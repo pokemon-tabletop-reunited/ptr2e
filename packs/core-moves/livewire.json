@@ -4,9 +4,10 @@
   "img": "systems/ptr2e/img/svg/electric_icon.svg",
   "system": {
     "slug": "livewire",
-    "description": "<p>Effect: Items and sharp edges within the [Blast X] area begin crackling with electricity. A creature that moves through spaces containing the Hazard takes a Tick of Electric Type damage for every meter they travel. If a creature moves at least 3 meters through the Hazard, they gain @Affliction[paralysis] 5. The presence of Rainy Weather, Electric Terrain, and Ion Deluge reduces the number of meters required to cause @Affliction[paralysis] by 1 each.</p>",
+    "description": "<p>Effect: Items and sharp edges within the [Blast X] area begin crackling with electricity. A creature that moves through spaces containing the Hazard takes a Tick of Electric-Type damage for every meter they travel. If a creature moves at least 4 meters through the Hazard, they gain @Affliction[paralysis] 5. The presence of Rainy Weather, Electric Terrain, and Ion Deluge reduces the number of meters required to cause @Affliction[paralysis] by 1 each.</p>",
     "traits": [
       "hazard",
+      "environ",
       "blast-4"
     ],
     "actions": [
@@ -16,16 +17,17 @@
         "type": "attack",
         "traits": [
           "hazard",
+          "environ",
           "blast-4"
         ],
         "range": {
-          "target": "creature",
+          "target": "blast",
           "distance": 10,
           "unit": "m"
         },
         "cost": {
-          "activation": "simple",
-          "powerPoints": 5,
+          "activation": "complex",
+          "powerPoints": 4,
           "delay": null,
           "priority": null,
           "trigger": null
@@ -36,7 +38,7 @@
         "types": [
           "electric"
         ],
-        "description": "<p>Effect: Items and sharp edges within the [Blast X] area begin crackling with electricity. A creature that moves through spaces containing the Hazard takes a Tick of Electric Type damage for every meter they travel. If a creature moves at least 3 meters through the Hazard, they gain @Affliction[paralysis] 5. The presence of Rainy Weather, Electric Terrain, and Ion Deluge reduces the number of meters required to cause @Affliction[paralysis] by 1 each.</p>",
+        "description": "<p>Effect: Items and sharp edges within the [Blast X] area begin crackling with electricity. A creature that moves through spaces containing the Hazard takes a Tick of Electric-Type damage for every meter they travel. If a creature moves at least 4 meters through the Hazard, they gain @Affliction[paralysis] 5. The presence of Rainy Weather, Electric Terrain, and Ion Deluge reduces the number of meters required to cause @Affliction[paralysis] by 1 each.</p>",
         "contestType": "",
         "contestEffect": "",
         "free": false,
@@ -44,7 +46,7 @@
       }
     ],
     "container": null,
-    "grade": "C"
+    "grade": "B"
   },
   "_id": "DgPZ1JQ3CjpKqz3O",
   "effects": []

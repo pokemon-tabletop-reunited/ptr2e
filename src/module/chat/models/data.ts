@@ -21,10 +21,10 @@ interface AccuracyContext {
 type DamageCalc = {
     roll: Rolled<Roll>;
     value: number;
-    context: DamageContext;
+    context: Partial<DamageContext>;
 } | {
     value: 0;
-    context: DamageContext;
+    context: Partial<DamageContext>;
 }
 interface DamageContext {
     level: number;
@@ -37,6 +37,7 @@ interface DamageContext {
     stab: number;
     type: number;
     other: number;
+    [key: string]: number;
 }
 
 export type {

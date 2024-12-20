@@ -1,0 +1,22 @@
+<section class="tab sheet-body {{tabs.changes.cssClass}}" data-tab="changes" data-group="sheet">
+    <div class="scroll">
+        {{#if changeEditing}}
+            <section class="change-editing">
+                <div class="editor-placeholder"></div>
+                <div class="item-controls">
+                    <button type="button" data-action="close-editor">{{localize "PTR2E.EffectSheet.ChangeEditor.Controls.Close"}}</button>
+                    <button type="button" data-action="apply-editor">{{localize "PTR2E.EffectSheet.ChangeEditor.Controls.Apply"}}</button>
+                </div>
+            </section>
+        {{else}}
+            <div class="change-element-forms">
+                {{#each changes as |change|}}
+                    {{{change.template}}}
+                {{/each}}
+            </div>
+            <div class="create-change">
+                <button data-action="add-change"><i class="fa-solid fa-plus"></i> {{localize "PTR2E.EffectSheet.ChangeEditor.Controls.Add"}}</a>
+            </div>
+        {{/if}}
+    </div>
+</section>

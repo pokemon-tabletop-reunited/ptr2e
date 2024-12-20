@@ -343,8 +343,8 @@ function moveToMarkdown(move: any): MarkdownResult | null {
             action.range.target
         }\n- **Range Increment**: ${action.range.distance}m\n- **Action Cost**: ${
             action.cost.activation
-        }\n- **PP Cost**: ${action.cost.powerPoints}\n\n${traitsString ? `### Traits\n${traitsString}\n\n` : ""}### Effect\n${action.description}${
-            actionStrings.length > 0 ? `\n## Other Move Actions\n${actionStrings.join("\n\n")}` : ""
+        }\n- **PP Cost**: ${action.cost.powerPoints}\n- **Grade**: ${move.system.grade}\n\n${traitsString ? `### Traits\n${traitsString}\n\n` : ""}### Effect\n${action.description}${
+            actionStrings.length > 0 ? `\n\n## Other Move Actions\n${actionStrings.join("\n\n")}` : ""
         }`,
         path,
     };
@@ -391,6 +391,7 @@ function perkToMarkdown(perk: any): MarkdownResult | null {
 }
 
 function speciesToMarkdown(species: any): MarkdownResult | null {
+    if(species.folder) return null;
     const path = getMarkdownPath({
         type: "species",
         category: getCategory(species.name),

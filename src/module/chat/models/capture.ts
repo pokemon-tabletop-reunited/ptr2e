@@ -1,4 +1,5 @@
 import { ActorPTR2e } from "@actor";
+import { resolveCapture } from "@actor/helpers.ts";
 import { ChatMessagePTR2e } from "@chat";
 import { SlugField } from "@module/data/fields/slug-field.ts";
 import PokeballActionPTR2e from "@module/data/models/pokeball-action.ts";
@@ -242,15 +243,30 @@ abstract class CaptureMessageSystem extends foundry.abstract.TypeDataModel {
     });
     await actor.update({ "system.skills": skills });
 
-    ui.notifications.info(
-      `Successfully applied Luck to this roll, spending ${number} Luck from ${actor.name
+    const notification = `Successfully applied Luck to this roll, spending ${number} Luck from ${actor.name
       }. New total: ${actor.system.skills.get("luck")!.total}`
-    );
+    ui.notifications.info(notification);
 
     //@ts-expect-error - As this is an object duplicate, the property is no longer read-only.
     roll.total -= number;
 
     await this.parent.update({ "system.rolls.accuracy": roll });
+
+    await ChatMessagePTR2e.create({
+      whisper: ChatMessagePTR2e.getWhisperRecipients("GM") as unknown as string[],
+      speaker: { alias: actor.name },
+      content: notification,
+    });
+  }
+
+  activateListeners(html: JQuery<HTMLElement>) {
+    html.find("[data-action='apply-capture']").on("click", async (event) => {
+      event.preventDefault();
+      const {originUuid, targetUuid, success} = (event.currentTarget as HTMLButtonElement).dataset;
+      if(!originUuid || !targetUuid) return;
+
+      resolveCapture(originUuid, targetUuid, success === "true");
+    });
   }
 }
 

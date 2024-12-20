@@ -1,0 +1,76 @@
+{
+    "name": "Pure Love",
+    "type": "ability",
+    "img": "systems/ptr2e/img/icons/ability_icon.webp",
+    "system": {
+      "actions": [
+        {
+          "traits": [
+            "defensive",
+            "interrupt-3"
+          ],
+          "name": "Pure Love",
+          "slug": "pure-love-trigger",
+          "type": "generic",
+          "cost": {
+            "activation": "free",
+            "powerPoints": 3,
+            "trigger": "<p>The user is hit by a [Contact] attack.</p>",
+            "delay": null,
+            "priority": null
+          },
+          "range": {
+            "target": "self",
+            "distance": 0,
+            "unit": "m"
+          },
+          "description": "<p>Trigger: The user is hit by a [Contact] attack.</p><p>Effect: The triggering creature gains @Affliction[charmed].</p>"
+        },
+        {
+            "traits": [
+              "healing"
+            ],
+            "name": "Pure Love",
+            "slug": "pure-love",
+            "type": "passive",
+            "cost": {
+              "activation": "free",
+              "powerPoints": 0,
+              "delay": null,
+              "priority": null
+            },
+            "range": {
+              "target": "self",
+              "distance": 0,
+              "unit": "m"
+            },
+            "description": "<p>Effect: The user's Physical- and Special-Category gain the [Drain 1/4] Trait when affecting creatures that are @Affliction[charmed].</p>"
+          }
+      ],
+      "description": "<p>Trigger: The user is hit by a [Contact] attack.</p><p>Effect: The triggering creature gains @Affliction[charmed].</p><p>Passive: The user's Physical- and Special-Category gain the [Drain 1/4] Trait when affecting creatures that are @Affliction[charmed].</p>",
+      "traits": [
+        "defensive"
+      ],
+      "slug": null,
+      "container": null
+    },
+    "_id": "iBSELL1at6mPDK5b",
+    "effects": [],
+    "sort": 0,
+    "ownership": {
+      "default": 0,
+      "tXAZ3QUgjuwX4gdV": 3
+    },
+    "flags": {},
+    "_stats": {
+      "compendiumSource": null,
+      "duplicateSource": null,
+      "coreVersion": "12.324",
+      "systemId": "ptr2e",
+      "systemVersion": "0.005",
+      "createdTime": 1716919240454,
+      "modifiedTime": 1716919240454,
+      "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
+    },
+    "_key": "!items!iBSELL1at6mPDK5b"
+  }

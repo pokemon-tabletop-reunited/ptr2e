@@ -3,6 +3,7 @@ import { EffectSourcePTR2e } from "@effects";
 import AfflictionActiveEffectSystem from "@module/effects/data/affliction.ts";
 import { DeferredPromise, DeferredValue, DeferredValueParams, ModifierAdjustment, ModifierPTR2e } from "@module/effects/modifiers.ts";
 import { RollNote } from "@system/notes.ts";
+import { Predicate } from "@system/predication/predication.ts";
 
 type ModifierSynthetics = Record<"all" | "damage", DeferredModifier[]> & Record<string, DeferredModifier[] | undefined>;
 type ModifierAdjustmentSynthetics = { all: ModifierAdjustment[]; damage: ModifierAdjustment[] } & Record<
@@ -16,6 +17,7 @@ export interface EffectRoll {
   label: string;
   roll?: Rolled<Roll>;
   success?: boolean;
+  critOnly?: boolean;
   [key: string]: unknown;
 }
 
@@ -25,6 +27,7 @@ export interface EffectRollSource {
   label: string;
   roll: RollJSON | null;
   success?: boolean;
+  critOnly?: boolean;
   [key: string]: unknown;
 }
 
@@ -33,7 +36,8 @@ export type DeferredEffectRoll = DeferredPromise<EffectRoll | null>;
 type DeferredModifier = DeferredValue<ModifierPTR2e>;
 
 interface ActorSynthetics {
-  ephemeralEffects: Record<string, { target: DeferredEphemeralEffect[]; origin: DeferredEphemeralEffect[] } | undefined>;
+  ephemeralEffects: Record<string, { target: DeferredEphemeralEffect[]; origin: DeferredEphemeralEffect[], self: DeferredEphemeralEffect[] } | undefined>;
+  ephemeralModifiers: Record<string, DeferredModifier[]>;
   modifierAdjustments: ModifierAdjustmentSynthetics;
   modifiers: ModifierSynthetics;
   preparationWarnings: {
@@ -44,9 +48,16 @@ interface ActorSynthetics {
   };
   afflictions: { data: AfflictionActiveEffectSystem[], ids: Set<string> };
   rollNotes: Record<string, RollNote[]>;
-  effects: Record<string, { self: DeferredEffectRoll[], target: DeferredEffectRoll[], origin: DeferredEffectRoll[]}>;
+  effects: Record<string, { self: DeferredEffectRoll[], target: DeferredEffectRoll[], origin: DeferredEffectRoll[] }>;
   toggles: RollOptionToggle[];
-  attackAdjustments: AttackAdjustment[];
+  attackAdjustments: (() => AttackAdjustment)[];
+  tokenTags: Map<TokenDocumentUUID, string>;
+  tokenOverrides: DeepPartial<Pick<TokenDocument['_source'], "light" | "name">> & {
+    alpha?: number | null;
+    texture?:
+    | { src: ImageFilePath | VideoFilePath; tint?: Color | null }
+    | { src: ImageFilePath | VideoFilePath; tint?: Color | null; scaleX: number; scaleY: number };
+  };
 }
 
 export interface RollOptionToggle {
@@ -64,7 +75,7 @@ export interface RollOptionToggle {
 
 export interface AttackAdjustment {
   adjustAttack?: (
-      attack: AttackPTR2e, options: string[]
+    attack: AttackPTR2e, options: string[]
   ) => void;
   adjustTraits?: (attack: AttackPTR2e, traits: string[], options: string[]) => void;
 }
@@ -207,6 +218,50 @@ interface AdvancementData {
   }
 }
 
+interface AuraData {
+  slug: string;
+  radius: number;
+  traits: Trait[];
+  effects: AuraEffectData[];
+  appearance: AuraAppearanceData;
+}
+
+interface AuraEffectData {
+  uuid: string;
+  affects: "allies" | "enemies" | "all";
+  appliesSelfOnly: boolean;
+  events: ("enter" | "turn-start" | "turn-end")[];
+  predicate: Predicate;
+  removeOnExit: boolean;
+  includesSelf: boolean;
+  // alterations: ItemAlteration[];
+}
+
+interface AuraAppearanceData {
+  border: { color: number; alpha: number } | null;
+  highlight: { color: number; alpha: number };
+  texture: {
+    src: ImageFilePath | VideoFilePath;
+    alpha: number;
+    scale: number;
+    translation: { x: number; y: number } | null;
+    loop: boolean;
+    playbackRate: number;
+  } | null;
+}
+
+interface ActorDimensions {
+  length: number;
+  width: number;
+  height: number;
+}
+
+/** The size property of creatures and equipment */
+export const SIZES = ["diminutive", "tiny", "small", "medium", "large", "huge", "gigantic", "titanic", "max"] as const;
+export const SIZE_SLUGS = ["diminutive", "tiny", "small", "medium", "large", "huge", "gigantic", "titanic", "max"] as const;
+
+type Size = (typeof SIZES)[number];
+
 export type {
   ModifierSynthetics,
   ModifierAdjustmentSynthetics,
@@ -231,5 +286,10 @@ export type {
   CapabilityClass,
   Movement,
   HealthData,
-  AdvancementData
+  AdvancementData,
+  AuraData,
+  AuraEffectData,
+  AuraAppearanceData,
+  ActorDimensions,
+  Size,
 };

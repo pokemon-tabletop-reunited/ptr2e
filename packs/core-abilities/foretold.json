@@ -63,6 +63,37 @@
         "description": "<p>Effect: When this attack is used, it deals its damage to the target at the start of the user's first Activation in the following Round.</p>",
         "free": true,
         "img": "icons/svg/explosion.svg"
+      },
+      {
+        "slug": "future-sight",
+        "name": "Future Sight",
+        "type": "attack",
+        "traits": [
+          "pp-updated"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 15,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 5,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "special",
+        "power": 120,
+        "accuracy": 100,
+        "types": [
+          "psychic"
+        ],
+        "description": "<p>Effect: When this attack is used, it deals its damage to the target at the start of the user's first Activation in the following Round.</p>",
+        "contestType": "",
+        "contestEffect": "",
+        "free": true,
+        "slot": null
       }
     ],
     "description": "<p>Trigger: An enemy creature enters combat.</p><p>Effect: Connection - Future Sight. The user freely uses Future Sight on the triggering creature. Passive: The user has +1 default EVA Stage.</p>",

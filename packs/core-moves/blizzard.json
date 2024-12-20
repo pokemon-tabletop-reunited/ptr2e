@@ -31,7 +31,38 @@
         "types": [
           "ice"
         ],
-        "description": "<p>Effect: On hit, the target has a 10% chance of gaining @Affliction[frozen] 5. In Snow Weather, Blizzard always hits.</p>",
+        "description": "<p>Effect: On hit, the target has a 10% chance of gaining @Affliction[frozen] 2.</p>",
+        "img": "icons/svg/explosion.svg"
+      },
+      {
+        "slug": "blizzard-snowy",
+        "name": "Blizzard (Snowy)",
+        "type": "attack",
+        "traits": [
+          "environ",
+          "wind",
+          "pp-updated",
+          "danger-close",
+          "partial-automation"
+        ],
+        "range": {
+          "target": "wide-line",
+          "distance": 5,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 5,
+          "trigger": "<p>Snowy Weather is present.</p>"
+        },
+        "category": "special",
+        "power": 110,
+        "accuracy": 100,
+        "types": [
+          "ice"
+        ],
+        "description": "<p>Snowy Weather is present.</p><p>Effect: On hit, the target has a 10% chance of gaining @Affliction[frozen] 3.</p>",
+        "variant": "blizzard",
         "img": "icons/svg/explosion.svg"
       }
     ],
@@ -53,6 +84,17 @@
           {
             "type": "roll-effect",
             "key": "blizzard-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.frozencondititem",
+            "predicate": [],
+            "chance": 10,
+            "affects": "target",
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "roll-effect",
+            "key": "blizzard-snowy-attack",
             "value": "Compendium.ptr2e.core-effects.Item.frozencondititem",
             "predicate": [],
             "chance": 10,

@@ -3,6 +3,8 @@ export {};
 declare global {
     /** A container group which displays interface elements rendered above other canvas groups. */
     class InterfaceCanvasGroup extends PIXI.Container {
+        grid: GridLayer;
+
         /**
          * Display scrolling status text originating from this ObjectHUD container.
          * @param origin                  An origin point where the text should first emerge

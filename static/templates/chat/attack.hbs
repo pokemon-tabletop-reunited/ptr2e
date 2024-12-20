@@ -20,22 +20,24 @@
         {{> effect-traits traits=attack.traits attack=attack}}
     </article>
     {{#each results as |data uuid|}}
-        <div class="collapse-button">
-            <button type="button" class="collapse-rolls" data-uuid="{{uuid}}">Show Rolls for {{data.target.name}}</button>
-        </div>
-        <article class="collapsed">
-            {{#if data.rolls.accuracy}}{{{data.rolls.accuracy}}}{{/if}}
-            {{#if data.rolls.crit}}{{{data.rolls.crit}}}{{/if}}
-            {{#if data.rolls.damage}}{{{data.rolls.damage}}}{{/if}}
-            {{#each data.rolls.effects}}
-                {{{this}}}
-            {{/each}}
-        </article>
-        {{#if data.notes}}
-            <section class="notes">
-                {{{notes}}}
-            </section>
-        {{/if}}
+      {{#unless data.rolls.none}}
+          <div class="collapse-button">
+              <button type="button" class="collapse-rolls" data-uuid="{{uuid}}">Show Rolls for {{data.target.name}}</button>
+          </div>
+          <article class="collapsed">
+              {{#if data.rolls.accuracy}}{{{data.rolls.accuracy}}}{{/if}}
+              {{#if data.rolls.crit}}{{{data.rolls.crit}}}{{/if}}
+              {{#if data.rolls.damage}}{{{data.rolls.damage}}}{{/if}}
+              {{#each data.rolls.effects}}
+                  {{{this}}}
+              {{/each}}
+          </article>
+          {{#if data.notes}}
+              <section class="notes">
+                  {{{notes}}}
+              </section>
+          {{/if}}
+      {{/unless}}
     {{/each}}
     {{#if selfEffectRolls}}
        <div class="collapse-button">
@@ -55,8 +57,13 @@
             <div class="effect-rolls">Effect</div>
         {{else if hasEffect}}
             <div class="effect-rolls">Effect</div>
-        {{else}}
+            <div class="damage"><!--spacer--></div>
+        {{else if hasDamage}}
             <div class="damage">Damage</div>
+            <div class="effect-rolls"><!--spacer--></div>
+        {{else}}
+            <div class="damage"><!--spacer--></div>
+            <div class="effect-rolls"><!--spacer--></div>
         {{/if}}
         <div class="apply"><button type="button" class="update-targets" data-tooltip="[Left Click] to add current selected/targeted actors<br>[Left Alt + Left Click] to overwrite targets with currently selected/targeted actors"><i class="fas fa-crosshairs"></i></button></div>
     </div> 
@@ -81,13 +88,30 @@
                 <div class="effect-rolls" data-tooltip="target-effect-rolls" data-tooltip-direction="LEFT">
                   <i class="{{#if data.effect.some}}fas{{else}}far{{/if}} fa-star"></i>
                 </div>
-            {{else}}
+                <div class="damage"><!--spacer--></div>
+            {{else if @root.hasDamage}}
                 <div class="damage" data-tooltip="{{data.damage}}" data-tooltip-direction="LEFT">
                     <span>{{data.damage}}</span>
                 </div>
+                <div class="effect-rolls"><!--spacer--></div>
+            {{else}}
+                <div class="damage"><!--spacer--></div>
+                <div class="effect-rolls"><!--spacer--></div>
             {{/if}}
             <div class="apply">
-                <button type="button" class="apply-damage"><i class="fas fa-bolt"></i>{{localize "PTR2E.Damage.Apply"}}</button>
+                <button type="button" class="apply-damage" 
+                  {{#unless (or @root.hasEffect @root.hasDamage)}}
+                    disabled 
+                    data-tooltip="This attack has no effect or damage to resolve."
+                  {{else if (and @root.hasEffect @root.hasDamage)}}
+                    data-tooltip="Apply Damage & Effect(s)"
+                  {{else if @root.hasEffect}}
+                    data-tooltip="Apply Effect(s)."
+                  {{else if @root.hasDamage}}
+                    data-tooltip="Apply Damage"
+                  {{/unless}}>
+                  <i class="fas fa-bolt"></i>{{localize "PTR2E.Damage.Apply"}}
+                </button>
             </div>
         </div>
     {{/each}}

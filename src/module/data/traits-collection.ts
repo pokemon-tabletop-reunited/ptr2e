@@ -18,7 +18,9 @@ export default class PTR2eTraits extends Collection<Trait> {
 
     for (const trait of CONFIG.PTR.data.traits) {
       if (!trait.description) trait.description = "";
-      this.set(trait.slug, trait as Trait);
+      //@ts-expect-error - This is a valid operation
+      if(!trait.changes) trait.changes = [];
+      this.set(trait.slug, trait as unknown as Trait);
     }
 
     // Allow custom-defined user Traits from the world

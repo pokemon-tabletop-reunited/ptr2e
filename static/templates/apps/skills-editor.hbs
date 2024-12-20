@@ -9,6 +9,10 @@
         <div class="points">
             <label>Spent Points: <span>{{points.spent}} / {{points.total}}</span></label>
             <label>Points Available: <span><b>{{points.available}}</b></span></label>
+            <div class="skill-filter mt-1">
+              <label>Filter: </label>
+              <input name="filter" type="search" placeholder="Filter" value="">
+            </div>
         </div>
     </fieldset>
     <fieldset class="skills">
@@ -20,7 +24,7 @@
                 <label>Apply Investment</label>
             </header>
             {{#each skills}}
-                <div class="skill">
+                <div class="skill" data-slug="{{slug}}" data-group="{{group}}">
                     <label class="skill" data-tooltip-direction="LEFT" data-slug="{{slug}}" data-group="{{group}}" data-tooltip="{{slug}}">{{label}}</label>
                     <label>{{value}}</label>
                     <label>{{rvs}}</label>

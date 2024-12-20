@@ -4,7 +4,7 @@ import { RollNote, RollNoteSource } from "@system/notes.ts";
 import { AttackPTR2e, Trait } from "@data";
 import { ActorPTR2e, EffectRoll } from "@actor";
 import { TokenDocumentPTR2e } from "@module/canvas/token/document.ts";
-import { CheckType } from "./check-roll.ts";
+import { CheckRoll, CheckType } from "./check-roll.ts";
 import { ItemPTR2e, ItemSystemPTR } from "@item";
 import { ModifierPTR2e } from "@module/effects/modifiers.ts";
 
@@ -110,6 +110,12 @@ interface CheckRollContext extends BaseRollContext {
         target: EffectRoll[];
         origin: EffectRoll[];
     };
+    /** Attack Variants' slugs */
+    variants?: string[];
 }
 
-export type { AttackRollParams, BaseRollContext, CheckRollContext, DamageRollParams, RollParameters, RollData};
+interface CaptureCheckRollContext extends CheckRollContext {
+  accuracyRoll: Rolled<CheckRoll>;
+}
+
+export type { AttackRollParams, BaseRollContext, CheckRollContext, CaptureCheckRollContext, DamageRollParams, RollParameters, RollData};

@@ -10,6 +10,25 @@
           "interrupt-1"
         ],
         "name": "Fearmonger",
+        "slug": "fearmonger-trigger",
+        "type": "generic",
+        "cost": {
+          "activation": "free",
+          "powerPoints": 2,
+          "trigger": "<p>A creature hits the user with a [Contact] attack.</p>",
+          "delay": null,
+          "priority": null
+        },
+        "range": {
+          "target": "creature",
+          "distance": 5,
+          "unit": "m"
+        },
+        "description": "<p>Trigger: A creature hits the user with a [Contact] attack.</p><p>Effect: The triggering creature gains @Affliction[fear] 5.</p>"
+      },
+      {
+        "traits": [],
+        "name": "Fearmonger",
         "slug": "fearmonger",
         "type": "passive",
         "cost": {
@@ -18,7 +37,7 @@
           "trigger": "<p>A creature ends their Activation within Range of the user, or attacks the user with a [Contact] attack.</p>"
         },
         "range": {
-          "target": "emanation",
+          "target": "enemy-aura",
           "distance": 6,
           "unit": "m"
         },

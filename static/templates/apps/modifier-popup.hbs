@@ -1,64 +1,66 @@
 <main>
-    <fieldset class="skill-modifiers">
-        <legend>Skill Modifiers</legend>
-        <header class="modifier">
-            <span class="mod">Modifier</span>
-            <span class="value">Value</span>
-            <span class="exclude"></span>
-        </header>
-        <article>
-            <section class="modifier-panel">
-                {{#each modifiers as |modifier idx|}}
-                    {{#unless modifier.hidden}}
-                        <div class="modifier{{#if modifier.ignored}} ignored{{#if modifier.hideIfDisabled}} hidden{{/if}}{{/if}}" data-index="{{idx}}">
-                            <span class="mod">{{modifier.label}}</span>
-                            <span class="value"> {{modifier.modifier}}</span>
-                            <span class="exclude">
-                                <input type="checkbox" {{#unless modifier.ignored}}checked{{/unless}}>
-                            </span>
-                        </div>
-                    {{/unless}}
-                {{/each}}
-            </section>
-            <section class="add-modifier-panel">
-                <div class="modifier">
-                    <input type="text" class="mod add-modifier-name" placeholder="New Modifier">
-                    <input type="number" class="value add-modifier-value" placeholder="+1" />
-                    <button type="button" class="exclude add-modifier">+Add</button>
-                </div>
-            </section>
-        </article>
+  <fieldset class="skill-modifiers">
+    <legend>Skill Modifiers</legend>
+    <header class="modifier">
+      <span class="mod">Modifier</span>
+      <span class="type">Type</span>
+      <span class="value">Value</span>
+      <span class="exclude"></span>
+    </header>
+    <article>
+      <section class="modifier-panel">
+        {{#each modifiers as |modifier idx|}}
+          {{#unless modifier.hidden}}
+            <div class="modifier{{#if modifier.ignored}} ignored{{#if modifier.hideIfDisabled}} hidden{{/if}}{{/if}}" data-index="{{idx}}">
+              <span class="mod" data-tooltip="{{modifier.label}}" data-tooltip-direction="UP">{{modifier.label}}</span>
+              <span class="type">{{#unless (is modifier.select "crit-base")}}{{formatSlug modifier.select}}{{else}}Mons Caught{{/unless}}</span>
+              <span class="value"> {{modifier.modifier}}</span>
+              <span class="exclude">
+                <input type="checkbox" {{#unless modifier.ignored}}checked{{/unless}}>
+              </span>
+            </div>
+          {{/unless}}
+        {{/each}}
+      </section>
+      <section class="add-modifier-panel">
+        <div class="modifier">
+          <input type="text" class="mod add-modifier-name" placeholder="New Modifier">
+          <select class="type add-modifier-type">
+            <option value="capture-percentile">Capture Percentile</option>
+            <option value="crit-percentile">Crit Percentile</option>
+            <option value="crit-base">Mons Caught</option>
+        </select>
+          <input type="number" class="value add-modifier-value" placeholder="+1" />
+          <button type="button" class="exclude add-modifier">+Add</button>
+        </div>
+      </section>
+    </article>
+  </fieldset>
+  {{#if challengeRating}}
+    <fieldset class="skill-challenge-rating">
+      <legend>Challenge Rating</legend>
+      <article>
+        <label>Challenge Rating</label>
+        <select name="challenge-rating">
+          {{selectOptions challengeRatings selected=challengeRating localize=true}}
+        </select>
+      </article>
     </fieldset>
-    {{#if challengeRating}}
-        <fieldset class="skill-challenge-rating">
-            <legend>Challenge Rating</legend>
-            <article>
-                <label>Challenge Rating</label>
-                <select name="challenge-rating">
-                    {{selectOptions challengeRatings selected=challengeRating localize=true}}
-                </select>
-            </article>
-        </fieldset>
-    {{/if}}
-    <fieldset class="roll-mode-panel">
-      <legend>Roll Mode</legend>
-        <label class="roll-mode">
-            {{!-- {{localize "PTR2E.RollModeLabel"}} --}}
-            <select name="rollmode">
-                {{#select rollMode}}
-                    {{#each rollModes as |label key|}}
-                        <option value="{{key}}">{{localize label}}</option>
-                    {{/each}}
-                {{/select}}
-            </select>
-        </label>
-        {{!-- <label data-tooltip="PTR2E.Roll.Dialog.ShowDefaultHint">
-            {{localize "PTR2E.Roll.Dialog.ShowDefault"}}
-            <input data-action="change-show-default" type="checkbox" {{checked showCheckDialogs}} />
-        </label> --}}
-    </fieldset>
-    <hr/>
-    <footer clas="mt-3">
-        <button type="submit">Submit</button>
-    </footer>
+  {{/if}}
+  <fieldset class="roll-mode-panel">
+    <legend>Roll Mode</legend>
+    <label class="roll-mode">
+      <select name="rollmode">
+        {{#select rollMode}}
+          {{#each rollModes as |label key|}}
+            <option value="{{key}}">{{localize label}}</option>
+          {{/each}}
+        {{/select}}
+      </select>
+    </label>
+  </fieldset>
+  <hr/>
+  <footer clas="mt-3">
+      <button type="submit">Submit</button>
+  </footer>
 </main>

@@ -6,6 +6,9 @@ import TypeDataModel from "types/foundry/common/abstract/type-data.js";
 import { AttackRollResult, CheckRoll, PokeballRollResults } from "../system/rolls/check-roll.ts";
 import AttackMessageSystem from "./models/attack.ts";
 import * as R from "remeda";
+import { SummonPTR2e } from "@item";
+import { AttackPTR2e } from "@data";
+import { CombatantPTR2e } from "@combat";
 
 class ChatMessagePTR2e<TSchema extends TypeDataModel = TypeDataModel> extends ChatMessage<TSchema> {
   /** Get the actor associated with this chat message */
@@ -119,8 +122,75 @@ class ChatMessagePTR2e<TSchema extends TypeDataModel = TypeDataModel> extends Ch
       "activateListeners" in this.system &&
       this.system &&
       typeof this.system.activateListeners === "function"
-    )
+    ) {
       this.system.activateListeners(html);
+    }
+
+    // Delay Button
+    html.find("button.delay-attack").on("click", async (event) => {
+      event.preventDefault();
+      event.stopPropagation();
+
+      const { attackUuid } = event.currentTarget.dataset;
+      const action = await fromUuid(attackUuid) as unknown as AttackPTR2e;
+      if (!action) return void ui.notifications.error("Action not found.");
+
+      return action.delayAction();
+    });
+
+    // PP Button
+    html.find("button.consume-pp").on("click", async (event) => {
+      event.preventDefault();
+      event.stopPropagation();
+
+      const { attackUuid } = event.currentTarget.dataset;
+      const action = await fromUuid(attackUuid) as unknown as AttackPTR2e;
+      if (!action) return void ui.notifications.error("Action not found.");
+
+      const ppCost = action.cost.powerPoints
+      if(!ppCost) return void ui.notifications.error("No PP cost found on action.");
+
+      const actor = action!.actor;
+      if (!actor) return void ui.notifications.error("Unable to detect actor.");
+
+      if(ppCost > actor.system.powerPoints.value) return void ui.notifications.error(game.i18n.format("PTR2E.AttackWarning.NotEnoughPP", { cost: ppCost, current: actor.system.powerPoints.value }));
+
+      await actor.update({
+        "system.powerPoints.value": actor.system.powerPoints.value - ppCost,
+      })
+      ui.notifications.info(`You have ${actor.system.powerPoints.value} power points remaining. (Used ${ppCost})`);
+    });
+
+    // Summon Button
+    html.find("button.create-summon").on("click", async (event) => {
+      event.preventDefault();
+      event.stopPropagation();
+
+      if (!game.combat) return void ui.notifications.error("You must be in combat to summon a creature.");
+
+      const { attackUuid } = event.currentTarget.dataset;
+      const action = await fromUuid(attackUuid) as unknown as AttackPTR2e;
+      if (!action) return void ui.notifications.error("Action not found.");
+      if (!(action?.type === "attack" && action.summon)) return void ui.notifications.error("Action not found on item.");
+
+      const summonItem = await fromUuid<SummonPTR2e>((action as AttackPTR2e).summon);
+      if (!summonItem) return void ui.notifications.error("Summon not found on action.");
+
+      const combatants = await game.combat.createEmbeddedDocuments("Combatant", [{
+        name: summonItem.name,
+        type: "summon",
+        system: {
+          owner: action.actor?.uuid ?? null,
+          item: { ...summonItem.clone({"system.owner": action.actor?.uuid ?? null}).toObject(), uuid: summonItem.uuid }
+        }
+      }])
+
+      if (!combatants.length) return void ui.notifications.error("Failed to create summon.");
+
+      ChatMessage.create({
+        content: `Added: ${(combatants as CombatantPTR2e[]).map(c => c.link).join(", ")} to Combat.`,
+      });
+    });
 
     html.find(".dice-roll").on("click", (event) => {
       event.preventDefault();
@@ -270,7 +340,7 @@ class ChatMessagePTR2e<TSchema extends TypeDataModel = TypeDataModel> extends Ch
       type = "skill";
     }
 
-    if(type == "skill") {
+    if (type == "skill") {
       system.result = {
         modifiers: context.modifiers,
         ...R.pick(context, ["action", "domains", "notes", "title", "type"]),
@@ -290,7 +360,7 @@ class ChatMessagePTR2e<TSchema extends TypeDataModel = TypeDataModel> extends Ch
       speaker,
       flavor,
       system,
-    }, {rollMode: context.rollMode});
+    }, { rollMode: context.rollMode });
   }
 
   static createFromPokeballResults<TTypeDataModel extends TypeDataModel = TypeDataModel>(
@@ -331,7 +401,7 @@ class ChatMessagePTR2e<TSchema extends TypeDataModel = TypeDataModel> extends Ch
       speaker,
       flavor,
       system,
-    }, {rollMode: context.rollMode});
+    }, { rollMode: context.rollMode });
   }
 
   static async createFromResults(
@@ -370,6 +440,7 @@ class ChatMessagePTR2e<TSchema extends TypeDataModel = TypeDataModel> extends Ch
       attack?: Record<string, unknown>;
       attackSlug: string;
       origin: Record<string, unknown>;
+      originItem?: Record<string, unknown>;
       results: Record<string, unknown>[];
       selfEffects: {
         applied: boolean;
@@ -407,36 +478,33 @@ class ChatMessagePTR2e<TSchema extends TypeDataModel = TypeDataModel> extends Ch
       selfEffects: context.selfEffectRolls?.length ? {
         applied: true,
         rolls: await Promise.all(context.selfEffectRolls.map(async (r) => {
-          const roll = r.roll ? r.roll : (await new Roll("1d100ms@dc", {dc: r.chance}).roll())
+          const roll = r.roll ? r.roll : (await new Roll("1d100ms@dc", { dc: r.chance }).roll())
           return {
             chance: r.chance,
             effect: r.effect,
             label: r.label,
             roll: roll.toJSON(),
-            success: roll.total <= 0
+            success: roll.total <= 0,
+            critOnly: r.critOnly
           }
         }))
       } : null
     };
+    if(context.attack?.type === "summon") system.originItem = context.item?.toJSON();
 
     // @ts-expect-error - Chatmessages aren't typed properly yet
-    return dataOnly
-      ? {
-        type: "attack",
-        speaker,
-        flavor,
-        system,
-      } // @ts-expect-error - Chatmessages aren't typed properly yet
+    return dataOnly ? { type: "attack", speaker, flavor, system, }
+      // @ts-expect-error - Chatmessages aren't typed properly yet
       : ChatMessagePTR2e.create<ChatMessagePTR2e<AttackMessageSystem>>({
         type: "attack",
         speaker,
         flavor,
         system,
-      }, {rollMode: context.rollMode});
+      }, { rollMode: context.rollMode });
   }
 
   override get isRoll(): boolean {
-    if(["attack","skill","capture"].includes(this.type)) return true;
+    if (["attack", "skill", "capture"].includes(this.type)) return true;
     return super.isRoll;
   }
 }

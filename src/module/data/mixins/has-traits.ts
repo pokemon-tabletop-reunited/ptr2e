@@ -39,7 +39,14 @@ export default function HasTraits<BaseClass extends TemplateConstructor>(baseCla
       else {
         console.debug(`Could not find trait with slug ${traitSlug}`);
         console.debug("TODO: Remove this functionality and add a migration to remove invalid traits.")
-        this.traits.set(traitSlug, { label: Handlebars.helpers.formatSlug(traitSlug), description: '', slug: traitSlug, related: [], virtual: virtual ?? false });
+        this.traits.set(traitSlug, { 
+          label: Handlebars.helpers.formatSlug(traitSlug), 
+          description: '', 
+          slug: traitSlug, 
+          related: [], 
+          virtual: virtual ?? false,
+          changes: []
+        });
       }
 
       rollOptionManager?.addTrait(this.traits.get(traitSlug));

@@ -1,7 +1,5 @@
 import { AbilityPTR2e, ItemPTR2e, ItemSystemPTR, SpeciesPTR2e } from "@item";
 import ActorPTR2e from "./base.ts";
-import { SpeciesDropSheet } from "./sheets/species-drop-sheet.ts";
-import { SpeciesSystemModel } from "@item/data/index.ts";
 import { htmlQuery, htmlQueryAll, sluggify } from "@utils";
 import { Tab } from "@item/sheets/document.ts";
 import { ActorComponentKey, ActorComponents, ComponentPopout } from "./components/sheet.ts";
@@ -37,6 +35,7 @@ import Sortable from "sortablejs";
 import { ApplicationHeaderControlsEntry } from "types/foundry/common/applications/api.js";
 import PartySheetPTR2e from "@module/apps/party-sheet.ts";
 import { ToggleComponent } from "./components/toggle-component.ts";
+import { PerkWebApp } from "@module/apps/perk-web/perk-web-v2.ts";
 
 class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixin(
   ActorSheetV2Expanded
@@ -53,16 +52,16 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
       classes: ["ptr2e", "sheet", "actor", "v2"],
       position: {
         width: 900,
-        height: 660,
+        height: 700,
       },
       window: {
         resizable: true,
         controls: [
           ...(super.DEFAULT_OPTIONS?.window?.controls ?? []),
           {
-            icon: "fas fa-paw",
-            label: "PTR2E.ActorSheet.Species",
-            action: "species-header",
+            icon: "fas fa-cog",
+            label: "PTR2E.ActorSheet.Settings.Title",
+            action: "open-settings",
             visible: true,
           },
           {
@@ -70,12 +69,6 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
             label: "PTR2E.ActorSheet.Inspector",
             action: "open-inspector",
             visible: true
-          },
-          {
-            icon: "fas fa-heart-circle-plus",
-            label: "PTR2E.ActorSheet.Rest",
-            action: "rest",
-            visible: true,
           },
           {
             icon: "fas fa-user-group",
@@ -88,7 +81,13 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
             label: "PTR2E.OpenTutorList",
             action: "open-tutor-list",
             visible: true,
-          }
+          },
+          {
+            icon: "fas fa-heart-circle-plus",
+            label: "PTR2E.ActorSheet.Rest",
+            action: "rest",
+            visible: true,
+          },
         ],
       },
       form: {
@@ -104,41 +103,9 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
       actions: {
         "species-header": async function (this: ActorSheetPTRV2, event: Event) {
           event.preventDefault();
-          const species = this.actor.system.species!;
-          const sheet = new SpeciesDropSheet((item) => {
-            if (!item) return;
-            if (
-              !(
-                item instanceof CONFIG.Item.documentClass &&
-                item.system instanceof SpeciesSystemModel
-              )
-            )
-              return;
-            if (item.slug !== species.slug) {
-              const species = item.toObject().system;
-              species.slug ||= sluggify(item.name);
-              this.actor.update({ "system.species": species });
-            }
-          });
-          sheet.species = new CONFIG.Item.documentClass(
-            {
-              _id: "actorSpeciesItem",
-              name: species.slug
-                ? Handlebars.helpers.formatSlug(species.slug)
-                : this.actor.name,
-              type: "species",
-              img: this.actor.img,
-              flags: {
-                ptr2e: {
-                  disabled: !this.actor.system._source.species,
-                  virtual: true,
-                },
-              },
-              system: species.toObject(),
-            },
-            { parent: this.document }
-          ) as SpeciesPTR2e;
-          sheet.render(true);
+          const species = this.actor.items.get("actorspeciesitem") as SpeciesPTR2e;
+          if(!species) return;
+          species.sheet.render(true);
         },
         "open-inspector": async function (this: ActorSheetPTRV2, event: Event) {
           event.preventDefault();
@@ -146,13 +113,16 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
           inspector.render(true);
         },
         "open-perk-web": async function (this: ActorSheetPTRV2) {
-          if ([true, undefined].includes(this.actor.flags.ptr2e?.sheet?.perkFlash))
-            await this.actor.setFlag("ptr2e", "sheet.perkFlash", false);
-          game.ptr.web.open(this.actor);
+          // if ([true, undefined].includes(this.actor.flags.ptr2e?.sheet?.perkFlash))
+          //   await this.actor.setFlag("ptr2e", "sheet.perkFlash", false);
+          // game.ptr.web.open(this.actor);
+
+          const app = new PerkWebApp(this.actor);
+          app.render(true);
         },
         "open-party-sheet": async function (this: ActorSheetPTRV2) {
           if (!this.actor.party) return;
-          new PartySheetPTR2e({folder: this.actor.folder!}).render(true);
+          new PartySheetPTR2e({ folder: this.actor.folder! }).render(true);
         },
         "edit-movelist": function (this: ActorSheetPTRV2) {
           new KnownActionsApp(this.actor).render(true);
@@ -211,7 +181,60 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
         },
         "add-clock": ActorSheetPTRV2.#onAddClock,
         "open-tutor-list": function (this: ActorSheetPTRV2) {
-          game.ptr.tutorList.render({ force:true, actor: this.actor });
+          game.ptr.tutorList.render({ force: true, actor: this.actor });
+        },
+        "open-settings": function (this: ActorSheetPTRV2) {
+          const alliance =
+            this.actor._source.system.details?.alliance === null ? "neutral" : (this.actor._source.system.details?.alliance || "default");
+          const defaultValue = game.i18n.localize(
+            this.actor.hasPlayerOwner
+              ? "PTR2E.ActorSheet.Alliance.Party"
+              : "PTR2E.ActorSheet.Alliance.Opposition",
+          );
+
+          const allianceOptions = {
+            default: game.i18n.format("PTR2E.ActorSheet.Alliance.Default", { alliance: defaultValue }),
+            opposition: "PTR2E.ActorSheet.Alliance.Opposition",
+            party: "PTR2E.ActorSheet.Alliance.Party",
+            neutral: "PTR2E.ActorSheet.Alliance.Neutral",
+          };
+          //@ts-expect-error - Type incomplete
+          const sizeFields = this.actor.system.schema.fields.details.fields.size.fields as foundry.data.fields.DataSchema;
+
+          return void foundry.applications.api.DialogV2.prompt({
+            content: `<p>${game.i18n.localize("PTR2E.ActorSheet.Settings.Content")}</p>
+            <div class="form-group"><label>${game.i18n.localize("PTR2E.FIELDS.details.alliance.label")}</label><div class="form-fields"><select name="system.details.alliance">
+            ${Object.entries(allianceOptions).map(([key, value]) => `<option value="${key}" ${key === alliance ? "selected" : ""}>${game.i18n.localize(value)}</option>`).join("")}
+            </select></div></div>${Handlebars.helpers.formField(sizeFields.height, {hash: {
+              localize: true,
+              value: this.actor._source.system.details.size.height
+            }})}${Handlebars.helpers.formField(sizeFields.weight, {hash: {
+              localize: true,
+              value: this.actor._source.system.details.size.weight
+            }})}<div class="form-group"><label>Height Class</label><div class="form-fields"><input readonly type="text" value="${game.i18n.localize(this.actor.size.toString())}"></div></div><div class="form-group"><label>Weight Class</label><div class="form-fields"><input readonly type="text" value="${this.actor.system.details.size.weightClass}"></div></div>`,
+            window: { title: game.i18n.localize("PTR2E.ActorSheet.Settings.Title") },
+            ok: {
+              label: game.i18n.localize("PTR2E.ActorSheet.Settings.Save"),
+              action: "ok",
+              callback: async (_event, target, element) => {
+                const html = element ?? target;
+                const alliance = htmlQuery<HTMLInputElement>(html, '[name="system.details.alliance"]')?.value;
+                const height = htmlQuery<HTMLInputElement>(html, '[name="system.details.size.height"]')?.value;
+                const weight = htmlQuery<HTMLInputElement>(html, '[name="system.details.size.weight"]')?.value;
+                const updateData = {
+                  ...(alliance === "default"
+                    ? { "system.details.alliance": '' }
+                    : alliance === "neutral"
+                      ? { "system.details.alliance": null }
+                      : { "system.details.alliance": alliance }),
+                  "system.details.size.height": height,
+                  "system.details.size.weight": weight,
+                }
+                return void this.actor.update(updateData);
+              }
+            },
+            rejectClose: false
+          });
         }
       },
     },
@@ -240,34 +263,42 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
     overview: {
       id: "overview",
       template: "systems/ptr2e/templates/actor/actor-overview.hbs",
+      scrollable: [".scroll"]
     },
     actions: {
       id: "actions",
       template: "systems/ptr2e/templates/actor/actor-actions.hbs",
+      scrollable: [".scroll"]
     },
     inventory: {
       id: "inventory",
       template: "systems/ptr2e/templates/actor/actor-inventory.hbs",
+      scrollable: [".scroll"]
     },
     clocks: {
       id: "clocks",
       template: "systems/ptr2e/templates/actor/actor-clocks.hbs",
+      scrollable: [".scroll"]
     },
     skills: {
       id: "skills",
       template: "systems/ptr2e/templates/actor/actor-skills.hbs",
+      scrollable: [".scroll"]
     },
     perks: {
       id: "perks",
       template: "systems/ptr2e/templates/actor/actor-perks.hbs",
+      scrollable: [".scroll"]
     },
     biography: {
       id: "biography",
       template: "systems/ptr2e/templates/actor/actor-biography.hbs",
+      scrollable: [".scroll"]
     },
     effects: {
       id: "effects",
       template: "systems/ptr2e/templates/actor/actor-effects.hbs",
+      scrollable: [".scroll"]
     },
   };
 
@@ -431,6 +462,10 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
   ) {
     if (partId === "overview") {
       context.movement = Object.values(this.actor.system.movement);
+    }
+
+    if (partId === "sidebar") {
+      context.species = this.actor.items.get("actorspeciesitem") as SpeciesPTR2e;
     }
 
     if (partId === "clocks") {
@@ -605,7 +640,7 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
 
           const clocks = fu.duplicate(this.document.system._source.clocks);
           const index = clocks.findIndex((c) => c.id === clock.id);
-          if(index === -1) return;
+          if (index === -1) return;
           clocks[index].value = clock.value >= clock.max ? 0 : clock.value + 1;
 
           return this.document.update({ "system.clocks": clocks });
@@ -620,7 +655,7 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
 
           const clocks = fu.duplicate(this.document.system._source.clocks);
           const index = clocks.findIndex((c) => c.id === clock.id);
-          if(index === -1) return;
+          if (index === -1) return;
           clocks[index].value = clock.value <= 0 ? clock.max : clock.value - 1;
 
           return this.document.update({ "system.clocks": clocks });
@@ -656,7 +691,7 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
                 callback: async () => {
                   const clocks = fu.duplicate(this.document.system._source.clocks);
                   const index = clocks.findIndex((c) => c.id === clock.id);
-                  if(index === -1) return;
+                  if (index === -1) return;
                   clocks.splice(index, 1);
 
                   return this.document.update({ "system.clocks": clocks });
@@ -836,7 +871,7 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
   override _getHeaderControls(): ApplicationHeaderControlsEntry[] {
     const controls = fu.duplicate(super._getHeaderControls());
 
-    if(!this.actor.party) controls.findSplice(c => c.action === "open-party-sheet")
+    if (!this.actor.party) controls.findSplice(c => c.action === "open-party-sheet")
 
     return controls;
   }
@@ -921,7 +956,7 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
       }
     }
 
-    if (!data.action?.slug) return super._onDrop(event);
+    if (!data.action?.slug) return super._onDrop(event, data);
     //@ts-expect-error - This is a custom method
     this._onDropAction(event, data);
     return;
@@ -968,6 +1003,8 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
     ) as HTMLElement;
     if (!abilityDiv) return;
 
+    if(ability.system.isSuppressed) return void ui.notifications.warn("This ability is suppressed and cannot be re-assigned.");
+
     const slot = Number(abilityDiv.dataset.slot);
     if (isNaN(slot)) return;
 
@@ -977,6 +1014,8 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
       return;
     }
     if (currentAbility === ability) return;
+
+    if(currentAbility.system.isSuppressed) return void ui.notifications.warn("That slot is filled with a suppressed ability which cannot be re-assigned");
 
     this.actor.updateEmbeddedDocuments("Item", [
       { _id: currentAbility.id, "system.slot": ability.system.slot ?? null },
@@ -1071,7 +1110,7 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
 
     switch (type) {
       case "effect": {
-        return ActiveEffectPTR2e.createDialog({}, { parent: this.document });
+        return ActiveEffectPTR2e.createDialog({}, { parent: this.document, types: ActiveEffectPTR2e.TYPES.filter(s => s != "summon") });
       }
       default: {
         const itemType = Item.TYPES.includes(type) ? type : null;
@@ -1096,8 +1135,8 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
 
   static #onAddClock(this: ActorSheetPTRV2, event: Event, clock?: Clock) {
     event.preventDefault();
-    return new ClockEditor({}, clock instanceof Clock ? clock : new Clock({}, {parent: this.document.system})).render(true);
-}
+    return new ClockEditor({}, clock instanceof Clock ? clock : new Clock({}, { parent: this.document.system })).render(true);
+  }
 }
 
 export default ActorSheetPTRV2;

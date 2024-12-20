@@ -26,11 +26,12 @@ export class CompendiumBrowserSpeciesTab extends CompendiumBrowserTab {
     const debug = (msg: string, ...params: unknown[]) => console.debug(`PTR2e | Compendium Browser | Species Tab | ${msg}`, params);
     debug("Stated loading data");
     const species: CompendiumBrowserIndexData[] = [];
-    const indexFields = ["img", "system.number", "system.types", "system.traits", "system.moves", "system.skills", "system.eggGroups", "system.form"];
+    const indexFields = ["img", "system.number", "system.types", "system.traits", "system.moves", "system.skills", "system.eggGroups", "system.form", "system.abilities"];
     const eggGroups = new Set<string>();
     const allTraits = new Set<string>();
     const tutorMoves = new Set<string>();
     const levelUpMoves = new Set<string>();
+    const allAbilities = new Set<string>();
 
     for await (const { pack, index } of this.browser.packLoader.loadPacks(
       "Item",
@@ -73,6 +74,14 @@ export class CompendiumBrowserSpeciesTab extends CompendiumBrowserTab {
           tutorMoves.add(move.name);
         }
 
+        const abilities: string[] = [];
+        for(const group in speciesData.system.abilities ?? {}) {
+          for(const ability of speciesData.system.abilities[group] ?? []) {
+            allAbilities.add(ability.slug);
+            abilities.push(ability.slug);
+          }
+        }
+
         species.push({
           name: speciesData.name,
           img: speciesData.img,
@@ -82,7 +91,8 @@ export class CompendiumBrowserSpeciesTab extends CompendiumBrowserTab {
           number: speciesData.system.number,
           skills: speciesData.system.skills ? R.fromEntries(speciesData.system.skills.map((skill: SkillPTR2e) => [skill.slug, skill.value])) : [],
           eggGroups: speciesData.system.eggGroups,
-          moves
+          moves,
+          abilities
         })
       }
     }
@@ -109,6 +119,10 @@ export class CompendiumBrowserSpeciesTab extends CompendiumBrowserTab {
     }, {} as Record<string, string>));
     this.filterData.multiselects.levelUpMoves.options = this.generateMultiselectOptions(Array.from(levelUpMoves).reduce((acc, move) => {
       acc[move] = formatSlug(move);
+      return acc;
+    }, {} as Record<string, string>));
+    this.filterData.multiselects.abilities.options = this.generateMultiselectOptions(Array.from(allAbilities).reduce((acc, ability) => {
+      acc[ability] = formatSlug(ability);
       return acc;
     }, {} as Record<string, string>));
     this.filterData.multiselects.traits.options = this.generateMultiselectOptions(allTraits.reduce((acc, trait) => {
@@ -163,6 +177,9 @@ export class CompendiumBrowserSpeciesTab extends CompendiumBrowserTab {
     // Tutor Moves
     if (!this.filterTraits(entry.moves.tutor, multiselects.tutorMoves.selected, multiselects.tutorMoves.conjunction)) return false;
 
+    // Abilities
+    if (!this.filterTraits(entry.abilities, multiselects.abilities.selected, multiselects.abilities.conjunction)) return false;
+
     // Traits
     if (!this.filterTraits(entry.traits, multiselects.traits.selected, multiselects.traits.conjunction)) return false;
 
@@ -208,6 +225,12 @@ export class CompendiumBrowserSpeciesTab extends CompendiumBrowserTab {
         tutorMoves: {
           conjunction: "and",
           label: "PTR2E.CompendiumBrowser.Filters.TutorMoves",
+          options: [],
+          selected: []
+        },
+        abilities: {
+          conjunction: "and",
+          label: "PTR2E.CompendiumBrowser.Filters.Abilities",
           options: [],
           selected: []
         }

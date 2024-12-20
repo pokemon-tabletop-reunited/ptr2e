@@ -54,6 +54,11 @@
             {{#unless (is accuracy.category "critical")}}{{> control id="critical" label="PTR2E.Status.ChangeToCritical"}}{{/unless}}
             {{#unless (or (is accuracy.category "miss") (is accuracy.category "fumble"))}}{{> control id="miss" label="PTR2E.Status.ChangeToMiss"}}{{/unless}}
         </footer>
+        {{else}}
+        <footer>
+            {{#unless (is accuracy.category "hit")}}{{> control id="hit" label="PTR2E.Status.ChangeToHit"}}{{/unless}}
+            {{#unless (is accuracy.category "miss")}}{{> control id="miss" label="PTR2E.Status.ChangeToMiss"}}{{/unless}}
+        </footer>
     {{/if}}
 </content>
 
@@ -65,7 +70,7 @@
     <div class="form-group">
         <label>{{localize label}}:</label>
         <div class="form-fields">
-            {{#if division}}{{log value value2}}
+            {{#if division}}
                 {{#if (gte value 0)}} 
                     <span>{{numberFormat value2 decimals=2}} ({{add value division}} / {{division}})</span>
                 {{else}}

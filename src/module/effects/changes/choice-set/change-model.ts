@@ -1,4 +1,4 @@
-import { ChangeModel, ChangeModelOptions, ChangeSchema } from "@data";
+import { ActionPTR2e, ChangeModel, ChangeModelOptions, ChangeSchema } from "@data";
 import { PickableThing } from "@module/apps/pick-a-thing-prompt.ts";
 import { DataUnionField } from "@module/data/fields/data-union-field.ts";
 import { StrictArrayField, StrictBooleanField, StrictObjectField, StrictStringField } from "@module/data/fields/strict-primitive-fields.ts";
@@ -192,12 +192,12 @@ export default class ChoiceSetChangeSystem extends ChangeModel {
     }
 
     // If every choice is an item UUID, get the label and images from those items
-    const choicesAreUUIDs = choices.every((c): c is ItemChoice => UUIDUtils.isItemUUID(c.value));
+    const choicesAreUUIDs = choices.every((c): c is ItemChoice => UUIDUtils.isItemUUID(c.value) || UUIDUtils.isActionUUID(c.value));
     if (choicesAreUUIDs) {
       const itemChoices = await UUIDUtils.fromUUIDs(choices.map(c => c.value));
       for (let i = 0; i < choices.length; i++) {
         const item = itemChoices[i];
-        if (item instanceof ItemPTR2e) {
+        if (item instanceof ItemPTR2e || item instanceof ActionPTR2e) {
           choices[i].label = item.name;
           choices[i].img = item.img;
         }
@@ -258,7 +258,7 @@ export default class ChoiceSetChangeSystem extends ChangeModel {
     if (!(this.rollOption && (typeof selection === "string" || typeof selection === "number"))) return;
 
     // If the selection was a UUID, the roll option had its suffix appended at item creation
-    const suffix = UUIDUtils.isItemUUID(selection) ? "" : `:${selection}`;
+    const suffix = UUIDUtils.isItemUUID(selection) || UUIDUtils.isActionUUID(selection) ? "" : `:${selection}`;
     this.effect.flags.ptr2e.choiceSelections ??= {};
     this.effect.flags.ptr2e.choiceSelections[this.rollOption] = selection;
     this.actor?.rollOptions.addOption("all", `${this.rollOption}${suffix}`);

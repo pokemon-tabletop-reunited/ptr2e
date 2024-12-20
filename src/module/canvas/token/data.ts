@@ -1,7 +1,5 @@
 type TokenFlagsPTR2e = DocumentFlags & {
-    ptr2e: {
-        [key: string]: unknown;
-    },
+    ptr2e: Record<string, unknown>,
     [key: string]: unknown;
 }
 

@@ -7,9 +7,9 @@ import { PTRCONSTS } from "@data";
 class HumanoidActorSystem extends ActorSystemPTR2e {
     declare parent: ActorPTR2e<this>;
 
-    static constructSpecies(system: HumanoidActorSystem): SpeciesSystemModel {
+    static constructSpecies(system: HumanoidActorSystem, name = system.parent.name): SpeciesSystemModel {
         const data = {
-            slug: sluggify(system.parent.name),
+            slug: sluggify(name),
             traits: ["humanoid", "underdog", "unique-egg-group", "bipedal", "speech", "wielder"],
             number: 0,
             stats: {
@@ -139,8 +139,18 @@ class HumanoidActorSystem extends ActorSystemPTR2e {
             this.parent.updateSource({ "system.traits": ["humanoid", "underdog"] })
         }
 
-        if(!this._source.species) {
-            this.parent.updateSource({ "system.species": HumanoidActorSystem.constructSpecies(this).toObject() });
+        if(!this.parent.items.has("actorspeciesitem")) {
+          const items = this.parent.toObject().items ?? [];
+          this.parent.updateSource({ "items": [
+            ...items,
+            {
+              name: data.name,
+              type: 'species',
+              img: data.img,
+              _id: "actorspeciesitem",
+              system: HumanoidActorSystem.constructSpecies(this).toObject()
+            }
+          ]});
         }
 
         if(this.health?.max && this.health?.value !== this.health?.max) {

@@ -15,7 +15,7 @@ class SkillsSettingsMenu extends foundry.applications.api.HandlebarsApplicationM
         foundry.applications.api.ApplicationV2.DEFAULT_OPTIONS,
         {
             id: "skills-settings",
-            classes: ["sheet"],
+            classes: ["sheet", "default-sheet"],
             tag: "form",
             window: {
                 title: "PTR2E.Settings.Skills.Title",

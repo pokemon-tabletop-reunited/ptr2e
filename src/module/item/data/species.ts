@@ -255,11 +255,13 @@ class SpeciesSystem extends SpeciesExtension {
   }
 
   static override migrateData(source: SpeciesSystem['_source']) {
-    for (const abGroup of Object.keys(source.abilities)) {
-      source.abilities[abGroup] = (source.abilities[abGroup] as foundry.data.fields.SourcePropFromDataField<foundry.data.fields.SchemaField<AbilityReferenceSchema>>[]).map(g => {
-        if (typeof g == "object") return g;
-        return { slug: g, uuid: null };
-      });
+    if (source.abilities) {
+      for (const abGroup of Object.keys(source.abilities)) {
+        source.abilities[abGroup] = (source.abilities[abGroup] as foundry.data.fields.SourcePropFromDataField<foundry.data.fields.SchemaField<AbilityReferenceSchema>>[]).map(g => {
+          if (typeof g == "object") return g;
+          return { slug: g, uuid: null };
+        });
+      }
     }
     return super.migrateData(source);
   }
@@ -270,84 +272,84 @@ class SpeciesSystem extends SpeciesExtension {
         case "height": {
           switch (true) {
             case height < 0.3048:
+              return 0;
+            case height < 0.6096:
               return 1;
-            case height < 0.6858:
+            case height < 1.2192:
               return 2;
-            case height < 1.3208:
+            case height < 2.4384:
               return 3;
-            case height < 3.048:
+            case height < 4.8768:
               return 4;
-            case height < 5.4864:
+            case height < 9.7536:
               return 5;
-            case height < 10.9728:
-              return 6;
             case height < 16.4592:
-              return 7;
+              return 6;
             default:
-              return 8;
+              return 7;
           }
         }
         case "quad": {
           switch (true) {
             case height < 0.1512:
+              return 0;
+            case height < 0.3024:
               return 1;
-            case height < 0.3402:
+            case height < 0.6047:
               return 2;
-            case height < 0.6551:
+            case height < 1.2094:
               return 3;
-            case height < 1.5118:
+            case height < 2.4189:
               return 4;
-            case height < 2.7213:
+            case height < 4.8378:
               return 5;
-            case height < 5.4425:
-              return 6;
             case height < 8.1638:
-              return 7;
+              return 6;
             default:
-              return 8;
+              return 7;
           }
         }
         case "length": {
           switch (true) {
             case height < 0.5073:
+              return 0;
+            case height < 1.0145:
               return 1;
-            case height < 1.1413:
+            case height < 2.029:
               return 2;
-            case height < 2.1981:
+            case height < 4.058:
               return 3;
-            case height < 5.0725:
+            case height < 8.116:
               return 4;
-            case height < 9.1305:
+            case height < 16.2321:
               return 5;
-            case height < 18.2611:
-              return 6;
             case height < 27.3916:
-              return 7;
+              return 6;
             default:
-              return 8;
+              return 7;
           }
         }
         default:
-          return 8;
+          return 0;
       }
     })();
     const sizeCategory = (() => {
       switch (sizeClass) {
-        case 1:
+        case 0:
           return "Diminutive";
-        case 2:
+        case 1:
           return "Tiny";
-        case 3:
+        case 2:
           return "Small";
-        case 4:
+        case 3:
           return "Medium";
-        case 5:
+        case 4:
           return "Large";
-        case 6:
+        case 5:
           return "Huge";
-        case 7:
+        case 6:
           return "Gigantic";
-        case 8:
+        case 7:
           return "Titanic";
         default:
           return "Max";

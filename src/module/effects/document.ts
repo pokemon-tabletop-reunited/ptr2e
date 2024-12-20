@@ -8,12 +8,14 @@ import { sluggify } from "@utils";
 import { RollOptionDomains } from "@module/data/roll-option-manager.ts";
 import { ItemGrantData } from "@item/data/system.ts";
 import { processGrantDeletions } from "./changes/grant-item.ts";
+import { AbilitySystemModel } from "@item/data/index.ts";
 class ActiveEffectPTR2e<
   TParent extends ActorPTR2e | ItemPTR2e | null = ActorPTR2e | ItemPTR2e | null,
   TSystem extends ActiveEffectSystem = ActiveEffectSystem,
 > extends ActiveEffect<TParent, TSystem> {
   /** Has this document completed `DataModel` initialization? */
   declare initialized: boolean;
+  declare static TYPES: string[];
 
   static LOCALIZATION_PREFIXES = ["PTR2E.Effect"];
 
@@ -101,6 +103,9 @@ class ActiveEffectPTR2e<
   }
 
   override apply(actor: ActorPTR2e, change: ChangeModel, options?: string[]): unknown {
+    if (this.parent instanceof ItemPTR2e && this.parent && this.parent.system instanceof AbilitySystemModel) {
+      if (this.parent.system.suppress) return;
+    }
     return this.system.apply(actor, change, options);
   }
 
@@ -139,7 +144,7 @@ class ActiveEffectPTR2e<
    * Override the implementation of ActiveEffect#_requiresDurationUpdate to support activation-based initiative.
    * Duration is purely handled in terms of combat turns elapsed.
    */
-  override _requiresDurationUpdate() {
+  override _requiresDurationUpdate(): boolean {
     const { _combatTime, type } = this.duration;
     if (type === "turns" && game.combat) {
       //@ts-expect-error - This is a private property
@@ -258,6 +263,11 @@ class ActiveEffectPTR2e<
           },
         });
       }
+
+      if (this.target.isImmuneToEffect(this)) {
+        ui.notifications.warn(game.i18n.format("PTR2E.Effect.Immune", { effect: this.name, target: this.target.name }));
+        return false;
+      }
     }
 
     if (data.description.startsWith("PTR2E.Effect.")) {
@@ -272,11 +282,13 @@ class ActiveEffectPTR2e<
   }
 
   // TODO: Clean this up cause god it's a mess.
-  protected override _preUpdate(
+  protected override async _preUpdate(
     changed: DeepPartial<this["_source"]>,
     options: DocumentUpdateContext<TParent>,
     user: User
   ): Promise<boolean | void> {
+    if (!changed?.changes && !changed?.system?.changes) return super._preUpdate(changed, options, user);
+
     const parseChangePath = (expanded: { changes: unknown[]; system?: unknown }) => {
       expanded.system = fu.mergeObject(expanded.system ?? {}, {
         changes: expanded.changes,
@@ -331,8 +343,7 @@ class ActiveEffectPTR2e<
     ) {
       parseIndexPaths(expanded as { system: { changes: Record<number, unknown> } });
     }
-
-    fu.setProperty(changed, "system", expanded.system);
+    fu.setProperty(changed, "system.changes", (expanded.system as Record<string, unknown>).changes);
     delete changed.changes;
 
     return super._preUpdate(changed, options, user);
@@ -360,12 +371,21 @@ class ActiveEffectPTR2e<
           source._id = fu.randomID();
         }
 
-        const existing = (parent.effects.contents as ActiveEffectPTR2e[]).find(
-          (e) => e.slug === sluggify(source.name)
-        );
-        if (existing?.system.stacks) {
-          existing.update({ "system.stacks": existing.system.stacks + (source.system?.stacks || 1) });
-          return [];
+        if (source.flags?.ptr2e?.stacks !== false) {
+          const existing = (parent.effects.contents as ActiveEffectPTR2e[]).find(
+            (e) => e.slug === sluggify(source.name)
+          );
+          if (existing?.system.stacks) {
+            existing.update({ "system.stacks": existing.system.stacks + (source.system?.stacks || 1) });
+            return [];
+          }
+          if ((
+            (source.system?.traits as string[])?.includes("major-affliction")
+            || (source.system?.traits as string[])?.includes("minor-affliction")
+          ) && existing?.duration.turns) {
+            existing.update({ "duration.turns": existing.duration.turns + (source.duration?.turns || 1) });
+            return [];
+          }
         }
 
         return new this(source, { parent });
@@ -397,10 +417,12 @@ class ActiveEffectPTR2e<
       }
     }
 
-    await ItemPTR2e.createDocuments( //@ts-expect-error - this should not error
-      outputItemSources,
-      context as DocumentModificationContext<ActorPTR2e | null>
-    );
+    if (outputItemSources.length) {
+      await ItemPTR2e.createDocuments( //@ts-expect-error - this should not error
+        outputItemSources,
+        context as DocumentModificationContext<ActorPTR2e | null>
+      );
+    }
     // Create the effects
     return super.createDocuments(outputEffectSources, context) as Promise<ActiveEffectPTR2e[]>;
   }
@@ -419,7 +441,7 @@ class ActiveEffectPTR2e<
           await change.preDelete?.({ pendingItems: items, context });
         }
 
-        await processGrantDeletions(effect, null, items, effects);
+        await processGrantDeletions(effect, null, items, effects, !!context.ignoreRestricted);
       }
 
       if (items.length) {
@@ -450,6 +472,12 @@ interface ActiveEffectPTR2e<
       rollOptions: {
         [domain in keyof typeof RollOptionDomains]: Record<string, boolean>;
       }
+      aura?: {
+        slug: string;
+        origin: ActorUUID;
+        removeOnExit: boolean;
+        amount?: number;
+      };
     };
   }
 

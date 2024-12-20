@@ -72,6 +72,7 @@ interface RollContext<
   target: RollTarget | null;
   traits: string[];
   effectRolls: { target: EffectRoll[], origin: EffectRoll[] };
+  flatDamage?: number;
 }
 
 interface AttackSelf<

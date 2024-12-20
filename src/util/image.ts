@@ -33,6 +33,7 @@ class ImageResolver {
     static async createFromSpeciesData(config: ImageSpeciesResolverConfig, speciesData: SpeciesImageData) {
         const {base, extensions} = {base: speciesData.data.base, extensions: Array.from(new Set([...speciesData.data.extensions ?? [], ".webp"]))};
         const suffixes = speciesData.suffixes ?? {};
+        if(!suffixes["token"]) suffixes["token"] = "_Token";
 
         const resolver = await ImageResolver.create(base, extensions);
         if(!resolver) return null;
@@ -109,9 +110,7 @@ class ImageResolver {
                         return result;
                     }
                 } // form matched partially, return shiny result
-                else {
-                    return shinyResult;
-                }
+                return shinyResult;
             }
         }
 

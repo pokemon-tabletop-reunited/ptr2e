@@ -26,6 +26,18 @@ export function initializeSettings() {
     requiresReload: true,
   });
 
+  game.settings.register("ptr2e", "tokens.autoscale", {
+    name: "PTR2E.Settings.Tokens.Autoscale.Name",
+    hint: "PTR2E.Settings.Tokens.Autoscale.Hint",
+    scope: "world",
+    config: true,
+    type: Boolean,
+    default: true,
+    onChange: (value) => {
+      game.ptr.settings.tokens.autoscale = !!value;
+    }
+  });
+
   game.settings.register("ptr2e", "dev-mode", {
     name: "PTR2E.Settings.DevMode.Name",
     hint: "PTR2E.Settings.DevMode.Hint",

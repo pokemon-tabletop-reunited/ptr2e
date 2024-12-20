@@ -167,7 +167,7 @@ class ChangeModel<TSchema extends ChangeSchema = ChangeSchema> extends foundry.a
       ...(this.item?.getRollOptions() ?? []),
     ]);
 
-    return this.resolveInjectedProperties(this.predicate).test(optionSet);
+    return this.resolveInjectedProperties(this.predicate.clone()).test(optionSet);
   }
 
   /** Send a deferred warning to the console indicating that a rule element's validation failed */
@@ -329,6 +329,7 @@ class ChangeModel<TSchema extends ChangeSchema = ChangeSchema> extends foundry.a
           Roll.replaceFormulaData(trimmed, {
             ...(this.actor?.getRollData() ?? []),
             item: this.item,
+            effect: this.effect,
             ...resolvables,
           })
         )
@@ -439,7 +440,7 @@ interface ChangeModel<TSchema extends ChangeSchema = ChangeSchema>
   afterRoll?(params: ChangeModel.AfterRollParams): Promise<void>;
 
   /** Runs before the rule's parent effect's owning actor is updated */
-  preUpdateActor?(): Promise<{ create: ItemSourcePTR2e[]; delete: string[] }>;
+  preUpdateActor?(): Promise<{ create: ItemSourcePTR2e[]; delete: string[];} | { createEffects: EffectSourcePTR2e[]; deleteEffects: string[];}>;
 
   /**
    * Runs before this rules element's parent effect is created. The effect is temporarilly constructed. A rule element can

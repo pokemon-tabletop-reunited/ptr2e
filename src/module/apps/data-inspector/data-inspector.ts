@@ -316,7 +316,7 @@ class DataInspector extends foundry.applications.api.HandlebarsApplicationMixin(
   }
 
   filterOptions(options: string[]): Set<string> {
-    if (!this.searchTerm || this.searchTerm.length <= 3) return new Set(options);
+    if (!this.searchTerm || this.searchTerm.length < 3) return new Set(options);
 
     const search = new MiniSearch({ fields: ["id"], searchOptions: { fuzzy: this.fuzzyiness } });
     search.addAll(options.map(o => ({ id: o })));
