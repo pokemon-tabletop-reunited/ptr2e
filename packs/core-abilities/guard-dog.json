@@ -1,7 +1,7 @@
 {
   "name": "Guard Dog",
   "type": "ability",
-  "img": "systems/ptr2e/img/icons/ability_icon.webp",
+  "img": "systems/ptr2e/img/perk-icons/Socialite.svg",
   "system": {
     "actions": [
       {
@@ -33,7 +33,11 @@
           "activation": "free"
         },
         "description": "<p>Passive: The user cannot be Pushed, but will still be affected by damage and other effects of Push actions.</p>",
-        "img": "icons/svg/explosion.svg"
+        "img": "icons/svg/explosion.svg",
+        "range": {
+          "target": "enemy",
+          "unit": "m"
+        }
       }
     ],
     "description": "<p>Trigger: The user is hit by an action with the [Social] Trait.</p><p>Effect: The user gains +1 ATK Stage for 5 Activations. Passive: The user cannot be Pushed, but will still be affected by damage and other effects of Push actions.</p>",

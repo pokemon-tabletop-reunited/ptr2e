@@ -1,7 +1,7 @@
 {
   "name": "Mimicry",
   "type": "ability",
-  "img": "systems/ptr2e/img/icons/ability_icon.webp",
+  "img": "systems/ptr2e/img/perk-icons/Exploration.svg",
   "system": {
     "actions": [
       {
@@ -15,16 +15,14 @@
         "cost": {
           "activation": "free",
           "powerPoints": 1,
-          "trigger": "<p>A [Terrain] is set or the user enters battle while a [Terrain] is active.</p>",
-          "delay": null,
-          "priority": null
+          "trigger": "<p>A [Terrain] is set or the user enters battle while a [Terrain] is active.</p>"
         },
         "range": {
           "target": "self",
-          "distance": 0,
           "unit": "m"
         },
-        "description": "<p>Trigger: A [Terrain] is set or the user enters battle while a [Terrain] is active.</p><p>Effect: The user gains the Type associated with the active [Terrain] as an extra Type, and the user's Physical- and Special-Category Attacks deal 25% more damage to creatures that possess that Type.</p>"
+        "description": "<p>Trigger: A [Terrain] is set or the user enters battle while a [Terrain] is active.</p><p>Effect: The user gains the Type associated with the active [Terrain] as an extra Type, and the user's Physical- and Special-Category Attacks deal 25% more damage to creatures that possess that Type.</p>",
+        "img": "icons/svg/explosion.svg"
       },
       {
         "traits": [
@@ -34,40 +32,22 @@
         "slug": "mimicry-passive",
         "type": "passive",
         "cost": {
-          "activation": "free",
-          "powerPoints": 0,
-          "delay": null,
-          "priority": null
+          "activation": "free"
         },
-        "range": null,
-        "description": "<p>Passive: the user's Disguise and Stealth checks are two degrees more successful while the user is stationary.</p>"
+        "description": "<p>Passive: the user's Disguise and Stealth checks are two degrees more successful while the user is stationary.</p>",
+        "img": "icons/svg/explosion.svg"
       }
     ],
     "description": "<p>Trigger: A [Terrain] is set or the user enters battle while a [Terrain] is active.</p><p>Effect: The user gains the Type associated with the active [Terrain] as an extra Type, and the user's Physical- and Special-Category Attacks deal 25% more damage to creatures that possess that Type. Passive: the user's Disguise and Stealth checks are two degrees more successful while the user is stationary.</p>",
     "traits": [
       "environ"
     ],
-    "slug": null,
-    "container": null
+    "slug": "mimicry",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
   },
   "_id": "GAwJKsxIwra79UwU",
-  "effects": [],
-  "folder": null,
-  "sort": 0,
-  "ownership": {
-    "default": 0,
-    "tXAZ3QUgjuwX4gdV": 3
-  },
-  "flags": {},
-  "_stats": {
-    "compendiumSource": null,
-    "duplicateSource": null,
-    "coreVersion": "12.324",
-    "systemId": "ptr2e",
-    "systemVersion": "0.005",
-    "createdTime": 1716919240454,
-    "modifiedTime": 1716919240454,
-    "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
-  },
-  "_key": "!items!GAwJKsxIwra79UwU"
+  "effects": []
 }

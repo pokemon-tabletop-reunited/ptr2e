@@ -1,7 +1,7 @@
 {
   "name": "Crackling Fury",
   "type": "ability",
-  "img": "systems/ptr2e/img/icons/ability_icon.webp",
+  "img": "systems/ptr2e/img/svg/electric_icon.svg",
   "system": {
     "actions": [
       {
@@ -16,16 +16,14 @@
         "cost": {
           "activation": "free",
           "powerPoints": 2,
-          "trigger": "<p>The user declares an Attack.</p>",
-          "delay": null,
-          "priority": null
+          "trigger": "<p>The user declares an Attack.</p>"
         },
         "range": {
           "target": "self",
-          "distance": 0,
           "unit": "m"
         },
-        "description": "<p>Trigger: The user declares an Attack.</p><p>Effect: The triggering Attack has its Power increase by 40%, and it gains [Recoil 1/6] until the end of the user's Activation. While the user meets the [Desperation 1/3] Condition, this bonus increases to 70%.</p>"
+        "description": "<p>Trigger: The user declares an Attack.</p><p>Effect: The triggering Attack has its Power increase by 40%, and it gains [Recoil 1/6] until the end of the user's Activation. While the user meets the [Desperation 1/3] Condition, this bonus increases to 70%.</p>",
+        "img": "icons/svg/explosion.svg"
       },
       {
         "slug": "plasma-fists",
@@ -45,10 +43,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 3,
-          "delay": null,
-          "priority": null,
-          "trigger": null
+          "powerPoints": 3
         },
         "category": "physical",
         "power": 100,
@@ -56,11 +51,8 @@
         "types": [
           "electric"
         ],
-        "description": "<p>Effect: On hit, all of user's Normal Type attacks become Electric Type for 5 Activations.</p>",
-        "contestType": "",
-        "contestEffect": "",
-        "free": false,
-        "slot": null
+        "description": "<p>Effect: On hit, all of the the user's Normal Type attacks become Electric Type for 5 Activations.</p>",
+        "img": "icons/svg/explosion.svg"
       }
     ],
     "description": "<p>Trigger: The user declares an Attack.</p><p>Effect: Connection - Plasma Fists. The triggering Attack has its Power increase by 40%, and it gains [Recoil 1/6] until the end of the user's Activation. While the user meets the [Desperation 1/3] Condition, this bonus increases to 70%.</p>",
@@ -69,27 +61,12 @@
       "connection",
       "desperation-1-3"
     ],
-    "slug": null,
-    "container": null
+    "slug": "crackling-fury",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
   },
   "_id": "khQIUEZFYnHOyXnu",
-  "effects": [],
-  "folder": null,
-  "sort": 0,
-  "ownership": {
-    "default": 0,
-    "tXAZ3QUgjuwX4gdV": 3
-  },
-  "flags": {},
-  "_stats": {
-    "compendiumSource": null,
-    "duplicateSource": null,
-    "coreVersion": "12.324",
-    "systemId": "ptr2e",
-    "systemVersion": "0.005",
-    "createdTime": 1716919240454,
-    "modifiedTime": 1716919240454,
-    "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
-  },
-  "_key": "!items!khQIUEZFYnHOyXnu"
+  "effects": []
 }

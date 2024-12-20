@@ -1,7 +1,7 @@
 {
   "name": "Wave Master",
   "type": "ability",
-  "img": "systems/ptr2e/img/icons/ability_icon.webp",
+  "img": "systems/ptr2e/img/svg/water_icon.svg",
   "system": {
     "actions": [
       {
@@ -12,16 +12,14 @@
         "cost": {
           "activation": "free",
           "powerPoints": 4,
-          "trigger": "<p>The user declares a Water-type attack.</p>",
-          "delay": null,
-          "priority": null
+          "trigger": "<p>The user declares a Water-type attack.</p>"
         },
         "range": {
           "target": "self",
-          "distance": 0,
           "unit": "m"
         },
-        "description": "<p>Trigger: The user declares a Water-type attack.</p><p>Effect: The triggering attack loses the [Contact] trait, if it had it, until the user's next Activation, and has its Range increased by 2.</p>"
+        "description": "<p>Trigger: The user declares a Water-type attack.</p><p>Effect: The triggering attack loses the [Contact] trait, if it had it, until the user's next Activation, and has its Range increased by 2.</p>",
+        "img": "icons/svg/explosion.svg"
       },
       {
         "traits": [],
@@ -29,38 +27,20 @@
         "slug": "wave-master",
         "type": "passive",
         "cost": {
-          "activation": "free",
-          "powerPoints": 0,
-          "delay": null,
-          "priority": null
+          "activation": "free"
         },
-        "range": null,
-        "description": "<p>Passive: The user gains +2 to their Swim Score.</p>"
+        "description": "<p>Passive: The user gains +2 to their Swim Score.</p>",
+        "img": "icons/svg/explosion.svg"
       }
     ],
     "description": "<p>Trigger: The user declares a Water-type attack.</p><p>Effect: The triggering attack loses the [Contact] trait, if it had it, until the user's next Activation, and has its Range increased by 2. Passive: The user gains +2 to their Swim Score.</p>",
     "traits": [],
-    "slug": null,
-    "container": null
+    "slug": "wave-master",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
   },
   "_id": "DvK2tigtC2GMcRG1",
-  "effects": [],
-  "folder": null,
-  "sort": 0,
-  "ownership": {
-    "default": 0,
-    "tXAZ3QUgjuwX4gdV": 3
-  },
-  "flags": {},
-  "_stats": {
-    "compendiumSource": null,
-    "duplicateSource": null,
-    "coreVersion": "12.324",
-    "systemId": "ptr2e",
-    "systemVersion": "0.005",
-    "createdTime": 1716919240454,
-    "modifiedTime": 1716919240454,
-    "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
-  },
-  "_key": "!items!DvK2tigtC2GMcRG1"
+  "effects": []
 }

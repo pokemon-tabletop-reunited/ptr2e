@@ -1,7 +1,7 @@
 {
   "name": "Prideful",
   "type": "ability",
-  "img": "systems/ptr2e/img/icons/ability_icon.webp",
+  "img": "systems/ptr2e/img/conditions/badly-poisoned.svg",
   "system": {
     "actions": [
       {
@@ -10,42 +10,24 @@
         "slug": "prideful",
         "type": "passive",
         "cost": {
-          "activation": "free",
-          "powerPoints": 0,
-          "delay": null,
-          "priority": null
+          "activation": "free"
         },
         "range": {
           "target": "self",
-          "distance": 0,
           "unit": "m"
         },
-        "description": "<p>Effect: The user's SPATK stat increases by 50% if affected by a Major Status Affliction. If the user is afflicted with @Affliction[poison] or @Affliction[blight], their SPATK increases by 100% instead.</p>"
+        "description": "<p>Effect: The user's SPATK stat increases by 50% if affected by a Major Status Affliction. If the user is afflicted with @Affliction[poison] or @Affliction[blight], their SPATK increases by 100% instead.</p>",
+        "img": "icons/svg/explosion.svg"
       }
     ],
     "description": "<p>Effect: The user's SPATK stat increases by 50% if affected by a Major Status Affliction. If the user is afflicted with @Affliction[poison] or @Affliction[blight], their SPATK increases by 100% instead.</p>",
     "traits": [],
-    "slug": null,
-    "container": null
+    "slug": "prideful",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
   },
   "_id": "L4mRysn1IivdAU1B",
-  "effects": [],
-  "folder": null,
-  "sort": 0,
-  "ownership": {
-    "default": 0,
-    "tXAZ3QUgjuwX4gdV": 3
-  },
-  "flags": {},
-  "_stats": {
-    "compendiumSource": null,
-    "duplicateSource": null,
-    "coreVersion": "12.324",
-    "systemId": "ptr2e",
-    "systemVersion": "0.005",
-    "createdTime": 1716919240454,
-    "modifiedTime": 1716919240454,
-    "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
-  },
-  "_key": "!items!L4mRysn1IivdAU1B"
+  "effects": []
 }

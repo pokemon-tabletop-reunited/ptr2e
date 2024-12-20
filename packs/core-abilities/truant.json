@@ -1,7 +1,7 @@
 {
   "name": "Truant",
   "type": "ability",
-  "img": "systems/ptr2e/img/icons/ability_icon.webp",
+  "img": "systems/ptr2e/img/conditions/sleep.svg",
   "system": {
     "actions": [
       {
@@ -10,42 +10,24 @@
         "slug": "truant",
         "type": "passive",
         "cost": {
-          "activation": "free",
-          "powerPoints": 0,
-          "delay": null,
-          "priority": null
+          "activation": "free"
         },
         "range": {
           "target": "self",
-          "distance": 0,
           "unit": "m"
         },
-        "description": "<p>Effect: All of the user's attacks have the [Exhaust] trait if they do not have the trait already. All of the user's attacks that are Simple Actions are Complex Actions instead. The user cannot use [Set-Up] attacks. The user's [Exhaust] attacks have +30% Power.</p>"
+        "description": "<p>Effect: All of the user's attacks have the [Exhaust] trait if they do not have the trait already. All of the user's attacks that are Simple Actions are Complex Actions instead. The user cannot use [Set-Up] attacks. The user's [Exhaust] attacks have +30% Power.</p>",
+        "img": "icons/svg/explosion.svg"
       }
     ],
     "description": "<p>Effect: All of the user's attacks have the [Exhaust] trait if they do not have the trait already. All of the user's attacks that are Simple Actions are Complex Actions instead. The user cannot use [Set-Up] attacks. The user's [Exhaust] attacks have +30% Power.</p>",
     "traits": [],
-    "slug": null,
-    "container": null
+    "slug": "truant",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
   },
   "_id": "1fZMWi8thyYYl8Sz",
-  "effects": [],
-  "folder": null,
-  "sort": 0,
-  "ownership": {
-    "default": 0,
-    "tXAZ3QUgjuwX4gdV": 3
-  },
-  "flags": {},
-  "_stats": {
-    "compendiumSource": null,
-    "duplicateSource": null,
-    "coreVersion": "12.324",
-    "systemId": "ptr2e",
-    "systemVersion": "0.005",
-    "createdTime": 1716919240454,
-    "modifiedTime": 1716919240454,
-    "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
-  },
-  "_key": "!items!1fZMWi8thyYYl8Sz"
+  "effects": []
 }

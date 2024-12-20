@@ -1,7 +1,7 @@
 {
   "name": "Ball Fetch",
   "type": "ability",
-  "img": "systems/ptr2e/img/icons/ability_icon.webp",
+  "img": "systems/ptr2e/img/item-icons/basic%20ball.webp",
   "system": {
     "actions": [
       {
@@ -14,41 +14,25 @@
         "cost": {
           "activation": "simple",
           "powerPoints": 2,
-          "trigger": "<p>A creature within Range has a Flung item miss it.</p>",
-          "delay": null,
-          "priority": null
+          "trigger": "<p>A creature within Range has a Flung item miss it.</p>"
         },
         "range": {
           "target": "object",
           "distance": 8,
           "unit": "m"
         },
-        "description": "<p>Trigger: A creature within Range has a Flung item miss it.</p><p>Effect: The user gains +2 ACC and EVA Stages for 2 Activations. Then the user freely moves to the fallen item and picks it up, making it a Held Item.</p>"
+        "description": "<p>Trigger: A creature within Range has a Flung item miss it.</p><p>Effect: The user gains +2 ACC and EVA Stages for 2 Activations. Then the user freely moves to the fallen item and picks it up, making it a Held Item.</p>",
+        "img": "icons/svg/explosion.svg"
       }
     ],
     "description": "<p>Trigger: A creature within Range has a Flung item miss it.</p><p>Effect: The user gains +2 ACC and EVA Stages for 2 Activations. Then the user freely moves to the fallen item and picks it up, making it a Held Item.</p>",
     "traits": [],
-    "slug": null,
-    "container": null
+    "slug": "ball-fetch",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
   },
   "_id": "M062FeoBqCYUqs1M",
-  "effects": [],
-  "folder": null,
-  "sort": 0,
-  "ownership": {
-    "default": 0,
-    "tXAZ3QUgjuwX4gdV": 3
-  },
-  "flags": {},
-  "_stats": {
-    "compendiumSource": null,
-    "duplicateSource": null,
-    "coreVersion": "12.324",
-    "systemId": "ptr2e",
-    "systemVersion": "0.005",
-    "createdTime": 1716919240454,
-    "modifiedTime": 1716919240454,
-    "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
-  },
-  "_key": "!items!M062FeoBqCYUqs1M"
+  "effects": []
 }

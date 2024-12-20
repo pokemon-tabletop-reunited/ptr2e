@@ -1,7 +1,7 @@
 {
   "name": "Dragonfire",
   "type": "ability",
-  "img": "systems/ptr2e/img/icons/ability_icon.webp",
+  "img": "systems/ptr2e/img/svg/dragon_icon.svg",
   "system": {
     "actions": [
       {
@@ -32,7 +32,11 @@
           "activation": "free"
         },
         "description": "<p>Passive: Increases the Damage of the user's Dragon-Type attacks by 50%.</p>",
-        "img": "icons/svg/explosion.svg"
+        "img": "icons/svg/explosion.svg",
+        "range": {
+          "target": "enemy",
+          "unit": "m"
+        }
       }
     ],
     "description": "<p>Effect: The user's Fire-Type attacks deal 50% more damage to Dragon-Type Pokemon. Passive: Increases the Damage of the user's Dragon-Type attacks by 50%.</p>",
