@@ -297,7 +297,7 @@ export default abstract class BlueprintSystem extends HasEmbed(HasMigrations(fou
       })();
 
       // TODO: Implement proper exp for Characters
-      const experience = (3 * Math.pow(level, 3)) / 6;
+      const experience = (1 * Math.pow(level, 3)) / 1;
 
       const nature = await (async () => {
         // Get nature from rolltable result, or static value

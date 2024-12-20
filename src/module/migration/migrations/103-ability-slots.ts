@@ -27,8 +27,8 @@ export class Migration103AbilitySlots extends MigrationBase {
         if(isNaN(experience) || experience < 0) return;
 
         const level = actorSource.type === "humanoid" 
-            ? Math.max(1, Math.floor(Math.cbrt(((experience || 1) * 4) / 5)))
-            : Math.max(1, Math.floor(Math.cbrt(((experience || 1) * 6) / 3)));
+            ? Math.max(1, Math.floor(Math.cbrt(((experience || 1) * 1) / 1)))
+            : Math.max(1, Math.floor(Math.cbrt(((experience || 1) * 1) / 1)));
 
         // Initialize map if necessary
         if(!this._map) {
