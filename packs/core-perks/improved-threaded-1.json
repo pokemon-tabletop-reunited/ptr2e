@@ -16,15 +16,21 @@
         "slug": "improved-threaded-1",
         "description": "<p>Improve your Threaded Movement Allowance by 2.</p>",
         "cost": {
-          "activation": "free"
+          "activation": "free",
+          "powerPoints": 0,
+          "delay": null,
+          "priority": null
         },
         "type": "passive",
         "traits": [],
         "img": "icons/svg/explosion.svg",
         "range": {
           "target": "enemy",
-          "unit": "m"
-        }
+          "unit": "m",
+          "distance": 0
+        },
+        "variant": null,
+        "hidden": false
       }
     ],
     "slug": "improved-threaded-1",
@@ -38,7 +44,10 @@
     "nodes": [
       {
         "connected": [
-          "mankey-see-mankey-do"
+          "hivemark",
+          "silk-swing",
+          "mankey-see-mankey-do",
+          "adhesive-digits"
         ],
         "config": {
           "alpha": null,
@@ -51,10 +60,35 @@
         },
         "hidden": false,
         "type": "normal",
-        "x": 52,
-        "y": 127
+        "x": 90,
+        "y": 27,
+        "tier": null
+      },
+      {
+        "x": 85,
+        "y": 36,
+        "connected": [
+          "silk-swing",
+          "adhesive-digits",
+          "improved-overland-1-7"
+        ],
+        "config": {
+          "alpha": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "borderWidth": null,
+          "texture": null,
+          "tint": null,
+          "scale": null
+        },
+        "hidden": false,
+        "type": "normal",
+        "tier": null
       }
-    ]
+    ],
+    "originSlug": null,
+    "global": true,
+    "webs": []
   },
   "_id": "OluRtmzPHj9OgOXc",
   "img": "systems/ptr2e/img/svg/bug_icon.svg",

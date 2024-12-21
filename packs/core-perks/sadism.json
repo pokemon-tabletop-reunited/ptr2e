@@ -17,14 +17,18 @@
         "type": "generic",
         "range": {
           "target": "self",
-          "unit": "m"
+          "unit": "m",
+          "distance": 0
         },
         "cost": {
           "activation": "free",
           "powerPoints": 3,
-          "trigger": "A creature within 5m of you suffers loses a Tick(s) of HP as effect damage from an Affliction."
+          "trigger": "A creature within 5m of you suffers loses a Tick(s) of HP as effect damage from an Affliction.",
+          "delay": null,
+          "priority": null
         },
-        "img": "icons/svg/explosion.svg"
+        "img": "icons/svg/explosion.svg",
+        "variant": null
       }
     ],
     "slug": "sadism",
@@ -46,9 +50,9 @@
     "nodes": [
       {
         "connected": [
-          "lasting-harm",
-          "hexcraft",
-          "acceptance"
+          "stage-vampirism",
+          "cultivate-weakness",
+          "insidious-wounds"
         ],
         "config": {
           "alpha": null,
@@ -61,10 +65,16 @@
         },
         "hidden": false,
         "type": "normal",
-        "x": 175,
-        "y": 112
+        "x": 147,
+        "y": 70,
+        "tier": null
       }
-    ]
+    ],
+    "originSlug": null,
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": []
   },
   "effects": []
 }

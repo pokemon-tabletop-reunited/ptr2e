@@ -14,15 +14,19 @@
         "description": "<p>You can detect the presence of minds within a range equal to your Occult (Psychic) Skill in metres, unless those minds have been concealed in some way.</p>",
         "cost": {
           "activation": "simple",
-          "powerPoints": 2
+          "powerPoints": 2,
+          "delay": null,
+          "priority": null
         },
         "type": "generic",
         "traits": [],
         "img": "icons/svg/explosion.svg",
         "range": {
           "target": "enemy",
-          "unit": "m"
-        }
+          "unit": "m",
+          "distance": 0
+        },
+        "variant": null
       }
     ],
     "slug": "detect-minds",
@@ -35,8 +39,7 @@
       {
         "connected": [
           "hypnotic-suggestion",
-          "telekinetic-potential",
-          "mindscramble"
+          "conceal-mind"
         ],
         "config": {
           "alpha": null,
@@ -49,10 +52,16 @@
         },
         "hidden": false,
         "type": "normal",
-        "x": 99,
-        "y": 155
+        "x": 139,
+        "y": 124,
+        "tier": null
       }
-    ]
+    ],
+    "originSlug": null,
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": []
   },
   "_id": "W565Ar8WPA07HEBx",
   "img": "systems/ptr2e/img/svg/psychic_icon.svg",

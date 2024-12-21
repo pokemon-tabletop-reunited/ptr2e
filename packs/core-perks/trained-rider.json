@@ -18,15 +18,21 @@
         "slug": "trained-rider",
         "description": "<p>You may mount a Pokemon using a Simple Action instead of a Complex Action. You are able to mount under duress without requiring a check.</p>",
         "cost": {
-          "activation": "free"
+          "activation": "free",
+          "powerPoints": 0,
+          "delay": null,
+          "priority": null
         },
         "type": "passive",
         "traits": [],
         "img": "icons/svg/explosion.svg",
         "range": {
           "target": "enemy",
-          "unit": "m"
-        }
+          "unit": "m",
+          "distance": 0
+        },
+        "variant": null,
+        "hidden": false
       }
     ],
     "slug": "trained-rider",
@@ -37,10 +43,22 @@
     },
     "nodes": [
       {
+        "x": 91,
+        "y": 59,
+        "hidden": false,
+        "type": "entry",
         "connected": [
           "ride-for-ruin",
           "urge-mount",
-          "knee-steering"
+          "knee-steering",
+          "improved-overland-1-2",
+          "thug",
+          "guard-up",
+          "berserker",
+          "lean-in",
+          "cyclist",
+          "improved-overland-1-7",
+          "stat-iv-booster-1-5"
         ],
         "config": {
           "alpha": null,
@@ -51,12 +69,14 @@
           "tint": "#ffffff",
           "scale": null
         },
-        "hidden": false,
-        "type": "normal",
-        "x": 141,
-        "y": 143
+        "tier": null
       }
-    ]
+    ],
+    "originSlug": null,
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": []
   },
   "_id": "swPSWUmbRn3KwvyI",
   "img": "systems/ptr2e/img/perk-icons/Cavalier.svg",

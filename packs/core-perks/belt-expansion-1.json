@@ -12,15 +12,21 @@
         "slug": "belt-expansion-1",
         "description": "<p>Add an additional Belt slot.</p>",
         "cost": {
-          "activation": "free"
+          "activation": "free",
+          "powerPoints": 0,
+          "delay": null,
+          "priority": null
         },
         "type": "passive",
         "traits": [],
         "img": "icons/svg/explosion.svg",
         "range": {
           "target": "enemy",
-          "unit": "m"
-        }
+          "unit": "m",
+          "distance": 0
+        },
+        "variant": null,
+        "hidden": false
       }
     ],
     "slug": "belt-expansion-1",
@@ -36,7 +42,8 @@
         "connected": [
           "trained-wielder",
           "dress-to-impress",
-          "backpacker-1"
+          "out-of-options",
+          "dual-wielder"
         ],
         "config": {
           "alpha": null,
@@ -49,22 +56,54 @@
         },
         "hidden": false,
         "type": "normal",
-        "x": 184,
-        "y": 57
+        "x": 181,
+        "y": 53,
+        "tier": null
       },
       {
         "tier": {
           "rank": 2,
           "uuid": "Compendium.ptr2e.core-perks.Item.sJ1B6djHXWc4F5Ez"
-        }
+        },
+        "x": null,
+        "y": null,
+        "connected": [],
+        "config": {
+          "alpha": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "borderWidth": null,
+          "texture": null,
+          "tint": null,
+          "scale": null
+        },
+        "hidden": false,
+        "type": "normal"
       },
       {
         "tier": {
           "rank": 3,
           "uuid": "Compendium.ptr2e.core-perks.Item.wWAAPsxfOC8nGPGm"
-        }
+        },
+        "x": null,
+        "y": null,
+        "connected": [],
+        "config": {
+          "alpha": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "borderWidth": null,
+          "texture": null,
+          "tint": null,
+          "scale": null
+        },
+        "hidden": false,
+        "type": "normal"
       }
-    ]
+    ],
+    "originSlug": null,
+    "global": true,
+    "webs": []
   },
   "_id": "zAKTLdBrA5eeGCsX",
   "img": "systems/ptr2e/img/perk-icons/Tactician.svg",

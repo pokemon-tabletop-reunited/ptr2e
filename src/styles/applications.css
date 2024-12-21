@@ -6903,35 +6903,39 @@ body .application.sheet .form-group {
   display: flex;
   flex-direction: column;
 }
-.application.sheet.github-commit-manager main.scroll ul {
+.application.sheet.github-commit-manager main fieldset.scroll {
+  max-height: 40vh;
+  overflow-y: scroll;
+}
+.application.sheet.github-commit-manager main ul {
   list-style: none;
   padding: 0;
   margin: 0;
 }
-.application.sheet.github-commit-manager main.scroll ul li {
+.application.sheet.github-commit-manager main ul li {
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
   padding: 0.5rem;
   border-bottom: 1px solid var(--border-theme-color);
 }
-.application.sheet.github-commit-manager main.scroll ul li span {
+.application.sheet.github-commit-manager main ul li span {
   flex: 0 0 150px;
   overflow: hidden;
   text-overflow: ellipsis;
 }
-.application.sheet.github-commit-manager main.scroll ul li span.message {
+.application.sheet.github-commit-manager main ul li span.message {
   flex: 1;
   text-wrap: pretty;
 }
-.application.sheet.github-commit-manager main.scroll ul li .hint {
+.application.sheet.github-commit-manager main ul li .hint {
   text-wrap: pretty;
 }
-.application.sheet.github-commit-manager main.scroll ul li button {
+.application.sheet.github-commit-manager main ul li button {
   flex: 0;
   padding: 0.25rem;
 }
-.application.sheet.github-commit-manager main.scroll ul li button i {
+.application.sheet.github-commit-manager main ul li button i {
   margin: unset;
 }
 .application.sheet.github-commit-manager footer {

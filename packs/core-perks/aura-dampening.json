@@ -19,15 +19,19 @@
         "description": "<p>You are able to dampen your Aura, making it difficult to read your moods and intentions. You may spend the 2 PP cost as an [Interrupt 3] Free Action when someone attempts to probe your Aura using Aura Empathy to inflict a -20 penalty to any triggering Aura Sense check.</p>",
         "cost": {
           "activation": "free",
-          "powerPoints": 2
+          "powerPoints": 2,
+          "delay": null,
+          "priority": null
         },
         "type": "generic",
         "traits": [],
         "img": "icons/svg/explosion.svg",
         "range": {
           "target": "enemy",
-          "unit": "m"
-        }
+          "unit": "m",
+          "distance": 0
+        },
+        "variant": null
       }
     ],
     "slug": "aura-dampening",
@@ -39,9 +43,10 @@
     "nodes": [
       {
         "connected": [
-          "shielding-aura",
-          "aura-haze",
-          "sight-beyond-sight"
+          "aura-projection",
+          "aura-bonding",
+          "shift-consciousness-aura",
+          "shielding-aura"
         ],
         "config": {
           "alpha": null,
@@ -54,10 +59,16 @@
         },
         "hidden": false,
         "type": "normal",
-        "x": 82,
-        "y": 68
+        "x": 179,
+        "y": 25,
+        "tier": null
       }
-    ]
+    ],
+    "originSlug": null,
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": []
   },
   "_id": "3j8tXm6MJWi1JKsH",
   "img": "systems/ptr2e/img/perk-icons/Aura.svg",

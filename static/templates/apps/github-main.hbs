@@ -8,9 +8,9 @@
     <p>Edit any item and use the 'Commit to Github' button in its toolbar to start a Commit.</p>
     {{/if}}
   </header>
-  <main class="scroll pt-2">
+  <main class="pt-2">
     {{#if ongoing}}
-    <fieldset class="pb-2">
+    <fieldset class="pb-2 scroll">
       <legend>Commit Items</legend>
       <ul>
         <li class="blob">
@@ -45,6 +45,7 @@
         </div>
         <p class="hint">Describe the changes you've made; such as "Fixed the PP cost for the abilities A, B & C"</p>
       </div>
+      </fieldset>
     {{/if}}
   </main>
   <footer class="pt-2 pb-2">

@@ -19,12 +19,16 @@
         "img": "systems/ptr2e/img/svg/grass_icon.svg",
         "range": {
           "target": "self",
-          "unit": "m"
+          "unit": "m",
+          "distance": 0
         },
         "cost": {
           "activation": "free",
-          "powerPoints": 3
-        }
+          "powerPoints": 3,
+          "delay": null,
+          "priority": null
+        },
+        "variant": null
       }
     ],
     "description": "<p>Trigger: The Weather becomes Sunny.<br><br>Effect: You may spend 3PP to gain the Ringed condition as a free-action interrupt.</p>",
@@ -38,7 +42,8 @@
       {
         "connected": [
           "nurturing-shoots",
-          "one-with-the-green"
+          "one-with-the-green",
+          "climatologist"
         ],
         "config": {
           "alpha": null,
@@ -51,10 +56,16 @@
         },
         "hidden": false,
         "type": "normal",
-        "x": 79,
-        "y": 86
+        "x": 52,
+        "y": 133,
+        "tier": null
       }
-    ]
+    ],
+    "originSlug": null,
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": []
   },
   "img": "systems/ptr2e/img/svg/grass_icon.svg",
   "effects": [],

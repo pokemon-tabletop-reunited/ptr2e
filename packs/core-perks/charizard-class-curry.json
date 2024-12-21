@@ -19,15 +19,20 @@
         "slug": "charizard-class-curry",
         "description": "<p>You are able to make Charizard-class Curries as a Camp Action. One of these Curries restores 50% of the party's max HP and have them recover from Exposure. On a 1-25, you attract a non-hostile Pokemon from the local environment to investigate the camp.</p>",
         "cost": {
-          "activation": "complex"
+          "activation": "complex",
+          "powerPoints": 0,
+          "delay": null,
+          "priority": null
         },
         "type": "camping",
         "traits": [],
         "range": {
           "target": "object",
-          "unit": "m"
+          "unit": "m",
+          "distance": 0
         },
-        "img": "icons/svg/explosion.svg"
+        "img": "icons/svg/explosion.svg",
+        "variant": null
       }
     ],
     "slug": "charizard-class-curry",
@@ -40,8 +45,7 @@
       {
         "connected": [
           "wobbufet-class-curry",
-          "copperajah-class-curry",
-          "curry-breath"
+          "copperajah-class-curry"
         ],
         "config": {
           "alpha": null,
@@ -54,10 +58,16 @@
         },
         "hidden": false,
         "type": "normal",
-        "x": 212,
-        "y": 15
+        "x": 193,
+        "y": 129,
+        "tier": null
       }
-    ]
+    ],
+    "originSlug": null,
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": []
   },
   "_id": "7IwAmBCPdulCY7yD",
   "img": "systems/ptr2e/img/perk-icons/Chef.svg",

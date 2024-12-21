@@ -14,13 +14,18 @@
         "type": "generic",
         "range": {
           "target": "creature",
-          "unit": "m"
+          "unit": "m",
+          "distance": 0
         },
         "cost": {
           "activation": "free",
-          "trigger": "The target is afflicted with a [Major Affliction] the user caused."
+          "trigger": "The target is afflicted with a [Major Affliction] the user caused.",
+          "powerPoints": 0,
+          "delay": null,
+          "priority": null
         },
-        "img": "systems/ptr2e/img/perk-icons/Arcana.svg"
+        "img": "systems/ptr2e/img/perk-icons/Arcana.svg",
+        "variant": null
       }
     ],
     "slug": "acute-affliction",
@@ -37,10 +42,11 @@
     "nodes": [
       {
         "connected": [
+          "lasting-harm",
+          "logicians-wisdom",
           "acceptance",
-          "potent-afflictions",
-          "thug",
-          "logicians-wisdom"
+          "cultivate-weakness",
+          "draconic-presence"
         ],
         "config": {
           "alpha": null,
@@ -53,10 +59,16 @@
         },
         "hidden": false,
         "type": "normal",
-        "x": 175,
-        "y": 104
+        "x": 152,
+        "y": 75,
+        "tier": null
       }
-    ]
+    ],
+    "originSlug": null,
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": []
   },
   "effects": []
 }

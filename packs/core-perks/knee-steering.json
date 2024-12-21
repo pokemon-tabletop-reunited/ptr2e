@@ -18,15 +18,21 @@
         "slug": "knee-steering",
         "description": "<p>You may steer a mount without using one of your hands, freeing that hand up to use for other activities.</p>",
         "cost": {
-          "activation": "free"
+          "activation": "free",
+          "powerPoints": 0,
+          "delay": null,
+          "priority": null
         },
         "type": "passive",
         "traits": [],
         "img": "icons/svg/explosion.svg",
         "range": {
           "target": "enemy",
-          "unit": "m"
-        }
+          "unit": "m",
+          "distance": 0
+        },
+        "variant": null,
+        "hidden": false
       }
     ],
     "slug": "knee-steering",
@@ -39,7 +45,8 @@
       {
         "connected": [
           "lean-in",
-          "trained-rider"
+          "trained-rider",
+          "urge-mount"
         ],
         "config": {
           "alpha": null,
@@ -52,10 +59,16 @@
         },
         "hidden": false,
         "type": "normal",
-        "x": 127,
-        "y": 133
+        "x": 91,
+        "y": 63,
+        "tier": null
       }
-    ]
+    ],
+    "originSlug": null,
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": []
   },
   "_id": "3RFfXmRoL4xcwHWr",
   "img": "systems/ptr2e/img/perk-icons/Cavalier.svg",

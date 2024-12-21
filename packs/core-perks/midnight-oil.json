@@ -16,11 +16,16 @@
         "img": "systems/ptr2e/img/svg/fire_icon.svg",
         "range": {
           "target": "self",
-          "unit": "m"
+          "unit": "m",
+          "distance": 0
         },
         "cost": {
-          "activation": "free"
-        }
+          "activation": "free",
+          "powerPoints": 0,
+          "delay": null,
+          "priority": null
+        },
+        "variant": null
       }
     ],
     "description": "<p>As a free action, you may spend 4 ticks of HP to become Stoked 1.</p>",
@@ -34,7 +39,8 @@
       {
         "connected": [
           "firefly",
-          "inner-warmth"
+          "inner-warmth",
+          "intense-heat"
         ],
         "config": {
           "alpha": null,
@@ -47,10 +53,16 @@
         },
         "hidden": false,
         "type": "normal",
-        "x": 138,
-        "y": 26
+        "x": 166,
+        "y": 92,
+        "tier": null
       }
-    ]
+    ],
+    "originSlug": null,
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": []
   },
   "img": "systems/ptr2e/img/svg/fire_icon.svg",
   "effects": [],

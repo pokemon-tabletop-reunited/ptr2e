@@ -13,15 +13,21 @@
         "slug": "one-with-the-green",
         "description": "<p>You add the Sap Sipper Ability to your Trained Abilities list.</p>",
         "cost": {
-          "activation": "free"
+          "activation": "free",
+          "powerPoints": 0,
+          "delay": null,
+          "priority": null
         },
         "type": "passive",
         "traits": [],
         "img": "icons/svg/explosion.svg",
         "range": {
           "target": "enemy",
-          "unit": "m"
-        }
+          "unit": "m",
+          "distance": 0
+        },
+        "variant": null,
+        "hidden": false
       }
     ],
     "slug": "one-with-the-green",
@@ -34,7 +40,8 @@
       {
         "connected": [
           "nurturing-shoots",
-          "summer-growth"
+          "summer-growth",
+          "guard-up"
         ],
         "config": {
           "alpha": null,
@@ -47,10 +54,16 @@
         },
         "hidden": false,
         "type": "normal",
-        "x": 72,
-        "y": 86
+        "x": 65,
+        "y": 131,
+        "tier": null
       }
-    ]
+    ],
+    "originSlug": null,
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": []
   },
   "_id": "ks3F2x6TCKlFrWTO",
   "img": "systems/ptr2e/img/svg/grass_icon.svg",

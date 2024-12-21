@@ -19,9 +19,12 @@
         },
         "cost": {
           "activation": "free",
-          "powerPoints": 5
+          "powerPoints": 5,
+          "delay": null,
+          "priority": null
         },
-        "img": "icons/svg/explosion.svg"
+        "img": "icons/svg/explosion.svg",
+        "variant": null
       }
     ],
     "slug": "logicians-wisdom",
@@ -36,9 +39,11 @@
     "nodes": [
       {
         "connected": [
-          "insidious-wounds",
+          "thug",
+          "lasting-harm",
+          "acute-affliction",
           "stage-vampirism",
-          "acute-affliction"
+          "cultivate-weakness"
         ],
         "config": {
           "alpha": null,
@@ -51,10 +56,16 @@
         },
         "hidden": false,
         "type": "normal",
-        "x": 173,
-        "y": 98
+        "x": 147,
+        "y": 74,
+        "tier": null
       }
-    ]
+    ],
+    "originSlug": null,
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": []
   },
   "effects": []
 }

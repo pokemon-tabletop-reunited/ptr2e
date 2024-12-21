@@ -13,15 +13,21 @@
         "slug": "nurturing-shoots",
         "description": "<p>You gain the [Plant Grower] trait.</p>",
         "cost": {
-          "activation": "free"
+          "activation": "free",
+          "powerPoints": 0,
+          "delay": null,
+          "priority": null
         },
         "type": "passive",
         "traits": [],
         "img": "icons/svg/explosion.svg",
         "range": {
           "target": "enemy",
-          "unit": "m"
-        }
+          "unit": "m",
+          "distance": 0
+        },
+        "variant": null,
+        "hidden": false
       }
     ],
     "slug": "nurturing-shoots",
@@ -34,7 +40,9 @@
       {
         "connected": [
           "one-with-the-green",
-          "summer-growth"
+          "summer-growth",
+          "improved-overland-1-4",
+          "improved-burrow-1-2"
         ],
         "config": {
           "alpha": null,
@@ -47,10 +55,16 @@
         },
         "hidden": false,
         "type": "normal",
-        "x": 73,
-        "y": 82
+        "x": 57,
+        "y": 127,
+        "tier": null
       }
-    ]
+    ],
+    "originSlug": null,
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": []
   },
   "_id": "cAm1mX4AkuIz2hi1",
   "img": "systems/ptr2e/img/svg/grass_icon.svg",

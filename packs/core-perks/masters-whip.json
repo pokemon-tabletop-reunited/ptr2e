@@ -14,12 +14,17 @@
         "type": "generic",
         "range": {
           "target": "ally",
-          "unit": "m"
+          "unit": "m",
+          "distance": 0
         },
         "cost": {
-          "activation": "simple"
+          "activation": "simple",
+          "powerPoints": 0,
+          "delay": null,
+          "priority": null
         },
-        "img": "icons/svg/explosion.svg"
+        "img": "icons/svg/explosion.svg",
+        "variant": null
       }
     ],
     "slug": "masters-whip",
@@ -40,11 +45,18 @@
     },
     "nodes": [
       {
+        "x": 36,
+        "y": 113,
+        "hidden": false,
+        "type": "entry",
         "connected": [
           "beastmaster",
           "harsh-motivator",
           "unreasonable",
-          "bloodthirst"
+          "bloodthirst",
+          "root-6",
+          "climatologist",
+          "emergency-retreat"
         ],
         "config": {
           "alpha": null,
@@ -55,12 +67,14 @@
           "tint": "#f5f5f5",
           "scale": null
         },
-        "hidden": false,
-        "type": "normal",
-        "x": 200,
-        "y": 144
+        "tier": null
       }
-    ]
+    ],
+    "originSlug": null,
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": []
   },
   "effects": []
 }

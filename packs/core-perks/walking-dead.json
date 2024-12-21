@@ -13,15 +13,21 @@
         "slug": "walking-dead",
         "description": "Gain the [Silent], [Breathless] & [Lifesense 10] traits, and your Diet changes to Auravore.",
         "cost": {
-          "activation": "free"
+          "activation": "free",
+          "powerPoints": 0,
+          "delay": null,
+          "priority": null
         },
         "type": "passive",
         "traits": [],
         "img": "icons/svg/explosion.svg",
         "range": {
           "target": "self",
-          "unit": "m"
-        }
+          "unit": "m",
+          "distance": 0
+        },
+        "variant": null,
+        "hidden": false
       }
     ],
     "slug": "walking-dead",
@@ -34,7 +40,8 @@
       {
         "connected": [
           "spectral-stalker",
-          "grim-haunt"
+          "grim-haunt",
+          "stat-iv-booster-1-2"
         ],
         "config": {
           "alpha": null,
@@ -47,10 +54,16 @@
         },
         "hidden": false,
         "type": "normal",
-        "x": 10,
-        "y": 59
+        "x": 167,
+        "y": 116,
+        "tier": null
       }
-    ]
+    ],
+    "originSlug": null,
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": []
   },
   "_id": "JJDDKoaSQpOFk6SV",
   "img": "systems/ptr2e/img/svg/ghost_icon.svg",

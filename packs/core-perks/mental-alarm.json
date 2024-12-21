@@ -18,15 +18,21 @@
         "slug": "mental-alarm",
         "description": "<p>You become aware when someone attempts to read your mind using Psychic powers. Does not affect Aura.</p>",
         "cost": {
-          "activation": "free"
+          "activation": "free",
+          "powerPoints": 0,
+          "delay": null,
+          "priority": null
         },
         "type": "passive",
         "traits": [],
         "img": "icons/svg/explosion.svg",
         "range": {
           "target": "enemy",
-          "unit": "m"
-        }
+          "unit": "m",
+          "distance": 0
+        },
+        "variant": null,
+        "hidden": false
       }
     ],
     "slug": "mental-alarm",
@@ -38,8 +44,10 @@
     "nodes": [
       {
         "connected": [
-          "yesterday-and-today",
-          "scholar"
+          "scholar",
+          "conceal-mind",
+          "improved-overland-1-14",
+          "improved-telekinesis-1-2"
         ],
         "config": {
           "alpha": null,
@@ -52,10 +60,16 @@
         },
         "hidden": false,
         "type": "normal",
-        "x": 189,
-        "y": 172
+        "x": 101,
+        "y": 147,
+        "tier": null
       }
-    ]
+    ],
+    "originSlug": null,
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": []
   },
   "_id": "RU5kwaRv9k4RXj3g",
   "img": "systems/ptr2e/img/perk-icons/Knowledge.svg",

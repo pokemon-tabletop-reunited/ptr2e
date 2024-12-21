@@ -20,11 +20,14 @@
         },
         "cost": {
           "activation": "simple",
-          "powerPoints": 3
+          "powerPoints": 3,
+          "delay": null,
+          "priority": null
         },
         "description": "Effect: The target may use DEF in place of their ATK when using a Physical-Category Attack for 1 Activation.",
         "type": "generic",
-        "img": "icons/svg/explosion.svg"
+        "img": "icons/svg/explosion.svg",
+        "variant": null
       },
       {
         "name": "Assault Armor! (Self)",
@@ -35,15 +38,19 @@
         ],
         "range": {
           "target": "self",
-          "unit": "m"
+          "unit": "m",
+          "distance": 0
         },
         "cost": {
           "activation": "simple",
-          "powerPoints": 3
+          "powerPoints": 3,
+          "delay": null,
+          "priority": null
         },
         "description": "Effect: The user may use DEF in place of their ATK when using a Physical-Category Attack until the end of their next Activation.",
         "type": "generic",
-        "img": "icons/svg/explosion.svg"
+        "img": "icons/svg/explosion.svg",
+        "variant": null
       }
     ],
     "slug": "assault-armor-style",
@@ -68,7 +75,11 @@
       {
         "connected": [
           "gambit-style",
-          "evasive-style"
+          "evasive-style",
+          "stat-iv-booster-1-11",
+          "improved-burrow-1-3",
+          "improved-overland-1-13",
+          "improved-overland-1-5"
         ],
         "config": {
           "alpha": null,
@@ -81,10 +92,16 @@
         },
         "hidden": false,
         "type": "normal",
-        "x": 31,
-        "y": 230
+        "x": 101,
+        "y": 124,
+        "tier": null
       }
-    ]
+    ],
+    "originSlug": null,
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": []
   },
   "effects": []
 }

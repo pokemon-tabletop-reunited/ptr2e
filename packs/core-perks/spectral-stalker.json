@@ -13,15 +13,21 @@
         "slug": "spectral-stalker",
         "description": "<p>Gain the [Shadow Meld] trait.</p>",
         "cost": {
-          "activation": "free"
+          "activation": "free",
+          "powerPoints": 0,
+          "delay": null,
+          "priority": null
         },
         "type": "passive",
         "traits": [],
         "img": "icons/svg/explosion.svg",
         "range": {
           "target": "enemy",
-          "unit": "m"
-        }
+          "unit": "m",
+          "distance": 0
+        },
+        "variant": null,
+        "hidden": false
       }
     ],
     "slug": "spectral-stalker",
@@ -34,7 +40,8 @@
       {
         "connected": [
           "walking-dead",
-          "grim-haunt"
+          "grim-haunt",
+          "stat-iv-booster-1-2"
         ],
         "config": {
           "alpha": null,
@@ -47,10 +54,16 @@
         },
         "hidden": false,
         "type": "normal",
-        "x": 17,
-        "y": 55
+        "x": 172,
+        "y": 114,
+        "tier": null
       }
-    ]
+    ],
+    "originSlug": null,
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": []
   },
   "_id": "fdBGG8e0iPzaYfbD",
   "img": "systems/ptr2e/img/svg/ghost_icon.svg",

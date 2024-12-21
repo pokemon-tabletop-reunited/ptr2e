@@ -16,14 +16,18 @@
         "cost": {
           "activation": "free",
           "powerPoints": 5,
-          "trigger": "The user gains @Affliction[fainted]."
+          "trigger": "The user gains @Affliction[fainted].",
+          "delay": null,
+          "priority": null
         },
         "range": {
           "target": "self",
-          "unit": "m"
+          "unit": "m",
+          "distance": 0
         },
         "description": "Effect: You heal 6 Ticks of HP, accruing a Stack of @Affliction[weary] as normal. If done on your own turn, this becomes a Complex Action.",
-        "img": "icons/svg/explosion.svg"
+        "img": "icons/svg/explosion.svg",
+        "variant": null
       }
     ],
     "description": "<p>Trigger: The user gains @Affliction[fainted].<br><br>Effect: You heal 6 Ticks of HP, accruing a Stack of @Affliction[weary] as normal. If done on your own turn, this becomes a Complex Action.</p>",
@@ -56,10 +60,16 @@
         },
         "hidden": false,
         "type": "normal",
-        "x": 72,
-        "y": 50
+        "x": 70,
+        "y": 41,
+        "tier": null
       }
-    ]
+    ],
+    "originSlug": null,
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": []
   },
   "effects": []
 }

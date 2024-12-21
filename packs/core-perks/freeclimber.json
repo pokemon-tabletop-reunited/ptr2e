@@ -18,15 +18,21 @@
         "slug": "freeclimber",
         "description": "<p>You are able to climb without suffering penalties due to lack of equipment.</p>",
         "cost": {
-          "activation": "free"
+          "activation": "free",
+          "powerPoints": 0,
+          "delay": null,
+          "priority": null
         },
         "type": "passive",
         "traits": [],
         "img": "icons/svg/explosion.svg",
         "range": {
           "target": "enemy",
-          "unit": "m"
-        }
+          "unit": "m",
+          "distance": 0
+        },
+        "variant": null,
+        "hidden": false
       }
     ],
     "slug": "freeclimber",
@@ -40,8 +46,11 @@
         "connected": [
           "hobby-gardener",
           "all-seasonal",
-          "cyclist",
-          "sprint"
+          "sprint",
+          "parkour",
+          "shovel-hands",
+          "improved-burrow-1",
+          "hardy-trekker"
         ],
         "config": {
           "alpha": null,
@@ -54,10 +63,16 @@
         },
         "hidden": false,
         "type": "normal",
-        "x": 60,
-        "y": 138
+        "x": 125,
+        "y": 22,
+        "tier": null
       }
-    ]
+    ],
+    "originSlug": null,
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": []
   },
   "_id": "sAukVqClITEpjQE3",
   "img": "systems/ptr2e/img/perk-icons/Exploration.svg",

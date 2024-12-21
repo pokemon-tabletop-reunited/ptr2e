@@ -20,15 +20,19 @@
         "description": "<p>You may activate this perk when a [Closed Heart] creature would gain @Affliction[hyper-mode]. That creature does not gain @Affliction[hyper-mode] and is healed 2 Ticks of HP and 10 PP.</p>",
         "cost": {
           "activation": "free",
-          "powerPoints": 4
+          "powerPoints": 4,
+          "delay": null,
+          "priority": null
         },
         "type": "generic",
         "traits": [],
         "img": "icons/svg/explosion.svg",
         "range": {
           "target": "enemy",
-          "unit": "m"
-        }
+          "unit": "m",
+          "distance": 0
+        },
+        "variant": null
       }
     ],
     "slug": "deep-breaths",
@@ -41,6 +45,10 @@
     },
     "nodes": [
       {
+        "x": null,
+        "y": null,
+        "hidden": false,
+        "type": "normal",
         "connected": [
           "hobby-gardener",
           "shadow-guide",
@@ -55,12 +63,14 @@
           "tint": null,
           "scale": null
         },
-        "hidden": false,
-        "type": "normal",
-        "x": 103,
-        "y": 215
+        "tier": null
       }
-    ]
+    ],
+    "originSlug": null,
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": []
   },
   "_id": "qP0uRTj023iaIgyr",
   "img": "systems/ptr2e/img/svg/shadow_icon.svg",

@@ -13,15 +13,21 @@
         "slug": "sea-lungs",
         "description": "<p>You gain the [Gilled] trait.</p>",
         "cost": {
-          "activation": "free"
+          "activation": "free",
+          "powerPoints": 0,
+          "delay": null,
+          "priority": null
         },
         "type": "passive",
         "traits": [],
         "img": "icons/svg/explosion.svg",
         "range": {
           "target": "enemy",
-          "unit": "m"
-        }
+          "unit": "m",
+          "distance": 0
+        },
+        "variant": null,
+        "hidden": false
       }
     ],
     "slug": "sea-lungs",
@@ -34,7 +40,8 @@
       {
         "connected": [
           "fisheye",
-          "overboard"
+          "overboard",
+          "root-2"
         ],
         "config": {
           "alpha": null,
@@ -47,10 +54,16 @@
         },
         "hidden": false,
         "type": "normal",
-        "x": 204,
-        "y": 79
+        "x": 156,
+        "y": 24,
+        "tier": null
       }
-    ]
+    ],
+    "originSlug": null,
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": []
   },
   "_id": "fl85sOpDz50eIHOw",
   "img": "systems/ptr2e/img/svg/water_icon.svg",

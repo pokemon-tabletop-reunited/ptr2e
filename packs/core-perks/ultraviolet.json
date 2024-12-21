@@ -14,15 +14,19 @@
         "description": "<p>You gain @Affliction[hyper-mode] 5.</p>",
         "cost": {
           "activation": "free",
-          "powerPoints": 3
+          "powerPoints": 3,
+          "delay": null,
+          "priority": null
         },
         "type": "generic",
         "traits": [],
         "img": "icons/svg/explosion.svg",
         "range": {
           "target": "enemy",
-          "unit": "m"
-        }
+          "unit": "m",
+          "distance": 0
+        },
+        "variant": null
       }
     ],
     "slug": "ultraviolet",
@@ -33,6 +37,10 @@
     },
     "nodes": [
       {
+        "x": null,
+        "y": null,
+        "hidden": false,
+        "type": "normal",
         "connected": [
           "shadow-guide",
           "dark-clarity",
@@ -47,12 +55,14 @@
           "tint": null,
           "scale": null
         },
-        "hidden": false,
-        "type": "normal",
-        "x": 87,
-        "y": 210
+        "tier": null
       }
-    ]
+    ],
+    "originSlug": null,
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": []
   },
   "_id": "7DDMgeaNgSRsWevs",
   "img": "systems/ptr2e/img/svg/shadow_icon.svg",

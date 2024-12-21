@@ -19,15 +19,20 @@
         "slug": "open-your-heart",
         "description": "<p>You have the necessary knowledge and skill to perform the Purification Ceremony that forms the final stage of cleansing a [Closed Heart] creature.</p>",
         "cost": {
-          "activation": "complex"
+          "activation": "complex",
+          "powerPoints": 0,
+          "delay": null,
+          "priority": null
         },
         "type": "camping",
         "traits": [],
         "img": "icons/svg/explosion.svg",
         "range": {
           "target": "enemy",
-          "unit": "m"
-        }
+          "unit": "m",
+          "distance": 0
+        },
+        "variant": null
       }
     ],
     "slug": "open-your-heart",
@@ -38,6 +43,10 @@
     },
     "nodes": [
       {
+        "x": null,
+        "y": null,
+        "hidden": false,
+        "type": "normal",
         "connected": [
           "shadow-guide",
           "silver-bullet",
@@ -52,12 +61,14 @@
           "tint": null,
           "scale": null
         },
-        "hidden": false,
-        "type": "normal",
-        "x": 109,
-        "y": 210
+        "tier": null
       }
-    ]
+    ],
+    "originSlug": null,
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": []
   },
   "_id": "UXnjHFxuFH43XwVS",
   "img": "systems/ptr2e/img/svg/shadow_icon.svg",

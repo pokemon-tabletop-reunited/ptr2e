@@ -4,7 +4,7 @@
   "folder": "aUkQAkBYAmrv6REK",
   "system": {
     "prerequisites": [
-      "item:perk:paleontologist",
+      "item:perk:palaeontologist",
       {
         "xof": [
           {
@@ -49,15 +49,20 @@
         "slug": "yesterday-and-today",
         "description": "<p>You can access to the [Fossil] Tutor List, and may tutor Attacks from the from that Tutor List as if you knew them already yourself, up to your Grade. You receive +20 on Teaching Checks to Tutor [Fossil] creatures.</p>",
         "cost": {
-          "activation": "complex"
+          "activation": "complex",
+          "powerPoints": 0,
+          "delay": null,
+          "priority": null
         },
         "type": "generic",
         "traits": [],
         "img": "icons/svg/explosion.svg",
         "range": {
           "target": "enemy",
-          "unit": "m"
-        }
+          "unit": "m",
+          "distance": 0
+        },
+        "variant": null
       }
     ],
     "slug": "yesterday-and-today",
@@ -69,9 +74,8 @@
     "nodes": [
       {
         "connected": [
-          "mental-alarm",
           "finding-lifes-way",
-          "pokemaniac"
+          "palaeontologist"
         ],
         "config": {
           "alpha": null,
@@ -84,10 +88,16 @@
         },
         "hidden": false,
         "type": "normal",
-        "x": 197,
-        "y": 177
+        "x": 81,
+        "y": 142,
+        "tier": null
       }
-    ]
+    ],
+    "originSlug": null,
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": []
   },
   "_id": "tNwQxSzvK1hy3rJk",
   "img": "systems/ptr2e/img/perk-icons/Exploration.svg",

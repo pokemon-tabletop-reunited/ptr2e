@@ -14,12 +14,17 @@
         "type": "generic",
         "range": {
           "target": "creature",
-          "unit": "m"
+          "unit": "m",
+          "distance": 0
         },
         "cost": {
-          "activation": "simple"
+          "activation": "simple",
+          "powerPoints": 0,
+          "delay": null,
+          "priority": null
         },
-        "img": "icons/svg/explosion.svg"
+        "img": "icons/svg/explosion.svg",
+        "variant": null
       }
     ],
     "slug": "mightyena-tactic",
@@ -34,9 +39,7 @@
     "nodes": [
       {
         "connected": [
-          "hamstring",
-          "run-down",
-          "type-hunter"
+          "hamstring"
         ],
         "config": {
           "alpha": null,
@@ -49,10 +52,16 @@
         },
         "hidden": false,
         "type": "normal",
-        "x": 150,
-        "y": 177
+        "x": 64,
+        "y": 180,
+        "tier": null
       }
-    ]
+    ],
+    "originSlug": null,
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": []
   },
   "effects": []
 }

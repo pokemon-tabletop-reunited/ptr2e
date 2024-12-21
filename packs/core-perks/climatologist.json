@@ -50,15 +50,21 @@
         "slug": "climatologist",
         "description": "<p>You gain +15 to Skill Rolls pertaining to Weather, and gain all [Climate Clay] recipies. The user adds all [Weather] Attacks to their Tutor List.</p>",
         "cost": {
-          "activation": "free"
+          "activation": "free",
+          "powerPoints": 0,
+          "delay": null,
+          "priority": null
         },
         "type": "passive",
         "traits": [],
         "img": "icons/svg/explosion.svg",
         "range": {
           "target": "enemy",
-          "unit": "m"
-        }
+          "unit": "m",
+          "distance": 0
+        },
+        "variant": null,
+        "hidden": false
       }
     ],
     "slug": "climatologist",
@@ -69,9 +75,24 @@
     },
     "nodes": [
       {
+        "x": 38,
+        "y": 134,
+        "hidden": false,
+        "type": "entry",
         "connected": [
           "climate-change",
-          "perpetual-storm"
+          "perpetual-storm",
+          "weaponized-weather",
+          "curveball-technique",
+          "masters-whip",
+          "root-5",
+          "emergency-retreat",
+          "underdogs-spirit-1",
+          "summer-growth",
+          "scholar",
+          "chill-out",
+          "jammer",
+          "improved-overland-1-8"
         ],
         "config": {
           "alpha": null,
@@ -82,12 +103,14 @@
           "tint": null,
           "scale": null
         },
-        "hidden": false,
-        "type": "normal",
-        "x": 24,
-        "y": 147
+        "tier": null
       }
-    ]
+    ],
+    "originSlug": null,
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": []
   },
   "_id": "lR4jrHXCXj0HH3Cs",
   "img": "systems/ptr2e/img/perk-icons/Knowledge.svg",

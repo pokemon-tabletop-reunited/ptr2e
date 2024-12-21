@@ -19,9 +19,12 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 5
+          "powerPoints": 5,
+          "delay": null,
+          "priority": null
         },
-        "img": "icons/svg/explosion.svg"
+        "img": "icons/svg/explosion.svg",
+        "variant": null
       }
     ],
     "slug": "cultivate-weakness",
@@ -43,10 +46,14 @@
     "nodes": [
       {
         "connected": [
-          "acceptance",
-          "insidious-wounds",
+          "stage-vampirism",
+          "logicians-wisdom",
+          "sadism",
+          "acute-affliction",
+          "lasting-harm",
           "potent-afflictions",
-          "lasting-harm"
+          "suspicious-minds",
+          "insidious-wounds"
         ],
         "config": {
           "alpha": null,
@@ -59,10 +66,16 @@
         },
         "hidden": false,
         "type": "normal",
-        "x": 167,
-        "y": 109
+        "x": 152,
+        "y": 72,
+        "tier": null
       }
-    ]
+    ],
+    "originSlug": null,
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": []
   },
   "effects": []
 }

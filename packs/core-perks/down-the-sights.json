@@ -13,15 +13,19 @@
         "description": "<p>Your next non-[Contact] gains [Crit 1] or [Crit X+1] until it resolves.</p>",
         "cost": {
           "activation": "simple",
-          "powerPoints": 2
+          "powerPoints": 2,
+          "delay": null,
+          "priority": null
         },
         "type": "generic",
         "traits": [],
         "img": "icons/svg/explosion.svg",
         "range": {
           "target": "enemy",
-          "unit": "m"
-        }
+          "unit": "m",
+          "distance": 0
+        },
+        "variant": null
       }
     ],
     "slug": "down-the-sights",
@@ -32,10 +36,15 @@
     },
     "nodes": [
       {
+        "x": 183,
+        "y": 67,
+        "hidden": false,
+        "type": "normal",
         "connected": [
-          "dead-eye",
-          "dead-to-rights",
-          "run-down"
+          "covering-fire",
+          "harry",
+          "trained-wielder",
+          "root-3"
         ],
         "config": {
           "alpha": null,
@@ -46,12 +55,14 @@
           "tint": "#ffffff",
           "scale": null
         },
-        "hidden": false,
-        "type": "normal",
-        "x": 159,
-        "y": 169
+        "tier": null
       }
-    ]
+    ],
+    "originSlug": null,
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": []
   },
   "_id": "eHdFNdcyllxflfNA",
   "img": "systems/ptr2e/img/perk-icons/Combat.svg",

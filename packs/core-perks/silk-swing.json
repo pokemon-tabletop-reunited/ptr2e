@@ -13,15 +13,21 @@
         "slug": "silk-swing",
         "description": "<p>You gain the [Threaded] trait, and gain a Threaded Movement Allowance equal to your Overland Movement Allowance.</p>",
         "cost": {
-          "activation": "free"
+          "activation": "free",
+          "powerPoints": 0,
+          "delay": null,
+          "priority": null
         },
         "type": "passive",
         "traits": [],
         "img": "icons/svg/explosion.svg",
         "range": {
           "target": "enemy",
-          "unit": "m"
-        }
+          "unit": "m",
+          "distance": 0
+        },
+        "variant": null,
+        "hidden": false
       }
     ],
     "slug": "silk-swing",
@@ -34,7 +40,10 @@
       {
         "connected": [
           "adhesive-digits",
-          "hivemark"
+          "hivemark",
+          "improved-threaded-1",
+          "root-1",
+          "improved-threaded-1-1"
         ],
         "config": {
           "alpha": null,
@@ -47,10 +56,16 @@
         },
         "hidden": false,
         "type": "normal",
-        "x": 51,
-        "y": 20
+        "x": 83,
+        "y": 31,
+        "tier": null
       }
-    ]
+    ],
+    "originSlug": null,
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": []
   },
   "_id": "tVbuG5HWGhxgZQV5",
   "img": "systems/ptr2e/img/svg/bug_icon.svg",

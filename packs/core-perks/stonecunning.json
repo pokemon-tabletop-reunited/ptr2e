@@ -18,15 +18,21 @@
         "slug": "stonecunning",
         "description": "<p>You gain the [Tremorsense 20] trait.</p>",
         "cost": {
-          "activation": "free"
+          "activation": "free",
+          "powerPoints": 0,
+          "delay": null,
+          "priority": null
         },
         "type": "passive",
         "traits": [],
         "img": "icons/svg/explosion.svg",
         "range": {
           "target": "enemy",
-          "unit": "m"
-        }
+          "unit": "m",
+          "distance": 0
+        },
+        "variant": null,
+        "hidden": false
       }
     ],
     "slug": "stonecunning",
@@ -39,7 +45,11 @@
       {
         "connected": [
           "powerlifter",
-          "shovel-hands"
+          "shovel-hands",
+          "hardy-trekker",
+          "parkour",
+          "immovable-stone",
+          "scree"
         ],
         "config": {
           "alpha": null,
@@ -52,10 +62,16 @@
         },
         "hidden": false,
         "type": "normal",
-        "x": 58,
-        "y": 145
+        "x": 130,
+        "y": 32,
+        "tier": null
       }
-    ]
+    ],
+    "originSlug": null,
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": []
   },
   "_id": "lTOiK3AutkgbMo7J",
   "img": "systems/ptr2e/img/svg/rock_icon.svg",

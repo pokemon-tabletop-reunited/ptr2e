@@ -15,15 +15,19 @@
         "description": "<p>When using either Light Screen or Reflect, you may spend 3PP to also use the other one as a Free Action at [Interrupt 2].</p>",
         "cost": {
           "activation": "complex",
-          "powerPoints": 3
+          "powerPoints": 3,
+          "delay": null,
+          "priority": null
         },
         "type": "generic",
         "traits": [],
         "img": "icons/svg/explosion.svg",
         "range": {
           "target": "enemy",
-          "unit": "m"
-        }
+          "unit": "m",
+          "distance": 0
+        },
+        "variant": null
       },
       {
         "slug": "reflect",
@@ -34,11 +38,14 @@
         ],
         "range": {
           "target": "field",
-          "unit": "m"
+          "unit": "m",
+          "distance": 0
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 3
+          "powerPoints": 3,
+          "delay": null,
+          "priority": null
         },
         "category": "status",
         "types": [
@@ -46,7 +53,18 @@
         ],
         "description": "<p>Effect: For 3 rounds, the user and all allies take 50% less damage from Physical attacks.</p>",
         "free": true,
-        "img": "systems/ptr2e/img/perk-icons/Occultism.svg"
+        "img": "systems/ptr2e/img/perk-icons/Occultism.svg",
+        "variant": null,
+        "power": null,
+        "accuracy": null,
+        "contestType": "",
+        "contestEffect": "",
+        "slot": null,
+        "summon": null,
+        "defaultVariant": null,
+        "flingItemId": null,
+        "offensiveStat": null,
+        "defensiveStat": null
       },
       {
         "slug": "light-screen",
@@ -57,11 +75,14 @@
         ],
         "range": {
           "target": "field",
-          "unit": "m"
+          "unit": "m",
+          "distance": 0
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 3
+          "powerPoints": 3,
+          "delay": null,
+          "priority": null
         },
         "category": "status",
         "types": [
@@ -69,7 +90,18 @@
         ],
         "description": "<p>Effect: For 3 rounds, the user and all allies take 50% less damage from Special attacks.</p>",
         "free": true,
-        "img": "systems/ptr2e/img/perk-icons/Occultism.svg"
+        "img": "systems/ptr2e/img/perk-icons/Occultism.svg",
+        "variant": null,
+        "power": null,
+        "accuracy": null,
+        "contestType": "",
+        "contestEffect": "",
+        "slot": null,
+        "summon": null,
+        "defaultVariant": null,
+        "flingItemId": null,
+        "offensiveStat": null,
+        "defensiveStat": null
       }
     ],
     "slug": "screen-setter",
@@ -80,7 +112,14 @@
     },
     "nodes": [
       {
-        "connected": [],
+        "connected": [
+          "telekinetic-potential",
+          "psychoportation",
+          "telepathic-potential",
+          "improved-overland-1-1",
+          "improved-overland-1-3",
+          "improved-teleportation-1"
+        ],
         "config": {
           "alpha": null,
           "backgroundColor": null,
@@ -92,10 +131,16 @@
         },
         "hidden": false,
         "type": "normal",
-        "x": 185,
-        "y": 41
+        "x": 142,
+        "y": 113,
+        "tier": null
       }
-    ]
+    ],
+    "originSlug": null,
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": []
   },
   "_id": "cnTPWqYXmGaFZfBd",
   "img": "systems/ptr2e/img/perk-icons/Occultism.svg",

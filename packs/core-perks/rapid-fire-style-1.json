@@ -12,15 +12,19 @@
         "description": "<p>Your next non-[Contact] Attack gains the [2-Strike] trait, if it didn't already have [X-Strike], and has its Power reduced to 80% of its default value. If it already had [X-Strike], that value increases by +2.</p>",
         "cost": {
           "activation": "simple",
-          "powerPoints": 1
+          "powerPoints": 1,
+          "delay": null,
+          "priority": null
         },
         "type": "generic",
         "traits": [],
         "img": "icons/svg/explosion.svg",
         "range": {
           "target": "enemy",
-          "unit": "m"
-        }
+          "unit": "m",
+          "distance": 0
+        },
+        "variant": null
       }
     ],
     "slug": "rapid-fire-style-1",
@@ -32,11 +36,12 @@
     "nodes": [
       {
         "connected": [
-          "evasive-style",
           "type-style",
           "rapid-fire-style-2",
-          "precise-style",
-          "strong-style"
+          "stat-iv-booster-1-4",
+          "evasive-style",
+          "improved-burrow-1-3",
+          "improved-flight-1-6"
         ],
         "config": {
           "alpha": null,
@@ -49,10 +54,16 @@
         },
         "hidden": false,
         "type": "normal",
-        "x": 50,
-        "y": 226
+        "x": 116,
+        "y": 125,
+        "tier": null
       }
-    ]
+    ],
+    "originSlug": null,
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": []
   },
   "_id": "4FH3vIN3aJLVe0x0",
   "img": "systems/ptr2e/img/perk-icons/Orders_Training.svg",

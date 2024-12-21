@@ -28,15 +28,21 @@
         "slug": "pack-alpha",
         "description": "<p>You gain the [Pack Leader] trait, and may designate consenting creatures with the [Pack Mon] trait as members of your pack.</p>",
         "cost": {
-          "activation": "free"
+          "activation": "free",
+          "powerPoints": 0,
+          "delay": null,
+          "priority": null
         },
         "type": "passive",
         "traits": [],
         "img": "icons/svg/explosion.svg",
         "range": {
           "target": "enemy",
-          "unit": "m"
-        }
+          "unit": "m",
+          "distance": 0
+        },
+        "variant": null,
+        "hidden": false
       }
     ],
     "slug": "pack-alpha",
@@ -47,11 +53,15 @@
     },
     "nodes": [
       {
+        "x": 154,
+        "y": 175,
+        "hidden": false,
+        "type": "entry",
         "connected": [
           "pack-mon",
-          "formation-attacks",
           "lead-from-behind",
-          "synchronised-takedown"
+          "root-4",
+          "packmarked"
         ],
         "config": {
           "alpha": null,
@@ -62,12 +72,14 @@
           "tint": "#ffffff",
           "scale": null
         },
-        "hidden": false,
-        "type": "normal",
-        "x": 49,
-        "y": 172
+        "tier": null
       }
-    ]
+    ],
+    "originSlug": null,
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": []
   },
   "_id": "ee07hyZxFObQ5emn",
   "img": "systems/ptr2e/img/perk-icons/Tactician.svg",

@@ -17,12 +17,16 @@
         "img": "systems/ptr2e/img/perk-icons/Tactician.svg",
         "range": {
           "target": "enemy",
-          "unit": "m"
+          "unit": "m",
+          "distance": 0
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 3
-        }
+          "powerPoints": 3,
+          "delay": null,
+          "priority": null
+        },
+        "variant": null
       }
     ],
     "description": "<p>The user gains the Action Mark Prey.</p><p>As a Complex Action, a target enemy. The enemy receives Marked 5 and -1 Defense and Special Defense Stages for 5 activations.</p>",
@@ -35,8 +39,9 @@
     "nodes": [
       {
         "connected": [
-          "pack-mon",
-          "synchronised-takedown"
+          "pack-alpha",
+          "pile-on",
+          "you-belong-to-me"
         ],
         "config": {
           "alpha": null,
@@ -49,10 +54,16 @@
         },
         "hidden": false,
         "type": "normal",
-        "x": 45,
-        "y": 181
+        "x": 149,
+        "y": 176,
+        "tier": null
       }
-    ]
+    ],
+    "originSlug": null,
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": []
   },
   "img": "systems/ptr2e/img/perk-icons/Tactician.svg",
   "effects": [],

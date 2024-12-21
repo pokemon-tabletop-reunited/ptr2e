@@ -16,14 +16,18 @@
         "type": "generic",
         "range": {
           "target": "creature",
-          "unit": "m"
+          "unit": "m",
+          "distance": 0
         },
         "cost": {
           "activation": "free",
           "powerPoints": 1,
-          "trigger": "The user hits a target that has at least one [Major Affliction] or [Minor Affliction] that inflicts effect damage."
+          "trigger": "The user hits a target that has at least one [Major Affliction] or [Minor Affliction] that inflicts effect damage.",
+          "delay": null,
+          "priority": null
         },
-        "img": "icons/svg/explosion.svg"
+        "img": "icons/svg/explosion.svg",
+        "variant": null
       }
     ],
     "slug": "insidious-wounds",
@@ -40,9 +44,9 @@
     "nodes": [
       {
         "connected": [
-          "cultivate-weakness",
-          "logicians-wisdom",
-          "thug"
+          "suspicious-minds",
+          "sadism",
+          "cultivate-weakness"
         ],
         "config": {
           "alpha": null,
@@ -55,10 +59,16 @@
         },
         "hidden": false,
         "type": "normal",
-        "x": 166,
-        "y": 102
+        "x": 150,
+        "y": 69,
+        "tier": null
       }
-    ]
+    ],
+    "originSlug": null,
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": []
   },
   "effects": []
 }

@@ -15,15 +15,19 @@
         "description": "<p>You may hide your mind's presence as an [Interrupt 4] Simple Action in response to an incoming telepathic sweep of the area. You automatically become aware of any telepaths who are actively searching for minds.</p>",
         "cost": {
           "activation": "free",
-          "powerPoints": 2
+          "powerPoints": 2,
+          "delay": null,
+          "priority": null
         },
         "type": "generic",
         "traits": [],
         "img": "icons/svg/explosion.svg",
         "range": {
           "target": "enemy",
-          "unit": "m"
-        }
+          "unit": "m",
+          "distance": 0
+        },
+        "variant": null
       }
     ],
     "slug": "conceal-mind",
@@ -35,7 +39,10 @@
     "nodes": [
       {
         "connected": [
-          "hypnotic-suggestion"
+          "hypnotic-suggestion",
+          "telepathic-potential",
+          "detect-minds",
+          "mental-alarm"
         ],
         "config": {
           "alpha": null,
@@ -48,10 +55,16 @@
         },
         "hidden": false,
         "type": "normal",
-        "x": 95,
-        "y": 167
+        "x": 137,
+        "y": 131,
+        "tier": null
       }
-    ]
+    ],
+    "originSlug": null,
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": []
   },
   "_id": "x43vlmG7j09l1BGN",
   "img": "systems/ptr2e/img/svg/psychic_icon.svg",

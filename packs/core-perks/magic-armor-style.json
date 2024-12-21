@@ -20,11 +20,14 @@
         },
         "cost": {
           "activation": "simple",
-          "powerPoints": 3
+          "powerPoints": 3,
+          "delay": null,
+          "priority": null
         },
         "description": "Effect: The target may use SPDEF in place of their SPATK when using a Special-Category Attack for 1 Activation.",
         "type": "generic",
-        "img": "icons/svg/explosion.svg"
+        "img": "icons/svg/explosion.svg",
+        "variant": null
       },
       {
         "name": "Magic Armor! (Self)",
@@ -35,15 +38,19 @@
         ],
         "range": {
           "target": "self",
-          "unit": "m"
+          "unit": "m",
+          "distance": 0
         },
         "cost": {
           "activation": "simple",
-          "powerPoints": 3
+          "powerPoints": 3,
+          "delay": null,
+          "priority": null
         },
         "description": "Effect: The user may use SPDEF in place of their SPATK when using a Special-Category Attack until the end of their next Activation.",
         "type": "generic",
-        "img": "icons/svg/explosion.svg"
+        "img": "icons/svg/explosion.svg",
+        "variant": null
       }
     ],
     "slug": "magic-armor-style",
@@ -65,7 +72,10 @@
     "nodes": [
       {
         "connected": [
-          "type-style"
+          "type-style",
+          "agile-style",
+          "improved-flight-1-6",
+          "improved-swim-1-2"
         ],
         "config": {
           "alpha": null,
@@ -78,10 +88,16 @@
         },
         "hidden": false,
         "type": "normal",
-        "x": 58,
-        "y": 229
+        "x": 116,
+        "y": 135,
+        "tier": null
       }
-    ]
+    ],
+    "originSlug": null,
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": []
   },
   "effects": []
 }

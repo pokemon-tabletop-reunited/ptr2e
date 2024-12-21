@@ -24,14 +24,17 @@
         },
         "cost": {
           "activation": "simple",
-          "powerPoints": 4
+          "powerPoints": 4,
+          "delay": null,
+          "priority": null
         },
         "type": "generic",
         "traits": [
           "command",
           "social"
         ],
-        "img": "icons/svg/explosion.svg"
+        "img": "icons/svg/explosion.svg",
+        "variant": null
       }
     ],
     "slug": "mobilize",
@@ -45,13 +48,18 @@
     },
     "nodes": [
       {
+        "x": 43,
+        "y": 53,
+        "hidden": false,
+        "type": "entry",
         "connected": [
-          "root-1",
           "drill-sergeant",
           "cheerleader",
           "hold-the-line",
           "im-with-you",
-          "chansey-medicine"
+          "chansey-medicine",
+          "root-1",
+          "breeder"
         ],
         "config": {
           "alpha": null,
@@ -62,12 +70,14 @@
           "tint": "#141414",
           "scale": null
         },
-        "hidden": false,
-        "type": "normal",
-        "x": 40,
-        "y": 46
+        "tier": null
       }
-    ]
+    ],
+    "originSlug": null,
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": []
   },
   "_id": "EhfPkS23yRI8VENp",
   "img": "systems/ptr2e/img/perk-icons/Tactician.svg",

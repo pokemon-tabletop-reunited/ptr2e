@@ -20,15 +20,21 @@
         "slug": "underdogs-spirit-1",
         "description": "<p>Gain +10 HP Base Stat, up to the Underdog BST Cap.</p>",
         "cost": {
-          "activation": "free"
+          "activation": "free",
+          "powerPoints": 0,
+          "delay": null,
+          "priority": null
         },
         "type": "passive",
         "traits": [],
         "img": "icons/svg/explosion.svg",
         "range": {
           "target": "enemy",
-          "unit": "m"
-        }
+          "unit": "m",
+          "distance": 0
+        },
+        "variant": null,
+        "hidden": false
       }
     ],
     "slug": "underdogs-spirit-1",
@@ -39,8 +45,15 @@
     },
     "nodes": [
       {
+        "x": 64,
+        "y": 163,
+        "hidden": false,
+        "type": "entry",
         "connected": [
-          "specialised-underdog"
+          "specialised-underdog",
+          "root-5",
+          "climatologist",
+          "pokemaniac"
         ],
         "config": {
           "alpha": null,
@@ -51,12 +64,14 @@
           "tint": "#121212",
           "scale": null
         },
-        "hidden": false,
-        "type": "normal",
-        "x": 216,
-        "y": 44
+        "tier": null
       }
-    ]
+    ],
+    "originSlug": null,
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": []
   },
   "_id": "jbm2zRAz5F3IdmWQ",
   "img": "systems/ptr2e/img/perk-icons/Breeder.svg",

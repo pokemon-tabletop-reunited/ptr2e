@@ -23,11 +23,17 @@
         "img": "icons/svg/explosion.svg",
         "range": {
           "target": "enemy",
-          "unit": "m"
+          "unit": "m",
+          "distance": 0
         },
         "cost": {
-          "activation": "simple"
-        }
+          "activation": "simple",
+          "powerPoints": 0,
+          "delay": null,
+          "priority": null
+        },
+        "variant": null,
+        "hidden": false
       }
     ],
     "slug": "dark-clarity",
@@ -38,6 +44,10 @@
     },
     "nodes": [
       {
+        "x": null,
+        "y": null,
+        "hidden": false,
+        "type": "normal",
         "connected": [
           "hobby-gardener",
           "shadow-guide",
@@ -52,12 +62,14 @@
           "tint": "#ffffff",
           "scale": null
         },
-        "hidden": false,
-        "type": "normal",
-        "x": 91,
-        "y": 207
+        "tier": null
       }
-    ]
+    ],
+    "originSlug": null,
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": []
   },
   "_id": "dClCBlhuOD49szkG",
   "img": "systems/ptr2e/img/svg/shadow_icon.svg",

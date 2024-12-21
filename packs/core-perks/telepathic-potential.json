@@ -13,15 +13,21 @@
         "slug": "telepathic-potential",
         "description": "<p>You gain the [Telepath] trait.</p>",
         "cost": {
-          "activation": "free"
+          "activation": "free",
+          "powerPoints": 0,
+          "delay": null,
+          "priority": null
         },
         "type": "passive",
         "traits": [],
         "img": "icons/svg/explosion.svg",
         "range": {
           "target": "enemy",
-          "unit": "m"
-        }
+          "unit": "m",
+          "distance": 0
+        },
+        "variant": null,
+        "hidden": false
       }
     ],
     "slug": "telepathic-potential",
@@ -33,7 +39,16 @@
     "nodes": [
       {
         "connected": [
-          "hypnotic-suggestion"
+          "hypnotic-suggestion",
+          "hesitation",
+          "root-4",
+          "muse",
+          "telekinetic-potential",
+          "conceal-mind",
+          "screen-setter",
+          "improved-teleportation-1-2",
+          "improved-overland-1-6",
+          "improved-telekinesis-1-2"
         ],
         "config": {
           "alpha": null,
@@ -46,10 +61,16 @@
         },
         "hidden": false,
         "type": "normal",
-        "x": 108,
-        "y": 168
+        "x": 141,
+        "y": 138,
+        "tier": null
       }
-    ]
+    ],
+    "originSlug": null,
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": []
   },
   "_id": "4n06ljZtbCqy6lEC",
   "img": "systems/ptr2e/img/svg/psychic_icon.svg",

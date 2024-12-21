@@ -14,12 +14,17 @@
         "type": "generic",
         "range": {
           "target": "creature",
-          "unit": "m"
+          "unit": "m",
+          "distance": 0
         },
         "cost": {
-          "activation": "free"
+          "activation": "free",
+          "powerPoints": 0,
+          "delay": null,
+          "priority": null
         },
-        "img": "icons/svg/explosion.svg"
+        "img": "icons/svg/explosion.svg",
+        "variant": null
       }
     ],
     "slug": "run-down",
@@ -36,11 +41,7 @@
         "connected": [
           "hobby-gardener",
           "hamstring",
-          "mightyena-tactic",
-          "quick-and-the-dead",
-          "down-the-sights",
-          "game-specialist",
-          "dead-to-rights"
+          "quick-and-the-dead"
         ],
         "config": {
           "alpha": null,
@@ -53,10 +54,16 @@
         },
         "hidden": false,
         "type": "normal",
-        "x": 151,
-        "y": 170
+        "x": 67,
+        "y": 185,
+        "tier": null
       }
-    ]
+    ],
+    "originSlug": null,
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": []
   },
   "effects": []
 }

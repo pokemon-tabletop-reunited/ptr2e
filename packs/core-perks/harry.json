@@ -14,13 +14,17 @@
         "type": "generic",
         "range": {
           "target": "object",
-          "unit": "m"
+          "unit": "m",
+          "distance": 0
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 2
+          "powerPoints": 2,
+          "delay": null,
+          "priority": null
         },
-        "img": "icons/svg/explosion.svg"
+        "img": "icons/svg/explosion.svg",
+        "variant": null
       }
     ],
     "slug": "harry",
@@ -38,7 +42,9 @@
       {
         "connected": [
           "covering-fire",
-          "tainted-blades"
+          "tainted-blades",
+          "backpacker-1",
+          "down-the-sights"
         ],
         "config": {
           "alpha": null,
@@ -51,10 +57,16 @@
         },
         "hidden": false,
         "type": "normal",
-        "x": 203,
-        "y": 210
+        "x": 187,
+        "y": 72,
+        "tier": null
       }
-    ]
+    ],
+    "originSlug": null,
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": []
   },
   "effects": []
 }

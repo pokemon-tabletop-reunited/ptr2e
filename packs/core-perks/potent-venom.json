@@ -14,15 +14,21 @@
         "slug": "potent-venom",
         "description": "<p>Your attacks that have a chance to inflict @Affliction[poison] have that chance increase by +20%. Additionally, your Struggle and Weapon attacks gain a 10% chance to inflict @Affliction[poison] on hit.</p>",
         "cost": {
-          "activation": "free"
+          "activation": "free",
+          "powerPoints": 0,
+          "delay": null,
+          "priority": null
         },
         "type": "passive",
         "traits": [],
         "img": "icons/svg/explosion.svg",
         "range": {
           "target": "enemy",
-          "unit": "m"
-        }
+          "unit": "m",
+          "distance": 0
+        },
+        "variant": null,
+        "hidden": false
       }
     ],
     "slug": "potent-venom",
@@ -34,7 +40,9 @@
     "nodes": [
       {
         "connected": [
-          "venomous"
+          "venomous",
+          "acceptance",
+          "tainted-blades"
         ],
         "config": {
           "alpha": null,
@@ -47,10 +55,16 @@
         },
         "hidden": false,
         "type": "normal",
-        "x": 157,
-        "y": 82
+        "x": 167,
+        "y": 85,
+        "tier": null
       }
-    ]
+    ],
+    "originSlug": null,
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": []
   },
   "_id": "TaUuAKRcosusMkC9",
   "img": "systems/ptr2e/img/svg/poison_icon.svg",

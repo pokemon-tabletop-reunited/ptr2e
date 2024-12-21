@@ -13,15 +13,21 @@
         "slug": "dual-wielder",
         "description": "<p>Gain a second Wielded Item Slot.</p>",
         "cost": {
-          "activation": "free"
+          "activation": "free",
+          "powerPoints": 0,
+          "delay": null,
+          "priority": null
         },
         "type": "passive",
         "traits": [],
         "img": "icons/svg/explosion.svg",
         "range": {
           "target": "enemy",
-          "unit": "m"
-        }
+          "unit": "m",
+          "distance": 0
+        },
+        "variant": null,
+        "hidden": false
       }
     ],
     "slug": "dual-wielder",
@@ -34,7 +40,8 @@
       {
         "connected": [
           "backpacker-1",
-          "trained-wielder"
+          "belt-expansion-1",
+          "dress-to-impress"
         ],
         "config": {
           "alpha": null,
@@ -47,10 +54,16 @@
         },
         "hidden": false,
         "type": "normal",
-        "x": 175,
-        "y": 56
+        "x": 192,
+        "y": 55,
+        "tier": null
       }
-    ]
+    ],
+    "originSlug": null,
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": []
   },
   "_id": "QioUEl6UBFclZvzG",
   "img": "systems/ptr2e/img/perk-icons/Tactician.svg",

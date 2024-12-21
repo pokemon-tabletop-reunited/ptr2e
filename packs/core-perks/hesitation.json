@@ -20,7 +20,9 @@
         "cost": {
           "activation": "free",
           "powerPoints": 2,
-          "trigger": "The user's hits a creature with a [Social] Action."
+          "trigger": "The user's hits a creature with a [Social] Action.",
+          "delay": null,
+          "priority": null
         },
         "type": "generic",
         "traits": [
@@ -30,8 +32,10 @@
         "img": "systems/ptr2e/img/icons/feat_icon.webp",
         "range": {
           "target": "creature",
-          "unit": "m"
-        }
+          "unit": "m",
+          "distance": 0
+        },
+        "variant": null
       }
     ],
     "slug": "hesitation",
@@ -43,7 +47,9 @@
     "nodes": [
       {
         "connected": [
-          "condemn"
+          "condemn",
+          "stat-iv-booster-1-2",
+          "telepathic-potential"
         ],
         "config": {
           "alpha": null,
@@ -56,10 +62,16 @@
         },
         "hidden": false,
         "type": "normal",
-        "x": 127,
-        "y": 86
+        "x": 160,
+        "y": 140,
+        "tier": null
       }
-    ]
+    ],
+    "originSlug": null,
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": []
   },
   "_id": "qslC7XqAQJZt0lxR",
   "img": "systems/ptr2e/img/perk-icons/Socialite.svg",

@@ -13,15 +13,21 @@
         "slug": "venomous",
         "description": "<p>You gain the [Venomous] Trait.</p>",
         "cost": {
-          "activation": "free"
+          "activation": "free",
+          "powerPoints": 0,
+          "delay": null,
+          "priority": null
         },
         "type": "passive",
         "traits": [],
         "img": "icons/svg/explosion.svg",
         "range": {
           "target": "enemy",
-          "unit": "m"
-        }
+          "unit": "m",
+          "distance": 0
+        },
+        "variant": null,
+        "hidden": false
       }
     ],
     "slug": "venomous",
@@ -33,7 +39,9 @@
     "nodes": [
       {
         "connected": [
-          "potent-venom"
+          "potent-venom",
+          "root-3",
+          "tainted-blades"
         ],
         "config": {
           "alpha": null,
@@ -46,10 +54,16 @@
         },
         "hidden": false,
         "type": "normal",
-        "x": 159,
-        "y": 81
+        "x": 173,
+        "y": 89,
+        "tier": null
       }
-    ]
+    ],
+    "originSlug": null,
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": []
   },
   "_id": "hvuakkloMFHGmBMe",
   "img": "systems/ptr2e/img/svg/poison_icon.svg",

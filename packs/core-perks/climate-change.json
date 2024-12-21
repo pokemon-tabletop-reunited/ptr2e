@@ -46,7 +46,9 @@
         "description": "<p>When a [Weather] effect ends or you enter Combat, you may use a [Weather] Attack as an [Interrupt 4] Free Action.</p>",
         "cost": {
           "activation": "free",
-          "powerPoints": 3
+          "powerPoints": 3,
+          "delay": null,
+          "priority": null
         },
         "type": "generic",
         "traits": [
@@ -56,8 +58,10 @@
         "img": "icons/svg/explosion.svg",
         "range": {
           "target": "enemy",
-          "unit": "m"
-        }
+          "unit": "m",
+          "distance": 0
+        },
+        "variant": null
       }
     ],
     "slug": "climate-change",
@@ -83,10 +87,16 @@
         },
         "hidden": false,
         "type": "normal",
-        "x": 18,
-        "y": 142
+        "x": 44,
+        "y": 128,
+        "tier": null
       }
-    ]
+    ],
+    "originSlug": null,
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": []
   },
   "_id": "c9lZiSYxUivRPn2p",
   "img": "systems/ptr2e/img/perk-icons/Elamentalist.svg",

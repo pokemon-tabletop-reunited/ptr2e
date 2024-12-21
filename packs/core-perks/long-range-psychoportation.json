@@ -20,15 +20,19 @@
         "description": "<p>You may fast travel via Teleportation to any settlement that you have previously visited, along with anyone touching you at the moment of transmission.</p>",
         "cost": {
           "activation": "complex",
-          "powerPoints": 10
+          "powerPoints": 10,
+          "delay": null,
+          "priority": null
         },
         "type": "exploration",
         "traits": [],
         "img": "icons/svg/explosion.svg",
         "range": {
           "target": "enemy",
-          "unit": "m"
-        }
+          "unit": "m",
+          "distance": 0
+        },
+        "variant": null
       }
     ],
     "slug": "long-range-psychoportation",
@@ -41,8 +45,7 @@
       {
         "connected": [
           "psychoportation",
-          "mindscramble",
-          "telekinetic-potential"
+          "improved-teleportation-1-1"
         ],
         "config": {
           "alpha": null,
@@ -55,10 +58,16 @@
         },
         "hidden": false,
         "type": "normal",
-        "x": 106,
-        "y": 160
+        "x": 164,
+        "y": 119,
+        "tier": null
       }
-    ]
+    ],
+    "originSlug": null,
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": []
   },
   "_id": "clK02KrlSlmoP2Ad",
   "img": "systems/ptr2e/img/svg/psychic_icon.svg",

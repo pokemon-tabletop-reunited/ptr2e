@@ -14,13 +14,17 @@
         "type": "generic",
         "range": {
           "target": "object",
-          "unit": "m"
+          "unit": "m",
+          "distance": 0
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 2
+          "powerPoints": 2,
+          "delay": null,
+          "priority": null
         },
-        "img": "systems/ptr2e/img/perk-icons/Tactician.svg"
+        "img": "systems/ptr2e/img/perk-icons/Tactician.svg",
+        "variant": null
       }
     ],
     "slug": "covering-fire",
@@ -39,7 +43,9 @@
         "connected": [
           "hobby-gardener",
           "tainted-blades",
-          "harry"
+          "harry",
+          "trained-wielder",
+          "down-the-sights"
         ],
         "config": {
           "alpha": null,
@@ -52,10 +58,16 @@
         },
         "hidden": false,
         "type": "normal",
-        "x": 199,
-        "y": 202
+        "x": 177,
+        "y": 70,
+        "tier": null
       }
-    ]
+    ],
+    "originSlug": null,
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": []
   },
   "effects": []
 }

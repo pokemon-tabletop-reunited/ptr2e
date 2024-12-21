@@ -19,15 +19,19 @@
         "description": "<p>You shift your consciousness into a consenting Pokemon. Your body enters a helpless, catatonic state during this time and you instead control the host body, utilising it's skills and traits, with the addition of retained access to your [Aura] perks. You may end this effect at any time with a Complex Action. If the host is @Affliction[fainted] while your consciousness is present, your own body also gains a stack of @Affliction[weary]. If the user dies while shifted, this would typically sever the connection. GMs may wish to consider instead making the shift permanent.</p>",
         "cost": {
           "activation": "complex",
-          "powerPoints": 5
+          "powerPoints": 5,
+          "delay": null,
+          "priority": null
         },
         "type": "exploration",
         "traits": [],
         "img": "icons/svg/explosion.svg",
         "range": {
           "target": "enemy",
-          "unit": "m"
-        }
+          "unit": "m",
+          "distance": 0
+        },
+        "variant": null
       }
     ],
     "slug": "shift-consciousness-aura",
@@ -39,8 +43,8 @@
     "nodes": [
       {
         "connected": [
-          "aura-empathy",
-          "aura-projection"
+          "aura-dampening",
+          "aura-bonding"
         ],
         "config": {
           "alpha": null,
@@ -53,10 +57,16 @@
         },
         "hidden": false,
         "type": "normal",
-        "x": 88,
-        "y": 70
+        "x": 182,
+        "y": 27,
+        "tier": null
       }
-    ]
+    ],
+    "originSlug": null,
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": []
   },
   "_id": "zwEYbTMfJb44gxKC",
   "img": "systems/ptr2e/img/perk-icons/Aura.svg",

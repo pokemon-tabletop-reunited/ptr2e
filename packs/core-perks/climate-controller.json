@@ -21,18 +21,23 @@
         "cost": {
           "activation": "complex",
           "powerPoints": 6,
-          "trigger": "A [Weather] Effect you created would be removed by either expiring or due to the effect of an Attack or Ability (but not Intense Weather)."
+          "trigger": "A [Weather] Effect you created would be removed by either expiring or due to the effect of an Attack or Ability (but not Intense Weather).",
+          "delay": null,
+          "priority": null
         },
         "range": {
           "target": "field",
-          "unit": "m"
+          "unit": "m",
+          "distance": 0
         },
         "type": "passive",
         "traits": [
           "environ",
           "weather"
         ],
-        "img": "icons/svg/explosion.svg"
+        "img": "icons/svg/explosion.svg",
+        "variant": null,
+        "hidden": false
       }
     ],
     "slug": "climate-controller",
@@ -60,10 +65,16 @@
         },
         "hidden": false,
         "type": "normal",
-        "x": 20,
-        "y": 154
+        "x": 43,
+        "y": 125,
+        "tier": null
       }
-    ]
+    ],
+    "originSlug": null,
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": []
   },
   "_id": "Rv0tHo3enp9gvtur",
   "img": "systems/ptr2e/img/perk-icons/Trainer.svg",

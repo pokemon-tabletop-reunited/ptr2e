@@ -18,15 +18,21 @@
         "slug": "powerlifter",
         "description": "<p>You have trained your muscles for great weights, and gain +10 on skill checks made with the Lift against targets larger than yourself.</p>",
         "cost": {
-          "activation": "free"
+          "activation": "free",
+          "powerPoints": 0,
+          "delay": null,
+          "priority": null
         },
         "type": "passive",
         "traits": [],
         "img": "icons/svg/explosion.svg",
         "range": {
           "target": "enemy",
-          "unit": "m"
-        }
+          "unit": "m",
+          "distance": 0
+        },
+        "variant": null,
+        "hidden": false
       }
     ],
     "slug": "powerlifter",
@@ -39,9 +45,10 @@
       {
         "connected": [
           "hobby-gardener",
-          "weathered",
           "improved-burrow-1",
-          "stonecunning"
+          "stonecunning",
+          "acrobat",
+          "root-2"
         ],
         "config": {
           "alpha": null,
@@ -54,10 +61,16 @@
         },
         "hidden": false,
         "type": "normal",
-        "x": 65,
-        "y": 143
+        "x": 139,
+        "y": 32,
+        "tier": null
       }
-    ]
+    ],
+    "originSlug": null,
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": []
   },
   "_id": "bSM1oq0xt7kx6hLX",
   "img": "systems/ptr2e/img/svg/fighting_icon.svg",

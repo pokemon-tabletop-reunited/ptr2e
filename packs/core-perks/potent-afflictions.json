@@ -14,12 +14,18 @@
         "type": "passive",
         "range": {
           "target": "creature",
-          "unit": "m"
+          "unit": "m",
+          "distance": 0
         },
         "cost": {
-          "activation": "simple"
+          "activation": "simple",
+          "powerPoints": 0,
+          "delay": null,
+          "priority": null
         },
-        "img": "systems/ptr2e/img/perk-icons/Arcana.svg"
+        "img": "systems/ptr2e/img/perk-icons/Arcana.svg",
+        "variant": null,
+        "hidden": false
       }
     ],
     "slug": "potent-afflictions",
@@ -51,7 +57,10 @@
     "nodes": [
       {
         "connected": [
-          "acute-affliction",
+          "acceptance",
+          "hexcraft",
+          "lasting-harm",
+          "suspicious-minds",
           "cultivate-weakness"
         ],
         "config": {
@@ -65,10 +74,16 @@
         },
         "hidden": false,
         "type": "normal",
-        "x": 164,
-        "y": 108
+        "x": 157,
+        "y": 70,
+        "tier": null
       }
-    ]
+    ],
+    "originSlug": null,
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": []
   },
   "effects": []
 }

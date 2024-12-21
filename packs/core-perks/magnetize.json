@@ -14,15 +14,19 @@
         "description": "<p>You may stick to magnetic surfaces and gain the Ability to move freely along them using your Overland Movement Allowance. This effect lasts until the beginning of your next Activation, at which point - provided you are conscious - you may take this action again before falling.</p>",
         "cost": {
           "activation": "free",
-          "powerPoints": 1
+          "powerPoints": 1,
+          "delay": null,
+          "priority": null
         },
         "type": "generic",
         "traits": [],
         "img": "icons/svg/explosion.svg",
         "range": {
           "target": "enemy",
-          "unit": "m"
-        }
+          "unit": "m",
+          "distance": 0
+        },
+        "variant": null
       }
     ],
     "slug": "magnetize",
@@ -35,7 +39,9 @@
       {
         "connected": [
           "jammer",
-          "watt-burn"
+          "watt-burn",
+          "improved-overland-1-8",
+          "improved-flight-1-4"
         ],
         "config": {
           "alpha": null,
@@ -48,10 +54,16 @@
         },
         "hidden": false,
         "type": "normal",
-        "x": 94,
-        "y": 34
+        "x": 20,
+        "y": 134,
+        "tier": null
       }
-    ]
+    ],
+    "originSlug": null,
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": []
   },
   "_id": "Vi8F4LxUvMqrhrHD",
   "img": "systems/ptr2e/img/svg/electric_icon.svg",

@@ -27,11 +27,14 @@
         },
         "cost": {
           "activation": "simple",
-          "powerPoints": 1
+          "powerPoints": 1,
+          "delay": null,
+          "priority": null
         },
         "description": "<p>Effect: The target gains @Affliction[gambit] 1.</p>",
         "type": "generic",
-        "img": "systems/ptr2e/img/perk-icons/Orders_Training.svg"
+        "img": "systems/ptr2e/img/perk-icons/Orders_Training.svg",
+        "variant": null
       },
       {
         "name": "Gambit! (Self)",
@@ -42,15 +45,19 @@
         ],
         "range": {
           "target": "self",
-          "unit": "m"
+          "unit": "m",
+          "distance": 0
         },
         "cost": {
           "activation": "simple",
-          "powerPoints": 1
+          "powerPoints": 1,
+          "delay": null,
+          "priority": null
         },
         "description": "<p>Effect: The target gains @Affliction[gambit] 2.</p>",
         "type": "generic",
-        "img": "systems/ptr2e/img/perk-icons/Orders_Training.svg"
+        "img": "systems/ptr2e/img/perk-icons/Orders_Training.svg",
+        "variant": null
       }
     ],
     "slug": "gambit-style",
@@ -64,9 +71,11 @@
     "nodes": [
       {
         "connected": [
-          "agile-style",
-          "strong-style",
-          "assault-armor-style"
+          "assault-armor-style",
+          "precise-style",
+          "improved-burrow-1-3",
+          "improved-overland-1-13",
+          "improved-overland-1-5"
         ],
         "config": {
           "alpha": null,
@@ -79,10 +88,16 @@
         },
         "hidden": false,
         "type": "normal",
-        "x": 35,
-        "y": 222
+        "x": 95,
+        "y": 125,
+        "tier": null
       }
-    ]
+    ],
+    "originSlug": null,
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": []
   },
   "_id": "DejWRv29FwiYyyeE",
   "img": "systems/ptr2e/img/perk-icons/Orders_Training.svg",

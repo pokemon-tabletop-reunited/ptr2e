@@ -14,15 +14,21 @@
         "slug": "intense-heat",
         "description": "<p>Your Fire-Type moves gain a 20% chance to @Affliction[burn], or increase that chance by +20%.</p>",
         "cost": {
-          "activation": "free"
+          "activation": "free",
+          "powerPoints": 0,
+          "delay": null,
+          "priority": null
         },
         "type": "passive",
         "traits": [],
         "img": "icons/svg/explosion.svg",
         "range": {
           "target": "enemy",
-          "unit": "m"
-        }
+          "unit": "m",
+          "distance": 0
+        },
+        "variant": null,
+        "hidden": false
       }
     ],
     "slug": "intense-heat",
@@ -37,7 +43,9 @@
       {
         "connected": [
           "inner-warmth",
-          "firefly"
+          "firefly",
+          "midnight-oil",
+          "acceptance"
         ],
         "config": {
           "alpha": null,
@@ -50,10 +58,16 @@
         },
         "hidden": false,
         "type": "normal",
-        "x": 137,
-        "y": 30
+        "x": 162,
+        "y": 89,
+        "tier": null
       }
-    ]
+    ],
+    "originSlug": null,
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": []
   },
   "_id": "TCYfgKMsSUhsv9Tp",
   "img": "systems/ptr2e/img/svg/fire_icon.svg",

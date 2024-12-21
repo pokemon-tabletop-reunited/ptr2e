@@ -13,15 +13,21 @@
         "slug": "firefly",
         "description": "<p>You gain [Glow 3] or [Glow X+2].</p>",
         "cost": {
-          "activation": "free"
+          "activation": "free",
+          "powerPoints": 0,
+          "delay": null,
+          "priority": null
         },
         "type": "passive",
         "traits": [],
         "img": "icons/svg/explosion.svg",
         "range": {
           "target": "enemy",
-          "unit": "m"
-        }
+          "unit": "m",
+          "distance": 0
+        },
+        "variant": null,
+        "hidden": false
       }
     ],
     "slug": "firefly",
@@ -34,7 +40,11 @@
       {
         "connected": [
           "midnight-oil",
-          "intense-heat"
+          "intense-heat",
+          "root-3",
+          "type-embodiment-type",
+          "grim-haunt",
+          "mindscramble"
         ],
         "config": {
           "alpha": null,
@@ -47,10 +57,16 @@
         },
         "hidden": false,
         "type": "normal",
-        "x": 129,
-        "y": 30
+        "x": 165,
+        "y": 95,
+        "tier": null
       }
-    ]
+    ],
+    "originSlug": null,
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": []
   },
   "_id": "LPWul8LmZhwp1FbR",
   "img": "systems/ptr2e/img/svg/fire_icon.svg",

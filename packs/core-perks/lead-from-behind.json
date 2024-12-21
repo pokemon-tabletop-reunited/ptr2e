@@ -19,15 +19,21 @@
         "slug": "lead-from-behind",
         "description": "<p>You are considered to always be within Reach of members of your Pack (and within Reach of creatures within Reach of them) for the purpose of activating their Pack Mon perks.</p>",
         "cost": {
-          "activation": "free"
+          "activation": "free",
+          "powerPoints": 0,
+          "delay": null,
+          "priority": null
         },
         "type": "passive",
         "traits": [],
         "img": "icons/svg/explosion.svg",
         "range": {
           "target": "enemy",
-          "unit": "m"
-        }
+          "unit": "m",
+          "distance": 0
+        },
+        "variant": null,
+        "hidden": false
       }
     ],
     "slug": "lead-from-behind",
@@ -39,8 +45,9 @@
     "nodes": [
       {
         "connected": [
-          "muse",
-          "pack-alpha"
+          "pack-alpha",
+          "you-belong-to-me",
+          "pile-on"
         ],
         "config": {
           "alpha": null,
@@ -53,10 +60,16 @@
         },
         "hidden": false,
         "type": "normal",
-        "x": 51,
-        "y": 180
+        "x": 152,
+        "y": 181,
+        "tier": null
       }
-    ]
+    ],
+    "originSlug": null,
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": []
   },
   "_id": "1MQDre4JFEKJr4IT",
   "img": "systems/ptr2e/img/perk-icons/Tactician.svg",

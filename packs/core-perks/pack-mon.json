@@ -11,15 +11,21 @@
         "slug": "pack-mon",
         "description": "<p>You gain the [Pack Mon] trait and may join a Pack.</p>",
         "cost": {
-          "activation": "free"
+          "activation": "free",
+          "powerPoints": 0,
+          "delay": null,
+          "priority": null
         },
         "type": "passive",
         "traits": [],
         "img": "icons/svg/explosion.svg",
         "range": {
           "target": "enemy",
-          "unit": "m"
-        }
+          "unit": "m",
+          "distance": 0
+        },
+        "variant": null,
+        "hidden": false
       }
     ],
     "slug": "pack-mon",
@@ -31,10 +37,13 @@
     "nodes": [
       {
         "connected": [
-          "packmarked",
           "pack-alpha",
-          "you-belong-to-me",
-          "muse"
+          "root-4",
+          "muse",
+          "formation-attacks",
+          "improved-overland-1-12",
+          "metamove-empower",
+          "stat-iv-booster-1-13"
         ],
         "config": {
           "alpha": null,
@@ -47,10 +56,16 @@
         },
         "hidden": false,
         "type": "normal",
-        "x": 42,
-        "y": 174
+        "x": 150,
+        "y": 172,
+        "tier": null
       }
-    ]
+    ],
+    "variant": "multi",
+    "mode": "shared",
+    "originSlug": null,
+    "global": true,
+    "webs": []
   },
   "_id": "g7RkEg1WRz28MU8R",
   "img": "systems/ptr2e/img/perk-icons/Breeder.svg",

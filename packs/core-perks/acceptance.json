@@ -14,12 +14,18 @@
         "type": "passive",
         "range": {
           "target": "self",
-          "unit": "m"
+          "unit": "m",
+          "distance": 0
         },
         "cost": {
-          "activation": "free"
+          "activation": "free",
+          "powerPoints": 0,
+          "delay": null,
+          "priority": null
         },
-        "img": "systems/ptr2e/img/perk-icons/Socialite.svg"
+        "img": "systems/ptr2e/img/perk-icons/Socialite.svg",
+        "variant": null,
+        "hidden": false
       }
     ],
     "slug": "acceptance",
@@ -40,11 +46,22 @@
     },
     "nodes": [
       {
+        "x": 162,
+        "y": 83,
+        "hidden": false,
+        "type": "entry",
         "connected": [
+          "potent-venom",
+          "intense-heat",
+          "thug",
           "hexcraft",
-          "sadism",
+          "potent-afflictions",
+          "lasting-harm",
           "acute-affliction",
-          "cultivate-weakness"
+          "fighting-momentum",
+          "plain-irritating",
+          "subsidence",
+          "draconic-presence"
         ],
         "config": {
           "alpha": null,
@@ -55,12 +72,14 @@
           "tint": null,
           "scale": null
         },
-        "hidden": false,
-        "type": "normal",
-        "x": 176,
-        "y": 106
+        "tier": null
       }
-    ]
+    ],
+    "originSlug": null,
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": []
   },
   "effects": [
     {

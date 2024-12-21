@@ -17,11 +17,16 @@
         "img": "systems/ptr2e/img/svg/electric_icon.svg",
         "range": {
           "target": "self",
-          "unit": "m"
+          "unit": "m",
+          "distance": 0
         },
         "cost": {
-          "activation": "free"
-        }
+          "activation": "free",
+          "powerPoints": 0,
+          "delay": null,
+          "priority": null
+        },
+        "variant": null
       }
     ],
     "description": "<p>As a free action, you may spend 4 ticks of HP to gain @Affliction[charged] 1.</p>",
@@ -35,7 +40,9 @@
       {
         "connected": [
           "high-voltage",
-          "magnetize"
+          "magnetize",
+          "improved-flight-1-4",
+          "stat-iv-booster-1-6"
         ],
         "config": {
           "alpha": null,
@@ -48,10 +55,16 @@
         },
         "hidden": false,
         "type": "normal",
-        "x": 97,
-        "y": 31
+        "x": 20,
+        "y": 141,
+        "tier": null
       }
-    ]
+    ],
+    "originSlug": null,
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": []
   },
   "img": "systems/ptr2e/img/svg/electric_icon.svg",
   "effects": [],

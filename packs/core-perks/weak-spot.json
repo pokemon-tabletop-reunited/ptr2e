@@ -14,12 +14,18 @@
         "type": "passive",
         "range": {
           "target": "self",
-          "unit": "m"
+          "unit": "m",
+          "distance": 0
         },
         "cost": {
-          "activation": "free"
+          "activation": "free",
+          "powerPoints": 0,
+          "delay": null,
+          "priority": null
         },
-        "img": "icons/svg/explosion.svg"
+        "img": "icons/svg/explosion.svg",
+        "variant": null,
+        "hidden": false
       },
       {
         "slug": "focus-energy",
@@ -30,11 +36,14 @@
         ],
         "range": {
           "target": "creature",
-          "unit": "m"
+          "unit": "m",
+          "distance": 0
         },
         "cost": {
           "activation": "simple",
-          "powerPoints": 3
+          "powerPoints": 3,
+          "delay": null,
+          "priority": null
         },
         "category": "status",
         "types": [
@@ -42,7 +51,18 @@
         ],
         "description": "Effect: The user's gain +1 CRIT stage for 5 activations.",
         "free": true,
-        "img": "icons/svg/explosion.svg"
+        "img": "icons/svg/explosion.svg",
+        "variant": null,
+        "power": null,
+        "accuracy": null,
+        "contestType": "",
+        "contestEffect": "",
+        "slot": null,
+        "summon": null,
+        "defaultVariant": null,
+        "flingItemId": null,
+        "offensiveStat": null,
+        "defensiveStat": null
       },
       {
         "slug": "laser-focus",
@@ -53,18 +73,33 @@
         ],
         "range": {
           "target": "self",
-          "unit": "m"
+          "unit": "m",
+          "distance": 0
         },
         "cost": {
           "activation": "simple",
-          "powerPoints": 3
+          "powerPoints": 3,
+          "delay": null,
+          "priority": null
         },
         "category": "status",
         "types": [
           "normal"
         ],
         "description": "Effect: The user gains +4 CRIT stages for 2 activations.",
-        "img": "icons/svg/explosion.svg"
+        "img": "icons/svg/explosion.svg",
+        "variant": null,
+        "power": null,
+        "accuracy": null,
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null,
+        "summon": null,
+        "defaultVariant": null,
+        "flingItemId": null,
+        "offensiveStat": null,
+        "defensiveStat": null
       }
     ],
     "slug": "weak-spot",
@@ -81,7 +116,9 @@
     "nodes": [
       {
         "connected": [
-          "hit-run",
+          "root-5",
+          "type-hunter",
+          "dead-to-rights",
           "dead-eye"
         ],
         "config": {
@@ -95,10 +132,16 @@
         },
         "hidden": false,
         "type": "normal",
-        "x": 160,
-        "y": 154
+        "x": 33,
+        "y": 178,
+        "tier": null
       }
-    ]
+    ],
+    "originSlug": null,
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": []
   },
   "effects": []
 }

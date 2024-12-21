@@ -12,15 +12,21 @@
         "slug": "hit-run",
         "description": "<p>After resolving an Attack, the user cannot be targeted with [Interrupt X] Actions until the end of their Activation.</p>",
         "cost": {
-          "activation": "free"
+          "activation": "free",
+          "powerPoints": 0,
+          "delay": null,
+          "priority": null
         },
         "type": "passive",
         "traits": [],
         "img": "icons/svg/explosion.svg",
         "range": {
           "target": "creature",
-          "unit": "m"
-        }
+          "unit": "m",
+          "distance": 0
+        },
+        "variant": null,
+        "hidden": false
       }
     ],
     "slug": "hit-run",
@@ -32,9 +38,13 @@
     "nodes": [
       {
         "connected": [
-          "weak-spot",
-          "hamstring",
-          "skirmish"
+          "muse",
+          "root-4",
+          "improved-overland-1-6",
+          "improved-overland-1-11",
+          "stat-iv-booster-1-9",
+          "improved-overland-1-12",
+          "improved-swim-1-1"
         ],
         "config": {
           "alpha": null,
@@ -47,10 +57,16 @@
         },
         "hidden": false,
         "type": "normal",
-        "x": 154,
-        "y": 155
+        "x": 130,
+        "y": 145,
+        "tier": null
       }
-    ]
+    ],
+    "originSlug": null,
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": []
   },
   "_id": "1SjUYN4180BTBYCk",
   "img": "systems/ptr2e/img/perk-icons/Combat.svg",

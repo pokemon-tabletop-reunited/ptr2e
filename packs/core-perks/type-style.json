@@ -26,14 +26,17 @@
         ],
         "cost": {
           "activation": "simple",
-          "powerPoints": 2
+          "powerPoints": 2,
+          "delay": null,
+          "priority": null
         },
         "range": {
           "target": "creature",
           "distance": 10,
           "unit": "m"
         },
-        "img": "icons/svg/explosion.svg"
+        "img": "icons/svg/explosion.svg",
+        "variant": null
       }
     ],
     "slug": "type-style",
@@ -51,7 +54,11 @@
         "connected": [
           "rapid-fire-style-1",
           "type-style",
-          "magic-armor-style"
+          "magic-armor-style",
+          "type-strategist",
+          "type-tutoring",
+          "improved-overland-1-6",
+          "improved-flight-1-6"
         ],
         "config": {
           "alpha": null,
@@ -64,10 +71,16 @@
         },
         "hidden": false,
         "type": "normal",
-        "x": 56,
-        "y": 231
+        "x": 122,
+        "y": 130,
+        "tier": null
       }
-    ]
+    ],
+    "originSlug": null,
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": []
   },
   "_id": "rf1amQ8FoBlQka5c",
   "img": "systems/ptr2e/img/perk-icons/Orders_Training.svg",

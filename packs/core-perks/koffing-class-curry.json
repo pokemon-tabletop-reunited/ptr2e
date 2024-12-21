@@ -12,15 +12,20 @@
         "slug": "koffing-class-curry",
         "description": "<p>You are able to make Koffing-class Curries as a Camp Action. One of these Curries restores 25% of the party's max HP. After making a Koffing-class Curry, roll a d100. On a 1, you attract a non-hostile Pokemon from the local environment to investigate the camp.</p>",
         "cost": {
-          "activation": "complex"
+          "activation": "complex",
+          "powerPoints": 0,
+          "delay": null,
+          "priority": null
         },
         "type": "camping",
         "traits": [],
         "img": "icons/svg/explosion.svg",
         "range": {
           "target": "enemy",
-          "unit": "m"
-        }
+          "unit": "m",
+          "distance": 0
+        },
+        "variant": null
       }
     ],
     "slug": "koffing-class-curry",
@@ -31,8 +36,15 @@
     },
     "nodes": [
       {
+        "x": 185,
+        "y": 127,
+        "hidden": false,
+        "type": "entry",
         "connected": [
-          "milcery-class-curry"
+          "milcery-class-curry",
+          "root-3",
+          "trubbish-class-sandwiches",
+          "stat-iv-booster-1-2"
         ],
         "config": {
           "alpha": null,
@@ -43,12 +55,14 @@
           "tint": null,
           "scale": null
         },
-        "hidden": false,
-        "type": "normal",
-        "x": 207,
-        "y": 20
+        "tier": null
       }
-    ]
+    ],
+    "originSlug": null,
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": []
   },
   "_id": "u37SL8BTWqw1fr0P",
   "img": "systems/ptr2e/img/perk-icons/Chef.svg",

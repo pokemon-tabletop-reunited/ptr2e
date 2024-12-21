@@ -18,15 +18,21 @@
         "slug": "beastmaster",
         "description": "<p>You may substitute Intimidate in place of Leadership for Skill Contests.</p>",
         "cost": {
-          "activation": "free"
+          "activation": "free",
+          "powerPoints": 0,
+          "delay": null,
+          "priority": null
         },
         "type": "passive",
         "traits": [],
         "img": "icons/svg/explosion.svg",
         "range": {
           "target": "enemy",
-          "unit": "m"
-        }
+          "unit": "m",
+          "distance": 0
+        },
+        "variant": null,
+        "hidden": false
       }
     ],
     "slug": "beastmaster",
@@ -37,10 +43,17 @@
     },
     "nodes": [
       {
+        "x": 39,
+        "y": 111,
+        "hidden": false,
+        "type": "entry",
         "connected": [
           "bloodthirst",
           "masters-whip",
-          "harsh-motivator"
+          "harsh-motivator",
+          "root-6",
+          "curveball-technique",
+          "improved-burrow-1-2"
         ],
         "config": {
           "alpha": null,
@@ -51,12 +64,14 @@
           "tint": null,
           "scale": null
         },
-        "hidden": false,
-        "type": "normal",
-        "x": 196,
-        "y": 136
+        "tier": null
       }
-    ]
+    ],
+    "originSlug": null,
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": []
   },
   "_id": "B2XQnfWC8Xx8Veqj",
   "img": "systems/ptr2e/img/perk-icons/Taskmaster.svg",

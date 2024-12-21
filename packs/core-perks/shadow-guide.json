@@ -24,15 +24,21 @@
         "slug": "shadow-guide",
         "description": "<p>[Closed Heart] creatures that you are responsible for may gain XP, level up, learn new moves and evolve as normal.</p>",
         "cost": {
-          "activation": "free"
+          "activation": "free",
+          "powerPoints": 0,
+          "delay": null,
+          "priority": null
         },
         "type": "passive",
         "traits": [],
         "img": "icons/svg/explosion.svg",
         "range": {
           "target": "enemy",
-          "unit": "m"
-        }
+          "unit": "m",
+          "distance": 0
+        },
+        "variant": null,
+        "hidden": false
       }
     ],
     "slug": "shadow-guide",
@@ -43,6 +49,10 @@
     },
     "nodes": [
       {
+        "x": null,
+        "y": null,
+        "hidden": false,
+        "type": "normal",
         "connected": [
           "deep-breaths",
           "open-your-heart",
@@ -60,12 +70,14 @@
           "tint": null,
           "scale": null
         },
-        "hidden": false,
-        "type": "normal",
-        "x": 103,
-        "y": 208
+        "tier": null
       }
-    ]
+    ],
+    "originSlug": null,
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": []
   },
   "_id": "hqj8DQgk8QnBPehy",
   "img": "systems/ptr2e/img/svg/shadow_icon.svg",

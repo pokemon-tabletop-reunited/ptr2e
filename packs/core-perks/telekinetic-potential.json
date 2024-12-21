@@ -13,15 +13,21 @@
         "slug": "telekinetic-potential",
         "description": "<p>You gain the [Telekinetic 2] trait.</p>",
         "cost": {
-          "activation": "free"
+          "activation": "free",
+          "powerPoints": 0,
+          "delay": null,
+          "priority": null
         },
         "type": "passive",
         "traits": [],
         "img": "icons/svg/explosion.svg",
         "range": {
           "target": "enemy",
-          "unit": "m"
-        }
+          "unit": "m",
+          "distance": 0
+        },
+        "variant": null,
+        "hidden": false
       }
     ],
     "slug": "telekinetic-potential",
@@ -33,9 +39,15 @@
     "nodes": [
       {
         "connected": [
-          "long-range-psychoportation",
           "psychoportation",
-          "detect-minds"
+          "telepathic-potential",
+          "stat-iv-booster-1-2",
+          "improved-teleportation-1-1",
+          "improved-overland-1-1",
+          "screen-setter",
+          "mindscramble",
+          "improved-telekinesis-1",
+          "improved-telekinesis-1-1"
         ],
         "config": {
           "alpha": null,
@@ -48,10 +60,16 @@
         },
         "hidden": false,
         "type": "normal",
-        "x": 97,
-        "y": 169
+        "x": 150,
+        "y": 129,
+        "tier": null
       }
-    ]
+    ],
+    "originSlug": null,
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": []
   },
   "_id": "d152HgMF55iaUMiu",
   "img": "systems/ptr2e/img/svg/psychic_icon.svg",

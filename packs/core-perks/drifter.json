@@ -19,15 +19,21 @@
         "slug": "drifter",
         "description": "<p>You gain the [Hover] trait, and if you did not already possess a Flight movement, you gain a Flight Movement Allowance equal to that of your highest Primary Movement Score.</p>",
         "cost": {
-          "activation": "free"
+          "activation": "free",
+          "powerPoints": 0,
+          "delay": null,
+          "priority": null
         },
         "type": "passive",
         "traits": [],
         "img": "icons/svg/explosion.svg",
         "range": {
           "target": "enemy",
-          "unit": "m"
-        }
+          "unit": "m",
+          "distance": 0
+        },
+        "variant": null,
+        "hidden": false
       }
     ],
     "slug": "drifter",
@@ -40,7 +46,12 @@
       {
         "connected": [
           "dustoff",
-          "wingblades"
+          "wingblades",
+          "improved-flight-1-1",
+          "enchanting-smile",
+          "improved-flight-1",
+          "acrobat",
+          "root-2"
         ],
         "config": {
           "alpha": null,
@@ -53,10 +64,16 @@
         },
         "hidden": false,
         "type": "normal",
-        "x": 159,
-        "y": 31
+        "x": 124,
+        "y": 46,
+        "tier": null
       }
-    ]
+    ],
+    "originSlug": null,
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": []
   },
   "_id": "KxU35Iv6OY04jW0M",
   "img": "systems/ptr2e/img/svg/flying_icon.svg",

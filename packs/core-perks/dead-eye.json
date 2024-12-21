@@ -12,15 +12,19 @@
         "description": "<p>Trigger: You hit with a damaging, non-Critical, non-[Contact] Attack. The attack becomes a Critical Hit.</p>",
         "cost": {
           "activation": "free",
-          "powerPoints": 5
+          "powerPoints": 5,
+          "delay": null,
+          "priority": null
         },
         "type": "generic",
         "traits": [],
         "img": "icons/svg/explosion.svg",
         "range": {
           "target": "enemy",
-          "unit": "m"
-        }
+          "unit": "m",
+          "distance": 0
+        },
+        "variant": null
       }
     ],
     "slug": "dead-eye",
@@ -32,9 +36,9 @@
     "nodes": [
       {
         "connected": [
-          "down-the-sights",
+          "weak-spot",
           "dead-to-rights",
-          "weak-spot"
+          "great-hunter"
         ],
         "config": {
           "alpha": null,
@@ -47,10 +51,16 @@
         },
         "hidden": false,
         "type": "normal",
-        "x": 158,
-        "y": 160
+        "x": 37,
+        "y": 181,
+        "tier": null
       }
-    ]
+    ],
+    "originSlug": null,
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": []
   },
   "_id": "XwBEo0SPEQ5UtA0l",
   "img": "systems/ptr2e/img/perk-icons/Combat.svg",

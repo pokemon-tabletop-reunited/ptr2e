@@ -18,15 +18,21 @@
         "slug": "forensic-accountant",
         "description": "<p>You have a knack for spotting discrepancies when looking through accounts, inventory records and similar. You gain a +10 to Accounting checks to catch errors and \"cooked\" books.</p>",
         "cost": {
-          "activation": "free"
+          "activation": "free",
+          "powerPoints": 0,
+          "delay": null,
+          "priority": null
         },
         "type": "passive",
         "traits": [],
         "img": "icons/svg/explosion.svg",
         "range": {
           "target": "enemy",
-          "unit": "m"
-        }
+          "unit": "m",
+          "distance": 0
+        },
+        "variant": null,
+        "hidden": false
       }
     ],
     "slug": "forensic-accountant",
@@ -37,7 +43,12 @@
     },
     "nodes": [
       {
-        "connected": [],
+        "connected": [
+          "root-6",
+          "curveball-technique",
+          "breeder",
+          "improved-overland-1-4"
+        ],
         "config": {
           "alpha": null,
           "backgroundColor": "#ffffff",
@@ -49,10 +60,16 @@
         },
         "hidden": false,
         "type": "normal",
-        "x": 62,
-        "y": 110
+        "x": 52,
+        "y": 95,
+        "tier": null
       }
-    ]
+    ],
+    "originSlug": null,
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": []
   },
   "_id": "lpfTAt7M1mDGh5kH",
   "img": "systems/ptr2e/img/perk-icons/Knowledge.svg",

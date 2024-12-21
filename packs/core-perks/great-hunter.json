@@ -54,15 +54,20 @@
         "slug": "great-hunter",
         "description": "<p>The user gains +10 to rolls that are actively involved with having the user track, locate, inquire about/discern information concerning another creature. This can range from standard wilderness hunter type of activities or pursuits, to even cyberpunk style investigations. The user adds Hunter’s Prowess to their Known Abilities List.</p>",
         "cost": {
-          "activation": "free"
+          "activation": "free",
+          "powerPoints": 0,
+          "delay": null,
+          "priority": null
         },
         "type": "generic",
         "traits": [],
         "img": "icons/svg/explosion.svg",
         "range": {
           "target": "enemy",
-          "unit": "m"
-        }
+          "unit": "m",
+          "distance": 0
+        },
+        "variant": null
       }
     ],
     "slug": "great-hunter",
@@ -75,7 +80,9 @@
       {
         "connected": [
           "trophy-bagger",
-          "type-hunter"
+          "type-hunter",
+          "game-specialist",
+          "dead-eye"
         ],
         "config": {
           "alpha": null,
@@ -88,10 +95,16 @@
         },
         "hidden": false,
         "type": "normal",
-        "x": 140,
-        "y": 173
+        "x": 40,
+        "y": 184,
+        "tier": null
       }
-    ]
+    ],
+    "originSlug": null,
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": []
   },
   "_id": "cXFTuRz4ACvbBA57",
   "img": "systems/ptr2e/img/perk-icons/Hunting.svg",

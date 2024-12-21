@@ -12,15 +12,19 @@
         "description": "If you have observed someone else succeed at a skill check during the current scene, you may gain their skill/10 (rounded up) as a bonus to performing the same skill check for yourself.</p>",
         "cost": {
           "activation": "free",
-          "powerPoints": 2
+          "powerPoints": 2,
+          "delay": null,
+          "priority": null
         },
         "type": "generic",
         "traits": [],
         "img": "icons/svg/explosion.svg",
         "range": {
           "target": "enemy",
-          "unit": "m"
-        }
+          "unit": "m",
+          "distance": 0
+        },
+        "variant": null
       }
     ],
     "slug": "mankey-see-mankey-do",
@@ -32,11 +36,11 @@
     "nodes": [
       {
         "connected": [
-          "improved-threaded-1",
           "hardy-trekker",
-          "cyclist",
-          "strong-swimmer",
-          "weathered"
+          "weathered",
+          "sprint",
+          "improved-overland-1",
+          "improved-threaded-1"
         ],
         "config": {
           "alpha": null,
@@ -49,10 +53,16 @@
         },
         "hidden": false,
         "type": "normal",
-        "x": 56,
-        "y": 128
+        "x": 116,
+        "y": 17,
+        "tier": null
       }
-    ]
+    ],
+    "originSlug": null,
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": []
   },
   "_id": "K8K5SEJO0FyRGyYY",
   "img": "systems/ptr2e/img/perk-icons/Knowledge.svg",

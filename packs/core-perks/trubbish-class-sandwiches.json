@@ -12,15 +12,20 @@
         "slug": "trubbish-class-sandwiches",
         "description": "<p>You are able to make Trubbish-class Sandwiches as a Camp Action. These sandwiches may have particular effects determined by their ingredients, but are barely passable as 'food'.</p>",
         "cost": {
-          "activation": "complex"
+          "activation": "complex",
+          "powerPoints": 0,
+          "delay": null,
+          "priority": null
         },
         "type": "camping",
         "traits": [],
         "img": "icons/svg/explosion.svg",
         "range": {
           "target": "enemy",
-          "unit": "m"
-        }
+          "unit": "m",
+          "distance": 0
+        },
+        "variant": null
       }
     ],
     "slug": "trubbish-class-sandwiches",
@@ -31,10 +36,16 @@
     },
     "nodes": [
       {
+        "x": 184,
+        "y": 134,
+        "hidden": false,
+        "type": "entry",
         "connected": [
           "root-4",
           "zigzagoon-class-sandwiches",
-          "basic-ball-crafting"
+          "basic-ball-crafting",
+          "koffing-class-curry",
+          "stat-iv-booster-1-2"
         ],
         "config": {
           "alpha": null,
@@ -45,10 +56,14 @@
           "tint": null,
           "scale": null
         },
-        "hidden": false,
-        "type": "normal"
+        "tier": null
       }
-    ]
+    ],
+    "originSlug": null,
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": []
   },
   "_id": "VMIvDWQr9DdPtYNH",
   "img": "systems/ptr2e/img/perk-icons/Chef.svg",

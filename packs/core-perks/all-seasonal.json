@@ -26,15 +26,19 @@
         "description": "<p>Until the start of the next Round, the user benefits from the active [Weather] and [Terrain] as if they were the beneficial Type or had the specific [Traits] of their choice.</p>",
         "cost": {
           "activation": "free",
-          "powerPoints": 4
+          "powerPoints": 4,
+          "delay": null,
+          "priority": null
         },
         "type": "generic",
         "traits": [],
         "img": "icons/svg/explosion.svg",
         "range": {
           "target": "enemy",
-          "unit": "m"
-        }
+          "unit": "m",
+          "distance": 0
+        },
+        "variant": null
       }
     ],
     "slug": "all-seasonal",
@@ -47,7 +51,8 @@
       {
         "connected": [
           "hardy-trekker",
-          "freeclimber"
+          "freeclimber",
+          "weathered"
         ],
         "config": {
           "alpha": null,
@@ -60,10 +65,16 @@
         },
         "hidden": false,
         "type": "normal",
-        "x": 55,
-        "y": 134
+        "x": 101,
+        "y": 18,
+        "tier": null
       }
-    ]
+    ],
+    "originSlug": null,
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": []
   },
   "_id": "c44mrEbFuTtSb747",
   "img": "systems/ptr2e/img/perk-icons/Exploration.svg",

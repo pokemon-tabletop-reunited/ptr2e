@@ -16,18 +16,33 @@
         ],
         "range": {
           "target": "creature",
-          "unit": "m"
+          "unit": "m",
+          "distance": 0
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 3
+          "powerPoints": 3,
+          "delay": null,
+          "priority": null
         },
         "category": "status",
         "types": [
           "normal"
         ],
         "description": "<p>Effect: The target recovers 4 Ticks of HP.</p>",
-        "img": "icons/svg/explosion.svg"
+        "img": "icons/svg/explosion.svg",
+        "variant": null,
+        "power": null,
+        "accuracy": null,
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null,
+        "summon": null,
+        "defaultVariant": null,
+        "flingItemId": null,
+        "offensiveStat": null,
+        "defensiveStat": null
       },
       {
         "slug": "acutherapy",
@@ -43,14 +58,28 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 2
+          "powerPoints": 2,
+          "delay": null,
+          "priority": null
         },
         "category": "status",
         "types": [
           "normal"
         ],
         "description": "<p>Effect: Roll 1d8 and raise the Stages of the stat in the corresponding table by +2 for 5 activations.</p><p><ol><li>ATK</li><li>DEF</li><li>SPATK</li><li>SPDEF</li><li>SPD</li><li>ACC</li><li>EVA</li><li>User Choice<></ol></p>",
-        "img": "icons/svg/explosion.svg"
+        "img": "icons/svg/explosion.svg",
+        "variant": null,
+        "power": null,
+        "accuracy": null,
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null,
+        "summon": null,
+        "defaultVariant": null,
+        "flingItemId": null,
+        "offensiveStat": null,
+        "defensiveStat": null
       },
       {
         "slug": "purify",
@@ -66,14 +95,28 @@
         },
         "cost": {
           "activation": "simple",
-          "powerPoints": 5
+          "powerPoints": 5,
+          "delay": null,
+          "priority": null
         },
         "category": "status",
         "types": [
           "poison"
         ],
         "description": "<p>Effect: The target is cured of all [Major Affliction]s. If the target is cured this way, the user recovers HP equal to 1/2 their Max HP.</p>",
-        "img": "icons/svg/explosion.svg"
+        "img": "icons/svg/explosion.svg",
+        "variant": null,
+        "power": null,
+        "accuracy": null,
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null,
+        "summon": null,
+        "defaultVariant": null,
+        "flingItemId": null,
+        "offensiveStat": null,
+        "defensiveStat": null
       }
     ],
     "slug": "chansey-medicine",
@@ -94,6 +137,10 @@
     },
     "nodes": [
       {
+        "x": 36,
+        "y": 73,
+        "hidden": false,
+        "type": "entry",
         "connected": [
           "healing-hands",
           "cautious-healer",
@@ -101,7 +148,9 @@
           "invigorate",
           "mobilize",
           "tactician",
-          "guard-up"
+          "heroic-transformation",
+          "breeder",
+          "stat-iv-booster-1-10"
         ],
         "config": {
           "alpha": null,
@@ -112,12 +161,14 @@
           "tint": null,
           "scale": null
         },
-        "hidden": false,
-        "type": "normal",
-        "x": 33,
-        "y": 71
+        "tier": null
       }
-    ]
+    ],
+    "originSlug": null,
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": []
   },
   "effects": [
     {

@@ -20,15 +20,21 @@
         "slug": "aura-bonding",
         "description": "<p>You may substitute Aura Sense in place of the Conversation skill when interacting with creatures that the GM deems to be receptive.</p>",
         "cost": {
-          "activation": "free"
+          "activation": "free",
+          "powerPoints": 0,
+          "delay": null,
+          "priority": null
         },
         "type": "passive",
         "traits": [],
         "img": "icons/svg/explosion.svg",
         "range": {
           "target": "enemy",
-          "unit": "m"
-        }
+          "unit": "m",
+          "distance": 0
+        },
+        "variant": null,
+        "hidden": false
       }
     ],
     "slug": "aura-bonding",
@@ -40,9 +46,12 @@
     "nodes": [
       {
         "connected": [
-          "aura-user",
-          "shielding-aura",
-          "aura-channeling"
+          "aura-channeling",
+          "aura-projection",
+          "aura-empathy",
+          "aura-dampening",
+          "soothing-aura",
+          "shift-consciousness-aura"
         ],
         "config": {
           "alpha": null,
@@ -55,10 +64,16 @@
         },
         "hidden": false,
         "type": "normal",
-        "x": 80,
-        "y": 65
+        "x": 179,
+        "y": 29,
+        "tier": null
       }
-    ]
+    ],
+    "originSlug": null,
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": []
   },
   "_id": "UfdaseGwkBOgrqbz",
   "img": "systems/ptr2e/img/perk-icons/Aura.svg",

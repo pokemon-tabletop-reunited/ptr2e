@@ -15,15 +15,21 @@
         "slug": "improved-teleportation-1",
         "description": "<p>Improve your Teleportation Movement Allowance by 2.</p>",
         "cost": {
-          "activation": "free"
+          "activation": "free",
+          "powerPoints": 0,
+          "delay": null,
+          "priority": null
         },
         "type": "passive",
         "traits": [],
         "img": "icons/svg/explosion.svg",
         "range": {
           "target": "enemy",
-          "unit": "m"
-        }
+          "unit": "m",
+          "distance": 0
+        },
+        "variant": null,
+        "hidden": false
       }
     ],
     "slug": "improved-teleportation-1",
@@ -37,7 +43,11 @@
     "nodes": [
       {
         "connected": [
-          "improved-burrow-1"
+          "improved-overland-1-3",
+          "unbending-steel",
+          "screen-setter",
+          "improved-telekinesis-1",
+          "stat-iv-booster-1-4"
         ],
         "config": {
           "alpha": null,
@@ -50,10 +60,60 @@
         },
         "hidden": false,
         "type": "normal",
-        "x": 79,
-        "y": 140
+        "x": 122,
+        "y": 106,
+        "tier": null
+      },
+      {
+        "x": 168,
+        "y": 127,
+        "connected": [
+          "telekinetic-potential",
+          "root-3",
+          "psychoportation",
+          "long-range-psychoportation",
+          "improved-telekinesis-1-1",
+          "improved-teleportation-1-2"
+        ],
+        "config": {
+          "alpha": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "borderWidth": null,
+          "texture": null,
+          "tint": null,
+          "scale": null
+        },
+        "hidden": false,
+        "type": "normal",
+        "tier": null
+      },
+      {
+        "x": 152,
+        "y": 143,
+        "connected": [
+          "improved-telekinesis-1-1",
+          "improved-teleportation-1-1",
+          "telepathic-potential",
+          "root-4"
+        ],
+        "config": {
+          "alpha": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "borderWidth": null,
+          "texture": null,
+          "tint": null,
+          "scale": null
+        },
+        "hidden": false,
+        "type": "normal",
+        "tier": null
       }
-    ]
+    ],
+    "originSlug": null,
+    "global": true,
+    "webs": []
   },
   "_id": "7f24boNPqznIhjiv",
   "img": "systems/ptr2e/img/svg/psychic_icon.svg",

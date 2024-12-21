@@ -25,15 +25,19 @@
         "description": "<p>The target gains +25% damage against [Closed Heart] creatures with their next Attack.</p>",
         "cost": {
           "activation": "simple",
-          "powerPoints": 2
+          "powerPoints": 2,
+          "delay": null,
+          "priority": null
         },
         "type": "generic",
         "traits": [],
         "img": "icons/svg/explosion.svg",
         "range": {
           "target": "enemy",
-          "unit": "m"
-        }
+          "unit": "m",
+          "distance": 0
+        },
+        "variant": null
       }
     ],
     "slug": "silver-bullet",
@@ -44,6 +48,10 @@
     },
     "nodes": [
       {
+        "x": null,
+        "y": null,
+        "hidden": false,
+        "type": "normal",
         "connected": [
           "open-your-heart",
           "shadow-guide"
@@ -57,12 +65,14 @@
           "tint": "#040404",
           "scale": null
         },
-        "hidden": false,
-        "type": "normal",
-        "x": 115,
-        "y": 208
+        "tier": null
       }
-    ]
+    ],
+    "originSlug": null,
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": []
   },
   "_id": "r69KkYo3UhSWLXpG",
   "img": "systems/ptr2e/img/perk-icons/Trainer.svg",

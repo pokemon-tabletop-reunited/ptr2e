@@ -42,15 +42,20 @@
         "cost": {
           "activation": "free",
           "powerPoints": 2,
-          "trigger": "The user declares Rush."
+          "trigger": "The user declares Rush.",
+          "delay": null,
+          "priority": null
         },
         "range": {
           "target": "self",
-          "unit": "m"
+          "unit": "m",
+          "distance": 0
         },
         "type": "passive",
         "traits": [],
-        "img": "icons/svg/explosion.svg"
+        "img": "icons/svg/explosion.svg",
+        "variant": null,
+        "hidden": false
       }
     ],
     "slug": "sprint",
@@ -64,8 +69,10 @@
         "connected": [
           "improved-burrow-1",
           "swimming-lessons",
-          "cyclist",
-          "freeclimber"
+          "freeclimber",
+          "root-2",
+          "hardy-trekker",
+          "mankey-see-mankey-do"
         ],
         "config": {
           "alpha": null,
@@ -78,10 +85,16 @@
         },
         "hidden": false,
         "type": "normal",
-        "x": 66,
-        "y": 136
+        "x": 131,
+        "y": 17,
+        "tier": null
       }
-    ]
+    ],
+    "originSlug": null,
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": []
   },
   "_id": "vxp5hyhlVJozIaNR",
   "img": "systems/ptr2e/img/perk-icons/Exploration.svg",

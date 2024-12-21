@@ -19,9 +19,12 @@
         },
         "cost": {
           "activation": "free",
-          "powerPoints": 2
+          "powerPoints": 2,
+          "delay": null,
+          "priority": null
         },
-        "img": "icons/svg/explosion.svg"
+        "img": "icons/svg/explosion.svg",
+        "variant": null
       }
     ],
     "slug": "type-harmony",
@@ -40,8 +43,11 @@
     "nodes": [
       {
         "connected": [
-          "type-desperation",
-          "type-specialty"
+          "type-embodiment-type",
+          "stat-iv-booster-1-1",
+          "type-specialty",
+          "root-3",
+          "plain-irritating"
         ],
         "config": {
           "alpha": null,
@@ -54,10 +60,16 @@
         },
         "hidden": false,
         "type": "normal",
-        "x": 153,
-        "y": 215
+        "x": 156,
+        "y": 95,
+        "tier": null
       }
-    ]
+    ],
+    "originSlug": null,
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": []
   },
   "effects": []
 }

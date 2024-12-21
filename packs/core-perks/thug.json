@@ -20,15 +20,19 @@
         "cost": {
           "activation": "free",
           "powerPoints": 2,
-          "trigger": "You hit a creature with an attack."
+          "trigger": "You hit a creature with an attack.",
+          "delay": null,
+          "priority": null
         },
         "range": {
           "target": "self",
-          "unit": "m"
+          "unit": "m",
+          "distance": 0
         },
         "type": "generic",
         "traits": [],
-        "img": "icons/svg/explosion.svg"
+        "img": "icons/svg/explosion.svg",
+        "variant": null
       }
     ],
     "slug": "thug",
@@ -39,10 +43,20 @@
     },
     "nodes": [
       {
+        "x": 135,
+        "y": 72,
+        "hidden": false,
+        "type": "entry",
         "connected": [
-          "acute-affliction",
-          "insidious-wounds",
-          "suspicious-minds"
+          "acceptance",
+          "hexcraft",
+          "stage-vampirism",
+          "logicians-wisdom",
+          "kinetic-dispersion",
+          "improved-overland-1-2",
+          "trained-rider",
+          "improved-flight-1-2",
+          "draconic-presence"
         ],
         "config": {
           "alpha": null,
@@ -53,12 +67,14 @@
           "tint": null,
           "scale": null
         },
-        "hidden": false,
-        "type": "normal",
-        "x": 166,
-        "y": 99
+        "tier": null
       }
-    ]
+    ],
+    "originSlug": null,
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": []
   },
   "_id": "1iAaHzCp7bW9108k",
   "img": "systems/ptr2e/img/perk-icons/Combat.svg",

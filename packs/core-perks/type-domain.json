@@ -20,7 +20,10 @@
         "slug": "type-domain",
         "description": "<p>You are able to tutor [Domain] abilities associated to your chosen <Type>. Only creatures that have your chosen <Type> can learn these abilties.</p>",
         "cost": {
-          "activation": "free"
+          "activation": "free",
+          "powerPoints": 0,
+          "delay": null,
+          "priority": null
         },
         "type": "passive",
         "traits": [
@@ -29,8 +32,11 @@
         "img": "icons/svg/explosion.svg",
         "range": {
           "target": "enemy",
-          "unit": "m"
-        }
+          "unit": "m",
+          "distance": 0
+        },
+        "variant": null,
+        "hidden": false
       }
     ],
     "slug": "type-domain",
@@ -44,9 +50,11 @@
     "nodes": [
       {
         "connected": [
-          "type-specialty",
-          "type-embodiment-type",
-          "type-strategist"
+          "type-desperation",
+          "type-tutoring",
+          "type-strategist",
+          "improved-overland-1-1",
+          "stat-iv-booster-1-1"
         ],
         "config": {
           "alpha": null,
@@ -59,10 +67,16 @@
         },
         "hidden": false,
         "type": "normal",
-        "x": 167,
-        "y": 215
+        "x": 141,
+        "y": 98,
+        "tier": null
       }
-    ]
+    ],
+    "originSlug": null,
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": []
   },
   "_id": "aMMwSJntCErBGbQZ",
   "img": "systems/ptr2e/img/perk-icons/Trainer.svg",

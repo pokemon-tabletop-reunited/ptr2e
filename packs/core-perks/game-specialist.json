@@ -58,15 +58,20 @@
         "slug": "game-specialist",
         "description": "<p>The user’s Attacks have +1 ACC against creatures that are smaller than itself. The user adds Game Hunter to their Known Abilities List.</p>",
         "cost": {
-          "activation": "free"
+          "activation": "free",
+          "powerPoints": 0,
+          "delay": null,
+          "priority": null
         },
         "type": "generic",
         "traits": [],
         "img": "icons/svg/explosion.svg",
         "range": {
           "target": "enemy",
-          "unit": "m"
-        }
+          "unit": "m",
+          "distance": 0
+        },
+        "variant": null
       }
     ],
     "slug": "game-specialist",
@@ -78,11 +83,7 @@
     "nodes": [
       {
         "connected": [
-          "high-noon",
-          "type-hunter",
-          "trophy-bagger",
-          "skirmish",
-          "run-down"
+          "great-hunter"
         ],
         "config": {
           "alpha": null,
@@ -95,10 +96,16 @@
         },
         "hidden": false,
         "type": "normal",
-        "x": 146,
-        "y": 170
+        "x": 35,
+        "y": 185,
+        "tier": null
       }
-    ]
+    ],
+    "originSlug": null,
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": []
   },
   "_id": "kZRq2LwzKTWC56PO",
   "img": "systems/ptr2e/img/perk-icons/Hunting.svg",

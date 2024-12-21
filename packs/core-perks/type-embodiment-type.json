@@ -12,15 +12,21 @@
         "slug": "type-embodiment-type",
         "description": "<p>You gain a &lt;Type&gt; trait, from the baseline 18 &lt;Type&gt;s (at default). A recommended limit on &lt;Type&gt; traits is 3 total, but this can be revised at GM discretion. May replace an existing &lt;Type&gt;.</p>",
         "cost": {
-          "activation": "free"
+          "activation": "free",
+          "powerPoints": 0,
+          "delay": null,
+          "priority": null
         },
         "type": "passive",
         "traits": [],
         "img": "icons/svg/explosion.svg",
         "range": {
           "target": "enemy",
-          "unit": "m"
-        }
+          "unit": "m",
+          "distance": 0
+        },
+        "variant": null,
+        "hidden": false
       }
     ],
     "slug": "type-embodiment-type",
@@ -32,8 +38,11 @@
     "nodes": [
       {
         "connected": [
+          "type-harmony",
+          "improved-overland-1-1",
           "type-specialty",
-          "type-domain"
+          "root-3",
+          "firefly"
         ],
         "config": {
           "alpha": null,
@@ -46,10 +55,16 @@
         },
         "hidden": false,
         "type": "normal",
-        "x": 166,
-        "y": 208
+        "x": 156,
+        "y": 105,
+        "tier": null
       }
-    ]
+    ],
+    "originSlug": null,
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": []
   },
   "_id": "3hmeZeafNkHeCKvi",
   "img": "systems/ptr2e/img/perk-icons/Touched.svg",

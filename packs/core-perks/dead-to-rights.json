@@ -12,15 +12,19 @@
         "description": "<p>The next time you declare a non-[Contact] Attack against a foe without Cover, you gain +3 ACC and +2 CRIT Stages for 1 Activation.</p>",
         "cost": {
           "activation": "free",
-          "powerPoints": 10
+          "powerPoints": 10,
+          "delay": null,
+          "priority": null
         },
         "type": "generic",
         "traits": [],
         "img": "icons/svg/explosion.svg",
         "range": {
           "target": "enemy",
-          "unit": "m"
-        }
+          "unit": "m",
+          "distance": 0
+        },
+        "variant": null
       }
     ],
     "slug": "dead-to-rights",
@@ -32,10 +36,10 @@
     "nodes": [
       {
         "connected": [
-          "down-the-sights",
-          "dead-eye",
-          "quick-and-the-dead",
-          "run-down"
+          "type-hunter",
+          "high-noon",
+          "weak-spot",
+          "dead-eye"
         ],
         "config": {
           "alpha": null,
@@ -48,10 +52,16 @@
         },
         "hidden": false,
         "type": "normal",
-        "x": 152,
-        "y": 162
+        "x": 46,
+        "y": 181,
+        "tier": null
       }
-    ]
+    ],
+    "originSlug": null,
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": []
   },
   "_id": "7Uhx4SiJFnFrbhB6",
   "img": "systems/ptr2e/img/perk-icons/Combat.svg",

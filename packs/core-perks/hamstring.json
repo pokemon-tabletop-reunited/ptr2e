@@ -14,12 +14,18 @@
         "type": "passive",
         "range": {
           "target": "creature",
-          "unit": "m"
+          "unit": "m",
+          "distance": 0
         },
         "cost": {
-          "activation": "free"
+          "activation": "free",
+          "powerPoints": 0,
+          "delay": null,
+          "priority": null
         },
-        "img": "systems/ptr2e/img/perk-icons/Hunting.svg"
+        "img": "systems/ptr2e/img/perk-icons/Hunting.svg",
+        "variant": null,
+        "hidden": false
       }
     ],
     "slug": "hamstring",
@@ -36,7 +42,8 @@
         "connected": [
           "run-down",
           "mightyena-tactic",
-          "hit-run"
+          "stat-iv-booster-1-7",
+          "improved-overland-1-9"
         ],
         "config": {
           "alpha": null,
@@ -49,10 +56,16 @@
         },
         "hidden": false,
         "type": "normal",
-        "x": 157,
-        "y": 175
+        "x": 61,
+        "y": 183,
+        "tier": null
       }
-    ]
+    ],
+    "originSlug": null,
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": []
   },
   "effects": [
     {

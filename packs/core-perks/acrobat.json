@@ -20,15 +20,21 @@
         "slug": "acrobat",
         "description": "<p>You gain a +10 to Acrobatics checks when benefitting from a running start.</p>",
         "cost": {
-          "activation": "free"
+          "activation": "free",
+          "powerPoints": 0,
+          "delay": null,
+          "priority": null
         },
         "type": "passive",
         "traits": [],
         "img": "icons/svg/explosion.svg",
         "range": {
           "target": "enemy",
-          "unit": "m"
-        }
+          "unit": "m",
+          "distance": 0
+        },
+        "variant": null,
+        "hidden": false
       }
     ],
     "slug": "acrobat",
@@ -41,7 +47,11 @@
       {
         "connected": [
           "hobby-gardener",
-          "parkour"
+          "parkour",
+          "drifter",
+          "root-2",
+          "powerlifter",
+          "cyclist"
         ],
         "config": {
           "alpha": null,
@@ -54,10 +64,16 @@
         },
         "hidden": false,
         "type": "normal",
-        "x": 51,
-        "y": 135
+        "x": 129,
+        "y": 38,
+        "tier": null
       }
-    ]
+    ],
+    "originSlug": null,
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": []
   },
   "_id": "MDkJ0KhnAvqw0v3J",
   "img": "systems/ptr2e/img/perk-icons/Exploration.svg",

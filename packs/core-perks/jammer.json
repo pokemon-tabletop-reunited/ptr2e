@@ -13,12 +13,17 @@
         "type": "generic",
         "range": {
           "target": "self",
-          "unit": "m"
+          "unit": "m",
+          "distance": 0
         },
         "cost": {
-          "activation": "free"
+          "activation": "free",
+          "powerPoints": 0,
+          "delay": null,
+          "priority": null
         },
-        "img": "icons/svg/explosion.svg"
+        "img": "icons/svg/explosion.svg",
+        "variant": null
       }
     ],
     "slug": "jammer",
@@ -36,7 +41,8 @@
       {
         "connected": [
           "magnetize",
-          "high-voltage"
+          "high-voltage",
+          "climatologist"
         ],
         "config": {
           "alpha": null,
@@ -49,10 +55,16 @@
         },
         "hidden": false,
         "type": "normal",
-        "x": 92,
-        "y": 29
+        "x": 27,
+        "y": 137,
+        "tier": null
       }
-    ]
+    ],
+    "originSlug": null,
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": []
   },
   "effects": [],
   "folder": "2JITUAwLwao03qoc"

@@ -13,15 +13,21 @@
         "slug": "psychoportation",
         "description": "<p>You gain the [Teleporter] trait. Additionally, you gain a Teleport Movement Allowance equal to that of your highest Primary Movement Score.</p>",
         "cost": {
-          "activation": "free"
+          "activation": "free",
+          "powerPoints": 0,
+          "delay": null,
+          "priority": null
         },
         "type": "passive",
         "traits": [],
         "img": "icons/svg/explosion.svg",
         "range": {
           "target": "enemy",
-          "unit": "m"
-        }
+          "unit": "m",
+          "distance": 0
+        },
+        "variant": null,
+        "hidden": false
       }
     ],
     "slug": "psychoportation",
@@ -35,7 +41,11 @@
         "connected": [
           "hypnotic-suggestion",
           "long-range-psychoportation",
-          "telekinetic-potential"
+          "telekinetic-potential",
+          "improved-teleportation-1-1",
+          "improved-overland-1-1",
+          "screen-setter",
+          "mindscramble"
         ],
         "config": {
           "alpha": null,
@@ -48,10 +58,16 @@
         },
         "hidden": false,
         "type": "normal",
-        "x": 105,
-        "y": 171
+        "x": 160,
+        "y": 124,
+        "tier": null
       }
-    ]
+    ],
+    "originSlug": null,
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": []
   },
   "_id": "362jA0jsfgTgKKiE",
   "img": "systems/ptr2e/img/svg/psychic_icon.svg",

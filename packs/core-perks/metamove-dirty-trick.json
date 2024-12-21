@@ -13,7 +13,9 @@
         "cost": {
           "activation": "free",
           "powerPoints": 4,
-          "trigger": "The user's declares an attack."
+          "trigger": "The user's declares an attack.",
+          "delay": null,
+          "priority": null
         },
         "type": "generic",
         "traits": [
@@ -23,8 +25,10 @@
         "img": "systems/ptr2e/img/icons/feat_icon.webp",
         "range": {
           "target": "creature",
-          "unit": "m"
-        }
+          "unit": "m",
+          "distance": 0
+        },
+        "variant": null
       }
     ],
     "slug": "metamove-dirty-trick",
@@ -39,8 +43,10 @@
     "nodes": [
       {
         "connected": [
+          "metamove-power-swap",
           "metamove-empower",
-          "metamove-power-swap"
+          "stat-iv-booster-1-13",
+          "improved-overland-1-16"
         ],
         "config": {
           "alpha": null,
@@ -53,10 +59,16 @@
         },
         "hidden": false,
         "type": "normal",
-        "x": 212,
-        "y": 102
+        "x": 122,
+        "y": 182,
+        "tier": null
       }
-    ]
+    ],
+    "originSlug": null,
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": []
   },
   "effects": []
 }

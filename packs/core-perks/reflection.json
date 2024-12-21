@@ -9,45 +9,7 @@
     "slug": "reflection",
     "description": "<p> If you suffer damage that would break your shields, you may spend 2PP to inflict a tick of damage on the creature responsible as a Free Action at [Interrupt 2].</p>",
     "traits": [],
-    "prerequisites": [
-      [
-        {
-          "or": [
-            {
-              "gte": [
-                "{actor|skills.sleight-of-hand.mod}",
-                30
-              ]
-            },
-            {
-              "gte": [
-                "{actor|skills.disguise.mod}",
-                35
-              ]
-            },
-            {
-              "gte": [
-                "{actor|skills.aura-sense.mod}",
-                40
-              ]
-            },
-            {
-              "gte": [
-                "{actor|skills.lift.mod}",
-                45
-              ]
-            },
-            {
-              "gte": [
-                "{actor|skills.intimidate.mod}",
-                50
-              ]
-            },
-            "item:move:bide"
-          ]
-        }
-      ]
-    ],
+    "prerequisites": [],
     "cost": 2,
     "_migration": {
       "version": null,
@@ -70,10 +32,16 @@
         },
         "hidden": false,
         "type": "normal",
-        "x": 52,
-        "y": 84
+        "x": 89,
+        "y": 96,
+        "tier": null
       }
-    ]
+    ],
+    "originSlug": null,
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": []
   },
   "effects": []
 }

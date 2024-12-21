@@ -58,15 +58,20 @@
         "slug": "trophy-bagger",
         "description": "<p>The user’s bonuses from Great Hunter increase to +20 when the target is Large or larger.</p><p>The user's Attacks deal more damage the larger the target is compared to the user.</p><blockquote> PowerPercentIncrease = max(0, 7.5 * (targetCatMod-userCatMod))</blockquote>",
         "cost": {
-          "activation": "free"
+          "activation": "free",
+          "powerPoints": 0,
+          "delay": null,
+          "priority": null
         },
         "type": "generic",
         "traits": [],
         "img": "icons/svg/explosion.svg",
         "range": {
           "target": "enemy",
-          "unit": "m"
-        }
+          "unit": "m",
+          "distance": 0
+        },
+        "variant": null
       }
     ],
     "slug": "trophy-bagger",
@@ -79,10 +84,7 @@
       {
         "connected": [
           "hobby-gardener",
-          "great-hunter",
-          "type-hunter",
-          "game-specialist",
-          "high-noon"
+          "great-hunter"
         ],
         "config": {
           "alpha": null,
@@ -95,10 +97,16 @@
         },
         "hidden": false,
         "type": "normal",
-        "x": 142,
-        "y": 168
+        "x": 41,
+        "y": 188,
+        "tier": null
       }
-    ]
+    ],
+    "originSlug": null,
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": []
   },
   "_id": "w7jJHaMJtSIg6FrQ",
   "img": "systems/ptr2e/img/perk-icons/Hunting.svg",

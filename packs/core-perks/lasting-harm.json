@@ -13,12 +13,18 @@
         "type": "passive",
         "range": {
           "target": "self",
-          "unit": "m"
+          "unit": "m",
+          "distance": 0
         },
         "cost": {
-          "activation": "free"
+          "activation": "free",
+          "powerPoints": 0,
+          "delay": null,
+          "priority": null
         },
-        "img": "icons/svg/explosion.svg"
+        "img": "icons/svg/explosion.svg",
+        "variant": null,
+        "hidden": false
       }
     ],
     "slug": "lasting-harm",
@@ -33,9 +39,13 @@
     "nodes": [
       {
         "connected": [
-          "sadism",
-          "cultivate-weakness",
-          "suspicious-minds"
+          "hexcraft",
+          "acceptance",
+          "potent-afflictions",
+          "suspicious-minds",
+          "logicians-wisdom",
+          "acute-affliction",
+          "cultivate-weakness"
         ],
         "config": {
           "alpha": null,
@@ -48,10 +58,16 @@
         },
         "hidden": false,
         "type": "normal",
-        "x": 173,
-        "y": 114
+        "x": 157,
+        "y": 74,
+        "tier": null
       }
-    ]
+    ],
+    "originSlug": null,
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": []
   },
   "effects": [],
   "folder": "a1w2zpzavg6qtJFn"

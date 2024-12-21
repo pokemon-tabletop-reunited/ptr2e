@@ -13,15 +13,21 @@
         "slug": "adhesive-digits",
         "description": "<p>You gain the [Wallclimber] trait.</p>",
         "cost": {
-          "activation": "free"
+          "activation": "free",
+          "powerPoints": 0,
+          "delay": null,
+          "priority": null
         },
         "type": "passive",
         "traits": [],
         "img": "icons/svg/explosion.svg",
         "range": {
           "target": "enemy",
-          "unit": "m"
-        }
+          "unit": "m",
+          "distance": 0
+        },
+        "variant": null,
+        "hidden": false
       }
     ],
     "slug": "adhesive-digits",
@@ -34,7 +40,11 @@
       {
         "connected": [
           "hivemark",
-          "silk-swing"
+          "silk-swing",
+          "improved-threaded-1",
+          "cyclist",
+          "improved-overland-1",
+          "improved-threaded-1-1"
         ],
         "config": {
           "alpha": null,
@@ -47,10 +57,16 @@
         },
         "hidden": false,
         "type": "normal",
-        "x": 48,
-        "y": 22
+        "x": 89,
+        "y": 32,
+        "tier": null
       }
-    ]
+    ],
+    "originSlug": null,
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": []
   },
   "_id": "SRCfAPJpN29pFcJe",
   "img": "systems/ptr2e/img/svg/bug_icon.svg",

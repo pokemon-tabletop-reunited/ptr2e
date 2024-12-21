@@ -17,13 +17,17 @@
         "cost": {
           "activation": "free",
           "powerPoints": 2,
-          "trigger": "The user enters Combat."
+          "trigger": "The user enters Combat.",
+          "delay": null,
+          "priority": null
         },
         "range": {
           "target": "self",
-          "unit": "m"
+          "unit": "m",
+          "distance": 0
         },
-        "img": "icons/svg/explosion.svg"
+        "img": "icons/svg/explosion.svg",
+        "variant": null
       }
     ],
     "slug": "skirmish",
@@ -39,8 +43,8 @@
       {
         "connected": [
           "quick-and-the-dead",
-          "game-specialist",
-          "hit-run"
+          "stat-iv-booster-1-7",
+          "improved-overland-1-9"
         ],
         "config": {
           "alpha": null,
@@ -53,10 +57,16 @@
         },
         "hidden": false,
         "type": "normal",
-        "x": 147,
-        "y": 160
+        "x": 65,
+        "y": 177,
+        "tier": null
       }
-    ]
+    ],
+    "originSlug": null,
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": []
   },
   "effects": []
 }

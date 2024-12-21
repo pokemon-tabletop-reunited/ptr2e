@@ -25,7 +25,9 @@
         "description": "<p>The target [Closed Heart] creature gains @Affliction[hyper-mode] 5.</p>",
         "cost": {
           "activation": "simple",
-          "powerPoints": 2
+          "powerPoints": 2,
+          "delay": null,
+          "priority": null
         },
         "range": {
           "target": "creature",
@@ -34,7 +36,8 @@
         },
         "type": "generic",
         "traits": [],
-        "img": "icons/svg/explosion.svg"
+        "img": "icons/svg/explosion.svg",
+        "variant": null
       }
     ],
     "slug": "fiendish-provocation",
@@ -45,6 +48,10 @@
     },
     "nodes": [
       {
+        "x": null,
+        "y": null,
+        "hidden": false,
+        "type": "normal",
         "connected": [
           "shadow-guide",
           "ultraviolet"
@@ -58,12 +65,14 @@
           "tint": "#ffffff",
           "scale": null
         },
-        "hidden": false,
-        "type": "normal",
-        "x": 92,
-        "y": 216
+        "tier": null
       }
-    ]
+    ],
+    "originSlug": null,
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": []
   },
   "_id": "bf8a76v0PxvOgJaF",
   "img": "systems/ptr2e/img/svg/shadow_icon.svg",

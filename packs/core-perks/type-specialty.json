@@ -11,15 +11,21 @@
         "slug": "type-specialty",
         "description": "<p>You gain +10 to social interaction Skill Tests when interacting with Pokemon of your preferred type. The cost on this scales with each additional type chosen.</p>",
         "cost": {
-          "activation": "free"
+          "activation": "free",
+          "powerPoints": 0,
+          "delay": null,
+          "priority": null
         },
         "type": "passive",
         "traits": [],
         "img": "icons/svg/explosion.svg",
         "range": {
           "target": "enemy",
-          "unit": "m"
-        }
+          "unit": "m",
+          "distance": 0
+        },
+        "variant": null,
+        "hidden": false
       }
     ],
     "slug": "type-specialty",
@@ -31,12 +37,10 @@
     "nodes": [
       {
         "connected": [
-          "type-desperation",
-          "type-embodiment-type",
-          "type-domain",
-          "type-tutoring",
-          "type-strategist",
-          "type-harmony"
+          "improved-overland-1-1",
+          "stat-iv-booster-1-1",
+          "type-harmony",
+          "type-embodiment-type"
         ],
         "config": {
           "alpha": null,
@@ -49,10 +53,16 @@
         },
         "hidden": false,
         "type": "normal",
-        "x": 160,
-        "y": 214
+        "x": 154,
+        "y": 100,
+        "tier": null
       }
-    ]
+    ],
+    "originSlug": null,
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": []
   },
   "_id": "7M9EE1mHIJeoAWhp",
   "img": "systems/ptr2e/img/perk-icons/Socialite.svg",

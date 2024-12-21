@@ -27,11 +27,14 @@
         },
         "cost": {
           "activation": "simple",
-          "powerPoints": 1
+          "powerPoints": 1,
+          "delay": null,
+          "priority": null
         },
         "description": "Effect: The target gains @Affliction[agile] 1.",
         "type": "generic",
-        "img": "icons/svg/explosion.svg"
+        "img": "icons/svg/explosion.svg",
+        "variant": null
       },
       {
         "name": "Agile! (Self)",
@@ -42,15 +45,19 @@
         ],
         "range": {
           "target": "self",
-          "unit": "m"
+          "unit": "m",
+          "distance": 0
         },
         "cost": {
           "activation": "simple",
-          "powerPoints": 1
+          "powerPoints": 1,
+          "delay": null,
+          "priority": null
         },
         "description": "Effect: The target gains @Affliction[agile] 2.",
         "type": "generic",
-        "img": "icons/svg/explosion.svg"
+        "img": "icons/svg/explosion.svg",
+        "variant": null
       }
     ],
     "slug": "agile-style",
@@ -64,9 +71,12 @@
     "nodes": [
       {
         "connected": [
-          "evasive-style",
-          "gambit-style",
-          "rapid-style"
+          "magic-armor-style",
+          "strong-style",
+          "stat-iv-booster-1-11",
+          "improved-flight-1-6",
+          "improved-swim-1-2",
+          "improved-overland-1-14"
         ],
         "config": {
           "alpha": null,
@@ -79,10 +89,16 @@
         },
         "hidden": false,
         "type": "normal",
-        "x": 38,
-        "y": 213
+        "x": 109,
+        "y": 136,
+        "tier": null
       }
-    ]
+    ],
+    "originSlug": null,
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": []
   },
   "_id": "9bYyVaMgkigTKOc7",
   "img": "systems/ptr2e/img/perk-icons/Orders_Training.svg",
