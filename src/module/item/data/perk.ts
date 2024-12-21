@@ -31,6 +31,7 @@ export default abstract class PerkSystem extends PerkExtension {
       ...super.defineSchema() as PerkSystemSchemaExtension,
 
       prerequisites: new PredicateField(),
+      autoUnlock: new PredicateField(),
       cost: new fields.NumberField({ required: true, initial: 1, label: "PTR2E.FIELDS.apCost.label", hint: "PTR2E.FIELDS.apCost.hint" }),
       originSlug: new SlugField({ required: true, nullable: true, initial: null }),
 
@@ -348,6 +349,7 @@ export default interface PerkSystem extends ModelPropsFromSchema<PerkSchema> {
 
 interface PerkSchema extends foundry.data.fields.DataSchema, PerkSystemSchemaExtension {
   prerequisites: PredicateField;
+  autoUnlock: PredicateField;
   cost: foundry.data.fields.NumberField<number, number, true, false, true>;
   originSlug: SlugField<string, string, true, true, true>;
   nodes: foundry.data.fields.ArrayField<

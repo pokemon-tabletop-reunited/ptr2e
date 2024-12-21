@@ -68,6 +68,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -138,6 +139,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -290,6 +292,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -387,6 +390,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -481,6 +485,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -649,6 +654,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -730,6 +736,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -829,6 +836,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -927,6 +935,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -1004,6 +1013,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -1099,6 +1109,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -1167,6 +1178,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -1244,6 +1256,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -1336,6 +1349,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -1424,6 +1438,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -1520,6 +1535,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -1624,6 +1640,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -1733,6 +1750,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -1833,6 +1851,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -1922,6 +1941,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -2017,6 +2037,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -2117,6 +2138,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -2190,6 +2212,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -2278,6 +2301,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -2350,6 +2374,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -2422,6 +2447,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -2517,6 +2543,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -2652,6 +2679,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -2739,6 +2767,7 @@ const data = [
               "version": null,
               "previous": null
           },
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -2811,6 +2840,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -2957,6 +2987,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -3047,6 +3078,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -3142,6 +3174,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -3231,6 +3264,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -3320,6 +3354,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -3463,6 +3498,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "global": true,
           "webs": []
@@ -3556,6 +3592,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -3622,6 +3659,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -3746,6 +3784,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -3840,6 +3879,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -3939,6 +3979,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -4030,6 +4071,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -4156,6 +4198,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -4249,6 +4292,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -4335,6 +4379,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -4434,6 +4479,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -4533,6 +4579,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -4600,6 +4647,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -4698,6 +4746,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -4798,6 +4847,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -4894,6 +4944,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -4989,6 +5040,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -5074,6 +5126,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -5145,6 +5198,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -5207,6 +5261,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -5306,6 +5361,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -5404,6 +5460,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -5497,6 +5554,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -5594,6 +5652,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -5662,6 +5721,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -5808,6 +5868,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -5912,6 +5973,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -6005,6 +6067,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -6128,6 +6191,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -6253,6 +6317,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -6360,6 +6425,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -6532,6 +6598,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -6604,6 +6671,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -6688,6 +6756,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -6781,6 +6850,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -6885,6 +6955,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -6977,6 +7048,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -7078,6 +7150,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -7223,6 +7296,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -7322,6 +7396,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -7418,6 +7493,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -7553,7 +7629,8 @@ const data = [
                       "trained-rider",
                       "improved-flight-1-1",
                       "draconic-presence",
-                      "stat-iv-booster-1-3"
+                      "stat-iv-booster-1-3",
+                      "stat-iv-booster-1-10"
                   ],
                   "config": {
                       "alpha": null,
@@ -7900,6 +7977,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "global": true,
           "webs": []
@@ -7969,7 +8047,7 @@ const data = [
           "systemId": "ptr2e",
           "systemVersion": "0.10.0-alpha.4.1.0",
           "createdTime": null,
-          "modifiedTime": 1734795734292,
+          "modifiedTime": 1734798864349,
           "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
           "compendiumSource": null,
           "duplicateSource": null
@@ -8017,6 +8095,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -8110,6 +8189,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -8217,6 +8297,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -8345,6 +8426,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -8414,6 +8496,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -8557,6 +8640,7 @@ const data = [
               "version": null,
               "previous": null
           },
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -8645,6 +8729,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -8730,6 +8815,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -8827,6 +8913,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -8901,6 +8988,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -8968,6 +9056,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -9063,6 +9152,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -9150,6 +9240,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -9313,6 +9404,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "global": true,
           "webs": []
@@ -9453,6 +9545,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -9613,6 +9706,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -9686,6 +9780,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -9773,6 +9868,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -9840,6 +9936,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -9910,6 +10007,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -9999,6 +10097,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -10099,6 +10198,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -10195,6 +10295,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -10296,6 +10397,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -10365,6 +10467,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -10512,6 +10615,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -10606,6 +10710,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -10675,6 +10780,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -10857,6 +10963,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -10924,6 +11031,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -11016,6 +11124,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -11167,6 +11276,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -11263,6 +11373,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -11362,6 +11473,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -11457,6 +11569,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -11549,6 +11662,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -11646,6 +11760,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -11738,6 +11853,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -11837,6 +11953,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -11907,6 +12024,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -12002,6 +12120,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -12195,6 +12314,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -12335,6 +12455,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -12425,6 +12546,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -12543,6 +12665,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "global": true,
           "webs": []
@@ -12635,6 +12758,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -12713,6 +12837,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -12788,6 +12913,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -12876,6 +13002,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -12969,6 +13096,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -13132,6 +13260,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "global": true,
           "webs": []
@@ -13325,6 +13454,7 @@ const data = [
               "version": null,
               "previous": null
           },
+          "autoUnlock": [],
           "originSlug": null,
           "global": true,
           "webs": []
@@ -13414,6 +13544,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -13510,6 +13641,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -13600,6 +13732,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -13697,6 +13830,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -13799,6 +13933,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -13972,6 +14107,7 @@ const data = [
                   "type": "normal"
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "global": true,
           "webs": []
@@ -14040,6 +14176,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -14187,6 +14324,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -14315,6 +14453,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -14408,6 +14547,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -14503,6 +14643,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -14648,6 +14789,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -14777,6 +14919,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -14844,6 +14987,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -14908,6 +15052,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -15001,6 +15146,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -15153,6 +15299,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -15232,6 +15379,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -15328,6 +15476,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -15429,6 +15578,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -15523,6 +15673,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -15593,6 +15744,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -15681,6 +15833,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -15756,6 +15909,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -15826,6 +15980,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -15970,6 +16125,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -16036,6 +16192,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -16116,6 +16273,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "global": true,
           "webs": []
@@ -16252,6 +16410,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -16329,6 +16488,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -16402,6 +16562,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -16472,6 +16633,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -16539,6 +16701,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -16682,6 +16845,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -16816,6 +16980,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -16887,6 +17052,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -17007,6 +17173,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -17095,6 +17262,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -17188,6 +17356,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -17254,6 +17423,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -17323,6 +17493,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -17446,6 +17617,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -17537,6 +17709,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -17624,6 +17797,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -17730,6 +17904,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -17822,6 +17997,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -17929,6 +18105,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -18069,6 +18246,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -18231,6 +18409,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -18303,6 +18482,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -18375,6 +18555,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -18467,6 +18648,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -18541,6 +18723,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -18644,6 +18827,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -18745,6 +18929,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -18840,6 +19025,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -18916,6 +19102,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -19006,6 +19193,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -19106,6 +19294,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -19203,6 +19392,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -19325,6 +19515,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -19393,6 +19584,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -19549,6 +19741,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -19673,6 +19866,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -19765,6 +19959,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -19891,6 +20086,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -20023,6 +20219,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -20090,6 +20287,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -20165,6 +20363,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -20259,6 +20458,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -20427,6 +20627,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -20524,6 +20725,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -20670,6 +20872,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -20761,6 +20964,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -20857,6 +21061,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -20934,6 +21139,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -21021,6 +21227,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -21091,6 +21298,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -21251,6 +21459,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -21318,6 +21527,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -21387,6 +21597,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -21479,6 +21690,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -21574,6 +21786,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -21699,6 +21912,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -21960,7 +22174,8 @@ const data = [
                       "desperate-strike",
                       "guard-up",
                       "trained-rider",
-                      "stat-iv-booster-1-5"
+                      "stat-iv-booster-1-5",
+                      "stat-iv-booster-1-10"
                   ],
                   "config": {
                       "alpha": null,
@@ -21974,6 +22189,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -22043,7 +22259,7 @@ const data = [
           "systemId": "ptr2e",
           "systemVersion": "0.10.0-alpha.4.1.0",
           "createdTime": null,
-          "modifiedTime": 1734794551415,
+          "modifiedTime": 1734798859870,
           "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
           "compendiumSource": null,
           "duplicateSource": null
@@ -22114,6 +22330,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -22257,6 +22474,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -22408,6 +22626,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -22548,6 +22767,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -22642,6 +22862,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -22737,6 +22958,7 @@ const data = [
           ],
           "variant": "multi",
           "mode": "shared",
+          "autoUnlock": [],
           "originSlug": null,
           "global": true,
           "webs": []
@@ -22807,6 +23029,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -22929,6 +23152,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -23057,6 +23281,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -23181,6 +23406,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -23286,6 +23512,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -23382,6 +23609,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -23525,6 +23753,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -23685,6 +23914,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -23787,6 +24017,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -23909,6 +24140,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -24005,6 +24237,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -24101,6 +24334,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -24257,6 +24491,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -24349,6 +24584,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -24438,6 +24674,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -24528,6 +24765,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -24613,6 +24851,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -24685,6 +24924,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -24815,6 +25055,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -24909,6 +25150,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -25000,6 +25242,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -25154,6 +25397,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -25248,6 +25492,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -25341,6 +25586,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -25478,6 +25724,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -25577,6 +25824,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -25706,6 +25954,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -25799,6 +26048,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -25893,6 +26143,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -25989,6 +26240,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -26084,6 +26336,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -26213,6 +26466,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -26316,6 +26570,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -26387,6 +26642,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -26541,6 +26797,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -26630,6 +26887,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -26720,6 +26978,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -26869,6 +27128,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -26938,6 +27198,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -27102,6 +27363,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -27193,6 +27455,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -27290,6 +27553,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -27388,6 +27652,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -27537,6 +27802,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -27605,6 +27871,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -27701,6 +27968,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -27801,6 +28069,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -27894,6 +28163,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -28053,6 +28323,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -28130,6 +28401,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -28229,6 +28501,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -28305,6 +28578,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -28396,6 +28670,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -28465,6 +28740,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -28555,7 +28831,8 @@ const data = [
                       "lean-in",
                       "cyclist",
                       "improved-overland-1-7",
-                      "stat-iv-booster-1-5"
+                      "stat-iv-booster-1-5",
+                      "stat-iv-booster-1-10"
                   ],
                   "config": {
                       "alpha": null,
@@ -28569,6 +28846,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -28589,7 +28867,7 @@ const data = [
           "systemId": "ptr2e",
           "systemVersion": "0.10.0-alpha.4.1.0",
           "createdTime": null,
-          "modifiedTime": 1734794625091,
+          "modifiedTime": 1734798863414,
           "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
           "compendiumSource": null,
           "duplicateSource": null
@@ -28699,6 +28977,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -28776,6 +29055,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -28900,6 +29180,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -28968,6 +29249,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -29058,6 +29340,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -29195,6 +29478,7 @@ const data = [
                   "type": "normal"
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "global": true,
           "webs": []
@@ -29317,6 +29601,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -29411,6 +29696,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -29501,6 +29787,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -29597,6 +29884,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -29718,6 +30006,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -29806,6 +30095,9 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [
+              "trait:heater"
+          ],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -29878,7 +30170,7 @@ const data = [
           "systemId": "ptr2e",
           "systemVersion": "0.10.0-alpha.4.1.0",
           "createdTime": null,
-          "modifiedTime": 1734785285237,
+          "modifiedTime": 1734798044057,
           "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
           "compendiumSource": null,
           "duplicateSource": null
@@ -29975,6 +30267,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -30096,6 +30389,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -30197,6 +30491,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -30330,6 +30625,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -30398,6 +30694,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -30477,6 +30774,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -30617,6 +30915,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -30815,7 +31114,8 @@ const data = [
                   "connected": [
                       "improved-overland-1-7",
                       "trained-rider",
-                      "berserker"
+                      "berserker",
+                      "stat-iv-booster-1-10"
                   ],
                   "config": {
                       "alpha": null,
@@ -30935,7 +31235,11 @@ const data = [
                   "y": 76,
                   "connected": [
                       "chansey-medicine",
-                      "guard-up"
+                      "guard-up",
+                      "berserker",
+                      "stat-iv-booster-1-5",
+                      "trained-rider",
+                      "improved-overland-1-2"
                   ],
                   "config": {
                       "alpha": null,
@@ -31031,6 +31335,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "global": true,
           "webs": []
@@ -31048,7 +31353,7 @@ const data = [
           "systemId": "ptr2e",
           "systemVersion": "0.10.0-alpha.4.1.0",
           "createdTime": null,
-          "modifiedTime": 1734795732362,
+          "modifiedTime": 1734798864349,
           "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
           "compendiumSource": null,
           "duplicateSource": null
@@ -31101,6 +31406,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -31192,6 +31498,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -31284,6 +31591,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -31367,6 +31675,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -31465,6 +31774,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -31577,6 +31887,7 @@ const data = [
           ],
           "global": false,
           "slug": "dizzy-daft",
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null
@@ -31676,6 +31987,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -31750,6 +32062,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -31882,6 +32195,7 @@ const data = [
                   "type": "normal"
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "global": true,
           "webs": []
@@ -31975,6 +32289,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -32229,6 +32544,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "global": true,
           "webs": []
@@ -32376,6 +32692,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -32509,6 +32826,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -32603,6 +32921,7 @@ const data = [
                   "tier": null
               }
           ],
+          "autoUnlock": [],
           "originSlug": null,
           "variant": null,
           "mode": null,

@@ -421,6 +421,7 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
             [PerkState.available]: "available",
             [PerkState.purchased]: "purchased",
             [PerkState.invalid]: "invalid",
+            [PerkState.autoUnlocked]: "auto-unlocked",
           }[node.state];
           const classes: string[] = [];
           if (node === this.connectionNode) classes.push("selected");

@@ -12,15 +12,21 @@
         "slug": "stat-iv-booster-1",
         "description": "<p>Increase one <Stat>'s IV by 5.</p>",
         "cost": {
-          "activation": "free"
+          "activation": "free",
+          "powerPoints": 0,
+          "delay": null,
+          "priority": null
         },
         "type": "passive",
         "traits": [],
         "img": "icons/svg/explosion.svg",
         "range": {
           "target": "enemy",
-          "unit": "m"
-        }
+          "unit": "m",
+          "distance": 0
+        },
+        "variant": null,
+        "hidden": false
       }
     ],
     "slug": "stat-iv-booster-1",
@@ -93,9 +99,7 @@
           "spectral-stalker",
           "walking-dead",
           "telekinetic-potential",
-          "improved-telekinesis-1-1",
-          "root-3",
-          "root-4"
+          "improved-telekinesis-1-1"
         ],
         "config": {
           "alpha": null,
@@ -163,7 +167,8 @@
         "connected": [
           "improved-overland-1-7",
           "trained-rider",
-          "berserker"
+          "berserker",
+          "stat-iv-booster-1-10"
         ],
         "config": {
           "alpha": null,
@@ -283,7 +288,11 @@
         "y": 76,
         "connected": [
           "chansey-medicine",
-          "guard-up"
+          "guard-up",
+          "berserker",
+          "stat-iv-booster-1-5",
+          "trained-rider",
+          "improved-overland-1-2"
         ],
         "config": {
           "alpha": null,
@@ -379,6 +388,8 @@
         "tier": null
       }
     ],
+    "autoUnlock": [],
+    "originSlug": null,
     "global": true,
     "webs": []
   },

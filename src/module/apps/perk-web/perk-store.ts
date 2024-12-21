@@ -9,7 +9,8 @@ export const PerkState = {
   connected: 1,
   available: 2,
   purchased: 3,
-  invalid: 4
+  invalid: 4,
+  autoUnlocked: 5
 } as const;
 
 export type PerkPurchaseState = ValueOf<typeof PerkState>;
@@ -246,7 +247,9 @@ class PerkStore extends Collection<PerkNode> {
     for (const node of purchasedNodes) {
       if (visited.has(node.slug)) continue;
       visited.add(node.slug);
-      node.state = PerkState.invalid
+
+      const autoUnlock = this.isAutoPurchased({ node, actor });
+      node.state = autoUnlock ? PerkState.purchased : PerkState.invalid
     }
 
     // If no roots are purchased, all roots are available for free
@@ -330,17 +333,45 @@ class PerkStore extends Collection<PerkNode> {
               }
             }
             else {
-              connectedNode.state = this.isAvailableOrConnected({
-                node: connectedNode,
-                apAvailable,
-                actor,
-              });
+              const autoPurchase = this.isAutoPurchased({ node: connectedNode, actor });
+              if(autoPurchase) {
+                connectedNode.state = PerkState.autoUnlocked;
+                this.updateConnections({ purchasedPerks: [connectedNode], visited, apAvailable, currentTier, highestTier, actor });
+              }
+              else {
+                connectedNode.state = this.isAvailableOrConnected({
+                  node: connectedNode,
+                  apAvailable,
+                  actor,
+                });
+              }
             }
           }
         }
         visited.add(connected);
       }
     }
+  }
+
+  isAutoPurchased({
+    node,
+    actor
+  }: {
+    node: PerkNode,
+    actor: Maybe<ActorPTR2e>
+  }) {
+    if(!actor) return false;
+
+    const predicate = new Predicate(SummonStatistic.resolveValue(
+      node.perk.system.autoUnlock,
+      node.perk.system.autoUnlock,
+      { actor, item: node.perk },
+      { evaluate: true, resolvables: { actor, item: node.perk } }
+    ) as unknown as Predicate);
+
+    if(predicate.length === 0) return false;
+
+    return predicate.test(actor.getRollOptions());
   }
 
   isAvailableOrConnected({

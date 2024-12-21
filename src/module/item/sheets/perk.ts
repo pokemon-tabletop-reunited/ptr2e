@@ -88,6 +88,7 @@ export default class PerkSheet extends ItemSheetPTR2e<PerkPTR2e["system"]> {
       [key: string]: unknown;
       system?: {
         prerequisites?: string | [];
+        autoUnlock?: string | []
       }
     }
 
@@ -108,6 +109,23 @@ export default class PerkSheet extends ItemSheetPTR2e<PerkPTR2e["system"]> {
           }
         }
       } else data.system.prerequisites = [];
+
+      const autoUnlock = data.system.autoUnlock;
+      if(typeof autoUnlock === "string") {
+        if(autoUnlock.trim() === "") delete data.system.autoUnlock;
+        else {
+          try {
+            data.system.autoUnlock = JSON.parse(autoUnlock);
+          } catch (error) {
+            if (error instanceof Error) {
+              ui.notifications.error(
+                game.i18n.format("PTR2E.EffectSheet.ChangeEditor.Errors.ChangeSyntax", { message: error.message }),
+              );
+              throw error; // prevent update, to give the user a chance to correct, and prevent bad data
+            }
+          }
+        }
+      } else data.system.autoUnlock = [];
     }
 
     if (
