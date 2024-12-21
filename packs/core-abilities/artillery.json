@@ -6,6 +6,24 @@
     "actions": [
       {
         "traits": [],
+        "name": "Artillery (Move Change)",
+        "slug": "artillery-move-change",
+        "type": "generic",
+        "cost": {
+          "activation": "free",
+          "powerPoints": 1,
+          "delay": null,
+          "priority": null
+        },
+        "range": {
+          "target": "self",
+          "distance": 0,
+          "unit": "m"
+        },
+        "description": "<p>Effect: The user's next declared [Pulse], [Missile], and [Explode] Attack has the following changes applied based on its Targeting until it is resolved:<ul><li><q>Creature</q><ul><li>Accuracy -10</li><li>Range +150% (min. +2m)</li></ul></li><li><q>Blast</q><ul><li>Accuracy -20</li><li>Range +200% (min. +3m)</li><li>[Blast X+1]</li></ul></li><li><q>Cone</q><ul><li>Accuracy -10</li><li>Range +150% (min. +1m)</li></ul></li><li><q>Line</q><ul><li>Accuracy -15</li><li>Range +150% (min. +2m)</li></ul></li><li><q>Wide Line</q><ul><li>Accuracy -20</li><li>Range +150% (min. +2m)</li></ul></li><li><q>Emanation</q><ul><li>Accuracy -15</li><li>Range +100% (min. +1m)</li></ul></li></ul></p>"
+      },
+      {
+        "traits": [],
         "name": "Artillery",
         "slug": "artillery",
         "type": "passive",
@@ -20,10 +38,10 @@
           "distance": 0,
           "unit": "m"
         },
-        "description": "<p>Effect: The user's [Pulse] and [Missile] attacks lose -15 Accuracy and their Range increases by 150%.</p>"
+        "description": "<p>Effect: The user's [Pulse], [Missile], and [Explode] attacks have +15% Power.</p>"
       }
     ],
-    "description": "<p>Effect: The user's [Pulse] and [Missile] attacks lose -15 Accuracy and their Range increases by 150%.</p>",
+    "description": "<p>Effect: The user's next declared [Pulse], [Missile], and [Explode] Attack has the following changes applied based on its Targeting until it is resolved:<ul><li><q>Creature</q><ul><li>Accuracy -10</li><li>Range +150% (min. +2m)</li></ul></li><li><q>Blast</q><ul><li>Accuracy -20</li><li>Range +200% (min. +3m)</li><li>[Blast X+1]</li></ul></li><li><q>Cone</q><ul><li>Accuracy -10</li><li>Range +150% (min. +1m)</li></ul></li><li><q>Line</q><ul><li>Accuracy -15</li><li>Range +150% (min. +2m)</li></ul></li><li><q>Wide Line</q><ul><li>Accuracy -20</li><li>Range +150% (min. +2m)</li></ul></li><li><q>Emanation</q><ul><li>Accuracy -15</li><li>Range +100% (min. +1m)</li></ul></li></ul></p><p>Passive: The user's [Pulse], [Missile], and [Explode] attacks have +15% Power.</p>",
     "traits": [],
     "slug": null,
     "container": null

@@ -1,17 +1,18 @@
 {
   "name": "Milcery-Class Curry",
   "type": "perk",
+  "folder": "zrVtKATNxzLNxTUZ",
   "system": {
     "prerequisites": [
-      "Husbandry 40",
-      "Wobbufet-Class Curry"
+      {
+        "gte": [
+          "{actor|skills.husbandry.mod}",
+          40
+        ]
+      },
+      "item:perk:wobbufet-class-curry"
     ],
     "cost": 3,
-    "design": {
-      "arena": "social",
-      "approach": "finesse",
-      "archetype": "Chef"
-    },
     "description": "<p>You are able to make Milcery-class Curries as a Camp Action. One of these Curries restores 75% of the party's max HP. After making a Milcery-class Curry, roll a d100. On a 1-15, you attract a non-hostile Pokemon from the local environment to investigate the camp.</p>",
     "actions": [
       {
@@ -19,43 +20,56 @@
         "slug": "milcery-class-curry",
         "description": "<p>You are able to make Milcery-class Curries as a Camp Action. One of these Curries restores 75% of the party's max HP. After making a Milcery-class Curry, roll a d100. On a 1-15, you attract a non-hostile Pokemon from the local environment to investigate the camp.</p>",
         "cost": {
-          "activation": "complex"
+          "activation": "complex",
+          "powerPoints": 0,
+          "delay": null,
+          "priority": null
         },
         "type": "camping",
         "traits": [],
         "img": "icons/svg/explosion.svg",
         "range": {
           "target": "enemy",
-          "unit": "m"
-        }
+          "unit": "m",
+          "distance": 0
+        },
+        "variant": null
       }
     ],
     "slug": "milcery-class-curry",
     "traits": [],
-    "node": {
-      "i": -56,
-      "j": 23,
-      "connected": [
-        "wobbufet-class-curry",
-        "copperajah-class-curry",
-        "charizard-class-curry"
-      ],
-      "config": {
-        "alpha": null,
-        "backgroundColor": "#ffff80",
-        "borderColor": null,
-        "borderWidth": null,
-        "texture": "systems/ptr2e/img/perk-icons/Chef.svg",
-        "tint": "#161616",
-        "scale": null
-      },
-      "hidden": false,
-      "type": "normal"
-    },
     "_migration": {
       "version": null,
       "previous": null
-    }
+    },
+    "nodes": [
+      {
+        "connected": [
+          "koffing-class-curry",
+          "wobbufet-class-curry"
+        ],
+        "config": {
+          "alpha": null,
+          "backgroundColor": "#ffff80",
+          "borderColor": null,
+          "borderWidth": null,
+          "texture": "systems/ptr2e/img/perk-icons/Chef.svg",
+          "tint": "#161616",
+          "scale": null
+        },
+        "hidden": false,
+        "type": "normal",
+        "x": 187,
+        "y": 125,
+        "tier": null
+      }
+    ],
+    "autoUnlock": [],
+    "originSlug": null,
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": []
   },
   "_id": "lH0NeWlnJsfFdTvf",
   "img": "systems/ptr2e/img/perk-icons/Chef.svg",

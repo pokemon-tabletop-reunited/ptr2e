@@ -3,14 +3,14 @@
   "type": "perk",
   "system": {
     "prerequisites": [
-      "Swim 30"
+      {
+        "gte": [
+          "{actor|skills.swim.mod}",
+          30
+        ]
+      }
     ],
     "cost": 1,
-    "design": {
-      "arena": "physical",
-      "approach": "resilience",
-      "archetype": "Athleticism"
-    },
     "description": "<p>You are able to hold your breath for longer, and manage your air more carefully while diving. Increase the size of your Breath clock while swimming by 2 Spans.</p>",
     "actions": [
       {
@@ -18,44 +18,62 @@
         "slug": "strong-swimmer",
         "description": "<p>You are able to hold your breath for longer, and manage your air more carefully while diving. Increase the size of your Breath clock while swimming by 2 Spans.</p>",
         "cost": {
-          "activation": "free"
+          "activation": "free",
+          "powerPoints": 0,
+          "delay": null,
+          "priority": null
         },
         "type": "passive",
         "traits": [],
         "img": "icons/svg/explosion.svg",
         "range": {
           "target": "enemy",
-          "unit": "m"
-        }
+          "unit": "m",
+          "distance": 0
+        },
+        "variant": null,
+        "hidden": false
       }
     ],
     "slug": "strong-swimmer",
     "traits": [],
-    "node": {
-      "i": -42,
-      "j": -55,
-      "connected": [
-        "improved-swim-1",
-        "swimming-lessons"
-      ],
-      "config": {
-        "alpha": null,
-        "backgroundColor": null,
-        "borderColor": null,
-        "borderWidth": null,
-        "texture": "systems/ptr2e/img/svg/water_icon.svg",
-        "tint": null,
-        "scale": null
-      },
-      "hidden": false,
-      "type": "normal"
-    },
     "_migration": {
       "version": null,
       "previous": null
-    }
+    },
+    "nodes": [
+      {
+        "connected": [
+          "swimming-lessons",
+          "fisheye",
+          "improved-swim-1",
+          "overboard"
+        ],
+        "config": {
+          "alpha": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "borderWidth": null,
+          "texture": "systems/ptr2e/img/svg/water_icon.svg",
+          "tint": null,
+          "scale": null
+        },
+        "hidden": false,
+        "type": "normal",
+        "x": 151,
+        "y": 19,
+        "tier": null
+      }
+    ],
+    "autoUnlock": [],
+    "originSlug": null,
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": []
   },
   "_id": "8biTrHnT6nNeO3in",
   "img": "systems/ptr2e/img/svg/water_icon.svg",
-  "effects": []
+  "effects": [],
+  "folder": "1osM6JY51pvLkJ3Q"
 }

@@ -3,14 +3,9 @@
   "type": "perk",
   "system": {
     "prerequisites": [
-      "[Psychic]"
+      "trait:psychic"
     ],
     "cost": 2,
-    "design": {
-      "arena": "mental",
-      "approach": "power",
-      "archetype": "[Psychic]"
-    },
     "description": "<p>You gain the [Teleporter] trait. Additionally, you gain a Teleport Movement Allowance equal to that of your highest Primary Movement Score.</p>",
     "actions": [
       {
@@ -18,46 +13,67 @@
         "slug": "psychoportation",
         "description": "<p>You gain the [Teleporter] trait. Additionally, you gain a Teleport Movement Allowance equal to that of your highest Primary Movement Score.</p>",
         "cost": {
-          "activation": "free"
+          "activation": "free",
+          "powerPoints": 0,
+          "delay": null,
+          "priority": null
         },
         "type": "passive",
         "traits": [],
         "img": "icons/svg/explosion.svg",
         "range": {
           "target": "enemy",
-          "unit": "m"
-        }
+          "unit": "m",
+          "distance": 0
+        },
+        "variant": null,
+        "hidden": false
       }
     ],
     "slug": "psychoportation",
     "traits": [],
-    "node": {
-      "i": -106,
-      "j": 46,
-      "connected": [
-        "improved-teleportation-1",
-        "telekinetic-potential",
-        "long-range-psychoportation",
-        "improved-flight-1"
-      ],
-      "config": {
-        "alpha": null,
-        "backgroundColor": null,
-        "borderColor": null,
-        "borderWidth": null,
-        "texture": "systems/ptr2e/img/svg/psychic_icon.svg",
-        "tint": null,
-        "scale": null
-      },
-      "hidden": false,
-      "type": "normal"
-    },
     "_migration": {
       "version": null,
       "previous": null
-    }
+    },
+    "nodes": [
+      {
+        "connected": [
+          "hypnotic-suggestion",
+          "long-range-psychoportation",
+          "telekinetic-potential",
+          "improved-teleportation-1-1",
+          "improved-overland-1-1",
+          "screen-setter",
+          "mindscramble"
+        ],
+        "config": {
+          "alpha": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "borderWidth": null,
+          "texture": "systems/ptr2e/img/svg/psychic_icon.svg",
+          "tint": null,
+          "scale": null
+        },
+        "hidden": false,
+        "type": "normal",
+        "x": 160,
+        "y": 124,
+        "tier": null
+      }
+    ],
+    "autoUnlock": [
+      "trait:teleporter"
+    ],
+    "originSlug": null,
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": []
   },
   "_id": "362jA0jsfgTgKKiE",
   "img": "systems/ptr2e/img/svg/psychic_icon.svg",
-  "effects": []
+  "effects": [],
+  "folder": "F4b52L00KrAtdPu5"
 }

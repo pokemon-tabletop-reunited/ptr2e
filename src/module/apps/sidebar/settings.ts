@@ -1,3 +1,5 @@
+import { GithubSheet } from "../github.ts";
+
 export class SettingsSidebarPTR2e extends Settings {
   static override get defaultOptions() {
     return fu.mergeObject(super.defaultOptions, {
@@ -12,6 +14,7 @@ export class SettingsSidebarPTR2e extends Settings {
     switch (button.dataset.action) {
       case "tutor-list": return void game.ptr.tutorList.render({force: true, actor: null});
       case "compendium-browser": return void game.ptr.compendiumBrowser.render(true);
+      case "github-app": return void new GithubSheet().render(true);
     }
 
     return super._onSettingsButton(event);

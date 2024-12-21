@@ -1,5 +1,5 @@
 {
-  "folder": "Et2u8UoXSe2a17oq",
+  "folder": "zrVtKATNxzLNxTUX",
   "name": "Metamove: Dirty Trick",
   "type": "perk",
   "_id": "7jgu6qfPzvZDS5lZ",
@@ -13,7 +13,9 @@
         "cost": {
           "activation": "free",
           "powerPoints": 4,
-          "trigger": "The user's declares an attack."
+          "trigger": "The user's declares an attack.",
+          "delay": null,
+          "priority": null
         },
         "type": "generic",
         "traits": [
@@ -23,8 +25,10 @@
         "img": "systems/ptr2e/img/icons/feat_icon.webp",
         "range": {
           "target": "creature",
-          "unit": "m"
-        }
+          "unit": "m",
+          "distance": 0
+        },
+        "variant": null
       }
     ],
     "slug": "metamove-dirty-trick",
@@ -32,32 +36,40 @@
     "traits": [],
     "prerequisites": [],
     "cost": 1,
-    "design": {
-      "arena": "physical",
-      "approach": "finesse",
-      "archetype": "Metamove"
+    "_migration": {
+      "version": null,
+      "previous": null
     },
-    "node": {
-      "i": 32,
-      "j": -3,
-      "connected": [
-        "strong-style",
-        "metamove-bullseye",
-        "incognito",
-        "run-down"
-      ],
-      "config": {
-        "alpha": null,
-        "backgroundColor": "#8000ff",
-        "borderColor": null,
-        "borderWidth": null,
-        "texture": "systems/ptr2e/img/perk-icons/Arcana.svg",
-        "tint": null,
-        "scale": null
-      },
-      "hidden": false,
-      "type": "normal"
-    }
+    "nodes": [
+      {
+        "connected": [
+          "metamove-power-swap",
+          "metamove-empower",
+          "stat-iv-booster-1-13",
+          "improved-overland-1-16"
+        ],
+        "config": {
+          "alpha": null,
+          "backgroundColor": "#8000ff",
+          "borderColor": null,
+          "borderWidth": null,
+          "texture": "systems/ptr2e/img/perk-icons/Arcana.svg",
+          "tint": null,
+          "scale": null
+        },
+        "hidden": false,
+        "type": "normal",
+        "x": 122,
+        "y": 182,
+        "tier": null
+      }
+    ],
+    "autoUnlock": [],
+    "originSlug": null,
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": []
   },
   "effects": []
 }

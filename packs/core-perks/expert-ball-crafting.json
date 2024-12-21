@@ -1,17 +1,18 @@
 {
   "name": "Expert Ball Crafting",
   "type": "perk",
+  "folder": "CpqiTFuJPCaphgZU",
   "system": {
     "prerequisites": [
-      "Electronics 70",
-      "Advanced Ball Crafting"
+      {
+        "gte": [
+          "{actor|skills.electronics.mod}",
+          70
+        ]
+      },
+      "item:perk:advanced-ball-crafting"
     ],
     "cost": 2,
-    "design": {
-      "arena": "mental",
-      "approach": "resilience",
-      "archetype": "Crafting"
-    },
     "description": "<p>You learn the Ultra Ball recipe.</p>",
     "actions": [
       {
@@ -19,45 +20,59 @@
         "slug": "expert-ball-crafting",
         "description": "<p>You learn the Ultra Ball recipe.</p>",
         "cost": {
-          "activation": "complex"
+          "activation": "complex",
+          "powerPoints": 0,
+          "delay": null,
+          "priority": null
         },
         "type": "camping",
         "traits": [],
         "img": "icons/svg/explosion.svg",
         "range": {
           "target": "enemy",
-          "unit": "m"
-        }
+          "unit": "m",
+          "distance": 0
+        },
+        "variant": null
       }
     ],
     "slug": "expert-ball-crafting",
     "traits": [],
-    "node": {
-      "i": -54,
-      "j": 42,
-      "connected": [
-        "dimensional-balls",
-        "weighted-ball-expertise",
-        "type-ball-specs",
-        "hunting-ball-expertise",
-        "weather-capture-specs"
-      ],
-      "config": {
-        "alpha": null,
-        "backgroundColor": null,
-        "borderColor": null,
-        "borderWidth": null,
-        "texture": "systems/ptr2e/img/perk-icons/Crafting.svg",
-        "tint": "#f4f4f0",
-        "scale": null
-      },
-      "hidden": false,
-      "type": "normal"
-    },
     "_migration": {
       "version": null,
       "previous": null
-    }
+    },
+    "nodes": [
+      {
+        "connected": [
+          "dimensional-balls",
+          "weighted-ball-expertise",
+          "type-ball-specs",
+          "hunting-ball-expertise",
+          "weather-capture-specs"
+        ],
+        "config": {
+          "alpha": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "borderWidth": null,
+          "texture": "systems/ptr2e/img/perk-icons/Crafting.svg",
+          "tint": "#f4f4f0",
+          "scale": null
+        },
+        "hidden": false,
+        "type": "normal",
+        "x": null,
+        "y": null,
+        "tier": null
+      }
+    ],
+    "autoUnlock": [],
+    "originSlug": null,
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": []
   },
   "_id": "MxXMqYFlUWVnNouK",
   "img": "systems/ptr2e/img/perk-icons/Crafting.svg",

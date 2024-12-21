@@ -1,5 +1,5 @@
 {
-  "folder": "Et2u8UoXSe2a17oq",
+  "folder": "JZrGRskscJOkkPWA",
   "name": "Magic Armor Style",
   "type": "perk",
   "_id": "tXq3fwEuJwbnZk9m",
@@ -20,12 +20,15 @@
         },
         "cost": {
           "activation": "simple",
-          "powerPoints": 3
+          "powerPoints": 3,
+          "delay": null,
+          "priority": null
         },
         "description": "Effect: The target may use SPDEF in place of their SPATK when using a Special-Category Attack for 1 Activation.",
-        "type": "generic"
+        "type": "generic",
+        "img": "icons/svg/explosion.svg",
+        "variant": null
       },
-
       {
         "name": "Magic Armor! (Self)",
         "slug": "magic-armor-self",
@@ -35,67 +38,67 @@
         ],
         "range": {
           "target": "self",
-          "distance": 0,
-          "unit": "m"
+          "unit": "m",
+          "distance": 0
         },
         "cost": {
           "activation": "simple",
-          "powerPoints": 3
+          "powerPoints": 3,
+          "delay": null,
+          "priority": null
         },
         "description": "Effect: The user may use SPDEF in place of their SPATK when using a Special-Category Attack until the end of their next Activation.",
-        "type": "generic"
+        "type": "generic",
+        "img": "icons/svg/explosion.svg",
+        "variant": null
       }
     ],
-    "slug": null,
+    "slug": "magic-armor-style",
     "description": "<p>Simple Action, 2 PP cost. Target self or allied creature. The affected creature may use SPDEF in place of their SPATK when using a Special-Category Attack until the end of their next full Activation.</p>",
     "traits": [],
     "prerequisites": [
-      "Leadership 45"
+      {
+        "gte": [
+          "{actor|skills.leadership.mod}",
+          45
+        ]
+      }
     ],
     "cost": 2,
-    "design": {
-      "arena": "social",
-      "approach": "resilience",
-      "archetype": "Tactician"
+    "_migration": {
+      "version": null,
+      "previous": null
     },
-    "node": {
-      "i": 23,
-      "j": -78,
-      "connected": [
-        "aura-user",
-        "root-2",
-        "improved-overland-5",
-        "covering-fire",
-        "tubthumping"
-      ],
-      "config": {
-        "alpha": null,
-        "backgroundColor": "#0000ff",
-        "borderColor": null,
-        "borderWidth": null,
-        "texture": "systems/ptr2e/img/perk-icons/Orders_Training.svg",
-        "tint": null,
-        "scale": null
-      },
-      "hidden": false,
-      "type": "normal"
-    }
+    "nodes": [
+      {
+        "connected": [
+          "type-style",
+          "agile-style",
+          "improved-flight-1-6",
+          "improved-swim-1-2"
+        ],
+        "config": {
+          "alpha": null,
+          "backgroundColor": "#0000ff",
+          "borderColor": null,
+          "borderWidth": null,
+          "texture": "systems/ptr2e/img/perk-icons/Orders_Training.svg",
+          "tint": null,
+          "scale": null
+        },
+        "hidden": false,
+        "type": "normal",
+        "x": 116,
+        "y": 135,
+        "tier": null
+      }
+    ],
+    "autoUnlock": [],
+    "originSlug": null,
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": []
   },
-  "effects": [],
-  "sort": 0,
-  "ownership": {
-    "default": 0,
-    "Kc3DOunCh3ClAeHS": 3
-  },
-  "flags": {},
-  "_stats": {
-    "compendiumSource": "Item.tXq3fwEuJwbnZk9m",
-    "duplicateSource": null,
-    "coreVersion": "12.325",
-    "systemId": "ptr2e",
-    "systemVersion": "0.006",
-    "createdTime": 1717154613162,
-    "modifiedTime": 1717179721971,
-    "lastModifiedBy": "Kc3DOunCh3ClAeHS"
-  }
+  "effects": []
 }

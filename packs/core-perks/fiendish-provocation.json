@@ -3,15 +3,20 @@
   "type": "perk",
   "system": {
     "prerequisites": [
-      "[Trainer] or [Expedition Leader]",
-      "Intimidate 40"
+      {
+        "and": [
+          "trait:trainer",
+          "trait:expedition-leader"
+        ]
+      },
+      {
+        "gte": [
+          "{actor|skills.intimidate.mod}",
+          40
+        ]
+      }
     ],
     "cost": 2,
-    "design": {
-      "arena": "social",
-      "approach": "power",
-      "archetype": "Shadow"
-    },
     "description": "<p>The target [Closed Heart] creature gains @Affliction[hyper-mode] 5.</p>",
     "actions": [
       {
@@ -20,7 +25,9 @@
         "description": "<p>The target [Closed Heart] creature gains @Affliction[hyper-mode] 5.</p>",
         "cost": {
           "activation": "simple",
-          "powerPoints": 2
+          "powerPoints": 2,
+          "delay": null,
+          "priority": null
         },
         "range": {
           "target": "creature",
@@ -29,40 +36,47 @@
         },
         "type": "generic",
         "traits": [],
-        "img": "icons/svg/explosion.svg"
+        "img": "icons/svg/explosion.svg",
+        "variant": null
       }
     ],
     "slug": "fiendish-provocation",
     "traits": [],
-    "node": {
-      "i": 48,
-      "j": -47,
-      "connected": [
-        "shadow-guide",
-        "you-belong-to-me",
-        "root-3",
-        "silver-bullet",
-        "frenzied-assault",
-        "ultraviolet"
-      ],
-      "config": {
-        "alpha": null,
-        "backgroundColor": null,
-        "borderColor": null,
-        "borderWidth": null,
-        "texture": "systems/ptr2e/img/svg/shadow_icon.svg",
-        "tint": "#ffffff",
-        "scale": null
-      },
-      "hidden": false,
-      "type": "normal"
-    },
     "_migration": {
       "version": null,
       "previous": null
-    }
+    },
+    "nodes": [
+      {
+        "x": null,
+        "y": null,
+        "hidden": false,
+        "type": "normal",
+        "connected": [
+          "shadow-guide",
+          "ultraviolet"
+        ],
+        "config": {
+          "alpha": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "borderWidth": null,
+          "texture": "systems/ptr2e/img/svg/shadow_icon.svg",
+          "tint": "#ffffff",
+          "scale": null
+        },
+        "tier": null
+      }
+    ],
+    "autoUnlock": [],
+    "originSlug": null,
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": []
   },
   "_id": "bf8a76v0PxvOgJaF",
   "img": "systems/ptr2e/img/svg/shadow_icon.svg",
-  "effects": []
+  "effects": [],
+  "folder": "mWJffsapofL9b8rY"
 }

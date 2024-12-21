@@ -3,15 +3,15 @@
   "type": "perk",
   "system": {
     "prerequisites": [
-      "Shadow Guide",
-      "Leadership 40"
+      "item:perk:shadow-guide",
+      {
+        "gte": [
+          "{actor|skills.leadership.mod}",
+          40
+        ]
+      }
     ],
     "cost": 2,
-    "design": {
-      "arena": "social",
-      "approach": "power",
-      "archetype": "Shadow"
-    },
     "description": "<p>You can apply Styles and other Command Actions to [Closed Heart] creatures normally, even if they are in @Affliction[hyper-mode]. This Perk's PP cost is made in addition to the normal cost of a Style and/or Command Action and only applies when the target is in @Affliction[hyper-mode].</p>",
     "actions": [
       {
@@ -23,40 +23,57 @@
         "img": "icons/svg/explosion.svg",
         "range": {
           "target": "enemy",
-          "unit": "m"
+          "unit": "m",
+          "distance": 0
         },
         "cost": {
-          "activation": "simple"
-        }
+          "activation": "simple",
+          "powerPoints": 0,
+          "delay": null,
+          "priority": null
+        },
+        "variant": null,
+        "hidden": false
       }
     ],
     "slug": "dark-clarity",
     "traits": [],
-    "node": {
-      "i": 54,
-      "j": -45,
-      "connected": [
-        "shadow-guide",
-        "pack-alpha"
-      ],
-      "config": {
-        "alpha": null,
-        "backgroundColor": "#121212",
-        "borderColor": null,
-        "borderWidth": null,
-        "texture": "systems/ptr2e/img/svg/shadow_icon.svg",
-        "tint": "#ffffff",
-        "scale": null
-      },
-      "hidden": false,
-      "type": "normal"
-    },
     "_migration": {
       "version": null,
       "previous": null
-    }
+    },
+    "nodes": [
+      {
+        "x": null,
+        "y": null,
+        "hidden": false,
+        "type": "normal",
+        "connected": [
+          "hobby-gardener",
+          "shadow-guide",
+          "ultraviolet"
+        ],
+        "config": {
+          "alpha": null,
+          "backgroundColor": "#121212",
+          "borderColor": null,
+          "borderWidth": null,
+          "texture": "systems/ptr2e/img/svg/shadow_icon.svg",
+          "tint": "#ffffff",
+          "scale": null
+        },
+        "tier": null
+      }
+    ],
+    "autoUnlock": [],
+    "originSlug": null,
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": []
   },
   "_id": "dClCBlhuOD49szkG",
   "img": "systems/ptr2e/img/svg/shadow_icon.svg",
-  "effects": []
+  "effects": [],
+  "folder": "mWJffsapofL9b8rY"
 }

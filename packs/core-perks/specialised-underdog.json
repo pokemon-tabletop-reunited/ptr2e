@@ -1,16 +1,12 @@
 {
   "name": "Specialised Underdog",
   "type": "perk",
+  "folder": "zrVtKATNxzLNxTUb",
   "system": {
     "prerequisites": [
-      "Underdog's Spirit 2"
+      "item:perk:underdogs-spirit-2"
     ],
     "cost": 2,
-    "design": {
-      "arena": "physical",
-      "approach": "finesse",
-      "archetype": "Underdog"
-    },
     "description": "<p>Transfer 10 Base Stat Points from one of your stats other than HP to one other stat of your choosing.</p>",
     "actions": [
       {
@@ -18,41 +14,56 @@
         "slug": "specialised-underdog",
         "description": "<p>Transfer 10 Base Stat Points from one of your stats other than HP to one other stat of your choosing.</p>",
         "cost": {
-          "activation": "free"
+          "activation": "free",
+          "powerPoints": 0,
+          "delay": null,
+          "priority": null
         },
         "type": "passive",
         "traits": [],
         "img": "icons/svg/explosion.svg",
         "range": {
           "target": "enemy",
-          "unit": "m"
-        }
+          "unit": "m",
+          "distance": 0
+        },
+        "variant": null,
+        "hidden": false
       }
     ],
     "slug": "specialised-underdog",
     "traits": [],
-    "node": {
-      "i": -12,
-      "j": -46,
-      "connected": [
-        "underdogs-spirit-3"
-      ],
-      "config": {
-        "alpha": null,
-        "backgroundColor": "#008000",
-        "borderColor": null,
-        "borderWidth": null,
-        "texture": "systems/ptr2e/img/perk-icons/Breeder.svg",
-        "tint": "#ffffff",
-        "scale": null
-      },
-      "hidden": false,
-      "type": "normal"
-    },
     "_migration": {
       "version": null,
       "previous": null
-    }
+    },
+    "nodes": [
+      {
+        "connected": [
+          "underdogs-spirit-1"
+        ],
+        "config": {
+          "alpha": null,
+          "backgroundColor": "#008000",
+          "borderColor": null,
+          "borderWidth": null,
+          "texture": "systems/ptr2e/img/perk-icons/Breeder.svg",
+          "tint": "#ffffff",
+          "scale": null
+        },
+        "hidden": false,
+        "type": "normal",
+        "x": 67,
+        "y": 166,
+        "tier": null
+      }
+    ],
+    "autoUnlock": [],
+    "originSlug": null,
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": []
   },
   "_id": "RZ325sDR3S3iSSha",
   "img": "systems/ptr2e/img/perk-icons/Breeder.svg",

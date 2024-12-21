@@ -1,17 +1,18 @@
 {
   "name": "Underdog's Spirit 1",
   "type": "perk",
+  "folder": "zrVtKATNxzLNxTUb",
   "system": {
     "prerequisites": [
-      "Underdog",
-      "level 25"
+      "trait:underdog",
+      {
+        "gte": [
+          "{actor|level}",
+          25
+        ]
+      }
     ],
     "cost": 1,
-    "design": {
-      "arena": "physical",
-      "approach": "power",
-      "archetype": "Underdog"
-    },
     "description": "<p>Gain +10 HP Base Stat, up to the Underdog BST Cap.</p>",
     "actions": [
       {
@@ -19,44 +20,59 @@
         "slug": "underdogs-spirit-1",
         "description": "<p>Gain +10 HP Base Stat, up to the Underdog BST Cap.</p>",
         "cost": {
-          "activation": "free"
+          "activation": "free",
+          "powerPoints": 0,
+          "delay": null,
+          "priority": null
         },
         "type": "passive",
         "traits": [],
         "img": "icons/svg/explosion.svg",
         "range": {
           "target": "enemy",
-          "unit": "m"
-        }
+          "unit": "m",
+          "distance": 0
+        },
+        "variant": null,
+        "hidden": false
       }
     ],
     "slug": "underdogs-spirit-1",
     "traits": [],
-    "node": {
-      "i": -23,
-      "j": -40,
-      "connected": [
-        "underdogs-spirit-2",
-        "breeder",
-        "groomer",
-        "type-tutoring"
-      ],
-      "config": {
-        "alpha": null,
-        "backgroundColor": "#ffffff",
-        "borderColor": null,
-        "borderWidth": null,
-        "texture": "systems/ptr2e/img/perk-icons/Breeder.svg",
-        "tint": "#121212",
-        "scale": null
-      },
-      "hidden": false,
-      "type": "normal"
-    },
     "_migration": {
       "version": null,
       "previous": null
-    }
+    },
+    "nodes": [
+      {
+        "x": 64,
+        "y": 163,
+        "hidden": false,
+        "type": "entry",
+        "connected": [
+          "specialised-underdog",
+          "root-5",
+          "climatologist",
+          "pokemaniac"
+        ],
+        "config": {
+          "alpha": null,
+          "backgroundColor": "#ffffff",
+          "borderColor": null,
+          "borderWidth": null,
+          "texture": "systems/ptr2e/img/perk-icons/Breeder.svg",
+          "tint": "#121212",
+          "scale": null
+        },
+        "tier": null
+      }
+    ],
+    "autoUnlock": [],
+    "originSlug": null,
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": []
   },
   "_id": "jbm2zRAz5F3IdmWQ",
   "img": "systems/ptr2e/img/perk-icons/Breeder.svg",

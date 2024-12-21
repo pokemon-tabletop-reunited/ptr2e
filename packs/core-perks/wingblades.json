@@ -1,6 +1,7 @@
 {
   "name": "Wingblades",
   "type": "perk",
+  "folder": "QFi3YFwyLLQSpOap",
   "system": {
     "_migration": {
       "version": 0.108,
@@ -10,30 +11,39 @@
     "description": "<p>Your Flying-type attacks have a +20% chance to inflict the @Affliction[wind-shear] affliction.</p>",
     "traits": [],
     "prerequisites": [
-      "[Flying]"
+      "trait:flying"
     ],
     "cost": 2,
-    "design": {
-      "arena": "physical",
-      "approach": "power",
-      "archetype": ""
-    },
-    "node": {
-      "i": null,
-      "j": null,
-      "connected": [],
-      "config": {
-        "alpha": null,
-        "backgroundColor": null,
-        "borderColor": null,
-        "borderWidth": null,
-        "texture": "systems/ptr2e/img/svg/flying_icon.svg",
-        "tint": null,
-        "scale": null
-      },
-      "hidden": false,
-      "type": "normal"
-    }
+    "slug": "wingblades",
+    "nodes": [
+      {
+        "connected": [
+          "dustoff",
+          "drifter",
+          "improved-flight-1-2"
+        ],
+        "config": {
+          "alpha": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "borderWidth": null,
+          "texture": "systems/ptr2e/img/svg/flying_icon.svg",
+          "tint": null,
+          "scale": null
+        },
+        "hidden": false,
+        "type": "normal",
+        "x": 123,
+        "y": 52,
+        "tier": null
+      }
+    ],
+    "autoUnlock": [],
+    "originSlug": null,
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": []
   },
   "img": "systems/ptr2e/img/svg/flying_icon.svg",
   "effects": [
@@ -91,6 +101,5 @@
       }
     }
   ],
-  "flags": {},
   "_id": "WpybU6Q2VwDs88xF"
 }

@@ -18,7 +18,7 @@ export class CompendiumBrowserPerkTab extends CompendiumBrowserTab {
     this.filterData = this.prepareFilterData();
   }
 
-  protected override async loadData(): Promise<void> {
+  public override async loadData(): Promise<void> {
     const debug = (msg: string, ...params: unknown[]) => console.debug(`PTR2e | Compendium Browser | Perk Tab | ${msg}`, params);
     debug("Stated loading data");
     const perks: CompendiumBrowserIndexData[] = [];
@@ -73,7 +73,7 @@ export class CompendiumBrowserPerkTab extends CompendiumBrowserTab {
       acc[traitData.slug] = traitData.label;
       return acc;
     }, {} as Record<string, string>));
-    this.filterData.multiselects.prerequisites.options = this.generateMultiselectOptions(prerequisites.reduce((acc, prereq) => ({...acc, [prereq]: prereq}), {} as Record<string, string>));
+    // this.filterData.multiselects.prerequisites.options = this.generateMultiselectOptions(prerequisites.reduce((acc, prereq) => ({...acc, [prereq]: prereq}), {} as Record<string, string>));
 
     debug("Finished loading data");
   }
@@ -88,7 +88,7 @@ export class CompendiumBrowserPerkTab extends CompendiumBrowserTab {
     if (!this.filterTraits(entry.traits, multiselects.traits.selected, multiselects.traits.conjunction)) return false;
 
     // Prerequisites
-    if (!this.filterTraits(entry.prerequisites, multiselects.prerequisites.selected, multiselects.prerequisites.conjunction)) return false;
+    // if (!this.filterTraits(entry.prerequisites, multiselects.prerequisites.selected, multiselects.prerequisites.conjunction)) return false;
 
     return true;
   }
@@ -102,12 +102,12 @@ export class CompendiumBrowserPerkTab extends CompendiumBrowserTab {
           options: [],
           selected: []
         },
-        prerequisites: {
-          conjunction: "and",
-          label: "PTR2E.CompendiumBrowser.Filters.Prerequisites",
-          options: [],
-          selected: []
-        }
+        // prerequisites: {
+        //   conjunction: "and",
+        //   label: "PTR2E.CompendiumBrowser.Filters.Prerequisites",
+        //   options: [],
+        //   selected: []
+        // }
       },
       sliders: {
         apCost: {

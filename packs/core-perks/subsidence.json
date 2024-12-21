@@ -10,30 +10,38 @@
     "description": "<p>Passive: Your ground-type moves gain a +20% chance to inflict the Grounded condition.</p>",
     "traits": [],
     "prerequisites": [
-      "[Ground]"
+      "trait:ground"
     ],
     "cost": 2,
-    "design": {
-      "arena": "physical",
-      "approach": "power",
-      "archetype": "Ground"
-    },
-    "node": {
-      "i": null,
-      "j": null,
-      "connected": [],
-      "config": {
-        "alpha": null,
-        "backgroundColor": null,
-        "borderColor": null,
-        "borderWidth": null,
-        "texture": null,
-        "tint": null,
-        "scale": null
-      },
-      "hidden": false,
-      "type": "normal"
-    }
+    "slug": "subsidence",
+    "nodes": [
+      {
+        "connected": [
+          "acceptance",
+          "improved-burrow-1-1"
+        ],
+        "config": {
+          "alpha": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "borderWidth": null,
+          "texture": null,
+          "tint": null,
+          "scale": null
+        },
+        "hidden": false,
+        "type": "normal",
+        "x": 167,
+        "y": 80,
+        "tier": null
+      }
+    ],
+    "autoUnlock": [],
+    "originSlug": null,
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": []
   },
   "img": "systems/ptr2e/img/svg/ground_icon.svg",
   "effects": [
@@ -91,6 +99,6 @@
       }
     }
   ],
-  "flags": {},
-  "_id": "c0M3C4MM9sh46FGN"
+  "_id": "c0M3C4MM9sh46FGN",
+  "folder": "65s6t1apBC1J01GE"
 }

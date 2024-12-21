@@ -26,10 +26,14 @@
         <div class="modifier">
           <input type="text" class="mod add-modifier-name" placeholder="New Modifier">
           <select class="type add-modifier-type">
-            <option value="capture-percentile">Capture Percentile</option>
-            <option value="crit-percentile">Crit Percentile</option>
-            <option value="crit-base">Mons Caught</option>
-        </select>
+            {{#if capture}}
+              <option value="capture-percentile">Capture Percentile</option>
+              <option value="crit-percentile">Crit Percentile</option>
+              <option value="crit-base">Mons Caught</option>
+            {{else}}
+              <option value="any-flat">Flat Modifier</option>
+            {{/if}}
+          </select>
           <input type="number" class="value add-modifier-value" placeholder="+1" />
           <button type="button" class="exclude add-modifier">+Add</button>
         </div>

@@ -3,14 +3,9 @@
   "type": "perk",
   "system": {
     "prerequisites": [
-      "Lack a Wielding slot."
+      "#Lack a Wielding slot."
     ],
     "cost": 2,
-    "design": {
-      "arena": "physical",
-      "approach": "resilience",
-      "archetype": "Gear"
-    },
     "description": "<p>Gain a Wielded Item Slot.</p>",
     "actions": [
       {
@@ -18,52 +13,65 @@
         "slug": "trained-wielder",
         "description": "<p>Gain a Wielded Item Slot.</p>",
         "cost": {
-          "activation": "free"
+          "activation": "free",
+          "powerPoints": 0,
+          "delay": null,
+          "priority": null
         },
         "type": "passive",
         "traits": [],
         "img": "icons/svg/explosion.svg",
         "range": {
           "target": "enemy",
-          "unit": "m"
-        }
+          "unit": "m",
+          "distance": 0
+        },
+        "variant": null,
+        "hidden": false
       }
     ],
     "slug": "trained-wielder",
     "traits": [],
-    "node": {
-      "i": -28,
-      "j": 70,
-      "connected": [
-        "dual-wielder",
-        "blacksmith",
-        "knee-steering",
-        "fisherman",
-        "lethal-restraint",
-        "bug-catcher",
-        "improved-overland-1",
-        "secret-ninja-tools",
-        "down-the-sights",
-        "rapid-fire-style-1"
-      ],
-      "config": {
-        "alpha": null,
-        "backgroundColor": "#808080",
-        "borderColor": null,
-        "borderWidth": null,
-        "texture": "systems/ptr2e/img/perk-icons/Tactician.svg",
-        "tint": "#080808",
-        "scale": null
-      },
-      "hidden": false,
-      "type": "normal"
-    },
     "_migration": {
       "version": null,
       "previous": null
-    }
+    },
+    "nodes": [
+      {
+        "x": 179,
+        "y": 61,
+        "hidden": false,
+        "type": "entry",
+        "connected": [
+          "belt-expansion-1",
+          "dress-to-impress",
+          "root-3",
+          "root-2",
+          "covering-fire",
+          "backpacker-1",
+          "down-the-sights"
+        ],
+        "config": {
+          "alpha": null,
+          "backgroundColor": "#808080",
+          "borderColor": null,
+          "borderWidth": null,
+          "texture": "systems/ptr2e/img/perk-icons/Tactician.svg",
+          "tint": "#080808",
+          "scale": null
+        },
+        "tier": null
+      }
+    ],
+    "autoUnlock": [],
+    "originSlug": null,
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": []
   },
   "_id": "Noilrz4vhlRIcrO3",
   "img": "systems/ptr2e/img/perk-icons/Tactician.svg",
-  "effects": []
+  "effects": [],
+  "folder": "oMMIXyKwOCIxMHrK"
 }

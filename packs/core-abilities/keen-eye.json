@@ -1,7 +1,7 @@
 {
   "name": "Keen Eye",
   "type": "ability",
-  "img": "systems/ptr2e/img/icons/ability_icon.webp",
+  "img": "icons/magic/perception/orb-crystal-ball-scrying-blue.webp",
   "system": {
     "actions": [
       {
@@ -13,7 +13,11 @@
           "activation": "free"
         },
         "description": "<p>Effect: The user is immune to negative ACC [Stage Change] effects, and the user has +1 default ACC Stage. ACC [Stage Change] effects the user gains have their duration increased by +2.</p>",
-        "img": "icons/svg/explosion.svg"
+        "img": "icons/svg/explosion.svg",
+        "range": {
+          "target": "enemy",
+          "unit": "m"
+        }
       }
     ],
     "description": "<p>Effect: The user is immune to negative ACC [Stage Change] effects, and the user has +1 default ACC Stage. ACC [Stage Change] effects the user gains have their duration increased by +2.</p>",
@@ -74,7 +78,7 @@
       "_stats": {
         "compendiumSource": "Compendium.ptr2e.core-effects.Item.iv1l5qSwT9ykajV0.ActiveEffect.meYfTfOa9PesJCOa",
         "duplicateSource": null,
-        "coreVersion": "12.330",
+        "coreVersion": "12.331",
         "systemId": "ptr2e",
         "systemVersion": "0.10.0-alpha.2.0.3",
         "createdTime": 1722029702249,

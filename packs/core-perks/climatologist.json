@@ -3,16 +3,46 @@
   "type": "perk",
   "system": {
     "prerequisites": [
-      "[Trainer] or [Expedition Leader]",
-      "Science (Meteorology) 25 OR (Survival 40 AND Occult Spiritual 40)",
-      "Level 10"
+      {
+        "or": [
+          "trait:trainer",
+          "trait:expedition-leader"
+        ]
+      },
+      {
+        "or": [
+          {
+            "gte": [
+              "{actor|skills.meteorology.mod}",
+              25
+            ]
+          },
+          {
+            "and": [
+              {
+                "gte": [
+                  "{actor|skills.survival.mod}",
+                  40
+                ]
+              },
+              {
+                "gte": [
+                  "{actor|skills.spiritual.mod}",
+                  40
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "gte": [
+          "{actor|level}",
+          10
+        ]
+      }
     ],
     "cost": 2,
-    "design": {
-      "arena": "physical",
-      "approach": "finesse",
-      "archetype": "Climatology"
-    },
     "description": "<p>You gain +15 to Skill Rolls pertaining to Weather, and gain all [Climate Clay] recipies. The user adds all [Weather] Attacks to their Tutor List.</p>",
     "actions": [
       {
@@ -20,48 +50,71 @@
         "slug": "climatologist",
         "description": "<p>You gain +15 to Skill Rolls pertaining to Weather, and gain all [Climate Clay] recipies. The user adds all [Weather] Attacks to their Tutor List.</p>",
         "cost": {
-          "activation": "free"
+          "activation": "free",
+          "powerPoints": 0,
+          "delay": null,
+          "priority": null
         },
         "type": "passive",
         "traits": [],
         "img": "icons/svg/explosion.svg",
         "range": {
           "target": "enemy",
-          "unit": "m"
-        }
+          "unit": "m",
+          "distance": 0
+        },
+        "variant": null,
+        "hidden": false
       }
     ],
     "slug": "climatologist",
     "traits": [],
-    "node": {
-      "i": -64,
-      "j": -24,
-      "connected": [
-        "weaponized-weather",
-        "climate-change",
-        "climate-controller",
-        "scholar",
-        "mankey-see-mankey-do",
-        "nurturing-shoots"
-      ],
-      "config": {
-        "alpha": null,
-        "backgroundColor": "#00ff00",
-        "borderColor": null,
-        "borderWidth": null,
-        "texture": "systems/ptr2e/img/perk-icons/Knowledge.svg",
-        "tint": null,
-        "scale": null
-      },
-      "hidden": false,
-      "type": "normal"
-    },
     "_migration": {
       "version": null,
       "previous": null
-    }
+    },
+    "nodes": [
+      {
+        "x": 38,
+        "y": 134,
+        "hidden": false,
+        "type": "entry",
+        "connected": [
+          "climate-change",
+          "perpetual-storm",
+          "weaponized-weather",
+          "curveball-technique",
+          "masters-whip",
+          "root-5",
+          "emergency-retreat",
+          "underdogs-spirit-1",
+          "summer-growth",
+          "scholar",
+          "chill-out",
+          "jammer",
+          "improved-overland-1-8"
+        ],
+        "config": {
+          "alpha": null,
+          "backgroundColor": "#00ff00",
+          "borderColor": null,
+          "borderWidth": null,
+          "texture": "systems/ptr2e/img/perk-icons/Knowledge.svg",
+          "tint": null,
+          "scale": null
+        },
+        "tier": null
+      }
+    ],
+    "autoUnlock": [],
+    "originSlug": null,
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": []
   },
   "_id": "lR4jrHXCXj0HH3Cs",
   "img": "systems/ptr2e/img/perk-icons/Knowledge.svg",
-  "effects": []
+  "effects": [],
+  "folder": "JifQ0uTghmQ9VBPk"
 }

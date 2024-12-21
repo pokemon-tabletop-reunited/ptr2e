@@ -3,14 +3,14 @@
   "type": "perk",
   "system": {
     "prerequisites": [
-      "Leadership 20"
+      {
+        "gte": [
+          "{actor|skills.leadership.mod}",
+          20
+        ]
+      }
     ],
     "cost": 1,
-    "design": {
-      "arena": "social",
-      "approach": "finesse",
-      "archetype": "Support"
-    },
     "description": "<p>The user spends 4 PP as a Simple Action. Allied creatures within 8m cannot have [Interrupt X] Actions or Abilities triggered their by their Movement for 2 Activations.</p>",
     "actions": [
       {
@@ -24,14 +24,17 @@
         },
         "cost": {
           "activation": "simple",
-          "powerPoints": 4
+          "powerPoints": 4,
+          "delay": null,
+          "priority": null
         },
         "type": "generic",
         "traits": [
           "command",
           "social"
         ],
-        "img": "icons/svg/explosion.svg"
+        "img": "icons/svg/explosion.svg",
+        "variant": null
       }
     ],
     "slug": "mobilize",
@@ -39,33 +42,46 @@
       "command",
       "social"
     ],
-    "node": {
-      "i": 46,
-      "j": -56,
-      "connected": [
-        "root-3",
-        "tactician",
-        "cheerleader",
-        "emergency-retreat"
-      ],
-      "config": {
-        "alpha": null,
-        "backgroundColor": "#00ff40",
-        "borderColor": null,
-        "borderWidth": null,
-        "texture": "systems/ptr2e/img/perk-icons/Tactician.svg",
-        "tint": "#141414",
-        "scale": null
-      },
-      "hidden": false,
-      "type": "normal"
-    },
     "_migration": {
       "version": null,
       "previous": null
-    }
+    },
+    "nodes": [
+      {
+        "x": 43,
+        "y": 53,
+        "hidden": false,
+        "type": "entry",
+        "connected": [
+          "drill-sergeant",
+          "cheerleader",
+          "hold-the-line",
+          "im-with-you",
+          "chansey-medicine",
+          "root-1",
+          "breeder"
+        ],
+        "config": {
+          "alpha": null,
+          "backgroundColor": "#00ff40",
+          "borderColor": null,
+          "borderWidth": null,
+          "texture": "systems/ptr2e/img/perk-icons/Tactician.svg",
+          "tint": "#141414",
+          "scale": null
+        },
+        "tier": null
+      }
+    ],
+    "autoUnlock": [],
+    "originSlug": null,
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": []
   },
   "_id": "EhfPkS23yRI8VENp",
   "img": "systems/ptr2e/img/perk-icons/Tactician.svg",
-  "effects": []
+  "effects": [],
+  "folder": "PAZ8zWUPw7Azm5V6"
 }

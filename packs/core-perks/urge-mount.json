@@ -3,14 +3,14 @@
   "type": "perk",
   "system": {
     "prerequisites": [
-      "Riding 25"
+      {
+        "gte": [
+          "{actor|skills.riding.mod}",
+          25
+        ]
+      }
     ],
     "cost": 3,
-    "design": {
-      "arena": "social",
-      "approach": "finesse",
-      "archetype": "Cavalier"
-    },
     "description": "<p>When you use your Mount to Rush, you may roll Riding instead of the usual Rushing skill (whether Climbing, Running or Swimming skill.)</p>",
     "actions": [
       {
@@ -18,45 +18,60 @@
         "slug": "urge-mount",
         "description": "<p>When you use your Mount to Rush, you may roll Riding instead of the usual Rushing skill (whether Climbing, Running or Swimming skill.)</p>",
         "cost": {
-          "activation": "free"
+          "activation": "free",
+          "powerPoints": 0,
+          "delay": null,
+          "priority": null
         },
         "type": "passive",
         "traits": [],
         "img": "icons/svg/explosion.svg",
         "range": {
           "target": "enemy",
-          "unit": "m"
-        }
+          "unit": "m",
+          "distance": 0
+        },
+        "variant": null,
+        "hidden": false
       }
     ],
     "slug": "urge-mount",
     "traits": [],
-    "node": {
-      "i": -4,
-      "j": 52,
-      "connected": [
-        "trained-rider",
-        "root-4",
-        "knee-steering"
-      ],
-      "config": {
-        "alpha": null,
-        "backgroundColor": "#ffffff",
-        "borderColor": null,
-        "borderWidth": null,
-        "texture": "systems/ptr2e/img/perk-icons/Cavalier.svg",
-        "tint": "#ff0000",
-        "scale": null
-      },
-      "hidden": false,
-      "type": "normal"
-    },
     "_migration": {
       "version": null,
       "previous": null
-    }
+    },
+    "nodes": [
+      {
+        "connected": [
+          "trained-rider",
+          "knee-steering"
+        ],
+        "config": {
+          "alpha": null,
+          "backgroundColor": "#ffffff",
+          "borderColor": null,
+          "borderWidth": null,
+          "texture": "systems/ptr2e/img/perk-icons/Cavalier.svg",
+          "tint": "#ff0000",
+          "scale": null
+        },
+        "hidden": false,
+        "type": "normal",
+        "x": 95,
+        "y": 59,
+        "tier": null
+      }
+    ],
+    "autoUnlock": [],
+    "originSlug": null,
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": []
   },
   "_id": "LF4eCNJmB07YMr7v",
   "img": "systems/ptr2e/img/perk-icons/Cavalier.svg",
-  "effects": []
+  "effects": [],
+  "folder": "ZTA2RsL9wA15o2ic"
 }

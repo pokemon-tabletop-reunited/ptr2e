@@ -3,14 +3,9 @@
   "type": "perk",
   "system": {
     "prerequisites": [
-      "[Bug]"
+      "trait:bug"
     ],
     "cost": 2,
-    "design": {
-      "arena": "physical",
-      "approach": "finesse",
-      "archetype": "[Bug]"
-    },
     "description": "<p>You gain the [Wallclimber] trait.</p>",
     "actions": [
       {
@@ -18,46 +13,118 @@
         "slug": "adhesive-digits",
         "description": "<p>You gain the [Wallclimber] trait.</p>",
         "cost": {
-          "activation": "free"
+          "activation": "free",
+          "powerPoints": 0,
+          "delay": null,
+          "priority": null
         },
         "type": "passive",
         "traits": [],
         "img": "icons/svg/explosion.svg",
         "range": {
           "target": "enemy",
-          "unit": "m"
-        }
+          "unit": "m",
+          "distance": 0
+        },
+        "variant": null,
+        "hidden": false
       }
     ],
     "slug": "adhesive-digits",
     "traits": [],
-    "node": {
-      "i": -81,
-      "j": 28,
-      "connected": [
-        "type-embodiment-type",
-        "root-6",
-        "silk-swing",
-        "improved-threaded-1"
-      ],
-      "config": {
-        "alpha": null,
-        "backgroundColor": null,
-        "borderColor": null,
-        "borderWidth": null,
-        "texture": "systems/ptr2e/img/svg/bug_icon.svg",
-        "tint": null,
-        "scale": null
-      },
-      "hidden": false,
-      "type": "normal"
-    },
     "_migration": {
       "version": null,
       "previous": null
-    }
+    },
+    "nodes": [
+      {
+        "connected": [
+          "hivemark",
+          "silk-swing",
+          "improved-threaded-1",
+          "cyclist",
+          "improved-overland-1",
+          "improved-threaded-1-1"
+        ],
+        "config": {
+          "alpha": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "borderWidth": null,
+          "texture": "systems/ptr2e/img/svg/bug_icon.svg",
+          "tint": null,
+          "scale": null
+        },
+        "hidden": false,
+        "type": "normal",
+        "x": 89,
+        "y": 32,
+        "tier": null
+      }
+    ],
+    "autoUnlock": [
+      "trait:wallclimber"
+    ],
+    "originSlug": null,
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": []
   },
   "_id": "SRCfAPJpN29pFcJe",
   "img": "systems/ptr2e/img/svg/bug_icon.svg",
-  "effects": []
+  "effects": [
+    {
+      "name": "Adhesive Digits",
+      "type": "passive",
+      "_id": "9bI5wfg4o8mbi525",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "add-trait",
+            "key": "",
+            "value": "Wallclimber",
+            "predicate": [],
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.4.1.0",
+        "createdTime": 1733011835433,
+        "modifiedTime": 1733011846258,
+        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
+      }
+    }
+  ],
+  "folder": "o5iIUG4Bj40M86yi"
 }

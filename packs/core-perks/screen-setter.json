@@ -3,15 +3,11 @@
   "type": "perk",
   "system": {
     "prerequisites": [
-      "Moves Known (Light Screen & Reflect)"
+      "item:move:light-screen",
+      "item:move:reflect"
     ],
     "cost": 4,
-    "design": {
-      "arena": "mental",
-      "approach": "resilience",
-      "archetype": "Support"
-    },
-    "description": "<p>When using either Light Screen or Reflect, you may spend 3PP to also use the other one as a Free Action at [Interrupt 2].</p>",
+    "description": "<p>When using either Light Screen or Reflect, you may spend 3PP to also use the other one as a Free Action at [Interrupt 2].<br><br>Connection: Light Screen, Reflect.</p>",
     "actions": [
       {
         "name": "Screen Setter",
@@ -19,43 +15,136 @@
         "description": "<p>When using either Light Screen or Reflect, you may spend 3PP to also use the other one as a Free Action at [Interrupt 2].</p>",
         "cost": {
           "activation": "complex",
-          "powerPoints": 3
+          "powerPoints": 3,
+          "delay": null,
+          "priority": null
         },
         "type": "generic",
         "traits": [],
         "img": "icons/svg/explosion.svg",
         "range": {
           "target": "enemy",
-          "unit": "m"
-        }
+          "unit": "m",
+          "distance": 0
+        },
+        "variant": null
+      },
+      {
+        "slug": "reflect",
+        "name": "Reflect",
+        "type": "attack",
+        "traits": [
+          "shield"
+        ],
+        "range": {
+          "target": "field",
+          "unit": "m",
+          "distance": 0
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 3,
+          "delay": null,
+          "priority": null
+        },
+        "category": "status",
+        "types": [
+          "psychic"
+        ],
+        "description": "<p>Effect: For 3 rounds, the user and all allies take 50% less damage from Physical attacks.</p>",
+        "free": true,
+        "img": "systems/ptr2e/img/perk-icons/Occultism.svg",
+        "variant": null,
+        "power": null,
+        "accuracy": null,
+        "contestType": "",
+        "contestEffect": "",
+        "slot": null,
+        "summon": null,
+        "defaultVariant": null,
+        "flingItemId": null,
+        "offensiveStat": null,
+        "defensiveStat": null
+      },
+      {
+        "slug": "light-screen",
+        "name": "Light Screen",
+        "type": "attack",
+        "traits": [
+          "shield"
+        ],
+        "range": {
+          "target": "field",
+          "unit": "m",
+          "distance": 0
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 3,
+          "delay": null,
+          "priority": null
+        },
+        "category": "status",
+        "types": [
+          "psychic"
+        ],
+        "description": "<p>Effect: For 3 rounds, the user and all allies take 50% less damage from Special attacks.</p>",
+        "free": true,
+        "img": "systems/ptr2e/img/perk-icons/Occultism.svg",
+        "variant": null,
+        "power": null,
+        "accuracy": null,
+        "contestType": "",
+        "contestEffect": "",
+        "slot": null,
+        "summon": null,
+        "defaultVariant": null,
+        "flingItemId": null,
+        "offensiveStat": null,
+        "defensiveStat": null
       }
     ],
     "slug": "screen-setter",
     "traits": [],
-    "node": {
-      "i": -96,
-      "j": 58,
-      "connected": [
-        "root-6"
-      ],
-      "config": {
-        "alpha": null,
-        "backgroundColor": null,
-        "borderColor": "#808080",
-        "borderWidth": null,
-        "texture": "systems/ptr2e/img/perk-icons/Occultism.svg",
-        "tint": "#ffffff",
-        "scale": null
-      },
-      "hidden": false,
-      "type": "normal"
-    },
     "_migration": {
       "version": null,
       "previous": null
-    }
+    },
+    "nodes": [
+      {
+        "connected": [
+          "telekinetic-potential",
+          "psychoportation",
+          "telepathic-potential",
+          "improved-overland-1-1",
+          "improved-overland-1-3",
+          "improved-teleportation-1"
+        ],
+        "config": {
+          "alpha": null,
+          "backgroundColor": null,
+          "borderColor": "#808080",
+          "borderWidth": null,
+          "texture": "systems/ptr2e/img/perk-icons/Occultism.svg",
+          "tint": "#ffffff",
+          "scale": null
+        },
+        "hidden": false,
+        "type": "normal",
+        "x": 142,
+        "y": 113,
+        "tier": null
+      }
+    ],
+    "autoUnlock": [],
+    "originSlug": null,
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": []
   },
   "_id": "cnTPWqYXmGaFZfBd",
   "img": "systems/ptr2e/img/perk-icons/Occultism.svg",
-  "effects": []
+  "effects": [],
+  "folder": "KcpEanpX82Cu6Dqh"
 }

@@ -3,14 +3,9 @@
   "type": "perk",
   "system": {
     "prerequisites": [
-      "[Grass]"
+      "trait:grass"
     ],
     "cost": 3,
-    "design": {
-      "arena": "physical",
-      "approach": "resilience",
-      "archetype": "[Grass]"
-    },
     "description": "<p>You add the Sap Sipper Ability to your Trained Abilities list.</p>",
     "actions": [
       {
@@ -18,45 +13,123 @@
         "slug": "one-with-the-green",
         "description": "<p>You add the Sap Sipper Ability to your Trained Abilities list.</p>",
         "cost": {
-          "activation": "free"
+          "activation": "free",
+          "powerPoints": 0,
+          "delay": null,
+          "priority": null
         },
         "type": "passive",
         "traits": [],
         "img": "icons/svg/explosion.svg",
         "range": {
           "target": "enemy",
-          "unit": "m"
-        }
+          "unit": "m",
+          "distance": 0
+        },
+        "variant": null,
+        "hidden": false
       }
     ],
     "slug": "one-with-the-green",
     "traits": [],
-    "node": {
-      "i": -63,
-      "j": -6,
-      "connected": [
-        "type-embodiment-type",
-        "nurturing-shoots",
-        "potent-venom"
-      ],
-      "config": {
-        "alpha": null,
-        "backgroundColor": null,
-        "borderColor": null,
-        "borderWidth": null,
-        "texture": "systems/ptr2e/img/svg/grass_icon.svg",
-        "tint": null,
-        "scale": null
-      },
-      "hidden": false,
-      "type": "normal"
-    },
     "_migration": {
       "version": null,
       "previous": null
-    }
+    },
+    "nodes": [
+      {
+        "connected": [
+          "nurturing-shoots",
+          "summer-growth",
+          "guard-up"
+        ],
+        "config": {
+          "alpha": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "borderWidth": null,
+          "texture": "systems/ptr2e/img/svg/grass_icon.svg",
+          "tint": null,
+          "scale": null
+        },
+        "hidden": false,
+        "type": "normal",
+        "x": 65,
+        "y": 131,
+        "tier": null
+      }
+    ],
+    "autoUnlock": [],
+    "originSlug": null,
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": []
   },
   "_id": "ks3F2x6TCKlFrWTO",
   "img": "systems/ptr2e/img/svg/grass_icon.svg",
-  "effects": []
+  "effects": [
+    {
+      "name": "One With The Green",
+      "type": "passive",
+      "_id": "zTlgGqk5jWHAOXDL",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "grant-item",
+            "key": "",
+            "value": "Compendium.ptr2e.core-abilities.Item.VRKURBrbkh2y2G62",
+            "predicate": [],
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "reevaluateOnUpdate": false,
+            "inMemoryOnly": false,
+            "allowDuplicate": true,
+            "alterations": [],
+            "track": false,
+            "replaceSelf": false,
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            }
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.4.1.0",
+        "createdTime": 1733069184244,
+        "modifiedTime": 1733069218211,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+      }
+    }
+  ],
+  "folder": "eXSEV54jXXZfP27D"
 }

@@ -1,5 +1,5 @@
 {
-  "folder": "Et2u8UoXSe2a17oq",
+  "folder": "a1w2zpzavg6qtJFn",
   "name": "Cultivate Weakness",
   "type": "perk",
   "_id": "AtM1ZJB3yDsFOi8S",
@@ -22,57 +22,61 @@
           "powerPoints": 5,
           "delay": null,
           "priority": null
-        }
+        },
+        "img": "icons/svg/explosion.svg",
+        "variant": null
       }
     ],
-    "slug": null,
+    "slug": "cultivate-weakness",
     "description": "<p>As a Complex Action costing 5PP, the user may designate a target. The target is one step weaker towards any <Type> of the user's choosing for 3 Activations.</p>",
     "traits": [],
     "prerequisites": [
-      "Occult (Legends) 25"
+      {
+        "gte": [
+          "{actor|skills.legendary.mod}",
+          25
+        ]
+      }
     ],
     "cost": 3,
-    "design": {
-      "arena": "mental",
-      "approach": "finesse",
-      "archetype": ""
+    "_migration": {
+      "version": null,
+      "previous": null
     },
-    "node": {
-      "i": -86,
-      "j": 33,
-      "connected": [
-        "type-embodiment-type",
-        "adhesive-digits",
-        "magnetize"
-      ],
-      "config": {
-        "alpha": null,
-        "backgroundColor": "#8000ff",
-        "borderColor": null,
-        "borderWidth": null,
-        "texture": "systems/ptr2e/img/perk-icons/Knowledge.svg",
-        "tint": "#fdfdfd",
-        "scale": null
-      },
-      "hidden": false,
-      "type": "normal"
-    }
+    "nodes": [
+      {
+        "connected": [
+          "stage-vampirism",
+          "logicians-wisdom",
+          "sadism",
+          "acute-affliction",
+          "lasting-harm",
+          "potent-afflictions",
+          "suspicious-minds",
+          "insidious-wounds"
+        ],
+        "config": {
+          "alpha": null,
+          "backgroundColor": "#8000ff",
+          "borderColor": null,
+          "borderWidth": null,
+          "texture": "systems/ptr2e/img/perk-icons/Knowledge.svg",
+          "tint": "#fdfdfd",
+          "scale": null
+        },
+        "hidden": false,
+        "type": "normal",
+        "x": 152,
+        "y": 72,
+        "tier": null
+      }
+    ],
+    "autoUnlock": [],
+    "originSlug": null,
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": []
   },
-  "effects": [],
-  "sort": 700000,
-  "ownership": {
-    "default": 0,
-    "Kc3DOunCh3ClAeHS": 3
-  },
-  "flags": {},
-  "_stats": {
-    "compendiumSource": "Item.AtM1ZJB3yDsFOi8S",
-    "duplicateSource": null,
-    "coreVersion": "12.325",
-    "systemId": "ptr2e",
-    "systemVersion": "0.006",
-    "createdTime": 1717153022732,
-    "modifiedTime": 1717178302885,
-    "lastModifiedBy": "Kc3DOunCh3ClAeHS"
-  }
+  "effects": []
 }

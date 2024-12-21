@@ -1,18 +1,14 @@
 {
   "name": "Improved Threaded 1",
   "type": "perk",
+  "folder": "zrVtKATNxzLNxTUe",
   "system": {
     "prerequisites": [
-      "An Threaded Movement Allowance",
-      "Running 25 + 5 x (# of Improved Threaded Perks already obtained)",
-      "Acrobatics 25 + 5 x (# of Improved Threaded Perks already obtained)"
+      "#An Threaded Movement Allowance",
+      "#Running 25 + 5 x (# of Improved Threaded Perks already obtained)",
+      "#Acrobatics 25 + 5 x (# of Improved Threaded Perks already obtained)"
     ],
     "cost": 1,
-    "design": {
-      "arena": "physical",
-      "approach": "finesse",
-      "archetype": "Mobility"
-    },
     "description": "<p>Improve your Threaded Movement Allowance by 2.</p>",
     "actions": [
       {
@@ -20,44 +16,80 @@
         "slug": "improved-threaded-1",
         "description": "<p>Improve your Threaded Movement Allowance by 2.</p>",
         "cost": {
-          "activation": "free"
+          "activation": "free",
+          "powerPoints": 0,
+          "delay": null,
+          "priority": null
         },
         "type": "passive",
         "traits": [],
         "img": "icons/svg/explosion.svg",
         "range": {
           "target": "enemy",
-          "unit": "m"
-        }
+          "unit": "m",
+          "distance": 0
+        },
+        "variant": null,
+        "hidden": false
       }
     ],
     "slug": "improved-threaded-1",
     "traits": [],
-    "node": {
-      "i": -72,
-      "j": 21,
-      "connected": [
-        "adhesive-digits",
-        "silk-swing",
-        "improved-overland-4",
-        "venomous"
-      ],
-      "config": {
-        "alpha": null,
-        "backgroundColor": null,
-        "borderColor": null,
-        "borderWidth": null,
-        "texture": "systems/ptr2e/img/svg/bug_icon.svg",
-        "tint": null,
-        "scale": null
-      },
-      "hidden": false,
-      "type": "normal"
-    },
     "_migration": {
       "version": null,
       "previous": null
-    }
+    },
+    "variant": "multi",
+    "mode": "individual",
+    "nodes": [
+      {
+        "connected": [
+          "hivemark",
+          "silk-swing",
+          "mankey-see-mankey-do",
+          "adhesive-digits"
+        ],
+        "config": {
+          "alpha": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "borderWidth": null,
+          "texture": "systems/ptr2e/img/svg/bug_icon.svg",
+          "tint": null,
+          "scale": null
+        },
+        "hidden": false,
+        "type": "normal",
+        "x": 90,
+        "y": 27,
+        "tier": null
+      },
+      {
+        "x": 85,
+        "y": 36,
+        "connected": [
+          "silk-swing",
+          "adhesive-digits",
+          "improved-overland-1-7"
+        ],
+        "config": {
+          "alpha": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "borderWidth": null,
+          "texture": null,
+          "tint": null,
+          "scale": null
+        },
+        "hidden": false,
+        "type": "normal",
+        "tier": null
+      }
+    ],
+    "autoUnlock": [],
+    "originSlug": null,
+    "global": true,
+    "webs": []
   },
   "_id": "OluRtmzPHj9OgOXc",
   "img": "systems/ptr2e/img/svg/bug_icon.svg",

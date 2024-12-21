@@ -1,24 +1,29 @@
 {
   "name": "<Type> Domain",
   "type": "perk",
+  "folder": "kWG8zov1UnSKOvEQ",
   "system": {
     "prerequisites": [
-      "Teaching 50"
+      {
+        "gte": [
+          "{actor|skills.teaching.mod}",
+          35
+        ]
+      },
+      "item:perk:type-specialty"
     ],
-    "cost": 4,
-    "design": {
-      "arena": "mental",
-      "approach": "finesse",
-      "archetype": "Type Ace"
-    },
-    "description": "<p>You are able to tutor [Domain] abilities associated to your chosen <Type>. Only creatures that have your chosen <Type> can learn these abilties.</p>",
+    "cost": 2,
+    "description": "<p>You are able to tutor [Domain] abilities associated to your chosen &lt;Type&gt; . Only yourself, and creatures that have your chosen Type can learn these abilties. This perk may be purchased multiple times, once per Type Specialty you possess.</p>",
     "actions": [
       {
         "name": "<Type> Domain",
         "slug": "type-domain",
         "description": "<p>You are able to tutor [Domain] abilities associated to your chosen <Type>. Only creatures that have your chosen <Type> can learn these abilties.</p>",
         "cost": {
-          "activation": "free"
+          "activation": "free",
+          "powerPoints": 0,
+          "delay": null,
+          "priority": null
         },
         "type": "passive",
         "traits": [
@@ -27,38 +32,52 @@
         "img": "icons/svg/explosion.svg",
         "range": {
           "target": "enemy",
-          "unit": "m"
-        }
+          "unit": "m",
+          "distance": 0
+        },
+        "variant": null,
+        "hidden": false
       }
     ],
     "slug": "type-domain",
     "traits": [
       "type"
     ],
-    "node": {
-      "i": -43,
-      "j": -16,
-      "connected": [
-        "type-style",
-        "type-tutoring",
-        "type-specialty"
-      ],
-      "config": {
-        "alpha": null,
-        "backgroundColor": null,
-        "borderColor": null,
-        "borderWidth": null,
-        "texture": "systems/ptr2e/img/perk-icons/Trainer.svg",
-        "tint": null,
-        "scale": null
-      },
-      "hidden": false,
-      "type": "normal"
-    },
     "_migration": {
       "version": null,
       "previous": null
-    }
+    },
+    "nodes": [
+      {
+        "connected": [
+          "type-desperation",
+          "type-tutoring",
+          "type-strategist",
+          "improved-overland-1-1",
+          "stat-iv-booster-1-1"
+        ],
+        "config": {
+          "alpha": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "borderWidth": null,
+          "texture": "systems/ptr2e/img/perk-icons/Trainer.svg",
+          "tint": null,
+          "scale": null
+        },
+        "hidden": false,
+        "type": "normal",
+        "x": 141,
+        "y": 98,
+        "tier": null
+      }
+    ],
+    "autoUnlock": [],
+    "originSlug": null,
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": []
   },
   "_id": "aMMwSJntCErBGbQZ",
   "img": "systems/ptr2e/img/perk-icons/Trainer.svg",

@@ -21,6 +21,7 @@
   "ITEM.AddButton": "Add",
   "ITEM.DeleteButton": "Delete",
   "SETTINGS.TutorList": "Manage Tutor Lists",
+  "SETTINGS.Github": "Manage Github PR",
   "PTR2E": {
     "Rename": "Rename",
     "Actor": {
@@ -42,6 +43,10 @@
         "nature": {
           "label": "Nature",
           "hint": "The nature must be a valid nature, a UUID to a Rolltable or blank (random)."
+        },
+        "shiny": {
+          "label": "Shiny",
+          "hint": "The % chance for the Pokémon to be shiny."
         }
       }
     },
@@ -97,6 +102,171 @@
           "Simple": "Simple",
           "Complex": "Complex",
           "Free": "Free"
+        }
+      }
+    },
+    "PerkWebApp": {
+      "Title": "Perk Web",
+      "PurchaseTier": "Purchase Tier",
+      "PurchasePerk": "Purchase Perk",
+      "RefundTier": "Refund Tier",
+      "RefundPerk": "Refund Perk",
+      "Evolve": "Evolve into {name}"
+    },
+    "ExpTracker": {
+      "Tabs": {
+        "venture": {
+          "label": "Venture"
+        },
+        "training": {
+          "label": "Training"
+        }
+      },
+      "title": "EXP / Venture Tracker",
+      "hint": "Open EXP / Venture Tracker"
+    },
+    "CircumstanceModifiers": {
+      "CustomEntry": {
+        "label": "Label",
+        "value": "Value"
+      },
+      "Combat": "Combat",
+      "Social": "Social",
+      "Exploration": "Exploration",
+      "Contests": "Contests",
+      "Pokeathlons": "Pokéathlons",
+      "Other": "Other",
+      "Custom": "Custom",
+      "Modifiers": {
+        "BabySteps": {
+          "label": "Baby's First Steps",
+          "hint": "If the Average Level that the Base EXP Reward was calculated from is less then 10, apply this bonus. It is here to help out while you're in those lone digits!"
+        },
+        "MajorNPCDefeated": {
+          "label": "Major NPC Defeated",
+          "hint": "Such as a Gym Leader, Team Rocket Lieutenant or Rival. Feel free to increase this reward for higher-stakes fights with bosses such as Legendaries, or Elite Four members, or even Giovanni himself!"
+        },
+        "WonEncounter": {
+          "label": "Won Encounter"
+        },
+        "ThwartedEvilPlans": {
+          "label": "Thwarted Evil Plans",
+          "hint": "Think defeating a Pokémon that was terrorizing an area after Team Rocket pissed it off by attacking its young!<br>Or if you are the evil doers… thwarting the Forces of Good can be just as enticing…"
+        },
+        "ImpressiveStrategy": {
+          "label": "Impressive Usage of Strategy",
+          "hint": "<p>This can be anything like the Players using the terrain to their advantage; to impressive teamwork or even just quick thinking on the spot! Award your players for their ingenuity!</p><p>Some more examples:</p><ul><li>Defeating the Kangaskhan by having Scorbunny run around its legs with rope to take it down like an AT-AT</li><li>Destroy the nearby Water Tower to make everyone Wet and in for a Shocking Surprise.</li><li>The Stealth Rocks that Skarmory put up made it so that the Charizard couldn’t charge in against it and instead force it to come in close and fight the Seismitoad ready to fight in close-quarters with this Lizard!</li><li>You managed to allow the entire party to benefit from your Sandstorm strategy; yet they barely even have any Ground, Steel or Rock types!</li></ul>"
+        },
+        "ImpressedMajorNPC": {
+          "label": "Impressing (Major) NPCs",
+          "hint": "You may not have beaten the Elite Four member with your 3 gym badges… But they’re impressed by how good you already are!<br>You can consider not giving the “Lost Encounter” penalty when awarding this bonus."
+        },
+        "EntertainTheCrowd": {
+          "label": "Entertain the Crowd",
+          "hint": "You really know how to give a show! The NPCs watching your fight be it Humans or Pokémon really loved watching that, or are happy and thankful you resolved the situation before it could further get out of hand."
+        },
+        "AllySaved": {
+          "label": "Ally Saved",
+          "hint": "You managed to save a Player-controlled or NPC ally; be it by reducing the damage they would receive by lowering it; making an attack miss; taking the hit yourself, or plainly removing the source of damage! Teamwork is the dreamwork!"
+        },
+        "SucceedAgainstOdds": {
+          "label": "Succeed against all odds",
+          "hint": "Succeed on a Skill Check in which you have less than 20 points invested!"
+        },
+        "CaptureNewSpecies": {
+          "label": "Capture a new Species"
+        },
+        "DestroyedPublicInfrastructure": {
+          "label": "Destroyed Public Infrastructure",
+          "hint": "<p>You better have a good explanation for Officer Jenny…</p><p>Don’t award this penalty if players received permission.</p>"
+        },
+        "LostEncounter": {
+          "label": "Lost Encounter"
+        },
+        "HalfPartyFainted": {
+          "label": "Gruesome; half the party or more fainted!"
+        },
+        "PartyDefeated": {
+          "label": "Party Defeat"
+        },
+        "MajorInfluencer": {
+          "label": "Major Influencer",
+          "hint": "This social encounter involves someone or something key to the plot of this Journey, it’s impressive you managed to survive!"
+        },
+        "AvoidFight": {
+          "label": "Avoided a Fight",
+          "hint": "<p>Wow that was gonna be scary, glad you talked your way out of it!</p><p>Only award this if the Fight was going to be challenging; talking down an angry Caterpie with your Charizard ain’t gonna award you additional EXP.</p>"
+        },
+        "ConvincingStory": {
+          "label": "Convincing Story",
+          "hint": "Who knows you could convince someone like that! You managed to convince someone of a fact that wasn’t… quite true, but surely it will help you achieve your goal!"
+        },
+        "VeryPersuasive": {
+          "label": "Very Persuasive",
+          "hint": "Sway someone to do something they didn’t originally plan to do; or didn’t agree with before, to now help you out / agree with!"
+        },
+        "WonArgument": {
+          "label": "What an Argument",
+          "hint": "You just made the GM stutter with how ingenious your argument was, awesome work."
+        },
+        "AwesomeRoleplay": {
+          "label": "Awesome Roleplay",
+          "hint": "That was super in-character, absolutely love it!"
+        },
+        "MadeTheTableLaugh": {
+          "label": "Made the Table Laugh",
+          "hint": "We’re playing games for fun right? Sometimes a Dad joke is appropriate after all…"
+        },
+        "QuickWitted": {
+          "label": "Quick Witted",
+          "hint": "You handled that situation with ease despite being unprepared, or perhaps your information was incorrect? Either way, you did a great job!"
+        },
+        "OffendedNPC": {
+          "label": "Offended the NPC",
+          "hint": "You were trying to befriend them… not offend them…"
+        },
+        "FoundGoal": {
+          "label": "Find what you’re looking for"
+        },
+        "SuccessfulCamp": {
+          "label": "Nice Meal, Cozy Fire, a successful Camp!",
+          "hint": "Succeed at more than half of your Camping Checks (min 1)."
+        },
+        "ClearBlockedPath": {
+          "label": "Clear the blocked path"
+        },
+        "SolvePuzzle": {
+          "label": "Solve a Puzzle"
+        },
+        "DoSkillChallenge": {
+          "label": "Participate in a Skill Challenge",
+          "hint": "Whether you succeed or lost; you helped move the plot forward! Succeed at a skill challenge set-up by the GM."
+        },
+        "PlaceFirst": {
+          "label": "Place First Overall"
+        },
+        "PlaceSecond": {
+          "label": "Place Second Overall"
+        },
+        "PlaceThird": {
+          "label": "Place Third Overall"
+        },
+        "WinIntroduction": {
+          "label": "End first in the Introduction / Visual Phase"
+        },
+        "TrickOpponent": {
+          "label": "Trick Your Opponent",
+          "hint": "Make your opponent Fumble through the usage of a cleverly timed move"
+        },
+        "TopPerformer": {
+          "label": "Top Performer",
+          "hint": "Score the highest amount of appeal in any round of the ‘Secondary Judging’ better known as the ‘Moves Evaluation’"
+        },
+        "LastPlace": {
+          "label": "Get Fourth Place or Worse Overall"
+        },
+        "WinAnySection": {
+          "label": "Place First in a section of a Triathlon"
         }
       }
     },
@@ -178,7 +348,7 @@
         "Functions": "Functions",
         "FunctionsHint": "Include getters and functions.",
         "Tokens": {
-          "Autoscale": {
+          "AutoScale": {
             "Name": "Autoscale Tokens",
             "Hint": "Automatically scale tokens according to their Actor's Size."
           }
@@ -613,7 +783,7 @@
           "bound": "The afflicted creature cannot willingly use any Movement. Stacks of Bound do not decrease at the end of a creature's Activation, instead the effect that applied Bound will provide a way of removing the Bound Condition.",
           "drowning": "The afflicted creature loses a Tick of HP at the end of each of their Activations. The creature is Suppressed and has -1 default SPDEF stage while Drowning is active.",
           "infested": "The afflicted creature loses a Tick of HP at the end of each of their Activations. The creature is Hindered and has -1 default DEF stage while Infested is active.",
-          "wind-shear": "The afflicted creature loses a Tick of HP at the end of each of their Activations. The creature has -1 default DEF stage while Wind Shear is active.",
+          "wind-shear": "The afflicted creature loses a Tick of HP at the end of each of their Activations. The creature has -1 default ACC stage while Wind Shear is active.",
           "disabled": "One of the afflicted creature’s attacks cannot be used, under any circumstances. The move in question is determined by the source of the disabled effect, usually being “the last attack the target used.” If this would prevent them from using any attack, they may Struggle instead.",
           "nullified": "One of the afflicted creature’s abilities is negated, and cannot be activated or benefited from. The ability in question is determined by the source of the nullification, usually determined randomly.",
           "suppressed": "The afflicted creature spends 50% more PP on all actions that use PP, minimum 1.",
@@ -1240,7 +1410,7 @@
       },
       "slug": {
         "label": "Slug",
-        "hint": "The slug is a unique identifier for this entity."
+        "hint": "The slug is a unique identifier for this entity. Generally should not be edited unless you know what you are doing."
       },
       "description": {
         "label": "Effect Description",
@@ -1421,6 +1591,10 @@
         "label": "Prerequisites",
         "hint": "The prerequisites to pickup this Perk."
       },
+      "autoUnlock": {
+        "label": "Auto Unlock",
+        "hint": "The predicate to automatically unlock this Perk. Primarily used for 'Gain Trait' based perks."
+      },
       "apCost": {
         "label": "AP Cost",
         "hint": "The Advancement Point cost to purchase this Perk."
@@ -1445,7 +1619,40 @@
           "hint": "The Archetype to which this perk belongs"
         }
       },
+      "perk": {
+        "variant": {
+          "label": "Perk Type",
+          "hint": "The type of Perk, either 'Basic', 'Tiered' or 'Multi'.",
+          "basic": "Basic",
+          "tiered": "Tiered",
+          "multi": "Multi"
+        },
+        "mode": {
+          "label": "Perk Mode",
+          "hint": "The mode of the Perk",
+          "shared": "Shared",
+          "individual": "Individual",
+          "replace": "Replace",
+          "coexist": "Coexist"
+        },
+        "global": {
+          "label": "Global Perk",
+          "hint": "Whether this perk is shown on everyone's Perk Web (Checked), or only on the webs listed below (Unchecked)."
+        },
+        "webs": {
+          "label": "Species Webs",
+          "hint": "The Species Webs this perk is shown on (if any). Drag & Drop species to add them to the list."
+        }
+      },
       "node": {
+        "x": {
+          "label": "X",
+          "hint": "The Column Position in the Grid"
+        },
+        "y": {
+          "label": "Y",
+          "hint": "The Row Position in the Grid"
+        },
         "i": {
           "label": "I",
           "hint": "I is the equivalent to X but in Hexagonal Grid Space"
@@ -1461,6 +1668,20 @@
         "hidden": {
           "label": "Hidden",
           "hint": "Whether this node is hidden to players or not"
+        },
+        "type": {
+          "label": "Type",
+          "hint": "The type of node"
+        },
+        "tier": {
+          "rank": {
+            "label": "Rank",
+            "hint": "Which tier is this?"
+          },
+          "uuid": {
+            "label": "UUID",
+            "hint": "The UUID of the Perk Item that represents this Tier"
+          }
         },
         "config": {
           "alpha": {
@@ -1637,6 +1858,17 @@
         }
       }
     },
+    "ActorSize": {
+      "Diminutive": "Diminutive",
+      "Tiny": "Tiny",
+      "Small": "Small",
+      "Medium": "Medium",
+      "Large": "Large",
+      "Huge": "Huge",
+      "Gigantic": "Gigantic",
+      "Titanic": "Titanic",
+      "Max": "Max"
+    },
     "ItemSheet": {
       "Tabs": {
         "overview": {
@@ -1674,6 +1906,10 @@
         "forms": {
           "label": "Forms"
         }
+      },
+      "perk": {
+        "label": "Evo Perk Location",
+        "hint": "The location of the Evolution Perk on this species' perk web."
       },
       "SendToChatLabel": "Send to Chat",
       "evolutions": {

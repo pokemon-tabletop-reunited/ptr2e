@@ -1,5 +1,5 @@
 {
-  "folder": "Et2u8UoXSe2a17oq",
+  "folder": "UZGN1glVNXLieg48",
   "name": "Packmarked",
   "type": "perk",
   "system": {
@@ -17,44 +17,56 @@
         "img": "systems/ptr2e/img/perk-icons/Tactician.svg",
         "range": {
           "target": "enemy",
-          "unit": "m"
+          "unit": "m",
+          "distance": 0
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 3
-        }
+          "powerPoints": 3,
+          "delay": null,
+          "priority": null
+        },
+        "variant": null
       }
     ],
     "description": "<p>The user gains the Action Mark Prey.</p><p>As a Complex Action, a target enemy. The enemy receives Marked 5 and -1 Defense and Special Defense Stages for 5 activations.</p>",
     "traits": [],
     "prerequisites": [
-      "[Pack Leader]"
+      "trait:pack-leader"
     ],
     "cost": 3,
-    "design": {
-      "arena": "social",
-      "approach": "power",
-      "archetype": "Pack Leader"
-    },
-    "node": {
-      "i": null,
-      "j": null,
-      "connected": [],
-      "config": {
-        "alpha": null,
-        "backgroundColor": null,
-        "borderColor": null,
-        "borderWidth": null,
-        "texture": "systems/ptr2e/img/perk-icons/Tactician.svg",
-        "tint": null,
-        "scale": null
-      },
-      "hidden": false,
-      "type": "normal"
-    }
+    "slug": "packmarked",
+    "nodes": [
+      {
+        "connected": [
+          "pack-alpha",
+          "pile-on",
+          "you-belong-to-me"
+        ],
+        "config": {
+          "alpha": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "borderWidth": null,
+          "texture": "systems/ptr2e/img/perk-icons/Tactician.svg",
+          "tint": null,
+          "scale": null
+        },
+        "hidden": false,
+        "type": "normal",
+        "x": 149,
+        "y": 176,
+        "tier": null
+      }
+    ],
+    "autoUnlock": [],
+    "originSlug": null,
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": []
   },
   "img": "systems/ptr2e/img/perk-icons/Tactician.svg",
   "effects": [],
-  "flags": {},
   "_id": "d9NvBytgPiTxyW1z"
 }

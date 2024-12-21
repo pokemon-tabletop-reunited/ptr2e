@@ -1,60 +1,49 @@
 {
-  "folder": "Et2u8UoXSe2a17oq",
+  "folder": "c29hnIAtXgwB7FeY",
   "name": "Punishment Ward",
   "type": "perk",
   "_id": "Uylv9mn44TF6SnfU",
   "img": "systems/ptr2e/img/perk-icons/Tactician.svg",
   "system": {
     "actions": [],
-    "slug": null,
+    "slug": "punishment-ward",
     "description": "<p>Connection - Bide. Connection - Karmic Bide.</p>",
     "traits": [],
     "prerequisites": [
-      "Move Known: Bide"
+      "item:move:bide"
     ],
     "cost": 3,
-    "design": {
-      "arena": "social",
-      "approach": "resilience",
-      "archetype": "Tank"
+    "_migration": {
+      "version": null,
+      "previous": null
     },
-    "node": {
-      "i": 36,
-      "j": -98,
-      "connected": [
-        "cyclist",
-        "improved-overland-5",
-        "improved-shielding",
-        "shielded-fortune"
-      ],
-      "config": {
-        "alpha": null,
-        "backgroundColor": null,
-        "borderColor": null,
-        "borderWidth": null,
-        "texture": "systems/ptr2e/img/perk-icons/Tactician.svg",
-        "tint": null,
-        "scale": null
-      },
-      "hidden": false,
-      "type": "normal"
-    }
+    "nodes": [
+      {
+        "connected": [
+          "reflection"
+        ],
+        "config": {
+          "alpha": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "borderWidth": null,
+          "texture": "systems/ptr2e/img/perk-icons/Tactician.svg",
+          "tint": null,
+          "scale": null
+        },
+        "hidden": false,
+        "type": "normal",
+        "x": 92,
+        "y": 96,
+        "tier": null
+      }
+    ],
+    "autoUnlock": [],
+    "originSlug": null,
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": []
   },
-  "effects": [],
-  "sort": 0,
-  "ownership": {
-    "default": 0,
-    "Kc3DOunCh3ClAeHS": 3
-  },
-  "flags": {},
-  "_stats": {
-    "compendiumSource": "Item.Uylv9mn44TF6SnfU",
-    "duplicateSource": null,
-    "coreVersion": "12.325",
-    "systemId": "ptr2e",
-    "systemVersion": "0.006",
-    "createdTime": 1717157674460,
-    "modifiedTime": 1717179583210,
-    "lastModifiedBy": "Kc3DOunCh3ClAeHS"
-  }
+  "effects": []
 }

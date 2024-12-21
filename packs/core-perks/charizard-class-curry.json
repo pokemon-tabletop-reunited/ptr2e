@@ -1,16 +1,17 @@
 {
   "name": "Charizard-class Curry",
   "type": "perk",
+  "folder": "zrVtKATNxzLNxTUZ",
   "system": {
     "prerequisites": [
-      "Husbandry 80"
+      {
+        "gte": [
+          "{actor|skills.husbandry.mod}",
+          80
+        ]
+      }
     ],
     "cost": 5,
-    "design": {
-      "arena": "social",
-      "approach": "power",
-      "archetype": "Chef"
-    },
     "description": "<p>You are able to make Charizard-class Curries as a Camp Action. One of these Curries restores 50% of the party's max HP and have them recover from Exposure. On a 1-25, you attract a non-hostile Pokemon from the local environment to investigate the camp.</p>",
     "actions": [
       {
@@ -18,42 +19,56 @@
         "slug": "charizard-class-curry",
         "description": "<p>You are able to make Charizard-class Curries as a Camp Action. One of these Curries restores 50% of the party's max HP and have them recover from Exposure. On a 1-25, you attract a non-hostile Pokemon from the local environment to investigate the camp.</p>",
         "cost": {
-          "activation": "complex"
+          "activation": "complex",
+          "powerPoints": 0,
+          "delay": null,
+          "priority": null
         },
         "type": "camping",
         "traits": [],
         "range": {
           "target": "object",
-          "unit": "m"
+          "unit": "m",
+          "distance": 0
         },
-        "img": "icons/svg/explosion.svg"
+        "img": "icons/svg/explosion.svg",
+        "variant": null
       }
     ],
     "slug": "charizard-class-curry",
     "traits": [],
-    "node": {
-      "i": -32,
-      "j": 12,
-      "connected": [
-        "copperajah-class-curry",
-        "milcery-class-curry"
-      ],
-      "config": {
-        "alpha": null,
-        "backgroundColor": "#ff8000",
-        "borderColor": null,
-        "borderWidth": null,
-        "texture": "systems/ptr2e/img/perk-icons/Chef.svg",
-        "tint": null,
-        "scale": null
-      },
-      "hidden": false,
-      "type": "normal"
-    },
     "_migration": {
       "version": null,
       "previous": null
-    }
+    },
+    "nodes": [
+      {
+        "connected": [
+          "wobbufet-class-curry",
+          "copperajah-class-curry"
+        ],
+        "config": {
+          "alpha": null,
+          "backgroundColor": "#ff8000",
+          "borderColor": null,
+          "borderWidth": null,
+          "texture": "systems/ptr2e/img/perk-icons/Chef.svg",
+          "tint": null,
+          "scale": null
+        },
+        "hidden": false,
+        "type": "normal",
+        "x": 193,
+        "y": 129,
+        "tier": null
+      }
+    ],
+    "autoUnlock": [],
+    "originSlug": null,
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": []
   },
   "_id": "7IwAmBCPdulCY7yD",
   "img": "systems/ptr2e/img/perk-icons/Chef.svg",

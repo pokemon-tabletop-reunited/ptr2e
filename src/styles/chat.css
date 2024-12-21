@@ -669,3 +669,29 @@
   flex: 1 0 100%;
   text-wrap: nowrap;
 }
+.chat-message.message details.exp-tracker-output {
+  padding: 0.25rem;
+  border: 1px solid var(--border-theme-color);
+  border-radius: 8px;
+}
+.chat-message.message details.exp-tracker-output ul {
+  margin: 0;
+  padding: 0;
+}
+.chat-message.message details.exp-tracker-output ul li {
+  display: flex;
+  flex-direction: row;
+  gap: 0.25rem;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  text-wrap: pretty;
+  text-align: center;
+  border: 1px solid var(--border-theme-color);
+  border-radius: 8px;
+  padding: 0.5rem;
+  margin: 0.25rem;
+}
+.chat-message.message details.exp-tracker-output ul li span {
+  flex: 1 1 auto;
+}

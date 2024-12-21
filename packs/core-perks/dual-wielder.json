@@ -3,14 +3,9 @@
   "type": "perk",
   "system": {
     "prerequisites": [
-      "Have a Wielded Item Slot"
+      "#Have a Wielded Item Slot"
     ],
     "cost": 4,
-    "design": {
-      "arena": "physical",
-      "approach": "finesse",
-      "archetype": "Gear"
-    },
     "description": "<p>Gain a second Wielded Item Slot.</p>",
     "actions": [
       {
@@ -18,43 +13,61 @@
         "slug": "dual-wielder",
         "description": "<p>Gain a second Wielded Item Slot.</p>",
         "cost": {
-          "activation": "free"
+          "activation": "free",
+          "powerPoints": 0,
+          "delay": null,
+          "priority": null
         },
         "type": "passive",
         "traits": [],
         "img": "icons/svg/explosion.svg",
         "range": {
           "target": "enemy",
-          "unit": "m"
-        }
+          "unit": "m",
+          "distance": 0
+        },
+        "variant": null,
+        "hidden": false
       }
     ],
     "slug": "dual-wielder",
     "traits": [],
-    "node": {
-      "i": -26,
-      "j": 77,
-      "connected": [
-        "trained-wielder"
-      ],
-      "config": {
-        "alpha": null,
-        "backgroundColor": null,
-        "borderColor": null,
-        "borderWidth": null,
-        "texture": "systems/ptr2e/img/perk-icons/Tactician.svg",
-        "tint": null,
-        "scale": null
-      },
-      "hidden": false,
-      "type": "normal"
-    },
     "_migration": {
       "version": null,
       "previous": null
-    }
+    },
+    "nodes": [
+      {
+        "connected": [
+          "backpacker-1",
+          "belt-expansion-1",
+          "dress-to-impress"
+        ],
+        "config": {
+          "alpha": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "borderWidth": null,
+          "texture": "systems/ptr2e/img/perk-icons/Tactician.svg",
+          "tint": null,
+          "scale": null
+        },
+        "hidden": false,
+        "type": "normal",
+        "x": 192,
+        "y": 55,
+        "tier": null
+      }
+    ],
+    "autoUnlock": [],
+    "originSlug": null,
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": []
   },
   "_id": "QioUEl6UBFclZvzG",
   "img": "systems/ptr2e/img/perk-icons/Tactician.svg",
-  "effects": []
+  "effects": [],
+  "folder": "oMMIXyKwOCIxMHrK"
 }

@@ -1,6 +1,7 @@
 {
   "name": "Biting Cold",
   "type": "perk",
+  "folder": "ge4zHJUHigfmeDte",
   "system": {
     "_migration": {
       "version": 0.107,
@@ -10,30 +11,40 @@
     "description": "<p>Passive: The user's Ice-Type Attacks have a 30% chance to inflict Frostbite.</p>",
     "traits": [],
     "prerequisites": [
-      "[Ice]"
+      "trait:ice"
     ],
     "cost": 2,
-    "design": {
-      "arena": "physical",
-      "approach": "power",
-      "archetype": ""
-    },
-    "node": {
-      "i": null,
-      "j": null,
-      "connected": [],
-      "config": {
-        "alpha": null,
-        "backgroundColor": null,
-        "borderColor": null,
-        "borderWidth": null,
-        "texture": null,
-        "tint": null,
-        "scale": null
-      },
-      "hidden": false,
-      "type": "normal"
-    }
+    "slug": "biting-cold",
+    "nodes": [
+      {
+        "connected": [
+          "brittle-ice",
+          "cryogenics",
+          "chill-out",
+          "stat-iv-booster-1"
+        ],
+        "config": {
+          "alpha": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "borderWidth": null,
+          "texture": null,
+          "tint": null,
+          "scale": null
+        },
+        "hidden": false,
+        "type": "normal",
+        "x": 79,
+        "y": 116,
+        "tier": null
+      }
+    ],
+    "autoUnlock": [],
+    "originSlug": null,
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": []
   },
   "img": "systems/ptr2e/img/svg/ice_icon.svg",
   "effects": [
@@ -91,6 +102,5 @@
       }
     }
   ],
-  "flags": {},
   "_id": "XekPJ58Ak2uObq6y"
 }

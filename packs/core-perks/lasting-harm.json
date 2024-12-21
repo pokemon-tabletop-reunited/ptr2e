@@ -13,68 +13,63 @@
         "type": "passive",
         "range": {
           "target": "self",
-          "distance": 0,
-          "unit": "m"
+          "unit": "m",
+          "distance": 0
         },
         "cost": {
           "activation": "free",
           "powerPoints": 0,
           "delay": null,
           "priority": null
-        }
+        },
+        "img": "icons/svg/explosion.svg",
+        "variant": null,
+        "hidden": false
       }
     ],
-    "slug": null,
+    "slug": "lasting-harm",
     "description": "<p>Your created [Major Affliction]s and [Minor Affliction]s that inflict effect damage start with +2 Stacks.</p>",
     "traits": [],
-    "prerequisites": [
-      "None"
-    ],
+    "prerequisites": [],
     "cost": 4,
-    "design": {
-      "arena": "mental",
-      "approach": "power",
-      "archetype": "Affliction"
+    "_migration": {
+      "version": null,
+      "previous": null
     },
-    "node": {
-      "i": -59,
-      "j": -11,
-      "connected": [
-        "one-with-the-green",
-        "nurturing-shoots",
-        "brittle-ice",
-        "hexcraft",
-        "mutual-aid"
-      ],
-      "config": {
-        "alpha": null,
-        "backgroundColor": "#000000",
-        "borderColor": null,
-        "borderWidth": null,
-        "texture": "systems/ptr2e/img/perk-icons/Arcana.svg",
-        "tint": null,
-        "scale": null
-      },
-      "hidden": false,
-      "type": "normal"
-    }
+    "nodes": [
+      {
+        "connected": [
+          "hexcraft",
+          "acceptance",
+          "potent-afflictions",
+          "suspicious-minds",
+          "logicians-wisdom",
+          "acute-affliction",
+          "cultivate-weakness"
+        ],
+        "config": {
+          "alpha": null,
+          "backgroundColor": "#000000",
+          "borderColor": null,
+          "borderWidth": null,
+          "texture": "systems/ptr2e/img/perk-icons/Arcana.svg",
+          "tint": null,
+          "scale": null
+        },
+        "hidden": false,
+        "type": "normal",
+        "x": 157,
+        "y": 74,
+        "tier": null
+      }
+    ],
+    "autoUnlock": [],
+    "originSlug": null,
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": []
   },
   "effects": [],
-  "folder": "Et2u8UoXSe2a17oq",
-  "sort": 200000,
-  "ownership": {
-    "default": 0,
-    "Kc3DOunCh3ClAeHS": 3
-  },
-  "flags": {},
-  "_stats": {
-    "compendiumSource": "Item.oJnV1s084hy0b1GU",
-    "duplicateSource": null,
-    "coreVersion": "12.325",
-    "systemId": "ptr2e",
-    "systemVersion": "0.006",
-    "createdTime": 1717152773948,
-    "modifiedTime": 1717178831270,
-    "lastModifiedBy": "Kc3DOunCh3ClAeHS"
-  }
+  "folder": "a1w2zpzavg6qtJFn"
 }

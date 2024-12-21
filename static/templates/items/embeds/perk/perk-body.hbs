@@ -6,7 +6,11 @@
                 <fieldset class="prereqs">
                     <legend>{{localize fields.prerequisites.label}}</legend>
                     <ul>
+                      {{#if prerequisites}}
+                        {{#each prerequisites}}<li>{{{this}}}</li>{{else}}<li class="none">No Prerequisites.</li>{{/each}}
+                      {{else}}
                         {{#each document.system.prerequisites}}<li>{{{asContentLink this}}}</li>{{else}}<li class="none">No Prerequisites.</li>{{/each}}
+                      {{/if}}
                     </ul>
                 </fieldset>
                 <div class="cost-row">

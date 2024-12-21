@@ -35,6 +35,7 @@ import Sortable from "sortablejs";
 import { ApplicationHeaderControlsEntry } from "types/foundry/common/applications/api.js";
 import PartySheetPTR2e from "@module/apps/party-sheet.ts";
 import { ToggleComponent } from "./components/toggle-component.ts";
+import { PerkWebApp } from "@module/apps/perk-web/perk-web-v2.ts";
 
 class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixin(
   ActorSheetV2Expanded
@@ -112,9 +113,12 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
           inspector.render(true);
         },
         "open-perk-web": async function (this: ActorSheetPTRV2) {
-          if ([true, undefined].includes(this.actor.flags.ptr2e?.sheet?.perkFlash))
-            await this.actor.setFlag("ptr2e", "sheet.perkFlash", false);
-          game.ptr.web.open(this.actor);
+          // if ([true, undefined].includes(this.actor.flags.ptr2e?.sheet?.perkFlash))
+          //   await this.actor.setFlag("ptr2e", "sheet.perkFlash", false);
+          // game.ptr.web.open(this.actor);
+
+          const app = new PerkWebApp(this.actor);
+          app.render(true);
         },
         "open-party-sheet": async function (this: ActorSheetPTRV2) {
           if (!this.actor.party) return;
@@ -207,7 +211,7 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
             }})}${Handlebars.helpers.formField(sizeFields.weight, {hash: {
               localize: true,
               value: this.actor._source.system.details.size.weight
-            }})}`,
+            }})}<div class="form-group"><label>Height Class</label><div class="form-fields"><input readonly type="text" value="${game.i18n.localize(this.actor.size.toString())}"></div></div><div class="form-group"><label>Weight Class</label><div class="form-fields"><input readonly type="text" value="${this.actor.system.details.size.weightClass}"></div></div>`,
             window: { title: game.i18n.localize("PTR2E.ActorSheet.Settings.Title") },
             ok: {
               label: game.i18n.localize("PTR2E.ActorSheet.Settings.Save"),
@@ -452,12 +456,40 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
     };
   }
 
+  _prepareEffectiveness(): Record<string, { value: number, name: string}[]> {
+    const effectiveness = { effective: [], ineffective: [], immune: [] } as Record<string, {value: number, name: string}[]>;
+    for(const [type, value] of Object.entries(this.actor.system.type.effectiveness)) {
+      if(value === 1) continue;
+      if(value === 0) {
+        effectiveness.immune.push({
+          value,
+          name: type
+        });
+        continue;
+      }
+      if(value > 1) {
+        effectiveness.effective.push({
+          value,
+          name: type
+        });
+        continue;
+      }
+      effectiveness.ineffective.push({
+        value,
+        name: type
+      });
+    }
+    return effectiveness;
+  }
+
   override async _preparePartContext(
     partId: string,
     context: foundry.applications.api.ApplicationRenderContext
   ) {
     if (partId === "overview") {
       context.movement = Object.values(this.actor.system.movement);
+
+      context.effectiveness = this._prepareEffectiveness();
     }
 
     if (partId === "sidebar") {
@@ -905,10 +937,10 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
   override async close(
     options: Partial<foundry.applications.api.ApplicationClosingOptions> = {}
   ): Promise<this> {
-    if (game.ptr.web.actor === this.actor) {
-      this.minimize();
-      return this;
-    }
+    // if (game.ptr.web.actor === this.actor) {
+    //   this.minimize();
+    //   return this;
+    // }
     return super.close(options) as Promise<this>;
   }
 

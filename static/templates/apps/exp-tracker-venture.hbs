@@ -1,0 +1,82 @@
+<section class="tab sheet-body {{tabs.venture.cssClass}}" data-tab="venture" data-group="sheet">
+  <fieldset class="header">
+    {{#each characters as |character|}}
+      <details>
+        <summary>{{character.pc.name}}'s Characters</summary>
+        <header>
+          <div class="actor">
+            <img src="{{character.pc.img}}" alt="{{character.pc.name}}">
+            <label>{{character.pc.name}} ({{character.pc.level}})</label>
+          </div>
+        </header>
+        <fieldset>
+          <legend>Party & Boxes</legend>
+          {{#each character.data.entries as |member|}}
+            {{#if member.loafing}}
+              <div class="actor loafing" data-uuid="{{member.actor.uuid}}" data-tooltip="{{member.actor.name}} is Loafing {{member.loafing.system.stacks}} and will therefore not gain experience.">
+                <img src="{{member.actor.img}}" alt="{{member.actor.name}}">
+              </div>
+            {{else}}
+              <div class="actor" data-uuid="{{member.actor.uuid}}" data-tooltip="{{member.actor.name}} ({{member.actor.level}})">
+                <img src="{{member.actor.img}}" alt="{{member.actor.name}}">
+              </div>
+            {{/if}}
+          {{/each}}
+        </fieldset>
+      </details>
+    {{/each}}
+  </fieldset>
+  <aside class="base-experience">
+    <fieldset>
+      <legend>Current Reward Summary</legend>
+      <p class="m-0">The current BER reward is: <b>{{ber}}</b> experience</p>
+      <p class="m-0">The current Circumstance Modifier percentage total is: <b data-name="cms-percent">{{multiply cmsPercent 100}}%</b></p>
+      <p class="m-0">Making the total awarded experience: <b data-name="exp-total">{{total}}</b></p>
+    </fieldset>
+  </aside>
+  <fieldset class="cms">
+    <legend>Circumstance Modifiers</legend>
+    <div class="">
+      <input type="text" name="filter" value="{{filter}}" placeholder="Filter for a modifier..." />
+    </div>
+    {{#each circumstanceGroups as |group|}} 
+      <details class="{{group.id}}">
+        <summary>{{localize group.title}}</summary>
+        {{#each group.modifiers as |modifier|}}
+          <div class="form-group" data-filter="{{modifier.name}}">
+            <label for="{{modifier.name}}" class="short">{{localize modifier.label}} ({{multiply modifier.value 100}}%)</label>
+            <div class="form-fields">
+              <input type="checkbox" id="{{modifier.name}}" name="{{modifier.name}}" {{checked modifier.checked}} />
+              {{#if (is ../group.id "custom")}} 
+                <a class="fas fa-trash" data-action="delete-modifier" data-modifier="{{modifier.name}}" data-tooltip="Delete modifier {{localize modifier.label}}" style="flex: 0 0 20px; margin-left: 5px;"></a>
+              {{/if}}
+            </div>
+            {{#if modifier.hint}}
+              <span class="hint">{{{localize modifier.hint}}}</span>
+            {{/if}}
+          </div>
+        {{/each}}
+        {{#if (is group.id "custom")}}
+          <fieldset class="custom mt-2">
+            <legend>Add custom modifier</legend>
+              <div class="form-group">
+                <label for="customName" class="short">{{localize "PTR2E.CircumstanceModifiers.CustomEntry.label"}}</label>
+                <div class="form-fields">
+                  <input type="text" id="customName" name="customName" placeholder="Custom modifier..."/>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="customValue" class="short">{{localize "PTR2E.CircumstanceModifiers.CustomEntry.value"}}</label>
+                <div class="form-fields">
+                  <input type="number" id="customValue" name="customValue" placeholder="50" />
+                </div>
+              </div>
+              <div class="d-flex flex-row justify-content-center align-items-center">
+                <button class="fb-65" type="button" data-action="add-modifier">Add Modifier</button>
+              </div>
+          </fieldset>
+        {{/if}}
+      </details>
+    {{/each}}
+  </fieldset>
+</section>

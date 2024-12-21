@@ -1,5 +1,5 @@
 {
-  "folder": "Et2u8UoXSe2a17oq",
+  "folder": "a1w2zpzavg6qtJFn",
   "name": "Acceptance",
   "type": "perk",
   "_id": "DfkrSep5vYRf2xl8",
@@ -14,52 +14,73 @@
         "type": "passive",
         "range": {
           "target": "self",
-          "unit": "m"
+          "unit": "m",
+          "distance": 0
         },
         "cost": {
-          "activation": "free"
+          "activation": "free",
+          "powerPoints": 0,
+          "delay": null,
+          "priority": null
         },
-        "img": "systems/ptr2e/img/perk-icons/Socialite.svg"
+        "img": "systems/ptr2e/img/perk-icons/Socialite.svg",
+        "variant": null,
+        "hidden": false
       }
     ],
     "slug": "acceptance",
     "description": "<p>Your Attacks with a % effect chance have that chance increased by +10%.</p>",
     "traits": [],
     "prerequisites": [
-      "Fast Talk 35"
+      {
+        "gte": [
+          "{actor|skills.fast-talk.mod}",
+          35
+        ]
+      }
     ],
     "cost": 2,
-    "design": {
-      "arena": "social",
-      "approach": "finesse",
-      "archetype": "Affliction"
-    },
-    "node": {
-      "i": -87,
-      "j": 72,
-      "connected": [
-        "powerlifter",
-        "draconic-imitation",
-        "root-6",
-        "mental-alarm",
-        "the-meaning-of-haste"
-      ],
-      "config": {
-        "alpha": null,
-        "backgroundColor": "#408080",
-        "borderColor": null,
-        "borderWidth": null,
-        "texture": "systems/ptr2e/img/perk-icons/Socialite.svg",
-        "tint": null,
-        "scale": null
-      },
-      "hidden": false,
-      "type": "normal"
-    },
     "_migration": {
       "version": null,
       "previous": null
-    }
+    },
+    "nodes": [
+      {
+        "x": 162,
+        "y": 83,
+        "hidden": false,
+        "type": "entry",
+        "connected": [
+          "potent-venom",
+          "intense-heat",
+          "thug",
+          "hexcraft",
+          "potent-afflictions",
+          "lasting-harm",
+          "acute-affliction",
+          "fighting-momentum",
+          "plain-irritating",
+          "subsidence",
+          "draconic-presence"
+        ],
+        "config": {
+          "alpha": null,
+          "backgroundColor": "#408080",
+          "borderColor": null,
+          "borderWidth": null,
+          "texture": "systems/ptr2e/img/perk-icons/Socialite.svg",
+          "tint": null,
+          "scale": null
+        },
+        "tier": null
+      }
+    ],
+    "autoUnlock": [],
+    "originSlug": null,
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": []
   },
   "effects": [
     {

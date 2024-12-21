@@ -94,7 +94,7 @@ class SummonStatistic extends AttackStatistic {
    */
   static resolveInjectedProperties<T extends string | number | object | null | undefined>(
     source: T,
-    injectables: { actor: Maybe<ActorPTR2e>; item: ItemPTR2e; attack: AttackPTR2e }
+    injectables: { actor: Maybe<ActorPTR2e>; item: ItemPTR2e; attack?: AttackPTR2e }
   ): T;
   static resolveInjectedProperties(
     source: string | number | object | null | undefined,
@@ -155,7 +155,7 @@ class SummonStatistic extends AttackStatistic {
   static resolveValue(
     value: unknown,
     defaultValue: Exclude<RuleValue, BracketedValue> = 0,
-    injectables: { actor: Maybe<ActorPTR2e>; item: ItemPTR2e; attack: AttackPTR2e },
+    injectables: { actor: Maybe<ActorPTR2e>; item: ItemPTR2e; attack?: AttackPTR2e },
     { evaluate = true, resolvables = {} }: ResolveValueParams = {}
   ): number | string | boolean | object | null {
     value ??= defaultValue ?? null;
@@ -209,7 +209,7 @@ class SummonStatistic extends AttackStatistic {
   static #resolveBracketedValue(
     value: BracketedValue,
     defaultValue: Exclude<RuleValue, BracketedValue>,
-    injectables: { actor: Maybe<ActorPTR2e>; item: ItemPTR2e; attack: AttackPTR2e }
+    injectables: { actor: Maybe<ActorPTR2e>; item: ItemPTR2e; attack?: AttackPTR2e }
   ): Exclude<RuleValue, BracketedValue> {
     const bracketNumber = ((): number => {
       if (!value.field) return injectables.actor?.level ?? 0;

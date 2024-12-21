@@ -10,7 +10,7 @@ import { Progress } from "src/util/progress.ts";
 import FolderPTR2e from "@module/folder/document.ts";
 import natureToStatArray from "@scripts/config/natures.ts";
 import SpeciesSystem, { EvolutionData, LevelUpMoveSchema } from "./species.ts";
-import { AbilityPTR2e, MovePTR2e } from "@item";
+import { AbilityPTR2e, MovePTR2e, SpeciesPTR2e } from "@item";
 import { ImageResolver, NORMINV, sluggify } from "@utils";
 import { TokenDocumentPTR2e } from "@module/canvas/token/document.ts";
 
@@ -29,32 +29,32 @@ export default abstract class BlueprintSystem extends HasEmbed(HasMigrations(fou
   static readonly HumanoidHeightWeightData = {
     male: {
       height: {
-        average: 1.77,
-        deviation: 0.06421
+        average: 1.784,
+        deviation: 0.0769
       },
       weight: {
-        average: 26.6,
-        deviation: 3.31
+        average: 25.6,
+        deviation: 3.32
       }
     },
     female: {
       height: {
-        average: 1.63,
-        deviation: 0.05716
+        average: 1.638,
+        deviation: 0.0717
       },
       weight: {
-        average: 24.0,
+        average: 23.4,
         deviation: 4.18
       }
     },
     genderless: {
       height: {
-        average: 1.7,
-        deviation: 0.060685
+        average: 1.711,
+        deviation: 0.0743
       },
       weight: {
-        average: 25.3,
-        deviation: 3.745
+        average: 24.5,
+        deviation: 3.75
       }
     }
   } as const;
@@ -230,7 +230,7 @@ export default abstract class BlueprintSystem extends HasEmbed(HasMigrations(fou
       const speciesOrActor = await (async () => {
         // Get rolltable result or species data
         if (blueprint.doc instanceof ItemPTR2e) {
-          return blueprint.doc.system;
+          return blueprint.doc;
         }
         const table = blueprint.doc as RollTable;
         const tableResult = await table.drawMany(3, { displayChat: false });
@@ -238,7 +238,7 @@ export default abstract class BlueprintSystem extends HasEmbed(HasMigrations(fou
           if (result.type === CONST.TABLE_RESULT_TYPES.TEXT) continue;
           const uuid = (result.type === CONST.TABLE_RESULT_TYPES.COMPENDIUM ? "Compendium." : "") + result.documentCollection + "." + result.documentId;
           const doc = await fromUuid<ItemPTR2e | ActorPTR2e>(uuid);
-          if (doc && doc instanceof ItemPTR2e && doc.system instanceof SpeciesSystemModel) return doc.system;
+          if (doc && doc instanceof ItemPTR2e && doc.system instanceof SpeciesSystemModel) return doc;
           if (doc && doc instanceof ActorPTR2e) return doc;
         }
         throw new Error("No valid species found in rolltable");
@@ -257,7 +257,9 @@ export default abstract class BlueprintSystem extends HasEmbed(HasMigrations(fou
         toBeCreated.push(actor);
         continue;
       }
-      const species = speciesOrActor.toObject();
+      const species = speciesOrActor.toObject() as SpeciesPTR2e['_source'] & {
+        system: SpeciesSystemModel['_source'];
+      };
 
       const level = await (async () => {
         // Get level from rolltable result, or range
@@ -325,20 +327,22 @@ export default abstract class BlueprintSystem extends HasEmbed(HasMigrations(fou
 
       // TODO: Implement these options
       const { shinyChance, preventEvolution, linkToken } = {
-        shinyChance: 1,
+        shinyChance: blueprint.shiny,
         preventEvolution: blueprint.preventEvolution ?? false,
         linkToken: false,
       }
 
       const shiny = this.randomInteger(1, 100) <= shinyChance;
 
-      const gender = species.genderRatio === -1
+      const gender = species.system.genderRatio === -1
         ? "genderless"
-        : Math.random() < species.genderRatio / 8
+        : Math.random() < species.system.genderRatio / 8
           ? "male"
           : "female";
 
-      const evolution = await (async (): Promise<NonNullable<SpeciesSystemModel['_source']>> => {
+      const evolution = await (async (): Promise<NonNullable<SpeciesPTR2e['_source'] & {
+        system: SpeciesSystemModel['_source'];
+      }>> => {
         if (preventEvolution) return species;
 
         function getEvolution(evolution: EvolutionData): EvolutionData {
@@ -381,23 +385,27 @@ export default abstract class BlueprintSystem extends HasEmbed(HasMigrations(fou
           }
           return getEvolution(evolutions[0]);
         }
-        const evolution = getEvolution(species.evolutions as unknown as EvolutionData)
+        const evolution = getEvolution(species.system.evolutions as unknown as EvolutionData)
         if (!evolution?.uuid) return species;
 
-        return (await fromUuid<ItemPTR2e<SpeciesSystem>>(evolution.uuid))?.system?.toObject() ?? species;
+        return ((await fromUuid<ItemPTR2e<SpeciesSystem>>(evolution.uuid))?.toObject() as SpeciesPTR2e['_source'] & {
+          system: SpeciesSystemModel['_source'];
+        } | undefined) ?? species;
       })();
 
       const { weight, height } = await (async (): Promise<{ weight: number, height: number }> => {
-        const isHumanoid = evolution.traits.includes("humanoid");
+        const isHumanoid = evolution.system.traits.includes("humanoid");
 
-        const random = (await new Roll(isHumanoid ? "1d2000" : "2d1000").evaluate()).total;
+        const randomH = (await new Roll(isHumanoid ? "1d10000000000" : "2d20000").evaluate()).total;
+        const randomW = (await new Roll(isHumanoid ? "1d10000000000" : "2d20000").evaluate()).total;
+
         const height = isHumanoid
-          ? NORMINV(random / 2001, BlueprintSystem.HumanoidHeightWeightData[gender].height.average, BlueprintSystem.HumanoidHeightWeightData[gender].height.deviation)
-          : ((random / 2000) * 0.8 + 0.6) * (evolution.size.height ?? 1);
+          ? NORMINV(randomH / 10000000000, BlueprintSystem.HumanoidHeightWeightData[gender].height.average, BlueprintSystem.HumanoidHeightWeightData[gender].height.deviation)
+          : ((randomH / 40000) * 0.8 + 0.6) * (evolution.system.size.height ?? 1);
 
         const weight = isHumanoid
-          ? NORMINV(random / 2001, BlueprintSystem.HumanoidHeightWeightData[gender].weight.average, BlueprintSystem.HumanoidHeightWeightData[gender].weight.deviation) * Math.pow(height, 2)
-          : ((random / 2000) * 0.4 + 8) * height * (evolution.size.weight ?? 1);
+          ? NORMINV(randomW / 10000000000, BlueprintSystem.HumanoidHeightWeightData[gender].weight.average, BlueprintSystem.HumanoidHeightWeightData[gender].weight.deviation) * Math.pow(height, 2)
+          : ((randomW / 40000) * 0.4 + 8) * ((randomH / 40000) * 0.8 + 0.6) * (evolution.system.size.weight ?? 1);
 
         return { height, weight };
       })();
@@ -409,33 +417,44 @@ export default abstract class BlueprintSystem extends HasEmbed(HasMigrations(fou
           return points % 4 === 0 ? points : points + (4 - (points % 4));
         })()
 
-        class weightedBag<T> {
-          entries: { entry: T; weight: number }[] = [];
-          total = 0;
+        class WeightedBag<T> {
+          private entries: { entry: T; weight: number }[] = [];
+          private totalWeight = 0;
+
           addEntry(entry: T, weight: number) {
-            this.total += weight;
-            this.entries.push({ entry, weight: this.total });
+            this.entries.push({ entry, weight });
+            this.totalWeight += weight;
           }
+
           get() {
-            return this.entries.find((entry) => entry.weight >= Math.random() * this.total)!
-              .entry;
+            const rand = Math.random() * this.totalWeight;
+            let cumulativeWeight = 0;
+
+            for (const { entry, weight } of this.entries) {
+              cumulativeWeight += weight;
+              if (rand < cumulativeWeight) {
+                return entry;
+              }
+            }
+
+            return null; // In case there are no entries
           }
         }
 
         const calculateStats = (points: number, weighted: boolean) => {
-          const bag = new weightedBag<keyof typeof stats>();
-          const stats = {} as Record<keyof typeof evolution.stats, number>;
+          const bag = new WeightedBag<keyof typeof stats>();
+          const stats = {} as Record<keyof typeof evolution.system.stats, number>;
 
-          for (const key in evolution.stats) {
+          for (const key in evolution.system.stats) {
             stats[key as keyof typeof stats] = 0;
             bag.addEntry(
               key as keyof typeof stats,
-              weighted ? evolution.stats[key as keyof typeof evolution.stats] as number : 1
+              weighted ? evolution.system.stats[key as keyof typeof evolution.system.stats] as number : 1
             );
           }
 
           for (let i = 0; i < points; i += 4) {
-            stats[bag.get()] += 4;
+            stats[bag.get()!] += 4;
           }
           return stats;
         };
@@ -443,18 +462,18 @@ export default abstract class BlueprintSystem extends HasEmbed(HasMigrations(fou
         const weightedStats = calculateStats(508 - randomPoints, true);
         const randomStats = calculateStats(randomPoints, false);
 
-        return Object.keys(evolution.stats).reduce(
+        return Object.keys(evolution.system.stats).reduce(
           (acc, key) => {
-            const stat = key as keyof typeof evolution.stats;
+            const stat = key as keyof typeof evolution.system.stats;
             acc[stat] = { evs: weightedStats[stat] + randomStats[stat] };
             return acc;
           },
-          {} as Record<keyof typeof evolution.stats, { evs: number }>
+          {} as Record<keyof typeof evolution.system.stats, { evs: number }>
         );
       })();
 
       const moves: MovePTR2e["_source"][] = await (async () => {
-        const levelUpMoves = (evolution.moves.levelUp as ModelPropsFromSchema<LevelUpMoveSchema>[]).filter((move) => move.level <= level);
+        const levelUpMoves = (evolution.system.moves.levelUp as ModelPropsFromSchema<LevelUpMoveSchema>[]).filter((move) => move.level <= level);
 
         const moveItems = await Promise.all(
           levelUpMoves.map(async (move) => fromUuid(move.uuid))
@@ -478,10 +497,10 @@ export default abstract class BlueprintSystem extends HasEmbed(HasMigrations(fou
       })();
 
       const abilities: AbilityPTR2e["_source"][] = await (async () => {
-        const sets = [evolution.abilities.starting];
-        if (level >= 20) sets.push(evolution.abilities.basic);
-        if (level >= 50) sets.push(evolution.abilities.advanced);
-        if (level >= 80) sets.push(evolution.abilities.master);
+        const sets = [evolution.system.abilities.starting];
+        if (level >= 20) sets.push(evolution.system.abilities.basic);
+        if (level >= 50) sets.push(evolution.system.abilities.advanced);
+        if (level >= 80) sets.push(evolution.system.abilities.master);
 
         const abilityItems = await Promise.all(
           sets.map((set) => {
@@ -513,13 +532,13 @@ export default abstract class BlueprintSystem extends HasEmbed(HasMigrations(fou
       })();
 
       const { portrait: img, token: tokenImage } = await (async () => {
-        const config = game.ptr.data.artMap.get(evolution.slug || sluggify(blueprint.name));
+        const config = game.ptr.data.artMap.get(evolution.system.slug || sluggify(blueprint.name));
         if (!config) return { portrait: "icons/svg/mystery-man.svg", token: "icons/svg/mystery-man.svg" };
         const resolver = await ImageResolver.createFromSpeciesData(
           {
-            dexId: evolution.number,
+            dexId: evolution.system.number,
             shiny,
-            forms: evolution.form ? [evolution.form] : [],
+            forms: evolution.system.form ? [evolution.system.form] : [],
           },
           config
         );
@@ -527,9 +546,9 @@ export default abstract class BlueprintSystem extends HasEmbed(HasMigrations(fou
 
         const tokenResolver = await ImageResolver.createFromSpeciesData(
           {
-            dexId: evolution.number,
+            dexId: evolution.system.number,
             shiny,
-            forms: evolution.form ? [evolution.form, "token"] : ["token"],
+            forms: evolution.system.form ? [evolution.system.form, "token"] : ["token"],
           },
           config
         );
@@ -541,19 +560,20 @@ export default abstract class BlueprintSystem extends HasEmbed(HasMigrations(fou
 
       // Add species item
       items.push({
-        name: evolution.slug ? Handlebars.helpers.formatSlug(evolution.slug) : evolution.name,
+        name: evolution.system.slug ? Handlebars.helpers.formatSlug(evolution.system.slug) : evolution.name,
         type: 'species',
         img: img,
-        system: evolution,
-        _id: "actorspeciesitem"
+        system: evolution.system,
+        _id: "actorspeciesitem",
+        effects: evolution.effects
       })
 
       const foundryDefaultTokenSettings = game.settings.get("core", "defaultToken");
 
       const data = {
-        name: Handlebars.helpers.formatSlug(evolution.slug) || blueprint.name,
+        name: Handlebars.helpers.formatSlug(evolution.system.slug) || blueprint.name,
         img,
-        type: evolution?.traits?.includes("humanoid") ? "humanoid" : "pokemon",
+        type: evolution.system.traits?.includes("humanoid") ? "humanoid" : "pokemon",
         folder: options.folder?.id,
         ownership: options.parent ? options.parent.ownership : {},
         system: {

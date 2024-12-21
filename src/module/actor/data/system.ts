@@ -1,4 +1,5 @@
-import { HasTraits, HasMigrations, PokemonType, ClockPTR2e } from "@data";
+/* eslint-disable no-fallthrough */
+import { HasTraits, HasMigrations, PokemonType, ClockPTR2e, Trait } from "@data";
 import { getTypes, TypeEffectiveness } from "@scripts/config/effectiveness.ts";
 import {
   ActorPTR2e,
@@ -367,9 +368,6 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
     this.advancement.advancementPoints.total = this.parent.isHumanoid() ? (19 + this.advancement.level) : (10 + Math.floor(this.advancement.level / 2));
     this.advancement.advancementPoints.spent = 0;
 
-    this.health.max = this.attributes.hp.value;
-    this.health.percent = Math.round((this.health.value / this.health.max) * 100);
-
     this.powerPoints.max = 20 + Math.ceil(0.5 * this.advancement.level);
     this.inventoryPoints.max = 12 + Math.floor((this.skills.get('resources')?.total ?? 0) / 10);
 
@@ -450,8 +448,10 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
 
     for (const type of this.parent.species.types.values()) {
       this.type.types.add(type);
-      if (this.type.types.size > 1 && this.type.types.has("untyped"))
+      if (this.type.types.size > 1 && this.type.types.has("untyped")) {
         this.type.types.delete("untyped");
+        this.traits.delete("untyped");
+      }
     }
 
     this.movement = Object.fromEntries([
@@ -479,6 +479,9 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
       this.attributes[key].value = this._calculateStatTotal(this.attributes[key]);
     }
 
+    this.health.max = this.attributes.hp.value;
+    this.health.percent = Math.round((this.health.value / this.health.max) * 100);
+
     for (const skill of this.skills) {
       skill.prepareBaseData();
     }
@@ -489,12 +492,51 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
         this.skills.set(newSkill.slug, newSkill);
       }
     }
+
+    if (this.shield.value > 0) this.parent.rollOptions.addOption("self", "state:shielded");
+    switch (true) {
+      case this.health.value <= Math.floor(this.health.max * 0.25): {
+        this.parent.rollOptions.addOption("self", "state:desperation-1-4");
+      }
+      case this.health.value <= Math.floor(this.health.max * (1 / 3)): {
+        this.parent.rollOptions.addOption("self", "state:desperation-1-3");
+      }
+      case this.health.value <= Math.floor(this.health.max * 0.5): {
+        this.parent.rollOptions.addOption("self", "state:desperation-1-2");
+      }
+      case this.health.value <= Math.floor(this.health.max * 0.75): {
+        this.parent.rollOptions.addOption("self", "state:desperation-3-4");
+      }
+    }
+    switch (true) {
+      case this.health.value == this.health.max: {
+        this.parent.rollOptions.addOption("self", "state:healthy");
+      }
+      case this.health.value >= Math.floor(this.health.max * 0.75): {
+        this.parent.rollOptions.addOption("self", "state:intrepid-3-4");
+      }
+      case this.health.value >= Math.floor(this.health.max * 0.5): {
+        this.parent.rollOptions.addOption("self", "state:intrepid-1-2");
+      }
+      case this.health.value >= Math.floor(this.health.max * (1 / 3)): {
+        this.parent.rollOptions.addOption("self", "state:intrepid-1-3");
+      }
+      case this.health.value >= Math.floor(this.health.max * 0.25): {
+        this.parent.rollOptions.addOption("self", "state:intrepid-1-4");
+      }
+    }
   }
 
   override prepareDerivedData(): void {
     super.prepareDerivedData();
     this.species?.prepareDerivedData?.();
     this.parent.species?.prepareDerivedData?.();
+
+    for (const ptype of this.type.types) {
+      if (!this.traits.has(ptype) && Trait.isValid(ptype) && ptype != "untyped") {
+        this.addTraitFromSlug(ptype, true);
+      }
+    }
 
     // Calculate bonus RVs if applicable
     const isAce = this.traits.has("ace");

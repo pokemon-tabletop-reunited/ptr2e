@@ -1,59 +1,49 @@
 {
-  "folder": "Et2u8UoXSe2a17oq",
+  "folder": "c29hnIAtXgwB7FeY",
   "name": "Cleansing Shield",
   "type": "perk",
   "_id": "8Q2UYrV7BPZ535Mz",
   "img": "systems/ptr2e/img/perk-icons/Aura.svg",
   "system": {
     "actions": [],
-    "slug": null,
+    "slug": "cleansing-shield",
     "description": "<p>On gaining a Shield, you may spend 3PP to reduce the stacks of any Afflictions that you may have by 1. You do not suffer any negative effects of reducing these stacks.</p>",
     "traits": [],
     "prerequisites": [
-      "Improved Shielding"
+      "item:perk:improved-shielding"
     ],
     "cost": 3,
-    "design": {
-      "arena": "mental",
-      "approach": "resilience",
-      "archetype": "Tank"
+    "_migration": {
+      "version": null,
+      "previous": null
     },
-    "node": {
-      "i": 32,
-      "j": -111,
-      "connected": [
-        "improved-shielding",
-        "superlative-shields",
-        "warding-shield"
-      ],
-      "config": {
-        "alpha": null,
-        "backgroundColor": "#408080",
-        "borderColor": null,
-        "borderWidth": null,
-        "texture": "systems/ptr2e/img/perk-icons/Aura.svg",
-        "tint": null,
-        "scale": null
-      },
-      "hidden": false,
-      "type": "normal"
-    }
+    "nodes": [
+      {
+        "connected": [
+          "improved-shielding"
+        ],
+        "config": {
+          "alpha": null,
+          "backgroundColor": "#408080",
+          "borderColor": null,
+          "borderWidth": null,
+          "texture": "systems/ptr2e/img/perk-icons/Aura.svg",
+          "tint": null,
+          "scale": null
+        },
+        "hidden": false,
+        "type": "normal",
+        "x": 75,
+        "y": 101,
+        "tier": null
+      }
+    ],
+    "autoUnlock": [],
+    "originSlug": null,
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": []
   },
-  "effects": [],
-  "sort": 0,
-  "ownership": {
-    "default": 0,
-    "Kc3DOunCh3ClAeHS": 3
-  },
-  "flags": {},
-  "_stats": {
-    "compendiumSource": "Item.8Q2UYrV7BPZ535Mz",
-    "duplicateSource": null,
-    "coreVersion": "12.325",
-    "systemId": "ptr2e",
-    "systemVersion": "0.006",
-    "createdTime": 1717157169164,
-    "modifiedTime": 1717179731506,
-    "lastModifiedBy": "Kc3DOunCh3ClAeHS"
-  }
+  "effects": []
 }

@@ -1,17 +1,18 @@
 {
   "name": "Lechonk-Class Sandwiches",
   "type": "perk",
+  "folder": "zrVtKATNxzLNxTUZ",
   "system": {
     "prerequisites": [
-      "Husbandry 40",
-      "Zigzagoon-Class Sandwiches"
+      {
+        "gte": [
+          "{actor|skills.husbandry.mod}",
+          40
+        ]
+      },
+      "item:perk:zigzagoon-class-sandwiches"
     ],
     "cost": 3,
-    "design": {
-      "arena": "social",
-      "approach": "finesse",
-      "archetype": "Chef"
-    },
     "description": "<p>You are able to make Lechonk-Class Sandwiches. The staple food of the explorer. These reliable sandwiches confer a +10 to all Skill checks made in the following day.</p>",
     "actions": [
       {
@@ -19,43 +20,57 @@
         "slug": "lechonk-class-sandwiches",
         "description": "<p>You are able to make Lechonk-Class Sandwiches. The staple food of the explorer. These reliable sandwiches confer a +10 to all Skill checks made in the following day.</p>",
         "cost": {
-          "activation": "complex"
+          "activation": "complex",
+          "powerPoints": 0,
+          "delay": null,
+          "priority": null
         },
         "type": "camping",
         "traits": [],
         "img": "icons/svg/explosion.svg",
         "range": {
           "target": "enemy",
-          "unit": "m"
-        }
+          "unit": "m",
+          "distance": 0
+        },
+        "variant": null
       }
     ],
     "slug": "lechonk-class-sandwiches",
     "traits": [],
-    "node": {
-      "i": -17,
-      "j": 23,
-      "connected": [
-        "ralts-class-sandwiches",
-        "zigzagoon-class-sandwiches",
-        "hitmon-class-sandwiches"
-      ],
-      "config": {
-        "alpha": null,
-        "backgroundColor": "#ff80ff",
-        "borderColor": null,
-        "borderWidth": null,
-        "texture": "systems/ptr2e/img/perk-icons/Chef.svg",
-        "tint": null,
-        "scale": null
-      },
-      "hidden": false,
-      "type": "normal"
-    },
     "_migration": {
       "version": null,
       "previous": null
-    }
+    },
+    "nodes": [
+      {
+        "connected": [
+          "ralts-class-sandwiches",
+          "zigzagoon-class-sandwiches",
+          "hitmon-class-sandwiches"
+        ],
+        "config": {
+          "alpha": null,
+          "backgroundColor": "#ff80ff",
+          "borderColor": null,
+          "borderWidth": null,
+          "texture": "systems/ptr2e/img/perk-icons/Chef.svg",
+          "tint": null,
+          "scale": null
+        },
+        "hidden": false,
+        "type": "normal",
+        "x": 184,
+        "y": 138,
+        "tier": null
+      }
+    ],
+    "autoUnlock": [],
+    "originSlug": null,
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": []
   },
   "_id": "pZ9pdfIKMVYtJBeW",
   "img": "systems/ptr2e/img/perk-icons/Chef.svg",

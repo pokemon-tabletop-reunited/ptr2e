@@ -1,17 +1,13 @@
 {
   "name": "Improved Burrow 1",
   "type": "perk",
+  "folder": "zrVtKATNxzLNxTUe",
   "system": {
     "prerequisites": [
-      "A Burrow Movement Allowance",
-      "Climb 20 + 10 x (# of Improved Burrow Perks already obtained)"
+      "#A Burrow Movement Allowance",
+      "#Climb 20 + 10 x (# of Improved Burrow Perks already obtained)"
     ],
     "cost": 1,
-    "design": {
-      "arena": "physical",
-      "approach": "power",
-      "archetype": "Mobility"
-    },
     "description": "<p>Improve your Burrow Movement Allowance by 2.</p>",
     "actions": [
       {
@@ -19,42 +15,127 @@
         "slug": "improved-burrow-1",
         "description": "<p>Improve your Burrow Movement Allowance by 2.</p>",
         "cost": {
-          "activation": "free"
+          "activation": "free",
+          "powerPoints": 0,
+          "delay": null,
+          "priority": null
         },
         "type": "passive",
         "traits": [],
         "img": "icons/svg/explosion.svg",
         "range": {
           "target": "enemy",
-          "unit": "m"
-        }
+          "unit": "m",
+          "distance": 0
+        },
+        "variant": null,
+        "hidden": false
       }
     ],
     "slug": "improved-burrow-1",
     "traits": [],
-    "node": {
-      "i": -65,
-      "j": 41,
-      "connected": [
-        "shovel-hands",
-        "root-6"
-      ],
-      "config": {
-        "alpha": null,
-        "backgroundColor": "#804000",
-        "borderColor": null,
-        "borderWidth": null,
-        "texture": "systems/ptr2e/img/perk-icons/Exploration.svg",
-        "tint": null,
-        "scale": null
-      },
-      "hidden": false,
-      "type": "normal"
-    },
     "_migration": {
       "version": null,
       "previous": null
-    }
+    },
+    "variant": "multi",
+    "mode": "individual",
+    "nodes": [
+      {
+        "connected": [
+          "swimming-lessons",
+          "sprint",
+          "powerlifter",
+          "shovel-hands",
+          "freeclimber"
+        ],
+        "config": {
+          "alpha": null,
+          "backgroundColor": "#804000",
+          "borderColor": null,
+          "borderWidth": null,
+          "texture": "systems/ptr2e/img/perk-icons/Exploration.svg",
+          "tint": null,
+          "scale": null
+        },
+        "hidden": false,
+        "type": "normal",
+        "x": 142,
+        "y": 26,
+        "tier": null
+      },
+      {
+        "x": 172,
+        "y": 80,
+        "connected": [
+          "root-3",
+          "subsidence"
+        ],
+        "config": {
+          "alpha": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "borderWidth": null,
+          "texture": null,
+          "tint": null,
+          "scale": null
+        },
+        "hidden": false,
+        "type": "normal",
+        "tier": null
+      },
+      {
+        "x": 47,
+        "y": 110,
+        "connected": [
+          "nurturing-shoots",
+          "improved-overland-1-4",
+          "root-6",
+          "beastmaster"
+        ],
+        "config": {
+          "alpha": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "borderWidth": null,
+          "texture": null,
+          "tint": null,
+          "scale": null
+        },
+        "hidden": false,
+        "type": "normal",
+        "tier": null
+      },
+      {
+        "x": 105,
+        "y": 127,
+        "connected": [
+          "stat-iv-booster-1-11",
+          "assault-armor-style",
+          "evasive-style",
+          "rapid-fire-style-1",
+          "gambit-style",
+          "improved-overland-1-13",
+          "improved-flight-1-6"
+        ],
+        "config": {
+          "alpha": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "borderWidth": null,
+          "texture": null,
+          "tint": null,
+          "scale": null
+        },
+        "hidden": false,
+        "type": "normal",
+        "tier": null
+      }
+    ],
+    "autoUnlock": [],
+    "originSlug": null,
+    "global": true,
+    "webs": []
   },
   "_id": "QmK7pugsgkpdnaHA",
   "img": "systems/ptr2e/img/perk-icons/Exploration.svg",

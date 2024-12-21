@@ -1,5 +1,5 @@
 {
-  "folder": "Et2u8UoXSe2a17oq",
+  "folder": "a1w2zpzavg6qtJFn",
   "name": "Acute Affliction",
   "type": "perk",
   "_id": "IuAGcFJ6q6zCVXdm",
@@ -14,52 +14,62 @@
         "type": "generic",
         "range": {
           "target": "creature",
-          "unit": "m"
+          "unit": "m",
+          "distance": 0
         },
         "cost": {
           "activation": "free",
-          "powerPoints": 0,
           "trigger": "The target is afflicted with a [Major Affliction] the user caused.",
+          "powerPoints": 0,
           "delay": null,
           "priority": null
         },
-        "img": "systems/ptr2e/img/perk-icons/Arcana.svg"
+        "img": "systems/ptr2e/img/perk-icons/Arcana.svg",
+        "variant": null
       }
     ],
     "slug": "acute-affliction",
     "description": "<p>Trigger: The target is afflicted with a [Major Affliction] the user caused.<p></p>Effect: The target's default DEF and SPDEF are reduced by -1.</p>",
     "traits": [],
     "prerequisites": [
-      "Potent Afflictions"
+      "item:perk:potent-afflictions"
     ],
     "cost": 5,
-    "design": {
-      "arena": "mental",
-      "approach": "power",
-      "archetype": ""
+    "_migration": {
+      "version": null,
+      "previous": null
     },
-    "node": {
-      "i": -73,
-      "j": 2,
-      "connected": [
-        "potent-venom",
-        "venomous",
-        "potent-afflictions",
-        "cryogenics",
-        "stage-vampirism"
-      ],
-      "config": {
-        "alpha": null,
-        "backgroundColor": "#ffffff",
-        "borderColor": null,
-        "borderWidth": null,
-        "texture": "systems/ptr2e/img/perk-icons/Arcana.svg",
-        "tint": "#000000",
-        "scale": null
-      },
-      "hidden": false,
-      "type": "normal"
-    }
+    "nodes": [
+      {
+        "connected": [
+          "lasting-harm",
+          "logicians-wisdom",
+          "acceptance",
+          "cultivate-weakness",
+          "draconic-presence"
+        ],
+        "config": {
+          "alpha": null,
+          "backgroundColor": "#ffffff",
+          "borderColor": null,
+          "borderWidth": null,
+          "texture": "systems/ptr2e/img/perk-icons/Arcana.svg",
+          "tint": "#000000",
+          "scale": null
+        },
+        "hidden": false,
+        "type": "normal",
+        "x": 152,
+        "y": 75,
+        "tier": null
+      }
+    ],
+    "autoUnlock": [],
+    "originSlug": null,
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": []
   },
   "effects": []
 }

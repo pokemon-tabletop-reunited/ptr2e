@@ -1,59 +1,51 @@
 {
-  "folder": "Et2u8UoXSe2a17oq",
+  "folder": "Gqo64zZKzngJILBa",
   "name": "Out Of Options",
   "type": "perk",
   "_id": "BnumBrLaD5gCeOyb",
   "img": "systems/ptr2e/img/perk-icons/Taskmaster.svg",
   "system": {
     "actions": [],
-    "slug": null,
+    "slug": "out-of-options",
     "description": "<p>Your Struggle Attacks gain +50 Power if you have less than 10% of your PP remaining. This does not apply to Weapons.</p>",
     "traits": [],
-    "prerequisites": [
-      "None"
-    ],
+    "prerequisites": [],
     "cost": 2,
-    "design": {
-      "arena": "physical",
-      "approach": "resilience",
-      "archetype": "Blitzer"
+    "_migration": {
+      "version": null,
+      "previous": null
     },
-    "node": {
-      "i": 38,
-      "j": -54,
-      "connected": [
-        "root-3",
-        "tactician",
-        "jammer"
-      ],
-      "config": {
-        "alpha": null,
-        "backgroundColor": "#fbfbfb",
-        "borderColor": null,
-        "borderWidth": null,
-        "texture": "systems/ptr2e/img/perk-icons/Taskmaster.svg",
-        "tint": "#000000",
-        "scale": null
-      },
-      "hidden": false,
-      "type": "normal"
-    }
+    "nodes": [
+      {
+        "x": 180,
+        "y": 44,
+        "hidden": false,
+        "type": "entry",
+        "connected": [
+          "edgerunner",
+          "running-on-fumes",
+          "aura-user",
+          "root-2",
+          "belt-expansion-1"
+        ],
+        "config": {
+          "alpha": null,
+          "backgroundColor": "#fbfbfb",
+          "borderColor": null,
+          "borderWidth": null,
+          "texture": "systems/ptr2e/img/perk-icons/Taskmaster.svg",
+          "tint": "#000000",
+          "scale": null
+        },
+        "tier": null
+      }
+    ],
+    "autoUnlock": [],
+    "originSlug": null,
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": []
   },
-  "effects": [],
-  "sort": 0,
-  "ownership": {
-    "default": 0,
-    "Kc3DOunCh3ClAeHS": 3
-  },
-  "flags": {},
-  "_stats": {
-    "compendiumSource": "Item.BnumBrLaD5gCeOyb",
-    "duplicateSource": null,
-    "coreVersion": "12.325",
-    "systemId": "ptr2e",
-    "systemVersion": "0.006",
-    "createdTime": 1717159798881,
-    "modifiedTime": 1717179257186,
-    "lastModifiedBy": "Kc3DOunCh3ClAeHS"
-  }
+  "effects": []
 }

@@ -16,41 +16,58 @@
         "img": "systems/ptr2e/img/conditions/cheered.svg",
         "range": {
           "target": "ally",
-          "unit": "m"
+          "unit": "m",
+          "distance": 0
         },
         "cost": {
-          "activation": "simple"
-        }
+          "activation": "simple",
+          "powerPoints": 0,
+          "delay": null,
+          "priority": null
+        },
+        "variant": null
       }
     ],
     "description": "<p>As a Simple Action, designate an ally as your Muse and set a Muse Clock for 6 Spans. When that ally ends an Activation, tick one Span on the Muse Clock. When the Clock fills, your next Attack has its Power doubled.</p>",
     "traits": [],
     "prerequisites": [],
     "cost": 2,
-    "design": {
-      "arena": "social",
-      "approach": "power",
-      "archetype": "Combat"
-    },
-    "node": {
-      "i": null,
-      "j": null,
-      "connected": [],
-      "config": {
-        "alpha": null,
-        "backgroundColor": null,
-        "borderColor": null,
-        "borderWidth": null,
-        "texture": "systems/ptr2e/img/conditions/cheered.svg",
-        "tint": null,
-        "scale": null
-      },
-      "hidden": false,
-      "type": "normal"
-    }
+    "slug": "muse",
+    "nodes": [
+      {
+        "connected": [
+          "pack-mon",
+          "root-4",
+          "telepathic-potential",
+          "hit-run",
+          "improved-overland-1-12",
+          "improved-swim-1-1"
+        ],
+        "config": {
+          "alpha": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "borderWidth": null,
+          "texture": "systems/ptr2e/img/conditions/cheered.svg",
+          "tint": null,
+          "scale": null
+        },
+        "hidden": false,
+        "type": "normal",
+        "x": 150,
+        "y": 164,
+        "tier": null
+      }
+    ],
+    "autoUnlock": [],
+    "originSlug": null,
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": []
   },
   "img": "systems/ptr2e/img/conditions/cheered.svg",
   "effects": [],
-  "flags": {},
-  "_id": "OXVqgQQ78QUgRinK"
+  "_id": "OXVqgQQ78QUgRinK",
+  "folder": "UZGN1glVNXLieg48"
 }

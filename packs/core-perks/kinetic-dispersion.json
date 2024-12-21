@@ -1,5 +1,5 @@
 {
-  "folder": "Et2u8UoXSe2a17oq",
+  "folder": "bvVSJTYvqaY3Smhz",
   "name": "Kinetic Dispersion",
   "type": "perk",
   "system": {
@@ -23,43 +23,66 @@
         "cost": {
           "activation": "complex",
           "powerPoints": 5,
-          "trigger": "The user is damaged by a Physical damaging attack."
+          "trigger": "The user is damaged by a Physical damaging attack.",
+          "delay": null,
+          "priority": null
         },
         "types": [
           "fighting"
         ],
         "category": "physical",
-        "free": true
+        "free": true,
+        "variant": null,
+        "power": null,
+        "accuracy": null,
+        "contestType": "",
+        "contestEffect": "",
+        "slot": null,
+        "summon": null,
+        "defaultVariant": null,
+        "flingItemId": null,
+        "offensiveStat": null,
+        "defensiveStat": null
       }
     ],
     "description": "<p>The user learns the Move Tenkan. Counter and Tenkan become Connected.</p>",
     "traits": [],
     "prerequisites": [
-      "Move Known: Counter"
+      "item:move:counter"
     ],
     "cost": 1,
-    "design": {
-      "arena": "physical",
-      "approach": "resilience",
-      "archetype": "Combat"
-    },
-    "node": {
-      "i": null,
-      "j": null,
-      "connected": [],
-      "config": {
-        "alpha": null,
-        "backgroundColor": null,
-        "borderColor": null,
-        "borderWidth": null,
-        "texture": "systems/ptr2e/img/svg/fighting_icon.svg",
-        "tint": null,
-        "scale": null
-      },
-      "hidden": false,
-      "type": "normal"
-    },
-    "slug": "kinetic-dispersion"
+    "slug": "kinetic-dispersion",
+    "nodes": [
+      {
+        "connected": [
+          "fighting-momentum",
+          "guard-up",
+          "thug",
+          "improved-overland-1-2",
+          "plain-irritating"
+        ],
+        "config": {
+          "alpha": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "borderWidth": null,
+          "texture": "systems/ptr2e/img/svg/fighting_icon.svg",
+          "tint": null,
+          "scale": null
+        },
+        "hidden": false,
+        "type": "normal",
+        "x": 128,
+        "y": 85,
+        "tier": null
+      }
+    ],
+    "autoUnlock": [],
+    "originSlug": null,
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": []
   },
   "img": "systems/ptr2e/img/svg/fighting_icon.svg",
   "effects": [],

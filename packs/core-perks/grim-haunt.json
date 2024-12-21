@@ -1,6 +1,7 @@
 {
   "name": "Grim Haunt",
   "type": "perk",
+  "folder": "mYLGJuVcLTxYkgvC",
   "system": {
     "_migration": {
       "version": 0.107,
@@ -10,30 +11,40 @@
     "description": "<p>Passive: Your Ghost-Type attacks gain a 20% chance to inflict Cursed. If they would already inflict Cursed, the chance is instead increased by 20%.</p>",
     "traits": [],
     "prerequisites": [
-      "[Ghost]"
+      "trait:ghost"
     ],
     "cost": 4,
-    "design": {
-      "arena": "mental",
-      "approach": "finesse",
-      "archetype": "Ghost"
-    },
-    "node": {
-      "i": null,
-      "j": null,
-      "connected": [],
-      "config": {
-        "alpha": null,
-        "backgroundColor": null,
-        "borderColor": null,
-        "borderWidth": null,
-        "texture": "systems/ptr2e/img/svg/ghost_icon.svg",
-        "tint": null,
-        "scale": null
-      },
-      "hidden": false,
-      "type": "normal"
-    }
+    "slug": "grim-haunt",
+    "nodes": [
+      {
+        "connected": [
+          "walking-dead",
+          "spectral-stalker",
+          "firefly",
+          "root-3"
+        ],
+        "config": {
+          "alpha": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "borderWidth": null,
+          "texture": "systems/ptr2e/img/svg/ghost_icon.svg",
+          "tint": null,
+          "scale": null
+        },
+        "hidden": false,
+        "type": "normal",
+        "x": 168,
+        "y": 110,
+        "tier": null
+      }
+    ],
+    "autoUnlock": [],
+    "originSlug": null,
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": []
   },
   "img": "systems/ptr2e/img/svg/ghost_icon.svg",
   "effects": [
@@ -91,6 +102,5 @@
       }
     }
   ],
-  "flags": {},
   "_id": "oPLEceo9QogaudDM"
 }

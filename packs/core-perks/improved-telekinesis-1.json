@@ -1,55 +1,143 @@
 {
-    "name": "Improved Telekinesis 1",
-    "type": "perk",
-    "system": {
-      "prerequisites": [
-        "[Telekinetic X]",
-        "Occult (Psychic) 20 + 10 x (# of Improved Telekinesis Perks already obtained)"
-      ],
-      "cost": 1,
-      "design": {
-        "arena": "mental",
-        "approach": "power",
-        "archetype": "[Psychic]"
-      },
-      "description": "<p>Improve your [Telekinesis X] by 2.</p>",
-      "actions": [
-        {
-          "name": "Improved Telekinesis 1",
-          "slug": "improved-telekinesis-1",
-          "description": "<p>Improve your [Telekinesis X] by 2.</p>",
-          "cost": {
-            "activation": "free"
-          },
-          "type": "passive",
-          "traits": []
-        }
-      ],
-      "slug": "improved-telekinesis-1",
-      "traits": []
-    },
-    "_id": "QmK8catssCQpdnaQA",
-    "img": "systems/ptr2e/img/icons/feat_icon.webp",
-    "effects": [],
-    "flags": {
-      "core": {
-        "sourceId": "Compendium.ptr2e.core-perks.Item.QmK8catssCQpdnaQA"
+  "name": "Improved Telekinesis 1",
+  "type": "perk",
+  "folder": "zrVtKATNxzLNxTUe",
+  "system": {
+    "prerequisites": [
+      "#[Telekinetic X]",
+      "#Occult (Psychic) 20 + 10 x (# of Improved Telekinesis Perks already obtained)"
+    ],
+    "cost": 1,
+    "description": "<p>Improve your [Telekinesis X] by 2.</p>",
+    "actions": [
+      {
+        "name": "Improved Telekinesis 1",
+        "slug": "improved-telekinesis-1",
+        "description": "<p>Improve your [Telekinesis X] by 2.</p>",
+        "cost": {
+          "activation": "free",
+          "powerPoints": 0,
+          "delay": null,
+          "priority": null
+        },
+        "type": "passive",
+        "traits": [],
+        "img": "icons/svg/explosion.svg",
+        "range": {
+          "target": "enemy",
+          "distance": 0,
+          "unit": "m"
+        },
+        "variant": null,
+        "hidden": false
       }
+    ],
+    "slug": "improved-telekinesis-1",
+    "variant": "multi",
+    "mode": "individual",
+    "nodes": [
+      {
+        "x": 129,
+        "y": 116,
+        "connected": [
+          "telekinetic-potential",
+          "stat-iv-booster-1-4",
+          "improved-teleportation-1"
+        ],
+        "config": {
+          "alpha": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "borderWidth": null,
+          "texture": null,
+          "tint": null,
+          "scale": null
+        },
+        "hidden": false,
+        "type": "normal",
+        "tier": null
+      },
+      {
+        "x": 156,
+        "y": 134,
+        "connected": [
+          "telekinetic-potential",
+          "stat-iv-booster-1-2",
+          "improved-teleportation-1-1",
+          "improved-teleportation-1-2"
+        ],
+        "config": {
+          "alpha": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "borderWidth": null,
+          "texture": null,
+          "tint": null,
+          "scale": null
+        },
+        "hidden": false,
+        "type": "normal",
+        "tier": null
+      },
+      {
+        "x": 103,
+        "y": 150,
+        "connected": [
+          "stat-iv-booster-1-9",
+          "improved-overland-1-11",
+          "improved-flight-1-5",
+          "stat-iv-booster-1-8",
+          "telepathic-potential",
+          "improved-swim-1-1",
+          "stat-iv-booster-1-12",
+          "improved-overland-1-15",
+          "mental-alarm"
+        ],
+        "config": {
+          "alpha": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "borderWidth": null,
+          "texture": null,
+          "tint": null,
+          "scale": null
+        },
+        "hidden": false,
+        "type": "normal",
+        "tier": null
+      }
+    ],
+    "traits": [],
+    "_migration": {
+      "version": null,
+      "previous": null
     },
-    "_stats": {
-      "coreVersion": "12.321",
-      "systemId": "ptr2e",
-      "systemVersion": "0.005",
-      "createdTime": null,
-      "modifiedTime": 1714922372663,
-      "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
-      "compendiumSource": null,
-      "duplicateSource": null
-    },
-    "folder": null,
-    "sort": 0,
-    "ownership": {
-      "default": 0
-    },
-    "_key": "!items!QmK8catssCQpdnaQA"
-  }
+    "autoUnlock": [],
+    "originSlug": null,
+    "global": true,
+    "webs": []
+  },
+  "_id": "QmK8catssCQpdnaA",
+  "img": "systems/ptr2e/img/icons/feat_icon.webp",
+  "effects": [],
+  "flags": {
+    "core": {
+      "sourceId": "Compendium.ptr2e.core-perks.Item.QmK8catssCQpdnaA"
+    }
+  },
+  "_stats": {
+    "coreVersion": "12.321",
+    "systemId": "ptr2e",
+    "systemVersion": "0.005",
+    "createdTime": null,
+    "modifiedTime": 1714922372663,
+    "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+    "compendiumSource": null,
+    "duplicateSource": null
+  },
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!QmK8catssCQpdnaA"
+}

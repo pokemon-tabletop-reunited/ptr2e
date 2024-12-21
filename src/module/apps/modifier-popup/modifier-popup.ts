@@ -115,6 +115,12 @@ export class ModifierPopup extends foundry.applications.api.HandlebarsApplicatio
             : method === "base"
               ? "crit-base"
               : "invalid";
+        case "any":
+          return method === "flat"
+            ? this.context.type !== "pokeball-check" 
+              ? "any-flat"
+              : "invalid"
+            : "invalid";
         default:
           return "invalid";
       }
@@ -124,7 +130,8 @@ export class ModifierPopup extends foundry.applications.api.HandlebarsApplicatio
       "capture-percentile": 1,
       "crit-percentile": 2,
       "crit-base": 3,
-      invalid: 4,
+      "any-flat": 4,
+      invalid: 5,
     };
 
     const modifiers = this.check.modifiers.map(m => {
@@ -133,7 +140,7 @@ export class ModifierPopup extends foundry.applications.api.HandlebarsApplicatio
         hideIfDisabled: !this.originallyEnabled.has(m) && m.hideIfDisabled,
         select: selectOption(m.type, m.method),
       }
-      if (modifier.select === "invalid") modifier.hidden = true;
+      if (modifier.select === "invalid" || modifier.slug === this.check.slug) modifier.hidden = true;
       return modifier;
     }).sort((a, b) => {
       // Sort in order of select options.
@@ -157,7 +164,8 @@ export class ModifierPopup extends foundry.applications.api.HandlebarsApplicatio
           ? game.settings.get("core", "rollMode")
           : this.context.rollMode,
       challengeRatings: this.challengeRatings,
-      challengeRating
+      challengeRating,
+      capture: this.context.type === "pokeball-check",
     };
   }
 
@@ -199,7 +207,8 @@ export class ModifierPopup extends foundry.applications.api.HandlebarsApplicatio
         ![
           "capture-percentile",
           "crit-percentile",
-          "crit-base"
+          "crit-base",
+          "any-flat"
         ].includes(modifierType)
       ) {
         errors.push("Invalid modifier type. Please select a valid modifier type.");
@@ -219,6 +228,8 @@ export class ModifierPopup extends foundry.applications.api.HandlebarsApplicatio
               return { method: "percentile", type: "crit" };
             case "crit-base":
               return { method: "base", type: "crit" };
+            case "any-flat":
+              return { method: "flat", type: "any" };
           }
           return {};
         })()

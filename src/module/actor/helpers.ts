@@ -118,10 +118,13 @@ async function resolveCapture(originUuid: string, targetUuid: string, success: b
         if(targetActor.isToken) {
           const newActor = await ActorPTR2e.create(targetActor.clone({
             folder: trainerActor.folder.id,
-            permission: fu.duplicate(trainerActor.permission),
+            ownership: fu.duplicate(trainerActor.ownership),
             "system.party": {
               partyMemberOf: party ? trainerActor.folder.id : null,
               teamMemberOf: []
+            },
+            prototypeToken: {
+              actorLink: true
             }
           }).toObject());
           if(!newActor) return void ui.notifications.error("Unable to resolve capture; new actor could not be created.");
@@ -133,10 +136,13 @@ async function resolveCapture(originUuid: string, targetUuid: string, success: b
 
         await targetActor.update({
           folder: trainerActor.folder.id,
-          permission: fu.duplicate(trainerActor.permission),
+          ownership: fu.duplicate(trainerActor.ownership),
           "system.party": {
             partyMemberOf: party ? trainerActor.folder.id : null,
             teamMemberOf: []
+          },
+          prototypeToken: {
+            actorLink: true
           }
         })
 

@@ -3,16 +3,47 @@
   "type": "perk",
   "system": {
     "prerequisites": [
-      "Climate Controller",
-      "Level 40",
-      "Science (Meteorology) 50 OR (Survival 70 AND Occult Spiritual 70 AND Level 60)"
+      "item:perk:climate-controller",
+      {
+        "gte": [
+          "{actor|level}",
+          40
+        ]
+      },
+      {
+        "or": [
+          {
+            "gte": [
+              "{actor|skills.meteorology.mod}",
+              50
+            ]
+          },
+          {
+            "and": [
+              {
+                "gte": [
+                  "{actor|skills.survival.mod}",
+                  70
+                ]
+              },
+              {
+                "gte": [
+                  "{actor|skills.spiritual.mod}",
+                  70
+                ]
+              },
+              {
+                "gte": [
+                  "{actor|level}",
+                  60
+                ]
+              }
+            ]
+          }
+        ]
+      }
     ],
     "cost": 2,
-    "design": {
-      "arena": "physical",
-      "approach": "finesse",
-      "archetype": "Climatology"
-    },
     "description": "<p>Weathers set by you last for +2 additional Rounds, and their numerical effects are increased by 30% (minimum 1).</p>",
     "actions": [
       {
@@ -20,43 +51,60 @@
         "slug": "perpetual-storm",
         "description": "<p>Weathers set by you last for +2 additional Rounds, and their numerical effects are increased by 30% (minimum 1).</p>",
         "cost": {
-          "activation": "free"
+          "activation": "free",
+          "powerPoints": 0,
+          "delay": null,
+          "priority": null
         },
         "type": "passive",
         "traits": [],
         "img": "icons/svg/explosion.svg",
         "range": {
           "target": "enemy",
-          "unit": "m"
-        }
+          "unit": "m",
+          "distance": 0
+        },
+        "variant": null,
+        "hidden": false
       }
     ],
     "slug": "perpetual-storm",
     "traits": [],
-    "node": {
-      "i": -75,
-      "j": -22,
-      "connected": [
-        "climate-change"
-      ],
-      "config": {
-        "alpha": null,
-        "backgroundColor": "#400080",
-        "borderColor": null,
-        "borderWidth": null,
-        "texture": "systems/ptr2e/img/perk-icons/Elamentalist.svg",
-        "tint": "#ffffff",
-        "scale": null
-      },
-      "hidden": false,
-      "type": "normal"
-    },
     "_migration": {
       "version": null,
       "previous": null
-    }
+    },
+    "nodes": [
+      {
+        "connected": [
+          "climate-controller",
+          "climatologist"
+        ],
+        "config": {
+          "alpha": null,
+          "backgroundColor": "#400080",
+          "borderColor": null,
+          "borderWidth": null,
+          "texture": "systems/ptr2e/img/perk-icons/Elamentalist.svg",
+          "tint": "#ffffff",
+          "scale": null
+        },
+        "hidden": false,
+        "type": "normal",
+        "x": 39,
+        "y": 126,
+        "tier": null
+      }
+    ],
+    "autoUnlock": [],
+    "originSlug": null,
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": []
   },
   "_id": "LvxsCjJDbfgyQ7G5",
   "img": "systems/ptr2e/img/perk-icons/Elamentalist.svg",
-  "effects": []
+  "effects": [],
+  "folder": "JifQ0uTghmQ9VBPk"
 }

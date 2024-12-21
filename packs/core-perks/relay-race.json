@@ -1,0 +1,86 @@
+{
+  "name": "Relay Race",
+  "type": "perk",
+  "folder": "fDfAXQXXzkaqpYoa",
+  "system": {
+    "_migration": {
+      "version": 0.109,
+      "previous": null
+    },
+    "actions": [
+      {
+        "slug": "baton-pass",
+        "name": "Baton Pass",
+        "type": "attack",
+        "traits": [],
+        "range": {
+          "target": "self",
+          "unit": "m",
+          "distance": 0
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 4,
+          "delay": null,
+          "priority": null
+        },
+        "category": "status",
+        "types": [
+          "normal"
+        ],
+        "description": "<p>Effect: This attack can only be used by an owned Pokemon. The user switches with an allied Pokemon, returning to their owned Pokeball in the process. The ally gains the user’s [Stage Change] effects, [Pseudo Affliction]s, and other beneficial effects.</p>",
+        "img": "icons/svg/explosion.svg",
+        "variant": null,
+        "power": null,
+        "accuracy": null,
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null,
+        "summon": null,
+        "defaultVariant": null,
+        "flingItemId": null,
+        "offensiveStat": null,
+        "defensiveStat": null
+      }
+    ],
+    "description": "<p>You learn and are able to use Baton Pass on behalf of your Pokemon, switching them out as if they had used the Move themselves.</p>",
+    "traits": [],
+    "prerequisites": [
+      "trait:trainer",
+      "item:perk:emergency-retreat"
+    ],
+    "cost": 3,
+    "slug": "relay-race",
+    "nodes": [
+      {
+        "connected": [
+          "emergency-retreat"
+        ],
+        "config": {
+          "alpha": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "borderWidth": null,
+          "texture": "systems/ptr2e/img/perk-icons/Juggler.svg",
+          "tint": null,
+          "scale": null
+        },
+        "hidden": false,
+        "type": "normal",
+        "x": 16,
+        "y": 121,
+        "tier": null
+      }
+    ],
+    "autoUnlock": [],
+    "originSlug": null,
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": []
+  },
+  "img": "systems/ptr2e/img/perk-icons/Juggler.svg",
+  "effects": [],
+  "_id": "jdQ27YKL5LkVTATx"
+}

@@ -3,7 +3,7 @@ import { AttackMessageSystem, ChatMessagePTR2e, DamageAppliedMessageSystem } fro
 import { CombatantPTR2e } from "@combat";
 import { ActionPTR2e, AttackPTR2e, Trait } from "@data";
 import { ActiveEffectPTR2e } from "@effects";
-import { EffectPTR2e, ItemPTR2e, MovePTR2e, SummonPTR2e } from "@item";
+import { EffectPTR2e, ItemPTR2e, MovePTR2e, PerkPTR2e, SummonPTR2e } from "@item";
 import { DataInspector } from "@module/apps/data-inspector/data-inspector.ts";
 import { CustomSkill } from "@module/data/models/skill.ts";
 import Tagify from "@yaireo/tagify";
@@ -717,10 +717,12 @@ export default class TooltipsPTR2e {
       type: t.type
     }));
 
+    const prerequisites = perk.type === "perk" ? (perk as PerkPTR2e).system.getPredicateStrings() : null
+
     this.tooltip.classList.add(type);
     await this._renderTooltip({
       path: `systems/ptr2e/templates/items/embeds/${type}.hbs`,
-      data: { fields: perk.system.schema.fields, document: perk, traits },
+      data: { fields: perk.system.schema.fields, document: perk, traits, prerequisites },
       direction: game.tooltip.element?.dataset.tooltipDirection as
         | TooltipDirections
         | undefined,

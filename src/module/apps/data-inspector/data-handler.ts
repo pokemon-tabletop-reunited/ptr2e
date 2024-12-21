@@ -474,7 +474,7 @@ class DataStructure {
   }
 
   filterChildren(searchTerm: Maybe<string>, all: Record<string, DataStructure>, fuzzy: number) {
-    if (!searchTerm || searchTerm.length <= 3) return;
+    if (!searchTerm || searchTerm.length < 3) return;
 
     const miniSearch = new MiniSearch({
       fields: ["key", "path", "value"],
