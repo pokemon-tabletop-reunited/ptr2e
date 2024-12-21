@@ -3,73 +3,74 @@
   "type": "perk",
   "system": {
     "prerequisites": [
-      "Aura Sense 60",
-      "Aura Bonding"
+      {
+        "gte": [
+          "{actor|skills.aura-sense.mod}",
+          60
+        ]
+      },
+      "item:perk:aura-bonding"
     ],
     "cost": 3,
-    "design": {
-      "arena": "social",
-      "approach": "power",
-      "archetype": "Aura"
-    },
-    "description": "You may make a Hard (-20) Aura Sense check to try and assuage the aura of a hostile target and calm it, rendering it non-hostile unless provoked. Please note, this will not function on opponents who are hostile through cold indifference rather than anger or pain.",
+    "description": "<p>You may make a Hard (-20) Aura Sense check to try and assuage the aura of a hostile target and calm it, rendering it non-hostile unless provoked. Please note, this will not function on opponents who are hostile through cold indifference rather than anger or pain.</p>",
     "actions": [
       {
         "name": "Soothing Aura",
         "slug": "soothing-aura",
-        "description": "You may make a Hard (-20) Aura Sense check to try and assuage the aura of a hostile target and calm it, rendering it non-hostile unless provoked. Please note, this will not function on opponents who are hostile through cold indifference rather than anger or pain.",
+        "description": "<p>You may make a Hard (-20) Aura Sense check to try and assuage the aura of a hostile target and calm it, rendering it non-hostile unless provoked. Please note, this will not function on opponents who are hostile through cold indifference rather than anger or pain.</p>",
         "cost": {
           "activation": "complex",
-          "powerPoints": 5
+          "powerPoints": 5,
+          "delay": null,
+          "priority": null
         },
         "type": "generic",
-        "traits": []
+        "traits": [],
+        "img": "icons/svg/explosion.svg",
+        "range": {
+          "target": "enemy",
+          "unit": "m",
+          "distance": 0
+        },
+        "variant": null
       }
     ],
     "slug": "soothing-aura",
     "traits": [],
-    "node": {
-      "i": -3,
-      "j": -56,
-      "connected": [
-        "aura-bonding",
-        "aura-projection"
-      ],
-      "config": {
-        "alpha": null,
-        "backgroundColor": "#008000",
-        "borderColor": null,
-        "borderWidth": null,
-        "texture": "systems/ptr2e/img/perk-icons/Aura.svg",
-        "tint": "#151515",
-        "scale": null
-      },
-      "hidden": false,
-      "type": "normal"
-    }
+    "_migration": {
+      "version": null,
+      "previous": null
+    },
+    "nodes": [
+      {
+        "connected": [
+          "aura-bonding"
+        ],
+        "config": {
+          "alpha": null,
+          "backgroundColor": "#008000",
+          "borderColor": null,
+          "borderWidth": null,
+          "texture": "systems/ptr2e/img/perk-icons/Aura.svg",
+          "tint": "#151515",
+          "scale": null
+        },
+        "hidden": false,
+        "type": "normal",
+        "x": 179,
+        "y": 32,
+        "tier": null
+      }
+    ],
+    "autoUnlock": [],
+    "originSlug": null,
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": []
   },
   "_id": "6m9rPR0KNKTQ2B40",
-  "img": "/systems/ptr2e/img/icons/feat_icon.webp",
+  "img": "systems/ptr2e/img/perk-icons/Aura.svg",
   "effects": [],
-  "flags": {
-    "core": {
-      "sourceId": "Compendium.ptr2e.core-perks.Item.6m9rPR0KNKTQ2B40"
-    }
-  },
-  "_stats": {
-    "coreVersion": "12.321",
-    "systemId": "ptr2e",
-    "systemVersion": "0.005",
-    "createdTime": null,
-    "modifiedTime": 1714920527631,
-    "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
-    "compendiumSource": null,
-    "duplicateSource": null
-  },
-  "folder": null,
-  "sort": 0,
-  "ownership": {
-    "default": 0
-  },
-  "_key": "!items!6m9rPR0KNKTQ2B40"
+  "folder": "I7ocNlZvZjyhwUcw"
 }

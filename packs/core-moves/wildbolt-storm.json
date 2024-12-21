@@ -1,10 +1,10 @@
 {
   "name": "Wildbolt Storm",
   "type": "move",
-  "img": "/systems/ptr2e/img/svg/electric_icon.svg",
+  "img": "systems/ptr2e/img/svg/electric_icon.svg",
   "system": {
     "slug": "wildbolt-storm",
-    "description": "Effect: On hit, all valid targets have a 20% chance of being Paralysis 7. If there is Rainy or Windy Weather, this attack gains [Danger Close].",
+    "description": "<p>Effect: On hit, all valid targets have a 30% chance of gaining @Affliction[paralysis] 7. If there is Rainy or Windy Weather, this attack gains [Danger Close].</p>",
     "traits": [
       "legendary",
       "blast-5",
@@ -19,10 +19,11 @@
         "type": "attack",
         "traits": [
           "legendary",
-          "blast-5",
+          "blast-4",
           "sky",
           "wind",
-          "environ"
+          "environ",
+          "pp-updated"
         ],
         "range": {
           "target": "blast",
@@ -31,7 +32,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 7,
+          "powerPoints": 10,
           "delay": null,
           "priority": null,
           "trigger": null
@@ -42,10 +43,47 @@
         "types": [
           "electric"
         ],
-        "description": "Effect: On hit, all valid targets have a 20% chance of being Paralysis 7. If there is Rainy or Windy Weather, this attack gains [Danger Close].",
+        "description": "<p>Effect: On hit, all valid targets have a 30% chance of gaining @Affliction[paralysis] 7. If there is Rainy or Windy Weather, this attack gains [Danger Close].</p>",
         "contestType": "",
         "contestEffect": "",
         "free": false,
+        "slot": null
+      },
+      {
+        "slug": "wildbolt-storm-blowing",
+        "name": "Wildbolt Storm (Blowing)",
+        "type": "attack",
+        "traits": [
+          "legendary",
+          "wind",
+          "blast-4",
+          "environ",
+          "danger-close",
+          "pp-updated"
+        ],
+        "range": {
+          "target": "blast",
+          "distance": 10,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 8,
+          "delay": null,
+          "priority": null,
+          "trigger": "Rainy or Windy Weather is present."
+        },
+        "category": "special",
+        "power": 100,
+        "accuracy": 100,
+        "types": [
+          "flying"
+        ],
+        "description": "<pTrigger: Rainy or Windy Weather is present.</p><p>Effect: On hit, all valid targets have a 30% chance of gaining @Affliction[paralysis] 7.</p>",
+        "contestType": "",
+        "contestEffect": "",
+        "variant": "wildbolt-storm",
+        "free": true,
         "slot": null
       }
     ],

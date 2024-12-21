@@ -1,10 +1,10 @@
 {
   "name": "Thunderous Kick",
   "type": "move",
-  "img": "/systems/ptr2e/img/svg/fighting_icon.svg",
+  "img": "systems/ptr2e/img/svg/fighting_icon.svg",
   "system": {
     "slug": "thunderous-kick",
-    "description": "Effect: On hit, the target loses -1 DEF stage for 5 activations. This attack is both Fighting and Electric Type.",
+    "description": "",
     "traits": [
       "legendary",
       "dash",
@@ -22,7 +22,8 @@
           "dash",
           "push-3",
           "kick",
-          "contact"
+          "contact",
+          "pp-updated"
         ],
         "range": {
           "target": "creature",
@@ -31,7 +32,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 7,
+          "powerPoints": 5,
           "delay": null,
           "priority": null,
           "trigger": null
@@ -40,9 +41,10 @@
         "power": 90,
         "accuracy": 100,
         "types": [
-          "fighting"
+          "fighting",
+          "electric"
         ],
-        "description": "Effect: On hit, the target loses -1 DEF stage for 5 activations. This attack is both Fighting and Electric Type.",
+        "description": "<p>Effect: On hit, the target loses -1 DEF Stage for 5 Activations. This attack is both Fighting- and Electric-Type.</p>",
         "contestType": "",
         "contestEffect": "",
         "free": false,
@@ -50,7 +52,7 @@
       }
     ],
     "container": null,
-    "grade": "A"
+    "grade": "B"
   },
   "_id": "fXfHy8KhkSm1MMi4",
   "effects": []

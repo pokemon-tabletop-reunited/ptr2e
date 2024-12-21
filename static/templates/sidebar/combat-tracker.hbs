@@ -94,7 +94,15 @@
 
             <div class="token-initiative">
                 {{#if this.hasRolled}}
-                <span class="initiative">{{this.initiative}}</span>
+                  {{#if (isdefined this.delay)}}
+                  {{#if (is this.delay -1)}}
+                    <span class="initiative">0A</span>
+                  {{else}}
+                    <span class="initiative" data-tooltip="This Delayed action happens after {{add this.delay 1}} Activations have passed.">{{add this.delay 1}}A</span>
+                  {{/if}}
+                  {{else}}
+                  <span class="initiative">{{this.initiative}}</span>
+                {{/if}}
                 {{else if this.owner}}
                 <a class="combatant-control roll" data-tooltip="COMBAT.InitiativeRoll" data-control="rollInitiative"></a>
                 {{/if}}

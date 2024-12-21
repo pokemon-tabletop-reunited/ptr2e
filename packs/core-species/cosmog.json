@@ -1,6 +1,6 @@
 {
   "name": "cosmog",
-  "img": "/systems/ptr2e/img/icons/species_icon.webp",
+  "img": "systems/ptr2e/img/icons/species_icon.webp",
   "type": "species",
   "system": {
     "types": [
@@ -19,14 +19,12 @@
         {
           "name": "teleport",
           "level": 1,
-          "gen": "scarlet-violet",
-          "uuid": "Compendium.ptr2e.core-moves.Item.D70apP7vVf1aEVVr"
+          "gen": "scarlet-violet"
         },
         {
           "name": "splash",
           "level": 1,
-          "gen": "scarlet-violet",
-          "uuid": "Compendium.ptr2e.core-moves.Item.zsfPLAkIqk2KQaP7"
+          "gen": "scarlet-violet"
         }
       ],
       "tutor": []
@@ -37,7 +35,7 @@
       "category": "tiny",
       "type": "quad"
     },
-    "captureRate": 45,
+    "captureRate": 250,
     "eggGroups": [
       "no-eggs"
     ],
@@ -109,6 +107,7 @@
       "pokemon",
       "legendary",
       "underdog",
+      "glow-2",
       "hover",
       "teleporter",
       "dangerous-ultra-wormhole"
@@ -118,19 +117,33 @@
     ],
     "abilities": {
       "starting": [
-        "beast-boost"
+        {
+          "slug": "beast-boost"
+        }
       ],
       "basic": [
-        "unaware",
-        "magic-bounce"
+        {
+          "slug": "unaware"
+        },
+        {
+          "slug": "magic-bounce"
+        }
       ],
       "advanced": [
-        "sturdy",
-        "magic-guard"
+        {
+          "slug": "sturdy"
+        },
+        {
+          "slug": "magic-guard"
+        }
       ],
       "master": [
-        "full-metal-body",
-        "shadow-shield"
+        {
+          "slug": "full-metal-body"
+        },
+        {
+          "slug": "shadow-shield"
+        }
       ]
     },
     "movement": {
@@ -180,7 +193,7 @@
         "group": null
       },
       {
-        "slug": "occult-legends",
+        "slug": "legends",
         "value": 20,
         "rvs": 0,
         "favourite": false,
@@ -188,7 +201,7 @@
         "group": "occult"
       },
       {
-        "slug": "occult-psychic",
+        "slug": "psychic",
         "value": 30,
         "rvs": 0,
         "favourite": false,
@@ -196,7 +209,7 @@
         "group": "occult"
       },
       {
-        "slug": "occult-ultra-beasts",
+        "slug": "ultra-beasts",
         "value": 25,
         "rvs": 0,
         "favourite": false,

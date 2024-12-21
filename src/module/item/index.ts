@@ -5,6 +5,7 @@ import { ActorPTR2e } from "@actor";
 
 // Items
 type AbilityPTR2e<TParent extends ActorPTR2e | null = ActorPTR2e | null> = ItemPTR2e<data.AbilitySystemModel, TParent>;
+type BlueprintPTR2e<TParent extends ActorPTR2e | null = ActorPTR2e | null> = ItemPTR2e<data.BlueprintSystemModel, TParent>;
 type ConsumablePTR2e<TParent extends ActorPTR2e | null = ActorPTR2e | null> = ItemPTR2e<data.ConsumableSystemModel, TParent>;
 type ContainerPTR2e<TParent extends ActorPTR2e | null = ActorPTR2e | null> = ItemPTR2e<data.ContainerSystemModel, TParent>;
 type EquipmentPTR2e<TParent extends ActorPTR2e | null = ActorPTR2e | null> = ItemPTR2e<data.EquipmentSystemModel, TParent>;
@@ -15,9 +16,11 @@ type SpeciesPTR2e<TParent extends ActorPTR2e | null = ActorPTR2e | null> = ItemP
 type WeaponPTR2e<TParent extends ActorPTR2e | null = ActorPTR2e | null> = ItemPTR2e<data.WeaponSystemModel, TParent>;
 type PTUItem = ItemPTR2e;
 type EffectPTR2e<TParent extends ActorPTR2e | null = ActorPTR2e | null> = ItemPTR2e<data.EffectSystemModel, TParent>;
+type SummonPTR2e<TParent extends ActorPTR2e | null = null> = ItemPTR2e<data.SummonSystemModel, TParent>;
 
 export type {
     AbilityPTR2e,
+    BlueprintPTR2e,
     ConsumablePTR2e,
     ContainerPTR2e,
     EquipmentPTR2e,
@@ -28,10 +31,12 @@ export type {
     WeaponPTR2e,
     PTUItem,
     EffectPTR2e,
+    SummonPTR2e,
 };
 
 export type ItemSystemPTR =
     | data.AbilitySystemModel
+    | data.BlueprintSystemModel
     | data.ConsumableSystemModel
     | data.ContainerSystemModel
     | data.EquipmentSystemModel
@@ -40,7 +45,8 @@ export type ItemSystemPTR =
     | data.PerkSystemModel
     | data.SpeciesSystemModel
     | data.WeaponSystemModel
-    | data.EffectSystemModel;
+    | data.EffectSystemModel
+    | data.SummonSystemModel;
 
 export type ItemSystemsWithActions =
     | data.AbilitySystemModel
@@ -48,10 +54,18 @@ export type ItemSystemsWithActions =
     | data.GearSystemModel
     | data.MoveSystemModel
     | data.PerkSystemModel
+    | data.WeaponSystemModel
+    | data.SummonSystemModel;
+
+export type ItemSystemsWithFlingStats =
+    | data.ConsumableSystemModel
+    | data.EquipmentSystemModel
+    | data.GearSystemModel
     | data.WeaponSystemModel;
 
 export type ItemSourcePTR2e =
     | data.AbilitySystemSource
+    | data.BlueprintSystemSource
     | data.ConsumableSystemSource
     | data.ContainerSystemSource
     | data.EquipmentSystemSource
@@ -60,7 +74,8 @@ export type ItemSourcePTR2e =
     | data.PerkSystemSource
     | data.SpeciesSystemSource
     | data.WeaponSystemSource
-    | data.EffectSystemSource;
+    | data.EffectSystemSource
+    | data.SummonSystemSource;
 
 // Document
 export * from "./document.ts";

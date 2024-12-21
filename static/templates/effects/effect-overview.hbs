@@ -1,4 +1,7 @@
 <section class="tab sheet-body {{tabs.overview.cssClass}}" data-tab="overview" data-group="sheet">
+    <aside class="traits"> 
+      <input type="text" class="traits ptr2e-tagify" name="system.traits" value="{{json traits}}" data-dType="JSON"/>
+    </aside>
     <div class="scroll">
         {{formField fields.tint value=data.tint localize=true}}
         

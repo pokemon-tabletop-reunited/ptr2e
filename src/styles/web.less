@@ -8,7 +8,7 @@
     width: 250px;
     height: 100%;
     pointer-events: none;
-    z-index: calc(var(--z-index-tooltip) - 2);
+    z-index: calc(var(--z-index-window) - 1);
     display: grid;
     grid-template-columns: 250px;
     border-radius: unset;
@@ -107,6 +107,17 @@
             border: 1px solid var(--color-light-6);
             border-radius: 8px;
 
+            header {
+              margin-bottom: 0.25rem;
+              h2 {
+                margin-bottom: 0.25rem;
+              }
+
+              &.traits {
+                margin: 0.25rem 0;
+              }
+            }
+
             .perk-embed {
                 border: unset;
                 border-radius: unset;
@@ -120,6 +131,21 @@
                     gap: 0.5rem;
                 }
             }
+
+          figure {
+            fieldset {
+              padding: 1rem;
+              display: flex;
+              flex-direction: row;
+              flex-wrap: nowrap;
+              gap: 0.5rem;
+              border-radius: 8px;
+              border-color: var(--border-theme-color);
+              p {
+                margin: 0;
+              }
+            }
+          }
         }
 
         footer {
@@ -132,8 +158,12 @@
             border-bottom: 1px solid var(--color-light-6);
 
             button {
-                &.purchase {
+                &.purchase, &.refund {
                     flex: 0 0 70%;
+                }
+
+                &.refund {
+                  border-color: #851a1a;
                 }
 
                 &.unavailable {
@@ -203,6 +233,8 @@
             border-radius: 6px;
 
             dl {
+              margin: 0.25em 0;
+
                 dt {
                     display: inline-block;
                     padding-left: 5px;
@@ -225,11 +257,19 @@
             }
         }
 
-        [data-filter-type="multiselects"] {
+        [data-filter-type="multiselects"], [data-filter-type="checkboxes"] {
             border: 1px solid var(--border-theme-color);
             border-radius: 6px;
             margin: 0.5rem;
             padding: 0.5rem;
+
+            dt {
+              width: 10%;
+            }
+    
+            dd {
+                width: 82%;
+            }
 
             .tags {
                 --readonly-striped: 0;

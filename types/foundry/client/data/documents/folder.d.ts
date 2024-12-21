@@ -92,7 +92,7 @@ declare global {
          * @param options Additional options passed to the Dialog.prompt method
          * @return A Promise which resolves or rejects once the dialog has been submitted or closed
          */
-        exportDialog(pack: string, options?: Record<string, unknown>): Promise<void>;
+        exportDialog(pack: string | null, options?: Record<string, unknown>): Promise<void>;
 
         protected override _onDelete(options: DocumentModificationContext<null>, userId: string): void;
 

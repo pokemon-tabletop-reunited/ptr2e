@@ -1,10 +1,10 @@
 {
   "name": "Fake Out",
   "type": "move",
-  "img": "/systems/ptr2e/img/svg/normal_icon.svg",
+  "img": "systems/ptr2e/img/svg/normal_icon.svg",
   "system": {
     "slug": "fake-out",
-    "description": "Effect: The target becomes Flinched 5 on hit.",
+    "description": "",
     "traits": [
       "dash",
       "priority-3",
@@ -18,7 +18,9 @@
         "traits": [
           "dash",
           "priority-3",
-          "contact"
+          "contact",
+          "flinch-5",
+          "pp-updated"
         ],
         "range": {
           "target": "creature",
@@ -27,7 +29,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 5,
+          "powerPoints": 4,
           "delay": null,
           "priority": 3,
           "trigger": null
@@ -38,7 +40,7 @@
         "types": [
           "normal"
         ],
-        "description": "Effect: The target becomes Flinched 5 on hit.",
+        "description": "<p>Effect: On hit, the target is Flinched.</p>",
         "contestType": "",
         "contestEffect": "",
         "free": false,
@@ -46,7 +48,7 @@
       }
     ],
     "container": null,
-    "grade": "C"
+    "grade": "B"
   },
   "_id": "bETEHMYZpiBol842",
   "effects": []

@@ -3,7 +3,7 @@ import ChangeForm from "./base.ts";
 
 class StageModifierForm extends ChangeForm<StageModifierSystem> {
     override get template() {
-        return "/systems/ptr2e/templates/effects/changes/stage-modifier.hbs";
+        return "systems/ptr2e/templates/effects/changes/stage-modifier.hbs";
     }
 }
 

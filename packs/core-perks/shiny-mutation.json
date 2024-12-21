@@ -3,70 +3,74 @@
   "type": "perk",
   "system": {
     "prerequisites": [
-      "Husbandry 60"
+      {
+        "gte": [
+          "{actor|skills.husbandry.mod}",
+          60
+        ]
+      }
     ],
     "cost": 3,
-    "design": {
-      "arena": "mental",
-      "approach": "power",
-      "archetype": "Breeding"
-    },
-    "description": "Through careful selection of traits in parents, you have learned how to breed Pokemon with the 'Shiny' gene.",
+    "description": "<p>Through careful selection of traits in parents, you have learned how to breed Pokemon with the 'Shiny' gene.</p>",
     "actions": [
       {
         "name": "Shiny Mutation",
         "slug": "shiny-mutation",
-        "description": "Through careful selection of traits in parents, you have learned how to breed Pokemon with the 'Shiny' gene.",
+        "description": "<p>Through careful selection of traits in parents, you have learned how to breed Pokemon with the 'Shiny' gene.</p>",
         "cost": {
-          "activation": "free"
+          "activation": "free",
+          "powerPoints": 0,
+          "delay": null,
+          "priority": null
         },
         "type": "passive",
-        "traits": []
+        "traits": [],
+        "img": "icons/svg/explosion.svg",
+        "range": {
+          "target": "enemy",
+          "unit": "m",
+          "distance": 0
+        },
+        "variant": null,
+        "hidden": false
       }
     ],
     "slug": "shiny-mutation",
     "traits": [],
-    "node": {
-      "i": -32,
-      "j": -34,
-      "connected": [
-        "breeder"
-      ],
-      "config": {
-        "alpha": null,
-        "backgroundColor": "#ff80c0",
-        "borderColor": null,
-        "borderWidth": null,
-        "texture": "systems/ptr2e/img/perk-icons/Breeder.svg",
-        "tint": "#0b0b0b",
-        "scale": null
-      },
-      "hidden": false,
-      "type": "normal"
-    }
+    "_migration": {
+      "version": null,
+      "previous": null
+    },
+    "nodes": [
+      {
+        "connected": [
+          "breeder"
+        ],
+        "config": {
+          "alpha": null,
+          "backgroundColor": "#ff80c0",
+          "borderColor": null,
+          "borderWidth": null,
+          "texture": "systems/ptr2e/img/perk-icons/Breeder.svg",
+          "tint": "#0b0b0b",
+          "scale": null
+        },
+        "hidden": false,
+        "type": "normal",
+        "x": 24,
+        "y": 82,
+        "tier": null
+      }
+    ],
+    "autoUnlock": [],
+    "originSlug": null,
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": []
   },
   "_id": "kjAlZzQyHM9eiaYV",
-  "img": "/systems/ptr2e/img/icons/feat_icon.webp",
+  "img": "systems/ptr2e/img/perk-icons/Breeder.svg",
   "effects": [],
-  "flags": {
-    "core": {
-      "sourceId": "Compendium.ptr2e.core-perks.Item.kjAlZzQyHM9eiaYV"
-    }
-  },
-  "_stats": {
-    "coreVersion": "12.321",
-    "systemId": "ptr2e",
-    "systemVersion": "0.005",
-    "createdTime": null,
-    "modifiedTime": 1714920281338,
-    "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
-    "compendiumSource": null,
-    "duplicateSource": null
-  },
-  "folder": null,
-  "sort": 0,
-  "ownership": {
-    "default": 0
-  },
-  "_key": "!items!kjAlZzQyHM9eiaYV"
+  "folder": "aNkYtPlgFsBmX4Q1"
 }

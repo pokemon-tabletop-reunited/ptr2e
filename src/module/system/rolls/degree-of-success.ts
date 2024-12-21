@@ -1,4 +1,3 @@
-import { CheckContext } from "@system/data.ts";
 import { CheckRoll } from "./check-roll.ts";
 
 class DegreeOfSuccess {
@@ -14,12 +13,13 @@ class DegreeOfSuccess {
     /** The total of the roll including modifiers */
     readonly rollTotal: number;
 
-    constructor(roll: Rolled<CheckRoll> | RollBrief) {
+    constructor(roll: Rolled<CheckRoll> | Rolled<Roll> | RollBrief) {
         if (roll instanceof Roll) {
             this.dieResult =
                 (roll.isDeterministic
                     ? roll.terms.find((t): t is NumericTerm => t instanceof NumericTerm)
-                    : roll.dice.find((d): d is Die => d instanceof Die && d.faces === 20)
+                    // @ts-expect-error - This namespace is not defined in the outdated types, but does exist in foundry v12
+                    : roll.dice.find((d): d is foundry.dice.terms.Die => d instanceof foundry.dice.terms.Die && d.faces === 20)
                 )?.total ?? 1;
             this.rollTotal = roll.total;
         } else {
@@ -39,8 +39,7 @@ class DegreeOfSuccess {
     }
 
     static create(
-        roll: Rolled<CheckRoll>,
-        _context?: CheckContext
+        roll: Rolled<CheckRoll> | Rolled<Roll>
     ): DegreeOfSuccess | null {
         // TODO: Implement
         const dos = new DegreeOfSuccess(roll);
@@ -49,7 +48,7 @@ class DegreeOfSuccess {
     }
 }
 
-type RollBrief = { dieValue: number; modifier: number };
+interface RollBrief { dieValue: number; modifier: number }
 
 interface CheckDC {
     slug?: string | null;

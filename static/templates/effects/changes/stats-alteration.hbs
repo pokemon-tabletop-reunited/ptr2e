@@ -1,0 +1,36 @@
+<div class="form-group center-text mb-2">
+  <p class="hint">Apply +- alterations to an Actor's Base Stats</p>
+</div>
+<div class="form-group">
+    <label class="short justify-content-center">HP</label>
+    <div class="form-fields">
+        <input type="number" name="{{basePath}}.hp" value="{{change.hp}}" />
+    </div>
+    <label class="short justify-content-center">ATK</label>
+    <div class="form-fields">
+        <input type="number" name="{{basePath}}.atk" value="{{change.atk}}" />
+    </div>
+    <label class="short justify-content-center">DEF</label>
+    <div class="form-fields">
+        <input type="number" name="{{basePath}}.def" value="{{change.def}}" />
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="short justify-content-center">SPA</label>
+    <div class="form-fields">
+        <input type="number" name="{{basePath}}.spa" value="{{change.spa}}" />
+    </div>
+    <label class="short justify-content-center">SPD</label>
+    <div class="form-fields">
+        <input type="number" name="{{basePath}}.spd" value="{{change.spd}}" />
+    </div>
+    <label class="short justify-content-center">SPE</label>
+    <div class="form-fields">
+        <input type="number" name="{{basePath}}.spe" value="{{change.spe}}" />
+    </div>
+</div>
+
+<div class="form-group">
+    <label class="short">{{localize fields.predicate.label}}</label>
+    <input type="text" name="{{basePath}}.predicate" value="{{json change.predicate spaces=0}}" />
+</div>

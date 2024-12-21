@@ -1,78 +1,106 @@
 {
   "name": "Inherited Resolve",
   "type": "ability",
-  "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+  "img": "systems/ptr2e/img/icons/weapon_icon.webp",
   "system": {
     "actions": [
       {
         "traits": [
           "legendary",
-          "connection",
-          "forme-change"
+          "forme-change",
+          "desperation-1-2",
+          "interrupt-6"
         ],
         "name": "Inherited Resolve",
-        "slug": "inherited-resolve",
-        "type": "passive",
+        "slug": "inherited-resolve-desperation",
+        "type": "generic",
         "cost": {
           "activation": "free",
-          "powerPoints": 0,
-          "trigger": "The user drops below 50% HP.",
-          "delay": null,
-          "priority": null
+          "trigger": "<p>The user crosses the threshold to meet the [Desperation 1/2] Condition.</p>"
         },
         "range": {
           "target": "self",
-          "distance": 0,
           "unit": "m"
         },
-        "description": "Trigger: The user drops below 50% HP.\nEffect: Connection - Secret Sword. The user transforms into its Resolute Forme. When the user Faints, it transforms into its Ordinary Forme. The user may also spend 6 PP as part of a Simple Action to chance Forme (otherwise, changed freely outside of combat with time)."
+        "description": "<p>Trigger: The user crosses the threshold to meet the [Desperation 1/2] Condition.</p><p>Effect: The user transforms into its Resolute Forme.</p>",
+        "img": "icons/svg/explosion.svg"
       },
       {
         "traits": [
           "legendary",
-          "connection",
+          "forme-change"
+        ],
+        "name": "Inherited Resolve (Forced Change)",
+        "slug": "inherited-resolve-change",
+        "type": "generic",
+        "cost": {
+          "activation": "simple",
+          "powerPoints": 4
+        },
+        "range": {
+          "target": "self",
+          "unit": "m"
+        },
+        "description": "<p>Effect: The user changes to its Resolute Form. This Action may be used outside of Combat as an Exploration Action.</p>",
+        "img": "icons/svg/explosion.svg"
+      },
+      {
+        "traits": [
+          "legendary",
           "forme-change"
         ],
         "name": "Inherited Resolve",
-        "slug": "inherited-resolve",
+        "slug": "inherited-resolve-passive",
         "type": "passive",
         "cost": {
-          "activation": "free",
-          "powerPoints": 0,
-          "delay": null,
-          "priority": null
+          "activation": "free"
         },
-        "range": null,
-        "description": "Passive: While in Resolute Forme, the user may use its [Sharp] and [Horn] attacks as Special-Category attacks, the user's Physical Reach increases by +1., and the user takes 15% less damage from all sources."
+        "description": "<p>Passive: While in Resolute Forme, the user may use its [Sharp] and [Horn] attacks as Special-Category attacks, the user's Reach increases by +1, and the user takes 15% less damage from all sources. When the user gains @Affliction[fainted] it transforms into its Ordinary Forme.</p>",
+        "img": "icons/svg/explosion.svg"
+      },
+      {
+        "slug": "secret-sword",
+        "name": "Secret Sword",
+        "type": "attack",
+        "traits": [
+          "pass-4",
+          "sharp",
+          "legendary",
+          "pp-updated"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 3
+        },
+        "category": "special",
+        "power": 85,
+        "accuracy": 100,
+        "types": [
+          "fighting"
+        ],
+        "description": "<p>Effect: This Attack's damage is calculated using the target's DEF.</p>",
+        "free": true,
+        "img": "icons/svg/explosion.svg"
       }
     ],
-    "description": "Trigger: The user drops below 50% HP.\nEffect: Connection - Secret Sword. The user transforms into its Resolute Forme. When the user Faints, it transforms into its Ordinary Forme. The user may also spend 6 PP as part of a Simple Action to chance Forme (otherwise, changed freely outside of combat with time).  Passive: While in Resolute Forme, the user may use its [Sharp] and [Horn] attacks as Special-Category attacks, the user's Physical Reach increases by +1., and the user takes 15% less damage from all sources.",
+    "description": "<p>Trigger: The user crosses the threshold to meet the [Desperation 1/2] Condition.</p><p>Effect: Connection - Secret Sword. The user transforms into its Resolute Forme. The user may spend 4 PP as a Simple Action to enter its Resolute Forme, or may do so as an Exploration Action.</p><p>Passive: While in Resolute Forme, the user may use its [Sharp] and [Horn] attacks as Special-Category attacks, the user's Reach increases by +1, and the user takes 15% less damage from all sources. When the user gains @Affliction[fainted] it transforms into its Ordinary Forme.</p>",
     "traits": [
       "legendary",
       "connection",
-      "forme-change"
+      "forme-change",
+      "desperation-1-2"
     ],
-    "slug": null,
-    "container": null
+    "slug": "inherited-resolve",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
   },
   "_id": "MksLcyHu34JEXutg",
-  "effects": [],
-  "folder": null,
-  "sort": 0,
-  "ownership": {
-    "default": 0,
-    "tXAZ3QUgjuwX4gdV": 3
-  },
-  "flags": {},
-  "_stats": {
-    "compendiumSource": null,
-    "duplicateSource": null,
-    "coreVersion": "12.324",
-    "systemId": "ptr2e",
-    "systemVersion": "0.005",
-    "createdTime": 1716919240454,
-    "modifiedTime": 1716919240454,
-    "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
-  },
-  "_key": "!items!MksLcyHu34JEXutg"
+  "effects": []
 }

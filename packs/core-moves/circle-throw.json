@@ -1,15 +1,16 @@
 {
   "name": "Circle Throw",
   "type": "move",
-  "img": "/systems/ptr2e/img/svg/fighting_icon.svg",
+  "img": "systems/ptr2e/img/svg/fighting_icon.svg",
   "system": {
     "slug": "circle-throw",
-    "description": "Effect: The target is Pushed 8m minus their WC, losing the Grapple Condition if applicable. If the target is an owned Pokémon, they are immediately returned their Poké Ball.",
+    "description": "<p>Effect: On hit, the target loses the @Affliction[grapple] if applicable and is Pushed 10m minus their WC (minimum 1m). If the target is an owned Pokémon, they are immediately Recalled.</p>",
     "traits": [
       "push-x",
       "delay-1",
       "contact",
-      "grapple"
+      "grapple",
+      "pp-updated"
     ],
     "actions": [
       {
@@ -20,7 +21,8 @@
           "push-x",
           "delay-1",
           "contact",
-          "grapple"
+          "grapple",
+          "pp-updated"
         ],
         "range": {
           "target": "creature",
@@ -29,7 +31,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 7,
+          "powerPoints": 3,
           "delay": 1,
           "priority": null,
           "trigger": null
@@ -40,7 +42,7 @@
         "types": [
           "fighting"
         ],
-        "description": "Effect: The target is Pushed 8m minus their WC, losing the Grapple Condition if applicable. If the target is an owned Pokémon, they are immediately returned their Poké Ball.",
+        "description": "<p>Effect: On hit, the target loses the @Affliction[grapple] if applicable and is Pushed 10m minus their WC (minimum 1m). If the target is an owned Pokémon, they are immediately Recalled.</p>",
         "contestType": "",
         "contestEffect": "",
         "free": false,
@@ -48,7 +50,7 @@
       }
     ],
     "container": null,
-    "grade": "A"
+    "grade": "C"
   },
   "_id": "3KlcIgcWJFr9EKFx",
   "effects": []

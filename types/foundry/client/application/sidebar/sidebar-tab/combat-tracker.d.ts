@@ -15,6 +15,7 @@ declare interface CombatTrackerTurn {
     hasResource: boolean;
     resource: object | null;
     type?: string;
+    delay?: number;
 }
 
 declare interface CombatTrackerData {

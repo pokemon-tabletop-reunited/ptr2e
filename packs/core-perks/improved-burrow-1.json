@@ -1,73 +1,195 @@
 {
   "name": "Improved Burrow 1",
   "type": "perk",
+  "folder": "zrVtKATNxzLNxTUe",
   "system": {
     "prerequisites": [
-      "A Burrow Movement Allowance"
+      "#A Burrow Movement Allowance",
+      "#Climb 20 + 10 x (# of Improved Burrow Perks already obtained)"
     ],
     "cost": 1,
-    "design": {
-      "arena": "physical",
-      "approach": "power",
-      "archetype": "Mobility"
-    },
-    "description": "Improve your Burrow Movement Allowance by 2.",
+    "description": "<p>Improve your Burrow Movement Allowance by 2.</p>",
     "actions": [
       {
         "name": "Improved Burrow 1",
         "slug": "improved-burrow-1",
-        "description": "Improve your Burrow Movement Allowance by 2.",
+        "description": "<p>Improve your Burrow Movement Allowance by 2.</p>",
         "cost": {
-          "activation": "free"
+          "activation": "free",
+          "powerPoints": 0,
+          "delay": null,
+          "priority": null
         },
         "type": "passive",
-        "traits": []
+        "traits": [],
+        "img": "icons/svg/explosion.svg",
+        "range": {
+          "target": "enemy",
+          "unit": "m",
+          "distance": 0
+        },
+        "variant": null,
+        "hidden": false
       }
     ],
     "slug": "improved-burrow-1",
     "traits": [],
-    "node": {
-      "i": -65,
-      "j": 41,
-      "connected": [
-        "shovel-hands",
-        "root-6"
-      ],
-      "config": {
-        "alpha": null,
-        "backgroundColor": "#804000",
-        "borderColor": null,
-        "borderWidth": null,
-        "texture": "systems/ptr2e/img/perk-icons/Exploration.svg",
-        "tint": null,
-        "scale": null
+    "_migration": {
+      "version": null,
+      "previous": null
+    },
+    "variant": "multi",
+    "mode": "individual",
+    "nodes": [
+      {
+        "connected": [
+          "swimming-lessons",
+          "sprint",
+          "powerlifter",
+          "shovel-hands",
+          "freeclimber"
+        ],
+        "config": {
+          "alpha": null,
+          "backgroundColor": "#804000",
+          "borderColor": null,
+          "borderWidth": null,
+          "texture": "systems/ptr2e/img/perk-icons/Exploration.svg",
+          "tint": null,
+          "scale": null
+        },
+        "hidden": false,
+        "type": "normal",
+        "x": 142,
+        "y": 26,
+        "tier": null
       },
-      "hidden": false,
-      "type": "normal"
-    }
+      {
+        "x": 172,
+        "y": 80,
+        "connected": [
+          "root-3",
+          "subsidence"
+        ],
+        "config": {
+          "alpha": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "borderWidth": null,
+          "texture": null,
+          "tint": null,
+          "scale": null
+        },
+        "hidden": false,
+        "type": "normal",
+        "tier": null
+      },
+      {
+        "x": 47,
+        "y": 110,
+        "connected": [
+          "nurturing-shoots",
+          "improved-overland-1-4",
+          "root-6",
+          "beastmaster"
+        ],
+        "config": {
+          "alpha": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "borderWidth": null,
+          "texture": null,
+          "tint": null,
+          "scale": null
+        },
+        "hidden": false,
+        "type": "normal",
+        "tier": null
+      },
+      {
+        "x": 105,
+        "y": 127,
+        "connected": [
+          "stat-iv-booster-1-11",
+          "assault-armor-style",
+          "evasive-style",
+          "rapid-fire-style-1",
+          "gambit-style",
+          "improved-overland-1-13",
+          "improved-flight-1-6"
+        ],
+        "config": {
+          "alpha": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "borderWidth": null,
+          "texture": null,
+          "tint": null,
+          "scale": null
+        },
+        "hidden": false,
+        "type": "normal",
+        "tier": null
+      }
+    ],
+    "autoUnlock": [],
+    "originSlug": null,
+    "global": true,
+    "webs": []
   },
   "_id": "QmK7pugsgkpdnaHA",
-  "img": "/systems/ptr2e/img/icons/feat_icon.webp",
-  "effects": [],
-  "flags": {
-    "core": {
-      "sourceId": "Compendium.ptr2e.core-perks.Item.QmK7pugsgkpdnaHA"
+  "img": "systems/ptr2e/img/perk-icons/Exploration.svg",
+  "effects": [
+    {
+      "name": "Improved Burrow",
+      "type": "passive",
+      "_id": "A9U7GVQynow9u1zj",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "basic",
+            "key": "system.movement.burrow.value",
+            "value": 2,
+            "predicate": [],
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": "Compendium.ptr2e.core-perks.Item.QmK7pugsgkpdnaHA.ActiveEffect.A9U7GVQynow9u1zj",
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.2.4.3",
+        "createdTime": 1729187749803,
+        "modifiedTime": 1729187756184,
+        "lastModifiedBy": "IcBpMqhFuTck9VpX"
+      }
     }
-  },
-  "_stats": {
-    "coreVersion": "12.321",
-    "systemId": "ptr2e",
-    "systemVersion": "0.005",
-    "createdTime": null,
-    "modifiedTime": 1714922372663,
-    "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
-    "compendiumSource": null,
-    "duplicateSource": null
-  },
-  "folder": null,
-  "sort": 0,
-  "ownership": {
-    "default": 0
-  },
-  "_key": "!items!QmK7pugsgkpdnaHA"
+  ]
 }

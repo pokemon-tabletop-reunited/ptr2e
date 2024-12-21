@@ -1,13 +1,13 @@
 {
   "name": "Smokescreen",
   "type": "move",
-  "img": "/systems/ptr2e/img/svg/normal_icon.svg",
+  "img": "systems/ptr2e/img/svg/normal_icon.svg",
   "system": {
     "slug": "smokescreen",
-    "description": "Effect: An Obscurring Cloud is created in the [Blast] area for 5 rounds. Any creature that starts their activation in, or enters the hazard becomes Blind 2.",
+    "description": "<p>Effect: An Obscurring Cloud is created in the [Blast X] area for 5 rounds. Any creature that starts their Activation in or enters a space containing an Obscurring Cloud Hazard gains @Affliction[blinded] 2.</p>",
     "traits": [
       "hazard",
-      "blast-4"
+      "blast-3"
     ],
     "actions": [
       {
@@ -16,7 +16,7 @@
         "type": "attack",
         "traits": [
           "hazard",
-          "blast-4"
+          "blast-3"
         ],
         "range": {
           "target": "creature",
@@ -36,14 +36,15 @@
         "types": [
           "normal"
         ],
-        "description": "Effect: An Obscurring Cloud is created in the [Blast] area for 5 rounds. Any creature that starts their activation in, or enters the hazard becomes Blind 2.",
+        "description": "<p>Effect: An Obscurring Cloud is created in the [Blast X] area for 5 rounds. Any creature that starts their Activation in or enters a space containing an Obscurring Cloud Hazard gains @Affliction[blinded] 2.</p>",
         "contestType": "",
         "contestEffect": "",
         "free": false,
         "slot": null
       }
     ],
-    "container": null
+    "container": null,
+    "grade": "E"
   },
   "_id": "pYNVsTCmUw7oWhRg",
   "effects": []

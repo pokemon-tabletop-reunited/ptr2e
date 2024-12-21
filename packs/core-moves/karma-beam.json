@@ -1,10 +1,10 @@
 {
   "name": "Karma Beam",
   "type": "move",
-  "img": "/systems/ptr2e/img/svg/ghost_icon.svg",
+  "img": "systems/ptr2e/img/svg/ghost_icon.svg",
   "system": {
     "slug": "karma-beam",
-    "description": "Effect: If the user has been damaged by super-effective damage since its last activation, this move's Power doubles.",
+    "description": "<p>Effect: If the user has been damaged by super effective damage since its last Activation, this Attack's Power doubles.</p",
     "traits": [
       "ray"
     ],
@@ -14,7 +14,8 @@
         "name": "Karma Beam",
         "type": "attack",
         "traits": [
-          "ray"
+          "ray",
+          "pp-updated"
         ],
         "range": {
           "target": "creature",
@@ -34,7 +35,39 @@
         "types": [
           "ghost"
         ],
-        "description": "Effect: If the user has been damaged by super-effective damage since its last activation, this move's Power doubles.",
+        "description": "<p>Effect: If the user has been damaged by super effective damage since its last Activation, this Attack's Power doubles.</p>",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      },
+      {
+        "slug": "karma-beam-retribution",
+        "name": "Karma Beam (Retribution)",
+        "type": "attack",
+        "traits": [
+          "ray",
+          "pp-updated"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 10,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 6,
+          "delay": null,
+          "priority": null,
+          "trigger": "<p>The user has been damaged by super effective damage since the end of its last Activation.</p>"
+        },
+        "category": "special",
+        "power": 140,
+        "accuracy": 100,
+        "types": [
+          "ghost"
+        ],
+        "description": "<p>Trigger: The user has been damaged by super effective damage since the end of its last Activation.</p>",
         "contestType": "",
         "contestEffect": "",
         "free": false,
@@ -42,7 +75,7 @@
       }
     ],
     "container": null,
-    "grade": "B"
+    "grade": "A"
   },
   "_id": "JhjIgIhWRq7FZCnK",
   "effects": []

@@ -1,7 +1,7 @@
 {
   "name": "metapod",
   "type": "species",
-  "img": "/systems/ptr2e/img/icons/species_icon.webp",
+  "img": "systems/ptr2e/img/icons/species_icon.webp",
   "system": {
     "number": 11,
     "size": {
@@ -34,20 +34,36 @@
     ],
     "abilities": {
       "starting": [
-        "shed-skin",
-        "shell-armor"
+        {
+          "slug": "shed-skin"
+        },
+        {
+          "slug": "shell-armor"
+        }
       ],
       "basic": [
-        "regenerator",
-        "stalwart"
+        {
+          "slug": "regenerator"
+        },
+        {
+          "slug": "stalwart"
+        }
       ],
       "advanced": [
-        "pollen-field",
-        "sturdy"
+        {
+          "slug": "pollen-field"
+        },
+        {
+          "slug": "sturdy"
+        }
       ],
       "master": [
-        "overcoat",
-        "clear-body"
+        {
+          "slug": "overcoat"
+        },
+        {
+          "slug": "clear-body"
+        }
       ]
     },
     "skills": [
@@ -61,7 +77,7 @@
       },
       {
         "slug": "climb",
-        "value": 70,
+        "value": 60,
         "rvs": 0,
         "favourite": false,
         "hidden": false,
@@ -109,7 +125,7 @@
       },
       {
         "slug": "stealth",
-        "value": 70,
+        "value": 60,
         "rvs": 0,
         "favourite": false,
         "hidden": false,
@@ -124,7 +140,6 @@
         "group": null
       }
     ],
-    "slug": "",
     "stats": {
       "hp": 50,
       "atk": 20,
@@ -139,32 +154,27 @@
     "moves": {
       "tutor": [
         {
-          "name": "string-shot",
-          "gen": "heartgold-soulsilver",
-          "uuid": "Compendium.ptr2e.core-moves.Item.TijijTYIY2UOVWOn"
-        },
-        {
-          "name": "iron-defense",
-          "gen": "ultra-sun-ultra-moon",
-          "uuid": "Compendium.ptr2e.core-moves.Item.qSWTxI39iL7ivEVw"
-        },
-        {
           "name": "bug-bite",
-          "gen": "ultra-sun-ultra-moon",
-          "uuid": "Compendium.ptr2e.core-moves.Item.VWTUbiZH5inKfQn8"
+          "gen": "ultra-sun-ultra-moon"
         },
         {
           "name": "electroweb",
-          "gen": "ultra-sun-ultra-moon",
-          "uuid": "Compendium.ptr2e.core-moves.Item.DLoWCGaBlU23XnUI"
+          "gen": "ultra-sun-ultra-moon"
+        },
+        {
+          "name": "iron-defense",
+          "gen": "ultra-sun-ultra-moon"
+        },
+        {
+          "name": "string-shot",
+          "gen": "heartgold-soulsilver"
         }
       ],
       "levelUp": [
         {
           "name": "harden",
           "level": 1,
-          "gen": "brilliant-diamond-and-shining-pearl",
-          "uuid": "Compendium.ptr2e.core-moves.Item.vKslOzFQFtNm1yzc"
+          "gen": "brilliant-diamond-and-shining-pearl"
         }
       ]
     },
@@ -215,10 +225,16 @@
           }
         }
       ],
-      "uuid": "Compendium.ptr2e.core-species.Item.DLpRR7pFa4VCgCpC"
-    }
+      "uuid": "Compendium.ptr2e.core-species.Item.QEUZx1xKGWHNOHde",
+      "methods": []
+    },
+    "_migration": {
+      "version": null,
+      "previous": null
+    },
+    "habitats": [],
+    "slug": "metapod"
   },
   "_id": "DLpRR7pFa4VCgCpC",
-  "effects": [],
-  "folder": null
+  "effects": []
 }

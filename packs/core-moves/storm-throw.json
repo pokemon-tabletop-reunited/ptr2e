@@ -1,15 +1,15 @@
 {
   "name": "Storm Throw",
   "type": "move",
-  "img": "/systems/ptr2e/img/svg/fighting_icon.svg",
+  "img": "systems/ptr2e/img/svg/fighting_icon.svg",
   "system": {
     "slug": "storm-throw",
-    "description": "Trigger: The user is in control of a Grapple.\nEffect: This attack gains [Danger Close], and has its [Push X] increased by +2. If the user is not in control of a Grapple, this attack cannot be declared.",
+    "description": "",
     "traits": [
       "crit-4",
-      "push-2",
-      "contact",
-      "grapple"
+      "push-4",
+      "grapple",
+      "pp-updated"
     ],
     "actions": [
       {
@@ -18,9 +18,9 @@
         "type": "attack",
         "traits": [
           "crit-4",
-          "push-2",
-          "contact",
-          "grapple"
+          "push-4",
+          "grapple",
+          "pp-updated"
         ],
         "range": {
           "target": "creature",
@@ -29,10 +29,9 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 6,
+          "powerPoints": 4,
           "delay": null,
-          "priority": null,
-          "trigger": "The user is in control of a Grapple."
+          "priority": null
         },
         "category": "physical",
         "power": 60,
@@ -40,7 +39,7 @@
         "types": [
           "fighting"
         ],
-        "description": "Trigger: The user is in control of a Grapple.\nEffect: This attack gains [Danger Close], and has its [Push X] increased by +2. If the user is not in control of a Grapple, this attack cannot be declared.",
+        "description": "<p>Effect: On hit, the target loses @Affliction[grapple] if applicable and is Pushed.",
         "contestType": "",
         "contestEffect": "",
         "free": false,

@@ -1,52 +1,133 @@
 {
   "name": "Defeatist",
   "type": "ability",
-  "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+  "img": "icons/skills/movement/figure-running-gray.webp",
   "system": {
     "actions": [
       {
-        "traits": [],
+        "traits": [
+          "desperation-1-2"
+        ],
         "name": "Defeatist",
         "slug": "defeatist",
         "type": "generic",
         "cost": {
-          "activation": "free",
-          "powerPoints": 0,
-          "trigger": "The user is at 50% or less HP.",
-          "delay": null,
-          "priority": null
+          "activation": "free"
         },
         "range": {
           "target": "self",
-          "distance": 0,
           "unit": "m"
         },
-        "description": "Trigger: The user is at 50% or less HP.\nEffect: The user's Base ATK and SPATK are reduced by 50% and their Base DEF and SPDEF are increased by 50%."
+        "description": "<p>Effect: While the user meets the [Desperation 1/2] Condition, their Base ATK and SPATK are reduced by 50% and their Base DEF, SPDEF, and SPD are increased by 50%.</p>",
+        "img": "icons/svg/explosion.svg"
       }
     ],
-    "description": "Trigger: The user is at 50% or less HP.\nEffect: The user's Base ATK and SPATK are reduced by 50% and their Base DEF and SPDEF are increased by 50%.",
+    "description": "ffect: While the user meets the [Desperation 1/2] Condition, their Base ATK and SPATK are reduced by 50% and their Base DEF, SPDEF, and SPD are increased by 50%.</p>",
     "traits": [],
-    "slug": null,
-    "container": null
+    "slug": "defeatist",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
   },
   "_id": "UEoQx5XPkgzgPFtU",
-  "effects": [],
-  "folder": null,
-  "sort": 0,
-  "ownership": {
-    "default": 0,
-    "tXAZ3QUgjuwX4gdV": 3
-  },
-  "flags": {},
-  "_stats": {
-    "compendiumSource": null,
-    "duplicateSource": null,
-    "coreVersion": "12.324",
-    "systemId": "ptr2e",
-    "systemVersion": "0.005",
-    "createdTime": 1716919240454,
-    "modifiedTime": 1716919240454,
-    "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
-  },
-  "_key": "!items!UEoQx5XPkgzgPFtU"
+  "effects": [
+    {
+      "name": "Defeatist",
+      "type": "passive",
+      "_id": "qISNKnU7vNXCSZa7",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "basic",
+            "key": "system.attributes.atk.base",
+            "value": 0.5,
+            "predicate": [
+              "self:state:desperation-1-2"
+            ],
+            "mode": 1,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "key": "system.attributes.spa.base",
+            "value": 0.5,
+            "mode": 1,
+            "predicate": [
+              "self:state:desperation-1-2"
+            ],
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "key": "system.attributes.def.base",
+            "value": 0.5,
+            "mode": 1,
+            "predicate": [
+              "self:state:desperation-1-2"
+            ],
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "key": "system.attributes.spd.base",
+            "value": 0.5,
+            "mode": 1,
+            "predicate": [
+              "self:state:desperation-1-2"
+            ],
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "key": "system.attributes.spe.base",
+            "value": 0.5,
+            "predicate": [
+              "self:state:desperation-1-2"
+            ],
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.2.4.2",
+        "createdTime": 1728600798829,
+        "modifiedTime": 1728635895627,
+        "lastModifiedBy": "IcBpMqhFuTck9VpX"
+      }
+    }
+  ]
 }

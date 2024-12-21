@@ -1,10 +1,10 @@
 {
   "name": "Empathy Pulse",
   "type": "move",
-  "img": "/systems/ptr2e/img/svg/fighting_icon.svg",
+  "img": "systems/ptr2e/img/svg/fighting_icon.svg",
   "system": {
     "slug": "empathy-pulse",
-    "description": "Effect: On hit, the target has a 10% chance of losing -1 SPATK stage for 5 activations. This attack is one step more effective against Shadow-Types.",
+    "description": "",
     "traits": [
       "pulse",
       "aura"
@@ -16,7 +16,8 @@
         "type": "attack",
         "traits": [
           "pulse",
-          "aura"
+          "aura",
+          "pp-updated"
         ],
         "range": {
           "target": "creature",
@@ -25,7 +26,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 5,
+          "powerPoints": 4,
           "delay": null,
           "priority": null,
           "trigger": null
@@ -36,7 +37,7 @@
         "types": [
           "fighting"
         ],
-        "description": "Effect: On hit, the target has a 10% chance of losing -1 SPATK stage for 5 activations. This attack is one step more effective against Shadow-Types.",
+        "description": "<p>Effect: On hit, the target has a 10% chance of losing -1 SPATK Stage for 5 Activations. This attack is one step more effective against Shadow-Types.</p>",
         "contestType": "",
         "contestEffect": "",
         "free": false,
@@ -44,7 +45,7 @@
       }
     ],
     "container": null,
-    "grade": "B"
+    "grade": "C"
   },
   "_id": "BtEepSFV3VkWViS1",
   "effects": []

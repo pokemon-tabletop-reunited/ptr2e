@@ -1,10 +1,10 @@
 {
   "name": "Grab",
   "type": "move",
-  "img": "/systems/ptr2e/img/svg/untyped_icon.svg",
+  "img": "systems/ptr2e/img/svg/untyped_icon.svg",
   "system": {
     "slug": "grab",
-    "description": "Effect: the user's ACC is modified by (userCatMod-targetCatMod)/2 for this attack. On hit, the user makes a LIft Check, CR = (userWC-targetWC) / 2. On success, the user and target gain Grapple, and the user is in control of the grapple.",
+    "description": "<p>Effect: On hit, the user makes a Lift Check, <em>CR = -20 + 10 * (userWC-targetWC) / 2</em>. On success, the user and target gain @Affliction[grapple], and the user is put in control of the grapple.</p>",
     "traits": [
       "basic",
       "contact",
@@ -26,26 +26,19 @@
           "unit": "m"
         },
         "cost": {
-          "activation": "complex",
-          "powerPoints": 0,
-          "delay": null,
-          "priority": null,
-          "trigger": null
+          "activation": "complex"
         },
         "category": "status",
-        "power": null,
-        "accuracy": 100,
+        "accuracy": 90,
         "types": [
           "untyped"
         ],
-        "description": "Effect: the user's ACC is modified by (userCatMod-targetCatMod)/2 for this attack. On hit, the user makes a LIft Check, CR = (userWC-targetWC) / 2. On success, the user and target gain Grapple, and the user is in control of the grapple.",
-        "contestType": "",
-        "contestEffect": "",
-        "free": false,
-        "slot": null
+        "description": "<p>Effect: On hit, the user makes a Lift Check, <em>CR = -20 + 10 * (userWC-targetWC) / 2</em>. On success, the user and target gain @Affliction[grapple], and the user is put in control of the grapple.</p>",
+        "free": true,
+        "img": "systems/ptr2e/img/svg/untyped_icon.svg"
       }
     ],
-    "container": null
+    "grade": "E"
   },
   "_id": "nZIEKK2aQE5Y53Q4",
   "effects": []

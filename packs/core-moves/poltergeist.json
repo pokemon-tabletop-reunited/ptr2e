@@ -1,17 +1,19 @@
 {
   "name": "Poltergeist",
   "type": "move",
-  "img": "/systems/ptr2e/img/svg/ghost_icon.svg",
+  "img": "systems/ptr2e/img/svg/ghost_icon.svg",
   "system": {
     "slug": "poltergeist",
-    "description": "Effect: If the target does not have an equipped Accessory or Belt item, this attack fails.",
+    "description": "",
     "traits": [],
     "actions": [
       {
         "slug": "poltergeist",
         "name": "Poltergeist",
         "type": "attack",
-        "traits": [],
+        "traits": [
+          "pp-updated"
+        ],
         "range": {
           "target": "creature",
           "distance": 10,
@@ -19,10 +21,10 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 4,
+          "powerPoints": 3,
           "delay": null,
           "priority": null,
-          "trigger": null
+          "trigger": "<p>The target has an equipped [Held], [Accessory], or [Belt] item.</p>"
         },
         "category": "physical",
         "power": 110,
@@ -30,7 +32,7 @@
         "types": [
           "ghost"
         ],
-        "description": "Effect: If the target does not have an equipped Accessory or Belt item, this attack fails.",
+        "description": "<p>Trigger: The target has an equipped [Held], [Accessory], or [Belt] item.</p><p>Effect: If the target does not have an equipped Accessory or Belt item, this attack fails.</p>",
         "contestType": "",
         "contestEffect": "",
         "free": false,
@@ -38,7 +40,7 @@
       }
     ],
     "container": null,
-    "grade": "B"
+    "grade": "C"
   },
   "_id": "GaMBzn6HlvjqvZdJ",
   "effects": []

@@ -1,0 +1,62 @@
+{
+  "name": "Heroic Transformation",
+  "type": "perk",
+  "system": {
+    "_migration": {
+      "version": 0.109,
+      "previous": null
+    },
+    "actions": [],
+    "description": "<p>You acquire a Heroic Transformation, which you may construct yourself. You gain 100 Base Stat Points to allocate to the Heroic Transformation, and may allocate a maximum of +50 to any one stat. You may not allocate any of these points to HP. <br><br>This transformation functions similarly to a Mega Evolution, and may require a Key Item or Trait appropriate to the setting.</p>",
+    "traits": [],
+    "prerequisites": [
+      "trait:humanoid",
+      {
+        "gte": [
+          "{actor|level}",
+          40
+        ]
+      }
+    ],
+    "cost": 3,
+    "slug": "heroic-transformation",
+    "nodes": [
+      {
+        "x": 16,
+        "y": 81,
+        "hidden": false,
+        "type": "entry",
+        "connected": [
+          "typed-transform",
+          "heroic-rush",
+          "heroic-mobility",
+          "heroic-senses",
+          "transformation-ability",
+          "tactician",
+          "root-6",
+          "chansey-medicine"
+        ],
+        "config": {
+          "alpha": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "borderWidth": null,
+          "texture": null,
+          "tint": null,
+          "scale": null
+        },
+        "tier": null
+      }
+    ],
+    "autoUnlock": [],
+    "originSlug": null,
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": []
+  },
+  "img": "icons/magic/control/silhouette-grow-shrink-blue.webp",
+  "effects": [],
+  "_id": "UXjU1BOmmLM3N6QP",
+  "folder": "OUVEQyuUswQVLxBO"
+}

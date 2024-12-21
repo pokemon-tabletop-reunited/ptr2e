@@ -1,10 +1,9 @@
 {
   "name": "Mud Shot",
   "type": "move",
-  "img": "/systems/ptr2e/img/svg/ground_icon.svg",
+  "img": "systems/ptr2e/img/svg/ground_icon.svg",
   "system": {
     "slug": "mud-shot",
-    "description": "Effect: On hit, the target loses -1 SPD stage for 5 activations.",
     "traits": [
       "missile"
     ],
@@ -14,7 +13,8 @@
         "name": "Mud Shot",
         "type": "attack",
         "traits": [
-          "missile"
+          "missile",
+          "pp-updated"
         ],
         "range": {
           "target": "creature",
@@ -23,10 +23,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 6,
-          "delay": null,
-          "priority": null,
-          "trigger": null
+          "powerPoints": 3
         },
         "category": "special",
         "power": 55,
@@ -34,15 +31,69 @@
         "types": [
           "ground"
         ],
-        "description": "Effect: On hit, the target loses -1 SPD stage for 5 activations.",
-        "contestType": "",
-        "contestEffect": "",
-        "free": false,
-        "slot": null
+        "description": "<p>Effect: On hit, the target loses -1 SPD stage for 5 Activations.</p>"
       }
     ],
-    "container": null
+    "grade": "D",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
   },
   "_id": "rDnV5BfNxKyYAWam",
-  "effects": []
+  "effects": [
+    {
+      "name": "Mud Shot",
+      "type": "passive",
+      "_id": "tSb48N5nhSPAB21P",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "mud-shot-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.HLAV9dhz632Rfp1K",
+            "predicate": [],
+            "chance": 100,
+            "affects": "target",
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.3.4.1",
+        "createdTime": 1732233541477,
+        "modifiedTime": 1732233564258,
+        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
+      }
+    }
+  ]
 }

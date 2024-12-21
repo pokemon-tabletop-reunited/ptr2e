@@ -24,7 +24,7 @@ class CheckRoll extends Roll {
             case "luck-check":
                 return CheckRoll.createSkillCheckFormula(options);
             case "luck-roll":
-                return { formula: "1d10", data: { type: "luck-roll" } };
+                return { formula: "1d6+4", data: { type: "luck-roll" } };
             case "pokeball-check":
                 return { formula: "1d100", data: { type: "pokeball-check" } };
         }
@@ -97,7 +97,7 @@ interface CheckRollDataPTR2e extends RollDataPTR2e {
     domains?: string[];
 }
 
-type AttackRollResult = {
+interface AttackRollResult {
     rolls: {
         accuracy: Rolled<CheckRoll> | null;
         crit: Rolled<CheckRoll> | null;
@@ -111,9 +111,9 @@ type AttackRollResult = {
     options: AttackRollDataPTR2e;
     context: CheckRollContext;
     check: CheckModifier;
-};
+}
 
-type PokeballRollResults = {
+interface PokeballRollResults {
     rolls: {
         accuracy: Rolled<CheckRoll> | null;
         crit: Rolled<CheckRoll> | null;
@@ -133,7 +133,7 @@ type PokeballRollResults = {
     options: CheckRollDataPTR2e;
     context: CheckRollContext;
     check: CheckModifier;
-};
+}
 
 type CheckType = "check" | "attack-roll" | "skill-check" | "luck-roll" | "luck-check" | "pokeball-check";
 

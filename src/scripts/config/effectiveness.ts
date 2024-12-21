@@ -4,7 +4,7 @@ export default {
     "normal":{
         "images":{
             "icon":"systems/ptu/static/css/images/types2/NormalIC_Icon.png",
-            "bar":"/systems/ptu/static/css/images/types2/NormalIC.png"
+            "bar":"systems/ptu/static/css/images/types2/NormalIC.png"
         },
         "effectiveness":{
             "normal":1,
@@ -33,7 +33,7 @@ export default {
     "fighting":{
         "images":{
             "icon":"systems/ptu/static/css/images/types2/FightingIC_Icon.png",
-            "bar":"/systems/ptu/static/css/images/types2/FightingIC.png"
+            "bar":"systems/ptu/static/css/images/types2/FightingIC.png"
         },
         "effectiveness":{
             "normal":1,
@@ -62,7 +62,7 @@ export default {
     "flying":{
         "images":{
             "icon":"systems/ptu/static/css/images/types2/FlyingIC_Icon.png",
-            "bar":"/systems/ptu/static/css/images/types2/FlyingIC.png"
+            "bar":"systems/ptu/static/css/images/types2/FlyingIC.png"
         },
         "effectiveness":{
             "normal":1,
@@ -91,7 +91,7 @@ export default {
     "poison":{
         "images":{
             "icon":"systems/ptu/static/css/images/types2/PoisonIC_Icon.png",
-            "bar":"/systems/ptu/static/css/images/types2/PoisonIC.png"
+            "bar":"systems/ptu/static/css/images/types2/PoisonIC.png"
         },
         "effectiveness":{
             "normal":1,
@@ -120,7 +120,7 @@ export default {
     "ground":{
         "images":{
             "icon":"systems/ptu/static/css/images/types2/GroundIC_Icon.png",
-            "bar":"/systems/ptu/static/css/images/types2/GroundIC.png"
+            "bar":"systems/ptu/static/css/images/types2/GroundIC.png"
         },
         "effectiveness":{
             "normal":1,
@@ -149,7 +149,7 @@ export default {
     "rock":{
         "images":{
             "icon":"systems/ptu/static/css/images/types2/RockIC_Icon.png",
-            "bar":"/systems/ptu/static/css/images/types2/RockIC.png"
+            "bar":"systems/ptu/static/css/images/types2/RockIC.png"
         },
         "effectiveness":{
             "normal":0.5,
@@ -178,7 +178,7 @@ export default {
     "bug":{
         "images":{
             "icon":"systems/ptu/static/css/images/types2/BugIC_Icon.png",
-            "bar":"/systems/ptu/static/css/images/types2/BugIC.png"
+            "bar":"systems/ptu/static/css/images/types2/BugIC.png"
         },
         "effectiveness":{
             "normal":1,
@@ -207,7 +207,7 @@ export default {
     "ghost":{
         "images":{
             "icon":"systems/ptu/static/css/images/types2/GhostIC_Icon.png",
-            "bar":"/systems/ptu/static/css/images/types2/GhostIC.png"
+            "bar":"systems/ptu/static/css/images/types2/GhostIC.png"
         },
         "effectiveness":{
             "normal":0,
@@ -236,7 +236,7 @@ export default {
     "steel":{
         "images":{
             "icon":"systems/ptu/static/css/images/types2/SteelIC_Icon.png",
-            "bar":"/systems/ptu/static/css/images/types2/SteelIC.png"
+            "bar":"systems/ptu/static/css/images/types2/SteelIC.png"
         },
         "effectiveness":{
             "normal":0.5,
@@ -265,7 +265,7 @@ export default {
     "fire":{
         "images":{
             "icon":"systems/ptu/static/css/images/types2/FireIC_Icon.png",
-            "bar":"/systems/ptu/static/css/images/types2/FireIC.png"
+            "bar":"systems/ptu/static/css/images/types2/FireIC.png"
         },
         "effectiveness":{
             "normal":1,
@@ -294,7 +294,7 @@ export default {
     "water":{
         "images":{
             "icon":"systems/ptu/static/css/images/types2/WaterIC_Icon.png",
-            "bar":"/systems/ptu/static/css/images/types2/WaterIC.png"
+            "bar":"systems/ptu/static/css/images/types2/WaterIC.png"
         },
         "effectiveness":{
             "normal":1,
@@ -323,7 +323,7 @@ export default {
     "grass":{
         "images":{
             "icon":"systems/ptu/static/css/images/types2/GrassIC_Icon.png",
-            "bar":"/systems/ptu/static/css/images/types2/GrassIC.png"
+            "bar":"systems/ptu/static/css/images/types2/GrassIC.png"
         },
         "effectiveness":{
             "normal":1,
@@ -352,7 +352,7 @@ export default {
     "electric":{
         "images":{
             "icon":"systems/ptu/static/css/images/types2/ElectricIC_Icon.png",
-            "bar":"/systems/ptu/static/css/images/types2/ElectricIC.png"
+            "bar":"systems/ptu/static/css/images/types2/ElectricIC.png"
         },
         "effectiveness":{
             "normal":1,
@@ -381,7 +381,7 @@ export default {
     "psychic":{
         "images":{
             "icon":"systems/ptu/static/css/images/types2/PsychicIC_Icon.png",
-            "bar":"/systems/ptu/static/css/images/types2/PsychicIC.png"
+            "bar":"systems/ptu/static/css/images/types2/PsychicIC.png"
         },
         "effectiveness":{
             "normal":1,
@@ -410,7 +410,7 @@ export default {
     "ice":{
         "images":{
             "icon":"systems/ptu/static/css/images/types2/IceIC_Icon.png",
-            "bar":"/systems/ptu/static/css/images/types2/IceIC.png"
+            "bar":"systems/ptu/static/css/images/types2/IceIC.png"
         },
         "effectiveness":{
             "normal":1,
@@ -439,7 +439,7 @@ export default {
     "dragon":{
         "images":{
             "icon":"systems/ptu/static/css/images/types2/DragonIC_Icon.png",
-            "bar":"/systems/ptu/static/css/images/types2/DragonIC.png"
+            "bar":"systems/ptu/static/css/images/types2/DragonIC.png"
         },
         "effectiveness":{
             "normal":1,
@@ -468,7 +468,7 @@ export default {
     "dark":{
         "images":{
             "icon":"systems/ptu/static/css/images/types2/DarkIC_Icon.png",
-            "bar":"/systems/ptu/static/css/images/types2/DarkIC.png"
+            "bar":"systems/ptu/static/css/images/types2/DarkIC.png"
         },
         "effectiveness":{
             "normal":1,
@@ -497,7 +497,7 @@ export default {
     "fairy":{
         "images":{
             "icon":"systems/ptu/static/css/images/types2/FairyIC_Icon.png",
-            "bar":"/systems/ptu/static/css/images/types2/FairyIC.png"
+            "bar":"systems/ptu/static/css/images/types2/FairyIC.png"
         },
         "effectiveness":{
             "normal":1,
@@ -526,7 +526,7 @@ export default {
     "nuclear":{
         "images":{
             "icon":"systems/ptu/static/css/images/types2/NuclearIC_Icon.png",
-            "bar":"/systems/ptu/static/css/images/types2/NuclearIC.png"
+            "bar":"systems/ptu/static/css/images/types2/NuclearIC.png"
         },
         "effectiveness":{
             "normal":2,
@@ -584,7 +584,7 @@ export default {
     "untyped":{
         "images":{
             "icon":"systems/ptu/static/css/images/types2/UntypedIC_Icon.png",
-            "bar":"/systems/ptu/static/css/images/types2/UntypedIC.png"
+            "bar":"systems/ptu/static/css/images/types2/UntypedIC.png"
         },
         "effectiveness":{
             "normal":1,

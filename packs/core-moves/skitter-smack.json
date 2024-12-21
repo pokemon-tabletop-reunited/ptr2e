@@ -1,10 +1,10 @@
 {
   "name": "Skitter Smack",
   "type": "move",
-  "img": "/systems/ptr2e/img/svg/bug_icon.svg",
+  "img": "systems/ptr2e/img/svg/bug_icon.svg",
   "system": {
     "slug": "skitter-smack",
-    "description": "Effect: On hit, the target loses -1 SPATK stage for 5 activations.",
+    "description": "",
     "traits": [
       "pass-2",
       "contact"
@@ -16,7 +16,8 @@
         "type": "attack",
         "traits": [
           "pass-2",
-          "contact"
+          "contact",
+          "pp-updated"
         ],
         "range": {
           "target": "creature",
@@ -25,7 +26,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 7,
+          "powerPoints": 3,
           "delay": null,
           "priority": null,
           "trigger": null
@@ -36,7 +37,7 @@
         "types": [
           "bug"
         ],
-        "description": "Effect: On hit, the target loses -1 SPATK stage for 5 activations.",
+        "description": "<p>Effect: On hit, the target loses -1 SPATK Stage for 5 Activations.</p>",
         "contestType": "",
         "contestEffect": "",
         "free": false,
@@ -44,7 +45,7 @@
       }
     ],
     "container": null,
-    "grade": "A"
+    "grade": "C"
   },
   "_id": "gxhNlns100h709Oq",
   "effects": []

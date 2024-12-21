@@ -1,23 +1,23 @@
 {
   "name": "Leaf Shield",
   "type": "move",
-  "img": "/systems/ptr2e/img/svg/grass_icon.svg",
+  "img": "systems/ptr2e/img/svg/grass_icon.svg",
   "system": {
     "slug": "leaf-shield",
-    "description": "Effect: The user's DEF stage and SPDEF stage increase by +1 for 5 activations. If there is Sunny, DEF stage and SPDEF stage are increased by +2 for 6 activations instead.",
+    "description": "<p>Effect: The user gains +1 DEF and SPDEF Stage for 5 Activations. If Sunny Weather is present, the user gains +2 DEF and SPDEF Stages for 7 Activations instead.</p>",
     "traits": [
       "environ"
     ],
     "actions": [
       {
-        "slug": "leaf-shield",
+        "slug": "growth",
         "name": "Leaf Shield",
         "type": "attack",
         "traits": [
           "environ"
         ],
         "range": {
-          "target": "self",
+          "target": "creature",
           "distance": 0,
           "unit": "m"
         },
@@ -32,12 +32,44 @@
         "power": null,
         "accuracy": null,
         "types": [
-          "grass"
+          "normal"
         ],
-        "description": "Effect: The user's DEF stage and SPDEF stage increase by +1 for 5 activations. If there is Sunny, DEF stage and SPDEF stage are increased by +2 for 6 activations instead.",
+        "description": "<p>Effect: The user gains +1 DEF and SPDEF Stage for 5 Activations.</p>",
         "contestType": "",
         "contestEffect": "",
         "free": false,
+        "slot": null
+      },
+      {
+        "slug": "growth-sunny",
+        "name": "Leaf Shield",
+        "type": "attack",
+        "traits": [
+          "environ"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 0,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 5,
+          "delay": null,
+          "priority": null,
+          "trigger": "<p>Sunny Weather is present.</p>"
+        },
+        "category": "status",
+        "power": null,
+        "accuracy": null,
+        "types": [
+          "normal"
+        ],
+        "description": "<p>Trigger: Sunny Weather is present.</p><p>Effect: The user gains +2 DEF and SPDEF Stages for 7 Activations.",
+        "contestType": "",
+        "contestEffect": "",
+        "variant": "leaf-guard",
+        "free": true,
         "slot": null
       }
     ],

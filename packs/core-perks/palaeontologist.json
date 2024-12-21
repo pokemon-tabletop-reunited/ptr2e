@@ -3,71 +3,110 @@
   "type": "perk",
   "system": {
     "prerequisites": [
-      "Science (Palaeontology) 25"
+      {
+        "gte": [
+          "{actor|skills.palaeontology.mod}",
+          35
+        ]
+      },
+      {
+        "xof": [
+          {
+            "gte": [
+              "{actor|skills.archaeology.mod}",
+              25
+            ]
+          },
+          {
+            "gte": [
+              "{actor|skills.biology.mod}",
+              25
+            ]
+          },
+          {
+            "gte": [
+              "{actor|skills.botany.mod}",
+              25
+            ]
+          },
+          {
+            "gte": [
+              "{actor|skills.geology.mod}",
+              25
+            ]
+          },
+          {
+            "gte": [
+              "{actor|skills.zoology.mod}",
+              25
+            ]
+          }
+        ],
+        "x": 2
+      }
     ],
-    "cost": 1,
-    "design": {
-      "arena": "mental",
-      "approach": "power",
-      "archetype": "Knowledge"
-    },
-    "description": "Your study of Palaeontology allows you to identify Pokemon Fossils using a Science (Palaeontology) Skill Check. The difficulty of this check may be modified accordingly based on the condition of the fossil.",
+    "cost": 2,
+    "description": "<p>You gain +20 on rolls to identify Fossils (Pokemon or otherwise) and operate Reanimation Machines or similar mechanisms (including as part of the \"Revival\" Downtime Action).</p>",
     "actions": [
       {
         "name": "Palaeontologist",
         "slug": "palaeontologist",
-        "description": "Your study of Palaeontology allows you to identify Pokemon Fossils using a Science (Palaeontology) Skill Check. The difficulty of this check may be modified accordingly based on the condition of the fossil.",
+        "description": "<p>You gain +20 on rolls to identify Fossils (Pokemon or otherwise) and operate Reanimation Machines or similar mechanisms (including as part of the \"Revival\" Downtime Action).</p>",
         "cost": {
-          "activation": "complex"
+          "activation": "complex",
+          "powerPoints": 0,
+          "delay": null,
+          "priority": null
         },
         "type": "generic",
-        "traits": []
+        "traits": [],
+        "img": "icons/svg/explosion.svg",
+        "range": {
+          "target": "enemy",
+          "unit": "m",
+          "distance": 0
+        },
+        "variant": null
       }
     ],
     "slug": "palaeontologist",
     "traits": [],
-    "node": {
-      "i": -49,
-      "j": -30,
-      "connected": [
-        "pokemaniac",
-        "scholar"
-      ],
-      "config": {
-        "alpha": null,
-        "backgroundColor": "#804000",
-        "borderColor": null,
-        "borderWidth": null,
-        "texture": "systems/ptr2e/img/perk-icons/Knowledge.svg",
-        "tint": "#ffffff",
-        "scale": null
-      },
-      "hidden": false,
-      "type": "normal"
-    }
+    "_migration": {
+      "version": null,
+      "previous": null
+    },
+    "nodes": [
+      {
+        "connected": [
+          "finding-lifes-way",
+          "scholar",
+          "yesterday-and-today"
+        ],
+        "config": {
+          "alpha": null,
+          "backgroundColor": "#804000",
+          "borderColor": null,
+          "borderWidth": null,
+          "texture": "systems/ptr2e/img/perk-icons/Knowledge.svg",
+          "tint": "#ffffff",
+          "scale": null
+        },
+        "hidden": false,
+        "type": "normal",
+        "x": 73,
+        "y": 143,
+        "tier": null
+      }
+    ],
+    "autoUnlock": [],
+    "originSlug": null,
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": []
   },
   "_id": "mP80n30afHnRChhO",
-  "img": "/systems/ptr2e/img/icons/feat_icon.webp",
+  "img": "systems/ptr2e/img/perk-icons/Knowledge.svg",
   "effects": [],
-  "flags": {
-    "core": {
-      "sourceId": "Compendium.ptr2e.core-perks.Item.mP80n30afHnRChhO"
-    }
-  },
-  "_stats": {
-    "coreVersion": "12.321",
-    "systemId": "ptr2e",
-    "systemVersion": "0.005",
-    "createdTime": null,
-    "modifiedTime": 1714920993455,
-    "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
-    "compendiumSource": null,
-    "duplicateSource": null
-  },
-  "folder": null,
-  "sort": 0,
-  "ownership": {
-    "default": 0
-  },
-  "_key": "!items!mP80n30afHnRChhO"
+  "folder": "aUkQAkBYAmrv6REK"
 }

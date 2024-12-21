@@ -3,75 +3,73 @@
   "type": "perk",
   "system": {
     "prerequisites": [
-      "[Trainer]"
+      "trait:trainer"
     ],
     "cost": 1,
-    "design": {
-      "arena": "physical",
-      "approach": "finesse",
-      "archetype": "Support"
-    },
-    "description": "You may immediately recall a Pokemon as a free action interrupt in the event that Pokemon faints.",
+    "description": "You may immediately recall a Pokemon as a Free Action at [Interrupt 2] in the event that Pokemon gains @Affliction[fainted].",
     "actions": [
       {
         "name": "Emergency Retreat",
         "slug": "emergency-retreat",
-        "description": "You may immediately recall a Pokemon as a free action interrupt in the event that Pokemon faints.",
+        "description": "You may immediately recall a Pokemon as a Free Action at [Interrupt 2] in the event that Pokemon gains @Affliction[fainted].",
         "cost": {
           "activation": "free",
-          "powerPoints": 1
+          "powerPoints": 1,
+          "delay": null,
+          "priority": null
         },
         "type": "generic",
-        "traits": []
+        "traits": [],
+        "img": "icons/svg/explosion.svg",
+        "range": {
+          "target": "enemy",
+          "unit": "m",
+          "distance": 0
+        },
+        "variant": null
       }
     ],
     "slug": "emergency-retreat",
     "traits": [],
-    "node": {
-      "i": 41,
-      "j": -72,
-      "connected": [
-        "keep-fighting",
-        "cheerleader",
-        "mobilize",
-        "cyclist",
-        "improved-overland-5"
-      ],
-      "config": {
-        "alpha": null,
-        "backgroundColor": "#0d0d0d",
-        "borderColor": null,
-        "borderWidth": null,
-        "texture": "systems/ptr2e/img/perk-icons/Juggler.svg",
-        "tint": "#ffff00",
-        "scale": null
-      },
-      "hidden": false,
-      "type": "normal"
-    }
+    "_migration": {
+      "version": null,
+      "previous": null
+    },
+    "nodes": [
+      {
+        "x": 20,
+        "y": 122,
+        "hidden": false,
+        "type": "entry",
+        "connected": [
+          "relay-race",
+          "quick-switch",
+          "climatologist",
+          "root-6",
+          "masters-whip",
+          "improved-flight-1-4"
+        ],
+        "config": {
+          "alpha": null,
+          "backgroundColor": "#0d0d0d",
+          "borderColor": null,
+          "borderWidth": null,
+          "texture": "systems/ptr2e/img/perk-icons/Juggler.svg",
+          "tint": "#ffff00",
+          "scale": null
+        },
+        "tier": null
+      }
+    ],
+    "autoUnlock": [],
+    "originSlug": null,
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": []
   },
   "_id": "COOTzCdaHbTPL7uT",
-  "img": "/systems/ptr2e/img/icons/feat_icon.webp",
+  "img": "systems/ptr2e/img/perk-icons/Juggler.svg",
   "effects": [],
-  "flags": {
-    "core": {
-      "sourceId": "Compendium.ptr2e.core-perks.Item.COOTzCdaHbTPL7uT"
-    }
-  },
-  "_stats": {
-    "coreVersion": "12.321",
-    "systemId": "ptr2e",
-    "systemVersion": "0.005",
-    "createdTime": null,
-    "modifiedTime": 1714922283510,
-    "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
-    "compendiumSource": null,
-    "duplicateSource": null
-  },
-  "folder": null,
-  "sort": 0,
-  "ownership": {
-    "default": 0
-  },
-  "_key": "!items!COOTzCdaHbTPL7uT"
+  "folder": "fDfAXQXXzkaqpYoa"
 }

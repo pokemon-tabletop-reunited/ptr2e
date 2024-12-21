@@ -1,10 +1,10 @@
 {
   "name": "Web Ball",
   "type": "move",
-  "img": "/systems/ptr2e/img/svg/bug_icon.svg",
+  "img": "systems/ptr2e/img/svg/bug_icon.svg",
   "system": {
     "slug": "web-ball",
-    "description": "Effect: On hit, the target loses -1 SPD stage for 5 activations.",
+    "description": "",
     "traits": [
       "missile"
     ],
@@ -14,7 +14,8 @@
         "name": "Web Ball",
         "type": "attack",
         "traits": [
-          "missile"
+          "missile",
+          "pp-updated"
         ],
         "range": {
           "target": "creature",
@@ -23,7 +24,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 6,
+          "powerPoints": 3,
           "delay": null,
           "priority": null,
           "trigger": null
@@ -34,7 +35,7 @@
         "types": [
           "bug"
         ],
-        "description": "Effect: On hit, the target loses -1 SPD stage for 5 activations.",
+        "description": "<p>Effect: On hit, the target loses -1 SPD Stage for 5 Activations.</p>",
         "contestType": "",
         "contestEffect": "",
         "free": false,
@@ -42,7 +43,7 @@
       }
     ],
     "container": null,
-    "grade": "B"
+    "grade": "D"
   },
   "_id": "ub3a5v6pgoKDDI7x",
   "effects": []

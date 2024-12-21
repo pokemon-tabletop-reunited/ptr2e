@@ -1,7 +1,7 @@
 {
   "name": "Shadow Break",
   "type": "move",
-  "img": "/systems/ptr2e/img/svg/shadow_icon.svg",
+  "img": "systems/ptr2e/img/svg/shadow_icon.svg",
   "system": {
     "slug": "shadow-break",
     "description": "",
@@ -16,7 +16,8 @@
         "type": "attack",
         "traits": [
           "crit-1",
-          "contact"
+          "contact",
+          "pp-updated"
         ],
         "range": {
           "target": "creature",
@@ -25,7 +26,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 2,
+          "powerPoints": 3,
           "delay": null,
           "priority": null,
           "trigger": null
@@ -36,7 +37,7 @@
         "types": [
           "shadow"
         ],
-        "description": null,
+        "description": "",
         "contestType": "",
         "contestEffect": "",
         "free": false,

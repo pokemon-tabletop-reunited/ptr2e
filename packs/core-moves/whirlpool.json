@@ -1,13 +1,15 @@
 {
   "name": "Whirlpool",
   "type": "move",
-  "img": "/systems/ptr2e/img/svg/water_icon.svg",
+  "img": "systems/ptr2e/img/svg/water_icon.svg",
   "system": {
     "slug": "whirlpool",
-    "description": "Effect: All valid targets become Bound 4. While Bound, they take a Tick of HP in damage at the end of each of their activations. Whirlpool's Power is doubled against Swimming targets.",
+    "description": "",
     "traits": [
       "blast-1",
-      "trap"
+      "trap",
+      "field",
+      "pp-updated"
     ],
     "actions": [
       {
@@ -16,7 +18,9 @@
         "type": "attack",
         "traits": [
           "blast-1",
-          "trap"
+          "trap",
+          "field",
+          "pp-updated"
         ],
         "range": {
           "target": "blast",
@@ -36,7 +40,7 @@
         "types": [
           "water"
         ],
-        "description": "Effect: All valid targets become Bound 4. While Bound, they take a Tick of HP in damage at the end of each of their activations. Whirlpool's Power is doubled against Swimming targets.",
+        "description": "<p>Effect: All valid targets become @Affliction[bound] 4. While @Affliction[bound], they take a Tick of HP in damage at the end of each of their Activations. Whirlpool's Power is doubled against Swimming targets.</p>",
         "contestType": "",
         "contestEffect": "",
         "free": false,

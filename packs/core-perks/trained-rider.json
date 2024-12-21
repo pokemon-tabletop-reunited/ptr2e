@@ -3,73 +3,85 @@
   "type": "perk",
   "system": {
     "prerequisites": [
-      "Riding 20"
+      {
+        "gte": [
+          "{actor|skills.riding.mod}",
+          20
+        ]
+      }
     ],
     "cost": 1,
-    "design": {
-      "arena": "physical",
-      "approach": "resilience",
-      "archetype": "Cavalier"
-    },
-    "description": "You may mount a Pokemon using a Simple Action instead of a Complex Action. You are able to mount under duress without requiring a check.",
+    "description": "<p>You may mount a Pokemon using a Simple Action instead of a Complex Action. You are able to mount under duress without requiring a check.</p>",
     "actions": [
       {
         "name": "Trained Rider",
         "slug": "trained-rider",
-        "description": "You may mount a Pokemon using a Simple Action instead of a Complex Action. You are able to mount under duress without requiring a check.",
+        "description": "<p>You may mount a Pokemon using a Simple Action instead of a Complex Action. You are able to mount under duress without requiring a check.</p>",
         "cost": {
-          "activation": "free"
+          "activation": "free",
+          "powerPoints": 0,
+          "delay": null,
+          "priority": null
         },
         "type": "passive",
-        "traits": []
+        "traits": [],
+        "img": "icons/svg/explosion.svg",
+        "range": {
+          "target": "enemy",
+          "unit": "m",
+          "distance": 0
+        },
+        "variant": null,
+        "hidden": false
       }
     ],
     "slug": "trained-rider",
     "traits": [],
-    "node": {
-      "i": 5,
-      "j": 47,
-      "connected": [
-        "root-4",
-        "knee-steering",
-        "urge-mount",
-        "lean-in"
-      ],
-      "config": {
-        "alpha": null,
-        "backgroundColor": "#008000",
-        "borderColor": null,
-        "borderWidth": null,
-        "texture": "systems/ptr2e/img/perk-icons/Cavalier.svg",
-        "tint": "#ffffff",
-        "scale": null
-      },
-      "hidden": false,
-      "type": "normal"
-    }
+    "_migration": {
+      "version": null,
+      "previous": null
+    },
+    "nodes": [
+      {
+        "x": 91,
+        "y": 59,
+        "hidden": false,
+        "type": "entry",
+        "connected": [
+          "ride-for-ruin",
+          "urge-mount",
+          "knee-steering",
+          "improved-overland-1-2",
+          "thug",
+          "guard-up",
+          "berserker",
+          "lean-in",
+          "cyclist",
+          "improved-overland-1-7",
+          "stat-iv-booster-1-5",
+          "stat-iv-booster-1-10"
+        ],
+        "config": {
+          "alpha": null,
+          "backgroundColor": "#008000",
+          "borderColor": null,
+          "borderWidth": null,
+          "texture": "systems/ptr2e/img/perk-icons/Cavalier.svg",
+          "tint": "#ffffff",
+          "scale": null
+        },
+        "tier": null
+      }
+    ],
+    "autoUnlock": [],
+    "originSlug": null,
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": []
   },
   "_id": "swPSWUmbRn3KwvyI",
-  "img": "/systems/ptr2e/img/icons/feat_icon.webp",
+  "img": "systems/ptr2e/img/perk-icons/Cavalier.svg",
   "effects": [],
-  "flags": {
-    "core": {
-      "sourceId": "Compendium.ptr2e.core-perks.Item.swPSWUmbRn3KwvyI"
-    }
-  },
-  "_stats": {
-    "coreVersion": "12.321",
-    "systemId": "ptr2e",
-    "systemVersion": "0.005",
-    "createdTime": null,
-    "modifiedTime": 1714921491038,
-    "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
-    "compendiumSource": null,
-    "duplicateSource": null
-  },
-  "folder": null,
-  "sort": 0,
-  "ownership": {
-    "default": 0
-  },
-  "_key": "!items!swPSWUmbRn3KwvyI"
+  "folder": "ZTA2RsL9wA15o2ic"
 }

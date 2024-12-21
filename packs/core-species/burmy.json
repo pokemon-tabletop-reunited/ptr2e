@@ -1,7 +1,7 @@
 {
   "name": "burmy",
   "type": "species",
-  "img": "/systems/ptr2e/img/icons/species_icon.webp",
+  "img": "systems/ptr2e/img/icons/species_icon.webp",
   "system": {
     "number": 412,
     "size": {
@@ -26,24 +26,40 @@
       "pokemon",
       "underdog",
       "reach",
-      "many-legged"
+      "legless"
     ],
     "abilities": {
       "starting": [
-        "overcoat",
-        "oblivious"
+        {
+          "slug": "overcoat"
+        },
+        {
+          "slug": "oblivious"
+        }
       ],
       "basic": [
-        "shed-skin",
-        "run-away"
+        {
+          "slug": "shed-skin"
+        },
+        {
+          "slug": "run-away"
+        }
       ],
       "advanced": [
-        "stamina",
-        "forage"
+        {
+          "slug": "stamina"
+        },
+        {
+          "slug": "harvest"
+        }
       ],
       "master": [
-        "symbiosis",
-        "opportunist"
+        {
+          "slug": "symbiosis"
+        },
+        {
+          "slug": "opportunist"
+        }
       ]
     },
     "skills": [
@@ -152,7 +168,6 @@
         "group": null
       }
     ],
-    "slug": "",
     "stats": {
       "hp": 40,
       "atk": 29,
@@ -168,49 +183,42 @@
       "levelUp": [
         {
           "name": "protect",
-          "level": 1,
           "gen": "brilliant-diamond-and-shining-pearl",
-          "uuid": "Compendium.ptr2e.core-moves.Item.DwzmkHqd28xR3P3c"
+          "level": 1
         },
         {
           "name": "tackle",
-          "level": 10,
           "gen": "brilliant-diamond-and-shining-pearl",
-          "uuid": "Compendium.ptr2e.core-moves.Item.fWOSmnI68Lct2LUn"
+          "level": 10
         },
         {
           "name": "bug-bite",
-          "level": 15,
           "gen": "brilliant-diamond-and-shining-pearl",
-          "uuid": "Compendium.ptr2e.core-moves.Item.VWTUbiZH5inKfQn8"
-        },
-        {
-          "name": "string-shot",
-          "level": 20,
-          "gen": "brilliant-diamond-and-shining-pearl",
-          "uuid": "Compendium.ptr2e.core-moves.Item.TijijTYIY2UOVWOn"
+          "level": 15
         },
         {
           "name": "hidden-power",
-          "level": 20,
           "gen": "ultra-sun-ultra-moon",
-          "uuid": "Compendium.ptr2e.core-moves.Item.1lkeVmjLt8Vp0izT"
+          "level": 20
+        },
+        {
+          "name": "string-shot",
+          "gen": "brilliant-diamond-and-shining-pearl",
+          "level": 20
         }
       ],
       "tutor": [
         {
-          "name": "snore",
-          "gen": "ultra-sun-ultra-moon",
-          "uuid": "Compendium.ptr2e.core-moves.Item.4XGhnE4bWGYPKRxO"
+          "name": "electroweb",
+          "gen": "ultra-sun-ultra-moon"
         },
         {
-          "name": "electroweb",
-          "gen": "ultra-sun-ultra-moon",
-          "uuid": "Compendium.ptr2e.core-moves.Item.DLoWCGaBlU23XnUI"
+          "name": "snore",
+          "gen": "ultra-sun-ultra-moon"
         }
       ]
     },
-    "captureRate": 120,
+    "captureRate": 155,
     "eggGroups": [
       "bug"
     ],
@@ -313,10 +321,15 @@
           "evolutions": []
         }
       ],
-      "uuid": "Compendium.ptr2e.core-species.Item.kmFRu6lAhtEfASJy"
-    }
+      "uuid": "Compendium.ptr2e.core-species.Item.kmFRu6lAhtEfASJy",
+      "methods": []
+    },
+    "_migration": {
+      "version": null,
+      "previous": null
+    },
+    "slug": "burmy"
   },
   "_id": "kmFRu6lAhtEfASJy",
-  "effects": [],
-  "folder": null
+  "effects": []
 }

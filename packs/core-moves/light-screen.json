@@ -1,13 +1,10 @@
 {
   "name": "Light Screen",
   "type": "move",
-  "img": "/systems/ptr2e/img/svg/psychic_icon.svg",
+  "img": "systems/ptr2e/img/svg/psychic_icon.svg",
   "system": {
     "slug": "light-screen",
-    "description": "Effect: For 3 rounds, the user and all allies take 50% less damage from Special attacks.",
-    "traits": [
-      "shield"
-    ],
+    "traits": [],
     "actions": [
       {
         "slug": "light-screen",
@@ -18,31 +15,26 @@
         ],
         "range": {
           "target": "field",
-          "distance": 0,
           "unit": "m"
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 3,
-          "delay": null,
-          "priority": null,
-          "trigger": null
+          "powerPoints": 3
         },
         "category": "status",
-        "power": null,
-        "accuracy": null,
         "types": [
           "psychic"
         ],
-        "description": "Effect: For 3 rounds, the user and all allies take 50% less damage from Special attacks.",
-        "contestType": "",
-        "contestEffect": "",
-        "free": false,
-        "slot": null
+        "description": "<p>Effect: For 3 rounds, the user and all allies take 50% less damage from Special attacks.</p>",
+        "img": "systems/ptr2e/img/svg/psychic_icon.svg",
+        "summon": "Compendium.ptr2e.core-summons.Item.cH35Gz6AFM7eNlz2"
       }
     ],
-    "container": null,
-    "grade": "E"
+    "grade": "E",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
   },
   "_id": "gSRNdRZt5vRCzqwM",
   "effects": []

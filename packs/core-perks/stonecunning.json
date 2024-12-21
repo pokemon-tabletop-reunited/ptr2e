@@ -3,73 +3,133 @@
   "type": "perk",
   "system": {
     "prerequisites": [
-      "[Ground] or [Rock]"
+      {
+        "or": [
+          "trait:ground",
+          "trait:rock"
+        ]
+      }
     ],
     "cost": 2,
-    "design": {
-      "arena": "mental",
-      "approach": "finesse",
-      "archetype": "[Ground / Rock Type]"
-    },
-    "description": "You gain the [Tremorsense 20] trait.",
+    "description": "<p>You gain the [Tremorsense 20] trait.</p>",
     "actions": [
       {
         "name": "Stonecunning",
         "slug": "stonecunning",
-        "description": "You gain the [Tremorsense 20] trait.",
+        "description": "<p>You gain the [Tremorsense 20] trait.</p>",
         "cost": {
-          "activation": "free"
+          "activation": "free",
+          "powerPoints": 0,
+          "delay": null,
+          "priority": null
         },
         "type": "passive",
-        "traits": []
+        "traits": [],
+        "img": "icons/svg/explosion.svg",
+        "range": {
+          "target": "enemy",
+          "unit": "m",
+          "distance": 0
+        },
+        "variant": null,
+        "hidden": false
       }
     ],
     "slug": "stonecunning",
     "traits": [],
-    "node": {
-      "i": -78,
-      "j": 56,
-      "connected": [
-        "root-6",
-        "gemcutter",
-        "shovel-hands",
-        "powerlifter"
-      ],
-      "config": {
-        "alpha": null,
-        "backgroundColor": null,
-        "borderColor": null,
-        "borderWidth": null,
-        "texture": "systems/ptr2e/img/svg/rock_icon.svg",
-        "tint": null,
-        "scale": null
-      },
-      "hidden": false,
-      "type": "normal"
-    }
+    "_migration": {
+      "version": null,
+      "previous": null
+    },
+    "nodes": [
+      {
+        "connected": [
+          "powerlifter",
+          "shovel-hands",
+          "hardy-trekker",
+          "parkour",
+          "immovable-stone",
+          "scree"
+        ],
+        "config": {
+          "alpha": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "borderWidth": null,
+          "texture": "systems/ptr2e/img/svg/rock_icon.svg",
+          "tint": null,
+          "scale": null
+        },
+        "hidden": false,
+        "type": "normal",
+        "x": 130,
+        "y": 32,
+        "tier": null
+      }
+    ],
+    "autoUnlock": [
+      "trait:tremorsense-20"
+    ],
+    "originSlug": null,
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": []
   },
   "_id": "lTOiK3AutkgbMo7J",
-  "img": "/systems/ptr2e/img/icons/feat_icon.webp",
-  "effects": [],
-  "flags": {
-    "core": {
-      "sourceId": "Compendium.ptr2e.core-perks.Item.lTOiK3AutkgbMo7J"
+  "img": "systems/ptr2e/img/svg/rock_icon.svg",
+  "effects": [
+    {
+      "name": "Stonecunning",
+      "type": "passive",
+      "_id": "XhVkB2ye6s9V17T1",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "add-trait",
+            "key": "",
+            "value": "Tremorsense 20",
+            "predicate": [],
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.3.4.1",
+        "createdTime": 1732233306323,
+        "modifiedTime": 1732233319995,
+        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
+      }
     }
-  },
-  "_stats": {
-    "coreVersion": "12.321",
-    "systemId": "ptr2e",
-    "systemVersion": "0.005",
-    "createdTime": null,
-    "modifiedTime": 1714922207504,
-    "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
-    "compendiumSource": null,
-    "duplicateSource": null
-  },
-  "folder": null,
-  "sort": 0,
-  "ownership": {
-    "default": 0
-  },
-  "_key": "!items!lTOiK3AutkgbMo7J"
+  ],
+  "folder": "1osM6JY51pvLkJ3Q"
 }

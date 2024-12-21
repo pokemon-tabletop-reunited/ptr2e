@@ -31,16 +31,16 @@ class TeamSheetPTR2e extends foundry.applications.api.HandlebarsApplicationMixin
     static override PARTS: Record<string, foundry.applications.api.HandlebarsTemplatePart> = {
         tabs: {
             id: "tabs",
-            template: "/systems/ptr2e/templates/items/parts/item-tabs.hbs",
+            template: "systems/ptr2e/templates/items/parts/item-tabs.hbs",
         },
         overview: {
             id: "overview",
-            template: "/systems/ptr2e/templates/apps/team/overview.hbs",
+            template: "systems/ptr2e/templates/apps/team/overview.hbs",
             scrollable: [".scroll"]
         },
         party: {
             id: "party",
-            template: "/systems/ptr2e/templates/apps/team/party.hbs",
+            template: "systems/ptr2e/templates/apps/team/party.hbs",
             scrollable: [".scroll"],
         },
     };

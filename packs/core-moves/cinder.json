@@ -1,7 +1,7 @@
 {
   "name": "Cinder",
   "type": "move",
-  "img": "/systems/ptr2e/img/svg/fire_icon.svg",
+  "img": "systems/ptr2e/img/svg/fire_icon.svg",
   "system": {
     "slug": "cinder",
     "description": "",
@@ -14,16 +14,17 @@
         "name": "Cinder",
         "type": "attack",
         "traits": [
-          "basic"
+          "basic",
+          "pp-updated"
         ],
         "range": {
           "target": "cone",
-          "distance": 3,
+          "distance": 2,
           "unit": "m"
         },
         "cost": {
-          "activation": "simple",
-          "powerPoints": 1,
+          "activation": "complex",
+          "powerPoints": 0,
           "delay": null,
           "priority": null,
           "trigger": null
@@ -34,7 +35,7 @@
         "types": [
           "fire"
         ],
-        "description": null,
+        "description": "",
         "contestType": "",
         "contestEffect": "",
         "free": false,

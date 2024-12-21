@@ -1,12 +1,13 @@
 {
   "name": "Frustration",
   "type": "move",
-  "img": "/systems/ptr2e/img/svg/normal_icon.svg",
+  "img": "systems/ptr2e/img/svg/normal_icon.svg",
   "system": {
     "slug": "frustration",
-    "description": "Effect: If the user is Enraged, Confused or Flinched, Frustration's Power is 100.",
+    "description": "",
     "traits": [
-      "contact"
+      "contact",
+      "pp-updated"
     ],
     "actions": [
       {
@@ -14,7 +15,8 @@
         "name": "Frustration",
         "type": "attack",
         "traits": [
-          "contact"
+          "contact",
+          "pp-updated"
         ],
         "range": {
           "target": "creature",
@@ -23,7 +25,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 5,
+          "powerPoints": 3,
           "delay": null,
           "priority": null,
           "trigger": null
@@ -34,10 +36,43 @@
         "types": [
           "normal"
         ],
-        "description": "Effect: If the user is Enraged, Confused or Flinched, Frustration's Power is 100.",
+        "description": "",
         "contestType": "",
         "contestEffect": "",
         "free": false,
+        "slot": null
+      },
+      {
+        "slug": "frustration-empowered",
+        "name": "Frustration (Empowered)",
+        "type": "attack",
+        "traits": [
+          "contact",
+          "pp-updated"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 3,
+          "delay": null,
+          "priority": null,
+          "trigger": "<p>While the user is @Affliction[enraged], @Affliction[confused], @Affliction[taunted], or @Affliction[suppressed].</p>"
+        },
+        "category": "physical",
+        "power": 100,
+        "accuracy": 100,
+        "types": [
+          "normal"
+        ],
+        "description": "<p>Trigger: While the user is @Affliction[enraged], @Affliction[confused], @Affliction[taunted], or @Affliction[suppressed].</p>",
+        "contestType": "",
+        "contestEffect": "",
+        "variant": "frustration",
+        "free": true,
         "slot": null
       }
     ],

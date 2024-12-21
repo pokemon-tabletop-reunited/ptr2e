@@ -1,14 +1,15 @@
 {
   "name": "Electro Drift",
   "type": "move",
-  "img": "/systems/ptr2e/img/svg/electric_icon.svg",
+  "img": "systems/ptr2e/img/svg/electric_icon.svg",
   "system": {
     "slug": "electro-drift",
-    "description": "Effect: If Electro Drift deals Super Effective damage, the its Power is increased by 50%. The user may freely attack to any open space in range after resolution.",
+    "description": "<p>Effect: If this attack deals super effective damage, its Damage is increased by 30%.</p>",
     "traits": [
       "legendary",
-      "smite",
-      "contact"
+      "dash",
+      "contact",
+      "pp-updated"
     ],
     "actions": [
       {
@@ -17,8 +18,9 @@
         "type": "attack",
         "traits": [
           "legendary",
-          "smite",
-          "contact"
+          "dash",
+          "contact",
+          "pp-updated"
         ],
         "range": {
           "target": "wide-line",
@@ -27,10 +29,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 8,
-          "delay": null,
-          "priority": null,
-          "trigger": null
+          "powerPoints": 4
         },
         "category": "special",
         "power": 100,
@@ -38,15 +37,11 @@
         "types": [
           "electric"
         ],
-        "description": "Effect: If Electro Drift deals Super Effective damage, the its Power is increased by 50%. The user may freely attack to any open space in range after resolution.",
-        "contestType": "",
-        "contestEffect": "",
-        "free": false,
-        "slot": null
+        "description": "<p>Effect: If this attack deals super effective damage, its Damage is increased by 30%.</p>",
+        "img": "systems/ptr2e/img/svg/electric_icon.svg"
       }
     ],
-    "container": null,
-    "grade": "S"
+    "grade": "B"
   },
   "_id": "Ewy6qCginoydpHKm",
   "effects": []

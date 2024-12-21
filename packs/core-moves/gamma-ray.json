@@ -1,7 +1,7 @@
 {
   "name": "Gamma Ray",
   "type": "move",
-  "img": "/systems/ptr2e/img/svg/nuclear_icon.svg",
+  "img": "systems/ptr2e/img/svg/nuclear_icon.svg",
   "system": {
     "slug": "gamma-ray",
     "description": "",
@@ -14,7 +14,8 @@
         "name": "Gamma Ray",
         "type": "attack",
         "traits": [
-          "ray"
+          "ray",
+          "pp-updated"
         ],
         "range": {
           "target": "creature",
@@ -22,8 +23,8 @@
           "unit": "m"
         },
         "cost": {
-          "activation": "simple",
-          "powerPoints": 2,
+          "activation": "complex",
+          "powerPoints": 1,
           "delay": null,
           "priority": null,
           "trigger": null
@@ -34,7 +35,7 @@
         "types": [
           "nuclear"
         ],
-        "description": null,
+        "description": "",
         "contestType": "",
         "contestEffect": "",
         "free": false,
@@ -45,5 +46,6 @@
     "grade": "E"
   },
   "_id": "WVPzbqV4kQo9e29K",
+  "folder": "EpCOePz8omfXbp35",
   "effects": []
 }

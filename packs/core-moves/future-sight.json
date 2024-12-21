@@ -1,17 +1,19 @@
 {
   "name": "Future Sight",
   "type": "move",
-  "img": "/systems/ptr2e/img/svg/psychic_icon.svg",
+  "img": "systems/ptr2e/img/svg/psychic_icon.svg",
   "system": {
     "slug": "future-sight",
-    "description": "Effect: When this attack is used, it deals its damage to the target at the start of the user's first Activation in the following Round.",
+    "description": "",
     "traits": [],
     "actions": [
       {
         "slug": "future-sight",
         "name": "Future Sight",
         "type": "attack",
-        "traits": [],
+        "traits": [
+          "pp-updated"
+        ],
         "range": {
           "target": "creature",
           "distance": 15,
@@ -19,7 +21,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 7,
+          "powerPoints": 5,
           "delay": null,
           "priority": null,
           "trigger": null
@@ -30,7 +32,7 @@
         "types": [
           "psychic"
         ],
-        "description": "Effect: When this attack is used, it deals its damage to the target at the start of the user's first Activation in the following Round.",
+        "description": "<p>Effect: When this attack is declared, the user rolls to hit valid target(s) at the start of the user's first Activation in the following Round.</p>",
         "contestType": "",
         "contestEffect": "",
         "free": false,
@@ -38,7 +40,7 @@
       }
     ],
     "container": null,
-    "grade": "A"
+    "grade": "B"
   },
   "_id": "mFTIJjM1A7Ty1vBb",
   "effects": []

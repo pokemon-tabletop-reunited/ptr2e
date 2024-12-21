@@ -1,11 +1,12 @@
 import { TokenPTR2e } from "@module/canvas/token/object.ts";
 import { CheckDC } from "./degree-of-success.ts";
 import { RollNote, RollNoteSource } from "@system/notes.ts";
-import { Trait } from "@data";
-import { ActorPTR2e } from "@actor";
+import { AttackPTR2e, Trait } from "@data";
+import { ActorPTR2e, EffectRoll } from "@actor";
 import { TokenDocumentPTR2e } from "@module/canvas/token/document.ts";
-import { CheckType } from "./check-roll.ts";
+import { CheckRoll, CheckType } from "./check-roll.ts";
 import { ItemPTR2e, ItemSystemPTR } from "@item";
+import { ModifierPTR2e } from "@module/effects/modifiers.ts";
 
 interface RollData extends RollOptions {
     rollerId?: string;
@@ -74,6 +75,8 @@ interface CheckRollContext extends BaseRollContext {
     identifier?: Maybe<string>;
     /** The slug of an action, of which this roll is a workflow component */
     action?: Maybe<string>;
+    /** The (virtual) attack data */
+    attack?: AttackPTR2e;
     /** Targeting data for the check, if applicable */
     targets?: RollTarget[] | null;
     /** The actor which initiated this roll. */
@@ -94,6 +97,25 @@ interface CheckRollContext extends BaseRollContext {
     isReroll?: boolean;
     /** Omitted Subrolls */
     omittedSubrolls?: Set<'accuracy' | 'crit' | 'damage'>;
+    /** PP Cost */
+    ppCost?: number;
+    /** Should PP be consumed */
+    consumePP?: boolean;
+    /** Modifier information to be stored on chat message object */
+    modifiers?: ModifierPTR2e[];
+    /** Self Effect Rolls */
+    selfEffectRolls?: EffectRoll[];
+    /** Target Effect Rolls */
+    effectRolls?: {
+        target: EffectRoll[];
+        origin: EffectRoll[];
+    };
+    /** Attack Variants' slugs */
+    variants?: string[];
 }
 
-export type { AttackRollParams, BaseRollContext, CheckRollContext, DamageRollParams, RollParameters, RollData};
+interface CaptureCheckRollContext extends CheckRollContext {
+  accuracyRoll: Rolled<CheckRoll>;
+}
+
+export type { AttackRollParams, BaseRollContext, CheckRollContext, CaptureCheckRollContext, DamageRollParams, RollParameters, RollData};

@@ -9,6 +9,10 @@
         <div class="points">
             <label>Spent Points: <span>{{points.spent}} / {{points.total}}</span></label>
             <label>Points Available: <span><b>{{points.available}}</b></span></label>
+            <div class="skill-filter mt-1">
+              <label>Filter: </label>
+              <input name="filter" type="search" placeholder="Filter" value="">
+            </div>
         </div>
     </fieldset>
     <fieldset class="skills">
@@ -20,26 +24,31 @@
                 <label>Apply Investment</label>
             </header>
             {{#each skills}}
-                {{#unless hidden}}
-                    <div class="skill">
-                        <label class="skill" data-tooltip-direction="LEFT" data-slug="{{slug}}" data-group="{{group}}" data-tooltip="{{slug}}">{{label}}</label>
-                        <label>{{value}}</label>
-                        <label>{{rvs}}</label>
-                        {{#if (eq this.slug "luck")}}
-                            <button type="button" data-action="roll-luck">{{#if @root.isReroll}}Reroll{{else}}Roll{{/if}} Luck</button>
+                <div class="skill" data-slug="{{slug}}" data-group="{{group}}">
+                    <label class="skill" data-tooltip-direction="LEFT" data-slug="{{slug}}" data-group="{{group}}" data-tooltip="{{slug}}">{{label}}</label>
+                    <label>{{value}}</label>
+                    <label>{{rvs}}</label>
+                    {{#if (eq this.slug "luck")}}
+                        <button type="button" data-action="roll-luck">{{#if @root.isReroll}}Reroll{{else}}Roll{{/if}} Luck</button>
+                    {{else}}
+                        {{#if (and (eq this.slug "resources") (not @root.levelOne true))}}
+                            <label></label>
                         {{else}}
-                            {{#if (and (eq this.slug "resources") (not @root.levelOne true))}}
-                                <label></label>
-                            {{else}}
-                                <input name="{{slug}}.investment" type="number" max="{{@root.maxInvestment}}" value="{{investment}}" data-slug="{{slug}}" step="1"/>
-                            {{/if}}
+                            <input name="{{slug}}.investment" type="number" min="{{min}}" max="{{max}}" value="{{investment}}" data-slug="{{slug}}" step="1"/>
                         {{/if}}
-                    </div>
-                {{/unless}}
+                    {{/if}}
+                </div>
             {{/each}}
         </div>
     </fieldset>
     <footer class="controls">
-        <button type="submit">Apply Investment</button>
+        {{#if valid}}
+        <button type="submit">{{localize "PTR2E.SkillsEditor.Apply.apply"}}</button>
+        {{else}}
+        {{#if showOverrideSubmit}}
+        <button type="submit" formnovalidate="formnovalidate">{{localize "PTR2E.SkillsEditor.Apply.override"}}</button>
+        {{/if}}
+        <p>{{localize "PTR2E.SkillsEditor.Apply.fail"}}</p>
+        {{/if}}
     </footer>
 </section>

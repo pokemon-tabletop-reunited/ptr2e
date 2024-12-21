@@ -1,61 +1,52 @@
 {
-    "folder": "Et2u8UoXSe2a17oq",
-    "name": "Cryogenics",
-    "type": "perk",
-    "_id": "4YWi4IoDjPR0Q3RZ",
-    "img": "systems/ptr2e/img/svg/ice_icon.svg",
-    "system": {
-        "actions": [],
-        "slug": null,
-        "description": "<p>Double the Effect Range of Freeze effects. This does not stack with the Serene Grace ability.</p>",
-        "traits": [],
-        "prerequisites": [
-            "[Ice]"
+  "folder": "ge4zHJUHigfmeDte",
+  "name": "Cryogenics",
+  "type": "perk",
+  "_id": "4YWi4IoDjPR0Q3RZ",
+  "img": "systems/ptr2e/img/svg/ice_icon.svg",
+  "system": {
+    "actions": [],
+    "slug": "cryogenics",
+    "description": "<p>Double the Effect chance of @Affliction[frostbite] effects, and the user's chance to inflict @Affliction[frozen] increases by 10%.</p>",
+    "traits": [],
+    "prerequisites": [
+      "trait:ice"
+    ],
+    "cost": 3,
+    "_migration": {
+      "version": null,
+      "previous": null
+    },
+    "nodes": [
+      {
+        "connected": [
+          "brittle-ice",
+          "chill-out",
+          "improved-overland-1-5",
+          "biting-cold"
         ],
-        "cost": 3,
-        "design": {
-            "arena": "mental",
-            "approach": "power",
-            "archetype": "Ice"
+        "config": {
+          "alpha": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "borderWidth": null,
+          "texture": "systems/ptr2e/img/svg/ice_icon.svg",
+          "tint": null,
+          "scale": null
         },
-        "node": {
-            "i": -89,
-            "j": 12,
-            "connected": [
-                "acute-affliction",
-                "venomous",
-                "type-embodiment-type",
-                "adhesive-digits",
-                "stage-vampirism"
-            ],
-            "config": {
-                "alpha": null,
-                "backgroundColor": null,
-                "borderColor": null,
-                "borderWidth": null,
-                "texture": "systems/ptr2e/img/svg/ice_icon.svg",
-                "tint": null,
-                "scale": null
-            },
-            "hidden": false,
-            "type": "normal"
-        }
-    },
-    "effects": [],
-    "sort": 0,
-    "ownership": {
-        "default": 0,
-        "Kc3DOunCh3ClAeHS": 3
-    },
-    "flags": {},
-    "_stats": {
-        "compendiumSource": "Item.4YWi4IoDjPR0Q3RZ",
-        "duplicateSource": null,
-        "coreVersion": "12.325",
-        "systemId": "ptr2e",
-        "systemVersion": "0.006",
-        "createdTime": 1717161267839,
-        "modifiedTime": 1717179612991,
-        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
-    }
+        "hidden": false,
+        "type": "normal",
+        "x": 86,
+        "y": 115,
+        "tier": null
+      }
+    ],
+    "autoUnlock": [],
+    "originSlug": null,
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": []
+  },
+  "effects": []
 }

@@ -1,60 +1,81 @@
 {
-    "name": "Hesitation",
-    "type": "perk",
-    "system": {
-        "prerequisites": [
-            "Intimidate 40"
-        ],
-        "cost": 3,
-        "design": {
-            "arena": "social",
-            "approach": "power",
-            "archetype": "Combat"
-        },
-        "description": "You hit an opponent with a Move that has the [Social] trait. After spending the activation cost, the target hesitates and increases their AV by 20 until their next activation.",
-        "actions": [
-            {
-                "name": "Hesitation",
-                "slug": "hesitation",
-                "description": "You hit an opponent with a Move that has the [Social] trait. After spending the activation cost, the target hesitates and increases their AV by 20 until their next activation.",
-                "cost": {
-                    "activation": "free",
-                    "powerPoints": 4
-                },
-                "type": "passive",
-                "traits": [],
-                "img": "/systems/ptr2e/img/icons/feat_icon.webp",
-                "range": {
-                    "target": "enemy",
-                    "unit": "m"
-                }
-            }
-        ],
+  "name": "Hesitation",
+  "type": "perk",
+  "system": {
+    "prerequisites": [
+      {
+        "gte": [
+          "{actor|skills.intimidate.mod}",
+          40
+        ]
+      }
+    ],
+    "cost": 3,
+    "description": "<p>When the user hits a creature with a [Social] Action,they may spend 2 PP to cause to the target to be Flinched 3. For multiple targets, you must spend 2 PP to affect each target</p>",
+    "actions": [
+      {
+        "name": "Hesitation",
         "slug": "hesitation",
-        "traits": [],
-        "node": {
-            "i": 19,
-            "j": -13,
-            "connected": [
-                "you-belong-to-me",
-                "thug",
-                "fearsome-defense",
-                "unreasonable"
-            ],
-            "config": {
-                "alpha": null,
-                "backgroundColor": "#8000ff",
-                "borderColor": null,
-                "borderWidth": null,
-                "texture": "systems/ptr2e/img/perk-icons/Socialite.svg",
-                "tint": "#ffffff",
-                "scale": null
-            },
-            "hidden": false,
-            "type": "normal"
-        }
+        "description": "<p>Trigger: The user's hits a creature with a [Social] Action.</p><p>Effect: The target is Flinched.</p>",
+        "cost": {
+          "activation": "free",
+          "powerPoints": 2,
+          "trigger": "The user's hits a creature with a [Social] Action.",
+          "delay": null,
+          "priority": null
+        },
+        "type": "generic",
+        "traits": [
+          "social",
+          "flinch-3"
+        ],
+        "img": "systems/ptr2e/img/icons/feat_icon.webp",
+        "range": {
+          "target": "creature",
+          "unit": "m",
+          "distance": 0
+        },
+        "variant": null
+      }
+    ],
+    "slug": "hesitation",
+    "traits": [],
+    "_migration": {
+      "version": null,
+      "previous": null
     },
-    "_id": "qslC7XqAQJZt0lxR",
-    "img": "/systems/ptr2e/img/icons/feat_icon.webp",
-    "effects": []
+    "nodes": [
+      {
+        "connected": [
+          "condemn",
+          "stat-iv-booster-1-2",
+          "telepathic-potential"
+        ],
+        "config": {
+          "alpha": null,
+          "backgroundColor": "#8000ff",
+          "borderColor": null,
+          "borderWidth": null,
+          "texture": "systems/ptr2e/img/perk-icons/Socialite.svg",
+          "tint": "#ffffff",
+          "scale": null
+        },
+        "hidden": false,
+        "type": "normal",
+        "x": 160,
+        "y": 140,
+        "tier": null
+      }
+    ],
+    "autoUnlock": [],
+    "originSlug": null,
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": []
+  },
+  "_id": "qslC7XqAQJZt0lxR",
+  "img": "systems/ptr2e/img/perk-icons/Socialite.svg",
+  "effects": [],
+  "folder": "jLhPGZvYVjjs7D54"
 }

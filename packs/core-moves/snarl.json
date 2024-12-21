@@ -1,10 +1,9 @@
 {
   "name": "Snarl",
   "type": "move",
-  "img": "/systems/ptr2e/img/svg/dark_icon.svg",
+  "img": "systems/ptr2e/img/svg/dark_icon.svg",
   "system": {
     "slug": "snarl",
-    "description": "On hit, all valid targets lose -1 SPATK stage for 5 activations.",
     "traits": [
       "sonic",
       "social"
@@ -16,7 +15,8 @@
         "type": "attack",
         "traits": [
           "sonic",
-          "social"
+          "social",
+          "pp-updated"
         ],
         "range": {
           "target": "cone",
@@ -25,10 +25,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 6,
-          "delay": null,
-          "priority": null,
-          "trigger": null
+          "powerPoints": 4
         },
         "category": "special",
         "power": 55,
@@ -36,16 +33,70 @@
         "types": [
           "dark"
         ],
-        "description": "On hit, all valid targets lose -1 SPATK stage for 5 activations.",
-        "contestType": "",
-        "contestEffect": "",
-        "free": false,
-        "slot": null
+        "description": "<p>Effect: On hit, all valid targets lose -1 SPATK Stage for 5 activations.</p>",
+        "img": "icons/svg/explosion.svg"
       }
     ],
-    "container": null,
-    "grade": "B"
+    "grade": "C",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
   },
   "_id": "ETIoZqMMiW74sq3s",
-  "effects": []
+  "effects": [
+    {
+      "name": "Snarl",
+      "type": "passive",
+      "_id": "QPNiyiNSSlmG4PYX",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "snarl-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.1JXumQz0QqthT9Iv",
+            "predicate": [],
+            "chance": 100,
+            "affects": "target",
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.4.1.0",
+        "createdTime": 1733414982278,
+        "modifiedTime": 1733415005627,
+        "lastModifiedBy": "IcBpMqhFuTck9VpX"
+      }
+    }
+  ]
 }

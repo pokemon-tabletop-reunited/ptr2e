@@ -3,7 +3,7 @@ import ChangeForm from "./base.ts";
 
 class AELikeModifierForm extends ChangeForm<BasicChangeSystem> {
     override get template() {
-        return "/systems/ptr2e/templates/effects/changes/ae-like.hbs";
+        return "systems/ptr2e/templates/effects/changes/ae-like.hbs";
     }
 }
 

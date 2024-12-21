@@ -1,14 +1,10 @@
 {
   "name": "Rain Dance",
   "type": "move",
-  "img": "/systems/ptr2e/img/svg/water_icon.svg",
+  "img": "systems/ptr2e/img/svg/water_icon.svg",
   "system": {
     "slug": "rain-dance",
-    "description": "Effect: The Weather becomes Rainy for 3 rounds.",
-    "traits": [
-      "weather",
-      "dance"
-    ],
+    "traits": [],
     "actions": [
       {
         "slug": "rain-dance",
@@ -20,31 +16,26 @@
         ],
         "range": {
           "target": "field",
-          "distance": 0,
           "unit": "m"
         },
         "cost": {
-          "activation": "simple",
-          "powerPoints": 8,
-          "delay": null,
-          "priority": null,
-          "trigger": null
+          "activation": "complex",
+          "powerPoints": 4
         },
         "category": "status",
-        "power": null,
-        "accuracy": null,
         "types": [
           "water"
         ],
-        "description": "Effect: The Weather becomes Rainy for 3 rounds.",
-        "contestType": "",
-        "contestEffect": "",
-        "free": false,
-        "slot": null
+        "description": "<p>Effect: The Weather becomes Rainy for 3 rounds.</p>",
+        "img": "systems/ptr2e/img/svg/water_icon.svg",
+        "summon": "Compendium.ptr2e.core-summons.Item.IkeVGMx2xjpkphtA"
       }
     ],
-    "container": null,
-    "grade": "A"
+    "grade": "A",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
   },
   "_id": "tILTZn18N9r8H7cs",
   "effects": []

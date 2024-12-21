@@ -1,7 +1,7 @@
 {
   "name": "Air Lock",
   "type": "ability",
-  "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+  "img": "icons/magic/air/weather-clouds-sunlight.webp",
   "system": {
     "actions": [
       {
@@ -13,45 +13,27 @@
         "slug": "air-lock",
         "type": "passive",
         "cost": {
-          "activation": "free",
-          "powerPoints": 0,
-          "delay": null,
-          "priority": null
+          "activation": "free"
         },
         "range": {
           "target": "field",
-          "distance": 0,
           "unit": "m"
         },
-        "description": "Effect: Air Lock suppresses all effects brought on by [Weather], except for those created by the user."
+        "description": "<p>Effect: Air Lock suppresses the effects of active Weathers, except for those created by the user.</p>",
+        "img": "icons/svg/explosion.svg"
       }
     ],
-    "description": "Effect: Air Lock suppresses all effects brought on by [Weather], except for those created by the user.",
+    "description": "<p>Effect: Air Lock suppresses the effects of active Weathers, except for those created by the user.</p>",
     "traits": [
       "legendary",
       "weather"
     ],
-    "slug": null,
-    "container": null
+    "slug": "air-lock",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
   },
   "_id": "Fs69d9eJbvI4isTQ",
-  "effects": [],
-  "folder": null,
-  "sort": 0,
-  "ownership": {
-    "default": 0,
-    "tXAZ3QUgjuwX4gdV": 3
-  },
-  "flags": {},
-  "_stats": {
-    "compendiumSource": null,
-    "duplicateSource": null,
-    "coreVersion": "12.324",
-    "systemId": "ptr2e",
-    "systemVersion": "0.005",
-    "createdTime": 1716919240454,
-    "modifiedTime": 1716919240454,
-    "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
-  },
-  "_key": "!items!Fs69d9eJbvI4isTQ"
+  "effects": []
 }

@@ -1,18 +1,20 @@
 {
   "name": "Celebration",
   "type": "ability",
-  "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+  "img": "systems/ptr2e/img/icons/ability_icon.webp",
   "system": {
     "actions": [
       {
-        "traits": [],
+        "traits": [
+          "interrupt-3"
+        ],
         "name": "Celebration",
         "slug": "celebration",
         "type": "generic",
         "cost": {
           "activation": "free",
-          "powerPoints": 3,
-          "trigger": "The user causes at least one creature to Faint",
+          "powerPoints": 6,
+          "trigger": "<p>The user causes at least one creature to gain @Affliction[fainted].</p>",
           "delay": null,
           "priority": null
         },
@@ -21,10 +23,10 @@
           "distance": 0,
           "unit": "m"
         },
-        "description": "Trigger: The user causes at least one creature to Faint\nEffect: The user takes an additional activation. This can occur once per round."
+        "description": "<p>Trigger: The user causes at least one creature to gain @Affliction[fainted]</p><p>Effect: The user takes an additional Activation at the end of the Round. This can occur once per round.</p>"
       }
     ],
-    "description": "Trigger: The user causes at least one creature to Faint\nEffect: The user takes an additional activation. This can occur once per round.",
+    "description": "<p>Trigger: The user causes at least one creature to gain @Affliction[fainted]</p><p>Effect: The user takes an additional Activation at the end of the Round. This can occur once per round.</p>",
     "traits": [],
     "slug": null,
     "container": null

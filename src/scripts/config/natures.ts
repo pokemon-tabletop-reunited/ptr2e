@@ -1,4 +1,4 @@
-export default {
+const natureToStatArray = {
     cuddly: ["hp", "atk"],
     distracted: ["hp", "def"],
     proud: ["hp", "spa"],
@@ -36,3 +36,16 @@ export default {
     serious: ["spe", "spe"],
     composed: ["hp", "hp"],
 };
+
+type Nature = keyof typeof natureToStatArray;
+
+const natures = Object.entries(natureToStatArray).reduce((acc, [nature, stats]) => {
+    acc[nature] = `${nature.capitalize()} (+${stats[0]} -${stats[1]})`;
+    return acc;
+}, {} as Record<string, string>)
+
+export default natureToStatArray;
+export {
+    natures,
+    type Nature
+}

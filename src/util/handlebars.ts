@@ -1,6 +1,7 @@
 import { PTRCONSTS, PokemonCategory, PokemonType } from "@data";
 import { capitalize, formatSlug } from "./misc.ts";
 import { getTypes } from "@scripts/config/effectiveness.ts";
+import * as R from "remeda";
 
 export function registerHandlebarsHelpers() {
     _registerBasicHelpers();
@@ -8,6 +9,10 @@ export function registerHandlebarsHelpers() {
 }
 
 function _registerPTRHelpers() {
+  Handlebars.registerHelper("devMode", function () {
+    return game.settings.get("ptr2e", "dev-mode");
+  });
+
     Handlebars.registerHelper("keywords", function (keywords) {
         return keywords.map((k: string) => `<span class="keyword" >&lt;${k}&gt;</span>`).join("");
     });
@@ -27,10 +32,13 @@ function _registerPTRHelpers() {
             const direction: string = hash?.direction ?? "LEFT";
             const tooltip: string = hash?.tooltip ?? formatSlug(img);
             const classes: string = hash?.classes ?? "";
+            const urlOnly = hash?.urlOnly ?? false;
+
+            if(urlOnly) return isType ? `systems/ptr2e/img/svg/${img}_icon.svg` : `systems/ptr2e/img/icons/${img}_icon.png`;
 
             return isType
-                ? `<img src="/systems/ptr2e/img/svg/${img}_icon.svg" alt="${img}" data-tooltip="${tooltip}" data-tooltip-direction="${direction}" class="icon ${classes}" />`
-                : `<img src="/systems/ptr2e/img/icons/${img}_icon.png" alt="${img}" data-tooltip="${tooltip}" data-tooltip-direction="${direction}" class="icon ${classes}" />`;
+                ? `<img src="systems/ptr2e/img/svg/${img}_icon.svg" alt="${img}" data-tooltip="${tooltip}" data-tooltip-direction="${direction}" class="icon ${classes}"/>`
+                : `<img src="systems/ptr2e/img/icons/${img}_icon.png" alt="${img}" data-tooltip="${tooltip}" data-tooltip-direction="${direction}" class="icon ${classes}"/>`;
         }
     );
 
@@ -43,7 +51,7 @@ function _registerPTRHelpers() {
                 img.setAttribute(key, args.hash[key]);
             }
             if (!doc) {
-                img.src = "/icons/svg/hazard.svg";
+                img.src = "icons/svg/hazard.svg";
                 return img.outerHTML;
             }
 
@@ -92,7 +100,9 @@ function _registerPTRHelpers() {
     });
 
     Handlebars.registerHelper("asContentLink", function (content: string) {
+      try {
         const uuid = content ? fu.parseUuid(content) : null;
+      
         if (!uuid?.id) {
             // Return as raw string
             // But escape the content in case of Keyword strings
@@ -171,7 +181,20 @@ function _registerPTRHelpers() {
         };
 
         return TextEditor.createAnchor(data).outerHTML;
+      } catch (error) {
+        console.warn(error);
+        return content;
+      }
     });
+
+    Handlebars.registerHelper("sortFolder", function(folder: Folder) {
+      if(!(folder instanceof Folder)) return folder;
+
+      switch(folder.sorting) {
+        case "a": return folder.contents.sort((a, b) => a.name.localeCompare(b.name));
+        case "m": return folder.contents.sort((a,b) => a.sort - b.sort);
+      }
+    })
 }
 
 function _registerBasicHelpers() {
@@ -180,8 +203,8 @@ function _registerBasicHelpers() {
     Handlebars.registerHelper("getProperty", (obj, key) => fu.getProperty(obj, key));
 
     Handlebars.registerHelper("concat", function () {
-        var outStr = "";
-        for (var arg in arguments) {
+        let outStr = "";
+        for (const arg in arguments) {
             if (typeof arguments[arg] != "object") {
                 outStr += arguments[arg];
             }
@@ -242,7 +265,7 @@ function _registerBasicHelpers() {
         return a || b;
     });
     Handlebars.registerHelper("not", function (a, b = false) {
-        return a != b;
+      return R.isPlainObject(b) ? !a : a != b;
     });
     Handlebars.registerHelper("divide", (value1, value2) => Number(value1) / Number(value2));
     Handlebars.registerHelper("multiply", (value1, value2) => Number(value1) * Number(value2));

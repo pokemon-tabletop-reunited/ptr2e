@@ -1,0 +1,92 @@
+{
+  "name": "Dizzy Daft",
+  "type": "perk",
+  "folder": "e9XnhZdjIE7hroYs",
+  "system": {
+    "_migration": {
+      "version": 0.109,
+      "previous": null
+    },
+    "actions": [
+      {
+        "name": "Dizzy Daft (Active)",
+        "slug": "dizzy-daft-action-1",
+        "description": "<p>You inflict @Affliction[confused] 5 on yourself.</p>",
+        "traits": [],
+        "type": "generic",
+        "img": "modules/ptr2e-pkmn-sprites/sprites/327.webp",
+        "range": {
+          "target": "self",
+          "unit": "m",
+          "distance": 0
+        },
+        "cost": {
+          "activation": "simple",
+          "powerPoints": 2,
+          "delay": null,
+          "priority": null
+        },
+        "variant": null
+      },
+      {
+        "name": "Dizzy Daft (Passive)",
+        "slug": "dizzy-daft-action-2",
+        "description": "<p>You are immune to the negative effects of the Confused condition, and never Fumble as a result of it.</p>",
+        "traits": [],
+        "type": "passive",
+        "img": "modules/ptr2e-pkmn-sprites/sprites/327.webp",
+        "range": {
+          "target": "self",
+          "unit": "m",
+          "distance": 0
+        },
+        "cost": {
+          "activation": "free",
+          "powerPoints": 0,
+          "delay": null,
+          "priority": null
+        },
+        "hidden": true,
+        "variant": null
+      }
+    ],
+    "description": "<p>You can confuse yourself, and avoid the ill-effects.</p>",
+    "traits": [],
+    "prerequisites": [],
+    "cost": 2,
+    "nodes": [
+      {
+        "x": 15,
+        "y": 13,
+        "connected": [
+          "evolution-spinda"
+        ],
+        "config": {
+          "alpha": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "borderWidth": null,
+          "texture": null,
+          "tint": null,
+          "scale": null
+        },
+        "hidden": false,
+        "type": "normal",
+        "tier": null
+      }
+    ],
+    "webs": [
+      "Compendium.ptr2e.core-species.Item.DN39HBQfR7lFM73H"
+    ],
+    "global": false,
+    "slug": "dizzy-daft",
+    "autoUnlock": [],
+    "originSlug": null,
+    "variant": null,
+    "mode": null
+  },
+  "img": "systems/ptr2e/img/icons/feat_icon.webp",
+  "effects": [],
+  "flags": {},
+  "_id": "y3aSWoyIMrXrn0l1"
+}

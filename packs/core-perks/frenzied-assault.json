@@ -2,74 +2,125 @@
   "name": "Frenzied Assault",
   "type": "perk",
   "system": {
-    "prerequisites": [
-      "None"
-    ],
+    "prerequisites": [],
     "cost": 2,
-    "design": {
-      "arena": "physical",
-      "approach": "power",
-      "archetype": "Combat"
-    },
-    "description": "When Enraged, you may spend the PP cost to act with priority 3. You may spend additional PP up to a total of 7 to increase the Priority rating with which you act.",
+    "description": "<p>While @Affliction[enraged], the user's Attacks have a 30% chance on resolution to grant the user +1 SPD Stage for 5 Activations for 5 Activations.</p>",
     "actions": [
       {
         "name": "Frenzied Assault",
         "slug": "frenzied-assault",
-        "description": "When Enraged, you may spend the PP cost to act with priority 3. You may spend additional PP up to a total of 7 to increase the Priority rating with which you act.",
+        "description": "<p>While @Affliction[enraged], the user's Attacks have a 30% chance on resolution to grant the user +1 SPD Stage for 5 Activations for 5 Activations.</p>",
         "cost": {
           "activation": "free",
-          "powerPoints": 3
+          "powerPoints": 0,
+          "delay": null,
+          "priority": null
         },
         "type": "generic",
-        "traits": []
+        "traits": [],
+        "img": "icons/svg/explosion.svg",
+        "range": {
+          "target": "enemy",
+          "unit": "m",
+          "distance": 0
+        },
+        "variant": null
       }
     ],
     "slug": "frenzied-assault",
     "traits": [],
-    "node": {
-      "i": 67,
-      "j": -74,
-      "connected": [
-        "berserk",
-        "ultraviolet",
-        "fiendish-provocation"
-      ],
-      "config": {
-        "alpha": null,
-        "backgroundColor": "#ff0000",
-        "borderColor": null,
-        "borderWidth": null,
-        "texture": "systems/ptr2e/img/perk-icons/Combat.svg",
-        "tint": null,
-        "scale": null
-      },
-      "hidden": false,
-      "type": "normal"
-    }
+    "_migration": {
+      "version": null,
+      "previous": null
+    },
+    "nodes": [
+      {
+        "connected": [
+          "berserker",
+          "elemental-rage",
+          "seeing-red"
+        ],
+        "config": {
+          "alpha": null,
+          "backgroundColor": "#ff0000",
+          "borderColor": null,
+          "borderWidth": null,
+          "texture": "systems/ptr2e/img/perk-icons/Combat.svg",
+          "tint": null,
+          "scale": null
+        },
+        "hidden": false,
+        "type": "normal",
+        "x": 57,
+        "y": 41,
+        "tier": null
+      }
+    ],
+    "autoUnlock": [],
+    "originSlug": null,
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": []
   },
   "_id": "IMn0UktiyUWZXQty",
-  "img": "/systems/ptr2e/img/icons/feat_icon.webp",
-  "effects": [],
-  "flags": {
-    "core": {
-      "sourceId": "Compendium.ptr2e.core-perks.Item.IMn0UktiyUWZXQty"
+  "img": "systems/ptr2e/img/perk-icons/Combat.svg",
+  "effects": [
+    {
+      "name": "Frenzied Assault",
+      "type": "passive",
+      "_id": "XwbxmvahwQuGuMzh",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "attack",
+            "value": "Compendium.ptr2e.core-effects.Item.XeiSuS3APUcN0MLM",
+            "predicate": [
+              "effect:affliction:enraged"
+            ],
+            "chance": 30,
+            "affects": "self",
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.4.1.0",
+        "createdTime": 1734211188522,
+        "modifiedTime": 1734212542084,
+        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
+      }
     }
-  },
-  "_stats": {
-    "coreVersion": "12.321",
-    "systemId": "ptr2e",
-    "systemVersion": "0.005",
-    "createdTime": null,
-    "modifiedTime": 1714920537025,
-    "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
-    "compendiumSource": null,
-    "duplicateSource": null
-  },
-  "folder": null,
-  "sort": 0,
-  "ownership": {
-    "default": 0
-  },
-  "_key": "!items!IMn0UktiyUWZXQty"
+  ],
+  "folder": "zrVtKATNxzLNxTUa"
 }

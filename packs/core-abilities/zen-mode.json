@@ -1,22 +1,24 @@
 {
   "name": "Zen Mode",
   "type": "ability",
-  "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+  "img": "systems/ptr2e/img/icons/ability_icon.webp",
   "system": {
     "actions": [
       {
         "traits": [
           "defensive",
           "forme-change",
+          "desperation-1-2",
+          "interrupt-3",
           "innate"
         ],
         "name": "Zen Mode",
-        "slug": "zen-mode",
-        "type": "passive",
+        "slug": "zen-mode-active",
+        "type": "active",
         "cost": {
           "activation": "free",
-          "powerPoints": 0,
-          "trigger": "The user is reduced to 50% or fewer HP.",
+          "powerPoints": 2,
+          "trigger": "<p>Trigger: An attack is resolved against the user and the user meets the [Desperation 1/2] Condition.</p>",
           "delay": null,
           "priority": null
         },
@@ -25,10 +27,52 @@
           "distance": 0,
           "unit": "m"
         },
-        "description": "Trigger: The user is reduced to 50% or fewer HP.\nEffect: The user changes to Zen forme. While in Zen Forme, the user resists all incoming damage by 1 step."
+        "description": "<p>Trigger: An attack is resolved against the user and the user meets the [Desperation 1/2] Condition.</p><p>Effect: The user changes to its Zen Forme.</p>"
+      },
+      {
+        "traits": [
+          "defensive",
+          "innate"
+        ],
+        "name": "Zen Mode",
+        "slug": "zen-mode-passive",
+        "type": "passive",
+        "cost": {
+          "activation": "free",
+          "powerPoints": 0,
+          "delay": null,
+          "priority": null
+        },
+        "range": {
+          "target": "self",
+          "distance": 0,
+          "unit": "m"
+        },
+        "description": "<p>Effect: While in Standard Forme, the user deals 15% more damage, and in Zen Forme, they take 15% less damage. Depending on the user's Species, they also gain an Extra Ability: <ul><li>Darmanitan Standard Forme - Sheer Force</li><li>Darmanitan Zen Forme - Power Fists</li><li>Galarian Darmanitan Standard Forme: Sheer Force</li><li>Galarian Darmanitan Zen Mode: Coldflame</li><ul></p>"
+      },
+      {
+        "traits": [
+          "defensive",
+          "innate"
+        ],
+        "name": "Zen Mode",
+        "slug": "zen-mode-downtime",
+        "type": "downtime",
+        "cost": {
+          "activation": "free",
+          "powerPoints": 0,
+          "delay": null,
+          "priority": null
+        },
+        "range": {
+          "target": "self",
+          "distance": 0,
+          "unit": "m"
+        },
+        "description": "<p>Effect: The user changes to or from its Zen Forme.</p>"
       }
     ],
-    "description": "Trigger: The user is reduced to 50% or fewer HP.\nEffect: The user changes to Zen forme. While in Zen Forme, the user resists all incoming damage by 1 step.",
+    "description": "<p>Trigger: An attack is resolved against the user and the user meets the [Desperation 1/2] Condition.</p><p>Effect: The user changes to its Zen Forme. </p><p>Passive: While in Standard Forme, the user deals 15% more damage, and in Zen Forme, they take 15% less damage. Depending on the user's Species, they also gain an Extra Ability: <ul><li>Darmanitan Standard Forme - Sheer Force</li><li>Darmanitan Zen Forme - Power Fists</li><li>Galarian Darmanitan Standard Forme: Sheer Force</li><li>Galarian Darmanitan Zen Mode: Coldflame</li><ul></p>",
     "traits": [
       "defensive",
       "forme-change",

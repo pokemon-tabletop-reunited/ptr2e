@@ -1,8 +1,7 @@
-import { ActorPTR2e } from "@actor";
+import { ActorPTR2e, Attribute } from "@actor";
 import { ActorSheetPTR2e } from "@actor";
 import { CenterLabelsPlugin } from "@scripts/chart-plugins.ts";
 import { Chart, ChartOptions } from "chart.js/auto";
-import { _longestText, _normalizeAngle } from "chart.js/helpers";
 
 export class StatsChart {
     sheet: ActorSheetPTR2e | foundry.applications.api.DocumentSheetV2<ActorPTR2e>;
@@ -83,11 +82,10 @@ export class StatsChart {
     get data() {
         const attributes = this.sheet.document.system.attributes;
         const highestStat = (() => {
-            const max = Math.max(...Object.values(attributes).map((attr) => attr.value));
+            const max = Math.max(...Object.values(attributes).map((attr) => (attr as Attribute).value));
             return Math.ceil(max / 20) * 20;
         })();
 
-        // Sample data
         return {
             labels: [["HP", attributes.hp.value], ["ATK", attributes.atk.value], [attributes.def.value, "DEF"], [attributes.spe.value, "SPD"], [attributes.spd.value, "SP.DEF"], ["SP.ATK", attributes.spa.value]],
             datasets: [

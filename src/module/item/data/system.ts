@@ -1,8 +1,10 @@
 import { ActionPTR2e } from "@data";
+import { MigrationRecord } from "@module/data/mixins/has-migrations.ts";
 import { RollOptionDomains } from "@module/data/roll-option-manager.ts";
 
 type ItemType =
     | "ability"
+    | "blueprint"
     | "consumable"
     | "container"
     | "effect"
@@ -11,7 +13,8 @@ type ItemType =
     | "move"
     | "perk"
     | "species"
-    | "weapon";
+    | "weapon"
+    | "summon";
 
 type BaseItemSourcePTR2e<
     TType extends ItemType,
@@ -22,8 +25,8 @@ type BaseItemSourcePTR2e<
 
 interface ItemFlagsPTR2e extends foundry.documents.ItemFlags {
     ptr2e: {
-        rulesSelections: Record<string, string | number | object | null>;
-        itemGrants: Record<string, ItemGrantData>;
+        choiceSelections: Record<string, string | number | object | null>;
+        //itemGrants: Record<string, ItemGrantData>;
         grantedBy: ItemGrantData | null;
         rollOptions: {
             [domain in keyof typeof RollOptionDomains]: Record<string, boolean>;
@@ -34,7 +37,7 @@ interface ItemFlagsPTR2e extends foundry.documents.ItemFlags {
 
 interface ItemSourceFlagsPTR2e extends DeepPartial<foundry.documents.ItemFlags> {
     ptr2e?: {
-        rulesSelections?: Record<string, string | number | object>;
+        choiceSelections?: Record<string, string | number | object>;
         itemGrants?: Record<string, ItemGrantSource>;
         grantedBy?: ItemGrantSource | null;
         rollOptions: {
@@ -55,7 +58,7 @@ interface ItemGrantSource {
 
 type ItemGrantDeleteAction = "cascade" | "detach" | "restrict";
 
-type ItemSystemSource = {
+interface ItemSystemSource {
     /**
      * A slug for the item, derived from its name.
      * @defaultValue `slugify(this.name)`
@@ -97,7 +100,9 @@ type ItemSystemSource = {
      * If the item is not in a container, this will be `null`.
      */
     container?: DocumentUUID | null;
-};
+
+    _migration?: MigrationRecord;
+}
 
 export type {
     BaseItemSourcePTR2e,

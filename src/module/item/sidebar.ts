@@ -22,7 +22,7 @@ export default class ItemDirectoryPTR2e<TItem extends ItemPTR2e<ItemSystemPTR, n
             const statusEffect = CONFIG.statusEffects.find(effect => effect._id === data._id);
             if(statusEffect) options.keepId = true;
         }
-        //@ts-expect-error
+        //@ts-expect-error - This is a valid check
         return entry.constructor.create(data, options);
     }
 }

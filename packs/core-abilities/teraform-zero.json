@@ -1,9 +1,30 @@
 {
   "name": "Teraform Zero",
   "type": "ability",
-  "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+  "img": "systems/ptr2e/img/perk-icons/Touched.svg",
   "system": {
     "actions": [
+      {
+        "traits": [
+          "environ",
+          "transform",
+          "phenomenon",
+          "legendary"
+        ],
+        "name": "Teraform Zero (Active)",
+        "slug": "teraform-zero-active",
+        "type": "generic",
+        "cost": {
+          "activation": "simple",
+          "powerPoints": 8
+        },
+        "range": {
+          "target": "field",
+          "unit": "m"
+        },
+        "description": "<p>Effect: All current [Weather] and [Terrain] effects end. Creatures on the field that have undergone a Phenomenal Transformation other than Terastallization have those Transformations ended.</p>",
+        "img": "icons/svg/explosion.svg"
+      },
       {
         "traits": [
           "environ",
@@ -16,47 +37,29 @@
         "type": "generic",
         "cost": {
           "activation": "free",
-          "powerPoints": 0,
-          "trigger": "The user gains this ability.",
-          "delay": null,
-          "priority": null
+          "trigger": "<p>The user gains this Ability.</p>"
         },
         "range": {
           "target": "field",
-          "distance": 0,
           "unit": "m"
         },
-        "description": "Trigger: The user gains this ability.\nEffect: All current [Weather] and [Terrain] effects end. Creatures on the field that have undergone a Phenomenal Transformation other than Terastalization have those Transformations ended. The user may spend 8 PP as a Simple Action to activate this Ability, ignoring this Ability's Trigger."
+        "description": "<p>Trigger: The user gains this Ability.</p><p>Effect: All current [Weather] and [Terrain] effects end. Creatures on the field that have undergone a Phenomenal Transformation other than Terastallization have those Transformations ended.</p>",
+        "img": "icons/svg/explosion.svg"
       }
     ],
-    "description": "Trigger: The user gains this ability.\nEffect: All current [Weather] and [Terrain] effects end. Creatures on the field that have undergone a Phenomenal Transformation other than Terastalization have those Transformations ended. The user may spend 8 PP as a Simple Action to activate this Ability, ignoring this Ability's Trigger.",
+    "description": "<p>Trigger: The user gains this Ability.</p><p>Effect: All current [Weather] and [Terrain] effects end. Creatures on the field that have undergone a Phenomenal Transformation other than Terastallization have those Transformations ended. The user may spend PP as a Simple Action to activate this Ability, ignoring the normal Trigger.</p>",
     "traits": [
       "environ",
       "transform",
       "phenomenon",
       "legendary"
     ],
-    "slug": null,
-    "container": null
+    "slug": "teraform-zero",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
   },
   "_id": "nxJJax0yiUKIH40F",
-  "effects": [],
-  "folder": null,
-  "sort": 0,
-  "ownership": {
-    "default": 0,
-    "tXAZ3QUgjuwX4gdV": 3
-  },
-  "flags": {},
-  "_stats": {
-    "compendiumSource": null,
-    "duplicateSource": null,
-    "coreVersion": "12.324",
-    "systemId": "ptr2e",
-    "systemVersion": "0.005",
-    "createdTime": 1716919240454,
-    "modifiedTime": 1716919240454,
-    "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
-  },
-  "_key": "!items!nxJJax0yiUKIH40F"
+  "effects": []
 }

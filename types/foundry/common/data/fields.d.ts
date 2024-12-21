@@ -288,6 +288,15 @@ export abstract class DataField<
      * @returns {HTMLDivElement}              The rendered form group element
      */
     toFormGroup(inputConfig?: FormInputConfig, groupConfig?: FormGroupConfig, customInput?: CustomFormInput): HTMLDivElement;
+
+    /**
+     * Apply an ActiveEffectChange to this field.
+     * @param {*} value                  The field's current value.
+     * @param {DataModel} model          The model instance.
+     * @param {EffectChangeData} change  The change to apply.
+     * @returns {*}                      The updated value.
+     */
+    applyChange(value: unknown, model: abstract.DataModel, change: {key: string, value: unknown, priority: number, mode: unknown}): unknown
 }
 
 interface FormInputConfig<TValue = any>{
@@ -373,6 +382,13 @@ export class SchemaField<
      * @returns The DataField instance or undefined
      */
     get(fieldName: string): DataField | undefined;
+
+    /**
+     * Traverse the schema, obtaining the DataField definition for a particular field.
+     * @param {string[]|string} fieldName       A field path like ["abilities", "strength"] or "abilities.strength"
+     * @returns {SchemaField|DataField}         The corresponding DataField definition for that field, or undefined
+     */
+    getField(fieldName: string[]|string): SchemaField<DataSchema> | DataField | undefined;
 
     /* -------------------------------------------- */
     /*  Data Field Methods                          */
@@ -1087,6 +1103,10 @@ export class DocumentTypeField<
      * @param {DataFieldContext} [context]    Additional context which describes the field
      */
     constructor(documentClass: ConstructorOf<TDocument>, options?: StringFieldOptions<TSourceProp, TRequired, TNullable, THasInitial>, context?: DataFieldOptions<TSourceProp, TRequired, TNullable, THasInitial>);
+}
+
+export class AnyField extends DataField {
+    protected override _cast(value: unknown): unknown;
 }
 
 /** A subclass of `ObjectField` which supports a system-level data object. */

@@ -3,71 +3,83 @@
   "type": "perk",
   "system": {
     "prerequisites": [
-      "Conversation 25",
-      "Leadership 25"
+      {
+        "gte": [
+          "{actor|skills.conversation.mod}",
+          25
+        ]
+      },
+      {
+        "gte": [
+          "{actor|skills.leadership.mod}",
+          25
+        ]
+      }
     ],
     "cost": 2,
-    "design": {
-      "arena": "social",
-      "approach": "power",
-      "archetype": "Support"
-    },
-    "description": "You are practiced in psyching up your allies. You may use Moves which are normally Self-Targeting instead as having Range 10m and able to target yourself or allied creatures.",
+    "description": "<p>You are practiced in psyching up your allies. You may use Moves which are normally Self-Targeting instead as having Range 10m and able to target yourself or allied creatures.</p>",
     "actions": [
       {
         "name": "Cheerleader",
         "slug": "cheerleader",
-        "description": "You are practiced in psyching up your allies. You may use Moves which are normally Self-Targeting instead as having Range 10m and able to target yourself or allied creatures.",
+        "description": "<p>You are practiced in psyching up your allies. You may use Moves which are normally Self-Targeting instead as having Range 10m and able to target yourself or allied creatures.</p>",
         "type": "passive",
-        "traits": []
+        "traits": [],
+        "img": "icons/svg/explosion.svg",
+        "range": {
+          "target": "enemy",
+          "unit": "m",
+          "distance": 0
+        },
+        "cost": {
+          "activation": "simple",
+          "powerPoints": 0,
+          "delay": null,
+          "priority": null
+        },
+        "variant": null,
+        "hidden": false
       }
     ],
     "slug": "cheerleader",
     "traits": [],
-    "node": {
-      "i": 37,
-      "j": -59,
-      "connected": [
-        "tactician",
-        "mobilize",
-        "keep-fighting",
-        "emergency-retreat"
-      ],
-      "config": {
-        "alpha": null,
-        "backgroundColor": "#ff80ff",
-        "borderColor": null,
-        "borderWidth": null,
-        "texture": "systems/ptr2e/img/perk-icons/Orders_Training.svg",
-        "tint": "#141414",
-        "scale": null
-      },
-      "hidden": false,
-      "type": "normal"
-    }
+    "_migration": {
+      "version": null,
+      "previous": null
+    },
+    "nodes": [
+      {
+        "connected": [
+          "mobilize",
+          "tactician",
+          "resolute-watcher",
+          "the-meaning-of-haste"
+        ],
+        "config": {
+          "alpha": null,
+          "backgroundColor": "#ff80ff",
+          "borderColor": null,
+          "borderWidth": null,
+          "texture": "systems/ptr2e/img/perk-icons/Orders_Training.svg",
+          "tint": "#141414",
+          "scale": null
+        },
+        "hidden": false,
+        "type": "normal",
+        "x": 38,
+        "y": 56,
+        "tier": null
+      }
+    ],
+    "autoUnlock": [],
+    "originSlug": null,
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": []
   },
   "_id": "mVWaaMJ4l5KVO4IP",
-  "img": "/systems/ptr2e/img/icons/feat_icon.webp",
+  "img": "systems/ptr2e/img/perk-icons/Orders_Training.svg",
   "effects": [],
-  "flags": {
-    "core": {
-      "sourceId": "Compendium.ptr2e.core-perks.Item.mVWaaMJ4l5KVO4IP"
-    }
-  },
-  "_stats": {
-    "coreVersion": "12.321",
-    "systemId": "ptr2e",
-    "systemVersion": "0.005",
-    "createdTime": null,
-    "modifiedTime": 1714920512126,
-    "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
-    "compendiumSource": null,
-    "duplicateSource": null
-  },
-  "folder": null,
-  "sort": 0,
-  "ownership": {
-    "default": 0
-  },
-  "_key": "!items!mVWaaMJ4l5KVO4IP"
+  "folder": "PAZ8zWUPw7Azm5V6"
 }

@@ -1,13 +1,12 @@
 {
   "name": "Stout Aerouant",
   "type": "ability",
-  "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+  "img": "systems/ptr2e/img/svg/dragon_icon.svg",
   "system": {
     "actions": [
       {
         "traits": [
-          "legendary",
-          "connection"
+          "legendary"
         ],
         "name": "Stout Aerouant",
         "slug": "stout-aerouant",
@@ -15,61 +14,56 @@
         "cost": {
           "activation": "free",
           "powerPoints": 3,
-          "trigger": "The user resolves a Dragon-Type attack",
-          "delay": null,
-          "priority": null
+          "trigger": "<p>The user resolves a Dragon-Type attack.</p>"
         },
         "range": {
           "target": "self",
-          "distance": 0,
           "unit": "m"
         },
-        "description": "Trigger: The user resolves a Dragon-Type attack\nEffect: Connection - Dragon Energy. Negative stage changes affecting the user are removed."
+        "description": "<p>Trigger: The user resolves a Dragon-Type attack.</p><p>Effect: Negative [Stage Change] effects affecting the user are removed.</p>",
+        "img": "icons/svg/explosion.svg"
       },
       {
+        "slug": "dragon-energy",
+        "name": "Dragon Energy",
+        "type": "attack",
         "traits": [
           "legendary",
-          "connection"
+          "pulse",
+          "drain-1/4",
+          "pp-updated"
         ],
-        "name": "Stout Aerouant",
-        "slug": "stout-aerouant",
-        "type": "passive",
-        "cost": {
-          "activation": "free",
-          "powerPoints": 0,
-          "delay": null,
-          "priority": null
+        "range": {
+          "target": "emanation",
+          "distance": 5,
+          "unit": "m"
         },
-        "range": null,
-        "description": "Passive: Dragon Energy on the user's Active List gains [Drain 1/2]."
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 10
+        },
+        "category": "special",
+        "power": 150,
+        "accuracy": 100,
+        "types": [
+          "dragon"
+        ],
+        "description": "<p>Effect: This attack's Power ranges based on how healthy the user is, ranging from 1 to 150.</p><p><blockquote>Damage Formula: Power = max(1, 150 x UserCurrentHP/UserMaxHP)</blockquote>",
+        "free": true,
+        "img": "icons/svg/explosion.svg"
       }
     ],
-    "description": "Trigger: The user resolves a Dragon-Type attack\nEffect: Connection - Dragon Energy. Negative stage changes affecting the user are removed. Passive: Dragon Energy on the user's Active List gains [Drain 1/2].",
+    "description": "<p>Trigger: The user resolves a Dragon-Type attack.</p><p>Effect: Connection - Dragon Energy. Negative [Stage Change] effects affecting the user are removed. Passive: The user's Dragon Energy gains [Drain 1/4].</p>",
     "traits": [
       "legendary",
       "connection"
     ],
-    "slug": null,
-    "container": null
+    "slug": "stout-aerouant",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
   },
   "_id": "fgnUpZqSxSncHLqF",
-  "effects": [],
-  "folder": null,
-  "sort": 0,
-  "ownership": {
-    "default": 0,
-    "tXAZ3QUgjuwX4gdV": 3
-  },
-  "flags": {},
-  "_stats": {
-    "compendiumSource": null,
-    "duplicateSource": null,
-    "coreVersion": "12.324",
-    "systemId": "ptr2e",
-    "systemVersion": "0.005",
-    "createdTime": 1716919240454,
-    "modifiedTime": 1716919240454,
-    "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
-  },
-  "_key": "!items!fgnUpZqSxSncHLqF"
+  "effects": []
 }

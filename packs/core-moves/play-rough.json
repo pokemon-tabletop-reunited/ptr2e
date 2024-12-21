@@ -1,10 +1,9 @@
 {
   "name": "Play Rough",
   "type": "move",
-  "img": "/systems/ptr2e/img/svg/fairy_icon.svg",
+  "img": "systems/ptr2e/img/svg/fairy_icon.svg",
   "system": {
     "slug": "play-rough",
-    "description": "Effect: On hit, the has a 10% chance of losing -1 ATK stage for 5 activations.",
     "traits": [
       "dash",
       "push-3",
@@ -18,7 +17,8 @@
         "traits": [
           "dash",
           "push-3",
-          "contact"
+          "contact",
+          "pp-updated"
         ],
         "range": {
           "target": "creature",
@@ -27,10 +27,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 7,
-          "delay": null,
-          "priority": null,
-          "trigger": null
+          "powerPoints": 4
         },
         "category": "physical",
         "power": 90,
@@ -38,16 +35,70 @@
         "types": [
           "fairy"
         ],
-        "description": "Effect: On hit, the has a 10% chance of losing -1 ATK stage for 5 activations.",
-        "contestType": "",
-        "contestEffect": "",
-        "free": false,
-        "slot": null
+        "description": "<p>Effect: On hit, the target has a 10% chance of losing -1 ATK Stage for 5 activations.</p>",
+        "img": "icons/svg/explosion.svg"
       }
     ],
-    "container": null,
-    "grade": "A"
+    "grade": "B",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
   },
   "_id": "cTJm9kr95bnmbdBN",
-  "effects": []
+  "effects": [
+    {
+      "name": "Play Rough",
+      "type": "passive",
+      "_id": "CBmlcU9FOPCIS6wf",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "play-rough-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.ikCAv5w4iNfHHqaE",
+            "predicate": [],
+            "chance": 10,
+            "affects": "target",
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.4.1.0",
+        "createdTime": 1732751576648,
+        "modifiedTime": 1732751600553,
+        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
+      }
+    }
+  ]
 }

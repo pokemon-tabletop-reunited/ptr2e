@@ -1,75 +1,133 @@
 {
   "name": "Relic Soloist",
   "type": "ability",
-  "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+  "img": "systems/ptr2e/img/perk-icons/Musician.svg",
   "system": {
     "actions": [
       {
         "traits": [
-          "legendary",
-          "connection"
+          "legendary"
         ],
         "name": "Relic Soloist",
         "slug": "relic-soloist",
         "type": "generic",
         "cost": {
           "activation": "free",
-          "powerPoints": 0,
-          "trigger": "The user resolves Relic Song",
-          "delay": null,
-          "priority": null
+          "trigger": "<p>The user resolves Relic Song.</p>"
         },
         "range": {
           "target": "self",
-          "distance": 0,
           "unit": "m"
         },
-        "description": "Trigger: The user resolves Relic Song\nEffect: Connection - Relic Song. The user transforms into its Pirouette Forme. The user may also chance to Pirouette Forme as either a Simple Action (4 PP), or as a Downtime Action."
+        "description": "<p>Trigger: The user resolves Relic Song.</p><p>Effect: The user transforms into its Pirouette Forme. The user may also change to Pirouette Forme as either a Simple Action (4 PP), or as a Downtime Action.</p>",
+        "img": "icons/svg/explosion.svg"
       },
       {
         "traits": [
-          "legendary",
-          "connection"
+          "legendary"
+        ],
+        "name": "Relic Soloist (Active)",
+        "slug": "relic-soloist-active",
+        "type": "generic",
+        "cost": {
+          "activation": "simple",
+          "powerPoints": 4
+        },
+        "range": {
+          "target": "self",
+          "unit": "m"
+        },
+        "description": "<p>Trigger: The user resolves Relic Song.</p><p>Effect: The user transforms into its Pirouette Forme.</p>",
+        "img": "icons/svg/explosion.svg"
+      },
+      {
+        "traits": [
+          "legendary"
         ],
         "name": "Relic Soloist",
-        "slug": "relic-soloist",
+        "slug": "relic-soloist-downtime",
+        "type": "downtime",
+        "cost": {
+          "activation": "free"
+        },
+        "range": {
+          "target": "self",
+          "unit": "m"
+        },
+        "description": "<p>Effect: The user transforms into its Pirouette Forme.</p>",
+        "img": "icons/svg/explosion.svg"
+      },
+      {
+        "slug": "relic-song",
+        "name": "Relic Song",
+        "type": "attack",
+        "traits": [
+          "sonic",
+          "friendly",
+          "legendary",
+          "pp-updated"
+        ],
+        "range": {
+          "target": "emanation",
+          "distance": 8,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 8
+        },
+        "category": "special",
+        "power": 75,
+        "accuracy": 100,
+        "types": [
+          "normal"
+        ],
+        "description": "<p>Effect: On hit, all valid targets have a 30% chance of gaining @Affliction[drowsy] 7.</p>",
+        "free": true,
+        "img": "icons/svg/explosion.svg"
+      },
+      {
+        "traits": [],
+        "name": "Amplifier",
+        "slug": "amplifier",
         "type": "passive",
         "cost": {
-          "activation": "free",
-          "powerPoints": 0,
-          "delay": null,
-          "priority": null
+          "activation": "free"
         },
-        "range": null,
-        "description": "Passive: The user possesses the Abilities - Amplifier and Benevolent Gift"
+        "range": {
+          "target": "self",
+          "unit": "m"
+        },
+        "description": "<p>Effect: The user's [Sonic] attacks have 30% more Power and have their Range increased by 50%.</p>",
+        "img": "icons/svg/explosion.svg"
+      },
+      {
+        "traits": [],
+        "name": "Benevolent Gift",
+        "slug": "benevolent-gift",
+        "type": "passive",
+        "cost": {
+          "activation": "free"
+        },
+        "range": {
+          "target": "self",
+          "unit": "m"
+        },
+        "description": "<p>Effect: The duration of effects caused or created by the user is increased by 2.</p>",
+        "img": "icons/svg/explosion.svg"
       }
     ],
-    "description": "Trigger: The user resolves Relic Song\nEffect: Connection - Relic Song. The user transforms into its Pirouette Forme. The user may also chance to Pirouette Forme as either a Simple Action (4 PP), or as a Downtime Action. Passive: The user possesses the Abilities - Amplifier and Benevolent Gift",
+    "description": "<p>Trigger: The user resolves Relic Song</p><p>Effect: Connection - Relic Song. The user transforms into its Pirouette Forme. The user may also change to Pirouette Forme as either a Simple Action (4 PP), or as a Downtime Action. Passive: The user possesses the Abilities - Amplifier and Benevolent Gift",
     "traits": [
       "legendary",
       "connection"
     ],
-    "slug": null,
-    "container": null
+    "slug": "relic-soloist",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
   },
   "_id": "RsbFvEb7DqMVwhMr",
-  "effects": [],
-  "folder": null,
-  "sort": 0,
-  "ownership": {
-    "default": 0,
-    "tXAZ3QUgjuwX4gdV": 3
-  },
-  "flags": {},
-  "_stats": {
-    "compendiumSource": null,
-    "duplicateSource": null,
-    "coreVersion": "12.324",
-    "systemId": "ptr2e",
-    "systemVersion": "0.005",
-    "createdTime": 1716919240454,
-    "modifiedTime": 1716919240454,
-    "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
-  },
-  "_key": "!items!RsbFvEb7DqMVwhMr"
+  "effects": []
 }

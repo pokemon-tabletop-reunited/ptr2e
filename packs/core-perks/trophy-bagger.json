@@ -1,0 +1,116 @@
+{
+  "name": "Trophy Bagger",
+  "type": "perk",
+  "system": {
+    "prerequisites": [
+      "item:perk:great-hunter",
+      {
+        "xof": [
+          {
+            "gte": [
+              "{actor|skills.track.mod}",
+              60
+            ]
+          },
+          {
+            "gte": [
+              "{actor|skills.listen.mod}",
+              50
+            ]
+          },
+          {
+            "gte": [
+              "{actor|skills.navigate.mod}",
+              40
+            ]
+          },
+          {
+            "gte": [
+              "{actor|skills.spot.mod}",
+              50
+            ]
+          },
+          {
+            "gte": [
+              "{actor|skills.survival.mod}",
+              40
+            ]
+          },
+          {
+            "gte": [
+              "{actor|skills.stealth.mod}",
+              50
+            ]
+          }
+        ],
+        "x": 3
+      },
+      "#6 or More \"Hunter\" Archetype Perks",
+      {
+        "not": "item:perk:game-specialist"
+      }
+    ],
+    "cost": 4,
+    "description": "<p>The user’s bonuses from Great Hunter increase to +20 when the target is Large or larger.</p><p>The user's Attacks deal more damage the larger the target is compared to the user.</p><blockquote> PowerPercentIncrease = max(0, 7.5 * (targetCatMod-userCatMod))</blockquote>",
+    "actions": [
+      {
+        "name": "Trophy Bagger",
+        "slug": "trophy-bagger",
+        "description": "<p>The user’s bonuses from Great Hunter increase to +20 when the target is Large or larger.</p><p>The user's Attacks deal more damage the larger the target is compared to the user.</p><blockquote> PowerPercentIncrease = max(0, 7.5 * (targetCatMod-userCatMod))</blockquote>",
+        "cost": {
+          "activation": "free",
+          "powerPoints": 0,
+          "delay": null,
+          "priority": null
+        },
+        "type": "generic",
+        "traits": [],
+        "img": "icons/svg/explosion.svg",
+        "range": {
+          "target": "enemy",
+          "unit": "m",
+          "distance": 0
+        },
+        "variant": null
+      }
+    ],
+    "slug": "trophy-bagger",
+    "traits": [],
+    "_migration": {
+      "version": null,
+      "previous": null
+    },
+    "nodes": [
+      {
+        "connected": [
+          "hobby-gardener",
+          "great-hunter"
+        ],
+        "config": {
+          "alpha": null,
+          "backgroundColor": "#804000",
+          "borderColor": null,
+          "borderWidth": null,
+          "texture": "systems/ptr2e/img/perk-icons/Hunting.svg",
+          "tint": "#ffffff",
+          "scale": null
+        },
+        "hidden": false,
+        "type": "normal",
+        "x": 41,
+        "y": 188,
+        "tier": null
+      }
+    ],
+    "autoUnlock": [],
+    "originSlug": null,
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": []
+  },
+  "_id": "w7jJHaMJtSIg6FrQ",
+  "img": "systems/ptr2e/img/perk-icons/Hunting.svg",
+  "effects": [],
+  "folder": "W85LoOCz3WlwbyhZ"
+}

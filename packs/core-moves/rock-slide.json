@@ -1,12 +1,14 @@
 {
   "name": "Rock Slide",
   "type": "move",
-  "img": "/systems/ptr2e/img/svg/rock_icon.svg",
+  "img": "systems/ptr2e/img/svg/rock_icon.svg",
   "system": {
     "slug": "rock-slide",
-    "description": "Effect: On hit, all valid targets have a 30% chance of being Flinched 3.",
+    "description": "",
     "traits": [
-      "blast-3"
+      "blast-3",
+      "flinch-chance-3",
+      "pp-updated"
     ],
     "actions": [
       {
@@ -14,7 +16,9 @@
         "name": "Rock Slide",
         "type": "attack",
         "traits": [
-          "blast-3"
+          "blast-3",
+          "flinch-chance-3",
+          "pp-updated"
         ],
         "range": {
           "target": "blast",
@@ -34,7 +38,7 @@
         "types": [
           "rock"
         ],
-        "description": "Effect: On hit, all valid targets have a 30% chance of being Flinched 3.",
+        "description": "<p>Effect: On hit, all valid targets have a 30% chance of being Flinched.</p>",
         "contestType": "",
         "contestEffect": "",
         "free": false,

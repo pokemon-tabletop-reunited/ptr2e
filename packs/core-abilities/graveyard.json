@@ -1,57 +1,174 @@
 {
   "name": "Graveyard",
   "type": "ability",
-  "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+  "img": "icons/environment/settlement/graveyard-tombstone-night.webp",
   "system": {
     "actions": [
       {
         "traits": [
           "domain",
+          "aura",
           "ghost"
         ],
         "name": "Graveyard",
         "slug": "graveyard",
         "type": "passive",
         "cost": {
-          "activation": "free",
-          "powerPoints": 0,
-          "delay": null,
-          "priority": null
+          "activation": "free"
         },
         "range": {
           "target": "aura",
           "distance": 5,
           "unit": "m"
         },
-        "description": "Effect: The user and all Ghost-Type creatures within Range take 20% less damage from all sources."
+        "description": "<p>Effect: The user and all Ghost-Type creatures within Range take 20% less damage from all sources.</p>",
+        "img": "icons/svg/explosion.svg"
       }
     ],
-    "description": "Effect: The user and all Ghost-Type creatures within Range take 20% less damage from all sources.",
+    "description": "<p>Effect: The user and all Ghost-Type creatures within Range take 20% less damage from all sources.</p>",
     "traits": [
       "domain",
+      "aura",
       "ghost"
     ],
-    "slug": null,
-    "container": null
+    "slug": "graveyard",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
   },
   "_id": "Xwtf9S4YvML7PRBj",
-  "effects": [],
-  "folder": null,
-  "sort": 0,
-  "ownership": {
-    "default": 0,
-    "tXAZ3QUgjuwX4gdV": 3
-  },
-  "flags": {},
-  "_stats": {
-    "compendiumSource": null,
-    "duplicateSource": null,
-    "coreVersion": "12.324",
-    "systemId": "ptr2e",
-    "systemVersion": "0.005",
-    "createdTime": 1716919240454,
-    "modifiedTime": 1716919240454,
-    "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
-  },
-  "_key": "!items!Xwtf9S4YvML7PRBj"
+  "effects": [
+    {
+      "name": "Graveyard",
+      "type": "passive",
+      "_id": "w0OodBLk9sGL03hx",
+      "img": "icons/environment/settlement/graveyard-tombstone-night.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "ephemeral-modifier",
+            "key": "attack-damage-percentile",
+            "value": -20,
+            "predicate": [],
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "hideIfDisabled": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.4.1.0",
+        "createdTime": 1732660127343,
+        "modifiedTime": 1732661434582,
+        "lastModifiedBy": "IcBpMqhFuTck9VpX"
+      }
+    },
+    {
+      "name": "Graveyard (Aura)",
+      "type": "passive",
+      "_id": "9QGC6z89X7x4pLli",
+      "img": "icons/environment/settlement/graveyard-tombstone-night.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "aura",
+            "key": "",
+            "value": 0,
+            "predicate": [],
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "radius": 5,
+            "effects": [
+              {
+                "uuid": "Compendium.ptr2e.core-effects.Item.pqbzkawwRmk3qTr1",
+                "affects": "all",
+                "events": [
+                  "enter"
+                ],
+                "removeOnExit": true,
+                "includesSelf": false,
+                "appliesSelfOnly": false,
+                "predicate": [
+                  "target:trait:ghost"
+                ]
+              }
+            ],
+            "appearance": {
+              "border": {
+                "color": "#FF0000",
+                "alpha": 0.75
+              },
+              "highlight": {
+                "color": "user-color",
+                "alpha": 0.25
+              },
+              "texture": null
+            },
+            "mergeExisting": true
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.4.1.0",
+        "createdTime": 1732660297239,
+        "modifiedTime": 1732661422629,
+        "lastModifiedBy": "IcBpMqhFuTck9VpX"
+      }
+    }
+  ]
 }

@@ -64,6 +64,9 @@ declare global {
         /** A reference to the PointSource object which defines this light source area of effect */
         light: LightSource<this>;
 
+        /** The current animations of this Token. */
+        get animationContexts(): Map<string, TokenAnimationContext>;
+
         /** A reference to an animation that is currently in progress for this Token, if any */
         _animation: Promise<unknown> | null;
 
@@ -161,6 +164,9 @@ declare global {
          * @see {SightLayer#testVisibility}
          */
         get isVisible(): boolean | undefined;
+
+        /** The animation name used for Token movement */
+        get animationName(): string;
 
         /** The animation name used for Token movement */
         get movementAnimationName(): string;
@@ -340,6 +346,12 @@ declare global {
 
         /** Draw the active effects and overlay effect icons which are present upon the Token */
         drawEffects(): Promise<void>;
+
+        /**
+         * Draw the effect icons for ActiveEffect documents which apply to the Token's Actor.
+         * Called by {@link Token#drawEffects}.
+         */
+        protected _drawEffects(): Promise<void>;
 
         /** Draw the overlay effect icon */
         protected _drawOverlay({ src, tint }?: { src?: string; tint?: number }): Promise<void>;
@@ -628,4 +640,67 @@ declare global {
         a0?: Partial<TokenMeshDisplayAttributes>;
         hoverInOut?: boolean;
     }
+
+    interface TokenAnimationData {
+        /** The x position in pixels */
+        x: number;
+        /** The y position in pixels */
+        y: number;
+        /** The width in grid spaces */
+        width: number;
+        /** The height in grid spaces */
+        height: number;
+        /** The alpha value */
+        alpha: number;
+        /** The rotation in degrees */
+        rotation: number;
+        /** The texture data */
+        texture: {
+            /** The texture file path */
+            src: string;
+            /** The texture anchor X */
+            anchorX: number;
+            /** The texture anchor Y */
+            anchorY: number;
+            /** The texture scale X */
+            scaleX: number;
+            /** The texture scale Y */
+            scaleY: number;
+            /** The texture tint */
+            tint: Color;
+        };
+        /** The ring data */
+        ring: {
+            /** The ring subject data */
+            subject: {
+                /** The ring subject texture */
+                texture: string;
+                /** The ring subject scale */
+                scale: number;
+            };
+        };
+    }
+
+    interface TokenAnimationContext {
+      /** The name of the animation */
+      name: string | symbol;
+      /** The final animation state */
+      to: Partial<TokenAnimationData>;
+      /** The duration of the animation */
+      duration: number;
+      /** The current time of the animation */
+      time: number;
+      /** Asynchronous functions that are executed before the animation starts */
+      preAnimate: ((context: TokenAnimationContext) => Promise<void>)[];
+      /** Synchronous functions that are executed after the animation ended.
+       *  They may be executed before the preAnimate functions have finished  if the animation is terminated.
+       */
+      postAnimate: ((context: TokenAnimationContext) => void)[];
+      /**
+       *  The promise of the animation, which resolves to true if the animation
+       *  completed, to false if it was terminated, and rejects if an error occurred.
+       *  Undefined in the first frame (at time 0) of the animation.
+       */
+      promise?: Promise<boolean>;
+  }
 }

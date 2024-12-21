@@ -3,76 +3,85 @@
   "type": "perk",
   "system": {
     "prerequisites": [
-      "[Trainer] or [Expedition Leader]",
-      "Psychology 30"
+      {
+        "or": [
+          "trait:trainer",
+          "trait:expedition-leader"
+        ]
+      },
+      {
+        "gte": [
+          "{actor|skills.psychology.mod}",
+          30
+        ]
+      }
     ],
     "cost": 2,
-    "design": {
-      "arena": "social",
-      "approach": "power",
-      "archetype": "Shadow"
-    },
-    "description": "[Closed Heart] creatures that you are responsible for may gain XP, level up, learn new moves and evolve as normal.",
+    "description": "<p>[Closed Heart] creatures that you are responsible for may gain XP, level up, learn new moves and evolve as normal.</p>",
     "actions": [
       {
         "name": "Shadow Guide",
         "slug": "shadow-guide",
-        "description": "[Closed Heart] creatures that you are responsible for may gain XP, level up, learn new moves and evolve as normal.",
+        "description": "<p>[Closed Heart] creatures that you are responsible for may gain XP, level up, learn new moves and evolve as normal.</p>",
         "cost": {
-          "activation": "free"
+          "activation": "free",
+          "powerPoints": 0,
+          "delay": null,
+          "priority": null
         },
         "type": "passive",
-        "traits": []
+        "traits": [],
+        "img": "icons/svg/explosion.svg",
+        "range": {
+          "target": "enemy",
+          "unit": "m",
+          "distance": 0
+        },
+        "variant": null,
+        "hidden": false
       }
     ],
     "slug": "shadow-guide",
     "traits": [],
-    "node": {
-      "i": 59,
-      "j": -56,
-      "connected": [
-        "root-3",
-        "dark-clarity",
-        "fiendish-provocation",
-        "silver-bullet",
-        "open-your-heart",
-        "deep-breaths"
-      ],
-      "config": {
-        "alpha": null,
-        "backgroundColor": null,
-        "borderColor": null,
-        "borderWidth": null,
-        "texture": "systems/ptr2e/img/svg/shadow_icon.svg",
-        "tint": null,
-        "scale": null
-      },
-      "hidden": false,
-      "type": "normal"
-    }
+    "_migration": {
+      "version": null,
+      "previous": null
+    },
+    "nodes": [
+      {
+        "x": null,
+        "y": null,
+        "hidden": false,
+        "type": "normal",
+        "connected": [
+          "deep-breaths",
+          "open-your-heart",
+          "silver-bullet",
+          "fiendish-provocation",
+          "dark-clarity",
+          "ultraviolet"
+        ],
+        "config": {
+          "alpha": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "borderWidth": null,
+          "texture": "systems/ptr2e/img/svg/shadow_icon.svg",
+          "tint": null,
+          "scale": null
+        },
+        "tier": null
+      }
+    ],
+    "autoUnlock": [],
+    "originSlug": null,
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": []
   },
   "_id": "hqj8DQgk8QnBPehy",
-  "img": "/systems/ptr2e/img/icons/feat_icon.webp",
+  "img": "systems/ptr2e/img/svg/shadow_icon.svg",
   "effects": [],
-  "flags": {
-    "core": {
-      "sourceId": "Compendium.ptr2e.core-perks.Item.hqj8DQgk8QnBPehy"
-    }
-  },
-  "_stats": {
-    "coreVersion": "12.321",
-    "systemId": "ptr2e",
-    "systemVersion": "0.005",
-    "createdTime": null,
-    "modifiedTime": 1714920453372,
-    "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
-    "compendiumSource": null,
-    "duplicateSource": null
-  },
-  "folder": null,
-  "sort": 0,
-  "ownership": {
-    "default": 0
-  },
-  "_key": "!items!hqj8DQgk8QnBPehy"
+  "folder": "mWJffsapofL9b8rY"
 }

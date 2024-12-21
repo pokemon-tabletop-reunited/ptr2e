@@ -1,42 +1,75 @@
 {
-    "folder": "Et2u8UoXSe2a17oq",
-    "name": "Metamove: Dirty Trick",
-    "type": "perk",
-    "_id": "7jgu6qfPzvZDS5lZ",
-    "img": "systems/ptr2e/img/perk-icons/Arcana.svg",
-    "system": {
-        "actions": [],
+  "folder": "zrVtKATNxzLNxTUX",
+  "name": "Metamove: Dirty Trick",
+  "type": "perk",
+  "_id": "7jgu6qfPzvZDS5lZ",
+  "img": "systems/ptr2e/img/perk-icons/Arcana.svg",
+  "system": {
+    "actions": [
+      {
+        "name": "Metamove: Dirty Trick",
         "slug": "metamove-dirty-trick",
-        "description": "<p>You may spend an additional 4PP to have the move inflict Flinched 2 and Vulnerable 5.</p>",
-        "traits": [],
-        "prerequisites": [],
-        "cost": 1,
-        "design": {
-            "arena": "physical",
-            "approach": "finesse",
-            "archetype": "Metamove"
+        "description": "<p>Trigger: The user declares an Attack.</p><p>Effect: On hit, the Triggering Attack causes all valid targets to be Flinched and they lose -1 EVA for 5 Activations.</p>",
+        "cost": {
+          "activation": "free",
+          "powerPoints": 4,
+          "trigger": "The user's declares an attack.",
+          "delay": null,
+          "priority": null
         },
-        "node": {
-            "i": 32,
-            "j": -3,
-            "connected": [
-                "strong-style",
-                "metamove-bullseye",
-                "incognito",
-                "run-down"
-            ],
-            "config": {
-                "alpha": null,
-                "backgroundColor": "#8000ff",
-                "borderColor": null,
-                "borderWidth": null,
-                "texture": "systems/ptr2e/img/perk-icons/Arcana.svg",
-                "tint": null,
-                "scale": null
-            },
-            "hidden": false,
-            "type": "normal"
-        }
+        "type": "generic",
+        "traits": [
+          "social",
+          "flinch-3"
+        ],
+        "img": "systems/ptr2e/img/icons/feat_icon.webp",
+        "range": {
+          "target": "creature",
+          "unit": "m",
+          "distance": 0
+        },
+        "variant": null
+      }
+    ],
+    "slug": "metamove-dirty-trick",
+    "description": "<p>When declaring an Attack, the user may spend 4PP to have that Attack inflict Flinched 2 and cause affected creatures lose -1 EVA for 5 Activations if it hits.</p>",
+    "traits": [],
+    "prerequisites": [],
+    "cost": 1,
+    "_migration": {
+      "version": null,
+      "previous": null
     },
-    "effects": []
+    "nodes": [
+      {
+        "connected": [
+          "metamove-power-swap",
+          "metamove-empower",
+          "stat-iv-booster-1-13",
+          "improved-overland-1-16"
+        ],
+        "config": {
+          "alpha": null,
+          "backgroundColor": "#8000ff",
+          "borderColor": null,
+          "borderWidth": null,
+          "texture": "systems/ptr2e/img/perk-icons/Arcana.svg",
+          "tint": null,
+          "scale": null
+        },
+        "hidden": false,
+        "type": "normal",
+        "x": 122,
+        "y": 182,
+        "tier": null
+      }
+    ],
+    "autoUnlock": [],
+    "originSlug": null,
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": []
+  },
+  "effects": []
 }

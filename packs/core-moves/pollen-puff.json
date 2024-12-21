@@ -1,10 +1,10 @@
 {
   "name": "Pollen Puff",
   "type": "move",
-  "img": "/systems/ptr2e/img/svg/bug_icon.svg",
+  "img": "systems/ptr2e/img/svg/bug_icon.svg",
   "system": {
     "slug": "pollen-puff",
-    "description": "Effect: If this attack hits an allied creature, that creature recovers HP equal to half the user of this attacks Max HP instead of tasking damage.",
+    "description": "<p>Effect: If this attack hits an allied creature, that creature recovers 8 Ticks of HP instead of taking damage.</p>",
     "traits": [
       "healing",
       "blast-2",
@@ -20,7 +20,8 @@
           "healing",
           "blast-2",
           "powder",
-          "missile"
+          "missile",
+          "pp-updated"
         ],
         "range": {
           "target": "creature",
@@ -29,7 +30,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 6,
+          "powerPoints": 5,
           "delay": null,
           "priority": null,
           "trigger": null
@@ -40,7 +41,42 @@
         "types": [
           "bug"
         ],
-        "description": "Effect: If this attack hits an allied creature, that creature recovers HP equal to half the user of this attacks Max HP instead of tasking damage.",
+        "description": "",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      },
+      {
+        "slug": "pollen-puff-ally",
+        "name": "Pollen Puff (Ally)",
+        "type": "attack",
+        "traits": [
+          "healing",
+          "blast-2",
+          "powder",
+          "missile",
+          "pp-updated"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 5,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 5,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "status",
+        "power": null,
+        "accuracy": 100,
+        "types": [
+          "bug"
+        ],
+        "description": "<p>Effect: On hit, all valid, allied targets recover 8 Ticks of HP.</p>",
         "contestType": "",
         "contestEffect": "",
         "free": false,
@@ -48,7 +84,7 @@
       }
     ],
     "container": null,
-    "grade": "A"
+    "grade": "B"
   },
   "_id": "OLWOhRduozudOSkX",
   "effects": []

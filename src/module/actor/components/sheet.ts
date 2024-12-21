@@ -5,6 +5,7 @@ import { EffectComponent } from "./effect-component.ts";
 import { MovementComponent } from "./movement-component.ts";
 import { PerksComponent } from "./perks-component.ts";
 import { FavouriteSkillsComponent, SkillsComponent } from "./skills-component.ts";
+import { ToggleComponent } from "./toggle-component.ts";
 
 const ActorComponents = {
     "effects": EffectComponent,
@@ -13,6 +14,7 @@ const ActorComponents = {
     "abilities": AbilitiesComponent,
     "perks": PerksComponent,
     "movement": MovementComponent,
+    "toggles": ToggleComponent,
 }
 type ActorComponentKey = keyof typeof ActorComponents;
 
@@ -112,7 +114,7 @@ class ComponentPopout extends foundry.applications.api.HandlebarsApplicationMixi
 
     /** @override */
     override _onFirstRender() {
-        //@ts-expect-error
+        //@ts-expect-error - App v1 compatability
         this.actor.apps[this.id] = this;
     }
 
@@ -120,7 +122,7 @@ class ComponentPopout extends foundry.applications.api.HandlebarsApplicationMixi
 
     /** @override */
     override _onClose() {
-        //@ts-expect-error
+        //@ts-expect-error  - App v1 compatability
         delete this.actor.apps[this.id];
     }
 }

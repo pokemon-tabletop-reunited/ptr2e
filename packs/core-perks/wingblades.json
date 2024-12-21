@@ -1,0 +1,105 @@
+{
+  "name": "Wingblades",
+  "type": "perk",
+  "folder": "QFi3YFwyLLQSpOap",
+  "system": {
+    "_migration": {
+      "version": 0.108,
+      "previous": null
+    },
+    "actions": [],
+    "description": "<p>Your Flying-type attacks have a +20% chance to inflict the @Affliction[wind-shear] affliction.</p>",
+    "traits": [],
+    "prerequisites": [
+      "trait:flying"
+    ],
+    "cost": 2,
+    "slug": "wingblades",
+    "nodes": [
+      {
+        "connected": [
+          "dustoff",
+          "drifter",
+          "improved-flight-1-2"
+        ],
+        "config": {
+          "alpha": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "borderWidth": null,
+          "texture": "systems/ptr2e/img/svg/flying_icon.svg",
+          "tint": null,
+          "scale": null
+        },
+        "hidden": false,
+        "type": "normal",
+        "x": 123,
+        "y": 52,
+        "tier": null
+      }
+    ],
+    "autoUnlock": [],
+    "originSlug": null,
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": []
+  },
+  "img": "systems/ptr2e/img/svg/flying_icon.svg",
+  "effects": [
+    {
+      "name": "Wingblades",
+      "type": "passive",
+      "_id": "AlRTcU6rgV92e87g",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "flying-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.windshearconitem",
+            "predicate": [],
+            "chance": 20,
+            "affects": "target",
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.3.4.1",
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      }
+    }
+  ],
+  "_id": "WpybU6Q2VwDs88xF"
+}

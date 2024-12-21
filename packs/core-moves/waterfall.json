@@ -1,13 +1,16 @@
 {
   "name": "Waterfall",
   "type": "move",
-  "img": "/systems/ptr2e/img/svg/water_icon.svg",
+  "img": "systems/ptr2e/img/svg/water_icon.svg",
   "system": {
     "slug": "waterfall",
-    "description": "Effect: On hit, all valid targets have a 20% chance of being Flinched 2.",
+    "description": "",
     "traits": [
       "contact",
-      "pass-2"
+      "pass-2",
+      "flinch-chance-2",
+      "field",
+      "pp-updated"
     ],
     "actions": [
       {
@@ -16,7 +19,10 @@
         "type": "attack",
         "traits": [
           "contact",
-          "pass-2"
+          "pass-2",
+          "flinch-chance-2",
+          "field",
+          "pp-updated"
         ],
         "range": {
           "target": "creature",
@@ -25,7 +31,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 6,
+          "powerPoints": 4,
           "delay": null,
           "priority": null,
           "trigger": null
@@ -36,7 +42,7 @@
         "types": [
           "water"
         ],
-        "description": "Effect: On hit, all valid targets have a 20% chance of being Flinched 2.",
+        "description": "<p>Effect: On hit, all valid targets have a 20% chance of being Flinched.</p>",
         "contestType": "",
         "contestEffect": "",
         "free": false,
@@ -44,7 +50,7 @@
       }
     ],
     "container": null,
-    "grade": "B"
+    "grade": "C"
   },
   "_id": "C8ricUjRzb7sX101",
   "effects": []

@@ -1,14 +1,10 @@
 {
   "name": "Infestation",
   "type": "move",
-  "img": "/systems/ptr2e/img/svg/bug_icon.svg",
+  "img": "systems/ptr2e/img/svg/bug_icon.svg",
   "system": {
     "slug": "infestation",
-    "description": "Effect: All valid targets become Bound 5. While Bound, they take a Tick of HP in damage at the end of each of their activations.",
-    "traits": [
-      "trap",
-      "blast-1"
-    ],
+    "traits": [],
     "actions": [
       {
         "slug": "infestation",
@@ -16,7 +12,8 @@
         "type": "attack",
         "traits": [
           "trap",
-          "blast-1"
+          "blast-1",
+          "pp-updated"
         ],
         "range": {
           "target": "blast",
@@ -25,10 +22,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 5,
-          "delay": null,
-          "priority": null,
-          "trigger": null
+          "powerPoints": 4
         },
         "category": "special",
         "power": 20,
@@ -36,16 +30,81 @@
         "types": [
           "bug"
         ],
-        "description": "Effect: All valid targets become Bound 5. While Bound, they take a Tick of HP in damage at the end of each of their activations.",
-        "contestType": "",
-        "contestEffect": "",
-        "free": false,
-        "slot": null
+        "description": "<p>Effect: All valid targets become @Affliction[bound] 5 and @Affliction[infested] 5</p>",
+        "img": "systems/ptr2e/img/svg/bug_icon.svg"
       }
     ],
-    "container": null,
-    "grade": "C"
+    "grade": "C",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
   },
   "_id": "BIG6nxi9Dw2cWq9X",
-  "effects": []
+  "effects": [
+    {
+      "name": "Infestation",
+      "type": "passive",
+      "_id": "9Qar5px2vxpevFPv",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "infestation-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.boundconditiitem",
+            "predicate": [],
+            "chance": 100,
+            "affects": "target",
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "roll-effect",
+            "key": "infestation-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.infestedconditem",
+            "predicate": [],
+            "chance": 100,
+            "affects": "target",
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.3.4.1",
+        "createdTime": 1732232987597,
+        "modifiedTime": 1732233051314,
+        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
+      }
+    }
+  ]
 }

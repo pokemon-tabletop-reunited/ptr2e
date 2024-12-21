@@ -3,17 +3,19 @@ import { StrictStringField } from "./strict-primitive-fields.ts";
 
 /** A sluggified string field */
 class SlugField<
+    TSourceProp extends string = string,
+    TModelProp extends string = string,
     TRequired extends boolean = true,
     TNullable extends boolean = boolean,
     THasInitial extends boolean = boolean,
-> extends StrictStringField<string, string, TRequired, TNullable, THasInitial> {
-    constructor(options: SlugFieldOptions<TRequired, TNullable, THasInitial> = {}) {
+> extends StrictStringField<TSourceProp, TModelProp, TRequired, TNullable, THasInitial> {
+    constructor(options: SlugFieldOptions<TSourceProp, TRequired, TNullable, THasInitial> = {}) {
         options.blank ??= false;
         options.camel ??= null;
         super(options);
     }
 
-    protected static override get _defaults(): SlugFieldOptions<boolean, boolean, boolean> {
+    protected static override get _defaults(): SlugFieldOptions<string, boolean, boolean, boolean> {
         return { ...super._defaults, nullable: true, initial: null, camel: null };
     }
 
@@ -29,15 +31,17 @@ class SlugField<
 }
 
 interface SlugField<
+    TSourceProp extends string = string,
+    TModelProp extends string = string,
     TRequired extends boolean = true,
     TNullable extends boolean = boolean,
     THasInitial extends boolean = boolean,
-> extends StrictStringField<string, string, TRequired, TNullable, THasInitial> {
-    options: SlugFieldOptions<TRequired, TNullable, THasInitial>;
+> extends StrictStringField<TSourceProp, TModelProp, TRequired, TNullable, THasInitial> {
+    options: SlugFieldOptions<TSourceProp, TRequired, TNullable, THasInitial>;
 }
 
-interface SlugFieldOptions<TRequired extends boolean, TNullable extends boolean, THasInitial extends boolean>
-    extends foundry.data.fields.StringFieldOptions<string, TRequired, TNullable, THasInitial> {
+interface SlugFieldOptions<TSourceProp extends string, TRequired extends boolean, TNullable extends boolean, THasInitial extends boolean>
+    extends foundry.data.fields.StringFieldOptions<TSourceProp, TRequired, TNullable, THasInitial> {
     camel?: SlugCamel;
 }
 

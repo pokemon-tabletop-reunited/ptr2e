@@ -1,4 +1,5 @@
-import ActiveEffectConfigPTR2e from "@module/effects/sheet.ts";
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import ActiveEffectConfig from "@module/effects/sheet.ts";
 import ChangeModel from "../change.ts";
 import { createHTMLElement, fontAwesomeIcon, htmlClosest, htmlQuery, htmlQueryAll, isBracketedValue, isObject, tagify } from "@utils";
 import * as R from "remeda";
@@ -7,7 +8,7 @@ import { ItemPTR2e } from "@item";
 import ResolvableValueField from "@module/data/fields/resolvable-value-field.ts";
 
 class ChangeForm<TChange extends ChangeModel = ChangeModel> {
-    declare sheet: ActiveEffectConfigPTR2e;
+    declare sheet: ActiveEffectConfig;
     declare index: number;
     declare change: TChange;
     declare source: TChange["_source"];
@@ -20,7 +21,7 @@ class ChangeForm<TChange extends ChangeModel = ChangeModel> {
     #activeTab: Maybe<string> = null;
 
     get template() {
-        return "/systems/ptr2e/templates/effects/changes/base.hbs";
+        return "systems/ptr2e/templates/effects/changes/base.hbs";
     }
 
     /** Base proprety path for the contained change */
@@ -125,7 +126,7 @@ class ChangeForm<TChange extends ChangeModel = ChangeModel> {
     async render(): Promise<string> {
         const context = await this._prepareContext();
         context.template = await renderTemplate(this.template, context)
-        return renderTemplate("/systems/ptr2e/templates/effects/changes/partials/outer.hbs", context);
+        return renderTemplate("systems/ptr2e/templates/effects/changes/partials/outer.hbs", context);
     }
 
     /**
@@ -167,7 +168,7 @@ class ChangeForm<TChange extends ChangeModel = ChangeModel> {
     async updateItem(updates: Partial<TChange["_source"]> | Record<string, unknown>): Promise<void> {
         const changes = this.effect.toObject().system.changes;
         const result = fu.mergeObject(this.source, updates, {performDeletions: true});
-        if(this.schema) {
+        if(this.schema) { //@ts-expect-error - This is valid
             cleanDataUsingSchema(this.schema.fields, result);
         }
         changes[this.index] = result as ChangeModel;
@@ -290,6 +291,11 @@ class ChangeForm<TChange extends ChangeModel = ChangeModel> {
             return;
         }
 
+        if('alterations' in source && !!source.alterations && !Array.isArray(source.alterations)) {
+          //@ts-expect-error - I mean it's quite clear the property is here if we're in this block...
+          source.alterations = Object.values(source.alterations);
+        }
+
         source = fu.mergeObject(this.source, source, {inplace: false});
 
         // Prevent wheel events on the sliders from spamming updates
@@ -300,7 +306,7 @@ class ChangeForm<TChange extends ChangeModel = ChangeModel> {
         // Predicate is special cased as always json. Later on extend such parsing to more things
         cleanPredicate(source);
 
-        if (this.schema) {
+        if (this.schema) { //@ts-expect-error - This is valid
             cleanDataUsingSchema(this.schema.fields, source);
         }
 
@@ -322,8 +328,8 @@ function cleanDataUsingSchema(schema: Record<string, foundry.data.fields.DataFie
         if(field.options.required ?? ('element' in field ? (field as {element: foundry.data.fields.DataField})?.element?.options.required : false)) return false;
         const initialValue = typeof field.initial === "function" ? field.initial(data) : field.initial;
         const valueRaw = data[key];
-        const value = R.isObject(valueRaw) && R.isObject(initialValue) ? { ...initialValue, ...valueRaw } : valueRaw;
-        const isInitial = R.equals(initialValue, value);
+        const value = R.isPlainObject(valueRaw) && R.isPlainObject(initialValue) ? { ...initialValue, ...valueRaw } : valueRaw;
+        const isInitial = R.isDeepEqual(initialValue, value);
         if (isInitial) delete data[key];
         return !(key in data);
     };
@@ -339,7 +345,7 @@ function cleanDataUsingSchema(schema: Record<string, foundry.data.fields.DataFie
 
         if ("fields" in field) {
             const value = data[key];
-            if (R.isObject(value)) {
+            if (R.isPlainObject(value)) {
                 cleanDataUsingSchema(field.fields as Record<string, foundry.data.fields.DataField>, value);
                 deleteIfInitial(key, field);
                 continue;
@@ -351,7 +357,7 @@ function cleanDataUsingSchema(schema: Record<string, foundry.data.fields.DataFie
             if (Array.isArray(value)) {
                 // Recursively clean schema fields inside an array
                 for (const data of value) {
-                    if (R.isObject(data)) {
+                    if (R.isPlainObject(data)) {
                         if (data.predicate) {
                             cleanPredicate(data);
                         }
@@ -392,12 +398,12 @@ function cleanPredicate(source: { predicate?: unknown }) {
     }
 }
 
-type ChangeTabData = {
+interface ChangeTabData {
     /** Valid tab names for this form */
     names: string[];
     /** The display style applied to active tabs */
     displayStyle: "block" | "flex" | "grid";
-};
+}
 
 interface ChangeFormContext<TChange extends ChangeModel>
     extends Omit<ChangeFormOptions<TChange>, "sheet"> {
@@ -413,7 +419,7 @@ interface ChangeFormContext<TChange extends ChangeModel>
 }
 
 interface ChangeFormOptions<TChange extends ChangeModel = ChangeModel> {
-    sheet: ActiveEffectConfigPTR2e;
+    sheet: ActiveEffectConfig;
     index: number;
     change: TChange;
 }

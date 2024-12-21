@@ -8,4 +8,7 @@
     </header>
     {{/if}}
     {{> perk-body}}
+    {{#each actions}}
+      {{> action-embed action=action}}
+    {{/each}}
 </figure>

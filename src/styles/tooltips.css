@@ -1,0 +1,312 @@
+#loading {
+  margin-bottom: 0.5em;
+}
+#loading label {
+  font-size: var(--font-size-15);
+}
+aside[role="tooltip"] {
+  min-width: 165px;
+  --tooltip-background: linear-gradient(to right, rgba(7, 7, 10, 0.9), rgba(19, 17, 31, 0.95));
+  background: var(--tooltip-background) !important;
+  border-color: var(--color-light-6) !important;
+  border-radius: 8px !important;
+}
+aside[role="tooltip"] a.content-link {
+  background: var(--content-link-background);
+  line-height: 24px;
+}
+aside[role="tooltip"] fieldset {
+  border-color: var(--color-light-6);
+  border-radius: 8px;
+}
+aside[role="tooltip"].locked-tooltip,
+aside[role="tooltip"].locked-tooltip * {
+  -webkit-user-select: text;
+  -moz-user-select: text;
+  -ms-user-select: text;
+  user-select: text;
+  border-color: var(--ground-color) !important;
+}
+aside[role="tooltip"].locked-tooltip .circular-progress,
+aside[role="tooltip"].locked-tooltip * .circular-progress {
+  animation: none;
+  --progress: 100;
+}
+aside[role="tooltip"].locked-tooltip .circular-progress circle.fgb,
+aside[role="tooltip"].locked-tooltip * .circular-progress circle.fgb {
+  stroke: var(--stroke);
+}
+aside[role="tooltip"].text-right {
+  text-align: unset !important;
+}
+aside[role="tooltip"] .progress-circle {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  width: 25px;
+  height: 25px;
+  border-radius: 0 0 0 40%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+aside[role="tooltip"] .circular-progress {
+  --size: 20px;
+  --half-size: calc(var(--size) / 2);
+  --stroke-width: 5px;
+  --radius: calc((var(--size) - var(--stroke-width)) / 2);
+  --circumference: calc(var(--radius) * pi * 2);
+  --dash: calc((var(--progress) * var(--circumference)) / 100);
+  --stroke: var(--ground-color);
+  animation: progress-animation 2s ease-out 0s 1 forwards;
+}
+aside[role="tooltip"] .circular-progress circle {
+  cx: var(--half-size);
+  cy: var(--half-size);
+  r: var(--radius);
+  stroke-width: var(--stroke-width);
+  fill: none;
+  stroke-linecap: round;
+}
+aside[role="tooltip"] .circular-progress circle.bg {
+  stroke: #ddd;
+}
+aside[role="tooltip"] .circular-progress circle.fg {
+  transform: rotate(-90deg);
+  transform-origin: var(--half-size) var(--half-size);
+  stroke-dasharray: var(--dash) calc(var(--circumference) - var(--dash));
+  transition: stroke-dasharray 0.3s linear 0s;
+  stroke: var(--stroke);
+}
+aside[role="tooltip"] .circular-progress circle.fgb {
+  stroke-width: 4px;
+}
+@property --progress {
+  syntax: "<number>";
+  inherits: false;
+  initial-value: 0;
+}
+@keyframes progress-animation {
+  from {
+    --progress: 0;
+  }
+  to {
+    --progress: 100;
+  }
+}
+aside[role="tooltip"].status header h3,
+aside[role="tooltip"].damage header h3 {
+  border-bottom: 1px solid #6f6c66;
+  padding: 0.25rem;
+  margin: 0;
+}
+aside[role="tooltip"].status main,
+aside[role="tooltip"].damage main {
+  display: flex;
+  flex-direction: column;
+}
+aside[role="tooltip"].status main figure,
+aside[role="tooltip"].damage main figure {
+  margin: 0.1rem 0.25rem;
+  border: 2px groove #6f6c66;
+  padding: 0.25rem;
+  text-align: center;
+}
+aside[role="tooltip"].status main figure code,
+aside[role="tooltip"].damage main figure code {
+  font-size: 0.8rem;
+  word-wrap: pre-wrap;
+}
+aside[role="tooltip"].status main .form-group,
+aside[role="tooltip"].damage main .form-group {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  text-align: start;
+  flex-wrap: wrap;
+  margin: 0.1rem 0.25rem;
+  border: 2px groove #6f6c66;
+  padding: 0.25rem;
+}
+aside[role="tooltip"].status main .form-group label,
+aside[role="tooltip"].damage main .form-group label {
+  flex: 0 0 auto;
+}
+aside[role="tooltip"].status main .form-group .form-fields,
+aside[role="tooltip"].damage main .form-group .form-fields {
+  flex: 0 0 auto;
+}
+aside[role="tooltip"].status main .form-group .hint,
+aside[role="tooltip"].damage main .form-group .hint {
+  flex: 0 0 100%;
+  font-size: 0.75rem;
+  margin: 0.25rem 0;
+  font-style: italic;
+}
+aside[role="tooltip"].status footer,
+aside[role="tooltip"].damage footer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.25rem;
+}
+aside[role="tooltip"].status footer .button,
+aside[role="tooltip"].damage footer .button {
+  flex: 0 0 auto;
+  margin: 0 0.25rem;
+}
+aside[role="tooltip"]:has(.damage-info) {
+  padding: 0 !important;
+  min-width: 165px;
+}
+aside[role="tooltip"].damage-info {
+  display: flex;
+  flex-direction: column;
+}
+aside[role="tooltip"].damage-info header {
+  padding: 0.5rem;
+  padding-right: 0.75rem;
+  border-bottom: 1px solid var(--color-light-6);
+  width: 100%;
+}
+aside[role="tooltip"].damage-info header h5 {
+  margin: 0;
+}
+aside[role="tooltip"].damage-info .note {
+  display: flex;
+  flex-direction: column;
+  padding: 0.5rem;
+}
+aside[role="tooltip"].damage-info .note figure {
+  margin: 0;
+  padding-bottom: 0.5rem;
+  min-height: 20px;
+}
+aside[role="tooltip"].damage-info .note figure a.content-link {
+  background: var(--content-link-background);
+}
+aside[role="tooltip"].damage-info .note figure:first-child {
+  padding-top: unset;
+}
+aside[role="tooltip"].damage-info .note figure:last-child {
+  padding: 0.5rem 0 0.25rem 0;
+}
+aside[role="tooltip"].damage-info .note figure.damage {
+  padding: 0;
+  align-content: center;
+}
+aside[role="tooltip"].effect-rolls content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+aside[role="tooltip"].effect-rolls content header {
+  margin: 0;
+  border-bottom: 1px solid var(--color-light-6);
+  width: 100%;
+}
+aside[role="tooltip"].effect-rolls content main {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+aside[role="tooltip"].effect-rolls content main section.effect {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  gap: 0.25rem;
+  align-items: center;
+}
+aside[role="tooltip"].effect-rolls content main section.effect small {
+  max-width: 120px;
+  flex: 1;
+}
+aside[role="tooltip"].effect-rolls content main section.effect .total {
+  flex: 0 0 35px;
+}
+aside[role="tooltip"].effect-rolls content main section.effect .total.fail {
+  text-shadow: 1px 1px #aa0200;
+}
+aside[role="tooltip"].effect-rolls content main section.effect .total.success {
+  text-shadow: 1px 1px #18520b;
+}
+aside[role="tooltip"].effect-rolls content main section.effect i {
+  flex: 0 0 25px;
+  text-align: center;
+  border: 1px solid;
+  border-radius: 8px;
+  padding: 0.25rem;
+  cursor: pointer;
+}
+aside[role="tooltip"].effect-rolls content main section.effect i.fail {
+  border-color: #aa0200 !important;
+}
+aside[role="tooltip"].effect-rolls content main section.effect i.success {
+  border-color: #18520b !important;
+}
+aside[role="tooltip"].data-element {
+  box-shadow: 0 0 2px var(--data-inspector-tooltip-shadow);
+  background-color: var(--data-inspector-tooltip-background);
+  text-shadow: none;
+  border: 0.3px solid var(--data-inspector-tooltip-border);
+  border-radius: 0.5em;
+  border-bottom-left-radius: 0;
+}
+aside[role="tooltip"].data-element p:first-child {
+  margin-top: 0;
+}
+aside[role="tooltip"].data-element .path {
+  color: var(--data-inspector-tooltip-path);
+}
+aside[role="tooltip"].data-element .type {
+  color: var(--data-inspector-tooltip-type);
+}
+aside[role="tooltip"].data-element .children {
+  color: var(--data-inspector-tooltip-children);
+}
+aside[role="tooltip"].data-element .length {
+  color: var(--data-inspector-tooltip-length);
+}
+aside[role="tooltip"].data-element .in-data {
+  display: flex;
+  flex-direction: row;
+  gap: 1px;
+  place-content: center;
+}
+aside[role="tooltip"].data-element .in-data .data-source {
+  display: flex;
+  flex-direction: column;
+  flex: 0;
+  gap: 3px;
+  align-items: center;
+}
+aside[role="tooltip"].data-element .in-data .data-source .header,
+aside[role="tooltip"].data-element .in-data .data-source .value {
+  justify-content: center;
+  flex: 0;
+  margin: 0;
+  padding: 0.1em 0.3em;
+  white-space: nowrap;
+  font-weight: var(--font-size-11, 8pt);
+}
+aside[role="tooltip"].data-element .in-data .data-source .header {
+  background-color: rgba(0, 0, 0, 0.1);
+  font-weight: bold;
+}
+aside[role="tooltip"].data-element .in-data .data-source .value {
+  overflow: unset;
+}
+aside[role="tooltip"] .attack-embed {
+  min-width: 275px;
+}
+aside[role="tooltip"] .effect-embed .effect-description ul {
+  text-align: left;
+}
+footer.suppressed {
+  font-weight: bold;
+  text-decoration: underline;
+  padding: 1rem;
+  margin-top: 1rem;
+  border: 1px solid var(--border-theme-color);
+}

@@ -13,8 +13,11 @@
                 <label for="type">{{localize fields.consumableType.label}}</label> <span>{{localize (lookup fields.consumableType.choices document.system.consumableType)}}</span>
             </fieldset>
             <fieldset>
-                <label for="charges.value">{{localize fields.charges.fields.value.label}}</label> <span>{{document.system.charges.value}}</span>
-                <label for="charges.max">{{localize fields.charges.fields.max.label}}</label> <span>{{document.system.charges.max}}</span>
+                <legend>
+                    Quality &amp; Value
+                </legend>
+                <label for="grade">{{localize fields.grade.label}}</label> <span>{{document.system.grade}}</span>
+                <label for="rarity">{{localize fields.rarity.label}}</label> <span>{{document.system.rarity}}</span>
             </fieldset>
         </section>
         <section class="item-description">
@@ -32,4 +35,7 @@
             </fieldset>
         </section>
     </content>
+    {{#each actions}}
+      {{> action-embed action=action}}
+    {{/each}}
 </figure>

@@ -1,10 +1,10 @@
 {
   "name": "Sacred Fire",
   "type": "move",
-  "img": "/systems/ptr2e/img/svg/fire_icon.svg",
+  "img": "systems/ptr2e/img/svg/fire_icon.svg",
   "system": {
     "slug": "sacred-fire",
-    "description": "Effect: On hit, all valid targets have a 50% chance of gaining @Affliction[burn] 7. If a @Affliction[burn] target would be @Affliction[burn] by this attack, they instead have Char 5 applied.",
+    "description": "<p>Effect: On hit, all valid targets have a 50% chance of gaining @Affliction[burn] 7. A creature that has @Affliction[burn] has a 50% chance of also gaining @Affliction[splinter] 7.</p>",
     "traits": [
       "defrost",
       "legendary"
@@ -16,7 +16,8 @@
         "type": "attack",
         "traits": [
           "defrost",
-          "legendary"
+          "legendary",
+          "pp-updated"
         ],
         "range": {
           "target": "wide-line",
@@ -25,7 +26,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 8,
+          "powerPoints": 7,
           "delay": null,
           "priority": null,
           "trigger": null
@@ -36,15 +37,49 @@
         "types": [
           "fire"
         ],
-        "description": "Effect: On hit, all valid targets have a 50% chance of gaining @Affliction[burn] 7. If a target whom is already suffering from the Burn affliction would be burned by this attack, they instead have @Affliction[char] 5 applied.",
+        "description": "<p>Effect: On hit, all valid targets have a 50% chance of gaining @Affliction[burn] 7.</p>",
         "contestType": "",
         "contestEffect": "",
         "free": false,
         "slot": null
+      },
+      {
+        "slug": "sacred-fire-burned",
+        "name": "Sacred Fire (Burned)",
+        "type": "attack",
+        "traits": [
+          "defrost",
+          "legendary",
+          "pp-updated"
+        ],
+        "range": {
+          "target": "wide-line",
+          "distance": 10,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 7,
+          "delay": null,
+          "priority": null,
+          "trigger": "<p>Valid target(s) have @Affliction[burn].</p>"
+        },
+        "category": "physical",
+        "power": 100,
+        "accuracy": 95,
+        "types": [
+          "fire"
+        ],
+        "description": "<p>Trigger: Valid target(s) have @Affliction[burn].</p><p>Effect: On hit, all valid targets have a 50% chance of gaining @Affliction[burn] 7 and a 50% chance of gaining @Affliction[splinter] 7.",
+        "contestType": "",
+        "contestEffect": "",
+        "variant": "sacred-fire",
+        "free": true,
+        "slot": null
       }
     ],
     "container": null,
-    "grade": "S"
+    "grade": "B"
   },
   "_id": "hoQZlSqWhAC3WujH",
   "effects": []

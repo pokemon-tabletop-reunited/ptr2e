@@ -1,9 +1,11 @@
 <content class="attack-embed">
     <aside>
+      {{#if attack.category}}
         {{{getIcon attack.category}}}
-        {{#each attack.types as |type|}}
-        {{{getIcon type}}}
-        {{/each}}
+      {{/if}}
+      {{#each attack.types as |type|}}
+      {{{getIcon type}}}
+      {{/each}}
     </aside>
     <main>
         <section class="attack-info">
@@ -33,7 +35,7 @@
 
             <fieldset class="range">
                 <label for="range.target">{{localize fields.range.fields.target.label}}</label>
-                <span>{{formatSlug attack.range.target}}</span>
+                <span data-tooltip="range-tooltip" data-range-value="{{attack.range.target}}">{{formatSlug attack.range.target}}</span>
                 <label for="range.distance">{{localize fields.range.fields.distance.label}}</label>
                 <span>{{attack.range.distance}}m</span>
             </fieldset>
@@ -52,5 +54,22 @@
                 {{/if}}
             </fieldset>
         </section>
+        {{#unless noButtons}}
+          <footer class="buttons">
+            <section class="attack-delay">
+              <button class="delay-attack" data-attack-uuid="{{attack.uuid}}" data-tooltip="Delay Attack">Delay Attack</button>
+            </section>
+          {{#if attack.cost.powerPoints}}
+            <section class="attack-pp">
+              <button class="consume-pp" data-attack-uuid="{{attack.uuid}}" data-tooltip="Consume Power Points">Consume PP</button>
+            </section>
+          {{/if}}
+          {{#if attack.summon}}
+            <section class="attack-summon mt-2">
+              <button class="create-summon" data-attack-uuid="{{attack.uuid}}" data-tooltip="Add Summon to Combat (GM Only)" {{#unless (isGm)}}disabled{{/unless}}>Create Summon</button>
+            </section>
+          {{/if}}
+          </footer>
+        {{/unless}}
     </main>
-</content>
+</content> 

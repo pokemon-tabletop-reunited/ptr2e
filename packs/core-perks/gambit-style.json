@@ -1,0 +1,107 @@
+{
+  "name": "Gambit Style",
+  "type": "perk",
+  "system": {
+    "prerequisites": [
+      {
+        "gte": [
+          "{actor|skills.leadership.mod}",
+          35
+        ]
+      }
+    ],
+    "cost": 1,
+    "description": "<p>The target gains @Affliction[gambit] 1.</p>",
+    "actions": [
+      {
+        "name": "Gambit!",
+        "slug": "gambit",
+        "traits": [
+          "command",
+          "style"
+        ],
+        "range": {
+          "target": "ally",
+          "distance": 20,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "simple",
+          "powerPoints": 1,
+          "delay": null,
+          "priority": null
+        },
+        "description": "<p>Effect: The target gains @Affliction[gambit] 1.</p>",
+        "type": "generic",
+        "img": "systems/ptr2e/img/perk-icons/Orders_Training.svg",
+        "variant": null
+      },
+      {
+        "name": "Gambit! (Self)",
+        "slug": "gambit-self",
+        "traits": [
+          "command",
+          "style"
+        ],
+        "range": {
+          "target": "self",
+          "unit": "m",
+          "distance": 0
+        },
+        "cost": {
+          "activation": "simple",
+          "powerPoints": 1,
+          "delay": null,
+          "priority": null
+        },
+        "description": "<p>Effect: The target gains @Affliction[gambit] 2.</p>",
+        "type": "generic",
+        "img": "systems/ptr2e/img/perk-icons/Orders_Training.svg",
+        "variant": null
+      }
+    ],
+    "slug": "gambit-style",
+    "traits": [
+      "command"
+    ],
+    "_migration": {
+      "version": null,
+      "previous": null
+    },
+    "nodes": [
+      {
+        "connected": [
+          "assault-armor-style",
+          "precise-style",
+          "improved-burrow-1-3",
+          "improved-overland-1-13",
+          "improved-overland-1-5"
+        ],
+        "config": {
+          "alpha": null,
+          "backgroundColor": "#004080",
+          "borderColor": null,
+          "borderWidth": null,
+          "texture": "systems/ptr2e/img/perk-icons/Orders_Training.svg",
+          "tint": "#808080",
+          "scale": null
+        },
+        "hidden": false,
+        "type": "normal",
+        "x": 95,
+        "y": 125,
+        "tier": null
+      }
+    ],
+    "autoUnlock": [],
+    "originSlug": null,
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": []
+  },
+  "_id": "DejWRv29FwiYyyeE",
+  "img": "systems/ptr2e/img/perk-icons/Orders_Training.svg",
+  "effects": [],
+  "folder": "JZrGRskscJOkkPWA"
+}

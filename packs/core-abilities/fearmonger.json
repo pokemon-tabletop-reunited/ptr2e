@@ -1,56 +1,60 @@
 {
   "name": "Fearmonger",
   "type": "ability",
-  "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+  "img": "icons/svg/terror.svg",
   "system": {
     "actions": [
       {
         "traits": [
-          "friendly"
+          "friendly",
+          "interrupt-1"
         ],
+        "name": "Fearmonger",
+        "slug": "fearmonger-trigger",
+        "type": "generic",
+        "cost": {
+          "activation": "free",
+          "powerPoints": 2,
+          "trigger": "<p>A creature hits the user with a [Contact] attack.</p>",
+          "delay": null,
+          "priority": null
+        },
+        "range": {
+          "target": "creature",
+          "distance": 5,
+          "unit": "m"
+        },
+        "description": "<p>Trigger: A creature hits the user with a [Contact] attack.</p><p>Effect: The triggering creature gains @Affliction[fear] 5.</p>"
+      },
+      {
+        "traits": [],
         "name": "Fearmonger",
         "slug": "fearmonger",
         "type": "passive",
         "cost": {
           "activation": "free",
           "powerPoints": 2,
-          "trigger": "A creature ends their activation within Range of the user, or attacks the user with a [Contact] attack.",
-          "delay": null,
-          "priority": null
+          "trigger": "<p>A creature ends their Activation within Range of the user, or attacks the user with a [Contact] attack.</p>"
         },
         "range": {
-          "target": "emanation",
+          "target": "enemy-aura",
           "distance": 6,
           "unit": "m"
         },
-        "description": "Trigger: A creature ends their activation within Range of the user, or attacks the user with a [Contact] attack.\nEffect: The triggering creature gains Fear 2, stacking with any Fear they previously had."
+        "description": "<p>Trigger: A creature ends their Activation within Range of the user, or attacks the user with a [Contact] attack.</p><p>Effect: The triggering creature gains @Affliction[fear] 2, stacking with any @Affliction[fear] they previously had.</p>",
+        "img": "icons/svg/explosion.svg"
       }
     ],
-    "description": "Trigger: A creature ends their activation within Range of the user, or attacks the user with a [Contact] attack.\nEffect: The triggering creature gains Fear 2, stacking with any Fear they previously had.",
+    "description": "<p>Trigger: A creature ends their Activation within Range of the user, or attacks the user with a [Contact] attack.</p><p>Effect: The triggering creature gains @Affliction[fear] 2, stacking with any @Affliction[fear] they previously had.</p>",
     "traits": [
       "friendly"
     ],
-    "slug": null,
-    "container": null
+    "slug": "fearmonger",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
   },
-  "folder": "0nG9TRDSwrmcTFwO",
   "_id": "PM4HEKaK4F3GHfO6",
-  "effects": [],
-  "sort": 0,
-  "ownership": {
-    "default": 0,
-    "tXAZ3QUgjuwX4gdV": 3
-  },
-  "flags": {},
-  "_stats": {
-    "compendiumSource": null,
-    "duplicateSource": null,
-    "coreVersion": "12.324",
-    "systemId": "ptr2e",
-    "systemVersion": "0.005",
-    "createdTime": 1716919240454,
-    "modifiedTime": 1716919240454,
-    "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
-  },
-  "_key": "!items!PM4HEKaK4F3GHfO6"
+  "effects": []
 }

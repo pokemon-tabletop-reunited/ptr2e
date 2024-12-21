@@ -1,0 +1,95 @@
+{
+  "name": "Fell Breath",
+  "type": "move",
+  "_id": "YdOUuKrJhcO6PyuI",
+  "img": "systems/ptr2e/img/svg/dark_icon.svg",
+  "system": {
+    "slug": "fell-breath",
+    "traits": [],
+    "actions": [
+      {
+        "name": "Fell Breath",
+        "slug": "fell-breath",
+        "type": "attack",
+        "img": "icons/svg/explosion.svg",
+        "traits": [],
+        "range": {
+          "target": "line",
+          "distance": 5,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 4
+        },
+        "types": [
+          "dark"
+        ],
+        "category": "special",
+        "power": 75,
+        "accuracy": 90,
+        "description": "<p>Effect: On hit, all valid targets have a 20% chance of gaining @Affliction[poison] 5.</p>"
+      }
+    ],
+    "grade": "C",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "effects": [
+    {
+      "name": "Fell Breath",
+      "type": "passive",
+      "_id": "vnfdZqp6pTa3DFkv",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "fell-breath-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.poisoncondititem",
+            "predicate": [],
+            "chance": 20,
+            "affects": "target",
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.3.0.0",
+        "createdTime": 1729542725637,
+        "modifiedTime": 1729542749992,
+        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
+      }
+    }
+  ]
+}

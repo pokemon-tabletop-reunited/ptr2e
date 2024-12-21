@@ -1,20 +1,19 @@
 {
   "name": "Possession",
   "type": "move",
-  "img": "/systems/ptr2e/img/svg/ghost_icon.svg",
+  "img": "systems/ptr2e/img/svg/ghost_icon.svg",
   "system": {
     "slug": "possession",
-    "description": "Effect: This attack uses the target's ATK stat for damage calculation instead of the user's.",
-    "traits": [
-      "contact"
-    ],
+    "traits": [],
     "actions": [
       {
         "slug": "possession",
         "name": "Possession",
         "type": "attack",
         "traits": [
-          "contact"
+          "contact",
+          "pp-updated",
+          "use-opponents-stats"
         ],
         "range": {
           "target": "creature",
@@ -23,10 +22,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 6,
-          "delay": null,
-          "priority": null,
-          "trigger": null
+          "powerPoints": 4
         },
         "category": "physical",
         "power": 95,
@@ -34,15 +30,15 @@
         "types": [
           "ghost"
         ],
-        "description": "Effect: This attack uses the target's ATK stat for damage calculation instead of the user's.",
-        "contestType": "",
-        "contestEffect": "",
-        "free": false,
-        "slot": null
+        "description": "<p>Effect: This attack uses the target's ATK stat for damage calculation instead of the user's.</p>",
+        "img": "icons/svg/explosion.svg"
       }
     ],
-    "container": null,
-    "grade": "A"
+    "grade": "B",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
   },
   "_id": "Ycop1NS7yaMjc9uy",
   "effects": []

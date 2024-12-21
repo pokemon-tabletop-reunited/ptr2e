@@ -1,10 +1,10 @@
 {
   "name": "Miracle Will",
   "type": "move",
-  "img": "/systems/ptr2e/img/svg/psychic_icon.svg",
+  "img": "systems/ptr2e/img/svg/psychic_icon.svg",
   "system": {
     "slug": "miracle-will",
-    "description": "Effect: If this attack hits an allied creature, that creature recovers HP equal to half the user's Max HP instead of tasking damage.",
+    "description": "<p>Effect: If this attack hits an allied creature, that creature recovers 8 Ticks of HP instead of taking damage.</p>",
     "traits": [
       "healing",
       "blast-2",
@@ -17,10 +17,10 @@
         "name": "Miracle Will",
         "type": "attack",
         "traits": [
-          "healing",
           "blast-2",
           "pulse",
-          "crit-2"
+          "crit-2",
+          "pp-updated"
         ],
         "range": {
           "target": "blast",
@@ -29,7 +29,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 7,
+          "powerPoints": 6,
           "delay": null,
           "priority": null,
           "trigger": null
@@ -40,15 +40,50 @@
         "types": [
           "psychic"
         ],
-        "description": "Effect: If this attack hits an allied creature, that creature recovers HP equal to half the user's Max HP instead of tasking damage.",
+        "description": "",
         "contestType": "",
         "contestEffect": "",
         "free": false,
         "slot": null
+      },
+      {
+        "slug": "miracle-will-ally",
+        "name": "Miracle Will (Ally)",
+        "type": "attack",
+        "traits": [
+          "healing",
+          "blast-2",
+          "pulse",
+          "pp-updated"
+        ],
+        "range": {
+          "target": "blast",
+          "distance": 8,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 6,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "status",
+        "power": null,
+        "accuracy": 100,
+        "types": [
+          "psychic"
+        ],
+        "description": "<p>Effect: On hit, all valid, allied targets recover 8 Ticks of HP.</p>",
+        "contestType": "",
+        "contestEffect": "",
+        "variant": "miracle-will",
+        "free": true,
+        "slot": null
       }
     ],
     "container": null,
-    "grade": "A"
+    "grade": "B"
   },
   "_id": "cc4J7JBwzqsYlBVO",
   "effects": []

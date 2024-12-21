@@ -1,10 +1,10 @@
 {
   "name": "Spore",
   "type": "move",
-  "img": "/systems/ptr2e/img/svg/grass_icon.svg",
+  "img": "systems/ptr2e/img/svg/grass_icon.svg",
   "system": {
     "slug": "spore",
-    "description": "Effect: On hit, all valid targets gain Drowsy 5.",
+    "description": "<p>Effect: On hit, all valid targets gain @Affliction[drowsy] 5.</p>",
     "traits": [
       "powder"
     ],
@@ -23,26 +23,22 @@
         },
         "cost": {
           "activation": "simple",
-          "powerPoints": 6,
-          "delay": null,
-          "priority": null,
-          "trigger": null
+          "powerPoints": 6
         },
         "category": "status",
-        "power": null,
         "accuracy": 100,
         "types": [
           "grass"
         ],
-        "description": "Effect: On hit, all valid targets gain Drowsy 5.",
-        "contestType": "",
-        "contestEffect": "",
-        "free": false,
-        "slot": null
+        "description": "<p>Effect: On hit, all valid targets gain @Affliction[drowsy] 5.</p>",
+        "img": "icons/svg/explosion.svg"
       }
     ],
-    "container": null,
-    "grade": "B"
+    "grade": "B",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
   },
   "_id": "PXbl5gqdFngy3cZ3",
   "effects": []

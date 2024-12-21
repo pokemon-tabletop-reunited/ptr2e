@@ -1,10 +1,10 @@
 {
   "name": "Bolt Beak",
   "type": "move",
-  "img": "/systems/ptr2e/img/svg/electric_icon.svg",
+  "img": "systems/ptr2e/img/svg/electric_icon.svg",
   "system": {
     "slug": "bolt-beak",
-    "description": "Effect: Bolt Beak is more powerful the faster the user is compared to the target.\nBolt Beak's Power = min(2*85, (15*UserSPD / TargetSPD) + 85)",
+    "description": "",
     "traits": [
       "jaw",
       "contact"
@@ -16,7 +16,8 @@
         "type": "attack",
         "traits": [
           "jaw",
-          "contact"
+          "contact",
+          "pp-updated"
         ],
         "range": {
           "target": "creature",
@@ -36,7 +37,7 @@
         "types": [
           "electric"
         ],
-        "description": "Effect: Bolt Beak is more powerful the faster the user is compared to the target.\nBolt Beak's Power = min(2*85, (15*UserSPD / TargetSPD) + 85)",
+        "description": "<p>Effect: This attack is more powerful the faster the user is compared to the target, ranging from 85 to 170.</p><p><blockquote>Damage Formula: Power = min(170, (15*UserSPD / TargetSPD) + 85)</blockquote></p>",
         "contestType": "",
         "contestEffect": "",
         "free": false,

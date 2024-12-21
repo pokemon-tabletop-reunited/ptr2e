@@ -1,3 +1,4 @@
+
 //@ts-nocheck
 export class SubTypeDataField extends foundry.data.fields.TypeDataField {
     /**

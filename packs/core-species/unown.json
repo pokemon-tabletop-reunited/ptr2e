@@ -1,7 +1,7 @@
 {
   "name": "unown",
   "type": "species",
-  "img": "/systems/ptr2e/img/icons/species_icon.webp",
+  "img": "systems/ptr2e/img/icons/species_icon.webp",
   "system": {
     "number": 201,
     "size": {
@@ -29,24 +29,39 @@
       "unown-choir",
       "aura-user",
       "telepath",
-      "telekinetic-4",
+      "telekinetic-8",
+      "glow-3",
       "underdog"
     ],
     "abilities": {
       "starting": [
-        "runes-of-power"
+        {
+          "slug": "runes-of-power"
+        }
       ],
       "basic": [
-        "power-leech",
-        "potent-might"
+        {
+          "slug": "power-leech"
+        },
+        {
+          "slug": "potent-might"
+        }
       ],
       "advanced": [
-        "feedback",
-        "magic-guard"
+        {
+          "slug": "feedback"
+        },
+        {
+          "slug": "magic-guard"
+        }
       ],
       "master": [
-        "mystic-power",
-        "magic-bounce"
+        {
+          "slug": "mystic-power"
+        },
+        {
+          "slug": "magic-bounce"
+        }
       ]
     },
     "skills": [
@@ -99,8 +114,56 @@
         "group": null
       },
       {
-        "slug": "occult-all",
+        "slug": "psychic",
         "value": 50,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": "occult"
+      },
+      {
+        "slug": "ghost",
+        "value": 25,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": "occult"
+      },
+      {
+        "slug": "dragon",
+        "value": 25,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": "occult"
+      },
+      {
+        "slug": "fairy",
+        "value": 25,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": "occult"
+      },
+      {
+        "slug": "spiritual",
+        "value": 45,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": "occult"
+      },
+      {
+        "slug": "legendary",
+        "value": 50,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": "occult"
+      },
+      {
+        "slug": "paradox",
+        "value": 30,
         "rvs": 0,
         "favourite": false,
         "hidden": false,
@@ -131,7 +194,7 @@
         "group": null
       }
     ],
-    "slug": "",
+    "slug": "unown",
     "stats": {
       "hp": 48,
       "atk": 72,
@@ -143,7 +206,7 @@
     "types": [
       "psychic"
     ],
-    "captureRate": 225,
+    "captureRate": 191,
     "eggGroups": [
       "no-eggs"
     ],
@@ -157,8 +220,7 @@
         {
           "name": "hidden-power",
           "level": 1,
-          "gen": "brilliant-diamond-and-shining-pearl",
-          "uuid": "Compendium.ptr2e.core-moves.Item.1lkeVmjLt8Vp0izT"
+          "gen": "brilliant-diamond-and-shining-pearl"
         }
       ]
     }

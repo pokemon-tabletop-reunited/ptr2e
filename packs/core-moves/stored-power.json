@@ -1,20 +1,18 @@
 {
   "name": "Stored Power",
   "type": "move",
-  "img": "/systems/ptr2e/img/svg/psychic_icon.svg",
+  "img": "systems/ptr2e/img/svg/psychic_icon.svg",
   "system": {
     "slug": "stored-power",
-    "description": "Effect: This attack gains +20 Power for each positive stage the user has.",
-    "traits": [
-      "pulse"
-    ],
+    "traits": [],
     "actions": [
       {
         "slug": "stored-power",
         "name": "Stored Power",
         "type": "attack",
         "traits": [
-          "pulse"
+          "pulse",
+          "pp-updated"
         ],
         "range": {
           "target": "creature",
@@ -23,10 +21,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 7,
-          "delay": null,
-          "priority": null,
-          "trigger": null
+          "powerPoints": 4
         },
         "category": "special",
         "power": 20,
@@ -34,15 +29,15 @@
         "types": [
           "psychic"
         ],
-        "description": "Effect: This attack gains +20 Power for each positive stage the user has.",
-        "contestType": "",
-        "contestEffect": "",
-        "free": false,
-        "slot": null
+        "description": "<p>Effect: This attack's Power increases based on the totals of the user's Stat Stages, increasing if a Stat's total Stages are positive.</p><p></p><blockquote><p>Damage Formula: Power = 20 + 20 x (max(0,ATKStages)+max(0,DEFStages)+max(0,SPATKStages)+max(0,SPDEFStages)+max(0,SPDStages)+max(0,ACCStages)+max(0,EVAStages))</p></blockquote>",
+        "img": "systems/ptr2e/img/svg/psychic_icon.svg"
       }
     ],
-    "container": null,
-    "grade": "B"
+    "grade": "B",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
   },
   "_id": "7Mhbg8HQUtPGaWSg",
   "effects": []

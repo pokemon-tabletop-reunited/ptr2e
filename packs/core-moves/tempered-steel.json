@@ -1,13 +1,13 @@
 {
   "name": "Tempered Steel",
   "type": "move",
-  "img": "/systems/ptr2e/img/svg/steel_icon.svg",
+  "img": "systems/ptr2e/img/svg/steel_icon.svg",
   "system": {
     "slug": "tempered-steel",
-    "description": "Effect: This attack is considered to be both Steel and Fire Type. This attack uses the higher of the user's Defense or Special Defense for damage calculation.",
+    "description": "",
     "traits": [
       "legendary",
-      "push-x",
+      "push-4",
       "contact"
     ],
     "actions": [
@@ -17,8 +17,9 @@
         "type": "attack",
         "traits": [
           "legendary",
-          "push-x",
-      "contact"
+          "push-4",
+          "contact",
+          "pp-updated"
         ],
         "range": {
           "target": "creature",
@@ -27,7 +28,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 6,
+          "powerPoints": 3,
           "delay": null,
           "priority": null,
           "trigger": null
@@ -36,11 +37,46 @@
         "power": 100,
         "accuracy": 95,
         "types": [
-          "steel"
+          "steel",
+          "fire"
         ],
-        "description": "Effect: This attack is considered to be both Steel and Fire Type. This attack uses the higher of the user's Defense or Special Defense for damage calculation.",
+        "description": "<p>Effect: This attack is considered to be both Steel and Fire Type. This attack uses the higher of the user's Defense or Special Defense for damage calculation.</p>",
         "contestType": "",
         "contestEffect": "",
+        "free": false,
+        "slot": null
+      },
+      {
+        "slug": "tempered-steel-sheen",
+        "name": "Tempered Steel (Sheen)",
+        "type": "attack",
+        "traits": [
+          "legendary",
+          "pp-updated"
+        ],
+        "range": {
+          "target": "emanation",
+          "distance": 2,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 6,
+          "delay": null,
+          "priority": null,
+          "trigger": "The user possesses the Ability Chromium Finish.</p>"
+        },
+        "category": "special",
+        "power": 100,
+        "accuracy": 95,
+        "types": [
+          "steel",
+          "fire"
+        ],
+        "description": "The user possesses the Ability Chromium Finish.</p><p>Effect: This attack is considered to be both Steel and Fire Type. This attack uses the higher of the user's Defense or Special Defense for damage calculation.</p>",
+        "contestType": "",
+        "contestEffect": "",
+        "variant": "tempered-steel",
         "free": false,
         "slot": null
       }

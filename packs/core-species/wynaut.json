@@ -1,7 +1,7 @@
 {
   "name": "wynaut",
   "type": "species",
-  "img": "/systems/ptr2e/img/icons/species_icon.webp",
+  "img": "systems/ptr2e/img/icons/species_icon.webp",
   "system": {
     "number": 360,
     "size": {
@@ -20,7 +20,12 @@
           "value": 3
         }
       ],
-      "secondary": []
+      "secondary": [
+        {
+          "type": "swim",
+          "value": 3
+        }
+      ]
     },
     "traits": [
       "pokemon",
@@ -28,25 +33,40 @@
       "darkvision-15",
       "pack-mon",
       "telepathic",
-      "underdog",
-      "baby"
+      "underdog"
     ],
     "abilities": {
       "starting": [
-        "shadow-tag",
-        "telepathy"
+        {
+          "slug": "shadow-tag"
+        },
+        {
+          "slug": "telepathy"
+        }
       ],
       "basic": [
-        "synchronize",
-        "own-tempo"
+        {
+          "slug": "synchronize"
+        },
+        {
+          "slug": "own-tempo"
+        }
       ],
       "advanced": [
-        "bulletproof",
-        "magic-bounce"
+        {
+          "slug": "stalwart"
+        },
+        {
+          "slug": "magic-bounce"
+        }
       ],
       "master": [
-        "stamina",
-        "soul-link"
+        {
+          "slug": "self-sufficient"
+        },
+        {
+          "slug": "soul-link"
+        }
       ]
     },
     "skills": [
@@ -60,7 +80,7 @@
       },
       {
         "slug": "climb",
-        "value": 5,
+        "value": 15,
         "rvs": 0,
         "favourite": false,
         "hidden": false,
@@ -68,6 +88,14 @@
       },
       {
         "slug": "conversation",
+        "value": 20,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "disguise",
         "value": 30,
         "rvs": 0,
         "favourite": false,
@@ -76,7 +104,7 @@
       },
       {
         "slug": "leadership",
-        "value": 25,
+        "value": 15,
         "rvs": 0,
         "favourite": false,
         "hidden": false,
@@ -84,7 +112,7 @@
       },
       {
         "slug": "lift",
-        "value": 20,
+        "value": 15,
         "rvs": 0,
         "favourite": false,
         "hidden": false,
@@ -100,7 +128,7 @@
       },
       {
         "slug": "natural-world",
-        "value": 25,
+        "value": 20,
         "rvs": 0,
         "favourite": false,
         "hidden": false,
@@ -108,7 +136,15 @@
       },
       {
         "slug": "negotiation",
-        "value": 35,
+        "value": 20,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "running",
+        "value": 20,
         "rvs": 0,
         "favourite": false,
         "hidden": false,
@@ -117,6 +153,14 @@
       {
         "slug": "spot",
         "value": 25,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "stealth",
+        "value": 20,
         "rvs": 0,
         "favourite": false,
         "hidden": false,
@@ -132,14 +176,14 @@
       },
       {
         "slug": "swim",
-        "value": 20,
+        "value": 10,
         "rvs": 0,
         "favourite": false,
         "hidden": false,
         "group": null
       }
     ],
-    "slug": "",
+    "slug": "wynaut",
     "stats": {
       "hp": 95,
       "atk": 23,
@@ -156,50 +200,42 @@
         {
           "name": "counter",
           "level": 1,
-          "gen": "brilliant-diamond-and-shining-pearl",
-          "uuid": "Compendium.ptr2e.core-moves.Item.TzmxWMEVbUTipXGX"
+          "gen": "brilliant-diamond-and-shining-pearl"
         },
         {
           "name": "amnesia",
           "level": 1,
-          "gen": "brilliant-diamond-and-shining-pearl",
-          "uuid": "Compendium.ptr2e.core-moves.Item.MVyAM09Whwvb0sMN"
+          "gen": "brilliant-diamond-and-shining-pearl"
         },
         {
           "name": "splash",
           "level": 1,
-          "gen": "brilliant-diamond-and-shining-pearl",
-          "uuid": "Compendium.ptr2e.core-moves.Item.zsfPLAkIqk2KQaP7"
+          "gen": "brilliant-diamond-and-shining-pearl"
         },
         {
           "name": "destiny-bond",
           "level": 1,
-          "gen": "brilliant-diamond-and-shining-pearl",
-          "uuid": "Compendium.ptr2e.core-moves.Item.KtSSIe0Sc2Ucby1Q"
+          "gen": "brilliant-diamond-and-shining-pearl"
         },
         {
           "name": "charm",
           "level": 1,
-          "gen": "brilliant-diamond-and-shining-pearl",
-          "uuid": "Compendium.ptr2e.core-moves.Item.qz5m0G6pBtTputPs"
+          "gen": "brilliant-diamond-and-shining-pearl"
         },
         {
           "name": "safeguard",
           "level": 1,
-          "gen": "brilliant-diamond-and-shining-pearl",
-          "uuid": "Compendium.ptr2e.core-moves.Item.X2ZRPMlCRzbcEwOS"
+          "gen": "brilliant-diamond-and-shining-pearl"
         },
         {
           "name": "encore",
           "level": 1,
-          "gen": "brilliant-diamond-and-shining-pearl",
-          "uuid": "Compendium.ptr2e.core-moves.Item.ZxIubCcCNv3MnafK"
+          "gen": "brilliant-diamond-and-shining-pearl"
         },
         {
           "name": "mirror-coat",
           "level": 1,
-          "gen": "brilliant-diamond-and-shining-pearl",
-          "uuid": "Compendium.ptr2e.core-moves.Item.YBM5wpQaekDhGwTE"
+          "gen": "brilliant-diamond-and-shining-pearl"
         }
       ]
     },

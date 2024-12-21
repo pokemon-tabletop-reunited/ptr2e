@@ -1,6 +1,22 @@
 <section class="tab sheet-body {{tabs.clocks.cssClass}}" data-tab="clocks" data-group="sheet">
-    <div class="scroll" style="grid-area: span 5 / span 5; align-items: center; place-content: center; font-size: xx-large;">
-        <span>The Crafting & Clocks tab</span>
-        <span>Will be added in a later build!</span>
-    </div>
+  <main class="scroll clock-list"
+    style="grid-area: span 5 / span 5;">
+    {{#each clocks as |clock|}}
+      <figure class="clock-entry" data-id="{{clock.id}}">
+        <div class="clock" style="--areas: {{clock.max}}; --filled: {{clock.value}}; --clock-color: {{clock.color}}">
+          {{#each clock.spokes}}
+            <div class="spoke" style="--index: {{ this }}"></div>
+          {{/each}}
+        </div>
+        <div class="name-section">
+          <div class="controls">
+            <a data-action="delete-clock"><i class="fas fa-trash"></i></a>
+            <a data-action="edit-clock"><i class="fas fa-edit"></i></a>
+          </div>
+          <div class="name">{{#if clock.private}}<i class="fas fa-eye-slash"></i>{{/if}} {{clock.label}}</div>
+        </div>
+      </figure>
+    {{/each}}
+  </main>
+  <a data-action="add-clock"><i class="fas fa-plus"></i> {{localize "PTR2E.Clocks.Global.Add"}}</a>
 </section>

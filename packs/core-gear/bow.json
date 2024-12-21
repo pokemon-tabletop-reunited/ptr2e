@@ -1,0 +1,216 @@
+{
+  "folder": "V4skAU6G3OH5fXaf",
+  "name": "Bow",
+  "type": "weapon",
+  "system": {
+    "_migration": {
+      "version": 0.104,
+      "previous": null
+    },
+    "slug": "bow",
+    "traits": [
+      "weapon",
+      "reload",
+      "charge-pool-12"
+    ],
+    "actions": [
+      {
+        "name": "Standard Arrow",
+        "slug": "standard-arrow",
+        "description": "",
+        "traits": [
+          "weapon",
+          "missile"
+        ],
+        "type": "attack",
+        "range": {
+          "target": "enemy",
+          "distance": 45,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 0
+        },
+        "types": [
+          "untyped"
+        ],
+        "category": "physical",
+        "power": 60,
+        "accuracy": 95,
+        "free": true
+      },
+      {
+        "name": "Blunthead Arrow",
+        "slug": "blunthead-arrow",
+        "description": "<p>On hit, the target has a 30% chance of being Flinched 3.</p>",
+        "traits": [
+          "weapon",
+          "missile",
+          "flinch-chance-3"
+        ],
+        "type": "attack",
+        "range": {
+          "target": "enemy",
+          "distance": 45,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 0
+        },
+        "variant": "standard-arrow",
+        "types": [
+          "untyped"
+        ],
+        "category": "physical",
+        "power": 40,
+        "accuracy": 95,
+        "free": true
+      },
+      {
+        "name": "Broadhead Arrow",
+        "slug": "broadhead-arrow",
+        "description": "<p>Effect: On hit, the target has a 30% chance of gaining @Affliction[splinter] 5.</p>",
+        "traits": [
+          "weapon",
+          "missile"
+        ],
+        "type": "attack",
+        "range": {
+          "target": "enemy",
+          "distance": 45,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 1
+        },
+        "variant": "standard-arrow",
+        "types": [
+          "untyped"
+        ],
+        "category": "physical",
+        "power": 80,
+        "accuracy": 85,
+        "free": true
+      },
+      {
+        "name": "Bodkin Arrow",
+        "slug": "bodkin-arrow",
+        "description": "",
+        "traits": [
+          "weapon",
+          "missile",
+          "crit-1"
+        ],
+        "type": "attack",
+        "range": {
+          "target": "enemy",
+          "distance": 45,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 1
+        },
+        "variant": "standard-arrow",
+        "types": [
+          "untyped"
+        ],
+        "category": "physical",
+        "power": 50,
+        "accuracy": 90,
+        "free": true
+      }
+    ],
+    "description": "<p>A bow's attack profile can be altered by changing the ammunition used for it. Arrows may be lit on fire to change their typing to Fire Type. Otherwise, damage type may be altered through alchemical treatments.</p>",
+    "crafting": {
+      "skill": "Wood",
+      "spans": null,
+      "materials": []
+    },
+    "equipped": {
+      "carryType": "stowed",
+      "handsHeld": 2,
+      "slot": "held"
+    },
+    "grade": "E",
+    "fling": {
+      "type": "untyped",
+      "power": 20,
+      "accuracy": 100
+    },
+    "quantity": 1,
+    "rarity": "common",
+    "identification": {
+      "misidentified": null,
+      "status": "identified",
+      "unidentified": {
+        "name": "Unidentified Item",
+        "img": "systems/ptu/css/images/icons/item_icon.png",
+        "description": "<p>Unidentified Item</p>"
+      }
+    },
+    "weaponType": "Ranged",
+    "weaponPp": 12,
+    "weaponRange": "45"
+  },
+  "_id": "lvWIPtRom0SHwdMn",
+  "img": "systems/ptr2e/img/icons/weapon_icon.webp",
+  "effects": [
+    {
+      "name": "Broadhead Arrow",
+      "type": "passive",
+      "_id": "LolzlRdBaFbwWM3d",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "broadhead-arrow-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.splinterconditem",
+            "predicate": [],
+            "chance": 30,
+            "affects": "target",
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.2.4.3",
+        "createdTime": 1729161823663,
+        "modifiedTime": 1729161853985,
+        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
+      }
+    }
+  ]
+}

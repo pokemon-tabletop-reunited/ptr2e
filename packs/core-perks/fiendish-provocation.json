@@ -3,77 +3,80 @@
   "type": "perk",
   "system": {
     "prerequisites": [
-      "[Trainer] or [Expedition Leader]",
-      "Intimidate 40"
+      {
+        "and": [
+          "trait:trainer",
+          "trait:expedition-leader"
+        ]
+      },
+      {
+        "gte": [
+          "{actor|skills.intimidate.mod}",
+          40
+        ]
+      }
     ],
     "cost": 2,
-    "design": {
-      "arena": "social",
-      "approach": "power",
-      "archetype": "Shadow"
-    },
-    "description": "The target [Closed Heart] creature gains Hyper Mode 5.",
+    "description": "<p>The target [Closed Heart] creature gains @Affliction[hyper-mode] 5.</p>",
     "actions": [
       {
         "name": "Fiendish Provocation",
         "slug": "fiendish-provocation",
-        "description": "The target [Closed Heart] creature gains Hyper Mode 5.",
+        "description": "<p>The target [Closed Heart] creature gains @Affliction[hyper-mode] 5.</p>",
         "cost": {
           "activation": "simple",
-          "powerPoints": 2
+          "powerPoints": 2,
+          "delay": null,
+          "priority": null
+        },
+        "range": {
+          "target": "creature",
+          "distance": 10,
+          "unit": "m"
         },
         "type": "generic",
-        "traits": []
+        "traits": [],
+        "img": "icons/svg/explosion.svg",
+        "variant": null
       }
     ],
     "slug": "fiendish-provocation",
     "traits": [],
-    "node": {
-      "i": 48,
-      "j": -47,
-      "connected": [
-        "shadow-guide",
-        "you-belong-to-me",
-        "root-3",
-        "silver-bullet",
-        "frenzied-assault",
-        "ultraviolet"
-      ],
-      "config": {
-        "alpha": null,
-        "backgroundColor": null,
-        "borderColor": null,
-        "borderWidth": null,
-        "texture": "systems/ptr2e/img/perk-icons/Aura.svg",
-        "tint": "#ffffff",
-        "scale": null
-      },
-      "hidden": false,
-      "type": "normal"
-    }
+    "_migration": {
+      "version": null,
+      "previous": null
+    },
+    "nodes": [
+      {
+        "x": null,
+        "y": null,
+        "hidden": false,
+        "type": "normal",
+        "connected": [
+          "shadow-guide",
+          "ultraviolet"
+        ],
+        "config": {
+          "alpha": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "borderWidth": null,
+          "texture": "systems/ptr2e/img/svg/shadow_icon.svg",
+          "tint": "#ffffff",
+          "scale": null
+        },
+        "tier": null
+      }
+    ],
+    "autoUnlock": [],
+    "originSlug": null,
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": []
   },
   "_id": "bf8a76v0PxvOgJaF",
-  "img": "/systems/ptr2e/img/icons/feat_icon.webp",
+  "img": "systems/ptr2e/img/svg/shadow_icon.svg",
   "effects": [],
-  "flags": {
-    "core": {
-      "sourceId": "Compendium.ptr2e.core-perks.Item.bf8a76v0PxvOgJaF"
-    }
-  },
-  "_stats": {
-    "coreVersion": "12.321",
-    "systemId": "ptr2e",
-    "systemVersion": "0.005",
-    "createdTime": null,
-    "modifiedTime": 1714920494563,
-    "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
-    "compendiumSource": null,
-    "duplicateSource": null
-  },
-  "folder": null,
-  "sort": 0,
-  "ownership": {
-    "default": 0
-  },
-  "_key": "!items!bf8a76v0PxvOgJaF"
+  "folder": "mWJffsapofL9b8rY"
 }

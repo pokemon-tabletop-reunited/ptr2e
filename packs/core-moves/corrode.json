@@ -1,16 +1,17 @@
 {
   "name": "Corrode",
   "type": "move",
-  "img": "/systems/ptr2e/img/svg/poison_icon.svg",
+  "_id": "IMvY0LoT5PWC8bJE",
+  "img": "systems/ptr2e/img/svg/poison_icon.svg",
   "system": {
     "slug": "corrode",
-    "description": "Effect: This attack is Super Effective against the Steel Type.",
     "traits": [],
     "actions": [
       {
-        "slug": "corrode",
         "name": "Corrode",
+        "slug": "corrode",
         "type": "attack",
+        "img": "systems/ptr2e/img/svg/poison_icon.svg",
         "traits": [],
         "range": {
           "target": "creature",
@@ -19,27 +20,75 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 7,
-          "delay": null,
-          "priority": null,
-          "trigger": null
+          "powerPoints": 2
         },
-        "category": "special",
-        "power": 70,
-        "accuracy": 100,
         "types": [
           "poison"
         ],
-        "description": "Effect: This attack is Super Effective against the Steel Type.",
-        "contestType": "",
-        "contestEffect": "",
-        "free": false,
-        "slot": null
+        "category": "status",
+        "accuracy": 100,
+        "description": "<p>Effect: The target suffers -1 Defense and -1 Special Defense Stage. If the target creature is Steel-Type, it can be damaged by the user's Poison-Type attacks.</p>"
       }
     ],
-    "container": null,
-    "grade": "A"
+    "grade": "D",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
   },
-  "_id": "x9vhahTaPpo9yqKO",
-  "effects": []
+  "effects": [
+    {
+      "name": "Corrode",
+      "type": "passive",
+      "_id": "PU7gVIGaW1NfxWBo",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "",
+            "value": 0,
+            "predicate": [],
+            "chance": 100,
+            "affects": "target",
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.3.0.0",
+        "createdTime": 1729540891128,
+        "modifiedTime": 1729540903529,
+        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
+      }
+    }
+  ]
 }

@@ -1,5 +1,50 @@
 <section class="tab sheet-body {{tabs.overview.cssClass}}" data-tab="overview" data-group="sheet">
-    {{> actor-skills-component favouriteOnly=true}}
-    {{> stats-chart fieldset=true}}
-    {{> actor-movement-component}}
+  {{> actor-skills-component favouriteOnly=true}}
+  {{> stats-chart fieldset=true}}
+  {{> actor-movement-component}}
+
+  <aside class="effectiveness">
+    <fieldset style="gap: 0;">
+      <legend>Effectiveness</legend>
+      <fieldset class="effectiveness-container">
+        <legend>Super Effective</legend>
+        {{#each effectiveness.effective}}
+          <div class="effectiveness">
+            {{{getIcon this.name}}}
+            <label>x{{this.value}}</label>
+          </div>
+        {{else}}
+          <div class="effectiveness">
+            <small>No weaknesses</small>
+          </div>
+        {{/each}}
+      </fieldset>
+      <fieldset class="effectiveness-container">
+        <legend>Immunities</legend>
+        {{#each effectiveness.immune}}
+          <div class="effectiveness">
+            {{{getIcon this.name}}}
+            <label>x{{this.value}}</label>
+          </div>
+        {{else}}
+          <div class="effectiveness">
+            <small>No immunities</small>
+          </div>
+        {{/each}}
+      </fieldset>
+      <fieldset class="effectiveness-container">
+        <legend>Not Very Effective</legend>
+        {{#each effectiveness.ineffective}}
+          <div class="effectiveness">
+            {{{getIcon this.name}}}
+            <label>x{{this.value}}</label>
+          </div>
+        {{else}}
+          <div class="effectiveness">
+            <small>No resistances</small>
+          </div>
+        {{/each}}
+      </fieldset>
+    </fieldset>
+  </aside>
 </section>

@@ -1,24 +1,26 @@
 {
   "name": "Power Down!",
   "type": "move",
-  "img": "/systems/ptr2e/img/svg/untyped_icon.svg",
+  "img": "systems/ptr2e/img/svg/untyped_icon.svg",
   "system": {
     "slug": "power-down",
-    "description": "Effect: Deactivates a [Phenomenon] effect on a partnered creature. This may be used as a Command Action.",
+    "description": "<p>Effect: Deactivates a [Phenomenon] effect on the target, and the target is Flinched.</p>",
     "traits": [
       "evolution",
       "phenomenon",
-      "command"
+      "command",
+      "flinch-3"
     ],
     "actions": [
       {
         "slug": "power-down",
         "name": "Power Down!",
-        "type": "attack",
+        "type": "generic",
         "traits": [
           "evolution",
           "phenomenon",
-          "command"
+          "command",
+          "flinch-3"
         ],
         "range": {
           "target": "ally",
@@ -26,26 +28,15 @@
           "unit": "m"
         },
         "cost": {
-          "activation": "free",
-          "powerPoints": 2,
-          "delay": null,
-          "priority": null,
-          "trigger": null
+          "activation": "simple",
+          "powerPoints": 0
         },
-        "category": "status",
-        "power": null,
-        "accuracy": null,
-        "types": [
-          "untyped"
-        ],
-        "description": "Effect: Deactivates a [Phenomenon] effect on a partnered creature. This may be used as a Command Action.",
-        "contestType": "",
-        "contestEffect": "",
-        "free": false,
-        "slot": null
+        "description": "<p>Effect: Deactivates a [Phenomenon] effect on the target, and the target is Flinched.</p>",
+        "img": "icons/svg/explosion.svg"
       }
     ],
-    "container": null
+    "container": null,
+    "grade": "E"
   },
   "_id": "RxtzSBitKA3GRzq8",
   "effects": []

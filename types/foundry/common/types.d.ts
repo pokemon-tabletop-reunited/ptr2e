@@ -32,12 +32,30 @@ declare global {
         recursive?: boolean;
         /** Whether to delete all documents of a given type, regardless of the array of ids provided. Only used during a delete operation. */
         deleteAll?: boolean;
+        deleteSubfolders?: boolean;
+        deleteContents?: boolean;
+        restoreDelta?: boolean;
+        [key: string]: unknown;
     }
 
     type DocumentUpdateContext<TParent extends Document | null> = Omit<
         DocumentModificationContext<TParent>,
         "deleteAll" | "index" | "keepId" | "keepEmbeddedIds" | "temporary"
     >;
+
+    interface DatabaseUpdateOperation {
+      broadcast: boolean;
+      updates: object[];
+      diff?: boolean;
+      modifiedTime?: number;
+      recursive?: boolean;
+      render?: boolean;
+      noHook?: boolean;
+      parent?: foundry.abstract.Document | null;
+      pack: string | null;
+      parentUuid?: string | null;
+      _result?: (string | object)[];
+    }
 
     /* ----------------------------------------- */
     /*  Reusable Type Definitions                */

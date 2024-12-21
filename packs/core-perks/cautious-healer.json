@@ -1,60 +1,56 @@
 {
-    "folder": "Et2u8UoXSe2a17oq",
-    "name": "Cautious Healer",
-    "type": "perk",
-    "_id": "ld4fIK2v73fZ0Dy5",
-    "img": "systems/ptr2e/img/perk-icons/Knowledge.svg",
-    "system": {
-        "actions": [],
-        "slug": null,
-        "description": "<p>When you heal another creature using a Healing Move, you gain Resolved 3.</p>",
-        "traits": [],
-        "prerequisites": [
-            "Medicine 45"
+  "folder": "4UhJK1LInml07WJf",
+  "name": "Cautious Healer",
+  "type": "perk",
+  "_id": "ld4fIK2v73fZ0Dy5",
+  "img": "systems/ptr2e/img/perk-icons/Knowledge.svg",
+  "system": {
+    "actions": [],
+    "slug": "cautious-healer",
+    "description": "<p>When you heal another creature using a Healing Move, you gain @Affliction[resolved] 3.</p>",
+    "traits": [],
+    "prerequisites": [
+      {
+        "gte": [
+          "{actor|skills.medicine.mod}",
+          45
+        ]
+      }
+    ],
+    "cost": 3,
+    "_migration": {
+      "version": null,
+      "previous": null
+    },
+    "nodes": [
+      {
+        "connected": [
+          "chansey-medicine",
+          "last-aid",
+          "mutual-aid"
         ],
-        "cost": 3,
-        "design": {
-            "arena": "mental",
-            "approach": "resilience",
-            "archetype": ""
+        "config": {
+          "alpha": null,
+          "backgroundColor": "#008000",
+          "borderColor": null,
+          "borderWidth": null,
+          "texture": "systems/ptr2e/img/perk-icons/Knowledge.svg",
+          "tint": null,
+          "scale": null
         },
-        "node": {
-            "i": -52,
-            "j": -36,
-            "connected": [
-                "forensic-accountant",
-                "mankey-see-mankey-do",
-                "root-1",
-                "chansey-medicine"
-            ],
-            "config": {
-                "alpha": null,
-                "backgroundColor": "#008000",
-                "borderColor": null,
-                "borderWidth": null,
-                "texture": "systems/ptr2e/img/perk-icons/Knowledge.svg",
-                "tint": null,
-                "scale": null
-            },
-            "hidden": false,
-            "type": "normal"
-        }
-    },
-    "effects": [],
-    "sort": 0,
-    "ownership": {
-        "default": 0,
-        "Kc3DOunCh3ClAeHS": 3
-    },
-    "flags": {},
-    "_stats": {
-        "compendiumSource": "Item.ld4fIK2v73fZ0Dy5",
-        "duplicateSource": null,
-        "coreVersion": "12.325",
-        "systemId": "ptr2e",
-        "systemVersion": "0.006",
-        "createdTime": 1717159513022,
-        "modifiedTime": 1717178146343,
-        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
-    }
+        "hidden": false,
+        "type": "normal",
+        "x": 54,
+        "y": 79,
+        "tier": null
+      }
+    ],
+    "autoUnlock": [],
+    "originSlug": null,
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": []
+  },
+  "effects": []
 }

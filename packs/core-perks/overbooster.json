@@ -1,0 +1,72 @@
+{
+  "folder": "zrVtKATNxzLNxTUa",
+  "name": "Overbooster",
+  "type": "perk",
+  "_id": "k7NoYMHTuGsUxUvS",
+  "img": "systems/ptr2e/img/perk-icons/Combat.svg",
+  "system": {
+    "actions": [
+      {
+        "name": "Overbooster",
+        "slug": "overbooster",
+        "description": "<p>The user loses a Tick of HP. The user's next Physical- or Special-Category Attack deals +20% more damage. This can be done twice on each of the user's Activations.</p>",
+        "traits": [],
+        "type": "generic",
+        "range": {
+          "target": "self",
+          "unit": "m",
+          "distance": 0
+        },
+        "cost": {
+          "activation": "free",
+          "powerPoints": 1,
+          "delay": null,
+          "priority": null
+        },
+        "img": "icons/svg/explosion.svg",
+        "variant": null
+      }
+    ],
+    "slug": "overbooster",
+    "description": "<p>The user spends a Tick of HP and 1 PP. The user's next Physical- or Special-Category Attack deals +20% more damage. This can be done twice on each of the user's Activations</p>>",
+    "traits": [],
+    "prerequisites": [],
+    "cost": 3,
+    "_migration": {
+      "version": null,
+      "previous": null
+    },
+    "nodes": [
+      {
+        "connected": [
+          "desperate-strike",
+          "glutton-for-punishment",
+          "adrenaline-rush",
+          "tubthumping",
+          "swan-song"
+        ],
+        "config": {
+          "alpha": null,
+          "backgroundColor": "#808080",
+          "borderColor": null,
+          "borderWidth": null,
+          "texture": "systems/ptr2e/img/perk-icons/Combat.svg",
+          "tint": "#ff0000",
+          "scale": null
+        },
+        "hidden": false,
+        "type": "normal",
+        "x": 65,
+        "y": 42,
+        "tier": null
+      }
+    ],
+    "autoUnlock": [],
+    "originSlug": null,
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": []
+  },
+  "effects": []
+}

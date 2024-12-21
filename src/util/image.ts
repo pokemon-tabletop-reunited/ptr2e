@@ -33,6 +33,7 @@ class ImageResolver {
     static async createFromSpeciesData(config: ImageSpeciesResolverConfig, speciesData: SpeciesImageData) {
         const {base, extensions} = {base: speciesData.data.base, extensions: Array.from(new Set([...speciesData.data.extensions ?? [], ".webp"]))};
         const suffixes = speciesData.suffixes ?? {};
+        if(!suffixes["token"]) suffixes["token"] = "_Token";
 
         const resolver = await ImageResolver.create(base, extensions);
         if(!resolver) return null;
@@ -109,9 +110,7 @@ class ImageResolver {
                         return result;
                     }
                 } // form matched partially, return shiny result
-                else {
-                    return shinyResult;
-                }
+                return shinyResult;
             }
         }
 
@@ -158,7 +157,7 @@ interface ImageSpeciesResolverConfig {
  * const sample: Record<string, SpeciesImageData> = {
  *  "rotom": {
  *      "data": {
- *          "base": "/systems/ptu/static/images/sprites/479",
+ *          "base": "systems/ptu/static/images/sprites/479",
  *          "extensions": [".webp"],
  *      },
  *      "suffixes": {
@@ -171,18 +170,20 @@ interface ImageSpeciesResolverConfig {
  * }
  * ```
  */
-type SpeciesImageData = {
+interface SpeciesImageData {
     data: {
         base: string;
         extensions: string[];
+        random: boolean;
     }
     suffixes: Record<string, string> | null;
 }
 
-type SpeciesImageDataSource = {
+interface SpeciesImageDataSource {
     data: {
         base: string;
         extensions?: string[];
+        random: boolean;
     }
     suffixes?: Record<string, string>;
 }

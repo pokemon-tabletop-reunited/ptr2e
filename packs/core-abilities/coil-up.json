@@ -1,20 +1,18 @@
 {
   "name": "Coil Up",
   "type": "ability",
-  "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+  "img": "systems/ptr2e/img/icons/ability_icon.webp",
   "system": {
     "actions": [
       {
-        "traits": [
-          "connection"
-        ],
+        "traits": [],
         "name": "Coil Up",
         "slug": "coil-up",
         "type": "generic",
         "cost": {
           "activation": "free",
           "powerPoints": 4,
-          "trigger": "At the start of combat or when the user is switched in.",
+          "trigger": "<p>The user enters combat.</p>",
           "delay": null,
           "priority": null
         },
@@ -23,17 +21,45 @@
           "distance": 0,
           "unit": "m"
         },
-        "description": "Trigger: At the start of combat or when the user is switched in.\nEffect: Connection - Coil. The user's Coil gains [Priority 3] until the start of their next Activation, and the user freely uses Coil."
+        "description": "<p>Trigger: The user enters combat.</p><p>Effect:The user's Coil gains [Priority 3] until the start of their next Activation, and the user freely uses Coil.</p>"
+      },
+      {
+        "slug": "coil",
+        "name": "Coil",
+        "type": "attack",
+        "traits": [],
+        "range": {
+          "target": "self",
+          "distance": 0,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 5,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "status",
+        "power": null,
+        "accuracy": null,
+        "types": [
+          "poison"
+        ],
+        "description": "<p>Effect: The user's ATK Stage, DEF Stage and ACC Stage are increased by +1 for 5 activations.</p>",
+        "contestType": "",
+        "contestEffect": "",
+        "free": true,
+        "slot": null
       }
     ],
-    "description": "Trigger: At the start of combat or when the user is switched in.\nEffect: Connection - Coil. The user's Coil gains [Priority 3] until the start of their next Activation, and the user freely uses Coil.",
+    "description": "<p>Trigger: The user enters combat.</p><p>Effect: Connection - Coil. The user's Coil gains [Priority 3] until the start of their next Activation, and the user freely uses Coil.</p>",
     "traits": [
       "connection"
     ],
     "slug": null,
     "container": null
   },
-  "folder": "0nG9TRDSwrmcTFwO",
   "_id": "beY7ZLjNlYwBbHw4",
   "effects": [],
   "sort": 0,

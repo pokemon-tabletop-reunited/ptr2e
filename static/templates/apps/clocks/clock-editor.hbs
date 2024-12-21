@@ -20,7 +20,9 @@
         <legend>Optional Info</legend>
         {{formField fields.value value=clock.value localize=true}}
         {{formField fields.color value=clock.color localize=true}}
-        {{formField fields.private value=clock.private localize=true}}
+        {{#if isGm}}
+          {{formField fields.private value=clock.private localize=true}}
+        {{/if}}
     </fieldset>
     <footer class="dialog-buttons">
         <button type="submit">

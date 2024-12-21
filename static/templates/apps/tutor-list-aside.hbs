@@ -1,0 +1,24 @@
+<aside>
+  <header>
+    <div class="actor">
+      {{#if actor}}
+          <img src="{{actor.img}}" alt="{{actor.name}}">
+          <span><a class="content-link" data-uuid="{{actor.uuid}}" data-link="{{actor.uuid}}" data-type="Actor"><i class="fas fa-user"></i> {{actor.name}}'s</a>Tutor List</span>
+          <a data-action="clear" title="Clear Actor"><i class="fas fa-times"></i></a>
+      {{else}}
+        <p>Viewing All Tutor Data<br><small>Drag an Actor here to view their Tutor List</small></p>
+      {{/if}}
+    </div>
+    <input name="filter" type="search" placeholder="Filter" value="">
+  </header>
+  <nav class="scroll tutor-list-options">
+    <a class="item{{#if (eq tab "")}} active{{/if}}" data-tab="">
+      All
+    </a>
+    {{#each lists as |list|}}
+      <a class="item list-tab{{#if (eq @root.tab list.id)}} active{{/if}}" data-tab="{{list.id}}">
+        {{list.title}}
+      </a>
+    {{/each}}
+  </nav>
+</aside>

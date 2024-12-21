@@ -1,17 +1,19 @@
 {
   "name": "Perplex",
   "type": "move",
-  "img": "/systems/ptr2e/img/svg/psychic_icon.svg",
+  "img": "systems/ptr2e/img/svg/psychic_icon.svg",
   "system": {
     "slug": "perplex",
-    "description": "Effect: If the target is Confused, this Move's Power is instead 130.",
+    "description": "<p>Effect: If the target is @Affliction[confused], this Attack's Power is doubled.</p>",
     "traits": [],
     "actions": [
       {
         "slug": "perplex",
         "name": "Perplex",
         "type": "attack",
-        "traits": [],
+        "traits": [
+          "pp-updated"
+        ],
         "range": {
           "target": "creature",
           "distance": 10,
@@ -19,7 +21,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 7,
+          "powerPoints": 5,
           "delay": null,
           "priority": null,
           "trigger": null
@@ -30,15 +32,46 @@
         "types": [
           "psychic"
         ],
-        "description": "Effect: If the target is Confused, this Move's Power is instead 130.",
+        "description": "<p>Effect: If the target is @Affliction[confused], this Attack's Power is doubled.</p>",
         "contestType": "",
         "contestEffect": "",
         "free": false,
         "slot": null
+      },
+      {
+        "slug": "perplex-confused",
+        "name": "Perplex (Confused)",
+        "type": "attack",
+        "img": "icons/svg/explosion.svg",
+        "traits": [],
+        "range": {
+          "target": "creature",
+          "distance": 10,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 5,
+          "delay": null,
+          "priority": null,
+          "trigger": "The target has @Affliction[confused]."
+        },
+        "variant": "perplex",
+        "types": [
+          "psychic"
+        ],
+        "category": "special",
+        "power": 130,
+        "accuracy": 100,
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null,
+        "description": "<p>Trigger: The target has @Affliction[confused].</p>"
       }
     ],
     "container": null,
-    "grade": "A"
+    "grade": "B"
   },
   "_id": "LmhqjPALgsspcMvi",
   "effects": []

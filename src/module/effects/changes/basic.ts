@@ -6,6 +6,7 @@ export default class BasicChangeSystem extends ChangeModel {
     static override TYPE = "basic";
 
     override apply(actor: ActorPTR2e, rollOptions?: string[] | Set<string> | null): void {
+        // eslint-disable-next-line @typescript-eslint/no-this-alias
         const change = this;
 
         if (change.ignored) return;
@@ -34,10 +35,15 @@ export default class BasicChangeSystem extends ChangeModel {
         }
 
         // Handle arrays
-        if (change.mode === CONST.ACTIVE_EFFECT_MODES.ADD && Array.isArray(current)) {
+        if (change.mode === CONST.ACTIVE_EFFECT_MODES.ADD && (Array.isArray(current) || current instanceof Set)) {
+          if(Array.isArray(current)) {
             if (!current.includes(newValue)) {
-                current.push(newValue);
+              current.push(newValue);
             }
+          }
+          else {
+            current.add(newValue);
+          }
         } else {
             try {
                 fu.setProperty(actor, path, newValue);
@@ -151,13 +157,13 @@ export default class BasicChangeSystem extends ChangeModel {
      */
     static _applyAdd(change: unknown, current: unknown): number | unknown | foundry.data.validation.DataModelValidationFailure {
         const isNumericAdd =
-            typeof change === "number" && (typeof current === "number" || typeof current === undefined || typeof current === null);
-        const isArrayAdd = Array.isArray(current) && current.every(e => typeof e === typeof change);
+            typeof change === "number" && (typeof current === "number" || typeof current === "undefined" || current === null);
+        const isArrayAdd = (Array.isArray(current) || current instanceof Set) && (current as unknown[]).every(e => typeof e === typeof change)
 
         if (isNumericAdd) {
             return (current as number ?? 0) + change;
         } else if (isArrayAdd) {
-            return change;
+          return change;
         }
 
         return new foundry.data.validation.DataModelValidationFailure({ message: `Unable to Add \`${change}\` to \`${current}\`. This is likely due to an invalid Key.`, invalidValue: change, fallback: false });
@@ -176,7 +182,7 @@ export default class BasicChangeSystem extends ChangeModel {
         if (!(typeof current === 'number' || current === undefined)) {
             return new foundry.data.validation.DataModelValidationFailure({ message: `Unable to apply mode Multiply on \`${current}\`. This is likely due to an invalid Key.`, invalidValue: current, fallback: false });
         }
-        return Math.trunc((current ?? 0) * change);
+        return change > 1 ? Math.ceil((current ?? 0) * change) : Math.floor((current ?? 0) * change);
     }
 
     /* -------------------------------------------- */
@@ -207,7 +213,7 @@ export default class BasicChangeSystem extends ChangeModel {
         if (typeof change !== "number") {
             return new foundry.data.validation.DataModelValidationFailure({ message: `Invalid value \`${change}\` for mode ${upgrade ? "Upgrade" : "Downgrade"}, value must be a number.`, invalidValue: change, fallback: false });
         }
-        if (!(typeof current === "number" || current === undefined)) {
+        if (!(typeof current === "number" || current === undefined || current === null)) {
             return new foundry.data.validation.DataModelValidationFailure({ message: `Unable to apply mode ${upgrade ? "Upgrade" : "Downgrade"} on \`${current}\`. This is likely due to an invalid Key.`,invalidValue: current, fallback: false });
         }
 

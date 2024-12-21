@@ -1,6 +1,6 @@
 {
   "name": "Key Stone",
-  "img": "/systems/ptr2e/img/icons/item_icon.webp",
+  "img": "systems/ptr2e/img/icons/equipment_icon.webp",
   "type": "equipment",
   "system": {
     "crafting": {
@@ -23,35 +23,78 @@
     "traits": [
       "phenomenon",
       "slottable",
-      "pp-pool-10"
+      "charge-pool-1"
     ],
     "actions": [
       {
-        "name": "Key Stone",
-        "slug": "key-stone",
-        "type": "passive",
-        "description": "Effect: The user may utilize this Item's PP Pool to pay for the PP Cost of Mega Evolve!",
-        "img": "/systems/ptr2e/img/icons/item_icon.webp",
+        "slug": "mega-evolve",
+        "name": "Mega Evolve!",
+        "type": "generic",
         "traits": [
-          "Phenomenon",
-          "Slottable",
-          "PP Pool 10"
+          "evolution",
+          "phenomenon",
+          "command"
         ],
         "range": {
-          "target": "creature",
-          "distance": 0,
+          "target": "ally",
+          "distance": 50,
           "unit": "m"
         },
         "cost": {
-          "activation": "complex",
+          "activation": "free",
           "powerPoints": 0,
           "delay": null,
-          "priority": null
+          "priority": null,
+          "trigger": "<p>Targeted creature possesses a Mega Stone sharing their Species Trait.</p>"
         },
-        "variant": null
+        "category": "status",
+        "power": null,
+        "accuracy": null,
+        "types": [
+          "untyped"
+        ],
+        "description": "<p>Trigger: Targeted creature possesses a Mega Stone sharing their Species Trait.</p><p>Effect: The targeted Pokémon uses Mega Evolve! (Mega Stone).</p>",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      },
+      {
+        "slug": "mega-evolve-key-stone-charge",
+        "name": "Mega Evolve! (Key Stone Charge)",
+        "type": "generic",
+        "traits": [
+          "evolution",
+          "phenomenon",
+          "command"
+        ],
+        "range": {
+          "target": "ally",
+          "distance": 50,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "free",
+          "powerPoints": 0,
+          "delay": null,
+          "priority": null,
+          "trigger": "<p>Targeted creature possesses a Mega Stone sharing their Species Trait.</p>"
+        },
+        "category": "status",
+        "power": null,
+        "accuracy": null,
+        "types": [
+          "untyped"
+        ],
+        "description": "<p>Trigger: Targeted creature possesses a Mega Stone sharing their Species Trait.</p><p>Effect: The targeted Pokémon freely uses Mega Evolve! (Mega Stone).</p>",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null,
+        "variant": "mega-evolve"
       }
     ],
-    "description": "Effect: The user may utilize this Item's PP Pool to pay for the PP Cost of Mega Evolve!",
+    "description": "<p>Effect: The user may utilize a charge from this Item to pay the PP Cost of Mega Evolve! for the user or a creature on their Team.</p>",
     "slug": null,
     "container": null,
     "quantity": 1,
@@ -67,7 +110,7 @@
   },
   "_id": "FbPvDuEStPKXezyf",
   "effects": [],
-  "folder": null,
+  "folder": "V4skAU6G3OH5fXad",
   "sort": 0,
   "ownership": {
     "default": 0,

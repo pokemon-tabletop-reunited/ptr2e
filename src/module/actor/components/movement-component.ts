@@ -5,7 +5,7 @@ class MovementComponent extends ActorComponent {
     static override TOOLTIP = "PTR2E.ActorSheet.Components.Movement.tooltip";
 
     override renderComponent(data: Record<string, unknown>): Promise<string> {
-        data.movement = this.actor.system.movement.contents;
+        data.movement = Object.values(this.actor.system.movement);
         return renderTemplate(this.template, data);
     }
 }

@@ -3,74 +3,106 @@
   "type": "perk",
   "system": {
     "prerequisites": [
-      "Leadership 30"
+      {
+        "gte": [
+          "{actor|skills.leadership.mod}",
+          30
+        ]
+      }
     ],
     "cost": 1,
-    "design": {
-      "arena": "social",
-      "approach": "finesse",
-      "archetype": "Support"
-    },
-    "description": "The target gains Evasive 1.",
+    "description": "<p>The target gains @Affliction[evasive] 1.</p>",
     "actions": [
       {
-        "name": "Evasive Style",
-        "slug": "evasive-style",
-        "description": "The target gains Evasive 1.",
+        "name": "Evasive!",
+        "slug": "evasive",
+        "traits": [
+          "command",
+          "style"
+        ],
+        "range": {
+          "target": "ally",
+          "distance": 20,
+          "unit": "m"
+        },
         "cost": {
           "activation": "simple",
-          "powerPoints": 2
+          "powerPoints": 1,
+          "delay": null,
+          "priority": null
         },
+        "description": "Effect: The target gains @Affliction[evasive] 1.",
         "type": "generic",
-        "traits": []
+        "img": "icons/svg/explosion.svg",
+        "variant": null
+      },
+      {
+        "name": "Evasive! (Self)",
+        "slug": "evasive-self",
+        "traits": [
+          "command",
+          "style"
+        ],
+        "range": {
+          "target": "self",
+          "unit": "m",
+          "distance": 0
+        },
+        "cost": {
+          "activation": "simple",
+          "powerPoints": 1,
+          "delay": null,
+          "priority": null
+        },
+        "description": "Effect: The target gains @Affliction[evasive] 2.",
+        "type": "generic",
+        "img": "icons/svg/explosion.svg",
+        "variant": null
       }
     ],
     "slug": "evasive-style",
-    "traits": [],
-    "node": {
-      "i": 5,
-      "j": -86,
-      "connected": [
-        "root-2",
-        "aura-user",
-        "freeclimber",
-        "parkour"
-      ],
-      "config": {
-        "alpha": null,
-        "backgroundColor": "#004080",
-        "borderColor": null,
-        "borderWidth": null,
-        "texture": "systems/ptr2e/img/perk-icons/Orders_Training.svg",
-        "tint": "#808080",
-        "scale": null
-      },
-      "hidden": false,
-      "type": "normal"
-    }
+    "traits": [
+      "command"
+    ],
+    "_migration": {
+      "version": null,
+      "previous": null
+    },
+    "nodes": [
+      {
+        "connected": [
+          "rapid-fire-style-1",
+          "assault-armor-style",
+          "stat-iv-booster-1-11",
+          "improved-burrow-1-3",
+          "improved-flight-1-6",
+          "improved-overland-1-5"
+        ],
+        "config": {
+          "alpha": null,
+          "backgroundColor": "#004080",
+          "borderColor": null,
+          "borderWidth": null,
+          "texture": "systems/ptr2e/img/perk-icons/Orders_Training.svg",
+          "tint": "#808080",
+          "scale": null
+        },
+        "hidden": false,
+        "type": "normal",
+        "x": 109,
+        "y": 124,
+        "tier": null
+      }
+    ],
+    "autoUnlock": [],
+    "originSlug": null,
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": []
   },
   "_id": "DejTHLN3FViZzzeE",
-  "img": "/systems/ptr2e/img/icons/feat_icon.webp",
+  "img": "systems/ptr2e/img/perk-icons/Orders_Training.svg",
   "effects": [],
-  "flags": {
-    "core": {
-      "sourceId": "Compendium.ptr2e.core-perks.Item.DejTHLN3FViZzzeE"
-    }
-  },
-  "_stats": {
-    "coreVersion": "12.321",
-    "systemId": "ptr2e",
-    "systemVersion": "0.005",
-    "createdTime": null,
-    "modifiedTime": 1714920529293,
-    "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
-    "compendiumSource": null,
-    "duplicateSource": null
-  },
-  "folder": null,
-  "sort": 0,
-  "ownership": {
-    "default": 0
-  },
-  "_key": "!items!DejTHLN3FViZzzeE"
+  "folder": "JZrGRskscJOkkPWA"
 }

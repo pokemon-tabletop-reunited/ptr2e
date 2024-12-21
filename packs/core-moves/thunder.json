@@ -1,10 +1,10 @@
 {
   "name": "Thunder",
   "type": "move",
-  "img": "/systems/ptr2e/img/svg/electric_icon.svg",
+  "img": "systems/ptr2e/img/svg/electric_icon.svg",
   "system": {
     "slug": "thunder",
-    "description": "Effect: On hit, the target has a 30% chance of being Paralysis 5. If Rainy Weather is active, this attack gains [Danger Close].",
+    "description": "<p>Effect: On hit, the target has a 30% chance of gaining @Affliction[paralysis] 5. If Rainy Weather is active, this attack gains [Danger Close].</p>",
     "traits": [
       "sky",
       "environ"
@@ -16,7 +16,8 @@
         "type": "attack",
         "traits": [
           "sky",
-          "environ"
+          "environ",
+          "pp-updated"
         ],
         "range": {
           "target": "creature",
@@ -25,10 +26,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 8,
-          "delay": null,
-          "priority": null,
-          "trigger": null
+          "powerPoints": 7
         },
         "category": "special",
         "power": 110,
@@ -36,16 +34,111 @@
         "types": [
           "electric"
         ],
-        "description": "Effect: On hit, the target has a 30% chance of being Paralysis 5. If Rainy Weather is active, this attack gains [Danger Close].",
-        "contestType": "",
-        "contestEffect": "",
-        "free": false,
-        "slot": null
+        "description": "<p>Effect: On hit, the target has a 30% chance of gaining @Affliction[paralysis] 5. If Rainy Weather is active, this attack gains [Danger Close].</p>",
+        "img": "icons/svg/explosion.svg"
+      },
+      {
+        "slug": "thunder-rainy",
+        "name": "Thunder (Rainy)",
+        "type": "attack",
+        "traits": [
+          "sky",
+          "environ",
+          "danger-close",
+          "pp-updated"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 10,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 7
+        },
+        "category": "special",
+        "power": 110,
+        "accuracy": 100,
+        "types": [
+          "electric"
+        ],
+        "description": "<p>Effect: On hit, the target has a 30% chance of gaining @Affliction[paralysis] 5. If Rainy Weather is active, this attack gains [Danger Close].</p>",
+        "variant": "thunder",
+        "free": true,
+        "img": "icons/svg/explosion.svg"
       }
     ],
-    "container": null,
-    "grade": "S"
+    "grade": "A",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
   },
   "_id": "l0mROFo4zk1nZ15X",
-  "effects": []
+  "effects": [
+    {
+      "name": "Thunder",
+      "type": "passive",
+      "_id": "Hxw6TJ5Lxjk9Uccs",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "thunder-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.paralysisconitem",
+            "predicate": [],
+            "chance": 30,
+            "affects": "target",
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "roll-effect",
+            "key": "thunder-rainy-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.paralysisconitem",
+            "predicate": [],
+            "chance": 30,
+            "affects": "target",
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.4.1.0",
+        "createdTime": 1733435309063,
+        "modifiedTime": 1733435352979,
+        "lastModifiedBy": "IcBpMqhFuTck9VpX"
+      }
+    }
+  ]
 }

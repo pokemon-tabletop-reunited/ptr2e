@@ -1,15 +1,17 @@
 {
   "name": "Steamroller",
   "type": "move",
-  "img": "/systems/ptr2e/img/svg/bug_icon.svg",
+  "img": "systems/ptr2e/img/svg/bug_icon.svg",
   "system": {
     "slug": "steamroller",
-    "description": "Effect: On hit, the target has a 30% chanced of being Flinched 3.",
+    "description": "",
     "traits": [
       "crushing",
       "earthbound",
       "curl",
-      "contact"
+      "contact",
+      "flinch-chance-3",
+      "pp-updated"
     ],
     "actions": [
       {
@@ -20,7 +22,9 @@
           "crushing",
           "earthbound",
           "curl",
-          "contact"
+          "contact",
+          "flinch-chance-3",
+          "pp-updated"
         ],
         "range": {
           "target": "creature",
@@ -29,7 +33,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 5,
+          "powerPoints": 2,
           "delay": null,
           "priority": null,
           "trigger": null
@@ -40,7 +44,7 @@
         "types": [
           "bug"
         ],
-        "description": "Effect: On hit, the target has a 30% chanced of being Flinched 3.",
+        "description": "<p>Effect: On hit, the target has a 30% chanced of being Flinched.</p>",
         "contestType": "",
         "contestEffect": "",
         "free": false,
@@ -48,7 +52,7 @@
       }
     ],
     "container": null,
-    "grade": "B"
+    "grade": "E"
   },
   "_id": "2SDRWYsw9hgCRMIZ",
   "effects": []

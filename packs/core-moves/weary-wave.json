@@ -1,0 +1,102 @@
+{
+  "name": "Weary Wave",
+  "type": "move",
+  "_id": "6PB2pT8mDdI3OvPU",
+  "img": "systems/ptr2e/img/svg/psychic_icon.svg",
+  "system": {
+    "slug": "weary-wave",
+    "traits": [
+      "pulse"
+    ],
+    "actions": [
+      {
+        "name": "Weary Wave",
+        "slug": "weary-wave",
+        "type": "attack",
+        "img": "icons/svg/explosion.svg",
+        "traits": [
+          "pulse"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 5,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 1
+        },
+        "types": [
+          "psychic"
+        ],
+        "category": "special",
+        "power": 40,
+        "accuracy": 100,
+        "description": "<p>Effect: On hit, the target has a 10% chance of gaining @Affliction[drowsy] 5.</p>"
+      }
+    ],
+    "grade": "E",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "effects": [
+    {
+      "name": "Weary Wave",
+      "type": "affliction",
+      "_id": "beiELWJW1AEv74so",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "weary-wave-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.drowsycondititem",
+            "predicate": [],
+            "chance": 10,
+            "affects": "target",
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0,
+        "priority": 50,
+        "formula": "",
+        "type": "damage"
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": "Item.7bIAt2TLLGJ9gGuf.ActiveEffect.UGUdX5OeefJ1eQQX",
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.2.4.2",
+        "createdTime": 1728760362749,
+        "modifiedTime": 1728760362749,
+        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
+      }
+    }
+  ]
+}

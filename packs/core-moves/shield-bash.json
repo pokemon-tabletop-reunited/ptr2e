@@ -1,14 +1,10 @@
 {
   "name": "Shield Bash",
   "type": "move",
-  "img": "/systems/ptr2e/img/svg/steel_icon.svg",
+  "img": "systems/ptr2e/img/svg/steel_icon.svg",
   "system": {
     "slug": "shield-bash",
-    "description": "Effect: This attack uses the user's DEF in calculating this move's damage, rather than ATK.",
-    "traits": [
-      "dash",
-      "contact"
-    ],
+    "traits": [],
     "actions": [
       {
         "slug": "shield-bash",
@@ -16,7 +12,8 @@
         "type": "attack",
         "traits": [
           "dash",
-          "contact"
+          "contact",
+          "pp-updated"
         ],
         "range": {
           "target": "creature",
@@ -25,10 +22,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 6,
-          "delay": null,
-          "priority": null,
-          "trigger": null
+          "powerPoints": 3
         },
         "category": "physical",
         "power": 70,
@@ -36,15 +30,16 @@
         "types": [
           "steel"
         ],
-        "description": "Effect: This attack uses the user's DEF in calculating this move's damage, rather than ATK.",
-        "contestType": "",
-        "contestEffect": "",
-        "free": false,
-        "slot": null
+        "description": "<p>Effect: This attack uses the user's DEF in calculating this move's damage, rather than ATK.</p>",
+        "img": "systems/ptr2e/img/svg/steel_icon.svg",
+        "offensiveStat": "def"
       }
     ],
-    "container": null,
-    "grade": "B"
+    "grade": "C",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
   },
   "_id": "lctMFK1EyYtA8Qx8",
   "effects": []

@@ -4,6 +4,10 @@
             <legend>
                 Details
             </legend>
+            {{#if (devMode)}}
+              {{formField fields.slug value=source.system.slug localize=true}}
+            {{/if}}
+            
             {{formField fields.consumableType value=source.system.consumableType localize=true}}
             {{formField fields.cost value=source.system.cost localize=true}}
             {{#if (eq source.system.consumableType 'pokeball')}}
@@ -16,9 +20,9 @@
             </legend>
             {{formField fields.quantity value=source.system.quantity localize=true}}
             {{formField fields.equipped.fields.carryType value=source.system.equipped.carryType localize=true}}
+            {{formField fields.equipped.fields.slot value=source.system.equipped.slot localize=true}}
             {{formField fields.equipped.fields.handsHeld value=source.system.equipped.handsHeld localize=true}}
-            {{formField fields.charges.fields.value value=source.system.charges.value localize=true}}
-            {{formField fields.charges.fields.max value=source.system.charges.max localize=true}}
+            {{formField fields.stack value=source.system.stack localize=true}}
         </fieldset>
         <fieldset>
             <legend>
@@ -37,6 +41,7 @@
             {{formField fields.fling.fields.type value=source.system.fling.type localize=true}}
             {{formField fields.fling.fields.power value=source.system.fling.power localize=true}}
             {{formField fields.fling.fields.accuracy value=source.system.fling.accuracy localize=true}} 
+            {{formField fields.fling.fields.hide value=source.system.fling.hide localize=true}} 
         </fieldset>
         <fieldset>
             <legend>

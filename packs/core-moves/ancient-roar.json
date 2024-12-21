@@ -1,7 +1,7 @@
 {
   "name": "Ancient Roar",
   "type": "move",
-  "img": "/systems/ptr2e/img/svg/rock_icon.svg",
+  "img": "systems/ptr2e/img/svg/rock_icon.svg",
   "system": {
     "slug": "ancient-roar",
     "description": "",
@@ -14,16 +14,17 @@
         "name": "Ancient Roar",
         "type": "attack",
         "traits": [
-          "sonic"
+          "sonic",
+          "pp-updated"
         ],
         "range": {
-          "target": "cone",
+          "target": "wide-line",
           "distance": 4,
           "unit": "m"
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 6,
+          "powerPoints": 4,
           "delay": null,
           "priority": null,
           "trigger": null
@@ -34,7 +35,7 @@
         "types": [
           "rock"
         ],
-        "description": null,
+        "description": "",
         "contestType": "",
         "contestEffect": "",
         "free": false,
@@ -42,7 +43,7 @@
       }
     ],
     "container": null,
-    "grade": "B"
+    "grade": "C"
   },
   "_id": "JXRibhGmDnVpNh1t",
   "effects": []

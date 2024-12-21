@@ -1,13 +1,12 @@
 {
   "name": "Fusion Flare",
   "type": "move",
-  "img": "/systems/ptr2e/img/svg/fire_icon.svg",
+  "img": "systems/ptr2e/img/svg/fire_icon.svg",
   "system": {
     "slug": "fusion-flare",
-    "description": "Effect: If Fusion Bolt was used by another creature during the current or previous round, Fusion Flare has its Power doubled.",
+    "description": "<p>Effect: If Fusion Bolt was used by another creature during the current or previous round, this attack is stronger.</p>",
     "traits": [
       "blast-1",
-      "smite",
       "legendary",
       "defrost"
     ],
@@ -18,9 +17,9 @@
         "type": "attack",
         "traits": [
           "blast-1",
-          "smite",
           "legendary",
-          "defrost"
+          "defrost",
+          "pp-updated"
         ],
         "range": {
           "target": "blast",
@@ -29,7 +28,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 8,
+          "powerPoints": 5,
           "delay": null,
           "priority": null,
           "trigger": null
@@ -40,7 +39,41 @@
         "types": [
           "fire"
         ],
-        "description": "Effect: If Fusion Bolt was used by another creature during the current or previous round, Fusion Flare has its Power doubled.",
+        "description": "",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      },
+      {
+        "slug": "fusion-flare-overdrive",
+        "name": "Fusion Flare (Overdrive)",
+        "type": "attack",
+        "traits": [
+          "blast-2",
+          "legendary",
+          "defrost",
+          "pp-updated"
+        ],
+        "range": {
+          "target": "blast",
+          "distance": 20,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 5,
+          "delay": null,
+          "priority": null,
+          "trigger": "<p>Fusion Bolt was used by another creature during the current or previous round.</p>"
+        },
+        "category": "special",
+        "power": 200,
+        "accuracy": 100,
+        "types": [
+          "fire"
+        ],
+        "description": "<p>Trigger: Fusion Bolt was used by another creature during the current or previous round.</p>",
         "contestType": "",
         "contestEffect": "",
         "free": false,
@@ -48,7 +81,7 @@
       }
     ],
     "container": null,
-    "grade": "S"
+    "grade": "B"
   },
   "_id": "arJaiRGaufTkxD9e",
   "effects": []

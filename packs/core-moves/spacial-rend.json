@@ -1,14 +1,13 @@
 {
   "name": "Spacial Rend",
   "type": "move",
-  "img": "/systems/ptr2e/img/svg/dragon_icon.svg",
+  "img": "systems/ptr2e/img/svg/dragon_icon.svg",
   "system": {
     "slug": "spacial-rend",
-    "description": "Effect: On hit, non-[Legendary] targets are Lifted 3. The user may spend 4 PP to have this attack lose [Blast 6] and change its Range to \"15m Wide Line\" until their next Activation.",
+    "description": "",
     "traits": [
       "legendary",
       "crit-2",
-      "smite",
       "sharp",
       "blast-6"
     ],
@@ -20,9 +19,9 @@
         "traits": [
           "legendary",
           "crit-2",
-          "smite",
           "sharp",
-          "blast-6"
+          "blast-3",
+          "pp-updated"
         ],
         "range": {
           "target": "blast",
@@ -31,7 +30,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 8,
+          "powerPoints": 7,
           "delay": null,
           "priority": null,
           "trigger": null
@@ -42,15 +41,50 @@
         "types": [
           "dragon"
         ],
-        "description": "Effect: On hit, non-[Legendary] targets are Lifted 3. The user may spend 4 PP to have this attack lose [Blast 6] and change its Range to \"15m Wide Line\" until their next Activation.",
+        "description": "<p>Effect: On hit, non-[Legendary] targets are @Affliction[lifted] 3.</p>",
         "contestType": "",
         "contestEffect": "",
         "free": false,
         "slot": null
+      },
+      {
+        "slug": "spacial-rend-wave",
+        "name": "Spacial Rend (Wave)",
+        "type": "attack",
+        "traits": [
+          "legendary",
+          "crit-2",
+          "sharp",
+          "pp-updated"
+        ],
+        "range": {
+          "target": "wide-line",
+          "distance": 15,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 13,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "special",
+        "power": 100,
+        "accuracy": 95,
+        "types": [
+          "dragon"
+        ],
+        "description": "<p>Effect: On hit, non-[Legendary] targets are @Affliction[lifted] 3.</p>",
+        "contestType": "",
+        "contestEffect": "",
+        "variant": "spacial-rend",
+        "free": true,
+        "slot": null
       }
     ],
     "container": null,
-    "grade": "S"
+    "grade": "A"
   },
   "_id": "SrGEHvXVGd311qxA",
   "effects": []

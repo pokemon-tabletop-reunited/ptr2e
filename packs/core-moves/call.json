@@ -1,10 +1,10 @@
 {
   "name": "Call!",
   "type": "move",
-  "img": "/systems/ptr2e/img/svg/untyped_icon.svg",
+  "img": "systems/ptr2e/img/svg/untyped_icon.svg",
   "system": {
     "slug": "call",
-    "description": "Effect: The target loses 2 Stacks on Drowsy, Nightmares, Confused, Flinched, Disabled, Suppressed, Enraged, Charmed, Fear, and Taunted conditions it possesses. A target afflicted with Hyper Mode is cured of Hyper Mode.",
+    "description": "<p>Effect: The target loses 2 Stacks on @Affliction[drowsy], @Affliction[confused], @Affliction[disabled], @Affliction[suppressed], @Affliction[enraged], @Affliction[charmed], @Affliction[fear], and @Affliction[taunted] conditions it possesses. A target afflicted with @Affliction[hyper-mode] is cured of @Affliction[hyper-mode].</p>",
     "traits": [
       "command"
     ],
@@ -12,7 +12,7 @@
       {
         "slug": "call",
         "name": "Call!",
-        "type": "attack",
+        "type": "generic",
         "traits": [
           "command"
         ],
@@ -23,25 +23,14 @@
         },
         "cost": {
           "activation": "simple",
-          "powerPoints": 2,
-          "delay": null,
-          "priority": null,
-          "trigger": null
+          "powerPoints": 1
         },
-        "category": "status",
-        "power": null,
-        "accuracy": null,
-        "types": [
-          "untyped"
-        ],
-        "description": "Effect: The target loses 2 Stacks on Drowsy, Nightmares, Confused, Flinched, Disabled, Suppressed, Enraged, Charmed, Fear, and Taunted conditions it possesses. A target afflicted with Hyper Mode is cured of Hyper Mode.",
-        "contestType": "",
-        "contestEffect": "",
-        "free": false,
-        "slot": null
+        "description": "<p>Effect: The @Affliction[drowsy], @Affliction[confused], @Affliction[disabled], @Affliction[suppressed], @Affliction[enraged], @Affliction[charmed], @Affliction[fear], and @Affliction[taunted] Afflictions the user is Afflicted with have their Stack counts reduced by 2. A target afflicted with @Affliction[hyper-mode] is cured of @Affliction[hyper-mode].</p>",
+        "img": "icons/svg/explosion.svg"
       }
     ],
-    "container": null
+    "container": null,
+    "grade": "E"
   },
   "_id": "eir0T0FTafp3GG9i",
   "effects": []

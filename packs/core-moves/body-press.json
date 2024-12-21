@@ -1,15 +1,10 @@
 {
   "name": "Body Press",
   "type": "move",
-  "img": "/systems/ptr2e/img/svg/fighting_icon.svg",
+  "img": "systems/ptr2e/img/svg/fighting_icon.svg",
   "system": {
     "slug": "body-press",
-    "description": "Effect: This Attack uses the user's DEF in calculating damage, rather than their ATK.",
-    "traits": [
-      "crushing",
-      "dash",
-      "contact"
-    ],
+    "traits": [],
     "actions": [
       {
         "slug": "body-press",
@@ -18,7 +13,8 @@
         "traits": [
           "crushing",
           "dash",
-          "contact"
+          "contact",
+          "pp-updated"
         ],
         "range": {
           "target": "creature",
@@ -27,10 +23,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 7,
-          "delay": null,
-          "priority": null,
-          "trigger": null
+          "powerPoints": 3
         },
         "category": "physical",
         "power": 80,
@@ -38,15 +31,16 @@
         "types": [
           "fighting"
         ],
-        "description": "Effect: This Attack uses the user's DEF in calculating damage, rather than their ATK.",
-        "contestType": "",
-        "contestEffect": "",
-        "free": false,
-        "slot": null
+        "description": "<p>Effect: This Attack uses the user's DEF in calculating damage, rather than their ATK.</p>",
+        "img": "systems/ptr2e/img/svg/fighting_icon.svg",
+        "offensiveStat": "def"
       }
     ],
-    "container": null,
-    "grade": "A"
+    "grade": "C",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
   },
   "_id": "14Y2q4Gi9E8pQCHQ",
   "effects": []

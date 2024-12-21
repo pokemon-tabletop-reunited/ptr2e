@@ -1,20 +1,18 @@
 {
   "name": "Sand Sling",
   "type": "move",
-  "img": "/systems/ptr2e/img/svg/ground_icon.svg",
+  "img": "systems/ptr2e/img/svg/ground_icon.svg",
   "system": {
     "slug": "sand-sling",
-    "description": "",
-    "traits": [
-      "basic"
-    ],
+    "traits": [],
     "actions": [
       {
         "slug": "sand-sling",
         "name": "Sand Sling",
         "type": "attack",
         "traits": [
-          "basic"
+          "basic",
+          "pp-updated"
         ],
         "range": {
           "target": "cone",
@@ -22,11 +20,7 @@
           "unit": "m"
         },
         "cost": {
-          "activation": "simple",
-          "powerPoints": 1,
-          "delay": null,
-          "priority": null,
-          "trigger": null
+          "activation": "complex"
         },
         "category": "physical",
         "power": 30,
@@ -34,15 +28,14 @@
         "types": [
           "ground"
         ],
-        "description": null,
-        "contestType": "",
-        "contestEffect": "",
-        "free": false,
-        "slot": null
+        "img": "systems/ptr2e/img/svg/ground_icon.svg"
       }
     ],
-    "container": null,
-    "grade": "E"
+    "grade": "E",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
   },
   "_id": "A5BW7VH780xKw7v5",
   "effects": []

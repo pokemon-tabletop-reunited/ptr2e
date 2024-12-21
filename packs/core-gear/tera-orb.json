@@ -1,6 +1,6 @@
 {
   "name": "Tera Orb",
-  "img": "/systems/ptr2e/img/icons/item_icon.webp",
+  "img": "systems/ptr2e/img/icons/equipment_icon.webp",
   "type": "equipment",
   "system": {
     "crafting": {
@@ -23,35 +23,76 @@
     "traits": [
       "phenomenon",
       "slottable",
-      "pp-pool-10"
+      "charge-pool-1"
     ],
     "actions": [
       {
-        "name": "Tera Orb",
-        "slug": "tera-orb",
-        "type": "passive",
-        "description": "Effect: The user may utilize this Item's PP Pool to pay for the PP Cost of Crystal Pitch!",
-        "img": "/systems/ptr2e/img/icons/item_icon.webp",
+        "slug": "crystal-pitch",
+        "name": "Crystal Pitch!",
+        "type": "attack",
         "traits": [
-          "Phenomenon",
-          "Slottable",
-          "PP Pool 10"
+          "phenomenon",
+          "fling"
         ],
         "range": {
-          "target": "creature",
-          "distance": 0,
+          "target": "ally",
+          "distance": 10,
           "unit": "m"
         },
         "cost": {
           "activation": "complex",
           "powerPoints": 0,
           "delay": null,
-          "priority": null
+          "priority": null,
+          "trigger": null
         },
-        "variant": null
+        "category": "status",
+        "power": null,
+        "accuracy": 100,
+        "types": [
+          "untyped"
+        ],
+        "description": "<p>Effect: The targeted loses 4 PP, and undergoes Terastilization.</p>",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      },
+      {
+        "slug": "crystal-pitch-tera-orb-charge",
+        "name": "Crystal Pitch! (Tera Orb Charge)",
+        "type": "attack",
+        "traits": [
+          "phenomenon",
+          "fling"
+        ],
+        "range": {
+          "target": "ally",
+          "distance": 10,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 0,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "status",
+        "power": null,
+        "accuracy": 100,
+        "types": [
+          "untyped"
+        ],
+        "description": "<p>Effect: The targeted undergoes Terastilization.</p>",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "variant": "crystal-pitch",
+        "slot": null
       }
     ],
-    "description": "Effect: The user may utilize this Item's PP Pool to pay for the PP Cost of Crystal Pitch!",
+    "description": "Effect: The user may utilize a charge from this Item to pay the PP Cost of Crystal Pitch! for the user or a creature on their Team.",
     "slug": null,
     "container": null,
     "quantity": 1,
@@ -67,7 +108,7 @@
   },
   "_id": "nY44TowWvFpkMDMb",
   "effects": [],
-  "folder": null,
+  "folder": "V4skAU6G3OH5fXad",
   "sort": 0,
   "ownership": {
     "default": 0,

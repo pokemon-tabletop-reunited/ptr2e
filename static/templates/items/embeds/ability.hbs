@@ -20,7 +20,15 @@
                     <small><i>No Effect Description Provided</i></small>
                 </article>
                 {{/if}}
+                {{#if document.system.isSuppressed}}
+                  <footer class="suppressed">
+                    <span class="suppressed">This Ability has been suppressed!</span>
+                  </footer>
+                {{/if}}
             </fieldset>
         </section>
     </content>
+    {{#each actions}}
+      {{> action-embed action=action}}
+    {{/each}}
 </figure>

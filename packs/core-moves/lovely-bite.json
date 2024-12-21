@@ -1,10 +1,10 @@
 {
   "name": "Lovely Bite",
   "type": "move",
-  "img": "/systems/ptr2e/img/svg/fairy_icon.svg",
+  "img": "systems/ptr2e/img/svg/fairy_icon.svg",
   "system": {
     "slug": "lovely-bite",
-    "description": "Effect: On hit, the target has a 20% chance to becomed Charmed 5.",
+    "description": "",
     "traits": [
       "jaw",
       "contact"
@@ -16,7 +16,9 @@
         "type": "attack",
         "traits": [
           "jaw",
-          "contact"
+          "contact",
+          "flinch-chance-4",
+          "pp-updated"
         ],
         "range": {
           "target": "creature",
@@ -25,7 +27,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 6,
+          "powerPoints": 1,
           "delay": null,
           "priority": null,
           "trigger": null
@@ -36,7 +38,7 @@
         "types": [
           "fairy"
         ],
-        "description": "Effect: On hit, the target has a 20% chance to becomed Charmed 5.",
+        "description": "<p>Effect: On hit, the target has a 10% chance of gaining @Affliction[charmed] 5, and a 10% chance of being Flinched.</p>",
         "contestType": "",
         "contestEffect": "",
         "free": false,
@@ -44,7 +46,7 @@
       }
     ],
     "container": null,
-    "grade": "B"
+    "grade": "E"
   },
   "_id": "aC6RDGdtZPan3cHH",
   "effects": []

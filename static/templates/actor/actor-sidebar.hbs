@@ -10,6 +10,16 @@
         </div>
     </div>
     <div class="inputs">
+        <div class="shield-current">
+            <label for="system.shield.value">{{localize fields.shield.fields.value.label}} {{localize "PTR2E.FIELDS.shield.short"}}</label>
+            {{formInput fields.shield.fields.value value=actor.system.shield.value localized=true}}
+        </div>
+        <div class="shield-max">
+            <label for="system.shield.max">{{localize fields.shield.fields.max.label}} {{localize "PTR2E.FIELDS.shield.short"}}</label>
+            {{formInput fields.shield.fields.max value=actor.system.shield.max localized=true disabled=true}}
+        </div>
+    </div>
+    <div class="inputs">
         <div class="pp-current">
             <label for="system.powerPoints.value">{{localize fields.powerPoints.fields.value.label}} {{localize "PTR2E.FIELDS.powerPoints.short"}}</label>
             {{formInput fields.powerPoints.fields.value value=actor.system.powerPoints.value localized=true}}
@@ -77,10 +87,22 @@
             {{formInput fields.battleStats.fields.evasion.fields.stage value=actor.system.battleStats.evasion.stage disabled=true}}
         </div>
     </div>
+    <div class="nature-dropdown">
+        <label for="system.nature">{{localize fields.nature.label}}</label>
+        <select name="system.nature" id="system.nature" data-dtype="String">
+            {{selectOptions natures selected=actor.system.nature localize=true}}
+        </select>
+    </div>
+    <div class="species-link">
+      <label for="species">{{localize "TYPES.Item.species"}}</label>
+      <span class="species">
+        <a class="content-link" draggable="true" data-link="" data-uuid="{{species.uuid}}" data-id="actorspeciesitem" data-type="Item" data-tooltip="Species Item"><i class="fas fa-paw"></i>{{species.name}}</a>
+      </span>
+    </div>
     <div class="perk-web-button">
         <button type="button" class="perk-web-button" data-action="open-perk-web">
             <i class="fas fa-sitemap"></i>
-            <label>{{localize "PTR2E.ActorSheet.Buttons.perkWeb"}} {{#if actor.system.advancement.advancementPoints.available}}<small class="ml-1 unspend">({{actor.system.advancement.advancementPoints.available}} Unspend!)</small>{{/if}}</label>
+            <label>{{localize "PTR2E.ActorSheet.Buttons.perkWeb"}} {{#if shouldPerkFlash}}<small class="ml-1 unspent">({{localize "PTR2E.ActorSheet.Unspent" num=actor.system.advancement.advancementPoints.available}})</small>{{/if}}</label>
         </button>
     </div>
 </aside>

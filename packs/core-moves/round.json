@@ -1,10 +1,10 @@
 {
   "name": "Round",
   "type": "move",
-  "img": "/systems/ptr2e/img/svg/normal_icon.svg",
+  "img": "systems/ptr2e/img/svg/normal_icon.svg",
   "system": {
     "slug": "round",
-    "description": "Effect: If another creature uses Round, you may use Round as a Priority 1 action with 120 Power immediately after the triggering creature's activation.",
+    "description": "<p>Effect: When another creature on the Field resolves this attack, the user may declare this attack as an Interrupt, attacking with doubled Power and increased Range.</p>",
     "traits": [
       "sonic"
     ],
@@ -14,16 +14,17 @@
         "name": "Round",
         "type": "attack",
         "traits": [
-          "sonic"
+          "sonic",
+          "pp-updated"
         ],
         "range": {
-          "target": "creature",
-          "distance": 5,
+          "target": "emanation",
+          "distance": 1,
           "unit": "m"
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 6,
+          "powerPoints": 3,
           "delay": null,
           "priority": null,
           "trigger": null
@@ -34,10 +35,44 @@
         "types": [
           "normal"
         ],
-        "description": "Effect: If another creature uses Round, you may use Round as a Priority 1 action with 120 Power immediately after the triggering creature's activation.",
+        "description": "",
         "contestType": "",
         "contestEffect": "",
         "free": false,
+        "slot": null
+      },
+      {
+        "slug": "round-double",
+        "name": "Round (Double)",
+        "type": "attack",
+        "traits": [
+          "sonic",
+          "interrupt-1",
+          "pp-updated"
+        ],
+        "range": {
+          "target": "emanation",
+          "distance": 3,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 3,
+          "delay": null,
+          "priority": null,
+          "trigger": "<p>Another creature on the Field resolves Round or Round (Double).</p>"
+        },
+        "category": "special",
+        "power": 120,
+        "accuracy": 100,
+        "types": [
+          "normal"
+        ],
+        "description": "<p>Another creature on the Field resolves Round or Round (Double).</p>",
+        "contestType": "",
+        "contestEffect": "",
+        "variant": "round",
+        "free": true,
         "slot": null
       }
     ],

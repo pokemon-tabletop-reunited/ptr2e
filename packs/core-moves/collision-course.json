@@ -1,13 +1,14 @@
 {
   "name": "Collision Course",
   "type": "move",
-  "img": "/systems/ptr2e/img/svg/fighting_icon.svg",
+  "img": "systems/ptr2e/img/svg/fighting_icon.svg",
   "system": {
     "slug": "collision-course",
-    "description": "Effect: This Attack's Power is 130 when it deals super effective damage.",
+    "description": "",
     "traits": [
       "pass-6",
       "legendary",
+      "dash",
       "contact"
     ],
     "actions": [
@@ -18,7 +19,8 @@
         "traits": [
           "pass-6",
           "legendary",
-          "contact"
+          "contact",
+          "pp-updated"
         ],
         "range": {
           "target": "creature",
@@ -27,7 +29,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 8,
+          "powerPoints": 4,
           "delay": null,
           "priority": null,
           "trigger": null
@@ -38,7 +40,7 @@
         "types": [
           "fighting"
         ],
-        "description": "Effect: This Attack's Power is 130 when it deals super effective damage.",
+        "description": "<p>Effect: If this attack deals super effective damage, its Damage is increased by 30%.</p>",
         "contestType": "",
         "contestEffect": "",
         "free": false,
@@ -46,7 +48,7 @@
       }
     ],
     "container": null,
-    "grade": "S"
+    "grade": "B"
   },
   "_id": "JvZy6cidIpLDBlJu",
   "effects": []

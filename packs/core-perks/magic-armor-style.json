@@ -1,0 +1,104 @@
+{
+  "folder": "JZrGRskscJOkkPWA",
+  "name": "Magic Armor Style",
+  "type": "perk",
+  "_id": "tXq3fwEuJwbnZk9m",
+  "img": "systems/ptr2e/img/perk-icons/Orders_Training.svg",
+  "system": {
+    "actions": [
+      {
+        "name": "Magic Armor!",
+        "slug": "magic-armor",
+        "traits": [
+          "command",
+          "style"
+        ],
+        "range": {
+          "target": "ally",
+          "distance": 20,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "simple",
+          "powerPoints": 3,
+          "delay": null,
+          "priority": null
+        },
+        "description": "Effect: The target may use SPDEF in place of their SPATK when using a Special-Category Attack for 1 Activation.",
+        "type": "generic",
+        "img": "icons/svg/explosion.svg",
+        "variant": null
+      },
+      {
+        "name": "Magic Armor! (Self)",
+        "slug": "magic-armor-self",
+        "traits": [
+          "command",
+          "style"
+        ],
+        "range": {
+          "target": "self",
+          "unit": "m",
+          "distance": 0
+        },
+        "cost": {
+          "activation": "simple",
+          "powerPoints": 3,
+          "delay": null,
+          "priority": null
+        },
+        "description": "Effect: The user may use SPDEF in place of their SPATK when using a Special-Category Attack until the end of their next Activation.",
+        "type": "generic",
+        "img": "icons/svg/explosion.svg",
+        "variant": null
+      }
+    ],
+    "slug": "magic-armor-style",
+    "description": "<p>Simple Action, 2 PP cost. Target self or allied creature. The affected creature may use SPDEF in place of their SPATK when using a Special-Category Attack until the end of their next full Activation.</p>",
+    "traits": [],
+    "prerequisites": [
+      {
+        "gte": [
+          "{actor|skills.leadership.mod}",
+          45
+        ]
+      }
+    ],
+    "cost": 2,
+    "_migration": {
+      "version": null,
+      "previous": null
+    },
+    "nodes": [
+      {
+        "connected": [
+          "type-style",
+          "agile-style",
+          "improved-flight-1-6",
+          "improved-swim-1-2"
+        ],
+        "config": {
+          "alpha": null,
+          "backgroundColor": "#0000ff",
+          "borderColor": null,
+          "borderWidth": null,
+          "texture": "systems/ptr2e/img/perk-icons/Orders_Training.svg",
+          "tint": null,
+          "scale": null
+        },
+        "hidden": false,
+        "type": "normal",
+        "x": 116,
+        "y": 135,
+        "tier": null
+      }
+    ],
+    "autoUnlock": [],
+    "originSlug": null,
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": []
+  },
+  "effects": []
+}

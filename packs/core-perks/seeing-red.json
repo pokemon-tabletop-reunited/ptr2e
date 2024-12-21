@@ -1,59 +1,143 @@
 {
-    "folder": "Et2u8UoXSe2a17oq",
-    "name": "Seeing Red",
-    "type": "perk",
-    "_id": "ZPI6ynhdFdYyxJUx",
-    "img": "systems/ptr2e/img/svg/fighting_icon.svg",
-    "system": {
-        "actions": [],
-        "slug": null,
-        "description": "<p>When you would gain the Enraged condition, extend the duration stacks to 5 stacks. If something would give you the Enraged condition again, set your stacks back to 5.</p>",
-        "traits": [],
-        "prerequisites": [
-            "[Berserker]"
+  "folder": "zrVtKATNxzLNxTUa",
+  "name": "Seeing Red",
+  "type": "perk",
+  "_id": "ZPI6ynhdFdYyxJUx",
+  "img": "systems/ptr2e/img/svg/fighting_icon.svg",
+  "system": {
+    "actions": [
+      {
+        "slug": "rage",
+        "name": "Rage",
+        "type": "attack",
+        "traits": [
+          "contact",
+          "pp-updated"
         ],
-        "cost": 2,
-        "design": {
-            "arena": "physical",
-            "approach": "power",
-            "archetype": "Berserker"
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
         },
-        "node": {
-            "i": 55,
-            "j": -83,
-            "connected": [
-                "berserker",
-                "plus-ultra",
-                "hear-no-bell"
-            ],
-            "config": {
-                "alpha": null,
-                "backgroundColor": null,
-                "borderColor": null,
-                "borderWidth": null,
-                "texture": "systems/ptr2e/img/svg/fighting_icon.svg",
-                "tint": null,
-                "scale": null
-            },
-            "hidden": false,
-            "type": "normal"
-        }
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 1,
+          "delay": null,
+          "priority": null
+        },
+        "category": "physical",
+        "power": 20,
+        "accuracy": 100,
+        "types": [
+          "normal"
+        ],
+        "description": "<p>Effect: The user gains @Affliction[enraged] 2. While @Affliction[enraged], if the user is hit by a damaging attack, they gain +1 ATK Stage for 5 activations.</p>",
+        "img": "systems/ptr2e/img/svg/fighting_icon.svg",
+        "free": true,
+        "variant": null,
+        "contestType": "",
+        "contestEffect": "",
+        "slot": null,
+        "summon": null,
+        "defaultVariant": null,
+        "flingItemId": null,
+        "offensiveStat": null,
+        "defensiveStat": null
+      }
+    ],
+    "slug": "seeing-red",
+    "description": "<p>When you would gain @Affliction[enraged], the set duration increases by +3 Stacks.<br><br>Connection: Rage</p>",
+    "traits": [],
+    "prerequisites": [
+      "trait:berserker"
+    ],
+    "cost": 2,
+    "_migration": {
+      "version": null,
+      "previous": null
     },
-    "effects": [],
-    "sort": 0,
-    "ownership": {
-        "default": 0,
-        "Kc3DOunCh3ClAeHS": 3
-    },
-    "flags": {},
-    "_stats": {
-        "compendiumSource": "Item.ZPI6ynhdFdYyxJUx",
+    "nodes": [
+      {
+        "connected": [
+          "frenzied-assault",
+          "berserk"
+        ],
+        "config": {
+          "alpha": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "borderWidth": null,
+          "texture": "systems/ptr2e/img/svg/fighting_icon.svg",
+          "tint": null,
+          "scale": null
+        },
+        "hidden": false,
+        "type": "normal",
+        "x": 58,
+        "y": 38,
+        "tier": null
+      }
+    ],
+    "autoUnlock": [],
+    "originSlug": null,
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": []
+  },
+  "effects": [
+    {
+      "name": "Seeing Red",
+      "type": "passive",
+      "_id": "Mul9Bgd2zc3DTvj8",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "rage-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.enragedcondiitem",
+            "predicate": [],
+            "chance": 100,
+            "affects": "self",
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.325",
+        "coreVersion": "12.331",
         "systemId": "ptr2e",
-        "systemVersion": "0.006",
-        "createdTime": 1717163311151,
-        "modifiedTime": 1717179573348,
+        "systemVersion": "0.10.0-alpha.4.1.0",
+        "createdTime": 1733496068419,
+        "modifiedTime": 1733496094596,
         "lastModifiedBy": "Kc3DOunCh3ClAeHS"
+      }
     }
+  ]
 }

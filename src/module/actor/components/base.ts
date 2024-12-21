@@ -24,10 +24,12 @@ class ActorComponent {
     /**
      * For injecting header buttons and other elements into the frame
      */
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     renderFrame(_close: HTMLElement) {
         // Implement in subclass
     }
 
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     attachListeners(_html: HTMLElement) {
         // Implement in subclass
     }

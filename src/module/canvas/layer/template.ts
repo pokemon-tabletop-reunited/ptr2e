@@ -39,6 +39,7 @@ export class TemplateLayerPTR2e<TObject extends MeasuredTemplatePTR2e = Measured
         const dimensions = canvas.dimensions;
 
         // Snap the destination to the grid
+        //@ts-expect-error - Foundry types are incomplete
         const { x, y } = canvas.grid.getSnappedPosition(destination.x, destination.y, this.gridPrecision);
         destination.x = x;
         destination.y = y;
@@ -123,10 +124,12 @@ export class TemplateLayerPTR2e<TObject extends MeasuredTemplatePTR2e = Measured
             },
             wheelAbortController: new AbortController(),
             mousedown: (event: PIXI.FederatedPointerEvent): void => {
-                event.stopPropagation();//@ts-ignore
+                event.stopPropagation();
+                //@ts-expect-error - Foundry types are incomplete
                 preview.snapForShape();
                 const { document, position } = preview;
                 this.#deactivatePreviewListeners(initialLayer, event);
+                //@ts-expect-error - Foundry types are incomplete
                 document.updateSource(canvas.grid.getSnappedPosition(position.x, position.y, this.gridPrecision));
                 canvas.scene?.createEmbeddedDocuments("MeasuredTemplate", [document.toObject()]);
             },

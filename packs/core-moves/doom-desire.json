@@ -1,15 +1,13 @@
 {
   "name": "Doom Desire",
   "type": "move",
-  "img": "/systems/ptr2e/img/svg/steel_icon.svg",
+  "img": "systems/ptr2e/img/svg/steel_icon.svg",
   "system": {
     "slug": "doom-desire",
-    "description": "Effect: When this attack is used, the user takes a defensive stance and reduces incoming damage by 25% until. After 3 other creatures' activations, the user attacks with Doom Desire and exits the defensive stance.",
+    "description": "",
     "traits": [
       "legendary",
-      "smite",
-      "defensive",
-      "delay-3"
+      "blast-3"
     ],
     "actions": [
       {
@@ -18,19 +16,18 @@
         "type": "attack",
         "traits": [
           "legendary",
-          "smite",
-          "defensive",
-          "delay-3"
+          "blast-3",
+          "pp-updated"
         ],
         "range": {
-          "target": "creature",
-          "distance": 20,
+          "target": "blast",
+          "distance": 25,
           "unit": "m"
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 8,
-          "delay": 3,
+          "powerPoints": 6,
+          "delay": null,
           "priority": null,
           "trigger": null
         },
@@ -40,7 +37,7 @@
         "types": [
           "steel"
         ],
-        "description": "Effect: When this attack is used, the user takes a defensive stance and reduces incoming damage by 25% until. After 3 other creatures' activations, the user attacks with Doom Desire and exits the defensive stance.",
+        "description": "<p>Effect: When this attack is declared, the user rolls to hit valid target(s) at the start of the user's first Activation in the following Round.</p>",
         "contestType": "",
         "contestEffect": "",
         "free": false,
@@ -48,7 +45,7 @@
       }
     ],
     "container": null,
-    "grade": "S"
+    "grade": "B"
   },
   "_id": "0idrtcsbkR1V3St0",
   "effects": []

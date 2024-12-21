@@ -1,0 +1,43 @@
+<div class="form-group">
+    <label class="short">{{localize "PTR2E.Effect.FIELDS.ChangeSelector.label"}}</label>
+    <div class="form-fields">
+        <input type="text" name="{{basePath}}.key" value="{{change.selector}}" />
+    </div>
+</div>
+
+<div class="form-group">
+    <label class="short">{{localize "PTR2E.Effect.FIELDS.ChangeUuid.label"}}</label>
+    <div class="form-fields">
+        <input type="text" name="{{basePath}}.value" value="{{change.uuid}}" />
+    </div>
+</div>
+
+<div class="form-group">
+    <label class="short">{{localize "PTR2E.Effect.FIELDS.ChangeChance.label"}}</label>
+    <div class="form-fields">
+        <input type="number" name="{{basePath}}.chance" value="{{change.chance}}" />
+    </div>
+</div>
+
+<div class="form-group">
+    <label class="short">{{localize "PTR2E.Effect.FIELDS.ChangeAffects.label"}}</label>
+    <div class="form-fields">
+      <div>
+        <input type="radio" name="{{basePath}}.affects" value="target" {{#if (is change.affects 'target')}}checked{{/if}} />
+        <label>{{localize "PTR2E.Effect.FIELDS.ChangeAffects.target"}}</label>
+      </div>
+      <div>
+        <input type="radio" name="{{basePath}}.affects" value="self" {{#if (is change.affects 'self')}}checked{{/if}} />
+        <label>{{localize "PTR2E.Effect.FIELDS.ChangeAffects.self"}}</label>
+      </div>
+      <div>
+        <input type="radio" name="{{basePath}}.affects" value="origin" {{#if (is change.affects 'origin')}}checked{{/if}} />
+        <label>{{localize "PTR2E.Effect.FIELDS.ChangeAffects.origin"}}</label>
+      </div>
+    </div>
+</div>
+
+<div class="form-group">
+    <label class="short">{{localize fields.predicate.label}}</label>
+    <input type="text" name="{{basePath}}.predicate" value="{{json change.predicate spaces=0}}" />
+</div>

@@ -1,12 +1,14 @@
 {
   "name": "Heart Stamp",
   "type": "move",
-  "img": "/systems/ptr2e/img/svg/psychic_icon.svg",
+  "img": "systems/ptr2e/img/svg/psychic_icon.svg",
   "system": {
     "slug": "heart-stamp",
-    "description": "Effect: On hit, the target has a 30% chance of being Flinched 5.",
+    "description": "",
     "traits": [
-      "contact"
+      "contact",
+      "flinch-chance-3",
+      "pp-updated"
     ],
     "actions": [
       {
@@ -14,7 +16,9 @@
         "name": "Heart Stamp",
         "type": "attack",
         "traits": [
-          "contact"
+          "contact",
+          "flinch-chance-3",
+          "pp-updated"
         ],
         "range": {
           "target": "creature",
@@ -23,7 +27,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 4,
+          "powerPoints": 2,
           "delay": null,
           "priority": null,
           "trigger": null
@@ -34,7 +38,7 @@
         "types": [
           "psychic"
         ],
-        "description": "Effect: On hit, the target has a 30% chance of being Flinched 5.",
+        "description": "<p>Effect: On hit, the target has a 30% chance of being Flinched.</p>",
         "contestType": "",
         "contestEffect": "",
         "free": false,
@@ -42,7 +46,7 @@
       }
     ],
     "container": null,
-    "grade": "C"
+    "grade": "E"
   },
   "_id": "GOMWacqt0eKWKfcd",
   "effects": []

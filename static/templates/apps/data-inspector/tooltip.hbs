@@ -1,0 +1,19 @@
+<p><label>{{localize 'PTR2E.DataInspector.Path'}}</label>:<br><span class='path'>{{path}}</span></p>
+<p><label>{{localize 'PTR2E.DataInspector.Type'}}</label>: <span class='type'>{{type}}</span></p>
+{{#if documentId}}
+<p><label>{{localize 'PTR2E.DataInspector.DocumentID'}}</label>: <span class='document-id'>{{documentId}}</span></p>
+{{/if}}
+{{#if isContainer}}
+<p><label>{{localize 'PTR2E.DataInspector.ChildCount'}}</label>: <span class='children'>{{children}}</span></p>
+{{/if}}
+{{#if isString}}
+<p><label>{{localize 'PTR2E.DataInspector.StringLength'}}</label>: <span class='length'>{{length}}</span></p>
+{{/if}}
+<div class='in-data'>
+  {{#each inData}}
+  <div class='data-source {{@key}}'>
+    <label class='header'>{{localize label}}</label>
+    <span class='value'>{{#if present}}<i class="fa-solid fa-check"></i>{{else}}<i class="fa-solid fa-xmark"></i>{{/if}}</span>
+  </div>
+  {{/each}}
+</div>

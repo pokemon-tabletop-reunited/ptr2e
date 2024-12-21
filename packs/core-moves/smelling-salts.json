@@ -1,12 +1,13 @@
 {
   "name": "Smelling Salts",
   "type": "move",
-  "img": "/systems/ptr2e/img/svg/normal_icon.svg",
+  "img": "systems/ptr2e/img/svg/normal_icon.svg",
   "system": {
     "slug": "smelling-salts",
-    "description": "Effect: If the target gains Paralysis, Smelling Salts has 140 power. A target that has Paralysis is cured of Paralysis after Smelling Salts resolves.",
+    "description": "<p>Trigger: The target has @Affliction[paralysis].</p><p>Effect: This attack's Power is doubled. On resolution, the target is cured of @Affliction[paralysis], and is Flinched.</p>",
     "traits": [
-      "contact"
+      "flinch-5",
+      "pp-updated"
     ],
     "actions": [
       {
@@ -14,7 +15,8 @@
         "name": "Smelling Salts",
         "type": "attack",
         "traits": [
-          "contact"
+          "contact",
+          "pp-updated"
         ],
         "range": {
           "target": "creature",
@@ -23,7 +25,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 7,
+          "powerPoints": 2,
           "delay": null,
           "priority": null,
           "trigger": null
@@ -34,15 +36,48 @@
         "types": [
           "normal"
         ],
-        "description": "Effect: If the target gains Paralysis, Smelling Salts has 140 power. A target that has Paralysis is cured of Paralysis after Smelling Salts resolves.",
+        "description": "",
         "contestType": "",
         "contestEffect": "",
         "free": false,
         "slot": null
+      },
+      {
+        "slug": "smelling-salts-paralyzed",
+        "name": "Smelling Salts (Paralyzed)",
+        "type": "attack",
+        "traits": [
+          "flinch-5",
+          "pp-updated"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 5,
+          "delay": null,
+          "priority": null,
+          "trigger": "<p>The target has @Affliction[paralysis].</p>"
+        },
+        "category": "physical",
+        "power": 140,
+        "accuracy": 100,
+        "types": [
+          "normal"
+        ],
+        "description": "<p>Trigger: The target has @Affliction[paralysis]..</p><p>Effect: On resolution, the target is cured of The target has @Affliction[paralysis], and is Flinched.</p>",
+        "contestType": "",
+        "contestEffect": "",
+        "variant": "smelling-salts",
+        "free": true,
+        "slot": null
       }
     ],
     "container": null,
-    "grade": "A"
+    "grade": "B"
   },
   "_id": "qtFxob1JHeUKKR2H",
   "effects": []

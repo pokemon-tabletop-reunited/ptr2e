@@ -1,5 +1,5 @@
 import { ChangeModelTypes } from '../models/base.ts';
-import { ChangeModel } from '@data';
+import { ChangeModel, ChangeSchema } from '@data';
 import { TemplateConstructor } from './data-template.ts';
 
 /**
@@ -7,25 +7,31 @@ import { TemplateConstructor } from './data-template.ts';
  * @group Mixins
  */
 export default function HasChanges<BaseClass extends TemplateConstructor>(baseClass: BaseClass) {
-    class TemplateClass extends baseClass {
-        static override defineSchema(): foundry.data.fields.DataSchema {
-            const fields = foundry.data.fields;
+  class TemplateClass extends baseClass {
+    static override defineSchema(): ChangesSchema {
+      const fields = foundry.data.fields;
 
-            return {
-                ...super.defineSchema(),
+      return {
+        ...super.defineSchema(),
 
-                changes: new fields.ArrayField(new fields.TypedSchemaField(ChangeModelTypes(), { required: true, initial: [], nullable: false }))
-            };
-        }
+        changes: new fields.ArrayField<ChangesField, foundry.data.fields.SourcePropFromDataField<ChangeModel>[], foundry.data.fields.SourcePropFromDataField<ChangeModel>[], true, false, true>(
+          new fields.TypedSchemaField<ModelPropsFromSchema<ChangeSchema>, ChangeModel, true, false, true>(ChangeModelTypes(), { required: true, nullable: false }),
+          { required: true, nullable: false, initial: [] }
+        )
+      };
     }
+  }
 
-    interface TemplateClass {
-        changes: ChangeModel[];
 
-        _source: InstanceType<typeof baseClass>['_source'] & {
-            changes: ChangeModel[];
-        }
-    }
+  interface TemplateClass extends ModelPropsFromSchema<ChangesSchema> {
+    _source: SourceFromSchema<ChangesSchema>;
+  }
 
-    return TemplateClass;
+  return TemplateClass;
 }
+
+export interface ChangesSchema extends foundry.data.fields.DataSchema {
+  changes: foundry.data.fields.ArrayField<ChangesField, foundry.data.fields.SourcePropFromDataField<ChangesField>[], foundry.data.fields.ModelPropFromDataField<ChangesField>[], true, false, true>;
+}
+
+type ChangesField = foundry.data.fields.TypedSchemaField<ModelPropsFromSchema<ChangeSchema>, ChangeModel, true, false, true>

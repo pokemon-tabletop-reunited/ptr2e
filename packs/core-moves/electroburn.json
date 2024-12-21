@@ -1,0 +1,109 @@
+{
+  "name": "Electroburn",
+  "type": "move",
+  "_id": "ww6edyhA67Br8BSD",
+  "img": "systems/ptr2e/img/svg/electric_icon.svg",
+  "system": {
+    "slug": "electroburn",
+    "traits": [],
+    "actions": [
+      {
+        "name": "Electroburn",
+        "slug": "electroburn",
+        "type": "attack",
+        "img": "systems/ptr2e/img/svg/electric_icon.svg",
+        "traits": [
+          "contact"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 2
+        },
+        "types": [
+          "electric",
+          "fire"
+        ],
+        "category": "physical",
+        "power": 80,
+        "accuracy": 90,
+        "description": "<p>Effect: On hit, the target has a 20% chance of gaining @Affliction[paralysis] 5, and a 20% chance of gaining @Affliction[burn] 5. This attack is both Electric and Fire.</p>"
+      }
+    ],
+    "grade": "D",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "effects": [
+    {
+      "name": "Electroburn",
+      "type": "passive",
+      "_id": "6L747ckNdtFUT5QX",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "electroburn-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.paralysisconitem",
+            "predicate": [],
+            "chance": 20,
+            "affects": "target",
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "roll-effect",
+            "key": "electroburn-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.burnconditioitem",
+            "predicate": [],
+            "chance": 20,
+            "affects": "target",
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.3.0.0",
+        "createdTime": 1729541224979,
+        "modifiedTime": 1729541298219,
+        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
+      }
+    }
+  ]
+}

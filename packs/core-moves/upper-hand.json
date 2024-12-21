@@ -1,10 +1,10 @@
 {
   "name": "Upper Hand",
   "type": "move",
-  "img": "/systems/ptr2e/img/svg/fighting_icon.svg",
+  "img": "systems/ptr2e/img/svg/fighting_icon.svg",
   "system": {
     "slug": "upper-hand",
-    "description": "Trigger: You are targeted by a Physical- or Special-Category Attack.\nEffect: The user can freely move up to half of the Movement Score of their choice towards the target and then attacks with Upper Hand, if possible. If the target Faints due to damage from this move, the triggering attack fails.",
+    "description": "<p>Trigger: The user is targeted by a  Attack.</p><p>Effect: The user can freely move up to half of the Movement Score of their choice towards the target and then attacks with Upper Hand, if possible. If the target gains @Affliction[fainted] due to damage from this move, the triggering attack fails.</p>",
     "traits": [
       "punch",
       "dash",
@@ -18,9 +18,8 @@
         "type": "attack",
         "traits": [
           "punch",
-          "dash",
-          "interrupt-2",
-          "contact"
+          "contact",
+          "pp-updated"
         ],
         "range": {
           "target": "creature",
@@ -29,10 +28,10 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 7,
+          "powerPoints": 3,
           "delay": null,
           "priority": null,
-          "trigger": "You are targeted by a Physical- or Special-Category Attack."
+          "trigger": ""
         },
         "category": "physical",
         "power": 65,
@@ -40,15 +39,51 @@
         "types": [
           "fighting"
         ],
-        "description": "Trigger: You are targeted by a Physical- or Special-Category Attack.\nEffect: The user can freely move up to half of the Movement Score of their choice towards the target and then attacks with Upper Hand, if possible. If the target Faints due to damage from this move, the triggering attack fails.",
+        "description": "",
         "contestType": "",
         "contestEffect": "",
+        "free": false,
+        "slot": null
+      },
+      {
+        "slug": "upper-hand-reaction",
+        "name": "Upper Hand (Reaction)",
+        "type": "attack",
+        "traits": [
+          "punch",
+          "dash",
+          "interrupt-2",
+          "contact",
+          "pp-updated"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 3,
+          "delay": null,
+          "priority": null,
+          "trigger": "<p>The user is targeted by a  Attack.</p>"
+        },
+        "category": "physical",
+        "power": 65,
+        "accuracy": 100,
+        "types": [
+          "fighting"
+        ],
+        "description": "<p>Trigger: The user is targeted by a  Attack.</p><p>Effect: The user can freely move up to half of the Movement Score of their choice towards the target and then attacks with Upper Hand, if possible. If the target gains @Affliction[fainted] due to damage from this move, the triggering attack fails.</p>",
+        "contestType": "",
+        "contestEffect": "",
+        "variant": "upper-hand",
         "free": false,
         "slot": null
       }
     ],
     "container": null,
-    "grade": "A"
+    "grade": "D"
   },
   "_id": "PSM4n8qYVeHDnQEk",
   "effects": []

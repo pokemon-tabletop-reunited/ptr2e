@@ -1,0 +1,106 @@
+{
+  "name": "Yesterday and Today",
+  "type": "perk",
+  "folder": "aUkQAkBYAmrv6REK",
+  "system": {
+    "prerequisites": [
+      "item:perk:palaeontologist",
+      {
+        "xof": [
+          {
+            "gte": [
+              "{actor|skills.archaeology.mod}",
+              40
+            ]
+          },
+          {
+            "gte": [
+              "{actor|skills.biology.mod}",
+              40
+            ]
+          },
+          {
+            "gte": [
+              "{actor|skills.botany.mod}",
+              40
+            ]
+          },
+          {
+            "gte": [
+              "{actor|skills.geology.mod}",
+              40
+            ]
+          },
+          {
+            "gte": [
+              "{actor|skills.zoology.mod}",
+              40
+            ]
+          }
+        ],
+        "x": 3
+      }
+    ],
+    "cost": 2,
+    "description": "<p>You can access to the [Fossil] Tutor List, and may tutor Attacks from the from that Tutor List as if you knew them already yourself, up to your Grade. You receive +20 on Teaching Checks to Tutor [Fossil] creatures.</p>",
+    "actions": [
+      {
+        "name": "Yesterday and Today",
+        "slug": "yesterday-and-today",
+        "description": "<p>You can access to the [Fossil] Tutor List, and may tutor Attacks from the from that Tutor List as if you knew them already yourself, up to your Grade. You receive +20 on Teaching Checks to Tutor [Fossil] creatures.</p>",
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 0,
+          "delay": null,
+          "priority": null
+        },
+        "type": "generic",
+        "traits": [],
+        "img": "icons/svg/explosion.svg",
+        "range": {
+          "target": "enemy",
+          "unit": "m",
+          "distance": 0
+        },
+        "variant": null
+      }
+    ],
+    "slug": "yesterday-and-today",
+    "traits": [],
+    "_migration": {
+      "version": null,
+      "previous": null
+    },
+    "nodes": [
+      {
+        "connected": [
+          "finding-lifes-way",
+          "palaeontologist"
+        ],
+        "config": {
+          "alpha": null,
+          "backgroundColor": "#804000",
+          "borderColor": null,
+          "borderWidth": null,
+          "texture": "systems/ptr2e/img/perk-icons/Exploration.svg",
+          "tint": null,
+          "scale": null
+        },
+        "hidden": false,
+        "type": "normal",
+        "x": 81,
+        "y": 142,
+        "tier": null
+      }
+    ],
+    "autoUnlock": [],
+    "originSlug": null,
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": []
+  },
+  "_id": "tNwQxSzvK1hy3rJk",
+  "img": "systems/ptr2e/img/perk-icons/Exploration.svg",
+  "effects": []
+}

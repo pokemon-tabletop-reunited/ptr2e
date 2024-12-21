@@ -1,12 +1,14 @@
 {
   "name": "Wake-Up Slap",
   "type": "move",
-  "img": "/systems/ptr2e/img/svg/fighting_icon.svg",
+  "img": "systems/ptr2e/img/svg/fighting_icon.svg",
   "system": {
     "slug": "wake-up-slap",
-    "description": "Effect: If the target has the Drowsy or Nightmares condition, this Attack's Power doubles and the target is cured of Drowsy or Nightmares on hit, with the target gaining Flinched 5.",
+    "description": "<p>Trigger: The target has @Affliction[drowsy] or @Affliction[nightmares].</p><p>Effect: This attack's Power is doubled. On resolution, the target is cured of @Affliction[drowsy] and @Affliction[nightmares], and is Flinched.",
     "traits": [
-      "contact"
+      "contact",
+      "flinch-5",
+      "pp-updated"
     ],
     "actions": [
       {
@@ -14,7 +16,8 @@
         "name": "Wake-Up Slap",
         "type": "attack",
         "traits": [
-          "contact"
+          "contact",
+          "pp-updated"
         ],
         "range": {
           "target": "creature",
@@ -23,7 +26,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 7,
+          "powerPoints": 2,
           "delay": null,
           "priority": null,
           "trigger": null
@@ -34,15 +37,49 @@
         "types": [
           "fighting"
         ],
-        "description": "Effect: If the target has the Drowsy or Nightmares condition, this Attack's Power doubles and the target is cured of Drowsy or Nightmares on hit, with the target gaining Flinched 5.",
+        "description": "",
         "contestType": "",
         "contestEffect": "",
         "free": false,
         "slot": null
+      },
+      {
+        "slug": "wake-up-slap-sleeper",
+        "name": "Wake-Up Slap (Sleeper)",
+        "type": "attack",
+        "traits": [
+          "contact",
+          "flinch-5",
+          "pp-updated"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 5,
+          "delay": null,
+          "priority": null,
+          "trigger": "<p>The target has @Affliction[drowsy] or @Affliction[nightmares].</p>"
+        },
+        "category": "physical",
+        "power": 140,
+        "accuracy": 100,
+        "types": [
+          "fighting"
+        ],
+        "description": "<p>Trigger: The target has @Affliction[drowsy] or @Affliction[nightmares].</p><p>Effect: On resolution, the target is cured of @Affliction[drowsy] and @Affliction[nightmares], and is Flinched.</p>",
+        "contestType": "",
+        "contestEffect": "",
+        "variant": "wake-up-slap",
+        "free": true,
+        "slot": null
       }
     ],
     "container": null,
-    "grade": "A"
+    "grade": "B"
   },
   "_id": "0Fa6CTcxg45VyXNP",
   "effects": []

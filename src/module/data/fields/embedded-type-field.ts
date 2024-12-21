@@ -42,6 +42,7 @@ export class EmbeddedTypeDataField extends foundry.data.fields.EmbeddedDataField
         )
     }
 
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     override initialize(value: any, parent: ConstructorOf<foundry.abstract.DataModel>, options: any = {}): foundry.abstract.TypeDataModel {
         if (!value) return value;
 

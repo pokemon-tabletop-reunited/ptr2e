@@ -188,6 +188,14 @@ declare global {
         /* -------------------------------------------- */
 
         /**
+         * Get the current history state of the Combat encounter.
+         * @param {Combatant} [combatant]       The new active combatant
+         * @returns {CombatHistoryData}
+         * @protected
+         */
+        _getCurrentState(combatant: Combatant<this>): CombatHistoryData;
+
+        /**
          * Manage the execution of Combat lifecycle events.
          * This method orchestrates the execution of four events in the following order, as applicable:
          * 1. End Turn

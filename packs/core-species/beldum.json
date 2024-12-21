@@ -1,7 +1,7 @@
 {
   "name": "beldum",
   "type": "species",
-  "img": "/systems/ptr2e/img/icons/species_icon.webp",
+  "img": "systems/ptr2e/img/icons/species_icon.webp",
   "system": {
     "number": 374,
     "size": {
@@ -31,30 +31,55 @@
       "hover",
       "underdog",
       "telepath",
+      "telekinetic-2",
       "magnetic"
     ],
     "abilities": {
       "starting": [
-        "clear-body",
-        "think-tank"
+        {
+          "slug": "clear-body"
+        },
+        {
+          "slug": "think-tank"
+        }
       ],
       "basic": [
-        "light-metal",
-        "magnet-pull"
+        {
+          "slug": "light-metal"
+        },
+        {
+          "slug": "magnet-pull"
+        }
       ],
       "advanced": [
-        "lead-skin",
-        "rock-head"
+        {
+          "slug": "lead-skin"
+        },
+        {
+          "slug": "rock-head"
+        }
       ],
       "master": [
-        "download",
-        "simple"
+        {
+          "slug": "download"
+        },
+        {
+          "slug": "simple"
+        }
       ]
     },
     "skills": [
       {
         "slug": "conversation",
         "value": 35,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "flying",
+        "value": 30,
         "rvs": 0,
         "favourite": false,
         "hidden": false,
@@ -109,7 +134,7 @@
         "group": null
       },
       {
-        "slug": "occult-psychic",
+        "slug": "psychic",
         "value": 35,
         "rvs": 0,
         "favourite": false,
@@ -149,7 +174,7 @@
         "group": null
       }
     ],
-    "slug": "",
+    "slug": "beldum",
     "stats": {
       "hp": 40,
       "atk": 55,
@@ -166,51 +191,43 @@
       "tutor": [
         {
           "name": "headbutt",
-          "gen": "heartgold-soulsilver",
-          "uuid": "Compendium.ptr2e.core-moves.Item.BzZjntvWTP1swwKG"
+          "gen": "heartgold-soulsilver"
         },
         {
           "name": "iron-defense",
-          "gen": "ultra-sun-ultra-moon",
-          "uuid": "Compendium.ptr2e.core-moves.Item.qSWTxI39iL7ivEVw"
+          "gen": "ultra-sun-ultra-moon"
         },
         {
           "name": "zen-headbutt",
-          "gen": "ultra-sun-ultra-moon",
-          "uuid": "Compendium.ptr2e.core-moves.Item.cTCWHk9SbPBiQOvB"
+          "gen": "ultra-sun-ultra-moon"
         },
         {
           "name": "iron-head",
-          "gen": "ultra-sun-ultra-moon",
-          "uuid": "Compendium.ptr2e.core-moves.Item.0rhyfVFsZ1asQIwv"
+          "gen": "ultra-sun-ultra-moon"
         },
         {
           "name": "steel-beam",
-          "gen": "sword-shield",
-          "uuid": "Compendium.ptr2e.core-moves.Item.5Srn3lfprE15Xo10"
+          "gen": "sword-shield"
         },
         {
           "name": "tera-blast",
-          "gen": "scarlet-violet",
-          "uuid": "Compendium.ptr2e.core-moves.Item.13ujOwTEjKRN9bpE"
+          "gen": "scarlet-violet"
         }
       ],
       "levelUp": [
         {
           "name": "tackle",
           "level": 1,
-          "gen": "scarlet-violet",
-          "uuid": "Compendium.ptr2e.core-moves.Item.fWOSmnI68Lct2LUn"
+          "gen": "scarlet-violet"
         },
         {
           "name": "take-down",
           "level": 1,
-          "gen": "ultra-sun-ultra-moon",
-          "uuid": "Compendium.ptr2e.core-moves.Item.uO99VTvrh96awdWK"
+          "gen": "ultra-sun-ultra-moon"
         }
       ]
     },
-    "captureRate": 3,
+    "captureRate": 45,
     "eggGroups": [
       "mineral"
     ],
@@ -235,7 +252,7 @@
               "methods": [
                 {
                   "type": "level",
-                  "level": 45,
+                  "level": 55,
                   "operand": "and"
                 }
               ],

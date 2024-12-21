@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { PTUActor } from "@actor";
 import { PTUItem } from "@item";
 import { ItemSheetOptions } from "@item/sheet.ts";
@@ -5,7 +6,7 @@ import { ItemSheetOptions } from "@item/sheet.ts";
 export default class PTUSheet extends DocumentSheet {
     static override get defaultOptions() {
         const options = super.defaultOptions;
-        options.template = "/systems/ptr2e/templates/ptu-conversion.hbs";
+        options.template = "systems/ptr2e/templates/ptu-conversion.hbs";
         options.width = 580;
         options.height = 680;
         options.classes.push("ptu-sheet");
@@ -94,8 +95,6 @@ export default class PTUSheet extends DocumentSheet {
     }
 
     protected override async _onSubmit(
-        _event: Event,
-        _options?: OnSubmitFormOptions | undefined
     ): Promise<false | Record<string, unknown>> {
         return false;
     }

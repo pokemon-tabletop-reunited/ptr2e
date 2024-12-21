@@ -6,6 +6,7 @@ import * as Documents from "./documents/module.ts";
 import * as Packages from "./packages/module.ts";
 import * as Utils from "./utils/module.ts";
 import * as Applications from "./applications/module.ts";
+import * as CanvasS from "../client-esm/canvas/module.ts";
 
 // global-modifying module
 import "./primitives/module.d.ts";
@@ -29,6 +30,8 @@ declare global {
             export import utils = Utils;
             /** Application classes which represent user interface windows. */
             export import applications = Applications;
+
+            export import canvas = CanvasS;
         }
     }
 }

@@ -1,7 +1,7 @@
 {
   "name": "Scratch",
   "type": "move",
-  "img": "/systems/ptr2e/img/svg/normal_icon.svg",
+  "img": "systems/ptr2e/img/svg/normal_icon.svg",
   "system": {
     "slug": "scratch",
     "description": "",
@@ -16,7 +16,8 @@
         "type": "attack",
         "traits": [
           "sharp",
-          "contact"
+          "contact",
+          "pp-updated"
         ],
         "range": {
           "target": "creature",
@@ -24,8 +25,8 @@
           "unit": "m"
         },
         "cost": {
-          "activation": "simple",
-          "powerPoints": 2,
+          "activation": "complex",
+          "powerPoints": 0,
           "delay": null,
           "priority": null,
           "trigger": null
@@ -36,14 +37,15 @@
         "types": [
           "normal"
         ],
-        "description": null,
+        "description": "",
         "contestType": "",
         "contestEffect": "",
         "free": false,
         "slot": null
       }
     ],
-    "container": null
+    "container": null,
+    "grade": "E"
   },
   "_id": "rpka3XlZLzOViXR7",
   "effects": []

@@ -1,13 +1,13 @@
 {
   "name": "Windvane",
   "type": "ability",
-  "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+  "img": "systems/ptr2e/img/svg/flying_icon.svg",
   "system": {
     "actions": [
       {
         "traits": [
-          "connection",
-          "weather"
+          "weather",
+          "interrupt-2"
         ],
         "name": "Windvane",
         "slug": "windvane",
@@ -15,44 +15,50 @@
         "cost": {
           "activation": "simple",
           "powerPoints": 2,
-          "trigger": "The user uses Tailwind.",
-          "delay": null,
-          "priority": null
+          "trigger": "<p>The user declares Tailwind.</p>"
         },
         "range": {
           "target": "field",
-          "distance": 0,
           "unit": "m"
         },
-        "description": "Trigger: The user uses Tailwind.\nEffect: Connection - Tailwind. The set Windy Weather has its duration increased by +2 Rounds."
+        "description": "<p>Trigger: The user declares Tailwind.</p><p>Effect: The set Windy Weather has its duration increased by +2 Rounds.</p>",
+        "img": "icons/svg/explosion.svg"
+      },
+      {
+        "slug": "tailwind",
+        "name": "Tailwind",
+        "type": "attack",
+        "traits": [
+          "weather"
+        ],
+        "range": {
+          "target": "field",
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 4
+        },
+        "category": "status",
+        "types": [
+          "flying"
+        ],
+        "description": "<p>Effect: The weather becomes Windy for 3 rounds.</p>",
+        "free": true,
+        "img": "icons/svg/explosion.svg"
       }
     ],
-    "description": "Trigger: The user uses Tailwind.\nEffect: Connection - Tailwind. The set Windy Weather has its duration increased by +2 Rounds.",
+    "description": "<p>Trigger: The user declares Tailwind.</p><p>Effect: Connection - Tailwind. The set Windy Weather has its duration increased by +2 Rounds.</p>",
     "traits": [
       "connection",
       "weather"
     ],
-    "slug": null,
-    "container": null
+    "slug": "windvane",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
   },
   "_id": "t8k9AGD2NcCxxW2f",
-  "effects": [],
-  "folder": null,
-  "sort": 0,
-  "ownership": {
-    "default": 0,
-    "tXAZ3QUgjuwX4gdV": 3
-  },
-  "flags": {},
-  "_stats": {
-    "compendiumSource": null,
-    "duplicateSource": null,
-    "coreVersion": "12.324",
-    "systemId": "ptr2e",
-    "systemVersion": "0.005",
-    "createdTime": 1716919240454,
-    "modifiedTime": 1716919240454,
-    "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
-  },
-  "_key": "!items!t8k9AGD2NcCxxW2f"
+  "effects": []
 }

@@ -1,16 +1,10 @@
 {
   "name": "Blaster Knuckle",
   "type": "move",
-  "img": "/systems/ptr2e/img/svg/fighting_icon.svg",
+  "img": "systems/ptr2e/img/svg/fighting_icon.svg",
   "system": {
     "slug": "blaster-knuckle",
-    "description": "Effect: This attack is considered to be both Fighting and Fire Type.",
-    "traits": [
-      "punch",
-      "pass-4",
-      "explode",
-      "defrost"
-    ],
+    "traits": [],
     "actions": [
       {
         "slug": "blaster-knuckle",
@@ -20,7 +14,8 @@
           "punch",
           "pass-4",
           "explode",
-          "defrost"
+          "defrost",
+          "pp-updated"
         ],
         "range": {
           "target": "creature",
@@ -29,26 +24,24 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 6,
-          "delay": null,
-          "priority": null,
-          "trigger": null
+          "powerPoints": 6
         },
         "category": "physical",
         "power": 100,
         "accuracy": 85,
         "types": [
-          "fighting"
+          "fighting",
+          "fire"
         ],
-        "description": "Effect: This attack is considered to be both Fighting and Fire Type.",
-        "contestType": "",
-        "contestEffect": "",
-        "free": false,
-        "slot": null
+        "description": "<p>Effect: This attack is considered to be both Fighting and Fire Type.</p>",
+        "img": "systems/ptr2e/img/svg/fighting_icon.svg"
       }
     ],
-    "container": null,
-    "grade": "A"
+    "grade": "B",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
   },
   "_id": "a6B03X7ci0Ta4bSS",
   "effects": []

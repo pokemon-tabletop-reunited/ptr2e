@@ -1,10 +1,10 @@
 {
   "name": "Retaliate",
   "type": "move",
-  "img": "/systems/ptr2e/img/svg/normal_icon.svg",
+  "img": "systems/ptr2e/img/svg/normal_icon.svg",
   "system": {
     "slug": "retaliate",
-    "description": "Effect: If an ally has Fainted this round, Retaliate's Power is 140.",
+    "description": "<p>Effect: If an ally has @Affliction[fainted] this round, Retaliate's Power is doubled.</p>",
     "traits": [
       "contact"
     ],
@@ -14,7 +14,8 @@
         "name": "Retaliate",
         "type": "attack",
         "traits": [
-          "contact"
+          "contact",
+          "pp-updated"
         ],
         "range": {
           "target": "creature",
@@ -23,7 +24,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 8,
+          "powerPoints": 5,
           "delay": null,
           "priority": null,
           "trigger": null
@@ -34,14 +35,48 @@
         "types": [
           "normal"
         ],
-        "description": "Effect: If an ally has Fainted this round, Retaliate's Power is 140.",
+        "description": "<p>Effect: If an ally has @Affliction[fainted] this round, Retaliate's Power is doubled.</p>",
         "contestType": "",
         "contestEffect": "",
         "free": false,
         "slot": null
+      },
+      {
+        "slug": "retaliate-retaliator",
+        "name": "Retaliate (Retaliator)",
+        "type": "attack",
+        "traits": [
+          "contact",
+          "pp-updated"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 5,
+          "delay": null,
+          "priority": null,
+          "trigger": "<p>An ally has @Affliction[fainted] this Round.</p>"
+        },
+        "category": "physical",
+        "power": 140,
+        "accuracy": 100,
+        "types": [
+          "normal"
+        ],
+        "description": "<p>Trigger: An ally has @Affliction[fainted] this Round.</p>",
+        "contestType": "",
+        "contestEffect": "",
+        "variant": "retaliate",
+        "free": true,
+        "slot": null
       }
     ],
-    "container": null
+    "container": null,
+    "grade": "B"
   },
   "_id": "lDDtcDz9efyRjTjZ",
   "effects": []

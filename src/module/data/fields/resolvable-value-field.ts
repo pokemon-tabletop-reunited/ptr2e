@@ -1,6 +1,7 @@
 import { BracketedValue, RuleValue } from "@module/effects/data.ts";
 import { isObject } from "@utils";
 import * as R from "remeda";
+import { FormInputConfig } from "types/foundry/common/data/fields.js";
 
 class ResolvableValueField<
     TRequired extends boolean,
@@ -29,7 +30,7 @@ class ResolvableValueField<
 
         if (isObject<BracketedValue>(value) && "brackets" in value) {
             value.field ||= "actor|level";
-            const brackets = (value.brackets = R.compact(Object.values(value.brackets ?? {})));
+            const brackets = (value.brackets = R.filter(Object.values(value.brackets ?? {}), R.isTruthy));
             for (const bracket of brackets) {
                 if (bracket.start === null) delete bracket.start;
                 if (bracket.end === null) delete bracket.end;
@@ -38,6 +39,10 @@ class ResolvableValueField<
         }
 
         return value;
+    }
+
+    override _toInput(config: FormInputConfig): HTMLElement | HTMLCollection {
+      return foundry.data.fields.StringField.prototype._toInput.bind(this)(config);
     }
 }
 

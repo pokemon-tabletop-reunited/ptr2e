@@ -2,7 +2,7 @@ import { ActorPTR2e } from "@actor";
 import { ModifierPTR2e } from "@module/effects/modifiers.ts";
 import * as R from "remeda";
 import { BaseStatisticData, StatisticData } from "./data.ts"
-import { extractModifiers } from "src/util/rule-helpers.ts";
+import { extractModifiers } from "src/util/change-helpers.ts";
 
 /** Basic data forming any PTR statistic */
 abstract class BaseStatistic {
@@ -24,7 +24,7 @@ abstract class BaseStatistic {
         this.slug = data.slug;
         this.label = game.i18n.localize(data.label).trim();
         this.data = { ...data };
-        this.domains = R.uniq((data.domains ??= []));
+        this.domains = R.unique((data.domains ??= []));
         const modifiers = [
             data.modifiers ?? [],
             extractModifiers(this.actor.synthetics, this.domains, data.defferedValueParams),

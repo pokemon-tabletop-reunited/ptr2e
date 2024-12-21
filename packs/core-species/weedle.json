@@ -1,7 +1,7 @@
 {
   "name": "weedle",
   "type": "species",
-  "img": "/systems/ptr2e/img/icons/species_icon.webp",
+  "img": "systems/ptr2e/img/icons/species_icon.webp",
   "system": {
     "number": 13,
     "size": {
@@ -38,24 +38,41 @@
       "darkvision-15",
       "wallclimber",
       "venomous",
-      "pack-mon"
+      "pack-mon",
+      "horned"
     ],
     "abilities": {
       "starting": [
-        "shield-dust",
-        "run-away"
+        {
+          "slug": "shield-dust"
+        },
+        {
+          "slug": "run-away"
+        }
       ],
       "basic": [
-        "poison-point",
-        "swarm"
+        {
+          "slug": "poison-point"
+        },
+        {
+          "slug": "swarm"
+        }
       ],
       "advanced": [
-        "angry-buzz",
-        "intimidate"
+        {
+          "slug": "angry-buzz"
+        },
+        {
+          "slug": "intimidate"
+        }
       ],
       "master": [
-        "perforate",
-        "supervenom"
+        {
+          "slug": "perforate"
+        },
+        {
+          "slug": "supervenom"
+        }
       ]
     },
     "skills": [
@@ -164,7 +181,6 @@
         "group": null
       }
     ],
-    "slug": "",
     "stats": {
       "hp": 40,
       "atk": 35,
@@ -174,35 +190,31 @@
       "spe": 50
     },
     "types": [
-      "bug",
-      "poison"
+      "poison",
+      "bug"
     ],
     "moves": {
       "tutor": [
         {
           "name": "electroweb",
-          "gen": "ultra-sun-ultra-moon",
-          "uuid": "Compendium.ptr2e.core-moves.Item.DLoWCGaBlU23XnUI"
+          "gen": "ultra-sun-ultra-moon"
         }
       ],
       "levelUp": [
         {
           "name": "poison-sting",
           "level": 1,
-          "gen": "brilliant-diamond-and-shining-pearl",
-          "uuid": "Compendium.ptr2e.core-moves.Item.lvu3DNk1KLVjzOvw"
+          "gen": "brilliant-diamond-and-shining-pearl"
         },
         {
           "name": "string-shot",
           "level": 1,
-          "gen": "brilliant-diamond-and-shining-pearl",
-          "uuid": "Compendium.ptr2e.core-moves.Item.TijijTYIY2UOVWOn"
+          "gen": "brilliant-diamond-and-shining-pearl"
         },
         {
           "name": "bug-bite",
           "level": 9,
-          "gen": "brilliant-diamond-and-shining-pearl",
-          "uuid": "Compendium.ptr2e.core-moves.Item.VWTUbiZH5inKfQn8"
+          "gen": "brilliant-diamond-and-shining-pearl"
         }
       ]
     },
@@ -253,10 +265,12 @@
           }
         }
       ],
-      "uuid": "Compendium.ptr2e.core-species.Item.BmuDohMAWcHopUmk"
-    }
+      "uuid": "Compendium.ptr2e.core-species.Item.BmuDohMAWcHopUmk",
+      "methods": []
+    },
+    "habitats": [],
+    "slug": "weedle"
   },
   "_id": "BmuDohMAWcHopUmk",
-  "effects": [],
-  "folder": null
+  "effects": []
 }

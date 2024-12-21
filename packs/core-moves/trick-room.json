@@ -1,48 +1,40 @@
 {
   "name": "Trick Room",
   "type": "move",
-  "img": "/systems/ptr2e/img/svg/psychic_icon.svg",
+  "img": "systems/ptr2e/img/svg/psychic_icon.svg",
   "system": {
     "slug": "trick-room",
-    "description": "Effect: The Terrain is set to Trick Room for 3 Rounds. This attack does not clear other [Terrain] types, and the effect is not cleared by the use of other [Terrain] Attacks.",
-    "traits": [
-      "terrain"
-    ],
+    "traits": [],
     "actions": [
       {
         "slug": "trick-room",
         "name": "Trick Room",
         "type": "attack",
         "traits": [
-          "terrain"
+          "room"
         ],
         "range": {
           "target": "field",
-          "distance": 0,
           "unit": "m"
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 8,
-          "delay": null,
-          "priority": null,
-          "trigger": null
+          "powerPoints": 8
         },
         "category": "status",
-        "power": null,
-        "accuracy": null,
         "types": [
           "psychic"
         ],
-        "description": "Effect: The Terrain is set to Trick Room for 3 Rounds. This attack does not clear other [Terrain] types, and the effect is not cleared by the use of other [Terrain] Attacks.",
-        "contestType": "",
-        "contestEffect": "",
-        "free": false,
-        "slot": null
+        "description": "<p>Effect: Summons @UUID[Compendium.ptr2e.core-summons.Item.R6JOV2LI9kcG8vSq]{Trick Room}.</p><p>Trick Room causes all Base Action Values to be inversed. <br>This happens by deducting all BaseAVs from 195.</p>",
+        "img": "systems/ptr2e/img/svg/psychic_icon.svg",
+        "summon": "Compendium.ptr2e.core-summons.Item.R6JOV2LI9kcG8vSq"
       }
     ],
-    "container": null,
-    "grade": "A"
+    "grade": "A",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
   },
   "_id": "0o8uUraEHLc4mDq4",
   "effects": []

@@ -1,12 +1,13 @@
 {
   "name": "Solarize",
   "type": "ability",
-  "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+  "img": "systems/ptr2e/img/icons/ability_icon.webp",
   "system": {
     "actions": [
       {
         "traits": [
           "type-shift",
+          "interrupt-5",
           "radiant"
         ],
         "name": "Solarize",
@@ -15,7 +16,7 @@
         "cost": {
           "activation": "free",
           "powerPoints": 1,
-          "trigger": "The user declares a Normal-Type attack",
+          "trigger": "<p>The user declares a Normal-Type attack.</p>",
           "delay": null,
           "priority": null
         },
@@ -24,10 +25,10 @@
           "distance": 0,
           "unit": "m"
         },
-        "description": "Trigger: The user declares a Normal-Type attack\nEffect: The user changes that attack's Type to Radiant-Type until their next Activation."
+        "description": "<p>Trigger: The user declares a Normal-Type attack.</p><p>Effect: The user increases the Power of the triggering attack by 20% and changes its Type to Radiant-Type until the end of their current Activation.</p>"
       }
     ],
-    "description": "Trigger: The user declares a Normal-Type attack\nEffect: The user changes that attack's Type to Radiant-Type until their next Activation.",
+    "description": "<p>Trigger: The user declares a Normal-Type attack.</p><p>Effect: The user increases the Power of the triggering attack by 20% and changes its Type to Radiant-Type until the end of their current Activation.</p>",
     "traits": [
       "type-shift",
       "radiant"
@@ -37,7 +38,7 @@
   },
   "_id": "T9yfyr5jRf10GlUO",
   "effects": [],
-  "folder": null,
+  "folder": "0nG9TRDSwrmcTFwO",
   "sort": 0,
   "ownership": {
     "default": 0,

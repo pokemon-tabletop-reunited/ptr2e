@@ -1,10 +1,10 @@
 {
   "name": "Laser Pulse",
   "type": "move",
-  "img": "/systems/ptr2e/img/svg/normal_icon.svg",
+  "img": "systems/ptr2e/img/svg/normal_icon.svg",
   "system": {
     "slug": "laser-pulse",
-    "description": "Effect: When used, the Move's type randomly changes to Electric, Fire, or Ice.",
+    "description": "",
     "traits": [
       "pulse",
       "ray",
@@ -18,7 +18,8 @@
         "traits": [
           "pulse",
           "ray",
-          "move-locked"
+          "move-locked",
+          "pp-updated"
         ],
         "range": {
           "target": "creature",
@@ -27,7 +28,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 5,
+          "powerPoints": 4,
           "delay": null,
           "priority": null,
           "trigger": null
@@ -38,7 +39,7 @@
         "types": [
           "normal"
         ],
-        "description": "Effect: When used, the Move's type randomly changes to Electric, Fire, or Ice.",
+        "description": "<p>Effect: When used, the Move's type randomly changes to Electric, Fire, or Ice.</p>",
         "contestType": "",
         "contestEffect": "",
         "free": false,

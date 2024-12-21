@@ -1,4 +1,4 @@
-import { isObject } from "remeda";
+import { isPlainObject } from "remeda";
 import { DataModelValidationFailure } from "types/foundry/common/data/validation-failure.js";
 
 const { fields } = foundry.data;
@@ -99,7 +99,7 @@ class RecordField<
         values: unknown,
         options?: foundry.data.fields.DataFieldValidationOptions,
     ): boolean | DataModelValidationFailure | void {
-        if (!isObject(values)) {
+        if (!isPlainObject(values)) {
             return new foundry.data.validation.DataModelValidationFailure({ message: "must be an Object" });
         }
         return this._validateValues(values, options);

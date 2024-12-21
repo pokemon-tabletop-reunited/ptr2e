@@ -3,73 +3,77 @@
   "type": "perk",
   "system": {
     "prerequisites": [
-      "Aura Sense 25"
+      {
+        "gte": [
+          "{actor|skills.aura-sense.mod}",
+          25
+        ]
+      }
     ],
     "cost": 1,
-    "design": {
-      "arena": "mental",
-      "approach": "power",
-      "archetype": "Aura"
-    },
-    "description": "You are able to outwardly transmit surface thoughts and feelings through Aura.",
+    "description": "<p>You are able to outwardly transmit surface thoughts and feelings through Aura.</p>",
     "actions": [
       {
         "name": "Aura Projection",
         "slug": "aura-projection",
-        "description": "You are able to outwardly transmit surface thoughts and feelings through Aura.",
+        "description": "<p>You are able to outwardly transmit surface thoughts and feelings through Aura.</p>",
         "cost": {
-          "activation": "free"
+          "activation": "free",
+          "powerPoints": 0,
+          "delay": null,
+          "priority": null
         },
         "type": "passive",
-        "traits": []
+        "traits": [],
+        "img": "icons/svg/explosion.svg",
+        "range": {
+          "target": "enemy",
+          "unit": "m",
+          "distance": 0
+        },
+        "variant": null,
+        "hidden": false
       }
     ],
     "slug": "aura-projection",
     "traits": [],
-    "node": {
-      "i": -5,
-      "j": -60,
-      "connected": [
-        "shielding-aura",
-        "aura-empathy",
-        "soothing-aura",
-        "aura-channeling"
-      ],
-      "config": {
-        "alpha": null,
-        "backgroundColor": "#c9b5de",
-        "borderColor": null,
-        "borderWidth": null,
-        "texture": "systems/ptr2e/img/perk-icons/Aura.svg",
-        "tint": "#735393",
-        "scale": null
-      },
-      "hidden": false,
-      "type": "normal"
-    }
+    "_migration": {
+      "version": null,
+      "previous": null
+    },
+    "nodes": [
+      {
+        "connected": [
+          "aura-user",
+          "aura-bonding",
+          "aura-dampening",
+          "shielding-aura"
+        ],
+        "config": {
+          "alpha": null,
+          "backgroundColor": "#c9b5de",
+          "borderColor": null,
+          "borderWidth": null,
+          "texture": "systems/ptr2e/img/perk-icons/Aura.svg",
+          "tint": "#735393",
+          "scale": null
+        },
+        "hidden": false,
+        "type": "normal",
+        "x": 176,
+        "y": 27,
+        "tier": null
+      }
+    ],
+    "autoUnlock": [],
+    "originSlug": null,
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": []
   },
   "_id": "FNa1vZTffzqYCN3p",
-  "img": "/systems/ptr2e/img/icons/feat_icon.webp",
+  "img": "systems/ptr2e/img/perk-icons/Aura.svg",
   "effects": [],
-  "flags": {
-    "core": {
-      "sourceId": "Compendium.ptr2e.core-perks.Item.FNa1vZTffzqYCN3p"
-    }
-  },
-  "_stats": {
-    "coreVersion": "12.321",
-    "systemId": "ptr2e",
-    "systemVersion": "0.005",
-    "createdTime": null,
-    "modifiedTime": 1714920527631,
-    "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
-    "compendiumSource": null,
-    "duplicateSource": null
-  },
-  "folder": null,
-  "sort": 0,
-  "ownership": {
-    "default": 0
-  },
-  "_key": "!items!FNa1vZTffzqYCN3p"
+  "folder": "I7ocNlZvZjyhwUcw"
 }

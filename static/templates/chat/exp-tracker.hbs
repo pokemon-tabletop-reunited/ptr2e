@@ -1,0 +1,30 @@
+{{#if percent}}
+  <h3>Venture EXP Awarded!</h3>
+  <p>Awarded {{total}} exp</p>
+  <p>Modifier Percentage: {{multiply percent 100}}%</p>
+  <details class="exp-tracker-output">
+    <summary>Update Details</summary>
+    <ul>
+      {{#each messages}}
+        <li>
+          <span>{{link}}</span>
+          <span>{{old}} => {{new}}{{#if levelUp}} <b>(Level Up!)</b>{{/if}}</span>
+        </li>
+      {{/each}}
+    </ul>
+  </details>
+{{else}}
+  <h3>Training EXP Awarded!</h3>
+  <p>Awarded {{total}} exp</p>
+  <details class="exp-tracker-output">
+    <summary>Update Details</summary>
+    <ul>
+      {{#each messages}}
+        <li>
+          <span>{{link}}</span>
+          <span>{{old}} => {{new}}{{#if levelUp}} <b>(Level Up!)</b>{{/if}}</span>
+        </li>
+      {{/each}}
+    </ul>
+  </details>
+{{/if}}

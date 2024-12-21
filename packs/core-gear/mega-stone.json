@@ -1,6 +1,6 @@
 {
   "name": "Mega Stone",
-  "img": "/systems/ptr2e/img/icons/item_icon.webp",
+  "img": "systems/ptr2e/img/item-icons/mega stone.webp",
   "type": "equipment",
   "system": {
     "crafting": {
@@ -27,28 +27,37 @@
     ],
     "actions": [
       {
-        "name": "Mega Stone",
-        "slug": "mega-stone",
-        "type": "passive",
-        "description": "Effect: Allows creature that matches the <Species> Trait to Mega Evolve when equipped.",
-        "img": "/systems/ptr2e/img/icons/item_icon.webp",
+        "slug": "mega-evolve-mega-stone",
+        "name": "Mega Evolve! (Mega Stone)",
+        "type": "generic",
         "traits": [
-          "Evolution",
-          "Phenomenon",
-          "<Species>"
+          "evolution",
+          "phenomenon",
+          "command"
         ],
         "range": {
-          "target": "creature",
+          "target": "self",
           "distance": 0,
           "unit": "m"
         },
         "cost": {
-          "activation": "complex",
-          "powerPoints": 0,
+          "activation": "free",
+          "powerPoints": 6,
           "delay": null,
-          "priority": null
+          "priority": null,
+          "trigger": "<p>The user shares their Species Trait with a held Mega Stone, and the user is within 50m of an ally holding a Key Stone.</p>"
         },
-        "variant": null
+        "category": "status",
+        "power": null,
+        "accuracy": null,
+        "types": [
+          "untyped"
+        ],
+        "description": "<p>Trigger: The user shares their Species Trait with a held Mega Stone, and the user is within 50m of an ally holding a Key Stone.</p><p>Effect: The user undergoes Mega Evolution.</p>",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
       }
     ],
     "description": "Effect: Allows creature that matches the <Species> Trait to Mega Evolve when equipped.",
@@ -67,7 +76,7 @@
   },
   "_id": "XZIA2fPJEaLE2Zeg",
   "effects": [],
-  "folder": null,
+  "folder": "V4skAU6G3OH5fXad",
   "sort": 0,
   "ownership": {
     "default": 0,

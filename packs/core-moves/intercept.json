@@ -1,62 +1,68 @@
 {
-    "name": "Intercept",
-    "type": "move",
-    "_id": "V3Ez1kwHYBoE1GuX",
-    "img": "/systems/ptr2e/img/svg/untyped_icon.svg",
-    "system": {
-        "slug": null,
-        "traits": [],
-        "actions": [
-            {
-                "name": "Intercept Attack",
-                "slug": "intercept-attack",
-                "type": "attack",
-                "traits": [],
-                "range": {
-                    "target": "ally",
-                    "distance": 0,
-                    "unit": "m"
-                },
-                "cost": {
-                    "activation": "complex",
-                    "powerPoints": 0,
-                    "delay": null,
-                    "priority": null,
-                    "trigger": ""
-                },
-                "types": [
-                    "untyped"
-                ],
-                "category": "status",
-                "power": null,
-                "accuracy": null,
-                "contestType": "",
-                "contestEffect": "",
-                "free": false,
-                "slot": null,
-                "description": "<p>You may declare Intercept as a Complex Action Interrupt when an ally would be hit by an attack, and consume movement allowance to attempt to reposition, shoving your ally 1m to the side of their currently occupied space, and you now occupying it. If you are unable to reach the target ally's space, Intercept fails but still consumes movement allowance and a Complex action.<br><br>Note: Moves with [Danger Close] cannot miss in the first Range Increment. Where [Danger Close] is in effect, Intercept cannot be declared.</p>"
-            }
+  "name": "Intercept",
+  "type": "move",
+  "_id": "V3Ez1kwHYBoE1GuX",
+  "img": "systems/ptr2e/img/svg/untyped_icon.svg",
+  "system": {
+    "slug": null,
+    "traits": [
+      "interrupt-3",
+      "push-1",
+      "manipulate"
+    ],
+    "actions": [
+      {
+        "name": "Intercept",
+        "slug": "intercept",
+        "type": "generic",
+        "traits": [
+          "interrupt-3",
+          "push-1",
+          "manipulate"
         ],
-        "description": "<p>You may declare Intercept as a Complex Action Interrupt when an ally would be hit by an attack, and consume movement allowance to attempt to reposition, shoving your ally 1m to the side of their currently occupied space, and you now occupying it. If you are unable to reach the target ally's space, Intercept fails but still consumes movement allowance and a Complex action.<br><br>Note: Moves with [Danger Close] cannot miss in the first Range Increment. Where [Danger Close] is in effect, Intercept cannot be declared.</p>",
-        "container": null,
-        "grade": "E"
-    },
-    "effects": [],
-    "folder": null,
-    "sort": 0,
-    "ownership": {
-        "default": 0,
-        "Kc3DOunCh3ClAeHS": 3
-    },
-    "flags": {},
-    "_stats": {
-        "compendiumSource": null,
-        "duplicateSource": null,
-        "coreVersion": "12.325",
-        "systemId": "ptr2e",
-        "systemVersion": "0.006",
-        "createdTime": 1717158253897,
-        "modifiedTime": 1717158572136,
-        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
-    }
+        "range": {
+          "target": "ally"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 0,
+          "delay": null,
+          "priority": null,
+          "trigger": "<p>An ally would be hit by a non-[Danger Close] Attack.</p>"
+        },
+        "types": [
+          "untyped"
+        ],
+        "category": "status",
+        "power": null,
+        "accuracy": null,
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null,
+        "description": "<p>Trigger: An ally would be hit by a non-[Danger Close] Attack.</p><p>Effect: The user uses Movements of their choice, moving into the target's space.The target is Pushed out of that space, and the user takes the attack in place of the target. If the user is are unable to reach the target ally's space, the target still takes damage from the attack. If the target cannot be Pushed out of the area of effect of the triggering Attack, they still take the full effects of the triggering Attack.</p>"
+      }
+    ],
+    "description": "<p>Trigger: An ally would be hit by a non-[Danger Close] Attack.</p><p>Effect: The user uses Movements of their choice, moving into the target's space.The target is Pushed out of that space, and the user takes the attack in place of the target. If the user is are unable to reach the target ally's space, the target still takes damage from the attack. If the target cannot be Pushed out of the area of effect of the triggering Attack, they still take the full effects of the triggering Attack.</p>",
+    "container": null,
+    "grade": "E"
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "Kc3DOunCh3ClAeHS": 3
+  },
+  "flags": {},
+  "_stats": {
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "coreVersion": "12.325",
+    "systemId": "ptr2e",
+    "systemVersion": "0.006",
+    "createdTime": 1717158253897,
+    "modifiedTime": 1717158572136,
+    "lastModifiedBy": "Kc3DOunCh3ClAeHS"
+  }
 }

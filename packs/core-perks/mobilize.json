@@ -3,74 +3,85 @@
   "type": "perk",
   "system": {
     "prerequisites": [
-      "Leadership 20"
+      {
+        "gte": [
+          "{actor|skills.leadership.mod}",
+          20
+        ]
+      }
     ],
     "cost": 1,
-    "design": {
-      "arena": "social",
-      "approach": "finesse",
-      "archetype": "Support"
-    },
-    "description": "Allies influenced by this Command cannot provoke Attacks by moving.",
+    "description": "<p>The user spends 4 PP as a Simple Action. Allied creatures within 8m cannot have [Interrupt X] Actions or Abilities triggered their by their Movement for 2 Activations.</p>",
     "actions": [
       {
         "name": "Mobilize",
         "slug": "mobilize",
-        "description": "Allies influenced by this Command cannot provoke Attacks by moving.",
+        "description": "<p>Allied creatures in range cannot have [Interrupt X] Actions or Abilities triggered their by their Movement for 2 Activations.</p>",
+        "range": {
+          "target": "emanation",
+          "distance": 8,
+          "unit": "m"
+        },
         "cost": {
           "activation": "simple",
-          "powerPoints": 2
+          "powerPoints": 4,
+          "delay": null,
+          "priority": null
         },
         "type": "generic",
-        "traits": []
+        "traits": [
+          "command",
+          "social"
+        ],
+        "img": "icons/svg/explosion.svg",
+        "variant": null
       }
     ],
     "slug": "mobilize",
-    "traits": [],
-    "node": {
-      "i": 46,
-      "j": -56,
-      "connected": [
-        "root-3",
-        "tactician",
-        "cheerleader",
-        "emergency-retreat"
-      ],
-      "config": {
-        "alpha": null,
-        "backgroundColor": "#00ff40",
-        "borderColor": null,
-        "borderWidth": null,
-        "texture": "systems/ptr2e/img/perk-icons/Tactician.svg",
-        "tint": "#141414",
-        "scale": null
-      },
-      "hidden": false,
-      "type": "normal"
-    }
+    "traits": [
+      "command",
+      "social"
+    ],
+    "_migration": {
+      "version": null,
+      "previous": null
+    },
+    "nodes": [
+      {
+        "x": 43,
+        "y": 53,
+        "hidden": false,
+        "type": "entry",
+        "connected": [
+          "drill-sergeant",
+          "cheerleader",
+          "hold-the-line",
+          "im-with-you",
+          "chansey-medicine",
+          "root-1",
+          "breeder"
+        ],
+        "config": {
+          "alpha": null,
+          "backgroundColor": "#00ff40",
+          "borderColor": null,
+          "borderWidth": null,
+          "texture": "systems/ptr2e/img/perk-icons/Tactician.svg",
+          "tint": "#141414",
+          "scale": null
+        },
+        "tier": null
+      }
+    ],
+    "autoUnlock": [],
+    "originSlug": null,
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": []
   },
   "_id": "EhfPkS23yRI8VENp",
-  "img": "/systems/ptr2e/img/icons/feat_icon.webp",
+  "img": "systems/ptr2e/img/perk-icons/Tactician.svg",
   "effects": [],
-  "flags": {
-    "core": {
-      "sourceId": "Compendium.ptr2e.core-perks.Item.EhfPkS23yRI8VENp"
-    }
-  },
-  "_stats": {
-    "coreVersion": "12.321",
-    "systemId": "ptr2e",
-    "systemVersion": "0.005",
-    "createdTime": null,
-    "modifiedTime": 1714920514975,
-    "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
-    "compendiumSource": null,
-    "duplicateSource": null
-  },
-  "folder": null,
-  "sort": 0,
-  "ownership": {
-    "default": 0
-  },
-  "_key": "!items!EhfPkS23yRI8VENp"
+  "folder": "PAZ8zWUPw7Azm5V6"
 }

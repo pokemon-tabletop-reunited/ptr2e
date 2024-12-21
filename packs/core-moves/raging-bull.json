@@ -1,13 +1,14 @@
 {
   "name": "Raging Bull",
   "type": "move",
-  "img": "/systems/ptr2e/img/svg/normal_icon.svg",
+  "img": "systems/ptr2e/img/svg/normal_icon.svg",
   "system": {
     "slug": "raging-bull",
-    "description": "Effect: If the target is possesses a [Shield] effect, the effect is removed before Raging Bull deals damage. Raging Bull's damage Type depends on the user's form.\nKantonian Tauros - Normal\nPaldean Tauros - Fighting\nBlaze Tauros - Fire\nAqua Tauros - Water",
+    "description": "",
     "traits": [
       "dash",
       "pass-2",
+      "pierce",
       "contact"
     ],
     "actions": [
@@ -18,7 +19,9 @@
         "traits": [
           "dash",
           "pass-2",
-          "contact"
+          "pierce",
+          "contact",
+          "pp-updated"
         ],
         "range": {
           "target": "creature",
@@ -38,7 +41,7 @@
         "types": [
           "normal"
         ],
-        "description": "Effect: If the target is possesses a [Shield] effect, the effect is removed before Raging Bull deals damage. Raging Bull's damage Type depends on the user's form.\nKantonian Tauros - Normal\nPaldean Tauros - Fighting\nBlaze Tauros - Fire\nAqua Tauros - Water",
+        "description": "<p>Effect: This attack's damage Type depends on the user's form.</p><p>Kantonian - Normal</p><p>Paldean - Fighting</p><p>Blaze - Fire</p><p>Aqua - Water",
         "contestType": "",
         "contestEffect": "",
         "free": false,

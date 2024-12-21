@@ -3,74 +3,77 @@
   "type": "perk",
   "system": {
     "prerequisites": [
-      "Husbandry 25"
+      {
+        "gte": [
+          "{actor|skills.husbandry.mod}",
+          25
+        ]
+      }
     ],
     "cost": 1,
-    "design": {
-      "arena": "social",
-      "approach": "resilience",
-      "archetype": "Breeding"
-    },
-    "description": "You understand the fundamentals of Pokemon Egg Groups and behaviour well enough to breed Pokemon. You may undertake the Breeding Camp Action to perform a Husbandry skill check and produce an Egg.",
+    "description": "<p>You understand the fundamentals of Pokemon Egg Groups and behaviour well enough to breed Pokemon. You may undertake the Breeding Camp Action to perform a Husbandry skill check and produce an Egg.</p>",
     "actions": [
       {
         "name": "Breeder",
         "slug": "breeder",
-        "description": "You understand the fundamentals of Pokemon Egg Groups and behaviour well enough to breed Pokemon. You may undertake the Breeding Camp Action to perform a Husbandry skill check and produce an Egg.",
+        "description": "<p>You understand the fundamentals of Pokemon Egg Groups and behaviour well enough to breed Pokemon. You may undertake the Breeding Camp Action to perform a Husbandry skill check and produce an Egg.</p>",
         "cost": {
-          "activation": "complex"
+          "activation": "complex",
+          "powerPoints": 0,
+          "delay": null,
+          "priority": null
         },
         "type": "camping",
-        "traits": []
+        "traits": [],
+        "img": "icons/svg/explosion.svg",
+        "range": {
+          "target": "enemy",
+          "unit": "m",
+          "distance": 0
+        },
+        "variant": null
       }
     ],
     "slug": "breeder",
     "traits": [],
-    "node": {
-      "i": -28,
-      "j": -39,
-      "connected": [
-        "root-1",
-        "shiny-mutation",
-        "underdogs-spirit-1",
-        "groomer",
-        "hobby-gardener"
-      ],
-      "config": {
-        "alpha": null,
-        "backgroundColor": "#ffff00",
-        "borderColor": null,
-        "borderWidth": null,
-        "texture": "systems/ptr2e/img/perk-icons/Breeder.svg",
-        "tint": "#151515",
-        "scale": null
-      },
-      "hidden": false,
-      "type": "normal"
-    }
+    "_migration": {
+      "version": null,
+      "previous": null
+    },
+    "nodes": [
+      {
+        "connected": [
+          "shiny-mutation",
+          "chansey-medicine",
+          "root-6",
+          "mobilize",
+          "forensic-accountant"
+        ],
+        "config": {
+          "alpha": null,
+          "backgroundColor": "#ffff00",
+          "borderColor": null,
+          "borderWidth": null,
+          "texture": "systems/ptr2e/img/perk-icons/Breeder.svg",
+          "tint": "#151515",
+          "scale": null
+        },
+        "hidden": false,
+        "type": "normal",
+        "x": 29,
+        "y": 82,
+        "tier": null
+      }
+    ],
+    "autoUnlock": [],
+    "originSlug": null,
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": []
   },
   "_id": "Cb1xb08jFdxHHVae",
-  "img": "/systems/ptr2e/img/icons/feat_icon.webp",
+  "img": "systems/ptr2e/img/perk-icons/Breeder.svg",
   "effects": [],
-  "flags": {
-    "core": {
-      "sourceId": "Compendium.ptr2e.core-perks.Item.Cb1xb08jFdxHHVae"
-    }
-  },
-  "_stats": {
-    "coreVersion": "12.321",
-    "systemId": "ptr2e",
-    "systemVersion": "0.005",
-    "createdTime": null,
-    "modifiedTime": 1714920280070,
-    "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
-    "compendiumSource": null,
-    "duplicateSource": null
-  },
-  "folder": null,
-  "sort": 0,
-  "ownership": {
-    "default": 0
-  },
-  "_key": "!items!Cb1xb08jFdxHHVae"
+  "folder": "aNkYtPlgFsBmX4Q1"
 }

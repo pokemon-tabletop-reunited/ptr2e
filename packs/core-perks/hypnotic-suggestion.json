@@ -3,72 +3,75 @@
   "type": "perk",
   "system": {
     "prerequisites": [
-      "[Telepath]"
+      "trait:telepath"
     ],
     "cost": 3,
-    "design": {
-      "arena": "mental",
-      "approach": "finesse",
-      "archetype": "[Psychic Type]"
-    },
-    "description": "Make an opposed Occult (Psychic) test versus the target of the Hypnotic Suggestion. If you win, you may implant a suggestion in their mind as to what they should do as if it were there own idea, before erasing the memory of being influenced. If the Suggestion clashes with the target's core values, then they receive +40 to their skill check to resist.",
+    "description": "<p>Make an opposed Occult (Psychic) test versus the target of the Hypnotic Suggestion. If you win, you may implant a suggestion in their mind as to what they should do as if it were their own idea, before erasing the memory of being influenced. If the Suggestion clashes with the target's core values, then they receive +40 to their skill check to resist.</p>",
     "actions": [
       {
         "name": "Hypnotic Suggestion",
         "slug": "hypnotic-suggestion",
-        "description": "Make an opposed Occult (Psychic) test versus the target of the Hypnotic Suggestion. If you win, you may implant a suggestion in their mind as to what they should do as if it were there own idea, before erasing the memory of being influenced. If the Suggestion clashes with the target's core values, then they receive +40 to their skill check to resist.",
+        "description": "<p>Make an opposed Occult (Psychic) test versus the target of the Hypnotic Suggestion. If you win, you may implant a suggestion in their mind as to what they should do as if it were there own idea, before erasing the memory of being influenced. If the Suggestion clashes with the target's core values, then they receive +40 to their skill check to resist.</p>",
         "cost": {
           "activation": "complex",
-          "powerPoints": 5
+          "powerPoints": 5,
+          "delay": null,
+          "priority": null
         },
         "type": "exploration",
-        "traits": []
+        "traits": [],
+        "img": "icons/svg/explosion.svg",
+        "range": {
+          "target": "enemy",
+          "unit": "m",
+          "distance": 0
+        },
+        "variant": null
       }
     ],
     "slug": "hypnotic-suggestion",
     "traits": [],
-    "node": {
-      "i": -103,
-      "j": 59,
-      "connected": [
-        "detect-minds",
-        "conceal-mind"
-      ],
-      "config": {
-        "alpha": null,
-        "backgroundColor": null,
-        "borderColor": null,
-        "borderWidth": null,
-        "texture": "systems/ptr2e/img/svg/psychic_icon.svg",
-        "tint": null,
-        "scale": null
-      },
-      "hidden": false,
-      "type": "normal"
-    }
+    "_migration": {
+      "version": 0.108,
+      "previous": {
+        "schema": null,
+        "foundry": "12.330",
+        "system": "0.10.0-alpha.3.2.0"
+      }
+    },
+    "nodes": [
+      {
+        "connected": [
+          "psychoportation",
+          "detect-minds",
+          "telepathic-potential",
+          "conceal-mind"
+        ],
+        "config": {
+          "alpha": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "borderWidth": null,
+          "texture": "systems/ptr2e/img/svg/psychic_icon.svg",
+          "tint": null,
+          "scale": null
+        },
+        "hidden": false,
+        "type": "normal",
+        "x": 144,
+        "y": 129,
+        "tier": null
+      }
+    ],
+    "autoUnlock": [],
+    "originSlug": null,
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": []
   },
   "_id": "BQY0NiJMPOWEaeLY",
-  "img": "/systems/ptr2e/img/icons/feat_icon.webp",
+  "img": "systems/ptr2e/img/svg/psychic_icon.svg",
   "effects": [],
-  "flags": {
-    "core": {
-      "sourceId": "Compendium.ptr2e.core-perks.Item.BQY0NiJMPOWEaeLY"
-    }
-  },
-  "_stats": {
-    "coreVersion": "12.321",
-    "systemId": "ptr2e",
-    "systemVersion": "0.005",
-    "createdTime": null,
-    "modifiedTime": 1714921808739,
-    "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
-    "compendiumSource": null,
-    "duplicateSource": null
-  },
-  "folder": null,
-  "sort": 0,
-  "ownership": {
-    "default": 0
-  },
-  "_key": "!items!BQY0NiJMPOWEaeLY"
+  "folder": "F4b52L00KrAtdPu5"
 }

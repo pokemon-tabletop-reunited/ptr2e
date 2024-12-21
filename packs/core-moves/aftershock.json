@@ -1,0 +1,102 @@
+{
+  "name": "Aftershock",
+  "type": "move",
+  "_id": "RuQs6by7zFAgsOhU",
+  "img": "systems/ptr2e/img/svg/ground_icon.svg",
+  "system": {
+    "slug": null,
+    "traits": [
+      "delay-3",
+      "earthbound"
+    ],
+    "actions": [
+      {
+        "name": "Aftershock",
+        "slug": "aftershock",
+        "type": "attack",
+        "img": "icons/svg/explosion.svg",
+        "traits": [
+          "delay-3",
+          "earthbound"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 5,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 6,
+          "delay": 3,
+          "priority": null
+        },
+        "variant": null,
+        "types": [
+          "ground"
+        ],
+        "category": "physical",
+        "power": 50,
+        "accuracy": 100,
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null,
+        "description": ""
+      },
+      {
+        "name": "Aftershock (Follow-Up)",
+        "slug": "aftershock-follow-up",
+        "type": "attack",
+        "img": "icons/svg/explosion.svg",
+        "traits": [
+          "delay-3",
+          "danger-close",
+          "earthbound"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 5,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 6,
+          "delay": 3,
+          "priority": null
+        },
+        "variant": "aftershock",
+        "types": [
+          "ground"
+        ],
+        "category": "physical",
+        "power": 150,
+        "accuracy": 100,
+        "contestType": "",
+        "contestEffect": "",
+        "free": true,
+        "slot": null,
+        "description": "<p>Effect: This attack may only be used if the target was hit with an [Earthbound] attack since the user's previous Activation.</p>"
+      }
+    ],
+    "description": "",
+    "container": null,
+    "grade": "A"
+  },
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "CYLdyr5mPSDmNpTp": 3
+  },
+  "flags": {},
+  "_stats": {
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "coreVersion": "12.328",
+    "systemId": "ptr2e",
+    "systemVersion": "0.10.0-alpha.1.5.2",
+    "createdTime": 1720798088437,
+    "modifiedTime": 1720798229258,
+    "lastModifiedBy": "CYLdyr5mPSDmNpTp"
+  }
+}

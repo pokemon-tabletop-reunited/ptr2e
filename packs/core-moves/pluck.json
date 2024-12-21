@@ -1,10 +1,10 @@
 {
   "name": "Pluck",
   "type": "move",
-  "img": "/systems/ptr2e/img/svg/flying_icon.svg",
+  "img": "systems/ptr2e/img/svg/flying_icon.svg",
   "system": {
     "slug": "pluck",
-    "description": "Effect: The user steals and consumes an equipped Food item on the target.",
+    "description": "",
     "traits": [
       "contact"
     ],
@@ -14,7 +14,8 @@
         "name": "Pluck",
         "type": "attack",
         "traits": [
-          "contact"
+          "contact",
+          "pp-updated"
         ],
         "range": {
           "target": "creature",
@@ -23,7 +24,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 5,
+          "powerPoints": 2,
           "delay": null,
           "priority": null,
           "trigger": null
@@ -34,7 +35,7 @@
         "types": [
           "flying"
         ],
-        "description": "Effect: The user steals and consumes an equipped Food item on the target.",
+        "description": "<p>Effect: The user steals and consumes an equipped Food item on the target.</p>",
         "contestType": "",
         "contestEffect": "",
         "free": false,
@@ -42,7 +43,7 @@
       }
     ],
     "container": null,
-    "grade": "B"
+    "grade": "E"
   },
   "_id": "lP6Hes91PJDuKlN0",
   "effects": []

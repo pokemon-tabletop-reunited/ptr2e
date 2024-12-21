@@ -1,0 +1,1902 @@
+[
+  {
+    "id": "dead",
+    "_id": "faintedcondition",
+    "name": "PTR2E.Effect.Statuses.Labels.fainted",
+    "img": "systems/ptr2e/img/conditions/fainted.svg",
+    "type": "passive",
+    "description": "PTR2E.Effect.Statuses.Descriptions.fainted",
+    "system": {
+      "changes": [
+        {
+          "type": "roll-option",
+          "domain": "effect",
+          "value": "fainted"
+        }
+      ],
+      "removeOnRecall": false,
+      "removeAfterCombat": false
+    }
+  },
+  {
+    "id": "burn",
+    "name": "PTR2E.Effect.Statuses.Labels.burn",
+    "img": "systems/ptr2e/img/conditions/burned.svg",
+    "type": "affliction",
+    "duration": {
+      "turns": 5
+    },
+    "system": {
+      "changes": [
+        {
+          "type": "basic",
+          "key": "system.attributes.atk.stage",
+          "value": -1,
+          "mode": 2
+        }
+      ],
+      "formula": "1/16",
+      "type": "damage",
+      "removeOnRecall": false,
+      "removeAfterCombat": true,
+      "traits": [
+        "fire",
+        "major-affliction"
+      ]
+    },
+    "description": "PTR2E.Effect.Statuses.Descriptions.burn"
+  },
+  {
+    "id": "poison",
+    "name": "PTR2E.Effect.Statuses.Labels.poison",
+    "img": "systems/ptr2e/img/conditions/poisoned.svg",
+    "type": "affliction",
+    "duration": {
+      "turns": 5
+    },
+    "system": {
+      "changes": [
+        {
+          "type": "basic",
+          "key": "system.attributes.spa.stage",
+          "value": -1,
+          "mode": 2
+        }
+      ],
+      "formula": "1/16",
+      "type": "damage",
+      "removeOnRecall": false,
+      "removeAfterCombat": true,
+      "traits": [
+        "poison",
+        "major-affliction"
+      ]
+    },
+    "description": "PTR2E.Effect.Statuses.Descriptions.poison"
+  },
+  {
+    "id": "blight",
+    "name": "PTR2E.Effect.Statuses.Labels.blight",
+    "img": "systems/ptr2e/img/conditions/badly-poisoned.svg",
+    "type": "affliction",
+    "system": {
+      "changes": [
+        {
+          "type": "basic",
+          "key": "system.attributes.spa.stage",
+          "value": -1,
+          "mode": 2
+        }
+      ],
+      "formula": "(1/16 * @stacksToRemove)",
+      "type": "damage",
+      "removeOnRecall": false,
+      "removeAfterCombat": true,
+      "traits": [
+        "poison",
+        "major-affliction"
+      ],
+      "stacks": 8
+    },
+    "description": "PTR2E.Effect.Statuses.Descriptions.blight"
+  },
+  {
+    "id": "paralysis",
+    "name": "PTR2E.Effect.Statuses.Labels.paralysis",
+    "img": "systems/ptr2e/img/conditions/paralysis.svg",
+    "type": "affliction",
+    "duration": {
+      "turns": 5
+    },
+    "system": {
+      "changes": [
+        {
+          "type": "basic",
+          "key": "system.attributes.spe.value",
+          "value": 0.5,
+          "predicate": [],
+          "mode": 1,
+          "priority": null,
+          "ignored": false
+        },
+        {
+          "type": "basic",
+          "key": "system.attributes.spe.stage",
+          "value": -2,
+          "mode": 2
+        },
+        {
+          "type": "grant-effect",
+          "value": "slowed"
+        }
+      ],
+      "formula": null,
+      "type": null,
+      "removeOnRecall": false,
+      "removeAfterCombat": true,
+      "traits": [
+        "electric",
+        "major-affliction"
+      ]
+    },
+    "description": "PTR2E.Effect.Statuses.Descriptions.paralysis"
+  },
+  {
+    "id": "drowsy",
+    "name": "PTR2E.Effect.Statuses.Labels.drowsy",
+    "img": "systems/ptr2e/img/conditions/sleep.svg",
+    "type": "affliction",
+    "duration": {
+      "turns": 5
+    },
+    "system": {
+      "changes": [
+        {
+          "type": "percentile-modifier",
+          "key": "all-power",
+          "value": -33.33
+        },
+        {
+          "type": "basic",
+          "key": "system.attributes.spd.stage",
+          "value": -1,
+          "mode": 2
+        }
+      ],
+      "formula": null,
+      "type": null,
+      "removeOnRecall": false,
+      "removeAfterCombat": true,
+      "traits": [
+        "sleep",
+        "major-affliction"
+      ]
+    },
+    "description": "PTR2E.Effect.Statuses.Descriptions.drowsy"
+  },
+  {
+    "id": "nightmares",
+    "name": "PTR2E.Effect.Statuses.Labels.nightmares",
+    "img": "systems/ptr2e/img/conditions/bad-sleep.svg",
+    "type": "affliction",
+    "duration": {
+      "turns": 5
+    },
+    "system": {
+      "changes": [
+        {
+          "type": "percentile-modifier",
+          "key": "all-power",
+          "value": -50
+        },
+        {
+          "type": "basic",
+          "key": "system.attributes.spd.stage",
+          "value": -1,
+          "mode": 2
+        },
+        {
+          "type": "grant-effect",
+          "value": "slowed"
+        }
+      ],
+      "formula": "1/16",
+      "type": "damage",
+      "removeOnRecall": false,
+      "removeAfterCombat": true,
+      "traits": [
+        "sleep",
+        "major-affliction"
+      ]
+    },
+    "description": "PTR2E.Effect.Statuses.Descriptions.nightmares"
+  },
+  {
+    "id": "frozen",
+    "name": "PTR2E.Effect.Statuses.Labels.frozen",
+    "img": "systems/ptr2e/img/conditions/frozen.svg",
+    "type": "affliction",
+    "flags": {
+      "ptr2e": {
+        "stacks": false
+      }
+    },
+    "duration": {
+      "turns": 5
+    },
+    "system": {
+      "changes": [
+        {
+          "type": "basic",
+          "key": "system.battleStats.evasion.stage",
+          "value": -1,
+          "mode": 2
+        },
+        {
+          "type": "basic",
+          "key": "system.attributes.spe.value",
+          "value": 1.5,
+          "predicate": [],
+          "mode": 1,
+          "priority": null,
+          "ignored": false
+        },
+        {
+          "type": "basic",
+          "key": "system.attributes.spe.stage",
+          "value": 1,
+          "mode": 2
+        }
+      ],
+      "formula": null,
+      "type": null,
+      "removeOnRecall": false,
+      "removeAfterCombat": true,
+      "traits": [
+        "ice",
+        "major-affliction"
+      ]
+    },
+    "description": "PTR2E.Effect.Statuses.Descriptions.frozen"
+  },
+  {
+    "id": "frostbite",
+    "name": "PTR2E.Effect.Statuses.Labels.frostbite",
+    "img": "systems/ptr2e/img/perk-icons/Elamentalist.svg",
+    "type": "affliction",
+    "duration": {
+      "turns": 5
+    },
+    "system": {
+      "changes": [
+        {
+          "type": "basic",
+          "key": "system.attributes.def.stage",
+          "value": -1,
+          "mode": 2
+        }
+      ],
+      "formula": "1/16",
+      "type": "damage",
+      "removeOnRecall": false,
+      "removeAfterCombat": true,
+      "traits": [
+        "ice",
+        "major-affliction"
+      ]
+    },
+    "description": "PTR2E.Effect.Statuses.Descriptions.frostbite"
+  },
+  {
+    "id": "splinter",
+    "name": "PTR2E.Effect.Statuses.Labels.splinter",
+    "img": "icons/svg/oak.svg",
+    "type": "affliction",
+    "duration": {
+      "turns": 5
+    },
+    "system": {
+      "changes": [
+        {
+          "type": "grant-effect",
+          "value": "stunted"
+        }
+      ],
+      "formula": null,
+      "type": null,
+      "removeOnRecall": false,
+      "removeAfterCombat": true,
+      "traits": [
+        "major-affliction"
+      ]
+    },
+    "description": "PTR2E.Effect.Statuses.Descriptions.splinter"
+  },
+  {
+    "id": "slowed",
+    "name": "PTR2E.Effect.Statuses.Labels.slowed",
+    "img": "systems/ptr2e/img/conditions/slowed.svg",
+    "type": "affliction",
+    "duration": {
+      "turns": 5
+    },
+    "system": {
+      "changes": [
+        {}
+      ],
+      "formula": null,
+      "type": null,
+      "removeOnRecall": false,
+      "removeAfterCombat": true,
+      "traits": [
+        "minor-affliction"
+      ]
+    },
+    "description": "PTR2E.Effect.Statuses.Descriptions.slowed"
+  },
+  {
+    "id": "blinded",
+    "name": "PTR2E.Effect.Statuses.Labels.blinded",
+    "img": "systems/ptr2e/img/conditions/blindness.svg",
+    "type": "affliction",
+    "duration": {
+      "turns": 5
+    },
+    "system": {
+      "changes": [
+        {
+          "type": "basic",
+          "key": "system.battleStats.accuracy.stage",
+          "value": -1,
+          "mode": 2
+        }
+      ],
+      "formula": null,
+      "type": null,
+      "removeOnRecall": false,
+      "removeAfterCombat": true,
+      "traits": [
+        "minor-affliction"
+      ]
+    },
+    "description": "PTR2E.Effect.Statuses.Descriptions.blinded"
+  },
+  {
+    "id": "hindered",
+    "name": "PTR2E.Effect.Statuses.Labels.hindered",
+    "img": "icons/svg/unconscious.svg",
+    "type": "affliction",
+    "duration": {
+      "turns": 5
+    },
+    "system": {
+      "changes": [
+        {
+          "type": "flat-modifier",
+          "key": "skill-check",
+          "value": -10
+        }
+      ],
+      "formula": null,
+      "type": null,
+      "removeOnRecall": false,
+      "removeAfterCombat": true,
+      "traits": [
+        "minor-affliction"
+      ]
+    },
+    "description": "PTR2E.Effect.Statuses.Descriptions.hindered"
+  },
+  {
+    "id": "stunted",
+    "name": "PTR2E.Effect.Statuses.Labels.stunted",
+    "img": "icons/svg/paralysis.svg",
+    "type": "affliction",
+    "duration": {
+      "turns": 5
+    },
+    "system": {
+      "changes": [],
+      "formula": null,
+      "type": null,
+      "removeOnRecall": false,
+      "removeAfterCombat": true,
+      "traits": [
+        "minor-affliction"
+      ]
+    },
+    "description": "PTR2E.Effect.Statuses.Descriptions.stunted"
+  },
+  {
+    "id": "confused",
+    "name": "PTR2E.Effect.Statuses.Labels.confused",
+    "img": "systems/ptr2e/img/conditions/confused.svg",
+    "type": "affliction",
+    "duration": {
+      "turns": 5
+    },
+    "system": {
+      "changes": [],
+      "formula": null,
+      "type": null,
+      "removeOnRecall": false,
+      "removeAfterCombat": true,
+      "traits": [
+        "minor-affliction"
+      ]
+    },
+    "description": "PTR2E.Effect.Statuses.Descriptions.confused"
+  },
+  {
+    "id": "hyper-mode",
+    "name": "PTR2E.Effect.Statuses.Labels.hyper-mode",
+    "img": "icons/svg/hazard.svg",
+    "type": "passive",
+    "system": {
+      "changes": [],
+      "traits": [
+        "minor-affliction"
+      ],
+      "description": "PTR2E.Effect.Statuses.Descriptions.hyper-mode"
+    }
+  },
+  {
+    "id": "weary",
+    "_id": "wearycondition00",
+    "name": "PTR2E.Effect.Statuses.Labels.weary",
+    "img": "icons/svg/stoned.svg",
+    "type": "passive",
+    "system": {
+      "changes": [
+        {
+          "type": "basic",
+          "key": "system.battleStats.accuracy.stage",
+          "value": "min(0, -(@effect.system.stacks * (@effect.system.stacks + 1) / 2))",
+          "mode": 2
+        },
+        {
+          "type": "basic",
+          "key": "system.battleStats.evasion.stage",
+          "value": "min(0, -(@effect.system.stacks * (@effect.system.stacks + 1) / 2))",
+          "mode": 2
+        }
+      ],
+      "traits": [
+        "pseudo-affliction"
+      ],
+      "stacks": 1,
+      "removeAfterCombat": false
+    },
+    "description": "PTR2E.Effect.Statuses.Descriptions.weary"
+  },
+  {
+    "id": "exposed",
+    "name": "PTR2E.Effect.Statuses.Labels.exposed",
+    "img": "icons/svg/hazard.svg",
+    "type": "passive",
+    "system": {
+      "changes": [],
+      "traits": [
+        "minor-affliction"
+      ],
+      "removeAfterCombat": false
+    },
+    "description": "PTR2E.Effect.Statuses.Descriptions.exposed"
+  },
+  {
+    "id": "stuck",
+    "name": "PTR2E.Effect.Statuses.Labels.stuck",
+    "img": "systems/ptr2e/img/conditions/stuck.svg",
+    "type": "affliction",
+    "duration": {
+      "turns": 5
+    },
+    "system": {
+      "changes": [],
+      "formula": null,
+      "type": null,
+      "removeOnRecall": false,
+      "removeAfterCombat": true,
+      "traits": [
+        "minor-affliction"
+      ]
+    },
+    "description": "PTR2E.Effect.Statuses.Descriptions.stuck"
+  },
+  {
+    "id": "bound",
+    "name": "PTR2E.Effect.Statuses.Labels.bound",
+    "img": "icons/svg/aura.svg",
+    "type": "affliction",
+    "system": {
+      "changes": [],
+      "traits": [
+        "minor-affliction"
+      ]
+    },
+    "description": "PTR2E.Effect.Statuses.Descriptions.bound"
+  },
+  {
+    "id": "drowning",
+    "name": "PTR2E.Effect.Statuses.Labels.drowning",
+    "img": "systems/ptr2e/img/perk-icons/Elamentalist.svg",
+    "type": "affliction",
+    "duration": {
+      "turns": 5
+    },
+    "system": {
+      "changes": [
+        {
+          "type": "grant-effect",
+          "value": "suppressed"
+        },
+        {
+          "type": "basic",
+          "key": "system.attributes.eva.stage",
+          "value": -1,
+          "mode": 2
+        }
+      ],
+      "formula": "1/16",
+      "type": "damage",
+      "removeOnRecall": false,
+      "removeAfterCombat": true,
+      "traits": [
+        "water",
+        "minor-affliction"
+      ]
+    },
+    "description": "PTR2E.Effect.Statuses.Descriptions.drowning"
+  },
+  {
+    "id": "infested",
+    "name": "PTR2E.Effect.Statuses.Labels.infested",
+    "img": "systems/ptr2e/img/perk-icons/Elamentalist.svg",
+    "type": "affliction",
+    "duration": {
+      "turns": 5
+    },
+    "system": {
+      "changes": [
+        {
+          "type": "grant-effect",
+          "value": "hindered"
+        },
+        {
+          "type": "basic",
+          "key": "system.attributes.def.stage",
+          "value": -1,
+          "mode": 2
+        }
+      ],
+      "formula": "1/16",
+      "type": "damage",
+      "removeOnRecall": false,
+      "removeAfterCombat": true,
+      "traits": [
+        "water",
+        "minor-affliction"
+      ]
+    },
+    "description": "PTR2E.Effect.Statuses.Descriptions.infested"
+  },
+  {
+    "id": "tased",
+    "name": "PTR2E.Effect.Statuses.Labels.tased",
+    "img": "systems/ptr2e/img/perk-icons/Elamentalist.svg",
+    "type": "affliction",
+    "duration": {
+      "turns": 5
+    },
+    "system": {
+      "changes": [
+        {
+          "type": "basic",
+          "key": "system.attributes.spd.stage",
+          "value": -1,
+          "mode": 2
+        }
+      ],
+      "formula": "1/16",
+      "type": "damage",
+      "removeOnRecall": false,
+      "removeAfterCombat": true,
+      "traits": [
+        "electric",
+        "minor-affliction"
+      ]
+    },
+    "description": "PTR2E.Effect.Statuses.Descriptions.tased"
+  },
+  {
+    "id": "wind-shear",
+    "name": "PTR2E.Effect.Statuses.Labels.wind-shear",
+    "img": "systems/ptr2e/img/perk-icons/Elamentalist.svg",
+    "type": "affliction",
+    "duration": {
+      "turns": 5
+    },
+    "system": {
+      "changes": [
+        {
+          "type": "basic",
+          "key": "system.battleStats.accuracy.stage",
+          "value": -1,
+          "mode": 2
+        }
+      ],
+      "formula": "1/16",
+      "type": "damage",
+      "removeOnRecall": false,
+      "removeAfterCombat": true,
+      "traits": [
+        "flying",
+        "minor-affliction"
+      ]
+    },
+    "description": "PTR2E.Effect.Statuses.Descriptions.wind-shear"
+  },
+  {
+    "id": "disabled",
+    "name": "PTR2E.Effect.Statuses.Labels.disabled",
+    "img": "systems/ptr2e/img/conditions/disabled.svg",
+    "type": "affliction",
+    "duration": {
+      "turns": 5
+    },
+    "system": {
+      "changes": [
+        {
+          "type": "choice-set",
+          "choices": "flags.ptr2e.disableActionOptions.options",
+          "adjustName": true,
+          "rollOption": "disabled"
+        },
+        {
+          "type": "basic",
+          "key": "flags.ptr2e.disableActionOptions.disabled",
+          "value": "{effect|flags.ptr2e.choiceSelections.disabled}",
+          "mode": 2
+        }
+      ],
+      "formula": null,
+      "type": null,
+      "removeOnRecall": false,
+      "removeAfterCombat": true,
+      "traits": [
+        "minor-affliction"
+      ]
+    },
+    "description": "PTR2E.Effect.Statuses.Descriptions.disabled"
+  },
+  {
+    "id": "nullified",
+    "name": "PTR2E.Effect.Statuses.Labels.nullified",
+    "img": "icons/svg/cancel.svg",
+    "type": "affliction",
+    "duration": {
+      "turns": 5
+    },
+    "system": {
+      "changes": [
+        {
+          "type": "choice-set",
+          "choices": "nullifiableAbilities",
+          "adjustName": true,
+          "rollOption": "nullified"
+        },
+        {
+          "type": "suppress-ability",
+          "key": "{effect|flags.ptr2e.choiceSelections.nullified}"
+        }
+      ],
+      "formula": null,
+      "type": null,
+      "removeOnRecall": false,
+      "removeAfterCombat": true,
+      "traits": [
+        "minor-affliction"
+      ]
+    },
+    "description": "PTR2E.Effect.Statuses.Descriptions.nullified"
+  },
+  {
+    "id": "suppressed",
+    "name": "PTR2E.Effect.Statuses.Labels.suppressed",
+    "img": "systems/ptr2e/img/conditions/suppressed.svg",
+    "type": "affliction",
+    "duration": {
+      "turns": 5
+    },
+    "system": {
+      "changes": [
+        {
+          "type": "alter-attack",
+          "value": 1.5,
+          "mode": 1,
+          "property": "pp-cost",
+          "definition": []
+        }
+      ],
+      "formula": null,
+      "type": null,
+      "removeOnRecall": false,
+      "removeAfterCombat": true,
+      "traits": [
+        "minor-affliction"
+      ]
+    },
+    "description": "PTR2E.Effect.Statuses.Descriptions.suppressed"
+  },
+  {
+    "id": "lifted",
+    "name": "PTR2E.Effect.Statuses.Labels.lifted",
+    "img": "icons/svg/angel.svg",
+    "type": "affliction",
+    "duration": {
+      "turns": 5
+    },
+    "system": {
+      "changes": [
+        {
+          "type": "grant-effect",
+          "value": "stuck"
+        },
+        {
+          "type": "grant-effect",
+          "value": "raised"
+        },
+        {
+          "type": "basic",
+          "key": "system.battleStats.evasion.stage",
+          "value": -6,
+          "mode": 2
+        }
+      ],
+      "formula": null,
+      "type": null,
+      "removeOnRecall": false,
+      "removeAfterCombat": true,
+      "traits": [
+        "minor-affliction"
+      ]
+    },
+    "description": "PTR2E.Effect.Statuses.Descriptions.lifted"
+  },
+  {
+    "id": "raised",
+    "name": "PTR2E.Effect.Statuses.Labels.raised",
+    "img": "icons/svg/wing.svg",
+    "type": "affliction",
+    "duration": {
+      "turns": 5
+    },
+    "system": {
+      "changes": [
+        {
+          "type": "roll-option",
+          "key": "immunity",
+          "value": "trait:earthbound"
+        }
+      ],
+      "formula": null,
+      "type": null,
+      "removeOnRecall": false,
+      "removeAfterCombat": true,
+      "traits": [
+        "minor-affliction"
+      ]
+    },
+    "description": "PTR2E.Effect.Statuses.Descriptions.raised"
+  },
+  {
+    "id": "harden",
+    "name": "PTR2E.Effect.Statuses.Labels.harden",
+    "img": "icons/svg/tower.svg",
+    "type": "affliction",
+    "duration": {
+      "turns": 5
+    },
+    "system": {
+      "changes": [
+        {
+          "type": "flat-modifier",
+          "key": "contact-trait-attack-power",
+          "value": 20
+        },
+        {
+          "type": "stage-modifier",
+          "key": "dash-trait-attack-crit",
+          "value": 1
+        }
+      ],
+      "formula": null,
+      "type": null,
+      "removeOnRecall": false,
+      "removeAfterCombat": true,
+      "traits": [
+        "minor-affliction"
+      ]
+    },
+    "description": "PTR2E.Effect.Statuses.Descriptions.harden"
+  },
+  {
+    "id": "sharpen",
+    "name": "PTR2E.Effect.Statuses.Labels.sharpen",
+    "img": "icons/svg/sword.svg",
+    "type": "affliction",
+    "duration": {
+      "turns": 5
+    },
+    "system": {
+      "changes": [
+        {
+          "type": "stage-modifier",
+          "key": "dash-trait-attack-crit",
+          "value": 1
+        },
+        {
+          "type": "stage-modifier",
+          "key": "sharp-trait-attack-crit",
+          "value": 1
+        }
+      ],
+      "formula": null,
+      "type": null,
+      "removeOnRecall": false,
+      "removeAfterCombat": true,
+      "traits": [
+        "minor-affliction"
+      ]
+    },
+    "description": "PTR2E.Effect.Statuses.Descriptions.sharpen"
+  },
+  {
+    "id": "destined",
+    "name": "PTR2E.Effect.Statuses.Labels.destined",
+    "img": "icons/svg/daze.svg",
+    "type": "affliction",
+    "duration": {
+      "turns": 5
+    },
+    "system": {
+      "changes": [],
+      "formula": null,
+      "type": null,
+      "removeOnRecall": false,
+      "removeAfterCombat": true,
+      "traits": [
+        "minor-affliction"
+      ]
+    },
+    "description": "PTR2E.Effect.Statuses.Descriptions.destined"
+  },
+  {
+    "id": "disguised",
+    "name": "PTR2E.Effect.Statuses.Labels.disguised",
+    "img": "icons/svg/cowled.svg",
+    "type": "passive",
+    "system": {
+      "changes": [],
+      "removeOnRecall": false,
+      "removeAfterCombat": false,
+      "traits": [
+        "minor-affliction"
+      ]
+    },
+    "description": "PTR2E.Effect.Statuses.Descriptions.disguised"
+  },
+  {
+    "id": "braced",
+    "name": "PTR2E.Effect.Statuses.Labels.braced",
+    "img": "icons/svg/shield.svg",
+    "type": "passive",
+    "system": {
+      "changes": [
+        {
+          "type": "basic",
+          "key": "system.attributes.def.stage",
+          "value": 2,
+          "mode": 2
+        },
+        {
+          "type": "basic",
+          "key": "system.attributes.spd.stage",
+          "value": 2,
+          "mode": 2
+        },
+        {
+          "type": "basic",
+          "key": "system.attributes.atk.stage",
+          "value": -1,
+          "mode": 2
+        },
+        {
+          "type": "basic",
+          "key": "system.attributes.spa.stage",
+          "value": -1,
+          "mode": 2
+        },
+        {
+          "type": "roll-option",
+          "key": "immunity",
+          "value": "crit"
+        }
+      ],
+      "removeOnRecall": true,
+      "traits": [
+        "minor-affliction"
+      ]
+    },
+    "description": "PTR2E.Effect.Statuses.Descriptions.braced"
+  },
+  {
+    "id": "duel",
+    "name": "PTR2E.Effect.Statuses.Labels.duel",
+    "img": "systems/ptr2e/img/conditions/tagged.svg",
+    "type": "affliction",
+    "duration": {
+      "turns": 5
+    },
+    "system": {
+      "changes": [
+        {
+          "type": "token-tag",
+          "key": "duel"
+        },
+        {
+          "type": "stage-modifier",
+          "key": "all-crit",
+          "value": 2,
+          "label": "Duel - Duel Partner",
+          "mode": 2,
+          "predicate": ["target:mark:duel", "origin:mark:duel"]
+        },
+        {
+          "type": "percentile-modifier",
+          "key": "all-damage",
+          "label": "Duel - non-Duel Partner",
+          "value": -33.33,
+          "predicate": [
+            {
+              "not": "target:mark:duel"
+            },
+            {
+              "not": "origin:mark:duel"
+            }
+          ]
+        },
+        {
+          "type": "grant-effect",
+          "value": "stuck"
+        }
+      ],
+      "formula": null,
+      "type": null,
+      "removeOnRecall": false,
+      "removeAfterCombat": true,
+      "traits": [
+        "minor-affliction"
+      ]
+    },
+    "description": "PTR2E.Effect.Statuses.Descriptions.duel"
+  },
+  {
+    "id": "engulfed",
+    "name": "PTR2E.Effect.Statuses.Labels.engulfed",
+    "img": "icons/svg/barrel.svg",
+    "type": "affliction",
+    "duration": {
+      "turns": 5
+    },
+    "system": {
+      "changes": [
+        {
+          "type": "grant-effect",
+          "value": "bound"
+        },
+        {
+          "type": "grant-effect",
+          "value": "stuck"
+        }
+      ],
+      "formula": null,
+      "type": null,
+      "removeOnRecall": false,
+      "removeAfterCombat": true,
+      "traits": [
+        "minor-affliction"
+      ]
+    },
+    "description": "PTR2E.Effect.Statuses.Descriptions.engulfed"
+  },
+  {
+    "id": "curled",
+    "name": "PTR2E.Effect.Statuses.Labels.curled",
+    "img": "icons/svg/mole.svg",
+    "type": "affliction",
+    "duration": {
+      "turns": 5
+    },
+    "system": {
+      "changes": [
+        {
+          "type": "basic",
+          "key": "system.attributes.def.stage",
+          "value": 1,
+          "mode": 2
+        },
+        {
+          "type": "percentile-modifier",
+          "key": "curl-trait-attack-power",
+          "value": 100
+        }
+      ],
+      "formula": null,
+      "type": null,
+      "removeOnRecall": false,
+      "removeAfterCombat": true,
+      "traits": [
+        "minor-affliction"
+      ]
+    },
+    "description": "PTR2E.Effect.Statuses.Descriptions.curled"
+  },
+  {
+    "id": "chanted",
+    "name": "PTR2E.Effect.Statuses.Labels.chanted",
+    "img": "icons/svg/mage-shield.svg",
+    "type": "affliction",
+    "duration": {
+      "turns": 5
+    },
+    "system": {
+      "changes": [
+        {
+          "type": "roll-option",
+          "key": "immunity",
+          "value": "crit"
+        }
+      ],
+      "formula": null,
+      "type": null,
+      "removeOnRecall": false,
+      "removeAfterCombat": true,
+      "traits": [
+        "minor-affliction"
+      ]
+    },
+    "description": "PTR2E.Effect.Statuses.Descriptions.chanted"
+  },
+  {
+    "id": "choice-locked",
+    "name": "PTR2E.Effect.Statuses.Labels.choice-locked",
+    "img": "icons/svg/stone-path.svg",
+    "type": "affliction",
+    "duration": {
+      "turns": 5
+    },
+    "system": {
+      "changes": [],
+      "formula": null,
+      "type": null,
+      "removeOnRecall": false,
+      "removeAfterCombat": true,
+      "traits": [
+        "minor-affliction"
+      ],
+      "description": "PTR2E.Effect.Statuses.Descriptions.choice-locked"
+    }
+  },
+  {
+    "id": "grounded",
+    "name": "PTR2E.Effect.Statuses.Labels.grounded",
+    "img": "icons/svg/mountain.svg",
+    "type": "affliction",
+    "duration": {
+      "turns": 5
+    },
+    "system": {
+      "changes": [
+        {
+          "type": "roll-option",
+          "key": "immunity",
+          "value": "effect:lifted"
+        },
+        {
+          "type": "roll-option",
+          "key": "immunity",
+          "value": "effect:raised"
+        }
+      ],
+      "formula": null,
+      "type": null,
+      "removeOnRecall": false,
+      "removeAfterCombat": true,
+      "traits": [
+        "minor-affliction"
+      ]
+    },
+    "description": "PTR2E.Effect.Statuses.Descriptions.grounded"
+  },
+  {
+    "id": "cursed",
+    "name": "PTR2E.Effect.Statuses.Labels.cursed",
+    "img": "systems/ptr2e/img/conditions/cursed.svg",
+    "type": "affliction",
+    "duration": {
+      "turns": 5
+    },
+    "system": {
+      "changes": [],
+      "formula": "1/4",
+      "type": "damage",
+      "removeOnRecall": false,
+      "removeAfterCombat": true,
+      "traits": [
+        "minor-affliction"
+      ]
+    },
+    "description": "PTR2E.Effect.Statuses.Descriptions.cursed"
+  },
+  {
+    "id": "true-sight",
+    "name": "PTR2E.Effect.Statuses.Labels.true-sight",
+    "img": "icons/svg/eye.svg",
+    "type": "affliction",
+    "duration": {
+      "turns": 5
+    },
+    "system": {
+      "changes": [],
+      "formula": null,
+      "type": null,
+      "removeOnRecall": false,
+      "removeAfterCombat": true,
+      "traits": [
+        "minor-affliction"
+      ],
+      "description": "PTR2E.Effect.Statuses.Descriptions.true-sight"
+    }
+  },
+  {
+    "id": "shrink",
+    "name": "PTR2E.Effect.Statuses.Labels.shrink",
+    "img": "icons/svg/degen.svg",
+    "type": "affliction",
+    "duration": {
+      "turns": 5
+    },
+    "system": {
+      "changes": [],
+      "formula": null,
+      "type": null,
+      "removeOnRecall": false,
+      "removeAfterCombat": true,
+      "traits": [
+        "minor-affliction"
+      ]
+    },
+    "description": "PTR2E.Effect.Statuses.Descriptions.shrink"
+  },
+  {
+    "id": "enlarge",
+    "name": "PTR2E.Effect.Statuses.Labels.enlarge",
+    "img": "icons/svg/regen.svg",
+    "type": "affliction",
+    "duration": {
+      "turns": 5
+    },
+    "system": {
+      "changes": [],
+      "formula": null,
+      "type": null,
+      "removeOnRecall": false,
+      "removeAfterCombat": true,
+      "traits": [
+        "minor-affliction"
+      ]
+    },
+    "description": "PTR2E.Effect.Statuses.Descriptions.enlarge"
+  },
+  {
+    "id": "marked",
+    "name": "PTR2E.Effect.Statuses.Labels.marked",
+    "img": "icons/svg/target.svg",
+    "type": "affliction",
+    "duration": {
+      "turns": 5
+    },
+    "system": {
+      "changes": [],
+      "formula": null,
+      "type": null,
+      "removeOnRecall": false,
+      "removeAfterCombat": true,
+      "traits": [
+        "minor-affliction"
+      ]
+    },
+    "description": "PTR2E.Effect.Statuses.Descriptions.marked"
+  },
+  {
+    "id": "unlucky",
+    "name": "PTR2E.Effect.Statuses.Labels.unlucky",
+    "img": "icons/svg/card-hand.svg",
+    "type": "affliction",
+    "duration": {
+      "turns": 5
+    },
+    "system": {
+      "changes": [],
+      "formula": null,
+      "type": null,
+      "removeOnRecall": false,
+      "removeAfterCombat": true,
+      "traits": [
+        "minor-affliction"
+      ]
+    },
+    "description": "PTR2E.Effect.Statuses.Descriptions.unlucky"
+  },
+  {
+    "id": "perish",
+    "name": "PTR2E.Effect.Statuses.Labels.perish",
+    "img": "icons/svg/skull.svg",
+    "type": "affliction",
+    "duration": {
+      "turns": 5
+    },
+    "system": {
+      "changes": [],
+      "formula": null,
+      "type": null,
+      "removeOnRecall": false,
+      "removeAfterCombat": true,
+      "traits": [
+        "minor-affliction"
+      ]
+    },
+    "description": "PTR2E.Effect.Statuses.Descriptions.perish"
+  },
+  {
+    "id": "invisible",
+    "name": "PTR2E.Effect.Statuses.Labels.invisible",
+    "img": "icons/svg/invisible.svg",
+    "type": "affliction",
+    "duration": {
+      "turns": 5
+    },
+    "system": {
+      "changes": [],
+      "formula": null,
+      "type": null,
+      "removeOnRecall": false,
+      "removeAfterCombat": true,
+      "traits": [
+        "minor-affliction"
+      ]
+    },
+    "description": "PTR2E.Effect.Statuses.Descriptions.invisible"
+  },
+  {
+    "id": "transient",
+    "name": "PTR2E.Effect.Statuses.Labels.transient",
+    "img": "icons/svg/door-exit.svg",
+    "type": "affliction",
+    "duration": {
+      "turns": 5
+    },
+    "system": {
+      "changes": [
+        {
+          "type": "basic",
+          "key": "system.battleStats.evasion.stage",
+          "value": 6,
+          "mode": 2
+        },
+        {
+          "type": "percentile-modifier",
+          "key": "all-damage",
+          "value": -75
+        }
+      ],
+      "formula": null,
+      "type": null,
+      "removeOnRecall": false,
+      "removeAfterCombat": true,
+      "traits": [
+        "minor-affliction"
+      ]
+    },
+    "description": "PTR2E.Effect.Statuses.Descriptions.transient"
+  },
+  {
+    "id": "fear",
+    "name": "PTR2E.Effect.Statuses.Labels.fear",
+    "img": "icons/svg/silenced.svg",
+    "type": "affliction",
+    "duration": {
+      "turns": 5
+    },
+    "system": {
+      "changes": [
+        {
+          "type": "percentile-modifier",
+          "key": "attack-power",
+          "value": -33,
+          "predicate": [],
+          "label": "Fear - targeting Source",
+          "mode": 2,
+          "priority": null,
+          "ignored": false
+        },
+        {
+          "type": "basic",
+          "key": "system.battleStats.accuracy.stage",
+          "value": 1,
+          "predicate": [],
+          "label": "Fear - targeting Source",
+          "mode": 2,
+          "priority": null,
+          "ignored": false
+        }
+      ],
+      "formula": null,
+      "type": null,
+      "removeOnRecall": false,
+      "removeAfterCombat": true,
+      "traits": [
+        "minor-affliction"
+      ]
+    },
+    "description": "PTR2E.Effect.Statuses.Descriptions.fear"
+  },
+  {
+    "id": "stockpile",
+    "name": "PTR2E.Effect.Statuses.Labels.stockpile",
+    "img": "icons/svg/coins.svg",
+    "type": "passive",
+    "system": {
+      "changes": [
+        {
+          "type": "basic",
+          "key": "system.attributes.def.stage",
+          "value": 1
+        },
+        {
+          "type": "basic",
+          "key": "system.attributes.spd.stage",
+          "value": 1
+        }
+      ],
+      "removeOnRecall": true,
+      "removeAfterCombat": true,
+      "traits": [
+        "minor-affliction"
+      ]
+    },
+    "description": "PTR2E.Effect.Statuses.Descriptions.stockpile"
+  },
+  {
+    "id": "leech",
+    "name": "PTR2E.Effect.Statuses.Labels.leech",
+    "img": "systems/ptr2e/img/conditions/seeded.svg",
+    "type": "affliction",
+    "duration": {
+      "turns": 5
+    },
+    "system": {
+      "changes": [],
+      "formula": "1/8",
+      "type": "damage",
+      "removeOnRecall": false,
+      "removeAfterCombat": true,
+      "traits": [
+        "minor-affliction"
+      ]
+    },
+    "description": "PTR2E.Effect.Statuses.Descriptions.leech"
+  },
+  {
+    "id": "rebound",
+    "name": "PTR2E.Effect.Statuses.Labels.rebound",
+    "img": "icons/svg/holy-shield.svg",
+    "type": "affliction",
+    "duration": {
+      "turns": 5
+    },
+    "system": {
+      "changes": [],
+      "formula": null,
+      "type": null,
+      "removeOnRecall": false,
+      "removeAfterCombat": true,
+      "traits": [
+        "minor-affliction"
+      ]
+    },
+    "description": "PTR2E.Effect.Statuses.Descriptions.rebound"
+  },
+  {
+    "id": "ringed",
+    "name": "PTR2E.Effect.Statuses.Labels.ringed",
+    "img": "systems/ptr2e/img/conditions/vortex.svg",
+    "type": "affliction",
+    "duration": {
+      "turns": 5
+    },
+    "system": {
+      "changes": [],
+      "formula": "1/16",
+      "type": "healing",
+      "removeOnRecall": false,
+      "removeAfterCombat": true,
+      "traits": [
+        "minor-affliction"
+      ]
+    },
+    "description": "PTR2E.Effect.Statuses.Descriptions.ringed"
+  },
+  {
+    "id": "enraged",
+    "name": "PTR2E.Effect.Statuses.Labels.enraged",
+    "img": "systems/ptr2e/img/conditions/rage.svg",
+    "type": "affliction",
+    "duration": {
+      "turns": 5
+    },
+    "system": {
+      "changes": [],
+      "formula": null,
+      "type": null,
+      "removeOnRecall": false,
+      "removeAfterCombat": true,
+      "traits": [
+        "minor-affliction"
+      ]
+    },
+    "description": "PTR2E.Effect.Statuses.Descriptions.enraged"
+  },
+  {
+    "id": "charmed",
+    "name": "PTR2E.Effect.Statuses.Labels.charmed",
+    "img": "systems/ptr2e/img/conditions/infatuated.svg",
+    "type": "affliction",
+    "duration": {
+      "turns": 5
+    },
+    "system": {
+      "changes": [],
+      "formula": null,
+      "type": null,
+      "removeOnRecall": false,
+      "removeAfterCombat": true,
+      "traits": [
+        "minor-affliction"
+      ]
+    },
+    "description": "PTR2E.Effect.Statuses.Descriptions.charmed"
+  },
+  {
+    "id": "taunted",
+    "name": "PTR2E.Effect.Statuses.Labels.taunted",
+    "img": "icons/svg/terror.svg",
+    "type": "affliction",
+    "duration": {
+      "turns": 5
+    },
+    "system": {
+      "changes": [
+        {
+          "type": "percentile-modifier",
+          "key": "attack-power",
+          "value": -33,
+          "predicate": [],
+          "label": "Taunt - not targeting Source",
+          "mode": 2,
+          "priority": null,
+          "ignored": false
+        }
+      ],
+      "formula": null,
+      "type": null,
+      "removeOnRecall": false,
+      "removeAfterCombat": true,
+      "traits": [
+        "minor-affliction"
+      ]
+    },
+    "description": "PTR2E.Effect.Statuses.Descriptions.taunted"
+  },
+  {
+    "id": "grapple",
+    "name": "PTR2E.Effect.Statuses.Labels.grapple",
+    "img": "icons/svg/net.svg",
+    "type": "passive",
+    "system": {
+      "changes": [
+        {
+          "type": "basic",
+          "key": "system.battleStats.evasion.stage",
+          "value": -1,
+          "mode": 2
+        },
+        {
+          "type": "basic",
+          "key": "system.battleStats.accuracy.stage",
+          "value": -1,
+          "mode": 2
+        }
+      ],
+      "removeOnRecall": true,
+      "removeAfterCombat": true,
+      "traits": [
+        "minor-affliction"
+      ]
+    },
+    "description": "PTR2E.Effect.Statuses.Descriptions.grapple"
+  },
+  {
+    "id": "resolved",
+    "name": "PTR2E.Effect.Statuses.Labels.resolved",
+    "img": "icons/svg/fire-shield.svg",
+    "type": "affliction",
+    "duration": {
+      "turns": 2
+    },
+    "system": {
+      "changes": [
+        {
+          "type": "basic",
+          "key": "system.attributes.def.stage",
+          "value": 1,
+          "mode": 2
+        },
+        {
+          "type": "basic",
+          "key": "system.attributes.spd.stage",
+          "value": 1,
+          "mode": 2
+        }
+      ],
+      "removeOnRecall": false,
+      "removeAfterCombat": true,
+      "traits": [
+        "pseudo-affliction"
+      ]
+    },
+    "description": "PTR2E.Effect.Statuses.Descriptions.resolved"
+  },
+  {
+    "id": "boosted",
+    "name": "PTR2E.Effect.Statuses.Labels.boosted",
+    "img": "icons/svg/light.svg",
+    "type": "affliction",
+    "duration": {
+      "turns": 2
+    },
+    "system": {
+      "changes": [
+        {
+          "type": "basic",
+          "key": "system.attributes.atk.stage",
+          "value": 1,
+          "mode": 2
+        },
+        {
+          "type": "basic",
+          "key": "system.attributes.spa.stage",
+          "value": 1,
+          "mode": 2
+        }
+      ],
+      "removeOnRecall": true,
+      "removeAfterCombat": true,
+      "traits": [
+        "pseudo-affliction"
+      ]
+    },
+    "description": "PTR2E.Effect.Statuses.Descriptions.boosted"
+  },
+  {
+    "id": "rapid",
+    "name": "PTR2E.Effect.Statuses.Labels.rapid",
+    "img": "icons/svg/wingfoot.svg",
+    "type": "affliction",
+    "duration": {
+      "turns": 2
+    },
+    "system": {
+      "changes": [],
+      "removeOnRecall": true,
+      "removeAfterCombat": true,
+      "traits": [
+        "pseudo-affliction"
+      ]
+    },
+    "description": "PTR2E.Effect.Statuses.Descriptions.rapid"
+  },
+  {
+    "id": "strong",
+    "name": "PTR2E.Effect.Statuses.Labels.strong",
+    "img": "icons/svg/statue.svg",
+    "type": "affliction",
+    "duration": {
+      "turns": 2
+    },
+    "system": {
+      "changes": [
+        {
+          "type": "percentile-modifier",
+          "key": "attack-power",
+          "value": 20,
+          "predicate": [],
+          "label": "Strong",
+          "mode": 2,
+          "priority": null,
+          "ignored": false
+        }
+      ],
+      "removeOnRecall": true,
+      "removeAfterCombat": true,
+      "traits": [
+        "pseudo-affliction"
+      ]
+    },
+    "description": "PTR2E.Effect.Statuses.Descriptions.strong"
+  },
+  {
+    "id": "agile",
+    "name": "PTR2E.Effect.Statuses.Labels.agile",
+    "img": "icons/svg/thrust.svg",
+    "type": "affliction",
+    "duration": {
+      "turns": 2
+    },
+    "system": {
+      "changes": [
+        {
+          "type": "percentile-modifier",
+          "key": "attack-power",
+          "value": -20,
+          "predicate": [],
+          "label": "Agile",
+          "mode": 2,
+          "priority": null,
+          "ignored": false
+        }
+      ],
+      "removeOnRecall": true,
+      "removeAfterCombat": true,
+      "traits": [
+        "pseudo-affliction"
+      ]
+    },
+    "description": "PTR2E.Effect.Statuses.Descriptions.agile"
+  },
+  {
+    "id": "precise",
+    "name": "PTR2E.Effect.Statuses.Labels.precise",
+    "img": "icons/svg/sun.svg",
+    "type": "affliction",
+    "duration": {
+      "turns": 2
+    },
+    "system": {
+      "changes": [
+        {
+          "type": "basic",
+          "key": "system.battleStats.accuracy.stage",
+          "value": 1,
+          "mode": 2
+        }
+      ],
+      "removeOnRecall": true,
+      "removeAfterCombat": true,
+      "traits": [
+        "pseudo-affliction"
+      ]
+    },
+    "description": "PTR2E.Effect.Statuses.Descriptions.precise"
+  },
+  {
+    "id": "evasive",
+    "name": "PTR2E.Effect.Statuses.Labels.evasive",
+    "img": "icons/svg/upgrade.svg",
+    "type": "affliction",
+    "duration": {
+      "turns": 2
+    },
+    "system": {
+      "changes": [
+        {
+          "type": "basic",
+          "key": "system.battleStats.evasion.stage",
+          "value": 1,
+          "mode": 2
+        }
+      ],
+      "removeOnRecall": true,
+      "removeAfterCombat": true,
+      "traits": [
+        "pseudo-affliction"
+      ]
+    },
+    "description": "PTR2E.Effect.Statuses.Descriptions.evasive"
+  },
+  {
+    "id": "gambit",
+    "name": "PTR2E.Effect.Statuses.Labels.gambit",
+    "img": "icons/svg/upgrade.svg",
+    "type": "affliction",
+    "duration": {
+      "turns": 2
+    },
+    "system": {
+      "changes": [
+        {
+          "type": "basic",
+          "key": "system.battleStats.acc.stage",
+          "value": -1,
+          "mode": 2
+        },
+        {
+          "type": "basic",
+          "key": "system.battleStats.critRate.stage",
+          "value": 2,
+          "mode": 2
+        }
+      ],
+      "removeOnRecall": true,
+      "removeAfterCombat": true,
+      "traits": [
+        "pseudo-affliction"
+      ]
+    },
+    "description": "PTR2E.Effect.Statuses.Descriptions.gambit"
+  },
+  {
+    "id": "stoked",
+    "name": "PTR2E.Effect.Statuses.Labels.stoked",
+    "img": "systems/ptr2e/img/svg/fire_icon.svg",
+    "type": "affliction",
+    "duration": {
+      "turns": 1
+    },
+    "system": {
+      "changes": [
+        {
+          "type": "percentile-modifier",
+          "key": "fire-attack-power",
+          "value": 100,
+          "mode": 2
+        }
+      ],
+      "removeOnRecall": true,
+      "removeAfterCombat": true,
+      "traits": [
+        "fire",
+        "pseudo-affliction"
+      ]
+    },
+    "description": "PTR2E.Effect.Statuses.Descriptions.stoked"
+  },
+  {
+    "id": "charged",
+    "name": "PTR2E.Effect.Statuses.Labels.charged",
+    "img": "systems/ptr2e/img/perk-icons/Elamentalist.svg",
+    "type": "affliction",
+    "duration": {
+      "turns": 1
+    },
+    "system": {
+      "changes": [
+        {
+          "type": "percentile-modifier",
+          "key": "electric-attack-power",
+          "value": 100,
+          "mode": 2
+        }
+      ],
+      "removeOnRecall": false,
+      "removeAfterCombat": true,
+      "traits": [
+        "electric",
+        "psuedo-affliction"
+      ]
+    },
+    "description": "PTR2E.Effect.Statuses.Descriptions.charged"
+  },
+  {
+    "id": "loafing",
+    "_id": "loafingcondition",
+    "name": "PTR2E.Effect.Statuses.Labels.loafing",
+    "img": "icons/svg/anchor.svg",
+    "type": "passive",
+    "system": {
+      "changes": [
+        {
+          "type": "flat-modifier",
+          "key": "attack-damage-percentile",
+          "value": "-((@effect.system.stacks * 15) + (max(0, (@effect.system.stacks - 2)) * 5) + (max(0, (@effect.system.stacks - 3)) * 10))"
+        },
+        {
+          "type": "basic",
+          "key": "system.modifiers.skills",
+          "value": "-((@effect.system.stacks * 0.15) + (max(0, (@effect.system.stacks - 2)) * 0.05) + (max(0, (@effect.system.stacks - 3)) * 0.10))",
+          "mode": 2
+        },
+        {
+          "type": "basic",
+          "key": "system.attributes.spe.stage",
+          "value": "-(1 + (max(0, (@effect.system.stacks - 2)) * 1) + (max(0, (@effect.system.stacks - 3)) * 1))",
+          "mode": 2
+        },
+        {
+          "type": "alter-attack",
+          "key": "all",
+          "value": "1+((@effect.system.stacks * 0.15) + (max(0, (@effect.system.stacks - 2)) * 0.05) + (max(0, (@effect.system.stacks - 3)) * 0.30))",
+          "mode": 1,
+          "definition": [],
+          "property": "pp-cost"
+        },
+        {
+          "type": "flat-modifier",
+          "key": "attack-accuracy-flat",
+          "value": "-(max(0, (@effect.system.stacks - 1)) * 10)",
+          "predicate": [
+            {
+              "gt": [
+                "{effect|system.stacks}",
+                1
+              ]
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "key": "system.modifiers.movement",
+          "value": "-((max(0, (@effect.system.stacks - 2)) * 2) + (max(0, (@effect.system.stacks - 3)) * 1))",
+          "mode": 2
+        },
+        {
+          "type": "grant-effect",
+          "value": "unlucky",
+          "reevaluateOnUpdate": true,
+          "allowDuplicate": false,
+          "onDeleteActions": {
+            "grantee": "restrict",
+            "granter": "cascade"
+          },
+          "alterations": [
+            {
+              "mode": 5,
+              "property": "type",
+              "value": "passive"
+            },
+            {
+              "mode": 5,
+              "property": "duration.turns",
+              "value": 0
+            }
+          ],
+          "predicate": [
+            {
+              "gt": [
+                "{effect|system.stacks}",
+                1
+              ]
+            }
+          ]
+        }
+      ],
+      "traits": [
+        "pseudo-affliction"
+      ],
+      "stacks": 1,
+      "removeAfterCombat": false
+    },
+    "description": "PTR2E.Effect.Statuses.Descriptions.loafing"
+  }
+]

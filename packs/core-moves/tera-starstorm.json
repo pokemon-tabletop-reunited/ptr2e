@@ -1,10 +1,10 @@
 {
   "name": "Tera Starstorm",
   "type": "move",
-  "img": "/systems/ptr2e/img/svg/normal_icon.svg",
+  "img": "systems/ptr2e/img/svg/normal_icon.svg",
   "system": {
     "slug": "tera-starstorm",
-    "description": "Effect: If the user is currently in their Stellar Forme, this attack instead has [Blast 5].",
+    "description": "",
     "traits": [
       "legendary",
       "blast-2"
@@ -16,7 +16,8 @@
         "type": "attack",
         "traits": [
           "legendary",
-          "blast-2"
+          "blast-2",
+          "pp-updated"
         ],
         "range": {
           "target": "blast",
@@ -25,7 +26,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 8,
+          "powerPoints": 6,
           "delay": null,
           "priority": null,
           "trigger": null
@@ -36,15 +37,49 @@
         "types": [
           "normal"
         ],
-        "description": "Effect: If the user is currently in their Stellar Forme, this attack instead has [Blast 5].",
+        "description": "",
         "contestType": "",
         "contestEffect": "",
         "free": false,
         "slot": null
+      },
+      {
+        "slug": "tera-starstorm-stellar",
+        "name": "Tera Starstorm (Stellar)",
+        "type": "attack",
+        "traits": [
+          "legendary",
+          "blast-5",
+          "pp-updated"
+        ],
+        "range": {
+          "target": "blast",
+          "distance": 20,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 6,
+          "delay": null,
+          "priority": null,
+          "trigger": "<p>The user is currently in their Stellar Forme.</p>"
+        },
+        "category": "special",
+        "power": 120,
+        "accuracy": 100,
+        "types": [
+          "normal"
+        ],
+        "description": "<p>Tigger: The user is currently in their Stellar Forme.</p>",
+        "contestType": "",
+        "contestEffect": "",
+        "variant": "tera-starstorm",
+        "free": true,
+        "slot": null
       }
     ],
     "container": null,
-    "grade": "S"
+    "grade": "A"
   },
   "_id": "LNZi0GDKv5mYjS7F",
   "effects": []

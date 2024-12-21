@@ -53,7 +53,7 @@ declare global {
          * @param [options.hookName="EntryContext"]  The name of the hook to call.
          */
         static create(
-            app: Application,
+            app: Application | foundry.applications.api.ApplicationV2,
             html: JQuery,
             selector: string,
             menuItems: ContextMenuEntry[],

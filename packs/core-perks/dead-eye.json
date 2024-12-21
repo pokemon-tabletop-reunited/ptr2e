@@ -2,74 +2,69 @@
   "name": "Dead Eye",
   "type": "perk",
   "system": {
-    "prerequisites": [
-      "None"
-    ],
+    "prerequisites": [],
     "cost": 4,
-    "design": {
-      "arena": "physical",
-      "approach": "finesse",
-      "archetype": "Combat"
-    },
-    "description": "Trigger: You score a hit with a damaging ranged move which is not a Critical Hit. The attack becomes a critical hit.",
+    "description": "<p>Trigger: You hit with a damaging, non-Critical, non-[Contact] Attack. The attack becomes a Critical Hit.</p>",
     "actions": [
       {
         "name": "Dead Eye",
         "slug": "dead-eye",
-        "description": "Trigger: You score a hit with a damaging ranged move which is not a Critical Hit. The attack becomes a critical hit.",
+        "description": "<p>Trigger: You hit with a damaging, non-Critical, non-[Contact] Attack. The attack becomes a Critical Hit.</p>",
         "cost": {
           "activation": "free",
-          "powerPoints": 5
+          "powerPoints": 5,
+          "delay": null,
+          "priority": null
         },
         "type": "generic",
-        "traits": []
+        "traits": [],
+        "img": "icons/svg/explosion.svg",
+        "range": {
+          "target": "enemy",
+          "unit": "m",
+          "distance": 0
+        },
+        "variant": null
       }
     ],
     "slug": "dead-eye",
     "traits": [],
-    "node": {
-      "i": -43,
-      "j": 95,
-      "connected": [
-        "down-the-sights",
-        "dead-to-rights",
-        "precise-style"
-      ],
-      "config": {
-        "alpha": null,
-        "backgroundColor": "#0000ff",
-        "borderColor": null,
-        "borderWidth": null,
-        "texture": "systems/ptr2e/img/perk-icons/Combat.svg",
-        "tint": "#ffffff",
-        "scale": null
-      },
-      "hidden": false,
-      "type": "normal"
-    }
+    "_migration": {
+      "version": null,
+      "previous": null
+    },
+    "nodes": [
+      {
+        "connected": [
+          "weak-spot",
+          "dead-to-rights",
+          "great-hunter"
+        ],
+        "config": {
+          "alpha": null,
+          "backgroundColor": "#0000ff",
+          "borderColor": null,
+          "borderWidth": null,
+          "texture": "systems/ptr2e/img/perk-icons/Combat.svg",
+          "tint": "#ffffff",
+          "scale": null
+        },
+        "hidden": false,
+        "type": "normal",
+        "x": 37,
+        "y": 181,
+        "tier": null
+      }
+    ],
+    "autoUnlock": [],
+    "originSlug": null,
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": []
   },
   "_id": "XwBEo0SPEQ5UtA0l",
-  "img": "/systems/ptr2e/img/icons/feat_icon.webp",
+  "img": "systems/ptr2e/img/perk-icons/Combat.svg",
   "effects": [],
-  "flags": {
-    "core": {
-      "sourceId": "Compendium.ptr2e.core-perks.Item.XwBEo0SPEQ5UtA0l"
-    }
-  },
-  "_stats": {
-    "coreVersion": "12.321",
-    "systemId": "ptr2e",
-    "systemVersion": "0.005",
-    "createdTime": null,
-    "modifiedTime": 1714922220971,
-    "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
-    "compendiumSource": null,
-    "duplicateSource": null
-  },
-  "folder": null,
-  "sort": 0,
-  "ownership": {
-    "default": 0
-  },
-  "_key": "!items!XwBEo0SPEQ5UtA0l"
+  "folder": "W85LoOCz3WlwbyhZ"
 }

@@ -1,0 +1,106 @@
+{
+  "name": "High Voltage",
+  "type": "perk",
+  "system": {
+    "_migration": {
+      "version": 0.107,
+      "previous": null
+    },
+    "actions": [],
+    "description": "<p>Your Electric-Type moves gain a 20% chance to inflict Paralysis, or increase their existing Paralysis chance by +20%.</p>",
+    "traits": [],
+    "prerequisites": [
+      "trait:electric"
+    ],
+    "cost": 2,
+    "slug": "high-voltage",
+    "nodes": [
+      {
+        "connected": [
+          "watt-burn",
+          "jammer",
+          "root-5",
+          "stat-iv-booster-1-6"
+        ],
+        "config": {
+          "alpha": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "borderWidth": null,
+          "texture": null,
+          "tint": null,
+          "scale": null
+        },
+        "hidden": false,
+        "type": "normal",
+        "x": 27,
+        "y": 144,
+        "tier": null
+      }
+    ],
+    "autoUnlock": [],
+    "originSlug": null,
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": []
+  },
+  "img": "systems/ptr2e/img/svg/electric_icon.svg",
+  "effects": [
+    {
+      "name": "High Voltage",
+      "type": "passive",
+      "_id": "JPgwGEpdloaEzDRD",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "electric-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.paralysisconitem",
+            "predicate": [],
+            "chance": 20,
+            "affects": "target",
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.3.0.0",
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      }
+    }
+  ],
+  "_id": "gRR00RqYfyIOaeWV",
+  "folder": "2JITUAwLwao03qoc"
+}

@@ -1,13 +1,10 @@
 {
   "name": "Sunny Day",
   "type": "move",
-  "img": "/systems/ptr2e/img/svg/fire_icon.svg",
+  "img": "systems/ptr2e/img/svg/fire_icon.svg",
   "system": {
     "slug": "sunny-day",
-    "description": "Effect: The Weather becomes Sunny for 3 rounds.",
-    "traits": [
-      "weather"
-    ],
+    "traits": [],
     "actions": [
       {
         "slug": "sunny-day",
@@ -18,31 +15,26 @@
         ],
         "range": {
           "target": "field",
-          "distance": 0,
           "unit": "m"
         },
         "cost": {
-          "activation": "simple",
-          "powerPoints": 8,
-          "delay": null,
-          "priority": null,
-          "trigger": null
+          "activation": "complex",
+          "powerPoints": 4
         },
         "category": "status",
-        "power": null,
-        "accuracy": null,
         "types": [
           "fire"
         ],
-        "description": "Effect: The Weather becomes Sunny for 3 rounds.",
-        "contestType": "",
-        "contestEffect": "",
-        "free": false,
-        "slot": null
+        "description": "<p>Effect: The Weather becomes Sunny for 3 rounds.</p>",
+        "img": "systems/ptr2e/img/svg/fire_icon.svg",
+        "summon": "Compendium.ptr2e.core-summons.Item.9cgLo9qwotwZUqPT"
       }
     ],
-    "container": null,
-    "grade": "A"
+    "grade": "A",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
   },
   "_id": "oZFYMEJhZ3CZSNEZ",
   "effects": []

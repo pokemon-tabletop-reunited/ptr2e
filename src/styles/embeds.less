@@ -116,7 +116,7 @@ span.trait span.tag {
     }
 }
 
-#perk-web-hud section[data-application-part="perk"],
+#perk-web-app section[data-application-part="hudPerk"],
 aside[role="tooltip"].attack,
 aside[role="tooltip"].ability,
 aside[role="tooltip"].consumable,
@@ -267,6 +267,10 @@ aside[role="tooltip"].weapon,
             }
         }
     }
+}
+
+#perk-web-hud section[data-application-part="perk"] {
+    overflow: auto;
 }
 
 #perk-web-hud section[data-application-part="perk"],
@@ -614,11 +618,25 @@ content.attack-embed {
         }
 
         section.attack-description {
-            margin-top: 1rem;
+          margin-top: 1rem;
 
-            article {
-                min-height: 50px;
-            }
+          article {
+            min-height: 50px;
+            word-break: break-word;
+          }
+        }
+
+        footer.buttons {
+          margin-top: 2rem;
+          display: flex;
+          justify-content: center;
+          gap: 1rem;
+          flex-wrap: wrap;
+          flex-direction: row;
+
+          section {
+            flex: 1 1 calc(50% - 1rem);
+          }
         }
     }
 

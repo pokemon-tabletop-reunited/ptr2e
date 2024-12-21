@@ -17,7 +17,7 @@ export default abstract class EquipmentSystem extends GearSystem {
 
         if(!data.img || data.img === "icons/svg/item-bag.svg") {
             this.parent.updateSource({
-                img: "/systems/ptr2e/img/icons/item_icon.webp"
+                img: "systems/ptr2e/img/icons/equipment_icon.webp"
             })
         }
     }

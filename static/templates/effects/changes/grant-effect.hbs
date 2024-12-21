@@ -1,7 +1,12 @@
 <div class="form-group">
-    <label class="short" for="{{fieldIdPrefix}}uuid">{{localize "PTR2E.Effect.FIELDS.ChangeUuid.label"}}</label>
+    <label class="short" for="{{fieldIdPrefix}}uuid">{{localize "PTR2E.Effect.FIELDS.ChangeAffliction.label"}}</label>
     <div class="form-fields">
-        {{formInput fields.value value=change.value}}
+        <input type="text" name="{{basePath}}.value" id="{{fieldIdPrefix}}uuid" value="{{change.value}}" />
+        {{#if granted}}
+            <a class="content-link" data-uuid="{{granted.uuid}}" data-link="{{granted.uuid}}" data-tooltip="{{granted.name}}" data-type="Item" data-tooltip-direction="RIGHT">
+                <img src="{{granted.img}}"/> {{granted.name}}
+            </a>
+        {{/if}}
     </div>
 </div>
 
@@ -33,3 +38,56 @@
         />
     </div>
 </div>
+
+<div class="form-group">
+    <label for="{{fieldIdPrefix}}replace-self" data-tooltip="{{localize fields.replaceSelf.hint}}">{{localize fields.replaceSelf.label}}</label>
+    <div class="form-fields">
+        <input
+            type="checkbox"
+            name="{{basePath}}.replaceSelf"
+            id="{{fieldIdPrefix}}replace-self"
+            {{checked change.replaceSelf}}
+        />
+    </div>
+</div>
+
+<fieldset class="alterations">
+  <legend>Alterations</legend>
+  <content>
+    {{#each change.alterations as |alteration|}}
+    <div class="alteration">
+      {{formField ../fields.mode value=alteration.mode localize=true name=(concat ../basePath ".alterations." @index ".mode")}}
+
+      <div class="form-group">
+          <label class="short">{{localize "PTR2E.Effect.FIELDS.ChangeKey.label"}}</label>
+          <div class="form-fields">
+              <input type="text" name="{{../basePath}}.alterations.{{@index}}.property" value="{{alteration.property}}"/>
+          </div>
+      </div>
+
+      <div class="form-group">
+          <label class="short">{{localize ../fields.value.label}}</label>
+          <div class="form-fields">
+              {{{../form.resolvableValue (concat "alterations." @index ".value") hideButton=true}}}
+
+              {{{../form.resolvableAddBracket (concat "alterations." @index ".value")}}}
+          </div>
+      </div>
+
+      {{{../form.resolvableBrackets (concat "alterations." @index ".value")}}}
+
+      <div class="form-group" style="place-content: end;">
+        <button type="button" class="item-control alteration-delete" title="Delete Alteration" data-action="delete-alteration" data-id="{{../basePath}}" data-index="{{@index}}">
+            <i class="fas fa-trash"></i> Remove Alteration
+        </button>
+      </div>
+    </div>
+  {{/each}}
+  </content>
+  <div class="header">
+    <button class="item-control alteration-create" title="Add Alteration" data-action="add-alteration" data-id="{{basePath}}">
+        <i class="fas fa-plus-circle" style="margin-right: 3px;"></i>
+        <span class="readable">Add Alteration</span>
+    </button>
+  </div>
+</fieldset>

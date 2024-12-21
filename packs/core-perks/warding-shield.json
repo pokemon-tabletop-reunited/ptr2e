@@ -1,59 +1,104 @@
 {
-    "folder": "Et2u8UoXSe2a17oq",
-    "name": "Warding Shield",
-    "type": "perk",
-    "_id": "12pn6e6HTTFxyKjC",
-    "img": "systems/ptr2e/img/perk-icons/Combat.svg",
-    "system": {
-        "actions": [],
-        "slug": null,
-        "description": "<p>Enemy effect rates targeting you whilst Shielded reduce their effect range by 10, to a minimum of 1.</p>",
-        "traits": [],
-        "prerequisites": [
-            "Improved Shielding"
+  "folder": "c29hnIAtXgwB7FeY",
+  "name": "Warding Shield",
+  "type": "perk",
+  "_id": "12pn6e6HTTFxyKjC",
+  "img": "systems/ptr2e/img/perk-icons/Combat.svg",
+  "system": {
+    "actions": [],
+    "slug": "warding-shield",
+    "description": "<p>Enemy effect rates targeting you whilst Shielded reduce their effect range by 10, to a minimum of 1. This only applies to secondary effects which would be directly detrimental to yourself, and does not impact chances for the enemy to self-buff.</p>",
+    "traits": [],
+    "prerequisites": [
+      "item:perk:improved-shielding"
+    ],
+    "cost": 3,
+    "_migration": {
+      "version": null,
+      "previous": null
+    },
+    "nodes": [
+      {
+        "connected": [
+          "improved-shielding"
         ],
-        "cost": 3,
-        "design": {
-            "arena": "social",
-            "approach": "resilience",
-            "archetype": "Tank"
+        "config": {
+          "alpha": null,
+          "backgroundColor": "#ff8000",
+          "borderColor": null,
+          "borderWidth": null,
+          "texture": "systems/ptr2e/img/perk-icons/Combat.svg",
+          "tint": null,
+          "scale": null
         },
-        "node": {
-            "i": 24,
-            "j": -105,
-            "connected": [
-                "cleansing-shield",
-                "improved-shielding",
-                "reflection"
+        "hidden": false,
+        "type": "normal",
+        "x": 76,
+        "y": 102,
+        "tier": null
+      }
+    ],
+    "autoUnlock": [],
+    "originSlug": null,
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": []
+  },
+  "effects": [
+    {
+      "name": "Warding Shield",
+      "type": "passive",
+      "_id": "UkzRpXgjJWHA993Y",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "ephemeral-modifier",
+            "key": "system.modifiers.effectChance",
+            "value": -10,
+            "predicate": [
+              "self:state:shielded"
             ],
-            "config": {
-                "alpha": null,
-                "backgroundColor": "#ff8000",
-                "borderColor": null,
-                "borderWidth": null,
-                "texture": "systems/ptr2e/img/perk-icons/Combat.svg",
-                "tint": null,
-                "scale": null
-            },
-            "hidden": false,
-            "type": "normal"
-        }
-    },
-    "effects": [],
-    "sort": 0,
-    "ownership": {
-        "default": 0,
-        "Kc3DOunCh3ClAeHS": 3
-    },
-    "flags": {},
-    "_stats": {
-        "compendiumSource": "Item.12pn6e6HTTFxyKjC",
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "hideIfDisabled": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.325",
+        "coreVersion": "12.331",
         "systemId": "ptr2e",
-        "systemVersion": "0.006",
-        "createdTime": 1717164231786,
-        "modifiedTime": 1717179733116,
-        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
+        "systemVersion": "0.10.0-alpha.4.1.0",
+        "createdTime": 1733069809373,
+        "modifiedTime": 1733069890379,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+      }
     }
+  ]
 }

@@ -1,0 +1,109 @@
+{
+  "name": "Chill Out",
+  "type": "perk",
+  "system": {
+    "_migration": {
+      "version": 0.109,
+      "previous": null
+    },
+    "actions": [],
+    "description": "<p>You gain the [Chiller] trait.</p>",
+    "traits": [],
+    "prerequisites": [
+      "trait:ice"
+    ],
+    "cost": 1,
+    "slug": "chill-out",
+    "nodes": [
+      {
+        "connected": [
+          "cryogenics",
+          "climatologist",
+          "root-5",
+          "improved-overland-1-5",
+          "biting-cold",
+          "brittle-ice",
+          "stat-iv-booster-1-12"
+        ],
+        "config": {
+          "alpha": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "borderWidth": null,
+          "texture": "systems/ptr2e/img/svg/ice_icon.svg",
+          "tint": null,
+          "scale": null
+        },
+        "hidden": false,
+        "type": "normal",
+        "x": 74,
+        "y": 134,
+        "tier": null
+      }
+    ],
+    "autoUnlock": [
+      "trait:chiller"
+    ],
+    "originSlug": null,
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": []
+  },
+  "img": "systems/ptr2e/img/svg/ice_icon.svg",
+  "effects": [
+    {
+      "name": "Chill Out",
+      "type": "passive",
+      "_id": "PecTsS5QeVQHLfGZ",
+      "img": "systems/ptr2e/img/svg/ice_icon.svg",
+      "system": {
+        "changes": [
+          {
+            "type": "add-trait",
+            "key": "",
+            "value": "Chiller",
+            "predicate": [],
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.4.1.0",
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      }
+    }
+  ],
+  "_id": "6korHbWCabxy4Br8",
+  "folder": "ge4zHJUHigfmeDte"
+}

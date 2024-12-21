@@ -1,10 +1,10 @@
 {
   "name": "Dynamax Cannon",
   "type": "move",
-  "img": "/systems/ptr2e/img/svg/dragon_icon.svg",
+  "img": "systems/ptr2e/img/svg/dragon_icon.svg",
   "system": {
     "slug": "dynamax-cannon",
-    "description": "Effect: This Attack's Power is doubled if the target is Dynamaxed.",
+    "description": "",
     "traits": [
       "legendary",
       "ray"
@@ -16,7 +16,8 @@
         "type": "attack",
         "traits": [
           "legendary",
-          "ray"
+          "ray",
+          "pp-updated"
         ],
         "range": {
           "target": "creature",
@@ -25,7 +26,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 8,
+          "powerPoints": 9,
           "delay": null,
           "priority": null,
           "trigger": null
@@ -36,7 +37,40 @@
         "types": [
           "dragon"
         ],
-        "description": "Effect: This Attack's Power is doubled if the target is Dynamaxed.",
+        "description": "<p>Effect: This Attack's Power is doubled if the target is Dynamaxed.</p>",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      },
+      {
+        "slug": "dynamax-cannon-giant",
+        "name": "Dynamax Cannon (Giant)",
+        "type": "attack",
+        "traits": [
+          "legendary",
+          "ray",
+          "pp-updated"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 15,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 9,
+          "delay": null,
+          "priority": null,
+          "trigger": "<p>Target is Dynamaxed.</p>"
+        },
+        "category": "special",
+        "power": 200,
+        "accuracy": 100,
+        "types": [
+          "dragon"
+        ],
+        "description": "<p>Trigger: Target is Dynamaxed.</p>",
         "contestType": "",
         "contestEffect": "",
         "free": false,
@@ -44,7 +78,7 @@
       }
     ],
     "container": null,
-    "grade": "S"
+    "grade": "A"
   },
   "_id": "d8fSDnDZwrFinDuc",
   "effects": []

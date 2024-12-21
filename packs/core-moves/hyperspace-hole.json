@@ -1,12 +1,13 @@
 {
   "name": "Hyperspace Hole",
   "type": "move",
-  "img": "/systems/ptr2e/img/svg/psychic_icon.svg",
+  "img": "systems/ptr2e/img/svg/psychic_icon.svg",
   "system": {
     "slug": "hyperspace-hole",
-    "description": "Effect: This attack removes [Shield] effects affecting the target before it hits the target.",
+    "description": "",
     "traits": [
       "legendary",
+      "pierce",
       "danger-close"
     ],
     "actions": [
@@ -16,7 +17,9 @@
         "type": "attack",
         "traits": [
           "legendary",
-          "danger-close"
+          "danger-close",
+          "pierce",
+          "pp-updated"
         ],
         "range": {
           "target": "creature",
@@ -25,7 +28,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 8,
+          "powerPoints": 5,
           "delay": null,
           "priority": null,
           "trigger": null
@@ -36,7 +39,7 @@
         "types": [
           "psychic"
         ],
-        "description": "Effect: This attack removes [Shield] effects affecting the target before it hits the target.",
+        "description": "",
         "contestType": "",
         "contestEffect": "",
         "free": false,
@@ -44,7 +47,7 @@
       }
     ],
     "container": null,
-    "grade": "A"
+    "grade": "C"
   },
   "_id": "45AOpbdj7b05bGeT",
   "effects": []

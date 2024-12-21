@@ -13,7 +13,7 @@ export function getAllSkillSlugs(): string[] {
  */
 export function getInitialSkillList(): SkillPTR2e['_source'][] {
     return Array.from(getAllSkillSlugs()).map((skill) => {
-        const baseValue = BaseSkills[skill];
+        const baseValue = game.ptr.data.skills.get(skill) ?? BaseSkills[skill];
         return partialSkillToSkill(baseValue ? baseValue : { slug: skill });
     });
 }
@@ -25,8 +25,6 @@ export function partialSkillToSkill(partialSkill: Partial<SkillPTR2e['_source']>
     if (!partialSkill.slug) throw new Error("Partial Skill is missing slug");
     return fu.mergeObject(initial, partialSkill) as SkillPTR2e['_source'];
 }
-// @ts-ignore
-globalThis.partialSkillToSkill = partialSkillToSkill;
 
 const BaseSkills = {
     luck: {
@@ -41,6 +39,7 @@ const BaseSkills = {
     accounting: { slug: "accounting" },
     acrobatics: { slug: "acrobatics" },
     appraise: { slug: "appraise" },
+    archaeology: { slug: "archaeology" },
     painting: { slug: "painting", group: "arts" },
     sculpting: { slug: "sculpting", group: "arts" },
     acting: { slug: "acting", group: "arts" },
@@ -56,6 +55,7 @@ const BaseSkills = {
     electronics: { slug: "electronics" },
     engineering: { slug: "engineering" },
     "fast-talk": { slug: "fast-talk" },
+    flying: { slug: "flying" },
     handiwork: { slug: "handiwork" },
     history: { slug: "history" },
     husbandry: { slug: "husbandry" },
@@ -96,7 +96,6 @@ const BaseSkills = {
     research: { slug: "research" },
     ride: { slug: "ride" },
     running: { slug: "running" },
-    archeology: { slug: "archeology", group: "science" },
     astronomy: { slug: "astronomy", group: "science" },
     biology: { slug: "biology", group: "science" },
     botany: { slug: "botany", group: "science" },
@@ -106,15 +105,17 @@ const BaseSkills = {
     geology: { slug: "geology", group: "science" },
     mathematics: { slug: "mathematics", group: "science" },
     meteorology: { slug: "meteorology", group: "science" },
+    palaeontology: { slug: "palaeontology", group: "science" },
     parapsychology: { slug: "parapsychology", group: "science" },
     pharmacy: { slug: "pharmacy", group: "science" },
     physics: { slug: "physics", group: "science" },
     zoology: { slug: "zoology", group: "science" },
-    meganobiology: { slug: "meganobiology", group: "science" },
+    eschatobiology: { slug: "eschatobiology", group: "science" },
+    megalobiology: { slug: "megalobiology", group: "science" },
     terastology: { slug: "terastology", group: "science" },
     ultrology: { slug: "ultrology", group: "science" },
     "paradoxian-studies": { slug: "paradoxian-studies", group: "science" },
-    "sleigh-of-hand": { slug: "sleigh-of-hand" },
+    "sleight-of-hand": { slug: "sleight-of-hand" },
     spot: { slug: "spot" },
     stealth: { slug: "stealth" },
     survival: { slug: "survival" },

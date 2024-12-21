@@ -1,12 +1,15 @@
 {
   "name": "Headbutt",
   "type": "move",
-  "img": "/systems/ptr2e/img/svg/normal_icon.svg",
+  "img": "systems/ptr2e/img/svg/normal_icon.svg",
   "system": {
     "slug": "headbutt",
-    "description": "Effect: On hit, the target has a 30% chance of becoming Flinched 2.",
+    "description": "",
     "traits": [
-      "contact"
+      "contact",
+      "flinch-chance-2",
+      "field",
+      "pp-updated"
     ],
     "actions": [
       {
@@ -14,7 +17,10 @@
         "name": "Headbutt",
         "type": "attack",
         "traits": [
-          "contact"
+          "contact",
+          "flinch-chance-2",
+          "field",
+          "pp-updated"
         ],
         "range": {
           "target": "creature",
@@ -23,7 +29,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 6,
+          "powerPoints": 3,
           "delay": null,
           "priority": null,
           "trigger": null
@@ -34,14 +40,15 @@
         "types": [
           "normal"
         ],
-        "description": "Effect: On hit, the target has a 30% chance of becoming Flinched 2.",
+        "description": "<p>Effect: On hit, the target has a 30% chance of being Flinched.</p>",
         "contestType": "",
         "contestEffect": "",
         "free": false,
         "slot": null
       }
     ],
-    "container": null
+    "container": null,
+    "grade": "D"
   },
   "_id": "BzZjntvWTP1swwKG",
   "effects": []

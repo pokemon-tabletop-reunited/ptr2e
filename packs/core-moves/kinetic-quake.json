@@ -1,0 +1,99 @@
+{
+  "name": "Kinetic Quake",
+  "type": "move",
+  "_id": "kAk7Qg7VDwHvpAXo",
+  "img": "systems/ptr2e/img/svg/psychic_icon.svg",
+  "system": {
+    "slug": null,
+    "traits": [
+      "earthbound"
+    ],
+    "actions": [
+      {
+        "slug": "kinetic-quake",
+        "name": "Kinetic Quake",
+        "type": "attack",
+        "traits": [
+          "earthbound",
+          "pp-updated"
+        ],
+        "range": {
+          "target": "emanation",
+          "distance": 6,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 11,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "physical",
+        "power": 75,
+        "accuracy": 100,
+        "types": [
+          "psychic"
+        ],
+        "description": "",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      },
+      {
+        "slug": "kinetic-quake-burrowing",
+        "name": "Kinetic Quake (Burrowing)",
+        "type": "attack",
+        "traits": [
+          "earthbound",
+          "pp-updated"
+        ],
+        "range": {
+          "target": "emanation",
+          "distance": 6,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 11,
+          "delay": null,
+          "priority": null,
+          "trigger": "<p>Valid target(s) is Burrowing.</p>"
+        },
+        "category": "physical",
+        "power": 150,
+        "accuracy": 100,
+        "types": [
+          "psychic"
+        ],
+        "description": "<p>Trigger: Valid target(s) is Burrowing.</p><p>Effect: This attack ignores the target's EVA Stage increases.</p>",
+        "contestType": "",
+        "contestEffect": "",
+        "varant": "kinetic-quake",
+        "free": true,
+        "slot": null
+      }
+    ],
+    "description": "<p>Effect: If a target is Burrowing, this Attack ignores the target's EVA Stage increases and has its Power doubled.</p>",
+    "container": null,
+    "grade": "A"
+  },
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "CYLdyr5mPSDmNpTp": 3
+  },
+  "flags": {},
+  "_stats": {
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "coreVersion": "12.328",
+    "systemId": "ptr2e",
+    "systemVersion": "0.10.0-alpha.1.5.2",
+    "createdTime": 1721263054843,
+    "modifiedTime": 1721263132715,
+    "lastModifiedBy": "CYLdyr5mPSDmNpTp"
+  }
+}

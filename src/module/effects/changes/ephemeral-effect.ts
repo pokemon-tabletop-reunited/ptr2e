@@ -15,13 +15,13 @@ export default class EphemeralEffectChangeSystem extends ChangeModel {
             ...schema,
             affects: new fields.StringField({
                 required: true,
-                choices: ["target", "origin"].reduce<Record<string,string>>((acc, affects) => ({...acc, [affects]: affects}), {}),
+                choices: ["target", "origin", "self"].reduce<Record<string,string>>((acc, affects) => ({...acc, [affects]: affects}), {}),
                 initial: "target",
             }),
         };
     }
 
-    static override #validateUuid(
+    static #validateUuid(
         value: unknown
     ): void | foundry.data.validation.DataModelValidationFailure {
         if (!UUIDUtils.isItemUUID(value)) {
@@ -31,7 +31,7 @@ export default class EphemeralEffectChangeSystem extends ChangeModel {
                 unresolved: false,
             });
         }
-        if (!fromUuidSync(value)) {
+        if (game.ready && !fromUuidSync(value)) {
             return new foundry.data.validation.DataModelValidationFailure({
                 invalidValue: value,
                 message: game.i18n.format("PTR2E.Effect.FIELDS.ChangeUuid.invalid.itemNotFound", {
@@ -56,6 +56,7 @@ export default class EphemeralEffectChangeSystem extends ChangeModel {
         const synthetics = (this.actor!.synthetics.ephemeralEffects[selector] ??= {
             origin: [],
             target: [],
+            self: [],
         });
         synthetics[this.affects].push(defferedEffect);
     }
@@ -114,6 +115,6 @@ export default class EphemeralEffectChangeSystem extends ChangeModel {
     }
 }
 
-export default interface FlatModifierChangeSystem {
-    affects: "target" | "origin";
+export default interface EphemeralEffectChangeSystem {
+    affects: "target" | "origin" | "self";
 }

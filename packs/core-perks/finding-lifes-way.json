@@ -1,0 +1,112 @@
+{
+  "name": "Finding Life's Way",
+  "type": "perk",
+  "system": {
+    "prerequisites": [
+      "item:perk:palaeontologist",
+      {
+        "gte": [
+          "{actor|skills.paleontology.mod}",
+          50
+        ]
+      },
+      {
+        "xof": [
+          {
+            "gte": [
+              "{actor|skills.archaeology.mod}",
+              50
+            ]
+          },
+          {
+            "gte": [
+              "{actor|skills.biology.mod}",
+              50
+            ]
+          },
+          {
+            "gte": [
+              "{actor|skills.botany.mod}",
+              50
+            ]
+          },
+          {
+            "gte": [
+              "{actor|skills.geology.mod}",
+              50
+            ]
+          },
+          {
+            "gte": [
+              "{actor|skills.zoology.mod}",
+              50
+            ]
+          }
+        ],
+        "x": 2
+      }
+    ],
+    "cost": 1,
+    "description": "<p>You may use the “Revival” Downtime Action during Camp without the need for a Reanimation Machine or similar means.</p>",
+    "actions": [
+      {
+        "name": "Finding Life's Way",
+        "slug": "finding-lifes-way",
+        "description": "<p>You may use the “Revival” Downtime Action during Camp without the need for a Reanimation Machine or similar means.</p>",
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 0,
+          "delay": null,
+          "priority": null
+        },
+        "type": "generic",
+        "traits": [],
+        "img": "icons/svg/explosion.svg",
+        "range": {
+          "target": "enemy",
+          "unit": "m",
+          "distance": 0
+        },
+        "variant": null
+      }
+    ],
+    "slug": "finding-lifes-way",
+    "traits": [],
+    "_migration": {
+      "version": null,
+      "previous": null
+    },
+    "nodes": [
+      {
+        "connected": [
+          "palaeontologist",
+          "yesterday-and-today"
+        ],
+        "config": {
+          "alpha": null,
+          "backgroundColor": "#804000",
+          "borderColor": null,
+          "borderWidth": null,
+          "texture": "systems/ptr2e/img/perk-icons/Knowledge.svg",
+          "tint": null,
+          "scale": null
+        },
+        "hidden": false,
+        "type": "normal",
+        "x": 76,
+        "y": 136,
+        "tier": null
+      }
+    ],
+    "autoUnlock": [],
+    "originSlug": null,
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": []
+  },
+  "_id": "tBR0myB9zvUXhYw6",
+  "img": "systems/ptr2e/img/perk-icons/Knowledge.svg",
+  "effects": [],
+  "folder": "aUkQAkBYAmrv6REK"
+}

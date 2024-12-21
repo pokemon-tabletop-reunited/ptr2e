@@ -1,6 +1,6 @@
 {
   "name": "cosmoem",
-  "img": "/systems/ptr2e/img/icons/species_icon.webp",
+  "img": "systems/ptr2e/img/icons/species_icon.webp",
   "type": "species",
   "system": {
     "types": [
@@ -19,14 +19,12 @@
         {
           "name": "teleport",
           "level": 1,
-          "gen": "scarlet-violet",
-          "uuid": "Compendium.ptr2e.core-moves.Item.D70apP7vVf1aEVVr"
+          "gen": "scarlet-violet"
         },
         {
           "name": "cosmic-power",
           "level": null,
-          "gen": "scarlet-violet",
-          "uuid": "Compendium.ptr2e.core-moves.Item.yF0XYtBJKJJstJDD"
+          "gen": "scarlet-violet"
         }
       ],
       "tutor": []
@@ -37,7 +35,7 @@
       "category": "diminutive",
       "type": "quad"
     },
-    "captureRate": 45,
+    "captureRate": 90,
     "eggGroups": [
       "no-eggs"
     ],
@@ -102,13 +100,14 @@
           }
         }
       ],
-      "uuid": "Compendium.ptr2e.core-species.Item.HOfS7vBFF6ME2LiA"
+      "uuid": "Compendium.ptr2e.core-species.Item.XRRwQRXawRg2oxRH"
     },
     "number": 790,
     "traits": [
       "pokemon",
       "legendary",
       "underdog",
+      "glow-4",
       "hover",
       "teleporter",
       "dangerous-ultra-wormhole"
@@ -118,19 +117,33 @@
     ],
     "abilities": {
       "starting": [
-        "beast-boost"
+        {
+          "slug": "beast-boost"
+        }
       ],
       "basic": [
-        "unaware",
-        "magic-bounce"
+        {
+          "slug": "unaware"
+        },
+        {
+          "slug": "magic-bounce"
+        }
       ],
       "advanced": [
-        "sturdy",
-        "magic-guard"
+        {
+          "slug": "sturdy"
+        },
+        {
+          "slug": "magic-guard"
+        }
       ],
       "master": [
-        "full-metal-body",
-        "shadow-shield"
+        {
+          "slug": "full-metal-body"
+        },
+        {
+          "slug": "shadow-shield"
+        }
       ]
     },
     "movement": {
@@ -180,7 +193,7 @@
         "group": null
       },
       {
-        "slug": "occult-legends",
+        "slug": "legends",
         "value": 40,
         "rvs": 0,
         "favourite": false,
@@ -188,7 +201,7 @@
         "group": "occult"
       },
       {
-        "slug": "occult-psychic",
+        "slug": "psychic",
         "value": 50,
         "rvs": 0,
         "favourite": false,
@@ -196,7 +209,7 @@
         "group": "occult"
       },
       {
-        "slug": "occult-ultra-beast",
+        "slug": "ultra-beasts",
         "value": 40,
         "rvs": 0,
         "favourite": false,

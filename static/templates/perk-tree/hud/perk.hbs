@@ -1,4 +1,4 @@
-<section>
+<section class="{{#if editMode}}editing{{/if}}">
     {{#with perk}}
         {{#if document}}
             <header class="perk-header">
@@ -14,11 +14,30 @@
                 </header>
                 {{/if}}
                 {{> perk-body}}
+                {{#if actions}}
+                  <h2 class="m-0 noborder center-text">Actions</h2>
+                {{/if}}
+                {{#each actions}}
+                  {{> action-embed action=action noButtons=true}}
+                {{/each}}
             </figure>
             <footer>
-                <button class="purchase {{#unless purchasable}}unavailable{{/unless}}" data-action="purchase" {{#unless purchasable}}disabled{{/unless}}>
-                    <i class="fas fa-sack-dollar"></i> Purchase Perk ({{document.system.cost}} AP)
+              {{#if state.evolution}}
+                <button class="purchase {{#unless state.purchasable}}unavailable{{/unless}}" data-action="evolve" {{#unless state.purchasable}}disabled{{/unless}}>
+                  <i class="fas fa-sack-dollar"></i> {{{cost.evolution}}}
                 </button>
+              {{else}}
+                {{#if state.available}}
+                  <button class="purchase {{#unless state.purchasable}}unavailable{{/unless}}" data-action="purchase" {{#unless state.purchasable}}disabled{{/unless}}>
+                    <i class="fas fa-sack-dollar"></i> {{{cost.purchase}}}
+                  </button>
+                {{/if}}
+                {{#if state.refundable}}
+                  <button class="refund" data-action="refund">
+                    <i class="fas fa-sack-dollar"></i> {{{cost.refund}}}
+                  </button>
+                {{/if}}
+              {{/if}}
             </footer>
         {{/if}}
     {{/with}}

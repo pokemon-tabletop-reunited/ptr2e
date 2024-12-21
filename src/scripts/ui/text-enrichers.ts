@@ -10,12 +10,12 @@ export class TextEnricher {
 
             const body = $("body");
             body.on("click", "span.affliction > .content-link", TextEnricher._onClickAffliction);
-            //@ts-expect-error
+            //@ts-expect-error - This is a valid handler
             body.on("dragstart", "span.affliction > .content-link", TextEnricher._onDragStartAffliction);
         }
     }
 
-    static async enrich(data: RegExpMatchArray, _enricherOptions: EnrichmentOptions): Promise<HTMLElement | null> {
+    static async enrich(data: RegExpMatchArray): Promise<HTMLElement | null> {
         if(data.length < 4) return null;
         // const {item, actor} = enricherOptions.rollData ?? {};
         const {label, options, slug, type} = data.groups ?? {};
@@ -43,6 +43,7 @@ export class TextEnricher {
         if(!trait) return null;
 
         // TODO: Add keyword decorator
+        // eslint-disable-next-line no-constant-condition
         const decorator = false ? ['&lt;','&gt;'] : ['[',']'];
 
         const span = document.createElement("span");
@@ -54,7 +55,8 @@ export class TextEnricher {
         return span;
     }
 
-    //@ts-expect-error
+    //@ts-expect-error - The typings here are valid
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     static async #createAffliction({slug, options, label, item, actor}: {slug?: string, options: Record<string, string | undefined> | null, label?: string, item?: Item, actor?: Actor}): Promise<HTMLElement | null> {
         const affliction = game.ptr.data.afflictions.get(slug!);
         if(!affliction) return null;
@@ -133,15 +135,15 @@ export class TextEnricher {
 
 const TraitEnricher: TextEditorEnricherConfig = {
     pattern: /@(?<type>Trait)\[(?<slug>[-a-z]+)(\s+)?](?:{(?<label>[^}]+)})?/gi,
-    enricher: async (match: RegExpMatchArray, options: EnrichmentOptions): Promise<HTMLElement | null> => {
-        return TextEnricher.enrich(match, options);
+    enricher: async (match: RegExpMatchArray): Promise<HTMLElement | null> => {
+        return TextEnricher.enrich(match);
     }
 }
 
 const AfflictionEnricher: TextEditorEnricherConfig = {
     pattern: /@(?<type>Affliction)\[(?<slug>[-a-z]+)(\s+)?](?:{(?<label>[^}]+)})?/gi,
-    enricher: async (match: RegExpMatchArray, options: EnrichmentOptions): Promise<HTMLElement | null> => {
-        return TextEnricher.enrich(match, options);
+    enricher: async (match: RegExpMatchArray): Promise<HTMLElement | null> => {
+        return TextEnricher.enrich(match);
     }
 }
 

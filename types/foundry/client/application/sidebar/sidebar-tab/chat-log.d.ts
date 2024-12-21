@@ -97,7 +97,7 @@ declare class ChatLog<TChatMessage extends ChatMessage = ChatMessage> extends Si
     /**
      * Scroll the chat log to the bottom
      */
-    protected scrollBottom(): void;
+    scrollBottom({popout, waitImages}: {popout?: boolean, waitImages?: boolean}): void;
 
     /**
      * Update the content of a previously posted message after its data has been replaced
