@@ -1,7 +1,7 @@
 {
   "name": "Phantom Devicer",
   "type": "ability",
-  "img": "systems/ptr2e/img/icons/ability_icon.webp",
+  "img": "systems/ptr2e/img/perk-icons/Mechanist.svg",
   "system": {
     "actions": [
       {
@@ -15,16 +15,15 @@
         "cost": {
           "activation": "complex",
           "powerPoints": 5,
-          "trigger": "<p>The user is adjacent to an unoccupied appliance.</p>",
-          "delay": null,
-          "priority": null
+          "trigger": "<p>The user is adjacent to an unoccupied appliance.</p>"
         },
         "range": {
           "target": "object",
           "distance": 1,
           "unit": "m"
         },
-        "description": "<p>Trigger: The user is adjacent to an unoccupied appliance.</p><p>Effect: The user possesses the triggering object, changing Forme as appropriate.  They can spend 2 PP as a Complex Action to exit an appliance, changing into their base Forme. This can be separately done as an Exploration Action without consuming PP. When in a separate Forme, the user's Connected Thunder Shock is swapped for an appropriate Attack based on the Forme:</p><p>- Heat: Overheat</p><p>- Wash: Hydro Pump</p><p>- Frost: Blizzard</p><p>- Fan: Hurricane</p><p>- Mow: Leaf Storm"
+        "description": "<p>Trigger: The user is adjacent to an unoccupied appliance.</p><p>Effect: The user possesses the triggering object, changing Forme as appropriate.  They can spend 2 PP as a Complex Action to exit an appliance, changing into their base Forme. This can be separately done as an Exploration Action without consuming PP. When in a separate Forme, the user's Connected Thunder Shock is swapped for an appropriate Attack based on the Forme:</p><p>- Heat: Overheat</p><p>- Wash: Hydro Pump</p><p>- Frost: Blizzard</p><p>- Fan: Hurricane</p><p>- Mow: Leaf Storm",
+        "img": "icons/svg/explosion.svg"
       },
       {
         "traits": [
@@ -35,13 +34,10 @@
         "slug": "phantom-devicer-passive",
         "type": "passive",
         "cost": {
-          "activation": "free",
-          "powerPoints": 0,
-          "delay": null,
-          "priority": null
+          "activation": "free"
         },
-        "range": null,
-        "description": "<p>Passive: While in their base Forme, the user also has the Ability Static. While in another Forme due to possessing an appliance, they instead have the Ability Ectobiologist.</p>"
+        "description": "<p>Passive: While in their base Forme, the user also has the Ability Static. While in another Forme due to possessing an appliance, they instead have the Ability Ectobiologist.</p>",
+        "img": "icons/svg/explosion.svg"
       },
       {
         "slug": "thunder-shock",
@@ -66,10 +62,8 @@
           "electric"
         ],
         "description": "<p>Effect: On hit, the target has a 10% chance of gaining @Affliction[paralysis] 5.</p>",
-        "contestType": "",
-        "contestEffect": "",
         "free": true,
-        "slot": null
+        "img": "icons/svg/explosion.svg"
       },
       {
         "traits": [
@@ -97,27 +91,12 @@
       "innate",
       "forme-change"
     ],
-    "slug": null,
-    "container": null
+    "slug": "phantom-devicer",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
   },
   "_id": "F0sV19dmngv5CVe9",
-  "effects": [],
-  "folder": null,
-  "sort": 0,
-  "ownership": {
-    "default": 0,
-    "tXAZ3QUgjuwX4gdV": 3
-  },
-  "flags": {},
-  "_stats": {
-    "compendiumSource": null,
-    "duplicateSource": null,
-    "coreVersion": "12.324",
-    "systemId": "ptr2e",
-    "systemVersion": "0.005",
-    "createdTime": 1716919240454,
-    "modifiedTime": 1716919240454,
-    "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
-  },
-  "_key": "!items!F0sV19dmngv5CVe9"
+  "effects": []
 }

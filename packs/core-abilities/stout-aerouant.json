@@ -1,7 +1,7 @@
 {
   "name": "Stout Aerouant",
   "type": "ability",
-  "img": "systems/ptr2e/img/icons/ability_icon.webp",
+  "img": "systems/ptr2e/img/svg/dragon_icon.svg",
   "system": {
     "actions": [
       {
@@ -14,16 +14,14 @@
         "cost": {
           "activation": "free",
           "powerPoints": 3,
-          "trigger": "<p>The user resolves a Dragon-Type attack.</p>",
-          "delay": null,
-          "priority": null
+          "trigger": "<p>The user resolves a Dragon-Type attack.</p>"
         },
         "range": {
           "target": "self",
-          "distance": 0,
           "unit": "m"
         },
-        "description": "<p>Trigger: The user resolves a Dragon-Type attack.</p><p>Effect: Negative [Stage Change] effects affecting the user are removed.</p>"
+        "description": "<p>Trigger: The user resolves a Dragon-Type attack.</p><p>Effect: Negative [Stage Change] effects affecting the user are removed.</p>",
+        "img": "icons/svg/explosion.svg"
       },
       {
         "slug": "dragon-energy",
@@ -42,10 +40,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 10,
-          "delay": null,
-          "priority": null,
-          "trigger": null
+          "powerPoints": 10
         },
         "category": "special",
         "power": 150,
@@ -54,10 +49,8 @@
           "dragon"
         ],
         "description": "<p>Effect: This attack's Power ranges based on how healthy the user is, ranging from 1 to 150.</p><p><blockquote>Damage Formula: Power = max(1, 150 x UserCurrentHP/UserMaxHP)</blockquote>",
-        "contestType": "",
-        "contestEffect": "",
         "free": true,
-        "slot": null
+        "img": "icons/svg/explosion.svg"
       }
     ],
     "description": "<p>Trigger: The user resolves a Dragon-Type attack.</p><p>Effect: Connection - Dragon Energy. Negative [Stage Change] effects affecting the user are removed. Passive: The user's Dragon Energy gains [Drain 1/4].</p>",
@@ -65,27 +58,12 @@
       "legendary",
       "connection"
     ],
-    "slug": null,
-    "container": null
+    "slug": "stout-aerouant",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
   },
   "_id": "fgnUpZqSxSncHLqF",
-  "effects": [],
-  "folder": null,
-  "sort": 0,
-  "ownership": {
-    "default": 0,
-    "tXAZ3QUgjuwX4gdV": 3
-  },
-  "flags": {},
-  "_stats": {
-    "compendiumSource": null,
-    "duplicateSource": null,
-    "coreVersion": "12.324",
-    "systemId": "ptr2e",
-    "systemVersion": "0.005",
-    "createdTime": 1716919240454,
-    "modifiedTime": 1716919240454,
-    "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
-  },
-  "_key": "!items!fgnUpZqSxSncHLqF"
+  "effects": []
 }

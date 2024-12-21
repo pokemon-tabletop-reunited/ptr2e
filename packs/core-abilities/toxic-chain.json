@@ -1,7 +1,7 @@
 {
   "name": "Toxic Chain",
   "type": "ability",
-  "img": "systems/ptr2e/img/icons/ability_icon.webp",
+  "img": "icons/magic/control/debuff-chains-shackles-movement-purple.webp",
   "system": {
     "actions": [
       {
@@ -12,17 +12,14 @@
         "slug": "toxic-chain",
         "type": "passive",
         "cost": {
-          "activation": "free",
-          "powerPoints": 0,
-          "delay": null,
-          "priority": null
+          "activation": "free"
         },
         "range": {
           "target": "self",
-          "distance": null,
           "unit": "m"
         },
-        "description": "<p>Effect: The user's attacks have a 30% chance to apply @Affliction[blight] 5.</p>"
+        "description": "<p>Effect: The user's attacks have a 30% chance to apply @Affliction[blight] 5.</p>",
+        "img": "icons/svg/explosion.svg"
       },
       {
         "slug": "toxic",
@@ -36,22 +33,16 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 7,
-          "delay": null,
-          "priority": null,
-          "trigger": null
+          "powerPoints": 7
         },
         "category": "status",
-        "power": null,
         "accuracy": 90,
         "types": [
           "poison"
         ],
         "description": "<p>Effect: The target gains @Affliction[blight] 8. If Toxic is used by a Poison-Typed creature, this attack gains [Danger Close].</p>",
-        "contestType": "",
-        "contestEffect": "",
         "free": true,
-        "slot": null
+        "img": "icons/svg/explosion.svg"
       },
       {
         "slug": "toxic-poison-type",
@@ -68,22 +59,17 @@
         "cost": {
           "activation": "complex",
           "powerPoints": 7,
-          "delay": null,
-          "priority": null,
           "trigger": "<p>The user has the Poison Type.</p>"
         },
         "category": "status",
-        "power": null,
         "accuracy": 100,
         "types": [
           "poison"
         ],
         "description": "<p>Trigger: The user has the Poison Type.</p><p>Effect: The target gains @Affliction[blight] 8.</p>",
-        "contestType": "",
-        "contestEffect": "",
         "variant": "toxic",
         "free": true,
-        "slot": null
+        "img": "icons/svg/explosion.svg"
       }
     ],
     "description": "<p>Effect: Connection - Toxic. The user's attacks have a 30% chance to apply @Affliction[blight] 5.</p>",
@@ -91,27 +77,12 @@
       "legendary",
       "connection"
     ],
-    "slug": null,
-    "container": null
+    "slug": "toxic-chain",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
   },
   "_id": "l1yGOqKO6wB3AXyE",
-  "effects": [],
-  "folder": null,
-  "sort": 0,
-  "ownership": {
-    "default": 0,
-    "tXAZ3QUgjuwX4gdV": 3
-  },
-  "flags": {},
-  "_stats": {
-    "compendiumSource": null,
-    "duplicateSource": null,
-    "coreVersion": "12.324",
-    "systemId": "ptr2e",
-    "systemVersion": "0.005",
-    "createdTime": 1716919240454,
-    "modifiedTime": 1716919240454,
-    "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
-  },
-  "_key": "!items!l1yGOqKO6wB3AXyE"
+  "effects": []
 }

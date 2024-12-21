@@ -1,7 +1,7 @@
 {
   "name": "Water Veil",
   "type": "ability",
-  "img": "systems/ptr2e/img/icons/ability_icon.webp",
+  "img": "systems/ptr2e/img/svg/water_icon.svg",
   "system": {
     "actions": [
       {
@@ -35,7 +35,11 @@
           "activation": "free"
         },
         "description": "<p>Passive: The user is immune to the @Affliction[burn] Affliction.</p>",
-        "img": "icons/svg/explosion.svg"
+        "img": "icons/svg/explosion.svg",
+        "range": {
+          "target": "enemy",
+          "unit": "m"
+        }
       }
     ],
     "description": "<p>Effect: The duration of @Affliction[burn] affecting allied creatures within 10m of the user are reduced by 2 instead of 1 at the end of each of their Activations. Passive: The user is immune to the @Affliction[burn] Affliction.</p>",
@@ -102,7 +106,7 @@
       "_stats": {
         "compendiumSource": "Compendium.ptr2e.core-abilities.Item.Rd9wEjxJT1sSjly1.ActiveEffect.IydfTEubnrcEnJvk",
         "duplicateSource": null,
-        "coreVersion": "12.329",
+        "coreVersion": "12.331",
         "systemId": "ptr2e",
         "systemVersion": "0.10.0-alpha.3.3.0",
         "createdTime": 1731340457916,

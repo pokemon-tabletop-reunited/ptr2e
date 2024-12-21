@@ -1,7 +1,7 @@
 {
   "name": "Innards Out",
   "type": "ability",
-  "img": "systems/ptr2e/img/icons/ability_icon.webp",
+  "img": "systems/ptr2e/img/item-icons/poke%20doll.webp",
   "system": {
     "actions": [
       {
@@ -14,44 +14,27 @@
         "type": "generic",
         "cost": {
           "activation": "free",
-          "powerPoints": 0,
-          "trigger": "<p>The user would be @Affliction[fainted] by an attack.</p>",
-          "delay": null,
-          "priority": null
+          "trigger": "<p>The user would be @Affliction[fainted] by an attack.</p>"
         },
         "range": {
           "target": "creature",
           "distance": 5,
           "unit": "m"
         },
-        "description": "<p>Trigger: The user would be @Affliction[fainted] by an attack.</p><p>Effect: The user deals damage to the source of the triggering attack equal to the amount of HP the user lost from the triggering attack.</p>"
+        "description": "<p>Trigger: The user would be @Affliction[fainted] by an attack.</p><p>Effect: The user deals damage to the source of the triggering attack equal to the amount of HP the user lost from the triggering attack.</p>",
+        "img": "icons/svg/explosion.svg"
       }
     ],
     "description": "<p>Trigger: The user would be @Affliction[fainted] by an attack.</p><p>Effect: The user deals damage to the source of the triggering attack equal to the amount of HP the user lost from the triggering attack.</p>",
     "traits": [
       "defensive"
     ],
-    "slug": null,
-    "container": null
+    "slug": "innards-out",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
   },
   "_id": "slX9donFBumFr05N",
-  "effects": [],
-  "folder": null,
-  "sort": 0,
-  "ownership": {
-    "default": 0,
-    "tXAZ3QUgjuwX4gdV": 3
-  },
-  "flags": {},
-  "_stats": {
-    "compendiumSource": null,
-    "duplicateSource": null,
-    "coreVersion": "12.324",
-    "systemId": "ptr2e",
-    "systemVersion": "0.005",
-    "createdTime": 1716919240454,
-    "modifiedTime": 1716919240454,
-    "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
-  },
-  "_key": "!items!slX9donFBumFr05N"
+  "effects": []
 }

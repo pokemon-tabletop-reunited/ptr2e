@@ -1,7 +1,7 @@
 {
   "name": "Foretold",
   "type": "ability",
-  "img": "systems/ptr2e/img/icons/ability_icon.webp",
+  "img": "systems/ptr2e/img/svg/psychic_icon.svg",
   "system": {
     "actions": [
       {
@@ -32,6 +32,36 @@
           "activation": "free"
         },
         "description": "<p>Passive: The user has +1 default EVA Stage.</p>",
+        "img": "icons/svg/explosion.svg",
+        "range": {
+          "target": "enemy",
+          "unit": "m"
+        }
+      },
+      {
+        "slug": "future-sight",
+        "name": "Future Sight",
+        "type": "attack",
+        "traits": [
+          "pp-updated"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 15,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 5
+        },
+        "category": "special",
+        "power": 120,
+        "accuracy": 100,
+        "types": [
+          "psychic"
+        ],
+        "description": "<p>Effect: When this attack is used, it deals its damage to the target at the start of the user's first Activation in the following Round.</p>",
+        "free": true,
         "img": "icons/svg/explosion.svg"
       },
       {
@@ -121,7 +151,7 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.330",
+        "coreVersion": "12.331",
         "systemId": "ptr2e",
         "systemVersion": "0.10.0-alpha.2.0.3",
         "createdTime": 1722259246709,
