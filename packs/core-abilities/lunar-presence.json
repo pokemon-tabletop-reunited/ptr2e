@@ -1,7 +1,7 @@
 {
   "name": "Lunar Presence",
   "type": "ability",
-  "img": "systems/ptr2e/img/icons/ability_icon.webp",
+  "img": "systems/ptr2e/img/svg/fairy_icon.svg",
   "system": {
     "actions": [
       {
@@ -15,7 +15,11 @@
           "activation": "free"
         },
         "description": "<p>Passive: The user's Dark- and Fairy-Type attacks deal 50% more damage, and the user is considered to be Fairy-Type for the effects of Gloomy Weather.</p>",
-        "img": "icons/svg/explosion.svg"
+        "img": "icons/svg/explosion.svg",
+        "range": {
+          "target": "enemy",
+          "unit": "m"
+        }
       },
       {
         "slug": "lunar-dance",
@@ -32,22 +36,14 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 7,
-          "delay": null,
-          "priority": null,
-          "trigger": null
+          "powerPoints": 7
         },
         "category": "status",
-        "power": null,
-        "accuracy": null,
         "types": [
           "psychic"
         ],
         "description": "<p>Effect: The user reduces their HP to 0 and gains @Affliction[fainted]. After the user gains @Affliction[fainted], the Target recovers all of its HP and PP, and is cured of all Status Conditions. If the user is an owned Pokemon and their Trainer has another Pokemon that is not @Affliction[fainted] in a Poke Ball, that Pokemon may be designated the target of this Attack.</p>",
-        "contestType": "",
-        "contestEffect": "",
-        "free": false,
-        "slot": null
+        "img": "icons/svg/explosion.svg"
       },
       {
         "slug": "lunar-dance-full",
@@ -64,22 +60,15 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 10,
-          "delay": null,
-          "priority": null,
-          "trigger": null
+          "powerPoints": 10
         },
         "category": "status",
-        "power": null,
-        "accuracy": null,
         "types": [
           "psychic"
         ],
         "description": "<p>Effect: The user reduces their HP to 0 and gains @Affliction[fainted]. After the user gains @Affliction[fainted], the Target recovers all of its HP and PP, is cured of all Status Afflictions, and gains @Affliction[boosted] 7. If the user is an owned Pokemon and their Trainer has another Pokemon that is not @Affliction[fainted] in a Poke Ball, that Pokemon may be designated the target of this Attack.</p>",
-        "contestType": "",
-        "contestEffect": "",
         "free": true,
-        "slot": null
+        "img": "icons/svg/explosion.svg"
       }
     ],
     "description": "<p>Trigger: The user declares Lunar Dance</p><p>Effect: Connection - Lunar Dance. The creature targeted by the triggering attack gains @Affliction[boosted] 7. Passive: The user's Dark- and Fairy-Type attacks deal 50% more damage, and the user is considered to be Fairy-Type for the effects of Gloomy Weather.</p>",
@@ -152,7 +141,7 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.330",
+        "coreVersion": "12.331",
         "systemId": "ptr2e",
         "systemVersion": "0.10.0-alpha.2.0.3",
         "createdTime": 1722260005393,

@@ -700,17 +700,6 @@
             "ignored": false
           },
           {
-            "type": "add-trait",
-            "predicate": [
-              "forme:mega-ampharos:active"
-            ],
-            "key": "",
-            "value": "Dragon",
-            "mode": 2,
-            "priority": null,
-            "ignored": false
-          },
-          {
             "type": "token-alterations",
             "predicate": [
               "forme:mega-ampharos:active"
@@ -742,7 +731,11 @@
             "inMemoryOnly": false,
             "alterations": [],
             "track": false,
-            "replaceSelf": false
+            "replaceSelf": false,
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            }
           }
         ],
         "slug": null,
@@ -771,14 +764,14 @@
       "sort": 0,
       "flags": {},
       "_stats": {
-        "compendiumSource": null,
+        "compendiumSource": "Compendium.ptr2e.core-species.Item.UzZ4RXHwZaKD8QBp.ActiveEffect.kRq6IKqwujK1z4V6",
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "ptr2e",
-        "systemVersion": "0.10.0-alpha.4.0.0",
+        "systemVersion": "0.10.0-alpha.4.1.0",
         "createdTime": 1732364715309,
-        "modifiedTime": 1732366055468,
-        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
+        "modifiedTime": 1734448518605,
+        "lastModifiedBy": "IcBpMqhFuTck9VpX"
       }
     }
   ]

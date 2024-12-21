@@ -1,7 +1,7 @@
 {
   "name": "Crystallize",
   "type": "ability",
-  "img": "systems/ptr2e/img/icons/ability_icon.webp",
+  "img": "systems/ptr2e/img/svg/ice_icon.svg",
   "system": {
     "actions": [
       {
@@ -13,7 +13,6 @@
         "type": "generic",
         "cost": {
           "activation": "free",
-          "powerPoints": 0,
           "trigger": "<p>The user declares a Rock-Type attack.</p>"
         },
         "range": {
@@ -32,7 +31,11 @@
           "activation": "free"
         },
         "description": "<p>Passive: The user's Ice-Type attacks have their Power increased by 30%.</p>",
-        "img": "icons/svg/explosion.svg"
+        "img": "icons/svg/explosion.svg",
+        "range": {
+          "target": "enemy",
+          "unit": "m"
+        }
       }
     ],
     "description": "<p>Trigger: The user declares a Rock-Type attack.</p><p>Effect: The triggering attack has its Type changed to Ice until the end of the user's Activation. Passive: The user's Ice-Type attacks have their Power increased by 30%.</p>",
@@ -90,7 +93,7 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.330",
+        "coreVersion": "12.331",
         "systemId": "ptr2e",
         "systemVersion": "0.10.0-alpha.2.0.3",
         "createdTime": 1722251310663,

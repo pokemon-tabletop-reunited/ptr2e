@@ -1,7 +1,7 @@
 {
   "name": "Regurgitation",
   "type": "ability",
-  "img": "systems/ptr2e/img/icons/ability_icon.webp",
+  "img": "systems/ptr2e/img/icons/species_icon.webp",
   "system": {
     "actions": [
       {
@@ -13,16 +13,15 @@
         "type": "generic",
         "cost": {
           "activation": "simple",
-          "powerPoints": 2,
-          "delay": null,
-          "priority": null
+          "powerPoints": 2
         },
         "range": {
           "target": "creature",
           "distance": 1,
           "unit": "m"
         },
-        "description": "<p>Effect: The user makes a @Affliction[grapple] Maneuver against a creature at least one size smaller than the user, with +10 per CatMod difference. On success, the user Engulfs the target, equipping the creature as a [Stash] item.The user can only have one creature @Affliction[engulfed] at a time. An @Affliction[engulfed] creature cannot act or be affected by actions or effects in any way, except to free itself with a -20 @Affliction[grapple] check.</p><p>When the user hits a target with an attack while it has an @Affliction[engulfed] creature, it deals a Tick of HP damage to the target. This damage possesses the Type(s) of the @Affliction[engulfed] creature.</p><p>If the user gains @Affliction[fainted], the @Affliction[engulfed] creature may freely escape if it chooses, appearing in a space adjacent to the user.</p>"
+        "description": "<p>Effect: The user makes a @Affliction[grapple] Maneuver against a creature at least one size smaller than the user, with +10 per CatMod difference. On success, the user Engulfs the target, equipping the creature as a [Stash] item.The user can only have one creature @Affliction[engulfed] at a time. An @Affliction[engulfed] creature cannot act or be affected by actions or effects in any way, except to free itself with a -20 @Affliction[grapple] check.</p><p>When the user hits a target with an attack while it has an @Affliction[engulfed] creature, it deals a Tick of HP damage to the target. This damage possesses the Type(s) of the @Affliction[engulfed] creature.</p><p>If the user gains @Affliction[fainted], the @Affliction[engulfed] creature may freely escape if it chooses, appearing in a space adjacent to the user.</p>",
+        "img": "icons/svg/explosion.svg"
       },
       {
         "slug": "gulp-missile",
@@ -39,10 +38,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 3,
-          "delay": null,
-          "priority": null,
-          "trigger": null
+          "powerPoints": 3
         },
         "category": "physical",
         "power": 45,
@@ -50,11 +46,8 @@
         "types": [
           "water"
         ],
-        "description": "",
-        "contestType": "",
-        "contestEffect": "",
         "free": true,
-        "slot": null
+        "img": "icons/svg/explosion.svg"
       },
       {
         "slug": "gulp-missile-engulfed",
@@ -72,10 +65,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 5,
-          "delay": null,
-          "priority": null,
-          "trigger": null
+          "powerPoints": 5
         },
         "category": "physical",
         "power": 90,
@@ -84,37 +74,21 @@
           "water"
         ],
         "description": "<p>Effect: The user launches their equipped @Affliction[engulfed] creature as part of this Attack, and may change the Type of this attack to a Type possessed by the launched creature. On hit, the target and the launched creature have a 20% chance to lose -1 DEF Stage for 5 Activations, a 20% chance to lose -1 SPDEF Stage for 5 Activations, and a 20% chance to gain @Affliction[paralysis] 5. The damage the launched creature takes from this attack is reduced by 2/3.</p><p>Requirement: The user has an @Affliction[engulfed] creature equipped as a [Stash] item.</p>",
-        "contestType": "",
-        "contestEffect": "",
         "variant": "gulp-missile",
         "free": true,
-        "slot": null
+        "img": "icons/svg/explosion.svg"
       }
     ],
     "description": "<p>Effect: Connection - Gulp Missile. The user makes a @Affliction[grapple] Maneuver against a creature at least one size smaller than the user, with +10 per CatMod difference. On success, the user Engulfs the target, equipping the creature as a [Stash] item.The user can only have one creature @Affliction[engulfed] at a time. An @Affliction[engulfed] creature cannot act or be affected by actions or effects in any way, except to free itself with a -20 @Affliction[grapple] check.</p><p>When the user hits a target with an attack while it has an @Affliction[engulfed] creature, it deals a Tick of HP damage to the target. This damage possesses the Type(s) of the @Affliction[engulfed] creature.</p><p>If the user gains @Affliction[fainted], the @Affliction[engulfed] creature may freely escape if it chooses, appearing in a space adjacent to the user.</p>",
     "traits": [
       "innate"
     ],
-    "slug": null,
-    "container": null
+    "slug": "regurgitation",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
   },
   "_id": "HGS3xhATLQ4IKprf",
-  "effects": [],
-  "sort": 0,
-  "ownership": {
-    "default": 0,
-    "tXAZ3QUgjuwX4gdV": 3
-  },
-  "flags": {},
-  "_stats": {
-    "compendiumSource": null,
-    "duplicateSource": null,
-    "coreVersion": "12.324",
-    "systemId": "ptr2e",
-    "systemVersion": "0.005",
-    "createdTime": 1716919240454,
-    "modifiedTime": 1716919240454,
-    "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
-  },
-  "_key": "!items!HGS3xhATLQ4IKprf"
+  "effects": []
 }

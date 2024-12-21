@@ -16,8 +16,8 @@
     "actions": [
       {
         "name": "Standard Arrow",
-        "slug": "bow-action-1",
-        "description": "<p>A bow's attack profile can be altered by changing the ammunition used for it.</p>",
+        "slug": "standard-arrow",
+        "description": "",
         "traits": [
           "weapon",
           "missile"
@@ -30,23 +30,24 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 1
+          "powerPoints": 0
         },
         "types": [
           "untyped"
         ],
         "category": "physical",
         "power": 60,
-        "accuracy": 90,
+        "accuracy": 95,
         "free": true
       },
       {
-        "name": "Blunt Head Arrow",
-        "slug": "bow-action-1e3c-gygcvnh-gmejjs",
-        "description": "<p>A bow's attack profile can be altered by changing the ammunition used for it.</p>",
+        "name": "Blunthead Arrow",
+        "slug": "blunthead-arrow",
+        "description": "<p>On hit, the target has a 30% chance of being Flinched 3.</p>",
         "traits": [
           "weapon",
-          "missile"
+          "missile",
+          "flinch-chance-3"
         ],
         "type": "attack",
         "range": {
@@ -56,21 +57,21 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 1
+          "powerPoints": 0
         },
-        "variant": "bow-action-1",
+        "variant": "standard-arrow",
         "types": [
           "untyped"
         ],
         "category": "physical",
         "power": 40,
-        "accuracy": 90,
+        "accuracy": 95,
         "free": true
       },
       {
         "name": "Broadhead Arrow",
-        "slug": "bow-action-1t-szf-pubwzt-cxpe0p",
-        "description": "<p>A bow's attack profile can be altered by changing the ammunition used for it.</p>",
+        "slug": "broadhead-arrow",
+        "description": "<p>Effect: On hit, the target has a 30% chance of gaining @Affliction[splinter] 5.</p>",
         "traits": [
           "weapon",
           "missile"
@@ -85,13 +86,41 @@
           "activation": "complex",
           "powerPoints": 1
         },
-        "variant": "bow-action-1",
+        "variant": "standard-arrow",
         "types": [
           "untyped"
         ],
         "category": "physical",
         "power": 80,
-        "accuracy": 80,
+        "accuracy": 85,
+        "free": true
+      },
+      {
+        "name": "Bodkin Arrow",
+        "slug": "bodkin-arrow",
+        "description": "",
+        "traits": [
+          "weapon",
+          "missile",
+          "crit-1"
+        ],
+        "type": "attack",
+        "range": {
+          "target": "enemy",
+          "distance": 45,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 1
+        },
+        "variant": "standard-arrow",
+        "types": [
+          "untyped"
+        ],
+        "category": "physical",
+        "power": 50,
+        "accuracy": 90,
         "free": true
       }
     ],
@@ -129,5 +158,59 @@
   },
   "_id": "lvWIPtRom0SHwdMn",
   "img": "systems/ptr2e/img/icons/weapon_icon.webp",
-  "effects": []
+  "effects": [
+    {
+      "name": "Broadhead Arrow",
+      "type": "passive",
+      "_id": "LolzlRdBaFbwWM3d",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "broadhead-arrow-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.splinterconditem",
+            "predicate": [],
+            "chance": 30,
+            "affects": "target",
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.2.4.3",
+        "createdTime": 1729161823663,
+        "modifiedTime": 1729161853985,
+        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
+      }
+    }
+  ]
 }
