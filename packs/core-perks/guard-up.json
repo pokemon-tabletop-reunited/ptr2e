@@ -1,5 +1,5 @@
 {
-  "folder": "4mQhbimHM4mmdXgs",
+  "folder": "c29hnIAtXgwB7FeY",
   "name": "Guard Up!",
   "type": "perk",
   "_id": "1hbtcyVMpmrRmtVA",
@@ -9,7 +9,38 @@
     "slug": "guard-up",
     "description": "<p>You may expend a Simple Action and 3PP to gain 2 ticks of Shields.</p>",
     "traits": [],
-    "prerequisites": [],
+    "prerequisites": [
+      [
+        {
+          "or": [
+            {
+              "gte": [
+                "{actor|skills.lift.mod}",
+                25
+              ]
+            },
+            {
+              "gte": [
+                "{actor|skills.handiwork.mod}",
+                30
+              ]
+            },
+            {
+              "gte": [
+                "{actor|skills.aura-sense.mod}",
+                30
+              ]
+            },
+            {
+              "gte": [
+                "{actor|skills.survival.mod}",
+                35
+              ]
+            }
+          ]
+        }
+      ]
+    ],
     "cost": 3,
     "_migration": {
       "version": null,
