@@ -30,8 +30,8 @@ export default abstract class PerkSystem extends PerkExtension {
     return {
       ...super.defineSchema() as PerkSystemSchemaExtension,
 
-      prerequisites: new PredicateField(),
-      autoUnlock: new PredicateField(),
+      prerequisites: new PredicateField({ label: "PTR2E.FIELDS.prerequisites.label", hint: "PTR2E.FIELDS.prerequisites.hint" }),
+      autoUnlock: new PredicateField({ label: "PTR2E.FIELDS.autoUnlock.label", hint: "PTR2E.FIELDS.autoUnlock.hint" }),
       cost: new fields.NumberField({ required: true, initial: 1, label: "PTR2E.FIELDS.apCost.label", hint: "PTR2E.FIELDS.apCost.hint" }),
       originSlug: new SlugField({ required: true, nullable: true, initial: null }),
 

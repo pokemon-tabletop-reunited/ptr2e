@@ -6965,9 +6965,9 @@ ul.item-list.result-list li.item.rarity-unique {
   color: white;
   display: grid;
   overflow: hidden;
-  grid-template-areas: "hudHeader web searchHeader" "hudActor web search" "hudPerk web searchResults" "hudControls web searchResults";
+  grid-template-areas: "hudHeader web search" "hudActor web search" "hudPerk web search" "hudPerk web searchResults" "hudControls web searchResults";
   grid-template-columns: 250px minmax(0, 1fr) 250px;
-  grid-template-rows: 33px 100px minmax(0, 1fr) min-content;
+  grid-template-rows: 33px 100px 130px minmax(0, 1fr) min-content;
   --appv2-background-opaque: linear-gradient(to right, #07070a, #13111f);
 }
 #perk-web-app .hud {
@@ -7263,61 +7263,279 @@ ul.item-list.result-list li.item.rarity-unique {
 }
 #perk-web-app [data-application-part="search"] {
   grid-area: search;
+  position: sticky;
+  display: block;
+  padding: 0 5px;
+  overflow: auto;
+  /*  Sort and filter areas */
 }
-#perk-web-app [data-application-part="search"] .search {
-  margin: 0.5rem;
-  padding: 0.5rem;
+#perk-web-app [data-application-part="search"] h3 {
+  font-size: 1.25em;
+  border-bottom: none;
+}
+#perk-web-app [data-application-part="search"] div[class^="slider-"] {
+  height: 10px;
+  width: 80%;
+  border: 1px solid black;
+}
+#perk-web-app [data-application-part="search"] div[class^="slider-"] .noUi-base {
+  background: #dddddd;
+}
+#perk-web-app [data-application-part="search"] div[class^="slider-"] .noUi-base .noUi-origin .noUi-handle {
+  background: none;
+  border: none;
+  box-shadow: none;
+  color: var(--text-light);
+  cursor: grab;
+  font-size: var(--font-size-16);
+  height: 14px;
+  right: -7px;
+  text-shadow: 0 0 4px black;
+  top: -4px;
+  width: 14px;
+}
+#perk-web-app [data-application-part="search"] div[class^="slider-"] .noUi-base .noUi-origin .noUi-handle:active {
+  cursor: grabbing;
+}
+#perk-web-app [data-application-part="search"] div[class^="slider-"] .noUi-base .noUi-origin .noUi-handle.handle {
+  background: #c85019;
+  border-radius: 2px;
+  border: 1px solid black;
+  box-shadow: 1px 1px 4px black;
+}
+#perk-web-app [data-application-part="search"] div[class^="slider-"] .noUi-base .noUi-origin .noUi-handle::before,
+#perk-web-app [data-application-part="search"] div[class^="slider-"] .noUi-base .noUi-origin .noUi-handle::after {
+  background: none;
+}
+#perk-web-app [data-application-part="search"] div[class^="slider-"] .noUi-base .noUi-origin .noUi-handle .noUi-touch-area {
+  cursor: pointer;
+}
+#perk-web-app [data-application-part="search"] div[class^="slider-"] .noUi-base .noUi-tooltip {
+  display: none;
+}
+#perk-web-app [data-application-part="search"] div[class^="slider-"] .noUi-base .noUi-active .noUi-tooltip {
+  display: block;
+  background-color: rgba(0, 0, 0, 0.9);
+  color: var(--text-light);
+  line-height: 18px;
+  padding: 6px 14px;
+}
+#perk-web-app [data-application-part="search"] div[class^="slider-"] .noUi-base .noUi-connect.range_selected {
+  background: rgba(255, 255, 240, 0.8);
+}
+#perk-web-app [data-application-part="search"] tags {
+  --tags-border-color: var(--border-theme-color);
+  --tag-bg: var(--color-theme-4);
+  --tag-hover: var(--color-theme-3);
+  width: 100%;
+  --tag-pad: 0;
+}
+#perk-web-app [data-application-part="search"] tags .trait {
+  display: inline-flex;
+  padding: 0.25rem;
+}
+#perk-web-app [data-application-part="search"] tags .trait .tag {
+  text-decoration: underline;
+}
+#perk-web-app [data-application-part="search"] tags tag {
+  padding: 2px 5px;
+}
+#perk-web-app [data-application-part="search"] tags tag .tagify__tag__removeBtn {
+  margin: auto;
+  margin-right: 2px;
+}
+#perk-web-app [data-application-part="search"] tags tag .conjunction-not-button {
   display: flex;
-  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50px;
+  cursor: pointer;
+  font: 10px/1 Arial;
+  background: var(--tag-remove-btn-bg);
+  color: var(--tag-remove-btn-color);
+  width: 16px;
+  height: 16px;
+  margin: auto 3px;
+  overflow: hidden;
+  transition: 0.2s ease-out;
+  padding-top: 1px;
+}
+#perk-web-app [data-application-part="search"] tags tag .conjunction-not-button.active {
+  background: var(--tag-remove-btn-bg--hover);
+  color: var(--color-text-dark-3);
+}
+#perk-web-app [data-application-part="search"] .filtercontainer,
+#perk-web-app [data-application-part="search"] .sortcontainer {
   border: 1px solid var(--border-theme-color);
-  border-radius: 6px;
+  border-radius: 5px;
+  margin-top: 5px;
+  padding: 5px;
 }
-#perk-web-app [data-application-part="search"] .search dl {
-  margin: 0.25em 0;
+#perk-web-app [data-application-part="search"] .filtercontainer div.title,
+#perk-web-app [data-application-part="search"] .sortcontainer div.title {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  height: 22px;
 }
-#perk-web-app [data-application-part="search"] .search dl dt {
-  display: inline-block;
-  padding-left: 5px;
-  font-weight: bold;
+#perk-web-app [data-application-part="search"] .filtercontainer div.title h3,
+#perk-web-app [data-application-part="search"] .sortcontainer div.title h3 {
+  margin: 0;
+  cursor: pointer;
 }
-#perk-web-app [data-application-part="search"] .search dl dd {
-  display: inline-block;
-  text-transform: capitalize;
-  padding-left: 5px;
-  margin: 3px 0;
+#perk-web-app [data-application-part="search"] .filtercontainer div.title button,
+#perk-web-app [data-application-part="search"] .sortcontainer div.title button {
+  width: fit-content;
+  line-height: 22px;
 }
-#perk-web-app [data-application-part="search"] .search dl dd select {
-  margin-left: 0.5em;
-  width: 8.5em;
+#perk-web-app [data-application-part="search"] .filtercontainer button.clear-filters,
+#perk-web-app [data-application-part="search"] .sortcontainer button.clear-filters {
+  margin-bottom: 5px;
 }
-#perk-web-app [data-application-part="search"] .search dl a.direction {
+#perk-web-app [data-application-part="search"] .filtercontainer > dl dt > input[type="checkbox"],
+#perk-web-app [data-application-part="search"] .sortcontainer > dl dt > input[type="checkbox"] {
+  transform: none;
+  flex: none;
+  height: auto;
+  margin: 3px 3px;
+}
+#perk-web-app [data-application-part="search"] .filtercontainer > dl dd > a.direction,
+#perk-web-app [data-application-part="search"] .sortcontainer > dl dd > a.direction {
   padding: 2px;
 }
-#perk-web-app [data-application-part="search"] [data-filter-type="multiselects"],
-#perk-web-app [data-application-part="search"] [data-filter-type="checkboxes"] {
-  border: 1px solid var(--border-theme-color);
-  border-radius: 6px;
-  margin: 0.5rem;
-  padding: 0.5rem;
+#perk-web-app [data-application-part="search"] dt,
+#perk-web-app [data-application-part="search"] dd {
+  margin: unset;
 }
-#perk-web-app [data-application-part="search"] [data-filter-type="multiselects"] dt,
-#perk-web-app [data-application-part="search"] [data-filter-type="checkboxes"] dt {
+#perk-web-app [data-application-part="search"] .filtercontainer dt {
   width: 10%;
 }
-#perk-web-app [data-application-part="search"] [data-filter-type="multiselects"] dd,
-#perk-web-app [data-application-part="search"] [data-filter-type="checkboxes"] dd {
+#perk-web-app [data-application-part="search"] .filtercontainer dd {
   width: 82%;
 }
-#perk-web-app [data-application-part="search"] [data-filter-type="multiselects"] .tags,
-#perk-web-app [data-application-part="search"] [data-filter-type="checkboxes"] .tags {
-  --readonly-striped: 0;
-  border: none;
-  gap: 0;
-  padding: 0;
+#perk-web-app [data-application-part="search"] .filtercontainer .filter-conjunction {
+  margin-top: 0.25rem;
 }
-#perk-web-app [data-application-part="search"] [data-filter-type="multiselects"] .filter-conjunction,
-#perk-web-app [data-application-part="search"] [data-filter-type="checkboxes"] .filter-conjunction {
-  font-size: 12px;
+#perk-web-app [data-application-part="search"] .filtercontainer .filter-conjunction input[type="radio"] {
+  margin: 0 5px 0 3px;
+}
+#perk-web-app [data-application-part="search"] .rangecontainer div {
+  text-align: center;
+  margin-top: 5px;
+}
+#perk-web-app [data-application-part="search"] .rangecontainer input {
+  width: 45%;
+}
+#perk-web-app [data-application-part="search"] .slidercontainer-flex {
+  display: flex;
+  justify-content: space-around;
+  align-items: baseline;
+}
+#perk-web-app [data-application-part="search"] .slidercontainer-flex label {
+  width: 10px;
+}
+#perk-web-app [data-application-part="search"] dl {
+  margin: 5px 0;
+}
+#perk-web-app [data-application-part="search"] dt {
+  display: inline-block;
+  padding-left: 5px;
+}
+#perk-web-app [data-application-part="search"] dd {
+  display: inline-block;
+  text-transform: capitalize;
+}
+#perk-web-app [data-application-part="search"] dd select {
+  margin-left: 0.5em;
+  width: 6em;
+}
+#perk-web-app [data-application-part="search"] ul.result-list {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  overflow: visible scroll;
+}
+#perk-web-app [data-application-part="search"] ul.result-list > li {
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.125rem 0.25rem;
+}
+#perk-web-app [data-application-part="search"] ul.result-list > li:nth-child(odd) {
+  background-color: rgba(0, 0, 0, 0.12);
+}
+#perk-web-app [data-application-part="search"] ul.result-list > li > * {
+  align-items: center;
+  display: flex;
+  min-height: 2rem;
+  justify-content: center;
+}
+#perk-web-app [data-application-part="search"] ul.result-list > li > .image {
+  max-width: 2rem;
+}
+#perk-web-app [data-application-part="search"] ul.result-list > li > .name {
+  gap: 0.25em;
+  flex-basis: 6ch;
+  justify-content: start;
+}
+#perk-web-app [data-application-part="search"] ul.result-list > li > .tags {
+  padding: 0.25em 0.05em;
+  margin-bottom: 0;
+}
+#perk-web-app [data-application-part="search"] ul.result-list > li > .level {
+  flex-grow: 1;
+  font-weight: 900;
+  max-width: 1.5em;
+}
+#perk-web-app [data-application-part="search"] ul.result-list > li > .price {
+  flex: none;
+  justify-content: end;
+  margin-right: var(--font-size-10);
+  min-width: 5em;
+}
+#perk-web-app [data-application-part="search"] ul.result-list > li > .end {
+  margin-right: 0.5em;
+}
+#perk-web-app [data-application-part="search"] ul.result-list > li:hover {
+  background-color: rgba(255, 255, 255, 0.25);
+  cursor: grab;
+}
+#perk-web-app [data-application-part="search"] #tagfilter input {
+  width: 100%;
+}
+#perk-web-app [data-application-part="search"] .hint {
+  font-size: var(--font-size-12);
+  border: 1px solid #00ff0547;
+  border-radius: 5px;
+  padding: 3px;
+}
+#perk-web-app [data-application-part="search"] .spacer {
+  display: inline-block;
+  min-width: 5px;
+}
+#perk-web-app [data-application-part="search"] .spacer-large {
+  display: inline-block;
+  min-width: 15px;
+}
+#perk-web-app [data-application-part="search"] .equipment-controls {
+  margin-left: 0.25em;
+  margin-right: 0.25em;
+  max-width: 1em;
+  width: 1em;
+}
+#perk-web-app [data-application-part="search"] .list-buttons {
+  position: absolute;
+  bottom: 3px;
+  right: 22px;
+  width: 54%;
+  display: flex;
+  justify-content: space-between;
+}
+#perk-web-app [data-application-part="search"] .list-buttons button {
+  line-height: 19px;
+  background: #fffff0;
 }
 #perk-web-app [data-application-part="searchResults"] {
   grid-area: searchResults;
@@ -7363,6 +7581,37 @@ ul.item-list.result-list li.item.rarity-unique {
   flex-direction: row;
   align-items: center;
   justify-content: center;
+}
+#perk-web-app [data-application-part="searchResults"] .item-list.result-list {
+  overflow-y: auto;
+  overflow-x: hidden;
+  margin: unset;
+  height: 100%;
+}
+#perk-web-app [data-application-part="searchResults"] .item-list.result-list li {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+#perk-web-app [data-application-part="searchResults"] .item-list.result-list li .image {
+  flex: 0 0 36px;
+  height: 36px;
+  width: 36px;
+  margin-right: 5px;
+}
+#perk-web-app [data-application-part="searchResults"] .item-list.result-list li .image img {
+  border: unset;
+}
+#perk-web-app [data-application-part="searchResults"] .item-list.result-list li .name {
+  flex: 1;
+}
+#perk-web-app [data-application-part="searchResults"] .item-list.result-list li .grade,
+#perk-web-app [data-application-part="searchResults"] .item-list.result-list li .cost {
+  flex: 0 0 min-content;
+  text-wrap: nowrap;
+  padding-right: 0.5rem;
+  color: var(--color-text-primary);
 }
 #perk-web-app .editing {
   --appv2-background-opaque: linear-gradient(to right, #25191c, #1f1115);

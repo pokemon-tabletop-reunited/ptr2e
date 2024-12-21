@@ -90,7 +90,7 @@ interface MoveFilters extends BaseFilterData {
 interface PerkFilters extends BaseFilterData {
   multiselects: {
     traits: MultiselectData<string>;
-    prerequisites: MultiselectData<string>;
+    // prerequisites: MultiselectData<string>;
   };
   sliders: {
     apCost: SliderData;
