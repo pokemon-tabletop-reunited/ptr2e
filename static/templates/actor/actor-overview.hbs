@@ -10,7 +10,7 @@
         <legend>Super Effective</legend>
         {{#each effectiveness.effective}}
           <div class="effectiveness">
-            {{{getIcon this.name}}}
+            {{{getIcon this.name direction="DOWN"}}}
             <label>x{{this.value}}</label>
           </div>
         {{else}}
@@ -23,7 +23,7 @@
         <legend>Immunities</legend>
         {{#each effectiveness.immune}}
           <div class="effectiveness">
-            {{{getIcon this.name}}}
+            {{{getIcon this.name direction="DOWN"}}}
             <label>x{{this.value}}</label>
           </div>
         {{else}}
@@ -36,7 +36,7 @@
         <legend>Not Very Effective</legend>
         {{#each effectiveness.ineffective}}
           <div class="effectiveness">
-            {{{getIcon this.name}}}
+            {{{getIcon this.name direction="DOWN"}}}
             <label>x{{this.value}}</label>
           </div>
         {{else}}

@@ -61,14 +61,21 @@ export class TutorListApp extends foundry.applications.api.HandlebarsApplication
   }
 
   override _prepareContext(options?: foundry.applications.api.HandlebarsRenderOptions | undefined) {
-    const lists = game.ptr.data.tutorList.list;
+    const lists = game.ptr.data.tutorList.list.contents;
 
     return {
       ...super._prepareContext(options),
-      lists: (this.actor ? this.filterList() : lists).map(list => ({
+      lists: (this.actor ? this.filterList() : lists).sort((a, b) => {
+        if (a.slug === "universal") return -1;
+        if (b.slug === "universal") return 1;
+        if (a.type === b.type) {
+          return a.slug.localeCompare(b.slug);
+        }
+        return a.type.localeCompare(b.type);
+      }).map(list => ({
         slug: list.slug,
         title: list.type !== "universal" ? `${formatSlug(list.slug)} (${list.type === 'egg' ? 'Egg Group' : formatSlug(list.type)})` : formatSlug(list.slug),
-        hidden: this.currentTab !== "" ? this.currentTab !== list.id : false,
+        hidden: this.currentTab !== "" ? this.currentTab !== list.slug : false,
         moves: list.moves.map(move => ({
           slug: move.slug,
           title: formatSlug(move.slug),
@@ -83,7 +90,7 @@ export class TutorListApp extends foundry.applications.api.HandlebarsApplication
   filterList() {
     const actor = this.actor;
     const tutorList = game.ptr.data.tutorList;
-    if (!actor) return tutorList.list;
+    if (!actor) return tutorList.list.contents;
 
     const resultLists = [tutorList.get("universal-universal")!];
 
