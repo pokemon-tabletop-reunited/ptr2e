@@ -6,29 +6,7 @@
     "prerequisites": [],
     "cost": 1,
     "description": "<p>Increase one <Stat>'s IV by 5.</p>",
-    "actions": [
-      {
-        "name": "<Stat> IV Booster 1",
-        "slug": "stat-iv-booster-1",
-        "description": "<p>Increase one <Stat>'s IV by 5.</p>",
-        "cost": {
-          "activation": "free",
-          "powerPoints": 0,
-          "delay": null,
-          "priority": null
-        },
-        "type": "passive",
-        "traits": [],
-        "img": "icons/svg/explosion.svg",
-        "range": {
-          "target": "enemy",
-          "unit": "m",
-          "distance": 0
-        },
-        "variant": null,
-        "hidden": false
-      }
-    ],
+    "actions": [],
     "slug": "stat-iv-booster-1",
     "traits": [],
     "_migration": {
@@ -395,5 +373,84 @@
   },
   "_id": "wqHZnaqbcQqOeLO7",
   "img": "systems/ptr2e/img/perk-icons/Trainer.svg",
-  "effects": []
+  "effects": [
+    {
+      "name": "IV Boost",
+      "type": "passive",
+      "_id": "Tl4uDbytkAel5CYi",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "choice-set",
+            "key": "",
+            "value": 0,
+            "predicate": [],
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "choices": [
+              {
+                "value": "system.attributes.hp.ivs",
+                "label": "HP"
+              },
+              {
+                "value": "system.attributes.atk.ivs",
+                "label": "Attack"
+              },
+              {
+                "value": "system.attributes.def.ivs",
+                "label": "Defense"
+              },
+              {
+                "value": "system.attributes.spa.ivs",
+                "label": "Special Attack"
+              },
+              {
+                "value": "system.attributes.spd.ivs",
+                "label": "Special Defense"
+              },
+              {
+                "value": "system.attributes.spe.ivs",
+                "label": "Speed"
+              }
+            ],
+            "prompt": "Pick a Stat",
+            "adjustName": true,
+            "rollOption": "ivBoosterChoice",
+            "flag": "ivBoosterChoice"
+          },
+          {
+            "type": "basic",
+            "key": "{effect|flags.ptr2e.choiceSelections.ivBoosterChoice}",
+            "value": 5,
+            "predicate": [],
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": false,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "<p><span style=\"font-family:Signika, sans-serif\">Increase one 's IV by 5.</span></p>",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": []
+    }
+  ]
 }

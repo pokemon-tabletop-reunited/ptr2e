@@ -209,7 +209,7 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
           if (!this.currentNode.perk.flags.ptr2e?.evolution) return;
 
           const perk = this.currentNode.perk;
-          const species = await fromUuid<SpeciesPTR2e>((perk.flags.ptr2e.evolution as {uuid: string}).uuid);
+          const species = await fromUuid<SpeciesPTR2e>((perk.flags.ptr2e.evolution as { uuid: string }).uuid);
           if (!species) return;
 
           const current = this.actor.species;
@@ -219,12 +219,12 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
           const currentMoveSlugs = new Set(this.actor.itemTypes.move.map(move => move.slug));
           const newMoves = await (async () => {
             const levelUpMoves = (species.system.moves.levelUp as ModelPropsFromSchema<LevelUpMoveSchema>[]).filter((move) => move.level <= level && !currentMoveSlugs.has(sluggify(move.name)));
-    
+
             return (await Promise.all(
               levelUpMoves.map(async (move) => fromUuid<MovePTR2e>(move.uuid))
             )).flatMap((move) => move ? [move] : []);
           })();
-          
+
           const { portrait: img, token: tokenImage } = await (async () => {
             const config = game.ptr.data.artMap.get(species.system.slug || sluggify(species.name));
             if (!config) return { portrait: "icons/svg/mystery-man.svg", token: "icons/svg/mystery-man.svg" };
@@ -237,7 +237,7 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
               config
             );
             if (!resolver?.result) return { portrait: "icons/svg/mystery-man.svg", token: "icons/svg/mystery-man.svg" };
-    
+
             const tokenResolver = await ImageResolver.createFromSpeciesData(
               {
                 dexId: species.system.number,
@@ -284,9 +284,9 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
           return void PerkWebApp.refresh.call(this);
         },
         "load-search": async function (this: PerkWebApp) {
-          if(!this.perkTab) return;
-          if(this.perkTab.isInitialized) return;
-          
+          if (!this.perkTab) return;
+          if (this.perkTab.isInitialized) return;
+
           await this.perkTab.init();
           this.render({ parts: ["search"] });
         }
@@ -385,7 +385,7 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
     const maxRow = 250;
     const maxCol = 250;
 
-    if(!this.perkTab?.isInitialized) {
+    if (!this.perkTab?.isInitialized) {
       this.perkTab = new CompendiumBrowserPerkTab(game.ptr.compendiumBrowser);
       this.perkTab.filterData.sliders.apCost.isExpanded = true;
     }
@@ -520,13 +520,14 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
       global: this.web === "global",
       webOptions,
       web: this.web,
-      filterData: this.perkTab.filterData
+      filterData: this.perkTab.filterData,
+      noZoom: navigator.userAgent.includes("FoundryVirtualTabletop"),
     }
   }
 
   override _preparePartContext(partId: string, context: ApplicationRenderContext): Promise<ApplicationRenderContext> {
-  
-    if(partId === "hudPerk" && 'perk' in context && context.perk && typeof context.perk === "object" && 'document' in context.perk && context.perk.document) {
+
+    if (partId === "hudPerk" && 'perk' in context && context.perk && typeof context.perk === "object" && 'document' in context.perk && context.perk.document) {
       const perk = context.perk.document as PerkPTR2e;
       (context.perk as Record<string, unknown>).prerequisites = perk.system.getPredicateStrings();
     }
@@ -779,7 +780,7 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
 
     if (partId === "search") {
       const currentTab = this.perkTab;
-      if(!currentTab) return;
+      if (!currentTab) return;
 
       const search = htmlElement.querySelector<HTMLInputElement>("input[name=textFilter]");
       if (search) {
@@ -1113,10 +1114,20 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
       const nameAnchor = liElement.querySelector<HTMLAnchorElement>("div.name > a");
       if (nameAnchor) {
         nameAnchor.addEventListener("click", async () => {
-          const document = await fromUuid(entryUuid);
-          if (document?.sheet) {
-            document.sheet.render(true);
-          }
+          const document = await fromUuid<PerkPTR2e>(entryUuid);
+          const position = this._perkStore.nodeFromSlug(document?.slug ?? "")?.position;
+          if (!position) return;
+          const perkElement = this.element.querySelector(`div.perk[data-x="${position.x}"][data-y="${position.y}"]`)
+          perkElement?.scrollIntoView({ inline: 'center', block: 'center', behavior: 'smooth' });
+        });
+        nameAnchor.addEventListener("click", async () => {
+          const document = await fromUuid<PerkPTR2e>(entryUuid);
+          const node = this._perkStore.nodeFromSlug(document?.slug ?? "");
+          if (!node) return;
+          const perkElement = this.element.querySelector(`div.perk[data-x="${node.position.x}"][data-y="${node.position.y}"]`)
+          this.currentNode = node;
+          perkElement?.scrollIntoView({ inline: 'center', block: 'center', behavior: 'smooth' });
+          this.render({ parts: ["hudPerk"] });
         });
       }
     }
@@ -1353,11 +1364,20 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
     }
 
     this._zoomAmount = zoom;
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore - Zoom is a valid property
-    grid!.style.zoom = `${zoom}`;
+    const isElectron = navigator.userAgent.includes("FoundryVirtualTabletop");
+    if (!isElectron) {
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore - Zoom is a valid property
+      grid!.style.zoom = `${zoom}`;
+    }
+    else {
+      grid!.style.transform = `scale(${zoom})`;
+    }
+
     this.renderSVG()
-    zoomElement.scrollTo(newCenter);
+
+    if (!isElectron) zoomElement.scrollTo(newCenter);
+    else zoomElement.scrollTo({ top: (zoomElement.scrollWidth / 2) - (zoomElement.clientWidth / 2), left: (zoomElement.scrollHeight / 2) - (zoomElement.clientHeight / 2) });
   }
 
   async setWeb(species: SpeciesPTR2e | null) {
@@ -1618,6 +1638,15 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
     if (this.actor) {
       this.actor.sheet.setPosition({ left: 270, top: 20 });
       this.actor.sheet.minimize();
+    }
+
+    if (navigator.userAgent.includes("FoundryVirtualTabletop")) {
+      ui.notifications.warn("We've detected you're using the Foundry VTT Electron Client as your web browser. Please see chat for the full message...")
+      ChatMessage.create({
+        content: "<p>We've detected you're using the Foundry VTT Electron Client as your web browser.</p><p>Due to a problem in the older version of the Electron Client that Foundry V12 uses, the Perk Web's zoom feature is broken.</p><p>Since this is a browser issue, we cannot fix this at a system level, luckily, with Foundry V13, the Electron Version has been updated and this issue is fixed.</p><p>For now, you can still use the Perk Web, but the zoom feature will not work as intended.</p><p>As thus, we recommend using a different browser for the best experience.</p>",
+        speaker: ChatMessage.getSpeaker({ alias: "PTR2e" }),
+        whisper: [game.user.id]
+      }).then(message => ui.chat.renderPopout(message!));
     }
   }
 
