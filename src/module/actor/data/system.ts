@@ -601,6 +601,8 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
       return 1;
     })();
 
+    stat.ivs = Math.clamp(stat.ivs, 0, 31);
+
     const level = this.advancement.level;
 
     if ("stage" in stat) {
