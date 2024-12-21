@@ -192,7 +192,7 @@ export default class ItemSheetPTR2e<
       Array.isArray(submitData["system.traits"])
     ) {
       // Traits are stored as an array of objects, but we only need the values
-      submitData["system.traits"] = submitData["system.traits"].map(
+      submitData["system.traits"] = submitData["system.traits"].filter(t => !t.virtual).map(
         (trait: { value: string }) => sluggify(trait.value)
       );
     }

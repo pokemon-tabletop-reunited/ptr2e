@@ -136,7 +136,7 @@ export default class PerkSheet extends ItemSheetPTR2e<PerkPTR2e["system"]> {
       Array.isArray(data.system.traits)
     ) {
       // Traits are stored as an array of objects, but we only need the values
-      data.system.traits = data.system.traits.map((trait: { value: string }) =>
+      data.system.traits = data.system.traits.filter(t => !t.virtual).map((trait: { value: string }) =>
         sluggify(trait.value)
       );
     }
