@@ -1,5 +1,5 @@
 {
-  "folder": "Et2u8UoXSe2a17oq",
+  "folder": "a1w2zpzavg6qtJFn",
   "name": "Logician's Wisdom",
   "type": "perk",
   "_id": "xp2j0rUO5GEmAAdb",
@@ -11,70 +11,55 @@
         "slug": "logicians-wisdom",
         "description": "<p>Effect: The target takes +10% more Damage per [Major Affliction] and +5% more Damage per [Minor Affliction] they possess from the triggering attack.</p>",
         "traits": [],
-        "type": "generic",
+        "type": "passive",
         "range": {
           "target": "creature",
-          "trigger": "The user hits a target with a Physical- or Special-Category Attack.",
           "distance": 20,
           "unit": "m"
         },
         "cost": {
-          "activation": "free",
-          "powerPoints": 5,
-          "delay": null,
-          "priority": null
-        }
+          "activation": "free"
+        },
+        "img": "systems/ptr2e/img/perk-icons/Tactician.svg"
       }
     ],
-    "slug": null,
+    "slug": "logicians-wisdom",
     "description": "<p>Trigger: The user declares a Physical- or Special-Category Attack.</p><p>Effect: The target takes +10% more Damage per [Major Affliction] and +5% more Damage per [Minor Affliction] they possess from the triggering attack.</p>",
     "traits": [],
-    "prerequisites": [
-      "None"
-    ],
+    "prerequisites": [],
     "cost": 4,
-    "design": {
-      "arena": "mental",
-      "approach": "finesse",
-      "archetype": "Tactician"
+    "_migration": {
+      "version": null,
+      "previous": null
     },
-    "node": {
-      "i": 125,
-      "j": 136,
-      "connected": [
-        "hit-run",
-        "adrenaline-rush",
-        "sprint",
-        "weak-spot"
-      ],
-      "config": {
-        "alpha": null,
-        "backgroundColor": "#ffff00",
-        "borderColor": null,
-        "borderWidth": null,
-        "texture": "systems/ptr2e/img/perk-icons/Tactician.svg",
-        "tint": "#2c2c2c",
-        "scale": null
-      },
-      "hidden": false,
-      "type": "normal"
-    }
+    "nodes": [
+      {
+        "connected": [
+          "thug",
+          "lasting-harm",
+          "acute-affliction",
+          "stage-vampirism",
+          "cultivate-weakness"
+        ],
+        "config": {
+          "alpha": null,
+          "backgroundColor": "#ffff00",
+          "borderColor": null,
+          "borderWidth": null,
+          "texture": "systems/ptr2e/img/perk-icons/Tactician.svg",
+          "tint": "#2c2c2c",
+          "scale": null
+        },
+        "hidden": false,
+        "type": "normal",
+        "x": 147,
+        "y": 74,
+        "tier": null
+      }
+    ],
+    "autoUnlock": [],
+    "global": true,
+    "webs": []
   },
-  "effects": [],
-  "sort": 1500000,
-  "ownership": {
-    "default": 0,
-    "Kc3DOunCh3ClAeHS": 3
-  },
-  "flags": {},
-  "_stats": {
-    "compendiumSource": "Item.xp2j0rUO5GEmAAdb",
-    "duplicateSource": null,
-    "coreVersion": "12.325",
-    "systemId": "ptr2e",
-    "systemVersion": "0.006",
-    "createdTime": 1717147257161,
-    "modifiedTime": 1717179749463,
-    "lastModifiedBy": "Kc3DOunCh3ClAeHS"
-  }
+  "effects": []
 }
