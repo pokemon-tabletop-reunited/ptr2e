@@ -1,5 +1,5 @@
 {
-  "folder": "Et2u8UoXSe2a17oq",
+  "folder": "c29hnIAtXgwB7FeY",
   "name": "Look Out!",
   "type": "perk",
   "_id": "EBvvOSG44hZTeDCK",
@@ -10,38 +10,57 @@
     "description": "<p>You may Intercept an attack against an ally within your available Movement Allowance as a Simple Action Interrupt. This consumes Movement Allowance as normal. If you also possess the perk \"Fearsome Defense\", this instead becomes a Free Action.</p>",
     "traits": [],
     "prerequisites": [
-      "Running or Swim 35"
+      {
+        "or": [
+          {
+            "gte": [
+              "{actor|skills.running.mod}",
+              35
+            ]
+          },
+          {
+            "gte": [
+              "{actor|skills.swim.mod}",
+              35
+            ]
+          }
+        ]
+      }
     ],
     "cost": 2,
-    "design": {
-      "arena": "social",
-      "approach": "resilience",
-      "archetype": "Tank"
-    },
-    "node": {
-      "i": 156,
-      "j": 38,
-      "connected": [
-        "i-get-knocked-down",
-        "root-2",
-        "cyclist"
-      ],
-      "config": {
-        "alpha": null,
-        "backgroundColor": "#008040",
-        "borderColor": null,
-        "borderWidth": null,
-        "texture": "systems/ptr2e/img/perk-icons/Combat.svg",
-        "tint": null,
-        "scale": null
-      },
-      "hidden": false,
-      "type": "normal"
-    },
     "_migration": {
       "version": null,
       "previous": null
-    }
+    },
+    "nodes": [
+      {
+        "connected": [
+          "fearsome-defense",
+          "vigilant-guardian",
+          "martyrs-gift"
+        ],
+        "config": {
+          "alpha": null,
+          "backgroundColor": "#008040",
+          "borderColor": null,
+          "borderWidth": null,
+          "texture": "systems/ptr2e/img/perk-icons/Combat.svg",
+          "tint": null,
+          "scale": null
+        },
+        "hidden": false,
+        "type": "normal",
+        "x": 72,
+        "y": 88,
+        "tier": null
+      }
+    ],
+    "autoUnlock": [],
+    "originSlug": null,
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": []
   },
   "effects": []
 }

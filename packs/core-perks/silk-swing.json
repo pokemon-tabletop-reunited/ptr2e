@@ -3,14 +3,9 @@
   "type": "perk",
   "system": {
     "prerequisites": [
-      "[Bug]"
+      "trait:bug"
     ],
     "cost": 2,
-    "design": {
-      "arena": "physical",
-      "approach": "finesse",
-      "archetype": "[Bug]"
-    },
     "description": "<p>You gain the [Threaded] trait, and gain a Threaded Movement Allowance equal to your Overland Movement Allowance.</p>",
     "actions": [
       {
@@ -18,45 +13,65 @@
         "slug": "silk-swing",
         "description": "<p>You gain the [Threaded] trait, and gain a Threaded Movement Allowance equal to your Overland Movement Allowance.</p>",
         "cost": {
-          "activation": "free"
+          "activation": "free",
+          "powerPoints": 0,
+          "delay": null,
+          "priority": null
         },
         "type": "passive",
         "traits": [],
         "img": "icons/svg/explosion.svg",
         "range": {
           "target": "enemy",
-          "unit": "m"
-        }
+          "unit": "m",
+          "distance": 0
+        },
+        "variant": null,
+        "hidden": false
       }
     ],
     "slug": "silk-swing",
     "traits": [],
-    "node": {
-      "i": 44,
-      "j": 149,
-      "connected": [
-        "root-6",
-        "adhesive-digits",
-        "improved-threaded-1"
-      ],
-      "config": {
-        "alpha": null,
-        "backgroundColor": null,
-        "borderColor": null,
-        "borderWidth": null,
-        "texture": "systems/ptr2e/img/svg/bug_icon.svg",
-        "tint": null,
-        "scale": null
-      },
-      "hidden": false,
-      "type": "normal"
-    },
     "_migration": {
       "version": null,
       "previous": null
-    }
+    },
+    "nodes": [
+      {
+        "connected": [
+          "adhesive-digits",
+          "hivemark",
+          "improved-threaded-1",
+          "root-1",
+          "improved-threaded-1-1"
+        ],
+        "config": {
+          "alpha": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "borderWidth": null,
+          "texture": "systems/ptr2e/img/svg/bug_icon.svg",
+          "tint": null,
+          "scale": null
+        },
+        "hidden": false,
+        "type": "normal",
+        "x": 83,
+        "y": 31,
+        "tier": null
+      }
+    ],
+    "autoUnlock": [
+      "trait:threaded"
+    ],
+    "originSlug": null,
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": []
   },
   "_id": "tVbuG5HWGhxgZQV5",
   "img": "systems/ptr2e/img/svg/bug_icon.svg",
-  "effects": []
+  "effects": [],
+  "folder": "o5iIUG4Bj40M86yi"
 }

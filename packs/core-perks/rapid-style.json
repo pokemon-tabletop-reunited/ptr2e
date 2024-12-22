@@ -3,14 +3,14 @@
   "type": "perk",
   "system": {
     "prerequisites": [
-      "Leadership 40"
+      {
+        "gte": [
+          "{actor|skills.leadership.mod}",
+          40
+        ]
+      }
     ],
     "cost": 2,
-    "design": {
-      "arena": "physical",
-      "approach": "finesse",
-      "archetype": "Support"
-    },
     "description": "<p>The target gains @Affliction[rapid] 1.</p>",
     "actions": [
       {
@@ -27,11 +27,14 @@
         },
         "cost": {
           "activation": "simple",
-          "powerPoints": 2
+          "powerPoints": 2,
+          "delay": null,
+          "priority": null
         },
         "description": "Effect: The target gains @Affliction[rapid] 1.",
         "type": "generic",
-        "img": "icons/svg/explosion.svg"
+        "img": "icons/svg/explosion.svg",
+        "variant": null
       },
       {
         "name": "Rapid! (Self)",
@@ -47,43 +50,58 @@
         },
         "cost": {
           "activation": "simple",
-          "powerPoints": 2
+          "powerPoints": 2,
+          "delay": null,
+          "priority": null
         },
         "description": "Effect: The target gains @Affliction[rapid] 2.",
         "type": "generic",
-        "img": "icons/svg/explosion.svg"
+        "img": "icons/svg/explosion.svg",
+        "variant": null
       }
     ],
     "slug": "rapid-style",
     "traits": [],
-    "node": {
-      "i": 143,
-      "j": 85,
-      "connected": [
-        "stat-specialist",
-        "tactician",
-        "root-3",
-        "improved-overland-3",
-        "quick-switch"
-      ],
-      "config": {
-        "alpha": null,
-        "backgroundColor": "#800080",
-        "borderColor": null,
-        "borderWidth": null,
-        "texture": "systems/ptr2e/img/perk-icons/Orders_Training.svg",
-        "tint": "#ffffff",
-        "scale": null
-      },
-      "hidden": false,
-      "type": "normal"
-    },
     "_migration": {
       "version": null,
       "previous": null
-    }
+    },
+    "nodes": [
+      {
+        "connected": [
+          "hobby-gardener",
+          "strong-style",
+          "precise-style",
+          "improved-overland-1-13",
+          "improved-swim-1-2",
+          "stat-iv-booster-1-12",
+          "improved-overland-1-14"
+        ],
+        "config": {
+          "alpha": null,
+          "backgroundColor": "#800080",
+          "borderColor": null,
+          "borderWidth": null,
+          "texture": "systems/ptr2e/img/perk-icons/Orders_Training.svg",
+          "tint": "#ffffff",
+          "scale": null
+        },
+        "hidden": false,
+        "type": "normal",
+        "x": 95,
+        "y": 135,
+        "tier": null
+      }
+    ],
+    "autoUnlock": [],
+    "originSlug": null,
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": []
   },
   "_id": "jJJ6DaJCklHa5x2X",
   "img": "systems/ptr2e/img/perk-icons/Orders_Training.svg",
-  "effects": []
+  "effects": [],
+  "folder": "JZrGRskscJOkkPWA"
 }

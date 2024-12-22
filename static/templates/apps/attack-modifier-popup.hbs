@@ -36,7 +36,7 @@
                             <input type="checkbox" {{#unless modifier.ignored}}checked{{/unless}}>
                         </span>
                     </div>
-                    <span class="appliesTo" data-collection="{{modifier.collection}}" data-slug="{{modifier.slug}}">
+                    <span class="appliesTo {{#if modifier.ignored}}{{#if modifier.hideIfDisabled}} hidden{{/if}}{{/if}}" data-collection="{{modifier.collection}}" data-slug="{{modifier.slug}}">
                         <span class="label">Applies to</span>
                         <span class="avatars">
                             {{#each modifier.appliesTo}}

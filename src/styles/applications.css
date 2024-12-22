@@ -776,7 +776,7 @@ body .application.sheet .form-group {
   grid-template-rows: repeat(7, 1fr);
 }
 .application.sheet.actor.v2 .window-content .tab.active[data-tab="overview"] .skill-component {
-  grid-area: 1 / 1 / span 4 / span 3;
+  grid-area: 5 / 1 / span 3 / span 4;
 }
 .application.sheet.actor.v2 .window-content .tab.active[data-tab="overview"] aside.stats-chart-aside {
   grid-area: 1 / 5 / span 4 / span 3;
@@ -796,7 +796,7 @@ body .application.sheet .form-group {
   max-height: 100%;
 }
 .application.sheet.actor.v2 .window-content .tab.active[data-tab="overview"] .movement-component {
-  grid-area: 5 / 1 / span 3 / span 3;
+  grid-area: 5 / 5 / span 3 / span 3;
   padding: 0.5rem;
 }
 .application.sheet.actor.v2 .window-content .tab.active[data-tab="overview"] .movement-component .movement {
@@ -809,6 +809,42 @@ body .application.sheet .form-group {
 .application.sheet.actor.v2 .window-content .tab.active[data-tab="overview"] .movement-component .movement label,
 .application.sheet.actor.v2 .window-content .tab.active[data-tab="overview"] .movement-component .movement input {
   flex: 0 0 45%;
+}
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="overview"] aside.effectiveness {
+  grid-area: 1 / 1 / span 4 / span 4;
+  padding: 0.5rem;
+}
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="overview"] aside.effectiveness fieldset {
+  background: linear-gradient(to right, rgba(7, 7, 10, 0.93), rgba(19, 17, 31, 0.95));
+  border-radius: 8px;
+  border: 1px solid var(--border-theme-color);
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+}
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="overview"] aside.effectiveness fieldset.effectiveness-container {
+  flex-direction: row;
+  gap: 0.25rem;
+  flex-wrap: wrap;
+  overflow: unset;
+  padding: 0.75rem;
+}
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="overview"] aside.effectiveness div.effectiveness {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 0.25rem;
+}
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="overview"] aside.effectiveness div.effectiveness img {
+  height: 28px;
+  width: 28px;
+  border: unset;
+}
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="overview"] aside.effectiveness div.effectiveness small {
+  text-align: center;
+  color: var(--hint-text-color);
 }
 .application.sheet.actor.v2 .window-content .tab.active[data-tab="perks"] {
   grid-template-columns: 1fr 5px 1fr;
@@ -2434,6 +2470,226 @@ body .application.sheet .form-group {
 }
 .application.sheet.tutor-list main ul li {
   margin-bottom: 0.35rem;
+}
+.application.sheet.exp-tracker .window-content {
+  display: grid;
+  grid-template-columns: 100%;
+  grid-template-rows: calc(1rem + 24px) auto min-content;
+  grid-template-areas: "nav" "main" "footer";
+}
+.application.sheet.exp-tracker .window-content nav.tabs {
+  border-top: unset;
+  border-left: unset;
+  border-right: unset;
+}
+.application.sheet.exp-tracker .window-content [data-application-part="footer"] {
+  grid-area: footer;
+  padding: 0.5rem;
+  border-top: 1px solid var(--border-theme-color);
+}
+.application.sheet.exp-tracker .window-content [data-application-part="venture"].active {
+  grid-area: main;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  height: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+.application.sheet.exp-tracker .window-content [data-application-part="venture"].active details {
+  padding: 0.5rem;
+  border-radius: 8px;
+  border: 1px solid var(--border-theme-color);
+  min-height: 35px;
+}
+.application.sheet.exp-tracker .window-content [data-application-part="venture"].active fieldset.header {
+  display: inline-table;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+.application.sheet.exp-tracker .window-content [data-application-part="venture"].active fieldset.header:has(details[open]) {
+  height: 100%;
+}
+.application.sheet.exp-tracker .window-content [data-application-part="venture"].active fieldset.header > details {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin: 0.5rem 0;
+  overflow-y: auto;
+}
+.application.sheet.exp-tracker .window-content [data-application-part="venture"].active fieldset.header > details:first-child {
+  margin-top: 0;
+}
+.application.sheet.exp-tracker .window-content [data-application-part="venture"].active fieldset.header > details:last-child {
+  margin-bottom: 0;
+}
+.application.sheet.exp-tracker .window-content [data-application-part="venture"].active fieldset.header > details > header {
+  margin: 0.5rem 0;
+}
+.application.sheet.exp-tracker .window-content [data-application-part="venture"].active fieldset.header > details > header .actor {
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
+  align-items: center;
+}
+.application.sheet.exp-tracker .window-content [data-application-part="venture"].active fieldset.header > details > header .actor img {
+  height: 48px;
+  width: 48px;
+  border: unset;
+  border-radius: 50%;
+}
+.application.sheet.exp-tracker .window-content [data-application-part="venture"].active fieldset.header > details > header .actor label {
+  flex: 1;
+  margin-left: 1rem;
+}
+.application.sheet.exp-tracker .window-content [data-application-part="venture"].active fieldset.header > details > fieldset {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  overflow-y: auto;
+  overflow-x: hidden;
+  max-height: calc(4rem + 144px);
+}
+.application.sheet.exp-tracker .window-content [data-application-part="venture"].active fieldset.header > details > fieldset .actor {
+  flex: 0 0 48px;
+  height: 48px;
+}
+.application.sheet.exp-tracker .window-content [data-application-part="venture"].active fieldset.header > details > fieldset .actor img {
+  height: 48px;
+  width: 48px;
+  border: unset;
+  border-radius: 50%;
+}
+.application.sheet.exp-tracker .window-content [data-application-part="venture"].active fieldset.header > details > fieldset .actor.loafing {
+  filter: grayscale(100%);
+}
+.application.sheet.exp-tracker .window-content [data-application-part="venture"].active aside.base-experience {
+  margin: 2px;
+}
+.application.sheet.exp-tracker .window-content [data-application-part="venture"].active aside.base-experience details {
+  padding-left: 1.5rem;
+}
+.application.sheet.exp-tracker .window-content [data-application-part="venture"].active fieldset.cms {
+  display: flex;
+  overflow-x: hidden;
+  overflow-y: auto;
+  flex: 1 0 auto;
+}
+.application.sheet.exp-tracker .window-content [data-application-part="venture"].active fieldset.cms:has(details[open]) {
+  height: 100%;
+}
+.application.sheet.exp-tracker .window-content [data-application-part="venture"].active fieldset.cms .form-group > label {
+  flex-basis: 65%;
+}
+.application.sheet.exp-tracker .window-content [data-application-part="venture"].active fieldset.cms details {
+  overflow-y: auto;
+  flex: 0 0 auto;
+}
+.application.sheet.exp-tracker .window-content [data-application-part="venture"].active fieldset.cms fieldset.custom .form-group label {
+  flex-basis: 50%;
+}
+.application.sheet.exp-tracker .window-content [data-application-part="venture"].active fieldset.cms fieldset.custom .form-group .form-fields {
+  flex-basis: 40%;
+}
+.application.sheet.exp-tracker .window-content [data-application-part="training"].active {
+  grid-area: main;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  height: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+.application.sheet.exp-tracker .window-content [data-application-part="training"].active details {
+  padding: 0.5rem;
+  border-radius: 8px;
+  border: 1px solid var(--border-theme-color);
+  min-height: 35px;
+}
+.application.sheet.exp-tracker .window-content [data-application-part="training"].active fieldset.header {
+  display: inline-table;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+.application.sheet.exp-tracker .window-content [data-application-part="training"].active fieldset.header:has(details[open]) {
+  height: 100%;
+}
+.application.sheet.exp-tracker .window-content [data-application-part="training"].active fieldset.header fieldset.training-targets {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+}
+.application.sheet.exp-tracker .window-content [data-application-part="training"].active fieldset.header fieldset.training-targets .slot {
+  place-items: center;
+}
+.application.sheet.exp-tracker .window-content [data-application-part="training"].active fieldset.header fieldset.training-targets .actor {
+  height: 64px;
+  width: 64px;
+  border: 1px solid var(--border-theme-color);
+  border-radius: 50%;
+}
+.application.sheet.exp-tracker .window-content [data-application-part="training"].active fieldset.header fieldset.training-targets .actor img {
+  height: 64px;
+  width: 64px;
+  border: unset;
+}
+.application.sheet.exp-tracker .window-content [data-application-part="training"].active fieldset.header fieldset.training-targets .actor.empty {
+  border-style: dashed;
+}
+.application.sheet.exp-tracker .window-content [data-application-part="training"].active fieldset.header > details {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin: 0.5rem 0;
+  overflow-y: auto;
+}
+.application.sheet.exp-tracker .window-content [data-application-part="training"].active fieldset.header > details:first-child {
+  margin-top: 0;
+}
+.application.sheet.exp-tracker .window-content [data-application-part="training"].active fieldset.header > details:last-child {
+  margin-bottom: 0;
+}
+.application.sheet.exp-tracker .window-content [data-application-part="training"].active fieldset.header > details > header {
+  margin: 0.5rem 0;
+}
+.application.sheet.exp-tracker .window-content [data-application-part="training"].active fieldset.header > details > header .actor {
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
+  align-items: center;
+}
+.application.sheet.exp-tracker .window-content [data-application-part="training"].active fieldset.header > details > header .actor img {
+  height: 48px;
+  width: 48px;
+  border: unset;
+  border-radius: 50%;
+}
+.application.sheet.exp-tracker .window-content [data-application-part="training"].active fieldset.header > details > header .actor label {
+  flex: 1;
+  margin-left: 1rem;
+}
+.application.sheet.exp-tracker .window-content [data-application-part="training"].active fieldset.header > details > fieldset {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  overflow-y: auto;
+  overflow-x: hidden;
+  max-height: calc(4rem + 144px);
+}
+.application.sheet.exp-tracker .window-content [data-application-part="training"].active fieldset.header > details > fieldset .actor {
+  flex: 0 0 48px;
+  height: 48px;
+}
+.application.sheet.exp-tracker .window-content [data-application-part="training"].active fieldset.header > details > fieldset .actor img {
+  height: 48px;
+  width: 48px;
+  border: unset;
+  border-radius: 50%;
+}
+.application.sheet.exp-tracker .window-content [data-application-part="training"].active fieldset.header > details > fieldset .actor.loafing {
+  filter: grayscale(100%);
 }
 .application.sheet.skill-sheet {
   max-height: 750px;
@@ -6644,6 +6900,53 @@ body .application.sheet .form-group {
   width: 40px;
   height: 40px;
 }
+.application.sheet.github-commit-manager section.window-content {
+  display: flex;
+  flex-direction: column;
+}
+.application.sheet.github-commit-manager main fieldset.scroll {
+  max-height: 40vh;
+  overflow-y: scroll;
+}
+.application.sheet.github-commit-manager main ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.application.sheet.github-commit-manager main ul li {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  padding: 0.5rem;
+  border-bottom: 1px solid var(--border-theme-color);
+}
+.application.sheet.github-commit-manager main ul li span {
+  flex: 0 0 150px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.application.sheet.github-commit-manager main ul li span.message {
+  flex: 1;
+  text-wrap: pretty;
+}
+.application.sheet.github-commit-manager main ul li .hint {
+  text-wrap: pretty;
+}
+.application.sheet.github-commit-manager main ul li button {
+  flex: 0;
+  padding: 0.25rem;
+}
+.application.sheet.github-commit-manager main ul li button i {
+  margin: unset;
+}
+.application.sheet.github-commit-manager footer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+.application.sheet.github-commit-manager footer button {
+  flex: 0 0 35%;
+}
 .directory-item.document .entry-name.document-name.rarity-uncommon,
 ul.item-list.result-list li.item.rarity-uncommon {
   color: #33a7ff;
@@ -6663,9 +6966,9 @@ ul.item-list.result-list li.item.rarity-unique {
   color: white;
   display: grid;
   overflow: hidden;
-  grid-template-areas: "hudHeader web searchHeader" "hudActor web search" "hudPerk web searchResults" "hudControls web searchResults";
+  grid-template-areas: "hudHeader web search" "hudActor web search" "hudPerk web search" "hudPerk web searchResults" "hudControls web searchResults";
   grid-template-columns: 250px minmax(0, 1fr) 250px;
-  grid-template-rows: 33px 100px minmax(0, 1fr) min-content;
+  grid-template-rows: 33px 100px 130px minmax(0, 1fr) min-content;
   --appv2-background-opaque: linear-gradient(to right, #07070a, #13111f);
 }
 #perk-web-app .hud {
@@ -6730,7 +7033,6 @@ ul.item-list.result-list li.item.rarity-unique {
 }
 #perk-web-app [data-application-part="hudPerk"] {
   grid-area: hudPerk;
-  overflow: auto;
 }
 #perk-web-app [data-application-part="hudPerk"] h2 {
   font-family: inherit;
@@ -6739,6 +7041,7 @@ ul.item-list.result-list li.item.rarity-unique {
 #perk-web-app [data-application-part="hudPerk"] .perk-header {
   border-bottom: 1px solid var(--color-light-6);
   padding: 0.5rem 0;
+  height: 33px;
 }
 #perk-web-app [data-application-part="hudPerk"] .perk-header h2 {
   border-bottom: unset;
@@ -6751,6 +7054,8 @@ ul.item-list.result-list li.item.rarity-unique {
   margin: 0.5rem;
   border: 1px solid var(--color-light-6);
   border-radius: 8px;
+  overflow: auto;
+  max-height: calc(100% - 33px - 50px - 1rem);
 }
 #perk-web-app [data-application-part="hudPerk"] figure header {
   margin-bottom: 0.25rem;
@@ -6787,15 +7092,17 @@ ul.item-list.result-list li.item.rarity-unique {
 }
 #perk-web-app [data-application-part="hudPerk"] footer {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: space-evenly;
+  align-items: center;
+  gap: 0.5rem;
   padding: 0.5rem 0;
   border-top: 1px solid var(--color-light-6);
   border-bottom: 1px solid var(--color-light-6);
 }
 #perk-web-app [data-application-part="hudPerk"] footer button.purchase,
 #perk-web-app [data-application-part="hudPerk"] footer button.refund {
-  flex: 0 0 70%;
+  width: 70%;
 }
 #perk-web-app [data-application-part="hudPerk"] footer button.refund {
   border-color: #851a1a;
@@ -6824,8 +7131,12 @@ ul.item-list.result-list li.item.rarity-unique {
 }
 #perk-web-app [data-application-part="web"] {
   grid-area: web;
+}
+#perk-web-app [data-application-part="web"] .scroll {
   display: flex;
   overflow: auto;
+  width: 100%;
+  height: 100%;
 }
 #perk-web-app [data-application-part="web"] svg {
   position: absolute;
@@ -6840,9 +7151,15 @@ ul.item-list.result-list li.item.rarity-unique {
   display: grid;
   grid-template-columns: repeat(250, 48px);
   grid-template-rows: repeat(250, 48px);
-  gap: 1.5rem;
+  gap: 1rem;
   z-index: 2;
-  border: 1px solid var(--border-theme-color);
+  height: max-content;
+  width: max-content;
+  flex: 1;
+}
+#perk-web-app [data-application-part="web"] section.perk-grid.species-web {
+  grid-template-columns: repeat(30, 48px);
+  grid-template-rows: repeat(30, 48px);
 }
 #perk-web-app [data-application-part="web"] section.perk-grid .perk {
   height: 48px;
@@ -6854,6 +7171,80 @@ ul.item-list.result-list li.item.rarity-unique {
 #perk-web-app [data-application-part="web"] section.perk-grid .perk.selected {
   border-color: #973748;
   filter: drop-shadow(0 0 8px #973748);
+}
+#perk-web-app [data-application-part="web"] section.perk-grid .perk.highlighted {
+  border-color: #379762;
+  filter: drop-shadow(0 0 8px #379762);
+}
+#perk-web-app [data-application-part="web"] section.perk-grid .perk.unavailable {
+  filter: grayscale(100%);
+  cursor: not-allowed;
+  border-style: dashed;
+  transform: scale(0.9);
+  border-width: 2px;
+}
+#perk-web-app [data-application-part="web"] section.perk-grid .perk.invalid {
+  filter: grayscale(50%) drop-shadow(0 0 24px #851a1a);
+  border-color: #851a1a;
+  border-width: 3px;
+  border-style: dashed;
+  cursor: not-allowed;
+}
+#perk-web-app [data-application-part="web"] section.perk-grid .perk.connected {
+  border-color: #FBA151;
+  filter: grayscale(25%) drop-shadow(0 0 10px #FBA151);
+  border-width: 3px;
+  border-style: dashed;
+  cursor: not-allowed;
+}
+#perk-web-app [data-application-part="web"] section.perk-grid .perk.available {
+  border-color: #379762;
+  filter: brightness(120%) drop-shadow(0 0 16px #379762) drop-shadow(0 0 24px #ffffff);
+  border-width: 4px;
+  border-style: inset;
+  transform: scale(1.1);
+}
+#perk-web-app [data-application-part="web"] section.perk-grid .perk.purchased {
+  border-color: #2ECFF5;
+  filter: drop-shadow(0 0 6px #2ECFF5);
+  border-width: 7px;
+  border-style: double;
+  transform: scale(1.1);
+  cursor: auto;
+}
+#perk-web-app [data-application-part="web"] section.perk-grid .perk.auto-unlocked {
+  border-color: #4254bb;
+  filter: drop-shadow(0 0 6px #4254bb);
+  border-width: 5px;
+  border-style: double;
+  cursor: auto;
+}
+#perk-web-app [data-application-part="web"] section.perk-grid .perk.tiered {
+  border-color: #9E4FCE;
+  filter: brightness(120%) drop-shadow(0 0 16px #9E4FCE) drop-shadow(0 0 24px #ffffff);
+  border-width: 4px;
+  border-style: inset;
+  transform: scale(1.1);
+}
+#perk-web-app [data-application-part="web"] section.perk-grid .perk.tiered.connected {
+  filter: grayscale(25%) drop-shadow(0 0 10px #FBA151);
+  border-width: 3px;
+  border-style: dashed;
+  cursor: not-allowed;
+}
+#perk-web-app [data-application-part="web"] section.perk-grid .perk.root {
+  transform: scale(1.5);
+  border-radius: 35%;
+  padding: 5px;
+}
+#perk-web-app [data-application-part="web"] section.perk-grid .perk.root img {
+  border-radius: 35%;
+}
+#perk-web-app [data-application-part="web"] section.perk-grid .perk.entry {
+  border-radius: 25%;
+}
+#perk-web-app [data-application-part="web"] section.perk-grid .perk.entry img {
+  border-radius: 25%;
 }
 #perk-web-app [data-application-part="web"] section.perk-grid .perk img {
   border: unset;
@@ -6873,61 +7264,279 @@ ul.item-list.result-list li.item.rarity-unique {
 }
 #perk-web-app [data-application-part="search"] {
   grid-area: search;
+  position: sticky;
+  display: block;
+  padding: 0 5px;
+  overflow: auto;
+  /*  Sort and filter areas */
 }
-#perk-web-app [data-application-part="search"] .search {
-  margin: 0.5rem;
-  padding: 0.5rem;
+#perk-web-app [data-application-part="search"] h3 {
+  font-size: 1.25em;
+  border-bottom: none;
+}
+#perk-web-app [data-application-part="search"] div[class^="slider-"] {
+  height: 10px;
+  width: 80%;
+  border: 1px solid black;
+}
+#perk-web-app [data-application-part="search"] div[class^="slider-"] .noUi-base {
+  background: #dddddd;
+}
+#perk-web-app [data-application-part="search"] div[class^="slider-"] .noUi-base .noUi-origin .noUi-handle {
+  background: none;
+  border: none;
+  box-shadow: none;
+  color: var(--text-light);
+  cursor: grab;
+  font-size: var(--font-size-16);
+  height: 14px;
+  right: -7px;
+  text-shadow: 0 0 4px black;
+  top: -4px;
+  width: 14px;
+}
+#perk-web-app [data-application-part="search"] div[class^="slider-"] .noUi-base .noUi-origin .noUi-handle:active {
+  cursor: grabbing;
+}
+#perk-web-app [data-application-part="search"] div[class^="slider-"] .noUi-base .noUi-origin .noUi-handle.handle {
+  background: #c85019;
+  border-radius: 2px;
+  border: 1px solid black;
+  box-shadow: 1px 1px 4px black;
+}
+#perk-web-app [data-application-part="search"] div[class^="slider-"] .noUi-base .noUi-origin .noUi-handle::before,
+#perk-web-app [data-application-part="search"] div[class^="slider-"] .noUi-base .noUi-origin .noUi-handle::after {
+  background: none;
+}
+#perk-web-app [data-application-part="search"] div[class^="slider-"] .noUi-base .noUi-origin .noUi-handle .noUi-touch-area {
+  cursor: pointer;
+}
+#perk-web-app [data-application-part="search"] div[class^="slider-"] .noUi-base .noUi-tooltip {
+  display: none;
+}
+#perk-web-app [data-application-part="search"] div[class^="slider-"] .noUi-base .noUi-active .noUi-tooltip {
+  display: block;
+  background-color: rgba(0, 0, 0, 0.9);
+  color: var(--text-light);
+  line-height: 18px;
+  padding: 6px 14px;
+}
+#perk-web-app [data-application-part="search"] div[class^="slider-"] .noUi-base .noUi-connect.range_selected {
+  background: rgba(255, 255, 240, 0.8);
+}
+#perk-web-app [data-application-part="search"] tags {
+  --tags-border-color: var(--border-theme-color);
+  --tag-bg: var(--color-theme-4);
+  --tag-hover: var(--color-theme-3);
+  width: 100%;
+  --tag-pad: 0;
+}
+#perk-web-app [data-application-part="search"] tags .trait {
+  display: inline-flex;
+  padding: 0.25rem;
+}
+#perk-web-app [data-application-part="search"] tags .trait .tag {
+  text-decoration: underline;
+}
+#perk-web-app [data-application-part="search"] tags tag {
+  padding: 2px 5px;
+}
+#perk-web-app [data-application-part="search"] tags tag .tagify__tag__removeBtn {
+  margin: auto;
+  margin-right: 2px;
+}
+#perk-web-app [data-application-part="search"] tags tag .conjunction-not-button {
   display: flex;
-  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50px;
+  cursor: pointer;
+  font: 10px/1 Arial;
+  background: var(--tag-remove-btn-bg);
+  color: var(--tag-remove-btn-color);
+  width: 16px;
+  height: 16px;
+  margin: auto 3px;
+  overflow: hidden;
+  transition: 0.2s ease-out;
+  padding-top: 1px;
+}
+#perk-web-app [data-application-part="search"] tags tag .conjunction-not-button.active {
+  background: var(--tag-remove-btn-bg--hover);
+  color: var(--color-text-dark-3);
+}
+#perk-web-app [data-application-part="search"] .filtercontainer,
+#perk-web-app [data-application-part="search"] .sortcontainer {
   border: 1px solid var(--border-theme-color);
-  border-radius: 6px;
+  border-radius: 5px;
+  margin-top: 5px;
+  padding: 5px;
 }
-#perk-web-app [data-application-part="search"] .search dl {
-  margin: 0.25em 0;
+#perk-web-app [data-application-part="search"] .filtercontainer div.title,
+#perk-web-app [data-application-part="search"] .sortcontainer div.title {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  height: 22px;
 }
-#perk-web-app [data-application-part="search"] .search dl dt {
-  display: inline-block;
-  padding-left: 5px;
-  font-weight: bold;
+#perk-web-app [data-application-part="search"] .filtercontainer div.title h3,
+#perk-web-app [data-application-part="search"] .sortcontainer div.title h3 {
+  margin: 0;
+  cursor: pointer;
 }
-#perk-web-app [data-application-part="search"] .search dl dd {
-  display: inline-block;
-  text-transform: capitalize;
-  padding-left: 5px;
-  margin: 3px 0;
+#perk-web-app [data-application-part="search"] .filtercontainer div.title button,
+#perk-web-app [data-application-part="search"] .sortcontainer div.title button {
+  width: fit-content;
+  line-height: 22px;
 }
-#perk-web-app [data-application-part="search"] .search dl dd select {
-  margin-left: 0.5em;
-  width: 8.5em;
+#perk-web-app [data-application-part="search"] .filtercontainer button.clear-filters,
+#perk-web-app [data-application-part="search"] .sortcontainer button.clear-filters {
+  margin-bottom: 5px;
 }
-#perk-web-app [data-application-part="search"] .search dl a.direction {
+#perk-web-app [data-application-part="search"] .filtercontainer > dl dt > input[type="checkbox"],
+#perk-web-app [data-application-part="search"] .sortcontainer > dl dt > input[type="checkbox"] {
+  transform: none;
+  flex: none;
+  height: auto;
+  margin: 3px 3px;
+}
+#perk-web-app [data-application-part="search"] .filtercontainer > dl dd > a.direction,
+#perk-web-app [data-application-part="search"] .sortcontainer > dl dd > a.direction {
   padding: 2px;
 }
-#perk-web-app [data-application-part="search"] [data-filter-type="multiselects"],
-#perk-web-app [data-application-part="search"] [data-filter-type="checkboxes"] {
-  border: 1px solid var(--border-theme-color);
-  border-radius: 6px;
-  margin: 0.5rem;
-  padding: 0.5rem;
+#perk-web-app [data-application-part="search"] dt,
+#perk-web-app [data-application-part="search"] dd {
+  margin: unset;
 }
-#perk-web-app [data-application-part="search"] [data-filter-type="multiselects"] dt,
-#perk-web-app [data-application-part="search"] [data-filter-type="checkboxes"] dt {
+#perk-web-app [data-application-part="search"] .filtercontainer dt {
   width: 10%;
 }
-#perk-web-app [data-application-part="search"] [data-filter-type="multiselects"] dd,
-#perk-web-app [data-application-part="search"] [data-filter-type="checkboxes"] dd {
+#perk-web-app [data-application-part="search"] .filtercontainer dd {
   width: 82%;
 }
-#perk-web-app [data-application-part="search"] [data-filter-type="multiselects"] .tags,
-#perk-web-app [data-application-part="search"] [data-filter-type="checkboxes"] .tags {
-  --readonly-striped: 0;
-  border: none;
-  gap: 0;
-  padding: 0;
+#perk-web-app [data-application-part="search"] .filtercontainer .filter-conjunction {
+  margin-top: 0.25rem;
 }
-#perk-web-app [data-application-part="search"] [data-filter-type="multiselects"] .filter-conjunction,
-#perk-web-app [data-application-part="search"] [data-filter-type="checkboxes"] .filter-conjunction {
-  font-size: 12px;
+#perk-web-app [data-application-part="search"] .filtercontainer .filter-conjunction input[type="radio"] {
+  margin: 0 5px 0 3px;
+}
+#perk-web-app [data-application-part="search"] .rangecontainer div {
+  text-align: center;
+  margin-top: 5px;
+}
+#perk-web-app [data-application-part="search"] .rangecontainer input {
+  width: 45%;
+}
+#perk-web-app [data-application-part="search"] .slidercontainer-flex {
+  display: flex;
+  justify-content: space-around;
+  align-items: baseline;
+}
+#perk-web-app [data-application-part="search"] .slidercontainer-flex label {
+  width: 10px;
+}
+#perk-web-app [data-application-part="search"] dl {
+  margin: 5px 0;
+}
+#perk-web-app [data-application-part="search"] dt {
+  display: inline-block;
+  padding-left: 5px;
+}
+#perk-web-app [data-application-part="search"] dd {
+  display: inline-block;
+  text-transform: capitalize;
+}
+#perk-web-app [data-application-part="search"] dd select {
+  margin-left: 0.5em;
+  width: 6em;
+}
+#perk-web-app [data-application-part="search"] ul.result-list {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  overflow: visible scroll;
+}
+#perk-web-app [data-application-part="search"] ul.result-list > li {
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.125rem 0.25rem;
+}
+#perk-web-app [data-application-part="search"] ul.result-list > li:nth-child(odd) {
+  background-color: rgba(0, 0, 0, 0.12);
+}
+#perk-web-app [data-application-part="search"] ul.result-list > li > * {
+  align-items: center;
+  display: flex;
+  min-height: 2rem;
+  justify-content: center;
+}
+#perk-web-app [data-application-part="search"] ul.result-list > li > .image {
+  max-width: 2rem;
+}
+#perk-web-app [data-application-part="search"] ul.result-list > li > .name {
+  gap: 0.25em;
+  flex-basis: 6ch;
+  justify-content: start;
+}
+#perk-web-app [data-application-part="search"] ul.result-list > li > .tags {
+  padding: 0.25em 0.05em;
+  margin-bottom: 0;
+}
+#perk-web-app [data-application-part="search"] ul.result-list > li > .level {
+  flex-grow: 1;
+  font-weight: 900;
+  max-width: 1.5em;
+}
+#perk-web-app [data-application-part="search"] ul.result-list > li > .price {
+  flex: none;
+  justify-content: end;
+  margin-right: var(--font-size-10);
+  min-width: 5em;
+}
+#perk-web-app [data-application-part="search"] ul.result-list > li > .end {
+  margin-right: 0.5em;
+}
+#perk-web-app [data-application-part="search"] ul.result-list > li:hover {
+  background-color: rgba(255, 255, 255, 0.25);
+  cursor: grab;
+}
+#perk-web-app [data-application-part="search"] #tagfilter input {
+  width: 100%;
+}
+#perk-web-app [data-application-part="search"] .hint {
+  font-size: var(--font-size-12);
+  border: 1px solid #00ff0547;
+  border-radius: 5px;
+  padding: 3px;
+}
+#perk-web-app [data-application-part="search"] .spacer {
+  display: inline-block;
+  min-width: 5px;
+}
+#perk-web-app [data-application-part="search"] .spacer-large {
+  display: inline-block;
+  min-width: 15px;
+}
+#perk-web-app [data-application-part="search"] .equipment-controls {
+  margin-left: 0.25em;
+  margin-right: 0.25em;
+  max-width: 1em;
+  width: 1em;
+}
+#perk-web-app [data-application-part="search"] .list-buttons {
+  position: absolute;
+  bottom: 3px;
+  right: 22px;
+  width: 54%;
+  display: flex;
+  justify-content: space-between;
+}
+#perk-web-app [data-application-part="search"] .list-buttons button {
+  line-height: 19px;
+  background: #fffff0;
 }
 #perk-web-app [data-application-part="searchResults"] {
   grid-area: searchResults;
@@ -6973,6 +7582,37 @@ ul.item-list.result-list li.item.rarity-unique {
   flex-direction: row;
   align-items: center;
   justify-content: center;
+}
+#perk-web-app [data-application-part="searchResults"] .item-list.result-list {
+  overflow-y: auto;
+  overflow-x: hidden;
+  margin: unset;
+  height: 100%;
+}
+#perk-web-app [data-application-part="searchResults"] .item-list.result-list li {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+#perk-web-app [data-application-part="searchResults"] .item-list.result-list li .image {
+  flex: 0 0 36px;
+  height: 36px;
+  width: 36px;
+  margin-right: 5px;
+}
+#perk-web-app [data-application-part="searchResults"] .item-list.result-list li .image img {
+  border: unset;
+}
+#perk-web-app [data-application-part="searchResults"] .item-list.result-list li .name {
+  flex: 1;
+}
+#perk-web-app [data-application-part="searchResults"] .item-list.result-list li .grade,
+#perk-web-app [data-application-part="searchResults"] .item-list.result-list li .cost {
+  flex: 0 0 min-content;
+  text-wrap: nowrap;
+  padding-right: 0.5rem;
+  color: var(--color-text-primary);
 }
 #perk-web-app .editing {
   --appv2-background-opaque: linear-gradient(to right, #25191c, #1f1115);

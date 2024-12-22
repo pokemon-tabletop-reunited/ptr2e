@@ -1,6 +1,7 @@
 {
   "name": "Overboard",
   "type": "perk",
+  "folder": "53FtVeHm7lIHHCiS",
   "system": {
     "_migration": {
       "version": 0.109,
@@ -10,30 +11,40 @@
     "description": "<p>Your Water-type attacks gain a 20% chance to inflict @Affliction[drowning] 5</p>",
     "traits": [],
     "prerequisites": [
-      "[Water]"
+      "trait:water"
     ],
     "cost": 2,
-    "design": {
-      "arena": "physical",
-      "approach": "power",
-      "archetype": ""
-    },
-    "node": {
-      "i": null,
-      "j": null,
-      "connected": [],
-      "config": {
-        "alpha": null,
-        "backgroundColor": null,
-        "borderColor": null,
-        "borderWidth": null,
-        "texture": "systems/ptr2e/img/svg/water_icon.svg",
-        "tint": null,
-        "scale": null
-      },
-      "hidden": false,
-      "type": "normal"
-    }
+    "slug": "overboard",
+    "nodes": [
+      {
+        "connected": [
+          "sea-lungs",
+          "fisheye",
+          "swimming-lessons",
+          "strong-swimmer"
+        ],
+        "config": {
+          "alpha": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "borderWidth": null,
+          "texture": "systems/ptr2e/img/svg/water_icon.svg",
+          "tint": null,
+          "scale": null
+        },
+        "hidden": false,
+        "type": "normal",
+        "x": 152,
+        "y": 22,
+        "tier": null
+      }
+    ],
+    "autoUnlock": [],
+    "originSlug": null,
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": []
   },
   "img": "systems/ptr2e/img/svg/water_icon.svg",
   "effects": [
@@ -91,6 +102,5 @@
       }
     }
   ],
-  "flags": {},
   "_id": "ePzd695SkERfBcaP"
 }

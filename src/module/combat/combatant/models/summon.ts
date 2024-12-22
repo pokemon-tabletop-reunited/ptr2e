@@ -44,7 +44,7 @@ class SummonCombatantSystem extends CombatantSystemPTR2e {
         const jsonData = JSON.parse(this._source.item);
         if (jsonData.uuid) {
           const item = fromUuidSync<SummonPTR2e>(jsonData.uuid);
-          if (item) return item.clone(jsonData.system.owner ? { "system.owner": jsonData.system.owner } : {}, { keepId: true });
+          if (item && item instanceof ItemPTR2e) return item.clone(jsonData.system.owner ? { "system.owner": jsonData.system.owner } : {}, { keepId: true });
         }
 
         return ItemPTR2e.fromJSON(this._source.item) as SummonPTR2e;

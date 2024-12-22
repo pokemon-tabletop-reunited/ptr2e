@@ -1,5 +1,5 @@
 /* eslint-disable no-fallthrough */
-import { HasTraits, HasMigrations, PokemonType, ClockPTR2e } from "@data";
+import { HasTraits, HasMigrations, PokemonType, ClockPTR2e, Trait } from "@data";
 import { getTypes, TypeEffectiveness } from "@scripts/config/effectiveness.ts";
 import {
   ActorPTR2e,
@@ -368,9 +368,6 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
     this.advancement.advancementPoints.total = this.parent.isHumanoid() ? (19 + this.advancement.level) : (10 + Math.floor(this.advancement.level / 2));
     this.advancement.advancementPoints.spent = 0;
 
-    this.health.max = this.attributes.hp.value;
-    this.health.percent = Math.round((this.health.value / this.health.max) * 100);
-
     this.powerPoints.max = 20 + Math.ceil(0.5 * this.advancement.level);
     this.inventoryPoints.max = 12 + Math.floor((this.skills.get('resources')?.total ?? 0) / 10);
 
@@ -451,8 +448,10 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
 
     for (const type of this.parent.species.types.values()) {
       this.type.types.add(type);
-      if (this.type.types.size > 1 && this.type.types.has("untyped"))
+      if (this.type.types.size > 1 && this.type.types.has("untyped")) {
         this.type.types.delete("untyped");
+        this.traits.delete("untyped");
+      }
     }
 
     this.movement = Object.fromEntries([
@@ -479,6 +478,9 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
       if (this.attributes[key].base === undefined) this.attributes[key].base = 40;
       this.attributes[key].value = this._calculateStatTotal(this.attributes[key]);
     }
+
+    this.health.max = this.attributes.hp.value;
+    this.health.percent = Math.round((this.health.value / this.health.max) * 100);
 
     for (const skill of this.skills) {
       skill.prepareBaseData();
@@ -529,6 +531,12 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
     super.prepareDerivedData();
     this.species?.prepareDerivedData?.();
     this.parent.species?.prepareDerivedData?.();
+
+    for (const ptype of this.type.types) {
+      if (!this.traits.has(ptype) && Trait.isValid(ptype) && ptype != "untyped") {
+        this.addTraitFromSlug(ptype, true);
+      }
+    }
 
     // Calculate bonus RVs if applicable
     const isAce = this.traits.has("ace");
@@ -592,6 +600,8 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
       if (stat.slug === nature[1]) return 0.9;
       return 1;
     })();
+
+    stat.ivs = Math.clamp(stat.ivs, 0, 31);
 
     const level = this.advancement.level;
 

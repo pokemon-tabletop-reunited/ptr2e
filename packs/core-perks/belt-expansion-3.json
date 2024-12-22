@@ -1,17 +1,13 @@
 {
   "name": "Belt Expansion 3",
   "type": "perk",
+  "folder": "oMMIXyKwOCIxMHrK",
   "system": {
     "prerequisites": [
-      "Belt Expansion 2",
-      "Human"
+      "item:perk:belt-expansion-2",
+      "trait:humanoid"
     ],
     "cost": 3,
-    "design": {
-      "arena": "physical",
-      "approach": "resilience",
-      "archetype": "Gear"
-    },
     "description": "<p>Add an additional Belt slot.</p>",
     "actions": [
       {
@@ -19,41 +15,56 @@
         "slug": "belt-expansion-3",
         "description": "<p>Add an additional Belt slot.</p>",
         "cost": {
-          "activation": "free"
+          "activation": "free",
+          "powerPoints": 0,
+          "delay": null,
+          "priority": null
         },
         "type": "passive",
         "traits": [],
         "img": "icons/svg/explosion.svg",
         "range": {
           "target": "enemy",
-          "unit": "m"
-        }
+          "unit": "m",
+          "distance": 0
+        },
+        "variant": null,
+        "hidden": false
       }
     ],
     "slug": "belt-expansion-3",
     "traits": [],
-    "node": {
-      "i": 119,
-      "j": 190,
-      "connected": [
-        "belt-expansion-2"
-      ],
-      "config": {
-        "alpha": null,
-        "backgroundColor": null,
-        "borderColor": null,
-        "borderWidth": null,
-        "texture": "systems/ptr2e/img/perk-icons/Tactician.svg",
-        "tint": "#408080",
-        "scale": null
-      },
-      "hidden": false,
-      "type": "normal"
-    },
     "_migration": {
       "version": null,
       "previous": null
-    }
+    },
+    "nodes": [
+      {
+        "connected": [
+          "belt-expansion-2"
+        ],
+        "config": {
+          "alpha": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "borderWidth": null,
+          "texture": "systems/ptr2e/img/perk-icons/Tactician.svg",
+          "tint": "#408080",
+          "scale": null
+        },
+        "hidden": false,
+        "type": "normal",
+        "x": null,
+        "y": null,
+        "tier": null
+      }
+    ],
+    "autoUnlock": [],
+    "originSlug": null,
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": []
   },
   "_id": "wWAAPsxfOC8nGPGm",
   "img": "systems/ptr2e/img/perk-icons/Tactician.svg",

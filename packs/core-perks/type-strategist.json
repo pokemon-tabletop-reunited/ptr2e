@@ -1,6 +1,7 @@
 {
   "name": "<Type> Strategist",
   "type": "perk",
+  "folder": "kWG8zov1UnSKOvEQ",
   "system": {
     "_migration": {
       "version": 0.109,
@@ -10,33 +11,43 @@
     "description": "<p>You may tutor the Strategist abilities corresponding to your purchased Type Specialty to owned Pokemon of that type, or yourself if you are of that type.</p>",
     "traits": [],
     "prerequisites": [
-      "<Type> Specialist"
+      "item:perk:type-specialist"
     ],
     "cost": 2,
-    "design": {
-      "arena": "mental",
-      "approach": "resilience",
-      "archetype": "Type Ace"
-    },
-    "node": {
-      "i": null,
-      "j": null,
-      "connected": [],
-      "config": {
-        "alpha": null,
-        "backgroundColor": null,
-        "borderColor": null,
-        "borderWidth": null,
-        "texture": "systems/ptr2e/img/perk-icons/Trainer.svg",
-        "tint": null,
-        "scale": null
-      },
-      "hidden": false,
-      "type": "normal"
-    }
+    "slug": "type-strategist",
+    "nodes": [
+      {
+        "connected": [
+          "improved-overland-1-1",
+          "type-tutoring",
+          "type-domain",
+          "stat-iv-booster-1-1",
+          "type-style"
+        ],
+        "config": {
+          "alpha": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "borderWidth": null,
+          "texture": "systems/ptr2e/img/perk-icons/Trainer.svg",
+          "tint": null,
+          "scale": null
+        },
+        "hidden": false,
+        "type": "normal",
+        "x": 146,
+        "y": 105,
+        "tier": null
+      }
+    ],
+    "autoUnlock": [],
+    "originSlug": null,
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": []
   },
   "img": "systems/ptr2e/img/perk-icons/Trainer.svg",
   "effects": [],
-  "flags": {},
   "_id": "4RGeGfwQgRYhOUf8"
 }

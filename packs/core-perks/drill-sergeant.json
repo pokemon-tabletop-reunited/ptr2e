@@ -21,7 +21,9 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 5
+          "powerPoints": 5,
+          "delay": null,
+          "priority": null
         },
         "category": "status",
         "types": [
@@ -30,7 +32,17 @@
         "description": "<p>Effect: The user and all allies in range gain +1 CRIT Stage for 5 activations. Dragon-type creature instead gain +2 CRIT Stages for 5 activations.</p>",
         "slot": 3,
         "img": "systems/ptr2e/img/svg/dragon_icon.svg",
-        "free": true
+        "free": true,
+        "variant": null,
+        "power": null,
+        "accuracy": null,
+        "contestType": "",
+        "contestEffect": "",
+        "summon": null,
+        "defaultVariant": null,
+        "flingItemId": null,
+        "offensiveStat": null,
+        "defensiveStat": null
       },
       {
         "slug": "coaching",
@@ -44,7 +56,9 @@
         },
         "cost": {
           "activation": "simple",
-          "powerPoints": 7
+          "powerPoints": 7,
+          "delay": null,
+          "priority": null
         },
         "category": "status",
         "types": [
@@ -52,39 +66,63 @@
         ],
         "description": "<p>Effect: The user and all allies in range gain +1 ATK and DEF Stage for 5 activations.</p>",
         "free": true,
-        "img": "systems/ptr2e/img/perk-icons/Orders_Training.svg"
+        "img": "systems/ptr2e/img/perk-icons/Orders_Training.svg",
+        "variant": null,
+        "power": null,
+        "accuracy": null,
+        "contestType": "",
+        "contestEffect": "",
+        "slot": null,
+        "summon": null,
+        "defaultVariant": null,
+        "flingItemId": null,
+        "offensiveStat": null,
+        "defensiveStat": null
       }
     ],
     "description": "<p>You learn the moves Dragon Cheer and Coaching, and gain them as Connected Moves.</p>",
     "traits": [],
     "prerequisites": [
-      "Leadership 45"
+      {
+        "gte": [
+          "{actor|skills.leadership.mod}",
+          45
+        ]
+      }
     ],
     "cost": 2,
-    "design": {
-      "arena": "social",
-      "approach": "power",
-      "archetype": ""
-    },
-    "node": {
-      "i": null,
-      "j": null,
-      "connected": [],
-      "config": {
-        "alpha": null,
-        "backgroundColor": null,
-        "borderColor": null,
-        "borderWidth": null,
-        "texture": null,
-        "tint": null,
-        "scale": null
-      },
-      "hidden": false,
-      "type": "normal"
-    }
+    "slug": "drill-sergeant",
+    "nodes": [
+      {
+        "connected": [
+          "tactician",
+          "mobilize"
+        ],
+        "config": {
+          "alpha": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "borderWidth": null,
+          "texture": null,
+          "tint": null,
+          "scale": null
+        },
+        "hidden": false,
+        "type": "normal",
+        "x": 37,
+        "y": 51,
+        "tier": null
+      }
+    ],
+    "autoUnlock": [],
+    "originSlug": null,
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": []
   },
   "img": "systems/ptr2e/img/perk-icons/Orders_Training.svg",
   "effects": [],
-  "flags": {},
-  "_id": "F4l5fiHA0sXoMbx6"
+  "_id": "F4l5fiHA0sXoMbx6",
+  "folder": "PAZ8zWUPw7Azm5V6"
 }

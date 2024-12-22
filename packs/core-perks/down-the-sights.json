@@ -1,16 +1,10 @@
 {
   "name": "Down The Sights",
   "type": "perk",
+  "folder": "W85LoOCz3WlwbyhZ",
   "system": {
-    "prerequisites": [
-      "None"
-    ],
+    "prerequisites": [],
     "cost": 1,
-    "design": {
-      "arena": "mental",
-      "approach": "resilience",
-      "archetype": "Combat"
-    },
     "description": "<p>Your next non-[Contact] Attack gains [Crit X] or [Crit X+1] until it resolves.</p>",
     "actions": [
       {
@@ -19,47 +13,57 @@
         "description": "<p>Your next non-[Contact] gains [Crit 1] or [Crit X+1] until it resolves.</p>",
         "cost": {
           "activation": "simple",
-          "powerPoints": 2
+          "powerPoints": 2,
+          "delay": null,
+          "priority": null
         },
         "type": "generic",
         "traits": [],
         "img": "icons/svg/explosion.svg",
         "range": {
           "target": "enemy",
-          "unit": "m"
-        }
+          "unit": "m",
+          "distance": 0
+        },
+        "variant": null
       }
     ],
     "slug": "down-the-sights",
     "traits": [],
-    "node": {
-      "i": 76,
-      "j": 210,
-      "connected": [
-        "trained-wielder",
-        "root-5",
-        "rapid-fire-style-1",
-        "lethal-restraint",
-        "dead-to-rights",
-        "dead-eye",
-        "precise-style"
-      ],
-      "config": {
-        "alpha": null,
-        "backgroundColor": null,
-        "borderColor": null,
-        "borderWidth": null,
-        "texture": "systems/ptr2e/img/perk-icons/Combat.svg",
-        "tint": "#ffffff",
-        "scale": null
-      },
-      "hidden": false,
-      "type": "normal"
-    },
     "_migration": {
       "version": null,
       "previous": null
-    }
+    },
+    "nodes": [
+      {
+        "x": 183,
+        "y": 67,
+        "hidden": false,
+        "type": "normal",
+        "connected": [
+          "covering-fire",
+          "harry",
+          "trained-wielder",
+          "root-3"
+        ],
+        "config": {
+          "alpha": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "borderWidth": null,
+          "texture": "systems/ptr2e/img/perk-icons/Combat.svg",
+          "tint": "#ffffff",
+          "scale": null
+        },
+        "tier": null
+      }
+    ],
+    "autoUnlock": [],
+    "originSlug": null,
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": []
   },
   "_id": "eHdFNdcyllxflfNA",
   "img": "systems/ptr2e/img/perk-icons/Combat.svg",

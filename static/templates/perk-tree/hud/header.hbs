@@ -2,7 +2,13 @@
   <div class="item-controls">
       <a data-action="refresh" data-tooltip-direction="DOWN" data-tooltip="Refresh Perkweb" draggable="false"><i class="fa-solid fa-fw fa-rotate-right"></i></a>
   </div>
-  <span class="header-text">{{actor.name}}'s Perk Web</span>
+  <span class="header-text">
+    <select name="web">
+      {{#each webOptions as |option|}}
+        <option value="{{option.value}}" {{#if (eq ../web option.value)}}selected{{/if}}>{{option.label}}</option>
+      {{/each}}
+    </select>
+  </span>
   <div class="item-controls">
       <a data-action="close-hud" data-tooltip-direction="DOWN" data-tooltip="Close Perkweb" draggable="false"><i class="fa-solid fa-fw fa-times"></i></a>
   </div>

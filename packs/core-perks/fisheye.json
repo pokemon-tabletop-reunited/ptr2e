@@ -10,33 +10,43 @@
     "description": "<p>Passive: You do not suffer cover penalties to accuracy as a result of making a ranged attack through a body of water.</p>",
     "traits": [],
     "prerequisites": [
-      "[Water]"
+      "trait:water"
     ],
     "cost": 2,
-    "design": {
-      "arena": "physical",
-      "approach": "finesse",
-      "archetype": "Water"
-    },
-    "node": {
-      "i": null,
-      "j": null,
-      "connected": [],
-      "config": {
-        "alpha": null,
-        "backgroundColor": null,
-        "borderColor": null,
-        "borderWidth": null,
-        "texture": "systems/ptr2e/img/svg/water_icon.svg",
-        "tint": null,
-        "scale": null
-      },
-      "hidden": false,
-      "type": "normal"
-    }
+    "slug": "fisheye",
+    "nodes": [
+      {
+        "connected": [
+          "sea-lungs",
+          "overboard",
+          "strong-swimmer",
+          "improved-swim-1"
+        ],
+        "config": {
+          "alpha": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "borderWidth": null,
+          "texture": "systems/ptr2e/img/svg/water_icon.svg",
+          "tint": null,
+          "scale": null
+        },
+        "hidden": false,
+        "type": "normal",
+        "x": 157,
+        "y": 20,
+        "tier": null
+      }
+    ],
+    "autoUnlock": [],
+    "originSlug": null,
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": []
   },
   "img": "systems/ptr2e/img/svg/water_icon.svg",
   "effects": [],
-  "flags": {},
-  "_id": "suWJ8EKQwovaDVCA"
+  "_id": "suWJ8EKQwovaDVCA",
+  "folder": "53FtVeHm7lIHHCiS"
 }

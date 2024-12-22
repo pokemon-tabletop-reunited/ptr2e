@@ -3,14 +3,14 @@
   "type": "perk",
   "system": {
     "prerequisites": [
-      "Level 30"
+      {
+        "gte": [
+          "{actor|level}",
+          30
+        ]
+      }
     ],
     "cost": 3,
-    "design": {
-      "arena": "physical",
-      "approach": "resilience",
-      "archetype": "Combat"
-    },
     "description": "<p>Your fight or flight response is finely honed - able to get you out of the stickiest of situations. The user gains the Ability Adrenaline as a Tutored Ability, and once during battle, when the user crosses the [Desperation 1/2] threshold, they freely use either U-Turn or No Retreat, as if it was on their Active List.</p>",
     "actions": [
       {
@@ -19,7 +19,9 @@
         "description": "<p>Your fight or flight response is finely honed - able to get you out of the stickiest of situations. The user gains the Ability Adrenaline as a Tutored Ability, and once during battle, when the user crosses the [Desperation 1/2] threshold, they freely use either U-Turn or No Retreat, as if it was on their Active List.</p>",
         "cost": {
           "activation": "free",
-          "powerPoints": 3
+          "powerPoints": 3,
+          "delay": null,
+          "priority": null
         },
         "type": "generic",
         "traits": [
@@ -29,38 +31,50 @@
         "img": "icons/svg/explosion.svg",
         "range": {
           "target": "enemy",
-          "unit": "m"
-        }
+          "unit": "m",
+          "distance": 0
+        },
+        "variant": null
       }
     ],
     "slug": "adrenaline-rush",
     "traits": [],
-    "node": {
-      "i": 133,
-      "j": 127,
-      "connected": [
-        "fearsome-defense",
-        "sprint",
-        "fighting-fit"
-      ],
-      "config": {
-        "alpha": null,
-        "backgroundColor": "#008000",
-        "borderColor": null,
-        "borderWidth": null,
-        "texture": "systems/ptr2e/img/perk-icons/Combat.svg",
-        "tint": "#000000",
-        "scale": null
-      },
-      "hidden": false,
-      "type": "normal"
-    },
     "_migration": {
       "version": null,
       "previous": null
-    }
+    },
+    "nodes": [
+      {
+        "connected": [
+          "hear-no-bell",
+          "plus-ultra",
+          "overbooster"
+        ],
+        "config": {
+          "alpha": null,
+          "backgroundColor": "#008000",
+          "borderColor": null,
+          "borderWidth": null,
+          "texture": "systems/ptr2e/img/perk-icons/Combat.svg",
+          "tint": "#000000",
+          "scale": null
+        },
+        "hidden": false,
+        "type": "normal",
+        "x": 71,
+        "y": 44,
+        "tier": null
+      }
+    ],
+    "autoUnlock": [],
+    "originSlug": null,
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": []
   },
   "_id": "1uzQwRPq1YMLDk8L",
   "img": "systems/ptr2e/img/perk-icons/Combat.svg",
-  "effects": []
+  "effects": [],
+  "folder": "zrVtKATNxzLNxTUa"
 }

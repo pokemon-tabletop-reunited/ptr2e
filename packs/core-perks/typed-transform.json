@@ -10,33 +10,40 @@
     "description": "<p>Your Heroic Transformation now comes with Type adjustments. You may designate the new Typing your Transformation grants, up to the maximum number of Types that the GM will permit in the campaign.</p>",
     "traits": [],
     "prerequisites": [
-      "Heroic Transformation"
+      "item:perk:heroic-transformation"
     ],
     "cost": 1,
-    "design": {
-      "arena": "physical",
-      "approach": "power",
-      "archetype": ""
-    },
-    "node": {
-      "i": null,
-      "j": null,
-      "connected": [],
-      "config": {
-        "alpha": null,
-        "backgroundColor": null,
-        "borderColor": null,
-        "borderWidth": null,
-        "texture": null,
-        "tint": null,
-        "scale": null
-      },
-      "hidden": false,
-      "type": "normal"
-    }
+    "slug": "typed-transform",
+    "nodes": [
+      {
+        "connected": [
+          "heroic-transformation"
+        ],
+        "config": {
+          "alpha": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "borderWidth": null,
+          "texture": null,
+          "tint": null,
+          "scale": null
+        },
+        "hidden": false,
+        "type": "normal",
+        "x": 14,
+        "y": 87,
+        "tier": null
+      }
+    ],
+    "autoUnlock": [],
+    "originSlug": null,
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": []
   },
   "img": "icons/magic/control/silhouette-grow-shrink-blue.webp",
   "effects": [],
-  "flags": {},
-  "_id": "Y6kxAC1fhtm1iCxF"
+  "_id": "Y6kxAC1fhtm1iCxF",
+  "folder": "OUVEQyuUswQVLxBO"
 }

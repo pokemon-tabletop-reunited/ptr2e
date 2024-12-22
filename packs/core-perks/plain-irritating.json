@@ -1,5 +1,5 @@
 {
-  "folder": "Et2u8UoXSe2a17oq",
+  "folder": "LPbbEDkprZMje251",
   "name": "Plain Irritating",
   "type": "perk",
   "system": {
@@ -11,30 +11,40 @@
     "description": "<p>Passive: Your Normal-type attacks gain a 20% chance to inflict Enraged 5.</p>",
     "traits": [],
     "prerequisites": [
-      "[Normal]"
+      "trait:normal"
     ],
     "cost": 2,
-    "design": {
-      "arena": "social",
-      "approach": "finesse",
-      "archetype": "Normal"
-    },
-    "node": {
-      "i": null,
-      "j": null,
-      "connected": [],
-      "config": {
-        "alpha": null,
-        "backgroundColor": null,
-        "borderColor": null,
-        "borderWidth": null,
-        "texture": "systems/ptr2e/img/svg/normal_icon.svg",
-        "tint": null,
-        "scale": null
-      },
-      "hidden": false,
-      "type": "normal"
-    }
+    "slug": "plain-irritating",
+    "nodes": [
+      {
+        "connected": [
+          "acceptance",
+          "stat-iv-booster-1-1",
+          "type-harmony",
+          "kinetic-dispersion"
+        ],
+        "config": {
+          "alpha": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "borderWidth": null,
+          "texture": "systems/ptr2e/img/svg/normal_icon.svg",
+          "tint": null,
+          "scale": null
+        },
+        "hidden": false,
+        "type": "normal",
+        "x": 151,
+        "y": 90,
+        "tier": null
+      }
+    ],
+    "autoUnlock": [],
+    "originSlug": null,
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": []
   },
   "img": "systems/ptr2e/img/svg/normal_icon.svg",
   "effects": [
@@ -92,6 +102,5 @@
       }
     }
   ],
-  "flags": {},
   "_id": "VcOz4h3ZaRg9p3iQ"
 }

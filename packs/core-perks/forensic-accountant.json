@@ -3,14 +3,14 @@
   "type": "perk",
   "system": {
     "prerequisites": [
-      "Accounting 30"
+      {
+        "gte": [
+          "{actor|skills.accounting.mod}",
+          30
+        ]
+      }
     ],
     "cost": 1,
-    "design": {
-      "arena": "mental",
-      "approach": "finesse",
-      "archetype": "Knowledge"
-    },
     "description": "<p>You have a knack for spotting discrepancies when looking through accounts, inventory records and similar. You gain a +10 to Accounting checks to catch errors and \"cooked\" books.</p>",
     "actions": [
       {
@@ -18,44 +18,62 @@
         "slug": "forensic-accountant",
         "description": "<p>You have a knack for spotting discrepancies when looking through accounts, inventory records and similar. You gain a +10 to Accounting checks to catch errors and \"cooked\" books.</p>",
         "cost": {
-          "activation": "free"
+          "activation": "free",
+          "powerPoints": 0,
+          "delay": null,
+          "priority": null
         },
         "type": "passive",
         "traits": [],
         "img": "icons/svg/explosion.svg",
         "range": {
           "target": "enemy",
-          "unit": "m"
-        }
+          "unit": "m",
+          "distance": 0
+        },
+        "variant": null,
+        "hidden": false
       }
     ],
     "slug": "forensic-accountant",
     "traits": [],
-    "node": {
-      "i": 62,
-      "j": 89,
-      "connected": [
-        "mankey-see-mankey-do",
-        "scholar"
-      ],
-      "config": {
-        "alpha": null,
-        "backgroundColor": "#ffffff",
-        "borderColor": null,
-        "borderWidth": null,
-        "texture": "systems/ptr2e/img/perk-icons/Knowledge.svg",
-        "tint": "#0d0d0d",
-        "scale": null
-      },
-      "hidden": false,
-      "type": "normal"
-    },
     "_migration": {
       "version": null,
       "previous": null
-    }
+    },
+    "nodes": [
+      {
+        "connected": [
+          "root-6",
+          "curveball-technique",
+          "breeder",
+          "improved-overland-1-4"
+        ],
+        "config": {
+          "alpha": null,
+          "backgroundColor": "#ffffff",
+          "borderColor": null,
+          "borderWidth": null,
+          "texture": "systems/ptr2e/img/perk-icons/Knowledge.svg",
+          "tint": "#0d0d0d",
+          "scale": null
+        },
+        "hidden": false,
+        "type": "normal",
+        "x": 52,
+        "y": 95,
+        "tier": null
+      }
+    ],
+    "autoUnlock": [],
+    "originSlug": null,
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": []
   },
   "_id": "lpfTAt7M1mDGh5kH",
   "img": "systems/ptr2e/img/perk-icons/Knowledge.svg",
-  "effects": []
+  "effects": [],
+  "folder": "7teAIlc2cPYi7NG7"
 }

@@ -456,12 +456,44 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
     };
   }
 
+  _prepareEffectiveness(): Record<string, { value: number, name: string}[]> {
+    const effectiveness = { effective: [], ineffective: [], immune: [] } as Record<string, {value: number, name: string}[]>;
+    for(const [type, value] of Object.entries(this.actor.system.type.effectiveness)) {
+      //TODO: Make this a setting
+      if(type === "nuclear") continue;
+      if(type === "shadow") continue;
+
+      if(value === 1) continue;
+      if(value === 0) {
+        effectiveness.immune.push({
+          value,
+          name: type
+        });
+        continue;
+      }
+      if(value > 1) {
+        effectiveness.effective.push({
+          value,
+          name: type
+        });
+        continue;
+      }
+      effectiveness.ineffective.push({
+        value,
+        name: type
+      });
+    }
+    return effectiveness;
+  }
+
   override async _preparePartContext(
     partId: string,
     context: foundry.applications.api.ApplicationRenderContext
   ) {
     if (partId === "overview") {
       context.movement = Object.values(this.actor.system.movement);
+
+      context.effectiveness = this._prepareEffectiveness();
     }
 
     if (partId === "sidebar") {
@@ -909,10 +941,10 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
   override async close(
     options: Partial<foundry.applications.api.ApplicationClosingOptions> = {}
   ): Promise<this> {
-    if (game.ptr.web.actor === this.actor) {
-      this.minimize();
-      return this;
-    }
+    // if (game.ptr.web.actor === this.actor) {
+    //   this.minimize();
+    //   return this;
+    // }
     return super.close(options) as Promise<this>;
   }
 

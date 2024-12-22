@@ -10,33 +10,40 @@
     "description": "<p>You gain +5 to a Movement Allowance that you possess access to when in your Heroic Transformation. This perk may be purchased multiple times, but only once per Movement Allowance type.</p>",
     "traits": [],
     "prerequisites": [
-      "Heroic Transformation"
+      "item:perk:heroic-transformation"
     ],
     "cost": 2,
-    "design": {
-      "arena": "physical",
-      "approach": "power",
-      "archetype": ""
-    },
-    "node": {
-      "i": null,
-      "j": null,
-      "connected": [],
-      "config": {
-        "alpha": null,
-        "backgroundColor": null,
-        "borderColor": null,
-        "borderWidth": null,
-        "texture": null,
-        "tint": null,
-        "scale": null
-      },
-      "hidden": false,
-      "type": "normal"
-    }
+    "slug": "heroic-rush",
+    "nodes": [
+      {
+        "connected": [
+          "heroic-transformation"
+        ],
+        "config": {
+          "alpha": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "borderWidth": null,
+          "texture": null,
+          "tint": null,
+          "scale": null
+        },
+        "hidden": false,
+        "type": "normal",
+        "x": 13,
+        "y": 77,
+        "tier": null
+      }
+    ],
+    "autoUnlock": [],
+    "originSlug": null,
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": []
   },
   "img": "icons/magic/control/silhouette-grow-shrink-blue.webp",
   "effects": [],
-  "flags": {},
-  "_id": "ej4M5FhdLJ2qf19k"
+  "_id": "ej4M5FhdLJ2qf19k",
+  "folder": "OUVEQyuUswQVLxBO"
 }

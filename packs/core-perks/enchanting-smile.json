@@ -10,30 +10,39 @@
     "description": "<p>Passive: Your Fairy-Type moves have a 20% chance to inflict Charmed 5. If they would already have a chance to inflict Charmed, that is instead increased by +20%.</p>",
     "traits": [],
     "prerequisites": [
-      "[Fairy]"
+      "trait:fairy"
     ],
     "cost": 3,
-    "design": {
-      "arena": "social",
-      "approach": "power",
-      "archetype": "Fairy"
-    },
-    "node": {
-      "i": null,
-      "j": null,
-      "connected": [],
-      "config": {
-        "alpha": null,
-        "backgroundColor": null,
-        "borderColor": null,
-        "borderWidth": null,
-        "texture": "systems/ptr2e/img/svg/fairy_icon.svg",
-        "tint": null,
-        "scale": null
-      },
-      "hidden": false,
-      "type": "normal"
-    }
+    "slug": "enchanting-smile",
+    "nodes": [
+      {
+        "connected": [
+          "hexcraft",
+          "drifter",
+          "root-2"
+        ],
+        "config": {
+          "alpha": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "borderWidth": null,
+          "texture": "systems/ptr2e/img/svg/fairy_icon.svg",
+          "tint": null,
+          "scale": null
+        },
+        "hidden": false,
+        "type": "normal",
+        "x": 152,
+        "y": 49,
+        "tier": null
+      }
+    ],
+    "autoUnlock": [],
+    "originSlug": null,
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": []
   },
   "img": "systems/ptr2e/img/svg/fairy_icon.svg",
   "effects": [
@@ -91,6 +100,6 @@
       }
     }
   ],
-  "flags": {},
-  "_id": "7msvQavxdvyJaW1J"
+  "_id": "7msvQavxdvyJaW1J",
+  "folder": "JVlvijPZ5VhpbHkZ"
 }

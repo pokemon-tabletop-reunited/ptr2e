@@ -3,15 +3,20 @@
   "type": "perk",
   "system": {
     "prerequisites": [
-      "Conversation 25",
-      "Leadership 25"
+      {
+        "gte": [
+          "{actor|skills.conversation.mod}",
+          25
+        ]
+      },
+      {
+        "gte": [
+          "{actor|skills.leadership.mod}",
+          25
+        ]
+      }
     ],
     "cost": 2,
-    "design": {
-      "arena": "social",
-      "approach": "power",
-      "archetype": "Support"
-    },
     "description": "<p>You are practiced in psyching up your allies. You may use Moves which are normally Self-Targeting instead as having Range 10m and able to target yourself or allied creatures.</p>",
     "actions": [
       {
@@ -23,43 +28,58 @@
         "img": "icons/svg/explosion.svg",
         "range": {
           "target": "enemy",
-          "unit": "m"
+          "unit": "m",
+          "distance": 0
         },
         "cost": {
-          "activation": "simple"
-        }
+          "activation": "simple",
+          "powerPoints": 0,
+          "delay": null,
+          "priority": null
+        },
+        "variant": null,
+        "hidden": false
       }
     ],
     "slug": "cheerleader",
     "traits": [],
-    "node": {
-      "i": 157,
-      "j": 61,
-      "connected": [
-        "tactician",
-        "mobilize",
-        "keep-fighting",
-        "emergency-retreat",
-        "overbooster"
-      ],
-      "config": {
-        "alpha": null,
-        "backgroundColor": "#ff80ff",
-        "borderColor": null,
-        "borderWidth": null,
-        "texture": "systems/ptr2e/img/perk-icons/Orders_Training.svg",
-        "tint": "#141414",
-        "scale": null
-      },
-      "hidden": false,
-      "type": "normal"
-    },
     "_migration": {
       "version": null,
       "previous": null
-    }
+    },
+    "nodes": [
+      {
+        "connected": [
+          "mobilize",
+          "tactician",
+          "resolute-watcher",
+          "the-meaning-of-haste"
+        ],
+        "config": {
+          "alpha": null,
+          "backgroundColor": "#ff80ff",
+          "borderColor": null,
+          "borderWidth": null,
+          "texture": "systems/ptr2e/img/perk-icons/Orders_Training.svg",
+          "tint": "#141414",
+          "scale": null
+        },
+        "hidden": false,
+        "type": "normal",
+        "x": 38,
+        "y": 56,
+        "tier": null
+      }
+    ],
+    "autoUnlock": [],
+    "originSlug": null,
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": []
   },
   "_id": "mVWaaMJ4l5KVO4IP",
   "img": "systems/ptr2e/img/perk-icons/Orders_Training.svg",
-  "effects": []
+  "effects": [],
+  "folder": "PAZ8zWUPw7Azm5V6"
 }

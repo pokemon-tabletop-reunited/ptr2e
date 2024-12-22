@@ -3,15 +3,20 @@
   "type": "perk",
   "system": {
     "prerequisites": [
-      "[Trainer] or [Expedition Leader]",
-      "Psychology 40"
+      {
+        "or": [
+          "trait:trainer",
+          "trait:expedition-leader"
+        ]
+      },
+      {
+        "gte": [
+          "{actor|skills.psychology.mod}",
+          40
+        ]
+      }
     ],
     "cost": 2,
-    "design": {
-      "arena": "mental",
-      "approach": "power",
-      "archetype": "Shadow"
-    },
     "description": "<p>The target gains +25% damage against [Closed Heart] creatures with their next Attack.</p>",
     "actions": [
       {
@@ -20,44 +25,58 @@
         "description": "<p>The target gains +25% damage against [Closed Heart] creatures with their next Attack.</p>",
         "cost": {
           "activation": "simple",
-          "powerPoints": 2
+          "powerPoints": 2,
+          "delay": null,
+          "priority": null
         },
         "type": "generic",
         "traits": [],
         "img": "icons/svg/explosion.svg",
         "range": {
           "target": "enemy",
-          "unit": "m"
-        }
+          "unit": "m",
+          "distance": 0
+        },
+        "variant": null
       }
     ],
     "slug": "silver-bullet",
     "traits": [],
-    "node": {
-      "i": 173,
-      "j": 71,
-      "connected": [
-        "shadow-guide",
-        "fiendish-provocation"
-      ],
-      "config": {
-        "alpha": null,
-        "backgroundColor": "#ffffff",
-        "borderColor": null,
-        "borderWidth": null,
-        "texture": "systems/ptr2e/img/perk-icons/Trainer.svg",
-        "tint": "#040404",
-        "scale": null
-      },
-      "hidden": false,
-      "type": "normal"
-    },
     "_migration": {
       "version": null,
       "previous": null
-    }
+    },
+    "nodes": [
+      {
+        "x": null,
+        "y": null,
+        "hidden": false,
+        "type": "normal",
+        "connected": [
+          "open-your-heart",
+          "shadow-guide"
+        ],
+        "config": {
+          "alpha": null,
+          "backgroundColor": "#ffffff",
+          "borderColor": null,
+          "borderWidth": null,
+          "texture": "systems/ptr2e/img/perk-icons/Trainer.svg",
+          "tint": "#040404",
+          "scale": null
+        },
+        "tier": null
+      }
+    ],
+    "autoUnlock": [],
+    "originSlug": null,
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": []
   },
   "_id": "r69KkYo3UhSWLXpG",
   "img": "systems/ptr2e/img/perk-icons/Trainer.svg",
-  "effects": []
+  "effects": [],
+  "folder": "mWJffsapofL9b8rY"
 }

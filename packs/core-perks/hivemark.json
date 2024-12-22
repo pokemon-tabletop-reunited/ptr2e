@@ -16,49 +16,55 @@
         "img": "systems/ptr2e/img/svg/bug_icon.svg",
         "range": {
           "target": "enemy",
-          "distance": 0,
-          "unit": "m"
+          "unit": "m",
+          "distance": 0
         },
         "cost": {
           "activation": "free",
           "powerPoints": 0,
           "delay": null,
-          "priority": null,
-          "trigger": ""
+          "priority": null
         },
-        "variant": null,
-        "hidden": true
+        "hidden": true,
+        "variant": null
       }
     ],
-    "slug": null,
+    "slug": "hivemark",
     "description": "<p>Passive: Your Bug-Type Moves gain a +20% chance to inflict Infested 5.</p>",
     "traits": [],
     "prerequisites": [
-      "[Bug]"
+      "trait:bug"
     ],
     "cost": 2,
+    "nodes": [
+      {
+        "connected": [
+          "adhesive-digits",
+          "silk-swing",
+          "improved-threaded-1"
+        ],
+        "config": {
+          "alpha": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "borderWidth": null,
+          "texture": null,
+          "tint": null,
+          "scale": null
+        },
+        "hidden": false,
+        "type": "normal",
+        "x": 84,
+        "y": 25,
+        "tier": null
+      }
+    ],
+    "autoUnlock": [],
     "originSlug": null,
-    "design": {
-      "arena": "physical",
-      "approach": "power",
-      "archetype": ""
-    },
-    "node": {
-      "i": null,
-      "j": null,
-      "connected": [],
-      "config": {
-        "alpha": null,
-        "backgroundColor": null,
-        "borderColor": null,
-        "borderWidth": null,
-        "texture": null,
-        "tint": null,
-        "scale": null
-      },
-      "hidden": false,
-      "type": "normal"
-    }
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": []
   },
   "_id": "o8JKgkDzgMMay8Co",
   "img": "systems/ptr2e/img/svg/bug_icon.svg",
@@ -117,21 +123,5 @@
       }
     }
   ],
-  "folder": null,
-  "sort": 0,
-  "ownership": {
-    "default": 0,
-    "wRgL6u6KEJDBDQIE": 3
-  },
-  "flags": {},
-  "_stats": {
-    "compendiumSource": null,
-    "duplicateSource": null,
-    "coreVersion": "12.331",
-    "systemId": "ptr2e",
-    "systemVersion": "0.10.0-alpha.3.2.0",
-    "createdTime": 1731104694958,
-    "modifiedTime": 1731105123121,
-    "lastModifiedBy": "wRgL6u6KEJDBDQIE"
-  }
+  "folder": "o5iIUG4Bj40M86yi"
 }

@@ -3,14 +3,14 @@
   "type": "perk",
   "system": {
     "prerequisites": [
-      "Aura Sense 45"
+      {
+        "gte": [
+          "{actor|skills.aura-sense.mod}",
+          45
+        ]
+      }
     ],
     "cost": 4,
-    "design": {
-      "arena": "social",
-      "approach": "power",
-      "archetype": "Aura"
-    },
     "description": "<p>You shift your consciousness into a consenting Pokemon. Your body enters a helpless, catatonic state during this time and you instead control the host body, utilising it's skills and traits, with the addition of retained access to your [Aura] perks. You may end this effect at any time with a Complex Action. If the host is @Affliction[fainted] while your consciousness is present, your own body also gains a stack of @Affliction[weary]. If the user dies while shifted, this would typically sever the connection. GMs may wish to consider instead making the shift permanent.</p>",
     "actions": [
       {
@@ -19,44 +19,58 @@
         "description": "<p>You shift your consciousness into a consenting Pokemon. Your body enters a helpless, catatonic state during this time and you instead control the host body, utilising it's skills and traits, with the addition of retained access to your [Aura] perks. You may end this effect at any time with a Complex Action. If the host is @Affliction[fainted] while your consciousness is present, your own body also gains a stack of @Affliction[weary]. If the user dies while shifted, this would typically sever the connection. GMs may wish to consider instead making the shift permanent.</p>",
         "cost": {
           "activation": "complex",
-          "powerPoints": 5
+          "powerPoints": 5,
+          "delay": null,
+          "priority": null
         },
         "type": "exploration",
         "traits": [],
         "img": "icons/svg/explosion.svg",
         "range": {
           "target": "enemy",
-          "unit": "m"
-        }
+          "unit": "m",
+          "distance": 0
+        },
+        "variant": null
       }
     ],
     "slug": "shift-consciousness-aura",
     "traits": [],
-    "node": {
-      "i": 130,
-      "j": 61,
-      "connected": [
-        "sight-beyond-sight",
-        "aura-bonding"
-      ],
-      "config": {
-        "alpha": null,
-        "backgroundColor": "#804000",
-        "borderColor": null,
-        "borderWidth": null,
-        "texture": "systems/ptr2e/img/perk-icons/Aura.svg",
-        "tint": "#ffffff",
-        "scale": null
-      },
-      "hidden": false,
-      "type": "normal"
-    },
     "_migration": {
       "version": null,
       "previous": null
-    }
+    },
+    "nodes": [
+      {
+        "connected": [
+          "aura-dampening",
+          "aura-bonding"
+        ],
+        "config": {
+          "alpha": null,
+          "backgroundColor": "#804000",
+          "borderColor": null,
+          "borderWidth": null,
+          "texture": "systems/ptr2e/img/perk-icons/Aura.svg",
+          "tint": "#ffffff",
+          "scale": null
+        },
+        "hidden": false,
+        "type": "normal",
+        "x": 182,
+        "y": 27,
+        "tier": null
+      }
+    ],
+    "autoUnlock": [],
+    "originSlug": null,
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": []
   },
   "_id": "zwEYbTMfJb44gxKC",
   "img": "systems/ptr2e/img/perk-icons/Aura.svg",
-  "effects": []
+  "effects": [],
+  "folder": "I7ocNlZvZjyhwUcw"
 }

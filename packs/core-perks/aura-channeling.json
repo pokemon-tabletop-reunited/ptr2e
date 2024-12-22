@@ -3,14 +3,14 @@
   "type": "perk",
   "system": {
     "prerequisites": [
-      "Aura Sense 50"
+      {
+        "gte": [
+          "{actor|skills.aura-sense.mod}",
+          50
+        ]
+      }
     ],
     "cost": 2,
-    "design": {
-      "arena": "mental",
-      "approach": "finesse",
-      "archetype": "Aura"
-    },
     "description": "<p>You have practiced the technique known as Channeling, and may use it to communicate with the spirits of the dead. You also gain +10 on Aura Sense skill checks pertaining to [Ghost][Pokemon].</p>",
     "actions": [
       {
@@ -19,42 +19,54 @@
         "description": "<p>You have practiced the technique known as Channeling, and may use it to communicate with the spirits of the dead. You also gain +10 on Aura Sense skill checks pertaining to [Ghost][Pokemon].</p>",
         "cost": {
           "activation": "complex",
-          "powerPoints": 3
+          "powerPoints": 3,
+          "delay": null,
+          "priority": null
         },
         "type": "exploration",
         "traits": [],
         "img": "icons/svg/explosion.svg",
         "range": {
           "target": "enemy",
-          "unit": "m"
-        }
+          "unit": "m",
+          "distance": 0
+        },
+        "variant": null
       }
     ],
     "slug": "aura-channeling",
     "traits": [],
-    "node": {
-      "i": 113,
-      "j": 56,
-      "connected": [
-        "aura-projection",
-        "shielding-aura"
-      ],
-      "config": {
-        "alpha": null,
-        "backgroundColor": "#ccdef0",
-        "borderColor": null,
-        "borderWidth": null,
-        "texture": "systems/ptr2e/img/perk-icons/Aura.svg",
-        "tint": "#3e52a3",
-        "scale": null
-      },
-      "hidden": false,
-      "type": "normal"
-    },
     "_migration": {
       "version": null,
       "previous": null
-    }
+    },
+    "nodes": [
+      {
+        "connected": [
+          "aura-bonding"
+        ],
+        "config": {
+          "alpha": null,
+          "backgroundColor": "#ccdef0",
+          "borderColor": null,
+          "borderWidth": null,
+          "texture": "systems/ptr2e/img/perk-icons/Aura.svg",
+          "tint": "#3e52a3",
+          "scale": null
+        },
+        "hidden": false,
+        "type": "normal",
+        "x": 182,
+        "y": 29,
+        "tier": null
+      }
+    ],
+    "autoUnlock": [],
+    "originSlug": null,
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": []
   },
   "_id": "UKe2X1IyhElRxVSJ",
   "img": "systems/ptr2e/img/perk-icons/Aura.svg",
@@ -114,5 +126,6 @@
         "lastModifiedBy": "Kc3DOunCh3ClAeHS"
       }
     }
-  ]
+  ],
+  "folder": "I7ocNlZvZjyhwUcw"
 }

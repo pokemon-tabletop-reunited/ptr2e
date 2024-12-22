@@ -1,5 +1,5 @@
 {
-  "folder": "Et2u8UoXSe2a17oq",
+  "folder": "W85LoOCz3WlwbyhZ",
   "name": "Run Down",
   "type": "perk",
   "_id": "kLAxoTAbUNlw04af",
@@ -14,64 +14,57 @@
         "type": "generic",
         "range": {
           "target": "creature",
-          "distance": 0,
-          "unit": "m"
+          "unit": "m",
+          "distance": 0
         },
         "cost": {
           "activation": "free",
           "powerPoints": 0,
           "delay": null,
           "priority": null
-        }
+        },
+        "img": "icons/svg/explosion.svg",
+        "variant": null
       }
     ],
-    "slug": null,
+    "slug": "run-down",
     "description": "<p>Trigger: You successfully hit an opponent with an attack.<br><br>May spend 4 PP to gain +1 SPD stage for 5 activations as a Free Action at [Interrupt 2].</p>",
     "traits": [],
-    "prerequisites": [
-      "None"
-    ],
+    "prerequisites": [],
     "cost": 3,
-    "design": {
-      "arena": "physical",
-      "approach": "power",
-      "archetype": "Hunter"
+    "_migration": {
+      "version": null,
+      "previous": null
     },
-    "node": {
-      "i": 147,
-      "j": 125,
-      "connected": [
-        "strong-style",
-        "metamove-dirty-trick"
-      ],
-      "config": {
-        "alpha": null,
-        "backgroundColor": "#000000",
-        "borderColor": null,
-        "borderWidth": null,
-        "texture": "systems/ptr2e/img/perk-icons/Cavalier.svg",
-        "tint": null,
-        "scale": null
-      },
-      "hidden": false,
-      "type": "normal"
-    }
+    "nodes": [
+      {
+        "connected": [
+          "hobby-gardener",
+          "hamstring",
+          "quick-and-the-dead"
+        ],
+        "config": {
+          "alpha": null,
+          "backgroundColor": "#000000",
+          "borderColor": null,
+          "borderWidth": null,
+          "texture": "systems/ptr2e/img/perk-icons/Cavalier.svg",
+          "tint": null,
+          "scale": null
+        },
+        "hidden": false,
+        "type": "normal",
+        "x": 67,
+        "y": 185,
+        "tier": null
+      }
+    ],
+    "autoUnlock": [],
+    "originSlug": null,
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": []
   },
-  "effects": [],
-  "sort": 2200000,
-  "ownership": {
-    "default": 0,
-    "Kc3DOunCh3ClAeHS": 3
-  },
-  "flags": {},
-  "_stats": {
-    "compendiumSource": "Item.kLAxoTAbUNlw04af",
-    "duplicateSource": null,
-    "coreVersion": "12.325",
-    "systemId": "ptr2e",
-    "systemVersion": "0.006",
-    "createdTime": 1717147440339,
-    "modifiedTime": 1717179523480,
-    "lastModifiedBy": "Kc3DOunCh3ClAeHS"
-  }
+  "effects": []
 }

@@ -1,5 +1,5 @@
 {
-  "folder": "Et2u8UoXSe2a17oq",
+  "folder": "ge4zHJUHigfmeDte",
   "name": "Brittle Ice",
   "type": "perk",
   "_id": "gApHAIKySeFhi4mM",
@@ -10,41 +10,42 @@
     "description": "<p>You deal +75% damage against @Affliction[frozen] targets.</p>",
     "traits": [],
     "prerequisites": [
-      "[Ice]"
+      "trait:ice"
     ],
     "cost": 3,
-    "design": {
-      "arena": "physical",
-      "approach": "power",
-      "archetype": ""
-    },
-    "node": {
-      "i": 60,
-      "j": 121,
-      "connected": [
-        "potent-venom",
-        "potent-afflictions",
-        "one-with-the-green",
-        "improved-overland-4",
-        "hexcraft",
-        "lasting-harm"
-      ],
-      "config": {
-        "alpha": null,
-        "backgroundColor": null,
-        "borderColor": null,
-        "borderWidth": null,
-        "texture": "systems/ptr2e/img/svg/ice_icon.svg",
-        "tint": null,
-        "scale": null
-      },
-      "hidden": false,
-      "type": "normal"
-    },
     "_migration": {
       "version": null,
       "previous": null
-    }
+    },
+    "nodes": [
+      {
+        "connected": [
+          "cryogenics",
+          "biting-cold",
+          "chill-out"
+        ],
+        "config": {
+          "alpha": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "borderWidth": null,
+          "texture": "systems/ptr2e/img/svg/ice_icon.svg",
+          "tint": null,
+          "scale": null
+        },
+        "hidden": false,
+        "type": "normal",
+        "x": 73,
+        "y": 127,
+        "tier": null
+      }
+    ],
+    "autoUnlock": [],
+    "originSlug": null,
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": []
   },
   "effects": [
     {

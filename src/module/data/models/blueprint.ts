@@ -45,6 +45,16 @@ class Blueprint extends foundry.abstract.DataModel {
         label: "PTR2E.Blueprint.FIELDS.species.label",
         hint: "PTR2E.Blueprint.FIELDS.species.hint"
       }),
+      shiny: new fields.NumberField({
+        required: true, 
+        initial: 1, 
+        nullable: false, 
+        min: 0, 
+        max: 100,
+        step: 1, 
+        label: "PTR2E.Blueprint.FIELDS.shiny.label",
+        hint: "PTR2E.Blueprint.FIELDS.shiny.hint"
+      }),
       level: new fields.StringField({
         required: true, initial: null, nullable: true, trim: true, blank: false, validate: (value) => {
           // Level can be either a integer value, a range in the format `a-b`, a Rolltable UUID or null
@@ -201,6 +211,7 @@ interface BlueprintSchema extends foundry.data.fields.DataSchema {
   owner: foundry.data.fields.BooleanField<boolean, boolean, true, false, true>;
   sort: foundry.data.fields.NumberField<number, number, true, false, true>;
   preventEvolution: foundry.data.fields.BooleanField<boolean, boolean, true, false, true>;
+  shiny: foundry.data.fields.NumberField<number, number, true, false, true>;
 }
 
 interface EVSSchema extends foundry.data.fields.DataSchema {

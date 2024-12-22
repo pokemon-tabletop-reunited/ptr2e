@@ -1,16 +1,12 @@
 {
   "name": "Conceal Mind",
   "type": "perk",
+  "folder": "F4b52L00KrAtdPu5",
   "system": {
     "prerequisites": [
-      "[Telepath]"
+      "trait:telepath"
     ],
     "cost": 2,
-    "design": {
-      "arena": "mental",
-      "approach": "finesse",
-      "archetype": "[Psychic]"
-    },
     "description": "<p>You may hide your mind's presence as an [Interrupt 4] Simple Action in response to an incoming telepathic sweep of the area. You automatically become aware of any telepaths who are actively searching for minds.</p>",
     "actions": [
       {
@@ -19,44 +15,57 @@
         "description": "<p>You may hide your mind's presence as an [Interrupt 4] Simple Action in response to an incoming telepathic sweep of the area. You automatically become aware of any telepaths who are actively searching for minds.</p>",
         "cost": {
           "activation": "free",
-          "powerPoints": 2
+          "powerPoints": 2,
+          "delay": null,
+          "priority": null
         },
         "type": "generic",
         "traits": [],
         "img": "icons/svg/explosion.svg",
         "range": {
           "target": "enemy",
-          "unit": "m"
-        }
+          "unit": "m",
+          "distance": 0
+        },
+        "variant": null
       }
     ],
     "slug": "conceal-mind",
     "traits": [],
-    "node": {
-      "i": 17,
-      "j": 174,
-      "connected": [
-        "telepathic-potential",
-        "detect-minds",
-        "telekinetic-potential",
-        "hypnotic-suggestion"
-      ],
-      "config": {
-        "alpha": null,
-        "backgroundColor": "#400000",
-        "borderColor": null,
-        "borderWidth": null,
-        "texture": "systems/ptr2e/img/svg/psychic_icon.svg",
-        "tint": "#ffffff",
-        "scale": null
-      },
-      "hidden": false,
-      "type": "normal"
-    },
     "_migration": {
       "version": null,
       "previous": null
-    }
+    },
+    "nodes": [
+      {
+        "connected": [
+          "hypnotic-suggestion",
+          "telepathic-potential",
+          "detect-minds",
+          "mental-alarm"
+        ],
+        "config": {
+          "alpha": null,
+          "backgroundColor": "#400000",
+          "borderColor": null,
+          "borderWidth": null,
+          "texture": "systems/ptr2e/img/svg/psychic_icon.svg",
+          "tint": "#ffffff",
+          "scale": null
+        },
+        "hidden": false,
+        "type": "normal",
+        "x": 137,
+        "y": 131,
+        "tier": null
+      }
+    ],
+    "autoUnlock": [],
+    "originSlug": null,
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": []
   },
   "_id": "x43vlmG7j09l1BGN",
   "img": "systems/ptr2e/img/svg/psychic_icon.svg",

@@ -3,14 +3,14 @@
   "type": "perk",
   "system": {
     "prerequisites": [
-      "Track 20"
+      {
+        "gte": [
+          "{actor|skills.track.mod}",
+          20
+        ]
+      }
     ],
     "cost": 1,
-    "design": {
-      "arena": "mental",
-      "approach": "resilience",
-      "archetype": "Capture"
-    },
     "description": "<p>You gain +10 on Skill Checks used as part of a fishing activity.</p>",
     "actions": [
       {
@@ -18,46 +18,59 @@
         "slug": "fisherman",
         "description": "<p>You gain +10 on Skill Checks used as part of a fishing activity.</p>",
         "cost": {
-          "activation": "free"
+          "activation": "free",
+          "powerPoints": 0,
+          "delay": null,
+          "priority": null
         },
         "type": "passive",
         "traits": [],
         "img": "icons/svg/explosion.svg",
         "range": {
           "target": "enemy",
-          "unit": "m"
-        }
+          "unit": "m",
+          "distance": 0
+        },
+        "variant": null,
+        "hidden": false
       }
     ],
     "slug": "fisherman",
     "traits": [],
-    "node": {
-      "i": 73,
-      "j": 194,
-      "connected": [
-        "curveball-technique",
-        "trained-wielder",
-        "bug-catcher",
-        "snare"
-      ],
-      "config": {
-        "alpha": null,
-        "backgroundColor": "#004080",
-        "borderColor": null,
-        "borderWidth": null,
-        "texture": "systems/ptr2e/img/perk-icons/Hunting.svg",
-        "tint": null,
-        "scale": null
-      },
-      "hidden": false,
-      "type": "normal"
-    },
     "_migration": {
       "version": null,
       "previous": null
-    }
+    },
+    "nodes": [
+      {
+        "connected": [
+          "snare"
+        ],
+        "config": {
+          "alpha": null,
+          "backgroundColor": "#004080",
+          "borderColor": null,
+          "borderWidth": null,
+          "texture": "systems/ptr2e/img/perk-icons/Hunting.svg",
+          "tint": null,
+          "scale": null
+        },
+        "hidden": false,
+        "type": "normal",
+        "x": 68,
+        "y": 106,
+        "tier": null
+      }
+    ],
+    "autoUnlock": [],
+    "originSlug": null,
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": []
   },
   "_id": "T4Odoci05syU7G8r",
   "img": "systems/ptr2e/img/perk-icons/Hunting.svg",
-  "effects": []
+  "effects": [],
+  "folder": "ADL1Oc2oQaQK45IU"
 }

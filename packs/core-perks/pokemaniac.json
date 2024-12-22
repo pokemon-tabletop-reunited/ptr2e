@@ -3,14 +3,14 @@
   "type": "perk",
   "system": {
     "prerequisites": [
-      "Science (Zoology) 40"
+      {
+        "gte": [
+          "{actor|skills.zoology.mod}",
+          40
+        ]
+      }
     ],
     "cost": 2,
-    "design": {
-      "arena": "mental",
-      "approach": "power",
-      "archetype": "Knowledge"
-    },
     "description": "<p>You may make a Science (Zoology) roll to identify the pokemon's level and traits.</p>",
     "actions": [
       {
@@ -19,44 +19,63 @@
         "description": "<p>You may make a Science (Zoology) roll to identify the pokemon's level and traits.</p>",
         "cost": {
           "activation": "complex",
-          "powerPoints": 3
+          "powerPoints": 3,
+          "delay": null,
+          "priority": null
         },
         "type": "generic",
         "traits": [],
         "img": "icons/svg/explosion.svg",
         "range": {
           "target": "enemy",
-          "unit": "m"
-        }
+          "unit": "m",
+          "distance": 0
+        },
+        "variant": null
       }
     ],
     "slug": "pokemaniac",
     "traits": [],
-    "node": {
-      "i": 75,
-      "j": 84,
-      "connected": [
-        "palaeontologist",
-        "root-1"
-      ],
-      "config": {
-        "alpha": null,
-        "backgroundColor": "#008000",
-        "borderColor": null,
-        "borderWidth": null,
-        "texture": "systems/ptr2e/img/perk-icons/Knowledge.svg",
-        "tint": "#ffffff",
-        "scale": null
-      },
-      "hidden": false,
-      "type": "normal"
-    },
     "_migration": {
       "version": null,
       "previous": null
-    }
+    },
+    "nodes": [
+      {
+        "connected": [
+          "hobby-gardener",
+          "scholar",
+          "underdogs-spirit-1",
+          "root-5",
+          "stat-iv-booster-1-8",
+          "improved-flight-1-5",
+          "stat-iv-booster-1-12"
+        ],
+        "config": {
+          "alpha": null,
+          "backgroundColor": "#008000",
+          "borderColor": null,
+          "borderWidth": null,
+          "texture": "systems/ptr2e/img/perk-icons/Knowledge.svg",
+          "tint": "#ffffff",
+          "scale": null
+        },
+        "hidden": false,
+        "type": "normal",
+        "x": 72,
+        "y": 157,
+        "tier": null
+      }
+    ],
+    "autoUnlock": [],
+    "originSlug": null,
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": []
   },
   "_id": "C1x4SbzpolXcgEWH",
   "img": "systems/ptr2e/img/perk-icons/Knowledge.svg",
-  "effects": []
+  "effects": [],
+  "folder": "aUkQAkBYAmrv6REK"
 }

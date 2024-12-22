@@ -3,14 +3,14 @@
   "type": "perk",
   "system": {
     "prerequisites": [
-      "Aura Sense 25"
+      {
+        "gte": [
+          "{actor|skills.aura-sense.mod}",
+          25
+        ]
+      }
     ],
     "cost": 1,
-    "design": {
-      "arena": "mental",
-      "approach": "power",
-      "archetype": "Aura"
-    },
     "description": "<p>You are able to outwardly transmit surface thoughts and feelings through Aura.</p>",
     "actions": [
       {
@@ -18,46 +18,62 @@
         "slug": "aura-projection",
         "description": "<p>You are able to outwardly transmit surface thoughts and feelings through Aura.</p>",
         "cost": {
-          "activation": "free"
+          "activation": "free",
+          "powerPoints": 0,
+          "delay": null,
+          "priority": null
         },
         "type": "passive",
         "traits": [],
         "img": "icons/svg/explosion.svg",
         "range": {
           "target": "enemy",
-          "unit": "m"
-        }
+          "unit": "m",
+          "distance": 0
+        },
+        "variant": null,
+        "hidden": false
       }
     ],
     "slug": "aura-projection",
     "traits": [],
-    "node": {
-      "i": 115,
-      "j": 60,
-      "connected": [
-        "shielding-aura",
-        "aura-empathy",
-        "soothing-aura",
-        "aura-channeling"
-      ],
-      "config": {
-        "alpha": null,
-        "backgroundColor": "#c9b5de",
-        "borderColor": null,
-        "borderWidth": null,
-        "texture": "systems/ptr2e/img/perk-icons/Aura.svg",
-        "tint": "#735393",
-        "scale": null
-      },
-      "hidden": false,
-      "type": "normal"
-    },
     "_migration": {
       "version": null,
       "previous": null
-    }
+    },
+    "nodes": [
+      {
+        "connected": [
+          "aura-user",
+          "aura-bonding",
+          "aura-dampening",
+          "shielding-aura"
+        ],
+        "config": {
+          "alpha": null,
+          "backgroundColor": "#c9b5de",
+          "borderColor": null,
+          "borderWidth": null,
+          "texture": "systems/ptr2e/img/perk-icons/Aura.svg",
+          "tint": "#735393",
+          "scale": null
+        },
+        "hidden": false,
+        "type": "normal",
+        "x": 176,
+        "y": 27,
+        "tier": null
+      }
+    ],
+    "autoUnlock": [],
+    "originSlug": null,
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": []
   },
   "_id": "FNa1vZTffzqYCN3p",
   "img": "systems/ptr2e/img/perk-icons/Aura.svg",
-  "effects": []
+  "effects": [],
+  "folder": "I7ocNlZvZjyhwUcw"
 }

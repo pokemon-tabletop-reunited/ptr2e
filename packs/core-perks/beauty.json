@@ -2,15 +2,8 @@
   "name": "Beauty",
   "type": "perk",
   "system": {
-    "prerequisites": [
-      "None"
-    ],
+    "prerequisites": [],
     "cost": 1,
-    "design": {
-      "arena": "social",
-      "approach": "power",
-      "archetype": "Socialite"
-    },
     "description": "<p>You are considered to be an attractive or aesthetically pleasing example of your species. Gain a +10 to social skill checks where the GM agrees your appearance would be advantageous, and gain a +20 to Perform (Beauty) skill checks.</p>",
     "actions": [
       {
@@ -18,43 +11,60 @@
         "slug": "beauty",
         "description": "You are considered to be an attractive or aesthetically pleasing example of your species. Gain a +10 to social skill checks where the GM agrees your appearance would be advantageous, and gain a +20 to Perform (Beauty) skill checks.",
         "cost": {
-          "activation": "free"
+          "activation": "free",
+          "powerPoints": 0,
+          "delay": null,
+          "priority": null
         },
         "type": "passive",
         "traits": [],
         "img": "icons/svg/explosion.svg",
         "range": {
           "target": "enemy",
-          "unit": "m"
-        }
+          "unit": "m",
+          "distance": 0
+        },
+        "variant": null,
+        "hidden": false
       }
     ],
     "slug": "beauty",
     "traits": [],
-    "node": {
-      "i": 41,
-      "j": 215,
-      "connected": [
-        "root-5"
-      ],
-      "config": {
-        "alpha": null,
-        "backgroundColor": "#ff8000",
-        "borderColor": null,
-        "borderWidth": null,
-        "texture": "systems/ptr2e/img/perk-icons/Socialite.svg",
-        "tint": "#ff0080",
-        "scale": null
-      },
-      "hidden": false,
-      "type": "normal"
-    },
     "_migration": {
       "version": null,
       "previous": null
-    }
+    },
+    "nodes": [
+      {
+        "connected": [
+          "groomer",
+          "root-4"
+        ],
+        "config": {
+          "alpha": null,
+          "backgroundColor": "#ff8000",
+          "borderColor": null,
+          "borderWidth": null,
+          "texture": "systems/ptr2e/img/perk-icons/Socialite.svg",
+          "tint": "#ff0080",
+          "scale": null
+        },
+        "hidden": false,
+        "type": "normal",
+        "x": 163,
+        "y": 148,
+        "tier": null
+      }
+    ],
+    "autoUnlock": [],
+    "originSlug": null,
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": []
   },
   "_id": "3GjHvIJhWSJJMKnK",
   "img": "systems/ptr2e/img/perk-icons/Socialite.svg",
-  "effects": []
+  "effects": [],
+  "folder": "jLhPGZvYVjjs7D54"
 }

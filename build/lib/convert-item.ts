@@ -568,10 +568,10 @@ function tutorListToMarkdown(data: {
   const path = getMarkdownPath({
     type: "lists",
     subtype: "tutor",
-    title: data.slug,
+    title: `${data.slug}-${data.type}`,
   });
   const metadata: MetaData = {
-    title: formatSlug(data.slug),
+    title: formatSlug(`${data.slug}-${data.type}`),
     description: `An auto-generated markdown file for the ${data.slug} tutor list.`,
     published: "true",
     editor: "markdown",

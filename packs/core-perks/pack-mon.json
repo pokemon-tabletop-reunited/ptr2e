@@ -2,15 +2,8 @@
   "name": "Pack Mon",
   "type": "perk",
   "system": {
-    "prerequisites": [
-      "None"
-    ],
+    "prerequisites": [],
     "cost": 1,
-    "design": {
-      "arena": "social",
-      "approach": "resilience",
-      "archetype": "Pack Mon"
-    },
     "description": "<p>You gain the [Pack Mon] trait and may join a Pack.</p>",
     "actions": [
       {
@@ -18,44 +11,67 @@
         "slug": "pack-mon",
         "description": "<p>You gain the [Pack Mon] trait and may join a Pack.</p>",
         "cost": {
-          "activation": "free"
+          "activation": "free",
+          "powerPoints": 0,
+          "delay": null,
+          "priority": null
         },
         "type": "passive",
         "traits": [],
         "img": "icons/svg/explosion.svg",
         "range": {
           "target": "enemy",
-          "unit": "m"
-        }
+          "unit": "m",
+          "distance": 0
+        },
+        "variant": null,
+        "hidden": false
       }
     ],
     "slug": "pack-mon",
     "traits": [],
-    "node": {
-      "i": 172,
-      "j": 79,
-      "connected": [
-        "root-3",
-        "formation-attacks"
-      ],
-      "config": {
-        "alpha": null,
-        "backgroundColor": "#00ff00",
-        "borderColor": null,
-        "borderWidth": null,
-        "texture": "systems/ptr2e/img/perk-icons/Breeder.svg",
-        "tint": null,
-        "scale": null
-      },
-      "hidden": false,
-      "type": "normal"
-    },
     "_migration": {
       "version": null,
       "previous": null
-    }
+    },
+    "nodes": [
+      {
+        "connected": [
+          "pack-alpha",
+          "root-4",
+          "muse",
+          "formation-attacks",
+          "improved-overland-1-12",
+          "metamove-empower",
+          "stat-iv-booster-1-13"
+        ],
+        "config": {
+          "alpha": null,
+          "backgroundColor": "#00ff00",
+          "borderColor": null,
+          "borderWidth": null,
+          "texture": "systems/ptr2e/img/perk-icons/Breeder.svg",
+          "tint": null,
+          "scale": null
+        },
+        "hidden": false,
+        "type": "normal",
+        "x": 150,
+        "y": 172,
+        "tier": null
+      }
+    ],
+    "variant": "multi",
+    "mode": "shared",
+    "autoUnlock": [
+      "trait:pack-mon"
+    ],
+    "originSlug": null,
+    "global": true,
+    "webs": []
   },
   "_id": "g7RkEg1WRz28MU8R",
   "img": "systems/ptr2e/img/perk-icons/Breeder.svg",
-  "effects": []
+  "effects": [],
+  "folder": "UZGN1glVNXLieg48"
 }

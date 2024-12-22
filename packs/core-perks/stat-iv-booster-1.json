@@ -1,63 +1,456 @@
 {
   "name": "<Stat> IV Booster 1",
   "type": "perk",
+  "folder": "zrVtKATNxzLNxTUf",
   "system": {
-    "prerequisites": [
-      "<Stat Specialist>"
-    ],
+    "prerequisites": [],
     "cost": 1,
-    "design": {
-      "arena": "physical",
-      "approach": "resilience",
-      "archetype": "Stat Ace"
-    },
     "description": "<p>Increase one <Stat>'s IV by 5.</p>",
-    "actions": [
-      {
-        "name": "<Stat> IV Booster 1",
-        "slug": "stat-iv-booster-1",
-        "description": "<p>Increase one <Stat>'s IV by 5.</p>",
-        "cost": {
-          "activation": "free"
-        },
-        "type": "passive",
-        "traits": [],
-        "img": "icons/svg/explosion.svg",
-        "range": {
-          "target": "enemy",
-          "unit": "m"
-        }
-      }
-    ],
+    "actions": [],
     "slug": "stat-iv-booster-1",
     "traits": [],
-    "node": {
-      "i": 123,
-      "j": 78,
-      "connected": [
-        "stat-specialist",
-        "stat-iv-booster-2",
-        "underdogs-spirit-3",
-        "keep-fighting"
-      ],
-      "config": {
-        "alpha": null,
-        "backgroundColor": null,
-        "borderColor": null,
-        "borderWidth": null,
-        "texture": "systems/ptr2e/img/perk-icons/Trainer.svg",
-        "tint": null,
-        "scale": null
-      },
-      "hidden": false,
-      "type": "normal"
-    },
     "_migration": {
       "version": null,
       "previous": null
-    }
+    },
+    "variant": "multi",
+    "mode": "individual",
+    "nodes": [
+      {
+        "connected": [
+          "guard-up",
+          "unbending-steel",
+          "improved-overland-1-5",
+          "biting-cold"
+        ],
+        "config": {
+          "alpha": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "borderWidth": null,
+          "texture": "systems/ptr2e/img/perk-icons/Trainer.svg",
+          "tint": null,
+          "scale": null
+        },
+        "hidden": false,
+        "type": "normal",
+        "x": 93,
+        "y": 104,
+        "tier": null
+      },
+      {
+        "x": 151,
+        "y": 98,
+        "connected": [
+          "root-3",
+          "type-harmony",
+          "type-desperation",
+          "type-domain",
+          "type-tutoring",
+          "type-strategist",
+          "type-specialty",
+          "improved-overland-1-1",
+          "plain-irritating",
+          "night-eyes",
+          "mindscramble"
+        ],
+        "config": {
+          "alpha": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "borderWidth": null,
+          "texture": null,
+          "tint": null,
+          "scale": null
+        },
+        "hidden": false,
+        "type": "normal",
+        "tier": null
+      },
+      {
+        "x": 178,
+        "y": 130,
+        "connected": [
+          "koffing-class-curry",
+          "trubbish-class-sandwiches",
+          "hesitation",
+          "spectral-stalker",
+          "walking-dead",
+          "telekinetic-potential",
+          "improved-telekinesis-1-1"
+        ],
+        "config": {
+          "alpha": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "borderWidth": null,
+          "texture": null,
+          "tint": null,
+          "scale": null
+        },
+        "hidden": false,
+        "type": "normal",
+        "tier": null
+      },
+      {
+        "x": 111,
+        "y": 82,
+        "connected": [
+          "improved-overland-1-2",
+          "draconic-presence",
+          "improved-flight-1-3",
+          "guard-up"
+        ],
+        "config": {
+          "alpha": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "borderWidth": null,
+          "texture": null,
+          "tint": null,
+          "scale": null
+        },
+        "hidden": false,
+        "type": "normal",
+        "tier": null
+      },
+      {
+        "x": 111,
+        "y": 116,
+        "connected": [
+          "improved-overland-1-5",
+          "improved-overland-1-3",
+          "unbending-steel",
+          "improved-telekinesis-1",
+          "improved-overland-1-6",
+          "improved-teleportation-1",
+          "rapid-fire-style-1"
+        ],
+        "config": {
+          "alpha": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "borderWidth": null,
+          "texture": null,
+          "tint": null,
+          "scale": null
+        },
+        "hidden": false,
+        "type": "normal",
+        "tier": null
+      },
+      {
+        "x": 78,
+        "y": 52,
+        "connected": [
+          "improved-overland-1-7",
+          "trained-rider",
+          "berserker",
+          "stat-iv-booster-1-10"
+        ],
+        "config": {
+          "alpha": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "borderWidth": null,
+          "texture": null,
+          "tint": null,
+          "scale": null
+        },
+        "hidden": false,
+        "type": "normal",
+        "tier": null
+      },
+      {
+        "x": 22,
+        "y": 155,
+        "connected": [
+          "high-voltage",
+          "watt-burn",
+          "root-5"
+        ],
+        "config": {
+          "alpha": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "borderWidth": null,
+          "texture": null,
+          "tint": null,
+          "scale": null
+        },
+        "hidden": false,
+        "type": "normal",
+        "tier": null
+      },
+      {
+        "x": 58,
+        "y": 173,
+        "connected": [
+          "root-5",
+          "improved-overland-1-9",
+          "high-noon",
+          "hamstring",
+          "skirmish",
+          "improved-overland-1-10"
+        ],
+        "config": {
+          "alpha": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "borderWidth": null,
+          "texture": null,
+          "tint": null,
+          "scale": null
+        },
+        "hidden": false,
+        "type": "normal",
+        "tier": null
+      },
+      {
+        "x": 76,
+        "y": 170,
+        "connected": [
+          "root-5",
+          "improved-overland-1-10",
+          "improved-flight-1-5",
+          "pokemaniac",
+          "improved-overland-1-11",
+          "improved-telekinesis-1-2"
+        ],
+        "config": {
+          "alpha": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "borderWidth": null,
+          "texture": null,
+          "tint": null,
+          "scale": null
+        },
+        "hidden": false,
+        "type": "normal",
+        "tier": null
+      },
+      {
+        "x": 105,
+        "y": 169,
+        "connected": [
+          "improved-overland-1-10",
+          "improved-flight-1-5",
+          "improved-overland-1-11",
+          "improved-telekinesis-1-2",
+          "hit-run",
+          "improved-overland-1-12",
+          "improved-swim-1-1",
+          "improved-overland-1-15",
+          "improved-overland-1-16",
+          "metamove-guarded-strike",
+          "metamove-bullseye",
+          "improved-swim-1-3",
+          "improved-flight-1-7"
+        ],
+        "config": {
+          "alpha": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "borderWidth": null,
+          "texture": null,
+          "tint": null,
+          "scale": null
+        },
+        "hidden": false,
+        "type": "normal",
+        "tier": null
+      },
+      {
+        "x": 64,
+        "y": 76,
+        "connected": [
+          "chansey-medicine",
+          "guard-up",
+          "berserker",
+          "stat-iv-booster-1-5",
+          "trained-rider",
+          "improved-overland-1-2"
+        ],
+        "config": {
+          "alpha": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "borderWidth": null,
+          "texture": null,
+          "tint": null,
+          "scale": null
+        },
+        "hidden": false,
+        "type": "normal",
+        "tier": null
+      },
+      {
+        "x": 105,
+        "y": 130,
+        "connected": [
+          "improved-burrow-1-3",
+          "improved-overland-1-13",
+          "improved-swim-1-2",
+          "improved-flight-1-6",
+          "strong-style",
+          "agile-style",
+          "evasive-style",
+          "assault-armor-style"
+        ],
+        "config": {
+          "alpha": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "borderWidth": null,
+          "texture": null,
+          "tint": null,
+          "scale": null
+        },
+        "hidden": false,
+        "type": "normal",
+        "tier": null
+      },
+      {
+        "x": 87,
+        "y": 141,
+        "connected": [
+          "improved-overland-1-14",
+          "precise-style",
+          "rapid-style",
+          "chill-out",
+          "scholar",
+          "pokemaniac",
+          "improved-telekinesis-1-2",
+          "improved-flight-1-5",
+          "improved-overland-1-15"
+        ],
+        "config": {
+          "alpha": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "borderWidth": null,
+          "texture": null,
+          "tint": null,
+          "scale": null
+        },
+        "hidden": false,
+        "type": "normal",
+        "tier": null
+      },
+      {
+        "x": 121,
+        "y": 179,
+        "connected": [
+          "improved-overland-1-16",
+          "metamove-target-split",
+          "metamove-empower",
+          "metamove-dirty-trick",
+          "metamove-guarded-strike",
+          "metamove-power-swap",
+          "improved-overland-1-12",
+          "pack-mon",
+          "root-4"
+        ],
+        "config": {
+          "alpha": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "borderWidth": null,
+          "texture": null,
+          "tint": null,
+          "scale": null
+        },
+        "hidden": false,
+        "type": "normal",
+        "tier": null
+      }
+    ],
+    "autoUnlock": [],
+    "originSlug": null,
+    "global": true,
+    "webs": []
   },
   "_id": "wqHZnaqbcQqOeLO7",
   "img": "systems/ptr2e/img/perk-icons/Trainer.svg",
-  "effects": []
+  "effects": [
+    {
+      "name": "IV Boost",
+      "type": "passive",
+      "_id": "Tl4uDbytkAel5CYi",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "choice-set",
+            "key": "",
+            "value": 0,
+            "predicate": [],
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "choices": [
+              {
+                "value": "system.attributes.hp.ivs",
+                "label": "HP"
+              },
+              {
+                "value": "system.attributes.atk.ivs",
+                "label": "Attack"
+              },
+              {
+                "value": "system.attributes.def.ivs",
+                "label": "Defense"
+              },
+              {
+                "value": "system.attributes.spa.ivs",
+                "label": "Special Attack"
+              },
+              {
+                "value": "system.attributes.spd.ivs",
+                "label": "Special Defense"
+              },
+              {
+                "value": "system.attributes.spe.ivs",
+                "label": "Speed"
+              }
+            ],
+            "prompt": "Pick a Stat",
+            "adjustName": true,
+            "rollOption": "ivBoosterChoice",
+            "flag": "ivBoosterChoice"
+          },
+          {
+            "type": "basic",
+            "key": "{effect|flags.ptr2e.choiceSelections.ivBoosterChoice}",
+            "value": 5,
+            "predicate": [],
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": false,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "<p><span style=\"font-family:Signika, sans-serif\">Increase one 's IV by 5.</span></p>",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": []
+    }
+  ]
 }

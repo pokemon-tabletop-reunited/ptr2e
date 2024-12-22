@@ -4,6 +4,10 @@
             <legend>
                 Details
             </legend>
+            {{#if (devMode)}}
+              {{formField fields.slug value=source.system.slug localize=true}}
+            {{/if}}
+            
             {{formField fields.baseAV value=source.system.baseAV localize=true}}
             {{formField fields.duration value=source.system.duration localize=true}}
             {{formField fields.description enriched=enrichedDescription value=source.system.description toggled=true localize=true}}

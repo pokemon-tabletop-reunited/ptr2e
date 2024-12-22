@@ -13,12 +13,13 @@ import { ImageResolver, sluggify } from "@utils";
 import type EnJSON from "static/lang/en.json";
 import ClockPanel from "@module/apps/clocks/clock-panel.ts";
 import TokenPanel from "@module/apps/token-panel.ts";
-import PerkWeb from "@module/canvas/perk-tree/perk-web.ts";
 import { remigrate } from "@system/remigrate.ts";
 import { CompendiumBrowserSettings, CompendiumBrowserSources } from "@module/apps/compendium-browser/data.ts";
 import { CompendiumBrowser } from "@module/apps/compendium-browser/index.ts";
 import { TutorListSettings } from "@system/tutor-list/setting-model.ts";
 import { TutorListApp } from "@module/apps/tutor-list.ts";
+import GithubManager from "@module/apps/github.ts";
+import { ExpTrackerSettings } from "@system/exp-tracker-model.ts";
 
 interface GamePTR2e
   extends Game<
@@ -32,10 +33,10 @@ interface GamePTR2e
     User<ActorPTR2e<ActorSystemPTR2e, null>>
   > {
   ptr: {
-    web: PerkWeb;
     util: {
       sluggify: typeof sluggify;
       image: ImageResolver;
+      github: typeof GithubManager
     };
     compendiumBrowser: CompendiumBrowser;
     data: {
@@ -112,7 +113,9 @@ declare global {
     get(module: "ptr2e", key: "compendiumBrowserSources"): CompendiumBrowserSources
     get(module: "ptr2e", key: "compendiumBrowserPacks"): CompendiumBrowserSettings
     get(module: "ptr2e", key: "tutorListData"): TutorListSettings
+    get(module: "ptr2e", key: "expTrackerData"): ExpTrackerSettings
     get(module: "ptr2e", key: "tokens.autoscale"): boolean
+    set(module: "ptr2e", key: "expTrackerData", value: ExpTrackerSettings['_source']): ExpTrackerSettings
   }
 
   // eslint-disable-next-line @typescript-eslint/no-namespace

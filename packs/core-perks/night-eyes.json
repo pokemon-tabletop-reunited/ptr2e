@@ -1,5 +1,5 @@
 {
-  "folder": "Et2u8UoXSe2a17oq",
+  "folder": "3FMJcmOMjNlPT6A0",
   "name": "Night Eyes",
   "type": "perk",
   "system": {
@@ -11,35 +11,41 @@
     "description": "<p>Passive: You gain [Darkvision 20], or [Darkvision X+10].</p>",
     "traits": [],
     "prerequisites": [
-      "[Dark]"
+      "trait:dark"
     ],
     "cost": 1,
-    "design": {
-      "arena": "mental",
-      "approach": "finesse",
-      "archetype": "Dark"
-    },
-    "node": {
-      "i": 128,
-      "j": 148,
-      "connected": [
-        "shadow-bubble"
-      ],
-      "config": {
-        "alpha": null,
-        "backgroundColor": null,
-        "borderColor": null,
-        "borderWidth": null,
-        "texture": "systems/ptr2e/img/svg/dark_icon.svg",
-        "tint": null,
-        "scale": null
-      },
-      "hidden": false,
-      "type": "normal"
-    }
+    "slug": "night-eyes",
+    "nodes": [
+      {
+        "connected": [
+          "salted-wounds",
+          "shadow-bubble",
+          "stat-iv-booster-1-1"
+        ],
+        "config": {
+          "alpha": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "borderWidth": null,
+          "texture": "systems/ptr2e/img/svg/dark_icon.svg",
+          "tint": null,
+          "scale": null
+        },
+        "hidden": false,
+        "type": "normal",
+        "x": 148,
+        "y": 92,
+        "tier": null
+      }
+    ],
+    "autoUnlock": [],
+    "originSlug": null,
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": []
   },
   "img": "systems/ptr2e/img/svg/dark_icon.svg",
   "effects": [],
-  "flags": {},
   "_id": "K1FDD5N2IuI05k6T"
 }

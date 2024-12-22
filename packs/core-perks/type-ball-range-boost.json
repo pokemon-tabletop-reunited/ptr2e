@@ -1,44 +1,54 @@
 {
   "name": "Type Ball Range Boost",
   "type": "perk",
+  "folder": "CpqiTFuJPCaphgZU",
   "system": {
     "prerequisites": [
-      "Electronics 70",
-      "Type Ball Specs"
+      {
+        "gte": [
+          "{actor|skills.electronics.mod}",
+          70
+        ]
+      },
+      "item:perk:type-ball-specs"
     ],
     "cost": 2,
-    "design": {
-      "arena": "mental",
-      "approach": "finesse",
-      "archetype": "Crafting"
-    },
     "description": "<p>You learn four [Type Ball] recipies.</p>",
     "actions": [],
     "slug": "type-ball-range-boost",
     "traits": [],
-    "node": {
-      "i": 69,
-      "j": 167,
-      "connected": [
-        "type-ball-specs",
-        "dimensional-balls"
-      ],
-      "config": {
-        "alpha": null,
-        "backgroundColor": "#c0c0c0",
-        "borderColor": null,
-        "borderWidth": null,
-        "texture": "systems/ptr2e/img/perk-icons/Crafting.svg",
-        "tint": "#161616",
-        "scale": null
-      },
-      "hidden": false,
-      "type": "normal"
-    },
     "_migration": {
       "version": null,
       "previous": null
-    }
+    },
+    "nodes": [
+      {
+        "connected": [
+          "type-ball-specs",
+          "dimensional-balls"
+        ],
+        "config": {
+          "alpha": null,
+          "backgroundColor": "#c0c0c0",
+          "borderColor": null,
+          "borderWidth": null,
+          "texture": "systems/ptr2e/img/perk-icons/Crafting.svg",
+          "tint": "#161616",
+          "scale": null
+        },
+        "hidden": false,
+        "type": "normal",
+        "x": null,
+        "y": null,
+        "tier": null
+      }
+    ],
+    "autoUnlock": [],
+    "originSlug": null,
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": []
   },
   "_id": "ZjsASAjltcnpWtf0",
   "img": "systems/ptr2e/img/perk-icons/Crafting.svg",

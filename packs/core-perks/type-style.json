@@ -1,16 +1,17 @@
 {
   "name": "<Type> Style",
   "type": "perk",
+  "folder": "kWG8zov1UnSKOvEQ",
   "system": {
     "prerequisites": [
-      "Leadership 35"
+      {
+        "gte": [
+          "{actor|skills.leadership.mod}",
+          35
+        ]
+      }
     ],
     "cost": 2,
-    "design": {
-      "arena": "social",
-      "approach": "power",
-      "archetype": "Type Ace"
-    },
     "description": "<p>The target adds this Action's [Type] to the next Attack they declare, lasting until the Attack resolves. The user may also be selected as a target for this Action.</p>",
     "actions": [
       {
@@ -25,14 +26,17 @@
         ],
         "cost": {
           "activation": "simple",
-          "powerPoints": 2
+          "powerPoints": 2,
+          "delay": null,
+          "priority": null
         },
         "range": {
           "target": "creature",
           "distance": 10,
           "unit": "m"
         },
-        "img": "icons/svg/explosion.svg"
+        "img": "icons/svg/explosion.svg",
+        "variant": null
       }
     ],
     "slug": "type-style",
@@ -41,29 +45,43 @@
       "command",
       "type"
     ],
-    "node": {
-      "i": 87,
-      "j": 102,
-      "connected": [
-        "type-domain",
-        "type-tutoring"
-      ],
-      "config": {
-        "alpha": null,
-        "backgroundColor": null,
-        "borderColor": null,
-        "borderWidth": null,
-        "texture": "systems/ptr2e/img/perk-icons/Orders_Training.svg",
-        "tint": null,
-        "scale": null
-      },
-      "hidden": false,
-      "type": "normal"
-    },
     "_migration": {
       "version": null,
       "previous": null
-    }
+    },
+    "nodes": [
+      {
+        "connected": [
+          "rapid-fire-style-1",
+          "type-style",
+          "magic-armor-style",
+          "type-strategist",
+          "type-tutoring",
+          "improved-overland-1-6",
+          "improved-flight-1-6"
+        ],
+        "config": {
+          "alpha": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "borderWidth": null,
+          "texture": "systems/ptr2e/img/perk-icons/Orders_Training.svg",
+          "tint": null,
+          "scale": null
+        },
+        "hidden": false,
+        "type": "normal",
+        "x": 122,
+        "y": 130,
+        "tier": null
+      }
+    ],
+    "autoUnlock": [],
+    "originSlug": null,
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": []
   },
   "_id": "rf1amQ8FoBlQka5c",
   "img": "systems/ptr2e/img/perk-icons/Orders_Training.svg",

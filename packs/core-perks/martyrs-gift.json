@@ -24,38 +24,51 @@
         "cost": {
           "activation": "free",
           "powerPoints": 5,
-          "trigger": "Fainted"
-        }
+          "trigger": "Fainted",
+          "delay": null,
+          "priority": null
+        },
+        "variant": null
       }
     ],
     "description": "<p>Trigger: User is fainted.<br><br>Effect: When the User is fainted, they give all allied entities within 5m Shields equal to 4 ticks of the User's Max HP. Activating this perk prevents the use of Tubthumping or Keep Fighting on the User.</p>",
     "traits": [],
     "prerequisites": [],
     "cost": 4,
-    "design": {
-      "arena": "social",
-      "approach": "resilience",
-      "archetype": ""
-    },
-    "node": {
-      "i": null,
-      "j": null,
-      "connected": [],
-      "config": {
-        "alpha": null,
-        "backgroundColor": null,
-        "borderColor": null,
-        "borderWidth": null,
-        "texture": "systems/ptr2e/img/perk-icons/Elamentalist.svg",
-        "tint": null,
-        "scale": null
-      },
-      "hidden": false,
-      "type": "normal"
-    }
+    "slug": "martyrs-gift",
+    "nodes": [
+      {
+        "connected": [
+          "mutual-aid",
+          "last-aid",
+          "look-out",
+          "fearsome-defense"
+        ],
+        "config": {
+          "alpha": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "borderWidth": null,
+          "texture": "systems/ptr2e/img/perk-icons/Elamentalist.svg",
+          "tint": null,
+          "scale": null
+        },
+        "hidden": false,
+        "type": "normal",
+        "x": 59,
+        "y": 84,
+        "tier": null
+      }
+    ],
+    "autoUnlock": [],
+    "originSlug": null,
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": []
   },
   "img": "systems/ptr2e/img/perk-icons/Elamentalist.svg",
   "effects": [],
-  "flags": {},
-  "_id": "l3JLwtDNpK6jFb2k"
+  "_id": "l3JLwtDNpK6jFb2k",
+  "folder": "c29hnIAtXgwB7FeY"
 }

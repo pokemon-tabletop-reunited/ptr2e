@@ -21,38 +21,52 @@
         },
         "cost": {
           "activation": "simple",
-          "powerPoints": 2
-        }
+          "powerPoints": 2,
+          "delay": null,
+          "priority": null
+        },
+        "variant": null
       }
     ],
     "description": "<p>You may provide an ally with Shields based on your own HP Max. The target ally receives Shields equal to 4 Ticks of the user's HP. If the user has Improved Shielding, this Perk benefits from the effect of that (rather than if the recipient has that perk).</p>",
     "traits": [],
     "prerequisites": [],
     "cost": 3,
-    "design": {
-      "arena": "physical",
-      "approach": "resilience",
-      "archetype": ""
-    },
-    "node": {
-      "i": null,
-      "j": null,
-      "connected": [],
-      "config": {
-        "alpha": null,
-        "backgroundColor": null,
-        "borderColor": null,
-        "borderWidth": null,
-        "texture": "icons/equipment/shield/heater-crystal-blue.webp",
-        "tint": null,
-        "scale": null
-      },
-      "hidden": false,
-      "type": "normal"
-    }
+    "slug": "hold-the-line",
+    "nodes": [
+      {
+        "connected": [
+          "tactician",
+          "mobilize",
+          "watchers-protection",
+          "resolute-watcher",
+          "keep-fighting"
+        ],
+        "config": {
+          "alpha": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "borderWidth": null,
+          "texture": "icons/equipment/shield/heater-crystal-blue.webp",
+          "tint": null,
+          "scale": null
+        },
+        "hidden": false,
+        "type": "normal",
+        "x": 34,
+        "y": 56,
+        "tier": null
+      }
+    ],
+    "autoUnlock": [],
+    "originSlug": null,
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": []
   },
   "img": "icons/equipment/shield/heater-crystal-blue.webp",
   "effects": [],
-  "flags": {},
-  "_id": "OeB204Ho5OCVR4xB"
+  "_id": "OeB204Ho5OCVR4xB",
+  "folder": "PAZ8zWUPw7Azm5V6"
 }

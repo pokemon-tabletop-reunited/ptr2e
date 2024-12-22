@@ -1,16 +1,12 @@
 {
   "name": "Intense Heat",
   "type": "perk",
+  "folder": "oguAsvaOzTLs8f97",
   "system": {
     "prerequisites": [
-      "[Fire]"
+      "trait:fire"
     ],
     "cost": 2,
-    "design": {
-      "arena": "physical",
-      "approach": "power",
-      "archetype": "[Fire]"
-    },
     "description": "<p>Your Fire-Type moves gain a 20% chance to @Affliction[burn], or increase that chance by +20%.</p>",
     "actions": [
       {
@@ -18,45 +14,61 @@
         "slug": "intense-heat",
         "description": "<p>Your Fire-Type moves gain a 20% chance to @Affliction[burn], or increase that chance by +20%.</p>",
         "cost": {
-          "activation": "free"
+          "activation": "free",
+          "powerPoints": 0,
+          "delay": null,
+          "priority": null
         },
         "type": "passive",
         "traits": [],
         "img": "icons/svg/explosion.svg",
         "range": {
           "target": "enemy",
-          "unit": "m"
-        }
+          "unit": "m",
+          "distance": 0
+        },
+        "variant": null,
+        "hidden": false
       }
     ],
     "slug": "intense-heat",
     "traits": [
       "partial-automation"
     ],
-    "node": {
-      "i": 139,
-      "j": 155,
-      "connected": [
-        "type-embodiment-type-2",
-        "inner-warmth",
-        "firefly"
-      ],
-      "config": {
-        "alpha": null,
-        "backgroundColor": null,
-        "borderColor": null,
-        "borderWidth": null,
-        "texture": "systems/ptr2e/img/svg/fire_icon.svg",
-        "tint": null,
-        "scale": null
-      },
-      "hidden": false,
-      "type": "normal"
-    },
     "_migration": {
       "version": null,
       "previous": null
-    }
+    },
+    "nodes": [
+      {
+        "connected": [
+          "inner-warmth",
+          "firefly",
+          "midnight-oil",
+          "acceptance"
+        ],
+        "config": {
+          "alpha": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "borderWidth": null,
+          "texture": "systems/ptr2e/img/svg/fire_icon.svg",
+          "tint": null,
+          "scale": null
+        },
+        "hidden": false,
+        "type": "normal",
+        "x": 162,
+        "y": 89,
+        "tier": null
+      }
+    ],
+    "autoUnlock": [],
+    "originSlug": null,
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": []
   },
   "_id": "TCYfgKMsSUhsv9Tp",
   "img": "systems/ptr2e/img/svg/fire_icon.svg",

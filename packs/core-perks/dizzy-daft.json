@@ -1,6 +1,7 @@
 {
   "name": "Dizzy Daft",
   "type": "perk",
+  "folder": "e9XnhZdjIE7hroYs",
   "system": {
     "_migration": {
       "version": 0.109,
@@ -16,12 +17,16 @@
         "img": "modules/ptr2e-pkmn-sprites/sprites/327.webp",
         "range": {
           "target": "self",
-          "unit": "m"
+          "unit": "m",
+          "distance": 0
         },
         "cost": {
           "activation": "simple",
-          "powerPoints": 2
-        }
+          "powerPoints": 2,
+          "delay": null,
+          "priority": null
+        },
+        "variant": null
       },
       {
         "name": "Dizzy Daft (Passive)",
@@ -32,41 +37,53 @@
         "img": "modules/ptr2e-pkmn-sprites/sprites/327.webp",
         "range": {
           "target": "self",
-          "unit": "m"
+          "unit": "m",
+          "distance": 0
         },
         "cost": {
-          "activation": "free"
+          "activation": "free",
+          "powerPoints": 0,
+          "delay": null,
+          "priority": null
         },
-        "hidden": true
+        "hidden": true,
+        "variant": null
       }
     ],
     "description": "<p>You can confuse yourself, and avoid the ill-effects.</p>",
     "traits": [],
-    "prerequisites": [
-      "Spinda"
-    ],
+    "prerequisites": [],
     "cost": 2,
-    "design": {
-      "arena": "physical",
-      "approach": "power",
-      "archetype": ""
-    },
-    "node": {
-      "i": null,
-      "j": null,
-      "connected": [],
-      "config": {
-        "alpha": null,
-        "backgroundColor": null,
-        "borderColor": null,
-        "borderWidth": null,
-        "texture": null,
-        "tint": null,
-        "scale": null
-      },
-      "hidden": false,
-      "type": "normal"
-    }
+    "nodes": [
+      {
+        "x": 15,
+        "y": 13,
+        "connected": [
+          "evolution-spinda"
+        ],
+        "config": {
+          "alpha": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "borderWidth": null,
+          "texture": null,
+          "tint": null,
+          "scale": null
+        },
+        "hidden": false,
+        "type": "normal",
+        "tier": null
+      }
+    ],
+    "webs": [
+      "Compendium.ptr2e.core-species.Item.DN39HBQfR7lFM73H"
+    ],
+    "global": false,
+    "slug": "dizzy-daft",
+    "autoUnlock": [],
+    "originSlug": null,
+    "variant": null,
+    "mode": null
   },
   "img": "systems/ptr2e/img/icons/feat_icon.webp",
   "effects": [],

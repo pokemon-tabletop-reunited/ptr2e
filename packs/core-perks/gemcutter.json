@@ -1,16 +1,37 @@
 {
   "name": "Gemcutter",
   "type": "perk",
+  "folder": "CpqiTFuJPCaphgZU",
   "system": {
     "prerequisites": [
-      "Profession (Gemcutter) 30 OR (Handiwork 45 AND Appraise 30)"
+      {
+        "or": [
+          {
+            "gte": [
+              "{actor|skills.gemcutter.mod}",
+              30
+            ]
+          },
+          {
+            "and": [
+              {
+                "gte": [
+                  "{actor|skills.handiwork.mod}",
+                  45
+                ]
+              },
+              {
+                "gte": [
+                  "{actor|skills.appraise.mod}",
+                  30
+                ]
+              }
+            ]
+          }
+        ]
+      }
     ],
     "cost": 2,
-    "design": {
-      "arena": "mental",
-      "approach": "resilience",
-      "archetype": "Crafting"
-    },
     "description": "<p>You are able to fashion shards into Evolution Stones. You are able to learn [Evolution Stone] Crafting Recipes.</p>",
     "actions": [
       {
@@ -18,44 +39,58 @@
         "slug": "gemcutter",
         "description": "<p>You are able to fashion shards into Evolution Stones. You are able to learn [Evolution Stone] Crafting Recipes.</p>",
         "cost": {
-          "activation": "complex"
+          "activation": "complex",
+          "powerPoints": 0,
+          "delay": null,
+          "priority": null
         },
         "type": "camping",
         "traits": [],
         "img": "icons/svg/explosion.svg",
         "range": {
           "target": "enemy",
-          "unit": "m"
-        }
+          "unit": "m",
+          "distance": 0
+        },
+        "variant": null
       }
     ],
     "slug": "gemcutter",
     "traits": [],
-    "node": {
-      "i": 45,
-      "j": 171,
-      "connected": [
-        "root-6",
-        "basic-ball-crafting",
-        "stonecunning",
-        "shovel-hands"
-      ],
-      "config": {
-        "alpha": null,
-        "backgroundColor": "#00ff00",
-        "borderColor": null,
-        "borderWidth": null,
-        "texture": "systems/ptr2e/img/perk-icons/Crafting.svg",
-        "tint": null,
-        "scale": null
-      },
-      "hidden": false,
-      "type": "normal"
-    },
     "_migration": {
       "version": null,
       "previous": null
-    }
+    },
+    "nodes": [
+      {
+        "connected": [
+          "root-6",
+          "basic-ball-crafting",
+          "stonecunning",
+          "shovel-hands"
+        ],
+        "config": {
+          "alpha": null,
+          "backgroundColor": "#00ff00",
+          "borderColor": null,
+          "borderWidth": null,
+          "texture": "systems/ptr2e/img/perk-icons/Crafting.svg",
+          "tint": null,
+          "scale": null
+        },
+        "hidden": false,
+        "type": "normal",
+        "x": null,
+        "y": null,
+        "tier": null
+      }
+    ],
+    "autoUnlock": [],
+    "originSlug": null,
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": []
   },
   "_id": "vpASThmqrsbqOnpf",
   "img": "systems/ptr2e/img/perk-icons/Crafting.svg",

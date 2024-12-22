@@ -363,7 +363,7 @@ export default class SpeciesSheet extends ItemSheetPTR2e<SpeciesPTR2e["system"]>
     ) {
       // Traits are stored as an array of objects, but we only need the values
       // @ts-expect-error - traits is an array of objects, but we only need the values
-      data.system.traits = data.system.traits.map((trait: { value: string }) =>
+      data.system.traits = data.system.traits.filter(t => !t.virtual).map((trait: { value: string }) =>
         sluggify(trait.value)
       );
 

@@ -1,16 +1,17 @@
 {
   "name": "Pokeball Repairs",
   "type": "perk",
+  "folder": "CpqiTFuJPCaphgZU",
   "system": {
     "prerequisites": [
-      "Electronics 20"
+      {
+        "gte": [
+          "{actor|skills.electronics.mod}",
+          20
+        ]
+      }
     ],
     "cost": 1,
-    "design": {
-      "arena": "mental",
-      "approach": "resilience",
-      "archetype": "Crafting"
-    },
     "description": "<p>You may make a Mechanics check with a penalty based on the Grade of the PokeBall you wish to repair after a failed capture check (-10 for Great Balls, -20 for Ultra Balls, etc). This requires appropriate tools.</p>",
     "actions": [
       {
@@ -18,43 +19,57 @@
         "slug": "pokeball-repairs",
         "description": "<p>You may make a Mechanics check with a penalty based on the Grade of the PokeBall you wish to repair after a failed capture check (-10 for Great Balls, -20 for Ultra Balls, etc). This requires appropriate tools.</p>",
         "cost": {
-          "activation": "complex"
+          "activation": "complex",
+          "powerPoints": 0,
+          "delay": null,
+          "priority": null
         },
         "type": "camping",
         "traits": [],
         "img": "icons/svg/explosion.svg",
         "range": {
           "target": "enemy",
-          "unit": "m"
-        }
+          "unit": "m",
+          "distance": 0
+        },
+        "variant": null
       }
     ],
     "slug": "pokeball-repairs",
     "traits": [],
-    "node": {
-      "i": 78,
-      "j": 183,
-      "connected": [
-        "blacksmith",
-        "basic-ball-crafting",
-        "capture-ace-2"
-      ],
-      "config": {
-        "alpha": null,
-        "backgroundColor": "#808080",
-        "borderColor": null,
-        "borderWidth": null,
-        "texture": "systems/ptr2e/img/perk-icons/Crafting.svg",
-        "tint": "#ffffff",
-        "scale": null
-      },
-      "hidden": false,
-      "type": "normal"
-    },
     "_migration": {
       "version": null,
       "previous": null
-    }
+    },
+    "nodes": [
+      {
+        "connected": [
+          "blacksmith",
+          "basic-ball-crafting",
+          "capture-ace-2"
+        ],
+        "config": {
+          "alpha": null,
+          "backgroundColor": "#808080",
+          "borderColor": null,
+          "borderWidth": null,
+          "texture": "systems/ptr2e/img/perk-icons/Crafting.svg",
+          "tint": "#ffffff",
+          "scale": null
+        },
+        "hidden": false,
+        "type": "normal",
+        "x": null,
+        "y": null,
+        "tier": null
+      }
+    ],
+    "autoUnlock": [],
+    "originSlug": null,
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": []
   },
   "_id": "2YjQ2sYKiLQSFmJP",
   "img": "systems/ptr2e/img/perk-icons/Crafting.svg",

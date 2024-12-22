@@ -1,6 +1,7 @@
 {
   "name": "<Type> Hunter",
   "type": "perk",
+  "folder": "W85LoOCz3WlwbyhZ",
   "system": {
     "_migration": {
       "version": 0.109,
@@ -16,41 +17,57 @@
         "img": "systems/ptr2e/img/perk-icons/Touched.svg",
         "range": {
           "target": "creature",
-          "unit": "m"
+          "unit": "m",
+          "distance": 0
         },
         "cost": {
-          "activation": "free"
-        }
+          "activation": "free",
+          "powerPoints": 0,
+          "delay": null,
+          "priority": null
+        },
+        "variant": null
       }
     ],
     "description": "<p>You can tutor abilities with the [Hunter] trait. This can be applied to self or owned [Pokemon]. Follows the normal restrictions for tutored abilities.</p>",
     "traits": [],
     "prerequisites": [],
     "cost": 2,
-    "design": {
-      "arena": "physical",
-      "approach": "power",
-      "archetype": ""
-    },
-    "node": {
-      "i": null,
-      "j": null,
-      "connected": [],
-      "config": {
-        "alpha": null,
-        "backgroundColor": null,
-        "borderColor": null,
-        "borderWidth": null,
-        "texture": null,
-        "tint": null,
-        "scale": null
-      },
-      "hidden": false,
-      "type": "normal"
-    }
+    "slug": "type-hunter",
+    "nodes": [
+      {
+        "x": 40,
+        "y": 176,
+        "hidden": false,
+        "type": "entry",
+        "connected": [
+          "great-hunter",
+          "root-5",
+          "high-noon",
+          "weak-spot",
+          "dead-to-rights",
+          "improved-overland-1-9"
+        ],
+        "config": {
+          "alpha": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "borderWidth": null,
+          "texture": null,
+          "tint": null,
+          "scale": null
+        },
+        "tier": null
+      }
+    ],
+    "autoUnlock": [],
+    "originSlug": null,
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": []
   },
   "img": "systems/ptr2e/img/perk-icons/Touched.svg",
   "effects": [],
-  "flags": {},
   "_id": "aGUPKyrimGXyyDpA"
 }

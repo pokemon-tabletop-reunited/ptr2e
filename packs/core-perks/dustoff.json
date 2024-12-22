@@ -21,40 +21,52 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 3
-        }
+          "powerPoints": 3,
+          "delay": null,
+          "priority": null
+        },
+        "variant": null
       }
     ],
     "description": "<p>You gain the Dustoff Action.</p>",
     "traits": [],
     "prerequisites": [
-      "[Winged]"
+      "trait:winged"
     ],
     "cost": 1,
-    "design": {
-      "arena": "physical",
-      "approach": "power",
-      "archetype": ""
-    },
-    "node": {
-      "i": null,
-      "j": null,
-      "connected": [],
-      "config": {
-        "alpha": null,
-        "backgroundColor": null,
-        "borderColor": null,
-        "borderWidth": null,
-        "texture": null,
-        "tint": null,
-        "scale": null
-      },
-      "hidden": false,
-      "type": "normal"
-    }
+    "slug": "dustoff",
+    "nodes": [
+      {
+        "connected": [
+          "drifter",
+          "wingblades",
+          "hexcraft"
+        ],
+        "config": {
+          "alpha": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "borderWidth": null,
+          "texture": null,
+          "tint": null,
+          "scale": null
+        },
+        "hidden": false,
+        "type": "normal",
+        "x": 127,
+        "y": 51,
+        "tier": null
+      }
+    ],
+    "autoUnlock": [],
+    "originSlug": null,
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": []
   },
   "img": "systems/ptr2e/img/svg/flying_icon.svg",
   "effects": [],
-  "flags": {},
-  "_id": "XHm3M8t5MQJDHmnt"
+  "_id": "XHm3M8t5MQJDHmnt",
+  "folder": "QFi3YFwyLLQSpOap"
 }

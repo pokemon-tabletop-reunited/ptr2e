@@ -3,15 +3,20 @@
   "type": "perk",
   "system": {
     "prerequisites": [
-      "Conversation 50",
-      "Leadership 50"
+      {
+        "gte": [
+          "{actor|skills.conversation.mod}",
+          50
+        ]
+      },
+      {
+        "gte": [
+          "{actor|skills.leadership.mod}",
+          50
+        ]
+      }
     ],
     "cost": 4,
-    "design": {
-      "arena": "social",
-      "approach": "power",
-      "archetype": "Support"
-    },
     "description": "<p>Trigger: An ally gains @Affliction[fainted].</p><p>Effect: The target is healed to 1HP, and is healed of one Stack of @Affliction[weary]. Then, the target is cleared of any [Major Afflictions] and [Minor Afflictions] and recover 5 Ticks of HP.</p>",
     "actions": [
       {
@@ -22,7 +27,9 @@
         "cost": {
           "activation": "free",
           "powerPoints": 10,
-          "trigger": "An ally gains @Affliction[fainted]."
+          "trigger": "An ally gains @Affliction[fainted].",
+          "delay": null,
+          "priority": null
         },
         "range": {
           "target": "ally",
@@ -33,42 +40,47 @@
           "interrupt-4",
           "healing"
         ],
-        "img": "icons/svg/explosion.svg"
+        "img": "icons/svg/explosion.svg",
+        "variant": null
       }
     ],
     "slug": "keep-fighting",
     "traits": [],
-    "node": {
-      "i": 144,
-      "j": 59,
-      "connected": [
-        "tactician",
-        "stat-specialist",
-        "stat-iv-booster-1",
-        "aura-user",
-        "aura-bonding",
-        "cheerleader",
-        "emergency-retreat",
-        "overbooster"
-      ],
-      "config": {
-        "alpha": null,
-        "backgroundColor": "#ffffff",
-        "borderColor": null,
-        "borderWidth": null,
-        "texture": "systems/ptr2e/img/perk-icons/Tactician.svg",
-        "tint": "#191919",
-        "scale": null
-      },
-      "hidden": false,
-      "type": "normal"
-    },
     "_migration": {
       "version": null,
       "previous": null
-    }
+    },
+    "nodes": [
+      {
+        "connected": [
+          "hold-the-line",
+          "resolute-watcher"
+        ],
+        "config": {
+          "alpha": null,
+          "backgroundColor": "#ffffff",
+          "borderColor": null,
+          "borderWidth": null,
+          "texture": "systems/ptr2e/img/perk-icons/Tactician.svg",
+          "tint": "#191919",
+          "scale": null
+        },
+        "hidden": false,
+        "type": "normal",
+        "x": 34,
+        "y": 58,
+        "tier": null
+      }
+    ],
+    "autoUnlock": [],
+    "originSlug": null,
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": []
   },
   "_id": "3RMFsZTuMdDhCyZg",
   "img": "systems/ptr2e/img/perk-icons/Tactician.svg",
-  "effects": []
+  "effects": [],
+  "folder": "PAZ8zWUPw7Azm5V6"
 }

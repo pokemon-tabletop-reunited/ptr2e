@@ -1,5 +1,5 @@
 {
-  "folder": "Et2u8UoXSe2a17oq",
+  "folder": "zrVtKATNxzLNxTUa",
   "name": "Seeing Red",
   "type": "perk",
   "_id": "ZPI6ynhdFdYyxJUx",
@@ -21,7 +21,9 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 1
+          "powerPoints": 1,
+          "delay": null,
+          "priority": null
         },
         "category": "physical",
         "power": 20,
@@ -31,45 +33,57 @@
         ],
         "description": "<p>Effect: The user gains @Affliction[enraged] 2. While @Affliction[enraged], if the user is hit by a damaging attack, they gain +1 ATK Stage for 5 activations.</p>",
         "img": "systems/ptr2e/img/svg/fighting_icon.svg",
-        "free": true
+        "free": true,
+        "variant": null,
+        "contestType": "",
+        "contestEffect": "",
+        "slot": null,
+        "summon": null,
+        "defaultVariant": null,
+        "flingItemId": null,
+        "offensiveStat": null,
+        "defensiveStat": null
       }
     ],
     "slug": "seeing-red",
     "description": "<p>When you would gain @Affliction[enraged], the set duration increases by +3 Stacks.<br><br>Connection: Rage</p>",
     "traits": [],
     "prerequisites": [
-      "[Berserker]"
+      "trait:berserker"
     ],
     "cost": 2,
-    "design": {
-      "arena": "physical",
-      "approach": "power",
-      "archetype": "Berserker"
-    },
-    "node": {
-      "i": 175,
-      "j": 37,
-      "connected": [
-        "berserker",
-        "plus-ultra",
-        "hear-no-bell"
-      ],
-      "config": {
-        "alpha": null,
-        "backgroundColor": null,
-        "borderColor": null,
-        "borderWidth": null,
-        "texture": "systems/ptr2e/img/svg/fighting_icon.svg",
-        "tint": null,
-        "scale": null
-      },
-      "hidden": false,
-      "type": "normal"
-    },
     "_migration": {
       "version": null,
       "previous": null
-    }
+    },
+    "nodes": [
+      {
+        "connected": [
+          "frenzied-assault",
+          "berserk"
+        ],
+        "config": {
+          "alpha": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "borderWidth": null,
+          "texture": "systems/ptr2e/img/svg/fighting_icon.svg",
+          "tint": null,
+          "scale": null
+        },
+        "hidden": false,
+        "type": "normal",
+        "x": 58,
+        "y": 38,
+        "tier": null
+      }
+    ],
+    "autoUnlock": [],
+    "originSlug": null,
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": []
   },
   "effects": [
     {

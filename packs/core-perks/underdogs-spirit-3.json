@@ -1,17 +1,18 @@
 {
   "name": "Underdog's Spirit 3",
   "type": "perk",
+  "folder": "zrVtKATNxzLNxTUb",
   "system": {
     "prerequisites": [
-      "Underdog's Spirit 2",
-      "level 30"
+      "item:perk:underdogs-spirit-2",
+      {
+        "gte": [
+          "{actor|level}",
+          30
+        ]
+      }
     ],
     "cost": 2,
-    "design": {
-      "arena": "physical",
-      "approach": "power",
-      "archetype": "Underdog"
-    },
     "description": "<p>Gain +20 to a Combat Stat that is not HP, up to the Underdog BST Cap. This stat cannot be selected again for future Underdog's Spirit Ranks.</p>",
     "actions": [
       {
@@ -19,44 +20,59 @@
         "slug": "underdogs-spirit-3",
         "description": "<p>Gain +20 to a Combat Stat that is not HP, up to the Underdog BST Cap. This stat cannot be selected again for future Underdog's Spirit Ranks.</p>",
         "cost": {
-          "activation": "free"
+          "activation": "free",
+          "powerPoints": 0,
+          "delay": null,
+          "priority": null
         },
         "type": "passive",
         "traits": [],
         "img": "icons/svg/explosion.svg",
         "range": {
           "target": "enemy",
-          "unit": "m"
-        }
+          "unit": "m",
+          "distance": 0
+        },
+        "variant": null,
+        "hidden": false
       }
     ],
     "slug": "underdogs-spirit-3",
     "traits": [],
-    "node": {
-      "i": 110,
-      "j": 78,
-      "connected": [
-        "underdogs-spirit-2",
-        "underdogs-spirit-4",
-        "specialised-underdog",
-        "stat-iv-booster-1"
-      ],
-      "config": {
-        "alpha": null,
-        "backgroundColor": "#ffffff",
-        "borderColor": null,
-        "borderWidth": null,
-        "texture": "systems/ptr2e/img/perk-icons/Breeder.svg",
-        "tint": "#0c0c0c",
-        "scale": null
-      },
-      "hidden": false,
-      "type": "normal"
-    },
     "_migration": {
       "version": null,
       "previous": null
-    }
+    },
+    "nodes": [
+      {
+        "connected": [
+          "underdogs-spirit-2",
+          "underdogs-spirit-4",
+          "specialised-underdog",
+          "stat-iv-booster-1"
+        ],
+        "config": {
+          "alpha": null,
+          "backgroundColor": "#ffffff",
+          "borderColor": null,
+          "borderWidth": null,
+          "texture": "systems/ptr2e/img/perk-icons/Breeder.svg",
+          "tint": "#0c0c0c",
+          "scale": null
+        },
+        "hidden": false,
+        "type": "normal",
+        "x": null,
+        "y": null,
+        "tier": null
+      }
+    ],
+    "autoUnlock": [],
+    "originSlug": null,
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": []
   },
   "_id": "C1AZnIBVdC1y4mc4",
   "img": "systems/ptr2e/img/perk-icons/Breeder.svg",

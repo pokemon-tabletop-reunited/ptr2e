@@ -3,14 +3,9 @@
   "type": "perk",
   "system": {
     "prerequisites": [
-      "[Ground]"
+      "trait:ground"
     ],
     "cost": 2,
-    "design": {
-      "arena": "physical",
-      "approach": "power",
-      "archetype": "[Ground]"
-    },
     "description": "<p>You gain a Burrow Movement Allowance equal to your Overland Movement Allowance.</p>",
     "actions": [
       {
@@ -18,47 +13,63 @@
         "slug": "shovel-hands",
         "description": "<p>You gain a Burrow Movement Allowance equal to your Overland Movement Allowance.</p>",
         "cost": {
-          "activation": "free"
+          "activation": "free",
+          "powerPoints": 0,
+          "delay": null,
+          "priority": null
         },
         "type": "passive",
         "traits": [],
         "img": "icons/svg/explosion.svg",
         "range": {
           "target": "enemy",
-          "unit": "m"
-        }
+          "unit": "m",
+          "distance": 0
+        },
+        "variant": null,
+        "hidden": false
       }
     ],
     "slug": "shovel-hands",
     "traits": [],
-    "node": {
-      "i": 53,
-      "j": 169,
-      "connected": [
-        "root-6",
-        "gemcutter",
-        "stonecunning",
-        "powerlifter",
-        "improved-burrow-1"
-      ],
-      "config": {
-        "alpha": null,
-        "backgroundColor": null,
-        "borderColor": null,
-        "borderWidth": null,
-        "texture": "systems/ptr2e/img/svg/ground_icon.svg",
-        "tint": null,
-        "scale": null
-      },
-      "hidden": false,
-      "type": "normal"
-    },
     "_migration": {
       "version": null,
       "previous": null
-    }
+    },
+    "nodes": [
+      {
+        "connected": [
+          "stonecunning",
+          "parkour",
+          "improved-burrow-1",
+          "freeclimber",
+          "scree"
+        ],
+        "config": {
+          "alpha": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "borderWidth": null,
+          "texture": "systems/ptr2e/img/svg/ground_icon.svg",
+          "tint": null,
+          "scale": null
+        },
+        "hidden": false,
+        "type": "normal",
+        "x": 132,
+        "y": 26,
+        "tier": null
+      }
+    ],
+    "autoUnlock": [],
+    "originSlug": null,
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": []
   },
   "_id": "bViFIhDmZmpeLhUG",
   "img": "systems/ptr2e/img/svg/ground_icon.svg",
-  "effects": []
+  "effects": [],
+  "folder": "1osM6JY51pvLkJ3Q"
 }

@@ -1,17 +1,18 @@
 {
   "name": "Zigzagoon-Class Sandwiches",
   "type": "perk",
+  "folder": "zrVtKATNxzLNxTUZ",
   "system": {
     "prerequisites": [
-      "Husbandry 20",
-      "Trubbish-Class Sandwiches"
+      {
+        "gte": [
+          "{actor|skills.husbandry.mod}",
+          20
+        ]
+      },
+      "item:perk:trubbish-class-sandwiches"
     ],
     "cost": 2,
-    "design": {
-      "arena": "social",
-      "approach": "resilience",
-      "archetype": "Chef"
-    },
     "description": "<p>You are able to make Zigzagoon-Class Sandwiches as a Camp Action. In addition to their usual effects, these sandwiches confer a +20 on one skill check of your choosing in the following day. Some diners find themselves oddly unable to walk in a straight line after eating these sandwiches.</p>",
     "actions": [
       {
@@ -19,44 +20,56 @@
         "slug": "zigzagoon-class-sandwiches",
         "description": "<p>You are able to make Zigzagoon-Class Sandwiches as a Camp Action. In addition to their usual effects, these sandwiches confer a +20 on one skill check of your choosing in the following day. Some diners find themselves oddly unable to walk in a straight line after eating these sandwiches.</p>",
         "cost": {
-          "activation": "complex"
+          "activation": "complex",
+          "powerPoints": 0,
+          "delay": null,
+          "priority": null
         },
         "type": "camping",
         "traits": [],
         "img": "icons/svg/explosion.svg",
         "range": {
           "target": "enemy",
-          "unit": "m"
-        }
+          "unit": "m",
+          "distance": 0
+        },
+        "variant": null
       }
     ],
     "slug": "zigzagoon-class-sandwiches",
     "traits": [],
-    "node": {
-      "i": 106,
-      "j": 151,
-      "connected": [
-        "trubbish-class-sandwiches",
-        "lechonk-class-sandwiches",
-        "sprint",
-        "hit-run"
-      ],
-      "config": {
-        "alpha": null,
-        "backgroundColor": "#804000",
-        "borderColor": null,
-        "borderWidth": null,
-        "texture": "systems/ptr2e/img/perk-icons/Chef.svg",
-        "tint": "#ffffff",
-        "scale": null
-      },
-      "hidden": false,
-      "type": "normal"
-    },
     "_migration": {
       "version": null,
       "previous": null
-    }
+    },
+    "nodes": [
+      {
+        "x": 187,
+        "y": 136,
+        "hidden": false,
+        "type": "normal",
+        "connected": [
+          "trubbish-class-sandwiches",
+          "lechonk-class-sandwiches"
+        ],
+        "config": {
+          "alpha": null,
+          "backgroundColor": "#804000",
+          "borderColor": null,
+          "borderWidth": null,
+          "texture": "systems/ptr2e/img/perk-icons/Chef.svg",
+          "tint": "#ffffff",
+          "scale": null
+        },
+        "tier": null
+      }
+    ],
+    "autoUnlock": [],
+    "originSlug": null,
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": []
   },
   "_id": "EICoj1ArkNCRaWrJ",
   "img": "systems/ptr2e/img/perk-icons/Chef.svg",

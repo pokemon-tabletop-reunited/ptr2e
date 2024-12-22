@@ -3,14 +3,14 @@
   "type": "perk",
   "system": {
     "prerequisites": [
-      "Leadership 30"
+      {
+        "gte": [
+          "{actor|skills.leadership.mod}",
+          30
+        ]
+      }
     ],
     "cost": 1,
-    "design": {
-      "arena": "mental",
-      "approach": "finesse",
-      "archetype": "Support"
-    },
     "description": "<p>The target gains @Affliction[precise] 1.</p>",
     "actions": [
       {
@@ -27,11 +27,14 @@
         },
         "cost": {
           "activation": "simple",
-          "powerPoints": 1
+          "powerPoints": 1,
+          "delay": null,
+          "priority": null
         },
         "description": "Effect: The target gains @Affliction[precise] 1.",
         "type": "generic",
-        "img": "icons/svg/explosion.svg"
+        "img": "icons/svg/explosion.svg",
+        "variant": null
       },
       {
         "name": "Precise! (Self)",
@@ -42,45 +45,60 @@
         ],
         "range": {
           "target": "self",
-          "unit": "m"
+          "unit": "m",
+          "distance": 0
         },
         "cost": {
           "activation": "simple",
-          "powerPoints": 1
+          "powerPoints": 1,
+          "delay": null,
+          "priority": null
         },
         "description": "Effect: The target gains @Affliction[precise] 2.",
         "type": "generic",
-        "img": "icons/svg/explosion.svg"
+        "img": "icons/svg/explosion.svg",
+        "variant": null
       }
     ],
     "slug": "precise-style",
     "traits": [],
-    "node": {
-      "i": 67,
-      "j": 216,
-      "connected": [
-        "down-the-sights",
-        "dead-eye",
-        "root-5"
-      ],
-      "config": {
-        "alpha": null,
-        "backgroundColor": "#80ffff",
-        "borderColor": null,
-        "borderWidth": null,
-        "texture": "systems/ptr2e/img/perk-icons/Orders_Training.svg",
-        "tint": "#161616",
-        "scale": null
-      },
-      "hidden": false,
-      "type": "normal"
-    },
     "_migration": {
       "version": null,
       "previous": null
-    }
+    },
+    "nodes": [
+      {
+        "connected": [
+          "gambit-style",
+          "rapid-style",
+          "improved-overland-1-13",
+          "stat-iv-booster-1-12"
+        ],
+        "config": {
+          "alpha": null,
+          "backgroundColor": "#80ffff",
+          "borderColor": null,
+          "borderWidth": null,
+          "texture": "systems/ptr2e/img/perk-icons/Orders_Training.svg",
+          "tint": "#161616",
+          "scale": null
+        },
+        "hidden": false,
+        "type": "normal",
+        "x": 89,
+        "y": 130,
+        "tier": null
+      }
+    ],
+    "autoUnlock": [],
+    "originSlug": null,
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": []
   },
   "_id": "bj0EK3ur1N9ULr4A",
   "img": "systems/ptr2e/img/perk-icons/Orders_Training.svg",
-  "effects": []
+  "effects": [],
+  "folder": "JZrGRskscJOkkPWA"
 }

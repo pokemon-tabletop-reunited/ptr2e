@@ -147,6 +147,24 @@
                 <small>{{localize "PTR2E.SpeciesSheet.evolutions.methods.missing"}}</small>
             {{/each}}
         </fieldset>
+        <fieldset class="perk" data-path="{{concat basePath ".perk"}}">
+          <legend>{{localize "PTR2E.SpeciesSheet.perk.label"}}</legend>
+          <p class="hint">{{localize "PTR2E.SpeciesSheet.perk.hint"}}</p>
+          <div class="form-group">
+            <label>{{localize "PTR2E.FIELDS.node.x.label"}}</label>
+            <div class="form-fields">
+              <input type="number" name="{{basePath}}.perk.x" class="form-control" data-dtype="String" value="{{this.perk.x}}">
+            </div>
+            <p class="hint">{{localize "PTR2E.FIELDS.node.y.hint"}}</p>
+          </div>
+          <div class="form-group">
+            <label>{{localize "PTR2E.FIELDS.node.y.label"}}</label>
+            <div class="form-fields">
+              <input type="number" name="{{basePath}}.perk.y" class="form-control" data-dtype="String" value="{{this.perk.y}}">
+            </div>
+            <p class="hint">{{localize "PTR2E.FIELDS.node.y.hint"}}</p>
+          </div>
+        </fieldset>
         <fieldset class="evos" data-path="{{concat basePath ".evolutions"}}">
             <legend>
                 {{this.name}}'s {{localize "PTR2E.SpeciesSheet.evolutions.label"}}

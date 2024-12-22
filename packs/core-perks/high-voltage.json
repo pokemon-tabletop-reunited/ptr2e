@@ -10,30 +10,40 @@
     "description": "<p>Your Electric-Type moves gain a 20% chance to inflict Paralysis, or increase their existing Paralysis chance by +20%.</p>",
     "traits": [],
     "prerequisites": [
-      "[Electric]"
+      "trait:electric"
     ],
     "cost": 2,
-    "design": {
-      "arena": "physical",
-      "approach": "power",
-      "archetype": ""
-    },
-    "node": {
-      "i": null,
-      "j": null,
-      "connected": [],
-      "config": {
-        "alpha": null,
-        "backgroundColor": null,
-        "borderColor": null,
-        "borderWidth": null,
-        "texture": null,
-        "tint": null,
-        "scale": null
-      },
-      "hidden": false,
-      "type": "normal"
-    }
+    "slug": "high-voltage",
+    "nodes": [
+      {
+        "connected": [
+          "watt-burn",
+          "jammer",
+          "root-5",
+          "stat-iv-booster-1-6"
+        ],
+        "config": {
+          "alpha": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "borderWidth": null,
+          "texture": null,
+          "tint": null,
+          "scale": null
+        },
+        "hidden": false,
+        "type": "normal",
+        "x": 27,
+        "y": 144,
+        "tier": null
+      }
+    ],
+    "autoUnlock": [],
+    "originSlug": null,
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": []
   },
   "img": "systems/ptr2e/img/svg/electric_icon.svg",
   "effects": [
@@ -91,6 +101,6 @@
       }
     }
   ],
-  "flags": {},
-  "_id": "gRR00RqYfyIOaeWV"
+  "_id": "gRR00RqYfyIOaeWV",
+  "folder": "2JITUAwLwao03qoc"
 }

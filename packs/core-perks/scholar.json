@@ -3,14 +3,14 @@
   "type": "perk",
   "system": {
     "prerequisites": [
-      "Research 25"
+      {
+        "gte": [
+          "{actor|skills.research.mod}",
+          25
+        ]
+      }
     ],
     "cost": 1,
-    "design": {
-      "arena": "mental",
-      "approach": "resilience",
-      "archetype": "Knowledge"
-    },
     "description": "<p>You gain access to the Research Camp Action. You may not know something then and there in the moment, but with enough dedication and the right resources, you will find out eventually.</p>",
     "actions": [
       {
@@ -18,48 +18,65 @@
         "slug": "scholar",
         "description": "<p>You gain access to the Research Camp Action. You may not know something then and there in the moment, but with enough dedication and the right resources, you will find out eventually.</p>",
         "cost": {
-          "activation": "complex"
+          "activation": "complex",
+          "powerPoints": 0,
+          "delay": null,
+          "priority": null
         },
         "type": "camping",
         "traits": [],
         "img": "icons/svg/explosion.svg",
         "range": {
           "target": "enemy",
-          "unit": "m"
-        }
+          "unit": "m",
+          "distance": 0
+        },
+        "variant": null
       }
     ],
     "slug": "scholar",
     "traits": [],
-    "node": {
-      "i": 64,
-      "j": 93,
-      "connected": [
-        "root-1",
-        "forensic-accountant",
-        "climatologist",
-        "palaeontologist",
-        "type-tutoring",
-        "type-specialty"
-      ],
-      "config": {
-        "alpha": null,
-        "backgroundColor": "#808080",
-        "borderColor": null,
-        "borderWidth": null,
-        "texture": "systems/ptr2e/img/perk-icons/Knowledge.svg",
-        "tint": "#ffffff",
-        "scale": null
-      },
-      "hidden": false,
-      "type": "normal"
-    },
     "_migration": {
       "version": null,
       "previous": null
-    }
+    },
+    "nodes": [
+      {
+        "x": 66,
+        "y": 152,
+        "hidden": false,
+        "type": "entry",
+        "connected": [
+          "hobby-gardener",
+          "palaeontologist",
+          "pokemaniac",
+          "root-5",
+          "climatologist",
+          "mental-alarm",
+          "stat-iv-booster-1-12",
+          "improved-overland-1-15"
+        ],
+        "config": {
+          "alpha": null,
+          "backgroundColor": "#808080",
+          "borderColor": null,
+          "borderWidth": null,
+          "texture": "systems/ptr2e/img/perk-icons/Knowledge.svg",
+          "tint": "#ffffff",
+          "scale": null
+        },
+        "tier": null
+      }
+    ],
+    "autoUnlock": [],
+    "originSlug": null,
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": []
   },
   "_id": "KEvYjwxJ3bWLCknR",
   "img": "systems/ptr2e/img/perk-icons/Knowledge.svg",
-  "effects": []
+  "effects": [],
+  "folder": "aUkQAkBYAmrv6REK"
 }

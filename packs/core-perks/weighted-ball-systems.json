@@ -1,45 +1,55 @@
 {
   "name": "Weighted Ball Systems",
   "type": "perk",
+  "folder": "CpqiTFuJPCaphgZU",
   "system": {
     "prerequisites": [
-      "Electronics 35",
-      "Basic Ball Crafting"
+      {
+        "gte": [
+          "{actor|skills.electronics.mod}",
+          35
+        ]
+      },
+      "item:perk:basic-ball-crafting"
     ],
     "cost": 1,
-    "design": {
-      "arena": "mental",
-      "approach": "finesse",
-      "archetype": "Crafting"
-    },
     "description": "<p>You learn the Feather Ball and Heavy Ball recipes.</p>",
     "actions": [],
     "slug": "weighted-ball-systems",
     "traits": [],
-    "node": {
-      "i": 88,
-      "j": 166,
-      "connected": [
-        "basic-ball-crafting",
-        "advanced-ball-crafting",
-        "advanced-ball-weights"
-      ],
-      "config": {
-        "alpha": null,
-        "backgroundColor": "#80ffff",
-        "borderColor": null,
-        "borderWidth": null,
-        "texture": "systems/ptr2e/img/perk-icons/Crafting.svg",
-        "tint": "#0d0d0d",
-        "scale": null
-      },
-      "hidden": false,
-      "type": "normal"
-    },
     "_migration": {
       "version": null,
       "previous": null
-    }
+    },
+    "nodes": [
+      {
+        "connected": [
+          "basic-ball-crafting",
+          "advanced-ball-crafting",
+          "advanced-ball-weights"
+        ],
+        "config": {
+          "alpha": null,
+          "backgroundColor": "#80ffff",
+          "borderColor": null,
+          "borderWidth": null,
+          "texture": "systems/ptr2e/img/perk-icons/Crafting.svg",
+          "tint": "#0d0d0d",
+          "scale": null
+        },
+        "hidden": false,
+        "type": "normal",
+        "x": null,
+        "y": null,
+        "tier": null
+      }
+    ],
+    "autoUnlock": [],
+    "originSlug": null,
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": []
   },
   "_id": "VVu1yg08Si8inouB",
   "img": "systems/ptr2e/img/perk-icons/Crafting.svg",

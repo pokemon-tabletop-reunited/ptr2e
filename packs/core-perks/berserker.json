@@ -1,5 +1,5 @@
 {
-  "folder": "Et2u8UoXSe2a17oq",
+  "folder": "zrVtKATNxzLNxTUa",
   "name": "Berserker",
   "type": "perk",
   "_id": "fTAcIGm5QGWoKB1D",
@@ -21,7 +21,9 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 1
+          "powerPoints": 1,
+          "delay": null,
+          "priority": null
         },
         "category": "physical",
         "power": 20,
@@ -30,7 +32,17 @@
           "normal"
         ],
         "description": "<p>Effect: The user gains @Affliction[enraged] 2. While @Affliction[enraged], if the user is hit by a damaging attack, they gain +1 ATK Stage for 5 activations.</p>",
-        "img": "icons/svg/explosion.svg"
+        "img": "icons/svg/explosion.svg",
+        "variant": null,
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null,
+        "summon": null,
+        "defaultVariant": null,
+        "flingItemId": null,
+        "offensiveStat": null,
+        "defensiveStat": null
       },
       {
         "slug": "rage",
@@ -47,7 +59,9 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 1
+          "powerPoints": 1,
+          "delay": null,
+          "priority": null
         },
         "category": "physical",
         "power": 20,
@@ -56,7 +70,17 @@
           "normal"
         ],
         "description": "<p>Effect: The user gains @Affliction[enraged] 2. While @Affliction[enraged], if the user is hit by a damaging attack, they gain +1 ATK Stage for 5 activations.</p>",
-        "img": "icons/svg/explosion.svg"
+        "img": "icons/svg/explosion.svg",
+        "variant": null,
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null,
+        "summon": null,
+        "defaultVariant": null,
+        "flingItemId": null,
+        "offensiveStat": null,
+        "defensiveStat": null
       },
       {
         "name": "Frenzy Rush",
@@ -83,14 +107,26 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 2
+          "powerPoints": 2,
+          "delay": null,
+          "priority": null
         },
         "types": [
           "normal"
         ],
         "category": "physical",
         "power": 30,
-        "accuracy": 75
+        "accuracy": 75,
+        "variant": null,
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null,
+        "summon": null,
+        "defaultVariant": null,
+        "flingItemId": null,
+        "offensiveStat": null,
+        "defensiveStat": null
       },
       {
         "slug": "work-up",
@@ -99,18 +135,33 @@
         "traits": [],
         "range": {
           "target": "self",
-          "unit": "m"
+          "unit": "m",
+          "distance": 0
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 3
+          "powerPoints": 3,
+          "delay": null,
+          "priority": null
         },
         "category": "status",
         "types": [
           "normal"
         ],
         "description": "<p>Effect: The user raises their ATK and SPATK Stages by +1 for 5 activations.</p>",
-        "img": "icons/svg/explosion.svg"
+        "img": "icons/svg/explosion.svg",
+        "variant": null,
+        "power": null,
+        "accuracy": null,
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null,
+        "summon": null,
+        "defaultVariant": null,
+        "flingItemId": null,
+        "offensiveStat": null,
+        "defensiveStat": null
       },
       {
         "slug": "work-up-enraged",
@@ -119,61 +170,91 @@
         "traits": [],
         "range": {
           "target": "self",
-          "unit": "m"
+          "unit": "m",
+          "distance": 0
         },
         "cost": {
           "activation": "simple",
           "powerPoints": 3,
-          "trigger": "<p>The user is @Affliction[enraged].</p>"
+          "trigger": "<p>The user is @Affliction[enraged].</p>",
+          "delay": null,
+          "priority": null
         },
         "category": "status",
         "types": [
           "normal"
         ],
         "description": "<p>Trigger: The user is @Affliction[enraged].</p><p>Effect: The user gains +1 ATK and SPATK Stages for 5 activations.</p>",
-        "img": "icons/svg/explosion.svg"
+        "img": "icons/svg/explosion.svg",
+        "variant": null,
+        "power": null,
+        "accuracy": null,
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null,
+        "summon": null,
+        "defaultVariant": null,
+        "flingItemId": null,
+        "offensiveStat": null,
+        "defensiveStat": null
       }
     ],
     "slug": "berserker",
     "description": "<p>Gain the [Berserker] trait and gain access to the Berserker Tutor List. The user learns Rage, Work Up, and Frenzy Rush.</p>",
     "traits": [],
     "prerequisites": [
-      "Intimidate 25"
+      {
+        "gte": [
+          "{actor|skills.intimidate.mod}",
+          25
+        ]
+      }
     ],
     "cost": 1,
-    "design": {
-      "arena": "physical",
-      "approach": "power",
-      "archetype": "Berserker"
-    },
-    "node": {
-      "i": 171,
-      "j": 42,
-      "connected": [
-        "backpacker-1",
-        "berserk",
-        "frenzied-assault",
-        "hear-no-bell",
-        "i-get-knocked-down",
-        "seeing-red",
-        "plus-ultra"
-      ],
-      "config": {
-        "alpha": null,
-        "backgroundColor": null,
-        "borderColor": null,
-        "borderWidth": null,
-        "texture": "systems/ptr2e/img/icons/physical_icon.png",
-        "tint": null,
-        "scale": null
-      },
-      "hidden": false,
-      "type": "normal"
-    },
     "_migration": {
       "version": null,
       "previous": null
-    }
+    },
+    "nodes": [
+      {
+        "x": 56,
+        "y": 44,
+        "hidden": false,
+        "type": "entry",
+        "connected": [
+          "root-1",
+          "berserk",
+          "frenzied-assault",
+          "gut-punch",
+          "glutton-for-punishment",
+          "i-get-knocked-down",
+          "desperate-strike",
+          "guard-up",
+          "trained-rider",
+          "stat-iv-booster-1-5",
+          "stat-iv-booster-1-10"
+        ],
+        "config": {
+          "alpha": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "borderWidth": null,
+          "texture": "systems/ptr2e/img/icons/physical_icon.png",
+          "tint": null,
+          "scale": null
+        },
+        "tier": null
+      }
+    ],
+    "autoUnlock": [
+      "trait:berserker"
+    ],
+    "originSlug": null,
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": []
   },
   "effects": [
     {

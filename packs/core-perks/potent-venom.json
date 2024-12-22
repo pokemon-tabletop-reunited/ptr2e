@@ -1,16 +1,12 @@
 {
   "name": "Potent Venom",
   "type": "perk",
+  "folder": "8nTJNodaluw5G4Y6",
   "system": {
     "prerequisites": [
-      "[Poison]"
+      "trait:poison"
     ],
     "cost": 2,
-    "design": {
-      "arena": "physical",
-      "approach": "resilience",
-      "archetype": "[Poison]"
-    },
     "description": "<p>Your Poison-Type Attacks gain +20% chance to inflict @Affliction[poison] 5.</p>",
     "actions": [
       {
@@ -18,43 +14,58 @@
         "slug": "potent-venom",
         "description": "<p>Your attacks that have a chance to inflict @Affliction[poison] have that chance increase by +20%. Additionally, your Struggle and Weapon attacks gain a 10% chance to inflict @Affliction[poison] on hit.</p>",
         "cost": {
-          "activation": "free"
+          "activation": "free",
+          "powerPoints": 0,
+          "delay": null,
+          "priority": null
         },
         "type": "passive",
         "traits": [],
         "img": "icons/svg/explosion.svg",
         "range": {
           "target": "enemy",
-          "unit": "m"
-        }
+          "unit": "m",
+          "distance": 0
+        },
+        "variant": null,
+        "hidden": false
       }
     ],
     "slug": "potent-venom",
     "traits": [],
-    "node": {
-      "i": 54,
-      "j": 128,
-      "connected": [
-        "venomous",
-        "one-with-the-green",
-        "improved-overland-4"
-      ],
-      "config": {
-        "alpha": null,
-        "backgroundColor": null,
-        "borderColor": null,
-        "borderWidth": null,
-        "texture": "systems/ptr2e/img/svg/poison_icon.svg",
-        "tint": null,
-        "scale": null
-      },
-      "hidden": false,
-      "type": "normal"
-    },
     "_migration": {
       "version": null,
       "previous": null
-    }
+    },
+    "nodes": [
+      {
+        "connected": [
+          "venomous",
+          "acceptance",
+          "tainted-blades"
+        ],
+        "config": {
+          "alpha": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "borderWidth": null,
+          "texture": "systems/ptr2e/img/svg/poison_icon.svg",
+          "tint": null,
+          "scale": null
+        },
+        "hidden": false,
+        "type": "normal",
+        "x": 167,
+        "y": 85,
+        "tier": null
+      }
+    ],
+    "autoUnlock": [],
+    "originSlug": null,
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": []
   },
   "_id": "TaUuAKRcosusMkC9",
   "img": "systems/ptr2e/img/svg/poison_icon.svg",

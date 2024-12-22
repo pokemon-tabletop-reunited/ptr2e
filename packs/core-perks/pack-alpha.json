@@ -3,14 +3,24 @@
   "type": "perk",
   "system": {
     "prerequisites": [
-      "Leadership 25 or Intimidate 35"
+      {
+        "or": [
+          {
+            "gte": [
+              "{actor|skills.leadership.mod}",
+              25
+            ]
+          },
+          {
+            "gte": [
+              "{actor|skills.intimidate.mod}",
+              35
+            ]
+          }
+        ]
+      }
     ],
     "cost": 1,
-    "design": {
-      "arena": "social",
-      "approach": "power",
-      "archetype": "Pack Leader"
-    },
     "description": "<p>You gain the [Pack Leader] trait, and may designate consenting creatures with the [Pack Mon] trait as members of your pack.</p>",
     "actions": [
       {
@@ -18,48 +28,64 @@
         "slug": "pack-alpha",
         "description": "<p>You gain the [Pack Leader] trait, and may designate consenting creatures with the [Pack Mon] trait as members of your pack.</p>",
         "cost": {
-          "activation": "free"
+          "activation": "free",
+          "powerPoints": 0,
+          "delay": null,
+          "priority": null
         },
         "type": "passive",
         "traits": [],
         "img": "icons/svg/explosion.svg",
         "range": {
           "target": "enemy",
-          "unit": "m"
-        }
+          "unit": "m",
+          "distance": 0
+        },
+        "variant": null,
+        "hidden": false
       }
     ],
     "slug": "pack-alpha",
     "traits": [],
-    "node": {
-      "i": 160,
-      "j": 86,
-      "connected": [
-        "root-3",
-        "lead-from-behind",
-        "pile-on",
-        "dark-clarity",
-        "you-belong-to-me",
-        "strong-style"
-      ],
-      "config": {
-        "alpha": null,
-        "backgroundColor": null,
-        "borderColor": null,
-        "borderWidth": null,
-        "texture": "systems/ptr2e/img/perk-icons/Tactician.svg",
-        "tint": "#ffffff",
-        "scale": null
-      },
-      "hidden": false,
-      "type": "normal"
-    },
     "_migration": {
       "version": null,
       "previous": null
-    }
+    },
+    "nodes": [
+      {
+        "x": 154,
+        "y": 175,
+        "hidden": false,
+        "type": "entry",
+        "connected": [
+          "pack-mon",
+          "lead-from-behind",
+          "root-4",
+          "packmarked"
+        ],
+        "config": {
+          "alpha": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "borderWidth": null,
+          "texture": "systems/ptr2e/img/perk-icons/Tactician.svg",
+          "tint": "#ffffff",
+          "scale": null
+        },
+        "tier": null
+      }
+    ],
+    "autoUnlock": [
+      "trait:pack-leader"
+    ],
+    "originSlug": null,
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": []
   },
   "_id": "ee07hyZxFObQ5emn",
   "img": "systems/ptr2e/img/perk-icons/Tactician.svg",
-  "effects": []
+  "effects": [],
+  "folder": "UZGN1glVNXLieg48"
 }
