@@ -397,6 +397,7 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
       y: number;
       classes: string[],
       state?: PerkPurchaseState;
+      uuid?: string;
     }
 
     const webOptions = [
@@ -458,7 +459,8 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
               x,
               y,
               classes,
-              state: node.state
+              state: node.state,
+              uuid: node.tierInfo.perk.uuid
             });
           }
           else {
@@ -468,7 +470,8 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
               x,
               y,
               classes,
-              state: node.state
+              state: node.state,
+              uuid: perk.uuid
             });
           }
         }
