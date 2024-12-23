@@ -1105,6 +1105,8 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
     }
   }
 
+  private multiPerkCycle: Record<ItemUUID, number> = {};
+
   /** Activate click listeners on loaded actors and items */
   #activateResultListeners(liElements: HTMLLIElement[] = []): void {
     for (const liElement of liElements) {
@@ -1115,15 +1117,18 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
       if (nameAnchor) {
         nameAnchor.addEventListener("click", async () => {
           const document = await fromUuid<PerkPTR2e>(entryUuid);
-          const position = this._perkStore.nodeFromSlug(document?.slug ?? "")?.position;
-          if (!position) return;
-          const perkElement = this.element.querySelector(`div.perk[data-x="${position.x}"][data-y="${position.y}"]`)
-          perkElement?.scrollIntoView({ inline: 'center', block: 'center', behavior: 'smooth' });
-        });
-        nameAnchor.addEventListener("click", async () => {
-          const document = await fromUuid<PerkPTR2e>(entryUuid);
-          const node = this._perkStore.nodeFromSlug(document?.slug ?? "");
+          let node = this._perkStore.nodeFromSlug(document?.slug ?? "");
           if (!node) return;
+
+          if (node.perk.system.variant === "multi") {
+            const current = this.multiPerkCycle[entryUuid as ItemUUID] ?? -1;
+            const cycle = this.multiPerkCycle[entryUuid as ItemUUID] = (current + 1);
+
+            const nodeData = node.perk.system.nodes.at(cycle);
+            const newNode = this._perkStore.get(`${nodeData?.x}-${nodeData?.y}`);
+            if(newNode) node = newNode;
+          }
+
           const perkElement = this.element.querySelector(`div.perk[data-x="${node.position.x}"][data-y="${node.position.y}"]`)
           this.currentNode = node;
           perkElement?.scrollIntoView({ inline: 'center', block: 'center', behavior: 'smooth' });
@@ -1660,6 +1665,7 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
   }
 
   static async refresh(this: PerkWebApp) {
+    this.multiPerkCycle = {};
     this._lineCache.clear();
     await game.ptr.perks.reset();
     this.isSortableDragging = false;
