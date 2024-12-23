@@ -7195,11 +7195,12 @@ body {
   grid-template-areas: 
     "hudHeader web search"
     "hudActor web search"
+    "hudZoom web search"
     "hudPerk web search"
     "hudPerk web searchResults"
     "hudControls web searchResults";
   grid-template-columns: 250px minmax(0, 1fr) 250px;
-  grid-template-rows: 33px 100px 130px minmax(0, 1fr) min-content;
+  grid-template-rows: 33px 100px 30px 100px minmax(0, 1fr) min-content;
 
   --appv2-background-opaque: linear-gradient(to right, rgb(7, 7, 10), rgb(19, 17, 31));
 
@@ -7273,8 +7274,31 @@ body {
       }
     }
   }
+  [data-application-part="hudZoom"] {
+    grid-area: hudZoom;
+
+    footer {
+      flex: 0 0 100%;
+      display: flex;
+      flex-direction: row;
+      gap: 0.25rem;
+      justify-content: space-evenly;
+      align-items: center;
+      text-align: center;
+
+      label {
+        flex: 0 0 30%;
+      }
+
+      select {
+        flex: 0 0 50%;
+      }
+    }
+  }
   [data-application-part="hudPerk"] {
     grid-area: hudPerk;
+
+    border-top: 1px solid var(--border-theme-color);
 
     h2 {
       font-family: inherit;

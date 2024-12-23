@@ -5,7 +5,7 @@
     "prerequisites": [
       {
         "gte": [
-          "{actor|skills.riding.mod}",
+          "{actor|skills.ride.mod}",
           35
         ]
       }
@@ -18,21 +18,15 @@
         "slug": "knee-steering",
         "description": "<p>You may steer a mount without using one of your hands, freeing that hand up to use for other activities.</p>",
         "cost": {
-          "activation": "free",
-          "powerPoints": 0,
-          "delay": null,
-          "priority": null
+          "activation": "free"
         },
         "type": "passive",
         "traits": [],
         "img": "icons/svg/explosion.svg",
         "range": {
           "target": "enemy",
-          "unit": "m",
-          "distance": 0
-        },
-        "variant": null,
-        "hidden": false
+          "unit": "m"
+        }
       }
     ],
     "slug": "knee-steering",
@@ -65,9 +59,6 @@
       }
     ],
     "autoUnlock": [],
-    "originSlug": null,
-    "variant": null,
-    "mode": null,
     "global": true,
     "webs": []
   },

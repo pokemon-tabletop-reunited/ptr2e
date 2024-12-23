@@ -356,7 +356,7 @@ export class ActorSheetV2Expanded<
     const item = (await ItemPTR2e.implementation.fromDropData(data)) as ItemPTR2e;
     if (item.type === "effect") {
       const effects = item.effects.map(effect => effect.toObject());
-      if (effects.length === 0) return;
+      if (!effects.length) return;
       return ActiveEffectPTR2e.create(effects, { parent: this.actor });
     }
 

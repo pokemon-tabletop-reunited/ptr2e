@@ -305,6 +305,32 @@ export default class TooltipsPTR2e {
       });
     }
 
+    for (const button of this.tooltip.querySelectorAll("button")) {
+      if (button.classList.contains("consume-pp")) {
+        button.addEventListener("click", async (event) => {
+          event.preventDefault();
+          event.stopPropagation();
+
+          const { actionUuid } = button.dataset;
+          const action = await fromUuid(actionUuid) as unknown as ActionPTR2e;
+          if (!action) return void ui.notifications.error("Action not found.");
+
+          const ppCost = action.cost.powerPoints
+          if (!ppCost) return void ui.notifications.error("No PP cost found on action.");
+
+          const actor = action.actor;
+          if (!actor) return void ui.notifications.error("Unable to detect actor.");
+
+          if (ppCost > actor.system.powerPoints.value) return void ui.notifications.error(game.i18n.format("PTR2E.AttackWarning.NotEnoughPP", { cost: ppCost, current: actor.system.powerPoints.value }));
+
+          await actor.update({
+            "system.powerPoints.value": actor.system.powerPoints.value - ppCost,
+          })
+          ui.notifications.info(`You have ${actor.system.powerPoints.value} power points remaining. (Used ${ppCost})`);
+        });
+      }
+    }
+
     return 2000;
   }
 
@@ -400,8 +426,8 @@ export default class TooltipsPTR2e {
           event.preventDefault();
           event.stopPropagation();
 
-          const { attackUuid } = button.dataset;
-          const action = await fromUuid(attackUuid) as unknown as ActionPTR2e;
+          const { actionUuid } = button.dataset;
+          const action = await fromUuid(actionUuid) as unknown as ActionPTR2e;
           if (!action) return void ui.notifications.error("Action not found.");
 
           const ppCost = action.cost.powerPoints
