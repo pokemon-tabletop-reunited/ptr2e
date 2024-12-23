@@ -5,7 +5,7 @@
     "prerequisites": [
       {
         "gte": [
-          "{actor|skills.riding.mod}",
+          "{actor|skills.ride.mod}",
           25
         ]
       }
@@ -18,21 +18,15 @@
         "slug": "urge-mount",
         "description": "<p>When you use your Mount to Rush, you may roll Riding instead of the usual Rushing skill (whether Climbing, Running or Swimming skill.)</p>",
         "cost": {
-          "activation": "free",
-          "powerPoints": 0,
-          "delay": null,
-          "priority": null
+          "activation": "free"
         },
         "type": "passive",
         "traits": [],
         "img": "icons/svg/explosion.svg",
         "range": {
           "target": "enemy",
-          "unit": "m",
-          "distance": 0
-        },
-        "variant": null,
-        "hidden": false
+          "unit": "m"
+        }
       }
     ],
     "slug": "urge-mount",
@@ -64,9 +58,6 @@
       }
     ],
     "autoUnlock": [],
-    "originSlug": null,
-    "variant": null,
-    "mode": null,
     "global": true,
     "webs": []
   },
