@@ -306,6 +306,11 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
       template: "systems/ptr2e/templates/perk-tree/hud/actor.hbs",
       classes: ["hud"]
     },
+    hudZoom: {
+      id: "hudZoom",
+      template: "systems/ptr2e/templates/perk-tree/hud/zoom.hbs",
+      classes: ["hud"]
+    },
     hudPerk: {
       id: "hudPerk",
       template: "systems/ptr2e/templates/perk-tree/hud/perk.hbs",
@@ -524,12 +529,16 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
       webOptions,
       web: this.web,
       filterData: this.perkTab.filterData,
-      noZoom: navigator.userAgent.includes("FoundryVirtualTabletop"),
+      noZoom: navigator.userAgent.includes("FoundryVirtualTabletop")
     }
   }
 
   override _preparePartContext(partId: string, context: ApplicationRenderContext): Promise<ApplicationRenderContext> {
-
+    if(partId === "hudZoom") {
+      context.zoomLevels = this.zoomLevels;
+      context.zoomLevel = this._zoomAmount;
+    }
+    
     if (partId === "hudPerk" && 'perk' in context && context.perk && typeof context.perk === "object" && 'document' in context.perk && context.perk.document) {
       const perk = context.perk.document as PerkPTR2e;
       (context.perk as Record<string, unknown>).prerequisites = perk.system.getPredicateStrings();
@@ -558,6 +567,14 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
         }
         const species = await fromUuid<SpeciesPTR2e>(value);
         this.setWeb(species ?? null);
+      });
+    }
+
+    if (partId === "hudZoom") {
+      const zoomValueSelect = htmlElement.querySelector<HTMLSelectElement>("select[name='zoom-value']");
+      zoomValueSelect?.addEventListener("change", (event) => {
+        event.preventDefault();
+        this.zoom(Number(zoomValueSelect.value) as this['zoomLevels'][number], false);
       });
     }
 
@@ -1354,7 +1371,7 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
     });
   }
 
-  zoom(zoom = this._zoomAmount) {
+  zoom(zoom = this._zoomAmount, reRenderSelect = true) {
     const grid = this.element.querySelector<HTMLElement>(".perk-grid");
     const zoomElement = this.element.querySelector<HTMLElement>(`[data-application-part="web"] .scroll`);
     if (!grid || !zoomElement) return;
@@ -1386,6 +1403,8 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
 
     if (!isElectron) zoomElement.scrollTo(newCenter);
     else zoomElement.scrollTo({ top: (zoomElement.scrollWidth / 2) - (zoomElement.clientWidth / 2), left: (zoomElement.scrollHeight / 2) - (zoomElement.clientHeight / 2) });
+
+    if(reRenderSelect) this.render({ parts: ["hudZoom"] });
   }
 
   async setWeb(species: SpeciesPTR2e | null) {
