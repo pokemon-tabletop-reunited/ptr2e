@@ -366,7 +366,7 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
   currentNode: PerkNode | null = null;
   connectionNode: PerkNode | null = null;
   editMode = false;
-  zoomLevels = [0.2, 0.4, 0.65, 1, 1.3, 1.65] as const;
+  zoomLevels = [0.05, 0.1, 0.2, 0.4, 0.65, 1, 1.3, 1.65] as const;
 
   _onScroll: () => void | null;
   _lineCache = new Map<string, SVGLineElement>();
