@@ -86,11 +86,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734783154861,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -134,8 +134,8 @@ const data = [
                   },
                   "hidden": false,
                   "type": "normal",
-                  "x": 76,
-                  "y": 102,
+                  "x": 89,
+                  "y": 103,
                   "tier": null
               }
           ],
@@ -210,9 +210,9 @@ const data = [
       "_stats": {
           "coreVersion": "12.331",
           "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemVersion": "0.10.0-alpha.4.2.2",
           "createdTime": null,
-          "modifiedTime": 1734790238914,
+          "modifiedTime": 1734963640460,
           "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
           "compendiumSource": null,
           "duplicateSource": null
@@ -310,11 +310,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734794564487,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -408,11 +408,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734792054444,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -502,11 +502,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734795559982,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -669,11 +669,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734793951503,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -722,7 +722,8 @@ const data = [
                       "unbending-steel",
                       "one-with-the-green",
                       "stat-iv-booster-1-3",
-                      "stat-iv-booster-1-10"
+                      "stat-iv-booster-1-10",
+                      "lethal-restraint"
                   ],
                   "config": {
                       "alpha": null,
@@ -752,9 +753,9 @@ const data = [
       "_stats": {
           "coreVersion": "12.331",
           "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemVersion": "0.10.0-alpha.4.2.2",
           "createdTime": null,
-          "modifiedTime": 1734794617722,
+          "modifiedTime": 1734963575410,
           "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
           "compendiumSource": null,
           "duplicateSource": null
@@ -854,11 +855,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734794756320,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -953,11 +954,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734785894951,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -1030,11 +1031,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734794160484,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -1195,11 +1196,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734791121131,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -1271,11 +1272,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734785262050,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -1349,7 +1350,9 @@ const data = [
                   "tier": null
               }
           ],
-          "autoUnlock": [],
+          "autoUnlock": [
+              "trait:teleporter"
+          ],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -1367,11 +1370,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734792483828,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -1456,11 +1459,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734792339124,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -1553,11 +1556,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734786297037,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -1658,11 +1661,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734786035192,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -1767,11 +1770,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734792567306,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -1866,11 +1869,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734785255268,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -1958,11 +1961,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734786359469,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -2055,11 +2058,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734783158135,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -2156,11 +2159,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734790434200,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -2227,11 +2230,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734795739025,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -2319,11 +2322,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734795448749,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -2391,11 +2394,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734795149898,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -2429,7 +2432,8 @@ const data = [
                       "brittle-ice",
                       "chill-out",
                       "improved-overland-1-5",
-                      "biting-cold"
+                      "biting-cold",
+                      "thermal-dynamics"
                   ],
                   "config": {
                       "alpha": null,
@@ -2463,9 +2467,9 @@ const data = [
       "_stats": {
           "coreVersion": "12.331",
           "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemVersion": "0.10.0-alpha.4.2.2",
           "createdTime": null,
-          "modifiedTime": 1734792920593,
+          "modifiedTime": 1734957229277,
           "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
           "compendiumSource": null,
           "duplicateSource": null
@@ -2543,7 +2547,9 @@ const data = [
                   "tier": null
               }
           ],
-          "autoUnlock": [],
+          "autoUnlock": [
+              "trait:telepath"
+          ],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -2622,11 +2628,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734795057040,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -2822,7 +2828,8 @@ const data = [
                       "improved-overland-1-5",
                       "biting-cold",
                       "brittle-ice",
-                      "stat-iv-booster-1-12"
+                      "stat-iv-booster-1-12",
+                      "thermal-dynamics"
                   ],
                   "config": {
                       "alpha": null,
@@ -2840,7 +2847,9 @@ const data = [
                   "tier": null
               }
           ],
-          "autoUnlock": [],
+          "autoUnlock": [
+              "trait:chiller"
+          ],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -2911,9 +2920,9 @@ const data = [
       "_stats": {
           "coreVersion": "12.331",
           "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemVersion": "0.10.0-alpha.4.2.2",
           "createdTime": null,
-          "modifiedTime": 1734795513655,
+          "modifiedTime": 1734957231534,
           "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
           "compendiumSource": null,
           "duplicateSource": null
@@ -3005,11 +3014,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734783158135,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -3096,11 +3105,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734791403614,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -3191,11 +3200,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734786993083,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -3282,11 +3291,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734784294905,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -3372,11 +3381,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734793952491,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -3513,11 +3522,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734794177733,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -3607,11 +3616,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734795677408,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -3731,11 +3740,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734786719293,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -3779,8 +3788,8 @@ const data = [
                   },
                   "hidden": false,
                   "type": "normal",
-                  "x": 75,
-                  "y": 101,
+                  "x": 88,
+                  "y": 104,
                   "tier": null
               }
           ],
@@ -3800,9 +3809,9 @@ const data = [
       "_stats": {
           "coreVersion": "12.331",
           "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemVersion": "0.10.0-alpha.4.2.2",
           "createdTime": null,
-          "modifiedTime": 1734790238914,
+          "modifiedTime": 1734963642192,
           "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
           "compendiumSource": null,
           "duplicateSource": null
@@ -3897,11 +3906,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734790852091,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -3997,11 +4006,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734790146138,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -4089,11 +4098,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734786035192,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -4216,11 +4225,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734795508460,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -4307,11 +4316,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734793939254,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -4397,11 +4406,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734791535410,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -4497,11 +4506,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734793258790,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -4665,11 +4674,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734793859682,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -4761,11 +4770,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734785864646,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -4862,11 +4871,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734785255268,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -4930,7 +4939,8 @@ const data = [
                       "harsh-motivator",
                       "root-6",
                       "curveball-technique",
-                      "improved-burrow-1-2"
+                      "improved-burrow-1-2",
+                      "lethal-restraint"
                   ],
                   "config": {
                       "alpha": null,
@@ -4963,9 +4973,9 @@ const data = [
       "_stats": {
           "coreVersion": "12.331",
           "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemVersion": "0.10.0-alpha.4.2.2",
           "createdTime": null,
-          "modifiedTime": 1734794648502,
+          "modifiedTime": 1734963581439,
           "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
           "compendiumSource": null,
           "duplicateSource": null
@@ -5058,11 +5068,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734792491509,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -5213,11 +5223,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734794716873,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -5478,11 +5488,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734795519175,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -5572,11 +5582,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734794664832,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -5670,11 +5680,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734790268123,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -5790,11 +5800,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734786155713,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -5886,11 +5896,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734783217962,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -5993,8 +6003,8 @@ const data = [
           "systemId": null,
           "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734784215719,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -6082,11 +6092,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734793870413,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -6209,11 +6219,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734795484048,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -6335,11 +6345,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734795484924,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -6492,11 +6502,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734794745580,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -6615,11 +6625,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734790519631,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -6686,11 +6696,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734795743673,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -6771,11 +6781,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734786108918,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -6867,11 +6877,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734786988955,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -6973,11 +6983,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734794558945,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -7167,11 +7177,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734792066790,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -7314,11 +7324,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734786035192,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -7511,11 +7521,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734783217962,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -7677,7 +7687,8 @@ const data = [
                       "nurturing-shoots",
                       "curveball-technique",
                       "improved-burrow-1-2",
-                      "forensic-accountant"
+                      "forensic-accountant",
+                      "lethal-restraint"
                   ],
                   "config": {
                       "alpha": null,
@@ -7702,7 +7713,8 @@ const data = [
                       "cryogenics",
                       "evasive-style",
                       "gambit-style",
-                      "assault-armor-style"
+                      "assault-armor-style",
+                      "thermal-dynamics"
                   ],
                   "config": {
                       "alpha": null,
@@ -8045,9 +8057,9 @@ const data = [
       "_stats": {
           "coreVersion": "12.331",
           "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemVersion": "0.10.0-alpha.4.2.2",
           "createdTime": null,
-          "modifiedTime": 1734798864349,
+          "modifiedTime": 1734963584137,
           "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
           "compendiumSource": null,
           "duplicateSource": null
@@ -8110,11 +8122,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734790346043,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -8314,11 +8326,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734794174463,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -8441,11 +8453,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734795485463,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -8568,11 +8580,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734792555596,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -8744,11 +8756,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734794042629,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -8824,7 +8836,63 @@ const data = [
       },
       "_id": "IMn0UktiyUWZXQty",
       "img": "systems/ptr2e/img/perk-icons/Combat.svg",
-      "effects": [],
+      "effects": [
+          {
+              "name": "Frenzied Assault",
+              "type": "passive",
+              "_id": "XwbxmvahwQuGuMzh",
+              "img": "systems/ptr2e/img/icons/effect_icon.webp",
+              "system": {
+                  "changes": [
+                      {
+                          "type": "roll-effect",
+                          "key": "attack",
+                          "value": "Compendium.ptr2e.core-effects.Item.XeiSuS3APUcN0MLM",
+                          "predicate": [
+                              "effect:affliction:enraged"
+                          ],
+                          "chance": 30,
+                          "affects": "self",
+                          "mode": 2,
+                          "priority": null,
+                          "ignored": false
+                      }
+                  ],
+                  "slug": null,
+                  "traits": [],
+                  "removeAfterCombat": true,
+                  "removeOnRecall": false,
+                  "stacks": 0
+              },
+              "disabled": false,
+              "duration": {
+                  "startTime": null,
+                  "seconds": null,
+                  "combat": null,
+                  "rounds": null,
+                  "turns": null,
+                  "startRound": null,
+                  "startTurn": null
+              },
+              "description": "",
+              "origin": null,
+              "tint": "#ffffff",
+              "transfer": true,
+              "statuses": [],
+              "sort": 0,
+              "flags": {},
+              "_stats": {
+                  "compendiumSource": null,
+                  "duplicateSource": null,
+                  "coreVersion": "12.331",
+                  "systemId": "ptr2e",
+                  "systemVersion": "0.10.0-alpha.4.1.0",
+                  "createdTime": 1734211188522,
+                  "modifiedTime": 1734212542084,
+                  "lastModifiedBy": "Kc3DOunCh3ClAeHS"
+              }
+          }
+      ],
       "folder": "zrVtKATNxzLNxTUa",
       "flags": {
           "core": {
@@ -8833,11 +8901,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734785823510,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -9073,11 +9141,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734786993083,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -9167,11 +9235,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734792522671,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -9255,11 +9323,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734794058071,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -9471,11 +9539,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734795740915,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -9633,11 +9701,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734791479640,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -9724,11 +9792,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734785285237,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -9795,11 +9863,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734795724015,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -9886,11 +9954,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734785829814,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -9954,11 +10022,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734786103971,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -10024,11 +10092,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734791529695,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -10115,11 +10183,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734793190022,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -10216,11 +10284,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734795537505,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -10313,11 +10381,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734792064014,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -10397,7 +10465,9 @@ const data = [
                   "tier": null
               }
           ],
-          "autoUnlock": [],
+          "autoUnlock": [
+              "trait:hover"
+          ],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -10414,11 +10484,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734789814259,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -10537,11 +10607,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734791748988,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -10633,11 +10703,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734786298084,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -10728,11 +10798,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734792467696,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -10852,11 +10922,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734791603301,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -10981,11 +11051,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734790526388,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -11198,11 +11268,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734790000808,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -11291,11 +11361,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734785860617,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -11490,11 +11560,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734784277250,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -11587,11 +11657,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734786107741,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -11680,11 +11750,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734786093610,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -11775,11 +11845,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734785886860,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -11871,11 +11941,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734794726230,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -11935,7 +12005,11 @@ const data = [
           "nodes": [
               {
                   "connected": [
-                      "fast-pitch"
+                      "guard-up",
+                      "beastmaster",
+                      "improved-overland-1-4",
+                      "forensic-accountant",
+                      "curveball-technique"
                   ],
                   "config": {
                       "alpha": null,
@@ -11948,8 +12022,8 @@ const data = [
                   },
                   "hidden": false,
                   "type": "normal",
-                  "x": 67,
-                  "y": 117,
+                  "x": 56,
+                  "y": 111,
                   "tier": null
               }
           ],
@@ -11972,9 +12046,9 @@ const data = [
       "_stats": {
           "coreVersion": "12.331",
           "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemVersion": "0.10.0-alpha.4.2.2",
           "createdTime": null,
-          "modifiedTime": 1734791662028,
+          "modifiedTime": 1734963665597,
           "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
           "compendiumSource": null,
           "duplicateSource": null
@@ -12040,11 +12114,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734793172923,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -12135,11 +12209,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734786375968,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -12314,7 +12388,9 @@ const data = [
                   "tier": null
               }
           ],
-          "autoUnlock": [],
+          "autoUnlock": [
+              "trait:healer"
+          ],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -12381,11 +12457,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734794601259,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -12473,11 +12549,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734794316410,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -12564,11 +12640,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734786035192,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -12680,11 +12756,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734793263044,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -12739,7 +12815,6 @@ const data = [
               {
                   "connected": [
                       "capture-ace-1",
-                      "lethal-restraint",
                       "curveball-technique"
                   ],
                   "config": {
@@ -12777,9 +12852,9 @@ const data = [
       "_stats": {
           "coreVersion": "12.331",
           "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemVersion": "0.10.0-alpha.4.2.2",
           "createdTime": null,
-          "modifiedTime": 1734791661157,
+          "modifiedTime": 1734963512137,
           "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
           "compendiumSource": null,
           "duplicateSource": null
@@ -12854,11 +12929,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734793825988,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -12928,11 +13003,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734786070032,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -13020,11 +13095,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734793866142,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -13113,11 +13188,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734791673738,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -13327,11 +13402,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734795472339,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -13470,9 +13545,9 @@ const data = [
       "_stats": {
           "coreVersion": "12.331",
           "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemVersion": "0.005",
           "createdTime": null,
-          "modifiedTime": 1734795557419,
+          "modifiedTime": 1714922372663,
           "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
           "compendiumSource": null,
           "duplicateSource": null
@@ -13561,11 +13636,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734793417120,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -13659,11 +13734,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734795557419,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -13749,11 +13824,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734794995403,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -13848,11 +13923,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734793196275,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -13951,11 +14026,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734790522698,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -14247,11 +14322,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734792485704,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -14324,7 +14399,9 @@ const data = [
                   "tier": null
               }
           ],
-          "autoUnlock": [],
+          "autoUnlock": [
+              "trait:wallclimber"
+          ],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -14394,11 +14471,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734793244149,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -14565,11 +14642,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734790435336,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -14714,11 +14791,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734785285237,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -14860,11 +14937,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734790988633,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -14934,11 +15011,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734786094362,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -14982,8 +15059,8 @@ const data = [
                   },
                   "hidden": false,
                   "type": "normal",
-                  "x": 74,
-                  "y": 100,
+                  "x": 87,
+                  "y": 105,
                   "tier": null
               }
           ],
@@ -15003,9 +15080,9 @@ const data = [
       "_stats": {
           "coreVersion": "12.331",
           "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemVersion": "0.10.0-alpha.4.2.2",
           "createdTime": null,
-          "modifiedTime": 1734790238914,
+          "modifiedTime": 1734963649046,
           "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
           "compendiumSource": null,
           "duplicateSource": null
@@ -15070,11 +15147,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734786301526,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -15220,11 +15297,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734783158135,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -15316,11 +15393,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734786993083,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -15397,11 +15474,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734794639011,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -15494,11 +15571,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734791383542,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -15596,11 +15673,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734783158135,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -15691,11 +15768,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734783193094,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -15759,11 +15836,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734785716860,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -15850,11 +15927,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734794770162,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -16051,11 +16128,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734786407328,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -16143,11 +16220,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734793393953,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -16210,11 +16287,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734785897111,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -16338,11 +16415,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734793861812,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -16428,11 +16505,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734792498073,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -16504,11 +16581,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734793342073,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -16577,11 +16654,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734794606658,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -16648,11 +16725,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734795706377,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -16772,11 +16849,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734786649531,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -16863,11 +16940,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734786691197,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -16964,9 +17041,9 @@ const data = [
                       "fast-pitch",
                       "guard-up",
                       "beastmaster",
-                      "forensic-accountant",
                       "climatologist",
-                      "improved-overland-1-4"
+                      "improved-overland-1-4",
+                      "lethal-restraint"
                   ],
                   "config": {
                       "alpha": null,
@@ -16999,9 +17076,9 @@ const data = [
       "_stats": {
           "coreVersion": "12.331",
           "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemVersion": "0.10.0-alpha.4.2.2",
           "createdTime": null,
-          "modifiedTime": 1734794683575,
+          "modifiedTime": 1734963615216,
           "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
           "compendiumSource": null,
           "duplicateSource": null
@@ -17034,7 +17111,8 @@ const data = [
                       "brittle-ice",
                       "cryogenics",
                       "chill-out",
-                      "stat-iv-booster-1"
+                      "stat-iv-booster-1",
+                      "thermal-dynamics"
                   ],
                   "config": {
                       "alpha": null,
@@ -17124,9 +17202,9 @@ const data = [
       "_stats": {
           "coreVersion": "12.331",
           "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemVersion": "0.10.0-alpha.4.2.2",
           "createdTime": null,
-          "modifiedTime": 1734792920593,
+          "modifiedTime": 1734957230110,
           "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
           "compendiumSource": null,
           "duplicateSource": null
@@ -17280,11 +17358,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734793953115,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -17564,11 +17642,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734792568993,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -17635,11 +17713,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734785888345,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -17815,11 +17893,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734791697986,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -17919,11 +17997,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734786035192,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -18012,11 +18090,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734793808117,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -18174,11 +18252,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734785828856,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -18329,11 +18407,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734785821172,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -18424,11 +18502,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734786035192,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -18573,11 +18651,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734791056331,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -18665,11 +18743,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734794789280,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -18844,11 +18922,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734784278473,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -18944,11 +19022,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734785255268,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -19043,11 +19121,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734791132941,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -19117,11 +19195,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734786075974,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -19211,11 +19289,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734791128921,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -19309,11 +19387,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734785836153,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -19410,11 +19488,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734791394500,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -19533,11 +19611,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734795504313,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -19656,11 +19734,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734786427548,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -19759,11 +19837,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734793192387,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -19884,11 +19962,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734790520687,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -19959,7 +20037,9 @@ const data = [
                   "tier": null
               }
           ],
-          "autoUnlock": [],
+          "autoUnlock": [
+              "trait:plant-grower"
+          ],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -20029,11 +20109,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734791708200,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -20104,11 +20184,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734791735560,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -20237,11 +20317,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734793953115,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -20476,11 +20556,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734792469603,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -20645,11 +20725,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734795163703,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -20725,7 +20805,9 @@ const data = [
                   "tier": null
               }
           ],
-          "autoUnlock": [],
+          "autoUnlock": [
+              "trait:telekinetic-2"
+          ],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -20795,11 +20877,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734792946412,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -20890,11 +20972,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734786299045,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -20981,11 +21063,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734792039263,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -21079,11 +21161,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734791399123,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -21154,11 +21236,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734792051229,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -21244,11 +21326,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734793879309,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -21369,11 +21451,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734790863131,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -21459,7 +21541,9 @@ const data = [
                   "tier": null
               }
           ],
-          "autoUnlock": [],
+          "autoUnlock": [
+              "trait:pack-leader"
+          ],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -21477,11 +21561,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734794779889,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -21615,11 +21699,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734786081184,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -21706,11 +21790,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734793396072,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -21856,11 +21940,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734785844186,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -21907,8 +21991,8 @@ const data = [
                   },
                   "hidden": false,
                   "type": "normal",
-                  "x": 77,
-                  "y": 99,
+                  "x": 86,
+                  "y": 102,
                   "tier": null
               }
           ],
@@ -21928,9 +22012,9 @@ const data = [
       "_stats": {
           "coreVersion": "12.331",
           "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemVersion": "0.10.0-alpha.4.2.2",
           "createdTime": null,
-          "modifiedTime": 1734790238914,
+          "modifiedTime": 1734963632878,
           "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
           "compendiumSource": null,
           "duplicateSource": null
@@ -22189,7 +22273,9 @@ const data = [
                   "tier": null
               }
           ],
-          "autoUnlock": [],
+          "autoUnlock": [
+              "trait:berserker"
+          ],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -22256,11 +22342,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734798859870,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -22330,7 +22416,9 @@ const data = [
                   "tier": null
               }
           ],
-          "autoUnlock": [],
+          "autoUnlock": [
+              "trait:shadow-meld"
+          ],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -22400,11 +22488,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734791481716,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -22474,7 +22562,9 @@ const data = [
                   "tier": null
               }
           ],
-          "autoUnlock": [],
+          "autoUnlock": [
+              "trait:gilled"
+          ],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -22544,11 +22634,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734790858456,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -22696,11 +22786,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734794705726,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -22785,11 +22875,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734786035192,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -22880,11 +22970,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734790436479,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -22958,7 +23048,9 @@ const data = [
           ],
           "variant": "multi",
           "mode": "shared",
-          "autoUnlock": [],
+          "autoUnlock": [
+              "trait:pack-mon"
+          ],
           "originSlug": null,
           "global": true,
           "webs": []
@@ -22974,11 +23066,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734795713030,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -23011,7 +23103,8 @@ const data = [
                   "connected": [
                       "cryogenics",
                       "biting-cold",
-                      "chill-out"
+                      "chill-out",
+                      "thermal-dynamics"
                   ],
                   "config": {
                       "alpha": null,
@@ -23100,9 +23193,9 @@ const data = [
       "_stats": {
           "coreVersion": "12.331",
           "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemVersion": "0.10.0-alpha.4.2.2",
           "createdTime": null,
-          "modifiedTime": 1734792881543,
+          "modifiedTime": 1734957230847,
           "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
           "compendiumSource": null,
           "duplicateSource": null
@@ -23224,11 +23317,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734793416062,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -23424,11 +23517,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734795507501,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -23530,11 +23623,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734791371750,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -23679,11 +23772,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734785847203,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -23753,7 +23846,9 @@ const data = [
                   "tier": null
               }
           ],
-          "autoUnlock": [],
+          "autoUnlock": [
+              "trait:venomous"
+          ],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -23823,11 +23918,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734790988177,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -23932,11 +24027,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734790139424,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -24032,11 +24127,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734794654539,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -24158,11 +24253,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734795507045,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -24252,11 +24347,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734785255268,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -24403,11 +24498,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734794994257,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -24508,11 +24603,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734790581467,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -24599,11 +24694,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734785858021,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -24691,11 +24786,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734790582455,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -24780,11 +24875,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734794059676,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -24869,11 +24964,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734795461577,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -24939,11 +25034,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734795699759,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -25073,11 +25168,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734793916969,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -25168,11 +25263,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734791419467,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -25322,11 +25417,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734791670072,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -25415,11 +25510,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734786096701,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -25507,11 +25602,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734794032862,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -25603,11 +25698,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734786994307,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -25743,9 +25838,9 @@ const data = [
       "_stats": {
           "coreVersion": "12.331",
           "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemVersion": "0.10.0-alpha.4.2.2",
           "createdTime": null,
-          "modifiedTime": 1734794674313,
+          "modifiedTime": 1734963602529,
           "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
           "compendiumSource": null,
           "duplicateSource": null
@@ -25824,7 +25919,9 @@ const data = [
                   "tier": null
               }
           ],
-          "autoUnlock": [],
+          "autoUnlock": [
+              "trait:tremorsense-20"
+          ],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -25894,11 +25991,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734791124250,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -25969,11 +26066,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734786087020,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -26065,11 +26162,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734786987849,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -26220,9 +26317,9 @@ const data = [
               {
                   "connected": [
                       "root-6",
-                      "curveball-technique",
                       "breeder",
-                      "improved-overland-1-4"
+                      "improved-overland-1-4",
+                      "lethal-restraint"
                   ],
                   "config": {
                       "alpha": null,
@@ -26259,9 +26356,9 @@ const data = [
       "_stats": {
           "coreVersion": "12.331",
           "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemVersion": "0.10.0-alpha.4.2.2",
           "createdTime": null,
-          "modifiedTime": 1734791716269,
+          "modifiedTime": 1734963615216,
           "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
           "compendiumSource": null,
           "duplicateSource": null
@@ -26353,11 +26450,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734786987849,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -26484,11 +26581,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734792792982,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -26588,11 +26685,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734786035192,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -26713,11 +26810,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734791128921,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -27050,11 +27147,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734793225689,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -27144,11 +27241,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734785255268,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -27269,11 +27366,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734791484904,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -27378,11 +27475,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734785255268,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -27473,11 +27570,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734792339124,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -27570,11 +27667,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734786987849,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -27652,7 +27749,9 @@ const data = [
                   "tier": null
               }
           ],
-          "autoUnlock": [],
+          "autoUnlock": [
+              "trait:blindsense-10"
+          ],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -27721,11 +27820,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734783191060,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -27820,11 +27919,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734791388321,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -27886,11 +27985,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734790345204,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -27986,11 +28085,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734792339124,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -28087,11 +28186,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734791378251,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -28232,11 +28331,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734794032862,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -28340,11 +28439,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734795478294,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -28418,11 +28517,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734794227555,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -28519,11 +28618,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734789987630,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -28758,11 +28857,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734790850343,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -28864,11 +28963,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734798863414,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -28995,11 +29094,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734792795338,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -29197,11 +29296,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734792794085,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -29264,11 +29363,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734785716860,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -29340,7 +29439,9 @@ const data = [
                   "tier": null
               }
           ],
-          "autoUnlock": [],
+          "autoUnlock": [
+              "trait:threaded"
+          ],
           "originSlug": null,
           "variant": null,
           "mode": null,
@@ -29358,11 +29459,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734793243258,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -29493,11 +29594,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734791659669,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -29616,11 +29717,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734795468992,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -29714,11 +29815,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734790432877,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -29804,11 +29905,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734794764120,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -30021,11 +30122,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734792339124,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -30167,11 +30268,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734798044057,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -30407,11 +30508,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734793141271,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -30508,11 +30609,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734795150639,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -30643,11 +30744,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734793917981,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -30709,11 +30810,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734785716860,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -30841,11 +30942,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734794751104,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -30953,29 +31054,7 @@ const data = [
           "prerequisites": [],
           "cost": 1,
           "description": "<p>Increase one <Stat>'s IV by 5.</p>",
-          "actions": [
-              {
-                  "name": "<Stat> IV Booster 1",
-                  "slug": "stat-iv-booster-1",
-                  "description": "<p>Increase one <Stat>'s IV by 5.</p>",
-                  "cost": {
-                      "activation": "free",
-                      "powerPoints": 0,
-                      "delay": null,
-                      "priority": null
-                  },
-                  "type": "passive",
-                  "traits": [],
-                  "img": "icons/svg/explosion.svg",
-                  "range": {
-                      "target": "enemy",
-                      "unit": "m",
-                      "distance": 0
-                  },
-                  "variant": null,
-                  "hidden": false
-              }
-          ],
+          "actions": [],
           "slug": "stat-iv-booster-1",
           "traits": [],
           "_migration": {
@@ -31292,7 +31371,8 @@ const data = [
                       "pokemaniac",
                       "improved-telekinesis-1-2",
                       "improved-flight-1-5",
-                      "improved-overland-1-15"
+                      "improved-overland-1-15",
+                      "thermal-dynamics"
                   ],
                   "config": {
                       "alpha": null,
@@ -31342,7 +31422,98 @@ const data = [
       },
       "_id": "wqHZnaqbcQqOeLO7",
       "img": "systems/ptr2e/img/perk-icons/Trainer.svg",
-      "effects": [],
+      "effects": [
+          {
+              "name": "IV Boost",
+              "type": "passive",
+              "_id": "Tl4uDbytkAel5CYi",
+              "img": "systems/ptr2e/img/icons/effect_icon.webp",
+              "system": {
+                  "changes": [
+                      {
+                          "type": "choice-set",
+                          "key": "",
+                          "value": 0,
+                          "predicate": [],
+                          "mode": 2,
+                          "priority": null,
+                          "ignored": false,
+                          "choices": [
+                              {
+                                  "value": "system.attributes.hp.ivs",
+                                  "label": "HP"
+                              },
+                              {
+                                  "value": "system.attributes.atk.ivs",
+                                  "label": "Attack"
+                              },
+                              {
+                                  "value": "system.attributes.def.ivs",
+                                  "label": "Defense"
+                              },
+                              {
+                                  "value": "system.attributes.spa.ivs",
+                                  "label": "Special Attack"
+                              },
+                              {
+                                  "value": "system.attributes.spd.ivs",
+                                  "label": "Special Defense"
+                              },
+                              {
+                                  "value": "system.attributes.spe.ivs",
+                                  "label": "Speed"
+                              }
+                          ],
+                          "prompt": "Pick a Stat",
+                          "adjustName": true,
+                          "rollOption": "ivBoosterChoice",
+                          "flag": "ivBoosterChoice"
+                      },
+                      {
+                          "type": "basic",
+                          "key": "{effect|flags.ptr2e.choiceSelections.ivBoosterChoice}",
+                          "value": 5,
+                          "predicate": [],
+                          "mode": 2,
+                          "priority": null,
+                          "ignored": false
+                      }
+                  ],
+                  "slug": null,
+                  "traits": [],
+                  "removeAfterCombat": false,
+                  "removeOnRecall": false,
+                  "stacks": 0
+              },
+              "disabled": false,
+              "duration": {
+                  "startTime": null,
+                  "seconds": null,
+                  "combat": null,
+                  "rounds": null,
+                  "turns": null,
+                  "startRound": null,
+                  "startTurn": null
+              },
+              "description": "<p><span style=\"font-family:Signika, sans-serif\">Increase one 's IV by 5.</span></p>",
+              "origin": null,
+              "tint": "#ffffff",
+              "transfer": true,
+              "statuses": [],
+              "_stats": {
+                  "coreVersion": "12.331",
+                  "systemId": null,
+                  "systemVersion": null,
+                  "createdTime": null,
+                  "modifiedTime": null,
+                  "lastModifiedBy": null,
+                  "compendiumSource": null,
+                  "duplicateSource": null
+              },
+              "sort": 0,
+              "flags": {}
+          }
+      ],
       "flags": {
           "core": {
               "sourceId": "Compendium.ptr2e.core-perks.Item.wqHZnaqbcQqOeLO7"
@@ -31351,9 +31522,9 @@ const data = [
       "_stats": {
           "coreVersion": "12.331",
           "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemVersion": "0.10.0-alpha.4.2.2",
           "createdTime": null,
-          "modifiedTime": 1734798864349,
+          "modifiedTime": 1734957249302,
           "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
           "compendiumSource": null,
           "duplicateSource": null
@@ -31423,11 +31594,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734786077505,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -31515,11 +31686,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734795080079,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -31541,7 +31712,7 @@ const data = [
                   "slug": "logicians-wisdom",
                   "description": "<p>Effect: The target takes +10% more Damage per [Major Affliction] and +5% more Damage per [Minor Affliction] they possess from the triggering attack.</p>",
                   "traits": [],
-                  "type": "generic",
+                  "type": "passive",
                   "range": {
                       "target": "creature",
                       "distance": 20,
@@ -31549,12 +31720,13 @@ const data = [
                   },
                   "cost": {
                       "activation": "free",
-                      "powerPoints": 5,
+                      "powerPoints": 0,
                       "delay": null,
                       "priority": null
                   },
-                  "img": "icons/svg/explosion.svg",
-                  "variant": null
+                  "img": "systems/ptr2e/img/perk-icons/Tactician.svg",
+                  "variant": null,
+                  "hidden": false
               }
           ],
           "slug": "logicians-wisdom",
@@ -31592,11 +31764,11 @@ const data = [
               }
           ],
           "autoUnlock": [],
+          "global": true,
+          "webs": [],
           "originSlug": null,
           "variant": null,
-          "mode": null,
-          "global": true,
-          "webs": []
+          "mode": null
       },
       "effects": [],
       "flags": {
@@ -31606,11 +31778,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734785255268,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -31792,11 +31964,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734790835423,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -32079,11 +32251,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734795707231,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -32210,11 +32382,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734793867691,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -32307,11 +32479,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734791733360,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -32611,11 +32783,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734795743673,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -32709,11 +32881,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734786993083,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -32844,11 +33016,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734795716945,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -32939,11 +33111,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.1.0",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734783158135,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
