@@ -69,50 +69,90 @@
     </div> 
     {{#each results as |data uuid|}}
         <div class="target" data-target-uuid="{{data.target.uuid}}">
-            <div class="icon">
-                <img src="{{data.target.img}}" alt="{{data.target.name}}">
+          <div class="icon">
+              <img src="{{data.target.img}}" alt="{{data.target.name}}">
+          </div>
+          {{#with data.hit}}
+          <div class="status" data-tooltip="{{this}}" data-tooltip-direction="UP">
+              <i class="fas fa-{{#if (is this "hit")}}certificate{{else if (is this "critical")}}crosshairs{{else}}times-circle{{/if}}"></i>
+          </div>
+          {{/with}}
+          {{#if (and @root.hasDamage @root.hasEffect)}}
+            <div class="damage" data-tooltip="{{data.damage}}" data-tooltip-direction="LEFT">
+                <span>{{data.damage}}</span>
             </div>
-            {{#with data.hit}}
-            <div class="status" data-tooltip="{{this}}" data-tooltip-direction="UP">
-                <i class="fas fa-{{#if (is this "hit")}}certificate{{else if (is this "critical")}}crosshairs{{else}}times-circle{{/if}}"></i>
-            </div>
-            {{/with}}
-            {{#if (and @root.hasDamage @root.hasEffect)}}
-                <div class="damage" data-tooltip="{{data.damage}}" data-tooltip-direction="LEFT">
-                    <span>{{data.damage}}</span>
-                </div>
-                <div class="effect-rolls" data-tooltip="target-effect-rolls" data-tooltip-direction="LEFT">
-                  <i class="{{#if data.effect.some}}fas{{else}}far{{/if}} fa-star"></i>
-                </div>
-            {{else if @root.hasEffect}}
-                <div class="effect-rolls" data-tooltip="target-effect-rolls" data-tooltip-direction="LEFT">
-                  <i class="{{#if data.effect.some}}fas{{else}}far{{/if}} fa-star"></i>
-                </div>
-                <div class="damage"><!--spacer--></div>
-            {{else if @root.hasDamage}}
-                <div class="damage" data-tooltip="{{data.damage}}" data-tooltip-direction="LEFT">
-                    <span>{{data.damage}}</span>
-                </div>
-                <div class="effect-rolls"><!--spacer--></div>
-            {{else}}
-                <div class="damage"><!--spacer--></div>
-                <div class="effect-rolls"><!--spacer--></div>
-            {{/if}}
-            <div class="apply">
-                <button type="button" class="apply-damage" 
-                  {{#unless (or @root.hasEffect @root.hasDamage)}}
-                    disabled 
-                    data-tooltip="This attack has no effect or damage to resolve."
-                  {{else if (and @root.hasEffect @root.hasDamage)}}
-                    data-tooltip="Apply Damage & Effect(s)"
-                  {{else if @root.hasEffect}}
-                    data-tooltip="Apply Effect(s)."
-                  {{else if @root.hasDamage}}
-                    data-tooltip="Apply Damage"
-                  {{/unless}}>
-                  <i class="fas fa-bolt"></i>{{localize "PTR2E.Damage.Apply"}}
+            {{#if hasCaptureRoll}}
+              <div class="apply">
+                <button type="button" data-action="apply-capture" 
+                  data-tooltip="Make Capture Roll"
+                  data-tooltip-direction="UP">
+                  <i class="fas fa-bolt" style="font-size: unset;"></i>Roll
                 </button>
             </div>
+            {{else}}
+              <div class="effect-rolls" data-tooltip="target-effect-rolls" data-tooltip-direction="LEFT">
+                <i class="{{#if data.effect.some}}fas{{else}}far{{/if}} fa-star"></i>
+              </div>
+            {{/if}}
+          {{else if @root.hasEffect}}
+              <div class="effect-rolls" data-tooltip="target-effect-rolls" data-tooltip-direction="LEFT">
+                <i class="{{#if data.effect.some}}fas{{else}}far{{/if}} fa-star"></i>
+              </div>
+              <div class="damage">
+                {{#if hasCaptureRoll}}
+                  <div class="apply">
+                    <button type="button" data-action="apply-capture" 
+                      data-tooltip="Make Capture Roll"
+                      data-tooltip-direction="UP">
+                      <i class="fas fa-bolt" style="font-size: unset;"></i>Roll
+                    </button>
+                  </div>
+                {{/if}}
+              </div>
+          {{else if @root.hasDamage}}
+              <div class="damage" data-tooltip="{{data.damage}}" data-tooltip-direction="LEFT">
+                  <span>{{data.damage}}</span>
+              </div>
+              <div class="effect-rolls">
+                {{#if hasCaptureRoll}}
+                  <div class="apply">
+                    <button type="button" data-action="apply-capture" 
+                      data-tooltip="Make Capture Roll"
+                      data-tooltip-direction="UP">
+                      <i class="fas fa-bolt" style="font-size: unset;"></i>Roll
+                    </button>
+                  </div>
+                {{/if}}
+              </div>
+          {{else}}
+              <div class="apply">
+                {{#if hasCaptureRoll}}
+                  <div class="damage">
+                    <button type="button" data-action="apply-capture" 
+                      data-tooltip="Make Capture Roll"
+                      data-tooltip-direction="UP">
+                      <i class="fas fa-bolt" style="font-size: unset;"></i>Roll
+                    </button>
+                  </div>
+                {{/if}}
+              </div>
+              <div class="effect-rolls"><!--spacer--></div>
+          {{/if}}
+          <div class="apply">
+              <button type="button" class="apply-damage" 
+                {{#unless (or @root.hasEffect @root.hasDamage)}}
+                  disabled 
+                  data-tooltip="This attack has no effect or damage to resolve."
+                {{else if (and @root.hasEffect @root.hasDamage)}}
+                  data-tooltip="Apply Damage & Effect(s)"
+                {{else if @root.hasEffect}}
+                  data-tooltip="Apply Effect(s)."
+                {{else if @root.hasDamage}}
+                  data-tooltip="Apply Damage"
+                {{/unless}}>
+                <i class="fas fa-bolt"></i>{{localize "PTR2E.Damage.Apply"}}
+              </button>
+          </div>
         </div>
     {{/each}}
 </footer>

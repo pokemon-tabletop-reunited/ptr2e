@@ -1,7 +1,7 @@
 import { ActorPTR2e } from "@actor";
 import AttackPTR2e from "@module/data/models/attack.ts";
 import { ChatMessagePTR2e } from "@chat";
-import { AccuracySuccessCategory, PTRCONSTS, SummonAttackPTR2e } from "@data";
+import { AccuracySuccessCategory, PokeballActionPTR2e, PTRCONSTS, SummonAttackPTR2e } from "@data";
 import { SlugField } from "@module/data/fields/slug-field.ts";
 import { AttackRoll } from "@system/rolls/attack-roll.ts";
 import { AccuracyCalc, DamageCalc } from "./data.ts";
@@ -12,7 +12,9 @@ import { UserVisibility } from "@scripts/ui/user-visibility.ts";
 import { ModifierPTR2e } from "@module/effects/modifiers.ts";
 import { RollNote } from "@system/notes.ts";
 import { ActiveEffectPTR2e } from "@effects";
-import { ItemPTR2e, ItemSystemsWithActions } from "@item";
+import { ConsumablePTR2e, ItemPTR2e, ItemSystemsWithActions } from "@item";
+import ConsumableSystem from "@item/data/consumable.ts";
+import { CheckRoll } from "@system/rolls/check-roll.ts";
 
 abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
   declare parent: ChatMessagePTR2e<AttackMessageSystem>;
@@ -348,12 +350,12 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
         }
       }
 
-      if(!rolls.accuracy && !rolls.crit && !rolls.damage && !rolls.effects.length) rolls.none = true;
+      if (!rolls.accuracy && !rolls.crit && !rolls.damage && !rolls.effects.length) rolls.none = true;
 
       return rolls;
     };
     const summonAttack = 'damageType' in this.attack ? this.attack as SummonAttackPTR2e : null;
-    
+
     const context: AttackMessageRenderContext =
       this.context ??
       (this.context = {
@@ -381,6 +383,7 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
                     target: result.effectRolls.target,
                   }
                 } : { some: false, applied: false },
+                hasCaptureRoll: !!(this.attack.slug.startsWith("fling") && this.attack.flingItemId),
               };
               if (result.damage) {
                 const damage = result.damage.calculateDamageTotal({
@@ -396,8 +399,8 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
                   context.damageRoll = damage;
                 }
               }
-              else if(summonAttack?.damageType === "flat") {
-                const damage = AttackRoll.calculateFlatDamage(summonAttack,result.target);
+              else if (summonAttack?.damageType === "flat") {
+                const damage = AttackRoll.calculateFlatDamage(summonAttack, result.target);
                 if (damage) {
                   context.damage = damage.value;
                   context.damageRoll = damage;
@@ -469,6 +472,16 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
         overrides,
       },
     });
+  }
+
+  async rollCaptureCheck({ accuracyRoll, critRoll, target }: { accuracyRoll: Rolled<CheckRoll>, critRoll: Rolled<CheckRoll>, target: ActorPTR2e }) {
+    if (!(this.attack.slug.startsWith("fling") && this.attack.flingItemId)) return;
+
+    const flingItem = this.origin.items.get(this.attack.flingItemId) as ItemPTR2e;
+    if (!(flingItem.type === "consumable" && (flingItem.system as ConsumableSystem).consumableType === "pokeball")) return;
+
+    const action = PokeballActionPTR2e.fromConsumable(flingItem as ConsumablePTR2e);
+    await action.roll({ accuracyRoll, critRoll, targets: [target]})
   }
 
   async spendPP() {
@@ -631,6 +644,17 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
     });
     html.find(".update-targets").on("click", this.updateTargets.bind(this));
     html.find("[data-action='consume-pp']").on("click", this.spendPP.bind(this));
+    html.find("[data-action='apply-capture']").on("click", async (event) => {
+      const targetUuid = (event.currentTarget.closest("[data-target-uuid]") as HTMLElement)?.dataset?.targetUuid;
+      if(!targetUuid) return;
+      const result = this.results.find(r => r.target.uuid === targetUuid);
+      if (!result) return;
+      await this.rollCaptureCheck({
+        accuracyRoll: result.accuracy!,
+        critRoll: result.crit!,
+        target: result.target
+      });
+    });
   }
 
   public async applyLuckIncrease(targetUuid: ActorUUID) {
@@ -715,6 +739,7 @@ interface AttackMessageRenderContextData {
       target: foundry.data.fields.ModelPropFromDataField<foundry.data.fields.SchemaField<EffectRollsSchema>>[];
     };
   };
+  hasCaptureRoll?: boolean;
 }
 
 interface AttackMessageSchema extends foundry.data.fields.DataSchema {
