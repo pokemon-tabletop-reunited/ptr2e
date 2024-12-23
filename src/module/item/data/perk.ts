@@ -147,12 +147,12 @@ export default abstract class PerkSystem extends PerkExtension {
           return `${predicate.replace("#", "")} (Not Automated)`;
         }
 
-        const itemRollOption = predicate.trim().match(/^(item):(?<type>[-a-z]+):(?<slug>[-a-z]+)$/);
+        const itemRollOption = predicate.trim().match(/^(item):(?<type>[-a-z]+):(?<slug>[-a-z0-9]+)$/);
         if(itemRollOption) {
           return `${Handlebars.helpers.formatSlug(itemRollOption.groups?.slug)} (${Handlebars.helpers.formatSlug(itemRollOption.groups?.type)})`;
         }
 
-        const traitRollOption = predicate.trim().match(/^(trait):(?<slug>[-a-z]+)$/);
+        const traitRollOption = predicate.trim().match(/^(trait):(?<slug>[-a-z0-9]+)$/);
         if(traitRollOption) {
           return `[${Handlebars.helpers.formatSlug(traitRollOption.groups?.slug)}]`;
         }

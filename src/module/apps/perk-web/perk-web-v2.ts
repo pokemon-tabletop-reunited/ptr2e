@@ -534,11 +534,11 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
   }
 
   override _preparePartContext(partId: string, context: ApplicationRenderContext): Promise<ApplicationRenderContext> {
-    if(partId === "hudZoom") {
+    if (partId === "hudZoom") {
       context.zoomLevels = this.zoomLevels;
       context.zoomLevel = this._zoomAmount;
     }
-    
+
     if (partId === "hudPerk" && 'perk' in context && context.perk && typeof context.perk === "object" && 'document' in context.perk && context.perk.document) {
       const perk = context.perk.document as PerkPTR2e;
       (context.perk as Record<string, unknown>).prerequisites = perk.system.getPredicateStrings();
@@ -1146,7 +1146,7 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
 
             const nodeData = node.perk.system.nodes.at(cycle);
             const newNode = this._perkStore.get(`${nodeData?.x}-${nodeData?.y}`);
-            if(newNode) node = newNode;
+            if (newNode) node = newNode;
           }
 
           const perkElement = this.element.querySelector(`div.perk[data-x="${node.position.x}"][data-y="${node.position.y}"]`)
@@ -1320,7 +1320,7 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
       isDown = false;
       // element.style.cursor = this._zoomAmount === this.zoomLevels[0] ? "unset" : "zoom-in";
       element.style.cursor = "unset";
-      setTimeout(() => { isMoving = false }, 50);
+      setTimeout(() => { isMoving = false });
     });
 
     element.addEventListener("mousemove", (e) => {
@@ -1404,7 +1404,7 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
     if (!isElectron) zoomElement.scrollTo(newCenter);
     else zoomElement.scrollTo({ top: (zoomElement.scrollWidth / 2) - (zoomElement.clientWidth / 2), left: (zoomElement.scrollHeight / 2) - (zoomElement.clientHeight / 2) });
 
-    if(reRenderSelect) this.render({ parts: ["hudZoom"] });
+    if (reRenderSelect) this.render({ parts: ["hudZoom"] });
   }
 
   async setWeb(species: SpeciesPTR2e | null) {
