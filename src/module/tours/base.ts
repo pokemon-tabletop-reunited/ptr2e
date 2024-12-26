@@ -53,7 +53,7 @@ export class PTRTour extends Tour {
       if (this.app instanceof Application) {
         //@ts-expect-error - Ignore the fact that the property is protected
         await this.app._render(true);
-        this.app.activateTab(this.currentStep.app[0].tab);
+        if(this.currentStep.app[0].tab) this.app.activateTab(this.currentStep.app[0].tab);
       } else {
         await this.app.render(true);
         for (const step of this.currentStep.app) {

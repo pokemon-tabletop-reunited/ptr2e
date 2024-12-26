@@ -2773,7 +2773,56 @@
       "automation": {
         "title": "Effects Automation & The Data Inspector",
         "description": "A technical guide on how to use the Data Inspector to automate effects, and how to use the Automation System!",
-        "steps": {}
+        "steps": {
+          "welcome": {
+            "title": "Welcome to the Automation Tour!",
+            "content": "The Automation Tour will give you a quick overview of where in the UI to find the automation tools, for an in-depth technical guide you will want to check out the <a href=\"https://2e.ptr.wiki/en/rules/foundry/automation-guide\">Wiki</a>."
+          },
+          "effects": {
+            "title": "Active Effect Automation",
+            "content": "PTR2e uses a heavily upgraded variant of the Foundry Active Effect system to automate the effects of basically any item, whether that's a move, ability, perk or otherwise. If you are familiar with PTR 1e or the PF2e system, you will find that the automation system is very compatible to the 'Rules based Automation' of those two systems.\nAn effect can be added to any type of item, including the 'Effect' item, which can be useful to store effects you may wish to temporarily include on Actors, such as the '+1 Attack Stages' effect item."
+          },
+          "effects-tab": {
+            "title": "Effects Tab",
+            "content": "In the effects tab of any Item/Actor you will see which effects are currently active, and on items you will be able to create new ones with the [+] button at the top right corner."
+          },
+          "create-effect": {
+            "title": "Create Effect Dialog",
+            "content": "There are two types of Active Effect, Afflictions & Passive Effects. An Affliction will automatically expire after a certain amount of turns have passed and also have the option to trigger 'End of Turn' effects, meanwhile Passive Effects, as the name implies, don't expire nor have the capability to trigger 'End of Turn' effects.\nThe '+1 Attack Stage' effect is an example of an Affliction."
+          },
+          "effect-overview": {
+            "title": "Effect Overview",
+            "content": "In this tab you can change default Active Effect settings; important to note is for effects to properly work the 'Transfer Effect' option should be enabled, and the 'Effect Suspended' option should be disabled."
+          },
+          "effect-details": {
+            "title": "Effect Details",
+            "content": "Meanwhile in the Details tab you can set more detailed options, such as the duration of the affliction, any End of Turn damage it should deal, and more."
+          },
+          "effect-changes-1": {
+            "title": "Effect Changes [1/3]",
+            "content": "And then we get to the meat of the Automation system, Effect Changes.\nAs mentioned earlier, if you are familiar with the 'Rules Based Automation' system, you should find the functionality here very familiar, except instead of 'Rules' we now have 'Changes'.\nChanges can be anything from a simple stat change, to a more complex modifier on a roll, or even adding effect applications to attacks, or granting different items & effect! For full details please check the <a href=\"https://2e.ptr.wiki/en/rules/foundry/automation-guide\">Automation Guide on the wiki</a>."
+          },
+          "effect-changes-2": {
+            "title": "Effect Changes [2/3]",
+            "content": "You can simply add changes with the 'Create Change' button, and change the type of change you wish to create with the dropdown.\nFor '+1 Attack Stage' you can see there is one change of type 'AE-Like', which allows for a simple stat change, in this case, +1 to the Attack Combat Stage."
+          },
+          "effect-changes-3": {
+            "title": "Effect Changes [3/3]",
+            "content": "A useful tool to know about is the 'Edit as JSON' button, this will open the JSON view of the change, allowing you to make more complex changes than the UI allows for, or to copy a change to another item."
+          },
+          "data-inspector": {
+            "title": "Data Inspector",
+            "content": "The Data Inspector is a powerful tool that allows you to see the data of an Item, Actor or Chat Message.\nYou can open the Data Inspector either by selecting 'Open Data Inspector' from an Actor/Item sheet's toolbar dropdown menu or by right-clicking a Chat Message that has a Roll and selecting 'Open Data Inspector'"
+          },
+          "data-inspector-actor": {
+            "title": "Data Inspector - Actor",
+            "content": "This is the Data Inspector for an Actor.\nHere you can view all underlying data.\nUseful for figuring out the path of an attribute, or which Rolloptions are currently applied to an Actor.\nYou can check usage & control details by hovering on the [?] icon in the toolbar."
+          },
+          "data-inspector-chat": {
+            "title": "Data Inspector - Chat Roll",
+            "content": "This is the Data Inspector for a Chat Message that contains a Roll.\nHere you can see all Selectors that this roll checked against as well as all Roll Options that where applied from the User and possible Target.\nOn the right side you can see the modifiers to the roll itself.\nIn the case of a roll that targets multiple Actors, you can choose to view target-based details by selecting the appropriate target on the left."
+          }
+        }
       },
       "misc": {
         "title": "Miscellaneous & FAQ",
