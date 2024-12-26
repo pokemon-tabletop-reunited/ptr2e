@@ -37,6 +37,7 @@ export default class TooltipsPTR2e {
    * @param _observer - The observer that triggered the mutations
    */
   _onMutation(mutations: MutationRecord[]) {
+    if(Tour.activeTour) return;
     for (const { type, attributeName, oldValue } of mutations) {
       if (type === "attributes" && attributeName === "class") {
         const diff = new Set(this.tooltip.classList).difference(

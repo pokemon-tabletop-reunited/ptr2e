@@ -32,7 +32,7 @@ export class PTRTour extends Tour {
   // @ts-ignore - Unused param & empty function is intentional.
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   protected async _tearDown(complete?: boolean): Promise<void> {
-    if(this.app) await this.app.close();
+    if (this.app) await this.app.close();
   }
 
   /**
@@ -56,8 +56,8 @@ export class PTRTour extends Tour {
         this.app.activateTab(this.currentStep.app[0].tab);
       } else {
         await this.app.render(true);
-        for(const step of this.currentStep.app) {
-          if(!step.tab || !step.group) continue;
+        for (const step of this.currentStep.app) {
+          if (!step.tab || !step.group) continue;
           this.app.changeTab(step.tab, step.group);
         }
       }
@@ -84,17 +84,17 @@ export class PTRTour extends Tour {
 
   override async progress(stepIndex: number): Promise<void> {
     // Ensure we are provided a valid tour step
-    if ( !Number.between(stepIndex, -1, this.steps.length) ) {
+    if (!Number.between(stepIndex, -1, this.steps.length)) {
       throw new Error(`Step index ${stepIndex} is not valid for Tour ${this.id} with ${this.steps.length} steps.`);
     }
 
     // Ensure that only one Tour is active at a given time
-    if ( Tour.activeTour && (Tour.activeTour !== this) ) {
-      if ( (stepIndex !== -1) && (stepIndex !== this.steps.length) ) throw new Error(`You cannot begin the ${this.title} Tour because the `
-      + `${Tour.activeTour.title} Tour is already in progress`);
+    if (Tour.activeTour && (Tour.activeTour !== this)) {
+      if ((stepIndex !== -1) && (stepIndex !== this.steps.length)) throw new Error(`You cannot begin the ${this.title} Tour because the `
+        + `${Tour.activeTour.title} Tour is already in progress`);
     }
 
-    if( stepIndex === 0 && this.currentStep) {
+    if (stepIndex === 0 && this.currentStep) {
       await this._postStep();
       console.debug(`Tour [${this.namespace}.${this.id}] | Completed step 1 of ${this.steps.length}`);
     }

@@ -142,7 +142,7 @@ declare global {
          * @param event   A click event
          * @param buttons   The step buttons
          */
-        private _onButtonClick(event: MouseEvent, buttons: HTMLButtonElement[]): void;
+        protected _onButtonClick(event: MouseEvent, buttons: NodeListOf<HTMLButtonElement>): void;
 
         /** Saves the current progress of the Tour to a world setting */
         private _saveProgress(): void;

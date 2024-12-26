@@ -2699,8 +2699,61 @@
       },
       "perkWeb": {
         "title": "Perk Web",
-        "description": "The Perk Web is how you can see and purchase Perks for your Characters and NPCs! This tour will guide you on how to use it!",
-        "steps": {}
+        "description": "The Perk Web is how you can see and purchase Perks for your Player Characters and NPCs! This tour will guide you on how to use it!",
+        "steps": {
+          "welcome": {
+            "title": "Welcome to the Perk Web Tour!",
+            "content": "This tour will guide you through the Perk Web, where you can see all the Perks available to your Character!"
+          },
+          "rules": {
+            "title": "Perk Rules Overview",
+            "content": "Perks are purchased using 'Advancement Points' which are gained through leveling up, and can be spent on any Perk that you meet the prerequisites for.\nBesides any prerequisite you may need, every Perk can only be picked up if you have a different perk that connects to it on the Web!\nThat's why the very first perk you will pick up will be one of the 6 'Root' perks, these perks are special in the sense that you can always pick them up, even with no connection, and the first one is free!"
+          },
+          "open-web": {
+            "title": "Open the Perk Web",
+            "content": "On the Actor Sheet, in the bottom left corner, you will find the button to open the Perk Web.\nWhenever you gain new Advancement Points from level-up, the button will glow to indicate you have Perk Points to spend!"
+          },
+          "web-overview": {
+            "title": "Perk Web Overview",
+            "content": "The Perk Web consists of 3 parts, the left sidebar shows you information about your character as well as any info about a perk you have selected.\nThe center shows you the Perk Web itself\nFinally, the right sidebar allows you to search for perks and filter them.\nLets quickly cover the left sidebar!"
+          },
+          "hud-header": {
+            "title": "Header Bar",
+            "content": "The header bar has 3 important functions, the left most button allows you to refresh the Perk Web's data, in case you or your GM makes any changes to your Actor or a Perk on the web; so you can see the changes reflected!\nBesides that, on the right end, you can find the perk web close button! Very useful, lest you get stuck in here forever!"
+          },
+          "hud-header-webs": {
+            "title": "Web Selector",
+            "content": "Finally, the select bar in the center allows you to swap to different webs unique to your Actor, for example, a Species' Personal Perk Web, which will also show their Evolution Perks!"
+          },
+          "hud-actor": {
+            "title": "Actor Info",
+            "content": "Right below we can find the Actor Info, showing you how many Advancement Points you currently have available to spend!"
+          },
+          "actor-sheet": {
+            "title": "Actor Sheet",
+            "content": "While you're in the Web, you can open any Foundry Sheet like normal, your Actor Sheet will always show up in minimized in th top left corner.\nIf you have a module such as Quick Insert installed, you can also search for any Actor/Item/etc. to open it on-top of the Perk Web View."
+          },
+          "web-controls": {
+            "title": "Controls",
+            "content": "You can move the web either by using the scroll bars on the right and bottom, using the [Scroll Wheel] (while holding [Shift] for Horizontal scroll), or by dragging the web around while holding [Right Click].\nYou can zoom in and out using [Left Click]/[Right Click], or by using the Zoom Level Dropdown on the left sidebar.\nTo view detailed information on a Perk, you can [Left Click] it to reveal its details.\nHovering over a Perk will show you its Tooltip overview."
+          },
+          "perk-overview": {
+            "title": "Perk Overview",
+            "content": "I've gone ahead and selected 'Root 1' for you, as you can see over on the left, it's a very simple perk, it's even free!\nYou can easily buy a perk by clicking the purchasing button right below the perk's details, or, if you already own the perk, you will find that the button has changed to a 'Refund' button!\n\nPlease Note: As of Beta 1, there is no automation to check whether a Refund is a 'Valid' Refund. This means that you by refunding a perk you could invalidate other perks, please make sure to only refund perks with the permission of your GM and after making sure it doesn't break any connections!"
+          },
+          "perk-styling": {
+            "title": "Perk Colors & Styling",
+            "content": "A Perk's availability can quickly be glanced by looking at its border color & style, go over each option:<ul style='max-height: 30vh; overflow-y: auto;'><li><span style='font-weight: bold; color: #2ECFF5;'>Purchased:</span> These perks can easily be identified by their <span style='font-weight: bold; color: #2ECFF5;'>thick blue border</span>, and are the perks you have already obtained!</li><li><span style='font-weight: bold; color: #379762;'>Available:</span> These perks can be identified by their <span style='font-weight: bold; color: #379762;'>Green Border</span> & <span style='font-weight: bold; color: #ffffff;'>White Glow</span>, these are perks you have a valid connection to, meet all the Prerequisites for *and* have enough Advancement Points to purchase!</li><li><span style='font-weight: bold; color: #FBA151;'>Missing Prerequisite:</span> These perks are easily identified by their <span style='font-weight: bold; color: #FBA151;'>Dashed Orange Borders</span>. These are perks that you currently have access to, but do not meet all the Prerequisites for, or do not have enough Advancement Points for. Check their details to figure out what you're missing!</li><li><span style='font-weight: bold; color: #4254bb;'>Skipped Perk:</span> Sometimes you may find a perk with a <span style='font-weight: bold; color: #4254bb;'>Dark Blue/Purple Border</span>, these are perks that are 'Auto Purchased' or 'Skipped' for your Character, for example, the perk Inner Warmth gives your Fire type the [Heater] trait, however, your Torchic already gets this trait from their Species! Thus, while you haven't purchased this perks with your Advancement Points, it counts as having been purchased since Torchic already has the [Heater] trait.</li><li><span style='font-weight: bold; color: #9E4FCE;'>Tiered Perk:</span> Another uncommon perk collor is <span style='font-weight: bold; color: #9E4FCE;'>Purple Bordered</span> perks, these are perks that have multiple tiers and can thus be purchased multiple times!</li><li><span style='font-weight: bold; color: #851a1a;'>Invalid Connection:</span> Perks that your actor owns, but do not have a Valid Connection can be identified by their <span style='font-weight: bold; color: #851a1a;'>Red Dashed Borders & Glow</span>. These Perks lack a valid connection leading back to a Root, and thus are 'Invalid', if you ever find yourself with an Invalid Perk, please resolve the issue by fixing purchasing its connections; or discuss with your GM how to fix the situation. A build with an 'Invalid' perk would be considered 'cheating'.</li><li><span style='font-weight: bold; color: #919AA2;'>Unavailable Perk:</span> Last but not least, unavailable perks which can be identified by their <span style='font-weight: bold; color: #919AA2;'>Dashed Gray Borders & Greyed out icon</span>. These perks simply don't have any connection to your currently picked up perks, so you have to work towards them if you wish to unlock them!</li></ul>"
+          },
+          "perk-example": {
+            "title": "Example",
+            "content": "As an example, Tour-san has purchased Root 1, which is connected to these two perks here, Tactician & Mobilize. Tactician requires us to have at least 30 in the Leadership Skill, meanwhile Mobilize only requires 20. As Tour-san only has 25, Mobilize is currently available, but Tactician is not, as indicated by their Green & Orange Borders respectively."
+          },
+          "search": {
+            "title": "Search & Filter",
+            "content": "Over on the right-hand side, you can Search & Filter for Perks, and makes use of the Compendium Browser's Perk Tab. By default, the search won't load any perks to keep the web snappy, but you can easily load them in by clicking the 'Load Perk Search' button. After which, you can search for any perk you may want!\nClicking on a perk will make the Web pan to that perk, and show you its details! Sometimes Perks are on the web multiple times, clicking on the same perk again will cycle through all the locations it can be found in!"
+          }
+        }
       },
       "generatingPokemon": {
         "title": "Quick-Generating Pokémon",
