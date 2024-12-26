@@ -120,7 +120,6 @@ export const Init: PTRHook = {
       (async () => {
         // Monkeypatch the game.tooltip class to stop auto-dismissing tooltips
         const original = game.tooltip.deactivate.bind(game.tooltip);
-        //@ts-expect-error - Monkeypatching game.tooltip
         game.tooltip.deactivate = (force) => {
           if (Tour.tourInProgress && !force) return;
           original();

@@ -33,10 +33,10 @@ declare global {
         targetElement: HTMLElement;
 
         /** The HTMLElement that fades out the rest of the screen */
-        fadeElement: HTMLElement;
+        fadeElement?: HTMLElement;
 
         /** The HTMLElement that blocks input while a Tour is active */
-        overlayElement: HTMLElement;
+        overlayElement?: HTMLElement;
 
         /** Padding around a Highlighted Element */
         static HIGHLIGHT_PADDING: number;
