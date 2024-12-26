@@ -57,8 +57,6 @@ export class FoldersTour extends PTRTour {
         break;
       }
       case "open-party-sheet": {
-        ui.sidebar.activateTab("actors");
-
         const { folder, tourSan, tourSanVoltorb } = await this.getDocuments();
 
         await Actor.updateDocuments([
@@ -89,8 +87,6 @@ export class FoldersTour extends PTRTour {
         break;
       }
       case "opened-party-sheet": {
-        ui.sidebar.activateTab("actors");
-
         const { folder, tourSan, tourSanVoltorb } = await this.getDocuments();
         
         await Actor.updateDocuments([
@@ -117,6 +113,38 @@ export class FoldersTour extends PTRTour {
         ])
 
         await folder.renderPartySheet();
+        //@ts-expect-error - Bypass protected property
+        await ui.actors._render(true)
+        break;
+      }
+      case "organize-party": {
+        const { folder, tourSan, tourSanVoltorb } = await this.getDocuments();
+        
+        await Actor.updateDocuments([
+          {
+            _id: tourSan.id,
+            system: {
+              party: {
+                ownerOf: folder.id,
+                partyMemberOf: null,
+                teamMemberOf: []
+              }
+            }
+          },
+          {
+            _id: tourSanVoltorb.id,
+            system: {
+              party: {
+                ownerOf: null,
+                partyMemberOf: folder.id,
+                teamMemberOf: []
+              }
+            }
+          }
+        ])
+
+        const sheet = await folder.renderPartySheet();
+        sheet?.changeTab("party", "sheet");
         //@ts-expect-error - Bypass protected property
         await ui.actors._render(true)
         break;
@@ -154,8 +182,6 @@ export class FoldersTour extends PTRTour {
         break;
       }
       case "create-team": {
-        ui.sidebar.activateTab("actors");
-
         const { folder, tourSan, tourSanVoltorb } = await this.getDocuments();
         const dialog = await this.openTourSanDialog(folder);
 
@@ -190,8 +216,6 @@ export class FoldersTour extends PTRTour {
         break;
       }
       case "open-team-sheet": {
-        ui.sidebar.activateTab("actors");
-
         const { folder, tourSan, tourSanVoltorb } = await this.getDocuments();
         
         await Actor.updateDocuments([
@@ -223,8 +247,6 @@ export class FoldersTour extends PTRTour {
         break;
       }
       case "opened-team-sheet": {
-        ui.sidebar.activateTab("actors");
-
         const { folder, tourSan, tourSanVoltorb } = await this.getDocuments();
         
         await Actor.updateDocuments([
@@ -266,7 +288,7 @@ export class FoldersTour extends PTRTour {
     if (this.currentStep?.id === "create-party" || this.currentStep?.id === "create-team") {
       this.closeDialog(true);
     }
-    if (this.currentStep?.id === "opened-party-sheet") {
+    if (this.currentStep?.id === "opened-party-sheet" || this.currentStep?.id === "organize-party") {
       const dialog = foundry.applications.instances.get(`PartySheetPTR2e-Folder.toursantmpfolder`) as FolderConfigPTR2e | undefined;
       if (dialog) dialog.close();
     }
