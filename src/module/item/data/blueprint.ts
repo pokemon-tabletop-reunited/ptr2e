@@ -338,7 +338,7 @@ export default abstract class BlueprintSystem extends HasEmbed(HasMigrations(fou
 
       const gender = species.system.genderRatio === -1
         ? "genderless"
-        : Math.random() < species.system.genderRatio / 8
+        : Math.random() > species.system.genderRatio / 8
           ? "male"
           : "female";
 
