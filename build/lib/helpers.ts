@@ -79,4 +79,140 @@ function tupleHasValue<const A extends readonly unknown[]>(array: A, value: unkn
     return array.includes(value);
 }
 
-export { getFilesRecursively, PackError, isObject, sluggify, tupleHasValue};
+class StatementValidator {
+  static isStatement(statement: unknown): statement is PredicateStatement {
+    return statement instanceof Object
+      ? this.isCompound(statement) || this.isBinaryOp(statement)
+      : typeof statement === "string"
+        ? this.isAtomic(statement)
+        : false;
+  }
+
+  static isAtomic(statement: unknown): statement is Atom {
+    return (typeof statement === "string" && statement.length > 0) || this.isBinaryOp(statement);
+  }
+
+  static #binaryOperators = new Set(["eq", "gt", "gte", "lt", "lte"]);
+
+  static isBinaryOp(statement: unknown): statement is BinaryOperation {
+    if (!isObject(statement)) return false;
+    const entries = Object.entries(statement);
+    if (entries.length > 1) return false;
+    const [operator, operands]: [string, unknown] = entries[0];
+    return (
+      this.#binaryOperators.has(operator) &&
+      Array.isArray(operands) &&
+      operands.length === 2 &&
+      typeof operands[0] === "string" &&
+      ["string", "number"].includes(typeof operands[1])
+    );
+  }
+
+  static isCompound(statement: unknown): statement is CompoundStatement {
+    return (
+      isObject(statement) &&
+      (this.isAnd(statement) ||
+        this.isOr(statement) ||
+        this.isNand(statement) ||
+        this.isXor(statement) ||
+        this.isNor(statement) ||
+        this.isNot(statement) ||
+        this.isIf(statement) ||
+        this.isXOf(statement))
+    );
+  }
+
+  static isAnd(statement: { and?: unknown }): statement is Conjunction {
+    return (
+      Object.keys(statement).length === 1 &&
+      Array.isArray(statement.and) &&
+      statement.and.every((subProp) => this.isStatement(subProp))
+    );
+  }
+
+  static isNand(statement: { nand?: unknown }): statement is AlternativeDenial {
+    return (
+      Object.keys(statement).length === 1 &&
+      Array.isArray(statement.nand) &&
+      statement.nand.every((subProp) => this.isStatement(subProp))
+    );
+  }
+
+  static isOr(statement: { or?: unknown }): statement is Disjunction {
+    return (
+      Object.keys(statement).length === 1 &&
+      Array.isArray(statement.or) &&
+      statement.or.every((subProp) => this.isStatement(subProp))
+    );
+  }
+
+  static isXor(statement: { xor?: unknown }): statement is ExclusiveDisjunction {
+    return (
+      Object.keys(statement).length === 1 &&
+      Array.isArray(statement.xor) &&
+      statement.xor.every((subProp) => this.isStatement(subProp))
+    );
+  }
+
+  static isNor(statement: { nor?: unknown }): statement is JointDenial {
+    return (
+      Object.keys(statement).length === 1 &&
+      Array.isArray(statement.nor) &&
+      statement.nor.every((subProp) => this.isStatement(subProp))
+    );
+  }
+
+  static isNot(statement: { not?: unknown }): statement is Negation {
+    return Object.keys(statement).length === 1 && !!statement.not && this.isStatement(statement.not);
+  }
+
+  static isIf(statement: { if?: unknown; then?: unknown }): statement is Conditional {
+    return (
+      Object.keys(statement).length === 2 && this.isStatement(statement.if) && this.isStatement(statement.then)
+    );
+  }
+
+  static isXOf(statement: { xof?: unknown; x?: unknown }): statement is XOf {
+    return Object.keys(statement).length === 2 &&
+      (
+        this.isAnd({ and: statement.xof }) ||
+        this.isOr({ or: statement.xof }) ||
+        this.isNand({ nand: statement.xof }) ||
+        this.isXor({ xor: statement.xof }) ||
+        this.isNor({ nor: statement.xof })
+      ) && (
+        typeof statement.x === "number" && statement.x > 0
+      );
+  }
+}
+
+interface EqualTo { eq: [string, string | number] }
+interface GreaterThan { gt: [string, string | number] }
+interface GreaterThanEqualTo { gte: [string, string | number] }
+interface LessThan { lt: [string, string | number] }
+interface LessThanEqualTo { lte: [string, string | number] }
+type BinaryOperation = EqualTo | GreaterThan | GreaterThanEqualTo | LessThan | LessThanEqualTo;
+type Atom = string | BinaryOperation;
+
+interface Conjunction { and: PredicateStatement[] }
+interface Disjunction { or: PredicateStatement[] }
+interface ExclusiveDisjunction { xor: PredicateStatement[] }
+interface Negation { not: PredicateStatement }
+interface AlternativeDenial { nand: PredicateStatement[] }
+interface JointDenial { nor: PredicateStatement[] }
+interface Conditional { if: PredicateStatement; then: PredicateStatement }
+interface XOf { xof: PredicateStatement[]; x: number }
+type CompoundStatement =
+  | Conjunction
+  | Disjunction
+  | ExclusiveDisjunction
+  | AlternativeDenial
+  | JointDenial
+  | Negation
+  | Conditional
+  | XOf;
+
+type PredicateStatement = Atom | CompoundStatement;
+
+export { getFilesRecursively, PackError, isObject, sluggify, tupleHasValue, StatementValidator};
+export type {PredicateStatement}
