@@ -16,7 +16,7 @@
         {{/each}}
     </nav>
     <section class="tab sheet-body active {{subtabs.actionsCombat.cssClass}} p-0" data-tab="actionsCombat" data-group="actions">
-        <div class="action-column scroll">
+        <div class="action-column scroll" id="attack">
             <div class="header slots">
                 <p>Attack Slots</p>
                 <a class="edit-movelist" data-action="edit-movelist">Known Attacks</a>
@@ -44,7 +44,7 @@
                 {{/each}}
             </div>
         </div>
-        <div class="action-column scroll">
+        <div class="action-column scroll" id="generic">
             <div class="header">
                 <p>Generic Actions</p>
             </div>
@@ -57,7 +57,7 @@
                 {{/each}}
             </div>
         </div>
-        <div class="action-column scroll">
+        <div class="action-column scroll" id="passive">
             <div class="header">
                 <p>Passives</p>
             </div>
@@ -69,7 +69,7 @@
                 {{/each}}
             </div>
         </div> 
-        <div class="action-column scroll">
+        <div class="action-column scroll" id="camping">
             <div class="header">
                 <p>Camping Activities</p>
             </div>
@@ -79,7 +79,7 @@
                 {{/each}}
             </div>
         </div>
-        <div class="action-column scroll">
+        <div class="action-column scroll" id="downtime">
             <div class="header">
                 <p>Downtime Activities</p>
             </div>
@@ -89,7 +89,7 @@
                 {{/each}}
             </div>
         </div> 
-        <div class="action-column scroll">
+        <div class="action-column scroll" id="exploration">
             <div class="header">
                 <p>Exploration Activities</p>
             </div>

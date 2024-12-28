@@ -13,6 +13,8 @@ import SpeciesSystem, { EvolutionData, LevelUpMoveSchema } from "./species.ts";
 import { AbilityPTR2e, MovePTR2e, SpeciesPTR2e } from "@item";
 import { ImageResolver, NORMINV, sluggify } from "@utils";
 import { TokenDocumentPTR2e } from "@module/canvas/token/document.ts";
+import { getInitialSkillList, partialSkillToSkill } from "@scripts/config/skills.ts";
+import { SkillSchema } from "@module/data/models/skill.ts";
 
 export default abstract class BlueprintSystem extends HasEmbed(HasMigrations(foundry.abstract.TypeDataModel), "blueprint") {
   /**
@@ -336,7 +338,7 @@ export default abstract class BlueprintSystem extends HasEmbed(HasMigrations(fou
 
       const gender = species.system.genderRatio === -1
         ? "genderless"
-        : Math.random() < species.system.genderRatio / 8
+        : Math.random() > species.system.genderRatio / 8
           ? "male"
           : "female";
 
@@ -472,6 +474,93 @@ export default abstract class BlueprintSystem extends HasEmbed(HasMigrations(fou
         );
       })();
 
+      // TODO: Add skill settings
+      const skills = (() => {
+        const totalPoints = (evolution.system.traits.includes("ace") ? 400 : 110) + 10 * (level - 1);
+
+        const speciesPoints = Math.floor(totalPoints * 0.65);
+        const leftOverPoints = totalPoints - speciesPoints;
+
+        const randomSpeciesPoints = Math.ceil(Math.random() * speciesPoints * 0.30)
+        const randomPoints = Math.ceil(Math.random() * leftOverPoints * 0.50)
+
+        class WeightedBag<T> {
+          private entries: { entry: T; weight: number }[] = [];
+          private totalWeight = 0;
+
+          addEntry(entry: T, weight: number) {
+            this.entries.push({ entry, weight });
+            this.totalWeight += weight;
+          }
+
+          get() {
+            const rand = Math.random() * this.totalWeight;
+            let cumulativeWeight = 0;
+
+            for (const { entry, weight } of this.entries) {
+              cumulativeWeight += weight;
+              if (rand < cumulativeWeight) {
+                return entry;
+              }
+            }
+
+            return null; // In case there are no entries
+          }
+        }
+
+        const skills = new Map(getInitialSkillList().map((skill) => [skill.slug, skill]));
+
+        const calculateSkills = (points: number, weighted: boolean, speciesOnly: boolean) => {
+          const bag = new WeightedBag<SourceFromSchema<SkillSchema>>();
+
+          const pool = speciesOnly ? evolution.system.skills : Array.from(skills.values());
+
+          for (const skillData of pool) {
+            const skill = skills.get(skillData.slug) ?? (() => {
+              const skill = (game.ptr.data.skills.get(skillData.slug) ?? partialSkillToSkill({ slug: skillData.slug })) as SourceFromSchema<SkillSchema>;
+              skills.set(skillData.slug, skill);
+              return skill;
+            })();
+            if(skill.hidden) continue;
+            bag.addEntry(
+              skill,
+              weighted
+                ? speciesOnly
+                  ? skill.value
+                  : (skill.rvs ?? 1) >= 45
+                    ? 1
+                    : (skill.rvs ?? skill.value)
+                : 1
+            );
+          }
+
+          let invested = 0;
+          let retry = 0;
+          while (invested < points) {
+            const result = bag.get();
+            if (result && (result.rvs ?? 0) < 70) {
+              result.rvs = (result.rvs ?? 0) + 1;
+              invested++;
+              retry = 0;
+            }
+            else {
+              retry++;
+              if (retry > 10) {
+                console.warn("Skill generation failed to allocate points");
+                break;
+              }
+            }
+          }
+        };
+
+        calculateSkills(speciesPoints - randomSpeciesPoints, true, true);
+        calculateSkills(randomSpeciesPoints, false, true);
+        calculateSkills(randomPoints, false, false);
+        calculateSkills(leftOverPoints - randomPoints, true, false);
+
+        return Array.from(skills.values());
+      })();
+
       const moves: MovePTR2e["_source"][] = await (async () => {
         const levelUpMoves = (evolution.system.moves.levelUp as ModelPropsFromSchema<LevelUpMoveSchema>[]).filter((move) => move.level <= level);
 
@@ -596,7 +685,8 @@ export default abstract class BlueprintSystem extends HasEmbed(HasMigrations(fou
               weight,
               height
             }
-          }
+          },
+          skills
         },
         items,
         prototypeToken: fu.mergeObject(foundryDefaultTokenSettings, {

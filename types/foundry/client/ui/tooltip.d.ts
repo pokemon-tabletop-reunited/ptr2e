@@ -57,7 +57,7 @@ declare global {
         activate(element: HTMLElement, options?: TooltipActivationOptions): void;
 
         /** Deactivate the tooltip from a previously hovered HTML element. */
-        deactivate(): void;
+        deactivate(force?: boolean): void;
 
         /** Clear any pending activation workflow. */
         protected clearPending(): void;

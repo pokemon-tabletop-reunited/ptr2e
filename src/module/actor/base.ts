@@ -869,6 +869,24 @@ class ActorPTR2e<
     return effectiveness;
   }
 
+  async getUnderdogPerks(): Promise<PerkPTR2e[]> {
+    if(!this.traits.has("underdog")) return [];
+    if(!this.species) return [];
+
+    const underdogPerks = await game.packs.get("ptr2e.core-perks")!.getDocuments({_id__in: [
+      "underdogperk0001",
+      "underdogperk0011",
+      "underdogperk0021",
+      "underdogperk0031",
+      "underdogperk0041",
+      "underdogperk0051",
+      "underdogperk0002",
+    ]}) as PerkPTR2e[];
+    const webs = new Set([this.species!.evolutions?.uuid ?? this.species!.parent.flags?.core?.sourceId ?? []].flat());
+    const baseConnection = `evolution-${this.species!.evolutions?.name ?? this.species!.parent.slug}`;
+    return underdogPerks.map(perk => perk.clone({"system.webs": webs, "system.nodes": perk.system._source.nodes.map(node => ({...node, connected: [baseConnection, ...node.connected]}))}));
+  }
+
   isHumanoid(): this is ActorPTR2e<HumanoidActorSystem> {
     return this.traits.has("humanoid");
   }

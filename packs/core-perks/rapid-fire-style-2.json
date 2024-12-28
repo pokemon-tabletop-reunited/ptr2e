@@ -6,20 +6,46 @@
       "item:perk:rapid-fire-style-1"
     ],
     "cost": 4,
-    "description": "<p>Your next non-[Contact] Attack gains the [5-Strike] trait, if it didn't already have [X-Strike], and has its Power reduced to 40% of its default value. If it already had [X-Strike], that value increases by +5.</p>",
+    "description": "<p>Your next non-[Contact] Attack gains the [5-Strike] trait, if it didn't already have [X-Strike], and has its Power reduced by 55%. If it already had [X-Strike], that value increases by +5.</p>",
     "actions": [
       {
-        "name": "Rapid Fire Style 2",
-        "slug": "rapid-fire-style-2",
-        "description": "<p>Your next non-[Contact] Attack gains the [5-Strike] trait, if it didn't already have [X-Strike], and has its Power reduced to 40% of its default value. If it already had [X-Strike], that value increases by +5.</p>",
+        "name": "Rapid Fire 2!",
+        "slug": "rapid-fire-2",
+        "description": "<p>The target's next non-[Contact] Attack gains the [5-Strike] trait, if it didn't already have [X-Strike], and has its Power reduced by 55%. If it already had [X-Strike], that value increases by +2.</p>",
         "cost": {
           "activation": "simple",
-          "powerPoints": 3,
+          "powerPoints": 2,
           "delay": null,
           "priority": null
         },
         "type": "generic",
-        "traits": [],
+        "traits": [
+          "command",
+          "style"
+        ],
+        "img": "icons/svg/explosion.svg",
+        "range": {
+          "target": "creature",
+          "unit": "m",
+          "distance": 20
+        },
+        "variant": null
+      },
+      {
+        "name": "Rapid Fire 2! (Self)",
+        "slug": "rapid-fire-2-self",
+        "description": "<p>Your next non-[Contact] Attack gains the [2-Strike] trait, if it didn't already have [X-Strike], and has its Power reduced by 55%. If it already had [X-Strike], that value increases by +2.</p>",
+        "cost": {
+          "activation": "simple",
+          "powerPoints": 2,
+          "delay": null,
+          "priority": null
+        },
+        "type": "generic",
+        "traits": [
+          "command",
+          "style"
+        ],
         "img": "icons/svg/explosion.svg",
         "range": {
           "target": "enemy",
