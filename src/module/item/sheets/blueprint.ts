@@ -32,7 +32,7 @@ export default class BlueprintSheet extends foundry.applications.api.HandlebarsA
         closeOnSubmit: false,
         handler: this.#onSubmit,
       },
-      dragDrop: [{ dropSelector: "aside" }],
+      dragDrop: [{ dropSelector: "aside" }, {dropSelector: ".species-fields"}],
       actions: {
         "rename": async function (this: BlueprintSheet) {
           const name = this.document.name;
@@ -152,6 +152,7 @@ export default class BlueprintSheet extends foundry.applications.api.HandlebarsA
       blueprint: this.selected,
       fields: Blueprint.schema.fields,
       isGenerator: !!this.generation,
+      habitats: CONFIG.PTR.data.habitats
     };
   }
 
@@ -243,6 +244,20 @@ export default class BlueprintSheet extends foundry.applications.api.HandlebarsA
           }
         })
       }
+    }
+    if(partId === "main") {
+      const select = htmlElement.querySelector<HTMLSelectElement>("select.species-select");
+      select?.addEventListener("change", async () => {
+        const value = select.value;
+        if(!value) return;
+        if(!this.selected) return;
+        if(this.generation?.temporary) {
+          this.selected.updateSource({species: value});
+        } 
+        else {
+          await this.blueprint.updateChildren([{_id: this.selected.id, species: value}]);
+        }
+      })
     }
   }
 
@@ -388,8 +403,19 @@ export default class BlueprintSheet extends foundry.applications.api.HandlebarsA
 
     if (!doc) return;
 
-    this.team = null;
-    this.blueprint.createChildren([doc]);
+    if((event.currentTarget as HTMLElement).classList.contains("species-fields")) {
+      if(!this.selected) return;
+      if(this.generation?.temporary) {
+        return void this.selected.updateSource({species: doc.uuid});
+      } else {
+        this.team = null
+        return void await this.blueprint.updateChildren([{_id: this.selected.id, species: doc.uuid}]);
+      }
+    }
+    else {
+      this.team = null;
+      this.blueprint.createChildren([doc]);
+    }
   }
 
   static async #onSubmit(
@@ -408,6 +434,7 @@ export default class BlueprintSheet extends foundry.applications.api.HandlebarsA
           delete updateData[key];
         }
       }
+      if(updateData.species) this.team = null;
       await this.blueprint.updateChildren([{
         _id: this.selected.id,
         ...updateData

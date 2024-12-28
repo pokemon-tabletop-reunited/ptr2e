@@ -45,8 +45,6 @@ export const Init: PTRHook = {
         CONFIG.Token.prototypeSheetClass = TokenConfigPTR2e;
       }
 
-      
-
       // Define custom Entity classes
       CONFIG.ActiveEffect.documentClass = PTRCONFIG.ActiveEffect.documentClass;
       CONFIG.ActiveEffect.dataModels = PTRCONFIG.ActiveEffect.dataModels;
@@ -89,6 +87,8 @@ export const Init: PTRHook = {
         CONFIG.ui.items = PTRCONFIG.ui.items;
         CONFIG.ui.actors = PTRCONFIG.ui.actors;
         CONFIG.ui.compendium = PTRCONFIG.ui.compendium;
+        //@ts-expect-error - Typing issue
+        CONFIG.ui.tables = PTRCONFIG.ui.tables;
         CONFIG.ui.perksTab = PTRCONFIG.ui.perks;
         CONFIG.ui.settings = PTRCONFIG.ui.settings;
       }
