@@ -9,5 +9,6 @@ export { default as Trait} from "./trait.ts";
 export { default as ClockPTR2e } from "./clock.ts";
 export { default as ClockDatabase } from "./clock-database.ts";
 export { default as SummonAttackPTR2e } from "./summon.ts";
+export { default as PokeballActionPTR2e } from "./pokeball-action.ts";
 export * from "./base.ts";
 export * from "../../effects/changes/index.ts";

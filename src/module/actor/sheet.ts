@@ -125,10 +125,10 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
           new PartySheetPTR2e({ folder: this.actor.folder! }).render(true);
         },
         "edit-movelist": function (this: ActorSheetPTRV2) {
-          new KnownActionsApp(this.actor).render(true);
+          return new KnownActionsApp(this.actor).render(true);
         },
         "edit-abilitylist": function (this: ActorSheetPTRV2) {
-          new AvailableAbilitiesApp(this.actor).render(true);
+          return new AvailableAbilitiesApp(this.actor).render(true);
         },
         "roll-attack": async function (this: ActorSheetPTRV2, event: Event) {
           const actionDiv = (event.target as HTMLElement).closest(
@@ -169,7 +169,7 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
           }
         },
         "edit-skills": async function (this: ActorSheetPTRV2) {
-          new SkillsEditor(this.actor).render(true);
+          return new SkillsEditor(this.actor).render(true);
         },
         "luck-roll": async function (this: ActorSheetPTRV2) {
           const skill = this.actor.system.skills.get("luck")!;
@@ -306,28 +306,10 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
 
   tabGroups: Record<string, string> = {
     sheet: "overview",
-    actions: "actionsCombat",
+    actions: "slots",
   };
 
   subtabs: Record<string, Tab> = {
-    // actionsCombat: {
-    //     id: "actionsCombat",
-    //     group: "actions",
-    //     icon: "fa-solid fa-burst",
-    //     label: "PTR2E.ActorSheet.Tabs.actions.combat.label",
-    // },
-    // actionsDowntime: {
-    //     id: "actionsDowntime",
-    //     group: "actions",
-    //     icon: "fa-solid fa-clock",
-    //     label: "PTR2E.ActorSheet.Tabs.actions.downtime.label",
-    // },
-    // actionsOther: {
-    //     id: "actionsOther",
-    //     group: "actions",
-    //     icon: "fa-solid fa-dice-d20",
-    //     label: "PTR2E.ActorSheet.Tabs.actions.other.label",
-    // },
     slots: {
       id: "slots",
       group: "actions",

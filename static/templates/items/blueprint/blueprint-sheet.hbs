@@ -2,7 +2,19 @@
   {{#if blueprint}}
     <fieldset class="species">
       <legend>Species</legend>
-      {{formField fields.species value=blueprint._source.species localize=true}}
+      <div class="form-group"> 
+        <label>{{localize fields.species.label}}</label>
+        <div class="form-fields species-fields">
+          <select class="species-select" data-tooltip="You can use this dropdown to select a Dynamic Habitat Table instead.">
+            <option value=""></option>
+            {{#each habitats as |habitat|}}
+              <option value="{{habitat.slug}}" {{#if (is habitat.slug ../blueprint._source.species)}}selected{{/if}}>{{habitat.name}}</option>
+            {{/each}}
+          </select>
+          <input type="text" name="species" value="{{blueprint._source.species}}">
+        </div>
+        <p class="hint">{{localize fields.species.hint}}</p>
+      </div>
       {{formField fields.level value=blueprint._source.level localize=true}}
       {{formField fields.nature value=blueprint._source.nature localize=true}}
       {{formField fields.shiny value=blueprint._source.shiny localize=true}}
@@ -11,7 +23,7 @@
   {{else}}
     <div class="empty">
       <span class="name">No Blueprint has been selected, please select one from the side</span>
-    </div>
+  </div>
   {{/if}}
   <div class="footer">
     <button>Generate Actor(s)</button>

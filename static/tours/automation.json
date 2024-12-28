@@ -1,0 +1,130 @@
+{
+  "title": "PTR2E.Tours.automation.title",
+  "description": "PTR2E.Tours.automation.description",
+  "canBeResumed": true,
+  "display": true,
+  "steps": [
+    {
+      "id": "welcome",
+      "selector": "",
+      "title": "PTR2E.Tours.automation.steps.welcome.title",
+      "content": "PTR2E.Tours.automation.steps.welcome.content"
+    },
+    {
+      "id": "effects",
+      "selector": "",
+      "title": "PTR2E.Tours.automation.steps.effects.title",
+      "content": "PTR2E.Tours.automation.steps.effects.content"
+    },
+    {
+      "id": "effects-tab",
+      "selector": ".sheet.effect-sheet [data-application-part=\"effects\"]",
+      "title": "PTR2E.Tours.automation.steps.effects-tab.title",
+      "content": "PTR2E.Tours.automation.steps.effects-tab.content",
+      "app": [
+        {
+          "tab": "effects",
+          "group": "sheet"
+        }
+      ]
+    },
+    {
+      "id": "create-effect",
+      "selector": ".app.dialog",
+      "title": "PTR2E.Tours.automation.steps.create-effect.title",
+      "content": "PTR2E.Tours.automation.steps.create-effect.content",
+      "app": [
+        {
+          "tab": "effects",
+          "group": "sheet"
+        }
+      ]
+    },
+    {
+      "id": "effect-overview",
+      "selector": ".sheet.active-effect-sheet [data-application-part=\"overview\"]",
+      "title": "PTR2E.Tours.automation.steps.effect-overview.title",
+      "content": "PTR2E.Tours.automation.steps.effect-overview.content",
+      "app": [
+        {
+          "tab": "overview",
+          "group": "sheet"
+        }
+      ]
+    },
+    {
+      "id": "effect-details",
+      "selector": ".sheet.active-effect-sheet [data-application-part=\"details\"]",
+      "title": "PTR2E.Tours.automation.steps.effect-details.title",
+      "content": "PTR2E.Tours.automation.steps.effect-details.content",
+      "app": [
+        {
+          "tab": "details",
+          "group": "sheet"
+        }
+      ]
+    },
+    {
+      "id": "effect-changes-1",
+      "selector": ".sheet.active-effect-sheet [data-application-part=\"changes\"]",
+      "title": "PTR2E.Tours.automation.steps.effect-changes-1.title",
+      "content": "PTR2E.Tours.automation.steps.effect-changes-1.content",
+      "app": [
+        {
+          "tab": "changes",
+          "group": "sheet"
+        }
+      ]
+    },
+    {
+      "id": "effect-changes-2",
+      "selector": ".sheet.active-effect-sheet [data-application-part=\"changes\"]",
+      "title": "PTR2E.Tours.automation.steps.effect-changes-2.title",
+      "content": "PTR2E.Tours.automation.steps.effect-changes-2.content",
+      "app": [
+        {
+          "tab": "changes",
+          "group": "sheet"
+        }
+      ]
+    },
+    {
+      "id": "effect-changes-3",
+      "selector": ".sheet.active-effect-sheet [data-application-part=\"changes\"] a.edit-change",
+      "title": "PTR2E.Tours.automation.steps.effect-changes-3.title",
+      "content": "PTR2E.Tours.automation.steps.effect-changes-3.content",
+      "app": [
+        {
+          "tab": "changes",
+          "group": "sheet"
+        }
+      ]
+    },
+    {
+      "id": "data-inspector",
+      "selector": ".sheet.effect-sheet .controls-dropdown.expanded [data-action=\"open-inspector\"]",
+      "title": "PTR2E.Tours.automation.steps.data-inspector.title",
+      "content": "PTR2E.Tours.automation.steps.data-inspector.content",
+      "app": [
+        {
+          "tab": "effects",
+          "group": "sheet"
+        }
+      ]
+    },
+    {
+      "id": "data-inspector-actor",
+      "selector": ".sheet.data-inspector",
+      "title": "PTR2E.Tours.automation.steps.data-inspector-actor.title",
+      "content": "PTR2E.Tours.automation.steps.data-inspector-actor.content",
+      "app": [{}]
+    },
+    {
+      "id": "data-inspector-chat",
+      "selector": ".sheet.data-inspector",
+      "title": "PTR2E.Tours.automation.steps.data-inspector-chat.title",
+      "content": "PTR2E.Tours.automation.steps.data-inspector-chat.content",
+      "app": [{}]
+    }
+  ]
+}

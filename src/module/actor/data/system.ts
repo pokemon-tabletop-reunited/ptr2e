@@ -317,7 +317,7 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
     for(const k in this.attributes) {
       const key = k as keyof Attributes;
       Object.defineProperty(this.attributes[key], "final", {
-        get: () => key === "hp" ? this.attributes[key].total : this.parent.calcStatTotal(this.attributes[key], false),
+        get: () => key === "hp" ? this.attributes[key].value : this.parent.calcStatTotal(this.attributes[key], false),
       });
     }
 
@@ -601,6 +601,8 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
       return 1;
     })();
 
+    stat.ivs = Math.clamp(stat.ivs, 0, 31);
+
     const level = this.advancement.level;
 
     if ("stage" in stat) {
@@ -611,7 +613,7 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
     }
 
     /** Calculate HP */
-    const bulkMod = Math.pow(1 + ((Math.exp(1)) / Math.pow(Math.PI, 3)), (this.parent.species?.size.sizeClass || 1) - 1);
+    const bulkMod = Math.pow(1 + ((Math.exp(1)) / Math.pow(Math.PI, 3)), (this.details.size.heightClass || 1) - 1);
 
     return Math.floor(
       (Math.floor(((2 * stat.base + stat.ivs + stat.evs / 4) * level * bulkMod) / 100) +

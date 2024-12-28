@@ -33,6 +33,9 @@ import FormActiveEffectSystem from "@module/effects/data/form.ts";
 import { FormConfigSheet } from "@module/effects/form-sheet.ts";
 import { Predicate } from "@system/predication/predication.ts";
 import { CircumstanceModifierGroups } from "./circumstance-modifiers.ts";
+import { Habitats } from "./habitats.ts";
+import { HabitatRollTable } from "@system/habitat-table.ts";
+import { RollTableDirectoryPTR2e } from "@module/apps/sidebar/rolltables-directory.ts";
 
 export const PTRCONFIG = {
   ActiveEffect: {
@@ -150,18 +153,23 @@ export const PTRCONFIG = {
   Scene: {
     documentClass: ScenePTR2e,
   },
+  RollTable: {
+    habitatClass: HabitatRollTable
+  },
   ui: {
     perks: PerkDirectory,
     combat: CombatTrackerPTR2e,
     items: ItemDirectoryPTR2e,
     actors: ActorDirectoryPTR2e,
     compendium: CompendiumDirectoryPTR2e,
-    settings: SettingsSidebarPTR2e
+    settings: SettingsSidebarPTR2e,
+    tables: RollTableDirectoryPTR2e
   },
   data: {
     traits: Traits,
     skills: Skills,
-    circumstanceModifierGroups: CircumstanceModifierGroups
+    circumstanceModifierGroups: CircumstanceModifierGroups,
+    habitats: Habitats
   },
   statusEffects: StatusEffects,
   specialStatusEffects: {

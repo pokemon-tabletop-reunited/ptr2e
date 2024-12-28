@@ -4,20 +4,21 @@
   "type": "equipment",
   "system": {
     "crafting": {
-      "skill": null,
+      "skill": "",
       "spans": null,
       "materials": []
     },
     "equipped": {
-      "slot": "belt",
+      "slot": "accessory",
       "carryType": "stowed",
       "handsHeld": null
     },
-    "grade": "B",
+    "grade": "D",
     "fling": {
       "type": "untyped",
       "power": null,
-      "accuracy": 100
+      "accuracy": 100,
+      "hide": false
     },
     "rarity": "uncommon",
     "traits": [
@@ -34,22 +35,17 @@
         ],
         "range": {
           "target": "creature",
-          "distance": 0,
           "unit": "m"
         },
         "cost": {
           "activation": "complex",
-          "trigger": "A creature declares an attack on the user.",
-          "powerPoints": 0,
-          "delay": null,
-          "priority": null
+          "trigger": "A creature declares an attack on the user."
         },
-        "variant": null
+        "img": "icons/svg/explosion.svg"
       }
     ],
-    "description": "Trigger: A creature declares an attack on the user.\nEffect: The triggering creature gains -2 ACC Stages for 2 activations.",
-    "slug": null,
-    "container": null,
+    "description": "<p>Attacks directed towards the user suffer a -10% accuracy penalty.</p>",
+    "slug": "bright-powder",
     "quantity": 1,
     "identification": {
       "misidentified": null,
@@ -59,26 +55,66 @@
         "img": "systems/ptu/css/images/icons/item_icon.png",
         "description": "<p>Unidentified Item</p>"
       }
+    },
+    "_migration": {
+      "version": null,
+      "previous": null
     }
   },
   "_id": "fZxtxgw3k8IDHhY1",
-  "effects": [],
-  "folder": "V4skAU6G3OH5fXad",
-  "sort": 0,
-  "ownership": {
-    "default": 0,
-    "tXAZ3QUgjuwX4gdV": 3
-  },
-  "flags": {},
-  "_stats": {
-    "compendiumSource": null,
-    "duplicateSource": null,
-    "coreVersion": "12.327",
-    "systemId": "ptr2e",
-    "systemVersion": "0.0.0-alpha.1.0",
-    "createdTime": 1717878484297,
-    "modifiedTime": 1717878484297,
-    "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
-  },
-  "_key": "!items!fZxtxgw3k8IDHhY1"
+  "effects": [
+    {
+      "name": "Bright Powder",
+      "type": "passive",
+      "_id": "436HTL1cayZVU5X0",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "ephemeral-modifier",
+            "key": "attack-accuracy-percentile",
+            "value": -10,
+            "predicate": [],
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "hideIfDisabled": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.4.2.2",
+        "createdTime": 1734820645454,
+        "modifiedTime": 1734820691398,
+        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
+      }
+    }
+  ],
+  "folder": "V4skAU6G3OH5fXad"
 }

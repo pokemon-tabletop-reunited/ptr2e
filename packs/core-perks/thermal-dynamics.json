@@ -1,0 +1,71 @@
+{
+  "name": "Thermal Dynamics",
+  "type": "perk",
+  "system": {
+    "_migration": {
+      "version": 0.109,
+      "previous": null
+    },
+    "actions": [
+      {
+        "name": "Thermal Dynamics",
+        "slug": "thermal-dynamics",
+        "description": "<p>Whenever you use an action with the [Defrost] trait you may add up to 2 of the following effects, spending 2 PP per effect added.</p><ul><li>For each stack of Frostbite reduced on the target, deal Tick damage as if the Frostbite had ticked down as End-of-Activation Damage.</li><li>Increase the maximum stacks of Frostbite removed by this Action by 5.</li><li>If this Action would cure Frozen affecting you, your next Action is Advanced by 50% as if Frozen had naturally ticked down to 0 stacks.</li><li>If this Action would cure Frozen from any targets, those targets their next Action is Advanced by 50% as if Frozen had naturally ticked down to 0 stacks.</li><li>Any damage dealt by this Action is reduced by 50%.</li></ul>",
+        "traits": [],
+        "type": "passive",
+        "img": "systems/ptr2e/img/svg/ice_icon.svg",
+        "cost": {
+          "activation": "free",
+          "powerPoints": 2,
+          "delay": null,
+          "priority": null,
+          "trigger": ""
+        },
+        "variant": null,
+        "hidden": false
+      }
+    ],
+    "slug": "thermal-dynamics",
+    "description": "<p>Whenever you use an action with the [Defrost] trait you may add up to 2 of the following effects, spending 2 PP per effect added.</p><ul><li>For each stack of Frostbite reduced on the target, deal Tick damage as if the Frostbite had ticked down as End-of-Activation Damage.</li><li>Increase the maximum stacks of Frostbite removed by this Action by 5.</li><li>If this Action would cure Frozen affecting you, your next Action is Advanced by 50% as if Frozen had naturally ticked down to 0 stacks.</li><li>If this Action would cure Frozen from any targets, those targets their next Action is Advanced by 50% as if Frozen had naturally ticked down to 0 stacks.</li><li>Any damage dealt by this Action is reduced by 50%.</li></ul>",
+    "traits": [],
+    "prerequisites": [
+      "#A move with the [Defrost] Trait"
+    ],
+    "autoUnlock": [],
+    "cost": 2,
+    "originSlug": null,
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": [],
+    "nodes": [
+      {
+        "x": 83,
+        "y": 124,
+        "connected": [
+          "cryogenics",
+          "biting-cold",
+          "brittle-ice",
+          "chill-out",
+          "improved-overland-1-5",
+          "stat-iv-booster-1-12"
+        ],
+        "config": {
+          "alpha": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "borderWidth": null,
+          "texture": null,
+          "tint": null,
+          "scale": null
+        },
+        "hidden": false,
+        "type": "normal",
+        "tier": null
+      }
+    ]
+  },
+  "_id": "fFlHKIDOcCsyXByy",
+  "img": "systems/ptr2e/img/svg/ice_icon.svg",
+  "effects": []
+}

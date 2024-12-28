@@ -312,6 +312,24 @@ export default class TokenPanel extends foundry.applications.api.HandlebarsAppli
         });
       }
     }
+    if (["passives", "generic"].includes(partId)) {
+      for (const element of htmlQueryAll(htmlElement, ".action")) {
+        element.addEventListener("contextmenu", async (event) => {
+          event.preventDefault();
+          const slug = (
+            (event.currentTarget as HTMLElement).closest(
+              ".action[data-action]"
+            ) as HTMLElement
+          )?.dataset?.action;
+          if (!slug) return;
+
+          const action = this.token!.actor!.actions.get(slug);
+          if (!action) return;
+
+          return action.item.toChat();
+        });
+      }
+    }
     if (partId === "generic") {
       for (const element of htmlQueryAll(htmlElement, ".action")) {
         const rollable = htmlQuery(element, ".rollable");
