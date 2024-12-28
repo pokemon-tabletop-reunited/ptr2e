@@ -379,6 +379,7 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
 
   web: "global" | ItemUUID = "global";
   private speciesEvolutions: PerkPTR2e[] = [];
+  private underdogPerks: PerkPTR2e[] = [];
   private perkTab: CompendiumBrowserPerkTab | null = null;
 
   constructor(actor: ActorPTR2e, options?: Partial<ApplicationConfigurationExpanded>) {
@@ -411,7 +412,7 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
         label: this.actor?.name ? `${this.actor.name}'s Global Perk Web` : "Global Perk Web"
       }
     ]
-    const uuid = this.actor?.species?.evolutions?.uuid ?? this.actor?.species?.parent?.flags?.core?.sourceId;
+    const uuid = this.actor?.species?.evolutions?.uuid ?? this.actor?.species?.parent?.flags?.core?.sourceId ?? this.actor?.species?.parent?.uuid;
     if (uuid) webOptions.push({
       value: uuid,
       label: this.actor?.name ? `${this.actor.name}'s Species Perk Web` : "Species Perk Web"
@@ -419,7 +420,7 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
 
     if (!this._perkStore) {
       const perks = Array.from((await game.ptr.perks.initialize()).perks.values());
-      perks.push(...this.speciesEvolutions);
+      perks.push(...this.speciesEvolutions, ...this.underdogPerks);
       this._perkStore = new PerkStore({ perks, web: this.web });
     }
     if (!this._perkStore.initialized) {
@@ -1416,6 +1417,7 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
 
     this.web = species.uuid;
     this.speciesEvolutions = await species.system.getEvolutionPerks(!!this.actor?.system.shiny);
+    this.underdogPerks = this.actor ? await this.actor.getUnderdogPerks() : [];
     await PerkWebApp.refresh.call(this);
 
     setTimeout(() => {
@@ -1693,7 +1695,8 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
     this.isSortableDragging = false;
     const perks = [
       ...Array.from(game.ptr.perks.perks.values()),
-      ...this.speciesEvolutions
+      ...this.speciesEvolutions,
+      ...this.underdogPerks
     ]
     this._perkStore.reinitialize({ perks, actor: this.actor ?? undefined, web: this.web });
 

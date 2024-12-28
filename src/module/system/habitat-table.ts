@@ -13,7 +13,7 @@ class HabitatRollTable extends RollTable {
     const habitatSlug = data.habitat as keyof typeof CONFIG.PTR.data.habitats;
     const habitat = CONFIG.PTR.data.habitats[habitatSlug];
     if (habitat === undefined) throw new Error(`Invalid habitat "${habitatSlug}"`);
-    if(HabitatRollTable.cache[habitatSlug]) return HabitatRollTable.cache[habitatSlug];
+    if(HabitatRollTable.cache[habitatSlug]) return HabitatRollTable.cache[habitatSlug]!;
 
     data.name = habitat.name;
     data.description = habitat.description;
