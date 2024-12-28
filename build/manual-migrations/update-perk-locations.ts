@@ -134,8 +134,8 @@ const data = [
                   },
                   "hidden": false,
                   "type": "normal",
-                  "x": 89,
-                  "y": 103,
+                  "x": 76,
+                  "y": 102,
                   "tier": null
               }
           ],
@@ -209,11 +209,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.2.2",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734963640460,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -752,11 +752,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.2.2",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734963575410,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -1223,7 +1223,7 @@ const data = [
           "prerequisites": [
               {
                   "gte": [
-                      "{actor|skills.ghosts.mod}",
+                      "{actor|skills.ghost.mod}",
                       55
                   ]
               }
@@ -1258,11 +1258,11 @@ const data = [
               }
           ],
           "autoUnlock": [],
+          "global": true,
+          "webs": [],
           "originSlug": null,
           "variant": null,
-          "mode": null,
-          "global": true,
-          "webs": []
+          "mode": null
       },
       "effects": [],
       "flags": {
@@ -1479,7 +1479,7 @@ const data = [
           "prerequisites": [
               {
                   "gte": [
-                      "{actor|skills.riding.mod}",
+                      "{actor|skills.ride.mod}",
                       35
                   ]
               }
@@ -1539,11 +1539,11 @@ const data = [
               }
           ],
           "autoUnlock": [],
+          "global": true,
+          "webs": [],
           "originSlug": null,
           "variant": null,
-          "mode": null,
-          "global": true,
-          "webs": []
+          "mode": null
       },
       "_id": "3RFfXmRoL4xcwHWr",
       "img": "systems/ptr2e/img/perk-icons/Cavalier.svg",
@@ -2249,20 +2249,46 @@ const data = [
       "system": {
           "prerequisites": [],
           "cost": 2,
-          "description": "<p>Your next non-[Contact] Attack gains the [2-Strike] trait, if it didn't already have [X-Strike], and has its Power reduced to 80% of its default value. If it already had [X-Strike], that value increases by +2.</p>",
+          "description": "<p>The target's next non-[Contact] Attack gains the [2-Strike] trait, if it didn't already have [X-Strike], and has its Power reduced by 35%. If it already had [X-Strike], that value increases by +2.</p>",
           "actions": [
               {
-                  "name": "Rapid Fire Style 1",
-                  "slug": "rapid-fire-style-1",
-                  "description": "<p>Your next non-[Contact] Attack gains the [2-Strike] trait, if it didn't already have [X-Strike], and has its Power reduced to 80% of its default value. If it already had [X-Strike], that value increases by +2.</p>",
+                  "name": "Rapid Fire!",
+                  "slug": "rapid-fire",
+                  "description": "<p>The target's next non-[Contact] Attack gains the [2-Strike] trait, if it didn't already have [X-Strike], and has its Power reduced by 35%. If it already had [X-Strike], that value increases by +2.</p>",
                   "cost": {
                       "activation": "simple",
-                      "powerPoints": 1,
+                      "powerPoints": 2,
                       "delay": null,
                       "priority": null
                   },
                   "type": "generic",
-                  "traits": [],
+                  "traits": [
+                      "command",
+                      "style"
+                  ],
+                  "img": "icons/svg/explosion.svg",
+                  "range": {
+                      "target": "creature",
+                      "unit": "m",
+                      "distance": 20
+                  },
+                  "variant": null
+              },
+              {
+                  "name": "Rapid Fire! (Self)",
+                  "slug": "rapid-fire-self",
+                  "description": "<p>Your next non-[Contact] Attack gains the [2-Strike] trait, if it didn't already have [X-Strike], and has its Power reduced by 35%. If it already had [X-Strike], that value increases by +2.</p>",
+                  "cost": {
+                      "activation": "simple",
+                      "powerPoints": 2,
+                      "delay": null,
+                      "priority": null
+                  },
+                  "type": "generic",
+                  "traits": [
+                      "command",
+                      "style"
+                  ],
                   "img": "icons/svg/explosion.svg",
                   "range": {
                       "target": "enemy",
@@ -2466,11 +2492,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.2.2",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734957229277,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -2919,11 +2945,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.2.2",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734957231534,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -3431,8 +3457,12 @@ const data = [
           "slug": "improved-teleportation-1",
           "traits": [],
           "_migration": {
-              "version": null,
-              "previous": null
+              "version": 0.109,
+              "previous": {
+                  "schema": null,
+                  "foundry": "12.331",
+                  "system": "0.10.0-alpha.4.2.3"
+              }
           },
           "variant": "multi",
           "mode": "individual",
@@ -3508,13 +3538,65 @@ const data = [
               }
           ],
           "autoUnlock": [],
-          "originSlug": null,
+          "originSlug": "improved-teleportation-1-2",
           "global": true,
           "webs": []
       },
       "_id": "7f24boNPqznIhjiv",
       "img": "systems/ptr2e/img/svg/psychic_icon.svg",
-      "effects": [],
+      "effects": [
+          {
+              "name": "Improved Teleportation",
+              "type": "passive",
+              "_id": "hE1QIY57H3Q9txfn",
+              "img": "systems/ptr2e/img/icons/effect_icon.webp",
+              "system": {
+                  "changes": [
+                      {
+                          "type": "basic",
+                          "key": "system.movement.teleport.value",
+                          "value": 2,
+                          "predicate": [],
+                          "mode": 2,
+                          "priority": null,
+                          "ignored": false
+                      }
+                  ],
+                  "slug": null,
+                  "traits": [],
+                  "removeAfterCombat": true,
+                  "removeOnRecall": false,
+                  "stacks": 0
+              },
+              "disabled": false,
+              "duration": {
+                  "startTime": null,
+                  "seconds": null,
+                  "combat": null,
+                  "rounds": null,
+                  "turns": null,
+                  "startRound": null,
+                  "startTurn": null
+              },
+              "description": "",
+              "origin": null,
+              "tint": "#ffffff",
+              "transfer": true,
+              "statuses": [],
+              "sort": 0,
+              "flags": {},
+              "_stats": {
+                  "compendiumSource": null,
+                  "duplicateSource": null,
+                  "coreVersion": "12.331",
+                  "systemId": "ptr2e",
+                  "systemVersion": "0.10.0-alpha.4.2.3",
+                  "createdTime": 1735220270467,
+                  "modifiedTime": 1735220279891,
+                  "lastModifiedBy": "wRgL6u6KEJDBDQIE"
+              }
+          }
+      ],
       "flags": {
           "core": {
               "sourceId": "Compendium.ptr2e.core-perks.Item.7f24boNPqznIhjiv"
@@ -3808,11 +3890,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.2.2",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734963642192,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -4972,11 +5054,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.2.2",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734963581439,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -5303,105 +5385,6 @@ const data = [
       }
   },
   {
-      "name": "Underdog's Spirit 3",
-      "type": "perk",
-      "folder": "zrVtKATNxzLNxTUb",
-      "system": {
-          "prerequisites": [
-              "item:perk:underdogs-spirit-2",
-              {
-                  "gte": [
-                      "{actor|level}",
-                      30
-                  ]
-              }
-          ],
-          "cost": 2,
-          "description": "<p>Gain +20 to a Combat Stat that is not HP, up to the Underdog BST Cap. This stat cannot be selected again for future Underdog's Spirit Ranks.</p>",
-          "actions": [
-              {
-                  "name": "Underdog's Spirit 3",
-                  "slug": "underdogs-spirit-3",
-                  "description": "<p>Gain +20 to a Combat Stat that is not HP, up to the Underdog BST Cap. This stat cannot be selected again for future Underdog's Spirit Ranks.</p>",
-                  "cost": {
-                      "activation": "free",
-                      "powerPoints": 0,
-                      "delay": null,
-                      "priority": null
-                  },
-                  "type": "passive",
-                  "traits": [],
-                  "img": "icons/svg/explosion.svg",
-                  "range": {
-                      "target": "enemy",
-                      "unit": "m",
-                      "distance": 0
-                  },
-                  "variant": null,
-                  "hidden": false
-              }
-          ],
-          "slug": "underdogs-spirit-3",
-          "traits": [],
-          "_migration": {
-              "version": null,
-              "previous": null
-          },
-          "nodes": [
-              {
-                  "connected": [
-                      "underdogs-spirit-2",
-                      "underdogs-spirit-4",
-                      "specialised-underdog",
-                      "stat-iv-booster-1"
-                  ],
-                  "config": {
-                      "alpha": null,
-                      "backgroundColor": "#ffffff",
-                      "borderColor": null,
-                      "borderWidth": null,
-                      "texture": "systems/ptr2e/img/perk-icons/Breeder.svg",
-                      "tint": "#0c0c0c",
-                      "scale": null
-                  },
-                  "hidden": false,
-                  "type": "normal",
-                  "x": null,
-                  "y": null,
-                  "tier": null
-              }
-          ],
-          "autoUnlock": [],
-          "originSlug": null,
-          "variant": null,
-          "mode": null,
-          "global": true,
-          "webs": []
-      },
-      "_id": "C1AZnIBVdC1y4mc4",
-      "img": "systems/ptr2e/img/perk-icons/Breeder.svg",
-      "effects": [],
-      "flags": {
-          "core": {
-              "sourceId": "Compendium.ptr2e.core-perks.Item.C1AZnIBVdC1y4mc4"
-          }
-      },
-      "_stats": {
-          "coreVersion": "12.331",
-          "systemId": null,
-          "systemVersion": null,
-          "createdTime": null,
-          "modifiedTime": null,
-          "lastModifiedBy": null,
-          "compendiumSource": null,
-          "duplicateSource": null
-      },
-      "sort": 0,
-      "ownership": {
-          "default": 0
-      }
-  },
-  {
       "name": "Pokemaniac",
       "type": "perk",
       "system": {
@@ -5448,7 +5431,6 @@ const data = [
                   "connected": [
                       "hobby-gardener",
                       "scholar",
-                      "underdogs-spirit-1",
                       "root-5",
                       "stat-iv-booster-1-8",
                       "improved-flight-1-5",
@@ -6556,12 +6538,12 @@ const data = [
               }
           ],
           "cost": 1,
-          "description": "<p>You learn the Attack Weather Ball, and gain all [Climate Rock] recipies.</p>",
+          "description": "<p>You learn Weather Ball, and gain all [Climate Rock] recipies.</p>",
           "actions": [
               {
                   "name": "Weaponized Weather",
                   "slug": "weaponized-weather",
-                  "description": "<p>You learn the Attack Weather Ball, and gain all [Climate Rock] recipies.</p>",
+                  "description": "<p>You learn Weather Ball, and gain all [Climate Rock] recipies.</p>",
                   "cost": {
                       "activation": "free",
                       "powerPoints": 0,
@@ -8056,11 +8038,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.2.2",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734963584137,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -10627,7 +10609,7 @@ const data = [
           "prerequisites": [
               {
                   "gte": [
-                      "{actor|skills.riding.mod}",
+                      "{actor|skills.ride.mod}",
                       25
                   ]
               }
@@ -10686,11 +10668,11 @@ const data = [
               }
           ],
           "autoUnlock": [],
+          "global": true,
+          "webs": [],
           "originSlug": null,
           "variant": null,
-          "mode": null,
-          "global": true,
-          "webs": []
+          "mode": null
       },
       "_id": "LF4eCNJmB07YMr7v",
       "img": "systems/ptr2e/img/perk-icons/Cavalier.svg",
@@ -10981,12 +10963,12 @@ const data = [
               }
           ],
           "cost": 2,
-          "description": "<p>Weathers set by you last for +2 additional Rounds, and their numerical effects are increased by 30% (minimum 1).</p>",
+          "description": "<p>Weathers set by you last for +2 additional Rounds, and their numerical effects are increased by 10% (minimum 1).</p>",
           "actions": [
               {
                   "name": "Perpetual Storm",
                   "slug": "perpetual-storm",
-                  "description": "<p>Weathers set by you last for +2 additional Rounds, and their numerical effects are increased by 30% (minimum 1).</p>",
+                  "description": "<p>Weathers set by you last for +2 additional Rounds, and their numerical effects are increased by 10% (minimum 1).</p>",
                   "cost": {
                       "activation": "free",
                       "powerPoints": 0,
@@ -11136,7 +11118,14 @@ const data = [
       "name": "Acrobat",
       "type": "perk",
       "system": {
-          "prerequisites": [],
+          "prerequisites": [
+              {
+                  "gte": [
+                      "{actor|skills.acrobatics.mod}",
+                      30
+                  ]
+              }
+          ],
           "cost": 1,
           "description": "<p>You gain a +10 to Acrobatics checks when benefitting from a running start.</p>",
           "actions": [
@@ -12045,11 +12034,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.2.2",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734963665597,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -12851,11 +12840,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.2.2",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734963512137,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -13121,7 +13110,7 @@ const data = [
               {
                   "name": "Summer Growth",
                   "slug": "summer-growth-action-1",
-                  "description": "<p>Trigger: The Weather becomes Sunny.<br><br>Effect: You may spend 3PP to gain the Ringed condition as a free-action interrupt.</p><p>NOTE: make Generic Action</p>",
+                  "description": "<p>Trigger: The Weather becomes Sunny.<br><br>Effect: You may spend 3 PP to gain the Ringed condition as a free-action interrupt.</p><p>NOTE: make Generic Action</p>",
                   "traits": [
                       "interrupt"
                   ],
@@ -13141,7 +13130,7 @@ const data = [
                   "variant": null
               }
           ],
-          "description": "<p>Trigger: The Weather becomes Sunny.<br><br>Effect: You may spend 3PP to gain the Ringed condition as a free-action interrupt.</p>",
+          "description": "<p>Trigger: The Weather becomes Sunny.<br><br>Effect: You may spend 3 PP to gain the Ringed condition as a free-action interrupt.</p>",
           "traits": [],
           "prerequisites": [
               "trait:grass"
@@ -13748,96 +13737,6 @@ const data = [
       }
   },
   {
-      "name": "Specialised Underdog",
-      "type": "perk",
-      "folder": "zrVtKATNxzLNxTUb",
-      "system": {
-          "prerequisites": [
-              "item:perk:underdogs-spirit-2"
-          ],
-          "cost": 2,
-          "description": "<p>Transfer 10 Base Stat Points from one of your stats other than HP to one other stat of your choosing.</p>",
-          "actions": [
-              {
-                  "name": "Specialised Underdog",
-                  "slug": "specialised-underdog",
-                  "description": "<p>Transfer 10 Base Stat Points from one of your stats other than HP to one other stat of your choosing.</p>",
-                  "cost": {
-                      "activation": "free",
-                      "powerPoints": 0,
-                      "delay": null,
-                      "priority": null
-                  },
-                  "type": "passive",
-                  "traits": [],
-                  "img": "icons/svg/explosion.svg",
-                  "range": {
-                      "target": "enemy",
-                      "unit": "m",
-                      "distance": 0
-                  },
-                  "variant": null,
-                  "hidden": false
-              }
-          ],
-          "slug": "specialised-underdog",
-          "traits": [],
-          "_migration": {
-              "version": null,
-              "previous": null
-          },
-          "nodes": [
-              {
-                  "connected": [
-                      "underdogs-spirit-1"
-                  ],
-                  "config": {
-                      "alpha": null,
-                      "backgroundColor": "#008000",
-                      "borderColor": null,
-                      "borderWidth": null,
-                      "texture": "systems/ptr2e/img/perk-icons/Breeder.svg",
-                      "tint": "#ffffff",
-                      "scale": null
-                  },
-                  "hidden": false,
-                  "type": "normal",
-                  "x": 67,
-                  "y": 166,
-                  "tier": null
-              }
-          ],
-          "autoUnlock": [],
-          "originSlug": null,
-          "variant": null,
-          "mode": null,
-          "global": true,
-          "webs": []
-      },
-      "_id": "RZ325sDR3S3iSSha",
-      "img": "systems/ptr2e/img/perk-icons/Breeder.svg",
-      "effects": [],
-      "flags": {
-          "core": {
-              "sourceId": "Compendium.ptr2e.core-perks.Item.RZ325sDR3S3iSSha"
-          }
-      },
-      "_stats": {
-          "coreVersion": "12.331",
-          "systemId": null,
-          "systemVersion": null,
-          "createdTime": null,
-          "modifiedTime": null,
-          "lastModifiedBy": null,
-          "compendiumSource": null,
-          "duplicateSource": null
-      },
-      "sort": 0,
-      "ownership": {
-          "default": 0
-      }
-  },
-  {
       "name": "Weathered",
       "type": "perk",
       "system": {
@@ -14022,177 +13921,6 @@ const data = [
       "flags": {
           "core": {
               "sourceId": "Compendium.ptr2e.core-perks.Item.Rv0tHo3enp9gvtur"
-          }
-      },
-      "_stats": {
-          "coreVersion": "12.331",
-          "systemId": null,
-          "systemVersion": null,
-          "createdTime": null,
-          "modifiedTime": null,
-          "lastModifiedBy": null,
-          "compendiumSource": null,
-          "duplicateSource": null
-      },
-      "sort": 0,
-      "ownership": {
-          "default": 0
-      }
-  },
-  {
-      "name": "Underdog's Spirit 2",
-      "type": "perk",
-      "folder": "zrVtKATNxzLNxTUb",
-      "system": {
-          "prerequisites": [
-              "item:perk:underdogs-spirit-1"
-          ],
-          "cost": 1,
-          "description": "<p>Gain +20 to a Combat Stat that is not HP, up to the Underdog BST Cap. This stat cannot be selected again for future Underdog's Spirit Ranks.</p>",
-          "actions": [
-              {
-                  "name": "Underdog's Spirit 2",
-                  "slug": "underdogs-spirit-2",
-                  "description": "<p>Gain +20 to a Combat Stat that is not HP, up to the Underdog BST Cap. This stat cannot be selected again for future Underdog's Spirit Ranks.</p>",
-                  "cost": {
-                      "activation": "free",
-                      "powerPoints": 0,
-                      "delay": null,
-                      "priority": null
-                  },
-                  "type": "passive",
-                  "traits": [],
-                  "img": "icons/svg/explosion.svg",
-                  "range": {
-                      "target": "enemy",
-                      "unit": "m",
-                      "distance": 0
-                  },
-                  "variant": null,
-                  "hidden": false
-              }
-          ],
-          "slug": "underdogs-spirit-2",
-          "traits": [],
-          "_migration": {
-              "version": null,
-              "previous": null
-          },
-          "variant": "tiered",
-          "mode": "coexist",
-          "nodes": [
-              {
-                  "connected": [
-                      "underdogs-spirit-1",
-                      "underdogs-spirit-3"
-                  ],
-                  "config": {
-                      "alpha": null,
-                      "backgroundColor": "#ffffff",
-                      "borderColor": null,
-                      "borderWidth": null,
-                      "texture": "systems/ptr2e/img/perk-icons/Breeder.svg",
-                      "tint": "#0c0c0c",
-                      "scale": null
-                  },
-                  "hidden": false,
-                  "type": "normal",
-                  "x": null,
-                  "y": null,
-                  "tier": null
-              },
-              {
-                  "tier": {
-                      "rank": 2,
-                      "uuid": "Compendium.ptr2e.core-perks.Item.C1AZnIBVdC1y4mc4"
-                  },
-                  "x": null,
-                  "y": null,
-                  "connected": [],
-                  "config": {
-                      "alpha": null,
-                      "backgroundColor": null,
-                      "borderColor": null,
-                      "borderWidth": null,
-                      "texture": null,
-                      "tint": null,
-                      "scale": null
-                  },
-                  "hidden": false,
-                  "type": "normal"
-              },
-              {
-                  "tier": {
-                      "rank": 3,
-                      "uuid": "Compendium.ptr2e.core-perks.Item.YRtdrEL8YdgJLtGI"
-                  },
-                  "x": null,
-                  "y": null,
-                  "connected": [],
-                  "config": {
-                      "alpha": null,
-                      "backgroundColor": null,
-                      "borderColor": null,
-                      "borderWidth": null,
-                      "texture": null,
-                      "tint": null,
-                      "scale": null
-                  },
-                  "hidden": false,
-                  "type": "normal"
-              },
-              {
-                  "tier": {
-                      "rank": 4,
-                      "uuid": "Compendium.ptr2e.core-perks.Item.uE8kihRl4Faw49iL"
-                  },
-                  "x": null,
-                  "y": null,
-                  "connected": [],
-                  "config": {
-                      "alpha": null,
-                      "backgroundColor": null,
-                      "borderColor": null,
-                      "borderWidth": null,
-                      "texture": null,
-                      "tint": null,
-                      "scale": null
-                  },
-                  "hidden": false,
-                  "type": "normal"
-              },
-              {
-                  "tier": {
-                      "rank": 5,
-                      "uuid": "Compendium.ptr2e.core-perks.Item.nTqX5nVBl4ZgiKrD"
-                  },
-                  "x": null,
-                  "y": null,
-                  "connected": [],
-                  "config": {
-                      "alpha": null,
-                      "backgroundColor": null,
-                      "borderColor": null,
-                      "borderWidth": null,
-                      "texture": null,
-                      "tint": null,
-                      "scale": null
-                  },
-                  "hidden": false,
-                  "type": "normal"
-              }
-          ],
-          "autoUnlock": [],
-          "originSlug": null,
-          "global": true,
-          "webs": []
-      },
-      "_id": "SAqRif1tG4MlR3Xu",
-      "img": "systems/ptr2e/img/perk-icons/Breeder.svg",
-      "effects": [],
-      "flags": {
-          "core": {
-              "sourceId": "Compendium.ptr2e.core-perks.Item.SAqRif1tG4MlR3Xu"
           }
       },
       "_stats": {
@@ -15079,11 +14807,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.2.2",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734963649046,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -15357,8 +15085,8 @@ const data = [
           "nodes": [
               {
                   "connected": [
-                      "wobbufet-class-curry",
-                      "charizard-class-curry"
+                      "charizard-class-curry",
+                      "milcery-class-curry"
                   ],
                   "config": {
                       "alpha": null,
@@ -15393,11 +15121,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": null,
-          "systemVersion": null,
+          "systemId": "ptr2e",
+          "systemVersion": "0.10.0-alpha.4.2.3",
           "createdTime": null,
-          "modifiedTime": null,
-          "lastModifiedBy": null,
+          "modifiedTime": 1735405782380,
+          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -17075,11 +16803,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.2.2",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734963615216,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -17201,11 +16929,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.2.2",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734957230110,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -17709,97 +17437,6 @@ const data = [
       "flags": {
           "core": {
               "sourceId": "Compendium.ptr2e.core-perks.Item.YRsJxgBk69Mp7uhW"
-          }
-      },
-      "_stats": {
-          "coreVersion": "12.331",
-          "systemId": null,
-          "systemVersion": null,
-          "createdTime": null,
-          "modifiedTime": null,
-          "lastModifiedBy": null,
-          "compendiumSource": null,
-          "duplicateSource": null
-      },
-      "sort": 0,
-      "ownership": {
-          "default": 0
-      }
-  },
-  {
-      "name": "Underdog's Spirit 4",
-      "type": "perk",
-      "folder": "zrVtKATNxzLNxTUb",
-      "system": {
-          "prerequisites": [
-              "item:perk:underdogs-spirit-3"
-          ],
-          "cost": 2,
-          "description": "<p>Gain +20 to a Combat Stat that is not HP, up to the Underdog BST Cap. This stat cannot be selected again for future Underdog's Spirit Ranks.</p>",
-          "actions": [
-              {
-                  "name": "Underdog's Spirit 4",
-                  "slug": "underdogs-spirit-4",
-                  "description": "<p>Gain +20 to a Combat Stat that is not HP, up to the Underdog BST Cap. This stat cannot be selected again for future Underdog's Spirit Ranks.</p>",
-                  "cost": {
-                      "activation": "free",
-                      "powerPoints": 0,
-                      "delay": null,
-                      "priority": null
-                  },
-                  "type": "passive",
-                  "traits": [],
-                  "img": "icons/svg/explosion.svg",
-                  "range": {
-                      "target": "enemy",
-                      "unit": "m",
-                      "distance": 0
-                  },
-                  "variant": null,
-                  "hidden": false
-              }
-          ],
-          "slug": "underdogs-spirit-4",
-          "traits": [],
-          "_migration": {
-              "version": null,
-              "previous": null
-          },
-          "nodes": [
-              {
-                  "connected": [
-                      "underdogs-spirit-3",
-                      "underdogs-spirit-5"
-                  ],
-                  "config": {
-                      "alpha": null,
-                      "backgroundColor": "#ffffff",
-                      "borderColor": null,
-                      "borderWidth": null,
-                      "texture": "systems/ptr2e/img/perk-icons/Breeder.svg",
-                      "tint": "#0c0c0c",
-                      "scale": null
-                  },
-                  "hidden": false,
-                  "type": "normal",
-                  "x": null,
-                  "y": null,
-                  "tier": null
-              }
-          ],
-          "autoUnlock": [],
-          "originSlug": null,
-          "variant": null,
-          "mode": null,
-          "global": true,
-          "webs": []
-      },
-      "_id": "YRtdrEL8YdgJLtGI",
-      "img": "systems/ptr2e/img/perk-icons/Breeder.svg",
-      "effects": [],
-      "flags": {
-          "core": {
-              "sourceId": "Compendium.ptr2e.core-perks.Item.YRtdrEL8YdgJLtGI"
           }
       },
       "_stats": {
@@ -19767,7 +19404,7 @@ const data = [
               }
           ],
           "cost": 3,
-          "description": "<p>Until the start of the next Round, the user benefits from the active [Weather] and [Terrain] as if they were the beneficial Type or had the specific [Traits] of their choice.</p>",
+          "description": "<p>Until the start of the next Round, the user benefits from the active [Weather] and [Terrain] as if they were the beneficial Type or had the specific [Traits] of their choice. The user learns one Move from the [Trekker] Tutor List.</p>",
           "actions": [
               {
                   "name": "All-Seasonal",
@@ -19890,7 +19527,7 @@ const data = [
               }
           ],
           "cost": 3,
-          "description": "<p>When a [Weather] effect ends or you enter Combat, you may use a [Weather] Attack as an [Interrupt 4] Free Action. The user learns 2 [Weather] Attacks from their Tutor List, and they do not need to meet the Grade requirements for these Attacks.</p>",
+          "description": "<p>When a [Weather] effect ends or you enter Combat, you may use a [Weather] Attack as an [Interrupt 4] Free Action. The user learns one Attack from the [Climatologist] Tutor List.</p>",
           "actions": [
               {
                   "name": "Climate Change",
@@ -20955,11 +20592,11 @@ const data = [
               }
           ],
           "autoUnlock": [],
+          "global": true,
+          "webs": [],
           "originSlug": null,
           "variant": null,
-          "mode": null,
-          "global": true,
-          "webs": []
+          "mode": null
       },
       "_id": "d5QAjSgWP4KbjSz6",
       "img": "systems/ptr2e/img/perk-icons/Cavalier.svg",
@@ -21804,6 +21441,102 @@ const data = [
       }
   },
   {
+      "name": "Thermal Dynamics",
+      "type": "perk",
+      "system": {
+          "_migration": {
+              "version": 0.109,
+              "previous": null
+          },
+          "actions": [
+              {
+                  "name": "Thermal Dynamics",
+                  "slug": "thermal-dynamics",
+                  "description": "<p>Whenever you use an action with the [Defrost] trait you may add up to 2 of the following effects, spending 2 PP per effect added.</p><ul><li>For each stack of Frostbite reduced on the target, deal Tick damage as if the Frostbite had ticked down as End-of-Activation Damage.</li><li>Increase the maximum stacks of Frostbite removed by this Action by 5.</li><li>If this Action would cure Frozen affecting you, your next Action is Advanced by 50% as if Frozen had naturally ticked down to 0 stacks.</li><li>If this Action would cure Frozen from any targets, those targets their next Action is Advanced by 50% as if Frozen had naturally ticked down to 0 stacks.</li><li>Any damage dealt by this Action is reduced by 50%.</li></ul>",
+                  "traits": [],
+                  "type": "passive",
+                  "img": "systems/ptr2e/img/svg/ice_icon.svg",
+                  "cost": {
+                      "activation": "free",
+                      "powerPoints": 2,
+                      "delay": null,
+                      "priority": null,
+                      "trigger": ""
+                  },
+                  "variant": null,
+                  "hidden": false,
+                  "range": {
+                      "target": "enemy",
+                      "distance": 0,
+                      "unit": "m"
+                  }
+              }
+          ],
+          "slug": "thermal-dynamics",
+          "description": "<p>Whenever you use an action with the [Defrost] trait you may add up to 2 of the following effects, spending 2 PP per effect added.</p><ul><li>For each stack of Frostbite reduced on the target, deal Tick damage as if the Frostbite had ticked down as End-of-Activation Damage.</li><li>Increase the maximum stacks of Frostbite removed by this Action by 5.</li><li>If this Action would cure Frozen affecting you, your next Action is Advanced by 50% as if Frozen had naturally ticked down to 0 stacks.</li><li>If this Action would cure Frozen from any targets, those targets their next Action is Advanced by 50% as if Frozen had naturally ticked down to 0 stacks.</li><li>Any damage dealt by this Action is reduced by 50%.</li></ul>",
+          "traits": [],
+          "prerequisites": [
+              "#A move with the [Defrost] Trait"
+          ],
+          "autoUnlock": [],
+          "cost": 2,
+          "originSlug": null,
+          "variant": null,
+          "mode": null,
+          "global": true,
+          "webs": [],
+          "nodes": [
+              {
+                  "x": 83,
+                  "y": 124,
+                  "connected": [
+                      "cryogenics",
+                      "biting-cold",
+                      "brittle-ice",
+                      "chill-out",
+                      "improved-overland-1-5",
+                      "stat-iv-booster-1-12"
+                  ],
+                  "config": {
+                      "alpha": null,
+                      "backgroundColor": null,
+                      "borderColor": null,
+                      "borderWidth": null,
+                      "texture": null,
+                      "tint": null,
+                      "scale": null
+                  },
+                  "hidden": false,
+                  "type": "normal",
+                  "tier": null
+              }
+          ]
+      },
+      "_id": "fFlHKIDOcCsyXByy",
+      "img": "systems/ptr2e/img/svg/ice_icon.svg",
+      "effects": [],
+      "flags": {
+          "core": {
+              "sourceId": "Compendium.ptr2e.core-perks.Item.fFlHKIDOcCsyXByy"
+          }
+      },
+      "_stats": {
+          "coreVersion": "12.331",
+          "systemId": null,
+          "systemVersion": null,
+          "createdTime": null,
+          "modifiedTime": null,
+          "lastModifiedBy": null,
+          "compendiumSource": null,
+          "duplicateSource": null
+      },
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+          "default": 0
+      }
+  },
+  {
       "folder": "zrVtKATNxzLNxTUa",
       "name": "Glutton For Punishment",
       "type": "perk",
@@ -22011,11 +21744,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.2.2",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734963632878,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -22227,7 +21960,7 @@ const data = [
               }
           ],
           "slug": "berserker",
-          "description": "<p>Gain the [Berserker] trait and gain access to the Berserker Tutor List. The user learns Rage, Work Up, and Frenzy Rush.</p>",
+          "description": "<p>Gain the [Berserker] trait and gain access to the [Berserker] Tutor List. The user learns Rage, Work Up, and Frenzy Rush.</p>",
           "traits": [],
           "prerequisites": [
               {
@@ -23192,11 +22925,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.2.2",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734957230847,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -23950,7 +23683,7 @@ const data = [
               }
           ],
           "cost": 2,
-          "description": "<p>Until the start of the next Round, the user is immune to effect damage and negative effects of active Terrains, Weathers, and Hazards. The user adds all [Terrain] Attacks to their Tutor List, learning 2 of them immediately upon taking this Perk.</p>",
+          "description": "<p>Until the start of the next Round, the user is immune to effect damage and negative effects of active Terrains, Weathers, and Hazards. The user gains the [Trekker] Trait, and learns one Move from that Tutor List.</p>",
           "actions": [
               {
                   "name": "Hardy Trekker",
@@ -24361,157 +24094,6 @@ const data = [
       }
   },
   {
-      "name": "Underdog's Spirit 1",
-      "type": "perk",
-      "folder": "zrVtKATNxzLNxTUb",
-      "system": {
-          "prerequisites": [
-              "trait:underdog",
-              {
-                  "gte": [
-                      "{actor|level}",
-                      25
-                  ]
-              }
-          ],
-          "cost": 1,
-          "description": "<p>Gain +10 HP Base Stat, up to the Underdog BST Cap.</p>",
-          "actions": [
-              {
-                  "name": "Underdog's Spirit 1",
-                  "slug": "underdogs-spirit-1",
-                  "description": "<p>Gain +10 HP Base Stat, up to the Underdog BST Cap.</p>",
-                  "cost": {
-                      "activation": "free",
-                      "powerPoints": 0,
-                      "delay": null,
-                      "priority": null
-                  },
-                  "type": "passive",
-                  "traits": [],
-                  "img": "icons/svg/explosion.svg",
-                  "range": {
-                      "target": "enemy",
-                      "unit": "m",
-                      "distance": 0
-                  },
-                  "variant": null,
-                  "hidden": false
-              }
-          ],
-          "slug": "underdogs-spirit-1",
-          "traits": [],
-          "_migration": {
-              "version": null,
-              "previous": null
-          },
-          "nodes": [
-              {
-                  "x": 64,
-                  "y": 163,
-                  "hidden": false,
-                  "type": "entry",
-                  "connected": [
-                      "specialised-underdog",
-                      "root-5",
-                      "climatologist",
-                      "pokemaniac"
-                  ],
-                  "config": {
-                      "alpha": null,
-                      "backgroundColor": "#ffffff",
-                      "borderColor": null,
-                      "borderWidth": null,
-                      "texture": "systems/ptr2e/img/perk-icons/Breeder.svg",
-                      "tint": "#121212",
-                      "scale": null
-                  },
-                  "tier": null
-              }
-          ],
-          "autoUnlock": [],
-          "originSlug": null,
-          "variant": null,
-          "mode": null,
-          "global": true,
-          "webs": []
-      },
-      "_id": "jbm2zRAz5F3IdmWQ",
-      "img": "systems/ptr2e/img/perk-icons/Breeder.svg",
-      "effects": [
-          {
-              "name": "Underdog's Spirit 1",
-              "type": "passive",
-              "_id": "sa9DKSsGPQSxhX24",
-              "img": "systems/ptr2e/img/icons/effect_icon.webp",
-              "system": {
-                  "changes": [
-                      {
-                          "type": "basic",
-                          "key": "system.attributes.hp.base",
-                          "value": 10,
-                          "predicate": [],
-                          "mode": 2,
-                          "priority": null,
-                          "ignored": false
-                      }
-                  ],
-                  "slug": null,
-                  "traits": [],
-                  "removeAfterCombat": true,
-                  "removeOnRecall": false,
-                  "stacks": 0
-              },
-              "disabled": false,
-              "duration": {
-                  "startTime": null,
-                  "seconds": null,
-                  "combat": null,
-                  "rounds": null,
-                  "turns": null,
-                  "startRound": null,
-                  "startTurn": null
-              },
-              "description": "",
-              "origin": null,
-              "tint": "#ffffff",
-              "transfer": true,
-              "statuses": [],
-              "sort": 0,
-              "flags": {},
-              "_stats": {
-                  "compendiumSource": "Actor.6K9P8ATjBFtFFA6f.Item.Z0CEcAOmbtkRkHzr.ActiveEffect.ouUENbxP31g1dmNU",
-                  "duplicateSource": null,
-                  "coreVersion": "12.331",
-                  "systemId": "ptr2e",
-                  "systemVersion": "0.10.0-alpha.3.0.0",
-                  "createdTime": 1729377335281,
-                  "modifiedTime": 1729377335281,
-                  "lastModifiedBy": "Kc3DOunCh3ClAeHS"
-              }
-          }
-      ],
-      "flags": {
-          "core": {
-              "sourceId": "Compendium.ptr2e.core-perks.Item.jbm2zRAz5F3IdmWQ"
-          }
-      },
-      "_stats": {
-          "coreVersion": "12.331",
-          "systemId": null,
-          "systemVersion": null,
-          "createdTime": null,
-          "modifiedTime": null,
-          "lastModifiedBy": null,
-          "compendiumSource": null,
-          "duplicateSource": null
-      },
-      "sort": 0,
-      "ownership": {
-          "default": 0
-      }
-  },
-  {
       "name": "Relay Race",
       "type": "perk",
       "folder": "fDfAXQXXzkaqpYoa",
@@ -24896,20 +24478,46 @@ const data = [
               "item:perk:rapid-fire-style-1"
           ],
           "cost": 4,
-          "description": "<p>Your next non-[Contact] Attack gains the [5-Strike] trait, if it didn't already have [X-Strike], and has its Power reduced to 40% of its default value. If it already had [X-Strike], that value increases by +5.</p>",
+          "description": "<p>Your next non-[Contact] Attack gains the [5-Strike] trait, if it didn't already have [X-Strike], and has its Power reduced by 55%. If it already had [X-Strike], that value increases by +5.</p>",
           "actions": [
               {
-                  "name": "Rapid Fire Style 2",
-                  "slug": "rapid-fire-style-2",
-                  "description": "<p>Your next non-[Contact] Attack gains the [5-Strike] trait, if it didn't already have [X-Strike], and has its Power reduced to 40% of its default value. If it already had [X-Strike], that value increases by +5.</p>",
+                  "name": "Rapid Fire 2!",
+                  "slug": "rapid-fire-2",
+                  "description": "<p>The target's next non-[Contact] Attack gains the [5-Strike] trait, if it didn't already have [X-Strike], and has its Power reduced by 55%. If it already had [X-Strike], that value increases by +2.</p>",
                   "cost": {
                       "activation": "simple",
-                      "powerPoints": 3,
+                      "powerPoints": 2,
                       "delay": null,
                       "priority": null
                   },
                   "type": "generic",
-                  "traits": [],
+                  "traits": [
+                      "command",
+                      "style"
+                  ],
+                  "img": "icons/svg/explosion.svg",
+                  "range": {
+                      "target": "creature",
+                      "unit": "m",
+                      "distance": 20
+                  },
+                  "variant": null
+              },
+              {
+                  "name": "Rapid Fire 2! (Self)",
+                  "slug": "rapid-fire-2-self",
+                  "description": "<p>Your next non-[Contact] Attack gains the [2-Strike] trait, if it didn't already have [X-Strike], and has its Power reduced by 55%. If it already had [X-Strike], that value increases by +2.</p>",
+                  "cost": {
+                      "activation": "simple",
+                      "powerPoints": 2,
+                      "delay": null,
+                      "priority": null
+                  },
+                  "type": "generic",
+                  "traits": [
+                      "command",
+                      "style"
+                  ],
                   "img": "icons/svg/explosion.svg",
                   "range": {
                       "target": "enemy",
@@ -25534,7 +25142,7 @@ const data = [
               {
                   "name": "Skirmish",
                   "slug": "skirmish",
-                  "description": "<p>The user gains +2 SPD stages for 5 Activations, or removed early if the user takes damage.</p>",
+                  "description": "<p>Trigger: The user enters Combat.</p><p>Effect: The user advances their Initiative by 50%.</p><blockquote>Ideally this should be done prior to the GM pressing the 'Begin Combat' button.</blockquote>",
                   "traits": [
                       "interrupt-2"
                   ],
@@ -25551,12 +25159,12 @@ const data = [
                       "unit": "m",
                       "distance": 0
                   },
-                  "img": "icons/svg/explosion.svg",
+                  "img": "systems/ptr2e/img/perk-icons/Ninja.svg",
                   "variant": null
               }
           ],
           "slug": "skirmish",
-          "description": "<p>Upon entering combat, as a Free Action at [Interrupt 2], you may spend 2 PP to gain +2 SPD stages for 5 Activations, or until you take damage.</p>",
+          "description": "<p>Upon entering combat, as a Free Action at [Interrupt 2], you may spend 2 PP advance their Initiative by 50%.</p>",
           "traits": [],
           "prerequisites": [],
           "cost": 2,
@@ -25588,11 +25196,11 @@ const data = [
               }
           ],
           "autoUnlock": [],
+          "global": true,
+          "webs": [],
           "originSlug": null,
           "variant": null,
-          "mode": null,
-          "global": true,
-          "webs": []
+          "mode": null
       },
       "effects": [],
       "flags": {
@@ -25662,8 +25270,8 @@ const data = [
           "nodes": [
               {
                   "connected": [
-                      "koffing-class-curry",
-                      "wobbufet-class-curry"
+                      "wobbufet-class-curry",
+                      "copperajah-class-curry"
                   ],
                   "config": {
                       "alpha": null,
@@ -25698,11 +25306,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": null,
-          "systemVersion": null,
+          "systemId": "ptr2e",
+          "systemVersion": "0.10.0-alpha.4.2.3",
           "createdTime": null,
-          "modifiedTime": null,
-          "lastModifiedBy": null,
+          "modifiedTime": 1735405780999,
+          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -25756,12 +25364,12 @@ const data = [
               }
           ],
           "cost": 2,
-          "description": "<p>You gain +15 to Skill Rolls pertaining to Weather, and gain all [Climate Clay] recipies. The user adds all [Weather] Attacks to their Tutor List.</p>",
+          "description": "<p>You gain +15 to Skill Rolls pertaining to Weather, and gain all [Climate Clay] recipies. The user gains the [Climatologist] Trait, and learns one Move from that Tutor List.</p>",
           "actions": [
               {
                   "name": "Climatologist",
                   "slug": "climatologist",
-                  "description": "<p>You gain +15 to Skill Rolls pertaining to Weather, and gain all [Climate Clay] recipies. The user adds all [Weather] Attacks to their Tutor List.</p>",
+                  "description": "<p>You gain +15 to Skill Rolls pertaining to Weather, and gain all [Climate Clay] recipies. The user gains the [Climatologist] Trait, and learns one Move from that Tutor List.</p>",
                   "cost": {
                       "activation": "free",
                       "powerPoints": 0,
@@ -25800,7 +25408,6 @@ const data = [
                       "masters-whip",
                       "root-5",
                       "emergency-retreat",
-                      "underdogs-spirit-1",
                       "summer-growth",
                       "scholar",
                       "chill-out",
@@ -25837,11 +25444,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.2.2",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734963602529,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -26355,11 +25962,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.2.2",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734963615216,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -26907,96 +26514,6 @@ const data = [
       "flags": {
           "core": {
               "sourceId": "Compendium.ptr2e.core-perks.Item.nT6V9QuEPMqAy4Xj"
-          }
-      },
-      "_stats": {
-          "coreVersion": "12.331",
-          "systemId": null,
-          "systemVersion": null,
-          "createdTime": null,
-          "modifiedTime": null,
-          "lastModifiedBy": null,
-          "compendiumSource": null,
-          "duplicateSource": null
-      },
-      "sort": 0,
-      "ownership": {
-          "default": 0
-      }
-  },
-  {
-      "name": "Underdog's Spirit 6",
-      "type": "perk",
-      "folder": "zrVtKATNxzLNxTUb",
-      "system": {
-          "prerequisites": [
-              "item:perk:underdogs-spirit-5"
-          ],
-          "cost": 3,
-          "description": "Gain +20 to a Combat Stat that is not HP, up to the Underdog BST Cap. This stat cannot be selected again for future Underdog's Spirit Ranks.",
-          "actions": [
-              {
-                  "name": "Underdog's Spirit 6",
-                  "slug": "underdogs-spirit-6",
-                  "description": "<p>Gain +20 to a Combat Stat that is not HP, up to the Underdog BST Cap. This stat cannot be selected again for future Underdog's Spirit Ranks.</p>",
-                  "cost": {
-                      "activation": "free",
-                      "powerPoints": 0,
-                      "delay": null,
-                      "priority": null
-                  },
-                  "type": "passive",
-                  "traits": [],
-                  "img": "icons/svg/explosion.svg",
-                  "range": {
-                      "target": "enemy",
-                      "unit": "m",
-                      "distance": 0
-                  },
-                  "variant": null,
-                  "hidden": false
-              }
-          ],
-          "slug": "underdogs-spirit-6",
-          "traits": [],
-          "_migration": {
-              "version": null,
-              "previous": null
-          },
-          "nodes": [
-              {
-                  "connected": [
-                      "underdogs-spirit-5"
-                  ],
-                  "config": {
-                      "alpha": null,
-                      "backgroundColor": "#ffffff",
-                      "borderColor": null,
-                      "borderWidth": null,
-                      "texture": "systems/ptr2e/img/perk-icons/Breeder.svg",
-                      "tint": "#0c0c0c",
-                      "scale": null
-                  },
-                  "hidden": false,
-                  "type": "normal",
-                  "x": null,
-                  "y": null,
-                  "tier": null
-              }
-          ],
-          "autoUnlock": [],
-          "originSlug": null,
-          "variant": null,
-          "mode": null,
-          "global": true,
-          "webs": []
-      },
-      "_id": "nTqX5nVBl4ZgiKrD",
-      "img": "systems/ptr2e/img/perk-icons/Breeder.svg",
-      "effects": [],
-      "flags": {
-          "core": {
-              "sourceId": "Compendium.ptr2e.core-perks.Item.nTqX5nVBl4ZgiKrD"
           }
       },
       "_stats": {
@@ -28475,7 +27992,6 @@ const data = [
                   "type": "root",
                   "connected": [
                       "climatologist",
-                      "underdogs-spirit-1",
                       "pokemaniac",
                       "scholar",
                       "chill-out",
@@ -28877,7 +28393,7 @@ const data = [
           "prerequisites": [
               {
                   "gte": [
-                      "{actor|skills.riding.mod}",
+                      "{actor|skills.ride.mod}",
                       20
                   ]
               }
@@ -28946,11 +28462,11 @@ const data = [
               }
           ],
           "autoUnlock": [],
+          "global": true,
+          "webs": [],
           "originSlug": null,
           "variant": null,
-          "mode": null,
-          "global": true,
-          "webs": []
+          "mode": null
       },
       "_id": "swPSWUmbRn3KwvyI",
       "img": "systems/ptr2e/img/perk-icons/Cavalier.svg",
@@ -29228,12 +28744,12 @@ const data = [
               }
           ],
           "cost": 2,
-          "description": "<p>You can access to the [Fossil] Tutor List, and may tutor Attacks from the from that Tutor List as if you knew them already yourself, up to your Grade. You receive +20 on Teaching Checks to Tutor [Fossil] creatures.</p>",
+          "description": "<p>You can access to the [Fossil] Tutor List, and may tutor Attacks from the from that Tutor List as if you knew them already yourself. You receive +20 on Teaching Checks to Tutor [Fossil] creatures.</p>",
           "actions": [
               {
                   "name": "Yesterday and Today",
                   "slug": "yesterday-and-today",
-                  "description": "<p>You can access to the [Fossil] Tutor List, and may tutor Attacks from the from that Tutor List as if you knew them already yourself, up to your Grade. You receive +20 on Teaching Checks to Tutor [Fossil] creatures.</p>",
+                  "description": "<p>You can access to the [Fossil] Tutor List, and may tutor Attacks from the from that Tutor List as if you knew them already yourself. You receive +20 on Teaching Checks to Tutor [Fossil] creatures.</p>",
                   "cost": {
                       "activation": "complex",
                       "powerPoints": 0,
@@ -29871,10 +29387,10 @@ const data = [
                   "hidden": false,
                   "type": "entry",
                   "connected": [
-                      "milcery-class-curry",
                       "root-3",
                       "trubbish-class-sandwiches",
-                      "stat-iv-booster-1-2"
+                      "stat-iv-booster-1-2",
+                      "wobbufet-class-curry"
                   ],
                   "config": {
                       "alpha": null,
@@ -29901,6 +29417,615 @@ const data = [
       "flags": {
           "core": {
               "sourceId": "Compendium.ptr2e.core-perks.Item.u37SL8BTWqw1fr0P"
+          }
+      },
+      "_stats": {
+          "coreVersion": "12.331",
+          "systemId": "ptr2e",
+          "systemVersion": "0.10.0-alpha.4.2.3",
+          "createdTime": null,
+          "modifiedTime": 1735405783192,
+          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "compendiumSource": null,
+          "duplicateSource": null
+      },
+      "sort": 0,
+      "ownership": {
+          "default": 0
+      }
+  },
+  {
+      "name": "Underdog's Spirit 1",
+      "type": "perk",
+      "folder": "zrVtKATNxzLNxTUb",
+      "system": {
+          "prerequisites": [
+              "trait:underdog",
+              {
+                  "gte": [
+                      "{actor|level}",
+                      25
+                  ]
+              }
+          ],
+          "cost": 1,
+          "description": "<p>Gain +10 HP Base Stat, up to the Underdog BST Cap.</p>",
+          "actions": [
+              {
+                  "name": "Underdog's Spirit 1",
+                  "slug": "underdogs-spirit-1",
+                  "description": "<p>Gain +10 HP Base Stat, up to the Underdog BST Cap.</p>",
+                  "cost": {
+                      "activation": "free",
+                      "powerPoints": 0,
+                      "delay": null,
+                      "priority": null
+                  },
+                  "type": "passive",
+                  "traits": [],
+                  "img": "icons/svg/explosion.svg",
+                  "range": {
+                      "target": "enemy",
+                      "unit": "m",
+                      "distance": 0
+                  },
+                  "variant": null,
+                  "hidden": false
+              }
+          ],
+          "slug": "underdogs-spirit-1",
+          "traits": [],
+          "_migration": {
+              "version": null,
+              "previous": null
+          },
+          "nodes": [
+              {
+                  "x": 15,
+                  "y": 17,
+                  "hidden": false,
+                  "type": "entry",
+                  "connected": [
+                      "specialized-underdog"
+                  ],
+                  "config": {
+                      "alpha": null,
+                      "backgroundColor": "#ffffff",
+                      "borderColor": null,
+                      "borderWidth": null,
+                      "texture": "systems/ptr2e/img/perk-icons/Breeder.svg",
+                      "tint": "#121212",
+                      "scale": null
+                  },
+                  "tier": null
+              },
+              {
+                  "tier": {
+                      "rank": 2,
+                      "uuid": "Compendium.ptr2e.core-perks.Item.underdogperk0011"
+                  },
+                  "x": null,
+                  "y": null,
+                  "connected": [],
+                  "hidden": false,
+                  "type": "normal",
+                  "config": {
+                      "alpha": null,
+                      "backgroundColor": null,
+                      "borderColor": null,
+                      "borderWidth": null,
+                      "texture": null,
+                      "tint": null,
+                      "scale": null
+                  }
+              },
+              {
+                  "tier": {
+                      "rank": 3,
+                      "uuid": "Compendium.ptr2e.core-perks.Item.underdogperk0021"
+                  },
+                  "x": null,
+                  "y": null,
+                  "connected": [],
+                  "hidden": false,
+                  "type": "normal",
+                  "config": {
+                      "alpha": null,
+                      "backgroundColor": null,
+                      "borderColor": null,
+                      "borderWidth": null,
+                      "texture": null,
+                      "tint": null,
+                      "scale": null
+                  }
+              },
+              {
+                  "tier": {
+                      "rank": 4,
+                      "uuid": "Compendium.ptr2e.core-perks.Item.underdogperk0031"
+                  },
+                  "x": null,
+                  "y": null,
+                  "connected": [],
+                  "hidden": false,
+                  "type": "normal",
+                  "config": {
+                      "alpha": null,
+                      "backgroundColor": null,
+                      "borderColor": null,
+                      "borderWidth": null,
+                      "texture": null,
+                      "tint": null,
+                      "scale": null
+                  }
+              },
+              {
+                  "tier": {
+                      "rank": 5,
+                      "uuid": "Compendium.ptr2e.core-perks.Item.underdogperk0041"
+                  },
+                  "x": null,
+                  "y": null,
+                  "connected": [],
+                  "hidden": false,
+                  "type": "normal",
+                  "config": {
+                      "alpha": null,
+                      "backgroundColor": null,
+                      "borderColor": null,
+                      "borderWidth": null,
+                      "texture": null,
+                      "tint": null,
+                      "scale": null
+                  }
+              },
+              {
+                  "tier": {
+                      "rank": 5,
+                      "uuid": "Compendium.ptr2e.core-perks.Item.underdogperk0051"
+                  },
+                  "x": null,
+                  "y": null,
+                  "connected": [],
+                  "hidden": false,
+                  "type": "normal",
+                  "config": {
+                      "alpha": null,
+                      "backgroundColor": null,
+                      "borderColor": null,
+                      "borderWidth": null,
+                      "texture": null,
+                      "tint": null,
+                      "scale": null
+                  }
+              }
+          ],
+          "autoUnlock": [],
+          "originSlug": null,
+          "variant": "tiered",
+          "mode": "coexist",
+          "global": false,
+          "webs": []
+      },
+      "_id": "underdogperk0001",
+      "img": "systems/ptr2e/img/perk-icons/Breeder.svg",
+      "effects": [
+          {
+              "name": "Underdog's Spirit 1",
+              "type": "passive",
+              "_id": "sa9DKSsGPQSxhX24",
+              "img": "systems/ptr2e/img/icons/effect_icon.webp",
+              "system": {
+                  "changes": [
+                      {
+                          "type": "basic",
+                          "key": "system.attributes.hp.base",
+                          "value": 10,
+                          "predicate": [],
+                          "mode": 2,
+                          "priority": null,
+                          "ignored": false
+                      }
+                  ],
+                  "slug": null,
+                  "traits": [],
+                  "removeAfterCombat": true,
+                  "removeOnRecall": false,
+                  "stacks": 0
+              },
+              "disabled": false,
+              "duration": {
+                  "startTime": null,
+                  "seconds": null,
+                  "combat": null,
+                  "rounds": null,
+                  "turns": null,
+                  "startRound": null,
+                  "startTurn": null
+              },
+              "description": "",
+              "origin": null,
+              "tint": "#ffffff",
+              "transfer": true,
+              "statuses": [],
+              "sort": 0,
+              "flags": {},
+              "_stats": {
+                  "compendiumSource": "Actor.6K9P8ATjBFtFFA6f.Item.Z0CEcAOmbtkRkHzr.ActiveEffect.ouUENbxP31g1dmNU",
+                  "duplicateSource": null,
+                  "coreVersion": "12.331",
+                  "systemId": "ptr2e",
+                  "systemVersion": "0.10.0-alpha.3.0.0",
+                  "createdTime": 1729377335281,
+                  "modifiedTime": 1729377335281,
+                  "lastModifiedBy": "Kc3DOunCh3ClAeHS"
+              }
+          }
+      ],
+      "flags": {
+          "core": {
+              "sourceId": "Compendium.ptr2e.core-perks.Item.underdogperk0001"
+          }
+      },
+      "_stats": {
+          "coreVersion": "12.331",
+          "systemId": null,
+          "systemVersion": null,
+          "createdTime": null,
+          "modifiedTime": null,
+          "lastModifiedBy": null,
+          "compendiumSource": null,
+          "duplicateSource": null
+      },
+      "sort": 0,
+      "ownership": {
+          "default": 0
+      }
+  },
+  {
+      "name": "Specialised Underdog",
+      "type": "perk",
+      "folder": "zrVtKATNxzLNxTUb",
+      "system": {
+          "prerequisites": [
+              "trait:underdog",
+              "item:perk:underdogs-spirit-2"
+          ],
+          "cost": 2,
+          "description": "<p>Transfer 10 Base Stat Points from one of your stats other than HP to one other stat of your choosing.</p>",
+          "actions": [
+              {
+                  "name": "Specialised Underdog",
+                  "slug": "specialised-underdog",
+                  "description": "<p>Transfer 10 Base Stat Points from one of your stats other than HP to one other stat of your choosing.</p>",
+                  "cost": {
+                      "activation": "free",
+                      "powerPoints": 0,
+                      "delay": null,
+                      "priority": null
+                  },
+                  "type": "passive",
+                  "traits": [],
+                  "img": "icons/svg/explosion.svg",
+                  "range": {
+                      "target": "enemy",
+                      "unit": "m",
+                      "distance": 0
+                  },
+                  "variant": null,
+                  "hidden": false
+              }
+          ],
+          "slug": "specialised-underdog",
+          "traits": [],
+          "_migration": {
+              "version": null,
+              "previous": null
+          },
+          "nodes": [
+              {
+                  "connected": [
+                      "underdogs-spirit-1"
+                  ],
+                  "config": {
+                      "alpha": null,
+                      "backgroundColor": "#008000",
+                      "borderColor": null,
+                      "borderWidth": null,
+                      "texture": "systems/ptr2e/img/perk-icons/Breeder.svg",
+                      "tint": "#ffffff",
+                      "scale": null
+                  },
+                  "hidden": false,
+                  "type": "normal",
+                  "x": 15,
+                  "y": 18,
+                  "tier": null
+              }
+          ],
+          "autoUnlock": [],
+          "originSlug": null,
+          "variant": null,
+          "mode": null,
+          "global": false,
+          "webs": []
+      },
+      "_id": "underdogperk0002",
+      "img": "systems/ptr2e/img/perk-icons/Breeder.svg",
+      "effects": [],
+      "flags": {
+          "core": {
+              "sourceId": "Compendium.ptr2e.core-perks.Item.underdogperk0002"
+          }
+      },
+      "_stats": {
+          "coreVersion": "12.331",
+          "systemId": null,
+          "systemVersion": null,
+          "createdTime": null,
+          "modifiedTime": null,
+          "lastModifiedBy": null,
+          "compendiumSource": null,
+          "duplicateSource": null
+      },
+      "sort": 0,
+      "ownership": {
+          "default": 0
+      }
+  },
+  {
+      "name": "Underdog's Spirit 2",
+      "type": "perk",
+      "folder": "zrVtKATNxzLNxTUb",
+      "system": {
+          "prerequisites": [
+              "item:perk:underdogs-spirit-1"
+          ],
+          "cost": 1,
+          "description": "<p>Gain +20 to a Combat Stat that is not HP, up to the Underdog BST Cap. This stat cannot be selected again for future Underdog's Spirit Ranks.</p>",
+          "actions": [
+              {
+                  "name": "Underdog's Spirit 2",
+                  "slug": "underdogs-spirit-2",
+                  "description": "<p>Gain +20 to a Combat Stat that is not HP, up to the Underdog BST Cap. This stat cannot be selected again for future Underdog's Spirit Ranks.</p>",
+                  "cost": {
+                      "activation": "free",
+                      "powerPoints": 0,
+                      "delay": null,
+                      "priority": null
+                  },
+                  "type": "passive",
+                  "traits": [],
+                  "img": "icons/svg/explosion.svg",
+                  "range": {
+                      "target": "enemy",
+                      "unit": "m",
+                      "distance": 0
+                  },
+                  "variant": null,
+                  "hidden": false
+              }
+          ],
+          "slug": "underdogs-spirit-2",
+          "traits": [],
+          "_migration": {
+              "version": null,
+              "previous": null
+          },
+          "variant": "tiered",
+          "mode": "coexist",
+          "nodes": [
+              {
+                  "connected": [],
+                  "config": {
+                      "alpha": null,
+                      "backgroundColor": "#ffffff",
+                      "borderColor": null,
+                      "borderWidth": null,
+                      "texture": "systems/ptr2e/img/perk-icons/Breeder.svg",
+                      "tint": "#0c0c0c",
+                      "scale": null
+                  },
+                  "hidden": false,
+                  "type": "normal",
+                  "x": null,
+                  "y": null,
+                  "tier": null
+              }
+          ],
+          "autoUnlock": [],
+          "originSlug": null,
+          "global": false,
+          "webs": []
+      },
+      "_id": "underdogperk0011",
+      "img": "systems/ptr2e/img/perk-icons/Breeder.svg",
+      "effects": [],
+      "flags": {
+          "core": {
+              "sourceId": "Compendium.ptr2e.core-perks.Item.underdogperk0011"
+          }
+      },
+      "_stats": {
+          "coreVersion": "12.331",
+          "systemId": null,
+          "systemVersion": null,
+          "createdTime": null,
+          "modifiedTime": null,
+          "lastModifiedBy": null,
+          "compendiumSource": null,
+          "duplicateSource": null
+      },
+      "sort": 0,
+      "ownership": {
+          "default": 0
+      }
+  },
+  {
+      "name": "Underdog's Spirit 3",
+      "type": "perk",
+      "folder": "zrVtKATNxzLNxTUb",
+      "system": {
+          "prerequisites": [
+              "item:perk:underdogs-spirit-2",
+              {
+                  "gte": [
+                      "{actor|level}",
+                      30
+                  ]
+              }
+          ],
+          "cost": 2,
+          "description": "<p>Gain +20 to a Combat Stat that is not HP, up to the Underdog BST Cap. This stat cannot be selected again for future Underdog's Spirit Ranks.</p>",
+          "actions": [
+              {
+                  "name": "Underdog's Spirit 3",
+                  "slug": "underdogs-spirit-3",
+                  "description": "<p>Gain +20 to a Combat Stat that is not HP, up to the Underdog BST Cap. This stat cannot be selected again for future Underdog's Spirit Ranks.</p>",
+                  "cost": {
+                      "activation": "free",
+                      "powerPoints": 0,
+                      "delay": null,
+                      "priority": null
+                  },
+                  "type": "passive",
+                  "traits": [],
+                  "img": "icons/svg/explosion.svg",
+                  "range": {
+                      "target": "enemy",
+                      "unit": "m",
+                      "distance": 0
+                  },
+                  "variant": null,
+                  "hidden": false
+              }
+          ],
+          "slug": "underdogs-spirit-3",
+          "traits": [],
+          "_migration": {
+              "version": null,
+              "previous": null
+          },
+          "nodes": [
+              {
+                  "connected": [],
+                  "config": {
+                      "alpha": null,
+                      "backgroundColor": "#ffffff",
+                      "borderColor": null,
+                      "borderWidth": null,
+                      "texture": "systems/ptr2e/img/perk-icons/Breeder.svg",
+                      "tint": "#0c0c0c",
+                      "scale": null
+                  },
+                  "hidden": false,
+                  "type": "normal",
+                  "x": null,
+                  "y": null,
+                  "tier": null
+              }
+          ],
+          "autoUnlock": [],
+          "originSlug": null,
+          "variant": null,
+          "mode": null,
+          "global": false,
+          "webs": []
+      },
+      "_id": "underdogperk0021",
+      "img": "systems/ptr2e/img/perk-icons/Breeder.svg",
+      "effects": [],
+      "flags": {
+          "core": {
+              "sourceId": "Compendium.ptr2e.core-perks.Item.underdogperk0021"
+          }
+      },
+      "_stats": {
+          "coreVersion": "12.331",
+          "systemId": null,
+          "systemVersion": null,
+          "createdTime": null,
+          "modifiedTime": null,
+          "lastModifiedBy": null,
+          "compendiumSource": null,
+          "duplicateSource": null
+      },
+      "sort": 0,
+      "ownership": {
+          "default": 0
+      }
+  },
+  {
+      "name": "Underdog's Spirit 4",
+      "type": "perk",
+      "folder": "zrVtKATNxzLNxTUb",
+      "system": {
+          "prerequisites": [
+              "item:perk:underdogs-spirit-3"
+          ],
+          "cost": 2,
+          "description": "<p>Gain +20 to a Combat Stat that is not HP, up to the Underdog BST Cap. This stat cannot be selected again for future Underdog's Spirit Ranks.</p>",
+          "actions": [
+              {
+                  "name": "Underdog's Spirit 4",
+                  "slug": "underdogs-spirit-4",
+                  "description": "<p>Gain +20 to a Combat Stat that is not HP, up to the Underdog BST Cap. This stat cannot be selected again for future Underdog's Spirit Ranks.</p>",
+                  "cost": {
+                      "activation": "free",
+                      "powerPoints": 0,
+                      "delay": null,
+                      "priority": null
+                  },
+                  "type": "passive",
+                  "traits": [],
+                  "img": "icons/svg/explosion.svg",
+                  "range": {
+                      "target": "enemy",
+                      "unit": "m",
+                      "distance": 0
+                  },
+                  "variant": null,
+                  "hidden": false
+              }
+          ],
+          "slug": "underdogs-spirit-4",
+          "traits": [],
+          "_migration": {
+              "version": null,
+              "previous": null
+          },
+          "nodes": [
+              {
+                  "connected": [],
+                  "config": {
+                      "alpha": null,
+                      "backgroundColor": "#ffffff",
+                      "borderColor": null,
+                      "borderWidth": null,
+                      "texture": "systems/ptr2e/img/perk-icons/Breeder.svg",
+                      "tint": "#0c0c0c",
+                      "scale": null
+                  },
+                  "hidden": false,
+                  "type": "normal",
+                  "x": null,
+                  "y": null,
+                  "tier": null
+              }
+          ],
+          "autoUnlock": [],
+          "originSlug": null,
+          "variant": null,
+          "mode": null,
+          "global": false,
+          "webs": []
+      },
+      "_id": "underdogperk0031",
+      "img": "systems/ptr2e/img/perk-icons/Breeder.svg",
+      "effects": [],
+      "flags": {
+          "core": {
+              "sourceId": "Compendium.ptr2e.core-perks.Item.underdogperk0031"
           }
       },
       "_stats": {
@@ -29965,10 +30090,7 @@ const data = [
           },
           "nodes": [
               {
-                  "connected": [
-                      "underdogs-spirit-6",
-                      "underdogs-spirit-4"
-                  ],
+                  "connected": [],
                   "config": {
                       "alpha": null,
                       "backgroundColor": "#ffffff",
@@ -29989,15 +30111,103 @@ const data = [
           "originSlug": null,
           "variant": null,
           "mode": null,
-          "global": true,
+          "global": false,
           "webs": []
       },
-      "_id": "uE8kihRl4Faw49iL",
+      "_id": "underdogperk0041",
       "img": "systems/ptr2e/img/perk-icons/Breeder.svg",
       "effects": [],
       "flags": {
           "core": {
-              "sourceId": "Compendium.ptr2e.core-perks.Item.uE8kihRl4Faw49iL"
+              "sourceId": "Compendium.ptr2e.core-perks.Item.underdogperk0041"
+          }
+      },
+      "_stats": {
+          "coreVersion": "12.331",
+          "systemId": null,
+          "systemVersion": null,
+          "createdTime": null,
+          "modifiedTime": null,
+          "lastModifiedBy": null,
+          "compendiumSource": null,
+          "duplicateSource": null
+      },
+      "sort": 0,
+      "ownership": {
+          "default": 0
+      }
+  },
+  {
+      "name": "Underdog's Spirit 6",
+      "type": "perk",
+      "folder": "zrVtKATNxzLNxTUb",
+      "system": {
+          "prerequisites": [
+              "item:perk:underdogs-spirit-5"
+          ],
+          "cost": 3,
+          "description": "Gain +20 to a Combat Stat that is not HP, up to the Underdog BST Cap. This stat cannot be selected again for future Underdog's Spirit Ranks.",
+          "actions": [
+              {
+                  "name": "Underdog's Spirit 6",
+                  "slug": "underdogs-spirit-6",
+                  "description": "<p>Gain +20 to a Combat Stat that is not HP, up to the Underdog BST Cap. This stat cannot be selected again for future Underdog's Spirit Ranks.</p>",
+                  "cost": {
+                      "activation": "free",
+                      "powerPoints": 0,
+                      "delay": null,
+                      "priority": null
+                  },
+                  "type": "passive",
+                  "traits": [],
+                  "img": "icons/svg/explosion.svg",
+                  "range": {
+                      "target": "enemy",
+                      "unit": "m",
+                      "distance": 0
+                  },
+                  "variant": null,
+                  "hidden": false
+              }
+          ],
+          "slug": "underdogs-spirit-6",
+          "traits": [],
+          "_migration": {
+              "version": null,
+              "previous": null
+          },
+          "nodes": [
+              {
+                  "connected": [],
+                  "config": {
+                      "alpha": null,
+                      "backgroundColor": "#ffffff",
+                      "borderColor": null,
+                      "borderWidth": null,
+                      "texture": "systems/ptr2e/img/perk-icons/Breeder.svg",
+                      "tint": "#0c0c0c",
+                      "scale": null
+                  },
+                  "hidden": false,
+                  "type": "normal",
+                  "x": null,
+                  "y": null,
+                  "tier": null
+              }
+          ],
+          "autoUnlock": [],
+          "originSlug": null,
+          "variant": null,
+          "mode": null,
+          "global": false,
+          "webs": []
+      },
+      "_id": "underdogperk0051",
+      "img": "systems/ptr2e/img/perk-icons/Breeder.svg",
+      "effects": [],
+      "flags": {
+          "core": {
+              "sourceId": "Compendium.ptr2e.core-perks.Item.underdogperk0051"
           }
       },
       "_stats": {
@@ -30832,7 +31042,7 @@ const data = [
       "system": {
           "actions": [],
           "slug": "hexcraft",
-          "description": "<p>You gain access to the [Hexcraft] trait and Tutor List, and may learn 3 moves from the [Hexcraft] Tutor List that you qualify for immediately.</p>",
+          "description": "<p>You gain access to the [Haxcraft] trait and Tutor List, and you learn Spite, Grudge, and Night Shade.</p>",
           "traits": [],
           "prerequisites": [
               {
@@ -31521,11 +31731,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": "ptr2e",
-          "systemVersion": "0.10.0-alpha.4.2.2",
+          "systemId": null,
+          "systemVersion": null,
           "createdTime": null,
-          "modifiedTime": 1734957249302,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+          "modifiedTime": null,
+          "lastModifiedBy": null,
           "compendiumSource": null,
           "duplicateSource": null
       },
@@ -32843,10 +33053,10 @@ const data = [
           "nodes": [
               {
                   "connected": [
-                      "milcery-class-curry",
                       "curry-breath",
                       "charizard-class-curry",
-                      "copperajah-class-curry"
+                      "milcery-class-curry",
+                      "koffing-class-curry"
                   ],
                   "config": {
                       "alpha": null,
@@ -32881,11 +33091,11 @@ const data = [
       },
       "_stats": {
           "coreVersion": "12.331",
-          "systemId": null,
-          "systemVersion": null,
+          "systemId": "ptr2e",
+          "systemVersion": "0.10.0-alpha.4.2.3",
           "createdTime": null,
-          "modifiedTime": null,
-          "lastModifiedBy": null,
+          "modifiedTime": 1735405783192,
+          "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
           "compendiumSource": null,
           "duplicateSource": null
       },
