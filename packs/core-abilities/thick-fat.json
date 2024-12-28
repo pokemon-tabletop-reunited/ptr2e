@@ -33,5 +33,68 @@
     }
   },
   "_id": "lT0zvBk2uYNaLTLo",
-  "effects": []
+  "effects": [
+    {
+      "name": "Thick Fat",
+      "type": "passive",
+      "_id": "hDTu7ESC4HKKu5oD",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "ephemeral-modifier",
+            "key": "fire-attack-damage-percentile",
+            "value": -50,
+            "predicate": [],
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "hideIfDisabled": false
+          },
+          {
+            "type": "ephemeral-modifier",
+            "key": "ice-attack-damage-percentile",
+            "value": -50,
+            "predicate": [],
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "hideIfDisabled": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.4.2.3",
+        "createdTime": 1735383528373,
+        "modifiedTime": 1735383572058,
+        "lastModifiedBy": "wRgL6u6KEJDBDQIE"
+      }
+    }
+  ]
 }
