@@ -60,12 +60,29 @@ export class RollTableDirectoryPTR2e extends RollTableDirectory {
         icon: '<i class="fas fa-sync"></i>',
         condition: header => {
           const li = header.closest("li[data-habitat]")[0] as HTMLLIElement;
-          return HabitatRollTable.canRefresh(li?.dataset.habitat);
+          return HabitatRollTable.canRefresh(li?.dataset.habitat as keyof typeof CONFIG.PTR.data.habitats);
         },
         callback: header => {
           const li = header.closest("li[data-habitat]")[0] as HTMLLIElement;
           const habitat = li?.dataset.habitat as keyof typeof CONFIG.PTR.data.habitats;
           HabitatRollTable.refresh(habitat);
+        }
+      },
+      {
+        name: "PTR2E.DynamicTableCopy",
+        icon: '<i class="fas fa-copy"></i>',
+        condition: header => {
+          const li = header.closest("li[data-habitat]")[0] as HTMLLIElement;
+          return !!CONFIG.PTR.data.habitats[li?.dataset.habitat as keyof typeof CONFIG.PTR.data.habitats];
+        },
+        callback: async header => {
+          const li = header.closest("li[data-habitat]")[0] as HTMLLIElement;
+          const habitat = li.dataset.habitat as keyof typeof CONFIG.PTR.data.habitats;
+          const table = new HabitatRollTable({ habitat });
+          await table.init();
+          const data = table.toObject();
+          data.name = `Copy of ${data.name}`
+          RollTable.create(data);
         }
       },
       ...options,

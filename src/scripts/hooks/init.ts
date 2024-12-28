@@ -166,6 +166,7 @@ export const Init: PTRHook = {
 
     Hooks.once('ready', () => {
       console.log('PTR 2e | Ready');
+
       // Add ready code here
       GamePTR.onReady();
 

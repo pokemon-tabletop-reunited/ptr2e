@@ -19,13 +19,13 @@
 
   <!-- Directories List -->
 	<ol class="directory-list">
-    <li class="directory-item folder flexcol collapsed" draggable="false">
+    <li class="directory-item folder flexcol collapsed" draggable="false" data-tooltip="Dynamic Habitat Tables are generated automatically based on the 'habitat' field of Species in the Species Compendium.">
       <header class="folder-header flexrow">
         <h3 class="noborder"><i class="fas fa-folder-open fa-fw"></i>Dynamic Habitat Tables</h3>
       </header>
       <ol class="subdirectory">
         {{~#each habitats}}
-          <li class="directory-item dynamic-habitat document rolltable flexrow" style="display: flex;" data-habitat="{{this.slug}}" draggable="false">
+          <li class="directory-item dynamic-habitat document rolltable flexrow" style="display: flex;" data-habitat="{{this.slug}}" data-document-id="{{this.slug}}" draggable="false">
             <img class="thumbnail" title="Rollable Table" src="icons/svg/d20-grey.svg">
             <h4 class="entry-name document-name"><a>{{this.name}}</a></h4>
           </li>
