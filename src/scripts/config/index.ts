@@ -33,6 +33,7 @@ import FormActiveEffectSystem from "@module/effects/data/form.ts";
 import { FormConfigSheet } from "@module/effects/form-sheet.ts";
 import { Predicate } from "@system/predication/predication.ts";
 import { CircumstanceModifierGroups } from "./circumstance-modifiers.ts";
+import { Habitats } from "./habitats.ts";
 
 export const PTRCONFIG = {
   ActiveEffect: {
@@ -161,7 +162,8 @@ export const PTRCONFIG = {
   data: {
     traits: Traits,
     skills: Skills,
-    circumstanceModifierGroups: CircumstanceModifierGroups
+    circumstanceModifierGroups: CircumstanceModifierGroups,
+    habitats: Habitats
   },
   statusEffects: StatusEffects,
   specialStatusEffects: {
