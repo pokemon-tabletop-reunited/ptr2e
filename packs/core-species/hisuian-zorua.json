@@ -6,7 +6,7 @@
     "number": 570,
     "size": {
       "category": "small",
-      "type": "height",
+      "type": "quad",
       "height": 0.7,
       "weight": 12.5
     },
@@ -17,21 +17,21 @@
       "primary": [
         {
           "type": "overland",
-          "value": 10
+          "value": 11
         }
       ],
       "secondary": [
         {
           "type": "swim",
-          "value": 5
+          "value": 3
         }
       ]
     },
     "traits": [
       "pokemon",
-      "underdog",
       "illusionist",
-      "pack-mon"
+      "pack-mon",
+      "quadrupedal"
     ],
     "abilities": {
       "starting": [
@@ -41,18 +41,18 @@
       ],
       "basic": [
         {
-          "slug": "wimp-out"
+          "slug": "aurora-borealis"
         },
         {
-          "slug": "dark-call"
+          "slug": "assassin"
         }
       ],
       "advanced": [
         {
-          "slug": "ambush"
+          "slug": "exploit-weakness"
         },
         {
-          "slug": "exploit-weakness"
+          "slug": "lacerate"
         }
       ],
       "master": [
@@ -60,7 +60,7 @@
           "slug": "creepy"
         },
         {
-          "slug": "snow-cloak"
+          "slug": "necromancy"
         }
       ]
     },
@@ -91,6 +91,14 @@
       },
       {
         "slug": "disguise",
+        "value": 30,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "ghost",
         "value": 30,
         "rvs": 0,
         "favourite": false,
@@ -136,14 +144,6 @@
         "favourite": false,
         "hidden": false,
         "group": null
-      },
-      {
-        "slug": "ghost",
-        "value": 30,
-        "rvs": 0,
-        "favourite": false,
-        "hidden": false,
-        "group": "occult"
       },
       {
         "slug": "psychology",
@@ -210,187 +210,79 @@
     "moves": {
       "levelUp": [
         {
-          "name": "scratch",
-          "level": 1,
-          "gen": "scarlet-violet"
+          "name": "leer",
+          "gen": "scarlet-violet",
+          "level": 1
         },
         {
-          "name": "leer",
-          "level": 1,
-          "gen": "scarlet-violet"
+          "name": "scratch",
+          "gen": "scarlet-violet",
+          "level": 1
         },
         {
           "name": "torment",
-          "level": 4,
-          "gen": "scarlet-violet"
+          "gen": "scarlet-violet",
+          "level": 4
         },
         {
           "name": "hone-claws",
-          "level": 8,
-          "gen": "scarlet-violet"
+          "gen": "scarlet-violet",
+          "level": 8
         },
         {
           "name": "shadow-sneak",
-          "level": 12,
-          "gen": "scarlet-violet"
+          "gen": "scarlet-violet",
+          "level": 12
         },
         {
           "name": "curse",
-          "level": 16,
-          "gen": "scarlet-violet"
+          "gen": "scarlet-violet",
+          "level": 16
         },
         {
           "name": "taunt",
-          "level": 20,
-          "gen": "scarlet-violet"
+          "gen": "scarlet-violet",
+          "level": 20
         },
         {
           "name": "knock-off",
-          "level": 24,
-          "gen": "scarlet-violet"
+          "gen": "scarlet-violet",
+          "level": 24
         },
         {
           "name": "spite",
-          "level": 28,
-          "gen": "scarlet-violet"
+          "gen": "scarlet-violet",
+          "level": 28
         },
         {
           "name": "agility",
-          "level": 32,
-          "gen": "scarlet-violet"
+          "gen": "scarlet-violet",
+          "level": 32
         },
         {
           "name": "shadow-ball",
-          "level": 36,
-          "gen": "scarlet-violet"
+          "gen": "scarlet-violet",
+          "level": 36
         },
         {
           "name": "bitter-malice",
-          "level": 40,
-          "gen": "scarlet-violet"
+          "gen": "scarlet-violet",
+          "level": 40
         },
         {
           "name": "nasty-plot",
-          "level": 44,
-          "gen": "scarlet-violet"
+          "gen": "scarlet-violet",
+          "level": 44
         },
         {
           "name": "foul-play",
-          "level": 48,
-          "gen": "scarlet-violet"
+          "gen": "scarlet-violet",
+          "level": 48
         }
       ],
       "tutor": [
         {
-          "name": "detect",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "memento",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "extrasensory",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "comeuppance",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "take-down",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "roar",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "hyper-beam",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "dig",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "night-shade",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "confuse-ray",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "swift",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "rest",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "substitute",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "thief",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "protect",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "sludge-bomb",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "icy-wind",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "endure",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "sleep-talk",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "pain-split",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "rain-dance",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "psych-up",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "will-o-wisp",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "facade",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "focus-punch",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "trick",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "imprison",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "fake-tears",
+          "name": "burning-jealousy",
           "gen": "scarlet-violet"
         },
         {
@@ -398,7 +290,11 @@
           "gen": "scarlet-violet"
         },
         {
-          "name": "u-turn",
+          "name": "comeuppance",
+          "gen": "scarlet-violet"
+        },
+        {
+          "name": "confuse-ray",
           "gen": "scarlet-violet"
         },
         {
@@ -406,11 +302,35 @@
           "gen": "scarlet-violet"
         },
         {
-          "name": "giga-impact",
+          "name": "detect",
           "gen": "scarlet-violet"
         },
         {
-          "name": "shadow-claw",
+          "name": "dig",
+          "gen": "scarlet-violet"
+        },
+        {
+          "name": "endure",
+          "gen": "scarlet-violet"
+        },
+        {
+          "name": "extrasensory",
+          "gen": "scarlet-violet"
+        },
+        {
+          "name": "facade",
+          "gen": "scarlet-violet"
+        },
+        {
+          "name": "fake-tears",
+          "gen": "scarlet-violet"
+        },
+        {
+          "name": "focus-punch",
+          "gen": "scarlet-violet"
+        },
+        {
+          "name": "giga-impact",
           "gen": "scarlet-violet"
         },
         {
@@ -418,19 +338,15 @@
           "gen": "scarlet-violet"
         },
         {
-          "name": "snarl",
+          "name": "hyper-beam",
           "gen": "scarlet-violet"
         },
         {
-          "name": "phantom-force",
+          "name": "icy-wind",
           "gen": "scarlet-violet"
         },
         {
-          "name": "skitter-smack",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "burning-jealousy",
+          "name": "imprison",
           "gen": "scarlet-violet"
         },
         {
@@ -438,11 +354,95 @@
           "gen": "scarlet-violet"
         },
         {
-          "name": "tera-blast",
+          "name": "memento",
+          "gen": "scarlet-violet"
+        },
+        {
+          "name": "night-shade",
+          "gen": "scarlet-violet"
+        },
+        {
+          "name": "pain-split",
+          "gen": "scarlet-violet"
+        },
+        {
+          "name": "phantom-force",
+          "gen": "scarlet-violet"
+        },
+        {
+          "name": "protect",
+          "gen": "scarlet-violet"
+        },
+        {
+          "name": "psych-up",
+          "gen": "scarlet-violet"
+        },
+        {
+          "name": "rain-dance",
+          "gen": "scarlet-violet"
+        },
+        {
+          "name": "rest",
+          "gen": "scarlet-violet"
+        },
+        {
+          "name": "roar",
+          "gen": "scarlet-violet"
+        },
+        {
+          "name": "shadow-claw",
+          "gen": "scarlet-violet"
+        },
+        {
+          "name": "skitter-smack",
+          "gen": "scarlet-violet"
+        },
+        {
+          "name": "sleep-talk",
+          "gen": "scarlet-violet"
+        },
+        {
+          "name": "sludge-bomb",
+          "gen": "scarlet-violet"
+        },
+        {
+          "name": "snarl",
           "gen": "scarlet-violet"
         },
         {
           "name": "snowscape",
+          "gen": "scarlet-violet"
+        },
+        {
+          "name": "substitute",
+          "gen": "scarlet-violet"
+        },
+        {
+          "name": "swift",
+          "gen": "scarlet-violet"
+        },
+        {
+          "name": "take-down",
+          "gen": "scarlet-violet"
+        },
+        {
+          "name": "tera-blast",
+          "gen": "scarlet-violet"
+        },
+        {
+          "name": "thief",
+          "gen": "scarlet-violet"
+        },
+        {
+          "name": "trick",
+          "gen": "scarlet-violet"
+        },
+        {
+          "name": "u-turn",
+          "gen": "scarlet-violet"
+        },
+        {
+          "name": "will-o-wisp",
           "gen": "scarlet-violet"
         }
       ]
@@ -458,8 +458,8 @@
       "details": null,
       "evolutions": [
         {
-          "name": "zoroark",
-          "uuid": "Compendium.ptr2e.core-species.Item.8BZ0uPg1HcYOAjTh",
+          "name": "hisuian-zoroark",
+          "uuid": "Compendium.ptr2e.core-species.Item.LBezeXJOj6cUwYFN",
           "methods": [
             {
               "type": "level",
@@ -467,19 +467,31 @@
               "operand": "and"
             }
           ],
-          "evolutions": [],
+          "perk": {
+            "x": 15,
+            "y": 15
+          },
           "details": {
             "gender": null,
             "item": null,
             "level": null,
             "knownMove": null
-          }
+          },
+          "evolutions": []
         }
       ],
-      "uuid": "Compendium.ptr2e.core-species.Item.SlLelgJyBZpuWnhV"
+      "uuid": "Compendium.ptr2e.core-species.Item.SlLelgJyBZpuWnhV",
+      "methods": [],
+      "perk": {
+        "x": 15,
+        "y": 15
+      }
+    },
+    "_migration": {
+      "version": null,
+      "previous": null
     }
   },
   "_id": "SlLelgJyBZpuWnhV",
-  "effects": [],
-  "folder": null
+  "effects": []
 }
