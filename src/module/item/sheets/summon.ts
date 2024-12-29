@@ -5,7 +5,7 @@ import SummonActiveEffectSystem from "@module/effects/data/summon.ts";
 import { ActiveEffectSchema } from "types/foundry/common/documents/active-effect.js";
 
 export default class SummonSheet extends ItemSheetPTR2e<SummonPTR2e["system"]> {
-  static override DEFAULT_OPTIONS = fu.mergeObject(
+  static override DEFAULT_OPTIONS = foundry.utils.mergeObject(
     super.DEFAULT_OPTIONS,
     {
       classes: ["summon-sheet"],
@@ -18,7 +18,7 @@ export default class SummonSheet extends ItemSheetPTR2e<SummonPTR2e["system"]> {
   override noActions = false;
 
   static override PARTS: Record<string, foundry.applications.api.HandlebarsTemplatePart> =
-    fu.mergeObject(super.PARTS, {
+    foundry.utils.mergeObject(super.PARTS, {
       overview: {
         template: SummonSheet.overviewTemplate,
       },

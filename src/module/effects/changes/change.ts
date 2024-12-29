@@ -246,7 +246,7 @@ class ChangeModel<TSchema extends ChangeSchema = ChangeSchema> extends foundry.a
               : key === "actor" || key === "item" || key === "effect"
                 ? this[key]
                 : this.effect;
-          const value = fu.getProperty(data ?? {}, prop);
+          const value = foundry.utils.getProperty(data ?? {}, prop);
           if (value === undefined) {
             this.ignored = true;
             if (warn)
@@ -293,7 +293,7 @@ class ChangeModel<TSchema extends ChangeSchema = ChangeSchema> extends foundry.a
 
     if (resolvedFromBracket instanceof Object) {
       return defaultValue instanceof Object
-        ? fu.mergeObject(defaultValue, resolvedFromBracket, { inplace: false })
+        ? foundry.utils.mergeObject(defaultValue, resolvedFromBracket, { inplace: false })
         : resolvedFromBracket;
     }
 
@@ -356,13 +356,13 @@ class ChangeModel<TSchema extends ChangeSchema = ChangeSchema> extends foundry.a
 
       switch (source) {
         case "actor":
-          return Number(fu.getProperty(actor ?? {}, field.substring(separator + 1))) || 0;
+          return Number(foundry.utils.getProperty(actor ?? {}, field.substring(separator + 1))) || 0;
         case "item":
-          return Number(fu.getProperty(item ?? {}, field.substring(separator + 1))) || 0;
+          return Number(foundry.utils.getProperty(item ?? {}, field.substring(separator + 1))) || 0;
         case "rule":
-          return Number(fu.getProperty(this, field.substring(separator + 1))) || 0;
+          return Number(foundry.utils.getProperty(this, field.substring(separator + 1))) || 0;
         default:
-          return Number(fu.getProperty(actor ?? {}, field.substring(0))) || 0;
+          return Number(foundry.utils.getProperty(actor ?? {}, field.substring(0))) || 0;
       }
     })();
     const brackets = value.brackets ?? [];

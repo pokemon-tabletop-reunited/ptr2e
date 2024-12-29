@@ -23,7 +23,7 @@ class ChoiceSetPrompt extends PickAThingPrompt<ItemPTR2e<ItemSystemPTR, ActorPTR
     this.allowedDrops = this.containsItems ? data.allowedDrops : null;
   }
 
-  static override DEFAULT_OPTIONS = fu.mergeObject(
+  static override DEFAULT_OPTIONS = foundry.utils.mergeObject(
     super.DEFAULT_OPTIONS,
     {
       classes: ["choice-set-prompt"],

@@ -12,7 +12,7 @@ export class MockItem {
         data: ItemSourcePTR2e,
         public options: DocumentConstructionContext<ActorPTR2e | null> = {},
     ) {
-        this._source = fu.duplicate(data);
+        this._source = foundry.utils.duplicate(data);
         this.parent = options.parent ?? null;
     }
 
@@ -34,16 +34,16 @@ export class MockItem {
     ): Promise<ItemPTR2e<ItemSystemPTR, ActorPTR2e | null>[]> {
         return updates.flatMap((update) => {
             const item = game.items.find((item) => item.id === update._id);
-            if (item) fu.mergeObject(item._source, update, { performDeletions: true });
+            if (item) foundry.utils.mergeObject(item._source, update, { performDeletions: true });
             return item ?? [];
         });
     }
 
     update(changes: object): void {
-        fu.mergeObject(this._source, changes, { performDeletions: true });
+        foundry.utils.mergeObject(this._source, changes, { performDeletions: true });
     }
 
     toObject(): ItemSourcePTR2e {
-        return fu.duplicate(this._source);
+        return foundry.utils.duplicate(this._source);
     }
 }

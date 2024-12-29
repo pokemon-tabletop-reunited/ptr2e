@@ -51,7 +51,7 @@ export default class PTR2eTraits extends Collection<Trait> {
       });
     }
 
-    this.rawModuleTraits = fu.deepClone(toAdd);
+    this.rawModuleTraits = foundry.utils.deepClone(toAdd);
 
     return this;
   }

@@ -6,7 +6,7 @@ class PerkDirectory extends ItemDirectory<ItemPTR2e<ItemSystemPTR, null>> {
   }
 
   static override get defaultOptions(): SidebarDirectoryOptions {
-    return fu.mergeObject(super.defaultOptions, {
+    return foundry.utils.mergeObject(super.defaultOptions, {
       popOut: true
     });
   }

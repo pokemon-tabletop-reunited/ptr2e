@@ -8,7 +8,7 @@ import { SpeciesSystemModel } from "@item/data/index.ts";
 import { ActorPTR2e } from "@actor";
 
 export default class BlueprintSheet extends foundry.applications.api.HandlebarsApplicationMixin(DocumentSheetV2<ItemPTR2e<BlueprintSystem>>) {
-  static override DEFAULT_OPTIONS = fu.mergeObject(
+  static override DEFAULT_OPTIONS = foundry.utils.mergeObject(
     super.DEFAULT_OPTIONS,
     {
       classes: ["blueprint", "sheet"],
@@ -428,7 +428,7 @@ export default class BlueprintSheet extends foundry.applications.api.HandlebarsA
 
     // If this isn't a temporary generation, update the current selected blueprint based on form data
     if (!this.generation?.temporary && this.selected) {
-      const updateData = fu.duplicate(formData.object);
+      const updateData = foundry.utils.duplicate(formData.object);
       for (const key in updateData) {
         if (updateData[key] === "") {
           delete updateData[key];
@@ -447,13 +447,13 @@ export default class BlueprintSheet extends foundry.applications.api.HandlebarsA
       const blueprint = this.selected;
       if (!blueprint) return;
 
-      const updateData = fu.duplicate(formData.object);
+      const updateData = foundry.utils.duplicate(formData.object);
       for (const key in updateData) {
         if (updateData[key] === "") {
           delete updateData[key];
         }
       }
-      fu.mergeObject(blueprint, updateData, { inplace: true });
+      foundry.utils.mergeObject(blueprint, updateData, { inplace: true });
     }
 
     const generation = this.generation ? {...this.generation, team: !this.team?.owner && (this.team?.members?.length ?? 0) > 1} : null;

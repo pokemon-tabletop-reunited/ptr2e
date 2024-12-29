@@ -29,7 +29,7 @@ class RecursiveEmbeddedDataField<
     context: Record<string, unknown> & {recursion?: number} = {}
   ) {
     //@ts-expect-error - This is correct
-    if (!fu.isSubclass(model, foundry.abstract.DataModel)) {
+    if (!foundry.utils.isSubclass(model, foundry.abstract.DataModel)) {
       throw new Error("An EmbeddedDataField must specify a DataModel class as its type");
     }
 

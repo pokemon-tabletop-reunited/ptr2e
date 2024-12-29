@@ -1,6 +1,7 @@
 import { ActionPTR2e } from "@data";
 import { MigrationRecord } from "@module/data/mixins/has-migrations.ts";
 import { RollOptionDomains } from "@module/data/roll-option-manager.ts";
+import type { AnyObject } from "fvtt-types/utils";
 
 type ItemType =
     | "ability"
@@ -23,7 +24,7 @@ type BaseItemSourcePTR2e<
     flags: ItemSourceFlagsPTR2e;
 };
 
-interface ItemFlagsPTR2e extends foundry.documents.ItemFlags {
+interface ItemFlagsPTR2e extends AnyObject {
     ptr2e: {
         choiceSelections: Record<string, string | number | object | null>;
         //itemGrants: Record<string, ItemGrantData>;

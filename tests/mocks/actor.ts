@@ -12,7 +12,7 @@ export class MockActor {
     readonly items: MockCollection<ItemPTR2e<ItemSystemPTR, ActorPTR2e>> = new MockCollection();
 
     constructor(data: ActorSourcePTR2e, public options: DocumentConstructionContext<null> = {}) {
-        this._source = fu.duplicate(data);
+        this._source = foundry.utils.duplicate(data);
         this._source.items ??= []
         this.prepareData();
     }
@@ -28,7 +28,7 @@ export class MockActor {
         for (const source of this._source.items as unknown as SourceFromSchema<ItemSchema<string, ItemSystemPTR>>[]) {
             const item = this.items.get(source._id ?? "");
             if (item) {
-                (item as { _source: object })._source = fu.duplicate(source);
+                (item as { _source: object })._source = foundry.utils.duplicate(source);
             } else {
                 this.items.set(
                     source._id ?? "",

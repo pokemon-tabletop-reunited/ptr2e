@@ -102,11 +102,11 @@ class ModifierPTR2e implements RawModifier {
     this.#originalValue = this.modifier = args.modifier;
 
     this.domains = args.domains ?? [];
-    this.adjustments = fu.deepClone(args.adjustments ?? []);
+    this.adjustments = foundry.utils.deepClone(args.adjustments ?? []);
     this.alterations = [args.alterations ?? []].flat();
     this.ignored = args.ignored ?? false;
     this.predicate = new Predicate(args.predicate ?? []);
-    this.traits = fu.deepClone(args.traits ?? []);
+    this.traits = foundry.utils.deepClone(args.traits ?? []);
     this.hideIfDisabled = args.hideIfDisabled ?? false;
     this.critical = args.critical ?? null;
     this.hidden = args.hidden ?? false;
@@ -148,7 +148,7 @@ class ModifierPTR2e implements RawModifier {
 
   /** Return a copy of this ModifierPTR2e instance */
   clone(options: { test?: Iterable<string> } = {}): ModifierPTR2e {
-    const clone = new ModifierPTR2e(fu.mergeObject({ ...this, modifier: this.#originalValue, appliesTo: new Map(this.appliesTo) }));
+    const clone = new ModifierPTR2e(foundry.utils.mergeObject({ ...this, modifier: this.#originalValue, appliesTo: new Map(this.appliesTo) }));
     if (options.test) clone.test(options.test);
 
     return clone;

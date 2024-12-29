@@ -1,39 +1,46 @@
-import { AbilityPTR2e, ContainerPTR2e } from "@item";
-import { ActionPTR2e, HasBase, HasEmbed } from "@module/data/index.ts";
-import { BaseItemSourcePTR2e, ItemSystemSource } from "./system.ts";
-import { HasBaseSchema } from "@module/data/mixins/has-base.ts";
+import { HasBase, HasEmbed } from "@module/data/index.ts";
+import type { BaseItemSourcePTR2e, ItemSystemSource } from "./system.ts";
+import type { HasBaseSchema } from "@module/data/mixins/has-base.ts";
+import type { SchemaField } from "node_modules/fvtt-types/src/foundry/common/data/fields.d.mts";
+import type Document from "node_modules/fvtt-types/src/foundry/common/abstract/document.d.mts";
+
+const abilitySchema = {
+  slot: new foundry.data.fields.NumberField({
+    required: true,
+    nullable: true,
+    initial: null,
+    label: "PTR2E.FIELDS.slot.label",
+    hint: "PTR2E.FIELDS.slot.hint",
+  }),
+  free: new foundry.data.fields.BooleanField({
+    required: true,
+    initial: false,
+    label: "PTR2E.FIELDS.free.label",
+    hint: "PTR2E.FIELDS.free.hint",
+  }),
+};
+
+export type AbilitySchema = typeof abilitySchema & HasBaseSchema;
 
 /**
  * @category Item Data Models
  * @extends {HasBase}
  * @extends {foundry.abstract.TypeDataModel}
  */
-export default abstract class AbilitySystem extends HasEmbed(HasBase(foundry.abstract.TypeDataModel), "ability") {
+export default class AbilitySystem extends HasEmbed(HasBase(foundry.abstract.TypeDataModel<AbilitySchema, Item>), "ability") {
   /**
    * @internal
    */
-  declare parent: AbilityPTR2e;
+  // declare parent: AbilityPTR2e;
 
   static override defineSchema(): AbilitySchema {
-    const fields = foundry.data.fields;
     return {
       ...super.defineSchema() as HasBaseSchema,
-
-      free: new fields.BooleanField({
-        required: true,
-        initial: false,
-        label: "PTR2E.FIELDS.free.label",
-        hint: "PTR2E.FIELDS.free.hint",
-      }),
-      slot: new fields.NumberField({
-        required: true,
-        nullable: true,
-        initial: null,
-        label: "PTR2E.FIELDS.slot.label",
-        hint: "PTR2E.FIELDS.slot.hint",
-      }),
+      ...abilitySchema,
     };
   }
+
+  declare suppress: boolean | undefined;
 
   get isSuppressed(): boolean {
     return this.suppress ?? false;
@@ -41,13 +48,14 @@ export default abstract class AbilitySystem extends HasEmbed(HasBase(foundry.abs
 
   override prepareDerivedData(): void {
     if (this.free || this.slot !== null) {
-      this.parent.rollOptions.addOption("item", `${this.parent.type}:${this.parent.slug}:active`);
+      //this.parent.rollOptions.addOption("item", `${this.parent.type}:${this.parent.slug}:active`);
     }
 
     super.prepareDerivedData();
   }
 
-  override async _preCreate(data: this["parent"]["_source"], options: DocumentModificationContext<this["parent"]["parent"]>, user: User): Promise<boolean | void> {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  override async _preCreate(data: this['parent']['_source'], options: foundry.abstract.Document.PreCreateOptions<any>, user: User): Promise<boolean | void> {
     const result = await super._preCreate(data, options, user);
     if (result === false) return false;
 
@@ -59,19 +67,14 @@ export default abstract class AbilitySystem extends HasEmbed(HasBase(foundry.abs
   }
 }
 
-export default interface AbilitySystem extends ModelPropsFromSchema<AbilitySchema> { 
-  container: ContainerPTR2e | null;
-  actions: Collection<ActionPTR2e>;
+// export default interface AbilitySystem extends foundry.data.fields.SchemaField.InitializedType<AbilitySchema> { 
+//   container: ContainerPTR2e | null;
+//   actions: Collection<ActionPTR2e>;
 
-  suppress?: boolean;
+//   suppress?: boolean;
 
-  _source: SourceFromSchema<AbilitySchema>;
-}
-
-interface AbilitySchema extends foundry.data.fields.DataSchema, HasBaseSchema {
-  slot: foundry.data.fields.NumberField<number, number, true, true, true>;
-  free: foundry.data.fields.BooleanField<boolean, boolean, true, false, true>;
-}
+//   _source: foundry.data.fields.SchemaField.PersistedType<AbilitySchema>;
+// }
 
 export type AbilitySource = BaseItemSourcePTR2e<"ability", AbilitySystemSource>;
 

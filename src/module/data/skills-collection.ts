@@ -25,7 +25,7 @@ export default class PTR2eSkills extends Collection<Skill> {
         this.clear();
 
         for(const skill of Object.values(CONFIG.PTR.data.skills)) {
-            this.set(skill.slug, fu.mergeObject({
+            this.set(skill.slug, foundry.utils.mergeObject({
                 favourite: false,
                 hidden: false,
                 group: undefined
@@ -41,7 +41,7 @@ export default class PTR2eSkills extends Collection<Skill> {
                 
                 const existing = this.get(skill.slug);
                 if(existing) {
-                    fu.mergeObject(existing, {favourite: skill.favourite ?? existing.favourite, hidden: skill.hidden ?? existing.hidden});
+                    foundry.utils.mergeObject(existing, {favourite: skill.favourite ?? existing.favourite, hidden: skill.hidden ?? existing.hidden});
                     return;
                 }
                 
@@ -69,7 +69,7 @@ export default class PTR2eSkills extends Collection<Skill> {
             });
         }
     
-        this.rawModuleSkills = fu.deepClone(toAdd);
+        this.rawModuleSkills = foundry.utils.deepClone(toAdd);
     
         return this;
     }

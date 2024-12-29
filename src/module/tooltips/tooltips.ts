@@ -656,7 +656,7 @@ export default class TooltipsPTR2e {
         if (!target) return;
         if (!target.effect.effects?.[type]?.length) return;
 
-        const results = fu.duplicate(message.system._source.results);
+        const results = foundry.utils.duplicate(message.system._source.results);
         const result = (() => {
           for (const result of results) {
             const jsonData = JSON.parse(result.target);

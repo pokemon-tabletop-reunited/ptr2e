@@ -48,10 +48,10 @@ class ItemAlteration extends foundry.abstract.DataModel<ChangeModel> {
     }
 
     const property = item.type === "effect" && !this.property.startsWith("effects.") ? `effects.0.${this.property}` : this.property;
-    const current = fu.getProperty(item, property);
+    const current = foundry.utils.getProperty(item, property);
     const value = typeof this.value === "boolean" ? this.value : this.resolveInjectedProperties(this.value);
     const change = BasicChangeSystem.getNewValue(this.mode, current, value, false)
-    fu.setProperty(item, property, change);
+    foundry.utils.setProperty(item, property, change);
   }
 
   applyToItem(item: ItemPTR2e): void {
@@ -74,10 +74,10 @@ class ItemAlteration extends foundry.abstract.DataModel<ChangeModel> {
 
   applyField(source: ItemPTR2e['_source'], item: ItemPTR2e, property: string, field: ReturnType<foundry.abstract.DataModel["schema"]["getField"]>): unknown {
     field ??= item.schema.getField(property);
-    const current = fu.getProperty(source, property);
+    const current = foundry.utils.getProperty(source, property);
     const value = typeof this.value === "boolean" ? this.value : this.resolveInjectedProperties(this.value);
     const update = field?.applyChange(current, item, {key: property, mode: this.mode, value, priority: 0});
-    fu.setProperty(source, property, update);
+    foundry.utils.setProperty(source, property, update);
     return update;
   }
 
@@ -157,7 +157,7 @@ class ItemAlteration extends foundry.abstract.DataModel<ChangeModel> {
               : key === "actor" || key === "item" || key === "effect"
                 ? this[key]
                 : this.effect;
-          const value = fu.getProperty(data ?? {}, prop);
+          const value = foundry.utils.getProperty(data ?? {}, prop);
           if (value === undefined) {
             this.ignored = true;
             if (warn)
@@ -204,7 +204,7 @@ class ItemAlteration extends foundry.abstract.DataModel<ChangeModel> {
 
     if (resolvedFromBracket instanceof Object) {
       return defaultValue instanceof Object
-        ? fu.mergeObject(defaultValue, resolvedFromBracket, { inplace: false })
+        ? foundry.utils.mergeObject(defaultValue, resolvedFromBracket, { inplace: false })
         : resolvedFromBracket;
     }
 
@@ -266,13 +266,13 @@ class ItemAlteration extends foundry.abstract.DataModel<ChangeModel> {
 
       switch (source) {
         case "actor":
-          return Number(fu.getProperty(actor ?? {}, field.substring(separator + 1))) || 0;
+          return Number(foundry.utils.getProperty(actor ?? {}, field.substring(separator + 1))) || 0;
         case "item":
-          return Number(fu.getProperty(item ?? {}, field.substring(separator + 1))) || 0;
+          return Number(foundry.utils.getProperty(item ?? {}, field.substring(separator + 1))) || 0;
         case "rule":
-          return Number(fu.getProperty(this, field.substring(separator + 1))) || 0;
+          return Number(foundry.utils.getProperty(this, field.substring(separator + 1))) || 0;
         default:
-          return Number(fu.getProperty(actor ?? {}, field.substring(0))) || 0;
+          return Number(foundry.utils.getProperty(actor ?? {}, field.substring(0))) || 0;
       }
     })();
     const brackets = value.brackets ?? [];

@@ -320,7 +320,7 @@ const SORTABLE_BASE_OPTIONS: Sortable.Options = {
  * Converts a possible UUID string to an embedded UUID string if it is a valid UUID
  */
 function maybeUuidStringToUuidEmbed(uuid: string) {
-  const result = uuid ? fu.parseUuid(uuid) : null;
+  const result = uuid ? foundry.utils.parseUuid(uuid) : null;
   if (result?.id) {
     return `@UUID[${uuid}]`;
   }
@@ -372,10 +372,10 @@ function debounceAsync<T = any>(callback: () => T, delay: number): (...args: any
    * @internal
    */
 function _addDataFieldMigration(data: Record<string, unknown>, oldKey: string, newKey: string, apply?: (data: Record<string, unknown>) => unknown): boolean {
-  if (!fu.hasProperty(data, newKey) && fu.hasProperty(data, oldKey)) {
+  if (!foundry.utils.hasProperty(data, newKey) && foundry.utils.hasProperty(data, oldKey)) {
     const prop = Object.getOwnPropertyDescriptor(data, oldKey);
     if (prop && !prop.writable) return false;
-    fu.setProperty(data, newKey, apply ? apply(data) : fu.getProperty(data, oldKey));
+    foundry.utils.setProperty(data, newKey, apply ? apply(data) : foundry.utils.getProperty(data, oldKey));
     delete data[oldKey];
     return true;
   }

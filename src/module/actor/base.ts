@@ -46,7 +46,7 @@ interface ActorParty {
 class ActorPTR2e<
   TSystem extends ActorSystemPTR2e = ActorSystemPTR2e,
   TParent extends TokenDocumentPTR2e | null = TokenDocumentPTR2e | null,
-> extends Actor<TParent, TSystem> {
+> extends Actor {
   /** Has this document completed `DataModel` initialization? */
   declare initialized: boolean;
 
@@ -61,7 +61,7 @@ class ActorPTR2e<
       },
       // Add debounced checkAreaEffects method
       checkAreaEffects: {
-        value: fu.debounce(checkAreaEffects, 50),
+        value: foundry.utils.debounce(checkAreaEffects, 50),
       },
     });
   }
@@ -277,7 +277,7 @@ class ActorPTR2e<
       tokenOverrides: {},
       preparationWarnings: {
         add: (warning: string) => preparationWarnings.add(warning),
-        flush: fu.debounce(() => {
+        flush: foundry.utils.debounce(() => {
           for (const warning of preparationWarnings) {
             console.warn(warning);
           }
@@ -1041,7 +1041,7 @@ class ActorPTR2e<
     if (afflictions.toDelete.length !== 0) {
       await this.deleteEmbeddedDocuments("ActiveEffect", afflictions.toDelete);
     }
-    if (!fu.isEmpty(updates)) {
+    if (!foundry.utils.isEmpty(updates)) {
       await this.update(updates);
       if (newHealth !== oldHealth) {
         //@ts-expect-error - Chat messages have not been properly defined yet
@@ -1155,7 +1155,7 @@ class ActorPTR2e<
     const rangePenalty = rangeIncrement
       ? new ModifierPTR2e({
         label: "PTR2E.Modifiers.rip",
-        slug: `range-penalty-unicqi-${appliesTo ?? fu.randomID()}`,
+        slug: `range-penalty-unicqi-${appliesTo ?? foundry.utils.randomID()}`,
         modifier: Math.min(-((rangeIncrement * (rangeIncrement + 1)) / 2), 0),
         method: "stage",
         type: "accuracy",
@@ -1170,7 +1170,7 @@ class ActorPTR2e<
       const difference = target.size.difference(context.self.actor.size)
       if(difference >= 2) return new ModifierPTR2e({
         label: "PTR2E.Modifiers.size",
-        slug: `size-penalty-unicqi-${appliesTo ?? fu.randomID()}`,
+        slug: `size-penalty-unicqi-${appliesTo ?? foundry.utils.randomID()}`,
         modifier: difference >= 4 ? 2 : 1,
         method: "stage",
         type: "accuracy",
@@ -1178,7 +1178,7 @@ class ActorPTR2e<
       });
       if(difference <= -2) return new ModifierPTR2e({
         label: "PTR2E.Modifiers.size",
-        slug: `size-penalty-unicqi-${appliesTo ?? fu.randomID()}`,
+        slug: `size-penalty-unicqi-${appliesTo ?? foundry.utils.randomID()}`,
         modifier: difference <= -4 ? -2 : -1,
         method: "stage",
         type: "accuracy",
@@ -1192,7 +1192,7 @@ class ActorPTR2e<
     if (evasionStages !== 0 && !omittedSubrolls.has("accuracy")) {
       const evasionModifier = new ModifierPTR2e({
         label: "PTR2E.Modifiers.evasion",
-        slug: `evasion-modifier-unicqi-${appliesTo ?? fu.randomID()}`,
+        slug: `evasion-modifier-unicqi-${appliesTo ?? foundry.utils.randomID()}`,
         modifier: evasionStages,
         method: "stage",
         type: "evasion",
@@ -1205,7 +1205,7 @@ class ActorPTR2e<
     if (accuracyStages != 0) {
       context.self.modifiers.push(
         new ModifierPTR2e({
-          slug: `accuracy-modifier-unicqi-${appliesTo ?? fu.randomID()}`,
+          slug: `accuracy-modifier-unicqi-${appliesTo ?? foundry.utils.randomID()}`,
           label: "PTR2E.Modifiers.accuracy",
           modifier: accuracyStages,
           method: "stage",
@@ -1219,7 +1219,7 @@ class ActorPTR2e<
     if (critStages != 0) {
       context.self.modifiers.push(
         new ModifierPTR2e({
-          slug: `crit-modifier-unicqi-${appliesTo ?? fu.randomID()}`,
+          slug: `crit-modifier-unicqi-${appliesTo ?? foundry.utils.randomID()}`,
           label: "PTR2E.Modifiers.crit",
           modifier: critStages,
           method: "stage",
@@ -1517,8 +1517,8 @@ class ActorPTR2e<
 
     return this.clone(
       {
-        items: [fu.deepClone(this._source.items)].flat(),
-        effects: [fu.deepClone(this._source.effects), applicableEffects].flat(),
+        items: [foundry.utils.deepClone(this._source.items)].flat(),
+        effects: [foundry.utils.deepClone(this._source.effects), applicableEffects].flat(),
         flags: { ptr2e: { rollOptions: { all: rollOptionsAll } } },
       },
       { keepId: true }
@@ -1589,7 +1589,7 @@ class ActorPTR2e<
       }
 
       const effects = (effect instanceof ItemPTR2e ? effect.effects : [effect]) as ActiveEffectPTR2e[];
-      const sources = effects.map(e => fu.mergeObject(e.toObject(), { flags }) as unknown as EffectSourcePTR2e);
+      const sources = effects.map(e => foundry.utils.mergeObject(e.toObject(), { flags }) as unknown as EffectSourcePTR2e);
       toCreate.push(...sources);
     }
 
@@ -1681,8 +1681,8 @@ class ActorPTR2e<
         )
       );
 
-      const tokenDefaults = fu.deepClone(game.settings.get("core", "defaultToken"));
-      const actor = new this(fu.mergeObject({ prototypeToken: tokenDefaults }, source));
+      const tokenDefaults = foundry.utils.deepClone(game.settings.get("core", "defaultToken"));
+      const actor = new this(foundry.utils.mergeObject({ prototypeToken: tokenDefaults }, source));
       await MigrationRunner.ensureSchemaVersion(
         actor,
         MigrationList.constructFromVersion(lowestSchemaVersion)

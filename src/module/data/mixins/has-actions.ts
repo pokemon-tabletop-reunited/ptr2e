@@ -1,10 +1,24 @@
-import { TemplateConstructor } from './data-template.ts';
-// import { MappedArrayField } from '../fields/mapped-array-field.ts';
-import { ActionPTR2e } from '@data';
+import type { TemplateConstructor } from './data-template.ts';
 import { ActionModelTypes } from '../models/base.ts';
 import { ActorPTR2e } from '@actor';
-import { AbilityPTR2e, ItemPTR2e } from '@item';
+import { ItemPTR2e, type AbilityPTR2e } from '@item';
 import { CollectionField } from '../fields/collection-field.ts';
+import type { AnyDocument } from 'node_modules/fvtt-types/src/foundry/client/data/abstract/client-document.d.mts';
+
+const actionsSchema = {
+  /**
+   * A record of actions that the item has.
+   * @remarks
+   * This is a record of actions that the item has, keyed by the action's slug.
+   * @see {@link ActionPTR2e}
+   */
+  actions: new CollectionField( //@ts-expect-error - Options field is not required.
+    new foundry.data.fields.TypedSchemaField(ActionModelTypes()),
+    'slug'
+  )
+}
+
+export type ActionsSchema = typeof actionsSchema;
 
 /**
  * Adds actions property to target data model.
@@ -13,11 +27,9 @@ import { CollectionField } from '../fields/collection-field.ts';
 export default function HasActions<BaseClass extends TemplateConstructor>(baseClass: BaseClass) {
   abstract class TemplateClass extends baseClass {
     static override defineSchema(): ActionsSchema {
-      const fields = foundry.data.fields;
-
       return {
         ...super.defineSchema(),
-        actions: new CollectionField(new fields.TypedSchemaField(ActionModelTypes()), 'slug')
+        ...actionsSchema
       };
     }
 
@@ -43,7 +55,7 @@ export default function HasActions<BaseClass extends TemplateConstructor>(baseCl
       }
     }
 
-    private _isValidParent(parent: foundry.abstract.DataModel | null): parent is ActorPTR2e | ItemPTR2e {
+    private _isValidParent(parent: AnyDocument | null): parent is ActorPTR2e | ItemPTR2e {
       return (
         parent instanceof ActorPTR2e ||
         parent instanceof ItemPTR2e
@@ -60,21 +72,9 @@ export default function HasActions<BaseClass extends TemplateConstructor>(baseCl
     }
   }
 
-  interface TemplateClass extends ModelPropsFromSchema<ActionsSchema> {
-    /**
-     * A record of actions that the item has.
-     * @remarks
-     * This is a record of actions that the item has, keyed by the action's slug.
-     * @see {@link ActionPTR2e}
-     */
-    actions: Collection<ActionPTR2e>;
-
-    _source: SourceFromSchema<ActionsSchema>;
+  interface TemplateClass extends foundry.data.fields.SchemaField.InitializedType<ActionsSchema> {
+    _source: foundry.data.fields.SchemaField.PersistedType<ActionsSchema>;
   }
 
   return TemplateClass;
-}
-
-export interface ActionsSchema extends foundry.data.fields.DataSchema {
-  actions: CollectionField<foundry.data.fields.TypedSchemaField<ActionPTR2e>>;
 }

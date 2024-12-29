@@ -2,7 +2,7 @@ import { AbilityPTR2e } from "@item";
 import { default as ItemSheetPTR2e } from "./base.ts";
 
 export default class AbilitySheet extends ItemSheetPTR2e<AbilityPTR2e["system"]> {
-    static override DEFAULT_OPTIONS = fu.mergeObject(
+    static override DEFAULT_OPTIONS = foundry.utils.mergeObject(
         super.DEFAULT_OPTIONS,
         {
             classes: ["ability-sheet"],
@@ -15,7 +15,7 @@ export default class AbilitySheet extends ItemSheetPTR2e<AbilityPTR2e["system"]>
     override noActions = false;
 
     static override PARTS: Record<string, foundry.applications.api.HandlebarsTemplatePart> = 
-        fu.mergeObject(super.PARTS, {
+        foundry.utils.mergeObject(super.PARTS, {
             overview: {
                 template: AbilitySheet.overviewTemplate,
             },

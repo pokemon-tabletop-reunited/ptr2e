@@ -647,7 +647,7 @@ export class ItemSheetV2Expanded<
       const existing = this.document.actions.get(actionData.slug);
       if(existing) return void ui.notifications.warn(`An action with the slug ${actionData.slug} already exists on this item.`);
 
-      const actions = fu.duplicate(this.document.system._source.actions as ActionPTR2e['_source'][]);
+      const actions = foundry.utils.duplicate(this.document.system._source.actions as ActionPTR2e['_source'][]);
       actions.push(action.toObject());
       return void this.document.update({ "system.actions": actions });
     }

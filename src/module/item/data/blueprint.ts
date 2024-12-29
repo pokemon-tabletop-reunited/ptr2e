@@ -65,7 +65,7 @@ export default abstract class BlueprintSystem extends HasEmbed(HasMigrations(fou
     const fields = foundry.data.fields;
     return {
       ...super.defineSchema() as MigrationSchema,
-      id: new fields.DocumentIdField({ initial: fu.randomID(), required: true, nullable: false }),
+      id: new fields.DocumentIdField({ initial: foundry.utils.randomID(), required: true, nullable: false }),
       blueprints: new CollectionField(new fields.EmbeddedDataField(Blueprint), "id"),
     }
   }
@@ -83,7 +83,7 @@ export default abstract class BlueprintSystem extends HasEmbed(HasMigrations(fou
         throw new Error(`Could not find child with id ${update._id}`);
       }
       delete update._id;
-      fu.mergeObject(child, update, { inplace: true })
+      foundry.utils.mergeObject(child, update, { inplace: true })
     }
 
     return this.parent.update({ "system.blueprints": children });
@@ -95,12 +95,12 @@ export default abstract class BlueprintSystem extends HasEmbed(HasMigrations(fou
       if (c instanceof ItemPTR2e && c.system instanceof BlueprintSystem) {
         return c.system.blueprints.map(b => ({
           ...b.toObject(),
-          id: fu.randomID()
+          id: foundry.utils.randomID()
         }));
       }
       return [{
         species: c.uuid,
-        id: fu.randomID(),
+        id: foundry.utils.randomID(),
       }]
     });
 
@@ -689,7 +689,7 @@ export default abstract class BlueprintSystem extends HasEmbed(HasMigrations(fou
           skills
         },
         items,
-        prototypeToken: fu.mergeObject(foundryDefaultTokenSettings, {
+        prototypeToken: foundry.utils.mergeObject(foundryDefaultTokenSettings, {
           actorLink: linkToken,
           displayBars: foundryDefaultTokenSettings.displayBars ?? CONST.TOKEN_DISPLAY_MODES.OWNER_HOVER,
           displayName: foundryDefaultTokenSettings.displayName ?? CONST.TOKEN_DISPLAY_MODES.OWNER,

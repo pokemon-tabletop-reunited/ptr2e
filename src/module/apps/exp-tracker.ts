@@ -6,7 +6,7 @@ import { ActiveEffectPTR2e } from "@effects";
 import { sluggify } from "@utils";
 
 export class EXPTracker extends foundry.applications.api.HandlebarsApplicationMixin(ApplicationV2Expanded) {
-  static override DEFAULT_OPTIONS = fu.mergeObject(
+  static override DEFAULT_OPTIONS = foundry.utils.mergeObject(
     super.DEFAULT_OPTIONS,
     {
       id: "exp-tracker",
@@ -291,7 +291,7 @@ export class EXPTracker extends foundry.applications.api.HandlebarsApplicationMi
   }
 
   _prepareModifiers() {
-    const circumstanceGroups = fu.duplicate(CONFIG.PTR.data.circumstanceModifierGroups);
+    const circumstanceGroups = foundry.utils.duplicate(CONFIG.PTR.data.circumstanceModifierGroups);
     const setting = game.settings.get("ptr2e", "expTrackerData");
     for (const group in circumstanceGroups) {
       const modifiers = circumstanceGroups[group as keyof typeof circumstanceGroups].modifiers;

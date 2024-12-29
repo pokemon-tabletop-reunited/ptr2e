@@ -7,7 +7,7 @@ import { htmlQueryAll, htmlQuery, tupleHasValue } from "@utils";
 import { AttackPTR2e } from "@data";
 
 export class AttackModifierPopup extends ModifierPopup {
-  static override DEFAULT_OPTIONS = fu.mergeObject(
+  static override DEFAULT_OPTIONS = foundry.utils.mergeObject(
     super.DEFAULT_OPTIONS,
     {
       classes: ["attack"],

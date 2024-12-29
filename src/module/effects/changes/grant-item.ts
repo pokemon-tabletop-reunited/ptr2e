@@ -175,9 +175,9 @@ export default class GrantItemChangeSystem extends ChangeModel {
     }
 
     // Set ids and flags on the granting effect and granted item
-    effectSource._id ??= fu.randomID();
+    effectSource._id ??= foundry.utils.randomID();
     const grantedSource = grantedDocument.toObject();
-    grantedSource._id = fu.randomID();
+    grantedSource._id = foundry.utils.randomID();
 
     // An item may grant another copy of itself, but at least strip the copy of its grant CMs
     if (this.item?.flags?.core?.sourceId === (grantedSource.flags.core?.sourceId ?? "")) {
@@ -193,7 +193,7 @@ export default class GrantItemChangeSystem extends ChangeModel {
     }
 
     // Guarantee future already-granted checks pass in all cases by re-assigning sourceId
-    grantedSource.flags = fu.mergeObject(grantedSource.flags, { core: { sourceId: uuid } });
+    grantedSource.flags = foundry.utils.mergeObject(grantedSource.flags, { core: { sourceId: uuid } });
 
     // Apply alterations
     try {
@@ -204,7 +204,7 @@ export default class GrantItemChangeSystem extends ChangeModel {
       if (error instanceof Error) this.failValidation(error.message);
     }
 
-    const tempGranted = this.type === "grant-effect" ? new ActiveEffectPTR2e(fu.deepClone(grantedSource), { parent: this.actor }) : new ItemPTR2e(fu.deepClone(grantedSource), { parent: this.actor });
+    const tempGranted = this.type === "grant-effect" ? new ActiveEffectPTR2e(foundry.utils.deepClone(grantedSource), { parent: this.actor }) : new ItemPTR2e(foundry.utils.deepClone(grantedSource), { parent: this.actor });
     // tempGranted.grantedBy = this.effect;
 
     // TODO: Check for immunity and bail if a match
@@ -328,7 +328,7 @@ export default class GrantItemChangeSystem extends ChangeModel {
 
   /** Set flags on granting and grantee items to indicate relationship between the two */
   #setGrantFlags(granter: PreCreate<EffectSourcePTR2e>, grantee: ItemSourcePTR2e | ItemPTR2e | ActiveEffectPTR2e): void {
-    const flags = fu.mergeObject(granter.flags ?? {}, { ptr2e: { itemGrants: { [this.flag]: {} } } });
+    const flags = foundry.utils.mergeObject(granter.flags ?? {}, { ptr2e: { itemGrants: { [this.flag]: {} } } });
     if (!this.flag) throw new Error("No flag set for granted item");
 
     flags.ptr2e.itemGrants[this.flag] = {
@@ -353,9 +353,9 @@ export default class GrantItemChangeSystem extends ChangeModel {
       // Don't await since it will trigger a data reset, possibly wiping temporary roll options
       grantee.update({ "flags.ptr2e.grantedBy": grantedBy }, { render: false });
     } else {
-      grantee.flags = fu.mergeObject(grantee.flags ?? {}, { ptr2e: { grantedBy } });
+      grantee.flags = foundry.utils.mergeObject(grantee.flags ?? {}, { ptr2e: { grantedBy } });
       if (this.type === "grant-effect") {
-        grantee.flags = fu.mergeObject(grantee.flags ?? {}, { ptr2e: { grantedBy } });
+        grantee.flags = foundry.utils.mergeObject(grantee.flags ?? {}, { ptr2e: { grantedBy } });
       }
     }
   }

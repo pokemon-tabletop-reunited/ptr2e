@@ -216,7 +216,7 @@ abstract class CaptureMessageSystem extends foundry.abstract.TypeDataModel {
   }
 
   public async applyLuckIncrease(number: number) {
-    const roll = fu.duplicate(this.parent.system.rolls.accuracy);
+    const roll = foundry.utils.duplicate(this.parent.system.rolls.accuracy);
     if (roll == undefined) return;
     const currentResult = roll.total;
     if ((currentResult - number) % 10 !== 0) {

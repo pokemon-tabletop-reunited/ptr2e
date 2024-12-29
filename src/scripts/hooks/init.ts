@@ -194,7 +194,7 @@ export const Init: PTRHook = {
         // Update the world system version
         const previous = game.settings.get("ptr2e", "worldSystemVersion") as string;
         const current = game.system.version;
-        if (fu.isNewerVersion(current, previous)) {
+        if (foundry.utils.isNewerVersion(current, previous)) {
           await game.settings.set("ptr2e", "worldSystemVersion", current);
         }
 
@@ -210,7 +210,7 @@ export const Init: PTRHook = {
             // without it will also not be listed in the package manager. Skip warning those without it in
             // case they were made for private use.
             !!m.compatibility.verified &&
-            (abandonedModules.has(m.id) || !fu.isNewerVersion(m.compatibility.verified, "10.312")),
+            (abandonedModules.has(m.id) || !foundry.utils.isNewerVersion(m.compatibility.verified, "10.312")),
         );
 
         for (const badModule of subV10Modules) {

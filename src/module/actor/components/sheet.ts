@@ -26,7 +26,7 @@ type ComponentApplicationConfiguration = Required<{
 class ComponentPopout extends foundry.applications.api.HandlebarsApplicationMixin(
     foundry.applications.api.ApplicationV2
 ) {
-    static override DEFAULT_OPTIONS = fu.mergeObject(
+    static override DEFAULT_OPTIONS = foundry.utils.mergeObject(
         super.DEFAULT_OPTIONS,
         {
             id: "{id}",
@@ -62,7 +62,7 @@ class ComponentPopout extends foundry.applications.api.HandlebarsApplicationMixi
     override _initializeApplicationOptions(options: Partial<foundry.applications.api.ApplicationConfiguration> & ComponentApplicationConfiguration): foundry.applications.api.ApplicationConfiguration & ComponentApplicationConfiguration {
         const appOptions = super._initializeApplicationOptions(options);
         if(typeof options.component !== "string") 
-            appOptions.actions = fu.mergeObject(appOptions.actions, options.component.constructor.ACTIONS);
+            appOptions.actions = foundry.utils.mergeObject(appOptions.actions, options.component.constructor.ACTIONS);
         
         return {
             ...appOptions,

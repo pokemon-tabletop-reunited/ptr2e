@@ -241,7 +241,7 @@ class DataStructure {
       if (this.root.treetype === "rolldata") return true;
       if (!this.root._rollData) return false;
       try {
-        return fu.hasProperty(this.root._rollData, this.path) || fu.hasProperty({system: this.root._rollData}, this.key);
+        return foundry.utils.hasProperty(this.root._rollData, this.path) || foundry.utils.hasProperty({system: this.root._rollData}, this.key);
       }
       catch {
         return false;
@@ -255,7 +255,7 @@ class DataStructure {
       if (this.root.treetype === "source") return true;
       if (!this.root._sourceData) return false;
       try {
-        return fu.hasProperty(this.root._sourceData, this.path) || fu.hasProperty({system: this.root._sourceData}, this.path);
+        return foundry.utils.hasProperty(this.root._sourceData, this.path) || foundry.utils.hasProperty({system: this.root._sourceData}, this.path);
       }
       catch {
         return false;
@@ -269,7 +269,7 @@ class DataStructure {
       if (this.root.treetype === "derived") return true;
       if (!this.root._derivedData) return false;
       try {
-        return fu.hasProperty(this.root._derivedData, this.path) || fu.hasProperty({system: this.root._derivedData}, this.path);
+        return foundry.utils.hasProperty(this.root._derivedData, this.path) || foundry.utils.hasProperty({system: this.root._derivedData}, this.path);
       }
       catch {
         return false;
@@ -282,7 +282,7 @@ class DataStructure {
     return this._inTemporary ??= (() => {
       if (!this.root._temporaryData) return false;
       try {
-        return fu.hasProperty(this.root._temporaryData, this.path) || fu.hasProperty({system: this.root._temporaryData}, this.path);
+        return foundry.utils.hasProperty(this.root._temporaryData, this.path) || foundry.utils.hasProperty({system: this.root._temporaryData}, this.path);
       }
       catch {
         return false;

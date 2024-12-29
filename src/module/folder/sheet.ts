@@ -7,7 +7,7 @@ import { SocketRequestData } from "@scripts/hooks/socket.ts";
 class FolderConfigPTR2e extends foundry.applications.api.HandlebarsApplicationMixin(
   DocumentSheetV2<FolderPTR2e>
 ) {
-  static override DEFAULT_OPTIONS = fu.mergeObject(
+  static override DEFAULT_OPTIONS = foundry.utils.mergeObject(
     super.DEFAULT_OPTIONS,
     {
       classes: ["folder-edit"],
@@ -189,7 +189,7 @@ class FolderConfigPTR2e extends foundry.applications.api.HandlebarsApplicationMi
         // Throw error so that the form doesn't close
         throw new Error("No GM is currently online.");
       }
-      const id = fu.randomID();
+      const id = foundry.utils.randomID();
 
       const timeout = setTimeout(() => {
         ui.notifications.error("Request timed out. Please try again later.");
@@ -213,10 +213,10 @@ class FolderConfigPTR2e extends foundry.applications.api.HandlebarsApplicationMi
 
       const data = {
         request: "folderCreateOrUpdate",
-        data: fu.mergeObject(formData.object, this.document.id ? { _id: this.document.id } : {
+        data: foundry.utils.mergeObject(formData.object, this.document.id ? { _id: this.document.id } : {
           source: (() => {
             const source = this.document.toObject()
-            const merged = fu.mergeObject(source, formData.object, { inplace: false });
+            const merged = foundry.utils.mergeObject(source, formData.object, { inplace: false });
             if (!merged.name) merged.name = source.name;
             return merged;
           })(),

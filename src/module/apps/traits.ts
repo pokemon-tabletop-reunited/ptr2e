@@ -6,7 +6,7 @@ import { ApplicationRenderContext, HandlebarsRenderOptions } from "types/foundry
 class TraitsSettingsMenu extends foundry.applications.api.HandlebarsApplicationMixin(foundry.applications.api.ApplicationV2) {
     newCounter = 0;
 
-    static override DEFAULT_OPTIONS = fu.mergeObject(foundry.applications.api.ApplicationV2.DEFAULT_OPTIONS, {
+    static override DEFAULT_OPTIONS = foundry.utils.mergeObject(foundry.applications.api.ApplicationV2.DEFAULT_OPTIONS, {
         id: "traits-settings",
         classes: ["sheet"],
         tag: "form",
@@ -128,7 +128,7 @@ class TraitsSettingsMenu extends foundry.applications.api.HandlebarsApplicationM
     }
 
     static async #onSubmit(this: TraitsSettingsMenu, _event: SubmitEvent | Event, _form: HTMLFormElement, formData: FormDataExtended) {
-        const traitsData = fu.expandObject<{trait?: Record<string, Partial<Trait>>}>(formData.object).trait ?? {};
+        const traitsData = foundry.utils.expandObject<{trait?: Record<string, Partial<Trait>>}>(formData.object).trait ?? {};
 
         const traits = new Map<string, Trait>();
         
@@ -148,7 +148,7 @@ class TraitsSettingsMenu extends foundry.applications.api.HandlebarsApplicationM
             if(trait.slug) {
                 const existingTrait = game.ptr.data.traits.get(trait.slug);
                 if(!existingTrait) continue;
-                const update = fu.deepClone(existingTrait);
+                const update = foundry.utils.deepClone(existingTrait);
                 update.label = trait.label ?? existingTrait.label;
                 update.slug = sluggify(existingTrait.label);
                 update.description = trait.description ?? existingTrait.description;

@@ -42,7 +42,7 @@ class MappedArrayField<TElementField extends foundry.data.fields.DataField> exte
 
     protected _isMap(value: unknown | unknown[]): value is Map<string, unknown> {
         return (
-            fu.getType(value) === "Map"
+            foundry.utils.getType(value) === "Map"
         )
     }
 }

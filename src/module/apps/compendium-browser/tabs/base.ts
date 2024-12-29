@@ -81,7 +81,7 @@ export abstract class CompendiumBrowserTab {
     this.searchEngine.addAll(this.indexData);
 
     // Set default Filter Data for resets
-    this.defaultFilterData = fu.deepClone(this.filterData);
+    this.defaultFilterData = foundry.utils.deepClone(this.filterData);
 
     this.isInitialized = true;
   }
@@ -122,12 +122,12 @@ export abstract class CompendiumBrowserTab {
     if (!this.isInitialized) {
       await this.init();
     }
-    return fu.deepClone(this.defaultFilterData);
+    return foundry.utils.deepClone(this.defaultFilterData);
   }
 
   /** Reset all filters */
   resetFilters(): void {
-    this.filterData = fu.deepClone(this.defaultFilterData);
+    this.filterData = foundry.utils.deepClone(this.defaultFilterData);
   }
 
   /** Check this tabs type */
@@ -274,7 +274,7 @@ export abstract class CompendiumBrowserTab {
   /** Ensure all index fields are present in the index data */
   protected hasAllIndexFields(data: CompendiumIndexData, indexFields: string[]): boolean {
     for (const field of indexFields) {
-      if (fu.getProperty(data, field) === undefined && !/\.(?:source|publication)/.test(field)) {
+      if (foundry.utils.getProperty(data, field) === undefined && !/\.(?:source|publication)/.test(field)) {
         return false;
       }
     }

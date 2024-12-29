@@ -3,7 +3,7 @@ import { default as ItemSheetPTR2e } from "./base.ts";
 import { sluggify } from "@utils";
 
 export default class PerkSheet extends ItemSheetPTR2e<PerkPTR2e["system"]> {
-  static override DEFAULT_OPTIONS = fu.mergeObject(
+  static override DEFAULT_OPTIONS = foundry.utils.mergeObject(
     super.DEFAULT_OPTIONS,
     {
       classes: ["ability-sheet"],
@@ -70,7 +70,7 @@ export default class PerkSheet extends ItemSheetPTR2e<PerkPTR2e["system"]> {
   }
 
   static override PARTS: Record<string, foundry.applications.api.HandlebarsTemplatePart> =
-    fu.mergeObject(super.PARTS, {
+    foundry.utils.mergeObject(super.PARTS, {
       overview: {
         template: PerkSheet.overviewTemplate,
       },
@@ -84,7 +84,7 @@ export default class PerkSheet extends ItemSheetPTR2e<PerkPTR2e["system"]> {
     _form: HTMLFormElement,
     formData: FormDataExtended
   ) {
-    const data = fu.expandObject(formData.object) as {
+    const data = foundry.utils.expandObject(formData.object) as {
       [key: string]: unknown;
       system?: {
         prerequisites?: string | [];

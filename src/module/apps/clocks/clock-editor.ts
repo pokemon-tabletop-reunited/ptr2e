@@ -17,7 +17,7 @@ export default class ClockEditor extends foundry.applications.api.HandlebarsAppl
     this.clock = clock;
   }
 
-  static override DEFAULT_OPTIONS = fu.mergeObject(
+  static override DEFAULT_OPTIONS = foundry.utils.mergeObject(
     super.DEFAULT_OPTIONS,
     {
       id: "clock-editor-{id}",
@@ -100,13 +100,13 @@ export default class ClockEditor extends foundry.applications.api.HandlebarsAppl
 
     if (this.clock) {
       if(this.clock.parent instanceof ActorSystemPTR2e) {
-        const clocks = fu.duplicate(this.clock.parent._source.clocks);
+        const clocks = foundry.utils.duplicate(this.clock.parent._source.clocks);
         const index = clocks.findIndex((c) => c.id === this.clock!.id);
         if (index === -1) {
           clocks.push(formData.object as SourceFromSchema<ClockSchema>);
         }
         else {
-          clocks[index] = fu.mergeObject(clocks[index], formData.object as SourceFromSchema<ClockSchema>);
+          clocks[index] = foundry.utils.mergeObject(clocks[index], formData.object as SourceFromSchema<ClockSchema>);
         }
         return this.clock.parent.parent.update({"system.clocks": clocks});
       }

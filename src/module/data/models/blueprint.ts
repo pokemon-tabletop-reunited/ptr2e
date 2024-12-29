@@ -39,11 +39,11 @@ class Blueprint extends foundry.abstract.DataModel {
     }
 
     return {
-      id: new fields.DocumentIdField({ initial: fu.randomID(), required: true, nullable: false }),
+      id: new fields.DocumentIdField({ initial: foundry.utils.randomID(), required: true, nullable: false }),
       species: new DataUnionField([
         new fields.DocumentUUIDField({
           required: true, nullable: true, initial: null, embedded: false, validate: (value) => {
-            const uuid = fu.parseUuid(String(value));
+            const uuid = foundry.utils.parseUuid(String(value));
             return uuid && (uuid.documentType === "RollTable" || uuid.documentType === "Item" || uuid.documentType === "Actor");
           }, validationError: "The species must be a valid (Species) Item, Actor, Rolltable UUID or null.",
         }),
@@ -87,7 +87,7 @@ class Blueprint extends foundry.abstract.DataModel {
           }
 
           // Check if the value is a Rolltable UUID
-          const uuid = fu.parseUuid(value);
+          const uuid = foundry.utils.parseUuid(value);
           if (uuid && uuid.documentId) {
             if (uuid.documentType === "RollTable") return true;
             throw new Error("The UUID must point to a Rolltable.");
@@ -109,7 +109,7 @@ class Blueprint extends foundry.abstract.DataModel {
           if (natures[nature] !== undefined) return true;
 
           // Check if the value is a Rolltable UUID
-          const uuid = fu.parseUuid(value);
+          const uuid = foundry.utils.parseUuid(value);
           if (uuid && uuid.documentId) {
             if (uuid.documentType === "RollTable") return true;
             throw new Error("The UUID must point to a Rolltable.");

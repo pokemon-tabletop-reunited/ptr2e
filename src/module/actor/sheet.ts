@@ -46,7 +46,7 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
     this.statsChart = new StatsChart(this);
   }
 
-  static override DEFAULT_OPTIONS = fu.mergeObject(
+  static override DEFAULT_OPTIONS = foundry.utils.mergeObject(
     super.DEFAULT_OPTIONS,
     {
       classes: ["ptr2e", "sheet", "actor", "v2"],
@@ -150,7 +150,7 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
         "favourite-skill": ActorSheetPTRV2._onFavouriteSkill,
         "hide-skill": ActorSheetPTRV2._onHideSkill,
         "toggle-hidden-skills": async function (this: ActorSheetPTRV2) {
-          const appSettings = fu.duplicate(
+          const appSettings = foundry.utils.duplicate(
             game.user.getFlag("ptr2e", "appSettings") ?? {}
           ) as Record<string, Record<string, unknown>>;
           if (!appSettings[this.appId])
@@ -652,7 +652,7 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
           const clock = this.document.system.clocks.get(id as string);
           if (!clock) return;
 
-          const clocks = fu.duplicate(this.document.system._source.clocks);
+          const clocks = foundry.utils.duplicate(this.document.system._source.clocks);
           const index = clocks.findIndex((c) => c.id === clock.id);
           if (index === -1) return;
           clocks[index].value = clock.value >= clock.max ? 0 : clock.value + 1;
@@ -667,7 +667,7 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
           const clock = this.document.system.clocks.get(id as string);
           if (!clock) return;
 
-          const clocks = fu.duplicate(this.document.system._source.clocks);
+          const clocks = foundry.utils.duplicate(this.document.system._source.clocks);
           const index = clocks.findIndex((c) => c.id === clock.id);
           if (index === -1) return;
           clocks[index].value = clock.value <= 0 ? clock.max : clock.value - 1;
@@ -703,7 +703,7 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
                 label: game.i18n.localize("PTR2E.Clocks.Global.Delete.Confirm"),
                 icon: "fas fa-trash",
                 callback: async () => {
-                  const clocks = fu.duplicate(this.document.system._source.clocks);
+                  const clocks = foundry.utils.duplicate(this.document.system._source.clocks);
                   const index = clocks.findIndex((c) => c.id === clock.id);
                   if (index === -1) return;
                   clocks.splice(index, 1);
@@ -752,7 +752,7 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
               siblings: clocks,
             });
 
-            const clocksData = fu.duplicate(this.document.system._source.clocks);
+            const clocksData = foundry.utils.duplicate(this.document.system._source.clocks);
             for (const update of sortUpdates) {
               const index = clocksData.findIndex((c) => c.id === update.target.id);
               if (index === -1) continue;
@@ -883,7 +883,7 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
   }
 
   override _getHeaderControls(): ApplicationHeaderControlsEntry[] {
-    const controls = fu.duplicate(super._getHeaderControls());
+    const controls = foundry.utils.duplicate(super._getHeaderControls());
 
     if (!this.actor.party) controls.findSplice(c => c.action === "open-party-sheet")
 

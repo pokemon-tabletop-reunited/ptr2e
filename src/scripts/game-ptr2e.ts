@@ -70,7 +70,7 @@ const GamePTR = {
       top?.insertAdjacentElement("afterend", tokenTemplate);
     }
 
-    game.ptr = fu.mergeObject(game.ptr ?? {}, initData);
+    game.ptr = foundry.utils.mergeObject(game.ptr ?? {}, initData);
   },
   onSetup() {
     // Run "delayed" constructor of game.ptr.tooltips

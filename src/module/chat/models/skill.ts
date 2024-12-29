@@ -234,7 +234,7 @@ abstract class SkillMessageSystem extends foundry.abstract.TypeDataModel {
     const notification = `Luck spent: ${spent.map(s => `${s.name} (Used ${s.amount}, leftover: ${s.leftover})`).join(", ")}`
     ui.notifications.info(notification);
 
-    const roll = fu.duplicate(this.roll);
+    const roll = foundry.utils.duplicate(this.roll);
     //@ts-expect-error - As this is an object duplicate, the property is no longer read-only.
     roll.total -= number;
 

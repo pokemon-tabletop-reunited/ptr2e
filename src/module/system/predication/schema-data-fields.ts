@@ -46,7 +46,7 @@ class PredicateField<
         options: foundry.data.fields.ArrayFieldOptions<RawPredicate, TRequired, TNullable, THasInitial>,
     ): Predicate | null | undefined {
         const statements = super.initialize(value, model, options);
-        return Array.isArray(statements) ? new Predicate(...fu.deepClone(statements)) : statements;
+        return Array.isArray(statements) ? new Predicate(...foundry.utils.deepClone(statements)) : statements;
     }
 }
 

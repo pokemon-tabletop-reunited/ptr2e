@@ -7,7 +7,7 @@ import { ApplicationV2Expanded } from "./appv2-expanded.ts";
 import { HandlebarsRenderOptions } from "types/foundry/common/applications/handlebars-application.ts";
 
 class GithubSheet extends foundry.applications.api.HandlebarsApplicationMixin(ApplicationV2Expanded) {
-  static override DEFAULT_OPTIONS = fu.mergeObject(
+  static override DEFAULT_OPTIONS = foundry.utils.mergeObject(
     super.DEFAULT_OPTIONS,
     {
       id: "github-commit-manager",
@@ -122,10 +122,10 @@ class GithubManager {
     item: TDocument["_source"],
     packItem: TDocument["_source"]
   ) {
-    const diff = fu.diffObject<Record<string, any>>(packItem, item);
+    const diff = foundry.utils.diffObject<Record<string, any>>(packItem, item);
     if (diff.flags?.core) {
       delete diff.flags.core;
-      if (fu.isEmpty(diff.flags)) {
+      if (foundry.utils.isEmpty(diff.flags)) {
         delete diff.flags;
       }
     }
@@ -135,7 +135,7 @@ class GithubManager {
     delete diff.folder;
     delete diff.ownership;
     if (diff.system?.actions) {
-      diff.system.actions = fu.diffObject(
+      diff.system.actions = foundry.utils.diffObject(
         (packItem.system as { actions: object }).actions,
         (item.system as { actions: object }).actions
       );
@@ -147,26 +147,26 @@ class GithubManager {
           if (!value) {
             delete action[key];
           }
-          if (isObject(value) && !fu.isEmpty(value)) {
+          if (isObject(value) && !foundry.utils.isEmpty(value)) {
             for (const [k, v] of Object.entries(value)) {
               if (!v) {
                 delete (value as any)[k];
               }
             }
-            if (fu.isEmpty(value)) {
+            if (foundry.utils.isEmpty(value)) {
               delete action[key];
             }
           }
         }
-        if (fu.isEmpty(action)) {
+        if (foundry.utils.isEmpty(action)) {
           delete diff.system.actions[index];
         }
       }
-      if (fu.isEmpty(diff.system.actions)) {
+      if (foundry.utils.isEmpty(diff.system.actions)) {
         delete diff.system.actions;
       }
     }
-    if (fu.isEmpty(diff.system)) {
+    if (foundry.utils.isEmpty(diff.system)) {
       delete diff.system;
     }
 
@@ -179,13 +179,13 @@ class GithubManager {
     diff: Record<string, any>,
     packItem: TDocument["_source"]
   ) {
-    const data: Record<string, any> = fu.mergeObject(packItem, diff, { inplace: false });
+    const data: Record<string, any> = foundry.utils.mergeObject(packItem, diff, { inplace: false });
     if ('actions' in packItem.system && diff.system?.actions !== undefined) {
       const actions = data.system.actions = packItem.system.actions as unknown as ActionPTR2e[];
       for (const [key, action] of Object.entries<ActionPTR2e>(diff.system.actions)) {
         const index = parseInt(key);
         if (actions[index]) {
-          actions[index] = fu.mergeObject(actions[index], action, { inplace: false });
+          actions[index] = foundry.utils.mergeObject(actions[index], action, { inplace: false });
         } else {
           data.system.actions.push(action);
         }
@@ -196,10 +196,10 @@ class GithubManager {
       if (data.flags.core?.sourceId) {
         delete data.flags.core.sourceId;
       }
-      if (fu.isEmpty(data.flags.core)) {
+      if (foundry.utils.isEmpty(data.flags.core)) {
         delete data.flags.core;
       }
-      if (fu.isEmpty(data.flags)) {
+      if (foundry.utils.isEmpty(data.flags)) {
         delete data.flags;
       }
     }
@@ -215,7 +215,7 @@ class GithubManager {
         if (!value) {
           delete action[key];
         }
-        if (isObject(value) && !fu.isEmpty(value)) {
+        if (isObject(value) && !foundry.utils.isEmpty(value)) {
           for (const [k, v] of Object.entries(value)) {
             if (!v) {
               delete (value as any)[k];
@@ -250,7 +250,7 @@ class GithubManager {
 
     // Check if valid document
     try {
-      const tempItem = new ItemPTR2e(fu.deepClone(data), { keepId: true });
+      const tempItem = new ItemPTR2e(foundry.utils.deepClone(data), { keepId: true });
       tempItem.validate();
     } catch (error) {
       ui.notifications.error(
@@ -307,7 +307,7 @@ class GithubManager {
     const existingData = existing.toObject();
 
     const diff = isPack ? itemData as Record<string, any> : GithubManager.getDiffableItem(itemData, existingData);
-    if (fu.isEmpty(diff)) {
+    if (foundry.utils.isEmpty(diff)) {
       ui.notifications.info(`No changes to commit`);
       return;
     }
@@ -354,7 +354,7 @@ class GithubManager {
         "Content-Type": "application/json",
         "X-Powered-By": "FoundryVTT PTR2e",
       },
-      body: JSON.stringify({ id: fu.randomID() + game.user.name + game.user.id }),
+      body: JSON.stringify({ id: foundry.utils.randomID() + game.user.name + game.user.id }),
     });
     if (result.status === 200) {
       const json = await result.json();

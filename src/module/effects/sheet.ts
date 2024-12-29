@@ -13,7 +13,7 @@ import Tagify from "@yaireo/tagify";
 class ActiveEffectConfig extends foundry.applications.api.HandlebarsApplicationMixin(
   DocumentSheetV2<ActiveEffectPTR2e>
 ) {
-  static override DEFAULT_OPTIONS = fu.mergeObject(
+  static override DEFAULT_OPTIONS = foundry.utils.mergeObject(
     super.DEFAULT_OPTIONS,
     {
       classes: ["active-effect-sheet"],
@@ -567,7 +567,7 @@ class ActiveEffectConfig extends foundry.applications.api.HandlebarsApplicationM
     _form: HTMLFormElement,
     formData: FormDataExtended
   ): Record<string, unknown> & { system?: Record<string, unknown> } {
-    const data = fu.expandObject(formData.object) as Record<string, unknown> & {
+    const data = foundry.utils.expandObject(formData.object) as Record<string, unknown> & {
       system?: { changes?: Record<number, ChangeModel["_source"]>; traits?: string[] };
     };
 
@@ -677,7 +677,7 @@ class ActiveEffectConfig extends foundry.applications.api.HandlebarsApplicationM
     event.preventDefault();
     event.stopPropagation();
     const submitData = this._prepareSubmitData(event, form, formData);
-    if (fu.isEmpty(submitData)) return;
+    if (foundry.utils.isEmpty(submitData)) return;
 
     await this.document.update(submitData);
   }

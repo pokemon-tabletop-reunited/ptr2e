@@ -78,7 +78,7 @@ class ActiveEffectPTR2e<
   override prepareBaseData(): void {
     super.prepareBaseData();
 
-    this.flags.ptr2e = fu.mergeObject(this.flags.ptr2e ?? {}, { choiceSelections: {} })
+    this.flags.ptr2e = foundry.utils.mergeObject(this.flags.ptr2e ?? {}, { choiceSelections: {} })
 
     this._name = this._source.name;
     Object.defineProperty(this, "name", {
@@ -290,7 +290,7 @@ class ActiveEffectPTR2e<
     if (!changed?.changes && !changed?.system?.changes) return super._preUpdate(changed, options, user);
 
     const parseChangePath = (expanded: { changes: unknown[]; system?: unknown }) => {
-      expanded.system = fu.mergeObject(expanded.system ?? {}, {
+      expanded.system = foundry.utils.mergeObject(expanded.system ?? {}, {
         changes: expanded.changes,
       });
     };
@@ -301,7 +301,7 @@ class ActiveEffectPTR2e<
         const index = parseInt(key);
         if (!current[index]) continue;
 
-        current[index] = fu.mergeObject(current[index], value);
+        current[index] = foundry.utils.mergeObject(current[index], value);
       }
       data.system.changes = current;
     };
@@ -325,7 +325,7 @@ class ActiveEffectPTR2e<
       );
     };
 
-    const expanded = fu.expandObject(changed);
+    const expanded = foundry.utils.expandObject(changed);
     if (isValidChargesArray(expanded)) {
       parseChangePath(expanded as { changes: unknown[]; system?: unknown });
     } else if (isValidIndexPathObject(expanded)) {
@@ -343,7 +343,7 @@ class ActiveEffectPTR2e<
     ) {
       parseIndexPaths(expanded as { system: { changes: Record<number, unknown> } });
     }
-    fu.setProperty(changed, "system.changes", (expanded.system as Record<string, unknown>).changes);
+    foundry.utils.setProperty(changed, "system.changes", (expanded.system as Record<string, unknown>).changes);
     delete changed.changes;
 
     return super._preUpdate(changed, options, user);
@@ -368,7 +368,7 @@ class ActiveEffectPTR2e<
     const effects = await (async (): Promise<ActiveEffectPTR2e[]> => {
       const effects = sources.flatMap((source) => {
         if (!(context.keepId || context.keepEmbeddedIds)) {
-          source._id = fu.randomID();
+          source._id = foundry.utils.randomID();
         }
 
         if (source.flags?.ptr2e?.stacks !== false) {

@@ -10,7 +10,7 @@ type SkillBeingEdited = SkillPTR2e["_source"] & { label: string; investment: num
 export class SkillsEditor extends foundry.applications.api.HandlebarsApplicationMixin(
   foundry.applications.api.ApplicationV2
 ) {
-  static override DEFAULT_OPTIONS = fu.mergeObject(
+  static override DEFAULT_OPTIONS = foundry.utils.mergeObject(
     super.DEFAULT_OPTIONS,
     {
       tag: "form",
@@ -408,7 +408,7 @@ export class SkillsEditor extends foundry.applications.api.HandlebarsApplication
     _form: HTMLFormElement,
     formData: FormDataExtended
   ) {
-    const data = fu.expandObject<Record<string, { investment: string }>>(formData.object);
+    const data = foundry.utils.expandObject<Record<string, { investment: string }>>(formData.object);
     const skills = this.document.system.toObject().skills as SkillPTR2e["_source"][];
     const maxInvestment = this.document.system.advancement.level === 1 ? 90 : 100;
     const levelOne = this.document.system.advancement.level === 1 || !this.document.flags.ptr2e?.editedSkills;

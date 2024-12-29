@@ -118,8 +118,8 @@ class Statistic extends BaseStatistic {
   }
 
   withRollOptions(options?: RollOptionConfig): Statistic {
-    const newOptions = fu.mergeObject(this.config ?? {}, options ?? {}, { inplace: false });
-    return new Statistic(this.actor, fu.deepClone(this.data), newOptions);
+    const newOptions = foundry.utils.mergeObject(this.config ?? {}, options ?? {}, { inplace: false });
+    return new Statistic(this.actor, foundry.utils.deepClone(this.data), newOptions);
   }
 
   /**
@@ -138,7 +138,7 @@ class Statistic extends BaseStatistic {
       return [...new Set([arr1 ?? [], arr2 ?? []].flat())];
     }
 
-    const result = fu.mergeObject(fu.deepClone(this.data), data);
+    const result = foundry.utils.mergeObject(foundry.utils.deepClone(this.data), data);
     result.domains = maybeMergeArrays(this.domains, data.domains);
     result.modifiers = maybeMergeArrays(this.data.modifiers, data.modifiers);
     result.rollOptions = maybeMergeArrays(this.data.rollOptions, data.rollOptions);
@@ -191,7 +191,7 @@ class StatisticCheck<TParent extends Statistic = Statistic> implements BaseStati
   constructor(parent: TParent, data: StatisticData, config: RollOptionConfig = {}) {
     this.parent = parent;
     this.type = data.check?.type ?? "check";
-    data.check = fu.mergeObject(data.check ?? {}, { type: this.type });
+    data.check = foundry.utils.mergeObject(data.check ?? {}, { type: this.type });
 
     const checkDomains = new Set(R.filter(["check", data.check.domains].flat(), R.isTruthy));
     if (this.type === "attack-roll") {

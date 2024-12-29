@@ -9,7 +9,7 @@ import { sluggify } from "@utils";
 
 export class FormConfigSheet extends ActiveEffectConfig {
 
-  static override DEFAULT_OPTIONS = fu.mergeObject(
+  static override DEFAULT_OPTIONS = foundry.utils.mergeObject(
     super.DEFAULT_OPTIONS,
     {
       classes: ["form-sheet"],
@@ -262,7 +262,7 @@ export class FormConfigSheet extends ActiveEffectConfig {
     event.preventDefault();
     event.stopPropagation();
     const submitData = this._prepareSubmitData(event, form, formData);
-    if (fu.isEmpty(submitData)) return;
+    if (foundry.utils.isEmpty(submitData)) return;
 
 
     await this.document.update(submitData);

@@ -14,7 +14,7 @@ type AllowedDocumentTypes = ActorPTR2e | ActorPTR2e<ActorSystemPTR2e, TokenDocum
 
 class DataInspector extends foundry.applications.api.HandlebarsApplicationMixin(ApplicationV2Expanded) {
 
-  static override DEFAULT_OPTIONS = fu.mergeObject(
+  static override DEFAULT_OPTIONS = foundry.utils.mergeObject(
     super.DEFAULT_OPTIONS,
     {
       tag: "aside",
@@ -142,7 +142,7 @@ class DataInspector extends foundry.applications.api.HandlebarsApplicationMixin(
         if (!('getRollData' in document)) return { data: {}, path: '' };
         if (this.rollData == null) {
           this.rollData = document.getRollData() as Record<string, unknown>;
-          if(this.rollData.actor) this.rollData = fu.duplicate(this.rollData.actor as Record<string, unknown>);
+          if(this.rollData.actor) this.rollData = foundry.utils.duplicate(this.rollData.actor as Record<string, unknown>);
         }
         return { data: this.rollData, path: '' };
       }
@@ -254,7 +254,7 @@ class DataInspector extends foundry.applications.api.HandlebarsApplicationMixin(
       context.entries = this._currentData ??= (() => {
         this.tabs = {};
         const results = doc.system.results.map(r => {
-          const context = fu.duplicate(r.context);
+          const context = foundry.utils.duplicate(r.context);
           const { name, uuid } = r.target ?? { uuid: context.action };
           const id = name ? r.target.token ? r.target.token.id : r.target.id : null;
           const filteredOptions = this.filterOptions(context.options);
@@ -283,7 +283,7 @@ class DataInspector extends foundry.applications.api.HandlebarsApplicationMixin(
 
       context.entry = this._currentData ??= (() => {
         this.tabs = {};
-        const result = fu.duplicate(doc.system.result);
+        const result = foundry.utils.duplicate(doc.system.result);
         const filteredOptions = this.filterOptions(result.options);
         result.options = result.options.filter(o => filteredOptions.has(o)).sort((a, b) => a.localeCompare(b));
         return result;
@@ -297,7 +297,7 @@ class DataInspector extends foundry.applications.api.HandlebarsApplicationMixin(
 
       context.entry = this._currentData ??= (() => {
         this.tabs = {};
-        const result = fu.duplicate(doc.system.result);
+        const result = foundry.utils.duplicate(doc.system.result);
         const filteredOptions = this.filterOptions(result.options);
         result.options = result.options.filter(o => filteredOptions.has(o)).sort((a, b) => a.localeCompare(b));
         return result;
@@ -351,7 +351,7 @@ class DataInspector extends foundry.applications.api.HandlebarsApplicationMixin(
       const functionsCheckbox = htmlQuery(htmlElement, "input[name='include-functions']") as Maybe<HTMLInputElement>;
 
       pathInput?.addEventListener("keyup", () => {
-        fu.debounce(this.deferredPath.bind(this), 250)(pathInput.value);
+        foundry.utils.debounce(this.deferredPath.bind(this), 250)(pathInput.value);
       });
 
       modeSelect?.addEventListener("change", () => {
@@ -360,11 +360,11 @@ class DataInspector extends foundry.applications.api.HandlebarsApplicationMixin(
       });
 
       searchInput?.addEventListener("keyup", () => {
-        fu.debounce(this.deferredSearch.bind(this), 250)(searchInput.value);
+        foundry.utils.debounce(this.deferredSearch.bind(this), 250)(searchInput.value);
       });
 
       fuzzyInput?.addEventListener("change", () => {
-        fu.debounce(this.deferredFuzzyChange.bind(this), 250)(Number(fuzzyInput.value));
+        foundry.utils.debounce(this.deferredFuzzyChange.bind(this), 250)(Number(fuzzyInput.value));
       });
 
       functionsCheckbox?.addEventListener("change", () => {

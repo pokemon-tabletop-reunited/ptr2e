@@ -3,7 +3,7 @@ import { ApplicationV2Expanded } from "./appv2-expanded.ts";
 import { AbilityPTR2e, ItemPTR2e } from "@item";
 
 export class AvailableAbilitiesApp extends foundry.applications.api.HandlebarsApplicationMixin(ApplicationV2Expanded) {
-    static override DEFAULT_OPTIONS = fu.mergeObject(
+    static override DEFAULT_OPTIONS = foundry.utils.mergeObject(
         super.DEFAULT_OPTIONS,
         {
             tag: "aside",

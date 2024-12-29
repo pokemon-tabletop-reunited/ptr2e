@@ -8,7 +8,7 @@ class UUIDUtils {
     // For any UUIDs which are embedded within a compendium pack, batch retrieve all such documents.
     const packs = new Map();
     for (const uuid of uuids) {
-      const { collection, documentId } = fu.parseUuid(uuid);
+      const { collection, documentId } = foundry.utils.parseUuid(uuid);
       if (!collection || !(collection instanceof CompendiumCollection)) continue;
       if (collection.has(documentId!)) continue;
       if (!packs.has(collection)) packs.set(collection, []);
@@ -24,7 +24,7 @@ class UUIDUtils {
 
   static isItemUUID(uuid: unknown): uuid is ItemUUID {
     try {
-      return typeof uuid === "string" && fu.parseUuid(uuid).type === "Item";
+      return typeof uuid === "string" && foundry.utils.parseUuid(uuid).type === "Item";
     } catch {
       return false;
     }
@@ -32,7 +32,7 @@ class UUIDUtils {
 
   static isActionUUID(uuid: unknown): uuid is ActionUUID {
     try {
-      return typeof uuid === "string" && fu.parseUuid(uuid).type === "Actions";
+      return typeof uuid === "string" && foundry.utils.parseUuid(uuid).type === "Actions";
     } catch {
       return false;
     }
@@ -40,7 +40,7 @@ class UUIDUtils {
 
   static isCompendiumUUID(uuid: unknown): uuid is CompendiumUUID {
     try {
-      return typeof uuid === "string" && fu.parseUuid(uuid).collection instanceof CompendiumCollection;
+      return typeof uuid === "string" && foundry.utils.parseUuid(uuid).collection instanceof CompendiumCollection;
     }
     catch {
       return false;
@@ -50,7 +50,7 @@ class UUIDUtils {
   static isTokenUUID(uuid: unknown): uuid is TokenDocumentUUID {
     try {
       if (typeof uuid !== "string") return false;
-      const parsed = fu.parseUuid(uuid);
+      const parsed = foundry.utils.parseUuid(uuid);
       return parsed.documentType === "Scene" && parsed.embedded[0] === "Token";
     } catch {
       return false;

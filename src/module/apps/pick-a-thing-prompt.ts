@@ -37,7 +37,7 @@ export abstract class PickAThingPrompt<TItem extends ItemPTR2e, TThing extends s
     return this.item?.actor;
   }
 
-  static override DEFAULT_OPTIONS = fu.mergeObject(
+  static override DEFAULT_OPTIONS = foundry.utils.mergeObject(
     super.DEFAULT_OPTIONS,
     {
       tag: "aside",

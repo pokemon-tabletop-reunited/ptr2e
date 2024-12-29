@@ -71,7 +71,7 @@ export class MigrationRunnerBase {
     }
 
     async getUpdatedActor(actor: ActorPTR2e['_source'], migrations: MigrationBase[]): Promise<ActorPTR2e['_source']> {
-        const currentActor = fu.deepClone(actor);
+        const currentActor = foundry.utils.deepClone(actor);
 
         for (const migration of migrations) {
             for (const currentItem of currentActor.items as ItemPTR2e['_source'][]) {
@@ -111,7 +111,7 @@ export class MigrationRunnerBase {
     }
 
     async getUpdatedItem(item: ItemPTR2e['_source'], migrations: MigrationBase[]): Promise<ItemPTR2e['_source']> {
-        const current = fu.deepClone(item);
+        const current = foundry.utils.deepClone(item);
 
         for (const migration of migrations) {
             await migration.preUpdateItem?.(current);
@@ -140,7 +140,7 @@ export class MigrationRunnerBase {
         tableSource: foundry.documents.RollTableSource,
         migrations: MigrationBase[],
     ): Promise<foundry.documents.RollTableSource> {
-        const current = fu.deepClone(tableSource);
+        const current = foundry.utils.deepClone(tableSource);
 
         for (const migration of migrations) {
             try {
@@ -157,7 +157,7 @@ export class MigrationRunnerBase {
         macroSource: foundry.documents.MacroSource,
         migrations: MigrationBase[],
     ): Promise<foundry.documents.MacroSource> {
-        const current = fu.deepClone(macroSource);
+        const current = foundry.utils.deepClone(macroSource);
 
         for (const migration of migrations) {
             try {
@@ -174,7 +174,7 @@ export class MigrationRunnerBase {
         source: foundry.documents.JournalEntrySource,
         migrations: MigrationBase[],
     ): Promise<foundry.documents.JournalEntrySource> {
-        const clone = fu.deepClone(source);
+        const clone = foundry.utils.deepClone(source);
 
         for (const migration of migrations) {
             try {
@@ -203,7 +203,7 @@ export class MigrationRunnerBase {
         userData: foundry.documents.UserSource,
         migrations: MigrationBase[],
     ): Promise<foundry.documents.UserSource> {
-        const current = fu.deepClone(userData);
+        const current = foundry.utils.deepClone(userData);
         for (const migration of migrations) {
             try {
                 await migration.updateUser?.(current);

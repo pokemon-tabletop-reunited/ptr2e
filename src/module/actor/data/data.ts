@@ -11,7 +11,7 @@ import { Nature } from "@scripts/config/natures.ts";
 
 interface Movement { method: string; value: number; type: "primary" | "secondary" }
 
-interface ActorSystemSchema extends TraitsSchema, MigrationSchema, foundry.data.fields.DataSchema {
+interface ActorSystemSchema extends TraitsSchema, MigrationSchema, DataSchema {
   species: foundry.data.fields.SchemaField<SpeciesSchema, SourceFromSchema<SpeciesSchema>, SpeciesSystem, false, true, true>;
   advancement: foundry.data.fields.SchemaField<AdvancementSchema, SourceFromSchema<AdvancementSchema>, ModelPropsFromSchema<AdvancementSchema>, true, false, false>;
   attributes: foundry.data.fields.SchemaField<AttributesSchema, SourceFromSchema<AttributesSchema>, ModelPropsFromSchema<AttributesSchema>, true, false, false>;
@@ -39,18 +39,18 @@ interface ActorSystemSchema extends TraitsSchema, MigrationSchema, foundry.data.
   immunities: foundry.data.fields.SetField<SlugField, string[], Set<string>, true, false, true>;
 }
 
-interface PartySchema extends foundry.data.fields.DataSchema {
+interface PartySchema extends DataSchema {
   ownerOf: foundry.data.fields.DocumentIdField<string, false, false, false>;
   partyMemberOf: foundry.data.fields.DocumentIdField<string, false, false, false>;
   teamMemberOf: foundry.data.fields.ArrayField<foundry.data.fields.DocumentIdField<string, true, false, false>, string[], string[], true, false, true>;
 }
 
-interface AdvancementSchema extends foundry.data.fields.DataSchema {
+interface AdvancementSchema extends DataSchema {
   experience: foundry.data.fields.SchemaField<ExperienceSchema, SourceFromSchema<ExperienceSchema>, ModelPropsFromSchema<ExperienceSchema>, true, false, false>;
   level: foundry.data.fields.NumberField<number, number, true, false, true>;
 }
 
-interface ExperienceSchema extends foundry.data.fields.DataSchema {
+interface ExperienceSchema extends DataSchema {
   current: foundry.data.fields.NumberField<number, number, true, false, true>;
   next: foundry.data.fields.NumberField<number, number, true, false, true>;
   diff: foundry.data.fields.NumberField<number, number, true, false, true>;

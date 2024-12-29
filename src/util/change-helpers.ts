@@ -206,7 +206,7 @@ interface ExtractEphemeralEffectsParams {
 //     rollOptions: Set<string>
 // ): RollSubstitution[] {
 //     return domains
-//         .flatMap((d) => fu.deepClone(substitutions[d] ?? []))
+//         .flatMap((d) => foundry.utils.deepClone(substitutions[d] ?? []))
 //         .filter((s) => s.predicate?.test(rollOptions) ?? true);
 // }
 

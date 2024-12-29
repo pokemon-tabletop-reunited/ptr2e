@@ -72,7 +72,7 @@ export class PackLoader {
         sources.has(source) ||
         (this.sourcesSettings.showUnknownSources && !!source && !knownSources.includes(source))
       ) {
-        filteredIndex.set(data._id, fu.deepClone(data));
+        filteredIndex.set(data._id, foundry.utils.deepClone(data));
       }
     }
     return filteredIndex;

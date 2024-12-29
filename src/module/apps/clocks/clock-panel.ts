@@ -6,9 +6,9 @@ import Sortable from "sortablejs";
 export default class ClockPanel extends foundry.applications.api.HandlebarsApplicationMixin(
   foundry.applications.api.ApplicationV2
 ) {
-  public refresh = fu.debounce(this.render, 100);
+  public refresh = foundry.utils.debounce(this.render, 100);
 
-  static override DEFAULT_OPTIONS = fu.mergeObject(
+  static override DEFAULT_OPTIONS = foundry.utils.mergeObject(
     super.DEFAULT_OPTIONS,
     {
       classes: ["clock-panel sheet"],

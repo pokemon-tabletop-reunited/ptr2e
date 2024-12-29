@@ -2,7 +2,7 @@ import { ConsumablePTR2e } from "@item";
 import { default as ItemSheetPTR2e } from "./base.ts";
 
 export default class ConsumableSheet extends ItemSheetPTR2e<ConsumablePTR2e["system"]> {
-    static override DEFAULT_OPTIONS = fu.mergeObject(
+    static override DEFAULT_OPTIONS = foundry.utils.mergeObject(
         super.DEFAULT_OPTIONS,
         {
             classes: ["ability-sheet"],
@@ -15,7 +15,7 @@ export default class ConsumableSheet extends ItemSheetPTR2e<ConsumablePTR2e["sys
     override noActions = true;
 
     static override PARTS: Record<string, foundry.applications.api.HandlebarsTemplatePart> = 
-        fu.mergeObject(super.PARTS, {
+        foundry.utils.mergeObject(super.PARTS, {
             overview: {
                 template: ConsumableSheet.overviewTemplate,
             },

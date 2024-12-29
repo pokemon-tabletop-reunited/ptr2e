@@ -14,7 +14,7 @@ import { CheckboxData, RangesInputData, RenderResultListOptions, SelectData, Sli
 import noUiSlider from "nouislider";
 
 export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMixin(ApplicationV2Expanded) {
-  static override DEFAULT_OPTIONS = fu.mergeObject(
+  static override DEFAULT_OPTIONS = foundry.utils.mergeObject(
     super.DEFAULT_OPTIONS,
     {
       id: "perk-web-app",
@@ -93,7 +93,7 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
             if (current) {
               newPerk.flags ??= {};
               newPerk.flags.ptr2e ??= {};
-              newPerk.flags.ptr2e = fu.mergeObject(newPerk.flags.ptr2e, current.toObject().flags.ptr2e, { inplace: false });
+              newPerk.flags.ptr2e = foundry.utils.mergeObject(newPerk.flags.ptr2e, current.toObject().flags.ptr2e, { inplace: false });
               newPerk.flags.ptr2e.tierSlug = this.currentNode.tierInfo?.perk.slug ?? this.currentNode.slug;
               newPerk.system.originSlug = current.system.originSlug;
             }
@@ -171,7 +171,7 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
 
             newPerk.flags ??= {};
             newPerk.flags.ptr2e ??= {};
-            newPerk.flags.ptr2e = fu.mergeObject(newPerk.flags.ptr2e, current.toObject().flags.ptr2e, { inplace: false });
+            newPerk.flags.ptr2e = foundry.utils.mergeObject(newPerk.flags.ptr2e, current.toObject().flags.ptr2e, { inplace: false });
             newPerk.flags.ptr2e.tierSlug = perk.slug;
             newPerk.system.originSlug = current.system.originSlug;
 

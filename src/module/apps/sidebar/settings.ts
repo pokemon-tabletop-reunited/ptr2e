@@ -2,7 +2,7 @@ import { GithubSheet } from "../github.ts";
 
 export class SettingsSidebarPTR2e extends Settings {
   static override get defaultOptions() {
-    return fu.mergeObject(super.defaultOptions, {
+    return foundry.utils.mergeObject(super.defaultOptions, {
       template: "systems/ptr2e/templates/sidebar/settings.hbs",
     });
   }

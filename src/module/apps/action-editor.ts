@@ -8,7 +8,7 @@ import * as R from "remeda";
 export class ActionEditor<
   TDocument extends ItemPTR2e<ItemSystemsWithActions>,
 > extends foundry.applications.api.HandlebarsApplicationMixin(ApplicationV2Expanded) {
-  static override DEFAULT_OPTIONS = fu.mergeObject(
+  static override DEFAULT_OPTIONS = foundry.utils.mergeObject(
     super.DEFAULT_OPTIONS,
     {
       tag: "form",
@@ -65,8 +65,8 @@ export class ActionEditor<
           const action = actions.find(a => a.slug === this.action.slug);
           if (!action) return;
 
-          const variant = fu.duplicate(action);
-          variant.slug += sluggify(`-${fu.randomID()}`);
+          const variant = foundry.utils.duplicate(action);
+          variant.slug += sluggify(`-${foundry.utils.randomID()}`);
           variant.name += ` Variant`;
           variant.variant = action.slug;
           actions.push(variant);

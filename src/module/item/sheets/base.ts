@@ -12,7 +12,7 @@ import { DataInspector } from "@module/apps/data-inspector/data-inspector.ts";
 export default class ItemSheetPTR2e<
   TSystem extends ItemSystemPTR,
 > extends foundry.applications.api.HandlebarsApplicationMixin(ItemSheetV2Expanded) {
-  static override DEFAULT_OPTIONS = fu.mergeObject(
+  static override DEFAULT_OPTIONS = foundry.utils.mergeObject(
     super.DEFAULT_OPTIONS,
     {
       classes: ["move-sheet"],

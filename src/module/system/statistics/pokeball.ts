@@ -95,7 +95,7 @@ class PokeballCheck<TParent extends PokeballStatistic = PokeballStatistic> imple
   constructor(parent: TParent, data: PokeballStatisticData, config: RollOptionConfig = {}) {
     this.parent = parent;
 
-    data.check = fu.mergeObject(data.check ?? {}, { type: this.type });
+    data.check = foundry.utils.mergeObject(data.check ?? {}, { type: this.type });
     data.check.domains = Array.from(new Set(data.check.domains ?? []));
     this.domains = R.unique(R.filter([data.domains, data.check.domains].flat(), R.isTruthy));
 

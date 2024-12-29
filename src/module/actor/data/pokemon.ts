@@ -57,7 +57,7 @@ class PokemonActorSystem extends ActorSystemPTR2e {
         }
 
         const source = this.parent.toObject();
-        const update = fu.mergeObject(source, generatedData[0], { inplace: false });
+        const update = foundry.utils.mergeObject(source, generatedData[0], { inplace: false });
         if(source.folder && source.folder !== update.folder) update.folder = source.folder;
         this.parent.updateSource(update);
 

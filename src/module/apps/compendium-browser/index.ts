@@ -11,7 +11,7 @@ import Tagify from "@yaireo/tagify";
 import noUiSlider from "nouislider";
 
 export class CompendiumBrowser extends foundry.applications.api.HandlebarsApplicationMixin(ApplicationV2Expanded) {
-  static override DEFAULT_OPTIONS = fu.mergeObject(
+  static override DEFAULT_OPTIONS = foundry.utils.mergeObject(
     super.DEFAULT_OPTIONS,
     {
       tag: "form",

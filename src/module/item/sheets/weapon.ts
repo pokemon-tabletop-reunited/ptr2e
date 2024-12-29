@@ -2,7 +2,7 @@ import { WeaponPTR2e } from "@item";
 import { default as ItemSheetPTR2e } from "./base.ts";
 
 export default class WeaponSheet extends ItemSheetPTR2e<WeaponPTR2e["system"]> {
-    static override DEFAULT_OPTIONS = fu.mergeObject(
+    static override DEFAULT_OPTIONS = foundry.utils.mergeObject(
         super.DEFAULT_OPTIONS,
         {
             classes: ["ability-sheet"],
@@ -15,7 +15,7 @@ export default class WeaponSheet extends ItemSheetPTR2e<WeaponPTR2e["system"]> {
     override noActions = false;
 
     static override PARTS: Record<string, foundry.applications.api.HandlebarsTemplatePart> = 
-        fu.mergeObject(super.PARTS, {
+        foundry.utils.mergeObject(super.PARTS, {
             overview: {
                 template: WeaponSheet.overviewTemplate,
             },

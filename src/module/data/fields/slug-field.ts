@@ -1,48 +1,35 @@
-import { SlugCamel, sluggify } from "@utils";
+import { sluggify } from "@utils";
+import type { SlugCamel } from "@utils";
 import { StrictStringField } from "./strict-primitive-fields.ts";
+import type { DataField, StringField } from "node_modules/fvtt-types/src/foundry/common/data/fields.d.mts";
 
 /** A sluggified string field */
 class SlugField<
-    TSourceProp extends string = string,
-    TModelProp extends string = string,
-    TRequired extends boolean = true,
-    TNullable extends boolean = boolean,
-    THasInitial extends boolean = boolean,
-> extends StrictStringField<TSourceProp, TModelProp, TRequired, TNullable, THasInitial> {
-    constructor(options: SlugFieldOptions<TSourceProp, TRequired, TNullable, THasInitial> = {}) {
-        options.blank ??= false;
-        options.camel ??= null;
-        super(options);
-    }
+  Options extends SlugFieldOptions = Omit<StringField.DefaultOptions, 'required'> & { required: true },
+  AssignmentType = StringField.AssignmentType<Options>,
+  InitializedType = StringField.InitializedType<Options>,
+  PersistedType extends string | null | undefined = StringField.InitializedType<Options>
+> extends StrictStringField<Options, AssignmentType, InitializedType, PersistedType> {
+  constructor(options?: Options) {
+    options ??= {} as Options;
+    options.blank ??= false;
+    options.camel ??= null;
+    super(options);
+  }
 
-    protected static override get _defaults(): SlugFieldOptions<string, boolean, boolean, boolean> {
-        return { ...super._defaults, nullable: true, initial: null, camel: null };
-    }
+  protected static override get _defaults() {
+    return { ...super._defaults, nullable: true, initial: null, camel: null };
+  }
 
-    protected override _cleanType(
-        value: Maybe<string>,
-        options?: foundry.data.fields.CleanFieldOptions,
-    ): foundry.data.fields.MaybeSchemaProp<string, TRequired, TNullable, THasInitial>;
-    protected override _cleanType(value: Maybe<string>, options?: foundry.data.fields.CleanFieldOptions): unknown {
-        const slug = super._cleanType(value, options);
-        const camel = this.options.camel ?? null;
-        return typeof slug === "string" ? sluggify(slug, { camel }) : slug;
-    }
+  protected override _cleanType(value: InitializedType, options?: DataField.CleanOptions): InitializedType {
+    const slug = super._cleanType(value, options);
+    const camel = this.options.camel ?? null;
+    return typeof slug === "string" ? sluggify(slug, { camel }) as InitializedType : slug;
+  }
 }
 
-interface SlugField<
-    TSourceProp extends string = string,
-    TModelProp extends string = string,
-    TRequired extends boolean = true,
-    TNullable extends boolean = boolean,
-    THasInitial extends boolean = boolean,
-> extends StrictStringField<TSourceProp, TModelProp, TRequired, TNullable, THasInitial> {
-    options: SlugFieldOptions<TSourceProp, TRequired, TNullable, THasInitial>;
-}
-
-interface SlugFieldOptions<TSourceProp extends string, TRequired extends boolean, TNullable extends boolean, THasInitial extends boolean>
-    extends foundry.data.fields.StringFieldOptions<TSourceProp, TRequired, TNullable, THasInitial> {
-    camel?: SlugCamel;
+interface SlugFieldOptions extends StringFieldOptions {
+  camel?: SlugCamel;
 }
 
 export { SlugField };

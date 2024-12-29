@@ -2,7 +2,7 @@ import { GearPTR2e } from "@item";
 import { default as ItemSheetPTR2e } from "./base.ts";
 
 export default class GearSheet extends ItemSheetPTR2e<GearPTR2e["system"]> {
-    static override DEFAULT_OPTIONS = fu.mergeObject(
+    static override DEFAULT_OPTIONS = foundry.utils.mergeObject(
         super.DEFAULT_OPTIONS,
         {
             classes: ["ability-sheet"],
@@ -15,7 +15,7 @@ export default class GearSheet extends ItemSheetPTR2e<GearPTR2e["system"]> {
     override noActions = true;
 
     static override PARTS: Record<string, foundry.applications.api.HandlebarsTemplatePart> = 
-        fu.mergeObject(super.PARTS, {
+        foundry.utils.mergeObject(super.PARTS, {
             overview: {
                 template: GearSheet.overviewTemplate,
             },

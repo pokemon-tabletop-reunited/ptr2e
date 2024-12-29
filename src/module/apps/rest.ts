@@ -3,7 +3,7 @@ import { ApplicationV2Expanded } from "./appv2-expanded.ts";
 import { htmlQueryAll } from "@utils";
 
 export class RestApp extends foundry.applications.api.HandlebarsApplicationMixin(ApplicationV2Expanded) {
-    static override DEFAULT_OPTIONS = fu.mergeObject(
+    static override DEFAULT_OPTIONS = foundry.utils.mergeObject(
         super.DEFAULT_OPTIONS,
         {
             tag: "form",
@@ -39,7 +39,7 @@ export class RestApp extends foundry.applications.api.HandlebarsApplicationMixin
     fractionToHeal: number;
 
     constructor(name: string, documents: ActorPTR2e[], options: Partial<foundry.applications.api.ApplicationConfiguration> = {}) {
-        options.id = `rest-${documents.length ? documents[0].id || fu.randomID() : fu.randomID()}`;
+        options.id = `rest-${documents.length ? documents[0].id || foundry.utils.randomID() : foundry.utils.randomID()}`;
         super(options);
         this.name = name;
         this.documents = documents;
@@ -101,7 +101,7 @@ export class RestApp extends foundry.applications.api.HandlebarsApplicationMixin
         _form: HTMLFormElement,
         formData: FormDataExtended
     ) {
-        const data = fu.expandObject(formData.object);
+        const data = foundry.utils.expandObject(formData.object);
         const healOptions = {
             fractionToHeal: 1.0,
             removeWeary: true,

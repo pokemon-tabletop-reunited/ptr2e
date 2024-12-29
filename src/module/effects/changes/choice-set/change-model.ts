@@ -230,7 +230,7 @@ export default class ChoiceSetChangeSystem extends ChangeModel {
   }
 
   private choicesFromPath(path: string): PickableThing<string>[] {
-    const choiceObject: unknown = fu.getProperty(CONFIG.PTR, path) ?? fu.getProperty(this.actor ?? {}, path) ?? {};
+    const choiceObject: unknown = foundry.utils.getProperty(CONFIG.PTR, path) ?? foundry.utils.getProperty(this.actor ?? {}, path) ?? {};
     if (
       Array.isArray(choiceObject) &&
       choiceObject.every((c) => R.isPlainObject<{ value: string }>(c) && typeof c.value === "string")

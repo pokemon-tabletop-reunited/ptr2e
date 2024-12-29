@@ -1,8 +1,7 @@
 import { ActorPTR2e } from "@actor";
-import { ItemSheetPTR2e, ItemSourcePTR2e, ItemSystemPTR, ItemSystemsWithActions } from "@item";
+import type { ItemSourcePTR2e, ItemSystemPTR, ItemSystemsWithActions } from "@item";
 import { ActionPTR2e, EquipmentData, RollOptionManager, Trait } from "@data";
-import { ActiveEffectPTR2e, EffectSourcePTR2e } from "@effects";
-import { ItemFlagsPTR2e } from "./data/system.ts";
+import { ActiveEffectPTR2e, type EffectSourcePTR2e } from "@effects";
 import { ActionsCollections } from "@actor/actions.ts";
 import { SpeciesSystemModel } from "./data/index.ts";
 import { preImportJSON } from "@module/data/doc-helper.ts";
@@ -10,22 +9,21 @@ import { MigrationList, MigrationRunner } from "@module/migration/index.ts";
 import * as R from "remeda";
 import { MigrationRunnerBase } from "@module/migration/runner/base.ts";
 import { processGrantDeletions } from "@module/effects/changes/grant-item.ts";
+import type { AnyDocument, DropData, FromDropDataOptions } from "node_modules/fvtt-types/src/foundry/client/data/abstract/client-document.d.mts";
+import type { InexactPartial } from "fvtt-types/utils";
 
 /**
  * @extends {PTRItemData}
  */
-class ItemPTR2e<
-  TSystem extends ItemSystemPTR = ItemSystemPTR,
-  TParent extends ActorPTR2e | null = ActorPTR2e | null,
-> extends Item<TParent, TSystem> {
+class ItemPTR2e extends Item {
   /** Has this document completed `DataModel` initialization? */
   declare initialized: boolean;
 
-  declare _sheet: ItemSheetPTR2e<this> | null;
+  // declare _sheet: ItemSheetPTR2e<this> | null;
 
-  override get sheet(): ItemSheetPTR2e<this> {
-    return super.sheet as ItemSheetPTR2e<this>;
-  }
+  // override get sheet(): ItemSheetPTR2e<this> {
+  //   return super.sheet as ItemSheetPTR2e<this>;
+  // }
 
   /** The recorded schema version of this item, updated after each data migration */
   get schemaVersion(): number | null {
@@ -33,20 +31,20 @@ class ItemPTR2e<
   }
 
   get grantedBy(): ItemPTR2e | ActiveEffectPTR2e | null {
-    return (this.actor?.items.get(this.flags.ptr2e.grantedBy?.id ?? "") as Maybe<ItemPTR2e>)
-      ?? (this.actor?.effects.get(this.flags.ptr2e.grantedBy?.id ?? "") as Maybe<ActiveEffectPTR2e>)
+    return (this.actor?.items.get(this.flags.ptr2e.grantedBy?.id ?? "") as ItemPTR2e | undefined | null)
+      ?? (this.actor?.effects.get(this.flags.ptr2e.grantedBy?.id ?? "") as ActiveEffectPTR2e | undefined | null)
       ?? null;
   }
 
-  protected override _initializeSource(
-    data: object & { _stats: { systemId: string }; type: string },
-    options?: DataModelConstructionOptions<TParent> | undefined
-  ): this["_source"] {
-    if (data?._stats?.systemId === "ptu") {
-      data.type = "ptu-item";
-    }
-    return super._initializeSource(data, options);
-  }
+  // protected override _initializeSource(
+  //   data: this | foundry.data.fields.SchemaField.InnerConstructorType<foundry.documents.BaseItem.Schema>,
+  //   options?: Omit<foundry.abstract.DataModel.DataValidationOptions, "parent">
+  // ) {
+  //   if (data?._stats?.systemId === "ptu") {
+  //     data.type = "ptu-item";
+  //   }
+  //   return super._initializeSource(data, options);
+  // }
 
   get slug() {
     return this.system.slug;
@@ -72,12 +70,12 @@ class ItemPTR2e<
         .map((o) => `${prefix}:${o}`) ?? []
       : [];
 
-    const gearOptions = 'equipped' in this.system 
-    ? [
-      `${this.slug}:${(this.system.equipped as EquipmentData).carryType}`,
-      ...(["held", "worn"].includes((this.system.equipped as EquipmentData).carryType) ? `${this.slug}:equipped`: [])
-    ]
-    : [] as string[];
+    const gearOptions = 'equipped' in this.system
+      ? [
+        `${this.slug}:${(this.system.equipped as EquipmentData).carryType}`,
+        ...(["held", "worn"].includes((this.system.equipped as EquipmentData).carryType) ? `${this.slug}:equipped` : [])
+      ]
+      : [] as string[];
 
     const options = [
       `${prefix}:id:${this.id}`,
@@ -153,23 +151,22 @@ class ItemPTR2e<
     });
   }
 
-  static override async fromDropData<TDocument extends foundry.abstract.Document>(
-    this: ConstructorOf<TDocument>,
-    data: DropCanvasData,
-    options?: Record<string, unknown> | undefined
-  ): Promise<TDocument | undefined> {
+  static override async fromDropData<T extends foundry.abstract.Document.AnyConstructor>(
+    this: T,
+    data: DropData<InstanceType<NoInfer<T>>>,
+    options?: FromDropDataOptions
+  ) {
     if (data?.type !== "ActiveEffect")
-      return super.fromDropData(data, options) as Promise<TDocument | undefined>;
+      return super.fromDropData(data, options) as Promise<T | undefined>;
 
-    let document: ActiveEffectPTR2e | null = null;
+    let document: AnyDocument | ActiveEffectPTR2e | null = null;
 
     // Case 1 - Data explicitly provided
     if (data.data) {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      document = new CONFIG.ActiveEffect.documentClass(data.data as any) as ActiveEffectPTR2e;
+      document = new CONFIG.ActiveEffect.documentClass(data.data) as ActiveEffectPTR2e;
     }
     // Case 2 - UUID provided
-    else if (data.uuid) document = await fromUuid(data.uuid);
+    else if ('uuid' in data && data.uuid) document = await fromUuid(data.uuid);
 
     // Ensure that we have an ActiveEffect document
     if (!document)
@@ -180,7 +177,7 @@ class ItemPTR2e<
       throw new Error("Invalid drop data provided for ActiveEffect Item creation");
 
     // Create item document with the ActiveEffect data
-    return new this({
+    return new CONFIG.Item.documentClass({
       name: document.name,
       type: "effect",
       effects: [document.toObject()],
@@ -188,33 +185,32 @@ class ItemPTR2e<
     });
   }
 
-  static override async createDocuments<TDocument extends foundry.abstract.Document>(
-    this: ConstructorOf<TDocument>,
-    data?: (TDocument | PreCreate<TDocument["_source"]>)[],
-    context?: DocumentModificationContext<TDocument["parent"]>
-  ): Promise<TDocument[]>;
-  static override async createDocuments<TDocument extends foundry.abstract.Document>(
-    data: (TDocument | PreCreate<TDocument["_source"]>)[] = [],
-    context: DocumentModificationContext<TDocument["parent"]> = {},
-  ): Promise<foundry.abstract.Document[]> {
-    const sources = data?.map((d) => (d instanceof ItemPTR2e ? d.toObject() : d as PreCreate<ItemPTR2e["_source"]>)) ?? [];
+  static override async createDocuments<T extends foundry.abstract.Document.AnyConstructor, Temporary extends boolean | undefined>(
+    this: T,
+    data: Item.ConstructorData[],
+    operation?: Record<string, unknown> & {
+      temporary?: Temporary;
+    }
+  ): Promise<foundry.abstract.Document.ToStoredIf<T, Temporary>[] | undefined> {
+    const sources = data?.map((d) => (d instanceof Item ? d.toObject() : d)) ?? [];
 
     // Migrate source in case of importing from an old compendium
-    for (const source of [...sources] as PreCreate<ItemPTR2e["_source"]>[]) {
+    for (const source of [...sources]) {
       if (R.isEmpty(R.pick(source, ["flags", "system"]))) {
         // The item has no migratable data: set schema version and skip
         const migrationSource = { _migration: { version: MigrationRunnerBase.LATEST_SCHEMA_VERSION } };
-        source.system = fu.mergeObject(source.system ?? {}, migrationSource);
+        source.system = foundry.utils.mergeObject(source.system ?? {}, migrationSource);
         continue;
       }
 
       const item = new CONFIG.Item.documentClass(source);
       await MigrationRunner.ensureSchemaVersion(item, MigrationList.constructFromVersion(item.schemaVersion));
-      data.splice(data.indexOf(source as PreCreate<TDocument["_source"]>), 1, item.toObject() as unknown as PreCreate<TDocument["_source"]>);
+      data.splice(data.indexOf(source), 1, item.toObject());
     }
 
-    const actor = context?.parent as ActorPTR2e | null;
-    if (!actor) return super.createDocuments<TDocument>(data, context);
+    const actor = operation?.parent as ActorPTR2e | null;
+    //@ts-expect-error - Operation cannot be typed correctly until https://github.com/League-of-Foundry-Developers/foundry-vtt-types/issues/2998 is resolved
+    if (!actor) return super.createDocuments<T, Temporary>(data, operation);
 
     const specialTypes = ["species"];
 
@@ -222,7 +218,7 @@ class ItemPTR2e<
       if (specialTypes.includes(source.type as string)) {
         switch (source.type) {
           case "species": {
-            const speciesItem = actor.items.get("actorspeciesitem") as ItemPTR2e<ItemSystemPTR, ActorPTR2e>;
+            const speciesItem = actor.items.get("actorspeciesitem")
             if (speciesItem) {
               await speciesItem.update({ "system": source.system });
               return [];
@@ -232,7 +228,7 @@ class ItemPTR2e<
         return [];
       }
     }
-    
+
     async function processSources(sources: ItemSourcePTR2e[]) {
       const outputItemSources: ItemSourcePTR2e[] = [];
 
@@ -268,47 +264,54 @@ class ItemPTR2e<
 
       return outputItemSources;
     }
-     
+
     const outputItemSources = await processSources(sources as ItemSourcePTR2e[]);
 
-    if (!(context.keepId || context.keepEmbeddedIds)) {
+    if(!operation) operation = {};
+
+    if (!(operation.keepId || operation.keepEmbeddedIds)) {
       for (const source of sources) {
-        source._id = fu.randomID();
+        source._id = foundry.utils.randomID();
       }
-      context.keepEmbeddedIds = true;
-      context.keepId = true;
+      operation.keepEmbeddedIds = true;
+      operation.keepId = true;
     }
 
-    return super.createDocuments<TDocument>(sources.concat(outputItemSources) as PreCreate<TDocument["_source"]>[], context);
+    //@ts-expect-error - Operation cannot be typed correctly until https://github.com/League-of-Foundry-Developers/foundry-vtt-types/issues/2998 is resolved
+    return super.createDocuments<T, Temporary>(sources.concat(outputItemSources), operation);
   }
 
   /**
    * Exact copy of the original createDialog method except:
    * Removed 'ptu-item' from appearing in the list.
    */
-  static override async createDialog<TDocument extends foundry.abstract.Document>(
-    this: ConstructorOf<TDocument>,
+  static override async createDialog(
     data: Record<string, unknown> = {},
-    context: {
-      parent?: TDocument["parent"];
-      pack?: Collection<TDocument> | null;
-      perksOnly?: boolean;
-      types?: string[];
-    } & Partial<FormApplicationOptions>,
-  ): Promise<TDocument | null> {
+    context?: Record<string, unknown> & {
+      parent?: AnyDocument;
+      pack?: string | null;
+    } & 
+      InexactPartial<
+        DialogOptions & {
+          perksOnly?: boolean;
+          types?: string[];
+        }
+      >
+  ) {
+    if(!context) context = {};
     const { parent, pack, ...options } = context;
 
     // Collect data
-    //@ts-expect-error - This is a valid string property
     const documentName = this.metadata.name;
-    const types = context.perksOnly ? ["perk"] : game.documentTypes[documentName].filter(t => t !== CONST.BASE_DOCUMENT_TYPE && t !== "ptu-item");
-    let collection: Items<ItemPTR2e<ItemSystemPTR, null>> | undefined;
+    const types = context.perksOnly ? ["perk"] : game.documentTypes[documentName as keyof typeof game["documentTypes"]].filter(t => t !== CONST.BASE_DOCUMENT_TYPE && t !== "ptu-item");
+    let collection: CompendiumCollection<CompendiumCollection.Metadata> | WorldCollection<typeof AnyDocument, string> | undefined;
     if (!parent) {
-      if (pack) collection = game.packs.get(pack as unknown as string) as unknown as Items<ItemPTR2e<ItemSystemPTR, null>>;
+      if (pack) collection = game.packs.get(pack);
       else collection = game.collections.get(documentName);
     }
+    //@ts-expect-error - Accessing a protected property
     const folders = collection?._formatFolderSelectOptions() ?? [];
-    //@ts-expect-error - This is a valid string property
+    
     const label = context.perksOnly ? game.i18n.localize("TYPES.Item.perk") : game.i18n.localize(this.metadata.label);
     const title = game.i18n.format("DOCUMENT.Create", { type: label });
     // Render the document creation form
@@ -332,25 +335,23 @@ class ItemPTR2e<
       content: html,
       label: title,
       callback: html => {
-        const form = html[0].querySelector("form");
+        const form = $(html)[0].querySelector("form");
         const fd = new FormDataExtended(form!);
         foundry.utils.mergeObject(data, fd.object, { inplace: true });
         if (!data.folder) delete data.folder;
         if (types.length === 1) data.type = types[0];
-        //@ts-expect-error - This is a valid string property
-        if (!data.name?.trim()) data.name = this.defaultName();
-        //@ts-expect-error - This is a valid string property
+        if (!(data.name as string)?.trim()) data.name = this.defaultName();
         return this.implementation.create(data, { parent, pack, renderSheet: true });
       },
       rejectClose: false,
       options
-    }) as unknown as TDocument | null;
+    })
   }
 
-  override async update(data: Record<string, unknown>, context?: DocumentModificationContext<TParent> | undefined): Promise<this | undefined> {
+  override async update(data: Record<string, unknown>, context?: InexactPartial<Omit<foundry.abstract.Document.DatabaseOperationsFor<"Item", "update">, "updates">>): Promise<this | undefined> {
     if (!(this.system instanceof SpeciesSystemModel && this.system.virtual) && !this.flags.ptr2e.virtual) return super.update(data, context);
 
-    await this.actor?.updateEmbeddedDocuments("Item", [{ _id: "actorspeciesitem", "system.species": fu.expandObject(data).system }]);
+    await this.actor?.updateEmbeddedDocuments("Item", [{ _id: "actorspeciesitem", "system.species": foundry.utils.expandObject(data).system }]);
     this.updateSource(data);
     foundry.applications.instances.get(`SpeciesSheet-${this.uuid}`)?.render({});
     return undefined;
@@ -362,13 +363,12 @@ class ItemPTR2e<
     return processed ? super.importFromJSON(processed) : this;
   }
 
-  static override async deleteDocuments<TDocument extends foundry.abstract.Document>(this: ConstructorOf<TDocument>, ids?: string[], context?: DocumentModificationContext<TDocument["parent"]> & { pendingEffects?: ActiveEffectPTR2e<ActorPTR2e | ItemPTR2e<ItemSystemPTR, ActorPTR2e>>[] }): Promise<TDocument[]>;
-  static override async deleteDocuments(ids: string[] = [], context: DocumentModificationContext<ActorPTR2e | null> & { pendingEffects?: ActiveEffectPTR2e<ActorPTR2e | ItemPTR2e<ItemSystemPTR, ActorPTR2e>>[] } = {}): Promise<foundry.abstract.Document[]> {
+  static override async deleteDocuments(ids: string[] = [], context: InexactPartial<Omit<foundry.abstract.Document.DatabaseOperationsFor<"Item", "delete">, "ids">> & { pendingEffects?: ActiveEffectPTR2e<ActorPTR2e | ItemPTR2e>[], ignoreRestricted?: boolean } = {}): Promise<foundry.abstract.Document.ToConfiguredInstance<typeof Item>[]> {
     ids = Array.from(new Set(ids)).filter(id => id !== "actorspeciesitem");
-    const actor = context.parent;
+    const actor = context.parent as Actor | undefined
     if (actor) {
-      const items = ids.flatMap(id => actor.items.get(id) ?? []) as ItemPTR2e<ItemSystemPTR, ActorPTR2e>[];
-      const effects = context.pendingEffects ? [...context.pendingEffects] : [] as ActiveEffectPTR2e<ActorPTR2e | ItemPTR2e<ItemSystemPTR, ActorPTR2e>>[];
+      const items = ids.flatMap(id => actor.items.get(id) ?? []) as ItemPTR2e[];
+      const effects = context.pendingEffects ? [...context.pendingEffects] : [] as ActiveEffectPTR2e<ActorPTR2e | ItemPTR2e>[];
 
       // TODO: Logic for container deletion
 
@@ -380,12 +380,12 @@ class ItemPTR2e<
               await change.preDelete?.({ pendingItems: items, context });
             }
 
-            await processGrantDeletions(effect as ActiveEffectPTR2e<ActorPTR2e | ItemPTR2e<ItemSystemPTR, ActorPTR2e>>, item, items, effects, !!context.ignoreRestricted)
+            await processGrantDeletions(effect as ActiveEffectPTR2e<ActorPTR2e | ItemPTR2e>, item, items, effects, !!context.ignoreRestricted)
           }
         }
         else {
           if (item.grantedBy && item.grantedBy instanceof ActiveEffectPTR2e) {
-            await processGrantDeletions(item.grantedBy as ActiveEffectPTR2e<ActorPTR2e | ItemPTR2e<ItemSystemPTR, ActorPTR2e>>, item, items, effects, !!context.ignoreRestricted);
+            await processGrantDeletions(item.grantedBy as ActiveEffectPTR2e<ActorPTR2e | ItemPTR2e>, item, items, effects, !!context.ignoreRestricted);
           }
         }
       }
@@ -395,44 +395,22 @@ class ItemPTR2e<
           await ActiveEffectPTR2e.deleteDocuments(effectIds, { pendingItems: items, parent: actor });
         }
       }
-      ids = Array.from(new Set(items.map(i => i.id))).filter(id => actor.items.has(id));
+      ids = Array.from(new Set(items.map(i => i.id))).filter(id => id && actor.items.has(id));
     }
     return super.deleteDocuments(ids, context);
   }
 
-  override getEmbeddedCollection(embeddedName: string) {
-    if(embeddedName === "Actions" && this.hasActions()) return this.actions as unknown as ReturnType<Item["getEmbeddedCollection"]>;
-    return super.getEmbeddedCollection(embeddedName);
+  override getEmbeddedCollection<EmbeddedName extends Exclude<foundry.CONST.EMBEDDED_DOCUMENT_TYPES, "Region" | "RegionBehavior"> | "Actions">(embeddedName: EmbeddedName): Collection<foundry.abstract.Document.ConfiguredInstanceForName<EmbeddedName extends foundry.abstract.Document.Type ? EmbeddedName : never>> {
+    if (embeddedName === "Actions" && this.hasActions()) return this.actions as unknown as ReturnType<Item["getEmbeddedCollection"]>;
+    return super.getEmbeddedCollection(embeddedName as Exclude<foundry.CONST.EMBEDDED_DOCUMENT_TYPES, "Region" | "RegionBehavior">);
   }
 
-  // static override updateDocuments<TDocument extends foundry.abstract.Document>(
-  //   this: ConstructorOf<TDocument>,
-  //   updates?: Record<string, unknown>[],
-  //   operation?: Partial<DocumentModificationContext<TDocument["parent"]>>,
-  // ): Promise<TDocument[]>;
-  // static override async updateDocuments(
-  //   updates: Record<string, unknown>[] = [],
-  //   operation: Partial<DocumentModificationContext<ActorPTR2e | null>> = {},
-  // ): Promise<Item<Actor | null>[]> {
-  //   const isFullReplace = !((operation?.diff ?? true) && (operation?.recursive ?? true));
-  //   if (isFullReplace) return super.updateDocuments(updates, operation);
-
-  //   // Process rule element hooks for each actor update
-  //   for (const changed of updates) {
-  //     await processPreUpdateActorHooks(changed, { pack: operation.pack ?? null, type: 'item' });
-  //   }
-
-  //   return super.updateDocuments(updates, operation);
-  // }
 }
 
-interface ItemPTR2e<
-  TSystem extends ItemSystemPTR = ItemSystemPTR,
-  TParent extends ActorPTR2e | null = ActorPTR2e | null,
-> extends Item<TParent, TSystem> {
+interface ItemPTR2e extends Item {
   constructor: typeof ItemPTR2e;
-  flags: ItemFlagsPTR2e;
-  readonly _source: foundry.documents.ItemSource<string, TSystem>;
+  // flags: ItemFlagsPTR2e;
+  // readonly _source: foundry.documents.ItemSource<string, TSystem>;
 
   _actions: ActionsCollections;
 

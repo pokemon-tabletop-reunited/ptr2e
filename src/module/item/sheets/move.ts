@@ -3,7 +3,7 @@ import { Tab } from "./document.ts";
 import { default as ItemSheetPTR2e } from "./base.ts";
 
 export default class MoveSheet extends ItemSheetPTR2e<MovePTR2e["system"]> {
-  static override DEFAULT_OPTIONS = fu.mergeObject(
+  static override DEFAULT_OPTIONS = foundry.utils.mergeObject(
     super.DEFAULT_OPTIONS,
     {
       classes: ["move-sheet"],
@@ -18,7 +18,7 @@ export default class MoveSheet extends ItemSheetPTR2e<MovePTR2e["system"]> {
   override noActions = false;
 
   static override PARTS: Record<string, foundry.applications.api.HandlebarsTemplatePart> =
-    fu.mergeObject(
+    foundry.utils.mergeObject(
       super.PARTS,
       {
         overview: {
@@ -119,12 +119,12 @@ export default class MoveSheet extends ItemSheetPTR2e<MovePTR2e["system"]> {
   //     _form: HTMLFormElement,
   //     formData: FormDataExtended
   // ) {
-  //     const actions = fu.duplicate(this.document.system._source.actions);
+  //     const actions = foundry.utils.duplicate(this.document.system._source.actions);
   //     const attackIndex = actions.findIndex((action) => action.type === "attack");
   //     if (attackIndex === -1) return;
 
-  //     const expanded = fu.expandObject(formData.object) as AttackPTR2e["_source"];
-  //     actions[attackIndex] = fu.mergeObject(actions[attackIndex], expanded, { inplace: false });
+  //     const expanded = foundry.utils.expandObject(formData.object) as AttackPTR2e["_source"];
+  //     actions[attackIndex] = foundry.utils.mergeObject(actions[attackIndex], expanded, { inplace: false });
   //     actions[attackIndex].slug = sluggify(actions[attackIndex].name);
   //     await this.document.update({ "system.actions": actions });
   // }

@@ -11,7 +11,7 @@ class SkillsSettingsMenu extends foundry.applications.api.HandlebarsApplicationM
 ) {
     newCounter = 0;
 
-    static override DEFAULT_OPTIONS = fu.mergeObject(
+    static override DEFAULT_OPTIONS = foundry.utils.mergeObject(
         foundry.applications.api.ApplicationV2.DEFAULT_OPTIONS,
         {
             id: "skills-settings",
@@ -203,7 +203,7 @@ class SkillsSettingsMenu extends foundry.applications.api.HandlebarsApplicationM
         formData: FormDataExtended
     ) {
         const skillsData =
-            fu.expandObject<{ skill?: Record<string, Partial<Skill>> }>(formData.object).skill ??
+            foundry.utils.expandObject<{ skill?: Record<string, Partial<Skill>> }>(formData.object).skill ??
             {};
 
         const skills = new Map<string, Skill>();
@@ -230,7 +230,7 @@ class SkillsSettingsMenu extends foundry.applications.api.HandlebarsApplicationM
 
                 if (game.ptr.data.skills.isCustomSkill(existingSkill)) {
                     const s = skill as CustomSkill;
-                    const update = fu.deepClone(existingSkill);
+                    const update = foundry.utils.deepClone(existingSkill);
                     update.label = s.label ?? existingSkill.label;
                     update.slug = sluggify(s.label ?? existingSkill.label);
                     update.group = sluggify(s.group ?? existingSkill.group!) || undefined;

@@ -101,7 +101,7 @@ function _registerPTRHelpers() {
 
     Handlebars.registerHelper("asContentLink", function (content: string) {
       try {
-        const uuid = content ? fu.parseUuid(content) : null;
+        const uuid = content ? foundry.utils.parseUuid(content) : null;
       
         if (!uuid?.id) {
             // Return as raw string
@@ -200,7 +200,7 @@ function _registerPTRHelpers() {
 function _registerBasicHelpers() {
     Handlebars.registerHelper("abs", (value) => Math.abs(Number(value)));
 
-    Handlebars.registerHelper("getProperty", (obj, key) => fu.getProperty(obj, key));
+    Handlebars.registerHelper("getProperty", (obj, key) => foundry.utils.getProperty(obj, key));
 
     Handlebars.registerHelper("concat", function () {
         let outStr = "";
@@ -355,7 +355,7 @@ function _registerBasicHelpers() {
             ret = "",
             data: { key: string; index: number; first: boolean; last: boolean } | undefined;
 
-        if (fu.getType(context) === "function") {
+        if (foundry.utils.getType(context) === "function") {
             // @ts-ignore
             context = context.call(this);
         }
@@ -376,7 +376,7 @@ function _registerBasicHelpers() {
                 });
         }
 
-        if (fu.getType(context) === "Map") {
+        if (foundry.utils.getType(context) === "Map") {
             if (options.data) {
                 data = Handlebars.Utils.createFrame(options.data);
             }

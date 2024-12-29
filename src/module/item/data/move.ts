@@ -186,7 +186,7 @@ export default abstract class MoveSystem extends HasEmbed(
           changedActions[mainAttackIndex].traits = changed.system.traits;
         }
       } else {
-        const attacks = fu.duplicate(this._source.actions);
+        const attacks = foundry.utils.duplicate(this._source.actions);
         const mainAttackIndex = attacks.findIndex((action) => action.slug === this.slug);
         if (mainAttackIndex === -1) {
           const retry = attacks.findIndex((action) => action.type === "attack");

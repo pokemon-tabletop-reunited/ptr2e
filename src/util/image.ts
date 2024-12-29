@@ -2,7 +2,7 @@ class ImageResolver {
 
     private tree: foundry.utils.StringTree<string>;
     constructor(files: string[]) {
-        this.tree = new fu.StringTree();
+        this.tree = new foundry.utils.StringTree();
 
         for(const file of files) {
             const str = [...file.split('/').at(-1)?.split('.').at(0) ?? ""];
@@ -64,7 +64,7 @@ class ImageResolver {
 
         const node = this.tree.nodeAtPrefix(realNeedle, {hasLeaves: true});
 
-        const filePath = node?.[fu.StringTree.leaves];
+        const filePath = node?.[foundry.utils.StringTree.leaves];
         return Array.isArray(filePath) ? filePath.at(0) : filePath;
     }
 

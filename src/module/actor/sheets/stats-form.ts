@@ -12,7 +12,7 @@ export default class StatsForm extends foundry.applications.api.HandlebarsApplic
     this._statsChart = new StatsChart(this, {});
   }
 
-  static override DEFAULT_OPTIONS = fu.mergeObject(super.DEFAULT_OPTIONS, {
+  static override DEFAULT_OPTIONS = foundry.utils.mergeObject(super.DEFAULT_OPTIONS, {
     classes: ["stats-form"],
     position: {
       height: 620,
@@ -163,7 +163,7 @@ export default class StatsForm extends foundry.applications.api.HandlebarsApplic
 
     const rangeInput = event.target as HTMLInputElement;
     const key = rangeInput.name.replaceAll("system.", "").replaceAll("attributes.", "").replaceAll(".base", "") as keyof Attributes;
-    const attributes = fu.duplicate(this.document.system._source.attributes);
+    const attributes = foundry.utils.duplicate(this.document.system._source.attributes);
     attributes[key].base = parseInt(rangeInput.value);
     const max = this.#calcBaseMaximum(key, attributes as this['document']['system']['attributes']);
     rangeInput.max = max.toString();
@@ -181,7 +181,7 @@ export default class StatsForm extends foundry.applications.api.HandlebarsApplic
 
     const rangeInput = event.target as HTMLInputElement;
     const key = rangeInput.name.replaceAll("system.", "").replaceAll("attributes.", "").replaceAll(".evs", "") as keyof Attributes;
-    const attributes = fu.duplicate(this.document.system._source.attributes);
+    const attributes = foundry.utils.duplicate(this.document.system._source.attributes);
     attributes[key].evs = parseInt(rangeInput.value);
     const max = this.#calcEvMaximum(key, attributes as this['document']['system']['attributes']);
     rangeInput.max = max.toString();

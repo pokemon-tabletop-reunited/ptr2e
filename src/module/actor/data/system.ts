@@ -14,11 +14,259 @@ import natureToStatArray, { natures } from "@scripts/config/natures.ts";
 import { SlugField } from "@module/data/fields/slug-field.ts";
 import { TraitsSchema } from "@module/data/mixins/has-traits.ts";
 import { MigrationSchema } from "@module/data/mixins/has-migrations.ts";
-import { ActorSystemSchema, AttributeSchema, StatSchema, TypeField, GenderOptions, AttributesSchema, AdvancementSchema, Movement } from "./data.ts";
+import { ActorSystemSchema as actorSystemSchema, AttributeSchema, StatSchema, TypeField, GenderOptions, AttributesSchema, AdvancementSchema, Movement } from "./data.ts";
 import { addDataFieldMigration, sluggify } from "@utils";
 import { AbilityReferenceSchema } from "@item/data/species.ts";
 
-class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeDataModel)) {
+const actorSystemSchema = (() => {
+  const fields = foundry.data.fields;
+
+  function getAttributeField(slug: string, withStage?: boolean): AttributeSchema;
+  function getAttributeField(slug: string, withStage: true): AttributeSchema;
+  function getAttributeField(slug: string, withStage: false): Omit<AttributeSchema, "stage">;
+  function getAttributeField(slug: string, withStage = true): AttributeSchema | Omit<AttributeSchema, "stage"> {
+    return {
+      ...getStatField(slug, withStage),
+      evs: new fields.NumberField({
+        required: true,
+        label: `PTR2E.Attributes.${slug}.Label`,
+        initial: 0,
+        min: 0,
+        max: 200,
+        step: 4,
+        validate: (d) =>
+          (d as number) >= 0 && (d as number) <= 200 && (d as number) % 4 === 0,
+      }),
+      ivs: new fields.NumberField({
+        required: true,
+        initial: 0,
+        validate: (d) => (d as number) >= 0,
+      }),
+      base: new fields.NumberField({
+        required: false,
+        initial: undefined,
+        validate: (d) => d === undefined || (d as number) >= 1,
+      }),
+    };
+  };
+
+  function getStatField(slug: string, withStage?: boolean): StatSchema;
+  function getStatField(slug: string, withStage: true): StatSchema;
+  function getStatField(slug: string, withStage: false): Omit<StatSchema, "stage">;
+  function getStatField(slug: string, withStage = true): StatSchema | Omit<StatSchema, "stage"> {
+    const output: Partial<StatSchema> = {
+      slug: new SlugField({ required: true, initial: slug }),
+    };
+    if (withStage)
+      output.stage = new fields.NumberField({
+        required: true,
+        initial: 0,
+        validate: (d) => (d as number) >= -6 && (d as number) <= 6,
+        label: `PTR2E.Attributes.${slug}.Stage.Label`,
+        hint: `PTR2E.Attributes.${slug}.Stage.Hint`,
+      });
+    return output as StatSchema | Omit<StatSchema, "stage">;
+  };
+
+  return {
+    advancement: new fields.SchemaField({
+      experience: new fields.SchemaField({
+        current: new fields.NumberField({
+          required: true,
+          initial: 0,
+          min: 0,
+          label: "PTR2E.FIELDS.experience.current.label",
+          hint: "PTR2E.FIELDS.experience.current.hint",
+        }),
+        next: new fields.NumberField({
+          required: true,
+          initial: 0,
+          min: 0,
+          label: "PTR2E.FIELDS.experience.next.label",
+          hint: "PTR2E.FIELDS.experience.next.hint",
+        }),
+        diff: new fields.NumberField({
+          required: true,
+          initial: 0,
+          min: 0,
+          label: "PTR2E.FIELDS.experience.diff.label",
+          hint: "PTR2E.FIELDS.experience.diff.hint",
+        }),
+      }),
+      level: new fields.NumberField({
+        required: true,
+        initial: 1,
+        min: 1,
+        max: 100,
+        label: "PTR2E.FIELDS.level.label",
+        hint: "PTR2E.FIELDS.level.hint",
+      }),
+    }),
+    attributes: new fields.SchemaField({
+      hp: new fields.SchemaField(getAttributeField("hp", false)),
+      atk: new fields.SchemaField(getAttributeField("atk")),
+      def: new fields.SchemaField(getAttributeField("def")),
+      spa: new fields.SchemaField(getAttributeField("spa")),
+      spd: new fields.SchemaField(getAttributeField("spd")),
+      spe: new fields.SchemaField(getAttributeField("spe")),
+    }),
+    battleStats: new fields.SchemaField({
+      evasion: new fields.SchemaField(getStatField("evasion")),
+      accuracy: new fields.SchemaField(getStatField("accuracy")),
+      critRate: new fields.SchemaField(getStatField("crit-rate")),
+    }),
+    skills: new CollectionField(new fields.EmbeddedDataField(SkillPTR2e), "slug", {
+      initial: getInitialSkillList,
+    }),
+    biology: new fields.ObjectField(),
+    capabilities: new fields.ObjectField(),
+    type: new fields.SchemaField({
+      types: new fields.SetField<TypeField, foundry.data.fields.SourcePropFromDataField<TypeField>[], Set<foundry.data.fields.SourcePropFromDataField<TypeField>>, true, false, true>(
+        new fields.StringField<keyof TypeEffectiveness, keyof TypeEffectiveness, true, false, true>({
+          required: true,
+          choices: getTypes().reduce<Record<PokemonType, string>>(
+            (acc, type) => ({ ...acc, [type]: type }),
+            {} as Record<PokemonType, string>
+          ),
+          initial: "untyped",
+          label: "PTR2E.FIELDS.PokemonType.Label",
+          hint: "PTR2E.FIELDS.PokemonType.Hint",
+        }),
+        {
+          initial: ["untyped"],
+          label: "PTR2E.FIELDS.PokemonType.LabelPlural",
+          hint: "PTR2E.FIELDS.PokemonType.HintPlural",
+          required: true,
+          validate: (d) =>
+            d instanceof Set ? d.size > 0 : Array.isArray(d) ? d.length > 0 : false,
+          validationError: "PTR2E.Errors.PokemonType",
+        }
+      ),
+    }),
+    powerPoints: new fields.SchemaField({
+      value: new fields.NumberField({
+        required: true,
+        initial: 0,
+        validate: (d) => (d as number) >= 0,
+        label: "PTR2E.FIELDS.powerPoints.value.label",
+        hint: "PTR2E.FIELDS.powerPoints.value.hint",
+      }),
+      max: new fields.NumberField({
+        required: true,
+        initial: 0,
+        validate: (d) => (d as number) >= 0,
+        label: "PTR2E.FIELDS.powerPoints.max.label",
+        hint: "PTR2E.FIELDS.powerPoints.max.hint",
+      }),
+    }),
+    health: new fields.SchemaField({
+      value: new fields.NumberField({
+        required: true,
+        initial: 0,
+        validate: (d) => (d as number) >= 0,
+        label: "PTR2E.FIELDS.health.value.label",
+        hint: "PTR2E.FIELDS.health.value.hint",
+      }),
+      max: new fields.NumberField({
+        required: true,
+        initial: 0,
+        validate: (d) => (d as number) >= 0,
+        label: "PTR2E.FIELDS.health.max.label",
+        hint: "PTR2E.FIELDS.health.max.hint",
+      }),
+    }),
+    shield: new fields.SchemaField({
+      value: new fields.NumberField({
+        required: true,
+        initial: 0,
+        validate: (d) => (d as number) >= 0,
+        label: "PTR2E.FIELDS.shield.value.label",
+        hint: "PTR2E.FIELDS.shield.value.hint",
+      }),
+      max: new fields.NumberField({
+        required: true,
+        initial: 0,
+        validate: (d) => (d as number) >= 0,
+        label: "PTR2E.FIELDS.shield.max.label",
+        hint: "PTR2E.FIELDS.shield.max.hint",
+      })
+    }),
+    money: new fields.NumberField({ required: true, initial: 0 }),
+    species: new fields.SchemaField(SpeciesSystemModel.defineSchema(), {
+      required: false,
+      nullable: true,
+      initial: null,
+    }),
+    shiny: new fields.BooleanField({ required: true, initial: false }),
+    nature: new fields.StringField({
+      required: true,
+      choices: natures,
+      initial: "hardy",
+      label: "PTR2E.FIELDS.nature.label",
+    }),
+    gender: new fields.StringField<GenderOptions, GenderOptions, true, false, true>({
+      required: true,
+      choices: {
+        "genderless": "genderless",
+        "male": "male",
+        "female": "female"
+      },
+      initial: "genderless"
+    }),
+    slots: new fields.NumberField({
+      required: true,
+      initial: 6,
+      integer: true,
+      positive: true,
+      label: "PTR2E.FIELDS.slots.label",
+      hint: "PTR2E.FIELDS.slots.hint",
+    }),
+    inventoryPoints: new fields.SchemaField({
+      current: new fields.NumberField({
+        required: true,
+        initial: 0,
+        min: 0,
+        label: "PTR2E.FIELDS.inventoryPoints.current.label",
+        hint: "PTR2E.FIELDS.inventoryPoints.current.hint",
+      }),
+    }),
+    party: new fields.SchemaField({
+      ownerOf: new fields.DocumentIdField({ required: false }),
+      partyMemberOf: new fields.DocumentIdField({ required: false }),
+      teamMemberOf: new fields.ArrayField(new fields.DocumentIdField(), { initial: [] }),
+    }),
+    clocks: new CollectionField(
+      new fields.EmbeddedDataField(ClockPTR2e),
+      "id",
+      { required: true, initial: [] }
+    ),
+    immunities: new fields.SetField(new SlugField(), { required: true, initial: [] }),
+    details: new fields.SchemaField({
+      alliance: new fields.StringField({
+        choices: {
+          "party": "party",
+          "opposition": "opposition"
+        },
+        required: true,
+        nullable: true,
+        initial: "",
+        blank: true,
+        label: "PTR2E.FIELDS.details.alliance.label",
+        hint: "PTR2E.FIELDS.details.alliance.hint",
+      }),
+      size: new fields.SchemaField({
+        height: new fields.NumberField({required: true, initial: 0, label: "PTR2E.FIELDS.size.height.label", hint: "PTR2E.FIELDS.size.height.hint"}),
+        weight: new fields.NumberField({required: true, initial: 0, label: "PTR2E.FIELDS.size.weight.label", hint: "PTR2E.FIELDS.size.weight.hint"}),
+        heightClass: new fields.NumberField({required: true, initial: 0, min: 0, max: 7}),
+        weightClass: new fields.NumberField({required: true, initial: 1, min: 1, max: 16}),
+      })
+    })
+  };
+})();
+
+export type ActorSystemSchema = typeof actorSystemSchema;
+
+class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeDataModel<ActorSystemSchema, ActorPTR2e>)) {
   static LOCALIZATION_PREFIXES = ["PTR2E.ActorSystem"];
 
   declare parent: ActorPTR2e<this>;
@@ -26,250 +274,7 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
   modifiers: Record<string, number | undefined> = {};
 
   static override defineSchema(): ActorSystemSchema {
-    const fields = foundry.data.fields;
-
-    function getAttributeField(slug: string, withStage?: boolean): AttributeSchema;
-    function getAttributeField(slug: string, withStage: true): AttributeSchema;
-    function getAttributeField(slug: string, withStage: false): Omit<AttributeSchema, "stage">;
-    function getAttributeField(slug: string, withStage = true): AttributeSchema | Omit<AttributeSchema, "stage"> {
-      return {
-        ...getStatField(slug, withStage),
-        evs: new fields.NumberField({
-          required: true,
-          label: `PTR2E.Attributes.${slug}.Label`,
-          initial: 0,
-          min: 0,
-          max: 200,
-          step: 4,
-          validate: (d) =>
-            (d as number) >= 0 && (d as number) <= 200 && (d as number) % 4 === 0,
-        }),
-        ivs: new fields.NumberField({
-          required: true,
-          initial: 0,
-          validate: (d) => (d as number) >= 0,
-        }),
-        base: new fields.NumberField({
-          required: false,
-          initial: undefined,
-          validate: (d) => d === undefined || (d as number) >= 1,
-        }),
-      };
-    };
-
-    function getStatField(slug: string, withStage?: boolean): StatSchema;
-    function getStatField(slug: string, withStage: true): StatSchema;
-    function getStatField(slug: string, withStage: false): Omit<StatSchema, "stage">;
-    function getStatField(slug: string, withStage = true): StatSchema | Omit<StatSchema, "stage"> {
-      const output: Partial<StatSchema> = {
-        slug: new SlugField({ required: true, initial: slug }),
-      };
-      if (withStage)
-        output.stage = new fields.NumberField({
-          required: true,
-          initial: 0,
-          validate: (d) => (d as number) >= -6 && (d as number) <= 6,
-          label: `PTR2E.Attributes.${slug}.Stage.Label`,
-          hint: `PTR2E.Attributes.${slug}.Stage.Hint`,
-        });
-      return output as StatSchema | Omit<StatSchema, "stage">;
-    };
-
-    return {
-      ...super.defineSchema() as MigrationSchema & TraitsSchema,
-      advancement: new fields.SchemaField({
-        experience: new fields.SchemaField({
-          current: new fields.NumberField({
-            required: true,
-            initial: 0,
-            min: 0,
-            label: "PTR2E.FIELDS.experience.current.label",
-            hint: "PTR2E.FIELDS.experience.current.hint",
-          }),
-          next: new fields.NumberField({
-            required: true,
-            initial: 0,
-            min: 0,
-            label: "PTR2E.FIELDS.experience.next.label",
-            hint: "PTR2E.FIELDS.experience.next.hint",
-          }),
-          diff: new fields.NumberField({
-            required: true,
-            initial: 0,
-            min: 0,
-            label: "PTR2E.FIELDS.experience.diff.label",
-            hint: "PTR2E.FIELDS.experience.diff.hint",
-          }),
-        }),
-        level: new fields.NumberField({
-          required: true,
-          initial: 1,
-          min: 1,
-          max: 100,
-          label: "PTR2E.FIELDS.level.label",
-          hint: "PTR2E.FIELDS.level.hint",
-        }),
-      }),
-      attributes: new fields.SchemaField({
-        hp: new fields.SchemaField(getAttributeField("hp", false)),
-        atk: new fields.SchemaField(getAttributeField("atk")),
-        def: new fields.SchemaField(getAttributeField("def")),
-        spa: new fields.SchemaField(getAttributeField("spa")),
-        spd: new fields.SchemaField(getAttributeField("spd")),
-        spe: new fields.SchemaField(getAttributeField("spe")),
-      }),
-      battleStats: new fields.SchemaField({
-        evasion: new fields.SchemaField(getStatField("evasion")),
-        accuracy: new fields.SchemaField(getStatField("accuracy")),
-        critRate: new fields.SchemaField(getStatField("crit-rate")),
-      }),
-      skills: new CollectionField(new fields.EmbeddedDataField(SkillPTR2e), "slug", {
-        initial: getInitialSkillList,
-      }),
-      biology: new fields.ObjectField(),
-      capabilities: new fields.ObjectField(),
-      type: new fields.SchemaField({
-        types: new fields.SetField<TypeField, foundry.data.fields.SourcePropFromDataField<TypeField>[], Set<foundry.data.fields.SourcePropFromDataField<TypeField>>, true, false, true>(
-          new fields.StringField<keyof TypeEffectiveness, keyof TypeEffectiveness, true, false, true>({
-            required: true,
-            choices: getTypes().reduce<Record<PokemonType, string>>(
-              (acc, type) => ({ ...acc, [type]: type }),
-              {} as Record<PokemonType, string>
-            ),
-            initial: "untyped",
-            label: "PTR2E.FIELDS.PokemonType.Label",
-            hint: "PTR2E.FIELDS.PokemonType.Hint",
-          }),
-          {
-            initial: ["untyped"],
-            label: "PTR2E.FIELDS.PokemonType.LabelPlural",
-            hint: "PTR2E.FIELDS.PokemonType.HintPlural",
-            required: true,
-            validate: (d) =>
-              d instanceof Set ? d.size > 0 : Array.isArray(d) ? d.length > 0 : false,
-            validationError: "PTR2E.Errors.PokemonType",
-          }
-        ),
-      }),
-      powerPoints: new fields.SchemaField({
-        value: new fields.NumberField({
-          required: true,
-          initial: 0,
-          validate: (d) => (d as number) >= 0,
-          label: "PTR2E.FIELDS.powerPoints.value.label",
-          hint: "PTR2E.FIELDS.powerPoints.value.hint",
-        }),
-        max: new fields.NumberField({
-          required: true,
-          initial: 0,
-          validate: (d) => (d as number) >= 0,
-          label: "PTR2E.FIELDS.powerPoints.max.label",
-          hint: "PTR2E.FIELDS.powerPoints.max.hint",
-        }),
-      }),
-      health: new fields.SchemaField({
-        value: new fields.NumberField({
-          required: true,
-          initial: 0,
-          validate: (d) => (d as number) >= 0,
-          label: "PTR2E.FIELDS.health.value.label",
-          hint: "PTR2E.FIELDS.health.value.hint",
-        }),
-        max: new fields.NumberField({
-          required: true,
-          initial: 0,
-          validate: (d) => (d as number) >= 0,
-          label: "PTR2E.FIELDS.health.max.label",
-          hint: "PTR2E.FIELDS.health.max.hint",
-        }),
-      }),
-      shield: new fields.SchemaField({
-        value: new fields.NumberField({
-          required: true,
-          initial: 0,
-          validate: (d) => (d as number) >= 0,
-          label: "PTR2E.FIELDS.shield.value.label",
-          hint: "PTR2E.FIELDS.shield.value.hint",
-        }),
-        max: new fields.NumberField({
-          required: true,
-          initial: 0,
-          validate: (d) => (d as number) >= 0,
-          label: "PTR2E.FIELDS.shield.max.label",
-          hint: "PTR2E.FIELDS.shield.max.hint",
-        })
-      }),
-      money: new fields.NumberField({ required: true, initial: 0 }),
-      species: new fields.SchemaField(SpeciesSystemModel.defineSchema(), {
-        required: false,
-        nullable: true,
-        initial: null,
-      }),
-      shiny: new fields.BooleanField({ required: true, initial: false }),
-      nature: new fields.StringField({
-        required: true,
-        choices: natures,
-        initial: "hardy",
-        label: "PTR2E.FIELDS.nature.label",
-      }),
-      gender: new fields.StringField<GenderOptions, GenderOptions, true, false, true>({
-        required: true,
-        choices: {
-          "genderless": "genderless",
-          "male": "male",
-          "female": "female"
-        },
-        initial: "genderless"
-      }),
-      slots: new fields.NumberField({
-        required: true,
-        initial: 6,
-        integer: true,
-        positive: true,
-        label: "PTR2E.FIELDS.slots.label",
-        hint: "PTR2E.FIELDS.slots.hint",
-      }),
-      inventoryPoints: new fields.SchemaField({
-        current: new fields.NumberField({
-          required: true,
-          initial: 0,
-          min: 0,
-          label: "PTR2E.FIELDS.inventoryPoints.current.label",
-          hint: "PTR2E.FIELDS.inventoryPoints.current.hint",
-        }),
-      }),
-      party: new fields.SchemaField({
-        ownerOf: new fields.DocumentIdField({ required: false }),
-        partyMemberOf: new fields.DocumentIdField({ required: false }),
-        teamMemberOf: new fields.ArrayField(new fields.DocumentIdField(), { initial: [] }),
-      }),
-      clocks: new CollectionField(
-        new fields.EmbeddedDataField(ClockPTR2e),
-        "id",
-        { required: true, initial: [] }
-      ),
-      immunities: new fields.SetField(new SlugField(), { required: true, initial: [] }),
-      details: new fields.SchemaField({
-        alliance: new fields.StringField({
-          choices: {
-            "party": "party",
-            "opposition": "opposition"
-          },
-          required: true,
-          nullable: true,
-          initial: "",
-          blank: true,
-          label: "PTR2E.FIELDS.details.alliance.label",
-          hint: "PTR2E.FIELDS.details.alliance.hint",
-        }),
-        size: new fields.SchemaField({
-          height: new fields.NumberField({required: true, initial: 0, label: "PTR2E.FIELDS.size.height.label", hint: "PTR2E.FIELDS.size.height.hint"}),
-          weight: new fields.NumberField({required: true, initial: 0, label: "PTR2E.FIELDS.size.weight.label", hint: "PTR2E.FIELDS.size.weight.hint"}),
-          heightClass: new fields.NumberField({required: true, initial: 0, min: 0, max: 7}),
-          weightClass: new fields.NumberField({required: true, initial: 1, min: 1, max: 16}),
-        })
-      })
-    };
+    return actorSystemSchema;
   }
 
   static override migrateData(source: ActorSystemPTR2e["_source"]) {
@@ -487,7 +492,7 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
     }
     for (const skill of game.ptr.data.skills) {
       if (!this.skills.has(skill.slug)) {
-        const newSkill = new SkillPTR2e(fu.duplicate(skill), { parent: this });
+        const newSkill = new SkillPTR2e(foundry.utils.duplicate(skill), { parent: this });
         newSkill.prepareBaseData();
         this.skills.set(newSkill.slug, newSkill);
       }
@@ -624,7 +629,7 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
   }
 }
 
-interface ActorSystemPTR2e extends ModelPropsFromSchema<ActorSystemSchema> {
+interface ActorSystemPTR2e extends ModelPropsFromSchema<actorSystemSchema> {
   attributes: ModelPropsFromSchema<AttributesSchema> & {
     hp: Omit<Attribute, 'stage'>;
     atk: Attribute;
@@ -664,7 +669,7 @@ interface ActorSystemPTR2e extends ModelPropsFromSchema<ActorSystemSchema> {
 
   movement: Record<string, Movement>;
 
-  _source: SourceFromSchema<ActorSystemSchema>;
+  _source: SourceFromSchema<actorSystemSchema>;
 }
 
 export default ActorSystemPTR2e;

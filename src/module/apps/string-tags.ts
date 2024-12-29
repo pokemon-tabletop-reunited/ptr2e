@@ -154,7 +154,7 @@ export class HTMLStringTagsElementPTR2e extends foundry.applications.elements.HT
     toValue(tag: string): BackingData;
     async toValue(tag: string, async: true, strict: boolean): Promise<BackingData>;
     toValue(tag: string, async = false, strict = false): BackingData | Promise<BackingData> {
-        const uuid = tag ? fu.parseUuid(tag) : null;
+        const uuid = tag ? foundry.utils.parseUuid(tag) : null;
         // If the tag is a UUID, try to find the item with that ID and use its name as the label
         if (uuid?.id) {
             if (async) return this.toValueAsync(tag, strict);

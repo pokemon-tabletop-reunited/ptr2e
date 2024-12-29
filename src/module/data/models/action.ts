@@ -236,7 +236,7 @@ class ActionPTR2e extends foundry.abstract.DataModel {
   prepareUpdate(data: DeepPartial<SourceFromSchema<ActionSchema>>) {
     const currentActions = this.item.system.toObject().actions;
     const actionIndex = currentActions.findIndex((a) => a.slug === this.slug);
-    fu.mergeObject(currentActions[actionIndex], data);
+    foundry.utils.mergeObject(currentActions[actionIndex], data);
 
     return currentActions;
   }

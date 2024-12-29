@@ -456,7 +456,7 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
     const target = this.context?.results.get(targetUuid);
     if (!target) return false;
 
-    const overrides = fu.duplicate(this._source.overrides);
+    const overrides = foundry.utils.duplicate(this._source.overrides);
     const index = overrides.findIndex((override) => override.uuid === targetUuid);
     if (index === -1) {
       overrides.push({
@@ -658,7 +658,7 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
   }
 
   public async applyLuckIncrease(targetUuid: ActorUUID) {
-    const results = fu.duplicate(this.parent.system.results);
+    const results = foundry.utils.duplicate(this.parent.system.results);
     const currentResult = results[this.parent.system.results.findIndex(r => r.target.uuid == targetUuid)];
     if (!currentResult || !currentResult.accuracy) return;
     const accuracy = currentResult.accuracy;

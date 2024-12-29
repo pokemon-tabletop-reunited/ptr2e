@@ -77,7 +77,7 @@ class TokenDocumentPTR2e<TParent extends ScenePTR2e | null = ScenePTR2e | null> 
   override prepareBaseData(): void {
     super.prepareBaseData();
 
-    this.flags = fu.mergeObject(this.flags, { ptr2e: {} });
+    this.flags = foundry.utils.mergeObject(this.flags, { ptr2e: {} });
     const actor = this.actor;
     if (!actor) return;
 
@@ -88,7 +88,7 @@ class TokenDocumentPTR2e<TParent extends ScenePTR2e | null = ScenePTR2e | null> 
 
     // Autoscaling is a secondary feature of linking to actor size
     const autoscale = linkToActorSize ? (this.flags.ptr2e.autoscale ?? autoscaleDefault) : false;
-    this.flags.ptr2e = fu.mergeObject(this.flags.ptr2e ?? {}, { linkToActorSize, autoscale });
+    this.flags.ptr2e = foundry.utils.mergeObject(this.flags.ptr2e ?? {}, { linkToActorSize, autoscale });
 
     // Token dimensions from actor size
     TokenDocumentPTR2e.prepareSize(this);
@@ -125,7 +125,7 @@ class TokenDocumentPTR2e<TParent extends ScenePTR2e | null = ScenePTR2e | null> 
           : CONST.TOKEN_DISPOSITIONS.NEUTRAL;
 
     for (const [key, data] of actor.auras.entries()) {
-      this.auras.set(key, new TokenAura({ token: this, ...fu.deepClone(data) }));
+      this.auras.set(key, new TokenAura({ token: this, ...foundry.utils.deepClone(data) }));
     }
   }
 

@@ -14,7 +14,7 @@ export function getAllSkillSlugs(): string[] {
 export function getInitialSkillList(): SkillPTR2e['_source'][] {
     return Array.from(getAllSkillSlugs()).map((skill) => {
         const baseValue = game.ptr.data.skills.get(skill) ?? BaseSkills[skill];
-        return partialSkillToSkill(baseValue ? fu.duplicate(baseValue) : { slug: skill });
+        return partialSkillToSkill(baseValue ? foundry.utils.duplicate(baseValue) : { slug: skill });
     });
 }
 
@@ -23,7 +23,7 @@ export function partialSkillToSkill(partialSkill: Partial<SkillPTR2e['_source']>
     const initial = (schema.initial as () => SourceFromSchema<foundry.data.fields.DataSchema>)();
 
     if (!partialSkill.slug) throw new Error("Partial Skill is missing slug");
-    return fu.mergeObject(initial, partialSkill) as SkillPTR2e['_source'];
+    return foundry.utils.mergeObject(initial, partialSkill) as SkillPTR2e['_source'];
 }
 
 const BaseSkills = {

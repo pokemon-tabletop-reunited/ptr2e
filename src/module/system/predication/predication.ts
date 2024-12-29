@@ -45,7 +45,7 @@ class Predicate extends Array<PredicateStatement> {
   }
 
   toObject(): RawPredicate {
-    return fu.deepClone([...this]);
+    return foundry.utils.deepClone([...this]);
   }
 
   clone(): Predicate {

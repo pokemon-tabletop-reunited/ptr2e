@@ -10,7 +10,7 @@ class SkillsComponent extends ActorComponent {
 
     static override ACTIONS = {
         "toggle-hidden-skills": async function (this: SkillsComponent) {
-            const appSettings = fu.duplicate(game.user.getFlag("ptr2e", "appSettings") ?? {}) as Record<string, Record<string, unknown>>;
+            const appSettings = foundry.utils.duplicate(game.user.getFlag("ptr2e", "appSettings") ?? {}) as Record<string, Record<string, unknown>>;
             const appId = `ActorSheetPTRV2-${this.actor.uuid.replaceAll(".", "-")}`;
             if (!appSettings[appId]) appSettings[appId] = {hideHiddenSkills: true};
 

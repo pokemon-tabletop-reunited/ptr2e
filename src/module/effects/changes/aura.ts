@@ -253,7 +253,7 @@ export default class AuraChangeSystem extends ChangeModel {
   }
 
   #processAppearanceData(actor: ActorPTR2e): AuraAppearanceData {
-    const appearance = fu.deepClone(this.appearance);
+    const appearance = foundry.utils.deepClone(this.appearance);
     const { border, highlight, texture } = appearance;
     const textureSrc = ((): ImageFilePath | VideoFilePath | null => {
       if (!texture) return null;

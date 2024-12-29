@@ -5,7 +5,7 @@ import { htmlQuery, htmlQueryAll, tupleHasValue } from "@utils";
 export class ModifierPopup extends foundry.applications.api.HandlebarsApplicationMixin(
   foundry.applications.api.ApplicationV2
 ) {
-  static override DEFAULT_OPTIONS = fu.mergeObject(
+  static override DEFAULT_OPTIONS = foundry.utils.mergeObject(
     super.DEFAULT_OPTIONS,
     {
       classes: ["sheet modifier-popup"],

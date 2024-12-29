@@ -1,15 +1,16 @@
+import type { StringField } from "node_modules/fvtt-types/src/foundry/common/data/fields.d.mts";
+
 const { fields } = foundry.data;
 
 /** A `StringField` that does not cast the source value */
 class StrictStringField<
-    TSourceProp extends string,
-    TModelProp = TSourceProp,
-    TRequired extends boolean = false,
-    TNullable extends boolean = false,
-    THasInitial extends boolean = boolean,
-> extends fields.StringField<TSourceProp, TModelProp, TRequired, TNullable, THasInitial> {
-    protected override _cast(value: unknown): unknown {
-        return value;
+    Options extends StringFieldOptions = StringField.DefaultOptions,
+    AssignmentType = StringField.AssignmentType<Options>,
+    InitializedType = StringField.InitializedType<Options>,
+    PersistedType extends string | null | undefined = StringField.InitializedType<Options>
+> extends fields.StringField<Options, AssignmentType, InitializedType, PersistedType> {
+    protected override _cast(value: AssignmentType): InitializedType {
+      return value as unknown as InitializedType;
     }
 }
 

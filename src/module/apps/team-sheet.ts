@@ -15,7 +15,7 @@ class TeamSheetPTR2e extends foundry.applications.api.HandlebarsApplicationMixin
         this.folder = options.folder;
     }
 
-    static override DEFAULT_OPTIONS = fu.mergeObject(
+    static override DEFAULT_OPTIONS = foundry.utils.mergeObject(
         super.DEFAULT_OPTIONS,
         {
             id: "{id}",

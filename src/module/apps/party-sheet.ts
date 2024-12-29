@@ -21,7 +21,7 @@ class PartySheetPTR2e extends foundry.applications.api.HandlebarsApplicationMixi
     this.folder = options.folder;
   }
 
-  static override DEFAULT_OPTIONS = fu.mergeObject(
+  static override DEFAULT_OPTIONS = foundry.utils.mergeObject(
     super.DEFAULT_OPTIONS,
     {
       id: "{id}",
@@ -511,7 +511,7 @@ class PartySheetPTR2e extends foundry.applications.api.HandlebarsApplicationMixi
 
     if(article.dataset.folderId === 'party') {
       const currentFolderContents = folder.contents.filter(a => a.isOwner).map(actor => actor.id);
-      const currentPartyContents = this.folder.party.map(uuid => fu.parseUuid(uuid).id).filter(id => !!id) as string[];
+      const currentPartyContents = this.folder.party.map(uuid => foundry.utils.parseUuid(uuid).id).filter(id => !!id) as string[];
       const updates = [
         ...currentFolderContents.map(id => ({_id: id, "folder": this.folder.id, system: {party: { partyMemberOf: this.folder.id }}})),
         ...currentPartyContents.map(id => ({_id: id, "folder": folder.id, system: {party: { partyMemberOf: null }}}))

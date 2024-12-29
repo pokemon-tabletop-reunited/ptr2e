@@ -18,7 +18,7 @@ export default class TokenPanel extends foundry.applications.api.HandlebarsAppli
     this.refresh(true);
   }
 
-  public refresh = fu.debounce(this.render, 100);
+  public refresh = foundry.utils.debounce(this.render, 100);
 
   private _token: TokenPTR2e | null;
 
@@ -30,7 +30,7 @@ export default class TokenPanel extends foundry.applications.api.HandlebarsAppli
     this._token = token;
   }
 
-  static override DEFAULT_OPTIONS = fu.mergeObject(
+  static override DEFAULT_OPTIONS = foundry.utils.mergeObject(
     super.DEFAULT_OPTIONS,
     {
       classes: ["token-panel"],

@@ -36,7 +36,7 @@ export class TutorListSettings extends foundry.abstract.DataModel {
     const tutorList = game.settings.get("ptr2e", "tutorListData");
 
     // Migrate Tutor List
-    if (fu.isNewerVersion(TutorListVersion, tutorList._migration?.version ?? 0)) {
+    if (foundry.utils.isNewerVersion(TutorListVersion, tutorList._migration?.version ?? 0)) {
       const moveIndex = await game.packs.get("ptr2e.core-moves")!.getIndex();
       const moveMap = new Map<string, string>();
       for (const move of moveIndex) {

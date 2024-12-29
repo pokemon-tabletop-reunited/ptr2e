@@ -35,7 +35,7 @@ export default class StatsAlterationChangeSystem extends BasicChangeSystem {
     for(const k in this.paths) {
       const key = k as keyof typeof this.paths;
       if(this[key] === null) continue;
-      const currentValue = (fu.getProperty(actor, this.paths[key]) ?? null) as number | null;
+      const currentValue = (foundry.utils.getProperty(actor, this.paths[key]) ?? null) as number | null;
       if(!currentValue) this.failValidation(`The path "${this.paths[key]}" is not valid for the actor ${actor.id}.`);
       
       const newValue = BasicChangeSystem.getNewValue(CONST.ACTIVE_EFFECT_MODES.ADD, currentValue, this[key], this.merge);
@@ -44,7 +44,7 @@ export default class StatsAlterationChangeSystem extends BasicChangeSystem {
       }
 
       try {
-        fu.setProperty(actor, this.paths[key], newValue);
+        foundry.utils.setProperty(actor, this.paths[key], newValue);
       } catch (error) {
         if (error instanceof Error) {
           return this.failValidation(error.message);

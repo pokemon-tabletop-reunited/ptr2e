@@ -86,7 +86,7 @@ class ChangeForm<TChange extends ChangeModel = ChangeModel> {
             "systems/ptr2e/templates/effects/changes/partials/drop-zone.hbs"
         );
         const getResolvableData = (property: string) => {
-            const value = fu.getProperty(this.source, property);
+            const value = foundry.utils.getProperty(this.source, property);
             const mode = isBracketedValue(value)
                 ? "brackets"
                 : isObject(value)
@@ -167,7 +167,7 @@ class ChangeForm<TChange extends ChangeModel = ChangeModel> {
      */
     async updateItem(updates: Partial<TChange["_source"]> | Record<string, unknown>): Promise<void> {
         const changes = this.effect.toObject().system.changes;
-        const result = fu.mergeObject(this.source, updates, {performDeletions: true});
+        const result = foundry.utils.mergeObject(this.source, updates, {performDeletions: true});
         if(this.schema) { //@ts-expect-error - This is valid
             cleanDataUsingSchema(this.schema.fields, result);
         }
@@ -197,7 +197,7 @@ class ChangeForm<TChange extends ChangeModel = ChangeModel> {
         for (const button of htmlQueryAll(html, "[data-action=toggle-brackets]")) {
             button.addEventListener("click", () => {
                 const property = button.dataset.property ?? "value";
-                const value = fu.getProperty(this.source, property);
+                const value = foundry.utils.getProperty(this.source, property);
                 if (isBracketedValue(value)) {
                     this.updateItem({ [property]: "" });
                 } else {
@@ -209,7 +209,7 @@ class ChangeForm<TChange extends ChangeModel = ChangeModel> {
         for (const button of htmlQueryAll(html, "[data-action=add-bracket]")) {
             const property = button.dataset.property ?? "value";
             button.addEventListener("click", () => {
-                const value = fu.getProperty(this.source, property);
+                const value = foundry.utils.getProperty(this.source, property);
                 if (isBracketedValue(value)) {
                     value.brackets.push({ value: "" });
                     this.updateItem({ [property]: value });
@@ -220,7 +220,7 @@ class ChangeForm<TChange extends ChangeModel = ChangeModel> {
         for (const button of htmlQueryAll(html, "[data-action=delete-bracket]")) {
             const property = button.dataset.property ?? "value";
             button.addEventListener("click", () => {
-                const value = fu.getProperty(this.source, property);
+                const value = foundry.utils.getProperty(this.source, property);
                 const idx = Number(htmlClosest(button, "[data-idx]")?.dataset.idx);
                 if (isBracketedValue(value)) {
                     value.brackets.splice(idx, 1);
@@ -277,7 +277,7 @@ class ChangeForm<TChange extends ChangeModel = ChangeModel> {
         // If the entire thing is a string, this is a regular JSON textarea
         if (typeof source === "string") {
             try {
-                this.source = fu.mergeObject(this.source, JSON.parse(source), {inplace: false});
+                this.source = foundry.utils.mergeObject(this.source, JSON.parse(source), {inplace: false});
             } catch (error) {
                 if (error instanceof Error) {
                     ui.notifications.error(
@@ -296,7 +296,7 @@ class ChangeForm<TChange extends ChangeModel = ChangeModel> {
           source.alterations = Object.values(source.alterations);
         }
 
-        source = fu.mergeObject(this.source, source, {inplace: false});
+        source = foundry.utils.mergeObject(this.source, source, {inplace: false});
 
         // Prevent wheel events on the sliders from spamming updates
         for (const slider of htmlQueryAll<HTMLInputElement>(this.element, "input[type=range")) {

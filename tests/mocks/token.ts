@@ -9,7 +9,7 @@ export class MockToken {
         data: foundry.documents.TokenSource,
         context: { parent?: Scene | null; actor?: ActorPTR2e | null } = {},
     ) {
-        this._source = fu.duplicate(data);
+        this._source = foundry.utils.duplicate(data);
         this.parent = context.parent ?? null;
         this.actor = context.actor ?? null;
     }

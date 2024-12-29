@@ -49,7 +49,7 @@ class ClockDatabase extends foundry.abstract.DataModel {
             const clockIndex = instance.clocks.findIndex((c) => c.id === update._id);
             if(clockIndex === -1) continue;
 
-            instance.clocks[clockIndex] = fu.mergeObject(instance.clocks[clockIndex], update);
+            instance.clocks[clockIndex] = foundry.utils.mergeObject(instance.clocks[clockIndex], update);
         }
 
         return this.update(instance);
@@ -63,7 +63,7 @@ class ClockDatabase extends foundry.abstract.DataModel {
         const instance = this.instance.toObject();
         const index = instance.clocks.findIndex((clock) => clock.id === id);
         if (index === -1) return undefined;
-        instance.clocks[index] = fu.mergeObject(instance.clocks[index], data);
+        instance.clocks[index] = foundry.utils.mergeObject(instance.clocks[index], data);
         return this.update(instance);
     }
 

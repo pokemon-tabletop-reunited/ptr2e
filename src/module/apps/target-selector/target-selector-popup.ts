@@ -6,7 +6,7 @@ import { htmlQueryAll } from "@utils";
 export class TargetSelectorPopup extends foundry.applications.api.HandlebarsApplicationMixin(
     foundry.applications.api.ApplicationV2
 ) {
-    static override DEFAULT_OPTIONS = fu.mergeObject(
+    static override DEFAULT_OPTIONS = foundry.utils.mergeObject(
         super.DEFAULT_OPTIONS,
         {
             classes: ["sheet target-selector-popup"],

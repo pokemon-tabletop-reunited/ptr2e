@@ -11,7 +11,7 @@ export async function preImportJSON<TDocument extends ActorPTR2e | ItemPTR2e>(do
 
     const sourceSchemaVersion = Number(source.system?._migration?.version) || 0;
     const worldSchemaVersion = MigrationRunnerBase.LATEST_SCHEMA_VERSION;
-    if(fu.isNewerVersion(sourceSchemaVersion, worldSchemaVersion)) {
+    if(foundry.utils.isNewerVersion(sourceSchemaVersion, worldSchemaVersion)) {
         ui.notifications.error(game.i18n.format("PTR2E.ErrorMessage.CantImportTooHighVersion", {sourceSchemaVersion, worldSchemaVersion}));
         return null;
     }

@@ -21,7 +21,7 @@ export default class BasicChangeSystem extends ChangeModel {
         if (!change.test(rollOptions)) return;
 
         // Determine the data type of the target field
-        const current = fu.getProperty(actor, path) ?? null;
+        const current = foundry.utils.getProperty(actor, path) ?? null;
         const resolvables = {
             actor: actor,
             item: change.item,
@@ -46,7 +46,7 @@ export default class BasicChangeSystem extends ChangeModel {
           }
         } else {
             try {
-                fu.setProperty(actor, path, newValue);
+                foundry.utils.setProperty(actor, path, newValue);
                 // TODO: Implement data change logging here
             } catch (error) {
                 if (error instanceof Error) {
@@ -65,7 +65,7 @@ export default class BasicChangeSystem extends ChangeModel {
             !/\bnull\b/.test(path) &&
             (path.startsWith("flags.") ||
                 [path, path.replace(/\.[-\w]+$/, ""), path.replace(/\.?[-\w]+\.[-\w]+$/, "")].some(
-                    (path) => fu.getProperty(actor, path) !== undefined,
+                    (path) => foundry.utils.getProperty(actor, path) !== undefined,
                 ))
         );
     }
@@ -192,7 +192,7 @@ export default class BasicChangeSystem extends ChangeModel {
      */
     static _applyOverride(change: unknown, current: unknown, merge?: boolean): unknown | foundry.data.validation.DataModelValidationFailure {
         if (merge && isObject(current) && isObject(change)) {
-            return fu.mergeObject(current, change);
+            return foundry.utils.mergeObject(current, change);
         }
         return change;
     }

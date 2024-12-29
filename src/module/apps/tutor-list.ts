@@ -4,7 +4,7 @@ import { HandlebarsRenderOptions } from "types/foundry/common/applications/handl
 import { ActorPTR2e } from "@actor";
 
 export class TutorListApp extends foundry.applications.api.HandlebarsApplicationMixin(ApplicationV2Expanded) {
-  static override DEFAULT_OPTIONS = fu.mergeObject(
+  static override DEFAULT_OPTIONS = foundry.utils.mergeObject(
     super.DEFAULT_OPTIONS,
     {
       tag: "div",

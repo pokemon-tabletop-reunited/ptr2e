@@ -2,7 +2,7 @@ export class EmbeddedTypeDataField extends foundry.data.fields.EmbeddedDataField
     declare model: ConstructorOf<foundry.abstract.TypeDataModel> & {TYPES: string[], DATA_MODELS: Record<string, ConstructorOf<foundry.abstract.TypeDataModel>>};
 
     constructor(model: typeof foundry.abstract.TypeDataModel, options: object = {}) {
-        if (!fu.isSubclass(model, foundry.abstract.TypeDataModel)) {
+        if (!foundry.utils.isSubclass(model, foundry.abstract.TypeDataModel)) {
             throw new Error("EmbeddedTypeDataField requires a valid model class");
         }
         if (!EmbeddedTypeDataField.hasTypeField(model)) {
@@ -38,7 +38,7 @@ export class EmbeddedTypeDataField extends foundry.data.fields.EmbeddedDataField
         return (
             'DATA_MODELS' in model
             && typeof model.DATA_MODELS === "object"
-            && Object.values(model.DATA_MODELS as Record<string, unknown>).every((model: unknown) => fu.isSubclass(model as ConstructorOf<foundry.abstract.TypeDataModel>, foundry.abstract.TypeDataModel))
+            && Object.values(model.DATA_MODELS as Record<string, unknown>).every((model: unknown) => foundry.utils.isSubclass(model as ConstructorOf<foundry.abstract.TypeDataModel>, foundry.abstract.TypeDataModel))
         )
     }
 

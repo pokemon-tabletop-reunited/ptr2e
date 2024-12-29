@@ -8,7 +8,7 @@ import {
 class SpeciesDropSheetV2 extends foundry.applications.api.HandlebarsApplicationMixin(
   ApplicationV2Expanded
 ) {
-  static override DEFAULT_OPTIONS = fu.mergeObject(
+  static override DEFAULT_OPTIONS = foundry.utils.mergeObject(
     super.DEFAULT_OPTIONS,
     {
       classes: ["pokemon", "sheet", "actor"],
