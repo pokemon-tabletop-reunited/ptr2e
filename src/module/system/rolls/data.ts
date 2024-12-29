@@ -1,12 +1,12 @@
-import { TokenPTR2e } from "@module/canvas/token/object.ts";
-import { CheckDC } from "./degree-of-success.ts";
-import { RollNote, RollNoteSource } from "@system/notes.ts";
-import { AttackPTR2e, Trait } from "@data";
-import { ActorPTR2e, EffectRoll } from "@actor";
-import { TokenDocumentPTR2e } from "@module/canvas/token/document.ts";
-import { CheckRoll, CheckType } from "./check-roll.ts";
-import { ItemPTR2e, ItemSystemPTR } from "@item";
-import { ModifierPTR2e } from "@module/effects/modifiers.ts";
+import type { TokenPTR2e } from "@module/canvas/token/object.ts";
+import type { CheckDC } from "./degree-of-success.ts";
+import type { RollNote, RollNoteSource } from "@system/notes.ts";
+import type { AttackPTR2e, Trait } from "@data";
+import type { ActorPTR2e, EffectRoll } from "@actor";
+import type { TokenDocumentPTR2e } from "@module/canvas/token/document.ts";
+import type { CheckRoll, CheckType } from "./check-roll.ts";
+import type { ItemPTR2e, ItemSystemPTR } from "@item";
+import type { ModifierPTR2e } from "@module/effects/modifiers.ts";
 
 interface RollData extends RollOptions {
     rollerId?: string;

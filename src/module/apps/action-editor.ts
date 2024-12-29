@@ -1,8 +1,10 @@
-import { ItemPTR2e, ItemSystemsWithActions } from "@item";
+import type { ItemSystemsWithActions } from "@item";
+import { ItemPTR2e } from "@item";
 import Tagify from "@yaireo/tagify";
 import { ApplicationV2Expanded } from "./appv2-expanded.ts";
 import { htmlQuery, htmlQueryAll, sluggify } from "@utils";
-import { AttackPTR2e, Trait } from "@data";
+import type { AttackPTR2e} from "@data";
+import { Trait } from "@data";
 import * as R from "remeda";
 
 export class ActionEditor<

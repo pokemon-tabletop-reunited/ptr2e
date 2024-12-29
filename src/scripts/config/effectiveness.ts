@@ -1,4 +1,4 @@
-import { PokemonType } from "@data";
+import type { PokemonType } from "@data";
 
 export default {
     "normal":{

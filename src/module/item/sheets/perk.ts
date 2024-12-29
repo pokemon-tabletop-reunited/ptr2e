@@ -1,4 +1,5 @@
-import { ItemPTR2e, PerkPTR2e, SpeciesPTR2e } from "@item";
+import type { PerkPTR2e, SpeciesPTR2e } from "@item";
+import { ItemPTR2e } from "@item";
 import { default as ItemSheetPTR2e } from "./base.ts";
 import { sluggify } from "@utils";
 

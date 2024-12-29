@@ -1,4 +1,4 @@
-import { ActorPTR2e, DeferredValueParams } from "@actor";
+import type { ActorPTR2e, DeferredValueParams } from "@actor";
 import { ChangeModel } from "@data";
 import { ModifierPTR2e } from "../modifiers.ts";
 

@@ -1,4 +1,4 @@
-import { RollOptionDomains } from "@module/data/roll-option-manager.ts";
+import type { RollOptionDomains } from "@module/data/roll-option-manager.ts";
 import type { AnyObject, DeepPartial } from "fvtt-types/utils";
 
 interface ItemFlagsPTR2e extends AnyObject {

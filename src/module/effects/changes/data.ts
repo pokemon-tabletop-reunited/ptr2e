@@ -1,9 +1,9 @@
 
-import { PredicateField } from "@system/predication/schema-data-fields.ts";
-import ActiveEffectSystem from "../system.ts";
-import ResolvableValueField from "@module/data/fields/resolvable-value-field.ts";
-import { RuleValue } from "../data.ts";
-import { RawPredicate } from "@system/predication/predication.ts";
+import type { PredicateField } from "@system/predication/schema-data-fields.ts";
+import type ActiveEffectSystem from "../system.ts";
+import type ResolvableValueField from "@module/data/fields/resolvable-value-field.ts";
+import type { RuleValue } from "../data.ts";
+import type { RawPredicate } from "@system/predication/predication.ts";
 
 interface ChangeModelOptions {
     parent: ActiveEffectSystem;

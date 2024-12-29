@@ -2,7 +2,7 @@ import { HasBase, HasEmbed, HasGearData, HasIdentification, } from "@module/data
 import type { IdentificationSchema } from "@module/data/mixins/has-identification.ts";
 import type { GearSchema } from "@module/data/mixins/has-gear-data.ts";
 import type { HasBaseSchema } from "@module/data/mixins/has-base.ts";
-import { ItemPTR2e } from "@item/document.ts";
+import type { ItemPTR2e } from "@item/document.ts";
 
 export type GearSystemSchema = IdentificationSchema & GearSchema & HasBaseSchema;
 

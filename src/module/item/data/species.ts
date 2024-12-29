@@ -1,18 +1,20 @@
-import { ItemPTR2e, PerkPTR2e, SpeciesPTR2e } from "@item";
+import type { PerkPTR2e, SpeciesPTR2e } from "@item";
+import { ItemPTR2e } from "@item";
 import { HasDescription, HasEmbed, HasMigrations, HasSlug, HasTraits, PTRCONSTS, Trait } from "@module/data/index.ts";
-import { PokemonType } from "@data";
-import { BaseItemSourcePTR2e, ItemSystemSource } from "./data.ts";
+import type { PokemonType } from "@data";
+import type { BaseItemSourcePTR2e, ItemSystemSource } from "./data.ts";
 import { getTypes } from "@scripts/config/effectiveness.ts";
 import { SlugField } from "@module/data/fields/slug-field.ts";
-import { DataSchema, SourcePropFromDataField } from "types/foundry/common/data/fields.js";
+import type { DataSchema, SourcePropFromDataField } from "types/foundry/common/data/fields.js";
 import SkillPTR2e from "@module/data/models/skill.ts";
 import { CollectionField } from "@module/data/fields/collection-field.ts";
-import { TraitsSchema } from "@module/data/mixins/has-traits.ts";
-import { MigrationSchema } from "@module/data/mixins/has-migrations.ts";
-import { DescriptionSchema } from "@module/data/mixins/has-description.ts";
-import { SlugSchema } from "@module/data/mixins/has-slug.ts";
+import type { TraitsSchema } from "@module/data/mixins/has-traits.ts";
+import type { MigrationSchema } from "@module/data/mixins/has-migrations.ts";
+import type { DescriptionSchema } from "@module/data/mixins/has-description.ts";
+import type { SlugSchema } from "@module/data/mixins/has-slug.ts";
 import { getInitialSkillList } from "@scripts/config/skills.ts";
-import { Predicate, PredicateStatement } from "@system/predication/predication.ts";
+import type { PredicateStatement } from "@system/predication/predication.ts";
+import { Predicate } from "@system/predication/predication.ts";
 import { ImageResolver, sluggify } from "@utils";
 
 const SpeciesExtension = HasEmbed(

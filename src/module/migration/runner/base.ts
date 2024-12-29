@@ -1,12 +1,12 @@
 
-import { ActorPTR2e } from "@actor";
-import { ActionPTR2e } from "@data";
-import { ActiveEffectPTR2e } from "@effects";
-import { ItemPTR2e } from "@item";
-import { ScenePTR2e } from "@module/canvas/scene.ts";
-import { TokenDocumentPTR2e } from "@module/canvas/token/document.ts";
-import { MigrationRecord } from "@module/data/mixins/has-migrations.ts";
-import { MigrationBase } from "@module/migration/base.ts";
+import type { ActorPTR2e } from "@actor";
+import type { ActionPTR2e } from "@data";
+import type { ActiveEffectPTR2e } from "@effects";
+import type { ItemPTR2e } from "@item";
+import type { ScenePTR2e } from "@module/canvas/scene.ts";
+import type { TokenDocumentPTR2e } from "@module/canvas/token/document.ts";
+import type { MigrationRecord } from "@module/data/mixins/has-migrations.ts";
+import type { MigrationBase } from "@module/migration/base.ts";
 
 interface CollectionDiff<T extends foundry.documents.ActiveEffectSource | ItemPTR2e['_source']> {
     inserted: T[];

@@ -1,5 +1,5 @@
-import { TokenDocumentPTR2e } from "@module/canvas/token/document.ts";
-import { SquareGridPTR2e } from "../grid.ts";
+import type { TokenDocumentPTR2e } from "@module/canvas/token/document.ts";
+import type { SquareGridPTR2e } from "../grid.ts";
 import { AuraRenderers } from "./aura/map.ts";
 import * as R from "remeda";
 

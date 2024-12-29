@@ -1,8 +1,9 @@
-import { DocumentSheetConfiguration, DocumentSheetV2 } from "@item/sheets/document.ts";
+import type { DocumentSheetConfiguration} from "@item/sheets/document.ts";
+import { DocumentSheetV2 } from "@item/sheets/document.ts";
 import FolderPTR2e from "./document.ts";
-import { HandlebarsRenderOptions } from "types/foundry/common/applications/api.js";
+import type { HandlebarsRenderOptions } from "types/foundry/common/applications/api.js";
 import { ActorPTR2e } from "@actor";
-import { SocketRequestData } from "@scripts/hooks/socket.ts";
+import type { SocketRequestData } from "@scripts/hooks/socket.ts";
 
 class FolderConfigPTR2e extends foundry.applications.api.HandlebarsApplicationMixin(
   DocumentSheetV2<FolderPTR2e>

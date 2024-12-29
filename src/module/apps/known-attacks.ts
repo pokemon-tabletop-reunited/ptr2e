@@ -1,4 +1,4 @@
-import { ActorPTR2e } from "@actor";
+import type { ActorPTR2e } from "@actor";
 import { ApplicationV2Expanded } from "./appv2-expanded.ts";
 import { ItemPTR2e } from "@item";
 import { ActionEditor } from "./action-editor.ts";

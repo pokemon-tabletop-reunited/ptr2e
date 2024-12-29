@@ -1,4 +1,5 @@
-import { CombatantPTR2e, CombatantSystemPTR2e, CombatPTR2e } from "@combat";
+import type { CombatantPTR2e, CombatPTR2e } from "@combat";
+import { CombatantSystemPTR2e } from "@combat";
 
 class RoundCombatantSystem extends CombatantSystemPTR2e {
   declare parent: CombatantPTR2e

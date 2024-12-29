@@ -1,4 +1,4 @@
-import { AccuracySuccessCategory } from "@data";
+import type { AccuracySuccessCategory } from "@data";
 
 interface AccuracyCalc {
     category: AccuracySuccessCategory;

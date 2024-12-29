@@ -8,8 +8,8 @@ import type {
 } from "types/foundry/common/documents/module.d.ts";
 import systemJSON from "../../static/system.json" assert { type: "json" };
 import { PackError } from "./helpers.ts";
-import { PackEntry } from "./types.ts";
-import { ItemSourcePTR2e } from "./compendium-pack.ts";
+import type { PackEntry } from "./types.ts";
+import type { ItemSourcePTR2e } from "./compendium-pack.ts";
 import { tupleHasValue } from "./helpers.ts";
 
 const DB_KEYS = ["actors", "items", "journal", "macros", "tables"] as const;

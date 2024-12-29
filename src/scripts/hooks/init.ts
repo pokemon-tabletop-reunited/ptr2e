@@ -2,7 +2,7 @@ import { ActorSheetPTR2e } from "@actor";
 import { PTRCONFIG } from "@scripts/config/index.ts";
 import { GamePTR } from "@scripts/game-ptr2e.ts";
 import { HandlebarTemplates, registerHandlebarsHelpers } from "@utils";
-import { PTRHook } from "./data.ts";
+import type { PTRHook } from "./data.ts";
 import { HTMLStringTagsElementPTR2e } from "@module/apps/string-tags.ts";
 import { initializeSettings } from "@scripts/settings.ts";
 import { default as enrichers } from "@scripts/ui/text-enrichers.ts";

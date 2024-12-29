@@ -1,6 +1,6 @@
 import { ChangeModelTypes } from '../models/base.ts';
 import { ChangeModel, ChangeSchema } from '@data';
-import { TemplateConstructor } from './data-template.ts';
+import type { TemplateConstructor } from './data-template.ts';
 
 const changesSchema = {
   changes: new foundry.data.fields.ArrayField( //@ts-expect-error - Options are not required

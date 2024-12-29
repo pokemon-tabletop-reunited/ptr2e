@@ -1,5 +1,5 @@
-import { ActorPTR2e } from "@actor";
-import FolderPTR2e from "@module/folder/document.ts";
+import type { ActorPTR2e } from "@actor";
+import type FolderPTR2e from "@module/folder/document.ts";
 import FolderConfigPTR2e from "@module/folder/sheet.ts";
 import { htmlQuery } from "@utils";
 import { PTRTour } from "./base.ts";

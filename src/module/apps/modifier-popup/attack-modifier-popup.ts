@@ -1,10 +1,11 @@
-import { CheckModifier, ModifierPTR2e } from "@module/effects/modifiers.ts";
-import { CheckRollContext } from "@system/rolls/data.ts";
+import type { CheckModifier} from "@module/effects/modifiers.ts";
+import { ModifierPTR2e } from "@module/effects/modifiers.ts";
+import type { CheckRollContext } from "@system/rolls/data.ts";
 import { ModifierPopup } from "./modifier-popup.ts";
-import { ActorPTR2e } from "@actor";
-import { CheckContext } from "@system/data.ts";
+import type { ActorPTR2e } from "@actor";
+import type { CheckContext } from "@system/data.ts";
 import { htmlQueryAll, htmlQuery, tupleHasValue } from "@utils";
-import { AttackPTR2e } from "@data";
+import type { AttackPTR2e } from "@data";
 
 export class AttackModifierPopup extends ModifierPopup {
   static override DEFAULT_OPTIONS = foundry.utils.mergeObject(

@@ -1,8 +1,8 @@
-import { ActiveEffectPTR2e } from "@effects";
+import type { ActiveEffectPTR2e } from "@effects";
 import ActorPTR2e from "./base.ts";
-import { AuraEffectData } from "./data.ts";
-import { TokenDocumentPTR2e } from "@module/canvas/token/document.ts";
-import { ScenePTR2e } from "@module/canvas/scene.ts";
+import type { AuraEffectData } from "./data.ts";
+import type { TokenDocumentPTR2e } from "@module/canvas/token/document.ts";
+import type { ScenePTR2e } from "@module/canvas/scene.ts";
 import { htmlQuery } from "@utils";
 import { ChatMessagePTR2e } from "@chat";
 

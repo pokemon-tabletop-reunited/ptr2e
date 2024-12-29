@@ -1,7 +1,7 @@
-import { ItemPTR2e } from "@item";
+import type { ItemPTR2e } from "@item";
 import { MigrationBase } from "../base.ts"
-import { ActorPTR2e } from "@actor";
-import AbilitySystem from "@item/data/ability.ts";
+import type { ActorPTR2e } from "@actor";
+import type AbilitySystem from "@item/data/ability.ts";
 
 export class Migration103AbilitySlots extends MigrationBase {
     static override version = 0.103;

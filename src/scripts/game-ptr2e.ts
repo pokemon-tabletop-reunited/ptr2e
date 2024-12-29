@@ -6,14 +6,14 @@ import ClockPanel from "@module/apps/clocks/clock-panel.ts";
 import { Pokedex } from "pokeapi-js-wrapper";
 import { UUIDUtils } from "src/util/uuid.ts";
 import TokenPanel from "@module/apps/token-panel.ts";
-import { TokenPTR2e } from "@module/canvas/token/object.ts";
+import type { TokenPTR2e } from "@module/canvas/token/object.ts";
 import { TextEnricher } from "./ui/text-enrichers.ts";
 import { remigrate } from "@system/remigrate.ts";
 import { DataStructure } from "@module/apps/data-inspector/data-handler.ts";
 import { CompendiumBrowser } from "@module/apps/compendium-browser/index.ts";
 import { TutorListSettings } from "@system/tutor-list/setting-model.ts";
 import { TutorListApp } from "@module/apps/tutor-list.ts";
-import { CombatPTR2e } from "@combat";
+import type { CombatPTR2e } from "@combat";
 import GithubManager from "@module/apps/github.ts";
 
 const GamePTR = {

@@ -1,6 +1,7 @@
-import { ActorPTR2e } from "@actor";
-import { ChangeModel, ChangeModelOptions, ChangeSource } from "@data";
-import { AbilityPTR2e } from "@item";
+import type { ActorPTR2e } from "@actor";
+import type { ChangeModelOptions, ChangeSource } from "@data";
+import { ChangeModel } from "@data";
+import type { AbilityPTR2e } from "@item";
 import { UUIDUtils } from "src/util/uuid.ts";
 
 export default class SuppresAbilityChangeSystem extends ChangeModel {

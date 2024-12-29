@@ -1,4 +1,4 @@
-import { ActorPTR2e } from "@actor";
+import type { ActorPTR2e } from "@actor";
 import { ActorSystemPTR2e } from "./index.ts";
 import { SpeciesSystemModel } from "@item/data/index.ts";
 import { sluggify } from "@utils";

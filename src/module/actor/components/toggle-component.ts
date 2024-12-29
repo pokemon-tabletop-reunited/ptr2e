@@ -1,6 +1,6 @@
 import { htmlClosest, htmlQuery, htmlQueryAll } from "@utils";
 import { ActorComponent } from "./base.ts";
-import ActorPTR2e from "@actor/base.ts";
+import type ActorPTR2e from "@actor/base.ts";
 
 class ToggleComponent extends ActorComponent {
     static override TEMPLATE = "systems/ptr2e/templates/actor/components/actor-toggle-component.hbs";

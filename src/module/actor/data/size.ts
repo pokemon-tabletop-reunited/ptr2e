@@ -1,4 +1,5 @@
-import { Size, SIZES } from "@actor/data.ts";
+import type { Size} from "@actor/data.ts";
+import { SIZES } from "@actor/data.ts";
 
 interface SizeDimensions {
   length: number;

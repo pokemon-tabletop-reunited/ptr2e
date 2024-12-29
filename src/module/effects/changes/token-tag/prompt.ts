@@ -1,6 +1,6 @@
-import { TokenDocumentPTR2e } from "@module/canvas/token/document.ts";
+import type { TokenDocumentPTR2e } from "@module/canvas/token/document.ts";
 import { TokenPTR2e } from "@module/canvas/token/object.ts";
-import { Predicate } from "@system/predication/predication.ts";
+import type { Predicate } from "@system/predication/predication.ts";
 
 class TagTokenPrompt {
   constructor(params: PromptParameters) {

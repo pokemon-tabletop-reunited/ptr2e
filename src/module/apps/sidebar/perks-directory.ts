@@ -1,4 +1,5 @@
-import { ItemPTR2e, ItemSystemPTR } from "@item";
+import type { ItemSystemPTR } from "@item";
+import { ItemPTR2e } from "@item";
 
 class PerkDirectory extends ItemDirectory<ItemPTR2e<ItemSystemPTR, null>> {
   get popout() {

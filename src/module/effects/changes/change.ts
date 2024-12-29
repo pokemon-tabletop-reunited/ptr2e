@@ -1,11 +1,12 @@
 import { isBracketedValue, isObject, reduceItemName, sluggify } from "@utils";
-import { BracketedValue, RuleValue } from "@module/effects/data.ts";
-import { ActiveEffectSystem, EffectSourcePTR2e } from "@effects";
+import type { BracketedValue, RuleValue } from "@module/effects/data.ts";
+import type { ActiveEffectSystem, EffectSourcePTR2e } from "@effects";
 import { PredicateField } from "@system/predication/schema-data-fields.ts";
-import { EffectPTR2e, ItemPTR2e, ItemSourcePTR2e } from "@item";
-import { ActorPTR2e } from "@actor";
-import { ChangeModelOptions, ChangeSchema, ChangeSource, ResolveValueParams } from "./data.ts";
-import { DataModelValidationOptions } from "types/foundry/common/abstract/data.js";
+import type { EffectPTR2e, ItemSourcePTR2e } from "@item";
+import { ItemPTR2e } from "@item";
+import type { ActorPTR2e } from "@actor";
+import type { ChangeModelOptions, ChangeSchema, ChangeSource, ResolveValueParams } from "./data.ts";
+import type { DataModelValidationOptions } from "types/foundry/common/abstract/data.js";
 import * as R from "remeda";
 import ResolvableValueField from "@module/data/fields/resolvable-value-field.ts";
 import { ChangeModelTypes } from "@data";

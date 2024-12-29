@@ -1,11 +1,11 @@
-import { ActorPTR2e } from "@actor";
-import { AttackMessageSystem, ChatMessagePTR2e, DamageAppliedMessageSystem } from "@chat";
-import { CombatantPTR2e } from "@combat";
+import type { ActorPTR2e } from "@actor";
+import type { AttackMessageSystem, ChatMessagePTR2e, DamageAppliedMessageSystem } from "@chat";
+import type { CombatantPTR2e } from "@combat";
 import { ActionPTR2e, AttackPTR2e, Trait } from "@data";
 import { ActiveEffectPTR2e } from "@effects";
-import { EffectPTR2e, ItemPTR2e, MovePTR2e, PerkPTR2e, SummonPTR2e } from "@item";
-import { DataInspector } from "@module/apps/data-inspector/data-inspector.ts";
-import { CustomSkill } from "@module/data/models/skill.ts";
+import type { EffectPTR2e, ItemPTR2e, MovePTR2e, PerkPTR2e, SummonPTR2e } from "@item";
+import type { DataInspector } from "@module/apps/data-inspector/data-inspector.ts";
+import type { CustomSkill } from "@module/data/models/skill.ts";
 import Tagify from "@yaireo/tagify";
 
 export default class TooltipsPTR2e {

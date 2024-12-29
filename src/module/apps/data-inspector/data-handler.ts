@@ -1,8 +1,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { FunctionDeclaration } from "typescript";
-import { DATA_TYPE_INVERTED, DATA_TYPES, ignoreDataModelParts, TreeTypes, ValueLike } from "./data.ts";
+import type { FunctionDeclaration } from "typescript";
+import type { TreeTypes, ValueLike } from "./data.ts";
+import { DATA_TYPE_INVERTED, DATA_TYPES, ignoreDataModelParts } from "./data.ts";
 import { getChildTypeId, getTypeId } from "./helpers.ts";
-import MiniSearch, { MatchInfo } from "minisearch";
+import type { MatchInfo } from "minisearch";
+import MiniSearch from "minisearch";
 
 class ChildKeyData {
   key: string;

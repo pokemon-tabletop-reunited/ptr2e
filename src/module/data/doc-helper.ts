@@ -1,5 +1,5 @@
-import { ActorPTR2e } from "@actor";
-import { ItemPTR2e } from "@item";
+import type { ActorPTR2e } from "@actor";
+import type { ItemPTR2e } from "@item";
 import { MigrationList, MigrationRunner } from "@module/migration/index.ts";
 import { MigrationRunnerBase } from "@module/migration/runner/base.ts";
 import { isObject } from "@utils";

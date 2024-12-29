@@ -1,6 +1,6 @@
-import { CombatantPTR2e, CombatPTR2e } from "@combat";
+import type { CombatantPTR2e, CombatPTR2e } from "@combat";
 import CombatantSystemPTR2e from "../system.ts";
-import { ActorPTR2e } from "@actor";
+import type { ActorPTR2e } from "@actor";
 
 class CharacterCombatantSystem extends CombatantSystemPTR2e {
   declare parent: CombatantPTR2e;

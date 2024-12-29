@@ -1,4 +1,4 @@
-import { ItemPTR2e } from "@item";
+import type { ItemPTR2e } from "@item";
 
 interface BackingData {
     value: string;

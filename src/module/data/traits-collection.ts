@@ -1,5 +1,5 @@
 import { formatSlug, sluggify } from "@utils";
-import Trait from "./models/trait.ts";
+import type Trait from "./models/trait.ts";
 
 export default class PTR2eTraits extends Collection<Trait> {
   rawModuleTraits: Trait[] = [];

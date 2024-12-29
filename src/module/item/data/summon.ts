@@ -1,11 +1,12 @@
-import { ItemPTR2e, type SummonPTR2e } from "@item";
+import type { ItemPTR2e} from "@item";
+import { type SummonPTR2e } from "@item";
 import { HasActions, HasEmbed, HasMigrations, HasSlug, HasTraits } from "@module/data/index.ts";
 import { type MigrationSchema } from "@module/data/mixins/has-migrations.ts";
 import { type ActionsSchema } from "@module/data/mixins/has-actions.ts";
 import { type SlugSchema } from "@module/data/mixins/has-slug.ts";
 import { type TraitsSchema } from "@module/data/mixins/has-traits.ts";
 import HasDescription, { type DescriptionSchema } from "@module/data/mixins/has-description.ts";
-import { ActorPTR2e } from "@actor";
+import type { ActorPTR2e } from "@actor";
 
 const summonSchema = {
   baseAV: new foundry.data.fields.NumberField({

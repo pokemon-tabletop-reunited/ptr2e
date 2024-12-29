@@ -1,4 +1,4 @@
-import { ActorPTR2e } from "@actor";
+import type { ActorPTR2e } from "@actor";
 import { ChangeModel } from "@data";
 import { TokenDocumentPTR2e } from "@module/canvas/token/document.ts";
 import { UUIDUtils } from "src/util/uuid.ts";

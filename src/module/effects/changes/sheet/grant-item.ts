@@ -1,8 +1,9 @@
-import { ChangeSchema } from "../data.ts";
-import GrantItemChangeSystem from "../grant-item.ts";
-import ChangeForm, { ChangeFormContext } from "./base.ts";
+import type { ChangeSchema } from "../data.ts";
+import type GrantItemChangeSystem from "../grant-item.ts";
+import type { ChangeFormContext } from "./base.ts";
+import ChangeForm from "./base.ts";
 import { htmlQueryAll } from "@utils";
-import { ItemAlteration } from "@module/effects/alterations/item.ts";
+import type { ItemAlteration } from "@module/effects/alterations/item.ts";
 
 class GrantItemForm extends ChangeForm<GrantItemChangeSystem> {
     override get template() {

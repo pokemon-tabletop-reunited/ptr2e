@@ -1,4 +1,4 @@
-import TokenAlterationChangeSystem from "../token-alterations.ts";
+import type TokenAlterationChangeSystem from "../token-alterations.ts";
 import ChangeForm from "./base.ts";
 
 class TokenAlterationForm extends ChangeForm<TokenAlterationChangeSystem> {

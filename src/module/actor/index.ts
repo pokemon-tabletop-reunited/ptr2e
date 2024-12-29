@@ -1,4 +1,4 @@
-import ActorPTR2e from "./base.ts";
+import type ActorPTR2e from "./base.ts";
 type PTUActor = ActorPTR2e;
 export type {PTUActor};
 

@@ -1,5 +1,5 @@
 import { htmlQuery } from "@utils";
-import { TokenDocumentPTR2e } from "./document.ts";
+import type { TokenDocumentPTR2e } from "./document.ts";
 import { ActorSizePTR2e } from "@actor/data/size.ts";
 
 export class TokenConfigPTR2e<TDocument extends TokenDocumentPTR2e> extends TokenConfig<TDocument> {

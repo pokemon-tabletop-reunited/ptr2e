@@ -1,7 +1,7 @@
-import { EffectPTR2e } from "@item";
+import type { EffectPTR2e } from "@item";
 import { PTRTour } from "./base.ts";
 import { ActiveEffectPTR2e } from "@effects";
-import ActiveEffectConfig from "@module/effects/sheet.ts";
+import type ActiveEffectConfig from "@module/effects/sheet.ts";
 import { DataInspector } from "@module/apps/data-inspector/data-inspector.ts";
 import { ActorPTR2e } from "@actor";
 import { ChatMessagePTR2e } from "@chat";

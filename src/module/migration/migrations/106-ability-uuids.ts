@@ -1,7 +1,8 @@
-import { AbilityPTR2e, ItemPTR2e } from "@item";
+import type { AbilityPTR2e, ItemPTR2e } from "@item";
 import { MigrationBase } from "../base.ts"
-import SpeciesSystem, { AbilityReference } from "@item/data/species.ts";
-import { ActorPTR2e } from "@actor";
+import type { AbilityReference } from "@item/data/species.ts";
+import type SpeciesSystem from "@item/data/species.ts";
+import type { ActorPTR2e } from "@actor";
 
 export class Migration106AbilityUUIDs extends MigrationBase {
   static override version = 0.106;

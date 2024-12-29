@@ -1,7 +1,7 @@
-import { AuraAppearanceData } from "@actor";
+import type { AuraAppearanceData } from "@actor";
 // import { Trait } from "@data";
-import { TokenDocumentPTR2e } from "../document.ts";
-import { TokenPTR2e } from "../object.ts";
+import type { TokenDocumentPTR2e } from "../document.ts";
+import type { TokenPTR2e } from "../object.ts";
 
 interface TokenAuraData {
   /** The radius of the aura, measured in feet from the boundary of a token's space */

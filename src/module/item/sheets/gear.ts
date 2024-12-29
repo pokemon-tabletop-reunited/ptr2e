@@ -1,4 +1,4 @@
-import { GearPTR2e } from "@item";
+import type { GearPTR2e } from "@item";
 import { default as ItemSheetPTR2e } from "./base.ts";
 
 export default class GearSheet extends ItemSheetPTR2e<GearPTR2e["system"]> {

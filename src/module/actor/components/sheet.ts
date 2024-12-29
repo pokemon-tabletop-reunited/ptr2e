@@ -1,6 +1,6 @@
-import ActorPTR2e from "../base.ts";
+import type ActorPTR2e from "../base.ts";
 import { AbilitiesComponent } from "./abilities-component.ts";
-import { ActorComponent } from "./base.ts";
+import type { ActorComponent } from "./base.ts";
 import { EffectComponent } from "./effect-component.ts";
 import { MovementComponent } from "./movement-component.ts";
 import { PerksComponent } from "./perks-component.ts";

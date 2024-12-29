@@ -1,5 +1,5 @@
 import { SquareGridPTR2e } from "@module/canvas/grid.ts";
-import { PTRHook } from "./data.ts";
+import type { PTRHook } from "./data.ts";
 import { EXPTracker } from "@module/apps/exp-tracker.ts";
 
 export const GetSceneControlButtons: PTRHook = {

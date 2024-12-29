@@ -1,7 +1,7 @@
-import { BracketedValue, RuleValue } from "@module/effects/data.ts";
+import type { BracketedValue, RuleValue } from "@module/effects/data.ts";
 import { isObject } from "@utils";
 import * as R from "remeda";
-import { FormInputConfig } from "types/foundry/common/data/fields.js";
+import type { FormInputConfig } from "types/foundry/common/data/fields.js";
 
 class ResolvableValueField<
     TRequired extends boolean,

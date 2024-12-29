@@ -1,5 +1,6 @@
 import { PredicateField } from "@system/predication/schema-data-fields.ts";
-import ActiveEffectSystem, { ActiveEffectSystemSchema } from "../system.ts";
+import type { ActiveEffectSystemSchema } from "../system.ts";
+import ActiveEffectSystem from "../system.ts";
 import { Predicate } from "@system/predication/predication.ts";
 import { sluggify } from "@utils";
 import * as R from "remeda";

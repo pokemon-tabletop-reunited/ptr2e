@@ -1,5 +1,6 @@
-import { ActorPTR2e, RollOptionToggle } from "@actor";
-import { ChangeModel, ChangeModelOptions, ChangeSchema, ChangeSource } from "@data";
+import type { ActorPTR2e, RollOptionToggle } from "@actor";
+import type { ChangeModelOptions, ChangeSchema, ChangeSource } from "@data";
+import { ChangeModel } from "@data";
 import ResolvableValueField from "@module/data/fields/resolvable-value-field.ts";
 import { StrictStringField } from "@module/data/fields/strict-primitive-fields.ts";
 import { RollOptionDomains } from "@module/data/roll-option-manager.ts";

@@ -1,6 +1,7 @@
 import { isObject } from "@utils";
-import DataModel, { _DataModel } from "types/foundry/common/abstract/data.js";
-import { DataField, DataSchema } from "types/foundry/common/data/fields.js";
+import type { _DataModel } from "types/foundry/common/abstract/data.js";
+import type DataModel from "types/foundry/common/abstract/data.js";
+import type { DataField, DataSchema } from "types/foundry/common/data/fields.js";
 
 const { fields } = foundry.data;
 

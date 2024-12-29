@@ -1,6 +1,7 @@
-import { ItemPTR2e } from '@item';
-import { TemplateConstructor } from './data-template.ts';
-import { IdentificationStatus, PTRCONSTS } from '@data';
+import type { ItemPTR2e } from '@item';
+import type { TemplateConstructor } from './data-template.ts';
+import type { IdentificationStatus} from '@data';
+import { PTRCONSTS } from '@data';
 
 /**
  * Adds Identification property to target data model.

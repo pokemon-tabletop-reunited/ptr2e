@@ -1,5 +1,6 @@
 import { MigrationBase } from "../base.ts"
-import { ActorPTR2e, HumanoidActorSystem } from "@actor";
+import type { ActorPTR2e} from "@actor";
+import { HumanoidActorSystem } from "@actor";
 
 export class Migration109SpeciesItems extends MigrationBase {
   static override version = 0.109;

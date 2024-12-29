@@ -1,5 +1,5 @@
-import { ItemPTR2e, PerkPTR2e } from "@item";
-import { PerkSystemModel } from "@item/data/index.ts";
+import type { ItemPTR2e, PerkPTR2e } from "@item";
+import type { PerkSystemModel } from "@item/data/index.ts";
 
 class PerkManager {
 

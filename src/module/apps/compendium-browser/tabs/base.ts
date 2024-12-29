@@ -1,7 +1,7 @@
 import MiniSearch from "minisearch";
-import { BrowserTabs, ContentTabName } from "../data.ts";
-import { CompendiumBrowser } from "../index.ts";
-import {
+import type { BrowserTabs, ContentTabName } from "../data.ts";
+import type { CompendiumBrowser } from "../index.ts";
+import type {
   BrowserFilter,
   CheckboxOptions,
   CompendiumBrowserIndexData,
@@ -11,7 +11,7 @@ import {
 import { CompendiumDirectoryPTR2e } from "@module/apps/sidebar/compendium-directory.ts";
 import * as R from "remeda";
 import { htmlQuery, sluggify } from "@utils";
-import { TableResultSource } from "types/foundry/common/documents/module.js";
+import type { TableResultSource } from "types/foundry/common/documents/module.js";
 
 export abstract class CompendiumBrowserTab {
   /** A reference to the parent CompendiumBrowser */

@@ -1,5 +1,5 @@
-import { ItemSystemPTR } from "@item";
-import { ItemPTR2e } from "./document.ts";
+import type { ItemSystemPTR } from "@item";
+import type { ItemPTR2e } from "./document.ts";
 
 export default class ItemDirectoryPTR2e<TItem extends ItemPTR2e<ItemSystemPTR, null>> extends ItemDirectory<TItem> {
     protected override _onDrop(event: DragEvent): void {

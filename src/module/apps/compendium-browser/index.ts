@@ -1,12 +1,12 @@
 import { ApplicationV2Expanded } from "../appv2-expanded.ts";
 import { createHTMLElement, fontAwesomeIcon, htmlClosest, htmlQuery, htmlQueryAll, isObject, objectHasKey, setHasElement } from "@utils";
-import { BrowserTabs, CompendiumBrowserSettings, PackInfo, TabData, TabName } from "./data.ts";
+import type { BrowserTabs, CompendiumBrowserSettings, PackInfo, TabData, TabName } from "./data.ts";
 import * as browserTabs from "./tabs/index.ts";
 import { PackLoader } from "./loader.ts";
-import { Tab } from "@item/sheets/document.ts";
-import { ItemType } from "@item/data/data.ts";
+import type { Tab } from "@item/sheets/document.ts";
+import type { ItemType } from "@item/data/data.ts";
 import * as R from "remeda";
-import { BrowserFilter, CheckboxData, RangesInputData, RenderResultListOptions, SelectData, SliderData } from "./tabs/data.ts";
+import type { BrowserFilter, CheckboxData, RangesInputData, RenderResultListOptions, SelectData, SliderData } from "./tabs/data.ts";
 import Tagify from "@yaireo/tagify";
 import noUiSlider from "nouislider";
 

@@ -1,4 +1,4 @@
-import ActorPTR2e from "@actor/base.ts";
+import type ActorPTR2e from "@actor/base.ts";
 
 class ActorComponent {
     static TEMPLATE: string;

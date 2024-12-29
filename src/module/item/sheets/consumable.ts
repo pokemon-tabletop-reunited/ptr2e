@@ -1,4 +1,4 @@
-import { ConsumablePTR2e } from "@item";
+import type { ConsumablePTR2e } from "@item";
 import { default as ItemSheetPTR2e } from "./base.ts";
 
 export default class ConsumableSheet extends ItemSheetPTR2e<ConsumablePTR2e["system"]> {

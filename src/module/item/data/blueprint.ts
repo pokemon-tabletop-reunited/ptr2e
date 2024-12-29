@@ -1,4 +1,5 @@
-import { AttackPTR2e, HasEmbed, HasMigrations } from "@data";
+import type { AttackPTR2e} from "@data";
+import { HasEmbed, HasMigrations } from "@data";
 import type { MigrationSchema } from "@module/data/mixins/has-migrations.ts";
 import { CollectionField } from "@module/data/fields/collection-field.ts";
 import { Blueprint } from "@module/data/models/blueprint.ts";
@@ -6,11 +7,13 @@ import { ItemPTR2e } from "@item/document.ts";
 import { SpeciesSystemModel } from "./index.ts";
 import { ActorPTR2e } from "@actor";
 import { Progress } from "src/util/progress.ts";
-import FolderPTR2e from "@module/folder/document.ts";
+import type FolderPTR2e from "@module/folder/document.ts";
 import natureToStatArray from "@scripts/config/natures.ts";
-import SpeciesSystem, { EvolutionData, type LevelUpMoveSchema } from "./species.ts";
+import type { EvolutionData} from "./species.ts";
+import type SpeciesSystem from "./species.ts";
+import { type LevelUpMoveSchema } from "./species.ts";
 import { ImageResolver, NORMINV, sluggify } from "@utils";
-import { TokenDocumentPTR2e } from "@module/canvas/token/document.ts";
+import type { TokenDocumentPTR2e } from "@module/canvas/token/document.ts";
 import { getInitialSkillList, partialSkillToSkill } from "@scripts/config/skills.ts";
 import { type SkillSchema } from "@module/data/models/skill.ts";
 

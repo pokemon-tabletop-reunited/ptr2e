@@ -1,11 +1,11 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { ActorPTR2e } from "@actor";
-import { ActionPTR2e } from "@data";
+import type { ActorPTR2e } from "@actor";
+import type { ActionPTR2e } from "@data";
 import { ActiveEffectPTR2e } from "@effects";
 import { ItemPTR2e } from "@item";
 import { htmlQueryAll, sluggify } from "@utils";
-import { ApplicationHeaderControlsEntry } from "types/foundry/common/applications/api.js";
+import type { ApplicationHeaderControlsEntry } from "types/foundry/common/applications/api.js";
 
 export type ApplicationConfigurationExpanded = foundry.applications.api.ApplicationConfiguration & {
   dragDrop: DragDropConfiguration[];

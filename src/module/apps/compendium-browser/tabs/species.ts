@@ -1,10 +1,10 @@
-import { ContentTabName } from "../data.ts";
-import { CompendiumBrowser } from "../index.ts";
+import type { ContentTabName } from "../data.ts";
+import type { CompendiumBrowser } from "../index.ts";
 import { CompendiumBrowserTab } from "./base.ts";
-import { SpeciesFilters, CompendiumBrowserIndexData } from "./data.ts";
+import type { SpeciesFilters, CompendiumBrowserIndexData } from "./data.ts";
 import * as R from "remeda";
 import { formatSlug, ImageResolver, sluggify } from "@utils";
-import SkillPTR2e from "@module/data/models/skill.ts";
+import type SkillPTR2e from "@module/data/models/skill.ts";
 
 export class CompendiumBrowserSpeciesTab extends CompendiumBrowserTab {
   tabName: ContentTabName = "species"

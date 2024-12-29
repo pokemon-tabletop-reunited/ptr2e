@@ -1,14 +1,15 @@
-import { ActorPTR2e, EffectRollSource } from "@actor";
-import { ScenePTR2e } from "@module/canvas/scene.ts";
-import { TokenDocumentPTR2e } from "@module/canvas/token/document.ts";
-import { CheckRollContext } from "@system/rolls/data.ts";
-import TypeDataModel from "types/foundry/common/abstract/type-data.js";
-import { AttackRollResult, CheckRoll, PokeballRollResults } from "../system/rolls/check-roll.ts";
-import AttackMessageSystem from "./models/attack.ts";
+import type { ActorPTR2e, EffectRollSource } from "@actor";
+import type { ScenePTR2e } from "@module/canvas/scene.ts";
+import type { TokenDocumentPTR2e } from "@module/canvas/token/document.ts";
+import type { CheckRollContext } from "@system/rolls/data.ts";
+import type TypeDataModel from "types/foundry/common/abstract/type-data.js";
+import type { AttackRollResult, PokeballRollResults } from "../system/rolls/check-roll.ts";
+import { CheckRoll } from "../system/rolls/check-roll.ts";
+import type AttackMessageSystem from "./models/attack.ts";
 import * as R from "remeda";
-import { SummonPTR2e } from "@item";
-import { AttackPTR2e } from "@data";
-import { CombatantPTR2e } from "@combat";
+import type { SummonPTR2e } from "@item";
+import type { AttackPTR2e } from "@data";
+import type { CombatantPTR2e } from "@combat";
 
 class ChatMessagePTR2e<TSchema extends TypeDataModel = TypeDataModel> extends ChatMessage<TSchema> {
   /** Get the actor associated with this chat message */

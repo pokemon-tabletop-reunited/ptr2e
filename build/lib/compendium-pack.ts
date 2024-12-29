@@ -1,10 +1,11 @@
 import fs from "fs";
 import path from "path";
 import { getFilesRecursively, isObject, PackError, sluggify } from "./helpers.ts";
-import { DBFolder, LevelDatabase } from "./level-database.ts";
-import { PackEntry } from "./types.ts";
+import type { DBFolder} from "./level-database.ts";
+import { LevelDatabase } from "./level-database.ts";
+import type { PackEntry } from "./types.ts";
 import coreIconsJSON from "../core-icons.json" assert { type: "json" };
-import { ItemSchema } from "types/foundry/common/documents/item.js";
+import type { ItemSchema } from "types/foundry/common/documents/item.js";
 
 type ActorSourcePTR2e = Actor["_source"];
 type ItemSourcePTR2e = Item["_source"];

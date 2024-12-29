@@ -1,7 +1,8 @@
 import fs from "fs";
 import path from "path";
 import url from "url";
-import { JournalConverter, Page, randomID } from "./lib/convert-journal.ts";
+import type { Page} from "./lib/convert-journal.ts";
+import { JournalConverter, randomID } from "./lib/convert-journal.ts";
 import { CompendiumPack } from "./lib/compendium-pack.ts";
 import {
   abilityToMarkdown,

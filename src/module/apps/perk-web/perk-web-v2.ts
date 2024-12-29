@@ -1,16 +1,19 @@
-import { ApplicationConfigurationExpanded, ApplicationV2Expanded } from "../appv2-expanded.ts";
-import { ActorPTR2e } from "@actor";
+import type { ApplicationConfigurationExpanded} from "../appv2-expanded.ts";
+import { ApplicationV2Expanded } from "../appv2-expanded.ts";
+import type { ActorPTR2e } from "@actor";
 import { ChoiceSetChangeSystem, GrantEffectChangeSystem, GrantItemChangeSystem, Trait } from "@data";
-import { ItemPTR2e, MovePTR2e, PerkPTR2e, SpeciesPTR2e } from "@item";
+import type { MovePTR2e, PerkPTR2e, SpeciesPTR2e } from "@item";
+import { ItemPTR2e } from "@item";
 import Tagify from "@yaireo/tagify";
 import Sortable from "sortablejs";
-import PerkStore, { PerkNode, PerkPurchaseState, PerkState } from "./perk-store.ts";
-import { ActiveEffectPTR2e } from "@effects";
-import { LevelUpMoveSchema } from "@item/data/species.ts";
+import type { PerkNode, PerkPurchaseState} from "./perk-store.ts";
+import PerkStore, { PerkState } from "./perk-store.ts";
+import type { ActiveEffectPTR2e } from "@effects";
+import type { LevelUpMoveSchema } from "@item/data/species.ts";
 import { createHTMLElement, fontAwesomeIcon, htmlClosest, htmlQuery, htmlQueryAll, ImageResolver, isObject, objectHasKey, sluggify } from "@utils";
-import { ApplicationRenderContext } from "types/foundry/common/applications/api.js";
+import type { ApplicationRenderContext } from "types/foundry/common/applications/api.js";
 import { CompendiumBrowserPerkTab } from "../compendium-browser/tabs/perk.ts";
-import { CheckboxData, RangesInputData, RenderResultListOptions, SelectData, SliderData } from "../compendium-browser/tabs/data.ts";
+import type { CheckboxData, RangesInputData, RenderResultListOptions, SelectData, SliderData } from "../compendium-browser/tabs/data.ts";
 import noUiSlider from "nouislider";
 
 export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMixin(ApplicationV2Expanded) {

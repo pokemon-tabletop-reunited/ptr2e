@@ -1,6 +1,6 @@
-import FolderPTR2e from "@module/folder/document.ts";
+import type FolderPTR2e from "@module/folder/document.ts";
 import { MigrationBase } from "../base.ts"
-import { ActorPTR2e } from "@actor";
+import type { ActorPTR2e } from "@actor";
 
 export class Migration104FolderUpdate extends MigrationBase {
   static override version = 0.104;

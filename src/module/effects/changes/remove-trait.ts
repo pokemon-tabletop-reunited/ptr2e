@@ -1,5 +1,6 @@
-import { ActorPTR2e } from "@actor";
-import { ChangeModel, ChangeSchema } from "@data";
+import type { ActorPTR2e } from "@actor";
+import type { ChangeSchema } from "@data";
+import { ChangeModel } from "@data";
 import { sluggify } from "@utils";
 
 export default class RemoveTraitChangeSystem extends ChangeModel {

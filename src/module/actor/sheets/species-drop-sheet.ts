@@ -1,7 +1,8 @@
 import { ItemPTR2e } from "@item";
 import { SpeciesSystemModel } from "@item/data/index.ts";
+import type {
+  ApplicationConfigurationExpanded} from "@module/apps/appv2-expanded.ts";
 import {
-  ApplicationConfigurationExpanded,
   ApplicationV2Expanded,
 } from "@module/apps/appv2-expanded.ts";
 

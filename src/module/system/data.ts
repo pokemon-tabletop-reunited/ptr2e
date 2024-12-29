@@ -1,13 +1,13 @@
-import { ActorPTR2e, EffectRoll } from "@actor";
-import { BaseStatisticCheck, StatisticCheck } from "./statistics/statistic.ts";
-import { ItemPTR2e, ItemSystemPTR, ItemSystemsWithActions } from "@item";
-import { CheckDC } from "@system/rolls/degree-of-success.ts";
-import { TokenDocumentPTR2e } from "@module/canvas/token/document.ts";
-import { ModifierPTR2e } from "@module/effects/modifiers.ts";
-import { TokenPTR2e } from "@module/canvas/token/object.ts";
-import { ActionPTR2e, AttackPTR2e, Trait } from "@data";
-import { RollNote } from "./notes.ts";
-import { AttackCheck } from "./statistics/attack.ts";
+import type { ActorPTR2e, EffectRoll } from "@actor";
+import type { BaseStatisticCheck, StatisticCheck } from "./statistics/statistic.ts";
+import type { ItemPTR2e, ItemSystemPTR, ItemSystemsWithActions } from "@item";
+import type { CheckDC } from "@system/rolls/degree-of-success.ts";
+import type { TokenDocumentPTR2e } from "@module/canvas/token/document.ts";
+import type { ModifierPTR2e } from "@module/effects/modifiers.ts";
+import type { TokenPTR2e } from "@module/canvas/token/object.ts";
+import type { ActionPTR2e, AttackPTR2e, Trait } from "@data";
+import type { RollNote } from "./notes.ts";
+import type { AttackCheck } from "./statistics/attack.ts";
 
 interface CheckContextParams<
   TStatistic extends BaseStatisticCheck<unknown, unknown> = StatisticCheck,

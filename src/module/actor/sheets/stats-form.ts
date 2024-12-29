@@ -1,6 +1,6 @@
 import { StatsChart } from "./stats-chart.ts";
-import { Attributes, ActorPTR2e } from "@actor";
-import { DocumentSheetConfiguration } from "@item/sheets/document.ts";
+import type { Attributes, ActorPTR2e } from "@actor";
+import type { DocumentSheetConfiguration } from "@item/sheets/document.ts";
 import { debounceAsync } from "@utils";
 
 export default class StatsForm extends foundry.applications.api.HandlebarsApplicationMixin(foundry.applications.api.DocumentSheetV2<ActorPTR2e, foundry.applications.api.HandlebarsDocumentSheetConfiguration>) {

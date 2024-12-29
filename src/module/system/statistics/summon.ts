@@ -1,11 +1,11 @@
-import { AttackPTR2e, ResolveValueParams, SummonAttackPTR2e } from "@data";
+import type { AttackPTR2e, ResolveValueParams, SummonAttackPTR2e } from "@data";
 import { AttackStatistic } from "./attack.ts";
 import { ModifierPTR2e } from "@module/effects/modifiers.ts";
 import * as R from "remeda";
 import { isBracketedValue, isObject } from "@utils";
-import { ActorPTR2e } from "@actor";
-import { ItemPTR2e } from "@item";
-import { BracketedValue, RuleValue } from "@effects";
+import type { ActorPTR2e } from "@actor";
+import type { ItemPTR2e } from "@item";
+import type { BracketedValue, RuleValue } from "@effects";
 
 class SummonStatistic extends AttackStatistic {
   constructor(summon: SummonAttackPTR2e) {

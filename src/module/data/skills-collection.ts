@@ -1,5 +1,5 @@
 import { formatSlug, sluggify } from "@utils";
-import { CoreSkill, CustomSkill, Skill } from "./models/skill.ts";
+import type { CoreSkill, CustomSkill, Skill } from "./models/skill.ts";
 
 export default class PTR2eSkills extends Collection<Skill> {
     rawModuleSkills: CustomSkill[] = [];

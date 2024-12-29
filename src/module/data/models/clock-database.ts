@@ -1,4 +1,5 @@
-import Clock, { ClockSchema } from "./clock.ts";
+import type { ClockSchema } from "./clock.ts";
+import Clock from "./clock.ts";
 
 class ClockDatabase extends foundry.abstract.DataModel {
     static override defineSchema() {

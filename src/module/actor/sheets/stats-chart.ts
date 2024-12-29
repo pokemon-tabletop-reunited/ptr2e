@@ -1,7 +1,8 @@
-import { ActorPTR2e, Attribute } from "@actor";
-import { ActorSheetPTR2e } from "@actor";
+import type { ActorPTR2e, Attribute } from "@actor";
+import type { ActorSheetPTR2e } from "@actor";
 import { CenterLabelsPlugin } from "@scripts/chart-plugins.ts";
-import { Chart, ChartOptions } from "chart.js/auto";
+import type { ChartOptions } from "chart.js/auto";
+import { Chart } from "chart.js/auto";
 
 export class StatsChart {
     sheet: ActorSheetPTR2e | foundry.applications.api.DocumentSheetV2<ActorPTR2e>;

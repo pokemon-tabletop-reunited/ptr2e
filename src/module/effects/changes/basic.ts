@@ -1,4 +1,4 @@
-import { ActorPTR2e } from "@actor";
+import type { ActorPTR2e } from "@actor";
 import { isObject } from "@utils";
 import { ChangeModel } from "@data";
 

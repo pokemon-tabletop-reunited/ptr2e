@@ -1,8 +1,8 @@
 import { grades } from "@module/data/mixins/has-gear-data.ts";
-import { ContentTabName } from "../data.ts";
-import { CompendiumBrowser } from "../index.ts";
+import type { ContentTabName } from "../data.ts";
+import type { CompendiumBrowser } from "../index.ts";
 import { CompendiumBrowserTab } from "./base.ts";
-import { CompendiumBrowserIndexData, GearFilters } from "./data.ts";
+import type { CompendiumBrowserIndexData, GearFilters } from "./data.ts";
 import { formatSlug } from "@utils";
 
 export class CompendiumBrowserGearTab extends CompendiumBrowserTab {

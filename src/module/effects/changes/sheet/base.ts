@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import ActiveEffectConfig from "@module/effects/sheet.ts";
-import ChangeModel from "../change.ts";
+import type ActiveEffectConfig from "@module/effects/sheet.ts";
+import type ChangeModel from "../change.ts";
 import { createHTMLElement, fontAwesomeIcon, htmlClosest, htmlQuery, htmlQueryAll, isBracketedValue, isObject, tagify } from "@utils";
 import * as R from "remeda";
-import ActiveEffectPTR2e from "@module/effects/document.ts";
+import type ActiveEffectPTR2e from "@module/effects/document.ts";
 import { ItemPTR2e } from "@item";
 import ResolvableValueField from "@module/data/fields/resolvable-value-field.ts";
 

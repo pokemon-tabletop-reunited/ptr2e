@@ -1,4 +1,4 @@
-import { AbilityPTR2e } from "@item";
+import type { AbilityPTR2e } from "@item";
 import { default as ItemSheetPTR2e } from "./base.ts";
 
 export default class AbilitySheet extends ItemSheetPTR2e<AbilityPTR2e["system"]> {

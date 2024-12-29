@@ -1,5 +1,5 @@
 import FolderPTR2e from "@module/folder/document.ts";
-import { PTRHook } from "./data.ts";
+import type { PTRHook } from "./data.ts";
 
 export const Sockets: PTRHook = {
   listen: () => {

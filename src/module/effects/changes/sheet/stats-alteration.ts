@@ -1,4 +1,4 @@
-import StatsAlterationChangeSystem from "../stats-alteration.ts";
+import type StatsAlterationChangeSystem from "../stats-alteration.ts";
 import ChangeForm from "./base.ts";
 
 class StatsAlterationModifierForm extends ChangeForm<StatsAlterationChangeSystem> {

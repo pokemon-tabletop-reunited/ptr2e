@@ -1,5 +1,6 @@
-import { ActorPTR2e, AttackAdjustment } from "@actor";
-import { BasicChangeSystem, ChangeModel, ChangeSchema, PTRCONSTS, RangePTR2e } from "@data";
+import type { ActorPTR2e, AttackAdjustment } from "@actor";
+import type { ChangeSchema} from "@data";
+import { BasicChangeSystem, ChangeModel, PTRCONSTS, RangePTR2e } from "@data";
 import { PredicateField } from "@system/predication/schema-data-fields.ts";
 
 type AttackPropertyOptions = "power" | "accuracy" | "type" | "traits" | "pp-cost" | "range" | "rip" | "offensiveStat" | "defensiveStat";

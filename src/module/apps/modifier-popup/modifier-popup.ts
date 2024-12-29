@@ -1,5 +1,6 @@
-import { CheckModifier, ModifierPTR2e } from "@module/effects/modifiers.ts";
-import { CheckRollContext } from "@system/rolls/data.ts";
+import type { CheckModifier} from "@module/effects/modifiers.ts";
+import { ModifierPTR2e } from "@module/effects/modifiers.ts";
+import type { CheckRollContext } from "@system/rolls/data.ts";
 import { htmlQuery, htmlQueryAll, tupleHasValue } from "@utils";
 
 export class ModifierPopup extends foundry.applications.api.HandlebarsApplicationMixin(

@@ -1,7 +1,7 @@
 import { ActorComponent } from "./base.ts";
-import ActorPTR2e from "@actor/base.ts";
-import { Skill } from "@actor/data.ts";
-import SkillPTR2e from "@module/data/models/skill.ts";
+import type ActorPTR2e from "@actor/base.ts";
+import type { Skill } from "@actor/data.ts";
+import type SkillPTR2e from "@module/data/models/skill.ts";
 import { htmlQueryAll } from "@utils";
 
 class SkillsComponent extends ActorComponent {

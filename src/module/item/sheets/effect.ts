@@ -1,4 +1,4 @@
-import { EffectPTR2e } from "@item";
+import type { EffectPTR2e } from "@item";
 import { default as ItemSheetPTR2e } from "./base.ts";
 
 export default class EffectSheet extends ItemSheetPTR2e<EffectPTR2e["system"]> {

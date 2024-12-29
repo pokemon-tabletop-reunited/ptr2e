@@ -1,11 +1,11 @@
-import { AuraAppearanceData, AuraData, AuraEffectData } from "@actor";
-import { TokenDocumentPTR2e } from "../document.ts";
-import { ScenePTR2e } from "@module/canvas/scene.ts";
-import { EffectAreaSquare } from "@module/canvas/effect-area-square.ts";
+import type { AuraAppearanceData, AuraData, AuraEffectData } from "@actor";
+import type { TokenDocumentPTR2e } from "../document.ts";
+import type { ScenePTR2e } from "@module/canvas/scene.ts";
+import type { EffectAreaSquare } from "@module/canvas/effect-area-square.ts";
 import { getAreaSquares } from "./util.ts";
 import { measureDistanceCuboid } from "@module/canvas/helpers.ts";
-import { Trait } from "@data";
-import { TokenAuraData } from "./types.ts";
+import type { Trait } from "@data";
+import type { TokenAuraData } from "./types.ts";
 
 class TokenAura implements TokenAuraData {
   #squares?: EffectAreaSquare[];

@@ -1,4 +1,4 @@
-import RollOptionChangeSystem from "../roll-option.ts";
+import type RollOptionChangeSystem from "../roll-option.ts";
 import ChangeForm from "./base.ts";
 
 class RollOptionForm extends ChangeForm<RollOptionChangeSystem> {

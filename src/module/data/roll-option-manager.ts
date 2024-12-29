@@ -1,7 +1,7 @@
-import { ActorPTR2e } from "@actor";
+import type { ActorPTR2e } from "@actor";
 import { ItemPTR2e } from "@item";
-import Trait from "./models/trait.ts";
-import { ActiveEffectPTR2e } from "@effects";
+import type Trait from "./models/trait.ts";
+import type { ActiveEffectPTR2e } from "@effects";
 
 export default class RollOptionManager<TParent extends ActorPTR2e | ItemPTR2e | ActiveEffectPTR2e> {
   #initialized = false;

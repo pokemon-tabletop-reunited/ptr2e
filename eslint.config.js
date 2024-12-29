@@ -8,7 +8,7 @@ export default [
   },
   { files: ["**/*.{js,mjs,cjs,ts}"] },
   { files: ["**/*.js"], languageOptions: { sourceType: "script" } },
-  { languageOptions: { globals: globals.browser } },
+  { languageOptions: { globals: globals.browser, parserOptions: { project: false} } },
   pluginJs.configs.recommended,
   {
     rules: {
@@ -21,7 +21,9 @@ export default [
       "@typescript-eslint/no-unsafe-declaration-merging": "off",
       "@typescript-eslint/no-non-null-assertion": "off",
       "@typescript-eslint/no-invalid-void-type": "off",
-      "@typescript-eslint/no-dynamic-delete": "off",
+      "@typescript-eslint/no-dynamic-delete": "off"
+      // "@typescript-eslint/consistent-type-exports": "error",
+      // "@typescript-eslint/consistent-type-imports": "error"
     }
   },
   ...tseslint.configs.stylistic,

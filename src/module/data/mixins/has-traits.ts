@@ -1,6 +1,6 @@
 import { ActorPTR2e } from '@actor';
 import { SlugField } from '../fields/slug-field.ts';
-import Trait from '../models/trait.ts';
+import type Trait from '../models/trait.ts';
 import type { TemplateConstructor } from './data-template.ts';
 import SystemTraitsCollection from '../system-traits-collection.ts';
 import type { ArrayField, SetField } from 'node_modules/fvtt-types/src/foundry/common/data/fields.d.mts';

@@ -1,6 +1,6 @@
 import { ActionPTR2e } from "@data";
-import { CaptureStatisticRollParameters } from "@system/statistics/statistic.ts";
-import { ConsumablePTR2e } from "@item";
+import type { CaptureStatisticRollParameters } from "@system/statistics/statistic.ts";
+import type { ConsumablePTR2e } from "@item";
 import { PokeballStatistic } from "@system/statistics/pokeball.ts";
 
 export default class PokeballActionPTR2e extends ActionPTR2e {

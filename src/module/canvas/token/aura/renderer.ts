@@ -1,9 +1,9 @@
-import { AuraAppearanceData, AuraData } from "@actor";
-import { TokenPTR2e } from "../object.ts";
-import { TokenAuraData } from "./types.ts";
+import type { AuraAppearanceData, AuraData } from "@actor";
+import type { TokenPTR2e } from "../object.ts";
+import type { TokenAuraData } from "./types.ts";
 import { isVideoFilePath } from "@utils";
 import { getAreaSquares, getGridHighlightShape } from "./util.ts";
-import { EffectAreaSquare } from "@module/canvas/effect-area-square.ts";
+import type { EffectAreaSquare } from "@module/canvas/effect-area-square.ts";
 
 class AuraRenderer extends PIXI.Graphics implements TokenAuraData {
   /** Standard line thickness for circle shape and label markers */

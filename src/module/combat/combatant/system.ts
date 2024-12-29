@@ -1,4 +1,4 @@
-import CombatantPTR2e from "./document.ts";
+import type CombatantPTR2e from "./document.ts";
 
 export default class CombatantSystemPTR2e extends foundry.abstract.TypeDataModel {
   declare parent: CombatantPTR2e;

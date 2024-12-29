@@ -1,7 +1,8 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 //@ts-nocheck
 
-import { Chart, ChartOptions, RadialLinearScale } from "chart.js/auto";
+import type { Chart, RadialLinearScale } from "chart.js/auto";
+import { ChartOptions } from "chart.js/auto";
 import { HALF_PI, PI, _longestText, _normalizeAngle, isArray, toDegrees, toFont } from "chart.js/helpers";
 import ChartDataLabels from "chartjs-plugin-datalabels";
 

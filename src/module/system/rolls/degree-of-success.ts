@@ -1,4 +1,4 @@
-import { CheckRoll } from "./check-roll.ts";
+import type { CheckRoll } from "./check-roll.ts";
 
 class DegreeOfSuccess {
     /** The calculated degree of success */

@@ -1,4 +1,5 @@
-import SkillPTR2e, { CoreSkill } from "@module/data/models/skill.ts";
+import type { CoreSkill } from "@module/data/models/skill.ts";
+import SkillPTR2e from "@module/data/models/skill.ts";
 
 /**
  * Get all skills loaded into the world for default skill creation.

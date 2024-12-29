@@ -1,10 +1,11 @@
-import { Predicate, RawPredicate } from "@system/predication/predication.ts";
-import { DamageAlteration } from "./alterations/damage.ts";
-import ChangeModel from "./changes/change.ts";
+import type { RawPredicate } from "@system/predication/predication.ts";
+import { Predicate } from "@system/predication/predication.ts";
+import type { DamageAlteration } from "./alterations/damage.ts";
+import type ChangeModel from "./changes/change.ts";
 import { signedInteger, sluggify } from "@utils";
-import { ItemPTR2e } from "@item";
+import type { ItemPTR2e } from "@item";
 import * as R from "remeda";
-import { RollNote } from "@system/notes.ts";
+import type { RollNote } from "@system/notes.ts";
 
 interface RawModifier {
   /** An identifier for this modifier; should generally be a localization key (see en.json). */

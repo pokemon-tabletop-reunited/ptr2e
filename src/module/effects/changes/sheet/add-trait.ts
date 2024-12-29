@@ -1,4 +1,4 @@
-import AddTraitChangeSystem from "../add-trait.ts";
+import type AddTraitChangeSystem from "../add-trait.ts";
 import ChangeForm from "./base.ts";
 
 class AddTraitForm extends ChangeForm<AddTraitChangeSystem> {

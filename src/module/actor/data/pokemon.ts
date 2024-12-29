@@ -1,8 +1,9 @@
-import { ActorPTR2e } from "@actor";
+import type { ActorPTR2e } from "@actor";
 import { ActorSystemPTR2e } from "./index.ts";
 import { SpeciesDropSheet } from "@actor/sheets/species-drop-sheet.ts";
 import { ItemPTR2e } from "@item";
-import { BlueprintSystemModel, SpeciesSystemModel } from "@item/data/index.ts";
+import type { BlueprintSystemModel} from "@item/data/index.ts";
+import { SpeciesSystemModel } from "@item/data/index.ts";
 import { BlueprintSheetPTR2e } from "@item/sheets/index.ts";
 
 class PokemonActorSystem extends ActorSystemPTR2e {

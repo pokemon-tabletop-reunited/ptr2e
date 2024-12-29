@@ -1,10 +1,11 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { ActionPTR2e } from "@data";
-import { ItemPTR2e, ItemSystemPTR } from "@item";
-import { DocumentSheetV2 } from "@item/sheets/document.ts";
+import type { ActionPTR2e } from "@data";
+import type { ItemSystemPTR } from "@item";
+import { ItemPTR2e } from "@item";
+import type { DocumentSheetV2 } from "@item/sheets/document.ts";
 import { isObject } from "@utils";
 import { ApplicationV2Expanded } from "./appv2-expanded.ts";
-import { HandlebarsRenderOptions } from "types/foundry/common/applications/handlebars-application.ts";
+import type { HandlebarsRenderOptions } from "types/foundry/common/applications/handlebars-application.ts";
 
 class GithubSheet extends foundry.applications.api.HandlebarsApplicationMixin(ApplicationV2Expanded) {
   static override DEFAULT_OPTIONS = foundry.utils.mergeObject(

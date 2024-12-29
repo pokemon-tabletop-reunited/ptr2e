@@ -1,5 +1,5 @@
 //@ts-nocheck - This file is constantly tripping based on [Symbol.iterator], thus no-check to stop unnecessary warnings/errors.
-import Trait from './models/trait.ts';
+import type Trait from './models/trait.ts';
 export default class SystemTraitsCollection<V extends Trait = Trait> extends Collection<V> {
   suppressedTraits = new Set<string>();
 

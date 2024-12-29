@@ -1,6 +1,6 @@
-import { BracketedValue } from "@module/effects/data.ts";
+import type { BracketedValue } from "@module/effects/data.ts";
 import * as R from "remeda";
-import Sortable from "sortablejs";
+import type Sortable from "sortablejs";
 
 const wordCharacter = String.raw`[\p{Alphabetic}\p{Mark}\p{Decimal_Number}\p{Join_Control}]`;
 const nonWordCharacter = String.raw`[^\p{Alphabetic}\p{Mark}\p{Decimal_Number}\p{Join_Control}]`;

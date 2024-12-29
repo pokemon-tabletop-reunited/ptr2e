@@ -1,4 +1,4 @@
-import RemoveTraitChangeSystem from "../remove-trait.ts";
+import type RemoveTraitChangeSystem from "../remove-trait.ts";
 import ChangeForm from "./base.ts";
 
 class RemoveTraitForm extends ChangeForm<RemoveTraitChangeSystem> {

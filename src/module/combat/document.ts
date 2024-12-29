@@ -1,10 +1,11 @@
-import { TokenDocumentPTR2e } from "@module/canvas/token/document.ts";
-import {
+import type { TokenDocumentPTR2e } from "@module/canvas/token/document.ts";
+import type {
   CombatantPTR2e,
   CombatantSystemPTR2e,
   CombatSystemPTR2e,
-  RoundCombatantSystem,
-  SummonCombatantSystem,
+  SummonCombatantSystem} from "@combat";
+import {
+  RoundCombatantSystem
 } from "@combat";
 import { ActorPTR2e } from "@actor";
 

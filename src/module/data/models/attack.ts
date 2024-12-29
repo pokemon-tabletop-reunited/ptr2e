@@ -1,15 +1,17 @@
-import { ActionPTR2e, ContestType, PTRCONSTS, PokemonCategory, PokemonType } from "@data";
+import type { ContestType, PokemonCategory, PokemonType } from "@data";
+import { ActionPTR2e, PTRCONSTS } from "@data";
 import { getTypes } from "@scripts/config/effectiveness.ts";
-import { ActionSchema } from "./action.ts";
+import type { ActionSchema } from "./action.ts";
 import { AttackStatistic } from "@system/statistics/attack.ts";
-import { AttackStatisticRollParameters } from "@system/statistics/statistic.ts";
+import type { AttackStatisticRollParameters } from "@system/statistics/statistic.ts";
 // import { MovePTR2e } from "@item";
-import { ActorPTR2e } from "@actor";
+import type { ActorPTR2e } from "@actor";
 import { SlugField } from "../fields/slug-field.ts";
-import { AttackRollResult } from "@system/rolls/check-roll.ts";
-import { ItemPTR2e, SummonPTR2e } from "@item";
-import { CombatantPTR2e } from "@combat";
-import { ActorSizePTR2e } from "@actor/data/size.ts";
+import type { AttackRollResult } from "@system/rolls/check-roll.ts";
+import type { SummonPTR2e } from "@item";
+import { ItemPTR2e } from "@item";
+import type { CombatantPTR2e } from "@combat";
+import type { ActorSizePTR2e } from "@actor/data/size.ts";
 
 export default class AttackPTR2e extends ActionPTR2e {
   declare type: "attack" | "summon";

@@ -1,8 +1,9 @@
-import {
+import type {
     ModuleSpeciesImageDataSource,
-    sluggify,
     SpeciesImageData,
-    SpeciesImageDataSource,
+    SpeciesImageDataSource} from "@utils";
+import {
+    sluggify
 } from "@utils";
 
 export default class PTR2eArtMaps extends Collection<SpeciesImageData> {

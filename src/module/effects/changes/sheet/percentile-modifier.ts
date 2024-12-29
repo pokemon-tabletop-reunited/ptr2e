@@ -1,4 +1,4 @@
-import StageChangeSystem from "../stage-modifier.ts";
+import type StageChangeSystem from "../stage-modifier.ts";
 import ChangeForm from "./base.ts";
 
 class PercentileModifierForm extends ChangeForm<StageChangeSystem> {

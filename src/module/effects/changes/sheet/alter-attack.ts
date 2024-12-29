@@ -1,4 +1,4 @@
-import AlterAttackChangeSystem from "../alter-attack.ts";
+import type AlterAttackChangeSystem from "../alter-attack.ts";
 import ChangeForm from "./base.ts";
 
 class AlterAttackForm extends ChangeForm<AlterAttackChangeSystem> {

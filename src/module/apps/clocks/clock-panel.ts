@@ -1,5 +1,5 @@
 import Clock from "@module/data/models/clock.ts";
-import { HandlebarsRenderOptions } from "types/foundry/common/applications/handlebars-application.ts";
+import type { HandlebarsRenderOptions } from "types/foundry/common/applications/handlebars-application.ts";
 import ClockEditor from "./clock-editor.ts";
 import Sortable from "sortablejs";
 

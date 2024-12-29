@@ -1,6 +1,7 @@
-import { ActorPTR2e, ActorSystemPTR2e } from "@actor";
-import { Tab } from "@item/sheets/document.ts";
-import FolderPTR2e from "@module/folder/document.ts";
+import type { ActorSystemPTR2e } from "@actor";
+import { ActorPTR2e } from "@actor";
+import type { Tab } from "@item/sheets/document.ts";
+import type FolderPTR2e from "@module/folder/document.ts";
 
 class TeamSheetPTR2e extends foundry.applications.api.HandlebarsApplicationMixin(
     foundry.applications.api.ApplicationV2

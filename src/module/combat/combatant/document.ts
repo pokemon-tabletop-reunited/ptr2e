@@ -1,6 +1,6 @@
-import { TokenDocumentPTR2e } from "@module/canvas/token/document.ts";
-import { CombatPTR2e } from "@combat";
-import { CombatantSystemPTR2e } from "@combat";
+import type { TokenDocumentPTR2e } from "@module/canvas/token/document.ts";
+import type { CombatPTR2e } from "@combat";
+import type { CombatantSystemPTR2e } from "@combat";
 
 class CombatantPTR2e<
   TParent extends CombatPTR2e | null = CombatPTR2e | null,

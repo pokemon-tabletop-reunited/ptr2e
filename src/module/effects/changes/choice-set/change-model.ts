@@ -1,5 +1,6 @@
-import { ActionPTR2e, ChangeModel, ChangeModelOptions, ChangeSchema } from "@data";
-import { PickableThing } from "@module/apps/pick-a-thing-prompt.ts";
+import type { ChangeModelOptions, ChangeSchema } from "@data";
+import { ActionPTR2e, ChangeModel } from "@data";
+import type { PickableThing } from "@module/apps/pick-a-thing-prompt.ts";
 import { DataUnionField } from "@module/data/fields/data-union-field.ts";
 import { StrictArrayField, StrictBooleanField, StrictObjectField, StrictStringField } from "@module/data/fields/strict-primitive-fields.ts";
 import { Predicate } from "@system/predication/predication.ts";
@@ -8,8 +9,9 @@ import { sluggify } from "@utils";
 import * as R from "remeda"
 import { UUIDUtils } from "src/util/uuid.ts";
 import { ChoiceSetPrompt } from "./prompt.ts";
-import { ItemPTR2e, ItemSystemPTR } from "@item";
-import { ActorPTR2e } from "@actor";
+import type { ItemSystemPTR } from "@item";
+import { ItemPTR2e } from "@item";
+import type { ActorPTR2e } from "@actor";
 
 export default class ChoiceSetChangeSystem extends ChangeModel {
   static override TYPE = "choice-set";

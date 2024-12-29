@@ -1,23 +1,23 @@
-import { ActorPTR2e } from "@actor";
+import type { ActorPTR2e } from "@actor";
 import { BaseStatistic } from "./base.ts";
-import { StatisticCheckData, StatisticData, StatisticDifficultyClassData } from "./data.ts";
+import type { StatisticCheckData, StatisticData, StatisticDifficultyClassData } from "./data.ts";
 import { CheckModifier, ModifierPTR2e, StatisticModifier } from "@module/effects/modifiers.ts";
-import { ItemPTR2e, ItemSystemPTR } from "@item";
-import { AttackRollCallback, CheckRoll, CheckRollCallback, CheckType, PokeballRollCallback } from "@system/rolls/check-roll.ts";
+import type { ItemPTR2e, ItemSystemPTR } from "@item";
+import type { AttackRollCallback, CheckRoll, CheckRollCallback, CheckType, PokeballRollCallback } from "@system/rolls/check-roll.ts";
 import * as R from "remeda";
 import {
   extractModifierAdjustments,
   extractModifiers,
   extractNotes,
 } from "src/util/change-helpers.ts";
-import { TokenDocumentPTR2e } from "@module/canvas/token/document.ts";
-import { CheckDC } from "@system/rolls/degree-of-success.ts";
-import { RollNote, RollNoteSource } from "@system/notes.ts";
-import { TokenPTR2e } from "@module/canvas/token/object.ts";
-import { CheckContext, RollTarget } from "../data.ts";
-import { CheckRollContext } from "@system/rolls/data.ts";
+import type { TokenDocumentPTR2e } from "@module/canvas/token/document.ts";
+import type { CheckDC } from "@system/rolls/degree-of-success.ts";
+import type { RollNote, RollNoteSource } from "@system/notes.ts";
+import type { TokenPTR2e } from "@module/canvas/token/object.ts";
+import type { CheckContext, RollTarget } from "../data.ts";
+import type { CheckRollContext } from "@system/rolls/data.ts";
 import { CheckPTR2e } from "../check.ts";
-import { AttackModifierPopup } from "@module/apps/modifier-popup/attack-modifier-popup.ts";
+import type { AttackModifierPopup } from "@module/apps/modifier-popup/attack-modifier-popup.ts";
 
 class Statistic extends BaseStatistic {
   /** The `Statistic` from which this one was derived (set by `Statistic#extend`), or otherwise `null`. */

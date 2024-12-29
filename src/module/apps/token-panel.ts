@@ -1,8 +1,8 @@
-import { ActorPTR2e } from "@actor";
+import type { ActorPTR2e } from "@actor";
 import { SkillsComponent } from "@actor/components/skills-component.ts";
-import { AttackPTR2e } from "@data";
-import { Tab } from "@item/sheets/document.ts";
-import { TokenPTR2e } from "@module/canvas/token/object.ts";
+import type { AttackPTR2e } from "@data";
+import type { Tab } from "@item/sheets/document.ts";
+import type { TokenPTR2e } from "@module/canvas/token/object.ts";
 import { htmlQuery, htmlQueryAll } from "@utils";
 
 export default class TokenPanel extends foundry.applications.api.HandlebarsApplicationMixin(

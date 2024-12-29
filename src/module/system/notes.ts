@@ -1,6 +1,7 @@
-import { ChangeModel } from "@data";
-import { Predicate, RawPredicate } from "./predication/predication.ts";
-import { UserVisibility } from "@scripts/ui/user-visibility.ts";
+import type { ChangeModel } from "@data";
+import type { RawPredicate } from "./predication/predication.ts";
+import { Predicate } from "./predication/predication.ts";
+import type { UserVisibility } from "@scripts/ui/user-visibility.ts";
 import { createHTMLElement } from "@utils";
 
 class RollNote {

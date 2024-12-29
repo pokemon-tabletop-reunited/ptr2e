@@ -1,4 +1,4 @@
-import FlatModifierChangeSystem from "../flat-modifier.ts";
+import type FlatModifierChangeSystem from "../flat-modifier.ts";
 import ChangeForm from "./base.ts";
 
 class FlatModifierForm extends ChangeForm<FlatModifierChangeSystem> {

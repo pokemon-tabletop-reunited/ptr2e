@@ -1,6 +1,7 @@
-import { ActionPTR2e, AttackPTR2e, HasBase, HasEmbed, Trait } from "@module/data/index.ts";
+import type { ActionPTR2e, AttackPTR2e, Trait } from "@module/data/index.ts";
+import { HasBase, HasEmbed } from "@module/data/index.ts";
 import { sluggify } from "@utils";
-import SystemTraitsCollection from "@module/data/system-traits-collection.ts";
+import type SystemTraitsCollection from "@module/data/system-traits-collection.ts";
 import type { DeepPartial } from "fvtt-types/utils";
 import type { ItemPTR2e } from "@item/document.ts";
 import type { HasBaseSchema } from "@module/data/mixins/has-base.ts";

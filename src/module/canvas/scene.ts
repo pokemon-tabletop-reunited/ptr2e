@@ -1,6 +1,6 @@
 import { SquareGridPTR2e } from "./grid.ts";
 import { checkAuras } from "./helpers.ts";
-import { TokenDocumentPTR2e } from "./token/document.ts";
+import type { TokenDocumentPTR2e } from "./token/document.ts";
 
 export class ScenePTR2e extends Scene {
 

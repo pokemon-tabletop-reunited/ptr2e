@@ -1,5 +1,5 @@
 
-import RollEffectChangeSystem from "../roll-note.ts";
+import type RollEffectChangeSystem from "../roll-note.ts";
 import ChangeForm from "./base.ts";
 
 class RollEffectForm extends ChangeForm<RollEffectChangeSystem> {

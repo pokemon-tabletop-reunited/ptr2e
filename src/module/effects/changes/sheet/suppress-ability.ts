@@ -1,4 +1,4 @@
-import SuppresAbilityChangeSystem from "../suppress-ability.ts";
+import type SuppresAbilityChangeSystem from "../suppress-ability.ts";
 import ChangeForm from "./base.ts";
 
 class SuppresAbilityForm extends ChangeForm<SuppresAbilityChangeSystem> {

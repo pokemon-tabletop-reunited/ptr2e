@@ -1,6 +1,6 @@
-import { ActorSheetPTR2e } from "@actor";
+import type { ActorSheetPTR2e } from "@actor";
 import { ItemPTR2e } from "@item";
-import { BlueprintSystemModel } from "@item/data/index.ts";
+import type { BlueprintSystemModel } from "@item/data/index.ts";
 import { BlueprintSheetPTR2e } from "@item/sheets/index.ts";
 
 export const DropCanvasData = {

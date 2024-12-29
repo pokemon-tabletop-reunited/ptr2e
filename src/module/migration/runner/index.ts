@@ -1,10 +1,10 @@
-import { ActorPTR2e, ActorSystemPTR2e } from "@actor";
+import type { ActorPTR2e, ActorSystemPTR2e } from "@actor";
 import { MigrationRunnerBase } from "./base.ts";
-import { ItemPTR2e, ItemSystemPTR } from "@item";
-import { MigrationBase } from "../base.ts";
+import type { ItemPTR2e, ItemSystemPTR } from "@item";
+import type { MigrationBase } from "../base.ts";
 import { Progress } from "src/util/progress.ts";
-import { TokenDocumentPTR2e } from "@module/canvas/token/document.ts";
-import { ScenePTR2e } from "@module/canvas/scene.ts";
+import type { TokenDocumentPTR2e } from "@module/canvas/token/document.ts";
+import type { ScenePTR2e } from "@module/canvas/scene.ts";
 
 export class MigrationRunner extends MigrationRunnerBase {
     override needsMigration(): boolean {

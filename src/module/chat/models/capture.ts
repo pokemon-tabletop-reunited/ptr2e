@@ -2,9 +2,9 @@ import { ActorPTR2e } from "@actor";
 import { resolveCapture } from "@actor/helpers.ts";
 import { ChatMessagePTR2e } from "@chat";
 import { SlugField } from "@module/data/fields/slug-field.ts";
-import PokeballActionPTR2e from "@module/data/models/pokeball-action.ts";
-import { ModifierPTR2e } from "@module/effects/modifiers.ts";
-import { CaptureRoll } from "@system/rolls/capture-roll.ts";
+import type PokeballActionPTR2e from "@module/data/models/pokeball-action.ts";
+import type { ModifierPTR2e } from "@module/effects/modifiers.ts";
+import type { CaptureRoll } from "@system/rolls/capture-roll.ts";
 
 abstract class CaptureMessageSystem extends foundry.abstract.TypeDataModel {
   declare parent: ChatMessagePTR2e<CaptureMessageSystem>;

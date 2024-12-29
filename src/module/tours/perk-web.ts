@@ -1,4 +1,5 @@
-import { ActorPTR2e, ActorSheetPTR2e } from "@actor";
+import type { ActorSheetPTR2e } from "@actor";
+import { ActorPTR2e } from "@actor";
 import { PTRTour } from "./base.ts";
 import { PerkWebApp } from "@module/apps/perk-web/perk-web-v2.ts";
 import { ItemPTR2e } from "@item";

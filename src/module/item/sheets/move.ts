@@ -1,5 +1,5 @@
-import { MovePTR2e } from "@item";
-import { Tab } from "./document.ts";
+import type { MovePTR2e } from "@item";
+import type { Tab } from "./document.ts";
 import { default as ItemSheetPTR2e } from "./base.ts";
 
 export default class MoveSheet extends ItemSheetPTR2e<MovePTR2e["system"]> {

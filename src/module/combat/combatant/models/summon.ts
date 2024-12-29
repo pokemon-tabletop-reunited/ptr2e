@@ -1,10 +1,12 @@
-import { CombatantPTR2e, CombatantSystemPTR2e } from "@combat";
-import { CombatantSystemSchema } from "../system.ts";
-import { ItemPTR2e, SummonPTR2e } from "@item";
-import { SummonAttackPTR2e } from "@data";
-import { ActorPTR2e } from "@actor";
-import { ActiveEffectPTR2e } from "@effects";
-import SummonActiveEffectSystem from "@module/effects/data/summon.ts";
+import type { CombatantPTR2e} from "@combat";
+import { CombatantSystemPTR2e } from "@combat";
+import type { CombatantSystemSchema } from "../system.ts";
+import type { SummonPTR2e } from "@item";
+import { ItemPTR2e } from "@item";
+import type { SummonAttackPTR2e } from "@data";
+import type { ActorPTR2e } from "@actor";
+import type { ActiveEffectPTR2e } from "@effects";
+import type SummonActiveEffectSystem from "@module/effects/data/summon.ts";
 
 class SummonCombatantSystem extends CombatantSystemPTR2e {
   declare parent: CombatantPTR2e

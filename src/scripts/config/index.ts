@@ -1,5 +1,6 @@
 
-import { ActorPTR2e, ActorSheetPTR2e, HumanoidActorSystem, PokemonActorSystem, Size } from "@actor";
+import type { Size } from "@actor";
+import { ActorPTR2e, ActorSheetPTR2e, HumanoidActorSystem, PokemonActorSystem } from "@actor";
 import { SummonCombatantSystem, CharacterCombatantSystem, CombatPTR2e, CombatSystemPTR2e, CombatTrackerPTR2e, CombatantPTR2e, RoundCombatantSystem } from "@combat";
 import { ItemPTR2e, data, sheets } from "@item";
 import { PerkDirectory } from "@module/apps/sidebar/perks-directory.ts";

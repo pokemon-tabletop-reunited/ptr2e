@@ -1,4 +1,4 @@
-import StageModifierSystem from "../stage-modifier.ts";
+import type StageModifierSystem from "../stage-modifier.ts";
 import ChangeForm from "./base.ts";
 
 class StageModifierForm extends ChangeForm<StageModifierSystem> {

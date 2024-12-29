@@ -1,6 +1,7 @@
 import { ActorPTR2e } from "@actor";
 import type { ItemSourcePTR2e, ItemSystemPTR, ItemSystemsWithActions } from "@item";
-import { ActionPTR2e, EquipmentData, RollOptionManager, Trait } from "@data";
+import type { ActionPTR2e, EquipmentData, Trait } from "@data";
+import { RollOptionManager } from "@data";
 import { ActiveEffectPTR2e, type EffectSourcePTR2e } from "@effects";
 import { ActionsCollections } from "@actor/actions.ts";
 import { SpeciesSystemModel } from "./data/index.ts";

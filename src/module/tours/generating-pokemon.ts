@@ -1,6 +1,7 @@
 import { BlueprintSheetPTR2e } from "@item/sheets/index.ts";
 import { PTRTour } from "./base.ts";
-import { BlueprintPTR2e, ItemPTR2e } from "@item";
+import type { BlueprintPTR2e} from "@item";
+import { ItemPTR2e } from "@item";
 
 export class GeneratingPokemonTour extends PTRTour {
   private blueprintApp: foundry.applications.api.ApplicationV2 | undefined;

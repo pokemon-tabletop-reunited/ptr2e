@@ -1,5 +1,5 @@
 
-import RollNoteChangeSystem from "../roll-note.ts";
+import type RollNoteChangeSystem from "../roll-note.ts";
 import ChangeForm from "./base.ts";
 
 class RollNoteForm extends ChangeForm<RollNoteChangeSystem> {

@@ -1,6 +1,6 @@
-import { PredicateField } from "@system/predication/schema-data-fields.ts";
-import ChangeModel from "./changes/change.ts";
-import ActiveEffectSystem from "./system.ts";
+import type { PredicateField } from "@system/predication/schema-data-fields.ts";
+import type ChangeModel from "./changes/change.ts";
+import type ActiveEffectSystem from "./system.ts";
 
 interface RuleElementSource {
     key?: JSONValue;

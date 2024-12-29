@@ -1,7 +1,9 @@
 /* eslint-disable no-fallthrough */
-import { HasTraits, HasMigrations, PokemonType, ClockPTR2e, Trait } from "@data";
-import { getTypes, TypeEffectiveness } from "@scripts/config/effectiveness.ts";
-import {
+import type { PokemonType} from "@data";
+import { HasTraits, HasMigrations, ClockPTR2e, Trait } from "@data";
+import type { TypeEffectiveness } from "@scripts/config/effectiveness.ts";
+import { getTypes } from "@scripts/config/effectiveness.ts";
+import type {
   ActorPTR2e,
   Attribute,
   Attributes,
@@ -14,9 +16,10 @@ import natureToStatArray, { natures } from "@scripts/config/natures.ts";
 import { SlugField } from "@module/data/fields/slug-field.ts";
 import { TraitsSchema } from "@module/data/mixins/has-traits.ts";
 import { MigrationSchema } from "@module/data/mixins/has-migrations.ts";
-import { ActorSystemSchema as actorSystemSchema, AttributeSchema, StatSchema, TypeField, GenderOptions, AttributesSchema, AdvancementSchema, Movement } from "./data.ts";
+import type { AttributeSchema, StatSchema, TypeField, GenderOptions, AttributesSchema, AdvancementSchema, Movement } from "./data.ts";
+import { ActorSystemSchema as actorSystemSchema } from "./data.ts";
 import { addDataFieldMigration, sluggify } from "@utils";
-import { AbilityReferenceSchema } from "@item/data/species.ts";
+import type { AbilityReferenceSchema } from "@item/data/species.ts";
 
 const actorSystemSchema = (() => {
   const fields = foundry.data.fields;

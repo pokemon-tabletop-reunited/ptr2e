@@ -1,4 +1,5 @@
-import { PTRCONSTS, PokemonCategory, PokemonType } from "@data";
+import type { PokemonCategory, PokemonType } from "@data";
+import { PTRCONSTS } from "@data";
 import { capitalize, formatSlug } from "./misc.ts";
 import { getTypes } from "@scripts/config/effectiveness.ts";
 import * as R from "remeda";

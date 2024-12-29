@@ -1,7 +1,7 @@
 /** @module item */
-import { ItemPTR2e } from "./document.ts";
-import * as data from "./data/index.ts";
-import { ActorPTR2e } from "@actor";
+import type { ItemPTR2e } from "./document.ts";
+import type * as data from "./data/index.ts";
+import type { ActorPTR2e } from "@actor";
 
 // Items
 type AbilityPTR2e<TParent extends ActorPTR2e | null = ActorPTR2e | null> = ItemPTR2e<data.AbilitySystemModel, TParent>;

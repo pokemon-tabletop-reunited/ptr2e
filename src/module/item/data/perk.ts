@@ -1,4 +1,5 @@
-import { ItemPTR2e, type PerkPTR2e } from "@item";
+import type { ItemPTR2e} from "@item";
+import { type PerkPTR2e } from "@item";
 import { HasTraits, HasActions, HasSlug, HasDescription, HasEmbed, HasMigrations } from "@module/data/index.ts";
 import { SlugField } from "@module/data/fields/slug-field.ts";
 import { type SlugSchema } from "@module/data/mixins/has-slug.ts";

@@ -1,5 +1,5 @@
-import { TemplateLayerPTR2e } from "./layer/template.ts";
-import { ScenePTR2e } from "./scene.ts";
+import type { TemplateLayerPTR2e } from "./layer/template.ts";
+import type { ScenePTR2e } from "./scene.ts";
 
 export class MeasuredTemplatePTR2e<TDocument extends MeasuredTemplateDocument<ScenePTR2e | null> = MeasuredTemplateDocument<ScenePTR2e | null>> extends MeasuredTemplate<TDocument> {
   override highlightGrid(): void {

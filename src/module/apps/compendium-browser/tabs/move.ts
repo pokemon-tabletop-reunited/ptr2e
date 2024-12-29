@@ -1,9 +1,10 @@
 import { grades } from "@module/data/mixins/has-gear-data.ts";
-import { ContentTabName } from "../data.ts";
-import { CompendiumBrowser } from "../index.ts";
+import type { ContentTabName } from "../data.ts";
+import type { CompendiumBrowser } from "../index.ts";
 import { CompendiumBrowserTab } from "./base.ts";
-import { CompendiumBrowserIndexData, MoveFilters } from "./data.ts";
-import { ActionPTR2e, AttackPTR2e, PTRCONSTS } from "@data";
+import type { CompendiumBrowserIndexData, MoveFilters } from "./data.ts";
+import type { ActionPTR2e, AttackPTR2e} from "@data";
+import { PTRCONSTS } from "@data";
 import { unique } from "remeda";
 import { formatSlug } from "@utils";
 

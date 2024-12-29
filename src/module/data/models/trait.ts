@@ -1,7 +1,7 @@
-import { ActorPTR2e } from "@actor";
+import type { ActorPTR2e } from "@actor";
 import { ActiveEffectPTR2e } from "@effects";
-import { ItemPTR2e } from "@item";
-import ChangeModel from "@module/effects/changes/change.ts";
+import type { ItemPTR2e } from "@item";
+import type ChangeModel from "@module/effects/changes/change.ts";
 import { formatSlug } from "@utils";
 
 class Trait {

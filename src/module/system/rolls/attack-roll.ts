@@ -1,8 +1,9 @@
-import { AccuracySuccessCategory, AttackPTR2e, SummonAttackPTR2e } from "@data";
-import { CheckRoll, CheckRollDataPTR2e } from "./check-roll.ts";
-import { AttackCheckModifier } from "@module/effects/modifiers.ts";
-import { ActorPTR2e } from "@actor";
-import { AccuracyContext, DamageCalc } from "@module/chat/models/data.ts";
+import type { AccuracySuccessCategory, AttackPTR2e, SummonAttackPTR2e } from "@data";
+import type { CheckRollDataPTR2e } from "./check-roll.ts";
+import { CheckRoll } from "./check-roll.ts";
+import type { AttackCheckModifier } from "@module/effects/modifiers.ts";
+import type { ActorPTR2e } from "@actor";
+import type { AccuracyContext, DamageCalc } from "@module/chat/models/data.ts";
 
 // @ts-expect-error - This override is intentional
 class AttackRoll extends CheckRoll {

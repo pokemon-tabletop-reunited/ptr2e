@@ -1,7 +1,7 @@
-import { DeferredEphemeralEffect, DeferredValueParams } from "@actor";
+import type { DeferredEphemeralEffect, DeferredValueParams } from "@actor";
 import { ChangeModel } from "@data";
 import { UUIDUtils } from "src/util/uuid.ts";
-import { ActiveEffectSystem, EffectSourcePTR2e } from "@effects";
+import type { ActiveEffectSystem, EffectSourcePTR2e } from "@effects";
 import { ItemPTR2e } from "@item";
 
 export default class EphemeralEffectChangeSystem extends ChangeModel {

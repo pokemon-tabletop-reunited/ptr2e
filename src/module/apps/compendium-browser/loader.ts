@@ -1,5 +1,5 @@
 import { localizer, sluggify } from "@utils";
-import { CompendiumBrowserSources } from "./data.ts";
+import type { CompendiumBrowserSources } from "./data.ts";
 import { Progress } from "src/util/progress.ts";
 
 export class PackLoader {

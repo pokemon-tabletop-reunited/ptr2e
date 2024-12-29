@@ -1,6 +1,6 @@
-import { ScenePTR2e } from "./scene.ts";
-import { TokenDocumentPTR2e } from "./token/document.ts";
-import { TokenPTR2e } from "./token/object.ts";
+import type { ScenePTR2e } from "./scene.ts";
+import type { TokenDocumentPTR2e } from "./token/document.ts";
+import type { TokenPTR2e } from "./token/object.ts";
 
 // Prevent concurrent executions of this method in case of network latency
 let auraCheckLock = Promise.resolve();

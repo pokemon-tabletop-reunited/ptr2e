@@ -1,12 +1,12 @@
-import { ActorPTR2e, ActorSystemPTR2e } from "@actor";
-import { TokenPTR2e } from "@module/canvas/token/object.ts";
-import { TokenFlagsPTR2e } from "@module/canvas/token/data.ts";
-import { ScenePTR2e } from "../scene.ts";
-import { CombatantPTR2e, CombatPTR2e } from "@combat";
+import type { ActorPTR2e, ActorSystemPTR2e } from "@actor";
+import type { TokenPTR2e } from "@module/canvas/token/object.ts";
+import type { TokenFlagsPTR2e } from "@module/canvas/token/data.ts";
+import type { ScenePTR2e } from "../scene.ts";
+import type { CombatantPTR2e, CombatPTR2e } from "@combat";
 // TODO: Fix circular dependency when imported from @combat
 import CharacterCombatantSystem from "../../combat/combatant/models/character.ts";
 import { TokenAura } from "./aura/aura.ts";
-import { TokenConfigPTR2e } from "./sheet.ts";
+import type { TokenConfigPTR2e } from "./sheet.ts";
 
 class TokenDocumentPTR2e<TParent extends ScenePTR2e | null = ScenePTR2e | null> extends TokenDocument<TParent> {
 

@@ -1,7 +1,9 @@
-import { ActorPTR2e } from "@actor";
-import { ItemPTR2e, ItemSystemPTR } from "@item";
-import { PickableThing, PickAThingConstructorArgs, PickAThingPrompt, PromptTemplateData } from "@module/apps/pick-a-thing-prompt.ts";
-import { Predicate } from "@system/predication/predication.ts";
+import type { ActorPTR2e } from "@actor";
+import type { ItemSystemPTR } from "@item";
+import { ItemPTR2e } from "@item";
+import type { PickableThing, PickAThingConstructorArgs, PromptTemplateData } from "@module/apps/pick-a-thing-prompt.ts";
+import { PickAThingPrompt } from "@module/apps/pick-a-thing-prompt.ts";
+import type { Predicate } from "@system/predication/predication.ts";
 import { createHTMLElement, htmlQuery, htmlQueryAll, sluggify } from "@utils";
 import { UUIDUtils } from "src/util/uuid.ts";
 

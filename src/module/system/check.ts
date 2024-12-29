@@ -1,26 +1,30 @@
 import { ChatMessagePTR2e } from "@chat";
-import { ConsumablePTR2e, ItemPTR2e, ItemSystemsWithFlingStats } from "@item";
+import type { ConsumablePTR2e, ItemPTR2e, ItemSystemsWithFlingStats } from "@item";
 import { ModifierPopup } from "@module/apps/modifier-popup/modifier-popup.ts";
-import { AttackCheckModifier, CheckModifier, ModifierPTR2e } from "@module/effects/modifiers.ts";
+import type { CheckModifier, ModifierPTR2e } from "@module/effects/modifiers.ts";
+import { AttackCheckModifier } from "@module/effects/modifiers.ts";
 import { RollNote } from "@system/notes.ts";
-import {
+import type {
   AttackRollCallback,
   AttackRollResult,
-  CheckRoll,
   CheckRollCallback,
   PokeballRollCallback,
-  PokeballRollResults,
+  PokeballRollResults} from "@system/rolls/check-roll.ts";
+import {
+  CheckRoll
 } from "@system/rolls/check-roll.ts";
-import { CaptureCheckRollContext, CheckRollContext } from "@system/rolls/data.ts";
+import type { CaptureCheckRollContext, CheckRollContext } from "@system/rolls/data.ts";
 import { DegreeOfSuccess } from "@system/rolls/degree-of-success.ts";
 import { sluggify } from "@utils";
-import { CheckContext } from "./data.ts";
+import type { CheckContext } from "./data.ts";
 import { AttackModifierPopup } from "@module/apps/modifier-popup/attack-modifier-popup.ts";
-import { AttackRoll, AttackRollCreationData, AttackRollDataPTR2e } from "./rolls/attack-roll.ts";
-import { CaptureRoll, CaptureRollCreationData } from "./rolls/capture-roll.ts";
+import type { AttackRollCreationData, AttackRollDataPTR2e } from "./rolls/attack-roll.ts";
+import { AttackRoll } from "./rolls/attack-roll.ts";
+import type { CaptureRollCreationData } from "./rolls/capture-roll.ts";
+import { CaptureRoll } from "./rolls/capture-roll.ts";
 import { ConsumableSystemModel } from "@item/data/index.ts";
-import { ActorPTR2e } from "@actor";
-import { ActiveEffectPTR2e } from "@effects";
+import type { ActorPTR2e } from "@actor";
+import type { ActiveEffectPTR2e } from "@effects";
 
 class CheckPTR2e {
   static async rollPokeball(

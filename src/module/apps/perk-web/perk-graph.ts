@@ -1,4 +1,5 @@
-import PerkStore, { PerkNode } from "./perk-store.ts";
+import type { PerkNode } from "./perk-store.ts";
+import type PerkStore from "./perk-store.ts";
 import { PerkState } from "./perk-store.ts";
 
 class PerkGraph {

@@ -1,5 +1,5 @@
-import { AttackMessageSystem, CaptureMessageSystem, ChatMessagePTR2e, DamageAppliedMessageSystem, SkillMessageSystem } from "@chat";
-import { PTRHook } from "./data.ts";
+import type { AttackMessageSystem, CaptureMessageSystem, ChatMessagePTR2e, DamageAppliedMessageSystem, SkillMessageSystem } from "@chat";
+import type { PTRHook } from "./data.ts";
 import { DataInspector } from "@module/apps/data-inspector/data-inspector.ts";
 import { TargetSelectorPopup } from "@module/apps/target-selector/target-selector-popup.ts";
 

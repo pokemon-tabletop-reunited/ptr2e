@@ -5,7 +5,7 @@ import type { TraitsSchema } from "@module/data/mixins/has-traits.ts";
 import type { DescriptionSchema } from "@module/data/mixins/has-description.ts";
 import type { ContainerSchema } from "@module/data/mixins/has-container.ts";
 import type { GearSchema } from "@module/data/mixins/has-gear-data.ts";
-import { ItemPTR2e } from "@item/document.ts";
+import type { ItemPTR2e } from "@item/document.ts";
 
 const containerSchema = {
   collapsed: new foundry.data.fields.BooleanField({ required: true, initial: false, label: "PTR2E.FIELDS.collapsed.label", hint: "PTR2E.FIELDS.collapsed.hint" }),

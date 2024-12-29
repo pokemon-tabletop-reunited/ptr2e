@@ -1,4 +1,4 @@
-import { WeaponPTR2e } from "@item";
+import type { WeaponPTR2e } from "@item";
 import { default as ItemSheetPTR2e } from "./base.ts";
 
 export default class WeaponSheet extends ItemSheetPTR2e<WeaponPTR2e["system"]> {

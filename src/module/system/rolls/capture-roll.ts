@@ -1,7 +1,8 @@
-import { ActorPTR2e } from "@actor";
-import { CheckRoll, CheckRollDataPTR2e } from "./check-roll.ts";
-import { AttackCheckModifier } from "@module/effects/modifiers.ts";
-import { ActiveEffectPTR2e } from "@effects";
+import type { ActorPTR2e } from "@actor";
+import type { CheckRollDataPTR2e } from "./check-roll.ts";
+import { CheckRoll } from "./check-roll.ts";
+import type { AttackCheckModifier } from "@module/effects/modifiers.ts";
+import type { ActiveEffectPTR2e } from "@effects";
 
 class CaptureRoll extends CheckRoll {
   static override createFromData(

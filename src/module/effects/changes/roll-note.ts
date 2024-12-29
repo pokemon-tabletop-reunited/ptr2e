@@ -1,6 +1,7 @@
-import { ActorPTR2e } from "@actor";
-import { ChangeModel, ChangeSchema } from "@data";
-import { UserVisibility } from "@scripts/ui/user-visibility.ts";
+import type { ActorPTR2e } from "@actor";
+import type { ChangeSchema } from "@data";
+import { ChangeModel } from "@data";
+import type { UserVisibility } from "@scripts/ui/user-visibility.ts";
 import { RollNote } from "@system/notes.ts";
 
 export default class RollNoteChangeSystem extends ChangeModel {

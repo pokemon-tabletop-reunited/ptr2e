@@ -1,13 +1,14 @@
-import { ClockPTR2e } from "@data";
-import SpeciesSystem, { SpeciesSchema } from "@item/data/species.ts";
-import { CollectionField } from "@module/data/fields/collection-field.ts";
-import { SlugField } from "@module/data/fields/slug-field.ts";
-import { MigrationSchema } from "@module/data/mixins/has-migrations.ts";
-import { TraitsSchema } from "@module/data/mixins/has-traits.ts";
-import { ClockSchema } from "@module/data/models/clock.ts";
-import SkillPTR2e from "@module/data/models/skill.ts";
-import { TypeEffectiveness } from "@scripts/config/effectiveness.ts";
-import { Nature } from "@scripts/config/natures.ts";
+import type { ClockPTR2e } from "@data";
+import type { SpeciesSchema } from "@item/data/species.ts";
+import type SpeciesSystem from "@item/data/species.ts";
+import type { CollectionField } from "@module/data/fields/collection-field.ts";
+import type { SlugField } from "@module/data/fields/slug-field.ts";
+import type { MigrationSchema } from "@module/data/mixins/has-migrations.ts";
+import type { TraitsSchema } from "@module/data/mixins/has-traits.ts";
+import type { ClockSchema } from "@module/data/models/clock.ts";
+import type SkillPTR2e from "@module/data/models/skill.ts";
+import type { TypeEffectiveness } from "@scripts/config/effectiveness.ts";
+import type { Nature } from "@scripts/config/natures.ts";
 
 interface Movement { method: string; value: number; type: "primary" | "secondary" }
 

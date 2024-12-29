@@ -1,4 +1,4 @@
-import BasicChangeSystem from "../basic.ts";
+import type BasicChangeSystem from "../basic.ts";
 import ChangeForm from "./base.ts";
 
 class AELikeModifierForm extends ChangeForm<BasicChangeSystem> {

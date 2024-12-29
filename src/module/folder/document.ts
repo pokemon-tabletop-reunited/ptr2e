@@ -1,9 +1,10 @@
-import { ActorPTR2e, ActorSystemPTR2e } from "@actor";
+import type { ActorSystemPTR2e } from "@actor";
+import { ActorPTR2e } from "@actor";
 import PartySheetPTR2e from "@module/apps/party-sheet.ts";
 import TeamSheetPTR2e from "@module/apps/team-sheet.ts";
 import { LaxSchemaField } from "@module/data/fields/lax-schema-field.ts";
 import FolderConfigPTR2e from "./sheet.ts";
-import { FolderSchema } from "types/foundry/common/documents/folder.js";
+import type { FolderSchema } from "types/foundry/common/documents/folder.js";
 
 class FolderPTR2e<
   TDocument extends EnfolderableDocument = EnfolderableDocument,

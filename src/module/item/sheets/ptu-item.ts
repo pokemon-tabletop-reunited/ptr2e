@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { PTUActor } from "@actor";
-import { PTUItem } from "@item";
-import { ItemSheetOptions } from "@item/sheet.ts";
+import type { PTUActor } from "@actor";
+import type { PTUItem } from "@item";
+import type { ItemSheetOptions } from "@item/sheet.ts";
 
 export default class PTUSheet extends DocumentSheet {
     static override get defaultOptions() {

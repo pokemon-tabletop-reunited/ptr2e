@@ -1,4 +1,4 @@
-import { BaseEffectSourcePTR2e } from './data.ts';
+import type { BaseEffectSourcePTR2e } from './data.ts';
 
 export {default as ActiveEffectPTR2e } from './document.ts';
 

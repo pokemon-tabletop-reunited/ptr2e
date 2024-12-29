@@ -1,4 +1,4 @@
-import { MigrationBase } from "./base.ts";
+import type { MigrationBase } from "./base.ts";
 import { MigrationRunner } from "./runner/index.ts";
 import * as Migrations from "./migrations/index.ts";
 export { MigrationRunner } from "./runner/index.ts";

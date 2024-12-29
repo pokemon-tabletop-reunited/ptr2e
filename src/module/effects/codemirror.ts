@@ -1,9 +1,10 @@
-import { CompletionContext, CompletionResult, autocompletion } from "@codemirror/autocomplete";
+import type { CompletionContext, CompletionResult} from "@codemirror/autocomplete";
+import { autocompletion } from "@codemirror/autocomplete";
 import { indentWithTab } from "@codemirror/commands";
 import { json, jsonParseLinter } from "@codemirror/lang-json";
 import { syntaxTree } from "@codemirror/language";
 import { linter } from "@codemirror/lint";
-import { Extension } from "@codemirror/state";
+import type { Extension } from "@codemirror/state";
 import { keymap } from "@codemirror/view";
 import { ChangeModelTypes } from "@data";
 import { EditorView, basicSetup } from "codemirror";

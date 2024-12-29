@@ -1,7 +1,7 @@
-import { ItemPTR2e } from "@item";
+import type { ItemPTR2e } from "@item";
 import { MigrationBase } from "../base.ts"
 import { sluggify } from "@utils";
-import { ActionPTR2e } from "@data";
+import type { ActionPTR2e } from "@data";
 
 export class Migration101Initial extends MigrationBase {
     static override version = 0.101;

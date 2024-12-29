@@ -1,4 +1,5 @@
-import { ActorPTR2e, ActorSheetPTR2e } from "@actor";
+import type { ActorSheetPTR2e } from "@actor";
+import { ActorPTR2e } from "@actor";
 import { PTRTour } from "./base.ts";
 import StatsForm from "@actor/sheets/stats-form.ts";
 

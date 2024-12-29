@@ -1,8 +1,8 @@
-import { ActorPTR2e } from "@actor";
-import { ActionPTR2e } from "@data";
-import { ActiveEffectPTR2e } from "@effects";
-import { ItemPTR2e } from "@item";
-import { ScenePTR2e } from "@module/canvas/scene.ts";
+import type { ActorPTR2e } from "@actor";
+import type { ActionPTR2e } from "@data";
+import type { ActiveEffectPTR2e } from "@effects";
+import type { ItemPTR2e } from "@item";
+import type { ScenePTR2e } from "@module/canvas/scene.ts";
 
 /**
  * This is the base class for a migration.

@@ -1,11 +1,11 @@
 import { ActorPTR2e } from "@actor";
 import { ChatMessagePTR2e } from "@chat";
 import { SlugField } from "@module/data/fields/slug-field.ts";
-import SkillPTR2e from "@module/data/models/skill.ts";
-import { ModifierPTR2e } from "@module/effects/modifiers.ts";
+import type SkillPTR2e from "@module/data/models/skill.ts";
+import type { ModifierPTR2e } from "@module/effects/modifiers.ts";
 import { RollNote } from "@system/notes.ts";
-import { CheckRoll } from "@system/rolls/check-roll.ts";
-import { CheckContextRollNotesSchemaField } from "./attack.ts";
+import type { CheckRoll } from "@system/rolls/check-roll.ts";
+import type { CheckContextRollNotesSchemaField } from "./attack.ts";
 import { PredicateField } from "@system/predication/schema-data-fields.ts";
 
 interface SkillMessageSystem

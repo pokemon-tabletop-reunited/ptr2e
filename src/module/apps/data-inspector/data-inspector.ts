@@ -1,14 +1,16 @@
-import { ActorPTR2e, ActorSystemPTR2e } from "@actor";
+import type { ActorSystemPTR2e } from "@actor";
+import { ActorPTR2e } from "@actor";
 import { ApplicationV2Expanded } from "../appv2-expanded.ts";
 import { DataStructure } from "./data-handler.ts";
-import { ItemPTR2e, ItemSystemPTR } from "@item";
+import type { ItemSystemPTR } from "@item";
+import { ItemPTR2e } from "@item";
 import { AttackMessageSystem, CaptureMessageSystem, ChatMessagePTR2e, DamageAppliedMessageSystem, SkillMessageSystem } from "@chat";
-import { TreeTypes } from "./data.ts";
-import { TokenDocumentPTR2e } from "@module/canvas/token/document.ts";
+import type { TreeTypes } from "./data.ts";
+import type { TokenDocumentPTR2e } from "@module/canvas/token/document.ts";
 import { htmlQuery, htmlQueryAll } from "@utils";
 import { ActiveEffectPTR2e } from "@effects";
 import MiniSearch from "minisearch";
-import { Tab } from "@item/sheets/document.ts";
+import type { Tab } from "@item/sheets/document.ts";
 
 type AllowedDocumentTypes = ActorPTR2e | ActorPTR2e<ActorSystemPTR2e, TokenDocumentPTR2e> | ItemPTR2e<ItemSystemPTR> | ActiveEffectPTR2e | ChatMessagePTR2e<AttackMessageSystem> | ChatMessagePTR2e<SkillMessageSystem>;
 

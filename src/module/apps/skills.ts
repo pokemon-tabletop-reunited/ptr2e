@@ -1,7 +1,7 @@
-import { Tab } from "@item/sheets/document.ts";
-import { CustomSkill, Skill } from "@module/data/models/skill.ts";
+import type { Tab } from "@item/sheets/document.ts";
+import type { CustomSkill, Skill } from "@module/data/models/skill.ts";
 import { sluggify } from "@utils";
-import {
+import type {
     ApplicationRenderContext,
     HandlebarsRenderOptions,
 } from "types/foundry/common/applications/api.js";

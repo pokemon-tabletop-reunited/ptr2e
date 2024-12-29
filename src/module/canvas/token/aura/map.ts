@@ -1,4 +1,4 @@
-import { TokenPTR2e } from "../object.ts";
+import type { TokenPTR2e } from "../object.ts";
 import { AuraRenderer } from "./renderer.ts";
 
 export class AuraRenderers extends Map<string, AuraRenderer> {

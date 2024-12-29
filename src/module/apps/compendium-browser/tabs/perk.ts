@@ -1,7 +1,7 @@
-import { ContentTabName } from "../data.ts";
-import { CompendiumBrowser } from "../index.ts";
+import type { ContentTabName } from "../data.ts";
+import type { CompendiumBrowser } from "../index.ts";
 import { CompendiumBrowserTab } from "./base.ts";
-import { PerkFilters, CompendiumBrowserIndexData } from "./data.ts";
+import type { PerkFilters, CompendiumBrowserIndexData } from "./data.ts";
 
 export class CompendiumBrowserPerkTab extends CompendiumBrowserTab {
   tabName: ContentTabName = "perk"

@@ -1,5 +1,5 @@
-import { ItemPTR2e } from "@item";
-import { ActorPTR2e } from "@actor";
+import type { ItemPTR2e } from "@item";
+import type { ActorPTR2e } from "@actor";
 import { MigrationBase } from "../base.ts"
 
 export class Migration107AbsolutePaths extends MigrationBase {

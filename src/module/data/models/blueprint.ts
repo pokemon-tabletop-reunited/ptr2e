@@ -2,7 +2,7 @@ import { CollectionField } from "../fields/collection-field.ts";
 import { natures } from "@scripts/config/natures.ts";
 import { RecursiveEmbeddedDataField } from "../fields/recursive-embedded-data-field.ts";
 import { SlugField } from "../fields/slug-field.ts";
-import { ItemPTR2e } from "@item";
+import type { ItemPTR2e } from "@item";
 import { DataUnionField } from "../fields/data-union-field.ts";
 import { StrictStringField } from "../fields/strict-primitive-fields.ts";
 import { HabitatRollTable } from "@system/habitat-table.ts";

@@ -1,4 +1,5 @@
-import { PTRCONSTS, DistanceUnit, TargetOption } from "@data";
+import type { DistanceUnit, TargetOption } from "@data";
+import { PTRCONSTS } from "@data";
 
 class RangePTR2e extends foundry.abstract.DataModel {
     static override defineSchema() {

@@ -1,8 +1,10 @@
-import { ItemPTR2e, SummonPTR2e } from "@item";
+import type { SummonPTR2e } from "@item";
+import { ItemPTR2e } from "@item";
 import { default as ItemSheetPTR2e } from "./base.ts";
-import { ActiveEffectPTR2e, ActiveEffectSystem } from "@effects";
-import SummonActiveEffectSystem from "@module/effects/data/summon.ts";
-import { ActiveEffectSchema } from "types/foundry/common/documents/active-effect.js";
+import type { ActiveEffectSystem } from "@effects";
+import { ActiveEffectPTR2e } from "@effects";
+import type SummonActiveEffectSystem from "@module/effects/data/summon.ts";
+import type { ActiveEffectSchema } from "types/foundry/common/documents/active-effect.js";
 
 export default class SummonSheet extends ItemSheetPTR2e<SummonPTR2e["system"]> {
   static override DEFAULT_OPTIONS = foundry.utils.mergeObject(

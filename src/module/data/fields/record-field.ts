@@ -1,5 +1,5 @@
 import { isPlainObject } from "remeda";
-import { DataModelValidationFailure } from "types/foundry/common/data/validation-failure.js";
+import type { DataModelValidationFailure } from "types/foundry/common/data/validation-failure.js";
 
 const { fields } = foundry.data;
 

@@ -1,4 +1,4 @@
-import CombatPTR2e from "./document.ts";
+import type CombatPTR2e from "./document.ts";
 
 class CombatSystem extends foundry.abstract.TypeDataModel {
     declare parent: CombatPTR2e;

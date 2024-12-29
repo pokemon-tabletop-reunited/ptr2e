@@ -1,4 +1,4 @@
-import { ChatMessagePTR2e } from "@chat";
+import type { ChatMessagePTR2e } from "@chat";
 import { TokenDocumentPTR2e } from "@module/canvas/token/document.ts";
 import { htmlQueryAll } from "@utils";
 

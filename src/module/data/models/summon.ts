@@ -1,11 +1,13 @@
 import { AttackPTR2e } from "@data";
 import ResolvableValueField from "../fields/resolvable-value-field.ts";
-import { AttackStatistic } from "@system/statistics/attack.ts";
+import type { AttackStatistic } from "@system/statistics/attack.ts";
 import { SummonStatistic } from "@system/statistics/summon.ts";
-import ActionPTR2e, { ActionSchema } from "./action.ts";
-import { CombatantPTR2e, SummonCombatantSystem } from "@combat";
-import { ActorPTR2e } from "@actor";
-import { ItemPTR2e, SummonPTR2e } from "@item";
+import type { ActionSchema } from "./action.ts";
+import type ActionPTR2e from "./action.ts";
+import type { CombatantPTR2e, SummonCombatantSystem } from "@combat";
+import type { ActorPTR2e } from "@actor";
+import type { SummonPTR2e } from "@item";
+import { ItemPTR2e } from "@item";
 export default class SummonActionPTR2e extends AttackPTR2e {
   declare parent: SummonPTR2e['system']
 

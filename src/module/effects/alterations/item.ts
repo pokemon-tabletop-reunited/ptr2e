@@ -1,9 +1,11 @@
 import ResolvableValueField from "@module/data/fields/resolvable-value-field.ts";
-import ChangeModel from "../changes/change.ts";
-import { ItemPTR2e, ItemSourcePTR2e } from "@item";
-import { StringField } from "types/foundry/common/data/fields.js";
-import { BasicChangeSystem, ResolveValueParams } from "@data";
-import { BracketedValue, RuleValue } from "../data.ts";
+import type ChangeModel from "../changes/change.ts";
+import type { ItemSourcePTR2e } from "@item";
+import { ItemPTR2e } from "@item";
+import type { StringField } from "types/foundry/common/data/fields.js";
+import type { ResolveValueParams } from "@data";
+import { BasicChangeSystem } from "@data";
+import type { BracketedValue, RuleValue } from "../data.ts";
 import { isBracketedValue, isObject } from "@utils";
 import * as R from "remeda";
 

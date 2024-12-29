@@ -1,6 +1,6 @@
-import { ModifierPTR2e, RawModifier } from "@module/effects/modifiers.ts";
-import { CheckType } from "@system/rolls/check-roll.ts";
-import { DeferredValueParams } from "@module/effects/modifiers.ts";
+import type { ModifierPTR2e, RawModifier } from "@module/effects/modifiers.ts";
+import type { CheckType } from "@system/rolls/check-roll.ts";
+import type { DeferredValueParams } from "@module/effects/modifiers.ts";
 
 interface BaseStatisticData {
     /** An identifier such as "accounting" or "ember" */

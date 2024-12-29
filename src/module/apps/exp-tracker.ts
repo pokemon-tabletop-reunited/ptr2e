@@ -1,8 +1,9 @@
-import { ApplicationConfigurationExpanded, ApplicationV2Expanded } from "./appv2-expanded.ts";
-import { HandlebarsRenderOptions } from "types/foundry/common/applications/handlebars-application.ts";
-import { Tab } from "@item/sheets/document.ts";
+import type { ApplicationConfigurationExpanded} from "./appv2-expanded.ts";
+import { ApplicationV2Expanded } from "./appv2-expanded.ts";
+import type { HandlebarsRenderOptions } from "types/foundry/common/applications/handlebars-application.ts";
+import type { Tab } from "@item/sheets/document.ts";
 import { ActorPTR2e } from "@actor";
-import { ActiveEffectPTR2e } from "@effects";
+import type { ActiveEffectPTR2e } from "@effects";
 import { sluggify } from "@utils";
 
 export class EXPTracker extends foundry.applications.api.HandlebarsApplicationMixin(ApplicationV2Expanded) {

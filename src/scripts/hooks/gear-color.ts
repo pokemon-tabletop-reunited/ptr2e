@@ -1,5 +1,5 @@
 import { ItemPTR2e } from "@item";
-import { PTRHook } from "./data.ts";
+import type { PTRHook } from "./data.ts";
 
 export const GearColor: PTRHook = {
   listen: () => {

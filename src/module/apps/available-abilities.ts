@@ -1,6 +1,7 @@
-import { ActorPTR2e } from "@actor";
+import type { ActorPTR2e } from "@actor";
 import { ApplicationV2Expanded } from "./appv2-expanded.ts";
-import { AbilityPTR2e, ItemPTR2e } from "@item";
+import type { AbilityPTR2e} from "@item";
+import { ItemPTR2e } from "@item";
 
 export class AvailableAbilitiesApp extends foundry.applications.api.HandlebarsApplicationMixin(ApplicationV2Expanded) {
     static override DEFAULT_OPTIONS = foundry.utils.mergeObject(

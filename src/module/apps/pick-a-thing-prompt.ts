@@ -1,4 +1,4 @@
-import { ItemPTR2e } from "@item";
+import type { ItemPTR2e } from "@item";
 import { ApplicationV2Expanded } from "./appv2-expanded.ts";
 import { Predicate } from "@system/predication/predication.ts";
 import { htmlClosest, htmlQueryAll } from "@utils";

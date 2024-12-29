@@ -1,5 +1,5 @@
 import { ActorPTR2e } from "@actor";
-import { ItemPTR2e } from "@item";
+import type { ItemPTR2e } from "@item";
 import { HasDescription, HasEmbed, HasMigrations, HasSlug, HasTraits } from "@module/data/index.ts";
 import { ActiveEffectPTR2e } from "@effects";
 import type { TraitsSchema } from "@module/data/mixins/has-traits.ts";

@@ -1,12 +1,13 @@
-import { ItemPTR2e, ItemSystemPTR, ItemSystemsWithActions } from "@item";
+import type { ItemPTR2e, ItemSystemPTR, ItemSystemsWithActions } from "@item";
 import { htmlQuery, htmlQueryAll, sluggify } from "@utils";
-import { DocumentSheetConfiguration, Tab } from "./document.ts";
+import type { DocumentSheetConfiguration, Tab } from "./document.ts";
 import Tagify from "@yaireo/tagify";
 import GithubManager from "@module/apps/github.ts";
 import { ActiveEffectPTR2e } from "@effects";
 import { ActionEditor } from "@module/apps/action-editor.ts";
 import { ItemSheetV2Expanded } from "@module/apps/appv2-expanded.ts";
-import { ActionPTR2e, Trait } from "@data";
+import type { ActionPTR2e} from "@data";
+import { Trait } from "@data";
 import { DataInspector } from "@module/apps/data-inspector/data-inspector.ts";
 
 export default class ItemSheetPTR2e<

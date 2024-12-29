@@ -5,7 +5,7 @@ import { Blueprint } from "@module/data/models/blueprint.ts";
 import { htmlQuery } from "@utils";
 import Sortable from "sortablejs";
 import { SpeciesSystemModel } from "@item/data/index.ts";
-import { ActorPTR2e } from "@actor";
+import type { ActorPTR2e } from "@actor";
 
 export default class BlueprintSheet extends foundry.applications.api.HandlebarsApplicationMixin(DocumentSheetV2<ItemPTR2e<BlueprintSystem>>) {
   static override DEFAULT_OPTIONS = foundry.utils.mergeObject(

@@ -1,5 +1,5 @@
-import { ActorPTR2e } from "@actor";
-import { ChatMessagePTR2e } from "@chat";
+import type { ActorPTR2e } from "@actor";
+import type { ChatMessagePTR2e } from "@chat";
 import { SlugField } from "@module/data/fields/slug-field.ts";
 
 abstract class DamageAppliedMessageSystem extends foundry.abstract.TypeDataModel {

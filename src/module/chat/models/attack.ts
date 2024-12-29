@@ -1,20 +1,22 @@
 import { ActorPTR2e } from "@actor";
 import AttackPTR2e from "@module/data/models/attack.ts";
 import { ChatMessagePTR2e } from "@chat";
-import { AccuracySuccessCategory, PokeballActionPTR2e, PTRCONSTS, SummonAttackPTR2e } from "@data";
+import type { AccuracySuccessCategory} from "@data";
+import { PokeballActionPTR2e, PTRCONSTS, SummonAttackPTR2e } from "@data";
 import { SlugField } from "@module/data/fields/slug-field.ts";
 import { AttackRoll } from "@system/rolls/attack-roll.ts";
-import { AccuracyCalc, DamageCalc } from "./data.ts";
+import type { AccuracyCalc, DamageCalc } from "./data.ts";
 import { CollectionField } from "@module/data/fields/collection-field.ts";
 import * as R from "remeda";
 import { PredicateField } from "@system/predication/schema-data-fields.ts";
-import { UserVisibility } from "@scripts/ui/user-visibility.ts";
-import { ModifierPTR2e } from "@module/effects/modifiers.ts";
+import type { UserVisibility } from "@scripts/ui/user-visibility.ts";
+import type { ModifierPTR2e } from "@module/effects/modifiers.ts";
 import { RollNote } from "@system/notes.ts";
-import { ActiveEffectPTR2e } from "@effects";
-import { ConsumablePTR2e, ItemPTR2e, ItemSystemsWithActions } from "@item";
-import ConsumableSystem from "@item/data/consumable.ts";
-import { CheckRoll } from "@system/rolls/check-roll.ts";
+import type { ActiveEffectPTR2e } from "@effects";
+import type { ConsumablePTR2e, ItemSystemsWithActions } from "@item";
+import { ItemPTR2e } from "@item";
+import type ConsumableSystem from "@item/data/consumable.ts";
+import type { CheckRoll } from "@system/rolls/check-roll.ts";
 
 abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
   declare parent: ChatMessagePTR2e<AttackMessageSystem>;

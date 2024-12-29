@@ -1,12 +1,13 @@
 import { ActorPTR2e } from "@actor";
-import { ItemPTR2e, ItemSourcePTR2e, ItemSystemPTR } from "@item";
-import { ActiveEffectSystem, EffectSourcePTR2e } from "@effects";
-import { ChangeModel, Trait } from "@data";
-import { ActiveEffectSchema } from "types/foundry/common/documents/active-effect.js";
-import { CombatPTR2e } from "@combat";
+import type { ItemSourcePTR2e, ItemSystemPTR } from "@item";
+import { ItemPTR2e } from "@item";
+import type { ActiveEffectSystem, EffectSourcePTR2e } from "@effects";
+import type { ChangeModel, Trait } from "@data";
+import type { ActiveEffectSchema } from "types/foundry/common/documents/active-effect.js";
+import type { CombatPTR2e } from "@combat";
 import { sluggify } from "@utils";
-import { RollOptionDomains } from "@module/data/roll-option-manager.ts";
-import { ItemGrantData } from "@item/data/data.ts";
+import type { RollOptionDomains } from "@module/data/roll-option-manager.ts";
+import type { ItemGrantData } from "@item/data/data.ts";
 import { processGrantDeletions } from "./changes/grant-item.ts";
 import { AbilitySystemModel } from "@item/data/index.ts";
 class ActiveEffectPTR2e<

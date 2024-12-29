@@ -1,11 +1,12 @@
-import { ItemPTR2e, MovePTR2e, SpeciesPTR2e } from "@item";
-import { DocumentSheetConfiguration, Tab } from "./document.ts";
-import { SpeciesSystemSource } from "@item/data/index.ts";
+import type { MovePTR2e, SpeciesPTR2e } from "@item";
+import { ItemPTR2e } from "@item";
+import type { DocumentSheetConfiguration, Tab } from "./document.ts";
+import type { SpeciesSystemSource } from "@item/data/index.ts";
 import { htmlQueryAll, sluggify } from "@utils";
 import { default as ItemSheetPTR2e } from "./base.ts";
 import * as R from "remeda";
-import { AbilityReference, AbilityReferenceSchema, EvolutionData } from "@item/data/species.ts";
-import SkillPTR2e from "@module/data/models/skill.ts";
+import type { AbilityReference, AbilityReferenceSchema, EvolutionData } from "@item/data/species.ts";
+import type SkillPTR2e from "@module/data/models/skill.ts";
 import { partialSkillToSkill } from "@scripts/config/skills.ts";
 import { ActiveEffectPTR2e } from "@effects";
 

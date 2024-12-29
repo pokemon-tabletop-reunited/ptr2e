@@ -1,6 +1,7 @@
-import { ActorPTR2e, AuraAppearanceData, AuraData, AuraEffectData } from "@actor";
+import type { ActorPTR2e, AuraAppearanceData, AuraData, AuraEffectData } from "@actor";
 import { userColorForActor } from "@actor/helpers.ts";
-import { ChangeModel, ChangeSchema } from "@data";
+import type { ChangeSchema } from "@data";
+import { ChangeModel } from "@data";
 import { DataUnionField } from "@module/data/fields/data-union-field.ts";
 import ResolvableValueField from "@module/data/fields/resolvable-value-field.ts";
 import { StrictArrayField, StrictBooleanField, StrictNumberField, StrictStringField } from "@module/data/fields/strict-primitive-fields.ts";

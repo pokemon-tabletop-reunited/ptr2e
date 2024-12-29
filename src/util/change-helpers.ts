@@ -1,13 +1,16 @@
-import { ActorPTR2e, ActorSynthetics, EffectRoll } from "@actor";
-import { ActionPTR2e, AttackPTR2e, ChangeModel } from "@data";
-import { ActiveEffectPTR2e, BracketedValue, EffectSourcePTR2e } from "@effects";
-import { ItemPTR2e, ItemSourcePTR2e } from "@item";
-import {
+import type { ActorSynthetics, EffectRoll } from "@actor";
+import { ActorPTR2e } from "@actor";
+import type { ActionPTR2e, AttackPTR2e, ChangeModel } from "@data";
+import type { BracketedValue, EffectSourcePTR2e } from "@effects";
+import { ActiveEffectPTR2e } from "@effects";
+import type { ItemSourcePTR2e } from "@item";
+import { ItemPTR2e } from "@item";
+import type {
   DeferredValueParams,
   ModifierAdjustment,
   ModifierPTR2e,
 } from "@module/effects/modifiers.ts";
-import { RollNote } from "@system/notes.ts";
+import type { RollNote } from "@system/notes.ts";
 import * as R from "remeda";
 
 /** Extracts a list of all cloned modifiers across all given keys in a single list. */

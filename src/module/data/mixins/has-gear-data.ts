@@ -1,5 +1,6 @@
-import { EquipmentData, PokemonType, PTRCONSTS } from "@data";
-import { TemplateConstructor } from "./data-template.ts";
+import type { PokemonType} from "@data";
+import { EquipmentData, PTRCONSTS } from "@data";
+import type { TemplateConstructor } from "./data-template.ts";
 import { getTypes } from "@scripts/config/effectiveness.ts";
 import { SlugField } from "../fields/slug-field.ts";
 

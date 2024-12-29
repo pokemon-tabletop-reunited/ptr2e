@@ -1,6 +1,7 @@
-import { ActorPTR2e } from "@actor";
-import ChangeModel from "../changes/change.ts";
-import ActiveEffectSystem, { ActiveEffectSystemSchema } from "../system.ts";
+import type { ActorPTR2e } from "@actor";
+import type ChangeModel from "../changes/change.ts";
+import type { ActiveEffectSystemSchema } from "../system.ts";
+import ActiveEffectSystem from "../system.ts";
 import { extractNotes } from "src/util/change-helpers.ts";
 import { RollNote } from "@system/notes.ts";
 

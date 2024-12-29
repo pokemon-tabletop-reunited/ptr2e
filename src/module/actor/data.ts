@@ -1,9 +1,9 @@
-import { AttackPTR2e, DistanceUnit, Trait, WeightUnit } from "@data";
-import { EffectSourcePTR2e } from "@effects";
-import AfflictionActiveEffectSystem from "@module/effects/data/affliction.ts";
-import { DeferredPromise, DeferredValue, DeferredValueParams, ModifierAdjustment, ModifierPTR2e } from "@module/effects/modifiers.ts";
-import { RollNote } from "@system/notes.ts";
-import { Predicate } from "@system/predication/predication.ts";
+import type { AttackPTR2e, DistanceUnit, Trait, WeightUnit } from "@data";
+import type { EffectSourcePTR2e } from "@effects";
+import type AfflictionActiveEffectSystem from "@module/effects/data/affliction.ts";
+import type { DeferredPromise, DeferredValue, DeferredValueParams, ModifierAdjustment, ModifierPTR2e } from "@module/effects/modifiers.ts";
+import type { RollNote } from "@system/notes.ts";
+import type { Predicate } from "@system/predication/predication.ts";
 
 type ModifierSynthetics = Record<"all" | "damage", DeferredModifier[]> & Record<string, DeferredModifier[] | undefined>;
 type ModifierAdjustmentSynthetics = { all: ModifierAdjustment[]; damage: ModifierAdjustment[] } & Record<

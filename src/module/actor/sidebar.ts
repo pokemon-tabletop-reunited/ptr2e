@@ -1,6 +1,6 @@
 import FolderPTR2e from "@module/folder/document.ts";
-import ActorPTR2e from "./base.ts";
-import ActorSystemPTR2e from "./data/system.ts";
+import type ActorPTR2e from "./base.ts";
+import type ActorSystemPTR2e from "./data/system.ts";
 import FolderConfigPTR2e from "@module/folder/sheet.ts";
 
 export default class ActorDirectoryPTR2e<

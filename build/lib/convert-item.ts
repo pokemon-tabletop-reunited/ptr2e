@@ -1,7 +1,8 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { PredicateStatement, sluggify, StatementValidator } from "./helpers.ts";
+import type { PredicateStatement} from "./helpers.ts";
+import { sluggify, StatementValidator } from "./helpers.ts";
 
 const categories = {
     "a-e": ["a", "b", "c", "d", "e"],

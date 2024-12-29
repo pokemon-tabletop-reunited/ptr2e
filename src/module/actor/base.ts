@@ -1,6 +1,6 @@
 /* eslint-disable no-fallthrough */
 import { TokenDocumentPTR2e } from "@module/canvas/token/document.ts";
-import {
+import type {
   ActorDimensions,
   ActorSynthetics,
   ActorSystemPTR2e,
@@ -9,32 +9,36 @@ import {
   HumanoidActorSystem,
   PokemonActorSystem,
 } from "@actor";
-import { ActiveEffectPTR2e, ActiveEffectSystem, EffectSourcePTR2e } from "@effects";
-import { TypeEffectiveness } from "@scripts/config/effectiveness.ts";
-import { ActionPTR2e, AttackPTR2e, PokemonType, PTRCONSTS, RollOptionChangeSystem, RollOptionManager, Trait } from "@data";
-import { ActorFlags } from "types/foundry/common/documents/actor.js";
+import type { ActiveEffectSystem, EffectSourcePTR2e } from "@effects";
+import { ActiveEffectPTR2e } from "@effects";
+import type { TypeEffectiveness } from "@scripts/config/effectiveness.ts";
+import type { ActionPTR2e, PokemonType, PTRCONSTS} from "@data";
+import { AttackPTR2e, RollOptionChangeSystem, RollOptionManager, Trait } from "@data";
+import type { ActorFlags } from "types/foundry/common/documents/actor.js";
 import type { RollOptions } from "@module/data/roll-option-manager.ts";
-import FolderPTR2e from "@module/folder/document.ts";
-import { CombatantPTR2e, CombatPTR2e } from "@combat";
-import AfflictionActiveEffectSystem from "@module/effects/data/affliction.ts";
+import type FolderPTR2e from "@module/folder/document.ts";
+import type { CombatantPTR2e, CombatPTR2e } from "@combat";
+import type AfflictionActiveEffectSystem from "@module/effects/data/affliction.ts";
 import { ChatMessagePTR2e } from "@chat";
-import { AbilityPTR2e, ItemPTR2e, ItemSystemPTR, ItemSystemsWithActions, PerkPTR2e } from "@item";
+import type { AbilityPTR2e, ItemSystemPTR, ItemSystemsWithActions, PerkPTR2e } from "@item";
+import { ItemPTR2e } from "@item";
 import { ActionsCollections } from "./actions.ts";
-import { CustomSkill } from "@module/data/models/skill.ts";
-import { BaseStatisticCheck, Statistic, StatisticCheck } from "@system/statistics/statistic.ts";
-import { CheckContext, CheckContextParams, RollContext, RollContextParams } from "@system/data.ts";
+import type { CustomSkill } from "@module/data/models/skill.ts";
+import type { BaseStatisticCheck, StatisticCheck } from "@system/statistics/statistic.ts";
+import { Statistic } from "@system/statistics/statistic.ts";
+import type { CheckContext, CheckContextParams, RollContext, RollContextParams } from "@system/data.ts";
 import { extractEffectRolls, extractEphemeralEffects, extractModifiers, extractTargetModifiers, processPreUpdateHooks } from "src/util/change-helpers.ts";
-import { TokenPTR2e } from "@module/canvas/token/object.ts";
+import type { TokenPTR2e } from "@module/canvas/token/object.ts";
 import * as R from "remeda";
 import { ModifierPTR2e } from "@module/effects/modifiers.ts";
 import { sluggify } from "@utils";
 import { preImportJSON } from "@module/data/doc-helper.ts";
 import { MigrationRunnerBase } from "@module/migration/runner/base.ts";
 import { MigrationList, MigrationRunner } from "@module/migration/index.ts";
-import MoveSystem from "@item/data/move.ts";
-import SpeciesSystem from "@item/data/species.ts";
-import { PickableThing } from "@module/apps/pick-a-thing-prompt.ts";
-import { ActionUUID } from "src/util/uuid.ts";
+import type MoveSystem from "@item/data/move.ts";
+import type SpeciesSystem from "@item/data/species.ts";
+import type { PickableThing } from "@module/apps/pick-a-thing-prompt.ts";
+import type { ActionUUID } from "src/util/uuid.ts";
 import { ActorSizePTR2e } from "./data/size.ts";
 import { auraAffectsActor, checkAreaEffects } from "./helpers.ts";
 

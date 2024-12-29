@@ -1,8 +1,8 @@
 import { EffectAreaSquare } from "@module/canvas/effect-area-square.ts";
-import BaseEffectSource from "types/foundry/client-esm/canvas/sources/base-effect-source.js";
-import { TokenPTR2e } from "../object.ts";
+import type BaseEffectSource from "types/foundry/client-esm/canvas/sources/base-effect-source.js";
+import type { TokenPTR2e } from "../object.ts";
 import { TokenDocumentPTR2e } from "../document.ts";
-import { Trait } from "@data";
+import type { Trait } from "@data";
 
 export function getAreaSquares(data: GetAreaSquaresParams): EffectAreaSquare[] {
   if (!canvas.ready) return [];

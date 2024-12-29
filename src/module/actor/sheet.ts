@@ -1,26 +1,30 @@
-import { AbilityPTR2e, ItemPTR2e, ItemSystemPTR, SpeciesPTR2e } from "@item";
+import type { AbilityPTR2e, ItemSystemPTR, SpeciesPTR2e } from "@item";
+import { ItemPTR2e } from "@item";
 import ActorPTR2e from "./base.ts";
 import { htmlQuery, htmlQueryAll, sluggify } from "@utils";
-import { Tab } from "@item/sheets/document.ts";
-import { ActorComponentKey, ActorComponents, ComponentPopout } from "./components/sheet.ts";
+import type { Tab } from "@item/sheets/document.ts";
+import type { ActorComponentKey} from "./components/sheet.ts";
+import { ActorComponents, ComponentPopout } from "./components/sheet.ts";
 import { EffectComponent } from "./components/effect-component.ts";
-import GearSystem from "@item/data/gear.ts";
-import WeaponSystem from "@item/data/weapon.ts";
-import ConsumableSystem from "@item/data/consumable.ts";
+import type GearSystem from "@item/data/gear.ts";
+import type WeaponSystem from "@item/data/weapon.ts";
+import type ConsumableSystem from "@item/data/consumable.ts";
 import Tagify from "@yaireo/tagify";
-import EquipmentSystem from "@item/data/equipment.ts";
-import ContainerSystem from "@item/data/container.ts";
+import type EquipmentSystem from "@item/data/equipment.ts";
+import type ContainerSystem from "@item/data/container.ts";
 import { KnownActionsApp } from "@module/apps/known-attacks.ts";
 import { RestApp } from "@module/apps/rest.ts";
+import type {
+  DocumentSheetConfigurationExpanded} from "@module/apps/appv2-expanded.ts";
 import {
-  ActorSheetV2Expanded,
-  DocumentSheetConfigurationExpanded,
+  ActorSheetV2Expanded
 } from "@module/apps/appv2-expanded.ts";
 import { ActionEditor } from "@module/apps/action-editor.ts";
-import SkillPTR2e from "@module/data/models/skill.ts";
+import type SkillPTR2e from "@module/data/models/skill.ts";
 import { SkillsComponent } from "./components/skills-component.ts";
 import { SkillsEditor } from "@module/apps/skills-editor.ts";
-import { AttackPTR2e, Trait } from "@data";
+import type { AttackPTR2e} from "@data";
+import { Trait } from "@data";
 import { PerksComponent } from "./components/perks-component.ts";
 import { AbilitiesComponent } from "./components/abilities-component.ts";
 import { StatsChart } from "./sheets/stats-chart.ts";
@@ -32,7 +36,7 @@ import { DataInspector } from "@module/apps/data-inspector/data-inspector.ts";
 import Clock from "@module/data/models/clock.ts";
 import ClockEditor from "@module/apps/clocks/clock-editor.ts";
 import Sortable from "sortablejs";
-import { ApplicationHeaderControlsEntry } from "types/foundry/common/applications/api.js";
+import type { ApplicationHeaderControlsEntry } from "types/foundry/common/applications/api.js";
 import PartySheetPTR2e from "@module/apps/party-sheet.ts";
 import { ToggleComponent } from "./components/toggle-component.ts";
 import { PerkWebApp } from "@module/apps/perk-web/perk-web-v2.ts";

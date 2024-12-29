@@ -1,4 +1,4 @@
-import { ActorPTR2e } from "@actor";
+import type { ActorPTR2e } from "@actor";
 import FlatModifierChangeSystem from "./flat-modifier.ts";
 
 export default class PercentileModifierSystem extends FlatModifierChangeSystem {

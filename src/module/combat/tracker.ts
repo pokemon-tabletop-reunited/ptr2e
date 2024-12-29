@@ -1,4 +1,4 @@
-import { CombatPTR2e, SummonCombatantSystem } from "@combat";
+import type { CombatPTR2e, SummonCombatantSystem } from "@combat";
 import { htmlQuery } from "@utils";
 
 class CombatTrackerPTR2e<TEncounter extends CombatPTR2e | null> extends CombatTracker<TEncounter> {

@@ -1,5 +1,5 @@
-import { SearchResult } from "minisearch";
-import { SortDirection } from "../data.ts";
+import type { SearchResult } from "minisearch";
+import type { SortDirection } from "../data.ts";
 
 type CheckboxOptions = Record<string, { label: string; selected: boolean }>;
 interface CheckboxData {

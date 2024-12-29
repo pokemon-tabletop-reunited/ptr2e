@@ -1,16 +1,18 @@
-import PokeballActionPTR2e from "@module/data/models/pokeball-action.ts";
-import { BaseStatisticCheck, CaptureStatisticRollParameters, RollOptionConfig, Statistic, StatisticRollParameters } from "./statistic.ts";
-import { ConsumablePTR2e } from "@item";
-import { ActorPTR2e } from "@actor";
-import { StatisticData } from "./data.ts";
-import { PokeballRollCallback, PokeballRollResults } from "@system/rolls/check-roll.ts";
-import { AttackCheckModifier, ModifierPTR2e, StatisticModifier } from "@module/effects/modifiers.ts";
+import type PokeballActionPTR2e from "@module/data/models/pokeball-action.ts";
+import type { BaseStatisticCheck, CaptureStatisticRollParameters, RollOptionConfig, StatisticRollParameters } from "./statistic.ts";
+import { Statistic } from "./statistic.ts";
+import type { ConsumablePTR2e } from "@item";
+import type { ActorPTR2e } from "@actor";
+import type { StatisticData } from "./data.ts";
+import type { PokeballRollCallback, PokeballRollResults } from "@system/rolls/check-roll.ts";
+import type { ModifierPTR2e} from "@module/effects/modifiers.ts";
+import { AttackCheckModifier, StatisticModifier } from "@module/effects/modifiers.ts";
 import * as R from "remeda";
 import { extractModifierAdjustments, extractModifiers, extractNotes } from "src/util/change-helpers.ts";
 import { CheckPTR2e } from "@system/check.ts";
-import { CaptureCheckRollContext } from "@system/rolls/data.ts";
-import { TokenPTR2e } from "@module/canvas/token/object.ts";
-import { ActionUUID } from "src/util/uuid.ts";
+import type { CaptureCheckRollContext } from "@system/rolls/data.ts";
+import type { TokenPTR2e } from "@module/canvas/token/object.ts";
+import type { ActionUUID } from "src/util/uuid.ts";
 
 type PokeballStatisticData = StatisticData &
   Required<Pick<StatisticData, "defferedValueParams" | "modifiers" | "domains" | "rollOptions">>;

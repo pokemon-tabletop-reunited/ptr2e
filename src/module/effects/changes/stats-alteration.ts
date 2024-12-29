@@ -1,4 +1,4 @@
-import { ActorPTR2e } from "@actor";
+import type { ActorPTR2e } from "@actor";
 import BasicChangeSystem from "./basic.ts";
 
 export default class StatsAlterationChangeSystem extends BasicChangeSystem {

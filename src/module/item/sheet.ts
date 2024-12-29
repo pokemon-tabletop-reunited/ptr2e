@@ -1,4 +1,4 @@
-import { ItemPTR2e } from "@item";
+import type { ItemPTR2e } from "@item";
 
 class ItemSheetPTR2e<TItem extends ItemPTR2e> extends ItemSheet<TItem, ItemSheetOptions> {
     

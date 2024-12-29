@@ -1,6 +1,8 @@
 import { ActorPTR2e } from "@actor";
-import { ItemPTR2e, ItemSystemsWithActions } from "@item";
-import { PTRCONSTS, ActionType, ActionCost, Delay, Priority, Trait } from "@data";
+import type { ItemSystemsWithActions } from "@item";
+import { ItemPTR2e } from "@item";
+import type { ActionType, ActionCost, Delay, Priority} from "@data";
+import { PTRCONSTS, Trait } from "@data";
 import { RangePTR2e } from "@data";
 import { CollectionField } from "../fields/collection-field.ts";
 import { SlugField } from "../fields/slug-field.ts";

@@ -1,7 +1,7 @@
-import { ActorPTR2e } from "@actor";
-import { ActiveEffectSystemSchema } from "../system.ts";
+import type { ActorPTR2e } from "@actor";
+import type { ActiveEffectSystemSchema } from "../system.ts";
 import AfflictionActiveEffectSystem from "./affliction.ts";
-import { ChangeModel } from "@data";
+import type { ChangeModel } from "@data";
 
 class SummonActiveEffectSystem extends AfflictionActiveEffectSystem {
   static override defineSchema() {

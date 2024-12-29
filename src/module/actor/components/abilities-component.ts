@@ -1,7 +1,7 @@
 import { htmlQueryAll } from "@utils";
 import { ActorComponent } from "./base.ts";
-import ActorPTR2e from "@actor/base.ts";
-import { AbilityPTR2e } from "@item";
+import type ActorPTR2e from "@actor/base.ts";
+import type { AbilityPTR2e } from "@item";
 
 class AbilitiesComponent extends ActorComponent {
     static override TEMPLATE = "systems/ptr2e/templates/actor/components/actor-abilities-component.hbs";

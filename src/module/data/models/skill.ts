@@ -1,4 +1,4 @@
-import { ActorSystemPTR2e } from "@actor";
+import type { ActorSystemPTR2e } from "@actor";
 import { SlugField } from "../fields/slug-field.ts";
 
 class SkillPTR2e extends foundry.abstract.DataModel {

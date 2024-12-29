@@ -1,9 +1,11 @@
-import { DocumentSheetConfiguration, DocumentSheetV2, Tab } from "@item/sheets/document.ts";
+import type { DocumentSheetConfiguration, Tab } from "@item/sheets/document.ts";
+import { DocumentSheetV2 } from "@item/sheets/document.ts";
 import ActiveEffectPTR2e from "./document.ts";
-import { CHANGE_FORMS, ChangeForm, ChangeFormOptions } from "./changes/sheet/index.ts";
+import type { ChangeFormOptions } from "./changes/sheet/index.ts";
+import { CHANGE_FORMS, ChangeForm } from "./changes/sheet/index.ts";
 import * as R from "remeda";
 import { htmlQuery, htmlQueryAll, sluggify, SORTABLE_BASE_OPTIONS } from "@utils";
-import ChangeModel from "./changes/change.ts";
+import type ChangeModel from "./changes/change.ts";
 import { BasicChangeSystem, ChangeModelTypes, Trait } from "@data";
 import { CodeMirror } from "./codemirror.ts";
 import Sortable from "sortablejs";

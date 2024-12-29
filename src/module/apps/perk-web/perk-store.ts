@@ -1,6 +1,7 @@
-import { ItemPTR2e, PerkPTR2e, SpeciesPTR2e } from "@item";
+import type { PerkPTR2e, SpeciesPTR2e } from "@item";
+import { ItemPTR2e } from "@item";
 import PerkGraph from "./perk-graph.ts";
-import { ActorPTR2e } from "@actor";
+import type { ActorPTR2e } from "@actor";
 import { SummonStatistic } from "@system/statistics/summon.ts";
 import { Predicate } from "@system/predication/predication.ts";
 

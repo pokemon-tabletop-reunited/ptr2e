@@ -1,6 +1,7 @@
-import { ActionPTR2e, ActionType, AttackPTR2e, PTRCONSTS } from "@data";
+import type { ActionType, AttackPTR2e} from "@data";
+import { ActionPTR2e, PTRCONSTS } from "@data";
 import ActorPTR2e from "./base.ts";
-import { ItemPTR2e, ItemSystemsWithActions } from "@item";
+import type { ItemPTR2e, ItemSystemsWithActions } from "@item";
 
 export class ActionsCollections extends Collection<ActionPTR2e> {
   parent: ActorPTR2e | ItemPTR2e;
