@@ -11,11 +11,11 @@ import type FolderPTR2e from "@module/folder/document.ts";
 import natureToStatArray from "@scripts/config/natures.ts";
 import type { EvolutionData} from "./species.ts";
 import type SpeciesSystem from "./species.ts";
-import { type LevelUpMoveSchema } from "./species.ts";
 import { ImageResolver, NORMINV, sluggify } from "@utils";
 import type { TokenDocumentPTR2e } from "@module/canvas/token/document.ts";
 import { getInitialSkillList, partialSkillToSkill } from "@scripts/config/skills.ts";
 import { type SkillSchema } from "@module/data/models/skill.ts";
+import type { SpeciesPTR2e } from "@item";
 
 const blueprintSchema = {
   id: new foundry.data.fields.DocumentIdField({ initial: foundry.utils.randomID(), required: true, nullable: false }),
@@ -375,6 +375,7 @@ export default abstract class BlueprintSystem extends HasEmbed(HasMigrations(fou
                   return gender === method.gender;
                 }
               }
+              return false;
             }
 
             return andCases.length && orCases.length

@@ -1,5 +1,5 @@
 import { ActorPTR2e } from "@actor";
-import type { ItemSourcePTR2e, ItemSystemsWithActions } from "@item";
+import type { ItemSystemPTR, ItemSystemsWithActions } from "@item";
 import type { ActionPTR2e, EquipmentData, Trait } from "@data";
 import { RollOptionManager } from "@data";
 import { ActiveEffectPTR2e, type EffectSourcePTR2e } from "@effects";
@@ -230,8 +230,8 @@ class ItemPTR2e extends Item {
       }
     }
 
-    async function processSources(sources: ItemSourcePTR2e[]) {
-      const outputItemSources: ItemSourcePTR2e[] = [];
+    async function processSources(sources: ItemPTR2e['_source'][]) {
+      const outputItemSources: ItemPTR2e['_source'][] = [];
 
       for (const source of sources) {
         if (!source.effects?.length) continue;
@@ -266,7 +266,7 @@ class ItemPTR2e extends Item {
       return outputItemSources;
     }
 
-    const outputItemSources = await processSources(sources as ItemSourcePTR2e[]);
+    const outputItemSources = await processSources(sources as ItemPTR2e['_source'][]);
 
     if(!operation) operation = {};
 
@@ -414,9 +414,7 @@ interface ItemPTR2e extends Item {
 
   _actions: ActionsCollections;
 
-  system: Item['system'] & {
-    slug: string;
-  }
+  system: ItemSystemPTR;
 
   rollOptions: RollOptionManager<this>;
 }
