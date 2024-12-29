@@ -1,8 +1,6 @@
 import { HasBase, HasEmbed } from "@module/data/index.ts";
 import type { BaseItemSourcePTR2e, ItemSystemSource } from "./system.ts";
 import type { HasBaseSchema } from "@module/data/mixins/has-base.ts";
-import type { SchemaField } from "node_modules/fvtt-types/src/foundry/common/data/fields.d.mts";
-import type Document from "node_modules/fvtt-types/src/foundry/common/abstract/document.d.mts";
 
 const abilitySchema = {
   slot: new foundry.data.fields.NumberField({
@@ -47,7 +45,7 @@ export default class AbilitySystem extends HasEmbed(HasBase(foundry.abstract.Typ
   }
 
   override prepareDerivedData(): void {
-    if (this.free || this.slot !== null) {
+    if (this.free || this.slot !== null) { 
       //this.parent.rollOptions.addOption("item", `${this.parent.type}:${this.parent.slug}:active`);
     }
 
@@ -55,7 +53,7 @@ export default class AbilitySystem extends HasEmbed(HasBase(foundry.abstract.Typ
   }
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  override async _preCreate(data: this['parent']['_source'], options: foundry.abstract.Document.PreCreateOptions<any>, user: User): Promise<boolean | void> {
+  override async _preCreate(data: foundry.abstract.TypeDataModel.ParentAssignmentType<AbilitySchema, Item>, options: foundry.abstract.Document.PreCreateOptions<any>, user: User): Promise<boolean | void> {
     const result = await super._preCreate(data, options, user);
     if (result === false) return false;
 
@@ -66,15 +64,6 @@ export default class AbilitySystem extends HasEmbed(HasBase(foundry.abstract.Typ
     }
   }
 }
-
-// export default interface AbilitySystem extends foundry.data.fields.SchemaField.InitializedType<AbilitySchema> { 
-//   container: ContainerPTR2e | null;
-//   actions: Collection<ActionPTR2e>;
-
-//   suppress?: boolean;
-
-//   _source: foundry.data.fields.SchemaField.PersistedType<AbilitySchema>;
-// }
 
 export type AbilitySource = BaseItemSourcePTR2e<"ability", AbilitySystemSource>;
 

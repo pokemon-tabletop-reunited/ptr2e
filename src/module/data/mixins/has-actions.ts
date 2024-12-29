@@ -12,7 +12,7 @@ const actionsSchema = {
    * This is a record of actions that the item has, keyed by the action's slug.
    * @see {@link ActionPTR2e}
    */
-  actions: new CollectionField( //@ts-expect-error - Options field is not required.
+  actions: new CollectionField(
     new foundry.data.fields.TypedSchemaField(ActionModelTypes()),
     'slug'
   )

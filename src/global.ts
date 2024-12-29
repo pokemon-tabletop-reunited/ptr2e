@@ -21,6 +21,9 @@ import { TutorListApp } from "@module/apps/tutor-list.ts";
 import GithubManager from "@module/apps/github.ts";
 import { ExpTrackerSettings } from "@system/exp-tracker-model.ts";
 import type { HasBaseSchema } from "@module/data/mixins/has-base.ts";
+import type { ItemFlagsPTR2e } from "@item/data/system.ts";
+import type AbilitySystem from "@item/data/ability.ts";
+import type { ActiveEffectPTR2e } from "@effects";
 
 declare global {
   // interface ConfigPTR2e extends ConfiguredConfig {
@@ -123,15 +126,12 @@ declare global {
   interface DocumentClassConfig {
     Actor: typeof ActorPTR2e;
     Item: typeof ItemPTR2e;
+    ActiveEffect: typeof ActiveEffectPTR2e;
   }
 
   interface DataModelConfig {
-    Actor: {
-      "humanoid": object
-      "pokemon": object
-    }
     Item: {
-      "ability": object, 
+      "ability": typeof AbilitySystem, 
       "blueprint": object,
       "consumable": object, 
       "container": object, 
@@ -144,6 +144,10 @@ declare global {
       "ptu-item": object,
       "weapon": object,
       "summon": object
+    },
+    Actor: {
+      "humanoid": object
+      "pokemon": object
     },
     ActiveEffect: {
       "affliction": object,
@@ -170,5 +174,7 @@ declare global {
     Actions: object;
   }
 
-  
+  interface FlagConfig {
+    Item: ItemFlagsPTR2e;
+  }
 }

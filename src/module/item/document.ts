@@ -11,6 +11,7 @@ import { MigrationRunnerBase } from "@module/migration/runner/base.ts";
 import { processGrantDeletions } from "@module/effects/changes/grant-item.ts";
 import type { AnyDocument, DropData, FromDropDataOptions } from "node_modules/fvtt-types/src/foundry/client/data/abstract/client-document.d.mts";
 import type { InexactPartial } from "fvtt-types/utils";
+import AbilitySystem from "./data/ability.ts";
 
 /**
  * @extends {PTRItemData}
@@ -47,11 +48,11 @@ class ItemPTR2e extends Item {
   // }
 
   get slug() {
-    return this.system.slug;
+    return 'slug' in this.system ? this.system.slug : "";
   }
 
   get traits(): Collection<Trait> | null {
-    return "traits" in this.system ? this.system.traits : null;
+    return "traits" in this.system ? this.system.traits as Collection<Trait> : null;
   }
 
   getRollOptions(prefix = this.type, { includeGranter = true } = {}): string[] {
@@ -409,7 +410,6 @@ class ItemPTR2e extends Item {
 
 interface ItemPTR2e extends Item {
   constructor: typeof ItemPTR2e;
-  // flags: ItemFlagsPTR2e;
   // readonly _source: foundry.documents.ItemSource<string, TSystem>;
 
   _actions: ActionsCollections;
