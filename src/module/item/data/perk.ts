@@ -339,6 +339,8 @@ export default abstract class PerkSystem extends HasEmbed(
       source.nodes = [source.node];
     }
 
+    source.nodes[0].tier = null
+
     return super.migrateData(source);
   }
 }

@@ -4,7 +4,7 @@ import type * as data from "./data/index.ts";
 import type { ActorPTR2e } from "@actor";
 
 // Items
-type AbilityPTR2e<TParent extends ActorPTR2e | null = ActorPTR2e | null> = ItemPTR2e<data.AbilitySystemModel, TParent>;
+type AbilityPTR2e = ItemPTR2e & {system : data.AbilitySystemModel};
 type BlueprintPTR2e<TParent extends ActorPTR2e | null = ActorPTR2e | null> = ItemPTR2e<data.BlueprintSystemModel, TParent>;
 type ConsumablePTR2e<TParent extends ActorPTR2e | null = ActorPTR2e | null> = ItemPTR2e<data.ConsumableSystemModel, TParent>;
 type ContainerPTR2e<TParent extends ActorPTR2e | null = ActorPTR2e | null> = ItemPTR2e<data.ContainerSystemModel, TParent>;

@@ -132,9 +132,9 @@ declare global {
   }
 
   interface DocumentClassConfig {
-    Actor: typeof ActorPTR2e;
+    // Actor: typeof ActorPTR2e;
     Item: typeof ItemPTR2e;
-    ActiveEffect: typeof ActiveEffectPTR2e;
+    // ActiveEffect: typeof ActiveEffectPTR2e;
   }
 
   interface DataModelConfig {
