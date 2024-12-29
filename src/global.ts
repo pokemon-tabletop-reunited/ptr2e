@@ -21,9 +21,10 @@ import { TutorListApp } from "@module/apps/tutor-list.ts";
 import GithubManager from "@module/apps/github.ts";
 import { ExpTrackerSettings } from "@system/exp-tracker-model.ts";
 import type { HasBaseSchema } from "@module/data/mixins/has-base.ts";
-import type { ItemFlagsPTR2e } from "@item/data/system.ts";
+import type { ItemFlagsPTR2e } from "@item/data/data.ts";
 import type AbilitySystem from "@item/data/ability.ts";
 import type { ActiveEffectPTR2e } from "@effects";
+import type PerkSystem from "@item/data/perk.ts";
 
 declare global {
   // interface ConfigPTR2e extends ConfiguredConfig {
@@ -117,6 +118,10 @@ declare global {
     };
   }
 
+  interface CONFIG {
+    PTR: typeof PTRCONFIG;
+  }
+
   interface AssumeHookRan {
     init: never;
     setup: never;
@@ -136,10 +141,10 @@ declare global {
       "consumable": object, 
       "container": object, 
       "effect": object,
-      "equipment": object, 
+      "equipment": object,
       "gear": object, 
       "move": object, 
-      "perk": object, 
+      "perk": typeof PerkSystem, 
       "species": object,
       "ptu-item": object,
       "weapon": object,
@@ -177,4 +182,7 @@ declare global {
   interface FlagConfig {
     Item: ItemFlagsPTR2e;
   }
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  type ConstructorOf<T> = new (...args: any[]) => T;
 }

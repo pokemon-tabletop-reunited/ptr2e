@@ -5,7 +5,7 @@ import type { DataField, StringField } from "node_modules/fvtt-types/src/foundry
 
 /** A sluggified string field */
 class SlugField<
-  Options extends SlugFieldOptions = Omit<StringField.DefaultOptions, 'required'> & { required: true },
+  Options extends SlugFieldOptions = Omit<StringField.DefaultOptions, 'required'> & { required: true},
   AssignmentType = StringField.AssignmentType<Options>,
   InitializedType = StringField.InitializedType<Options>,
   PersistedType extends string | null | undefined = StringField.InitializedType<Options>
@@ -28,7 +28,7 @@ class SlugField<
   }
 }
 
-interface SlugFieldOptions extends StringFieldOptions {
+interface SlugFieldOptions extends StringField.Options {
   camel?: SlugCamel;
 }
 

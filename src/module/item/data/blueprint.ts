@@ -1,6 +1,5 @@
 import { AttackPTR2e, HasEmbed, HasMigrations } from "@data";
-import { MigrationSchema } from "@module/data/mixins/has-migrations.ts";
-import { BaseItemSourcePTR2e } from "./system.ts";
+import type { MigrationSchema } from "@module/data/mixins/has-migrations.ts";
 import { CollectionField } from "@module/data/fields/collection-field.ts";
 import { Blueprint } from "@module/data/models/blueprint.ts";
 import { ItemPTR2e } from "@item/document.ts";
@@ -9,14 +8,20 @@ import { ActorPTR2e } from "@actor";
 import { Progress } from "src/util/progress.ts";
 import FolderPTR2e from "@module/folder/document.ts";
 import natureToStatArray from "@scripts/config/natures.ts";
-import SpeciesSystem, { EvolutionData, LevelUpMoveSchema } from "./species.ts";
-import { AbilityPTR2e, MovePTR2e, SpeciesPTR2e } from "@item";
+import SpeciesSystem, { EvolutionData, type LevelUpMoveSchema } from "./species.ts";
 import { ImageResolver, NORMINV, sluggify } from "@utils";
 import { TokenDocumentPTR2e } from "@module/canvas/token/document.ts";
 import { getInitialSkillList, partialSkillToSkill } from "@scripts/config/skills.ts";
-import { SkillSchema } from "@module/data/models/skill.ts";
+import { type SkillSchema } from "@module/data/models/skill.ts";
 
-export default abstract class BlueprintSystem extends HasEmbed(HasMigrations(foundry.abstract.TypeDataModel), "blueprint") {
+const blueprintSchema = {
+  id: new foundry.data.fields.DocumentIdField({ initial: foundry.utils.randomID(), required: true, nullable: false }),
+  blueprints: new CollectionField(new foundry.data.fields.EmbeddedDataField(Blueprint), "id"),
+}
+
+export type BlueprintItemSchema = typeof blueprintSchema & MigrationSchema;
+
+export default abstract class BlueprintSystem extends HasEmbed(HasMigrations(foundry.abstract.TypeDataModel<BlueprintItemSchema, ItemPTR2e>), "blueprint") {
   /**
    * All items in the system have the following properties, but since blueprints do not make use of them
    * they are left as null / empty strings.
@@ -61,12 +66,10 @@ export default abstract class BlueprintSystem extends HasEmbed(HasMigrations(fou
     }
   } as const;
 
-  static override defineSchema(): BlueprintSchema {
-    const fields = foundry.data.fields;
+  static override defineSchema(): BlueprintItemSchema {
     return {
       ...super.defineSchema() as MigrationSchema,
-      id: new fields.DocumentIdField({ initial: foundry.utils.randomID(), required: true, nullable: false }),
-      blueprints: new CollectionField(new fields.EmbeddedDataField(Blueprint), "id"),
+      ...blueprintSchema
     }
   }
 
@@ -75,7 +78,7 @@ export default abstract class BlueprintSystem extends HasEmbed(HasMigrations(fou
       throw new Error("Cannot update children without an id");
     }
 
-    const children = this.toObject().blueprints;
+    const children = this.toObject().blueprints as Blueprint['_source'][];
     const map = new Map(children.map(c => [c.id, c]));
     for (const update of updates) {
       const child = map.get(update._id as string);
@@ -89,9 +92,9 @@ export default abstract class BlueprintSystem extends HasEmbed(HasMigrations(fou
     return this.parent.update({ "system.blueprints": children });
   }
 
-  async createChildren(children: (RollTable | ItemPTR2e<BlueprintSystem | SpeciesSystemModel> | ActorPTR2e)[]) {
-    const existing = this.toObject().blueprints;
-    const newChildren = children.flatMap((c: RollTable | ItemPTR2e<BlueprintSystem | SpeciesSystemModel> | ActorPTR2e): Partial<Blueprint['_source']>[] => {
+  async createChildren(children: (RollTable | ItemPTR2e | ActorPTR2e)[]) {
+    const existing = this.toObject().blueprints as Blueprint['_source'][];
+    const newChildren = children.flatMap((c: RollTable | ItemPTR2e | ActorPTR2e): Partial<Blueprint['_source']>[] => {
       if (c instanceof ItemPTR2e && c.system instanceof BlueprintSystem) {
         return c.system.blueprints.map(b => ({
           ...b.toObject(),
@@ -108,7 +111,7 @@ export default abstract class BlueprintSystem extends HasEmbed(HasMigrations(fou
   }
 
   async deleteChildren(ids: string[]) {
-    const children = this.toObject().blueprints.filter(c => !ids.includes(c.id as string));
+    const children = (this.toObject().blueprints as Blueprint['_source'][]).filter(c => !ids.includes(c.id as string));
     return this.parent.update({ "system.blueprints": children });
   }
 
@@ -750,19 +753,4 @@ export default abstract class BlueprintSystem extends HasEmbed(HasMigrations(fou
 
 function randomFromList<T>(list: T[]): T {
   return list[Math.floor(Math.random() * list.length)];
-}
-
-export default interface BlueprintSystem extends ModelPropsFromSchema<BlueprintSchema> {
-  _source: SourceFromSchema<BlueprintSchema>;
-}
-
-interface BlueprintSchema extends foundry.data.fields.DataSchema, MigrationSchema {
-  id: foundry.data.fields.DocumentIdField<string, true, false, true>;
-  blueprints: CollectionField<foundry.data.fields.EmbeddedDataField<Blueprint>>;
-}
-
-export type BlueprintSource = BaseItemSourcePTR2e<"blueprint", BlueprintSystemSource>;
-
-interface BlueprintSystemSource {
-  slug: string;
 }

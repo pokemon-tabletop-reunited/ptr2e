@@ -4,7 +4,7 @@ import { BrowserTabs, CompendiumBrowserSettings, PackInfo, TabData, TabName } fr
 import * as browserTabs from "./tabs/index.ts";
 import { PackLoader } from "./loader.ts";
 import { Tab } from "@item/sheets/document.ts";
-import { ItemType } from "@item/data/system.ts";
+import { ItemType } from "@item/data/data.ts";
 import * as R from "remeda";
 import { BrowserFilter, CheckboxData, RangesInputData, RenderResultListOptions, SelectData, SliderData } from "./tabs/data.ts";
 import Tagify from "@yaireo/tagify";

@@ -2,7 +2,7 @@ import { PredicateField } from "@system/predication/schema-data-fields.ts";
 import ChangeModel from "./changes/change.ts";
 import ActiveEffectSystem from "./system.ts";
 
-type RuleElementSource = {
+interface RuleElementSource {
     key?: JSONValue;
     value?: JSONValue;
     label?: JSONValue;
@@ -13,7 +13,7 @@ type RuleElementSource = {
     requiresInvestment?: JSONValue;
     requiresEquipped?: JSONValue;
     removeUponCreate?: JSONValue;
-};
+}
 
 type RuleValue = string | number | boolean | object | BracketedValue | null;
 
@@ -28,7 +28,7 @@ interface BracketedValue<T extends object | number | string = object | number | 
     brackets: Bracket<T>[];
 }
 
-type RuleElementSchema = {
+interface RuleElementSchema {
     // key: StringField<string, string, true, false, false>;
     // /** An identifying slug for the rule element: its significance and restrictions are determined per RE type */
     // slug: SlugField;
@@ -44,7 +44,7 @@ type RuleElementSchema = {
     // requiresEquipped: BooleanField<boolean, boolean, false, true, false>;
     // /** Whether the rule element requires that the parent item (if physical) be invested */
     // requiresInvestment: BooleanField<boolean, boolean, false, true, false>;
-};
+}
 
 type ModelPropsFromRESchema<TSchema extends RuleElementSchema> = Omit<
     ModelPropsFromSchema<TSchema>,

@@ -9,7 +9,7 @@ type ActorSourcePTR2e = ActorPTR2e['_source'];
 export class MockActor {
     _source: ActorSourcePTR2e;
 
-    readonly items: MockCollection<ItemPTR2e<ItemSystemPTR, ActorPTR2e>> = new MockCollection();
+    readonly items = new MockCollection<ItemPTR2e<ItemSystemPTR, ActorPTR2e>>();
 
     constructor(data: ActorSourcePTR2e, public options: DocumentConstructionContext<null> = {}) {
         this._source = foundry.utils.duplicate(data);

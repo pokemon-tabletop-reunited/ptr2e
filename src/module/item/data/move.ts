@@ -1,55 +1,49 @@
-import { ContainerPTR2e, MovePTR2e } from "@item";
 import { ActionPTR2e, AttackPTR2e, HasBase, HasEmbed, Trait } from "@module/data/index.ts";
 import { sluggify } from "@utils";
-import { BaseItemSourcePTR2e, ItemSystemSource } from "./system.ts";
-import { HasBaseSchema } from "@module/data/mixins/has-base.ts";
 import SystemTraitsCollection from "@module/data/system-traits-collection.ts";
+import type { DeepPartial } from "fvtt-types/utils";
+import type { ItemPTR2e } from "@item/document.ts";
+import type { HasBaseSchema } from "@module/data/mixins/has-base.ts";
+
+const moveSchema = {
+  grade: new foundry.data.fields.StringField({
+    required: true,
+    initial: "E",
+    choices: [
+      "E",
+      "D",
+      "C",
+      "B",
+      "A",
+      "S",
+    ].reduce((acc, grade) => ({ ...acc, [grade]: grade }), {}),
+  }),
+}
+
+export type MoveSchema = typeof moveSchema & HasBaseSchema;
 
 /**
  * @category Item Data Models
  */
 export default abstract class MoveSystem extends HasEmbed(
-  HasBase(foundry.abstract.TypeDataModel),
+  HasBase(foundry.abstract.TypeDataModel<MoveSchema, ItemPTR2e>),
   "move"
 ) {
   /**
    * @internal
    */
-  declare parent: MovePTR2e;
+  // declare parent: MovePTR2e;
 
-  static LOCALIZATION_PREFIXES = ["PTR2E", "PTR2E.MoveSystem"];
+  static override LOCALIZATION_PREFIXES = ["PTR2E", "PTR2E.MoveSystem"];
 
-  static override defineSchema(): MoveSystemSchema {
-    const fields = foundry.data.fields;
+  static override defineSchema(): MoveSchema {
     return {
       ...super.defineSchema() as HasBaseSchema,
-
-      grade: new fields.StringField({
-        required: true,
-        initial: "E",
-        choices: [
-          "E",
-          "E+",
-          "D-",
-          "D",
-          "D+",
-          "C-",
-          "C",
-          "C+",
-          "B-",
-          "B",
-          "B+",
-          "A-",
-          "A",
-          "A+",
-          "S-",
-          "S",
-          "S+",
-        ].reduce((acc, grade) => ({ ...acc, [grade]: grade }), {}),
-      }),
+      ...moveSchema,
     };
   }
 
+  //@ts-expect-error - Overriding a property as a getter
   override get description(): string {
     return this.attack.description ?? this._source.description ?? "";
   }
@@ -58,6 +52,7 @@ export default abstract class MoveSystem extends HasEmbed(
   override set description(_value: string) {
   }
 
+  //@ts-expect-error - Overriding a property as a getter
   override get traits(): SystemTraitsCollection<Trait> {
     return this.attack.traits;
   }
@@ -83,8 +78,8 @@ export default abstract class MoveSystem extends HasEmbed(
   }
 
   override async toEmbed(
-    _config: foundry.abstract.DocumentHTMLEmbedConfig,
-    options: EnrichmentOptions = {}
+    _config: TextEditor.DocumentHTMLEmbedConfig, 
+    options: TextEditor.EnrichmentOptions = {}
   ): Promise<HTMLElement | HTMLCollection | null> {
     const attack = this.attack;
     const variants = this.actions.contents.filter((a) => a.slug !== attack.slug);
@@ -103,11 +98,8 @@ export default abstract class MoveSystem extends HasEmbed(
     });
   }
 
-  override async _preCreate(
-    data: this["parent"]["_source"],
-    options: DocumentModificationContext<this["parent"]["parent"]>,
-    user: User
-  ): Promise<boolean | void> {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      override async _preCreate(data: foundry.abstract.TypeDataModel.ParentAssignmentType<MoveSchema, ItemPTR2e>, options: foundry.abstract.Document.PreCreateOptions<any>, user: User): Promise<boolean | void> {
     if (data.system === undefined) {
       //@ts-expect-error - Actions on source is not a collection but an array
       data.system = { actions: [] };
@@ -151,9 +143,10 @@ export default abstract class MoveSystem extends HasEmbed(
   }
 
   override async _preUpdate(
-    changed: DeepPartial<this["parent"]["_source"]>,
-    options: DocumentUpdateContext<this["parent"]["parent"]>,
-    user: User
+    changed: DeepPartial<foundry.abstract.TypeDataModel.ParentAssignmentType<MoveSchema, ItemPTR2e>>,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    options: foundry.abstract.Document.PreUpdateOptions<any>,
+    user: string
   ): Promise<boolean | void> {
     if (changed.system?.actions !== undefined) {
       if (Array.isArray(changed.system.actions)) {
@@ -206,6 +199,7 @@ export default abstract class MoveSystem extends HasEmbed(
     }
     if (changed.system) {
       changed.system.description = "";
+      //@ts-expect-error - Traits on source objects are not a collection but an array
       changed.system.traits = [];
     }
 
@@ -226,18 +220,3 @@ export default abstract class MoveSystem extends HasEmbed(
     return attack;
   }
 }
-
-export default interface MoveSystem extends ModelPropsFromSchema<MoveSystemSchema> {
-  container: ContainerPTR2e | null;
-  actions: Collection<ActionPTR2e>;
-
-  _source: SourceFromSchema<MoveSystemSchema>;
-}
-
-interface MoveSystemSchema extends foundry.data.fields.DataSchema, HasBaseSchema {
-  grade: foundry.data.fields.StringField<string, string, true, false, true>;
-}
-
-export type MoveSource = BaseItemSourcePTR2e<"move", MoveSystemSource>;
-
-interface MoveSystemSource extends Required<ItemSystemSource> { }

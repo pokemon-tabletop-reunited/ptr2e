@@ -10,7 +10,7 @@ import { ItemPTR2e, ItemSourcePTR2e, ItemSystemPTR } from "@item";
 import { isObject, sluggify, tupleHasValue } from "@utils";
 import ActiveEffectPTR2e from "../document.ts";
 import { EffectSourcePTR2e } from "@effects";
-import { ItemGrantDeleteAction } from "@item/data/system.ts";
+import { ItemGrantDeleteAction } from "@item/data/data.ts";
 import * as R from "remeda";
 import { UUIDUtils } from "src/util/uuid.ts";
 

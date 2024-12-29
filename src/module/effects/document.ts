@@ -6,7 +6,7 @@ import { ActiveEffectSchema } from "types/foundry/common/documents/active-effect
 import { CombatPTR2e } from "@combat";
 import { sluggify } from "@utils";
 import { RollOptionDomains } from "@module/data/roll-option-manager.ts";
-import { ItemGrantData } from "@item/data/system.ts";
+import { ItemGrantData } from "@item/data/data.ts";
 import { processGrantDeletions } from "./changes/grant-item.ts";
 import { AbilitySystemModel } from "@item/data/index.ts";
 class ActiveEffectPTR2e<

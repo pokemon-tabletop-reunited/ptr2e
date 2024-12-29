@@ -1,7 +1,7 @@
 import { ItemPTR2e, PerkPTR2e, SpeciesPTR2e } from "@item";
 import { HasDescription, HasEmbed, HasMigrations, HasSlug, HasTraits, PTRCONSTS, Trait } from "@module/data/index.ts";
 import { PokemonType } from "@data";
-import { BaseItemSourcePTR2e, ItemSystemSource } from "./system.ts";
+import { BaseItemSourcePTR2e, ItemSystemSource } from "./data.ts";
 import { getTypes } from "@scripts/config/effectiveness.ts";
 import { SlugField } from "@module/data/fields/slug-field.ts";
 import { DataSchema, SourcePropFromDataField } from "types/foundry/common/data/fields.js";

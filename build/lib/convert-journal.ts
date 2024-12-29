@@ -6,7 +6,7 @@ import showdown from "showdown";
  * @param {number} length    The length of the random string to generate, which must be at most 16384.
  * @return {string}          A string containing random letters (A-Z, a-z) and numbers (0-9).
  */
-export function randomID(length: number = 16): string {
+export function randomID(length = 16): string {
     const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
     const cutoff = 0x100000000 - (0x100000000 % chars.length);
     const random = new Uint32Array(length);
@@ -23,7 +23,7 @@ class JournalConverter {
     static readonly extension = ".md" as const;
 
     readonly root: Page;
-    pages: Map<string, Page> = new Map();
+    pages = new Map<string, Page>();
 
     get entries(): JournalEntryPage<JournalEntry>["_source"][] {
         function toData(page: Page, depth = 1): JournalEntryPage<JournalEntry>["_source"] {
@@ -234,7 +234,7 @@ class Page {
     }
 
     metadata: Record<string, string> = {};
-    pages: Map<string, Page> = new Map();
+    pages = new Map<string, Page>();
 
     constructor({
         title,
@@ -254,8 +254,8 @@ class Page {
     }
 
     static fromPath(path: string) {
-        let title: string = "";
-        let metadata: Record<string, string> = {};
+        let title = "";
+        const metadata: Record<string, string> = {};
 
         const content = fs.readFileSync(path, "utf8").trim();
 
@@ -289,7 +289,7 @@ class Page {
     }
 }
 
-type MetaData = {
+interface MetaData {
     title: string;
     description: string;
     published: string;
@@ -299,6 +299,6 @@ type MetaData = {
     dateCreated: string;
     slug: string;
     parent?: string;
-};
+}
 
 export { JournalConverter, Page };

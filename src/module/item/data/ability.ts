@@ -1,6 +1,6 @@
 import { HasBase, HasEmbed } from "@module/data/index.ts";
-import type { BaseItemSourcePTR2e, ItemSystemSource } from "./system.ts";
 import type { HasBaseSchema } from "@module/data/mixins/has-base.ts";
+import type { ItemPTR2e } from "@item/document.ts";
 
 const abilitySchema = {
   slot: new foundry.data.fields.NumberField({
@@ -25,7 +25,7 @@ export type AbilitySchema = typeof abilitySchema & HasBaseSchema;
  * @extends {HasBase}
  * @extends {foundry.abstract.TypeDataModel}
  */
-export default class AbilitySystem extends HasEmbed(HasBase(foundry.abstract.TypeDataModel<AbilitySchema, Item>), "ability") {
+export default class AbilitySystem extends HasEmbed(HasBase(foundry.abstract.TypeDataModel<AbilitySchema, ItemPTR2e>), "ability") {
   /**
    * @internal
    */
@@ -53,7 +53,7 @@ export default class AbilitySystem extends HasEmbed(HasBase(foundry.abstract.Typ
   }
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  override async _preCreate(data: foundry.abstract.TypeDataModel.ParentAssignmentType<AbilitySchema, Item>, options: foundry.abstract.Document.PreCreateOptions<any>, user: User): Promise<boolean | void> {
+  override async _preCreate(data: foundry.abstract.TypeDataModel.ParentAssignmentType<AbilitySchema, ItemPTR2e>, options: foundry.abstract.Document.PreCreateOptions<any>, user: User): Promise<boolean | void> {
     const result = await super._preCreate(data, options, user);
     if (result === false) return false;
 
@@ -63,11 +63,4 @@ export default class AbilitySystem extends HasEmbed(HasBase(foundry.abstract.Typ
       })
     }
   }
-}
-
-export type AbilitySource = BaseItemSourcePTR2e<"ability", AbilitySystemSource>;
-
-interface AbilitySystemSource extends ItemSystemSource {
-  slot: number;
-  free: boolean;
 }

@@ -105,25 +105,25 @@ export class SquareGridPTR2e extends SquareGrid {
         let dy = Math.abs(c1.j - c2.j);
         let dz = Math.abs(c1.e - c2.e);
 
-        let totalDiagonalSteps = Math.min(dx, dy, dz);
+        const totalDiagonalSteps = Math.min(dx, dy, dz);
         dx -= totalDiagonalSteps;
         dy -= totalDiagonalSteps;
         dz -= totalDiagonalSteps;
 
-        let diagonalStepsXY = Math.min(dx, dy);
+        const diagonalStepsXY = Math.min(dx, dy);
         dx -= diagonalStepsXY;
         dy -= diagonalStepsXY;
 
-        let diagonalStepsXZ = Math.min(dx, dz);
+        const diagonalStepsXZ = Math.min(dx, dz);
         dx -= diagonalStepsXZ;
         dz -= diagonalStepsXZ;
 
-        let diagonalStepsYZ = Math.min(dy, dz);
+        const diagonalStepsYZ = Math.min(dy, dz);
         dy -= diagonalStepsYZ;
         dz -= diagonalStepsYZ;
 
-        let remainingDiagonalSteps = diagonalStepsXY + diagonalStepsXZ + diagonalStepsYZ;
-        let straightSteps = dx + dy + dz;
+        const remainingDiagonalSteps = diagonalStepsXY + diagonalStepsXZ + diagonalStepsYZ;
+        const straightSteps = dx + dy + dz;
 
         return {
             /** 3D Diagonals */

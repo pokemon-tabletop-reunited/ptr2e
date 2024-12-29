@@ -1,103 +1,93 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { DataModelValidationFailure } from "types/foundry/common/data/validation-failure.js";
+import type { DataModelValidationFailure } from "node_modules/fvtt-types/src/foundry/common/data/validation-failure.d.mts";
 import { StrictArrayField } from "./strict-primitive-fields.ts";
+import type { AnyObject } from "fvtt-types/utils";
 
 const { fields } = foundry.data;
 
 class DataUnionField<
-    TField extends foundry.data.fields.DataField,
-    TRequired extends boolean = boolean,
-    TNullable extends boolean = boolean,
-    THasInitial extends boolean = boolean,
+  TField extends foundry.data.fields.DataField.Any,
+  Options extends foundry.data.fields.DataField.Options.Any = foundry.data.fields.DataField.DefaultOptions,
+  AssignmentType = foundry.data.fields.DataField.AssignmentTypeFor<TField>,
+  InitializedType = foundry.data.fields.DataField.InitializedTypeFor<TField>,
+  PersistedType = foundry.data.fields.DataField.PersistedTypeFor<TField>,
 > extends fields.DataField<
-    TField extends foundry.data.fields.DataField<infer TSourceProp> ? TSourceProp : never,
-    TField extends foundry.data.fields.DataField<infer _TSourceProp, infer TModelProp> ? TModelProp : never,
-    TRequired,
-    TNullable,
-    THasInitial
+  Options, 
+  AssignmentType,
+  InitializedType,
+  PersistedType
 > {
-    fields: TField[];
+  fields: TField[];
 
-    constructor(
-        fields: TField[],
-        options: foundry.data.fields.DataFieldOptions<
-            TField extends foundry.data.fields.DataField<infer TSourceProp> ? TSourceProp : never,
-            TRequired,
-            TNullable,
-            THasInitial
-        >,
-    ) {
-        super(options);
-        this.fields = fields;
+  constructor(
+    fields: TField[],
+    options: Options
+  ) {
+    super(options);
+    this.fields = fields;
+  }
+
+  protected override _cast(value?: AssignmentType): InitializedType {
+    //@ts-expect-error - Ignore type error
+    if (typeof value === "string") value = value.trim();
+    return value as InitializedType;
+  }
+
+  override clean(
+    value: AssignmentType,
+    options?: foundry.data.fields.DataField.CleanOptions,
+  ): InitializedType {
+    if (Array.isArray(value) && this.fields.some((f) => f instanceof foundry.data.fields.ArrayField)) {
+      const arrayField = this.fields.find((f) => f instanceof StrictArrayField);
+      const cleanValue = arrayField?.clean(value, options);
+      return (cleanValue ?? value) as InitializedType;
     }
 
-    protected override _cast(value?: unknown): unknown {
-        if (typeof value === "string") value = value.trim();
-        return value;
+    return super.clean(value, options)
+  }
+
+  override validate(
+    value: AssignmentType,
+    options?: foundry.data.fields.DataField.ValidationOptions<foundry.data.fields.DataField<Options, AssignmentType, InitializedType, PersistedType>>,
+  ): DataModelValidationFailure | undefined{
+    const { DataModelValidationFailure } = foundry.data.validation;
+    const { StringField } = foundry.data.fields;
+    for (const field of this.fields) {
+      if (field.validate(value, options) instanceof DataModelValidationFailure) {
+        continue;
+      } else if (field instanceof StringField && typeof value !== "string") {
+        continue;
+      } else {
+        return;
+      }
     }
 
-    override clean(
-        value: unknown,
-        options?: foundry.data.fields.CleanFieldOptions | undefined,
-    ): MaybeUnionSchemaProp<TField, TRequired, TNullable, THasInitial> {
-        if (Array.isArray(value) && this.fields.some((f) => f instanceof foundry.data.fields.ArrayField)) {
-            const arrayField = this.fields.find((f) => f instanceof StrictArrayField);
-            return (arrayField?.clean(value, options) ?? value) as MaybeUnionSchemaProp<
-                TField,
-                TRequired,
-                TNullable,
-                THasInitial
-            >;
-        }
+    return this.fields[0].validate(value, options);
+  }
 
-        return super.clean(value, options) as MaybeUnionSchemaProp<TField, TRequired, TNullable, THasInitial>;
-    }
-
-    override validate(
-        value: unknown,
-        options?: foundry.data.fields.DataFieldValidationOptions | undefined,
-    ): void | DataModelValidationFailure {
-        const { DataModelValidationFailure } = foundry.data.validation;
-        const { StringField } = foundry.data.fields;
-        for (const field of this.fields) {
-            if (field.validate(value, options) instanceof DataModelValidationFailure) {
-                continue;
-            } else if (field instanceof StringField && typeof value !== "string") {
-                continue;
-            } else {
-                return;
-            }
-        }
-
-        return this.fields[0].validate(value, options);
-    }
-
-    override initialize(
-        value: unknown,
-        model?: ConstructorOf<foundry.abstract.DataModel> | undefined,
-        options?: object | undefined,
-    ): MaybeUnionSchemaProp<TField, TRequired, TNullable, THasInitial> {
-        const field = this.fields.find((f) => !f.validate(value));
-        return field?.initialize(value, model, options) as MaybeUnionSchemaProp<
-            TField,
-            TRequired,
-            TNullable,
-            THasInitial
-        >;
-    }
+  override initialize(
+    value: PersistedType,
+    model: foundry.abstract.DataModel.Any,
+    options?: AnyObject,
+  ) {
+    const field = this.fields.find((f) => !f.validate(value));
+    return field?.initialize(value, model, options) as InitializedType;
+  }
 }
 
-type MaybeUnionSchemaProp<
-    TField extends foundry.data.fields.DataField,
-    TRequired extends boolean,
-    TNullable extends boolean,
-    THasInitial extends boolean,
-> = foundry.data.fields.MaybeSchemaProp<
-    TField extends foundry.data.fields.DataField<infer _TSourceProp, infer TModelProp, boolean, boolean, boolean> ? TModelProp : never,
-    TRequired,
-    TNullable,
-    THasInitial
->;
+// type MaybeUnionSchemaProp<
+//   TField extends foundry.data.fields.DataField,
+//   Options extends foundry.data.fields.DataField.Options.Any = foundry.data.fields.DataField.DefaultOptions,
+//   AssignmentType = foundry.data.fields.DataField.AssignmentType<Options>,
+//   InitializedType = foundry.data.fields.DataField.InitializedType<Options>,
+//   PersistedType extends unknown | null | undefined = InitializedType,
+// > = foundry.data.fields.MaybeSchemaProp<
+//   TField extends foundry.data.fields.DataField<infer _TSourceProp, infer TModelProp, boolean, boolean, boolean> ? TModelProp : never,
+//   TRequired,
+//   TNullable,
+//   THasInitial
+// >;
 
 export { DataUnionField };
-export type { MaybeUnionSchemaProp };
+// export type { MaybeUnionSchemaProp };
