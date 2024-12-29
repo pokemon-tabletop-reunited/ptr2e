@@ -1,8 +1,9 @@
 {
+  "$schema": "https://json.schemastore.org/tsconfig",
   "compilerOptions": {
     "target": "ES2022",
     "module": "NodeNext",
-    "moduleResolution": "NodeNext",
+    "moduleResolution": "nodenext",
     "lib": ["esnext", "dom", "dom.iterable"],
     "allowJs": true,
     "checkJs": false,
@@ -74,12 +75,13 @@
       "node",
       "jest",
       "jquery",
-      "@yaireo/tagify"
+      "@yaireo/tagify",
+      "fvtt-types"
     ],
-    "typeRoots": [
-      "node_modules/@types",
-      "types/foundry"
-    ]
+    // "typeRoots": [
+    //   "node_modules/@types",
+    //   "types/foundry"
+    // ]
   },
   "watchOptions": {
     "excludeDirectories": [

@@ -1,1 +1,0 @@
-export function parseHTML(htmlString: string): HTMLCollection|HTMLElement;
