@@ -1,24 +1,23 @@
 import { ActorPTR2e } from "@actor";
-import type { ItemSourcePTR2e, ItemSystemPTR } from "@item";
 import { ItemPTR2e } from "@item";
-import type { ActiveEffectSystem, EffectSourcePTR2e } from "@effects";
+import type { EffectSourcePTR2e } from "@effects";
 import type { ChangeModel, Trait } from "@data";
-import type { ActiveEffectSchema } from "types/foundry/common/documents/active-effect.js";
 import type { CombatPTR2e } from "@combat";
 import { sluggify } from "@utils";
 import type { RollOptionDomains } from "@module/data/roll-option-manager.ts";
 import type { ItemGrantData } from "@item/data/data.ts";
 import { processGrantDeletions } from "./changes/grant-item.ts";
 import { AbilitySystemModel } from "@item/data/index.ts";
-class ActiveEffectPTR2e<
-  TParent extends ActorPTR2e | ItemPTR2e | null = ActorPTR2e | ItemPTR2e | null,
-  TSystem extends ActiveEffectSystem = ActiveEffectSystem,
-> extends ActiveEffect<TParent, TSystem> {
+import type { DeepPartial } from "fvtt-types/utils";
+import type { EffectDurationData } from "node_modules/fvtt-types/src/foundry/common/documents/_types.d.mts";
+
+
+class ActiveEffectPTR2e extends ActiveEffect {
   /** Has this document completed `DataModel` initialization? */
   declare initialized: boolean;
   declare static TYPES: string[];
 
-  static LOCALIZATION_PREFIXES = ["PTR2E.Effect"];
+  static override LOCALIZATION_PREFIXES = ["PTR2E.Effect"];
 
   declare grantedBy: ItemPTR2e | null;
 
@@ -34,12 +33,9 @@ class ActiveEffectPTR2e<
   }
 
   static override defineSchema() {
-    const schema = super.defineSchema() as { changes?: ActiveEffectSchema["changes"] } & Omit<
-      ActiveEffectSchema,
-      "changes"
-    >;
+    const schema = super.defineSchema();
     delete schema.changes;
-    return schema as ActiveEffectSchema;
+    return schema as ActiveEffect.Schema;
   }
 
   override get changes() {
@@ -137,7 +133,7 @@ class ActiveEffectPTR2e<
     return this.system.getRollOptions(options);
   }
 
-  targetsActor(): this is ActiveEffectPTR2e<ActorPTR2e> {
+  targetsActor(): this is ActiveEffectPTR2e {
     return this.modifiesActor;
   }
 
@@ -159,7 +155,7 @@ class ActiveEffectPTR2e<
    * Override the implementation of ActiveEffect#_prepareDuration to support activation-based initiative.
    * Duration is purely handled in terms of combat turns elapsed.
    */
-  override _prepareDuration(): Partial<ActiveEffectPTR2e["duration"]> {
+  override _prepareDuration(): Omit<ActiveEffectDuration, keyof EffectDurationData> {
     const d = this.duration;
 
     // Turn-based duration
@@ -227,19 +223,16 @@ class ActiveEffectPTR2e<
     });
   }
 
-  override toObject(source?: true | undefined): this["_source"];
-  override toObject(source: false): RawObject<this>;
-  override toObject(source?: boolean | undefined): this["_source"] | RawObject<this> {
-    const data = super.toObject(source) as this["_source"];
+  override toObject(source: true): this["_source"];
+  override toObject(source?: boolean): this["_source"] | ReturnType<this["schema"]["toObject"]>;
+  override toObject(source?: boolean): this["_source"] | ReturnType<this["schema"]["toObject"]> {
+    const data = super.toObject(source) as foundry.data.fields.SchemaField.AssignmentType<ActiveEffect.Schema>;
     data.changes = this.changes.map((c) => c.toObject()) as this["_source"]["changes"];
     return data;
   }
 
-  protected override async _preCreate(
-    data: this["_source"],
-    options: DocumentModificationContext<TParent>,
-    user: User
-  ): Promise<boolean | void> {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  override async _preCreate(data: foundry.data.fields.SchemaField.AssignmentType<ActiveEffect.Schema>, options: foundry.abstract.Document.PreCreateOptions<any>, user: User): Promise<boolean | void> {
     if (!options.keepId && data._id) {
       const statusEffect = CONFIG.statusEffects.find((effect) => effect._id === data._id);
       if (statusEffect) options.keepId = true;
@@ -284,8 +277,9 @@ class ActiveEffectPTR2e<
 
   // TODO: Clean this up cause god it's a mess.
   protected override async _preUpdate(
-    changed: DeepPartial<this["_source"]>,
-    options: DocumentUpdateContext<TParent>,
+    changed: DeepPartial<foundry.data.fields.SchemaField.AssignmentType<Actor.Schema>>,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    options: foundry.abstract.Document.PreUpdateOptions<any>,
     user: User
   ): Promise<boolean | void> {
     if (!changed?.changes && !changed?.system?.changes) return super._preUpdate(changed, options, user);
@@ -350,17 +344,15 @@ class ActiveEffectPTR2e<
     return super._preUpdate(changed, options, user);
   }
 
-  static override async createDocuments<TDocument extends foundry.abstract.Document>(
-    this: ConstructorOf<TDocument>,
-    data?: (TDocument | PreCreate<TDocument["_source"]>)[],
-    context?: DocumentModificationContext<TDocument["parent"]>
-  ): Promise<TDocument[]>;
-  static override async createDocuments(
-    data: (ActiveEffectPTR2e | PreCreate<EffectSourcePTR2e>)[] = [],
-    context: DocumentModificationContext<ActorPTR2e | ItemPTR2e | null> = {}
-  ): Promise<ActiveEffectPTR2e[]> {
-    const sources: PreCreate<EffectSourcePTR2e>[] = data.map((d) =>
-      d instanceof ActiveEffectPTR2e ? (d.toObject() as EffectSourcePTR2e) : d
+  static override async createDocuments<T extends foundry.abstract.Document.SystemConstructor, Temporary extends boolean | undefined>(
+    this: T,
+    data: ActiveEffect.ConstructorData[],
+    context: Record<string, unknown> & {
+      temporary?: Temporary;
+    } = {}
+  ): Promise<foundry.abstract.Document.ToStoredIf<T, Temporary>[] | undefined> {
+    const sources = data.map((d) =>
+      d instanceof ActiveEffectPTR2e ? (d.toObject()) : d
     );
 
     const parent = context.parent;
@@ -428,13 +420,18 @@ class ActiveEffectPTR2e<
     return super.createDocuments(outputEffectSources, context) as Promise<ActiveEffectPTR2e[]>;
   }
 
-  static override async deleteDocuments<TDocument extends foundry.abstract.Document>(this: ConstructorOf<TDocument>, ids?: string[], context?: DocumentModificationContext<TDocument["parent"]> & { pendingItems?: ItemPTR2e<ItemSystemPTR, ActorPTR2e>[] }): Promise<TDocument[]>;
-  static override async deleteDocuments(ids: string[] = [], context: DocumentModificationContext<ActorPTR2e | ItemPTR2e | null> & { pendingItems?: ItemPTR2e<ItemSystemPTR, ActorPTR2e>[] } = {}): Promise<foundry.abstract.Document[]> {
+  static override async deleteDocuments<T extends foundry.abstract.Document.SystemConstructor, Temporary extends boolean | undefined>(
+    this: T,
+    ids: string[],
+    context: Record<string, unknown> & {
+      pendingItems?: ItemPTR2e[];
+    } = {}
+  ): Promise<foundry.abstract.Document.ToStoredIf<T, Temporary>[] | undefined> {
     ids = Array.from(new Set(ids));
     const actor = context.parent instanceof ActorPTR2e ? context.parent : null;
     if (actor) {
-      const effects = ids.flatMap(id => actor.effects.get(id) ?? []) as ActiveEffectPTR2e<ActorPTR2e | ItemPTR2e<ItemSystemPTR, ActorPTR2e>>[];
-      const items = context.pendingItems ? [...context.pendingItems] : [] as ItemPTR2e<ItemSystemPTR, ActorPTR2e>[];
+      const effects = ids.flatMap(id => actor.effects.get(id) ?? []) as ActiveEffectPTR2e[];
+      const items = context.pendingItems ? [...context.pendingItems] : [] as ItemPTR2e[];
 
       // Run Change Model pre-delete callbacks
       for (const effect of effects) {
@@ -457,15 +454,13 @@ class ActiveEffectPTR2e<
   }
 }
 
-interface ActiveEffectPTR2e<
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  TParent extends ActorPTR2e | ItemPTR2e | null = ActorPTR2e | ItemPTR2e | null,
-  TSystem extends ActiveEffectSystem = ActiveEffectSystem,
-> {
+interface ActiveEffectPTR2e {
   constructor: typeof ActiveEffectPTR2e;
-  readonly _source: foundry.documents.ActiveEffectSource<string, TSystem>;
 
-  flags: DocumentFlags & {
+  flags: {
+    core?: {
+      sourceId?: string;
+    }
     ptr2e: {
       itemGrants: Record<string, ItemGrantData>;
       grantedBy: ItemGrantData | null;

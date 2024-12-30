@@ -1,3 +1,4 @@
+import type { ActorSystemPTR2e } from "@actor";
 import { SlugField } from "../fields/slug-field.ts";
 
 const skillSchema = {
@@ -21,8 +22,7 @@ const skillSchema = {
 
 export type SkillSchema = typeof skillSchema;
 
-class SkillPTR2e extends foundry.abstract.DataModel<SkillSchema, Actor> {
-  // declare parent: ActorSystemPTR2e;
+class SkillPTR2e extends foundry.abstract.DataModel<SkillSchema> {
   declare total: number;
 
   static override defineSchema(): SkillSchema {

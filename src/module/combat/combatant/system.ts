@@ -1,8 +1,25 @@
+import type { DeepPartial } from "fvtt-types/utils";
 import type CombatantPTR2e from "./document.ts";
 
-export default class CombatantSystemPTR2e extends foundry.abstract.TypeDataModel {
-  declare parent: CombatantPTR2e;
+const combatantSystemSchema = {
+  activationsHad: new foundry.data.fields.NumberField({
+    required: true,
+    initial: 0,
+    min: 0,
+    nullable: false,
+  }),
+  advanceDelayPercent: new foundry.data.fields.NumberField({
+    required: true,
+    initial: 0,
+    min: -3,
+    max: 1,
+    nullable: false,
+  })
+};
 
+export type CombatantSystemSchema = typeof combatantSystemSchema;
+
+export default class CombatantSystemPTR2e extends foundry.abstract.TypeDataModel<CombatantSystemSchema, CombatantPTR2e> {
   get combat() {
     return this.parent.encounter;
   }
@@ -16,23 +33,7 @@ export default class CombatantSystemPTR2e extends foundry.abstract.TypeDataModel
   }
 
   static override defineSchema(): CombatantSystemSchema {
-    const fields = foundry.data.fields;
-    return {
-      ...super.defineSchema(),
-      activationsHad: new fields.NumberField({
-        required: true,
-        initial: 0,
-        min: 0,
-        nullable: false,
-      }),
-      advanceDelayPercent: new fields.NumberField({
-        required: true,
-        initial: 0,
-        min: -3,
-        max: 1,
-        nullable: false,
-      })
-    };
+    return combatantSystemSchema;
   }
 
   async applyAdvancementDelay(advancementDelay: number, dataOnly = false): Promise<Record<string, unknown> | this['parent'] | undefined> {
@@ -56,7 +57,7 @@ export default class CombatantSystemPTR2e extends foundry.abstract.TypeDataModel
 
   calculateInitiativeChange(oldBaseAV: number, newBaseAV: number, delayOrAdvancement = 0) {
     const currentInitiative = this.parent.initiative;
-    if (currentInitiative === null) return 0;
+    if (currentInitiative === null || currentInitiative === undefined) return 0;
 
     if (delayOrAdvancement > 1 || delayOrAdvancement < -3) {
       throw new Error("Delay or advancement must be normalized between -3 and 1");
@@ -79,7 +80,14 @@ export default class CombatantSystemPTR2e extends foundry.abstract.TypeDataModel
     return;
   }
 
-  override async _preUpdate(changed: DeepPartial<this["parent"]["_source"]>, options: DocumentUpdateContext<this["parent"]["parent"]>, user: User): Promise<boolean | void> {
+  override async _preUpdate(
+    changed: DeepPartial<foundry.data.fields.SchemaField.AssignmentType<Combatant.Schema>>,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    options: foundry.abstract.Document.PreUpdateOptions<any>,
+    user: User
+  ): Promise<boolean | void> {
+    if(!changed) return false;
+    
     const result = await super._preUpdate(changed, options, user);
     if (result === false) return false;
 
@@ -92,7 +100,13 @@ export default class CombatantSystemPTR2e extends foundry.abstract.TypeDataModel
     }
   }
 
-  override _onUpdate(changed: object, options: object, userId: string): void {
+  override _onUpdate(
+    changed: DeepPartial<foundry.data.fields.SchemaField.AssignmentType<Combatant.Schema>>,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    options: foundry.abstract.Document.OnUpdateOptions<any>,
+    userId: string
+  ): void {
+    if(!changed) return;
     super._onUpdate(changed, options, userId);
     if (
       "system" in changed &&
@@ -104,15 +118,4 @@ export default class CombatantSystemPTR2e extends foundry.abstract.TypeDataModel
       this.parent.actor?.onEndActivation();
     }
   }
-}
-
-export default interface CombatantSystemPTR2e
-  extends foundry.abstract.TypeDataModel,
-  ModelPropsFromSchema<CombatantSystemSchema> {
-  _source: SourceFromSchema<CombatantSystemSchema>;
-}
-
-export interface CombatantSystemSchema extends foundry.data.fields.DataSchema {
-  activationsHad: foundry.data.fields.NumberField<number, number, true, false, true>;
-  advanceDelayPercent: foundry.data.fields.NumberField<number, number, true, false, true>;
 }

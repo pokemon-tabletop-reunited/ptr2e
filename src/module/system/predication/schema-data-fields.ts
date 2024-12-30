@@ -34,7 +34,7 @@ class PredicateStatementField<Options extends foundry.data.fields.DataField.Opti
 class PredicateField<
   Options extends foundry.data.fields.DataField.Options.Any = {
     required: true,
-    nullable: true
+    nullable: false
   },
   SubFieldOptions extends foundry.data.fields.DataField.Options.Any = foundry.data.fields.DataField.DefaultOptions
 > extends foundry.data.fields.ArrayField<
@@ -43,11 +43,12 @@ class PredicateField<
   PredicateStatement,
   PredicateStatement,
   RawPredicate,
-  Predicate | null,//(Options extends {nullable: true} ? null : never),
+  Predicate,
   PredicateStatement,
   RawPredicate
 > {
-  constructor(options: Options) {
+  constructor(options?: Options) {
+    if(!options) options = {} as Options;
     super(new PredicateStatementField(), { label: "PTR2E.Effect.FIELDS.ChangePredicate.label", ...options });
   }
 
@@ -56,13 +57,13 @@ class PredicateField<
     value: RawPredicate,
     model: foundry.abstract.DataModel.Any,
     options?: AnyObject
-  ): Predicate | null {
-    const statements = super.initialize(value, model, options);   
+  ): Predicate {
+    const statements = super.initialize(value, model, options)!;   
 
     return Array.isArray(statements) 
       ? new Predicate(...foundry.utils.deepClone(statements)) 
       : typeof statements === "function"
-        ? statements()
+        ? statements()!
         : statements;
   }
 }

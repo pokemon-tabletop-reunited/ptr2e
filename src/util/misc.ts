@@ -1,4 +1,5 @@
 import type { BracketedValue } from "@module/effects/data.ts";
+import type { DeepPartial } from "fvtt-types/utils";
 import * as R from "remeda";
 import type Sortable from "sortablejs";
 

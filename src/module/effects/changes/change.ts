@@ -1,20 +1,63 @@
 import { isBracketedValue, isObject, reduceItemName, sluggify } from "@utils";
 import type { BracketedValue, RuleValue } from "@module/effects/data.ts";
-import type { ActiveEffectSystem, EffectSourcePTR2e } from "@effects";
 import { PredicateField } from "@system/predication/schema-data-fields.ts";
-import type { EffectPTR2e, ItemSourcePTR2e } from "@item";
 import { ItemPTR2e } from "@item";
 import type { ActorPTR2e } from "@actor";
-import type { ChangeModelOptions, ChangeSchema, ChangeSource, ResolveValueParams } from "./data.ts";
-import type { DataModelValidationOptions } from "types/foundry/common/abstract/data.js";
+import type { ChangeModelOptions, ChangeSource, ResolveValueParams } from "./data.ts";
 import * as R from "remeda";
 import ResolvableValueField from "@module/data/fields/resolvable-value-field.ts";
 import { ChangeModelTypes } from "@data";
 
-class ChangeModel<TSchema extends ChangeSchema = ChangeSchema> extends foundry.abstract.DataModel<
-  ActiveEffectSystem,
-  TSchema
-> {
+const changeModelSchema = {
+  // Default Foundry Fields
+  key: new foundry.data.fields.StringField({
+    required: true,
+    label: "PTR2E.Effect.FIELDS.ChangeKey.label",
+    hint: "PTR2E.Effect.FIELDS.ChangeKey.hint",
+    initial: ""
+  }),
+  value: new ResolvableValueField({
+    required: true,
+    nullable: false,
+    initial: "",
+    label: "PTR2E.Effect.FIELDS.ChangeValue.label",
+    hint: "PTR2E.Effect.FIELDS.ChangeValue.hint",
+  }),
+  mode: new foundry.data.fields.NumberField({
+    integer: true,
+    initial: CONST.ACTIVE_EFFECT_MODES.ADD,
+    choices: Object.fromEntries(Object.entries(CONST.ACTIVE_EFFECT_MODES).map(([k, v]) => [v, k])),
+    label: "PTR2E.Effect.FIELDS.ChangeMode.label",
+    hint: "PTR2E.Effect.FIELDS.ChangeMode.hint",
+  }),
+  priority: new foundry.data.fields.NumberField({}),
+
+  // Custom Fields
+  label: new foundry.data.fields.StringField({
+    required: false,
+    nullable: false,
+    blank: false,
+    initial: undefined,
+    label: "PTR2E.Effect.FIELDS.ChangeLabel.label",
+    // hint: "PTR2E.Effect.FIELDS.ChangeLabel.hint",
+  }),
+  predicate: new PredicateField(),
+  ignored: new foundry.data.fields.BooleanField({ initial: false }),
+}
+
+export type TypeField = foundry.data.fields.StringField<{
+  required: true,
+  blank: false,
+  initial: string,
+  choices: string[] | Record<string, string> | (() => string[]) | (() => Record<string, string>),
+  validate: (value: string) => boolean,
+  validationError: string,
+  label: string,
+}>
+
+export type ChangeModelSchema = typeof changeModelSchema & {type: TypeField};
+
+class ChangeModel extends foundry.abstract.DataModel<ChangeModelSchema> {
   static TYPE = "";
 
   static get label() {
@@ -50,56 +93,21 @@ class ChangeModel<TSchema extends ChangeSchema = ChangeSchema> extends foundry.a
       : this.effect.name;
   }
 
-  static override defineSchema(): ChangeSchema {
-    const fields = foundry.data.fields;
+  static override defineSchema(): ChangeModelSchema {
     return {
-      // Default Foundry Fields
-      key: new fields.StringField({
-        required: true,
-        label: "PTR2E.Effect.FIELDS.ChangeKey.label",
-        hint: "PTR2E.Effect.FIELDS.ChangeKey.hint",
-        initial: ""
-      }),
-      value: new ResolvableValueField({
-        required: true,
-        nullable: false,
-        initial: "",
-        label: "PTR2E.Effect.FIELDS.ChangeValue.label",
-        hint: "PTR2E.Effect.FIELDS.ChangeValue.hint",
-      }),
-      mode: new fields.NumberField({
-        integer: true,
-        initial: CONST.ACTIVE_EFFECT_MODES.ADD,
-        choices: Object.fromEntries(Object.entries(CONST.ACTIVE_EFFECT_MODES).map(([k, v]) => [v, k])),
-        label: "PTR2E.Effect.FIELDS.ChangeMode.label",
-        hint: "PTR2E.Effect.FIELDS.ChangeMode.hint",
-      }),
-      priority: new fields.NumberField({}),
-
+      ...changeModelSchema,
       // Type field
-      type: new fields.StringField({
+      type: new foundry.data.fields.StringField({
         required: true,
         blank: false,
         initial: this.TYPE,
-        choices: ChangeModelTypes,
-        validate: (value) => value === this.TYPE,
+        choices: ChangeModelTypes as unknown as (() => Record<string, string>),
+        validate: (value: string) => value === this.TYPE,
         validationError: `must be equal to "${this.TYPE}"`,
         label: "PTR2E.Effect.FIELDS.ChangeType.label",
         // hint: "PTR2E.Effect.FIELDS.ChangeType.hint",
       }),
-
-      // Custom Fields
-      label: new fields.StringField({
-        required: false,
-        nullable: false,
-        blank: false,
-        initial: undefined,
-        label: "PTR2E.Effect.FIELDS.ChangeLabel.label",
-        // hint: "PTR2E.Effect.FIELDS.ChangeLabel.hint",
-      }),
-      predicate: new PredicateField(),
-      ignored: new fields.BooleanField({ initial: false }),
-    };
+    }
   }
 
   /**
@@ -132,11 +140,14 @@ class ChangeModel<TSchema extends ChangeSchema = ChangeSchema> extends foundry.a
   }
 
   protected getReducedLabel(label = this.label): string {
-    return label === this.effect.name ? reduceItemName(label) : label;
+    return (label === this.effect.name ? reduceItemName(label!) : label) ?? "";
   }
 
   /** Include parent effect name & UUID in `DataModel` validation error messages. */
-  override validate(options?: DataModelValidationOptions | undefined): boolean {
+  override validate(options: {
+      changes?: foundry.data.fields.SchemaField.InnerAssignmentType<ChangeModelSchema>;
+      dropInvalidEmbedded: boolean;
+    }): boolean {
     try {
       return super.validate(options);
     } catch (error) {
@@ -394,140 +405,140 @@ class ChangeModel<TSchema extends ChangeSchema = ChangeSchema> extends foundry.a
   }
 }
 
-interface ChangeModel<TSchema extends ChangeSchema = ChangeSchema>
-  extends foundry.abstract.DataModel<ActiveEffectSystem, TSchema>,
-  ModelPropsFromSchema<ChangeSchema> {
-  constructor: typeof ChangeModel<TSchema>;
+// interface ChangeModel<TSchema extends ChangeSchema = ChangeSchema>
+//   extends foundry.abstract.DataModel<ActiveEffectSystem, TSchema>,
+//   ModelPropsFromSchema<ChangeSchema> {
+//   constructor: typeof ChangeModel<TSchema>;
 
-  value: string | number;
+//   value: string | number;
 
-  /**
-   * Some Change Models require parents data to be initialized before they can be initialized. This method is called
-   * after the parent effect has been initialized to finalize the initialization of the change model
-   */
-  prepareData?(): void;
+//   /**
+//    * Some Change Models require parents data to be initialized before they can be initialized. This method is called
+//    * after the parent effect has been initialized to finalize the initialization of the change model
+//    */
+//   prepareData?(): void;
 
-  /**
-   * Run between Actor#applyActiveEffects and Actor#prepareDerivedData. Generally limited to ActiveEffect-Like
-   * elements
-   */
-  onApplyActiveEffects?(): void;
+//   /**
+//    * Run between Actor#applyActiveEffects and Actor#prepareDerivedData. Generally limited to ActiveEffect-Like
+//    * elements
+//    */
+//   onApplyActiveEffects?(): void;
 
-  /**
-   * Run in Actor#prepareDerivedData which is similar to an init method and is the very first thing that is run after
-   * an actor.update() was called. Use this hook if you want to save or modify values on the actual data objects
-   * after actor changes. Those values should not be saved back to the actor unless we mess up.
-   *
-   * This callback is run for each rule in random order and is run very often, so watch out for performance.
-   */
-  beforePrepareData?(): void;
+//   /**
+//    * Run in Actor#prepareDerivedData which is similar to an init method and is the very first thing that is run after
+//    * an actor.update() was called. Use this hook if you want to save or modify values on the actual data objects
+//    * after actor changes. Those values should not be saved back to the actor unless we mess up.
+//    *
+//    * This callback is run for each rule in random order and is run very often, so watch out for performance.
+//    */
+//   beforePrepareData?(): void;
 
-  /** Run after all actor preparation callbacks have been run so you should see all final values here. */
-  afterPrepareData?(): void;
+//   /** Run after all actor preparation callbacks have been run so you should see all final values here. */
+//   afterPrepareData?(): void;
 
-  /**
-   * Run just prior to a check roll, passing along roll options already accumulated
-   * @param domains Applicable predication domains for pending check
-   * @param rollOptions Currently accumulated roll options for the pending check
-   */
-  beforeRoll?(domains: string[], rollOptions: Set<string>): void;
+//   /**
+//    * Run just prior to a check roll, passing along roll options already accumulated
+//    * @param domains Applicable predication domains for pending check
+//    * @param rollOptions Currently accumulated roll options for the pending check
+//    */
+//   beforeRoll?(domains: string[], rollOptions: Set<string>): void;
 
-  /**
-   * Run following a check roll, passing along roll options already accumulated
-   * @param domains Applicable selectors for the pending check
-   * @param domains Applicable predication domains for pending check
-   * @param rollOptions Currently accumulated roll options for the pending check
-   */
-  afterRoll?(params: ChangeModel.AfterRollParams): Promise<void>;
+//   /**
+//    * Run following a check roll, passing along roll options already accumulated
+//    * @param domains Applicable selectors for the pending check
+//    * @param domains Applicable predication domains for pending check
+//    * @param rollOptions Currently accumulated roll options for the pending check
+//    */
+//   afterRoll?(params: ChangeModel.AfterRollParams): Promise<void>;
 
-  /** Runs before the rule's parent effect's owning actor is updated */
-  preUpdateActor?(): Promise<{ create: ItemSourcePTR2e[]; delete: string[];} | { createEffects: EffectSourcePTR2e[]; deleteEffects: string[];}>;
+//   /** Runs before the rule's parent effect's owning actor is updated */
+//   preUpdateActor?(): Promise<{ create: ItemSourcePTR2e[]; delete: string[]; } | { createEffects: EffectSourcePTR2e[]; deleteEffects: string[]; }>;
 
-  /**
-   * Runs before this rules element's parent effect is created. The effect is temporarilly constructed. A rule element can
-   * alter itself before its parent effect is stored on a document; it can also alter the effect source itself in the same
-   * manner.
-   */
-  preCreate?({
-    changeSource,
-    effectSource,
-    pendingItems,
-    context,
-  }: ChangeModel.PreCreateParams): Promise<void>;
+//   /**
+//    * Runs before this rules element's parent effect is created. The effect is temporarilly constructed. A rule element can
+//    * alter itself before its parent effect is stored on a document; it can also alter the effect source itself in the same
+//    * manner.
+//    */
+//   preCreate?({
+//     changeSource,
+//     effectSource,
+//     pendingItems,
+//     context,
+//   }: ChangeModel.PreCreateParams): Promise<void>;
 
-  /**
-   * Runs before this rules element's parent item is created. The item is temporarilly constructed. A rule element can
-   * alter itself before its parent item is stored on an actor; it can also alter the item source itself in the same
-   * manner.
-   */
-  preDelete?({ pendingItems, context }: ChangeModel.PreDeleteParams): Promise<void>;
+//   /**
+//    * Runs before this rules element's parent item is created. The item is temporarilly constructed. A rule element can
+//    * alter itself before its parent item is stored on an actor; it can also alter the item source itself in the same
+//    * manner.
+//    */
+//   preDelete?({ pendingItems, context }: ChangeModel.PreDeleteParams): Promise<void>;
 
-  /**
-   * Runs before this rules element's parent item is updated */
-  preUpdate?(changes: DeepPartial<EffectPTR2e>): Promise<void>;
+//   /**
+//    * Runs before this rules element's parent item is updated */
+//   preUpdate?(changes: DeepPartial<EffectPTR2e>): Promise<void>;
 
-  /**
-   * Runs after an item holding this rule is added to an actor. If you modify or add the rule after the item
-   * is already present on the actor, nothing will happen. Rules that add toggles won't work here since this method is
-   * only called on item add.
-   *
-   * @param actorUpdates The first time a rule is run it receives an empty object. After all rules set various values
-   * on the object, this object is then passed to actor.update(). This is useful if you want to set specific values on
-   * the actor when an item is added. Keep in mind that the object for actor.update() is flattened, e.g.
-   * {'data.attributes.hp.value': 5}.
-   */
-  onCreate?(actorUpdates: Record<string, unknown>): void;
+//   /**
+//    * Runs after an item holding this rule is added to an actor. If you modify or add the rule after the item
+//    * is already present on the actor, nothing will happen. Rules that add toggles won't work here since this method is
+//    * only called on item add.
+//    *
+//    * @param actorUpdates The first time a rule is run it receives an empty object. After all rules set various values
+//    * on the object, this object is then passed to actor.update(). This is useful if you want to set specific values on
+//    * the actor when an item is added. Keep in mind that the object for actor.update() is flattened, e.g.
+//    * {'data.attributes.hp.value': 5}.
+//    */
+//   onCreate?(actorUpdates: Record<string, unknown>): void;
 
-  /**
-   * Run at certain encounter events, such as the start of the actor's turn. Similar to onCreate and onDelete, this provides an opportunity to make
-   * updates to the actor.
-   * @param data.event        The type of event that triggered this callback
-   * @param data.actorUpdates A record containing update data for the actor
-   */
-  onUpdateEncounter?(data: {
-    event: "initiative-roll" | "turn-start";
-    actorUpdates: Record<string, unknown>;
-  }): Promise<void>;
+//   /**
+//    * Run at certain encounter events, such as the start of the actor's turn. Similar to onCreate and onDelete, this provides an opportunity to make
+//    * updates to the actor.
+//    * @param data.event        The type of event that triggered this callback
+//    * @param data.actorUpdates A record containing update data for the actor
+//    */
+//   onUpdateEncounter?(data: {
+//     event: "initiative-roll" | "turn-start";
+//     actorUpdates: Record<string, unknown>;
+//   }): Promise<void>;
 
-  /**
-   * Runs after an item holding this rule is removed from an actor. This method is used for cleaning up any values
-   * on the actorData or token objects (e.g., removing temp HP).
-   *
-   * @param actorData data of the actor that holds the item
-   * @param item the removed item data
-   * @param actorUpdates see onCreate
-   * @param tokens see onCreate
-   */
-  onDelete?(actorUpdates: Record<string, unknown>): void;
-}
+//   /**
+//    * Runs after an item holding this rule is removed from an actor. This method is used for cleaning up any values
+//    * on the actorData or token objects (e.g., removing temp HP).
+//    *
+//    * @param actorData data of the actor that holds the item
+//    * @param item the removed item data
+//    * @param actorUpdates see onCreate
+//    * @param tokens see onCreate
+//    */
+//   onDelete?(actorUpdates: Record<string, unknown>): void;
+// }
 
 // eslint-disable-next-line @typescript-eslint/no-namespace
-namespace ChangeModel {
-  export interface PreCreateParams<T extends ChangeSource = ChangeSource> {
-    /** The source partial of the rule element's parent effect to be created */
-    effectSource: EffectSourcePTR2e;
-    /** The source of the change in `effectSource`'s `system.changes` array */
-    changeSource: T;
-    /** All effects pending creation in a `ActiveEffectPTR2e.createDocuments` call */
-    pendingEffects: EffectSourcePTR2e[];
-    /** All items pending creation in a `ActiveEffectPTR2e.createDocuments` call */
-    pendingItems: ItemSourcePTR2e[];
-    /** Items temporarily constructed from pending item source */
-    tempItems: ItemPTR2e[];
-    /** The context object from the `ItemPTR2e.createDocuments` call */
-    context: DocumentModificationContext<ActorPTR2e | ItemPTR2e | null>;
-    /** Whether this preCreate run is from a pre-update reevaluation */
-    reevaluation?: boolean;
-  }
+// namespace ChangeModel {
+//   export interface PreCreateParams<T extends ChangeSource = ChangeSource> {
+//     /** The source partial of the rule element's parent effect to be created */
+//     effectSource: EffectSourcePTR2e;
+//     /** The source of the change in `effectSource`'s `system.changes` array */
+//     changeSource: T;
+//     /** All effects pending creation in a `ActiveEffectPTR2e.createDocuments` call */
+//     pendingEffects: EffectSourcePTR2e[];
+//     /** All items pending creation in a `ActiveEffectPTR2e.createDocuments` call */
+//     pendingItems: ItemSourcePTR2e[];
+//     /** Items temporarily constructed from pending item source */
+//     tempItems: ItemPTR2e[];
+//     /** The context object from the `ItemPTR2e.createDocuments` call */
+//     context: DocumentModificationContext<ActorPTR2e | ItemPTR2e | null>;
+//     /** Whether this preCreate run is from a pre-update reevaluation */
+//     reevaluation?: boolean;
+//   }
 
-  export interface PreDeleteParams {
-    /** All items pending deletion in a `ItemPTR2e.deleteDocuments` call */
-    pendingItems: ItemPTR2e[];
-    /** The context object from the `ItemPTR2e.deleteDocuments` call */
-    context: DocumentModificationContext<ActorPTR2e | null> | DocumentModificationContext<ActorPTR2e | ItemPTR2e | null>;
-  }
+//   export interface PreDeleteParams {
+//     /** All items pending deletion in a `ItemPTR2e.deleteDocuments` call */
+//     pendingItems: ItemPTR2e[];
+//     /** The context object from the `ItemPTR2e.deleteDocuments` call */
+//     context: DocumentModificationContext<ActorPTR2e | null> | DocumentModificationContext<ActorPTR2e | ItemPTR2e | null>;
+//   }
 
-  export interface AfterRollParams { }
-}
+//   export interface AfterRollParams { }
+// }
 
 export default ChangeModel;

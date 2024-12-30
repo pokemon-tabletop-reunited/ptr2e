@@ -2,26 +2,21 @@ import type { ActorPTR2e } from "@actor";
 import { ActorSystemPTR2e } from "./index.ts";
 import { SpeciesDropSheet } from "@actor/sheets/species-drop-sheet.ts";
 import { ItemPTR2e } from "@item";
-import type { BlueprintSystemModel} from "@item/data/index.ts";
 import { SpeciesSystemModel } from "@item/data/index.ts";
 import { BlueprintSheetPTR2e } from "@item/sheets/index.ts";
+import type { ActorSystemSchema } from "./system.ts";
 
 class PokemonActorSystem extends ActorSystemPTR2e {
-  declare parent: ActorPTR2e<this>;
-
-  override async _preCreate(
-    data: this["parent"]["_source"],
-    options: DocumentModificationContext<this["parent"]["parent"]> & { fail?: boolean },
-    user: User
-  ) {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  override async _preCreate(data: foundry.abstract.TypeDataModel.ParentAssignmentType<ActorSystemSchema, ActorPTR2e>, options: foundry.abstract.Document.PreCreateOptions<any>, user: User): Promise<boolean | void> {
     if (!this.parent.items.has("actorspeciesitem")) {
-      const promise = await new Promise<ItemPTR2e<SpeciesSystemModel> | null>((resolve) => {
+      const promise = await new Promise<ItemPTR2e | null>((resolve) => {
         const app = new SpeciesDropSheet(resolve);
         app.render(true);
       });
 
       if (promise instanceof ItemPTR2e && promise.system instanceof SpeciesSystemModel) {
-        const blueprint = await ItemPTR2e.create<ItemPTR2e<BlueprintSystemModel, null>>(
+        const blueprint = await ItemPTR2e.create(
           {
             name: promise.name,
             type: "blueprint",
@@ -35,12 +30,11 @@ class PokemonActorSystem extends ActorSystemPTR2e {
             temporary: true
           }
         );
-        if(!blueprint) {
+        if (!blueprint) {
           options.fail = true;
           return false;
         }
 
-        //@ts-expect-error - This is a valid document.
         const generatedData = await new BlueprintSheetPTR2e({
           document: blueprint,
           generation: {
@@ -59,7 +53,7 @@ class PokemonActorSystem extends ActorSystemPTR2e {
 
         const source = this.parent.toObject();
         const update = foundry.utils.mergeObject(source, generatedData[0], { inplace: false });
-        if(source.folder && source.folder !== update.folder) update.folder = source.folder;
+        if (source.folder && source.folder !== update.folder) update.folder = source.folder;
         this.parent.updateSource(update);
 
         if (!data.name.includes(game.i18n.localize("TYPES.Actor.pokemon"))) {

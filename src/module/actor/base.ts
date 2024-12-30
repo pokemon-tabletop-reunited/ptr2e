@@ -12,15 +12,14 @@ import type {
 import type { ActiveEffectSystem, EffectSourcePTR2e } from "@effects";
 import { ActiveEffectPTR2e } from "@effects";
 import type { TypeEffectiveness } from "@scripts/config/effectiveness.ts";
-import type { ActionPTR2e, PokemonType, PTRCONSTS} from "@data";
+import type { ActionPTR2e, PokemonType, PTRCONSTS } from "@data";
 import { AttackPTR2e, RollOptionChangeSystem, RollOptionManager, Trait } from "@data";
-import type { ActorFlags } from "types/foundry/common/documents/actor.js";
 import type { RollOptions } from "@module/data/roll-option-manager.ts";
 import type FolderPTR2e from "@module/folder/document.ts";
 import type { CombatantPTR2e, CombatPTR2e } from "@combat";
 import type AfflictionActiveEffectSystem from "@module/effects/data/affliction.ts";
 import { ChatMessagePTR2e } from "@chat";
-import type { AbilityPTR2e, ItemSystemPTR, ItemSystemsWithActions, PerkPTR2e } from "@item";
+import type { AbilityPTR2e, ItemSystemPTR, ItemSystemsWithActions, MovePTR2e, PerkPTR2e } from "@item";
 import { ItemPTR2e } from "@item";
 import { ActionsCollections } from "./actions.ts";
 import type { CustomSkill } from "@module/data/models/skill.ts";
@@ -41,20 +40,18 @@ import type { PickableThing } from "@module/apps/pick-a-thing-prompt.ts";
 import type { ActionUUID } from "src/util/uuid.ts";
 import { ActorSizePTR2e } from "./data/size.ts";
 import { auraAffectsActor, checkAreaEffects } from "./helpers.ts";
-
+import type { DeepPartial, InexactPartial } from "fvtt-types/utils";
+import type { AnyDocument } from "node_modules/fvtt-types/src/foundry/client/data/abstract/client-document.d.mts";
 interface ActorParty {
-  owner: ActorPTR2e<ActorSystemPTR2e, null> | null;
-  party: ActorPTR2e<ActorSystemPTR2e, null>[];
+  owner: ActorPTR2e | null;
+  party: ActorPTR2e[];
 }
 
-class ActorPTR2e<
-  TSystem extends ActorSystemPTR2e = ActorSystemPTR2e,
-  TParent extends TokenDocumentPTR2e | null = TokenDocumentPTR2e | null,
-> extends Actor {
+class ActorPTR2e extends Actor {
   /** Has this document completed `DataModel` initialization? */
   declare initialized: boolean;
 
-  constructor(data: object, context: DocumentConstructionContext<TParent> = {}) {
+  constructor(data: foundry.abstract.DataModel.ConstructorDataFor<ActorPTR2e>, context: foundry.abstract.DataModel.DataValidationOptions<ActorPTR2e>) {
     super(data, context);
 
     Object.defineProperties(this, {
@@ -101,7 +98,7 @@ class ActorPTR2e<
       this._perks ??
       (this._perks = (this.itemTypes.perk as PerkPTR2e[]).reduce((acc, perk) => {
         acc.set(perk.system.originSlug ?? perk.slug, perk);
-        if(perk.flags?.ptr2e?.tierSlug) acc.set(perk.flags.ptr2e.tierSlug+"", perk);
+        if (perk.flags?.ptr2e?.tierSlug) acc.set(perk.flags.ptr2e.tierSlug + "", perk);
         return acc;
       }, new Map<string, PerkPTR2e>()))
     );
@@ -188,12 +185,12 @@ class ActorPTR2e<
     if (!this.folder) return null;
 
     return (this._party ??= ((): ActorParty | null => {
-      const owner = ((): ActorPTR2e<TSystem, null> | null => {
+      const owner = ((): ActorPTR2e | null => {
         if (this.folder?.owner)
-          return fromUuidSync<ActorPTR2e<TSystem, null>>(this.folder.owner);
+          return fromUuidSync(this.folder.owner) as ActorPTR2e
         return null;
       })();
-      const party = ((): ActorPTR2e<TSystem, null>[] => {
+      const party = ((): ActorPTR2e[] => {
         const uuid = (() => {
           if (this.parent instanceof TokenDocumentPTR2e) {
             return this.parent.baseActor?.uuid ?? this.uuid;
@@ -204,8 +201,8 @@ class ActorPTR2e<
         if (this.folder?.isFolderOwner(uuid) || this.folder?.isInParty(uuid))
           return this.folder.party.flatMap((u) =>
             u === uuid
-              ? (this as ActorPTR2e<TSystem, null>)
-              : fromUuidSync<ActorPTR2e<TSystem, null>>(u) ?? []
+              ? (this as ActorPTR2e)
+              : fromUuidSync(u) as ActorPTR2e ?? []
           );
         return [];
       })();
@@ -246,7 +243,7 @@ class ActorPTR2e<
 
   protected override _initializeSource(
     data: Record<string, unknown>,
-    options?: DataModelConstructionOptions<TParent> | undefined
+    options?: Omit<foundry.abstract.DataModel.DataValidationOptions, "parent">
   ): this["_source"] {
 
     if (data && '_stats' in data && data._stats && typeof data._stats === 'object' && 'systemId' in data._stats && data._stats.systemId === "ptu") {
@@ -339,7 +336,6 @@ class ActorPTR2e<
     if (this.type === "ptu-actor") return super.prepareBaseData();
     super.prepareBaseData();
 
-    //@ts-expect-error - The getter needs to be added afterwards.
     this.flags.ptr2e.disableActionOptions = {
       collection: new Collection(),
       disabled: []
@@ -478,7 +474,7 @@ class ActorPTR2e<
         "actions": [getFlingAttack({
           free: true,
           variant: false
-        }),getFlingAttack({
+        }), getFlingAttack({
           name: "Actor Toss",
           slug: "actor-toss",
         })],
@@ -505,7 +501,7 @@ class ActorPTR2e<
       }));
     }
 
-    const existing = this.items.get(data._id) as Maybe<ItemPTR2e<MoveSystem, this>>;
+    const existing = this.items.get(data._id) as Maybe<ItemPTR2e>;
     if (existing) {
       existing.updateSource(data);
       existing.reset();
@@ -592,10 +588,10 @@ class ActorPTR2e<
         }
       }
     }
-    for(const trait of this.traits) {
-      if(!trait.changes?.length) continue;
+    for (const trait of this.traits) {
+      if (!trait.changes?.length) continue;
       const effect = Trait.effectsFromChanges.bind(trait)(this) as ActiveEffectPTR2e<this>;
-      if(effect) yield effect;
+      if (effect) yield effect;
     }
     yield* super.allApplicableEffects() as Generator<ActiveEffectPTR2e<this>>
   }
@@ -653,16 +649,6 @@ class ActorPTR2e<
     }
     return skills;
   }
-
-  /**
-   * Toggle the perk tree for this actor
-   * @param {boolean} active
-   */
-  // async togglePerkTree(active: boolean) {
-  //   if (game.ptr.web.actor === this && active !== true) return game.ptr.web.close();
-  //   else if (active !== false) return game.ptr.web.open(this);
-  //   return;
-  // }
 
   getRollOptions(domains: string[] = []): string[] {
     const withAll = Array.from(new Set(["all", ...domains]));
@@ -741,7 +727,7 @@ class ActorPTR2e<
     function isAttribute(attribute: Attribute | Omit<Attribute, 'stage'>): attribute is Attribute {
       return attribute.slug !== "hp";
     }
-    if(!isAttribute(stat)) return stat.value;
+    if (!isAttribute(stat)) return stat.value;
     const stageModifier = () => {
       const stage = Math.clamp(stat.stage, -6, isCrit ? 0 : 6);
       return stage > 0 ? (2 + stage) / 2 : 2 / (2 + Math.abs(stage));
@@ -829,7 +815,7 @@ class ActorPTR2e<
   ): Promise<boolean | null> {
     if (!(typeof effectUuid === "string")) return null;
 
-    const effect = await fromUuid<ActiveEffectPTR2e>(effectUuid, { relative: this as Actor });
+    const effect = await fromUuid(effectUuid, { relative: this as Actor }) as ActiveEffectPTR2e;
     const change = effect?.changes.find(
       (c): c is RollOptionChangeSystem =>
         c instanceof RollOptionChangeSystem && c.domain === domain && c.option === option,
@@ -863,10 +849,10 @@ class ActorPTR2e<
     for (const type of moveTypes) {
       effectiveness *= this.system.type.effectiveness[type] ?? 1;
     }
-    if(ignoreImmune && effectiveness === 0) effectiveness = 1;
-    if(effectivenessStages !== 0) {
+    if (ignoreImmune && effectiveness === 0) effectiveness = 1;
+    if (effectivenessStages !== 0) {
       const positive = effectivenessStages > 0;
-      for(let i = 0; i < Math.abs(effectivenessStages); i++) {
+      for (let i = 0; i < Math.abs(effectivenessStages); i++) {
         effectiveness *= positive ? 2 : 0.5;
       }
     }
@@ -874,28 +860,30 @@ class ActorPTR2e<
   }
 
   async getUnderdogPerks(): Promise<PerkPTR2e[]> {
-    if(!this.traits.has("underdog")) return [];
-    if(!this.species) return [];
+    if (!this.traits.has("underdog")) return [];
+    if (!this.species) return [];
 
-    const underdogPerks = await game.packs.get("ptr2e.core-perks")!.getDocuments({_id__in: [
-      "underdogperk0001",
-      "underdogperk0011",
-      "underdogperk0021",
-      "underdogperk0031",
-      "underdogperk0041",
-      "underdogperk0051",
-      "underdogperk0002",
-    ]}) as PerkPTR2e[];
+    const underdogPerks = await game.packs.get("ptr2e.core-perks")!.getDocuments({
+      _id__in: [
+        "underdogperk0001",
+        "underdogperk0011",
+        "underdogperk0021",
+        "underdogperk0031",
+        "underdogperk0041",
+        "underdogperk0051",
+        "underdogperk0002",
+      ]
+    }) as PerkPTR2e[];
     const webs = new Set([this.species!.evolutions?.uuid ?? this.species!.parent.flags?.core?.sourceId ?? []].flat());
     const baseConnection = `evolution-${this.species!.evolutions?.name ?? this.species!.parent.slug}`;
-    return underdogPerks.map(perk => perk.clone({"system.webs": webs, "system.nodes": perk.system._source.nodes.map(node => ({...node, connected: [baseConnection, ...node.connected]}))}));
+    return underdogPerks.map(perk => perk.clone({ "system.webs": webs, "system.nodes": perk.system._source.nodes.map(node => ({ ...node, connected: [baseConnection, ...node.connected] })) }));
   }
 
-  isHumanoid(): this is ActorPTR2e<HumanoidActorSystem> {
+  isHumanoid(): this is ActorPTR2e {
     return this.traits.has("humanoid");
   }
 
-  isPokemon(): this is ActorPTR2e<PokemonActorSystem> {
+  isPokemon(): this is ActorPTR2e {
     return !this.isHumanoid();
   }
 
@@ -1124,7 +1112,7 @@ class ActorPTR2e<
    */
   onEndCombat() {
     const applicable = this.effects.filter(
-      (s) => (s as ActiveEffectPTR2e<this>).system.removeAfterCombat
+      (s) => (s as ActiveEffectPTR2e).system.removeAfterCombat
     );
     this.deleteEmbeddedDocuments(
       "ActiveEffect",
@@ -1134,7 +1122,7 @@ class ActorPTR2e<
 
   async getCheckContext<
     TStatistic extends BaseStatisticCheck<unknown, unknown>,
-    TItem extends ItemPTR2e<ItemSystemsWithActions, ActorPTR2e>,
+    TItem extends ItemPTR2e
   >(
     params: CheckContextParams<TStatistic, TItem>
   ): Promise<CheckContext<this, TStatistic, TItem>> {
@@ -1172,7 +1160,7 @@ class ActorPTR2e<
       const target = context.target?.actor;
       if (!target) return null;
       const difference = target.size.difference(context.self.actor.size)
-      if(difference >= 2) return new ModifierPTR2e({
+      if (difference >= 2) return new ModifierPTR2e({
         label: "PTR2E.Modifiers.size",
         slug: `size-penalty-unicqi-${appliesTo ?? foundry.utils.randomID()}`,
         modifier: difference >= 4 ? 2 : 1,
@@ -1180,7 +1168,7 @@ class ActorPTR2e<
         type: "accuracy",
         appliesTo: appliesTo ? new Map([[appliesTo, true]]) : null,
       });
-      if(difference <= -2) return new ModifierPTR2e({
+      if (difference <= -2) return new ModifierPTR2e({
         label: "PTR2E.Modifiers.size",
         slug: `size-penalty-unicqi-${appliesTo ?? foundry.utils.randomID()}`,
         modifier: difference <= -4 ? -2 : -1,
@@ -1238,7 +1226,7 @@ class ActorPTR2e<
 
   protected getRollContext<
     TStatistic extends BaseStatisticCheck<unknown, unknown>,
-    TItem extends ItemPTR2e<ItemSystemsWithActions, ActorPTR2e>,
+    TItem extends ItemPTR2e
   >(params: RollContextParams<TStatistic, TItem>): Promise<RollContext<this, TStatistic, TItem>>;
   protected async getRollContext(params: RollContextParams): Promise<RollContext<this>> {
     const [selfToken, targetToken]: [TokenPTR2e | null, TokenPTR2e | null] =
@@ -1253,11 +1241,11 @@ class ActorPTR2e<
         ]
         : [null, null];
 
-    if(targetToken?.actor && selfToken?.actor) {
+    if (targetToken?.actor && selfToken?.actor) {
       const targetMarks = targetToken.actor.synthetics.tokenTags.get(selfToken.document.uuid);
       const originMarks = selfToken.actor.synthetics.tokenTags.get(targetToken.document.uuid);
-      if(targetMarks) params.options.add(`target:mark:${targetMarks}`);
-      if(originMarks) params.options.add(`origin:mark:${originMarks}`);
+      if (targetMarks) params.options.add(`target:mark:${targetMarks}`);
+      if (originMarks) params.options.add(`origin:mark:${originMarks}`);
     }
 
     const originEphemeralEffects = await extractEphemeralEffects({
@@ -1306,7 +1294,7 @@ class ActorPTR2e<
         return null;
       })() ?? params.statistic;
 
-    const selfItem = ((): ItemPTR2e<ItemSystemsWithActions, ActorPTR2e> | null => {
+    const selfItem = ((): ItemPTR2e | null => {
       // 1. Simplest case: no context clone, so used the item passed to this method
       if (selfActor === this) return params.item ?? null;
 
@@ -1320,12 +1308,12 @@ class ActorPTR2e<
             statistic.item.system.consumableType &&
             statistic.item.system.consumableType === "pokeball"))
       ) {
-        return statistic.item as ItemPTR2e<ItemSystemsWithActions, ActorPTR2e>;
+        return statistic.item as ItemPTR2e
       }
 
       // 3. Get the item directly from the context clone
       const itemClone = selfActor.items.get(params.item?.id ?? "") as unknown as
-        | ItemPTR2e<ItemSystemsWithActions, ActorPTR2e>
+        | ItemPTR2e
         | undefined;
       if (itemClone) return itemClone;
 
@@ -1370,10 +1358,10 @@ class ActorPTR2e<
     })();
 
     let newFlatModifiers: ModifierPTR2e[] = [];
-    if(selfAttack) {
+    if (selfAttack) {
       const actionTraitDomains = actionTraits.map((t) => `${t}-trait-${selfAttack.type}`)
       params.domains = R.unique([...params.domains, ...actionTraitDomains])
-    
+
       const originalModifiers = params.statistic?.modifiers ?? [];
       const flatModsFromTraitDomains = extractModifiers(this.synthetics, actionTraitDomains);
 
@@ -1382,7 +1370,7 @@ class ActorPTR2e<
       newFlatModifiers = flatModsFromTraitDomains.filter(
         (mod) => !originalModifiers.some((original) => original.slug === mod.slug)
       ).map(mod => {
-        if(target) mod.appliesTo = new Map([[target.uuid, true]]);
+        if (target) mod.appliesTo = new Map([[target.uuid, true]]);
         return mod;
       });
     }
@@ -1658,15 +1646,13 @@ class ActorPTR2e<
     })
   }
 
-  static override async createDocuments<TDocument extends foundry.abstract.Document>(
-    this: ConstructorOf<TDocument>,
-    data?: (TDocument | PreCreate<TDocument["_source"]>)[],
-    context?: DocumentModificationContext<TDocument["parent"]>
-  ): Promise<TDocument[]>;
-  static override async createDocuments(
-    data: (ActorPTR2e | PreCreate<ActorPTR2e["_source"]>)[] = [],
-    context: DocumentModificationContext<TokenDocumentPTR2e | null> = {}
-  ): Promise<Actor<TokenDocument<Scene | null> | null>[]> {
+  static override async createDocuments<T extends foundry.abstract.Document.SystemConstructor, Temporary extends boolean | undefined>(
+    this: T,
+    data: Actor.ConstructorData[],
+    operation?: Record<string, unknown> & {
+      temporary?: Temporary;
+    }
+  ): Promise<foundry.abstract.Document.ToStoredIf<T, Temporary>[] | undefined> {
     const sources = data.map((d) => (d instanceof ActorPTR2e ? d.toObject() : d));
 
     for (const source of [...sources]) {
@@ -1695,16 +1681,27 @@ class ActorPTR2e<
       sources.splice(sources.indexOf(source), 1, actor.toObject());
     }
 
-    return super.createDocuments(sources, context);
+    return super.createDocuments(sources, operation) as Promise<foundry.abstract.Document.ToStoredIf<T, Temporary>[] | undefined>;
   }
 
-  static override async createDialog<TDocument extends foundry.abstract.Document>(this: ConstructorOf<TDocument>, data?: Record<string, unknown>, context?: { parent?: TDocument["parent"]; pack?: Collection<TDocument> | null; types?: string[] } & Partial<FormApplicationOptions>): Promise<TDocument | null>;
-  static override async createDialog(data: Record<string, unknown> = {}, context: { parent?: TokenDocumentPTR2e | null; pack?: Collection<ActorPTR2e> | null; types?: string[] } & Partial<FormApplicationOptions> = {}) {
+  static override async createDialog(
+    data: Record<string, unknown> = {},
+    context: Record<string, unknown> & {
+      parent?: AnyDocument;
+      pack?: string | null;
+    } &
+      InexactPartial<
+        DialogOptions & {
+          perksOnly?: boolean;
+          types?: string[];
+        }
+      > = {}) {
     if (!Array.isArray(context.types)) context.types = this.TYPES.filter(t => t !== "ptu-actor");
     else {
       if (context.types.length) context.types = context.types.filter(t => t !== "ptu-actor");
       else context.types = this.TYPES.filter(t => t !== "ptu-actor");
     }
+    if (context.pack === undefined) context.pack = null;
     return super.createDialog(data, context);
   }
 
@@ -1715,11 +1712,8 @@ class ActorPTR2e<
     this.synthetics.preparationWarnings.flush();
   }
 
-  protected override async _preCreate(
-    data: this["_source"],
-    options: DocumentModificationContext<TParent> & { fail?: boolean },
-    user: User
-  ): Promise<boolean | void> {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  override async _preCreate(data: foundry.data.fields.SchemaField.AssignmentType<Actor.Schema>, options: foundry.abstract.Document.PreCreateOptions<any>, user: User): Promise<boolean | void> {
     const result = await super._preCreate(data, options, user);
     if (result === false) return false;
     if (this.type === 'ptu-actor') throw new Error("PTU Actors cannot be created directly.");
@@ -1733,11 +1727,13 @@ class ActorPTR2e<
     }
   }
 
-  protected override async _preUpdate(
-    changed: DeepPartial<this["_source"]>,
-    options: DocumentModificationContext<TParent>,
+  override async _preUpdate(
+    changed: DeepPartial<foundry.data.fields.SchemaField.AssignmentType<Actor.Schema>>,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    options: foundry.abstract.Document.PreUpdateOptions<any>,
     user: User
   ): Promise<boolean | void> {
+    if(!changed) return false;
     if (changed.system?.party?.ownerOf) {
       const folder = game.folders.get(changed.system.party.ownerOf as Maybe<string>) as FolderPTR2e;
       if (folder?.owner && !this.uuid?.endsWith(folder.owner)) {
@@ -1848,8 +1844,9 @@ class ActorPTR2e<
   }
 
   protected override _onUpdate(
-    changed: DeepPartial<this["_source"]>,
-    options: DocumentUpdateContext<TParent>,
+    changed: DeepPartial<foundry.data.fields.SchemaField.AssignmentType<Actor.Schema>>,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    options: foundry.abstract.Document.OnUpdateOptions<any>,
     userId: string
   ): void {
     super._onUpdate(changed, options, userId);
@@ -1857,13 +1854,13 @@ class ActorPTR2e<
     // if (game.ptr.web.actor === this) game.ptr.web.refresh({ nodeRefresh: true });
   }
 
-  protected override async _onCreateDescendantDocuments(
-    parent: this,
+  protected override async _onCreateDescendantDocuments<T extends foundry.abstract.Document.SystemConstructor>(
+    parent: T,
     collection: "effects" | "items",
-    documents: ActiveEffectPTR2e<this>[] | ItemPTR2e<ItemSystemPTR, this>[],
-    results: ActiveEffectPTR2e<this>["_source"][] | ItemPTR2e<ItemSystemPTR, this>["_source"][],
+    documents: ActiveEffectPTR2e[] | ItemPTR2e[],
+    results: ActiveEffectPTR2e["_source"][] | ItemPTR2e["_source"][],
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    options: any,
+    options: foundry.abstract.Document.OnCreateOptions<any> & InexactPartial<{render: boolean }>,
     userId: string
   ) {
     super._onCreateDescendantDocuments(parent, collection, documents, results, options, userId);
@@ -1874,7 +1871,7 @@ class ActorPTR2e<
       collection: "effects" | "items",
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       _documents: any[]
-    ): _documents is ActiveEffectPTR2e<typeof parent>[] {
+    ): _documents is ActiveEffectPTR2e[] {
       return collection === "effects";
     }
     if (isEffect(collection, documents)) return;
@@ -1900,27 +1897,26 @@ class ActorPTR2e<
     // if (updates.length) await this.updateEmbeddedDocuments("Item", updates);
   }
 
-  protected override _onDeleteDescendantDocuments(
-    parent: this,
+  protected override _onDeleteDescendantDocuments<T extends foundry.abstract.Document.SystemConstructor>(
+    parent: T,
     collection: "effects" | "items",
+    documents: ClientDocument[],
+    changes: unknown[],
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    documents: any[],
-    ids: string[],
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    options: any,
+    options: foundry.abstract.Document.OnDeleteOptions<any> & InexactPartial<{ render: boolean }>,
     userId: string
   ): void {
-    super._onDeleteDescendantDocuments(parent, collection, documents, ids, options, userId);
+    super._onDeleteDescendantDocuments(parent, collection, documents, changes, options, userId);
     // if (game.ptr.web.actor === this) game.ptr.web.refresh({ nodeRefresh: true });
   }
 
-  protected override _onUpdateDescendantDocuments(
-    parent: this,
+  protected override _onUpdateDescendantDocuments<T extends foundry.abstract.Document.SystemConstructor>(
+    parent: T,
     collection: "effects" | "items",
-    documents: ActiveEffectPTR2e<this>[] | ItemPTR2e<ItemSystemPTR, this>[],
-    changes: ActiveEffectPTR2e<this>["_source"][] | ItemPTR2e<ItemSystemPTR, this>["_source"][],
+    documents: ActiveEffectPTR2e[] | ItemPTR2e[],
+    changes: ActiveEffectPTR2e["_source"][] | ItemPTR2e["_source"][],
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    options: any,
+    options: foundry.abstract.Document.OnUpdateOptions<any> & InexactPartial<{ render: boolean }>,
     userId: string
   ): void {
     super._onUpdateDescendantDocuments(parent, collection, documents, changes, options, userId);
@@ -2017,7 +2013,7 @@ class ActorPTR2e<
 
     // remove effects
     const applicable = this.effects.filter(
-      (s) => (s as ActiveEffectPTR2e<this>).system.removeAfterCombat || (s as ActiveEffectPTR2e<this>).system.removeOnRecall
+      (s) => (s as ActiveEffectPTR2e).system.removeAfterCombat || (s as ActiveEffectPTR2e).system.removeOnRecall
     );
     await this.deleteEmbeddedDocuments(
       "ActiveEffect",
@@ -2043,13 +2039,12 @@ class ActorPTR2e<
   }
 }
 
-interface ActorPTR2e<
-  TSystem extends ActorSystemPTR2e = ActorSystemPTR2e,
-  TParent extends TokenDocumentPTR2e | null = TokenDocumentPTR2e | null,
-> extends Actor<TParent, TSystem> {
-  get folder(): FolderPTR2e<ActorPTR2e<TSystem, null>> | null;
+interface ActorPTR2e extends Actor {
+  // get folder(): FolderPTR2e | null;
 
   _party: ActorParty | null;
+
+  system: ActorSystemPTR2e;
 
   health: {
     percent: number;
@@ -2059,8 +2054,6 @@ interface ActorPTR2e<
 
   _actions: ActionsCollections;
   _perks: Map<string, PerkPTR2e> | null;
-
-  level: number;
 
   flags: ActorFlags2e;
 
@@ -2082,17 +2075,20 @@ interface ActorPTR2e<
   skills: Record<string, Statistic>;
   _species: SpeciesSystem | null;
 
-  get itemTypes(): Record<string, ItemPTR2e[]>;
+  // get itemTypes(): Record<string, ItemPTR2e[]>;
 
   auras: Map<string, AuraData>;
 
   /** Added as debounced method */
   checkAreaEffects(): void;
 
-  fling: ItemPTR2e<MoveSystem, this>;
+  fling: MovePTR2e;
 }
 
-type ActorFlags2e = ActorFlags & {
+type ActorFlags2e = {
+  core?: {
+    sourceId?: string;
+  }
   ptr2e: {
     rollOptions: RollOptions & object;
     sheet?: {

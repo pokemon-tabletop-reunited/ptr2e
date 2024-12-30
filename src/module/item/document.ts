@@ -38,10 +38,10 @@ class ItemPTR2e extends Item {
   }
 
   // protected override _initializeSource(
-  //   data: this | foundry.data.fields.SchemaField.InnerConstructorType<foundry.documents.BaseItem.Schema>,
+  //   data: Record<string, unknown>,
   //   options?: Omit<foundry.abstract.DataModel.DataValidationOptions, "parent">
   // ) {
-  //   if (data?._stats?.systemId === "ptu") {
+  //   if (data && '_stats' in data && data._stats && typeof data._stats === 'object' && 'systemId' in data._stats && data._stats.systemId === "ptu") {
   //     data.type = "ptu-item";
   //   }
   //   return super._initializeSource(data, options);

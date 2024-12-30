@@ -1,7 +1,6 @@
 /* eslint-disable no-fallthrough */
 import type { PokemonType} from "@data";
 import { HasTraits, HasMigrations, ClockPTR2e, Trait } from "@data";
-import type { TypeEffectiveness } from "@scripts/config/effectiveness.ts";
 import { getTypes } from "@scripts/config/effectiveness.ts";
 import type {
   ActorPTR2e,
@@ -14,12 +13,10 @@ import { CollectionField } from "@module/data/fields/collection-field.ts";
 import SkillPTR2e from "@module/data/models/skill.ts";
 import natureToStatArray, { natures } from "@scripts/config/natures.ts";
 import { SlugField } from "@module/data/fields/slug-field.ts";
-import { TraitsSchema } from "@module/data/mixins/has-traits.ts";
-import { MigrationSchema } from "@module/data/mixins/has-migrations.ts";
-import type { AttributeSchema, StatSchema, TypeField, GenderOptions, AttributesSchema, AdvancementSchema, Movement } from "./data.ts";
-import { ActorSystemSchema as actorSystemSchema } from "./data.ts";
+import type { TraitsSchema } from "@module/data/mixins/has-traits.ts";
+import type { MigrationSchema } from "@module/data/mixins/has-migrations.ts";
+import type { AttributeSchema, StatSchema, Movement } from "./data.ts";
 import { addDataFieldMigration, sluggify } from "@utils";
-import type { AbilityReferenceSchema } from "@item/data/species.ts";
 
 const actorSystemSchema = (() => {
   const fields = foundry.data.fields;
@@ -64,7 +61,7 @@ const actorSystemSchema = (() => {
       output.stage = new fields.NumberField({
         required: true,
         initial: 0,
-        validate: (d) => (d as number) >= -6 && (d as number) <= 6,
+        validate: (d: number) => d >= -6 && d <= 6,
         label: `PTR2E.Attributes.${slug}.Stage.Label`,
         hint: `PTR2E.Attributes.${slug}.Stage.Hint`,
       });
@@ -124,8 +121,8 @@ const actorSystemSchema = (() => {
     biology: new fields.ObjectField(),
     capabilities: new fields.ObjectField(),
     type: new fields.SchemaField({
-      types: new fields.SetField<TypeField, foundry.data.fields.SourcePropFromDataField<TypeField>[], Set<foundry.data.fields.SourcePropFromDataField<TypeField>>, true, false, true>(
-        new fields.StringField<keyof TypeEffectiveness, keyof TypeEffectiveness, true, false, true>({
+      types: new fields.SetField(
+        new fields.StringField({
           required: true,
           choices: getTypes().reduce<Record<PokemonType, string>>(
             (acc, type) => ({ ...acc, [type]: type }),
@@ -140,7 +137,7 @@ const actorSystemSchema = (() => {
           label: "PTR2E.FIELDS.PokemonType.LabelPlural",
           hint: "PTR2E.FIELDS.PokemonType.HintPlural",
           required: true,
-          validate: (d) =>
+          validate: (d: Iterable<string>) =>
             d instanceof Set ? d.size > 0 : Array.isArray(d) ? d.length > 0 : false,
           validationError: "PTR2E.Errors.PokemonType",
         }
@@ -150,14 +147,14 @@ const actorSystemSchema = (() => {
       value: new fields.NumberField({
         required: true,
         initial: 0,
-        validate: (d) => (d as number) >= 0,
+        validate: (d: number) => d >= 0,
         label: "PTR2E.FIELDS.powerPoints.value.label",
         hint: "PTR2E.FIELDS.powerPoints.value.hint",
       }),
       max: new fields.NumberField({
         required: true,
         initial: 0,
-        validate: (d) => (d as number) >= 0,
+        validate: (d: number) => d >= 0,
         label: "PTR2E.FIELDS.powerPoints.max.label",
         hint: "PTR2E.FIELDS.powerPoints.max.hint",
       }),
@@ -166,14 +163,14 @@ const actorSystemSchema = (() => {
       value: new fields.NumberField({
         required: true,
         initial: 0,
-        validate: (d) => (d as number) >= 0,
+        validate: (d: number) => d >= 0,
         label: "PTR2E.FIELDS.health.value.label",
         hint: "PTR2E.FIELDS.health.value.hint",
       }),
       max: new fields.NumberField({
         required: true,
         initial: 0,
-        validate: (d) => (d as number) >= 0,
+        validate: (d: number) => d >= 0,
         label: "PTR2E.FIELDS.health.max.label",
         hint: "PTR2E.FIELDS.health.max.hint",
       }),
@@ -182,14 +179,14 @@ const actorSystemSchema = (() => {
       value: new fields.NumberField({
         required: true,
         initial: 0,
-        validate: (d) => (d as number) >= 0,
+        validate: (d: number) => d >= 0,
         label: "PTR2E.FIELDS.shield.value.label",
         hint: "PTR2E.FIELDS.shield.value.hint",
       }),
       max: new fields.NumberField({
         required: true,
         initial: 0,
-        validate: (d) => (d as number) >= 0,
+        validate: (d: number) => d >= 0,
         label: "PTR2E.FIELDS.shield.max.label",
         hint: "PTR2E.FIELDS.shield.max.hint",
       })
@@ -207,7 +204,7 @@ const actorSystemSchema = (() => {
       initial: "hardy",
       label: "PTR2E.FIELDS.nature.label",
     }),
-    gender: new fields.StringField<GenderOptions, GenderOptions, true, false, true>({
+    gender: new fields.StringField({
       required: true,
       choices: {
         "genderless": "genderless",
@@ -267,20 +264,23 @@ const actorSystemSchema = (() => {
   };
 })();
 
-export type ActorSystemSchema = typeof actorSystemSchema;
+export type ActorSystemSchema = typeof actorSystemSchema & TraitsSchema & MigrationSchema;
 
 class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeDataModel<ActorSystemSchema, ActorPTR2e>)) {
-  static LOCALIZATION_PREFIXES = ["PTR2E.ActorSystem"];
+  static override LOCALIZATION_PREFIXES = ["PTR2E.ActorSystem"];
 
-  declare parent: ActorPTR2e<this>;
+  declare parent: ActorPTR2e;
 
   modifiers: Record<string, number | undefined> = {};
 
   static override defineSchema(): ActorSystemSchema {
-    return actorSystemSchema;
+    return {
+      ...super.defineSchema() as TraitsSchema & MigrationSchema,
+      ...actorSystemSchema
+    };
   }
 
-  static override migrateData(source: ActorSystemPTR2e["_source"]) {
+  static override migrateData(source: NonNullable<foundry.data.fields.SchemaField.AssignmentType<ActorSystemSchema>>) {
     // Migrate the `health.shield` field to the new `shield` field
     addDataFieldMigration(source, "health.shield", "shield");
 
@@ -632,47 +632,51 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
   }
 }
 
-interface ActorSystemPTR2e extends ModelPropsFromSchema<actorSystemSchema> {
-  attributes: ModelPropsFromSchema<AttributesSchema> & {
-    hp: Omit<Attribute, 'stage'>;
-    atk: Attribute;
-    def: Attribute;
-    spa: Attribute;
-    spd: Attribute;
-    spe: Attribute;
-  };
-
-  type: {
-    effectiveness: Record<PokemonType, number>;
-    types: Set<PokemonType>;
-  };
-
-  advancement: ModelPropsFromSchema<AdvancementSchema> & {
-    advancementPoints: {
-      total: number;
-      spent: number;
-      available: number;
-    };
-    rvs: {
-      total: number;
-      spent: number;
-      available: number;
-    };
-  }
-
-  details: {
-    alliance: "party" | "opposition" | null | undefined;
-    size: {
-      height: number;
-      weight: number;
-      heightClass: number;
-      weightClass: number;
-    }
-  }
-
+interface ActorSystemPTR2e {
   movement: Record<string, Movement>;
-
-  _source: SourceFromSchema<actorSystemSchema>;
 }
+
+// interface ActorSystemPTR2e extends ModelPropsFromSchema<actorSystemSchema> {
+//   attributes: ModelPropsFromSchema<AttributesSchema> & {
+//     hp: Omit<Attribute, 'stage'>;
+//     atk: Attribute;
+//     def: Attribute;
+//     spa: Attribute;
+//     spd: Attribute;
+//     spe: Attribute;
+//   };
+
+//   type: {
+//     effectiveness: Record<PokemonType, number>;
+//     types: Set<PokemonType>;
+//   };
+
+//   advancement: ModelPropsFromSchema<AdvancementSchema> & {
+//     advancementPoints: {
+//       total: number;
+//       spent: number;
+//       available: number;
+//     };
+//     rvs: {
+//       total: number;
+//       spent: number;
+//       available: number;
+//     };
+//   }
+
+//   details: {
+//     alliance: "party" | "opposition" | null | undefined;
+//     size: {
+//       height: number;
+//       weight: number;
+//       heightClass: number;
+//       weightClass: number;
+//     }
+//   }
+
+//   movement: Record<string, Movement>;
+
+//   _source: SourceFromSchema<actorSystemSchema>;
+// }
 
 export default ActorSystemPTR2e;

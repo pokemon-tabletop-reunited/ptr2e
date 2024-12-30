@@ -8,29 +8,34 @@ import type { ChangesSchema } from "@module/data/mixins/has-changes.ts";
 import { ItemPTR2e } from "@item";
 import AbilitySystem from "@item/data/ability.ts";
 
+const activeEffectSystemSchema = {
+  removeAfterCombat: new foundry.data.fields.BooleanField({
+    required: true,
+    initial: true,
+    nullable: false,
+  }),
+  removeOnRecall: new foundry.data.fields.BooleanField({
+    required: true,
+    initial: false,
+    nullable: false,
+  }),
+  stacks: new foundry.data.fields.NumberField({ required: true, initial: 0, min: 0, nullable: false }),
+}
+
+export type ActiveEffectSystemSchema = typeof activeEffectSystemSchema & TraitsSchema & SlugSchema & ChangesSchema;
+
 export default abstract class ActiveEffectSystem extends HasEmbed(
-  HasTraits(HasSlug(HasChanges(foundry.abstract.TypeDataModel))),
+  HasTraits(HasSlug(HasChanges(foundry.abstract.TypeDataModel<ActiveEffectSystemSchema, ActiveEffectPTR2e>))),
   "effect"
 ) {
-  static LOCALIZATION_PREFIXES = ["PTR2E.Effect"];
+  static override LOCALIZATION_PREFIXES = ["PTR2E.Effect"];
 
   declare parent: ActiveEffectPTR2e;
 
   static override defineSchema(): ActiveEffectSystemSchema {
-    const fields = foundry.data.fields;
     return {
       ...super.defineSchema() as TraitsSchema & SlugSchema & ChangesSchema,
-      removeAfterCombat: new fields.BooleanField({
-        required: true,
-        initial: true,
-        nullable: false,
-      }),
-      removeOnRecall: new fields.BooleanField({
-        required: true,
-        initial: false,
-        nullable: false,
-      }),
-      stacks: new fields.NumberField({ required: true, initial: 0, min: 0, nullable: false }),
+      ...activeEffectSystemSchema,
     };
   }
 
@@ -54,16 +59,7 @@ export default abstract class ActiveEffectSystem extends HasEmbed(
     return result;
   }
 
-  override async toEmbed(_config: foundry.abstract.DocumentHTMLEmbedConfig, options: EnrichmentOptions = {}): Promise<HTMLElement | HTMLCollection | null> {
+  override async toEmbed(_config: TextEditor.DocumentHTMLEmbedConfig, options: TextEditor.EnrichmentOptions = {}): Promise<HTMLElement | HTMLCollection | null> {
     return super.toEmbed(_config, options, { parentFields: this.parent.schema.fields });
   }
-}
-
-export default interface ActiveEffectSystem
-  extends ModelPropsFromSchema<ActiveEffectSystemSchema> { }
-
-export interface ActiveEffectSystemSchema extends foundry.data.fields.DataSchema, TraitsSchema, SlugSchema, ChangesSchema {
-  removeAfterCombat: foundry.data.fields.BooleanField<boolean, boolean, true, false, true>;
-  removeOnRecall: foundry.data.fields.BooleanField<boolean, boolean, true, false, true>;
-  stacks: foundry.data.fields.NumberField<number, number, true, false, true>;
 }

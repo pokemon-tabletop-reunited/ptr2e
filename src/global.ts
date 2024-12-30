@@ -1,4 +1,4 @@
-import type { ActorPTR2e} from "@actor";
+import type { ActorPTR2e, HumanoidActorSystem, PokemonActorSystem} from "@actor";
 import { ActorSystemPTR2e } from "@actor";
 import { CombatPTR2e, CombatantPTR2e, CombatTrackerPTR2e } from "@combat";
 import type { ItemPTR2e} from "@item";
@@ -23,11 +23,11 @@ import type { TutorListSettings } from "@system/tutor-list/setting-model.ts";
 import type { TutorListApp } from "@module/apps/tutor-list.ts";
 import type GithubManager from "@module/apps/github.ts";
 import { ExpTrackerSettings } from "@system/exp-tracker-model.ts";
-import type { HasBaseSchema } from "@module/data/mixins/has-base.ts";
 import type { ItemFlagsPTR2e } from "@item/data/data.ts";
 import type AbilitySystem from "@item/data/ability.ts";
 import type { ActiveEffectPTR2e } from "@effects";
 import type PerkSystem from "@item/data/perk.ts";
+import type { TypeEffectiveness } from "@scripts/config/effectiveness.ts";
 
 declare global {
   // interface ConfigPTR2e extends ConfiguredConfig {
@@ -127,14 +127,15 @@ declare global {
 
   interface AssumeHookRan {
     init: never;
+    i18nready: never;
     setup: never;
     ready: never;
   }
 
   interface DocumentClassConfig {
-    // Actor: typeof ActorPTR2e;
+    Actor: typeof ActorPTR2e;
     Item: typeof ItemPTR2e;
-    // ActiveEffect: typeof ActiveEffectPTR2e;
+    ActiveEffect: typeof ActiveEffectPTR2e;
   }
 
   interface DataModelConfig {
@@ -154,8 +155,9 @@ declare global {
       "summon": object
     },
     Actor: {
-      "humanoid": object
-      "pokemon": object
+      "humanoid": HumanoidActorSystem
+      "pokemon": PokemonActorSystem
+      "ptu-actor": object
     },
     ActiveEffect: {
       "affliction": object,
@@ -184,8 +186,56 @@ declare global {
 
   interface FlagConfig {
     Item: ItemFlagsPTR2e;
+    Folder: {
+      core?: Record<string, unknown>;
+      ptr2e?: {
+        owner: string;
+        party: string[];
+        team: string[];
+      }
+    }
   }
 
+  interface SettingConfig {
+    "ptr2e.compendiumBrowserSources": CompendiumBrowserSources
+    "ptr2e.compendiumBrowserPacks": CompendiumBrowserSettings
+    "ptr2e.tutorListData": TutorListSettings
+    "ptr2e.expTrackerData": ExpTrackerSettings
+    "ptr2e.tokens.autoscale": boolean
+    "ptr2e.pokemonTypes": TypeEffectiveness
+    "ptr2e.clocks": ClockDatabase
+    "ptr2e.dev-mode": boolean
+    "ptr2e.player-folder-create-permission": boolean
+    "ptr2e.traits": unknown[]
+    "ptr2e.skills": unknown[]
+    "ptr2e.artMap": unknown
+    "ptr2e.worldSystemVersion": string
+    "ptr2e.worldSchemaVersion": number
+  }
+
+  // Misc Type Helpers
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   type ConstructorOf<T> = new (...args: any[]) => T;
+  type Maybe<T> = T | null | undefined;
+  type SetElement<TSet extends Set<unknown>> = TSet extends Set<infer TElement> ? TElement : never;
+
+  // Type Aliases
+  type TokenDocumentUUID = `Scene.${string}.Token.${string}`;
+  type CompendiumActorUUID = `Compendium.${string}.Actor.${string}`;
+  type ActorUUID = `Actor.${string}` | `${TokenDocumentUUID}.Actor.${string}` | CompendiumActorUUID;
+  type EmbeddedItemUUID = `Actor.${string}.Item.${string}`;
+  type CompendiumItemUUID = `Compendium.${string}.Item.${string}`;
+  type ItemUUID = `Item.${string}` | EmbeddedItemUUID | CompendiumItemUUID;
+
+  type HexColorString = `#${string}`;
+
+  type AudioFileExtension = keyof typeof CONST.AUDIO_FILE_EXTENSIONS;
+  type ImageFileExtension = keyof typeof CONST.IMAGE_FILE_EXTENSIONS;
+  type VideoFileExtension = keyof typeof CONST.VIDEO_FILE_EXTENSIONS;
+  type ActiveEffectChangeMode = (typeof CONST.ACTIVE_EFFECT_MODES)[keyof typeof CONST.ACTIVE_EFFECT_MODES];
+
+  type AudioFilePath = `${string}.${AudioFileExtension}`;
+  type ImageFilePath = `${string}.${ImageFileExtension}`;
+  type VideoFilePath = `${string}.${VideoFileExtension}`;
+  type FilePath = AudioFilePath | ImageFilePath | VideoFilePath;
 }

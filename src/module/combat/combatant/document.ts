@@ -2,11 +2,7 @@ import type { TokenDocumentPTR2e } from "@module/canvas/token/document.ts";
 import type { CombatPTR2e } from "@combat";
 import type { CombatantSystemPTR2e } from "@combat";
 
-class CombatantPTR2e<
-  TParent extends CombatPTR2e | null = CombatPTR2e | null,
-  TTokenDocument extends TokenDocumentPTR2e | null = TokenDocumentPTR2e | null,
-  TSystem extends CombatantSystemPTR2e = CombatantSystemPTR2e
-> extends Combatant<TParent, TTokenDocument, TSystem> {
+class CombatantPTR2e extends Combatant {
 
   get encounter() {
     return this.parent!;
