@@ -1,13 +1,13 @@
 import type { ActorSheetPTR2e } from "@actor";
-import { ItemPTR2e } from "@item";
-import type { BlueprintSystemModel } from "@item/data/index.ts";
+import { ItemPTR2e, type BlueprintPTR2e } from "@item";
 import { BlueprintSheetPTR2e } from "@item/sheets/index.ts";
+import type { DropData } from "node_modules/fvtt-types/src/foundry/client/data/abstract/client-document.d.mts";
 
 export const DropCanvasData = {
   listen() {
-    Hooks.on("dropCanvasData", async (canvas, drop) => {
+    Hooks.on("dropCanvasData", async (canvas, drop: DropData<Item.ConfiguredClass>) => {
       if (drop.type === "Item") {
-        const item = await fromUuid<ItemPTR2e>(drop.uuid);
+        const item = await fromUuid(drop.uuid) as ItemPTR2e | null;
         if (item?.type === "species") {
           const folder = await (async () => {
             const folder = game.actors.folders.getName(game.scenes.current!.name);
@@ -18,7 +18,7 @@ export const DropCanvasData = {
             });
           })()
 
-          const blueprint = await ItemPTR2e.create<ItemPTR2e<BlueprintSystemModel, null>>(
+          const blueprint = await ItemPTR2e.create(
             {
               name: item.name,
               type: "blueprint",
@@ -38,19 +38,17 @@ export const DropCanvasData = {
           const x = Math.floor(drop.x / canvas.scene.grid.size) * canvas.scene.grid.size
           const y = Math.floor(drop.y / canvas.scene.grid.size) * canvas.scene.grid.size
 
-          //@ts-expect-error - This is a valid document.
           return void new BlueprintSheetPTR2e({ document: blueprint, generation: {
             x, y, canvas, temporary: true
           } }).render(true);
         }
         if(item?.type === "blueprint") {
-          const blueprint = item as ItemPTR2e<BlueprintSystemModel, null>;
+          const blueprint = item as BlueprintPTR2e;
           if(!blueprint || !canvas.scene) return;
 
           const x = Math.floor(drop.x / canvas.scene.grid.size) * canvas.scene.grid.size
           const y = Math.floor(drop.y / canvas.scene.grid.size) * canvas.scene.grid.size
 
-          //@ts-expect-error - This is a valid document.
           return void new BlueprintSheetPTR2e({ document: blueprint, generation: {
             x, y, canvas, temporary: false
           } }).render(true);
@@ -59,11 +57,13 @@ export const DropCanvasData = {
     });
 
     // Handle dropping items onto tokens
-    Hooks.on("dropCanvasData", (_canvas, data) => {
-      const dropTarget = [...canvas.tokens.placeables]
+    Hooks.on("dropCanvasData", (canvas, data) => {
+      const dropTarget = [...canvas.tokens!.placeables]
         .sort((a, b) => b.document.sort - a.document.sort)
         .find((token) => {
+          //@ts-expect-error - Error in PIXI typings
           const maximumX = token.x + (token.hitArea?.right ?? 0);
+          //@ts-expect-error - Error in PIXI typings
           const maximumY = token.y + (token.hitArea?.bottom ?? 0);
           return data.x >= token.x && data.y >= token.y && data.x <= maximumX && data.y <= maximumY;
         });

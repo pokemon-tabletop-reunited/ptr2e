@@ -18,13 +18,15 @@ export const ChatContext: PTRHook = {
             return ["skill"].includes(message.type) && !(message.system as SkillMessageSystem).rerolled && !(message.system as SkillMessageSystem).luckRoll;
           },
           callback: li => {
-            const message = game.messages.get(li.data("messageId")) as ChatMessagePTR2e<SkillMessageSystem>;
+            const message = game.messages.get(li.data("messageId")) as ChatMessagePTR2e;
             if (!message) return;
             foundry.applications.api.DialogV2.confirm({
+              //@ts-expect-error - fvtt-types error
               window: {
                 title: "PTR2E.ChatContext.RerollSkill.title",
               },
               content: game.i18n.localize("PTR2E.ChatContext.RerollSkill.content"),
+              //@ts-expect-error - fvtt-types error
               yes: {
                 callback: async () => {
                   await message.system.reroll();
@@ -52,7 +54,7 @@ export const ChatContext: PTRHook = {
 
             // skill
             if (message.type == "skill") {
-              const chatMessage = message as ChatMessagePTR2e<SkillMessageSystem>;
+              const chatMessage = message as ChatMessagePTR2e & { system: SkillMessageSystem };
 
               const currentResult = chatMessage.system.context?.roll?.total;
               if (currentResult === undefined) return;
@@ -60,10 +62,12 @@ export const ChatContext: PTRHook = {
               // Get the amount required to get to the next increment of -10, or 0 if the current result is above 0.
               const amount = Math.abs((currentResult > 0 ? 0 : Math.ceil(currentResult / -10) * -10) - currentResult) || 10
               foundry.applications.api.DialogV2.confirm({
+                //@ts-expect-error - fvtt-types error
                 window: {
                   title: "PTR2E.ChatContext.SpendLuckSkill.title",
                 },
                 content: game.i18n.format("PTR2E.ChatContext.SpendLuckSkill.content", { amount }),
+                //@ts-expect-error - fvtt-types error
                 yes: {
                   callback: async () => {
                     await chatMessage.system.applyLuckIncrease(amount);
@@ -72,7 +76,7 @@ export const ChatContext: PTRHook = {
               });
             }
             else if (message.type == "capture") {
-              const captureMessage = message as ChatMessagePTR2e<CaptureMessageSystem>;
+              const captureMessage = message as ChatMessagePTR2e & { system: CaptureMessageSystem };
 
               const currentResult = captureMessage.system.rolls.accuracy?.total;
               if (currentResult === undefined) return;
@@ -80,10 +84,12 @@ export const ChatContext: PTRHook = {
               // Get the amount required to get to the next increment of -10, or 0 if the current result is above 0.
               const amount = Math.abs((currentResult > 0 ? 0 : Math.ceil(currentResult / -10) * -10) - currentResult) || 10
               foundry.applications.api.DialogV2.confirm({
+                //@ts-expect-error - fvtt-types error
                 window: {
                   title: "PTR2E.ChatContext.SpendLuckSkill.title",
                 },
                 content: game.i18n.format("PTR2E.ChatContext.SpendLuckSkill.content", { amount }),
+                //@ts-expect-error - fvtt-types error
                 yes: {
                   callback: async () => {
                     await captureMessage.system.applyLuckIncrease(amount);
@@ -92,7 +98,7 @@ export const ChatContext: PTRHook = {
               });
             }
             else if (message.type == "attack") {
-              const attackMessage = message as ChatMessagePTR2e<AttackMessageSystem>;
+              const attackMessage = message as ChatMessagePTR2e & { system: AttackMessageSystem };
               // get the valid targets (the ones that have been missed)
               const targets = attackMessage.system.results.map(r => {
                 // (r.accuracy?.total ?? 0) <= (r.accuracy?.options?.accuracyDC ?? -1)
@@ -123,10 +129,12 @@ export const ChatContext: PTRHook = {
               if (!target) return;
 
               foundry.applications.api.DialogV2.confirm({
+                //@ts-expect-error - fvtt-types error
                 window: {
                   title: "PTR2E.ChatContext.SpendLuckAttack.title",
                 },
                 content: game.i18n.format("PTR2E.ChatContext.SpendLuckAttack.content", { amount: target.amount }),
+                //@ts-expect-error - fvtt-types error
                 yes: {
                   callback: async () => {
                     await attackMessage.system.applyLuckIncrease(target.uuid as ActorUUID);
@@ -153,7 +161,7 @@ export const ChatContext: PTRHook = {
             return ["attack", "skill", "capture"].includes(message.type) || (message.type === "damage-applied" && !!(message.system as DamageAppliedMessageSystem).result)
           },
           callback: li => {
-            const message = game.messages.get(li.data("messageId")) as ChatMessagePTR2e<SkillMessageSystem>;
+            const message = game.messages.get(li.data("messageId")) as ChatMessagePTR2e & { system: SkillMessageSystem }
             if (!message) return;
             new DataInspector(message, {}).render(true);
           }

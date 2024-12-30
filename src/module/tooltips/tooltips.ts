@@ -189,9 +189,9 @@ export default class TooltipsPTR2e {
     const effectId = game.tooltip.element?.dataset.id;
     if (!effectId) return false;
 
-    const parent = await fromUuid<ActorPTR2e>(
-      (game.tooltip.element?.closest("[data-parent]") as HTMLElement)?.dataset.parent
-    );
+    const parent = await fromUuid(
+      (game.tooltip.element?.closest("[data-parent]") as HTMLElement)?.dataset.parent ?? ""
+    ) as ActorPTR2e | null;
     if (!parent) return false;
 
     const effect = parent.effects.get(effectId);

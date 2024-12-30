@@ -1,5 +1,7 @@
+import type { DICE_ROLL_MODES } from "node_modules/fvtt-types/src/foundry/common/constants.d.mts";
+
 /** Returns statistic dialog roll parameters based on held keys */
-interface ParamsFromEvent { skipDialog: boolean; rollMode?: RollMode | "roll" }
+interface ParamsFromEvent { skipDialog: boolean; rollMode?: DICE_ROLL_MODES | "roll" }
 
 function isRelevantEvent(
     event: Maybe<JQuery.TriggeredEvent | Event>,
@@ -27,7 +29,7 @@ function eventToRollParams(
 }
 
 /** Set roll mode from a user's input: used for messages that are not actually rolls. */
-function eventToRollMode(event: Maybe<Event>): RollMode | "roll" {
+function eventToRollMode(event: Maybe<Event>): DICE_ROLL_MODES | "roll" {
     if (!isRelevantEvent(event) || !(event.ctrlKey || event.metaKey)) return "roll";
     return game.user.isGM ? "gmroll" : "blindroll";
 }

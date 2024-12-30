@@ -3,7 +3,6 @@ import { ActorPTR2e } from "@actor";
 import type { ActionPTR2e, AttackPTR2e, ChangeModel } from "@data";
 import type { BracketedValue, EffectSourcePTR2e } from "@effects";
 import { ActiveEffectPTR2e } from "@effects";
-import type { ItemSourcePTR2e } from "@item";
 import { ItemPTR2e } from "@item";
 import type {
   DeferredValueParams,
@@ -59,7 +58,7 @@ async function extractTargetModifiers({
     )
   ).flatMap((e) => e ?? [])
     .map(m => {
-      m.appliesTo = new Map([[target.uuid, true]]);
+      m.appliesTo = new Map([[target.uuid as ActorUUID, true]]);
       return m;
     });
 }
@@ -248,13 +247,13 @@ async function processPreUpdateHooks(document: ActorPTR2e | ActiveEffectPTR2e | 
   const createDeletes = (
     await Promise.all(
       changes.map(
-        (c): Promise<{ create: ItemSourcePTR2e[]; delete: string[] } | { createEffects: EffectSourcePTR2e[]; deleteEffects: string[] }> => c.preUpdateActor()
+        (c): Promise<{ create: foundry.abstract.Document.ConstructorDataForName<"Item">; delete: string[] } | { createEffects: EffectSourcePTR2e[]; deleteEffects: string[] }> => c.preUpdateActor()
       )
     )
   ).reduce(
-    (combined: { create: ItemSourcePTR2e[]; delete: string[]; createEffects: EffectSourcePTR2e[]; deleteEffects: string[] }, cd) => {
+    (combined: { create: foundry.abstract.Document.ConstructorDataForName<"Item">[]; delete: string[]; createEffects: EffectSourcePTR2e[]; deleteEffects: string[] }, cd) => {
       if ('create' in cd) {
-        combined.create.push(...cd.create);
+        combined.create.push(...cd.create as unknown as foundry.abstract.Document.ConstructorDataForName<"Item">);
         combined.delete.push(...cd.delete);
       } else {
         combined.createEffects.push(...cd.createEffects);

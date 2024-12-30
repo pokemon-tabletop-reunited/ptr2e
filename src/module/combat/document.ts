@@ -450,17 +450,17 @@ class CombatPTR2e extends Combat {
   }
 
   protected override _onUpdate(
-    changed: DeepPartial<foundry.data.fields.SchemaField.AssignmentType<Combat.Schema>>,
+    changed: foundry.data.fields.SchemaField.AssignmentType<Combat.Schema>,
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     options: foundry.abstract.Document.OnUpdateOptions<any>,
     userId: string
   ): void {
-    super._onUpdate(changed, options, userId);
+    super._onUpdate(changed!, options, userId);
 
     const toDelete = [];
     for (const combatant of (this.combatants?.filter(c => c.type === "summon") ?? [])) {
       if (combatant.system.expired) {
-        toDelete.push(combatant.id);
+        toDelete.push(combatant.id!);
       }
     }
     if (toDelete.length) {

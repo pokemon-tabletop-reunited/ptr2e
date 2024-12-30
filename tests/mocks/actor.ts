@@ -1,39 +1,39 @@
-import type { ActorPTR2e } from "@actor";
-import type { ItemPTR2e, ItemSystemPTR } from "@item";
-import { MockItem } from "./item.ts";
-import { MockCollection } from "./collection.ts";
+// import type { ActorPTR2e } from "@actor";
+// import type { ItemPTR2e, ItemSystemPTR } from "@item";
+// import { MockItem } from "./item.ts";
+// import { MockCollection } from "./collection.ts";
 
-type ActorSourcePTR2e = ActorPTR2e['_source'];
+// type ActorSourcePTR2e = ActorPTR2e['_source'];
 
-export class MockActor {
-    _source: ActorSourcePTR2e;
+// export class MockActor {
+//     _source: ActorSourcePTR2e;
 
-    readonly items = new MockCollection<ItemPTR2e<ItemSystemPTR, ActorPTR2e>>();
+//     readonly items = new MockCollection<ItemPTR2e<ItemSystemPTR, ActorPTR2e>>();
 
-    constructor(data: ActorSourcePTR2e, public options: DocumentConstructionContext<null> = {}) {
-        this._source = foundry.utils.duplicate(data);
-        this._source.items ??= []
-        this.prepareData();
-    }
+//     constructor(data: ActorSourcePTR2e, public options: DocumentConstructionContext<null> = {}) {
+//         this._source = foundry.utils.duplicate(data);
+//         this._source.items ??= []
+//         this.prepareData();
+//     }
 
-    prepareData() {
-        const sourceIds = this._source.items.map((source) => source._id);
-        for (const item of this.items) {
-            if (!sourceIds.includes(item.id)) {
-                this.items.delete(item.id);
-            }
-        }
+//     prepareData() {
+//         const sourceIds = this._source.items.map((source) => source._id);
+//         for (const item of this.items) {
+//             if (!sourceIds.includes(item.id)) {
+//                 this.items.delete(item.id);
+//             }
+//         }
 
-        for (const source of this._source.items as unknown as SourceFromSchema<ItemSchema<string, ItemSystemPTR>>[]) {
-            const item = this.items.get(source._id ?? "");
-            if (item) {
-                (item as { _source: object })._source = foundry.utils.duplicate(source);
-            } else {
-                this.items.set(
-                    source._id ?? "",
-                    new MockItem(source, { parent: this as unknown as ActorPTR2e }) as unknown as ItemPTR2e<ItemSystemPTR, ActorPTR2e>,
-                );
-            }
-        }
-    }
-}
+//         for (const source of this._source.items as unknown as SourceFromSchema<ItemSchema<string, ItemSystemPTR>>[]) {
+//             const item = this.items.get(source._id ?? "");
+//             if (item) {
+//                 (item as { _source: object })._source = foundry.utils.duplicate(source);
+//             } else {
+//                 this.items.set(
+//                     source._id ?? "",
+//                     new MockItem(source, { parent: this as unknown as ActorPTR2e }) as unknown as ItemPTR2e<ItemSystemPTR, ActorPTR2e>,
+//                 );
+//             }
+//         }
+//     }
+// }

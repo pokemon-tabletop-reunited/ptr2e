@@ -3,12 +3,12 @@ import type { PTRHook } from "./data.ts";
 
 export const GearColor: PTRHook = {
   listen: () => {
-    Hooks.on("renderSidebarTab", (_, html, context) => {
-      const $html = $(html as HTMLElement);
+    Hooks.on("renderSidebarTab", (_: unknown, html: HTMLElement, context: unknown) => {
+      const $html = $(html);
 
       const getRarity = (item: ItemPTR2e) => {
         if (!["consumable", "container", "equipment", "gear", "weapon"].includes(item.type)) return null;
-        return (item.system.rarity as "common" | "uncommon" | "rare" | "unique") || null;
+        return ((item.system as {rarity: "common" | "uncommon" | "rare" | "unique"}).rarity) || null;
       }
 
       const toIndex = new Set<string>();
@@ -27,7 +27,7 @@ export const GearColor: PTRHook = {
         const entries = [
           ...context.tree.children.map(child => child.entries).flat(),
           ...context.tree.entries
-        ] as (ClientDocument | CompendiumIndexData)[];
+        ] as (ClientDocument | Record<string, unknown> & {type: string, _id: string})[];
 
         for (const entry of entries) {
           if (entry instanceof ItemPTR2e) {
@@ -47,7 +47,7 @@ export const GearColor: PTRHook = {
             if (!["consumable", "container", "equipment", "gear", "weapon"].includes(entry.type)) continue;
             // This compendium index entry was already loaded in memory
             if ('system' in entry) {
-              const rarity = getRarity(entry as ItemPTR2e);
+              const rarity = getRarity(entry as unknown as ItemPTR2e);
               if (!rarity) continue;
 
               const $entry = $html.find(`[data-entry-id="${entry.id}"]`);
@@ -67,7 +67,8 @@ export const GearColor: PTRHook = {
 
         if (toIndex.size && 'collection' in context) {
 
-          const collection = context.collection as CompendiumCollection;
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          const collection = context.collection as CompendiumCollection<any>;
           (async () => {
             const index = await collection.getIndex({ fields: ["system.rarity"] })
 

@@ -1,5 +1,5 @@
 import type { TokenFlagsPTR2e } from "@module/canvas/token/data.ts";
-import type { CombatantPTR2e } from "@combat";
+import type { CombatantPTR2e } from "../../combat/combatant/document.ts";
 // TODO: Fix circular dependency when imported from @combat
 import CharacterCombatantSystem from "../../combat/combatant/models/character.ts";
 import { TokenAura } from "./aura/aura.ts";

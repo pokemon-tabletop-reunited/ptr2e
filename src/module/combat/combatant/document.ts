@@ -35,7 +35,7 @@ class CombatantPTR2e extends Combatant {
     options: foundry.abstract.Document.PreUpdateOptions<any>,
     user: User
   ): Promise<boolean | void> {
-    if(!changed) return Promise.resolve(false);
+    if (!changed) return Promise.resolve(false);
     if (changed["initiative"] === null || ('-=initiative' in changed) || Number(changed.initiative ?? 0) < 0) {
       ui.notifications.error(game.i18n.localize("PTR2E.Combat.Combatant.InitiativeNotZeroOrNull"));
       return Promise.resolve(false);
@@ -49,3 +49,4 @@ class CombatantPTR2e extends Combatant {
 }
 
 export default CombatantPTR2e;
+export { type CombatantPTR2e }

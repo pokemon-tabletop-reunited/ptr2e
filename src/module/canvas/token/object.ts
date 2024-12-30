@@ -2,7 +2,6 @@ import type { DeepPartial } from "fvtt-types/utils";
 import type { SquareGridPTR2e } from "../grid.ts";
 import { AuraRenderers } from "./aura/map.ts";
 import * as R from "remeda";
-import type { TokenDocumentPTR2e } from "./document.ts";
 
 class TokenPTR2e extends Token {
   /** Visual representation and proximity-detection facilities for auras */
@@ -179,10 +178,6 @@ class TokenPTR2e extends Token {
       game.ptr.tokenPanel.token = (game.user.character?.getActiveTokens().at(0) as this) ?? null;
     }
   }
-}
-
-interface TokenPTR2e {
-  document: TokenDocumentPTR2e;
 }
 
 export { TokenPTR2e }

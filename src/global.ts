@@ -20,7 +20,7 @@ import type { ActiveEffectPTR2e } from "@effects";
 import type PerkSystem from "@item/data/perk.ts";
 import type { TypeEffectiveness } from "@scripts/config/effectiveness.ts";
 import type { CompendiumBrowserSettings, CompendiumBrowserSources } from "@module/apps/compendium-browser/data.ts";
-import type { CombatantPTR2e, CombatPTR2e, CombatSystemPTR2e } from "@combat";
+import type { CharacterCombatantSystem, CombatantPTR2e, CombatPTR2e, CombatSystemPTR2e, RoundCombatantSystem, SummonCombatantSystem } from "@combat";
 import type { ScenePTR2e } from "@module/canvas/scene.ts";
 import type { TokenPTR2e } from "@module/canvas/token/object.ts";
 import type { TokenDocumentPTR2e } from "@module/canvas/token/document.ts";
@@ -175,9 +175,9 @@ declare global {
       "combat": object
     },
     Combatant: {
-      "character": object,
-      "round": object,
-      "summon": object
+      "character": CharacterCombatantSystem,
+      "round": RoundCombatantSystem,
+      "summon": SummonCombatantSystem
     },
     Combat: {
       base: CombatSystemPTR2e
@@ -224,6 +224,8 @@ declare global {
   type SetElement<TSet extends Set<unknown>> = TSet extends Set<infer TElement> ? TElement : never;
 
   // Type Aliases
+  type CompendiumDocumentType = (typeof CONST.COMPENDIUM_DOCUMENT_TYPES)[number];
+  type CompendiumUUID = `Compendium.${string}.${CompendiumDocumentType}.${string}`;
   type TokenDocumentUUID = `Scene.${string}.Token.${string}`;
   type CompendiumActorUUID = `Compendium.${string}.Actor.${string}`;
   type ActorUUID = `Actor.${string}` | `${TokenDocumentUUID}.Actor.${string}` | CompendiumActorUUID;

@@ -17,7 +17,7 @@ export const GetSceneControlButtons: PTRHook = {
             const targets = [...game.user.targets];
             if (targets.length === 0) return ui.notifications.error("PTR2E.DistanceToTarget.NoTargets", { localize: true });
 
-            const self = canvas.tokens.controlled[0] || game.user.character?.getActiveTokens()?.[0];
+            const self = canvas?.tokens?.controlled[0] || game.user.character?.getActiveTokens()?.[0];
             if (!self) return ui.notifications.error("PTR2E.DistanceToTarget.NoSelf", { localize: true });
 
             const grid = game.scenes.viewed?.grid as SquareGridPTR2e;

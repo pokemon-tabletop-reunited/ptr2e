@@ -3,7 +3,7 @@ import * as R from "remeda";
 class UUIDUtils {
   static async fromUUIDs(
     uuids: string[]
-  ): Promise<ClientDocument[]> {
+  ): Promise<foundry.abstract.Document.Any[]> {
 
     // For any UUIDs which are embedded within a compendium pack, batch retrieve all such documents.
     const packs = new Map();
@@ -31,7 +31,7 @@ class UUIDUtils {
   }
 
   static isActionUUID(uuid: unknown): uuid is ActionUUID {
-    try {
+    try { //@ts-expect-error - Actions is a custom added type.
       return typeof uuid === "string" && foundry.utils.parseUuid(uuid).type === "Actions";
     } catch {
       return false;
@@ -59,6 +59,6 @@ class UUIDUtils {
 }
 
 type EmbeddedActionUUID = `Actions.${string}`;
-type ActionUUID = `${EmbeddedItemUUID}.${EmbeddedActionUUID}` | `${WorldItemUUID}.${EmbeddedActionUUID}` | `${CompendiumItemUUID}.${EmbeddedActionUUID}`;
+type ActionUUID = `${EmbeddedItemUUID}.${EmbeddedActionUUID}` | `Item.${string}.${EmbeddedActionUUID}` | `${CompendiumItemUUID}.${EmbeddedActionUUID}`;
 
 export { UUIDUtils, type ActionUUID };

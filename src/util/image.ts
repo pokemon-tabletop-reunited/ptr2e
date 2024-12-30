@@ -59,13 +59,14 @@ class ImageResolver {
     }
   }
 
-  find(needle: string | string[]) {
+  find(needle: string | string[]): string | undefined {
     const realNeedle = Array.isArray(needle) ? needle : [...needle];
 
     const node = this.tree.nodeAtPrefix(realNeedle, { hasLeaves: true });
 
     const filePath = node?.[foundry.utils.StringTree.leaves];
-    return Array.isArray(filePath) ? filePath.at(0) : filePath;
+    //FIXME: Look into why this conversion to string is required
+    return Array.isArray(filePath) ? filePath.at(0) as unknown as string : filePath;
   }
 
   findSpecies(config: ImageSpeciesResolverConfig): string | null {

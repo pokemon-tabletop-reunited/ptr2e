@@ -1,3 +1,3 @@
 export interface PTRHook {
-    listen: () => void;
+  listen: () => void;
 }
