@@ -1,26 +1,30 @@
 /* eslint-disable no-fallthrough */
-import type { PokemonType} from "@data";
+import type { PokemonType } from "@data";
 import { HasTraits, HasMigrations, ClockPTR2e, Trait } from "@data";
 import { getTypes } from "@scripts/config/effectiveness.ts";
-import type {
-  ActorPTR2e,
-  Attribute,
-  Attributes,
-} from "@actor";
 import { SpeciesSystemModel } from "@item/data/index.ts";
 import { getInitialSkillList } from "@scripts/config/skills.ts";
 import { CollectionField } from "@module/data/fields/collection-field.ts";
-import SkillPTR2e from "@module/data/models/skill.ts";
+import SkillPTR2e from "../../data/models/skill.ts";
 import natureToStatArray, { natures } from "@scripts/config/natures.ts";
 import { SlugField } from "@module/data/fields/slug-field.ts";
 import type { TraitsSchema } from "@module/data/mixins/has-traits.ts";
 import type { MigrationSchema } from "@module/data/mixins/has-migrations.ts";
 import type { Movement } from "./data.ts";
+import type { Stat, Attributes, Attribute } from "../data.ts";
 import { addDataFieldMigration, sluggify } from "@utils";
+import type { EmptyObject } from "fvtt-types/utils";
+import { default as ActorPTR2e } from "../base.ts";
 
-interface StatSchema = {
+interface StatSchema extends foundry.data.fields.DataSchema {
   slug: SlugField<{ required: true, initial: string }>;
-  stage: NumberField<{ required: true, initial: number }>;
+  stage: foundry.data.fields.NumberField<{ required: true, nullable: false, initial: number }>;
+}
+
+interface AttributeSchema extends StatSchema {
+  evs: foundry.data.fields.NumberField<{ required: true, nullable: false, initial: number, label: string, min: number, max: number, step: number, validate: (d: number) => boolean }>;
+  ivs: foundry.data.fields.NumberField<{ required: true, nullable: false, initial: number, validate: (d: number) => boolean }>;
+  base: foundry.data.fields.NumberField<{ required: false, nullable: false, initial: number | undefined, validate: (d: number) => boolean }>;
 }
 
 const actorSystemSchema = (() => {
@@ -34,6 +38,7 @@ const actorSystemSchema = (() => {
       ...getStatField(slug, withStage),
       evs: new fields.NumberField({
         required: true,
+        nullable: false,
         label: `PTR2E.Attributes.${slug}.Label`,
         initial: 0,
         min: 0,
@@ -44,11 +49,13 @@ const actorSystemSchema = (() => {
       }),
       ivs: new fields.NumberField({
         required: true,
+        nullable: false,
         initial: 0,
         validate: (d: number) => d >= 0,
       }),
       base: new fields.NumberField({
         required: false,
+        nullable: false,
         initial: undefined,
         validate: (d: number) => d === undefined || d >= 1,
       }),
@@ -65,6 +72,7 @@ const actorSystemSchema = (() => {
     if (withStage)
       output.stage = new fields.NumberField({
         required: true,
+        nullable: false,
         initial: 0,
         validate: (d: number) => d >= -6 && d <= 6,
         label: `PTR2E.Attributes.${slug}.Stage.Label`,
@@ -78,6 +86,7 @@ const actorSystemSchema = (() => {
       experience: new fields.SchemaField({
         current: new fields.NumberField({
           required: true,
+          nullable: false,
           initial: 0,
           min: 0,
           label: "PTR2E.FIELDS.experience.current.label",
@@ -85,6 +94,7 @@ const actorSystemSchema = (() => {
         }),
         next: new fields.NumberField({
           required: true,
+          nullable: false,
           initial: 0,
           min: 0,
           label: "PTR2E.FIELDS.experience.next.label",
@@ -92,6 +102,7 @@ const actorSystemSchema = (() => {
         }),
         diff: new fields.NumberField({
           required: true,
+          nullable: false,
           initial: 0,
           min: 0,
           label: "PTR2E.FIELDS.experience.diff.label",
@@ -100,6 +111,7 @@ const actorSystemSchema = (() => {
       }),
       level: new fields.NumberField({
         required: true,
+        nullable: false,
         initial: 1,
         min: 1,
         max: 100,
@@ -151,6 +163,7 @@ const actorSystemSchema = (() => {
     powerPoints: new fields.SchemaField({
       value: new fields.NumberField({
         required: true,
+        nullable: false,
         initial: 0,
         validate: (d: number) => d >= 0,
         label: "PTR2E.FIELDS.powerPoints.value.label",
@@ -158,6 +171,7 @@ const actorSystemSchema = (() => {
       }),
       max: new fields.NumberField({
         required: true,
+        nullable: false,
         initial: 0,
         validate: (d: number) => d >= 0,
         label: "PTR2E.FIELDS.powerPoints.max.label",
@@ -167,6 +181,7 @@ const actorSystemSchema = (() => {
     health: new fields.SchemaField({
       value: new fields.NumberField({
         required: true,
+        nullable: false,
         initial: 0,
         validate: (d: number) => d >= 0,
         label: "PTR2E.FIELDS.health.value.label",
@@ -174,6 +189,7 @@ const actorSystemSchema = (() => {
       }),
       max: new fields.NumberField({
         required: true,
+        nullable: false,
         initial: 0,
         validate: (d: number) => d >= 0,
         label: "PTR2E.FIELDS.health.max.label",
@@ -183,6 +199,7 @@ const actorSystemSchema = (() => {
     shield: new fields.SchemaField({
       value: new fields.NumberField({
         required: true,
+        nullable: false,
         initial: 0,
         validate: (d: number) => d >= 0,
         label: "PTR2E.FIELDS.shield.value.label",
@@ -190,13 +207,14 @@ const actorSystemSchema = (() => {
       }),
       max: new fields.NumberField({
         required: true,
+        nullable: false,
         initial: 0,
         validate: (d: number) => d >= 0,
         label: "PTR2E.FIELDS.shield.max.label",
         hint: "PTR2E.FIELDS.shield.max.hint",
       })
     }),
-    money: new fields.NumberField({ required: true, initial: 0 }),
+    money: new fields.NumberField({ required: true, nullable: false, initial: 0 }),
     species: new fields.SchemaField(SpeciesSystemModel.defineSchema(), {
       required: false,
       nullable: true,
@@ -220,6 +238,7 @@ const actorSystemSchema = (() => {
     }),
     slots: new fields.NumberField({
       required: true,
+      nullable: false,
       initial: 6,
       integer: true,
       positive: true,
@@ -229,6 +248,7 @@ const actorSystemSchema = (() => {
     inventoryPoints: new fields.SchemaField({
       current: new fields.NumberField({
         required: true,
+        nullable: false,
         initial: 0,
         min: 0,
         label: "PTR2E.FIELDS.inventoryPoints.current.label",
@@ -260,10 +280,10 @@ const actorSystemSchema = (() => {
         hint: "PTR2E.FIELDS.details.alliance.hint",
       }),
       size: new fields.SchemaField({
-        height: new fields.NumberField({required: true, initial: 0, label: "PTR2E.FIELDS.size.height.label", hint: "PTR2E.FIELDS.size.height.hint"}),
-        weight: new fields.NumberField({required: true, initial: 0, label: "PTR2E.FIELDS.size.weight.label", hint: "PTR2E.FIELDS.size.weight.hint"}),
-        heightClass: new fields.NumberField({required: true, initial: 0, min: 0, max: 7}),
-        weightClass: new fields.NumberField({required: true, initial: 1, min: 1, max: 16}),
+        height: new fields.NumberField({ required: true, nullable: false, initial: 0, label: "PTR2E.FIELDS.size.height.label", hint: "PTR2E.FIELDS.size.height.hint" }),
+        weight: new fields.NumberField({ required: true, nullable: false, initial: 0, label: "PTR2E.FIELDS.size.weight.label", hint: "PTR2E.FIELDS.size.weight.hint" }),
+        heightClass: new fields.NumberField({ required: true, nullable: false, initial: 0, min: 0, max: 7 }),
+        weightClass: new fields.NumberField({ required: true, nullable: false, initial: 1, min: 1, max: 16 }),
       })
     })
   };
@@ -271,7 +291,7 @@ const actorSystemSchema = (() => {
 
 export type ActorSystemSchema = typeof actorSystemSchema & TraitsSchema & MigrationSchema;
 
-class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeDataModel<ActorSystemSchema, ActorPTR2e>)) {
+class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeDataModel<ActorSystemSchema, ActorPTR2e, EmptyObject, ActorSystemDerivedData>)) {
   static override LOCALIZATION_PREFIXES = ["PTR2E.ActorSystem"];
 
   declare parent: ActorPTR2e;
@@ -292,7 +312,7 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
     // Migrate species Abilities data to the new format
     if (source.species?.abilities) {
       for (const abGroup of Object.keys(source.species.abilities)) {
-        source.species.abilities[abGroup] = (source.species.abilities[abGroup] as foundry.data.fields.SourcePropFromDataField<foundry.data.fields.SchemaField<AbilityReferenceSchema>>[]).map(g => {
+        source.species.abilities[abGroup] = (source.species.abilities[abGroup]).map(g => {
           if (typeof g == "object") return g;
           return { slug: g, uuid: null };
         });
@@ -327,7 +347,7 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
     super.prepareBaseData();
     this._initializeModifiers();
 
-    for(const k in this.attributes) {
+    for (const k in this.attributes) {
       const key = k as keyof Attributes;
       Object.defineProperty(this.attributes[key], "final", {
         get: () => key === "hp" ? this.attributes[key].value : this.parent.calcStatTotal(this.attributes[key], false),
@@ -445,7 +465,7 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
   }
 
   _prepareSpeciesData() {
-    if(!this.parent.species?.prepareBaseData) return;
+    if (!this.parent.species?.prepareBaseData) return;
     this.parent.species.prepareBaseData();
 
     // Add species traits to actor traits
@@ -485,8 +505,8 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
     for (const k in this.attributes) {
       const key = k as keyof Attributes;
       if (this.parent.species?.stats[key]) {
-        if(this.parent.isHumanoid()) this.attributes[key].base ??= this.parent.species.stats[key];
-        if(this.parent.isPokemon()) this.attributes[key].base = this.parent.species.stats[key];
+        if (this.parent.isHumanoid()) this.attributes[key].base ??= this.parent.species.stats[key];
+        if (this.parent.isPokemon()) this.attributes[key].base = this.parent.species.stats[key];
       }
       if (this.attributes[key].base === undefined) this.attributes[key].base = 40;
       this.attributes[key].value = this._calculateStatTotal(this.attributes[key]);
@@ -594,7 +614,7 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
       this.parent.rollOptions.addOption("immunities", "affliction:paralysis");
     }
 
-    if(!isNaN(Number(this.modifiers.movement)) && this.modifiers.movement !== 0) {
+    if (!isNaN(Number(this.modifiers.movement)) && this.modifiers.movement !== 0) {
       for (const movement of Object.values(this.movement)) {
         movement.value = Math.max(1, movement.value + Number(this.modifiers.movement));
       }
@@ -639,6 +659,35 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
 
 interface ActorSystemPTR2e {
   movement: Record<string, Movement>;
+
+  attributes: Attributes;
+  battleStats: {
+    evasion: Stat;
+    accuracy: Stat;
+    critRate: Stat;
+  };
+}
+
+interface ActorSystemDerivedData {
+  health: {
+    percent: number
+  }
+  advancement: {
+    advancementPoints: {
+      total: number;
+      spent: number;
+      available: number;
+    };
+    rvs: {
+      total: number;
+      spent: number;
+      available: number;
+    };
+  }
+  inventoryPoints: {
+    max: number;
+  }
+  [key: string]: unknown;
 }
 
 // interface ActorSystemPTR2e extends ModelPropsFromSchema<actorSystemSchema> {
@@ -685,3 +734,15 @@ interface ActorSystemPTR2e {
 // }
 
 export default ActorSystemPTR2e;
+export { type ActorSystemPTR2e }
+
+// interface AdvancementSchema extends foundry.data.fields.DataSchema {
+//   experience: foundry.data.fields.SchemaField<AdvancementExperienceSchema>;
+//   level: foundry.data.fields.NumberField<{ required: true, initial: number, min: number, max: number, label: string, hint: string }>;
+// }
+
+// interface AdvancementExperienceSchema extends foundry.data.fields.DataSchema {
+//   current: foundry.data.fields.NumberField<{ required: true, initial: number, min: number, label: string, hint: string }>;
+//   next: foundry.data.fields.NumberField<{ required: true, initial: number, min: number, label: string, hint: string }>;
+//   diff: foundry.data.fields.NumberField<{ required: true, initial: number, min: number, label: string, hint: string }>;
+// }

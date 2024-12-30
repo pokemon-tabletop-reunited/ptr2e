@@ -1,5 +1,5 @@
-import type { ActorSystemPTR2e } from "@actor";
 import { SlugField } from "../fields/slug-field.ts";
+import type { ActorSystemPTR2e } from "../../actor/data/system.ts";
 
 const skillSchema = {
   slug: new SlugField({ required: true, blank: false }),
@@ -22,7 +22,7 @@ const skillSchema = {
 
 export type SkillSchema = typeof skillSchema;
 
-class SkillPTR2e extends foundry.abstract.DataModel<SkillSchema> {
+class SkillPTR2e extends foundry.abstract.DataModel<SkillSchema, ActorSystemPTR2e> {
   declare total: number;
 
   static override defineSchema(): SkillSchema {
