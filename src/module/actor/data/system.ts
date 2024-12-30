@@ -15,8 +15,13 @@ import natureToStatArray, { natures } from "@scripts/config/natures.ts";
 import { SlugField } from "@module/data/fields/slug-field.ts";
 import type { TraitsSchema } from "@module/data/mixins/has-traits.ts";
 import type { MigrationSchema } from "@module/data/mixins/has-migrations.ts";
-import type { AttributeSchema, StatSchema, Movement } from "./data.ts";
+import type { Movement } from "./data.ts";
 import { addDataFieldMigration, sluggify } from "@utils";
+
+interface StatSchema = {
+  slug: SlugField<{ required: true, initial: string }>;
+  stage: NumberField<{ required: true, initial: number }>;
+}
 
 const actorSystemSchema = (() => {
   const fields = foundry.data.fields;
@@ -34,18 +39,18 @@ const actorSystemSchema = (() => {
         min: 0,
         max: 200,
         step: 4,
-        validate: (d) =>
-          (d as number) >= 0 && (d as number) <= 200 && (d as number) % 4 === 0,
+        validate: (d: number) =>
+          d >= 0 && d <= 200 && d % 4 === 0,
       }),
       ivs: new fields.NumberField({
         required: true,
         initial: 0,
-        validate: (d) => (d as number) >= 0,
+        validate: (d: number) => d >= 0,
       }),
       base: new fields.NumberField({
         required: false,
         initial: undefined,
-        validate: (d) => d === undefined || (d as number) >= 1,
+        validate: (d: number) => d === undefined || d >= 1,
       }),
     };
   };

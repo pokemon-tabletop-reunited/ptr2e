@@ -1,6 +1,5 @@
 import { SquareGridPTR2e } from "./grid.ts";
 import { checkAuras } from "./helpers.ts";
-import type { TokenDocumentPTR2e } from "./token/document.ts";
 
 export class ScenePTR2e extends Scene {
 
@@ -39,9 +38,8 @@ export class ScenePTR2e extends Scene {
     super.prepareBaseData();
   }
 
-  static #getGrid(scene: Scene): BaseGrid | null {
+  static #getGrid(scene: Scene): foundry.grid.BaseGrid | null {
     const grid = scene.grid;
-    //@ts-expect-error - Foundry types are incomplete
     if (grid instanceof foundry.grid.GridlessGrid) return grid;
 
     const T = CONST.GRID_TYPES;
@@ -62,9 +60,15 @@ export class ScenePTR2e extends Scene {
     return null;
   }
 
-  override _onUpdate(changed: DeepPartial<this["_source"]>, options: SceneUpdateContext, userId: string): void {
+  override _onUpdate(
+    changed: foundry.data.fields.SchemaField.InnerAssignmentType<Scene.Schema>, 
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    options: foundry.abstract.Document.OnUpdateOptions<any>, 
+    userId: string
+  ): void {
     super._onUpdate(changed, options, userId);
 
+    if(!canvas || !canvas.tokens) return;
     // Check if this is the new active scene or an update to an already active scene
     if (changed.active !== false && canvas.scene === this) {
       for (const token of canvas.tokens.placeables) {
@@ -76,8 +80,6 @@ export class ScenePTR2e extends Scene {
 
 export interface ScenePTR2e extends Scene {
   initialized: boolean;
-
-  readonly tokens: foundry.abstract.EmbeddedCollection<TokenDocumentPTR2e<this>>;
 
   /** Check for auras containing newly-placed or moved tokens (added as a debounced method) */
   checkAuras(): void;

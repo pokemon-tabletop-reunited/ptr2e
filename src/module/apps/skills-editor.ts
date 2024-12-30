@@ -2,7 +2,6 @@ import type { ActorPTR2e, Skill } from "@actor";
 import { SkillsComponent } from "@actor/components/skills-component.ts";
 import type SkillPTR2e from "@module/data/models/skill.ts";
 import { htmlQueryAll } from "@utils";
-import type { ApplicationRenderOptions } from "types/foundry/common/applications/api.js";
 
 
 type SkillBeingEdited = SkillPTR2e["_source"] & { label: string; investment: number; max: number; min: number };

@@ -1,12 +1,12 @@
-import type { ChangeModel} from "@module/data/index.ts";
+import type { ChangeModel } from "@module/data/index.ts";
 import { HasChanges, HasEmbed, HasSlug, HasTraits } from "@module/data/index.ts";
-import type { ActiveEffectPTR2e } from "@effects";
 import type { ActorPTR2e } from "@actor";
 import type { TraitsSchema } from "@module/data/mixins/has-traits.ts";
 import type { SlugSchema } from "@module/data/mixins/has-slug.ts";
 import type { ChangesSchema } from "@module/data/mixins/has-changes.ts";
 import { ItemPTR2e } from "@item";
 import AbilitySystem from "@item/data/ability.ts";
+import type { ActiveEffectPTR2e } from "./document.ts";
 
 const activeEffectSystemSchema = {
   removeAfterCombat: new foundry.data.fields.BooleanField({
@@ -24,10 +24,16 @@ const activeEffectSystemSchema = {
 
 export type ActiveEffectSystemSchema = typeof activeEffectSystemSchema & TraitsSchema & SlugSchema & ChangesSchema;
 
-export default abstract class ActiveEffectSystem extends HasEmbed(
-  HasTraits(HasSlug(HasChanges(foundry.abstract.TypeDataModel<ActiveEffectSystemSchema, ActiveEffectPTR2e>))),
+export default abstract class ActiveEffectSystem<Schema extends ActiveEffectSystemSchema = ActiveEffectSystemSchema> extends HasEmbed(
+  HasTraits(
+    HasSlug(
+      HasChanges(
+        foundry.abstract.TypeDataModel
+      )
+    )
+  ),
   "effect"
-) {
+)<Schema, ActiveEffectPTR2e> {
   static override LOCALIZATION_PREFIXES = ["PTR2E.Effect"];
 
   declare parent: ActiveEffectPTR2e;

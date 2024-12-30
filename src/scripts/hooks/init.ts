@@ -62,6 +62,7 @@ export const Init: PTRHook = {
       CONFIG.Combatant.dataModels = PTRCONFIG.Combatant.dataModels;
       CONFIG.Item.documentClass = PTRCONFIG.Item.documentClass;
       CONFIG.Item.dataModels = PTRCONFIG.Item.dataModels;
+      //@ts-expect-error - Add new property
       CONFIG.Change = {
         documentClass: PTRCONFIG.Change.documentClass,
         dataModels: PTRCONFIG.Change.dataModels

@@ -2,7 +2,6 @@ import type { ActionPTR2e, AttackPTR2e, Trait } from "@module/data/index.ts";
 import { HasBase, HasEmbed } from "@module/data/index.ts";
 import { sluggify } from "@utils";
 import type SystemTraitsCollection from "@module/data/system-traits-collection.ts";
-import type { DeepPartial } from "fvtt-types/utils";
 import type { ItemPTR2e } from "@item/document.ts";
 import type { HasBaseSchema } from "@module/data/mixins/has-base.ts";
 
@@ -144,7 +143,7 @@ export default abstract class MoveSystem extends HasEmbed(
   }
 
   override async _preUpdate(
-    changed: DeepPartial<foundry.abstract.TypeDataModel.ParentAssignmentType<MoveSchema, ItemPTR2e>>,
+    changed: foundry.abstract.TypeDataModel.ParentAssignmentType<MoveSchema, ItemPTR2e>,
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     options: foundry.abstract.Document.PreUpdateOptions<any>,
     user: string

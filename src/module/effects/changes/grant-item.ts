@@ -1,11 +1,6 @@
 import type { ActorPTR2e } from "@actor";
 import type { ChangeModelOptions, ChangeSchema, ChangeSource } from "@data";
 import { ChangeModel } from "@data";
-import type {
-  ArrayField,
-  BooleanField,
-  EmbeddedDataField,
-} from "types/foundry/common/data/fields.js";
 import { ItemAlteration } from "../alterations/item.ts";
 import type { ItemSourcePTR2e, ItemSystemPTR } from "@item";
 import { ItemPTR2e } from "@item";

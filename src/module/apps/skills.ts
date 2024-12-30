@@ -1,10 +1,6 @@
 import type { Tab } from "@item/sheets/document.ts";
 import type { CustomSkill, Skill } from "@module/data/models/skill.ts";
 import { sluggify } from "@utils";
-import type {
-    ApplicationRenderContext,
-    HandlebarsRenderOptions,
-} from "types/foundry/common/applications/api.js";
 
 class SkillsSettingsMenu extends foundry.applications.api.HandlebarsApplicationMixin(
     foundry.applications.api.ApplicationV2

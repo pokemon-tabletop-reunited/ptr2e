@@ -1,14 +1,12 @@
-import type { ActorPTR2e, ActorSystemPTR2e } from "@actor";
-import type { TokenPTR2e } from "@module/canvas/token/object.ts";
 import type { TokenFlagsPTR2e } from "@module/canvas/token/data.ts";
-import type { ScenePTR2e } from "../scene.ts";
-import type { CombatantPTR2e, CombatPTR2e } from "@combat";
+import type { CombatantPTR2e } from "@combat";
 // TODO: Fix circular dependency when imported from @combat
 import CharacterCombatantSystem from "../../combat/combatant/models/character.ts";
 import { TokenAura } from "./aura/aura.ts";
-import type { TokenConfigPTR2e } from "./sheet.ts";
+import type { Point } from "pixi.js";
+import type { DeepPartial } from "fvtt-types/utils";
 
-class TokenDocumentPTR2e<TParent extends ScenePTR2e | null = ScenePTR2e | null> extends TokenDocument<TParent> {
+class TokenDocumentPTR2e extends TokenDocument {
 
   /** This should be in Foundry core, but ... */
   get scene(): this["parent"] {
@@ -19,13 +17,13 @@ class TokenDocumentPTR2e<TParent extends ScenePTR2e | null = ScenePTR2e | null> 
   get bounds(): PIXI.Rectangle {
     const gridSize = this.scene?.grid.size ?? 100;
     // Use source values since coordinates are changed in real time over the course of movement animation
-    return new PIXI.Rectangle(this._source.x, this._source.y, this.width * gridSize, this.height * gridSize);
+    return new PIXI.Rectangle(this._source.x, this._source.y, (this.width ?? 0) * gridSize, (this.height ?? 0) * gridSize);
   }
 
   /** Bounds used for mechanics, such as flanking and drawing auras */
   get mechanicalBounds(): PIXI.Rectangle {
     const bounds = this.bounds;
-    if (this.width < 1) {
+    if (this.width !== undefined && this.width < 1 && canvas?.grid) {
       const position = canvas.grid.getTopLeftPoint({
         x: bounds.x + bounds.width / 2,
         y: bounds.y + bounds.height / 2,
@@ -47,7 +45,7 @@ class TokenDocumentPTR2e<TParent extends ScenePTR2e | null = ScenePTR2e | null> 
     return {
       x: bounds.x + bounds.width / 2,
       y: bounds.y + bounds.height / 2,
-    };
+    } as Point
   }
 
   get playersCanSeeName(): boolean {
@@ -121,7 +119,7 @@ class TokenDocumentPTR2e<TParent extends ScenePTR2e | null = ScenePTR2e | null> 
           ? {
             party: CONST.TOKEN_DISPOSITIONS.FRIENDLY,
             opposition: CONST.TOKEN_DISPOSITIONS.HOSTILE,
-          }[alliance]
+          }[alliance as "party" | "opposition"]
           : CONST.TOKEN_DISPOSITIONS.NEUTRAL;
 
     for (const [key, data] of actor.auras.entries()) {
@@ -135,11 +133,14 @@ class TokenDocumentPTR2e<TParent extends ScenePTR2e | null = ScenePTR2e | null> 
    * @param {Partial<DatabaseUpdateOperation>} [operation]  The database operation that was performed
    * @protected
    */
-  protected override _onRelatedUpdate(update: Record<string, unknown> = {}, options: DocumentModificationContext<null> = {}): void {
+  protected override _onRelatedUpdate(
+    update?: DeepPartial<Actor.ConfiguredInstance["_source"]>,
+    options?: foundry.abstract.Document.OnUpdateOptions<"Actor">,
+  ): void {
     super._onRelatedUpdate(update, options);
 
     // If the actor's speed combat stages are different from the token's combatant, update the combatant's speed stages
-    const combatant = this.combatant as CombatantPTR2e<CombatPTR2e> | null;
+    const combatant = this.combatant as CombatantPTR2e | null;
     if (!combatant || !(combatant.system instanceof CharacterCombatantSystem)) return;
     if (this.actor?.speedStage !== undefined && this.actor.speedStage !== combatant.system.speedStages) {
       const previous = combatant.system.previousBaseAV;
@@ -163,24 +164,24 @@ class TokenDocumentPTR2e<TParent extends ScenePTR2e | null = ScenePTR2e | null> 
 
     if (game.ptr.settings.tokens.autoscale && token.flags.ptr2e.autoscale !== false) {
       const absoluteScale = ["diminutive", "small"].includes(actor.size.value) ? 0.75 : 1;
-      const mirrorX = token.texture.scaleX < 0 ? -1 : 1;
+      const mirrorX = (token.texture.scaleX ?? 0) < 0 ? -1 : 1;
       token.texture.scaleX = mirrorX * absoluteScale;
-      const mirrorY = token.texture.scaleY < 0 ? -1 : 1;
+      const mirrorY = (token.texture.scaleY ?? 0) < 0 ? -1 : 1;
       token.texture.scaleY = mirrorY * absoluteScale;
     }
   }
 }
 
-interface TokenDocumentPTR2e<TParent extends ScenePTR2e | null = ScenePTR2e | null> extends TokenDocument<TParent> {
+interface TokenDocumentPTR2e extends TokenDocument {
   flags: TokenFlagsPTR2e;
 
   initialized: boolean;
   auras: Map<string, TokenAura>;
 
-  get actor(): ActorPTR2e<ActorSystemPTR2e, this | null> | null;
-  get combatant(): Combatant<Combat, this> | null;
-  get object(): TokenPTR2e<this> | null;
-  get sheet(): TokenConfigPTR2e<this>;
+  // get actor(): ActorPTR2e<ActorSystemPTR2e, this | null> | null;
+  // get combatant(): Combatant<Combat, this> | null;
+  // get object(): TokenPTR2e<this> | null;
+  // get sheet(): TokenConfigPTR2e<this>;
 }
 
 export { TokenDocumentPTR2e }

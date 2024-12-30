@@ -1,13 +1,15 @@
-import type { TokenDocumentPTR2e } from "@module/canvas/token/document.ts";
+import type { DeepPartial } from "fvtt-types/utils";
 import type { SquareGridPTR2e } from "../grid.ts";
 import { AuraRenderers } from "./aura/map.ts";
 import * as R from "remeda";
+import type { TokenDocumentPTR2e } from "./document.ts";
 
-class TokenPTR2e<TDocument extends TokenDocumentPTR2e = TokenDocumentPTR2e> extends Token<TDocument> {
+class TokenPTR2e extends Token {
   /** Visual representation and proximity-detection facilities for auras */
   readonly auras: AuraRenderers;
 
-  constructor(document: TDocument) {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  constructor(document: TokenDocument.ConfiguredInstance) {
     super(document);
 
     this.auras = new AuraRenderers(this);
@@ -16,6 +18,7 @@ class TokenPTR2e<TDocument extends TokenDocumentPTR2e = TokenDocumentPTR2e> exte
 
   /** A reference to an animation that is currently in progress for this Token, if any */
   get animation(): Promise<boolean> | null {
+    //@ts-expect-error - FIXME: FVTT-Types are incomplete
     return this.animationContexts.get(this.animationName)?.promise ?? null;
   }
 
@@ -25,6 +28,7 @@ class TokenPTR2e<TDocument extends TokenDocumentPTR2e = TokenDocumentPTR2e> exte
   }
 
   get isTiny(): boolean {
+    if(!this.document.height || !this.document.width) return false;
     return this.document.height < 1 || this.document.width < 1;
   }
 
@@ -36,7 +40,7 @@ class TokenPTR2e<TDocument extends TokenDocumentPTR2e = TokenDocumentPTR2e> exte
   /** Bounds used for mechanics, such as flanking and drawing auras */
   get mechanicalBounds(): PIXI.Rectangle {
     const bounds = super.bounds;
-    if (this.isTiny) {
+    if (this.isTiny && canvas?.grid) {
       const position = canvas.grid.getTopLeftPoint(bounds);
       return new PIXI.Rectangle(
         position.x,
@@ -55,7 +59,7 @@ class TokenPTR2e<TDocument extends TokenDocumentPTR2e = TokenDocumentPTR2e> exte
   }
 
   /** Reposition aura textures after this token has moved. */
-  protected override _applyRenderFlags(flags: Record<string, boolean>): void {
+  protected override _applyRenderFlags(flags: Token.RenderFlags): void {
     super._applyRenderFlags(flags);
     if (flags.refreshPosition) this.auras.refreshPositions();
   }
@@ -67,7 +71,9 @@ class TokenPTR2e<TDocument extends TokenDocumentPTR2e = TokenDocumentPTR2e> exte
   }
 
   /** Draw auras along with effect icons */
+  //@ts-expect-error - Foundry types are incomplete
   override async _drawEffects(): Promise<void> {
+    //@ts-expect-error - Foundry types are incomplete
     await super._drawEffects();
     await this.animation;
 
@@ -131,8 +137,9 @@ class TokenPTR2e<TDocument extends TokenDocumentPTR2e = TokenDocumentPTR2e> exte
 
   /** Reset aura renders when token size changes. */
   override _onUpdate(
-    changed: DeepPartial<TDocument["_source"]>,
-    options: DocumentModificationContext<TDocument["parent"]>,
+    changed: DeepPartial<foundry.data.fields.SchemaField.AssignmentType<Token.Schema>>,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    options: foundry.abstract.Document.OnUpdateOptions<any>,
     userId: string
   ): void {
     super._onUpdate(changed, options, userId);
@@ -149,10 +156,10 @@ class TokenPTR2e<TDocument extends TokenDocumentPTR2e = TokenDocumentPTR2e> exte
   }
 
   distanceTo(target: TokenPTR2e): number {
-    if (!canvas.ready) return NaN;
+    if (!canvas || !canvas.ready) return NaN;
     if (this === target) return 0;
 
-    if (canvas.grid.type === CONST.GRID_TYPES.SQUARE) {
+    if (canvas.grid?.type === CONST.GRID_TYPES.SQUARE) {
       return (canvas.grid as unknown as SquareGridPTR2e).getDistanceBetweenTokens(this, target);
     }
     //@ts-expect-error - Foundry types are incomplete
@@ -165,13 +172,17 @@ class TokenPTR2e<TDocument extends TokenDocumentPTR2e = TokenDocumentPTR2e> exte
     if (game.ready) game.ptr.tokenPanel.token = this;
   }
 
-  override _onRelease(options: Record<string, unknown> = {}) {
+  override _onRelease(options: PlaceableObject.ReleaseOptions) {
     super._onRelease(options);
 
     if (game.ready) {
       game.ptr.tokenPanel.token = (game.user.character?.getActiveTokens().at(0) as this) ?? null;
     }
   }
+}
+
+interface TokenPTR2e {
+  document: TokenDocumentPTR2e;
 }
 
 export { TokenPTR2e }

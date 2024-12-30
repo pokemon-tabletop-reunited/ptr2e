@@ -1,7 +1,6 @@
 import type { Trait } from "@data";
 import type { Tab } from "@item/sheets/document.ts";
 import { sluggify } from "@utils";
-import type { ApplicationRenderContext, HandlebarsRenderOptions } from "types/foundry/common/applications/api.js";
 
 class TraitsSettingsMenu extends foundry.applications.api.HandlebarsApplicationMixin(foundry.applications.api.ApplicationV2) {
     newCounter = 0;

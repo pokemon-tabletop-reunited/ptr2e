@@ -1,5 +1,3 @@
-import type { DeepPartial } from "fvtt-types/utils";
-
 class CombatantPTR2e extends Combatant {
 
   get encounter() {
@@ -32,7 +30,7 @@ class CombatantPTR2e extends Combatant {
   }
 
   protected override _preUpdate(
-    changed: DeepPartial<foundry.data.fields.SchemaField.AssignmentType<Combatant.Schema>>,
+    changed: foundry.data.fields.SchemaField.AssignmentType<Combatant.Schema>,
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     options: foundry.abstract.Document.PreUpdateOptions<any>,
     user: User

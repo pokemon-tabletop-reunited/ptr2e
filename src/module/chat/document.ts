@@ -2,7 +2,6 @@ import type { ActorPTR2e, EffectRollSource } from "@actor";
 import type { ScenePTR2e } from "@module/canvas/scene.ts";
 import type { TokenDocumentPTR2e } from "@module/canvas/token/document.ts";
 import type { CheckRollContext } from "@system/rolls/data.ts";
-import type TypeDataModel from "types/foundry/common/abstract/type-data.js";
 import type { AttackRollResult, PokeballRollResults } from "../system/rolls/check-roll.ts";
 import { CheckRoll } from "../system/rolls/check-roll.ts";
 import type AttackMessageSystem from "./models/attack.ts";
@@ -11,7 +10,7 @@ import type { SummonPTR2e } from "@item";
 import type { AttackPTR2e } from "@data";
 import type { CombatantPTR2e } from "@combat";
 
-class ChatMessagePTR2e<TSchema extends TypeDataModel = TypeDataModel> extends ChatMessage<TSchema> {
+class ChatMessagePTR2e extends ChatMessage {
   /** Get the actor associated with this chat message */
   get actor(): ActorPTR2e | null {
     return ChatMessagePTR2e.getSpeakerActor(this.speaker) as ActorPTR2e | null;
@@ -293,7 +292,7 @@ class ChatMessagePTR2e<TSchema extends TypeDataModel = TypeDataModel> extends Ch
     //
   }
 
-  static async createFromRoll<TTypeDataModel extends TypeDataModel = TypeDataModel>(
+  static async createFromRoll<TTypeDataModel extends foundry.abstract.TypeDataModel = foundry.abstract.TypeDataModel>(
     context: CheckRollContext & { notesList?: HTMLUListElement | null },
     roll: Rolled<CheckRoll>
   ): Promise<ChatMessagePTR2e<TTypeDataModel> | undefined> {
@@ -364,7 +363,7 @@ class ChatMessagePTR2e<TSchema extends TypeDataModel = TypeDataModel> extends Ch
     }, { rollMode: context.rollMode });
   }
 
-  static createFromPokeballResults<TTypeDataModel extends TypeDataModel = TypeDataModel>(
+  static createFromPokeballResults<TTypeDataModel extends foundry.abstract.TypeDataModel = foundry.abstract.TypeDataModel>(
     context: CheckRollContext,
     results: PokeballRollResults
   ): Promise<ChatMessagePTR2e<TTypeDataModel> | undefined> {
@@ -508,11 +507,6 @@ class ChatMessagePTR2e<TSchema extends TypeDataModel = TypeDataModel> extends Ch
     if (["attack", "skill", "capture"].includes(this.type)) return true;
     return super.isRoll;
   }
-}
-
-interface ChatMessagePTR2e<TSchema extends TypeDataModel = TypeDataModel> {
-  type: string;
-  system: TSchema;
 }
 
 export default ChatMessagePTR2e;

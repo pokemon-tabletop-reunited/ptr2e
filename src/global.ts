@@ -21,6 +21,9 @@ import type PerkSystem from "@item/data/perk.ts";
 import type { TypeEffectiveness } from "@scripts/config/effectiveness.ts";
 import type { CompendiumBrowserSettings, CompendiumBrowserSources } from "@module/apps/compendium-browser/data.ts";
 import type { CombatantPTR2e, CombatPTR2e, CombatSystemPTR2e } from "@combat";
+import type { ScenePTR2e } from "@module/canvas/scene.ts";
+import type { TokenPTR2e } from "@module/canvas/token/object.ts";
+import type { TokenDocumentPTR2e } from "@module/canvas/token/document.ts";
 
 declare global {
   // interface ConfigPTR2e extends ConfiguredConfig {
@@ -131,6 +134,9 @@ declare global {
     ActiveEffect: typeof ActiveEffectPTR2e;
     Combat: typeof CombatPTR2e;
     Combatant: typeof CombatantPTR2e;
+    Scene: typeof ScenePTR2e;
+    Token: typeof TokenPTR2e;
+    TokenDocument: typeof TokenDocumentPTR2e;
   }
 
   interface DataModelConfig {
@@ -231,6 +237,7 @@ declare global {
   type ImageFileExtension = keyof typeof CONST.IMAGE_FILE_EXTENSIONS;
   type VideoFileExtension = keyof typeof CONST.VIDEO_FILE_EXTENSIONS;
   type ActiveEffectChangeMode = (typeof CONST.ACTIVE_EFFECT_MODES)[keyof typeof CONST.ACTIVE_EFFECT_MODES];
+  type TokenDisplayMode = (typeof CONST.TOKEN_DISPLAY_MODES)[keyof typeof CONST.TOKEN_DISPLAY_MODES];
 
   type AudioFilePath = `${string}.${AudioFileExtension}`;
   type ImageFilePath = `${string}.${ImageFileExtension}`;

@@ -11,7 +11,6 @@ import type {
 import { CompendiumDirectoryPTR2e } from "@module/apps/sidebar/compendium-directory.ts";
 import * as R from "remeda";
 import { htmlQuery, sluggify } from "@utils";
-import type { TableResultSource } from "types/foundry/common/documents/module.js";
 
 export abstract class CompendiumBrowserTab {
   /** A reference to the parent CompendiumBrowser */

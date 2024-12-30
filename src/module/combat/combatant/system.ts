@@ -81,7 +81,7 @@ export default class CombatantSystemPTR2e<Schema extends CombatantSystemSchema =
   }
 
   override async _preUpdate(
-    changed: DeepPartial<foundry.data.fields.SchemaField.AssignmentType<Combatant.Schema>>,
+    changed: foundry.data.fields.SchemaField.AssignmentType<Combatant.Schema>,
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     options: foundry.abstract.Document.PreUpdateOptions<any>,
     userId: string

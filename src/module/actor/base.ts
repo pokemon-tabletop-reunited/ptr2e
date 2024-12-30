@@ -6,8 +6,6 @@ import type {
   ActorSystemPTR2e,
   Attribute,
   AuraData,
-  HumanoidActorSystem,
-  PokemonActorSystem,
 } from "@actor";
 import type { ActiveEffectSystem, EffectSourcePTR2e } from "@effects";
 import { ActiveEffectPTR2e } from "@effects";
@@ -19,7 +17,7 @@ import type FolderPTR2e from "@module/folder/document.ts";
 import type { CombatantPTR2e, CombatPTR2e } from "@combat";
 import type AfflictionActiveEffectSystem from "@module/effects/data/affliction.ts";
 import { ChatMessagePTR2e } from "@chat";
-import type { AbilityPTR2e, ItemSystemPTR, ItemSystemsWithActions, MovePTR2e, PerkPTR2e } from "@item";
+import type { AbilityPTR2e, ItemSystemPTR, MovePTR2e, PerkPTR2e } from "@item";
 import { ItemPTR2e } from "@item";
 import { ActionsCollections } from "./actions.ts";
 import type { CustomSkill } from "@module/data/models/skill.ts";
@@ -1728,7 +1726,7 @@ class ActorPTR2e extends Actor {
   }
 
   override async _preUpdate(
-    changed: DeepPartial<foundry.data.fields.SchemaField.AssignmentType<Actor.Schema>>,
+    changed: foundry.data.fields.SchemaField.AssignmentType<Actor.Schema>,
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     options: foundry.abstract.Document.PreUpdateOptions<any>,
     user: User
@@ -2085,7 +2083,7 @@ interface ActorPTR2e extends Actor {
   fling: MovePTR2e;
 }
 
-type ActorFlags2e = {
+interface ActorFlags2e {
   core?: {
     sourceId?: string;
   }
@@ -2101,6 +2099,6 @@ type ActorFlags2e = {
     }
     editedSkills?: boolean
   };
-};
+}
 
 export default ActorPTR2e;

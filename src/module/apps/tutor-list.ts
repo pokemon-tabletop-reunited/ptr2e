@@ -1,7 +1,6 @@
 import { formatSlug, sluggify } from "@utils";
 import type { ApplicationConfigurationExpanded} from "./appv2-expanded.ts";
 import { ApplicationV2Expanded } from "./appv2-expanded.ts";
-import type { HandlebarsRenderOptions } from "types/foundry/common/applications/handlebars-application.ts";
 import type { ActorPTR2e } from "@actor";
 
 export class TutorListApp extends foundry.applications.api.HandlebarsApplicationMixin(ApplicationV2Expanded) {

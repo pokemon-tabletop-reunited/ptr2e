@@ -8,7 +8,6 @@ import type { Extension } from "@codemirror/state";
 import { keymap } from "@codemirror/view";
 import { ChangeModelTypes } from "@data";
 import { EditorView, basicSetup } from "codemirror";
-import type { DataSchema } from "types/foundry/common/data/fields.d.ts";
 
 export const CodeMirror = {
     EditorView,

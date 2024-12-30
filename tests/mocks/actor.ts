@@ -1,7 +1,6 @@
 import type { ActorPTR2e } from "@actor";
 import type { ItemPTR2e, ItemSystemPTR } from "@item";
 import { MockItem } from "./item.ts";
-import type { ItemSchema } from "types/foundry/common/documents/item.js";
 import { MockCollection } from "./collection.ts";
 
 type ActorSourcePTR2e = ActorPTR2e['_source'];

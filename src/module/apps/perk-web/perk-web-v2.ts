@@ -11,7 +11,6 @@ import PerkStore, { PerkState } from "./perk-store.ts";
 import type { ActiveEffectPTR2e } from "@effects";
 import type { LevelUpMoveSchema } from "@item/data/species.ts";
 import { createHTMLElement, fontAwesomeIcon, htmlClosest, htmlQuery, htmlQueryAll, ImageResolver, isObject, objectHasKey, sluggify } from "@utils";
-import type { ApplicationRenderContext } from "types/foundry/common/applications/api.js";
 import { CompendiumBrowserPerkTab } from "../compendium-browser/tabs/perk.ts";
 import type { CheckboxData, RangesInputData, RenderResultListOptions, SelectData, SliderData } from "../compendium-browser/tabs/data.ts";
 import noUiSlider from "nouislider";

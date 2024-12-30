@@ -1,4 +1,4 @@
-import type { RollTableSchema } from "types/foundry/common/documents/roll-table.js";
+
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type PartialRecord<K extends keyof any, T> = {

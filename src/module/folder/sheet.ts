@@ -1,7 +1,6 @@
 import type { DocumentSheetConfiguration} from "@item/sheets/document.ts";
 import { DocumentSheetV2 } from "@item/sheets/document.ts";
 import FolderPTR2e from "./document.ts";
-import type { HandlebarsRenderOptions } from "types/foundry/common/applications/api.js";
 import { ActorPTR2e } from "@actor";
 import type { SocketRequestData } from "@scripts/hooks/socket.ts";
 

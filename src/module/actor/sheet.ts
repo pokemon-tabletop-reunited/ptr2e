@@ -36,7 +36,6 @@ import { DataInspector } from "@module/apps/data-inspector/data-inspector.ts";
 import Clock from "@module/data/models/clock.ts";
 import ClockEditor from "@module/apps/clocks/clock-editor.ts";
 import Sortable from "sortablejs";
-import type { ApplicationHeaderControlsEntry } from "types/foundry/common/applications/api.js";
 import PartySheetPTR2e from "@module/apps/party-sheet.ts";
 import { ToggleComponent } from "./components/toggle-component.ts";
 import { PerkWebApp } from "@module/apps/perk-web/perk-web-v2.ts";

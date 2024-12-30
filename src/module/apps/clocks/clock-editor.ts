@@ -1,7 +1,6 @@
 import { ActorSystemPTR2e } from "@actor";
 import type { ClockSchema } from "@module/data/models/clock.ts";
 import Clock from "@module/data/models/clock.ts";
-import type { HandlebarsRenderOptions } from "types/foundry/common/applications/handlebars-application.ts";
 
 const CLOCK_MAX_SIZE = 16;
 const CLOCK_SIZES = [2, 3, 4, 5, 6, 8, 10, 12, 16];

@@ -8,9 +8,7 @@ import type { RollOptionDomains } from "@module/data/roll-option-manager.ts";
 import type { ItemGrantData } from "@item/data/data.ts";
 import { processGrantDeletions } from "./changes/grant-item.ts";
 import { AbilitySystemModel } from "@item/data/index.ts";
-import type { DeepPartial } from "fvtt-types/utils";
 import type { EffectDurationData } from "node_modules/fvtt-types/src/foundry/common/documents/_types.d.mts";
-
 
 class ActiveEffectPTR2e extends ActiveEffect {
   /** Has this document completed `DataModel` initialization? */
@@ -277,7 +275,7 @@ class ActiveEffectPTR2e extends ActiveEffect {
 
   // TODO: Clean this up cause god it's a mess.
   protected override async _preUpdate(
-    changed: DeepPartial<foundry.data.fields.SchemaField.AssignmentType<Actor.Schema>>,
+    changed: foundry.data.fields.SchemaField.AssignmentType<Actor.Schema>,
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     options: foundry.abstract.Document.PreUpdateOptions<any>,
     user: User
@@ -481,3 +479,4 @@ interface ActiveEffectPTR2e {
 }
 
 export default ActiveEffectPTR2e;
+export { type ActiveEffectPTR2e };

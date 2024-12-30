@@ -1,6 +1,5 @@
 import type { ApplicationConfigurationExpanded} from "./appv2-expanded.ts";
 import { ApplicationV2Expanded } from "./appv2-expanded.ts";
-import type { HandlebarsRenderOptions } from "types/foundry/common/applications/handlebars-application.ts";
 import type { Tab } from "@item/sheets/document.ts";
 import { ActorPTR2e } from "@actor";
 import type { ActiveEffectPTR2e } from "@effects";

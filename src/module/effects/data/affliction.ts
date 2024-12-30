@@ -5,37 +5,44 @@ import ActiveEffectSystem from "../system.ts";
 import { extractNotes } from "src/util/change-helpers.ts";
 import { RollNote } from "@system/notes.ts";
 
-class AfflictionActiveEffectSystem extends ActiveEffectSystem {
-  static override defineSchema(): AfflictionSystemSchema {
-    const fields = foundry.data.fields;
+const afflictionEffectSchema = {
+  priority: new foundry.data.fields.NumberField({
+    required: true,
+    initial: 50,
+    nullable: false,
+  }),
+  formula: new foundry.data.fields.StringField({
+    required: true,
+    initial: "",
+    nullable: true,
+  }),
+  type: new foundry.data.fields.StringField({
+    required: true,
+    initial: "damage",
+    nullable: true,
+    choices: { damage: "damage", healing: "healing" },
+  }),
+}
+
+export type AfflictionSystemSchema = typeof afflictionEffectSchema & ActiveEffectSystemSchema;
+
+class AfflictionActiveEffectSystem<Schema extends AfflictionSystemSchema = AfflictionSystemSchema> extends ActiveEffectSystem<Schema> {
+  static override defineSchema(): ActiveEffectSystemSchema {
     return {
-      ...super.defineSchema(),
-      priority: new fields.NumberField({
-        required: true,
-        initial: 50,
-        nullable: false,
-      }),
-      formula: new fields.StringField({
-        required: true,
-        initial: "",
-        nullable: true,
-      }),
-      type: new fields.StringField({
-        required: true,
-        initial: "damage",
-        nullable: true, //@ts-expect-error - This is a valid choice
-        choices: { damage: "damage", healing: "healing" },
-      }),
+      ...super.defineSchema() as ActiveEffectSystemSchema,
+      ...afflictionEffectSchema
     };
   }
 
-  get remainingActivations() {
-    return this.stacks > 0 ? this.stacks : this.parent.duration.remaining;
+  get remainingActivations(): number {
+    const self = this as AfflictionActiveEffectSystem;
+    return self.stacks > 0 ? self.stacks : self.parent.duration.remaining;
   }
 
   public onEndActivation(): EndOfTurn {
+    const self = this as AfflictionActiveEffectSystem;
     const output = {} as EndOfTurn;
-    if (this.remainingActivations === 0) {
+    if (self.remainingActivations === 0) {
       output.type = "delete";
     }
     // If special update needs to happen
@@ -45,12 +52,12 @@ class AfflictionActiveEffectSystem extends ActiveEffectSystem {
     }
 
     const stacksToRemove = (() => {
-      if (this.slug.startsWith("blight")) {
-        const stacksToRemove = Math.min(this.stacks, Math.pow(2, this.parent.duration.turns! - this.parent.duration.remaining! - 1));
+      if (self.slug.startsWith("blight")) {
+        const stacksToRemove = Math.min(self.stacks, Math.pow(2, self.parent.duration.turns! - self.parent.duration.remaining! - 1));
         return stacksToRemove || 0;
       }
 
-      return this.stacks > 1 ? 1 : 0;
+      return self.stacks > 1 ? 1 : 0;
     })();
     if (stacksToRemove) {
       if (stacksToRemove === this.stacks) {
@@ -61,28 +68,28 @@ class AfflictionActiveEffectSystem extends ActiveEffectSystem {
 
         //@ts-expect-error - This is a valid update
         output.update = {
-          _id: this.parent.id,
-          "system.stacks": this.stacks - stacksToRemove,
+          _id: self.parent.id,
+          "system.stacks": self.stacks - stacksToRemove,
         }
       }
     }
 
-    const damage = this._calculateDamage(stacksToRemove);
+    const damage = self._calculateDamage(stacksToRemove);
     if (damage) {
       output.damage = damage;
     }
 
-    if (this.parent.targetsActor() && this.parent.parent?.synthetics?.rollNotes) {
+    if (self.parent.targetsActor() && self.parent.parent?.synthetics?.rollNotes) {
       const selectors = [
         "all",
         "affliction",
-        `affliction-${this.parent.slug}`,
-        `affliction-${this.parent.id}`,
-        ...this.traits.map(t => `affliction-trait-${t.slug}`),
+        `affliction-${self.parent.slug}`,
+        `affliction-${self.parent.id}`,
+        ...self.traits.map(t => `affliction-trait-${t.slug}`),
       ];
-      const options = this.parent.getRollOptions();
+      const options = self.parent.getRollOptions();
 
-      const notes = extractNotes(this.parent.parent.synthetics.rollNotes, selectors).filter((n) => n.predicate.test(Array.from(new Set(options))));
+      const notes = extractNotes(self.parent.parent.synthetics.rollNotes, selectors).filter((n) => n.predicate.test(Array.from(new Set(options))));
       const html = RollNote.notesToHTML(notes)?.innerHTML;
       if (html) output.note = { options, domains: selectors, html }
     }
@@ -95,25 +102,26 @@ class AfflictionActiveEffectSystem extends ActiveEffectSystem {
    * Returns a string of the damage formula
    */
   protected _calculateDamage(stacksToRemove: number): { formula: string; type: "damage" | "healing" } | void {
-    if (!this.formula || !this.type) return;
+    const self = this as AfflictionActiveEffectSystem;
+    if (!self.formula || !self.type) return;
 
-    if(this.type === 'damage' && this.parent.targetsActor()) {
-      const immunities = this.parent.target.rollOptions.getFromDomain("immunities");
+    if(self.type === 'damage' && self.parent.targetsActor()) {
+      const immunities = self.parent.target.rollOptions.getFromDomain("immunities");
       
-      const isImmune = this.parent.target.isImmuneToEffect(this.parent) 
+      const isImmune = self.parent.target.isImmuneToEffect(self.parent) 
         || (
-          (immunities[`damage:indirect`] || immunities[`damage:affliction:${this.parent.slug}`])
-          && !this.parent.traits.has("ignore-immunity") && !this.parent.traits.has(`ignore-immunity:${this.parent.slug}`)
+          (immunities[`damage:indirect`] || immunities[`damage:affliction:${self.parent.slug}`])
+          && !self.parent.traits.has("ignore-immunity") && !self.parent.traits.has(`ignore-immunity:${self.parent.slug}`)
         )
       
       if(isImmune) return;
     }
 
     const formula = Roll.replaceFormulaData(
-      this.formula,
+      self.formula,
       {
-        effect: this.parent,
-        actor: this.parent.target,
+        effect: self.parent,
+        actor: self.parent.target,
         stacksToRemove: stacksToRemove || 0,
       },
       { warn: false }
@@ -121,37 +129,22 @@ class AfflictionActiveEffectSystem extends ActiveEffectSystem {
 
     return {
       formula,
-      type: this.type,
+      type: self.type,
     };
   }
 
   override apply(actor: ActorPTR2e, change?: ChangeModel, options?: string[]): unknown {
+    const self = this as AfflictionActiveEffectSystem;
     const afflictions = (actor.synthetics.afflictions ??= { data: [], ids: new Set() });
-    if (!afflictions.ids.has(this.parent.id)) {
-      afflictions.data.push(this);
-      afflictions.ids.add(this.parent.id);
+    if (!afflictions.ids.has(self.parent.id)) {
+      afflictions.data.push(self);
+      afflictions.ids.add(self.parent.id);
     }
 
     if (!change) return false;
     return super.apply(actor, change, options);
   }
 }
-
-interface AfflictionActiveEffectSystem
-  extends ActiveEffectSystem,
-  ModelPropsFromSchema<AfflictionSystemSchema> { }
-
-type AfflictionSystemSchema = {
-  priority: foundry.data.fields.NumberField<number, number, true, false, true>;
-  formula: foundry.data.fields.StringField<string, string, true, true, true>;
-  type: foundry.data.fields.StringField<
-    "damage" | "healing",
-    "damage" | "healing",
-    true,
-    true,
-    true
-  >;
-} & ActiveEffectSystemSchema;
 
 type EndOfTurn =
   | {

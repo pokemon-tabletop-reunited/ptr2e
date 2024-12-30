@@ -5,7 +5,6 @@ import type { ActionPTR2e } from "@data";
 import { ActiveEffectPTR2e } from "@effects";
 import { ItemPTR2e } from "@item";
 import { htmlQueryAll, sluggify } from "@utils";
-import type { ApplicationHeaderControlsEntry } from "types/foundry/common/applications/api.js";
 
 export type ApplicationConfigurationExpanded = foundry.applications.api.ApplicationConfiguration & {
   dragDrop: DragDropConfiguration[];
