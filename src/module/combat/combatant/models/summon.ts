@@ -1,4 +1,4 @@
-import type { CombatantPTR2e} from "@combat";
+import type { CombatantPTR2e } from "@combat";
 import { CombatantSystemPTR2e } from "@combat";
 import type { CombatantSystemSchema } from "../system.ts";
 import type { SummonPTR2e } from "@item";
@@ -6,10 +6,20 @@ import { ItemPTR2e } from "@item";
 import type { SummonAttackPTR2e } from "@data";
 import type { ActorPTR2e } from "@actor";
 import type { ActiveEffectPTR2e } from "@effects";
-import type SummonActiveEffectSystem from "@module/effects/data/summon.ts";
+import type { DeepPartial } from "fvtt-types/utils";
 
-class SummonCombatantSystem extends CombatantSystemPTR2e {
-  declare parent: CombatantPTR2e
+const summonCombatantSchema = {
+  owner: new foundry.data.fields.DocumentUUIDField({ required: true, nullable: true }),
+  item: new foundry.data.fields.JSONField({ required: true, nullable: false }),
+  delay: new foundry.data.fields.NumberField({ required: true, initial: null, min: -2, max: 3 })
+}
+
+export type SummonCombatantSchema = typeof summonCombatantSchema & CombatantSystemSchema;
+
+export default class SummonCombatantSystem extends CombatantSystemPTR2e<SummonCombatantSchema> {
+
+  //@ts-expect-error - Override base property.
+  item: ItemPTR2e | null;
 
   override get baseAV(): number {
     return this.delay !== null ? 999 : this.item?.system.baseAV ?? 999;
@@ -28,12 +38,9 @@ class SummonCombatantSystem extends CombatantSystemPTR2e {
   }
 
   static override defineSchema(): SummonCombatantSchema {
-    const fields = foundry.data.fields;
     return {
       ...super.defineSchema() as CombatantSystemSchema,
-      owner: new fields.DocumentUUIDField({ required: true, nullable: true }),
-      item: new fields.JSONField({ required: true, nullable: false }),
-      delay: new fields.NumberField({ required: true, initial: null, min: -2, max: 3 })
+      ...summonCombatantSchema
     }
   }
 
@@ -45,7 +52,7 @@ class SummonCombatantSystem extends CombatantSystemPTR2e {
       try {
         const jsonData = JSON.parse(this._source.item);
         if (jsonData.uuid) {
-          const item = fromUuidSync<SummonPTR2e>(jsonData.uuid);
+          const item = fromUuidSync(jsonData.uuid);
           if (item && item instanceof ItemPTR2e) return item.clone(jsonData.system.owner ? { "system.owner": jsonData.system.owner } : {}, { keepId: true });
         }
 
@@ -62,10 +69,10 @@ class SummonCombatantSystem extends CombatantSystemPTR2e {
 
   override async onStartActivation() {
     const messages = [];
-    if(this.delay !== null) {
+    if (this.delay !== null) {
       const action = this.item?.system.actions?.contents?.[0];
-      if(action) {
-        messages.push(game.i18n.format("PTR2E.Combat.Summon.Messages.Delay", { name: action.actor?.link ?? "", action: action.link}));
+      if (action) {
+        messages.push(game.i18n.format("PTR2E.Combat.Summon.Messages.Delay", { name: action.actor?.link ?? "", action: action.link }));
       }
     }
     else if (this.item?.system.actions?.size) {
@@ -117,10 +124,10 @@ class SummonCombatantSystem extends CombatantSystemPTR2e {
     const effects = item.effects;
     if (!effects?.size) return [];
 
-    const owner = fromUuidSync<ActorPTR2e>(this.owner);
+    const owner = fromUuidSync(this.owner ?? "") as ActorPTR2e | null;
 
-    const applicableEffects: ActiveEffectPTR2e<null, SummonActiveEffectSystem>[] = [];
-    for (const effect of effects.contents as unknown as ActiveEffectPTR2e<null, SummonActiveEffectSystem>[]) {
+    const applicableEffects: ActiveEffectPTR2e[] = [];
+    for (const effect of effects.contents as unknown as ActiveEffectPTR2e[]) {
       switch (effect.system.targetType) {
         case "ally": {
           if (!owner) {
@@ -179,7 +186,8 @@ class SummonCombatantSystem extends CombatantSystemPTR2e {
     }
   }
 
-  override async _preCreate(data: this["parent"]["_source"], options: DocumentModificationContext<this["parent"]["parent"]>, user: User): Promise<boolean | void> {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  override async _preCreate(data: foundry.abstract.TypeDataModel.ParentAssignmentType<SummonCombatantSchema, CombatantPTR2e>, options: foundry.abstract.Document.PreCreateOptions<any>, user: User): Promise<boolean | void> {
     const result = await super._preCreate(data, options, user);
     if (result === false) return false;
 
@@ -193,7 +201,12 @@ class SummonCombatantSystem extends CombatantSystemPTR2e {
     return result;
   }
 
-  override _preUpdate(changed: DeepPartial<this["parent"]["_source"]>, options: DocumentUpdateContext<this["parent"]["parent"]>, user: User): Promise<boolean | void> {
+  override async _preUpdate(
+    changed: DeepPartial<foundry.abstract.TypeDataModel.ParentAssignmentType<SummonCombatantSchema, CombatantPTR2e>>,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    options: foundry.abstract.Document.PreUpdateOptions<any>,
+    userId: string
+  ): Promise<boolean | void> {
     if (changed.defeated) {
       changed.defeated = false;
     }
@@ -208,23 +221,34 @@ class SummonCombatantSystem extends CombatantSystemPTR2e {
       }
     }
 
-    return super._preUpdate(changed, options, user);
+    return super._preUpdate(changed, options, userId);
   }
 
   override _preDelete(
-    _options: DocumentModificationContext<this["parent"]["parent"]>,
-    _user: User
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    options: foundry.abstract.Document.PreDeleteOptions<any>,
+    user: User
   ): Promise<boolean | void> {
     if (this.combat.combatant?.id === this.parent.id) return Promise.resolve(false);
-    return super._preDelete(_options, _user);
+    return super._preDelete(options, user);
   }
 
-  override _onCreate(data: object, options: object, userId: string): void {
+  override _onCreate(
+    data: foundry.abstract.TypeDataModel.ParentAssignmentType<SummonCombatantSchema, CombatantPTR2e>,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    options: foundry.abstract.Document.OnCreateOptions<any>,
+    userId: string
+  ): void {
     super._onCreate(data, options, userId);
     this.notifyActorsOfEffectsIfApplicable()
   }
 
-  override _onUpdate(changed: object, options: object, userId: string): void {
+  override _onUpdate(
+    changed: foundry.abstract.TypeDataModel.ParentAssignmentType<SummonCombatantSchema, CombatantPTR2e>, 
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    options: foundry.abstract.Document.OnUpdateOptions<any>, 
+    userId: string
+  ): void {
     super._onUpdate(changed, options, userId);
     if (
       "system" in changed &&
@@ -237,20 +261,12 @@ class SummonCombatantSystem extends CombatantSystemPTR2e {
     }
   }
 
-  override _onDelete(options: object, userId: string): void {
+  override _onDelete(
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    options: foundry.abstract.Document.OnDeleteOptions<any>,
+    userId: string
+  ): void {
     super._onDelete(options, userId);
     this.notifyActorsOfEffectsIfApplicable()
   }
 }
-
-interface SummonCombatantSystem extends CombatantSystemPTR2e, ModelPropsFromSchema<SummonCombatantSchema> {
-  _source: SourceFromSchema<SummonCombatantSchema>;
-}
-
-interface SummonCombatantSchema extends CombatantSystemSchema {
-  owner: foundry.data.fields.DocumentUUIDField<string, true, true, false>;
-  item: foundry.data.fields.JSONField<SummonPTR2e | null, true, false, false>;
-  delay: foundry.data.fields.NumberField<number, number, true, true, true>;
-}
-
-export default SummonCombatantSystem;

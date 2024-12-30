@@ -1,9 +1,8 @@
 import type { CombatantPTR2e, CombatPTR2e } from "@combat";
-import CombatantSystemPTR2e from "../system.ts";
+import CombatantSystemPTR2e, { type CombatantSystemSchema } from "../system.ts";
 import type { ActorPTR2e } from "@actor";
 
 class CharacterCombatantSystem extends CombatantSystemPTR2e {
-  declare parent: CombatantPTR2e;
 
   get actor() {
     //if (!this.parent.actor) throw new Error("A Combatant must have an associated Actor to use this method.")
@@ -98,19 +97,29 @@ class CharacterCombatantSystem extends CombatantSystemPTR2e {
   }
 
   override _preDelete(
-    _options: DocumentModificationContext<this["parent"]["parent"]>,
-    _user: User
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    options: foundry.abstract.Document.PreDeleteOptions<any>,
+    user: User
   ): Promise<boolean | void> {
     if (this.combat.combatant?.id === this.parent.id) return Promise.resolve(false);
-    return super._preDelete(_options, _user);
+    return super._preDelete(options, user);
   }
 
-  override _onCreate(data: object, options: object, userId: string): void {
+  override _onCreate(
+    data: foundry.abstract.TypeDataModel.ParentAssignmentType<CombatantSystemSchema, CombatantPTR2e>,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    options: foundry.abstract.Document.OnCreateOptions<any>,
+    userId: string
+  ): void {
     super._onCreate(data, options, userId);
     this.handleSummonEffects();
   }
 
-  override _onDelete(options: object, userId: string): void {
+  override _onDelete(
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    options: foundry.abstract.Document.OnDeleteOptions<any>,
+    userId: string
+  ): void {
     super._onDelete(options, userId);
     this.handleSummonEffects();
   }

@@ -1,33 +1,26 @@
 import type CombatPTR2e from "./document.ts";
 
-class CombatSystem extends foundry.abstract.TypeDataModel {
-    declare parent: CombatPTR2e;
-
-    get maxTurns() {
-        return Math.min(this.parent.roundIndex + 1, this.parent.turns.length);
-    }
-
-    static override defineSchema(): CombatSystemSchema {
-        const fields = foundry.data.fields;
-        return {
-            ...super.defineSchema(),
-            turn: new fields.NumberField({ required: true, initial: 0, min: 0, nullable: false }),
-            participants: new fields.SetField(new fields.DocumentUUIDField(), {required: true, initial: []}),
-        };
-    }
-
-    override prepareDerivedData(): void {
-        super.prepareDerivedData();
-    }
+const combatSystemSchema = {
+  turn: new foundry.data.fields.NumberField({
+    required: true,
+    initial: 0,
+    min: 0,
+    nullable: false,
+  }),
+  participants: new foundry.data.fields.SetField(new foundry.data.fields.DocumentUUIDField(), {
+    required: true,
+    initial: [],
+  }),
 }
 
-interface CombatSystem extends foundry.abstract.TypeDataModel, ModelPropsFromSchema<CombatSystemSchema> {
-    _source: SourceFromSchema<CombatSystemSchema>;
-}
+export type CombatSystemSchema = typeof combatSystemSchema;
 
-interface CombatSystemSchema extends foundry.data.fields.DataSchema {
-    turn: foundry.data.fields.NumberField<number, number, true, false, true>;
-    participants: foundry.data.fields.SetField<foundry.data.fields.DocumentUUIDField<string>, string[], Set<string>, true, false, true>;
-}
+export default class CombatSystem extends foundry.abstract.TypeDataModel<CombatSystemSchema, CombatPTR2e> {
+  get maxTurns() {
+    return Math.min(this.parent.roundIndex + 1, this.parent.turns.length);
+  }
 
-export default CombatSystem;
+  static override defineSchema(): CombatSystemSchema {
+    return combatSystemSchema;
+  }
+}

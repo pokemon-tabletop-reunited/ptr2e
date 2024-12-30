@@ -32,9 +32,9 @@ export const Init: PTRHook = {
       foundry.abstract.DataModel.defineSchema = () => ({});
 
       // Add actor() to window
-      //@ts-expect-error - Adding actor to window
+      //@ts-expect-error - Adding actor shortcut to window
       window.actor = function (): Actor | null {
-        return canvas.tokens.controlled[0]?.actor;
+        return canvas?.tokens?.controlled[0]?.actor;
       }
 
       // Setup PTR Config
@@ -42,6 +42,7 @@ export const Init: PTRHook = {
       Object.freeze(CONFIG.PTR);
 
       if (game.release.generation === 12) {
+        //@ts-expect-error - Typing to be updated
         CONFIG.Token.prototypeSheetClass = TokenConfigPTR2e;
       }
 
@@ -87,7 +88,6 @@ export const Init: PTRHook = {
         CONFIG.ui.items = PTRCONFIG.ui.items;
         CONFIG.ui.actors = PTRCONFIG.ui.actors;
         CONFIG.ui.compendium = PTRCONFIG.ui.compendium;
-        //@ts-expect-error - Typing issue
         CONFIG.ui.tables = PTRCONFIG.ui.tables;
         CONFIG.ui.perksTab = PTRCONFIG.ui.perks;
         CONFIG.ui.settings = PTRCONFIG.ui.settings;
@@ -96,7 +96,6 @@ export const Init: PTRHook = {
       // Register custom sheets
       {
         Actors.unregisterSheet("core", ActorSheet);
-        //@ts-expect-error - Application V2 Compatability
         Actors.registerSheet("ptr2e", ActorSheetPTR2e, { types: ["humanoid", "pokemon"], makeDefault: true })
         Actors.registerSheet("ptr2e", PTRCONFIG.Actor.sheetClasses["ptu-actor"], { types: ["ptu-actor"], makeDefault: true })
 
@@ -104,7 +103,6 @@ export const Init: PTRHook = {
         for (const type in PTRCONFIG.Item.sheetClasses) {
           const key = type as keyof typeof PTRCONFIG.Item.sheetClasses;
           for (const sheet of PTRCONFIG.Item.sheetClasses[key]) {
-            //@ts-expect-error - Application V2 Compatability
             Items.registerSheet("ptr2e", sheet, { types: [type], makeDefault: true });
           }
         }
@@ -124,7 +122,7 @@ export const Init: PTRHook = {
       (async () => {
         // Monkeypatch the game.tooltip class to stop auto-dismissing tooltips
         const original = game.tooltip.deactivate.bind(game.tooltip);
-        game.tooltip.deactivate = (force) => {
+        game.tooltip.deactivate = (force: boolean) => {
           if (Tour.tourInProgress && !force) return;
           original();
         }
@@ -146,6 +144,7 @@ export const Init: PTRHook = {
 
       })();
 
+      //@ts-expect-error - Typing to be updated
       window.customElements.define(HTMLStringTagsElementPTR2e.tagName, HTMLStringTagsElementPTR2e);
 
       CONFIG.TextEditor.enrichers.push(...enrichers);

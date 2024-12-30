@@ -1,15 +1,18 @@
-import type { TokenDocumentPTR2e } from "@module/canvas/token/document.ts";
 import type {
   CombatantPTR2e,
   CombatantSystemPTR2e,
   CombatSystemPTR2e,
-  SummonCombatantSystem} from "@combat";
+  SummonCombatantSystem
+} from "@combat";
 import {
   RoundCombatantSystem
 } from "@combat";
 import { ActorPTR2e } from "@actor";
+import type { DeepPartial, InexactPartial } from "fvtt-types/utils";
 
-class CombatPTR2e extends Combat<CombatSystemPTR2e> {
+class CombatPTR2e extends Combat {
+  public _averageLevel: number | null;
+
   get averageLevel(): number {
     return (this._averageLevel ||=
       this.combatants.reduce((acc, combatant) => {
@@ -18,16 +21,12 @@ class CombatPTR2e extends Combat<CombatSystemPTR2e> {
       }, 0) / ((this.combatants.size - 1) || 1));
   }
 
-  get summons(): CombatantPTR2e<this, null, SummonCombatantSystem>[] {
-    return this.combatants.filter((c) => c.type === "summon") as CombatantPTR2e<this, null, SummonCombatantSystem>[];
+  get summons(): CombatantPTR2e[] {
+    return this.combatants.filter((c) => c.type === "summon") as CombatantPTR2e[];
   }
 
-  get roundCombatant(): CombatantPTR2e<this, null, RoundCombatantSystem> {
-    return this.combatants.get(RoundCombatantSystem.id) as CombatantPTR2e<
-      this,
-      null,
-      RoundCombatantSystem
-    >;
+  get roundCombatant(): CombatantPTR2e {
+    return this.combatants.get(RoundCombatantSystem.id) as CombatantPTR2e;
   }
 
   get roundIndex(): number {
@@ -36,7 +35,7 @@ class CombatPTR2e extends Combat<CombatSystemPTR2e> {
 
   override async rollInitiative(
     maybeIds: string | string[],
-    { updateTurn = true }: RollInitiativeOptions = {}
+    { updateTurn = true }: Combat.InitiativeOptions = {}
   ): Promise<this> {
     // Structure input data
     const ids = typeof maybeIds === "string" ? [maybeIds] : maybeIds;
@@ -66,11 +65,11 @@ class CombatPTR2e extends Combat<CombatSystemPTR2e> {
   }
 
   public override _sortCombatants(
-    a: { initiative: number | null; id: string, actor: Actor<TokenDocument<Scene | null> | null> | null, preview?: boolean },
-    b: { initiative: number | null; id: string, actor: Actor<TokenDocument<Scene | null> | null> | null, preview?: boolean },
-  ) {
+    a: { initiative: Maybe<number>; id: string | null, actor: Actor | null, preview?: boolean },
+    b: { initiative: Maybe<number>; id: string | null, actor: Actor | null, preview?: boolean },
+  ): number {
     // Sort initiative ascending, then by speed descending, finally by speed stages ascending
-    const resolveTie = (a: Maybe<ActorPTR2e>, b: Maybe<ActorPTR2e>) => {
+    const resolveTie = (a: Maybe<ActorPTR2e>, b: Maybe<ActorPTR2e>): number => {
       // Sort by speed descending
       const speedA = a?.speed ?? 0;
       const speedB = b?.speed ?? 0;
@@ -96,8 +95,8 @@ class CombatPTR2e extends Combat<CombatSystemPTR2e> {
     return typeof a.initiative === "number" &&
       typeof b.initiative === "number" &&
       a.initiative === b.initiative
-      ? (resolveTie(a.actor as ActorPTR2e, b.actor as ActorPTR2e) || (a.id > b.id ? 1 : -1))
-      : ia - ib || (a.id > b.id ? 1 : -1);
+      ? (resolveTie(a.actor as unknown as ActorPTR2e, b.actor as unknown as ActorPTR2e) || (a.id! > b.id! ? 1 : -1))
+      : ia - ib || (a.id! > b.id! ? 1 : -1);
   }
 
   override async startCombat(): Promise<this> {
@@ -121,7 +120,6 @@ class CombatPTR2e extends Combat<CombatSystemPTR2e> {
       const updateData = this._prepareTurnUpdateData();
 
       Hooks.callAll("combatTurn", this, updateData, {
-        // @ts-expect-error - This is a valid check
         advanceTime: CONFIG.time.turnTime,
         direction: 1,
       });
@@ -131,7 +129,7 @@ class CombatPTR2e extends Combat<CombatSystemPTR2e> {
       // } else {
       await this.updateEmbeddedDocuments(
         "Combatant",
-        updateData.combatants as EmbeddedDocumentUpdateData[]
+        updateData.combatants
       );
       delete updateData.combatants;
       const result = await this.update(updateData);
@@ -194,8 +192,8 @@ class CombatPTR2e extends Combat<CombatSystemPTR2e> {
         return {};
       }
       initiativeReduction += afterRound.initiative ?? 0;
-      combatantUpdateData[nextCombatant._id] = {
-        _id: nextCombatant._id,
+      combatantUpdateData[nextCombatant._id!] = {
+        _id: nextCombatant._id!,
         initiative: Math.max(0, nextCombatant.baseAV - initiativeReduction),
       };
       updateData.round = (this.round ?? -1) + 1;
@@ -203,8 +201,8 @@ class CombatPTR2e extends Combat<CombatSystemPTR2e> {
 
     // Unless the combat hasn't started yet, reset the current initiative to their BaseAV.
     if (currentCombatant) {
-      combatantUpdateData[currentCombatant._id] = {
-        _id: currentCombatant._id,
+      combatantUpdateData[currentCombatant._id!] = {
+        _id: currentCombatant._id!,
         initiative: Math.max(0, currentCombatant.baseAV - initiativeReduction),
         system: {
           activationsHad: (currentCombatant.system.activations ?? 0) + 1,
@@ -213,21 +211,21 @@ class CombatPTR2e extends Combat<CombatSystemPTR2e> {
     }
 
     for (const combatant of this.turns) {
-      if(combatant.type === "summon" && (combatant.system as SummonCombatantSystem).delay !== null && !combatant.isDefeated) {
-        combatantUpdateData[combatant._id] = {
-          _id: combatant._id,
+      if (combatant.type === "summon" && (combatant.system as SummonCombatantSystem).delay !== null && !combatant.isDefeated) {
+        combatantUpdateData[combatant._id!] = {
+          _id: combatant._id!,
           initiative: 999,
           system: {
             delay: (combatant.system as SummonCombatantSystem).delay! - 1,
-            activationsHad: combatantUpdateData[combatant._id]?.system?.activationsHad ?? combatant.system.activations ?? 0,
+            activationsHad: combatantUpdateData[combatant._id!]?.system?.activationsHad ?? combatant.system.activations ?? 0,
           }
         };
         continue;
       }
-      if (combatantUpdateData[combatant._id]) continue;
+      if (combatantUpdateData[combatant._id!]) continue;
       if (combatant.isDefeated) continue;
-      combatantUpdateData[combatant._id] = {
-        _id: combatant._id,
+      combatantUpdateData[combatant._id!] = {
+        _id: combatant._id!,
         initiative: Math.max(0, (combatant.initiative ?? 0) - initiativeReduction),
       };
     }
@@ -292,7 +290,7 @@ class CombatPTR2e extends Combat<CombatSystemPTR2e> {
     const next = this.combatant;
     if ((advanceTurn || changeCombatant) && next)
       await this._onStartTurn(
-        this.combatant as CombatantPTR2e<this, TokenDocumentPTR2e | null>
+        this.combatant as CombatantPTR2e
       );
   }
 
@@ -305,29 +303,29 @@ class CombatPTR2e extends Combat<CombatSystemPTR2e> {
     this.turns ||= [];
 
     // Determine the turn order and the current turn
-    const turns = this.combatants.contents.sort(this._sortCombatants);
+    const turns = this.combatants.contents.sort(this._sortCombatants) as CombatantPTR2e[];
     if (this.turn !== null) this.turn = Math.clamp(this.turn, 0, turns.length - 1);
 
-    const delaySummons = turns.filter(c => c.type === "summon" && (c.system as SummonCombatantSystem).delay !== null).sort(this._sortCombatants) as CombatantPTR2e<this, null, SummonCombatantSystem>[];
+    const delaySummons = turns.filter(c => c.type === "summon" && (c.system as SummonCombatantSystem).delay !== null).sort(this._sortCombatants) as CombatantPTR2e[];
     for (const summon of delaySummons) {
       // Delayed summons go after X amount of other activations, instead of being based on AV.
       // Thus, insert the summon at the correct position in the turn order.
       const delay = (summon.system as SummonCombatantSystem).delay!;
-      if(delay === -2) continue;
+      if (delay === -2) continue;
 
       turns.splice(turns.indexOf(delaySummons[0]), 1);
 
-      if(delay === -1) {
+      if (delay === -1) {
         turns.unshift(summon);
         continue;
       }
 
       let i = 0;
       let validTurns = 0;
-      while(validTurns < delay) {
+      while (validTurns < delay) {
         i++;
 
-        if(i >= turns.length) {
+        if (i >= turns.length) {
           break;
         }
         const nextTurn = turns[i];
@@ -337,7 +335,7 @@ class CombatPTR2e extends Combat<CombatSystemPTR2e> {
         }
         validTurns++;
       }
-      turns.splice(i+1, 0, summon);
+      turns.splice(i + 1, 0, summon);
     }
 
     // Update state tracking
@@ -348,11 +346,11 @@ class CombatPTR2e extends Combat<CombatSystemPTR2e> {
     if (!this.previous) this.previous = this.current;
 
     // Return the array of prepared turns
-    return (this.turns = turns as CollectionValue<this["combatants"]>[]) as CombatantPTR2e<this>[];
+    return (this.turns = turns as Combatant[]) as CombatantPTR2e[];
   }
 
   async resetEncounter(): Promise<this | undefined> {
-    const inits = this._idToUpdateBaseInitiativeArray(this.combatants.map((c) => c.id)).map(
+    const inits = this._idToUpdateBaseInitiativeArray(this.combatants.map((c) => c.id!)).map(
       (u) => ({ ...u, system: { activationsHad: 0, advanceDelayPercent: 0 } })
     );
     const updateData = {
@@ -372,11 +370,8 @@ class CombatPTR2e extends Combat<CombatSystemPTR2e> {
     return Promise.resolve(this);
   }
 
-  protected override async _preCreate(
-    data: this["_source"],
-    options: DocumentModificationContext<null>,
-    user: User
-  ): Promise<boolean | void> {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  override async _preCreate(data: foundry.data.fields.SchemaField.AssignmentType<Combat.Schema>, options: foundry.abstract.Document.PreCreateOptions<any>, user: User): Promise<boolean | void> {
     await super._preCreate(data, options, user);
 
     const round = new CONFIG.Combatant.documentClass({
@@ -392,18 +387,19 @@ class CombatPTR2e extends Combat<CombatSystemPTR2e> {
   }
 
   protected override _onCreateDescendantDocuments(
-    parent: this,
+    parent: ClientDocument,
     collection: "combatants",
-    documents: Combatant<this, TokenDocument<Scene | null> | null>[],
-    data: foundry.documents.CombatantSource<string, foundry.abstract.TypeDataModel>[],
-    options: DocumentModificationContext<this>,
+    documents: Combatant[],
+    results: Combatant['_source'][],
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    options: foundry.abstract.Document.OnCreateOptions<"Combatant"> & InexactPartial<{ combatTurn: number; turnEvents: boolean }>,
     userId: string
   ): void {
-    super._onCreateDescendantDocuments(parent, collection, documents, data, options, userId);
+    super._onCreateDescendantDocuments(parent, collection, documents, results, options, userId);
     this._averageLevel = null;
 
     const inits = this._idToUpdateBaseInitiativeArray(
-      this.round === 0 ? this.combatants.map((c) => c.id) : documents.map((c) => c._id!)
+      this.round === 0 ? this.combatants.map((c) => c.id!) : documents.map((c) => c._id!)
     );
     this.updateEmbeddedDocuments("Combatant", inits).then(() => {
       const participants = new Set(
@@ -417,28 +413,33 @@ class CombatPTR2e extends Combat<CombatSystemPTR2e> {
   }
 
   protected override _onDeleteDescendantDocuments(
-    parent: this,
+    parent: ClientDocument,
     collection: "combatants",
-    documents: Combatant<this, TokenDocument<Scene | null> | null, foundry.abstract.TypeDataModel>[],
+    documents: Combatant[],
     ids: string[],
-    options: DocumentModificationContext<this>,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    options: foundry.abstract.Document.OnDeleteOptions<"Combatant"> & InexactPartial<{ combatTurn: number; turnEvents: boolean }>,
     userId: string
   ): void {
     super._onDeleteDescendantDocuments(parent, collection, documents, ids, options, userId);
     this._averageLevel = null;
 
     if (this.round === 0) {
-      const inits = this._idToUpdateBaseInitiativeArray(this.combatants.map((c) => c.id));
+      const inits = this._idToUpdateBaseInitiativeArray(this.combatants.map((c) => c.id!));
       this.updateEmbeddedDocuments("Combatant", inits);
     }
   }
 
-  protected override _onDelete(options: DocumentModificationContext<null>, userId: string): void {
+  protected override _onDelete(
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    options: foundry.abstract.Document.OnDeleteOptions<any>,
+    userId: string
+  ): void {
     super._onDelete(options, userId);
 
     const participants = this.system.participants;
     for (const uuid of participants) {
-      const actor = fromUuidSync(uuid);
+      const actor = fromUuidSync(uuid!);
       if (actor instanceof ActorPTR2e) actor.onEndCombat();
     }
 
@@ -448,11 +449,16 @@ class CombatPTR2e extends Combat<CombatSystemPTR2e> {
     })
   }
 
-  protected override _onUpdate(changed: DeepPartial<this["_source"]>, options: DocumentModificationContext<null>, userId: string): void {
+  protected override _onUpdate(
+    changed: DeepPartial<foundry.data.fields.SchemaField.AssignmentType<Combat.Schema>>,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    options: foundry.abstract.Document.OnUpdateOptions<any>,
+    userId: string
+  ): void {
     super._onUpdate(changed, options, userId);
 
     const toDelete = [];
-    for (const combatant of (this.combatants?.filter(c => c.type === "summon") ?? []) as CombatantPTR2e<this, null, SummonCombatantSystem>[]) {
+    for (const combatant of (this.combatants?.filter(c => c.type === "summon") ?? [])) {
       if (combatant.system.expired) {
         toDelete.push(combatant.id);
       }
@@ -463,12 +469,8 @@ class CombatPTR2e extends Combat<CombatSystemPTR2e> {
   }
 }
 
-interface CombatPTR2e extends Combat<CombatSystemPTR2e> {
-  readonly combatants: foundry.abstract.EmbeddedCollection<
-    CombatantPTR2e<this, TokenDocumentPTR2e | null>
-  >;
-
-  _averageLevel: number | null;
+interface CombatPTR2e extends Combat {
+  system: CombatSystemPTR2e;
 }
 
 export default CombatPTR2e;

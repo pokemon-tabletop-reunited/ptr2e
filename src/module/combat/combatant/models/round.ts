@@ -1,12 +1,13 @@
-import type { CombatantPTR2e, CombatPTR2e } from "@combat";
+import type { CombatantPTR2e } from "@combat";
 import { CombatantSystemPTR2e } from "@combat";
+import type { DeepPartial } from "fvtt-types/utils";
+import type { CombatantSystemSchema } from "../system.ts";
 
 class RoundCombatantSystem extends CombatantSystemPTR2e {
-  declare parent: CombatantPTR2e
 
   static readonly id = "roundsinitiative" as const;
-  static get instance(): CombatantPTR2e<CombatPTR2e, null, RoundCombatantSystem> | null {
-    return game.combat?.combatants.get(this.id) as CombatantPTR2e<CombatPTR2e, null, RoundCombatantSystem> ?? null;
+  static get instance(): CombatantPTR2e | null {
+    return game.combat?.combatants.get(this.id) as CombatantPTR2e ?? null;
   }
 
   override get activations() {
@@ -18,11 +19,16 @@ class RoundCombatantSystem extends CombatantSystemPTR2e {
    */
   override get baseAV() { return 150 }
 
-  override _preUpdate(changed: DeepPartial<this["parent"]["_source"]>, options: DocumentUpdateContext<this["parent"]["parent"]>, user: User): Promise<boolean | void> {
+  override async _preUpdate(
+    changed: DeepPartial<foundry.abstract.TypeDataModel.ParentAssignmentType<CombatantSystemSchema, CombatantPTR2e>>,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    options: foundry.abstract.Document.PreUpdateOptions<any>,
+    userId: string
+  ): Promise<boolean | void> {
     if (changed.defeated) {
       changed.defeated = false;
     }
-    return super._preUpdate(changed, options, user);
+    return super._preUpdate(changed, options, userId);
   }
 
   override _preDelete(): Promise<boolean | void> {

@@ -1,15 +1,7 @@
 import type { ActorPTR2e, HumanoidActorSystem, PokemonActorSystem} from "@actor";
-import { ActorSystemPTR2e } from "@actor";
-import { CombatPTR2e, CombatantPTR2e, CombatTrackerPTR2e } from "@combat";
 import type { ItemPTR2e} from "@item";
-import { ItemSystemPTR } from "@item";
 import type { PerkManager } from "@module/apps/perk-manager/perk-manager.ts";
-import { PerkDirectory } from "@module/apps/sidebar/perks-directory.ts";
-import { ScenePTR2e } from "@module/canvas/scene.ts";
-import { TokenDocumentPTR2e } from "@module/canvas/token/document.ts";
-import { TokenPTR2e } from "@module/canvas/token/object.ts";
 import type { ArtMapCollection, ClockDatabase, SkillsCollection, TraitsCollection } from "@data";
-import { ChangeModel } from "@data";
 import type TooltipsPTR2e from "@module/tooltips/tooltips.ts";
 import type { PTRCONFIG } from "@scripts/config/index.ts";
 import type { ImageResolver, sluggify } from "@utils";
@@ -17,7 +9,6 @@ import type EnJSON from "static/lang/en.json";
 import type ClockPanel from "@module/apps/clocks/clock-panel.ts";
 import type TokenPanel from "@module/apps/token-panel.ts";
 import type { remigrate } from "@system/remigrate.ts";
-import { CompendiumBrowserSettings, CompendiumBrowserSources } from "@module/apps/compendium-browser/data.ts";
 import type { CompendiumBrowser } from "@module/apps/compendium-browser/index.ts";
 import type { TutorListSettings } from "@system/tutor-list/setting-model.ts";
 import type { TutorListApp } from "@module/apps/tutor-list.ts";
@@ -28,6 +19,8 @@ import type AbilitySystem from "@item/data/ability.ts";
 import type { ActiveEffectPTR2e } from "@effects";
 import type PerkSystem from "@item/data/perk.ts";
 import type { TypeEffectiveness } from "@scripts/config/effectiveness.ts";
+import type { CompendiumBrowserSettings, CompendiumBrowserSources } from "@module/apps/compendium-browser/data.ts";
+import type { CombatantPTR2e, CombatPTR2e, CombatSystemPTR2e } from "@combat";
 
 declare global {
   // interface ConfigPTR2e extends ConfiguredConfig {
@@ -136,6 +129,8 @@ declare global {
     Actor: typeof ActorPTR2e;
     Item: typeof ItemPTR2e;
     ActiveEffect: typeof ActiveEffectPTR2e;
+    Combat: typeof CombatPTR2e;
+    Combatant: typeof CombatantPTR2e;
   }
 
   interface DataModelConfig {
@@ -178,6 +173,9 @@ declare global {
       "round": object,
       "summon": object
     },
+    Combat: {
+      base: CombatSystemPTR2e
+    }
   }
 
   interface ConfiguredDocuments {

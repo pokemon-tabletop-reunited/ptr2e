@@ -19,7 +19,7 @@ const combatantSystemSchema = {
 
 export type CombatantSystemSchema = typeof combatantSystemSchema;
 
-export default class CombatantSystemPTR2e extends foundry.abstract.TypeDataModel<CombatantSystemSchema, CombatantPTR2e> {
+export default class CombatantSystemPTR2e<Schema extends CombatantSystemSchema = CombatantSystemSchema> extends foundry.abstract.TypeDataModel<Schema, CombatantPTR2e> {
   get combat() {
     return this.parent.encounter;
   }
@@ -32,8 +32,8 @@ export default class CombatantSystemPTR2e extends foundry.abstract.TypeDataModel
     return this.activationsHad;
   }
 
-  static override defineSchema(): CombatantSystemSchema {
-    return combatantSystemSchema;
+  static override defineSchema<Schema extends CombatantSystemSchema = CombatantSystemSchema>(): Schema {
+    return combatantSystemSchema as Schema;
   }
 
   async applyAdvancementDelay(advancementDelay: number, dataOnly = false): Promise<Record<string, unknown> | this['parent'] | undefined> {
@@ -84,11 +84,11 @@ export default class CombatantSystemPTR2e extends foundry.abstract.TypeDataModel
     changed: DeepPartial<foundry.data.fields.SchemaField.AssignmentType<Combatant.Schema>>,
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     options: foundry.abstract.Document.PreUpdateOptions<any>,
-    user: User
+    userId: string
   ): Promise<boolean | void> {
     if(!changed) return false;
     
-    const result = await super._preUpdate(changed, options, user);
+    const result = await super._preUpdate(changed, options, userId);
     if (result === false) return false;
 
     if (changed.system?.activationsHad !== undefined && Number(changed.system.activationsHad) > 0) {
