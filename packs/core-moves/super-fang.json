@@ -4,11 +4,7 @@
   "img": "systems/ptr2e/img/svg/normal_icon.svg",
   "system": {
     "slug": "super-fang",
-    "description": "<p>Effect: On hit, the target's current HP is reduced by 50%. This attack always deals a minimum of 1 HP in damage.</p>",
-    "traits": [
-      "contact",
-      "jaw"
-    ],
+    "traits": [],
     "actions": [
       {
         "slug": "super-fang",
@@ -16,7 +12,8 @@
         "type": "attack",
         "traits": [
           "contact",
-          "jaw"
+          "jaw",
+          "pp-updated"
         ],
         "range": {
           "target": "creature",
@@ -25,26 +22,22 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 7,
-          "delay": null,
-          "priority": null,
-          "trigger": null
+          "powerPoints": 3
         },
         "category": "status",
-        "power": null,
         "accuracy": 90,
         "types": [
           "normal"
         ],
         "description": "<p>Effect: On hit, the target's current HP is reduced by 50%. This attack always deals a minimum of 1 HP in damage.</p>",
-        "contestType": "",
-        "contestEffect": "",
-        "free": false,
-        "slot": null
+        "img": "systems/ptr2e/img/svg/normal_icon.svg"
       }
     ],
-    "container": null,
-    "grade": "A"
+    "grade": "A",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
   },
   "_id": "GrCm0UcSVchkEHKX",
   "effects": []
