@@ -9,7 +9,7 @@ type PartialRecord<K extends keyof any, T> = {
 class HabitatRollTable extends RollTable {
   private static cache: PartialRecord<keyof typeof CONFIG.PTR.data.habitats, HabitatRollTable> = {};
 
-  constructor(data: Record<string, unknown>, context: DocumentConstructionContext<null> = {}) {
+  constructor(data: Record<string, unknown>, context: foundry.abstract.DataModel.DataValidationOptions<HabitatRollTable> = {}) {
     const habitatSlug = data.habitat as keyof typeof CONFIG.PTR.data.habitats;
     const habitat = CONFIG.PTR.data.habitats[habitatSlug];
     if (habitat === undefined) throw new Error(`Invalid habitat "${habitatSlug}"`);
@@ -24,8 +24,8 @@ class HabitatRollTable extends RollTable {
     HabitatRollTable.cache[habitatSlug] = this;
   }
 
-  static override defineSchema(): RollTableSchema {
-    const schema = super.defineSchema() as RollTableSchema;
+  static override defineSchema(): RollTable.Schema {
+    const schema = super.defineSchema() as RollTable.Schema;
     //@ts-expect-error - Ignore that this property isn't optional
     delete schema.results;
     return schema;
@@ -33,14 +33,14 @@ class HabitatRollTable extends RollTable {
 
   habitat: keyof typeof CONFIG.PTR.data.habitats;
 
-  override async draw(options: { roll?: Roll | null; recursive?: boolean; results?: TableResult<RollTable>[]; displayChat?: boolean; rollMode?: RollMode | "roll" | null; }) {
+  override async draw(options: RollTable.DrawOptions) {
     await this.init();
     // options = options ?? {};
     // options.displayChat = false;
     return super.draw(options);
   }
 
-  override async drawMany(number: number, options: { roll?: Roll | null; recursive?: boolean; displayChat?: boolean; rollMode?: RollMode | null; }) {
+  override async drawMany(number: number, options: RollTable.DrawOptions) {
     await this.init();
     // options = options ?? {};
     // options.displayChat = false;
@@ -55,7 +55,17 @@ class HabitatRollTable extends RollTable {
 
     const notification = ui.notifications.info(`Initializing Dynamic Table: ${this.name}...`, { permanent: true });
 
-    const data = await game.packs.get("ptr2e.core-species")!.getIndex({ fields: ["system.habitats", "system.slug", "system.number", "system.form"] });
+    const data = await game.packs.get("ptr2e.core-species")!.getIndex({ fields: ["system.habitats", "system.slug", "system.number", "system.form"] }) as {
+      _id: string,
+      name: string,
+      img: string,
+      system: {
+        habitats: Maybe<keyof typeof CONFIG.PTR.data.habitats>[],
+        slug: string,
+        number: number,
+        form: string
+      }
+    }[]
     const species = data.filter(d => d.system.habitats?.includes(this.habitat));
     this.updateSource({
       results: (species.map( (s, i) => {
@@ -76,7 +86,7 @@ class HabitatRollTable extends RollTable {
     ui.notifications.info(`Dynamic Table: ${this.name} Initialized!`);
   }
 
-  override reset(): Promise<this> {
+  override reset() {
     this.isInitialized = false;
     this.updateSource({ results: [], formula: "" });
     return super.reset();
@@ -97,7 +107,7 @@ class HabitatRollTable extends RollTable {
 
 // @ts-expect-error - Ignore the change in typing
 interface HabitatRollTable {
-  results: TableResult<RollTable>[];
+  results: TableResult[];
 }
 
 export { HabitatRollTable };

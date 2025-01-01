@@ -1,21 +1,23 @@
 import { CollectionField } from "@module/data/fields/collection-field.ts";
 
-export const TutorListVersion = 1 as const;
+const expTrackerSettingsSchema = {
+  data: new CollectionField(new foundry.data.fields.SchemaField({
+    id: new foundry.data.fields.StringField({ required: true, nullable: false }),
+    checked: new foundry.data.fields.BooleanField({ required: true, nullable: false, initial: false }),
+  }), "id"),
+  custom: new CollectionField(new foundry.data.fields.SchemaField({
+    id: new foundry.data.fields.StringField({ required: true, nullable: false }),
+    checked: new foundry.data.fields.BooleanField({ required: true, nullable: false, initial: false }),
+    label: new foundry.data.fields.StringField({ required: true, nullable: false }),
+    value: new foundry.data.fields.NumberField({ required: true, nullable: false }),
+  }), "id"),
+}
 
-export class ExpTrackerSettings extends foundry.abstract.DataModel {
+export type ExpTrackerSettingsSchema = typeof expTrackerSettingsSchema;
+
+export class ExpTrackerSettings extends foundry.abstract.DataModel<ExpTrackerSettingsSchema> {
   static override defineSchema(): ExpTrackerSettingsSchema {
-    return {
-      data: new CollectionField(new foundry.data.fields.SchemaField({
-        id: new foundry.data.fields.StringField({ required: true, nullable: false }),
-        checked: new foundry.data.fields.BooleanField({ required: true, nullable: false, initial: false }),
-      }), "id"),
-      custom: new CollectionField(new foundry.data.fields.SchemaField({
-        id: new foundry.data.fields.StringField({ required: true, nullable: false }),
-        checked: new foundry.data.fields.BooleanField({ required: true, nullable: false, initial: false }),
-        label: new foundry.data.fields.StringField({ required: true, nullable: false }),
-        value: new foundry.data.fields.NumberField({ required: true, nullable: false }),
-      }), "id"),
-    }
+    return expTrackerSettingsSchema
   }
 
   get(id: string) {
@@ -59,37 +61,4 @@ export class ExpTrackerSettings extends foundry.abstract.DataModel {
       return game.settings.set("ptr2e", "expTrackerData", data);
     }
   }
-}
-
-export interface ExpTrackerSettings extends foundry.abstract.DataModel, ModelPropsFromSchema<ExpTrackerSettingsSchema> {
-  _source: SourceFromSchema<ExpTrackerSettingsSchema>;
-}
-
-interface ExpTrackerSettingsSchema extends foundry.data.fields.DataSchema {
-  data: CollectionField<
-    foundry.data.fields.SchemaField<ExpTrackerDataSchema>,
-    SourceFromSchema<ExpTrackerDataSchema>[],
-    Collection<{ id: string, checked: boolean }>,
-    true,
-    false,
-    true
-  >;
-  custom: CollectionField<
-    foundry.data.fields.SchemaField<ExpTrackerCustomDataSchema>,
-    SourceFromSchema<ExpTrackerCustomDataSchema>[],
-    Collection<{ id: string, checked: boolean, label: string, value: number }>,
-    true,
-    false,
-    true
-  >;
-}
-
-interface ExpTrackerDataSchema extends foundry.data.fields.DataSchema {
-  id: foundry.data.fields.StringField<string, string, true, false, false>,
-  checked: foundry.data.fields.BooleanField<boolean, boolean, true, false, true>,
-}
-
-interface ExpTrackerCustomDataSchema extends ExpTrackerDataSchema {
-  label: foundry.data.fields.StringField<string, string, true, false, false>,
-  value: foundry.data.fields.NumberField<number, number, true, false, false>,
 }

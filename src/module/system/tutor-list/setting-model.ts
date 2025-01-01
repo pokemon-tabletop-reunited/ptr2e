@@ -5,19 +5,56 @@ import { sluggify } from "@utils";
 
 export const TutorListVersion = 2 as const;
 
-export class TutorListSettings extends foundry.abstract.DataModel {
+export const tutorListSchemaSchema = {
+  // Slug of trait or Ability Name
+  slug: new SlugField({ required: true, nullable: false }),
+  // Type of trait or Ability
+  type: new foundry.data.fields.StringField({
+    choices: ["trait", "egg", "ability", "universal"],
+    initial: "trait",
+    required: true,
+    nullable: false,
+  }),
+  moves: new CollectionField(
+    new foundry.data.fields.SchemaField({
+      // Slug of move
+      slug: new SlugField({ required: true, nullable: false }),
+      // Uuid of move
+      uuid: new foundry.data.fields.StringField(),
+    })
+  ),
+};
+
+export type TutorListSchemaSchema = typeof tutorListSchemaSchema;
+
+class TutorListSchema extends foundry.abstract.DataModel<TutorListSchemaSchema> {
+  static override defineSchema(): TutorListSchemaSchema {
+    return tutorListSchemaSchema
+  }
+
+  get id() {
+    return `${this.slug}-${this.type}`;
+  }
+}
+
+
+const tutorListSettingsSchema = {
+  list: new CollectionField(new foundry.data.fields.EmbeddedDataField(TutorListSchema), "id"),
+  _migration: new foundry.data.fields.SchemaField({
+    version: new foundry.data.fields.NumberField({ required: true, nullable: true, initial: null }),
+    previous: new foundry.data.fields.SchemaField({
+      schema: new foundry.data.fields.NumberField({ required: true, nullable: true, initial: null }),
+      system: new foundry.data.fields.StringField({ required: false, blank: true }),
+      foundry: new foundry.data.fields.StringField({ required: false, blank: true }),
+    }, { required: false, nullable: true, initial: null }),
+  }),
+}
+
+export type TutorListSettingsSchema = typeof tutorListSettingsSchema;
+
+export class TutorListSettings extends foundry.abstract.DataModel<TutorListSettingsSchema> {
   static override defineSchema(): TutorListSettingsSchema {
-    return {
-      list: new CollectionField(new foundry.data.fields.EmbeddedDataField(TutorListSchema), "id"),
-      _migration: new foundry.data.fields.SchemaField({
-        version: new foundry.data.fields.NumberField({ required: true, nullable: true, initial: null }),
-        previous: new foundry.data.fields.SchemaField({
-          schema: new foundry.data.fields.NumberField({ required: true, nullable: true, initial: null }),
-          system: new foundry.data.fields.StringField({ required: false, blank: true }),
-          foundry: new foundry.data.fields.StringField({ required: false, blank: true }),
-        }, { required: false, nullable: true, initial: null }),
-      }),
-    }
+    return tutorListSettingsSchema
   }
 
   get(id: string) {
@@ -74,88 +111,4 @@ export class TutorListSettings extends foundry.abstract.DataModel {
       });
     }
   }
-}
-
-export interface TutorListSettings extends foundry.abstract.DataModel, ModelPropsFromSchema<TutorListSettingsSchema> {
-  _source: SourceFromSchema<TutorListSettingsSchema>;
-}
-
-class TutorListSchema extends foundry.abstract.DataModel {
-  static override defineSchema() {
-    return {
-      // Slug of trait or Ability Name
-      slug: new SlugField({ required: true, nullable: false }),
-      // Type of trait or Ability
-      type: new foundry.data.fields.StringField({
-        choices: ["trait", "egg", "ability", "universal"],
-        initial: "trait",
-        required: true,
-        nullable: false,
-      }),
-      moves: new CollectionField(
-        new foundry.data.fields.SchemaField({
-          // Slug of move
-          slug: new SlugField({ required: true, nullable: false }),
-          // Uuid of move
-          uuid: new foundry.data.fields.StringField(),
-        })
-      ),
-    };
-  }
-
-  get id() {
-    return `${this.slug}-${this.type}`;
-  }
-}
-
-interface TutorListSchema extends foundry.abstract.DataModel, ModelPropsFromSchema<_TutorListSettingsSchema> {
-  _source: SourceFromSchema<_TutorListSettingsSchema>;
-}
-
-interface TutorListSettingsSchema extends foundry.data.fields.DataSchema {
-  list: CollectionField<
-    foundry.data.fields.EmbeddedDataField<TutorListSchema>,
-    SourceFromSchema<_TutorListSettingsSchema>[],
-    Collection<TutorListSchema>,
-    true,
-    false,
-    true
-  >;
-  _migration: foundry.data.fields.SchemaField<
-    _MigrationSchema,
-    SourceFromSchema<_MigrationSchema>,
-    ModelPropsFromSchema<_MigrationSchema>,
-    true,
-    false,
-    false
-  >;
-}
-
-export interface _TutorListSettingsSchema extends foundry.data.fields.DataSchema {
-  slug: SlugField<string, string, true, false, false>,
-  type: foundry.data.fields.StringField<"trait" | "ability" | "egg" | "universal", "trait" | "ability" | "egg" | "universal", true, false, true>,
-  moves: CollectionField<
-    foundry.data.fields.SchemaField<_MoveSchema>,
-    SourceFromSchema<_MoveSchema>[],
-    Collection<ModelPropsFromSchema<_MoveSchema>>,
-    true,
-    false,
-    true
-  >;
-}
-
-interface _MoveSchema extends foundry.data.fields.DataSchema {
-  slug: SlugField<string, string, true, false, false>,
-  uuid: foundry.data.fields.StringField<string, string, true, true, true>,
-}
-
-interface _MigrationSchema extends foundry.data.fields.DataSchema {
-  version: foundry.data.fields.NumberField<number, number, true, true, true>;
-  previous: foundry.data.fields.SchemaField<_PreviousMigrationSchema, SourceFromSchema<_PreviousMigrationSchema>, ModelPropsFromSchema<_PreviousMigrationSchema>, false, true, true>;
-}
-
-interface _PreviousMigrationSchema extends foundry.data.fields.DataSchema {
-  schema: foundry.data.fields.NumberField<number, number, true, true, true>;
-  system: foundry.data.fields.StringField<string, string, false, false>;
-  foundry: foundry.data.fields.StringField<string, string, false, false>;
 }

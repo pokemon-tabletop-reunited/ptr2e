@@ -13,7 +13,6 @@ import { getInitialSkillList } from "@scripts/config/skills.ts";
 import type { PredicateStatement } from "@system/predication/predication.ts";
 import { Predicate } from "@system/predication/predication.ts";
 import { ImageResolver, sluggify } from "@utils";
-import type { DeepPartial } from "fvtt-types/utils";
 import type { PerkSchema } from "./perk.ts";
 import type PerkSystem from "./perk.ts";
 

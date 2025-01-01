@@ -10,7 +10,7 @@ const clockSchema = {
 }
 
 function _getSort(): number {
-  return canvas.ready
+  return canvas?.ready
     ? game.ptr.clocks.db.clocks.reduce((acc, c) => Math.max(acc, c.sort), 0) + 1
     : 0;
 }

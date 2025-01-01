@@ -5,6 +5,7 @@ import { DATA_TYPE_INVERTED, DATA_TYPES, ignoreDataModelParts } from "./data.ts"
 import { getChildTypeId, getTypeId } from "./helpers.ts";
 import type { MatchInfo } from "minisearch";
 import MiniSearch from "minisearch";
+import type { ValueOf } from "fvtt-types/utils";
 
 class ChildKeyData {
   key: string;
@@ -23,7 +24,7 @@ class DataStructure {
   typeId: ValueOf<typeof DATA_TYPES>;
   root: DataStructure
   value: unknown;
-  document?: foundry.abstract.Document;
+  document?: foundry.abstract.Document.Any;
   parent: DataStructure | null;
   children: DataStructure[] = [];
   depth = 0;
@@ -90,7 +91,7 @@ class DataStructure {
     return null;
   }
 
-  isModel(): this is { value: foundry.abstract.DataModel } {
+  isModel(): this is { value: foundry.abstract.DataModel.Any } {
     return this.typeId === DATA_TYPES.model;
   }
 
@@ -122,13 +123,13 @@ class DataStructure {
     return this.isDocument() || [DATA_TYPES.placeable, DATA_TYPES.pixi, DATA_TYPES.app].includes(this.typeId);
   }
 
-  isDocument(): this is { value: foundry.abstract.Document } {
+  isDocument(): this is { value: foundry.abstract.Document.Any } {
     return this.typeId === DATA_TYPES.document;
   }
 
-  get documentId(): string | undefined {
+  get documentId(): string | null {
     if (this.isDocument()) return this.value.id;
-    return undefined;
+    return null;
   }
 
   hasValues(): this is { value: ValueLike } {
@@ -408,7 +409,7 @@ class DataStructure {
     key: string, 
     path: string, 
     type: TreeTypes, 
-    { includeFunctions = false, document }: { includeFunctions?: boolean, document?: foundry.abstract.Document } = {}, 
+    { includeFunctions = false, document }: { includeFunctions?: boolean, document?: foundry.abstract.Document.Any } = {}, 
     {_sourceData, _derivedData, _rollData, _overides, _temporaryData}: { _sourceData?: object, _derivedData?: object, _rollData?: object, _overides?: object, _temporaryData?: object } = {}
   ): { root: DataStructure, all: Record<string, DataStructure>, count: number, depth: number } {
     const dt = new DataStructure({ key, path: key, value: sourceData, parent: null, treeType: type, depth: 0 });

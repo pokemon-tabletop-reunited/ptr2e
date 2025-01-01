@@ -1,6 +1,6 @@
 import type { ActorPTR2e, EffectRoll } from "@actor";
 import type { BaseStatisticCheck, StatisticCheck } from "./statistics/statistic.ts";
-import type { ItemPTR2e, ItemSystemPTR, ItemSystemsWithActions } from "@item";
+import type { ItemPTR2e } from "@item";
 import type { CheckDC } from "@system/rolls/degree-of-success.ts";
 import type { TokenDocumentPTR2e } from "@module/canvas/token/document.ts";
 import type { ModifierPTR2e } from "@module/effects/modifiers.ts";
@@ -11,14 +11,14 @@ import type { AttackCheck } from "./statistics/attack.ts";
 
 interface CheckContextParams<
   TStatistic extends BaseStatisticCheck<unknown, unknown> = StatisticCheck,
-  TItem extends ItemPTR2e<ItemSystemsWithActions, ActorPTR2e> | null = ItemPTR2e<ItemSystemsWithActions, ActorPTR2e> | null,
+  TItem extends ItemPTR2e | null = ItemPTR2e | null,
 > extends RollContextParams<TStatistic, TItem> {
 
 }
 
 interface RollContextParams<
   TStatistic extends BaseStatisticCheck<unknown, unknown> | null = StatisticCheck | null,
-  TItem extends ItemPTR2e<ItemSystemsWithActions, ActorPTR2e> | null = ItemPTR2e<ItemSystemsWithActions, ActorPTR2e> | null,
+  TItem extends ItemPTR2e | null = ItemPTR2e | null,
 > {
   /** The statistic used for the roll */
   statistic: TStatistic;
@@ -45,10 +45,7 @@ interface RollContextParams<
 interface CheckContext<
   TActor extends ActorPTR2e = ActorPTR2e,
   TStatistic extends BaseStatisticCheck<unknown, unknown> = StatisticCheck,
-  TItem extends ItemPTR2e<ItemSystemPTR, ActorPTR2e> | null = ItemPTR2e<
-    ItemSystemPTR,
-    ActorPTR2e
-  > | null,
+  TItem extends ItemPTR2e | null = ItemPTR2e | null,
 > extends RollContext<TActor, TStatistic, TItem> {
   dc?: CheckDC | null;
   outOfRange?: boolean;
@@ -61,10 +58,7 @@ interface CheckContext<
 interface RollContext<
   TActor extends ActorPTR2e,
   TStatistic extends BaseStatisticCheck<unknown, unknown> | null = StatisticCheck | null,
-  TItem extends ItemPTR2e<ItemSystemPTR, ActorPTR2e> | null = ItemPTR2e<
-    ItemSystemPTR,
-    ActorPTR2e
-  > | null,
+  TItem extends ItemPTR2e | null = ItemPTR2e | null,
 > {
   /** Roll options */
   options: Set<string>;
@@ -78,10 +72,7 @@ interface RollContext<
 interface AttackSelf<
   TActor extends ActorPTR2e,
   TStatistic extends BaseStatisticCheck<unknown, unknown> | null = AttackCheck | null,
-  TItem extends ItemPTR2e<ItemSystemPTR, ActorPTR2e> | null = ItemPTR2e<
-    ItemSystemPTR,
-    ActorPTR2e
-  > | null,
+  TItem extends ItemPTR2e | null = ItemPTR2e | null,
 > {
   actor: TActor;
   token: TokenDocumentPTR2e | null;
