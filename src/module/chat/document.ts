@@ -1,10 +1,8 @@
 import type { ActorPTR2e, EffectRollSource } from "@actor";
-import type { ScenePTR2e } from "@module/canvas/scene.ts";
 import type { TokenDocumentPTR2e } from "@module/canvas/token/document.ts";
 import type { CheckRollContext } from "@system/rolls/data.ts";
 import type { AttackRollResult, PokeballRollResults } from "../system/rolls/check-roll.ts";
 import { CheckRoll } from "../system/rolls/check-roll.ts";
-import type AttackMessageSystem from "./models/attack.ts";
 import * as R from "remeda";
 import type { SummonPTR2e } from "@item";
 import type { AttackPTR2e } from "@data";
@@ -17,18 +15,18 @@ class ChatMessagePTR2e extends ChatMessage {
   }
 
   /** Get the token of the speaker if possible */
-  get token(): TokenDocumentPTR2e<ScenePTR2e> | null {
+  get token(): TokenDocumentPTR2e | null {
     if (!game.scenes) return null; // In case we're in the middle of game setup
     const sceneId = this.speaker.scene ?? "";
     const tokenId = this.speaker.token ?? "";
     return (
-      (game.scenes.get(sceneId)?.tokens.get(tokenId) as TokenDocumentPTR2e<ScenePTR2e>) ??
+      (game.scenes.get(sceneId)?.tokens.get(tokenId) as TokenDocumentPTR2e) ??
       null
     );
   }
 
   override prepareDerivedData(): void {
-    const rolls = this._source.rolls.map((r) => JSON.parse(r));
+    const rolls = this._source.rolls.map((r) => JSON.parse(r!));
     let updated = false;
     for (const roll of rolls) {
       if (
@@ -71,7 +69,7 @@ class ChatMessagePTR2e extends ChatMessage {
     // Construct message data
     const messageData = {
       message: data,
-      user: game.user,
+      user: game.user!,
       author: this.author as User,
       alias: this.alias,
       cssClass: [
@@ -82,20 +80,21 @@ class ChatMessagePTR2e extends ChatMessage {
         this.type,
       ].filterJoin(" "),
       isWhisper: this.whisper.length,
-      canDelete: game.user.isGM, // Only GM users are allowed to have the trash-bin icon in the chat log itself
+      canDelete: game.user!.isGM, // Only GM users are allowed to have the trash-bin icon in the chat log itself
       whisperTo: this.whisper
         .map((u) => {
-          const user = game.users.get(u);
+          const user = game.users.get(u!);
           return user ? user.name : null;
         })
         .filterJoin(", "),
-    } as ChatMessageRenderData;
+    };
 
     // Render message data specifically for ROLL type messages
+    //@ts-expect-error - FIXME: Seems to be a type issue, investigate.
     if (this.isRoll) await this._renderRollContent(messageData);
 
     // Define a border color
-    if (this.style === CONST.CHAT_MESSAGE_STYLES.OOC)
+    if (this.style === CONST.CHAT_MESSAGE_STYLES.OOC) //@ts-expect-error - FIXME: Seems to be a missing type?
       messageData.borderColor = (this.author?.color as Color).css;
 
     // Render the chat message
@@ -132,7 +131,7 @@ class ChatMessagePTR2e extends ChatMessage {
       event.stopPropagation();
 
       const { attackUuid } = event.currentTarget.dataset;
-      const action = await fromUuid(attackUuid) as unknown as AttackPTR2e;
+      const action = await fromUuid(attackUuid!) as unknown as AttackPTR2e;
       if (!action) return void ui.notifications.error("Action not found.");
 
       return action.delayAction();
@@ -144,16 +143,16 @@ class ChatMessagePTR2e extends ChatMessage {
       event.stopPropagation();
 
       const { actionUuid } = event.currentTarget.dataset;
-      const action = await fromUuid(actionUuid) as unknown as AttackPTR2e;
+      const action = await fromUuid(actionUuid!) as unknown as AttackPTR2e;
       if (!action) return void ui.notifications.error("Action not found.");
 
       const ppCost = action.cost.powerPoints
-      if(!ppCost) return void ui.notifications.error("No PP cost found on action.");
+      if (!ppCost) return void ui.notifications.error("No PP cost found on action.");
 
       const actor = action!.actor;
       if (!actor) return void ui.notifications.error("Unable to detect actor.");
 
-      if(ppCost > actor.system.powerPoints.value) return void ui.notifications.error(game.i18n.format("PTR2E.AttackWarning.NotEnoughPP", { cost: ppCost, current: actor.system.powerPoints.value }));
+      if (ppCost > actor.system.powerPoints.value) return void ui.notifications.error(game.i18n.format("PTR2E.AttackWarning.NotEnoughPP", { cost: ppCost, current: actor.system.powerPoints.value }));
 
       await actor.update({
         "system.powerPoints.value": actor.system.powerPoints.value - ppCost,
@@ -169,11 +168,11 @@ class ChatMessagePTR2e extends ChatMessage {
       if (!game.combat) return void ui.notifications.error("You must be in combat to summon a creature.");
 
       const { attackUuid } = event.currentTarget.dataset;
-      const action = await fromUuid(attackUuid) as unknown as AttackPTR2e;
+      const action = await fromUuid(attackUuid!) as unknown as AttackPTR2e;
       if (!action) return void ui.notifications.error("Action not found.");
       if (!(action?.type === "attack" && action.summon)) return void ui.notifications.error("Action not found on item.");
 
-      const summonItem = await fromUuid<SummonPTR2e>((action as AttackPTR2e).summon);
+      const summonItem = await fromUuid((action as AttackPTR2e).summon!) as SummonPTR2e;
       if (!summonItem) return void ui.notifications.error("Summon not found on action.");
 
       const combatants = await game.combat.createEmbeddedDocuments("Combatant", [{
@@ -181,7 +180,7 @@ class ChatMessagePTR2e extends ChatMessage {
         type: "summon",
         system: {
           owner: action.actor?.uuid ?? null,
-          item: { ...summonItem.clone({"system.owner": action.actor?.uuid ?? null}).toObject(), uuid: summonItem.uuid }
+          item: { ...summonItem.clone({ "system.owner": action.actor?.uuid ?? null }).toObject(), uuid: summonItem.uuid }
         }
       }])
 
@@ -259,7 +258,7 @@ class ChatMessagePTR2e extends ChatMessage {
           event.preventDefault();
           if (!canvas.ready) return;
 
-          const actor = (await fromUuid(el.dataset.uuid)) as ActorPTR2e;
+          const actor = (await fromUuid(el.dataset.uuid!)) as ActorPTR2e;
           if (!actor) return;
 
           const tokens = actor.getActiveTokens(false);
@@ -292,10 +291,10 @@ class ChatMessagePTR2e extends ChatMessage {
     //
   }
 
-  static async createFromRoll<TTypeDataModel extends foundry.abstract.TypeDataModel = foundry.abstract.TypeDataModel>(
+  static async createFromRoll(
     context: CheckRollContext & { notesList?: HTMLUListElement | null },
-    roll: Rolled<CheckRoll>
-  ): Promise<ChatMessagePTR2e<TTypeDataModel> | undefined> {
+    roll: Roll.Evaluated<CheckRoll>
+  ): Promise<ChatMessagePTR2e | undefined> {
     let type = (() => {
       switch (context.type ?? roll.data.type) {
         case "check":
@@ -310,6 +309,7 @@ class ChatMessagePTR2e extends ChatMessage {
       return "base";
     })();
     const rollJson = roll.toJSON();
+    //@ts-expect-error - FIXME: Figure out why this is breaking.
     rollJson.data = roll.data;
     const system: Record<string, unknown> = {
       roll: rollJson,
@@ -334,6 +334,7 @@ class ChatMessagePTR2e extends ChatMessage {
         return await CheckRoll.createFromData({ type: "luck-roll" })!.roll();
       })();
       const luckRollJson = luckRoll.toJSON();
+      //@ts-expect-error - FIXME: Figure out why this is breaking.
       luckRollJson.data = luckRoll.data;
       system.luckRoll = luckRollJson;
       rolls.push(luckRollJson);
@@ -354,8 +355,7 @@ class ChatMessagePTR2e extends ChatMessage {
     });
     const flavor = context.notesList ? context.notesList.innerHTML : context.title ?? "";
 
-    //@ts-expect-error - Chatmessages aren't typed properly yet
-    return ChatMessagePTR2e.create<ChatMessagePTR2e<TTypeDataModel>>({
+    return ChatMessagePTR2e.create({
       type,
       speaker,
       flavor,
@@ -363,10 +363,10 @@ class ChatMessagePTR2e extends ChatMessage {
     }, { rollMode: context.rollMode });
   }
 
-  static createFromPokeballResults<TTypeDataModel extends foundry.abstract.TypeDataModel = foundry.abstract.TypeDataModel>(
+  static createFromPokeballResults(
     context: CheckRollContext,
     results: PokeballRollResults
-  ): Promise<ChatMessagePTR2e<TTypeDataModel> | undefined> {
+  ): Promise<ChatMessagePTR2e | undefined> {
     const type = "capture";
 
     const system = {
@@ -395,8 +395,7 @@ class ChatMessagePTR2e extends ChatMessage {
     });
     const flavor = context.title ?? "";
 
-    //@ts-expect-error - Chatmessages aren't typed properly yet
-    return ChatMessagePTR2e.create<ChatMessagePTR2e<TTypeDataModel>>({
+    return ChatMessagePTR2e.create({
       type,
       speaker,
       flavor,
@@ -408,19 +407,19 @@ class ChatMessagePTR2e extends ChatMessage {
     context: CheckRollContext & { notesList?: HTMLUListElement | null },
     results: AttackRollResult[],
     dataOnly: true
-  ): Promise<DeepPartial<ChatMessagePTR2e<AttackMessageSystem>> | undefined>;
+  ): Promise<ChatMessage.ConstructorData | undefined>;
   static async createFromResults(
     context: CheckRollContext & { notesList?: HTMLUListElement | null },
     results: AttackRollResult[],
     dataOnly?: false
-  ): Promise<ChatMessagePTR2e<AttackMessageSystem> | undefined>;
+  ): Promise<ChatMessagePTR2e | undefined>;
   static async createFromResults(
     context: CheckRollContext & { notesList?: HTMLUListElement | null },
     results: AttackRollResult[],
     dataOnly = false
   ): Promise<
-    | ChatMessagePTR2e<AttackMessageSystem>
-    | DeepPartial<ChatMessagePTR2e<AttackMessageSystem>>
+    | ChatMessagePTR2e
+    | ChatMessage.ConstructorData
     | undefined
   > {
     if (!context.action) return;
@@ -490,12 +489,10 @@ class ChatMessagePTR2e extends ChatMessage {
         }))
       } : null
     };
-    if(context.attack?.type === "summon") system.originItem = context.item?.toJSON();
+    if (context.attack?.type === "summon") system.originItem = context.item?.toJSON();
 
-    // @ts-expect-error - Chatmessages aren't typed properly yet
-    return dataOnly ? { type: "attack", speaker, flavor, system, }
-      // @ts-expect-error - Chatmessages aren't typed properly yet
-      : ChatMessagePTR2e.create<ChatMessagePTR2e<AttackMessageSystem>>({
+    return dataOnly ? { type: "attack", speaker, flavor, system }
+      : ChatMessagePTR2e.create({
         type: "attack",
         speaker,
         flavor,
