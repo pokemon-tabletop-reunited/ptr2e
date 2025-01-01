@@ -1,34 +1,36 @@
 import type { ActorPTR2e } from "@actor";
 import type { ChatMessagePTR2e } from "@chat";
 import { SlugField } from "@module/data/fields/slug-field.ts";
+import type { AnyObject } from "fvtt-types/utils";
 
-abstract class DamageAppliedMessageSystem extends foundry.abstract.TypeDataModel {
-  declare parent: ChatMessagePTR2e<DamageAppliedMessageSystem>;
+const damageAppliedSchema = {
+  target: new foundry.data.fields.DocumentUUIDField<{required: true, type: 'Actor'}, AnyObject, ActorPTR2e | null>({ required: true, type: 'Actor' }),
+  damageApplied: new foundry.data.fields.NumberField({ required: true, nullable: false }),
+  shieldApplied: new foundry.data.fields.BooleanField({ required: true, initial: false }),
+  undone: new foundry.data.fields.BooleanField({ required: true, initial: false }),
+  notes: new foundry.data.fields.ArrayField(new foundry.data.fields.ArrayField(new foundry.data.fields.HTMLField({ blank: false, nullable: false })), { required: true, initial: [] }),
+  rollNotes: new foundry.data.fields.ArrayField(new foundry.data.fields.StringField({ blank: false, nullable: false }), { required: true, initial: [] }),
+  result: new foundry.data.fields.SchemaField({
+    domains: new foundry.data.fields.ArrayField(new SlugField(), { required: true, initial: [] }),
+    type: new foundry.data.fields.StringField({ required: true, blank: true, initial: "" }),
+    options: new foundry.data.fields.ArrayField(new foundry.data.fields.StringField(), { required: true, initial: [] }),
+  }, { nullable: true, initial: null })
+}
 
+export type DamageAppliedSchema = typeof damageAppliedSchema;
+
+abstract class DamageAppliedMessageSystem extends foundry.abstract.TypeDataModel<DamageAppliedSchema, ChatMessagePTR2e> {
   /**
    * Define the schema for the DamageAppliedMessageSystem data model
    */
-  static override defineSchema() {
-    const fields = foundry.data.fields;
-    return {
-      target: new fields.DocumentUUIDField({ required: true, type: 'Actor' }),
-      damageApplied: new fields.NumberField({ required: true }),
-      shieldApplied: new fields.BooleanField({ required: true, initial: false }),
-      undone: new fields.BooleanField({ required: true, initial: false }),
-      notes: new fields.ArrayField(new fields.ArrayField(new fields.HTMLField({ blank: false, nullable: false })), { required: true, initial: [] }),
-      rollNotes: new fields.ArrayField(new fields.StringField({ blank: false, nullable: false }), { required: true, initial: [] }),
-      result: new fields.SchemaField({
-        domains: new fields.ArrayField(new SlugField(), { required: true, initial: [] }),
-        type: new fields.StringField({ required: true, blank: true, initial: "" }),
-        options: new fields.ArrayField(new fields.StringField(), { required: true, initial: [] }),
-      }, {nullable: true, initial: null})
-    }
+  static override defineSchema(): DamageAppliedSchema {
+    return damageAppliedSchema;
   }
 
   override prepareBaseData(): void {
 
     this.target = (() => {
-      const actor = fromUuidSync<ActorPTR2e>(this._source.target!);
+      const actor = fromUuidSync(this._source.target!) as ActorPTR2e | null;
       return actor;
     })();
 
@@ -66,32 +68,8 @@ abstract class DamageAppliedMessageSystem extends foundry.abstract.TypeDataModel
   }
 }
 
-interface DamageAppliedMessageSystem extends ModelPropsFromSchema<DamageAppliedMessageSchema> {
-  _source: SourceFromSchema<DamageAppliedMessageSchema>;
-
+interface DamageAppliedMessageSystem {
   _notesHTML: string | undefined;
-}
-
-interface DamageAppliedMessageSchema extends foundry.data.fields.DataSchema {
-  target: foundry.data.fields.DocumentUUIDField<ActorPTR2e, true, true, false>;
-  damageApplied: foundry.data.fields.NumberField<number, number, true, false, false>;
-  shieldApplied: foundry.data.fields.BooleanField<boolean, boolean, true, false, true>;
-  undone: foundry.data.fields.BooleanField<boolean, boolean, true, false, true>;
-  notes: foundry.data.fields.ArrayField<foundry.data.fields.ArrayField<foundry.data.fields.HTMLField>>;
-  result: foundry.data.fields.SchemaField<
-    DamageAppliedResultSchema,
-    foundry.data.fields.SourcePropFromDataField<foundry.data.fields.SchemaField<DamageAppliedResultSchema>>,
-    foundry.data.fields.ModelPropFromDataField<foundry.data.fields.SchemaField<DamageAppliedResultSchema>>,
-    true,
-    true,
-    true
-  >
-}
-
-interface DamageAppliedResultSchema extends foundry.data.fields.DataSchema {
-  domains: foundry.data.fields.ArrayField<SlugField, string[], string[], true, false, true>;
-  options: foundry.data.fields.ArrayField<foundry.data.fields.StringField, string[], string[], true, false, true>;
-  type: foundry.data.fields.StringField<string, string, true, false, true>;
 }
 
 export default DamageAppliedMessageSystem

@@ -136,7 +136,7 @@ class TokenPTR2e extends Token {
 
   /** Reset aura renders when token size changes. */
   override _onUpdate(
-    changed: DeepPartial<foundry.data.fields.SchemaField.AssignmentType<Token.Schema>>,
+    changed: foundry.data.fields.SchemaField.InnerAssignmentType<Token.Schema>,
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     options: foundry.abstract.Document.OnUpdateOptions<any>,
     userId: string

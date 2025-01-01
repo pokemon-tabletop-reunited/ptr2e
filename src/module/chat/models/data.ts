@@ -19,7 +19,7 @@ interface AccuracyContext {
 }
 
 type DamageCalc = {
-    roll: Rolled<Roll>;
+    roll: Roll.Evaluated<Roll>;
     value: number;
     context: Partial<DamageContext>;
 } | {

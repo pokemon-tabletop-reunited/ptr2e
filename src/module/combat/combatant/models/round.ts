@@ -20,7 +20,7 @@ class RoundCombatantSystem extends CombatantSystemPTR2e {
   override get baseAV() { return 150 }
 
   override async _preUpdate(
-    changed: DeepPartial<foundry.abstract.TypeDataModel.ParentAssignmentType<CombatantSystemSchema, CombatantPTR2e>>,
+    changed: foundry.abstract.TypeDataModel.ParentAssignmentType<CombatantSystemSchema, CombatantPTR2e>,
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     options: foundry.abstract.Document.PreUpdateOptions<any>,
     userId: string

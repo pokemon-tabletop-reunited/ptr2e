@@ -1,9 +1,8 @@
 import { ActorPTR2e } from "@actor";
-import type { ItemSystemsWithActions } from "@item";
+import type { ItemWithActions } from "@item";
 import { ItemPTR2e } from "@item";
-import type { ActionType, ActionCost, Delay, Priority} from "@data";
+import type { ActionType } from "@data";
 import { PTRCONSTS, Trait } from "@data";
-import { RangePTR2e } from "@data";
 import { CollectionField } from "../fields/collection-field.ts";
 import { SlugField } from "../fields/slug-field.ts";
 import SystemTraitsCollection from "../system-traits-collection.ts";
@@ -11,95 +10,115 @@ import SummonSystem from "@item/data/summon.ts";
 import { ActionEditor } from "@module/apps/action-editor.ts";
 import { formatSlug } from "@utils";
 
-class ActionPTR2e extends foundry.abstract.DataModel {
+const actionSchema = {
+  slug: new SlugField({
+    required: true,
+    label: "PTR2E.FIELDS.slug.label",
+    hint: "PTR2E.FIELDS.slug.hint",
+  }),
+  name: new foundry.data.fields.StringField({
+    required: true,
+    initial: "New Action",
+    label: "PTR2E.FIELDS.actionName.label",
+    hint: "PTR2E.FIELDS.actionName.hint",
+  }),
+  description: new foundry.data.fields.HTMLField({
+    required: false,
+    nullable: true,
+    label: "PTR2E.FIELDS.description.label",
+    hint: "PTR2E.FIELDS.description.hint",
+  }),
+  img: new foundry.data.fields.FilePathField({
+    required: true,
+    categories: ["IMAGE"],
+    initial: () => ActionPTR2e.baseImg,
+  }),
+  traits: new CollectionField<
+    foundry.data.fields.StringField<{ validate: (value: string) => boolean }>,
+    { label: string; hint: string },
+    string,
+    Trait,
+    string[],
+    SystemTraitsCollection<Trait>,
+    string
+  >(new foundry.data.fields.StringField({ validate: Trait.isValid }), "slug", {
+    label: "PTR2E.FIELDS.actionTraits.label",
+    hint: "PTR2E.FIELDS.actionTraits.hint",
+  }),
+  range: new foundry.data.fields.SchemaField({
+    target: new foundry.data.fields.StringField({
+      required: true, choices: Object.values(PTRCONSTS.TargetOptions).reduce<Record<string, string>>((acc, target) => ({ ...acc, [target]: target }), {}), initial: PTRCONSTS.TargetOptions.ENEMY, label: "PTR2E.FIELDS.target.label", hint: "PTR2E.FIELDS.target.hint"
+    }),
+    distance: new foundry.data.fields.NumberField({ required: true, nullable: false, initial: 0, min: 0, integer: true, label: "PTR2E.FIELDS.distance.label", hint: "PTR2E.FIELDS.distance.hint" }),
+    unit: new foundry.data.fields.StringField({ required: true, choices: Object.values(PTRCONSTS.DistanceUnits), initial: PTRCONSTS.DistanceUnits.METERS, label: "PTR2E.FIELDS.unit.label", hint: "PTR2E.FIELDS.unit.hint" }),
+  }, { required: false, nullable: true }),
+  cost: new foundry.data.fields.SchemaField({
+    activation: new foundry.data.fields.StringField({
+      required: true,
+      choices: Object.values(PTRCONSTS.ActivationCost).reduce<Record<string, string>>((acc, activation) => ({ ...acc, [activation]: activation }), {}),
+      initial: PTRCONSTS.ActivationCost.SIMPLE,
+      label: "PTR2E.FIELDS.activationCost.label",
+      hint: "PTR2E.FIELDS.activationCost.hint",
+    }),
+    powerPoints: new foundry.data.fields.NumberField({
+      required: true,
+      initial: 0,
+      min: 0,
+      integer: true,
+      label: "PTR2E.FIELDS.powerPoints.label",
+      hint: "PTR2E.FIELDS.powerPoints.hint",
+    }),
+    trigger: new foundry.data.fields.StringField({
+      required: false,
+      nullable: true,
+      label: "PTR2E.FIELDS.trigger.label",
+      hint: "PTR2E.FIELDS.trigger.hint",
+    }),
+    delay: new foundry.data.fields.NumberField({
+      required: false,
+      nullable: true,
+      min: 1,
+      max: 3,
+      integer: false,
+      label: "PTR2E.FIELDS.delay.label",
+      hint: "PTR2E.FIELDS.delay.hint",
+    }),
+    priority: new foundry.data.fields.NumberField({
+      required: false,
+      nullable: true,
+      min: 1,
+      max: 7,
+      integer: false,
+      label: "PTR2E.FIELDS.priority.label",
+      hint: "PTR2E.FIELDS.priority.hint",
+    }),
+  }),
+  variant: new SlugField({ required: false, nullable: true }),
+};
+
+export type ActionSchema = typeof actionSchema & { type: foundry.data.fields.StringField<{ required: true; blank: false; initial: ActionType; choices: Record<string, string>; label: string; hint: string; }, ActionType, ActionType, ActionType> };
+
+class ActionPTR2e<Schema extends ActionSchema = ActionSchema> extends foundry.abstract.DataModel<Schema, ItemWithActions> {
   static TYPE: ActionType = "generic" as const;
 
   static readonly baseImg = "icons/svg/explosion.svg";
 
   static override defineSchema(): ActionSchema {
-    const fields = foundry.data.fields;
     return {
-      slug: new SlugField({
-        required: true,
-        label: "PTR2E.FIELDS.slug.label",
-        hint: "PTR2E.FIELDS.slug.hint",
-      }),
-      name: new fields.StringField({
-        required: true,
-        initial: "New Action",
-        label: "PTR2E.FIELDS.actionName.label",
-        hint: "PTR2E.FIELDS.actionName.hint",
-      }),
-      description: new fields.HTMLField({
-        required: false,
-        nullable: true,
-        label: "PTR2E.FIELDS.description.label",
-        hint: "PTR2E.FIELDS.description.hint",
-      }),
-      img: new fields.FilePathField({
-        required: true,
-        categories: ["IMAGE"],
-        initial: () => ActionPTR2e.baseImg,
-      }),
-      traits: new CollectionField(new fields.StringField({ validate: Trait.isValid }), "slug", {
-        label: "PTR2E.FIELDS.actionTraits.label",
-        hint: "PTR2E.FIELDS.actionTraits.hint",
-      }),
-      type: new fields.StringField({
+      ...actionSchema,
+      type: new foundry.data.fields.StringField({
         required: true,
         blank: false,
         initial: this.TYPE,
         choices: Object.values(PTRCONSTS.ActionTypes).reduce<Record<string, string>>((acc, type) => ({ ...acc, [type]: type }), {}),
         label: "PTR2E.FIELDS.actionType.label",
         hint: "PTR2E.FIELDS.actionType.hint",
-      }),
-      range: new fields.EmbeddedDataField(RangePTR2e, { required: false, nullable: true }),
-      cost: new fields.SchemaField({
-        activation: new fields.StringField({
-          required: true,
-          choices: Object.values(PTRCONSTS.ActivationCost).reduce<Record<string, string>>((acc, activation) => ({ ...acc, [activation]: activation }), {}),
-          initial: PTRCONSTS.ActivationCost.SIMPLE,
-          label: "PTR2E.FIELDS.activationCost.label",
-          hint: "PTR2E.FIELDS.activationCost.hint",
-        }) as foundry.data.fields.StringField<ActionCost, string, true, false, true>,
-        powerPoints: new fields.NumberField({
-          required: true,
-          initial: 0,
-          min: 0,
-          integer: true,
-          label: "PTR2E.FIELDS.powerPoints.label",
-          hint: "PTR2E.FIELDS.powerPoints.hint",
-        }),
-        trigger: new fields.StringField({
-          required: false,
-          nullable: true,
-          label: "PTR2E.FIELDS.trigger.label",
-          hint: "PTR2E.FIELDS.trigger.hint",
-        }),
-        delay: new fields.NumberField({
-          required: false,
-          nullable: true,
-          min: 1,
-          max: 3,
-          integer: false,
-          label: "PTR2E.FIELDS.delay.label",
-          hint: "PTR2E.FIELDS.delay.hint",
-        }),
-        priority: new fields.NumberField({
-          required: false,
-          nullable: true,
-          min: 1,
-          max: 7,
-          integer: false,
-          label: "PTR2E.FIELDS.priority.label",
-          hint: "PTR2E.FIELDS.priority.hint",
-        }),
-      }),
-      variant: new SlugField({ required: false, nullable: true }),
+      })
     };
   }
 
   get actor(): ActorPTR2e | null {
+    console.log(test);
     if (this.parent?.parent instanceof ActorPTR2e) return this.parent.parent;
     if (this.parent instanceof SummonSystem) return this.parent.actor;
     if (
@@ -110,8 +129,9 @@ class ActionPTR2e extends foundry.abstract.DataModel {
     return null;
   }
 
-  get item(): ItemPTR2e<ItemSystemsWithActions>  {
+  get item(): ItemWithActions {
     if (this.parent instanceof ItemPTR2e) return this.parent;
+    //@ts-expect-error - FIXME: This is a temporary item, this might be due to this being a delayed action
     if (this.parent?.parent instanceof ItemPTR2e) return this.parent.parent;
     throw new Error("Action is not a child of an item");
   }
@@ -131,7 +151,7 @@ class ActionPTR2e extends foundry.abstract.DataModel {
   get uuid(): string {
     // This is a temporary item, this might be due to this being a delayed action
     // In which case, link to the original item if possible.
-    if(!this.item.id && this.actor?.id) {
+    if (!this.item.id && this.actor?.id) {
       const originalAction = this.actor.actions.get(this.slug);
       return originalAction?.uuid ?? "";
     }
@@ -163,19 +183,19 @@ class ActionPTR2e extends foundry.abstract.DataModel {
     name?: string;
     icon?: string;
   } = {}): HTMLAnchorElement {
-    let {attrs = {}, dataset = {} as Record<string, string>, name} = options;
-    const {classes = [], icon} = options;
+    let { attrs = {}, dataset = {} as Record<string, string>, name } = options;
+    const { classes = [], icon } = options;
     // Build dataset
     const documentName = `${formatSlug(this.type)} ${this.name}`;
     const anchorIcon = icon ?? "fas fa-burst";
-    if ( !classes.includes("content-link") ) classes.unshift("content-link");
+    if (!classes.includes("content-link")) classes.unshift("content-link");
     attrs = foundry.utils.mergeObject({ draggable: "true" }, attrs);
     dataset = foundry.utils.mergeObject({
       link: "",
       uuid: this.uuid,
-      id: this.id,
+      // id: this.id,
       type: this.documentName,
-      pack: this.pack,
+      // pack: this.pack,
       tooltip: documentName,
       "tooltipDirection": "LEFT"
     }, dataset);
@@ -188,7 +208,7 @@ class ActionPTR2e extends foundry.abstract.DataModel {
 
   _onClickDocumentLink() {
     return void new ActionEditor(
-      this.item as ItemPTR2e<ItemSystemsWithActions>,
+      this.item as ItemWithActions,
       this.slug
     ).render(true);
   }
@@ -200,9 +220,9 @@ class ActionPTR2e extends foundry.abstract.DataModel {
         acc.set(traitSlug, trait);
       }
       return acc;
-    }, new SystemTraitsCollection());
+    }, new SystemTraitsCollection())!;
 
-    if (this.img === ActionPTR2e.baseImg && this.item.img !== this.item.constructor.implementation.DEFAULT_ICON) {
+    if (this.item.img && this.img === ActionPTR2e.baseImg && this.item.img !== this.item.constructor.implementation.DEFAULT_ICON) {
       this.img = this.item.img;
     }
   }
@@ -230,12 +250,12 @@ class ActionPTR2e extends foundry.abstract.DataModel {
   /**
    * Apply an update to the Action through it's parent Item.
    */
-  async update(data: DeepPartial<SourceFromSchema<ActionSchema>>) {
+  async update(data: foundry.data.fields.SchemaField.InnerAssignmentType<ActionSchema>): Promise<ItemWithActions> {
     const currentActions = this.prepareUpdate(data);
-    return this.item.update({ "system.actions": currentActions });
+    return this.item.update({ "system.actions": currentActions }) as Promise<ItemWithActions>;
   }
 
-  prepareUpdate(data: DeepPartial<SourceFromSchema<ActionSchema>>) {
+  prepareUpdate(data: foundry.data.fields.SchemaField.InnerAssignmentType<ActionSchema>) {
     const currentActions = this.item.system.toObject().actions;
     const actionIndex = currentActions.findIndex((a) => a.slug === this.slug);
     foundry.utils.mergeObject(currentActions[actionIndex], data);
@@ -247,39 +267,38 @@ class ActionPTR2e extends foundry.abstract.DataModel {
     return this.item.toChat();
   }
 }
-interface ActionPTR2e extends foundry.abstract.DataModel, ModelPropsFromSchema<ActionSchema> {
-  _source: SourceFromSchema<ActionSchema>;
-  get schema(): foundry.data.fields.SchemaField<ActionSchema>;
+interface ActionPTR2e {
+  // get schema(): foundry.data.fields.SchemaField<ActionSchema>;
 }
 
-export interface ActionSchema extends foundry.data.fields.DataSchema {
-  slug: SlugField<string, string, true, false, false>
-  name: foundry.data.fields.StringField<string, string, true, false, true>;
-  description: foundry.data.fields.HTMLField<string, string, false, true>;
-  img: foundry.data.fields.FilePathField<ImageFilePath, string, true, false, true>;
-  traits: CollectionField<foundry.data.fields.StringField, string[], SystemTraitsCollection<Trait>>;
-  type: foundry.data.fields.StringField<string, ActionType, true, false, true>;
-  range: foundry.data.fields.EmbeddedDataField<RangePTR2e, false, true>;
-  cost: foundry.data.fields.SchemaField<{
-    activation: foundry.data.fields.StringField<ActionCost, string, true, false, true>;
-    powerPoints: foundry.data.fields.NumberField<number, number, true, false, true>;
-    trigger: foundry.data.fields.StringField<string, string, false, true>;
-    delay: foundry.data.fields.NumberField<Delay, number, false, true>;
-    priority: foundry.data.fields.NumberField<Priority, number, false, true>;
-  }, {
-    activation: ActionCost;
-    powerPoints: number;
-    trigger: string;
-    delay: Delay;
-    priority: Priority;
-  }, {
-    activation: ActionCost;
-    powerPoints: number;
-    trigger: string;
-    delay: Delay;
-    priority: Priority;
-  }>;
-  variant: SlugField<string, string, false>;
-}
+// export interface ActionSchema extends foundry.data.fields.DataSchema {
+//   slug: SlugField<string, string, true, false, false>
+//   name: foundry.data.fields.StringField<string, string, true, false, true>;
+//   description: foundry.data.fields.HTMLField<string, string, false, true>;
+//   img: foundry.data.fields.FilePathField<ImageFilePath, string, true, false, true>;
+//   traits: CollectionField<foundry.data.fields.StringField, string[], SystemTraitsCollection<Trait>>;
+//   type: foundry.data.fields.StringField<string, ActionType, true, false, true>;
+//   range: foundry.data.fields.EmbeddedDataField<RangePTR2e, false, true>;
+//   cost: foundry.data.fields.SchemaField<{
+//     activation: foundry.data.fields.StringField<ActionCost, string, true, false, true>;
+//     powerPoints: foundry.data.fields.NumberField<number, number, true, false, true>;
+//     trigger: foundry.data.fields.StringField<string, string, false, true>;
+//     delay: foundry.data.fields.NumberField<Delay, number, false, true>;
+//     priority: foundry.data.fields.NumberField<Priority, number, false, true>;
+//   }, {
+//     activation: ActionCost;
+//     powerPoints: number;
+//     trigger: string;
+//     delay: Delay;
+//     priority: Priority;
+//   }, {
+//     activation: ActionCost;
+//     powerPoints: number;
+//     trigger: string;
+//     delay: Delay;
+//     priority: Priority;
+//   }>;
+//   variant: SlugField<string, string, false>;
+// }
 
 export default ActionPTR2e;

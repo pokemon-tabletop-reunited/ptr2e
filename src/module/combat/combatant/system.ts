@@ -101,7 +101,7 @@ export default class CombatantSystemPTR2e<Schema extends CombatantSystemSchema =
   }
 
   override _onUpdate(
-    changed: DeepPartial<foundry.data.fields.SchemaField.AssignmentType<Combatant.Schema>>,
+    changed: foundry.data.fields.SchemaField.InnerAssignmentType<Combatant.Schema>,
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     options: foundry.abstract.Document.OnUpdateOptions<any>,
     userId: string

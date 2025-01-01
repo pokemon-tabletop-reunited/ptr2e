@@ -3,54 +3,52 @@ import { resolveCapture } from "@actor/helpers.ts";
 import { ChatMessagePTR2e } from "@chat";
 import { SlugField } from "@module/data/fields/slug-field.ts";
 import type PokeballActionPTR2e from "@module/data/models/pokeball-action.ts";
-import type { ModifierPTR2e } from "@module/effects/modifiers.ts";
 import type { CaptureRoll } from "@system/rolls/capture-roll.ts";
+import type { AnyObject } from "fvtt-types/utils";
 
-abstract class CaptureMessageSystem extends foundry.abstract.TypeDataModel {
-  declare parent: ChatMessagePTR2e<CaptureMessageSystem>;
+/**
+ * Validate that Rolls belonging to the ChatMessage document are valid
+ * @param {string} rollJSON     The serialized Roll data
+ */
+function validateRoll(rollJSON: unknown) {
+  const roll = JSON.parse(rollJSON as string);
+  if (!roll.evaluated)
+    throw new Error(`Roll objects added to ChatMessage documents must be evaluated`);
+}
+
+const captureMessageSchema = {
+  rolls: new foundry.data.fields.SchemaField({
+    accuracy: new foundry.data.fields.JSONField<{ required: true, nullable: true, validate: ((param: unknown) => void) }, AnyObject, Roll.Evaluated<CaptureRoll>>({ required: true, nullable: true, validate: validateRoll }),
+    crit: new foundry.data.fields.JSONField<{ required: true, nullable: true, validate: ((param: unknown) => void) }, AnyObject, Roll.Evaluated<CaptureRoll>>({ required: true, nullable: true, validate: validateRoll }),
+    shake1: new foundry.data.fields.JSONField<{ required: true, nullable: true, validate: ((param: unknown) => void) }, AnyObject, Roll.Evaluated<CaptureRoll>>({ required: true, nullable: true, validate: validateRoll }),
+    shake2: new foundry.data.fields.JSONField<{ required: true, nullable: true, validate: ((param: unknown) => void) }, AnyObject, Roll.Evaluated<CaptureRoll>>({ required: true, nullable: true, validate: validateRoll }),
+    shake3: new foundry.data.fields.JSONField<{ required: true, nullable: true, validate: ((param: unknown) => void) }, AnyObject, Roll.Evaluated<CaptureRoll>>({ required: true, nullable: true, validate: validateRoll }),
+    shake4: new foundry.data.fields.JSONField<{ required: true, nullable: true, validate: ((param: unknown) => void) }, AnyObject, Roll.Evaluated<CaptureRoll>>({ required: true, nullable: true, validate: validateRoll }),
+  }),
+  origin: new foundry.data.fields.JSONField<{ required: true }, AnyObject, ActorPTR2e>({ required: true }),
+  target: new foundry.data.fields.DocumentUUIDField({ required: true, nullable: true, type: "Actor", readonly: true, }),
+  slug: new SlugField(),
+  result: new foundry.data.fields.SchemaField({
+    modifiers: new foundry.data.fields.ArrayField(new foundry.data.fields.ObjectField(), { required: true, initial: [] }),
+    domains: new foundry.data.fields.ArrayField(new SlugField(), { required: true, initial: [] }),
+    type: new foundry.data.fields.StringField({ required: true, blank: true, initial: "" }),
+    options: new foundry.data.fields.ArrayField(new foundry.data.fields.StringField(), { required: true, initial: [] }),
+  }, { required: true }),
+}
+
+export type CaptureMessageSchema = typeof captureMessageSchema;
+
+abstract class CaptureMessageSystem extends foundry.abstract.TypeDataModel<CaptureMessageSchema, ChatMessagePTR2e> {
 
   /**
    * Define the schema for the DamageAppliedMessageSystem data model
    */
   static override defineSchema(): CaptureMessageSchema {
-    const fields = foundry.data.fields;
-    return {
-      rolls: new fields.SchemaField<
-        RollsSchema,
-        foundry.data.fields.SourcePropFromDataField<RollsSchema>,
-        foundry.data.fields.SourcePropFromDataField<RollsSchema>
-      >({
-        accuracy: new fields.JSONField({ required: true, nullable: true, validate: CaptureMessageSystem.#validateRoll }),
-        crit: new fields.JSONField({ required: true, nullable: true, validate: CaptureMessageSystem.#validateRoll }),
-        shake1: new fields.JSONField({ required: true, nullable: true, validate: CaptureMessageSystem.#validateRoll }),
-        shake2: new fields.JSONField({ required: true, nullable: true, validate: CaptureMessageSystem.#validateRoll }),
-        shake3: new fields.JSONField({ required: true, nullable: true, validate: CaptureMessageSystem.#validateRoll }),
-        shake4: new fields.JSONField({ required: true, nullable: true, validate: CaptureMessageSystem.#validateRoll }),
-      }),
-      origin: new fields.JSONField({ required: true }),
-      target: new fields.DocumentUUIDField({ required: true, nullable: true, type: "Actor", readonly: true, }),
-      slug: new SlugField(),
-      result: new fields.SchemaField({
-        modifiers: new fields.ArrayField(new fields.ObjectField(), { required: true, initial: [] }),
-        domains: new fields.ArrayField(new SlugField(), { required: true, initial: [] }),
-        type: new fields.StringField({ required: true, blank: true, initial: "" }),
-        options: new fields.ArrayField(new fields.StringField(), { required: true, initial: [] }),
-      }, { required: true}),
-    };
-  }
-
-  /**
-   * Validate that Rolls belonging to the ChatMessage document are valid
-   * @param {string} rollJSON     The serialized Roll data
-   */
-  static #validateRoll(rollJSON: unknown) {
-    const roll = JSON.parse(rollJSON as string);
-    if (!roll.evaluated)
-      throw new Error(`Roll objects added to ChatMessage documents must be evaluated`);
+    return captureMessageSchema;
   }
 
   get currentOrigin(): Promise<Maybe<ActorPTR2e>> {
-    return this.context?.origin?.uuid ? fromUuid<ActorPTR2e>(this.context.origin.uuid) : Promise.resolve(null);
+    return this.context?.origin?.uuid ? fromUuid(this.context.origin.uuid) as Promise<Maybe<ActorPTR2e>> : Promise.resolve(null);
   }
 
   override prepareBaseData(): void {
@@ -59,7 +57,7 @@ abstract class CaptureMessageSystem extends foundry.abstract.TypeDataModel {
     const fromRollData = (rollData: string | null) => {
       if (!rollData) return null;
       try {
-        return Roll.fromJSON(rollData) as Rolled<CaptureRoll>;
+        return Roll.fromJSON(rollData) as unknown as Roll.Evaluated<CaptureRoll>;
       } catch (error: unknown) {
         Hooks.onError("CaptureMessageSystem#prepareBaseData", error as Error, {
           log: "error",
@@ -110,7 +108,7 @@ abstract class CaptureMessageSystem extends foundry.abstract.TypeDataModel {
 
   async getHTMLContent() {
     const renderRolls = async (isPrivate: boolean) => {
-      const renderInnerRoll = async (roll: Rolled<CaptureRoll> | null, isPrivate: boolean) => {
+      const renderInnerRoll = async (roll: Roll.Evaluated<CaptureRoll> | null, isPrivate: boolean) => {
         return roll ? roll.render({ isPrivate }) : null;
       };
 
@@ -209,7 +207,7 @@ abstract class CaptureMessageSystem extends foundry.abstract.TypeDataModel {
         }
         return data;
       })(),
-      target: this.target ? await fromUuid<ActorPTR2e>(this.target) : null,
+      target: this.target ? (await fromUuid(this.target) as Maybe<ActorPTR2e>) : null,
     });
 
     return renderTemplate("systems/ptr2e/templates/chat/capture.hbs", context);
@@ -247,7 +245,6 @@ abstract class CaptureMessageSystem extends foundry.abstract.TypeDataModel {
       }. New total: ${actor.system.skills.get("luck")!.total}`
     ui.notifications.info(notification);
 
-    //@ts-expect-error - As this is an object duplicate, the property is no longer read-only.
     roll.total -= number;
 
     await this.parent.update({ "system.rolls.accuracy": roll });
@@ -262,17 +259,15 @@ abstract class CaptureMessageSystem extends foundry.abstract.TypeDataModel {
   activateListeners(html: JQuery<HTMLElement>) {
     html.find("[data-action='apply-capture']").on("click", async (event) => {
       event.preventDefault();
-      const {originUuid, targetUuid, success} = (event.currentTarget as HTMLButtonElement).dataset;
-      if(!originUuid || !targetUuid) return;
+      const { originUuid, targetUuid, success } = (event.currentTarget as HTMLButtonElement).dataset;
+      if (!originUuid || !targetUuid) return;
 
       resolveCapture(originUuid, targetUuid, success === "true");
     });
   }
 }
 
-interface CaptureMessageSystem extends ModelPropsFromSchema<CaptureMessageSchema> {
-  _source: SourceFromSchema<CaptureMessageSchema>;
-
+interface CaptureMessageSystem {
   context: Maybe<CaptureMessageRenderContext>;
   action: PokeballActionPTR2e;
 }
@@ -300,42 +295,42 @@ interface CaptureMessageRenderContext {
   target: Maybe<ActorPTR2e>
 }
 
-interface CaptureMessageSchema extends foundry.data.fields.DataSchema {
-  origin: foundry.data.fields.JSONField<ActorPTR2e, true, false, false>;
-  slug: SlugField<string, string, true, false, false>;
-  rolls: foundry.data.fields.SchemaField<
-    RollsSchema,
-    SourceFromSchema<RollsSchema>,
-    ModelPropsFromSchema<RollsSchema>,
-    true,
-    false,
-    true
-  >;
-  target: foundry.data.fields.DocumentUUIDField<string, true, true, false>;
-  result: foundry.data.fields.SchemaField<
-  CaptureMessageContextSchema,
-    foundry.data.fields.SourcePropFromDataField<foundry.data.fields.SchemaField<CaptureMessageContextSchema>>,
-    foundry.data.fields.ModelPropFromDataField<foundry.data.fields.SchemaField<CaptureMessageContextSchema>>,
-    true,
-    false,
-    true
-  >
-}
+// interface CaptureMessageSchema extends foundry.data.fields.DataSchema {
+//   origin: foundry.data.fields.JSONField<ActorPTR2e, true, false, false>;
+//   slug: SlugField<string, string, true, false, false>;
+//   rolls: foundry.data.fields.SchemaField<
+//     RollsSchema,
+//     SourceFromSchema<RollsSchema>,
+//     ModelPropsFromSchema<RollsSchema>,
+//     true,
+//     false,
+//     true
+//   >;
+//   target: foundry.data.fields.DocumentUUIDField<string, true, true, false>;
+//   result: foundry.data.fields.SchemaField<
+//     CaptureMessageContextSchema,
+//     foundry.data.fields.SourcePropFromDataField<foundry.data.fields.SchemaField<CaptureMessageContextSchema>>,
+//     foundry.data.fields.ModelPropFromDataField<foundry.data.fields.SchemaField<CaptureMessageContextSchema>>,
+//     true,
+//     false,
+//     true
+//   >
+// }
 
-interface RollsSchema extends foundry.data.fields.DataSchema {
-  accuracy: foundry.data.fields.JSONField<Rolled<CaptureRoll>, true, true, false>;
-  crit: foundry.data.fields.JSONField<Rolled<CaptureRoll>, true, true, false>;
-  shake1: foundry.data.fields.JSONField<Rolled<CaptureRoll>, true, true, false>;
-  shake2: foundry.data.fields.JSONField<Rolled<CaptureRoll>, true, true, false>;
-  shake3: foundry.data.fields.JSONField<Rolled<CaptureRoll>, true, true, false>;
-  shake4: foundry.data.fields.JSONField<Rolled<CaptureRoll>, true, true, false>;
-}
+// interface RollsSchema extends foundry.data.fields.DataSchema {
+//   accuracy: foundry.data.fields.JSONField<Rolled<CaptureRoll>, true, true, false>;
+//   crit: foundry.data.fields.JSONField<Rolled<CaptureRoll>, true, true, false>;
+//   shake1: foundry.data.fields.JSONField<Rolled<CaptureRoll>, true, true, false>;
+//   shake2: foundry.data.fields.JSONField<Rolled<CaptureRoll>, true, true, false>;
+//   shake3: foundry.data.fields.JSONField<Rolled<CaptureRoll>, true, true, false>;
+//   shake4: foundry.data.fields.JSONField<Rolled<CaptureRoll>, true, true, false>;
+// }
 
-interface CaptureMessageContextSchema extends foundry.data.fields.DataSchema {
-  domains: foundry.data.fields.ArrayField<SlugField, string[], string[], true, false, true>;
-  modifiers: foundry.data.fields.ArrayField<foundry.data.fields.ObjectField<ModifierPTR2e>, ModifierPTR2e[], ModifierPTR2e[], true, false, true>;
-  options: foundry.data.fields.ArrayField<foundry.data.fields.StringField, string[], string[], true, false, true>;
-  type: foundry.data.fields.StringField<string, string, true, false, true>;
-}
+// interface CaptureMessageContextSchema extends foundry.data.fields.DataSchema {
+//   domains: foundry.data.fields.ArrayField<SlugField, string[], string[], true, false, true>;
+//   modifiers: foundry.data.fields.ArrayField<foundry.data.fields.ObjectField<ModifierPTR2e>, ModifierPTR2e[], ModifierPTR2e[], true, false, true>;
+//   options: foundry.data.fields.ArrayField<foundry.data.fields.StringField, string[], string[], true, false, true>;
+//   type: foundry.data.fields.StringField<string, string, true, false, true>;
+// }
 
 export default CaptureMessageSystem;

@@ -1,4 +1,4 @@
-import type { ContestType, PokemonCategory, PokemonType } from "@data";
+import type { PokemonCategory } from "@data";
 import { ActionPTR2e, PTRCONSTS } from "@data";
 import { getTypes } from "@scripts/config/effectiveness.ts";
 import type { ActionSchema } from "./action.ts";
@@ -13,116 +13,121 @@ import { ItemPTR2e } from "@item";
 import type { CombatantPTR2e } from "@combat";
 import type { ActorSizePTR2e } from "@actor/data/size.ts";
 
-export default class AttackPTR2e extends ActionPTR2e {
+const attackSchema = {
+  types: new foundry.data.fields.SetField(
+    new foundry.data.fields.StringField({
+      required: true,
+      choices: getTypes().reduce<Record<string, string>>(
+        (acc, type) => ({ ...acc, [type]: type }),
+        {}
+      ),
+      initial: PTRCONSTS.Types.UNTYPED,
+      label: "PTR2E.FIELDS.pokemonType.label",
+      hint: "PTR2E.FIELDS.pokemonType.hint",
+    }),
+    {
+      initial: ["untyped"],
+      label: "PTR2E.FIELDS.pokemonType.labelPlural",
+      hint: "PTR2E.FIELDS.pokemonType.hintPlural",
+      required: true,
+      validate: (d: Iterable<string>) =>
+        d instanceof Set ? d.size > 0 : Array.isArray(d) ? d.length > 0 : false,
+      validationError: "PTR2E.Errors.PokemonType",
+    }
+  ),
+  category: new foundry.data.fields.StringField({
+    required: true,
+    choices: Object.values(PTRCONSTS.Categories).reduce<Record<string, string>>(
+      (acc, category) => ({ ...acc, [category]: category }),
+      {}
+    ),
+    initial: PTRCONSTS.Categories.PHYSICAL,
+    label: "PTR2E.FIELDS.pokemonCategory.label",
+    hint: "PTR2E.FIELDS.pokemonCategory.hint",
+  }),
+  power: new foundry.data.fields.NumberField({
+    required: false,
+    nullable: true,
+    min: 10,
+    max: 250,
+    label: "PTR2E.FIELDS.power.label",
+    hint: "PTR2E.FIELDS.power.hint",
+  }),
+  accuracy: new foundry.data.fields.NumberField({
+    required: false,
+    nullable: true,
+    min: 10,
+    max: 100,
+    label: "PTR2E.FIELDS.accuracy.label",
+    hint: "PTR2E.FIELDS.accuracy.hint",
+  }),
+  contestType: new foundry.data.fields.StringField({ required: true, blank: true, initial: "" }),
+  contestEffect: new foundry.data.fields.StringField({ required: true, blank: true, initial: "" }),
+  free: new foundry.data.fields.BooleanField({
+    required: true,
+    initial: false,
+    label: "PTR2E.FIELDS.free.label",
+    hint: "PTR2E.FIELDS.free.hint",
+  }),
+  slot: new foundry.data.fields.NumberField({
+    required: true,
+    nullable: true,
+    initial: null,
+    label: "PTR2E.FIELDS.slot.label",
+    hint: "PTR2E.FIELDS.slot.hint",
+  }),
+  summon: new foundry.data.fields.DocumentUUIDField({
+    required: true,
+    nullable: true,
+    initial: null,
+    label: "PTR2E.FIELDS.summon.label",
+    hint: "PTR2E.FIELDS.summon.hint",
+    type: "Item"
+  }),
+  defaultVariant: new SlugField({ 
+    required: true, 
+    nullable: true, 
+    initial: null,
+    label: "PTR2E.FIELDS.defaultVariant.label",
+    hint: "PTR2E.FIELDS.defaultVariant.hint"
+  }),
+  flingItemId: new foundry.data.fields.StringField({
+    required: true,
+    nullable: true,
+    initial: null,
+    label: "PTR2E.FIELDS.flingItemId.label",
+    hint: "PTR2E.FIELDS.flingItemId.hint",
+  }),
+  offensiveStat: new foundry.data.fields.StringField({
+    required: true,
+    nullable: true,
+    choices: PTRCONSTS.Stats.reduce((acc, stat) => ({ ...acc, [stat]: stat }), {"":""} as unknown as Record<PTRCONSTS.Stat, string>),
+    initial: null,
+    label: "PTR2E.FIELDS.offensiveStat.label",
+    hint: "PTR2E.FIELDS.offensiveStat.hint",
+  }),
+  defensiveStat: new foundry.data.fields.StringField({
+    required: true,
+    nullable: true,
+    choices: PTRCONSTS.Stats.reduce((acc, stat) => ({ ...acc, [stat]: stat }), {"":""} as unknown as Record<PTRCONSTS.Stat, string>),
+    initial: null,
+    label: "PTR2E.FIELDS.defensiveStat.label",
+    hint: "PTR2E.FIELDS.defensiveStat.hint",
+  })
+}
+
+export type AttackSchema = typeof attackSchema & ActionSchema;
+
+class AttackPTR2e<Schema extends AttackSchema = AttackSchema> extends ActionPTR2e<Schema> {
   declare type: "attack" | "summon";
 
   static override TYPE: "attack" | "summon" = "attack" as const;
 
-  static override defineSchema(): AttackSchema & ActionSchema {
-    const fields = foundry.data.fields;
+  static override defineSchema(): AttackSchema {
     return {
-      ...super.defineSchema(),
-      types: new fields.SetField(
-        new fields.StringField({
-          required: true,
-          choices: getTypes().reduce<Record<string, string>>(
-            (acc, type) => ({ ...acc, [type]: type }),
-            {}
-          ),
-          initial: PTRCONSTS.Types.UNTYPED,
-          label: "PTR2E.FIELDS.pokemonType.label",
-          hint: "PTR2E.FIELDS.pokemonType.hint",
-        }),
-        {
-          initial: ["untyped"],
-          label: "PTR2E.FIELDS.pokemonType.labelPlural",
-          hint: "PTR2E.FIELDS.pokemonType.hintPlural",
-          required: true,
-          validate: (d) =>
-            d instanceof Set ? d.size > 0 : Array.isArray(d) ? d.length > 0 : false,
-          validationError: "PTR2E.Errors.PokemonType",
-        }
-      ),
-      category: new fields.StringField({
-        required: true,
-        choices: Object.values(PTRCONSTS.Categories).reduce<Record<string, string>>(
-          (acc, category) => ({ ...acc, [category]: category }),
-          {}
-        ),
-        initial: PTRCONSTS.Categories.PHYSICAL,
-        label: "PTR2E.FIELDS.pokemonCategory.label",
-        hint: "PTR2E.FIELDS.pokemonCategory.hint",
-      }),
-      power: new fields.NumberField({
-        required: false,
-        nullable: true,
-        min: 10,
-        max: 250,
-        label: "PTR2E.FIELDS.power.label",
-        hint: "PTR2E.FIELDS.power.hint",
-      }),
-      accuracy: new fields.NumberField({
-        required: false,
-        nullable: true,
-        min: 10,
-        max: 100,
-        label: "PTR2E.FIELDS.accuracy.label",
-        hint: "PTR2E.FIELDS.accuracy.hint",
-      }),
-      contestType: new fields.StringField({ required: true, blank: true, initial: "" }),
-      contestEffect: new fields.StringField({ required: true, blank: true, initial: "" }),
-      free: new fields.BooleanField({
-        required: true,
-        initial: false,
-        label: "PTR2E.FIELDS.free.label",
-        hint: "PTR2E.FIELDS.free.hint",
-      }),
-      slot: new fields.NumberField({
-        required: true,
-        nullable: true,
-        initial: null,
-        label: "PTR2E.FIELDS.slot.label",
-        hint: "PTR2E.FIELDS.slot.hint",
-      }),
-      summon: new fields.DocumentUUIDField({
-        required: true,
-        nullable: true,
-        initial: null,
-        label: "PTR2E.FIELDS.summon.label",
-        hint: "PTR2E.FIELDS.summon.hint",
-        type: "Item"
-      }),
-      defaultVariant: new SlugField({ 
-        required: true, 
-        nullable: true, 
-        initial: null,
-        label: "PTR2E.FIELDS.defaultVariant.label",
-        hint: "PTR2E.FIELDS.defaultVariant.hint"
-      }),
-      flingItemId: new foundry.data.fields.StringField({
-        required: true,
-        nullable: true,
-        initial: null,
-        label: "PTR2E.FIELDS.flingItemId.label",
-        hint: "PTR2E.FIELDS.flingItemId.hint",
-      }),
-      offensiveStat: new fields.StringField<PTRCONSTS.Stat, PTRCONSTS.Stat, true, true, true>({
-        required: true,
-        nullable: true,
-        choices: PTRCONSTS.Stats.reduce((acc, stat) => ({ ...acc, [stat]: stat }), {"":""} as unknown as Record<PTRCONSTS.Stat, string>),
-        initial: null,
-        label: "PTR2E.FIELDS.offensiveStat.label",
-        hint: "PTR2E.FIELDS.offensiveStat.hint",
-      }),
-      defensiveStat: new fields.StringField<PTRCONSTS.Stat, PTRCONSTS.Stat, true, true, true>({
-        required: true,
-        nullable: true,
-        choices: PTRCONSTS.Stats.reduce((acc, stat) => ({ ...acc, [stat]: stat }), {"":""} as unknown as Record<PTRCONSTS.Stat, string>),
-        initial: null,
-        label: "PTR2E.FIELDS.defensiveStat.label",
-        hint: "PTR2E.FIELDS.defensiveStat.hint",
-      })
-    };
+      ...super.defineSchema() as ActionSchema,
+      ...attackSchema,
+    }
   }
 
   get isFree(): boolean {
@@ -266,13 +271,15 @@ export default class AttackPTR2e extends ActionPTR2e {
     if(!game.combat) return void ui.notifications.error("You must be in combat to be able to delay an action.");
     if(game.combat.combatant?.actor !== this.actor) return void ui.notifications.error("You must be the active combatant to delay this action.");
     if(number === undefined || number === null) {
-      const dialog = await foundry.applications.api.DialogV2.prompt<number>({
+      const dialog: number = await foundry.applications.api.DialogV2.prompt({
+        //@ts-expect-error - FIXME: FVTT-Types are incorrect
         window: {title: game.i18n.localize("PTR2E.Dialog.DelayActionTitle")},
         classes: ["center-text"],
         content: `<p>${game.i18n.localize("PTR2E.Dialog.DelayActionContent")}</p><input type="number" name="delay" min=1 max=3 step=1>`,
         ok: {
           action: "ok",
           label: "Delay Action",
+          //@ts-expect-error - FIXME: FVTT-Types are incorrect
           callback: (_event, _button, dialog) => {
             return dialog?.querySelector<HTMLInputElement>("input[name='delay']")?.value
           }
@@ -292,10 +299,11 @@ export default class AttackPTR2e extends ActionPTR2e {
       system: {
         owner: this.actor.uuid,
         actions: [
-          this.clone({
+          (this.clone({
             type: "summon",
+            //@ts-expect-error: FIXME: Figure out why this property is a thing
             targetType: "target"
-          }).toObject()
+          }) as this).toObject()
         ]
       }
     }) as SummonPTR2e;
@@ -317,7 +325,7 @@ export default class AttackPTR2e extends ActionPTR2e {
     });
   }
 
-  override prepareUpdate(data: DeepPartial<SourceFromSchema<ActionSchema>>): ActionPTR2e[] {
+  override prepareUpdate(data: foundry.data.fields.SchemaField.InnerAssignmentType<ActionSchema>): ActionPTR2e[] {
     const currentActions = super.prepareUpdate(data);
 
     for (const action of currentActions) {
@@ -340,40 +348,8 @@ export default class AttackPTR2e extends ActionPTR2e {
   }
 }
 
-export default interface AttackPTR2e extends ActionPTR2e, ModelPropsFromSchema<AttackSchema> {
-  // update(
-  //     data: DeepPartial<SourceFromSchema<AttackSchema>> &
-  //         DeepPartial<SourceFromSchema<ActionSchema>>
-  // ): Promise<this["item"]>;
-  // prepareUpdate(
-  //     data: DeepPartial<SourceFromSchema<AttackSchema>> &
-  //         DeepPartial<SourceFromSchema<ActionSchema>>
-  // ): (SourceFromSchema<ActionSchema> & SourceFromSchema<AttackSchema>)[];
-
+interface AttackPTR2e {
   statistic: Maybe<AttackStatistic>;
-
-  _source: SourceFromSchema<AttackSchema> & SourceFromSchema<ActionSchema>;
 }
 
-interface AttackSchema extends foundry.data.fields.DataSchema {
-  types: foundry.data.fields.SetField<
-    foundry.data.fields.StringField<string, PokemonType, true, false, true>,
-    PokemonType[],
-    Set<PokemonType>,
-    true,
-    false,
-    true
-  >;
-  category: foundry.data.fields.StringField<string, PokemonCategory, true, false, true>;
-  power: foundry.data.fields.NumberField<number>;
-  accuracy: foundry.data.fields.NumberField<number>;
-  contestType: foundry.data.fields.StringField<string, ContestType, true>;
-  contestEffect: foundry.data.fields.StringField<string, string, true>;
-  free: foundry.data.fields.BooleanField<boolean, boolean>;
-  slot: foundry.data.fields.NumberField<number, number, true, true, true>;
-  summon: foundry.data.fields.DocumentUUIDField<string>;
-  defaultVariant: SlugField<string, string, true, true, true>;
-  flingItemId: foundry.data.fields.StringField<string, string, true, true, true>;
-  offensiveStat: foundry.data.fields.StringField<PTRCONSTS.Stat, PTRCONSTS.Stat, true, true, true>;
-  defensiveStat: foundry.data.fields.StringField<PTRCONSTS.Stat, PTRCONSTS.Stat, true, true, true>;
-}
+export default AttackPTR2e;

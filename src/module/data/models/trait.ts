@@ -34,7 +34,7 @@ class Trait {
   }
 
   static effectsFromChanges<TParent extends ActorPTR2e | ItemPTR2e>(this: Trait, parent: TParent) {
-    return new ActiveEffectPTR2e<TParent>({
+    return new ActiveEffectPTR2e({
       name: this.label ?? formatSlug(this.slug),
       type: "passive",
       system: {

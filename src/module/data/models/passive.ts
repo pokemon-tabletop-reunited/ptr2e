@@ -1,14 +1,19 @@
 import { ActionPTR2e } from "@data";
-export default class PassivePTR2e extends ActionPTR2e {
-    declare type: "passive";
+import type { ActionSchema } from "./action.ts";
 
-    static override TYPE = "passive" as const;
+const passiveSchema = {
+  hidden: new foundry.data.fields.BooleanField({ required: true, initial: false, label: "PTR2E.FIELDS.hidden.label", hint: "PTR2E.FIELDS.hidden.hint" })
+}
 
-    static override defineSchema() {
-        const fields = foundry.data.fields;
-        return {
-            ...super.defineSchema(),
-            hidden: new fields.BooleanField({ required: true, initial: false, label: "PTR2E.FIELDS.hidden.label", hint: "PTR2E.FIELDS.hidden.hint" }),
-        }
+export type PassiveSchema = typeof passiveSchema & ActionSchema;
+
+export default class PassivePTR2e extends ActionPTR2e<PassiveSchema> {
+  static override TYPE = "passive" as const;
+
+  static override defineSchema(): PassiveSchema {
+    return {
+      ...super.defineSchema() as ActionSchema,
+      ...passiveSchema,
     }
+  }
 }

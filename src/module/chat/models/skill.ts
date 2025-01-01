@@ -2,101 +2,58 @@ import { ActorPTR2e } from "@actor";
 import { ChatMessagePTR2e } from "@chat";
 import { SlugField } from "@module/data/fields/slug-field.ts";
 import type SkillPTR2e from "@module/data/models/skill.ts";
-import type { ModifierPTR2e } from "@module/effects/modifiers.ts";
 import { RollNote } from "@system/notes.ts";
 import type { CheckRoll } from "@system/rolls/check-roll.ts";
-import type { CheckContextRollNotesSchemaField } from "./attack.ts";
 import { PredicateField } from "@system/predication/schema-data-fields.ts";
 
-interface SkillMessageSystem
-  extends foundry.abstract.TypeDataModel,
-  ModelPropsFromSchema<SkillMessageSchema> {
-  _source: SourceFromSchema<SkillMessageSchema>;
-
-  context: {
-    actor?: ActorPTR2e;
-    skill?: SkillPTR2e;
-    roll?: Rolled<CheckRoll>;
-    luckRoll?: Rolled<CheckRoll> | null;
-    appliedLuck?: boolean;
-  } | null;
+/**
+ * Validate that Rolls belonging to the ChatMessage document are valid
+ * @param {string} rollJSON     The serialized Roll data
+ */
+function validateRoll(rollJSON: unknown) {
+  const roll = JSON.parse(rollJSON as string);
+  if (!roll.evaluated)
+    throw new Error(`Roll objects added to ChatMessage documents must be evaluated`);
 }
 
-interface SkillMessageSchema extends foundry.data.fields.DataSchema {
-  roll: foundry.data.fields.JSONField<Rolled<CheckRoll>, true, false, false>;
-  origin: foundry.data.fields.JSONField<ActorPTR2e["_source"], true, false, false>;
-  slug: SlugField<string, string, true, false, false>;
-  luckRoll: foundry.data.fields.JSONField<Rolled<CheckRoll>, true, true, false>;
-  appliedLuck: foundry.data.fields.BooleanField<boolean, boolean, true, false, true>;
-  rerolled: foundry.data.fields.BooleanField<boolean, boolean, true, false, true>;
-  result: foundry.data.fields.SchemaField<
-    SkillMessageContextSchema,
-    foundry.data.fields.SourcePropFromDataField<foundry.data.fields.SchemaField<SkillMessageContextSchema>>,
-    foundry.data.fields.ModelPropFromDataField<foundry.data.fields.SchemaField<SkillMessageContextSchema>>,
-    true,
-    false,
-    true
-  >
-}
+const skillMessageSchema = {
+  roll: new foundry.data.fields.JSONField({
+    required: true,
+    validate: validateRoll,
+  }),
+  origin: new foundry.data.fields.JSONField({ required: true }),
+  slug: new SlugField({ required: true }),
+  luckRoll: new foundry.data.fields.JSONField({ required: true, nullable: true }),
+  appliedLuck: new foundry.data.fields.BooleanField({ required: true, initial: false }),
+  rerolled: new foundry.data.fields.BooleanField({ required: true, initial: false }),
+  result: new foundry.data.fields.SchemaField({
+    modifiers: new foundry.data.fields.ArrayField(new foundry.data.fields.ObjectField(), { required: true, initial: [] }),
+    domains: new foundry.data.fields.ArrayField(new SlugField(), { required: true, initial: [] }),
+    type: new foundry.data.fields.StringField({ required: true, blank: true, initial: "" }),
+    options: new foundry.data.fields.ArrayField(new foundry.data.fields.StringField(), { required: true, initial: [] }),
+    notes: new foundry.data.fields.ArrayField(
+      new foundry.data.fields.SchemaField({
+        selector: new foundry.data.fields.StringField({ required: true, blank: true, initial: "" }),
+        title: new foundry.data.fields.StringField({ required: true, blank: true, initial: "" }),
+        text: new foundry.data.fields.StringField({ required: true, blank: true, initial: "" }),
+        predicate: new PredicateField({ required: true, initial: [] }),
+        outcome: new foundry.data.fields.ArrayField(new foundry.data.fields.NumberField(), { required: true, initial: [] }),
+        visibility: new foundry.data.fields.StringField({ required: true, initial: "all", choices: ["all", "gm", "owner", "none"] }),
+      }),
+      { required: true, initial: [] }
+    ),
+  }, { required: true }),
+};
 
-interface SkillMessageContextSchema extends foundry.data.fields.DataSchema {
-  domains: foundry.data.fields.ArrayField<SlugField, string[], string[], true, false, true>;
-  modifiers: foundry.data.fields.ArrayField<foundry.data.fields.ObjectField<ModifierPTR2e>, ModifierPTR2e[], ModifierPTR2e[], true, false, true>;
-  options: foundry.data.fields.ArrayField<foundry.data.fields.StringField, string[], string[], true, false, true>;
-  type: foundry.data.fields.StringField<string, string, true, false, true>;
-  notes: foundry.data.fields.ArrayField<
-    CheckContextRollNotesSchemaField,
-    foundry.data.fields.SourcePropFromDataField<CheckContextRollNotesSchemaField>[],
-    foundry.data.fields.ModelPropFromDataField<CheckContextRollNotesSchemaField>[],
-    true, false, true>;
-}
+export type SkillMessageSchema = typeof skillMessageSchema;
 
-abstract class SkillMessageSystem extends foundry.abstract.TypeDataModel {
-  declare parent: ChatMessagePTR2e<SkillMessageSystem>;
+abstract class SkillMessageSystem extends foundry.abstract.TypeDataModel<SkillMessageSchema, ChatMessagePTR2e> {
 
   /**
    * Define the schema for the AttackMessageSystem data model
    */
   static override defineSchema(): SkillMessageSchema {
-    const fields = foundry.data.fields;
-    return {
-      roll: new fields.JSONField({
-        required: true,
-        validate: SkillMessageSystem.#validateRoll,
-      }),
-      origin: new fields.JSONField({ required: true }),
-      slug: new SlugField({ required: true }),
-      luckRoll: new fields.JSONField({ required: true, nullable: true }),
-      appliedLuck: new fields.BooleanField({ required: true, initial: false }),
-      rerolled: new fields.BooleanField({ required: true, initial: false }),
-      result: new fields.SchemaField({
-        modifiers: new fields.ArrayField(new fields.ObjectField(), { required: true, initial: [] }),
-        domains: new fields.ArrayField(new SlugField(), { required: true, initial: [] }),
-        type: new fields.StringField({ required: true, blank: true, initial: "" }),
-        options: new fields.ArrayField(new fields.StringField(), { required: true, initial: [] }),
-        notes: new fields.ArrayField(
-          new fields.SchemaField({
-            selector: new fields.StringField({ required: true, blank: true, initial: "" }),
-            title: new fields.StringField({ required: true, blank: true, initial: "" }),
-            text: new fields.StringField({ required: true, blank: true, initial: "" }),
-            predicate: new PredicateField({ required: true, initial: [] }),
-            outcome: new fields.ArrayField(new fields.NumberField(), { required: true, initial: [] }),
-            visibility: new fields.StringField({ required: true, initial: "all", choices: ["all", "gm", "owner", "none"] }),
-          }),
-          { required: true, initial: [] }
-        ),
-      }, { required: true }),
-    };
-  }
-
-  /**
-   * Validate that Rolls belonging to the ChatMessage document are valid
-   * @param {string} rollJSON     The serialized Roll data
-   */
-  static #validateRoll(rollJSON: unknown) {
-    const roll = JSON.parse(rollJSON as string);
-    if (!roll.evaluated)
-      throw new Error(`Roll objects added to ChatMessage documents must be evaluated`);
+    return skillMessageSchema;
   }
 
   override prepareBaseData(): void {
@@ -104,7 +61,7 @@ abstract class SkillMessageSystem extends foundry.abstract.TypeDataModel {
 
     let roll;
     try {
-      roll = Roll.fromJSON(this._source.roll) as Rolled<CheckRoll>;
+      roll = Roll.fromJSON(this._source.roll) as unknown as Roll.Evaluated<CheckRoll>;
     } catch (error) {
       Hooks.onError("SkillMessageSystem#roll", error as Error, { log: "error", data: this._source });
     }
@@ -112,7 +69,7 @@ abstract class SkillMessageSystem extends foundry.abstract.TypeDataModel {
     let luckRoll;
     try {
       if (this._source.luckRoll)
-        luckRoll = Roll.fromJSON(this._source.luckRoll) as Rolled<CheckRoll>;
+        luckRoll = Roll.fromJSON(this._source.luckRoll) as unknown as Roll.Evaluated<CheckRoll>;
       else luckRoll = null;
     } catch (error) {
       Hooks.onError("SkillMessageSystem#luckRoll", error as Error, {
@@ -199,12 +156,12 @@ abstract class SkillMessageSystem extends foundry.abstract.TypeDataModel {
     if (!this.context?.actor) return;
     if (!this.context?.roll) return;
 
-    const reroll = (await this.context.roll.clone().roll()) as Rolled<CheckRoll>;
+    const reroll = (await this.context.roll.clone().roll()) as Roll.Evaluated<CheckRoll>;
     await this.parent.update({ "system.roll": reroll.toJSON(), "system.rerolled": true });
   }
 
   get currentOrigin(): Promise<Maybe<ActorPTR2e>> {
-    return this.context?.actor?.uuid ? fromUuid<ActorPTR2e>(this.context.actor.uuid) : Promise.resolve(null);
+    return this.context?.actor?.uuid ? fromUuid(this.context.actor.uuid) as Promise<Maybe<ActorPTR2e>> : Promise.resolve(null);
   }
 
   public async applyLuckIncrease(number: number) {
@@ -273,6 +230,16 @@ abstract class SkillMessageSystem extends foundry.abstract.TypeDataModel {
 
     await this.parent.update({ "system.appliedLuck": true });
   }
+}
+
+interface SkillMessageSystem {
+  context: {
+    actor?: ActorPTR2e;
+    skill?: SkillPTR2e;
+    roll?: Roll.Evaluated<CheckRoll>;
+    luckRoll?: Roll.Evaluated<CheckRoll> | null;
+    appliedLuck?: boolean;
+  } | null;
 }
 
 export default SkillMessageSystem;

@@ -1,6 +1,6 @@
 import { ActionPTR2e } from "@data";
 import type { CaptureStatisticRollParameters } from "@system/statistics/statistic.ts";
-import type { ConsumablePTR2e } from "@item";
+import type { ConsumablePTR2e, ItemWithActions } from "@item";
 import { PokeballStatistic } from "@system/statistics/pokeball.ts";
 
 export default class PokeballActionPTR2e extends ActionPTR2e {
@@ -67,7 +67,7 @@ export default class PokeballActionPTR2e extends ActionPTR2e {
         powerPoints: 0
       }
     }, {
-      parent: consumable
+      parent: consumable as unknown as ItemWithActions
     })
     action.prepareDerivedData();
     return action;

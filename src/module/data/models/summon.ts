@@ -6,69 +6,76 @@ import type { ActionSchema } from "./action.ts";
 import type ActionPTR2e from "./action.ts";
 import type { CombatantPTR2e, SummonCombatantSystem } from "@combat";
 import type { ActorPTR2e } from "@actor";
-import type { SummonPTR2e } from "@item";
 import { ItemPTR2e } from "@item";
-export default class SummonActionPTR2e extends AttackPTR2e {
-  declare parent: SummonPTR2e['system']
+import type { AttackSchema } from "./attack.ts";
+
+const summonActionSchema = {
+  targetType: new foundry.data.fields.StringField({
+    required: true,
+    choices: ["all", "ally", "enemy", "target", "owner"].reduce(
+      (acc, val) => ({ ...acc, [val]: val }),
+      {}
+    ),
+    initial: "all",
+    label: "PTR2E.FIELDS.targetType.label",
+    hint: "PTR2E.FIELDS.targetType.hint"
+  }),
+  targetUuid: new foundry.data.fields.DocumentUUIDField({
+    required: true,
+    nullable: true,
+    initial: null,
+    label: "PTR2E.FIELDS.targetUuid.label",
+    hint: "PTR2E.FIELDS.targetUuid.hint",
+    type: "Actor"
+  }),
+  damageType: new foundry.data.fields.StringField({
+    required: true,
+    choices: ["power", "flat"].reduce(
+      (acc, val) => ({ ...acc, [val]: val }),
+      {}
+    ),
+    initial: "power",
+    label: "PTR2E.FIELDS.damageType.label",
+    hint: "PTR2E.FIELDS.damageType.hint"
+  }),
+  damageFormula: new foundry.data.fields.StringField({
+    required: true,
+    blank: true,
+    initial: "",
+    label: "PTR2E.FIELDS.damageFormula.label",
+    hint: "PTR2E.FIELDS.damageFormula.hint"
+  }),
+  attackStat: new ResolvableValueField({
+    required: true,
+    initial: "owner",
+    label: "PTR2E.FIELDS.attackStat.label",
+    hint: "PTR2E.FIELDS.attackStat.hint"
+  })
+}
+
+export type SummonActionSchema = typeof summonActionSchema & AttackSchema;
+
+export default class SummonActionPTR2e extends AttackPTR2e<SummonActionSchema> {
+  // declare parent: SummonPTR2e['system']
 
   declare type: "summon";
 
   static override TYPE = "summon" as const;
 
-  static override defineSchema() {
-    const fields = foundry.data.fields;
+  static override defineSchema(): SummonActionSchema {
     return {
-      ...super.defineSchema(),
-      targetType: new fields.StringField({
-        required: true,
-        choices: ["all", "ally", "enemy", "target", "owner"].reduce<Record<string, string>>(
-          (acc, val) => ({ ...acc, [val]: val }),
-          {}
-        ),
-        initial: "all",
-        label: "PTR2E.FIELDS.targetType.label",
-        hint: "PTR2E.FIELDS.targetType.hint"
-      }),
-      targetUuid: new fields.DocumentUUIDField({
-        required: true,
-        nullable: true,
-        initial: null,
-        label: "PTR2E.FIELDS.targetUuid.label",
-        hint: "PTR2E.FIELDS.targetUuid.hint",
-        type: "Actor"
-      }),
-      damageType: new fields.StringField({
-        required: true,
-        choices: ["power", "flat"].reduce<Record<string, string>>(
-          (acc, val) => ({ ...acc, [val]: val }),
-          {}
-        ),
-        initial: "power",
-        label: "PTR2E.FIELDS.damageType.label",
-        hint: "PTR2E.FIELDS.damageType.hint"
-      }),
-      damageFormula: new fields.StringField({
-        required: true,
-        blank: true,
-        initial: "",
-        label: "PTR2E.FIELDS.damageFormula.label",
-        hint: "PTR2E.FIELDS.damageFormula.hint"
-      }),
-      attackStat: new ResolvableValueField<true, false, true>({
-        required: true,
-        initial: "owner",
-        label: "PTR2E.FIELDS.attackStat.label",
-        hint: "PTR2E.FIELDS.attackStat.hint"
-      })
+      ...super.defineSchema() as AttackSchema,
+      ...summonActionSchema,
     }
   }
 
-  override get actor() {
-    if (this.parent instanceof ItemPTR2e) return this.parent.system.owner ? fromUuidSync<ActorPTR2e>(this.parent.system.owner) : super.actor;
-    return this.parent.owner ? fromUuidSync<ActorPTR2e>(this.parent.owner) : super.actor;
+  override get actor(): ActorPTR2e | null {
+    const self = this as SummonActionPTR2e;
+    if (self.parent instanceof ItemPTR2e) return self.parent.system.owner ? fromUuidSync(self.parent.system.owner) as ActorPTR2e | null : super.actor;
+    return self.parent.owner ? fromUuidSync(self.parent.owner) as ActorPTR2e | null : super.actor;
   }
 
-  override prepareDerivedData(): void {
+  override prepareDerivedData(this: SummonActionPTR2e): void {
     if (this.damageType === "power" && !this.attackStat) this.attackStat = "owner";
     super.prepareDerivedData();
   }
@@ -79,7 +86,7 @@ export default class SummonActionPTR2e extends AttackPTR2e {
     return new SummonStatistic(this);
   }
 
-  override getAttackStat(actor: Maybe<ActorPTR2e> = this.actor): number {
+  override getAttackStat(this: SummonActionPTR2e, actor: Maybe<ActorPTR2e> = this.actor): number {
     if (this.attackStat === "owner") return super.getAttackStat(actor);
     if (typeof this.attackStat === "number") return this.attackStat;
     const value = SummonStatistic.resolveValue(this.attackStat, 0, { actor, item: this.item, attack: this });
@@ -87,20 +94,20 @@ export default class SummonActionPTR2e extends AttackPTR2e {
     return 0;
   }
 
-  getFormula(): string {
+  getFormula(this: SummonActionPTR2e): string {
     if (!this.damageFormula) return "0";
     const formula = SummonStatistic.resolveValue(this.damageFormula, "0", { actor: this.actor, item: this.item, attack: this }, { evaluate: false });
     return typeof formula === "string" ? formula : typeof formula === "number" ? formula + "" : "0";
   }
 
-  async execute(summonCombatant: SummonCombatantSystem, combatants: CombatantPTR2e[]) {
+  async execute(this: SummonActionPTR2e, summonCombatant: SummonCombatantSystem, combatants: CombatantPTR2e[]) {
     if (!game.users.activeGM) return;
     if (!this.item._id) return;
     if (!this.statistic) this.statistic = this.prepareStatistic();
     if (!this.statistic) return false;
 
     const targets = new Set<ActorPTR2e>();
-    const owner = fromUuidSync<ActorPTR2e>(summonCombatant.owner)
+    const owner = fromUuidSync(summonCombatant.owner ?? "") as ActorPTR2e | null;
     for (const combatant of combatants) {
       if (combatant === summonCombatant.parent) continue;
       if (!combatant.actor) continue;
@@ -112,6 +119,8 @@ export default class SummonActionPTR2e extends AttackPTR2e {
             targets.add(combatant.actor);
             break
           }
+          //@ts-expect-error - FIXME: Issue in the original code logic, this.owner field doesn't exist.
+          // Slapping this on here for now, as this code is unfinished anyways.
           if (actor.uuid === this.owner || actor.isAllyOf(owner)) {
             targets.add(combatant.actor);
           }
@@ -157,7 +166,7 @@ export default class SummonActionPTR2e extends AttackPTR2e {
     })
   }
 
-  override prepareUpdate(data: DeepPartial<SourceFromSchema<ActionSchema>>): ActionPTR2e[] {
+  override prepareUpdate(data: foundry.data.fields.SchemaField.InnerAssignmentType<ActionSchema>): ActionPTR2e[] {
     const currentActions = super.prepareUpdate(data);
 
     for (const action of currentActions) {
@@ -173,34 +182,10 @@ export default class SummonActionPTR2e extends AttackPTR2e {
     return currentActions;
   }
 
-  override toJSON(): this["_source"] {
+  override toJSON() {
     return {
       ...super.toJSON(),
       itemUuid: this.item.uuid
     };
   }
-}
-
-export default interface SummonActionPTR2e extends AttackPTR2e, ModelPropsFromSchema<SummonActionSchema> {
-  _source: SourceFromSchema<SummonActionSchema> & AttackPTR2e['_source'];
-}
-
-interface SummonActionSchema extends ActionSchema {
-  targetType: foundry.data.fields.StringField<
-    "all" | "ally" | "enemy" | "target" | "owner",
-    "all" | "ally" | "enemy" | "target" | "owner",
-    true,
-    true,
-    true
-  >;
-  targetUuid: foundry.data.fields.DocumentUUIDField<string, true, true, true>;
-  damageType: foundry.data.fields.StringField<
-    "power" | "flat",
-    "power" | "flat",
-    true,
-    true,
-    true
-  >;
-  damageFormula: foundry.data.fields.StringField<string, string, true, true, true>;
-  attackStat: ResolvableValueField<true, false, true>;
 }

@@ -460,8 +460,8 @@ export default class SpeciesSystem extends HasEmbed(
     return evolutions;
   }
 
-  private async createEvolutionPerk(evolution: EvolutionData, isShiny = this.shiny): Promise<DeepPartial<foundry.abstract.DataModel.ConstructorDataFor<ItemPTR2e>> & {
-    system: DeepPartial<foundry.abstract.DataModel.ConstructorData<PerkSchema>>
+  private async createEvolutionPerk(evolution: EvolutionData, isShiny = this.shiny): Promise<foundry.abstract.DataModel.ConstructorDataFor<ItemPTR2e> & {
+    system: foundry.abstract.DataModel.ConstructorData<PerkSchema>
   }> {
 
     const img = await (async (): Promise<string> => {
@@ -483,7 +483,8 @@ export default class SpeciesSystem extends HasEmbed(
       name: `Evolution: ${Handlebars.helpers.capitalizeFirst(evolution.name)}`,
       type: "perk",
       img,
-      flags: {
+      flags: { 
+        // @ts-expect-error - Partial type
         ptr2e: {
           evolution: {
             name: evolution.name,
@@ -521,10 +522,10 @@ export default class SpeciesSystem extends HasEmbed(
 
     const takenCoordinates = new Set<`${number}-${number}`>();
 
-    const perks: DeepPartial<foundry.abstract.DataModel.ConstructorDataFor<ItemPTR2e>>[] = [];
-    const perksByDepth: Record<number, DeepPartial<foundry.abstract.DataModel.ConstructorDataFor<ItemPTR2e>>[]> = {};
-    const previousPerks: DeepPartial<foundry.abstract.DataModel.ConstructorDataFor<ItemPTR2e>>[] = [];
-    const nextPerks: DeepPartial<foundry.abstract.DataModel.ConstructorDataFor<ItemPTR2e>>[] = [];
+    const perks: foundry.abstract.DataModel.ConstructorDataFor<ItemPTR2e>[] = [];
+    const perksByDepth: Record<number, foundry.abstract.DataModel.ConstructorDataFor<ItemPTR2e>[]> = {};
+    const previousPerks: foundry.abstract.DataModel.ConstructorDataFor<ItemPTR2e>[] = [];
+    const nextPerks: foundry.abstract.DataModel.ConstructorDataFor<ItemPTR2e>[] = [];
     let lastDepth = 0;
 
     const evolutions = this.evolutions ? this.evolutions : {
@@ -566,7 +567,7 @@ export default class SpeciesSystem extends HasEmbed(
 
       if (lastDepth >= depth) {
         lastDepth = depth;
-        const perks: DeepPartial<foundry.abstract.DataModel.ConstructorDataFor<ItemPTR2e>>[] = perksByDepth[depth - 1] ?? [];
+        const perks: foundry.abstract.DataModel.ConstructorDataFor<ItemPTR2e>[] = perksByDepth[depth - 1] ?? [];
         previousPerks.splice(0, previousPerks.length, ...perks);
         nextPerks.splice(0, nextPerks.length, data);
       }

@@ -150,4 +150,4 @@ const AfflictionEnricher: TextEditor.EnricherConfig = {
 export default [
   TraitEnricher,
   AfflictionEnricher
-] as TextEditor.EnricherConfig[];
+] satisfies TextEditor.EnricherConfig[];

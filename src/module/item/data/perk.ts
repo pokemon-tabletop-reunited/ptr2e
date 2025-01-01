@@ -279,7 +279,7 @@ export default abstract class PerkSystem extends HasEmbed(
   }
 
   override async _preUpdate(
-    changed: DeepPartial<foundry.abstract.TypeDataModel.ParentAssignmentType<PerkSchema, ItemPTR2e>>,
+    changed: foundry.abstract.TypeDataModel.ParentAssignmentType<PerkSchema, ItemPTR2e>,
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     options: foundry.abstract.Document.PreUpdateOptions<any>,
     user: string

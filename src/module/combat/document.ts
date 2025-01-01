@@ -8,7 +8,7 @@ import {
   RoundCombatantSystem
 } from "@combat";
 import { ActorPTR2e } from "@actor";
-import type { DeepPartial, InexactPartial } from "fvtt-types/utils";
+import type { InexactPartial } from "fvtt-types/utils";
 
 class CombatPTR2e extends Combat {
   public _averageLevel: number | null;
@@ -389,7 +389,7 @@ class CombatPTR2e extends Combat {
   protected override _onCreateDescendantDocuments(
     parent: ClientDocument,
     collection: "combatants",
-    documents: Combatant[],
+    documents: ClientDocument[],
     results: Combatant['_source'][],
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     options: foundry.abstract.Document.OnCreateOptions<"Combatant"> & InexactPartial<{ combatTurn: number; turnEvents: boolean }>,
@@ -415,7 +415,7 @@ class CombatPTR2e extends Combat {
   protected override _onDeleteDescendantDocuments(
     parent: ClientDocument,
     collection: "combatants",
-    documents: Combatant[],
+    documents: ClientDocument[],
     ids: string[],
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     options: foundry.abstract.Document.OnDeleteOptions<"Combatant"> & InexactPartial<{ combatTurn: number; turnEvents: boolean }>,

@@ -71,7 +71,7 @@ class SkillPTR2e extends foundry.abstract.DataModel<SkillSchema, ActorSystemPTR2
   }
 }
 
-type CoreSkill = Pick<SkillPTR2e["_source"], 'slug' | 'favourite' | 'hidden' | 'group'>;
+type CoreSkill = Pick<foundry.data.fields.SchemaField.InnerAssignmentType<SkillSchema>, 'slug' | 'favourite' | 'hidden' | 'group'>;
 type CustomSkill = CoreSkill & { label: string; description: string };
 type Skill = CoreSkill | CustomSkill;
 

@@ -4,7 +4,6 @@ import TeamSheetPTR2e from "@module/apps/team-sheet.ts";
 import { LaxSchemaField } from "@module/data/fields/lax-schema-field.ts";
 import FolderConfigPTR2e from "./sheet.ts";
 import type { AnyDocument } from "node_modules/fvtt-types/src/foundry/client/data/abstract/client-document.d.mts";
-import type { DeepPartial } from "node_modules/vite-plugin-checker/dist/esm/types.js";
 import type { InexactPartial } from "fvtt-types/utils";
 
 const folderSchema = {
@@ -44,12 +43,12 @@ class FolderPTR2e extends Folder {
     return game.users.find(user => user.character?.uuid === owner.uuid) ?? null;
   }
 
-  get party(): Actor.ConfiguredClass[] {
+  get party(): ActorUUID[] {
     if (this.type !== "Actor") return [];
     return this.contents.filter(actor => (actor as unknown as ActorPTR2e).system.party?.partyMemberOf == this.id).map(actor => actor.uuid);
   }
 
-  get team(): Actor.ConfiguredClass[] {
+  get team(): ActorUUID[] {
     return game.actors.filter(actor => (actor as unknown as ActorPTR2e).system.party?.teamMemberOf.includes(this.id)).map(actor => actor.uuid);
   }
 
@@ -143,14 +142,13 @@ class FolderPTR2e extends Folder {
 
   static override createDialog<T extends foundry.abstract.Document.AnyConstructor>(
     this: T,
-    data?: DeepPartial<foundry.abstract.Document.ConstructorDataFor<T>>,
+    data?: foundry.abstract.Document.ConstructorDataFor<T>,
     options: InexactPartial<Omit<FolderConfig.Options, "resolve">> & {
       parent?: foundry.abstract.Document.Any;
       pack?: null | string;
       resolve?: (result: foundry.abstract.Document.ToConfiguredInstance<T> | null | undefined) => void;
     } = {}
   ): Promise<foundry.abstract.Document.ToConfiguredInstance<T> | null | undefined> {
-    //@ts-expect-error - Class is not abstract
     const folder = new Folder.implementation(
       foundry.utils.mergeObject(
         {
@@ -158,7 +156,7 @@ class FolderPTR2e extends Folder {
           sorting: "a",
         },
         data
-      ),
+      ) as Folder.ConstructorData,
       { pack: options.pack }
     );
     return new Promise((resolve) => {

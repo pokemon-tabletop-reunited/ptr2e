@@ -49,7 +49,7 @@ class ActorPTR2e extends Actor {
   /** Has this document completed `DataModel` initialization? */
   declare initialized: boolean;
 
-  constructor(data: foundry.abstract.DataModel.ConstructorDataFor<ActorPTR2e>, context: foundry.abstract.DataModel.DataValidationOptions<ActorPTR2e>) {
+  constructor(data: Actor.ConstructorData, context?: foundry.abstract.DataModel.DataValidationOptions<ActorPTR2e>) {
     super(data, context);
 
     Object.defineProperties(this, {
@@ -1842,7 +1842,7 @@ class ActorPTR2e extends Actor {
   }
 
   protected override _onUpdate(
-    changed: DeepPartial<foundry.data.fields.SchemaField.AssignmentType<Actor.Schema>>,
+    changed: foundry.data.fields.SchemaField.InnerAssignmentType<Actor.Schema>,
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     options: foundry.abstract.Document.OnUpdateOptions<any>,
     userId: string
@@ -1852,8 +1852,8 @@ class ActorPTR2e extends Actor {
     // if (game.ptr.web.actor === this) game.ptr.web.refresh({ nodeRefresh: true });
   }
 
-  protected override async _onCreateDescendantDocuments<T extends foundry.abstract.Document.SystemConstructor>(
-    parent: T,
+  protected override async _onCreateDescendantDocuments(
+    parent: ClientDocument,
     collection: "effects" | "items",
     documents: ActiveEffectPTR2e[] | ItemPTR2e[],
     results: ActiveEffectPTR2e["_source"][] | ItemPTR2e["_source"][],
@@ -1895,23 +1895,23 @@ class ActorPTR2e extends Actor {
     // if (updates.length) await this.updateEmbeddedDocuments("Item", updates);
   }
 
-  protected override _onDeleteDescendantDocuments<T extends foundry.abstract.Document.SystemConstructor>(
-    parent: T,
+  protected override _onDeleteDescendantDocuments(
+    parent: ClientDocument,
     collection: "effects" | "items",
     documents: ClientDocument[],
-    changes: unknown[],
+    ids: string[],
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     options: foundry.abstract.Document.OnDeleteOptions<any> & InexactPartial<{ render: boolean }>,
     userId: string
   ): void {
-    super._onDeleteDescendantDocuments(parent, collection, documents, changes, options, userId);
+    super._onDeleteDescendantDocuments(parent, collection, documents, ids, options, userId);
     // if (game.ptr.web.actor === this) game.ptr.web.refresh({ nodeRefresh: true });
   }
 
-  protected override _onUpdateDescendantDocuments<T extends foundry.abstract.Document.SystemConstructor>(
-    parent: T,
+  protected override _onUpdateDescendantDocuments(
+    parent: ClientDocument,
     collection: "effects" | "items",
-    documents: ActiveEffectPTR2e[] | ItemPTR2e[],
+    documents: ClientDocument[], //ActiveEffectPTR2e[] | ItemPTR2e[],
     changes: ActiveEffectPTR2e["_source"][] | ItemPTR2e["_source"][],
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     options: foundry.abstract.Document.OnUpdateOptions<any> & InexactPartial<{ render: boolean }>,

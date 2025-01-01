@@ -27,7 +27,7 @@ export function ChangeModelTypes(): foundry.data.fields.TypedSchemaField.Types {
 }
 
 let actionTypes;
-export function ActionModelTypes() {
+export function ActionModelTypes(): foundry.data.fields.TypedSchemaField.Types {
   return actionTypes ??= Object.freeze({
     [ActionPTR2e.TYPE]: ActionPTR2e,
     [AttackPTR2e.TYPE]: AttackPTR2e,

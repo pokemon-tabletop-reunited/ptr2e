@@ -202,7 +202,7 @@ export default class SummonCombatantSystem extends CombatantSystemPTR2e<SummonCo
   }
 
   override async _preUpdate(
-    changed: DeepPartial<foundry.abstract.TypeDataModel.ParentAssignmentType<SummonCombatantSchema, CombatantPTR2e>>,
+    changed: foundry.abstract.TypeDataModel.ParentAssignmentType<SummonCombatantSchema, CombatantPTR2e>,
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     options: foundry.abstract.Document.PreUpdateOptions<any>,
     userId: string

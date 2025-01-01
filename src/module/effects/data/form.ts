@@ -89,7 +89,7 @@ class FormActiveEffectSystem extends ActiveEffectSystem<FormActiveEffectSchema> 
   }
 
   protected override _preUpdate(
-    changed: DeepPartial<foundry.abstract.TypeDataModel.ParentAssignmentType<FormActiveEffectSchema, ActiveEffectPTR2e>>,
+    changed: foundry.abstract.TypeDataModel.ParentAssignmentType<FormActiveEffectSchema, ActiveEffectPTR2e>,
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     options: foundry.abstract.Document.PreUpdateOptions<any>,
     user: User
