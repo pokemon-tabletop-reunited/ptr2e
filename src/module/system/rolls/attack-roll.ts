@@ -111,7 +111,7 @@ class AttackRoll extends CheckRoll {
     options: AttackRollDataPTR2e
   ): AttackRoll | null {
     const basePower = data.attack.power;
-    if (basePower === null) return null;
+    if (basePower == null) return null;
 
     const powerModifier = data.check.total?.power?.percentile ?? 1;
     const powerFlatModifier = data.check.total?.power?.flat ?? 0;

@@ -6,7 +6,7 @@ import type { StatisticData } from "./data.ts";
 import * as R from "remeda";
 import { CheckModifier, ModifierPTR2e, StatisticModifier } from "@module/effects/modifiers.ts";
 import type { AttackRollResult } from "@system/rolls/check-roll.ts";
-import type { ConsumablePTR2e, ItemPTR2e, ItemSystemsWithActions } from "@item";
+import type { ConsumablePTR2e, ItemPTR2e, ItemWithActions } from "@item";
 import type { ActorPTR2e } from "@actor";
 import type { CheckContext } from "@system/data.ts";
 import type { TokenPTR2e } from "@module/canvas/token/object.ts";
@@ -25,7 +25,7 @@ type AttackRollParameters = AttackStatisticRollParameters
 class AttackStatistic extends Statistic {
   declare data: AttackStatisticData;
 
-  item: ItemPTR2e<ItemSystemsWithActions, ActorPTR2e>;
+  item: ItemWithActions;
   attack: AttackPTR2e;
 
   #check: AttackCheck<this> | null = null;
@@ -106,7 +106,7 @@ class AttackStatistic extends Statistic {
 
     super(actor, data);
 
-    this.item = item as ItemPTR2e<ItemSystemsWithActions, ActorPTR2e>;
+    this.item = item as ItemWithActions;
     this.attack = attack;
   }
 
@@ -167,7 +167,7 @@ class AttackCheck<TParent extends AttackStatistic = AttackStatistic> implements 
     return this.parent.createRollOptions(this.domains, args);
   }
 
-  get item(): ItemPTR2e<ItemSystemsWithActions, ActorPTR2e> {
+  get item(): ItemWithActions {
     return this.parent.item;
   }
   get attack() {
@@ -191,11 +191,11 @@ class AttackCheck<TParent extends AttackStatistic = AttackStatistic> implements 
 
     const targets: { actor: ActorPTR2e, token?: TokenPTR2e }[] = (() => {
       if (args.targets) return args.targets.map(t => ({ actor: t, token: t.token?.object as TokenPTR2e }));
-      return [...game.user.targets ?? []].map(t => ({ actor: t.actor as ActorPTR2e, token: t as TokenPTR2e }));
+      return [...game.user!.targets ?? []].map(t => ({ actor: t.actor as ActorPTR2e, token: t as TokenPTR2e }));
     })()
 
     if (this.attack.slug === "fling-actor-toss") {
-      game.user.targets.clear();
+      game.user!.targets.clear();
       const target = await new TagTokenPrompt({ prompt: "PTR2E.UI.TokenTagPrompt.TargetTokenFling", requirements: null }).resolveTarget();
       if (!target?.actor) return null;
       if (!target.actor.isAllyOf(this.actor)) {
@@ -251,7 +251,7 @@ class AttackCheck<TParent extends AttackStatistic = AttackStatistic> implements 
       item: this.item,
       options,
       traits: args.traits ?? this.item.traits,
-    }) as CheckContext<ActorPTR2e, AttackCheck<TParent>, ItemPTR2e<ItemSystemsWithActions, ActorPTR2e>>;
+    }) as CheckContext<ActorPTR2e, AttackCheck<TParent>, ItemWithActions>;
 
     if (context.self.actor.flags.ptr2e.disableActionOptions?.disabled.includes(this.attack.uuid as ActionUUID)) {
       ui.notifications.warn(game.i18n.format("PTR2E.AttackWarning.AfflictionDisabled", { name: this.attack.name }));
@@ -263,7 +263,7 @@ class AttackCheck<TParent extends AttackStatistic = AttackStatistic> implements 
       origin: this.actor,
       target: this.actor,
       item: this.item,
-      attack: this.attack,
+      attack: this.attack, //@ts-expect-error: FIXME: Should auto-resolve.
       action: this.attack,
       domains: this.domains,
       options,
@@ -272,19 +272,19 @@ class AttackCheck<TParent extends AttackStatistic = AttackStatistic> implements 
     });
 
     // const extraModifiers = args.modifiers ?? [];
-    const contexts: Record<ActorUUID, CheckContext<ActorPTR2e, AttackCheck<TParent>, ItemPTR2e<ItemSystemsWithActions, ActorPTR2e>>> = {}
+    const contexts: Record<ActorUUID, CheckContext<ActorPTR2e, AttackCheck<TParent>, ItemWithActions>> = {}
     let anyValidTargets = false;
     for (const target of targets) {
       const allyOrEnemy = this.actor.isAllyOf(target.actor) ? "ally" : this.actor.isEnemyOf(target.actor) ? "enemy" : "neutral";
 
-      const currContext = contexts[target.actor.uuid] = await this.actor.getCheckContext({
+      const currContext = contexts[target.actor.uuid as keyof typeof contexts] = await this.actor.getCheckContext({
         attack: this.attack,
         domains: this.domains,
         statistic: this,
         target: target,
         options: new Set([...options, `origin:${allyOrEnemy}`]),
         traits: args.traits ?? this.item.traits,
-      }) as CheckContext<ActorPTR2e, AttackCheck<TParent>, ItemPTR2e<ItemSystemsWithActions, ActorPTR2e>>
+      }) as CheckContext<ActorPTR2e, AttackCheck<TParent>, ItemWithActions>
 
       if (currContext.self.actor.flags.ptr2e.disableActionOptions?.disabled.includes(this.attack.uuid as ActionUUID)) {
         ui.notifications.warn(game.i18n.format("PTR2E.AttackWarning.AfflictionDisabled", { name: this.attack.name }));

@@ -1,6 +1,5 @@
 import ResolvableValueField from "@module/data/fields/resolvable-value-field.ts";
 import type ChangeModel from "../changes/change.ts";
-import type { ItemSourcePTR2e } from "@item";
 import { ItemPTR2e } from "@item";
 import type { ResolveValueParams } from "@data";
 import { BasicChangeSystem } from "@data";
@@ -8,37 +7,39 @@ import type { BracketedValue, RuleValue } from "../data.ts";
 import { isBracketedValue, isObject } from "@utils";
 import * as R from "remeda";
 
-class AttackAlteration extends foundry.abstract.DataModel<ChangeModel> {
-
-  static VALID_PROPERTIES = new Set([
-    "power",
-    "accuracy",
-    "type",
-    "traits",
-    "pp-cost",
-    "range",
-    "rip"
+const VALID_PROPERTIES = new Set([
+  "power",
+  "accuracy",
+  "type",
+  "traits",
+  "pp-cost",
+  "range",
+  "rip"
 ] as const);
 
-  static override defineSchema() {
-    const fields = foundry.data.fields;
-    return {
-      mode: new fields.NumberField({
-        required: true,
-        initial: CONST.ACTIVE_EFFECT_MODES.ADD,
-        choices: Object.fromEntries(Object.entries(CONST.ACTIVE_EFFECT_MODES).map(([k, v]) => [v, k])),
-      }),
-      property: new fields.StringField({
-        required: true,
-        choices: Array.from(this.VALID_PROPERTIES),
-        initial: undefined,
-      }),
-      value: new ResolvableValueField<true,false,true>({
-        required: true,
-        nullable: false,
-        initial: "",
-      })
-    }
+const attackAlterationSchema = {
+  mode: new foundry.data.fields.NumberField({
+    required: true,
+    initial: CONST.ACTIVE_EFFECT_MODES.ADD,
+    choices: Object.fromEntries(Object.entries(CONST.ACTIVE_EFFECT_MODES).map(([k, v]) => [v, k])),
+  }),
+  property: new foundry.data.fields.StringField({
+    required: true,
+    choices: Array.from(VALID_PROPERTIES),
+    initial: undefined,
+  }),
+  value: new ResolvableValueField({
+    required: true,
+    nullable: false,
+    initial: "",
+  })
+}
+
+export type AttackAlterationSchema = typeof attackAlterationSchema;
+
+class AttackAlteration extends foundry.abstract.DataModel<AttackAlterationSchema, ChangeModel> {
+  static override defineSchema(): AttackAlterationSchema {
+    return attackAlterationSchema;
   }
 
   get change(): ChangeModel {
@@ -53,41 +54,41 @@ class AttackAlteration extends foundry.abstract.DataModel<ChangeModel> {
     return this.change.actor;
   }
 
-  applyTo(item: ItemPTR2e | ItemSourcePTR2e): void {
-    if(item instanceof ItemPTR2e) {
+  applyTo(item: ItemPTR2e | Item.ConstructorData): void {
+    if (item instanceof ItemPTR2e) {
       return this.applyToItem(item);
     }
 
     const property = item.type === "effect" && !this.property.startsWith("effects.") ? `effects.0.${this.property}` : this.property;
     const current = foundry.utils.getProperty(item, property);
     const value = typeof this.value === "boolean" ? this.value : this.resolveInjectedProperties(this.value);
-    const change = BasicChangeSystem.getNewValue(this.mode, current, value, false)
+    const change = BasicChangeSystem.getNewValue(this.mode as ActiveEffectChangeMode, current, value, false)
     foundry.utils.setProperty(item, property, change);
   }
 
   applyToItem(item: ItemPTR2e): void {
     const source = item.toObject();
 
-    let field: ReturnType<foundry.abstract.DataModel["schema"]["getField"]>;
+    let field: foundry.data.fields.DataField.Unknown | undefined;
     const changes: Record<string, unknown> = {};
 
     const property = item.type === "effect" && !this.property.startsWith("effects.") ? `effects.0.${this.property}` : this.property;
 
-    if(property.startsWith("system.")) {
-      if(item.system instanceof foundry.abstract.DataModel) {
+    if (property.startsWith("system.")) {
+      if (item.system instanceof foundry.abstract.DataModel) {
         field = item.system.schema.getField(property.slice(7));
       }
     } else field = item.schema.getField(property);
-    if(field) changes[property] = this.applyField(source, item, property, field);
-    
-    if(Object.keys(changes).length > 0) item.update(changes);
+    if (field) changes[property] = this.applyField(source, item, property, field);
+
+    if (Object.keys(changes).length > 0) item.update(changes);
   }
 
-  applyField(source: ItemPTR2e['_source'], item: ItemPTR2e, property: string, field: ReturnType<foundry.abstract.DataModel["schema"]["getField"]>): unknown {
+  applyField(source: ItemPTR2e['_source'], item: ItemPTR2e, property: string, field: foundry.data.fields.DataField.Unknown | undefined): unknown {
     field ??= item.schema.getField(property);
     const current = foundry.utils.getProperty(source, property);
     const value = typeof this.value === "boolean" ? this.value : this.resolveInjectedProperties(this.value);
-    const update = field?.applyChange(current, item, {key: property, mode: this.mode, value, priority: 0});
+    const update = field?.applyChange(current, item, { key: property, mode: this.mode, value, priority: 0 });
     foundry.utils.setProperty(source, property, update);
     return update;
   }
@@ -95,7 +96,7 @@ class AttackAlteration extends foundry.abstract.DataModel<ChangeModel> {
   /** Send a deferred warning to the console indicating that a rule element's validation failed */
   public failValidation(...message: string[]): void {
     const fullMessage = message.join(" ");
-    const { name, uuid } = this.change;
+    const { name, uuid } = this.change as unknown as { name: string, uuid: string };
     if (!this.suppressWarnings) {
       const ruleName = game.i18n.localize(`PTR2E.RuleElement.${this.effect.type}`);
       this.actor?.synthetics.preparationWarnings.add(
@@ -310,13 +311,11 @@ class AttackAlteration extends foundry.abstract.DataModel<ChangeModel> {
   }
 }
 
-interface AttackAlteration extends foundry.abstract.DataModel<ChangeModel>, ModelPropsFromSchema<AttackAlterationSchema> { }
-
-interface AttackAlterationSchema extends foundry.data.fields.DataSchema {
-  mode: foundry.data.fields.NumberField<ActiveEffectChangeMode, ActiveEffectChangeMode, false, false, true>
-  property: StringField<string, string, true, false, true>;
-  value: ResolvableValueField<true, false, true>;
+interface AttackAlteration {
+  value: string;
+  suppressWarnings: boolean;
+  ignored: boolean;
+  item: ItemPTR2e | null;
 }
 
-export { AttackAlteration }
-export type { AttackAlterationSchema }
+export { AttackAlteration };

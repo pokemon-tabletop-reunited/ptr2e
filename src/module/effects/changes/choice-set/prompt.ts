@@ -7,7 +7,7 @@ import type { Predicate } from "@system/predication/predication.ts";
 import { createHTMLElement, htmlQuery, htmlQueryAll, sluggify } from "@utils";
 import { UUIDUtils } from "src/util/uuid.ts";
 
-class ChoiceSetPrompt extends PickAThingPrompt<ItemPTR2e<ItemSystemPTR, ActorPTR2e>, string | number | object> {
+class ChoiceSetPrompt extends PickAThingPrompt<ItemPTR2e, string | number | object> {
   /** The prompt statement to present the user in this application's window */
   prompt: string;
 

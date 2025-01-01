@@ -1,4 +1,4 @@
-import type { PokemonCategory } from "@data";
+import type { PokemonCategory, PokemonType } from "@data";
 import { ActionPTR2e, PTRCONSTS } from "@data";
 import { getTypes } from "@scripts/config/effectiveness.ts";
 import type { ActionSchema } from "./action.ts";
@@ -15,7 +15,7 @@ import type { ActorSizePTR2e } from "@actor/data/size.ts";
 
 const attackSchema = {
   types: new foundry.data.fields.SetField(
-    new foundry.data.fields.StringField({
+    new foundry.data.fields.StringField<{required: true, choices: Record<string,string>, initial: string, label: string, hint: string}, PokemonType, PokemonType>({
       required: true,
       choices: getTypes().reduce<Record<string, string>>(
         (acc, type) => ({ ...acc, [type]: type }),
@@ -119,8 +119,6 @@ const attackSchema = {
 export type AttackSchema = typeof attackSchema & ActionSchema;
 
 class AttackPTR2e<Schema extends AttackSchema = AttackSchema> extends ActionPTR2e<Schema> {
-  declare type: "attack" | "summon";
-
   static override TYPE: "attack" | "summon" = "attack" as const;
 
   static override defineSchema(): AttackSchema {

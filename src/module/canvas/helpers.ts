@@ -7,7 +7,7 @@ let auraCheckLock = Promise.resolve();
 
 /** Check for auras containing newly-placed or moved tokens */
 const checkAuras = foundry.utils.debounce(async function (this: ScenePTR2e): Promise<void> {
-  if (!(canvas!.ready && this.isInFocus && ([CONST.GRID_TYPES.SQUARE, CONST.GRID_TYPES.GRIDLESS]).includes(this.grid.type))) {
+  if (!(canvas!.ready && this.isInFocus && ([CONST.GRID_TYPES.SQUARE, CONST.GRID_TYPES.GRIDLESS] as CONST.GRID_TYPES[]).includes(this.grid.type as CONST.GRID_TYPES))) {
     return;
   }
 

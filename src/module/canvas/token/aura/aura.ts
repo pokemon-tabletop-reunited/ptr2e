@@ -69,12 +69,12 @@ class TokenAura implements TokenAuraData {
     if (this.token.object.distanceTo(token.object) > this.radius) return false;
 
     // If the grid is gridless, the aura radius is all that is checked.
-    if(canvas.grid.type === CONST.GRID_TYPES.GRIDLESS) {
+    if(canvas.grid!.type === CONST.GRID_TYPES.GRIDLESS) {
       return true;
     }
 
     const round = (n: number) => {
-      if(canvas.grid.type === CONST.GRID_TYPES.SQUARE) return n;
+      if(canvas.grid!.type === CONST.GRID_TYPES.SQUARE) return n;
       const scl = Math.pow(10, 2);
       return Math.round(n * scl) / scl;
     }
@@ -82,9 +82,9 @@ class TokenAura implements TokenAuraData {
     // Check whether any aura square intersects the token's space
     return this.squares.some((s) => s.active 
     && (
-      canvas.grid.type === CONST.GRID_TYPES.SQUARE
-        ? measureDistanceCuboid(s, token.mechanicalBounds) === 0
-        : round(canvas.grid.measurePath([s.center, token.center]).distance) === 0
+      canvas.grid!.type === CONST.GRID_TYPES.SQUARE
+        ? measureDistanceCuboid(s, token.mechanicalBounds) === 0 //@ts-expect-error - fvtt-types unfinished types: Opions should be optional
+        : round(canvas.grid!.measurePath([s.center, token.center]).distance) === 0
     ));
   }
 

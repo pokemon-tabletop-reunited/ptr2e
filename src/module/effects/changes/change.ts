@@ -416,6 +416,12 @@ interface ChangeModel {
    */
   beforePrepareData?(): void;
 
+  /**
+   * Some Change Models require parents data to be initialized before they can be initialized. This method is called
+   * after the parent effect has been initialized to finalize the initialization of the change model
+   */
+  prepareData?(): void;
+
   /** Run after all actor preparation callbacks have been run so you should see all final values here. */
   afterPrepareData?(): void;
 

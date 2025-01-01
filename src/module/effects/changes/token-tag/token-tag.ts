@@ -14,24 +14,24 @@ export default class TokenTagChangeSystem extends ChangeModel {
     this.value &&= this.resolveInjectedProperties(this.value);
 
     if (this.actor.getActiveTokens().length === 0) {
-      this.ignored = changeSource.ignored = true;
+      this.ignored = changeSource!.ignored = true;
       return;
     }
 
     const token =
       fromUuidSync(this.value ?? "")
-      ?? (game.user.targets.size === 1
-        ? Array.from(game.user.targets)[0].document
+      ?? (game.user!.targets.size === 1
+        ? Array.from(game.user!.targets)[0].document
         : await new TagTokenPrompt({ prompt: null, requirements: null }).resolveTarget());
 
     if (!(token instanceof TokenDocumentPTR2e)) {
       // No token was targeted: abort creating item
-      pendingItems.splice(pendingItems.findIndex(i => i.effects.find(e => e === effectSource)), 1);
+      pendingItems.splice(pendingItems.findIndex(i => i.effects!.find(e => e === effectSource)), 1);
       return;
     }
 
-    if(!(changeSource.key === this.key)) throw new Error(`TokenTagChangeSystem expected changeSource.slug to be ${this.key} but got ${changeSource.key}`);
-    this.value = changeSource.value = token.uuid;
+    if(!(changeSource!.key === this.key)) throw new Error(`TokenTagChangeSystem expected changeSource.slug to be ${this.key} but got ${changeSource!.key}`);
+    this.value = changeSource!.value = token.uuid;
   }
 
   override apply(actor: ActorPTR2e): void {

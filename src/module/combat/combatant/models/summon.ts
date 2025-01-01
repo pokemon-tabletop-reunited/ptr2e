@@ -6,7 +6,6 @@ import { ItemPTR2e } from "@item";
 import type { SummonAttackPTR2e } from "@data";
 import type { ActorPTR2e } from "@actor";
 import type { ActiveEffectPTR2e } from "@effects";
-import type { DeepPartial } from "fvtt-types/utils";
 
 const summonCombatantSchema = {
   owner: new foundry.data.fields.DocumentUUIDField({ required: true, nullable: true }),

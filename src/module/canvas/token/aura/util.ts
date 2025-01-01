@@ -5,16 +5,16 @@ import type { Trait } from "@data";
 
 export function getAreaSquares(data: GetAreaSquaresParams): EffectAreaSquare[] {
   if (!canvas.ready) return [];
-  const squareWidth = canvas.dimensions.size;
+  const squareWidth = canvas.dimensions!.size;
 
-  if(canvas.grid.type === CONST.GRID_TYPES.GRIDLESS) {
+  if(canvas.grid!.type === CONST.GRID_TYPES.GRIDLESS) {
     return [];
   }
 
   const collisionType = "move";
   const pointSource = (() => {
     const sources = foundry.canvas.sources;
-    const PointSource: ConstructorOf<BaseEffectSource<TokenPTR2e>> = {
+    const PointSource = {
       sight: sources.PointVisionSource,
       sound: sources.PointSoundSource,
       move: sources.PointMovementSource,
@@ -60,16 +60,17 @@ export function getGridHighlightShape({ x, y }: { x: number, y: number }, circle
  * @protected
  */
 export function getGridHighlightPositions({ x, y }: { x: number, y: number }, shape: PIXI.Circle): Point[] {
-  const grid = canvas.grid;
+  const grid = canvas.grid!;
   const ox = x, oy = y;
   const bounds = shape.getBounds();
   bounds.x += ox;
   bounds.y += oy;
-  bounds.fit(canvas.dimensions.rect);
+  bounds.fit(canvas.dimensions!.rect);
   bounds.pad(1);
 
   // Identify grid space that have their center points covered by the template shape
   const positions = [];
+  //@ts-expect-error - fvtt-types unfinished types
   const [i0, j0, i1, j1] = grid.getOffsetRange(bounds);
   for (let i = i0; i < i1; i++) {
     for (let j = j0; j < j1; j++) {

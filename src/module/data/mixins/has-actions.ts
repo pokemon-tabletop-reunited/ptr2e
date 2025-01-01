@@ -12,7 +12,11 @@ const actionsSchema = {
    * This is a record of actions that the item has, keyed by the action's slug.
    * @see {@link ActionPTR2e}
    */
-  actions: new CollectionField(
+  actions: new CollectionField<
+    foundry.data.fields.TypedSchemaField<
+      
+    >
+  >(
     new foundry.data.fields.TypedSchemaField(ActionModelTypes()),
     'slug'
   )

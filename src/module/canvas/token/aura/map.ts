@@ -51,13 +51,13 @@ export class AuraRenderers extends Map<string, AuraRenderer> {
       !!this.token.combatant?.parent?.started
 
     return !!(
-      ([CONST.GRID_TYPES.SQUARE, CONST.GRID_TYPES.GRIDLESS] as (GridType|undefined)[]).includes(canvas.scene?.grid.type) &&
+      ([CONST.GRID_TYPES.SQUARE, CONST.GRID_TYPES.GRIDLESS]).includes(canvas.scene?.grid.type) &&
       // Assume if token vision is disabled then the scene is not intended for play.
       canvas.scene?.tokenVision &&
       // The scene must be active, or a GM must be the only user logged in.
       canvas.scene.isInFocus &&
       // To be rendered to a player, the aura must emanate from an ally.
-      (game.user.isGM || this.token.actor?.alliance === "party") &&
+      (game.user!.isGM || this.token.actor?.alliance === "party") &&
       (this.token.controlled || this.token.hover || this.token.layer.highlightObjects || inEncounter())
     );
   }
@@ -77,8 +77,10 @@ export class AuraRenderers extends Map<string, AuraRenderer> {
     if (showBordersHighlights && (this.token.hover || this.token.layer.highlightObjects)) {
       const { highlightId } = this;
       const highlight =
-        canvas.interface.grid.highlightLayers[highlightId] ??
-        canvas.interface.grid.addHighlightLayer(highlightId);
+        //@ts-expect-error - fvtt-types unfinished types
+        canvas.interface!.grid.highlightLayers[highlightId] ??
+        //@ts-expect-error - fvtt-types unfinished types
+        canvas.interface!.grid.addHighlightLayer(highlightId);
       highlight.clear();
       for (const aura of this.values()) {
         aura.highlight();
@@ -113,6 +115,7 @@ export class AuraRenderers extends Map<string, AuraRenderer> {
   }
 
   clearHighlights(): void {
-    canvas.interface.grid.destroyHighlightLayer(this.highlightId);
+    //@ts-expect-error - fvtt-types unfinished types
+    canvas.interface!.grid.destroyHighlightLayer(this.highlightId);
   }
 }

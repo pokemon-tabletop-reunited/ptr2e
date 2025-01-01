@@ -1,6 +1,5 @@
 import type { CombatantPTR2e } from "@combat";
 import { CombatantSystemPTR2e } from "@combat";
-import type { DeepPartial } from "fvtt-types/utils";
 import type { CombatantSystemSchema } from "../system.ts";
 
 class RoundCombatantSystem extends CombatantSystemPTR2e {

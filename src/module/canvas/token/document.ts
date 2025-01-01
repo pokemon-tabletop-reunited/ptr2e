@@ -1,4 +1,3 @@
-import type { TokenFlagsPTR2e } from "@module/canvas/token/data.ts";
 import type { CombatantPTR2e } from "../../combat/combatant/document.ts";
 // TODO: Fix circular dependency when imported from @combat
 import CharacterCombatantSystem from "../../combat/combatant/models/character.ts";
@@ -23,7 +22,7 @@ class TokenDocumentPTR2e extends TokenDocument {
   /** Bounds used for mechanics, such as flanking and drawing auras */
   get mechanicalBounds(): PIXI.Rectangle {
     const bounds = this.bounds;
-    if (this.width !== undefined && this.width < 1 && canvas?.grid) {
+    if (this.width !== undefined && (this.width ?? 1) < 1 && canvas?.grid) {
       const position = canvas.grid.getTopLeftPoint({
         x: bounds.x + bounds.width / 2,
         y: bounds.y + bounds.height / 2,
@@ -49,7 +48,7 @@ class TokenDocumentPTR2e extends TokenDocument {
   }
 
   get playersCanSeeName(): boolean {
-    const anyoneCanSee: TokenDisplayMode[] = [CONST.TOKEN_DISPLAY_MODES.ALWAYS, CONST.TOKEN_DISPLAY_MODES.HOVER];
+    const anyoneCanSee: CONST.TOKEN_DISPLAY_MODES[] = [CONST.TOKEN_DISPLAY_MODES.ALWAYS, CONST.TOKEN_DISPLAY_MODES.HOVER];
     const nameDisplayMode = this.displayName;
     return anyoneCanSee.includes(nameDisplayMode) || this.actor?.alliance === "party";
   }
@@ -173,8 +172,6 @@ class TokenDocumentPTR2e extends TokenDocument {
 }
 
 interface TokenDocumentPTR2e extends TokenDocument {
-  flags: TokenFlagsPTR2e;
-
   initialized: boolean;
   auras: Map<string, TokenAura>;
 

@@ -4,8 +4,8 @@ import type { TraitsSchema } from "@module/data/mixins/has-traits.ts";
 import type { DescriptionSchema } from "@module/data/mixins/has-description.ts";
 import type { SlugSchema } from "@module/data/mixins/has-slug.ts";
 import type { ContainerSchema } from "@module/data/mixins/has-container.ts";
-import type { GearSchema } from "@module/data/mixins/has-gear-data.ts";
 import type { ItemPTR2e } from "@item/document.ts";
+import type { GearDataSchema } from "@module/data/mixins/has-gear-data.ts";
 
 const CONSUMABLE_TYPES = {
   ammo: "PTR2E.FIELDS.consumable.type.ammo",
@@ -32,7 +32,7 @@ const consumableSchema = {
   }),
 }
 
-export type ConsumableSchema = typeof consumableSchema & MigrationSchema & TraitsSchema & DescriptionSchema & SlugSchema & ContainerSchema & GearSchema;
+export type ConsumableSchema = typeof consumableSchema & MigrationSchema & TraitsSchema & DescriptionSchema & SlugSchema & ContainerSchema & GearDataSchema;
 
 /**
  * @category Item Data Models
@@ -45,7 +45,7 @@ export default abstract class ConsumableSystem extends HasEmbed(HasMigrations(Ha
 
   static override defineSchema(): ConsumableSchema {
     return {
-      ...super.defineSchema() as MigrationSchema & TraitsSchema & DescriptionSchema & SlugSchema & ContainerSchema & GearSchema,
+      ...super.defineSchema() as MigrationSchema & TraitsSchema & DescriptionSchema & SlugSchema & ContainerSchema & GearDataSchema,
       ...consumableSchema,
     };
   }

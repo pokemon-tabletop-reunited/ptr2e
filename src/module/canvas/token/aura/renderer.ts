@@ -23,7 +23,7 @@ class AuraRenderer extends PIXI.Graphics implements TokenAuraData {
     this.appearance = params.appearance;
     this.radius = params.radius;
     this.radiusPixels =
-      0.5 * this.token.mechanicalBounds.width + (this.radius / canvas.dimensions.distance) * canvas.grid.size;
+      0.5 * this.token.mechanicalBounds.width + (this.radius / canvas.dimensions!.distance) * canvas.grid!.size;
     this.addChild(this.border);
   }
 
@@ -44,7 +44,8 @@ class AuraRenderer extends PIXI.Graphics implements TokenAuraData {
 
   /** ID of `GridHighlight` container for this aura's token */
   get highlightLayer(): GridHighlight | null {
-    return canvas.interface.grid?.getHighlightLayer(this.token.highlightId) ?? null;
+    //@ts-expect-error - fvtt-types unfinished types
+    return canvas.interface!.grid?.getHighlightLayer(this.token.highlightId) ?? null;
   }
 
   /** The squares covered by this aura */
@@ -109,7 +110,7 @@ class AuraRenderer extends PIXI.Graphics implements TokenAuraData {
         maybeTexture.destroy();
         const videoTexture = await game.video.cloneTexture(globalVideo);
         const video = game.video.getVideoSource(videoTexture) ?? globalVideo;
-        video.playbackRate = data.playbackRate;
+        video.playbackRate = data.playbackRate!;
         const offset = data.loop ? Math.random() * video.duration : 0;
         game.video.play(video, { volume: 0, offset, loop: data.loop });
         return videoTexture;
@@ -130,7 +131,8 @@ class AuraRenderer extends PIXI.Graphics implements TokenAuraData {
       .endFill();
     this.textureContainer.position.set(bounds.x + radiusPixels, bounds.y + radiusPixels);
 
-    canvas.interface.grid.addChild(this.textureContainer);
+    //@ts-expect-error - fvtt-types unfinished types
+    canvas.interface!.grid.addChild(this.textureContainer);
   }
 
   /** Highlight the affected grid squares of this aura and indicate the radius */
@@ -141,7 +143,8 @@ class AuraRenderer extends PIXI.Graphics implements TokenAuraData {
     this.#drawLabel();
 
     // Clear the existing highlight layer
-    canvas.interface.grid.clearHighlightLayer(this.highlightId);
+    //@ts-expect-error - fvtt-types unfinished types
+    canvas.interface!.grid.clearHighlightLayer(this.highlightId);
 
     // For now, only highlight if there is an active combat
     const inEncounter = this.token.combatant?.parent?.started;
@@ -149,9 +152,10 @@ class AuraRenderer extends PIXI.Graphics implements TokenAuraData {
       const { highlightLayer } = this;
       if (!highlightLayer) return;
 
-      if ( canvas.grid.type === CONST.GRID_TYPES.GRIDLESS ) {
+      if ( canvas.grid!.type === CONST.GRID_TYPES.GRIDLESS ) {
         const shape = getGridHighlightShape(this.token.center, this.shape);
-        canvas.interface.grid.highlightPosition(this.highlightId, {border: this.appearance.border?.color, color: this.appearance.highlight?.color, shape});
+        //@ts-expect-error - fvtt-types unfinished types
+        canvas.interface!.grid.highlightPosition(this.highlightId, {border: this.appearance.border?.color, color: this.appearance.highlight?.color, shape});
       }
       else {
         for(const square of this.squares) {
@@ -164,7 +168,7 @@ class AuraRenderer extends PIXI.Graphics implements TokenAuraData {
   /** Add a numeric label and marker dot indicating the emanation radius */
   #drawLabel(): void {
     const style = CONFIG.canvasTextStyle.clone();
-    const gridSize = canvas.dimensions.size ?? 100;
+    const gridSize = canvas.dimensions?.size ?? 100;
     style.fontSize = Math.max(Math.round(gridSize * 0.36 * 12) / 12, 36);
     style.align = "center";
 
@@ -188,7 +192,8 @@ class AuraRenderer extends PIXI.Graphics implements TokenAuraData {
     super.destroy(options);
 
     if (this.textureContainer) {
-      canvas.interface.grid.removeChild(this.textureContainer);
+      //@ts-expect-error - fvtt-types unfinished types
+      canvas.interface!.grid.removeChild(this.textureContainer);
       if (!this.textureContainer.destroyed) this.textureContainer.destroy();
     }
   }

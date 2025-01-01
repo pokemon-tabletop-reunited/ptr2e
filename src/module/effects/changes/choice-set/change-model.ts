@@ -1,50 +1,94 @@
-import type { ChangeModelOptions, ChangeSchema } from "@data";
+import type { ChangeModelOptions } from "@data";
 import { ActionPTR2e, ChangeModel } from "@data";
 import type { PickableThing } from "@module/apps/pick-a-thing-prompt.ts";
 import { DataUnionField } from "@module/data/fields/data-union-field.ts";
 import { StrictArrayField, StrictBooleanField, StrictObjectField, StrictStringField } from "@module/data/fields/strict-primitive-fields.ts";
-import { Predicate } from "@system/predication/predication.ts";
+import { Predicate, type RawPredicate } from "@system/predication/predication.ts";
 import { PredicateField } from "@system/predication/schema-data-fields.ts";
 import { sluggify } from "@utils";
 import * as R from "remeda"
 import { UUIDUtils } from "src/util/uuid.ts";
 import { ChoiceSetPrompt } from "./prompt.ts";
-import type { ItemSystemPTR } from "@item";
 import { ItemPTR2e } from "@item";
-import type { ActorPTR2e } from "@actor";
+import type { ChangeModelSchema } from "../change.ts";
 
-export default class ChoiceSetChangeSystem extends ChangeModel {
+const choiceSetChangeSchema = {
+  choices: new DataUnionField(
+    [
+      new StrictArrayField(new StrictObjectField({ required: true, nullable: false, initial: undefined })),
+      new StrictStringField({ required: true, nullable: false, initial: undefined, }),
+    ],
+    { required: true, nullable: false, initial: [] }
+  ),
+  prompt: new foundry.data.fields.StringField({
+    required: false,
+    blank: false,
+    nullable: false,
+    initial: "PTR2E.ChoiceSetPrompt.Prompt",
+  }),
+  adjustName: new DataUnionField(
+    [
+      new StrictBooleanField({ required: true, nullable: false, initial: undefined }),
+      new StrictStringField({ required: true, nullable: false, initial: undefined }),
+    ],
+    { required: true, nullable: false, initial: true }
+  ),
+  allowedDrops: new foundry.data.fields.SchemaField<{
+    label: foundry.data.fields.StringField<{ required: true, blank: false, nullable: true, initial: null }>,
+    predicate: PredicateField,
+  }, 
+  { required: false, nullable: true, initial: undefined },
+  { label: string | null, predicate: RawPredicate},
+  { label: string | null, predicate: Predicate },
+  { label: string | null, predicate: RawPredicate }
+  >(
+    {
+      label: new foundry.data.fields.StringField({ required: true, blank: false, nullable: true, initial: null }),
+      predicate: new PredicateField(),
+    },
+    { required: false, nullable: true, initial: undefined }
+  ),
+  flag: new foundry.data.fields.StringField({ required: false, blank: false, nullable: false, initial: undefined }),
+  rollOption: new foundry.data.fields.StringField({ required: false, blank: false, nullable: true, initial: null }),
+  allowNoSelection: new StrictBooleanField({ required: false, nullable: false, initial: undefined }),
+  selection: new foundry.data.fields.AnyField({ required: false, nullable: true }),
+}
+
+export type ChoiceSetChangeSchema = typeof choiceSetChangeSchema & ChangeModelSchema;
+
+export default class ChoiceSetChangeSystem extends ChangeModel<ChoiceSetChangeSchema> {
   static override TYPE = "choice-set";
-
-  declare choices: UninflatedChoiceSet;
-  declare flag: string;
-  declare allowedDrops: AllowedDropsData | null;
-  declare allowNoSelection: boolean;
 
   /** Whether this choice set consists of items */
   containsItems = false;
 
-  /** The user's selection from among the options in `choices`, or otherwise `null` */
-  selection: string | number | object | null;
+  static override defineSchema(): ChoiceSetChangeSchema {
+    return {
+      ...super.defineSchema() as ChangeModelSchema,
+      ...choiceSetChangeSchema
+    }
+  }
 
-  constructor(source: ChoiceSetSource, options: ChangeModelOptions) {
+  constructor(source: foundry.abstract.DataModel.ConstructorData<ChoiceSetChangeSchema>, options: ChangeModelOptions) {
     super(source, options);
 
-    this.allowedDrops ??= null;
-    this.allowNoSelection ??= false;
-    this.rollOption ??= this.slug;
+    const self = this as ChoiceSetChangeSystem
 
-    this.flag = this.setDefaultFlag(this);
-    this.selection =
+    self.allowedDrops ??= null;
+    self.allowNoSelection ??= false;
+    self.rollOption ??= self.slug;
+
+    self.flag = self.setDefaultFlag(self);
+    self.selection =
       typeof source.selection === "string" || typeof source.selection === "number" || R.isPlainObject(source.selection)
         ? source.selection
         : null;
   }
 
-  override prepareData(): void {
-    if(this.item) {
+  override prepareData(this: ChoiceSetChangeSystem): void {
+    if (this.item) {
       this.item.flags.ptr2e.choiceSelections ??= {};
-      this.item.flags.ptr2e.choiceSelections[this.flag] = this.selection;
+      this.item.flags.ptr2e.choiceSelections[this.flag!] = this.selection;
     }
 
     if (this.selection !== null) {
@@ -63,7 +107,7 @@ export default class ChoiceSetChangeSystem extends ChangeModel {
    *  Since during `this.prepareData` we need to check if the change should be ignored, we need to override `this.test` to ignore the `ignore` property.
    */
   override test(options?: Iterable<string> | null, ignoreIgnore = false): boolean {
-    if(ignoreIgnore && this.ignored) {
+    if (ignoreIgnore && this.ignored) {
       this.ignored = false;
       const result = super.test(options);
       this.ignored = true;
@@ -72,56 +116,10 @@ export default class ChoiceSetChangeSystem extends ChangeModel {
     return super.test(options);
   }
 
-  static override defineSchema(): ChoiceSetSchema {
-    const fields = foundry.data.fields;
-    const schema = super.defineSchema();
-    return {
-      ...schema,
-      choices: new DataUnionField(
-        [
-          new StrictArrayField<
-            StrictObjectField<PickableThing>,
-            PickableThing[],
-            PickableThing[],
-            true,
-            false,
-            false
-          >(new StrictObjectField<PickableThing>({ required: true, nullable: false, initial: undefined })),
-          new StrictStringField<string, string, true, false, false>({ required: true, nullable: false, initial: undefined, }),
-        ],
-        { required: true, nullable: false, initial: [] }
-      ),
-      prompt: new fields.StringField({
-        required: false,
-        blank: false,
-        nullable: false,
-        initial: "PTR2E.ChoiceSetPrompt.Prompt",
-      }),
-      adjustName: new DataUnionField(
-        [
-          new StrictBooleanField({ required: true, nullable: false, initial: undefined }),
-          new StrictStringField<string, string, true, false, false>({ required: true, nullable: false, initial: undefined }),
-        ],
-        { required: true, nullable: false, initial: true }
-      ),
-      allowedDrops: new fields.SchemaField(
-        {
-          label: new fields.StringField({ required: true, blank: false, nullable: true, initial: null }),
-          predicate: new PredicateField(),
-        },
-        { required: false, nullable: true, initial: undefined }
-      ),
-      flag: new fields.StringField({ required: false, blank: false, nullable: false, initial: undefined }),
-      rollOption: new fields.StringField({ required: false, blank: false, nullable: true, initial: null }),
-      allowNoSelection: new StrictBooleanField({ required: false, nullable: false, initial: undefined }),
-      selection: new fields.AnyField({ required: false, nullable: true }),
-    }
-  }
-
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   override apply(): void { }
 
-  override async preCreate({ changeSource, effectSource }: ChangeModel.PreCreateParams<ChoiceSetSource>): Promise<void> {
+  override async preCreate({ changeSource, effectSource }: ChangeModel.PreCreateParams<ChoiceSetChangeSchema>): Promise<void> {
     const rollOptions = new Set([this.actor?.getRollOptions() ?? [], this.item?.getRollOptions() ?? []].flat());
     const predicate = this.resolveInjectedProperties(this.predicate);
     if (!predicate.test(rollOptions)) return;
@@ -131,8 +129,8 @@ export default class ChoiceSetChangeSystem extends ChangeModel {
     const inflatedChoices = await this.inflateChoices(rollOptions);
 
     const selection = this.getPreselection() ?? (await new ChoiceSetPrompt({
-      prompt: this.prompt,
-      item: this.item as Maybe<ItemPTR2e<ItemSystemPTR, ActorPTR2e>>,
+      prompt: this.prompt!,
+      item: this.item as Maybe<ItemPTR2e>,
       title: this.label,
       choices: inflatedChoices,
       containsItems: this.containsItems,
@@ -140,14 +138,14 @@ export default class ChoiceSetChangeSystem extends ChangeModel {
       allowNoSelection: this.allowNoSelection,
     }).resolveSelection());
 
-    if (!selection) { changeSource.ignored = true; return; }
+    if (!selection) { changeSource!.ignored = true; return; }
 
-    changeSource.selection = selection.value;
+    changeSource!.selection = selection.value;
 
-    if(this.adjustName) {
+    if (this.adjustName) {
       const effectName = effectSource.name;
       const label = game.i18n.localize(selection.label);
-      if(this.adjustName === true) {
+      if (this.adjustName === true) {
         const newName = `${effectName} (${label})`;
         // Deduplicate if parenthetical is already present
         const pattern = ((): RegExp => {
@@ -158,16 +156,16 @@ export default class ChoiceSetChangeSystem extends ChangeModel {
       }
       else {
         effectSource.name = game.i18n.format(this.adjustName, {
-          [this.flag]: game.i18n.localize(selection.label),
+          [this.flag!]: game.i18n.localize(selection.label),
         })
       }
     }
-    
-    this.effect.flags.ptr2e.choiceSelections ??= {};
-    this.effect.flags.ptr2e.choiceSelections[this.flag] = selection.value;
 
-    
-    this.setRollOption(changeSource.selection);
+    this.effect.flags.ptr2e.choiceSelections ??= {};
+    this.effect.flags.ptr2e.choiceSelections[this.flag!] = selection.value;
+
+
+    this.setRollOption(changeSource!.selection);
 
     for (const change of this.effect?.system?.changes ?? []) {
       // Now that a selection is made, other rule elements can be set back to unignored
@@ -184,6 +182,7 @@ export default class ChoiceSetChangeSystem extends ChangeModel {
    */
   async inflateChoices(rollOptions: Set<string>): Promise<PickableThing[]> {
     const choices: PickableThing<string | number | object>[] = Array.isArray(this.choices)
+      //@ts-expect-error - FIXME: Add typing to the Data Union Field
       ? this.choicesFromArray(this.choices, rollOptions) // Static choices from CM constructor data
       : typeof this.choices === "string"
         ? this.choicesFromPath(this.choices)
@@ -198,10 +197,10 @@ export default class ChoiceSetChangeSystem extends ChangeModel {
     if (choicesAreUUIDs) {
       const itemChoices = await UUIDUtils.fromUUIDs(choices.map(c => c.value));
       for (let i = 0; i < choices.length; i++) {
-        const item = itemChoices[i];
+        const item = itemChoices[i] as ItemPTR2e | ActionPTR2e | null;
         if (item instanceof ItemPTR2e || item instanceof ActionPTR2e) {
           choices[i].label = item.name;
-          choices[i].img = item.img;
+          choices[i].img = item.img!;
         }
       }
       this.containsItems = true;
@@ -248,10 +247,10 @@ export default class ChoiceSetChangeSystem extends ChangeModel {
     return [];
   }
 
-  private setDefaultFlag(source: ChoiceSetChangeSystem | ChoiceSetSource): string {
-    return (source.flag =
-      typeof source.flag === "string" && source.flag.length > 0
-        ? source.flag.replace(/[^-a-z0-9]/gi, "")
+  private setDefaultFlag(source: ChoiceSetChangeSystem | foundry.data.fields.SchemaField.AssignmentType<ChoiceSetChangeSchema>): string {
+    return (source!.flag =
+      typeof source!.flag === "string" && source!.flag.length > 0
+        ? source!.flag.replace(/[^-a-z0-9]/gi, "")
         : sluggify(this.slug ?? this.effect.slug ?? this.effect.name, { camel: "dromedary" })
     )
   }
@@ -268,73 +267,80 @@ export default class ChoiceSetChangeSystem extends ChangeModel {
 
   private getPreselection(): PickableThing | null {
     const choice = Array.isArray(this.choices) ? this.choices.find(c => R.isDeepEqual(c.value, this.selection)) : null;
-    return choice ?? null;
+    return (choice as unknown as PickableThing) ?? null;
   }
 }
 
-export default interface ChoiceSetChangeSystem extends ChangeModel, ModelPropsFromSchema<ChoiceSetSchema> {
-  _source: SourceFromSchema<ChoiceSetSchema>;
+export default interface ChoiceSetChangeSystem {
   value: string;
+
+  /** The user's selection from among the options in `choices`, or otherwise `null` */
+  selection: string | number | object | null;
+
+  // choices: UninflatedChoiceSet;
+  // flag: string;
+  // allowedDrops: AllowedDropsData | null;
+  // allowNoSelection: boolean;
 }
 
-type ChoiceSetSource = SourceFromSchema<ChoiceSetSchema> & {
-  selection?: unknown;
-}
+// type ChoiceSetSource = SourceFromSchema<ChoiceSetSchema> & {
+//   selection?: unknown;
+// }
 
-interface ChoiceSetSchema extends ChangeSchema {
-  /**
-   * The options from which the user can choose. If a string is provided, it is treated as a reference to a record in
-   * `CONFIG.PTR2E`, and the `PromptChoice` array is composed from its entries.
-   */
-  choices: DataUnionField<
-    | StrictArrayField<StrictObjectField<PickableThing>, PickableThing[], PickableThing[], true, false, false>
-    | StrictStringField<string, string, true, false, false>,
-    true,
-    false,
-    true
-  >;
-  /** The prompt to present in the ChoiceSet application window */
-  prompt: foundry.data.fields.StringField<string, string, false, false, true>;
-  /** Whether the parent item's name should be adjusted to reflect the choice made */
-  adjustName: DataUnionField<
-    StrictBooleanField<true, false, false> | StrictStringField<string, string, true, false, false>,
-    true,
-    false,
-    true
-  >;
-  /**
-   * The name of the flag that will contain the user's selection. If not set, it defaults to the camel-casing of the
-   * parent item's slug, falling back to name.
-   */
-  flag: foundry.data.fields.StringField<string, string, false, false, false>;
-  /** An optional roll option to be set from the selection */
-  rollOption: foundry.data.fields.StringField<string, string, false, true, true>;
-  /** A predicate indicating valid dropped item selections */
-  allowedDrops: foundry.data.fields.SchemaField<
-    AllowedDropsSchema,
-    SourceFromSchema<AllowedDropsSchema>,
-    ModelPropsFromSchema<AllowedDropsSchema>,
-    false,
-    true,
-    false
-  >;
-  /** Allow the user to make no selection without suppressing all other rule elements on the parent item */
-  allowNoSelection: StrictBooleanField<false, false, false>;
-  selection: foundry.data.fields.AnyField;
-};
+// interface ChoiceSetSchema extends ChangeSchema {
+//   /**
+//    * The options from which the user can choose. If a string is provided, it is treated as a reference to a record in
+//    * `CONFIG.PTR2E`, and the `PromptChoice` array is composed from its entries.
+//    */
+//   choices: DataUnionField<
+//     | StrictArrayField<StrictObjectField<PickableThing>, PickableThing[], PickableThing[], true, false, false>
+//     | StrictStringField<string, string, true, false, false>,
+//     true,
+//     false,
+//     true
+//   >;
+//   /** The prompt to present in the ChoiceSet application window */
+//   prompt: foundry.data.fields.StringField<string, string, false, false, true>;
+//   /** Whether the parent item's name should be adjusted to reflect the choice made */
+//   adjustName: DataUnionField<
+//     StrictBooleanField<true, false, false> | StrictStringField<string, string, true, false, false>,
+//     true,
+//     false,
+//     true
+//   >;
+//   /**
+//    * The name of the flag that will contain the user's selection. If not set, it defaults to the camel-casing of the
+//    * parent item's slug, falling back to name.
+//    */
+//   flag: foundry.data.fields.StringField<string, string, false, false, false>;
+//   /** An optional roll option to be set from the selection */
+//   rollOption: foundry.data.fields.StringField<string, string, false, true, true>;
+//   /** A predicate indicating valid dropped item selections */
+//   allowedDrops: foundry.data.fields.SchemaField<
+//     AllowedDropsSchema,
+//     SourceFromSchema<AllowedDropsSchema>,
+//     ModelPropsFromSchema<AllowedDropsSchema>,
+//     false,
+//     true,
+//     false
+//   >;
+//   /** Allow the user to make no selection without suppressing all other rule elements on the parent item */
+//   allowNoSelection: StrictBooleanField<false, false, false>;
+//   selection: foundry.data.fields.AnyField;
+// };
 
-interface AllowedDropsSchema extends foundry.data.fields.DataSchema {
-  label: foundry.data.fields.StringField<string, string, true, true, true>;
-  predicate: PredicateField;
-}
+// interface AllowedDropsSchema extends foundry.data.fields.DataSchema {
+//   label: foundry.data.fields.StringField<string, string, true, true, true>;
+//   predicate: PredicateField;
+// }
 
-type AllowedDropsData = ModelPropsFromSchema<AllowedDropsSchema>;
+// type AllowedDropsData = ModelPropsFromSchema<AllowedDropsSchema>;
 
 type UninflatedChoiceSet = string | PickableThing[]
 
 export type {
-  AllowedDropsData,
-  ChoiceSetSchema,
-  ChoiceSetSource,
+  // AllowedDropsData,
+  // ChoiceSetSchema,
+  // ChoiceSetSource,
   UninflatedChoiceSet,
 };

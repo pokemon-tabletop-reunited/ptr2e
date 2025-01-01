@@ -36,5 +36,5 @@ export function ActionModelTypes(): foundry.data.fields.TypedSchemaField.Types {
     "exploration": ActionPTR2e,
     "downtime": ActionPTR2e,
     "camping": ActionPTR2e,
-  });
+  })
 }

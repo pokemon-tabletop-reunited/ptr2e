@@ -72,7 +72,7 @@ export default class PTR2eArtMaps extends Collection<SpeciesImageData> {
     }
 
     // Allow custom-defined user Art Settings from the world
-    const settingArt = game.settings.get<Record<string, SpeciesImageDataSource>>(
+    const settingArt = game.settings.get(
       "ptr2e",
       "artmap"
     );

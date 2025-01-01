@@ -4,14 +4,14 @@ import type { MigrationSchema } from "@module/data/mixins/has-migrations.ts";
 import type { TraitsSchema } from "@module/data/mixins/has-traits.ts";
 import type { DescriptionSchema } from "@module/data/mixins/has-description.ts";
 import type { ContainerSchema } from "@module/data/mixins/has-container.ts";
-import type { GearSchema } from "@module/data/mixins/has-gear-data.ts";
+import type { GearDataSchema } from "@module/data/mixins/has-gear-data.ts";
 import type { ItemPTR2e } from "@item/document.ts";
 
 const containerSchema = {
   collapsed: new foundry.data.fields.BooleanField({ required: true, initial: false, label: "PTR2E.FIELDS.collapsed.label", hint: "PTR2E.FIELDS.collapsed.hint" }),
 }
 
-export type ContainerSystemSchema = typeof containerSchema & SlugSchema & MigrationSchema & TraitsSchema & DescriptionSchema & ContainerSchema & GearSchema;
+export type ContainerSystemSchema = typeof containerSchema & SlugSchema & MigrationSchema & TraitsSchema & DescriptionSchema & ContainerSchema & GearDataSchema;
 
 /**
  * @category Item Data Models
@@ -24,7 +24,7 @@ export default abstract class ContainerSystem extends HasEmbed(HasMigrations(Has
 
   static override defineSchema(): ContainerSystemSchema {
     return {
-      ...super.defineSchema() as SlugSchema & MigrationSchema & TraitsSchema & DescriptionSchema & ContainerSchema & GearSchema,
+      ...super.defineSchema() as SlugSchema & MigrationSchema & TraitsSchema & DescriptionSchema & ContainerSchema & GearDataSchema,
       ...containerSchema,
     };
   }

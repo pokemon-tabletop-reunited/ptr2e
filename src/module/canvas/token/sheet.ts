@@ -1,8 +1,7 @@
 import { htmlQuery } from "@utils";
-import type { TokenDocumentPTR2e } from "./document.ts";
 import { ActorSizePTR2e } from "@actor/data/size.ts";
 
-export class TokenConfigPTR2e<TDocument extends TokenDocumentPTR2e> extends TokenConfig<TDocument> {
+export class TokenConfigPTR2e extends TokenConfig {
   static override get defaultOptions(): DocumentSheetOptions {
     return {
       ...super.defaultOptions,
@@ -72,30 +71,26 @@ export class TokenConfigPTR2e<TDocument extends TokenDocumentPTR2e> extends Toke
    */
   #reestablishPrototype(): void {
     if (this.isPrototype && this.actor) {
-      const realPrototype = this.actor.prototypeToken as unknown as TDocument;
+      const realPrototype = this.actor.prototypeToken;
       this.object = this.token = realPrototype;
       setTimeout(() => this.render(true), 100);
     }
   }
 
-  /** Readd scale property to form data if input is disabled: necessary for mirroring checkboxes to function */
-  protected override _getSubmitData(updateData: Record<string, unknown> | null = {}): Record<string, unknown> {
+  /** Re-add scale property to form data if input is disabled: necessary for mirroring checkboxes to function */
+  protected override _getSubmitData(updateData: Record<string, unknown> | null = {}){
     const changes = updateData ?? {};
-    if (this.form.querySelector<HTMLInputElement>("input[name=scale]")?.disabled) {
+    if (this.form!.querySelector<HTMLInputElement>("input[name=scale]")?.disabled) {
       changes["scale"] = Math.abs(this.token._source.texture.scaleX);
     }
     return super._getSubmitData(changes);
   }
 
-  protected override async _updateObject(event: Event, formData: Record<string, unknown>): Promise<void> {
-    if (formData["flags.ptr2e.linkToActorSize"] === true) {
+  protected override async _updateObject(event: Event, formData: TokenConfig.FormData) {
+    if (formData["flags.ptr2e.linkToActorSize" as keyof typeof formData] === true) {
       const size = this.actor?.size ?? new ActorSizePTR2e({ value: "medium" });
       formData["width"] = formData["height"] = Math.min(size.length, size.width);
     }
     return super._updateObject(event, formData);
   }
-}
-
-export interface TokenConfigPTR2e<TDocument extends TokenDocumentPTR2e> extends TokenConfig<TDocument> {
-
 }

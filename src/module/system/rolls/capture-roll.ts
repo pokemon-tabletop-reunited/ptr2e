@@ -55,7 +55,7 @@ class CaptureRoll extends CheckRoll {
 
     const dc = new Roll(
       this.shakeDcFormula,
-      { catchRate: catchRate.total },
+      { catchRate: catchRate.total }, //@ts-expect-error - FIXME: Figure out how to do this properly
       { catchRate }
     ).evaluateSync();
     options.shakeDC = dc;

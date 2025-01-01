@@ -174,7 +174,7 @@ class TokenPTR2e extends Token {
     super._onRelease(options);
 
     if (game.ready) {
-      game.ptr.tokenPanel.token = (game.user.character?.getActiveTokens().at(0) as this) ?? null;
+      game.ptr.tokenPanel.token = (game.user!.character?.getActiveTokens().at(0) as this) ?? null;
     }
   }
 }

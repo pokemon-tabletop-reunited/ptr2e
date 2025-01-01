@@ -155,7 +155,7 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel<Attack
     const fromRollData = (rollData: string | null) => {
       if (!rollData) return null;
       try {
-        return Roll.fromJSON(rollData) as Roll.Evaluated<AttackRoll>;
+        return Roll.fromJSON(rollData) as unknown as Roll.Evaluated<AttackRoll>;
       } catch (error: unknown) {
         Hooks.onError("AttackMessageSystem#prepareBaseData", error as Error, {
           log: "error",

@@ -4,7 +4,7 @@ import type { PerkManager } from "@module/apps/perk-manager/perk-manager.ts";
 import type { ArtMapCollection, ClockDatabase, SkillsCollection, TraitsCollection } from "@data";
 import type TooltipsPTR2e from "@module/tooltips/tooltips.ts";
 import type { PTRCONFIG } from "@scripts/config/index.ts";
-import type { ImageResolver, sluggify } from "@utils";
+import type { ImageResolver, sluggify, SpeciesImageDataSource } from "@utils";
 import type EnJSON from "static/lang/en.json";
 import type ClockPanel from "@module/apps/clocks/clock-panel.ts";
 import type TokenPanel from "@module/apps/token-panel.ts";
@@ -209,7 +209,7 @@ declare global {
     "ptr2e.player-folder-create-permission": boolean
     "ptr2e.traits": unknown[]
     "ptr2e.skills": unknown[]
-    "ptr2e.artMap": unknown
+    "ptr2e.artmap": Record<string, SpeciesImageDataSource>
     "ptr2e.worldSystemVersion": string
     "ptr2e.worldSchemaVersion": number
   }
@@ -236,10 +236,19 @@ declare global {
   type ImageFileExtension = keyof typeof CONST.IMAGE_FILE_EXTENSIONS;
   type VideoFileExtension = keyof typeof CONST.VIDEO_FILE_EXTENSIONS;
   type ActiveEffectChangeMode = (typeof CONST.ACTIVE_EFFECT_MODES)[keyof typeof CONST.ACTIVE_EFFECT_MODES];
-  type TokenDisplayMode = (typeof CONST.TOKEN_DISPLAY_MODES)[keyof typeof CONST.TOKEN_DISPLAY_MODES];
 
   type AudioFilePath = `${string}.${AudioFileExtension}`;
   type ImageFilePath = `${string}.${ImageFileExtension}`;
   type VideoFilePath = `${string}.${VideoFileExtension}`;
   type FilePath = AudioFilePath | ImageFilePath | VideoFilePath;
+
+  interface Point { x: number; y: number }
+
+  interface Module {
+    flags: Record<string, {
+        "ptr2e-species-art"?: string;
+        "ptr2e-species-art-priority"?: number;
+        [key: string]: unknown;
+      }>
+  }
 }
