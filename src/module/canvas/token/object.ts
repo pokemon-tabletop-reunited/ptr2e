@@ -1,4 +1,3 @@
-import type { DeepPartial } from "fvtt-types/utils";
 import type { SquareGridPTR2e } from "../grid.ts";
 import { AuraRenderers } from "./aura/map.ts";
 import * as R from "remeda";
@@ -136,7 +135,7 @@ class TokenPTR2e extends Token {
 
   /** Reset aura renders when token size changes. */
   override _onUpdate(
-    changed: foundry.data.fields.SchemaField.InnerAssignmentType<Token.Schema>,
+    changed: foundry.data.fields.SchemaField.AssignmentType<Token.Schema>,
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     options: foundry.abstract.Document.OnUpdateOptions<any>,
     userId: string

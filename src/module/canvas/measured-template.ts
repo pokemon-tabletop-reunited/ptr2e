@@ -1,15 +1,14 @@
 import type { TemplateLayerPTR2e } from "./layer/template.ts";
-import type { ScenePTR2e } from "./scene.ts";
 
-export class MeasuredTemplatePTR2e<TDocument extends MeasuredTemplateDocument<ScenePTR2e | null> = MeasuredTemplateDocument<ScenePTR2e | null>> extends MeasuredTemplate<TDocument> {
+export class MeasuredTemplatePTR2e extends MeasuredTemplate {
   override highlightGrid(): void {
     const isCircleOrCone = ["circle", "cone"].includes(this.document.t);
-    const hasSquareGrid = canvas.grid.type === CONST.GRID_TYPES.SQUARE;
+    const hasSquareGrid = canvas!.grid!.type === CONST.GRID_TYPES.SQUARE;
     if (!isCircleOrCone || !hasSquareGrid) {
       return super.highlightGrid();
     }
 
-    const grid = canvas.grid;
+    const grid = canvas!.grid;
     //@ts-expect-error - Foundry types are incomplete
     grid.clearHighlightLayer(this.highlightId);
 
@@ -28,5 +27,5 @@ export class MeasuredTemplatePTR2e<TDocument extends MeasuredTemplateDocument<Sc
 }
 
 export interface MeasuredTemplatePTR2e {
-  get layer(): TemplateLayerPTR2e<this>;
+  get layer(): TemplateLayerPTR2e;
 }

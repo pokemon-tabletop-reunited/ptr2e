@@ -40,7 +40,7 @@ export class SquareGridPTR2e extends foundry.grid.SquareGrid {
     const getBounds = (t: Token) => this.getOffsetRangeInclusive(t.bounds);
     const getElevation = (t: Token) =>
       Math.floor(
-        (t.document.elevation / canvas.dimensions.distance) * canvas.dimensions.size
+        (t.document.elevation / canvas!.dimensions!.distance) * canvas!.dimensions!.size
       ) / this.size;
     const getHeight = (b: number[]) => Math.max(b[2] - b[0], b[3] - b[1]);
     const getDistance = (c1: GridOffsetWithElevation, c2: GridOffsetWithElevation) => {

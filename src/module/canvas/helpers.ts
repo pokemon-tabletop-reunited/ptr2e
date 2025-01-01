@@ -7,7 +7,7 @@ let auraCheckLock = Promise.resolve();
 
 /** Check for auras containing newly-placed or moved tokens */
 const checkAuras = foundry.utils.debounce(async function (this: ScenePTR2e): Promise<void> {
-  if (!(canvas.ready && this.isInFocus && ([CONST.GRID_TYPES.SQUARE, CONST.GRID_TYPES.GRIDLESS] as GridType[]).includes(this.grid.type))) {
+  if (!(canvas!.ready && this.isInFocus && ([CONST.GRID_TYPES.SQUARE, CONST.GRID_TYPES.GRIDLESS]).includes(this.grid.type))) {
     return;
   }
 
@@ -20,7 +20,7 @@ const checkAuras = foundry.utils.debounce(async function (this: ScenePTR2e): Pro
 
   try {
     // Get all tokens in the scene, excluding additional tokens linked to a common actor
-    const tokens = this.tokens.reduce((list: TokenDocumentPTR2e<ScenePTR2e>[], token) => {
+    const tokens = this.tokens.reduce((list: TokenDocumentPTR2e[], token) => {
       if (token.isLinked && list.some((t) => t.actor === token.actor)) {
         return list;
       }
@@ -30,6 +30,7 @@ const checkAuras = foundry.utils.debounce(async function (this: ScenePTR2e): Pro
 
     // Wait for any token animation to finish
     for (const token of tokens) {
+      //@ts-expect-error - fvtt-types unfinished types
       await token.object?.animation;
     }
 
@@ -37,7 +38,7 @@ const checkAuras = foundry.utils.debounce(async function (this: ScenePTR2e): Pro
       await aura.notifyActors();
     }
 
-    const sceneActors = new Set(tokens.flatMap((t) => (t.actor?.primaryUpdater === game.user ? t.actor : [])));
+    const sceneActors = new Set(tokens.flatMap((t) => (t.actor?.primaryUpdater === game.user ? t.actor! : [])));
     for (const actor of sceneActors) {
       actor.checkAreaEffects();
     }
@@ -65,11 +66,12 @@ function measureDistanceCuboid(
     target?: TokenPTR2e | null;
   } = {},
 ): number {
-  if (canvas.grid.type !== CONST.GRID_TYPES.SQUARE) {
-    return canvas.grid.measurePath([r0, r1]).distance;
+  if (canvas!.grid!.type !== CONST.GRID_TYPES.SQUARE) {
+    //@ts-expect-error - fvtt-types unfinished types: Options is optional
+    return canvas!.grid!.measurePath([r0, r1]).distance;
   }
 
-  const gridWidth = canvas.grid.sizeX;
+  const gridWidth = canvas!.grid!.sizeX;
 
   const distance = {
     dx: 0,
@@ -111,8 +113,8 @@ function measureDistanceCuboid(
 
     const [selfDimensions, targetDimensions] = [token.actor.dimensions, target.actor.dimensions];
 
-    const gridSize = canvas.dimensions.size;
-    const gridDistance = canvas.dimensions.distance;
+    const gridSize = canvas!.dimensions!.size;
+    const gridDistance = canvas!.dimensions!.distance;
 
     const elevation0 = Math.floor((selfElevation / gridDistance) * gridSize);
     const height0 = Math.floor((selfDimensions.height / gridDistance) * gridSize);
@@ -163,9 +165,10 @@ function measureDistanceCuboid(
 * @param p0 The origin point
 * @param p1 The destination point
 */
-function measureDistance(p0: Point, p1: Point): number {
-  if (canvas.grid.type !== CONST.GRID_TYPES.SQUARE) {
-    return canvas.grid.measurePath([p0, p1]).distance;
+function measureDistance(p0: { x: number, y: number }, p1: { x: number, y: number }): number {
+  if (canvas!.grid!.type !== CONST.GRID_TYPES.SQUARE) {
+    //@ts-expect-error - fvtt-types unfinished types: Options is optional
+    return canvas!.grid!.measurePath([p0, p1]).distance;
   }
 
   return measureDistanceOnGrid(new Ray(p0, p1));
@@ -180,10 +183,10 @@ function measureDistanceOnGrid(
   segment: { dx: number; dy: number; dz?: number | null },
   { reach = null }: { reach?: number | null } = {},
 ): number {
-  if (!canvas.dimensions) return NaN;
+  if (!canvas!.dimensions) return NaN;
 
-  const gridSize = canvas.dimensions.size;
-  const gridDistance = canvas.dimensions.distance;
+  const gridSize = canvas!.dimensions.size;
+  const gridDistance = canvas!.dimensions.distance;
 
   const nx = Math.ceil(Math.abs(segment.dx / gridSize));
   const ny = Math.ceil(Math.abs(segment.dy / gridSize));
@@ -209,13 +212,13 @@ function measureDistanceOnGrid(
 }
 
 /** Get a grid square at an arbitrary point. */
-function squareAtPoint(point: Point): PIXI.Rectangle {
+function squareAtPoint(point: { x: number, y: number }): PIXI.Rectangle {
   const snapped =
-    canvas.grid.type === CONST.GRID_TYPES.SQUARE
-      ? canvas.grid.getTopLeftPoint(point)
-      : canvas.grid.getSnappedPoint(point, { mode: CONST.GRID_SNAPPING_MODES.CENTER });
+    canvas!.grid!.type === CONST.GRID_TYPES.SQUARE
+      ? canvas!.grid!.getTopLeftPoint(point)
+      : canvas!.grid!.getSnappedPoint(point, { mode: CONST.GRID_SNAPPING_MODES.CENTER });
 
-  return new PIXI.Rectangle(snapped.x, snapped.y, canvas.grid.sizeX, canvas.grid.sizeY);
+  return new PIXI.Rectangle(snapped.x, snapped.y, canvas!.grid!.sizeX, canvas!.grid!.sizeY);
 }
 
 export { measureDistance, measureDistanceCuboid, squareAtPoint, checkAuras };

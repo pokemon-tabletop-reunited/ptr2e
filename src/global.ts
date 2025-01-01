@@ -122,9 +122,6 @@ declare global {
   }
 
   interface AssumeHookRan {
-    init: never;
-    i18nready: never;
-    setup: never;
     ready: never;
   }
 

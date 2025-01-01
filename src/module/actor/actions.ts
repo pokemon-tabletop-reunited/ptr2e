@@ -1,7 +1,7 @@
 import type { ActionType, AttackPTR2e} from "@data";
 import { ActionPTR2e, PTRCONSTS } from "@data";
 import ActorPTR2e from "./base.ts";
-import type { ItemPTR2e, ItemSystemsWithActions } from "@item";
+import type { ItemPTR2e, ItemWithActions } from "@item";
 
 export class ActionsCollections extends Collection<ActionPTR2e> {
   parent: ActorPTR2e | ItemPTR2e;
@@ -38,6 +38,7 @@ export class ActionsCollections extends Collection<ActionPTR2e> {
     return this;
   }
 
+  //@ts-expect-error: fvtt-types issue
   override delete(key: string): boolean {
     const action = this.get(key);
     if (!action) return false;
@@ -49,6 +50,7 @@ export class ActionsCollections extends Collection<ActionPTR2e> {
     return super.delete(key);
   }
 
+  //@ts-expect-error: fvtt-types issue
   override clear(): void {
     super.clear();
     for (const key of Object.values(PTRCONSTS.ActionTypes)) {
@@ -59,13 +61,13 @@ export class ActionsCollections extends Collection<ActionPTR2e> {
   /**
    * Add all actions from an item to the collection
    */
-  addActionsFromItem(item: ItemPTR2e<ItemSystemsWithActions>) {
+  addActionsFromItem(item: ItemWithActions) {
     const actions = item.actions;
     for (const action of actions) {
       this.set(action.slug, action);
       if (this.parent instanceof ActorPTR2e) {
         if(!["attack", "generic"].includes(action.type)) continue;
-        if (action.variant && !action.free) continue;
+        if (action.variant && !(action as unknown as {free: boolean}).free) continue;
 
         this.parent.flags.ptr2e.disableActionOptions!.collection.set(action.slug, action);
       }
@@ -76,8 +78,8 @@ export class ActionsCollections extends Collection<ActionPTR2e> {
   /**
    * Get the item hosting a given action by its slug
    */
-  getItem(actionSlug: string): Maybe<ItemPTR2e<ItemSystemsWithActions>> {
-    return this.get(actionSlug)?.item as Maybe<ItemPTR2e<ItemSystemsWithActions>>;
+  getItem(actionSlug: string): Maybe<ItemWithActions> {
+    return this.get(actionSlug)?.item as Maybe<ItemWithActions>;
   }
 }
 
