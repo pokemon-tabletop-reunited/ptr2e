@@ -1,30 +1,35 @@
 import type { ActorPTR2e, DeferredEffectRoll, DeferredValueParams, EffectRoll } from "@actor";
-import type { ChangeSchema } from "@data";
 import { ChangeModel } from "@data";
 import { ItemPTR2e } from "@item";
 import { UUIDUtils } from "src/util/uuid.ts";
+import type { ChangeModelSchema } from "./change.ts";
 
-export default class EffectRollChangeSystem extends ChangeModel {
+const effectRollChangeSchema = {
+  chance: new foundry.data.fields.NumberField({ required: true, nullable: false, initial: 10, min: 1, max: 100 }),
+  affects: new foundry.data.fields.StringField<{ required: true, choices: Record<string, string>, initial: string}, "self" | "target" | "origin", "self" | "target" | "origin">({
+    required: true,
+    choices: ["self", "target", "origin"].reduce<Record<string, string>>((acc, affects) => ({ ...acc, [affects]: affects }), {}),
+    initial: "target",
+  })
+}
+
+export type EffectRollChangeSchema = typeof effectRollChangeSchema & ChangeModelSchema;
+
+export default class EffectRollChangeSystem extends ChangeModel<EffectRollChangeSchema> {
   static override TYPE = "roll-effect";
 
-  static override defineSchema(): EffectRollSchema {
-    const fields = foundry.data.fields;
-    const schema = super.defineSchema();
+  static override defineSchema(): EffectRollChangeSchema {
+    const schema = super.defineSchema() as ChangeModelSchema;
     schema.value.validate = this.#validateUuid;
     return {
       ...schema,
-      chance: new fields.NumberField({ required: true, initial: 10, min: 1, max: 100 }),
-      affects: new fields.StringField({
-        required: true,
-        choices: ["self", "target", "origin"].reduce<Record<string, string>>((acc, affects) => ({ ...acc, [affects]: affects }), {}),
-        initial: "target",
-      }),
+      ...effectRollChangeSchema
     }
   }
 
   static #validateUuid(
     value: unknown
-  ): void | foundry.data.validation.DataModelValidationFailure {
+  ): undefined | foundry.data.validation.DataModelValidationFailure {
     if (!UUIDUtils.isItemUUID(value)) {
       return new foundry.data.validation.DataModelValidationFailure({
         invalidValue: value,
@@ -41,6 +46,7 @@ export default class EffectRollChangeSystem extends ChangeModel {
         unresolved: false,
       });
     }
+    return undefined;
   }
 
   get selector() {
@@ -54,7 +60,7 @@ export default class EffectRollChangeSystem extends ChangeModel {
   override apply(actor: ActorPTR2e): void {
     if (!this.actor) return;
 
-    const {selector, isCrit} = (() => {
+    const { selector, isCrit } = (() => {
       const selector = this.resolveInjectedProperties(this.selector)
       const isCrit = selector.endsWith("-crit");
       return {
@@ -75,7 +81,7 @@ export default class EffectRollChangeSystem extends ChangeModel {
     return async (params: DeferredValueParams = {}): Promise<EffectRoll | null> => {
       if (!this.actor) return null;
       if (!this.test(params.test ?? this.actor.getRollOptions())) return null;
-      
+
       const uuid = this.resolveInjectedProperties(this.uuid);
       if (!UUIDUtils.isItemUUID(uuid)) {
         this.failValidation(`"${uuid}" does not look like a UUID`);
@@ -88,9 +94,9 @@ export default class EffectRollChangeSystem extends ChangeModel {
       }
 
       return {
-        effect: effect.uuid,
+        effect: effect.uuid as ItemUUID,
         chance: this.chance,
-        label: this.label,
+        label: this.label ?? "",
         critOnly: isCrit,
       };
     }
@@ -98,7 +104,7 @@ export default class EffectRollChangeSystem extends ChangeModel {
 
   protected async getItem(key: string): Promise<Maybe<ClientDocument>> {
     try {
-      return (await fromUuid(key))?.clone({}, {keepId: true}) ?? null;
+      return (await fromUuid(key))?.clone({}, { keepId: true }) ?? null;
     } catch (error) {
       console.error(error);
       return null;
@@ -106,12 +112,6 @@ export default class EffectRollChangeSystem extends ChangeModel {
   }
 }
 
-export default interface EffectRollChangeSystem extends ChangeModel, ModelPropsFromSchema<EffectRollSchema> {
-  _source: SourceFromSchema<EffectRollSchema>;
+export default interface EffectRollChangeSystem {
   value: string;
 }
-
-interface EffectRollSchema extends ChangeSchema {
-  chance: foundry.data.fields.NumberField<number, number, true, false, true>;
-  affects: foundry.data.fields.StringField<"self" | "target" | "origin", "self" | "target" | "origin", true, false, true>;
-};

@@ -2,14 +2,21 @@ import type { ActorPTR2e, DeferredValueParams } from "@actor";
 import { ChangeModel } from "@data";
 import { ModifierPTR2e } from "../modifiers.ts";
 
-export default class FlatModifierChangeSystem extends ChangeModel {
+import type { ChangeModelSchema } from "./change.ts";
+
+const flatModifierChangeSchema = {
+  hideIfDisabled: new foundry.data.fields.BooleanField(),
+}
+
+export type FlatModifierChangeSchema = typeof flatModifierChangeSchema & ChangeModelSchema;
+
+export default class FlatModifierChangeSystem extends ChangeModel<FlatModifierChangeSchema> {
   static override TYPE = "flat-modifier";
 
-  static override defineSchema() {
-    const fields = foundry.data.fields;
+  static override defineSchema(): FlatModifierChangeSchema {
     return {
-      ...super.defineSchema(),
-      hideIfDisabled: new fields.BooleanField(),
+      ...super.defineSchema() as ChangeModelSchema,
+      ...flatModifierChangeSchema,
     };
   }
 
@@ -89,8 +96,4 @@ export default class FlatModifierChangeSystem extends ChangeModel {
     const modifiers = (actor.synthetics.modifiers[selector] ??= []);
     modifiers.push(construct);
   }
-}
-
-export default interface FlatModifierChangeSystem {
-  hideIfDisabled: boolean;
 }

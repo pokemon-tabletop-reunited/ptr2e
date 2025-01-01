@@ -7,6 +7,8 @@ import type { ChangeModelOptions, ChangeSource, ResolveValueParams } from "./dat
 import * as R from "remeda";
 import ResolvableValueField from "@module/data/fields/resolvable-value-field.ts";
 import { ChangeModelTypes } from "@data";
+import type { ActiveEffectSystem, EffectSourcePTR2e } from "@effects";
+import type { InexactPartial } from "fvtt-types/utils";
 
 const changeModelSchema = {
   // Default Foundry Fields
@@ -57,7 +59,7 @@ export type TypeField = foundry.data.fields.StringField<{
 
 export type ChangeModelSchema = typeof changeModelSchema & {type: TypeField};
 
-class ChangeModel extends foundry.abstract.DataModel<ChangeModelSchema> {
+class ChangeModel<Schema extends ChangeModelSchema = ChangeModelSchema> extends foundry.abstract.DataModel<Schema, ActiveEffectSystem> {
   static TYPE = "";
 
   static get label() {
@@ -72,8 +74,7 @@ class ChangeModel extends foundry.abstract.DataModel<ChangeModelSchema> {
 
   protected suppressWarnings = false;
 
-  constructor(source: ChangeSource, options: ChangeModelOptions) {
-    // @ts-expect-error - this is valid
+  constructor(source: foundry.abstract.DataModel.ConstructorData<Schema>, options: ChangeModelOptions) {
     super(source, options);
 
     if (this.invalid) {
@@ -126,7 +127,7 @@ class ChangeModel extends foundry.abstract.DataModel<ChangeModelSchema> {
     return;
   }
 
-  get actor() {
+  get actor(): ActorPTR2e | null {
     return (this.effect.parent && this.effect.targetsActor()) ? this.effect.target : null;
   }
 
@@ -139,13 +140,13 @@ class ChangeModel extends foundry.abstract.DataModel<ChangeModelSchema> {
     return sluggify(this.getReducedLabel());
   }
 
-  protected getReducedLabel(label = this.label): string {
-    return (label === this.effect.name ? reduceItemName(label!) : label) ?? "";
+  protected getReducedLabel(label: Maybe<string> = this.label): string {
+    return (label === this.effect.name ? reduceItemName(label ?? "") : label) ?? "";
   }
 
   /** Include parent effect name & UUID in `DataModel` validation error messages. */
   override validate(options: {
-      changes?: foundry.data.fields.SchemaField.InnerAssignmentType<ChangeModelSchema>;
+      changes?: foundry.data.fields.SchemaField.InnerAssignmentType<Schema>;
       dropInvalidEmbedded: boolean;
     }): boolean {
     try {
@@ -405,6 +406,35 @@ class ChangeModel extends foundry.abstract.DataModel<ChangeModelSchema> {
   }
 }
 
+interface ChangeModel {
+  /**
+   * Run in Actor#prepareDerivedData which is similar to an init method and is the very first thing that is run after
+   * an actor.update() was called. Use this hook if you want to save or modify values on the actual data objects
+   * after actor changes. Those values should not be saved back to the actor unless we mess up.
+   *
+   * This callback is run for each rule in random order and is run very often, so watch out for performance.
+   */
+  beforePrepareData?(): void;
+
+  /** Run after all actor preparation callbacks have been run so you should see all final values here. */
+  afterPrepareData?(): void;
+
+  /**
+   * Runs before this rules element's parent effect is created. The effect is temporarilly constructed. A rule element can
+   * alter itself before its parent effect is stored on a document; it can also alter the effect source itself in the same
+   * manner.
+   */
+  preCreate?({
+    changeSource,
+    effectSource,
+    pendingItems,
+    context,
+  }: ChangeModel.PreCreateParams): Promise<void>;
+
+  /** Runs before the rule's parent effect's owning actor is updated */
+  preUpdateActor?(): Promise<{ create: Item.ConstructorData[]; delete: string[]; } | { createEffects: ActiveEffect.ConstructorData[]; deleteEffects: string[]; }>;
+}
+
 // interface ChangeModel<TSchema extends ChangeSchema = ChangeSchema>
 //   extends foundry.abstract.DataModel<ActiveEffectSystem, TSchema>,
 //   ModelPropsFromSchema<ChangeSchema> {
@@ -513,32 +543,32 @@ class ChangeModel extends foundry.abstract.DataModel<ChangeModelSchema> {
 // }
 
 // eslint-disable-next-line @typescript-eslint/no-namespace
-// namespace ChangeModel {
-//   export interface PreCreateParams<T extends ChangeSource = ChangeSource> {
-//     /** The source partial of the rule element's parent effect to be created */
-//     effectSource: EffectSourcePTR2e;
-//     /** The source of the change in `effectSource`'s `system.changes` array */
-//     changeSource: T;
-//     /** All effects pending creation in a `ActiveEffectPTR2e.createDocuments` call */
-//     pendingEffects: EffectSourcePTR2e[];
-//     /** All items pending creation in a `ActiveEffectPTR2e.createDocuments` call */
-//     pendingItems: ItemSourcePTR2e[];
-//     /** Items temporarily constructed from pending item source */
-//     tempItems: ItemPTR2e[];
-//     /** The context object from the `ItemPTR2e.createDocuments` call */
-//     context: DocumentModificationContext<ActorPTR2e | ItemPTR2e | null>;
-//     /** Whether this preCreate run is from a pre-update reevaluation */
-//     reevaluation?: boolean;
-//   }
+namespace ChangeModel {
+  export interface PreCreateParams<Schema extends ChangeModelSchema = ChangeModelSchema> {
+    /** The source partial of the rule element's parent effect to be created */
+    effectSource: ActiveEffect.ConstructorData;
+    /** The source of the change in `effectSource`'s `system.changes` array */
+    changeSource: foundry.data.fields.SchemaField.AssignmentType<Schema>;
+    /** All effects pending creation in a `ActiveEffectPTR2e.createDocuments` call */
+    pendingEffects: ActiveEffect.ConstructorData[];
+    /** All items pending creation in a `ActiveEffectPTR2e.createDocuments` call */
+    pendingItems: Item.ConstructorData[];
+    /** Items temporarily constructed from pending item source */
+    tempItems: ItemPTR2e[];
+    /** The context object from the `ItemPTR2e.createDocuments` call */
+    context: InexactPartial<Omit<foundry.abstract.Document.DatabaseOperationsFor<"Item", "create">, "ids">>;
+    /** Whether this preCreate run is from a pre-update reevaluation */
+    reevaluation?: boolean;
+  }
 
-//   export interface PreDeleteParams {
-//     /** All items pending deletion in a `ItemPTR2e.deleteDocuments` call */
-//     pendingItems: ItemPTR2e[];
-//     /** The context object from the `ItemPTR2e.deleteDocuments` call */
-//     context: DocumentModificationContext<ActorPTR2e | null> | DocumentModificationContext<ActorPTR2e | ItemPTR2e | null>;
-//   }
+  export interface PreDeleteParams {
+    /** All items pending deletion in a `ItemPTR2e.deleteDocuments` call */
+    pendingItems: ItemPTR2e[];
+    /** The context object from the `ItemPTR2e.deleteDocuments` call */
+    context: InexactPartial<Omit<foundry.abstract.Document.DatabaseOperationsFor<"Item", "delete">, "ids">>
+  }
 
-//   export interface AfterRollParams { }
-// }
+  export interface AfterRollParams { }
+}
 
 export default ChangeModel;

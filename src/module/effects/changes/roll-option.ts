@@ -1,13 +1,85 @@
 import type { ActorPTR2e, RollOptionToggle } from "@actor";
-import type { ChangeModelOptions, ChangeSchema, ChangeSource } from "@data";
+import type { ChangeModelOptions, ChangeSource } from "@data";
 import { ChangeModel } from "@data";
 import ResolvableValueField from "@module/data/fields/resolvable-value-field.ts";
 import { StrictStringField } from "@module/data/fields/strict-primitive-fields.ts";
-import { RollOptionDomains } from "@module/data/roll-option-manager.ts";
+import { RollOptionDomains, type RollOptions } from "@module/data/roll-option-manager.ts";
 import { PredicateField } from "@system/predication/schema-data-fields.ts";
 import { isObject, sluggify } from "@utils";
+import type { ChangeModelSchema } from "./change.ts";
+import type { Predicate, RawPredicate } from "@system/predication/predication.ts";
 
-export default class RollOptionChangeSystem extends ChangeModel {
+const rollOptionChangeSchema = {
+  domain: new foundry.data.fields.StringField<{ required: true, initial: string, choices: string[] }, keyof RollOptions, keyof RollOptions>({ required: true, initial: "all", choices: Object.values(RollOptionDomains) }),
+  suboptions: new foundry.data.fields.ArrayField<
+    foundry.data.fields.DataField.Any,
+    { required: false, nullable: false, initial: [], validate: ((v: unknown[]) => boolean), validationError: string },
+    {
+      label: string,
+      value: string,
+      predicate: RawPredicate,
+      selected: boolean,
+    },
+    {
+      label: string,
+      value: string,
+      predicate: Predicate,
+      selected: boolean,
+    },
+    {
+      label: string,
+      value: string,
+      predicate: RawPredicate,
+      selected: boolean,
+    }[],
+    {
+      label: string,
+      value: string,
+      predicate: Predicate,
+      selected: boolean,
+    }[]
+  >(
+    new foundry.data.fields.SchemaField({
+      label: new foundry.data.fields.StringField({
+        required: true,
+        nullable: false,
+        blank: false
+      }),
+      value: new StrictStringField({
+        required: true,
+        nullable: false,
+        blank: false,
+        initial: undefined,
+      }),
+      predicate: new PredicateField(),
+      selected: new foundry.data.fields.BooleanField(),
+    }),
+    {
+      required: false,
+      nullable: false,
+      initial: [],
+      validate: (v: unknown[]): boolean => Array.isArray(v) && v.length !== 1,
+      validationError: "must have zero or 2+ suboptions",
+    },
+  ),
+  state: new ResolvableValueField({
+    required: false,
+    initial: (d: Record<string, unknown>) => !d.toggleable,
+    validate: (v: unknown) => ["boolean", "string"].includes(typeof v),
+    validationError: "must be a boolean, string, or otherwise omitted",
+  }),
+  toggleable: new foundry.data.fields.BooleanField({ required: false, nullable: false, initial: undefined, label: "PTR2E.Effect.FIELDS.ChangeToggleable.label", hint: "PTR2E.Effect.FIELDS.ChangeToggleable.hint" }),
+  placement: new foundry.data.fields.StringField({ required: false, nullable: false, initial: undefined }),
+  disabledIf: new PredicateField({ required: false, initial: undefined, label: "PTR2E.Effect.FIELDS.ChangeDisabledIf.label", hint: "PTR2E.Effect.FIELDS.ChangeDisabledIf.hint" }),
+  disabledValue: new foundry.data.fields.BooleanField({ required: false, initial: undefined }),
+  alwaysActive: new foundry.data.fields.BooleanField({ required: false, initial: undefined, label: "PTR2E.Effect.FIELDS.ChangeAlwaysActive.label", hint: "PTR2E.Effect.FIELDS.ChangeAlwaysActive.hint" }),
+  count: new foundry.data.fields.BooleanField({ required: false, initial: undefined, label: "PTR2E.Effect.FIELDS.ChangeCount.label", hint: "PTR2E.Effect.FIELDS.ChangeCount.hint" }),
+  removeAfterRoll: new foundry.data.fields.BooleanField({ required: false, initial: undefined }),
+}
+
+export type RollOptionChangeSchema = typeof rollOptionChangeSchema & ChangeModelSchema;
+
+export default class RollOptionChangeSystem extends ChangeModel<RollOptionChangeSchema> {
   static override TYPE = "roll-option";
 
   constructor(source: ChangeSource, options: ChangeModelOptions) {
@@ -16,56 +88,18 @@ export default class RollOptionChangeSystem extends ChangeModel {
     this.priority ??= -10;
   }
 
-  static override defineSchema() {
-    const fields = foundry.data.fields;
+  static override defineSchema(): RollOptionChangeSchema {
     return {
       ...super.defineSchema(),
-      domain: new fields.StringField({ required: true, initial: "all", choices: Object.values(RollOptionDomains) }),
-      suboptions: new fields.ArrayField(
-        new fields.SchemaField({
-          label: new fields.StringField({
-            required: true,
-            nullable: false,
-            blank: false,
-            initial: undefined,
-          }),
-          value: new StrictStringField({
-            required: true,
-            nullable: false,
-            blank: false,
-            initial: undefined,
-          }),
-          predicate: new PredicateField(),
-          selected: new fields.BooleanField(),
-        }),
-        {
-          required: false,
-          nullable: false,
-          initial: [],
-          validate: (v): boolean => Array.isArray(v) && v.length !== 1,
-          validationError: "must have zero or 2+ suboptions",
-        },
-      ),
-      state: new ResolvableValueField<false, false, true>({
-        required: false,
-        initial: (d: Record<string, unknown>) => !d.toggleable,
-        validate: (v) => ["boolean", "string"].includes(typeof v),
-        validationError: "must be a boolean, string, or otherwise omitted",
-      }),
-      toggleable: new fields.BooleanField({ required: false, nullable: false, initial: undefined, label: "PTR2E.Effect.FIELDS.ChangeToggleable.label", hint: "PTR2E.Effect.FIELDS.ChangeToggleable.hint" }),
-      placement: new fields.StringField({ required: false, nullable: false, initial: undefined }),
-      disabledIf: new PredicateField({ required: false, initial: undefined, label: "PTR2E.Effect.FIELDS.ChangeDisabledIf.label", hint: "PTR2E.Effect.FIELDS.ChangeDisabledIf.hint" }),
-      disabledValue: new fields.BooleanField({ required: false, initial: undefined }),
-      alwaysActive: new fields.BooleanField({ required: false, initial: undefined, label: "PTR2E.Effect.FIELDS.ChangeAlwaysActive.label", hint: "PTR2E.Effect.FIELDS.ChangeAlwaysActive.hint" }),
-      count: new fields.BooleanField({ required: false, initial: undefined, label: "PTR2E.Effect.FIELDS.ChangeCount.label", hint: "PTR2E.Effect.FIELDS.ChangeCount.hint" }),
-      removeAfterRoll: new fields.BooleanField({ required: false, initial: undefined }),
+      ...rollOptionChangeSchema
     }
   }
 
-  static override validateJoint(source: SourceFromSchema<RollOptionSchema>): void {
+  static override validateJoint(s: foundry.data.fields.SchemaField.AssignmentType<RollOptionChangeSchema>): void {
+    const source = s!;
     super.validateJoint(source);
 
-    if (source.suboptions.length > 0 && !source.toggleable) {
+    if ((source.suboptions?.length ?? 0) > 0 && !source.toggleable) {
       throw Error("suboptions: must be omitted if not toggleable");
     }
 
@@ -81,7 +115,7 @@ export default class RollOptionChangeSystem extends ChangeModel {
       throw Error("disabledValue: may only be included if toggeable and there is a disabledIf predicate.");
     }
 
-    if (source.alwaysActive && (!source.toggleable || source.suboptions.length === 0)) {
+    if (source.alwaysActive && (!source.toggleable || source.suboptions?.length === 0)) {
       throw Error("alwaysActive: must be false unless toggleable and containing suboptions");
     }
 
@@ -102,7 +136,7 @@ export default class RollOptionChangeSystem extends ChangeModel {
   }
 
   private resolveOption({ appendSuboption = true } = {}): string {
-    const baseOption = (this.resolveInjectedProperties(this.option)+"")
+    const baseOption = (this.resolveInjectedProperties(this.option) + "")
       .replace(/[^-:\w]/g, "")
       .replace(/:+/g, ":")
       .replace(/-+/g, "-")
@@ -163,7 +197,7 @@ export default class RollOptionChangeSystem extends ChangeModel {
         enabled: true,
       };
 
-      if(actor.synthetics.toggles.some(t => t.domain == toggle.domain && t.option == toggle.option)) {
+      if (actor.synthetics.toggles.some(t => t.domain == toggle.domain && t.option == toggle.option)) {
         return;
       }
 
@@ -193,7 +227,7 @@ export default class RollOptionChangeSystem extends ChangeModel {
       actor.rollOptions.addOption(this.domain, fullOption);
       // Also set option without the suboption appended
       actor.rollOptions.addOption(this.domain, baseOption);
-    } 
+    }
     // else {
     //   actor.rollOptions.removeOption(this.domain, fullOption);
     //   // Also remove option without the suboption appended
@@ -239,16 +273,17 @@ export default class RollOptionChangeSystem extends ChangeModel {
     if (!this.toggleable) throw Error("Attempted to toggle non-toggleable roll option");
 
     // Directly update the rule element on the item
-    const changeSource = this.effect.toObject().system.changes as ChangeModel['_source'][];
+    const changeSource = this.effect.toObject().system.changes as foundry.data.fields.SchemaField.AssignmentType<ChangeModelSchema>[];
     const thisSource =
       typeof this.sourceIndex === "number" ? changeSource.at(this.sourceIndex) as Maybe<this['_source']> : null;
     if (!thisSource) return null;
+    //@ts-expect-error - FIXME: Not supposed to be a readonly field
     thisSource.state = newValue;
 
     if (
       newSuboption &&
       Array.isArray(thisSource.suboptions) &&
-      thisSource.suboptions.every((o): o is SourceFromSchema<SuboptionData> => isObject(o))
+      thisSource.suboptions.every((o): o is { label: string, value: string, predicate: Predicate, selected: boolean } => isObject(o))
     ) {
       for (const suboption of thisSource.suboptions) {
         suboption.selected = suboption.value === newSuboption;
@@ -263,50 +298,6 @@ export default class RollOptionChangeSystem extends ChangeModel {
   }
 }
 
-export default interface RollOptionChangeSystem extends ChangeModel, ModelPropsFromSchema<RollOptionSchema> {
-  _source: SourceFromSchema<RollOptionSchema>;
+export default interface RollOptionChangeSystem {
   value: string;
-}
-
-interface RollOptionSchema extends ChangeSchema {
-  domain: foundry.data.fields.StringField<keyof typeof RollOptionDomains, keyof typeof RollOptionDomains, true, false, true>;
-
-  /** Suboptions for a toggle, appended to the option string */
-  suboptions: foundry.data.fields.ArrayField<
-    foundry.data.fields.SchemaField<
-      SuboptionData,
-      SourceFromSchema<SuboptionData>,
-      ModelPropsFromSchema<SuboptionData>,
-      true,
-      false,
-      true
-    >
-  >;
-  /**
-  * The value of the roll option: either a boolean or a string resolves to a boolean If omitted, it defaults to
-  * `true` unless also `togglable`, in which case to `false`.
-  */
-  state: ResolvableValueField<false, false, true>;
-  /** Whether the roll option is toggleable: a checkbox will appear in interfaces (usually actor sheets) */
-  toggleable: foundry.data.fields.BooleanField<boolean, boolean, false, false, false>;
-  /** If toggleable, the location to be found in an interface */
-  placement: foundry.data.fields.StringField<string, string, false, false, false>;
-  /** An optional predicate to determine whether the toggle is interactable by the user */
-  disabledIf: PredicateField<false, false, false>;
-  /** The value of the roll option if its toggle is disabled: null indicates the pre-disabled value is preserved */
-  disabledValue: foundry.data.fields.BooleanField<boolean, boolean, false, false, false>;
-  /**
-  * Whether this (toggleable and suboptions-containing) roll option always has a `value` of `true`, allowing only
-  * suboptions to be changed
-  */
-  alwaysActive: foundry.data.fields.BooleanField<boolean, boolean, false, false, false>;
-  /** Whether this roll option is countable: it will have a numeric value counting how many rules added this option */
-  count: foundry.data.fields.BooleanField<boolean, boolean, false, false, false>;
-}
-
-interface SuboptionData extends foundry.data.fields.DataSchema {
-  label: foundry.data.fields.StringField<string, string, true, false, false>;
-  value: foundry.data.fields.StringField<string, string, true, false, false>;
-  predicate: PredicateField;
-  selected: foundry.data.fields.BooleanField<boolean, boolean, true, false, true>;
 }

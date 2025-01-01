@@ -1,15 +1,21 @@
 import type { ActorPTR2e, DeferredValueParams } from "@actor";
 import { ChangeModel } from "@data";
 import { ModifierPTR2e } from "../modifiers.ts";
+import type { ChangeModelSchema } from "./change.ts";
 
-export default class EphemeralModifierChangeSystem extends ChangeModel {
+const ephemeralModifierChangeSchema = {
+  hideIfDisabled: new foundry.data.fields.BooleanField(),
+}
+
+export type EphemeralModifierChangeSchema = typeof ephemeralModifierChangeSchema & ChangeModelSchema;
+
+export default class EphemeralModifierChangeSystem extends ChangeModel<EphemeralModifierChangeSchema> {
   static override TYPE = "ephemeral-modifier";
 
-  static override defineSchema() {
-    const fields = foundry.data.fields;
+  static override defineSchema(): EphemeralModifierChangeSchema {
     return {
-      ...super.defineSchema(),
-      hideIfDisabled: new fields.BooleanField(),
+      ...super.defineSchema() as ChangeModelSchema,
+      ...ephemeralModifierChangeSchema
     };
   }
 
@@ -89,8 +95,4 @@ export default class EphemeralModifierChangeSystem extends ChangeModel {
     const modifiers = (actor.synthetics.ephemeralModifiers[selector] ??= []);
     modifiers.push(construct);
   }
-}
-
-export default interface EphemeralModifierChangeSystem {
-  hideIfDisabled: boolean;
 }

@@ -1,5 +1,4 @@
 import type { ActorPTR2e } from "@actor";
-import type { ChangeSchema } from "@data";
 import { ChangeModel } from "@data";
 import { sluggify } from "@utils";
 
@@ -23,10 +22,6 @@ export default class RemoveTraitChangeSystem extends ChangeModel {
   }
 }
 
-export default interface RemoveTraitChangeSystem extends ChangeModel, ModelPropsFromSchema<RemoveTraitChangeSchema> {
-  _source: SourceFromSchema<RemoveTraitChangeSchema>;
+export default interface RemoveTraitChangeSystem {
   value: string;
 }
-
-interface RemoveTraitChangeSchema extends ChangeSchema {
-};

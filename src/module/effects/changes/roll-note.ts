@@ -1,22 +1,26 @@
 import type { ActorPTR2e } from "@actor";
-import type { ChangeSchema } from "@data";
 import { ChangeModel } from "@data";
-import type { UserVisibility } from "@scripts/ui/user-visibility.ts";
 import { RollNote } from "@system/notes.ts";
+import type { ChangeModelSchema } from "./change.ts";
 
-export default class RollNoteChangeSystem extends ChangeModel {
+const rollNoteChangeSchema = {
+  visibility: new foundry.data.fields.StringField({
+    required: true,
+    nullable: true,
+    choices: ["gm", "owner"],
+    initial: null,
+  }),
+}
+
+export type RollNoteSchema = typeof rollNoteChangeSchema & ChangeModelSchema;
+
+export default class RollNoteChangeSystem extends ChangeModel<RollNoteSchema> {
   static override TYPE = "roll-note";
 
-  static override defineSchema() {
-    const fields = foundry.data.fields;
+  static override defineSchema(): RollNoteSchema {
     return {
-      ...super.defineSchema(),
-      visibility: new fields.StringField({
-        required: true,
-        nullable: true,
-        choices: ["gm", "owner"],
-        initial: null,
-      }),
+      ...super.defineSchema() as ChangeModelSchema,
+      ...rollNoteChangeSchema
     }
   }
 
@@ -29,14 +33,14 @@ export default class RollNoteChangeSystem extends ChangeModel {
   }
 
   override apply(actor: ActorPTR2e): void {
-    if(this.ignored) return;
-    if(!this.actor) return;
+    if (this.ignored) return;
+    if (!this.actor) return;
 
     const selector = this.resolveInjectedProperties(this.selector);
-    if(!selector || selector === "null") return;
+    if (!selector || selector === "null") return;
 
-    const text = this.resolveInjectedProperties(String(this.resolveValue(this.text, "", {evaluate: false}))).trim();
-    if(!text) return this.failValidation("text field resolved empty");
+    const text = this.resolveInjectedProperties(String(this.resolveValue(this.text, "", { evaluate: false }))).trim();
+    if (!text) return this.failValidation("text field resolved empty");
 
     const note = new RollNote({
       selector,
@@ -49,14 +53,6 @@ export default class RollNoteChangeSystem extends ChangeModel {
   }
 }
 
-export default interface RollNoteChangeSystem extends ChangeModel, ModelPropsFromSchema<RollNoteSchema> {
-  _source: SourceFromSchema<RollNoteSchema>;
+export default interface RollNoteChangeSystem {
   value: string;
 }
-
-interface RollNoteSchema extends ChangeSchema {
-  /** An optional limitation of the notes visibility to GMs */
-  visibility: foundry.data.fields.StringField<UserVisibility, UserVisibility, true, true, true>;
-  /** Applicable degree-of-success outcomes for the note */
-  // outcome: foundry.data.fields.ArrayField<foundry.data.fields.StringField<DegreeOfSuccessString, DegreeOfSuccessString, true, false, false>>;
-};

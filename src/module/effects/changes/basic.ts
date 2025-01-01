@@ -1,11 +1,12 @@
 import type { ActorPTR2e } from "@actor";
 import { isObject } from "@utils";
 import { ChangeModel } from "@data";
+import type { ChangeModelSchema } from "./change.ts";
 
-export default class BasicChangeSystem extends ChangeModel {
+export default class BasicChangeSystem<Schema extends ChangeModelSchema = ChangeModelSchema> extends ChangeModel<Schema> {
   static override TYPE = "basic";
 
-  override apply(actor: ActorPTR2e, rollOptions?: string[] | Set<string> | null): void {
+  override apply(this: BasicChangeSystem, actor: ActorPTR2e, rollOptions?: string[] | Set<string> | null): void {
     // eslint-disable-next-line @typescript-eslint/no-this-alias
     const change = this;
 
@@ -29,7 +30,7 @@ export default class BasicChangeSystem extends ChangeModel {
       change: change,
     }
     const changeValue = change.resolveValue(change.value, 0, { resolvables });
-    const newValue = BasicChangeSystem.getNewValue(change.mode, current, changeValue, change.merge);
+    const newValue = BasicChangeSystem.getNewValue(change.mode as ActiveEffectChangeMode, current, changeValue, change.merge);
     if (newValue instanceof foundry.data.validation.DataModelValidationFailure) {
       return change.failValidation(newValue.asError().message);
     }
@@ -60,6 +61,7 @@ export default class BasicChangeSystem extends ChangeModel {
   #pathIsValid(path: string): boolean {
     if (!this.effect.targetsActor()) return false;
     const actor = this.effect.target;
+    if(!actor) return false;
     return (
       path.length > 0 &&
       !/\bnull\b/.test(path) &&
@@ -131,9 +133,9 @@ export default class BasicChangeSystem extends ChangeModel {
   /**
    * Apply an ActiveEffect change to a target Actor.
    */
-  static getNewValue(mode: ActiveEffectChangeMode, current: number, change: number, merge?: boolean): number;
+  static getNewValue(mode: ActiveEffectChangeMode, current: number, change: number, merge?: boolean): number | foundry.data.validation.DataModelValidationFailure;
   static getNewValue<TCurrent>(mode: ActiveEffectChangeMode, current: TCurrent, change: TCurrent extends (infer TValue)[] ? TValue : TCurrent, merge?: boolean): (TCurrent extends (infer TValue)[] ? TValue : TCurrent) | foundry.data.validation.DataModelValidationFailure;
-  static getNewValue(mode: ActiveEffectChangeMode, current: unknown, change: unknown, merge?: boolean): unknown {
+  static getNewValue(mode: ActiveEffectChangeMode, current: unknown, change: unknown, merge?: boolean): unknown | foundry.data.validation.DataModelValidationFailure {
     const modes = CONST.ACTIVE_EFFECT_MODES;
     switch (mode) {
       case modes.ADD:

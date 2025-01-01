@@ -1,17 +1,38 @@
 import type { ActorPTR2e } from "@actor";
-import type { ChangeModelOptions, ChangeSchema, ChangeSource } from "@data";
+import type { ChangeModelOptions, ChangeSource } from "@data";
 import { ChangeModel } from "@data";
 import { ItemAlteration } from "../alterations/item.ts";
-import type { ItemSourcePTR2e, ItemSystemPTR } from "@item";
 import { ItemPTR2e } from "@item";
 import { isObject, sluggify, tupleHasValue } from "@utils";
 import ActiveEffectPTR2e from "../document.ts";
 import type { EffectSourcePTR2e } from "@effects";
-import type { ItemGrantDeleteAction } from "@item/data/data.ts";
 import * as R from "remeda";
 import { UUIDUtils } from "src/util/uuid.ts";
+import type { ChangeModelSchema } from "./change.ts";
+import type { ItemGrantDeleteAction } from "@item/data/data.ts";
 
-export default class GrantItemChangeSystem extends ChangeModel {
+const ON_DELETE_ACTIONS = ["cascade", "detach", "restrict"] as const;
+
+const grantItemChangeSchema = {
+  reevaluateOnUpdate: new foundry.data.fields.BooleanField({ label: "PTR2E.Effect.FIELDS.ChangeReevaluateOnUpdate.label" }),
+  inMemoryOnly: new foundry.data.fields.BooleanField(),
+  allowDuplicate: new foundry.data.fields.BooleanField({ initial: true, label: "PTR2E.Effect.FIELDS.ChangeAllowDuplicate.label" }),
+  alterations: new foundry.data.fields.ArrayField(new foundry.data.fields.EmbeddedDataField(ItemAlteration)),
+  track: new foundry.data.fields.BooleanField(),
+  replaceSelf: new foundry.data.fields.BooleanField({ label: "PTR2E.Effect.FIELDS.ChangeReplaceSelf.label" }),
+  onDeleteActions: new foundry.data.fields.SchemaField({
+    grantee: new foundry.data.fields.StringField({ required: true, choices: ON_DELETE_ACTIONS, initial: "detach" }),
+    granter: new foundry.data.fields.StringField({ required: true, choices: ON_DELETE_ACTIONS, initial: "cascade" }),
+  }, {
+    required: true,
+    nullable: true,
+    initial: null
+  })
+}
+
+export type GrantItemChangeSchema = typeof grantItemChangeSchema & ChangeModelSchema;
+
+export default class GrantItemChangeSystem extends ChangeModel<GrantItemChangeSchema> {
   static override TYPE = "grant-item";
 
   get grantedId(): string | null {
@@ -27,10 +48,10 @@ export default class GrantItemChangeSystem extends ChangeModel {
    */
   preselectChoices: Record<string, string | number> = {};
 
-  /** Actions taken when either the parent or child item are deleted */
-  onDeleteActions: Partial<OnDeleteActions> | null = null;
+  // /** Actions taken when either the parent or child item are deleted */
+  // override onDeleteActions: Partial<OnDeleteActions> | null = null;
 
-  constructor(data: GrantItemSource, options: ChangeModelOptions) {
+  constructor(data: foundry.abstract.DataModel.ConstructorData<GrantItemChangeSchema>, options: ChangeModelOptions) {
     if (data.inMemoryOnly) data.priority ??= 99;
     super(data, options);
     if (this.invalid) return;
@@ -51,26 +72,16 @@ export default class GrantItemChangeSystem extends ChangeModel {
     }
   }
 
-  static override defineSchema(): GrantItemSchema {
-    const fields = foundry.data.fields;
+  static override defineSchema(): GrantItemChangeSchema {
     const schema = super.defineSchema();
     schema.value.validate = GrantItemChangeSystem.#validateUuid;
     return {
       ...schema,
-      reevaluateOnUpdate: new fields.BooleanField({ label: "PTR2E.Effect.FIELDS.ChangeReevaluateOnUpdate.label" }),
-      inMemoryOnly: new fields.BooleanField(),
-      allowDuplicate: new fields.BooleanField({ initial: true, label: "PTR2E.Effect.FIELDS.ChangeAllowDuplicate.label" }),
-      alterations: new fields.ArrayField(new fields.EmbeddedDataField(ItemAlteration)),
-      track: new fields.BooleanField(),
-      replaceSelf: new fields.BooleanField({ label: "PTR2E.Effect.FIELDS.ChangeReplaceSelf.label" }),
-      onDeleteActions: new fields.SchemaField({
-        grantee: new fields.StringField({ required:true, choices: GrantItemChangeSystem.ON_DELETE_ACTIONS, initial: "detach" }),
-        granter: new fields.StringField({ required:true, choices: GrantItemChangeSystem.ON_DELETE_ACTIONS, initial: "cascade" }),
-      })
+      ...grantItemChangeSchema
     };
   }
 
-  static #validateUuid(value: unknown): void | foundry.data.validation.DataModelValidationFailure {
+  static #validateUuid(value: unknown): undefined | foundry.data.validation.DataModelValidationFailure {
     if (/{(actor|item|change|effect)\|(.*?)}/g.test(value + '')) return;
     if (!UUIDUtils.isItemUUID(value)) {
       return new foundry.data.validation.DataModelValidationFailure({
@@ -86,9 +97,8 @@ export default class GrantItemChangeSystem extends ChangeModel {
         unresolved: false
       });
     }
+    return undefined;
   }
-
-  static ON_DELETE_ACTIONS = ["cascade", "detach", "restrict"] as const;
 
   override apply(): void {
     if (!this.invalid) this.#createInMemoryCondition();
@@ -105,18 +115,18 @@ export default class GrantItemChangeSystem extends ChangeModel {
     this.key = value;
   }
 
-  static override validateJoint(data: SourceFromSchema<GrantItemSchema>): void {
-    super.validateJoint(data);
+  static override validateJoint(data: foundry.data.fields.SchemaField.AssignmentType<GrantItemChangeSchema>): void {
+    super.validateJoint(data!);
 
-    if (data.track && !data.key) {
+    if (data!.track && !data!.key) {
       throw Error("must have explicit flag set if granted item is tracked");
     }
 
-    if (data.reevaluateOnUpdate && data.predicate.length === 0) {
+    if (data!.reevaluateOnUpdate && data!.predicate.length === 0) {
       throw Error("reevaluateOnUpdate: must have non-empty predicate");
     }
 
-    if (data.reevaluateOnUpdate && data.allowDuplicate) {
+    if (data!.reevaluateOnUpdate && data!.allowDuplicate) {
       throw Error("reevaluateOnUpdate: cannot allow duplicates");
     }
   }
@@ -179,7 +189,7 @@ export default class GrantItemChangeSystem extends ChangeModel {
     // An item may grant another copy of itself, but at least strip the copy of its grant CMs
     if (this.item?.flags?.core?.sourceId === (grantedSource.flags.core?.sourceId ?? "")) {
       if (this.type === "grant-effect") {
-        (grantedSource as ActiveEffectPTR2e['_source']).system.changes = (grantedSource as ActiveEffectPTR2e['_source']).system.changes.filter(c => c.type !== GrantItemChangeSystem.TYPE);
+        grantedSource.system.changes = grantedSource.system.changes.filter(c => c.type !== GrantItemChangeSystem.TYPE);
       }
       else {
         for (const ae of (grantedSource as ItemPTR2e['_source']).effects) {
@@ -212,13 +222,13 @@ export default class GrantItemChangeSystem extends ChangeModel {
 
     if (this.ignored) return;
 
-    if(this.type !== "grant-effect") args.tempItems.push(tempGranted as ItemPTR2e);
+    if (this.type !== "grant-effect") args.tempItems.push(tempGranted as ItemPTR2e);
 
     this._grantedId = grantedSource._id;
     context.keepId = true;
 
-    this.#setGrantFlags(effectSource, grantedSource as ItemSourcePTR2e);
-    if(this.type !== "grant-effect") this.#trackItem(tempGranted as ItemPTR2e);
+    this.#setGrantFlags(effectSource, grantedSource);
+    if (this.type !== "grant-effect") this.#trackItem(tempGranted as ItemPTR2e);
 
     // Add to pending items before running pre-creates to preserve creation order
     if (this.replaceSelf) {
@@ -227,32 +237,32 @@ export default class GrantItemChangeSystem extends ChangeModel {
     }
 
     if (this.type === "grant-effect") pendingEffects.push(grantedSource as EffectSourcePTR2e);
-    else pendingItems.push(grantedSource as ItemSourcePTR2e);
+    else pendingItems.push(grantedSource);
 
     // Run the granted item's preCreate callbacks unless this is a pre-actor-update reevaluation
     if (!args.reevaluation) {
-      if(this.type === "grant-effect") await this.#runGrantedEffectPreCreates(args, tempGranted as ActiveEffectPTR2e, context);
+      if (this.type === "grant-effect") await this.#runGrantedEffectPreCreates(args, tempGranted as ActiveEffectPTR2e, context);
       else await this.#runGrantedItemPreCreates(args, tempGranted as ItemPTR2e, context);
     }
   }
 
   /** Grant an item if this rule element permits it and the predicate passes */
-  override async preUpdateActor(): Promise<{ create: ItemSourcePTR2e[]; delete: string[];} | { createEffects: EffectSourcePTR2e[]; deleteEffects: string[];}> {
+  override async preUpdateActor(): Promise<{ create: Item.ConstructorData[]; delete: string[]; } | { createEffects: ActiveEffect.ConstructorData[]; deleteEffects: string[]; }> {
     const noAction = { create: [], delete: [] };
 
     if (this.ignored || !this.reevaluateOnUpdate || this.inMemoryOnly || !this.actor) return noAction;
 
     if (this.grantedId && (this.actor.items.has(this.grantedId) || this.actor.effects.has(this.grantedId))) {
       if (!this.test()) {
-        if(this.type === "grant-effect") return { createEffects: [], deleteEffects: [this.grantedId] };
+        if (this.type === "grant-effect") return { createEffects: [], deleteEffects: [this.grantedId] };
         return { create: [], delete: [this.grantedId] };
       }
       return noAction;
     }
 
     const effectSource = this.effect.toObject() as EffectSourcePTR2e;
-    const changeSource: ChangeSource = this.toObject();
-    const pendingItems: ItemSourcePTR2e[] = [];
+    const changeSource = this.toObject() as foundry.data.fields.SchemaField.AssignmentType<ChangeModelSchema>;
+    const pendingItems: Item.ConstructorData[] = [];
     const pendingEffects: EffectSourcePTR2e[] = [];
     const context = { parent: this.actor, render: false };
     await this.preCreate({ changeSource, pendingItems, effectSource, pendingEffects, tempItems: [], context, reevaluation: true });
@@ -273,7 +283,7 @@ export default class GrantItemChangeSystem extends ChangeModel {
       }
       return { create: pendingItems, delete: [] };
     }
-    if(pendingEffects.length > 0) {
+    if (pendingEffects.length > 0) {
       const updatedGrants = effectSource.flags?.ptr2e?.itemGrants ?? {};
       const updatedKey = Object.keys(updatedGrants).find(k => (updatedGrants[k as keyof typeof updatedGrants] as { id: string }).id === this.grantedId);
       if (updatedKey) {
@@ -296,8 +306,7 @@ export default class GrantItemChangeSystem extends ChangeModel {
   #getOnDeleteActions(data: GrantItemSource): Partial<OnDeleteActions> | null {
     const actions = data.onDeleteActions;
     if (isObject<OnDeleteActions>(actions)) {
-      const ACTIONS = GrantItemChangeSystem.ON_DELETE_ACTIONS;
-      return tupleHasValue(ACTIONS, actions.granter) || tupleHasValue(ACTIONS, actions.grantee)
+      return tupleHasValue(ON_DELETE_ACTIONS, actions.granter) || tupleHasValue(ACTIONS, actions.grantee)
         ? R.pick(
           actions,
           ([actions.granter ? "granter" : [], actions.grantee ? "grantee" : []] as const).flat(),
@@ -312,15 +321,15 @@ export default class GrantItemChangeSystem extends ChangeModel {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   // #applyChoicePreselections(_grantedItem: ItemPTR2e): void {
   //   return;
-    // const source = grantedItem._source;
-    // for (const [flag, selection] of Object.entries(this.preselectChoices ?? {})) {
-    //     for(const effect of grantedItem.effects) {
-    //         const change = (effect as ActiveEffectPTR2e).system.changes.find(c => c.type === "choice-set" && c.key === flag);
-    //         if (change) {
+  // const source = grantedItem._source;
+  // for (const [flag, selection] of Object.entries(this.preselectChoices ?? {})) {
+  //     for(const effect of grantedItem.effects) {
+  //         const change = (effect as ActiveEffectPTR2e).system.changes.find(c => c.type === "choice-set" && c.key === flag);
+  //         if (change) {
 
-    //         }
-    //     }
-    // }
+  //         }
+  //     }
+  // }
   // }
 
   /** Set flags on granting and grantee items to indicate relationship between the two */
@@ -360,7 +369,7 @@ export default class GrantItemChangeSystem extends ChangeModel {
   async #runGrantedItemPreCreates(
     originalArgs: Omit<ChangeModel.PreCreateParams, "changeSource">,
     grantedItem: ItemPTR2e,
-    context: DocumentModificationContext<ActorPTR2e | ItemPTR2e | null>,
+    context: InexactPartial<Omit<foundry.abstract.Document.DatabaseOperationsFor<"Item", "create">, "ids">>,
   ): Promise<void> {
     for (const effect of grantedItem.effects.contents) {
       for (const change of (effect as ActiveEffectPTR2e).system.changes) {
@@ -377,7 +386,7 @@ export default class GrantItemChangeSystem extends ChangeModel {
   async #runGrantedEffectPreCreates(
     originalArgs: Omit<ChangeModel.PreCreateParams, "changeSource">,
     effect: ActiveEffectPTR2e,
-    context: DocumentModificationContext<ActorPTR2e | ItemPTR2e | null>,
+    context: InexactPartial<Omit<foundry.abstract.Document.DatabaseOperationsFor<"ActiveEffect", "create">, "ids">>,
   ): Promise<void> {
     for (const change of effect.system.changes) {
       await change.preCreate?.({
@@ -409,36 +418,9 @@ export default class GrantItemChangeSystem extends ChangeModel {
   }
 }
 
-export default interface GrantItemChangeSystem
-  extends ChangeModel,
-  ModelPropsFromSchema<GrantItemSchema> {
+export default interface GrantItemChangeSystem {
   value: string;
 }
-
-type GrantItemSchema = ChangeSchema & {
-  // /** The UUID of the item to grant: must be a compendium or world item */
-  // uuid: StringField<string, string, true, false, false>;
-  // /** A flag for referencing the granted item ID in other rule elements */
-  // flag: StringField<string,string,true,true,true>//SlugField<true, true, true>;
-  /** Permit this grant to be applied during an actor update--if it isn't already granted and the predicate passes */
-  reevaluateOnUpdate: BooleanField<boolean, boolean, false, false, true>;
-  /**
-   * Instead of creating a new item in the actor's embedded collection, add a "virtual" one. Usable only with
-   * conditions
-   */
-  inMemoryOnly: BooleanField<boolean, boolean, false, false, true>;
-  /** Allow multiple of the same item (as determined by source ID) to be granted */
-  allowDuplicate: BooleanField<boolean, boolean, false, false, true>;
-  /** A list of alterations to make on the item before granting it */
-  alterations: ArrayField<EmbeddedDataField<ItemAlteration>>;
-  /**
-   * Track a granted physical item from roll options: the sluggified `flag` will serve as a prefix for item roll
-   * options, which are added to the `all` domain.
-   */
-  track: BooleanField<boolean, boolean, false, false, false>;
-  /** Replace the granting item with the granted item*/
-  replaceSelf: BooleanField<boolean, boolean, false, false, false>;
-};
 
 interface GrantItemSource extends ChangeSource {
   preselectChoices?: unknown;
@@ -454,10 +436,10 @@ interface OnDeleteActions {
   grantee: ItemGrantDeleteAction;
 }
 
-export async function processGrantDeletions(effect: ActiveEffectPTR2e<ActorPTR2e | ItemPTR2e<ItemSystemPTR, ActorPTR2e>>, item: Maybe<ItemPTR2e<ItemSystemPTR, ActorPTR2e>>, pendingItems: ItemPTR2e<ItemSystemPTR, ActorPTR2e>[], pendingEffects: ActiveEffectPTR2e[], ignoreRestricted: boolean): Promise<void> {
-  const actor = effect.targetsActor() ? effect.target : (effect.parent as ItemPTR2e<ItemSystemPTR, ActorPTR2e>).actor;
+export async function processGrantDeletions(effect: ActiveEffectPTR2e, item: Maybe<ItemPTR2e>, pendingItems: ItemPTR2e[], pendingEffects: ActiveEffectPTR2e[], ignoreRestricted: boolean): Promise<void> {
+  const actor = effect.targetsActor() ? effect.target : effect.parent.actor;
 
-  const granter = actor.effects.get((item ? item.flags.ptr2e.grantedBy?.id : effect.flags.ptr2e.grantedBy?.id) ?? "") as ActiveEffectPTR2e<ActorPTR2e | ItemPTR2e<ItemSystemPTR, ActorPTR2e>>;
+  const granter = actor.effects.get((item ? item.flags.ptr2e.grantedBy?.id : effect.flags.ptr2e.grantedBy?.id) ?? "") as ActiveEffectPTR2e;
   const parentGrant = Object.values(granter?.flags.ptr2e.itemGrants ?? {}).find(g => g.id === effect.id || g.id === item?.id);
   const grants = Object.values(effect.flags.ptr2e.itemGrants ?? {});
 
@@ -470,10 +452,9 @@ export async function processGrantDeletions(effect: ActiveEffectPTR2e<ActorPTR2e
   }
 
   for (const grant of grants) {
-    const grantee = (actor.items.get(grant.id) as Maybe<ItemPTR2e<ItemSystemPTR, ActorPTR2e>>) ?? (actor.effects.get(grant.id) as ActiveEffectPTR2e) ?? (item?.effects.get(grant.id) as ActiveEffectPTR2e);
+    const grantee = (actor.items.get(grant.id) as Maybe<ItemPTR2e>) ?? (actor.effects.get(grant.id) as ActiveEffectPTR2e) ?? (item?.effects.get(grant.id) as ActiveEffectPTR2e);
     if (grantee?.flags.ptr2e.grantedBy?.id !== effect.id) continue;
 
-    // @ts-expect-error - Checks will succeed.
     if (!ignoreRestricted && grantee.flags.ptr2e.grantedBy.onDelete === "restrict" && !(pendingItems.includes(grantee) || pendingEffects.includes(grantee))) {
       ui.notifications.warn(game.i18n.format("PTR2E.UI.Warnings.GrantItem.RemovalPrevented", { item: item?.name ?? effect.name, preventer: grantee.name }));
       if (item) pendingItems.splice(pendingItems.indexOf(item), 1);
@@ -489,10 +470,9 @@ export async function processGrantDeletions(effect: ActiveEffectPTR2e<ActorPTR2e
   }
 
   for (const grant of grants) {
-    const grantee = (actor.items.get(grant.id) as Maybe<ItemPTR2e<ItemSystemPTR, ActorPTR2e>>) ?? (actor.effects.get(grant.id) as ActiveEffectPTR2e) ?? (item?.effects.get(grant.id) as ActiveEffectPTR2e);
+    const grantee = (actor.items.get(grant.id) as Maybe<ItemPTR2e>) ?? (actor.effects.get(grant.id) as ActiveEffectPTR2e) ?? (item?.effects.get(grant.id) as ActiveEffectPTR2e);
     if (grantee?.flags.ptr2e.grantedBy?.id !== effect.id) continue;
 
-    // @ts-expect-error - Checks will succeed.
     if (grantee.flags.ptr2e.grantedBy.onDelete === "cascade" && !(pendingItems.includes(grantee) || pendingEffects.includes(grantee))) {
       if (grantee instanceof ItemPTR2e) {
         pendingItems.push(grantee);
@@ -500,7 +480,7 @@ export async function processGrantDeletions(effect: ActiveEffectPTR2e<ActorPTR2e
       }
       if (grantee instanceof ActiveEffectPTR2e) {
         pendingEffects.push(grantee);
-        await processGrantDeletions(grantee as ActiveEffectPTR2e<ActorPTR2e | ItemPTR2e<ItemSystemPTR, ActorPTR2e>>, item, pendingItems, pendingEffects, ignoreRestricted);
+        await processGrantDeletions(grantee as ActiveEffectPTR2e, item, pendingItems, pendingEffects, ignoreRestricted);
       }
     }
   }
@@ -512,11 +492,10 @@ export async function processGrantDeletions(effect: ActiveEffectPTR2e<ActorPTR2e
   }
 
   for (const grant of grants) {
-    const grantee = (actor.items.get(grant.id) as Maybe<ItemPTR2e<ItemSystemPTR, ActorPTR2e>>) ?? (actor.effects.get(grant.id) as ActiveEffectPTR2e) ?? (item?.effects.get(grant.id) as ActiveEffectPTR2e);
+    const grantee = (actor.items.get(grant.id) as Maybe<ItemPTR2e>) ?? (actor.effects.get(grant.id) as ActiveEffectPTR2e) ?? (item?.effects.get(grant.id) as ActiveEffectPTR2e);
     if (grantee?.flags.ptr2e.grantedBy?.id !== effect.id) continue;
 
     // Unset the grant flag and leave the granted item on the actor
-    // @ts-expect-error - Checks will succeed.
     if (grantee.flags.ptr2e.grantedBy.onDelete === "detach" && !(pendingItems.includes(grantee) || pendingEffects.includes(grantee))) {
       await grantee.update({ "flags.ptr2e.-=grantedBy": null }, { render: false });
     }

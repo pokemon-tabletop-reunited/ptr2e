@@ -4,6 +4,7 @@ import type AfflictionActiveEffectSystem from "@module/effects/data/affliction.t
 import type { DeferredPromise, DeferredValue, DeferredValueParams, ModifierAdjustment, ModifierPTR2e } from "@module/effects/modifiers.ts";
 import type { RollNote } from "@system/notes.ts";
 import type { Predicate } from "@system/predication/predication.ts";
+import type { DeepPartial } from "fvtt-types/utils";
 
 type ModifierSynthetics = Record<"all" | "damage", DeferredModifier[]> & Record<string, DeferredModifier[] | undefined>;
 type ModifierAdjustmentSynthetics = { all: ModifierAdjustment[]; damage: ModifierAdjustment[] } & Record<
@@ -15,7 +16,7 @@ export interface EffectRoll {
   chance: number;
   effect: ItemUUID;
   label: string;
-  roll?: Rolled<Roll>;
+  roll?: Roll.Evaluated<Roll>;
   success?: boolean;
   critOnly?: boolean;
   [key: string]: unknown;
@@ -25,7 +26,7 @@ export interface EffectRollSource {
   chance: number;
   effect: ItemUUID;
   label: string;
-  roll: RollJSON | null;
+  roll: string | null;
   success?: boolean;
   critOnly?: boolean;
   [key: string]: unknown;
@@ -52,7 +53,7 @@ interface ActorSynthetics {
   toggles: RollOptionToggle[];
   attackAdjustments: (() => AttackAdjustment)[];
   tokenTags: Map<TokenDocumentUUID, string>;
-  tokenOverrides: DeepPartial<Pick<TokenDocument['_source'], "light" | "name">> & {
+  tokenOverrides: DeepPartial<Pick<TokenDocument.ConstructorData, "light" | "name">> & {
     alpha?: number | null;
     texture?:
     | { src: ImageFilePath | VideoFilePath; tint?: Color | null }
@@ -233,7 +234,7 @@ interface AuraEffectData {
   events: ("enter" | "turn-start" | "turn-end")[];
   predicate: Predicate;
   removeOnExit: boolean;
-  includesSelf: boolean;
+  includesSelf: boolean | undefined;
   // alterations: ItemAlteration[];
 }
 
@@ -245,8 +246,8 @@ interface AuraAppearanceData {
     alpha: number;
     scale: number;
     translation: { x: number; y: number } | null;
-    loop: boolean;
-    playbackRate: number;
+    loop: boolean | undefined;
+    playbackRate: number | undefined;
   } | null;
 }
 

@@ -1,14 +1,12 @@
-import type { AnyObject } from "fvtt-types/utils";
-import type { StringField } from "node_modules/fvtt-types/src/foundry/common/data/fields.d.mts";
-
-const { fields } = foundry.data;
+import type { AnyObject, SimpleMerge } from "fvtt-types/utils";
+import fields = foundry.data.fields;
 
 /** A `StringField` that does not cast the source value */
 class StrictStringField<
-  Options extends StringField.Options = StringField.DefaultOptions,
-  AssignmentType = StringField.AssignmentType<Options>,
-  InitializedType = StringField.InitializedType<Options>,
-  PersistedType extends string | null | undefined = StringField.InitializedType<Options>
+  Options extends fields.StringField.Options = fields.StringField.DefaultOptions,
+  AssignmentType = fields.StringField.AssignmentType<Options>,
+  InitializedType = fields.StringField.InitializedType<Options>,
+  PersistedType extends string | null | undefined = fields.StringField.InitializedType<Options>
 > extends fields.StringField<Options, AssignmentType, InitializedType, PersistedType> {
   protected override _cast(value: AssignmentType): InitializedType {
     return value as unknown as InitializedType;
@@ -17,25 +15,25 @@ class StrictStringField<
 
 /** A `NumberField` that does not cast the source value */
 class StrictNumberField<
-  TSourceProp extends number,
-  TModelProp = TSourceProp,
-  TRequired extends boolean = false,
-  TNullable extends boolean = true,
-  THasInitial extends boolean = true,
-> extends fields.NumberField<TSourceProp, TModelProp, TRequired, TNullable, THasInitial> {
-  protected override _cast(value: unknown): unknown {
-    return value;
+  Options extends fields.NumberField.Options = fields.NumberField.DefaultOptions,
+  AssignmentType = fields.NumberField.AssignmentType<Options>,
+  InitializedType = fields.NumberField.InitializedType<Options>,
+  PersistedType extends number | null | undefined = fields.NumberField.InitializedType<Options>
+> extends fields.NumberField<Options, AssignmentType, InitializedType, PersistedType> {
+  protected override _cast(value: AssignmentType): InitializedType {
+    return value as unknown as InitializedType;
   }
 }
 
 /** A `BooleanField` that does not cast the source value */
 class StrictBooleanField<
-  TRequired extends boolean = false,
-  TNullable extends boolean = false,
-  THasInitial extends boolean = true,
-> extends fields.BooleanField<boolean, boolean, TRequired, TNullable, THasInitial> {
-  protected override _cast(value: unknown): unknown {
-    return value;
+  Options extends fields.BooleanField.Options = fields.BooleanField.DefaultOptions,
+  AssignmentType = fields.BooleanField.AssignmentType<Options>,
+  InitializedType = fields.BooleanField.InitializedType<Options>,
+  PersistedType extends boolean | null | undefined = fields.BooleanField.InitializedType<SimpleMerge<Options, fields.BooleanField.DefaultOptions>>
+> extends fields.BooleanField<Options, AssignmentType, InitializedType, PersistedType> {
+  protected override _cast(value: AssignmentType): InitializedType {
+    return value as unknown as InitializedType;
   }
 }
 
@@ -75,14 +73,13 @@ class StrictArrayField<
 }
 
 class StrictObjectField<
-  TSourceProp extends object,
-  TModelProp = TSourceProp,
-  TRequired extends boolean = true,
-  TNullable extends boolean = false,
-  THasInitial extends boolean = true,
-> extends fields.ObjectField<TSourceProp, TModelProp, TRequired, TNullable, THasInitial> {
-  protected override _cast(value: unknown): unknown {
-    return value;
+  Options extends fields.DataField.Options<AnyObject> = fields.ObjectField.DefaultOptions,
+  AssignmentType = fields.ObjectField.AssignmentType<Options>,
+  InitializedType = fields.ObjectField.InitializedType<Options>,
+  PersistedType extends AnyObject | null | undefined = fields.ObjectField.InitializedType<Options>
+> extends fields.ObjectField<Options, AssignmentType, InitializedType, PersistedType> {
+  protected override _cast(value: AssignmentType): InitializedType {
+    return value as unknown as InitializedType;
   }
 }
 
