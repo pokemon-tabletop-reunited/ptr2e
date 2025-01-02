@@ -2,9 +2,9 @@ import type { ActorPTR2e } from "@actor";
 import { ApplicationV2Expanded, type ApplicationConfigurationExpanded} from "./appv2-expanded.ts";
 import { ItemPTR2e } from "@item";
 import { ActionEditor } from "./action-editor.ts";
-import type { DeepPartial } from "fvtt-types/utils";
+import type { AnyObject, DeepPartial } from "fvtt-types/utils";
 
-export class KnownActionsApp extends foundry.applications.api.HandlebarsApplicationMixin(ApplicationV2Expanded) {
+export class KnownActionsApp extends foundry.applications.api.HandlebarsApplicationMixin(ApplicationV2Expanded)<AnyObject> {
   static override DEFAULT_OPTIONS = {
     tag: "aside",
     classes: ["sheet", "known-actions-sheet"],

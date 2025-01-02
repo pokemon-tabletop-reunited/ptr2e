@@ -9,7 +9,7 @@ class TeamSheetPTR2e extends foundry.applications.api.HandlebarsApplicationMixin
     folder: FolderPTR2e<ActorPTR2e<ActorSystemPTR2e, null>>;
 
     constructor(
-        options: Partial<foundry.applications.api.ApplicationConfiguration> & {folder?: FolderPTR2e<ActorPTR2e<ActorSystemPTR2e, null>>} = {}
+        options: DeepPartial<ApplicationConfigurationExpanded> & {folder?: FolderPTR2e<ActorPTR2e<ActorSystemPTR2e, null>>} = {}
     ) {
         if(!options.folder) throw new Error("No folder provided for party sheet");
         super(options);
@@ -29,7 +29,7 @@ class TeamSheetPTR2e extends foundry.applications.api.HandlebarsApplicationMixin
         { inplace: false }
     );
 
-    static override PARTS: Record<string, foundry.applications.api.HandlebarsTemplatePart> = {
+    static override PARTS: Record<string, foundry.applications.api.HandlebarsApplicationMixin.HandlebarsTemplatePart> = {
         tabs: {
             id: "tabs",
             template: "systems/ptr2e/templates/items/parts/item-tabs.hbs",
@@ -77,7 +77,7 @@ class TeamSheetPTR2e extends foundry.applications.api.HandlebarsApplicationMixin
         return `${this.folder.name} - Team Sheet`;
     }
 
-    override _initializeApplicationOptions(options: Partial<foundry.applications.api.ApplicationConfiguration> & {folder?: FolderPTR2e<ActorPTR2e<ActorSystemPTR2e, null>>}): foundry.applications.api.ApplicationConfiguration {
+    override _initializeApplicationOptions(options: DeepPartial<ApplicationConfigurationExpanded> & {folder?: FolderPTR2e<ActorPTR2e<ActorSystemPTR2e, null>>}): foundry.applications.api.ApplicationConfiguration {
         options = super._initializeApplicationOptions(options);
         options.uniqueId = `${this.constructor.name}-${options.folder?.uuid}`;
         return options as foundry.applications.api.ApplicationConfiguration;
@@ -107,7 +107,7 @@ class TeamSheetPTR2e extends foundry.applications.api.HandlebarsApplicationMixin
         }
     }
 
-    override _attachPartListeners(partId: string, htmlElement: HTMLElement, options: foundry.applications.api.HandlebarsRenderOptions): void {
+    override _attachPartListeners(partId: string, htmlElement: HTMLElement, options: foundry.applications.api.HandlebarsApplicationMixin.HandlebarsRenderOptions): void {
         super._attachPartListeners(partId, htmlElement, options);
         if (partId === "overview") {
             for(const member of htmlElement.querySelectorAll(".party-member")) {

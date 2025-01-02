@@ -156,7 +156,7 @@ export class EXPTracker extends foundry.applications.api.HandlebarsApplicationMi
     }
   }
 
-  static override PARTS: Record<string, foundry.applications.api.HandlebarsTemplatePart> = {
+  static override PARTS: Record<string, foundry.applications.api.HandlebarsApplicationMixin.HandlebarsTemplatePart> = {
     tabs: {
       id: "tabs",
       template: "systems/ptr2e/templates/items/parts/item-tabs.hbs",
@@ -206,7 +206,7 @@ export class EXPTracker extends foundry.applications.api.HandlebarsApplicationMi
   private ber: number;
   private characters: ActorPTR2e[] = [];
 
-  override _prepareContext(options?: foundry.applications.api.HandlebarsRenderOptions | undefined) {
+  override _prepareContext(options?: foundry.applications.api.HandlebarsApplicationMixin.HandlebarsRenderOptions | undefined) {
     const getBoxData = ((folder: Folder) => {
       const recursive = (subFolders: Folder[]): Folder[] => {
         return subFolders.flatMap(data => [data, ...recursive(data.getSubfolders())]);

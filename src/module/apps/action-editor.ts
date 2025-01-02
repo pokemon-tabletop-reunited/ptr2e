@@ -121,7 +121,7 @@ export class ActionEditor<
 
   #allTraits: { value: string; label: string, type?: Trait["type"] }[] | undefined;
 
-  static override PARTS: Record<string, foundry.applications.api.HandlebarsTemplatePart> = {
+  static override PARTS: Record<string, foundry.applications.api.HandlebarsApplicationMixin.HandlebarsTemplatePart> = {
     header: {
       id: "header",
       template: "systems/ptr2e/templates/apps/action-editor-header.hbs",
@@ -148,7 +148,7 @@ export class ActionEditor<
     return `${this.document.name}'s Action - ${this.action.name}`;
   }
 
-  constructor(document: TDocument, actionSlug: string, options: Partial<foundry.applications.api.ApplicationConfiguration> = {}) {
+  constructor(document: TDocument, actionSlug: string, options: DeepPartial<ApplicationConfigurationExpanded> = {}) {
     options.id = `action-editor-${document.uuid}-${actionSlug}`;
     super(options);
     this.document = document;
@@ -221,7 +221,7 @@ export class ActionEditor<
   override _attachPartListeners(
     partId: string,
     htmlElement: HTMLElement,
-    options: foundry.applications.api.HandlebarsRenderOptions
+    options: foundry.applications.api.HandlebarsApplicationMixin.HandlebarsRenderOptions
   ): void {
     super._attachPartListeners(partId, htmlElement, options);
 
@@ -313,7 +313,7 @@ export class ActionEditor<
     return this.document.testUserPermission(game.user, CONST.DOCUMENT_OWNERSHIP_LEVELS.OWNER);
   }
 
-  override _onRender(context: foundry.applications.api.ApplicationRenderContext, options: foundry.applications.api.HandlebarsRenderOptions): void {
+  override _onRender(context: foundry.applications.api.ApplicationRenderContext, options: foundry.applications.api.HandlebarsApplicationMixin.HandlebarsRenderOptions): void {
     super._onRender(context, options);
 
     if (!this.isEditable) {

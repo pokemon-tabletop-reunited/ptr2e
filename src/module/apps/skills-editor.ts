@@ -2,20 +2,21 @@ import type { ActorPTR2e, Skill } from "@actor";
 import { SkillsComponent } from "@actor/components/skills-component.ts";
 import type SkillPTR2e from "@module/data/models/skill.ts";
 import { htmlQueryAll } from "@utils";
+import type { AnyObject, DeepPartial } from "fvtt-types/utils";
 
 
 type SkillBeingEdited = SkillPTR2e["_source"] & { label: string; investment: number; max: number; min: number };
 
 export class SkillsEditor extends foundry.applications.api.HandlebarsApplicationMixin(
   foundry.applications.api.ApplicationV2
-) {
+)<AnyObject> {
   static override DEFAULT_OPTIONS = foundry.utils.mergeObject(
     super.DEFAULT_OPTIONS,
     {
       tag: "form",
       classes: ["sheet skill-sheet"],
       position: {
-        height: 'auto',
+        height: 'auto' as const,
         width: 500,
       },
       form: {
@@ -37,7 +38,7 @@ export class SkillsEditor extends foundry.applications.api.HandlebarsApplication
     { inplace: false }
   );
 
-  static override PARTS: Record<string, foundry.applications.api.HandlebarsTemplatePart> = {
+  static override PARTS: Record<string, foundry.applications.api.HandlebarsApplicationMixin.HandlebarsTemplatePart> = {
     skills: {
       id: "skills",
       template: "systems/ptr2e/templates/apps/skills-editor.hbs",
@@ -54,7 +55,7 @@ export class SkillsEditor extends foundry.applications.api.HandlebarsApplication
 
   constructor(
     document: ActorPTR2e,
-    options: Partial<foundry.applications.api.ApplicationConfiguration> = {}
+    options: DeepPartial<foundry.applications.api.ApplicationV2.Configuration> = {}
   ) {
     options.id = `Skill-Editor-${document.uuid}`;
     super(options);
@@ -144,7 +145,7 @@ export class SkillsEditor extends foundry.applications.api.HandlebarsApplication
     };
   }
 
-  override async render(options: boolean | ApplicationRenderOptions, _options?: ApplicationRenderOptions): Promise<this> {
+  override async render(options: boolean | DeepPartial<foundry.applications.api.ApplicationV2.Configuration>, _options?: DeepPartial<foundry.applications.api.HandlebarsApplicationMixin.HandlebarsRenderOptions>): Promise<this> {
     const scrollTop = this.element?.querySelector(".scroll")?.scrollTop;
     const renderResult = await super.render(options, _options);
     // set the scroll location
@@ -158,7 +159,7 @@ export class SkillsEditor extends foundry.applications.api.HandlebarsApplication
   override _attachPartListeners(
     partId: string,
     htmlElement: HTMLElement,
-    options: foundry.applications.api.HandlebarsRenderOptions
+    options: foundry.applications.api.HandlebarsApplicationMixin.HandlebarsRenderOptions
   ): void {
     super._attachPartListeners(partId, htmlElement, options);
 
@@ -407,7 +408,7 @@ export class SkillsEditor extends foundry.applications.api.HandlebarsApplication
     _form: HTMLFormElement,
     formData: FormDataExtended
   ) {
-    const data = foundry.utils.expandObject<Record<string, { investment: string }>>(formData.object);
+    const data = foundry.utils.expandObject(formData.object) as Record<string, { investment: string }>;
     const skills = this.document.system.toObject().skills as SkillPTR2e["_source"][];
     const maxInvestment = this.document.system.advancement.level === 1 ? 90 : 100;
     const levelOne = this.document.system.advancement.level === 1 || !this.document.flags.ptr2e?.editedSkills;
@@ -438,7 +439,7 @@ export class SkillsEditor extends foundry.applications.api.HandlebarsApplication
     }
 
     for (const slug in data) {
-      const investment = parseInt(data[slug].investment);
+      const investment = parseInt(data[slug as keyof typeof data].investment);
       if (isNaN(investment) || !investment) continue;
 
       const skillData = game.ptr.data.skills.get(slug);

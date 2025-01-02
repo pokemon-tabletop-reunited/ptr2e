@@ -23,7 +23,7 @@ class TraitsSettingsMenu extends foundry.applications.api.HandlebarsApplicationM
         }
     }, { inplace: false });
 
-    static override PARTS: Record<string, foundry.applications.api.HandlebarsTemplatePart> = {
+    static override PARTS: Record<string, foundry.applications.api.HandlebarsApplicationMixin.HandlebarsTemplatePart> = {
         header: {
             id: "header",
             template: "systems/ptr2e/templates/apps/settings/traits-settings-header.hbs"

@@ -4,9 +4,9 @@ import { ItemPTR2e } from "@item";
 import type { DocumentSheetV2 } from "@item/sheets/document.ts";
 import { isObject } from "@utils";
 import { ApplicationV2Expanded } from "./appv2-expanded.ts";
-import type { DeepPartial } from "fvtt-types/utils";
+import type { AnyObject, DeepPartial } from "fvtt-types/utils";
 
-class GithubSheet extends foundry.applications.api.HandlebarsApplicationMixin(ApplicationV2Expanded) {
+class GithubSheet extends foundry.applications.api.HandlebarsApplicationMixin(ApplicationV2Expanded)<AnyObject> {
   static override DEFAULT_OPTIONS = {
     id: "github-commit-manager",
     tag: "form",

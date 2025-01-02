@@ -17,7 +17,7 @@ class ChoiceSetPrompt extends PickAThingPrompt<ItemPTR2e, string | number | obje
   /** A predicate validating a dragged & dropped item selection */
   allowedDrops: { label: string | null; predicate: Predicate } | null;
 
-  constructor(data: ChoiceSetPromptData, options?: Partial<foundry.applications.api.ApplicationConfiguration>) {
+  constructor(data: ChoiceSetPromptData, options?: DeepPartial<ApplicationConfigurationExpanded>) {
     super(data, options);
     this.prompt = data.prompt;
     this.choices ??= [];
@@ -34,7 +34,7 @@ class ChoiceSetPrompt extends PickAThingPrompt<ItemPTR2e, string | number | obje
     { inplace: false }
   );
 
-  static override PARTS: Record<string, foundry.applications.api.HandlebarsTemplatePart> = {
+  static override PARTS: Record<string, foundry.applications.api.HandlebarsApplicationMixin.HandlebarsTemplatePart> = {
     choices: {
       id: "choices",
       template: "systems/ptr2e/templates/apps/choice-set-prompt.hbs",

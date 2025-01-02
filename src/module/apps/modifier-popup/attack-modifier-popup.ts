@@ -22,7 +22,7 @@ export class AttackModifierPopup extends ModifierPopup {
     { inplace: false }
   );
 
-  static override PARTS: Record<string, foundry.applications.api.HandlebarsTemplatePart> = {
+  static override PARTS: Record<string, foundry.applications.api.HandlebarsApplicationMixin.HandlebarsTemplatePart> = {
     modifiers: {
       id: "modifiers",
       template: "systems/ptr2e/templates/apps/attack-modifier-popup.hbs",
@@ -43,7 +43,7 @@ export class AttackModifierPopup extends ModifierPopup {
     context: Omit<CheckRollContext, "target" | "targets"> & {
       contexts: Record<ActorUUID, CheckContext>;
     },
-    options: Partial<foundry.applications.api.ApplicationConfiguration> = {}
+    options: DeepPartial<ApplicationConfigurationExpanded> = {}
   ) {
     super(check, context, options);
 

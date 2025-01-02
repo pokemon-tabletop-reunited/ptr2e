@@ -48,7 +48,7 @@ class ComponentPopout extends foundry.applications.api.HandlebarsApplicationMixi
         { inplace: false }
     );
 
-    static override PARTS: Record<string, foundry.applications.api.HandlebarsTemplatePart> = {
+    static override PARTS: Record<string, foundry.applications.api.HandlebarsApplicationMixin.HandlebarsTemplatePart> = {
         popout: {
             id: "popout",
             template: "systems/ptr2e/templates/actor/actor-component.hbs",
@@ -59,7 +59,7 @@ class ComponentPopout extends foundry.applications.api.HandlebarsApplicationMixi
         return game.i18n.format(`PTR2E.ActorSheet.Components.${this.component.constructor.name}.title`, {actor: this.actor.name});
     }
 
-    override _initializeApplicationOptions(options: Partial<foundry.applications.api.ApplicationConfiguration> & ComponentApplicationConfiguration): foundry.applications.api.ApplicationConfiguration & ComponentApplicationConfiguration {
+    override _initializeApplicationOptions(options: DeepPartial<ApplicationConfigurationExpanded> & ComponentApplicationConfiguration): foundry.applications.api.ApplicationConfiguration & ComponentApplicationConfiguration {
         const appOptions = super._initializeApplicationOptions(options);
         if(typeof options.component !== "string") 
             appOptions.actions = foundry.utils.mergeObject(appOptions.actions, options.component.constructor.ACTIONS);
@@ -74,7 +74,7 @@ class ComponentPopout extends foundry.applications.api.HandlebarsApplicationMixi
     actor: ActorPTR2e;
     component: ActorComponent;
 
-    constructor(options: Partial<foundry.applications.api.ApplicationConfiguration> & ComponentApplicationConfiguration) {
+    constructor(options: DeepPartial<ApplicationConfigurationExpanded> & ComponentApplicationConfiguration) {
         options.component = (typeof options.component === "string") ? new ActorComponents[options.component](options.actor) : options.component;
         super(options);
         
@@ -90,7 +90,7 @@ class ComponentPopout extends foundry.applications.api.HandlebarsApplicationMixi
         return context;
     }
 
-    override _attachPartListeners(partId: string, htmlElement: HTMLElement, options: foundry.applications.api.HandlebarsRenderOptions): void {
+    override _attachPartListeners(partId: string, htmlElement: HTMLElement, options: foundry.applications.api.HandlebarsApplicationMixin.HandlebarsRenderOptions): void {
         super._attachPartListeners(partId, htmlElement, options);
 
         if(partId === "popout") {
@@ -98,7 +98,7 @@ class ComponentPopout extends foundry.applications.api.HandlebarsApplicationMixi
         }
     }
 
-    override async _renderFrame(options: foundry.applications.api.HandlebarsRenderOptions): Promise<HTMLElement> {
+    override async _renderFrame(options: foundry.applications.api.HandlebarsApplicationMixin.HandlebarsRenderOptions): Promise<HTMLElement> {
         const frame = await super._renderFrame(options);
 
         this.component.renderFrame(this.window.close);

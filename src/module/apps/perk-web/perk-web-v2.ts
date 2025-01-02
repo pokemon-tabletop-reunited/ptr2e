@@ -297,7 +297,7 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
     { inplace: false }
   );
 
-  static override PARTS: Record<string, foundry.applications.api.HandlebarsTemplatePart> = {
+  static override PARTS: Record<string, foundry.applications.api.HandlebarsApplicationMixin.HandlebarsTemplatePart> = {
     hudHeader: {
       id: "hudHeader",
       template: "systems/ptr2e/templates/perk-tree/hud/header.hbs",
@@ -389,7 +389,7 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
     this.actor = actor;
   }
 
-  override async _prepareContext(options?: foundry.applications.api.HandlebarsRenderOptions | undefined) {
+  override async _prepareContext(options?: foundry.applications.api.HandlebarsApplicationMixin.HandlebarsRenderOptions | undefined) {
     const maxRow = 250;
     const maxCol = 250;
 
@@ -553,7 +553,7 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
   #allTraits: { value: string; label: string, type?: Trait["type"] }[] | undefined;
   private isSortableDragging = false;
 
-  override _attachPartListeners(partId: string, htmlElement: HTMLElement, options: foundry.applications.api.HandlebarsRenderOptions): void {
+  override _attachPartListeners(partId: string, htmlElement: HTMLElement, options: foundry.applications.api.HandlebarsApplicationMixin.HandlebarsRenderOptions): void {
     super._attachPartListeners(partId, htmlElement, options);
 
     if (partId === "hudHeader") {
@@ -1180,7 +1180,7 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
     }
   }
 
-  override _onRender(context: foundry.applications.api.ApplicationRenderContext, options: foundry.applications.api.HandlebarsRenderOptions): void {
+  override _onRender(context: foundry.applications.api.ApplicationRenderContext, options: foundry.applications.api.HandlebarsApplicationMixin.HandlebarsRenderOptions): void {
     super._onRender(context, options);
 
     this.renderSVG();
@@ -1663,7 +1663,7 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
     return;
   }
 
-  override _onFirstRender(context: foundry.applications.api.ApplicationRenderContext, options: foundry.applications.api.HandlebarsRenderOptions): void {
+  override _onFirstRender(context: foundry.applications.api.ApplicationRenderContext, options: foundry.applications.api.HandlebarsApplicationMixin.HandlebarsRenderOptions): void {
     super._onFirstRender(context, options);
 
     if (this.actor) {
@@ -1681,7 +1681,7 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
     }
   }
 
-  override _onClose(options: foundry.applications.api.HandlebarsRenderOptions): void {
+  override _onClose(options: foundry.applications.api.HandlebarsApplicationMixin.HandlebarsRenderOptions): void {
     super._onClose(options);
     if (this.actor) {
       this.actor.sheet?.render(false)

@@ -26,7 +26,7 @@ export class TutorListApp extends foundry.applications.api.HandlebarsApplication
     { inplace: false }
   );
 
-  static override PARTS: Record<string, foundry.applications.api.HandlebarsTemplatePart> = {
+  static override PARTS: Record<string, foundry.applications.api.HandlebarsApplicationMixin.HandlebarsTemplatePart> = {
     aside: {
       id: "aside",
       template: "systems/ptr2e/templates/apps/tutor-list-aside.hbs",
@@ -60,7 +60,7 @@ export class TutorListApp extends foundry.applications.api.HandlebarsApplication
     return super.render(options, _options);
   }
 
-  override _prepareContext(options?: foundry.applications.api.HandlebarsRenderOptions | undefined) {
+  override _prepareContext(options?: foundry.applications.api.HandlebarsApplicationMixin.HandlebarsRenderOptions | undefined) {
     const lists = game.ptr.data.tutorList.list.contents;
 
     return {

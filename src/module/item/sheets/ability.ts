@@ -14,7 +14,7 @@ export default class AbilitySheet extends ItemSheetPTR2e<AbilityPTR2e["system"]>
     static override readonly detailsTemplate= "systems/ptr2e/templates/items/ability/ability-details.hbs";
     override noActions = false;
 
-    static override PARTS: Record<string, foundry.applications.api.HandlebarsTemplatePart> = 
+    static override PARTS: Record<string, foundry.applications.api.HandlebarsApplicationMixin.HandlebarsTemplatePart> = 
         foundry.utils.mergeObject(super.PARTS, {
             overview: {
                 template: AbilitySheet.overviewTemplate,

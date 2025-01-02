@@ -31,7 +31,7 @@ export class AvailableAbilitiesApp extends foundry.applications.api.HandlebarsAp
         { inplace: false }
     );
 
-    static override PARTS: Record<string, foundry.applications.api.HandlebarsTemplatePart> = {
+    static override PARTS: Record<string, foundry.applications.api.HandlebarsApplicationMixin.HandlebarsTemplatePart> = {
         actions: {
             id: "actions",
             template: "systems/ptr2e/templates/apps/available-abilities.hbs",
@@ -45,7 +45,7 @@ export class AvailableAbilitiesApp extends foundry.applications.api.HandlebarsAp
         return `${this.document.name}'s Available Abilities`; 
     }
 
-    constructor(document: ActorPTR2e, options: Partial<foundry.applications.api.ApplicationConfiguration> = {}) {
+    constructor(document: ActorPTR2e, options: DeepPartial<ApplicationConfigurationExpanded> = {}) {
         options.id = `available-abilities-${document.id}`;
         super(options);
         this.document = document;
@@ -99,7 +99,7 @@ export class AvailableAbilitiesApp extends foundry.applications.api.HandlebarsAp
         };
     }
 
-    override async _renderFrame(options: foundry.applications.api.HandlebarsRenderOptions) {
+    override async _renderFrame(options: foundry.applications.api.HandlebarsApplicationMixin.HandlebarsRenderOptions) {
         const frame = await super._renderFrame(options);
 
         // Add send to chat button

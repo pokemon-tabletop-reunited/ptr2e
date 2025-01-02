@@ -24,7 +24,7 @@ export default class TokenPanel extends foundry.applications.api.HandlebarsAppli
 
   constructor(
     token: TokenPTR2e | null,
-    options: Partial<foundry.applications.api.ApplicationConfiguration> = {}
+    options: DeepPartial<ApplicationConfigurationExpanded> = {}
   ) {
     super(options);
     this._token = token;
@@ -134,13 +134,13 @@ export default class TokenPanel extends foundry.applications.api.HandlebarsAppli
     return this.tabs;
   }
 
-  override _configureRenderOptions(options: foundry.applications.api.HandlebarsRenderOptions): void {
+  override _configureRenderOptions(options: foundry.applications.api.HandlebarsApplicationMixin.HandlebarsRenderOptions): void {
     super._configureRenderOptions(options);
   }
 
   override async _renderHTML(
     context: foundry.applications.api.ApplicationRenderContext,
-    options: foundry.applications.api.HandlebarsRenderOptions
+    options: foundry.applications.api.HandlebarsApplicationMixin.HandlebarsRenderOptions
   ): Promise<Record<string, HTMLElement>> {
     if (this.token?.actor) return super._renderHTML(context, options);
 
@@ -156,7 +156,7 @@ export default class TokenPanel extends foundry.applications.api.HandlebarsAppli
   }
 
   override async _prepareContext(
-    options?: foundry.applications.api.HandlebarsRenderOptions | undefined
+    options?: foundry.applications.api.HandlebarsApplicationMixin.HandlebarsRenderOptions | undefined
   ) {
     const context = await super._prepareContext(options);
     if (!this.token) return context;

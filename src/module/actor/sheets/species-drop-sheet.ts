@@ -26,7 +26,7 @@ class SpeciesDropSheetV2 extends foundry.applications.api.HandlebarsApplicationM
     { inplace: false }
   );
 
-  static override PARTS: Record<string, foundry.applications.api.HandlebarsTemplatePart> = {
+  static override PARTS: Record<string, foundry.applications.api.HandlebarsApplicationMixin.HandlebarsTemplatePart> = {
     main: {
       id: "main",
       template: "systems/ptr2e/templates/actor/species-drop.hbs",

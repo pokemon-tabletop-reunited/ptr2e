@@ -64,7 +64,7 @@ export default class ItemSheetPTR2e<
 
   #allTraits: { value: string; label: string, virtual?: boolean, type?: Trait["type"] }[] | undefined;
 
-  static override PARTS: Record<string, foundry.applications.api.HandlebarsTemplatePart> = {
+  static override PARTS: Record<string, foundry.applications.api.HandlebarsApplicationMixin.HandlebarsTemplatePart> = {
     header: {
       id: "header",
       template: "systems/ptr2e/templates/items/parts/item-header.hbs",
@@ -421,7 +421,7 @@ export default class ItemSheetPTR2e<
     }
   }
 
-  override _onRender(context: foundry.applications.api.ApplicationRenderContext, options: foundry.applications.api.HandlebarsRenderOptions): void {
+  override _onRender(context: foundry.applications.api.ApplicationRenderContext, options: foundry.applications.api.HandlebarsApplicationMixin.HandlebarsRenderOptions): void {
     super._onRender(context, options);
     for (const stringTags of this.element.querySelectorAll<HTMLElement>("string-tags")) {
       const path = stringTags.getAttribute("name");

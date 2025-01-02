@@ -41,7 +41,7 @@ export class CompendiumBrowser extends foundry.applications.api.HandlebarsApplic
     { inplace: false }
   );
 
-  static override PARTS: Record<string, foundry.applications.api.HandlebarsTemplatePart> = {
+  static override PARTS: Record<string, foundry.applications.api.HandlebarsApplicationMixin.HandlebarsTemplatePart> = {
     header: {
       id: "header",
       template: "systems/ptr2e/templates/apps/compendium-browser/header.hbs",
@@ -122,7 +122,7 @@ export class CompendiumBrowser extends foundry.applications.api.HandlebarsApplic
   packLoader = new PackLoader();
   declare activeTab: TabName;
 
-  constructor(options: Partial<foundry.applications.api.ApplicationConfiguration> = {}) {
+  constructor(options: DeepPartial<ApplicationConfigurationExpanded> = {}) {
     super(options);
 
     this.settings = game.settings.get("ptr2e", "compendiumBrowserPacks");
@@ -245,7 +245,7 @@ export class CompendiumBrowser extends foundry.applications.api.HandlebarsApplic
     return R.unique(this.dataTabsList.flatMap((t) => this.loadedPacks(t))).sort();
   }
 
-  override async _renderFrame(options: foundry.applications.api.HandlebarsRenderOptions): Promise<HTMLElement> {
+  override async _renderFrame(options: foundry.applications.api.HandlebarsApplicationMixin.HandlebarsRenderOptions): Promise<HTMLElement> {
     const frame = await super._renderFrame(options);
 
     // Add send to chat button
@@ -279,7 +279,7 @@ export class CompendiumBrowser extends foundry.applications.api.HandlebarsApplic
   override _attachPartListeners(
     partId: string,
     htmlElement: HTMLElement,
-    options: foundry.applications.api.HandlebarsRenderOptions
+    options: foundry.applications.api.HandlebarsApplicationMixin.HandlebarsRenderOptions
   ): void {
     super._attachPartListeners(partId, htmlElement, options);
 
@@ -603,7 +603,7 @@ export class CompendiumBrowser extends foundry.applications.api.HandlebarsApplic
     }
   }
 
-  override _onRender(context: foundry.applications.api.ApplicationRenderContext, options: foundry.applications.api.HandlebarsRenderOptions): void {
+  override _onRender(context: foundry.applications.api.ApplicationRenderContext, options: foundry.applications.api.HandlebarsApplicationMixin.HandlebarsRenderOptions): void {
     super._onRender(context, options);
 
     if (options?.parts?.some(p => ["controls", "content"].includes(p))) {
@@ -701,7 +701,7 @@ export class CompendiumBrowser extends foundry.applications.api.HandlebarsApplic
     }
   }
 
-  override _onClose(options: foundry.applications.api.HandlebarsRenderOptions): void {
+  override _onClose(options: foundry.applications.api.HandlebarsApplicationMixin.HandlebarsRenderOptions): void {
     for (const tab of Object.values(this.compendiumTabs)) {
       tab.filterData.search.text = "";
     }

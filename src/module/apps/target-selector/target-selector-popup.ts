@@ -23,7 +23,7 @@ export class TargetSelectorPopup extends foundry.applications.api.HandlebarsAppl
         { inplace: false }
     );
 
-    static override PARTS: Record<string, foundry.applications.api.HandlebarsTemplatePart> = {
+    static override PARTS: Record<string, foundry.applications.api.HandlebarsApplicationMixin.HandlebarsTemplatePart> = {
         modifiers: {
             id: "modifiers",
             template: "systems/ptr2e/templates/apps/target-selector-popup.hbs",
@@ -37,7 +37,7 @@ export class TargetSelectorPopup extends foundry.applications.api.HandlebarsAppl
     constructor(
         targets: { uuid: string; name: string; img: string; description?: string }[],
         { title = "PTR2E.ChatContext.SpendLuckAttack.label", hint = "PTR2E.ChatContext.SpendLuckAttack.hint" } : { title?: string; hint?: string; } = {},
-        options: Partial<foundry.applications.api.ApplicationConfiguration> = {}
+        options: DeepPartial<ApplicationConfigurationExpanded> = {}
     ) {
         super(options);
         this.targets = targets;
@@ -59,7 +59,7 @@ export class TargetSelectorPopup extends foundry.applications.api.HandlebarsAppl
     override _attachPartListeners(
         partId: string,
         htmlElement: HTMLElement,
-        options: foundry.applications.api.HandlebarsRenderOptions
+        options: foundry.applications.api.HandlebarsApplicationMixin.HandlebarsRenderOptions
     ): void {
         super._attachPartListeners(partId, htmlElement, options);
 

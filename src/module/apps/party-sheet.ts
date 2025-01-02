@@ -1,4 +1,3 @@
-import type { ActorSystemPTR2e } from "@actor";
 import { ActorPTR2e } from "@actor";
 import type { Tab } from "@item/sheets/document.ts";
 import FolderPTR2e from "@module/folder/document.ts";
@@ -10,10 +9,11 @@ import {
 } from "./appv2-expanded.ts";
 import FolderConfigPTR2e from "@module/folder/sheet.ts";
 import { RestApp } from "@module/apps/rest.ts";
+import type { AnyObject, DeepPartial } from "fvtt-types/utils";
 
 class PartySheetPTR2e extends foundry.applications.api.HandlebarsApplicationMixin(
   ApplicationV2Expanded
-) {
+)<AnyObject> {
   folder: FolderPTR2e;
 
   constructor(
@@ -88,7 +88,7 @@ class PartySheetPTR2e extends foundry.applications.api.HandlebarsApplicationMixi
     { inplace: false }
   );
 
-  static override PARTS: Record<string, foundry.applications.api.HandlebarsTemplatePart> = {
+  static override PARTS: Record<string, foundry.applications.api.HandlebarsApplicationMixin.HandlebarsTemplatePart> = {
     tabs: {
       id: "tabs",
       template: "systems/ptr2e/templates/items/parts/item-tabs.hbs",
@@ -105,7 +105,7 @@ class PartySheetPTR2e extends foundry.applications.api.HandlebarsApplicationMixi
     },
   };
 
-  tabGroups: Record<string, string> = {
+  override tabGroups: Record<string, string> = {
     sheet: "overview",
   };
 
@@ -136,20 +136,20 @@ class PartySheetPTR2e extends foundry.applications.api.HandlebarsApplicationMixi
     return `${this.folder.name} - Party Sheet`;
   }
 
-  override _initializeApplicationOptions(options: Partial<ApplicationConfigurationExpanded> & { folder?: FolderPTR2e<ActorPTR2e<ActorSystemPTR2e, null>> }): ApplicationConfigurationExpanded {
+  override _initializeApplicationOptions(options: DeepPartial<ApplicationConfigurationExpanded> & { folder?: FolderPTR2e }): ApplicationConfigurationExpanded & Record<string, unknown> {
     options = super._initializeApplicationOptions(options);
     options.uniqueId = `${this.constructor.name}-${options.folder?.uuid}`;
-    return options as ApplicationConfigurationExpanded;
+    return options as ApplicationConfigurationExpanded & Record<string, unknown>;
   }
 
-  async owner(): Promise<ActorPTR2e | null> {
-    return this.folder.owner ? await fromUuid(this.folder.owner) : null;
+  async owner(): Promise<Maybe<Actor.ConfiguredInstance>> {
+    return this.folder.owner ? await fromUuid(this.folder.owner) as unknown as Promise<Maybe<Actor.ConfiguredInstance>> : null;
   }
 
-  async party(): Promise<ActorPTR2e[]> {
-    const party: ActorPTR2e[] = [];
+  async party(): Promise<Actor.ConfiguredInstance[]> {
+    const party: Actor.ConfiguredInstance[] = [];
     for (const memberUuid of this.folder.party) {
-      const actor = await fromUuid<ActorPTR2e>(memberUuid);
+      const actor = await fromUuid(memberUuid) as Actor.ConfiguredInstance;
       if (actor) party.push(actor);
     }
     return party;
@@ -191,7 +191,7 @@ class PartySheetPTR2e extends foundry.applications.api.HandlebarsApplicationMixi
     }
   }
 
-  override _attachPartListeners(partId: string, htmlElement: HTMLElement, options: foundry.applications.api.HandlebarsRenderOptions): void {
+  override _attachPartListeners(partId: string, htmlElement: HTMLElement, options: DeepPartial<foundry.applications.api.HandlebarsApplicationMixin.HandlebarsRenderOptions>): void {
     super._attachPartListeners(partId, htmlElement, options);
     if (partId === "overview") {
       for (const member of htmlElement.querySelectorAll(".party-member")) {
@@ -217,7 +217,7 @@ class PartySheetPTR2e extends foundry.applications.api.HandlebarsApplicationMixi
         callback: async (header: JQuery) => {
           const li = header.closest(".party-drag-item.box-header")[0];
           if (!li) return void console.warn("No directory item found for folder edit context menu option");
-          const folder = game.folders.get(li.dataset.folderId);
+          const folder = game.folders.get(li.dataset.folderId!);
           if (!folder) return;
           const r = li.getBoundingClientRect();
           const options = { top: r.top, left: r.left - Number(FolderConfig.defaultOptions.width) - 10 };
@@ -233,17 +233,16 @@ class PartySheetPTR2e extends foundry.applications.api.HandlebarsApplicationMixi
         condition: async (header: JQuery) => {
           const li = header.closest(".party-drag-item.box-header")[0];
           if (!li) return false;
-          const folder = game.folders.get(li.dataset.folderId);
+          const folder = game.folders.get(li.dataset.folderId!);
           if (!folder) return false;
-          return CONST.COMPENDIUM_DOCUMENT_TYPES.includes(folder.type);
+          return CONST.COMPENDIUM_DOCUMENT_TYPES.includes(folder.type as CONST.COMPENDIUM_DOCUMENT_TYPES);
         },
         callback: async (header: JQuery) => {
           const li = header.closest(".party-drag-item.box-header")[0];
           if (!li) return false;
-          const folder = game.folders.get(li.dataset.folderId);
+          const folder = game.folders.get(li.dataset.folderId!);
           if (!folder) return;
           const r = li.getBoundingClientRect();
-          // @ts-expect-error - This is valid
           return Dialog.confirm({
             title: `${game.i18n.localize("FOLDER.CreateTable")}: ${folder.name}`,
             content: game.i18n.localize("FOLDER.CreateTableConfirm"),
@@ -263,10 +262,9 @@ class PartySheetPTR2e extends foundry.applications.api.HandlebarsApplicationMixi
         callback: async (header: JQuery) => {
           const li = header.closest(".party-drag-item.box-header")[0];
           if (!li) return;
-          const folder = game.folders.get(li.dataset.folderId);
+          const folder = game.folders.get(li.dataset.folderId!);
           if (!folder) return;
           const r = li.getBoundingClientRect();
-          // @ts-expect-error - This is valid
           return Dialog.confirm({
             title: `${game.i18n.localize("FOLDER.Remove")} ${folder.name}`,
             content: `<h4>${game.i18n.localize("AreYouSure")}</h4><p>${game.i18n.localize("FOLDER.RemoveWarning")}</p>`,
@@ -286,10 +284,9 @@ class PartySheetPTR2e extends foundry.applications.api.HandlebarsApplicationMixi
         callback: async (header: JQuery) => {
           const li = header.closest(".party-drag-item.box-header")[0];
           if (!li) return;
-          const folder = game.folders.get(li.dataset.folderId);
+          const folder = game.folders.get(li.dataset.folderId!);
           if (!folder) return;
           const r = li.getBoundingClientRect();
-          // @ts-expect-error - This is valid
           return Dialog.confirm({
             title: `${game.i18n.localize("FOLDER.Delete")} ${folder.name}`,
             content: `<h4>${game.i18n.localize("AreYouSure")}</h4><p>${game.i18n.localize("FOLDER.DeleteWarning")}</p>`,
@@ -309,7 +306,7 @@ class PartySheetPTR2e extends foundry.applications.api.HandlebarsApplicationMixi
         callback: async (header: JQuery) => {
           const li = header.closest(".party-drag-item.box-header")[0];
           if (!li) return;
-          const folder = game.folders.get(li.dataset.folderId);
+          const folder = game.folders.get(li.dataset.folderId!);
           // @ts-expect-error - Typing for this sheet is missing
           new DocumentOwnershipConfig(folder, {
             top: Math.min(li.offsetTop, window.innerHeight - 350),
@@ -322,14 +319,14 @@ class PartySheetPTR2e extends foundry.applications.api.HandlebarsApplicationMixi
         icon: '<i class="fas fa-atlas"></i>',
         condition: (header: JQuery) => {
           const li = header.closest(".party-drag-item.box-header")[0];
-          const folder = game.folders.get(li.dataset.folderId);
+          const folder = game.folders.get(li.dataset.folderId!);
           if (!folder) return false;
-          return CONST.COMPENDIUM_DOCUMENT_TYPES.includes(folder.type);
+          return CONST.COMPENDIUM_DOCUMENT_TYPES.includes(folder.type as CONST.COMPENDIUM_DOCUMENT_TYPES);
         },
         callback: async (header: JQuery) => {
           const li = header.closest(".party-drag-item.box-header")[0];
           if (!li) return;
-          const folder = game.folders.get(li.dataset.folderId);
+          const folder = game.folders.get(li.dataset.folderId!);
           if (!folder) return;
           return folder.exportDialog(null, {
             top: Math.min(li.offsetTop, window.innerHeight - 350),
@@ -365,7 +362,7 @@ class PartySheetPTR2e extends foundry.applications.api.HandlebarsApplicationMixi
         condition: (li: JQuery) => {
           const actor = game.actors.get(li.data("actorId"));
           if (!actor) return false;
-          if (actor.prototypeToken.randomImg) return false; //@ts-expect-error - This is correct
+          if (actor.prototypeToken.randomImg) return false;
           return ![null, undefined, CONST.DEFAULT_TOKEN].includes(actor.prototypeToken.texture.src);
         },
         callback: (li: JQuery) => {
@@ -383,8 +380,8 @@ class PartySheetPTR2e extends foundry.applications.api.HandlebarsApplicationMixi
         condition: () => game.user.isGM,
         callback: (header: JQuery) => {
           const li = header.closest(".party-drag-item");
+          //@ts-expect-error - fvtt-types missing types
           const document = ui.actors.collection.get(li.data("actorId"));
-          // @ts-expect-error - Typing for this sheet is missing
           new DocumentOwnershipConfig(document, {
             top: Math.min(li[0].offsetTop, window.innerHeight - 350),
             left: window.innerWidth - 720
@@ -396,11 +393,13 @@ class PartySheetPTR2e extends foundry.applications.api.HandlebarsApplicationMixi
         icon: '<i class="fas fa-file-export"></i>',
         condition: (header: JQuery) => {
           const li = header.closest(".party-drag-item");
+          //@ts-expect-error - fvtt-types missing types
           const document = ui.actors.collection.get(li.data("actorId"));
           return document?.isOwner;
         },
         callback: (header: JQuery) => {
           const li = header.closest(".party-drag-item");
+          //@ts-expect-error - fvtt-types missing types
           const document = ui.actors.collection.get(li.data("actorId"));
           return document?.exportToJSON();
         }
@@ -410,11 +409,13 @@ class PartySheetPTR2e extends foundry.applications.api.HandlebarsApplicationMixi
         icon: '<i class="fas fa-file-import"></i>',
         condition: (header: JQuery) => {
           const li = header.closest(".party-drag-item");
+          //@ts-expect-error - fvtt-types missing types
           const document = ui.actors.collection.get(li.data("actorId"));
           return document?.isOwner;
         },
         callback: (header: JQuery) => {
           const li = header.closest(".party-drag-item");
+          //@ts-expect-error - fvtt-types missing types
           const document = ui.actors.collection.get(li.data("actorId"));
           return document?.importFromJSONDialog();
         }
@@ -425,6 +426,7 @@ class PartySheetPTR2e extends foundry.applications.api.HandlebarsApplicationMixi
         condition: () => game.user.isGM,
         callback: (header: JQuery) => {
           const li = header.closest(".party-drag-item");
+          //@ts-expect-error - fvtt-types missing types
           const entry = ui.actors.collection.get(li.data("actorId"));
           if (!entry) return;
           return entry.deleteDialog({
@@ -435,10 +437,11 @@ class PartySheetPTR2e extends foundry.applications.api.HandlebarsApplicationMixi
       },
       {
         name: "SIDEBAR.Duplicate",
-        icon: '<i class="far fa-copy"></i>', //@ts-expect-error - Typing is missing
+        icon: '<i class="far fa-copy"></i>', //@ts-expect-error - fvtt-types missing types
         condition: () => game.user.isGM || ui.actors.collection.documentClass.canUserCreate(game.user),
         callback: (header: JQuery) => {
           const li = header.closest(".party-drag-item");
+          //@ts-expect-error - fvtt-types missing types
           const original = ui.actors.collection.get(li.data("actorId"));
           return original?.clone({ name: `${original._source.name} (Copy)` }, { save: true, addSource: true });
         }
@@ -473,7 +476,7 @@ class PartySheetPTR2e extends foundry.applications.api.HandlebarsApplicationMixi
     if (!actorId && !folderId) return;
 
     if (actorId) {
-      const actor = game.actors.get(entry.dataset.actorId);
+      const actor = game.actors.get(entry.dataset.actorId!);
       if (!actor) return;
 
       // Create drag data
@@ -498,14 +501,14 @@ class PartySheetPTR2e extends foundry.applications.api.HandlebarsApplicationMixi
   }
 
   override async _onDrop(event: DragEvent) {
-    const data = TextEditor.getDragEventData(event) as DropCanvasData;
+    const data = TextEditor.getDragEventData(event) as unknown as foundry.abstract.Document.DropData<foundry.abstract.Document.Any>;
     switch (data.type) {
-      case "Folder": return this._onDropFolder(event, data);
-      case "Actor": return this._onDropEntry(event, data);
+      case "Folder": return this._onDropFolder(event, data as unknown as foundry.abstract.Document.DropData<FolderPTR2e>);
+      case "Actor": return this._onDropEntry(event, data as unknown as foundry.abstract.Document.DropData<Actor.ConfiguredInstance>);
     }
   }
 
-  async _onDropFolder(event: DragEvent, data: DropCanvasData) {
+  async _onDropFolder(event: DragEvent, data: foundry.abstract.Document.DropData<FolderPTR2e>) {
     const folder = await FolderPTR2e.fromDropData(data);
     if (!folder || folder.type !== "Actor") return;
 
@@ -523,7 +526,7 @@ class PartySheetPTR2e extends foundry.applications.api.HandlebarsApplicationMixi
       return void await this.render({ parts: ["party"] });
     }
 
-    const targetFolder = game.folders.get(article.dataset.folderId) as Maybe<FolderPTR2e<ActorPTR2e<ActorSystemPTR2e, null>>>;
+    const targetFolder = game.folders.get(article.dataset.folderId!) as Maybe<FolderPTR2e>;
     if (!targetFolder || targetFolder.type !== "Actor") return;
 
     const target = ui.actors.element.find(`[data-folder-id="${targetFolder.id}"]`);
@@ -549,11 +552,11 @@ class PartySheetPTR2e extends foundry.applications.api.HandlebarsApplicationMixi
     return void await this.render({ parts: ["party"] });
   }
 
-  async _onDropEntry(event: DragEvent, data: DropCanvasData) {
+  async _onDropEntry(event: DragEvent, data: foundry.abstract.Document.DropData<Actor.ConfiguredInstance>) {
     const actor = await ActorPTR2e.fromDropData(data);
     if (!actor) return;
 
-    const targetActor = game.actors.get(((event.target as HTMLElement)?.closest(".party-drag-item") as HTMLElement)?.dataset?.actorId);
+    const targetActor = game.actors.get(((event.target as HTMLElement)?.closest(".party-drag-item") as HTMLElement)?.dataset?.actorId ?? "");
 
     const article = (event.target as HTMLElement).closest("article[data-folder-id], main[data-folder-id]") as HTMLElement;
     if (!article) return;
@@ -566,7 +569,7 @@ class PartySheetPTR2e extends foundry.applications.api.HandlebarsApplicationMixi
       await (target.length ? ui.actors._handleDroppedEntry(target[0], data) : ui.actors._handleDroppedEntry(null, { ...data, targetFolderUuid: this.folder.uuid }));
     }
     else {
-      const folder = game.folders.get(folderId) as FolderPTR2e<ActorPTR2e<ActorSystemPTR2e, null>>;
+      const folder = game.folders.get(folderId!) as FolderPTR2e;
       if (!folder) return;
 
       const target = ui.actors.element.find(targetActor ? `[data-entry-id="${targetActor.id}"]` : `[data-folder-id="${folder.id}"]`);
@@ -589,15 +592,16 @@ class PartySheetPTR2e extends foundry.applications.api.HandlebarsApplicationMixi
     return void await this.render({ parts: ["party"] });
   }
 
-  boundBoxes: Record<string, FolderPTR2e<ActorPTR2e<ActorSystemPTR2e, null>>> = {};
+  boundBoxes: Record<string, FolderPTR2e> = {};
 
+  //FIXME: TODO: Update AnyObject to the return type, that way we can also remove the extended 'if' to narrow the type.
   /** @override */
-  override _onFirstRender(context: foundry.applications.api.ApplicationRenderContext) {
+  override _onFirstRender(context: DeepPartial<AnyObject>) {
     if ('boxData' in context && context.boxData && typeof context.boxData === 'object' && 'folders' in context.boxData) {
-      for (const folder of context.boxData.folders as FolderPTR2e<ActorPTR2e<ActorSystemPTR2e, null>>[]) {
+      for (const folder of context.boxData.folders as FolderPTR2e[]) {
         //@ts-expect-error - App v1 compatability
         folder.apps[this.id] = this;
-        this.boundBoxes[folder.id] = folder;
+        this.boundBoxes[folder.id!] = folder;
       }
     }
   }
@@ -607,9 +611,8 @@ class PartySheetPTR2e extends foundry.applications.api.HandlebarsApplicationMixi
   /** @override */
   override _onClose() {
     for (const folder of Object.values(this.boundBoxes)) {
-      //@ts-expect-error  - App v1 compatability
       delete folder.apps[this.id];
-      delete this.boundBoxes[folder.id];
+      delete this.boundBoxes[folder.id!];
     }
   }
 }

@@ -4,7 +4,7 @@ import type { ActionPTR2e } from "@data";
 import { ActiveEffectPTR2e } from "@effects";
 import { ItemPTR2e } from "@item";
 import { htmlQueryAll, sluggify } from "@utils";
-import type { AnyObject, DeepPartial } from "fvtt-types/utils";
+import type { AnyObject, DeepPartial, EmptyObject } from "fvtt-types/utils";
 
 export type ApplicationConfigurationExpanded = foundry.applications.api.ApplicationV2.Configuration & ExpandedConfiguration
 
@@ -13,7 +13,7 @@ export interface ExpandedConfiguration {
 }
 
 export class ApplicationV2Expanded<
-  RenderContext extends AnyObject = AnyObject,
+  RenderContext extends AnyObject = EmptyObject,
   Configuration extends ApplicationConfigurationExpanded = ApplicationConfigurationExpanded,
   RenderOptions extends foundry.applications.api.ApplicationV2.RenderOptions = foundry.applications.api.HandlebarsApplicationMixin.HandlebarsRenderOptions,
 > extends foundry.applications.api.ApplicationV2<RenderContext, Configuration, RenderOptions> {
@@ -111,7 +111,7 @@ export class ApplicationV2Expanded<
 export type DocumentSheetConfigurationExpanded<Document extends foundry.abstract.Document.Any> = foundry.applications.api.DocumentSheetV2.Configuration<Document> & ExpandedConfiguration;
 
 export class ActorSheetV2Expanded<
-  RenderContext extends AnyObject = AnyObject,
+  RenderContext extends AnyObject = EmptyObject,
   Configuration extends DocumentSheetConfigurationExpanded<Actor.ConfiguredInstance> = DocumentSheetConfigurationExpanded<Actor.ConfiguredInstance>,
   RenderOptions extends foundry.applications.api.DocumentSheetV2.RenderOptions = foundry.applications.api.DocumentSheetV2.RenderOptions
 > extends foundry.applications.sheets.ActorSheetV2<RenderContext, Configuration, RenderOptions> {
@@ -450,7 +450,7 @@ export class ActorSheetV2Expanded<
 }
 
 export class ItemSheetV2Expanded<
-  RenderContext extends AnyObject = AnyObject,
+  RenderContext extends AnyObject = EmptyObject,
   Configuration extends DocumentSheetConfigurationExpanded<Item.ConfiguredInstance> = DocumentSheetConfigurationExpanded<Item.ConfiguredInstance>,
   RenderOptions extends foundry.applications.api.DocumentSheetV2.RenderOptions = foundry.applications.api.DocumentSheetV2.RenderOptions
 > extends foundry.applications.sheets.ItemSheetV2<RenderContext, Configuration, RenderOptions> {

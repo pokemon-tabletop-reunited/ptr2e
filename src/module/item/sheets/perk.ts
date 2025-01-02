@@ -70,7 +70,7 @@ export default class PerkSheet extends ItemSheetPTR2e<PerkPTR2e["system"]> {
     return void await this.document.update({ "system.webs": webs });
   }
 
-  static override PARTS: Record<string, foundry.applications.api.HandlebarsTemplatePart> =
+  static override PARTS: Record<string, foundry.applications.api.HandlebarsApplicationMixin.HandlebarsTemplatePart> =
     foundry.utils.mergeObject(super.PARTS, {
       overview: {
         template: PerkSheet.overviewTemplate,

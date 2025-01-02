@@ -57,7 +57,7 @@ export default class BlueprintSheet extends foundry.applications.api.HandlebarsA
     { inplace: false }
   );
 
-  static override PARTS: Record<string, foundry.applications.api.HandlebarsTemplatePart> = {
+  static override PARTS: Record<string, foundry.applications.api.HandlebarsApplicationMixin.HandlebarsTemplatePart> = {
     side: {
       id: "side",
       template: "systems/ptr2e/templates/items/blueprint/blueprint-side.hbs",
@@ -156,7 +156,7 @@ export default class BlueprintSheet extends foundry.applications.api.HandlebarsA
     };
   }
 
-  override _attachPartListeners(partId: string, htmlElement: HTMLElement, options: foundry.applications.api.HandlebarsRenderOptions): void {
+  override _attachPartListeners(partId: string, htmlElement: HTMLElement, options: foundry.applications.api.HandlebarsApplicationMixin.HandlebarsRenderOptions): void {
     super._attachPartListeners(partId, htmlElement, options);
 
     if (partId === "side") {
@@ -466,7 +466,7 @@ export default class BlueprintSheet extends foundry.applications.api.HandlebarsA
     this.close();
   }
 
-  override _onClose(options: foundry.applications.api.HandlebarsRenderOptions): void {
+  override _onClose(options: foundry.applications.api.HandlebarsApplicationMixin.HandlebarsRenderOptions): void {
     super._onClose(options);
     if (this._dataOnly) {
       this.resolve();

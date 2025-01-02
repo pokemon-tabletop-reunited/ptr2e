@@ -250,7 +250,7 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
 
   #allTraits: { value: string; label: string, virtual: boolean, type?: Trait["type"] }[] | undefined;
 
-  static override PARTS: Record<string, foundry.applications.api.HandlebarsTemplatePart> = {
+  static override PARTS: Record<string, foundry.applications.api.HandlebarsApplicationMixin.HandlebarsTemplatePart> = {
     header: {
       id: "header",
       template: "systems/ptr2e/templates/actor/actor-header.hbs",
@@ -572,7 +572,7 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
   override _attachPartListeners(
     partId: string,
     htmlElement: HTMLElement,
-    options: foundry.applications.api.HandlebarsRenderOptions
+    options: foundry.applications.api.HandlebarsApplicationMixin.HandlebarsRenderOptions
   ): void {
     super._attachPartListeners(partId, htmlElement, options);
 

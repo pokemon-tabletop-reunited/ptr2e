@@ -24,7 +24,7 @@ export class ModifierPopup extends foundry.applications.api.HandlebarsApplicatio
     { inplace: false }
   );
 
-  static override PARTS: Record<string, foundry.applications.api.HandlebarsTemplatePart> = {
+  static override PARTS: Record<string, foundry.applications.api.HandlebarsApplicationMixin.HandlebarsTemplatePart> = {
     modifiers: {
       id: "modifiers",
       template: "systems/ptr2e/templates/apps/modifier-popup.hbs",
@@ -46,7 +46,7 @@ export class ModifierPopup extends foundry.applications.api.HandlebarsApplicatio
   constructor(
     check: CheckModifier,
     context: CheckRollContext,
-    options: Partial<foundry.applications.api.ApplicationConfiguration> = {}
+    options: DeepPartial<ApplicationConfigurationExpanded> = {}
   ) {
     if (!context.actor) throw new Error("ModifierPopup requires an actor in the context");
     if (!context.type) throw new Error("ModifierPopup requires a type in the context");
@@ -173,7 +173,7 @@ export class ModifierPopup extends foundry.applications.api.HandlebarsApplicatio
   override _attachPartListeners(
     partId: string,
     htmlElement: HTMLElement,
-    options: foundry.applications.api.HandlebarsRenderOptions
+    options: foundry.applications.api.HandlebarsApplicationMixin.HandlebarsRenderOptions
   ): void {
     super._attachPartListeners(partId, htmlElement, options);
 

@@ -40,7 +40,7 @@ class DataInspector extends foundry.applications.api.HandlebarsApplicationMixin(
     { inplace: false }
   );
 
-  static override PARTS: Record<string, foundry.applications.api.HandlebarsTemplatePart> = {
+  static override PARTS: Record<string, foundry.applications.api.HandlebarsApplicationMixin.HandlebarsTemplatePart> = {
     // header: {
     //   id: "header",
     //   template: "systems/ptr2e/templates/apps/data-inspector/header.hbs",
@@ -99,7 +99,7 @@ class DataInspector extends foundry.applications.api.HandlebarsApplicationMixin(
 
   root: DataStructure;
 
-  constructor(document: AllowedDocumentTypes, options: Partial<foundry.applications.api.ApplicationConfiguration> = {}) {
+  constructor(document: AllowedDocumentTypes, options: DeepPartial<ApplicationConfigurationExpanded> = {}) {
     if (!document.testUserPermission(game.user, 'OBSERVER')) {
       const msg = game.i18n.format("PTR2E.DataInspector.NoPermission", { name: 'name' in document ? document.name : '' });
       ui.notifications.error(msg, { console: false });
@@ -189,7 +189,7 @@ class DataInspector extends foundry.applications.api.HandlebarsApplicationMixin(
     };
   }
 
-  override async _prepareContext(options?: foundry.applications.api.HandlebarsRenderOptions | undefined) {
+  override async _prepareContext(options?: foundry.applications.api.HandlebarsApplicationMixin.HandlebarsRenderOptions | undefined) {
     const context = await super._prepareContext(options) as Record<string, unknown>,
       doc = this.document,
       type = doc.type;
@@ -511,7 +511,7 @@ class DataInspector extends foundry.applications.api.HandlebarsApplicationMixin(
     return void this.close();
   }
 
-  override _onRender(context: foundry.applications.api.ApplicationRenderContext, options: foundry.applications.api.HandlebarsRenderOptions): void {
+  override _onRender(context: foundry.applications.api.ApplicationRenderContext, options: foundry.applications.api.HandlebarsApplicationMixin.HandlebarsRenderOptions): void {
     super._onRender(context, options);
 
     if (this.scrollToPath) {
@@ -521,7 +521,7 @@ class DataInspector extends foundry.applications.api.HandlebarsApplicationMixin(
     }
   }
 
-  override async _renderFrame(options: foundry.applications.api.HandlebarsRenderOptions) {
+  override async _renderFrame(options: foundry.applications.api.HandlebarsApplicationMixin.HandlebarsRenderOptions) {
     const frame = await super._renderFrame(options);
 
     // Add info button

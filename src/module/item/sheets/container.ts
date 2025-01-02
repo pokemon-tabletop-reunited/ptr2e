@@ -14,7 +14,7 @@ export default class ContainerSheet extends ItemSheetPTR2e<ContainerPTR2e["syste
     static override readonly detailsTemplate= "systems/ptr2e/templates/items/container/container-details.hbs";
     override noActions = true;
 
-    static override PARTS: Record<string, foundry.applications.api.HandlebarsTemplatePart> = 
+    static override PARTS: Record<string, foundry.applications.api.HandlebarsApplicationMixin.HandlebarsTemplatePart> = 
         foundry.utils.mergeObject(super.PARTS, {
             overview: {
                 template: ContainerSheet.overviewTemplate,
