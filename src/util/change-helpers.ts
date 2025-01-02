@@ -1,9 +1,6 @@
 import type { ActorSynthetics, EffectRoll } from "@actor";
-import { ActorPTR2e } from "@actor";
 import type { ActionPTR2e, AttackPTR2e, ChangeModel } from "@data";
 import type { BracketedValue, EffectSourcePTR2e } from "@effects";
-import { ActiveEffectPTR2e } from "@effects";
-import { ItemPTR2e } from "@item";
 import type {
   DeferredValueParams,
   ModifierAdjustment,
@@ -146,7 +143,7 @@ async function extractEffectRolls({
         .map((d) => d({ test: fullOptions, resolvables }))
     )
   ).reduce((acc, val): EffectRoll[] => {
-    if(!val) return acc;
+    if (!val) return acc;
     const inMap = effectTargets.get(val.effect + (val.critOnly ? '-crit' : ''));
     const sameType = inMap?.critOnly === val.critOnly;
     if (!inMap) {
@@ -193,9 +190,9 @@ async function extractEffectRolls({
 
 interface ExtractEphemeralEffectsParams {
   affects: "target" | "origin";
-  origin: ActorPTR2e | null;
-  target: Maybe<ActorPTR2e>;
-  item: ItemPTR2e | null;
+  origin: Actor.ConfiguredInstance | null;
+  target: Maybe<Actor.ConfiguredInstance>;
+  item: Item.ConfiguredInstance | null;
   attack: AttackPTR2e | null;
   action: ActionPTR2e | null;
   domains: string[];
@@ -227,14 +224,14 @@ function isBracketedValue(value: unknown): value is BracketedValue {
   );
 }
 
-async function processPreUpdateHooks(document: ActorPTR2e | ActiveEffectPTR2e | ItemPTR2e) {
+async function processPreUpdateHooks(document: Actor.ConfiguredInstance | ActiveEffect.ConfiguredInstance | Item.ConfiguredInstance) {
   const actor = (() => {
-    if (document instanceof ActorPTR2e) return document;
-    if (document instanceof ActiveEffectPTR2e) return document.targetsActor() ? document.target : null;
-    if (document instanceof ItemPTR2e) return document.actor;
+    if (document instanceof CONFIG.Actor.documentClass) return document;
+    if (document instanceof CONFIG.ActiveEffect.documentClass) return document.targetsActor() ? document.target : null;
+    if (document instanceof CONFIG.Item.documentClass) return document.actor;
     return null;
   })();
-  if (!(actor instanceof ActorPTR2e)) return;
+  if (!(actor instanceof CONFIG.Actor.documentClass)) return;
 
   // Run preUpdateActor rule element callbacks
   type WithPreUpdateActor = ChangeModel & {
@@ -247,13 +244,13 @@ async function processPreUpdateHooks(document: ActorPTR2e | ActiveEffectPTR2e | 
   const createDeletes = (
     await Promise.all(
       changes.map(
-        (c): Promise<{ create: foundry.abstract.Document.ConstructorDataForName<"Item">; delete: string[] } | { createEffects: EffectSourcePTR2e[]; deleteEffects: string[] }> => c.preUpdateActor()
+        (c): Promise<{ create: Item.ConstructorData; delete: string[] } | { createEffects: EffectSourcePTR2e[]; deleteEffects: string[] }> => c.preUpdateActor()
       )
     )
   ).reduce(
-    (combined: { create: foundry.abstract.Document.ConstructorDataForName<"Item">[]; delete: string[]; createEffects: EffectSourcePTR2e[]; deleteEffects: string[] }, cd) => {
+    (combined: { create: Item.ConstructorData[]; delete: string[]; createEffects: EffectSourcePTR2e[]; deleteEffects: string[] }, cd) => {
       if ('create' in cd) {
-        combined.create.push(...cd.create as unknown as foundry.abstract.Document.ConstructorDataForName<"Item">);
+        combined.create.push(...cd.create as unknown as Item.ConstructorData);
         combined.delete.push(...cd.delete);
       } else {
         combined.createEffects.push(...cd.createEffects);
@@ -274,14 +271,14 @@ async function processPreUpdateHooks(document: ActorPTR2e | ActiveEffectPTR2e | 
   if (createDeletes.delete.length > 0) {
     await actor.deleteEmbeddedDocuments("Item", createDeletes.delete, { render: true, ignoreRestricted: true });
   }
-  if(createDeletes.createEffects.length > 0) {
+  if (createDeletes.createEffects.length > 0) {
     await actor.createEmbeddedDocuments("ActiveEffect", createDeletes.createEffects, {
       keepId: true,
       render: true,
     });
   }
-  if(createDeletes.deleteEffects.length > 0) {
-    await actor.deleteEmbeddedDocuments("ActiveEffect", createDeletes.deleteEffects, { render: true, ignoreRestricted: true});
+  if (createDeletes.deleteEffects.length > 0) {
+    await actor.deleteEmbeddedDocuments("ActiveEffect", createDeletes.deleteEffects, { render: true, ignoreRestricted: true });
   }
 }
 

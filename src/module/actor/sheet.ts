@@ -29,7 +29,6 @@ import { PerksComponent } from "./components/perks-component.ts";
 import { AbilitiesComponent } from "./components/abilities-component.ts";
 import { StatsChart } from "./sheets/stats-chart.ts";
 import StatsForm from "./sheets/stats-form.ts";
-import { ActiveEffectPTR2e } from "@effects";
 import { natures } from "@scripts/config/natures.ts";
 import { AvailableAbilitiesApp } from "@module/apps/available-abilities.ts";
 import { DataInspector } from "@module/apps/data-inspector/data-inspector.ts";
@@ -1127,7 +1126,7 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
 
     switch (type) {
       case "effect": {
-        return ActiveEffectPTR2e.createDialog({}, { parent: this.document, types: ActiveEffectPTR2e.TYPES.filter(s => s != "summon") });
+        return CONFIG.ActiveEffect.documentClass.createDialog({}, { parent: this.document, types: CONFIG.ActiveEffect.documentClass.TYPES.filter(s => s != "summon") });
       }
       default: {
         const itemType = Item.TYPES.includes(type) ? type : null;

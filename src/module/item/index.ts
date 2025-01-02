@@ -75,7 +75,6 @@ export type ItemSystemsWithFlingStats =
 export * from "./document.ts";
 
 // Sheets
-export * from "./sheet.ts";
 export * as sheets from "./sheets/index.ts";
 
 // System Data Models

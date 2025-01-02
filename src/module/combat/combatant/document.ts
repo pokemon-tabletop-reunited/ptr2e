@@ -1,6 +1,8 @@
+import type CombatantSystemPTR2e from "./system.ts";
+
 class CombatantPTR2e extends Combatant {
 
-  get encounter() {
+  get encounter(): Combat.ConfiguredInstance {
     return this.parent!;
   }
 
@@ -46,6 +48,10 @@ class CombatantPTR2e extends Combatant {
   override getInitiativeRoll(formula: string | undefined): Roll {
     return super.getInitiativeRoll(formula);
   }
+}
+
+interface CombatantPTR2e {
+  system: CombatantSystemPTR2e;
 }
 
 export default CombatantPTR2e;

@@ -1,8 +1,6 @@
-import type { ActorPTR2e } from "@actor";
 import { BaseStatistic } from "./base.ts";
 import type { StatisticCheckData, StatisticData, StatisticDifficultyClassData } from "./data.ts";
 import { CheckModifier, ModifierPTR2e, StatisticModifier } from "@module/effects/modifiers.ts";
-import type { ItemPTR2e, ItemSystemPTR } from "@item";
 import type { AttackRollCallback, CheckRoll, CheckRollCallback, CheckType, PokeballRollCallback } from "@system/rolls/check-roll.ts";
 import * as R from "remeda";
 import {
@@ -10,14 +8,13 @@ import {
   extractModifiers,
   extractNotes,
 } from "src/util/change-helpers.ts";
-import type { TokenDocumentPTR2e } from "@module/canvas/token/document.ts";
 import type { CheckDC } from "@system/rolls/degree-of-success.ts";
 import type { RollNote, RollNoteSource } from "@system/notes.ts";
-import type { TokenPTR2e } from "@module/canvas/token/object.ts";
 import type { CheckContext, RollTarget } from "../data.ts";
 import type { CheckRollContext } from "@system/rolls/data.ts";
 import { CheckPTR2e } from "../check.ts";
 import type { AttackModifierPopup } from "@module/apps/modifier-popup/attack-modifier-popup.ts";
+import type { DeepPartial } from "fvtt-types/utils";
 
 class Statistic extends BaseStatistic {
   /** The `Statistic` from which this one was derived (set by `Statistic#extend`), or otherwise `null`. */
@@ -27,7 +24,7 @@ class Statistic extends BaseStatistic {
 
   #check?: BaseStatisticCheck<unknown, unknown, this>;
 
-  constructor(actor: ActorPTR2e, data: StatisticData, config: RollOptionConfig = {}) {
+  constructor(actor: Actor.ConfiguredInstance, data: StatisticData, config: RollOptionConfig = {}) {
     data.modifiers ??= [];
     data.domains ??= [];
 
@@ -160,27 +157,12 @@ class Statistic extends BaseStatistic {
   }
 
   /** Shortcut to `this#check#roll` */
-  roll(args: StatisticRollParameters = {}): Promise<Rolled<CheckRoll> | null> {
-    return this.check.roll(args) as Promise<Rolled<CheckRoll> | null>;
+  roll(args: StatisticRollParameters = {}): Promise<Roll.Evaluated<CheckRoll> | null> {
+    return this.check.roll(args) as Promise<Roll.Evaluated<CheckRoll> | null>;
   }
-
-  // /** Creates view data for sheets and chat messages */
-  // getChatData(options: RollOptionConfig = {}): StatisticChatData {
-  //     const { check, dc } = this.withRollOptions(options);
-
-  //     return {
-  //         slug: this.slug,
-  //         label: this.label,
-  //         check: { mod: check.mod, breakdown: check.breakdown, label: check.label },
-  //         dc: {
-  //             value: dc.value,
-  //             breakdown: dc.breakdown,
-  //         },
-  //     };
-  // }
 }
 
-class StatisticCheck<TParent extends Statistic = Statistic> implements BaseStatisticCheck<StatisticRollParameters, Rolled<CheckRoll>, TParent> {
+class StatisticCheck<TParent extends Statistic = Statistic> implements BaseStatisticCheck<StatisticRollParameters, Roll.Evaluated<CheckRoll>, TParent> {
   parent: TParent;
   type: CheckType;
   label: string;
@@ -241,7 +223,7 @@ class StatisticCheck<TParent extends Statistic = Statistic> implements BaseStati
     return this.parent.createRollOptions(this.domains, args);
   }
 
-  async roll(args: StatisticRollParameters = {}): Promise<Rolled<CheckRoll> | null> {
+  async roll(args: StatisticRollParameters = {}): Promise<Roll.Evaluated<CheckRoll> | null> {
     // Use a CheckDC Object
     args.dc =
       typeof args.dc === "number" ? { value: Math.trunc(args.dc) || 0 } : args.dc ?? null;
@@ -251,14 +233,14 @@ class StatisticCheck<TParent extends Statistic = Statistic> implements BaseStati
     // The origin's token
     const token =
       args.token ??
-      (this.actor.getActiveTokens(false, true).shift() as TokenDocumentPTR2e | null);
+      (this.actor.getActiveTokens(false, true).shift() as TokenDocument.ConfiguredInstance | null);
     const item = args.item ?? null;
     const origin = args.origin;
 
     const targetTokens = origin
       ? null
       : ((args.targets?.flatMap((target) => target?.getActiveTokens() ?? []) ??
-        Array.from(game.user.targets)) as TokenPTR2e[]) ?? null;
+        Array.from(game.user.targets)) as Token.ConfiguredInstance[]) ?? null;
 
     //TODO: Implement roll context for attacks
     const rollContext: CheckContext<this["actor"]> | null = null as CheckContext<
@@ -340,7 +322,7 @@ interface BaseStatisticCheck<TRollParam, TRollResult, TParent extends Statistic 
   mod: number;
   modifiers: ModifierPTR2e[];
 
-  get actor(): ActorPTR2e;
+  get actor(): Actor.ConfiguredInstance;
   createRollOptions(args: RollOptionConfig): Set<string>;
   roll(args: TRollParam): Promise<TRollResult | null>;
   get breakdown(): string;
@@ -352,13 +334,13 @@ interface StatisticRollParameters<TCallback extends CheckRollCallback | AttackRo
   /** The slug of an action of which this check is a constituent roll */
   action?: string;
   /** What token to use for the roll itself. Defaults to the actor's token */
-  token?: Maybe<TokenDocumentPTR2e>;
+  token?: Maybe<TokenDocument.ConfiguredInstance>;
   /** Which attack this is (for the purposes of multiple attack penalty) */
   attackNumber?: number;
   /** Optional targets for the roll */
-  targets?: Maybe<ActorPTR2e[]>;
+  targets?: Maybe<Actor.ConfiguredInstance[]>;
   /** Optional origin for the roll: only one of target and origin may be provided */
-  origin?: Maybe<ActorPTR2e>;
+  origin?: Maybe<Actor.ConfiguredInstance>;
   /** Optional DC data for the roll */
   dc?: CheckDC | CheckDCReference | number | null;
   /** Optional override for the check modifier label */
@@ -374,9 +356,9 @@ interface StatisticRollParameters<TCallback extends CheckRollCallback | AttackRo
   /** Additional modifiers */
   modifiers?: ModifierPTR2e[];
   /** The originating item of this attack, if any */
-  item?: ItemPTR2e<ItemSystemPTR, ActorPTR2e> | null;
+  item?: Item.ConfiguredInstance | null;
   /** The roll mode (i.e., 'roll', 'blindroll', etc) to use when rendering this roll. */
-  rollMode?: RollMode | "roll";
+  rollMode?: CONFIG.Dice.RollModes | "roll";
   /** Should the dialog be skipped */
   skipDialog?: boolean;
   // /** Should this roll be rolled twice? If so, should it keep highest or lowest? */
@@ -398,8 +380,8 @@ interface StatisticRollParameters<TCallback extends CheckRollCallback | AttackRo
 }
 
 interface CaptureStatisticRollParameters extends StatisticRollParameters<PokeballRollCallback> {
-  accuracyRoll: Rolled<CheckRoll>;
-  critRoll: Rolled<CheckRoll>;
+  accuracyRoll: Roll.Evaluated<CheckRoll>;
+  critRoll: Roll.Evaluated<CheckRoll>;
 }
 
 interface AttackStatisticRollParameters extends StatisticRollParameters<AttackRollCallback> {
@@ -415,9 +397,9 @@ interface CheckDCReference {
 
 interface RollOptionConfig {
   extraRollOptions?: string[];
-  item?: ItemPTR2e | null;
-  origin?: ActorPTR2e | null;
-  target?: ActorPTR2e | null;
+  item?: Item.ConfiguredInstance | null;
+  origin?: Actor.ConfiguredInstance | null;
+  target?: Actor.ConfiguredInstance | null;
 }
 
 export { Statistic, StatisticCheck };

@@ -1,15 +1,13 @@
-import type { AttackPTR2e} from "@data";
+import type { AttackPTR2e } from "@data";
 import { SummonAttackPTR2e } from "@data";
-import type { AttackStatisticRollParameters, BaseStatisticCheck, RollOptionConfig} from "./statistic.ts";
+import type { AttackStatisticRollParameters, BaseStatisticCheck, RollOptionConfig } from "./statistic.ts";
 import { Statistic } from "./statistic.ts";
 import type { StatisticData } from "./data.ts";
 import * as R from "remeda";
 import { CheckModifier, ModifierPTR2e, StatisticModifier } from "@module/effects/modifiers.ts";
 import type { AttackRollResult } from "@system/rolls/check-roll.ts";
-import type { ConsumablePTR2e, ItemPTR2e, ItemWithActions } from "@item";
-import type { ActorPTR2e } from "@actor";
+import type { ConsumablePTR2e, ItemWithActions } from "@item";
 import type { CheckContext } from "@system/data.ts";
-import type { TokenPTR2e } from "@module/canvas/token/object.ts";
 import { extractEffectRolls, extractModifierAdjustments, extractModifiers, extractNotes } from "src/util/change-helpers.ts";
 import type { CheckRollContext } from "@system/rolls/data.ts";
 import { CheckPTR2e } from "@system/check.ts";
@@ -189,9 +187,9 @@ class AttackCheck<TParent extends AttackStatistic = AttackStatistic> implements 
     options.add(`attack:category:${this.attack.category}`);
     for (const type of this.attack.types) options.add(`attack:type:${type}`);
 
-    const targets: { actor: ActorPTR2e, token?: TokenPTR2e }[] = (() => {
-      if (args.targets) return args.targets.map(t => ({ actor: t, token: t.token?.object as TokenPTR2e }));
-      return [...game.user!.targets ?? []].map(t => ({ actor: t.actor as ActorPTR2e, token: t as TokenPTR2e }));
+    const targets: { actor: Actor.ConfiguredInstance, token?: Token.ConfiguredInstance }[] = (() => {
+      if (args.targets) return args.targets.map(t => ({ actor: t, token: t.token?.object as Token.ConfiguredInstance }));
+      return [...game.user!.targets ?? []].map(t => ({ actor: t.actor as Actor.ConfiguredInstance, token: t as Token.ConfiguredInstance }));
     })()
 
     if (this.attack.slug === "fling-actor-toss") {
@@ -232,11 +230,11 @@ class AttackCheck<TParent extends AttackStatistic = AttackStatistic> implements 
 
       this.attack.power = power;
       this.attack.accuracy = accuracy;
-      if(this.attack.range) {
+      if (this.attack.range) {
         this.attack.range.distance = range;
       }
       this.attack.name = `Fling - ${target.actor.name}`;
-      this.attack.updateSource({ name: `Fling - ${target.actor.name}`, power, accuracy, range: {distance: range}, traits: this.attack._source.traits });
+      this.attack.updateSource({ name: `Fling - ${target.actor.name}`, power, accuracy, range: { distance: range }, traits: this.attack._source.traits });
       this.attack.prepareDerivedData();
     }
 
@@ -251,7 +249,7 @@ class AttackCheck<TParent extends AttackStatistic = AttackStatistic> implements 
       item: this.item,
       options,
       traits: args.traits ?? this.item.traits,
-    }) as CheckContext<ActorPTR2e, AttackCheck<TParent>, ItemWithActions>;
+    }) as CheckContext<Actor.ConfiguredInstance, AttackCheck<TParent>, ItemWithActions>;
 
     if (context.self.actor.flags.ptr2e.disableActionOptions?.disabled.includes(this.attack.uuid as ActionUUID)) {
       ui.notifications.warn(game.i18n.format("PTR2E.AttackWarning.AfflictionDisabled", { name: this.attack.name }));
@@ -263,7 +261,7 @@ class AttackCheck<TParent extends AttackStatistic = AttackStatistic> implements 
       origin: this.actor,
       target: this.actor,
       item: this.item,
-      attack: this.attack, //@ts-expect-error: FIXME: Should auto-resolve.
+      attack: this.attack,
       action: this.attack,
       domains: this.domains,
       options,
@@ -272,7 +270,7 @@ class AttackCheck<TParent extends AttackStatistic = AttackStatistic> implements 
     });
 
     // const extraModifiers = args.modifiers ?? [];
-    const contexts: Record<ActorUUID, CheckContext<ActorPTR2e, AttackCheck<TParent>, ItemWithActions>> = {}
+    const contexts: Record<ActorUUID, CheckContext<Actor.ConfiguredInstance, AttackCheck<TParent>, ItemWithActions>> = {}
     let anyValidTargets = false;
     for (const target of targets) {
       const allyOrEnemy = this.actor.isAllyOf(target.actor) ? "ally" : this.actor.isEnemyOf(target.actor) ? "enemy" : "neutral";
@@ -284,7 +282,7 @@ class AttackCheck<TParent extends AttackStatistic = AttackStatistic> implements 
         target: target,
         options: new Set([...options, `origin:${allyOrEnemy}`]),
         traits: args.traits ?? this.item.traits,
-      }) as CheckContext<ActorPTR2e, AttackCheck<TParent>, ItemWithActions>
+      }) as CheckContext<Actor.ConfiguredInstance, AttackCheck<TParent>, ItemWithActions>
 
       if (currContext.self.actor.flags.ptr2e.disableActionOptions?.disabled.includes(this.attack.uuid as ActionUUID)) {
         ui.notifications.warn(game.i18n.format("PTR2E.AttackWarning.AfflictionDisabled", { name: this.attack.name }));
@@ -362,20 +360,20 @@ class AttackCheck<TParent extends AttackStatistic = AttackStatistic> implements 
     const rolls = await CheckPTR2e.rolls(check, checkContext, args.callback);
     if (rolls?.length) {
       //TODO: Apply post-roll options from changes
-      if(rolls[0].accuracy && rolls[0].crit) {
+      if (rolls[0].accuracy && rolls[0].crit) {
         if (this.attack.slug.startsWith("fling") && this.attack.flingItemId) {
           const flingItemId = this.attack.flingItemId;
-          const flingItem = this.actor.items.get(flingItemId) as ItemPTR2e;
-          if(flingItem?.type === "consumable" && (flingItem.system as ConsumableSystem).consumableType === "pokeball") {
+          const flingItem = this.actor.items.get(flingItemId) as Item.ConfiguredInstance;
+          if (flingItem?.type === "consumable" && (flingItem.system as ConsumableSystem).consumableType === "pokeball") {
             const action = PokeballActionPTR2e.fromConsumable(flingItem as ConsumablePTR2e)
-            await action.roll({ accuracyRoll: rolls[0].accuracy, critRoll: rolls[0].crit});
+            await action.roll({ accuracyRoll: rolls[0].accuracy, critRoll: rolls[0].crit });
           }
         }
       }
     }
 
     // Reset the fling actor toss attack data.
-    if(this.attack.slug === "fling-actor-toss") {
+    if (this.attack.slug === "fling-actor-toss") {
       this.actor.generateFlingAttack();
     }
 

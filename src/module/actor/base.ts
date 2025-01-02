@@ -1,5 +1,4 @@
 /* eslint-disable no-fallthrough */
-import { TokenDocumentPTR2e } from "@module/canvas/token/document.ts";
 import type {
   ActorDimensions,
   ActorSynthetics,
@@ -8,34 +7,26 @@ import type {
   AuraData,
 } from "@actor";
 import type { ActiveEffectSystem, EffectSourcePTR2e } from "@effects";
-import { ActiveEffectPTR2e } from "@effects";
 import type { TypeEffectiveness } from "@scripts/config/effectiveness.ts";
-import type { ActionPTR2e, PokemonType, PTRCONSTS } from "@data";
+import type { PokemonType, PTRCONSTS } from "@data";
 import { AttackPTR2e, RollOptionChangeSystem, RollOptionManager, Trait } from "@data";
 import type { RollOptions } from "@module/data/roll-option-manager.ts";
-import type FolderPTR2e from "@module/folder/document.ts";
-import type { CombatantPTR2e, CombatPTR2e } from "@combat";
 import type AfflictionActiveEffectSystem from "@module/effects/data/affliction.ts";
-import { ChatMessagePTR2e } from "@chat";
 import type { AbilityPTR2e, ItemSystemPTR, MovePTR2e, PerkPTR2e } from "@item";
-import { ItemPTR2e } from "@item";
 import { ActionsCollections } from "./actions.ts";
 import type { CustomSkill } from "@module/data/models/skill.ts";
 import type { BaseStatisticCheck, StatisticCheck } from "@system/statistics/statistic.ts";
 import { Statistic } from "@system/statistics/statistic.ts";
 import type { CheckContext, CheckContextParams, RollContext, RollContextParams } from "@system/data.ts";
 import { extractEffectRolls, extractEphemeralEffects, extractModifiers, extractTargetModifiers, processPreUpdateHooks } from "src/util/change-helpers.ts";
-import type { TokenPTR2e } from "@module/canvas/token/object.ts";
 import * as R from "remeda";
 import { ModifierPTR2e } from "@module/effects/modifiers.ts";
 import { sluggify } from "@utils";
 import { preImportJSON } from "@module/data/doc-helper.ts";
 import { MigrationRunnerBase } from "@module/migration/runner/base.ts";
 import { MigrationList, MigrationRunner } from "@module/migration/index.ts";
-import type MoveSystem from "@item/data/move.ts";
 import type SpeciesSystem from "@item/data/species.ts";
 import type { PickableThing } from "@module/apps/pick-a-thing-prompt.ts";
-import type { ActionUUID } from "src/util/uuid.ts";
 import { ActorSizePTR2e } from "./data/size.ts";
 import { auraAffectsActor, checkAreaEffects } from "./helpers.ts";
 import type { DeepPartial, InexactPartial } from "fvtt-types/utils";
@@ -102,8 +93,8 @@ class ActorPTR2e extends Actor {
     );
   }
 
-  get combatant(): CombatantPTR2e | null {
-    const combatants = (game.combat as CombatPTR2e | undefined)?.combatants.filter(
+  get combatant(): Combatant.ConfiguredInstance | null {
+    const combatants = (game.combat as Combat.ConfiguredInstance | undefined)?.combatants.filter(
       (c) => c.actor === this
     );
     return combatants?.length
@@ -135,7 +126,7 @@ class ActorPTR2e extends Actor {
   }
 
   get species() {
-    return this._species ??= (this.items.get("actorspeciesitem")?.system as Maybe<SpeciesSystem>) ?? this.system.species ?? null;
+    return this._species ??= (this.items.get("actorspeciesitem")?.system as Maybe<SpeciesSystem>) ?? this.system.species as unknown as SpeciesSystem ?? null;
   }
 
   get size() {
@@ -185,12 +176,12 @@ class ActorPTR2e extends Actor {
     return (this._party ??= ((): ActorParty | null => {
       const owner = ((): ActorPTR2e | null => {
         if (this.folder?.owner)
-          return fromUuidSync(this.folder.owner) as ActorPTR2e
+          return fromUuidSync<ActorPTR2e>(this.folder.owner as ActorUUID) as ActorPTR2e
         return null;
       })();
       const party = ((): ActorPTR2e[] => {
         const uuid = (() => {
-          if (this.parent instanceof TokenDocumentPTR2e) {
+          if (this.parent instanceof TokenDocument.ConfiguredInstance) {
             return this.parent.baseActor?.uuid ?? this.uuid;
           }
           return this.uuid;
@@ -247,7 +238,7 @@ class ActorPTR2e extends Actor {
     if (data && '_stats' in data && data._stats && typeof data._stats === 'object' && 'systemId' in data._stats && data._stats.systemId === "ptu") {
       data.type = "ptu-actor";
 
-      for (const item of data.items as ItemPTR2e[]) {
+      for (const item of data.items as Item.ConfiguredInstance[]) {
         if (item._stats.systemId === "ptu") {
           item.type = "ptu-item";
         }
@@ -334,6 +325,7 @@ class ActorPTR2e extends Actor {
     if (this.type === "ptu-actor") return super.prepareBaseData();
     super.prepareBaseData();
 
+    //@ts-expect-error - Getter is added seperately.
     this.flags.ptr2e.disableActionOptions = {
       collection: new Collection(),
       disabled: []
@@ -423,9 +415,9 @@ class ActorPTR2e extends Actor {
 
   generateFlingAttack() {
     function getFlingAttack(
-      { name, slug, power = 25, accuracy = 100, types = ["untyped"], free = false, variant = true, description = "", id = "" }:
-        { name?: string, slug?: string, power?: number, accuracy?: number, types?: DeepPartial<AttackPTR2e['_source']['types']>, free?: boolean, variant?: boolean, description?: string, id?: string }
-        = { name: "", slug: "", power: 25, accuracy: 100, types: ["untyped"], free: false, variant: true, description: "", id: "" }
+      { name, slug, power = 25, accuracy = 100, types = ["untyped"] as const, free = false, variant = true, description = "", id = "" }:
+        { name?: string, slug?: string, power?: number, accuracy?: number, types?: PokemonType[], free?: boolean, variant?: boolean, description?: string, id?: string }
+        = { name: "", slug: "", power: 25, accuracy: 100, types: ["untyped"] as const, free: false, variant: true, description: "", id: "" }
     ): DeepPartial<AttackPTR2e['_source']> {
       return {
         slug: `fling${name?.length ? `-${slug}` : ""}`,
@@ -459,7 +451,7 @@ class ActorPTR2e extends Actor {
     }
     const data = {
       "name": "Fling",
-      "type": "move",
+      "type": "move" as const,
       "img": "systems/ptr2e/img/svg/untyped_icon.svg",
       "system": {
         "slug": "fling",
@@ -483,7 +475,7 @@ class ActorPTR2e extends Actor {
     };
 
     const itemNames = new Set<string>();
-    for (const item of this.items?.contents as unknown as ItemPTR2e[]) {
+    for (const item of this.items?.contents as unknown as Item.ConfiguredInstance[]) {
       if (!["consumable", "equipment", "gear", "weapon"].includes(item.type)) continue;
       if (!item.system.fling) continue;
       if (itemNames.has(item.slug)) continue;
@@ -499,17 +491,17 @@ class ActorPTR2e extends Actor {
       }));
     }
 
-    const existing = this.items.get(data._id) as Maybe<ItemPTR2e>;
+    const existing = this.items.get(data._id) as Maybe<Item.ConfiguredInstance>;
     if (existing) {
       existing.updateSource(data);
       existing.reset();
       this.fling = existing;
     }
     else {
-      this.fling = new ItemPTR2e(data, { parent: this });
+      this.fling = new CONFIG.Item.documentClass(data, { parent: this }) as MovePTR2e;
     }
 
-    this.items.set(this.fling.id, this.fling);
+    this.items.set(this.fling.id!, this.fling);
   }
 
   /**
@@ -532,9 +524,9 @@ class ActorPTR2e extends Actor {
     // Organize non-disabled effects by their application priority
     const changes = [];
     // Afflictions don't always have changes, so we need to track them separately
-    const afflictions: ActiveEffectPTR2e<ActorPTR2e, AfflictionActiveEffectSystem>[] = [];
+    const afflictions: ActiveEffect.ConfiguredInstance[] = [];
     for (const effect of this.allApplicableEffects() as unknown as Generator<
-      ActiveEffectPTR2e<ActorPTR2e>,
+      ActiveEffect.ConfiguredInstance,
       void,
       void
     >) {
@@ -549,7 +541,7 @@ class ActorPTR2e extends Actor {
       for (const statusId of effect.statuses) this.statuses.add(statusId);
       if (!effect.changes.length && effect.type === "affliction")
         afflictions.push(
-          effect as ActiveEffectPTR2e<ActorPTR2e, AfflictionActiveEffectSystem>
+          effect as ActiveEffect.ConfiguredInstance
         );
     }
     changes.sort((a, b) => a.priority! - b.priority!);
@@ -572,7 +564,7 @@ class ActorPTR2e extends Actor {
     }
   }
 
-  override *allApplicableEffects(): Generator<ActiveEffectPTR2e<this>> {
+  override *allApplicableEffects(): Generator<ActiveEffect.ConfiguredInstance> {
     if (game.ready) {
       const combatant = this.combatant;
       if (combatant) {
@@ -580,7 +572,7 @@ class ActorPTR2e extends Actor {
         if (summons?.length) {
           for (const summon of summons) {
             for (const effect of summon.system.getApplicableEffects(this)) {
-              yield new ActiveEffectPTR2e(effect.toObject(), { parent: this }) as ActiveEffectPTR2e<this>;
+              yield new CONFIG.ActiveEffect.documentClass(effect.toObject(), { parent: this });
             }
           }
         }
@@ -588,10 +580,10 @@ class ActorPTR2e extends Actor {
     }
     for (const trait of this.traits) {
       if (!trait.changes?.length) continue;
-      const effect = Trait.effectsFromChanges.bind(trait)(this) as ActiveEffectPTR2e<this>;
+      const effect = Trait.effectsFromChanges.bind(trait)(this) as ActiveEffect.ConfiguredInstance;
       if (effect) yield effect;
     }
-    yield* super.allApplicableEffects() as Generator<ActiveEffectPTR2e<this>>
+    yield* super.allApplicableEffects() as Generator<ActiveEffect.ConfiguredInstance>
   }
 
   _calculateEffectiveness(): Record<PokemonType, number> {
@@ -813,7 +805,7 @@ class ActorPTR2e extends Actor {
   ): Promise<boolean | null> {
     if (!(typeof effectUuid === "string")) return null;
 
-    const effect = await fromUuid(effectUuid, { relative: this as Actor }) as ActiveEffectPTR2e;
+    const effect = await fromUuid<ActiveEffect.ConfiguredInstance>(effectUuid, { relative: this });
     const change = effect?.changes.find(
       (c): c is RollOptionChangeSystem =>
         c instanceof RollOptionChangeSystem && c.domain === domain && c.option === option,
@@ -830,7 +822,7 @@ class ActorPTR2e extends Actor {
     value: number,
     isDelta?: boolean,
     isBar?: boolean
-  ): Promise<this> {
+  ) {
     if (attribute === "health") {
       if (value >= 0) value = Math.floor(value);
       if (value < 0) value = Math.ceil(value);
@@ -839,7 +831,7 @@ class ActorPTR2e extends Actor {
       await this.applyDamage(value * -1);
       return this;
     }
-    return super.modifyTokenAttribute(attribute, value, isDelta, isBar);
+    return super.modifyTokenAttribute(attribute, value, !!isDelta, !!isBar);
   }
 
   getEffectiveness(moveTypes: Set<PokemonType>, effectivenessStages = 0, ignoreImmune = false): number {
@@ -928,7 +920,7 @@ class ActorPTR2e extends Actor {
     const rollNotes: { options: string[], domains: string[], html: string }[] = [];
     const afflictions = this.synthetics.afflictions.data.reduce<{
       toDelete: string[];
-      toUpdate: Partial<ActiveEffectPTR2e<ActorPTR2e>["_source"]>[];
+      toUpdate: Partial<ActiveEffect.ConstructorData>[];
       groups: Record<number, {
         afflictions: { formula?: string; affliction: AfflictionActiveEffectSystem }[];
         type?: "healing" | "damage" | "both";
@@ -1014,10 +1006,10 @@ class ActorPTR2e extends Actor {
       }
     }
 
-    const updates: DeepPartial<ActorPTR2e["_source"]> = {};
+    const updates: Actor.ConstructorData = {};
     const validAfflictionUpdates = afflictions.toUpdate.filter((update) => update._id);
     if (validAfflictionUpdates.length > 0)
-      updates.effects = validAfflictionUpdates as foundry.documents.ActorSource["effects"];
+      updates.effects = validAfflictionUpdates as ActiveEffect.ConstructorData[];
 
     const oldHealth = this.system.health.value;
     if (newHealth !== oldHealth) {
@@ -1110,7 +1102,7 @@ class ActorPTR2e extends Actor {
    */
   onEndCombat() {
     const applicable = this.effects.filter(
-      (s) => (s as ActiveEffectPTR2e).system.removeAfterCombat
+      (s) => (s as ActiveEffect.ConfiguredInstance).system.removeAfterCombat
     );
     this.deleteEmbeddedDocuments(
       "ActiveEffect",
@@ -1120,7 +1112,7 @@ class ActorPTR2e extends Actor {
 
   async getCheckContext<
     TStatistic extends BaseStatisticCheck<unknown, unknown>,
-    TItem extends ItemPTR2e
+    TItem extends Item.ConfiguredInstance
   >(
     params: CheckContextParams<TStatistic, TItem>
   ): Promise<CheckContext<this, TStatistic, TItem>> {
@@ -1138,8 +1130,8 @@ class ActorPTR2e extends Actor {
     })();
 
     const appliesTo =
-      context.target?.token?.actor?.uuid ??
-      (context.target?.actor?.id ? context.target.actor.uuid : null) ??
+      context.target?.token?.actor?.uuid as ActorUUID | null ??
+      (context.target?.actor?.id ? context.target.actor.uuid as ActorUUID : null) ??
       null;
 
     const rangePenalty = rangeIncrement
@@ -1224,17 +1216,17 @@ class ActorPTR2e extends Actor {
 
   protected getRollContext<
     TStatistic extends BaseStatisticCheck<unknown, unknown>,
-    TItem extends ItemPTR2e
+    TItem extends Item.ConfiguredInstance
   >(params: RollContextParams<TStatistic, TItem>): Promise<RollContext<this, TStatistic, TItem>>;
   protected async getRollContext(params: RollContextParams): Promise<RollContext<this>> {
-    const [selfToken, targetToken]: [TokenPTR2e | null, TokenPTR2e | null] =
+    const [selfToken, targetToken]: [Token.ConfiguredInstance | null, Token.ConfiguredInstance | null] =
       canvas.ready && !params.viewOnly
         ? [
-          canvas.tokens.controlled.find((t) => t.actor === this) ??
-          (this.getActiveTokens().shift() as TokenPTR2e) ??
+          canvas.tokens!.controlled.find((t) => t.actor === this) ??
+          (this.getActiveTokens().shift() as Token.ConfiguredInstance) ??
           null,
           params.target?.token ??
-          (params.target?.actor?.getActiveTokens().shift() as TokenPTR2e) ??
+          (params.target?.actor?.getActiveTokens().shift() as Token.ConfiguredInstance) ??
           null,
         ]
         : [null, null];
@@ -1292,7 +1284,7 @@ class ActorPTR2e extends Actor {
         return null;
       })() ?? params.statistic;
 
-    const selfItem = ((): ItemPTR2e | null => {
+    const selfItem = ((): Item.ConfiguredInstance | null => {
       // 1. Simplest case: no context clone, so used the item passed to this method
       if (selfActor === this) return params.item ?? null;
 
@@ -1300,18 +1292,18 @@ class ActorPTR2e extends Actor {
       if (
         statistic &&
         "item" in statistic &&
-        statistic.item instanceof ItemPTR2e &&
+        statistic.item instanceof CONFIG.Item.documentClass &&
         ("actions" in statistic.item.system ||
           ("consumableType" in statistic.item.system &&
             statistic.item.system.consumableType &&
             statistic.item.system.consumableType === "pokeball"))
       ) {
-        return statistic.item as ItemPTR2e
+        return statistic.item as Item.ConfiguredInstance
       }
 
       // 3. Get the item directly from the context clone
       const itemClone = selfActor.items.get(params.item?.id ?? "") as unknown as
-        | ItemPTR2e
+        | Item.ConfiguredInstance
         | undefined;
       if (itemClone) return itemClone;
 
@@ -1516,7 +1508,7 @@ class ActorPTR2e extends Actor {
   }
 
   /** Apply effects from an aura: will later be expanded to handle effects from measured templates */
-  async applyAreaEffects(aura: AuraData, origin: { actor: ActorPTR2e; token: TokenDocumentPTR2e }, affected: Set<ActorPTR2e>): Promise<void> {
+  async applyAreaEffects(aura: AuraData, origin: { actor: ActorPTR2e; token: TokenDocument.ConfiguredInstance }, affected: Set<ActorPTR2e>): Promise<void> {
     if (
       game.user !== this.primaryUpdater ||
       origin.token.hidden
@@ -1532,13 +1524,13 @@ class ActorPTR2e extends Actor {
 
     // Predicate for appliesSelfOnly is checking how many actors in the aura count, not whether it should apply to this actor.
     for (const data of aura.effects.filter(e => e.appliesSelfOnly ? origin.actor === this : e.predicate.test(rollOptions))) {
-      const existing = this.appliedEffects.find(e => e.flags?.core?.sourceId === data.uuid) as ActiveEffectPTR2e | undefined;
+      const existing = this.appliedEffects.find(e => e.flags?.core?.sourceId === data.uuid) as ActiveEffect.ConfiguredInstance | undefined;
       if (existing && !data.appliesSelfOnly) continue;
 
       if (!auraAffectsActor(data, origin.actor, this)) continue;
 
-      const effect = existing ?? await fromUuid(data.uuid);
-      if (!((effect instanceof ItemPTR2e && effect.type === "effect") || effect instanceof ActiveEffectPTR2e)) {
+      const effect = existing ?? await fromUuid<ActiveEffect.ConfiguredInstance>(data.uuid);
+      if (!((effect instanceof CONFIG.Item.documentClass && effect.type === "effect") || effect instanceof CONFIG.ActiveEffect.documentClass)) {
         console.warn(`Effect from ${data.uuid} not found`);
         continue;
       }
@@ -1578,7 +1570,7 @@ class ActorPTR2e extends Actor {
         }
       }
 
-      const effects = (effect instanceof ItemPTR2e ? effect.effects : [effect]) as ActiveEffectPTR2e[];
+      const effects = (effect instanceof CONFIG.Item.documentClass ? effect.effects : [effect]) as ActiveEffect.ConfiguredInstance[];
       const sources = effects.map(e => foundry.utils.mergeObject(e.toObject(), { flags }) as unknown as EffectSourcePTR2e);
       toCreate.push(...sources);
     }
@@ -1591,8 +1583,8 @@ class ActorPTR2e extends Actor {
     }
   }
 
-  isImmuneToEffect(data: ActiveEffectPTR2e | ActiveEffectPTR2e['_source']): boolean {
-    const effect = data instanceof ActiveEffectPTR2e ? data : new ActiveEffectPTR2e(data);
+  isImmuneToEffect(data: ActiveEffect.ConfiguredInstance | ActiveEffect.ConstructorData): boolean {
+    const effect = data instanceof CONFIG.ActiveEffect.documentClass ? data : new CONFIG.ActiveEffect.documentClass(data);
     const immunities = this.rollOptions.getFromDomain("immunities");
     if (Object.keys(immunities).length === 0) return false;
     if (effect.traits.has("ignore-immunity")) return false;
@@ -1609,12 +1601,12 @@ class ActorPTR2e extends Actor {
     return false;
   }
 
-  async applyRollEffects(toApply: ActiveEffectPTR2e["_source"][]) {
-    const oldEffects = this.effects.filter(e => e.type === "affliction").map(e => e.clone({}, { keepId: true })) as unknown as ActiveEffectPTR2e[];
-    const effects = await this.createEmbeddedDocuments("ActiveEffect", toApply) as ActiveEffectPTR2e[];
+  async applyRollEffects(toApply: ActiveEffect.ConstructorData[]) {
+    const oldEffects = this.effects.filter(e => e.type === "affliction").map(e => e.clone({}, { keepId: true })) as unknown as ActiveEffect.ConfiguredInstance[];
+    const effects = await this.createEmbeddedDocuments("ActiveEffect", toApply) as ActiveEffect.ConfiguredInstance[];
 
     const { notApplied, stacksUpdated } = toApply.reduce((acc, e) => {
-      const effect = new ActiveEffectPTR2e(e);
+      const effect = new CONFIG.ActiveEffect.documentClass(e);
       if (effects.some(ae => ae.slug === effect.slug)) {
         return acc;
       }
@@ -1625,7 +1617,7 @@ class ActorPTR2e extends Actor {
         acc.notApplied.push(effect);
       }
       return acc;
-    }, { notApplied: [] as ActiveEffectPTR2e[], stacksUpdated: [] as string[] });
+    }, { notApplied: [] as ActiveEffect.ConfiguredInstance[], stacksUpdated: [] as string[] });
 
     await ChatMessage.create({
       content: effects.length
@@ -1644,7 +1636,7 @@ class ActorPTR2e extends Actor {
     })
   }
 
-  static override async createDocuments<T extends foundry.abstract.Document.SystemConstructor, Temporary extends boolean | undefined>(
+  static override async createDocuments<T extends foundry.abstract.Document.AnyConstructor, Temporary extends boolean | undefined>(
     this: T,
     data: Actor.ConstructorData[],
     operation?: Record<string, unknown> & {
@@ -1670,7 +1662,7 @@ class ActorPTR2e extends Actor {
       );
 
       const tokenDefaults = foundry.utils.deepClone(game.settings.get("core", "defaultToken"));
-      const actor = new this(foundry.utils.mergeObject({ prototypeToken: tokenDefaults }, source));
+      const actor = new CONFIG.Actor.documentClass(foundry.utils.mergeObject({ prototypeToken: tokenDefaults }, source));
       await MigrationRunner.ensureSchemaVersion(
         actor,
         MigrationList.constructFromVersion(lowestSchemaVersion)
@@ -1686,14 +1678,14 @@ class ActorPTR2e extends Actor {
     data: Record<string, unknown> = {},
     context: Record<string, unknown> & {
       parent?: AnyDocument;
-      pack?: string | null;
+      pack: string | null;
     } &
       InexactPartial<
         DialogOptions & {
           perksOnly?: boolean;
           types?: string[];
         }
-      > = {}) {
+      > = {pack: null}) {
     if (!Array.isArray(context.types)) context.types = this.TYPES.filter(t => t !== "ptu-actor");
     else {
       if (context.types.length) context.types = context.types.filter(t => t !== "ptu-actor");
@@ -1718,7 +1710,7 @@ class ActorPTR2e extends Actor {
     if (options.fail === true) return false;
 
     if (this.system.party.ownerOf) {
-      const folder = game.folders.get(this.system.party.ownerOf) as FolderPTR2e;
+      const folder = game.folders.get(this.system.party.ownerOf) as Folder.ConfiguredInstance;
       if (folder.owner) {
         throw new Error("Cannot create an actor that owns a party folder already owned by another actor.");
       }
@@ -1733,7 +1725,7 @@ class ActorPTR2e extends Actor {
   ): Promise<boolean | void> {
     if(!changed) return false;
     if (changed.system?.party?.ownerOf) {
-      const folder = game.folders.get(changed.system.party.ownerOf as Maybe<string>) as FolderPTR2e;
+      const folder = game.folders.get(changed.system.party.ownerOf as string) as Folder.ConfiguredInstance;
       if (folder?.owner && !this.uuid?.endsWith(folder.owner)) {
         throw new Error("Cannot change the owner of a party folder to an actor that does not own it. Please remove the current party owner first.");
       }
@@ -1742,21 +1734,21 @@ class ActorPTR2e extends Actor {
     if (changed.system?.health?.value !== undefined) {
       const fainted = this.effects.get("faintedcondition") !== undefined;
       if ((changed.system.health.value as number) <= 0 && !fainted) {
-        const effects: ActiveEffectPTR2e["_source"][] = [];
+        const effects: ActiveEffect.ConstructorData[] = [];
         effects.push(
           (
-            await ActiveEffectPTR2e.fromStatusEffect("dead")
-          ).toObject() as ActiveEffectPTR2e["_source"]
+            await CONFIG.ActiveEffect.documentClass.fromStatusEffect("dead")
+          ).toObject() as ActiveEffect.ConstructorData
         );
 
         const weary = this.effects.get("wearycondition00") as
-          | ActiveEffectPTR2e<this>
+          | ActiveEffect.ConfiguredInstance
           | undefined;
         if (!weary) {
           effects.push(
             (
-              await ActiveEffectPTR2e.fromStatusEffect("weary")
-            ).toObject() as ActiveEffectPTR2e["_source"]
+              await CONFIG.ActiveEffect.documentClass.fromStatusEffect("weary")
+            ).toObject() as ActiveEffect.ConstructorData
           );
         } else {
           await weary.update({ "system.stacks": weary.system.stacks + 1 });
@@ -1821,7 +1813,7 @@ class ActorPTR2e extends Actor {
 
           const newMoves = this.species.moves.levelUp.filter(move => move.level > currentLevel && move.level <= level).filter(move => !this.itemTypes.move.some(item => item.slug == move.name));
           if (newMoves.length) {
-            const moves = (await Promise.all(newMoves.map(move => fromUuid<ItemPTR2e<MoveSystem>>(move.uuid)))).flatMap(move => move ?? []);
+            const moves = (await Promise.all(newMoves.map(move => fromUuid<Item.ConfiguredInstance>(move.uuid)))).flatMap(move => move ?? []);
             changed.items ??= [];
             //@ts-expect-error - Asserted that this is an Array.
             changed.items.push(...moves.map(move => move.toObject()));
@@ -1855,8 +1847,8 @@ class ActorPTR2e extends Actor {
   protected override async _onCreateDescendantDocuments(
     parent: ClientDocument,
     collection: "effects" | "items",
-    documents: ActiveEffectPTR2e[] | ItemPTR2e[],
-    results: ActiveEffectPTR2e["_source"][] | ItemPTR2e["_source"][],
+    documents: ActiveEffect.ConfiguredInstance[] | Item.ConfiguredInstance[],
+    results: ActiveEffect.ConstructorData[] | Item.ConstructorData[],
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     options: foundry.abstract.Document.OnCreateOptions<any> & InexactPartial<{render: boolean }>,
     userId: string
@@ -1869,7 +1861,7 @@ class ActorPTR2e extends Actor {
       collection: "effects" | "items",
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       _documents: any[]
-    ): _documents is ActiveEffectPTR2e[] {
+    ): _documents is ActiveEffect.ConfiguredInstance[] {
       return collection === "effects";
     }
     if (isEffect(collection, documents)) return;
@@ -1911,8 +1903,8 @@ class ActorPTR2e extends Actor {
   protected override _onUpdateDescendantDocuments(
     parent: ClientDocument,
     collection: "effects" | "items",
-    documents: ClientDocument[], //ActiveEffectPTR2e[] | ItemPTR2e[],
-    changes: ActiveEffectPTR2e["_source"][] | ItemPTR2e["_source"][],
+    documents: ClientDocument[], //ActiveEffect.ConfiguredInstance[] | Item.ConfiguredInstance[],
+    changes: ActiveEffect.ConstructorData[] | Item.ConstructorData[],
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     options: foundry.abstract.Document.OnUpdateOptions<any> & InexactPartial<{ render: boolean }>,
     userId: string
@@ -1933,7 +1925,7 @@ class ActorPTR2e extends Actor {
 
     // Find the effect with the static _id of the status effect
     if (status._id) {
-      const effect = this.effects.get(status._id);
+      const effect = this.effects.get(status._id as string);
       if (effect) existing.push(effect.id);
     }
 
@@ -1946,9 +1938,9 @@ class ActorPTR2e extends Actor {
     }
 
     if ((status.system as ActiveEffectSystem["_source"])?.stacks) {
-      const slug = sluggify(game.i18n.localize(status.name));
+      const slug = sluggify(game.i18n.localize(status.name!));
       for (const id of existing) {
-        const effect = this.effects.get(id) as ActiveEffectPTR2e<this>;
+        const effect = this.effects.get(id) as ActiveEffect.ConfiguredInstance
         if (effect.slug === slug) {
           if (overlay) {
             if (!all && effect.system.stacks > 1)
@@ -1971,10 +1963,9 @@ class ActorPTR2e extends Actor {
 
     // Create a new effect unless the status effect is forced inactive
     if (!active && active !== undefined) return;
-    const effect = await ActiveEffectPTR2e.fromStatusEffect(statusId);
+    const effect = await CONFIG.ActiveEffect.documentClass.fromStatusEffect(statusId);
     if (overlay) effect.updateSource({ "flags.core.overlay": true });
-    //@ts-expect-error - Active effects aren't typed properly yet
-    return ActiveEffectPTR2e.create(effect.toObject(), { parent: this, keepId: true });
+    return CONFIG.ActiveEffect.documentClass.create(effect.toObject(), { parent: this, keepId: true });
   }
 
   hasStatus(statusId: string): boolean {
@@ -1984,7 +1975,7 @@ class ActorPTR2e extends Actor {
 
     // Find the effect with the static _id of the status effect
     if (status._id) {
-      const effect = this.effects.get(status._id);
+      const effect = this.effects.get(status._id as string);
       if (effect) return true;
     }
 
@@ -2011,7 +2002,7 @@ class ActorPTR2e extends Actor {
 
     // remove effects
     const applicable = this.effects.filter(
-      (s) => (s as ActiveEffectPTR2e).system.removeAfterCombat || (s as ActiveEffectPTR2e).system.removeOnRecall
+      (s) => (s as ActiveEffect.ConfiguredInstance).system.removeAfterCombat || (s as ActiveEffect.ConfiguredInstance).system.removeOnRecall
     );
     await this.deleteEmbeddedDocuments(
       "ActiveEffect",
@@ -2038,7 +2029,7 @@ class ActorPTR2e extends Actor {
 }
 
 interface ActorPTR2e extends Actor {
-  // get folder(): FolderPTR2e | null;
+  // get folder(): Folder.ConfiguredInstance | null;
 
   _party: ActorParty | null;
 
@@ -2052,8 +2043,6 @@ interface ActorPTR2e extends Actor {
 
   _actions: ActionsCollections;
   _perks: Map<string, PerkPTR2e> | null;
-
-  flags: ActorFlags2e;
 
   rollOptions: RollOptionManager<this>;
 
@@ -2073,7 +2062,7 @@ interface ActorPTR2e extends Actor {
   skills: Record<string, Statistic>;
   _species: SpeciesSystem | null;
 
-  // get itemTypes(): Record<string, ItemPTR2e[]>;
+  // get itemTypes(): Record<string, Item.ConfiguredInstance[]>;
 
   auras: Map<string, AuraData>;
 
@@ -2081,24 +2070,6 @@ interface ActorPTR2e extends Actor {
   checkAreaEffects(): void;
 
   fling: MovePTR2e;
-}
-
-interface ActorFlags2e {
-  core?: {
-    sourceId?: string;
-  }
-  ptr2e: {
-    rollOptions: RollOptions & object;
-    sheet?: {
-      perkFlash?: boolean;
-    };
-    disableActionOptions?: {
-      collection: Collection<ActionPTR2e>;
-      get options(): PickableThing[];
-      disabled: ActionUUID[];
-    }
-    editedSkills?: boolean
-  };
 }
 
 export default ActorPTR2e;

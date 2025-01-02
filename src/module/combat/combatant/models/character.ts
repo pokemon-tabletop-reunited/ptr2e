@@ -1,32 +1,36 @@
-import type { CombatantPTR2e, CombatPTR2e } from "@combat";
 import CombatantSystemPTR2e, { type CombatantSystemSchema } from "../system.ts";
-import type { ActorPTR2e } from "@actor";
+import type SummonCombatantSystem from "./summon.ts";
 
 class CharacterCombatantSystem extends CombatantSystemPTR2e {
 
-  get actor() {
+  get actor(): Actor.ConfiguredInstance | null {
+    const self = this as CharacterCombatantSystem;
     //if (!this.parent.actor) throw new Error("A Combatant must have an associated Actor to use this method.")
-    return this.parent.actor;
+    return self.parent.actor;
   }
 
   get speedStages() {
-    return this._speedStages;
+    const self = this as CharacterCombatantSystem;
+    return self._speedStages;
   }
 
   private set speedStages(value: number) {
-    this._speedStages = Math.clamp(value, -6, 6);
+    const self = this as CharacterCombatantSystem;
+    self._speedStages = Math.clamp(value, -6, 6);
   }
   
   private _speedStages = 0;
   private _baseAV = 0;
 
   override get baseAV() {
-    this.speedStages = this.actor?.speedStage ?? 0;
-    return this._baseAV = CharacterCombatantSystem.calculateBaseAV(this.actor, this.combat);
+    const self = this as CharacterCombatantSystem;
+    self.speedStages = self.actor?.speedStage ?? 0;
+    return self._baseAV = CharacterCombatantSystem.calculateBaseAV(self.actor, self.combat);
   }
 
   get previousBaseAV() {
-    return this._baseAV ||= this.baseAV;
+    const self = this as CharacterCombatantSystem;
+    return self._baseAV ||= self.baseAV;
   }
 
   override prepareDerivedData(): void {
@@ -37,8 +41,8 @@ class CharacterCombatantSystem extends CombatantSystemPTR2e {
   }
 
   static calculateBaseAV(
-    actor: ActorPTR2e | null,
-    combat: CombatPTR2e,
+    actor: Actor.ConfiguredInstance | null,
+    combat: Combat.ConfiguredInstance,
     speedStages = actor?.speedStage ?? 0
   ): number {
     if (!actor) return Infinity;
@@ -92,7 +96,7 @@ class CharacterCombatantSystem extends CombatantSystemPTR2e {
     if(!summons?.length) return;
 
     for(const summon of summons) {
-      summon.system.notifyActorsOfEffectsIfApplicable([this.parent]);
+      (summon.system as SummonCombatantSystem).notifyActorsOfEffectsIfApplicable([this.parent]);
     }
   }
 
@@ -106,7 +110,7 @@ class CharacterCombatantSystem extends CombatantSystemPTR2e {
   }
 
   override _onCreate(
-    data: foundry.abstract.TypeDataModel.ParentAssignmentType<CombatantSystemSchema, CombatantPTR2e>,
+    data: foundry.abstract.TypeDataModel.ParentAssignmentType<CombatantSystemSchema, Combatant.ConfiguredInstance>,
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     options: foundry.abstract.Document.OnCreateOptions<any>,
     userId: string

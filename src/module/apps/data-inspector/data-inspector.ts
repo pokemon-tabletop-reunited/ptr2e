@@ -1,51 +1,37 @@
-import type { ActorSystemPTR2e } from "@actor";
-import { ActorPTR2e } from "@actor";
-import { ApplicationV2Expanded } from "../appv2-expanded.ts";
+import { ApplicationV2Expanded, type ApplicationConfigurationExpanded } from "../appv2-expanded.ts";
 import { DataStructure } from "./data-handler.ts";
-import type { ItemSystemPTR } from "@item";
-import { ItemPTR2e } from "@item";
 import { AttackMessageSystem, CaptureMessageSystem, ChatMessagePTR2e, DamageAppliedMessageSystem, SkillMessageSystem } from "@chat";
 import type { TreeTypes } from "./data.ts";
-import type { TokenDocumentPTR2e } from "@module/canvas/token/document.ts";
 import { htmlQuery, htmlQueryAll } from "@utils";
-import { ActiveEffectPTR2e } from "@effects";
 import MiniSearch from "minisearch";
 import type { Tab } from "@item/sheets/document.ts";
+import type { AnyObject, DeepPartial } from "fvtt-types/utils";
 
-type AllowedDocumentTypes = ActorPTR2e | ActorPTR2e<ActorSystemPTR2e, TokenDocumentPTR2e> | ItemPTR2e<ItemSystemPTR> | ActiveEffectPTR2e | ChatMessagePTR2e<AttackMessageSystem> | ChatMessagePTR2e<SkillMessageSystem>;
+type AllowedDocumentTypes = Actor.ConfiguredInstance | Item.ConfiguredInstance | ActiveEffect.ConfiguredInstance | ChatMessage.ConfiguredInstance;
 
-class DataInspector extends foundry.applications.api.HandlebarsApplicationMixin(ApplicationV2Expanded) {
+class DataInspector extends foundry.applications.api.HandlebarsApplicationMixin(ApplicationV2Expanded)<AnyObject> {
 
-  static override DEFAULT_OPTIONS = foundry.utils.mergeObject(
-    super.DEFAULT_OPTIONS,
-    {
-      tag: "aside",
-      classes: ["sheet", "data-inspector"],
-      position: {
-        height: 700,
-        width: 685,
-      },
-      window: {
-        minimizable: true,
-        resizable: true,
-      },
-      dragDrop: [{ dragSelector: null, dropSelector: ".window-content" }],
-      actions: {
-        refresh: function (this: DataInspector) {
-          this.resetCache()
-          this.render(true);
-        }
-      }
+  static override DEFAULT_OPTIONS = {
+    tag: "aside",
+    classes: ["sheet", "data-inspector"],
+    position: {
+      height: 700,
+      width: 685,
     },
-    { inplace: false }
-  );
+    window: {
+      minimizable: true,
+      resizable: true,
+    },
+    dragDrop: [{ dragSelector: null, dropSelector: ".window-content" }],
+    actions: {
+      refresh: function (this: DataInspector) {
+        this.resetCache()
+        this.render(true);
+      }
+    }
+  }
 
   static override PARTS: Record<string, foundry.applications.api.HandlebarsApplicationMixin.HandlebarsTemplatePart> = {
-    // header: {
-    //   id: "header",
-    //   template: "systems/ptr2e/templates/apps/data-inspector/header.hbs",
-    //   scrollable: [],
-    // },
     target: {
       id: "target",
       template: "systems/ptr2e/templates/apps/data-inspector/target.hbs",
@@ -92,7 +78,7 @@ class DataInspector extends foundry.applications.api.HandlebarsApplicationMixin(
   private lastSearch: { term: string | null, fuzzy: number } = { term: '', fuzzy: 0.15 };
   private includeFunctions = false;
 
-  private tabGroups: Record<string, string> = {
+  override tabGroups = {
     targets: "",
   };
   private tabs: Record<string, Tab> = {};
@@ -144,7 +130,7 @@ class DataInspector extends foundry.applications.api.HandlebarsApplicationMixin(
         if (!('getRollData' in document)) return { data: {}, path: '' };
         if (this.rollData == null) {
           this.rollData = document.getRollData() as Record<string, unknown>;
-          if(this.rollData.actor) this.rollData = foundry.utils.duplicate(this.rollData.actor as Record<string, unknown>);
+          if (this.rollData.actor) this.rollData = foundry.utils.duplicate(this.rollData.actor as Record<string, unknown>);
         }
         return { data: this.rollData, path: '' };
       }
@@ -189,7 +175,7 @@ class DataInspector extends foundry.applications.api.HandlebarsApplicationMixin(
     };
   }
 
-  override async _prepareContext(options?: foundry.applications.api.HandlebarsApplicationMixin.HandlebarsRenderOptions | undefined) {
+  override async _prepareContext(options: foundry.applications.api.HandlebarsApplicationMixin.HandlebarsRenderOptions) {
     const context = await super._prepareContext(options) as Record<string, unknown>,
       doc = this.document,
       type = doc.type;
@@ -208,7 +194,7 @@ class DataInspector extends foundry.applications.api.HandlebarsApplicationMixin(
 
   _prepareContextDataInspector(context: Record<string, unknown>) {
     const doc = this.document,
-      isActor = doc instanceof ActorPTR2e;
+      isActor = doc instanceof Actor.ConfiguredInstance;
 
     if (this.mode === 'source') {
       this.temporaryData = doc.toObject();
@@ -463,7 +449,7 @@ class DataInspector extends foundry.applications.api.HandlebarsApplicationMixin(
               const instance = foundry.applications.instances.get("data-inspector-" + uuid);
               if (instance) return void instance.bringToFront();
 
-              if (!(ds.value instanceof ActorPTR2e || ds.value instanceof ItemPTR2e || document instanceof ActiveEffectPTR2e || ds.value instanceof ChatMessagePTR2e)) return void ui.notifications.error(game.i18n.localize("PTR2E.DataInspector.Error.InvalidDocument"));
+              if (!(ds.value instanceof CONFIG.Actor.documentClass || ds.value instanceof CONFIG.Item.documentClass || document instanceof CONFIG.ActiveEffect.documentClass || ds.value instanceof CONFIG.ChatMessage.documentClass)) return void ui.notifications.error(game.i18n.localize("PTR2E.DataInspector.Error.InvalidDocument"));
               return void new DataInspector(ds.value as AllowedDocumentTypes).render(true)
             }
           });
@@ -497,21 +483,21 @@ class DataInspector extends foundry.applications.api.HandlebarsApplicationMixin(
   override async _onDrop(event: DragEvent) {
     event.preventDefault();
 
-    const data: { type: string, uuid: string } = TextEditor.getDragEventData(event);
+    const data = TextEditor.getDragEventData(event) as unknown as { type: string, uuid: string }
     if (!data?.uuid) return;
 
-    const document = await fromUuid(data.uuid);
+    const document = await fromUuid<AllowedDocumentTypes>(data.uuid);
     if (!document) return;
 
     const instance = foundry.applications.instances.get("data-inspector-" + document.uuid);
     if (instance) return void instance.bringToFront();
 
-    if (!(document instanceof ActorPTR2e || document instanceof ItemPTR2e || document instanceof ActiveEffectPTR2e || document instanceof ChatMessagePTR2e)) return void ui.notifications.error(game.i18n.localize("PTR2E.DataInspector.Error.InvalidDocument"));
+    if (!(document instanceof CONFIG.Actor.documentClass || document instanceof CONFIG.Item.documentClass || document instanceof CONFIG.ActiveEffect.documentClass || document instanceof CONFIG.ChatMessage.documentClass)) return void ui.notifications.error(game.i18n.localize("PTR2E.DataInspector.Error.InvalidDocument"));
     new DataInspector(document as AllowedDocumentTypes).render(true);
     return void this.close();
   }
 
-  override _onRender(context: foundry.applications.api.ApplicationRenderContext, options: foundry.applications.api.HandlebarsApplicationMixin.HandlebarsRenderOptions): void {
+  override _onRender(context: AnyObject, options: foundry.applications.api.HandlebarsApplicationMixin.HandlebarsRenderOptions): void {
     super._onRender(context, options);
 
     if (this.scrollToPath) {
@@ -528,13 +514,13 @@ class DataInspector extends foundry.applications.api.HandlebarsApplicationMixin(
     const infoLabel = game.i18n.localize("PTR2E.DataInspector.Instructions");
     const info = `<button type="button" class="header-control fa-solid fa-circle-question info-tooltip" 
                             data-tooltip="${infoLabel}" aria-label="${infoLabel}" data-tooltip-direction="UP"></button>`;
-    this.window.controls.insertAdjacentHTML("afterend", info);
+    this.window.controls!.insertAdjacentHTML("afterend", info);
 
     // Add refresh button
     const refreshLabel = game.i18n.localize("PTR2E.DataInspector.Refresh");
     const refresh = `<button type="button" data-action="refresh" class="header-control fa-solid fa-sync" 
                             data-tooltip="${refreshLabel}" aria-label="${refreshLabel}" data-tooltip-direction="UP"></button>`;
-    this.window.controls.insertAdjacentHTML("afterend", refresh);
+    this.window.controls!.insertAdjacentHTML("afterend", refresh);
 
     return frame;
   }

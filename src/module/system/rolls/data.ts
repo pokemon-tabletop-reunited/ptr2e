@@ -1,14 +1,12 @@
-import type { TokenPTR2e } from "@module/canvas/token/object.ts";
 import type { CheckDC } from "./degree-of-success.ts";
 import type { RollNote, RollNoteSource } from "@system/notes.ts";
 import type { AttackPTR2e, Trait } from "@data";
 import type { ActorPTR2e, EffectRoll } from "@actor";
 import type { TokenDocumentPTR2e } from "@module/canvas/token/document.ts";
 import type { CheckRoll, CheckType } from "./check-roll.ts";
-import type { ItemPTR2e, ItemSystemPTR } from "@item";
 import type { ModifierPTR2e } from "@module/effects/modifiers.ts";
 
-interface RollData extends RollOptions {
+interface RollData extends Roll.Options {
     rollerId?: string;
     totalModifier?: number;
     /** Whether roll breakdown should be visible to players */
@@ -24,14 +22,14 @@ interface RollParameters {
     /** Optional DC for the roll */
     dc?: CheckDC | null;
     /** Callback after the roll resolves */
-    callback?: (roll: Rolled<Roll>) => void;
+    callback?: (roll: Roll.Evaluated<Roll>) => void;
     /** Should a message be created from the roll */
     createMessage?: boolean;
 }
 
 interface AttackRollParams extends RollParameters {
     /** A target token: pulled from `game.users.targets` if not provided */
-    target?: TokenPTR2e | null;
+    target?: Token.ConfiguredInstance | null;
     /** Retrieve the formula of the strike roll without following through to the end */
     getFormula?: true;
     /** Should this strike consume ammunition, if applicable? */
@@ -53,7 +51,7 @@ interface BaseRollContext {
     /** Any notes which should be shown for the roll. */
     notes?: (RollNote | RollNoteSource)[];
     /** The roll mode (i.e., 'roll', 'blindroll', etc) to use when rendering this roll. */
-    rollMode?: RollMode | "roll";
+    rollMode?: CONFIG.Dice.RollModes | "roll";
     /** If this is an attack, the target of that attack */
     target?: RollTarget | null;
     /** Action traits associated with the roll */
@@ -84,7 +82,7 @@ interface CheckRollContext extends BaseRollContext {
     /** The token which initiated this roll. */
     token?: TokenDocumentPTR2e | null;
     /** The originating item of this attack, if any */
-    item?: ItemPTR2e<ItemSystemPTR, ActorPTR2e> | null;
+    item?: Item.ConfiguredInstance | null;
     /** Optional title of the roll options dialog; defaults to the check name */
     title?: string;
     /** Optional DC data for the check */
@@ -115,7 +113,7 @@ interface CheckRollContext extends BaseRollContext {
 }
 
 interface CaptureCheckRollContext extends CheckRollContext {
-  accuracyRoll: Rolled<CheckRoll>;
+  accuracyRoll: Roll.Evaluated<CheckRoll>;
 }
 
 export type { AttackRollParams, BaseRollContext, CheckRollContext, CaptureCheckRollContext, DamageRollParams, RollParameters, RollData};

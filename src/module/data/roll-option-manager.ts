@@ -1,9 +1,6 @@
-import type { ActorPTR2e } from "@actor";
-import { ItemPTR2e } from "@item";
 import type Trait from "./models/trait.ts";
-import type { ActiveEffectPTR2e } from "@effects";
 
-export default class RollOptionManager<TParent extends ActorPTR2e | ItemPTR2e | ActiveEffectPTR2e> {
+export default class RollOptionManager<TParent extends Actor.ConfiguredInstance | Item.ConfiguredInstance | ActiveEffect.ConfiguredInstance> {
   #initialized = false;
 
   private get options(): RollOptions {
@@ -36,7 +33,7 @@ export default class RollOptionManager<TParent extends ActorPTR2e | ItemPTR2e | 
     if (!["all", "change-selections"].includes(domain)) {
       this.options.all[`${domain}:${option}`] = value;
     }
-    if (addToParent && this.document instanceof ItemPTR2e && this.document.actor) {
+    if (addToParent && this.document instanceof CONFIG.Item.documentClass && this.document.actor) {
       this.document.actor.rollOptions.addOption(domain, option, {
         value: value,
         addToParent: false,
@@ -84,4 +81,4 @@ export type RollOptions = {
 };
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-export default interface RollOptionManager<TParent extends ActorPTR2e | ItemPTR2e | ActiveEffectPTR2e> { }
+export default interface RollOptionManager<TParent extends Actor.ConfiguredInstance | Item.ConfiguredInstance | ActiveEffect.ConfiguredInstance> { }

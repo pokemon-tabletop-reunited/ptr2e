@@ -1,5 +1,4 @@
 import type { AuraAppearanceData, AuraData } from "@actor";
-import type { TokenPTR2e } from "../object.ts";
 import type { TokenAuraData } from "./types.ts";
 import { isVideoFilePath } from "@utils";
 import { getAreaSquares, getGridHighlightShape } from "./util.ts";
@@ -203,7 +202,7 @@ interface AuraRenderer {
   slug: string;
 
   /** The token emitting the Aura */
-  token: TokenPTR2e;
+  token: Token.ConfiguredInstance;
 
   /** The aura radius of the aura in meters */
   radius: number;
@@ -217,7 +216,7 @@ interface AuraRenderer {
 
 interface AuraRendererParams extends Omit<AuraData, "effects" | "traits"> {
   slug: string;
-  token: TokenPTR2e;
+  token: Token.ConfiguredInstance;
 }
 
 export { AuraRenderer }

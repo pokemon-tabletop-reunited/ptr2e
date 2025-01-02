@@ -1,5 +1,4 @@
 import { SlugField } from "../fields/slug-field.ts";
-import type { ActorSystemPTR2e } from "../../actor/data/system.ts";
 
 const skillSchema = {
   slug: new SlugField({ required: true, blank: false }),
@@ -22,7 +21,7 @@ const skillSchema = {
 
 export type SkillSchema = typeof skillSchema;
 
-class SkillPTR2e extends foundry.abstract.DataModel<SkillSchema, ActorSystemPTR2e> {
+class SkillPTR2e extends foundry.abstract.DataModel<SkillSchema> {
   declare total: number;
 
   static override defineSchema(): SkillSchema {
@@ -35,7 +34,8 @@ class SkillPTR2e extends foundry.abstract.DataModel<SkillSchema, ActorSystemPTR2
     }
   }
 
-  get actor() {
+  get actor(): Actor.ConfiguredInstance {
+    //@ts-expect-error - FIXME: Unable to type parent due to circularity issue.
     return this.parent.parent!;
   }
 
@@ -49,11 +49,11 @@ class SkillPTR2e extends foundry.abstract.DataModel<SkillSchema, ActorSystemPTR2
     }
 
     this.total = this.value + (this.rvs ?? 0);
-    if ((this.rvs ?? 0) > 0 && this.parent.advancement?.rvs?.total && !["luck", "resources"].includes(this.slug)) {
-      this.parent.advancement.rvs.spent += this.rvs!;
+    if ((this.rvs ?? 0) > 0 && this.actor.system.advancement?.rvs?.total && !["luck", "resources"].includes(this.slug)) {
+      this.actor.system.advancement.rvs.spent += this.rvs!;
     }
     if (this.slug === "resources") {
-      this.parent.advancement.rvs.spent += this.value - 10;
+      this.actor.system.advancement.rvs.spent += this.value - 10;
     }
   }
 

@@ -4,7 +4,6 @@ import type { ItemPTR2e } from "@item";
 import type { CheckDC } from "@system/rolls/degree-of-success.ts";
 import type { TokenDocumentPTR2e } from "@module/canvas/token/document.ts";
 import type { ModifierPTR2e } from "@module/effects/modifiers.ts";
-import type { TokenPTR2e } from "@module/canvas/token/object.ts";
 import type { ActionPTR2e, AttackPTR2e, Trait } from "@data";
 import type { RollNote } from "./notes.ts";
 import type { AttackCheck } from "./statistics/attack.ts";
@@ -23,7 +22,7 @@ interface RollContextParams<
   /** The statistic used for the roll */
   statistic: TStatistic;
   /** A targeted token: may not be applicable if the action isn't targeted */
-  target?: { actor?: ActorPTR2e | null; token?: TokenPTR2e | null } | null;
+  target?: { actor?: ActorPTR2e | null; token?: Token.ConfiguredInstance | null } | null;
   /** The item being used in the attack or damage roll */
   item?: TItem;
   /** The action being used for this check */

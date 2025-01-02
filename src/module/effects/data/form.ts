@@ -4,7 +4,6 @@ import ActiveEffectSystem from "../system.ts";
 import { Predicate } from "@system/predication/predication.ts";
 import { sluggify } from "@utils";
 import * as R from "remeda";
-import ActiveEffectPTR2e from "../document.ts";
 import type { DeepPartial } from "fvtt-types/utils";
 
 const formEffectSchema = {
@@ -48,7 +47,7 @@ class FormActiveEffectSystem extends ActiveEffectSystem<FormActiveEffectSchema> 
   }
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  override async _preCreate(data: foundry.abstract.TypeDataModel.ParentAssignmentType<FormActiveEffectSchema, ActiveEffectPTR2e>, options: foundry.abstract.Document.PreCreateOptions<any>, user: User): Promise<boolean | void> {
+  override async _preCreate(data: foundry.abstract.TypeDataModel.ParentAssignmentType<FormActiveEffectSchema, ActiveEffect.ConfiguredInstance>, options: foundry.abstract.Document.PreCreateOptions<any>, user: User): Promise<boolean | void> {
     const self = this as FormActiveEffectSystem;
     const result = await super._preCreate(data, options, user);
     if(result === false) {
@@ -89,7 +88,7 @@ class FormActiveEffectSystem extends ActiveEffectSystem<FormActiveEffectSchema> 
   }
 
   protected override _preUpdate(
-    changed: foundry.abstract.TypeDataModel.ParentAssignmentType<FormActiveEffectSchema, ActiveEffectPTR2e>,
+    changed: foundry.abstract.TypeDataModel.ParentAssignmentType<FormActiveEffectSchema, ActiveEffect.ConfiguredInstance>,
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     options: foundry.abstract.Document.PreUpdateOptions<any>,
     user: User

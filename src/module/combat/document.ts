@@ -1,5 +1,4 @@
 import type {
-  CombatantPTR2e,
   CombatantSystemPTR2e,
   CombatSystemPTR2e,
   SummonCombatantSystem
@@ -7,7 +6,6 @@ import type {
 import {
   RoundCombatantSystem
 } from "@combat";
-import { ActorPTR2e } from "@actor";
 import type { InexactPartial } from "fvtt-types/utils";
 
 class CombatPTR2e extends Combat {
@@ -21,12 +19,12 @@ class CombatPTR2e extends Combat {
       }, 0) / ((this.combatants.size - 1) || 1));
   }
 
-  get summons(): CombatantPTR2e[] {
-    return this.combatants.filter((c) => c.type === "summon") as CombatantPTR2e[];
+  get summons(): Combatant.ConfiguredInstance[] {
+    return this.combatants.filter((c) => c.type === "summon") as Combatant.ConfiguredInstance[];
   }
 
-  get roundCombatant(): CombatantPTR2e {
-    return this.combatants.get(RoundCombatantSystem.id) as CombatantPTR2e;
+  get roundCombatant(): Combatant.ConfiguredInstance {
+    return this.combatants.get(RoundCombatantSystem.id) as Combatant.ConfiguredInstance;
   }
 
   get roundIndex(): number {
@@ -65,11 +63,11 @@ class CombatPTR2e extends Combat {
   }
 
   public override _sortCombatants(
-    a: { initiative: Maybe<number>; id: string | null, actor: Actor | null, preview?: boolean },
-    b: { initiative: Maybe<number>; id: string | null, actor: Actor | null, preview?: boolean },
+    a: { initiative: Maybe<number>; id: string | null, actor: Actor.ConfiguredInstance | null, preview?: boolean },
+    b: { initiative: Maybe<number>; id: string | null, actor: Actor.ConfiguredInstance | null, preview?: boolean },
   ): number {
     // Sort initiative ascending, then by speed descending, finally by speed stages ascending
-    const resolveTie = (a: Maybe<ActorPTR2e>, b: Maybe<ActorPTR2e>): number => {
+    const resolveTie = (a: Maybe<Actor.ConfiguredInstance>, b: Maybe<Actor.ConfiguredInstance>): number => {
       // Sort by speed descending
       const speedA = a?.speed ?? 0;
       const speedB = b?.speed ?? 0;
@@ -95,7 +93,7 @@ class CombatPTR2e extends Combat {
     return typeof a.initiative === "number" &&
       typeof b.initiative === "number" &&
       a.initiative === b.initiative
-      ? (resolveTie(a.actor as unknown as ActorPTR2e, b.actor as unknown as ActorPTR2e) || (a.id! > b.id! ? 1 : -1))
+      ? (resolveTie(a.actor as unknown as Actor.ConfiguredInstance, b.actor as unknown as Actor.ConfiguredInstance) || (a.id! > b.id! ? 1 : -1))
       : ia - ib || (a.id! > b.id! ? 1 : -1);
   }
 
@@ -182,7 +180,7 @@ class CombatPTR2e extends Combat {
     }> = {};
 
     // Reduce everyone's initiative by the current combatant's initiative
-    let initiativeReduction = nextCombatant.type === "summon" && nextCombatant.system.delay !== null ? 0 : nextCombatant.initiative ?? 0;
+    let initiativeReduction = nextCombatant.type === "summon" && (nextCombatant.system as SummonCombatantSystem).delay !== null ? 0 : nextCombatant.initiative ?? 0;
     if (nextCombatant.type === "round") {
       const afterRound = this.turns[getNext(next)];
       if (!afterRound) {
@@ -215,7 +213,7 @@ class CombatPTR2e extends Combat {
         combatantUpdateData[combatant._id!] = {
           _id: combatant._id!,
           initiative: 999,
-          system: {
+          system: { //@ts-expect-error - This is a summon, so the system is guaranteed to be a SummonCombatantSystem
             delay: (combatant.system as SummonCombatantSystem).delay! - 1,
             activationsHad: combatantUpdateData[combatant._id!]?.system?.activationsHad ?? combatant.system.activations ?? 0,
           }
@@ -290,7 +288,7 @@ class CombatPTR2e extends Combat {
     const next = this.combatant;
     if ((advanceTurn || changeCombatant) && next)
       await this._onStartTurn(
-        this.combatant as CombatantPTR2e
+        this.combatant as Combatant.ConfiguredInstance
       );
   }
 
@@ -303,10 +301,10 @@ class CombatPTR2e extends Combat {
     this.turns ||= [];
 
     // Determine the turn order and the current turn
-    const turns = this.combatants.contents.sort(this._sortCombatants) as CombatantPTR2e[];
+    const turns = this.combatants.contents.sort(this._sortCombatants) as Combatant.ConfiguredInstance[];
     if (this.turn !== null) this.turn = Math.clamp(this.turn, 0, turns.length - 1);
 
-    const delaySummons = turns.filter(c => c.type === "summon" && (c.system as SummonCombatantSystem).delay !== null).sort(this._sortCombatants) as CombatantPTR2e[];
+    const delaySummons = turns.filter(c => c.type === "summon" && (c.system as SummonCombatantSystem).delay !== null).sort(this._sortCombatants) as Combatant.ConfiguredInstance[];
     for (const summon of delaySummons) {
       // Delayed summons go after X amount of other activations, instead of being based on AV.
       // Thus, insert the summon at the correct position in the turn order.
@@ -346,7 +344,7 @@ class CombatPTR2e extends Combat {
     if (!this.previous) this.previous = this.current;
 
     // Return the array of prepared turns
-    return (this.turns = turns as Combatant[]) as CombatantPTR2e[];
+    return (this.turns = turns as Combatant.ConfiguredInstance[]) as Combatant.ConfiguredInstance[];
   }
 
   async resetEncounter(): Promise<this | undefined> {
@@ -389,7 +387,7 @@ class CombatPTR2e extends Combat {
   protected override _onCreateDescendantDocuments(
     parent: ClientDocument,
     collection: "combatants",
-    documents: ClientDocument[],
+    documents: Combatant.ConfiguredInstance[],
     results: Combatant['_source'][],
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     options: foundry.abstract.Document.OnCreateOptions<"Combatant"> & InexactPartial<{ combatTurn: number; turnEvents: boolean }>,
@@ -439,8 +437,8 @@ class CombatPTR2e extends Combat {
 
     const participants = this.system.participants;
     for (const uuid of participants) {
-      const actor = fromUuidSync(uuid!);
-      if (actor instanceof ActorPTR2e) actor.onEndCombat();
+      const actor = fromUuidSync<Actor.ConfiguredInstance>(uuid as ActorUUID);
+      if (actor instanceof CONFIG.Actor.documentClass) actor.onEndCombat();
     }
 
     ChatMessage.create({
@@ -459,7 +457,7 @@ class CombatPTR2e extends Combat {
 
     const toDelete = [];
     for (const combatant of (this.combatants?.filter(c => c.type === "summon") ?? [])) {
-      if (combatant.system.expired) {
+      if ('expired' in combatant.system && combatant.system.expired) {
         toDelete.push(combatant.id!);
       }
     }

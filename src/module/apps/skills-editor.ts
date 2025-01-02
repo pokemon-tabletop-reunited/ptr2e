@@ -140,10 +140,12 @@ export class SkillsEditor extends foundry.applications.api.HandlebarsApplication
       showOverrideSubmit: game?.user?.isGM ?? false,
     };
   }
-
-  override async render(options: boolean | DeepPartial<foundry.applications.api.ApplicationV2.Configuration>, _options?: DeepPartial<foundry.applications.api.HandlebarsApplicationMixin.HandlebarsRenderOptions>): Promise<this> {
+  override render(options?: DeepPartial<foundry.applications.api.HandlebarsApplicationMixin.HandlebarsRenderOptions>): Promise<this>;
+  /** @deprecated */
+  override render(options: boolean, _options?: DeepPartial<foundry.applications.api.HandlebarsApplicationMixin.HandlebarsRenderOptions>): Promise<this>;
+  override async render(options: boolean | DeepPartial<foundry.applications.api.HandlebarsApplicationMixin.HandlebarsRenderOptions> | undefined, _options?: DeepPartial<foundry.applications.api.HandlebarsApplicationMixin.HandlebarsRenderOptions>): Promise<this> {
     const scrollTop = this.element?.querySelector(".scroll")?.scrollTop;
-    const renderResult = await super.render(options, _options);
+    const renderResult = await super.render(options as boolean, _options);
     // set the scroll location
     if (scrollTop) {
       const scroll = this.element.querySelector(".scroll");
@@ -180,9 +182,9 @@ export class SkillsEditor extends foundry.applications.api.HandlebarsApplication
     this.render({});
   }
 
-  _onSearchFilter(_event: KeyboardEvent, query: string, rgx: RegExp, html: HTMLElement) {
+  _onSearchFilter(_event: KeyboardEvent, query: string, rgx: RegExp, html: HTMLElement | null) {
     const visibleLists = new Set();
-    for (const entry of html.querySelectorAll<HTMLAnchorElement>("div.skill")) {
+    for (const entry of html!.querySelectorAll<HTMLAnchorElement>("div.skill")) {
       if (!query) {
         entry.classList.remove("hidden");
         continue;
@@ -234,7 +236,7 @@ export class SkillsEditor extends foundry.applications.api.HandlebarsApplication
     const resources = document.system.skills.find((skill) => skill.slug === "resources");
     if (!resources) return;
 
-    foundry.applications.api.DialogV2.prompt({
+    foundry.applications.api.DialogV2.prompt<foundry.applications.api.DialogV2.WaitOptions, void>({
       window: {
         title: game.i18n.format("PTR2E.SkillsEditor.ChangeResources.title", {
           name: document.name,
@@ -289,7 +291,7 @@ export class SkillsEditor extends foundry.applications.api.HandlebarsApplication
     const luck = document.system.skills.find((skill) => skill.slug === "luck");
     if (!luck) return;
 
-    foundry.applications.api.DialogV2.prompt({
+    foundry.applications.api.DialogV2.prompt<foundry.applications.api.DialogV2.WaitOptions, void>({
       window: {
         title: game.i18n.format("PTR2E.SkillsEditor.ChangeLuck.title", {
           name: document.name,
@@ -383,7 +385,7 @@ export class SkillsEditor extends foundry.applications.api.HandlebarsApplication
       return;
     }
 
-    await foundry.applications.api.DialogV2.confirm({
+    await foundry.applications.api.DialogV2.confirm<foundry.applications.api.DialogV2.WaitOptions, void, void>({
       window: {
         title: game.i18n.format("PTR2E.SkillsEditor.RollLuck.title", {
           name: document.name,

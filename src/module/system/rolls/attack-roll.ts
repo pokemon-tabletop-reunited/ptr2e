@@ -2,22 +2,25 @@ import type { AccuracySuccessCategory, AttackPTR2e, SummonAttackPTR2e } from "@d
 import type { CheckRollDataPTR2e } from "./check-roll.ts";
 import { CheckRoll } from "./check-roll.ts";
 import type { AttackCheckModifier } from "@module/effects/modifiers.ts";
-import type { ActorPTR2e } from "@actor";
 import type { AccuracyContext, DamageCalc } from "@module/chat/models/data.ts";
+import type { AnyObject } from "fvtt-types/utils";
 
-// @ts-expect-error - This override is intentional
-class AttackRoll extends CheckRoll {
-  constructor(formula: string, data: Record<string, unknown>, options: AttackRollDataPTR2e) {
+
+class AttackRoll extends CheckRoll<AnyObject> {
+  constructor(formula: string, data: AnyObject | undefined, options: AttackRollDataPTR2e) {
     const type = options.attackType;
     if (!type) throw new Error("AttackRoll must have an attack type.");
     super(formula, data, options);
-    this.attackType = type;
+    const self = this as AttackRoll;
+    self.attackType = type;
   }
 
   static override createFromData(
-    data: AttackRollCreationData,
-    options: AttackRollDataPTR2e,
-    type: "accuracy" | "crit" | "damage" = "accuracy"
+    { data, options, type = "accuracy" }: {
+      data: AttackRollCreationData,
+      options: AttackRollDataPTR2e,
+      type: "accuracy" | "crit" | "damage"
+    }
   ): AttackRoll | null {
     options.attackType = type;
     switch (type) {
@@ -140,8 +143,8 @@ class AttackRoll extends CheckRoll {
     isMultiTarget,
     useEnemyStats
   }: {
-    origin: ActorPTR2e;
-    target: ActorPTR2e;
+    origin: Actor.ConfiguredInstance;
+    target: Actor.ConfiguredInstance;
     isCritHit: boolean;
     attack: AttackPTR2e;
     isMultiTarget: boolean;
@@ -164,7 +167,7 @@ class AttackRoll extends CheckRoll {
     const hasSniper = origin.rollOptions.getFromDomain("item")["ability:sniper:active"];
 
     // Type effectiveness
-    const effectivenessStage = parseInt(this.options.effectivenessStage+"");
+    const effectivenessStage = parseInt(this.options.effectivenessStage + "");
     const typeEffectiveness = target.getEffectiveness(attack.types, effectivenessStage, this.options.ignoreImmune ?? false);
 
     // Other modifiers
@@ -207,7 +210,7 @@ class AttackRoll extends CheckRoll {
     };
   }
 
-  static calculateFlatDamage(attack: SummonAttackPTR2e, target: ActorPTR2e): Maybe<DamageCalc> {
+  static calculateFlatDamage(attack: SummonAttackPTR2e, target: Actor.ConfiguredInstance): Maybe<DamageCalc> {
     const formula = attack.getFormula()
     const roll = new Roll(
       formula,

@@ -1,10 +1,8 @@
-import { ActorPTR2e } from "@actor";
 import PartySheetPTR2e from "@module/apps/party-sheet.ts";
 import TeamSheetPTR2e from "@module/apps/team-sheet.ts";
 import { LaxSchemaField } from "@module/data/fields/lax-schema-field.ts";
 import FolderConfigPTR2e from "./sheet.ts";
-import type { AnyDocument } from "node_modules/fvtt-types/src/foundry/client/data/abstract/client-document.d.mts";
-import type { InexactPartial } from "fvtt-types/utils";
+import type { DeepPartial, InexactPartial } from "fvtt-types/utils";
 
 const folderSchema = {
   flags: new LaxSchemaField({
@@ -29,12 +27,12 @@ class FolderPTR2e extends Folder {
 
   get owner(): string {
     if (this.type !== "Actor") return '';
-    return this.contents.find(actor => (actor as unknown as ActorPTR2e).system.party?.ownerOf == this.id)?.uuid ?? '';
+    return this.contents.find(actor => (actor as unknown as Actor.ConfiguredInstance).system.party?.ownerOf == this.id)?.uuid ?? '';
   }
 
-  get ownerActor(): ActorPTR2e | null {
+  get ownerActor(): Actor.ConfiguredInstance | null {
     if (this.type !== "Actor") return null;
-    return this.contents.find(actor => (actor as unknown as ActorPTR2e).system.party?.ownerOf == this.id) as unknown as ActorPTR2e | null;
+    return this.contents.find(actor => (actor as unknown as Actor.ConfiguredInstance).system.party?.ownerOf == this.id) as unknown as Actor.ConfiguredInstance | null;
   }
 
   get userFromAvatarIfOwner(): User | null {
@@ -45,11 +43,11 @@ class FolderPTR2e extends Folder {
 
   get party(): ActorUUID[] {
     if (this.type !== "Actor") return [];
-    return this.contents.filter(actor => (actor as unknown as ActorPTR2e).system.party?.partyMemberOf == this.id).map(actor => actor.uuid);
+    return this.contents.filter(actor => (actor as unknown as Actor.ConfiguredInstance).system.party?.partyMemberOf == this.id).map(actor => actor.uuid);
   }
 
   get team(): ActorUUID[] {
-    return game.actors.filter(actor => (actor as unknown as ActorPTR2e).system.party?.teamMemberOf.includes(this.id)).map(actor => actor.uuid);
+    return game.actors.filter(actor => (actor as unknown as Actor.ConfiguredInstance).system.party?.teamMemberOf.includes(this.id)).map(actor => actor.uuid);
   }
 
   get safeColor() {
@@ -66,17 +64,18 @@ class FolderPTR2e extends Folder {
    * of objects inside the index of the pack that are contained in this Folder.
    * @type {(ClientDocument|object)[]}
    */
-  override get contents(): this["type"] extends foundry.abstract.Document.Type ? foundry.abstract.Document.ConfiguredInstanceForName<this["type"]>[] : never {
+  override get contents(): FolderableDocuments[] {
     if (this._contents) return this._contents;
-    if (this.pack) return game.packs.get(this.pack)!.index.filter(d => d.folder === this.id) as (this["type"] extends foundry.abstract.Document.Type ? foundry.abstract.Document.ConfiguredInstanceForName<this["type"]>[] : never);
+    if (this.pack) return game.packs.get(this.pack)!.index.filter(d => d.folder === this.id)
+    //@ts-expect-error - fvtt-types issue
     return this.documentCollection?.filter(d => d.folder === this) ?? [];
   }
 
-  override set contents(value: this["type"] extends foundry.abstract.Document.Type ? foundry.abstract.Document.ConfiguredInstanceForName<this["type"]>[] : never) {
+  override set contents(value: FolderableDocuments[]) {
     this._contents = value;
   }
 
-  private _contents: (this["type"] extends foundry.abstract.Document.Type ? foundry.abstract.Document.ConfiguredInstanceForName<this["type"]>[] : never) | null = null;
+  private _contents: FolderableDocuments[] | null = null;
 
   isInParty(uuid: string) {
     return this._partySet.has(uuid);
@@ -102,7 +101,7 @@ class FolderPTR2e extends Folder {
 
   _prepareOwnerData() {
     if (!this.owner) return;
-    const owner = fromUuidSync(this.owner) as AnyDocument | null;
+    const owner = fromUuidSync<FolderableDocuments>(this.owner);
     if (!owner || !(owner instanceof this.documentClass)) return;
 
     // If the folder's owner is a document, update the document's folder property
@@ -116,7 +115,7 @@ class FolderPTR2e extends Folder {
     if (!("ptr2e" in this.flags && this.flags.ptr2e && "party" in this.flags.ptr2e)) return;
     const party = this.flags.ptr2e.party as string[];
     for (const uuid of party) {
-      const member = fromUuidSync(uuid) as AnyDocument | null;
+      const member = fromUuidSync<FolderableDocuments>(uuid);
       if (!member || !(member instanceof this.documentClass)) continue;
 
       // If the folder's party member is a document, update the document's folder property
@@ -125,7 +124,7 @@ class FolderPTR2e extends Folder {
   }
 
   isActorFolder(): this is FolderPTR2e & { type: "Actor" } {
-    return this.documentClass.name === ActorPTR2e.name;
+    return this.documentClass.name === CONFIG.Actor.documentClass.name;
   }
 
   async renderPartySheet() {
@@ -142,7 +141,7 @@ class FolderPTR2e extends Folder {
 
   static override createDialog<T extends foundry.abstract.Document.AnyConstructor>(
     this: T,
-    data?: foundry.abstract.Document.ConstructorDataFor<T>,
+    data?: DeepPartial<foundry.abstract.Document.ConstructorDataFor<T>>,
     options: InexactPartial<Omit<FolderConfig.Options, "resolve">> & {
       parent?: foundry.abstract.Document.Any;
       pack?: null | string;
@@ -168,7 +167,7 @@ class FolderPTR2e extends Folder {
       const appOptions = foundry.utils.mergeObject(options, {
         document: folder,
         position,
-      }, { inplace: false }) as Partial<foundry.applications.api.DocumentSheetConfiguration>;
+      }, { inplace: false }) as Partial<foundry.applications.api.DocumentSheetV2.Configuration>;
       new FolderConfigPTR2e(appOptions).render(true);
     });
   }

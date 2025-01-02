@@ -1,4 +1,3 @@
-import type { ActiveEffectPTR2e } from "@effects";
 import ActorPTR2e from "./base.ts";
 import type { AuraEffectData } from "./data.ts";
 import type { TokenDocumentPTR2e } from "@module/canvas/token/document.ts";
@@ -26,7 +25,7 @@ async function checkAreaEffects(this: ActorPTR2e): Promise<void> {
   const toKeep: string[] = [];
 
   for (const e of this.effects) {
-    const effect = e as ActiveEffectPTR2e
+    const effect = e as ActiveEffect.ConfiguredInstance
     const auraData = effect.flags.ptr2e?.aura;
     if (!auraData?.removeOnExit) continue;
 

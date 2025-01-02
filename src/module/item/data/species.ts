@@ -1,5 +1,4 @@
 import type { PerkPTR2e, SpeciesPTR2e } from "@item";
-import { ItemPTR2e } from "@item";
 import { HasDescription, HasEmbed, HasMigrations, HasSlug, HasTraits, PTRCONSTS, Trait } from "@module/data/index.ts";
 import { getTypes } from "@scripts/config/effectiveness.ts";
 import { SlugField } from "@module/data/fields/slug-field.ts";
@@ -164,7 +163,7 @@ const speciesSchema = (() => {
             nullable: false,
             initial: "",
           }),
-          value: new fields.NumberField({ required: true, min: 0 }),
+          value: new fields.NumberField({ required: true, nullable: false, min: 0 }),
         }),
         {
           required: true,
@@ -180,7 +179,7 @@ const speciesSchema = (() => {
             nullable: false,
             initial: "",
           }),
-          value: new fields.NumberField({ required: true, min: 0 }),
+          value: new fields.NumberField({ required: true, nullable: false, min: 0 }),
         }),
         {
           required: true,
@@ -238,7 +237,7 @@ export type SpeciesSchema = typeof speciesSchema & TraitsSchema & MigrationSchem
  * @category Item Data Models
  */
 export default class SpeciesSystem extends HasEmbed(
-  HasMigrations(HasTraits(HasDescription(HasSlug(foundry.abstract.TypeDataModel<SpeciesSchema, ItemPTR2e>)))),
+  HasMigrations(HasTraits(HasDescription(HasSlug(foundry.abstract.TypeDataModel<SpeciesSchema, Item.ConfiguredInstance>)))),
   "species"
 ) {
   /**
@@ -248,7 +247,7 @@ export default class SpeciesSystem extends HasEmbed(
 
   declare virtual: boolean;
 
-  constructor(data: foundry.abstract.DataModel.ConstructorData<SpeciesSchema>, options: foundry.abstract.DataModel.DataValidationOptions<ItemPTR2e> & { virtual?: boolean }) {
+  constructor(data: foundry.abstract.DataModel.ConstructorData<SpeciesSchema>, options: foundry.abstract.DataModel.DataValidationOptions<Item.ConfiguredInstance> & { virtual?: boolean }) {
     super(data, options);
 
     this.virtual = options?.virtual ?? false;
@@ -459,12 +458,12 @@ export default class SpeciesSystem extends HasEmbed(
     return evolutions;
   }
 
-  private async createEvolutionPerk(evolution: EvolutionData, isShiny = this.shiny): Promise<foundry.abstract.DataModel.ConstructorDataFor<ItemPTR2e> & {
+  private async createEvolutionPerk(evolution: EvolutionData, isShiny = this.shiny): Promise<foundry.abstract.DataModel.ConstructorDataFor<Item.ConfiguredInstance> & {
     system: foundry.abstract.DataModel.ConstructorData<PerkSchema>
   }> {
 
     const img = await (async (): Promise<string> => {
-      const species = await fromUuid(evolution.uuid ?? "") as SpeciesPTR2e | null;
+      const species = await fromUuid<Item.ConfiguredInstance>(evolution.uuid as ItemUUID) as SpeciesPTR2e | null;
       if (!species) return this.parent?.img ?? `systems/ptr2e/img/icons/species_icon.webp`;
 
       const config = game.ptr.data.artMap.get(species.slug);
@@ -482,8 +481,7 @@ export default class SpeciesSystem extends HasEmbed(
       name: `Evolution: ${Handlebars.helpers.capitalizeFirst(evolution.name)}`,
       type: "perk",
       img,
-      flags: { 
-        // @ts-expect-error - Partial type
+      flags: {
         ptr2e: {
           evolution: {
             name: evolution.name,
@@ -521,10 +519,10 @@ export default class SpeciesSystem extends HasEmbed(
 
     const takenCoordinates = new Set<`${number}-${number}`>();
 
-    const perks: foundry.abstract.DataModel.ConstructorDataFor<ItemPTR2e>[] = [];
-    const perksByDepth: Record<number, foundry.abstract.DataModel.ConstructorDataFor<ItemPTR2e>[]> = {};
-    const previousPerks: foundry.abstract.DataModel.ConstructorDataFor<ItemPTR2e>[] = [];
-    const nextPerks: foundry.abstract.DataModel.ConstructorDataFor<ItemPTR2e>[] = [];
+    const perks: foundry.abstract.DataModel.ConstructorDataFor<Item.ConfiguredInstance>[] = [];
+    const perksByDepth: Record<number, foundry.abstract.DataModel.ConstructorDataFor<Item.ConfiguredInstance>[]> = {};
+    const previousPerks: foundry.abstract.DataModel.ConstructorDataFor<Item.ConfiguredInstance>[] = [];
+    const nextPerks: foundry.abstract.DataModel.ConstructorDataFor<Item.ConfiguredInstance>[] = [];
     let lastDepth = 0;
 
     const evolutions = this.evolutions ? this.evolutions : {
@@ -566,7 +564,7 @@ export default class SpeciesSystem extends HasEmbed(
 
       if (lastDepth >= depth) {
         lastDepth = depth;
-        const perks: foundry.abstract.DataModel.ConstructorDataFor<ItemPTR2e>[] = perksByDepth[depth - 1] ?? [];
+        const perks: foundry.abstract.DataModel.ConstructorDataFor<Item.ConfiguredInstance>[] = perksByDepth[depth - 1] ?? [];
         previousPerks.splice(0, previousPerks.length, ...perks);
         nextPerks.splice(0, nextPerks.length, data);
       }
@@ -587,7 +585,7 @@ export default class SpeciesSystem extends HasEmbed(
     }
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    return perks.toReversed().map(data => new ItemPTR2e(data as any) as PerkPTR2e);
+    return perks.toReversed().map(data => new CONFIG.Item.documentClass(data as any) as PerkPTR2e);
   }
 
   static evolutionMethodsToPredicate(methods: EvolutionData["methods"]): Predicate {
@@ -650,7 +648,7 @@ export default class SpeciesSystem extends HasEmbed(
   }
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  override async _preCreate(data: foundry.abstract.TypeDataModel.ParentAssignmentType<SpeciesSchema, ItemPTR2e>, options: foundry.abstract.Document.PreCreateOptions<any>, user: User): Promise<boolean | void> {
+  override async _preCreate(data: foundry.abstract.TypeDataModel.ParentAssignmentType<SpeciesSchema, Item.ConfiguredInstance>, options: foundry.abstract.Document.PreCreateOptions<any>, user: User): Promise<boolean | void> {
     const result = await super._preCreate(data, options, user);
     if (result === false) return false;
 
@@ -677,10 +675,32 @@ export default interface SpeciesSystem {
   }
 }
 
+interface TypeMethodFieldPartialSchema extends foundry.data.fields.DataSchema {
+  type: foundry.data.fields.StringField<{ required: true, initial: string, choices: Record<string, string> }, "level" | "item" | "move" | "gender", "level" | "item" | "move" | "gender">;
+  operand: foundry.data.fields.StringField<{ required: true, initial: string, choices: Record<string, string> }, "and" | "or", "and" | "or">;
+}
+
+interface LevelMethodFieldSchema extends TypeMethodFieldPartialSchema {
+  level: foundry.data.fields.NumberField<{ required: true, min: number, max: number, initial: number }>;
+}
+
+interface GenderMethodFieldSchema extends TypeMethodFieldPartialSchema {
+  gender: foundry.data.fields.StringField<{ required: true, initial: string, choices: Record<string, string> }, "male" | "female" | "genderless", "male" | "female" | "genderless">;
+}
+
+interface ItemMethodFieldSchema extends TypeMethodFieldPartialSchema {
+  item: foundry.data.fields.StringField<{ required: true, initial: string }>;
+  held: foundry.data.fields.BooleanField<{ required: true, initial: boolean }>;
+}
+
+interface MoveMethodFieldSchema extends TypeMethodFieldPartialSchema {
+  move: foundry.data.fields.StringField<{ required: true, initial: string }>;
+}
+
 const evolutionSchema = (() => {
   const fields = foundry.data.fields;
 
-  const getTypeField = (initial: "level" | "item" | "move" | "gender") => ({
+  const getTypeField = (initial: "level" | "item" | "move" | "gender"): TypeMethodFieldPartialSchema => ({
     type: new fields.StringField({
       required: true,
       initial: initial as string,
@@ -694,8 +714,8 @@ const evolutionSchema = (() => {
   });
 
   // Minimum level required to evolve
-  class LevelMethodField extends foundry.abstract.DataModel<foundry.data.fields.DataSchema> {
-    static override defineSchema(): foundry.data.fields.DataSchema {
+  class LevelMethodField extends foundry.abstract.DataModel<LevelMethodFieldSchema> {
+    static override defineSchema(): LevelMethodFieldSchema {
       const fields = foundry.data.fields;
       return {
         ...getTypeField("level"),
@@ -709,8 +729,8 @@ const evolutionSchema = (() => {
     }
   }
   // Must have a certain gender
-  class GenderMethodField extends foundry.abstract.DataModel<foundry.data.fields.DataSchema> {
-    static override defineSchema(): foundry.data.fields.DataSchema {
+  class GenderMethodField extends foundry.abstract.DataModel<GenderMethodFieldSchema> {
+    static override defineSchema(): GenderMethodFieldSchema {
       const fields = foundry.data.fields;
       return {
         ...getTypeField("gender"),
@@ -723,8 +743,8 @@ const evolutionSchema = (() => {
     }
   }
   // Must hold/use a certain item
-  class ItemMethodField extends foundry.abstract.DataModel<foundry.data.fields.DataSchema> {
-    static override defineSchema(): foundry.data.fields.DataSchema {
+  class ItemMethodField extends foundry.abstract.DataModel<ItemMethodFieldSchema> {
+    static override defineSchema(): ItemMethodFieldSchema {
       const fields = foundry.data.fields;
       return {
         ...getTypeField("item"),
@@ -735,8 +755,8 @@ const evolutionSchema = (() => {
     }
   }
   // Must know a certain move
-  class MoveMethodField extends foundry.abstract.DataModel<foundry.data.fields.DataSchema> {
-    static override defineSchema(): foundry.data.fields.DataSchema {
+  class MoveMethodField extends foundry.abstract.DataModel<MoveMethodFieldSchema> {
+    static override defineSchema(): MoveMethodFieldSchema {
       const fields = foundry.data.fields;
       return {
         ...getTypeField("move"),

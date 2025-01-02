@@ -1,8 +1,7 @@
 import { ActorPTR2e } from "@actor";
-import type { ItemSystemPTR, ItemSystemsWithActions } from "@item";
+import type { ItemSystemPTR, ItemWithActions } from "@item";
 import type { ActionPTR2e, EquipmentData, Trait } from "@data";
 import { RollOptionManager } from "@data";
-import { ActiveEffectPTR2e, type EffectSourcePTR2e } from "@effects";
 import { ActionsCollections } from "@actor/actions.ts";
 import { SpeciesSystemModel } from "./data/index.ts";
 import { preImportJSON } from "@module/data/doc-helper.ts";
@@ -10,7 +9,7 @@ import { MigrationList, MigrationRunner } from "@module/migration/index.ts";
 import * as R from "remeda";
 import { MigrationRunnerBase } from "@module/migration/runner/base.ts";
 import { processGrantDeletions } from "@module/effects/changes/grant-item.ts";
-import type { AnyDocument, DropData, FromDropDataOptions } from "node_modules/fvtt-types/src/foundry/client/data/abstract/client-document.d.mts";
+import type { AnyDocument, FromDropDataOptions } from "node_modules/fvtt-types/src/foundry/client/data/abstract/client-document.d.mts";
 import type { InexactPartial } from "fvtt-types/utils";
 
 /**
@@ -31,9 +30,9 @@ class ItemPTR2e extends Item {
     return Number(this.system._migration?.version) || null;
   }
 
-  get grantedBy(): ItemPTR2e | ActiveEffectPTR2e | null {
-    return (this.actor?.items.get(this.flags.ptr2e.grantedBy?.id ?? "") as ItemPTR2e | undefined | null)
-      ?? (this.actor?.effects.get(this.flags.ptr2e.grantedBy?.id ?? "") as ActiveEffectPTR2e | undefined | null)
+  get grantedBy(): ItemPTR2e | ActiveEffect.ConfiguredInstance | null {
+    return (this.actor?.items.get(this.flags.ptr2e?.grantedBy?.id ?? "") as ItemPTR2e | undefined | null)
+      ?? (this.actor?.effects.get(this.flags.ptr2e?.grantedBy?.id ?? "") as ActiveEffect.ConfiguredInstance | undefined | null)
       ?? null;
   }
 
@@ -55,7 +54,7 @@ class ItemPTR2e extends Item {
     return "traits" in this.system ? this.system.traits as Collection<Trait> : null;
   }
 
-  getRollOptions(prefix = this.type, { includeGranter = true } = {}): string[] {
+  getRollOptions(prefix: string = this.type, { includeGranter = true } = {}): string[] {
     const traitOptions = ((): string[] => {
       if (!this.traits) return [];
       const options = [];
@@ -125,7 +124,7 @@ class ItemPTR2e extends Item {
     this.rollOptions = new RollOptionManager(this);
 
     this.rollOptions.addOption("item", `type:${this.type}`, { addToParent: false });
-    this.flags.ptr2e.itemGrants ??= {};
+    this.flags.ptr2e!.itemGrants ??= {};
 
     super.prepareBaseData();
   }
@@ -141,7 +140,7 @@ class ItemPTR2e extends Item {
     this.rollOptions.addOption("item", `${this.type}:${this.slug}`);
   }
 
-  hasActions(): this is ItemPTR2e<ItemSystemsWithActions> {
+  hasActions(): this is ItemWithActions {
     return 'actions' in this.system && (this.system.actions as Collection<ActionPTR2e>).size > 0;
   }
 
@@ -152,19 +151,18 @@ class ItemPTR2e extends Item {
     });
   }
 
-  static override async fromDropData<T extends foundry.abstract.Document.AnyConstructor>(
-    this: T,
-    data: DropData<InstanceType<NoInfer<T>>>,
+  static override async fromDropData(
+    data: foundry.abstract.Document.DropData<Item.ConfiguredInstance>,
     options?: FromDropDataOptions
-  ) {
+  ): Promise<Item.ConfiguredInstance | null> {
     if (data?.type !== "ActiveEffect")
-      return super.fromDropData(data, options) as Promise<T | undefined>;
+      return super.fromDropData(data, options);
 
-    let document: AnyDocument | ActiveEffectPTR2e | null = null;
+    let document: ActiveEffect.ConfiguredInstance | null = null;
 
     // Case 1 - Data explicitly provided
     if (data.data) {
-      document = new CONFIG.ActiveEffect.documentClass(data.data) as ActiveEffectPTR2e;
+      document = new CONFIG.ActiveEffect.documentClass(data.data) as ActiveEffect.ConfiguredInstance;
     }
     // Case 2 - UUID provided
     else if ('uuid' in data && data.uuid) document = await fromUuid(data.uuid);
@@ -236,15 +234,16 @@ class ItemPTR2e extends Item {
       for (const source of sources) {
         if (!source.effects?.length) continue;
         const item = new CONFIG.Item.documentClass(source as ItemPTR2e["_source"], { parent: actor }) as ItemPTR2e;
-        const effects = source.effects.map((e: unknown) => new CONFIG.ActiveEffect.documentClass(e as ActiveEffectPTR2e["_source"], { parent: item }) as ActiveEffectPTR2e);
+        const effects = source.effects.map((e: unknown) => new CONFIG.ActiveEffect.documentClass(e as foundry.data.fields.SchemaField.PersistedType<ActiveEffect.Schema>, { parent: item }) as ActiveEffect.ConfiguredInstance);
 
         // Process effect preCreate changes for all effects that are going to be added
         // This may add additional effects or items (such as via GrantItem)
 
-        const outputEffectSources: EffectSourcePTR2e[] = effects.map((e) => e._source as EffectSourcePTR2e);
+        const outputEffectSources: foundry.data.fields.SchemaField.PersistedType<ActiveEffect.Schema>[]
+          = effects.map((e) => e._source as foundry.data.fields.SchemaField.PersistedType<ActiveEffect.Schema>);
 
         for (const effect of effects) {
-          const effectSource = effect._source as EffectSourcePTR2e;
+          const effectSource = effect._source as foundry.data.fields.SchemaField.PersistedType<ActiveEffect.Schema>;
           const changes = effect.system.changes ?? [];
 
           for (const change of changes) {
@@ -260,6 +259,7 @@ class ItemPTR2e extends Item {
           }
         }
 
+        //@ts-expect-error - This shouldn't error.
         source.effects = outputEffectSources;
       }
 
@@ -268,7 +268,7 @@ class ItemPTR2e extends Item {
 
     const outputItemSources = await processSources(sources as ItemPTR2e['_source'][]);
 
-    if(!operation) operation = {};
+    if (!operation) operation = {};
 
     if (!(operation.keepId || operation.keepEmbeddedIds)) {
       for (const source of sources) {
@@ -291,15 +291,15 @@ class ItemPTR2e extends Item {
     context?: Record<string, unknown> & {
       parent?: AnyDocument;
       pack?: string | null;
-    } & 
+    } &
       InexactPartial<
         DialogOptions & {
           perksOnly?: boolean;
           types?: string[];
         }
       >
-  ) {
-    if(!context) context = {};
+  ): Promise<Item.ConfiguredInstance> {
+    if (!context) context = {};
     const { parent, pack, ...options } = context;
 
     // Collect data
@@ -312,7 +312,7 @@ class ItemPTR2e extends Item {
     }
     //@ts-expect-error - Accessing a protected property
     const folders = collection?._formatFolderSelectOptions() ?? [];
-    
+
     const label = context.perksOnly ? game.i18n.localize("TYPES.Item.perk") : game.i18n.localize(this.metadata.label);
     const title = game.i18n.format("DOCUMENT.Create", { type: label });
     // Render the document creation form
@@ -350,9 +350,9 @@ class ItemPTR2e extends Item {
   }
 
   override async update(data: Record<string, unknown>, context?: InexactPartial<Omit<foundry.abstract.Document.DatabaseOperationsFor<"Item", "update">, "updates">>): Promise<this | undefined> {
-    if (!(this.system instanceof SpeciesSystemModel && this.system.virtual) && !this.flags.ptr2e.virtual) return super.update(data, context);
+    if (!(this.system instanceof SpeciesSystemModel && this.system.virtual) && !this.flags.ptr2e?.virtual) return super.update(data, context);
 
-    await this.actor?.updateEmbeddedDocuments("Item", [{ _id: "actorspeciesitem", "system.species": foundry.utils.expandObject(data).system }]);
+    await this.actor?.updateEmbeddedDocuments("Item", [{ _id: "actorspeciesitem", "system.species": (foundry.utils.expandObject(data) as Record<string, unknown>).system }]);
     this.updateSource(data);
     foundry.applications.instances.get(`SpeciesSheet-${this.uuid}`)?.render({});
     return undefined;
@@ -364,12 +364,17 @@ class ItemPTR2e extends Item {
     return processed ? super.importFromJSON(processed) : this;
   }
 
-  static override async deleteDocuments(ids: string[] = [], context: InexactPartial<Omit<foundry.abstract.Document.DatabaseOperationsFor<"Item", "delete">, "ids">> & { pendingEffects?: ActiveEffectPTR2e<ActorPTR2e | ItemPTR2e>[], ignoreRestricted?: boolean } = {}): Promise<foundry.abstract.Document.ToConfiguredInstance<typeof Item>[]> {
+  static override async deleteDocuments(
+    ids: string[] = [],
+    context: InexactPartial<Omit<foundry.abstract.Document.DatabaseOperationsFor<"Item", "delete">, "ids">> & {
+      pendingEffects?: ActiveEffect.ConfiguredInstance[],
+      ignoreRestricted?: boolean
+    } = {}): Promise<Item.ConfiguredInstance[]> {
     ids = Array.from(new Set(ids)).filter(id => id !== "actorspeciesitem");
     const actor = context.parent as Actor | undefined
     if (actor) {
       const items = ids.flatMap(id => actor.items.get(id) ?? []) as ItemPTR2e[];
-      const effects = context.pendingEffects ? [...context.pendingEffects] : [] as ActiveEffectPTR2e<ActorPTR2e | ItemPTR2e>[];
+      const effects = context.pendingEffects ? [...context.pendingEffects] : [] as ActiveEffect.ConfiguredInstance[];
 
       // TODO: Logic for container deletion
 
@@ -377,26 +382,26 @@ class ItemPTR2e extends Item {
       for (const item of [...items]) {
         if (item.effects.size) {
           for (const effect of item.effects) {
-            for (const change of (effect as ActiveEffectPTR2e).changes) {
+            for (const change of (effect as ActiveEffect.ConfiguredInstance).changes) {
               await change.preDelete?.({ pendingItems: items, context });
             }
 
-            await processGrantDeletions(effect as ActiveEffectPTR2e<ActorPTR2e | ItemPTR2e>, item, items, effects, !!context.ignoreRestricted)
+            await processGrantDeletions(effect as ActiveEffect.ConfiguredInstance, item, items, effects, !!context.ignoreRestricted)
           }
         }
         else {
-          if (item.grantedBy && item.grantedBy instanceof ActiveEffectPTR2e) {
-            await processGrantDeletions(item.grantedBy as ActiveEffectPTR2e<ActorPTR2e | ItemPTR2e>, item, items, effects, !!context.ignoreRestricted);
+          if (item.grantedBy && item.grantedBy instanceof CONFIG.ActiveEffect.documentClass) {
+            await processGrantDeletions(item.grantedBy as ActiveEffect.ConfiguredInstance, item, items, effects, !!context.ignoreRestricted);
           }
         }
       }
       if (effects.length) {
         const effectIds = Array.from(new Set(effects.map(e => e.id))).filter(id => actor.effects.has(id) && !context.pendingEffects?.find(e => e.id === id));
         if (effectIds.length) {
-          await ActiveEffectPTR2e.deleteDocuments(effectIds, { pendingItems: items, parent: actor });
+          await CONFIG.ActiveEffect.documentClass.deleteDocuments(effectIds, { pendingItems: items, parent: actor });
         }
       }
-      ids = Array.from(new Set(items.map(i => i.id))).filter(id => id && actor.items.has(id));
+      ids = Array.from(new Set(items.map(i => i.id!))).filter(id => id && actor.items.has(id));
     }
     return super.deleteDocuments(ids, context);
   }

@@ -1,5 +1,4 @@
 import type { TokenDocumentPTR2e } from "@module/canvas/token/document.ts";
-import { TokenPTR2e } from "@module/canvas/token/object.ts";
 import type { Predicate } from "@system/predication/predication.ts";
 
 class TagTokenPrompt {
@@ -26,7 +25,7 @@ class TagTokenPrompt {
     const hookParams: HookParamsTargetToken = [
       "targetToken",
       (_user, token, targeted) => {
-        this._target = targeted && token instanceof TokenPTR2e ? token.document : null;
+        this._target = targeted && token instanceof Token.ConfiguredInstance ? token.document : null;
         this._resolve?.(this._target);
       }
     ]

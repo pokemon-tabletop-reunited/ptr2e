@@ -1,14 +1,11 @@
 import type { AuraAppearanceData } from "@actor";
-// import { Trait } from "@data";
-import type { TokenDocumentPTR2e } from "../document.ts";
-import type { TokenPTR2e } from "../object.ts";
 
 interface TokenAuraData {
   /** The radius of the aura, measured in feet from the boundary of a token's space */
   radius: number;
 
   /** The token from which this aura is emanating */
-  token: TokenPTR2e | TokenDocumentPTR2e;
+  token: Token.ConfiguredInstance | TokenDocument.ConfiguredInstance;
 
   /** The rectangle defining this aura's space */
   bounds: PIXI.Rectangle;

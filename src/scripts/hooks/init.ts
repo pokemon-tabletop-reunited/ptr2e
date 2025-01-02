@@ -123,6 +123,7 @@ export const Init: PTRHook = {
       (async () => {
         // Monkeypatch the game.tooltip class to stop auto-dismissing tooltips
         const original = game.tooltip.deactivate.bind(game.tooltip);
+        //@ts-expect-error - Monkeypatching
         game.tooltip.deactivate = (force: boolean) => {
           if (Tour.tourInProgress && !force) return;
           original();
@@ -145,7 +146,6 @@ export const Init: PTRHook = {
 
       })();
 
-      //@ts-expect-error - Typing to be updated
       window.customElements.define(HTMLStringTagsElementPTR2e.tagName, HTMLStringTagsElementPTR2e);
 
       CONFIG.TextEditor.enrichers.push(...enrichers);

@@ -1,14 +1,14 @@
-import type { ChatMessagePTR2e } from "@chat";
 import type { DegreeOfSuccess } from "./degree-of-success.ts";
 import type { CheckRollContext } from "./data.ts";
 import type { CheckModifier } from "@module/effects/modifiers.ts";
 import type { AttackRollDataPTR2e } from "./attack-roll.ts";
 import type { CheckContext } from "@system/data.ts";
+import type { AnyObject } from "fvtt-types/utils";
 
-class CheckRoll extends Roll {
-  static createFromData(options: CheckRollDataPTR2e): CheckRoll | null {
+class CheckRoll<Data extends AnyObject = AnyObject> extends Roll<Data> {
+  static createFromData({options}: {options: CheckRollDataPTR2e, [key: string]: unknown}): CheckRoll | null {
     const { formula, data } = CheckRoll.createFormula(options);
-    return new CheckRoll(formula, data, options);
+    return new CheckRoll(formula, data as unknown as AnyObject, options);
   }
 
   static createFormula(options: CheckRollDataPTR2e): {
@@ -70,10 +70,6 @@ class CheckRoll extends Roll {
 
     return { formula, data };
   }
-}
-
-interface CheckRoll extends Roll {
-  data: CheckRollDataPTR2e;
 }
 
 interface RollDataPTR2e {
@@ -141,7 +137,7 @@ type CheckType = "check" | "attack-roll" | "skill-check" | "luck-roll" | "luck-c
 type CheckRollCallback = (
   roll: Roll.Evaluated<CheckRoll>,
   outcome: number | null | undefined,
-  message: Maybe<ChatMessagePTR2e>
+  message: Maybe<ChatMessage.ConfiguredInstance>
 ) => Promise<void> | void;
 
 type AttackRollCallback = (
@@ -149,13 +145,13 @@ type AttackRollCallback = (
     contexts: Record<string, CheckContext>;
   },
   results: AttackRollResult[],
-  message: Maybe<ChatMessagePTR2e>
+  message: Maybe<ChatMessage.ConfiguredInstance>
 ) => Promise<void> | void;
 
 type PokeballRollCallback = (
   context: CheckRollContext,
   results: PokeballRollResults,
-  message: Maybe<ChatMessagePTR2e>
+  message: Maybe<ChatMessage.ConfiguredInstance>
 ) => Promise<void> | void;
 
 export { CheckRoll };

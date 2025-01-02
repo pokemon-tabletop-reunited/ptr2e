@@ -1,11 +1,8 @@
-import type { SummonPTR2e } from "@item";
 import { ItemPTR2e } from "@item";
 import { default as ItemSheetPTR2e } from "./base.ts";
-import type { ActiveEffectSystem } from "@effects";
-import { ActiveEffectPTR2e } from "@effects";
-import type SummonActiveEffectSystem from "@module/effects/data/summon.ts";
+import type { AnyObject } from "fvtt-types/utils";
 
-export default class SummonSheet extends ItemSheetPTR2e<SummonPTR2e["system"]> {
+export default class SummonSheet extends ItemSheetPTR2e<AnyObject> {
   static override DEFAULT_OPTIONS = foundry.utils.mergeObject(
     super.DEFAULT_OPTIONS,
     {
@@ -35,29 +32,29 @@ export default class SummonSheet extends ItemSheetPTR2e<SummonPTR2e["system"]> {
     // Items only support effects
     if (type !== "effect") return;
 
-    return ActiveEffectPTR2e.createDialog({}, { parent: this.document, types: ["summon"] });
+    return CONFIG.ActiveEffect.documentClass.createDialog({}, { parent: this.document, types: ["summon"] });
   }
 
   override async _onDropActiveEffect(_event: DragEvent, data: object) {
-    const effect = await ActiveEffectPTR2e.fromDropData(data);
+    const effect = await CONFIG.ActiveEffect.documentClass.fromDropData(data);
     if (!this.document.isOwner || !effect) return false;
     if (effect.parent === this.document) return false;
 
     // Change type to 'Summon' as it's the only type that should be on Summon Items
-    return ActiveEffectPTR2e.create(this.updateEffectType(effect.toObject()), { parent: this.document });
+    return CONFIG.ActiveEffect.documentClass.create(this.updateEffectType(effect.toObject()), { parent: this.document });
   }
 
   override async _onDropItem(_event: DragEvent, data: object) {
-    const item = await ItemPTR2e.fromDropData(data as DropCanvasData);
+    const item = await ItemPTR2e.fromDropData(data as foundry.abstract.Document.DropData<Item.ConfiguredInstance>);
     if (!item || item.type !== "effect") return;
     // Change type to 'Summon' as it's the only type that should be on Summon Items
-    const effects = item.effects.map((effect) => this.updateEffectType((effect as ActiveEffectPTR2e).toObject()));
+    const effects = item.effects.map((effect) => this.updateEffectType((effect as ActiveEffect.ConfiguredInstance).toObject()));
     if (effects.length === 0) return;
-    return ActiveEffectPTR2e.createDocuments(effects, { parent: this.document });
+    return CONFIG.ActiveEffect.documentClass.createDocuments(effects, { parent: this.document });
   }
 
-  private updateEffectType(data: SourceFromSchema<ActiveEffectSchema<string, ActiveEffectSystem>>): SourceFromSchema<ActiveEffectSchema<string, SummonActiveEffectSystem>> {
+  private updateEffectType(data: ActiveEffect.ConstructorData): ActiveEffect.ConfiguredInstance {
     data.type = "summon";
-    return data as SourceFromSchema<ActiveEffectSchema<string, SummonActiveEffectSystem>>;
+    return data
   }
 }

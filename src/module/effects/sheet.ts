@@ -1,6 +1,4 @@
-import type { DocumentSheetConfiguration, Tab } from "@item/sheets/document.ts";
-import { DocumentSheetV2 } from "@item/sheets/document.ts";
-import ActiveEffectPTR2e from "./document.ts";
+import type { Tab } from "@item/sheets/document.ts";
 import type { ChangeFormOptions } from "./changes/sheet/index.ts";
 import { CHANGE_FORMS, ChangeForm } from "./changes/sheet/index.ts";
 import * as R from "remeda";
@@ -11,53 +9,50 @@ import { CodeMirror } from "./codemirror.ts";
 import Sortable from "sortablejs";
 import { DataInspector } from "@module/apps/data-inspector/data-inspector.ts";
 import Tagify from "@yaireo/tagify";
+import type { AnyObject } from "fvtt-types/utils";
 
 class ActiveEffectConfig extends foundry.applications.api.HandlebarsApplicationMixin(
-  DocumentSheetV2<ActiveEffectPTR2e>
-) {
-  static override DEFAULT_OPTIONS = foundry.utils.mergeObject(
-    super.DEFAULT_OPTIONS,
-    {
-      classes: ["active-effect-sheet"],
-      position: {
-        width: 550,
-        height: "auto",
-      },
-      form: {
-        handler: ActiveEffectConfig.#onSubmit,
-        closeOnSubmit: false,
-        submitOnChange: true,
-      },
-      actions: {
-        "open-inspector": async function (this: ActiveEffectConfig, event: Event) {
-          event.preventDefault();
-          const inspector = new DataInspector(this.document);
-          inspector.render(true);
-        },
-        "convert-to-affliction": async function (this: ActiveEffectConfig, event: Event) {
-          event.preventDefault();
-          const newEffect = this.document.clone({ type: "affliction" }, { keepId: true });
-          const parent = this.document.parent;
-          await this.document.delete();
-          const docs = await ActiveEffectPTR2e.createDocuments([newEffect], {keepId: true, parent});
-          docs?.at(0)?.sheet?.render(true);
-        }
-      },
-      window: {
-        resizable: true,
-        controls: [
-          ...(super.DEFAULT_OPTIONS?.window?.controls ?? []),
-          {
-            icon: "fas fa-atom",
-            label: "PTR2E.ActorSheet.Inspector",
-            action: "open-inspector",
-            visible: true
-          }
-        ],
-      },
+  foundry.applications.api.DocumentSheetV2
+)<ActiveEffect.ConfiguredInstance, AnyObject> {
+  static override DEFAULT_OPTIONS = {
+    classes: ["active-effect-sheet"],
+    position: {
+      width: 550,
+      height: "auto",
     },
-    { inplace: false }
-  );
+    form: {
+      handler: ActiveEffectConfig.#onSubmit,
+      closeOnSubmit: false,
+      submitOnChange: true,
+    },
+    actions: {
+      "open-inspector": async function (this: ActiveEffectConfig, event: Event) {
+        event.preventDefault();
+        const inspector = new DataInspector(this.document);
+        inspector.render(true);
+      },
+      "convert-to-affliction": async function (this: ActiveEffectConfig, event: Event) {
+        event.preventDefault();
+        const newEffect = this.document.clone({ type: "affliction" }, { keepId: true });
+        const parent = this.document.parent;
+        await this.document.delete();
+        const docs = await CONFIG.ActiveEffect.documentClass.createDocuments([newEffect], { keepId: true, parent });
+        docs?.at(0)?.sheet?.render(true);
+      }
+    },
+    window: {
+      resizable: true,
+      controls: [
+        ...(super.DEFAULT_OPTIONS?.window?.controls ?? []),
+        {
+          icon: "fas fa-atom",
+          label: "PTR2E.ActorSheet.Inspector",
+          action: "open-inspector",
+          visible: true
+        }
+      ],
+    },
+  };
 
   #allTraits: { value: string; label: string, virtual: boolean, type?: Trait["type"] }[] | undefined;
 
@@ -95,11 +90,10 @@ class ActiveEffectConfig extends foundry.applications.api.HandlebarsApplicationM
 
   get editingChange(): ChangeModel["_source"] | null {
     if (this.#editingChangeIndex === null) return null;
-    // @ts-expect-error - This is a valid operation
     return this.document.changes[this.#editingChangeIndex] ?? null;
   }
 
-  tabGroups: Record<string, string> = {
+  override tabGroups: Record<string, string> = {
     sheet: "overview",
   };
 
@@ -155,7 +149,7 @@ class ActiveEffectConfig extends foundry.applications.api.HandlebarsApplicationM
     }
   }
 
-  override async _prepareContext(options?: DocumentSheetConfiguration<ActiveEffectPTR2e>) {
+  override async _prepareContext(options: foundry.applications.api.DocumentSheetV2.Configuration<ActiveEffect.ConfiguredInstance>): Promise<AnyObject> {
     const context = (await super._prepareContext(options)) as Record<string, unknown>;
 
     context.descriptionHTML = await TextEditor.enrichHTML(this.document.description, {
@@ -195,7 +189,7 @@ class ActiveEffectConfig extends foundry.applications.api.HandlebarsApplicationM
       });
     }
 
-    const traits  = (() => {
+    const traits = (() => {
       if ("traits" in this.document.system) {
         const traits = [];
         for (const trait of this.document.system.traits) {
@@ -251,7 +245,7 @@ class ActiveEffectConfig extends foundry.applications.api.HandlebarsApplicationM
     };
   }
 
-  override close(options?: foundry.applications.api.ApplicationClosingOptions) {
+  override close(options?: foundry.applications.api.ApplicationV2.ClosingOptions) {
     this.#editingChangeIndex = null;
     return super.close(options);
   }
@@ -323,7 +317,7 @@ class ActiveEffectConfig extends foundry.applications.api.HandlebarsApplicationM
           $(this.element).find("tags ~ input").each((_i, input) => {
             if ((input as HTMLInputElement).value === "") (input as HTMLInputElement).value = "[]";
           });
-          const formData = new FormDataExtended(this.element);
+          const formData = new FormDataExtended(this.element as HTMLFormElement);
           const data = this._prepareSubmitData(
             event as unknown as SubmitEvent,
             this.element as HTMLFormElement,
@@ -350,7 +344,7 @@ class ActiveEffectConfig extends foundry.applications.api.HandlebarsApplicationM
           $(this.element).find("tags ~ input").each((_i, input) => {
             if ((input as HTMLInputElement).value === "") (input as HTMLInputElement).value = "[]";
           });
-          const formData = new FormDataExtended(this.element);
+          const formData = new FormDataExtended(this.element as HTMLFormElement);
 
           // Manually update the JSON data with the new type if it doesn't exist
           const selectValue =
@@ -389,6 +383,7 @@ class ActiveEffectConfig extends foundry.applications.api.HandlebarsApplicationM
       for (const anchor of htmlQueryAll(htmlElement, "a.edit-change")) {
         anchor.addEventListener("click", async () => {
           if (
+            //@ts-expect-error - fvtt-types invalid typing
             this.state !== foundry.applications.api.ApplicationV2.RENDER_STATES.RENDERED
           )
             return;
@@ -405,7 +400,7 @@ class ActiveEffectConfig extends foundry.applications.api.HandlebarsApplicationM
           $(this.element).find("tags ~ input").each((_i, input) => {
             if ((input as HTMLInputElement).value === "") (input as HTMLInputElement).value = "[]";
           });
-          const formData = new FormDataExtended(this.element);
+          const formData = new FormDataExtended(this.element as HTMLFormElement);
           const data = this._prepareSubmitData(
             event as unknown as SubmitEvent,
             this.element as HTMLFormElement,
@@ -534,7 +529,7 @@ class ActiveEffectConfig extends foundry.applications.api.HandlebarsApplicationM
       htmlQuery(htmlElement, "img[data-edit]")?.addEventListener("click", (event) => {
         const imgElement = event.currentTarget as HTMLImageElement;
         const attr = imgElement.dataset.edit;
-        const current = foundry.utils.getProperty<string | undefined>(this.document, attr!);
+        const current = foundry.utils.getProperty(this.document, attr!) as string | undefined;
         const fp = new FilePicker({
           current,
           type: "image",
@@ -553,8 +548,8 @@ class ActiveEffectConfig extends foundry.applications.api.HandlebarsApplicationM
   }
 
   override _onRender(
-    context: foundry.applications.api.ApplicationRenderContext,
-    options: foundry.applications.api.HandlebarsDocumentSheetConfiguration
+    context: AnyObject,
+    options: foundry.applications.api.DocumentSheetV2.RenderOptions
   ): void {
     super._onRender(context, options);
     if (this.#editingChangeIndex === null && this.#rulesLastScrollTop) {

@@ -1,12 +1,11 @@
-import type { CombatantPTR2e } from "@combat";
 import { CombatantSystemPTR2e } from "@combat";
 import type { CombatantSystemSchema } from "../system.ts";
 
 class RoundCombatantSystem extends CombatantSystemPTR2e {
 
   static readonly id = "roundsinitiative" as const;
-  static get instance(): CombatantPTR2e | null {
-    return game.combat?.combatants.get(this.id) as CombatantPTR2e ?? null;
+  static get instance(): Combatant.ConfiguredInstance | null {
+    return game.combat?.combatants.get(this.id) as Combatant.ConfiguredInstance ?? null;
   }
 
   override get activations() {
@@ -19,7 +18,7 @@ class RoundCombatantSystem extends CombatantSystemPTR2e {
   override get baseAV() { return 150 }
 
   override async _preUpdate(
-    changed: foundry.abstract.TypeDataModel.ParentAssignmentType<CombatantSystemSchema, CombatantPTR2e>,
+    changed: foundry.abstract.TypeDataModel.ParentAssignmentType<CombatantSystemSchema, Combatant.ConfiguredInstance>,
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     options: foundry.abstract.Document.PreUpdateOptions<any>,
     userId: string

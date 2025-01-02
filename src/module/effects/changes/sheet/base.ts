@@ -3,7 +3,6 @@ import type ActiveEffectConfig from "@module/effects/sheet.ts";
 import type ChangeModel from "../change.ts";
 import { createHTMLElement, fontAwesomeIcon, htmlClosest, htmlQuery, htmlQueryAll, isBracketedValue, isObject, tagify } from "@utils";
 import * as R from "remeda";
-import type ActiveEffectPTR2e from "@module/effects/document.ts";
 import { ItemPTR2e } from "@item";
 import ResolvableValueField from "@module/data/fields/resolvable-value-field.ts";
 
@@ -41,7 +40,7 @@ class ChangeForm<TChange extends ChangeModel = ChangeModel> {
         this.schema = this.change.schema;
     }
 
-    get effect(): ActiveEffectPTR2e {
+    get effect(): ActiveEffect.ConfiguredInstance {
         return this.change.effect;
     }
 
@@ -407,7 +406,7 @@ interface ChangeTabData {
 
 interface ChangeFormContext<TChange extends ChangeModel>
     extends Omit<ChangeFormOptions<TChange>, "sheet"> {
-    effect: ActiveEffectPTR2e;
+    effect: ActiveEffect.ConfiguredInstance;
     /** A prefix for use in label-input/select pairs */
     fieldIdPrefix: string;
     basePath: string;

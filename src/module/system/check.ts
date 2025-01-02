@@ -24,7 +24,6 @@ import type { CaptureRollCreationData } from "./rolls/capture-roll.ts";
 import { CaptureRoll } from "./rolls/capture-roll.ts";
 import { ConsumableSystemModel } from "@item/data/index.ts";
 import type { ActorPTR2e } from "@actor";
-import type { ActiveEffectPTR2e } from "@effects";
 
 class CheckPTR2e {
   static async rollPokeball(
@@ -441,7 +440,7 @@ class CheckPTR2e {
     }
 
     if (context.ppCost && context.consumePP) {
-      const actor = await fromUuid<ActorPTR2e>(context.actor?.uuid) ?? game.actors.get(context.actor?.id);
+      const actor = await fromUuid<Actor.ConfiguredInstance>(context.actor?.uuid as ActorUUID) ?? game.actors.get(context.actor?.id ?? "");
       if (actor) {
         const pp = actor.system.powerPoints.value;
 
@@ -457,7 +456,7 @@ class CheckPTR2e {
       }
     }
 
-    const effectsToApply: ActiveEffectPTR2e['_source'][] = [];
+    const effectsToApply: ActiveEffect.ConstructorData[] = [];
     if (context.selfEffectRolls?.length) {
       for (const effectRoll of context.selfEffectRolls) {
         effectRoll.roll ??= await new Roll("1d100ms@dc", { dc: effectRoll.chance }).roll();
@@ -469,7 +468,7 @@ class CheckPTR2e {
             continue;
           }
 
-          effectsToApply.push(...item.toObject().effects as ActiveEffectPTR2e['_source'][]);
+          effectsToApply.push(...item.toObject().effects as ActiveEffect.ConstructorData[]);
         }
       }
     }

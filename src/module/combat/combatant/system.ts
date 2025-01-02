@@ -1,5 +1,4 @@
 import type { DeepPartial } from "fvtt-types/utils";
-import type CombatantPTR2e from "./document.ts";
 
 const combatantSystemSchema = {
   activationsHad: new foundry.data.fields.NumberField({
@@ -19,8 +18,8 @@ const combatantSystemSchema = {
 
 export type CombatantSystemSchema = typeof combatantSystemSchema;
 
-export default class CombatantSystemPTR2e<Schema extends CombatantSystemSchema = CombatantSystemSchema> extends foundry.abstract.TypeDataModel<Schema, CombatantPTR2e> {
-  get combat() {
+export default class CombatantSystemPTR2e<Schema extends CombatantSystemSchema = CombatantSystemSchema> extends foundry.abstract.TypeDataModel<Schema, Combatant.ConfiguredInstance> {
+  get combat(): Combat.ConfiguredInstance {
     return this.parent.encounter;
   }
 
@@ -28,15 +27,16 @@ export default class CombatantSystemPTR2e<Schema extends CombatantSystemSchema =
     throw new Error("CombatantSystemPTR2e#baseAV must be implemented by a subclass");
   }
 
-  get activations() {
-    return this.activationsHad;
+  get activations(): number {
+    const self = this as CombatantSystemPTR2e;
+    return self.activationsHad;
   }
 
-  static override defineSchema<Schema extends CombatantSystemSchema = CombatantSystemSchema>(): Schema {
-    return combatantSystemSchema as Schema;
+  static override defineSchema(): CombatantSystemSchema {
+    return combatantSystemSchema;
   }
 
-  async applyAdvancementDelay(advancementDelay: number, dataOnly = false): Promise<Record<string, unknown> | this['parent'] | undefined> {
+  async applyAdvancementDelay(this: CombatantSystemPTR2e, advancementDelay: number, dataOnly = false): Promise<Record<string, unknown> | this['parent'] | undefined> {
     if (advancementDelay === 0) return;
     if (advancementDelay > 1 || advancementDelay < -3) {
       throw new Error("Delay or advancement must be normalized between -3 and 1");
@@ -81,32 +81,33 @@ export default class CombatantSystemPTR2e<Schema extends CombatantSystemSchema =
   }
 
   override async _preUpdate(
-    changed: foundry.data.fields.SchemaField.AssignmentType<Combatant.Schema>,
+    changes: DeepPartial<foundry.abstract.TypeDataModel.ParentAssignmentType<Schema, Combatant.ConfiguredInstance>>,
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     options: foundry.abstract.Document.PreUpdateOptions<any>,
     userId: string
   ): Promise<boolean | void> {
-    if(!changed) return false;
-    
-    const result = await super._preUpdate(changed, options, userId);
+    if (!changes) return false;
+
+    const result = await super._preUpdate(changes, options, userId);
     if (result === false) return false;
 
-    if (changed.system?.activationsHad !== undefined && Number(changed.system.activationsHad) > 0) {
-      changed.system.advanceDelayPercent = 0;
+    if (changes.system?.activationsHad !== undefined && Number(changes.system.activationsHad) > 0) {
+      //@ts-expect-error - FIXME: Typing is failing - This should work.
+      changes.system.advanceDelayPercent = 0;
     }
 
-    if (changed.initiative !== undefined && typeof changed.initiative === "number") {
-      changed.initiative = Math.round(changed.initiative)
+    if (changes.initiative !== undefined && typeof changes.initiative === "number") {
+      changes.initiative = Math.round(changes.initiative)
     }
   }
 
   override _onUpdate(
-    changed: foundry.data.fields.SchemaField.InnerAssignmentType<Combatant.Schema>,
+    changed: DeepPartial<foundry.abstract.TypeDataModel.ParentAssignmentType<Schema, Combatant.ConfiguredInstance>>,
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     options: foundry.abstract.Document.OnUpdateOptions<any>,
     userId: string
   ): void {
-    if(!changed) return;
+    if (!changed) return;
     super._onUpdate(changed, options, userId);
     if (
       "system" in changed &&

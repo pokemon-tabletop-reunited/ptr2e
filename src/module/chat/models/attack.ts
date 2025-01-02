@@ -12,7 +12,6 @@ import { PredicateField } from "@system/predication/schema-data-fields.ts";
 import type { UserVisibility } from "@scripts/ui/user-visibility.ts";
 import type { ModifierPTR2e } from "@module/effects/modifiers.ts";
 import { RollNote } from "@system/notes.ts";
-import type { ActiveEffectPTR2e } from "@effects";
 import type { ConsumablePTR2e, ItemWithActions } from "@item";
 import { ItemPTR2e } from "@item";
 import type ConsumableSystem from "@item/data/consumable.ts";
@@ -42,17 +41,32 @@ const attackMessageSchema = {
         AnyObject,
         ActorPTR2e
       >({ required: true }),
-      accuracy: new foundry.data.fields.JSONField({
+      accuracy: new foundry.data.fields.JSONField<
+        { required: true, nullable: true, validate: foundry.data.fields.DataField.Validator<string> },
+        AnyObject,
+        Roll.Evaluated<AttackRoll> | null,
+        string | null
+      >({
         required: true,
         nullable: true,
         validate: validateRoll,
       }),
-      crit: new foundry.data.fields.JSONField({
+      crit: new foundry.data.fields.JSONField<
+        { required: true, nullable: true, validate: foundry.data.fields.DataField.Validator<string> },
+        AnyObject,
+        Roll.Evaluated<AttackRoll> | null,
+        string | null
+      >({
         required: true,
         nullable: true,
         validate: validateRoll,
       }),
-      damage: new foundry.data.fields.JSONField({
+      damage: new foundry.data.fields.JSONField<
+        { required: true, nullable: true, validate: foundry.data.fields.DataField.Validator<string> },
+        AnyObject,
+        Roll.Evaluated<AttackRoll> | null,
+        string | null
+      >({
         required: true,
         nullable: true,
         validate: validateRoll,
@@ -61,9 +75,17 @@ const attackMessageSchema = {
         check: new foundry.data.fields.SchemaField({
           breakdown: new foundry.data.fields.StringField({ required: true, blank: true, initial: "" }),
           slug: new SlugField({ required: true, blank: true, initial: "" }),
-          totalModifier: new foundry.data.fields.NumberField({ required: true, initial: 0 }),
-          totalModifiers: new foundry.data.fields.ObjectField({ required: true, initial: {} }),
-          _modifiers: new foundry.data.fields.ArrayField(new foundry.data.fields.ObjectField(), { required: true, initial: [] }),
+          totalModifier: new foundry.data.fields.NumberField({ required: true, nullable: false, initial: 0 }),
+          totalModifiers: new foundry.data.fields.ObjectField<
+            {required: true, initial: AnyObject},
+            Record<string, number>,
+            Record<string, number>
+          >({ required: true, initial: {} }),
+          _modifiers: new foundry.data.fields.ArrayField(new foundry.data.fields.ObjectField<
+              {required: true, initial: AnyObject},
+              AnyObject,
+              ModifierPTR2e
+            >(), { required: true, initial: [] }),
         }),
         action: new foundry.data.fields.StringField({ required: true, blank: true, initial: "" }),
         domains: new foundry.data.fields.ArrayField(new SlugField(), { required: true, initial: [] }),
@@ -73,30 +95,44 @@ const attackMessageSchema = {
             title: new foundry.data.fields.StringField({ required: true, blank: true, initial: "" }),
             text: new foundry.data.fields.StringField({ required: true, blank: true, initial: "" }),
             predicate: new PredicateField({ required: true, initial: [] }),
-            outcome: new foundry.data.fields.ArrayField(new foundry.data.fields.NumberField(), { required: true, initial: [] }),
-            visibility: new foundry.data.fields.StringField({ required: true, initial: "all", choices: ["all", "gm", "owner", "none"] }),
+            outcome: new foundry.data.fields.ArrayField(new foundry.data.fields.NumberField({required: true, nullable: false}), { required: true, initial: [] }),
+            visibility: new foundry.data.fields.StringField<
+              { required: true, initial: "all", choices: ["all", "gm", "owner", "none"] },
+              "all" | "gm" | "owner" | "none",
+              "all" | "gm" | "owner" | "none"
+            >({ required: true, initial: "all", choices: ["all", "gm", "owner", "none"] }),
           }),
           { required: true, initial: [] }
         ),
         title: new foundry.data.fields.StringField({ required: true, blank: true, initial: "" }),
         type: new foundry.data.fields.StringField({ required: true, blank: true, initial: "" }),
-        options: new foundry.data.fields.ArrayField(new foundry.data.fields.StringField(), { required: true, initial: [] }),
+        options: new foundry.data.fields.ArrayField(new foundry.data.fields.StringField({required: true}), { required: true, initial: [] }),
       }),
       effectRolls: new foundry.data.fields.SchemaField({
         applied: new foundry.data.fields.BooleanField({ required: true, initial: false }),
         target: new foundry.data.fields.ArrayField(new foundry.data.fields.SchemaField({
-          chance: new foundry.data.fields.NumberField({ required: true, min: 1, max: 100 }),
-          effect: new foundry.data.fields.DocumentUUIDField(),
+          chance: new foundry.data.fields.NumberField({ required: true, nullable: false, min: 1, max: 100 }),
+          effect: new foundry.data.fields.DocumentUUIDField<AnyObject, ItemUUID, ItemUUID>(),
           label: new foundry.data.fields.StringField({ required: true, initial: "" }),
-          roll: new foundry.data.fields.JSONField({ required: true, nullable: true, initial: null }),
+          roll: new foundry.data.fields.JSONField<
+            { required: true, nullable: true, initial: null },
+            AnyObject,
+            Roll.Evaluated<AttackRoll> | null,
+            string | null
+          >({ required: true, nullable: true, initial: null }),
           success: new foundry.data.fields.BooleanField({ required: true, nullable: true, initial: null }),
           critOnly: new foundry.data.fields.BooleanField({ required: true, initial: false })
         }), { required: true, initial: [] }),
         origin: new foundry.data.fields.ArrayField(new foundry.data.fields.SchemaField({
-          chance: new foundry.data.fields.NumberField({ required: true, min: 1, max: 100 }),
-          effect: new foundry.data.fields.DocumentUUIDField(),
+          chance: new foundry.data.fields.NumberField({ required: true, nullable: false, min: 1, max: 100 }),
+          effect: new foundry.data.fields.DocumentUUIDField<AnyObject, ItemUUID, ItemUUID>(),
           label: new foundry.data.fields.StringField({ required: true, initial: "" }),
-          roll: new foundry.data.fields.JSONField({ required: true, nullable: true, initial: null }),
+          roll: new foundry.data.fields.JSONField<
+            { required: true, nullable: true, initial: null },
+            AnyObject,
+            Roll.Evaluated<AttackRoll> | null,
+            string | null
+          >({ required: true, nullable: true, initial: null }),
           success: new foundry.data.fields.BooleanField({ required: true, nullable: true, initial: null }),
           critOnly: new foundry.data.fields.BooleanField({ required: true, initial: false })
         }), { required: true, initial: [] }),
@@ -118,16 +154,21 @@ const attackMessageSchema = {
     { required: true, initial: [] }
   ),
   pp: new foundry.data.fields.SchemaField({
-    spent: new foundry.data.fields.BooleanField({ required: true, initial: false }),
-    cost: new foundry.data.fields.NumberField({ required: true, initial: 0 }),
+    spent: new foundry.data.fields.BooleanField({ required: true, nullable: false, initial: false }),
+    cost: new foundry.data.fields.NumberField({ required: true, nullable: false, initial: 0 }),
   }),
   selfEffects: new foundry.data.fields.SchemaField({
     applied: new foundry.data.fields.BooleanField({ required: true, initial: false }),
     rolls: new foundry.data.fields.ArrayField(new foundry.data.fields.SchemaField({
-      chance: new foundry.data.fields.NumberField({ required: true, min: 1, max: 100 }),
+      chance: new foundry.data.fields.NumberField({ required: true, nullable: false, min: 1, max: 100 }),
       effect: new foundry.data.fields.DocumentUUIDField(),
       label: new foundry.data.fields.StringField({ required: true, initial: "" }),
-      roll: new foundry.data.fields.JSONField({ required: true, nullable: true, initial: null }),
+      roll: new foundry.data.fields.JSONField<
+        { required: true, nullable: true, initial: null },
+        AnyObject,
+        Roll.Evaluated<AttackRoll> | null,
+        string | null
+      >({ required: true, nullable: true, initial: null }),
       success: new foundry.data.fields.BooleanField({ required: true, nullable: true, initial: null }),
       critOnly: new foundry.data.fields.BooleanField({ required: true, initial: false }),
     }), { required: true, initial: [] }),
@@ -145,8 +186,8 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel<Attack
     return attackMessageSchema
   }
 
-  get currentOrigin(): Promise<Maybe<ActorPTR2e>> {
-    return this.context?.origin?.uuid ? fromUuid(this.context.origin.uuid) as Promise<Maybe<ActorPTR2e>> : Promise.resolve(null);
+  get currentOrigin(): Promise<Maybe<Actor.ConfiguredInstance>> {
+    return this.context?.origin?.uuid ? fromUuid<Actor.ConfiguredInstance>(this.context.origin.uuid) : Promise.resolve(null);
   }
 
   override prepareBaseData(): void {
@@ -264,7 +305,7 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel<Attack
 
       try {
         const attack = (jsonData.type === 'summon' ? SummonAttackPTR2e.fromJSON(this._source.attack) : AttackPTR2e.fromJSON(this._source.attack)) as AttackPTR2e;
-        const sourceItem = this.originItem ?? this.origin.actions.attack.get(this._source.attackSlug)?.item;
+        const sourceItem = (this.originItem ?? this.origin.actions.attack.get(this._source.attackSlug)?.item) as ItemWithActions;
         const clonedAttack = attack && sourceItem ? attack.clone({}, { parent: sourceItem }) : attack;
         clonedAttack.prepareDerivedData();
         return clonedAttack;
@@ -436,7 +477,7 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel<Attack
         selfEffectRolls: this.selfEffects ? await (async () => {
           const rolls = [];
           for (const roll of this.selfEffects!.rolls) {
-            const item = await fromUuid(roll.effect);
+            const item = await fromUuid<Item.ConfiguredInstance>(roll.effect);
             if (!item) {
               Hooks.onError("AttackMessageSystem#getHTMLContent", new Error(`Could not find item with uuid ${roll.effect}`), { log: "error" });
               continue;
@@ -531,7 +572,7 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel<Attack
     async function applyEffects(target: ActorPTR2e, effects: EffectRollData[], isCrit = false) {
       if (!effects.length) return;
       const toApply = await (async () => {
-        const toApply: ActiveEffectPTR2e['_source'][] = [];
+        const toApply: foundry.data.fields.SchemaField.PersistedType<ActiveEffect.Schema>[] = [];
         for (const effectRoll of effects) {
           if (effectRoll.success === null) {
             effectRoll.success = (effectRoll.roll?.total ?? 1) <= 0
@@ -550,7 +591,7 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel<Attack
             continue;
           }
 
-          toApply.push(...item.toObject().effects as ActiveEffectPTR2e['_source'][]);
+          toApply.push(...item.toObject().effects);
         }
         return toApply;
       })();
@@ -771,8 +812,8 @@ interface ResultData {
 
 interface TargetEffectRolls {
   applied: boolean;
-  target: EffectRolls[];
-  origin: EffectRolls[];
+  target: EffectRollData[];
+  origin: EffectRollData[];
 }
 
 interface CheckContext {
@@ -804,7 +845,7 @@ interface CheckContextRollNote {
 
 // interface SelfEffects {
 //   applied: boolean;
-//   rolls: EffectRolls[];
+//   rolls: EffectRollData[];
 // }
 
 interface EffectRollData {

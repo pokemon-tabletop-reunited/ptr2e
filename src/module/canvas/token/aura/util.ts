@@ -1,6 +1,4 @@
 import { EffectAreaSquare } from "@module/canvas/effect-area-square.ts";
-import type { TokenPTR2e } from "../object.ts";
-import { TokenDocumentPTR2e } from "../document.ts";
 import type { Trait } from "@data";
 
 export function getAreaSquares(data: GetAreaSquaresParams): EffectAreaSquare[] {
@@ -19,7 +17,7 @@ export function getAreaSquares(data: GetAreaSquaresParams): EffectAreaSquare[] {
       sound: sources.PointSoundSource,
       move: sources.PointMovementSource,
     }[collisionType];
-    const tokenObject = data.token instanceof TokenDocumentPTR2e ? data.token.object : data.token;
+    const tokenObject = data.token instanceof CONFIG.Token.documentClass ? data.token.object : data.token;
     return new PointSource({ object: tokenObject });
   })();
 
@@ -99,7 +97,7 @@ export function getGridHighlightPositions({ x, y }: { x: number, y: number }, sh
 interface GetAreaSquaresParams {
   bounds: PIXI.Rectangle;
   radius: number;
-  token: TokenPTR2e | TokenDocumentPTR2e;
+  token: Token.ConfiguredInstance | TokenDocument.ConfiguredInstance;
   traits?: Trait[];
   shape: PIXI.Circle;
 }

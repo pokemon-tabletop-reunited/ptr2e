@@ -1,30 +1,25 @@
 import type { MovePTR2e, SpeciesPTR2e } from "@item";
 import { ItemPTR2e } from "@item";
 import type { DocumentSheetConfiguration, Tab } from "./document.ts";
-import type { SpeciesSystemSource } from "@item/data/index.ts";
 import { htmlQueryAll, sluggify } from "@utils";
 import { default as ItemSheetPTR2e } from "./base.ts";
 import * as R from "remeda";
-import type { AbilityReference, AbilityReferenceSchema, EvolutionData } from "@item/data/species.ts";
+import type { EvolutionData } from "@item/data/species.ts";
 import type SkillPTR2e from "@module/data/models/skill.ts";
 import { partialSkillToSkill } from "@scripts/config/skills.ts";
-import { ActiveEffectPTR2e } from "@effects";
+import type { AnyObject, DeepPartial } from "fvtt-types/utils";
 
-export default class SpeciesSheet extends ItemSheetPTR2e<SpeciesPTR2e["system"]> {
-  static override DEFAULT_OPTIONS = foundry.utils.mergeObject(
-    super.DEFAULT_OPTIONS,
-    {
-      position: {
-        width: 600,
-      },
-      classes: ["species-sheet"],
-      actions: {
-        "copy-evolution-tree": SpeciesSheet.#copyEvolutionTree,
-        "paste-evolution-tree": SpeciesSheet.#pasteEvolutionTree,
-      },
+export default class SpeciesSheet extends ItemSheetPTR2e<AnyObject> {
+  static override DEFAULT_OPTIONS = {
+    position: {
+      width: 600,
     },
-    { inplace: false }
-  );
+    classes: ["species-sheet"],
+    actions: {
+      "copy-evolution-tree": SpeciesSheet.#copyEvolutionTree,
+      "paste-evolution-tree": SpeciesSheet.#pasteEvolutionTree,
+    },
+  }
 
   static override readonly overviewTemplate =
     "systems/ptr2e/templates/items/species/species-overview.hbs";
@@ -93,14 +88,14 @@ export default class SpeciesSheet extends ItemSheetPTR2e<SpeciesPTR2e["system"]>
     }
   };
 
-  override async _prepareContext() {
+  override async _prepareContext(options: DeepPartial<foundry.applications.api.DocumentSheetV2.RenderOptions> & { isFirstRender: boolean }): Promise<AnyObject> {
     return {
-      ...(await super._prepareContext()),
+      ...(await super._prepareContext(options)),
       copyPresent:
         !!SpeciesSheet.copyInfo &&
         SpeciesSheet.copyInfo !== this.document.system.evolutions,
       abilities: Object.keys(this.document.system.abilities).reduce((acc, key) => {
-        const category = this.document._source.system.abilities[key]! as foundry.data.fields.SourcePropFromDataField<foundry.data.fields.SchemaField<AbilityReferenceSchema>>[];
+        const category = this.document._source.system.abilities[key];
         acc[key] = category.map(ability => ({ slug: ability.slug, contentLink: Handlebars.helpers.asContentLink(ability.uuid) }));
         return acc;
       }, {} as Record<string, { slug: string, contentLink: string }[]>)
@@ -224,7 +219,7 @@ export default class SpeciesSheet extends ItemSheetPTR2e<SpeciesPTR2e["system"]>
             case "open-sheet": {
               const { uuid } = element.dataset;
               if (!uuid) return;
-              const item = await fromUuid<ItemPTR2e>(uuid);
+              const item = await fromUuid<ItemPTR2e>(uuid as ItemUUID);
               if (item) item.sheet?.render(true);
             }
           }
@@ -298,7 +293,7 @@ export default class SpeciesSheet extends ItemSheetPTR2e<SpeciesPTR2e["system"]>
           )?.dataset.effectId;
           if (!effectId) return;
           return (
-            this.document.effects.get(effectId) as ActiveEffectPTR2e<SpeciesPTR2e>
+            this.document.effects.get(effectId) as ActiveEffect.ConfiguredInstance
           )?.sheet?.render(true);
         });
       }
@@ -339,7 +334,7 @@ export default class SpeciesSheet extends ItemSheetPTR2e<SpeciesPTR2e["system"]>
     // Items only support effects
     if (type !== "effect") return;
 
-    return ActiveEffectPTR2e.createDialog({}, { parent: this.document, types: ["form"] });
+    return CONFIG.ActiveEffect.documentClass.createDialog({}, { parent: this.document, types: ["form"] });
   }
 
   override _prepareSubmitData(
@@ -348,7 +343,7 @@ export default class SpeciesSheet extends ItemSheetPTR2e<SpeciesPTR2e["system"]>
     formData: FormDataExtended
   ): Record<string, unknown> {
     const data = foundry.utils.expandObject(formData.object);
-    function isSystem(system: unknown): system is SpeciesSystemSource["system"] {
+    function isSystem(system: unknown) {
       return (
         typeof system === "object" &&
         system !== null &&
@@ -396,7 +391,7 @@ export default class SpeciesSheet extends ItemSheetPTR2e<SpeciesPTR2e["system"]>
         .sort((a, b) => a.slug.localeCompare(b.slug));
     }
 
-    return data;
+    return data as Record<string, unknown>;
   }
 
   static async #deleteEvolution(this: SpeciesSheet, event: Event): Promise<void> {
@@ -408,7 +403,7 @@ export default class SpeciesSheet extends ItemSheetPTR2e<SpeciesPTR2e["system"]>
 
     const doc = this.document.toObject();
     const evolutions = doc.system.evolutions;
-    const evos = foundry.utils.getProperty<EvolutionData[]>(doc, arrayPath) ?? [];
+    const evos = foundry.utils.getProperty(doc, arrayPath) as EvolutionData[] ?? [];
     evos.splice(parseInt(index), 1);
     this.document.update({ "system.evolutions": evolutions });
   }
@@ -420,7 +415,7 @@ export default class SpeciesSheet extends ItemSheetPTR2e<SpeciesPTR2e["system"]>
 
     const doc = this.document.toObject();
     const evolutions: EvolutionData = doc.system.evolutions!;
-    const methods = foundry.utils.getProperty<EvolutionData["methods"]>(doc, field) ?? [];
+    const methods = foundry.utils.getProperty(doc, field) as EvolutionData["methods"] ?? [];
     methods.push({ type: "level", level: 20, operand: "and" });
     this.document.update({ "system.evolutions": evolutions });
   }
@@ -432,7 +427,7 @@ export default class SpeciesSheet extends ItemSheetPTR2e<SpeciesPTR2e["system"]>
 
     const doc = this.document.toObject();
     const evolutions: EvolutionData = doc.system.evolutions!;
-    const methods = foundry.utils.getProperty<EvolutionData["methods"]>(doc, field) ?? [];
+    const methods = foundry.utils.getProperty(doc, field) as EvolutionData["methods"] ?? [];
     methods.splice(parseInt(index), 1);
     this.document.update({ "system.evolutions": evolutions });
   }
@@ -446,9 +441,9 @@ export default class SpeciesSheet extends ItemSheetPTR2e<SpeciesPTR2e["system"]>
     const { path } = target.dataset;
     if (!path) return;
 
-    const data = TextEditor.getDragEventData(event) as Record<string, string>;
+    const data = TextEditor.getDragEventData(event) as unknown as Record<string, string>;
     if (data.type !== "Item" || !data.uuid) return;
-    const item = await fromUuid<ItemPTR2e>(data.uuid);
+    const item = await fromUuid<ItemPTR2e>(data.uuid as ItemUUID);
     if (!item || !(item instanceof ItemPTR2e)) return;
 
     const doc = this.document.toObject();
@@ -493,9 +488,9 @@ export default class SpeciesSheet extends ItemSheetPTR2e<SpeciesPTR2e["system"]>
     const { path } = target.dataset;
     if (!path) return;
 
-    const data = TextEditor.getDragEventData(event) as Record<string, string>;
+    const data = TextEditor.getDragEventData(event) as unknown as Record<string, string>;
     if (data.type !== "Item" || !data.uuid) return;
-    const item = await fromUuid<ItemPTR2e>(data.uuid);
+    const item = await fromUuid<ItemPTR2e>(data.uuid as ItemUUID);
     if (!item || !(item instanceof ItemPTR2e)) return;
 
     // if the item isn't an ability, error
@@ -505,16 +500,16 @@ export default class SpeciesSheet extends ItemSheetPTR2e<SpeciesPTR2e["system"]>
 
     const doc = this.document.toObject();
 
-    const abilities: AbilityReference[] = foundry.utils.getProperty(doc, path) ?? [];
+    const abilities = foundry.utils.getProperty(doc, path) as {slug: string, uuid: ItemUUID}[] ?? [];
     // check if the slug is not present
     const existing = abilities.find((ability) => ability.slug == item.slug);
     if (!existing) {
       abilities.push({
         slug: item.slug,
-        uuid: item.uuid,
+        uuid: item.uuid as ItemUUID,
       });
     } else {
-      existing.uuid = item.uuid;
+      existing.uuid = item.uuid as ItemUUID;
     }
 
     await this.document.update({ [path]: abilities });
@@ -537,7 +532,7 @@ export default class SpeciesSheet extends ItemSheetPTR2e<SpeciesPTR2e["system"]>
     if (!path) return;
 
     const doc = this.document.toObject();
-    const abilities: AbilityReference[] = foundry.utils.getProperty(doc, path) ?? [];
+    const abilities = foundry.utils.getProperty(doc, path) as {slug: string, uuid: ItemUUID}[] ?? [];
     const filteredAbilities = abilities.filter((ability) => ability.slug != key);
 
     await this.document.update({ [path]: filteredAbilities });
@@ -610,9 +605,9 @@ export default class SpeciesSheet extends ItemSheetPTR2e<SpeciesPTR2e["system"]>
 
     target.classList.remove("dragover");
 
-    const data = TextEditor.getDragEventData(event) as Record<string, string>;
+    const data = TextEditor.getDragEventData(event) as unknown as Record<string, string>;
     if (data.type !== "Item" || !data.uuid) return;
-    const item = await fromUuid<MovePTR2e>(data.uuid);
+    const item = await fromUuid<MovePTR2e>(data.uuid as ItemUUID);
     if (!item || !(item instanceof ItemPTR2e)) return;
     if (item.type !== "move") {
       ui.notifications.error(game.i18n.localize("PTR2E.SpeciesSheet.moves.dropMoveError"));
@@ -622,10 +617,8 @@ export default class SpeciesSheet extends ItemSheetPTR2e<SpeciesPTR2e["system"]>
     const doc = this.document.toObject();
     const moves = doc.system.moves;
     if (target.classList.contains("tutor")) {
-      //@ts-expect-error - Gen is not required.
       moves.tutor.push({ name: item.slug, uuid: item.uuid });
     } else {
-      //@ts-expect-error - Gen is not required.
       moves.levelUp.push({ name: item.slug, uuid: item.uuid, level: 0 });
     }
 

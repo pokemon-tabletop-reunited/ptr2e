@@ -8,7 +8,6 @@ import Tagify from "@yaireo/tagify";
 import Sortable from "sortablejs";
 import type { PerkNode, PerkPurchaseState } from "./perk-store.ts";
 import PerkStore, { PerkState } from "./perk-store.ts";
-import type { ActiveEffectPTR2e } from "@effects";
 import { createHTMLElement, fontAwesomeIcon, htmlClosest, htmlQuery, htmlQueryAll, ImageResolver, isObject, objectHasKey, sluggify } from "@utils";
 import { CompendiumBrowserPerkTab } from "../compendium-browser/tabs/perk.ts";
 import type { CheckboxData, RangesInputData, RenderResultListOptions, SelectData, SliderData } from "../compendium-browser/tabs/data.ts";
@@ -148,7 +147,7 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
             }
 
             const oldChoiceSets = new Map<string, ChoiceSetChangeSystem>(current?.effects.contents.flatMap(effect =>
-              (effect as ActiveEffectPTR2e).changes.flatMap(change => change.type === ChoiceSetChangeSystem.TYPE ? change : []).flat() as ChoiceSetChangeSystem[]
+              (effect as ActiveEffect.ConfiguredInstance).changes.flatMap(change => change.type === ChoiceSetChangeSystem.TYPE ? change : []).flat() as ChoiceSetChangeSystem[]
             ).map(change => [change.rollOption ?? change.flag!, change]));
 
             const newPerk = perk.clone({

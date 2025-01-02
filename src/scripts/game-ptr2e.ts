@@ -6,14 +6,13 @@ import ClockPanel from "@module/apps/clocks/clock-panel.ts";
 import { Pokedex } from "pokeapi-js-wrapper";
 import { UUIDUtils } from "src/util/uuid.ts";
 import TokenPanel from "@module/apps/token-panel.ts";
-import type { TokenPTR2e } from "@module/canvas/token/object.ts";
 import { TextEnricher } from "./ui/text-enrichers.ts";
 import { remigrate } from "@system/remigrate.ts";
 import { DataStructure } from "@module/apps/data-inspector/data-handler.ts";
 import { CompendiumBrowser } from "@module/apps/compendium-browser/index.ts";
 import { TutorListSettings } from "@system/tutor-list/setting-model.ts";
 import { TutorListApp } from "@module/apps/tutor-list.ts";
-import type { CombatPTR2e } from "@combat";
+import type { CombatPTR2e, SummonCombatantSystem } from "@combat";
 import GithubManager from "@module/apps/github.ts";
 
 const GamePTR = {
@@ -85,13 +84,13 @@ const GamePTR = {
       if(!summons?.length) continue;
 
       for(const summon of summons) {
-        summon.system.notifyActorsOfEffectsIfApplicable(combat.combatants.contents);
+        (summon.system as SummonCombatantSystem).notifyActorsOfEffectsIfApplicable(combat.combatants.contents);
       }
     }
     
     game.ptr.clocks.panel.render(true);
     game.ptr.tokenPanel.render(true);
-    game.ptr.tokenPanel.token = game.user.character?.getActiveTokens().at(0) as TokenPTR2e | null;
+    game.ptr.tokenPanel.token = game.user.character?.getActiveTokens().at(0) as Token.ConfiguredInstance | null;
 
     // Initialize the art map collection.
     game.ptr.data.artMap.refresh();

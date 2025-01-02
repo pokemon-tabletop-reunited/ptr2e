@@ -1,15 +1,13 @@
-import type { ActorPTR2e } from "@actor";
 import type { ChangeModelOptions, ChangeSource } from "@data";
 import { ChangeModel } from "@data";
 import { ItemAlteration } from "../alterations/item.ts";
-import { ItemPTR2e } from "@item";
 import { isObject, sluggify, tupleHasValue } from "@utils";
-import ActiveEffectPTR2e from "../document.ts";
 import type { EffectSourcePTR2e } from "@effects";
 import * as R from "remeda";
 import { UUIDUtils } from "src/util/uuid.ts";
 import type { ChangeModelSchema } from "./change.ts";
 import type { ItemGrantDeleteAction } from "@item/data/data.ts";
+import type { InexactPartial } from "fvtt-types/utils";
 
 const ON_DELETE_ACTIONS = ["cascade", "detach", "restrict"] as const;
 
@@ -68,7 +66,7 @@ export default class GrantItemChangeSystem extends ChangeModel<GrantItemChangeSc
     if (this.track) {
       const grantedItem = this.actor?.items.get(this.grantedId ?? "") ?? null;
 
-      this.#trackItem(grantedItem as ItemPTR2e | null);
+      this.#trackItem(grantedItem as Item.ConfiguredInstance | null);
     }
   }
 
@@ -148,7 +146,7 @@ export default class GrantItemChangeSystem extends ChangeModel<GrantItemChangeSc
 
     const uuid = this.resolveInjectedProperties(this.uuid);
     const grantedDocument: Maybe<ClientDocument> = await this.getItem(uuid);
-    if (!(grantedDocument instanceof ItemPTR2e || grantedDocument instanceof ActiveEffectPTR2e)) return;
+    if (!(grantedDocument instanceof CONFIG.Item.documentClass || grantedDocument instanceof CONFIG.ActiveEffect.documentClass)) return;
 
     changeSource.key =
       typeof changeSource.key === "string" && changeSource.key.length > 0
@@ -167,8 +165,8 @@ export default class GrantItemChangeSystem extends ChangeModel<GrantItemChangeSc
 
     // If we shouldn't allow duplicates, check for an existing item with this source ID
     const existingItem = this.type === "grant-effect"
-      ? this.actor.effects.find(e => (e as ActiveEffectPTR2e).slug === grantedDocument.slug) as ActiveEffectPTR2e
-      : this.actor.items.find((i) => (i as ItemPTR2e)?.flags?.core?.sourceId === uuid) as ItemPTR2e;
+      ? this.actor.effects.find(e => (e as ActiveEffect.ConfiguredInstance).slug === grantedDocument.slug) as ActiveEffect.ConfiguredInstance
+      : this.actor.items.find((i) => (i as Item.ConfiguredInstance)?.flags?.core?.sourceId === uuid) as Item.ConfiguredInstance;
     if (!this.allowDuplicate && existingItem) {
       this.#setGrantFlags(effectSource, existingItem);
 
@@ -192,7 +190,7 @@ export default class GrantItemChangeSystem extends ChangeModel<GrantItemChangeSc
         grantedSource.system.changes = grantedSource.system.changes.filter(c => c.type !== GrantItemChangeSystem.TYPE);
       }
       else {
-        for (const ae of (grantedSource as ItemPTR2e['_source']).effects) {
+        for (const ae of (grantedSource as Item.ConstructorData).effects) {
           const effect = ae as EffectSourcePTR2e;
           effect.system.changes = effect.system.changes.filter(c => c.type !== GrantItemChangeSystem.TYPE);
         }
@@ -205,13 +203,13 @@ export default class GrantItemChangeSystem extends ChangeModel<GrantItemChangeSc
     // Apply alterations
     try {
       for (const alteration of this.alterations) {
-        alteration.applyTo(grantedSource as ItemSourcePTR2e);
+        alteration.applyTo(grantedSource as Item.ConstructorData);
       }
     } catch (error) {
       if (error instanceof Error) this.failValidation(error.message);
     }
 
-    const tempGranted = this.type === "grant-effect" ? new ActiveEffectPTR2e(foundry.utils.deepClone(grantedSource), { parent: this.actor }) : new ItemPTR2e(foundry.utils.deepClone(grantedSource), { parent: this.actor });
+    const tempGranted = this.type === "grant-effect" ? new CONFIG.ActiveEffect.documentClass(foundry.utils.deepClone(grantedSource), { parent: this.actor }) : new ItemPTR2e(foundry.utils.deepClone(grantedSource), { parent: this.actor });
     // tempGranted.grantedBy = this.effect;
 
     // TODO: Check for immunity and bail if a match
@@ -222,13 +220,13 @@ export default class GrantItemChangeSystem extends ChangeModel<GrantItemChangeSc
 
     if (this.ignored) return;
 
-    if (this.type !== "grant-effect") args.tempItems.push(tempGranted as ItemPTR2e);
+    if (this.type !== "grant-effect") args.tempItems.push(tempGranted as Item.ConfiguredInstance);
 
     this._grantedId = grantedSource._id;
     context.keepId = true;
 
     this.#setGrantFlags(effectSource, grantedSource);
-    if (this.type !== "grant-effect") this.#trackItem(tempGranted as ItemPTR2e);
+    if (this.type !== "grant-effect") this.#trackItem(tempGranted as Item.ConfiguredInstance);
 
     // Add to pending items before running pre-creates to preserve creation order
     if (this.replaceSelf) {
@@ -241,8 +239,8 @@ export default class GrantItemChangeSystem extends ChangeModel<GrantItemChangeSc
 
     // Run the granted item's preCreate callbacks unless this is a pre-actor-update reevaluation
     if (!args.reevaluation) {
-      if (this.type === "grant-effect") await this.#runGrantedEffectPreCreates(args, tempGranted as ActiveEffectPTR2e, context);
-      else await this.#runGrantedItemPreCreates(args, tempGranted as ItemPTR2e, context);
+      if (this.type === "grant-effect") await this.#runGrantedEffectPreCreates(args, tempGranted as ActiveEffect.ConfiguredInstance, context);
+      else await this.#runGrantedItemPreCreates(args, tempGranted as Item.ConfiguredInstance, context);
     }
   }
 
@@ -260,12 +258,12 @@ export default class GrantItemChangeSystem extends ChangeModel<GrantItemChangeSc
       return noAction;
     }
 
-    const effectSource = this.effect.toObject() as EffectSourcePTR2e;
+    const effectSource = this.effect.toObject() as ActiveEffect.ConstructorData;
     const changeSource = this.toObject() as foundry.data.fields.SchemaField.AssignmentType<ChangeModelSchema>;
     const pendingItems: Item.ConstructorData[] = [];
-    const pendingEffects: EffectSourcePTR2e[] = [];
+    const pendingEffects: ActiveEffect.ConstructorData[] = [];
     const context = { parent: this.actor, render: false };
-    await this.preCreate({ changeSource, pendingItems, effectSource, pendingEffects, tempItems: [], context, reevaluation: true });
+    await this.preCreate({ changeSource!, pendingItems, effectSource, pendingEffects, tempItems: [], context, reevaluation: true });
 
     if (pendingItems.length > 0) {
       const updatedGrants = effectSource.flags?.ptr2e?.itemGrants ?? {};
@@ -324,7 +322,7 @@ export default class GrantItemChangeSystem extends ChangeModel<GrantItemChangeSc
   // const source = grantedItem._source;
   // for (const [flag, selection] of Object.entries(this.preselectChoices ?? {})) {
   //     for(const effect of grantedItem.effects) {
-  //         const change = (effect as ActiveEffectPTR2e).system.changes.find(c => c.type === "choice-set" && c.key === flag);
+  //         const change = (effect as ActiveEffect.ConfiguredInstance).system.changes.find(c => c.type === "choice-set" && c.key === flag);
   //         if (change) {
 
   //         }
@@ -333,13 +331,15 @@ export default class GrantItemChangeSystem extends ChangeModel<GrantItemChangeSc
   // }
 
   /** Set flags on granting and grantee items to indicate relationship between the two */
-  #setGrantFlags(granter: PreCreate<EffectSourcePTR2e>, grantee: ItemSourcePTR2e | ItemPTR2e | ActiveEffectPTR2e): void {
+  #setGrantFlags(granter: ActiveEffect.ConstructorData, grantee: Item.ConstructorData | Item.ConfiguredInstance | ActiveEffect.ConfiguredInstance): void {
     const flags = foundry.utils.mergeObject(granter.flags ?? {}, { ptr2e: { itemGrants: { [this.flag]: {} } } });
     if (!this.flag) throw new Error("No flag set for granted item");
 
+    flags.ptr2e ??= {};
+    flags.ptr2e.itemGrants ??= {};
     flags.ptr2e.itemGrants[this.flag] = {
       // The granting item records the granted item's ID in an array at `flags.ptr2e.itemGrants`
-      id: grantee instanceof ItemPTR2e ? grantee.id : grantee._id!,
+      id: grantee instanceof CONFIG.Item.documentClass ? grantee.id : grantee._id!,
       // The on-delete action determines what will happen to the granter item when the granted item is deleted:
       // Default to "detach" (do nothing).
       onDelete: this.onDeleteActions?.grantee ?? "detach",
@@ -354,7 +354,7 @@ export default class GrantItemChangeSystem extends ChangeModel<GrantItemChangeSc
         this.onDeleteActions?.granter ?? "cascade",
     };
 
-    if (grantee instanceof ItemPTR2e) {
+    if (grantee instanceof CONFIG.Item.documentClass) {
       // This is a previously granted item: update its grantedBy flag
       // Don't await since it will trigger a data reset, possibly wiping temporary roll options
       grantee.update({ "flags.ptr2e.grantedBy": grantedBy }, { render: false });
@@ -368,11 +368,11 @@ export default class GrantItemChangeSystem extends ChangeModel<GrantItemChangeSc
 
   async #runGrantedItemPreCreates(
     originalArgs: Omit<ChangeModel.PreCreateParams, "changeSource">,
-    grantedItem: ItemPTR2e,
+    grantedItem: Item.ConfiguredInstance,
     context: InexactPartial<Omit<foundry.abstract.Document.DatabaseOperationsFor<"Item", "create">, "ids">>,
   ): Promise<void> {
     for (const effect of grantedItem.effects.contents) {
-      for (const change of (effect as ActiveEffectPTR2e).system.changes) {
+      for (const change of (effect as ActiveEffect.ConfiguredInstance).system.changes) {
         await change.preCreate?.({
           ...originalArgs,
           changeSource: change,
@@ -385,7 +385,7 @@ export default class GrantItemChangeSystem extends ChangeModel<GrantItemChangeSc
 
   async #runGrantedEffectPreCreates(
     originalArgs: Omit<ChangeModel.PreCreateParams, "changeSource">,
-    effect: ActiveEffectPTR2e,
+    effect: ActiveEffect.ConfiguredInstance,
     context: InexactPartial<Omit<foundry.abstract.Document.DatabaseOperationsFor<"ActiveEffect", "create">, "ids">>,
   ): Promise<void> {
     for (const change of effect.system.changes) {
@@ -411,7 +411,7 @@ export default class GrantItemChangeSystem extends ChangeModel<GrantItemChangeSc
   }
 
   /** If this item is being tracked, set an actor flag and add its item roll options to the `all` domain */
-  #trackItem(grantedItem: ItemPTR2e | null): void {
+  #trackItem(grantedItem: Item.ConfiguredInstance | null): void {
     if (!(this.track && this.flag && this.grantedId && grantedItem)) return;
 
     //TODO: Implement item tracking
@@ -436,10 +436,10 @@ interface OnDeleteActions {
   grantee: ItemGrantDeleteAction;
 }
 
-export async function processGrantDeletions(effect: ActiveEffectPTR2e, item: Maybe<ItemPTR2e>, pendingItems: ItemPTR2e[], pendingEffects: ActiveEffectPTR2e[], ignoreRestricted: boolean): Promise<void> {
+export async function processGrantDeletions(effect: ActiveEffect.ConfiguredInstance, item: Maybe<Item.ConfiguredInstance>, pendingItems: Item.ConfiguredInstance[], pendingEffects: ActiveEffect.ConfiguredInstance[], ignoreRestricted: boolean): Promise<void> {
   const actor = effect.targetsActor() ? effect.target : effect.parent.actor;
 
-  const granter = actor.effects.get((item ? item.flags.ptr2e.grantedBy?.id : effect.flags.ptr2e.grantedBy?.id) ?? "") as ActiveEffectPTR2e;
+  const granter = actor.effects.get((item ? item.flags.ptr2e.grantedBy?.id : effect.flags.ptr2e.grantedBy?.id) ?? "") as ActiveEffect.ConfiguredInstance;
   const parentGrant = Object.values(granter?.flags.ptr2e.itemGrants ?? {}).find(g => g.id === effect.id || g.id === item?.id);
   const grants = Object.values(effect.flags.ptr2e.itemGrants ?? {});
 
@@ -452,7 +452,7 @@ export async function processGrantDeletions(effect: ActiveEffectPTR2e, item: May
   }
 
   for (const grant of grants) {
-    const grantee = (actor.items.get(grant.id) as Maybe<ItemPTR2e>) ?? (actor.effects.get(grant.id) as ActiveEffectPTR2e) ?? (item?.effects.get(grant.id) as ActiveEffectPTR2e);
+    const grantee = (actor.items.get(grant.id) as Maybe<Item.ConfiguredInstance>) ?? (actor.effects.get(grant.id) as ActiveEffect.ConfiguredInstance) ?? (item?.effects.get(grant.id) as ActiveEffect.ConfiguredInstance);
     if (grantee?.flags.ptr2e.grantedBy?.id !== effect.id) continue;
 
     if (!ignoreRestricted && grantee.flags.ptr2e.grantedBy.onDelete === "restrict" && !(pendingItems.includes(grantee) || pendingEffects.includes(grantee))) {
@@ -470,17 +470,17 @@ export async function processGrantDeletions(effect: ActiveEffectPTR2e, item: May
   }
 
   for (const grant of grants) {
-    const grantee = (actor.items.get(grant.id) as Maybe<ItemPTR2e>) ?? (actor.effects.get(grant.id) as ActiveEffectPTR2e) ?? (item?.effects.get(grant.id) as ActiveEffectPTR2e);
+    const grantee = (actor.items.get(grant.id) as Maybe<Item.ConfiguredInstance>) ?? (actor.effects.get(grant.id) as ActiveEffect.ConfiguredInstance) ?? (item?.effects.get(grant.id) as ActiveEffect.ConfiguredInstance);
     if (grantee?.flags.ptr2e.grantedBy?.id !== effect.id) continue;
 
     if (grantee.flags.ptr2e.grantedBy.onDelete === "cascade" && !(pendingItems.includes(grantee) || pendingEffects.includes(grantee))) {
-      if (grantee instanceof ItemPTR2e) {
+      if (grantee instanceof CONFIG.Item.documentClass) {
         pendingItems.push(grantee);
         await processGrantDeletions(effect, grantee, pendingItems, pendingEffects, ignoreRestricted);
       }
-      if (grantee instanceof ActiveEffectPTR2e) {
+      if (grantee instanceof CONFIG.ActiveEffect.documentClass) {
         pendingEffects.push(grantee);
-        await processGrantDeletions(grantee as ActiveEffectPTR2e, item, pendingItems, pendingEffects, ignoreRestricted);
+        await processGrantDeletions(grantee as ActiveEffect.ConfiguredInstance, item, pendingItems, pendingEffects, ignoreRestricted);
       }
     }
   }
@@ -492,7 +492,7 @@ export async function processGrantDeletions(effect: ActiveEffectPTR2e, item: May
   }
 
   for (const grant of grants) {
-    const grantee = (actor.items.get(grant.id) as Maybe<ItemPTR2e>) ?? (actor.effects.get(grant.id) as ActiveEffectPTR2e) ?? (item?.effects.get(grant.id) as ActiveEffectPTR2e);
+    const grantee = (actor.items.get(grant.id) as Maybe<Item.ConfiguredInstance>) ?? (actor.effects.get(grant.id) as ActiveEffect.ConfiguredInstance) ?? (item?.effects.get(grant.id) as ActiveEffect.ConfiguredInstance);
     if (grantee?.flags.ptr2e.grantedBy?.id !== effect.id) continue;
 
     // Unset the grant flag and leave the granted item on the actor

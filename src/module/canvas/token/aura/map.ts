@@ -1,16 +1,16 @@
-import type { TokenPTR2e } from "../object.ts";
 import { AuraRenderer } from "./renderer.ts";
 
 export class AuraRenderers extends Map<string, AuraRenderer> {
-  readonly token: TokenPTR2e;
+  readonly token: Token.ConfiguredInstance;
 
-  constructor(token: TokenPTR2e) {
+  constructor(token: Token.ConfiguredInstance) {
     super();
     this.token = token;
   }
 
   /** The ID of the highlight layer for this aura's token */
   get highlightId(): string {
+    //@ts-expect-error - fvtt-types unfinished types
     return this.token.highlightId;
   }
 
@@ -51,7 +51,8 @@ export class AuraRenderers extends Map<string, AuraRenderer> {
       !!this.token.combatant?.parent?.started
 
     return !!(
-      ([CONST.GRID_TYPES.SQUARE, CONST.GRID_TYPES.GRIDLESS]).includes(canvas.scene?.grid.type) &&
+      // eslint-disable-next-line @typescript-eslint/no-non-null-asserted-optional-chain
+      ([CONST.GRID_TYPES.SQUARE, CONST.GRID_TYPES.GRIDLESS] as CONST.GRID_TYPES[]).includes(canvas.scene?.grid.type!) &&
       // Assume if token vision is disabled then the scene is not intended for play.
       canvas.scene?.tokenVision &&
       // The scene must be active, or a GM must be the only user logged in.
@@ -67,6 +68,7 @@ export class AuraRenderers extends Map<string, AuraRenderer> {
     if (this.size === 0) return;
 
     this.clearHighlights();
+    //@ts-expect-error - fvtt-types unfinished types
     if (this.token.isAnimating) return;
 
     const showBordersHighlights = this.#showBordersHighlights;

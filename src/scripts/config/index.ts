@@ -61,7 +61,7 @@ export const PTRCONFIG = {
     sheetClasses: {
       character: ActorSheetPTR2e,
       "ptu-actor": sheets.PTUSheet,
-    },
+    }
   },
   Change: {
     documentClass: ChangeModel,

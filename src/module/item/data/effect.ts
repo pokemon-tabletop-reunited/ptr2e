@@ -1,7 +1,6 @@
 import { ActorPTR2e } from "@actor";
 import type { ItemPTR2e } from "@item";
 import { HasDescription, HasEmbed, HasMigrations, HasSlug, HasTraits } from "@module/data/index.ts";
-import { ActiveEffectPTR2e } from "@effects";
 import type { TraitsSchema } from "@module/data/mixins/has-traits.ts";
 import type { MigrationSchema } from "@module/data/mixins/has-migrations.ts";
 import type { DescriptionSchema } from "@module/data/mixins/has-description.ts";
@@ -33,7 +32,7 @@ export default abstract class EffectSystem extends HasEmbed(HasTraits(HasMigrati
       const parent = this.parent.parent;
       if (parent instanceof ActorPTR2e) {
         const effects = this.effects;
-        await ActiveEffectPTR2e.createDocuments(effects, { parent: parent })
+        await CONFIG.ActiveEffect.documentClass.createDocuments(effects, { parent: parent })
         return false;
       }
     }

@@ -1,17 +1,16 @@
 import { SkillsComponent } from "@actor/components/skills-component.ts";
 import type { AttackPTR2e } from "@data";
 import type { Tab } from "@item/sheets/document.ts";
-import type { TokenPTR2e } from "@module/canvas/token/object.ts";
 import { htmlQuery, htmlQueryAll } from "@utils";
 import type { AnyObject, DeepPartial } from "fvtt-types/utils";
 
 export default class TokenPanel extends foundry.applications.api.HandlebarsApplicationMixin(
   foundry.applications.api.ApplicationV2
 )<AnyObject> {
-  get token(): TokenPTR2e | null {
+  get token(): Token.ConfiguredInstance | null {
     return this._token;
   }
-  set token(value: TokenPTR2e | null) {
+  set token(value: Token.ConfiguredInstance | null) {
     if (this._token === value) return;
     this.updateAppListeners(value);
     this._token = value;
@@ -20,10 +19,10 @@ export default class TokenPanel extends foundry.applications.api.HandlebarsAppli
 
   public refresh = foundry.utils.debounce(this.render, 100);
 
-  private _token: TokenPTR2e | null;
+  private _token: Token.ConfiguredInstance | null;
 
   constructor(
-    token: TokenPTR2e | null,
+    token: Token.ConfiguredInstance | null,
     options: DeepPartial<foundry.applications.api.ApplicationV2.Configuration> = {}
   ) {
     super(options);
@@ -378,7 +377,7 @@ export default class TokenPanel extends foundry.applications.api.HandlebarsAppli
     }
   }
 
-  updateAppListeners(token: TokenPTR2e | null) {
+  updateAppListeners(token: Token.ConfiguredInstance | null) {
     if (this.token?.actor) {
       //@ts-expect-error - AppV1 Compatibility
       delete this.token.actor.apps[this.id];

@@ -1,14 +1,14 @@
-import type { ActorPTR2e } from "@actor";
 import type { CheckRollDataPTR2e } from "./check-roll.ts";
 import { CheckRoll } from "./check-roll.ts";
 import type { AttackCheckModifier } from "@module/effects/modifiers.ts";
-import type { ActiveEffectPTR2e } from "@effects";
 
 class CaptureRoll extends CheckRoll {
   static override createFromData(
-    options: CheckRollDataPTR2e,
-    data?: CaptureRollCreationData,
-    type?: "crit" | "shake1" | "shake2" | "shake3" | "shake4"
+    { options, data, type }: {
+      options: CheckRollDataPTR2e,
+      data?: CaptureRollCreationData,
+      type?: "crit" | "shake1" | "shake2" | "shake3" | "shake4"
+    }
   ): CheckRoll | null {
     if (!type) throw new Error("CaptureRoll must have a type.");
     if (!data) throw new Error("CaptureRoll must have data.");
@@ -66,7 +66,7 @@ class CaptureRoll extends CheckRoll {
   static getCatchRate(data: CaptureRollCreationData) {
     if (!data.target) return null;
 
-    const effects = data.target.effects as unknown as ActiveEffectPTR2e[];
+    const effects = data.target.effects as unknown as ActiveEffect.ConfiguredInstance[];
     return new Roll(this.catchRateFormula, {
       hpMax: data.target.system.health.max,
       hpCurrent: data.target.system.health.value,
@@ -92,8 +92,8 @@ class CaptureRoll extends CheckRoll {
 }
 
 interface CaptureRollCreationData {
-  target: Maybe<ActorPTR2e>;
-  user: Maybe<ActorPTR2e>;
+  target: Maybe<Actor.ConfiguredInstance>;
+  user: Maybe<Actor.ConfiguredInstance>;
   ballBonus: number;
   miscMultiplier: number;
   critMultiplier: number;

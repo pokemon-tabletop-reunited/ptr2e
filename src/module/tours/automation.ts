@@ -1,6 +1,5 @@
 import type { EffectPTR2e } from "@item";
 import { PTRTour } from "./base.ts";
-import { ActiveEffectPTR2e } from "@effects";
 import type ActiveEffectConfig from "@module/effects/sheet.ts";
 import { DataInspector } from "@module/apps/data-inspector/data-inspector.ts";
 import { ActorPTR2e } from "@actor";
@@ -37,7 +36,7 @@ export class AutomationTour extends PTRTour {
         this.effectSheet = undefined;
       }
       if (!this.activeEffectSheet) {
-        this.activeEffectSheet = (this.item.effects.contents[0] as ActiveEffectPTR2e).sheet as unknown as ActiveEffectConfig
+        this.activeEffectSheet = (this.item.effects.contents[0] as ActiveEffect.ConfiguredInstance).sheet as unknown as ActiveEffectConfig
       }
     } else if (["data-inspector-actor", "data-inspector-chat"].includes(this.currentStep?.id ?? "")) {
       if (this.activeEffectSheet) {
@@ -258,7 +257,7 @@ export class AutomationTour extends PTRTour {
     await super._preStep();
 
     if(this.currentStep?.id === "create-effect") {
-      ActiveEffectPTR2e.createDialog({}, { parent: this.item})
+      CONFIG.ActiveEffect.documentClass.createDialog({}, { parent: this.item})
       await new Promise(resolve => setTimeout(resolve, 250));
     }
 

@@ -2,7 +2,6 @@ import type PokeballActionPTR2e from "@module/data/models/pokeball-action.ts";
 import type { BaseStatisticCheck, CaptureStatisticRollParameters, RollOptionConfig, StatisticRollParameters } from "./statistic.ts";
 import { Statistic } from "./statistic.ts";
 import type { ConsumablePTR2e } from "@item";
-import type { ActorPTR2e } from "@actor";
 import type { StatisticData } from "./data.ts";
 import type { PokeballRollCallback, PokeballRollResults } from "@system/rolls/check-roll.ts";
 import type { ModifierPTR2e} from "@module/effects/modifiers.ts";
@@ -11,7 +10,6 @@ import * as R from "remeda";
 import { extractModifierAdjustments, extractModifiers, extractNotes } from "src/util/change-helpers.ts";
 import { CheckPTR2e } from "@system/check.ts";
 import type { CaptureCheckRollContext } from "@system/rolls/data.ts";
-import type { TokenPTR2e } from "@module/canvas/token/object.ts";
 import type { ActionUUID } from "src/util/uuid.ts";
 
 type PokeballStatisticData = StatisticData &
@@ -20,7 +18,7 @@ type PokeballStatisticData = StatisticData &
 class PokeballStatistic extends Statistic {
   declare data: PokeballStatisticData;
 
-  item: ConsumablePTR2e<ActorPTR2e>;
+  item: ConsumablePTR2e;
   action: PokeballActionPTR2e;
 
   #check: PokeballCheck<this> | null = null;
@@ -77,7 +75,7 @@ class PokeballStatistic extends Statistic {
 
     super(actor, data);
 
-    this.item = item as unknown as ConsumablePTR2e<ActorPTR2e>;
+    this.item = item as unknown as ConsumablePTR2e;
     this.action = action;
   }
 
@@ -145,9 +143,9 @@ class PokeballCheck<TParent extends PokeballStatistic = PokeballStatistic> imple
   async roll(args: CaptureStatisticRollParameters): Promise<PokeballRollResults | null> {
     const options = new Set<string>(args.extraRollOptions ?? []);
 
-    const target: { actor: ActorPTR2e, token?: TokenPTR2e } = (() => {
-      if (args.targets) return args.targets.map(t => ({ actor: t, token: t.token?.object as TokenPTR2e }));
-      return [...game.user.targets ?? []].map(t => ({ actor: t.actor as ActorPTR2e, token: t as TokenPTR2e }));
+    const target: { actor: Actor.ConfiguredInstance, token?: Token.ConfiguredInstance } = (() => {
+      if (args.targets) return args.targets.map(t => ({ actor: t, token: t.token?.object as Token.ConfiguredInstance }));
+      return [...game.user.targets ?? []].map(t => ({ actor: t.actor as Actor.ConfiguredInstance, token: t as Token.ConfiguredInstance }));
     })()[0];
 
     const context = await this.actor.getCheckContext({

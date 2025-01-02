@@ -1,5 +1,4 @@
 import { GrantItemChangeSystem } from "@data";
-import ActiveEffectPTR2e from "../document.ts";
 
 export default class GrantEffectChangeSystem extends GrantItemChangeSystem {
   static override TYPE = "grant-effect";
@@ -21,7 +20,7 @@ export default class GrantEffectChangeSystem extends GrantItemChangeSystem {
 
   override async getItem(key: string = this.resolveInjectedProperties(this.uuid)): Promise<Maybe<ClientDocument>> {
     try {
-      const effect = await ActiveEffectPTR2e.fromStatusEffect(key)
+      const effect = await CONFIG.ActiveEffect.documentClass.fromStatusEffect(key)
       return effect;
     }
     catch (error) {

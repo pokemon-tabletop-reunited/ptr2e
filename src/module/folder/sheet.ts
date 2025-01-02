@@ -1,28 +1,21 @@
-import type { DocumentSheetConfiguration} from "@item/sheets/document.ts";
-import { DocumentSheetV2 } from "@item/sheets/document.ts";
-import FolderPTR2e from "./document.ts";
-import { ActorPTR2e } from "@actor";
 import type { SocketRequestData } from "@scripts/hooks/socket.ts";
+import type { AnyObject } from "fvtt-types/utils";
 
 class FolderConfigPTR2e extends foundry.applications.api.HandlebarsApplicationMixin(
-  DocumentSheetV2<FolderPTR2e>
-) {
-  static override DEFAULT_OPTIONS = foundry.utils.mergeObject(
-    super.DEFAULT_OPTIONS,
-    {
-      classes: ["folder-edit"],
-      position: {
-        width: 360,
-        height: "auto",
-      },
-      form: {
-        handler: FolderConfigPTR2e.#onSubmit,
-        closeOnSubmit: true,
-        submitOnChange: false,
-      },
+  foundry.applications.api.DocumentSheetV2
+)<Folder.ConfiguredInstance, AnyObject> {
+  static override DEFAULT_OPTIONS = {
+    classes: ["folder-edit"],
+    position: {
+      width: 360,
+      height: "auto" as const,
     },
-    { inplace: false }
-  );
+    form: {
+      handler: FolderConfigPTR2e.#onSubmit,
+      closeOnSubmit: true,
+      submitOnChange: false,
+    },
+  }
 
   override get isEditable() {
     return true;
@@ -61,22 +54,16 @@ class FolderConfigPTR2e extends foundry.applications.api.HandlebarsApplicationMi
 
   /* -------------------------------------------- */
 
-  // override async close(options={}) {
-  //     if ( !this.options.form?.submitOnChange ) this.options.resolve?.(null);
-  //     return super.close(options);
-  // }
-
-  override async _prepareContext(options?: DocumentSheetConfiguration<FolderPTR2e>) {
+  override async _prepareContext(options: foundry.applications.api.HandlebarsApplicationMixin.HandlebarsRenderOptions) {
     const context = await super._prepareContext(options);
     const folder = this.document.toObject();
-    //@ts-expect-error - This property exists
     const label = game.i18n.localize(Folder.implementation.metadata.label);
 
-    const owner = this.document.owner ? await fromUuid(this.document.owner) : null;
+    const owner = this.document.owner ? await fromUuid<Actor.ConfiguredInstance>(this.document.owner) : null;
     const team = [];
     for (const memberUuid of this.document.team) {
-      const actor = await fromUuid(memberUuid);
-      if (actor && actor instanceof ActorPTR2e) {
+      const actor = await fromUuid<Actor.ConfiguredInstance>(memberUuid);
+      if (actor && actor instanceof CONFIG.Actor.documentClass) {
         team.push({ actor, folder: actor.folder });
       }
     }
@@ -102,7 +89,7 @@ class FolderConfigPTR2e extends foundry.applications.api.HandlebarsApplicationMi
   override _attachPartListeners(
     partId: string,
     htmlElement: HTMLElement,
-    _options:foundry.applications.api.HandlebarsApplicationMixin.HandlebarsRenderOptions
+    _options: foundry.applications.api.HandlebarsApplicationMixin.HandlebarsRenderOptions
   ): void {
     super._attachPartListeners(partId, htmlElement, _options);
     if (partId === "members") {
@@ -125,14 +112,14 @@ class FolderConfigPTR2e extends foundry.applications.api.HandlebarsApplicationMi
 
     switch (type) {
       case "owner": {
-        const owner = await fromUuid(uuid);
+        const owner = await fromUuid<Actor.ConfiguredInstance>(uuid);
         if (owner) await owner.update({ "folder": null, "system.party.ownerOf": null });
         break;
       }
       case "team": {
-        const actor = await fromUuid(uuid);
-        if (actor && actor instanceof ActorPTR2e) {
-          await actor.update({ "system.party.teamMemberOf": (actor as ActorPTR2e).system.party.teamMemberOf.filter(id => id !== this.document.id) });
+        const actor = await fromUuid<Actor.ConfiguredInstance>(uuid);
+        if (actor && actor instanceof CONFIG.Actor.documentClass) {
+          await actor.update({ "system.party.teamMemberOf": (actor as Actor.ConfiguredInstance).system.party.teamMemberOf.filter(id => id !== this.document.id) });
         }
         break
       }
@@ -144,7 +131,7 @@ class FolderConfigPTR2e extends foundry.applications.api.HandlebarsApplicationMi
   static async _onDropOwner(this: FolderConfigPTR2e, event: DragEvent) {
     if (!event.dataTransfer) return;
     if (this.document.owner) {
-      const owner = await fromUuid(this.document.owner);
+      const owner = await fromUuid<Actor.ConfiguredInstance>(this.document.owner);
       if (owner) {
         ui.notifications.warn("Folder already has an owner. If you mean to update the owner, please remove the old one first.");
         return;
@@ -155,7 +142,7 @@ class FolderConfigPTR2e extends foundry.applications.api.HandlebarsApplicationMi
     if (!data) return;
 
     const actor = game.actors.get(data.id) ?? await fromUuid(data.uuid);
-    if (!actor || !(actor instanceof ActorPTR2e)) return;
+    if (!actor || !(actor instanceof CONFIG.Actor.documentClass)) return;
 
     await actor.update({ "folder": this.document.id, "system.party.ownerOf": this.document.id, "system.party.partyMemberOf": null });
 
@@ -169,7 +156,7 @@ class FolderConfigPTR2e extends foundry.applications.api.HandlebarsApplicationMi
     if (!data) return;
 
     const actor = game.actors.get(data.id) ?? await fromUuid(data.uuid);
-    if (!actor || !(actor instanceof ActorPTR2e)) return;
+    if (!actor || !(actor instanceof CONFIG.Actor.documentClass)) return;
 
     await actor.update({ "system.party.teamMemberOf": Array.from(new Set(actor.system.party.teamMemberOf.concat(this.document.id))) });
 
@@ -183,8 +170,8 @@ class FolderConfigPTR2e extends foundry.applications.api.HandlebarsApplicationMi
     formData: FormDataExtended
   ) {
     event.preventDefault();
-    if(!game.user.isGM) {
-      if(!game.users.activeGM) {
+    if (!game.user.isGM) {
+      if (!game.users.activeGM) {
         ui.notifications.error("Oops! A GM must be online to process this request.");
         // Throw error so that the form doesn't close
         throw new Error("No GM is currently online.");
@@ -198,16 +185,16 @@ class FolderConfigPTR2e extends foundry.applications.api.HandlebarsApplicationMi
 
       const listener = (data: SocketRequestData) => {
         if (typeof data !== 'object' || !('request' in data)) return;
-        if(data.id !== id && ["acknowledge","acknowledgeFailure"].includes(data.request)) return;
+        if (data.id !== id && ["acknowledge", "acknowledgeFailure"].includes(data.request)) return;
 
         ui.notifications.remove(notifId);
-        if(data.request === "acknowledgeFailure") ui.notifications.error(data.message || "GM failed to process request.");
+        if (data.request === "acknowledgeFailure") ui.notifications.error(data.message || "GM failed to process request.");
         else ui.notifications.info(data.message || "GM successfully processed request.");
         game.socket.off("system.ptr2e", listener);
         clearTimeout(timeout);
 
         if ("resolve" in this.options && typeof this.options.resolve === "function") {
-          this.options.resolve(game.folders.get(data.documentId));
+          this.options.resolve(game.folders.get(data.documentId!));
         }
       }
 
@@ -237,7 +224,7 @@ class FolderConfigPTR2e extends foundry.applications.api.HandlebarsApplicationMi
       if (this.document.id) return await this.document.update(data);
       else {
         this.document.updateSource(data);
-        return await FolderPTR2e.create(
+        return await CONFIG.Folder.documentClass.create(
           this.document instanceof Folder ? this.document.toObject() : this.document,
           { pack: this.document.pack }
         );
@@ -245,7 +232,7 @@ class FolderConfigPTR2e extends foundry.applications.api.HandlebarsApplicationMi
     })();
     if ("resolve" in this.options && typeof this.options.resolve === "function")
       this.options.resolve(folder);
-    return folder;
+    return void folder;
   }
 }
 

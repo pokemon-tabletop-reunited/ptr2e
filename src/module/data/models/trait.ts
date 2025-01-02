@@ -1,6 +1,3 @@
-import type { ActorPTR2e } from "@actor";
-import { ActiveEffectPTR2e } from "@effects";
-import type { ItemPTR2e } from "@item";
 import type ChangeModel from "@module/effects/changes/change.ts";
 import { formatSlug } from "@utils";
 
@@ -33,8 +30,8 @@ class Trait {
     }
   }
 
-  static effectsFromChanges<TParent extends ActorPTR2e | ItemPTR2e>(this: Trait, parent: TParent) {
-    return new ActiveEffectPTR2e({
+  static effectsFromChanges<TParent extends Actor.ConfiguredInstance | Item.ConfiguredInstance>(this: Trait, parent: TParent) {
+    return new CONFIG.ActiveEffect.documentClass({
       name: this.label ?? formatSlug(this.slug),
       type: "passive",
       system: {

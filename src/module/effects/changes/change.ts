@@ -7,13 +7,14 @@ import type { ChangeModelOptions, ChangeSource, ResolveValueParams } from "./dat
 import * as R from "remeda";
 import ResolvableValueField from "@module/data/fields/resolvable-value-field.ts";
 import { ChangeModelTypes } from "@data";
-import type { ActiveEffectSystem, EffectSourcePTR2e } from "@effects";
+import type { ActiveEffectSystem } from "@effects";
 import type { InexactPartial } from "fvtt-types/utils";
 
 const changeModelSchema = {
   // Default Foundry Fields
   key: new foundry.data.fields.StringField({
     required: true,
+    nullable: false,
     label: "PTR2E.Effect.FIELDS.ChangeKey.label",
     hint: "PTR2E.Effect.FIELDS.ChangeKey.hint",
     initial: ""
@@ -555,9 +556,9 @@ namespace ChangeModel {
     effectSource: ActiveEffect.ConstructorData;
     /** The source of the change in `effectSource`'s `system.changes` array */
     changeSource: foundry.data.fields.SchemaField.AssignmentType<Schema>;
-    /** All effects pending creation in a `ActiveEffectPTR2e.createDocuments` call */
+    /** All effects pending creation in a `ActiveEffect.ConfiguredInstance.createDocuments` call */
     pendingEffects: ActiveEffect.ConstructorData[];
-    /** All items pending creation in a `ActiveEffectPTR2e.createDocuments` call */
+    /** All items pending creation in a `ActiveEffect.ConfiguredInstance.createDocuments` call */
     pendingItems: Item.ConstructorData[];
     /** Items temporarily constructed from pending item source */
     tempItems: ItemPTR2e[];

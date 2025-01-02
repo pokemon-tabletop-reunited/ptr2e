@@ -1,14 +1,8 @@
-
-import type { ActorPTR2e } from "@actor";
 import type { ActionPTR2e } from "@data";
-import type { ActiveEffectPTR2e } from "@effects";
-import type { ItemPTR2e } from "@item";
-import type { ScenePTR2e } from "@module/canvas/scene.ts";
-import type { TokenDocumentPTR2e } from "@module/canvas/token/document.ts";
 import type { MigrationRecord } from "@module/data/mixins/has-migrations.ts";
 import type { MigrationBase } from "@module/migration/base.ts";
 
-interface CollectionDiff<T extends foundry.documents.ActiveEffectSource | ItemPTR2e['_source']> {
+interface CollectionDiff<T extends ActiveEffect.ConstructorData | Item.ConstructorData> {
     inserted: T[];
     deleted: string[];
     updated: T[];
@@ -36,14 +30,14 @@ export class MigrationRunnerBase {
         return currentVersion < (this.constructor as typeof MigrationRunnerBase).LATEST_SCHEMA_VERSION;
     }
 
-    diffCollection(orig: ItemPTR2e['_source'][], updated: ItemPTR2e['_source'][]): CollectionDiff<ItemPTR2e['_source']> {
-        const diffs: CollectionDiff<ItemPTR2e['_source']> = {
+    diffCollection(orig: Item.ConstructorData[], updated: Item.ConstructorData[]): CollectionDiff<Item.ConstructorData> {
+        const diffs: CollectionDiff<Item.ConstructorData> = {
             inserted: [],
             deleted: [],
             updated: [],
         };
 
-        const origSources = new Map<string, ItemPTR2e['_source']>();
+        const origSources = new Map<string, Item.ConstructorData>();
         for (const source of orig) {
             origSources.set(source._id!, source);
         }
@@ -70,11 +64,11 @@ export class MigrationRunnerBase {
         return diffs;
     }
 
-    async getUpdatedActor(actor: ActorPTR2e['_source'], migrations: MigrationBase[]): Promise<ActorPTR2e['_source']> {
+    async getUpdatedActor(actor: Actor.ConstructorData, migrations: MigrationBase[]): Promise<Actor.ConstructorData> {
         const currentActor = foundry.utils.deepClone(actor);
 
         for (const migration of migrations) {
-            for (const currentItem of currentActor.items as ItemPTR2e['_source'][]) {
+            for (const currentItem of currentActor.items as Item.ConstructorData[]) {
                 await migration.preUpdateItem?.(currentItem, currentActor);
             }
         }
@@ -82,7 +76,7 @@ export class MigrationRunnerBase {
         for (const migration of migrations) {
             await migration.updateActor?.(currentActor);
 
-            for (const currentItem of currentActor.items as ItemPTR2e['_source'][]) {
+            for (const currentItem of currentActor.items as Item.ConstructorData[]) {
                 await migration.updateItem?.(currentItem, currentActor);
                 if('actions' in currentItem.system && currentItem.system.actions) {
                     for (const action of currentItem.system.actions as unknown as ActionPTR2e['_source'][]) {
@@ -91,7 +85,7 @@ export class MigrationRunnerBase {
                 }
             }
 
-            for (const effect of currentActor.effects as ActiveEffectPTR2e['_source'][]) {
+            for (const effect of currentActor.effects as ActiveEffect.ConstructorData[]) {
                 migration.updateEffect?.(effect, currentActor);
             }
         }
@@ -101,7 +95,7 @@ export class MigrationRunnerBase {
             const latestMigration = migrations.slice(-1)[0];
             currentActor.system._migration ??= { version: null, previous: null };
             this.#updateMigrationRecord(currentActor.system._migration, latestMigration);
-            for (const itemSource of currentActor.items as ItemPTR2e['_source'][]) {
+            for (const itemSource of currentActor.items as Item.ConstructorData[]) {
                 itemSource.system._migration ??= { version: null, previous: null };
                 this.#updateMigrationRecord(itemSource.system._migration, latestMigration);
             }
@@ -110,7 +104,7 @@ export class MigrationRunnerBase {
         return currentActor;
     }
 
-    async getUpdatedItem(item: ItemPTR2e['_source'], migrations: MigrationBase[]): Promise<ItemPTR2e['_source']> {
+    async getUpdatedItem(item: Item.ConstructorData, migrations: MigrationBase[]): Promise<Item.ConstructorData> {
         const current = foundry.utils.deepClone(item);
 
         for (const migration of migrations) {
@@ -126,7 +120,7 @@ export class MigrationRunnerBase {
                 }
             }
 
-            for (const effect of current.effects as ActiveEffectPTR2e['_source'][]) {
+            for (const effect of current.effects as ActiveEffect.ConstructorData[]) {
                 migration.updateEffect?.(effect, current);
             }
         }
@@ -137,9 +131,9 @@ export class MigrationRunnerBase {
     }
 
     async getUpdatedTable(
-        tableSource: foundry.documents.RollTableSource,
+        tableSource: RollTable.ConstructorData,
         migrations: MigrationBase[],
-    ): Promise<foundry.documents.RollTableSource> {
+    ): Promise<RollTable.ConstructorData> {
         const current = foundry.utils.deepClone(tableSource);
 
         for (const migration of migrations) {
@@ -154,9 +148,9 @@ export class MigrationRunnerBase {
     }
 
     async getUpdatedMacro(
-        macroSource: foundry.documents.MacroSource,
+        macroSource: Macro.ConstructorData,
         migrations: MigrationBase[],
-    ): Promise<foundry.documents.MacroSource> {
+    ): Promise<Macro.ConstructorData> {
         const current = foundry.utils.deepClone(macroSource);
 
         for (const migration of migrations) {
@@ -171,9 +165,9 @@ export class MigrationRunnerBase {
     }
 
     async getUpdatedJournalEntry(
-        source: foundry.documents.JournalEntrySource,
+        source: JournalEntry.ConstructorData,
         migrations: MigrationBase[],
-    ): Promise<foundry.documents.JournalEntrySource> {
+    ): Promise<JournalEntry.ConstructorData> {
         const clone = foundry.utils.deepClone(source);
 
         for (const migration of migrations) {
@@ -188,9 +182,9 @@ export class MigrationRunnerBase {
     }
 
     async getUpdatedToken(
-        token: TokenDocumentPTR2e<ScenePTR2e>,
+        token: TokenDocument.ConfiguredInstance,
         migrations: MigrationBase[],
-    ): Promise<foundry.documents.TokenSource> {
+    ): Promise<TokenDocument.ConstructorData> {
         const current = token.toObject();
         for (const migration of migrations) {
             await migration.updateToken?.(current, token.actor, token.scene);
@@ -200,9 +194,9 @@ export class MigrationRunnerBase {
     }
 
     async getUpdatedUser(
-        userData: foundry.documents.UserSource,
+        userData: User.ConstructorData,
         migrations: MigrationBase[],
-    ): Promise<foundry.documents.UserSource> {
+    ): Promise<User.ConstructorData> {
         const current = foundry.utils.deepClone(userData);
         for (const migration of migrations) {
             try {

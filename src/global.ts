@@ -1,7 +1,7 @@
 import type { ActorPTR2e, HumanoidActorSystem, PokemonActorSystem} from "@actor";
 import type { ItemPTR2e} from "@item";
 import type { PerkManager } from "@module/apps/perk-manager/perk-manager.ts";
-import type { ArtMapCollection, ClockDatabase, SkillsCollection, Trait, TraitsCollection } from "@data";
+import type { ActionPTR2e, ArtMapCollection, ClockDatabase, SkillsCollection, Trait, TraitsCollection } from "@data";
 import type TooltipsPTR2e from "@module/tooltips/tooltips.ts";
 import type { PTRCONFIG } from "@scripts/config/index.ts";
 import type { ImageResolver, sluggify, SpeciesImageDataSource } from "@utils";
@@ -14,7 +14,7 @@ import type { TutorListSettings } from "@system/tutor-list/setting-model.ts";
 import type { TutorListApp } from "@module/apps/tutor-list.ts";
 import type GithubManager from "@module/apps/github.ts";
 import { ExpTrackerSettings } from "@system/exp-tracker-model.ts";
-import type { ItemFlagsPTR2e } from "@item/data/data.ts";
+import type { ItemFlagsPTR2e, ItemGrantData } from "@item/data/data.ts";
 import type AbilitySystem from "@item/data/ability.ts";
 import type { ActiveEffectPTR2e } from "@effects";
 import type PerkSystem from "@item/data/perk.ts";
@@ -25,6 +25,10 @@ import type { ScenePTR2e } from "@module/canvas/scene.ts";
 import type { TokenPTR2e } from "@module/canvas/token/object.ts";
 import type { TokenDocumentPTR2e } from "@module/canvas/token/document.ts";
 import type { PerkDirectory } from "@module/apps/sidebar/perks-directory.ts";
+import type { RollOptionDomains, RollOptions } from "@module/data/roll-option-manager.ts";
+import type FolderPTR2e from "@module/folder/document.ts";
+import type { PickableThing } from "@module/apps/pick-a-thing-prompt.ts";
+import type { ActionUUID } from "./util/uuid.ts";
 
 declare global {
   // interface ConfigPTR2e extends ConfiguredConfig {
@@ -138,6 +142,7 @@ declare global {
     Scene: typeof ScenePTR2e;
     Token: typeof TokenPTR2e;
     TokenDocument: typeof TokenDocumentPTR2e;
+    Folder: typeof FolderPTR2e;
   }
 
   interface DataModelConfig {
@@ -190,6 +195,23 @@ declare global {
   }
 
   interface FlagConfig {
+    Actor: {
+      core?: {
+        sourceId?: string;
+      }
+      ptr2e: {
+        rollOptions: RollOptions & object;
+        sheet?: {
+          perkFlash?: boolean;
+        };
+        disableActionOptions?: {
+          collection: Collection<ActionPTR2e>;
+          get options(): PickableThing[];
+          disabled: ActionUUID[];
+        }
+        editedSkills?: boolean
+      }
+    };
     Item: ItemFlagsPTR2e;
     Folder: {
       core?: Record<string, unknown>;
@@ -198,10 +220,41 @@ declare global {
         party: string[];
         team: string[];
       }
+    },
+    ActiveEffect: {
+      // core?: {
+      //   sourceId?: string;
+      // },
+      ptr2e?: {
+        itemGrants?: Record<string, ItemGrantData>;
+        grantedBy?: ItemGrantData | null;
+        choiceSelections?: Record<string, string | number | object | null>;
+        rollOptions?: {
+          [domain in keyof typeof RollOptionDomains]: Record<string, boolean>;
+        }
+        aura?: {
+          slug: string;
+          origin: ActorUUID;
+          removeOnExit: boolean;
+          amount?: number;
+        };
+      }
+    }
+    ChatMessage: {
+      ptr2e?: {
+        undoData: unknown
+      }
     }
     User: {
       ptr2e?: {
         "dev-identity": string;
+        "exp-training-slots": Record<string, unknown>;
+      }
+    }
+    Token: {
+      ptr2e?: {
+        autoscale?: boolean;
+        linkToActorSize?: boolean;
       }
     }
   }
@@ -238,6 +291,7 @@ declare global {
   type EmbeddedItemUUID = `Actor.${string}.Item.${string}`;
   type CompendiumItemUUID = `Compendium.${string}.Item.${string}`;
   type ItemUUID = `Item.${string}` | EmbeddedItemUUID | CompendiumItemUUID;
+  type FolderUUID = `Folder.${string}`;
 
   type HexColorString = `#${string}`;
 
@@ -260,4 +314,6 @@ declare global {
         [key: string]: unknown;
       }>
   }
+
+  type FolderableDocuments = Macro.ConfiguredInstance | Actor.ConfiguredInstance | Item.ConfiguredInstance | Scene.ConfiguredInstance | Cards.ConfiguredInstance | Playlist.ConfiguredInstance | RollTable.ConfiguredInstance | Adventure.ConfiguredInstance | JournalEntry.ConfiguredInstance;
 }

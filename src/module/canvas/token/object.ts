@@ -179,4 +179,8 @@ class TokenPTR2e extends Token {
   }
 }
 
+interface TokenPTR2e {
+
+}
+
 export { TokenPTR2e }

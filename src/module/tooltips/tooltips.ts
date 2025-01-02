@@ -2,7 +2,6 @@ import type { ActorPTR2e } from "@actor";
 import type { AttackMessageSystem, ChatMessagePTR2e, DamageAppliedMessageSystem } from "@chat";
 import type { CombatantPTR2e } from "@combat";
 import { ActionPTR2e, AttackPTR2e, Trait } from "@data";
-import { ActiveEffectPTR2e } from "@effects";
 import type { EffectPTR2e, ItemPTR2e, MovePTR2e, PerkPTR2e, SummonPTR2e } from "@item";
 import type { DataInspector } from "@module/apps/data-inspector/data-inspector.ts";
 import type { CustomSkill } from "@module/data/models/skill.ts";
@@ -216,7 +215,7 @@ export default class TooltipsPTR2e {
     const affliction = game.ptr.data.afflictions.get(afflictionId);
     if (!affliction) return false;
 
-    const effect = await ActiveEffectPTR2e.fromStatusEffect(affliction.id);
+    const effect = await CONFIG.ActiveEffect.documentClass.fromStatusEffect(affliction.id);
     effect.description = await TextEditor.enrichHTML(
       game.i18n.localize(affliction.description!)
     );

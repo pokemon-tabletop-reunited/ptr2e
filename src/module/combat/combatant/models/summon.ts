@@ -1,11 +1,7 @@
-import type { CombatantPTR2e } from "@combat";
 import { CombatantSystemPTR2e } from "@combat";
 import type { CombatantSystemSchema } from "../system.ts";
 import type { SummonPTR2e } from "@item";
-import { ItemPTR2e } from "@item";
 import type { SummonAttackPTR2e } from "@data";
-import type { ActorPTR2e } from "@actor";
-import type { ActiveEffectPTR2e } from "@effects";
 
 const summonCombatantSchema = {
   owner: new foundry.data.fields.DocumentUUIDField({ required: true, nullable: true }),
@@ -21,19 +17,23 @@ export default class SummonCombatantSystem extends CombatantSystemPTR2e<SummonCo
   item: ItemPTR2e | null;
 
   override get baseAV(): number {
-    return this.delay !== null ? 999 : this.item?.system.baseAV ?? 999;
+    const self = this as SummonCombatantSystem;
+    return self.delay !== null ? 999 : self.item?.system.baseAV ?? 999;
   }
 
   get duration() {
-    return this.delay !== null ? 1 : this.item?.system.duration ?? 1;
+    const self = this as SummonCombatantSystem;
+    return self.delay !== null ? 1 : self.item?.system.duration ?? 1;
   }
 
   get expired() {
-    return this.activationsHad >= this.duration
+    const self = this as SummonCombatantSystem;
+    return self.activationsHad >= self.duration
   }
 
   get name() {
-    return `${this.parent.name} (${this.duration - this.activationsHad})`;
+    const self = this as SummonCombatantSystem;
+    return `${self.parent.name} (${self.duration - self.activationsHad})`;
   }
 
   static override defineSchema(): SummonCombatantSchema {
@@ -52,10 +52,10 @@ export default class SummonCombatantSystem extends CombatantSystemPTR2e<SummonCo
         const jsonData = JSON.parse(this._source.item);
         if (jsonData.uuid) {
           const item = fromUuidSync(jsonData.uuid);
-          if (item && item instanceof ItemPTR2e) return item.clone(jsonData.system.owner ? { "system.owner": jsonData.system.owner } : {}, { keepId: true });
+          if (item && item instanceof CONFIG.Item.documentClass) return item.clone(jsonData.system.owner ? { "system.owner": jsonData.system.owner } : {}, { keepId: true });
         }
 
-        return ItemPTR2e.fromJSON(this._source.item) as SummonPTR2e;
+        return CONFIG.Item.documentClass.fromJSON(this._source.item) as SummonPTR2e;
       }
       catch (error: unknown) {
         Hooks.onError("SummonCombatantSystem#prepareBaseData", error as Error, {
@@ -117,16 +117,16 @@ export default class SummonCombatantSystem extends CombatantSystemPTR2e<SummonCo
   /**
    * Returns summon effects that should be applied to the actor, based on the conditions of the summon.
    */
-  getApplicableEffects(actor: ActorPTR2e) {
+  getApplicableEffects(actor: Actor.ConfiguredInstance) {
     const item = this.item;
     if (!item) return [];
     const effects = item.effects;
     if (!effects?.size) return [];
 
-    const owner = fromUuidSync(this.owner ?? "") as ActorPTR2e | null;
+    const owner = fromUuidSync<Actor.ConfiguredInstance>(this.owner as ActorUUID) as Actor.ConfiguredInstance | null;
 
-    const applicableEffects: ActiveEffectPTR2e[] = [];
-    for (const effect of effects.contents as unknown as ActiveEffectPTR2e[]) {
+    const applicableEffects: ActiveEffect.ConfiguredInstance[] = [];
+    for (const effect of effects.contents as unknown as ActiveEffect.ConfiguredInstance[]) {
       switch (effect.system.targetType) {
         case "ally": {
           if (!owner) {
@@ -174,7 +174,7 @@ export default class SummonCombatantSystem extends CombatantSystemPTR2e<SummonCo
     return applicableEffects;
   }
 
-  notifyActorsOfEffectsIfApplicable(combatants: CombatantPTR2e[] = this.combat.combatants.contents) {
+  notifyActorsOfEffectsIfApplicable(combatants: Combatant.ConfiguredInstance[] = this.combat.combatants.contents) {
     const item = this.item;
     if (!item) return;
     const effects = item.effects;
@@ -186,7 +186,7 @@ export default class SummonCombatantSystem extends CombatantSystemPTR2e<SummonCo
   }
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  override async _preCreate(data: foundry.abstract.TypeDataModel.ParentAssignmentType<SummonCombatantSchema, CombatantPTR2e>, options: foundry.abstract.Document.PreCreateOptions<any>, user: User): Promise<boolean | void> {
+  override async _preCreate(data: foundry.abstract.TypeDataModel.ParentAssignmentType<SummonCombatantSchema, Combatant.ConfiguredInstance>, options: foundry.abstract.Document.PreCreateOptions<any>, user: User): Promise<boolean | void> {
     const result = await super._preCreate(data, options, user);
     if (result === false) return false;
 
@@ -201,7 +201,7 @@ export default class SummonCombatantSystem extends CombatantSystemPTR2e<SummonCo
   }
 
   override async _preUpdate(
-    changed: foundry.abstract.TypeDataModel.ParentAssignmentType<SummonCombatantSchema, CombatantPTR2e>,
+    changed: foundry.abstract.TypeDataModel.ParentAssignmentType<SummonCombatantSchema, Combatant.ConfiguredInstance>,
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     options: foundry.abstract.Document.PreUpdateOptions<any>,
     userId: string
@@ -233,7 +233,7 @@ export default class SummonCombatantSystem extends CombatantSystemPTR2e<SummonCo
   }
 
   override _onCreate(
-    data: foundry.abstract.TypeDataModel.ParentAssignmentType<SummonCombatantSchema, CombatantPTR2e>,
+    data: foundry.abstract.TypeDataModel.ParentAssignmentType<SummonCombatantSchema, Combatant.ConfiguredInstance>,
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     options: foundry.abstract.Document.OnCreateOptions<any>,
     userId: string
@@ -243,7 +243,7 @@ export default class SummonCombatantSystem extends CombatantSystemPTR2e<SummonCo
   }
 
   override _onUpdate(
-    changed: foundry.abstract.TypeDataModel.ParentAssignmentType<SummonCombatantSchema, CombatantPTR2e>, 
+    changed: foundry.abstract.TypeDataModel.ParentAssignmentType<SummonCombatantSchema, Combatant.ConfiguredInstance>, 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     options: foundry.abstract.Document.OnUpdateOptions<any>, 
     userId: string

@@ -1,9 +1,5 @@
 import type { DocumentSheetConfiguration, Tab } from "@item/sheets/document.ts";
 import ActiveEffectConfig from "./sheet.ts";
-import type ActiveEffectPTR2e from "./document.ts";
-import type FormActiveEffectSystem from "./data/form.ts";
-import type { ActorPTR2e } from "@actor";
-import type { ItemPTR2e } from "@item";
 import { sluggify } from "@utils";
 // import * as R from "remeda";
 
@@ -61,7 +57,7 @@ export class FormConfigSheet extends ActiveEffectConfig {
     },
   };
 
-  override async _prepareContext(options?: DocumentSheetConfiguration<ActiveEffectPTR2e>) {
+  override async _prepareContext(options?: DocumentSheetConfiguration<ActiveEffect.ConfiguredInstance>) {
     const conditionDisplays = this.prepareConditionDisplays();
 
     return {
@@ -270,5 +266,5 @@ export class FormConfigSheet extends ActiveEffectConfig {
 }
 
 export interface FormConfigSheet {
-  get document(): ActiveEffectPTR2e<ActorPTR2e | ItemPTR2e | null, FormActiveEffectSystem>;
+  get document(): ActiveEffect.ConfiguredInstance;
 }

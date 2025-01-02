@@ -1,11 +1,7 @@
 import FolderPTR2e from "@module/folder/document.ts";
-import type ActorPTR2e from "./base.ts";
-import type ActorSystemPTR2e from "./data/system.ts";
 import FolderConfigPTR2e from "@module/folder/sheet.ts";
 
-export default class ActorDirectoryPTR2e<
-  TActor extends ActorPTR2e<ActorSystemPTR2e, null>,
-> extends ActorDirectory<TActor> {
+export default class ActorDirectoryPTR2e extends ActorDirectory {
   static override entryPartial =
     "systems/ptr2e/templates/sidebar/actor-directory-entry.hbs";
 
@@ -25,7 +21,7 @@ export default class ActorDirectoryPTR2e<
         ],
       },
       { inplace: false }
-    );
+    ) as ApplicationOptions;
   }
 
   override _getFolderContextOptions() {
@@ -34,16 +30,16 @@ export default class ActorDirectoryPTR2e<
     if (option) {
       option.callback = async (header) => {
         const li = header.closest(".directory-item")[0];
-        const folder = await fromUuid(li.dataset.uuid);
+        const folder = await fromUuid<Folder.ConfiguredInstance>(li.dataset.uuid as FolderUUID);
         const r = li.getBoundingClientRect();
         const context = {
           document: folder!,
           position: {
             top: r.top,
-            left: r.left - FolderConfigPTR2e.DEFAULT_OPTIONS.position.width - 10,
+            left: r.left - CONFIG.PTR.Folder.sheetClasses.folder.DEFAULT_OPTIONS.position.width - 10,
           },
         };
-        new FolderConfigPTR2e(context).render(true);
+        new CONFIG.PTR.Folder.sheetClasses.folder(context).render(true);
       };
     }
     return options;
@@ -54,7 +50,7 @@ export default class ActorDirectoryPTR2e<
 
     if ("tree" in data && data.tree) {
       const tree = data.tree as Tree;
-      const team: EnfolderableDocument[] = [];
+      const team: FolderableDocuments[] = [];
       const teamIds: string[] = [];
 
       function recurse(tree: Tree) {
@@ -113,7 +109,7 @@ export default class ActorDirectoryPTR2e<
     const folderId = li?.dataset.folderId;
     if (!folderId) return;
 
-    const folder = game.folders.get<FolderPTR2e>(folderId);
+    const folder = game.folders.get(folderId);
     return folder?.renderPartySheet();
   }
 
@@ -126,7 +122,7 @@ export default class ActorDirectoryPTR2e<
     const folderId = li?.dataset.folderId;
     if (!folderId) return;
 
-    const folder = game.folders.get<FolderPTR2e>(folderId);
+    const folder = game.folders.get(folderId);
     return folder?.renderTeamSheet();
   }
 
@@ -140,7 +136,7 @@ export default class ActorDirectoryPTR2e<
     event.stopPropagation();
     const button = event.currentTarget as HTMLElement;
     const li = button.closest<HTMLElement>(".directory-item");
-    const data = { folder: li?.dataset?.folderId || null, type: this.entryType };
+    const data = { folder: li?.dataset?.folderId || null, type: this.entryType as Folder.TypeNames };
     const options: {
       top: number;
       left: number;
@@ -151,12 +147,12 @@ export default class ActorDirectoryPTR2e<
     };
     if (this.collection instanceof CompendiumCollection)
       options.pack = this.collection.collection;
-    FolderPTR2e.createDialog(data, options);
+    CONFIG.Folder.documentClass.createDialog(data, options);
   }
 
   protected override async _handleDroppedEntry(
     target: HTMLElement,
-    data: DropCanvasData<string, object> & { targetFolderUuid?: string, noParty?: boolean }
+    data: TokenLayer.DropData & { targetFolderUuid?: string, noParty?: boolean }
   ): Promise<void> {
     const { uuid, type, targetFolderUuid, noParty} = data;
     // If the dropped data is not an Actor, defer to the parent class
@@ -164,7 +160,7 @@ export default class ActorDirectoryPTR2e<
 
     // Get target Folder Document
     const closestFolder = target?.closest<HTMLElement>(".folder");
-    const targetFolder = await fromUuid<FolderPTR2e<TActor>>(closestFolder?.dataset.uuid ?? targetFolderUuid);
+    const targetFolder = await fromUuid<Folder.ConfiguredInstance>(closestFolder?.dataset.uuid ?? targetFolderUuid as FolderUUID);
 
     // If the dropped Actor is already in the target Folder, do nothing
     if (targetFolder?.isFolderOwner(uuid)) {
@@ -172,7 +168,7 @@ export default class ActorDirectoryPTR2e<
     }
 
     // Get the Actor Document
-    const actor = await fromUuid<TActor>(uuid);
+    const actor = await fromUuid<Actor.ConfiguredInstance>(uuid as ActorUUID);
     if (!actor) return super._handleDroppedEntry(target, data);
 
     const party = actor.system.party;
@@ -215,7 +211,7 @@ export default class ActorDirectoryPTR2e<
   }
 }
 
-interface Tree<TDocument extends EnfolderableDocument = EnfolderableDocument> {
+interface Tree<TDocument extends FolderableDocuments = FolderableDocuments> {
   owner: TDocument | null;
   party: TDocument[];
   team: TDocument[] | boolean;

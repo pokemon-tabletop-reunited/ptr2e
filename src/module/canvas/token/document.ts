@@ -1,4 +1,3 @@
-import type { CombatantPTR2e } from "../../combat/combatant/document.ts";
 // TODO: Fix circular dependency when imported from @combat
 import CharacterCombatantSystem from "../../combat/combatant/models/character.ts";
 import { TokenAura } from "./aura/aura.ts";
@@ -84,7 +83,7 @@ class TokenDocumentPTR2e extends TokenDocument {
     const linkToActorSize = this.flags.ptr2e?.linkToActorSize ?? linkDefault;
 
     // Autoscaling is a secondary feature of linking to actor size
-    const autoscale = linkToActorSize ? (this.flags.ptr2e.autoscale ?? autoscaleDefault) : false;
+    const autoscale = linkToActorSize ? (this.flags.ptr2e?.autoscale ?? autoscaleDefault) : false;
     this.flags.ptr2e = foundry.utils.mergeObject(this.flags.ptr2e ?? {}, { linkToActorSize, autoscale });
 
     // Token dimensions from actor size
@@ -139,7 +138,7 @@ class TokenDocumentPTR2e extends TokenDocument {
     super._onRelatedUpdate(update, options);
 
     // If the actor's speed combat stages are different from the token's combatant, update the combatant's speed stages
-    const combatant = this.combatant as CombatantPTR2e | null;
+    const combatant = this.combatant as Combatant.ConfiguredInstance | null;
     if (!combatant || !(combatant.system instanceof CharacterCombatantSystem)) return;
     if (this.actor?.speedStage !== undefined && this.actor.speedStage !== combatant.system.speedStages) {
       const previous = combatant.system.previousBaseAV;
@@ -153,7 +152,7 @@ class TokenDocumentPTR2e extends TokenDocument {
   /** Set a TokenData instance's dimensions from actor data. Static so actors can use for their prototypes */
   static prepareSize(token: TokenDocumentPTR2e /*| PrototypeTokenPTR2e<ActorPTR2e>*/): void {
     const actor = token.actor;
-    if (!(actor && token.flags.ptr2e.linkToActorSize)) return;
+    if (!(actor && token.flags.ptr2e?.linkToActorSize)) return;
 
     // If not overridden by an actor override, set according to creature size (skipping gargantuan)
     const size = actor.dimensions; // In case an AE-like corrupted actor size data
@@ -161,7 +160,7 @@ class TokenDocumentPTR2e extends TokenDocument {
     token.width = size.width;
     token.height = size.length;
 
-    if (game.ptr.settings.tokens.autoscale && token.flags.ptr2e.autoscale !== false) {
+    if (game.ptr.settings.tokens.autoscale && token.flags.ptr2e?.autoscale !== false) {
       const absoluteScale = ["diminutive", "small"].includes(actor.size.value) ? 0.75 : 1;
       const mirrorX = (token.texture.scaleX ?? 0) < 0 ? -1 : 1;
       token.texture.scaleX = mirrorX * absoluteScale;
@@ -177,7 +176,7 @@ interface TokenDocumentPTR2e extends TokenDocument {
 
   // get actor(): ActorPTR2e<ActorSystemPTR2e, this | null> | null;
   // get combatant(): Combatant<Combat, this> | null;
-  // get object(): TokenPTR2e<this> | null;
+  // get object(): Token.ConfiguredInstance<this> | null;
   // get sheet(): TokenConfigPTR2e<this>;
 }
 

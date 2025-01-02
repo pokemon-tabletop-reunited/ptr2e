@@ -1,8 +1,6 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import type { ActionPTR2e } from "@data";
-import { ActiveEffectPTR2e } from "@effects";
-import { ItemPTR2e } from "@item";
 import { htmlQueryAll, sluggify } from "@utils";
 import type { AnyObject, DeepPartial, EmptyObject } from "fvtt-types/utils";
 
@@ -301,10 +299,10 @@ export class ActorSheetV2Expanded<
     const affliction = game.ptr.data.afflictions.get(data.id);
     if (!affliction) return false;
 
-    const effect = await ActiveEffectPTR2e.fromStatusEffect(affliction.id) as ActiveEffectPTR2e;
+    const effect = await CONFIG.ActiveEffect.documentClass.fromStatusEffect(affliction.id) as ActiveEffect.ConfiguredInstance;
     if (!effect) return false;
 
-    return ActiveEffectPTR2e.create(effect.toObject(), { parent: this.actor });
+    return CONFIG.ActiveEffect.documentClass.create(effect.toObject(), { parent: this.actor });
   }
 
   /* -------------------------------------------- */
@@ -317,10 +315,10 @@ export class ActorSheetV2Expanded<
    * @protected
    */
   async _onDropActiveEffect(_event: DragEvent, data: object) {
-    const effect = await ActiveEffectPTR2e.fromDropData(data as foundry.abstract.Document.DropData<ActiveEffect.ConfiguredInstance>);
+    const effect = await CONFIG.ActiveEffect.documentClass.fromDropData(data as foundry.abstract.Document.DropData<ActiveEffect.ConfiguredInstance>);
     if (!this.actor.isOwner || !effect) return false;
     if (effect.target === this.actor) return false;
-    return ActiveEffectPTR2e.create(effect.toObject(), { parent: this.actor });
+    return CONFIG.ActiveEffect.documentClass.create(effect.toObject(), { parent: this.actor });
   }
 
   /* -------------------------------------------- */
@@ -349,11 +347,11 @@ export class ActorSheetV2Expanded<
    */
   async _onDropItem(event: DragEvent, data: object) {
     if (!this.actor.isOwner) return false;
-    const item = (await ItemPTR2e.implementation.fromDropData(data as foundry.abstract.Document.DropData<Item.ConfiguredInstance>)) as ItemPTR2e;
+    const item = (await CONFIG.Item.documentClass.implementation.fromDropData(data as foundry.abstract.Document.DropData<Item.ConfiguredInstance>)) as Item.ConfiguredInstance;
     if (item.type === "effect") {
       const effects = item.effects.map(effect => effect.toObject());
       if (!effects.length) return;
-      return ActiveEffectPTR2e.create(effects, { parent: this.actor });
+      return CONFIG.ActiveEffect.documentClass.create(effects, { parent: this.actor });
     }
 
     const itemData = item.toObject();
@@ -414,7 +412,7 @@ export class ActorSheetV2Expanded<
    * @param {Object} itemData
    * @private
    */
-  _onSortItem(event: Event, itemData: ItemPTR2e["_source"]) {
+  _onSortItem(event: Event, itemData: Item.ConstructorData) {
     // Get the drag source and drop target
     const items = this.actor.items;
     const source = items.get(itemData._id!)!;
@@ -588,7 +586,7 @@ export class ItemSheetV2Expanded<
 
     // Active Effect
     if (li.dataset.effectId) {
-      const effect = this.document.effects.get(li.dataset.effectId) as ActiveEffectPTR2e;
+      const effect = this.document.effects.get(li.dataset.effectId) as ActiveEffect.ConfiguredInstance;
       dragData = effect?.toDragData();
     }
 
@@ -633,7 +631,7 @@ export class ItemSheetV2Expanded<
 
       const actionData = data.action as { slug: string, type: string };
 
-      const item = await ItemPTR2e.fromDropData(data as unknown as TokenLayer.DropData);
+      const item = await CONFIG.Item.documentClass.fromDropData(data as unknown as TokenLayer.DropData);
       if (!item || !item?.actions?.size) return;
 
       const action = item.actions.get(actionData.slug);
@@ -666,11 +664,11 @@ export class ItemSheetV2Expanded<
   }
 
   async _onDropItem(_event: DragEvent, data: object) {
-    const item = await ItemPTR2e.fromDropData(data as TokenLayer.DropData);
+    const item = await CONFIG.Item.documentClass.fromDropData(data as TokenLayer.DropData);
     if (!item || item.type !== "effect") return;
     const effects = item.effects.map((effect) => effect.toObject());
     if (effects.length === 0) return;
-    return ActiveEffectPTR2e.createDocuments(effects, { parent: this.document });
+    return CONFIG.ActiveEffect.documentClass.createDocuments(effects, { parent: this.document });
   }
 
   async _onDropAffliction(_event: DragEvent, data: object) {
@@ -679,14 +677,14 @@ export class ItemSheetV2Expanded<
     const affliction = game.ptr.data.afflictions.get(data.id);
     if (!affliction) return false;
 
-    const effect = await ActiveEffectPTR2e.fromStatusEffect(affliction.id) as ActiveEffectPTR2e;
+    const effect = await CONFIG.ActiveEffect.documentClass.fromStatusEffect(affliction.id) as ActiveEffect.ConfiguredInstance;
     if (!effect) return false;
 
-    return ActiveEffectPTR2e.create(effect.toObject(), { parent: this.document });
+    return CONFIG.ActiveEffect.documentClass.create(effect.toObject(), { parent: this.document });
   }
 
   async _onDropActiveEffect(_event: DragEvent, data: object) {
-    const effect = await ActiveEffectPTR2e.fromDropData(data);
+    const effect = await CONFIG.ActiveEffect.documentClass.fromDropData(data);
     if (!this.document.isOwner || !effect) return false;
     if (effect.parent === this.document) return false;
 
@@ -696,7 +694,7 @@ export class ItemSheetV2Expanded<
       // Attempt a best-effor conversion.
       source.type = source.system.formula || source.duration.turns ? "affliction" : "passive";
     }
-    return ActiveEffectPTR2e.create(source, { parent: this.document });
+    return CONFIG.ActiveEffect.documentClass.create(source, { parent: this.document });
   }
 
   protected override async _onSubmitForm(config: foundry.applications.api.ApplicationV2.FormConfiguration, event: Event | SubmitEvent): Promise<void> {

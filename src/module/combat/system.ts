@@ -1,5 +1,3 @@
-import type CombatPTR2e from "./document.ts";
-
 const combatSystemSchema = {
   turn: new foundry.data.fields.NumberField({
     required: true,
@@ -15,7 +13,7 @@ const combatSystemSchema = {
 
 export type CombatSystemSchema = typeof combatSystemSchema;
 
-export default class CombatSystem extends foundry.abstract.TypeDataModel<CombatSystemSchema, CombatPTR2e> {
+export default class CombatSystem extends foundry.abstract.TypeDataModel<CombatSystemSchema, Combat.ConfiguredInstance> {
   get maxTurns() {
     return Math.min(this.parent.roundIndex + 1, this.parent.turns.length);
   }

@@ -9,7 +9,7 @@ export class SquareGridPTR2e extends foundry.grid.SquareGrid {
     this.diagonals = options.diagonals ?? CONST.GRID_DIAGONALS.EQUIDISTANT;
   }
 
-  getTokensAdjacent(t1: Token, t2: Token, reach = false): boolean {
+  getTokensAdjacent(t1: Token.ConfiguredInstance, t2: Token.ConfiguredInstance, reach = false): boolean {
     if (!canvas || !canvas.ready || !canvas.dimensions) return false;
     const c1 = this.getOffset(t1.position) as GridOffsetWithElevation;
     const c2 = this.getOffset(t2.position) as GridOffsetWithElevation;
@@ -35,10 +35,10 @@ export class SquareGridPTR2e extends foundry.grid.SquareGrid {
    * Attempt to find the distance between 2 tokens based on 3d grid space.
    * The distance should be the shortest path between the two tokens, taking into account elevation and their size.
    */
-  getDistanceBetweenTokens(t1: Token, t2: Token): number {
+  getDistanceBetweenTokens(t1: Token.ConfiguredInstance, t2: Token.ConfiguredInstance): number {
     if(!canvas || !canvas.ready || !canvas.dimensions) return NaN;
-    const getBounds = (t: Token) => this.getOffsetRangeInclusive(t.bounds);
-    const getElevation = (t: Token) =>
+    const getBounds = (t: Token.ConfiguredInstance) => this.getOffsetRangeInclusive(t.bounds);
+    const getElevation = (t: Token.ConfiguredInstance) =>
       Math.floor(
         (t.document.elevation / canvas!.dimensions!.distance) * canvas!.dimensions!.size
       ) / this.size;

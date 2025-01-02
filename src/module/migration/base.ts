@@ -1,8 +1,4 @@
-import type { ActorPTR2e } from "@actor";
 import type { ActionPTR2e } from "@data";
-import type { ActiveEffectPTR2e } from "@effects";
-import type { ItemPTR2e } from "@item";
-import type { ScenePTR2e } from "@module/canvas/scene.ts";
 
 /**
  * This is the base class for a migration.
@@ -34,72 +30,72 @@ abstract class MigrationBase {
 interface MigrationBase {
     /**
      * Update the actor to the latest schema version.
-     * @param source This should be effectively a `ActorPTR2e['_source']` from the previous version.
+     * @param source This should be effectively a `Actor.ConstructorData` from the previous version.
      */
-    updateActor?(source: ActorPTR2e['_source']): Promise<void>;
+    updateActor?(source: Actor.ConstructorData): Promise<void>;
 
     /**
      * Update the item to the latest schema version, handling changes that must happen before any other migration in a
      * given list.
-     * @param source Item to update. This should be an `ItemPTR2e['_source']` from the previous version
+     * @param source Item to update. This should be an `Item.ConstructorData` from the previous version
      * @param actorSource If the item is part of an actor, this is set to the actor source
      */
-    preUpdateItem?(source: ItemPTR2e['_source'], actorSource?: ActorPTR2e['_source']): Promise<void>;
+    preUpdateItem?(source: Item.ConstructorData, actorSource?: Actor.ConstructorData): Promise<void>;
 
     /**
      * Update the action to the latest schema version.
      * @param source Action to update. This should be an `ActionPTR2e['_source']` from the previous version.
      * @param itemSource The action's parent item
      */
-    updateAction?(source: ActionPTR2e['_source'], itemSource: ItemPTR2e['_source']): Promise<void>;
+    updateAction?(source: ActionPTR2e['_source'], itemSource: Item.ConstructorData): Promise<void>;
 
     /**
      * Update the item to the latest schema version.
-     * @param source Item to update. This should be an `ItemPTR2e['_source']` from the previous version.
+     * @param source Item to update. This should be an `Item.ConstructorData` from the previous version.
      * @param actorSource If the item is part of an actor, this is set to the actor. For instance
      */
-    updateItem?(source: ItemPTR2e['_source'], actorSource?: ActorPTR2e['_source']): Promise<void>;
+    updateItem?(source: Item.ConstructorData, actorSource?: Actor.ConstructorData): Promise<void>;
 
     /**
      * Update the effect to the latest schema version.
-     * @param source Effect to update. This should be an `ActiveEffectPTR2e['_source']` from the previous version.
+     * @param source Effect to update. This should be an `ActiveEffect.ConstructorData` from the previous version.
      * @param parentSource The effect's parent
      */
-    updateEffect?(source: ActiveEffectPTR2e['_source'], parentSource: ItemPTR2e['_source'] | ActorPTR2e['_source']): Promise<void>;
+    updateEffect?(source: ActiveEffect.ConstructorData, parentSource: Item.ConstructorData | Actor.ConstructorData): Promise<void>;
 
     /**
      * Update the macro to the latest schema version.
      * @param source Macro data to update. This should be a `MacroData` from the previous version.
      */
-    updateJournalEntry?(source: foundry.documents.JournalEntrySource): Promise<void>;
+    updateJournalEntry?(source: JournalEntry.ConstructorData): Promise<void>;
 
     /**
      * Update the macro to the latest schema version.
      * @param source Macro data to update. This should be a `MacroData` from the previous version.
      */
-    updateMacro?(source: foundry.documents.MacroSource): Promise<void>;
+    updateMacro?(source: Macro.ConstructorData): Promise<void>;
 
     /**
      * Update the rollable table to the latest schema version.
      * @param source Rolltable data to update. This should be a `RollTableData` from the previous version.
      */
-    updateTable?(source: foundry.documents.RollTableSource): Promise<void>;
+    updateTable?(source: RollTable.ConstructorData): Promise<void>;
 
     /**
      * Update the token to the latest schema version.
      * @param tokenData Token data to update. This should be a `TokenData` from the previous version.
      */
     updateToken?(
-        tokenData: foundry.documents.TokenSource,
-        actor: Readonly<ActorPTR2e | null>,
-        scene: Readonly<ScenePTR2e | null>,
+        tokenData: Token.ConstructorData,
+        actor: Readonly<Actor.ConfiguredInstance | null>,
+        scene: Readonly<Scene.ConfiguredInstance | null>,
     ): Promise<void>;
 
     /**
      * Update the user to the latest schema version.
      * @param userData User's data to update. This should be a `UserData` from the previous version.
      */
-    updateUser?(userData: foundry.documents.UserSource): Promise<void>;
+    updateUser?(userData: User.ConstructorData): Promise<void>;
 
     /**
      * Run migrations for this schema version.

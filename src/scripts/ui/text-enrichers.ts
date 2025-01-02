@@ -1,7 +1,6 @@
 // Default Pattern
 // /@(?<type>Key)\[(?<slug>[-a-z]+)(\s+)?(?<options>[^\]]+)*](?:{(?<label>[^}]+)})?/gi
 
-import { ActiveEffectPTR2e } from "@effects";
 export class TextEnricher {
   static init() {
     const original = TextEditor.activateListeners.bind(TextEditor);
@@ -90,7 +89,7 @@ export class TextEnricher {
     const affliction = game.ptr.data.afflictions.get(id);
     if (!affliction) return;
 
-    const effect = await ActiveEffectPTR2e.fromStatusEffect(affliction.id) as ActiveEffectPTR2e
+    const effect = await CONFIG.ActiveEffect.documentClass.fromStatusEffect(affliction.id) as ActiveEffect.ConfiguredInstance
     if (!effect) return;
     effect.description = game.i18n.localize(affliction.description!);
 

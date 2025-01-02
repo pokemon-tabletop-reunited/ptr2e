@@ -1,61 +1,57 @@
-import type { ItemPTR2e, ItemSystemPTR, ItemSystemsWithActions } from "@item";
+import type { ItemWithActions } from "@item";
 import { htmlQuery, htmlQueryAll, sluggify } from "@utils";
-import type { DocumentSheetConfiguration, Tab } from "./document.ts";
+import type { Tab } from "./document.ts";
 import Tagify from "@yaireo/tagify";
 import GithubManager from "@module/apps/github.ts";
-import { ActiveEffectPTR2e } from "@effects";
 import { ActionEditor } from "@module/apps/action-editor.ts";
 import { ItemSheetV2Expanded } from "@module/apps/appv2-expanded.ts";
-import type { ActionPTR2e} from "@data";
+import type { ActionPTR2e } from "@data";
 import { Trait } from "@data";
 import { DataInspector } from "@module/apps/data-inspector/data-inspector.ts";
+import type { AnyObject, DeepPartial } from "fvtt-types/utils";
 
 export default class ItemSheetPTR2e<
-  TSystem extends ItemSystemPTR,
-> extends foundry.applications.api.HandlebarsApplicationMixin(ItemSheetV2Expanded) {
-  static override DEFAULT_OPTIONS = foundry.utils.mergeObject(
-    super.DEFAULT_OPTIONS,
-    {
-      classes: ["move-sheet"],
-      dragDrop: [
-        {
-          dropSelector: ".window-content",
-          dragSelector: ".effect-list .effect, .actions-list .action",
-        }
-      ],
-      position: {
-        height: 500,
-        width: 550,
-      },
-      actions: {
-        toChat: this.#toChat,
-        toGithub: GithubManager.commitItemToGithubSheet,
-        "open-inspector": async function<TSystem extends ItemSystemPTR>(this: ItemSheetPTR2e<TSystem>, event: Event) {
-          event.preventDefault();
-          const inspector = new DataInspector(this.item);
-          inspector.render(true);
-        },
-      },
-      form: {
-        submitOnChange: true,
-        closeOnSubmit: false,
-      },
-      window: {
-        minimizable: true,
-        resizable: true,
-        controls: [
-          ...(super.DEFAULT_OPTIONS?.window?.controls ?? []),
-          {
-            icon: "fas fa-atom",
-            label: "PTR2E.ActorSheet.Inspector",
-            action: "open-inspector",
-            visible: true
-          }
-        ],
+  Context extends AnyObject
+> extends foundry.applications.api.HandlebarsApplicationMixin(ItemSheetV2Expanded)<Context> {
+  static override DEFAULT_OPTIONS = {
+    classes: ["move-sheet"],
+    dragDrop: [
+      {
+        dropSelector: ".window-content",
+        dragSelector: ".effect-list .effect, .actions-list .action",
+      }
+    ],
+    position: {
+      height: 500,
+      width: 550,
+    },
+    actions: {
+      toChat: this.#toChat,
+      toGithub: GithubManager.commitItemToGithubSheet,
+      "open-inspector": async function <Context extends AnyObject>(this: ItemSheetPTR2e<Context>, event: Event) {
+        event.preventDefault();
+        const inspector = new DataInspector(this.item);
+        inspector.render(true);
       },
     },
-    { inplace: false }
-  );
+    form: {
+      submitOnChange: true,
+      closeOnSubmit: false,
+    },
+    window: {
+      minimizable: true,
+      resizable: true,
+      controls: [ //@ts-expect-error - FIXME: This should work.
+        ...(super.DEFAULT_OPTIONS?.window?.controls ?? []),
+        {
+          icon: "fas fa-atom",
+          label: "PTR2E.ActorSheet.Inspector",
+          action: "open-inspector",
+          visible: true
+        }
+      ],
+    },
+  }
 
   // Settings for child classes to override
   static readonly overviewTemplate: string = "";
@@ -99,7 +95,7 @@ export default class ItemSheetPTR2e<
     },
   };
 
-  tabGroups: Record<string, string> = {
+  override tabGroups: Record<string, string> = {
     sheet: "overview",
   };
 
@@ -139,7 +135,7 @@ export default class ItemSheetPTR2e<
     return this.tabs;
   }
 
-  override async _prepareContext() {
+  override async _prepareContext(options: DeepPartial<foundry.applications.api.DocumentSheetV2.RenderOptions> & { isFirstRender: boolean }): Promise<Context> {
     const traits = (() => {
       if ("traits" in this.document.system && this.document.system.traits) {
         const traits = [];
@@ -168,7 +164,7 @@ export default class ItemSheetPTR2e<
     const enrichedDescription = await TextEditor.enrichHTML(this.document.system.description);
 
     return {
-      ...((await super._prepareContext()) as Record<string, unknown>),
+      ...(await super._prepareContext(options)),
       item: this.document,
       source: this.document.toObject(),
       fields: this.document.system.schema.fields,
@@ -176,7 +172,7 @@ export default class ItemSheetPTR2e<
       traits,
       effects,
       enrichedDescription,
-    };
+    } as unknown as Context;
   }
 
   override _prepareSubmitData(
@@ -184,7 +180,7 @@ export default class ItemSheetPTR2e<
     form: HTMLFormElement,
     formData: FormDataExtended
   ): Record<string, unknown> {
-    const submitData = formData.object;
+    const submitData = formData.object as Record<string, unknown>;
 
     if (
       "system.traits" in submitData &&
@@ -198,24 +194,24 @@ export default class ItemSheetPTR2e<
       );
     }
 
-    return super._prepareSubmitData(event, form, formData);
+    return super._prepareSubmitData(event, form, formData) as Record<string, unknown>;
   }
 
-  override async _renderFrame(options: DocumentSheetConfiguration<ItemPTR2e<TSystem>>) {
+  override async _renderFrame(options: DeepPartial<foundry.applications.api.DocumentSheetV2.RenderOptions>) {
     const frame = await super._renderFrame(options);
 
     // Add send to chat button
     const toChatLabel = game.i18n.localize("PTR2E.ItemSheet.SendToChatLabel");
     const toChat = `<button type="button" class="header-control fa-solid fa-arrow-up-right-from-square" data-action="toChat"
                                 data-tooltip="${toChatLabel}" aria-label="${toChatLabel}"></button>`;
-    this.window.controls.insertAdjacentHTML("afterend", toChat);
+    this.window.controls!.insertAdjacentHTML("afterend", toChat);
 
     if (game.settings.get("ptr2e", "dev-mode")) {
       // Add send to chat button
       const commitToGithubLabel = game.i18n.localize("PTR2E.UI.DevMode.CommitToGithub.Label");
       const commitToGithub = `<button type="button" class="header-control fa-solid fa-upload" data-action="toGithub"
                                     data-tooltip="${commitToGithubLabel}" aria-label="${commitToGithubLabel}"></button>`;
-      this.window.controls.insertAdjacentHTML("afterend", commitToGithub);
+      this.window.controls!.insertAdjacentHTML("afterend", commitToGithub);
     }
 
     return frame;
@@ -224,7 +220,7 @@ export default class ItemSheetPTR2e<
   override _attachPartListeners(
     partId: string,
     htmlElement: HTMLElement,
-    options: DocumentSheetConfiguration<ItemPTR2e<TSystem>>
+    options: foundry.applications.api.HandlebarsApplicationMixin.HandlebarsRenderOptions
   ): void {
     super._attachPartListeners(partId, htmlElement, options);
 
@@ -282,7 +278,7 @@ export default class ItemSheetPTR2e<
           )?.dataset.effectId;
           if (!effectId) return;
           return (
-            this.document.effects.get(effectId) as ActiveEffectPTR2e<ItemPTR2e<TSystem>>
+            this.document.effects.get(effectId) as ActiveEffect.ConfiguredInstance
           )?.toChat();
         });
       }
@@ -294,7 +290,7 @@ export default class ItemSheetPTR2e<
           )?.dataset.effectId;
           if (!effectId) return;
           return (
-            this.document.effects.get(effectId) as ActiveEffectPTR2e<ItemPTR2e<TSystem>>
+            this.document.effects.get(effectId) as ActiveEffect.ConfiguredInstance
           )?.sheet?.render(true);
         });
       }
@@ -365,7 +361,7 @@ export default class ItemSheetPTR2e<
           switch (actionType) {
             case "edit-action": {
               const sheet = new ActionEditor(
-                this.document as ItemPTR2e<ItemSystemsWithActions>,
+                this.document as ItemWithActions,
                 slug
               );
               sheet.render(true);
@@ -401,7 +397,7 @@ export default class ItemSheetPTR2e<
       htmlQuery(htmlElement, "img[data-edit]")?.addEventListener("click", (event) => {
         const imgElement = event.currentTarget as HTMLImageElement;
         const attr = imgElement.dataset.edit;
-        const current = foundry.utils.getProperty<string | undefined>(this.document, attr!);
+        const current = foundry.utils.getProperty(this.document, attr!) as string | undefined;
         const { img } =
           this.document.constructor.getDefaultArtwork(this.document.toObject()) ?? {};
         const fp = new FilePicker({
@@ -421,7 +417,7 @@ export default class ItemSheetPTR2e<
     }
   }
 
-  override _onRender(context: foundry.applications.api.ApplicationRenderContext, options: foundry.applications.api.HandlebarsApplicationMixin.HandlebarsRenderOptions): void {
+  override _onRender(context: DeepPartial<Context>, options: foundry.applications.api.HandlebarsApplicationMixin.HandlebarsRenderOptions): void {
     super._onRender(context, options);
     for (const stringTags of this.element.querySelectorAll<HTMLElement>("string-tags")) {
       const path = stringTags.getAttribute("name");
@@ -490,8 +486,8 @@ export default class ItemSheetPTR2e<
     return super._onSubmitForm(config, event);
   }
 
-  static async #toChat<TSystem extends ItemSystemPTR>(
-    this: ItemSheetPTR2e<TSystem>
+  static async #toChat<Context extends AnyObject>(
+    this: ItemSheetPTR2e<Context>
   ) {
     return this.document.toChat();
   }
@@ -503,10 +499,6 @@ export default class ItemSheetPTR2e<
     // Items only support effects
     if (type !== "effect") return;
 
-    return ActiveEffectPTR2e.createDialog({}, { parent: this.document, types: ActiveEffectPTR2e.TYPES.filter(s => !["summon", "form"].includes(s)) });
+    return CONFIG.ActiveEffect.documentClass.createDialog({}, { parent: this.document, types: CONFIG.ActiveEffect.documentClass.TYPES.filter(s => !["summon", "form"].includes(s)) });
   }
-}
-
-export default interface ItemSheetPTR2e<TSystem extends ItemSystemPTR> {
-  get document(): ItemPTR2e<TSystem>;
 }

@@ -1,8 +1,6 @@
 import { htmlQueryAll } from "@utils";
 import { ActorComponent } from "./base.ts";
 import type ActorPTR2e from "@actor/base.ts";
-import type { ActiveEffectPTR2e } from "@effects";
-
 class EffectComponent extends ActorComponent {
     static override TEMPLATE = "systems/ptr2e/templates/actor/components/actor-effect-component.hbs";
     static override TOOLTIP = "PTR2E.ActorSheet.Components.Effects.tooltip";
@@ -24,7 +22,7 @@ class EffectComponent extends ActorComponent {
                 )?.dataset.effectId;
                 if (!effectId) return;
                 return (
-                    actor.effects.get(effectId) as ActiveEffectPTR2e<ActorPTR2e>
+                    actor.effects.get(effectId) as ActiveEffect.ConfiguredInstance
                 )?.toChat();
             });
         }
@@ -36,7 +34,7 @@ class EffectComponent extends ActorComponent {
                 )?.dataset.effectId;
                 if (!effectId) return;
                 return (
-                    actor.effects.get(effectId) as ActiveEffectPTR2e<ActorPTR2e>
+                    actor.effects.get(effectId) as ActiveEffect.ConfiguredInstance
                 )?.sheet?.render(true);
             });
         }

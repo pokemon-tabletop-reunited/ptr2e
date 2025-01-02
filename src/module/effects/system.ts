@@ -6,7 +6,6 @@ import type { SlugSchema } from "@module/data/mixins/has-slug.ts";
 import type { ChangesSchema } from "@module/data/mixins/has-changes.ts";
 import { ItemPTR2e } from "@item";
 import AbilitySystem from "@item/data/ability.ts";
-import type { ActiveEffectPTR2e } from "./document.ts";
 
 const activeEffectSystemSchema = {
   removeAfterCombat: new foundry.data.fields.BooleanField({
@@ -33,10 +32,8 @@ export default abstract class ActiveEffectSystem<Schema extends ActiveEffectSyst
     )
   ),
   "effect"
-)<Schema, ActiveEffectPTR2e> {
+)<Schema, ActiveEffect.ConfiguredInstance> {
   static override LOCALIZATION_PREFIXES = ["PTR2E.Effect"];
-
-  declare parent: ActiveEffectPTR2e;
 
   static override defineSchema(): ActiveEffectSystemSchema {
     return {

@@ -1,6 +1,5 @@
 import type { ScenePTR2e } from "./scene.ts";
 import type { TokenDocumentPTR2e } from "./token/document.ts";
-import type { TokenPTR2e } from "./token/object.ts";
 
 // Prevent concurrent executions of this method in case of network latency
 let auraCheckLock = Promise.resolve();
@@ -62,8 +61,8 @@ function measureDistanceCuboid(
     target = null,
   }: {
     reach?: number | null;
-    token?: TokenPTR2e | null;
-    target?: TokenPTR2e | null;
+    token?: Token.ConfiguredInstance | null;
+    target?: Token.ConfiguredInstance | null;
   } = {},
 ): number {
   if (canvas!.grid!.type !== CONST.GRID_TYPES.SQUARE) {

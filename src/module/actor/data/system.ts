@@ -4,8 +4,8 @@ import { HasTraits, HasMigrations, ClockPTR2e, Trait } from "@data";
 import { getTypes } from "@scripts/config/effectiveness.ts";
 import { SpeciesSystemModel } from "@item/data/index.ts";
 import { getInitialSkillList } from "@scripts/config/skills.ts";
-import { CollectionField } from "@module/data/fields/collection-field.ts";
 import SkillPTR2e from "../../data/models/skill.ts";
+import { CollectionField } from "@module/data/fields/collection-field.ts";
 import natureToStatArray, { natures } from "@scripts/config/natures.ts";
 import { SlugField } from "@module/data/fields/slug-field.ts";
 import type { TraitsSchema } from "@module/data/mixins/has-traits.ts";
@@ -480,7 +480,7 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
     }
 
     for (const type of this.parent.species.types.values()) {
-      this.type.types.add(type);
+      this.type.types.add(type as PokemonType);
       if (this.type.types.size > 1 && this.type.types.has("untyped")) {
         this.type.types.delete("untyped");
         this.traits.delete("untyped");
@@ -687,6 +687,9 @@ interface ActorSystemDerivedData {
   inventoryPoints: {
     max: number;
   }
+  type: {
+    effectiveness: Record<PokemonType, number>;
+  }
   [key: string]: unknown;
 }
 
@@ -746,3 +749,10 @@ export { type ActorSystemPTR2e }
 //   next: foundry.data.fields.NumberField<{ required: true, initial: number, min: number, label: string, hint: string }>;
 //   diff: foundry.data.fields.NumberField<{ required: true, initial: number, min: number, label: string, hint: string }>;
 // }
+
+declare global {
+  // eslint-disable-next-line @typescript-eslint/no-namespace
+  namespace Actor {
+    type ConfiguredBaseSystem = ActorSystemPTR2e
+  }
+}

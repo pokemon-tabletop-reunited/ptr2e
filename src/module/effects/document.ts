@@ -1,11 +1,8 @@
 import { ActorPTR2e } from "@actor";
 import { ItemPTR2e } from "@item";
-import type { EffectSourcePTR2e } from "@effects";
 import type { ChangeModel, Trait } from "@data";
 import type { CombatPTR2e } from "@combat";
 import { sluggify } from "@utils";
-import type { RollOptionDomains } from "@module/data/roll-option-manager.ts";
-import type { ItemGrantData } from "@item/data/data.ts";
 import { processGrantDeletions } from "./changes/grant-item.ts";
 import { AbilitySystemModel } from "@item/data/index.ts";
 import type { EffectDurationData } from "node_modules/fvtt-types/src/foundry/common/documents/_types.d.mts";
@@ -97,7 +94,10 @@ class ActiveEffectPTR2e extends ActiveEffect {
     }
   }
 
-  override apply(actor: ActorPTR2e, change: ChangeModel, options?: string[]): unknown {
+  
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  override apply(actor: ActorPTR2e, _change: any, options?: string[]): unknown {
+    const change = _change as ChangeModel;
     if (this.parent instanceof ItemPTR2e && this.parent && this.parent.system instanceof AbilitySystemModel) {
       if (this.parent.system.suppress) return;
     }
@@ -222,11 +222,12 @@ class ActiveEffectPTR2e extends ActiveEffect {
   }
 
   override toObject(source: true): this["_source"];
-  override toObject(source?: boolean): this["_source"] | ReturnType<this["schema"]["toObject"]>;
+  override toObject(source?: boolean): ReturnType<this["schema"]["toObject"]>;
   override toObject(source?: boolean): this["_source"] | ReturnType<this["schema"]["toObject"]> {
-    const data = super.toObject(source) as foundry.data.fields.SchemaField.AssignmentType<ActiveEffect.Schema>;
-    data.changes = this.changes.map((c) => c.toObject()) as this["_source"]["changes"];
-    return data;
+    const data = super.toObject(source);
+    //@ts-expect-error - Figure out the proper type here later
+    data.changes = this.changes.map((c) => c.toObject())
+    return data!;
   }
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -342,19 +343,18 @@ class ActiveEffectPTR2e extends ActiveEffect {
     return super._preUpdate(changed, options, user);
   }
 
-  static override async createDocuments<T extends foundry.abstract.Document.SystemConstructor, Temporary extends boolean | undefined>(
-    this: T,
+  static override async createDocuments(
     data: ActiveEffect.ConstructorData[],
     context: Record<string, unknown> & {
-      temporary?: Temporary;
+      temporary?: boolean;
     } = {}
-  ): Promise<foundry.abstract.Document.ToStoredIf<T, Temporary>[] | undefined> {
+  ): Promise<ActiveEffect.ConfiguredInstance[] | undefined> {
     const sources = data.map((d) =>
       d instanceof ActiveEffectPTR2e ? (d.toObject()) : d
     );
 
     const parent = context.parent;
-    if (!parent) return super.createDocuments(sources, context) as Promise<ActiveEffectPTR2e[]>;
+    if (!parent) return super.createDocuments(sources, context)
 
     const effects = await (async (): Promise<ActiveEffectPTR2e[]> => {
       const effects = sources.flatMap((source) => {
@@ -386,13 +386,13 @@ class ActiveEffectPTR2e extends ActiveEffect {
     })();
 
     const tempItems: ItemPTR2e[] = [];
-    const outputItemSources: ItemSourcePTR2e[] = [];
-    const outputEffectSources = effects.map((e) => e._source as EffectSourcePTR2e);
+    const outputItemSources: foundry.data.fields.SchemaField.PersistedType<Item.Schema>[] = [];
+    const outputEffectSources = effects.map((e) => e._source);
 
     // Process effect preCreate changes for all effects that are going to be added
     // This may add additional effects or items (such as via GrantItem)
     for (const effect of effects) {
-      const effectSource = effect._source as EffectSourcePTR2e;
+      const effectSource: foundry.data.fields.SchemaField.PersistedType<ActiveEffect.Schema> = effect._source;
       const changes = effect.system.changes ?? [];
 
       for (const change of changes) {
@@ -411,20 +411,19 @@ class ActiveEffectPTR2e extends ActiveEffect {
     if (outputItemSources.length) {
       await ItemPTR2e.createDocuments( //@ts-expect-error - this should not error
         outputItemSources,
-        context as DocumentModificationContext<ActorPTR2e | null>
+        context
       );
     }
     // Create the effects
-    return super.createDocuments(outputEffectSources, context) as Promise<ActiveEffectPTR2e[]>;
+    return super.createDocuments(outputEffectSources, context);
   }
 
-  static override async deleteDocuments<T extends foundry.abstract.Document.SystemConstructor, Temporary extends boolean | undefined>(
-    this: T,
+  static override async deleteDocuments(
     ids: string[],
     context: Record<string, unknown> & {
       pendingItems?: ItemPTR2e[];
     } = {}
-  ): Promise<foundry.abstract.Document.ToStoredIf<T, Temporary>[] | undefined> {
+  ): Promise<ActiveEffect.ConfiguredInstance[]> {
     ids = Array.from(new Set(ids));
     const actor = context.parent instanceof ActorPTR2e ? context.parent : null;
     if (actor) {
@@ -441,7 +440,7 @@ class ActiveEffectPTR2e extends ActiveEffect {
       }
 
       if (items.length) {
-        const itemIds = Array.from(new Set(items.map(i => i.id))).filter(id => actor.items.has(id) && !context.pendingItems?.find(i => i.id === id));
+        const itemIds = Array.from(new Set(items.map(i => i.id!))).filter(id => actor.items.has(id) && !context.pendingItems?.find(i => i.id === id));
         if (itemIds.length) {
           await ItemPTR2e.deleteDocuments(itemIds, { pendingEffects: effects, parent: actor });
         }
@@ -454,26 +453,6 @@ class ActiveEffectPTR2e extends ActiveEffect {
 
 interface ActiveEffectPTR2e {
   constructor: typeof ActiveEffectPTR2e;
-
-  flags: {
-    core?: {
-      sourceId?: string;
-    }
-    ptr2e: {
-      itemGrants: Record<string, ItemGrantData>;
-      grantedBy: ItemGrantData | null;
-      choiceSelections: Record<string, string | number | object | null>;
-      rollOptions: {
-        [domain in keyof typeof RollOptionDomains]: Record<string, boolean>;
-      }
-      aura?: {
-        slug: string;
-        origin: ActorUUID;
-        removeOnExit: boolean;
-        amount?: number;
-      };
-    };
-  }
 
   _name: string;
 }
