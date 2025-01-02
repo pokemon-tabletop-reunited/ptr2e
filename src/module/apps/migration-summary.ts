@@ -16,6 +16,7 @@ export class MigrationSummary extends Application<MigrationSummaryOptions> {
       (app): app is MigrationSummary => app instanceof MigrationSummary,
     );
     if (existing) {
+      //@ts-expect-error - FIXME: Look into this later.
       existing.options = foundry.utils.mergeObject(existing.options, options);
       return existing;
     }
@@ -45,8 +46,7 @@ export class MigrationSummary extends Application<MigrationSummaryOptions> {
       this.options.troubleshoot || actors.successful < actors.total || items.successful < items.total;
 
     const helpResourcesText = await TextEditor.enrichHTML(
-      game.i18n.localize("PTR2E.Migrations.Summary.HelpResources"),
-      { async: true },
+      game.i18n.localize("PTR2E.Migrations.Summary.HelpResources")
     );
 
     return {

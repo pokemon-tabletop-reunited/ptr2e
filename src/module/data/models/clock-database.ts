@@ -25,11 +25,11 @@ class ClockDatabase extends foundry.abstract.DataModel<ClockDatabaseSchema> {
   }
 
   static refresh() {
-    if (canvas?.ready) game.ptr.clocks.panel.refresh({});
+    if (canvas?.ready) game.ptr.clocks.panel.refresh(true);
   }
 
-  static async update(data: ClockDatabase['_source'], refresh = true): Promise<ClockDatabase> {
-    await game.settings.set("ptr2e", "clocks", data) as Promise<ClockDatabase>;
+  static async update(data: foundry.data.fields.SchemaField.PersistedType<ClockDatabaseSchema>, refresh = true): Promise<ClockDatabase> {
+    await game.settings.set("ptr2e", "clocks", data!) 
 
     if (refresh) this.refresh();
 

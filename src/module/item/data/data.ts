@@ -5,11 +5,11 @@ interface ItemFlagsPTR2e extends AnyObject {
   core?: {
     sourceId?: string;
   }
-  ptr2e: {
-    choiceSelections: Record<string, string | number | object | null>;
+  ptr2e?: {
+    choiceSelections?: Record<string, string | number | object | null>;
     //itemGrants: Record<string, ItemGrantData>;
-    grantedBy: ItemGrantData | null;
-    rollOptions: {
+    grantedBy?: ItemGrantData | null;
+    rollOptions?: {
       [domain in keyof typeof RollOptionDomains]: Record<string, boolean>;
     }
     [key: string]: unknown;

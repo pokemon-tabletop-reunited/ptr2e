@@ -1,6 +1,5 @@
-import type { ItemPTR2e, PerkPTR2e } from "@item";
-import type { PerkSystemModel } from "@item/data/index.ts";
-
+import type { PerkPTR2e } from "@item";
+//FIXME: Move this file elsewhere. It ain't an App.
 class PerkManager {
 
   private packs: string[] = ["ptr2e.core-perks"];
@@ -34,7 +33,7 @@ class PerkManager {
     return this;
   }
 
-  isValidPerk(perk: unknown): perk is ItemPTR2e<PerkSystemModel, null> {
+  isValidPerk(perk: unknown): perk is PerkPTR2e {
     return (
       typeof perk === "object"
       && perk !== null
@@ -56,7 +55,7 @@ class PerkManager {
         items.push(item);
       }
     }
-    yield items;
+    yield items as PerkPTR2e[];
   }
 }
 

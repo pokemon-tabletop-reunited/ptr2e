@@ -4,6 +4,7 @@ import PerkGraph from "./perk-graph.ts";
 import type { ActorPTR2e } from "@actor";
 import { SummonStatistic } from "@system/statistics/summon.ts";
 import { Predicate } from "@system/predication/predication.ts";
+import type { ValueOf } from "fvtt-types/utils";
 
 export const PerkState = {
   unavailable: 0,
@@ -184,7 +185,7 @@ class PerkStore extends Collection<PerkNode> {
           node.tierInfo = (() => {
             const tiers = node.perk.system.nodes.flatMap(node => {
               if (!node.tier) return [];
-              const perk = fromUuidSync<ItemPTR2e>(node.tier.uuid);
+              const perk = fromUuidSync(node.tier.uuid) as ItemPTR2e;
               if (!(perk instanceof ItemPTR2e && perk.type === "perk")) return [];
               return { perk, tier: node.tier.rank }
             }) as { perk: PerkPTR2e, tier: number }[];

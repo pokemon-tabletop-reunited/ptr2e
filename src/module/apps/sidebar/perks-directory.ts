@@ -1,12 +1,11 @@
-import type { ItemSystemPTR } from "@item";
 import { ItemPTR2e } from "@item";
 
-class PerkDirectory extends ItemDirectory<ItemPTR2e<ItemSystemPTR, null>> {
+class PerkDirectory extends ItemDirectory {
   get popout() {
     return this._popout;
   }
 
-  static override get defaultOptions(): SidebarDirectoryOptions {
+  static override get defaultOptions(): DocumentDirectoryOptions {
     return foundry.utils.mergeObject(super.defaultOptions, {
       popOut: true
     });
@@ -19,7 +18,7 @@ class PerkDirectory extends ItemDirectory<ItemPTR2e<ItemSystemPTR, null>> {
   static override entryPartial =
     "systems/ptr2e/templates/sidebar/perk-directory-entry.hbs";
 
-  async _onCreateEntry(
+  override async _onCreateEntry(
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     event: { preventDefault: () => void; stopPropagation: () => void; currentTarget: any },
     // eslint-disable-next-line no-empty-pattern
@@ -31,7 +30,7 @@ class PerkDirectory extends ItemDirectory<ItemPTR2e<ItemSystemPTR, null>> {
     const li = button.closest(".directory-item");
     const data = { folder: li?.dataset?.folderId, type: "perk" };
     const options = { width: 320, left: window.innerWidth - 630, top: button.offsetTop, perksOnly: true };
-    return ItemPTR2e.createDialog(data, options);
+    return void ItemPTR2e.createDialog(data, options);
   }
 
   override async close(options = {}) {
@@ -58,7 +57,5 @@ class PerkDirectory extends ItemDirectory<ItemPTR2e<ItemSystemPTR, null>> {
     pop.render(true, { top: 0, left: window.innerWidth - 310 });
   }
 }
-
-interface PerkDirectory extends ItemDirectory<ItemPTR2e<ItemSystemPTR, null>> { }
 
 export { PerkDirectory };

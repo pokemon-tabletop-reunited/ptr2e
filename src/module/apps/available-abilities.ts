@@ -133,7 +133,7 @@ export class AvailableAbilitiesApp extends foundry.applications.api.HandlebarsAp
     if (!ability) return;
 
     // Confirm the deletion unless the user is holding Shift
-    return void event.shiftKey ? ability.delete() : foundry.applications.api.DialogV2.confirm({
+    return void (event.shiftKey ? ability.delete() : foundry.applications.api.DialogV2.confirm({
       yes: {
         callback: () => ability.delete(),
       },
@@ -145,7 +145,7 @@ export class AvailableAbilitiesApp extends foundry.applications.api.HandlebarsAp
           name: ability.name,
         }),
       },
-    });
+    }));
   }
 
   get actor() {

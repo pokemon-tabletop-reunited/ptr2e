@@ -1,41 +1,45 @@
 import { ActorSystemPTR2e } from "@actor";
-import type { ClockSchema } from "@module/data/models/clock.ts";
-import Clock from "@module/data/models/clock.ts";
+import Clock, { type ClockSchema } from "@module/data/models/clock.ts";
+import type { DeepPartial, MaybePromise } from "fvtt-types/utils";
 
 const CLOCK_MAX_SIZE = 16;
 const CLOCK_SIZES = [2, 3, 4, 5, 6, 8, 10, 12, 16];
 
+interface ClockEditorContext {
+  clock: Clock;
+  maxSize: number;
+  presetSizes: number[];
+  fields: Record<string, unknown>;
+  [key: string]: unknown;
+}
+
 export default class ClockEditor extends foundry.applications.api.HandlebarsApplicationMixin(
   foundry.applications.api.ApplicationV2
-) {
+)<ClockEditorContext> {
   private clock?: Clock;
   constructor(
-    options: Partial<foundry.applications.api.HandlebarsDocumentSheetConfiguration>,
+    options: DeepPartial<foundry.applications.api.ApplicationV2.Configuration>,
     clock?: Clock
   ) {
     super(options);
     this.clock = clock;
   }
 
-  static override DEFAULT_OPTIONS = foundry.utils.mergeObject(
-    super.DEFAULT_OPTIONS,
-    {
-      id: "clock-editor-{id}",
-      classes: ["clock-editor"],
-      tag: "form",
-      window: {
-        frame: true,
-        positioned: true,
-        minimizable: false,
-      },
-      form: {
-        handler: ClockEditor.#submit,
-        closeOnSubmit: true,
-        submitOnChange: false,
-      },
+  static override DEFAULT_OPTIONS = {
+    id: "clock-editor-{id}",
+    classes: ["clock-editor"],
+    tag: "form",
+    window: {
+      frame: true,
+      positioned: true,
+      minimizable: false,
     },
-    { inplace: false }
-  );
+    form: {
+      handler: ClockEditor.#submit,
+      closeOnSubmit: true,
+      submitOnChange: false,
+    },
+  }
 
   static override PARTS = {
     clocks: {
@@ -44,24 +48,18 @@ export default class ClockEditor extends foundry.applications.api.HandlebarsAppl
     },
   };
 
-  override async _renderFrame(options:foundry.applications.api.HandlebarsApplicationMixin.HandlebarsRenderOptions) {
+  override async _renderFrame(options: foundry.applications.api.HandlebarsApplicationMixin.HandlebarsRenderOptions) {
     options.window!.title = this.clock
       ? game.i18n.format("PTR2E.Clocks.Global.Editor.TitleEdit", { label: this.clock.label })
       : game.i18n.localize("PTR2E.Clocks.Global.Editor.TitleAdd");
     return super._renderFrame(options);
   }
 
-  override async _prepareContext() {
-    const context = (await super._prepareContext()) ?? {};
-    const fields = (
-      game.ptr.clocks.db.schema.fields.clocks as foundry.data.fields.ArrayField<
-        foundry.data.fields.EmbeddedDataField<Clock>
-      >
-    ).element.fields;
+  override async _prepareContext(): Promise<ClockEditorContext> {
+    const fields = game.ptr.clocks.db.schema.fields.clocks.element.fields;
     const clock = this.clock ?? new Clock();
 
     return {
-      ...context,
       clock,
       maxSize: CLOCK_MAX_SIZE,
       presetSizes: CLOCK_SIZES,
@@ -69,14 +67,14 @@ export default class ClockEditor extends foundry.applications.api.HandlebarsAppl
     };
   }
 
-  override _attachPartListeners(partId: string, htmlElement: HTMLElement, options:foundry.applications.api.HandlebarsApplicationMixin.HandlebarsRenderOptions): void {
+  override _attachPartListeners(partId: string, htmlElement: HTMLElement, options: foundry.applications.api.HandlebarsApplicationMixin.HandlebarsRenderOptions): void {
     super._attachPartListeners(partId, htmlElement, options);
 
     if (partId === "clocks") {
       const dropdown = htmlElement.querySelector<HTMLSelectElement>("ul.dropdown");
-      if(!dropdown) return;
+      if (!dropdown) return;
 
-      for(const option of dropdown.children) {
+      for (const option of dropdown.children) {
         option.addEventListener("mousedown", () => {
           const value = (option as HTMLElement).dataset.value;
           if (!value) return;
@@ -92,30 +90,30 @@ export default class ClockEditor extends foundry.applications.api.HandlebarsAppl
 
   static #submit(
     this: ClockEditor,
-    event: Event,
+    event: SubmitEvent | Event,
     _form: HTMLFormElement,
     formData: FormDataExtended
-  ) {
+  ): MaybePromise<void> {
     event.preventDefault();
 
     if (this.clock) {
-      if(this.clock.parent instanceof ActorSystemPTR2e) {
+      if (this.clock.parent instanceof ActorSystemPTR2e) {
         const clocks = foundry.utils.duplicate(this.clock.parent._source.clocks);
         const index = clocks.findIndex((c) => c.id === this.clock!.id);
         if (index === -1) {
-          clocks.push(formData.object as SourceFromSchema<ClockSchema>);
+          clocks.push(formData.object);
         }
         else {
-          clocks[index] = foundry.utils.mergeObject(clocks[index], formData.object as SourceFromSchema<ClockSchema>);
+          clocks[index] = foundry.utils.mergeObject(clocks[index], formData.object);
         }
-        return this.clock.parent.parent.update({"system.clocks": clocks});
+        return this.clock.parent.parent.update({ "system.clocks": clocks });
       }
 
-      return game.ptr.clocks.db.updateClock(
+      return void game.ptr.clocks.db.updateClock(
         this.clock.id,
-        formData.object as Partial<SourceFromSchema<ClockSchema>>
+        formData.object
       );
     }
-    return game.ptr.clocks.db.createClock(formData.object as SourceFromSchema<ClockSchema>);
+    return void game.ptr.clocks.db.createClock(formData.object as unknown as foundry.data.fields.SchemaField.PersistedType<ClockSchema>);
   }
 }

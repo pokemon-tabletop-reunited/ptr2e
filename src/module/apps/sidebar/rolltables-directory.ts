@@ -32,12 +32,12 @@ export class RollTableDirectoryPTR2e extends RollTableDirectory {
     const habitat = (event.currentTarget as HTMLLIElement).dataset.habitat as keyof typeof CONFIG.PTR.data.habitats
     const table = new HabitatRollTable({ habitat })
     await table.init()
-    table.sheet.render(true, { editable: false });
+    table.sheet!.render(true, { editable: false });
   }
 
-  protected override _getEntryContextOptions(): EntryContextOption[] {
+  protected override _getEntryContextOptions(): ContextMenuEntry[] {
     const options = super._getEntryContextOptions().map(option => {
-      const oldCondition = option.condition;
+      const oldCondition = option.condition!;
 
       option.condition = (header) => {
         try {
@@ -45,7 +45,7 @@ export class RollTableDirectoryPTR2e extends RollTableDirectory {
           if(isDynamicTable && ["OWNERSHIP.Configure", "SIDEBAR.Delete", "SIDEBAR.Duplicate"].includes(option.name)) {
             return false;
           }
-          return oldCondition(header);
+          return typeof oldCondition === "function" ? oldCondition(header) : oldCondition;
         }
         catch {
           return false;

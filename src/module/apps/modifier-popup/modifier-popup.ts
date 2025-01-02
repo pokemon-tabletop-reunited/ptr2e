@@ -1,28 +1,25 @@
-import type { CheckModifier} from "@module/effects/modifiers.ts";
+import type { CheckModifier } from "@module/effects/modifiers.ts";
 import { ModifierPTR2e } from "@module/effects/modifiers.ts";
 import type { CheckRollContext } from "@system/rolls/data.ts";
 import { htmlQuery, htmlQueryAll, tupleHasValue } from "@utils";
+import type { AnyObject, DeepPartial } from "fvtt-types/utils";
 
 export class ModifierPopup extends foundry.applications.api.HandlebarsApplicationMixin(
   foundry.applications.api.ApplicationV2
-) {
-  static override DEFAULT_OPTIONS = foundry.utils.mergeObject(
-    super.DEFAULT_OPTIONS,
-    {
-      classes: ["sheet modifier-popup"],
-      position: {
-        height: "auto",
-        width: 400,
-      },
-      form: {
-        closeOnSubmit: true,
-        submitOnChange: false,
-        handler: ModifierPopup.#onSubmit,
-      },
-      tag: "form",
+)<AnyObject> {
+  static override DEFAULT_OPTIONS = {
+    classes: ["sheet modifier-popup"],
+    position: {
+      height: "auto" as const,
+      width: 400,
     },
-    { inplace: false }
-  );
+    form: {
+      closeOnSubmit: true,
+      submitOnChange: false,
+      handler: ModifierPopup.#onSubmit,
+    },
+    tag: "form",
+  } as DeepPartial<foundry.applications.api.ApplicationV2.Configuration> & object
 
   static override PARTS: Record<string, foundry.applications.api.HandlebarsApplicationMixin.HandlebarsTemplatePart> = {
     modifiers: {
@@ -46,7 +43,7 @@ export class ModifierPopup extends foundry.applications.api.HandlebarsApplicatio
   constructor(
     check: CheckModifier,
     context: CheckRollContext,
-    options: DeepPartial<ApplicationConfigurationExpanded> = {}
+    options: DeepPartial<foundry.applications.api.ApplicationV2.Configuration> = {}
   ) {
     if (!context.actor) throw new Error("ModifierPopup requires an actor in the context");
     if (!context.type) throw new Error("ModifierPopup requires a type in the context");
@@ -82,7 +79,7 @@ export class ModifierPopup extends foundry.applications.api.HandlebarsApplicatio
     impossible: "Impossible -60",
   } as const;
 
-  override async _prepareContext(): Promise<Record<string, unknown>> {
+  override async _prepareContext(): Promise<AnyObject> {
     const challengeRating = (() => {
       if (["luck-check", "attack-roll", "pokeball-check"].includes(this.context.type!)) return null;
       const value = this.check.modifiers.find(s => s.slug === "challenge-rating")?.value;
@@ -118,7 +115,7 @@ export class ModifierPopup extends foundry.applications.api.HandlebarsApplicatio
               : "invalid";
         case "any":
           return method === "flat"
-            ? this.context.type !== "pokeball-check" 
+            ? this.context.type !== "pokeball-check"
               ? "any-flat"
               : "invalid"
             : "invalid";
@@ -215,7 +212,7 @@ export class ModifierPopup extends foundry.applications.api.HandlebarsApplicatio
         errors.push("Invalid modifier type. Please select a valid modifier type.");
       }
       if (!name || !name.trim()) {
-        if(modifierType === "crit-base") name = "Mons Caught";
+        if (modifierType === "crit-base") name = "Mons Caught";
         else name = game.i18n.localize(value < 0 ? `Penalty` : `Bonus`);
       }
       if (errors.length > 0) {
@@ -316,7 +313,7 @@ export class ModifierPopup extends foundry.applications.api.HandlebarsApplicatio
       return;
     }
     const result = formData.object;
-    const rollMode = result.rollmode as RollMode;
+    const rollMode = result.rollmode as CONST.DICE_ROLL_MODES;
 
     this.resolve({ rollMode });
     this.promise = null;
@@ -325,5 +322,5 @@ export class ModifierPopup extends foundry.applications.api.HandlebarsApplicatio
 }
 
 export interface ModifierPopupResult {
-  rollMode: RollMode;
+  rollMode: CONST.DICE_ROLL_MODES;
 }

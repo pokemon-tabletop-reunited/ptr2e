@@ -7,7 +7,7 @@ export class SettingsSidebarPTR2e extends Settings {
     });
   }
 
-  protected override _onSettingsButton(event: MouseEvent): void {
+  protected override _onSettingsButton(event: JQuery.ClickEvent): void {
     event.preventDefault();
 
     const button = event.currentTarget as HTMLElement;

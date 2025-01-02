@@ -1,32 +1,35 @@
 import Clock from "@module/data/models/clock.ts";
 import ClockEditor from "./clock-editor.ts";
 import Sortable from "sortablejs";
+import type { MaybePromise } from "fvtt-types/utils";
+
+interface ClockPanelContext {
+  clocks: Clock[];
+  editable: boolean;
+  [key: string]: unknown;
+}
 
 export default class ClockPanel extends foundry.applications.api.HandlebarsApplicationMixin(
   foundry.applications.api.ApplicationV2
-) {
+)<ClockPanelContext> {
   public refresh = foundry.utils.debounce(this.render, 100);
 
-  static override DEFAULT_OPTIONS = foundry.utils.mergeObject(
-    super.DEFAULT_OPTIONS,
-    {
-      classes: ["clock-panel sheet"],
-      tag: "aside",
-      position: {
-        width: 300,
-        height: "auto",
-      },
-      window: {
-        minimizable: false,
-        frame: false,
-        positioned: false,
-      },
-      actions: {
-        "add-clock": ClockPanel.#onAddClock,
-      },
+  static override DEFAULT_OPTIONS = {
+    classes: ["clock-panel sheet"],
+    tag: "aside",
+    position: {
+      width: 300,
+      height: "auto" as const,
     },
-    { inplace: false }
-  );
+    window: {
+      minimizable: false,
+      frame: false,
+      positioned: false,
+    },
+    actions: {
+      "add-clock": ClockPanel.#onAddClock as unknown as ((event: PointerEvent, target: HTMLElement) => MaybePromise<void>)
+    },
+  };
 
   static override PARTS = {
     clocks: {
@@ -43,20 +46,18 @@ export default class ClockPanel extends foundry.applications.api.HandlebarsAppli
     return game.ptr.clocks.db.get(id);
   }
 
-  override async _renderFrame(options:foundry.applications.api.HandlebarsApplicationMixin.HandlebarsRenderOptions) {
+  override async _renderFrame(options: foundry.applications.api.HandlebarsApplicationMixin.HandlebarsRenderOptions) {
     const frame = await super._renderFrame(options);
     if (game.user.isGM) frame.classList.add("editable");
     this.window.close?.remove();
     return frame;
   }
 
-  override async _prepareContext() {
-    const context = (await super._prepareContext()) ?? {};
+  override async _prepareContext(): Promise<ClockPanelContext> {
     const isGM = game.user.isGM;
     const clocks = isGM ? this.clocks : this.clocks.filter((c) => !c.private);
 
     return {
-      ...context,
       clocks,
       editable: isGM,
     };
@@ -65,7 +66,7 @@ export default class ClockPanel extends foundry.applications.api.HandlebarsAppli
   override _attachPartListeners(
     partId: string,
     htmlElement: HTMLElement,
-    options:foundry.applications.api.HandlebarsApplicationMixin.HandlebarsRenderOptions
+    options: foundry.applications.api.HandlebarsApplicationMixin.HandlebarsRenderOptions
   ): void {
     super._attachPartListeners(partId, htmlElement, options);
     if (partId === "clocks") {
@@ -207,6 +208,6 @@ export default class ClockPanel extends foundry.applications.api.HandlebarsAppli
 
   static #onAddClock(this: ClockPanel, event: Event, clock?: Clock) {
     event.preventDefault();
-    return new ClockEditor({}, clock instanceof Clock ? clock : undefined).render(true);
+    return void new ClockEditor({}, clock instanceof Clock ? clock : undefined).render(true);
   }
 }

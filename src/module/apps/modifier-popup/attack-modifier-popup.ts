@@ -1,26 +1,22 @@
-import type { CheckModifier} from "@module/effects/modifiers.ts";
+import type { CheckModifier } from "@module/effects/modifiers.ts";
 import { ModifierPTR2e } from "@module/effects/modifiers.ts";
 import type { CheckRollContext } from "@system/rolls/data.ts";
 import { ModifierPopup } from "./modifier-popup.ts";
-import type { ActorPTR2e } from "@actor";
 import type { CheckContext } from "@system/data.ts";
 import { htmlQueryAll, htmlQuery, tupleHasValue } from "@utils";
 import type { AttackPTR2e } from "@data";
+import type { DeepPartial } from "fvtt-types/utils";
 
 export class AttackModifierPopup extends ModifierPopup {
-  static override DEFAULT_OPTIONS = foundry.utils.mergeObject(
-    super.DEFAULT_OPTIONS,
-    {
-      classes: ["attack"],
-      position: {
-        width: 440,
-      },
-      form: {
-        handler: AttackModifierPopup.#onSubmit,
-      },
+  static override DEFAULT_OPTIONS = {
+    classes: ["attack"],
+    position: {
+      width: 440,
     },
-    { inplace: false }
-  );
+    form: {
+      handler: AttackModifierPopup.#onSubmit,
+    },
+  }
 
   static override PARTS: Record<string, foundry.applications.api.HandlebarsApplicationMixin.HandlebarsTemplatePart> = {
     modifiers: {
@@ -43,7 +39,7 @@ export class AttackModifierPopup extends ModifierPopup {
     context: Omit<CheckRollContext, "target" | "targets"> & {
       contexts: Record<ActorUUID, CheckContext>;
     },
-    options: DeepPartial<ApplicationConfigurationExpanded> = {}
+    options: DeepPartial<foundry.applications.api.ApplicationV2.Configuration> = {}
   ) {
     super(check, context, options);
 
@@ -109,7 +105,7 @@ export class AttackModifierPopup extends ModifierPopup {
           appliesTo: (() => {
             if (!m.appliesTo || m.appliesTo.size === 0) {
               return this.targets.map((target) => {
-                const actor = fromUuidSync(target) as ActorPTR2e;
+                const actor = fromUuidSync(target) as Actor.ConfiguredInstance;
                 return {
                   name: actor?.name ?? "",
                   img: actor?.img ?? "",
@@ -123,7 +119,7 @@ export class AttackModifierPopup extends ModifierPopup {
             const output = [];
             for (const [key, value] of m.appliesTo.entries()) {
               seen.add(key);
-              const actor = fromUuidSync(key) as ActorPTR2e;
+              const actor = fromUuidSync(key) as Actor.ConfiguredInstance;
               output.push({
                 name: actor?.name ?? "",
                 img: actor?.img ?? "",
@@ -133,7 +129,7 @@ export class AttackModifierPopup extends ModifierPopup {
             }
             for (const target of this.targets) {
               if (seen.has(target)) continue;
-              const actor = fromUuidSync(target) as ActorPTR2e;
+              const actor = fromUuidSync(target) as Actor.ConfiguredInstance;
               output.push({
                 name: actor?.name ?? "",
                 img: actor?.img ?? "",
@@ -160,7 +156,7 @@ export class AttackModifierPopup extends ModifierPopup {
             const output = [];
             for (const [key, value] of m.appliesTo.entries()) {
               seen.add(key);
-              const actor = fromUuidSync(key) as ActorPTR2e;
+              const actor = fromUuidSync(key) as Actor.ConfiguredInstance;
               output.push({
                 name: actor?.name ?? "",
                 img: actor?.img ?? "",
@@ -170,7 +166,7 @@ export class AttackModifierPopup extends ModifierPopup {
             }
             for (const target of this.targets) {
               if (seen.has(target)) continue;
-              const actor = fromUuidSync(target) as ActorPTR2e;
+              const actor = fromUuidSync(target) as Actor.ConfiguredInstance;
               output.push({
                 name: actor?.name ?? "",
                 img: actor?.img ?? "",
@@ -201,7 +197,7 @@ export class AttackModifierPopup extends ModifierPopup {
     })();
 
     const variants = (() => {
-      if(!this.context.variants?.length || !this.context.actor) return null;
+      if (!this.context.variants?.length || !this.context.actor) return null;
 
       interface AttackVariant {
         slug: string;
@@ -214,29 +210,29 @@ export class AttackModifierPopup extends ModifierPopup {
       let original = false;
       let selected = false;
 
-      for(const variant of this.context.variants) {
+      for (const variant of this.context.variants) {
         const action = this.context.actor.actions.attack.get(variant);
-        if(!action) continue;
-        if(!action.variant) original = true;
-        if(this.context.action === variant) {
-          variantMap.set(variant, {slug: variant, uuid: action.uuid, label: action.name, category: action.category, selected: true });
+        if (!action) continue;
+        if (!action.variant) original = true;
+        if (this.context.action === variant) {
+          variantMap.set(variant, { slug: variant, uuid: action.uuid, label: action.name, category: action.category, selected: true });
           selected = true;
         }
         else {
-          variantMap.set(variant, {slug: variant, uuid: action.uuid, label: action.name, category: action.category});
-        }  
+          variantMap.set(variant, { slug: variant, uuid: action.uuid, label: action.name, category: action.category });
+        }
       }
 
       const variants = Array.from(variantMap.values()).sort((a, b) => a.label.localeCompare(b.label));
-      if(!original) {
+      if (!original) {
         const original = this.context.actor.actions.attack.get(variants[0].slug)!.original as AttackPTR2e;
-        if(!original) return null;
+        if (!original) return null;
         variants.unshift({
           slug: original.slug,
-          label: original.slug === 'fling' ? `${original.name} (No Item)` :`${original.name} (Original)`,
+          label: original.slug === 'fling' ? `${original.name} (No Item)` : `${original.name} (Original)`,
           category: original.category,
           uuid: original.uuid,
-          ...(!selected ? {selected: true} : {})
+          ...(!selected ? { selected: true } : {})
         })
       }
       return variants;
@@ -315,7 +311,7 @@ export class AttackModifierPopup extends ModifierPopup {
         });
 
         avatar.addEventListener("dblclick", async () => {
-          const actor = (await fromUuid(uuid)) as ActorPTR2e;
+          const actor = (await fromUuid(uuid)) as Actor.ConfiguredInstance;
           if (!actor) return;
 
           const token = actor.getActiveTokens(false)[0];
@@ -330,7 +326,7 @@ export class AttackModifierPopup extends ModifierPopup {
           event.preventDefault();
           if (!canvas.ready) return;
 
-          const actor = (await fromUuid(uuid)) as ActorPTR2e;
+          const actor = (await fromUuid(uuid)) as Actor.ConfiguredInstance;
           if (!actor) return;
 
           const tokens = actor.getActiveTokens(false);
@@ -480,9 +476,9 @@ export class AttackModifierPopup extends ModifierPopup {
     }
 
     const result = formData.object;
-    const rollMode = result.rollMode as RollMode;
+    const rollMode = result.rollMode as CONST.DICE_ROLL_MODES;
 
-    const consumePP = result["consume-pp"] == true;
+    const consumePP = (result["consume-pp"] as unknown as boolean) == true;
     this.context.consumePP = consumePP;
 
     this.resolve({ rollMode });
@@ -495,17 +491,17 @@ export class AttackModifierPopup extends ModifierPopup {
     const variantSlug = select.value;
 
     const uuid = this.context.actor?.uuid ?? this.context.attack?.actor?.uuid;
-    const origin = await fromUuid<ActorPTR2e>(uuid);
-    if(!origin) return;
+    const origin = await fromUuid<Actor.ConfiguredInstance>(uuid);
+    if (!origin) return;
 
     const variant = origin.actions.attack.get(variantSlug);
-    if(!variant) return void ui.notifications.error(`Unable to find variant ${variantSlug}`);
+    if (!variant) return void ui.notifications.error(`Unable to find variant ${variantSlug}`);
 
     this.resolve?.(null);
     this.promise = null;
     this.resolve = undefined;
 
-    variant.roll({modifierDialog: this});
+    variant.roll({ modifierDialog: this });
   }
 
   updateDetails(
@@ -533,5 +529,5 @@ export class AttackModifierPopup extends ModifierPopup {
 
 export interface ModifierPopupResult {
   modifiers: ModifierPTR2e[];
-  rollMode: RollMode;
+  rollMode: CONST.DICE_ROLL_MODES;
 }

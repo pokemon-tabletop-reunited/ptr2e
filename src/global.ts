@@ -24,6 +24,7 @@ import type { CharacterCombatantSystem, CombatantPTR2e, CombatPTR2e, CombatSyste
 import type { ScenePTR2e } from "@module/canvas/scene.ts";
 import type { TokenPTR2e } from "@module/canvas/token/object.ts";
 import type { TokenDocumentPTR2e } from "@module/canvas/token/document.ts";
+import type { PerkDirectory } from "@module/apps/sidebar/perks-directory.ts";
 
 declare global {
   // interface ConfigPTR2e extends ConfiguredConfig {
@@ -119,6 +120,9 @@ declare global {
 
   interface CONFIG {
     PTR: typeof PTRCONFIG;
+    ui: CONFIG.UI & {
+      perksTab: typeof PerkDirectory;
+    }
   }
 
   interface AssumeHookRan {

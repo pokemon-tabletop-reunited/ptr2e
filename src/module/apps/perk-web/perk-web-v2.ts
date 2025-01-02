@@ -1,4 +1,4 @@
-import type { ApplicationConfigurationExpanded} from "../appv2-expanded.ts";
+import type { ApplicationConfigurationExpanded } from "../appv2-expanded.ts";
 import { ApplicationV2Expanded } from "../appv2-expanded.ts";
 import type { ActorPTR2e } from "@actor";
 import { ChoiceSetChangeSystem, GrantEffectChangeSystem, GrantItemChangeSystem, Trait } from "@data";
@@ -6,16 +6,16 @@ import type { MovePTR2e, PerkPTR2e, SpeciesPTR2e } from "@item";
 import { ItemPTR2e } from "@item";
 import Tagify from "@yaireo/tagify";
 import Sortable from "sortablejs";
-import type { PerkNode, PerkPurchaseState} from "./perk-store.ts";
+import type { PerkNode, PerkPurchaseState } from "./perk-store.ts";
 import PerkStore, { PerkState } from "./perk-store.ts";
 import type { ActiveEffectPTR2e } from "@effects";
-import type { LevelUpMoveSchema } from "@item/data/species.ts";
 import { createHTMLElement, fontAwesomeIcon, htmlClosest, htmlQuery, htmlQueryAll, ImageResolver, isObject, objectHasKey, sluggify } from "@utils";
 import { CompendiumBrowserPerkTab } from "../compendium-browser/tabs/perk.ts";
 import type { CheckboxData, RangesInputData, RenderResultListOptions, SelectData, SliderData } from "../compendium-browser/tabs/data.ts";
 import noUiSlider from "nouislider";
+import type { AnyObject, DeepPartial } from "fvtt-types/utils";
 
-export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMixin(ApplicationV2Expanded) {
+export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMixin(ApplicationV2Expanded)<AnyObject> {
   static override DEFAULT_OPTIONS = foundry.utils.mergeObject(
     super.DEFAULT_OPTIONS,
     {
@@ -33,7 +33,7 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
       actions: {
         "toggle-edit-mode": function (this: PerkWebApp) {
           this.editMode = !this.editMode;
-          if (this.editMode) {
+          if (this.editMode) { //@ts-expect-error - Protected method
             if (!ui.perksTab.popout || ui.perksTab.popout._minimized) ui.perksTab.renderPopout();
 
             if (game.settings.get("ptr2e", "dev-mode")) {
@@ -69,8 +69,8 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
           if (this.currentNode.perk.system.variant === "tiered" && this.currentNode.perk.system.mode === "replace") {
             const current = this.actor.perks.get(this.currentNode.perk.slug);
             const oldChoiceSets = new Map<string, ChoiceSetChangeSystem>(current?.effects.contents.flatMap(effect =>
-              (effect as ActiveEffectPTR2e).changes.flatMap(change => change.type === ChoiceSetChangeSystem.TYPE ? change : []).flat() as ChoiceSetChangeSystem[]
-            ).map(change => [change.rollOption ?? change.flag, change]));
+              effect.changes.flatMap(change => change.type === ChoiceSetChangeSystem.TYPE ? change : []).flat() as ChoiceSetChangeSystem[]
+            ).map(change => [change.rollOption ?? change.flag!, change]));
 
             const newPerk = perk.clone({
               system: {
@@ -79,7 +79,7 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
               }
             }).toObject()
 
-            for (const effect of newPerk.effects as ActiveEffectPTR2e["_source"][]) {
+            for (const effect of newPerk.effects) {
               for (const csChange of effect.system.changes.flatMap(change => change.type === ChoiceSetChangeSystem.TYPE ? change : []) as ChoiceSetChangeSystem[]) {
                 const old = oldChoiceSets.get(csChange.rollOption ?? csChange.flag);
                 if (!old || !old.selection) continue;
@@ -89,7 +89,7 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
             }
 
             const hasEffectGrants = newPerk.effects.some(effect =>
-              (effect as ActiveEffectPTR2e['_source']).system.changes.some(change => [GrantItemChangeSystem.TYPE, GrantEffectChangeSystem.TYPE].includes(change.type))
+              effect.system.changes.some(change => [GrantItemChangeSystem.TYPE, GrantEffectChangeSystem.TYPE].includes(change.type))
             );
 
             if (current) {
@@ -149,7 +149,7 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
 
             const oldChoiceSets = new Map<string, ChoiceSetChangeSystem>(current?.effects.contents.flatMap(effect =>
               (effect as ActiveEffectPTR2e).changes.flatMap(change => change.type === ChoiceSetChangeSystem.TYPE ? change : []).flat() as ChoiceSetChangeSystem[]
-            ).map(change => [change.rollOption ?? change.flag, change]));
+            ).map(change => [change.rollOption ?? change.flag!, change]));
 
             const newPerk = perk.clone({
               system: {
@@ -158,7 +158,7 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
               }
             }).toObject()
 
-            for (const effect of newPerk.effects as ActiveEffectPTR2e["_source"][]) {
+            for (const effect of newPerk.effects) {
               for (const csChange of effect.system.changes.flatMap(change => change.type === ChoiceSetChangeSystem.TYPE ? change : []) as ChoiceSetChangeSystem[]) {
                 const old = oldChoiceSets.get(csChange.rollOption ?? csChange.flag);
                 if (!old || !old.selection) continue;
@@ -168,7 +168,7 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
             }
 
             const hasEffectGrants = newPerk.effects.some(effect =>
-              (effect as ActiveEffectPTR2e['_source']).system.changes.some(change => [GrantItemChangeSystem.TYPE, GrantEffectChangeSystem.TYPE].includes(change.type))
+              effect.system.changes.some(change => [GrantItemChangeSystem.TYPE, GrantEffectChangeSystem.TYPE].includes(change.type))
             );
 
             newPerk.flags ??= {};
@@ -220,7 +220,7 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
           const level = this.actor.system.advancement.level;
           const currentMoveSlugs = new Set(this.actor.itemTypes.move.map(move => move.slug));
           const newMoves = await (async () => {
-            const levelUpMoves = (species.system.moves.levelUp as ModelPropsFromSchema<LevelUpMoveSchema>[]).filter((move) => move.level <= level && !currentMoveSlugs.has(sluggify(move.name)));
+            const levelUpMoves = species.system.moves.levelUp.filter((move) => move.level <= level && !currentMoveSlugs.has(sluggify(move.name)));
 
             return (await Promise.all(
               levelUpMoves.map(async (move) => fromUuid<MovePTR2e>(move.uuid))
@@ -389,7 +389,7 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
     this.actor = actor;
   }
 
-  override async _prepareContext(options?: foundry.applications.api.HandlebarsApplicationMixin.HandlebarsRenderOptions | undefined) {
+  override async _prepareContext(options: foundry.applications.api.HandlebarsApplicationMixin.HandlebarsRenderOptions): Promise<AnyObject> {
     const maxRow = 250;
     const maxCol = 250;
 
@@ -536,7 +536,11 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
     }
   }
 
-  override _preparePartContext(partId: string, context: ApplicationRenderContext): Promise<ApplicationRenderContext> {
+  override _preparePartContext(
+    partId: string,
+    context: AnyObject,
+    options: foundry.applications.api.HandlebarsApplicationMixin.HandlebarsRenderOptions
+  ): Promise<AnyObject> {
     if (partId === "hudZoom") {
       context.zoomLevels = this.zoomLevels;
       context.zoomLevel = this._zoomAmount;
@@ -547,7 +551,7 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
       (context.perk as Record<string, unknown>).prerequisites = perk.system.getPredicateStrings();
     }
 
-    return super._preparePartContext(partId, context);
+    return super._preparePartContext(partId, context, options);
   }
 
   #allTraits: { value: string; label: string, type?: Trait["type"] }[] | undefined;
@@ -568,7 +572,7 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
         if (value === "global") {
           return this.setWeb(null);
         }
-        const species = await fromUuid<SpeciesPTR2e>(value);
+        const species = await fromUuid(value) as SpeciesPTR2e | null;
         this.setWeb(species ?? null);
       });
     }
@@ -1139,7 +1143,7 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
       const nameAnchor = liElement.querySelector<HTMLAnchorElement>("div.name > a");
       if (nameAnchor) {
         nameAnchor.addEventListener("click", async () => {
-          const document = await fromUuid<PerkPTR2e>(entryUuid);
+          const document = await fromUuid(entryUuid) as PerkPTR2e
           let node = this._perkStore.nodeFromSlug(document?.slug ?? "");
           if (!node) return;
 
@@ -1180,7 +1184,7 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
     }
   }
 
-  override _onRender(context: foundry.applications.api.ApplicationRenderContext, options: foundry.applications.api.HandlebarsApplicationMixin.HandlebarsRenderOptions): void {
+  override _onRender(context: DeepPartial<AnyObject>, options: foundry.applications.api.HandlebarsApplicationMixin.HandlebarsRenderOptions): void {
     super._onRender(context, options);
 
     this.renderSVG();
@@ -1417,7 +1421,7 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
       return await PerkWebApp.refresh.call(this);
     }
 
-    this.web = species.uuid;
+    this.web = species.uuid as ItemUUID;
     this.speciesEvolutions = await species.system.getEvolutionPerks(!!this.actor?.system.shiny);
     this.underdogPerks = this.actor ? await this.actor.getUnderdogPerks() : [];
     await PerkWebApp.refresh.call(this);
@@ -1434,7 +1438,7 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
     }, 150);
   }
 
-  override async _onDrop(event: DragEvent, itemData?: DropCanvasData[]) {
+  override async _onDrop(event: DragEvent, itemData?: TokenLayer.DropData[]) {
     if (!this.editMode) return;
     const element = this.element;
     const grid = element.querySelector<HTMLElement>(".perk-grid");
@@ -1449,7 +1453,7 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
           })
         )
         : await (async () => {
-          const data = TextEditor.getDragEventData(event) as DropCanvasData
+          const data = TextEditor.getDragEventData(event)
           if (!data) return [];
           const perk = await fromUuid(data.uuid) as PerkPTR2e;
           if (!(perk instanceof ItemPTR2e && perk.type === "perk")) return [];
@@ -1500,13 +1504,11 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
       _id: primaryEntry.perk._id,
       "system.global": this.web === "global",
       "system.nodes": (() => {
-        const nodes = primaryEntry.perk.system.toObject().nodes as Required<DeepPartial<PerkPTR2e['system']['nodes']>>;
+        const nodes = primaryEntry.perk.system.toObject().nodes;
         if (!currentlyOnWeb) {
           if (primaryEntry.perk.system.variant === "multi" || !nodes[0]) {
-            nodes.push({
-              x: i,
-              y: j,
-            })
+            //@ts-expect-error - Correct properties.
+            nodes.push({ x: i, y: j, })
           }
           else {
             nodes[0].x = i;
@@ -1517,10 +1519,8 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
         const index = primaryEntry.perk.system.nodes.indexOf(currentlyOnWeb.node);
         if (index === -1) {
           if (primaryEntry.perk.system.variant === "multi" || !nodes.length) {
-            nodes.push({
-              x: i,
-              y: j,
-            })
+            //@ts-expect-error - Correct properties.
+            nodes.push({ x: i, y: j, })
           }
           return nodes;
         };
@@ -1599,13 +1599,11 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
       updates[pack].push({
         _id: entry.perk._id,
         "system.nodes": (() => {
-          const nodes = entry.perk.system.toObject().nodes as Required<DeepPartial<PerkPTR2e['system']['nodes']>>;
+          const nodes = entry.perk.system.toObject().nodes
           if (!currentlyOnWeb) {
             if (entry.perk.system.variant === "multi" || !nodes[0]) {
-              nodes.push({
-                x: i,
-                y: j,
-              })
+              //@ts-expect-error - Correct properties.
+              nodes.push({ x: i, y: j, })
             }
             else {
               nodes[0].x = i;
@@ -1616,10 +1614,8 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
           const index = entry.perk.system.nodes.indexOf(currentlyOnWeb.node);
           if (index === -1) {
             if (entry.perk.system.variant === "multi" || !nodes.length) {
-              nodes.push({
-                x: i,
-                y: j,
-              })
+              //@ts-expect-error - Correct properties.
+              nodes.push({ x: i, y: j, })
             }
             return nodes;
           };
@@ -1663,12 +1659,12 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
     return;
   }
 
-  override _onFirstRender(context: foundry.applications.api.ApplicationRenderContext, options: foundry.applications.api.HandlebarsApplicationMixin.HandlebarsRenderOptions): void {
+  override _onFirstRender(context: DeepPartial<AnyObject>, options: foundry.applications.api.HandlebarsApplicationMixin.HandlebarsRenderOptions): void {
     super._onFirstRender(context, options);
 
     if (this.actor) {
-      this.actor.sheet.setPosition({ left: 270, top: 20 });
-      this.actor.sheet.minimize();
+      this.actor.sheet!.setPosition({ left: 270, top: 20 });
+      this.actor.sheet!.minimize();
     }
 
     if (navigator.userAgent.includes("FoundryVirtualTabletop")) {
@@ -1677,7 +1673,7 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
         content: "<p>We've detected you're using the Foundry VTT Electron Client as your web browser.</p><p>Due to a problem in the older version of the Electron Client that Foundry V12 uses, the Perk Web's zoom feature is broken.</p><p>Since this is a browser issue, we cannot fix this at a system level, luckily, with Foundry V13, the Electron Version has been updated and this issue is fixed.</p><p>For now, you can still use the Perk Web, but the zoom feature will not work as intended.</p><p>As thus, we recommend using a different browser for the best experience.</p>",
         speaker: ChatMessage.getSpeaker({ alias: "PTR2e" }),
         whisper: [game.user.id]
-      }).then(message => ui.chat.renderPopout(message!));
+      }).then(ui.chat.renderPopout);
     }
   }
 
