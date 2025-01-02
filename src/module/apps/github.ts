@@ -1,66 +1,62 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import type { ActionPTR2e } from "@data";
-import type { ItemSystemPTR } from "@item";
 import { ItemPTR2e } from "@item";
 import type { DocumentSheetV2 } from "@item/sheets/document.ts";
 import { isObject } from "@utils";
 import { ApplicationV2Expanded } from "./appv2-expanded.ts";
+import type { DeepPartial } from "fvtt-types/utils";
 
 class GithubSheet extends foundry.applications.api.HandlebarsApplicationMixin(ApplicationV2Expanded) {
-  static override DEFAULT_OPTIONS = foundry.utils.mergeObject(
-    super.DEFAULT_OPTIONS,
-    {
-      id: "github-commit-manager",
-      tag: "form",
-      classes: ["sheet", "github-commit-manager", "default-sheet"],
-      position: {
-        width: 565,
-      },
-      window: {
-        title: "Github Commit Manager",
-        minimizable: true,
-        resizable: true,
-      },
-      actions: {
-        finalize: async function (this: GithubSheet) {
-          ui.notifications.info("Finalizing commit to Github");
-
-          const commitMessage = this.element.querySelector<HTMLTextAreaElement>("[name='commit-message']")?.value;
-          const prTitle = this.element.querySelector<HTMLInputElement>("[name='pr-title']")?.value;
-
-          const result = await GithubManager.finalizeCommitToGithub({ message: commitMessage, title: prTitle });
-          if (result.success) {
-            ui.notifications.info("Successfully finalized commit to Github");
-          }
-          this.close();
-        },
-        cancel: async function (this: GithubSheet) {
-          if (this.ongoing) {
-            ui.notifications.info("Cancelling commit to Github");
-            await GithubManager.finalizeCommitToGithub({ deletePR: true });
-          }
-          this.close();
-        },
-        delete: async function (this: GithubSheet, event: MouseEvent) {
-          if (!this.ongoing) return;
-
-          const button = event.target as HTMLButtonElement;
-          const path = button.dataset.path;
-          if (!path) return;
-          button.disabled = true;
-
-          const result = await GithubManager.finalizeCommitToGithub({ deletePR: path });
-          if (result.success) {
-            ui.notifications.info("Successfully deleted entry");
-          }
-          return this.render(true);
-        },
-      }
+  static override DEFAULT_OPTIONS = {
+    id: "github-commit-manager",
+    tag: "form",
+    classes: ["sheet", "github-commit-manager", "default-sheet"],
+    position: {
+      width: 565,
     },
-    { inplace: false }
-  );
+    window: {
+      title: "Github Commit Manager",
+      minimizable: true,
+      resizable: true,
+    },
+    actions: {
+      finalize: async function (this: GithubSheet) {
+        ui.notifications.info("Finalizing commit to Github");
 
-  static override PARTS: Record<string, foundry.applications.api.HandlebarsTemplatePart> = {
+        const commitMessage = this.element.querySelector<HTMLTextAreaElement>("[name='commit-message']")?.value;
+        const prTitle = this.element.querySelector<HTMLInputElement>("[name='pr-title']")?.value;
+
+        const result = await GithubManager.finalizeCommitToGithub({ message: commitMessage, title: prTitle });
+        if (result.success) {
+          ui.notifications.info("Successfully finalized commit to Github");
+        }
+        this.close();
+      },
+      cancel: async function (this: GithubSheet) {
+        if (this.ongoing) {
+          ui.notifications.info("Cancelling commit to Github");
+          await GithubManager.finalizeCommitToGithub({ deletePR: true });
+        }
+        this.close();
+      },
+      delete: async function (this: GithubSheet, event: MouseEvent) {
+        if (!this.ongoing) return;
+
+        const button = event.target as HTMLButtonElement;
+        const path = button.dataset.path;
+        if (!path) return;
+        button.disabled = true;
+
+        const result = await GithubManager.finalizeCommitToGithub({ deletePR: path });
+        if (result.success) {
+          ui.notifications.info("Successfully deleted entry");
+        }
+        return void this.render(true);
+      },
+    }
+  }
+
+  static override PARTS: Record<string, foundry.applications.api.HandlebarsApplicationMixin.HandlebarsTemplatePart> = {
     main: {
       id: "main",
       template: "systems/ptr2e/templates/apps/github-main.hbs",
@@ -70,7 +66,7 @@ class GithubSheet extends foundry.applications.api.HandlebarsApplicationMixin(Ap
 
   ongoing = false;
 
-  override async _prepareContext(options?: HandlebarsRenderOptions | undefined) {
+  override async _prepareContext(options: DeepPartial<foundry.applications.api.HandlebarsApplicationMixin.HandlebarsRenderOptions>) {
     const context = await super._prepareContext(options);
 
     const status = await GithubManager.getCommitStatus();
@@ -98,9 +94,9 @@ class GithubManager {
     summon: "ptr2e.core-summons"
   } as const;
 
-  static async getExistingItem<TDocument extends ItemPTR2e>(
+  static async getExistingItem<TDocument extends Item.ConfiguredInstance>(
     item: TDocument,
-    pack: CompendiumCollection<ItemPTR2e<ItemSystemPTR, null>>
+    pack: CompendiumCollection<Item.ConfiguredInstance>
   ) {
     const existing = await (async () => {
       const sourceId = item.flags?.core?.sourceId;
@@ -122,7 +118,7 @@ class GithubManager {
     item: TDocument["_source"],
     packItem: TDocument["_source"]
   ) {
-    const diff = foundry.utils.diffObject<Record<string, any>>(packItem, item);
+    const diff = foundry.utils.diffObject(packItem, item) as any;
     if (diff.flags?.core) {
       delete diff.flags.core;
       if (foundry.utils.isEmpty(diff.flags)) {
@@ -185,6 +181,7 @@ class GithubManager {
       for (const [key, action] of Object.entries<ActionPTR2e>(diff.system.actions)) {
         const index = parseInt(key);
         if (actions[index]) {
+          //@ts-expect-error - Holy shit that's a mess
           actions[index] = foundry.utils.mergeObject(actions[index], action, { inplace: false });
         } else {
           data.system.actions.push(action);
@@ -280,7 +277,7 @@ class GithubManager {
 
     const pack = game.packs.get(
       GithubManager.VALID_DOCUMENT_TYPES[document.type]
-    ) as CompendiumCollection<ItemPTR2e<ItemSystemPTR, null>>;
+    );
     if (!pack) {
       ui.notifications.error(`Cannot find pack for ${document.type}`);
       return;

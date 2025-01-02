@@ -1,37 +1,34 @@
 import type { ActorPTR2e } from "@actor";
-import { ApplicationV2Expanded } from "./appv2-expanded.ts";
+import { ApplicationV2Expanded, type ApplicationConfigurationExpanded} from "./appv2-expanded.ts";
 import { ItemPTR2e } from "@item";
 import { ActionEditor } from "./action-editor.ts";
+import type { DeepPartial } from "fvtt-types/utils";
 
 export class KnownActionsApp extends foundry.applications.api.HandlebarsApplicationMixin(ApplicationV2Expanded) {
-  static override DEFAULT_OPTIONS = foundry.utils.mergeObject(
-    super.DEFAULT_OPTIONS,
-    {
-      tag: "aside",
-      classes: ["sheet", "known-actions-sheet"],
-      position: {
-        height: 'auto',
-        width: 230,
-      },
-      window: {
-        minimizable: true,
-        resizable: false,
-      },
-      dragDrop: [
-        {
-          dragSelector: ".action",
-          dropSelector: ".window-content",
-        }
-      ],
-      actions: {
-        "action-edit": KnownActionsApp._onEditAction,
-        "action-delete": KnownActionsApp._onDeleteAction,
-      }
+  static override DEFAULT_OPTIONS = {
+    tag: "aside",
+    classes: ["sheet", "known-actions-sheet"],
+    position: {
+      height: 'auto' as const,
+      width: 230,
     },
-    { inplace: false }
-  );
+    window: {
+      minimizable: true,
+      resizable: false,
+    },
+    dragDrop: [
+      {
+        dragSelector: ".action",
+        dropSelector: ".window-content",
+      }
+    ],
+    actions: {
+      "action-edit": KnownActionsApp._onEditAction,
+      "action-delete": KnownActionsApp._onDeleteAction,
+    }
+  } //as (DeepPartial<foundry.applications.api.ApplicationV2.Configuration> & DeepPartial<ExpandedConfiguration>);
 
-  static override PARTS: Record<string, foundry.applications.api.HandlebarsTemplatePart> = {
+  static override PARTS: Record<string, foundry.applications.api.HandlebarsApplicationMixin.HandlebarsTemplatePart> = {
     actions: {
       id: "actions",
       template: "systems/ptr2e/templates/apps/known-attacks.hbs",
@@ -45,7 +42,7 @@ export class KnownActionsApp extends foundry.applications.api.HandlebarsApplicat
     return `${this.document.name}'s Known Attacks`;
   }
 
-  constructor(document: ActorPTR2e, options: Partial<foundry.applications.api.ApplicationConfiguration> = {}) {
+  constructor(document: ActorPTR2e, options: DeepPartial<ApplicationConfigurationExpanded> = {}) {
     options.id = `known-attacks-${document.id}`;
     super(options);
     this.document = document;
@@ -84,7 +81,7 @@ export class KnownActionsApp extends foundry.applications.api.HandlebarsApplicat
   }
 
   override async _onDrop(event: DragEvent) {
-    const data = TextEditor.getDragEventData<DropCanvasData>(event);
+    const data = TextEditor.getDragEventData(event);
     const item = await ItemPTR2e.fromDropData(data);
     if (!item || item.type !== "move" || item.parent?.uuid === this.document.uuid) return;
 
@@ -99,14 +96,14 @@ export class KnownActionsApp extends foundry.applications.api.HandlebarsApplicat
     };
   }
 
-  override async _renderFrame(options: foundry.applications.api.HandlebarsRenderOptions) {
+  override async _renderFrame(options: foundry.applications.api.HandlebarsApplicationMixin.HandlebarsRenderOptions) {
     const frame = await super._renderFrame(options);
 
     // Add send to chat button
     const infoLabel = game.i18n.localize("PTR2E.ActorSheet.KnownAttacks.hint");
     const info = `<button type="button" class="header-control fa-solid fa-circle-question info-tooltip" 
                                 data-tooltip="${infoLabel}" aria-label="${infoLabel}" data-tooltip-direction="UP"></button>`;
-    this.window.controls.insertAdjacentHTML("afterend", info);
+    this.window.controls!.insertAdjacentHTML("afterend", info);
 
     return frame;
   }
@@ -165,7 +162,6 @@ export class KnownActionsApp extends foundry.applications.api.HandlebarsApplicat
   /** @override */
   override _onClose() {
     if (!this.actor) return;
-    //@ts-expect-error - AppV1 Compatibility
     delete this.actor.apps[this.id];
   }
 }

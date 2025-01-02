@@ -195,6 +195,11 @@ declare global {
         team: string[];
       }
     }
+    User: {
+      ptr2e?: {
+        "dev-identity": string;
+      }
+    }
   }
 
   interface SettingConfig {

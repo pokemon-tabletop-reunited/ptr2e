@@ -1,35 +1,37 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import type { ActorPTR2e } from "@actor";
 import type { ActionPTR2e } from "@data";
 import { ActiveEffectPTR2e } from "@effects";
 import { ItemPTR2e } from "@item";
 import { htmlQueryAll, sluggify } from "@utils";
+import type { AnyObject, DeepPartial } from "fvtt-types/utils";
 
-export type ApplicationConfigurationExpanded = foundry.applications.api.ApplicationConfiguration & {
-  dragDrop: DragDropConfiguration[];
-};
+export type ApplicationConfigurationExpanded = foundry.applications.api.ApplicationV2.Configuration & ExpandedConfiguration
+
+export interface ExpandedConfiguration {
+  dragDrop?: DragDropConfiguration[];
+}
 
 export class ApplicationV2Expanded<
-  TRenderOptions extends
-  foundry.applications.api.ApplicationRenderOptions = foundry.applications.api.HandlebarsRenderOptions,
-> extends foundry.applications.api.ApplicationV2<ApplicationConfigurationExpanded, TRenderOptions> {
-  declare options: ApplicationConfigurationExpanded;
+  RenderContext extends AnyObject = AnyObject,
+  Configuration extends ApplicationConfigurationExpanded = ApplicationConfigurationExpanded,
+  RenderOptions extends foundry.applications.api.ApplicationV2.RenderOptions = foundry.applications.api.HandlebarsApplicationMixin.HandlebarsRenderOptions,
+> extends foundry.applications.api.ApplicationV2<RenderContext, Configuration, RenderOptions> {
 
-  static override DEFAULT_OPTIONS: Omit<ApplicationConfigurationExpanded, "uniqueId"> =
-    foundry.utils.mergeObject(foundry.applications.api.ApplicationV2.DEFAULT_OPTIONS, {
-      dragDrop: [],
-    });
-
-  protected _dragDropHandlers: DragDrop[];
-
-  constructor(options: Partial<ApplicationConfigurationExpanded> = {}) {
+  constructor(options: DeepPartial<Configuration> = {}) {
     super(options);
 
     this._dragDropHandlers = this._createDragDropHandlers();
   }
 
-  override _onRender(context: foundry.applications.api.ApplicationRenderContext, options: TRenderOptions): void {
+  static override DEFAULT_OPTIONS = {
+    dragDrop: []
+  } as (DeepPartial<foundry.applications.api.ApplicationV2.Configuration> & ExpandedConfiguration)
+
+  protected _dragDropHandlers: DragDrop[];
+
+
+  override _onRender(context: DeepPartial<RenderContext>, options: DeepPartial<RenderOptions>): void {
     super._onRender(context, options);
 
     // Attach drag-and-drop handlers
@@ -42,7 +44,7 @@ export class ApplicationV2Expanded<
    * @private
    */
   _createDragDropHandlers() {
-    return this.options.dragDrop.map((d) => {
+    return this.options.dragDrop!.map((d) => {
       d.permissions = {
         dragstart: this._canDragStart.bind(this),
         drop: this._canDragDrop.bind(this),
@@ -62,8 +64,8 @@ export class ApplicationV2Expanded<
    * @returns {boolean}             Can the current user drag this selector?
    * @protected
    */
-  _canDragStart(_selector: string) {
-    return game.user.isGM;
+  _canDragStart(_selector: Maybe<string>) {
+    return game.user!.isGM;
   }
 
   /* -------------------------------------------- */
@@ -74,8 +76,8 @@ export class ApplicationV2Expanded<
    * @returns {boolean}             Can the current user drop on this selector?
    * @protected
    */
-  _canDragDrop(_selector: string) {
-    return game.user.isGM;
+  _canDragDrop(_selector: Maybe<string>) {
+    return game.user!.isGM;
   }
 
   /* -------------------------------------------- */
@@ -106,27 +108,22 @@ export class ApplicationV2Expanded<
   _onDrop(_event: DragEvent) { }
 }
 
-export type DocumentSheetConfigurationExpanded =
-  foundry.applications.api.DocumentSheetConfiguration & {
-    dragDrop: DragDropConfiguration[];
-  };
+export type DocumentSheetConfigurationExpanded<Document extends foundry.abstract.Document.Any> = foundry.applications.api.DocumentSheetV2.Configuration<Document> & ExpandedConfiguration;
 
 export class ActorSheetV2Expanded<
-  TRenderOptions extends
-  foundry.applications.api.HandlebarsDocumentSheetConfiguration = foundry.applications.api.HandlebarsDocumentSheetConfiguration,
-> extends foundry.applications.sheets.ActorSheetV2<
-  ActorPTR2e,
-  TRenderOptions,
-  DocumentSheetConfigurationExpanded
-> {
-  static override DEFAULT_OPTIONS: Omit<DocumentSheetConfigurationExpanded, "uniqueId"> =
-    foundry.utils.mergeObject(foundry.applications.sheets.ActorSheetV2.DEFAULT_OPTIONS, {
-      dragDrop: [],
-    });
+  RenderContext extends AnyObject = AnyObject,
+  Configuration extends DocumentSheetConfigurationExpanded<Actor.ConfiguredInstance> = DocumentSheetConfigurationExpanded<Actor.ConfiguredInstance>,
+  RenderOptions extends foundry.applications.api.DocumentSheetV2.RenderOptions = foundry.applications.api.DocumentSheetV2.RenderOptions
+> extends foundry.applications.sheets.ActorSheetV2<RenderContext, Configuration, RenderOptions> {
+  static override DEFAULT_OPTIONS = {
+    dragDrop: []
+  } as {
+    dragDrop: DragDropConfiguration[]
+  }
 
   protected _dragDropHandlers: DragDrop[];
 
-  constructor(options: Partial<DocumentSheetConfigurationExpanded> = {}) {
+  constructor(options: DeepPartial<Configuration> & { document: Actor.ConfiguredInstance }) {
     super(options);
 
     this._dragDropHandlers = this._createDragDropHandlers();
@@ -141,7 +138,7 @@ export class ActorSheetV2Expanded<
     return this.document;
   }
 
-  protected override async _onSubmitForm(config: foundry.applications.api.ApplicationFormConfiguration, event: Event | SubmitEvent): Promise<void> {
+  protected override async _onSubmitForm(config: foundry.applications.api.ApplicationV2.FormConfiguration, event: Event | SubmitEvent): Promise<void> {
     event.preventDefault();
     const { handler, closeOnSubmit } = config;
     const element = (event.currentTarget ?? this.element) as HTMLFormElement
@@ -155,7 +152,7 @@ export class ActorSheetV2Expanded<
     if (closeOnSubmit) await this.close();
   }
 
-  override _onRender(context: foundry.applications.api.ApplicationRenderContext, options: TRenderOptions): void {
+  override _onRender(context: DeepPartial<RenderContext>, options: DeepPartial<RenderOptions>): void {
     super._onRender(context, options);
 
     // Attach drag-and-drop handlers
@@ -168,7 +165,7 @@ export class ActorSheetV2Expanded<
    * @private
    */
   _createDragDropHandlers() {
-    return this.options.dragDrop.map((d) => {
+    return this.options.dragDrop!.map((d) => {
       d.permissions = {
         dragstart: this._canDragStart.bind(this),
         drop: this._canDragDrop.bind(this),
@@ -185,7 +182,7 @@ export class ActorSheetV2Expanded<
   /**
    * Add compatability with modules that add buttons to the header of the sheet using the AppV1 method
    */
-  override _getHeaderControls(): ApplicationHeaderControlsEntry[] {
+  override _getHeaderControls(): foundry.applications.api.ApplicationV2.HeaderControlsEntry[] {
     const controls = super._getHeaderControls();
 
     Hooks.callAll("getActorSheetHeaderButtons", this, controls);
@@ -212,7 +209,7 @@ export class ActorSheetV2Expanded<
    * @returns {boolean}             Can the current user drag this selector?
    * @protected
    */
-  _canDragStart(_selector: string) {
+  _canDragStart(_selector: Maybe<string>) {
     return this.isEditable;
   }
 
@@ -224,7 +221,7 @@ export class ActorSheetV2Expanded<
    * @returns {boolean}             Can the current user drop on this selector?
    * @protected
    */
-  _canDragDrop(_selector: string) {
+  _canDragDrop(_selector: Maybe<string>) {
     return this.isEditable;
   }
 
@@ -276,8 +273,8 @@ export class ActorSheetV2Expanded<
    * @param {DragEvent} event       The originating DragEvent
    * @protected
    */
-  async _onDrop(event: DragEvent, upstreamData?: {type: string}) {
-    const data: { type: string } = upstreamData ?? TextEditor.getDragEventData(event);
+  async _onDrop(event: DragEvent, upstreamData?: { type: string }) {
+    const data: { type: string } = upstreamData ?? TextEditor.getDragEventData(event) as unknown as { type: string };
     const actor = this.actor;
     const allowed = Hooks.call("dropActorSheetData", actor, this, data);
     if (allowed === false) return;
@@ -320,7 +317,7 @@ export class ActorSheetV2Expanded<
    * @protected
    */
   async _onDropActiveEffect(_event: DragEvent, data: object) {
-    const effect = await ActiveEffectPTR2e.fromDropData(data);
+    const effect = await ActiveEffectPTR2e.fromDropData(data as foundry.abstract.Document.DropData<ActiveEffect.ConfiguredInstance>);
     if (!this.actor.isOwner || !effect) return false;
     if (effect.target === this.actor) return false;
     return ActiveEffectPTR2e.create(effect.toObject(), { parent: this.actor });
@@ -352,7 +349,7 @@ export class ActorSheetV2Expanded<
    */
   async _onDropItem(event: DragEvent, data: object) {
     if (!this.actor.isOwner) return false;
-    const item = (await ItemPTR2e.implementation.fromDropData(data)) as ItemPTR2e;
+    const item = (await ItemPTR2e.implementation.fromDropData(data as foundry.abstract.Document.DropData<Item.ConfiguredInstance>)) as ItemPTR2e;
     if (item.type === "effect") {
       const effects = item.effects.map(effect => effect.toObject());
       if (!effects.length) return;
@@ -380,12 +377,12 @@ export class ActorSheetV2Expanded<
    */
   async _onDropFolder(event: DragEvent, data: object) {
     if (!this.actor.isOwner) return [];
-    const folder = (await Folder.fromDropData(data)) as Folder;
+    const folder = (await Folder.fromDropData(data as foundry.abstract.Document.DropData<Folder>)) as Folder;
     if (folder.type !== "Item") return [];
     const droppedItemData = await Promise.all(
       folder.contents.map(async (item) => {
         if (!(document instanceof Item))
-          item = (await fromUuid(item.uuid)) as EnfolderableDocument;
+          item = (await fromUuid(item.uuid)) as Actor.ConfiguredInstance | Item.ConfiguredInstance | Cards | Scene.ConfiguredInstance | Playlist | RollTable | Adventure | JournalEntry | Macro;
         return item.toObject();
       })
     );
@@ -439,32 +436,30 @@ export class ActorSheetV2Expanded<
     // Perform the sort
     const sortUpdates = SortingHelpers.performIntegerSort(source, { target, siblings });
     const updateData = sortUpdates.map((u) => {
-      const update = u.update;
-      update._id = u.target._id;
+      const update = u.update as { sort: number, _id: string };
+      update._id = u.target!._id!;
       return update;
     });
 
     // Perform the update
     return this.actor.updateEmbeddedDocuments(
       "Item",
-      updateData as EmbeddedDocumentUpdateData[]
+      updateData
     );
   }
 }
 
 export class ItemSheetV2Expanded<
-  TRenderOptions extends
-  foundry.applications.api.HandlebarsDocumentSheetConfiguration = foundry.applications.api.HandlebarsDocumentSheetConfiguration,
-> extends foundry.applications.sheets.ItemSheetV2<
-  ItemPTR2e,
-  ActorPTR2e,
-  TRenderOptions,
-  DocumentSheetConfigurationExpanded
-> {
-  static override DEFAULT_OPTIONS: Omit<DocumentSheetConfigurationExpanded, "uniqueId"> =
-    foundry.utils.mergeObject(foundry.applications.api.DocumentSheetV2.DEFAULT_OPTIONS, {
-      dragDrop: [],
-    });
+  RenderContext extends AnyObject = AnyObject,
+  Configuration extends DocumentSheetConfigurationExpanded<Item.ConfiguredInstance> = DocumentSheetConfigurationExpanded<Item.ConfiguredInstance>,
+  RenderOptions extends foundry.applications.api.DocumentSheetV2.RenderOptions = foundry.applications.api.DocumentSheetV2.RenderOptions
+> extends foundry.applications.sheets.ItemSheetV2<RenderContext, Configuration, RenderOptions> {
+
+  static override DEFAULT_OPTIONS = {
+    dragDrop: []
+  } as {
+    dragDrop: DragDropConfiguration[]
+  }
 
   protected _dragDropHandlers: DragDrop[];
 
@@ -472,13 +467,13 @@ export class ItemSheetV2Expanded<
     return this.document;
   }
 
-  constructor(options: Partial<DocumentSheetConfigurationExpanded> = {}) {
+  constructor(options: DeepPartial<Configuration> & { document: Item.ConfiguredInstance }) {
     super(options);
 
     this._dragDropHandlers = this._createDragDropHandlers();
   }
 
-  override _onRender(context: foundry.applications.api.ApplicationRenderContext, options: TRenderOptions): void {
+  override _onRender(context: DeepPartial<RenderContext>, options: DeepPartial<RenderOptions>): void {
     super._onRender(context, options);
 
     // Attach drag-and-drop handlers
@@ -495,11 +490,11 @@ export class ItemSheetV2Expanded<
         }
       }
       for (const element of htmlQueryAll(content, ".item-controls a")) {
-        if(element.classList.contains("effect-edit") || element.dataset.action == "edit-action") continue;
+        if (element.classList.contains("effect-edit") || element.dataset.action == "edit-action") continue;
         (element as HTMLButtonElement).disabled = true;
         element.attributes.setNamedItem(document.createAttribute("disabled"));
       }
-      for(const element of htmlQueryAll(content, "tags.tagify")) {
+      for (const element of htmlQueryAll(content, "tags.tagify")) {
         (element as HTMLInputElement).readOnly = true;
         element.attributes.setNamedItem(document.createAttribute("readOnly"));
       }
@@ -512,7 +507,7 @@ export class ItemSheetV2Expanded<
    * @private
    */
   _createDragDropHandlers() {
-    return this.options.dragDrop.map((d) => {
+    return this.options.dragDrop!.map((d) => {
       d.permissions = {
         dragstart: this._canDragStart.bind(this),
         drop: this._canDragDrop.bind(this),
@@ -529,7 +524,7 @@ export class ItemSheetV2Expanded<
   /**
    * Add compatability with modules that add buttons to the header of the sheet using the AppV1 method
    */
-  override _getHeaderControls(): ApplicationHeaderControlsEntry[] {
+  override _getHeaderControls(): foundry.applications.api.ApplicationV2.HeaderControlsEntry[] {
     const controls = super._getHeaderControls();
 
     Hooks.callAll("getActorSheetHeaderButtons", this, controls);
@@ -556,7 +551,7 @@ export class ItemSheetV2Expanded<
    * @returns {boolean}             Can the current user drag this selector?
    * @protected
    */
-  _canDragStart(_selector: string) {
+  _canDragStart(_selector: Maybe<string>) {
     return this.isEditable;
   }
 
@@ -568,7 +563,7 @@ export class ItemSheetV2Expanded<
    * @returns {boolean}             Can the current user drop on this selector?
    * @protected
    */
-  _canDragDrop(_selector: string) {
+  _canDragDrop(_selector: Maybe<string>) {
     return this.isEditable;
   }
 
@@ -627,29 +622,31 @@ export class ItemSheetV2Expanded<
    */
   async _onDrop(event: DragEvent): Promise<void> {
     event.preventDefault();
-    const data = TextEditor.getDragEventData<{ type: string }>(event);
+    const data = TextEditor.getDragEventData(event);
     const item = this.document;
     const allowed = Hooks.call("dropItemSheetData", item, data, event);
     if (allowed === false) return;
+    if (typeof data === "number") return;
 
-    if('action' in data && data.action) {
-      if(!(this.document.system.actions instanceof Collection)) return;
+    if ('action' in data && data.action) {
+      if (!(this.document.system.actions instanceof Collection)) return;
 
-      const actionData = data.action as {slug: string, type: string};
+      const actionData = data.action as { slug: string, type: string };
 
-      const item = await ItemPTR2e.fromDropData(data as unknown as DropCanvasData);
-      if(!item || !item?.actions?.size) return;
+      const item = await ItemPTR2e.fromDropData(data as unknown as TokenLayer.DropData);
+      if (!item || !item?.actions?.size) return;
 
       const action = item.actions.get(actionData.slug);
-      if(!action) return;
+      if (!action) return;
 
       const existing = this.document.actions.get(actionData.slug);
-      if(existing) return void ui.notifications.warn(`An action with the slug ${actionData.slug} already exists on this item.`);
+      if (existing) return void ui.notifications.warn(`An action with the slug ${actionData.slug} already exists on this item.`);
 
       const actions = foundry.utils.duplicate(this.document.system._source.actions as ActionPTR2e['_source'][]);
       actions.push(action.toObject());
       return void this.document.update({ "system.actions": actions });
     }
+    if (!('type' in data)) return;
 
     // Handle different data types
     switch (data.type) {
@@ -669,7 +666,7 @@ export class ItemSheetV2Expanded<
   }
 
   async _onDropItem(_event: DragEvent, data: object) {
-    const item = await ItemPTR2e.fromDropData(data as DropCanvasData);
+    const item = await ItemPTR2e.fromDropData(data as TokenLayer.DropData);
     if (!item || item.type !== "effect") return;
     const effects = item.effects.map((effect) => effect.toObject());
     if (effects.length === 0) return;
@@ -692,17 +689,17 @@ export class ItemSheetV2Expanded<
     const effect = await ActiveEffectPTR2e.fromDropData(data);
     if (!this.document.isOwner || !effect) return false;
     if (effect.parent === this.document) return false;
-    
+
     // Change type away from 'Summon' if applicable, as this type is only available for 'Summon' items.
     const source = effect.toObject();
-    if(source.type === "summon") {
+    if (source.type === "summon") {
       // Attempt a best-effor conversion.
       source.type = source.system.formula || source.duration.turns ? "affliction" : "passive";
     }
     return ActiveEffectPTR2e.create(source, { parent: this.document });
   }
 
-  protected override async _onSubmitForm(config: foundry.applications.api.ApplicationFormConfiguration, event: Event | SubmitEvent): Promise<void> {
+  protected override async _onSubmitForm(config: foundry.applications.api.ApplicationV2.FormConfiguration, event: Event | SubmitEvent): Promise<void> {
     event.preventDefault();
     const { handler, closeOnSubmit } = config;
     const element = (event.currentTarget ?? this.element) as HTMLFormElement
