@@ -10,33 +10,29 @@ type SkillBeingEdited = SkillPTR2e["_source"] & { label: string; investment: num
 export class SkillsEditor extends foundry.applications.api.HandlebarsApplicationMixin(
   foundry.applications.api.ApplicationV2
 )<AnyObject> {
-  static override DEFAULT_OPTIONS = foundry.utils.mergeObject(
-    super.DEFAULT_OPTIONS,
-    {
-      tag: "form",
-      classes: ["sheet skill-sheet"],
-      position: {
-        height: 'auto' as const,
-        width: 500,
-      },
-      form: {
-        submitOnChange: false,
-        closeOnSubmit: true,
-        handler: SkillsEditor.#onSubmit,
-      },
-      window: {
-        minimizable: true,
-        resizable: false,
-      },
-      actions: {
-        "reset-skills": SkillsEditor.#onResetSkills,
-        "change-resources": SkillsEditor.#onChangeResources,
-        "change-luck": SkillsEditor.#onChangeLuck,
-        "roll-luck": SkillsEditor.#onRollLuck,
-      },
+  static override DEFAULT_OPTIONS = {
+    tag: "form",
+    classes: ["sheet skill-sheet"],
+    position: {
+      height: 'auto' as const,
+      width: 500,
     },
-    { inplace: false }
-  );
+    form: {
+      submitOnChange: false,
+      closeOnSubmit: true,
+      handler: SkillsEditor.#onSubmit,
+    },
+    window: {
+      minimizable: true,
+      resizable: false,
+    },
+    actions: {
+      "reset-skills": SkillsEditor.#onResetSkills,
+      "change-resources": SkillsEditor.#onChangeResources,
+      "change-luck": SkillsEditor.#onChangeLuck,
+      "roll-luck": SkillsEditor.#onRollLuck,
+    },
+  }
 
   static override PARTS: Record<string, foundry.applications.api.HandlebarsApplicationMixin.HandlebarsTemplatePart> = {
     skills: {
@@ -423,8 +419,8 @@ export class SkillsEditor extends foundry.applications.api.HandlebarsApplication
       if (isNaN(investment) || !investment) continue;
 
       if (skill.slug === "resources") {
-        if(investment < 0) resourceMod = investment;
-        if(levelOne) {
+        if (investment < 0) resourceMod = investment;
+        if (levelOne) {
           resourceMod = investment
           delete data[skill.slug];
           continue;

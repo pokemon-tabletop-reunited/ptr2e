@@ -1,13 +1,13 @@
-import type { ActorPTR2e } from "@actor";
 import { SkillsComponent } from "@actor/components/skills-component.ts";
 import type { AttackPTR2e } from "@data";
 import type { Tab } from "@item/sheets/document.ts";
 import type { TokenPTR2e } from "@module/canvas/token/object.ts";
 import { htmlQuery, htmlQueryAll } from "@utils";
+import type { AnyObject, DeepPartial } from "fvtt-types/utils";
 
 export default class TokenPanel extends foundry.applications.api.HandlebarsApplicationMixin(
   foundry.applications.api.ApplicationV2
-) {
+)<AnyObject> {
   get token(): TokenPTR2e | null {
     return this._token;
   }
@@ -24,15 +24,13 @@ export default class TokenPanel extends foundry.applications.api.HandlebarsAppli
 
   constructor(
     token: TokenPTR2e | null,
-    options: DeepPartial<ApplicationConfigurationExpanded> = {}
+    options: DeepPartial<foundry.applications.api.ApplicationV2.Configuration> = {}
   ) {
     super(options);
     this._token = token;
   }
 
-  static override DEFAULT_OPTIONS = foundry.utils.mergeObject(
-    super.DEFAULT_OPTIONS,
-    {
+  static override DEFAULT_OPTIONS = {
       classes: ["token-panel"],
       tag: "aside",
       window: {
@@ -40,9 +38,7 @@ export default class TokenPanel extends foundry.applications.api.HandlebarsAppli
         frame: false,
         positioned: false,
       },
-    },
-    { inplace: false }
-  );
+    }
 
   static override PARTS = {
     info: {
@@ -83,7 +79,7 @@ export default class TokenPanel extends foundry.applications.api.HandlebarsAppli
     }
   };
 
-  tabGroups: Record<string, string> = {
+  override tabGroups: Record<string, string> = {
     sheet: "attack-slots",
   };
 
@@ -139,12 +135,12 @@ export default class TokenPanel extends foundry.applications.api.HandlebarsAppli
   }
 
   override async _renderHTML(
-    context: foundry.applications.api.ApplicationRenderContext,
-    options: foundry.applications.api.HandlebarsApplicationMixin.HandlebarsRenderOptions
+    context: AnyObject,
+    options: DeepPartial<foundry.applications.api.HandlebarsApplicationMixin.HandlebarsRenderOptions>
   ): Promise<Record<string, HTMLElement>> {
-    if (this.token?.actor) return super._renderHTML(context, options);
+    if (this.token?.actor) return super._renderHTML(context, options) as Promise<Record<string, HTMLElement>>;
 
-    return options.parts.reduce(
+    return options.parts!.reduce(
       (acc, partId) => {
         const t = document.createElement("template");
         t.dataset.applicationPart = partId;
@@ -156,13 +152,13 @@ export default class TokenPanel extends foundry.applications.api.HandlebarsAppli
   }
 
   override async _prepareContext(
-    options?: foundry.applications.api.HandlebarsApplicationMixin.HandlebarsRenderOptions | undefined
-  ) {
+    options: foundry.applications.api.HandlebarsApplicationMixin.HandlebarsRenderOptions
+  ): Promise<AnyObject> {
     const context = await super._prepareContext(options);
     if (!this.token) return context;
 
     const actor = this.token.actor;
-    if (!actor) return false;
+    if (!actor) return context;
 
     const actions = {
       passives: actor.actions.passive,
@@ -200,7 +196,7 @@ export default class TokenPanel extends foundry.applications.api.HandlebarsAppli
         const uuid = (event.currentTarget as HTMLElement).dataset.uuid;
         if (!uuid) return;
 
-        const actor = await fromUuid<ActorPTR2e>(uuid);
+        const actor = await fromUuid(uuid) as Actor.ConfiguredInstance
         if (!actor) return;
 
         const token = actor.getActiveTokens(false)[0];
@@ -231,7 +227,7 @@ export default class TokenPanel extends foundry.applications.api.HandlebarsAppli
         const uuid = (event.currentTarget as HTMLElement).dataset.uuid;
         if (!uuid) return;
 
-        const actor = await fromUuid<ActorPTR2e>(uuid);
+        const actor = await fromUuid(uuid) as Actor.ConfiguredInstance;
         if (!actor) return;
 
         const tokens = actor.getActiveTokens(false);

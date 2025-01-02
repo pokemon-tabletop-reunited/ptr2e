@@ -11,7 +11,7 @@ export class DocumentSheetV2<TDocument extends foundry.abstract.Document> extend
   > {
   declare options: DocumentSheetConfiguration<TDocument> & {dragDrop?: DragDropConfiguration[]};
 
-  protected override async _onSubmitForm(config: foundry.applications.api.ApplicationFormConfiguration, event: Event | SubmitEvent): Promise<void> {
+  protected override async _onSubmitForm(config: foundry.applications.api.ApplicationV2.FormConfiguration, event: Event | SubmitEvent): Promise<void> {
     event.preventDefault();
     const { handler, closeOnSubmit } = config;
     const element = (event.currentTarget ?? this.element) as HTMLFormElement

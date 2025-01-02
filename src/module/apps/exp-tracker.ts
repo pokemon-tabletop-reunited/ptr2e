@@ -323,7 +323,7 @@ export class EXPTracker extends foundry.applications.api.HandlebarsApplicationMi
     return this.slots[pc.uuid.replaceAll(".","-")] ?? (this.slots[pc.uuid.replaceAll(".","-")] = [{}, {}, {}, {}, {}, {}]);
   }
 
-  override _attachPartListeners(partId: string, htmlElement: HTMLElement, options: HandlebarsRenderOptions): void {
+  override _attachPartListeners(partId: string, htmlElement: HTMLElement, options:foundry.applications.api.HandlebarsApplicationMixin.HandlebarsRenderOptions): void {
     super._attachPartListeners(partId, htmlElement, options);
 
     if (partId === "venture") {

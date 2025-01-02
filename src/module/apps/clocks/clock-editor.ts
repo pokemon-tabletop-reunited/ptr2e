@@ -44,7 +44,7 @@ export default class ClockEditor extends foundry.applications.api.HandlebarsAppl
     },
   };
 
-  override async _renderFrame(options: HandlebarsRenderOptions) {
+  override async _renderFrame(options:foundry.applications.api.HandlebarsApplicationMixin.HandlebarsRenderOptions) {
     options.window!.title = this.clock
       ? game.i18n.format("PTR2E.Clocks.Global.Editor.TitleEdit", { label: this.clock.label })
       : game.i18n.localize("PTR2E.Clocks.Global.Editor.TitleAdd");
@@ -69,7 +69,7 @@ export default class ClockEditor extends foundry.applications.api.HandlebarsAppl
     };
   }
 
-  override _attachPartListeners(partId: string, htmlElement: HTMLElement, options: HandlebarsRenderOptions): void {
+  override _attachPartListeners(partId: string, htmlElement: HTMLElement, options:foundry.applications.api.HandlebarsApplicationMixin.HandlebarsRenderOptions): void {
     super._attachPartListeners(partId, htmlElement, options);
 
     if (partId === "clocks") {

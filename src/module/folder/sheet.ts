@@ -102,7 +102,7 @@ class FolderConfigPTR2e extends foundry.applications.api.HandlebarsApplicationMi
   override _attachPartListeners(
     partId: string,
     htmlElement: HTMLElement,
-    _options: HandlebarsRenderOptions
+    _options:foundry.applications.api.HandlebarsApplicationMixin.HandlebarsRenderOptions
   ): void {
     super._attachPartListeners(partId, htmlElement, _options);
     if (partId === "members") {

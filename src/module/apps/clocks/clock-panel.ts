@@ -43,7 +43,7 @@ export default class ClockPanel extends foundry.applications.api.HandlebarsAppli
     return game.ptr.clocks.db.get(id);
   }
 
-  override async _renderFrame(options: HandlebarsRenderOptions) {
+  override async _renderFrame(options:foundry.applications.api.HandlebarsApplicationMixin.HandlebarsRenderOptions) {
     const frame = await super._renderFrame(options);
     if (game.user.isGM) frame.classList.add("editable");
     this.window.close?.remove();
@@ -65,7 +65,7 @@ export default class ClockPanel extends foundry.applications.api.HandlebarsAppli
   override _attachPartListeners(
     partId: string,
     htmlElement: HTMLElement,
-    options: HandlebarsRenderOptions
+    options:foundry.applications.api.HandlebarsApplicationMixin.HandlebarsRenderOptions
   ): void {
     super._attachPartListeners(partId, htmlElement, options);
     if (partId === "clocks") {

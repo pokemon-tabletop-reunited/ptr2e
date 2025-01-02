@@ -69,7 +69,6 @@ class PartySheetPTR2e extends foundry.applications.api.HandlebarsApplicationMixi
             if (folder instanceof FolderPTR2e) {
               //@ts-expect-error - App v1 compatability
               this.boundBoxes[folder.id] = folder;
-              //@ts-expect-error - App v1 compatability
               folder.apps[this.id] = this;
               this.render({ parts: ["party"] });
             }
@@ -599,7 +598,6 @@ class PartySheetPTR2e extends foundry.applications.api.HandlebarsApplicationMixi
   override _onFirstRender(context: DeepPartial<AnyObject>) {
     if ('boxData' in context && context.boxData && typeof context.boxData === 'object' && 'folders' in context.boxData) {
       for (const folder of context.boxData.folders as FolderPTR2e[]) {
-        //@ts-expect-error - App v1 compatability
         folder.apps[this.id] = this;
         this.boundBoxes[folder.id!] = folder;
       }

@@ -1,7 +1,7 @@
 import type { ActorPTR2e, HumanoidActorSystem, PokemonActorSystem} from "@actor";
 import type { ItemPTR2e} from "@item";
 import type { PerkManager } from "@module/apps/perk-manager/perk-manager.ts";
-import type { ArtMapCollection, ClockDatabase, SkillsCollection, TraitsCollection } from "@data";
+import type { ArtMapCollection, ClockDatabase, SkillsCollection, Trait, TraitsCollection } from "@data";
 import type TooltipsPTR2e from "@module/tooltips/tooltips.ts";
 import type { PTRCONFIG } from "@scripts/config/index.ts";
 import type { ImageResolver, sluggify, SpeciesImageDataSource } from "@utils";
@@ -212,7 +212,7 @@ declare global {
     "ptr2e.clocks": ClockDatabase
     "ptr2e.dev-mode": boolean
     "ptr2e.player-folder-create-permission": boolean
-    "ptr2e.traits": unknown[]
+    "ptr2e.traits": Trait[]
     "ptr2e.skills": unknown[]
     "ptr2e.artmap": Record<string, SpeciesImageDataSource>
     "ptr2e.worldSystemVersion": string

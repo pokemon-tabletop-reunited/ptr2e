@@ -9,8 +9,12 @@ export const tutorListSchemaSchema = {
   // Slug of trait or Ability Name
   slug: new SlugField({ required: true, nullable: false }),
   // Type of trait or Ability
-  type: new foundry.data.fields.StringField({
-    choices: ["trait", "egg", "ability", "universal"],
+  type: new foundry.data.fields.StringField<
+    {required: true, nullable: false, initial: string, choices: ["trait", "egg", "ability", "universal"]},
+    "trait" | "egg" | "ability" | "universal",
+    "trait" | "egg" | "ability" | "universal"
+  >({
+    choices: ["trait", "egg", "ability", "universal"] as const,
     initial: "trait",
     required: true,
     nullable: false,

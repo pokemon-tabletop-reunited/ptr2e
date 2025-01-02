@@ -2,11 +2,10 @@ import { formatSlug, sluggify } from "@utils";
 import type { ApplicationConfigurationExpanded} from "./appv2-expanded.ts";
 import { ApplicationV2Expanded } from "./appv2-expanded.ts";
 import type { ActorPTR2e } from "@actor";
+import type { AnyObject, DeepPartial } from "fvtt-types/utils";
 
-export class TutorListApp extends foundry.applications.api.HandlebarsApplicationMixin(ApplicationV2Expanded) {
-  static override DEFAULT_OPTIONS = foundry.utils.mergeObject(
-    super.DEFAULT_OPTIONS,
-    {
+export class TutorListApp extends foundry.applications.api.HandlebarsApplicationMixin(ApplicationV2Expanded)<AnyObject> {
+  static override DEFAULT_OPTIONS = {
       tag: "div",
       classes: ["sheet", "tutor-list", "default-sheet"],
       position: {
@@ -22,9 +21,7 @@ export class TutorListApp extends foundry.applications.api.HandlebarsApplication
       actions: {
         "clear": function (this: TutorListApp) { this.render({ actor: null, parts: ["aside", "list"] }) },
       }
-    },
-    { inplace: false }
-  );
+    };
 
   static override PARTS: Record<string, foundry.applications.api.HandlebarsApplicationMixin.HandlebarsTemplatePart> = {
     aside: {
@@ -54,13 +51,16 @@ export class TutorListApp extends foundry.applications.api.HandlebarsApplication
       callback: this._onSearchFilter.bind(this),
     });
   }
-
-  override render(options: boolean | Partial<HandlebarsRenderOptions & { actor: ActorPTR2e | null }>, _options?: (HandlebarsRenderOptions & { actor?: ActorPTR2e | null }) | undefined): Promise<this> {
+  
+  override render(options?: DeepPartial<foundry.applications.api.HandlebarsApplicationMixin.HandlebarsRenderOptions> & {actor?: Actor.ConfiguredInstance | null}): Promise<this>;
+  /** @deprecated */
+  override render(options: boolean, _options?: DeepPartial<foundry.applications.api.HandlebarsApplicationMixin.HandlebarsRenderOptions> & {actor?: Actor.ConfiguredInstance | null}): Promise<this>;
+  override render(options: boolean | (DeepPartial<foundry.applications.api.HandlebarsApplicationMixin.HandlebarsRenderOptions> & {actor?: Actor.ConfiguredInstance | null}) | undefined, _options?: DeepPartial<foundry.applications.api.HandlebarsApplicationMixin.HandlebarsRenderOptions> & {actor?: Actor.ConfiguredInstance | null}): Promise<this> {
     this.actor = options === true ? _options?.actor ?? null : options ? options.actor ?? _options?.actor ?? null : null;
-    return super.render(options, _options);
+    return super.render(options as boolean, _options);
   }
 
-  override _prepareContext(options?: foundry.applications.api.HandlebarsApplicationMixin.HandlebarsRenderOptions | undefined) {
+  override _prepareContext(options: foundry.applications.api.HandlebarsApplicationMixin.HandlebarsRenderOptions) {
     const lists = game.ptr.data.tutorList.list.contents;
 
     return {
@@ -115,7 +115,7 @@ export class TutorListApp extends foundry.applications.api.HandlebarsApplication
     return resultLists;
   }
 
-  override _attachPartListeners(partId: string, htmlElement: HTMLElement, options: HandlebarsRenderOptions): void {
+  override _attachPartListeners(partId: string, htmlElement: HTMLElement, options:foundry.applications.api.HandlebarsApplicationMixin.HandlebarsRenderOptions): void {
     super._attachPartListeners(partId, htmlElement, options);
 
     if (partId === "aside") {
@@ -134,9 +134,9 @@ export class TutorListApp extends foundry.applications.api.HandlebarsApplication
     }
   }
 
-  _onSearchFilter(_event: KeyboardEvent, query: string, rgx: RegExp, html: HTMLElement) {
+  _onSearchFilter(_event: KeyboardEvent, query: string, rgx: RegExp, html: HTMLElement | null) {
     const visibleLists = new Set();
-    for (const entry of html.querySelectorAll<HTMLAnchorElement>("a.item.list-tab")) {
+    for (const entry of html!.querySelectorAll<HTMLAnchorElement>("a.item.list-tab")) {
       if (!query) {
         entry.classList.remove("hidden");
         continue;
@@ -157,10 +157,10 @@ export class TutorListApp extends foundry.applications.api.HandlebarsApplication
 
   override async _onDrop(event: DragEvent) {
     event.preventDefault();
-    const data: { uuid: string, type: string } = TextEditor.getDragEventData(event);
+    const data = TextEditor.getDragEventData(event) as unknown as { uuid: string, type: string }
     if (data.type !== "Actor" || !data.uuid) return;
 
-    const actor = await fromUuid<ActorPTR2e>(data.uuid);
+    const actor = await fromUuid(data.uuid) as Actor.ConfiguredInstance;
     if (!actor) return;
     this.render({ actor, parts: ["aside", "list"] });
   }

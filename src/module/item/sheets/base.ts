@@ -476,7 +476,7 @@ export default class ItemSheetPTR2e<
   }
 
   protected override async _onSubmitForm(
-    config: foundry.applications.api.ApplicationFormConfiguration,
+    config: foundry.applications.api.ApplicationV2.FormConfiguration,
     event: Event | SubmitEvent
   ): Promise<void> {
     event.preventDefault();
