@@ -1,8 +1,6 @@
-import type { ActorPTR2e } from "@actor";
-import type { AttackMessageSystem, ChatMessagePTR2e, DamageAppliedMessageSystem } from "@chat";
-import type { CombatantPTR2e } from "@combat";
+import type { AttackMessageSystem, DamageAppliedMessageSystem } from "@chat";
 import { ActionPTR2e, AttackPTR2e, Trait } from "@data";
-import type { EffectPTR2e, ItemPTR2e, MovePTR2e, PerkPTR2e, SummonPTR2e } from "@item";
+import type { EffectPTR2e, MovePTR2e, PerkPTR2e, SummonPTR2e } from "@item";
 import type { DataInspector } from "@module/apps/data-inspector/data-inspector.ts";
 import type { CustomSkill } from "@module/data/models/skill.ts";
 import Tagify from "@yaireo/tagify";
@@ -188,9 +186,9 @@ export default class TooltipsPTR2e {
     const effectId = game.tooltip.element?.dataset.id;
     if (!effectId) return false;
 
-    const parent = await fromUuid(
-      (game.tooltip.element?.closest("[data-parent]") as HTMLElement)?.dataset.parent ?? ""
-    ) as ActorPTR2e | null;
+    const parent = await fromUuid<Actor.ConfiguredInstance>(
+      ((game.tooltip.element?.closest("[data-parent]") as HTMLElement)?.dataset.parent ?? "") as ActorUUID
+    )
     if (!parent) return false;
 
     const effect = parent.effects.get(effectId);
@@ -242,7 +240,7 @@ export default class TooltipsPTR2e {
         .parent;
       if (!parentUuid) return false;
 
-      const parent = (await fromUuid(parentUuid)) as ActorPTR2e | ItemPTR2e;
+      const parent = (await fromUuid<Actor.ConfiguredInstance | Item.ConfiguredInstance>(parentUuid))
       if (!parent) return false;
 
       const attack = parent.actions.get(attackSlug) as ActionPTR2e | undefined;
@@ -255,7 +253,7 @@ export default class TooltipsPTR2e {
     const attackUuid = game.tooltip.element?.dataset.uuid;
     if (!attackUuid) return false;
 
-    const attack = (await fromUuid(attackUuid)) as unknown as ActionPTR2e | undefined;
+    const attack = (await fromUuid(attackUuid as ValidUUID)) as unknown as ActionPTR2e | undefined;
     if (!(attack instanceof ActionPTR2e)) return false;
 
     return await this.#createActionTooltip(attack);
@@ -312,7 +310,7 @@ export default class TooltipsPTR2e {
           event.stopPropagation();
 
           const { actionUuid } = button.dataset;
-          const action = await fromUuid(actionUuid) as unknown as ActionPTR2e;
+          const action = await fromUuid(actionUuid as ValidUUID) as unknown as ActionPTR2e;
           if (!action) return void ui.notifications.error("Action not found.");
 
           const ppCost = action.cost.powerPoints
@@ -344,7 +342,7 @@ export default class TooltipsPTR2e {
         .parent;
       if (!parentUuid) return false;
 
-      const parent = (await fromUuid(parentUuid)) as ActorPTR2e | ItemPTR2e;
+      const parent = (await fromUuid<Actor.ConfiguredInstance, Item.ConfiguredInstance>(parentUuid as ActorUUID))
       if (!parent) return false;
 
       const attack = parent.actions.attack!.get(attackSlug) as AttackPTR2e | undefined;
@@ -357,7 +355,7 @@ export default class TooltipsPTR2e {
     const attackUuid = game.tooltip.element?.dataset.uuid;
     if (!attackUuid) return false;
 
-    const attack = (await fromUuid(attackUuid)) as unknown as AttackPTR2e | undefined;
+    const attack = (await fromUuid(attackUuid as ValidUUID)) as unknown as AttackPTR2e | undefined;
     if (!(attack instanceof AttackPTR2e)) return false;
 
     return await this.#createAttackTooltip(attack);
@@ -414,7 +412,7 @@ export default class TooltipsPTR2e {
           event.stopPropagation();
 
           const { attackUuid } = button.dataset;
-          const action = await fromUuid(attackUuid) as unknown as AttackPTR2e;
+          const action = await fromUuid(attackUuid as ValidUUID) as unknown as AttackPTR2e;
           if (!action) return void ui.notifications.error("Action not found.");
 
           return action.delayAction();
@@ -427,7 +425,7 @@ export default class TooltipsPTR2e {
           event.stopPropagation();
 
           const { actionUuid } = button.dataset;
-          const action = await fromUuid(actionUuid) as unknown as ActionPTR2e;
+          const action = await fromUuid(actionUuid as ValidUUID) as unknown as ActionPTR2e;
           if (!action) return void ui.notifications.error("Action not found.");
 
           const ppCost = action.cost.powerPoints
@@ -452,11 +450,11 @@ export default class TooltipsPTR2e {
           if (!game.combat) return void ui.notifications.error("You must be in combat to summon a creature.");
 
           const { attackUuid } = button.dataset;
-          const action = await fromUuid(attackUuid) as unknown as ActionPTR2e;
+          const action = await fromUuid(attackUuid as ValidUUID) as unknown as ActionPTR2e & { summon: ItemUUID };
           if (!action) return void ui.notifications.error("Action not found.");
           if (!(action?.type === "attack" && action.summon)) return void ui.notifications.error("Action not found on item.");
 
-          const summonItem = await fromUuid<SummonPTR2e>((action as AttackPTR2e).summon);
+          const summonItem = await fromUuid<SummonPTR2e>((action as AttackPTR2e).summon as ItemUUID);
           if (!summonItem) return void ui.notifications.error("Summon not found on action.");
 
           const combatants = await game.combat.createEmbeddedDocuments("Combatant", [{
@@ -468,10 +466,10 @@ export default class TooltipsPTR2e {
             }
           }])
 
-          if (!combatants.length) return void ui.notifications.error("Failed to create summon.");
+          if (!combatants!.length) return void ui.notifications.error("Failed to create summon.");
 
           ChatMessage.create({
-            content: `Added: ${(combatants as CombatantPTR2e[]).map(c => c.link).join(", ")} to Combat.`,
+            content: `Added: ${(combatants as Combatant.ConfiguredInstance[]).map(c => c.link).join(", ")} to Combat.`,
           });
         });
       }
@@ -491,7 +489,7 @@ export default class TooltipsPTR2e {
     const messageId = (element.closest("[data-message-id]") as HTMLElement)?.dataset?.messageId;
     if (!messageId) return false;
 
-    const message = game.messages.get(messageId) as ChatMessagePTR2e<AttackMessageSystem>;
+    const message = game.messages.get(messageId) as ChatMessage.ConfiguredInstance & {system: AttackMessageSystem};
     if (!message) return false;
 
     const target = message.system.context?.results.get(targetUuid);
@@ -549,7 +547,7 @@ export default class TooltipsPTR2e {
     const messageId = (element.closest("[data-message-id]") as HTMLElement)?.dataset?.messageId;
     if (!messageId) return false;
 
-    const message = game.messages.get(messageId) as ChatMessagePTR2e<AttackMessageSystem>;
+    const message = game.messages.get(messageId) as ChatMessage.ConfiguredInstance & {system: AttackMessageSystem};
     if (!message) return false;
 
     const target = message.system.context?.results.get(targetUuid);
@@ -587,7 +585,7 @@ export default class TooltipsPTR2e {
     const uuid = element.dataset.message;
     if (!uuid) return false;
 
-    const message = (await fromUuid(uuid)) as ChatMessagePTR2e<DamageAppliedMessageSystem>;
+    const message = (await fromUuid<ChatMessage.ConfiguredInstance>(uuid as ValidUUID)) as ChatMessage.ConfiguredInstance & {system: DamageAppliedMessageSystem};
     if (!message) return false;
 
     this.tooltip.classList.add("damage-info");
@@ -613,7 +611,7 @@ export default class TooltipsPTR2e {
     const messageId = (element.closest("[data-message-id]") as HTMLElement)?.dataset?.messageId;
     if (!messageId) return false;
 
-    const message = game.messages.get(messageId) as ChatMessagePTR2e<AttackMessageSystem>;
+    const message = game.messages.get(messageId) as ChatMessage.ConfiguredInstance & {system: AttackMessageSystem};
     if (!message) return false;
 
     const target = message.system.context?.results.get(targetUuid);
@@ -650,7 +648,7 @@ export default class TooltipsPTR2e {
         const { targetUuid, messageId } = ((event.currentTarget as HTMLElement).closest("[data-target-uuid]") as HTMLElement)?.dataset ?? {};
         if (!targetUuid || !messageId) return;
 
-        const message = game.messages.get(messageId) as ChatMessagePTR2e<AttackMessageSystem>;
+        const message = game.messages.get(messageId) as ChatMessage.ConfiguredInstance & {system: AttackMessageSystem};
         const target = message.system.context?.results.get(targetUuid as ActorUUID);
         if (!target) return;
         if (!target.effect.effects?.[type]?.length) return;
@@ -667,9 +665,11 @@ export default class TooltipsPTR2e {
 
         result.effectRolls![type][index].success = (() => {
           if (result.effectRolls![type][index].success === null) {
+            //@ts-expect-error - FIXME: Maybe a fvtt-types error, at the very least, this is marked as nullable, but not showing up as such here.
             if (!result.effectRolls![type][index].roll) throw Error("No roll found");
             try {
-              return (Roll.fromJSON(result.effectRolls![type][index].roll!) as Rolled<Roll>).total <= 0 ? false : true;
+              //@ts-expect-error - FIXME: Maybe a fvtt-types error, at the very least, this is marked as nullable, but not showing up as such here.
+              return (Roll.fromJSON(result.effectRolls![type][index].roll!) as Roll.Evaluated<Roll>).total <= 0 ? false : true;
             } catch (error: unknown) {
               Hooks.onError("AttackMessageSystem#prepareBaseData", error as Error, {
                 log: "error",
@@ -736,19 +736,19 @@ export default class TooltipsPTR2e {
     return 500;
   }
 
-  async #createItemTooltip<TItem extends ItemPTR2e>(perk: TItem, type: string) {
-    const traits = [...(perk.traits?.values() ?? [])].map((t) => ({
+  async #createItemTooltip<TItem extends Item.ConfiguredInstance>(item: TItem, type: string) {
+    const traits = [...(item.traits?.values() ?? [])].map((t) => ({
       value: t.slug,
       label: t.label,
       type: t.type
     }));
 
-    const prerequisites = perk.type === "perk" ? (perk as PerkPTR2e).system.getPredicateStrings() : null
+    const prerequisites = item.type === "perk" ? (item as PerkPTR2e).system.getPredicateStrings() : null
 
     this.tooltip.classList.add(type);
     await this._renderTooltip({
       path: `systems/ptr2e/templates/items/embeds/${type}.hbs`,
-      data: { fields: perk.system.schema.fields, document: perk, traits, prerequisites },
+      data: { fields: item.system.schema.fields, document: item, traits, prerequisites },
       direction: game.tooltip.element?.dataset.tooltipDirection as
         | TooltipDirections
         | undefined,
@@ -770,7 +770,7 @@ export default class TooltipsPTR2e {
             return `
                         <tag contenteditable="false" spellcheck="false" tabindex="-1" class="tagify__tag" ${this.getAttributes(
               tagData
-            )}style="${Trait.bgColors[tagData.type || "default"] ? `--tag-bg: ${Trait.bgColors[tagData.type || "default"]!["bg"]}; --tag-hover: ${Trait.bgColors[tagData.type || "default"]!["hover"]}; --tag-border-color: ${Trait.bgColors[tagData.type || "default"]!["border"]};` : ""}">
+            )}style="${Trait.bgColors[(tagData.type || "default") as keyof typeof Trait['bgColors']] ? `--tag-bg: ${Trait.bgColors[(tagData.type || "default") as keyof typeof Trait['bgColors']]!["bg"]}; --tag-hover: ${Trait.bgColors[(tagData.type || "default") as keyof typeof Trait['bgColors']]!["hover"]}; --tag-border-color: ${Trait.bgColors[(tagData.type || "default") as keyof typeof Trait['bgColors']]!["border"]};` : ""}">
                         <x title="" class="tagify__tag__removeBtn" role="button" aria-label="remove tag"></x>
                         <div>
                             <span class='tagify__tag-text'>
@@ -821,7 +821,7 @@ export default class TooltipsPTR2e {
     if (embedFigure?.classList.contains("no-tooltip") && embedFigure.dataset.uuid === uuid)
       return false;
 
-    const entity = (await fromUuid(uuid)) as ItemPTR2e | null;
+    const entity = (await fromUuid<Item.ConfiguredInstance>(uuid as ItemUUID))
     if (!entity) return false;
 
     switch (entity.type) {

@@ -1,18 +1,18 @@
-import type { ActorPTR2e, Attribute } from "@actor";
+import type { Attribute } from "@actor";
 import type { ActorSheetPTR2e } from "@actor";
 import { CenterLabelsPlugin } from "@scripts/chart-plugins.ts";
 import type { ChartOptions } from "chart.js/auto";
 import { Chart } from "chart.js/auto";
 
 export class StatsChart {
-    sheet: ActorSheetPTR2e | foundry.applications.api.DocumentSheetV2<ActorPTR2e>;
+    sheet: ActorSheetPTR2e | foundry.applications.api.DocumentSheetV2<Actor.ConfiguredInstance>;
     chart: Chart | undefined;
     _options: ChartOptions;
     id: string | undefined;
     cssclass: string;
     initialized: boolean;
 
-    constructor(sheet: ActorSheetPTR2e | foundry.applications.api.DocumentSheetV2<ActorPTR2e>, options: Partial<ChartOptions> = {}, { id, cssclass }: { id?: string, cssclass: string } = { cssclass: "stats-chart" }) {
+    constructor(sheet: ActorSheetPTR2e | foundry.applications.api.DocumentSheetV2<Actor.ConfiguredInstance>, options: Partial<ChartOptions> = {}, { id, cssclass }: { id?: string, cssclass: string } = { cssclass: "stats-chart" }) {
         this.sheet = sheet;
         this._options = options;
         this.id = id;

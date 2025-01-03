@@ -105,8 +105,8 @@ class TraitsSettingsMenu extends foundry.applications.api.HandlebarsApplicationM
     partId: string,
     context: AnyObject,
     options: foundry.applications.api.HandlebarsApplicationMixin.HandlebarsRenderOptions
-  ) {
-    const preparedContext = await super._preparePartContext(partId, context, options);
+  ): Promise<AnyObject> {
+    const preparedContext = await super._preparePartContext(partId, context, options) as AnyObject & { partId: string }
     preparedContext.partId = partId;
     return preparedContext;
   }

@@ -66,7 +66,7 @@ export class TextEnricher {
     span.dataset.affliction = affliction.id;
     span.dataset.tooltip = affliction.id;
     span.append((() => {
-      const name = label || game.i18n.localize(affliction.name);
+      const name = label || game.i18n.localize(affliction.name!);
       return TextEditor.createAnchor({
         classes: ["content-link"],
         attrs: { draggable: true as unknown as string },

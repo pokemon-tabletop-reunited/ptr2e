@@ -4,7 +4,6 @@ import ActiveEffectSystem from "../system.ts";
 import { Predicate } from "@system/predication/predication.ts";
 import { sluggify } from "@utils";
 import * as R from "remeda";
-import type { DeepPartial } from "fvtt-types/utils";
 
 const formEffectSchema = {
   trigger: new foundry.data.fields.StringField({

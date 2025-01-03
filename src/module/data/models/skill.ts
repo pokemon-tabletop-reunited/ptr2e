@@ -1,7 +1,7 @@
 import { SlugField } from "../fields/slug-field.ts";
 
 const skillSchema = {
-  slug: new SlugField({ required: true, blank: false }),
+  slug: new SlugField({ required: true, nullable: false, blank: false }),
   value: new foundry.data.fields.NumberField({
     required: true,
     initial: 1,
@@ -21,7 +21,7 @@ const skillSchema = {
 
 export type SkillSchema = typeof skillSchema;
 
-class SkillPTR2e extends foundry.abstract.DataModel<SkillSchema> {
+class SkillPTR2e extends foundry.abstract.DataModel<SkillSchema, foundry.abstract.DataModel.Any | null> {
   declare total: number;
 
   static override defineSchema(): SkillSchema {
@@ -71,7 +71,7 @@ class SkillPTR2e extends foundry.abstract.DataModel<SkillSchema> {
   }
 }
 
-type CoreSkill = Pick<foundry.data.fields.SchemaField.InnerAssignmentType<SkillSchema>, 'slug' | 'favourite' | 'hidden' | 'group'>;
+type CoreSkill = Pick<foundry.data.fields.SchemaField.PersistedType<SkillSchema>, 'slug' | 'favourite' | 'hidden' | 'group'>;
 type CustomSkill = CoreSkill & { label: string; description: string };
 type Skill = CoreSkill | CustomSkill;
 

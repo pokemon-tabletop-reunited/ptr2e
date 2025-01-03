@@ -29,7 +29,7 @@ export const ChatContext: PTRHook = {
               //@ts-expect-error - fvtt-types error
               yes: {
                 callback: async () => {
-                  await message.system.reroll();
+                  await (message.system as SkillMessageSystem).reroll();
                 }
               }
             });
@@ -107,7 +107,7 @@ export const ChatContext: PTRHook = {
                 return {
                   uuid: r.target.uuid,
                   name: r.target.name,
-                  img: r.target.img,
+                  img: r.target.img!,
                   description: game.i18n.format("PTR2E.ChatContext.SpendLuckAttack.requires", { amount }),
                   amount,
                   result: r,

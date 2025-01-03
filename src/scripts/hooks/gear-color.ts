@@ -69,7 +69,7 @@ export const GearColor: PTRHook = {
 
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
           const collection = context.collection as CompendiumCollection<any>;
-          (async () => {
+          (async () => { //@ts-expect-error - FIXME: fvtt-types typings for getIndex are incorrect
             const index = await collection.getIndex({ fields: ["system.rarity"] })
 
             for (const id of toIndex) {

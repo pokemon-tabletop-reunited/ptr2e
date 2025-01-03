@@ -1,11 +1,10 @@
 import type { ActorSheetPTR2e } from "@actor";
 import { ItemPTR2e, type BlueprintPTR2e } from "@item";
 import { BlueprintSheetPTR2e } from "@item/sheets/index.ts";
-import type { DropData } from "node_modules/fvtt-types/src/foundry/client/data/abstract/client-document.d.mts";
 
 export const DropCanvasData = {
   listen() {
-    Hooks.on("dropCanvasData", async (canvas, drop: DropData<Item.ConfiguredClass>) => {
+    Hooks.on("dropCanvasData", async (canvas, drop: foundry.abstract.Document.DropData<Item.ConfiguredClass>) => {
       if (drop.type === "Item") {
         const item = await fromUuid(drop.uuid) as ItemPTR2e | null;
         if (item?.type === "species") {
@@ -33,25 +32,29 @@ export const DropCanvasData = {
               temporary: true
             }
           );
-          if(!blueprint || !canvas.scene) return;
+          if (!blueprint || !canvas.scene) return;
 
           const x = Math.floor(drop.x / canvas.scene.grid.size) * canvas.scene.grid.size
           const y = Math.floor(drop.y / canvas.scene.grid.size) * canvas.scene.grid.size
 
-          return void new BlueprintSheetPTR2e({ document: blueprint, generation: {
-            x, y, canvas, temporary: true
-          } }).render(true);
+          return void new BlueprintSheetPTR2e({
+            document: blueprint, generation: {
+              x, y, canvas, temporary: true
+            }
+          }).render(true);
         }
-        if(item?.type === "blueprint") {
+        if (item?.type === "blueprint") {
           const blueprint = item as BlueprintPTR2e;
-          if(!blueprint || !canvas.scene) return;
+          if (!blueprint || !canvas.scene) return;
 
           const x = Math.floor(drop.x / canvas.scene.grid.size) * canvas.scene.grid.size
           const y = Math.floor(drop.y / canvas.scene.grid.size) * canvas.scene.grid.size
 
-          return void new BlueprintSheetPTR2e({ document: blueprint, generation: {
-            x, y, canvas, temporary: false
-          } }).render(true);
+          return void new BlueprintSheetPTR2e({
+            document: blueprint, generation: {
+              x, y, canvas, temporary: false
+            }
+          }).render(true);
         }
       }
     });

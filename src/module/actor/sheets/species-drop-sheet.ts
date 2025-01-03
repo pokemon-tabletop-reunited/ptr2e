@@ -33,10 +33,10 @@ class SpeciesDropSheetV2 extends foundry.applications.api.HandlebarsApplicationM
     },
   }
 
-  promise: (value: ItemPTR2e<SpeciesSystemModel> | null) => void;
+  promise: (value: Item.ConfiguredInstance | null) => void;
 
   constructor(
-    promise: (value: ItemPTR2e<SpeciesSystemModel> | null) => void,
+    promise: (value: Item.ConfiguredInstance | null) => void,
     options?: ApplicationConfigurationExpanded
   ) {
     super(options);
@@ -49,9 +49,9 @@ class SpeciesDropSheetV2 extends foundry.applications.api.HandlebarsApplicationM
   }
 
   override async _onDrop(event: DragEvent) {
-    const data = TextEditor.getDragEventData(event) as Record<string, string>;
+    const data = TextEditor.getDragEventData(event) as unknown as Record<string, string>;
     if (data.type === "Item") {
-      const item = await fromUuid(data.uuid);
+      const item = await fromUuid<Item.ConfiguredInstance>(data.uuid);
       if (!item) {
         ui.notifications.error("The dropped item could not be found");
         return;

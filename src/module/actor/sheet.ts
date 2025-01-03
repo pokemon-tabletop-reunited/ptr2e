@@ -1,29 +1,17 @@
-import type { AbilityPTR2e, ItemSystemPTR, SpeciesPTR2e } from "@item";
-import { ItemPTR2e } from "@item";
-import ActorPTR2e from "./base.ts";
+import type { AbilityPTR2e, SpeciesPTR2e } from "@item";
 import { htmlQuery, htmlQueryAll, sluggify } from "@utils";
 import type { Tab } from "@item/sheets/document.ts";
-import type { ActorComponentKey} from "./components/sheet.ts";
+import type { ActorComponentKey } from "./components/sheet.ts";
 import { ActorComponents, ComponentPopout } from "./components/sheet.ts";
 import { EffectComponent } from "./components/effect-component.ts";
-import type GearSystem from "@item/data/gear.ts";
-import type WeaponSystem from "@item/data/weapon.ts";
-import type ConsumableSystem from "@item/data/consumable.ts";
 import Tagify from "@yaireo/tagify";
-import type EquipmentSystem from "@item/data/equipment.ts";
-import type ContainerSystem from "@item/data/container.ts";
 import { KnownActionsApp } from "@module/apps/known-attacks.ts";
 import { RestApp } from "@module/apps/rest.ts";
-import type {
-  DocumentSheetConfigurationExpanded} from "@module/apps/appv2-expanded.ts";
-import {
-  ActorSheetV2Expanded
-} from "@module/apps/appv2-expanded.ts";
+import { ActorSheetV2Expanded, type ApplicationConfigurationExpanded } from "@module/apps/appv2-expanded.ts";
 import { ActionEditor } from "@module/apps/action-editor.ts";
-import type SkillPTR2e from "@module/data/models/skill.ts";
 import { SkillsComponent } from "./components/skills-component.ts";
 import { SkillsEditor } from "@module/apps/skills-editor.ts";
-import type { AttackPTR2e} from "@data";
+import type { AttackPTR2e } from "@data";
 import { Trait } from "@data";
 import { PerksComponent } from "./components/perks-component.ts";
 import { AbilitiesComponent } from "./components/abilities-component.ts";
@@ -32,216 +20,218 @@ import StatsForm from "./sheets/stats-form.ts";
 import { natures } from "@scripts/config/natures.ts";
 import { AvailableAbilitiesApp } from "@module/apps/available-abilities.ts";
 import { DataInspector } from "@module/apps/data-inspector/data-inspector.ts";
-import Clock from "@module/data/models/clock.ts";
+import Clock, { type ClockSchema } from "@module/data/models/clock.ts";
 import ClockEditor from "@module/apps/clocks/clock-editor.ts";
 import Sortable from "sortablejs";
 import PartySheetPTR2e from "@module/apps/party-sheet.ts";
 import { ToggleComponent } from "./components/toggle-component.ts";
 import { PerkWebApp } from "@module/apps/perk-web/perk-web-v2.ts";
+import type { AnyObject, DeepPartial } from "fvtt-types/utils";
+import type { SkillSchema } from "@module/data/models/skill.ts";
 
 class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixin(
   ActorSheetV2Expanded
-) {
-  constructor(options: Partial<DocumentSheetConfigurationExpanded> = {}) {
+)<AnyObject> {
+  constructor(options: DeepPartial<ApplicationConfigurationExpanded> & {document: Actor.ConfiguredInstance}) {
     super(options);
 
     this.statsChart = new StatsChart(this);
   }
 
-  static override DEFAULT_OPTIONS = foundry.utils.mergeObject(
-    super.DEFAULT_OPTIONS,
-    {
-      classes: ["ptr2e", "sheet", "actor", "v2"],
-      position: {
-        width: 900,
-        height: 700,
-      },
-      window: {
-        resizable: true,
-        controls: [
-          ...(super.DEFAULT_OPTIONS?.window?.controls ?? []),
-          {
-            icon: "fas fa-cog",
-            label: "PTR2E.ActorSheet.Settings.Title",
-            action: "open-settings",
-            visible: true,
-          },
-          {
-            icon: "fas fa-atom",
-            label: "PTR2E.ActorSheet.Inspector",
-            action: "open-inspector",
-            visible: true
-          },
-          {
-            icon: "fas fa-user-group",
-            label: "PTR2E.ActorSheet.PartySheet",
-            action: "open-party-sheet",
-            visible: true,
-          },
-          {
-            icon: "fas fa-list",
-            label: "PTR2E.OpenTutorList",
-            action: "open-tutor-list",
-            visible: true,
-          },
-          {
-            icon: "fas fa-heart-circle-plus",
-            label: "PTR2E.ActorSheet.Rest",
-            action: "rest",
-            visible: true,
-          },
-        ],
-      },
-      form: {
-        submitOnChange: true,
-      },
-      dragDrop: [
+  static override DEFAULT_OPTIONS = {
+    classes: ["ptr2e", "sheet", "actor", "v2"],
+    position: {
+      width: 900,
+      height: 700,
+    },
+    window: {
+      resizable: true,
+      controls: [ //@ts-expect-error - FIXME: cast base class to not have this issue.
+        ...(super.DEFAULT_OPTIONS?.window?.controls ?? []),
         {
-          dropSelector: ".window-content",
-          dragSelector:
-            "fieldset .item, fieldset .effect, fieldset .action, ul.items > li",
+          icon: "fas fa-cog",
+          label: "PTR2E.ActorSheet.Settings.Title",
+          action: "open-settings",
+          visible: true,
+        },
+        {
+          icon: "fas fa-atom",
+          label: "PTR2E.ActorSheet.Inspector",
+          action: "open-inspector",
+          visible: true
+        },
+        {
+          icon: "fas fa-user-group",
+          label: "PTR2E.ActorSheet.PartySheet",
+          action: "open-party-sheet",
+          visible: true,
+        },
+        {
+          icon: "fas fa-list",
+          label: "PTR2E.OpenTutorList",
+          action: "open-tutor-list",
+          visible: true,
+        },
+        {
+          icon: "fas fa-heart-circle-plus",
+          label: "PTR2E.ActorSheet.Rest",
+          action: "rest",
+          visible: true,
         },
       ],
-      actions: {
-        "species-header": async function (this: ActorSheetPTRV2, event: Event) {
-          event.preventDefault();
-          const species = this.actor.items.get("actorspeciesitem") as SpeciesPTR2e;
-          if(!species) return;
-          species.sheet.render(true);
-        },
-        "open-inspector": async function (this: ActorSheetPTRV2, event: Event) {
-          event.preventDefault();
-          const inspector = new DataInspector(this.actor);
-          inspector.render(true);
-        },
-        "open-perk-web": async function (this: ActorSheetPTRV2) {
-          // if ([true, undefined].includes(this.actor.flags.ptr2e?.sheet?.perkFlash))
-          //   await this.actor.setFlag("ptr2e", "sheet.perkFlash", false);
-          // game.ptr.web.open(this.actor);
+    },
+    form: {
+      submitOnChange: true,
+    },
+    dragDrop: [
+      {
+        dropSelector: ".window-content",
+        dragSelector:
+          "fieldset .item, fieldset .effect, fieldset .action, ul.items > li",
+      },
+    ],
+    actions: {
+      "species-header": async function (this: ActorSheetPTRV2, event: Event) {
+        event.preventDefault();
+        const species = this.actor.items.get("actorspeciesitem") as SpeciesPTR2e;
+        if (!species) return;
+        species.sheet!.render(true);
+      },
+      "open-inspector": async function (this: ActorSheetPTRV2, event: Event) {
+        event.preventDefault();
+        const inspector = new DataInspector(this.actor);
+        inspector.render(true);
+      },
+      "open-perk-web": async function (this: ActorSheetPTRV2) {
+        // if ([true, undefined].includes(this.actor.flags.ptr2e?.sheet?.perkFlash))
+        //   await this.actor.setFlag("ptr2e", "sheet.perkFlash", false);
+        // game.ptr.web.open(this.actor);
 
-          const app = new PerkWebApp(this.actor);
-          app.render(true);
-        },
-        "open-party-sheet": async function (this: ActorSheetPTRV2) {
-          if (!this.actor.party) return;
-          new PartySheetPTR2e({ folder: this.actor.folder! }).render(true);
-        },
-        "edit-movelist": function (this: ActorSheetPTRV2) {
-          return new KnownActionsApp(this.actor).render(true);
-        },
-        "edit-abilitylist": function (this: ActorSheetPTRV2) {
-          return new AvailableAbilitiesApp(this.actor).render(true);
-        },
-        "roll-attack": async function (this: ActorSheetPTRV2, event: Event) {
-          const actionDiv = (event.target as HTMLElement).closest(
-            ".action"
-          ) as HTMLElement;
-          if (!actionDiv) return;
+        const app = new PerkWebApp(this.actor);
+        app.render(true);
+      },
+      "open-party-sheet": async function (this: ActorSheetPTRV2) {
+        if (!this.actor.party) return;
+        new PartySheetPTR2e({ folder: this.actor.folder! }).render(true);
+      },
+      "edit-movelist": function (this: ActorSheetPTRV2) {
+        return new KnownActionsApp(this.actor).render(true);
+      },
+      "edit-abilitylist": function (this: ActorSheetPTRV2) {
+        return new AvailableAbilitiesApp(this.actor).render(true);
+      },
+      "roll-attack": async function (this: ActorSheetPTRV2, event: Event) {
+        const actionDiv = (event.target as HTMLElement).closest(
+          ".action"
+        ) as HTMLElement;
+        if (!actionDiv) return;
 
-          const slug = actionDiv.dataset.slug;
-          if (!slug) return;
+        const slug = actionDiv.dataset.slug;
+        if (!slug) return;
 
-          const action = this.actor.actions.get(slug);
-          if (!action) return;
-          if ("rollable" in action && action.rollable === true)
-            await (action as AttackPTR2e).roll();
-        },
-        "action-to-chat": ActorSheetPTRV2._onToChatAction,
-        "action-edit": ActorSheetPTRV2._onEditAction,
-        "action-delete": ActorSheetPTRV2._onDeleteAction,
-        "favourite-skill": ActorSheetPTRV2._onFavouriteSkill,
-        "hide-skill": ActorSheetPTRV2._onHideSkill,
-        "toggle-hidden-skills": async function (this: ActorSheetPTRV2) {
-          const appSettings = foundry.utils.duplicate(
-            game.user.getFlag("ptr2e", "appSettings") ?? {}
-          ) as Record<string, Record<string, unknown>>;
-          if (!appSettings[this.appId])
-            appSettings[this.appId] = { hideHiddenSkills: true };
-          appSettings[this.appId].hideHiddenSkills =
-            !appSettings[this.appId].hideHiddenSkills;
-          await game.user.setFlag("ptr2e", "appSettings", appSettings);
+        const action = this.actor.actions.get(slug);
+        if (!action) return;
+        if ("rollable" in action && action.rollable === true)
+          await (action as AttackPTR2e).roll();
+      },
+      "action-to-chat": ActorSheetPTRV2._onToChatAction,
+      "action-edit": ActorSheetPTRV2._onEditAction,
+      "action-delete": ActorSheetPTRV2._onDeleteAction,
+      "favourite-skill": ActorSheetPTRV2._onFavouriteSkill,
+      "hide-skill": ActorSheetPTRV2._onHideSkill,
+      "toggle-hidden-skills": async function (this: ActorSheetPTRV2) {
+        const appSettings = foundry.utils.duplicate(
+          game.user.getFlag("ptr2e", "appSettings") ?? {}
+        ) as Record<string, Record<string, unknown>>;
+        if (!appSettings[this.appId])
+          appSettings[this.appId] = { hideHiddenSkills: true };
+        appSettings[this.appId].hideHiddenSkills =
+          !appSettings[this.appId].hideHiddenSkills;
+        await game.user.setFlag("ptr2e", "appSettings", appSettings);
 
-          for (const app of Object.values(this.actor.apps)) {
-            if (app instanceof foundry.applications.api.ApplicationV2) {
-              const parts = (app as unknown as { parts: Record<string, unknown> })
-                .parts;
-              if ("popout" in parts) app.render({ parts: ["popout"] });
-              if ("skills" in parts) app.render({ parts: ["skills"] });
-            } else app?.render();
-          }
-        },
-        "edit-skills": async function (this: ActorSheetPTRV2) {
-          return new SkillsEditor(this.actor).render(true);
-        },
-        "luck-roll": async function (this: ActorSheetPTRV2) {
-          const skill = this.actor.system.skills.get("luck")!;
-          await skill.endOfDayLuckRoll();
-        },
-        "rest": function (this: ActorSheetPTRV2) {
-          const toHeal = this.actor?.party ? [this.actor.party.owner!, ...(this.actor.party.party ?? [])] : [this.actor];
-          new RestApp(this.document.name, toHeal).render(true);
-        },
-        "add-clock": ActorSheetPTRV2.#onAddClock,
-        "open-tutor-list": function (this: ActorSheetPTRV2) {
-          game.ptr.tutorList.render({ force: true, actor: this.actor });
-        },
-        "open-settings": function (this: ActorSheetPTRV2) {
-          const alliance =
-            this.actor._source.system.details?.alliance === null ? "neutral" : (this.actor._source.system.details?.alliance || "default");
-          const defaultValue = game.i18n.localize(
-            this.actor.hasPlayerOwner
-              ? "PTR2E.ActorSheet.Alliance.Party"
-              : "PTR2E.ActorSheet.Alliance.Opposition",
-          );
-
-          const allianceOptions = {
-            default: game.i18n.format("PTR2E.ActorSheet.Alliance.Default", { alliance: defaultValue }),
-            opposition: "PTR2E.ActorSheet.Alliance.Opposition",
-            party: "PTR2E.ActorSheet.Alliance.Party",
-            neutral: "PTR2E.ActorSheet.Alliance.Neutral",
-          };
-          //@ts-expect-error - Type incomplete
-          const sizeFields = this.actor.system.schema.fields.details.fields.size.fields as foundry.data.fields.DataSchema;
-
-          return void foundry.applications.api.DialogV2.prompt({
-            content: `<p>${game.i18n.localize("PTR2E.ActorSheet.Settings.Content")}</p>
-            <div class="form-group"><label>${game.i18n.localize("PTR2E.FIELDS.details.alliance.label")}</label><div class="form-fields"><select name="system.details.alliance">
-            ${Object.entries(allianceOptions).map(([key, value]) => `<option value="${key}" ${key === alliance ? "selected" : ""}>${game.i18n.localize(value)}</option>`).join("")}
-            </select></div></div>${Handlebars.helpers.formField(sizeFields.height, {hash: {
-              localize: true,
-              value: this.actor._source.system.details.size.height
-            }})}${Handlebars.helpers.formField(sizeFields.weight, {hash: {
-              localize: true,
-              value: this.actor._source.system.details.size.weight
-            }})}<div class="form-group"><label>Height Class</label><div class="form-fields"><input readonly type="text" value="${game.i18n.localize(this.actor.size.toString())}"></div></div><div class="form-group"><label>Weight Class</label><div class="form-fields"><input readonly type="text" value="${this.actor.system.details.size.weightClass}"></div></div>`,
-            window: { title: game.i18n.localize("PTR2E.ActorSheet.Settings.Title") },
-            ok: {
-              label: game.i18n.localize("PTR2E.ActorSheet.Settings.Save"),
-              action: "ok",
-              callback: async (_event, target, element) => {
-                const html = element ?? target;
-                const alliance = htmlQuery<HTMLInputElement>(html, '[name="system.details.alliance"]')?.value;
-                const height = htmlQuery<HTMLInputElement>(html, '[name="system.details.size.height"]')?.value;
-                const weight = htmlQuery<HTMLInputElement>(html, '[name="system.details.size.weight"]')?.value;
-                const updateData = {
-                  ...(alliance === "default"
-                    ? { "system.details.alliance": '' }
-                    : alliance === "neutral"
-                      ? { "system.details.alliance": null }
-                      : { "system.details.alliance": alliance }),
-                  "system.details.size.height": height,
-                  "system.details.size.weight": weight,
-                }
-                return void this.actor.update(updateData);
-              }
-            },
-            rejectClose: false
-          });
+        for (const app of Object.values(this.actor.apps)) {
+          if (app instanceof foundry.applications.api.ApplicationV2) {
+            const parts = (app as unknown as { parts: Record<string, unknown> })
+              .parts;
+            if ("popout" in parts) app.render({ parts: ["popout"] });
+            if ("skills" in parts) app.render({ parts: ["skills"] });
+          } else app?.render();
         }
       },
+      "edit-skills": async function (this: ActorSheetPTRV2) {
+        return new SkillsEditor(this.actor).render(true);
+      },
+      "luck-roll": async function (this: ActorSheetPTRV2) {
+        const skill = this.actor.system.skills.get("luck")!;
+        await skill.endOfDayLuckRoll();
+      },
+      "rest": function (this: ActorSheetPTRV2) {
+        const toHeal = this.actor?.party ? [this.actor.party.owner!, ...(this.actor.party.party ?? [])] : [this.actor];
+        new RestApp(this.document.name, toHeal).render(true);
+      },
+      "add-clock": ActorSheetPTRV2.#onAddClock,
+      "open-tutor-list": function (this: ActorSheetPTRV2) {
+        game.ptr.tutorList.render({ force: true, actor: this.actor });
+      },
+      "open-settings": function (this: ActorSheetPTRV2) {
+        const alliance =
+          this.actor._source.system.details?.alliance === null ? "neutral" : (this.actor._source.system.details?.alliance || "default");
+        const defaultValue = game.i18n.localize(
+          this.actor.hasPlayerOwner
+            ? "PTR2E.ActorSheet.Alliance.Party"
+            : "PTR2E.ActorSheet.Alliance.Opposition",
+        );
+
+        const allianceOptions = {
+          default: game.i18n.format("PTR2E.ActorSheet.Alliance.Default", { alliance: defaultValue }),
+          opposition: "PTR2E.ActorSheet.Alliance.Opposition",
+          party: "PTR2E.ActorSheet.Alliance.Party",
+          neutral: "PTR2E.ActorSheet.Alliance.Neutral",
+        };
+        const sizeFields = this.actor.system.schema.fields.details.fields.size.fields as foundry.data.fields.DataSchema;
+
+        return void foundry.applications.api.DialogV2.prompt<foundry.applications.api.DialogV2.WaitOptions, void>({
+          content: `<p>${game.i18n.localize("PTR2E.ActorSheet.Settings.Content")}</p>
+            <div class="form-group"><label>${game.i18n.localize("PTR2E.FIELDS.details.alliance.label")}</label><div class="form-fields"><select name="system.details.alliance">
+            ${Object.entries(allianceOptions).map(([key, value]) => `<option value="${key}" ${key === alliance ? "selected" : ""}>${game.i18n.localize(value)}</option>`).join("")}
+            </select></div></div>${Handlebars.helpers.formField(sizeFields.height, {
+            hash: {
+              localize: true,
+              value: this.actor._source.system.details.size.height
+            }
+          })}${Handlebars.helpers.formField(sizeFields.weight, {
+            hash: {
+              localize: true,
+              value: this.actor._source.system.details.size.weight
+            }
+          })}<div class="form-group"><label>Height Class</label><div class="form-fields"><input readonly type="text" value="${game.i18n.localize(this.actor.size.toString())}"></div></div><div class="form-group"><label>Weight Class</label><div class="form-fields"><input readonly type="text" value="${this.actor.system.details.size.weightClass}"></div></div>`,
+          //@ts-expect-error - FIXME: FVTT-Types are incorrect
+          window: { title: game.i18n.localize("PTR2E.ActorSheet.Settings.Title") },
+          ok: {
+            label: game.i18n.localize("PTR2E.ActorSheet.Settings.Save"),
+            action: "ok",
+            callback: async (_event, target, element) => {
+              const html = element ?? target;
+              const alliance = htmlQuery<HTMLInputElement>(html, '[name="system.details.alliance"]')?.value;
+              const height = htmlQuery<HTMLInputElement>(html, '[name="system.details.size.height"]')?.value;
+              const weight = htmlQuery<HTMLInputElement>(html, '[name="system.details.size.weight"]')?.value;
+              const updateData = {
+                ...(alliance === "default"
+                  ? { "system.details.alliance": '' }
+                  : alliance === "neutral"
+                    ? { "system.details.alliance": null }
+                    : { "system.details.alliance": alliance }),
+                "system.details.size.height": height,
+                "system.details.size.weight": weight,
+              }
+              return void this.actor.update(updateData);
+            }
+          },
+          rejectClose: false
+        });
+      }
     },
-    { inplace: false }
-  );
+  };
 
   get appId() {
     return this.id.replaceAll(".", "-");
@@ -306,7 +296,7 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
 
   protected statsChart: StatsChart;
 
-  tabGroups: Record<string, string> = {
+  override tabGroups: Record<string, string> = {
     sheet: "overview",
     actions: "slots",
   };
@@ -418,8 +408,8 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
   }
 
   override async _prepareContext(
-    options?: foundry.applications.api.HandlebarsDocumentSheetConfiguration<ActorPTR2e>
-  ) {
+    options: foundry.applications.api.HandlebarsApplicationMixin.HandlebarsRenderOptions
+  ): Promise<AnyObject> {
     const { skills, hideHiddenSkills } = SkillsComponent.prepareSkillsData(this.actor);
     const shouldPerkFlash =
       this.actor.flags.ptr2e?.sheet?.perkFlash === false
@@ -440,22 +430,22 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
     };
   }
 
-  _prepareEffectiveness(): Record<string, { value: number, name: string}[]> {
-    const effectiveness = { effective: [], ineffective: [], immune: [] } as Record<string, {value: number, name: string}[]>;
-    for(const [type, value] of Object.entries(this.actor.system.type.effectiveness)) {
+  _prepareEffectiveness(): Record<string, { value: number, name: string }[]> {
+    const effectiveness = { effective: [], ineffective: [], immune: [] } as Record<string, { value: number, name: string }[]>;
+    for (const [type, value] of Object.entries(this.actor.system.type.effectiveness)) {
       //TODO: Make this a setting
-      if(type === "nuclear") continue;
-      if(type === "shadow") continue;
+      if (type === "nuclear") continue;
+      if (type === "shadow") continue;
 
-      if(value === 1) continue;
-      if(value === 0) {
+      if (value === 1) continue;
+      if (value === 0) {
         effectiveness.immune.push({
           value,
           name: type
         });
         continue;
       }
-      if(value > 1) {
+      if (value > 1) {
         effectiveness.effective.push({
           value,
           name: type
@@ -472,25 +462,27 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
 
   override async _preparePartContext(
     partId: string,
-    context: foundry.applications.api.ApplicationRenderContext
-  ) {
+    context: AnyObject,
+    options: foundry.applications.api.HandlebarsApplicationMixin.HandlebarsRenderOptions
+  ): Promise<AnyObject> {
+    const preparedContext = await super._preparePartContext(partId, context, options) as Record<string, unknown>
     if (partId === "overview") {
-      context.movement = Object.values(this.actor.system.movement);
+      preparedContext.movement = Object.values(this.actor.system.movement);
 
-      context.effectiveness = this._prepareEffectiveness();
+      preparedContext.effectiveness = this._prepareEffectiveness();
     }
 
     if (partId === "sidebar") {
-      context.species = this.actor.items.get("actorspeciesitem") as SpeciesPTR2e;
+      preparedContext.species = this.actor.items.get("actorspeciesitem") as SpeciesPTR2e;
     }
 
     if (partId === "clocks") {
-      context.clocks = game.user.isGM ? this.document.system.clocks.contents : this.document.system.clocks.contents.filter(c => !c.private);
+      preparedContext.clocks = game.user.isGM ? this.document.system.clocks.contents : this.document.system.clocks.contents.filter(c => !c.private);
     }
 
     if (partId === "inventory") {
       const inventory = (() => {
-        const inventory: Record<string, ItemPTR2e<ItemSystemPTR, ActorPTR2e>[]> = {};
+        const inventory: Record<string, Item.ConfiguredInstance[]> = {};
         for (const item of this.actor.items) {
           const physicalItems = [
             "weapon",
@@ -501,14 +493,7 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
           ];
           function isTypeOfPhysicalItem(
             item: Item
-          ): item is ItemPTR2e<
-            | GearSystem
-            | WeaponSystem
-            | ConsumableSystem
-            | EquipmentSystem
-            | ContainerSystem,
-            ActorPTR2e
-          > {
+          ): item is Item.ConfiguredInstance {
             return physicalItems.includes(item.type);
           }
           if (isTypeOfPhysicalItem(item)) {
@@ -522,16 +507,16 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
         }
         return inventory;
       })();
-      context.inventory = inventory;
+      preparedContext.inventory = inventory;
     }
 
     if (partId === "actions") {
-      context.subtabs = this._getSubTabs();
+      preparedContext.subtabs = this._getSubTabs();
     }
 
     if (partId === "effects") {
-      context.effects = this.actor.effects.contents;
-      context.toggles = this.actor.synthetics.toggles;
+      preparedContext.effects = this.actor.effects.contents;
+      preparedContext.toggles = this.actor.synthetics.toggles;
     }
 
     if (partId === "perks") {
@@ -558,14 +543,14 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
         type: trait.type,
       }));
 
-      context.traits = traits;
+      preparedContext.traits = traits;
 
       const { perk: perks, ability: abilities } = this.actor.itemTypes;
-      context.perks = perks.sort((a, b) => a.sort - b.sort);
-      context.abilities = abilities.sort((a, b) => a.sort - b.sort);
+      preparedContext.perks = perks.sort((a, b) => a.sort - b.sort);
+      preparedContext.abilities = abilities.sort((a, b) => a.sort - b.sort);
     }
 
-    return context;
+    return preparedContext;
   }
 
   override _attachPartListeners(
@@ -600,8 +585,8 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
       htmlQuery(htmlElement, "img[data-edit]")?.addEventListener("click", (event) => {
         const imgElement = event.currentTarget as HTMLImageElement;
         const attr = imgElement.dataset.edit;
-        const current = foundry.utils.getProperty<string | undefined>(this.actor, attr!);
-        const { img } = ActorPTR2e.getDefaultArtwork(this.actor.toObject()) ?? {};
+        const current = foundry.utils.getProperty(this.actor, attr!) as string | undefined
+        const { img } = CONFIG.Actor.documentClass.getDefaultArtwork(this.actor.toObject()) ?? {};
         const fp = new FilePicker({
           current,
           type: "image",
@@ -721,7 +706,7 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
             ],
             content: `<p>${game.i18n.format("PTR2E.Clocks.Global.Delete.Message", {
               label: clock.label,
-            })}</p>`,
+            })}</p>`,//@ts-expect-error - FIXME: FVTT-Types are incorrect
             window: {
               title: game.i18n.localize("PTR2E.Clocks.Global.Delete.Title"),
             },
@@ -754,7 +739,7 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
               siblings: clocks,
             });
 
-            const clocksData = foundry.utils.duplicate(this.document.system._source.clocks);
+            const clocksData = foundry.utils.duplicate(this.document.system._source.clocks) as foundry.data.fields.SchemaField.PersistedType<ClockSchema>[];
             for (const update of sortUpdates) {
               const index = clocksData.findIndex((c) => c.id === update.target.id);
               if (index === -1) continue;
@@ -775,7 +760,7 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
             ) as HTMLElement
           )?.dataset.itemId;
           if (!itemId) return;
-          return (this.document.items.get(itemId) as ItemPTR2e)?.sheet?.render(true);
+          return (this.document.items.get(itemId) as Item.ConfiguredInstance)?.sheet?.render(true);
         });
       }
 
@@ -795,13 +780,13 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
           // Confirm the deletion unless the user is holding Shift
           return event.shiftKey
             ? item.delete()
-            : foundry.applications.api.DialogV2.confirm({
+            : foundry.applications.api.DialogV2.confirm({//@ts-expect-error - FIXME: FVTT-Types are incorrect
               yes: {
                 callback: () => item.delete(),
               },
               content: game.i18n.format("PTR2E.Dialog.DeleteDocumentContent", {
                 name: item.name,
-              }),
+              }),//@ts-expect-error - FIXME: FVTT-Types are incorrect
               window: {
                 title: game.i18n.format("PTR2E.Dialog.DeleteDocumentTitle", {
                   name: item.name,
@@ -821,7 +806,7 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
               "[data-item-id]"
             ) as HTMLElement
           )?.dataset.itemId;
-          const item = this.document.items.get(itemId!) as ItemPTR2e;
+          const item = this.document.items.get(itemId!) as Item.ConfiguredInstance;
           if (!item || !("quantity" in item.system)) return;
 
           const action = (event.currentTarget as HTMLElement)?.dataset.action;
@@ -884,7 +869,7 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
     }
   }
 
-  override _getHeaderControls(): ApplicationHeaderControlsEntry[] {
+  override _getHeaderControls(): foundry.applications.api.ApplicationV2.HeaderControlsEntry[] {
     const controls = foundry.utils.duplicate(super._getHeaderControls());
 
     if (!this.actor.party) controls.findSplice(c => c.action === "open-party-sheet")
@@ -897,7 +882,7 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
     form: HTMLFormElement,
     formData: FormDataExtended
   ): Record<string, unknown> {
-    const submitData = formData.object;
+    const submitData = formData.object as Record<string, unknown>;
 
     if (
       "system.traits" in submitData &&
@@ -911,7 +896,7 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
       );
     }
 
-    return super._prepareSubmitData(event, form, formData);
+    return super._prepareSubmitData(event, form, formData) as Record<string, unknown>;
   }
 
   async _onPopout(event: Event) {
@@ -923,7 +908,7 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
   }
 
   override async close(
-    options: Partial<foundry.applications.api.ApplicationClosingOptions> = {}
+    options: Partial<foundry.applications.api.ApplicationV2.ClosingOptions> = {}
   ): Promise<this> {
     // if (game.ptr.web.actor === this.actor) {
     //   this.minimize();
@@ -951,23 +936,23 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
   }
 
   override async _onDrop(event: DragEvent) {
-    const data: {
+    const data = TextEditor.getDragEventData(event) as unknown as {
       type: string;
       action?: {
         slug: string;
         type: string;
       };
-      uuid?: string;
-    } = TextEditor.getDragEventData(event);
+      uuid?: ItemUUID;
+    }
 
     if (data.uuid) {
-      const item = await fromUuid(data.uuid);
+      const item = await fromUuid<Item.ConfiguredInstance>(data.uuid);
       if (
-        item instanceof ItemPTR2e &&
+        item instanceof CONFIG.Item.documentClass &&
         item.type == "ability" &&
-        this.actor.items.get(item.id) === item
+        this.actor.items.get(item.id!) === item
       ) {
-        this._onDropAbility(event, item);
+        this._onDropAbility(event, item as AbilityPTR2e);
         return;
       }
     }
@@ -1019,7 +1004,7 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
     ) as HTMLElement;
     if (!abilityDiv) return;
 
-    if(ability.system.isSuppressed) return void ui.notifications.warn("This ability is suppressed and cannot be re-assigned.");
+    if (ability.system.isSuppressed) return void ui.notifications.warn("This ability is suppressed and cannot be re-assigned.");
 
     const slot = Number(abilityDiv.dataset.slot);
     if (isNaN(slot)) return;
@@ -1031,7 +1016,7 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
     }
     if (currentAbility === ability) return;
 
-    if(currentAbility.system.isSuppressed) return void ui.notifications.warn("That slot is filled with a suppressed ability which cannot be re-assigned");
+    if (currentAbility.system.isSuppressed) return void ui.notifications.warn("That slot is filled with a suppressed ability which cannot be re-assigned");
 
     this.actor.updateEmbeddedDocuments("Item", [
       { _id: currentAbility.id, "system.slot": ability.system.slot ?? null },
@@ -1076,10 +1061,12 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
     const item = action.item;
 
     foundry.applications.api.DialogV2.confirm({
+      //@ts-expect-error - FIXME: FVTT-Types are incorrect
       window: {
         title: game.i18n.localize("PTR2E.Dialog.DeleteAction.Title"),
       },
       content: game.i18n.format("PTR2E.Dialog.DeleteAction.Content", { name: item.name }),
+      //@ts-expect-error - FIXME: FVTT-Types are incorrect
       yes: {
         callback: async () => {
           await item.delete();
@@ -1095,7 +1082,7 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
     const slug = skillDiv.dataset.slug;
     if (!slug) return;
 
-    const skills = this.actor.system.toObject().skills as SkillPTR2e["_source"][];
+    const skills = this.actor.system.toObject().skills as foundry.data.fields.SchemaField.PersistedType<SkillSchema>[];
     const index = skills.findIndex((s) => s.slug === slug);
     if (index === -1) return;
 
@@ -1111,7 +1098,7 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
     const slug = skillDiv.dataset.slug;
     if (!slug) return;
 
-    const skills = this.actor.system.toObject().skills as SkillPTR2e["_source"][];
+    const skills = this.actor.system.toObject().skills as foundry.data.fields.SchemaField.PersistedType<SkillSchema>[];
     const index = skills.findIndex((s) => s.slug === slug);
     if (index === -1) return;
 
@@ -1132,13 +1119,13 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
         const itemType = Item.TYPES.includes(type) ? type : null;
         if (!itemType) return;
 
-        return ItemPTR2e.createDialog({}, { parent: this.document, types: [itemType] });
+        return CONFIG.Item.documentClass.createDialog({}, { parent: this.document, types: [itemType] });
       }
     }
   }
 
-  emulateItemDrop(data: DropCanvasData) {
-    switch (data.type) {
+  emulateItemDrop(data: TokenLayer.DropData) {
+    switch (data.type as string) {
       case "Affliction":
         return this._onDropAffliction(new DragEvent("drop"), data);
       case "ActiveEffect":

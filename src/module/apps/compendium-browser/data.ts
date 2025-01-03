@@ -32,17 +32,17 @@ type CompendiumBrowserSettings = Omit<TabData<Record<string, PackInfo | undefine
 
 type CompendiumBrowserSourcesList = Record<string, SourceInfo | undefined>;
 interface CompendiumBrowserSources {
-    ignoreAsGM: boolean;
-    showEmptySources: boolean;
-    showUnknownSources: boolean;
-    sources: CompendiumBrowserSourcesList;
+  ignoreAsGM: boolean;
+  showEmptySources: boolean;
+  showUnknownSources: boolean;
+  sources: CompendiumBrowserSourcesList;
 }
 
 interface CompendiumBrowserSheetData {
-    user: Active<User>;
-    settings?: { settings: CompendiumBrowserSettings; sources: CompendiumBrowserSources };
-    scrollLimit?: number;
-    showCampaign: boolean;
+  user: User;
+  settings?: { settings: CompendiumBrowserSettings; sources: CompendiumBrowserSources };
+  scrollLimit?: number;
+  showCampaign: boolean;
 }
 
 export type {

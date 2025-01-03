@@ -312,7 +312,8 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
     // Migrate species Abilities data to the new format
     if (source.species?.abilities) {
       for (const abGroup of Object.keys(source.species.abilities)) {
-        source.species.abilities[abGroup] = (source.species.abilities[abGroup]).map(g => {
+        //@ts-expect-error - This is a migration, so we can safely assume the data is in the old format
+        source.species.abilities[abGroup] = (source.species.abilities[abGroup]).map((g: string | object) => {
           if (typeof g == "object") return g;
           return { slug: g, uuid: null };
         });
@@ -562,7 +563,7 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
 
   override prepareDerivedData(): void {
     super.prepareDerivedData();
-    this.species?.prepareDerivedData?.();
+    (this.species as SpeciesSystemModel | undefined)?.prepareDerivedData?.();
     this.parent.species?.prepareDerivedData?.();
 
     for (const ptype of this.type.types) {

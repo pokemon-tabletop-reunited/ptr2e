@@ -1,188 +1,187 @@
 import { ActorComponent } from "./base.ts";
-import type ActorPTR2e from "@actor/base.ts";
 import type { Skill } from "@actor/data.ts";
-import type SkillPTR2e from "@module/data/models/skill.ts";
+import type { SkillSchema } from "@module/data/models/skill.ts";
 import { htmlQueryAll } from "@utils";
 
 class SkillsComponent extends ActorComponent {
-    static override TEMPLATE = "systems/ptr2e/templates/actor/components/actor-skills-component.hbs";
-    static override TOOLTIP = "PTR2E.ActorSheet.Components.Skills.tooltip";
+  static override TEMPLATE = "systems/ptr2e/templates/actor/components/actor-skills-component.hbs";
+  static override TOOLTIP = "PTR2E.ActorSheet.Components.Skills.tooltip";
 
-    static override ACTIONS = {
-        "toggle-hidden-skills": async function (this: SkillsComponent) {
-            const appSettings = foundry.utils.duplicate(game.user.getFlag("ptr2e", "appSettings") ?? {}) as Record<string, Record<string, unknown>>;
-            const appId = `ActorSheetPTRV2-${this.actor.uuid.replaceAll(".", "-")}`;
-            if (!appSettings[appId]) appSettings[appId] = {hideHiddenSkills: true};
+  static override ACTIONS = {
+    "toggle-hidden-skills": async function (this: SkillsComponent) {
+      const appSettings = foundry.utils.duplicate(game.user.getFlag("ptr2e", "appSettings") ?? {}) as Record<string, Record<string, unknown>>;
+      const appId = `ActorSheetPTRV2-${this.actor.uuid.replaceAll(".", "-")}`;
+      if (!appSettings[appId]) appSettings[appId] = { hideHiddenSkills: true };
 
-            appSettings[appId].hideHiddenSkills = !appSettings[appId].hideHiddenSkills;
-            await game.user.setFlag("ptr2e", "appSettings", appSettings);
-            
-            for(const app of Object.values(this.actor.apps)) {
-                if(app instanceof foundry.applications.api.ApplicationV2) {
-                    const parts = (app as unknown as {parts: Record<string, unknown>}).parts;
-                    if('popout' in parts) app.render({parts: ["popout"]})
-                    if('skills' in parts) app.render({parts: ["skills"]})
-                }
-                else app?.render();
-            }
-        },
-    }
+      appSettings[appId].hideHiddenSkills = !appSettings[appId].hideHiddenSkills;
+      await game.user.setFlag("ptr2e", "appSettings", appSettings);
 
-    static prepareSkillsData(actor: ActorPTR2e) {
-        const skills = (() => {
-            const favouriteGroups: SkillCategory = { none: { label: null, skills: [] } };
-            const hiddenGroups: SkillCategory = { none: { label: null, skills: [] } };
-            const normalGroups: SkillCategory = { none: { label: null, skills: [] } };
+      for (const app of Object.values(this.actor.apps)) {
+        if (app instanceof foundry.applications.api.ApplicationV2) {
+          const parts = (app as unknown as { parts: Record<string, unknown> }).parts;
+          if ('popout' in parts) app.render({ parts: ["popout"] })
+          if ('skills' in parts) app.render({ parts: ["skills"] })
+        }
+        else app?.render();
+      }
+    },
+  }
 
-            for (const skill of actor.system.skills.contents.sort((a, b) =>
-                a.slug.localeCompare(b.slug)
-            )) {
-                // Do not add Luck for non-[Ace]s
-                if(skill.slug === "luck" && !actor.isAce) continue;
-                // Do not add Resources for non-[Ace]s that do not have the Resources skill from their Species
-                if(skill.slug === "resources" && !actor.isAce && (actor.species?.skills.get("resources")?.value ?? 0) <= 1) continue;
+  static prepareSkillsData(actor: Actor.ConfiguredInstance) {
+    const skills = (() => {
+      const favouriteGroups: SkillCategory = { none: { label: null, skills: [] } };
+      const hiddenGroups: SkillCategory = { none: { label: null, skills: [] } };
+      const normalGroups: SkillCategory = { none: { label: null, skills: [] } };
 
-                if (skill.favourite) {
-                    const group = skill.group || "none";
-                    if (!favouriteGroups[group])
-                        favouriteGroups[group] = { label: group, skills: [] };
-                    favouriteGroups[group].skills.push(skill);
-                } else if (skill.hidden) {
-                    const group = skill.group || "none";
-                    if (!hiddenGroups[group]) hiddenGroups[group] = { label: group, skills: [] };
-                    hiddenGroups[group].skills.push(skill);
-                } else {
-                    const group = skill.group || "none";
+      for (const skill of actor.system.skills.contents.sort((a, b) =>
+        a.slug.localeCompare(b.slug)
+      )) {
+        // Do not add Luck for non-[Ace]s
+        if (skill.slug === "luck" && !actor.isAce) continue;
+        // Do not add Resources for non-[Ace]s that do not have the Resources skill from their Species
+        if (skill.slug === "resources" && !actor.isAce && (actor.species?.skills.get("resources")?.value ?? 0) <= 1) continue;
 
-                    if (!normalGroups[group]) normalGroups[group] = { label: group, skills: [] };
-                    normalGroups[group].skills.push(skill);
-                }
-            }
-            return {
-                favourites: Object.entries(favouriteGroups)
-                    .sort((a, b) => a[0].localeCompare(b[0]))
-                    .map(([, v]) => v),
-                hidden: Object.entries(hiddenGroups)
-                    .sort((a, b) => a[0].localeCompare(b[0]))
-                    .map(([, v]) => v),
-                normal: Object.entries(normalGroups)
-                    .sort((a, b) => a[0].localeCompare(b[0]))
-                    .map(([, v]) => v),
-            };
-        })();
+        if (skill.favourite) {
+          const group = skill.group || "none";
+          if (!favouriteGroups[group])
+            favouriteGroups[group] = { label: group, skills: [] };
+          favouriteGroups[group].skills.push(skill);
+        } else if (skill.hidden) {
+          const group = skill.group || "none";
+          if (!hiddenGroups[group]) hiddenGroups[group] = { label: group, skills: [] };
+          hiddenGroups[group].skills.push(skill);
+        } else {
+          const group = skill.group || "none";
 
-        const hideHiddenSkills = (() => {
-            const appSettings = game.user.getFlag("ptr2e", "appSettings") as Record<string, Record<string, unknown>>;
-            const appId = `ActorSheetPTRV2-${actor.uuid.replaceAll(".", "-")}`;
-            if(appSettings?.[appId]) {
-                return appSettings[appId].hideHiddenSkills;
-            }
-            return true;
-        })();
+          if (!normalGroups[group]) normalGroups[group] = { label: group, skills: [] };
+          normalGroups[group].skills.push(skill);
+        }
+      }
+      return {
+        favourites: Object.entries(favouriteGroups)
+          .sort((a, b) => a[0].localeCompare(b[0]))
+          .map(([, v]) => v),
+        hidden: Object.entries(hiddenGroups)
+          .sort((a, b) => a[0].localeCompare(b[0]))
+          .map(([, v]) => v),
+        normal: Object.entries(normalGroups)
+          .sort((a, b) => a[0].localeCompare(b[0]))
+          .map(([, v]) => v),
+      };
+    })();
 
-        return {
-            skills,
-            hideHiddenSkills,
-        };
-    }
+    const hideHiddenSkills = (() => {
+      const appSettings = game.user.getFlag("ptr2e", "appSettings") as Record<string, Record<string, unknown>>;
+      const appId = `ActorSheetPTRV2-${actor.uuid.replaceAll(".", "-")}`;
+      if (appSettings?.[appId]) {
+        return appSettings[appId].hideHiddenSkills;
+      }
+      return true;
+    })();
 
-    override renderComponent(data: Record<string, unknown>): Promise<string> {
-        const {skills, hideHiddenSkills} = SkillsComponent.prepareSkillsData(this.actor);
-        data.skills = skills;
-        data.hideHiddenSkills = hideHiddenSkills;
-        return renderTemplate(this.template, data);
-    }
+    return {
+      skills,
+      hideHiddenSkills,
+    };
+  }
 
-    override renderFrame(close: HTMLElement): void {
-        // Add Toggle Hidden button to the header
-        const toggleHiddenSkillsLabel = game.i18n.localize("PTR2E.ActorSheet.Components.toggle-hidden-skills");
-        const toggleHiddenSkillsButton = `<button type="button" class="header-control fa-solid fa-eye-slash" data-action="toggle-hidden-skills"
+  override renderComponent(data: Record<string, unknown>): Promise<string> {
+    const { skills, hideHiddenSkills } = SkillsComponent.prepareSkillsData(this.actor);
+    data.skills = skills;
+    data.hideHiddenSkills = hideHiddenSkills;
+    return renderTemplate(this.template, data);
+  }
+
+  override renderFrame(close: HTMLElement): void {
+    // Add Toggle Hidden button to the header
+    const toggleHiddenSkillsLabel = game.i18n.localize("PTR2E.ActorSheet.Components.toggle-hidden-skills");
+    const toggleHiddenSkillsButton = `<button type="button" class="header-control fa-solid fa-eye-slash" data-action="toggle-hidden-skills"
                                     data-tooltip="${toggleHiddenSkillsLabel}" aria-label="${toggleHiddenSkillsLabel}"></button>`;
-        close.insertAdjacentHTML("beforebegin", toggleHiddenSkillsButton);
+    close.insertAdjacentHTML("beforebegin", toggleHiddenSkillsButton);
+  }
+
+  override attachListeners(htmlElement: HTMLElement) {
+    return SkillsComponent.attachListeners(htmlElement, this.actor);
+  }
+
+  static attachListeners(htmlElement: HTMLElement, actor: Actor.ConfiguredInstance) {
+    const refreshApps = () => {
+      for (const app of Object.values(actor.apps)) {
+        if (app instanceof foundry.applications.api.ApplicationV2) {
+          const parts = (app as unknown as { parts: Record<string, unknown> }).parts;
+          if ('popout' in parts) app.render({ parts: ["popout"] })
+          if ('skills' in parts) app.render({ parts: ["skills"] })
+        }
+        else app?.render();
+      }
     }
 
-    override attachListeners(htmlElement: HTMLElement) {
-        return SkillsComponent.attachListeners(htmlElement, this.actor);
+    for (const element of htmlQueryAll(htmlElement, ".item-controls .favourite-skill")) {
+      element.addEventListener("click", async (event) => {
+        const skillSlug = (
+          (event.currentTarget as HTMLElement)?.closest(".skill") as HTMLElement
+        )?.dataset.slug;
+        if (!skillSlug) return;
+
+        const skills = actor.system.toObject().skills as foundry.data.fields.SchemaField.PersistedType<SkillSchema>[];
+        const index = skills.findIndex((s) => s.slug === skillSlug);
+        if (index === -1) return;
+
+        skills[index].favourite = !skills[index].favourite;
+        if (skills[index].favourite && skills[index].hidden) skills[index].hidden = false;
+        await actor.update({ "system.skills": skills });
+        refreshApps();
+      });
     }
 
-    static attachListeners(htmlElement: HTMLElement, actor: ActorPTR2e) {
-        const refreshApps = () => {
-            for(const app of Object.values(actor.apps)) {
-                if(app instanceof foundry.applications.api.ApplicationV2) {
-                    const parts = (app as unknown as {parts: Record<string, unknown>}).parts;
-                    if('popout' in parts) app.render({parts: ["popout"]})
-                    if('skills' in parts) app.render({parts: ["skills"]})
-                }
-                else app?.render();
-            }
-        }
+    for (const element of htmlQueryAll(htmlElement, ".item-controls .hide-skill")) {
+      element.addEventListener("click", async (event) => {
+        const skillSlug = (
+          (event.currentTarget as HTMLElement)?.closest(".skill") as HTMLElement
+        )?.dataset.slug;
+        if (!skillSlug) return;
 
-        for (const element of htmlQueryAll(htmlElement, ".item-controls .favourite-skill")) {
-            element.addEventListener("click", async (event) => {
-                const skillSlug = (
-                    (event.currentTarget as HTMLElement)?.closest(".skill") as HTMLElement
-                )?.dataset.slug;
-                if (!skillSlug) return;
-                
-                const skills = actor.system.toObject().skills as SkillPTR2e["_source"][];
-                const index = skills.findIndex((s) => s.slug === skillSlug);
-                if (index === -1) return;
+        const skills = actor.system.toObject().skills as foundry.data.fields.SchemaField.PersistedType<SkillSchema>[];
+        const index = skills.findIndex((s) => s.slug === skillSlug);
+        if (index === -1) return;
 
-                skills[index].favourite = !skills[index].favourite;
-                if(skills[index].favourite && skills[index].hidden) skills[index].hidden = false;
-                await actor.update({ "system.skills": skills });
-                refreshApps();
-            });
-        }
-
-        for (const element of htmlQueryAll(htmlElement, ".item-controls .hide-skill")) {
-            element.addEventListener("click", async (event) => {
-                const skillSlug = (
-                    (event.currentTarget as HTMLElement)?.closest(".skill") as HTMLElement
-                )?.dataset.slug;
-                if (!skillSlug) return;
-
-                const skills = actor.system.toObject().skills as SkillPTR2e["_source"][];
-                const index = skills.findIndex((s) => s.slug === skillSlug);
-                if (index === -1) return;
-
-                skills[index].hidden = !skills[index].hidden;
-                if(skills[index].hidden && skills[index].favourite) skills[index].favourite = false;
-                await actor.update({ "system.skills": skills });
-                refreshApps();
-            });
-        }
-
-        for (const element of htmlQueryAll(htmlElement, ".skill-icon.rollable")) {
-            element.addEventListener("click", async (event) => {
-                const skillSlug = (
-                    (event.currentTarget as HTMLElement)?.closest(".skill") as HTMLElement
-                )?.dataset.slug;
-                if (!skillSlug) return;
-
-                const skill = actor.system.skills.get(skillSlug);
-                if(!skill) return;
-
-                return skill.roll();
-            });
-        }
+        skills[index].hidden = !skills[index].hidden;
+        if (skills[index].hidden && skills[index].favourite) skills[index].favourite = false;
+        await actor.update({ "system.skills": skills });
+        refreshApps();
+      });
     }
+
+    for (const element of htmlQueryAll(htmlElement, ".skill-icon.rollable")) {
+      element.addEventListener("click", async (event) => {
+        const skillSlug = (
+          (event.currentTarget as HTMLElement)?.closest(".skill") as HTMLElement
+        )?.dataset.slug;
+        if (!skillSlug) return;
+
+        const skill = actor.system.skills.get(skillSlug);
+        if (!skill) return;
+
+        return skill.roll();
+      });
+    }
+  }
 }
 
 class FavouriteSkillsComponent extends SkillsComponent {
-    override renderComponent(data: Record<string, unknown>): Promise<string> {
-        data.favouriteOnly = true;
-        return super.renderComponent(data);
-    }
+  override renderComponent(data: Record<string, unknown>): Promise<string> {
+    data.favouriteOnly = true;
+    return super.renderComponent(data);
+  }
 
-    // Don't add the toggle button
-    // eslint-disable-next-line @typescript-eslint/no-empty-function
-    override renderFrame(): void {}
+  // Don't add the toggle button
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  override renderFrame(): void { }
 }
 
 type SkillCategory = { none: { label: null; skills: Skill[] } } & Record<
-    string,
-    { label: string | null; skills: Skill[] }
+  string,
+  { label: string | null; skills: Skill[] }
 >;
 
 

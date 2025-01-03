@@ -4,12 +4,12 @@ import { MigrationRunner } from "../module/migration/runner/index.ts";
 export async function storeInitialWorldVersions(): Promise<void> {
   if (!game.user.hasRole(CONST.USER_ROLES.GAMEMASTER)) return;
 
-  const storedSystemVersion = game.settings.storage.get("world").getItem("ptr2e.worldSystemVersion");
+  const storedSystemVersion = game.settings.storage.get("world")!.getItem("ptr2e.worldSystemVersion");
   if (!storedSystemVersion) {
     await game.settings.set("ptr2e", "worldSystemVersion", game.system.version);
   }
 
-  const storedSchemaVersion = game.settings.storage.get("world").getItem("ptr2e.worldSchemaVersion");
+  const storedSchemaVersion = game.settings.storage.get("world")!.getItem("ptr2e.worldSchemaVersion");
   if (!storedSchemaVersion) {
     const minimumVersion = MigrationRunner.RECOMMENDED_SAFE_VERSION;
     const currentVersion =

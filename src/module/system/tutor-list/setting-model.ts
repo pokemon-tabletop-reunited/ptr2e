@@ -81,7 +81,7 @@ export class TutorListSettings extends foundry.abstract.DataModel<TutorListSetti
       const moveIndex = await game.packs.get("ptr2e.core-moves")!.getIndex();
       const moveMap = new Map<string, string>();
       for (const move of moveIndex) {
-        moveMap.set(sluggify(move.name), move.uuid);
+        moveMap.set(sluggify(move.name!), move.uuid);
       }
 
       const tutorData = [];

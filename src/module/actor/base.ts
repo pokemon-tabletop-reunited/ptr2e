@@ -2029,11 +2029,12 @@ class ActorPTR2e extends Actor {
 }
 
 interface ActorPTR2e extends Actor {
-  // get folder(): Folder.ConfiguredInstance | null;
+  _source: Omit<Actor['_source'], 'system'> & {
+    system: ActorSystemPTR2e['_source'];
+  }
+  system: ActorSystemPTR2e;
 
   _party: ActorParty | null;
-
-  system: ActorSystemPTR2e;
 
   health: {
     percent: number;

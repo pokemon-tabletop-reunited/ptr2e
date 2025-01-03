@@ -47,7 +47,7 @@ function _registerPTRHelpers() {
   Handlebars.registerHelper(
     "iconFromUuid",
     function (uuid, args: { hash: Record<string, string> }) {
-      const doc = fromUuidSync(uuid) as foundry.abstract.Document.ConfiguredClassForName<'Item'> | null;
+      const doc = fromUuidSync<Item.ConfiguredInstance>(uuid) as Item.ConfiguredInstance | null;
       const img = document.createElement("img");
       for (const key in args.hash) {
         img.setAttribute(key, args.hash[key]);
@@ -113,7 +113,7 @@ function _registerPTRHelpers() {
         return ele.innerHTML;
       }
 
-      const doc = fromUuidSync(content) as foundry.abstract.Document.ConfiguredClassForName<"Actor"> | null;
+      const doc = fromUuidSync<Actor.ConfiguredInstance>(content as ActorUUID) as Actor.ConfiguredInstance | { name: string, pack: string } | null;
       if (!doc) {
         return TextEditor.createAnchor({
           classes: ["content-link", "broken"],
@@ -161,7 +161,7 @@ function _registerPTRHelpers() {
         const documentName = game.packs.get(doc.pack)?.documentName;
         return {
           tooltip: name,
-          type: documentName,
+          type: documentName!,
           icon: CONFIG[documentName as "Actor"].sidebarIcon,
         };
       })();
@@ -176,7 +176,7 @@ function _registerPTRHelpers() {
           type,
           tooltip,
           id: uuid.id,
-          pack: doc.pack,
+          pack: doc.pack!,
         },
         icon,
       };
@@ -192,9 +192,7 @@ function _registerPTRHelpers() {
     if (!(folder instanceof Folder)) return folder;
 
     switch (folder.sorting) {
-      //@ts-expect-error - FIXME: fvtt-types issue
       case "a": return folder.contents.sort((a, b) => a.name.localeCompare(b.name));
-      //@ts-expect-error - FIXME: fvtt-types issue
       case "m": return folder.contents.sort((a, b) => a.sort - b.sort);
     }
   })

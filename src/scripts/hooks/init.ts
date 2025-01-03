@@ -42,7 +42,6 @@ export const Init: PTRHook = {
       Object.freeze(CONFIG.PTR);
 
       if (game.release.generation === 12) {
-        //@ts-expect-error - Typing to be updated
         CONFIG.Token.prototypeSheetClass = TokenConfigPTR2e;
       }
 

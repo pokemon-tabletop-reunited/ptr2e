@@ -1,5 +1,5 @@
-import type { ActorPTR2e, HumanoidActorSystem, PokemonActorSystem} from "@actor";
-import type { ItemPTR2e} from "@item";
+import type { ActorPTR2e, HumanoidActorSystem, PokemonActorSystem } from "@actor";
+import { ItemPTR2e, data } from "@item";
 import type { PerkManager } from "@module/apps/perk-manager/perk-manager.ts";
 import type { ActionPTR2e, ArtMapCollection, ClockDatabase, SkillsCollection, Trait, TraitsCollection } from "@data";
 import type TooltipsPTR2e from "@module/tooltips/tooltips.ts";
@@ -15,9 +15,7 @@ import type { TutorListApp } from "@module/apps/tutor-list.ts";
 import type GithubManager from "@module/apps/github.ts";
 import { ExpTrackerSettings } from "@system/exp-tracker-model.ts";
 import type { ItemFlagsPTR2e, ItemGrantData } from "@item/data/data.ts";
-import type AbilitySystem from "@item/data/ability.ts";
 import type { ActiveEffectPTR2e } from "@effects";
-import type PerkSystem from "@item/data/perk.ts";
 import type { TypeEffectiveness } from "@scripts/config/effectiveness.ts";
 import type { CompendiumBrowserSettings, CompendiumBrowserSources } from "@module/apps/compendium-browser/data.ts";
 import type { CharacterCombatantSystem, CombatantPTR2e, CombatPTR2e, CombatSystemPTR2e, RoundCombatantSystem, SummonCombatantSystem } from "@combat";
@@ -29,6 +27,11 @@ import type { RollOptionDomains, RollOptions } from "@module/data/roll-option-ma
 import type FolderPTR2e from "@module/folder/document.ts";
 import type { PickableThing } from "@module/apps/pick-a-thing-prompt.ts";
 import type { ActionUUID } from "./util/uuid.ts";
+import type { AttackMessageSystem, CaptureMessageSystem, ChatMessagePTR2e, DamageAppliedMessageSystem, ItemMessageSystem, SkillMessageSystem } from "@chat";
+import type AfflictionActiveEffectSystem from "@module/effects/data/affliction.ts";
+import type PassiveActiveEffectSystem from "@module/effects/data/passive.ts";
+import type SummonActiveEffectSystem from "@module/effects/data/summon.ts";
+import type FormActiveEffectSystem from "@module/effects/data/form.ts";
 
 declare global {
   // interface ConfigPTR2e extends ConfiguredConfig {
@@ -100,7 +103,7 @@ declare global {
         traits: TraitsCollection;
         skills: SkillsCollection;
         artMap: ArtMapCollection;
-        // afflictions: Map<string, StatusEffect>;
+        afflictions: Map<string, CONFIG.StatusEffect>;
         tutorList: TutorListSettings;
       };
       perks: PerkManager;
@@ -143,23 +146,24 @@ declare global {
     Token: typeof TokenPTR2e;
     TokenDocument: typeof TokenDocumentPTR2e;
     Folder: typeof FolderPTR2e;
+    ChatMessage: typeof ChatMessagePTR2e;
   }
 
   interface DataModelConfig {
     Item: {
-      "ability": typeof AbilitySystem, 
-      "blueprint": object,
-      "consumable": object, 
-      "container": object, 
-      "effect": object,
-      "equipment": object,
-      "gear": object, 
-      "move": object, 
-      "perk": typeof PerkSystem, 
-      "species": object,
+      "ability": typeof data.AbilitySystemModel,
+      "blueprint": typeof data.BlueprintSystemModel,
+      "consumable": typeof data.ConsumableSystemModel,
+      "container": typeof data.ContainerSystemModel,
+      "effect": typeof data.EffectSystemModel,
+      "equipment": typeof data.EquipmentSystemModel,
+      "gear": typeof data.GearSystemModel,
+      "move": typeof data.MoveSystemModel,
+      "perk": typeof data.PerkSystemModel,
+      "species": typeof data.SpeciesSystemModel,
       "ptu-item": object,
-      "weapon": object,
-      "summon": object
+      "weapon": typeof data.WeaponSystemModel,
+      "summon": typeof data.SummonSystemModel
     },
     Actor: {
       "humanoid": HumanoidActorSystem
@@ -167,17 +171,17 @@ declare global {
       "ptu-actor": object
     },
     ActiveEffect: {
-      "affliction": object,
-      "passive": object,
-      "summon": object,
-      "form":object
+      "affliction": AfflictionActiveEffectSystem,
+      "passive": PassiveActiveEffectSystem,
+      "summon": SummonActiveEffectSystem,
+      "form": FormActiveEffectSystem
     },
     ChatMessage: {
-      "item": object,
-      "attack": object,
-      "damage-applied": object,
-      "skill": object,
-      "capture": object,
+      "item": ItemMessageSystem,
+      "attack": AttackMessageSystem,
+      "damage-applied": DamageAppliedMessageSystem,
+      "skill": SkillMessageSystem,
+      "capture": CaptureMessageSystem,
       "combat": object
     },
     Combatant: {
@@ -249,6 +253,7 @@ declare global {
       ptr2e?: {
         "dev-identity": string;
         "exp-training-slots": Record<string, unknown>;
+        "appSettings": Record<string, Record<string, unknown>>;
       }
     }
     Token: {
@@ -262,11 +267,11 @@ declare global {
   interface SettingConfig {
     "ptr2e.compendiumBrowserSources": CompendiumBrowserSources
     "ptr2e.compendiumBrowserPacks": CompendiumBrowserSettings
-    "ptr2e.tutorListData": TutorListSettings
-    "ptr2e.expTrackerData": ExpTrackerSettings
+    "ptr2e.tutorListData": typeof TutorListSettings
+    "ptr2e.expTrackerData": typeof ExpTrackerSettings
     "ptr2e.tokens.autoscale": boolean
     "ptr2e.pokemonTypes": TypeEffectiveness
-    "ptr2e.clocks": ClockDatabase
+    "ptr2e.clocks": typeof ClockDatabase
     "ptr2e.dev-mode": boolean
     "ptr2e.player-folder-create-permission": boolean
     "ptr2e.traits": Trait[]
@@ -292,6 +297,8 @@ declare global {
   type CompendiumItemUUID = `Compendium.${string}.Item.${string}`;
   type ItemUUID = `Item.${string}` | EmbeddedItemUUID | CompendiumItemUUID;
   type FolderUUID = `Folder.${string}`;
+  //FIXME: This type shouldn't be necessary, but currently it makes life easy.
+  type ValidUUID = ActorUUID | ItemUUID | TokenDocumentUUID | CompendiumUUID | FolderUUID;
 
   type HexColorString = `#${string}`;
 
@@ -309,10 +316,10 @@ declare global {
 
   interface Module {
     flags: Record<string, {
-        "ptr2e-species-art"?: string;
-        "ptr2e-species-art-priority"?: number;
-        [key: string]: unknown;
-      }>
+      "ptr2e-species-art"?: string;
+      "ptr2e-species-art-priority"?: number;
+      [key: string]: unknown;
+    }>
   }
 
   type FolderableDocuments = Macro.ConfiguredInstance | Actor.ConfiguredInstance | Item.ConfiguredInstance | Scene.ConfiguredInstance | Cards.ConfiguredInstance | Playlist.ConfiguredInstance | RollTable.ConfiguredInstance | Adventure.ConfiguredInstance | JournalEntry.ConfiguredInstance;

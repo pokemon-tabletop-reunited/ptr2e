@@ -4,13 +4,9 @@ import { getTypes } from "@scripts/config/effectiveness.ts";
 import type { ActionSchema } from "./action.ts";
 import { AttackStatistic } from "@system/statistics/attack.ts";
 import type { AttackStatisticRollParameters } from "@system/statistics/statistic.ts";
-// import { MovePTR2e } from "@item";
-import type { ActorPTR2e } from "@actor";
 import { SlugField } from "../fields/slug-field.ts";
 import type { AttackRollResult } from "@system/rolls/check-roll.ts";
 import type { SummonPTR2e } from "@item";
-import { ItemPTR2e } from "@item";
-import type { CombatantPTR2e } from "@combat";
 import type { ActorSizePTR2e } from "@actor/data/size.ts";
 
 const attackSchema = {
@@ -182,7 +178,7 @@ class AttackPTR2e<Schema extends AttackSchema = AttackSchema> extends ActionPTR2
     return true//this.accuracy !== null || this.power !== null;
   }
 
-  getAttackStat(actor: Maybe<ActorPTR2e> = this.actor): number {
+  getAttackStat(actor: Maybe<Actor.ConfiguredInstance> = this.actor): number {
     return actor?.getAttackStat(this) ?? 0;
   }
 
@@ -279,21 +275,21 @@ class AttackPTR2e<Schema extends AttackSchema = AttackSchema> extends ActionPTR2
           label: "Delay Action",
           //@ts-expect-error - FIXME: FVTT-Types are incorrect
           callback: (_event, _button, dialog) => {
-            return dialog?.querySelector<HTMLInputElement>("input[name='delay']")?.value
+            return Number(dialog?.querySelector<HTMLInputElement>("input[name='delay']")?.value)
           }
         }
       })
       if(!dialog) return;
       number = dialog;
     }
-    if(number <= 0) return;
+    if(isNaN(number) || number <= 0) return;
 
     const delay = Math.min(3, number);
 
-    const summonItem = new ItemPTR2e({
+    const summonItem = new CONFIG.Item.documentClass({
       name: `${this.actor.name}'s Delayed (${delay}) ${this.name}`,
       type: "summon",
-      img: this.img,
+      img: this.img!,
       system: {
         owner: this.actor.uuid,
         actions: [
@@ -316,10 +312,10 @@ class AttackPTR2e<Schema extends AttackSchema = AttackSchema> extends ActionPTR2
       }
     }])
 
-    if (!combatants.length) return void ui.notifications.error("Failed to create delay action.");
+    if (!combatants!.length) return void ui.notifications.error("Failed to create delay action.");
 
     ChatMessage.create({
-      content: `Added: ${(combatants as CombatantPTR2e[]).map(c => c.link).join(", ")} to Combat.`,
+      content: `Added: ${(combatants as Combatant.ConfiguredInstance[]).map(c => c.link).join(", ")} to Combat.`,
     });
   }
 

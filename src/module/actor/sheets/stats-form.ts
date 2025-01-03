@@ -2,17 +2,17 @@ import { StatsChart } from "./stats-chart.ts";
 import type { Attributes, ActorPTR2e } from "@actor";
 import type { DocumentSheetConfiguration } from "@item/sheets/document.ts";
 import { debounceAsync } from "@utils";
+import type { AnyObject, DeepPartial } from "fvtt-types/utils";
 
-export default class StatsForm extends foundry.applications.api.HandlebarsApplicationMixin(foundry.applications.api.DocumentSheetV2<ActorPTR2e, foundry.applications.api.HandlebarsDocumentSheetConfiguration>) {
-
+export default class StatsForm extends foundry.applications.api.HandlebarsApplicationMixin(foundry.applications.api.DocumentSheetV2)<ActorPTR2e, AnyObject> {
   _statsChart: StatsChart;
 
-  constructor(options: Partial<foundry.applications.api.DocumentSheetConfiguration>) {
+  constructor(options: DeepPartial<foundry.applications.api.DocumentSheetV2.Configuration<Actor.ConfiguredInstance>>) {
     super(options);
     this._statsChart = new StatsChart(this, {});
   }
 
-  static override DEFAULT_OPTIONS = foundry.utils.mergeObject(super.DEFAULT_OPTIONS, {
+  static override DEFAULT_OPTIONS = {
     classes: ["stats-form"],
     position: {
       height: 620,
@@ -21,7 +21,7 @@ export default class StatsForm extends foundry.applications.api.HandlebarsApplic
     form: {
       handler: null
     }
-  }, { inplace: false });
+  };
 
   static override PARTS: Record<string, foundry.applications.api.HandlebarsApplicationMixin.HandlebarsTemplatePart> = {
     baseStats: {
@@ -50,25 +50,25 @@ export default class StatsForm extends foundry.applications.api.HandlebarsApplic
     return game.i18n.localize("PTR2E.ActorSheet.StatsFormTitle");
   }
 
-  override _configureRenderOptions(options: DocumentSheetConfiguration<ActorPTR2e>): void {
+  override _configureRenderOptions(options: foundry.applications.api.DocumentSheetV2.Configuration<Actor.ConfiguredInstance>): void {
     super._configureRenderOptions(options);
     if (this.document.isPokemon()) {
       options.parts = options.parts?.filter(part => part !== "baseStats");
     }
   }
 
-  override async _prepareContext() {
+  override async _prepareContext(options: foundry.applications.api.HandlebarsApplicationMixin.HandlebarsRenderOptions): Promise<AnyObject> {
     const speciesBaseStats = this.document.species?._source?.stats;
 
     const baseMaximums = this._calcBaseMaximums(this.document.system._source.attributes as this['document']['system']['attributes'], speciesBaseStats);
     const evMaximums = this._calcEVMaximums(this.document.system._source.attributes as this['document']['system']['attributes']);
     const stats = this.document.system._source.attributes;
-    for(const k in stats ?? {}) {
+    for (const k in stats ?? {}) {
       //@ts-expect-error - Clearly this is valid.
-      if(stats[k].base === undefined) stats[k].base = 40;
+      if (stats[k].base === undefined) stats[k].base = 40;
     }
     return {
-      ...(await super._prepareContext()),
+      ...(await super._prepareContext(options)),
       stats,
       fields: (this.document.system.schema.fields.attributes as foundry.data.fields.SchemaField<foundry.data.fields.DataSchema>).fields,
       baseMaximums,
@@ -98,7 +98,7 @@ export default class StatsForm extends foundry.applications.api.HandlebarsApplic
     }
   }
 
-  override _onRender(context: foundry.applications.api.ApplicationRenderContext, options: DocumentSheetConfiguration<ActorPTR2e>): void {
+  override _onRender(context: DeepPartial<AnyObject>, options: foundry.applications.api.HandlebarsApplicationMixin.HandlebarsRenderOptions): void {
     super._onRender(context, options);
     if (options.parts?.includes("statsChart")) {
       this._statsChart.render();

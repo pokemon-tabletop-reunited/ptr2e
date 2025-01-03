@@ -17,7 +17,7 @@ function _getSort(): number {
 
 export type ClockSchema = typeof clockSchema;
 
-export default class Clock extends foundry.abstract.DataModel<ClockSchema> {
+export default class Clock extends foundry.abstract.DataModel<ClockSchema, foundry.abstract.DataModel.Any | null> {
   static override defineSchema() {
     return clockSchema;
   }
