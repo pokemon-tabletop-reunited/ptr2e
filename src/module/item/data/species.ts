@@ -46,36 +46,42 @@ const speciesSchema = (() => {
       {
         hp: new fields.NumberField({
           required: true,
+          nullable: false,
           initial: 0,
           validate: (d: number) => (d as number) >= 0,
           label: `PTR2E.Attributes.hp.Label`,
         }),
         atk: new fields.NumberField({
           required: true,
+          nullable: false,
           initial: 0,
           validate: (d: number) => (d as number) >= 0,
           label: `PTR2E.Attributes.atk.Label`,
         }),
         def: new fields.NumberField({
           required: true,
+          nullable: false,
           initial: 0,
           validate: (d: number) => (d as number) >= 0,
           label: `PTR2E.Attributes.def.Label`,
         }),
         spa: new fields.NumberField({
           required: true,
+          nullable: false,
           initial: 0,
           validate: (d: number) => (d as number) >= 0,
           label: `PTR2E.Attributes.spa.Label`,
         }),
         spd: new fields.NumberField({
           required: true,
+          nullable: false,
           initial: 0,
           validate: (d: number) => (d as number) >= 0,
           label: `PTR2E.Attributes.spd.Label`,
         }),
         spe: new fields.NumberField({
           required: true,
+          nullable: false,
           initial: 0,
           validate: (d: number) => (d as number) >= 0,
           label: `PTR2E.Attributes.spe.Label`,

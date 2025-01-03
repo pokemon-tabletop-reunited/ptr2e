@@ -32,6 +32,7 @@ import type AfflictionActiveEffectSystem from "@module/effects/data/affliction.t
 import type PassiveActiveEffectSystem from "@module/effects/data/passive.ts";
 import type SummonActiveEffectSystem from "@module/effects/data/summon.ts";
 import type FormActiveEffectSystem from "@module/effects/data/form.ts";
+import type { MeasuredTemplatePTR2e } from "@module/canvas/measured-template.ts";
 
 declare global {
   // interface ConfigPTR2e extends ConfiguredConfig {
@@ -147,6 +148,7 @@ declare global {
     TokenDocument: typeof TokenDocumentPTR2e;
     Folder: typeof FolderPTR2e;
     ChatMessage: typeof ChatMessagePTR2e;
+    MeasuredTemplate: typeof MeasuredTemplatePTR2e;
   }
 
   interface DataModelConfig {

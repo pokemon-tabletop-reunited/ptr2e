@@ -1,4 +1,4 @@
-import type { TemplateLayerPTR2e } from "./layer/template.ts";
+// import type { TemplateLayerPTR2e } from "./layer/template.ts";
 
 export class MeasuredTemplatePTR2e extends MeasuredTemplate {
   override highlightGrid(): void {
@@ -18,6 +18,7 @@ export class MeasuredTemplatePTR2e extends MeasuredTemplate {
     const border = this.document.borderColor;
     const color = this.document.fillColor;
 
+    //@ts-expect-error - Foundry types are incomplete
     const positions = this._getGridHighlightPositions();
     for (const { x, y } of positions) {
       //@ts-expect-error - Foundry types are incomplete
@@ -26,6 +27,6 @@ export class MeasuredTemplatePTR2e extends MeasuredTemplate {
   }
 }
 
-export interface MeasuredTemplatePTR2e {
-  get layer(): TemplateLayerPTR2e;
-}
+// export interface MeasuredTemplatePTR2e {
+//   get layer(): TemplateLayerPTR2e;
+// }

@@ -63,7 +63,7 @@ export class ApplicationV2Expanded<
    * @protected
    */
   _canDragStart(_selector: Maybe<string>) {
-    return game.user!.isGM;
+    return game.user.isGM;
   }
 
   /* -------------------------------------------- */
@@ -107,6 +107,140 @@ export class ApplicationV2Expanded<
 }
 
 export type DocumentSheetConfigurationExpanded<Document extends foundry.abstract.Document.Any> = foundry.applications.api.DocumentSheetV2.Configuration<Document> & ExpandedConfiguration;
+
+export class DocumentSheetV2Expanded<
+  Document extends foundry.abstract.Document.Any = foundry.abstract.Document.Any,
+  RenderContext extends AnyObject = EmptyObject,
+  Configuration extends DocumentSheetConfigurationExpanded<Document> = DocumentSheetConfigurationExpanded<Document>,
+  RenderOptions extends foundry.applications.api.DocumentSheetV2.RenderOptions = foundry.applications.api.DocumentSheetV2.RenderOptions
+> extends foundry.applications.api.DocumentSheetV2<Document, RenderContext, Configuration, RenderOptions> {
+
+  static override DEFAULT_OPTIONS = {
+    dragDrop: []
+  } as (DeepPartial<DocumentSheetConfigurationExpanded<foundry.abstract.Document.Any>> & ExpandedConfiguration)
+
+  protected _dragDropHandlers: DragDrop[];
+
+  constructor(options: DeepPartial<Configuration> & { document: Document }) {
+    super(options);
+
+    this._dragDropHandlers = this._createDragDropHandlers()
+  }
+
+  override get isEditable(): boolean {
+    if (this.document instanceof ActiveEffect && !this.document.parent) return false;
+    return super.isEditable;
+  }
+
+  protected override async _onSubmitForm(config: foundry.applications.api.ApplicationV2.FormConfiguration, event: Event | SubmitEvent): Promise<void> {
+    event.preventDefault();
+    const { handler, closeOnSubmit } = config;
+    const element = (event.currentTarget ?? this.element) as HTMLFormElement
+
+    $(element).find("tags ~ input").each((_i, input) => {
+      if ((input as HTMLInputElement).value === "") (input as HTMLInputElement).value = "[]";
+    });
+
+    const formData = new FormDataExtended(element);
+    if (handler instanceof Function) await handler.call(this, event, element, formData);
+    if (closeOnSubmit) await this.close();
+  }
+
+  override _onRender(context: DeepPartial<RenderContext>, options: DeepPartial<RenderOptions>): void {
+    super._onRender(context, options);
+    if (!this.isEditable) {
+      const content = this.element.querySelector('.window-content');
+      if (!content) return;
+
+      for (const input of ["INPUT", "SELECT", "TEXTAREA", "BUTTON"]) {
+        for (const element of content.getElementsByTagName(input)) {
+          if (input === "TEXTAREA") (element as HTMLTextAreaElement).readOnly = true;
+          else (element as HTMLInputElement).disabled = true;
+        }
+      }
+      for (const element of htmlQueryAll(content, ".item-controls a")) {
+        if (element.classList.contains("effect-edit") || element.dataset.action == "edit-action") continue;
+        (element as HTMLButtonElement).disabled = true;
+        element.attributes.setNamedItem(document.createAttribute("disabled"));
+      }
+      for (const element of htmlQueryAll(content, "tags.tagify")) {
+        (element as HTMLInputElement).readOnly = true;
+        element.attributes.setNamedItem(document.createAttribute("readOnly"));
+      }
+    }
+    // Attach drag-and-drop handlers
+    this._dragDropHandlers.forEach((handler) => handler.bind(this.element));
+  }
+
+  /**
+   * Create drag-and-drop workflow handlers for this Application
+   * @returns {DragDrop[]}     An array of DragDrop handlers
+   * @private
+   */
+  _createDragDropHandlers() {
+    return this.options.dragDrop?.map((d) => {
+      d.permissions = {
+        dragstart: this._canDragStart.bind(this),
+        drop: this._canDragDrop.bind(this),
+      };
+      d.callbacks = {
+        dragstart: this._onDragStart.bind(this),
+        dragover: this._onDragOver.bind(this),
+        drop: this._onDrop.bind(this),
+      };
+      return new DragDrop(d);
+    }) ?? [];
+  }
+
+  /**
+   * Define whether a user is able to begin a dragstart workflow for a given drag selector
+   * @param {string} selector       The candidate HTML selector for dragging
+   * @returns {boolean}             Can the current user drag this selector?
+   * @protected
+   */
+  _canDragStart(_selector: Maybe<string>) {
+    return game.user.isGM;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Define whether a user is able to conclude a drag-and-drop workflow for a given drop selector
+   * @param {string} selector       The candidate HTML selector for the drop target
+   * @returns {boolean}             Can the current user drop on this selector?
+   * @protected
+   */
+  _canDragDrop(_selector: Maybe<string>) {
+    return game.user.isGM;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Callback actions which occur at the beginning of a drag start workflow.
+   * @param {DragEvent} event       The originating DragEvent
+   * @protected
+   */
+  _onDragStart(_event: DragEvent) { }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Callback actions which occur when a dragged element is over a drop target.
+   * @param {DragEvent} event       The originating DragEvent
+   * @protected
+   */
+  _onDragOver(_event: DragEvent) { }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Callback actions which occur when a dragged element is dropped on a target.
+   * @param {DragEvent} event       The originating DragEvent
+   * @protected
+   */
+  _onDrop(_event: DragEvent) { }
+}
 
 export class ActorSheetV2Expanded<
   RenderContext extends AnyObject = EmptyObject,
@@ -380,7 +514,7 @@ export class ActorSheetV2Expanded<
     const droppedItemData = await Promise.all(
       folder.contents.map(async (item) => {
         if (!(document instanceof Item))
-          item = (await fromUuid(item.uuid)) as Actor.ConfiguredInstance | Item.ConfiguredInstance | Cards | Scene.ConfiguredInstance | Playlist | RollTable | Adventure | JournalEntry | Macro;
+          item = await fromUuid<Actor.ConfiguredInstance | Item.ConfiguredInstance | Cards.ConfiguredInstance | Scene.ConfiguredInstance | Playlist.ConfiguredInstance | RollTable.ConfiguredInstance | Adventure.ConfiguredInstance | JournalEntry.ConfiguredInstance | Macro.ConfiguredInstance>(item.uuid as ValidUUID);
         return item.toObject();
       })
     );
@@ -415,7 +549,7 @@ export class ActorSheetV2Expanded<
   _onSortItem(event: Event, itemData: Item.ConstructorData) {
     // Get the drag source and drop target
     const items = this.actor.items;
-    const source = items.get(itemData._id!)!;
+    const source = items.get(itemData._id as string)!;
     const dropTarget = (event.target as HTMLElement).closest("[data-item-id]") as HTMLElement;
     if (!dropTarget) return;
     const target = items.get(dropTarget.dataset.itemId!)!;
@@ -457,7 +591,7 @@ export class ItemSheetV2Expanded<
     dragDrop: []
   } as {
     dragDrop: DragDropConfiguration[]
-  }
+  } as (DeepPartial<DocumentSheetConfigurationExpanded<Item.ConfiguredInstance>> & ExpandedConfiguration)
 
   protected _dragDropHandlers: DragDrop[];
 

@@ -1,10 +1,9 @@
-import { ActorPTR2e } from "@actor";
-import { ChatMessagePTR2e } from "@chat";
 import { SlugField } from "@module/data/fields/slug-field.ts";
 import type SkillPTR2e from "@module/data/models/skill.ts";
 import { RollNote } from "@system/notes.ts";
 import type { CheckRoll } from "@system/rolls/check-roll.ts";
 import { PredicateField } from "@system/predication/schema-data-fields.ts";
+import type { AnyObject } from "fvtt-types/utils";
 
 /**
  * Validate that Rolls belonging to the ChatMessage document are valid
@@ -23,7 +22,12 @@ const skillMessageSchema = {
   }),
   origin: new foundry.data.fields.JSONField({ required: true }),
   slug: new SlugField({ required: true }),
-  luckRoll: new foundry.data.fields.JSONField({ required: true, nullable: true }),
+  luckRoll: new foundry.data.fields.JSONField<
+    { required: true, nullable: true },
+    AnyObject,
+    Roll.Evaluated<CheckRoll> | null,
+    string | null
+  >({ required: true, nullable: true }),
   appliedLuck: new foundry.data.fields.BooleanField({ required: true, initial: false }),
   rerolled: new foundry.data.fields.BooleanField({ required: true, initial: false }),
   result: new foundry.data.fields.SchemaField({
@@ -37,7 +41,7 @@ const skillMessageSchema = {
         title: new foundry.data.fields.StringField({ required: true, blank: true, initial: "" }),
         text: new foundry.data.fields.StringField({ required: true, blank: true, initial: "" }),
         predicate: new PredicateField({ required: true, initial: [] }),
-        outcome: new foundry.data.fields.ArrayField(new foundry.data.fields.NumberField(), { required: true, initial: [] }),
+        outcome: new foundry.data.fields.ArrayField(new foundry.data.fields.NumberField({ required: true, nullable: false }), { required: true, initial: [] }),
         visibility: new foundry.data.fields.StringField({ required: true, initial: "all", choices: ["all", "gm", "owner", "none"] }),
       }),
       { required: true, initial: [] }
@@ -47,7 +51,7 @@ const skillMessageSchema = {
 
 export type SkillMessageSchema = typeof skillMessageSchema;
 
-abstract class SkillMessageSystem extends foundry.abstract.TypeDataModel<SkillMessageSchema, ChatMessagePTR2e> {
+abstract class SkillMessageSystem extends foundry.abstract.TypeDataModel<SkillMessageSchema, ChatMessage.ConfiguredInstance> {
 
   /**
    * Define the schema for the AttackMessageSystem data model
@@ -81,8 +85,8 @@ abstract class SkillMessageSystem extends foundry.abstract.TypeDataModel<SkillMe
     const origin = (() => {
       const origin = JSON.parse(this._source.origin);
       if (!origin) return null;
-      const actor = fromUuidSync(origin.uuid) as ActorPTR2e;
-      return actor ?? new ActorPTR2e(origin);
+      const actor = fromUuidSync<Actor.ConfiguredInstance>(origin.uuid) as Actor.ConfiguredInstance | null;
+      return actor ?? new CONFIG.Actor.documentClass(origin);
     })();
     if (!origin)
       Hooks.onError(
@@ -160,8 +164,8 @@ abstract class SkillMessageSystem extends foundry.abstract.TypeDataModel<SkillMe
     await this.parent.update({ "system.roll": reroll.toJSON(), "system.rerolled": true });
   }
 
-  get currentOrigin(): Promise<Maybe<ActorPTR2e>> {
-    return this.context?.actor?.uuid ? fromUuid(this.context.actor.uuid) as Promise<Maybe<ActorPTR2e>> : Promise.resolve(null);
+  get currentOrigin(): Promise<Maybe<Actor.ConfiguredInstance>> {
+    return this.context?.actor?.uuid ? fromUuid<Actor.ConfiguredInstance>(this.context.actor.uuid) : Promise.resolve(null);
   }
 
   public async applyLuckIncrease(number: number) {
@@ -197,8 +201,8 @@ abstract class SkillMessageSystem extends foundry.abstract.TypeDataModel<SkillMe
 
     await this.parent.update({ "system.roll": roll });
 
-    await ChatMessagePTR2e.create({
-      whisper: ChatMessagePTR2e.getWhisperRecipients("GM") as unknown as string[],
+    await CONFIG.ChatMessage.documentClass.create({
+      whisper: CONFIG.ChatMessage.documentClass.getWhisperRecipients("GM") as unknown as string[],
       speaker: { alias: actor.name },
       content: notification,
     })
@@ -234,7 +238,7 @@ abstract class SkillMessageSystem extends foundry.abstract.TypeDataModel<SkillMe
 
 interface SkillMessageSystem {
   context: {
-    actor?: ActorPTR2e;
+    actor?: Actor.ConfiguredInstance;
     skill?: SkillPTR2e;
     roll?: Roll.Evaluated<CheckRoll>;
     luckRoll?: Roll.Evaluated<CheckRoll> | null;

@@ -1,13 +1,12 @@
 import type { ActionType, AttackPTR2e} from "@data";
 import { ActionPTR2e, PTRCONSTS } from "@data";
-import ActorPTR2e from "./base.ts";
-import type { ItemPTR2e, ItemWithActions } from "@item";
+import type { ItemWithActions } from "@item";
 
 export class ActionsCollections extends Collection<ActionPTR2e> {
-  parent: ActorPTR2e | ItemPTR2e;
+  parent: Actor.ConfiguredInstance | Item.ConfiguredInstance;
   declare attack: Collection<AttackPTR2e>;
 
-  constructor(parent: ActorPTR2e | ItemPTR2e, sourceArray: ActionPTR2e[] = []) {
+  constructor(parent: Actor.ConfiguredInstance | Item.ConfiguredInstance, sourceArray: ActionPTR2e[] = []) {
     super(sourceArray.map((source) => [source.slug, source]));
 
     const data: PropertyDescriptorMap = Object.values(
@@ -65,7 +64,7 @@ export class ActionsCollections extends Collection<ActionPTR2e> {
     const actions = item.actions;
     for (const action of actions) {
       this.set(action.slug, action);
-      if (this.parent instanceof ActorPTR2e) {
+      if (this.parent instanceof CONFIG.Actor.documentClass) {
         if(!["attack", "generic"].includes(action.type)) continue;
         if (action.variant && !(action as unknown as {free: boolean}).free) continue;
 

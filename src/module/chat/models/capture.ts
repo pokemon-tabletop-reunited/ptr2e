@@ -1,6 +1,4 @@
-import { ActorPTR2e } from "@actor";
 import { resolveCapture } from "@actor/helpers.ts";
-import { ChatMessagePTR2e } from "@chat";
 import { SlugField } from "@module/data/fields/slug-field.ts";
 import type PokeballActionPTR2e from "@module/data/models/pokeball-action.ts";
 import type { CaptureRoll } from "@system/rolls/capture-roll.ts";
@@ -25,7 +23,7 @@ const captureMessageSchema = {
     shake3: new foundry.data.fields.JSONField<{ required: true, nullable: true, validate: ((param: unknown) => void) }, AnyObject, Roll.Evaluated<CaptureRoll>>({ required: true, nullable: true, validate: validateRoll }),
     shake4: new foundry.data.fields.JSONField<{ required: true, nullable: true, validate: ((param: unknown) => void) }, AnyObject, Roll.Evaluated<CaptureRoll>>({ required: true, nullable: true, validate: validateRoll }),
   }),
-  origin: new foundry.data.fields.JSONField<{ required: true }, AnyObject, ActorPTR2e>({ required: true }),
+  origin: new foundry.data.fields.JSONField<{ required: true }, AnyObject, Actor.ConfiguredInstance>({ required: true }),
   target: new foundry.data.fields.DocumentUUIDField({ required: true, nullable: true, type: "Actor", readonly: true, }),
   slug: new SlugField(),
   result: new foundry.data.fields.SchemaField({
@@ -38,7 +36,9 @@ const captureMessageSchema = {
 
 export type CaptureMessageSchema = typeof captureMessageSchema;
 
-abstract class CaptureMessageSystem extends foundry.abstract.TypeDataModel<CaptureMessageSchema, ChatMessagePTR2e> {
+abstract class CaptureMessageSystem extends foundry.abstract.TypeDataModel<CaptureMessageSchema, ChatMessage.ConfiguredInstance> {
+
+  declare parent: ChatMessage.ConfiguredInstance & { system: CaptureMessageSystem };
 
   /**
    * Define the schema for the DamageAppliedMessageSystem data model
@@ -47,8 +47,8 @@ abstract class CaptureMessageSystem extends foundry.abstract.TypeDataModel<Captu
     return captureMessageSchema;
   }
 
-  get currentOrigin(): Promise<Maybe<ActorPTR2e>> {
-    return this.context?.origin?.uuid ? fromUuid(this.context.origin.uuid) as Promise<Maybe<ActorPTR2e>> : Promise.resolve(null);
+  get currentOrigin(): Promise<Maybe<Actor.ConfiguredInstance>> {
+    return this.context?.origin?.uuid ? fromUuid<Actor.ConfiguredInstance>(this.context.origin.uuid as ActorUUID) : Promise.resolve(null);
   }
 
   override prepareBaseData(): void {
@@ -80,11 +80,11 @@ abstract class CaptureMessageSystem extends foundry.abstract.TypeDataModel<Captu
       })();
       if (!jsonData) return null;
 
-      const worldActor = fromUuidSync(jsonData.uuid) as Maybe<ActorPTR2e>;
+      const worldActor = fromUuidSync(jsonData.uuid) as Maybe<Actor.ConfiguredInstance>;
       if (worldActor) return worldActor;
 
       try {
-        return ActorPTR2e.fromJSON(actorData) as ActorPTR2e;
+        return CONFIG.Actor.documentClass.fromJSON(actorData) as Actor.ConfiguredInstance;
       } catch (error: unknown) {
         Hooks.onError("CaptureMessageSystem#prepareBaseData", error as Error, {
           log: "error",
@@ -207,7 +207,7 @@ abstract class CaptureMessageSystem extends foundry.abstract.TypeDataModel<Captu
         }
         return data;
       })(),
-      target: this.target ? (await fromUuid(this.target) as Maybe<ActorPTR2e>) : null,
+      target: this.target ? (await fromUuid<Actor.ConfiguredInstance>(this.target)) : null,
     });
 
     return renderTemplate("systems/ptr2e/templates/chat/capture.hbs", context);
@@ -216,7 +216,7 @@ abstract class CaptureMessageSystem extends foundry.abstract.TypeDataModel<Captu
   public async applyLuckIncrease(number: number) {
     const roll = foundry.utils.duplicate(this.parent.system.rolls.accuracy);
     if (roll == undefined) return;
-    const currentResult = roll.total;
+    const currentResult = roll.total!;
     if ((currentResult - number) % 10 !== 0) {
       ui.notifications.warn("Luck increases must be multiples of 10.");
       return;
@@ -245,12 +245,12 @@ abstract class CaptureMessageSystem extends foundry.abstract.TypeDataModel<Captu
       }. New total: ${actor.system.skills.get("luck")!.total}`
     ui.notifications.info(notification);
 
-    roll.total -= number;
+    roll.total! -= number;
 
     await this.parent.update({ "system.rolls.accuracy": roll });
 
-    await ChatMessagePTR2e.create({
-      whisper: ChatMessagePTR2e.getWhisperRecipients("GM") as unknown as string[],
+    await CONFIG.ChatMessage.documentClass.create({
+      whisper: CONFIG.ChatMessage.documentClass.getWhisperRecipients("GM") as unknown as string[],
       speaker: { alias: actor.name },
       content: notification,
     });
@@ -272,7 +272,7 @@ interface CaptureMessageSystem {
   action: PokeballActionPTR2e;
 }
 interface CaptureMessageRenderContext {
-  origin: ActorPTR2e;
+  origin: Actor.ConfiguredInstance;
   action: PokeballActionPTR2e;
   rolls: {
     accuracy: string | null;
@@ -292,7 +292,7 @@ interface CaptureMessageRenderContext {
     success: boolean;
     delay: number;
   }
-  target: Maybe<ActorPTR2e>
+  target: Maybe<Actor.ConfiguredInstance>
 }
 
 // interface CaptureMessageSchema extends foundry.data.fields.DataSchema {

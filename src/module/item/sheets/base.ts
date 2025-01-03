@@ -4,7 +4,7 @@ import type { Tab } from "./document.ts";
 import Tagify from "@yaireo/tagify";
 import GithubManager from "@module/apps/github.ts";
 import { ActionEditor } from "@module/apps/action-editor.ts";
-import { ItemSheetV2Expanded } from "@module/apps/appv2-expanded.ts";
+import { ItemSheetV2Expanded, type DocumentSheetConfigurationExpanded, type ExpandedConfiguration } from "@module/apps/appv2-expanded.ts";
 import type { ActionPTR2e } from "@data";
 import { Trait } from "@data";
 import { DataInspector } from "@module/apps/data-inspector/data-inspector.ts";
@@ -41,7 +41,7 @@ export default class ItemSheetPTR2e<
     window: {
       minimizable: true,
       resizable: true,
-      controls: [ //@ts-expect-error - FIXME: This should work.
+      controls: [
         ...(super.DEFAULT_OPTIONS?.window?.controls ?? []),
         {
           icon: "fas fa-atom",
@@ -51,7 +51,7 @@ export default class ItemSheetPTR2e<
         }
       ],
     },
-  }
+  } as (DeepPartial<DocumentSheetConfigurationExpanded<Item.ConfiguredInstance>> & ExpandedConfiguration)
 
   // Settings for child classes to override
   static readonly overviewTemplate: string = "";
@@ -307,12 +307,14 @@ export default class ItemSheetPTR2e<
           return event.shiftKey
             ? effect.delete()
             : foundry.applications.api.DialogV2.confirm({
+              //@ts-expect-error - FIXME: FVTT-Types are incorrect
               yes: {
                 callback: () => effect.delete(),
               },
               content: game.i18n.format("PTR2E.Dialog.DeleteDocumentContent", {
                 name: effect.name,
               }),
+              //@ts-expect-error - FIXME: FVTT-Types are incorrect
               window: {
                 title: game.i18n.format("PTR2E.Dialog.DeleteDocumentTitle", {
                   name: effect.name,
@@ -371,12 +373,14 @@ export default class ItemSheetPTR2e<
               const document = this.document;
 
               foundry.applications.api.DialogV2.confirm({
+                //@ts-expect-error - FIXME: FVTT-Types are incorrect
                 window: {
                   title: game.i18n.localize("PTR2E.Dialog.DeleteDocumentTitle"),
                 },
                 content: game.i18n.format("PTR2E.Dialog.DeleteDocumentContent", {
                   name: action.name,
                 }),
+                //@ts-expect-error - FIXME: FVTT-Types are incorrect
                 yes: {
                   callback: () => {
                     if (!("actions" in document.system)) return;

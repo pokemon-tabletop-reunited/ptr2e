@@ -1,10 +1,8 @@
-import type { ActorPTR2e } from "@actor";
-import type { ChatMessagePTR2e } from "@chat";
 import { SlugField } from "@module/data/fields/slug-field.ts";
 import type { AnyObject } from "fvtt-types/utils";
 
 const damageAppliedSchema = {
-  target: new foundry.data.fields.DocumentUUIDField<{required: true, type: 'Actor'}, AnyObject, ActorPTR2e | null>({ required: true, type: 'Actor' }),
+  target: new foundry.data.fields.DocumentUUIDField<{required: true, type: 'Actor'}, AnyObject, Actor.ConfiguredInstance | null>({ required: true, type: 'Actor' }),
   damageApplied: new foundry.data.fields.NumberField({ required: true, nullable: false }),
   shieldApplied: new foundry.data.fields.BooleanField({ required: true, initial: false }),
   undone: new foundry.data.fields.BooleanField({ required: true, initial: false }),
@@ -19,7 +17,7 @@ const damageAppliedSchema = {
 
 export type DamageAppliedSchema = typeof damageAppliedSchema;
 
-abstract class DamageAppliedMessageSystem extends foundry.abstract.TypeDataModel<DamageAppliedSchema, ChatMessagePTR2e> {
+abstract class DamageAppliedMessageSystem extends foundry.abstract.TypeDataModel<DamageAppliedSchema, ChatMessage.ConfiguredInstance> {
   /**
    * Define the schema for the DamageAppliedMessageSystem data model
    */
@@ -30,7 +28,7 @@ abstract class DamageAppliedMessageSystem extends foundry.abstract.TypeDataModel
   override prepareBaseData(): void {
 
     this.target = (() => {
-      const actor = fromUuidSync(this._source.target!) as ActorPTR2e | null;
+      const actor = fromUuidSync(this._source.target!) as Actor.ConfiguredInstance | null;
       return actor;
     })();
 

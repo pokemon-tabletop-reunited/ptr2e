@@ -2,7 +2,6 @@
 import type {
   ActorDimensions,
   ActorSynthetics,
-  ActorSystemPTR2e,
   Attribute,
   AuraData,
 } from "@actor";
@@ -233,7 +232,7 @@ class ActorPTR2e extends Actor {
   protected override _initializeSource(
     data: Record<string, unknown>,
     options?: Omit<foundry.abstract.DataModel.DataValidationOptions, "parent">
-  ): this["_source"] {
+  ): Actor.Source {
 
     if (data && '_stats' in data && data._stats && typeof data._stats === 'object' && 'systemId' in data._stats && data._stats.systemId === "ptu") {
       data.type = "ptu-actor";
@@ -2030,9 +2029,9 @@ class ActorPTR2e extends Actor {
 
 interface ActorPTR2e extends Actor {
   _source: Omit<Actor['_source'], 'system'> & {
-    system: ActorSystemPTR2e['_source'];
+    system: Actor.ConfiguredBaseSystem['_source'];
   }
-  system: ActorSystemPTR2e;
+  system: Actor.ConfiguredBaseSystem;
 
   _party: ActorParty | null;
 

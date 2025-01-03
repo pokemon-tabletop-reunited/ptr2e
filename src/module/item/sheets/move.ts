@@ -1,15 +1,10 @@
-import type { MovePTR2e } from "@item";
-import type { Tab } from "./document.ts";
 import { default as ItemSheetPTR2e } from "./base.ts";
+import type { AnyObject } from "fvtt-types/utils";
 
-export default class MoveSheet extends ItemSheetPTR2e<MovePTR2e["system"]> {
-  static override DEFAULT_OPTIONS = foundry.utils.mergeObject(
-    super.DEFAULT_OPTIONS,
-    {
-      classes: ["move-sheet"],
-    },
-    { inplace: false }
-  );
+export default class MoveSheet extends ItemSheetPTR2e<AnyObject> {
+  static override DEFAULT_OPTIONS = {
+    classes: ["move-sheet"],
+  }
 
   static override readonly overviewTemplate =
     "systems/ptr2e/templates/items/move/move-overview.hbs";
@@ -27,23 +22,11 @@ export default class MoveSheet extends ItemSheetPTR2e<MovePTR2e["system"]> {
         details: {
           template: MoveSheet.detailsTemplate,
         },
-        // attack: {
-        //     id: "attack",
-        //     template: "systems/ptr2e/templates/items/move/move-attack.hbs",
-        //     scrollable: [".scroll"],
-        //     forms: {
-        //         "#attack": {
-        //             handler: this._submitAttack,
-        //             closeOnSubmit: false,
-        //             submitOnChange: true,
-        //         },
-        //     },
-        // },
       },
       { inplace: false }
     );
 
-  override tabs: Record<string, Tab> = {
+  override tabs = {
     overview: {
       id: "overview",
       group: "sheet",
@@ -56,12 +39,6 @@ export default class MoveSheet extends ItemSheetPTR2e<MovePTR2e["system"]> {
       icon: "fa-solid fa-cogs",
       label: "PTR2E.ItemSheet.Tabs.details.label",
     },
-    // attack: {
-    //     id: "attack",
-    //     group: "sheet",
-    //     icon: "fa-solid fa-bullseye",
-    //     label: "PTR2E.ItemSheet.Tabs.attack.label",
-    // },
     actions: {
       id: "actions",
       group: "sheet",
@@ -99,11 +76,11 @@ export default class MoveSheet extends ItemSheetPTR2e<MovePTR2e["system"]> {
     }
   }
 
-  override async _prepareContext() {
+  override async _prepareContext(options: foundry.applications.api.HandlebarsApplicationMixin.HandlebarsRenderOptions): Promise<AnyObject> {
     const attack = this.document.system.attack;
 
     return {
-      ...(await super._prepareContext()),
+      ...(await super._prepareContext(options)),
       attack: {
         attack: attack,
         source: attack?._source,
@@ -112,20 +89,4 @@ export default class MoveSheet extends ItemSheetPTR2e<MovePTR2e["system"]> {
       },
     };
   }
-
-  // static async _submitAttack(
-  //     this: MoveSheet,
-  //     _event: SubmitEvent | Event,
-  //     _form: HTMLFormElement,
-  //     formData: FormDataExtended
-  // ) {
-  //     const actions = foundry.utils.duplicate(this.document.system._source.actions);
-  //     const attackIndex = actions.findIndex((action) => action.type === "attack");
-  //     if (attackIndex === -1) return;
-
-  //     const expanded = foundry.utils.expandObject(formData.object) as AttackPTR2e["_source"];
-  //     actions[attackIndex] = foundry.utils.mergeObject(actions[attackIndex], expanded, { inplace: false });
-  //     actions[attackIndex].slug = sluggify(actions[attackIndex].name);
-  //     await this.document.update({ "system.actions": actions });
-  // }
 }

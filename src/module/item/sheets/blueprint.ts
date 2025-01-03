@@ -1,61 +1,65 @@
-import { ItemPTR2e } from "@item/document.ts";
-import { DocumentSheetV2 } from "./document.ts";
 import BlueprintSystem from "@item/data/blueprint.ts";
 import { Blueprint } from "@module/data/models/blueprint.ts";
 import { htmlQuery } from "@utils";
 import Sortable from "sortablejs";
 import { SpeciesSystemModel } from "@item/data/index.ts";
-import type { ActorPTR2e } from "@actor";
+import type { AnyObject, DeepPartial } from "fvtt-types/utils";
+import { DocumentSheetV2Expanded } from "@module/apps/appv2-expanded.ts";
 
-export default class BlueprintSheet extends foundry.applications.api.HandlebarsApplicationMixin(DocumentSheetV2<ItemPTR2e<BlueprintSystem>>) {
-  static override DEFAULT_OPTIONS = foundry.utils.mergeObject(
-    super.DEFAULT_OPTIONS,
-    {
-      classes: ["blueprint", "sheet"],
-      position: {
-        width: 700,
-        height: 700,
-      },
-      window: {
-        resizable: true,
-        controls: [
-          {
-            action: "rename",
-            icon: "fas fa-edit",
-            label: "PTR2E.Rename",
-            visible: true
-          }
-        ]
-      },
-      form: {
-        submitOnChange: true,
-        closeOnSubmit: false,
-        handler: this.#onSubmit,
-      },
-      dragDrop: [{ dropSelector: "aside" }, {dropSelector: ".species-fields"}],
-      actions: {
-        "rename": async function (this: BlueprintSheet) {
-          const name = this.document.name;
-          const dialog = await foundry.applications.api.DialogV2.prompt<string>({
-            window: {title: game.i18n.localize("PTR2E.Dialog.RenameDocumentTitle")},
-            content: `<p>${game.i18n.localize("PTR2E.Dialog.RenameDocumentContent")}</p><input type="text" name="name" value="${name}">`,
-            ok: {
-              action: "ok",
-              label: "Confirm",
-              callback: (_event, _button, dialog) => {
-                return dialog?.querySelector<HTMLInputElement>("input[name='name']")?.value ?? name
-              }
-            }
-          })
-          if(!dialog || name == dialog) return;
-          await this.document.update({name: dialog});
-          if(this.rendered) this._updateFrame({window: {title: this.title}});
-        }
-      },
-      tag: "form",
+interface BlueprintSheetOptions extends foundry.applications.api.DocumentSheetV2.Configuration<Actor.ConfiguredInstance> {
+  generation?: {
+    x: number,
+    y: number,
+    temporary: boolean,
+    canvas: Canvas,
+  }
+}
+
+export default class BlueprintSheet extends foundry.applications.api.HandlebarsApplicationMixin(DocumentSheetV2Expanded)<Item.ConfiguredInstance, AnyObject, BlueprintSheetOptions> {
+  static override DEFAULT_OPTIONS = {
+    classes: ["blueprint", "sheet"],
+    position: {
+      width: 700,
+      height: 700,
     },
-    { inplace: false }
-  );
+    window: {
+      resizable: true,
+      controls: [
+        {
+          action: "rename",
+          icon: "fas fa-edit",
+          label: "PTR2E.Rename",
+          visible: true
+        }
+      ]
+    },
+    form: {
+      submitOnChange: true,
+      closeOnSubmit: false,
+      handler: this.#onSubmit,
+    },
+    dragDrop: [{ dropSelector: "aside" }, { dropSelector: ".species-fields" }],
+    actions: {
+      "rename": async function (this: BlueprintSheet) {
+        const name = this.document.name;
+        const dialog = await foundry.applications.api.DialogV2.prompt({
+          window: { title: game.i18n.localize("PTR2E.Dialog.RenameDocumentTitle") },
+          content: `<p>${game.i18n.localize("PTR2E.Dialog.RenameDocumentContent")}</p><input type="text" name="name" value="${name}">`,
+          ok: {
+            action: "ok",
+            label: "Confirm",
+            callback: (_event, _button, dialog) => {
+              return dialog?.querySelector<HTMLInputElement>("input[name='name']")?.value ?? name
+            }
+          }
+        })
+        if (!dialog || name == dialog) return;
+        await this.document.update({ name: dialog });
+        if (this.rendered) this._updateFrame({ window: { title: this.title } });
+      }
+    },
+    tag: "form",
+  }
 
   static override PARTS: Record<string, foundry.applications.api.HandlebarsApplicationMixin.HandlebarsTemplatePart> = {
     side: {
@@ -68,21 +72,14 @@ export default class BlueprintSheet extends foundry.applications.api.HandlebarsA
     },
   };
 
-  constructor(options: foundry.applications.api.DocumentSheetConfiguration & {
-    generation?: {
-      x: number,
-      y: number,
-      temporary: boolean,
-      canvas: Canvas,
-    },
-  }) {
+  constructor(options: Pick<BlueprintSheetOptions, "document" | "generation"> & DeepPartial<Omit<BlueprintSheetOptions, "document" | "generation">>) {
     super(options);
     this.generation = options.generation ?? null;
 
     this.prepareTeamData();
   }
 
-  get blueprint() {
+  get blueprint(): BlueprintSystem {
     return this.document.system;
   }
 
@@ -91,7 +88,7 @@ export default class BlueprintSheet extends foundry.applications.api.HandlebarsA
     y: number,
     temporary: boolean
     canvas: Canvas,
-    parent?: ActorPTR2e,
+    parent?: Actor.ConfiguredInstance,
   } | null = null;
   selection: string | null = null
   team: {
@@ -129,7 +126,7 @@ export default class BlueprintSheet extends foundry.applications.api.HandlebarsA
     return true;
   }
 
-  override async _prepareContext(): Promise<object> {
+  override async _prepareContext(options: foundry.applications.api.HandlebarsApplicationMixin.HandlebarsRenderOptions): Promise<AnyObject> {
     if (!this.prepareTeamData(this.team)) return {};
 
     for (const blueprint of this.blueprint.blueprints) {
@@ -146,7 +143,7 @@ export default class BlueprintSheet extends foundry.applications.api.HandlebarsA
     }
 
     return {
-      ...(await super._prepareContext()),
+      ...(await super._prepareContext(options)),
       team: this.team,
       type: this.team.owner ? "party" : this.team.members.length > 1 ? "team" : "individual",
       blueprint: this.selected,
@@ -170,7 +167,7 @@ export default class BlueprintSheet extends foundry.applications.api.HandlebarsA
           const species = blueprint?.species;
           if (!species) return;
 
-          const doc = await fromUuid(species);
+          const doc = await fromUuid<Item.ConfiguredInstance>(species as ItemUUID);
           doc?.sheet?.render(true);
         })
         element.addEventListener("contextmenu", async (event) => {
@@ -182,6 +179,7 @@ export default class BlueprintSheet extends foundry.applications.api.HandlebarsA
           if (!blueprint) return;
 
           foundry.applications.api.DialogV2.confirm({
+            //@ts-expect-error - Foundry types are incomplete
             yes: {
               callback: () => {
                 this.team = null;
@@ -191,6 +189,7 @@ export default class BlueprintSheet extends foundry.applications.api.HandlebarsA
             content: game.i18n.format("PTR2E.Dialog.DeleteDocumentContent", {
               name: blueprint.name,
             }),
+            //@ts-expect-error - Foundry types are incomplete
             window: {
               title: game.i18n.format("PTR2E.Dialog.DeleteDocumentTitle", {
                 name: blueprint.name,
@@ -245,32 +244,32 @@ export default class BlueprintSheet extends foundry.applications.api.HandlebarsA
         })
       }
     }
-    if(partId === "main") {
+    if (partId === "main") {
       const select = htmlElement.querySelector<HTMLSelectElement>("select.species-select");
       select?.addEventListener("change", async () => {
         const value = select.value;
-        if(!value) return;
-        if(!this.selected) return;
-        if(this.generation?.temporary) {
-          this.selected.updateSource({species: value});
-        } 
+        if (!value) return;
+        if (!this.selected) return;
+        if (this.generation?.temporary) {
+          this.selected.updateSource({ species: value });
+        }
         else {
-          await this.blueprint.updateChildren([{_id: this.selected.id, species: value}]);
+          await this.blueprint.updateChildren([{ _id: this.selected.id, species: value }]);
         }
       })
     }
   }
 
-  override _onRender(context: foundry.applications.api.ApplicationRenderContext, options: foundry.applications.api.HandlebarsDocumentSheetConfiguration): void {
+  override _onRender(context: DeepPartial<AnyObject>, options: foundry.applications.api.HandlebarsApplicationMixin.HandlebarsRenderOptions): void {
     super._onRender(context, options);
 
     if (options?.parts?.includes("main")) {
       this.element?.querySelectorAll(".tag.document-tag").forEach((element) => {
         element.addEventListener("dblclick", async () => {
-          const id = (element as HTMLElement).dataset.key;
+          const id = (element as HTMLElement).dataset.key as ItemUUID | undefined;
           if (!id) return;
 
-          const doc = await fromUuid(id);
+          const doc = await fromUuid<Item.ConfiguredInstance>(id);
           doc?.sheet?.render(true);
         })
       });
@@ -348,7 +347,7 @@ export default class BlueprintSheet extends foundry.applications.api.HandlebarsA
   }
 
   override async _onDrop(event: DragEvent) {
-    const data = TextEditor.getDragEventData(event) as Record<string, string>;
+    const data = TextEditor.getDragEventData(event) as unknown as Record<string, string>;
     const doc = await (async () => {
       switch (data.type) {
         case "RollTable": {
@@ -366,13 +365,13 @@ export default class BlueprintSheet extends foundry.applications.api.HandlebarsA
           return table;
         }
         case "Item": {
-          const item = await fromUuid<ItemPTR2e<BlueprintSystem | SpeciesSystemModel>>(data.uuid);
+          const item = await fromUuid<Item.ConfiguredInstance>(data.uuid as ItemUUID);
           if (!item) {
             ui.notifications.error("The dropped item could not be found");
             return;
           }
 
-          if (!(item instanceof ItemPTR2e && (item.system instanceof BlueprintSystem || item.system instanceof SpeciesSystemModel))) {
+          if (!(item instanceof CONFIG.Item.documentClass && (item.system instanceof BlueprintSystem || item.system instanceof SpeciesSystemModel))) {
             ui.notifications.error("The dropped item is not a Blueprint / Species / RollTable");
             return;
           }
@@ -380,7 +379,7 @@ export default class BlueprintSheet extends foundry.applications.api.HandlebarsA
           return item;
         }
         case "Actor": {
-          const actor = await fromUuid<ActorPTR2e>(data.uuid);
+          const actor = await fromUuid<Actor.ConfiguredInstance>(data.uuid as ActorUUID);
           if (!actor) {
             ui.notifications.error("The dropped actor could not be found");
             return;
@@ -388,9 +387,9 @@ export default class BlueprintSheet extends foundry.applications.api.HandlebarsA
 
           if (this.generation) {
             this.generation.parent = actor;
-            if(!this.team) return null;
+            if (!this.team) return null;
             // @ts-expect-error - Mock for UI purposes.
-            this.team.owner = {name: actor.name, img: actor.img};
+            this.team.owner = { name: actor.name, img: actor.img };
             this.render({ parts: ["side"] });
             return null;
           }
@@ -403,13 +402,13 @@ export default class BlueprintSheet extends foundry.applications.api.HandlebarsA
 
     if (!doc) return;
 
-    if((event.currentTarget as HTMLElement).classList.contains("species-fields")) {
-      if(!this.selected) return;
-      if(this.generation?.temporary) {
-        return void this.selected.updateSource({species: doc.uuid});
+    if ((event.currentTarget as HTMLElement).classList.contains("species-fields")) {
+      if (!this.selected) return;
+      if (this.generation?.temporary) {
+        return void this.selected.updateSource({ species: doc.uuid });
       } else {
         this.team = null
-        return void await this.blueprint.updateChildren([{_id: this.selected.id, species: doc.uuid}]);
+        return void await this.blueprint.updateChildren([{ _id: this.selected.id, species: doc.uuid }]);
       }
     }
     else {
@@ -434,7 +433,7 @@ export default class BlueprintSheet extends foundry.applications.api.HandlebarsA
           delete updateData[key];
         }
       }
-      if(updateData.species) this.team = null;
+      if (updateData.species) this.team = null;
       await this.blueprint.updateChildren([{
         _id: this.selected.id,
         ...updateData
@@ -456,10 +455,10 @@ export default class BlueprintSheet extends foundry.applications.api.HandlebarsA
       foundry.utils.mergeObject(blueprint, updateData, { inplace: true });
     }
 
-    const generation = this.generation ? {...this.generation, team: !this.team?.owner && (this.team?.members?.length ?? 0) > 1} : null;
+    const generation = this.generation ? { ...this.generation, team: !this.team?.owner && (this.team?.members?.length ?? 0) > 1 } : null;
 
     const result = this._dataOnly ? this.blueprint.generate(null, true) : this.blueprint.generate(generation);
-    if(this._dataOnly) {
+    if (this._dataOnly) {
       this.resolve(result);
       this._dataOnly = false;
     }
@@ -474,9 +473,9 @@ export default class BlueprintSheet extends foundry.applications.api.HandlebarsA
   }
 
   private _dataOnly = false;
-  private resolve: (value: void | PromiseLike<Partial<ActorPTR2e['_source']>[] | void>) => void;
+  private resolve: (value: void | PromiseLike<Partial<Actor.ConfiguredInstance['_source']>[] | void>) => void;
 
-  async dataOnly(): Promise<Partial<ActorPTR2e['_source']>[] | void> {
+  async dataOnly(): Promise<Partial<Actor.ConfiguredInstance['_source']>[] | void> {
     return new Promise((resolve) => {
       this._dataOnly = true;
       this.resolve = resolve;

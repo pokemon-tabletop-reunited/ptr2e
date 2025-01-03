@@ -1,5 +1,3 @@
-import type { MeasuredTemplatePTR2e } from "../measured-template.ts";
-
 export class TemplateLayerPTR2e extends TemplateLayer {
   /** Preview event listeners that can be referenced across methods */
   #previewListeners: TemplatePreviewEventListeners | null = null;
@@ -19,7 +17,7 @@ export class TemplateLayerPTR2e extends TemplateLayer {
     }
   }
 
-  async createPreview(createData: Record<string, unknown>): Promise<MeasuredTemplatePTR2e> {
+  async createPreview(createData: Record<string, unknown>): Promise<MeasuredTemplate.ConfiguredInstance> {
     const initialLayer = canvas!.activeLayer;
     //@ts-expect-error - fvtt-types incorrect type
     const preview = await this._createPreview({ ...createData, ...canvas.mousePosition }, { renderSheet: false });
@@ -84,7 +82,7 @@ export class TemplateLayerPTR2e extends TemplateLayer {
     return template.rotate(template.document.direction + delta, snap) as ReturnType<MeasuredTemplate.ConfiguredInstance["rotate"]> | void
   }
 
-  #activatePreviewListeners(preview: MeasuredTemplatePTR2e, initialLayer: InteractionLayer | null): void {
+  #activatePreviewListeners(preview: MeasuredTemplate.ConfiguredInstance, initialLayer: InteractionLayer | null): void {
     let lastMove = Date.now(); // Throttle 25ms
 
     const listeners: TemplatePreviewEventListeners = (this.#previewListeners = {
@@ -153,7 +151,6 @@ export class TemplateLayerPTR2e extends TemplateLayer {
   }
 
   #deactivatePreviewListeners(initialLayer: InteractionLayer | null, event: PIXI.FederatedPointerEvent): void {
-    //@ts-expect-error - fvtt-types Incorrect Type
     this._onDragLeftCancel(event);
     if (this.#previewListeners) {
       canvas.stage!.off("mousemove", this.#previewListeners.mousemove);

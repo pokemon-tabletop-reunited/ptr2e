@@ -1,15 +1,10 @@
-import { ItemPTR2e } from "@item";
 import { default as ItemSheetPTR2e } from "./base.ts";
 import type { AnyObject } from "fvtt-types/utils";
 
 export default class SummonSheet extends ItemSheetPTR2e<AnyObject> {
-  static override DEFAULT_OPTIONS = foundry.utils.mergeObject(
-    super.DEFAULT_OPTIONS,
-    {
-      classes: ["summon-sheet"],
-    },
-    { inplace: false }
-  );
+  static override DEFAULT_OPTIONS = {
+    classes: ["summon-sheet"],
+  }
 
   static override readonly overviewTemplate = "systems/ptr2e/templates/items/summon/summon-overview.hbs";
   static override readonly detailsTemplate = "systems/ptr2e/templates/items/summon/summon-details.hbs";
@@ -45,7 +40,7 @@ export default class SummonSheet extends ItemSheetPTR2e<AnyObject> {
   }
 
   override async _onDropItem(_event: DragEvent, data: object) {
-    const item = await ItemPTR2e.fromDropData(data as foundry.abstract.Document.DropData<Item.ConfiguredInstance>);
+    const item = await CONFIG.Item.documentClass.fromDropData(data as foundry.abstract.Document.DropData<Item.ConfiguredInstance>);
     if (!item || item.type !== "effect") return;
     // Change type to 'Summon' as it's the only type that should be on Summon Items
     const effects = item.effects.map((effect) => this.updateEffectType((effect as ActiveEffect.ConfiguredInstance).toObject()));

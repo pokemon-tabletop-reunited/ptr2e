@@ -1,4 +1,3 @@
-import { ActorPTR2e } from "@actor";
 import type { ItemSystemPTR, ItemWithActions } from "@item";
 import type { ActionPTR2e, EquipmentData, Trait } from "@data";
 import { RollOptionManager } from "@data";
@@ -92,7 +91,7 @@ class ItemPTR2e extends Item {
 
   override getRollData(): Record<string, unknown> {
     const rollData: Record<string, unknown> = { item: this };
-    if (this.parent instanceof ActorPTR2e) rollData.actor = this.parent;
+    if (this.parent instanceof CONFIG.Item.documentClass) rollData.actor = this.parent;
     return rollData;
   }
 
@@ -165,7 +164,7 @@ class ItemPTR2e extends Item {
       document = new CONFIG.ActiveEffect.documentClass(data.data) as ActiveEffect.ConfiguredInstance;
     }
     // Case 2 - UUID provided
-    else if ('uuid' in data && data.uuid) document = await fromUuid(data.uuid);
+    else if ('uuid' in data && data.uuid) document = await fromUuid<ActiveEffect.ConfiguredInstance>(data.uuid);
 
     // Ensure that we have an ActiveEffect document
     if (!document)
@@ -207,7 +206,7 @@ class ItemPTR2e extends Item {
       data.splice(data.indexOf(source), 1, item.toObject());
     }
 
-    const actor = operation?.parent as ActorPTR2e | null;
+    const actor = operation?.parent as Actor.ConfiguredInstance | null;
     //@ts-expect-error - Operation cannot be typed correctly until https://github.com/League-of-Foundry-Developers/foundry-vtt-types/issues/2998 is resolved
     if (!actor) return super.createDocuments<T, Temporary>(data, operation);
 

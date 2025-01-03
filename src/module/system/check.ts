@@ -1,5 +1,4 @@
-import { ChatMessagePTR2e } from "@chat";
-import type { ConsumablePTR2e, ItemPTR2e, ItemSystemsWithFlingStats } from "@item";
+import type { ConsumablePTR2e } from "@item";
 import { ModifierPopup } from "@module/apps/modifier-popup/modifier-popup.ts";
 import type { CheckModifier, ModifierPTR2e } from "@module/effects/modifiers.ts";
 import { AttackCheckModifier } from "@module/effects/modifiers.ts";
@@ -23,7 +22,6 @@ import { AttackRoll } from "./rolls/attack-roll.ts";
 import type { CaptureRollCreationData } from "./rolls/capture-roll.ts";
 import { CaptureRoll } from "./rolls/capture-roll.ts";
 import { ConsumableSystemModel } from "@item/data/index.ts";
-import type { ActorPTR2e } from "@actor";
 
 class CheckPTR2e {
   static async rollPokeball(
@@ -83,11 +81,11 @@ class CheckPTR2e {
     const rolls: PokeballRollResults["rolls"] = await (async () => {
       const [accuracy, crit, shake1, shake2, shake3, shake4] = await Promise.all([
         context.accuracyRoll ?? null,
-        CaptureRoll.createFromData(options, data, "crit")?.evaluate() ?? null,
-        CaptureRoll.createFromData(options, data, "shake1")?.evaluate() ?? null,
-        CaptureRoll.createFromData(options, data, "shake2")?.evaluate() ?? null,
-        CaptureRoll.createFromData(options, data, "shake3")?.evaluate() ?? null,
-        CaptureRoll.createFromData(options, data, "shake4")?.evaluate() ?? null,
+        CaptureRoll.createFromData({options, data, type: "crit"})?.evaluate() ?? null,
+        CaptureRoll.createFromData({options, data, type: "shake1"})?.evaluate() ?? null,
+        CaptureRoll.createFromData({options, data, type: "shake2"})?.evaluate() ?? null,
+        CaptureRoll.createFromData({options, data, type: "shake3"})?.evaluate() ?? null,
+        CaptureRoll.createFromData({options, data, type: "shake4"})?.evaluate() ?? null,
       ]);
       return {
         accuracy,
@@ -169,7 +167,7 @@ class CheckPTR2e {
     const message = await (() => {
       if (!context.createMessage) return null;
 
-      return ChatMessagePTR2e.createFromPokeballResults(messageContext, results);
+      return CONFIG.ChatMessage.documentClass.createFromPokeballResults(messageContext, results);
     })();
 
     if (callback) {
@@ -360,13 +358,13 @@ class CheckPTR2e {
         const [accuracy, crit, damage] = await Promise.all([
           skippedRolls.has("accuracy")
             ? null
-            : AttackRoll.createFromData(data, options, "accuracy")?.evaluate() ?? null,
+            : AttackRoll.createFromData({data, options, type: "accuracy"})?.evaluate() ?? null,
           skippedRolls.has("crit")
             ? null
-            : AttackRoll.createFromData(data, options, "crit")?.evaluate() ?? null,
+            : AttackRoll.createFromData({data, options, type: "crit"})?.evaluate() ?? null,
           skippedRolls.has("damage")
             ? null
-            : AttackRoll.createFromData(data, options, "damage")?.evaluate() ?? null,
+            : AttackRoll.createFromData({data, options, type: "damage"})?.evaluate() ?? null,
         ]);
         return { accuracy, crit, damage };
       })();
@@ -476,7 +474,7 @@ class CheckPTR2e {
     const message = await (() => {
       if (!context.createMessage) return null;
 
-      return ChatMessagePTR2e.createFromResults(context, results);
+      return CONFIG.ChatMessage.documentClass.createFromResults(context, results);
     })();
 
     if (callback) {
@@ -503,7 +501,7 @@ class CheckPTR2e {
     if (!context.isReroll && context.action?.startsWith("fling")) {
       const fling = context.actor?.actions.attack.get(context.action);
       if (fling?.flingItemId) {
-        const flingItem = context.actor?.items.get(fling.flingItemId) as Maybe<ItemPTR2e<ItemSystemsWithFlingStats>>;
+        const flingItem = context.actor?.items.get(fling.flingItemId);
         if (flingItem) {
           if (flingItem.system.quantity >= 1) {
             await flingItem.update({ "system.quantity": flingItem.system.quantity - 1 });
@@ -569,7 +567,7 @@ class CheckPTR2e {
       breakdown: check.breakdown,
     };
 
-    const roll = await CheckRoll.createFromData(options)!.evaluate();
+    const roll = await CheckRoll.createFromData({options})!.evaluate();
 
     const degree = context.dc ? new DegreeOfSuccess(roll) : null;
     if (degree) {
@@ -605,10 +603,10 @@ class CheckPTR2e {
     messageContext.notesList = notesList;
     messageContext.modifiers = check.modifiers;
 
-    const message: Maybe<ChatMessagePTR2e> = await (() => {
+    const message: Maybe<ChatMessage.ConfiguredInstance> = await (() => {
       if (!context.createMessage) return null;
 
-      return ChatMessagePTR2e.createFromRoll(messageContext, roll);
+      return CONFIG.ChatMessage.documentClass.createFromRoll(messageContext, roll);
     })();
 
     if (callback) {

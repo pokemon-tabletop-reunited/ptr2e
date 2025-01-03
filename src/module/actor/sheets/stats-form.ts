@@ -1,13 +1,13 @@
 import { StatsChart } from "./stats-chart.ts";
-import type { Attributes, ActorPTR2e } from "@actor";
+import type { Attributes } from "@actor";
 import type { DocumentSheetConfiguration } from "@item/sheets/document.ts";
 import { debounceAsync } from "@utils";
 import type { AnyObject, DeepPartial } from "fvtt-types/utils";
 
-export default class StatsForm extends foundry.applications.api.HandlebarsApplicationMixin(foundry.applications.api.DocumentSheetV2)<ActorPTR2e, AnyObject> {
+export default class StatsForm extends foundry.applications.api.HandlebarsApplicationMixin(foundry.applications.api.DocumentSheetV2)<Actor.ConfiguredInstance, AnyObject> {
   _statsChart: StatsChart;
 
-  constructor(options: DeepPartial<foundry.applications.api.DocumentSheetV2.Configuration<Actor.ConfiguredInstance>>) {
+  constructor(options: Pick<foundry.applications.api.DocumentSheetV2.Configuration<Actor.ConfiguredInstance>, "document"> & DeepPartial<Omit<foundry.applications.api.DocumentSheetV2.Configuration<Actor.ConfiguredInstance>, "document">>) {
     super(options);
     this._statsChart = new StatsChart(this, {});
   }
@@ -19,7 +19,7 @@ export default class StatsForm extends foundry.applications.api.HandlebarsApplic
       width: 700,
     },
     form: {
-      handler: null
+      handler: undefined
     }
   };
 
@@ -50,7 +50,7 @@ export default class StatsForm extends foundry.applications.api.HandlebarsApplic
     return game.i18n.localize("PTR2E.ActorSheet.StatsFormTitle");
   }
 
-  override _configureRenderOptions(options: foundry.applications.api.DocumentSheetV2.Configuration<Actor.ConfiguredInstance>): void {
+  override _configureRenderOptions(options: DeepPartial<foundry.applications.api.HandlebarsApplicationMixin.HandlebarsRenderOptions>): void {
     super._configureRenderOptions(options);
     if (this.document.isPokemon()) {
       options.parts = options.parts?.filter(part => part !== "baseStats");
@@ -77,7 +77,7 @@ export default class StatsForm extends foundry.applications.api.HandlebarsApplic
     }
   }
 
-  override _attachPartListeners(partId: string, htmlElement: HTMLElement, options: DocumentSheetConfiguration<ActorPTR2e>): void {
+  override _attachPartListeners(partId: string, htmlElement: HTMLElement, options: foundry.applications.api.HandlebarsApplicationMixin.HandlebarsRenderOptions): void {
     super._attachPartListeners(partId, htmlElement, options);
     const part = (this.constructor as typeof StatsForm).PARTS[partId];
 

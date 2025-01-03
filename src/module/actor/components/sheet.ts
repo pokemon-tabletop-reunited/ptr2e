@@ -76,7 +76,7 @@ class ComponentPopout extends foundry.applications.api.HandlebarsApplicationMixi
   actor: Actor.ConfiguredInstance;
   component: ActorComponent;
 
-  constructor(options: ComponentApplicationConfiguration) {
+  constructor(options: DeepPartial<ComponentApplicationConfiguration>) {
     options.component = (typeof options.component === "string") ? new ActorComponents[options.component](options.actor) : options.component;
     super(options);
 

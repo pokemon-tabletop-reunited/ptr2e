@@ -1,26 +1,24 @@
-import type { ActorPTR2e, EffectRollSource } from "@actor";
-import type { TokenDocumentPTR2e } from "@module/canvas/token/document.ts";
+import type {  EffectRollSource } from "@actor";
 import type { CheckRollContext } from "@system/rolls/data.ts";
 import type { AttackRollResult, PokeballRollResults } from "../system/rolls/check-roll.ts";
 import { CheckRoll } from "../system/rolls/check-roll.ts";
 import * as R from "remeda";
 import type { SummonPTR2e } from "@item";
 import type { AttackPTR2e } from "@data";
-import type { CombatantPTR2e } from "@combat";
 
 class ChatMessagePTR2e extends ChatMessage {
   /** Get the actor associated with this chat message */
-  get actor(): ActorPTR2e | null {
-    return ChatMessagePTR2e.getSpeakerActor(this.speaker) as ActorPTR2e | null;
+  get actor(): Actor.ConfiguredInstance | null {
+    return ChatMessagePTR2e.getSpeakerActor(this.speaker) as Actor.ConfiguredInstance | null;
   }
 
   /** Get the token of the speaker if possible */
-  get token(): TokenDocumentPTR2e | null {
+  get token(): TokenDocument.ConfiguredInstance | null {
     if (!game.scenes) return null; // In case we're in the middle of game setup
     const sceneId = this.speaker.scene ?? "";
     const tokenId = this.speaker.token ?? "";
     return (
-      (game.scenes.get(sceneId)?.tokens.get(tokenId) as TokenDocumentPTR2e) ??
+      (game.scenes.get(sceneId)?.tokens.get(tokenId) as TokenDocument.ConfiguredInstance) ??
       null
     );
   }
@@ -131,7 +129,7 @@ class ChatMessagePTR2e extends ChatMessage {
       event.stopPropagation();
 
       const { attackUuid } = event.currentTarget.dataset;
-      const action = await fromUuid(attackUuid!) as unknown as AttackPTR2e;
+      const action = await fromUuid(attackUuid as ValidUUID) as unknown as AttackPTR2e;
       if (!action) return void ui.notifications.error("Action not found.");
 
       return action.delayAction();
@@ -143,7 +141,7 @@ class ChatMessagePTR2e extends ChatMessage {
       event.stopPropagation();
 
       const { actionUuid } = event.currentTarget.dataset;
-      const action = await fromUuid(actionUuid!) as unknown as AttackPTR2e;
+      const action = await fromUuid(actionUuid as ValidUUID) as unknown as AttackPTR2e;
       if (!action) return void ui.notifications.error("Action not found.");
 
       const ppCost = action.cost.powerPoints
@@ -168,11 +166,11 @@ class ChatMessagePTR2e extends ChatMessage {
       if (!game.combat) return void ui.notifications.error("You must be in combat to summon a creature.");
 
       const { attackUuid } = event.currentTarget.dataset;
-      const action = await fromUuid(attackUuid!) as unknown as AttackPTR2e;
+      const action = await fromUuid(attackUuid as ValidUUID) as unknown as AttackPTR2e;
       if (!action) return void ui.notifications.error("Action not found.");
       if (!(action?.type === "attack" && action.summon)) return void ui.notifications.error("Action not found on item.");
 
-      const summonItem = await fromUuid((action as AttackPTR2e).summon!) as SummonPTR2e;
+      const summonItem = await fromUuid<Item.ConfiguredInstance>((action as AttackPTR2e).summon as ValidUUID) as SummonPTR2e;
       if (!summonItem) return void ui.notifications.error("Summon not found on action.");
 
       const combatants = await game.combat.createEmbeddedDocuments("Combatant", [{
@@ -184,10 +182,10 @@ class ChatMessagePTR2e extends ChatMessage {
         }
       }])
 
-      if (!combatants.length) return void ui.notifications.error("Failed to create summon.");
+      if (!combatants!.length) return void ui.notifications.error("Failed to create summon.");
 
       ChatMessage.create({
-        content: `Added: ${(combatants as CombatantPTR2e[]).map(c => c.link).join(", ")} to Combat.`,
+        content: `Added: ${(combatants as Combatant.ConfiguredInstance[]).map(c => c.link).join(", ")} to Combat.`,
       });
     });
 
@@ -258,7 +256,7 @@ class ChatMessagePTR2e extends ChatMessage {
           event.preventDefault();
           if (!canvas.ready) return;
 
-          const actor = (await fromUuid(el.dataset.uuid!)) as ActorPTR2e;
+          const actor = await fromUuid<Actor.ConfiguredInstance>(el.dataset.uuid as ActorUUID);
           if (!actor) return;
 
           const tokens = actor.getActiveTokens(false);
@@ -331,7 +329,7 @@ class ChatMessagePTR2e extends ChatMessage {
           context.luckRoll instanceof CheckRoll
         )
           return context.luckRoll;
-        return await CheckRoll.createFromData({ type: "luck-roll" })!.roll();
+        return await CheckRoll.createFromData({options: {}, type: "luck-roll" })!.roll();
       })();
       const luckRollJson = luckRoll.toJSON();
       //@ts-expect-error - FIXME: Figure out why this is breaking.
@@ -473,7 +471,7 @@ class ChatMessagePTR2e extends ChatMessage {
           options: Array.from(r.context.options ?? [])
         },
         effectRolls: r.context.effectRolls ?? null
-      })),
+      })), //@ts-expect-error - FIXME: Probably due to JSON field but being cast to the resulting object, but expecting string here already (which ain't necessary)
       selfEffects: context.selfEffectRolls?.length ? {
         applied: true,
         rolls: await Promise.all(context.selfEffectRolls.map(async (r) => {

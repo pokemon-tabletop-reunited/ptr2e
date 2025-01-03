@@ -96,6 +96,7 @@ export const Init: PTRHook = {
       // Register custom sheets
       {
         Actors.unregisterSheet("core", ActorSheet);
+        //@ts-expect-error - FIXME: This shouldn't be erroring, as it is a subclass of ActorSheetV2.
         Actors.registerSheet("ptr2e", ActorSheetPTR2e, { types: ["humanoid", "pokemon"], makeDefault: true })
         Actors.registerSheet("ptr2e", PTRCONFIG.Actor.sheetClasses["ptu-actor"], { types: ["ptu-actor"], makeDefault: true })
 

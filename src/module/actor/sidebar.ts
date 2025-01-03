@@ -21,7 +21,7 @@ export default class ActorDirectoryPTR2e extends ActorDirectory {
         ],
       },
       { inplace: false }
-    ) as ApplicationOptions;
+    ) as DocumentDirectoryOptions;
   }
 
   override _getFolderContextOptions() {
@@ -45,7 +45,7 @@ export default class ActorDirectoryPTR2e extends ActorDirectory {
     return options;
   }
 
-  override async getData(options?: Partial<ApplicationOptions> | undefined): Promise<object> {
+  override async getData(options?: Partial<DocumentDirectoryOptions> | undefined): Promise<object> {
     const data = await super.getData(options);
 
     if ("tree" in data && data.tree) {
@@ -160,7 +160,7 @@ export default class ActorDirectoryPTR2e extends ActorDirectory {
 
     // Get target Folder Document
     const closestFolder = target?.closest<HTMLElement>(".folder");
-    const targetFolder = await fromUuid<Folder.ConfiguredInstance>(closestFolder?.dataset.uuid ?? targetFolderUuid as FolderUUID);
+    const targetFolder = await fromUuid<Folder.ConfiguredInstance>((closestFolder?.dataset.uuid ?? targetFolderUuid) as FolderUUID);
 
     // If the dropped Actor is already in the target Folder, do nothing
     if (targetFolder?.isFolderOwner(uuid)) {

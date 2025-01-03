@@ -706,7 +706,7 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
             ],
             content: `<p>${game.i18n.format("PTR2E.Clocks.Global.Delete.Message", {
               label: clock.label,
-            })}</p>`,//@ts-expect-error - FIXME: FVTT-Types are incorrect
+            })}</p>`,
             window: {
               title: game.i18n.localize("PTR2E.Clocks.Global.Delete.Title"),
             },

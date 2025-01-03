@@ -1,6 +1,4 @@
-import { ActorPTR2e } from "@actor";
 import AttackPTR2e from "@module/data/models/attack.ts";
-import { ChatMessagePTR2e } from "@chat";
 import type { AccuracySuccessCategory } from "@data";
 import { PokeballActionPTR2e, PTRCONSTS, SummonAttackPTR2e } from "@data";
 import { SlugField } from "@module/data/fields/slug-field.ts";
@@ -13,7 +11,6 @@ import type { UserVisibility } from "@scripts/ui/user-visibility.ts";
 import type { ModifierPTR2e } from "@module/effects/modifiers.ts";
 import { RollNote } from "@system/notes.ts";
 import type { ConsumablePTR2e, ItemWithActions } from "@item";
-import { ItemPTR2e } from "@item";
 import type ConsumableSystem from "@item/data/consumable.ts";
 import type { CheckRoll } from "@system/rolls/check-roll.ts";
 import type { AnyObject } from "fvtt-types/utils";
@@ -30,8 +27,8 @@ function validateRoll(rollJSON: unknown) {
 }
 
 const attackMessageSchema = {
-  origin: new foundry.data.fields.JSONField<{ required: true }, AnyObject, ActorPTR2e>({ required: true }),
-  originItem: new foundry.data.fields.JSONField<{ required: true, nullable: true, initial: null }, AnyObject, ItemPTR2e>({ required: true, nullable: true, initial: null }),
+  origin: new foundry.data.fields.JSONField<{ required: true }, AnyObject, Actor.ConfiguredInstance>({ required: true }),
+  originItem: new foundry.data.fields.JSONField<{ required: true, nullable: true, initial: null }, AnyObject, Item.ConfiguredInstance>({ required: true, nullable: true, initial: null }),
   attack: new foundry.data.fields.JSONField<{ required: false }, AnyObject, AttackPTR2e>({ required: false }),
   attackSlug: new SlugField(),
   results: new foundry.data.fields.ArrayField(
@@ -39,7 +36,7 @@ const attackMessageSchema = {
       target: new foundry.data.fields.JSONField<
         { required: true },
         AnyObject,
-        ActorPTR2e
+        Actor.ConfiguredInstance
       >({ required: true }),
       accuracy: new foundry.data.fields.JSONField<
         { required: true, nullable: true, validate: foundry.data.fields.DataField.Validator<string> },
@@ -177,7 +174,9 @@ const attackMessageSchema = {
 
 export type AttackMessageSchema = typeof attackMessageSchema;
 
-abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel<AttackMessageSchema, ChatMessagePTR2e> {
+abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel<AttackMessageSchema, ChatMessage.ConfiguredInstance> {
+
+  declare parent: ChatMessage.ConfiguredInstance & { system: AttackMessageSystem };
 
   /**
    * Define the schema for the AttackMessageSystem data model
@@ -208,7 +207,7 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel<Attack
     const fromItemData = (itemData: string | null) => {
       if (!itemData) return null;
       try {
-        return ItemPTR2e.fromJSON(itemData) as ItemWithActions;
+        return CONFIG.Item.documentClass.fromJSON(itemData) as ItemWithActions;
       } catch (error: unknown) {
         Hooks.onError("AttackMessageSystem#prepareBaseData", error as Error, {
           log: "error",
@@ -232,11 +231,11 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel<Attack
       })();
       if (!jsonData) return null;
 
-      const worldActor = fromUuidSync(jsonData.uuid) as Maybe<ActorPTR2e>;
+      const worldActor = fromUuidSync(jsonData.uuid) as Maybe<Actor.ConfiguredInstance>;
       if (worldActor) return worldActor;
 
       try {
-        return ActorPTR2e.fromJSON(actorData) as ActorPTR2e;
+        return CONFIG.Actor.documentClass.fromJSON(actorData) as Actor.ConfiguredInstance;
       } catch (error: unknown) {
         Hooks.onError("AttackMessageSystem#prepareBaseData", error as Error, {
           log: "error",
@@ -526,10 +525,10 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel<Attack
     });
   }
 
-  async rollCaptureCheck({ accuracyRoll, critRoll, target }: { accuracyRoll: Roll.Evaluated<CheckRoll>, critRoll: Roll.Evaluated<CheckRoll>, target: ActorPTR2e }) {
+  async rollCaptureCheck({ accuracyRoll, critRoll, target }: { accuracyRoll: Roll.Evaluated<CheckRoll>, critRoll: Roll.Evaluated<CheckRoll>, target: Actor.ConfiguredInstance }) {
     if (!(this.attack.slug.startsWith("fling") && this.attack.flingItemId)) return;
 
-    const flingItem = this.origin.items.get(this.attack.flingItemId) as ItemPTR2e;
+    const flingItem = this.origin.items.get(this.attack.flingItemId) as Item.ConfiguredInstance;
     if (!(flingItem.type === "consumable" && (flingItem.system as ConsumableSystem).consumableType === "pokeball")) return;
 
     const action = PokeballActionPTR2e.fromConsumable(flingItem as ConsumablePTR2e);
@@ -569,7 +568,7 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel<Attack
     const result = this.context!.results.get(targetUuid);
     if (!result) return false;
 
-    async function applyEffects(target: ActorPTR2e, effects: EffectRollData[], isCrit = false) {
+    async function applyEffects(target: Actor.ConfiguredInstance, effects: EffectRollData[], isCrit = false) {
       if (!effects.length) return;
       const toApply = await (async () => {
         const toApply: foundry.data.fields.SchemaField.PersistedType<ActiveEffect.Schema>[] = [];
@@ -626,13 +625,13 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel<Attack
     const targets = (() => {
       const controlled = canvas!.tokens!.controlled
         .map((t) => t.actor)
-        .filter((t) => !!t) as ActorPTR2e[];
+        .filter((t) => !!t) as Actor.ConfiguredInstance[];
       if (controlled.length) {
         if (!(controlled.length === 1 && controlled[0].uuid === this.origin.uuid))
           return controlled;
       }
 
-      return [...game.user.targets].map((t) => t.actor).filter((t) => !!t) as ActorPTR2e[];
+      return [...game.user.targets].map((t) => t.actor).filter((t) => !!t) as Actor.ConfiguredInstance[];
     })();
     if (!targets.length) return;
 
@@ -710,6 +709,7 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel<Attack
   }
 
   public async applyLuckIncrease(targetUuid: ActorUUID) {
+    //FIXME: Why the fuck is this not just this.results??
     const results = foundry.utils.duplicate(this.parent.system.results);
     const currentResult = results[this.parent.system.results.findIndex(r => r.target.uuid == targetUuid)];
     if (!currentResult || !currentResult.accuracy) return;
@@ -718,7 +718,7 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel<Attack
     const actor = await this.currentOrigin;
     if (!actor) return;
 
-    const number = accuracy.total;
+    const number = accuracy.total!;
     const luck = actor.system.skills.get("luck")!.total;
     if (luck < number) {
       ui.notifications.warn("You do not have enough Luck to apply this increase.");
@@ -746,8 +746,8 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel<Attack
 
     await this.parent.update({ "system.results": results });
 
-    await ChatMessagePTR2e.create({
-      whisper: ChatMessagePTR2e.getWhisperRecipients("GM") as unknown as string[],
+    await CONFIG.ChatMessage.documentClass.create({
+      whisper: CONFIG.ChatMessage.documentClass.getWhisperRecipients("GM") as unknown as string[],
       speaker: { alias: actor.name },
       content: notification,
     });
@@ -760,7 +760,7 @@ interface AttackMessageSystem {
 }
 
 interface AttackMessageRenderContext {
-  origin: ActorPTR2e;
+  origin: Actor.ConfiguredInstance;
   originItem?: ItemWithActions;
   attack: AttackPTR2e;
   hasDamage: boolean;
@@ -779,7 +779,7 @@ interface AttackMessageRenderContextData {
     crit: string | null;
     damage: string | null;
   };
-  target: ActorPTR2e;
+  target: Actor.ConfiguredInstance;
   hit: AccuracySuccessCategory;
   damage?: number;
   damageRoll?: DamageCalc;
@@ -802,7 +802,7 @@ interface AttackMessageRenderContextData {
 // }
 
 interface ResultData {
-  target: ActorPTR2e;
+  target: Actor.ConfiguredInstance;
   accuracy: Roll.Evaluated<AttackRoll> | null;
   crit: Roll.Evaluated<AttackRoll> | null;
   damage: Roll.Evaluated<AttackRoll> | null;
