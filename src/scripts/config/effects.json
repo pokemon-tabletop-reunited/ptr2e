@@ -709,6 +709,39 @@
       ]
     },
     "description": "PTR2E.Effect.Statuses.Descriptions.wind-shear"
+  },  {
+    "id": "wracked",
+    "name": "PTR2E.Effect.Statuses.Labels.wracked",
+    "img": "systems/ptr2e/img/svg/shadow_icon.svg",
+    "type": "affliction",
+    "duration": {
+      "turns": 5
+    },
+    "system": {
+      "changes": [
+        {
+          "type": "basic",
+          "key": "system.battleStats.atk.stage",
+          "value": -1,
+          "mode": 2
+        },
+        {
+          "type": "basic",
+          "key": "system.battleStats.spatk.stage",
+          "value": -1,
+          "mode": 2
+        }
+      ],
+      "formula": "1/12",
+      "type": "damage",
+      "removeOnRecall": false,
+      "removeAfterCombat": true,
+      "traits": [
+        "flying",
+        "minor-affliction"
+      ]
+    },
+    "description": "PTR2E.Effect.Statuses.Descriptions.wind-shear"
   },
   {
     "id": "disabled",
