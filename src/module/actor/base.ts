@@ -8,10 +8,10 @@ import type {
 import type { ActiveEffectSystem, EffectSourcePTR2e } from "@effects";
 import type { TypeEffectiveness } from "@scripts/config/effectiveness.ts";
 import type { PokemonType, PTRCONSTS } from "@data";
-import { AttackPTR2e, RollOptionChangeSystem, RollOptionManager, Trait } from "@data";
+import { RollOptionChangeSystem, RollOptionManager, Trait } from "@data";
 import type { RollOptions } from "@module/data/roll-option-manager.ts";
 import type AfflictionActiveEffectSystem from "@module/effects/data/affliction.ts";
-import type { AbilityPTR2e, ItemSystemPTR, MovePTR2e, PerkPTR2e } from "@item";
+import type { AbilityPTR2e, MovePTR2e, PerkPTR2e } from "@item";
 import { ActionsCollections } from "./actions.ts";
 import type { CustomSkill } from "@module/data/models/skill.ts";
 import type { BaseStatisticCheck, StatisticCheck } from "@system/statistics/statistic.ts";
@@ -329,11 +329,12 @@ class ActorPTR2e extends Actor {
       collection: new Collection(),
       disabled: []
     }
-    Object.defineProperty(this.flags.ptr2e.disableActionOptions, "options", {
+    Object.defineProperty(this.flags.ptr2e!.disableActionOptions, "options", {
       get: () => {
-        return this.flags.ptr2e.disableActionOptions!.collection.filter(action => {
-          if (!(action instanceof AttackPTR2e)) return true;
-          return action.free ? true : action.slot ? this.attacks.actions[action.slot] === action : action.free;
+        return this.flags.ptr2e!.disableActionOptions!.collection.filter(action => {
+          if (!(action instanceof CONFIG.PTR.models.actions.attack)) return true;
+          const attack = action as unknown as PTR.Models.Action.Models.Attack.Instance;
+          return attack.free ? true : attack.slot ? this.attacks.actions[attack.slot] === attack : attack.free;
         }).map(action => ({ value: action.uuid }));
       }
     });
@@ -417,7 +418,7 @@ class ActorPTR2e extends Actor {
       { name, slug, power = 25, accuracy = 100, types = ["untyped"] as const, free = false, variant = true, description = "", id = "" }:
         { name?: string, slug?: string, power?: number, accuracy?: number, types?: PokemonType[], free?: boolean, variant?: boolean, description?: string, id?: string }
         = { name: "", slug: "", power: 25, accuracy: 100, types: ["untyped"] as const, free: false, variant: true, description: "", id: "" }
-    ): DeepPartial<AttackPTR2e['_source']> {
+    ): DeepPartial<PTR.Models.Action.Models.Attack.Source> {
       return {
         slug: `fling${name?.length ? `-${slug}` : ""}`,
         name: `Fling${name?.length ? ` (${name})` : ""}`,
@@ -702,12 +703,12 @@ class ActorPTR2e extends Actor {
     return this.system.attributes.spe.stage + (this.system.modifiers["speed"] ?? 0);
   }
 
-  getDefenseStat(attack: { category: AttackPTR2e["category"], defensiveStat: PTRCONSTS.Stat | null }, isCrit: boolean) {
+  getDefenseStat(attack: { category: PTR.Models.Action.Models.Attack.Instance["category"], defensiveStat: PTRCONSTS.Stat | null }, isCrit: boolean) {
     const stat: PTRCONSTS.Stat = attack.defensiveStat ?? (attack.category === "physical" ? "def" : "spd");
     return this.calcStatTotal(this.system.attributes[stat], isCrit);
   }
 
-  getAttackStat(attack: { category: AttackPTR2e["category"], offensiveStat: PTRCONSTS.Stat | null }) {
+  getAttackStat(attack: { category: PTR.Models.Action.Models.Attack.Instance["category"], offensiveStat: PTRCONSTS.Stat | null }) {
     const stat: PTRCONSTS.Stat = attack.offensiveStat ?? (attack.category === "physical" ? "atk" : "spa");
     return this.calcStatTotal(this.system.attributes[stat], false);
   }
@@ -1642,7 +1643,7 @@ class ActorPTR2e extends Actor {
       temporary?: Temporary;
     }
   ): Promise<foundry.abstract.Document.ToStoredIf<T, Temporary>[] | undefined> {
-    const sources = data.map((d) => (d instanceof ActorPTR2e ? d.toObject() : d));
+    const sources = data.map((d) => (d instanceof CONFIG.Actor.documentClass ? d.toObject() : d));
 
     for (const source of [...sources]) {
       if (!["flags", "items", "system"].some((k) => k in source)) {
@@ -1652,10 +1653,10 @@ class ActorPTR2e extends Actor {
         };
       }
       const lowestSchemaVersion = Math.min(
-        source.system?._migration?.version ?? MigrationRunnerBase.LATEST_SCHEMA_VERSION,
+        (source.system as {_migration?: {version?: number}})?._migration?.version ?? MigrationRunnerBase.LATEST_SCHEMA_VERSION,
         ...(source.items ?? []).map(
           (i) =>
-            (i?.system as ItemSystemPTR)?._migration?.version ??
+            (i?.system as PTR.Item.ItemSystemPTR)?._migration?.version ??
             MigrationRunnerBase.LATEST_SCHEMA_VERSION
         )
       );
@@ -1717,7 +1718,7 @@ class ActorPTR2e extends Actor {
   }
 
   override async _preUpdate(
-    changed: foundry.data.fields.SchemaField.AssignmentType<Actor.Schema>,
+    changed: Actor.PTR.SourceWithSystem,
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     options: foundry.abstract.Document.PreUpdateOptions<any>,
     user: User
@@ -1762,9 +1763,9 @@ class ActorPTR2e extends Actor {
     if (changed.system?.advancement?.experience?.current !== undefined) {
       const next = this.system.advancement.experience.next;
       if (next && Number(changed.system.advancement.experience.current) >= next) {
-        changed.flags ??= {}; //@ts-expect-error - flags is not defined in the base class
-        changed.flags.ptr2e ??= {}; //@ts-expect-error - flags is not defined in the base class
-        changed.flags.ptr2e.sheet ??= {}; //@ts-expect-error - flags is not defined in the base class
+        changed.flags ??= {}; 
+        changed.flags.ptr2e ??= {}; 
+        changed.flags.ptr2e.sheet ??= {}; 
         changed.flags.ptr2e.sheet.perkFlash = true;
       }
     }
@@ -1782,13 +1783,11 @@ class ActorPTR2e extends Actor {
 
     if (changed.system?.traits !== undefined && this.system?.traits?.suppressedTraits?.size) {
       if (changed.system.traits instanceof Set) {
-        //@ts-expect-error - During an update this should be an array
         changed.system.traits = Array.from(changed.system.traits);
       }
       else if (!Array.isArray(changed.system.traits)) {
         //@ts-expect-error - During an update this should be an array
         if (changed.system.traits instanceof Collection) changed.system.traits = [...changed.system.traits];
-        //@ts-expect-error - During an update this should be an array
         else changed.system.traits = [];
       }
 
@@ -1796,7 +1795,6 @@ class ActorPTR2e extends Actor {
       const sourceTraits = this.system._source.traits;
       const intersection = sourceTraits.filter(trait => suppressedTraits.has(trait));
       if (intersection.length) {
-        //@ts-expect-error - During an update this should be an array
         changed.system.traits = Array.from(new Set([...changed.system.traits, ...intersection]))
       }
     }
@@ -2048,8 +2046,8 @@ interface ActorPTR2e extends Actor {
 
   attacks: {
     slots: number;
-    actions: Record<number, AttackPTR2e>;
-    available: AttackPTR2e[];
+    actions: Record<number, PTR.Models.Action.Models.Attack.Instance>;
+    available: PTR.Models.Action.Models.Attack.Instance[];
   };
 
   abilities: {

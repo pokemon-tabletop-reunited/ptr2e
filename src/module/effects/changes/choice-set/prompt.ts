@@ -1,5 +1,4 @@
 import type { ActorPTR2e } from "@actor";
-import type { ItemSystemPTR } from "@item";
 import { ItemPTR2e } from "@item";
 import type { PickableThing, PickAThingConstructorArgs, PromptTemplateData } from "@module/apps/pick-a-thing-prompt.ts";
 import { PickAThingPrompt } from "@module/apps/pick-a-thing-prompt.ts";

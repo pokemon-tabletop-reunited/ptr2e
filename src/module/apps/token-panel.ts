@@ -1,5 +1,4 @@
 import { SkillsComponent } from "@actor/components/skills-component.ts";
-import type { AttackPTR2e } from "@data";
 import type { Tab } from "@item/sheets/document.ts";
 import { htmlQuery, htmlQueryAll } from "@utils";
 import type { AnyObject, DeepPartial } from "fvtt-types/utils";
@@ -284,7 +283,7 @@ export default class TokenPanel extends foundry.applications.api.HandlebarsAppli
             )?.dataset?.action;
             if (!slug) return;
 
-            const attack = this.token!.actor!.actions.attack.get(slug) as AttackPTR2e;
+            const attack = this.token!.actor!.actions.attack.get(slug) as PTR.Models.Action.Models.Attack.Instance;
             if (!attack) return;
 
             return attack.roll();
@@ -300,7 +299,7 @@ export default class TokenPanel extends foundry.applications.api.HandlebarsAppli
           )?.dataset?.action;
           if (!slug) return;
 
-          const attack = this.token!.actor!.actions.attack.get(slug) as AttackPTR2e;
+          const attack = this.token!.actor!.actions.attack.get(slug) as PTR.Models.Action.Models.Attack.Instance;
           if (!attack) return;
 
           return attack.item.toChat();

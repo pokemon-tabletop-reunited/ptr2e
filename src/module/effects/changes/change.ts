@@ -3,7 +3,7 @@ import type { BracketedValue, RuleValue } from "@module/effects/data.ts";
 import { PredicateField } from "@system/predication/schema-data-fields.ts";
 import { ItemPTR2e } from "@item";
 import type { ActorPTR2e } from "@actor";
-import type { ChangeModelOptions, ChangeSource, ResolveValueParams } from "./data.ts";
+import type { ChangeModelOptions, ResolveValueParams } from "./data.ts";
 import * as R from "remeda";
 import ResolvableValueField from "@module/data/fields/resolvable-value-field.ts";
 import { ChangeModelTypes } from "@data";
@@ -77,22 +77,23 @@ class ChangeModel<Schema extends ChangeModelSchema = ChangeModelSchema> extends 
 
   constructor(source: foundry.abstract.DataModel.ConstructorData<Schema>, options: ChangeModelOptions) {
     super(source, options);
+    const self = this as ChangeModel;
 
-    if (this.invalid) {
-      this.ignored = true;
+    if (self.invalid) {
+      self.ignored = true;
       return;
     }
 
     // Always suppress warnings if the actor has no ID (and is therefore a temporary clone)
-    this.suppressWarnings = options.suppressWarnings ?? !this.actor?.id;
-    this.#sourceIndex = options.sourceIndex ?? null;
+    self.suppressWarnings = options.suppressWarnings ?? !self.actor?.id;
+    self.#sourceIndex = options.sourceIndex ?? null;
 
-    this.label = this.label
-      ? game.i18n.format(this.resolveInjectedProperties(this.label), {
-        actor: this.actor?.name ?? null,
-        item: this.item?.name ?? null,
+    self.label = self.label
+      ? game.i18n.format(self.resolveInjectedProperties(self.label), {
+        actor: self.actor?.name ?? null,
+        item: self.item?.name ?? null,
       })
-      : this.effect.name;
+      : self.effect.name;
   }
 
   static override defineSchema(): ChangeModelSchema {
@@ -121,19 +122,22 @@ class ChangeModel<Schema extends ChangeModelSchema = ChangeModelSchema> extends 
     return false;
   }
 
-  get effect() {
-    return this.parent.parent;
+  get effect(): ActiveEffect.ConfiguredInstance {
+    const self = this as ChangeModel;
+    return self.parent.parent;
   }
   set effect(_) {
     return;
   }
 
   get actor(): ActorPTR2e | null {
-    return (this.effect.parent && this.effect.targetsActor()) ? this.effect.target : null;
+    const self = this as ChangeModel;
+    return (self.effect.parent && self.effect.targetsActor()) ? self.effect.target : null;
   }
 
   get item() {
-    const effect = this.effect;
+    const self = this as ChangeModel;
+    const effect = self.effect;
     return effect.parent instanceof ItemPTR2e ? effect.parent : null;
   }
 
@@ -141,7 +145,7 @@ class ChangeModel<Schema extends ChangeModelSchema = ChangeModelSchema> extends 
     return sluggify(this.getReducedLabel());
   }
 
-  protected getReducedLabel(label: Maybe<string> = this.label): string {
+  protected getReducedLabel(this: ChangeModel, label: Maybe<string> = this.label): string {
     return (label === this.effect.name ? reduceItemName(label ?? "") : label) ?? "";
   }
 
@@ -172,7 +176,7 @@ class ChangeModel<Schema extends ChangeModelSchema = ChangeModelSchema> extends 
   }
 
   /** Test this rule element's predicate, if present */
-  public test(options?: Iterable<string> | null) {
+  public test(this: ChangeModel, options?: Iterable<string> | null) {
     if (this.ignored) return false;
     if (this.predicate.length === 0) return true;
 
@@ -185,7 +189,7 @@ class ChangeModel<Schema extends ChangeModelSchema = ChangeModelSchema> extends 
   }
 
   /** Send a deferred warning to the console indicating that a rule element's validation failed */
-  public failValidation(...message: string[]): void {
+  public failValidation(this: ChangeModel, ...message: string[]): void {
     const fullMessage = message.join(" ");
     const { name, uuid } = this.effect;
     if (!this.suppressWarnings) {
@@ -227,6 +231,7 @@ class ChangeModel<Schema extends ChangeModelSchema = ChangeModelSchema> extends 
     options?: { warn?: boolean }
   ): T;
   resolveInjectedProperties(
+    this: ChangeModel,
     source: string | number | object | null | undefined,
     { warn = true } = {}
   ): string | number | object | null | undefined {
@@ -290,6 +295,7 @@ class ChangeModel<Schema extends ChangeModelSchema = ChangeModelSchema> extends 
    * @return the evaluated value
    */
   resolveValue(
+    this: ChangeModel,
     value: unknown,
     defaultValue: Exclude<RuleValue, BracketedValue> = 0,
     { evaluate = true, resolvables = {}, warn = true }: ResolveValueParams = {}
@@ -579,3 +585,4 @@ namespace ChangeModel {
 }
 
 export default ChangeModel;
+export { type ChangeModel };

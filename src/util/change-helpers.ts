@@ -1,5 +1,5 @@
 import type { ActorSynthetics, EffectRoll } from "@actor";
-import type { ActionPTR2e, AttackPTR2e, ChangeModel } from "@data";
+import type { ChangeModel } from "@data";
 import type { BracketedValue, EffectSourcePTR2e } from "@effects";
 import type {
   DeferredValueParams,
@@ -193,8 +193,8 @@ interface ExtractEphemeralEffectsParams {
   origin: Actor.ConfiguredInstance | null;
   target: Maybe<Actor.ConfiguredInstance>;
   item: Item.ConfiguredInstance | null;
-  attack: AttackPTR2e | null;
-  action: ActionPTR2e | null;
+  attack: PTR.Models.Action.Models.Attack.Instance | null;
+  action: PTR.Models.Action.Instance | null;
   domains: string[];
   options: Set<string> | string[];
 }

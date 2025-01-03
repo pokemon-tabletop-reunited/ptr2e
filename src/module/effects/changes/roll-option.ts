@@ -79,7 +79,7 @@ const rollOptionChangeSchema = {
 
 export type RollOptionChangeSchema = typeof rollOptionChangeSchema & ChangeModelSchema;
 
-export default class RollOptionChangeSystem extends ChangeModel<RollOptionChangeSchema> {
+class RollOptionChangeSystem extends ChangeModel<RollOptionChangeSchema> {
   static override TYPE = "roll-option";
 
   constructor(source: ChangeSource, options: ChangeModelOptions) {
@@ -298,6 +298,9 @@ export default class RollOptionChangeSystem extends ChangeModel<RollOptionChange
   }
 }
 
-export default interface RollOptionChangeSystem {
+interface RollOptionChangeSystem {
   value: string;
 }
+
+export default RollOptionChangeSystem;
+export type { RollOptionChangeSystem };

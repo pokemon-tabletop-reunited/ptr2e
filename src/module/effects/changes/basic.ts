@@ -3,7 +3,7 @@ import { isObject } from "@utils";
 import { ChangeModel } from "@data";
 import type { ChangeModelSchema } from "./change.ts";
 
-export default class BasicChangeSystem<Schema extends ChangeModelSchema = ChangeModelSchema> extends ChangeModel<Schema> {
+class BasicChangeSystem<Schema extends ChangeModelSchema = ChangeModelSchema> extends ChangeModel<Schema> {
   static override TYPE = "basic";
 
   override apply(this: BasicChangeSystem, actor: ActorPTR2e, rollOptions?: string[] | Set<string> | null): void {
@@ -164,7 +164,7 @@ export default class BasicChangeSystem<Schema extends ChangeModelSchema = Change
 
     if (isNumericAdd) {
       return (current as number ?? 0) + change;
-    } else if (isArrayAdd) {
+    } else if (isArrayAdd) {1
       return change;
     }
 
@@ -222,3 +222,6 @@ export default class BasicChangeSystem<Schema extends ChangeModelSchema = Change
     return upgrade ? Math.max(current ?? 0, change) : Math.min(current ?? 0, change);
   }
 }
+
+export default BasicChangeSystem;
+export { type BasicChangeSystem };

@@ -1,7 +1,7 @@
 import type { ActorPTR2e, HumanoidActorSystem, PokemonActorSystem } from "@actor";
 import { ItemPTR2e, data } from "@item";
 import type { PerkManager } from "@module/apps/perk-manager/perk-manager.ts";
-import type { ActionPTR2e, ArtMapCollection, ClockDatabase, SkillsCollection, Trait, TraitsCollection } from "@data";
+import type { ArtMapCollection, ClockDatabase, SkillsCollection, Trait, TraitsCollection } from "@data";
 import type TooltipsPTR2e from "@module/tooltips/tooltips.ts";
 import type { PTRCONFIG } from "@scripts/config/index.ts";
 import type { ImageResolver, sluggify, SpeciesImageDataSource } from "@utils";
@@ -205,13 +205,13 @@ declare global {
       core?: {
         sourceId?: string;
       }
-      ptr2e: {
-        rollOptions: RollOptions & object;
+      ptr2e?: {
+        rollOptions?: RollOptions & object;
         sheet?: {
           perkFlash?: boolean;
         };
         disableActionOptions?: {
-          collection: Collection<ActionPTR2e>;
+          collection: Collection<PTR.Models.Action.AnyInstance>;
           get options(): PickableThing[];
           disabled: ActionUUID[];
         }

@@ -11,7 +11,6 @@ import { ActorSheetV2Expanded, type ApplicationConfigurationExpanded } from "@mo
 import { ActionEditor } from "@module/apps/action-editor.ts";
 import { SkillsComponent } from "./components/skills-component.ts";
 import { SkillsEditor } from "@module/apps/skills-editor.ts";
-import type { AttackPTR2e } from "@data";
 import { Trait } from "@data";
 import { PerksComponent } from "./components/perks-component.ts";
 import { AbilitiesComponent } from "./components/abilities-component.ts";
@@ -132,7 +131,7 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
         const action = this.actor.actions.get(slug);
         if (!action) return;
         if ("rollable" in action && action.rollable === true)
-          await (action as AttackPTR2e).roll();
+          await (action as PTR.Models.Action.Models.Attack.Instance).roll();
       },
       "action-to-chat": ActorSheetPTRV2._onToChatAction,
       "action-edit": ActorSheetPTRV2._onEditAction,

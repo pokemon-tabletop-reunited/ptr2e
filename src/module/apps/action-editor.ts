@@ -1,15 +1,13 @@
-import type { ItemWithActions } from "@item";
 import { ItemPTR2e } from "@item";
 import Tagify from "@yaireo/tagify";
 import { ApplicationV2Expanded, type ApplicationConfigurationExpanded } from "./appv2-expanded.ts";
 import { htmlQuery, htmlQueryAll, sluggify } from "@utils";
-import type { AttackPTR2e } from "@data";
 import { Trait } from "@data";
 import * as R from "remeda";
 import type { AnyObject, DeepPartial } from "fvtt-types/utils";
 
 export class ActionEditor<
-  TDocument extends ItemWithActions,
+  TDocument extends PTR.Item.ItemWithActions,
 > extends foundry.applications.api.HandlebarsApplicationMixin(ApplicationV2Expanded)<AnyObject> {
   static override DEFAULT_OPTIONS = {
     tag: "form",
@@ -55,13 +53,13 @@ export class ActionEditor<
       ]
     },
     actions: {
-      toChat: function toChat<TDocument extends ItemWithActions>(this: ActionEditor<TDocument>) {
+      toChat: function toChat<TDocument extends PTR.Item.ItemWithActions>(this: ActionEditor<TDocument>) {
         this.document.toChat();
       },
-      openItem: function openItem<TDocument extends ItemWithActions>(this: ActionEditor<TDocument>) {
+      openItem: function openItem<TDocument extends PTR.Item.ItemWithActions>(this: ActionEditor<TDocument>) {
         this.document.sheet.render(true);
       },
-      createVariant: async function createVariant<TDocument extends ItemWithActions>(this: ActionEditor<TDocument>) {
+      createVariant: async function createVariant<TDocument extends PTR.Item.ItemWithActions>(this: ActionEditor<TDocument>) {
         const actions = this.document.system.toObject().actions;
         const action = actions.find(a => a.slug === this.action.slug);
         if (!action) return;
@@ -80,14 +78,14 @@ export class ActionEditor<
         const editor = new ActionEditor(this.document, variant.slug);
         editor.render(true);
       },
-      openOriginal: function openOriginal<TDocument extends ItemWithActions>(this: ActionEditor<TDocument>) {
+      openOriginal: function openOriginal<TDocument extends PTR.Item.ItemWithActions>(this: ActionEditor<TDocument>) {
         const original = this.action.original
         if (!original) return;
 
         const editor = new ActionEditor(this.document, original.slug);
         editor.render(true);
       },
-      deleteVariant: async function deleteVariant<TDocument extends ItemWithActions>(this: ActionEditor<TDocument>) {
+      deleteVariant: async function deleteVariant<TDocument extends PTR.Item.ItemWithActions>(this: ActionEditor<TDocument>) {
         const actions = this.document.system.toObject().actions;
         const index = actions.findIndex(a => a.slug === this.action.slug);
         if (index === -1) return;
@@ -182,7 +180,7 @@ export class ActionEditor<
     this.#allTraits = game.ptr.data.traits.map((trait) => ({ value: trait.slug, label: trait.label, type: trait.type }));
     const typeOptions = this.action.schema.fields.type.options.choices as Record<string, string>;
     const variants = this.action.type === "attack"
-      ? (this.action as AttackPTR2e).variants.flatMap(variant => this.action.item.actions.get(variant) ?? [])
+      ? (this.action as PTR.Models.Action.Models.Attack.Instance).variants.flatMap(variant => this.action.item.actions.get(variant) ?? [])
       : false;
 
     return {
@@ -198,7 +196,7 @@ export class ActionEditor<
     };
   }
 
-  static async #onSubmit<TDocument extends ItemWithActions>(this: ActionEditor<TDocument>, _event: Event, _element: HTMLFormElement, formData: FormDataExtended) {
+  static async #onSubmit<TDocument extends PTR.Item.ItemWithActions>(this: ActionEditor<TDocument>, _event: Event, _element: HTMLFormElement, formData: FormDataExtended) {
     const data = formData.object;
 
     if (

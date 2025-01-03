@@ -10,11 +10,11 @@ const tokenAlterationsChangeSchema = {
   name: new foundry.data.fields.StringField({ required: true, nullable: true, initial: null }),
   light: new foundry.data.fields.ObjectField({ required: true, nullable: true, initial: null }),
   alpha: new foundry.data.fields.AlphaField({ required: true, nullable: true, initial: null })
-} 
+}
 
 export type TokenAlterationsChangeSchema = typeof tokenAlterationsChangeSchema & ChangeModelSchema;
 
-export default class TokenAlterationsChangeSystem extends ChangeModel<TokenAlterationsChangeSchema> {
+class TokenAlterationsChangeSystem extends ChangeModel<TokenAlterationsChangeSchema> {
   static override TYPE = "token-alterations";
 
   static override defineSchema(): TokenAlterationsChangeSchema {
@@ -52,3 +52,6 @@ export default class TokenAlterationsChangeSystem extends ChangeModel<TokenAlter
     if (this.light) actor.synthetics.tokenOverrides.light = this.light;
   }
 }
+
+export default TokenAlterationsChangeSystem;
+export type { TokenAlterationsChangeSystem }

@@ -76,4 +76,4 @@ type CustomSkill = CoreSkill & { label: string; description: string };
 type Skill = CoreSkill | CustomSkill;
 
 export default SkillPTR2e;
-export type { Skill, CoreSkill, CustomSkill };
+export type { SkillPTR2e, Skill, CoreSkill, CustomSkill };

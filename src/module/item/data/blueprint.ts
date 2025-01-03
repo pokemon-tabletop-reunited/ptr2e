@@ -1,21 +1,12 @@
-import type { AttackPTR2e} from "@data";
 import { HasEmbed, HasMigrations } from "@data";
 import type { MigrationSchema } from "@module/data/mixins/has-migrations.ts";
 import { CollectionField } from "@module/data/fields/collection-field.ts";
-import { Blueprint } from "@module/data/models/blueprint.ts";
-import { ItemPTR2e } from "@item/document.ts";
-import { SpeciesSystemModel } from "./index.ts";
-import { ActorPTR2e } from "@actor";
+import { Blueprint, type BlueprintSchema } from "@module/data/models/blueprint.ts";
 import { Progress } from "src/util/progress.ts";
-import type FolderPTR2e from "@module/folder/document.ts";
 import natureToStatArray from "@scripts/config/natures.ts";
-import type { EvolutionData} from "./species.ts";
-import type SpeciesSystem from "./species.ts";
 import { ImageResolver, NORMINV, sluggify } from "@utils";
-import type { TokenDocumentPTR2e } from "@module/canvas/token/document.ts";
 import { getInitialSkillList, partialSkillToSkill } from "@scripts/config/skills.ts";
 import { type SkillSchema } from "@module/data/models/skill.ts";
-import type { SpeciesPTR2e } from "@item";
 
 const blueprintSchema = {
   id: new foundry.data.fields.DocumentIdField({ initial: foundry.utils.randomID(), required: true, nullable: false }),
@@ -23,8 +14,13 @@ const blueprintSchema = {
 }
 
 export type BlueprintItemSchema = typeof blueprintSchema & MigrationSchema;
+type BlueprintSource = foundry.data.fields.SchemaField.PersistedType<BlueprintSchema>;
 
-export default abstract class BlueprintSystem extends HasEmbed(HasMigrations(foundry.abstract.TypeDataModel<BlueprintItemSchema, ItemPTR2e>), "blueprint") {
+type SpeciesPTR2eSource = PTR.Item.Source & {
+  system: PTR.Item.System.Species.Source
+};
+
+export default abstract class BlueprintSystem extends HasEmbed(HasMigrations(foundry.abstract.TypeDataModel), "blueprint")<BlueprintItemSchema, Item.ConfiguredInstance> {
   /**
    * All items in the system have the following properties, but since blueprints do not make use of them
    * they are left as null / empty strings.
@@ -81,7 +77,7 @@ export default abstract class BlueprintSystem extends HasEmbed(HasMigrations(fou
       throw new Error("Cannot update children without an id");
     }
 
-    const children = this.toObject().blueprints as Blueprint['_source'][];
+    const children = this.toObject().blueprints as BlueprintSource[];
     const map = new Map(children.map(c => [c.id, c]));
     for (const update of updates) {
       const child = map.get(update._id as string);
@@ -95,19 +91,21 @@ export default abstract class BlueprintSystem extends HasEmbed(HasMigrations(fou
     return this.parent.update({ "system.blueprints": children });
   }
 
-  async createChildren(children: (RollTable | ItemPTR2e | ActorPTR2e)[]) {
-    const existing = this.toObject().blueprints as Blueprint['_source'][];
-    const newChildren = children.flatMap((c: RollTable | ItemPTR2e | ActorPTR2e): Partial<Blueprint['_source']>[] => {
-      if (c instanceof ItemPTR2e && c.system instanceof BlueprintSystem) {
-        return c.system.blueprints.map(b => ({
+  async createChildren(children: (RollTable.ConfiguredInstance | Item.ConfiguredInstance | Actor.ConfiguredInstance)[]) {
+    const existing = this.toObject().blueprints as PTR.Models.Blueprint.Source[];
+    const newChildren: PTR.Models.Blueprint.Source[] = children.flatMap((c: RollTable.ConfiguredInstance | Item.ConfiguredInstance | Actor.ConfiguredInstance): PTR.Models.Blueprint.Source[] => {
+      if (c instanceof CONFIG.Item.documentClass && c.system instanceof BlueprintSystem) {
+        const returnType = c.system.blueprints.map((b: PTR.Models.Blueprint.Instance): PTR.Models.Blueprint.Source => ({
           ...b.toObject(),
           id: foundry.utils.randomID()
         }));
+        return returnType;
       }
-      return [{
+      const returnType = [{
         species: c.uuid,
         id: foundry.utils.randomID(),
       }]
+      return returnType as PTR.Models.Blueprint.Source[];
     });
 
     return this.parent.update({ "system.blueprints": existing.concat(newChildren) });
@@ -122,8 +120,8 @@ export default abstract class BlueprintSystem extends HasEmbed(HasMigrations(fou
     x: number;
     y: number;
     canvas: Canvas;
-    folder?: FolderPTR2e | null;
-    parent?: ActorPTR2e;
+    folder?: Folder.ConfiguredInstance | null;
+    parent?: Actor.ConfiguredInstance;
     team: boolean;
   } | null, dataOnly = false) {
     // Safe generate
@@ -140,10 +138,10 @@ export default abstract class BlueprintSystem extends HasEmbed(HasMigrations(fou
     x: number;
     y: number;
     canvas: Canvas;
-    folder?: FolderPTR2e | null;
-    parent?: ActorPTR2e;
+    folder?: Folder.ConfiguredInstance | null;
+    parent?: Actor.ConfiguredInstance;
     team: boolean;
-  } | null, dataOnly: boolean): Promise<Partial<ActorPTR2e['_source']>[] | void> {
+  } | null, dataOnly: boolean): Promise<Actor.PTR.Source[] | void> {
     if (!canvas.scene && !dataOnly) return void ui.notifications.warn("Cannot generate Actors from Blueprint without an active scene");
 
     if (dataOnly && !options) {
@@ -187,7 +185,7 @@ export default abstract class BlueprintSystem extends HasEmbed(HasMigrations(fou
         });
         if (!folder) return;
         await options.parent.update({ folder: folder.id });
-        options.folder = folder as FolderPTR2e;
+        options.folder = folder as Folder.ConfiguredInstance;
       }
     }
 
@@ -201,19 +199,19 @@ export default abstract class BlueprintSystem extends HasEmbed(HasMigrations(fou
 
         if (!hasOwner) {
           const folder = game.actors.folders.getName(folderName);
-          if (folder) return folder as FolderPTR2e;
+          if (folder) return folder as Folder.ConfiguredInstance;
         }
         return await Folder.create({
           name: folderName,
           type: "Actor"
-        }) as FolderPTR2e;
+        }) as Folder.ConfiguredInstance;
       })()
     }
 
     const progress = new Progress({ steps: this.blueprints.size + 2 });
     progress.advance(game.i18n.localize("PTR2E.PokemonGeneration.Progress.Prefix"));
 
-    const toBeCreated: Partial<ActorPTR2e['_source']>[] = [];
+    const toBeCreated: Partial<Actor.PTR.Source>[] = [];
     for (const blueprint of this.blueprints) {
       await blueprint.prepareAsyncData();
       progress.advance(game.i18n.localize("PTR2E.PokemonGeneration.Progress.Prefix") + game.i18n.format("PTR2E.PokemonGeneration.Progress.Step", {
@@ -221,8 +219,8 @@ export default abstract class BlueprintSystem extends HasEmbed(HasMigrations(fou
       }));
 
       if (!blueprint.doc) throw new Error("Blueprint does not have a species");
-      if (blueprint.doc instanceof ActorPTR2e) {
-        const actor = blueprint.doc.toObject();
+      if (blueprint.doc instanceof CONFIG.Actor.documentClass) {
+        const actor = blueprint.doc.toObject() as Actor.PTR.SourceWithSystem;
         if (options.folder) {
           actor.folder = options.folder.id;
           actor.system.party = {
@@ -237,7 +235,7 @@ export default abstract class BlueprintSystem extends HasEmbed(HasMigrations(fou
 
       const speciesOrActor = await (async () => {
         // Get rolltable result or species data
-        if (blueprint.doc instanceof ItemPTR2e) {
+        if (blueprint.doc instanceof CONFIG.Item.documentClass) {
           return blueprint.doc;
         }
         const table = blueprint.doc as RollTable;
@@ -245,15 +243,15 @@ export default abstract class BlueprintSystem extends HasEmbed(HasMigrations(fou
         for (const result of tableResult.results) {
           if (result.type === CONST.TABLE_RESULT_TYPES.TEXT) continue;
           const uuid = (result.type === CONST.TABLE_RESULT_TYPES.COMPENDIUM ? "Compendium." : "") + result.documentCollection + "." + result.documentId;
-          const doc = await fromUuid<ItemPTR2e | ActorPTR2e>(uuid);
-          if (doc && doc instanceof ItemPTR2e && doc.system instanceof SpeciesSystemModel) return doc;
-          if (doc && doc instanceof ActorPTR2e) return doc;
+          const doc = await fromUuid<Item.ConfiguredInstance | Actor.ConfiguredInstance>(uuid as ValidUUID);
+          if (doc && doc instanceof CONFIG.Item.documentClass && doc.system instanceof CONFIG.Item.dataModels.species) return doc;
+          if (doc && doc instanceof CONFIG.Actor.documentClass) return doc;
         }
         throw new Error("No valid species found in rolltable");
       })()
 
-      if (speciesOrActor instanceof ActorPTR2e) {
-        const actor = speciesOrActor.toObject();
+      if (speciesOrActor instanceof CONFIG.Actor.documentClass) {
+        const actor = speciesOrActor.toObject() as Actor.PTR.SourceWithSystem
         if (options.folder) {
           actor.folder = options.folder.id;
           actor.system.party = {
@@ -265,9 +263,7 @@ export default abstract class BlueprintSystem extends HasEmbed(HasMigrations(fou
         toBeCreated.push(actor);
         continue;
       }
-      const species = speciesOrActor.toObject() as SpeciesPTR2e['_source'] & {
-        system: SpeciesSystemModel['_source'];
-      };
+      const species = speciesOrActor.toObject() as SpeciesPTR2eSource
 
       const level = await (async () => {
         // Get level from rolltable result, or range
@@ -348,12 +344,10 @@ export default abstract class BlueprintSystem extends HasEmbed(HasMigrations(fou
           ? "male"
           : "female";
 
-      const evolution = await (async (): Promise<NonNullable<SpeciesPTR2e['_source'] & {
-        system: SpeciesSystemModel['_source'];
-      }>> => {
+      const evolution = await (async (): Promise<NonNullable<SpeciesPTR2eSource>> => {
         if (preventEvolution) return species;
 
-        function getEvolution(evolution: EvolutionData): EvolutionData {
+        function getEvolution(evolution: PTR.Item.System.Species.Evolution.Source): PTR.Item.System.Species.Evolution.Source {
           if (!evolution?.evolutions) return evolution;
 
           const evolutions = evolution.evolutions.filter((e) => {
@@ -375,7 +369,6 @@ export default abstract class BlueprintSystem extends HasEmbed(HasMigrations(fou
                   return gender === method.gender;
                 }
               }
-              return false;
             }
 
             return andCases.length && orCases.length
@@ -390,16 +383,14 @@ export default abstract class BlueprintSystem extends HasEmbed(HasMigrations(fou
           if (!evolutions.length) return evolution;
           if (evolutions.length > 1) {
             // Pick a random evolution path to follow
-            return getEvolution(randomFromList(evolutions));
+            return getEvolution(randomFromList(evolutions as PTR.Item.System.Species.Evolution.Source[]));
           }
-          return getEvolution(evolutions[0]);
+          return getEvolution(evolutions[0] as PTR.Item.System.Species.Evolution.Source);
         }
-        const evolution = getEvolution(species.system.evolutions as unknown as EvolutionData)
+        const evolution = getEvolution(species.system.evolutions as PTR.Item.System.Species.Evolution.Source)
         if (!evolution?.uuid) return species;
 
-        return ((await fromUuid<ItemPTR2e<SpeciesSystem>>(evolution.uuid))?.toObject() as SpeciesPTR2e['_source'] & {
-          system: SpeciesSystemModel['_source'];
-        } | undefined) ?? species;
+        return ((await fromUuid<Item.ConfiguredInstance>(evolution.uuid))?.toObject() as SpeciesPTR2eSource | undefined) ?? species;
       })();
 
       const { weight, height } = await (async (): Promise<{ weight: number, height: number }> => {
@@ -518,13 +509,13 @@ export default abstract class BlueprintSystem extends HasEmbed(HasMigrations(fou
         const skills = new Map(getInitialSkillList().map((skill) => [skill.slug, skill]));
 
         const calculateSkills = (points: number, weighted: boolean, speciesOnly: boolean) => {
-          const bag = new WeightedBag<SourceFromSchema<SkillSchema>>();
+          const bag = new WeightedBag<foundry.data.fields.SchemaField.PersistedType<SkillSchema>>();
 
           const pool = speciesOnly ? evolution.system.skills : Array.from(skills.values());
 
           for (const skillData of pool) {
             const skill = skills.get(skillData.slug) ?? (() => {
-              const skill = (game.ptr.data.skills.get(skillData.slug) ?? partialSkillToSkill({ slug: skillData.slug })) as SourceFromSchema<SkillSchema>;
+              const skill = (game.ptr.data.skills.get(skillData.slug) ?? partialSkillToSkill({ slug: skillData.slug })) as foundry.data.fields.SchemaField.PersistedType<SkillSchema>;
               skills.set(skillData.slug, skill);
               return skill;
             })();
@@ -568,18 +559,18 @@ export default abstract class BlueprintSystem extends HasEmbed(HasMigrations(fou
         return Array.from(skills.values());
       })();
 
-      const moves: MovePTR2e["_source"][] = await (async () => {
-        const levelUpMoves = (evolution.system.moves.levelUp as ModelPropsFromSchema<LevelUpMoveSchema>[]).filter((move) => move.level <= level);
+      const moves: PTR.Item.System.Move.ParentSource[] = await (async () => {
+        const levelUpMoves = evolution.system.moves.levelUp.filter((move) => move.level <= level);
 
-        const moveItems = await Promise.all(
-          levelUpMoves.map(async (move) => fromUuid(move.uuid))
+        const moveItems: Maybe<Item.ConfiguredInstance> = await Promise.all(
+          levelUpMoves.map(async (move) => fromUuid<Item.ConfiguredInstance>(move.uuid as ItemUUID))
         );
         return moveItems.reduce(
           (acc, move, index) => {
-            if (move && move instanceof ItemPTR2e) {
+            if (move && move instanceof CONFIG.Item.documentClass) {
               const moveData = move.toObject();
               if (index < 6) {
-                const actions = moveData.system.actions as AttackPTR2e["_source"][];
+                const actions = moveData.system.actions as PTR.Models.Action.Models.Attack.Source[];
                 if (actions.length) {
                   actions[0].slot = index;
                 }
@@ -588,35 +579,35 @@ export default abstract class BlueprintSystem extends HasEmbed(HasMigrations(fou
             }
             return acc;
           },
-          [] as MovePTR2e["_source"][]
+          [] as PTR.Item.System.Move.ParentSource[]
         );
       })();
 
-      const abilities: AbilityPTR2e["_source"][] = await (async () => {
+      const abilities: PTR.Item.System.Ability.ParentSource[] = await (async () => {
         const sets = [evolution.system.abilities.starting];
         if (level >= 20) sets.push(evolution.system.abilities.basic);
         if (level >= 50) sets.push(evolution.system.abilities.advanced);
         if (level >= 80) sets.push(evolution.system.abilities.master);
 
-        const abilityItems = await Promise.all(
+        const abilityItems: Maybe<Item.ConfiguredInstance>[] = await Promise.all(
           sets.map((set) => {
             // Pick one random ability from this set
             const ability = set[Math.floor(Math.random() * set.length)];
-            return fromUuid(ability?.uuid);
+            return fromUuid<Item.ConfiguredInstance>(ability?.uuid as ItemUUID);
           })
         );
 
         let i = 0;
         return abilityItems.reduce(
           (acc, ability) => {
-            if (ability && ability instanceof ItemPTR2e) {
-              const abilityData = ability.toObject();
+            if (ability && ability instanceof CONFIG.Item.documentClass) {
+              const abilityData = ability.toObject() as PTR.Item.System.Ability.ParentSource;
               abilityData.system.slot = i++;
               acc.push(abilityData);
             }
             return acc;
           },
-          [] as AbilityPTR2e["_source"][]
+          [] as PTR.Item.System.Ability.ParentSource[]
         );
       })();
 
@@ -706,8 +697,8 @@ export default abstract class BlueprintSystem extends HasEmbed(HasMigrations(fou
             src: tokenImage,
           },
         }, { inplace: false }),
-      } as unknown as Partial<ActorPTR2e['_source']>;
-      const actor = new ActorPTR2e(data);
+      } as unknown as Partial<Actor.PTR.SourceWithSystem>;
+      const actor = new CONFIG.Actor.documentClass(data);
       data.system!.health = { value: actor.system.health.max, max: actor.system.health.max };
       data.system!.powerPoints = { value: actor.system.powerPoints.max, max: actor.system.powerPoints.max };
 
@@ -716,7 +707,7 @@ export default abstract class BlueprintSystem extends HasEmbed(HasMigrations(fou
 
     if (dataOnly) {
       progress.close(game.i18n.localize("PTR2E.PokemonGeneration.Progress.Prefix") + game.i18n.localize("PTR2E.PokemonGeneration.Progress.Complete"));
-      return toBeCreated;
+      return toBeCreated as Actor.PTR.Source[];
     }
 
     progress.advance(game.i18n.localize("PTR2E.PokemonGeneration.Progress.Prefix") + game.i18n.localize("PTR2E.PokemonGeneration.Progress.GenerationStep"));
@@ -726,7 +717,7 @@ export default abstract class BlueprintSystem extends HasEmbed(HasMigrations(fou
     progress.advance(game.i18n.localize("PTR2E.PokemonGeneration.Progress.Prefix" + game.i18n.localize("PTR2E.PokemonGeneration.Progress.TokenGenerationStep")));
 
     const { x, y } = options;
-    const tokensToCreate: TokenDocumentPTR2e[] = [];
+    const tokensToCreate: TokenDocument.ConfiguredInstance[] = [];
     for (const actor of actors) {
       // TODO: Spread out actors in case there's multiple
       const tokenData = await actor.getTokenDocument({ x, y });

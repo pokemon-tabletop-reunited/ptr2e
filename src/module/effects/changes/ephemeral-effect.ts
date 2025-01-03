@@ -15,7 +15,7 @@ const ephemeralEffectChangeSchema = {
 
 export type EphemeralEffectChangeSchema = typeof ephemeralEffectChangeSchema & ChangeModelSchema;
 
-export default class EphemeralEffectChangeSystem extends ChangeModel<EphemeralEffectChangeSchema> {
+class EphemeralEffectChangeSystem extends ChangeModel<EphemeralEffectChangeSchema> {
   static override TYPE = "ephemeral-effect";
 
   static override defineSchema() {
@@ -121,3 +121,6 @@ export default class EphemeralEffectChangeSystem extends ChangeModel<EphemeralEf
     };
   }
 }
+
+export default EphemeralEffectChangeSystem;
+export type { EphemeralEffectChangeSystem }

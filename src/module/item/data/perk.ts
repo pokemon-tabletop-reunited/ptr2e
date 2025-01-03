@@ -1,5 +1,3 @@
-import type { ItemPTR2e} from "@item";
-import { type PerkPTR2e } from "@item";
 import { HasTraits, HasActions, HasSlug, HasDescription, HasEmbed, HasMigrations } from "@module/data/index.ts";
 import { SlugField } from "@module/data/fields/slug-field.ts";
 import { type SlugSchema } from "@module/data/mixins/has-slug.ts";
@@ -9,7 +7,6 @@ import { type MigrationSchema } from "@module/data/mixins/has-migrations.ts";
 import { type TraitsSchema } from "@module/data/mixins/has-traits.ts";
 import { PredicateField } from "@system/predication/schema-data-fields.ts";
 import { Predicate, type PredicateStatement, StatementValidator } from "@system/predication/predication.ts";
-import type { DeepPartial } from "fvtt-types/utils";
 
 const perkSchema = {
   prerequisites: new PredicateField({ label: "PTR2E.FIELDS.prerequisites.label", hint: "PTR2E.FIELDS.prerequisites.hint" }),
@@ -85,14 +82,9 @@ export type PerkSchema = typeof perkSchema & TraitsSchema & MigrationSchema & De
  * @category Item Data Models
  */
 export default abstract class PerkSystem extends HasEmbed(
-  HasTraits(HasMigrations(HasDescription(HasSlug(HasActions(foundry.abstract.TypeDataModel<PerkSchema, ItemPTR2e>))))),
+  HasTraits(HasMigrations(HasDescription(HasSlug(HasActions(foundry.abstract.TypeDataModel))))),
   "perk"
-) {
-  /**
-   * @internal
-   */
-  declare parent: PerkPTR2e;
-
+)<PerkSchema, Item.ConfiguredInstance> {
   static override defineSchema(): PerkSchema {
     return {
       ...super.defineSchema() as TraitsSchema & MigrationSchema & DescriptionSchema & SlugSchema & ActionsSchema,
@@ -279,7 +271,7 @@ export default abstract class PerkSystem extends HasEmbed(
   }
 
   override async _preUpdate(
-    changed: foundry.abstract.TypeDataModel.ParentAssignmentType<PerkSchema, ItemPTR2e>,
+    changed: foundry.abstract.TypeDataModel.ParentAssignmentType<PerkSchema, Item.ConfiguredInstance>,
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     options: foundry.abstract.Document.PreUpdateOptions<any>,
     user: string
@@ -313,7 +305,7 @@ export default abstract class PerkSystem extends HasEmbed(
   }
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  override async _preCreate(data: foundry.abstract.TypeDataModel.ParentAssignmentType<PerkSchema, ItemPTR2e>, options: foundry.abstract.Document.PreCreateOptions<any>, user: User): Promise<boolean | void> {
+  override async _preCreate(data: foundry.abstract.TypeDataModel.ParentAssignmentType<PerkSchema, Item.ConfiguredInstance>, options: foundry.abstract.Document.PreCreateOptions<any>, user: User): Promise<boolean | void> {
     const result = await super._preCreate(data, options, user);
     if (result === false) return false;
 
@@ -325,7 +317,7 @@ export default abstract class PerkSystem extends HasEmbed(
   }
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  override _onCreate(data: foundry.abstract.TypeDataModel.ParentAssignmentType<PerkSchema, ItemPTR2e>, options: foundry.abstract.Document.OnCreateOptions<any>, userId: string): void {
+  override _onCreate(data: foundry.abstract.TypeDataModel.ParentAssignmentType<PerkSchema, Item.ConfiguredInstance>, options: foundry.abstract.Document.OnCreateOptions<any>, userId: string): void {
     super._onCreate(data, options, userId);
 
     if (game.ptr.perks.initialized && !this.parent.actor) {
@@ -339,6 +331,7 @@ export default abstract class PerkSystem extends HasEmbed(
       source.nodes = [source.node];
     }
 
+    //@ts-expect-error - FIXME: This is a nullable field.
     source.nodes[0].tier = null
 
     return super.migrateData(source);

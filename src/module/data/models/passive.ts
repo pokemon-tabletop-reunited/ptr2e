@@ -7,7 +7,7 @@ const passiveSchema = {
 
 export type PassiveSchema = typeof passiveSchema & ActionSchema;
 
-export default class PassivePTR2e extends ActionPTR2e<PassiveSchema> {
+class PassivePTR2e extends ActionPTR2e<PassiveSchema> {
   static override TYPE = "passive" as const;
 
   static override defineSchema(): PassiveSchema {
@@ -17,3 +17,6 @@ export default class PassivePTR2e extends ActionPTR2e<PassiveSchema> {
     }
   }
 }
+
+export default PassivePTR2e;
+export { type PassivePTR2e }

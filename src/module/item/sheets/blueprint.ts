@@ -459,7 +459,7 @@ export default class BlueprintSheet extends foundry.applications.api.HandlebarsA
 
     const result = this._dataOnly ? this.blueprint.generate(null, true) : this.blueprint.generate(generation);
     if (this._dataOnly) {
-      this.resolve(result);
+      this.resolve(result as unknown as void);
       this._dataOnly = false;
     }
     this.close();
@@ -473,9 +473,9 @@ export default class BlueprintSheet extends foundry.applications.api.HandlebarsA
   }
 
   private _dataOnly = false;
-  private resolve: (value: void | PromiseLike<Partial<Actor.ConfiguredInstance['_source']>[] | void>) => void;
+  private resolve: (value: void | PromiseLike<Partial<Actor.PTR.Source>[] | void>) => void;
 
-  async dataOnly(): Promise<Partial<Actor.ConfiguredInstance['_source']>[] | void> {
+  async dataOnly(): Promise<Partial<Actor.PTR.Source>[] | void> {
     return new Promise((resolve) => {
       this._dataOnly = true;
       this.resolve = resolve;

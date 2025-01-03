@@ -1,5 +1,5 @@
 // import type { ActorPTR2e } from "@actor";
-// import type { ItemPTR2e, ItemSystemPTR } from "@item";
+// import type { ItemPTR2e, PTR.Item.ItemSystemPTR } from "@item";
 
 // type ItemSourcePTR2e = ItemPTR2e['_source'];
 

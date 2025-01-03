@@ -1,4 +1,3 @@
-import type { AttackPTR2e } from "@data";
 import { SummonAttackPTR2e } from "@data";
 import type { AttackStatisticRollParameters, BaseStatisticCheck, RollOptionConfig } from "./statistic.ts";
 import { Statistic } from "./statistic.ts";
@@ -6,7 +5,7 @@ import type { StatisticData } from "./data.ts";
 import * as R from "remeda";
 import { CheckModifier, ModifierPTR2e, StatisticModifier } from "@module/effects/modifiers.ts";
 import type { AttackRollResult } from "@system/rolls/check-roll.ts";
-import type { ConsumablePTR2e, ItemWithActions } from "@item";
+import type { ConsumablePTR2e } from "@item";
 import type { CheckContext } from "@system/data.ts";
 import { extractEffectRolls, extractModifierAdjustments, extractModifiers, extractNotes } from "src/util/change-helpers.ts";
 import type { CheckRollContext } from "@system/rolls/data.ts";
@@ -23,12 +22,12 @@ type AttackRollParameters = AttackStatisticRollParameters
 class AttackStatistic extends Statistic {
   declare data: AttackStatisticData;
 
-  item: ItemWithActions;
-  attack: AttackPTR2e;
+  item: PTR.Item.ItemWithActions;
+  attack: PTR.Models.Action.Models.Attack.Instance;
 
   #check: AttackCheck<this> | null = null;
 
-  constructor(attack: AttackPTR2e, data: AttackStatisticData = {
+  constructor(attack: PTR.Models.Action.Models.Attack.Instance, data: AttackStatisticData = {
     slug: attack.slug,
     label: attack.name,
     check: {
@@ -104,7 +103,7 @@ class AttackStatistic extends Statistic {
 
     super(actor, data);
 
-    this.item = item as ItemWithActions;
+    this.item = item as PTR.Item.ItemWithActions;
     this.attack = attack;
   }
 
@@ -165,7 +164,7 @@ class AttackCheck<TParent extends AttackStatistic = AttackStatistic> implements 
     return this.parent.createRollOptions(this.domains, args);
   }
 
-  get item(): ItemWithActions {
+  get item(): PTR.Item.ItemWithActions {
     return this.parent.item;
   }
   get attack() {
@@ -249,7 +248,7 @@ class AttackCheck<TParent extends AttackStatistic = AttackStatistic> implements 
       item: this.item,
       options,
       traits: args.traits ?? this.item.traits,
-    }) as CheckContext<Actor.ConfiguredInstance, AttackCheck<TParent>, ItemWithActions>;
+    }) as CheckContext<Actor.ConfiguredInstance, AttackCheck<TParent>, PTR.Item.ItemWithActions>;
 
     if (context.self.actor.flags.ptr2e.disableActionOptions?.disabled.includes(this.attack.uuid as ActionUUID)) {
       ui.notifications.warn(game.i18n.format("PTR2E.AttackWarning.AfflictionDisabled", { name: this.attack.name }));
@@ -270,7 +269,7 @@ class AttackCheck<TParent extends AttackStatistic = AttackStatistic> implements 
     });
 
     // const extraModifiers = args.modifiers ?? [];
-    const contexts: Record<ActorUUID, CheckContext<Actor.ConfiguredInstance, AttackCheck<TParent>, ItemWithActions>> = {}
+    const contexts: Record<ActorUUID, CheckContext<Actor.ConfiguredInstance, AttackCheck<TParent>, PTR.Item.ItemWithActions>> = {}
     let anyValidTargets = false;
     for (const target of targets) {
       const allyOrEnemy = this.actor.isAllyOf(target.actor) ? "ally" : this.actor.isEnemyOf(target.actor) ? "enemy" : "neutral";
@@ -282,7 +281,7 @@ class AttackCheck<TParent extends AttackStatistic = AttackStatistic> implements 
         target: target,
         options: new Set([...options, `origin:${allyOrEnemy}`]),
         traits: args.traits ?? this.item.traits,
-      }) as CheckContext<Actor.ConfiguredInstance, AttackCheck<TParent>, ItemWithActions>
+      }) as CheckContext<Actor.ConfiguredInstance, AttackCheck<TParent>, PTR.Item.ItemWithActions>
 
       if (currContext.self.actor.flags.ptr2e.disableActionOptions?.disabled.includes(this.attack.uuid as ActionUUID)) {
         ui.notifications.warn(game.i18n.format("PTR2E.AttackWarning.AfflictionDisabled", { name: this.attack.name }));

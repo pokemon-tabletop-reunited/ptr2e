@@ -563,7 +563,7 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
 
   override prepareDerivedData(): void {
     super.prepareDerivedData();
-    (this.species as SpeciesSystemModel | undefined)?.prepareDerivedData?.();
+    // (this.species as SpeciesSystemModel | undefined)?.prepareDerivedData?.();
     this.parent.species?.prepareDerivedData?.();
 
     for (const ptype of this.type.types) {
@@ -754,6 +754,12 @@ export { type ActorSystemPTR2e }
 declare global {
   // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace Actor {
+    // eslint-disable-next-line @typescript-eslint/no-namespace
+    namespace PTR {
+      type Source = foundry.data.fields.SchemaField.PersistedType<Actor.Schema>
+      type SystemSource = foundry.data.fields.SchemaField.PersistedType<ActorSystemSchema>
+      type SourceWithSystem = Omit<Source, 'system'> & { system: SystemSource }
+    }
     type ConfiguredBaseSystem = ActorSystemPTR2e
   }
 }

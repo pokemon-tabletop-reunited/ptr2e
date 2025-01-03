@@ -7,8 +7,10 @@ import type {
   AttackRollCallback,
   AttackRollResult,
   CheckRollCallback,
+  CheckRollDataPTR2e,
   PokeballRollCallback,
-  PokeballRollResults} from "@system/rolls/check-roll.ts";
+  PokeballRollResults
+} from "@system/rolls/check-roll.ts";
 import {
   CheckRoll
 } from "@system/rolls/check-roll.ts";
@@ -81,11 +83,11 @@ class CheckPTR2e {
     const rolls: PokeballRollResults["rolls"] = await (async () => {
       const [accuracy, crit, shake1, shake2, shake3, shake4] = await Promise.all([
         context.accuracyRoll ?? null,
-        CaptureRoll.createFromData({options, data, type: "crit"})?.evaluate() ?? null,
-        CaptureRoll.createFromData({options, data, type: "shake1"})?.evaluate() ?? null,
-        CaptureRoll.createFromData({options, data, type: "shake2"})?.evaluate() ?? null,
-        CaptureRoll.createFromData({options, data, type: "shake3"})?.evaluate() ?? null,
-        CaptureRoll.createFromData({options, data, type: "shake4"})?.evaluate() ?? null,
+        CaptureRoll.createFromData({ options, data, type: "crit" })?.evaluate() ?? null,
+        CaptureRoll.createFromData({ options, data, type: "shake1" })?.evaluate() ?? null,
+        CaptureRoll.createFromData({ options, data, type: "shake2" })?.evaluate() ?? null,
+        CaptureRoll.createFromData({ options, data, type: "shake3" })?.evaluate() ?? null,
+        CaptureRoll.createFromData({ options, data, type: "shake4" })?.evaluate() ?? null,
       ]);
       return {
         accuracy,
@@ -234,7 +236,7 @@ class CheckPTR2e {
 
     for (const modifier of check.modifiers.filter(m => m.predicate.length !== 0)) {
       for (const [uuid, targetContext] of Object.entries(context.contexts)) {
-        if(modifier.ignored) {
+        if (modifier.ignored) {
           const sharedMod = sharedModifiers.get(modifier.slug);
           if (sharedMod && sharedMod.appliesTo.get(uuid as ActorUUID)) continue;
           if (modifier.predicate.test(targetContext.options)) {
@@ -253,8 +255,8 @@ class CheckPTR2e {
           continue;
         }
         const sharedMod = sharedModifiers.get(modifier.slug);
-        if(!modifier.predicate.test(targetContext.options)) {
-          if(sharedMod) {
+        if (!modifier.predicate.test(targetContext.options)) {
+          if (sharedMod) {
             sharedMod.appliesTo.set(uuid as ActorUUID, false);
           }
           else {
@@ -264,7 +266,7 @@ class CheckPTR2e {
             check.delete(modifier);
           }
         } else {
-          if(sharedMod) {
+          if (sharedMod) {
             sharedMod.appliesTo.set(uuid as ActorUUID, true);
           } else {
             const newMod = modifier.clone();
@@ -351,20 +353,20 @@ class CheckPTR2e {
       };
 
       const rolls: {
-        accuracy: Rolled<CheckRoll> | null;
-        crit: Rolled<CheckRoll> | null;
-        damage: Rolled<CheckRoll> | null;
+        accuracy: Roll.Evaluated<CheckRoll> | null;
+        crit: Roll.Evaluated<CheckRoll> | null;
+        damage: Roll.Evaluated<CheckRoll> | null;
       } = await (async () => {
         const [accuracy, crit, damage] = await Promise.all([
           skippedRolls.has("accuracy")
             ? null
-            : AttackRoll.createFromData({data, options, type: "accuracy"})?.evaluate() ?? null,
+            : AttackRoll.createFromData({ data, options, type: "accuracy" })?.evaluate() ?? null,
           skippedRolls.has("crit")
             ? null
-            : AttackRoll.createFromData({data, options, type: "crit"})?.evaluate() ?? null,
+            : AttackRoll.createFromData({ data, options, type: "crit" })?.evaluate() ?? null,
           skippedRolls.has("damage")
             ? null
-            : AttackRoll.createFromData({data, options, type: "damage"})?.evaluate() ?? null,
+            : AttackRoll.createFromData({ data, options, type: "damage" })?.evaluate() ?? null,
         ]);
         return { accuracy, crit, damage };
       })();
@@ -501,11 +503,11 @@ class CheckPTR2e {
     if (!context.isReroll && context.action?.startsWith("fling")) {
       const fling = context.actor?.actions.attack.get(context.action);
       if (fling?.flingItemId) {
-        const flingItem = context.actor?.items.get(fling.flingItemId);
+        const flingItem = context.actor?.items.get(fling.flingItemId) as PTR.Item.ItemWithFling | undefined;
         if (flingItem) {
-          if (flingItem.system.quantity >= 1) {
-            await flingItem.update({ "system.quantity": flingItem.system.quantity - 1 });
-            ui.notifications.info(game.i18n.format("PTR2E.AttackWarning.FlingItemConsumed", { name: flingItem.name, quantity: flingItem.system.quantity }));
+          if ((flingItem.system as unknown as { quantity: number }).quantity >= 1) {
+            await flingItem.update({ "system.quantity": (flingItem.system as unknown as { quantity: number }).quantity - 1 });
+            ui.notifications.info(game.i18n.format("PTR2E.AttackWarning.FlingItemConsumed", { name: flingItem.name, quantity: (flingItem.system as unknown as { quantity: number }).quantity }));
           }
           //TODO: Add setting for auto-delete.
           // else {
@@ -527,7 +529,7 @@ class CheckPTR2e {
     check: CheckModifier,
     context: CheckRollContext = {},
     callback?: CheckRollCallback
-  ): Promise<Rolled<CheckRoll> | null> {
+  ): Promise<Roll.Evaluated<CheckRoll> | null> {
     // TODO: Add user setting
     context.skipDialog ??= false;
     context.createMessage ??= true;
@@ -567,13 +569,13 @@ class CheckPTR2e {
       breakdown: check.breakdown,
     };
 
-    const roll = await CheckRoll.createFromData({options})!.evaluate();
+    const roll = await CheckRoll.createFromData({ options })!.evaluate();
 
     const degree = context.dc ? new DegreeOfSuccess(roll) : null;
     if (degree) {
       context.outcome = degree.value;
       context.unadjustedOutcome = degree.unadjusted;
-      roll.options.degreeOfSuccess = degree.value;
+      (roll.options as CheckRollDataPTR2e).degreeOfSuccess = degree.value;
     }
 
     const notes =

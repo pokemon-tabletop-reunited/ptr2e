@@ -1,6 +1,6 @@
 import { GrantItemChangeSystem } from "@data";
 
-export default class GrantEffectChangeSystem extends GrantItemChangeSystem {
+class GrantEffectChangeSystem extends GrantItemChangeSystem {
   static override TYPE = "grant-effect";
 
   static override defineSchema() {
@@ -29,3 +29,6 @@ export default class GrantEffectChangeSystem extends GrantItemChangeSystem {
     }
   }
 }
+
+export default GrantEffectChangeSystem;
+export { type GrantEffectChangeSystem }

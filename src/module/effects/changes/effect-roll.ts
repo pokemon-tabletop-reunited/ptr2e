@@ -15,7 +15,7 @@ const effectRollChangeSchema = {
 
 export type EffectRollChangeSchema = typeof effectRollChangeSchema & ChangeModelSchema;
 
-export default class EffectRollChangeSystem extends ChangeModel<EffectRollChangeSchema> {
+class EffectRollChangeSystem extends ChangeModel<EffectRollChangeSchema> {
   static override TYPE = "roll-effect";
 
   static override defineSchema(): EffectRollChangeSchema {
@@ -112,6 +112,9 @@ export default class EffectRollChangeSystem extends ChangeModel<EffectRollChange
   }
 }
 
-export default interface EffectRollChangeSystem {
+interface EffectRollChangeSystem {
   value: string;
 }
+
+export default EffectRollChangeSystem;
+export type { EffectRollChangeSystem };

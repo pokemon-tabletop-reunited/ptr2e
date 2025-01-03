@@ -30,7 +30,7 @@ const grantItemChangeSchema = {
 
 export type GrantItemChangeSchema = typeof grantItemChangeSchema & ChangeModelSchema;
 
-export default class GrantItemChangeSystem extends ChangeModel<GrantItemChangeSchema> {
+class GrantItemChangeSystem extends ChangeModel<GrantItemChangeSchema> {
   static override TYPE = "grant-item";
 
   get grantedId(): string | null {
@@ -418,9 +418,12 @@ export default class GrantItemChangeSystem extends ChangeModel<GrantItemChangeSc
   }
 }
 
-export default interface GrantItemChangeSystem {
+interface GrantItemChangeSystem {
   value: string;
 }
+
+export default GrantItemChangeSystem;
+export { type GrantItemChangeSystem };
 
 interface GrantItemSource extends ChangeSource {
   preselectChoices?: unknown;

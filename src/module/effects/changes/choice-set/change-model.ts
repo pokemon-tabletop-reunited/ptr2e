@@ -1,5 +1,5 @@
 import type { ChangeModelOptions } from "@data";
-import { ActionPTR2e, ChangeModel } from "@data";
+import { ChangeModel } from "@data";
 import type { PickableThing } from "@module/apps/pick-a-thing-prompt.ts";
 import { DataUnionField } from "@module/data/fields/data-union-field.ts";
 import { StrictArrayField, StrictBooleanField, StrictObjectField, StrictStringField } from "@module/data/fields/strict-primitive-fields.ts";
@@ -36,11 +36,11 @@ const choiceSetChangeSchema = {
   allowedDrops: new foundry.data.fields.SchemaField<{
     label: foundry.data.fields.StringField<{ required: true, blank: false, nullable: true, initial: null }>,
     predicate: PredicateField,
-  }, 
-  { required: false, nullable: true, initial: undefined },
-  { label: string | null, predicate: RawPredicate},
-  { label: string | null, predicate: Predicate },
-  { label: string | null, predicate: RawPredicate }
+  },
+    { required: false, nullable: true, initial: undefined },
+    { label: string | null, predicate: RawPredicate } | null,
+    { label: string | null, predicate: Predicate } | null,
+    { label: string | null, predicate: RawPredicate } | null
   >(
     {
       label: new foundry.data.fields.StringField({ required: true, blank: false, nullable: true, initial: null }),
@@ -56,7 +56,7 @@ const choiceSetChangeSchema = {
 
 export type ChoiceSetChangeSchema = typeof choiceSetChangeSchema & ChangeModelSchema;
 
-export default class ChoiceSetChangeSystem extends ChangeModel<ChoiceSetChangeSchema> {
+class ChoiceSetChangeSystem extends ChangeModel<ChoiceSetChangeSchema> {
   static override TYPE = "choice-set";
 
   /** Whether this choice set consists of items */
@@ -74,6 +74,7 @@ export default class ChoiceSetChangeSystem extends ChangeModel<ChoiceSetChangeSc
 
     const self = this as ChoiceSetChangeSystem
 
+    //@ts-expect-error - This should work fine.
     self.allowedDrops ??= null;
     self.allowNoSelection ??= false;
     self.rollOption ??= self.slug;
@@ -197,8 +198,8 @@ export default class ChoiceSetChangeSystem extends ChangeModel<ChoiceSetChangeSc
     if (choicesAreUUIDs) {
       const itemChoices = await UUIDUtils.fromUUIDs(choices.map(c => c.value));
       for (let i = 0; i < choices.length; i++) {
-        const item = itemChoices[i] as ItemPTR2e | ActionPTR2e | null;
-        if (item instanceof ItemPTR2e || item instanceof ActionPTR2e) {
+        const item = itemChoices[i] as Item.ConfiguredInstance | PTR.Models.Action.Instance | null;
+        if (item instanceof CONFIG.Item.documentClass || item instanceof CONFIG.PTR.models.actions.base) {
           choices[i].label = item.name;
           choices[i].img = item.img!;
         }
@@ -271,7 +272,7 @@ export default class ChoiceSetChangeSystem extends ChangeModel<ChoiceSetChangeSc
   }
 }
 
-export default interface ChoiceSetChangeSystem {
+interface ChoiceSetChangeSystem {
   value: string;
 
   /** The user's selection from among the options in `choices`, or otherwise `null` */
@@ -282,6 +283,9 @@ export default interface ChoiceSetChangeSystem {
   // allowedDrops: AllowedDropsData | null;
   // allowNoSelection: boolean;
 }
+
+export default ChoiceSetChangeSystem;
+export type { ChoiceSetChangeSystem };
 
 // type ChoiceSetSource = SourceFromSchema<ChoiceSetSchema> & {
 //   selection?: unknown;

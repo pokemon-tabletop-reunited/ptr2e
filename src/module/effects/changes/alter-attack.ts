@@ -16,7 +16,7 @@ const alterAttackChangeSchema = {
 
 export type AlterAttackChangeSchema = typeof alterAttackChangeSchema & ChangeModelSchema;
 
-export default class AlterAttackChangeSystem extends ChangeModel<AlterAttackChangeSchema> {
+class AlterAttackChangeSystem extends ChangeModel<AlterAttackChangeSchema> {
   static override TYPE = "alter-attack";
 
   static VALID_PROPERTIES = new Set<AttackPropertyOptions>([
@@ -309,6 +309,9 @@ export default class AlterAttackChangeSystem extends ChangeModel<AlterAttackChan
   }
 }
 
-export default interface AlterAttackChangeSystem {
+interface AlterAttackChangeSystem {
   value: string;
 }
+
+export default AlterAttackChangeSystem;
+export type { AlterAttackChangeSystem };

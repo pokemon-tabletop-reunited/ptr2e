@@ -4,7 +4,7 @@ import { TokenDocumentPTR2e } from "@module/canvas/token/document.ts";
 import { UUIDUtils } from "src/util/uuid.ts";
 import { TagTokenPrompt } from "./prompt.ts";
 
-export default class TokenTagChangeSystem extends ChangeModel {
+class TokenTagChangeSystem extends ChangeModel {
   static override TYPE = "token-tag";
 
   override async preCreate({ changeSource, effectSource, pendingItems }: ChangeModel.PreCreateParams): Promise<void> {
@@ -30,7 +30,7 @@ export default class TokenTagChangeSystem extends ChangeModel {
       return;
     }
 
-    if(!(changeSource!.key === this.key)) throw new Error(`TokenTagChangeSystem expected changeSource.slug to be ${this.key} but got ${changeSource!.key}`);
+    if (!(changeSource!.key === this.key)) throw new Error(`TokenTagChangeSystem expected changeSource.slug to be ${this.key} but got ${changeSource!.key}`);
     this.value = changeSource!.value = token.uuid;
   }
 
@@ -46,6 +46,9 @@ export default class TokenTagChangeSystem extends ChangeModel {
   }
 }
 
-export default interface TokenAlterationChangeSystem {
+interface TokenTagChangeSystem {
   value: string;
 }
+
+export default TokenTagChangeSystem;
+export type { TokenTagChangeSystem }

@@ -1,8 +1,17 @@
-import { ChangeModelTypes } from '../models/base.ts';
+import { ChangeModelTypes, type _ChangeModelTypes } from '../models/base.ts';
 import type { TemplateConstructor } from './data-template.ts';
 
 const changesSchema = {
-  changes: new foundry.data.fields.ArrayField(
+    changes: new foundry.data.fields.ArrayField<
+    foundry.data.fields.TypedSchemaField<_ChangeModelTypes, {required: true, nullable: false}>,
+    {required: true, nullable: false, initial: []},
+    PTR.ActiveEffect.Changes.Source,
+    PTR.ActiveEffect.Changes.Instance,
+    PTR.ActiveEffect.Changes.Source[],
+    PTR.ActiveEffect.Changes.Instance[],
+    Maybe<PTR.ActiveEffect.Changes.Source>,
+    Maybe<PTR.ActiveEffect.Changes.Source[]>
+>(
     new foundry.data.fields.TypedSchemaField(ChangeModelTypes(), { required: true, nullable: false }),
     { required: true, nullable: false, initial: [] }
   )

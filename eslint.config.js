@@ -18,6 +18,7 @@ export default [
   ...tseslint.configs.strict,
   {
     rules: {
+      "@typescript-eslint/no-namespace": "off",
       "@typescript-eslint/no-unsafe-declaration-merging": "off",
       "@typescript-eslint/no-non-null-assertion": "off",
       "@typescript-eslint/no-invalid-void-type": "off",

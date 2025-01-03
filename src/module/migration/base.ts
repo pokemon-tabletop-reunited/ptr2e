@@ -1,5 +1,3 @@
-import type { ActionPTR2e } from "@data";
-
 /**
  * This is the base class for a migration.
  * If you make a change to the database schema (i.e. any class extending a TypeDataModel),
@@ -32,7 +30,7 @@ interface MigrationBase {
      * Update the actor to the latest schema version.
      * @param source This should be effectively a `Actor.ConstructorData` from the previous version.
      */
-    updateActor?(source: Actor.ConstructorData): Promise<void>;
+    updateActor?(source: Actor.PTR.SourceWithSystem): Promise<void>;
 
     /**
      * Update the item to the latest schema version, handling changes that must happen before any other migration in a
@@ -40,28 +38,28 @@ interface MigrationBase {
      * @param source Item to update. This should be an `Item.ConstructorData` from the previous version
      * @param actorSource If the item is part of an actor, this is set to the actor source
      */
-    preUpdateItem?(source: Item.ConstructorData, actorSource?: Actor.ConstructorData): Promise<void>;
+    preUpdateItem?(source: PTR.Item.Source, actorSource?: Actor.PTR.SourceWithSystem): Promise<void>;
 
     /**
      * Update the action to the latest schema version.
      * @param source Action to update. This should be an `ActionPTR2e['_source']` from the previous version.
      * @param itemSource The action's parent item
      */
-    updateAction?(source: ActionPTR2e['_source'], itemSource: Item.ConstructorData): Promise<void>;
+    updateAction?(source: PTR.Models.Action.Source, itemSource: PTR.Item.Source): Promise<void>;
 
     /**
      * Update the item to the latest schema version.
      * @param source Item to update. This should be an `Item.ConstructorData` from the previous version.
      * @param actorSource If the item is part of an actor, this is set to the actor. For instance
      */
-    updateItem?(source: Item.ConstructorData, actorSource?: Actor.ConstructorData): Promise<void>;
+    updateItem?(source: PTR.Item.Source, actorSource?: Actor.PTR.SourceWithSystem): Promise<void>;
 
     /**
      * Update the effect to the latest schema version.
      * @param source Effect to update. This should be an `ActiveEffect.ConstructorData` from the previous version.
      * @param parentSource The effect's parent
      */
-    updateEffect?(source: ActiveEffect.ConstructorData, parentSource: Item.ConstructorData | Actor.ConstructorData): Promise<void>;
+    updateEffect?(source: ActiveEffect.ConstructorData, parentSource: PTR.Item.Source | Actor.PTR.SourceWithSystem): Promise<void>;
 
     /**
      * Update the macro to the latest schema version.

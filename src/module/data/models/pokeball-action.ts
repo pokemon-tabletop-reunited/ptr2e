@@ -1,9 +1,9 @@
 import { ActionPTR2e } from "@data";
 import type { CaptureStatisticRollParameters } from "@system/statistics/statistic.ts";
-import type { ConsumablePTR2e, ItemWithActions } from "@item";
+import type { ConsumablePTR2e } from "@item";
 import { PokeballStatistic } from "@system/statistics/pokeball.ts";
 
-export default class PokeballActionPTR2e extends ActionPTR2e {
+class PokeballActionPTR2e extends ActionPTR2e {
   declare type: "pokeball";
 
   static override TYPE = "pokeball" as const;
@@ -67,15 +67,15 @@ export default class PokeballActionPTR2e extends ActionPTR2e {
         powerPoints: 0
       }
     }, {
-      parent: consumable as unknown as ItemWithActions
+      parent: consumable as unknown as PTR.Item.ItemWithActions
     })
     action.prepareDerivedData();
     return action;
   }
 }
-export default interface PokeballActionPTR2e extends ActionPTR2e {
+interface PokeballActionPTR2e extends ActionPTR2e {
   statistic: Maybe<PokeballStatistic>;
 }
 
-//@ts-expect-error - ignore error
-window.pba = PokeballActionPTR2e;
+export default PokeballActionPTR2e;
+export { type PokeballActionPTR2e }

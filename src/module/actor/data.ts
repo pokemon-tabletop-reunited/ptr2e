@@ -1,4 +1,4 @@
-import type { AttackPTR2e, DistanceUnit, Trait, WeightUnit } from "@data";
+import type { DistanceUnit, Trait, WeightUnit } from "@data";
 import type { EffectSourcePTR2e } from "@effects";
 import type AfflictionActiveEffectSystem from "@module/effects/data/affliction.ts";
 import type { DeferredPromise, DeferredValue, DeferredValueParams, ModifierAdjustment, ModifierPTR2e } from "@module/effects/modifiers.ts";
@@ -76,9 +76,9 @@ export interface RollOptionToggle {
 
 export interface AttackAdjustment {
   adjustAttack?: (
-    attack: AttackPTR2e, options: string[]
+    attack: PTR.Models.Action.Models.Attack.Instance, options: string[]
   ) => void;
-  adjustTraits?: (attack: AttackPTR2e, traits: string[], options: string[]) => void;
+  adjustTraits?: (attack: PTR.Models.Action.Models.Attack.Instance, traits: string[], options: string[]) => void;
 }
 
 interface Attributes {

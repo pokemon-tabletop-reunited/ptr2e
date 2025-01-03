@@ -1,5 +1,5 @@
 import type { AttackMessageSystem, DamageAppliedMessageSystem } from "@chat";
-import { ActionPTR2e, AttackPTR2e, Trait } from "@data";
+import { Trait } from "@data";
 import type { EffectPTR2e, MovePTR2e, PerkPTR2e, SummonPTR2e } from "@item";
 import type { DataInspector } from "@module/apps/data-inspector/data-inspector.ts";
 import type { CustomSkill } from "@module/data/models/skill.ts";
@@ -243,7 +243,7 @@ export default class TooltipsPTR2e {
       const parent = (await fromUuid<Actor.ConfiguredInstance | Item.ConfiguredInstance>(parentUuid))
       if (!parent) return false;
 
-      const attack = parent.actions.get(attackSlug) as ActionPTR2e | undefined;
+      const attack = parent.actions.get(attackSlug) as PTR.Models.Action.Instance | undefined;
       if (!attack) return false;
 
       return await this.#createActionTooltip(attack);
@@ -253,13 +253,13 @@ export default class TooltipsPTR2e {
     const attackUuid = game.tooltip.element?.dataset.uuid;
     if (!attackUuid) return false;
 
-    const attack = (await fromUuid(attackUuid as ValidUUID)) as unknown as ActionPTR2e | undefined;
-    if (!(attack instanceof ActionPTR2e)) return false;
+    const attack = (await fromUuid(attackUuid as ValidUUID)) as unknown as PTR.Models.Action.Instance | undefined;
+    if (!(attack instanceof CONFIG.PTR.models.actions.base)) return false;
 
     return await this.#createActionTooltip(attack);
   }
 
-  async #createActionTooltip(action: ActionPTR2e) {
+  async #createActionTooltip(action: PTR.Models.Action.Instance) {
     const traits = action.traits.map((t) => ({ value: t.slug, label: t.label, type: t.type }));
 
     this.tooltip.classList.add("attack");
@@ -310,7 +310,7 @@ export default class TooltipsPTR2e {
           event.stopPropagation();
 
           const { actionUuid } = button.dataset;
-          const action = await fromUuid(actionUuid as ValidUUID) as unknown as ActionPTR2e;
+          const action = await fromUuid(actionUuid as ValidUUID) as unknown as PTR.Models.Action.Instance;
           if (!action) return void ui.notifications.error("Action not found.");
 
           const ppCost = action.cost.powerPoints
@@ -345,7 +345,7 @@ export default class TooltipsPTR2e {
       const parent = (await fromUuid<Actor.ConfiguredInstance, Item.ConfiguredInstance>(parentUuid as ActorUUID))
       if (!parent) return false;
 
-      const attack = parent.actions.attack!.get(attackSlug) as AttackPTR2e | undefined;
+      const attack = parent.actions.attack!.get(attackSlug) as PTR.Models.Action.Models.Attack.Instance | undefined;
       if (!attack) return false;
 
       return await this.#createAttackTooltip(attack);
@@ -355,13 +355,13 @@ export default class TooltipsPTR2e {
     const attackUuid = game.tooltip.element?.dataset.uuid;
     if (!attackUuid) return false;
 
-    const attack = (await fromUuid(attackUuid as ValidUUID)) as unknown as AttackPTR2e | undefined;
-    if (!(attack instanceof AttackPTR2e)) return false;
+    const attack = (await fromUuid(attackUuid as ValidUUID)) as unknown as PTR.Models.Action.Models.Attack.Instance | undefined;
+    if (!(attack instanceof CONFIG.PTR.models.actions.base)) return false;
 
     return await this.#createAttackTooltip(attack);
   }
 
-  async #createAttackTooltip(attack: AttackPTR2e) {
+  async #createAttackTooltip(attack: PTR.Models.Action.Models.Attack.Instance) {
     const traits = attack.traits.map((t) => ({ value: t.slug, label: t.label, type: t.type }));
 
     this.tooltip.classList.add("attack");
@@ -412,7 +412,7 @@ export default class TooltipsPTR2e {
           event.stopPropagation();
 
           const { attackUuid } = button.dataset;
-          const action = await fromUuid(attackUuid as ValidUUID) as unknown as AttackPTR2e;
+          const action = await fromUuid(attackUuid as ValidUUID) as unknown as PTR.Models.Action.Models.Attack.Instance;
           if (!action) return void ui.notifications.error("Action not found.");
 
           return action.delayAction();
@@ -425,7 +425,7 @@ export default class TooltipsPTR2e {
           event.stopPropagation();
 
           const { actionUuid } = button.dataset;
-          const action = await fromUuid(actionUuid as ValidUUID) as unknown as ActionPTR2e;
+          const action = await fromUuid(actionUuid as ValidUUID) as unknown as PTR.Models.Action.Instance;
           if (!action) return void ui.notifications.error("Action not found.");
 
           const ppCost = action.cost.powerPoints
@@ -450,11 +450,11 @@ export default class TooltipsPTR2e {
           if (!game.combat) return void ui.notifications.error("You must be in combat to summon a creature.");
 
           const { attackUuid } = button.dataset;
-          const action = await fromUuid(attackUuid as ValidUUID) as unknown as ActionPTR2e & { summon: ItemUUID };
+          const action = await fromUuid(attackUuid as ValidUUID) as unknown as PTR.Models.Action.Instance & { summon: ItemUUID };
           if (!action) return void ui.notifications.error("Action not found.");
           if (!(action?.type === "attack" && action.summon)) return void ui.notifications.error("Action not found on item.");
 
-          const summonItem = await fromUuid<SummonPTR2e>((action as AttackPTR2e).summon as ItemUUID);
+          const summonItem = await fromUuid<SummonPTR2e>((action as unknown as PTR.Models.Action.Models.Attack.Instance).summon as ItemUUID);
           if (!summonItem) return void ui.notifications.error("Summon not found on action.");
 
           const combatants = await game.combat.createEmbeddedDocuments("Combatant", [{

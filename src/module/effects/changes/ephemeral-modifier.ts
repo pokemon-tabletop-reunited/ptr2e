@@ -9,7 +9,7 @@ const ephemeralModifierChangeSchema = {
 
 export type EphemeralModifierChangeSchema = typeof ephemeralModifierChangeSchema & ChangeModelSchema;
 
-export default class EphemeralModifierChangeSystem extends ChangeModel<EphemeralModifierChangeSchema> {
+class EphemeralModifierChangeSystem extends ChangeModel<EphemeralModifierChangeSchema> {
   static override TYPE = "ephemeral-modifier";
 
   static override defineSchema(): EphemeralModifierChangeSchema {
@@ -96,3 +96,6 @@ export default class EphemeralModifierChangeSystem extends ChangeModel<Ephemeral
     modifiers.push(construct);
   }
 }
+
+export default EphemeralModifierChangeSystem;
+export type { EphemeralModifierChangeSystem };

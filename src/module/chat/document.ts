@@ -4,7 +4,6 @@ import type { AttackRollResult, PokeballRollResults } from "../system/rolls/chec
 import { CheckRoll } from "../system/rolls/check-roll.ts";
 import * as R from "remeda";
 import type { SummonPTR2e } from "@item";
-import type { AttackPTR2e } from "@data";
 
 class ChatMessagePTR2e extends ChatMessage {
   /** Get the actor associated with this chat message */
@@ -129,7 +128,7 @@ class ChatMessagePTR2e extends ChatMessage {
       event.stopPropagation();
 
       const { attackUuid } = event.currentTarget.dataset;
-      const action = await fromUuid(attackUuid as ValidUUID) as unknown as AttackPTR2e;
+      const action = await fromUuid(attackUuid as ValidUUID) as unknown as PTR.Models.Action.Models.Attack.Instance;
       if (!action) return void ui.notifications.error("Action not found.");
 
       return action.delayAction();
@@ -141,7 +140,7 @@ class ChatMessagePTR2e extends ChatMessage {
       event.stopPropagation();
 
       const { actionUuid } = event.currentTarget.dataset;
-      const action = await fromUuid(actionUuid as ValidUUID) as unknown as AttackPTR2e;
+      const action = await fromUuid(actionUuid as ValidUUID) as unknown as PTR.Models.Action.Models.Attack.Instance;
       if (!action) return void ui.notifications.error("Action not found.");
 
       const ppCost = action.cost.powerPoints
@@ -166,11 +165,11 @@ class ChatMessagePTR2e extends ChatMessage {
       if (!game.combat) return void ui.notifications.error("You must be in combat to summon a creature.");
 
       const { attackUuid } = event.currentTarget.dataset;
-      const action = await fromUuid(attackUuid as ValidUUID) as unknown as AttackPTR2e;
+      const action = await fromUuid(attackUuid as ValidUUID) as unknown as PTR.Models.Action.Models.Attack.Instance;
       if (!action) return void ui.notifications.error("Action not found.");
       if (!(action?.type === "attack" && action.summon)) return void ui.notifications.error("Action not found on item.");
 
-      const summonItem = await fromUuid<Item.ConfiguredInstance>((action as AttackPTR2e).summon as ValidUUID) as SummonPTR2e;
+      const summonItem = await fromUuid<Item.ConfiguredInstance>((action as PTR.Models.Action.Models.Attack.Instance).summon as ValidUUID) as SummonPTR2e;
       if (!summonItem) return void ui.notifications.error("Summon not found on action.");
 
       const combatants = await game.combat.createEmbeddedDocuments("Combatant", [{

@@ -97,3 +97,5 @@ export default class FlatModifierChangeSystem extends ChangeModel<FlatModifierCh
     modifiers.push(construct);
   }
 }
+
+export {type FlatModifierChangeSystem};

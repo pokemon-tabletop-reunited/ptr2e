@@ -1,5 +1,4 @@
 import { MigrationBase } from "../base.ts"
-import type { ActorPTR2e} from "@actor";
 import { HumanoidActorSystem } from "@actor";
 
 export class Migration109SpeciesItems extends MigrationBase {
@@ -7,7 +6,7 @@ export class Migration109SpeciesItems extends MigrationBase {
 
   override requiresFlush = true;
 
-  override async updateActor(source: ActorPTR2e["_source"]): Promise<void> {
+  override async updateActor(source: Actor.PTR.SourceWithSystem): Promise<void> {
     if (source.items?.find(i => i._id === "actorspeciesitem")) return void console.log("PTR2E | Migration 109: Actor already has a species item.");
     if (!source?.system?.species) {
       if (source.type !== "humanoid") return void console.error(`PTR2E | Migration 109: Actor '${source.name}' (${source._id}) does not have a species system.`, source);
@@ -18,7 +17,7 @@ export class Migration109SpeciesItems extends MigrationBase {
         type: 'species',
         img: source.img,
         _id: "actorspeciesitem",
-        system: HumanoidActorSystem.constructSpecies(source.system as HumanoidActorSystem, source.name).toObject()
+        system: HumanoidActorSystem.constructSpecies(source.system, source.name).toObject()
       }
 
       // Add the species item to the actor

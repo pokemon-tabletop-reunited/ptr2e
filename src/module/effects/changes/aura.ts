@@ -202,7 +202,7 @@ const auraEffectSchema = (() => {
 
 export type AuraChangeSchema = typeof auraEffectSchema & ChangeModelSchema;
 
-export default class AuraChangeSystem extends ChangeModel<AuraChangeSchema> {
+class AuraChangeSystem extends ChangeModel<AuraChangeSchema> {
   static override TYPE = "aura";
 
   static override defineSchema(): AuraChangeSchema {
@@ -293,6 +293,9 @@ export default class AuraChangeSystem extends ChangeModel<AuraChangeSchema> {
   }
 }
 
-export default interface AuraChangeSystem {
+interface AuraChangeSystem {
   value: string | number;
 }
+
+export default AuraChangeSystem;
+export type { AuraChangeSystem };

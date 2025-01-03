@@ -2,19 +2,6 @@ import type { PredicateField } from "@system/predication/schema-data-fields.ts";
 import type ChangeModel from "./changes/change.ts";
 import type ActiveEffectSystem from "./system.ts";
 
-interface RuleElementSource {
-    key?: JSONValue;
-    value?: JSONValue;
-    label?: JSONValue;
-    slug?: JSONValue;
-    predicate?: JSONValue;
-    priority?: JSONValue;
-    ignored?: JSONValue;
-    requiresInvestment?: JSONValue;
-    requiresEquipped?: JSONValue;
-    removeUponCreate?: JSONValue;
-}
-
 type RuleValue = string | number | boolean | object | BracketedValue | null;
 
 interface Bracket<T extends object | number | string> {

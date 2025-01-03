@@ -1,5 +1,4 @@
-import type { ItemSystemPTR, ItemWithActions } from "@item";
-import type { ActionPTR2e, EquipmentData, Trait } from "@data";
+import type { Trait } from "@data";
 import { RollOptionManager } from "@data";
 import { ActionsCollections } from "@actor/actions.ts";
 import { SpeciesSystemModel } from "./data/index.ts";
@@ -26,11 +25,11 @@ class ItemPTR2e extends Item {
 
   /** The recorded schema version of this item, updated after each data migration */
   get schemaVersion(): number | null {
-    return Number(this.system._migration?.version) || null;
+    return Number((this.system as { _migration?: { version?: number } })._migration?.version) || null;
   }
 
-  get grantedBy(): ItemPTR2e | ActiveEffect.ConfiguredInstance | null {
-    return (this.actor?.items.get(this.flags.ptr2e?.grantedBy?.id ?? "") as ItemPTR2e | undefined | null)
+  get grantedBy(): Item.ConfiguredInstance | ActiveEffect.ConfiguredInstance | null {
+    return (this.actor?.items.get(this.flags.ptr2e?.grantedBy?.id ?? "") as Item.ConfiguredInstance | undefined | null)
       ?? (this.actor?.effects.get(this.flags.ptr2e?.grantedBy?.id ?? "") as ActiveEffect.ConfiguredInstance | undefined | null)
       ?? null;
   }
@@ -71,8 +70,8 @@ class ItemPTR2e extends Item {
 
     const gearOptions = 'equipped' in this.system
       ? [
-        `${this.slug}:${(this.system.equipped as EquipmentData).carryType}`,
-        ...(["held", "worn"].includes((this.system.equipped as EquipmentData).carryType) ? `${this.slug}:equipped` : [])
+        `${this.slug}:${(this.system as unknown as PTR.Item.SystemWithEquippedData).equipped.carryType}`,
+        ...(["held", "worn"].includes((this.system as unknown as PTR.Item.SystemWithEquippedData).equipped.carryType) ? `${this.slug}:equipped` : [])
       ]
       : [] as string[];
 
@@ -139,8 +138,8 @@ class ItemPTR2e extends Item {
     this.rollOptions.addOption("item", `${this.type}:${this.slug}`);
   }
 
-  hasActions(): this is ItemWithActions {
-    return 'actions' in this.system && (this.system.actions as Collection<ActionPTR2e>).size > 0;
+  hasActions(): this is PTR.Item.ItemWithActions {
+    return 'actions' in this.system && (this.system.actions as Collection<PTR.Models.Action.Instance>).size > 0;
   }
 
   async toChat() {
@@ -418,7 +417,7 @@ interface ItemPTR2e extends Item {
 
   _actions: ActionsCollections;
 
-  system: ItemSystemPTR;
+  system: PTR.Item.ItemWithActions;
 
   rollOptions: RollOptionManager<this>;
 }

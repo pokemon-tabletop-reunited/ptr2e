@@ -73,7 +73,7 @@ class CheckRoll<Data extends AnyObject = AnyObject> extends Roll<Data> {
 }
 
 interface RollDataPTR2e {
-  rollerId?: string;
+  rollerId?: string | null;
   totalModifier?: number;
   /** Whether to show roll formula and tooltip to players */
   showBreakdown?: boolean;

@@ -1,4 +1,3 @@
-import type { PerkPTR2e, SpeciesPTR2e } from "@item";
 import { HasDescription, HasEmbed, HasMigrations, HasSlug, HasTraits, PTRCONSTS, Trait } from "@module/data/index.ts";
 import { getTypes } from "@scripts/config/effectiveness.ts";
 import { SlugField } from "@module/data/fields/slug-field.ts";
@@ -15,227 +14,389 @@ import { ImageResolver, sluggify } from "@utils";
 import type { PerkSchema } from "./perk.ts";
 import type PerkSystem from "./perk.ts";
 
-const speciesSchema = (() => {
-  const fields = foundry.data.fields;
+interface TypeMethodFieldPartialSchema extends foundry.data.fields.DataSchema {
+  type: foundry.data.fields.StringField<{ required: true, initial: string, choices: Record<string, string> }, "level" | "item" | "move" | "gender", "level" | "item" | "move" | "gender">;
+  operand: foundry.data.fields.StringField<{ required: true, initial: string, choices: Record<string, string> }, "and" | "or", "and" | "or">;
+}
 
-  function getMoveField(hasLevel = false) {
-    const innerFields: foundry.data.fields.DataSchema = {
-      name: new SlugField({ required: true }),
-      uuid: new fields.DocumentUUIDField({ required: true, type: "Item", embedded: false }),
-      gen: new SlugField({ required: false, blank: true }),
-    };
-    if (hasLevel) innerFields.level = new fields.NumberField({ required: true, min: 0, initial: 0 });
-    return new fields.SchemaField(innerFields)
+interface LevelMethodFieldSchema extends TypeMethodFieldPartialSchema {
+  level: foundry.data.fields.NumberField<{ required: true, nullable: false, min: number, max: number, initial: number }>;
+}
+
+interface GenderMethodFieldSchema extends TypeMethodFieldPartialSchema {
+  gender: foundry.data.fields.StringField<{ required: true, initial: string, choices: Record<string, string> }, "male" | "female" | "genderless", "male" | "female" | "genderless">;
+}
+
+interface ItemMethodFieldSchema extends TypeMethodFieldPartialSchema {
+  item: foundry.data.fields.StringField<{ required: true, initial: string }>;
+  held: foundry.data.fields.BooleanField<{ required: true, initial: boolean }>;
+}
+
+interface MoveMethodFieldSchema extends TypeMethodFieldPartialSchema {
+  move: foundry.data.fields.StringField<{ required: true, initial: string }>;
+}
+
+const evolutionSchema = (() => {
+  const getTypeField = (initial: "level" | "item" | "move" | "gender"): TypeMethodFieldPartialSchema => ({
+    type: new foundry.data.fields.StringField({
+      required: true,
+      initial: initial as string,
+      choices: ["level", "item", "move", "gender"].reduce<Record<string, string>>((acc, type) => ({ ...acc, [type]: type }), {}),
+    }),
+    operand: new foundry.data.fields.StringField({
+      required: true,
+      initial: "and",
+      choices: ["and", "or"].reduce<Record<string, string>>((acc, operand) => ({ ...acc, [operand]: operand }), {}),
+    }),
+  });
+
+  // Minimum level required to evolve
+  class LevelMethodField extends foundry.abstract.DataModel<LevelMethodFieldSchema> {
+    static override defineSchema(): LevelMethodFieldSchema {
+      return {
+        ...getTypeField("level"),
+        level: new foundry.data.fields.NumberField({
+          required: true,
+          nullable: false,
+          min: 1,
+          max: 100,
+          initial: 20,
+        }),
+      };
+    }
+  }
+  // Must have a certain gender
+  class GenderMethodField extends foundry.abstract.DataModel<GenderMethodFieldSchema> {
+    static override defineSchema(): GenderMethodFieldSchema {
+      return {
+        ...getTypeField("gender"),
+        gender: new foundry.data.fields.StringField({
+          required: true,
+          choices: ["male", "female", "genderless"].reduce<Record<string, string>>((acc, gender) => ({ ...acc, [gender]: gender }), {}),
+          initial: "genderless"
+        }),
+      };
+    }
+  }
+  // Must hold/use a certain item
+  class ItemMethodField extends foundry.abstract.DataModel<ItemMethodFieldSchema> {
+    static override defineSchema(): ItemMethodFieldSchema {
+      return {
+        ...getTypeField("item"),
+        item: new foundry.data.fields.StringField({ required: true, initial: "" }),
+        // If true the item must be held, otherwise it must be used.
+        held: new foundry.data.fields.BooleanField({ required: true, initial: false }),
+      };
+    }
+  }
+  // Must know a certain move
+  class MoveMethodField extends foundry.abstract.DataModel<MoveMethodFieldSchema> {
+    static override defineSchema(): MoveMethodFieldSchema {
+      return {
+        ...getTypeField("move"),
+        move: new foundry.data.fields.StringField({ required: true, initial: "" }),
+      };
+    }
   }
 
-  return {
-    number: new fields.NumberField({
-      required: true,
-      min: 0,
-      label: "PTR2E.FIELDS.pokemonNumber.label",
-      hint: "PTR2E.FIELDS.pokemonNumber.hint",
-    }),
-    form: new SlugField({
-      required: false,
-      nullable: true,
-      initial: null,
-      label: "PTR2E.FIELDS.pokemonForm.label",
-      hint: "PTR2E.FIELDS.pokemonForm.hint",
-    }),
-    stats: new fields.SchemaField(
-      {
-        hp: new fields.NumberField({
-          required: true,
-          nullable: false,
-          initial: 0,
-          validate: (d: number) => (d as number) >= 0,
-          label: `PTR2E.Attributes.hp.Label`,
-        }),
-        atk: new fields.NumberField({
-          required: true,
-          nullable: false,
-          initial: 0,
-          validate: (d: number) => (d as number) >= 0,
-          label: `PTR2E.Attributes.atk.Label`,
-        }),
-        def: new fields.NumberField({
-          required: true,
-          nullable: false,
-          initial: 0,
-          validate: (d: number) => (d as number) >= 0,
-          label: `PTR2E.Attributes.def.Label`,
-        }),
-        spa: new fields.NumberField({
-          required: true,
-          nullable: false,
-          initial: 0,
-          validate: (d: number) => (d as number) >= 0,
-          label: `PTR2E.Attributes.spa.Label`,
-        }),
-        spd: new fields.NumberField({
-          required: true,
-          nullable: false,
-          initial: 0,
-          validate: (d: number) => (d as number) >= 0,
-          label: `PTR2E.Attributes.spd.Label`,
-        }),
-        spe: new fields.NumberField({
-          required: true,
-          nullable: false,
-          initial: 0,
-          validate: (d: number) => (d as number) >= 0,
-          label: `PTR2E.Attributes.spe.Label`,
-        }),
-      },
-      { label: "PTR2E.FIELDS.stats.label" }
-    ),
-    types: new fields.SetField(
-      new SlugField({
-        required: true,
-        choices: getTypes().reduce<Record<string, string>>((acc, type) => ({ ...acc, [type]: type }), {}),
-        initial: PTRCONSTS.Types.UNTYPED,
-        label: "PTR2E.FIELDS.pokemonType.label",
+  const getSchema = () => ({
+    name: new SlugField({ required: true }),
+    uuid: new foundry.data.fields.DocumentUUIDField({ type: "Item", required: false }),
+    methods: new foundry.data.fields.ArrayField(
+      new foundry.data.fields.TypedSchemaField({
+        level: LevelMethodField,
+        item: ItemMethodField,
+        move: MoveMethodField,
+        gender: GenderMethodField,
       }),
       {
-        initial: ["untyped"],
-        label: "PTR2E.FIELDS.pokemonType.labelPlural",
-        hint: "PTR2E.FIELDS.pokemonType.hintPlural",
         required: true,
-        validate: (d: Set<unknown> | unknown[]) =>
-          d instanceof Set ? d.size > 0 : Array.isArray(d) ? d.length > 0 : false,
-        validationError: "PTR2E.Errors.PokemonType",
+        initial: [],
       }
     ),
-    size: new fields.SchemaField({
-      category: new SlugField({
-        required: true,
-        initial: "medium",
-        blank: false,
-        label: "PTR2E.FIELDS.size.category.label",
-        hint: "PTR2E.FIELDS.size.category.hint",
+    details: new foundry.data.fields.SchemaField(
+      {
+        gender: new SlugField({
+          required: true,
+          blank: false,
+          nullable: true,
+          choices: ["male", "female"].reduce<Record<string, string>>((acc, gender) => ({ ...acc, [gender]: gender }), {}),
+        }),
+        item: new SlugField({ required: true, nullable: true }),
+        level: new foundry.data.fields.NumberField({
+          required: true,
+          nullable: true,
+          min: 0,
+          max: 100,
+        }),
+        knownMove: new SlugField({
+          required: true,
+          nullable: true,
+        }),
+      },
+      { required: true, nullable: true }
+    ),
+    perk: new foundry.data.fields.SchemaField({
+      x: new foundry.data.fields.NumberField({ required: true, initial: 15 }),
+      y: new foundry.data.fields.NumberField({ required: true, initial: 15 }),
+    })
+  });
+
+  return {
+    ...getSchema(),
+    evolutions: new foundry.data.fields.ArrayField(
+      new foundry.data.fields.SchemaField({
+        ...getSchema(),
+        evolutions: new foundry.data.fields.ArrayField(
+          new foundry.data.fields.SchemaField(
+            {
+              ...getSchema(),
+              evolutions: new foundry.data.fields.ArrayField(
+                new foundry.data.fields.SchemaField({
+                  ...getSchema(),
+                  evolutions: new foundry.data.fields.ArrayField(
+                    new foundry.data.fields.ObjectField(),
+                    { required: false }
+                  ),
+                }),
+                { required: false }
+              ),
+            },
+            { required: false }
+          )
+        ),
       }),
-      type: new SlugField({
+      { required: true, initial: [] }
+    ),
+  };
+})();
+
+export type EvolutionSchema = typeof evolutionSchema;
+
+export class EvolutionData extends foundry.abstract.DataModel<EvolutionSchema> {
+  static override defineSchema(): EvolutionSchema {
+    return evolutionSchema;
+  }
+}
+
+const speciesSchema = {
+  number: new foundry.data.fields.NumberField({
+    required: true,
+    nullable: false,
+    min: 0,
+    label: "PTR2E.FIELDS.pokemonNumber.label",
+    hint: "PTR2E.FIELDS.pokemonNumber.hint",
+  }),
+  form: new SlugField({
+    required: false,
+    nullable: true,
+    initial: null,
+    label: "PTR2E.FIELDS.pokemonForm.label",
+    hint: "PTR2E.FIELDS.pokemonForm.hint",
+  }),
+  stats: new foundry.data.fields.SchemaField(
+    {
+      hp: new foundry.data.fields.NumberField({
         required: true,
-        initial: "height",
-        blank: false,
-        label: "PTR2E.FIELDS.size.type.label",
-        hint: "PTR2E.FIELDS.size.type.hint",
-      }),
-      height: new fields.NumberField({
-        required: true,
+        nullable: false,
         initial: 0,
-        integer: false,
-        label: "PTR2E.FIELDS.size.height.label",
-        hint: "PTR2E.FIELDS.size.height.hint",
+        validate: (d: number) => (d as number) >= 0,
+        label: `PTR2E.Attributes.hp.Label`,
       }),
-      weight: new fields.NumberField({
+      atk: new foundry.data.fields.NumberField({
         required: true,
+        nullable: false,
         initial: 0,
-        integer: false,
-        label: "PTR2E.FIELDS.size.weight.label",
-        hint: "PTR2E.FIELDS.size.weight.hint",
+        validate: (d: number) => (d as number) >= 0,
+        label: `PTR2E.Attributes.atk.Label`,
       }),
-    }),
-    diet: new fields.SetField(new SlugField({ blank: false }), {
+      def: new foundry.data.fields.NumberField({
+        required: true,
+        nullable: false,
+        initial: 0,
+        validate: (d: number) => (d as number) >= 0,
+        label: `PTR2E.Attributes.def.Label`,
+      }),
+      spa: new foundry.data.fields.NumberField({
+        required: true,
+        nullable: false,
+        initial: 0,
+        validate: (d: number) => (d as number) >= 0,
+        label: `PTR2E.Attributes.spa.Label`,
+      }),
+      spd: new foundry.data.fields.NumberField({
+        required: true,
+        nullable: false,
+        initial: 0,
+        validate: (d: number) => (d as number) >= 0,
+        label: `PTR2E.Attributes.spd.Label`,
+      }),
+      spe: new foundry.data.fields.NumberField({
+        required: true,
+        nullable: false,
+        initial: 0,
+        validate: (d: number) => (d as number) >= 0,
+        label: `PTR2E.Attributes.spe.Label`,
+      }),
+    },
+    { label: "PTR2E.FIELDS.stats.label" }
+  ),
+  types: new foundry.data.fields.SetField(
+    new SlugField({
       required: true,
-      initial: [],
-      label: "PTR2E.FIELDS.diet.label",
-      hint: "PTR2E.FIELDS.diet.hint",
+      choices: getTypes().reduce<Record<string, string>>((acc, type) => ({ ...acc, [type]: type }), {}),
+      initial: PTRCONSTS.Types.UNTYPED,
+      label: "PTR2E.FIELDS.pokemonType.label",
     }),
-    abilities: new fields.SchemaField({
-      starting: new fields.ArrayField(new fields.SchemaField({
-        slug: new SlugField({ blank: false }),
-        uuid: new fields.DocumentUUIDField(),
-      }), { required: true, initial: [], label: "PTR2E.FIELDS.abilities.starting.label", },),
-      basic: new fields.ArrayField(new fields.SchemaField({
-        slug: new SlugField({ blank: false }),
-        uuid: new fields.DocumentUUIDField(),
-      }), { required: true, initial: [], label: "PTR2E.FIELDS.abilities.basic.label", },),
-      advanced: new fields.ArrayField(new fields.SchemaField({
-        slug: new SlugField({ blank: false }),
-        uuid: new fields.DocumentUUIDField(),
-      }), { required: true, initial: [], label: "PTR2E.FIELDS.abilities.advanced.label", },),
-      master: new fields.ArrayField(new fields.SchemaField({
-        slug: new SlugField({ blank: false }),
-        uuid: new fields.DocumentUUIDField(),
-      }), { required: true, initial: [], label: "PTR2E.FIELDS.abilities.master.label", },),
+    {
+      initial: ["untyped"],
+      label: "PTR2E.FIELDS.pokemonType.labelPlural",
+      hint: "PTR2E.FIELDS.pokemonType.hintPlural",
+      required: true,
+      validate: (d: Set<unknown> | unknown[]) =>
+        d instanceof Set ? d.size > 0 : Array.isArray(d) ? d.length > 0 : false,
+      validationError: "PTR2E.Errors.PokemonType",
+    }
+  ),
+  size: new foundry.data.fields.SchemaField({
+    category: new SlugField({
+      required: true,
+      initial: "medium",
+      blank: false,
+      label: "PTR2E.FIELDS.size.category.label",
+      hint: "PTR2E.FIELDS.size.category.hint",
     }),
-    movement: new fields.SchemaField({
-      primary: new fields.ArrayField(
-        new fields.SchemaField({
-          type: new SlugField({
-            required: true,
-            blank: true,
-            nullable: false,
-            initial: "",
-          }),
-          value: new fields.NumberField({ required: true, nullable: false, min: 0 }),
-        }),
-        {
-          required: true,
-          initial: [],
-          label: "PTR2E.FIELDS.movement.primary.label",
-        }
-      ),
-      secondary: new fields.ArrayField(
-        new fields.SchemaField({
-          type: new SlugField({
-            required: true,
-            blank: true,
-            nullable: false,
-            initial: "",
-          }),
-          value: new fields.NumberField({ required: true, nullable: false, min: 0 }),
-        }),
-        {
-          required: true,
-          initial: [],
-          label: "PTR2E.FIELDS.movement.secondary.label",
-        }
-      ),
+    type: new SlugField({
+      required: true,
+      initial: "height",
+      blank: false,
+      label: "PTR2E.FIELDS.size.type.label",
+      hint: "PTR2E.FIELDS.size.type.hint",
     }),
-    skills: new CollectionField(new fields.EmbeddedDataField(SkillPTR2e), "slug", {
-      initial: getInitialSkillList,
-    }),
-    moves: new fields.SchemaField({
-      levelUp: new fields.ArrayField(getMoveField(true), { required: true, initial: [] }),
-      tutor: new fields.ArrayField(getMoveField(false), { required: true, initial: [] }),
-    }),
-    captureRate: new fields.NumberField({
+    height: new foundry.data.fields.NumberField({
       required: true,
       initial: 0,
-      min: 0,
-      max: 255,
-      label: "PTR2E.FIELDS.captureRate.label",
-      hint: "PTR2E.FIELDS.captureRate.hint",
+      integer: false,
+      label: "PTR2E.FIELDS.size.height.label",
+      hint: "PTR2E.FIELDS.size.height.hint",
     }),
-    eggGroups: new fields.SetField(new SlugField({ blank: false }), {
+    weight: new foundry.data.fields.NumberField({
       required: true,
-      initial: [],
-      label: "PTR2E.FIELDS.eggGroups.label",
-      hint: "PTR2E.FIELDS.eggGroups.hint",
+      initial: 0,
+      integer: false,
+      label: "PTR2E.FIELDS.size.weight.label",
+      hint: "PTR2E.FIELDS.size.weight.hint",
     }),
-    genderRatio: new fields.NumberField({
-      required: true,
-      initial: -1,
-      min: -1,
-      max: 8,
-      label: "PTR2E.FIELDS.genderRatio.label",
-      hint: "PTR2E.FIELDS.genderRatio.hint",
-    }),
-    habitats: new fields.SetField(new SlugField({ blank: false }), {
-      required: true,
-      initial: [],
-      label: "PTR2E.FIELDS.habitats.label",
-      hint: "PTR2E.FIELDS.habitats.hint",
-    }),
-    evolutions: new fields.EmbeddedDataField(EvolutionData, {
-      required: true,
-      nullable: true,
-      initial: null,
-    })
-  };
-})()
+  }),
+  diet: new foundry.data.fields.SetField(new SlugField({ blank: false }), {
+    required: true,
+    initial: [],
+    label: "PTR2E.FIELDS.diet.label",
+    hint: "PTR2E.FIELDS.diet.hint",
+  }),
+  abilities: new foundry.data.fields.SchemaField({
+    starting: new foundry.data.fields.ArrayField(new foundry.data.fields.SchemaField({
+      slug: new SlugField({ blank: false }),
+      uuid: new foundry.data.fields.DocumentUUIDField(),
+    }), { required: true, initial: [], label: "PTR2E.FIELDS.abilities.starting.label", },),
+    basic: new foundry.data.fields.ArrayField(new foundry.data.fields.SchemaField({
+      slug: new SlugField({ blank: false }),
+      uuid: new foundry.data.fields.DocumentUUIDField(),
+    }), { required: true, initial: [], label: "PTR2E.FIELDS.abilities.basic.label", },),
+    advanced: new foundry.data.fields.ArrayField(new foundry.data.fields.SchemaField({
+      slug: new SlugField({ blank: false }),
+      uuid: new foundry.data.fields.DocumentUUIDField(),
+    }), { required: true, initial: [], label: "PTR2E.FIELDS.abilities.advanced.label", },),
+    master: new foundry.data.fields.ArrayField(new foundry.data.fields.SchemaField({
+      slug: new SlugField({ blank: false }),
+      uuid: new foundry.data.fields.DocumentUUIDField(),
+    }), { required: true, initial: [], label: "PTR2E.FIELDS.abilities.master.label", },),
+  }),
+  movement: new foundry.data.fields.SchemaField({
+    primary: new foundry.data.fields.ArrayField(
+      new foundry.data.fields.SchemaField({
+        type: new SlugField({
+          required: true,
+          blank: true,
+          nullable: false,
+          initial: "",
+        }),
+        value: new foundry.data.fields.NumberField({ required: true, nullable: false, min: 0 }),
+      }),
+      {
+        required: true,
+        initial: [],
+        label: "PTR2E.FIELDS.movement.primary.label",
+      }
+    ),
+    secondary: new foundry.data.fields.ArrayField(
+      new foundry.data.fields.SchemaField({
+        type: new SlugField({
+          required: true,
+          blank: true,
+          nullable: false,
+          initial: "",
+        }),
+        value: new foundry.data.fields.NumberField({ required: true, nullable: false, min: 0 }),
+      }),
+      {
+        required: true,
+        initial: [],
+        label: "PTR2E.FIELDS.movement.secondary.label",
+      }
+    ),
+  }),
+  skills: new CollectionField(new foundry.data.fields.EmbeddedDataField(SkillPTR2e), "slug", {
+    initial: getInitialSkillList,
+  }),
+  moves: new foundry.data.fields.SchemaField({
+    levelUp: new foundry.data.fields.ArrayField(new foundry.data.fields.SchemaField({
+      name: new SlugField({ required: true }),
+      uuid: new foundry.data.fields.DocumentUUIDField({ required: true, nullable: false, type: "Item", embedded: false }),
+      gen: new SlugField({ required: false, blank: true }),
+      level: new foundry.data.fields.NumberField({ required: true, nullable: false, min: 0, initial: 0 }),
+    }), { required: true, initial: [] }),
+    tutor: new foundry.data.fields.ArrayField(new foundry.data.fields.SchemaField({
+      name: new SlugField({ required: true }),
+      uuid: new foundry.data.fields.DocumentUUIDField({ required: true, nullable: false, type: "Item", embedded: false }),
+      gen: new SlugField({ required: false, blank: true }),
+    }), { required: true, initial: [] }),
+  }),
+  captureRate: new foundry.data.fields.NumberField({
+    required: true,
+    initial: 0,
+    min: 0,
+    max: 255,
+    label: "PTR2E.FIELDS.captureRate.label",
+    hint: "PTR2E.FIELDS.captureRate.hint",
+  }),
+  eggGroups: new foundry.data.fields.SetField(new SlugField({ blank: false }), {
+    required: true,
+    initial: [],
+    label: "PTR2E.FIELDS.eggGroups.label",
+    hint: "PTR2E.FIELDS.eggGroups.hint",
+  }),
+  genderRatio: new foundry.data.fields.NumberField({
+    required: true,
+    nullable: false,
+    initial: -1,
+    min: -1,
+    max: 8,
+    label: "PTR2E.FIELDS.genderRatio.label",
+    hint: "PTR2E.FIELDS.genderRatio.hint",
+  }),
+  habitats: new foundry.data.fields.SetField(new SlugField({ blank: false }), {
+    required: true,
+    initial: [],
+    label: "PTR2E.FIELDS.habitats.label",
+    hint: "PTR2E.FIELDS.habitats.hint",
+  }),
+  evolutions: new foundry.data.fields.EmbeddedDataField(EvolutionData, {
+    required: true,
+    nullable: true,
+    initial: null,
+  })
+}
 
 export type SpeciesSchema = typeof speciesSchema & TraitsSchema & MigrationSchema & DescriptionSchema & SlugSchema;
 
@@ -243,9 +404,9 @@ export type SpeciesSchema = typeof speciesSchema & TraitsSchema & MigrationSchem
  * @category Item Data Models
  */
 export default class SpeciesSystem extends HasEmbed(
-  HasMigrations(HasTraits(HasDescription(HasSlug(foundry.abstract.TypeDataModel<SpeciesSchema, Item.ConfiguredInstance>)))),
+  HasMigrations(HasTraits(HasDescription(HasSlug(foundry.abstract.TypeDataModel)))),
   "species"
-) {
+)<SpeciesSchema, Item.ConfiguredInstance> {
   /**
    * @internal
    */
@@ -469,7 +630,7 @@ export default class SpeciesSystem extends HasEmbed(
   }> {
 
     const img = await (async (): Promise<string> => {
-      const species = await fromUuid<Item.ConfiguredInstance>(evolution.uuid as ItemUUID) as SpeciesPTR2e | null;
+      const species = await fromUuid<Item.ConfiguredInstance>(evolution.uuid as ItemUUID) as (Item.ConfiguredInstance & {system: SpeciesSystem}) | null;
       if (!species) return this.parent?.img ?? `systems/ptr2e/img/icons/species_icon.webp`;
 
       const config = game.ptr.data.artMap.get(species.slug);
@@ -512,7 +673,7 @@ export default class SpeciesSystem extends HasEmbed(
     }
   }
 
-  async getEvolutionPerks(isShiny = this.shiny): Promise<PerkPTR2e[]> {
+  async getEvolutionPerks(isShiny = this.shiny): Promise<Item.ConfiguredInstance> {
     if (!this.evolutions) return [];
     async function* recursiveEvolution(data: EvolutionData, depth = 0): AsyncGenerator<[EvolutionData, number]> {
       yield [data, depth];
@@ -591,7 +752,7 @@ export default class SpeciesSystem extends HasEmbed(
     }
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    return perks.toReversed().map(data => new CONFIG.Item.documentClass(data as any) as PerkPTR2e);
+    return perks.toReversed().map(data => new CONFIG.Item.documentClass(data as any));
   }
 
   static evolutionMethodsToPredicate(methods: EvolutionData["methods"]): Predicate {
@@ -674,179 +835,5 @@ export default interface SpeciesSystem {
     weight: number;
     sizeClass: number;
     weightClass: number;
-  }
-  moves: {
-    levelUp: { name: string; uuid: string; level: number }[];
-    tutor: { name: string; uuid: string }[];
-  }
-}
-
-interface TypeMethodFieldPartialSchema extends foundry.data.fields.DataSchema {
-  type: foundry.data.fields.StringField<{ required: true, initial: string, choices: Record<string, string> }, "level" | "item" | "move" | "gender", "level" | "item" | "move" | "gender">;
-  operand: foundry.data.fields.StringField<{ required: true, initial: string, choices: Record<string, string> }, "and" | "or", "and" | "or">;
-}
-
-interface LevelMethodFieldSchema extends TypeMethodFieldPartialSchema {
-  level: foundry.data.fields.NumberField<{ required: true, min: number, max: number, initial: number }>;
-}
-
-interface GenderMethodFieldSchema extends TypeMethodFieldPartialSchema {
-  gender: foundry.data.fields.StringField<{ required: true, initial: string, choices: Record<string, string> }, "male" | "female" | "genderless", "male" | "female" | "genderless">;
-}
-
-interface ItemMethodFieldSchema extends TypeMethodFieldPartialSchema {
-  item: foundry.data.fields.StringField<{ required: true, initial: string }>;
-  held: foundry.data.fields.BooleanField<{ required: true, initial: boolean }>;
-}
-
-interface MoveMethodFieldSchema extends TypeMethodFieldPartialSchema {
-  move: foundry.data.fields.StringField<{ required: true, initial: string }>;
-}
-
-const evolutionSchema = (() => {
-  const fields = foundry.data.fields;
-
-  const getTypeField = (initial: "level" | "item" | "move" | "gender"): TypeMethodFieldPartialSchema => ({
-    type: new fields.StringField({
-      required: true,
-      initial: initial as string,
-      choices: ["level", "item", "move", "gender"].reduce<Record<string, string>>((acc, type) => ({ ...acc, [type]: type }), {}),
-    }),
-    operand: new fields.StringField({
-      required: true,
-      initial: "and",
-      choices: ["and", "or"].reduce<Record<string, string>>((acc, operand) => ({ ...acc, [operand]: operand }), {}),
-    }),
-  });
-
-  // Minimum level required to evolve
-  class LevelMethodField extends foundry.abstract.DataModel<LevelMethodFieldSchema> {
-    static override defineSchema(): LevelMethodFieldSchema {
-      const fields = foundry.data.fields;
-      return {
-        ...getTypeField("level"),
-        level: new fields.NumberField({
-          required: true,
-          min: 1,
-          max: 100,
-          initial: 20,
-        }),
-      };
-    }
-  }
-  // Must have a certain gender
-  class GenderMethodField extends foundry.abstract.DataModel<GenderMethodFieldSchema> {
-    static override defineSchema(): GenderMethodFieldSchema {
-      const fields = foundry.data.fields;
-      return {
-        ...getTypeField("gender"),
-        gender: new fields.StringField({
-          required: true,
-          choices: ["male", "female", "genderless"].reduce<Record<string, string>>((acc, gender) => ({ ...acc, [gender]: gender }), {}),
-          initial: "genderless"
-        }),
-      };
-    }
-  }
-  // Must hold/use a certain item
-  class ItemMethodField extends foundry.abstract.DataModel<ItemMethodFieldSchema> {
-    static override defineSchema(): ItemMethodFieldSchema {
-      const fields = foundry.data.fields;
-      return {
-        ...getTypeField("item"),
-        item: new fields.StringField({ required: true, initial: "" }),
-        // If true the item must be held, otherwise it must be used.
-        held: new fields.BooleanField({ required: true, initial: false }),
-      };
-    }
-  }
-  // Must know a certain move
-  class MoveMethodField extends foundry.abstract.DataModel<MoveMethodFieldSchema> {
-    static override defineSchema(): MoveMethodFieldSchema {
-      const fields = foundry.data.fields;
-      return {
-        ...getTypeField("move"),
-        move: new fields.StringField({ required: true, initial: "" }),
-      };
-    }
-  }
-
-  const getSchema = () => ({
-    name: new SlugField({ required: true }),
-    uuid: new fields.DocumentUUIDField({ type: "Item", required: false }),
-    methods: new fields.ArrayField(
-      new fields.TypedSchemaField({
-        level: LevelMethodField,
-        item: ItemMethodField,
-        move: MoveMethodField,
-        gender: GenderMethodField,
-      }),
-      {
-        required: true,
-        initial: [],
-      }
-    ),
-    details: new fields.SchemaField(
-      {
-        gender: new SlugField({
-          required: true,
-          blank: false,
-          nullable: true,
-          choices: ["male", "female"].reduce<Record<string, string>>((acc, gender) => ({ ...acc, [gender]: gender }), {}),
-        }),
-        item: new SlugField({ required: true, nullable: true }),
-        level: new fields.NumberField({
-          required: true,
-          nullable: true,
-          min: 0,
-          max: 100,
-        }),
-        knownMove: new SlugField({
-          required: true,
-          nullable: true,
-        }),
-      },
-      { required: true, nullable: true }
-    ),
-    perk: new fields.SchemaField({
-      x: new fields.NumberField({ required: true, initial: 15 }),
-      y: new fields.NumberField({ required: true, initial: 15 }),
-    })
-  });
-
-  return {
-    ...getSchema(),
-    evolutions: new fields.ArrayField(
-      new fields.SchemaField({
-        ...getSchema(),
-        evolutions: new fields.ArrayField(
-          new fields.SchemaField(
-            {
-              ...getSchema(),
-              evolutions: new fields.ArrayField(
-                new fields.SchemaField({
-                  ...getSchema(),
-                  evolutions: new fields.ArrayField(
-                    new fields.ObjectField(),
-                    { required: false }
-                  ),
-                }),
-                { required: false }
-              ),
-            },
-            { required: false }
-          )
-        ),
-      }),
-      { required: true, initial: [] }
-    ),
-  };
-})();
-
-export type EvolutionSchema = typeof evolutionSchema;
-
-export class EvolutionData extends foundry.abstract.DataModel<EvolutionSchema> {
-  static override defineSchema(): EvolutionSchema {
-    return evolutionSchema;
   }
 }

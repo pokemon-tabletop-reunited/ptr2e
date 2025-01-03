@@ -1,5 +1,5 @@
 // import type { ActorPTR2e } from "@actor";
-// import type { ItemPTR2e, ItemSystemPTR } from "@item";
+// import type { ItemPTR2e, PTR.Item.ItemSystemPTR } from "@item";
 // import { MockItem } from "./item.ts";
 // import { MockCollection } from "./collection.ts";
 
@@ -8,7 +8,7 @@
 // export class MockActor {
 //     _source: ActorSourcePTR2e;
 
-//     readonly items = new MockCollection<ItemPTR2e<ItemSystemPTR, ActorPTR2e>>();
+//     readonly items = new MockCollection<ItemPTR2e<PTR.Item.ItemSystemPTR, ActorPTR2e>>();
 
 //     constructor(data: ActorSourcePTR2e, public options: DocumentConstructionContext<null> = {}) {
 //         this._source = foundry.utils.duplicate(data);
@@ -24,7 +24,7 @@
 //             }
 //         }
 
-//         for (const source of this._source.items as unknown as SourceFromSchema<ItemSchema<string, ItemSystemPTR>>[]) {
+//         for (const source of this._source.items as unknown as SourceFromSchema<ItemSchema<string, PTR.Item.ItemSystemPTR>>[]) {
 //             const item = this.items.get(source._id ?? "");
 //             if (item) {
 //                 (item as { _source: object })._source = foundry.utils.duplicate(source);

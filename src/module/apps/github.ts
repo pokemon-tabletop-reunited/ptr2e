@@ -1,7 +1,4 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import type { ActionPTR2e } from "@data";
-import { ItemPTR2e } from "@item";
-import type { DocumentSheetV2 } from "@item/sheets/document.ts";
 import { isObject } from "@utils";
 import { ApplicationV2Expanded } from "./appv2-expanded.ts";
 import type { AnyObject, DeepPartial } from "fvtt-types/utils";
@@ -66,7 +63,7 @@ class GithubSheet extends foundry.applications.api.HandlebarsApplicationMixin(Ap
 
   ongoing = false;
 
-  override async _prepareContext(options: DeepPartial<foundry.applications.api.HandlebarsApplicationMixin.HandlebarsRenderOptions>) {
+  override async _prepareContext(options: DeepPartial<foundry.applications.api.HandlebarsApplicationMixin.HandlebarsRenderOptions> & { isFirstRender: boolean }) {
     const context = await super._prepareContext(options);
 
     const status = await GithubManager.getCommitStatus();
@@ -114,7 +111,7 @@ class GithubManager {
     return existing;
   }
 
-  static getDiffableItem<TDocument extends ItemPTR2e>(
+  static getDiffableItem<TDocument extends Item.ConfiguredInstance>(
     item: TDocument["_source"],
     packItem: TDocument["_source"]
   ) {
@@ -171,14 +168,14 @@ class GithubManager {
     return diff;
   }
 
-  static prepareUpdateData<TDocument extends ItemPTR2e>(
+  static prepareUpdateData<TDocument extends Item.ConfiguredInstance>(
     diff: Record<string, any>,
     packItem: TDocument["_source"]
   ) {
     const data: Record<string, any> = foundry.utils.mergeObject(packItem, diff, { inplace: false });
     if ('actions' in packItem.system && diff.system?.actions !== undefined) {
-      const actions = data.system.actions = packItem.system.actions as unknown as ActionPTR2e[];
-      for (const [key, action] of Object.entries<ActionPTR2e>(diff.system.actions)) {
+      const actions = data.system.actions = packItem.system.actions as unknown as PTR.Models.Action.AnyInstance[];
+      for (const [key, action] of Object.entries(diff.system.actions)) {
         const index = parseInt(key);
         if (actions[index]) {
           //@ts-expect-error - Holy shit that's a mess
@@ -247,7 +244,7 @@ class GithubManager {
 
     // Check if valid document
     try {
-      const tempItem = new ItemPTR2e(foundry.utils.deepClone(data), { keepId: true });
+      const tempItem = new CONFIG.Item.documentClass(foundry.utils.deepClone(data), { keepId: true });
       tempItem.validate();
     } catch (error) {
       ui.notifications.error(
@@ -263,11 +260,12 @@ class GithubManager {
     return data;
   }
 
-  static async commitItemToGithubSheet<TDocument extends ItemPTR2e>(this: DocumentSheetV2<TDocument>) {
+  //@ts-expect-error - FIXME: Update this to use the correct type.
+  static async commitItemToGithubSheet<TDocument extends Item.ConfiguredInstance>(this: DocumentSheetV2<TDocument>) {
     return GithubManager.commitItemToGithub(this.document);
   }
 
-  static async commitItemToGithub<TDocument extends ItemPTR2e>(
+  static async commitItemToGithub<TDocument extends Item.ConfiguredInstance>(
     document: TDocument,
   ) {
     if (!GithubManager.VALID_DOCUMENT_TYPES[document.type]) {
@@ -286,7 +284,7 @@ class GithubManager {
     const existing = await GithubManager.getExistingItem(document, pack);
     if (!existing) {
       try {
-        return GithubManager.saveBlobToGithub(document.toObject() as ItemPTR2e["_source"]);
+        return GithubManager.saveBlobToGithub(document.toObject() as PTR.Item.Source);
       }
       catch {
         ui.notifications.error("An unexpected error occured.");
@@ -316,7 +314,7 @@ class GithubManager {
       diff["old_name"] = existingData.name;
     }
     try {
-      await GithubManager.saveBlobToGithub(realDiff as ItemPTR2e["_source"], diff);
+      await GithubManager.saveBlobToGithub(realDiff as PTR.Item.Source, diff);
     }
     catch {
       ui.notifications.error("An unexpected error occured.");
@@ -367,7 +365,7 @@ class GithubManager {
     return null;
   }
 
-  static async saveBlobToGithub<TDocument extends ItemPTR2e>(
+  static async saveBlobToGithub<TDocument extends Item.ConfiguredInstance>(
     realDiff: TDocument["_source"],
     diff?: Record<string, any>
   ) {

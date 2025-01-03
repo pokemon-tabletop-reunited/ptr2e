@@ -4,13 +4,13 @@ import type { ItemPTR2e } from "@item";
 import type { CheckDC } from "@system/rolls/degree-of-success.ts";
 import type { TokenDocumentPTR2e } from "@module/canvas/token/document.ts";
 import type { ModifierPTR2e } from "@module/effects/modifiers.ts";
-import type { ActionPTR2e, AttackPTR2e, Trait } from "@data";
+import type { Trait } from "@data";
 import type { RollNote } from "./notes.ts";
 import type { AttackCheck } from "./statistics/attack.ts";
 
 interface CheckContextParams<
   TStatistic extends BaseStatisticCheck<unknown, unknown> = StatisticCheck,
-  TItem extends ItemPTR2e | null = ItemPTR2e | null,
+  TItem extends Item.ConfiguredInstance | null = Item.ConfiguredInstance | null,
 > extends RollContextParams<TStatistic, TItem> {
 
 }
@@ -26,9 +26,9 @@ interface RollContextParams<
   /** The item being used in the attack or damage roll */
   item?: TItem;
   /** The action being used for this check */
-  action?: ActionPTR2e;
+  action?: PTR.Models.Action.Instance;
   /** The attack being used in the attack or damage roll */
-  attack?: AttackPTR2e;
+  attack?: PTR.Models.Action.Models.Attack.Instance;
   /** Domains from which to draw roll options */
   domains: string[];
   /** Initial roll options for the strike */
@@ -77,7 +77,7 @@ interface AttackSelf<
   token: TokenDocumentPTR2e | null;
   statistic: TStatistic,
   item: TItem,
-  attack: AttackPTR2e,
+  attack: PTR.Models.Action.Models.Attack.Instance,
   modifiers: ModifierPTR2e[]
 }
 

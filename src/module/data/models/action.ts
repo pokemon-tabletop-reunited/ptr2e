@@ -1,5 +1,4 @@
 import { ActorPTR2e } from "@actor";
-import type { ItemWithActions } from "@item";
 import { ItemPTR2e } from "@item";
 import type { ActionType } from "@data";
 import { PTRCONSTS, Trait } from "@data";
@@ -98,7 +97,7 @@ const actionSchema = {
 
 export type ActionSchema = typeof actionSchema & { type: foundry.data.fields.StringField<{ required: true; blank: false; initial: ActionType; choices: Record<string, string>; label: string; hint: string; }, ActionType, ActionType, ActionType> };
 
-class ActionPTR2e<Schema extends ActionSchema = ActionSchema> extends foundry.abstract.DataModel<Schema, ItemWithActions> {
+class ActionPTR2e<Schema extends ActionSchema = ActionSchema> extends foundry.abstract.DataModel<Schema, PTR.Item.ItemSystemsWithActions> {
   static TYPE: ActionType = "generic" as const;
 
   static readonly baseImg = "icons/svg/explosion.svg";
@@ -129,7 +128,7 @@ class ActionPTR2e<Schema extends ActionSchema = ActionSchema> extends foundry.ab
     return null;
   }
 
-  get item(): ItemWithActions {
+  get item(): PTR.Item.ItemWithActions {
     if (this.parent instanceof ItemPTR2e) return this.parent;
     //@ts-expect-error - FIXME: This is a temporary item, this might be due to this being a delayed action
     if (this.parent?.parent instanceof ItemPTR2e) return this.parent.parent;
@@ -208,7 +207,7 @@ class ActionPTR2e<Schema extends ActionSchema = ActionSchema> extends foundry.ab
 
   _onClickDocumentLink() {
     return void new ActionEditor(
-      this.item as ItemWithActions,
+      this.item,
       this.slug
     ).render(true);
   }
@@ -250,13 +249,13 @@ class ActionPTR2e<Schema extends ActionSchema = ActionSchema> extends foundry.ab
   /**
    * Apply an update to the Action through it's parent Item.
    */
-  async update(data: foundry.data.fields.SchemaField.InnerAssignmentType<ActionSchema>): Promise<ItemWithActions> {
+  async update(data: foundry.data.fields.SchemaField.InnerAssignmentType<ActionSchema>): Promise<PTR.Item.ItemWithActions> {
     const currentActions = this.prepareUpdate(data);
-    return this.item.update({ "system.actions": currentActions }) as Promise<ItemWithActions>;
+    return this.item.update({ "system.actions": currentActions }) as Promise<PTR.Item.ItemWithActions>;
   }
 
   prepareUpdate(data: foundry.data.fields.SchemaField.InnerAssignmentType<ActionSchema>) {
-    const currentActions = this.item.system.toObject().actions;
+    const currentActions = this.item.system.toObject().actions as PTR.Models.Action.Source[];
     const actionIndex = currentActions.findIndex((a) => a.slug === this.slug);
     foundry.utils.mergeObject(currentActions[actionIndex], data);
 
@@ -302,3 +301,4 @@ interface ActionPTR2e {
 // }
 
 export default ActionPTR2e;
+export { type ActionPTR2e }

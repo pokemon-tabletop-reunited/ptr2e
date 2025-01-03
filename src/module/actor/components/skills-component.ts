@@ -129,7 +129,7 @@ class SkillsComponent extends ActorComponent {
 
         skills[index].favourite = !skills[index].favourite;
         if (skills[index].favourite && skills[index].hidden) skills[index].hidden = false;
-        await actor.update({ "system.skills": skills });
+        await actor.update({ "system": { "skills": skills } });
         refreshApps();
       });
     }
@@ -147,7 +147,7 @@ class SkillsComponent extends ActorComponent {
 
         skills[index].hidden = !skills[index].hidden;
         if (skills[index].hidden && skills[index].favourite) skills[index].favourite = false;
-        await actor.update({ "system.skills": skills });
+        await actor.update({ "system": { "skills": skills } });
         refreshApps();
       });
     }
@@ -179,9 +179,9 @@ class FavouriteSkillsComponent extends SkillsComponent {
   override renderFrame(): void { }
 }
 
-type SkillCategory = { none: { label: null; skills: Skill[] } } & Record<
+type SkillCategory = { none: { label: null; skills: PTR.Models.Skill.Source[] } } & Record<
   string,
-  { label: string | null; skills: Skill[] }
+  { label: string | null; skills: PTR.Models.Skill.Source[] }
 >;
 
 

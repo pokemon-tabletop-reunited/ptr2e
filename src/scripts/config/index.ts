@@ -8,7 +8,7 @@ import { SquareGridPTR2e } from "@module/canvas/grid.ts";
 import { TemplateLayerPTR2e } from "@module/canvas/layer/template.ts";
 import { MeasuredTemplatePTR2e } from "@module/canvas/measured-template.ts";
 import { ScenePTR2e } from "@module/canvas/scene.ts";
-import { BasicChangeSystem, ChangeModel } from "@data";
+import { ActionPTR2e, AttackPTR2e, BasicChangeSystem, ChangeModel, PassivePTR2e } from "@data";
 import { ActiveEffectPTR2e } from "@module/effects/index.ts";
 import { AttackMessageSystem, ChatMessagePTR2e, DamageAppliedMessageSystem, ItemMessageSystem, SkillMessageSystem, CaptureMessageSystem } from "@module/chat/index.ts";
 import Traits from "static/traits.json" assert { type: "json" };
@@ -194,5 +194,12 @@ export const PTRCONFIG = {
   } as Record<Size, string>,
   utils: {
     predicate: Predicate
+  },
+  models: {
+    actions: {
+      base: ActionPTR2e,
+      attack: AttackPTR2e,
+      passive: PassivePTR2e,
+    }
   }
 }

@@ -1,4 +1,3 @@
-import AttackPTR2e from "@module/data/models/attack.ts";
 import type { AccuracySuccessCategory } from "@data";
 import { PokeballActionPTR2e, PTRCONSTS, SummonAttackPTR2e } from "@data";
 import { SlugField } from "@module/data/fields/slug-field.ts";
@@ -10,7 +9,7 @@ import { PredicateField } from "@system/predication/schema-data-fields.ts";
 import type { UserVisibility } from "@scripts/ui/user-visibility.ts";
 import type { ModifierPTR2e } from "@module/effects/modifiers.ts";
 import { RollNote } from "@system/notes.ts";
-import type { ConsumablePTR2e, ItemWithActions } from "@item";
+import type { ConsumablePTR2e } from "@item";
 import type ConsumableSystem from "@item/data/consumable.ts";
 import type { CheckRoll } from "@system/rolls/check-roll.ts";
 import type { AnyObject } from "fvtt-types/utils";
@@ -29,7 +28,7 @@ function validateRoll(rollJSON: unknown) {
 const attackMessageSchema = {
   origin: new foundry.data.fields.JSONField<{ required: true }, AnyObject, Actor.ConfiguredInstance>({ required: true }),
   originItem: new foundry.data.fields.JSONField<{ required: true, nullable: true, initial: null }, AnyObject, Item.ConfiguredInstance>({ required: true, nullable: true, initial: null }),
-  attack: new foundry.data.fields.JSONField<{ required: false }, AnyObject, AttackPTR2e>({ required: false }),
+  attack: new foundry.data.fields.JSONField<{ required: false }, AnyObject, PTR.Models.Action.Models.Attack.Instance>({ required: false }),
   attackSlug: new SlugField(),
   results: new foundry.data.fields.ArrayField(
     new foundry.data.fields.SchemaField({
@@ -207,7 +206,7 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel<Attack
     const fromItemData = (itemData: string | null) => {
       if (!itemData) return null;
       try {
-        return CONFIG.Item.documentClass.fromJSON(itemData) as ItemWithActions;
+        return CONFIG.Item.documentClass.fromJSON(itemData) as PTR.Item.ItemWithActions;
       } catch (error: unknown) {
         Hooks.onError("AttackMessageSystem#prepareBaseData", error as Error, {
           log: "error",
@@ -289,8 +288,8 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel<Attack
     this.origin = fromActorData(this._source.origin)!;
     this.originItem = fromItemData(this._source.originItem)!;
 
-    this.attack = ((): AttackPTR2e => {
-      if (!this._source.attack) return this.origin.actions.attack.get(this._source.attackSlug) as AttackPTR2e;
+    this.attack = ((): PTR.Models.Action.Models.Attack.Instance => {
+      if (!this._source.attack) return this.origin.actions.attack.get(this._source.attackSlug) as PTR.Models.Action.Models.Attack.Instance;
       const jsonData = (() => {
         try {
           return JSON.parse(this._source.attack);
@@ -300,11 +299,11 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel<Attack
           });
         }
       })();
-      if (!jsonData) return {} as AttackPTR2e;
+      if (!jsonData) return {} as PTR.Models.Action.Models.Attack.Instance;
 
       try {
-        const attack = (jsonData.type === 'summon' ? SummonAttackPTR2e.fromJSON(this._source.attack) : AttackPTR2e.fromJSON(this._source.attack)) as AttackPTR2e;
-        const sourceItem = (this.originItem ?? this.origin.actions.attack.get(this._source.attackSlug)?.item) as ItemWithActions;
+        const attack = (jsonData.type === 'summon' ? SummonAttackPTR2e.fromJSON(this._source.attack) : CONFIG.PTR.models.actions.attack.fromJSON(this._source.attack)) as PTR.Models.Action.Models.Attack.Instance;
+        const sourceItem = (this.originItem ?? this.origin.actions.attack.get(this._source.attackSlug)?.item) as PTR.Item.ItemWithActions;
         const clonedAttack = attack && sourceItem ? attack.clone({}, { parent: sourceItem }) : attack;
         clonedAttack.prepareDerivedData();
         return clonedAttack;
@@ -313,7 +312,7 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel<Attack
           log: "error",
         });
       }
-      return {} as AttackPTR2e;
+      return {} as PTR.Models.Action.Models.Attack.Instance;
     })() ?? {};
 
     if (!this.attackSlug)
@@ -755,14 +754,14 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel<Attack
 }
 
 interface AttackMessageSystem {
-  attack: AttackPTR2e;
+  attack: PTR.Models.Action.Models.Attack.Instance;
   context: Maybe<AttackMessageRenderContext>;
 }
 
 interface AttackMessageRenderContext {
   origin: Actor.ConfiguredInstance;
-  originItem?: ItemWithActions;
-  attack: AttackPTR2e;
+  originItem?: PTR.Item.ItemWithActions;
+  attack: PTR.Models.Action.Models.Attack.Instance;
   hasDamage: boolean;
   hasEffect: boolean;
   results: Map<ActorUUID, AttackMessageRenderContextData>;

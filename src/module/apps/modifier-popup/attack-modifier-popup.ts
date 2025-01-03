@@ -4,7 +4,6 @@ import type { CheckRollContext } from "@system/rolls/data.ts";
 import { ModifierPopup } from "./modifier-popup.ts";
 import type { CheckContext } from "@system/data.ts";
 import { htmlQueryAll, htmlQuery, tupleHasValue } from "@utils";
-import type { AttackPTR2e } from "@data";
 import type { DeepPartial } from "fvtt-types/utils";
 
 export class AttackModifierPopup extends ModifierPopup {
@@ -225,7 +224,7 @@ export class AttackModifierPopup extends ModifierPopup {
 
       const variants = Array.from(variantMap.values()).sort((a, b) => a.label.localeCompare(b.label));
       if (!original) {
-        const original = this.context.actor.actions.attack.get(variants[0].slug)!.original as AttackPTR2e;
+        const original = this.context.actor.actions.attack.get(variants[0].slug)!.original as PTR.Models.Action.Models.Attack.Instance;
         if (!original) return null;
         variants.unshift({
           slug: original.slug,

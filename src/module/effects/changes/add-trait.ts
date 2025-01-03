@@ -2,7 +2,7 @@ import type { ActorPTR2e } from "@actor";
 import { ChangeModel } from "@data";
 import { sluggify } from "@utils";
 
-export default class AddTraitChangeSystem extends ChangeModel {
+class AddTraitChangeSystem extends ChangeModel {
   static override TYPE = "add-trait";
 
   get trait() {
@@ -21,6 +21,9 @@ export default class AddTraitChangeSystem extends ChangeModel {
   }
 }
 
-export default interface AddTraitChangeSystem  {
+interface AddTraitChangeSystem  {
   value: string;
 }
+
+export default AddTraitChangeSystem;
+export type { AddTraitChangeSystem };

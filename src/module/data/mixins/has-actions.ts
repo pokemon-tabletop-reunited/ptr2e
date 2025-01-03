@@ -1,9 +1,8 @@
 import type { TemplateConstructor } from './data-template.ts';
-import { ActionModelTypes } from '../models/base.ts';
-import { ActorPTR2e } from '@actor';
-import { ItemPTR2e, type AbilityPTR2e } from '@item';
+import { ActionModelTypes, type _ActionModelTypes } from '../models/base.ts';
 import { CollectionField } from '../fields/collection-field.ts';
 import type { AnyDocument } from 'node_modules/fvtt-types/src/foundry/client/data/abstract/client-document.d.mts';
+import type { EmptyObject } from 'fvtt-types/utils';
 
 const actionsSchema = {
   /**
@@ -13,9 +12,14 @@ const actionsSchema = {
    * @see {@link ActionPTR2e}
    */
   actions: new CollectionField<
-    foundry.data.fields.TypedSchemaField<
-      
-    >
+    foundry.data.fields.TypedSchemaField<_ActionModelTypes>,
+    EmptyObject,
+    PTR.Models.Action.Source,
+    PTR.Models.Action.Instance,
+    PTR.Models.Action.Source[],
+    Collection<PTR.Models.Action.Instance>,
+    Maybe<PTR.Models.Action.Source>,
+    Maybe<PTR.Models.Action.Source[]>
   >(
     new foundry.data.fields.TypedSchemaField(ActionModelTypes()),
     'slug'
@@ -59,18 +63,18 @@ export default function HasActions<BaseClass extends TemplateConstructor>(baseCl
       }
     }
 
-    private _isValidParent(parent: AnyDocument | null): parent is ActorPTR2e | ItemPTR2e {
+    private _isValidParent(parent: AnyDocument | null): parent is Actor.ConfiguredInstance | Item.ConfiguredInstance {
       return (
-        parent instanceof ActorPTR2e ||
-        parent instanceof ItemPTR2e
+        parent instanceof CONFIG.Actor.documentClass ||
+        parent instanceof CONFIG.Item.documentClass
       );
     }
 
-    private _isAbilityParent(parent: ActorPTR2e | ItemPTR2e): parent is AbilityPTR2e {
-      return parent instanceof ItemPTR2e && parent.type === "ability";
+    private _isAbilityParent(parent: Actor.ConfiguredInstance | Item.ConfiguredInstance): parent is PTR.Item.System.Ability.ParentInstance {
+      return parent instanceof CONFIG.Item.documentClass && parent.type === "ability";
     }
 
-    private _isValidAbilityParent(parent: AbilityPTR2e) {
+    private _isValidAbilityParent(parent: PTR.Item.System.Ability.ParentInstance) {
       if(!parent.parent) return true;
       return !parent.system.isSuppressed && (parent.system.free || parent.system.slot !== null);
     }

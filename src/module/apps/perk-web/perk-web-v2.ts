@@ -1,9 +1,6 @@
 import type { ApplicationConfigurationExpanded } from "../appv2-expanded.ts";
 import { ApplicationV2Expanded } from "../appv2-expanded.ts";
-import type { ActorPTR2e } from "@actor";
 import { ChoiceSetChangeSystem, GrantEffectChangeSystem, GrantItemChangeSystem, Trait } from "@data";
-import type { MovePTR2e, PerkPTR2e, SpeciesPTR2e } from "@item";
-import { ItemPTR2e } from "@item";
 import Tagify from "@yaireo/tagify";
 import Sortable from "sortablejs";
 import type { PerkNode, PerkPurchaseState } from "./perk-store.ts";
@@ -14,7 +11,7 @@ import type { CheckboxData, RangesInputData, RenderResultListOptions, SelectData
 import noUiSlider from "nouislider";
 import type { AnyObject, DeepPartial } from "fvtt-types/utils";
 
-export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMixin(ApplicationV2Expanded)<AnyObject> {
+export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMixin(ApplicationV2Expanded)<Record<string, unknown>> {
   static override DEFAULT_OPTIONS = foundry.utils.mergeObject(
     super.DEFAULT_OPTIONS,
     {
@@ -39,6 +36,7 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
               const pack = game.packs.get("ptr2e.core-perks");
               if (pack) {
                 pack.configure({ locked: false });
+                //@ts-expect-error - fvtt-types are incorrect.
                 pack.render(true, { top: 0, left: window.innerWidth - 310 - 360 });
               }
             }
@@ -121,7 +119,7 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
             }
           }
 
-          await ItemPTR2e.create(perk.clone({
+          await CONFIG.Item.documentClass.create(perk.clone({
             system: {
               cost: perk.system.cost,
               originSlug: this.currentNode.tierInfo?.perk.slug ?? this.currentNode.slug
@@ -210,7 +208,7 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
           if (!this.currentNode.perk.flags.ptr2e?.evolution) return;
 
           const perk = this.currentNode.perk;
-          const species = await fromUuid<SpeciesPTR2e>((perk.flags.ptr2e.evolution as { uuid: string }).uuid);
+          const species = await fromUuid<PTR.Item.System.Species.ParentInstance>((perk.flags.ptr2e!.evolution as { uuid: string }).uuid as ItemUUID);
           if (!species) return;
 
           const current = this.actor.species;
@@ -222,7 +220,7 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
             const levelUpMoves = species.system.moves.levelUp.filter((move) => move.level <= level && !currentMoveSlugs.has(sluggify(move.name)));
 
             return (await Promise.all(
-              levelUpMoves.map(async (move) => fromUuid<MovePTR2e>(move.uuid))
+              levelUpMoves.map(async (move) => fromUuid<PTR.Item.System.Move.ParentInstance>(move.uuid as ItemUUID))
             )).flatMap((move) => move ? [move] : []);
           })();
 
@@ -258,7 +256,7 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
           flags.core.sourceId = species.uuid;
 
           await this.actor.update({
-            name: this.actor.name == current.name ? species.name : this.actor.name,
+            name: this.actor.name == current.parent.name ? species.name : this.actor.name,
             img: img,
             prototypeToken: {
               img: tokenImage,
@@ -368,7 +366,7 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
     "th",
   ]);
 
-  actor: ActorPTR2e | null = null;
+  actor: Actor.ConfiguredInstance | null = null;
   currentNode: PerkNode | null = null;
   connectionNode: PerkNode | null = null;
   editMode = false;
@@ -379,16 +377,16 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
   _zoomAmount: this['zoomLevels'][number] = 0.4;
 
   web: "global" | ItemUUID = "global";
-  private speciesEvolutions: PerkPTR2e[] = [];
-  private underdogPerks: PerkPTR2e[] = [];
+  private speciesEvolutions: PTR.Item.System.Perk.ParentInstance[] = [];
+  private underdogPerks: PTR.Item.System.Perk.ParentInstance[] = [];
   private perkTab: CompendiumBrowserPerkTab | null = null;
 
-  constructor(actor: ActorPTR2e, options?: Partial<ApplicationConfigurationExpanded>) {
+  constructor(actor: Actor.ConfiguredInstance, options?: Partial<ApplicationConfigurationExpanded>) {
     super(options);
     this.actor = actor;
   }
 
-  override async _prepareContext(options: foundry.applications.api.HandlebarsApplicationMixin.HandlebarsRenderOptions): Promise<AnyObject> {
+  override async _prepareContext(options: foundry.applications.api.HandlebarsApplicationMixin.HandlebarsRenderOptions): Promise<Record<string, unknown>> {
     const maxRow = 250;
     const maxCol = 250;
 
@@ -458,7 +456,7 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
               if (!n.tier) return false;
               return n.tier.rank === node.tierInfo!.tier;
             })
-            const img = node.tierInfo.perk.system.primaryNode?.config?.texture ?? tierNode?.config?.texture ?? node.tierInfo.perk.img ?? node.node.config?.texture ?? perk.img;
+            const img = (node.tierInfo.perk.system.primaryNode?.config?.texture ?? tierNode?.config?.texture ?? node.tierInfo.perk.img ?? node.node.config?.texture ?? perk.img) as string | undefined;
 
             grid.push({
               name: node.tierInfo.perk.name,
@@ -473,7 +471,7 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
           else {
             grid.push({
               name: perk.name,
-              img: node.node.config?.texture ?? perk.img,
+              img: (node.node.config?.texture ?? perk.img) as string | undefined,
               x,
               y,
               classes,
@@ -537,16 +535,16 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
 
   override _preparePartContext(
     partId: string,
-    context: AnyObject,
+    context: Record<string, unknown>,
     options: foundry.applications.api.HandlebarsApplicationMixin.HandlebarsRenderOptions
-  ): Promise<AnyObject> {
+  ): Promise<Record<string, unknown>> {
     if (partId === "hudZoom") {
       context.zoomLevels = this.zoomLevels;
       context.zoomLevel = this._zoomAmount;
     }
 
     if (partId === "hudPerk" && 'perk' in context && context.perk && typeof context.perk === "object" && 'document' in context.perk && context.perk.document) {
-      const perk = context.perk.document as PerkPTR2e;
+      const perk = context.perk.document as PTR.Item.System.Perk.ParentInstance;
       (context.perk as Record<string, unknown>).prerequisites = perk.system.getPredicateStrings();
     }
 
@@ -571,7 +569,7 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
         if (value === "global") {
           return this.setWeb(null);
         }
-        const species = await fromUuid(value) as SpeciesPTR2e | null;
+        const species = await fromUuid<PTR.Item.System.Species.ParentInstance>(value as ItemUUID);
         this.setWeb(species ?? null);
       });
     }
@@ -630,18 +628,20 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
             }
 
             if (this.connectionNode.perk.pack === node.perk.pack) {
-              await ItemPTR2e.updateDocuments([
+              await CONFIG.Item.documentClass.updateDocuments([
                 ...(
                   this.connectionNode.perk.id
                     ? [{
                       _id: this.connectionNode.perk._id,
-                      "system.nodes": (() => {
-                        const nodes = this.connectionNode.perk.system.toObject().nodes;
-                        const index = this.connectionNode.perk.system.nodes.indexOf(this.connectionNode.node);
-                        if (index === -1) return nodes;
-                        nodes[index].connected = Array.from(new Set(updateCurrent));
-                        return nodes;
-                      })()
+                      "system": {
+                        "nodes": (() => {
+                          const nodes = this.connectionNode.perk.system.toObject().nodes;
+                          const index = this.connectionNode.perk.system.nodes.indexOf(this.connectionNode.node);
+                          if (index === -1) return nodes;
+                          nodes[index].connected = Array.from(new Set(updateCurrent));
+                          return nodes;
+                        })()
+                      }
                     }]
                     : []
                 ),
@@ -649,13 +649,15 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
                   node.perk.id
                     ? [{
                       _id: node.perk._id,
-                      "system.nodes": (() => {
-                        const nodes = node.perk.system.toObject().nodes;
-                        const index = node.perk.system.nodes.indexOf(node.node);
-                        if (index === -1) return nodes;
-                        nodes[index].connected = Array.from(new Set(updateTarget));
-                        return nodes;
-                      })()
+                      "system": {
+                        "nodes": (() => {
+                          const nodes = node.perk.system.toObject().nodes;
+                          const index = node.perk.system.nodes.indexOf(node.node);
+                          if (index === -1) return nodes;
+                          nodes[index].connected = Array.from(new Set(updateTarget));
+                          return nodes;
+                        })()
+                      }
                     }]
                     : []
                 )
@@ -663,22 +665,26 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
             }
             else {
               if (this.connectionNode.perk.id) await this.connectionNode.perk.update({
-                "system.nodes": (() => {
-                  const nodes = this.connectionNode.perk.system.toObject().nodes;
-                  const index = this.connectionNode.perk.system.nodes.indexOf(this.connectionNode.node);
-                  if (index === -1) return nodes;
-                  nodes[index].connected = Array.from(new Set(updateCurrent));
-                  return nodes;
-                })()
+                "system": {
+                  "nodes": (() => {
+                    const nodes = this.connectionNode.perk.system.toObject().nodes;
+                    const index = this.connectionNode.perk.system.nodes.indexOf(this.connectionNode.node);
+                    if (index === -1) return nodes;
+                    nodes[index].connected = Array.from(new Set(updateCurrent));
+                    return nodes;
+                  })()
+                }
               }, this.connectionNode.perk.pack ? { pack: this.connectionNode.perk.pack } : {});
               if (node.perk.id) await node.perk.update({
-                "system.nodes": (() => {
-                  const nodes = node.perk.system.toObject().nodes;
-                  const index = node.perk.system.nodes.indexOf(node.node);
-                  if (index === -1) return nodes;
-                  nodes[index].connected = Array.from(new Set(updateTarget));
-                  return nodes;
-                })()
+                "system": {
+                  "nodes": (() => {
+                    const nodes = node.perk.system.toObject().nodes;
+                    const index = node.perk.system.nodes.indexOf(node.node);
+                    if (index === -1) return nodes;
+                    nodes[index].connected = Array.from(new Set(updateTarget));
+                    return nodes;
+                  })()
+                }
               }), node.perk.pack ? { pack: node.perk.pack } : {};
             }
 
@@ -1142,7 +1148,7 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
       const nameAnchor = liElement.querySelector<HTMLAnchorElement>("div.name > a");
       if (nameAnchor) {
         nameAnchor.addEventListener("click", async () => {
-          const document = await fromUuid(entryUuid) as PerkPTR2e
+          const document = await fromUuid<PTR.Item.System.Perk.ParentInstance>(entryUuid as ItemUUID)
           let node = this._perkStore.nodeFromSlug(document?.slug ?? "");
           if (!node) return;
 
@@ -1413,7 +1419,7 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
     if (reRenderSelect) this.render({ parts: ["hudZoom"] });
   }
 
-  async setWeb(species: SpeciesPTR2e | null) {
+  async setWeb(species: PTR.Item.System.Species.ParentInstance | null) {
     if (species === null) {
       this.web = "global";
       this.speciesEvolutions = [];
@@ -1447,21 +1453,21 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
       itemData?.length
         ? await Promise.all(
           itemData.map(async data => {
-            const item = await fromUuid(data.uuid);
-            return { perk: item as PerkPTR2e, x: data.x, y: data.y };
+            const item = await fromUuid<PTR.Item.System.Perk.ParentInstance>(data.uuid as ItemUUID);
+            return { perk: item, x: data.x, y: data.y };
           })
         )
         : await (async () => {
           const data = TextEditor.getDragEventData(event)
           if (!data) return [];
-          const perk = await fromUuid(data.uuid) as PerkPTR2e;
-          if (!(perk instanceof ItemPTR2e && perk.type === "perk")) return [];
+          const perk = await fromUuid<PTR.Item.System.Perk.ParentInstance>(data.uuid as ItemUUID);
+          if (!(perk instanceof CONFIG.Item.documentClass && perk.type === "perk")) return [];
           if (perk.system.variant === "multi") return [{ perk: perk, x: data.x, y: data.y }];
           return [{ perk: perk, x: perk.system.primaryNode?.x, y: perk.system.primaryNode?.y }];
-        })()) as { perk: PerkPTR2e, x: number, y: number }[];
+        })()) as { perk: PTR.Item.System.Perk.ParentInstance, x: number, y: number }[];
 
     const primaryEntry = items[0]
-    if (!(primaryEntry.perk instanceof ItemPTR2e && primaryEntry.perk.type === "perk")) return;
+    if (!(primaryEntry.perk instanceof CONFIG.Item.documentClass && primaryEntry.perk.type === "perk")) return;
 
     if (this.isSortableDragging && !itemData?.length) {
       const currentlyOnWeb = this._perkStore.get(`${primaryEntry.x}-${primaryEntry.y}`);
@@ -1492,7 +1498,7 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
     const currentlyOnWeb = this._perkStore.get(`${primaryEntry.x}-${primaryEntry.y}`);
 
     const toDelete = new Set<string>(currentlyOnWeb?.perk === primaryEntry.perk ? [`${primaryEntry.x}-${primaryEntry.y}`] : []);
-    const toSet: [string, PerkPTR2e, PerkPTR2e['system']['nodes'][0] | null][] = [[`${i}-${j}`, primaryEntry.perk, currentlyOnWeb?.node ?? primaryEntry.perk.system.primaryNode]];
+    const toSet: [string, PTR.Item.System.Perk.ParentInstance, PTR.Item.System.Perk.Instance['nodes'][0] | null][] = [[`${i}-${j}`, primaryEntry.perk, currentlyOnWeb?.node ?? primaryEntry.perk.system.primaryNode]];
     const updates: Record<string, Record<string, unknown>[]> = {
       world: [],
     };
@@ -1529,7 +1535,7 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
       })(),
       "system.webs": (() => {
         if (this.web === "global") return primaryEntry.perk.system.webs;
-        const web = new Set((primaryEntry.perk as PerkPTR2e).system.toObject().webs)
+        const web = new Set((primaryEntry.perk as PTR.Item.System.Perk.ParentInstance).system.toObject().webs)
         web.add(this.web);
         return web;
       })()
@@ -1540,7 +1546,7 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
     for (const entry of items) {
       if (entry.x === primaryEntry.x && entry.y === primaryEntry.y) continue;
       if (!delta) return;
-      if (!(entry.perk instanceof ItemPTR2e && entry.perk.type === "perk")) continue;
+      if (!(entry.perk instanceof CONFIG.Item.documentClass && entry.perk.type === "perk")) continue;
 
       const i = entry.x + delta.x;
       const j = entry.y + delta.y;
@@ -1562,7 +1568,7 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
         const update = updates[pack].find(u => u._id === entry.perk._id);
         if (update) {
           update["system.nodes"] = (() => {
-            const nodes = update["system.nodes"] as Required<DeepPartial<PerkPTR2e['system']['nodes']>>;
+            const nodes = update["system.nodes"] as Required<DeepPartial<PTR.Item.System.Perk.Instance['nodes']>>;
             if (!currentlyOnWeb) {
               if (entry.perk.system.variant === "multi" || !nodes[0]) {
                 nodes.push({
@@ -1633,10 +1639,10 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
 
     for (const key in updates) {
       if (key === "world") {
-        await ItemPTR2e.updateDocuments(updates[key]);
+        await CONFIG.Item.documentClass.updateDocuments(updates[key]);
       }
       else {
-        await ItemPTR2e.updateDocuments(updates[key], { pack: key });
+        await CONFIG.Item.documentClass.updateDocuments(updates[key], { pack: key });
       }
     }
 

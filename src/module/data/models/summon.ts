@@ -55,7 +55,7 @@ const summonActionSchema = {
 
 export type SummonActionSchema = typeof summonActionSchema & AttackSchema;
 
-export default class SummonActionPTR2e extends AttackPTR2e<SummonActionSchema> {
+class SummonActionPTR2e extends AttackPTR2e<SummonActionSchema> {
   // declare parent: SummonPTR2e['system']
 
   declare type: "summon";
@@ -189,3 +189,6 @@ export default class SummonActionPTR2e extends AttackPTR2e<SummonActionSchema> {
     };
   }
 }
+
+export default SummonActionPTR2e;
+export { type SummonActionPTR2e }

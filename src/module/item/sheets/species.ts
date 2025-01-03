@@ -1,10 +1,8 @@
-import type { MovePTR2e, SpeciesPTR2e } from "@item";
-import { ItemPTR2e } from "@item";
-import type { DocumentSheetConfiguration, Tab } from "./document.ts";
+import type { MovePTR2e } from "@item";
 import { htmlQueryAll, sluggify } from "@utils";
 import { default as ItemSheetPTR2e } from "./base.ts";
 import * as R from "remeda";
-import type { EvolutionData } from "@item/data/species.ts";
+import type { EvolutionData, EvolutionSchema, SpeciesSchema } from "@item/data/species.ts";
 import type SkillPTR2e from "@module/data/models/skill.ts";
 import { partialSkillToSkill } from "@scripts/config/skills.ts";
 import type { AnyObject, DeepPartial } from "fvtt-types/utils";
@@ -55,7 +53,7 @@ export default class SpeciesSheet extends ItemSheetPTR2e<AnyObject> {
     ["actions", "effects"]
   );
 
-  override tabs: Record<string, Tab> = {
+  override tabs = {
     overview: {
       id: "overview",
       group: "sheet",
@@ -96,7 +94,7 @@ export default class SpeciesSheet extends ItemSheetPTR2e<AnyObject> {
         SpeciesSheet.copyInfo !== this.document.system.evolutions,
       abilities: Object.keys(this.document.system.abilities).reduce((acc, key) => {
         const category = this.document._source.system.abilities[key];
-        acc[key] = category.map(ability => ({ slug: ability.slug, contentLink: Handlebars.helpers.asContentLink(ability.uuid) }));
+        acc[key] = category.map((ability: {slug: string, uuid: ItemUUID}) => ({ slug: ability.slug, contentLink: Handlebars.helpers.asContentLink(ability.uuid) }));
         return acc;
       }, {} as Record<string, { slug: string, contentLink: string }[]>)
     };
@@ -105,7 +103,7 @@ export default class SpeciesSheet extends ItemSheetPTR2e<AnyObject> {
   override _attachPartListeners(
     partId: string,
     htmlElement: HTMLElement,
-    options: DocumentSheetConfiguration<SpeciesPTR2e>
+    options: foundry.applications.api.HandlebarsApplicationMixin.HandlebarsRenderOptions
   ): void {
     super._attachPartListeners(partId, htmlElement, options);
 
@@ -219,7 +217,7 @@ export default class SpeciesSheet extends ItemSheetPTR2e<AnyObject> {
             case "open-sheet": {
               const { uuid } = element.dataset;
               if (!uuid) return;
-              const item = await fromUuid<ItemPTR2e>(uuid as ItemUUID);
+              const item = await fromUuid<Item.ConfiguredInstance>(uuid as ItemUUID);
               if (item) item.sheet?.render(true);
             }
           }
@@ -310,12 +308,14 @@ export default class SpeciesSheet extends ItemSheetPTR2e<AnyObject> {
           return event.shiftKey
             ? effect.delete()
             : foundry.applications.api.DialogV2.confirm({
+              //@ts-expect-error - FIXME: FVTT-Types are incorrect
               yes: {
                 callback: () => effect.delete(),
               },
               content: game.i18n.format("PTR2E.Dialog.DeleteDocumentContent", {
                 name: effect.name,
               }),
+              //@ts-expect-error - FIXME: FVTT-Types are incorrect
               window: {
                 title: game.i18n.format("PTR2E.Dialog.DeleteDocumentTitle", {
                   name: effect.name,
@@ -343,7 +343,7 @@ export default class SpeciesSheet extends ItemSheetPTR2e<AnyObject> {
     formData: FormDataExtended
   ): Record<string, unknown> {
     const data = foundry.utils.expandObject(formData.object);
-    function isSystem(system: unknown) {
+    function isSystem(system: unknown): system is foundry.data.fields.SchemaField.PersistedType<SpeciesSchema> {
       return (
         typeof system === "object" &&
         system !== null &&
@@ -415,7 +415,7 @@ export default class SpeciesSheet extends ItemSheetPTR2e<AnyObject> {
 
     const doc = this.document.toObject();
     const evolutions: EvolutionData = doc.system.evolutions!;
-    const methods = foundry.utils.getProperty(doc, field) as EvolutionData["methods"] ?? [];
+    const methods = (foundry.utils.getProperty(doc, field) ?? []) as foundry.data.fields.SchemaField.PersistedType<Pick<EvolutionSchema, "methods">>["methods"];
     methods.push({ type: "level", level: 20, operand: "and" });
     this.document.update({ "system.evolutions": evolutions });
   }
@@ -427,7 +427,7 @@ export default class SpeciesSheet extends ItemSheetPTR2e<AnyObject> {
 
     const doc = this.document.toObject();
     const evolutions: EvolutionData = doc.system.evolutions!;
-    const methods = foundry.utils.getProperty(doc, field) as EvolutionData["methods"] ?? [];
+    const methods = (foundry.utils.getProperty(doc, field) ?? []) as foundry.data.fields.SchemaField.PersistedType<Pick<EvolutionSchema, "methods">>["methods"]
     methods.splice(parseInt(index), 1);
     this.document.update({ "system.evolutions": evolutions });
   }
@@ -443,8 +443,8 @@ export default class SpeciesSheet extends ItemSheetPTR2e<AnyObject> {
 
     const data = TextEditor.getDragEventData(event) as unknown as Record<string, string>;
     if (data.type !== "Item" || !data.uuid) return;
-    const item = await fromUuid<ItemPTR2e>(data.uuid as ItemUUID);
-    if (!item || !(item instanceof ItemPTR2e)) return;
+    const item = await fromUuid<Item.ConfiguredInstance>(data.uuid as ItemUUID);
+    if (!item || !(item instanceof CONFIG.Item.documentClass)) return;
 
     const doc = this.document.toObject();
     if (path === "system.evolutions") {
@@ -457,7 +457,7 @@ export default class SpeciesSheet extends ItemSheetPTR2e<AnyObject> {
       await this.document.update({ "system.evolutions": newEvo });
       return;
     }
-    const evolutions: EvolutionData["_source"][] = foundry.utils.getProperty(doc, path) ?? (() => {
+    const evolutions: foundry.data.fields.SchemaField.PersistedType<EvolutionSchema>[] = foundry.utils.getProperty(doc, path) ?? (() => {
       if (doc.system.evolutions === null) {
         doc.system.evolutions = {
           name: doc.name,
@@ -468,6 +468,7 @@ export default class SpeciesSheet extends ItemSheetPTR2e<AnyObject> {
       }
       return doc.system.evolutions.evolutions;
     })();
+    //@ts-expect-error - FIXME: This should work.
     evolutions.push({
       name: item.name,
       uuid: item.uuid,
@@ -490,8 +491,8 @@ export default class SpeciesSheet extends ItemSheetPTR2e<AnyObject> {
 
     const data = TextEditor.getDragEventData(event) as unknown as Record<string, string>;
     if (data.type !== "Item" || !data.uuid) return;
-    const item = await fromUuid<ItemPTR2e>(data.uuid as ItemUUID);
-    if (!item || !(item instanceof ItemPTR2e)) return;
+    const item = await fromUuid<Item.ConfiguredInstance>(data.uuid as ItemUUID);
+    if (!item || !(item instanceof CONFIG.Item.documentClass)) return;
 
     // if the item isn't an ability, error
     if (item.type !== "ability") {
@@ -544,7 +545,7 @@ export default class SpeciesSheet extends ItemSheetPTR2e<AnyObject> {
     const { field, slug } = (event.currentTarget as HTMLElement).dataset;
     if (!field || !slug) return;
 
-    const doc = this.document.toObject();
+    const doc = this.document.toObject() as PTR.Item.System.Species.ParentSource;
     const { levelUp, tutor } = doc.system.moves;
 
     if (field === "tutor") {
@@ -557,7 +558,7 @@ export default class SpeciesSheet extends ItemSheetPTR2e<AnyObject> {
       const i = levelUp.findIndex((move) => move.name === slug);
       const move = levelUp[i];
       if (!move) return;
-      tutor.push(R.omit(move, ["level"]) as { name: string; uuid: string, gen: string | null });
+      tutor.push(R.omit(move, ["level"]) as { name: string; uuid: string, gen: string });
       levelUp.splice(i, 1);
     }
 
@@ -578,14 +579,16 @@ export default class SpeciesSheet extends ItemSheetPTR2e<AnyObject> {
     if (!field || !slug) return;
 
     const document = this.document;
-    const doc = document.toObject();
+    const doc = document.toObject() as PTR.Item.System.Species.ParentSource;
     const moves = doc.system.moves[field === "tutor" ? "tutor" : "levelUp"];
     const move = moves.find((move) => move.name === slug);
     if (!move) return;
 
     foundry.applications.api.DialogV2.confirm({
+      //@ts-expect-error - FIXME: FVTT-Types are incorrect
       window: { title: game.i18n.format("PTR2E.Dialog.DeleteDocumentTitle", { name: Handlebars.helpers.formatSlug(move.name) }) },
       content: game.i18n.format("PTR2E.Dialog.DeleteDocumentContent", { name: Handlebars.helpers.formatSlug(move.name) }),
+      //@ts-expect-error - FIXME: FVTT-Types are incorrect
       yes: {
         callback: () => {
           const i = moves.findIndex((move) => move.name === slug);
@@ -608,7 +611,7 @@ export default class SpeciesSheet extends ItemSheetPTR2e<AnyObject> {
     const data = TextEditor.getDragEventData(event) as unknown as Record<string, string>;
     if (data.type !== "Item" || !data.uuid) return;
     const item = await fromUuid<MovePTR2e>(data.uuid as ItemUUID);
-    if (!item || !(item instanceof ItemPTR2e)) return;
+    if (!item || !(item instanceof CONFIG.Item.documentClass)) return;
     if (item.type !== "move") {
       ui.notifications.error(game.i18n.localize("PTR2E.SpeciesSheet.moves.dropMoveError"));
       return;
@@ -648,6 +651,7 @@ export default class SpeciesSheet extends ItemSheetPTR2e<AnyObject> {
 
     const copyInfo = SpeciesSheet.copyInfo;
     foundry.applications.api.DialogV2.confirm({
+      //@ts-expect-error - FIXME: FVTT-Types are incorrect
       window: {
         title: game.i18n.localize(
           `PTR2E.SpeciesSheet.evolutions.copyPasteTree.paste.title`
@@ -657,6 +661,7 @@ export default class SpeciesSheet extends ItemSheetPTR2e<AnyObject> {
         thisName: this.document.name,
         copyName: copyInfo.name,
       }),
+      //@ts-expect-error - FIXME: FVTT-Types are incorrect
       yes: {
         callback: async () => {
           await this.document.update({ "system.evolutions": copyInfo });

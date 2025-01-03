@@ -1,11 +1,9 @@
-import type { ActorPTR2e, Skill } from "@actor";
 import { SkillsComponent } from "@actor/components/skills-component.ts";
-import type SkillPTR2e from "@module/data/models/skill.ts";
 import { htmlQueryAll } from "@utils";
 import type { AnyObject, DeepPartial } from "fvtt-types/utils";
 
 
-type SkillBeingEdited = SkillPTR2e["_source"] & { label: string; investment: number; max: number; min: number };
+type SkillBeingEdited = PTR.Models.Skill.Source & { label: string; investment: number; max: number; min: number };
 
 export class SkillsEditor extends foundry.applications.api.HandlebarsApplicationMixin(
   foundry.applications.api.ApplicationV2
@@ -41,7 +39,7 @@ export class SkillsEditor extends foundry.applications.api.HandlebarsApplication
     },
   };
 
-  document: ActorPTR2e;
+  document: Actor.ConfiguredInstance;
   skills: SkillBeingEdited[];
   filter: SearchFilter;
 
@@ -50,7 +48,7 @@ export class SkillsEditor extends foundry.applications.api.HandlebarsApplication
   }
 
   constructor(
-    document: ActorPTR2e,
+    document: Actor.ConfiguredInstance,
     options: DeepPartial<foundry.applications.api.ApplicationV2.Configuration> = {}
   ) {
     options.id = `Skill-Editor-${document.uuid}`;
@@ -67,7 +65,7 @@ export class SkillsEditor extends foundry.applications.api.HandlebarsApplication
   resetSkills(): this["skills"] {
     const { skills, hideHiddenSkills } = SkillsComponent.prepareSkillsData(this.document);
 
-    const convertSkill = (skill: Skill) => {
+    const convertSkill = (skill: PTR.Models.Skill.Source) => {
       if (game.i18n.has(`PTR2E.Skills.${skill.group ? `${skill.group}.${skill.slug}` : skill.slug}.label`)) {
         const label = game.i18n.format(
           `PTR2E.Skills.${skill.group ? `${skill.group}.${skill.slug}` : skill.slug
@@ -200,6 +198,7 @@ export class SkillsEditor extends foundry.applications.api.HandlebarsApplication
     const document = this.document;
 
     foundry.applications.api.DialogV2.confirm({
+      //@ts-expect-error - fvtt-types are incorrect
       window: {
         title: game.i18n.format("PTR2E.SkillsEditor.ResetSkills.title", {
           name: document.name,
@@ -208,6 +207,7 @@ export class SkillsEditor extends foundry.applications.api.HandlebarsApplication
       content: game.i18n.format("PTR2E.SkillsEditor.ResetSkills.content", {
         name: document.name,
       }),
+      //@ts-expect-error - fvtt-types are incorrect
       yes: {
         callback: async () => {
           await document.update({
@@ -237,6 +237,7 @@ export class SkillsEditor extends foundry.applications.api.HandlebarsApplication
     if (!resources) return;
 
     foundry.applications.api.DialogV2.prompt<foundry.applications.api.DialogV2.WaitOptions, void>({
+      //@ts-expect-error - fvtt-types are incorrect
       window: {
         title: game.i18n.format("PTR2E.SkillsEditor.ChangeResources.title", {
           name: document.name,
@@ -292,6 +293,7 @@ export class SkillsEditor extends foundry.applications.api.HandlebarsApplication
     if (!luck) return;
 
     foundry.applications.api.DialogV2.prompt<foundry.applications.api.DialogV2.WaitOptions, void>({
+      //@ts-expect-error - fvtt-types are incorrect
       window: {
         title: game.i18n.format("PTR2E.SkillsEditor.ChangeLuck.title", {
           name: document.name,
@@ -386,6 +388,7 @@ export class SkillsEditor extends foundry.applications.api.HandlebarsApplication
     }
 
     await foundry.applications.api.DialogV2.confirm<foundry.applications.api.DialogV2.WaitOptions, void, void>({
+      //@ts-expect-error - fvtt-types are incorrect
       window: {
         title: game.i18n.format("PTR2E.SkillsEditor.RollLuck.title", {
           name: document.name,
@@ -394,6 +397,7 @@ export class SkillsEditor extends foundry.applications.api.HandlebarsApplication
       content: game.i18n.format("PTR2E.SkillsEditor.RollLuck.content", {
         name: document.name,
       }),
+      //@ts-expect-error - fvtt-types are incorrect
       yes: {
         callback: rollAndApplyLuck.bind(this, true),
       },
@@ -407,7 +411,7 @@ export class SkillsEditor extends foundry.applications.api.HandlebarsApplication
     formData: FormDataExtended
   ) {
     const data = foundry.utils.expandObject(formData.object) as Record<string, { investment: string }>;
-    const skills = this.document.system.toObject().skills as SkillPTR2e["_source"][];
+    const skills = this.document.system.toObject().skills as PTR.Models.Skill.Source[];
     const maxInvestment = this.document.system.advancement.level === 1 ? 90 : 100;
     const levelOne = this.document.system.advancement.level === 1 || !this.document.flags.ptr2e?.editedSkills;
 

@@ -11,12 +11,12 @@ const statsAlterationChangeSchema = {
   spe: new foundry.data.fields.NumberField({ required: true, nullable: true, initial: null }),
 }
 
-export type StatsAlterationSchema = typeof statsAlterationChangeSchema & ChangeModelSchema;
+export type StatsAlterationChangeSchema = typeof statsAlterationChangeSchema & ChangeModelSchema;
 
-export default class StatsAlterationChangeSystem extends BasicChangeSystem<StatsAlterationSchema> {
+class StatsAlterationChangeSystem extends BasicChangeSystem<StatsAlterationChangeSchema> {
   static override TYPE = "stats-alteration";
 
-  static override defineSchema(): StatsAlterationSchema {
+  static override defineSchema(): StatsAlterationChangeSchema {
     return {
       ...super.defineSchema(),
       ...statsAlterationChangeSchema,
@@ -60,3 +60,6 @@ export default class StatsAlterationChangeSystem extends BasicChangeSystem<Stats
     }
   }
 }
+
+export default StatsAlterationChangeSystem;
+export type { StatsAlterationChangeSystem };

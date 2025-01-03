@@ -1,6 +1,4 @@
-import type FolderPTR2e from "@module/folder/document.ts";
 import { MigrationBase } from "../base.ts"
-import type { ActorPTR2e } from "@actor";
 
 export class Migration104FolderUpdate extends MigrationBase {
   static override version = 0.104;
@@ -23,14 +21,14 @@ export class Migration104FolderUpdate extends MigrationBase {
       Migration104FolderUpdate.lock = new Promise(resolve => lock.release = resolve);
 
       try {
-        const folders = game.folders.filter(folder => folder.type === "Actor") as FolderPTR2e[];
+        const folders = game.folders.filter(folder => folder.type === "Actor") as Folder.ConfiguredInstance[];
         return folders.reduce((map, folder) => {
           const { owner, party, team } = folder.flags.ptr2e as { owner: ActorUUID, party: ActorUUID[], team: ActorUUID[] } ?? { owner: "", party: [], team: [] };
 
           if (owner) {
             const id  =owner.split(".").at(-1)!;
-            const entry = map.get(id) ?? { owner: "", party: "", team: new Set(), folder: folder.id };
-            entry.owner = folder.id;
+            const entry = map.get(id) ?? { owner: "", party: "", team: new Set(), folder: folder.id! };
+            entry.owner = folder.id!;
             entry.folder ||= folder.id;
             map.set(id, entry);
           }
@@ -38,8 +36,8 @@ export class Migration104FolderUpdate extends MigrationBase {
           if (party?.length) {
             for (const uuid of party) {
               const id = uuid.split(".").at(-1)!;
-              const entry = map.get(id) ?? { owner: "", party: "", team: new Set(), folder: folder.id };
-              entry.party = folder.id;
+              const entry = map.get(id) ?? { owner: "", party: "", team: new Set(), folder: folder.id! };
+              entry.party = folder.id!;
               entry.folder ||= folder.id;
               map.set(id, entry);
             }
@@ -49,7 +47,7 @@ export class Migration104FolderUpdate extends MigrationBase {
             for (const uuid of team) {
               const id = uuid.split(".").at(-1)!;
               const entry = map.get(id) ?? { owner: "", party: "", team: new Set(), folder: "" };
-              entry.team.add(folder.id);
+              entry.team.add(folder.id!);
               map.set(id, entry);
             }
           }
@@ -65,7 +63,7 @@ export class Migration104FolderUpdate extends MigrationBase {
     })());
   }
 
-  override async updateActor(actor: ActorPTR2e["_source"]): Promise<void> {
+  override async updateActor(actor: Actor.PTR.SourceWithSystem): Promise<void> {
     const data = await this.getData();
 
     const actorData = data.get(actor._id!);

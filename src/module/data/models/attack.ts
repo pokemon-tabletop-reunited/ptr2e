@@ -11,7 +11,7 @@ import type { ActorSizePTR2e } from "@actor/data/size.ts";
 
 const attackSchema = {
   types: new foundry.data.fields.SetField(
-    new foundry.data.fields.StringField<{required: true, choices: Record<string,string>, initial: string, label: string, hint: string}, PokemonType, PokemonType>({
+    new foundry.data.fields.StringField<{ required: true, choices: Record<string, string>, initial: string, label: string, hint: string }, PokemonType, PokemonType>({
       required: true,
       choices: getTypes().reduce<Record<string, string>>(
         (acc, type) => ({ ...acc, [type]: type }),
@@ -80,9 +80,9 @@ const attackSchema = {
     hint: "PTR2E.FIELDS.summon.hint",
     type: "Item"
   }),
-  defaultVariant: new SlugField({ 
-    required: true, 
-    nullable: true, 
+  defaultVariant: new SlugField({
+    required: true,
+    nullable: true,
     initial: null,
     label: "PTR2E.FIELDS.defaultVariant.label",
     hint: "PTR2E.FIELDS.defaultVariant.hint"
@@ -97,7 +97,7 @@ const attackSchema = {
   offensiveStat: new foundry.data.fields.StringField({
     required: true,
     nullable: true,
-    choices: PTRCONSTS.Stats.reduce((acc, stat) => ({ ...acc, [stat]: stat }), {"":""} as unknown as Record<PTRCONSTS.Stat, string>),
+    choices: PTRCONSTS.Stats.reduce((acc, stat) => ({ ...acc, [stat]: stat }), { "": "" } as unknown as Record<PTRCONSTS.Stat, string>),
     initial: null,
     label: "PTR2E.FIELDS.offensiveStat.label",
     hint: "PTR2E.FIELDS.offensiveStat.hint",
@@ -105,7 +105,7 @@ const attackSchema = {
   defensiveStat: new foundry.data.fields.StringField({
     required: true,
     nullable: true,
-    choices: PTRCONSTS.Stats.reduce((acc, stat) => ({ ...acc, [stat]: stat }), {"":""} as unknown as Record<PTRCONSTS.Stat, string>),
+    choices: PTRCONSTS.Stats.reduce((acc, stat) => ({ ...acc, [stat]: stat }), { "": "" } as unknown as Record<PTRCONSTS.Stat, string>),
     initial: null,
     label: "PTR2E.FIELDS.defensiveStat.label",
     hint: "PTR2E.FIELDS.defensiveStat.hint",
@@ -159,7 +159,7 @@ class AttackPTR2e<Schema extends AttackSchema = AttackSchema> extends ActionPTR2
   }
 
   get variants(): string[] {
-    if(this.variant) return this.actor?.actions.attack.get(this.variant)?.variants ?? [];
+    if (this.variant) return this.actor?.actions.attack.get(this.variant)?.variants ?? [];
     return this.actor?.actions.attack.filter(a => a.variant == this.slug).map(a => a.slug) ?? [];
   }
 
@@ -184,10 +184,10 @@ class AttackPTR2e<Schema extends AttackSchema = AttackSchema> extends ActionPTR2
 
   async roll(args?: AttackStatisticRollParameters): Promise<AttackRollResult['rolls'][] | null | false> {
     if (!this.rollable) return false;
-    if(!args?.modifierDialog && !this.variant && this.defaultVariant) {
+    if (!args?.modifierDialog && !this.variant && this.defaultVariant) {
       const variant = this.actor?.actions.attack.get(this.defaultVariant);
-      if(variant) return variant.roll(args);
-    } 
+      if (variant) return variant.roll(args);
+    }
     return this.statistic!.check.roll(args);
   }
 
@@ -261,13 +261,13 @@ class AttackPTR2e<Schema extends AttackSchema = AttackSchema> extends ActionPTR2
   }
 
   async delayAction(number?: number) {
-    if(!this.actor) return;
-    if(!game.combat) return void ui.notifications.error("You must be in combat to be able to delay an action.");
-    if(game.combat.combatant?.actor !== this.actor) return void ui.notifications.error("You must be the active combatant to delay this action.");
-    if(number === undefined || number === null) {
+    if (!this.actor) return;
+    if (!game.combat) return void ui.notifications.error("You must be in combat to be able to delay an action.");
+    if (game.combat.combatant?.actor !== this.actor) return void ui.notifications.error("You must be the active combatant to delay this action.");
+    if (number === undefined || number === null) {
       const dialog: number = await foundry.applications.api.DialogV2.prompt({
         //@ts-expect-error - FIXME: FVTT-Types are incorrect
-        window: {title: game.i18n.localize("PTR2E.Dialog.DelayActionTitle")},
+        window: { title: game.i18n.localize("PTR2E.Dialog.DelayActionTitle") },
         classes: ["center-text"],
         content: `<p>${game.i18n.localize("PTR2E.Dialog.DelayActionContent")}</p><input type="number" name="delay" min=1 max=3 step=1>`,
         ok: {
@@ -279,10 +279,10 @@ class AttackPTR2e<Schema extends AttackSchema = AttackSchema> extends ActionPTR2
           }
         }
       })
-      if(!dialog) return;
+      if (!dialog) return;
       number = dialog;
     }
-    if(isNaN(number) || number <= 0) return;
+    if (isNaN(number) || number <= 0) return;
 
     const delay = Math.min(3, number);
 
@@ -347,3 +347,4 @@ interface AttackPTR2e {
 }
 
 export default AttackPTR2e;
+export { type AttackPTR2e };

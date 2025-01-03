@@ -1,8 +1,7 @@
-import type { ActionPTR2e, AttackPTR2e, Trait } from "@module/data/index.ts";
+import type { Trait } from "@module/data/index.ts";
 import { HasBase, HasEmbed } from "@module/data/index.ts";
 import { sluggify } from "@utils";
 import type SystemTraitsCollection from "@module/data/system-traits-collection.ts";
-import type { ItemPTR2e } from "@item/document.ts";
 import type { HasBaseSchema } from "@module/data/mixins/has-base.ts";
 
 const moveSchema = {
@@ -26,9 +25,9 @@ export type MoveSchema = typeof moveSchema & HasBaseSchema;
  * @category Item Data Models
  */
 export default abstract class MoveSystem extends HasEmbed(
-  HasBase(foundry.abstract.TypeDataModel<MoveSchema, ItemPTR2e>),
+  HasBase(foundry.abstract.TypeDataModel),
   "move"
-) {
+)<MoveSchema, Item.ConfiguredInstance> {
   /**
    * @internal
    */
@@ -78,12 +77,11 @@ export default abstract class MoveSystem extends HasEmbed(
   }
 
   override async toEmbed(
-    _config: TextEditor.DocumentHTMLEmbedConfig, 
+    _config: TextEditor.DocumentHTMLEmbedConfig,
     options: TextEditor.EnrichmentOptions = {}
   ): Promise<HTMLElement | HTMLCollection | null> {
     const attack = this.attack;
     const variants = this.actions.contents.filter((a) => a.slug !== attack.slug);
-
 
     const traits = attack.traits.map((trait) => ({ value: trait.slug, label: trait.label }));
 
@@ -99,12 +97,12 @@ export default abstract class MoveSystem extends HasEmbed(
   }
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      override async _preCreate(data: foundry.abstract.TypeDataModel.ParentAssignmentType<MoveSchema, ItemPTR2e>, options: foundry.abstract.Document.PreCreateOptions<any>, user: User): Promise<boolean | void> {
+  override async _preCreate(data:  foundry.abstract.TypeDataModel.ParentAssignmentType<MoveSchema, Item.ConfiguredInstance>, options: foundry.abstract.Document.PreCreateOptions<any>, user: User): Promise<boolean | void> {
     if (data.system === undefined) {
       //@ts-expect-error - Actions on source is not a collection but an array
       data.system = { actions: [] };
     }
-    if(data.system.actions === undefined) {
+    if (data.system.actions === undefined) {
       //@ts-expect-error - Actions on source is not a collection but an array
       data.system.actions = [];
     }
@@ -112,10 +110,10 @@ export default abstract class MoveSystem extends HasEmbed(
       throw new Error("Actions must be an array.");
     }
     if (Array.isArray(data.system.actions)) {
-      const actions = data.system.actions as ActionPTR2e["_source"][];
+      const actions = data.system.actions as PTR.Models.Action.Source[];
       if (actions.length === 0) {
         //@ts-expect-error - Actions on source is not a collection but an array
-        data.system.actions = [
+        actions = [
           {
             name: `${data.name}`,
             slug: sluggify(`${data.name}`),
@@ -124,11 +122,11 @@ export default abstract class MoveSystem extends HasEmbed(
         ];
         this.parent.updateSource({ "system.actions": data.system.actions });
       } else if (!actions.some((action) => action.type === "attack")) {
-        data.system.actions.unshift({
+        actions.unshift({
           name: `${data.name}`,
           slug: sluggify(`${data.name}`),
           type: "attack",
-        });
+        } as PTR.Models.Action.Source);
         this.parent.updateSource({ "system.actions": data.system.actions });
       }
     }
@@ -143,7 +141,7 @@ export default abstract class MoveSystem extends HasEmbed(
   }
 
   override async _preUpdate(
-    changed: foundry.abstract.TypeDataModel.ParentAssignmentType<MoveSchema, ItemPTR2e>,
+    changed: foundry.abstract.TypeDataModel.ParentAssignmentType<MoveSchema, Item.ConfiguredInstance>,
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     options: foundry.abstract.Document.PreUpdateOptions<any>,
     user: string
@@ -161,7 +159,7 @@ export default abstract class MoveSystem extends HasEmbed(
     }
     if (changed.system?.traits !== undefined) {
       //@ts-expect-error - Actions on source is not a collection but an array
-      const changedActions = changed.system?.actions as ActionPTR2e["_source"][];
+      const changedActions = changed.system?.actions as PTR.Models.Action.Source[];
       if (changedActions?.length) {
         const mainAttackIndex = changedActions.findIndex(
           (action) => action.slug === this.slug
@@ -179,7 +177,7 @@ export default abstract class MoveSystem extends HasEmbed(
           changedActions[mainAttackIndex].traits = changed.system.traits;
         }
       } else {
-        const attacks = foundry.utils.duplicate(this._source.actions);
+        const attacks = foundry.utils.duplicate(this._source.actions)!;
         const mainAttackIndex = attacks.findIndex((action) => action.slug === this.slug);
         if (mainAttackIndex === -1) {
           const retry = attacks.findIndex((action) => action.type === "attack");
@@ -206,17 +204,17 @@ export default abstract class MoveSystem extends HasEmbed(
     return await super._preUpdate(changed, options, user);
   }
 
-  get attack(): AttackPTR2e {
+  get attack(): PTR.Models.Action.Models.Attack.Instance {
     const attack = (() => {
       const action = this.actions.get(this.slug);
       if (!action || action.type !== "attack")
         return [...this.actions.values()].find(
           (action) => action.type === "attack"
-        ) as unknown as AttackPTR2e;
-      return action as unknown as AttackPTR2e;
+        ) as unknown as PTR.Models.Action.Models.Attack.Instance;
+      return action as unknown as PTR.Models.Action.Models.Attack.Instance;
     })();
 
-    if (!attack) return this.actions.contents[0] as AttackPTR2e;//throw new Error("No attack action found on this move.");
+    if (!attack) return this.actions.contents[0] as unknown as PTR.Models.Action.Models.Attack.Instance;//throw new Error("No attack action found on this move.");
     return attack;
   }
 }

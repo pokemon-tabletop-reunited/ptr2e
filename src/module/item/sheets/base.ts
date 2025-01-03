@@ -1,11 +1,9 @@
-import type { ItemWithActions } from "@item";
 import { htmlQuery, htmlQueryAll, sluggify } from "@utils";
 import type { Tab } from "./document.ts";
 import Tagify from "@yaireo/tagify";
 import GithubManager from "@module/apps/github.ts";
 import { ActionEditor } from "@module/apps/action-editor.ts";
 import { ItemSheetV2Expanded, type DocumentSheetConfigurationExpanded, type ExpandedConfiguration } from "@module/apps/appv2-expanded.ts";
-import type { ActionPTR2e } from "@data";
 import { Trait } from "@data";
 import { DataInspector } from "@module/apps/data-inspector/data-inspector.ts";
 import type { AnyObject, DeepPartial } from "fvtt-types/utils";
@@ -329,7 +327,7 @@ export default class ItemSheetPTR2e<
       const addButton = htmlElement.querySelector(".actions a[data-action='add-action']");
       addButton?.addEventListener("click", async () => {
         if (!("actions" in this.document.system)) return;
-        const actions = this.document.system._source.actions as ActionPTR2e[] ?? [];
+        const actions = this.document.system._source.actions as PTR.Models.Action.Instance[] ?? [];
 
         let num = actions.length + 1;
         const action = {
@@ -340,7 +338,7 @@ export default class ItemSheetPTR2e<
           type: "generic",
         };
 
-        while ((this.document.system.actions as Collection<ActionPTR2e>).has(action.slug)) {
+        while ((this.document.system.actions as Collection<PTR.Models.Action.Instance>).has(action.slug)) {
           action.name = `${this.document.name} Action (#${++num})`;
           action.slug = sluggify(action.name);
         }
@@ -357,13 +355,13 @@ export default class ItemSheetPTR2e<
           if (!slug) return;
 
           if (!("actions" in this.document.system)) return;
-          const action = (this.document.system.actions as Collection<ActionPTR2e>).get(slug);
+          const action = (this.document.system.actions as Collection<PTR.Models.Action.Instance>).get(slug);
           if (!action) return;
 
           switch (actionType) {
             case "edit-action": {
               const sheet = new ActionEditor(
-                this.document as ItemWithActions,
+                this.document as PTR.Item.ItemWithActions,
                 slug
               );
               sheet.render(true);
@@ -384,7 +382,7 @@ export default class ItemSheetPTR2e<
                 yes: {
                   callback: () => {
                     if (!("actions" in document.system)) return;
-                    const actions = (document.system._source.actions as ActionPTR2e[]).filter(
+                    const actions = (document.system._source.actions as PTR.Models.Action.Instance[]).filter(
                       (a) => a.slug !== slug
                     );
                     document.update({ "system.actions": actions });

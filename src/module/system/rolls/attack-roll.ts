@@ -1,4 +1,4 @@
-import type { AccuracySuccessCategory, AttackPTR2e, SummonAttackPTR2e } from "@data";
+import type { AccuracySuccessCategory } from "@data";
 import type { CheckRollDataPTR2e } from "./check-roll.ts";
 import { CheckRoll } from "./check-roll.ts";
 import type { AttackCheckModifier } from "@module/effects/modifiers.ts";
@@ -146,7 +146,7 @@ class AttackRoll extends CheckRoll<AnyObject> {
     origin: Actor.ConfiguredInstance;
     target: Actor.ConfiguredInstance;
     isCritHit: boolean;
-    attack: AttackPTR2e;
+    attack: PTR.Models.Action.Models.Attack.Instance;
     isMultiTarget: boolean;
     useEnemyStats: boolean;
   }): Maybe<DamageCalc> {
@@ -210,7 +210,7 @@ class AttackRoll extends CheckRoll<AnyObject> {
     };
   }
 
-  static calculateFlatDamage(attack: SummonAttackPTR2e, target: Actor.ConfiguredInstance): Maybe<DamageCalc> {
+  static calculateFlatDamage(attack: PTR.Models.Action.Models.Summon.Instance, target: Actor.ConfiguredInstance): Maybe<DamageCalc> {
     const formula = attack.getFormula()
     const roll = new Roll(
       formula,
@@ -241,7 +241,7 @@ interface AttackRoll extends CheckRoll {
 }
 
 interface AttackRollCreationData {
-  attack: AttackPTR2e;
+  attack: PTR.Models.Action.Models.Attack.Instance;
   check: AttackCheckModifier;
 }
 

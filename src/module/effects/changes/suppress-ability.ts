@@ -4,7 +4,7 @@ import { ChangeModel } from "@data";
 import type { AbilityPTR2e } from "@item";
 import { UUIDUtils } from "src/util/uuid.ts";
 
-export default class SuppresAbilityChangeSystem extends ChangeModel {
+class SuppressAbilityChangeSystem extends ChangeModel {
   static override TYPE = "suppress-ability";
 
   get selector() {
@@ -33,3 +33,6 @@ export default class SuppresAbilityChangeSystem extends ChangeModel {
     })
   }
 }
+
+export default SuppressAbilityChangeSystem;
+export type { SuppressAbilityChangeSystem };

@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import type { ActionPTR2e } from "@data";
 import { htmlQueryAll, sluggify } from "@utils";
 import type { AnyObject, DeepPartial, EmptyObject } from "fvtt-types/utils";
 
@@ -774,7 +773,7 @@ export class ItemSheetV2Expanded<
       const existing = this.document.actions.get(actionData.slug);
       if (existing) return void ui.notifications.warn(`An action with the slug ${actionData.slug} already exists on this item.`);
 
-      const actions = foundry.utils.duplicate(this.document.system._source.actions as ActionPTR2e['_source'][]);
+      const actions = foundry.utils.duplicate(this.document.system._source.actions as PTR.Models.Action.Source[]);
       actions.push(action.toObject());
       return void this.document.update({ "system.actions": actions });
     }

@@ -12,12 +12,12 @@ const rollNoteChangeSchema = {
   }),
 }
 
-export type RollNoteSchema = typeof rollNoteChangeSchema & ChangeModelSchema;
+export type RollNoteChangeSchema = typeof rollNoteChangeSchema & ChangeModelSchema;
 
-export default class RollNoteChangeSystem extends ChangeModel<RollNoteSchema> {
+class RollNoteChangeSystem extends ChangeModel<RollNoteChangeSchema> {
   static override TYPE = "roll-note";
 
-  static override defineSchema(): RollNoteSchema {
+  static override defineSchema(): RollNoteChangeSchema {
     return {
       ...super.defineSchema() as ChangeModelSchema,
       ...rollNoteChangeSchema
@@ -53,6 +53,9 @@ export default class RollNoteChangeSystem extends ChangeModel<RollNoteSchema> {
   }
 }
 
-export default interface RollNoteChangeSystem {
+interface RollNoteChangeSystem {
   value: string;
 }
+
+export default RollNoteChangeSystem;
+export type { RollNoteChangeSystem };
