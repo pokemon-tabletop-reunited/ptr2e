@@ -2,9 +2,8 @@ import { AttackPTR2e } from "@data";
 import ResolvableValueField from "../fields/resolvable-value-field.ts";
 import type { AttackStatistic } from "@system/statistics/attack.ts";
 import { SummonStatistic } from "@system/statistics/summon.ts";
-import type { ActionSchema } from "./action.ts";
-import type ActionPTR2e from "./action.ts";
 import type { AttackSchema } from "./attack.ts";
+import type { DeepPartial } from "fvtt-types/utils";
 
 const summonActionSchema = {
   targetType: new foundry.data.fields.StringField({
@@ -68,7 +67,10 @@ class SummonActionPTR2e extends AttackPTR2e<SummonActionSchema> {
 
   override get actor(): Actor.ConfiguredInstance | null {
     const self = this as SummonActionPTR2e;
+    //@ts-expect-error - FIXME: Investigate what is wrong here
     if (self.parent instanceof CONFIG.Item.documentClass) return self.parent.system.owner ? fromUuidSync<Actor.ConfiguredInstance>(self.parent.system.owner) as Actor.ConfiguredInstance | null : super.actor;
+    //@ts-expect-error - FIXME: Investigate what is wrong here
+
     return self.parent.owner ? fromUuidSync<Actor.ConfiguredInstance>(self.parent.owner) as Actor.ConfiguredInstance | null : super.actor;
   }
 
@@ -86,14 +88,14 @@ class SummonActionPTR2e extends AttackPTR2e<SummonActionSchema> {
   override getAttackStat(this: SummonActionPTR2e, actor: Maybe<Actor.ConfiguredInstance> = this.actor): number {
     if (this.attackStat === "owner") return super.getAttackStat(actor);
     if (typeof this.attackStat === "number") return this.attackStat;
-    const value = SummonStatistic.resolveValue(this.attackStat, 0, { actor, item: this.item, attack: this });
+    const value = SummonStatistic.resolveValue(this.attackStat, 0, { actor, item: this.item, attack: this as unknown as AttackPTR2e });
     if (typeof value === "number") return value;
     return 0;
   }
 
   getFormula(this: SummonActionPTR2e): string {
     if (!this.damageFormula) return "0";
-    const formula = SummonStatistic.resolveValue(this.damageFormula, "0", { actor: this.actor, item: this.item, attack: this }, { evaluate: false });
+    const formula = SummonStatistic.resolveValue(this.damageFormula, "0", { actor: this.actor, item: this.item, attack: this as unknown as AttackPTR2e }, { evaluate: false });
     return typeof formula === "string" ? formula : typeof formula === "number" ? formula + "" : "0";
   }
 
@@ -163,7 +165,7 @@ class SummonActionPTR2e extends AttackPTR2e<SummonActionSchema> {
     })
   }
 
-  override prepareUpdate(data: foundry.data.fields.SchemaField.InnerAssignmentType<ActionSchema>): ActionPTR2e[] {
+  override prepareUpdate(data: DeepPartial<foundry.data.fields.SchemaField.PersistedType<SummonActionSchema>>): PTR.Models.Action.Source[] {
     const currentActions = super.prepareUpdate(data);
 
     for (const action of currentActions) {

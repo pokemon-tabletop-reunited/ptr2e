@@ -6,7 +6,7 @@ import { SpeciesSystemModel } from "@item/data/index.ts";
 import type { AnyObject, DeepPartial } from "fvtt-types/utils";
 import { DocumentSheetV2Expanded } from "@module/apps/appv2-expanded.ts";
 
-interface BlueprintSheetOptions extends foundry.applications.api.DocumentSheetV2.Configuration<Actor.ConfiguredInstance> {
+interface BlueprintSheetOptions extends foundry.applications.api.DocumentSheetV2.Configuration<Item.ConfiguredInstance> {
   generation?: {
     x: number,
     y: number,

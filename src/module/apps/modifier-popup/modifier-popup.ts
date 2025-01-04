@@ -275,6 +275,7 @@ export class ModifierPopup extends foundry.applications.api.HandlebarsApplicatio
       if (!tupleHasValue(Object.values(CONST.DICE_ROLL_MODES), rollMode)) {
         throw Error("Unexpected roll mode");
       }
+      //@ts-expect-error - fvtt-types invalid typing
       this.context.rollMode = rollMode;
     });
   }

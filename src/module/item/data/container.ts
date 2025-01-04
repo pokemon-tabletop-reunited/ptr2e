@@ -15,7 +15,7 @@ export type ContainerSystemSchema = typeof containerSchema & SlugSchema & Migrat
 /**
  * @category Item Data Models
  */
-export default abstract class ContainerSystem extends HasEmbed(HasMigrations(HasGearData(HasTraits(HasDescription(HasSlug(HasContainer(foundry.abstract.TypeDataModel)))))), "container")<containerSchema, Item.ConfiguredInstance> {
+export default abstract class ContainerSystem extends HasEmbed(HasMigrations(HasGearData(HasTraits(HasDescription(HasSlug(HasContainer(foundry.abstract.TypeDataModel)))))), "container")<ContainerSystemSchema, Item.ConfiguredInstance> {
   /**
    * @internal
    */

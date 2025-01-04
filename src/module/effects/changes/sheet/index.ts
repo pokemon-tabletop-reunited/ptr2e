@@ -29,7 +29,7 @@ import StatsAlterationForm from "./stats-alteration.ts";
 // import AlterAttackChangeSystem from "../alter-attack.ts";
 // import AlterAttackForm from "./alter-attack.ts";
 
-const CHANGE_FORMS: Partial<Record<string, ConstructorOf<ChangeForm>>> = {
+const CHANGE_FORMS = {
     [FlatModifierChangeSystem.TYPE]: FlatModifierForm,
     [EphemeralModifierChangeSystem.TYPE]: FlatModifierForm,
     [StageModifierSystem.TYPE]: StageModifierForm,

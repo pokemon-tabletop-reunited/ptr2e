@@ -34,7 +34,7 @@ export default class PTR2eSkills extends Collection<Skill> {
     }
 
     // Allow custom-defined user Skills from the world
-    const settingSkills = game.settings.get<CustomSkill[]>("ptr2e", "skills");
+    const settingSkills = game.settings.get("ptr2e", "skills");
     if (settingSkills?.length > 0) {
       settingSkills.forEach((skill: CustomSkill) => {
         if (!skill.slug && !skill.label) return;

@@ -501,6 +501,6 @@ export default class ItemSheetPTR2e<
     // Items only support effects
     if (type !== "effect") return;
 
-    return CONFIG.ActiveEffect.documentClass.createDialog({}, { parent: this.document, types: CONFIG.ActiveEffect.documentClass.TYPES.filter(s => !["summon", "form"].includes(s)) });
+    return CONFIG.ActiveEffect.documentClass.createDialog({}, { parent: this.document, types: CONFIG.PTR.ActiveEffect.documentClass.TYPES.filter(s => !["summon", "form"].includes(s)) });
   }
 }

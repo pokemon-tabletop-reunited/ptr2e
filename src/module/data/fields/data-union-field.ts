@@ -63,7 +63,7 @@ class DataUnionField<
       }
     }
 
-    return this.fields[0].validate(value, options);
+    return this.fields[0].validate(value, options) as DataModelValidationFailure | undefined;
   }
 
   override initialize(

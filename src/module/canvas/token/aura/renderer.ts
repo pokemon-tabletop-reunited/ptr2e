@@ -43,7 +43,6 @@ class AuraRenderer extends PIXI.Graphics implements TokenAuraData {
 
   /** ID of `GridHighlight` container for this aura's token */
   get highlightLayer(): GridHighlight | null {
-    //@ts-expect-error - fvtt-types unfinished types
     return canvas.interface!.grid?.getHighlightLayer(this.token.highlightId) ?? null;
   }
 
@@ -58,7 +57,7 @@ class AuraRenderer extends PIXI.Graphics implements TokenAuraData {
     const { mechanicalBounds } = this.token;
     this.x = mechanicalBounds.width / 2;
     this.y = mechanicalBounds.height / 2;
-    if (this.token.document.width < 1) {
+    if ((this.token.document.width ?? 1) < 1) {
       // Tiny tokens may not be at the top-left position. Adjust for that here.
       this.x += mechanicalBounds.x - this.token.x;
       this.y += mechanicalBounds.y - this.token.y;
@@ -130,7 +129,6 @@ class AuraRenderer extends PIXI.Graphics implements TokenAuraData {
       .endFill();
     this.textureContainer.position.set(bounds.x + radiusPixels, bounds.y + radiusPixels);
 
-    //@ts-expect-error - fvtt-types unfinished types
     canvas.interface!.grid.addChild(this.textureContainer);
   }
 
@@ -142,7 +140,6 @@ class AuraRenderer extends PIXI.Graphics implements TokenAuraData {
     this.#drawLabel();
 
     // Clear the existing highlight layer
-    //@ts-expect-error - fvtt-types unfinished types
     canvas.interface!.grid.clearHighlightLayer(this.highlightId);
 
     // For now, only highlight if there is an active combat
@@ -191,7 +188,6 @@ class AuraRenderer extends PIXI.Graphics implements TokenAuraData {
     super.destroy(options);
 
     if (this.textureContainer) {
-      //@ts-expect-error - fvtt-types unfinished types
       canvas.interface!.grid.removeChild(this.textureContainer);
       if (!this.textureContainer.destroyed) this.textureContainer.destroy();
     }

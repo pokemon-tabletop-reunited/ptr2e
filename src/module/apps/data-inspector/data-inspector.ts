@@ -179,7 +179,6 @@ class DataInspector extends foundry.applications.api.HandlebarsApplicationMixin(
       doc = this.document,
       type = doc.type;
 
-    // @ts-expect-error - Type labels are present
     context.typeLabel = game.i18n.localize(CONFIG[doc.documentName]?.typeLabels?.[type] ?? doc.type);
     context.docType = doc.constructor.name;
     context.dataType = this.mode;

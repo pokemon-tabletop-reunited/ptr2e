@@ -5,7 +5,7 @@ import { TargetSelectorPopup } from "@module/apps/target-selector/target-selecto
 export const ChatContext: PTRHook = {
   listen: () => {
     // Luck based rerolling
-    Hooks.on("getChatLogEntryContext", (chat: ChatLog, menuItems: ContextMenuEntry[]): void => {
+    Hooks.on("getChatLogEntryContext", (_chat: ChatLog, menuItems: ContextMenuEntry[]): void => {
       const options: ContextMenuEntry[] = [
         {
           name: "PTR2E.ChatContext.RerollSkill.label",
@@ -54,7 +54,7 @@ export const ChatContext: PTRHook = {
             if (message.type == "skill") {
               const chatMessage = message as PTR.ChatMessage.System.Skill.ParentInstance;
 
-              const currentResult = chatMessage.system.context?.roll?.total;
+              const currentResult = (chatMessage.system as PTR.ChatMessage.System.Skill.Instance).context?.roll?.total;
               if (currentResult === undefined) return;
 
               // Get the amount required to get to the next increment of -10, or 0 if the current result is above 0.
@@ -98,7 +98,7 @@ export const ChatContext: PTRHook = {
             else if (message.type == "attack") {
               const attackMessage = message as PTR.ChatMessage.System.Attack.ParentInstance
               // get the valid targets (the ones that have been missed)
-              const targets = attackMessage.system.results.map(r => {
+              const targets = (attackMessage.system as PTR.ChatMessage.System.Attack.Instance).results.map(r => {
                 // (r.accuracy?.total ?? 0) <= (r.accuracy?.options?.accuracyDC ?? -1)
                 const currentResult = r.accuracy?.total ?? 0;
                 const amount = Math.max(currentResult, 0);

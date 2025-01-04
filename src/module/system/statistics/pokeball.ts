@@ -157,7 +157,7 @@ class PokeballCheck<TParent extends PokeballStatistic = PokeballStatistic> imple
       target
     })
 
-    if (context.self.actor.flags.ptr2e.disableActionOptions?.disabled.includes(this.parent.action.uuid as ActionUUID)) {
+    if (context.self.actor.flags.ptr2e?.disableActionOptions?.disabled.includes(this.parent.action.uuid as ActionUUID)) {
       ui.notifications.warn(game.i18n.format("PTR2E.AttackWarning.AfflictionDisabled", { name: this.parent.action.name }));
       return null;
     }

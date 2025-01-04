@@ -1,7 +1,7 @@
 import type { ContentTabName } from "../data.ts";
 import type { CompendiumBrowser } from "../index.ts";
 import { CompendiumBrowserTab } from "./base.ts";
-import type { PerkFilters, CompendiumBrowserIndexData } from "./data.ts";
+import type { PerkFilters, CompendiumBrowserIndexData, CompendiumIndexData } from "./data.ts";
 
 export class CompendiumBrowserPerkTab extends CompendiumBrowserTab {
   tabName: ContentTabName = "perk"
@@ -32,7 +32,7 @@ export class CompendiumBrowserPerkTab extends CompendiumBrowserTab {
       indexFields
     )) {
       debug(`${pack.metadata.label} - ${index.size} entries found`);
-      for (const perkData of index) {
+      for (const perkData of index as unknown as (PTR.Item.System.Perk.ParentSource & CompendiumIndexData)[]) {
         if(perkData.type !== "perk") continue;
 
         perkData.filters = {};
@@ -47,7 +47,7 @@ export class CompendiumBrowserPerkTab extends CompendiumBrowserTab {
         }
 
         for(const prereq of perkData.system.prerequisites ?? []) {
-          prerequisites.add(prereq);
+          prerequisites.add(prereq as string);
         }
 
         perks.push({

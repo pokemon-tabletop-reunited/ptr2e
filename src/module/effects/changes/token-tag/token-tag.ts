@@ -17,7 +17,7 @@ class TokenTagChangeSystem extends ChangeModel {
     }
 
     const token =
-      fromUuidSync(this.value ?? "")
+      fromUuidSync<TokenDocument.ConfiguredInstance>(this.value as ValidUUID)
       ?? (game.user!.targets.size === 1
         ? Array.from(game.user!.targets)[0].document
         : await new TagTokenPrompt({ prompt: null, requirements: null }).resolveTarget());

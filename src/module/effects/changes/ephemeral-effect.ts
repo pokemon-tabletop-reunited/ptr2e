@@ -66,9 +66,9 @@ class EphemeralEffectChangeSystem extends ChangeModel<EphemeralEffectChangeSchem
     synthetics[this.affects].push(defferedEffect);
   }
 
-  protected async getItem(key: string): Promise<Maybe<ClientDocument>> {
+  protected async getItem(key: string) {
     try {
-      return (await fromUuid(key))?.clone() ?? null;
+      return (await fromUuid<PTR.Item.System.Effect.ParentInstance>(key))?.clone() ?? null;
     } catch (error) {
       console.error(error);
       return null;
@@ -91,17 +91,17 @@ class EphemeralEffectChangeSystem extends ChangeModel<EphemeralEffectChangeSchem
         this.failValidation(`"${uuid}" does not look like a UUID`);
         return null;
       }
-      const effect: Maybe<ClientDocument> = await this.getItem(uuid);
+      const effect = await this.getItem(uuid);
       if (!(effect instanceof CONFIG.Item.documentClass && effect.type === "effect")) {
         this.failValidation(`unable to find effect item with uuid "${uuid}"`);
         return null;
       }
 
-      const source = effect.toObject();
+      const source = effect.toObject() as PTR.Item.System.Effect.ParentSource;
 
       // An ephemeral effect will be added to a contextual clone's item source array and cannot include any asynchronous change models
-      const hasForbiddenCMs = source.effects.some((e) =>
-        (e.system as PTR.ActiveEffect.SystemSource).changes.some(
+      const hasForbiddenCMs = (source.effects as PTR.ActiveEffect.SourceWithSystem[]).some((e) =>
+        e.system.changes!.some(
           (c) =>
             typeof c.key === "string" &&
             (c.key === "choice-set" ||

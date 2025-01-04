@@ -2,7 +2,7 @@ import { htmlQuery } from "@utils";
 import { ActorSizePTR2e } from "@actor/data/size.ts";
 
 export class TokenConfigPTR2e extends TokenConfig {
-  static override get defaultOptions(): DocumentSheetOptions {
+  static override get defaultOptions(): DocumentSheetOptions<TokenDocument.ConfiguredInstance> {
     return {
       ...super.defaultOptions,
       template: "systems/ptr2e/templates/apps/token/sheet.hbs",
@@ -10,7 +10,7 @@ export class TokenConfigPTR2e extends TokenConfig {
     };
   }
 
-  override async getData(options?: Partial<DocumentSheetOptions> | undefined) {
+  override async getData(options?: Partial<DocumentSheetOptions<TokenDocument.ConfiguredInstance>> | undefined) {
     const data = await super.getData(options);
 
     return {
@@ -33,14 +33,14 @@ export class TokenConfigPTR2e extends TokenConfig {
 
     const linkToSizeButton = htmlQuery(html, "a[data-action=toggle-link-to-size]");
     linkToSizeButton?.addEventListener("click", async () => {
-      await this.token.update({ "flags.ptr2e.linkToActorSize": !this.token.flags.ptr2e?.linkToActorSize });
+      await (this.token as TokenDocument.ConfiguredInstance).update({ "flags.ptr2e.linkToActorSize": !this.token.flags.ptr2e?.linkToActorSize });
       this.#reestablishPrototype();
       this.render();
     });
 
     const autoscaleButton = htmlQuery(html, "a[data-action=toggle-autoscale]");
     autoscaleButton?.addEventListener("click", async () => {
-      await this.token.update({ "flags.ptr2e.autoscale": !this.token.flags.ptr2e?.autoscale });
+      await (this.token as TokenDocument.ConfiguredInstance).update({ "flags.ptr2e.autoscale": !this.token.flags.ptr2e?.autoscale });
       this.#reestablishPrototype();
       this.render();
     });
@@ -72,6 +72,7 @@ export class TokenConfigPTR2e extends TokenConfig {
   #reestablishPrototype(): void {
     if (this.isPrototype && this.actor) {
       const realPrototype = this.actor.prototypeToken;
+      //@ts-expect-error: FIXME: Ask how to set prototype token type
       this.object = this.token = realPrototype;
       setTimeout(() => this.render(true), 100);
     }
@@ -81,7 +82,7 @@ export class TokenConfigPTR2e extends TokenConfig {
   protected override _getSubmitData(updateData: Record<string, unknown> | null = {}){
     const changes = updateData ?? {};
     if (this.form!.querySelector<HTMLInputElement>("input[name=scale]")?.disabled) {
-      changes["scale"] = Math.abs(this.token._source.texture.scaleX);
+      changes["scale"] = Math.abs(this.token._source.texture.scaleX!);
     }
     return super._getSubmitData(changes);
   }

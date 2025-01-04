@@ -26,13 +26,20 @@ interface AttributeSchema extends StatSchema {
   base: foundry.data.fields.NumberField<{ required: false, nullable: false, initial: number | undefined, validate: (d: number) => boolean }>;
 }
 
+interface HpAttributeSchema extends foundry.data.fields.DataSchema {
+  slug: SlugField<{ required: true, initial: string }>;
+  evs: foundry.data.fields.NumberField<{ required: true, nullable: false, initial: number, label: string, min: number, max: number, step: number, validate: (d: number) => boolean }>;
+  ivs: foundry.data.fields.NumberField<{ required: true, nullable: false, initial: number, validate: (d: number) => boolean }>;
+  base: foundry.data.fields.NumberField<{ required: false, nullable: false, initial: number | undefined, validate: (d: number) => boolean }>;
+}
+
 const actorSystemSchema = (() => {
   const fields = foundry.data.fields;
 
   function getAttributeField(slug: string, withStage?: boolean): AttributeSchema;
   function getAttributeField(slug: string, withStage: true): AttributeSchema;
-  function getAttributeField(slug: string, withStage: false): Omit<AttributeSchema, "stage">;
-  function getAttributeField(slug: string, withStage = true): AttributeSchema | Omit<AttributeSchema, "stage"> {
+  function getAttributeField(slug: string, withStage: false): HpAttributeSchema;
+  function getAttributeField(slug: string, withStage = true): AttributeSchema | HpAttributeSchema {
     return {
       ...getStatField(slug, withStage),
       evs: new fields.NumberField({
@@ -309,7 +316,6 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
     // Migrate species Abilities data to the new format
     if (source.species?.abilities) {
       for (const abGroup of Object.keys(source.species.abilities)) {
-        //@ts-expect-error - This is a migration, so we can safely assume the data is in the old format
         source.species.abilities[abGroup] = (source.species.abilities[abGroup]).map((g: string | object) => {
           if (typeof g == "object") return g;
           return { slug: g, uuid: null };

@@ -10,7 +10,6 @@ export class AuraRenderers extends Map<string, AuraRenderer> {
 
   /** The ID of the highlight layer for this aura's token */
   get highlightId(): string {
-    //@ts-expect-error - fvtt-types unfinished types
     return this.token.highlightId;
   }
 
@@ -68,7 +67,6 @@ export class AuraRenderers extends Map<string, AuraRenderer> {
     if (this.size === 0) return;
 
     this.clearHighlights();
-    //@ts-expect-error - fvtt-types unfinished types
     if (this.token.isAnimating) return;
 
     const showBordersHighlights = this.#showBordersHighlights;
@@ -79,9 +77,7 @@ export class AuraRenderers extends Map<string, AuraRenderer> {
     if (showBordersHighlights && (this.token.hover || this.token.layer.highlightObjects)) {
       const { highlightId } = this;
       const highlight =
-        //@ts-expect-error - fvtt-types unfinished types
         canvas.interface!.grid.highlightLayers[highlightId] ??
-        //@ts-expect-error - fvtt-types unfinished types
         canvas.interface!.grid.addHighlightLayer(highlightId);
       highlight.clear();
       for (const aura of this.values()) {
@@ -117,7 +113,6 @@ export class AuraRenderers extends Map<string, AuraRenderer> {
   }
 
   clearHighlights(): void {
-    //@ts-expect-error - fvtt-types unfinished types
     canvas.interface!.grid.destroyHighlightLayer(this.highlightId);
   }
 }

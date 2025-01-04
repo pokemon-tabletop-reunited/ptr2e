@@ -12,13 +12,13 @@ export class MeasuredTemplatePTR2e extends MeasuredTemplate {
     //@ts-expect-error - Foundry types are incomplete
     grid.clearHighlightLayer(this.highlightId);
 
+    //@ts-expect-error - Foundry types are incomplete
     this.layer.snapFor(this.document.t);
 
     // Highlight colors
     const border = this.document.borderColor;
     const color = this.document.fillColor;
 
-    //@ts-expect-error - Foundry types are incomplete
     const positions = this._getGridHighlightPositions();
     for (const { x, y } of positions) {
       //@ts-expect-error - Foundry types are incomplete

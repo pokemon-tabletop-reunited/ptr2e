@@ -62,7 +62,7 @@ export class PerkWebTour extends PTRTour {
       case "perk-example": {
         if(!this.actor?.perks.get("root-1")) {
           this.actor?.perks.set("root-1", new CONFIG.Item.documentClass({
-            "type": "perk",
+            "type": "perk" as const,
             "name": "Root 1",
             "img": "icons/svg/door-exit.svg",
             "system": {
@@ -96,7 +96,7 @@ export class PerkWebTour extends PTRTour {
               "global": true,
               "originSlug": "root-1"
             }
-          }));
+          }) as PTR.Item.System.Perk.ParentInstance);
           await this.perkWeb.constructor.refresh.call(this.perkWeb);
         }
 

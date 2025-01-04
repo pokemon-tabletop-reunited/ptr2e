@@ -186,7 +186,7 @@ export default class ActorDirectoryPTR2e extends ActorDirectory {
     if(targetFolder && noParty !== true && targetFolder.owner) {
       update["system.party.partyMemberOf"] = targetFolder.id;
 
-      const user = game.users.find((user) => user.character?.uuid === targetFolder.owner);
+      const user = game.users.find((user: User.ConfiguredInstance) => user.character?.uuid === targetFolder.owner);
       if(user) {
         update['ownership'] = {[user.id]: CONST.DOCUMENT_OWNERSHIP_LEVELS.OWNER, default: CONST.DOCUMENT_OWNERSHIP_LEVELS.OBSERVER};
       }

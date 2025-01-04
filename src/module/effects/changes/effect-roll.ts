@@ -49,14 +49,14 @@ class EffectRollChangeSystem extends ChangeModel<EffectRollChangeSchema> {
   }
 
   get selector() {
-    return this.key;
+    return (this as EffectRollChangeSystem).key;
   }
 
   get uuid() {
-    return this.value;
+    return (this as EffectRollChangeSystem).value;
   }
 
-  override apply(actor: Actor.ConfiguredInstance): void {
+  override apply(this: EffectRollChangeSystem, actor: Actor.ConfiguredInstance): void {
     if (!this.actor) return;
 
     const { selector, isCrit } = (() => {
@@ -76,7 +76,7 @@ class EffectRollChangeSystem extends ChangeModel<EffectRollChangeSchema> {
     synthetics[this.affects].push(defferedEffect);
   }
 
-  #createDeferredEffectRoll(isCrit = false): DeferredEffectRoll {
+  #createDeferredEffectRoll(this: EffectRollChangeSystem, isCrit = false): DeferredEffectRoll {
     return async (params: DeferredValueParams = {}): Promise<EffectRoll | null> => {
       if (!this.actor) return null;
       if (!this.test(params.test ?? this.actor.getRollOptions())) return null;
@@ -101,9 +101,9 @@ class EffectRollChangeSystem extends ChangeModel<EffectRollChangeSchema> {
     }
   }
 
-  protected async getItem(key: string): Promise<Maybe<ClientDocument>> {
+  protected async getItem(this: EffectRollChangeSystem, key: string){
     try {
-      return (await fromUuid(key))?.clone({}, { keepId: true }) ?? null;
+      return (await fromUuid<PTR.Item.System.Effect.ParentInstance>(key))?.clone({}, { keepId: true }) ?? null;
     } catch (error) {
       console.error(error);
       return null;
@@ -116,3 +116,4 @@ interface EffectRollChangeSystem {
 }
 
 export default EffectRollChangeSystem;
+export type { EffectRollChangeSystem }

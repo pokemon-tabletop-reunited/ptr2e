@@ -1,13 +1,13 @@
 
 import type { Size } from "@actor";
-import { ActorPTR2e, ActorSheetPTR2e, HumanoidActorSystem, PokemonActorSystem } from "@actor";
+import { ActorPTR2e, ActorSheetPTR2e, ActorSystemPTR2e, HumanoidActorSystem, PokemonActorSystem } from "@actor";
 import { SummonCombatantSystem, CharacterCombatantSystem, CombatPTR2e, CombatSystemPTR2e, CombatTrackerPTR2e, CombatantPTR2e, RoundCombatantSystem } from "@combat";
 import { ItemPTR2e, data, sheets } from "@item";
 import { PerkDirectory } from "@module/apps/sidebar/perks-directory.ts";
 import { SquareGridPTR2e } from "@module/canvas/grid.ts";
 import { TemplateLayerPTR2e } from "@module/canvas/layer/template.ts";
 import { MeasuredTemplatePTR2e } from "@module/canvas/measured-template.ts";
-import { ActionPTR2e, AttackPTR2e, BasicChangeSystem, ChangeModel, PassivePTR2e } from "@data";
+import { ActionPTR2e, AttackPTR2e, BasicChangeSystem, ChangeModel, PassivePTR2e, PokeballActionPTR2e, RollOptionChangeSystem, SummonAttackPTR2e } from "@data";
 import { ActiveEffectPTR2e } from "@module/effects/index.ts";
 import { AttackMessageSystem, ChatMessagePTR2e, DamageAppliedMessageSystem, ItemMessageSystem, SkillMessageSystem, CaptureMessageSystem } from "@module/chat/index.ts";
 import Traits from "static/traits.json" assert { type: "json" };
@@ -61,7 +61,8 @@ export const PTRCONFIG = {
     sheetClasses: {
       character: ActorSheetPTR2e,
       "ptu-actor": sheets.PTUSheet,
-    }
+    },
+    systemClass: ActorSystemPTR2e
   },
   Change: {
     documentClass: ChangeModel,
@@ -200,6 +201,12 @@ export const PTRCONFIG = {
       base: ActionPTR2e,
       attack: AttackPTR2e,
       passive: PassivePTR2e,
+      pokeball: PokeballActionPTR2e,
+      summon: SummonAttackPTR2e
+    },
+    changes: {
+      base: ChangeModel,
+      "roll-option": RollOptionChangeSystem
     }
   }
 }

@@ -14,7 +14,7 @@ import type { TutorListSettings } from "@system/tutor-list/setting-model.ts";
 import type { TutorListApp } from "@module/apps/tutor-list.ts";
 import type GithubManager from "@module/apps/github.ts";
 import { ExpTrackerSettings } from "@system/exp-tracker-model.ts";
-import type { ItemFlagsPTR2e, ItemGrantData } from "@item/data/data.ts";
+import type { ItemGrantData } from "@item/data/data.ts";
 import type { ActiveEffectPTR2e } from "@effects";
 import type { TypeEffectiveness } from "@scripts/config/effectiveness.ts";
 import type { CompendiumBrowserSettings, CompendiumBrowserSources } from "@module/apps/compendium-browser/data.ts";
@@ -33,6 +33,7 @@ import type PassiveActiveEffectSystem from "@module/effects/data/passive.ts";
 import type SummonActiveEffectSystem from "@module/effects/data/summon.ts";
 import type FormActiveEffectSystem from "@module/effects/data/form.ts";
 import type { MeasuredTemplatePTR2e } from "@module/canvas/measured-template.ts";
+import type { CustomSkill } from "@module/data/models/skill.ts";
 
 declare global {
   // interface ConfigPTR2e extends ConfiguredConfig {
@@ -150,7 +151,7 @@ declare global {
     Folder: typeof FolderPTR2e;
     ChatMessage: typeof ChatMessagePTR2e;
   }
-  
+
   interface PlaceableObjectClassConfig {
     Token: typeof TokenPTR2e;
     MeasuredTemplate: typeof MeasuredTemplatePTR2e;
@@ -223,7 +224,20 @@ declare global {
         editedSkills?: boolean
       }
     };
-    Item: ItemFlagsPTR2e;
+    Item: {
+      core?: {
+        sourceId?: string;
+      }
+      ptr2e?: {
+        choiceSelections?: Record<string, string | number | object | null>;
+        //itemGrants: Record<string, ItemGrantData>;
+        grantedBy?: ItemGrantData | null;
+        rollOptions?: {
+          [domain in keyof typeof RollOptionDomains]: Record<string, boolean>;
+        }
+        [key: string]: unknown;
+      };
+    }
     Folder: {
       core?: Record<string, unknown>;
       ptr2e?: {
@@ -233,9 +247,9 @@ declare global {
       }
     },
     ActiveEffect: {
-      // core?: {
-      //   sourceId?: string;
-      // },
+      core?: {
+        sourceId?: string;
+      },
       ptr2e?: {
         itemGrants?: Record<string, ItemGrantData>;
         grantedBy?: ItemGrantData | null;
@@ -270,6 +284,12 @@ declare global {
         linkToActorSize?: boolean;
       }
     }
+    Combatant: {
+      ptr2e?: Record<string, unknown>
+    }
+    Combat: {
+      ptr2e?: Record<string, unknown>
+    }
   }
 
   interface SettingConfig {
@@ -283,7 +303,7 @@ declare global {
     "ptr2e.dev-mode": boolean
     "ptr2e.player-folder-create-permission": boolean
     "ptr2e.traits": Trait[]
-    "ptr2e.skills": unknown[]
+    "ptr2e.skills": CustomSkill[]
     "ptr2e.artmap": Record<string, SpeciesImageDataSource>
     "ptr2e.worldSystemVersion": string
     "ptr2e.worldSchemaVersion": number

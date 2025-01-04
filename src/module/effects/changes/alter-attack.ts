@@ -42,7 +42,7 @@ class AlterAttackChangeSystem extends ChangeModel<AlterAttackChangeSchema> {
     return this.key;
   }
 
-  override apply(actor: Actor.ConfiguredInstance): void {
+  override apply(this: AlterAttackChangeSystem, actor: Actor.ConfiguredInstance): void {
     this.beforePrepareData(actor);
   }
 
@@ -234,10 +234,11 @@ class AlterAttackChangeSystem extends ChangeModel<AlterAttackChangeSchema> {
               }
 
               if (!attack.range) {
-                attack.range = new RangePTR2e({
+                attack.range = {
                   target: change as PTRCONSTS.TargetOption,
                   distance: 1,
-                });
+                  unit: PTRCONSTS.DistanceUnits.METERS
+                };
               }
               else {
                 attack.range.target = change as PTRCONSTS.TargetOption;

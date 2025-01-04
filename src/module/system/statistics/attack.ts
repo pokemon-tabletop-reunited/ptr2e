@@ -250,7 +250,7 @@ class AttackCheck<TParent extends AttackStatistic = AttackStatistic> implements 
       traits: args.traits ?? this.item.traits,
     }) as CheckContext<Actor.ConfiguredInstance, AttackCheck<TParent>, PTR.Item.ItemWithActions>;
 
-    if (context.self.actor.flags.ptr2e.disableActionOptions?.disabled.includes(this.attack.uuid as ActionUUID)) {
+    if (context.self.actor.flags.ptr2e?.disableActionOptions?.disabled.includes(this.attack.uuid as ActionUUID)) {
       ui.notifications.warn(game.i18n.format("PTR2E.AttackWarning.AfflictionDisabled", { name: this.attack.name }));
       return null;
     }
@@ -283,7 +283,7 @@ class AttackCheck<TParent extends AttackStatistic = AttackStatistic> implements 
         traits: args.traits ?? this.item.traits,
       }) as CheckContext<Actor.ConfiguredInstance, AttackCheck<TParent>, PTR.Item.ItemWithActions>
 
-      if (currContext.self.actor.flags.ptr2e.disableActionOptions?.disabled.includes(this.attack.uuid as ActionUUID)) {
+      if (currContext.self.actor.flags.ptr2e?.disableActionOptions?.disabled.includes(this.attack.uuid as ActionUUID)) {
         ui.notifications.warn(game.i18n.format("PTR2E.AttackWarning.AfflictionDisabled", { name: this.attack.name }));
         return null;
       }

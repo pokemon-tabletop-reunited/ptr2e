@@ -244,6 +244,7 @@ class GithubManager {
 
     // Check if valid document
     try {
+      //@ts-expect-error - FIXME: fvtt-types invalid types / circularity issue
       const tempItem = new CONFIG.Item.documentClass(foundry.utils.deepClone(data), { keepId: true });
       tempItem.validate();
     } catch (error) {

@@ -213,7 +213,7 @@ export default class TokenPanel extends foundry.applications.api.HandlebarsAppli
         const uuid = (event.currentTarget as HTMLElement).dataset.uuid;
         if (!uuid) return;
 
-        const actor = await fromUuid(uuid);
+        const actor = await fromUuid<Actor.ConfiguredInstance>(uuid as ActorUUID);
         return actor?.sheet?.render(true);
       });
 
@@ -378,12 +378,10 @@ export default class TokenPanel extends foundry.applications.api.HandlebarsAppli
 
   updateAppListeners(token: Token.ConfiguredInstance | null) {
     if (this.token?.actor) {
-      //@ts-expect-error - AppV1 Compatibility
       delete this.token.actor.apps[this.id];
     }
 
     if (!token?.actor) return;
-    //@ts-expect-error - AppV1 Compatibility
     token.actor.apps[this.id] = this;
   }
 }

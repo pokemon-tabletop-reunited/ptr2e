@@ -244,11 +244,11 @@ async function processPreUpdateHooks(document: Actor.ConfiguredInstance | Active
   const createDeletes = (
     await Promise.all(
       changes.map(
-        (c): Promise<{ create: Item.ConstructorData[]; delete: string[] } | { createEffects: PTR.ActiveEffect.Source[]; deleteEffects: string[] }> => c.preUpdateActor()
+        (c): Promise<{ create: PTR.Item.Source[]; delete: string[] } | { createEffects: PTR.ActiveEffect.Source[]; deleteEffects: string[] }> => c.preUpdateActor()
       )
     )
   ).reduce(
-    (combined: { create: Item.ConstructorData[]; delete: string[]; createEffects: PTR.ActiveEffect.Source[]; deleteEffects: string[] }, cd) => {
+    (combined: { create: PTR.Item.Source[]; delete: string[]; createEffects: PTR.ActiveEffect.Source[]; deleteEffects: string[] }, cd) => {
       if ('create' in cd) {
         combined.create.push(...cd.create);
         combined.delete.push(...cd.delete);

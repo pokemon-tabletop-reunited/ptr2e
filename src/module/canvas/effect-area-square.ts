@@ -22,7 +22,6 @@ export class EffectAreaSquare extends PIXI.Rectangle {
     if (this.x < 0 || this.y < 0) return;
 
     if (this.active) {
-      //@ts-expect-error - fvtt-types unfinished types
       canvas!.interface!.grid!.highlightPosition(layer.name, {
         x: this.x,
         y: this.y,
@@ -31,7 +30,6 @@ export class EffectAreaSquare extends PIXI.Rectangle {
         alpha: highlight.alpha,
       });
     } else {
-      //@ts-expect-error - fvtt-types unfinished types
       canvas!.interface!.grid!.highlightPosition(layer.name, {
         x: this.x,
         y: this.y,

@@ -1,6 +1,4 @@
 import { ActorComponent } from "./base.ts";
-import type { Skill } from "@actor/data.ts";
-import type { SkillSchema } from "@module/data/models/skill.ts";
 import { htmlQueryAll } from "@utils";
 
 class SkillsComponent extends ActorComponent {
@@ -123,7 +121,7 @@ class SkillsComponent extends ActorComponent {
         )?.dataset.slug;
         if (!skillSlug) return;
 
-        const skills = actor.system.toObject().skills as foundry.data.fields.SchemaField.PersistedType<SkillSchema>[];
+        const skills = actor.system.toObject().skills as PTR.Models.Skill.Source[];
         const index = skills.findIndex((s) => s.slug === skillSlug);
         if (index === -1) return;
 
@@ -141,7 +139,7 @@ class SkillsComponent extends ActorComponent {
         )?.dataset.slug;
         if (!skillSlug) return;
 
-        const skills = actor.system.toObject().skills as foundry.data.fields.SchemaField.PersistedType<SkillSchema>[];
+        const skills = actor.system.toObject().skills as PTR.Models.Skill.Source[];
         const index = skills.findIndex((s) => s.slug === skillSlug);
         if (index === -1) return;
 

@@ -59,7 +59,7 @@ async function checkAreaEffects(this: Actor.ConfiguredInstance): Promise<void> {
 /** Get the user color most appropriate for a provided actor */
 function userColorForActor(actor: Actor.ConfiguredInstance): HexColorString {
   const user =
-    game.users.find((u) => u.character === actor) ??
+    game.users.find((u: User.ConfiguredInstance) => u.character === actor) ??
     game.users.players.find((u) => actor.testUserPermission(u, "OWNER")) ??
     actor.primaryUpdater;
   return user?.color.toString() as HexColorString ?? "#43dfdf";
@@ -75,13 +75,13 @@ async function resolveCapture(originUuid: string, targetUuid: string, success: b
   const isPlayerCapture = originActor.hasPlayerOwner;
   const actors = isPlayerCapture
     ? (() => {
-      const playerCharacters = game.users.filter(u => !u.isGM && !!u.character).map(u => u.character!).filter(c => c.party?.owner === c) as Actor.ConfiguredInstance[]
+      const playerCharacters = game.users.filter((u: User.ConfiguredInstance) => !u.isGM && !!u.character).map(u => u.character!).filter(c => c.party?.owner === c) as Actor.ConfiguredInstance[]
       if (!playerCharacters.length) return [originActor];
       if (!playerCharacters.find(pc => pc.uuid === originActor.uuid)) playerCharacters.push(originActor);
       return playerCharacters;
     })()
     : (() => {
-      const nonPlayerCharacters = game.actors.filter(a => !a.hasPlayerOwner && a.uuid !== originActor.uuid && !!a.party && a.party.owner === a) as Actor.ConfiguredInstance[];
+      const nonPlayerCharacters = game.actors.filter((a: Actor.ConfiguredInstance) => !a.hasPlayerOwner && a.uuid !== originActor.uuid && !!a.party && a.party.owner === a) as Actor.ConfiguredInstance[];
       return [originActor, ...nonPlayerCharacters];
     })()
   const trainerOptions = actors.reduce((acc, actor) => {

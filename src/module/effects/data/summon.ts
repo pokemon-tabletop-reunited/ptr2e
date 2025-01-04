@@ -55,3 +55,4 @@ class SummonActiveEffectSystem extends AfflictionActiveEffectSystem<SummonEffect
 }
 
 export default SummonActiveEffectSystem;
+export type { SummonActiveEffectSystem }

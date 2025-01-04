@@ -35,11 +35,11 @@ export class MigrationSummary extends Application<MigrationSummaryOptions> {
   override async getData(): Promise<MigrationSummaryData> {
     const latestSchemaVersion = MigrationRunner.LATEST_SCHEMA_VERSION;
     const actors = {
-      successful: game.actors.filter((actor) => actor.schemaVersion === latestSchemaVersion).length,
+      successful: game.actors.filter((actor: Actor.ConfiguredInstance) => actor.schemaVersion === latestSchemaVersion).length,
       total: game.actors.size,
     };
     const items = {
-      successful: game.items.filter((item) => item.schemaVersion === latestSchemaVersion).length,
+      successful: game.items.filter((item: Item.ConfiguredInstance) => item.schemaVersion === latestSchemaVersion).length,
       total: game.items.size,
     };
     const canRemigrate =
@@ -71,11 +71,11 @@ export class MigrationSummary extends Application<MigrationSummaryOptions> {
       const lowestVersions = {
         actor:
           game.actors.size > 0
-            ? Math.min(...game.actors.map((a) => a.schemaVersion ?? 0))
+            ? Math.min(...game.actors.map((a: Actor.ConfiguredInstance) => a.schemaVersion ?? 0))
             : LATEST_SCHEMA_VERSION,
         item:
           game.items.size > 0
-            ? Math.min(...game.items.map((a) => a.schemaVersion ?? 0))
+            ? Math.min(...game.items.map((a: Item.ConfiguredInstance) => a.schemaVersion ?? 0))
             : LATEST_SCHEMA_VERSION,
       };
       const lowestSchemaVersion = Math.max(

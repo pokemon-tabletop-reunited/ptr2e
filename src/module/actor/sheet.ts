@@ -174,7 +174,7 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
       },
       "open-settings": function (this: ActorSheetPTRV2) {
         const alliance =
-          this.actor._source.system.details?.alliance === null ? "neutral" : (this.actor._source.system.details?.alliance || "default");
+          (this.actor._source.system as PTR.Actor.SystemSource).details?.alliance === null ? "neutral" : ((this.actor._source.system as PTR.Actor.SystemSource).details?.alliance || "default");
         const defaultValue = game.i18n.localize(
           this.actor.hasPlayerOwner
             ? "PTR2E.ActorSheet.Alliance.Party"
@@ -196,12 +196,12 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
             </select></div></div>${Handlebars.helpers.formField(sizeFields.height, {
             hash: {
               localize: true,
-              value: this.actor._source.system.details.size.height
+              value: (this.actor._source.system as PTR.Actor.SystemSource).details.size.height
             }
           })}${Handlebars.helpers.formField(sizeFields.weight, {
             hash: {
               localize: true,
-              value: this.actor._source.system.details.size.weight
+              value: (this.actor._source.system as PTR.Actor.SystemSource).details.size.weight
             }
           })}<div class="form-group"><label>Height Class</label><div class="form-fields"><input readonly type="text" value="${game.i18n.localize(this.actor.size.toString())}"></div></div><div class="form-group"><label>Weight Class</label><div class="form-fields"><input readonly type="text" value="${this.actor.system.details.size.weightClass}"></div></div>`,
           //@ts-expect-error - FIXME: FVTT-Types are incorrect
@@ -983,7 +983,7 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
     const slot = Number(actionDiv.dataset.slot);
     if (isNaN(slot)) return;
 
-    const action = this.actor.actions.attack.get(slug);
+    const action = this.actor.actions.attack.get(slug) as PTR.Models.Action.Models.Attack.Instance;
     if (!action) return;
 
     const currentAction = this.actor.attacks.actions[slot];
@@ -1112,7 +1112,7 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
 
     switch (type) {
       case "effect": {
-        return CONFIG.ActiveEffect.documentClass.createDialog({}, { parent: this.document, types: CONFIG.ActiveEffect.documentClass.TYPES.filter(s => s != "summon") });
+        return CONFIG.ActiveEffect.documentClass.createDialog({}, { parent: this.document, types: CONFIG.PTR.ActiveEffect.documentClass.TYPES.filter(s => s != "summon") });
       }
       default: {
         const itemType = Item.TYPES.includes(type) ? type : null;

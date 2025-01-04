@@ -6,8 +6,8 @@ import { AttackStatistic } from "@system/statistics/attack.ts";
 import type { AttackStatisticRollParameters } from "@system/statistics/statistic.ts";
 import { SlugField } from "../fields/slug-field.ts";
 import type { AttackRollResult } from "@system/rolls/check-roll.ts";
-import type { SummonPTR2e } from "@item";
 import type { ActorSizePTR2e } from "@actor/data/size.ts";
+import type { DeepPartial } from "fvtt-types/utils";
 
 const attackSchema = {
   types: new foundry.data.fields.SetField(
@@ -125,10 +125,10 @@ class AttackPTR2e<Schema extends AttackSchema = AttackSchema> extends ActionPTR2
   }
 
   get isFree(): boolean {
-    return this.free;
+    return (this as AttackPTR2e).free;
   }
 
-  static override validateJoint(data: AttackPTR2e["_source"]) {
+  static override validateJoint(data: PTR.Models.Action.Models.Attack.Source) {
     const category = data.category as PokemonCategory;
     const power = data.power as number;
     if (category === "status" && power)
@@ -136,9 +136,10 @@ class AttackPTR2e<Schema extends AttackSchema = AttackSchema> extends ActionPTR2
   }
 
   override get css() {
-    const categorySize = this.types.size > 1 ? "66%" : "50%";
-    const typeSizes = this.types.size > 1 ? 66 / this.types.size : 50;
-    const gradient = `linear-gradient(120deg, ${Array.from(this.types)
+    const self = this as AttackPTR2e;
+    const categorySize = self.types.size > 1 ? "66%" : "50%";
+    const typeSizes = self.types.size > 1 ? 66 / self.types.size : 50;
+    const gradient = `linear-gradient(120deg, ${Array.from(self.types)
       .flatMap((t, i) => {
         if (i === 0) return [`var(--${t}-color)`, `var(--${t}-color) ${typeSizes}%`];
         return [
@@ -146,7 +147,7 @@ class AttackPTR2e<Schema extends AttackSchema = AttackSchema> extends ActionPTR2
           `var(--${t}-color) ${typeSizes * (i + 1)}%`,
         ];
       })
-      .join(` , `)}, var(--${this.category}-color) ${categorySize})`;
+      .join(` , `)}, var(--${self.category}-color) ${categorySize})`;
 
     return {
       style: `background: ${gradient};`,
@@ -155,19 +156,21 @@ class AttackPTR2e<Schema extends AttackSchema = AttackSchema> extends ActionPTR2
   }
 
   get hasVariants(): boolean {
-    return this.variants.length > 0;
+    return (this as AttackPTR2e).variants.length > 0;
   }
 
   get variants(): string[] {
-    if (this.variant) return this.actor?.actions.attack.get(this.variant)?.variants ?? [];
-    return this.actor?.actions.attack.filter(a => a.variant == this.slug).map(a => a.slug) ?? [];
+    const self = this as AttackPTR2e;
+    if (self.variant) return self.actor?.actions.attack.get(self.variant)?.variants ?? [];
+    return self.actor?.actions.attack.filter(a => a.variant == self.slug).map(a => a.slug) ?? [];
   }
 
   // TODO: This should add any relevant modifiers
   get stab(): 0 | 1 | 1.5 {
-    if (!this.actor) return 1;
-    const intersection = this.actor.system.type.types.intersection(this.types);
-    return intersection.size === 1 && this.types.has(PTRCONSTS.Types.UNTYPED)
+    const self = this as AttackPTR2e;
+    if (!self.actor) return 1;
+    const intersection = self.actor.system.type.types.intersection(self.types);
+    return intersection.size === 1 && self.types.has(PTRCONSTS.Types.UNTYPED)
       ? 1
       : intersection.size > 0
         ? 1.5
@@ -178,11 +181,11 @@ class AttackPTR2e<Schema extends AttackSchema = AttackSchema> extends ActionPTR2
     return true//this.accuracy !== null || this.power !== null;
   }
 
-  getAttackStat(actor: Maybe<Actor.ConfiguredInstance> = this.actor): number {
-    return actor?.getAttackStat(this) ?? 0;
+  getAttackStat(actor: Maybe<Actor.ConfiguredInstance> = (this as AttackPTR2e).actor): number {
+    return actor?.getAttackStat(this as AttackPTR2e) ?? 0;
   }
 
-  async roll(args?: AttackStatisticRollParameters): Promise<AttackRollResult['rolls'][] | null | false> {
+  async roll(this: AttackPTR2e, args?: AttackStatisticRollParameters): Promise<AttackRollResult['rolls'][] | null | false> {
     if (!this.rollable) return false;
     if (!args?.modifierDialog && !this.variant && this.defaultVariant) {
       const variant = this.actor?.actions.attack.get(this.defaultVariant);
@@ -192,9 +195,10 @@ class AttackPTR2e<Schema extends AttackSchema = AttackSchema> extends ActionPTR2
   }
 
   override prepareDerivedData(): void {
+    const self = this as AttackPTR2e;
     super.prepareDerivedData();
 
-    this.statistic = this.prepareStatistic();
+    self.statistic = self.prepareStatistic();
   }
 
   // eslint-disable-next-line @typescript-eslint/class-literal-property-style
@@ -207,13 +211,13 @@ class AttackPTR2e<Schema extends AttackSchema = AttackSchema> extends ActionPTR2
     return false; // TODO: Implement
   }
 
-  public prepareStatistic({ force }: { force?: boolean } = {}): AttackStatistic | null {
+  public prepareStatistic(this: AttackPTR2e, { force }: { force?: boolean } = {}): AttackStatistic | null {
     if (!force && this.statistic) return this.statistic;
     if (!this.actor) return null;
     return new AttackStatistic(this);
   }
 
-  public getRangeIncrement(distance: number | null, size: ActorSizePTR2e): number | null {
+  public getRangeIncrement(this: AttackPTR2e, distance: number | null, size: ActorSizePTR2e): number | null {
     if (
       distance === null ||
       !this.range ||
@@ -260,20 +264,18 @@ class AttackPTR2e<Schema extends AttackSchema = AttackSchema> extends ActionPTR2
       : rangeIncrement;
   }
 
-  async delayAction(number?: number) {
+  async delayAction(this: AttackPTR2e, number?: number) {
     if (!this.actor) return;
     if (!game.combat) return void ui.notifications.error("You must be in combat to be able to delay an action.");
     if (game.combat.combatant?.actor !== this.actor) return void ui.notifications.error("You must be the active combatant to delay this action.");
     if (number === undefined || number === null) {
       const dialog: number = await foundry.applications.api.DialogV2.prompt({
-        //@ts-expect-error - FIXME: FVTT-Types are incorrect
         window: { title: game.i18n.localize("PTR2E.Dialog.DelayActionTitle") },
         classes: ["center-text"],
         content: `<p>${game.i18n.localize("PTR2E.Dialog.DelayActionContent")}</p><input type="number" name="delay" min=1 max=3 step=1>`,
         ok: {
           action: "ok",
           label: "Delay Action",
-          //@ts-expect-error - FIXME: FVTT-Types are incorrect
           callback: (_event, _button, dialog) => {
             return Number(dialog?.querySelector<HTMLInputElement>("input[name='delay']")?.value)
           }
@@ -300,7 +302,7 @@ class AttackPTR2e<Schema extends AttackSchema = AttackSchema> extends ActionPTR2
           }) as this).toObject()
         ]
       }
-    }) as SummonPTR2e;
+    }) as PTR.Item.System.Summon.ParentInstance;
 
     const combatants = await game.combat.createEmbeddedDocuments("Combatant", [{
       name: summonItem.name,
@@ -319,12 +321,16 @@ class AttackPTR2e<Schema extends AttackSchema = AttackSchema> extends ActionPTR2
     });
   }
 
-  override prepareUpdate(data: foundry.data.fields.SchemaField.InnerAssignmentType<ActionSchema>): ActionPTR2e[] {
+  override update(this: AttackPTR2e, data: DeepPartial<foundry.data.fields.SchemaField.PersistedType<AttackSchema>>): Promise<PTR.Item.ItemWithActions> {
+    return super.update(data);
+  }
+
+  override prepareUpdate(data: DeepPartial<foundry.data.fields.SchemaField.PersistedType<AttackSchema>>): PTR.Models.Action.Source[] {
     const currentActions = super.prepareUpdate(data);
 
     for (const action of currentActions) {
       if (action.type !== "attack") continue;
-      const attack = action as AttackPTR2e;
+      const attack = action as PTR.Models.Action.Models.Attack.Source;
       if (attack.category === "status") {
         attack.power = null;
       }
@@ -332,7 +338,7 @@ class AttackPTR2e<Schema extends AttackSchema = AttackSchema> extends ActionPTR2
     return currentActions;
   }
 
-  override getRollOptions(prefix = ""): Set<string> {
+  override getRollOptions(this: AttackPTR2e, prefix = ""): Set<string> {
     return new Set([
       `attack:${this.slug}`,
       `attack:slug:${this.slug}`,

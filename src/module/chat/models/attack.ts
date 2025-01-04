@@ -1,5 +1,5 @@
 import type { AccuracySuccessCategory } from "@data";
-import { PokeballActionPTR2e, PTRCONSTS, SummonAttackPTR2e } from "@data";
+import { PTRCONSTS } from "@data";
 import { SlugField } from "@module/data/fields/slug-field.ts";
 import { AttackRoll } from "@system/rolls/attack-roll.ts";
 import type { AccuracyCalc, DamageCalc } from "./data.ts";
@@ -9,8 +9,6 @@ import { PredicateField } from "@system/predication/schema-data-fields.ts";
 import type { UserVisibility } from "@scripts/ui/user-visibility.ts";
 import type { ModifierPTR2e } from "@module/effects/modifiers.ts";
 import { RollNote } from "@system/notes.ts";
-import type { ConsumablePTR2e } from "@item";
-import type ConsumableSystem from "@item/data/consumable.ts";
 import type { CheckRoll } from "@system/rolls/check-roll.ts";
 import type { AnyObject } from "fvtt-types/utils";
 import type { RawPredicate } from "@system/predication/predication.ts";
@@ -73,15 +71,15 @@ const attackMessageSchema = {
           slug: new SlugField({ required: true, blank: true, initial: "" }),
           totalModifier: new foundry.data.fields.NumberField({ required: true, nullable: false, initial: 0 }),
           totalModifiers: new foundry.data.fields.ObjectField<
-            {required: true, initial: AnyObject},
+            { required: true, initial: AnyObject },
             Record<string, number>,
             Record<string, number>
           >({ required: true, initial: {} }),
           _modifiers: new foundry.data.fields.ArrayField(new foundry.data.fields.ObjectField<
-              {required: true, initial: AnyObject},
-              AnyObject,
-              ModifierPTR2e
-            >(), { required: true, initial: [] }),
+            { required: true, initial: AnyObject },
+            AnyObject,
+            ModifierPTR2e
+          >(), { required: true, initial: [] }),
         }),
         action: new foundry.data.fields.StringField({ required: true, blank: true, initial: "" }),
         domains: new foundry.data.fields.ArrayField(new SlugField(), { required: true, initial: [] }),
@@ -91,7 +89,7 @@ const attackMessageSchema = {
             title: new foundry.data.fields.StringField({ required: true, blank: true, initial: "" }),
             text: new foundry.data.fields.StringField({ required: true, blank: true, initial: "" }),
             predicate: new PredicateField({ required: true, initial: [] }),
-            outcome: new foundry.data.fields.ArrayField(new foundry.data.fields.NumberField({required: true, nullable: false}), { required: true, initial: [] }),
+            outcome: new foundry.data.fields.ArrayField(new foundry.data.fields.NumberField({ required: true, nullable: false }), { required: true, initial: [] }),
             visibility: new foundry.data.fields.StringField<
               { required: true, initial: "all", choices: ["all", "gm", "owner", "none"] },
               "all" | "gm" | "owner" | "none",
@@ -102,7 +100,7 @@ const attackMessageSchema = {
         ),
         title: new foundry.data.fields.StringField({ required: true, blank: true, initial: "" }),
         type: new foundry.data.fields.StringField({ required: true, blank: true, initial: "" }),
-        options: new foundry.data.fields.ArrayField(new foundry.data.fields.StringField({required: true}), { required: true, initial: [] }),
+        options: new foundry.data.fields.ArrayField(new foundry.data.fields.StringField({ required: true }), { required: true, initial: [] }),
       }),
       effectRolls: new foundry.data.fields.SchemaField({
         applied: new foundry.data.fields.BooleanField({ required: true, initial: false }),
@@ -302,7 +300,7 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel<Attack
       if (!jsonData) return {} as PTR.Models.Action.Models.Attack.Instance;
 
       try {
-        const attack = (jsonData.type === 'summon' ? SummonAttackPTR2e.fromJSON(this._source.attack) : CONFIG.PTR.models.actions.attack.fromJSON(this._source.attack)) as PTR.Models.Action.Models.Attack.Instance;
+        const attack = (jsonData.type === 'summon' ? CONFIG.PTR.models.actions.summon.fromJSON(this._source.attack) : CONFIG.PTR.models.actions.attack.fromJSON(this._source.attack)) as PTR.Models.Action.Models.Attack.Instance;
         const sourceItem = (this.originItem ?? this.origin.actions.attack.get(this._source.attackSlug)?.item) as PTR.Item.ItemWithActions;
         const clonedAttack = attack && sourceItem ? attack.clone({}, { parent: sourceItem }) : attack;
         clonedAttack.prepareDerivedData();
@@ -404,7 +402,7 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel<Attack
 
       return rolls;
     };
-    const summonAttack = 'damageType' in this.attack ? this.attack as SummonAttackPTR2e : null;
+    const summonAttack = 'damageType' in this.attack ? this.attack as unknown as PTR.Models.Action.Models.Summon.Instance : null;
 
     const context: AttackMessageRenderContext =
       this.context ??
@@ -528,9 +526,9 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel<Attack
     if (!(this.attack.slug.startsWith("fling") && this.attack.flingItemId)) return;
 
     const flingItem = this.origin.items.get(this.attack.flingItemId) as Item.ConfiguredInstance;
-    if (!(flingItem.type === "consumable" && (flingItem.system as ConsumableSystem).consumableType === "pokeball")) return;
+    if (!(flingItem.type === "consumable" && (flingItem.system as PTR.Item.System.Consumable.Instance).consumableType === "pokeball")) return;
 
-    const action = PokeballActionPTR2e.fromConsumable(flingItem as ConsumablePTR2e);
+    const action = CONFIG.PTR.models.actions.pokeball.fromConsumable(flingItem as PTR.Item.System.Consumable.ParentInstance);
     await action.roll({ accuracyRoll, critRoll, targets: [target] })
   }
 
@@ -708,9 +706,8 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel<Attack
   }
 
   public async applyLuckIncrease(targetUuid: ActorUUID) {
-    //FIXME: Why the fuck is this not just this.results??
-    const results = foundry.utils.duplicate(this.parent.system.results);
-    const currentResult = results[this.parent.system.results.findIndex(r => r.target.uuid == targetUuid)];
+    const results = foundry.utils.duplicate(this.results);
+    const currentResult = results[this.results.findIndex(r => r.target.uuid == targetUuid)];
     if (!currentResult || !currentResult.accuracy) return;
     const accuracy = currentResult.accuracy;
 

@@ -1,8 +1,8 @@
-import { grades } from "@module/data/mixins/has-gear-data.ts";
+import { PTRCONSTS } from "@data";
 import type { ContentTabName } from "../data.ts";
 import type { CompendiumBrowser } from "../index.ts";
 import { CompendiumBrowserTab } from "./base.ts";
-import type { CompendiumBrowserIndexData, GearFilters } from "./data.ts";
+import type { CompendiumBrowserIndexData, CompendiumIndexData, GearFilters } from "./data.ts";
 import { formatSlug } from "@utils";
 
 export class CompendiumBrowserGearTab extends CompendiumBrowserTab {
@@ -35,8 +35,8 @@ export class CompendiumBrowserGearTab extends CompendiumBrowserTab {
       indexFields
     )) {
       debug(`${pack.metadata.label} - ${index.size} entries found`);
-      for (const gearData of index) {
-        if (!["consumable", "equipment", "gear", "weapon"].includes(gearData.type)) continue;
+      for (const gearData of index as unknown as (PTR.Item.System.Consumable.ParentSource & CompendiumIndexData)[] ) {
+        if (!["consumable", "equipment", "gear", "weapon"].includes(gearData.type!)) continue;
 
         gearData.filters = {};
 
@@ -48,7 +48,7 @@ export class CompendiumBrowserGearTab extends CompendiumBrowserTab {
         for (const trait of gearData.system.traits ?? []) {
           traits.add(trait);
         }
-        if(gearData.system.cost > highestIpCost) highestIpCost = gearData.system.cost;
+        if((gearData.system.cost ?? 0) > highestIpCost) highestIpCost = gearData.system.cost!;
 
         if(gearData.system.fling?.type) {
           flingTypes.add(gearData.system.fling.type);
@@ -86,7 +86,7 @@ export class CompendiumBrowserGearTab extends CompendiumBrowserTab {
       rare: "PTR2E.FIELDS.gear.rarity.rare",
       unique: "PTR2E.FIELDS.gear.rarity.unique"
     });
-    this.filterData.checkboxes.grade.options = this.generateCheckboxOptions(grades.reduce((acc, grade) => {
+    this.filterData.checkboxes.grade.options = this.generateCheckboxOptions(PTRCONSTS.Grades.reduce((acc, grade) => {
       acc[grade] = grade;
       return acc;
     }, {} as Record<string, string>));
@@ -116,7 +116,7 @@ export class CompendiumBrowserGearTab extends CompendiumBrowserTab {
     const { checkboxes, multiselects, sliders } = this.filterData;
 
     // Gear Type
-    if(checkboxes.type.selected.length && !checkboxes.type.selected.includes(entry.type)) return false;
+    if(checkboxes.type.selected.length && !checkboxes.type.selected.includes(entry.type!)) return false;
 
     // Rarity
     if(checkboxes.rarity.selected.length && !checkboxes.rarity.selected.includes(entry.rarity)) return false;

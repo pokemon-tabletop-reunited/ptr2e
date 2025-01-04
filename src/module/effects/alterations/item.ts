@@ -1,5 +1,4 @@
 import ResolvableValueField from "@module/data/fields/resolvable-value-field.ts";
-import type ChangeModel from "../changes/change.ts";
 import type { ResolveValueParams } from "@data";
 import { BasicChangeSystem } from "@data";
 import type { BracketedValue, RuleValue } from "../data.ts";
@@ -26,13 +25,13 @@ const itemAlterationSchema = {
 
 export type ItemAlterationSchema = typeof itemAlterationSchema;
 
-class ItemAlteration extends foundry.abstract.DataModel<ItemAlterationSchema, ChangeModel> {
+class ItemAlteration extends foundry.abstract.DataModel<ItemAlterationSchema, PTR.ActiveEffect.Changes.Instance> {
 
   static override defineSchema(): ItemAlterationSchema {
     return itemAlterationSchema;
   }
 
-  get change(): ChangeModel {
+  get change(): PTR.ActiveEffect.Changes.Instance {
     return this.parent;
   }
 

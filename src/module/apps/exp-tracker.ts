@@ -229,12 +229,12 @@ export class EXPTracker extends foundry.applications.api.HandlebarsApplicationMi
       }
     });
 
-    const pcs = game.users.contents.flatMap(user => user.character ?? []);
+    const pcs: Required<User.ConfiguredInstance["character"]>[] = game.users.contents.flatMap((user: User.ConfiguredInstance) => user.character ?? []);
     const characters = pcs.reduce((acc, pc) => {
       // Check if anyone from this party has already been added
-      const existing = acc.find(c => c.pc.folder?.id && c.pc.folder.id === pc.folder?.id);
+      const existing = acc.find((c: { pc: Actor.ConfiguredInstance, data: { folders: Folder[], entries: { actor: Actor.ConfiguredInstance, loafing?: ActiveEffect.ConfiguredInstance }[] }, slots: { actor?: Actor.ConfiguredInstance }[] }) => c.pc.folder?.id && c.pc.folder.id === pc.folder?.id);
       if (existing) {
-        if (pc.system.party.ownerOf === existing.pc.folder!.id) {
+        if (pc?.system.party.ownerOf === existing.pc.folder!.id) {
           delete this.slots[existing.pc.uuid];
           existing.pc = pc;
           existing.slots = this._getSlots(pc);
@@ -248,7 +248,7 @@ export class EXPTracker extends foundry.applications.api.HandlebarsApplicationMi
         slots: this._getSlots(pc)
       });
       return acc;
-    }, [] as { pc: Actor.ConfiguredInstance, data: { folders: Folder[], entries: { actor: Actor.ConfiguredInstance, loafing?: ActiveEffect.ConfiguredInstance }[] }, slots: { actor?: Actor.ConfiguredInstance }[] }[]);
+    }, [] satisfies { pc: Actor.ConfiguredInstance, data: { folders: Folder[], entries: { actor: Actor.ConfiguredInstance, loafing?: ActiveEffect.ConfiguredInstance }[] }, slots: { actor?: Actor.ConfiguredInstance }[] }[]);
 
     const apl = pcs.reduce((acc, pc, index, arr) => {
       acc += pc.level
@@ -268,7 +268,7 @@ export class EXPTracker extends foundry.applications.api.HandlebarsApplicationMi
     this.characters = characters.reduce((acc, { pc, data }) => {
       acc.push(pc, ...data.entries.flatMap(entry => entry.loafing ? [] : entry.actor));
       return acc;
-    }, [] as Actor.ConfiguredInstance[]);
+    }, [] satisfies Actor.ConfiguredInstance[]);
 
     const open = this.openDetails;
     this.openDetails = null;

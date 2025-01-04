@@ -5,3 +5,4 @@ class PassiveActiveEffectSystem extends ActiveEffectSystem {
 }
 
 export default PassiveActiveEffectSystem;
+export type { PassiveActiveEffectSystem };

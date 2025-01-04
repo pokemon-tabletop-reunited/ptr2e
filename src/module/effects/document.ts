@@ -1,6 +1,4 @@
 import { sluggify } from "@utils";
-import { processGrantDeletions } from "./changes/grant-item.ts";
-import { AbilitySystemModel } from "@item/data/index.ts";
 
 class ActiveEffectPTR2e extends ActiveEffect {
   /** Has this document completed `DataModel` initialization? */
@@ -28,9 +26,9 @@ class ActiveEffectPTR2e extends ActiveEffect {
     return schema as ActiveEffect.Schema;
   }
 
-  override get changes() {
-    return this.system.changes ?? [];
-  }
+  // override get changes() {
+  //   return this.system.changes ?? [];
+  // }
 
   get traits(): Collection<PTR.Models.Trait.Instance> {
     return this.system.traits;
@@ -93,7 +91,7 @@ class ActiveEffectPTR2e extends ActiveEffect {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   override apply(actor: Actor.ConfiguredInstance, _change: any, options?: string[]): unknown {
     const change = _change as PTR.ActiveEffect.Changes.Instance;
-    if (this.parent instanceof CONFIG.Item.documentClass && this.parent && this.parent.system instanceof AbilitySystemModel) {
+    if (this.parent instanceof CONFIG.Item.documentClass && this.parent && this.parent.system instanceof CONFIG.PTR.Item.dataModels.ability) {
       if (this.parent.system.suppress) return;
     }
     return (this.system as PTR.ActiveEffect.SystemInstance).apply(actor, change, options);
@@ -101,7 +99,7 @@ class ActiveEffectPTR2e extends ActiveEffect {
 
   getRollOptions(prefix = this.type, { includeGranter = true } = {}): string[] {
     const traitOptions = ((): string[] => {
-      const options = [];
+      const options: string[] = [];
       for (const trait of this.traits.values()) {
         options.push(`trait:${trait.slug}`);
       }
@@ -111,7 +109,7 @@ class ActiveEffectPTR2e extends ActiveEffect {
     const granterOptions = includeGranter
       ? this.grantedBy
         ?.getRollOptions("granter", { includeGranter: false })
-        .map((o) => `${prefix}:${o}`) ?? []
+        .map((o: string) => `${prefix}:${o}`) ?? []
       : [];
 
     const options = [
@@ -137,8 +135,7 @@ class ActiveEffectPTR2e extends ActiveEffect {
   override _requiresDurationUpdate(): boolean {
     const { _combatTime, type } = this.duration;
     if (type === "turns" && game.combat) {
-      //@ts-expect-error - This is a private property
-      const ct = this.parent?.combatant?.system.activations; //(game.combat as Combat.ConfiguredInstance).system.turn;
+      const ct = (this.parent?.combatant?.system as PTR.Combatant.SystemInstance).activations; //(game.combat as Combat.ConfiguredInstance).system.turn;
       return ct !== _combatTime && !!(this.target as Actor.ConfiguredInstance)?.inCombat;
     }
     return false;
@@ -148,7 +145,7 @@ class ActiveEffectPTR2e extends ActiveEffect {
    * Override the implementation of ActiveEffect#_prepareDuration to support activation-based initiative.
    * Duration is purely handled in terms of combat turns elapsed.
    */
-  override _prepareDuration(): EffectDurationData {
+  override _prepareDuration(): Omit<ActiveEffectDuration, "startTime" | "seconds" | "combat" | "rounds" | "turns" | "startRound" | "startTurn"> {
     const d = this.duration;
 
     // Turn-based duration
@@ -157,6 +154,7 @@ class ActiveEffectPTR2e extends ActiveEffect {
       if (!cbt || !this.targetsActor())
         return {
           type: "turns",
+          //@ts-expect-error - FIXME: Check if this is a fvtt-types issue or if I'm hacking Foundry, I don't remember.
           _combatTime: undefined,
         };
 
@@ -169,22 +167,25 @@ class ActiveEffectPTR2e extends ActiveEffect {
       if (currentTurn === undefined)
         return {
           type: "turns",
+          //@ts-expect-error - FIXME: Check if this is a fvtt-types issue or if I'm hacking Foundry, I don't remember.
           _combatTime: undefined,
         };
 
       // If the effect has not started yet display the full duration
       if (currentTurn <= startTurn) {
+        //@ts-expect-error - FIXME: Check if this is a fvtt-types issue or if I'm hacking Foundry, I don't remember.
         return {
           type: "turns",
           duration: durationTurn,
           remaining: durationTurn,
-          label: this._getDurationLabel(0, d.turns),
+          label: this._getDurationLabel(0, d.turns!),
           _combatTime: currentTurn,
         };
       }
 
       // Some number of remaining turns (possibly zero)
       const remainingTurns = Math.max(startTurn + durationTurn - currentTurn, 0);
+      //@ts-expect-error - FIXME: Check if this is a fvtt-types issue or if I'm hacking Foundry, I don't remember.
       return {
         type: "turns",
         duration: durationTurn,
@@ -195,6 +196,7 @@ class ActiveEffectPTR2e extends ActiveEffect {
     }
 
     // No duration
+    //@ts-expect-error - FIXME: Check if this is a fvtt-types issue or if I'm hacking Foundry, I don't remember.
     return {
       type: "none",
       duration: null,
@@ -216,14 +218,14 @@ class ActiveEffectPTR2e extends ActiveEffect {
     });
   }
 
-  override toObject(source: true): this["_source"];
-  override toObject(source?: boolean): PTR.ActiveEffect.Source;
-  override toObject(source?: boolean): this["_source"] | PTR.ActiveEffect.Source {
-    const data = super.toObject(source)
-    //@ts-expect-error - Figure out the proper type here later
-    data.changes = this.changes.map((c) => c.toObject())
-    return data;
-  }
+  // override toObject(source: true): this["_source"];
+  // override toObject(source?: boolean): PTR.ActiveEffect.Source;
+  // override toObject(source?: boolean): this["_source"] | PTR.ActiveEffect.Source {
+  //   const data = super.toObject(source)
+  //   //@ts-expect-error - Figure out the proper type here later
+  //   data.changes = this.changes.map((c) => c.toObject())
+  //   return data;
+  // }
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   override async _preCreate(data: PTR.ActiveEffect.SourceWithSystem, options: foundry.abstract.Document.PreCreateOptions<any>, user: User): Promise<boolean | void> {
@@ -285,7 +287,7 @@ class ActiveEffectPTR2e extends ActiveEffect {
     };
 
     const parseIndexPaths = (data: { system: { changes: object } }): void => {
-      const current = this.changes.map((c) => c.toObject());
+      const current = this.system.changes.map((c) => c.toObject());
       for (const [key, value] of Object.entries(data.system.changes)) {
         const index = parseInt(key);
         if (!current[index]) continue;
@@ -433,7 +435,8 @@ class ActiveEffectPTR2e extends ActiveEffect {
           await change.preDelete?.({ pendingItems: items, context });
         }
 
-        await processGrantDeletions(effect, null, items, effects, !!context.ignoreRestricted);
+        // const { processGrantDeletions } = await import("./changes/grant-item.ts");
+        // await processGrantDeletions(effect, null, items, effects, !!context.ignoreRestricted);
       }
 
       if (items.length) {

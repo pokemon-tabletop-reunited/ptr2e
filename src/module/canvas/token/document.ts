@@ -137,7 +137,7 @@ class TokenDocumentPTR2e extends TokenDocument {
 
     // If the actor's speed combat stages are different from the token's combatant, update the combatant's speed stages
     const combatant = this.combatant as Combatant.ConfiguredInstance | null;
-    if (!combatant || !(combatant.system instanceof CONFIG.Combatant.dataModels.character)) return;
+    if (!combatant || !(combatant.system instanceof CONFIG.PTR.Combatant.dataModels.character)) return;
     if (this.actor?.speedStage !== undefined && this.actor.speedStage !== combatant.system.speedStages) {
       const previous = combatant.system.previousBaseAV;
       const initiativeChange = combatant.system.calculateInitiativeChange(previous, combatant.system.baseAV);
@@ -171,6 +171,12 @@ class TokenDocumentPTR2e extends TokenDocument {
 interface TokenDocumentPTR2e extends TokenDocument {
   initialized: boolean;
   auras: Map<string, TokenAura>;
+
+  //FIXME: Investigate if these are missing types in fvtt-types, seems likely.
+  t: string
+  distance: number
+  direction: number
+  sort: number
 
   // get actor(): Actor.ConfiguredInstance<ActorSystemPTR2e, this | null> | null;
   // get combatant(): Combatant<Combat, this> | null;

@@ -1,6 +1,5 @@
 import { StatsChart } from "./stats-chart.ts";
 import type { Attributes } from "@actor";
-import type { DocumentSheetConfiguration } from "@item/sheets/document.ts";
 import { debounceAsync } from "@utils";
 import type { AnyObject, DeepPartial } from "fvtt-types/utils";
 
@@ -28,7 +27,7 @@ export default class StatsForm extends foundry.applications.api.HandlebarsApplic
       id: "baseStats",
       template: "systems/ptr2e/templates/actor/stats-form-parts/base-stats-form.hbs",
       forms: {
-        // @ts-expect-error - This is valid
+        //@ts-expect-error - Clearly this is valid.
         "#base-stats-form": { handler: debounceAsync(StatsForm.#onSubmitBaseStatsForm, 200) }
       }
     },
@@ -36,7 +35,7 @@ export default class StatsForm extends foundry.applications.api.HandlebarsApplic
       id: "evStats",
       template: "systems/ptr2e/templates/actor/stats-form-parts/ev-stats-form.hbs",
       forms: {
-        // @ts-expect-error - This is valid
+        //@ts-expect-error - Clearly this is valid.
         "#ev-stats-form": { handler: debounceAsync(StatsForm.#onSubmitEvStatsForm, 200) }
       }
     },
@@ -64,7 +63,6 @@ export default class StatsForm extends foundry.applications.api.HandlebarsApplic
     const evMaximums = this._calcEVMaximums(this.document.system._source.attributes as this['document']['system']['attributes']);
     const stats = this.document.system._source.attributes;
     for (const k in stats ?? {}) {
-      //@ts-expect-error - Clearly this is valid.
       if (stats[k].base === undefined) stats[k].base = 40;
     }
     return {

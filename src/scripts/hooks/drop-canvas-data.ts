@@ -3,9 +3,9 @@ import { BlueprintSheetPTR2e } from "@item/sheets/index.ts";
 
 export const DropCanvasData = {
   listen() {
-    Hooks.on("dropCanvasData", async (canvas, drop: foundry.abstract.Document.DropData<Item.ConfiguredClass>) => {
-      if (drop.type === "Item") {
-        const item = await fromUuid(drop.uuid) as Item.ConfiguredInstance | null;
+    Hooks.on("dropCanvasData", async (canvas, drop: TokenLayer.DropData) => {
+      if ((drop.type as string) === "Item") {
+        const item = await fromUuid<Item.ConfiguredInstance>(drop.uuid as ItemUUID)
         if (item?.type === "species") {
           const folder = await (async () => {
             const folder = game.actors.folders.getName(game.scenes.current!.name);
@@ -37,7 +37,7 @@ export const DropCanvasData = {
           const y = Math.floor(drop.y / canvas.scene.grid.size) * canvas.scene.grid.size
 
           return void new BlueprintSheetPTR2e({
-            document: blueprint, generation: {
+            document: blueprint as PTR.Item.System.Blueprint.ParentInstance, generation: {
               x, y, canvas, temporary: true
             }
           }).render(true);
@@ -50,7 +50,7 @@ export const DropCanvasData = {
           const y = Math.floor(drop.y / canvas.scene.grid.size) * canvas.scene.grid.size
 
           return void new BlueprintSheetPTR2e({
-            document: blueprint, generation: {
+            document: blueprint as PTR.Item.System.Blueprint.ParentInstance, generation: {
               x, y, canvas, temporary: false
             }
           }).render(true);
@@ -72,7 +72,7 @@ export const DropCanvasData = {
 
       const actor = dropTarget?.actor;
       if (actor && ["Affliction", "Item", "ActiveEffect"].includes(data.type!)) {
-        (actor.sheet as unknown as ActorSheetPTR2e).emulateItemDrop(data);
+        (actor.sheet as unknown as ActorSheetPTR2e).emulateItemDrop(data as TokenLayer.DropData);
         return false; // Prevent modules from doing anything further
       }
 

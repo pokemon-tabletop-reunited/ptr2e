@@ -180,7 +180,7 @@ export class HTMLStringTagsElementPTR2e extends foundry.applications.elements.HT
   }
 
   private async toValueAsync(tag: string, strict = false) {
-    const item = await fromUuid(tag) as Item.ConfiguredInstance
+    const item = await fromUuid<Item.ConfiguredInstance>(tag as ItemUUID);
     if (item) {
       return {
         value: tag,

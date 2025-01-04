@@ -9,7 +9,7 @@ class ScenePTR2e extends Scene {
 
   /** Whether this scene is "in focus": the active scene, or the viewed scene if only a single GM is logged in */
   get isInFocus(): boolean {
-    const soleUserIsGM = game.user.isGM && game.users.filter((u) => u.active).length === 1;
+    const soleUserIsGM = game.user.isGM && game.users.filter((u: User.ConfiguredInstance) => u.active).length === 1;
     return (this.active && !soleUserIsGM) || (this.isView && soleUserIsGM);
   }
 

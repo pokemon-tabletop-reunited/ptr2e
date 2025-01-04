@@ -14,17 +14,17 @@ export class Migration101Initial extends MigrationBase {
 
     if (source.system.description) {
       const slug = source.system.slug || sluggify(source.name);
-      const primaryAction = (source.system.actions as PTR.Models.Action.Instance[]).find(action => action.slug === slug) ?? (source.system.actions as PTR.Models.Action.Instance[]).find(action => action.type === "attack");
+      const primaryAction = (source.system.actions as PTR.Models.Action.Instance[]).find(action => action.slug === slug) ?? ((source.system as {actions: PTR.Models.Action.Instance[]}).actions).find(action => action.type === "attack");
       if (!primaryAction) {
         console.warn(`Item ${source.name} is missing a primary action.`);
         return;
       }
 
       if (!primaryAction.description) {
-        primaryAction.description = source.system.description;
+        primaryAction.description = (source.system as {description: string}).description;
       }
 
-      source.system.description = "";
+      (source.system as {description: string}).description = "";
     }
   }
 }

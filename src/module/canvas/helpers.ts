@@ -26,7 +26,6 @@ const checkAuras = foundry.utils.debounce(async function (this: Scene.Configured
 
     // Wait for any token animation to finish
     for (const token of tokens) {
-      //@ts-expect-error - fvtt-types unfinished types
       await token.object?.animation;
     }
 

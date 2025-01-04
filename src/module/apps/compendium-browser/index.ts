@@ -1,45 +1,41 @@
-import { ApplicationV2Expanded } from "../appv2-expanded.ts";
+import { ApplicationV2Expanded, type ApplicationConfigurationExpanded } from "../appv2-expanded.ts";
 import { createHTMLElement, fontAwesomeIcon, htmlClosest, htmlQuery, htmlQueryAll, isObject, objectHasKey, setHasElement } from "@utils";
 import type { BrowserTabs, CompendiumBrowserSettings, PackInfo, TabData, TabName } from "./data.ts";
 import * as browserTabs from "./tabs/index.ts";
 import { PackLoader } from "./loader.ts";
 import type { Tab } from "@item/sheets/document.ts";
-import type { ItemType } from "@item/data/data.ts";
 import * as R from "remeda";
 import type { BrowserFilter, CheckboxData, RangesInputData, RenderResultListOptions, SelectData, SliderData } from "./tabs/data.ts";
 import Tagify from "@yaireo/tagify";
 import noUiSlider from "nouislider";
+import type { AnyObject, DeepPartial } from "fvtt-types/utils";
 
-export class CompendiumBrowser extends foundry.applications.api.HandlebarsApplicationMixin(ApplicationV2Expanded) {
-  static override DEFAULT_OPTIONS = foundry.utils.mergeObject(
-    super.DEFAULT_OPTIONS,
-    {
-      tag: "form",
-      id: "compendium-browser",
-      classes: ["sheet", "default-sheet"],
-      position: {
-        width: 800,
-        height: 700,
-      },
-      window: {
-        minimizable: true,
-        resizable: true,
-        controls: [
-          // TODO: Add button to Open Settings
-          // {
-          //   label: "PTR2E.ItemSheet.SendToChatLabel",
-          //   icon: "fas fa-arrow-up-right-from-square",
-          //   action: "toChat"
-          // },
-        ]
-      },
-      dragDrop: [{ dragSelector: "li.item[data-type]" }],
-      actions: {
-        tutorList: () => game.ptr.tutorList.render({ force: true, actor: null })
-      }
+export class CompendiumBrowser extends foundry.applications.api.HandlebarsApplicationMixin(ApplicationV2Expanded)<AnyObject> {
+  static override DEFAULT_OPTIONS = {
+    tag: "form",
+    id: "compendium-browser",
+    classes: ["sheet", "default-sheet"],
+    position: {
+      width: 800,
+      height: 700,
     },
-    { inplace: false }
-  );
+    window: {
+      minimizable: true,
+      resizable: true,
+      controls: [
+        // TODO: Add button to Open Settings
+        // {
+        //   label: "PTR2E.ItemSheet.SendToChatLabel",
+        //   icon: "fas fa-arrow-up-right-from-square",
+        //   action: "toChat"
+        // },
+      ]
+    },
+    dragDrop: [{ dragSelector: "li.item[data-type]" }],
+    actions: {
+      tutorList: () => void game.ptr.tutorList.render({ force: true, actor: null })
+    }
+  }
 
   static override PARTS: Record<string, foundry.applications.api.HandlebarsApplicationMixin.HandlebarsTemplatePart> = {
     header: {
@@ -58,7 +54,7 @@ export class CompendiumBrowser extends foundry.applications.api.HandlebarsApplic
     },
   };
 
-  tabGroups: Record<string, string> = {
+  override tabGroups: Record<string, string> = {
     tabs: "",
   }
 
@@ -165,7 +161,7 @@ export class CompendiumBrowser extends foundry.applications.api.HandlebarsApplic
       "weapon"
     ] as const)
     type BrowsableType = SetElement<typeof browsableTypes>;
-    const typeToTab = new Map<ItemType, Exclude<TabName, "settings">>([
+    const typeToTab = new Map<"ability" | "consumable" | "equipment" | "gear" | "move" | "perk" | "species" | "weapon", Exclude<TabName, "settings">>([
       ["ability", "ability"],
       ["consumable", "gear"],
       ["equipment", "gear"],
@@ -178,7 +174,7 @@ export class CompendiumBrowser extends foundry.applications.api.HandlebarsApplic
 
     for (const pack of game.packs) {
       const tabNames = R.unique(
-        R.unique(pack.index.map(entry => entry.type))
+        R.unique(pack.index.map(entry => (entry as { type: string }).type))
           .filter((type): type is BrowsableType => setHasElement(browsableTypes, type))
           .flatMap(type => typeToTab.get(type) ?? [])
       )
@@ -252,13 +248,13 @@ export class CompendiumBrowser extends foundry.applications.api.HandlebarsApplic
     const openTutorList = game.i18n.localize("PTR2E.OpenTutorList");
     const tutorList = `<button type="button" class="header-control fa-solid fa-list" data-action="tutorList"
                                 data-tooltip="${openTutorList}" aria-label="${openTutorList}"></button>`;
-    this.window.controls.insertAdjacentHTML("afterend", tutorList);
+    this.window.controls!.insertAdjacentHTML("afterend", tutorList);
 
     return frame;
   }
 
 
-  override async _prepareContext() {
+  override async _prepareContext(): Promise<AnyObject> {
     const activeTab = this.activeTab;
     const tab = objectHasKey(this.compendiumTabs, activeTab) ? this.compendiumTabs[activeTab] : null;
 
@@ -603,7 +599,7 @@ export class CompendiumBrowser extends foundry.applications.api.HandlebarsApplic
     }
   }
 
-  override _onRender(context: foundry.applications.api.ApplicationRenderContext, options: foundry.applications.api.HandlebarsApplicationMixin.HandlebarsRenderOptions): void {
+  override _onRender(context: DeepPartial<AnyObject>, options: foundry.applications.api.HandlebarsApplicationMixin.HandlebarsRenderOptions): void {
     super._onRender(context, options);
 
     if (options?.parts?.some(p => ["controls", "content"].includes(p))) {
@@ -657,7 +653,7 @@ export class CompendiumBrowser extends foundry.applications.api.HandlebarsApplic
       const nameAnchor = liElement.querySelector<HTMLAnchorElement>("div.name > a");
       if (nameAnchor) {
         nameAnchor.addEventListener("click", async () => {
-          const document = await fromUuid(entryUuid);
+          const document = await fromUuid<Item.ConfiguredInstance>(entryUuid as ItemUUID);
           if (document?.sheet) {
             document.sheet.render(true);
           }

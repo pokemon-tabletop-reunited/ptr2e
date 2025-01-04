@@ -121,6 +121,15 @@ interface RenderResultListOptions {
   replace?: boolean;
 }
 
+//FIXME: Replace this with fvtt-types version once it is added
+interface CompendiumIndexData {
+  _id: string;
+  type?: string;
+  uuid?: string;
+  system?: Record<string, unknown>
+  filters?: Record<string, unknown>;
+}
+
 export type {
   BaseFilterData,
   BrowserFilter,
@@ -136,5 +145,6 @@ export type {
   GearFilters,
   MoveFilters,
   PerkFilters,
-  SpeciesFilters
+  SpeciesFilters,
+  CompendiumIndexData
 };

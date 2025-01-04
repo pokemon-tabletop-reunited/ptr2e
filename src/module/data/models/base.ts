@@ -1,4 +1,4 @@
-import { ActionPTR2e, AttackPTR2e, PassivePTR2e, BasicChangeSystem, RollOptionChangeSystem, FlatModifierChangeSystem, GrantItemChangeSystem, StageModifierSystem, PercentileModifierSystem, GrantEffectChangeSystem, EphemeralEffectChangeSystem, RollNoteChangeSystem, EffectRollChangeSystem, ChoiceSetChangeSystem, AddTraitChangeSystem, RemoveTraitChangeSystem, AlterAttackChangeSystem, SummonAttackPTR2e, EphemeralModifierChangeSystem, SuppresAbilityChangeSystem, TokenAlterationsChangeSystem, StatsAlterationChangeSystem, AuraChangeSystem, TokenTagChangeSystem } from "@data";
+import { ActionPTR2e, AttackPTR2e, PassivePTR2e, BasicChangeSystem, RollOptionChangeSystem, FlatModifierChangeSystem, GrantItemChangeSystem, StageModifierSystem, PercentileModifierSystem, GrantEffectChangeSystem, EphemeralEffectChangeSystem, RollNoteChangeSystem, EffectRollChangeSystem, ChoiceSetChangeSystem, AddTraitChangeSystem, RemoveTraitChangeSystem, AlterAttackChangeSystem, SummonAttackPTR2e, EphemeralModifierChangeSystem, SuppressAbilityChangeSystem, TokenAlterationsChangeSystem, StatsAlterationChangeSystem, AuraChangeSystem, TokenTagChangeSystem } from "@data";
 
 export interface _ChangeModelTypes extends foundry.data.fields.TypedSchemaField.Types {
   "basic": PTR.ActiveEffect.Changes.Schema;
@@ -35,7 +35,7 @@ export function ChangeModelTypes(): _ChangeModelTypes {
     [GrantEffectChangeSystem.TYPE]: GrantEffectChangeSystem,
     [AddTraitChangeSystem.TYPE]: AddTraitChangeSystem,
     [RemoveTraitChangeSystem.TYPE]: RemoveTraitChangeSystem,
-    [SuppresAbilityChangeSystem.TYPE]: SuppresAbilityChangeSystem,
+    [SuppressAbilityChangeSystem.TYPE]: SuppressAbilityChangeSystem,
     [StatsAlterationChangeSystem.TYPE]: StatsAlterationChangeSystem,
     [RollNoteChangeSystem.TYPE]: RollNoteChangeSystem,
     [RollOptionChangeSystem.TYPE]: RollOptionChangeSystem,

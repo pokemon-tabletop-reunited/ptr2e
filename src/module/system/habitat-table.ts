@@ -55,6 +55,7 @@ class HabitatRollTable extends RollTable {
 
     const notification = ui.notifications.info(`Initializing Dynamic Table: ${this.name}...`, { permanent: true });
 
+    //@ts-expect-error - fvtt-types is unfinished, fix when compendium index data is added.
     const data = await game.packs.get("ptr2e.core-species")!.getIndex({ fields: ["system.habitats", "system.slug", "system.number", "system.form"] }) as {
       _id: string,
       name: string,

@@ -9,7 +9,8 @@ import { CodeMirror } from "./codemirror.ts";
 import Sortable from "sortablejs";
 import { DataInspector } from "@module/apps/data-inspector/data-inspector.ts";
 import Tagify from "@yaireo/tagify";
-import type { AnyObject } from "fvtt-types/utils";
+import type { AnyObject, DeepPartial } from "fvtt-types/utils";
+import type { ExpandedConfiguration } from "@module/apps/appv2-expanded.ts";
 
 class ActiveEffectConfig extends foundry.applications.api.HandlebarsApplicationMixin(
   foundry.applications.api.DocumentSheetV2
@@ -18,7 +19,7 @@ class ActiveEffectConfig extends foundry.applications.api.HandlebarsApplicationM
     classes: ["active-effect-sheet"],
     position: {
       width: 550,
-      height: "auto",
+      height: "auto" as const,
     },
     form: {
       handler: ActiveEffectConfig.#onSubmit,
@@ -52,7 +53,7 @@ class ActiveEffectConfig extends foundry.applications.api.HandlebarsApplicationM
         }
       ],
     },
-  };
+  } as (DeepPartial<foundry.applications.api.ApplicationV2.Configuration> & ExpandedConfiguration)
 
   #allTraits: { value: string; label: string, virtual: boolean, type?: Trait["type"] }[] | undefined;
 
@@ -149,7 +150,7 @@ class ActiveEffectConfig extends foundry.applications.api.HandlebarsApplicationM
     }
   }
 
-  override async _prepareContext(options: foundry.applications.api.DocumentSheetV2.Configuration<ActiveEffect.ConfiguredInstance>): Promise<AnyObject> {
+  override async _prepareContext(options: foundry.applications.api.DocumentSheetV2.RenderOptions): Promise<AnyObject> {
     const context = (await super._prepareContext(options)) as Record<string, unknown>;
 
     context.descriptionHTML = await TextEditor.enrichHTML(this.document.description, {
@@ -166,7 +167,7 @@ class ActiveEffectConfig extends foundry.applications.api.HandlebarsApplicationM
     // Status Conditions
     const statuses = CONFIG.statusEffects.map((s) => ({
       id: s.id,
-      label: game.i18n.localize(s.name),
+      label: game.i18n.localize(s.name!),
       selected: (
         this.document.statuses instanceof Set
           ? this.document.statuses.has(s.id)
@@ -191,7 +192,7 @@ class ActiveEffectConfig extends foundry.applications.api.HandlebarsApplicationM
 
     const traits = (() => {
       if ("traits" in this.document.system) {
-        const traits = [];
+        const traits: {value: string, label: string, virtual: boolean, type: string}[] = [];
         for (const trait of this.document.system.traits) {
           traits.push({
             value: trait.slug,
@@ -226,7 +227,6 @@ class ActiveEffectConfig extends foundry.applications.api.HandlebarsApplicationM
       submitText: "EFFECT.Submit",
       statuses,
       modes: Object.entries(CONST.ACTIVE_EFFECT_MODES).reduce((obj, e) => {
-        // @ts-expect-error - This is a valid operation
         obj[e[1]] = game.i18n.localize(`EFFECT.MODE_${e[0]}`);
         return obj;
       }, {}),
@@ -371,7 +371,7 @@ class ActiveEffectConfig extends foundry.applications.api.HandlebarsApplicationM
             formData
           );
 
-          const changes = (data.system?.changes as ChangeModel["_source"][]) ?? [];
+          const changes = (data.system?.changes as PTR.ActiveEffect.Changes.Source[]) ?? [];
           const index = Number(select.parentElement?.dataset.changeIndex ?? "NaN");
           if (changes && Number.isInteger(index) && changes.length > index) {
             changes[index].type = select.value;
@@ -419,7 +419,8 @@ class ActiveEffectConfig extends foundry.applications.api.HandlebarsApplicationM
       const editingChange = this.editingChange;
       if (editingChange) {
         const changeText = JSON.stringify(editingChange, null, 2);
-        const schema = ChangeModelTypes()[editingChange.type]?.schema.fields;
+        //FIXME: This type should be updated.
+        const schema = (ChangeModelTypes()[editingChange.type] as {schema: foundry.data.fields.SchemaField.Any})?.schema.fields;
         const view = new CodeMirror.EditorView({
           doc: changeText,
           extensions: [
@@ -560,7 +561,7 @@ class ActiveEffectConfig extends foundry.applications.api.HandlebarsApplicationM
   }
 
   override _prepareSubmitData(
-    _event: SubmitEvent,
+    _event: SubmitEvent | Event,
     _form: HTMLFormElement,
     formData: FormDataExtended
   ): Record<string, unknown> & { system?: Record<string, unknown> } {
@@ -616,13 +617,13 @@ class ActiveEffectConfig extends foundry.applications.api.HandlebarsApplicationM
   }
 
   #createChangeForms(): void {
-    const changes = this.document.clone().system.changes;
+    const changes = this.document.clone().system.changes as PTR.ActiveEffect.Changes.Instance[];
     const previousForms = [...this.#changeForms];
 
     // First pass, create options, and then look for exact matches of data and reuse those forms
     // This is mostly to handle deletions and re-ordering of rule elements
     const processedChanges = changes.map((change, index) => {
-      const changeModel = this.document.changes.find((r) => r.sourceIndex === index);
+      const changeModel = this.document.changes.find((r: PTR.ActiveEffect.Changes.Instance) => r.sourceIndex === index);
       if (!changeModel)
         throw new Error(`Change model not found for change at index ${index}`);
       const options: ChangeFormOptions = {
@@ -661,13 +662,14 @@ class ActiveEffectConfig extends foundry.applications.api.HandlebarsApplicationM
         return processed.existing;
       }
 
+      //@ts-expect-error - FIXME: Figure out what the problem is here
       return new processed.FormClass(processed.options);
     });
   }
 
   static async #onSubmit(
     this: ActiveEffectConfig,
-    event: SubmitEvent,
+    event: SubmitEvent | Event,
     form: HTMLFormElement,
     formData: FormDataExtended
   ) {

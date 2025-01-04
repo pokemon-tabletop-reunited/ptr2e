@@ -42,7 +42,6 @@ export const Init: PTRHook = {
       Object.freeze(CONFIG.PTR);
 
       if (game.release.generation === 12) {
-        //@ts-expect-error - FIXME: Check later why this is erroring out.
         CONFIG.Token.prototypeSheetClass = TokenConfigPTR2e;
       }
 
@@ -110,9 +109,7 @@ export const Init: PTRHook = {
         }
 
         DocumentSheetConfig.unregisterSheet(ActiveEffect, "core", ActiveEffectConfig);
-        //@ts-expect-error - Application V2 Compatability
         DocumentSheetConfig.registerSheet(ActiveEffect, "ptr2e", PTRCONFIG.ActiveEffect.sheetClasses.effect, { makeDefault: true });
-        //@ts-expect-error - Application V2 Compatability
         DocumentSheetConfig.registerSheet(ActiveEffect, "ptr2e", PTRCONFIG.ActiveEffect.sheetClasses.form, { types: ['form'], makeDefault: true });
 
         DocumentSheetConfig.registerSheet(TokenDocumentPTR2e, "ptr2e", TokenConfigPTR2e, { makeDefault: true });

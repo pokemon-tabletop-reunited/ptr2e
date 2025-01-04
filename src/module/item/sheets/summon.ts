@@ -43,7 +43,7 @@ export default class SummonSheet extends ItemSheetPTR2e<AnyObject> {
     const item = await CONFIG.Item.documentClass.fromDropData(data as foundry.abstract.Document.DropData<Item.ConfiguredInstance>);
     if (!item || item.type !== "effect") return;
     // Change type to 'Summon' as it's the only type that should be on Summon Items
-    const effects = item.effects.map((effect) => this.updateEffectType((effect as ActiveEffect.ConfiguredInstance).toObject()));
+    const effects = item.effects.map((effect: ActiveEffect.ConfiguredInstance) => this.updateEffectType((effect as ActiveEffect.ConfiguredInstance).toObject()));
     if (effects.length === 0) return;
     return CONFIG.ActiveEffect.documentClass.createDocuments(effects, { parent: this.document });
   }

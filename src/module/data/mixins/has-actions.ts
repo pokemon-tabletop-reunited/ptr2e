@@ -63,7 +63,7 @@ export default function HasActions<BaseClass extends TemplateConstructor>(baseCl
       }
     }
 
-    private _isValidParent(parent: AnyDocument | null): parent is Actor.ConfiguredInstance | Item.ConfiguredInstance {
+    private _isValidParent(parent: AnyDocument | null): parent is AnyDocument & foundry.data.fields.SchemaField.InitializedType<ActionsSchema> {
       return (
         parent instanceof CONFIG.Actor.documentClass ||
         parent instanceof CONFIG.Item.documentClass

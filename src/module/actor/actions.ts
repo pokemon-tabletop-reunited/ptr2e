@@ -1,6 +1,6 @@
 import type { ActionType } from "@data";
 import { PTRCONSTS } from "@data";
-export class ActionsCollections extends Collection<PTR.Models.Action.AnyInstance> {
+export class ActionsCollections extends Collection<PTR.Models.Action.Instance> {
   parent: Actor.ConfiguredInstance | Item.ConfiguredInstance;
   declare attack: Collection<PTR.Models.Action.Models.Attack.Instance>;
 
@@ -18,7 +18,7 @@ export class ActionsCollections extends Collection<PTR.Models.Action.AnyInstance
     Object.defineProperties(this, data);
   }
 
-  override set(slug: Maybe<string>, value: PTR.Models.Action.AnyInstance) {
+  override set(slug: Maybe<string>, value: PTR.Models.Action.Instance) {
     if (!(value instanceof CONFIG.PTR.models.actions.base))
       throw new Error("ActionsCollection can only contain ActionPTR2e instances");
 
@@ -65,7 +65,7 @@ export class ActionsCollections extends Collection<PTR.Models.Action.AnyInstance
         if (!["attack", "generic"].includes(action.type)) continue;
         if (action.variant && !(action as unknown as { free: boolean }).free) continue;
 
-        this.parent.flags.ptr2e.disableActionOptions!.collection.set(action.slug, action);
+        this.parent.flags.ptr2e?.disableActionOptions!.collection.set(action.slug, action);
       }
     }
     return this;
@@ -80,5 +80,5 @@ export class ActionsCollections extends Collection<PTR.Models.Action.AnyInstance
 }
 
 export interface ActionsCollections
-  extends Collection<PTR.Models.Action.AnyInstance>,
-  Record<ActionType, Collection<PTR.Models.Action.AnyInstance>> { }
+  extends Collection<PTR.Models.Action.Instance>,
+  Record<ActionType, Collection<PTR.Models.Action.Instance>> { }

@@ -132,12 +132,14 @@ export class AvailableAbilitiesApp extends foundry.applications.api.HandlebarsAp
 
     // Confirm the deletion unless the user is holding Shift
     return void (event.shiftKey ? ability.delete() : foundry.applications.api.DialogV2.confirm({
+      //@ts-expect-error - fvtt-types incorrect types
       yes: {
         callback: () => ability.delete(),
       },
       content: game.i18n.format("PTR2E.Dialog.DeleteDocumentContent", {
         name: ability.name,
       }),
+      //@ts-expect-error - fvtt-types incorrect types
       window: {
         title: game.i18n.format("PTR2E.Dialog.DeleteDocumentTitle", {
           name: ability.name,

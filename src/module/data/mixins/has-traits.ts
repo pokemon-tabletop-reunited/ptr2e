@@ -2,7 +2,6 @@ import { SlugField } from '../fields/slug-field.ts';
 import type Trait from '../models/trait.ts';
 import type { TemplateConstructor } from './data-template.ts';
 import SystemTraitsCollection from '../system-traits-collection.ts';
-import type { ArrayField, SetField } from 'node_modules/fvtt-types/src/foundry/common/data/fields.d.mts';
 
 const traitsSchema = {
   /**
@@ -23,14 +22,12 @@ const traitsSchema = {
       label: string,
       hint: string
     },
-    ArrayField.AssignmentElementType<SlugField>,
-    ArrayField.InitializedElementType<SlugField>,
-    SetField.AssignmentType<ArrayField.AssignmentElementType<SlugField>, {
-      required: true,
-      initial: [],
-      nullable: false
-    }>,
-    SystemTraitsCollection
+    string,
+    string,
+    string[],
+    SystemTraitsCollection,
+    string,
+    string[] | undefined
   >(new SlugField(), { required: true, initial: [], label: "PTR2E.FIELDS.traits.label", hint: "PTR2E.FIELDS.traits.hint" })
 }
 
@@ -84,7 +81,7 @@ export default function HasTraits<BaseClass extends TemplateConstructor>(baseCla
 
       this._traits = [];
       this.traits = new SystemTraitsCollection();
-      this._source.traits.forEach(t => this.addTraitFromSlug(t, false));
+      this._source.traits!.forEach(t => this.addTraitFromSlug(t, false));
     }
   }
 

@@ -1,4 +1,3 @@
-import { ActorSystemPTR2e } from "@actor";
 import Clock, { type ClockSchema } from "@module/data/models/clock.ts";
 import type { DeepPartial, MaybePromise } from "fvtt-types/utils";
 
@@ -97,16 +96,16 @@ export default class ClockEditor extends foundry.applications.api.HandlebarsAppl
     event.preventDefault();
 
     if (this.clock) {
-      if (this.clock.parent instanceof ActorSystemPTR2e) {
+      if (this.clock.parent instanceof CONFIG.PTR.Actor.systemClass) {
         const clocks = foundry.utils.duplicate(this.clock.parent._source.clocks);
         const index = clocks.findIndex((c) => c.id === this.clock!.id);
         if (index === -1) {
-          clocks.push(formData.object);
+          clocks.push(formData.object as unknown as foundry.data.fields.SchemaField.PersistedType<ClockSchema>);
         }
         else {
-          clocks[index] = foundry.utils.mergeObject(clocks[index], formData.object);
+          clocks[index] = foundry.utils.mergeObject(clocks[index], formData.object) as unknown as foundry.data.fields.SchemaField.PersistedType<ClockSchema>;
         }
-        return this.clock.parent.parent.update({ "system.clocks": clocks });
+        return void this.clock.parent.parent.update({ "system.clocks": clocks });
       }
 
       return void game.ptr.clocks.db.updateClock(

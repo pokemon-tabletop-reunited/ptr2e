@@ -64,7 +64,7 @@ export class MigrationRunnerBase {
   }
 
   async getUpdatedActor(actor: foundry.data.fields.SchemaField.PersistedType<Actor.Schema>, migrations: MigrationBase[]): Promise<Actor.ConstructorData> {
-    const currentActor = foundry.utils.deepClone(actor)
+    const currentActor = foundry.utils.deepClone(actor) as PTR.Actor.SourceWithSystem;
 
     for (const migration of migrations) {
       for (const currentItem of currentActor.items as foundry.data.fields.SchemaField.PersistedType<Item.Schema>[]) {
@@ -94,7 +94,6 @@ export class MigrationRunnerBase {
       const latestMigration = migrations.slice(-1)[0];
       //@ts-expect-error - System type is Any, fix this later.
       currentActor.system._migration ??= { version: null, previous: null };
-      //@ts-expect-error - System type is Any, fix this later.
       this.#updateMigrationRecord(currentActor.system._migration, latestMigration);
       for (const itemSource of currentActor.items as foundry.data.fields.SchemaField.PersistedType<Item.Schema>[]) {
         //@ts-expect-error - System type is Any, fix this later.
@@ -108,7 +107,7 @@ export class MigrationRunnerBase {
   }
 
   async getUpdatedItem(item: Item.ConstructorData, migrations: MigrationBase[]): Promise<Item.ConstructorData> {
-    const current = foundry.utils.deepClone(item);
+    const current = foundry.utils.deepClone(item) as PTR.Item.Source;
 
     for (const migration of migrations) {
       await migration.preUpdateItem?.(current);

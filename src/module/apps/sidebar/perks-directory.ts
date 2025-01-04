@@ -40,12 +40,14 @@ class PerkDirectory extends ItemDirectory {
   }
 
   override bringToTop() {
+    //@ts-expect-error - fvtt-types is incomplete
     if (ui.activeWindow === this) return;
     const element = this.element[0];
     const z = Number(document.defaultView!.getComputedStyle(element).zIndex);
     if (z < _maxZ) {
       this.position.zIndex = Math.clamp(++_maxZ, 100, 99999);
       element.style.zIndex = "" + this.position.zIndex;
+      //@ts-expect-error - fvtt-types is incomplete
       ui.activeWindow = this;
     }
   }

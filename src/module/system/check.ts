@@ -38,6 +38,7 @@ class CheckPTR2e {
     const rollOptions = context.options ?? new Set();
 
     // Figure out the default roll mode (if not already set by the event)
+    //@ts-expect-error - fvtt-types issue
     if (rollOptions.has("secret")) context.rollMode ??= game.user.isGM ? "gmroll" : "blindroll";
     context.rollMode ??= "roll";
 
@@ -52,6 +53,7 @@ class CheckPTR2e {
       if (!dialog) {
         return null;
       }
+      //@ts-expect-error - fvtt-types issue
       context.rollMode = dialog.rollMode ?? context.rollMode;
     }
 
@@ -281,6 +283,7 @@ class CheckPTR2e {
     const rollOptions = context.options ?? new Set();
 
     // Figure out the default roll mode (if not already set by the event)
+    //@ts-expect-error - fvtt-types issue
     if (rollOptions.has("secret")) context.rollMode ??= game.user.isGM ? "gmroll" : "blindroll";
     context.rollMode ??= "roll";
 
@@ -296,6 +299,7 @@ class CheckPTR2e {
       if (!dialog) {
         return null;
       }
+      //@ts-expect-error - fvtt-types issue
       context.rollMode = dialog.rollMode ?? context.rollMode;
     }
     else if (!context.skipDialog) {
@@ -305,6 +309,7 @@ class CheckPTR2e {
       if (!dialog) {
         return null;
       }
+      //@ts-expect-error - fvtt-types issue
       context.rollMode = dialog.rollMode ?? context.rollMode;
     }
 
@@ -537,6 +542,7 @@ class CheckPTR2e {
     const rollOptions = context.options ?? new Set();
 
     // Figure out the default roll mode (if not already set by the event)
+    //@ts-expect-error - fvtt-types issue
     if (rollOptions.has("secret")) context.rollMode ??= game.user.isGM ? "gmroll" : "blindroll";
     context.rollMode ??= "roll";
 
@@ -551,6 +557,7 @@ class CheckPTR2e {
       if (!dialog) {
         return null;
       }
+      //@ts-expect-error - fvtt-types issue
       context.rollMode = dialog.rollMode ?? context.rollMode;
     }
 

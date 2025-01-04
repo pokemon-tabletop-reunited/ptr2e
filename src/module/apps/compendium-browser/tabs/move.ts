@@ -1,7 +1,7 @@
 import type { ContentTabName } from "../data.ts";
 import type { CompendiumBrowser } from "../index.ts";
 import { CompendiumBrowserTab } from "./base.ts";
-import type { CompendiumBrowserIndexData, MoveFilters } from "./data.ts";
+import type { CompendiumBrowserIndexData, CompendiumIndexData, MoveFilters } from "./data.ts";
 import { PTRCONSTS } from "@data";
 import { unique } from "remeda";
 import { formatSlug } from "@utils";
@@ -35,7 +35,7 @@ export class CompendiumBrowserMoveTab extends CompendiumBrowserTab {
       indexFields
     )) {
       debug(`${pack.metadata.label} - ${index.size} entries found`);
-      for (const moveData of index) {
+      for (const moveData of index as unknown as (PTR.Item.System.Move.ParentSource & CompendiumIndexData)[]) {
         if (moveData.type !== "move") continue;
 
         moveData.filters = {};
@@ -46,9 +46,9 @@ export class CompendiumBrowserMoveTab extends CompendiumBrowserTab {
         }
 
         const attack = (() => {
-          const attack = moveData.system.actions.find((action: PTR.Models.Action.Instance) => action.type === "attack") as PTR.Models.Action.Models.Attack.Instance;
+          const attack = moveData.system.actions?.find((action: PTR.Models.Action.Source) => action.type === "attack") as PTR.Models.Action.Models.Attack.Source;
           if (!attack) {
-            const action = moveData.system.actions[0];
+            const action = moveData.system.actions![0];
             if (!action) {
               console.warn(`PTR2e | Compendium Browser | Move Tab | ${pack.metadata.label} | ${moveData.name} does not have an action.`);
               return null;
@@ -57,7 +57,7 @@ export class CompendiumBrowserMoveTab extends CompendiumBrowserTab {
             return action;
           }
           return attack;
-        })() as PTR.Models.Action.Models.Attack.Instance;
+        })() as PTR.Models.Action.Models.Attack.Source;
         if (!attack) continue;
 
         const traits = unique<string[]>([...(moveData.system.traits ?? []), ...(attack.traits ?? []), ...(attack.types ?? [])]);
@@ -93,14 +93,7 @@ export class CompendiumBrowserMoveTab extends CompendiumBrowserTab {
     this.indexData = moves;
 
     // Set Filters
-    this.filterData.checkboxes.grade.options = this.generateCheckboxOptions([
-      "E",
-      "D",
-      "C",
-      "B",
-      "A",
-      "S",
-    ].reduce((acc, grade) => {
+    this.filterData.checkboxes.grade.options = this.generateCheckboxOptions(PTRCONSTS.Grades.reduce((acc, grade) => {
       acc[grade] = grade;
       return acc;
     }, {} as Record<string, string>));

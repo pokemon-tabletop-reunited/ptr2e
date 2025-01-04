@@ -199,8 +199,8 @@ class ChoiceSetChangeSystem extends ChangeModel<ChoiceSetChangeSchema> {
       for (let i = 0; i < choices.length; i++) {
         const item = itemChoices[i] as Item.ConfiguredInstance | PTR.Models.Action.Instance | null;
         if (item instanceof CONFIG.Item.documentClass || item instanceof CONFIG.PTR.models.actions.base) {
-          choices[i].label = item.name;
-          choices[i].img = item.img!;
+          choices[i].label = (item as Item.ConfiguredInstance).name;
+          choices[i].img = (item as Item.ConfiguredInstance).img!;
         }
       }
       this.containsItems = true;

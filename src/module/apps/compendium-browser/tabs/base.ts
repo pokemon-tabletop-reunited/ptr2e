@@ -5,10 +5,10 @@ import type {
   BrowserFilter,
   CheckboxOptions,
   CompendiumBrowserIndexData,
+  CompendiumIndexData,
   MultiselectData,
   RangesInputData,
 } from "./data.ts";
-import { CompendiumDirectoryPTR2e } from "@module/apps/sidebar/compendium-directory.ts";
 import * as R from "remeda";
 import { htmlQuery, sluggify } from "@utils";
 
@@ -68,7 +68,7 @@ export abstract class CompendiumBrowserTab {
       fields: this.searchFields,
       idField: "uuid",
       processTerm: (term): string[] | null => {
-        if (term.length <= 1 || CompendiumDirectoryPTR2e.STOP_WORDS.has(term)) return null;
+        if (term.length <= 1 || CONFIG.PTR.ui.compendium.STOP_WORDS.has(term)) return null;
         return Array.from(wordSegmenter.segment(term)).map(t =>
           SearchFilter.cleanQuery(t.segment.toLocaleLowerCase(game.i18n.lang)).replace(/['"]/g, "")
         )
@@ -286,24 +286,24 @@ export abstract class CompendiumBrowserTab {
   }: {
     initial?: number;
     weight?: number;
-  }): Partial<TableResultSource>[] {
+  }): Partial<RollTableDraw["results"][number]>[] {
     return this.currentIndex
-      .map((e, i): Partial<TableResultSource> | null => {
-        const data = fromUuidSync(e.uuid);
+      .map((e, i): Partial<RollTableDraw["results"][number]> | null => {
+        const data = fromUuidSync(e.uuid as ValidUUID);
         if (!data?.pack || !data._id || !("name" in data)) return null;
         const rangeMinMax = initial + i + 1;
         return {
-          text: data.name,
+          text: data.name as string,
           type: CONST.TABLE_RESULT_TYPES.COMPENDIUM,
-          documentCollection: data.pack,
-          documentId: data._id,
+          documentCollection: data.pack as string,
+          documentId: data._id as string,
           img: e.img,
           weight,
           range: [rangeMinMax, rangeMinMax],
           drawn: false,
         };
       })
-      .filter((r): r is Partial<TableResultSource> => !!r);
+      .filter((r): r is Partial<RollTableDraw["results"][number]> => !!r);
   }
 
   //TODO: Implement & convert to App V2

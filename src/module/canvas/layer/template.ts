@@ -66,7 +66,7 @@ export class TemplateLayerPTR2e extends TemplateLayer {
 
   protected override _onMouseWheel(event: WheelEvent): ReturnType<MeasuredTemplate.ConfiguredInstance["rotate"]> | void {
     // Abort if there's no hovered template
-    const template = this.hover;
+    const template = this.hover as Token.ConfiguredInstance;
     if (!template || !canvas!.scene || canvas!.grid!.type === CONST.GRID_TYPES.GRIDLESS) {
       return super._onMouseWheel(event);
     }
@@ -79,7 +79,7 @@ export class TemplateLayerPTR2e extends TemplateLayer {
     const snap = increment * coneMultiplier;
     const delta = snap * Math.sign(event.deltaY);
 
-    return template.rotate(template.document.direction + delta, snap) as ReturnType<MeasuredTemplate.ConfiguredInstance["rotate"]> | void
+    return template.rotate(template.document.direction + delta, snap) as unknown as ReturnType<MeasuredTemplate.ConfiguredInstance["rotate"]> | void
   }
 
   #activatePreviewListeners(preview: MeasuredTemplate.ConfiguredInstance, initialLayer: InteractionLayer | null): void {
@@ -133,7 +133,7 @@ export class TemplateLayerPTR2e extends TemplateLayer {
         this.#deactivatePreviewListeners(initialLayer, event);
         //@ts-expect-error - Foundry types are incomplete
         document.updateSource(canvas.grid.getSnappedPosition(position.x, position.y, this.gridPrecision));
-        canvas!.scene?.createEmbeddedDocuments("MeasuredTemplate", [document.toObject()]);
+        canvas.scene?.createEmbeddedDocuments("MeasuredTemplate", [document.toObject()]);
       },
       rightdown: (event: PIXI.FederatedPointerEvent): void => {
         event.stopPropagation();

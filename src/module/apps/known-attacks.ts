@@ -132,10 +132,12 @@ export class KnownActionsApp extends foundry.applications.api.HandlebarsApplicat
     const item = action.item;
 
     foundry.applications.api.DialogV2.confirm({
+      //@ts-expect-error - Fields field is typed but cannot easily be satisfied.
       window: {
         title: game.i18n.localize("PTR2E.Dialog.DeleteAction.Title"),
       },
       content: game.i18n.format("PTR2E.Dialog.DeleteAction.Content", { name: item.name }),
+      //@ts-expect-error - Fields field is typed but cannot easily be satisfied.
       yes: {
         callback: async () => {
           await item.delete();
@@ -151,7 +153,6 @@ export class KnownActionsApp extends foundry.applications.api.HandlebarsApplicat
   /** @override */
   override _onFirstRender() {
     if (!this.actor) return;
-    //@ts-expect-error - AppV1 Compatibility
     this.actor.apps[this.id] = this;
   }
 

@@ -1,10 +1,9 @@
 import type { ContentTabName } from "../data.ts";
 import type { CompendiumBrowser } from "../index.ts";
 import { CompendiumBrowserTab } from "./base.ts";
-import type { SpeciesFilters, CompendiumBrowserIndexData } from "./data.ts";
+import type { SpeciesFilters, CompendiumBrowserIndexData, CompendiumIndexData } from "./data.ts";
 import * as R from "remeda";
 import { formatSlug, ImageResolver, sluggify } from "@utils";
-import type SkillPTR2e from "@module/data/models/skill.ts";
 
 export class CompendiumBrowserSpeciesTab extends CompendiumBrowserTab {
   tabName: ContentTabName = "species"
@@ -39,7 +38,7 @@ export class CompendiumBrowserSpeciesTab extends CompendiumBrowserTab {
       indexFields
     )) {
       debug(`${pack.metadata.label} - ${index.size} entries found`);
-      for (const speciesData of index) {
+      for (const speciesData of index as unknown as (PTR.Item.System.Species.ParentSource & CompendiumIndexData)[]) {
         if (speciesData.type !== "species") continue;
 
         speciesData.filters = {};
@@ -50,7 +49,7 @@ export class CompendiumBrowserSpeciesTab extends CompendiumBrowserTab {
         }
 
         for (const eggGroup of speciesData.system.eggGroups ?? []) {
-          eggGroups.add(eggGroup);
+          eggGroups.add(eggGroup!);
         }
 
         const traits = R.unique<string[]>([...(speciesData.system.traits ?? []), ...(speciesData.system.types ?? [])]);
@@ -76,9 +75,9 @@ export class CompendiumBrowserSpeciesTab extends CompendiumBrowserTab {
 
         const abilities: string[] = [];
         for(const group in speciesData.system.abilities ?? {}) {
-          for(const ability of speciesData.system.abilities[group] ?? []) {
-            allAbilities.add(ability.slug);
-            abilities.push(ability.slug);
+          for(const ability of speciesData.system.abilities[group as keyof typeof speciesData["system"]["abilities"]] ?? []) {
+            allAbilities.add(ability.slug!);
+            abilities.push(ability.slug!);
           }
         }
 
@@ -89,7 +88,7 @@ export class CompendiumBrowserSpeciesTab extends CompendiumBrowserTab {
           type: speciesData.type,
           traits,
           number: speciesData.system.number,
-          skills: speciesData.system.skills ? R.fromEntries(speciesData.system.skills.map((skill: SkillPTR2e) => [skill.slug, skill.value])) : [],
+          skills: speciesData.system.skills ? R.fromEntries(speciesData.system.skills.map((skill) => [skill.slug, skill.value])) : [],
           eggGroups: speciesData.system.eggGroups,
           moves,
           abilities

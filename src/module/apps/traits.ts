@@ -1,9 +1,19 @@
 import type { Trait } from "@data";
 import type { Tab } from "@item/sheets/document.ts";
 import { sluggify } from "@utils";
-import type { AnyObject } from "fvtt-types/utils";
 
-class TraitsSettingsMenu extends foundry.applications.api.HandlebarsApplicationMixin(foundry.applications.api.ApplicationV2)<AnyObject> {
+interface TraitsSettingsMenuContext {
+  options: foundry.applications.api.HandlebarsApplicationMixin.HandlebarsRenderOptions;
+  traits: {
+    systemTraits: Trait[];
+    userTraits: Trait[];
+    moduleTraits: Trait[];
+  };
+  tabs: Record<string, Tab>;
+  [key: string]: unknown;
+}
+
+class TraitsSettingsMenu extends foundry.applications.api.HandlebarsApplicationMixin(foundry.applications.api.ApplicationV2)<TraitsSettingsMenuContext> {
   newCounter = 0;
 
   static override DEFAULT_OPTIONS = {
@@ -54,7 +64,7 @@ class TraitsSettingsMenu extends foundry.applications.api.HandlebarsApplicationM
     type: "userTraits",
   };
 
-  tabs: Record<string, Tab & { hint: string }> = {
+  tabs: Record<string, Tab> = {
     systemTraits: {
       id: "systemTraits",
       group: "type",
@@ -86,8 +96,8 @@ class TraitsSettingsMenu extends foundry.applications.api.HandlebarsApplicationM
     return Object.fromEntries(Object.entries(this.tabs).filter(([k]) => parts.includes(k)));
   }
 
-  override async _prepareContext(options: foundry.applications.api.HandlebarsApplicationMixin.HandlebarsRenderOptions) {
-    const systemTraits = CONFIG.PTR.data.traits;
+  override async _prepareContext(options: foundry.applications.api.HandlebarsApplicationMixin.HandlebarsRenderOptions): Promise<TraitsSettingsMenuContext> {
+    const systemTraits = CONFIG.PTR.data.traits as unknown as Trait[];
     const userTraits = game.settings.get("ptr2e", "traits")
     const moduleTraits = game.ptr.data.traits.rawModuleTraits;
     return {
@@ -103,10 +113,10 @@ class TraitsSettingsMenu extends foundry.applications.api.HandlebarsApplicationM
 
   override async _preparePartContext(
     partId: string,
-    context: AnyObject,
+    context: TraitsSettingsMenuContext,
     options: foundry.applications.api.HandlebarsApplicationMixin.HandlebarsRenderOptions
-  ): Promise<AnyObject> {
-    const preparedContext = await super._preparePartContext(partId, context, options) as AnyObject & { partId: string }
+  ): Promise<TraitsSettingsMenuContext> {
+    const preparedContext = await super._preparePartContext(partId, context, options) as TraitsSettingsMenuContext & { partId: string }
     preparedContext.partId = partId;
     return preparedContext;
   }

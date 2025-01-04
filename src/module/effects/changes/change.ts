@@ -449,7 +449,7 @@ interface ChangeModel {
   preDelete?({ pendingItems, context }: ChangeModel.PreDeleteParams): Promise<void>;
 
   /** Runs before the rule's parent effect's owning actor is updated */
-  preUpdateActor?(): Promise<{ create: Item.ConstructorData[]; delete: string[]; } | { createEffects: ActiveEffect.ConstructorData[]; deleteEffects: string[]; }>;
+  preUpdateActor?(): Promise<{ create: PTR.Item.Source[]; delete: string[]; } | { createEffects: PTR.ActiveEffect.Source[]; deleteEffects: string[]; }>;
 }
 
 // interface ChangeModel<TSchema extends ChangeSchema = ChangeSchema>

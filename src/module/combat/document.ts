@@ -447,7 +447,7 @@ class CombatPTR2e extends Combat {
   ): void {
     super._onUpdate(changed!, options, userId);
 
-    const toDelete = [];
+    const toDelete: string[] = [];
     for (const combatant of (this.combatants?.filter(c => c.type === "summon") ?? [])) {
       if ('expired' in combatant.system && combatant.system.expired) {
         toDelete.push(combatant.id!);

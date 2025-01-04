@@ -35,10 +35,10 @@ class FolderPTR2e extends Folder {
     return this.contents.find(actor => (actor as unknown as Actor.ConfiguredInstance).system.party?.ownerOf == this.id) as unknown as Actor.ConfiguredInstance | null;
   }
 
-  get userFromAvatarIfOwner(): User | null {
+  get userFromAvatarIfOwner(): User.ConfiguredInstance | null {
     const owner = this.ownerActor;
     if (!owner) return null;
-    return game.users.find(user => user.character?.uuid === owner.uuid) ?? null;
+    return game.users.find((user: User.ConfiguredInstance) => user.character?.uuid === owner.uuid) ?? null;
   }
 
   get party(): ActorUUID[] {
@@ -47,7 +47,7 @@ class FolderPTR2e extends Folder {
   }
 
   get team(): ActorUUID[] {
-    return game.actors.filter(actor => (actor as unknown as Actor.ConfiguredInstance).system.party?.teamMemberOf.includes(this.id)).map(actor => actor.uuid);
+    return game.actors.filter((actor: Actor.ConfiguredInstance) => actor.system.party?.teamMemberOf.includes(this.id)).map((actor: Actor.ConfiguredInstance) => actor.uuid);
   }
 
   get safeColor() {
@@ -167,7 +167,7 @@ class FolderPTR2e extends Folder {
       const appOptions = foundry.utils.mergeObject(options, {
         document: folder,
         position,
-      }, { inplace: false }) as Partial<foundry.applications.api.DocumentSheetV2.Configuration>;
+      }, { inplace: false }) as Partial<Omit<foundry.applications.api.DocumentSheetV2.Configuration<Folder.ConfiguredInstance>, 'document'>> & { document: Folder.ConfiguredInstance };
       new FolderConfigPTR2e(appOptions).render(true);
     });
   }

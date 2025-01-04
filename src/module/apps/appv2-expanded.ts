@@ -482,7 +482,7 @@ export class ActorSheetV2Expanded<
     if (!this.actor.isOwner) return false;
     const item = (await CONFIG.Item.documentClass.implementation.fromDropData(data as foundry.abstract.Document.DropData<Item.ConfiguredInstance>)) as Item.ConfiguredInstance;
     if (item.type === "effect") {
-      const effects = item.effects.map(effect => effect.toObject());
+      const effects = item.effects.map((effect: ActiveEffect.ConfiguredInstance) => effect.toObject());
       if (!effects.length) return;
       return CONFIG.ActiveEffect.documentClass.create(effects, { parent: this.actor });
     }
@@ -799,7 +799,7 @@ export class ItemSheetV2Expanded<
   async _onDropItem(_event: DragEvent, data: object) {
     const item = await CONFIG.Item.documentClass.fromDropData(data as TokenLayer.DropData);
     if (!item || item.type !== "effect") return;
-    const effects = item.effects.map((effect) => effect.toObject());
+    const effects = item.effects.map((effect: ActiveEffect.ConfiguredInstance) => effect.toObject());
     if (effects.length === 0) return;
     return CONFIG.ActiveEffect.documentClass.createDocuments(effects, { parent: this.document });
   }

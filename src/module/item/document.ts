@@ -44,7 +44,7 @@ class ItemPTR2e extends Item {
   //   return super._initializeSource(data, options);
   // }
 
-  get slug() {
+  get slug(): string {
     return this.system.slug;
   }
 
@@ -65,7 +65,7 @@ class ItemPTR2e extends Item {
     const granterOptions = includeGranter
       ? this.grantedBy
         ?.getRollOptions("granter", { includeGranter: false })
-        .map((o) => `${prefix}:${o}`) ?? []
+        .map((o: string) => `${prefix}:${o}`) ?? []
       : [];
 
     const gearOptions = 'equipped' in this.system
@@ -80,7 +80,7 @@ class ItemPTR2e extends Item {
       `${prefix}:${this.slug}`,
       `${prefix}:slug:${this.slug}`,
       ...granterOptions,
-      ...(this.parent?.getRollOptions() ?? []).map((o) => `actor:${o}`),
+      ...(this.parent?.getRollOptions() ?? []).map((o: string) => `actor:${o}`),
       ...traitOptions.map((o) => `${prefix}:${o}`),
       ...gearOptions.map((o) => `${prefix}:${o}`),
     ];

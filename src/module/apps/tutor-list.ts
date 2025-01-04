@@ -107,7 +107,7 @@ export class TutorListApp extends foundry.applications.api.HandlebarsApplication
     }
 
     for (const eggGroup of actor.species?.eggGroups ?? []) {
-      const list = tutorList.getType(sluggify(eggGroup), "egg");
+      const list = tutorList.getType(sluggify(eggGroup as string), "egg");
       if (list) resultLists
     }
 
@@ -159,7 +159,7 @@ export class TutorListApp extends foundry.applications.api.HandlebarsApplication
     const data = TextEditor.getDragEventData(event) as unknown as { uuid: string, type: string }
     if (data.type !== "Actor" || !data.uuid) return;
 
-    const actor = await fromUuid(data.uuid) as Actor.ConfiguredInstance;
+    const actor = await fromUuid<Actor.ConfiguredInstance>(data.uuid)
     if (!actor) return;
     this.render({ actor, parts: ["aside", "list"] });
   }

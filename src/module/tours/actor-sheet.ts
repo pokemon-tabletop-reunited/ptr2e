@@ -8,13 +8,12 @@ export class ActorSheetTour extends PTRTour {
     return this.actor?.sheet as unknown as ActorSheetPTR2e;
   }
 
-  _statsEditor: foundry.applications.api.ApplicationV2 | undefined;
-  _skillsEditor: foundry.applications.api.ApplicationV2 | undefined;
-  _actionsEditor: foundry.applications.api.ApplicationV2 | undefined;
+  _statsEditor: foundry.applications.api.ApplicationV2.Any | undefined;
+  _skillsEditor: foundry.applications.api.ApplicationV2.Any | undefined;
+  _actionsEditor: foundry.applications.api.ApplicationV2.Any | undefined;
 
   protected override async _preStep(): Promise<void> {
     if (!this.actor) {
-      //@ts-expect-error - Correct data is being passed
       this.actor = await CONFIG.Actor.documentClass.create({
         name: "Tour-san",
         type: "humanoid",
@@ -165,7 +164,7 @@ export class ActorSheetTour extends PTRTour {
     switch (this.currentStep?.id) {
       case "stats-editor": {
         if (!this.app?.rendered) await this.app.render(true);
-        this._statsEditor = await new StatsForm({ document: this.actor }).render(true)
+        this._statsEditor = await new StatsForm({ document: this.actor! }).render(true)
         break;
       }
       case "known-attacks": {

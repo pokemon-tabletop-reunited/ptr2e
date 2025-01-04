@@ -56,14 +56,14 @@ export class ActionEditor<
         this.document.toChat();
       },
       openItem: function openItem<TDocument extends PTR.Item.ItemWithActions>(this: ActionEditor<TDocument>) {
-        this.document.sheet.render(true);
+        this.document.sheet!.render(true);
       },
       createVariant: async function createVariant<TDocument extends PTR.Item.ItemWithActions>(this: ActionEditor<TDocument>) {
-        const actions = this.document.system.toObject().actions;
+        const actions = (this.document.system.toObject() as unknown as {actions: PTR.Models.Action.Source[]}).actions;
         const action = actions.find(a => a.slug === this.action.slug);
         if (!action) return;
 
-        const variant = foundry.utils.duplicate(action);
+        const variant = foundry.utils.duplicate(action) as PTR.Models.Action.Source;
         variant.slug += sluggify(`-${foundry.utils.randomID()}`);
         variant.name += ` Variant`;
         variant.variant = action.slug;
@@ -85,20 +85,22 @@ export class ActionEditor<
         editor.render(true);
       },
       deleteVariant: async function deleteVariant<TDocument extends PTR.Item.ItemWithActions>(this: ActionEditor<TDocument>) {
-        const actions = this.document.system.toObject().actions;
+        const actions = (this.document.system.toObject() as unknown as {actions: PTR.Models.Action.Source[]}).actions;
         const index = actions.findIndex(a => a.slug === this.action.slug);
         if (index === -1) return;
         const action = actions[index];
         if (!action.variant) return;
 
         foundry.applications.api.DialogV2.confirm({
+          //@ts-expect-error - fvtt-types incorrect types
           window: {
             title: game.i18n.localize("PTR2E.Dialog.DeleteAction.Title"),
           },
           content: game.i18n.format("PTR2E.Dialog.DeleteAction.Content", { name: action.name }),
+          //@ts-expect-error - fvtt-types incorrect types
           yes: {
             callback: async () => {
-              const actions = this.document.system.toObject().actions;
+              const actions = (this.document.system.toObject() as unknown as {actions: PTR.Models.Action.Source[]}).actions;
               const index = actions.findIndex(a => a.slug === action.slug);
               if (index === -1 || !actions[index].variant) return;
 
@@ -134,7 +136,7 @@ export class ActionEditor<
   document: TDocument;
   actionSlug: string;
 
-  get action() {
+  get action(): PTR.Models.Action.Instance {
     return this.document.system.actions.get(this.actionSlug)!;
   }
 
@@ -188,7 +190,7 @@ export class ActionEditor<
       source: this.action.toObject(),
       fields: this.action.schema.fields,
       traits,
-      enrichedDescription: await TextEditor.enrichHTML(this.action.description),
+      enrichedDescription: await TextEditor.enrichHTML(this.action.description!),
       rangeData: { tooltip: "range-tooltip", range: this.action?.range?.target },
       typeOptions: this.action.item.type === "summon" ? R.pick(typeOptions, ["summon", "generic"]) : R.omit(typeOptions, ["summon"]),
       variants

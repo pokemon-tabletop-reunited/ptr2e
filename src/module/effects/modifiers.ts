@@ -1,7 +1,6 @@
 import type { RawPredicate } from "@system/predication/predication.ts";
 import { Predicate } from "@system/predication/predication.ts";
 import type { DamageAlteration } from "./alterations/damage.ts";
-import type ChangeModel from "./changes/change.ts";
 import { signedInteger, sluggify } from "@utils";
 import * as R from "remeda";
 import type { RollNote } from "@system/notes.ts";
@@ -72,7 +71,7 @@ class ModifierPTR2e implements RawModifier {
   alterations: DamageAlteration[];
   ignored: boolean;
   /** The originating rule element of this modifier, if any: used to retrieve "parent" item roll options */
-  change: ChangeModel | null;
+  change: PTR.ActiveEffect.Changes.Instance | null;
 
   predicate: Predicate;
   critical: boolean | null;
@@ -148,7 +147,7 @@ class ModifierPTR2e implements RawModifier {
 
   /** Return a copy of this ModifierPTR2e instance */
   clone(options: { test?: Iterable<string> } = {}): ModifierPTR2e {
-    const clone = new ModifierPTR2e(foundry.utils.mergeObject({ ...this, modifier: this.#originalValue, appliesTo: new Map(this.appliesTo) }));
+    const clone = new ModifierPTR2e({ ...this, modifier: this.#originalValue, appliesTo: new Map(this.appliesTo!) } as ModifierObjectParams);
     if (options.test) clone.test(options.test);
 
     return clone;
@@ -403,7 +402,7 @@ class AttackCheckModifier extends CheckModifier {
 }
 
 interface ModifierObjectParams extends RawModifier {
-  change?: ChangeModel | null;
+  change?: PTR.ActiveEffect.Changes.Instance | null;
   alterations?: DamageAlteration[];
   /** 
    * In the case of a roll with multiple targets, 

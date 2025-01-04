@@ -7,8 +7,9 @@ class GrantEffectChangeSystem extends GrantItemChangeSystem {
     const schema = super.defineSchema();
     // eslint-disable-next-line @typescript-eslint/no-empty-function
     schema.value.validate = () => { };
+    //@ts-expect-error - Monkeypatch in choices
     schema.value.options.choices = CONFIG.PTR.statusEffects.reduce((choices, status) => {
-      choices[status.id] = status.name;
+      choices[status.id!] = status.name!;
       return choices;
     }, {} as Record<string, string>);
     return schema;

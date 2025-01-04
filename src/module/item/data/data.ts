@@ -1,21 +1,6 @@
 import type { RollOptionDomains } from "@module/data/roll-option-manager.ts";
 import type { AnyObject, DeepPartial } from "fvtt-types/utils";
 
-interface ItemFlagsPTR2e extends AnyObject {
-  core?: {
-    sourceId?: string;
-  }
-  ptr2e?: {
-    choiceSelections?: Record<string, string | number | object | null>;
-    //itemGrants: Record<string, ItemGrantData>;
-    grantedBy?: ItemGrantData | null;
-    rollOptions?: {
-      [domain in keyof typeof RollOptionDomains]: Record<string, boolean>;
-    }
-    [key: string]: unknown;
-  };
-}
-
 interface ItemSourceFlagsPTR2e extends DeepPartial<AnyObject> {
   ptr2e?: {
     choiceSelections?: Record<string, string | number | object>;
@@ -40,7 +25,7 @@ interface ItemGrantSource {
 type ItemGrantDeleteAction = "cascade" | "detach" | "restrict";
 
 export type {
-  ItemFlagsPTR2e,
+  
   ItemSourceFlagsPTR2e,
   ItemGrantData,
   ItemGrantSource,

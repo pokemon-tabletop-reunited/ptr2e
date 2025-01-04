@@ -562,13 +562,13 @@ export default abstract class BlueprintSystem extends HasEmbed(HasMigrations(fou
       const moves: PTR.Item.System.Move.ParentSource[] = await (async () => {
         const levelUpMoves = evolution.system.moves.levelUp.filter((move) => move.level <= level);
 
-        const moveItems: Maybe<Item.ConfiguredInstance> = await Promise.all(
+        const moveItems: Maybe<PTR.Item.System.Move.ParentSource>[] = await Promise.all(
           levelUpMoves.map(async (move) => fromUuid<Item.ConfiguredInstance>(move.uuid as ItemUUID))
         );
         return moveItems.reduce(
           (acc, move, index) => {
             if (move && move instanceof CONFIG.Item.documentClass) {
-              const moveData = move.toObject();
+              const moveData = move.toObject() as PTR.Item.System.Move.ParentSource;
               if (index < 6) {
                 const actions = moveData.system.actions as PTR.Models.Action.Models.Attack.Source[];
                 if (actions.length) {
@@ -711,8 +711,7 @@ export default abstract class BlueprintSystem extends HasEmbed(HasMigrations(fou
     }
 
     progress.advance(game.i18n.localize("PTR2E.PokemonGeneration.Progress.Prefix") + game.i18n.localize("PTR2E.PokemonGeneration.Progress.GenerationStep"));
-    //@ts-expect-error - This is valid actor data
-    const actors = await CONFIG.Actor.documentClass.createDocuments(toBeCreated);
+    const actors = await CONFIG.Actor.documentClass.createDocuments(toBeCreated) as Actor.ConfiguredInstance[];
 
     progress.advance(game.i18n.localize("PTR2E.PokemonGeneration.Progress.Prefix" + game.i18n.localize("PTR2E.PokemonGeneration.Progress.TokenGenerationStep")));
 

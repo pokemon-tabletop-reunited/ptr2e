@@ -21,12 +21,12 @@ class TagTokenPrompt {
       document.activeElement.blur();
     }
 
-    const hookParams: HookParamsTargetToken = [
+    const hookParams: ["targetToken", Hooks.StaticCallbacks["targetToken"]] = [
       "targetToken",
-      (_user, token, targeted) => {
-        this._target = targeted && token instanceof Token.ConfiguredInstance ? token.document : null;
+      ((_user, token, targeted) => {
+        this._target = targeted && token instanceof CONFIG.Token.objectClass ? token.document : null;
         this._resolve?.(this._target);
-      }
+      }) as Hooks.StaticCallbacks["targetToken"]
     ]
     Hooks.once(...hookParams);
 
@@ -39,7 +39,7 @@ class TagTokenPrompt {
     }, 15_000);
   }
 
-  private cancelHandler(hookParams: HookParamsTargetToken): (event: KeyboardEvent) => void {
+  private cancelHandler(hookParams: ["targetToken", Hooks.StaticCallbacks["targetToken"]]): (event: KeyboardEvent) => void {
     const handler = (event: KeyboardEvent): void => {
       if(event.key !== "Escape") return;
       event.stopPropagation();

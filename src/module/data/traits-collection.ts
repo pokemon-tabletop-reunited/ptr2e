@@ -24,7 +24,7 @@ export default class PTR2eTraits extends Collection<Trait> {
     }
 
     // Allow custom-defined user Traits from the world
-    const settingTraits = game.settings.get<Trait[]>("ptr2e", "traits");
+    const settingTraits = game.settings.get("ptr2e", "traits");
     if (settingTraits?.length > 0) {
       settingTraits.forEach((trait: Trait) => {
         if (!trait.slug && !trait.label) return;

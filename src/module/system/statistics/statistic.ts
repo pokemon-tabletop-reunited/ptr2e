@@ -97,7 +97,7 @@ class Statistic extends BaseStatistic {
       // Special cases, traits that modify the action itself universally
       // This might change once we've better decided how derivative traits will work
       const traits: string[] =
-        ("traits" in item.system ? item.system.traits!.map((s) => s.slug) : []) ?? [];
+        ("traits" in item.system ? item.system.traits!.map((s: {slug: string}) => s.slug) : []) ?? [];
       if (traits.includes("attack")) {
         rollOptions.push("trait:attack");
       }
@@ -115,7 +115,7 @@ class Statistic extends BaseStatistic {
   }
 
   withRollOptions(options?: RollOptionConfig): Statistic {
-    const newOptions = foundry.utils.mergeObject(this.config ?? {}, options ?? {}, { inplace: false });
+    const newOptions = foundry.utils.mergeObject<object, object, {inplace: false}>(this.config ?? {}, options ?? {}, { inplace: false }) as RollOptionConfig;
     return new Statistic(this.actor, foundry.utils.deepClone(this.data), newOptions);
   }
 
@@ -135,7 +135,7 @@ class Statistic extends BaseStatistic {
       return [...new Set([arr1 ?? [], arr2 ?? []].flat())];
     }
 
-    const result = foundry.utils.mergeObject(foundry.utils.deepClone(this.data), data);
+    const result = foundry.utils.mergeObject(foundry.utils.deepClone(this.data), data) as StatisticData;
     result.domains = maybeMergeArrays(this.domains, data.domains);
     result.modifiers = maybeMergeArrays(this.data.modifiers, data.modifiers);
     result.rollOptions = maybeMergeArrays(this.data.rollOptions, data.rollOptions);

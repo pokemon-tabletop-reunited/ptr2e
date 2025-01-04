@@ -235,7 +235,7 @@ class AuraChangeSystem extends ChangeModel<AuraChangeSchema> {
 
     // Late validation check of effect UUID
     for (const effect of data.effects) {
-      const indexEntry = fromUuidSync(effect.uuid);
+      const indexEntry = fromUuidSync<PTR.Item.System.Effect.ParentInstance>(effect.uuid);
       if (!(indexEntry && "type" in indexEntry && typeof indexEntry.type === "string")) {
         this.failValidation(`Unable to resolve effect uuid: ${effect.uuid}`);
         return;

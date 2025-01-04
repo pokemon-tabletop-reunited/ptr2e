@@ -27,7 +27,7 @@ class SummonStatistic extends AttackStatistic {
         );
       }
       else if (summon.damageType === "flat" && summon.damageFormula) {
-        const modifier = SummonStatistic.resolveValue(summon.damageFormula, 0, { actor, item, attack: summon });
+        const modifier = SummonStatistic.resolveValue(summon.damageFormula, 0, { actor, item, attack: summon as unknown as PTR.Models.Action.Models.Attack.Instance });
         if (typeof modifier === "number") {
           modifiers.push(
             new ModifierPTR2e({
@@ -43,7 +43,7 @@ class SummonStatistic extends AttackStatistic {
       }
     }
 
-    super(summon, {
+    super(summon as unknown as PTR.Models.Action.Models.Attack.Instance, {
       slug: summon.slug,
       label: summon.name,
       check: {

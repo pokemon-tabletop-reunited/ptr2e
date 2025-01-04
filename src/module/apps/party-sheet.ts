@@ -140,7 +140,7 @@ class PartySheetPTR2e extends foundry.applications.api.HandlebarsApplicationMixi
   }
 
   async owner(): Promise<Maybe<Actor.ConfiguredInstance>> {
-    return this.folder.owner ? await fromUuid(this.folder.owner) as unknown as Promise<Maybe<Actor.ConfiguredInstance>> : null;
+    return this.folder.owner ? await fromUuid<Actor.ConfiguredInstance>(this.folder.owner) : null;
   }
 
   async party(): Promise<Actor.ConfiguredInstance[]> {
@@ -180,11 +180,11 @@ class PartySheetPTR2e extends foundry.applications.api.HandlebarsApplicationMixi
     return {
       tabs: this._getTabs(),
       owner,
-      party: party.sort((a, b) => this.folder.sorting === "a" ? a.name.localeCompare(b.name) : a.sort - b.sort),
+      party: party.sort((a: Actor.ConfiguredInstance, b: Actor.ConfiguredInstance) => this.folder.sorting === "a" ? a.name.localeCompare(b.name) : a.sort - b.sort),
       folder: this.folder,
       boxData,
       disableButton: game.user.isGM ? false : game.settings.get("ptr2e", "player-folder-create-permission") === false,
-      nonParty: nonParty.sort((a, b) => this.folder.sorting === "a" ? a.name.localeCompare(b.name) : a.sort - b.sort)
+      nonParty: nonParty.sort((a: Actor.ConfiguredInstance, b: Actor.ConfiguredInstance) => this.folder.sorting === "a" ? a.name.localeCompare(b.name) : a.sort - b.sort)
     }
   }
 
@@ -304,7 +304,6 @@ class PartySheetPTR2e extends foundry.applications.api.HandlebarsApplicationMixi
           const li = header.closest(".party-drag-item.box-header")[0];
           if (!li) return;
           const folder = game.folders.get(li.dataset.folderId!);
-          // @ts-expect-error - Typing for this sheet is missing
           new DocumentOwnershipConfig(folder, {
             top: Math.min(li.offsetTop, window.innerHeight - 350),
             left: window.innerWidth - 720
@@ -377,7 +376,6 @@ class PartySheetPTR2e extends foundry.applications.api.HandlebarsApplicationMixi
         condition: () => game.user.isGM,
         callback: (header: JQuery) => {
           const li = header.closest(".party-drag-item");
-          //@ts-expect-error - fvtt-types missing types
           const document = ui.actors.collection.get(li.data("actorId"));
           new DocumentOwnershipConfig(document, {
             top: Math.min(li[0].offsetTop, window.innerHeight - 350),
@@ -390,13 +388,11 @@ class PartySheetPTR2e extends foundry.applications.api.HandlebarsApplicationMixi
         icon: '<i class="fas fa-file-export"></i>',
         condition: (header: JQuery) => {
           const li = header.closest(".party-drag-item");
-          //@ts-expect-error - fvtt-types missing types
           const document = ui.actors.collection.get(li.data("actorId"));
           return document?.isOwner;
         },
         callback: (header: JQuery) => {
           const li = header.closest(".party-drag-item");
-          //@ts-expect-error - fvtt-types missing types
           const document = ui.actors.collection.get(li.data("actorId"));
           return document?.exportToJSON();
         }
@@ -406,13 +402,11 @@ class PartySheetPTR2e extends foundry.applications.api.HandlebarsApplicationMixi
         icon: '<i class="fas fa-file-import"></i>',
         condition: (header: JQuery) => {
           const li = header.closest(".party-drag-item");
-          //@ts-expect-error - fvtt-types missing types
           const document = ui.actors.collection.get(li.data("actorId"));
           return document?.isOwner;
         },
         callback: (header: JQuery) => {
           const li = header.closest(".party-drag-item");
-          //@ts-expect-error - fvtt-types missing types
           const document = ui.actors.collection.get(li.data("actorId"));
           return document?.importFromJSONDialog();
         }
@@ -423,7 +417,6 @@ class PartySheetPTR2e extends foundry.applications.api.HandlebarsApplicationMixi
         condition: () => game.user.isGM,
         callback: (header: JQuery) => {
           const li = header.closest(".party-drag-item");
-          //@ts-expect-error - fvtt-types missing types
           const entry = ui.actors.collection.get(li.data("actorId"));
           if (!entry) return;
           return entry.deleteDialog({
@@ -434,11 +427,10 @@ class PartySheetPTR2e extends foundry.applications.api.HandlebarsApplicationMixi
       },
       {
         name: "SIDEBAR.Duplicate",
-        icon: '<i class="far fa-copy"></i>', //@ts-expect-error - fvtt-types missing types
+        icon: '<i class="far fa-copy"></i>',
         condition: () => game.user.isGM || ui.actors.collection.documentClass.canUserCreate(game.user),
         callback: (header: JQuery) => {
           const li = header.closest(".party-drag-item");
-          //@ts-expect-error - fvtt-types missing types
           const original = ui.actors.collection.get(li.data("actorId"));
           return original?.clone({ name: `${original._source.name} (Copy)` }, { save: true, addSource: true });
         }

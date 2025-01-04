@@ -145,7 +145,7 @@ class SkillsSettingsMenu extends foundry.applications.api.HandlebarsApplicationM
     context: AnyObject,
     options: foundry.applications.api.HandlebarsApplicationMixin.HandlebarsRenderOptions
   ): Promise<AnyObject> {
-    const preparedContext = await super._preparePartContext(partId, context, options);
+    const preparedContext = await super._preparePartContext(partId, context, options) as AnyObject & { partId: string }
     preparedContext.partId = partId;
     return preparedContext;
   }
@@ -254,7 +254,7 @@ class SkillsSettingsMenu extends foundry.applications.api.HandlebarsApplicationM
       }
     }
 
-    game.settings.set("ptr2e", "skills", Array.from(skills.values()));
+    game.settings.set("ptr2e", "skills", Array.from(skills.values()) as CustomSkill[]);
   }
 
   static async #createSkill(this: SkillsSettingsMenu) {
@@ -280,10 +280,12 @@ class SkillsSettingsMenu extends foundry.applications.api.HandlebarsApplicationM
     if (index === -1) return;
 
     foundry.applications.api.DialogV2.confirm({
+      //@ts-expect-error - fvtt-types are incomplete
       window: {
         title: game.i18n.format("PTR2E.Settings.Skills.deleteSkill.Title", { name: this.skills[index].label }),
       },
       content: game.i18n.format("PTR2E.Settings.Skills.deleteSkill.Content", { name: this.skills[index].label }),
+      //@ts-expect-error - fvtt-types are incomplete
       yes: {
         callback: () => {
           const index = this.skills.findIndex((s) => s.slug === slug);
@@ -311,7 +313,6 @@ class SkillsSettingsMenu extends foundry.applications.api.HandlebarsApplicationM
     for (const input of inputs) {
       const key = input.name.split(".").pop();
       if (key && key in this.skills[index]) {
-        //@ts-expect-error - This is a custom skill
         this.skills[index][key] = input.value ?? this.skills[index][key];
       }
     }
@@ -337,7 +338,6 @@ class SkillsSettingsMenu extends foundry.applications.api.HandlebarsApplicationM
     for (const input of inputs) {
       const key = input.name.split(".").pop();
       if (key && key in this.skills[index]) {
-        //@ts-expect-error - This is a custom skill
         this.skills[index][key] = input.value ?? this.skills[index][key];
       }
     }

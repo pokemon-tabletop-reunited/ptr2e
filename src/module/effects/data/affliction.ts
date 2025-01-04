@@ -186,3 +186,4 @@ type EndOfTurn =
   };
 
 export default AfflictionActiveEffectSystem;
+export type { AfflictionActiveEffectSystem };

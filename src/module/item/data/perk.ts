@@ -11,7 +11,7 @@ import { Predicate, type PredicateStatement, StatementValidator } from "@system/
 const perkSchema = {
   prerequisites: new PredicateField({ label: "PTR2E.FIELDS.prerequisites.label", hint: "PTR2E.FIELDS.prerequisites.hint" }),
   autoUnlock: new PredicateField({ label: "PTR2E.FIELDS.autoUnlock.label", hint: "PTR2E.FIELDS.autoUnlock.hint" }),
-  cost: new foundry.data.fields.NumberField({ required: true, initial: 1, label: "PTR2E.FIELDS.apCost.label", hint: "PTR2E.FIELDS.apCost.hint" }),
+  cost: new foundry.data.fields.NumberField({ required: true, nullable: false, initial: 1, label: "PTR2E.FIELDS.apCost.label", hint: "PTR2E.FIELDS.apCost.hint" }),
   originSlug: new SlugField({ required: true, nullable: true, initial: null }),
 
   variant: new foundry.data.fields.StringField({
@@ -59,7 +59,7 @@ const perkSchema = {
       hidden: new foundry.data.fields.BooleanField({ required: true, initial: false, label: "PTR2E.FIELDS.node.hidden.label", hint: "PTR2E.FIELDS.node.hidden.hint" }),
       type: new foundry.data.fields.StringField({ required: true, choices: ["normal", "root", "entry"].reduce<Record<string, string>>((acc, type) => ({ ...acc, [type]: type }), {}), initial: "normal", label: "PTR2E.FIELDS.node.type.label", hint: "PTR2E.FIELDS.node.type.hint" }),
       tier: new foundry.data.fields.SchemaField({
-        rank: new foundry.data.fields.NumberField({ required: true, initial: 1, min: 1, label: "PTR2E.FIELDS.node.tier.rank.label", hint: "PTR2E.FIELDS.node.tier.rank.hint" }),
+        rank: new foundry.data.fields.NumberField({ required: true, nullable: false, initial: 1, min: 1, label: "PTR2E.FIELDS.node.tier.rank.label", hint: "PTR2E.FIELDS.node.tier.rank.hint" }),
         uuid: new foundry.data.fields.DocumentUUIDField({ required: true, label: "PTR2E.FIELDS.node.tier.uuid.label", hint: "PTR2E.FIELDS.node.tier.uuid.hint", type: "Item" }),
       }, {
         required: true,

@@ -1,5 +1,5 @@
-import type { ChangeModelOptions, ChangeSource } from "@data";
-import { ChangeModel } from "@data";
+import type { ChangeModelOptions } from "@data";
+import { ChangeModel} from "@data";
 import { ItemAlteration } from "../alterations/item.ts";
 import { isObject, sluggify, tupleHasValue } from "@utils";
 import * as R from "remeda";
@@ -51,21 +51,23 @@ class GrantItemChangeSystem extends ChangeModel<GrantItemChangeSchema> {
   constructor(data: foundry.abstract.DataModel.ConstructorData<GrantItemChangeSchema>, options: ChangeModelOptions) {
     if (data.inMemoryOnly) data.priority ??= 99;
     super(data, options);
-    if (this.invalid) return;
+    const self = this as GrantItemChangeSystem;
+    if (self.invalid) return;
 
-    if (this.inMemoryOnly) {
-      this.reevaluateOnUpdate = true;
-      this.allowDuplicate = true;
+    if (self.inMemoryOnly) {
+      self.reevaluateOnUpdate = true;
+      self.allowDuplicate = true;
     } else {
-      if (this.reevaluateOnUpdate) this.allowDuplicate = false;
+      if (self.reevaluateOnUpdate) self.allowDuplicate = false;
     }
 
-    this.onDeleteActions = this.#getOnDeleteActions(data);
+    //@ts-expect-error: FIXME: Prob just circular error cause it's marked as nullable.
+    self.onDeleteActions = self.#getOnDeleteActions(data as unknown as PTR.ActiveEffect.Changes.Models.GrantItem.Source);
 
-    if (this.track) {
-      const grantedItem = this.actor?.items.get(this.grantedId ?? "") ?? null;
+    if (self.track) {
+      const grantedItem = self.actor?.items.get(self.grantedId ?? "") ?? null;
 
-      this.#trackItem(grantedItem as Item.ConfiguredInstance | null);
+      self.#trackItem(grantedItem as Item.ConfiguredInstance | null);
     }
   }
 
@@ -98,18 +100,18 @@ class GrantItemChangeSystem extends ChangeModel<GrantItemChangeSchema> {
   }
 
   override apply(): void {
-    if (!this.invalid) this.#createInMemoryCondition();
+    if (!(this as GrantItemChangeSystem).invalid) (this as GrantItemChangeSystem).#createInMemoryCondition();
   }
 
   get uuid() {
-    return this.value as string;
+    return (this as GrantItemChangeSystem).value as string;
   }
 
   get flag() {
-    return this.key;
+    return (this as GrantItemChangeSystem).key;
   }
   set flag(value: string) {
-    this.key = value;
+    (this as GrantItemChangeSystem).key = value;
   }
 
   static override validateJoint(data: foundry.data.fields.SchemaField.AssignmentType<GrantItemChangeSchema>): void {
@@ -119,7 +121,7 @@ class GrantItemChangeSystem extends ChangeModel<GrantItemChangeSchema> {
       throw Error("must have explicit flag set if granted item is tracked");
     }
 
-    if (data!.reevaluateOnUpdate && data!.predicate.length === 0) {
+    if (data!.reevaluateOnUpdate && data!.predicate?.length === 0) {
       throw Error("reevaluateOnUpdate: must have non-empty predicate");
     }
 
@@ -128,23 +130,23 @@ class GrantItemChangeSystem extends ChangeModel<GrantItemChangeSchema> {
     }
   }
 
-  public async getItem(key: string = this.resolveInjectedProperties(this.uuid)): Promise<Maybe<ClientDocument>> {
+  public async getItem(key: string = this.resolveInjectedProperties(this.uuid)) {
     try {
-      return (await fromUuid(key + ""))?.clone() ?? null
+      return (await fromUuid<Item.ConfiguredInstance>(key as ItemUUID))?.clone() ?? null
     } catch (error) {
       console.error(error);
       return null;
     }
   }
 
-  override async preCreate(args: ChangeModel.PreCreateParams<ChangeSource>): Promise<void> {
+  override async preCreate(this: GrantItemChangeSystem, args: ChangeModel.PreCreateParams<GrantItemChangeSchema>): Promise<void> {
     if (this.inMemoryOnly || this.invalid || !this.actor) return;
 
     const { effectSource, pendingItems, context, pendingEffects } = args;
-    const changeSource: GrantItemSource = args.changeSource;
+    const changeSource = args.changeSource!;
 
     const uuid = this.resolveInjectedProperties(this.uuid);
-    const grantedDocument: Maybe<ClientDocument> = await this.getItem(uuid);
+    const grantedDocument = await this.getItem(uuid);
     if (!(grantedDocument instanceof CONFIG.Item.documentClass || grantedDocument instanceof CONFIG.ActiveEffect.documentClass)) return;
 
     changeSource.key =
@@ -180,18 +182,18 @@ class GrantItemChangeSystem extends ChangeModel<GrantItemChangeSchema> {
 
     // Set ids and flags on the granting effect and granted item
     effectSource._id ??= foundry.utils.randomID();
-    const grantedSource = grantedDocument.toObject();
+    const grantedSource = grantedDocument.toObject() as PTR.ActiveEffect.SourceWithSystem | PTR.Item.System.Effect.ParentSource;
     grantedSource._id = foundry.utils.randomID();
 
     // An item may grant another copy of itself, but at least strip the copy of its grant CMs
     if (this.item?.flags?.core?.sourceId === (grantedSource.flags.core?.sourceId ?? "")) {
       if (this.type === "grant-effect") {
-        grantedSource.system.changes = grantedSource.system.changes.filter(c => c.type !== GrantItemChangeSystem.TYPE);
+        (grantedSource.system as unknown as PTR.ActiveEffect.SystemInstance).changes = (grantedSource.system as unknown as PTR.ActiveEffect.SystemInstance).changes.filter(c => c.type !== GrantItemChangeSystem.TYPE);
       }
       else {
-        for (const ae of (grantedSource as Item.ConstructorData).effects) {
-          const effect = ae as PTR.ActiveEffect.Source;
-          effect.system.changes = effect.system.changes.filter(c => c.type !== GrantItemChangeSystem.TYPE);
+        for (const ae of (grantedSource as PTR.Item.Source).effects) {
+          const effect = ae as PTR.ActiveEffect.SourceWithSystem;
+          effect.system.changes = effect.system.changes!.filter(c => c.type !== GrantItemChangeSystem.TYPE);
         }
       }
     }
@@ -208,7 +210,7 @@ class GrantItemChangeSystem extends ChangeModel<GrantItemChangeSchema> {
       if (error instanceof Error) this.failValidation(error.message);
     }
 
-    const tempGranted = this.type === "grant-effect" ? new CONFIG.ActiveEffect.documentClass(foundry.utils.deepClone(grantedSource), { parent: this.actor }) : new CONFIG.Item.documentClass(foundry.utils.deepClone(grantedSource), { parent: this.actor });
+    const tempGranted = this.type === "grant-effect" ? new CONFIG.ActiveEffect.documentClass(foundry.utils.deepClone(grantedSource), { parent: this.actor }) : new CONFIG.Item.documentClass(foundry.utils.deepClone(grantedSource) as unknown as PTR.Item.Source, { parent: this.actor });
     // tempGranted.grantedBy = this.effect;
 
     // TODO: Check for immunity and bail if a match
@@ -234,7 +236,7 @@ class GrantItemChangeSystem extends ChangeModel<GrantItemChangeSchema> {
     }
 
     if (this.type === "grant-effect") pendingEffects.push(grantedSource as PTR.ActiveEffect.Source);
-    else pendingItems.push(grantedSource);
+    else pendingItems.push(grantedSource as PTR.Item.Source);
 
     // Run the granted item's preCreate callbacks unless this is a pre-actor-update reevaluation
     if (!args.reevaluation) {
@@ -244,7 +246,7 @@ class GrantItemChangeSystem extends ChangeModel<GrantItemChangeSchema> {
   }
 
   /** Grant an item if this rule element permits it and the predicate passes */
-  override async preUpdateActor(): Promise<{ create: Item.ConstructorData[]; delete: string[]; } | { createEffects: ActiveEffect.ConstructorData[]; deleteEffects: string[]; }> {
+  override async preUpdateActor(): Promise<{ create: PTR.Item.Source[]; delete: string[]; } | { createEffects: PTR.ActiveEffect.Source[]; deleteEffects: string[]; }> {
     const noAction = { create: [], delete: [] };
 
     if (this.ignored || !this.reevaluateOnUpdate || this.inMemoryOnly || !this.actor) return noAction;
@@ -257,18 +259,18 @@ class GrantItemChangeSystem extends ChangeModel<GrantItemChangeSchema> {
       return noAction;
     }
 
-    const effectSource = this.effect.toObject() as ActiveEffect.ConstructorData;
-    const changeSource = this.toObject() as foundry.data.fields.SchemaField.AssignmentType<ChangeModelSchema>;
-    const pendingItems: Item.ConstructorData[] = [];
-    const pendingEffects: ActiveEffect.ConstructorData[] = [];
+    const effectSource = this.effect.toObject() as PTR.ActiveEffect.Source;
+    const changeSource = this.toObject() as PTR.ActiveEffect.Changes.Source;
+    const pendingItems: PTR.Item.Source[] = [];
+    const pendingEffects: PTR.ActiveEffect.Source[] = [];
     const context = { parent: this.actor, render: false };
-    await this.preCreate({ changeSource!, pendingItems, effectSource, pendingEffects, tempItems: [], context, reevaluation: true });
+    await this.preCreate({ changeSource, pendingItems, effectSource, pendingEffects, tempItems: [], context, reevaluation: true });
 
     if (pendingItems.length > 0) {
       const updatedGrants = effectSource.flags?.ptr2e?.itemGrants ?? {};
       const updatedKey = Object.keys(updatedGrants).find(k => (updatedGrants[k as keyof typeof updatedGrants] as { id: string }).id === this.grantedId);
       if (updatedKey) {
-        const changes = this.parent.toObject().changes;
+        const changes = this.parent.toObject().changes as PTR.ActiveEffect.Changes.Source[];
         const index = this.parent.changes.findIndex(c => c === this);
         if (index >= 0) {
           changes[index].key = updatedKey;
@@ -284,7 +286,7 @@ class GrantItemChangeSystem extends ChangeModel<GrantItemChangeSchema> {
       const updatedGrants = effectSource.flags?.ptr2e?.itemGrants ?? {};
       const updatedKey = Object.keys(updatedGrants).find(k => (updatedGrants[k as keyof typeof updatedGrants] as { id: string }).id === this.grantedId);
       if (updatedKey) {
-        const changes = this.parent.toObject().changes;
+        const changes = this.parent.toObject().changes as PTR.ActiveEffect.Changes.Source[]
         const index = this.parent.changes.findIndex(c => c === this);
         if (index >= 0) {
           changes[index].key = updatedKey;
@@ -300,10 +302,10 @@ class GrantItemChangeSystem extends ChangeModel<GrantItemChangeSchema> {
     return noAction;
   }
 
-  #getOnDeleteActions(data: GrantItemSource): Partial<OnDeleteActions> | null {
+  #getOnDeleteActions(data: PTR.ActiveEffect.Changes.Models.GrantItem.Source): Partial<OnDeleteActions> | null {
     const actions = data.onDeleteActions;
     if (isObject<OnDeleteActions>(actions)) {
-      return tupleHasValue(ON_DELETE_ACTIONS, actions.granter) || tupleHasValue(ACTIONS, actions.grantee)
+      return tupleHasValue(ON_DELETE_ACTIONS, actions.granter) || tupleHasValue(ON_DELETE_ACTIONS, actions.grantee)
         ? R.pick(
           actions,
           ([actions.granter ? "granter" : [], actions.grantee ? "grantee" : []] as const).flat(),
@@ -423,15 +425,6 @@ interface GrantItemChangeSystem {
 
 export default GrantItemChangeSystem;
 export { type GrantItemChangeSystem };
-
-interface GrantItemSource extends ChangeSource {
-  preselectChoices?: unknown;
-  reevaluateOnUpdate?: unknown;
-  inMemoryOnly?: unknown;
-  allowDuplicate?: unknown;
-  onDeleteActions?: unknown;
-  alterations?: unknown;
-}
 
 interface OnDeleteActions {
   granter: ItemGrantDeleteAction;

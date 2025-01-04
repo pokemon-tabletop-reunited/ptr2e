@@ -5,4 +5,5 @@ export interface Tab {
   label: string;
   active?: boolean;
   cssClass?: string;
+  hint?: string;
 }

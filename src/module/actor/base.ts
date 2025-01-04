@@ -7,10 +7,9 @@ import type {
 } from "@actor";
 import type { TypeEffectiveness } from "@scripts/config/effectiveness.ts";
 import type { PokemonType, PTRCONSTS } from "@data";
-import { RollOptionChangeSystem, RollOptionManager, Trait } from "@data";
+import { RollOptionManager, Trait } from "@data";
 import type { RollOptions } from "@module/data/roll-option-manager.ts";
 import type AfflictionActiveEffectSystem from "@module/effects/data/affliction.ts";
-import type { AbilityPTR2e, MovePTR2e, PerkPTR2e } from "@item";
 import { ActionsCollections } from "./actions.ts";
 import type { CustomSkill } from "@module/data/models/skill.ts";
 import type { BaseStatisticCheck, StatisticCheck } from "@system/statistics/statistic.ts";
@@ -66,28 +65,28 @@ class ActorPTR2e extends Actor {
     return this._actions;
   }
 
-  get originalRoot(): PerkPTR2e | null {
+  get originalRoot(): PTR.Item.System.Perk.ParentInstance | null {
     return (
-      (this.itemTypes.perk as PerkPTR2e[]).find(
+      (this.itemTypes.perk as PTR.Item.System.Perk.ParentInstance[]).find(
         (p) => p.system.cost === 0 && p.system.nodes[0]?.type === "root"
       ) ?? null
     );
   }
 
-  get unconnectedRoots(): PerkPTR2e[] {
-    return (this.itemTypes.perk as PerkPTR2e[]).filter(
+  get unconnectedRoots(): PTR.Item.System.Perk.ParentInstance[] {
+    return (this.itemTypes.perk as PTR.Item.System.Perk.ParentInstance[]).filter(
       (p) => p.system.cost === 5 && p.system.nodes[0]?.type === "root"
     );
   }
 
-  get perks(): Map<string, PerkPTR2e> {
+  get perks(): Map<string, PTR.Item.System.Perk.ParentInstance> {
     return (
       this._perks ??
-      (this._perks = (this.itemTypes.perk as PerkPTR2e[]).reduce((acc, perk) => {
+      (this._perks = (this.itemTypes.perk as PTR.Item.System.Perk.ParentInstance[]).reduce((acc, perk) => {
         acc.set(perk.system.originSlug ?? perk.slug, perk);
         if (perk.flags?.ptr2e?.tierSlug) acc.set(perk.flags.ptr2e.tierSlug + "", perk);
         return acc;
-      }, new Map<string, PerkPTR2e>()))
+      }, new Map<string, PTR.Item.System.Perk.ParentInstance>()))
     );
   }
 
@@ -150,20 +149,20 @@ class ActorPTR2e extends Actor {
   }
 
   /** Get an active GM or, failing that, a player who can update this actor */
-  get primaryUpdater(): User | null {
+  get primaryUpdater(): User.ConfiguredInstance | null {
     // 1. The first active GM, sorted by ID
     const { activeGM } = game.users;
     if (activeGM) return activeGM;
 
-    const activeUsers = game.users.filter((u) => u.active);
+    const activeUsers = game.users.filter((u: User.ConfiguredInstance) => u.active);
     // 2. The user with this actor assigned
-    const primaryPlayer = this.isToken ? null : activeUsers.find((u) => u.character?.id === this.id);
+    const primaryPlayer = this.isToken ? null : activeUsers.find((u: User.ConfiguredInstance) => u.character?.id === this.id);
     if (primaryPlayer) return primaryPlayer;
 
     // 3. Anyone who can update the actor
     const firstUpdater = game.users
-      .filter((u) => this.canUserModify(u, "update"))
-      .sort((a, b) => (a.id > b.id ? 1 : -1))
+      .filter((u: User.ConfiguredInstance) => this.canUserModify(u, "update"))
+      .sort((a: User.ConfiguredInstance, b: User.ConfiguredInstance) => (a.id! > b.id! ? 1 : -1))
       .shift();
     return firstUpdater ?? null;
   }
@@ -179,7 +178,7 @@ class ActorPTR2e extends Actor {
       })();
       const party = ((): ActorPTR2e[] => {
         const uuid = (() => {
-          if (this.parent instanceof TokenDocument.ConfiguredInstance) {
+          if (this.parent instanceof CONFIG.Token.documentClass) {
             return this.parent.baseActor?.uuid ?? this.uuid;
           }
           return this.uuid;
@@ -387,7 +386,7 @@ class ActorPTR2e extends Actor {
       {}
     );
 
-    for (const ability of this.itemTypes.ability as AbilityPTR2e[]) {
+    for (const ability of this.itemTypes.ability as PTR.Item.System.Ability.ParentInstance[]) {
       if (ability.system.free) {
         this.abilities.free.push(ability);
         continue;
@@ -497,7 +496,7 @@ class ActorPTR2e extends Actor {
       this.fling = existing;
     }
     else {
-      this.fling = new CONFIG.Item.documentClass(data, { parent: this }) as MovePTR2e;
+      this.fling = new CONFIG.Item.documentClass(data, { parent: this }) as PTR.Item.System.Move.ParentInstance;
     }
 
     this.items.set(this.fling.id!, this.fling);
@@ -531,9 +530,9 @@ class ActorPTR2e extends Actor {
     >) {
       if (!effect.active) continue;
       changes.push(
-        ...effect.changes.map((change) => {
+        ...effect.changes.map((change: PTR.ActiveEffect.Changes.Instance) => {
           const c = foundry.utils.deepClone(change);
-          c.priority = c.priority ?? c.mode * 10;
+          c.priority = c.priority ?? c.mode! * 10;
           return c;
         })
       );
@@ -742,7 +741,6 @@ class ActorPTR2e extends Actor {
           ),
         });
         if (!silent) {
-          //@ts-expect-error - Chat messages have not been properly defined yet
           await CONFIG.ChatMessage.documentClass.create(
             {
               type: "damage-applied",
@@ -782,7 +780,6 @@ class ActorPTR2e extends Actor {
       ),
     });
     if (!silent) {
-      //@ts-expect-error - Chat messages have not been properly defined yet
       await CONFIG.ChatMessage.documentClass.create({
         type: "damage-applied",
         system: {
@@ -806,8 +803,8 @@ class ActorPTR2e extends Actor {
 
     const effect = await fromUuid<ActiveEffect.ConfiguredInstance>(effectUuid, { relative: this });
     const change = effect?.changes.find(
-      (c): c is RollOptionChangeSystem =>
-        c instanceof RollOptionChangeSystem && c.domain === domain && c.option === option,
+      (c: PTR.ActiveEffect.Changes.Instance): c is PTR.ActiveEffect.Changes.Models.RollOption.Instance =>
+        c instanceof CONFIG.PTR.models.changes["roll-option"] && c.domain === domain && c.option === option,
     );
     const result = await change?.toggle(value, suboption) ?? null;
     if (result === null) return result;
@@ -848,7 +845,7 @@ class ActorPTR2e extends Actor {
     return effectiveness;
   }
 
-  async getUnderdogPerks(): Promise<PerkPTR2e[]> {
+  async getUnderdogPerks(): Promise<PTR.Item.System.Perk.ParentInstance[]> {
     if (!this.traits.has("underdog")) return [];
     if (!this.species) return [];
 
@@ -862,7 +859,7 @@ class ActorPTR2e extends Actor {
         "underdogperk0051",
         "underdogperk0002",
       ]
-    }) as PerkPTR2e[];
+    }) as PTR.Item.System.Perk.ParentInstance[];
     const webs = new Set([this.species!.evolutions?.uuid ?? this.species!.parent.flags?.core?.sourceId ?? []].flat());
     const baseConnection = `evolution-${this.species!.evolutions?.name ?? this.species!.parent.slug}`;
     return underdogPerks.map(perk => perk.clone({ "system.webs": webs, "system.nodes": perk.system._source.nodes.map(node => ({ ...node, connected: [baseConnection, ...node.connected] })) }));
@@ -1005,9 +1002,10 @@ class ActorPTR2e extends Actor {
       }
     }
 
-    const updates: Actor.ConstructorData = {};
+    const updates: DeepPartial<PTR.Actor.Source> = {};
     const validAfflictionUpdates = afflictions.toUpdate.filter((update) => update._id);
     if (validAfflictionUpdates.length > 0)
+      //@ts-expect-error - Circularity based error
       updates.effects = validAfflictionUpdates as ActiveEffect.ConstructorData[];
 
     const oldHealth = this.system.health.value;
@@ -1229,8 +1227,8 @@ class ActorPTR2e extends Actor {
         : [null, null];
 
     if (targetToken?.actor && selfToken?.actor) {
-      const targetMarks = targetToken.actor.synthetics.tokenTags.get(selfToken.document.uuid);
-      const originMarks = selfToken.actor.synthetics.tokenTags.get(targetToken.document.uuid);
+      const targetMarks = targetToken.actor.synthetics.tokenTags.get(selfToken.document.uuid as TokenDocumentUUID);
+      const originMarks = selfToken.actor.synthetics.tokenTags.get(targetToken.document.uuid as TokenDocumentUUID);
       if (targetMarks) params.options.add(`target:mark:${targetMarks}`);
       if (originMarks) params.options.add(`origin:mark:${originMarks}`);
     }
@@ -1292,8 +1290,8 @@ class ActorPTR2e extends Actor {
         statistic.item instanceof CONFIG.Item.documentClass &&
         ("actions" in statistic.item.system ||
           ("consumableType" in statistic.item.system &&
-            statistic.item.system.consumableType &&
-            statistic.item.system.consumableType === "pokeball"))
+            (statistic.item.system as PTR.Item.System.Consumable.Instance).consumableType &&
+            (statistic.item.system as PTR.Item.System.Consumable.Instance).consumableType === "pokeball"))
       ) {
         return statistic.item as Item.ConfiguredInstance
       }
@@ -1357,7 +1355,7 @@ class ActorPTR2e extends Actor {
       newFlatModifiers = flatModsFromTraitDomains.filter(
         (mod) => !originalModifiers.some((original) => original.slug === mod.slug)
       ).map(mod => {
-        if (target) mod.appliesTo = new Map([[target.uuid, true]]);
+        if (target) mod.appliesTo = new Map([[target.uuid as ActorUUID, true]]);
         return mod;
       });
     }
@@ -1650,10 +1648,10 @@ class ActorPTR2e extends Actor {
         };
       }
       const lowestSchemaVersion = Math.min(
-        (source.system as {_migration?: {version?: number}})?._migration?.version ?? MigrationRunnerBase.LATEST_SCHEMA_VERSION,
-        ...(source.items ?? []).map(
+        (source.system as { _migration?: { version?: number } })?._migration?.version ?? MigrationRunnerBase.LATEST_SCHEMA_VERSION,
+        ...((source.items ?? []) as PTR.Item.Source[]).map(
           (i) =>
-            (i?.system as PTR.Item.ItemSystemPTR)?._migration?.version ??
+            (i?.system as unknown as PTR.Item.ItemSystemPTR)?._migration?.version ??
             MigrationRunnerBase.LATEST_SCHEMA_VERSION
         )
       );
@@ -1682,7 +1680,7 @@ class ActorPTR2e extends Actor {
           perksOnly?: boolean;
           types?: string[];
         }
-      > = {pack: null}) {
+      > = { pack: null }) {
     if (!Array.isArray(context.types)) context.types = this.TYPES.filter(t => t !== "ptu-actor");
     else {
       if (context.types.length) context.types = context.types.filter(t => t !== "ptu-actor");
@@ -1720,7 +1718,7 @@ class ActorPTR2e extends Actor {
     options: foundry.abstract.Document.PreUpdateOptions<any>,
     user: User
   ): Promise<boolean | void> {
-    if(!changed) return false;
+    if (!changed) return false;
     if (changed.system?.party?.ownerOf) {
       const folder = game.folders.get(changed.system.party.ownerOf as string) as Folder.ConfiguredInstance;
       if (folder?.owner && !this.uuid?.endsWith(folder.owner)) {
@@ -1760,9 +1758,9 @@ class ActorPTR2e extends Actor {
     if (changed.system?.advancement?.experience?.current !== undefined) {
       const next = this.system.advancement.experience.next;
       if (next && Number(changed.system.advancement.experience.current) >= next) {
-        changed.flags ??= {}; 
-        changed.flags.ptr2e ??= {}; 
-        changed.flags.ptr2e.sheet ??= {}; 
+        changed.flags ??= {};
+        changed.flags.ptr2e ??= {};
+        changed.flags.ptr2e.sheet ??= {};
         changed.flags.ptr2e.sheet.perkFlash = true;
       }
     }
@@ -1789,7 +1787,7 @@ class ActorPTR2e extends Actor {
       }
 
       const suppressedTraits = this.system.traits.suppressedTraits;
-      const sourceTraits = this.system._source.traits;
+      const sourceTraits = this.system._source.traits!;
       const intersection = sourceTraits.filter(trait => suppressedTraits.has(trait));
       if (intersection.length) {
         changed.system.traits = Array.from(new Set([...changed.system.traits, ...intersection]))
@@ -1807,7 +1805,7 @@ class ActorPTR2e extends Actor {
 
           const newMoves = this.species.moves.levelUp.filter(move => move.level > currentLevel && move.level <= level).filter(move => !this.itemTypes.move.some(item => item.slug == move.name));
           if (newMoves.length) {
-            const moves = (await Promise.all(newMoves.map(move => fromUuid<Item.ConfiguredInstance>(move.uuid)))).flatMap(move => move ?? []);
+            const moves = (await Promise.all(newMoves.map(move => fromUuid<PTR.Item.System.Move.ParentInstance>(move.uuid)))).flatMap((move) => move ?? []);
             changed.items ??= [];
             //@ts-expect-error - Asserted that this is an Array.
             changed.items.push(...moves.map(move => move.toObject()));
@@ -1844,7 +1842,7 @@ class ActorPTR2e extends Actor {
     documents: ActiveEffect.ConfiguredInstance[] | Item.ConfiguredInstance[],
     results: ActiveEffect.ConstructorData[] | Item.ConstructorData[],
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    options: foundry.abstract.Document.OnCreateOptions<any> & InexactPartial<{render: boolean }>,
+    options: foundry.abstract.Document.OnCreateOptions<any> & InexactPartial<{ render: boolean }>,
     userId: string
   ) {
     super._onCreateDescendantDocuments(parent, collection, documents, results, options, userId);
@@ -1860,7 +1858,7 @@ class ActorPTR2e extends Actor {
     }
     if (isEffect(collection, documents)) return;
 
-    const perks = documents.filter((d) => d.type === "perk") as PerkPTR2e[];
+    const perks = (documents as Item.ConfiguredInstance[]).filter((d) => d.type === "perk") as PTR.Item.System.Perk.ParentInstance[];
     if (!perks.length) return;
 
     // const updates = [];
@@ -2034,7 +2032,7 @@ interface ActorPTR2e extends Actor {
   synthetics: ActorSynthetics;
 
   _actions: ActionsCollections;
-  _perks: Map<string, PerkPTR2e> | null;
+  _perks: Map<string, PTR.Item.System.Perk.ParentInstance> | null;
 
   rollOptions: RollOptionManager<this>;
 
@@ -2046,9 +2044,9 @@ interface ActorPTR2e extends Actor {
 
   abilities: {
     slots: 1 | 2 | 3 | 4;
-    entries: Record<number, AbilityPTR2e>;
-    available: AbilityPTR2e[];
-    free: AbilityPTR2e[];
+    entries: Record<number, PTR.Item.System.Ability.ParentInstance>;
+    available: PTR.Item.System.Ability.ParentInstance[];
+    free: PTR.Item.System.Ability.ParentInstance[];
   }
 
   skills: Record<string, Statistic>;
@@ -2061,7 +2059,7 @@ interface ActorPTR2e extends Actor {
   /** Added as debounced method */
   checkAreaEffects(): void;
 
-  fling: MovePTR2e;
+  fling: PTR.Item.System.Move.ParentInstance;
 }
 
 export default ActorPTR2e;

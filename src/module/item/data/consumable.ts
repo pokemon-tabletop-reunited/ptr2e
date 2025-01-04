@@ -36,7 +36,7 @@ export type ConsumableSchema = typeof consumableSchema & MigrationSchema & Trait
 /**
  * @category Item Data Models
  */
-export default abstract class ConsumableSystem extends HasEmbed(HasMigrations(HasTraits(HasDescription(HasSlug(HasContainer(HasGearData(foundry.abstract.TypeDataModel)))))), "consumable")<consumableSchema, Item.ConfiguredInstance> {
+export default abstract class ConsumableSystem extends HasEmbed(HasMigrations(HasTraits(HasDescription(HasSlug(HasContainer(HasGearData(foundry.abstract.TypeDataModel)))))), "consumable")<ConsumableSchema, Item.ConfiguredInstance> {
   // /**
   //  * @internal
   //  */

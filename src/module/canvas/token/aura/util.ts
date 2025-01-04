@@ -27,6 +27,7 @@ export function getAreaSquares(data: GetAreaSquaresParams): EffectAreaSquare[] {
     square.active = !CONFIG.Canvas.polygonBackends[collisionType].testCollision(data.token.center, square.center, {
       type: collisionType,
       mode: "any",
+      //@ts-expect-error - FIXME: fvtt-types issue
       source: pointSource
     })
     return square;
@@ -68,7 +69,6 @@ export function getGridHighlightPositions({ x, y }: { x: number, y: number }, sh
 
   // Identify grid space that have their center points covered by the template shape
   const positions = [];
-  //@ts-expect-error - fvtt-types unfinished types
   const [i0, j0, i1, j1] = grid.getOffsetRange(bounds);
   for (let i = i0; i < i1; i++) {
     for (let j = j0; j < j1; j++) {

@@ -39,7 +39,7 @@ export class PTRTour extends Tour {
    * Get the application instance for the current step, if applicable
    * Subclasses should override this to return the relevant application instance
    */
-  protected get app(): Application | foundry.applications.api.ApplicationV2 | undefined {
+  protected get app(): Application | foundry.applications.api.ApplicationV2.Any | undefined {
     return undefined;
   }
 
@@ -71,6 +71,7 @@ export class PTRTour extends Tour {
     }
 
     if (this.currentStep && !this.currentStep.selector) this.targetElement?.remove();
+    //@ts-expect-error - Monkey patched property
     else game.tooltip.deactivate(true);
     if (this.fadeElement) {
       this.fadeElement.remove();

@@ -1,7 +1,7 @@
 import type { ContentTabName } from "../data.ts";
 import type { CompendiumBrowser } from "../index.ts";
 import { CompendiumBrowserTab } from "./base.ts";
-import type { AbilityFilters, CompendiumBrowserIndexData } from "./data.ts";
+import type { AbilityFilters, CompendiumBrowserIndexData, CompendiumIndexData } from "./data.ts";
 
 export class CompendiumBrowserAbilityTab extends CompendiumBrowserTab {
   tabName: ContentTabName = "ability"
@@ -31,7 +31,7 @@ export class CompendiumBrowserAbilityTab extends CompendiumBrowserTab {
       indexFields
     )) {
       debug(`${pack.metadata.label} - ${index.size} entries found`);
-      for(const abilityData of index) {
+      for(const abilityData of index as unknown as (PTR.Item.System.Ability.ParentSource & CompendiumIndexData)[]) {
         if(abilityData.type !== "ability") continue;
 
         abilityData.filters = {};

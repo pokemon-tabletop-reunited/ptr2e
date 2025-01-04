@@ -1,6 +1,5 @@
 import { ActorSystemPTR2e } from "./index.ts";
 import { SpeciesDropSheet } from "@actor/sheets/species-drop-sheet.ts";
-import { SpeciesSystemModel } from "@item/data/index.ts";
 import { BlueprintSheetPTR2e } from "@item/sheets/index.ts";
 import type { ActorSystemSchema } from "./system.ts";
 
@@ -13,7 +12,7 @@ class PokemonActorSystem extends ActorSystemPTR2e {
         app.render(true);
       });
 
-      if (promise instanceof CONFIG.Item.documentClass && promise.system instanceof SpeciesSystemModel) {
+      if (promise instanceof CONFIG.Item.documentClass && promise.system instanceof CONFIG.PTR.Item.dataModels.species) {
         const blueprint = await CONFIG.Item.documentClass.create(
           {
             name: promise.name,
@@ -34,7 +33,7 @@ class PokemonActorSystem extends ActorSystemPTR2e {
         }
 
         const generatedData = await new BlueprintSheetPTR2e({
-          document: blueprint,
+          document: blueprint as Item.ConfiguredInstance,
           generation: {
             x: 0,
             y: 0,

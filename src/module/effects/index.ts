@@ -11,7 +11,8 @@ declare global {
   namespace PTR {
     namespace ActiveEffect {
       type Source = foundry.data.fields.SchemaField.PersistedType<globalThis.ActiveEffect.Schema>;
-      type SystemSource = foundry.data.fields.SchemaField.PersistedType<ActiveEffectSystemSchema>
+      type SystemSchema = ActiveEffectSystemSchema;
+      type SystemSource = foundry.data.fields.SchemaField.PersistedType<SystemSchema>
       type SourceWithSystem = Omit<Source, 'system'> & { system: SystemSource }
       type SystemInstance = ActiveEffectSystem
     }

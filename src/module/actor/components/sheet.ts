@@ -1,3 +1,4 @@
+import type { DeepPartial } from "fvtt-types/utils";
 import { AbilitiesComponent } from "./abilities-component.ts";
 import type { ActorComponent } from "./base.ts";
 import { EffectComponent } from "./effect-component.ts";
@@ -77,10 +78,10 @@ class ComponentPopout extends foundry.applications.api.HandlebarsApplicationMixi
   component: ActorComponent;
 
   constructor(options: DeepPartial<ComponentApplicationConfiguration>) {
-    options.component = (typeof options.component === "string") ? new ActorComponents[options.component](options.actor) : options.component;
+    options.component = (typeof options.component === "string") ? new ActorComponents[options.component](options.actor as Actor.ConfiguredInstance) : options.component;
     super(options);
 
-    this.actor = options.actor;
+    this.actor = options.actor as Actor.ConfiguredInstance;
     this.component = options.component as ActorComponent;
   }
 

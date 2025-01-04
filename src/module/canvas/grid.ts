@@ -98,7 +98,6 @@ export class SquareGridPTR2e extends foundry.grid.SquareGrid {
   }
 
   getOffsetRangeInclusive(bounds: Rectangle): [number, number, number, number] {
-    //@ts-expect-error - FIXME: FVTT-Types are incorrect
     const [i1, j1, i2, j2] = super.getOffsetRange(bounds);
     return [i1, j1, i2 - 1, j2 - 1];
   }

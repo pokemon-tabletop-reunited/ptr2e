@@ -6,6 +6,7 @@ import SystemTraitsCollection from "../system-traits-collection.ts";
 import SummonSystem from "@item/data/summon.ts";
 import { ActionEditor } from "@module/apps/action-editor.ts";
 import { formatSlug } from "@utils";
+import type { DeepPartial } from "fvtt-types/utils";
 
 const actionSchema = {
   slug: new SlugField({
@@ -95,7 +96,7 @@ const actionSchema = {
 
 export type ActionSchema = typeof actionSchema & { type: foundry.data.fields.StringField<{ required: true; blank: false; initial: ActionType; choices: Record<string, string>; label: string; hint: string; }, ActionType, ActionType, ActionType> };
 
-class ActionPTR2e<Schema extends ActionSchema = ActionSchema> extends foundry.abstract.DataModel<Schema, PTR.Item.ItemSystemsWithActions> {
+class ActionPTR2e<Schema extends ActionSchema = ActionSchema> extends foundry.abstract.DataModel<Schema, PTR.Item.ItemSystemsWithActions | PTR.Item.ItemWithActions> {
   static TYPE: ActionType = "generic" as const;
 
   static readonly baseImg = "icons/svg/explosion.svg";
@@ -114,8 +115,7 @@ class ActionPTR2e<Schema extends ActionSchema = ActionSchema> extends foundry.ab
     };
   }
 
-  get actor(): CONFIG.Actor.documentClass | null {
-    console.log(test);
+  get actor(): Actor.ConfiguredInstance | null {
     if (this.parent?.parent instanceof CONFIG.Actor.documentClass) return this.parent.parent;
     if (this.parent instanceof SummonSystem) return this.parent.actor;
     if (
@@ -127,15 +127,15 @@ class ActionPTR2e<Schema extends ActionSchema = ActionSchema> extends foundry.ab
   }
 
   get item(): PTR.Item.ItemWithActions {
-    if (this.parent instanceof CONFIG.Item.documentClass) return this.parent;
-    //@ts-expect-error - FIXME: This is a temporary item, this might be due to this being a delayed action
-    if (this.parent?.parent instanceof CONFIG.Item.documentClass) return this.parent.parent;
+    if (this.parent instanceof CONFIG.Item.documentClass) return this.parent as unknown as PTR.Item.ItemWithActions;
+    if (this.parent?.parent instanceof CONFIG.Item.documentClass) return this.parent.parent as unknown as PTR.Item.ItemWithActions;
     throw new Error("Action is not a child of an item");
   }
 
   get original(): ActionPTR2e | null {
-    if (!this.variant) return null;
-    return this.item.actions.get(this.variant) ?? null;
+    const self = this as ActionPTR2e;
+    if (!self.variant) return null;
+    return (self.item.actions.get(self.variant) ?? null) as ActionPTR2e;
   }
 
   get css(): { style: string; class: string; } {
@@ -146,18 +146,20 @@ class ActionPTR2e<Schema extends ActionSchema = ActionSchema> extends foundry.ab
   }
 
   get uuid(): string {
+    const self = this as ActionPTR2e;
     // This is a temporary item, this might be due to this being a delayed action
     // In which case, link to the original item if possible.
-    if (!this.item.id && this.actor?.id) {
-      const originalAction = this.actor.actions.get(this.slug);
+    if (!self.item.id && self.actor?.id) {
+      const originalAction = self.actor.actions.get(self.slug);
       return originalAction?.uuid ?? "";
     }
 
-    return `${this.item.uuid}.Actions.${this.slug}`
+    return `${self.item.uuid}.Actions.${self.slug}`
   }
 
   get link(): string {
-    return `@UUID[${this.uuid}]{${this.name}}`;
+    const self = this as ActionPTR2e;
+    return `@UUID[${self.uuid}]{${self.name}}`;
   }
 
   get documentName(): string {
@@ -173,7 +175,7 @@ class ActionPTR2e<Schema extends ActionSchema = ActionSchema> extends foundry.ab
      * @param [options.name]    A name to use for the Document, if different from the Document's name.
      * @param [options.icon]    A font-awesome icon class to use as the icon, if different to the Document's configured sidebarIcon.
      */
-  toAnchor(options: {
+  toAnchor(this: ActionPTR2e, options: {
     attrs?: Record<string, string>;
     dataset?: Record<string, string>;
     classes?: string[];
@@ -203,14 +205,14 @@ class ActionPTR2e<Schema extends ActionSchema = ActionSchema> extends foundry.ab
     return TextEditor.createAnchor({ attrs, dataset, name, classes, icon: anchorIcon });
   }
 
-  _onClickDocumentLink() {
+  _onClickDocumentLink(this: ActionPTR2e) {
     return void new ActionEditor(
       this.item,
       this.slug
     ).render(true);
   }
 
-  prepareDerivedData() {
+  prepareDerivedData(this: ActionPTR2e) {
     this.traits = this._source.traits.reduce((acc: SystemTraitsCollection<Trait>, traitSlug: string) => {
       const trait = game.ptr.data.traits.get(traitSlug);
       if (trait) {
@@ -227,7 +229,7 @@ class ActionPTR2e<Schema extends ActionSchema = ActionSchema> extends foundry.ab
   /**
    * Serialize salient information about this Action's owning Document when dragging it.
    */
-  toDragData(): Record<string, unknown> {
+  toDragData(this: ActionPTR2e): Record<string, unknown> {
     const dragData: Record<string, unknown> = {
       type: this.item.documentName,
       action: {
@@ -240,27 +242,27 @@ class ActionPTR2e<Schema extends ActionSchema = ActionSchema> extends foundry.ab
     return dragData;
   }
 
-  getRollOptions(prefix = ""): Set<string> {
+  getRollOptions(this: ActionPTR2e, prefix = ""): Set<string> {
     return new Set([`action:${this.slug}`]).map(key => prefix ? `${prefix}:${key}` : key);
   }
 
   /**
    * Apply an update to the Action through it's parent Item.
    */
-  async update(data: foundry.data.fields.SchemaField.InnerAssignmentType<ActionSchema>): Promise<PTR.Item.ItemWithActions> {
+  async update(this: ActionPTR2e, data: DeepPartial<foundry.data.fields.SchemaField.PersistedType<ActionSchema>>): Promise<PTR.Item.ItemWithActions> {
     const currentActions = this.prepareUpdate(data);
     return this.item.update({ "system.actions": currentActions }) as Promise<PTR.Item.ItemWithActions>;
   }
 
-  prepareUpdate(data: foundry.data.fields.SchemaField.InnerAssignmentType<ActionSchema>) {
-    const currentActions = this.item.system.toObject().actions as PTR.Models.Action.Source[];
+  prepareUpdate(this: ActionPTR2e, data: DeepPartial<foundry.data.fields.SchemaField.PersistedType<ActionSchema>>) {
+    const currentActions = (this.item.system.toObject() as unknown as {actions: PTR.Models.Action.Source[]}).actions;
     const actionIndex = currentActions.findIndex((a) => a.slug === this.slug);
     foundry.utils.mergeObject(currentActions[actionIndex], data);
 
     return currentActions;
   }
 
-  toChat() {
+  toChat(this: ActionPTR2e) {
     return this.item.toChat();
   }
 }

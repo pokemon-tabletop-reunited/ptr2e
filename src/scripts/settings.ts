@@ -150,6 +150,7 @@ export function initializeSettings() {
   game.settings.register("ptr2e", "compendiumBrowserPacks", {
     name: "PTR2E.SETTINGS.CompendiumBrowserPacks.Name",
     hint: "PTR2E.SETTINGS.CompendiumBrowserPacks.Hint",
+    //@ts-expect-error - FIXME: Valid type, fix settings at some point
     default: {},
     type: Object,
     scope: "world",

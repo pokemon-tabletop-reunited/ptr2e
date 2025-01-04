@@ -548,7 +548,7 @@ export default class TooltipsPTR2e {
     const message = game.messages.get(messageId) as PTR.ChatMessage.System.Attack.ParentInstance;
     if (!message) return false;
 
-    const target = message.system.context?.results.get(targetUuid);
+    const target = (message.system as PTR.ChatMessage.System.Attack.Instance).context?.results.get(targetUuid);
     if (!target) return false;
 
     const damage = target.damageRoll;
@@ -612,7 +612,7 @@ export default class TooltipsPTR2e {
     const message = game.messages.get(messageId) as PTR.ChatMessage.System.Attack.ParentInstance
     if (!message) return false;
 
-    const target = message.system.context?.results.get(targetUuid);
+    const target = (message.system as PTR.ChatMessage.System.Attack.Instance).context?.results.get(targetUuid);
     if (!target?.effect.effects) return false;
 
     this.tooltip.classList.add("effect-rolls");
@@ -663,10 +663,8 @@ export default class TooltipsPTR2e {
 
         result.effectRolls![type][index].success = (() => {
           if (result.effectRolls![type][index].success === null) {
-            //@ts-expect-error - FIXME: Maybe a fvtt-types error, at the very least, this is marked as nullable, but not showing up as such here.
             if (!result.effectRolls![type][index].roll) throw Error("No roll found");
             try {
-              //@ts-expect-error - FIXME: Maybe a fvtt-types error, at the very least, this is marked as nullable, but not showing up as such here.
               return (Roll.fromJSON(result.effectRolls![type][index].roll!) as Roll.Evaluated<Roll>).total <= 0 ? false : true;
             } catch (error: unknown) {
               Hooks.onError("TooltipsPTR2e#_onEffectRollsTooltip", error as Error, {

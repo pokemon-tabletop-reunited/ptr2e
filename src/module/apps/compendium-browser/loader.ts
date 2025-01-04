@@ -1,6 +1,7 @@
 import { localizer, sluggify } from "@utils";
 import type { CompendiumBrowserSources } from "./data.ts";
 import { Progress } from "src/util/progress.ts";
+import type { CompendiumIndexData } from "./tabs/data.ts";
 
 export class PackLoader {
   loadedSources: string[] = [];
@@ -14,7 +15,8 @@ export class PackLoader {
     documentType: "Actor" | "Item",
     packs: string[],
     indexFields: string[],
-  ): AsyncGenerator<{ pack: CompendiumCollection<CompendiumDocument>; index: CompendiumIndex }, void, unknown> {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  ): AsyncGenerator<{ pack: CompendiumCollection<any>; index: Collection<CompendiumIndexData> }, void, unknown> {
     const localize = localizer("PTR2E.ProgressBar");
     const sources = this.#getSources();
 
@@ -27,6 +29,7 @@ export class PackLoader {
       }
       progress.advance({ label: localize("LoadingPack", { pack: pack.metadata.label }) });
       if (pack.documentName === documentType) {
+        //@ts-expect-error - Fields field is typed but cannot easily be satisfied.
         const index = await pack.getIndex({ fields: indexFields });
         const firstResult: Partial<CompendiumIndexData> = index.contents.at(0) ?? {};
         // Every result should have the "system" property otherwise the indexFields were wrong for that pack
@@ -51,7 +54,7 @@ export class PackLoader {
     return sources;
   }
 
-  #createFilteredIndex(index: CompendiumIndex, sources: Set<string>): CompendiumIndex {
+  #createFilteredIndex(index: Collection<CompendiumIndexData>, sources: Set<string>): Collection<CompendiumIndexData> {
     if (sources.size === 0) {
       // Make sure everything works as before as long as the settings are not yet defined
       return index;
@@ -112,6 +115,7 @@ export class PackLoader {
         continue;
       }
       progress.advance({ label: localize("LoadingPack", { pack: pack?.metadata.label ?? "" }) });
+      //@ts-expect-error - Fields field is typed but cannot easily be satisfied.
       const index = await pack.getIndex({ fields: indexFields });
 
       for (const element of index) {
@@ -128,7 +132,7 @@ export class PackLoader {
   }
 
   #getSourceFromIndexData(indexData: CompendiumIndexData): string {
-    const system = indexData.system;
+    const system = indexData.system as { details?: { publication?: { title: string }; source?: { value: string } }; publication?: { title: string }; source?: { value: string } };
     if (!system) return "";
 
     // Handle unmigrated data
