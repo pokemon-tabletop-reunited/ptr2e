@@ -39,9 +39,9 @@ export type SummonItemSchema = typeof summonSchema & MigrationSchema & ActionsSc
  * @extends {foundry.abstract.TypeDataModel}
  */
 export default abstract class SummonSystem extends HasEmbed(
-  HasMigrations(HasActions(HasDescription(HasTraits(HasSlug(foundry.abstract.TypeDataModel)))))<SummonItemSchema, Item.ConfiguredInstance>,
+  HasMigrations(HasActions(HasDescription(HasTraits(HasSlug(foundry.abstract.TypeDataModel))))),
   "summon"
-) {
+)<SummonItemSchema, Item.ConfiguredInstance> {
   /**
    * @internal
    */
