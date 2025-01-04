@@ -1,4 +1,3 @@
-import { ItemPTR2e } from "@item";
 import type { PTRHook } from "./data.ts";
 
 export const GearColor: PTRHook = {
@@ -6,7 +5,7 @@ export const GearColor: PTRHook = {
     Hooks.on("renderSidebarTab", (_: unknown, html: HTMLElement, context: unknown) => {
       const $html = $(html);
 
-      const getRarity = (item: ItemPTR2e) => {
+      const getRarity = (item: Item.ConfiguredInstance) => {
         if (!["consumable", "container", "equipment", "gear", "weapon"].includes(item.type)) return null;
         return ((item.system as {rarity: "common" | "uncommon" | "rare" | "unique"}).rarity) || null;
       }
@@ -30,7 +29,7 @@ export const GearColor: PTRHook = {
         ] as (ClientDocument | Record<string, unknown> & {type: string, _id: string})[];
 
         for (const entry of entries) {
-          if (entry instanceof ItemPTR2e) {
+          if (entry instanceof CONFIG.Item.documentClass) {
             const rarity = getRarity(entry);
             if (!rarity) continue;
 
@@ -47,7 +46,7 @@ export const GearColor: PTRHook = {
             if (!["consumable", "container", "equipment", "gear", "weapon"].includes(entry.type)) continue;
             // This compendium index entry was already loaded in memory
             if ('system' in entry) {
-              const rarity = getRarity(entry as unknown as ItemPTR2e);
+              const rarity = getRarity(entry as unknown as Item.ConfiguredInstance);
               if (!rarity) continue;
 
               const $entry = $html.find(`[data-entry-id="${entry.id}"]`);
@@ -76,7 +75,7 @@ export const GearColor: PTRHook = {
               const entry = index.get(id);
               if (!entry) continue;
 
-              const rarity = getRarity(entry as ItemPTR2e);
+              const rarity = getRarity(entry as Item.ConfiguredInstance);
               if (!rarity) continue;
 
               const $entry = $html.find(`[data-entry-id="${entry._id}"]`);

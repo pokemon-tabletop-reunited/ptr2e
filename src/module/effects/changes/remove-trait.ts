@@ -1,4 +1,3 @@
-import type { ActorPTR2e } from "@actor";
 import { ChangeModel } from "@data";
 import { sluggify } from "@utils";
 
@@ -9,7 +8,7 @@ class RemoveTraitChangeSystem extends ChangeModel {
     return this.value;
   }
 
-  override apply(actor: ActorPTR2e): void {
+  override apply(actor: Actor.ConfiguredInstance): void {
     if (this.ignored) return;
     if (!this.actor) return;
     if (!this.test(actor.getRollOptions())) return;

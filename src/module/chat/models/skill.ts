@@ -54,7 +54,7 @@ export type SkillMessageSchema = typeof skillMessageSchema;
 abstract class SkillMessageSystem extends foundry.abstract.TypeDataModel<SkillMessageSchema, ChatMessage.ConfiguredInstance> {
 
   /**
-   * Define the schema for the AttackMessageSystem data model
+   * Define the schema for the SkillMessageSystem data model
    */
   static override defineSchema(): SkillMessageSchema {
     return skillMessageSchema;

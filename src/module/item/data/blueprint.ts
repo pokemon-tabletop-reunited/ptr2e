@@ -141,7 +141,7 @@ export default abstract class BlueprintSystem extends HasEmbed(HasMigrations(fou
     folder?: Folder.ConfiguredInstance | null;
     parent?: Actor.ConfiguredInstance;
     team: boolean;
-  } | null, dataOnly: boolean): Promise<Actor.PTR.Source[] | void> {
+  } | null, dataOnly: boolean): Promise<PTR.Actor.Source[] | void> {
     if (!canvas.scene && !dataOnly) return void ui.notifications.warn("Cannot generate Actors from Blueprint without an active scene");
 
     if (dataOnly && !options) {
@@ -211,7 +211,7 @@ export default abstract class BlueprintSystem extends HasEmbed(HasMigrations(fou
     const progress = new Progress({ steps: this.blueprints.size + 2 });
     progress.advance(game.i18n.localize("PTR2E.PokemonGeneration.Progress.Prefix"));
 
-    const toBeCreated: Partial<Actor.PTR.Source>[] = [];
+    const toBeCreated: Partial<PTR.Actor.Source>[] = [];
     for (const blueprint of this.blueprints) {
       await blueprint.prepareAsyncData();
       progress.advance(game.i18n.localize("PTR2E.PokemonGeneration.Progress.Prefix") + game.i18n.format("PTR2E.PokemonGeneration.Progress.Step", {
@@ -220,7 +220,7 @@ export default abstract class BlueprintSystem extends HasEmbed(HasMigrations(fou
 
       if (!blueprint.doc) throw new Error("Blueprint does not have a species");
       if (blueprint.doc instanceof CONFIG.Actor.documentClass) {
-        const actor = blueprint.doc.toObject() as Actor.PTR.SourceWithSystem;
+        const actor = blueprint.doc.toObject() as PTR.Actor.SourceWithSystem;
         if (options.folder) {
           actor.folder = options.folder.id;
           actor.system.party = {
@@ -251,7 +251,7 @@ export default abstract class BlueprintSystem extends HasEmbed(HasMigrations(fou
       })()
 
       if (speciesOrActor instanceof CONFIG.Actor.documentClass) {
-        const actor = speciesOrActor.toObject() as Actor.PTR.SourceWithSystem
+        const actor = speciesOrActor.toObject() as PTR.Actor.SourceWithSystem
         if (options.folder) {
           actor.folder = options.folder.id;
           actor.system.party = {
@@ -697,7 +697,7 @@ export default abstract class BlueprintSystem extends HasEmbed(HasMigrations(fou
             src: tokenImage,
           },
         }, { inplace: false }),
-      } as unknown as Partial<Actor.PTR.SourceWithSystem>;
+      } as unknown as Partial<PTR.Actor.SourceWithSystem>;
       const actor = new CONFIG.Actor.documentClass(data);
       data.system!.health = { value: actor.system.health.max, max: actor.system.health.max };
       data.system!.powerPoints = { value: actor.system.powerPoints.max, max: actor.system.powerPoints.max };
@@ -707,12 +707,12 @@ export default abstract class BlueprintSystem extends HasEmbed(HasMigrations(fou
 
     if (dataOnly) {
       progress.close(game.i18n.localize("PTR2E.PokemonGeneration.Progress.Prefix") + game.i18n.localize("PTR2E.PokemonGeneration.Progress.Complete"));
-      return toBeCreated as Actor.PTR.Source[];
+      return toBeCreated as PTR.Actor.Source[];
     }
 
     progress.advance(game.i18n.localize("PTR2E.PokemonGeneration.Progress.Prefix") + game.i18n.localize("PTR2E.PokemonGeneration.Progress.GenerationStep"));
     //@ts-expect-error - This is valid actor data
-    const actors = await ActorPTR2e.createDocuments(toBeCreated);
+    const actors = await CONFIG.Actor.documentClass.createDocuments(toBeCreated);
 
     progress.advance(game.i18n.localize("PTR2E.PokemonGeneration.Progress.Prefix" + game.i18n.localize("PTR2E.PokemonGeneration.Progress.TokenGenerationStep")));
 

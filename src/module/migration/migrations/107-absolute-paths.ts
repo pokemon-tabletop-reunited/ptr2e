@@ -9,7 +9,7 @@ export class Migration107AbsolutePaths extends MigrationBase {
     }
   }
 
-  override async updateActor(source: Actor.PTR.Source): Promise<void> {
+  override async updateActor(source: PTR.Actor.Source): Promise<void> {
     if (source.img?.startsWith('/')) {
       source.img = source.img.substring(1);
     }

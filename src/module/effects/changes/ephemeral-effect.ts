@@ -1,8 +1,6 @@
 import type { DeferredEphemeralEffect, DeferredValueParams } from "@actor";
 import { ChangeModel } from "@data";
 import { UUIDUtils } from "src/util/uuid.ts";
-import type { ActiveEffectSystem, EffectSourcePTR2e } from "@effects";
-import { ItemPTR2e } from "@item";
 import type { ChangeModelSchema } from "./change.ts";
 
 const ephemeralEffectChangeSchema = {
@@ -82,7 +80,7 @@ class EphemeralEffectChangeSystem extends ChangeModel<EphemeralEffectChangeSchem
   }
 
   #createDeferredEffect(): DeferredEphemeralEffect {
-    return async (params: DeferredValueParams = {}): Promise<EffectSourcePTR2e[] | null> => {
+    return async (params: DeferredValueParams = {}): Promise<PTR.ActiveEffect.Source[] | null> => {
       if (!this.actor) return null;
       if (!this.test(params.test ?? this.actor.getRollOptions())) {
         return null;
@@ -94,7 +92,7 @@ class EphemeralEffectChangeSystem extends ChangeModel<EphemeralEffectChangeSchem
         return null;
       }
       const effect: Maybe<ClientDocument> = await this.getItem(uuid);
-      if (!(effect instanceof ItemPTR2e && effect.type === "effect")) {
+      if (!(effect instanceof CONFIG.Item.documentClass && effect.type === "effect")) {
         this.failValidation(`unable to find effect item with uuid "${uuid}"`);
         return null;
       }
@@ -103,7 +101,7 @@ class EphemeralEffectChangeSystem extends ChangeModel<EphemeralEffectChangeSchem
 
       // An ephemeral effect will be added to a contextual clone's item source array and cannot include any asynchronous change models
       const hasForbiddenCMs = source.effects.some((e) =>
-        (e.system as ActiveEffectSystem["_source"]).changes.some(
+        (e.system as PTR.ActiveEffect.SystemSource).changes.some(
           (c) =>
             typeof c.key === "string" &&
             (c.key === "choice-set" ||
@@ -117,7 +115,7 @@ class EphemeralEffectChangeSystem extends ChangeModel<EphemeralEffectChangeSchem
         this.failValidation("an ephemeral effect may not include a choice set or grant");
       }
 
-      return source.effects as EffectSourcePTR2e[];
+      return source.effects as PTR.ActiveEffect.Source[];
     };
   }
 }

@@ -1,4 +1,3 @@
-import type { TokenDocumentPTR2e } from "@module/canvas/token/document.ts";
 import type { Predicate } from "@system/predication/predication.ts";
 
 class TagTokenPrompt {
@@ -7,7 +6,7 @@ class TagTokenPrompt {
     this.requirements = params.requirements;
   }
 
-  async resolveTarget(): Promise<Maybe<TokenDocumentPTR2e>> {
+  async resolveTarget(): Promise<Maybe<TokenDocument.ConfiguredInstance>> {
     game.user.targets.clear();
     this.activateListeners();
     ui.notifications.info(this.prompt, {localize: true});
@@ -57,8 +56,8 @@ interface TagTokenPrompt {
   prompt: string;
   requirements: TargetRequirements | null;
 
-  _target?: Maybe<TokenDocumentPTR2e>;
-  _resolve?: (value: Maybe<TokenDocumentPTR2e>) => void;
+  _target?: Maybe<TokenDocument.ConfiguredInstance>;
+  _resolve?: (value: Maybe<TokenDocument.ConfiguredInstance>) => void;
 }
 
 interface PromptParameters {

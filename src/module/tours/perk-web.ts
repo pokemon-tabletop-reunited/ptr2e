@@ -1,11 +1,9 @@
 import type { ActorSheetPTR2e } from "@actor";
-import { ActorPTR2e } from "@actor";
 import { PTRTour } from "./base.ts";
 import { PerkWebApp } from "@module/apps/perk-web/perk-web-v2.ts";
-import { ItemPTR2e } from "@item";
 
 export class PerkWebTour extends PTRTour {
-  private actor: ActorPTR2e | undefined;
+  private actor: Actor.ConfiguredInstance | undefined;
 
   override get app() {
     return this.actor?.sheet as unknown as ActorSheetPTR2e;
@@ -17,7 +15,7 @@ export class PerkWebTour extends PTRTour {
 
   protected override async _preStep(): Promise<void> {
     if (!this.actor) {
-      this.actor = await ActorPTR2e.create({
+      this.actor = await CONFIG.Actor.documentClass.create({
         name: "Tour-san",
         type: "humanoid",
         img: "systems/ptr2e/img/tour-san.png",
@@ -63,7 +61,7 @@ export class PerkWebTour extends PTRTour {
       }
       case "perk-example": {
         if(!this.actor?.perks.get("root-1")) {
-          this.actor?.perks.set("root-1", new ItemPTR2e({
+          this.actor?.perks.set("root-1", new CONFIG.Item.documentClass({
             "type": "perk",
             "name": "Root 1",
             "img": "icons/svg/door-exit.svg",

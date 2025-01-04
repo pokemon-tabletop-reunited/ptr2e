@@ -1,6 +1,5 @@
 import { ApplicationV2Expanded, type ApplicationConfigurationExpanded } from "../appv2-expanded.ts";
 import { DataStructure } from "./data-handler.ts";
-import { AttackMessageSystem, CaptureMessageSystem, ChatMessagePTR2e, DamageAppliedMessageSystem, SkillMessageSystem } from "@chat";
 import type { TreeTypes } from "./data.ts";
 import { htmlQuery, htmlQueryAll } from "@utils";
 import MiniSearch from "minisearch";
@@ -78,7 +77,7 @@ class DataInspector extends foundry.applications.api.HandlebarsApplicationMixin(
   private lastSearch: { term: string | null, fuzzy: number } = { term: '', fuzzy: 0.15 };
   private includeFunctions = false;
 
-  override tabGroups = {
+  override tabGroups: Record<string, string> = {
     targets: "",
   };
   private tabs: Record<string, Tab> = {};
@@ -95,18 +94,18 @@ class DataInspector extends foundry.applications.api.HandlebarsApplicationMixin(
     options.id = `data-inspector-${document.uuid}`;
     super(options);
     this.document = document;
-    if (this.document instanceof ChatMessagePTR2e) this.mode = "roll";
+    if (this.document instanceof CONFIG.ChatMessage.documentClass) this.mode = "roll";
   }
 
   override get title() {
     const title = ["Data Inspector"]
     if ('actor' in this.document && this.document.actor) title.push(this.document.actor.name + "'s");
     if ('name' in this.document) title.push(this.document.name);
-    else if (this.document instanceof ChatMessagePTR2e) {
+    else if (this.document instanceof CONFIG.ChatMessage.documentClass) {
       switch (true) {
-        case this.document.system instanceof AttackMessageSystem: title.push("Attack Roll"); break;
-        case this.document.system instanceof SkillMessageSystem: title.push("Skill Roll"); break;
-        case this.document.system instanceof ChatMessagePTR2e: title.push("Chat Message"); break;
+        case this.document.system instanceof CONFIG.PTR.ChatMessage.dataModels.attack: title.push("Attack Roll"); break;
+        case this.document.system instanceof CONFIG.PTR.ChatMessage.dataModels.skill: title.push("Skill Roll"); break;
+        case this.document.system instanceof CONFIG.ChatMessage.documentClass: title.push("Chat Message"); break;
       }
     }
 
@@ -186,7 +185,7 @@ class DataInspector extends foundry.applications.api.HandlebarsApplicationMixin(
     context.dataType = this.mode;
     context.document = doc;
     context.type = type;
-    context.isChatMessage = doc instanceof ChatMessagePTR2e;
+    context.isChatMessage = doc instanceof CONFIG.ChatMessage.documentClass;
 
     if (["derived", "rolldata", "source", "override", "flags"].includes(this.mode)) return this._prepareContextDataInspector(context);
     return this._prepareContextRollInspector(context);
@@ -194,16 +193,16 @@ class DataInspector extends foundry.applications.api.HandlebarsApplicationMixin(
 
   _prepareContextDataInspector(context: Record<string, unknown>) {
     const doc = this.document,
-      isActor = doc instanceof Actor.ConfiguredInstance;
+      isActor = doc instanceof CONFIG.Actor.documentClass;
 
     if (this.mode === 'source') {
       this.temporaryData = doc.toObject();
     }
 
-    const _rollData = context.rollData = this.getDataVariant(doc, 'rolldata').data;
-    const _sourceData = context.sourceData = this.getDataVariant(doc, 'source').data;
-    const _derivedData = context.derivedData = this.getDataVariant(doc, 'derived').data;
-    const _overrideData = isActor ? (context.overrideData = this.getDataVariant(doc, 'override').data) : undefined
+    const _rollData = context.rollData = this.getDataVariant(doc, 'rolldata').data!;
+    const _sourceData = context.sourceData = this.getDataVariant(doc, 'source').data!;
+    const _derivedData = context.derivedData = this.getDataVariant(doc, 'derived').data!;
+    const _overrideData = isActor ? (context.overrideData = this.getDataVariant(doc, 'override').data!) : undefined
     context.flagData = this.getDataVariant(doc, 'flags').data;
 
     const { data: docData, path: basePath } = this.getDataVariant(doc, this.mode);
@@ -215,7 +214,22 @@ class DataInspector extends foundry.applications.api.HandlebarsApplicationMixin(
     context.search = this.searchTerm;
     context.path = this._path;
 
-    const { root, count, depth, all } = this.cachedResults[this.mode] ??= DataStructure.recurse(docData, basePath, basePath, this.mode, { includeFunctions: this.includeFunctions, document: doc }, { _sourceData, _rollData, _derivedData, _overides: _overrideData });
+    const { root, count, depth, all } = this.cachedResults[this.mode] ??= DataStructure.recurse(
+      docData,
+      basePath,
+      basePath,
+      this.mode,
+      {
+        includeFunctions: this.includeFunctions,
+        document: doc
+      },
+      {
+        _sourceData,
+        _rollData,
+        _derivedData,
+        _overides: _overrideData
+      }
+    );
     context.data = this.root = (this._path ? (root.getAtPath(this._path) ?? root) : root);
     if (this.searchTerm && (this.searchTerm !== this.lastSearch.term || this.fuzzyiness !== this.lastSearch.fuzzy)) {
       this.root.filterChildren(this.searchTerm, all, this.fuzzyiness);
@@ -234,7 +248,7 @@ class DataInspector extends foundry.applications.api.HandlebarsApplicationMixin(
   _prepareContextRollInspector(context: Record<string, unknown>) {
     const doc = this.document;
 
-    if (doc.system instanceof AttackMessageSystem) {
+    if (doc.system instanceof CONFIG.PTR.ChatMessage.dataModels.attack) {
       if (this.lastSearch.term !== this.searchTerm || this.fuzzyiness !== this.lastSearch.fuzzy) {
         this._currentData = null;
       }
@@ -246,7 +260,7 @@ class DataInspector extends foundry.applications.api.HandlebarsApplicationMixin(
           const { name, uuid } = r.target ?? { uuid: context.action };
           const id = name ? r.target.token ? r.target.token.id : r.target.id : null;
           const filteredOptions = this.filterOptions(context.options);
-          context.options = context.options.filter(o => filteredOptions.has(o)).sort((a, b) => a.localeCompare(b));
+          context.options = context.options.filter((o: string) => filteredOptions.has(o)).sort((a: string, b: string) => a.localeCompare(b));
           context.action = `${context.action}-${uuid}`;
           context.modifiers = context.check._modifiers;
           this.tabs[context.action] = {
@@ -264,7 +278,7 @@ class DataInspector extends foundry.applications.api.HandlebarsApplicationMixin(
       context.tabs = this._getTabs();
     }
 
-    if (doc.system instanceof SkillMessageSystem || doc.system instanceof CaptureMessageSystem) {
+    if (doc.system instanceof CONFIG.PTR.ChatMessage.dataModels.skill || doc.system instanceof CONFIG.PTR.ChatMessage.dataModels.capture) {
       if (this.lastSearch.term !== this.searchTerm || this.fuzzyiness !== this.lastSearch.fuzzy) {
         this._currentData = null;
       }
@@ -273,12 +287,12 @@ class DataInspector extends foundry.applications.api.HandlebarsApplicationMixin(
         this.tabs = {};
         const result = foundry.utils.duplicate(doc.system.result);
         const filteredOptions = this.filterOptions(result.options);
-        result.options = result.options.filter(o => filteredOptions.has(o)).sort((a, b) => a.localeCompare(b));
+        result.options = result.options.filter((o: string) => filteredOptions.has(o)).sort((a: string, b: string) => a.localeCompare(b));
         return result;
       })();
     }
 
-    if (doc.system instanceof DamageAppliedMessageSystem && doc.system.result) {
+    if (doc.system instanceof CONFIG.PTR.ChatMessage.dataModels["damage-applied"] && doc.system.result) {
       if (this.lastSearch.term !== this.searchTerm || this.fuzzyiness !== this.lastSearch.fuzzy) {
         this._currentData = null;
       }
@@ -287,7 +301,7 @@ class DataInspector extends foundry.applications.api.HandlebarsApplicationMixin(
         this.tabs = {};
         const result = foundry.utils.duplicate(doc.system.result);
         const filteredOptions = this.filterOptions(result.options);
-        result.options = result.options.filter(o => filteredOptions.has(o)).sort((a, b) => a.localeCompare(b));
+        result.options = result.options.filter((o: string) => filteredOptions.has(o)).sort((a: string, b: string) => a.localeCompare(b));
         return result;
       })();
     }
@@ -366,7 +380,7 @@ class DataInspector extends foundry.applications.api.HandlebarsApplicationMixin(
       const appEl = htmlElement.closest("[data-appid]") as HTMLElement;
       if (appEl) {
         if (this.document instanceof Item) {
-          appEl.dataset.itemId = this.document.id;
+          appEl.dataset.itemId = this.document.id!;
           appEl.dataset.itemUuid = this.document.uuid;
         }
 

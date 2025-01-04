@@ -1,5 +1,3 @@
-import { ActorPTR2e } from "@actor";
-import { ItemPTR2e } from "@item";
 import type { ActionType } from "@data";
 import { PTRCONSTS, Trait } from "@data";
 import { CollectionField } from "../fields/collection-field.ts";
@@ -116,22 +114,22 @@ class ActionPTR2e<Schema extends ActionSchema = ActionSchema> extends foundry.ab
     };
   }
 
-  get actor(): ActorPTR2e | null {
+  get actor(): CONFIG.Actor.documentClass | null {
     console.log(test);
-    if (this.parent?.parent instanceof ActorPTR2e) return this.parent.parent;
+    if (this.parent?.parent instanceof CONFIG.Actor.documentClass) return this.parent.parent;
     if (this.parent instanceof SummonSystem) return this.parent.actor;
     if (
-      this.parent?.parent instanceof ItemPTR2e &&
-      this.parent.parent.actor instanceof ActorPTR2e
+      this.parent?.parent instanceof CONFIG.Item.documentClass &&
+      this.parent.parent.actor instanceof CONFIG.Actor.documentClass
     )
       return this.parent.parent.actor;
     return null;
   }
 
   get item(): PTR.Item.ItemWithActions {
-    if (this.parent instanceof ItemPTR2e) return this.parent;
+    if (this.parent instanceof CONFIG.Item.documentClass) return this.parent;
     //@ts-expect-error - FIXME: This is a temporary item, this might be due to this being a delayed action
-    if (this.parent?.parent instanceof ItemPTR2e) return this.parent.parent;
+    if (this.parent?.parent instanceof CONFIG.Item.documentClass) return this.parent.parent;
     throw new Error("Action is not a child of an item");
   }
 

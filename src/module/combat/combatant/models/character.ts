@@ -1,5 +1,4 @@
 import CombatantSystemPTR2e, { type CombatantSystemSchema } from "../system.ts";
-import type SummonCombatantSystem from "./summon.ts";
 
 class CharacterCombatantSystem extends CombatantSystemPTR2e {
 
@@ -96,7 +95,7 @@ class CharacterCombatantSystem extends CombatantSystemPTR2e {
     if(!summons?.length) return;
 
     for(const summon of summons) {
-      (summon.system as SummonCombatantSystem).notifyActorsOfEffectsIfApplicable([this.parent]);
+      (summon.system as PTR.Combatant.System.Summon.Instance).notifyActorsOfEffectsIfApplicable([this.parent]);
     }
   }
 
@@ -130,3 +129,4 @@ class CharacterCombatantSystem extends CombatantSystemPTR2e {
 }
 
 export default CharacterCombatantSystem;
+export type { CharacterCombatantSystem };

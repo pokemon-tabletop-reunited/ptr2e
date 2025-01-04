@@ -13,7 +13,7 @@ const slugSchema = {
    * If the slug is manually set, it should be unique within the actor's items.
    * @example
    * ```typescript
-   * const item = new ItemPTR2e({ name: 'Flashlight' });
+   * const item = new CONFIG.Item.documentClass({ name: 'Flashlight' });
    * console.log(item.slug); // 'flashlight'
    * ```
    */

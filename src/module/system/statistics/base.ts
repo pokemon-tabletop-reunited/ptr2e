@@ -1,4 +1,3 @@
-import type { ActorPTR2e } from "@actor";
 import type { ModifierPTR2e } from "@module/effects/modifiers.ts";
 import * as R from "remeda";
 import type { BaseStatisticData, StatisticData } from "./data.ts"
@@ -7,7 +6,7 @@ import { extractModifiers } from "src/util/change-helpers.ts";
 /** Basic data forming any PTR statistic */
 abstract class BaseStatistic {
     /** The actor to which this statistic belongs */
-    actor: ActorPTR2e;
+    actor: Actor.ConfiguredInstance;
     /** A stable but human-readable identifier */
     slug: string;
     /** A display label */
@@ -19,7 +18,7 @@ abstract class BaseStatistic {
     /** Penalties, bonuses, and actual modifiers comprising a total modifier value */
     modifiers: ModifierPTR2e[];
 
-    constructor(actor: ActorPTR2e, data: BaseStatisticData) {
+    constructor(actor: Actor.ConfiguredInstance, data: BaseStatisticData) {
         this.actor = actor;
         this.slug = data.slug;
         this.label = game.i18n.localize(data.label).trim();

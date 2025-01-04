@@ -1,6 +1,5 @@
 import ResolvableValueField from "@module/data/fields/resolvable-value-field.ts";
 import type ChangeModel from "../changes/change.ts";
-import { ItemPTR2e } from "@item";
 import type { ResolveValueParams } from "@data";
 import { BasicChangeSystem } from "@data";
 import type { BracketedValue, RuleValue } from "../data.ts";
@@ -54,8 +53,8 @@ class AttackAlteration extends foundry.abstract.DataModel<AttackAlterationSchema
     return this.change.actor;
   }
 
-  applyTo(item: ItemPTR2e | Item.ConstructorData): void {
-    if (item instanceof ItemPTR2e) {
+  applyTo(item: Item.ConfiguredInstance | Item.ConstructorData): void {
+    if (item instanceof CONFIG.Item.documentClass) {
       return this.applyToItem(item);
     }
 
@@ -66,7 +65,7 @@ class AttackAlteration extends foundry.abstract.DataModel<AttackAlterationSchema
     foundry.utils.setProperty(item, property, change);
   }
 
-  applyToItem(item: ItemPTR2e): void {
+  applyToItem(item: Item.ConfiguredInstance): void {
     const source = item.toObject();
 
     let field: foundry.data.fields.DataField.Unknown | undefined;
@@ -84,7 +83,7 @@ class AttackAlteration extends foundry.abstract.DataModel<AttackAlterationSchema
     if (Object.keys(changes).length > 0) item.update(changes);
   }
 
-  applyField(source: ItemPTR2e['_source'], item: ItemPTR2e, property: string, field: foundry.data.fields.DataField.Unknown | undefined): unknown {
+  applyField(source: PTR.Item.Source, item: Item.ConfiguredInstance, property: string, field: foundry.data.fields.DataField.Unknown | undefined): unknown {
     field ??= item.schema.getField(property);
     const current = foundry.utils.getProperty(source, property);
     const value = typeof this.value === "boolean" ? this.value : this.resolveInjectedProperties(this.value);
@@ -315,7 +314,7 @@ interface AttackAlteration {
   value: string;
   suppressWarnings: boolean;
   ignored: boolean;
-  item: ItemPTR2e | null;
+  item: Item.ConfiguredInstance | null;
 }
 
 export { AttackAlteration };

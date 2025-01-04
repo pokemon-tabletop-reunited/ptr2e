@@ -12,7 +12,7 @@ const gearDataSchema = {
    * This is the skill and time required to create the item.
    * @example
    * ```typescript
-   * const item = new ItemPTR2e({ name: 'Flashlight', "system.crafting": { skill: 'crafting', time: { value: 1, unit: 'hours' } });
+   * const item = new CONFIG.Item.documentClass({ name: 'Flashlight', "system.crafting": { skill: 'crafting', time: { value: 1, unit: 'hours' } });
    * console.log(item.system.crafting); // { skill: 'crafting', time: { value: 1, unit: 'hours' } }
    * ```
    */
@@ -51,7 +51,7 @@ const gearDataSchema = {
    * Tracks how the item is carried and how many hands are required to hold it.
    * @example
    * ```typescript
-   * const item = new ItemPTR2e({ name: 'Flashlight', "system.equipped": {carryType: 'held', handsHeld: 1} });
+   * const item = new CONFIG.Item.documentClass({ name: 'Flashlight', "system.equipped": {carryType: 'held', handsHeld: 1} });
    * console.log(item.system.equipped); // {carryType: 'held', handsHeld: 1}
    * ```
    */
@@ -73,7 +73,7 @@ const gearDataSchema = {
    * This is the grade of the item.
    * @example
    * ```typescript
-   * const item = new ItemPTR2e({ name: 'Flashlight', "system.grade": 'A' });
+   * const item = new CONFIG.Item.documentClass({ name: 'Flashlight', "system.grade": 'A' });
    * console.log(item.system.grade); // 'A'
    * ```
    */
@@ -126,7 +126,7 @@ const gearDataSchema = {
    * This is the quantity of the item.
    * @example
    * ```typescript
-   * const item = new ItemPTR2e({ name: 'Flashlight', "system.quantity": 5 });
+   * const item = new CONFIG.Item.documentClass({ name: 'Flashlight', "system.quantity": 5 });
    * console.log(item.system.quantity); // 5
    * ```
    */
@@ -145,7 +145,7 @@ const gearDataSchema = {
    * This is the rarity of the item.
    * @example
    * ```typescript
-   * const item = new ItemPTR2e({ name: 'Flashlight', "system.rarity": 'rare' });
+   * const item = new CONFIG.Item.documentClass({ name: 'Flashlight', "system.rarity": 'rare' });
    * console.log(item.system.rarity); // 'rare'
    * ```
    */

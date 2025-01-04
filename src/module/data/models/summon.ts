@@ -4,9 +4,6 @@ import type { AttackStatistic } from "@system/statistics/attack.ts";
 import { SummonStatistic } from "@system/statistics/summon.ts";
 import type { ActionSchema } from "./action.ts";
 import type ActionPTR2e from "./action.ts";
-import type { CombatantPTR2e, SummonCombatantSystem } from "@combat";
-import type { ActorPTR2e } from "@actor";
-import { ItemPTR2e } from "@item";
 import type { AttackSchema } from "./attack.ts";
 
 const summonActionSchema = {
@@ -69,10 +66,10 @@ class SummonActionPTR2e extends AttackPTR2e<SummonActionSchema> {
     }
   }
 
-  override get actor(): ActorPTR2e | null {
+  override get actor(): Actor.ConfiguredInstance | null {
     const self = this as SummonActionPTR2e;
-    if (self.parent instanceof ItemPTR2e) return self.parent.system.owner ? fromUuidSync(self.parent.system.owner) as ActorPTR2e | null : super.actor;
-    return self.parent.owner ? fromUuidSync(self.parent.owner) as ActorPTR2e | null : super.actor;
+    if (self.parent instanceof CONFIG.Item.documentClass) return self.parent.system.owner ? fromUuidSync<Actor.ConfiguredInstance>(self.parent.system.owner) as Actor.ConfiguredInstance | null : super.actor;
+    return self.parent.owner ? fromUuidSync<Actor.ConfiguredInstance>(self.parent.owner) as Actor.ConfiguredInstance | null : super.actor;
   }
 
   override prepareDerivedData(this: SummonActionPTR2e): void {
@@ -86,7 +83,7 @@ class SummonActionPTR2e extends AttackPTR2e<SummonActionSchema> {
     return new SummonStatistic(this);
   }
 
-  override getAttackStat(this: SummonActionPTR2e, actor: Maybe<ActorPTR2e> = this.actor): number {
+  override getAttackStat(this: SummonActionPTR2e, actor: Maybe<Actor.ConfiguredInstance> = this.actor): number {
     if (this.attackStat === "owner") return super.getAttackStat(actor);
     if (typeof this.attackStat === "number") return this.attackStat;
     const value = SummonStatistic.resolveValue(this.attackStat, 0, { actor, item: this.item, attack: this });
@@ -100,14 +97,14 @@ class SummonActionPTR2e extends AttackPTR2e<SummonActionSchema> {
     return typeof formula === "string" ? formula : typeof formula === "number" ? formula + "" : "0";
   }
 
-  async execute(this: SummonActionPTR2e, summonCombatant: SummonCombatantSystem, combatants: CombatantPTR2e[]) {
+  async execute(this: SummonActionPTR2e, summonCombatant: PTR.Combatant.System.Summon.Instance, combatants: Combatant.ConfiguredInstance[]) {
     if (!game.users.activeGM) return;
     if (!this.item._id) return;
     if (!this.statistic) this.statistic = this.prepareStatistic();
     if (!this.statistic) return false;
 
-    const targets = new Set<ActorPTR2e>();
-    const owner = fromUuidSync(summonCombatant.owner ?? "") as ActorPTR2e | null;
+    const targets = new Set<Actor.ConfiguredInstance>();
+    const owner = fromUuidSync(summonCombatant.owner ?? "") as Actor.ConfiguredInstance | null;
     for (const combatant of combatants) {
       if (combatant === summonCombatant.parent) continue;
       if (!combatant.actor) continue;
@@ -171,7 +168,7 @@ class SummonActionPTR2e extends AttackPTR2e<SummonActionSchema> {
 
     for (const action of currentActions) {
       if (action.type !== "summon") continue;
-      const attack = action as SummonActionPTR2e;
+      const attack = action as unknown as SummonActionPTR2e;
       if (attack.category === "status") {
         attack.power = null;
       }

@@ -1,12 +1,9 @@
-import type { EffectPTR2e } from "@item";
 import { PTRTour } from "./base.ts";
 import type ActiveEffectConfig from "@module/effects/sheet.ts";
 import { DataInspector } from "@module/apps/data-inspector/data-inspector.ts";
-import { ActorPTR2e } from "@actor";
-import { ChatMessagePTR2e } from "@chat";
 
 export class AutomationTour extends PTRTour {
-  private item: EffectPTR2e | undefined;
+  private item: PTR.Item.System.Effect.ParentInstance | undefined;
 
   private effectSheet: foundry.applications.api.ApplicationV2 | undefined;
   private activeEffectSheet: foundry.applications.api.ApplicationV2 | undefined;
@@ -23,7 +20,7 @@ export class AutomationTour extends PTRTour {
 
   protected override async _preStep(): Promise<void> {
     if (!this.item) {
-      this.item = (await fromUuid<EffectPTR2e>("Compendium.ptr2e.core-effects.Item.ZGwaMlzUwkSuCPyH"))!;
+      this.item = (await fromUuid<PTR.Item.System.Effect.ParentInstance>("Compendium.ptr2e.core-effects.Item.ZGwaMlzUwkSuCPyH"))!;
     }
 
     if (["effect-overview", "effect-details", "effect-changes-1", "effect-changes-2", "effect-changes-3"].includes(this.currentStep?.id ?? "")) {
@@ -51,7 +48,7 @@ export class AutomationTour extends PTRTour {
         await this.dataInspector.close();
       }
       if (this.currentStep!.id === "data-inspector-actor") {
-        this.dataInspector = new DataInspector(new ActorPTR2e({
+        this.dataInspector = new DataInspector(new CONFIG.Actor.documentClass({
           name: "Tour-san",
           type: "humanoid",
           img: "systems/ptr2e/img/tour-san.png",
@@ -153,7 +150,7 @@ export class AutomationTour extends PTRTour {
       }
       else {
         //@ts-expect-error - Incorrect typing
-        this.dataInspector = new DataInspector(new ChatMessagePTR2e({
+        this.dataInspector = new DataInspector(new CONFIG.ChatMessage.documentClass({
           "type": "attack",
           "flavor": "Tackle",
           "system": {

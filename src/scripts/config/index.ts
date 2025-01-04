@@ -7,7 +7,6 @@ import { PerkDirectory } from "@module/apps/sidebar/perks-directory.ts";
 import { SquareGridPTR2e } from "@module/canvas/grid.ts";
 import { TemplateLayerPTR2e } from "@module/canvas/layer/template.ts";
 import { MeasuredTemplatePTR2e } from "@module/canvas/measured-template.ts";
-import { ScenePTR2e } from "@module/canvas/scene.ts";
 import { ActionPTR2e, AttackPTR2e, BasicChangeSystem, ChangeModel, PassivePTR2e } from "@data";
 import { ActiveEffectPTR2e } from "@module/effects/index.ts";
 import { AttackMessageSystem, ChatMessagePTR2e, DamageAppliedMessageSystem, ItemMessageSystem, SkillMessageSystem, CaptureMessageSystem } from "@module/chat/index.ts";
@@ -37,6 +36,7 @@ import { CircumstanceModifierGroups } from "./circumstance-modifiers.ts";
 import { Habitats } from "./habitats.ts";
 import { HabitatRollTable } from "@system/habitat-table.ts";
 import { RollTableDirectoryPTR2e } from "@module/apps/sidebar/rolltables-directory.ts";
+import { ScenePTR2e } from "@module/canvas/index.ts";
 
 export const PTRCONFIG = {
   ActiveEffect: {

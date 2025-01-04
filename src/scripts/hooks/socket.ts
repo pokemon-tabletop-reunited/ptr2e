@@ -1,4 +1,3 @@
-import FolderPTR2e from "@module/folder/document.ts";
 import type { PTRHook } from "./data.ts";
 
 export const Sockets: PTRHook = {
@@ -39,7 +38,7 @@ async function handleSocketRequest(data: SocketRequestData): Promise<void> {
       }
       else {
         if (folderData.source) {
-          const folder = await FolderPTR2e.create(folderData.source, { pack: folderData.pack });
+          const folder = await CONFIG.Folder.documentClass.create(folderData.source, { pack: folderData.pack });
           return void game.socket.emit("system.ptr2e", { id: data.id, request: "acknowledge", message: `Folder ${folderData.source.name} created!`, documentId: folder?.id, documentType: "Folder" });
         }
       }

@@ -12,7 +12,6 @@ import { DataStructure } from "@module/apps/data-inspector/data-handler.ts";
 import { CompendiumBrowser } from "@module/apps/compendium-browser/index.ts";
 import { TutorListSettings } from "@system/tutor-list/setting-model.ts";
 import { TutorListApp } from "@module/apps/tutor-list.ts";
-import type { CombatPTR2e, SummonCombatantSystem } from "@combat";
 import GithubManager from "@module/apps/github.ts";
 
 const GamePTR = {
@@ -78,13 +77,13 @@ const GamePTR = {
   onReady() {
     // If there are any active combats, make sure to handle Summon Effects
     // This needs to be done in Setup as Combat & Combatants aren't yet initialized when actors get initialized.
-    for(const combat of (game.combats?.contents ?? []) as CombatPTR2e[]) {
+    for(const combat of (game.combats?.contents ?? []) as Combat.ConfiguredInstance[]) {
       if(!combat.active) continue;
       const summons = combat.summons;
       if(!summons?.length) continue;
 
       for(const summon of summons) {
-        (summon.system as SummonCombatantSystem).notifyActorsOfEffectsIfApplicable(combat.combatants.contents);
+        (summon.system as PTR.Combatant.System.Summon.Instance).notifyActorsOfEffectsIfApplicable(combat.combatants.contents);
       }
     }
     

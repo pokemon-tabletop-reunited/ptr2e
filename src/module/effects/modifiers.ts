@@ -3,7 +3,6 @@ import { Predicate } from "@system/predication/predication.ts";
 import type { DamageAlteration } from "./alterations/damage.ts";
 import type ChangeModel from "./changes/change.ts";
 import { signedInteger, sluggify } from "@utils";
-import type { ItemPTR2e } from "@item";
 import * as R from "remeda";
 import type { RollNote } from "@system/notes.ts";
 
@@ -141,7 +140,7 @@ class ModifierPTR2e implements RawModifier {
    * @param options.item An item producing damage as part of an action
    * @param options.test An `Array` or `Set` of roll options for use in predication testing
    */
-  applyDamageAlterations(options: { item: ItemPTR2e; test: Iterable<string> }): void {
+  applyDamageAlterations(options: { item: Item.ConfiguredInstance; test: Iterable<string> }): void {
     for (const alteration of this.alterations) {
       alteration.applyTo(this, options);
     }

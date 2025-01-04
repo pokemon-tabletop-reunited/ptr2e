@@ -1,10 +1,8 @@
-import type { ActorPTR2e } from "@actor";
-import type { ItemPTR2e } from "@item";
 import { MigrationList, MigrationRunner } from "@module/migration/index.ts";
 import { MigrationRunnerBase } from "@module/migration/runner/base.ts";
 import { isObject } from "@utils";
 
-export async function preImportJSON<TDocument extends ActorPTR2e | ItemPTR2e>(document: TDocument, json: string) {
+export async function preImportJSON<TDocument extends Actor.ConfiguredInstance | Item.ConfiguredInstance>(document: TDocument, json: string) {
   const source: unknown = JSON.parse(json);
   if (!isObject<TDocument['_source']>(source)) return null;
   if (!isObject(source.system)) return null;

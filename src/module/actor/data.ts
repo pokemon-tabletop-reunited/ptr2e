@@ -1,5 +1,4 @@
 import type { DistanceUnit, Trait, WeightUnit } from "@data";
-import type { EffectSourcePTR2e } from "@effects";
 import type AfflictionActiveEffectSystem from "@module/effects/data/affliction.ts";
 import type { DeferredPromise, DeferredValue, DeferredValueParams, ModifierAdjustment, ModifierPTR2e } from "@module/effects/modifiers.ts";
 import type { RollNote } from "@system/notes.ts";
@@ -32,7 +31,7 @@ export interface EffectRollSource {
   [key: string]: unknown;
 }
 
-export type DeferredEphemeralEffect = DeferredPromise<EffectSourcePTR2e[] | null>;
+export type DeferredEphemeralEffect = DeferredPromise<PTR.ActiveEffect.Source[] | null>;
 export type DeferredEffectRoll = DeferredPromise<EffectRoll | null>;
 type DeferredModifier = DeferredValue<ModifierPTR2e>;
 

@@ -1,4 +1,3 @@
-import type { AttackMessageSystem, CaptureMessageSystem, ChatMessagePTR2e, DamageAppliedMessageSystem, SkillMessageSystem } from "@chat";
 import type { PTRHook } from "./data.ts";
 import { DataInspector } from "@module/apps/data-inspector/data-inspector.ts";
 import { TargetSelectorPopup } from "@module/apps/target-selector/target-selector-popup.ts";
@@ -6,7 +5,6 @@ import { TargetSelectorPopup } from "@module/apps/target-selector/target-selecto
 export const ChatContext: PTRHook = {
   listen: () => {
     // Luck based rerolling
-    //@ts-expect-error - This is valid typing
     Hooks.on("getChatLogEntryContext", (chat: ChatLog, menuItems: ContextMenuEntry[]): void => {
       const options: ContextMenuEntry[] = [
         {
@@ -15,10 +13,10 @@ export const ChatContext: PTRHook = {
           condition: li => {
             const message = game.messages.get(li.data("messageId"));
             if (!message) return false;
-            return ["skill"].includes(message.type) && !(message.system as SkillMessageSystem).rerolled && !(message.system as SkillMessageSystem).luckRoll;
+            return ["skill"].includes(message.type) && !(message.system as PTR.ChatMessage.System.Skill.Instance).rerolled && !(message.system as PTR.ChatMessage.System.Skill.Instance).luckRoll;
           },
           callback: li => {
-            const message = game.messages.get(li.data("messageId")) as ChatMessagePTR2e;
+            const message = game.messages.get(li.data("messageId")) as ChatMessage.ConfiguredInstance;
             if (!message) return;
             foundry.applications.api.DialogV2.confirm({
               //@ts-expect-error - fvtt-types error
@@ -29,7 +27,7 @@ export const ChatContext: PTRHook = {
               //@ts-expect-error - fvtt-types error
               yes: {
                 callback: async () => {
-                  await (message.system as SkillMessageSystem).reroll();
+                  await (message.system as PTR.ChatMessage.System.Skill.Instance).reroll();
                 }
               }
             });
@@ -42,19 +40,19 @@ export const ChatContext: PTRHook = {
             const message = game.messages.get(li.data("messageId"));
             if (!message) return false;
 
-            if (["skill"].includes(message.type)) return !(message.system as SkillMessageSystem).luckRoll;
+            if (["skill"].includes(message.type)) return !(message.system as PTR.ChatMessage.System.Skill.Instance).luckRoll;
             if (["capture"].includes(message.type)) return true;
-            if (["attack"].includes(message.type)) return (message.system as AttackMessageSystem).results.some(r => (r?.accuracy?.total ?? 0) > 0);
+            if (["attack"].includes(message.type)) return (message.system as PTR.ChatMessage.System.Attack.Instance).results.some(r => (r?.accuracy?.total ?? 0) > 0);
 
             return false;
           },
           callback: async li => {
-            const message = game.messages.get(li.data("messageId")) as ChatMessagePTR2e;
+            const message = game.messages.get(li.data("messageId")) as ChatMessage.ConfiguredInstance;
             if (!message) return;
 
             // skill
             if (message.type == "skill") {
-              const chatMessage = message as ChatMessagePTR2e & { system: SkillMessageSystem };
+              const chatMessage = message as PTR.ChatMessage.System.Skill.ParentInstance;
 
               const currentResult = chatMessage.system.context?.roll?.total;
               if (currentResult === undefined) return;
@@ -76,7 +74,7 @@ export const ChatContext: PTRHook = {
               });
             }
             else if (message.type == "capture") {
-              const captureMessage = message as ChatMessagePTR2e & { system: CaptureMessageSystem };
+              const captureMessage = message as PTR.ChatMessage.System.Capture.ParentInstance
 
               const currentResult = captureMessage.system.rolls.accuracy?.total;
               if (currentResult === undefined) return;
@@ -98,7 +96,7 @@ export const ChatContext: PTRHook = {
               });
             }
             else if (message.type == "attack") {
-              const attackMessage = message as ChatMessagePTR2e & { system: AttackMessageSystem };
+              const attackMessage = message as PTR.ChatMessage.System.Attack.ParentInstance
               // get the valid targets (the ones that have been missed)
               const targets = attackMessage.system.results.map(r => {
                 // (r.accuracy?.total ?? 0) <= (r.accuracy?.options?.accuracyDC ?? -1)
@@ -158,10 +156,10 @@ export const ChatContext: PTRHook = {
           condition: li => {
             const message = game.messages.get(li.data("messageId"));
             if (!message) return false;
-            return ["attack", "skill", "capture"].includes(message.type) || (message.type === "damage-applied" && !!(message.system as DamageAppliedMessageSystem).result)
+            return ["attack", "skill", "capture"].includes(message.type) || (message.type === "damage-applied" && !!(message.system as PTR.ChatMessage.System.DamageApplied.Instance).result)
           },
           callback: li => {
-            const message = game.messages.get(li.data("messageId")) as ChatMessagePTR2e & { system: SkillMessageSystem }
+            const message = game.messages.get(li.data("messageId")) as PTR.ChatMessage.System.Skill.ParentInstance
             if (!message) return;
             new DataInspector(message, {}).render(true);
           }

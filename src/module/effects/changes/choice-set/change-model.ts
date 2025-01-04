@@ -9,7 +9,6 @@ import { sluggify } from "@utils";
 import * as R from "remeda"
 import { UUIDUtils } from "src/util/uuid.ts";
 import { ChoiceSetPrompt } from "./prompt.ts";
-import { ItemPTR2e } from "@item";
 import type { ChangeModelSchema } from "../change.ts";
 
 const choiceSetChangeSchema = {
@@ -131,7 +130,7 @@ class ChoiceSetChangeSystem extends ChangeModel<ChoiceSetChangeSchema> {
 
     const selection = this.getPreselection() ?? (await new ChoiceSetPrompt({
       prompt: this.prompt!,
-      item: this.item as Maybe<ItemPTR2e>,
+      item: this.item as Maybe<Item.ConfiguredInstance>,
       title: this.label,
       choices: inflatedChoices,
       containsItems: this.containsItems,

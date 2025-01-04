@@ -1,4 +1,3 @@
-import type { SummonCombatantSystem } from "@combat";
 import { htmlQuery } from "@utils";
 
 interface CombatTurn {
@@ -23,8 +22,8 @@ class CombatTrackerPTR2e extends CombatTracker {
       const combatant = this.viewed?.combatants.get(turn.id);
       if (!combatant) return turn;
       turn.type = combatant?.type;
-      if (combatant.type === "summon" && (combatant.system as SummonCombatantSystem).delay !== null && (combatant.system as SummonCombatantSystem).delay! >= -1) {
-        turn.delay = (combatant.system as SummonCombatantSystem).delay!;
+      if (combatant.type === "summon" && (combatant.system as PTR.Combatant.System.Summon.Instance).delay !== null && (combatant.system as PTR.Combatant.System.Summon.Instance).delay! >= -1) {
+        turn.delay = (combatant.system as PTR.Combatant.System.Summon.Instance).delay!;
       }
       return turn;
     })
@@ -131,6 +130,7 @@ class CombatTrackerPTR2e extends CombatTracker {
         if (!combatant) return;
 
         foundry.applications.api.DialogV2.prompt<foundry.applications.api.DialogV2.WaitOptions, void>({
+          //@ts-expect-error - fvtt-types is incorrect.
           window: {
             title: game.i18n.format("PTR2E.Combat.ContextMenu.ApplyDelayOrAdvancement.title", { name: combatant.name }),
           },

@@ -1,10 +1,9 @@
 import type { ActorSheetPTR2e } from "@actor";
-import { ActorPTR2e } from "@actor";
 import { PTRTour } from "./base.ts";
 import StatsForm from "@actor/sheets/stats-form.ts";
 
 export class ActorSheetTour extends PTRTour {
-  private actor: ActorPTR2e | undefined;
+  private actor: Actor.ConfiguredInstance | undefined;
   override get app(): ActorSheetPTR2e {
     return this.actor?.sheet as unknown as ActorSheetPTR2e;
   }
@@ -16,7 +15,7 @@ export class ActorSheetTour extends PTRTour {
   protected override async _preStep(): Promise<void> {
     if (!this.actor) {
       //@ts-expect-error - Correct data is being passed
-      this.actor = await ActorPTR2e.create({
+      this.actor = await CONFIG.Actor.documentClass.create({
         name: "Tour-san",
         type: "humanoid",
         img: "systems/ptr2e/img/tour-san.png",

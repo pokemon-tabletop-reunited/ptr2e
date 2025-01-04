@@ -504,3 +504,4 @@ class ChatMessagePTR2e extends ChatMessage {
 }
 
 export default ChatMessagePTR2e;
+export type { ChatMessagePTR2e };

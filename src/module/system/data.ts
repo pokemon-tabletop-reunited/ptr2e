@@ -1,8 +1,6 @@
-import type { ActorPTR2e, EffectRoll } from "@actor";
+import type { EffectRoll } from "@actor";
 import type { BaseStatisticCheck, StatisticCheck } from "./statistics/statistic.ts";
-import type { ItemPTR2e } from "@item";
 import type { CheckDC } from "@system/rolls/degree-of-success.ts";
-import type { TokenDocumentPTR2e } from "@module/canvas/token/document.ts";
 import type { ModifierPTR2e } from "@module/effects/modifiers.ts";
 import type { Trait } from "@data";
 import type { RollNote } from "./notes.ts";
@@ -17,12 +15,12 @@ interface CheckContextParams<
 
 interface RollContextParams<
   TStatistic extends BaseStatisticCheck<unknown, unknown> | null = StatisticCheck | null,
-  TItem extends ItemPTR2e | null = ItemPTR2e | null,
+  TItem extends Item.ConfiguredInstance | null = Item.ConfiguredInstance | null,
 > {
   /** The statistic used for the roll */
   statistic: TStatistic;
   /** A targeted token: may not be applicable if the action isn't targeted */
-  target?: { actor?: ActorPTR2e | null; token?: Token.ConfiguredInstance | null } | null;
+  target?: { actor?: Actor.ConfiguredInstance | null; token?: Token.ConfiguredInstance | null } | null;
   /** The item being used in the attack or damage roll */
   item?: TItem;
   /** The action being used for this check */
@@ -42,9 +40,9 @@ interface RollContextParams<
 }
 
 interface CheckContext<
-  TActor extends ActorPTR2e = ActorPTR2e,
+  TActor extends Actor.ConfiguredInstance = Actor.ConfiguredInstance,
   TStatistic extends BaseStatisticCheck<unknown, unknown> = StatisticCheck,
-  TItem extends ItemPTR2e | null = ItemPTR2e | null,
+  TItem extends Item.ConfiguredInstance | null = Item.ConfiguredInstance | null,
 > extends RollContext<TActor, TStatistic, TItem> {
   dc?: CheckDC | null;
   outOfRange?: boolean;
@@ -55,9 +53,9 @@ interface CheckContext<
 
 /** Context for the attack or damage roll of a strike */
 interface RollContext<
-  TActor extends ActorPTR2e,
+  TActor extends Actor.ConfiguredInstance,
   TStatistic extends BaseStatisticCheck<unknown, unknown> | null = StatisticCheck | null,
-  TItem extends ItemPTR2e | null = ItemPTR2e | null,
+  TItem extends Item.ConfiguredInstance | null = Item.ConfiguredInstance | null,
 > {
   /** Roll options */
   options: Set<string>;
@@ -69,12 +67,12 @@ interface RollContext<
 }
 
 interface AttackSelf<
-  TActor extends ActorPTR2e,
+  TActor extends Actor.ConfiguredInstance,
   TStatistic extends BaseStatisticCheck<unknown, unknown> | null = AttackCheck | null,
-  TItem extends ItemPTR2e | null = ItemPTR2e | null,
+  TItem extends Item.ConfiguredInstance | null = Item.ConfiguredInstance | null,
 > {
   actor: TActor;
-  token: TokenDocumentPTR2e | null;
+  token: TokenDocument.ConfiguredInstance | null;
   statistic: TStatistic,
   item: TItem,
   attack: PTR.Models.Action.Models.Attack.Instance,
@@ -82,8 +80,8 @@ interface AttackSelf<
 }
 
 interface RollTarget {
-  actor: ActorPTR2e;
-  token: TokenDocumentPTR2e;
+  actor: Actor.ConfiguredInstance;
+  token: TokenDocument.ConfiguredInstance;
   distance: number;
   rangeIncrement: number | null;
 }

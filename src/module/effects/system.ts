@@ -1,10 +1,8 @@
 import type { ChangeModel } from "@module/data/index.ts";
 import { HasChanges, HasEmbed, HasSlug, HasTraits } from "@module/data/index.ts";
-import type { ActorPTR2e } from "@actor";
 import type { TraitsSchema } from "@module/data/mixins/has-traits.ts";
 import type { SlugSchema } from "@module/data/mixins/has-slug.ts";
 import type { ChangesSchema } from "@module/data/mixins/has-changes.ts";
-import { ItemPTR2e } from "@item";
 import AbilitySystem from "@item/data/ability.ts";
 
 const activeEffectSystemSchema = {
@@ -50,8 +48,8 @@ export default abstract class ActiveEffectSystem<Schema extends ActiveEffectSyst
     return options;
   }
 
-  apply(actor: ActorPTR2e, change: ChangeModel, options?: string[]): unknown {
-    if (this.parent.parent instanceof ItemPTR2e && this.parent.parent.system instanceof AbilitySystem) {
+  apply(actor: Actor.ConfiguredInstance, change: ChangeModel, options?: string[]): unknown {
+    if (this.parent.parent instanceof CONFIG.Item.documentClass && this.parent.parent.system instanceof AbilitySystem) {
       if (!this.parent.parent.system.free && this.parent.parent.system.slot === null) {
         return false;
       }

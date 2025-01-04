@@ -410,7 +410,7 @@ class DataStructure {
     path: string, 
     type: TreeTypes, 
     { includeFunctions = false, document }: { includeFunctions?: boolean, document?: foundry.abstract.Document.Any } = {}, 
-    {_sourceData, _derivedData, _rollData, _overides, _temporaryData}: { _sourceData?: object, _derivedData?: object, _rollData?: object, _overides?: object, _temporaryData?: object } = {}
+    {_sourceData, _derivedData, _rollData, _overides, _temporaryData}: { _sourceData?: Record<string, unknown>, _derivedData?: Record<string, unknown>, _rollData?: Record<string, unknown>, _overides?: Record<string, unknown>, _temporaryData?: Record<string, unknown> } = {}
   ): { root: DataStructure, all: Record<string, DataStructure>, count: number, depth: number } {
     const dt = new DataStructure({ key, path: key, value: sourceData, parent: null, treeType: type, depth: 0 });
     dt._sourceData = _sourceData;

@@ -1,13 +1,10 @@
 import { isBracketedValue, isObject, reduceItemName, sluggify } from "@utils";
 import type { BracketedValue, RuleValue } from "@module/effects/data.ts";
 import { PredicateField } from "@system/predication/schema-data-fields.ts";
-import { ItemPTR2e } from "@item";
-import type { ActorPTR2e } from "@actor";
 import type { ChangeModelOptions, ResolveValueParams } from "./data.ts";
 import * as R from "remeda";
 import ResolvableValueField from "@module/data/fields/resolvable-value-field.ts";
 import { ChangeModelTypes } from "@data";
-import type { ActiveEffectSystem } from "@effects";
 import type { InexactPartial } from "fvtt-types/utils";
 
 const changeModelSchema = {
@@ -60,7 +57,7 @@ export type TypeField = foundry.data.fields.StringField<{
 
 export type ChangeModelSchema = typeof changeModelSchema & {type: TypeField};
 
-class ChangeModel<Schema extends ChangeModelSchema = ChangeModelSchema> extends foundry.abstract.DataModel<Schema, ActiveEffectSystem> {
+class ChangeModel<Schema extends ChangeModelSchema = ChangeModelSchema> extends foundry.abstract.DataModel<Schema, PTR.ActiveEffect.SystemInstance> {
   static TYPE = "";
 
   static get label() {
@@ -130,7 +127,7 @@ class ChangeModel<Schema extends ChangeModelSchema = ChangeModelSchema> extends 
     return;
   }
 
-  get actor(): ActorPTR2e | null {
+  get actor(): Actor.ConfiguredInstance | null {
     const self = this as ChangeModel;
     return (self.effect.parent && self.effect.targetsActor()) ? self.effect.target : null;
   }
@@ -138,7 +135,7 @@ class ChangeModel<Schema extends ChangeModelSchema = ChangeModelSchema> extends 
   get item() {
     const self = this as ChangeModel;
     const effect = self.effect;
-    return effect.parent instanceof ItemPTR2e ? effect.parent : null;
+    return effect.parent instanceof CONFIG.Item.documentClass ? effect.parent : null;
   }
 
   get slug() {
@@ -171,7 +168,7 @@ class ChangeModel<Schema extends ChangeModelSchema = ChangeModelSchema> extends 
   }
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  public apply(_: ActorPTR2e, __?: string[] | Set<string>): unknown {
+  public apply(_: Actor.ConfiguredInstance, __?: string[] | Set<string>): unknown {
     throw new Error("The apply method must be implemented by the subclass");
   }
 
@@ -449,7 +446,7 @@ interface ChangeModel {
 }
 
 // interface ChangeModel<TSchema extends ChangeSchema = ChangeSchema>
-//   extends foundry.abstract.DataModel<ActiveEffectSystem, TSchema>,
+//   extends foundry.abstract.DataModel<PTR.ActiveEffect.SystemInstance, TSchema>,
 //   ModelPropsFromSchema<ChangeSchema> {
 //   constructor: typeof ChangeModel<TSchema>;
 
@@ -495,7 +492,7 @@ interface ChangeModel {
 //   afterRoll?(params: ChangeModel.AfterRollParams): Promise<void>;
 
 //   /** Runs before the rule's parent effect's owning actor is updated */
-//   preUpdateActor?(): Promise<{ create: ItemSourcePTR2e[]; delete: string[]; } | { createEffects: EffectSourcePTR2e[]; deleteEffects: string[]; }>;
+//   preUpdateActor?(): Promise<{ create: ItemSourcePTR2e[]; delete: string[]; } | { createEffects: PTR.ActiveEffect.Source[]; deleteEffects: string[]; }>;
 
 //   /**
 //    * Runs before this rules element's parent effect is created. The effect is temporarilly constructed. A rule element can
@@ -567,17 +564,17 @@ namespace ChangeModel {
     /** All items pending creation in a `ActiveEffect.ConfiguredInstance.createDocuments` call */
     pendingItems: Item.ConstructorData[];
     /** Items temporarily constructed from pending item source */
-    tempItems: ItemPTR2e[];
-    /** The context object from the `ItemPTR2e.createDocuments` call */
+    tempItems: Item.ConfiguredInstance[];
+    /** The context object from the `CONFIG.Item.documentClass.createDocuments` call */
     context: InexactPartial<Omit<foundry.abstract.Document.DatabaseOperationsFor<"Item", "create">, "ids">>;
     /** Whether this preCreate run is from a pre-update reevaluation */
     reevaluation?: boolean;
   }
 
   export interface PreDeleteParams {
-    /** All items pending deletion in a `ItemPTR2e.deleteDocuments` call */
-    pendingItems: ItemPTR2e[];
-    /** The context object from the `ItemPTR2e.deleteDocuments` call */
+    /** All items pending deletion in a `CONFIG.Item.documentClass.deleteDocuments` call */
+    pendingItems: Item.ConfiguredInstance[];
+    /** The context object from the `CONFIG.Item.documentClass.deleteDocuments` call */
     context: InexactPartial<Omit<foundry.abstract.Document.DatabaseOperationsFor<"Item", "delete">, "ids">>
   }
 

@@ -473,9 +473,9 @@ export default class BlueprintSheet extends foundry.applications.api.HandlebarsA
   }
 
   private _dataOnly = false;
-  private resolve: (value: void | PromiseLike<Partial<Actor.PTR.Source>[] | void>) => void;
+  private resolve: (value: void | PromiseLike<Partial<PTR.Actor.Source>[] | void>) => void;
 
-  async dataOnly(): Promise<Partial<Actor.PTR.Source>[] | void> {
+  async dataOnly(): Promise<Partial<PTR.Actor.Source>[] | void> {
     return new Promise((resolve) => {
       this._dataOnly = true;
       this.resolve = resolve;

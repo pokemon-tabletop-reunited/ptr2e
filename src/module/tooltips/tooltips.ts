@@ -1,6 +1,4 @@
-import type { AttackMessageSystem, DamageAppliedMessageSystem } from "@chat";
 import { Trait } from "@data";
-import type { EffectPTR2e, MovePTR2e, PerkPTR2e, SummonPTR2e } from "@item";
 import type { DataInspector } from "@module/apps/data-inspector/data-inspector.ts";
 import type { CustomSkill } from "@module/data/models/skill.ts";
 import Tagify from "@yaireo/tagify";
@@ -454,7 +452,7 @@ export default class TooltipsPTR2e {
           if (!action) return void ui.notifications.error("Action not found.");
           if (!(action?.type === "attack" && action.summon)) return void ui.notifications.error("Action not found on item.");
 
-          const summonItem = await fromUuid<SummonPTR2e>((action as unknown as PTR.Models.Action.Models.Attack.Instance).summon as ItemUUID);
+          const summonItem = await fromUuid<PTR.Item.System.Summon.ParentInstance>((action as unknown as PTR.Models.Action.Models.Attack.Instance).summon as ItemUUID);
           if (!summonItem) return void ui.notifications.error("Summon not found on action.");
 
           const combatants = await game.combat.createEmbeddedDocuments("Combatant", [{
@@ -489,7 +487,7 @@ export default class TooltipsPTR2e {
     const messageId = (element.closest("[data-message-id]") as HTMLElement)?.dataset?.messageId;
     if (!messageId) return false;
 
-    const message = game.messages.get(messageId) as ChatMessage.ConfiguredInstance & {system: AttackMessageSystem};
+    const message = game.messages.get(messageId) as PTR.ChatMessage.System.Attack.ParentInstance;
     if (!message) return false;
 
     const target = message.system.context?.results.get(targetUuid);
@@ -547,7 +545,7 @@ export default class TooltipsPTR2e {
     const messageId = (element.closest("[data-message-id]") as HTMLElement)?.dataset?.messageId;
     if (!messageId) return false;
 
-    const message = game.messages.get(messageId) as ChatMessage.ConfiguredInstance & {system: AttackMessageSystem};
+    const message = game.messages.get(messageId) as PTR.ChatMessage.System.Attack.ParentInstance;
     if (!message) return false;
 
     const target = message.system.context?.results.get(targetUuid);
@@ -585,7 +583,7 @@ export default class TooltipsPTR2e {
     const uuid = element.dataset.message;
     if (!uuid) return false;
 
-    const message = (await fromUuid<ChatMessage.ConfiguredInstance>(uuid as ValidUUID)) as ChatMessage.ConfiguredInstance & {system: DamageAppliedMessageSystem};
+    const message = (await fromUuid<ChatMessage.ConfiguredInstance>(uuid as ValidUUID)) as PTR.ChatMessage.System.DamageApplied.ParentInstance
     if (!message) return false;
 
     this.tooltip.classList.add("damage-info");
@@ -611,7 +609,7 @@ export default class TooltipsPTR2e {
     const messageId = (element.closest("[data-message-id]") as HTMLElement)?.dataset?.messageId;
     if (!messageId) return false;
 
-    const message = game.messages.get(messageId) as ChatMessage.ConfiguredInstance & {system: AttackMessageSystem};
+    const message = game.messages.get(messageId) as PTR.ChatMessage.System.Attack.ParentInstance
     if (!message) return false;
 
     const target = message.system.context?.results.get(targetUuid);
@@ -648,7 +646,7 @@ export default class TooltipsPTR2e {
         const { targetUuid, messageId } = ((event.currentTarget as HTMLElement).closest("[data-target-uuid]") as HTMLElement)?.dataset ?? {};
         if (!targetUuid || !messageId) return;
 
-        const message = game.messages.get(messageId) as ChatMessage.ConfiguredInstance & {system: AttackMessageSystem};
+        const message = game.messages.get(messageId) as PTR.ChatMessage.System.Attack.ParentInstance
         const target = message.system.context?.results.get(targetUuid as ActorUUID);
         if (!target) return;
         if (!target.effect.effects?.[type]?.length) return;
@@ -671,7 +669,7 @@ export default class TooltipsPTR2e {
               //@ts-expect-error - FIXME: Maybe a fvtt-types error, at the very least, this is marked as nullable, but not showing up as such here.
               return (Roll.fromJSON(result.effectRolls![type][index].roll!) as Roll.Evaluated<Roll>).total <= 0 ? false : true;
             } catch (error: unknown) {
-              Hooks.onError("AttackMessageSystem#prepareBaseData", error as Error, {
+              Hooks.onError("TooltipsPTR2e#_onEffectRollsTooltip", error as Error, {
                 log: "error",
               });
             }
@@ -736,14 +734,14 @@ export default class TooltipsPTR2e {
     return 500;
   }
 
-  async #createItemTooltip<TItem extends Item.ConfiguredInstance>(item: TItem, type: string) {
+  async #createItemTooltip<TItem extends PTR.Item.ItemWithTraits>(item: TItem, type: string) {
     const traits = [...(item.traits?.values() ?? [])].map((t) => ({
       value: t.slug,
       label: t.label,
       type: t.type
     }));
 
-    const prerequisites = item.type === "perk" ? (item as PerkPTR2e).system.getPredicateStrings() : null
+    const prerequisites = item.type === "perk" ? (item as unknown as PTR.Item.System.Perk.ParentInstance).system.getPredicateStrings() : null
 
     this.tooltip.classList.add(type);
     await this._renderTooltip({
@@ -790,7 +788,7 @@ export default class TooltipsPTR2e {
     return 2000;
   }
 
-  async #createEffectItemTooltip(effect: EffectPTR2e) {
+  async #createEffectItemTooltip(effect: PTR.Item.System.Effect.ParentInstance) {
     this.tooltip.classList.add("effect");
     await this._renderTooltip({
       path: `systems/ptr2e/templates/items/embeds/effect-item.hbs`,
@@ -826,7 +824,7 @@ export default class TooltipsPTR2e {
 
     switch (entity.type) {
       case "move": {
-        const move = entity as MovePTR2e;
+        const move = entity as PTR.Item.System.Move.ParentInstance;
         const attack = move.system.attack;
         if (!attack) return false;
 
@@ -845,7 +843,7 @@ export default class TooltipsPTR2e {
         return await this.#createItemTooltip(entity, "container");
       case "effect":
         if (game.tooltip.element) game.tooltip.element.dataset.tooltipDirection ||= "LEFT";
-        return await this.#createEffectItemTooltip(entity as EffectPTR2e);
+        return await this.#createEffectItemTooltip(entity as PTR.Item.System.Effect.ParentInstance);
       case "equipment":
         if (game.tooltip.element) game.tooltip.element.dataset.tooltipDirection ||= "LEFT";
         return await this.#createItemTooltip(entity, "equipment");

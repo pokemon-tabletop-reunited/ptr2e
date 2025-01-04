@@ -1,10 +1,9 @@
-import type { ActorPTR2e } from "@actor";
 import FlatModifierChangeSystem from "./flat-modifier.ts";
 
 class PercentileModifierSystem extends FlatModifierChangeSystem {
   static override TYPE = "percentile-modifier";
 
-  override beforePrepareData(actor: ActorPTR2e | null = this.actor): void {
+  override beforePrepareData(actor: Actor.ConfiguredInstance | null = this.actor): void {
     return super.beforePrepareData(actor, "percentile");
   }
 }

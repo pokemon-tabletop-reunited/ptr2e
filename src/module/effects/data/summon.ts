@@ -1,4 +1,3 @@
-import type { ActorPTR2e } from "@actor";
 import type { AfflictionSystemSchema } from "./affliction.ts";
 import AfflictionActiveEffectSystem from "./affliction.ts";
 import type { ChangeModel } from "@data";
@@ -38,7 +37,7 @@ class SummonActiveEffectSystem extends AfflictionActiveEffectSystem<SummonEffect
     return Infinity;
   }
 
-  override apply(actor: ActorPTR2e, change: ChangeModel, options?: string[]) {
+  override apply(actor: Actor.ConfiguredInstance, change: ChangeModel, options?: string[]) {
     const self = this as SummonActiveEffectSystem;
     if(self.formula) {
       const afflictions = (actor.synthetics.afflictions ??= { data: [], ids: new Set() });

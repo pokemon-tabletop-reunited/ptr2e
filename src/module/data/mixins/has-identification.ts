@@ -1,4 +1,3 @@
-import type { ItemPTR2e } from '@item';
 import type { TemplateConstructor } from './data-template.ts';
 import { PTRCONSTS } from '@data';
 
@@ -11,7 +10,7 @@ const identificationSchema = {
    * It can be one of `'identified'`, `'unidentified'`, or `'misidentified'`.
    * @example
    * ```typescript
-   * const item = new ItemPTR2e({ 
+   * const item = new CONFIG.Item.documentClass({ 
    *      name: 'Flashlight', 
    *      "system.identification": { 
    *          status: 'unidentified'
@@ -82,7 +81,7 @@ export default function HasIdentification<BaseClass extends TemplateConstructor>
           this.identification,
           "misidentified",
           {
-            value: fromUuidSync(this._source.identification.misidentified, this.parent) as ItemPTR2e | null,
+            value: fromUuidSync(this._source.identification.misidentified, this.parent) as Item.ConfiguredInstance | null,
             writable: false,
             enumerable: false,
           }

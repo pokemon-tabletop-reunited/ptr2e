@@ -1,7 +1,5 @@
 import { htmlQueryAll } from "@utils";
 import { ActorComponent } from "./base.ts";
-import type ActorPTR2e from "@actor/base.ts";
-import type { AbilityPTR2e } from "@item";
 
 class AbilitiesComponent extends ActorComponent {
   static override TEMPLATE = "systems/ptr2e/templates/actor/components/actor-abilities-component.hbs";
@@ -17,7 +15,7 @@ class AbilitiesComponent extends ActorComponent {
     return AbilitiesComponent.attachListeners(htmlElement, this.actor);
   }
 
-  static attachListeners(htmlElement: HTMLElement, actor: ActorPTR2e) {
+  static attachListeners(htmlElement: HTMLElement, actor: Actor.ConfiguredInstance) {
     for (const element of htmlQueryAll(htmlElement, ".abilities-display .item-controls .item-to-chat")) {
       element.addEventListener("click", async (event) => {
         const itemId = (
@@ -25,7 +23,7 @@ class AbilitiesComponent extends ActorComponent {
         )?.dataset.itemId;
         if (!itemId) return;
         return (
-          actor.items.get(itemId) as AbilityPTR2e
+          actor.items.get(itemId) as PTR.Item.System.Ability.ParentInstance
         )?.toChat();
       });
     }
@@ -37,7 +35,7 @@ class AbilitiesComponent extends ActorComponent {
         )?.dataset.itemId;
         if (!itemId) return;
         return (
-          actor.items.get(itemId) as AbilityPTR2e
+          actor.items.get(itemId) as PTR.Item.System.Ability.ParentInstance
         )?.sheet?.render(true);
       });
     }

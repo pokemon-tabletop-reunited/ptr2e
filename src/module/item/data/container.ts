@@ -5,7 +5,6 @@ import type { TraitsSchema } from "@module/data/mixins/has-traits.ts";
 import type { DescriptionSchema } from "@module/data/mixins/has-description.ts";
 import type { ContainerSchema } from "@module/data/mixins/has-container.ts";
 import type { GearDataSchema } from "@module/data/mixins/has-gear-data.ts";
-import type { ItemPTR2e } from "@item/document.ts";
 
 const containerSchema = {
   collapsed: new foundry.data.fields.BooleanField({ required: true, initial: false, label: "PTR2E.FIELDS.collapsed.label", hint: "PTR2E.FIELDS.collapsed.hint" }),
@@ -16,7 +15,7 @@ export type ContainerSystemSchema = typeof containerSchema & SlugSchema & Migrat
 /**
  * @category Item Data Models
  */
-export default abstract class ContainerSystem extends HasEmbed(HasMigrations(HasGearData(HasTraits(HasDescription(HasSlug(HasContainer(foundry.abstract.TypeDataModel<ContainerSchema, ItemPTR2e>)))))), "container") {
+export default abstract class ContainerSystem extends HasEmbed(HasMigrations(HasGearData(HasTraits(HasDescription(HasSlug(HasContainer(foundry.abstract.TypeDataModel)))))), "container")<containerSchema, Item.ConfiguredInstance> {
   /**
    * @internal
    */
@@ -30,7 +29,7 @@ export default abstract class ContainerSystem extends HasEmbed(HasMigrations(Has
   }
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    override async _preCreate(data: foundry.abstract.TypeDataModel.ParentAssignmentType<ContainerSystemSchema, ItemPTR2e>, options: foundry.abstract.Document.PreCreateOptions<any>, user: User): Promise<boolean | void> {
+    override async _preCreate(data: foundry.abstract.TypeDataModel.ParentAssignmentType<ContainerSystemSchema, Item.ConfiguredInstance>, options: foundry.abstract.Document.PreCreateOptions<any>, user: User): Promise<boolean | void> {
     const result = await super._preCreate(data, options, user);
     if (result === false) return false;
 

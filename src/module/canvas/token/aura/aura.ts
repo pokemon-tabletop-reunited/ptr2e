@@ -1,6 +1,4 @@
 import type { AuraAppearanceData, AuraData, AuraEffectData } from "@actor";
-import type { TokenDocumentPTR2e } from "../document.ts";
-import type { ScenePTR2e } from "@module/canvas/scene.ts";
 import type { EffectAreaSquare } from "@module/canvas/effect-area-square.ts";
 import { getAreaSquares } from "./util.ts";
 import { measureDistanceCuboid } from "@module/canvas/helpers.ts";
@@ -27,7 +25,7 @@ class TokenAura implements TokenAuraData {
     return 0.5 * tokenWidth + (this.radius / gridSize) * gridSizePixels;
   }
 
-  get scene(): ScenePTR2e {
+  get scene(): Scene.ConfiguredInstance {
     return this.token.scene!;
   }
 
@@ -56,7 +54,7 @@ class TokenAura implements TokenAuraData {
   }
 
   /** Does this aura overlap with (at least part of) a token? */
-  containsToken(token: TokenDocumentPTR2e): boolean {
+  containsToken(token: TokenDocument.ConfiguredInstance): boolean {
     // If either token is hidden or not rendered, return false early
     if (this.token.hidden || token.hidden || !this.token.object || !token.object) {
       return false;
@@ -110,7 +108,7 @@ class TokenAura implements TokenAuraData {
 
 interface TokenAura {
   slug: string;
-  token: TokenDocumentPTR2e;
+  token: TokenDocument.ConfiguredInstance;
   /** the radius of the aura in meters */
   radius: number;
   traits: Trait[];
@@ -121,7 +119,7 @@ interface TokenAura {
 interface TokenAuraParams extends Omit<AuraData, "effects" | "traits"> {
   slug: string;
   radius: number;
-  token: TokenDocumentPTR2e;
+  token: TokenDocument.ConfiguredInstance;
   traits: Trait[];
   effects: AuraEffectData[];
 }

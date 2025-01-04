@@ -35,3 +35,4 @@ class RoundCombatantSystem extends CombatantSystemPTR2e {
 }
 
 export default RoundCombatantSystem;
+export type { RoundCombatantSystem };

@@ -3,8 +3,6 @@ import { AttackStatistic } from "./attack.ts";
 import { ModifierPTR2e } from "@module/effects/modifiers.ts";
 import * as R from "remeda";
 import { isBracketedValue, isObject } from "@utils";
-import type { ActorPTR2e } from "@actor";
-import type { ItemPTR2e } from "@item";
 import type { BracketedValue, RuleValue } from "@effects";
 
 class SummonStatistic extends AttackStatistic {
@@ -94,11 +92,11 @@ class SummonStatistic extends AttackStatistic {
    */
   static resolveInjectedProperties<T extends string | number | object | null | undefined>(
     source: T,
-    injectables: { actor: Maybe<ActorPTR2e>; item: ItemPTR2e; attack?: PTR.Models.Action.Models.Attack.Instance }
+    injectables: { actor: Maybe<Actor.ConfiguredInstance>; item: Item.ConfiguredInstance; attack?: PTR.Models.Action.Models.Attack.Instance }
   ): T;
   static resolveInjectedProperties(
     source: string | number | object | null | undefined,
-    injectables: { actor: Maybe<ActorPTR2e>; item: ItemPTR2e; attack: PTR.Models.Action.Models.Attack.Instance }
+    injectables: { actor: Maybe<Actor.ConfiguredInstance>; item: Item.ConfiguredInstance; attack: PTR.Models.Action.Models.Attack.Instance }
   ): string | number | object | null | undefined {
     if (
       source === null ||
@@ -155,7 +153,7 @@ class SummonStatistic extends AttackStatistic {
   static resolveValue(
     value: unknown,
     defaultValue: Exclude<RuleValue, BracketedValue> = 0,
-    injectables: { actor: Maybe<ActorPTR2e>; item: ItemPTR2e; attack?: PTR.Models.Action.Models.Attack.Instance },
+    injectables: { actor: Maybe<Actor.ConfiguredInstance>; item: Item.ConfiguredInstance; attack?: PTR.Models.Action.Models.Attack.Instance },
     { evaluate = true, resolvables = {} }: ResolveValueParams = {}
   ): number | string | boolean | object | null {
     value ??= defaultValue ?? null;
@@ -209,7 +207,7 @@ class SummonStatistic extends AttackStatistic {
   static #resolveBracketedValue(
     value: BracketedValue,
     defaultValue: Exclude<RuleValue, BracketedValue>,
-    injectables: { actor: Maybe<ActorPTR2e>; item: ItemPTR2e; attack?: PTR.Models.Action.Models.Attack.Instance }
+    injectables: { actor: Maybe<Actor.ConfiguredInstance>; item: Item.ConfiguredInstance; attack?: PTR.Models.Action.Models.Attack.Instance }
   ): Exclude<RuleValue, BracketedValue> {
     const bracketNumber = ((): number => {
       if (!value.field) return injectables.actor?.level ?? 0;

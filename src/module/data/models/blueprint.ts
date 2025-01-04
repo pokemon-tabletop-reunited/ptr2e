@@ -2,11 +2,9 @@ import { CollectionField } from "../fields/collection-field.ts";
 import { natures } from "@scripts/config/natures.ts";
 import { RecursiveEmbeddedDataField } from "../fields/recursive-embedded-data-field.ts";
 import { SlugField } from "../fields/slug-field.ts";
-import type { ItemPTR2e } from "@item";
 import { DataUnionField } from "../fields/data-union-field.ts";
 import { StrictStringField } from "../fields/strict-primitive-fields.ts";
 import { HabitatRollTable } from "@system/habitat-table.ts";
-import type { ActorPTR2e } from "@actor";
 
 function defineSchema() {
   const fields = foundry.data.fields;
@@ -179,7 +177,7 @@ export class Blueprint extends foundry.abstract.DataModel<BlueprintSchema, found
 
   declare name: string;
   declare img: string | null;
-  declare doc: ItemPTR2e | HabitatRollTable | RollTable | ActorPTR2e | null;
+  declare doc: Item.ConfiguredInstance | HabitatRollTable | RollTable | Actor.ConfiguredInstance | null;
 
   static override defineSchema(recursion = 0): BlueprintSchema {
     const fields = foundry.data.fields;
@@ -360,7 +358,7 @@ export class Blueprint extends foundry.abstract.DataModel<BlueprintSchema, found
         return table;
       }
 
-      return await fromUuid(this._source.species ?? "") as ItemPTR2e
+      return await fromUuid<Item.ConfiguredInstance>(this._source.species as ItemUUID) as Item.ConfiguredInstance
     })();
 
     const { name, img } = doc ?? { name: "Invalid UUID", img: "icons/svg/hazard.svg" };

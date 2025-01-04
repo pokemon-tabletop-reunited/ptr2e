@@ -1,6 +1,4 @@
-import { ActorPTR2e } from "@actor";
 import type { Tab } from "@item/sheets/document.ts";
-import FolderPTR2e from "@module/folder/document.ts";
 import type {
   ApplicationConfigurationExpanded
 } from "./appv2-expanded.ts";
@@ -14,10 +12,10 @@ import type { AnyObject, DeepPartial } from "fvtt-types/utils";
 class PartySheetPTR2e extends foundry.applications.api.HandlebarsApplicationMixin(
   ApplicationV2Expanded
 )<AnyObject> {
-  folder: FolderPTR2e;
+  folder: Folder.ConfiguredInstance;
 
   constructor(
-    options: Partial<ApplicationConfigurationExpanded> & { folder?: FolderPTR2e } = {}
+    options: Partial<ApplicationConfigurationExpanded> & { folder?: Folder.ConfiguredInstance } = {}
   ) {
     if (!options.folder) throw new Error("No folder provided for party sheet");
     super(options);
@@ -59,14 +57,14 @@ class PartySheetPTR2e extends foundry.applications.api.HandlebarsApplicationMixi
           const button = event.target as HTMLButtonElement;
           const rect = button.getBoundingClientRect();
 
-          FolderPTR2e.createDialog({
+          CONFIG.Folder.documentClass.createDialog({
             folder: this.folder.id,
             type: this.folder.type
           }, {
             top: rect.top + rect.height + 10,
             left: rect.left - Number(FolderConfig.defaultOptions.width) + rect.width,
           }).then((folder) => {
-            if (folder instanceof FolderPTR2e) {
+            if (folder instanceof CONFIG.Folder.documentClass) {
               //@ts-expect-error - App v1 compatability
               this.boundBoxes[folder.id] = folder;
               folder.apps[this.id] = this;
@@ -75,10 +73,10 @@ class PartySheetPTR2e extends foundry.applications.api.HandlebarsApplicationMixi
           });
         },
         "rest": async function (this: PartySheetPTR2e) {
-          const restParticipants: ActorPTR2e[] = await this.party();
+          const restParticipants: Actor.ConfiguredInstance[] = await this.party();
           const owner = await this.owner();
-          if (owner as ActorPTR2e) {
-            restParticipants.unshift(owner as unknown as ActorPTR2e);
+          if (owner as Actor.ConfiguredInstance) {
+            restParticipants.unshift(owner as unknown as Actor.ConfiguredInstance);
           }
           new RestApp(this.folder.name, restParticipants).render(true);
         },
@@ -135,7 +133,7 @@ class PartySheetPTR2e extends foundry.applications.api.HandlebarsApplicationMixi
     return `${this.folder.name} - Party Sheet`;
   }
 
-  override _initializeApplicationOptions(options: DeepPartial<ApplicationConfigurationExpanded> & { folder?: FolderPTR2e }): ApplicationConfigurationExpanded & Record<string, unknown> {
+  override _initializeApplicationOptions(options: DeepPartial<ApplicationConfigurationExpanded> & { folder?: Folder.ConfiguredInstance }): ApplicationConfigurationExpanded & Record<string, unknown> {
     options = super._initializeApplicationOptions(options);
     options.uniqueId = `${this.constructor.name}-${options.folder?.uuid}`;
     return options as ApplicationConfigurationExpanded & Record<string, unknown>;
@@ -158,9 +156,9 @@ class PartySheetPTR2e extends foundry.applications.api.HandlebarsApplicationMixi
     const owner = await this.owner();
     if (!owner) throw new Error("Owner not found for party sheet");
 
-    const party: ActorPTR2e[] = await this.party();
+    const party: Actor.ConfiguredInstance[] = await this.party();
 
-    const nonParty: ActorPTR2e[] = [];
+    const nonParty: Actor.ConfiguredInstance[] = [];
     for (const actor of this.folder.contents) {
       if (actor === owner) continue;
       if (!party.includes(actor)) nonParty.push(actor);
@@ -502,13 +500,13 @@ class PartySheetPTR2e extends foundry.applications.api.HandlebarsApplicationMixi
   override async _onDrop(event: DragEvent) {
     const data = TextEditor.getDragEventData(event) as unknown as foundry.abstract.Document.DropData<foundry.abstract.Document.Any>;
     switch (data.type) {
-      case "Folder": return this._onDropFolder(event, data as unknown as foundry.abstract.Document.DropData<FolderPTR2e>);
+      case "Folder": return this._onDropFolder(event, data as unknown as foundry.abstract.Document.DropData<Folder.ConfiguredInstance>);
       case "Actor": return this._onDropEntry(event, data as unknown as foundry.abstract.Document.DropData<Actor.ConfiguredInstance>);
     }
   }
 
-  async _onDropFolder(event: DragEvent, data: foundry.abstract.Document.DropData<FolderPTR2e>) {
-    const folder = await FolderPTR2e.fromDropData(data);
+  async _onDropFolder(event: DragEvent, data: foundry.abstract.Document.DropData<Folder.ConfiguredInstance>) {
+    const folder = await CONFIG.Folder.documentClass.fromDropData(data);
     if (!folder || folder.type !== "Actor") return;
 
     const article = (event.target as HTMLElement).closest("[data-folder-id]") as HTMLElement;
@@ -521,11 +519,11 @@ class PartySheetPTR2e extends foundry.applications.api.HandlebarsApplicationMixi
         ...currentFolderContents.map(id => ({ _id: id, "folder": this.folder.id, system: { party: { partyMemberOf: this.folder.id } } })),
         ...currentPartyContents.map(id => ({ _id: id, "folder": folder.id, system: { party: { partyMemberOf: null } } }))
       ]
-      await ActorPTR2e.updateDocuments(updates);
+      await CONFIG.Actor.documentClass.updateDocuments(updates);
       return void await this.render({ parts: ["party"] });
     }
 
-    const targetFolder = game.folders.get(article.dataset.folderId!) as Maybe<FolderPTR2e>;
+    const targetFolder = game.folders.get(article.dataset.folderId!) as Maybe<Folder.ConfiguredInstance>;
     if (!targetFolder || targetFolder.type !== "Actor") return;
 
     const target = ui.actors.element.find(`[data-folder-id="${targetFolder.id}"]`);
@@ -537,13 +535,13 @@ class PartySheetPTR2e extends foundry.applications.api.HandlebarsApplicationMixi
       const user = this.folder.userFromAvatarIfOwner;
       if (user) {
         const updates = [];
-        for (const actor of folder.contents as unknown as ActorPTR2e[]) {
+        for (const actor of folder.contents as unknown as Actor.ConfiguredInstance[]) {
           if (actor.ownership[user.id!] !== CONST.DOCUMENT_OWNERSHIP_LEVELS.OWNER) {
             updates.push({ _id: actor.id, "ownership": { [user.id!]: CONST.DOCUMENT_OWNERSHIP_LEVELS.OWNER, default: CONST.DOCUMENT_OWNERSHIP_LEVELS.OBSERVER } });
           }
         }
         if (updates.length) {
-          await ActorPTR2e.updateDocuments(updates);
+          await CONFIG.Actor.documentClass.updateDocuments(updates);
         }
       }
     }
@@ -552,7 +550,7 @@ class PartySheetPTR2e extends foundry.applications.api.HandlebarsApplicationMixi
   }
 
   async _onDropEntry(event: DragEvent, data: foundry.abstract.Document.DropData<Actor.ConfiguredInstance>) {
-    const actor = await ActorPTR2e.fromDropData(data);
+    const actor = await CONFIG.Actor.documentClass.fromDropData(data);
     if (!actor) return;
 
     const targetActor = game.actors.get(((event.target as HTMLElement)?.closest(".party-drag-item") as HTMLElement)?.dataset?.actorId ?? "");
@@ -568,7 +566,7 @@ class PartySheetPTR2e extends foundry.applications.api.HandlebarsApplicationMixi
       await (target.length ? ui.actors._handleDroppedEntry(target[0], data) : ui.actors._handleDroppedEntry(null, { ...data, targetFolderUuid: this.folder.uuid }));
     }
     else {
-      const folder = game.folders.get(folderId!) as FolderPTR2e;
+      const folder = game.folders.get(folderId!) as Folder.ConfiguredInstance;
       if (!folder) return;
 
       const target = ui.actors.element.find(targetActor ? `[data-entry-id="${targetActor.id}"]` : `[data-folder-id="${folder.id}"]`);
@@ -591,13 +589,13 @@ class PartySheetPTR2e extends foundry.applications.api.HandlebarsApplicationMixi
     return void await this.render({ parts: ["party"] });
   }
 
-  boundBoxes: Record<string, FolderPTR2e> = {};
+  boundBoxes: Record<string, Folder.ConfiguredInstance> = {};
 
   //FIXME: TODO: Update AnyObject to the return type, that way we can also remove the extended 'if' to narrow the type.
   /** @override */
   override _onFirstRender(context: DeepPartial<AnyObject>) {
     if ('boxData' in context && context.boxData && typeof context.boxData === 'object' && 'folders' in context.boxData) {
-      for (const folder of context.boxData.folders as FolderPTR2e[]) {
+      for (const folder of context.boxData.folders as Folder.ConfiguredInstance[]) {
         folder.apps[this.id] = this;
         this.boundBoxes[folder.id!] = folder;
       }

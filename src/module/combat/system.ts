@@ -13,7 +13,7 @@ const combatSystemSchema = {
 
 export type CombatSystemSchema = typeof combatSystemSchema;
 
-export default class CombatSystem extends foundry.abstract.TypeDataModel<CombatSystemSchema, Combat.ConfiguredInstance> {
+class CombatSystem extends foundry.abstract.TypeDataModel<CombatSystemSchema, Combat.ConfiguredInstance> {
   get maxTurns() {
     return Math.min(this.parent.roundIndex + 1, this.parent.turns.length);
   }
@@ -22,3 +22,6 @@ export default class CombatSystem extends foundry.abstract.TypeDataModel<CombatS
     return combatSystemSchema;
   }
 }
+
+export default CombatSystem;
+export type { CombatSystem };

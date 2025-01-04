@@ -1,7 +1,6 @@
 import { BlueprintSheetPTR2e } from "@item/sheets/index.ts";
 import { PTRTour } from "./base.ts";
 import type { BlueprintPTR2e} from "@item";
-import { ItemPTR2e } from "@item";
 
 export class GeneratingPokemonTour extends PTRTour {
   private blueprintApp: foundry.applications.api.ApplicationV2 | undefined;
@@ -14,7 +13,7 @@ export class GeneratingPokemonTour extends PTRTour {
     if(this.currentStep?.id === "example" && !this.blueprintApp) {
       //@ts-expect-error - Type check fails.
       this.blueprintApp = await new BlueprintSheetPTR2e({
-        document: new ItemPTR2e({
+        document: new CONFIG.Item.documentClass({
           name: "Bulbasaur",
           type: "blueprint",
           system: {

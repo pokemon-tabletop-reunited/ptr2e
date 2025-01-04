@@ -33,7 +33,7 @@ export const Init: PTRHook = {
 
       // Add actor() to window
       //@ts-expect-error - Adding actor shortcut to window
-      window.actor = function (): Actor | null {
+      window.actor = function (): Maybe<Actor.ConfiguredInstance> {
         return canvas?.tokens?.controlled[0]?.actor;
       }
 
@@ -42,6 +42,7 @@ export const Init: PTRHook = {
       Object.freeze(CONFIG.PTR);
 
       if (game.release.generation === 12) {
+        //@ts-expect-error - FIXME: Check later why this is erroring out.
         CONFIG.Token.prototypeSheetClass = TokenConfigPTR2e;
       }
 

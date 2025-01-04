@@ -1,4 +1,3 @@
-import FolderPTR2e from "@module/folder/document.ts";
 import FolderConfigPTR2e from "@module/folder/sheet.ts";
 
 export default class ActorDirectoryPTR2e extends ActorDirectory {
@@ -217,7 +216,7 @@ interface Tree<TDocument extends FolderableDocuments = FolderableDocuments> {
   team: TDocument[] | boolean;
   children: Tree[];
   entries: TDocument[];
-  folder: FolderPTR2e;
+  folder: Folder.ConfiguredInstance;
   depth: number;
   root: boolean;
   visible: boolean;

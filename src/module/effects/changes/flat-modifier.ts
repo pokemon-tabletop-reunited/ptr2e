@@ -1,4 +1,4 @@
-import type { ActorPTR2e, DeferredValueParams } from "@actor";
+import type { DeferredValueParams } from "@actor";
 import { ChangeModel } from "@data";
 import { ModifierPTR2e } from "../modifiers.ts";
 
@@ -24,12 +24,12 @@ export default class FlatModifierChangeSystem extends ChangeModel<FlatModifierCh
     return this.key;
   }
 
-  override apply(actor: ActorPTR2e): void {
+  override apply(actor: Actor.ConfiguredInstance): void {
     this.beforePrepareData(actor);
   }
 
   override beforePrepareData(
-    actor: ActorPTR2e | null = this.actor,
+    actor: Actor.ConfiguredInstance | null = this.actor,
     providedMethod: ModifierPTR2e["method"] = "flat"
   ): void {
     if (this.ignored) return;

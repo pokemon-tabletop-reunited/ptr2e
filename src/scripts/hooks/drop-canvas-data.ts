@@ -1,12 +1,11 @@
 import type { ActorSheetPTR2e } from "@actor";
-import { ItemPTR2e, type BlueprintPTR2e } from "@item";
 import { BlueprintSheetPTR2e } from "@item/sheets/index.ts";
 
 export const DropCanvasData = {
   listen() {
     Hooks.on("dropCanvasData", async (canvas, drop: foundry.abstract.Document.DropData<Item.ConfiguredClass>) => {
       if (drop.type === "Item") {
-        const item = await fromUuid(drop.uuid) as ItemPTR2e | null;
+        const item = await fromUuid(drop.uuid) as Item.ConfiguredInstance | null;
         if (item?.type === "species") {
           const folder = await (async () => {
             const folder = game.actors.folders.getName(game.scenes.current!.name);
@@ -17,7 +16,7 @@ export const DropCanvasData = {
             });
           })()
 
-          const blueprint = await ItemPTR2e.create(
+          const blueprint = await CONFIG.Item.documentClass.create(
             {
               name: item.name,
               type: "blueprint",
@@ -44,7 +43,7 @@ export const DropCanvasData = {
           }).render(true);
         }
         if (item?.type === "blueprint") {
-          const blueprint = item as BlueprintPTR2e;
+          const blueprint = item as PTR.Item.System.Blueprint.ParentInstance;
           if (!blueprint || !canvas.scene) return;
 
           const x = Math.floor(drop.x / canvas.scene.grid.size) * canvas.scene.grid.size

@@ -1,5 +1,3 @@
-import { ItemPTR2e } from "@item";
-
 class PerkDirectory extends ItemDirectory {
   get popout() {
     return this._popout;
@@ -30,7 +28,7 @@ class PerkDirectory extends ItemDirectory {
     const li = button.closest(".directory-item");
     const data = { folder: li?.dataset?.folderId, type: "perk" };
     const options = { width: 320, left: window.innerWidth - 630, top: button.offsetTop, perksOnly: true };
-    return void ItemPTR2e.createDialog(data, options);
+    return void CONFIG.Item.documentClass.createDialog(data, options);
   }
 
   override async close(options = {}) {

@@ -1,4 +1,3 @@
-import type { ActorPTR2e } from "@actor";
 import type ChangeModel from "../changes/change.ts";
 import type { ActiveEffectSystemSchema } from "../system.ts";
 import ActiveEffectSystem from "../system.ts";
@@ -133,7 +132,7 @@ class AfflictionActiveEffectSystem<Schema extends AfflictionSystemSchema = Affli
     };
   }
 
-  override apply(actor: ActorPTR2e, change?: ChangeModel, options?: string[]): unknown {
+  override apply(actor: Actor.ConfiguredInstance, change?: ChangeModel, options?: string[]): unknown {
     const self = this as AfflictionActiveEffectSystem;
     const afflictions = (actor.synthetics.afflictions ??= { data: [], ids: new Set() });
     if (!afflictions.ids.has(self.parent.id)) {

@@ -1,6 +1,4 @@
-import type { ActorPTR2e } from "@actor";
 import { ChangeModel } from "@data";
-import { TokenDocumentPTR2e } from "@module/canvas/token/document.ts";
 import { UUIDUtils } from "src/util/uuid.ts";
 import { TagTokenPrompt } from "./prompt.ts";
 
@@ -24,7 +22,7 @@ class TokenTagChangeSystem extends ChangeModel {
         ? Array.from(game.user!.targets)[0].document
         : await new TagTokenPrompt({ prompt: null, requirements: null }).resolveTarget());
 
-    if (!(token instanceof TokenDocumentPTR2e)) {
+    if (!(token instanceof CONFIG.Token.documentClass)) {
       // No token was targeted: abort creating item
       pendingItems.splice(pendingItems.findIndex(i => i.effects!.find(e => e === effectSource)), 1);
       return;
@@ -34,11 +32,11 @@ class TokenTagChangeSystem extends ChangeModel {
     this.value = changeSource!.value = token.uuid;
   }
 
-  override apply(actor: ActorPTR2e): void {
+  override apply(actor: Actor.ConfiguredInstance): void {
     this.beforePrepareData(actor);
   }
 
-  override beforePrepareData(actor: ActorPTR2e | null = this.actor,): void {
+  override beforePrepareData(actor: Actor.ConfiguredInstance | null = this.actor): void {
     if (!actor) return;
     if (UUIDUtils.isTokenUUID(this.value) && this.test()) {
       this.actor?.synthetics.tokenTags.set(this.value, this.key);

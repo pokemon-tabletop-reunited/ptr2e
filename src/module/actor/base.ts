@@ -5,7 +5,6 @@ import type {
   Attribute,
   AuraData,
 } from "@actor";
-import type { ActiveEffectSystem, EffectSourcePTR2e } from "@effects";
 import type { TypeEffectiveness } from "@scripts/config/effectiveness.ts";
 import type { PokemonType, PTRCONSTS } from "@data";
 import { RollOptionChangeSystem, RollOptionManager, Trait } from "@data";
@@ -744,7 +743,7 @@ class ActorPTR2e extends Actor {
         });
         if (!silent) {
           //@ts-expect-error - Chat messages have not been properly defined yet
-          await ChatMessagePTR2e.create(
+          await CONFIG.ChatMessage.documentClass.create(
             {
               type: "damage-applied",
               system: {
@@ -784,7 +783,7 @@ class ActorPTR2e extends Actor {
     });
     if (!silent) {
       //@ts-expect-error - Chat messages have not been properly defined yet
-      await ChatMessagePTR2e.create({
+      await CONFIG.ChatMessage.documentClass.create({
         type: "damage-applied",
         system: {
           damageApplied: damageApplied,
@@ -1026,8 +1025,7 @@ class ActorPTR2e extends Actor {
     if (!foundry.utils.isEmpty(updates)) {
       await this.update(updates);
       if (newHealth !== oldHealth) {
-        //@ts-expect-error - Chat messages have not been properly defined yet
-        await ChatMessagePTR2e.create({
+        await CONFIG.ChatMessage.documentClass.create({
           type: "damage-applied",
           system: {
             notes,
@@ -1043,8 +1041,7 @@ class ActorPTR2e extends Actor {
         });
       }
     } else if (notes.length > 0) {
-      //@ts-expect-error - Chat messages have not been properly defined yet
-      await ChatMessagePTR2e.create({
+      await CONFIG.ChatMessage.documentClass.create({
         type: "damage-applied",
         system: {
           notes,
@@ -1489,7 +1486,7 @@ class ActorPTR2e extends Actor {
 
   protected getContextualClone(
     rollOptions: string[],
-    ephemeralEffects: EffectSourcePTR2e[]
+    ephemeralEffects: PTR.ActiveEffect.Source[]
   ): this {
     const rollOptionsAll = rollOptions.reduce(
       (options: Record<string, boolean>, option: string) => ({ ...options, [option]: true }),
@@ -1516,7 +1513,7 @@ class ActorPTR2e extends Actor {
       return;
     }
 
-    const toCreate: EffectSourcePTR2e[] = [];
+    const toCreate: PTR.ActiveEffect.Source[] = [];
     const toUpdate = new Map<string, { _id: string; "flags.ptr2e.aura.amount": number }>();
     const rollOptions = aura.effects.some((e) => e.predicate.length > 0)
       ? new Set([...origin.actor.getRollOptions(), ...this.getSelfRollOptions("target")])
@@ -1571,7 +1568,7 @@ class ActorPTR2e extends Actor {
       }
 
       const effects = (effect instanceof CONFIG.Item.documentClass ? effect.effects : [effect]) as ActiveEffect.ConfiguredInstance[];
-      const sources = effects.map(e => foundry.utils.mergeObject(e.toObject(), { flags }) as unknown as EffectSourcePTR2e);
+      const sources = effects.map(e => foundry.utils.mergeObject(e.toObject(), { flags }) as unknown as PTR.ActiveEffect.Source);
       toCreate.push(...sources);
     }
 
@@ -1718,7 +1715,7 @@ class ActorPTR2e extends Actor {
   }
 
   override async _preUpdate(
-    changed: Actor.PTR.SourceWithSystem,
+    changed: PTR.Actor.SourceWithSystem,
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     options: foundry.abstract.Document.PreUpdateOptions<any>,
     user: User
@@ -1934,7 +1931,7 @@ class ActorPTR2e extends Actor {
       }
     }
 
-    if ((status.system as ActiveEffectSystem["_source"])?.stacks) {
+    if ((status.system as PTR.ActiveEffect.SystemSource)?.stacks) {
       const slug = sluggify(game.i18n.localize(status.name!));
       for (const id of existing) {
         const effect = this.effects.get(id) as ActiveEffect.ConfiguredInstance
@@ -2026,10 +2023,7 @@ class ActorPTR2e extends Actor {
 }
 
 interface ActorPTR2e extends Actor {
-  _source: Omit<Actor['_source'], 'system'> & {
-    system: Actor.ConfiguredBaseSystem['_source'];
-  }
-  system: Actor.ConfiguredBaseSystem;
+  system: PTR.Actor.SystemInstance;
 
   _party: ActorParty | null;
 

@@ -1,7 +1,5 @@
 import { htmlQueryAll } from "@utils";
 import { ActorComponent } from "./base.ts";
-import type ActorPTR2e from "@actor/base.ts";
-import type { PerkPTR2e } from "@item";
 
 class PerksComponent extends ActorComponent {
   static override TEMPLATE = "systems/ptr2e/templates/actor/components/actor-perks-component.hbs";
@@ -16,7 +14,7 @@ class PerksComponent extends ActorComponent {
     return PerksComponent.attachListeners(htmlElement, this.actor);
   }
 
-  static attachListeners(htmlElement: HTMLElement, actor: ActorPTR2e) {
+  static attachListeners(htmlElement: HTMLElement, actor: Actor.ConfiguredInstance) {
     for (const element of htmlQueryAll(htmlElement, ".perks-display .item-controls .item-to-chat")) {
       element.addEventListener("click", async (event) => {
         const itemId = (
@@ -24,7 +22,7 @@ class PerksComponent extends ActorComponent {
         )?.dataset.itemId;
         if (!itemId) return;
         return (
-          actor.items.get(itemId) as PerkPTR2e
+          actor.items.get(itemId) as PTR.Item.System.Perk.ParentInstance
         )?.toChat();
       });
     }
@@ -36,7 +34,7 @@ class PerksComponent extends ActorComponent {
         )?.dataset.itemId;
         if (!itemId) return;
         return (
-          actor.items.get(itemId) as PerkPTR2e
+          actor.items.get(itemId) as PTR.Item.System.Perk.ParentInstance
         )?.sheet?.render(true);
       });
     }

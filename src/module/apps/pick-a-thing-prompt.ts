@@ -1,11 +1,10 @@
-import type { ItemPTR2e } from "@item";
 import { ApplicationV2Expanded, type ApplicationConfigurationExpanded } from "./appv2-expanded.ts";
 import { Predicate } from "@system/predication/predication.ts";
 import { htmlClosest, htmlQueryAll } from "@utils";
 import Tagify from "@yaireo/tagify";
 import type { DeepPartial } from "fvtt-types/utils";
 
-export abstract class PickAThingPrompt<TItem extends ItemPTR2e, TThing extends string | number | object> extends foundry.applications.api.HandlebarsApplicationMixin(ApplicationV2Expanded)<PromptTemplateData> {
+export abstract class PickAThingPrompt<TItem extends Item.ConfiguredInstance, TThing extends string | number | object> extends foundry.applications.api.HandlebarsApplicationMixin(ApplicationV2Expanded)<PromptTemplateData> {
   protected item: Maybe<TItem>;
 
   private resolve?: (value: PickableThing<TThing> | null) => void;
@@ -122,7 +121,7 @@ export abstract class PickAThingPrompt<TItem extends ItemPTR2e, TThing extends s
 
 };
 
-interface PickAThingConstructorArgs<TItem extends ItemPTR2e, TThing extends string | number | object> {
+interface PickAThingConstructorArgs<TItem extends Item.ConfiguredInstance, TThing extends string | number | object> {
   title?: string;
   prompt?: string;
   choices: PickableThing<TThing>[];
@@ -142,7 +141,7 @@ interface PickableThing<T extends string | number | object = string | number | o
 interface PromptTemplateData {
   choices: PickableThing[];
   /** An item pertinent to the selection being made */
-  item: Maybe<ItemPTR2e>;
+  item: Maybe<Item.ConfiguredInstance>;
   user: User;
   [key: string]: unknown;
 }

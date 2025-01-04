@@ -63,7 +63,7 @@ export class Migration104FolderUpdate extends MigrationBase {
     })());
   }
 
-  override async updateActor(actor: Actor.PTR.SourceWithSystem): Promise<void> {
+  override async updateActor(actor: PTR.Actor.SourceWithSystem): Promise<void> {
     const data = await this.getData();
 
     const actorData = data.get(actor._id!);

@@ -126,11 +126,13 @@ declare global {
     };
   }
 
-  interface CONFIG {
-    PTR: typeof PTRCONFIG;
-    ui: CONFIG.UI & {
+  namespace CONFIG {
+    interface UI {
       perksTab: typeof PerkDirectory;
     }
+  }
+  interface CONFIG {
+    PTR: typeof PTRCONFIG;
   }
 
   interface AssumeHookRan {
@@ -144,10 +146,13 @@ declare global {
     Combat: typeof CombatPTR2e;
     Combatant: typeof CombatantPTR2e;
     Scene: typeof ScenePTR2e;
-    Token: typeof TokenPTR2e;
-    TokenDocument: typeof TokenDocumentPTR2e;
+    Token: typeof TokenDocumentPTR2e;
     Folder: typeof FolderPTR2e;
     ChatMessage: typeof ChatMessagePTR2e;
+  }
+  
+  interface PlaceableObjectClassConfig {
+    Token: typeof TokenPTR2e;
     MeasuredTemplate: typeof MeasuredTemplatePTR2e;
   }
 
@@ -163,36 +168,36 @@ declare global {
       "move": typeof data.MoveSystemModel,
       "perk": typeof data.PerkSystemModel,
       "species": typeof data.SpeciesSystemModel,
-      "ptu-item": object,
+      "ptu-item": foundry.abstract.DataModel.AnyConstructor,
       "weapon": typeof data.WeaponSystemModel,
       "summon": typeof data.SummonSystemModel
     },
     Actor: {
-      "humanoid": HumanoidActorSystem
-      "pokemon": PokemonActorSystem
-      "ptu-actor": object
+      "humanoid": typeof HumanoidActorSystem
+      "pokemon": typeof PokemonActorSystem
+      "ptu-actor": foundry.abstract.DataModel.AnyConstructor
     },
     ActiveEffect: {
-      "affliction": AfflictionActiveEffectSystem,
-      "passive": PassiveActiveEffectSystem,
-      "summon": SummonActiveEffectSystem,
-      "form": FormActiveEffectSystem
+      "affliction": typeof AfflictionActiveEffectSystem,
+      "passive": typeof PassiveActiveEffectSystem,
+      "summon": typeof SummonActiveEffectSystem,
+      "form": typeof FormActiveEffectSystem
     },
     ChatMessage: {
-      "item": ItemMessageSystem,
-      "attack": AttackMessageSystem,
-      "damage-applied": DamageAppliedMessageSystem,
-      "skill": SkillMessageSystem,
-      "capture": CaptureMessageSystem,
-      "combat": object
+      "item": typeof ItemMessageSystem,
+      "attack": typeof AttackMessageSystem,
+      "damage-applied": typeof DamageAppliedMessageSystem,
+      "skill": typeof SkillMessageSystem,
+      "capture": typeof CaptureMessageSystem,
+      "combat": foundry.abstract.DataModel.AnyConstructor
     },
     Combatant: {
-      "character": CharacterCombatantSystem,
-      "round": RoundCombatantSystem,
-      "summon": SummonCombatantSystem
+      "character": typeof CharacterCombatantSystem,
+      "round": typeof RoundCombatantSystem,
+      "summon": typeof SummonCombatantSystem
     },
     Combat: {
-      base: CombatSystemPTR2e
+      base: typeof CombatSystemPTR2e
     }
   }
 

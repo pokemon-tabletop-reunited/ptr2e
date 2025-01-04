@@ -1,4 +1,3 @@
-import type { ActorPTR2e } from "@actor";
 import { ActorSystemPTR2e } from "./index.ts";
 import { SpeciesSystemModel } from "@item/data/index.ts";
 import { sluggify } from "@utils";
@@ -7,7 +6,7 @@ import type { ActorSystemSchema } from "./system.ts";
 
 class HumanoidActorSystem extends ActorSystemPTR2e {
 
-  static constructSpecies(system: Actor.PTR.SystemSource, name = system.parent.name): SpeciesSystemModel {
+  static constructSpecies(system: PTR.Actor.SystemSource, name = system.parent.name): SpeciesSystemModel {
     const data = {
       slug: sluggify(name),
       traits: ["humanoid", "underdog", "unique-egg-group", "bipedal", "speech", "wielder"],
@@ -135,7 +134,7 @@ class HumanoidActorSystem extends ActorSystemPTR2e {
   }
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  override async _preCreate(data: foundry.abstract.TypeDataModel.ParentAssignmentType<ActorSystemSchema, ActorPTR2e>, options: foundry.abstract.Document.PreCreateOptions<any>, user: User): Promise<boolean | void> {
+  override async _preCreate(data: foundry.abstract.TypeDataModel.ParentAssignmentType<ActorSystemSchema, Actor.ConfiguredInstance>, options: foundry.abstract.Document.PreCreateOptions<any>, user: User): Promise<boolean | void> {
     if (!this._source.traits?.length) {
       this.parent.updateSource({ "system.traits": ["humanoid", "underdog"] })
     }

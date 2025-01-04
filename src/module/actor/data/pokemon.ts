@@ -1,22 +1,20 @@
-import type { ActorPTR2e } from "@actor";
 import { ActorSystemPTR2e } from "./index.ts";
 import { SpeciesDropSheet } from "@actor/sheets/species-drop-sheet.ts";
-import { ItemPTR2e } from "@item";
 import { SpeciesSystemModel } from "@item/data/index.ts";
 import { BlueprintSheetPTR2e } from "@item/sheets/index.ts";
 import type { ActorSystemSchema } from "./system.ts";
 
 class PokemonActorSystem extends ActorSystemPTR2e {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  override async _preCreate(data: foundry.abstract.TypeDataModel.ParentAssignmentType<ActorSystemSchema, ActorPTR2e>, options: foundry.abstract.Document.PreCreateOptions<any>, user: User): Promise<boolean | void> {
+  override async _preCreate(data: foundry.abstract.TypeDataModel.ParentAssignmentType<ActorSystemSchema, Actor.ConfiguredInstance>, options: foundry.abstract.Document.PreCreateOptions<any>, user: User): Promise<boolean | void> {
     if (!this.parent.items.has("actorspeciesitem")) {
-      const promise = await new Promise<ItemPTR2e | null>((resolve) => {
+      const promise = await new Promise<Item.ConfiguredInstance | null>((resolve) => {
         const app = new SpeciesDropSheet(resolve);
         app.render(true);
       });
 
-      if (promise instanceof ItemPTR2e && promise.system instanceof SpeciesSystemModel) {
-        const blueprint = await ItemPTR2e.create(
+      if (promise instanceof CONFIG.Item.documentClass && promise.system instanceof SpeciesSystemModel) {
+        const blueprint = await CONFIG.Item.documentClass.create(
           {
             name: promise.name,
             type: "blueprint",

@@ -1,7 +1,4 @@
-import { ActorPTR2e } from "@actor";
-import { ItemPTR2e } from "@item";
 import type { ChangeModel, Trait } from "@data";
-import type { CombatPTR2e } from "@combat";
 import { sluggify } from "@utils";
 import { processGrantDeletions } from "./changes/grant-item.ts";
 import { AbilitySystemModel } from "@item/data/index.ts";
@@ -14,7 +11,7 @@ class ActiveEffectPTR2e extends ActiveEffect {
 
   static override LOCALIZATION_PREFIXES = ["PTR2E.Effect"];
 
-  declare grantedBy: ItemPTR2e | null;
+  declare grantedBy: Item.ConfiguredInstance | null;
 
   get slug() {
     return this.system._source.slug ?? sluggify(this._name);
@@ -96,9 +93,9 @@ class ActiveEffectPTR2e extends ActiveEffect {
 
   
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  override apply(actor: ActorPTR2e, _change: any, options?: string[]): unknown {
+  override apply(actor: Actor.ConfiguredInstance, _change: any, options?: string[]): unknown {
     const change = _change as ChangeModel;
-    if (this.parent instanceof ItemPTR2e && this.parent && this.parent.system instanceof AbilitySystemModel) {
+    if (this.parent instanceof CONFIG.Item.documentClass && this.parent && this.parent.system instanceof AbilitySystemModel) {
       if (this.parent.system.suppress) return;
     }
     return this.system.apply(actor, change, options);
@@ -143,8 +140,8 @@ class ActiveEffectPTR2e extends ActiveEffect {
     const { _combatTime, type } = this.duration;
     if (type === "turns" && game.combat) {
       //@ts-expect-error - This is a private property
-      const ct = this.parent?.combatant?.system.activations; //(game.combat as CombatPTR2e).system.turn;
-      return ct !== _combatTime && !!(this.target as ActorPTR2e)?.inCombat;
+      const ct = this.parent?.combatant?.system.activations; //(game.combat as Combat.ConfiguredInstance).system.turn;
+      return ct !== _combatTime && !!(this.target as Actor.ConfiguredInstance)?.inCombat;
     }
     return false;
   }
@@ -158,7 +155,7 @@ class ActiveEffectPTR2e extends ActiveEffect {
 
     // Turn-based duration
     if (this.parent && (d.rounds || d.turns)) {
-      const cbt = game.combat as CombatPTR2e | undefined;
+      const cbt = game.combat as Combat.ConfiguredInstance | undefined;
       if (!cbt || !this.targetsActor())
         return {
           type: "turns",
@@ -214,7 +211,7 @@ class ActiveEffectPTR2e extends ActiveEffect {
       speaker: ChatMessage.getSpeaker({
         actor: this.targetsActor()
           ? this.target
-          : this.parent instanceof ItemPTR2e
+          : this.parent instanceof CONFIG.Item.documentClass
             ? this.parent.actor
             : game.user.character ?? null,
       }),
@@ -385,7 +382,7 @@ class ActiveEffectPTR2e extends ActiveEffect {
       // TODO: Possibly implement simple grants for Effects
     })();
 
-    const tempItems: ItemPTR2e[] = [];
+    const tempItems: Item.ConfiguredInstance[] = [];
     const outputItemSources: foundry.data.fields.SchemaField.PersistedType<Item.Schema>[] = [];
     const outputEffectSources = effects.map((e) => e._source);
 
@@ -409,7 +406,7 @@ class ActiveEffectPTR2e extends ActiveEffect {
     }
 
     if (outputItemSources.length) {
-      await ItemPTR2e.createDocuments( //@ts-expect-error - this should not error
+      await CONFIG.Item.documentClass.createDocuments( //@ts-expect-error - this should not error
         outputItemSources,
         context
       );
@@ -421,14 +418,14 @@ class ActiveEffectPTR2e extends ActiveEffect {
   static override async deleteDocuments(
     ids: string[],
     context: Record<string, unknown> & {
-      pendingItems?: ItemPTR2e[];
+      pendingItems?: Item.ConfiguredInstance[];
     } = {}
   ): Promise<ActiveEffect.ConfiguredInstance[]> {
     ids = Array.from(new Set(ids));
-    const actor = context.parent instanceof ActorPTR2e ? context.parent : null;
+    const actor = context.parent instanceof CONFIG.Actor.documentClass ? context.parent : null;
     if (actor) {
       const effects = ids.flatMap(id => actor.effects.get(id) ?? []) as ActiveEffectPTR2e[];
-      const items = context.pendingItems ? [...context.pendingItems] : [] as ItemPTR2e[];
+      const items = context.pendingItems ? [...context.pendingItems] : [] as Item.ConfiguredInstance[];
 
       // Run Change Model pre-delete callbacks
       for (const effect of effects) {
@@ -442,7 +439,7 @@ class ActiveEffectPTR2e extends ActiveEffect {
       if (items.length) {
         const itemIds = Array.from(new Set(items.map(i => i.id!))).filter(id => actor.items.has(id) && !context.pendingItems?.find(i => i.id === id));
         if (itemIds.length) {
-          await ItemPTR2e.deleteDocuments(itemIds, { pendingEffects: effects, parent: actor });
+          await CONFIG.Item.documentClass.deleteDocuments(itemIds, { pendingEffects: effects, parent: actor });
         }
       }
       ids = Array.from(new Set(effects.map(i => i.id))).filter(id => actor.effects.has(id));

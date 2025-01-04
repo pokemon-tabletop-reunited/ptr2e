@@ -1,5 +1,5 @@
-import type { ActorPTR2e, AttackAdjustment } from "@actor";
-import { BasicChangeSystem, ChangeModel, PTRCONSTS, RangePTR2e } from "@data";
+import type { AttackAdjustment } from "@actor";
+import { BasicChangeSystem, ChangeModel, PTRCONSTS } from "@data";
 import { PredicateField } from "@system/predication/schema-data-fields.ts";
 import type { ChangeModelSchema } from "./change.ts";
 
@@ -42,13 +42,13 @@ class AlterAttackChangeSystem extends ChangeModel<AlterAttackChangeSchema> {
     return this.key;
   }
 
-  override apply(actor: ActorPTR2e): void {
+  override apply(actor: Actor.ConfiguredInstance): void {
     this.beforePrepareData(actor);
   }
 
   override beforePrepareData(
     this: AlterAttackChangeSystem,
-    actor: ActorPTR2e | null = this.actor
+    actor: Actor.ConfiguredInstance | null = this.actor
   ): void {
     if (!actor) return;
     if (!this.test()) return;

@@ -1,6 +1,5 @@
 import { htmlClosest, htmlQuery, htmlQueryAll } from "@utils";
 import { ActorComponent } from "./base.ts";
-import type ActorPTR2e from "@actor/base.ts";
 
 class ToggleComponent extends ActorComponent {
   static override TEMPLATE = "systems/ptr2e/templates/actor/components/actor-toggle-component.hbs";
@@ -15,7 +14,7 @@ class ToggleComponent extends ActorComponent {
     return ToggleComponent.attachListeners(htmlElement, this.actor);
   }
 
-  static attachListeners(htmlElement: HTMLElement, actor: ActorPTR2e) {
+  static attachListeners(htmlElement: HTMLElement, actor: Actor.ConfiguredInstance) {
     for (const togglesSection of htmlQueryAll(htmlElement, "ul.toggles-list")) {
       togglesSection.addEventListener("change", (event) => {
         const toggleRow = htmlClosest(event.target, "[data-effect-uuid][data-domain][data-option]");

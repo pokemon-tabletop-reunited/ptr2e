@@ -1,5 +1,3 @@
-// TODO: Fix circular dependency when imported from @combat
-import CharacterCombatantSystem from "../../combat/combatant/models/character.ts";
 import { TokenAura } from "./aura/aura.ts";
 import type { Point } from "pixi.js";
 import type { DeepPartial } from "fvtt-types/utils";
@@ -139,7 +137,7 @@ class TokenDocumentPTR2e extends TokenDocument {
 
     // If the actor's speed combat stages are different from the token's combatant, update the combatant's speed stages
     const combatant = this.combatant as Combatant.ConfiguredInstance | null;
-    if (!combatant || !(combatant.system instanceof CharacterCombatantSystem)) return;
+    if (!combatant || !(combatant.system instanceof CONFIG.Combatant.dataModels.character)) return;
     if (this.actor?.speedStage !== undefined && this.actor.speedStage !== combatant.system.speedStages) {
       const previous = combatant.system.previousBaseAV;
       const initiativeChange = combatant.system.calculateInitiativeChange(previous, combatant.system.baseAV);
@@ -150,7 +148,7 @@ class TokenDocumentPTR2e extends TokenDocument {
   }
 
   /** Set a TokenData instance's dimensions from actor data. Static so actors can use for their prototypes */
-  static prepareSize(token: TokenDocumentPTR2e /*| PrototypeTokenPTR2e<ActorPTR2e>*/): void {
+  static prepareSize(token: TokenDocument.ConfiguredInstance /*| PrototypeTokenPTR2e<Actor.ConfiguredInstance>*/): void {
     const actor = token.actor;
     if (!(actor && token.flags.ptr2e?.linkToActorSize)) return;
 
@@ -174,7 +172,7 @@ interface TokenDocumentPTR2e extends TokenDocument {
   initialized: boolean;
   auras: Map<string, TokenAura>;
 
-  // get actor(): ActorPTR2e<ActorSystemPTR2e, this | null> | null;
+  // get actor(): Actor.ConfiguredInstance<ActorSystemPTR2e, this | null> | null;
   // get combatant(): Combatant<Combat, this> | null;
   // get object(): Token.ConfiguredInstance<this> | null;
   // get sheet(): TokenConfigPTR2e<this>;

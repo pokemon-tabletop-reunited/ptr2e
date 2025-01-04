@@ -1,4 +1,4 @@
-import type { ActorPTR2e, RollOptionToggle } from "@actor";
+import type { RollOptionToggle } from "@actor";
 import type { ChangeModelOptions, ChangeSource } from "@data";
 import { ChangeModel } from "@data";
 import ResolvableValueField from "@module/data/fields/resolvable-value-field.ts";
@@ -150,7 +150,7 @@ class RollOptionChangeSystem extends ChangeModel<RollOptionChangeSchema> {
     }
   }
 
-  override apply(actor: ActorPTR2e): void {
+  override apply(actor: Actor.ConfiguredInstance): void {
     this.domain = this.resolveInjectedProperties(this.domain);
     const isStandardDomain = /^[-a-z0-9]+$/.test(this.domain) && /[a-z]/.test(this.domain);
     // Domains can be of the form "{id}-term"
@@ -220,7 +220,7 @@ class RollOptionChangeSystem extends ChangeModel<RollOptionChangeSchema> {
     }
   }
 
-  private setOption(baseOption: string, value: boolean, actor: ActorPTR2e) {
+  private setOption(baseOption: string, value: boolean, actor: Actor.ConfiguredInstance) {
     const fullOption = this.resolveOption();
 
     if (value) {
@@ -248,7 +248,7 @@ class RollOptionChangeSystem extends ChangeModel<RollOptionChangeSchema> {
     }
   }
 
-  private setCount(option: string, actor: ActorPTR2e): void {
+  private setCount(option: string, actor: Actor.ConfiguredInstance): void {
     const domainRecord = actor.rollOptions.getFromDomain(this.domain);
     const existing = Object.keys(domainRecord)
       .flatMap((key: string) => ({

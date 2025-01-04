@@ -1,4 +1,3 @@
-import type { ItemPTR2e } from "@item";
 import GearSystem, { type GearSystemSchema } from "./gear.ts";
 
 const weaponSchema = {
@@ -23,7 +22,7 @@ export default abstract class WeaponSystem extends GearSystem {
   }
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  override async _preCreate(data: foundry.abstract.TypeDataModel.ParentAssignmentType<WeaponSchema, ItemPTR2e>, options: foundry.abstract.Document.PreCreateOptions<any>, user: User): Promise<boolean | void> {
+  override async _preCreate(data: foundry.abstract.TypeDataModel.ParentAssignmentType<WeaponSchema, Item.ConfiguredInstance>, options: foundry.abstract.Document.PreCreateOptions<any>, user: User): Promise<boolean | void> {
     const result = await super._preCreate(data, options, user);
     if (result === false) return false;
 

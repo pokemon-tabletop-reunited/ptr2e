@@ -1,7 +1,7 @@
 import { SquareGridPTR2e } from "./grid.ts";
 import { checkAuras } from "./helpers.ts";
 
-export class ScenePTR2e extends Scene {
+class ScenePTR2e extends Scene {
 
   get hasHexGrid(): boolean {
     return !([CONST.GRID_TYPES.GRIDLESS, CONST.GRID_TYPES.SQUARE] as number[]).includes(this.grid.type);
@@ -78,7 +78,7 @@ export class ScenePTR2e extends Scene {
   }
 }
 
-export interface ScenePTR2e extends Scene {
+interface ScenePTR2e extends Scene {
   initialized: boolean;
 
   /** Check for auras containing newly-placed or moved tokens (added as a debounced method) */
@@ -92,3 +92,6 @@ Object.defineProperty(ScenePTR2e.prototype, "checkAuras", {
   writable: false,
   value: checkAuras,
 });
+
+export default ScenePTR2e;
+export type { ScenePTR2e };

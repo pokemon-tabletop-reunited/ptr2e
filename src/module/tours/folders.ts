@@ -1,5 +1,3 @@
-import type { ActorPTR2e } from "@actor";
-import type FolderPTR2e from "@module/folder/document.ts";
 import FolderConfigPTR2e from "@module/folder/sheet.ts";
 import { htmlQuery } from "@utils";
 import { PTRTour } from "./base.ts";
@@ -306,13 +304,13 @@ export class FoldersTour extends PTRTour {
 
     const actorsToDelete = [];
 
-    const tourSan = game.actors.get("toursantempactor") as ActorPTR2e;
+    const tourSan = game.actors.get("toursantempactor") as Actor.ConfiguredInstance;
     if (tourSan) actorsToDelete.push('toursantempactor')
 
-    const tourSanVoltorb = game.actors.get("toursanstvoltorb") as ActorPTR2e;
+    const tourSanVoltorb = game.actors.get("toursanstvoltorb") as Actor.ConfiguredInstance;
     if (tourSanVoltorb) actorsToDelete.push('toursanstvoltorb')
 
-    const folder = game.folders.get("toursantmpfolder") as FolderPTR2e;
+    const folder = game.folders.get("toursantmpfolder") as Folder.ConfiguredInstance;
     if (folder) await folder.delete();
 
     await Actor.deleteDocuments(actorsToDelete);
@@ -321,7 +319,7 @@ export class FoldersTour extends PTRTour {
   private async getDocuments(): Promise<FolderTourDocuments> {
     const data = {
       folder: await (async () => {
-        return game.folders.get("toursantmpfolder") as FolderPTR2e ?? CONFIG.PTR.Folder.documentClass.create({
+        return game.folders.get("toursantmpfolder") as Folder.ConfiguredInstance ?? CONFIG.PTR.Folder.documentClass.create({
           name: "Tour-san's Folder",
           type: "Actor",
           _id: "toursantmpfolder",
@@ -330,7 +328,7 @@ export class FoldersTour extends PTRTour {
         }, { keepId: true });
       })(),
       tourSan: await (async () => {
-        return game.actors.get("toursantempactor") as ActorPTR2e ?? CONFIG.PTR.Actor.documentClass.create({
+        return game.actors.get("toursantempactor") as Actor.ConfiguredInstance ?? CONFIG.PTR.Actor.documentClass.create({
           name: "Tour-san",
           type: "humanoid",
           img: "systems/ptr2e/img/tour-san.png",
@@ -339,7 +337,7 @@ export class FoldersTour extends PTRTour {
         }, { keepId: true });
       })(),
       tourSanVoltorb: await (async () => {
-        return game.actors.get("toursanstvoltorb") as ActorPTR2e ?? CONFIG.PTR.Actor.documentClass.create({
+        return game.actors.get("toursanstvoltorb") as Actor.ConfiguredInstance ?? CONFIG.PTR.Actor.documentClass.create({
           name: "Tour-san's Voltorb",
           type: "humanoid",
           img: "systems/ptr2e/img/tour-san-voltorb.webp",
@@ -371,7 +369,7 @@ export class FoldersTour extends PTRTour {
     if (dialog) dialog.close();
   }
 
-  protected openTourSanDialog(folder: FolderPTR2e = game.folders.get("toursantmpfolder") as FolderPTR2e) {
+  protected openTourSanDialog(folder: Folder.ConfiguredInstance = game.folders.get("toursantmpfolder") as Folder.ConfiguredInstance) {
     const li = htmlQuery(document.body, "li.folder[data-folder-id='toursantmpfolder']");
     const r = li?.getBoundingClientRect();
     const context = r ? { document: folder, position: { top: r.top, left: r.left - FolderConfigPTR2e.DEFAULT_OPTIONS.position.width - 10 } } : { document: folder };
@@ -384,7 +382,7 @@ export class FoldersTour extends PTRTour {
 }
 
 interface FolderTourDocuments {
-  folder: FolderPTR2e;
-  tourSan: ActorPTR2e;
-  tourSanVoltorb: ActorPTR2e;
+  folder: Folder.ConfiguredInstance;
+  tourSan: Actor.ConfiguredInstance;
+  tourSanVoltorb: Actor.ConfiguredInstance;
 }

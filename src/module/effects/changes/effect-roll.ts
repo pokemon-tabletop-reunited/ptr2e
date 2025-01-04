@@ -1,12 +1,11 @@
-import type { ActorPTR2e, DeferredEffectRoll, DeferredValueParams, EffectRoll } from "@actor";
+import type { DeferredEffectRoll, DeferredValueParams, EffectRoll } from "@actor";
 import { ChangeModel } from "@data";
-import { ItemPTR2e } from "@item";
 import { UUIDUtils } from "src/util/uuid.ts";
 import type { ChangeModelSchema } from "./change.ts";
 
 const effectRollChangeSchema = {
   chance: new foundry.data.fields.NumberField({ required: true, nullable: false, initial: 10, min: 1, max: 100 }),
-  affects: new foundry.data.fields.StringField<{ required: true, choices: Record<string, string>, initial: string}, "self" | "target" | "origin", "self" | "target" | "origin">({
+  affects: new foundry.data.fields.StringField<{ required: true, choices: Record<string, string>, initial: string }, "self" | "target" | "origin", "self" | "target" | "origin">({
     required: true,
     choices: ["self", "target", "origin"].reduce<Record<string, string>>((acc, affects) => ({ ...acc, [affects]: affects }), {}),
     initial: "target",
@@ -57,7 +56,7 @@ class EffectRollChangeSystem extends ChangeModel<EffectRollChangeSchema> {
     return this.value;
   }
 
-  override apply(actor: ActorPTR2e): void {
+  override apply(actor: Actor.ConfiguredInstance): void {
     if (!this.actor) return;
 
     const { selector, isCrit } = (() => {
@@ -88,7 +87,7 @@ class EffectRollChangeSystem extends ChangeModel<EffectRollChangeSchema> {
         return null;
       }
       const effect: Maybe<ClientDocument> = await this.getItem(uuid);
-      if (!(effect instanceof ItemPTR2e && effect.type === "effect")) {
+      if (!(effect instanceof CONFIG.Item.documentClass && effect.type === "effect")) {
         this.failValidation(`unable to find effect item with uuid "${uuid}"`);
         return null;
       }
@@ -117,4 +116,3 @@ interface EffectRollChangeSystem {
 }
 
 export default EffectRollChangeSystem;
-export type { EffectRollChangeSystem };

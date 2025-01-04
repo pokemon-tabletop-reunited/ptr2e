@@ -1,8 +1,7 @@
 import type { CheckDC } from "./degree-of-success.ts";
 import type { RollNote, RollNoteSource } from "@system/notes.ts";
 import type { Trait } from "@data";
-import type { ActorPTR2e, EffectRoll } from "@actor";
-import type { TokenDocumentPTR2e } from "@module/canvas/token/document.ts";
+import type { EffectRoll } from "@actor";
 import type { CheckRoll, CheckType } from "./check-roll.ts";
 import type { ModifierPTR2e } from "@module/effects/modifiers.ts";
 
@@ -39,8 +38,8 @@ interface AttackRollParams extends RollParameters {
 interface DamageRollParams extends Omit<AttackRollParams, "consumeAmmo"> { }
 
 interface RollTarget {
-  actor: ActorPTR2e;
-  token: TokenDocumentPTR2e;
+  actor: Actor.ConfiguredInstance;
+  token: TokenDocument.ConfiguredInstance;
   distance: number;
   rangeIncrement: number | null;
 }
@@ -78,9 +77,9 @@ interface CheckRollContext extends BaseRollContext {
   /** Targeting data for the check, if applicable */
   targets?: RollTarget[] | null;
   /** The actor which initiated this roll. */
-  actor?: ActorPTR2e;
+  actor?: Actor.ConfiguredInstance;
   /** The token which initiated this roll. */
-  token?: TokenDocumentPTR2e | null;
+  token?: TokenDocument.ConfiguredInstance | null;
   /** The originating item of this attack, if any */
   item?: Item.ConfiguredInstance | null;
   /** Optional title of the roll options dialog; defaults to the check name */

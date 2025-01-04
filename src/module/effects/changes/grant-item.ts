@@ -2,7 +2,6 @@ import type { ChangeModelOptions, ChangeSource } from "@data";
 import { ChangeModel } from "@data";
 import { ItemAlteration } from "../alterations/item.ts";
 import { isObject, sluggify, tupleHasValue } from "@utils";
-import type { EffectSourcePTR2e } from "@effects";
 import * as R from "remeda";
 import { UUIDUtils } from "src/util/uuid.ts";
 import type { ChangeModelSchema } from "./change.ts";
@@ -191,7 +190,7 @@ class GrantItemChangeSystem extends ChangeModel<GrantItemChangeSchema> {
       }
       else {
         for (const ae of (grantedSource as Item.ConstructorData).effects) {
-          const effect = ae as EffectSourcePTR2e;
+          const effect = ae as PTR.ActiveEffect.Source;
           effect.system.changes = effect.system.changes.filter(c => c.type !== GrantItemChangeSystem.TYPE);
         }
       }
@@ -209,7 +208,7 @@ class GrantItemChangeSystem extends ChangeModel<GrantItemChangeSchema> {
       if (error instanceof Error) this.failValidation(error.message);
     }
 
-    const tempGranted = this.type === "grant-effect" ? new CONFIG.ActiveEffect.documentClass(foundry.utils.deepClone(grantedSource), { parent: this.actor }) : new ItemPTR2e(foundry.utils.deepClone(grantedSource), { parent: this.actor });
+    const tempGranted = this.type === "grant-effect" ? new CONFIG.ActiveEffect.documentClass(foundry.utils.deepClone(grantedSource), { parent: this.actor }) : new CONFIG.Item.documentClass(foundry.utils.deepClone(grantedSource), { parent: this.actor });
     // tempGranted.grantedBy = this.effect;
 
     // TODO: Check for immunity and bail if a match
@@ -234,7 +233,7 @@ class GrantItemChangeSystem extends ChangeModel<GrantItemChangeSchema> {
       pendingItems.findSplice(i => i._id === this.effect.parent?._id);
     }
 
-    if (this.type === "grant-effect") pendingEffects.push(grantedSource as EffectSourcePTR2e);
+    if (this.type === "grant-effect") pendingEffects.push(grantedSource as PTR.ActiveEffect.Source);
     else pendingItems.push(grantedSource);
 
     // Run the granted item's preCreate callbacks unless this is a pre-actor-update reevaluation
@@ -317,7 +316,7 @@ class GrantItemChangeSystem extends ChangeModel<GrantItemChangeSchema> {
 
   /** Apply preselected choices to the granted item's choices sets. */
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  // #applyChoicePreselections(_grantedItem: ItemPTR2e): void {
+  // #applyChoicePreselections(_grantedItem: CONFIG.Item.documentClass): void {
   //   return;
   // const source = grantedItem._source;
   // for (const [flag, selection] of Object.entries(this.preselectChoices ?? {})) {
@@ -376,7 +375,7 @@ class GrantItemChangeSystem extends ChangeModel<GrantItemChangeSchema> {
         await change.preCreate?.({
           ...originalArgs,
           changeSource: change,
-          effectSource: effect.toObject() as EffectSourcePTR2e,
+          effectSource: effect.toObject() as PTR.ActiveEffect.Source,
           context,
         });
       }
@@ -392,7 +391,7 @@ class GrantItemChangeSystem extends ChangeModel<GrantItemChangeSchema> {
       await change.preCreate?.({
         ...originalArgs,
         changeSource: change,
-        effectSource: effect.toObject() as EffectSourcePTR2e,
+        effectSource: effect.toObject() as PTR.ActiveEffect.Source,
         context,
       });
     }

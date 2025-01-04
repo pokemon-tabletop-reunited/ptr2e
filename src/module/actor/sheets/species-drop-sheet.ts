@@ -1,4 +1,3 @@
-import { ItemPTR2e } from "@item";
 import { SpeciesSystemModel } from "@item/data/index.ts";
 import type {
   ApplicationConfigurationExpanded} from "@module/apps/appv2-expanded.ts";
@@ -57,7 +56,7 @@ class SpeciesDropSheetV2 extends foundry.applications.api.HandlebarsApplicationM
         return;
       }
 
-      if (!(item instanceof ItemPTR2e && item.system instanceof SpeciesSystemModel)) {
+      if (!(item instanceof CONFIG.Item.documentClass && item.system instanceof SpeciesSystemModel)) {
         ui.notifications.error("The dropped item is not a species");
         return;
       }

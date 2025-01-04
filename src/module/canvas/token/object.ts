@@ -1,4 +1,3 @@
-import type { SquareGridPTR2e } from "../grid.ts";
 import { AuraRenderers } from "./aura/map.ts";
 import * as R from "remeda";
 
@@ -16,7 +15,6 @@ class TokenPTR2e extends Token {
 
   /** A reference to an animation that is currently in progress for this Token, if any */
   get animation(): Promise<boolean> | null {
-    //@ts-expect-error - FIXME: FVTT-Types are incomplete
     return this.animationContexts.get(this.animationName)?.promise ?? null;
   }
 
@@ -69,9 +67,7 @@ class TokenPTR2e extends Token {
   }
 
   /** Draw auras along with effect icons */
-  //@ts-expect-error - Foundry types are incomplete
   override async _drawEffects(): Promise<void> {
-    //@ts-expect-error - Foundry types are incomplete
     await super._drawEffects();
     await this.animation;
 
@@ -116,7 +112,8 @@ class TokenPTR2e extends Token {
 
   /** Include actor overrides in the clone if it is a preview */
   override clone(): this {
-    const clone = super.clone();
+    const clone = super.clone() as this;
+
     if (clone.isPreview) {
       clone.document.height = this.document.height;
       clone.document.width = this.document.width;
@@ -135,14 +132,14 @@ class TokenPTR2e extends Token {
 
   /** Reset aura renders when token size changes. */
   override _onUpdate(
-    changed: foundry.data.fields.SchemaField.AssignmentType<Token.Schema>,
+    changed: PTR.Token.Source,
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     options: foundry.abstract.Document.OnUpdateOptions<any>,
     userId: string
   ): void {
     super._onUpdate(changed, options, userId);
 
-    if (changed.width) {
+    if (changed?.width) {
       if (this.animation) {
         this.animation.then(() => {
           this.auras.reset();
@@ -158,7 +155,7 @@ class TokenPTR2e extends Token {
     if (this === target) return 0;
 
     if (canvas.grid?.type === CONST.GRID_TYPES.SQUARE) {
-      return (canvas.grid as unknown as SquareGridPTR2e).getDistanceBetweenTokens(this, target);
+      return (canvas.grid as unknown as PTR.Grid.Square).getDistanceBetweenTokens(this, target);
     }
     //@ts-expect-error - Foundry types are incomplete
     return canvas.grid.measureDistance(this.position, target.position);
@@ -171,11 +168,12 @@ class TokenPTR2e extends Token {
   }
 
   override _onRelease(options: PlaceableObject.ReleaseOptions) {
-    super._onRelease(options);
+    const result = super._onRelease(options);
 
     if (game.ready) {
       game.ptr.tokenPanel.token = (game.user!.character?.getActiveTokens().at(0) as this) ?? null;
     }
+    return result;
   }
 }
 

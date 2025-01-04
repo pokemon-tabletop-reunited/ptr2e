@@ -1,7 +1,6 @@
 import { formatSlug, sluggify } from "@utils";
 import type { ApplicationConfigurationExpanded} from "./appv2-expanded.ts";
 import { ApplicationV2Expanded } from "./appv2-expanded.ts";
-import type { ActorPTR2e } from "@actor";
 import type { AnyObject, DeepPartial } from "fvtt-types/utils";
 
 export class TutorListApp extends foundry.applications.api.HandlebarsApplicationMixin(ApplicationV2Expanded)<AnyObject> {
@@ -39,7 +38,7 @@ export class TutorListApp extends foundry.applications.api.HandlebarsApplication
   };
 
   filter: SearchFilter;
-  actor: ActorPTR2e | null = null;
+  actor: Actor.ConfiguredInstance | null = null;
   currentTab = "";
 
   constructor(options?: Partial<ApplicationConfigurationExpanded>) {

@@ -1,4 +1,3 @@
-import type { ItemPTR2e} from "@item";
 import { type SummonPTR2e } from "@item";
 import { HasActions, HasEmbed, HasMigrations, HasSlug, HasTraits } from "@module/data/index.ts";
 import { type MigrationSchema } from "@module/data/mixins/has-migrations.ts";
@@ -6,7 +5,6 @@ import { type ActionsSchema } from "@module/data/mixins/has-actions.ts";
 import { type SlugSchema } from "@module/data/mixins/has-slug.ts";
 import { type TraitsSchema } from "@module/data/mixins/has-traits.ts";
 import HasDescription, { type DescriptionSchema } from "@module/data/mixins/has-description.ts";
-import type { ActorPTR2e } from "@actor";
 
 const summonSchema = {
   baseAV: new foundry.data.fields.NumberField({
@@ -41,7 +39,7 @@ export type SummonItemSchema = typeof summonSchema & MigrationSchema & ActionsSc
  * @extends {foundry.abstract.TypeDataModel}
  */
 export default abstract class SummonSystem extends HasEmbed(
-  HasMigrations(HasActions(HasDescription(HasTraits(HasSlug(foundry.abstract.TypeDataModel<SummonItemSchema, ItemPTR2e>))))),
+  HasMigrations(HasActions(HasDescription(HasTraits(HasSlug(foundry.abstract.TypeDataModel)))))<SummonItemSchema, Item.ConfiguredInstance>,
   "summon"
 ) {
   /**
@@ -61,7 +59,7 @@ export default abstract class SummonSystem extends HasEmbed(
   }
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  override async _preCreate(data: foundry.abstract.TypeDataModel.ParentAssignmentType<SummonItemSchema, ItemPTR2e>, options: foundry.abstract.Document.PreCreateOptions<any>, user: User): Promise<boolean | void> {
+  override async _preCreate(data: foundry.abstract.TypeDataModel.ParentAssignmentType<SummonItemSchema, Item.ConfiguredInstance>, options: foundry.abstract.Document.PreCreateOptions<any>, user: User): Promise<boolean | void> {
     const result = await super._preCreate(data, options, user);
     if (result === false) return false;
 
@@ -72,7 +70,7 @@ export default abstract class SummonSystem extends HasEmbed(
     }
   }
 
-  get actor(): ActorPTR2e | null {
-    return this.owner ? fromUuidSync(this.owner) as ActorPTR2e : null;
+  get actor(): Actor.ConfiguredInstance | null {
+    return this.owner ? fromUuidSync<Actor.ConfiguredInstance>(this.owner) as Actor.ConfiguredInstance : null;
   }
 }

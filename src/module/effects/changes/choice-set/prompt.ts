@@ -1,12 +1,12 @@
-import type { ActorPTR2e } from "@actor";
-import { ItemPTR2e } from "@item";
+import type { ApplicationConfigurationExpanded } from "@module/apps/appv2-expanded.ts";
 import type { PickableThing, PickAThingConstructorArgs, PromptTemplateData } from "@module/apps/pick-a-thing-prompt.ts";
 import { PickAThingPrompt } from "@module/apps/pick-a-thing-prompt.ts";
 import type { Predicate } from "@system/predication/predication.ts";
 import { createHTMLElement, htmlQuery, htmlQueryAll, sluggify } from "@utils";
+import type { DeepPartial } from "fvtt-types/utils";
 import { UUIDUtils } from "src/util/uuid.ts";
 
-class ChoiceSetPrompt extends PickAThingPrompt<ItemPTR2e, string | number | object> {
+class ChoiceSetPrompt extends PickAThingPrompt<Item.ConfiguredInstance, string | number | object> {
   /** The prompt statement to present the user in this application's window */
   prompt: string;
 
@@ -67,7 +67,7 @@ class ChoiceSetPrompt extends PickAThingPrompt<ItemPTR2e, string | number | obje
     const renderItemSheet = async (choice: ChoiceSetChoice | null): Promise<void> => {
       if (!choice || !UUIDUtils.isItemUUID(choice.value)) return;
       const item = await fromUuid(choice.value);
-      item?.sheet.render(true);
+      item?.sheet?.render(true);
     }
 
     if (this.selectMenu) {
@@ -118,7 +118,7 @@ class ChoiceSetPrompt extends PickAThingPrompt<ItemPTR2e, string | number | obje
     return super.resolveSelection();
   }
 
-  override async close(options?: Partial<foundry.applications.api.ApplicationClosingOptions>): Promise<foundry.applications.api.ApplicationV2> {
+  override async close(options?: Partial<foundry.applications.api.ApplicationV2.ClosingOptions>): Promise<this> {
     if(this.choices.length > 0 && !this.selection && !this.allowNoSelection) {
       ui.notifications.warn(game.i18n.format("PTR2E.ChoiceSetPrompt.NoSelectionMade", {item: this.item?.name ?? ""}));
     }
@@ -128,10 +128,10 @@ class ChoiceSetPrompt extends PickAThingPrompt<ItemPTR2e, string | number | obje
   override async _onDrop(event: DragEvent): Promise<void> {
     event.preventDefault();
     const dataString = event.dataTransfer?.getData("text/plain");
-    const dropData: DropCanvasData<"Item"> | undefined = JSON.parse(dataString ?? "");
+    const dropData: foundry.abstract.Document.DropData<Item.ConfiguredInstance> | undefined = JSON.parse(dataString ?? "");
     if(dropData?.type !== "Item") return void ui.notifications.error(game.i18n.localize("PTR2E.ChoiceSetPrompt.DropItemError"));
 
-    const item = await ItemPTR2e.fromDropData(dropData);
+    const item = await CONFIG.Item.documentClass.fromDropData(dropData);
     if(!item) throw Error("Unexpectedly failed to create an item from dropped data");
 
     const isAllowedDrop = !!this.allowedDrops?.predicate.test(item.getRollOptions("item"));
@@ -184,11 +184,11 @@ class ChoiceSetPrompt extends PickAThingPrompt<ItemPTR2e, string | number | obje
   }
 }
 
-interface ChoiceSetPrompt extends PickAThingPrompt<ItemPTR2e<ItemSystemPTR, ActorPTR2e>, string | number | object> {
+interface ChoiceSetPrompt extends PickAThingPrompt<Item.ConfiguredInstance, string | number | object> {
   getSelection(event: MouseEvent): ChoiceSetChoice | null;
 }
 
-interface ChoiceSetPromptData extends PickAThingConstructorArgs<ItemPTR2e<ItemSystemPTR, ActorPTR2e>, string | number | object> {
+interface ChoiceSetPromptData extends PickAThingConstructorArgs<Item.ConfiguredInstance, string | number | object> {
   prompt: string;
   containsItems: boolean;
   allowedDrops: { label: string | null; predicate: Predicate } | null;

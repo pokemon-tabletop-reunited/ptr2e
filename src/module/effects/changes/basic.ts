@@ -1,4 +1,3 @@
-import type { ActorPTR2e } from "@actor";
 import { isObject } from "@utils";
 import { ChangeModel } from "@data";
 import type { ChangeModelSchema } from "./change.ts";
@@ -6,7 +5,7 @@ import type { ChangeModelSchema } from "./change.ts";
 class BasicChangeSystem<Schema extends ChangeModelSchema = ChangeModelSchema> extends ChangeModel<Schema> {
   static override TYPE = "basic";
 
-  override apply(this: BasicChangeSystem, actor: ActorPTR2e, rollOptions?: string[] | Set<string> | null): void {
+  override apply(this: BasicChangeSystem, actor: Actor.ConfiguredInstance, rollOptions?: string[] | Set<string> | null): void {
     // eslint-disable-next-line @typescript-eslint/no-this-alias
     const change = this;
 

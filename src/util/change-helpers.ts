@@ -1,6 +1,6 @@
 import type { ActorSynthetics, EffectRoll } from "@actor";
 import type { ChangeModel } from "@data";
-import type { BracketedValue, EffectSourcePTR2e } from "@effects";
+import type { BracketedValue } from "@effects";
 import type {
   DeferredValueParams,
   ModifierAdjustment,
@@ -91,7 +91,7 @@ async function extractEphemeralEffects({
   action,
   domains,
   options,
-}: ExtractEphemeralEffectsParams): Promise<EffectSourcePTR2e[]> {
+}: ExtractEphemeralEffectsParams): Promise<PTR.ActiveEffect.Source[]> {
   if (!(origin && target)) return [];
 
   const [effectsFrom, effectsTo] = affects === "target" ? [origin, target] : [target, origin];
@@ -244,11 +244,11 @@ async function processPreUpdateHooks(document: Actor.ConfiguredInstance | Active
   const createDeletes = (
     await Promise.all(
       changes.map(
-        (c): Promise<{ create: Item.ConstructorData[]; delete: string[] } | { createEffects: EffectSourcePTR2e[]; deleteEffects: string[] }> => c.preUpdateActor()
+        (c): Promise<{ create: Item.ConstructorData[]; delete: string[] } | { createEffects: PTR.ActiveEffect.Source[]; deleteEffects: string[] }> => c.preUpdateActor()
       )
     )
   ).reduce(
-    (combined: { create: Item.ConstructorData[]; delete: string[]; createEffects: EffectSourcePTR2e[]; deleteEffects: string[] }, cd) => {
+    (combined: { create: Item.ConstructorData[]; delete: string[]; createEffects: PTR.ActiveEffect.Source[]; deleteEffects: string[] }, cd) => {
       if ('create' in cd) {
         combined.create.push(...cd.create);
         combined.delete.push(...cd.delete);

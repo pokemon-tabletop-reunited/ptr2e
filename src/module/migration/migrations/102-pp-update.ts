@@ -1,4 +1,3 @@
-import type { ItemPTR2e } from "@item";
 import { MigrationBase } from "../base.ts"
 import { sluggify } from "@utils";
 import type { MoveSchema } from "@item/data/move.ts";
@@ -20,7 +19,7 @@ export class Migration102PPUpdate extends MigrationBase {
     })());
   }
 
-  isMoveItem(item: ItemPTR2e['_source']): item is Omit<PTR.Item.Source, 'system'> & { system: foundry.data.fields.SchemaField.PersistedType<MoveSchema> } {
+  isMoveItem(item: PTR.Item.Source): item is Omit<PTR.Item.Source, 'system'> & { system: foundry.data.fields.SchemaField.PersistedType<MoveSchema> } {
     return item.type === "move";
   }
 

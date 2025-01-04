@@ -1,7 +1,5 @@
 import type { PerkPTR2e, SpeciesPTR2e } from "@item";
-import { ItemPTR2e } from "@item";
 import PerkGraph from "./perk-graph.ts";
-import type { ActorPTR2e } from "@actor";
 import { SummonStatistic } from "@system/statistics/summon.ts";
 import { Predicate } from "@system/predication/predication.ts";
 import type { ValueOf } from "fvtt-types/utils";
@@ -105,7 +103,7 @@ class PerkStore extends Collection<PerkNode> {
     this.web = web;
   }
 
-  async reinitialize({ perks, nodes, actor, web }: { perks?: PerkPTR2e[], nodes?: PerkNode[], actor?: ActorPTR2e, web?: "global" | ItemUUID } = {}) {
+  async reinitialize({ perks, nodes, actor, web }: { perks?: PerkPTR2e[], nodes?: PerkNode[], actor?: Actor.ConfiguredInstance, web?: "global" | ItemUUID } = {}) {
     this.clear();
     this._initialized = false;
     this._rootNodes = null;
@@ -143,7 +141,7 @@ class PerkStore extends Collection<PerkNode> {
     if (actor) return this.updateState(actor);
   }
 
-  updateState(actor: Maybe<ActorPTR2e>) {
+  updateState(actor: Maybe<Actor.ConfiguredInstance>) {
     const purchasedRoots: PerkNode[] = [];
     const purchasedNodes: PerkNode[] = [];
     let currentTier = 0;
@@ -185,8 +183,8 @@ class PerkStore extends Collection<PerkNode> {
           node.tierInfo = (() => {
             const tiers = node.perk.system.nodes.flatMap(node => {
               if (!node.tier) return [];
-              const perk = fromUuidSync(node.tier.uuid) as ItemPTR2e;
-              if (!(perk instanceof ItemPTR2e && perk.type === "perk")) return [];
+              const perk = fromUuidSync<Item.ConfiguredInstance>(node.tier.uuid) as Item.ConfiguredInstance;
+              if (!(perk instanceof CONFIG.Item.documentClass && perk.type === "perk")) return [];
               return { perk, tier: node.tier.rank }
             }) as { perk: PerkPTR2e, tier: number }[];
             tiers.unshift({ perk: node.perk, tier: 1 });
@@ -284,7 +282,7 @@ class PerkStore extends Collection<PerkNode> {
     apAvailable: number,
     currentTier?: number,
     highestTier?: number,
-    actor?: Maybe<ActorPTR2e>
+    actor?: Maybe<Actor.ConfiguredInstance>
   }) {
     // Look through perks that are purchased and update their connections
     for (const node of purchasedPerks) {
@@ -360,7 +358,7 @@ class PerkStore extends Collection<PerkNode> {
     actor
   }: {
     node: PerkNode,
-    actor: Maybe<ActorPTR2e>
+    actor: Maybe<Actor.ConfiguredInstance>
   }) {
     if(!actor) return false;
 
@@ -382,7 +380,7 @@ class PerkStore extends Collection<PerkNode> {
     apAvailable
   }: {
     node: PerkNode,
-    actor: Maybe<ActorPTR2e>,
+    actor: Maybe<Actor.ConfiguredInstance>,
     apAvailable: number
   }) {
     if (apAvailable < node.perk.system.cost) return PerkState.connected;

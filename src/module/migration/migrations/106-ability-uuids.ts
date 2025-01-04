@@ -43,7 +43,7 @@ export class Migration106AbilityUUIDs extends MigrationBase {
   }
 
   // Actors can house virtual species items, so we need to update them as well
-  override async updateActor(source: Actor.PTR.SourceWithSystem): Promise<void> {
+  override async updateActor(source: PTR.Actor.SourceWithSystem): Promise<void> {
     if(!source.system.species) return;
 
     if (Migration106AbilityUUIDs.abilitiesMap === null) {

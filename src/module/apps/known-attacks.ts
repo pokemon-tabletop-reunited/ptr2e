@@ -1,6 +1,4 @@
-import type { ActorPTR2e } from "@actor";
 import { ApplicationV2Expanded, type ApplicationConfigurationExpanded} from "./appv2-expanded.ts";
-import { ItemPTR2e } from "@item";
 import { ActionEditor } from "./action-editor.ts";
 import type { AnyObject, DeepPartial } from "fvtt-types/utils";
 
@@ -36,13 +34,13 @@ export class KnownActionsApp extends foundry.applications.api.HandlebarsApplicat
     },
   };
 
-  document: ActorPTR2e;
+  document: Actor.ConfiguredInstance;
 
   override get title() {
     return `${this.document.name}'s Known Attacks`;
   }
 
-  constructor(document: ActorPTR2e, options: DeepPartial<ApplicationConfigurationExpanded> = {}) {
+  constructor(document: Actor.ConfiguredInstance, options: DeepPartial<ApplicationConfigurationExpanded> = {}) {
     options.id = `known-attacks-${document.id}`;
     super(options);
     this.document = document;
@@ -82,7 +80,7 @@ export class KnownActionsApp extends foundry.applications.api.HandlebarsApplicat
 
   override async _onDrop(event: DragEvent) {
     const data = TextEditor.getDragEventData(event);
-    const item = await ItemPTR2e.fromDropData(data);
+    const item = await CONFIG.Item.documentClass.fromDropData(data);
     if (!item || item.type !== "move" || item.parent?.uuid === this.document.uuid) return;
 
     this.document.createEmbeddedDocuments("Item", [item.toObject()]);

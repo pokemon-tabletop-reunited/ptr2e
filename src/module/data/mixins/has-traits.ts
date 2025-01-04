@@ -1,4 +1,3 @@
-import { ActorPTR2e } from '@actor';
 import { SlugField } from '../fields/slug-field.ts';
 import type Trait from '../models/trait.ts';
 import type { TemplateConstructor } from './data-template.ts';
@@ -12,7 +11,7 @@ const traitsSchema = {
    * This is a record of traits that the item has, keyed by the trait's name.
    * @example
    * ```typescript
-   * const item = new ItemPTR2e({ name: 'Flashlight', "system.traits": ["light"] });
+   * const item = new CONFIG.Item.documentClass({ name: 'Flashlight', "system.traits": ["light"] });
    * console.log(item.system.traits); // { "light": TraitPTR2e }
    * ```
    */
@@ -52,7 +51,7 @@ export default function HasTraits<BaseClass extends TemplateConstructor>(baseCla
 
     addTraitFromSlug(traitSlug: string, virtual?: boolean) {
       const rollOptionManager = (() => {
-        if (!(this.parent instanceof ActorPTR2e)) return null;
+        if (!(this.parent instanceof CONFIG.Actor.documentClass)) return null;
         return this.parent.rollOptions;
       })();
 

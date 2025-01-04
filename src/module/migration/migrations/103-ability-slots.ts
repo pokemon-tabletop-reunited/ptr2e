@@ -10,7 +10,7 @@ export class Migration103AbilitySlots extends MigrationBase {
     return item.type === "ability";
   }
 
-  override async updateItem(source: PTR.Item.Source, actorSource?: Actor.PTR.SourceWithSystem): Promise<void> {
+  override async updateItem(source: PTR.Item.Source, actorSource?: PTR.Actor.SourceWithSystem): Promise<void> {
     // Only update items on actors
     if (!actorSource || !actorSource?.system?.advancement?.experience?.current) return;
 

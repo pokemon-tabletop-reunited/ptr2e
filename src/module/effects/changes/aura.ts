@@ -1,4 +1,4 @@
-import type { ActorPTR2e, AuraAppearanceData, AuraData, AuraEffectData } from "@actor";
+import type { AuraAppearanceData, AuraData, AuraEffectData } from "@actor";
 import { userColorForActor } from "@actor/helpers.ts";
 import { ChangeModel } from "@data";
 import { DataUnionField } from "@module/data/fields/data-union-field.ts";
@@ -212,7 +212,7 @@ class AuraChangeSystem extends ChangeModel<AuraChangeSchema> {
     };
   }
 
-  override apply(actor: ActorPTR2e): void {
+  override apply(actor: Actor.ConfiguredInstance): void {
     if (!this.test()) return;
 
     const radius = Math.clamp(Math.ceil(Number(this.resolveValue(this.radius))), 1, 50);
@@ -269,7 +269,7 @@ class AuraChangeSystem extends ChangeModel<AuraChangeSchema> {
     }))
   }
 
-  #processAppearanceData(this: AuraChangeSystem, actor: ActorPTR2e): AuraAppearanceData {
+  #processAppearanceData(this: AuraChangeSystem, actor: Actor.ConfiguredInstance): AuraAppearanceData {
     const appearance = foundry.utils.deepClone(this.appearance);
     const { border, highlight, texture } = appearance;
     const textureSrc = ((): ImageFilePath | VideoFilePath | null => {

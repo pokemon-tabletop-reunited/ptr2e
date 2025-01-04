@@ -1,11 +1,8 @@
-import type { ScenePTR2e } from "./scene.ts";
-import type { TokenDocumentPTR2e } from "./token/document.ts";
-
 // Prevent concurrent executions of this method in case of network latency
 let auraCheckLock = Promise.resolve();
 
 /** Check for auras containing newly-placed or moved tokens */
-const checkAuras = foundry.utils.debounce(async function (this: ScenePTR2e): Promise<void> {
+const checkAuras = foundry.utils.debounce(async function (this: Scene.ConfiguredInstance): Promise<void> {
   if (!(canvas!.ready && this.isInFocus && ([CONST.GRID_TYPES.SQUARE, CONST.GRID_TYPES.GRIDLESS] as CONST.GRID_TYPES[]).includes(this.grid.type as CONST.GRID_TYPES))) {
     return;
   }
@@ -19,7 +16,7 @@ const checkAuras = foundry.utils.debounce(async function (this: ScenePTR2e): Pro
 
   try {
     // Get all tokens in the scene, excluding additional tokens linked to a common actor
-    const tokens = this.tokens.reduce((list: TokenDocumentPTR2e[], token) => {
+    const tokens = this.tokens.reduce((list: TokenDocument.ConfiguredInstance[], token) => {
       if (token.isLinked && list.some((t) => t.actor === token.actor)) {
         return list;
       }

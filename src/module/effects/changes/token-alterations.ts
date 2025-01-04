@@ -1,4 +1,3 @@
-import type { ActorPTR2e } from "@actor";
 import { ChangeModel } from "@data";
 import { isImageOrVideoPath } from "@utils";
 import type { ChangeModelSchema } from "./change.ts";
@@ -28,11 +27,11 @@ class TokenAlterationsChangeSystem extends ChangeModel<TokenAlterationsChangeSch
     return this.key;
   }
 
-  override apply(actor: ActorPTR2e): void {
+  override apply(actor: Actor.ConfiguredInstance): void {
     this.beforePrepareData(actor);
   }
 
-  override beforePrepareData(actor: ActorPTR2e | null = this.actor,): void {
+  override beforePrepareData(actor: Actor.ConfiguredInstance | null = this.actor,): void {
     const src = this.resolveInjectedProperties(this.texture);
     if (!isImageOrVideoPath(src)) return this.failValidation("Missing or invalid value field");
     if (!actor) return;

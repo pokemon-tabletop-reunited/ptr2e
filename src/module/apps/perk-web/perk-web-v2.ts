@@ -99,7 +99,7 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
 
             if (hasEffectGrants) {
               current?.delete();
-              await ItemPTR2e.create(newPerk, {
+              await CONFIG.Item.documentClass.create(newPerk, {
                 parent: this.actor
               });
               return void PerkWebApp.refresh.call(this);
@@ -176,7 +176,7 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
 
             if (hasEffectGrants) {
               current?.delete();
-              await ItemPTR2e.create(newPerk, {
+              await CONFIG.Item.documentClass.create(newPerk, {
                 parent: this.actor
               });
               return void PerkWebApp.refresh.call(this);

@@ -1,4 +1,3 @@
-import type { ActorPTR2e } from "@actor";
 import { ApplicationV2Expanded, type ApplicationConfigurationExpanded } from "./appv2-expanded.ts";
 import { htmlQueryAll } from "@utils";
 import type { AnyObject, DeepPartial } from "fvtt-types/utils";
@@ -32,11 +31,11 @@ export class RestApp extends foundry.applications.api.HandlebarsApplicationMixin
   };
 
   name: string;
-  documents: ActorPTR2e[];
+  documents: Actor.ConfiguredInstance[];
   restType: string;
   fractionToHeal: number;
 
-  constructor(name: string, documents: ActorPTR2e[], options: DeepPartial<ApplicationConfigurationExpanded> = {}) {
+  constructor(name: string, documents: Actor.ConfiguredInstance[], options: DeepPartial<ApplicationConfigurationExpanded> = {}) {
     options.id = `rest-${documents.length ? documents[0].id || foundry.utils.randomID() : foundry.utils.randomID()}`;
     super(options);
     this.name = name;

@@ -1,6 +1,5 @@
 import { resolveCapture } from "@actor/helpers.ts";
 import { SlugField } from "@module/data/fields/slug-field.ts";
-import type PokeballActionPTR2e from "@module/data/models/pokeball-action.ts";
 import type { CaptureRoll } from "@system/rolls/capture-roll.ts";
 import type { AnyObject } from "fvtt-types/utils";
 
@@ -41,7 +40,7 @@ abstract class CaptureMessageSystem extends foundry.abstract.TypeDataModel<Captu
   declare parent: ChatMessage.ConfiguredInstance & { system: CaptureMessageSystem };
 
   /**
-   * Define the schema for the DamageAppliedMessageSystem data model
+   * Define the schema for the CaptureMessageSystem data model
    */
   static override defineSchema(): CaptureMessageSchema {
     return captureMessageSchema;
@@ -94,7 +93,7 @@ abstract class CaptureMessageSystem extends foundry.abstract.TypeDataModel<Captu
     };
 
     this.origin = fromActorData(this._source.origin)!;
-    this.action = this.origin.actions.get(this._source.slug) as PokeballActionPTR2e;
+    this.action = this.origin.actions.get(this._source.slug) as PTR.Models.Action.Models.PokeballAction.Instance;
 
     this.rolls = {
       accuracy: fromRollData(this._source.rolls.accuracy)!,
@@ -269,11 +268,11 @@ abstract class CaptureMessageSystem extends foundry.abstract.TypeDataModel<Captu
 
 interface CaptureMessageSystem {
   context: Maybe<CaptureMessageRenderContext>;
-  action: PokeballActionPTR2e;
+  action: PTR.Models.Action.Models.PokeballAction.Instance;
 }
 interface CaptureMessageRenderContext {
   origin: Actor.ConfiguredInstance;
-  action: PokeballActionPTR2e;
+  action: PTR.Models.Action.Models.PokeballAction.Instance;
   rolls: {
     accuracy: string | null;
     crit: string | null;
@@ -296,7 +295,7 @@ interface CaptureMessageRenderContext {
 }
 
 // interface CaptureMessageSchema extends foundry.data.fields.DataSchema {
-//   origin: foundry.data.fields.JSONField<ActorPTR2e, true, false, false>;
+//   origin: foundry.data.fields.JSONField<Actor.ConfiguredInstance, true, false, false>;
 //   slug: SlugField<string, string, true, false, false>;
 //   rolls: foundry.data.fields.SchemaField<
 //     RollsSchema,

@@ -30,7 +30,7 @@ interface MigrationBase {
      * Update the actor to the latest schema version.
      * @param source This should be effectively a `Actor.ConstructorData` from the previous version.
      */
-    updateActor?(source: Actor.PTR.SourceWithSystem): Promise<void>;
+    updateActor?(source: PTR.Actor.SourceWithSystem): Promise<void>;
 
     /**
      * Update the item to the latest schema version, handling changes that must happen before any other migration in a
@@ -38,7 +38,7 @@ interface MigrationBase {
      * @param source Item to update. This should be an `Item.ConstructorData` from the previous version
      * @param actorSource If the item is part of an actor, this is set to the actor source
      */
-    preUpdateItem?(source: PTR.Item.Source, actorSource?: Actor.PTR.SourceWithSystem): Promise<void>;
+    preUpdateItem?(source: PTR.Item.Source, actorSource?: PTR.Actor.SourceWithSystem): Promise<void>;
 
     /**
      * Update the action to the latest schema version.
@@ -52,14 +52,14 @@ interface MigrationBase {
      * @param source Item to update. This should be an `Item.ConstructorData` from the previous version.
      * @param actorSource If the item is part of an actor, this is set to the actor. For instance
      */
-    updateItem?(source: PTR.Item.Source, actorSource?: Actor.PTR.SourceWithSystem): Promise<void>;
+    updateItem?(source: PTR.Item.Source, actorSource?: PTR.Actor.SourceWithSystem): Promise<void>;
 
     /**
      * Update the effect to the latest schema version.
      * @param source Effect to update. This should be an `ActiveEffect.ConstructorData` from the previous version.
      * @param parentSource The effect's parent
      */
-    updateEffect?(source: ActiveEffect.ConstructorData, parentSource: PTR.Item.Source | Actor.PTR.SourceWithSystem): Promise<void>;
+    updateEffect?(source: ActiveEffect.ConstructorData, parentSource: PTR.Item.Source | PTR.Actor.SourceWithSystem): Promise<void>;
 
     /**
      * Update the macro to the latest schema version.

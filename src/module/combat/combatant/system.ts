@@ -18,7 +18,7 @@ const combatantSystemSchema = {
 
 export type CombatantSystemSchema = typeof combatantSystemSchema;
 
-export default class CombatantSystemPTR2e<Schema extends CombatantSystemSchema = CombatantSystemSchema> extends foundry.abstract.TypeDataModel<Schema, Combatant.ConfiguredInstance> {
+class CombatantSystemPTR2e<Schema extends CombatantSystemSchema = CombatantSystemSchema> extends foundry.abstract.TypeDataModel<Schema, Combatant.ConfiguredInstance> {
   get combat(): Combat.ConfiguredInstance {
     return this.parent.encounter;
   }
@@ -120,3 +120,6 @@ export default class CombatantSystemPTR2e<Schema extends CombatantSystemSchema =
     }
   }
 }
+
+export default CombatantSystemPTR2e;
+export type { CombatantSystemPTR2e };

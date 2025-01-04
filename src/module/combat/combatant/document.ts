@@ -1,5 +1,3 @@
-import type CombatantSystemPTR2e from "./system.ts";
-
 class CombatantPTR2e extends Combatant {
 
   get encounter(): Combat.ConfiguredInstance {
@@ -51,7 +49,7 @@ class CombatantPTR2e extends Combatant {
 }
 
 interface CombatantPTR2e {
-  system: CombatantSystemPTR2e;
+  system: PTR.Combatant.SystemInstance;
 }
 
 export default CombatantPTR2e;

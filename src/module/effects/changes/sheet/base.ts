@@ -3,7 +3,6 @@ import type ActiveEffectConfig from "@module/effects/sheet.ts";
 import type ChangeModel from "../change.ts";
 import { createHTMLElement, fontAwesomeIcon, htmlClosest, htmlQuery, htmlQueryAll, isBracketedValue, isObject, tagify } from "@utils";
 import * as R from "remeda";
-import { ItemPTR2e } from "@item";
 import ResolvableValueField from "@module/data/fields/resolvable-value-field.ts";
 
 class ChangeForm<TChange extends ChangeModel = ChangeModel> {
@@ -244,10 +243,10 @@ class ChangeForm<TChange extends ChangeModel = ChangeModel> {
         }
     }
 
-    protected async onDrop(event: DragEvent, _element: HTMLElement): Promise<ItemPTR2e | null> {
+    protected async onDrop(event: DragEvent, _element: HTMLElement): Promise<Item.ConfiguredInstance | null> {
         const data = event.dataTransfer?.getData("text/plain");
         if (!data) return null;
-        const item = await ItemPTR2e.fromDropData(JSON.parse(data));
+        const item = await CONFIG.Item.documentClass.fromDropData(JSON.parse(data));
         return item ?? null;
     }
 

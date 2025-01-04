@@ -1,10 +1,8 @@
-
-import type ActiveEffectSystem from "../system.ts";
 import type { RuleValue } from "../data.ts";
 import type { RawPredicate } from "@system/predication/predication.ts";
 
 interface ChangeModelOptions {
-  parent: ActiveEffectSystem;
+  parent: PTR.ActiveEffect.SystemInstance;
   strict?: boolean | undefined;
   sourceIndex?: number | undefined;
   suppressWarnings?: boolean | undefined;

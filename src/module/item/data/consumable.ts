@@ -4,7 +4,6 @@ import type { TraitsSchema } from "@module/data/mixins/has-traits.ts";
 import type { DescriptionSchema } from "@module/data/mixins/has-description.ts";
 import type { SlugSchema } from "@module/data/mixins/has-slug.ts";
 import type { ContainerSchema } from "@module/data/mixins/has-container.ts";
-import type { ItemPTR2e } from "@item/document.ts";
 import type { GearDataSchema } from "@module/data/mixins/has-gear-data.ts";
 
 const CONSUMABLE_TYPES = {
@@ -37,7 +36,7 @@ export type ConsumableSchema = typeof consumableSchema & MigrationSchema & Trait
 /**
  * @category Item Data Models
  */
-export default abstract class ConsumableSystem extends HasEmbed(HasMigrations(HasTraits(HasDescription(HasSlug(HasContainer(HasGearData(foundry.abstract.TypeDataModel<ConsumableSchema, ItemPTR2e>)))))), "consumable") {
+export default abstract class ConsumableSystem extends HasEmbed(HasMigrations(HasTraits(HasDescription(HasSlug(HasContainer(HasGearData(foundry.abstract.TypeDataModel)))))), "consumable")<consumableSchema, Item.ConfiguredInstance> {
   // /**
   //  * @internal
   //  */
@@ -51,7 +50,7 @@ export default abstract class ConsumableSystem extends HasEmbed(HasMigrations(Ha
   }
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  override async _preCreate(data: foundry.abstract.TypeDataModel.ParentAssignmentType<ConsumableSchema, ItemPTR2e>, options: foundry.abstract.Document.PreCreateOptions<any>, user: User): Promise<boolean | void> {
+  override async _preCreate(data: foundry.abstract.TypeDataModel.ParentAssignmentType<ConsumableSchema, Item.ConfiguredInstance>, options: foundry.abstract.Document.PreCreateOptions<any>, user: User): Promise<boolean | void> {
     const result = await super._preCreate(data, options, user);
     if (result === false) return false;
 

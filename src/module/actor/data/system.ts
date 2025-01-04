@@ -14,7 +14,6 @@ import type { Movement } from "./data.ts";
 import type { Stat, Attributes, Attribute } from "../data.ts";
 import { addDataFieldMigration, sluggify } from "@utils";
 import type { EmptyObject } from "fvtt-types/utils";
-import { default as ActorPTR2e } from "../base.ts";
 
 interface StatSchema extends foundry.data.fields.DataSchema {
   slug: SlugField<{ required: true, initial: string }>;
@@ -291,10 +290,8 @@ const actorSystemSchema = (() => {
 
 export type ActorSystemSchema = typeof actorSystemSchema & TraitsSchema & MigrationSchema;
 
-class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeDataModel<ActorSystemSchema, ActorPTR2e, EmptyObject, ActorSystemDerivedData>)) {
+class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeDataModel))<ActorSystemSchema, Actor.ConfiguredInstance, EmptyObject, ActorSystemDerivedData> {
   static override LOCALIZATION_PREFIXES = ["PTR2E.ActorSystem"];
-
-  declare parent: ActorPTR2e;
 
   modifiers: Record<string, number | undefined> = {};
 
@@ -750,16 +747,3 @@ export { type ActorSystemPTR2e }
 //   next: foundry.data.fields.NumberField<{ required: true, initial: number, min: number, label: string, hint: string }>;
 //   diff: foundry.data.fields.NumberField<{ required: true, initial: number, min: number, label: string, hint: string }>;
 // }
-
-declare global {
-  // eslint-disable-next-line @typescript-eslint/no-namespace
-  namespace Actor {
-    // eslint-disable-next-line @typescript-eslint/no-namespace
-    namespace PTR {
-      type Source = foundry.data.fields.SchemaField.PersistedType<Actor.Schema>
-      type SystemSource = foundry.data.fields.SchemaField.PersistedType<ActorSystemSchema>
-      type SourceWithSystem = Omit<Source, 'system'> & { system: SystemSource }
-    }
-    type ConfiguredBaseSystem = ActorSystemPTR2e
-  }
-}

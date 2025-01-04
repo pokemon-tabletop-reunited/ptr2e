@@ -28,7 +28,7 @@ type CommonSortByOption = "name";
 type SortByOption = CommonSortByOption | "cost";
 type SortDirection = "asc" | "desc";
 
-type CompendiumBrowserSettings = Omit<TabData<Record<string, PackInfo | undefined>>, "settings">;
+type CompendiumBrowserSettings = Omit<TabData<Record<string, PackInfo | undefined>>, "settings"> & Record<string, unknown>
 
 type CompendiumBrowserSourcesList = Record<string, SourceInfo | undefined>;
 interface CompendiumBrowserSources {
@@ -36,6 +36,7 @@ interface CompendiumBrowserSources {
   showEmptySources: boolean;
   showUnknownSources: boolean;
   sources: CompendiumBrowserSourcesList;
+  [key: string]: unknown;
 }
 
 interface CompendiumBrowserSheetData {

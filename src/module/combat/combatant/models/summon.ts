@@ -1,7 +1,5 @@
 import { CombatantSystemPTR2e } from "@combat";
 import type { CombatantSystemSchema } from "../system.ts";
-import type { SummonPTR2e } from "@item";
-import type { SummonAttackPTR2e } from "@data";
 
 const summonCombatantSchema = {
   owner: new foundry.data.fields.DocumentUUIDField({ required: true, nullable: true }),
@@ -11,10 +9,10 @@ const summonCombatantSchema = {
 
 export type SummonCombatantSchema = typeof summonCombatantSchema & CombatantSystemSchema;
 
-export default class SummonCombatantSystem extends CombatantSystemPTR2e<SummonCombatantSchema> {
+class SummonCombatantSystem extends CombatantSystemPTR2e<SummonCombatantSchema> {
 
   //@ts-expect-error - Override base property.
-  item: ItemPTR2e | null;
+  item: Item.ConfiguredInstance | null;
 
   override get baseAV(): number {
     const self = this as SummonCombatantSystem;
@@ -55,7 +53,7 @@ export default class SummonCombatantSystem extends CombatantSystemPTR2e<SummonCo
           if (item && item instanceof CONFIG.Item.documentClass) return item.clone(jsonData.system.owner ? { "system.owner": jsonData.system.owner } : {}, { keepId: true });
         }
 
-        return CONFIG.Item.documentClass.fromJSON(this._source.item) as SummonPTR2e;
+        return CONFIG.Item.documentClass.fromJSON(this._source.item) as PTR.Item.System.Summon.ParentInstance;
       }
       catch (error: unknown) {
         Hooks.onError("SummonCombatantSystem#prepareBaseData", error as Error, {
@@ -100,7 +98,7 @@ export default class SummonCombatantSystem extends CombatantSystemPTR2e<SummonCo
     for (const action of this.item?.system.actions ?? []) {
       if (action.type !== "summon") continue;
 
-      const result = await (action as SummonAttackPTR2e).execute(this, this.combat.combatants.contents);
+      const result = await (action as PTR.Models.Action.Models.Summon.Instance).execute(this, this.combat.combatants.contents);
       // Result is only 'False' if no owner was found and thus the attack couldn't be resolved
       if (result === false) {
         console.warn(`Summon ${this.name} failed to execute action ${action.name} because no owner was found.`);
@@ -269,3 +267,6 @@ export default class SummonCombatantSystem extends CombatantSystemPTR2e<SummonCo
     this.notifyActorsOfEffectsIfApplicable()
   }
 }
+
+export default SummonCombatantSystem;
+export type { SummonCombatantSystem };

@@ -1,7 +1,5 @@
-import type { ActorPTR2e } from "@actor";
 import { ApplicationV2Expanded, type ApplicationConfigurationExpanded } from "./appv2-expanded.ts";
 import type { AbilityPTR2e } from "@item";
-import { ItemPTR2e } from "@item";
 import type { AnyObject, DeepPartial } from "fvtt-types/utils";
 
 export class AvailableAbilitiesApp extends foundry.applications.api.HandlebarsApplicationMixin(ApplicationV2Expanded)<AnyObject> {
@@ -36,13 +34,13 @@ export class AvailableAbilitiesApp extends foundry.applications.api.HandlebarsAp
     },
   };
 
-  document: ActorPTR2e;
+  document: Actor.ConfiguredInstance;
 
   override get title() {
     return `${this.document.name}'s Available Abilities`;
   }
 
-  constructor(document: ActorPTR2e, options: DeepPartial<ApplicationConfigurationExpanded> = {}) {
+  constructor(document: Actor.ConfiguredInstance, options: DeepPartial<ApplicationConfigurationExpanded> = {}) {
     options.id = `available-abilities-${document.id}`;
     super(options);
     this.document = document;
@@ -82,7 +80,7 @@ export class AvailableAbilitiesApp extends foundry.applications.api.HandlebarsAp
 
   override async _onDrop(event: DragEvent) {
     const data = TextEditor.getDragEventData(event);
-    const item = await ItemPTR2e.fromDropData(data as unknown as foundry.abstract.Document.DropData<Item.ConfiguredInstance>);
+    const item = await CONFIG.Item.documentClass.fromDropData(data as unknown as foundry.abstract.Document.DropData<Item.ConfiguredInstance>);
     if (!item || item.type !== "ability" || item.parent?.uuid === this.document.uuid) return;
 
     this.document.createEmbeddedDocuments("Item", [item.toObject()]);

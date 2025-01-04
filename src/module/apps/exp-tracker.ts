@@ -1,7 +1,6 @@
 import type { ApplicationConfigurationExpanded } from "./appv2-expanded.ts";
 import { ApplicationV2Expanded } from "./appv2-expanded.ts";
 import type { Tab } from "@item/sheets/document.ts";
-import { ActorPTR2e } from "@actor";
 import { sluggify } from "@utils";
 import type { AnyObject, DeepPartial } from "fvtt-types/utils";
 
@@ -65,7 +64,7 @@ export class EXPTracker extends foundry.applications.api.HandlebarsApplicationMi
           messages: []
         } as Record<string, Record<string, unknown>[]>);
 
-        await ActorPTR2e.updateDocuments(updates);
+        await CONFIG.Actor.documentClass.updateDocuments(updates);
         await game.settings.set("ptr2e", "expTrackerData", { custom: game.settings.get("ptr2e", "expTrackerData").custom.map(c => ({ ...c, checked: false })) });
         await ChatMessage.create({
           content: await renderTemplate("systems/ptr2e/templates/chat/exp-tracker.hbs", { messages, total, percent: cmsPercent }),
@@ -112,7 +111,7 @@ export class EXPTracker extends foundry.applications.api.HandlebarsApplicationMi
           messages: []
         } as Record<string, Record<string, unknown>[]>);
 
-        await ActorPTR2e.updateDocuments(updates);
+        await CONFIG.Actor.documentClass.updateDocuments(updates);
 
         this.slots = {};
         this.openDetails = null;
@@ -200,7 +199,7 @@ export class EXPTracker extends foundry.applications.api.HandlebarsApplicationMi
   }
 
   private ber: number;
-  private characters: ActorPTR2e[] = [];
+  private characters: Actor.ConfiguredInstance[] = [];
 
   override _prepareContext(options: foundry.applications.api.HandlebarsApplicationMixin.HandlebarsRenderOptions) {
     const getBoxData = ((folder: Folder) => {
@@ -209,7 +208,7 @@ export class EXPTracker extends foundry.applications.api.HandlebarsApplicationMi
       }
 
       const folders = [folder, ...recursive(folder.getSubfolders())];
-      const entries = folders.flatMap(folder => folder.contents as unknown as ActorPTR2e[]).filter(a => !a.system.party.ownerOf).sort((a, b) => {
+      const entries = folders.flatMap(folder => folder.contents as unknown as Actor.ConfiguredInstance[]).filter(a => !a.system.party.ownerOf).sort((a, b) => {
         if (a.system.party.partyMemberOf && b.system.party.partyMemberOf) {
           return a.folder!.sorting === "a"
             ? a.name.localeCompare(b.name)
@@ -249,7 +248,7 @@ export class EXPTracker extends foundry.applications.api.HandlebarsApplicationMi
         slots: this._getSlots(pc)
       });
       return acc;
-    }, [] as { pc: ActorPTR2e, data: { folders: Folder[], entries: { actor: ActorPTR2e, loafing?: ActiveEffect.ConfiguredInstance }[] }, slots: { actor?: ActorPTR2e }[] }[]);
+    }, [] as { pc: Actor.ConfiguredInstance, data: { folders: Folder[], entries: { actor: Actor.ConfiguredInstance, loafing?: ActiveEffect.ConfiguredInstance }[] }, slots: { actor?: Actor.ConfiguredInstance }[] }[]);
 
     const apl = pcs.reduce((acc, pc, index, arr) => {
       acc += pc.level
@@ -269,7 +268,7 @@ export class EXPTracker extends foundry.applications.api.HandlebarsApplicationMi
     this.characters = characters.reduce((acc, { pc, data }) => {
       acc.push(pc, ...data.entries.flatMap(entry => entry.loafing ? [] : entry.actor));
       return acc;
-    }, [] as ActorPTR2e[]);
+    }, [] as Actor.ConfiguredInstance[]);
 
     const open = this.openDetails;
     this.openDetails = null;
@@ -310,11 +309,11 @@ export class EXPTracker extends foundry.applications.api.HandlebarsApplicationMi
     }
   }
 
-  private slots: Record<string, { actor?: ActorPTR2e }[]>;
+  private slots: Record<string, { actor?: Actor.ConfiguredInstance }[]>;
   private openDetails: string | null = null;
 
-  _getSlots(pc: ActorPTR2e) {
-    if (!this.slots) this.slots = game.user.getFlag("ptr2e", "exp-training-slots") as Record<string, { actor?: ActorPTR2e }[]> ?? {};
+  _getSlots(pc: Actor.ConfiguredInstance) {
+    if (!this.slots) this.slots = game.user.getFlag("ptr2e", "exp-training-slots") as Record<string, { actor?: Actor.ConfiguredInstance }[]> ?? {};
 
     return this.slots[pc.uuid.replaceAll(".", "-")] ?? (this.slots[pc.uuid.replaceAll(".", "-")] = [{}, {}, {}, {}, {}, {}]);
   }

@@ -1,14 +1,12 @@
-import { ActorPTR2e } from "@actor";
 import type { Tab } from "@item/sheets/document.ts";
-import type FolderPTR2e from "@module/folder/document.ts";
 import type { AnyObject, DeepPartial } from "fvtt-types/utils";
 class TeamSheetPTR2e extends foundry.applications.api.HandlebarsApplicationMixin(
   foundry.applications.api.ApplicationV2
 )<AnyObject> {
-  folder: FolderPTR2e;
+  folder: Folder.ConfiguredInstance;
 
   constructor(
-    options: DeepPartial<foundry.applications.api.ApplicationV2.Configuration> & { folder?: FolderPTR2e } = {}
+    options: DeepPartial<foundry.applications.api.ApplicationV2.Configuration> & { folder?: Folder.ConfiguredInstance } = {}
   ) {
     if (!options.folder) throw new Error("No folder provided for party sheet");
     super(options);
@@ -72,7 +70,7 @@ class TeamSheetPTR2e extends foundry.applications.api.HandlebarsApplicationMixin
     return `${this.folder.name} - Team Sheet`;
   }
 
-  override _initializeApplicationOptions(options: DeepPartial<foundry.applications.api.ApplicationV2.Configuration> & { folder?: FolderPTR2e }): foundry.applications.api.ApplicationV2.Configuration {
+  override _initializeApplicationOptions(options: DeepPartial<foundry.applications.api.ApplicationV2.Configuration> & { folder?: Folder.ConfiguredInstance }): foundry.applications.api.ApplicationV2.Configuration {
     options = super._initializeApplicationOptions(options);
     options.uniqueId = `${this.constructor.name}-${options.folder?.uuid}`;
     return options as foundry.applications.api.ApplicationV2.Configuration;
@@ -81,8 +79,8 @@ class TeamSheetPTR2e extends foundry.applications.api.HandlebarsApplicationMixin
   override async _prepareContext() {
     const team = [];
     for (const memberUuid of this.folder.team) {
-      const actor = await fromUuid(memberUuid);
-      if (actor && actor instanceof ActorPTR2e) {
+      const actor = await fromUuid<Actor.ConfiguredInstance>(memberUuid);
+      if (actor && actor instanceof CONFIG.Actor.documentClass) {
         const party = [];
         if (actor.folder?.isFolderOwner(actor.uuid)) {
           for (const partyMemberUuid of actor.folder.party) {
@@ -130,7 +128,7 @@ class TeamSheetPTR2e extends foundry.applications.api.HandlebarsApplicationMixin
   _onTeamClick(event: Event) {
     const folderId = (event.currentTarget as HTMLElement).dataset.folderId;
     if (folderId) {
-      const folder = game.folders.get(folderId) as FolderPTR2e;
+      const folder = game.folders.get(folderId) as Folder.ConfiguredInstance;
       if (folder) folder.renderPartySheet();
     }
   }

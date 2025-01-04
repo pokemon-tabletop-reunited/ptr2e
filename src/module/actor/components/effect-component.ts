@@ -1,6 +1,6 @@
 import { htmlQueryAll } from "@utils";
 import { ActorComponent } from "./base.ts";
-import type ActorPTR2e from "@actor/base.ts";
+
 class EffectComponent extends ActorComponent {
   static override TEMPLATE = "systems/ptr2e/templates/actor/components/actor-effect-component.hbs";
   static override TOOLTIP = "PTR2E.ActorSheet.Components.Effects.tooltip";
@@ -14,7 +14,7 @@ class EffectComponent extends ActorComponent {
     return EffectComponent.attachListeners(htmlElement, this.actor);
   }
 
-  static attachListeners(htmlElement: HTMLElement, actor: ActorPTR2e) {
+  static attachListeners(htmlElement: HTMLElement, actor: Actor.ConfiguredInstance) {
     for (const element of htmlQueryAll(htmlElement, ".item-controls .effect-to-chat")) {
       element.addEventListener("click", async (event) => {
         const effectId = (

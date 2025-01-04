@@ -1,4 +1,3 @@
-import type { ActorPTR2e } from "@actor";
 import { ChangeModel } from "@data";
 import { RollNote } from "@system/notes.ts";
 import type { ChangeModelSchema } from "./change.ts";
@@ -32,7 +31,7 @@ class RollNoteChangeSystem extends ChangeModel<RollNoteChangeSchema> {
     return this.value;
   }
 
-  override apply(actor: ActorPTR2e): void {
+  override apply(actor: Actor.ConfiguredInstance): void {
     if (this.ignored) return;
     if (!this.actor) return;
 

@@ -1,4 +1,3 @@
-import { ItemPTR2e } from "@item";
 import Tagify from "@yaireo/tagify";
 import { ApplicationV2Expanded, type ApplicationConfigurationExpanded } from "./appv2-expanded.ts";
 import { htmlQuery, htmlQueryAll, sluggify } from "@utils";
@@ -225,7 +224,7 @@ export class ActionEditor<
         const imgElement = event.currentTarget as HTMLImageElement;
         const attr = imgElement.dataset.edit;
         const current = foundry.utils.getProperty(this.action, attr!) as string | undefined;
-        const { img } = ItemPTR2e.getDefaultArtwork(this.document.toObject()) ?? {};
+        const { img } = CONFIG.Item.documentClass.getDefaultArtwork(this.document.toObject()) ?? {};
         const fp = new FilePicker({
           current,
           type: "image",

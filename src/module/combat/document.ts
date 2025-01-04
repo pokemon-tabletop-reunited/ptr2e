@@ -1,11 +1,3 @@
-import type {
-  CombatantSystemPTR2e,
-  CombatSystemPTR2e,
-  SummonCombatantSystem
-} from "@combat";
-import {
-  RoundCombatantSystem
-} from "@combat";
 import type { InexactPartial } from "fvtt-types/utils";
 
 class CombatPTR2e extends Combat {
@@ -24,11 +16,11 @@ class CombatPTR2e extends Combat {
   }
 
   get roundCombatant(): Combatant.ConfiguredInstance {
-    return this.combatants.get(RoundCombatantSystem.id) as Combatant.ConfiguredInstance;
+    return this.combatants.get(CONFIG.PTR.Combatant.dataModels.round.id) as Combatant.ConfiguredInstance;
   }
 
   get roundIndex(): number {
-    return this.turns.findIndex((c) => c.id === RoundCombatantSystem.id);
+    return this.turns.findIndex((c) => c.id === CONFIG.PTR.Combatant.dataModels.round.id);
   }
 
   override async rollInitiative(
@@ -176,11 +168,11 @@ class CombatPTR2e extends Combat {
     const combatantUpdateData: Record<string, {
       _id: string;
       initiative: number;
-      system?: Partial<CombatantSystemPTR2e["_source"]>;
+      system?: Partial<PTR.Combatant.SystemSource>;
     }> = {};
 
     // Reduce everyone's initiative by the current combatant's initiative
-    let initiativeReduction = nextCombatant.type === "summon" && (nextCombatant.system as SummonCombatantSystem).delay !== null ? 0 : nextCombatant.initiative ?? 0;
+    let initiativeReduction = nextCombatant.type === "summon" && (nextCombatant.system as PTR.Combatant.System.Summon.Instance).delay !== null ? 0 : nextCombatant.initiative ?? 0;
     if (nextCombatant.type === "round") {
       const afterRound = this.turns[getNext(next)];
       if (!afterRound) {
@@ -209,12 +201,12 @@ class CombatPTR2e extends Combat {
     }
 
     for (const combatant of this.turns) {
-      if (combatant.type === "summon" && (combatant.system as SummonCombatantSystem).delay !== null && !combatant.isDefeated) {
+      if (combatant.type === "summon" && (combatant.system as PTR.Combatant.System.Summon.Instance).delay !== null && !combatant.isDefeated) {
         combatantUpdateData[combatant._id!] = {
           _id: combatant._id!,
           initiative: 999,
-          system: { //@ts-expect-error - This is a summon, so the system is guaranteed to be a SummonCombatantSystem
-            delay: (combatant.system as SummonCombatantSystem).delay! - 1,
+          system: { //@ts-expect-error - This is a summon, so the system is guaranteed to be a PTR.Combatant.System.Summon.Instance
+            delay: (combatant.system as PTR.Combatant.System.Summon.Instance).delay! - 1,
             activationsHad: combatantUpdateData[combatant._id!]?.system?.activationsHad ?? combatant.system.activations ?? 0,
           }
         };
@@ -234,7 +226,7 @@ class CombatPTR2e extends Combat {
 
   _prepareAdvanceEffectTurnData(
     data: ReturnType<CombatPTR2e["_prepareTurnUpdateData"]> & {
-      system?: Partial<CombatSystemPTR2e["_source"]>;
+      system?: Partial<PTR.Combat.SystemSource>;
     }
   ) {
     const currentTurn = this.system.turn;
@@ -304,11 +296,11 @@ class CombatPTR2e extends Combat {
     const turns = this.combatants.contents.sort(this._sortCombatants) as Combatant.ConfiguredInstance[];
     if (this.turn !== null) this.turn = Math.clamp(this.turn, 0, turns.length - 1);
 
-    const delaySummons = turns.filter(c => c.type === "summon" && (c.system as SummonCombatantSystem).delay !== null).sort(this._sortCombatants) as Combatant.ConfiguredInstance[];
+    const delaySummons = turns.filter(c => c.type === "summon" && (c.system as PTR.Combatant.System.Summon.Instance).delay !== null).sort(this._sortCombatants) as Combatant.ConfiguredInstance[];
     for (const summon of delaySummons) {
       // Delayed summons go after X amount of other activations, instead of being based on AV.
       // Thus, insert the summon at the correct position in the turn order.
-      const delay = (summon.system as SummonCombatantSystem).delay!;
+      const delay = (summon.system as PTR.Combatant.System.Summon.Instance).delay!;
       if (delay === -2) continue;
 
       turns.splice(turns.indexOf(delaySummons[0]), 1);
@@ -468,7 +460,7 @@ class CombatPTR2e extends Combat {
 }
 
 interface CombatPTR2e extends Combat {
-  system: CombatSystemPTR2e;
+  system: PTR.Combat.SystemInstance;
 }
 
 export default CombatPTR2e;

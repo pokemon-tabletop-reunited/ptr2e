@@ -1,4 +1,3 @@
-import type { ActorPTR2e } from "@actor";
 import BasicChangeSystem from "./basic.ts";
 import type { ChangeModelSchema } from "./change.ts";
 
@@ -32,7 +31,7 @@ class StatsAlterationChangeSystem extends BasicChangeSystem<StatsAlterationChang
     spe: "system.attributes.spe.base",
   } as const;
 
-  override apply(actor: ActorPTR2e, rollOptions?: string[] | Set<string> | null): void {
+  override apply(actor: Actor.ConfiguredInstance, rollOptions?: string[] | Set<string> | null): void {
     if (this.ignored) return;
 
     rollOptions ??= this.predicate.length > 0 ? new Set(rollOptions ?? actor.getRollOptions()) : null;
