@@ -1,8 +1,6 @@
-import type { ChangeModel, Trait } from "@data";
 import { sluggify } from "@utils";
 import { processGrantDeletions } from "./changes/grant-item.ts";
 import { AbilitySystemModel } from "@item/data/index.ts";
-import type { EffectDurationData } from "node_modules/fvtt-types/src/foundry/common/documents/_types.d.mts";
 
 class ActiveEffectPTR2e extends ActiveEffect {
   /** Has this document completed `DataModel` initialization? */
@@ -34,7 +32,7 @@ class ActiveEffectPTR2e extends ActiveEffect {
     return this.system.changes ?? [];
   }
 
-  get traits(): Collection<Trait> {
+  get traits(): Collection<PTR.Models.Trait.Instance> {
     return this.system.traits;
   }
 
@@ -58,7 +56,7 @@ class ActiveEffectPTR2e extends ActiveEffect {
       this.initialized = true;
       super.prepareData();
 
-      for (const change of this.changes) {
+      for (const change of this.system.changes) {
         change.prepareData?.();
       }
     }
@@ -91,14 +89,14 @@ class ActiveEffectPTR2e extends ActiveEffect {
     }
   }
 
-  
+
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   override apply(actor: Actor.ConfiguredInstance, _change: any, options?: string[]): unknown {
-    const change = _change as ChangeModel;
+    const change = _change as PTR.ActiveEffect.Changes.Instance;
     if (this.parent instanceof CONFIG.Item.documentClass && this.parent && this.parent.system instanceof AbilitySystemModel) {
       if (this.parent.system.suppress) return;
     }
-    return this.system.apply(actor, change, options);
+    return (this.system as PTR.ActiveEffect.SystemInstance).apply(actor, change, options);
   }
 
   getRollOptions(prefix = this.type, { includeGranter = true } = {}): string[] {
@@ -128,7 +126,7 @@ class ActiveEffectPTR2e extends ActiveEffect {
     return this.system.getRollOptions(options);
   }
 
-  targetsActor(): this is ActiveEffectPTR2e {
+  targetsActor(): this is ActiveEffectPTR2e & { target: Actor.ConfiguredInstance } {
     return this.modifiesActor;
   }
 
@@ -150,7 +148,7 @@ class ActiveEffectPTR2e extends ActiveEffect {
    * Override the implementation of ActiveEffect#_prepareDuration to support activation-based initiative.
    * Duration is purely handled in terms of combat turns elapsed.
    */
-  override _prepareDuration(): Omit<ActiveEffectDuration, keyof EffectDurationData> {
+  override _prepareDuration(): EffectDurationData {
     const d = this.duration;
 
     // Turn-based duration
@@ -219,16 +217,16 @@ class ActiveEffectPTR2e extends ActiveEffect {
   }
 
   override toObject(source: true): this["_source"];
-  override toObject(source?: boolean): ReturnType<this["schema"]["toObject"]>;
-  override toObject(source?: boolean): this["_source"] | ReturnType<this["schema"]["toObject"]> {
-    const data = super.toObject(source);
+  override toObject(source?: boolean): PTR.ActiveEffect.Source;
+  override toObject(source?: boolean): this["_source"] | PTR.ActiveEffect.Source {
+    const data = super.toObject(source)
     //@ts-expect-error - Figure out the proper type here later
     data.changes = this.changes.map((c) => c.toObject())
-    return data!;
+    return data;
   }
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  override async _preCreate(data: foundry.data.fields.SchemaField.AssignmentType<ActiveEffect.Schema>, options: foundry.abstract.Document.PreCreateOptions<any>, user: User): Promise<boolean | void> {
+  override async _preCreate(data: PTR.ActiveEffect.SourceWithSystem, options: foundry.abstract.Document.PreCreateOptions<any>, user: User): Promise<boolean | void> {
     if (!options.keepId && data._id) {
       const statusEffect = CONFIG.statusEffects.find((effect) => effect._id === data._id);
       if (statusEffect) options.keepId = true;
@@ -273,7 +271,7 @@ class ActiveEffectPTR2e extends ActiveEffect {
 
   // TODO: Clean this up cause god it's a mess.
   protected override async _preUpdate(
-    changed: foundry.data.fields.SchemaField.AssignmentType<Actor.Schema>,
+    changed: PTR.ActiveEffect.SourceWithSystem,
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     options: foundry.abstract.Document.PreUpdateOptions<any>,
     user: User
@@ -316,7 +314,7 @@ class ActiveEffectPTR2e extends ActiveEffect {
       );
     };
 
-    const expanded = foundry.utils.expandObject(changed);
+    const expanded = foundry.utils.expandObject(changed) as PTR.ActiveEffect.SourceWithSystem
     if (isValidChargesArray(expanded)) {
       parseChangePath(expanded as { changes: unknown[]; system?: unknown });
     } else if (isValidIndexPathObject(expanded)) {
@@ -335,6 +333,7 @@ class ActiveEffectPTR2e extends ActiveEffect {
       parseIndexPaths(expanded as { system: { changes: Record<number, unknown> } });
     }
     foundry.utils.setProperty(changed, "system.changes", (expanded.system as Record<string, unknown>).changes);
+    //@ts-expect-error - Should be optional
     delete changed.changes;
 
     return super._preUpdate(changed, options, user);
@@ -344,11 +343,12 @@ class ActiveEffectPTR2e extends ActiveEffect {
     data: ActiveEffect.ConstructorData[],
     context: Record<string, unknown> & {
       temporary?: boolean;
+      parent?: Actor.ConfiguredInstance | Item.ConfiguredInstance | null;
     } = {}
   ): Promise<ActiveEffect.ConfiguredInstance[] | undefined> {
     const sources = data.map((d) =>
       d instanceof ActiveEffectPTR2e ? (d.toObject()) : d
-    );
+    ) as PTR.ActiveEffect.SourceWithSystem[];
 
     const parent = context.parent;
     if (!parent) return super.createDocuments(sources, context)
@@ -364,14 +364,14 @@ class ActiveEffectPTR2e extends ActiveEffect {
             (e) => e.slug === sluggify(source.name)
           );
           if (existing?.system.stacks) {
-            existing.update({ "system.stacks": existing.system.stacks + (source.system?.stacks || 1) });
+            existing.update({ "system": { "stacks": existing.system.stacks + (source.system?.stacks || 1) } });
             return [];
           }
           if ((
             (source.system?.traits as string[])?.includes("major-affliction")
             || (source.system?.traits as string[])?.includes("minor-affliction")
           ) && existing?.duration.turns) {
-            existing.update({ "duration.turns": existing.duration.turns + (source.duration?.turns || 1) });
+            existing.update({ "duration": { "turns": existing.duration.turns + (source.duration?.turns || 1) } });
             return [];
           }
         }
@@ -406,7 +406,7 @@ class ActiveEffectPTR2e extends ActiveEffect {
     }
 
     if (outputItemSources.length) {
-      await CONFIG.Item.documentClass.createDocuments( //@ts-expect-error - this should not error
+      await CONFIG.Item.documentClass.createDocuments(
         outputItemSources,
         context
       );
@@ -429,7 +429,7 @@ class ActiveEffectPTR2e extends ActiveEffect {
 
       // Run Change Model pre-delete callbacks
       for (const effect of effects) {
-        for (const change of effect.changes) {
+        for (const change of effect.system.changes) {
           await change.preDelete?.({ pendingItems: items, context });
         }
 
@@ -449,7 +449,7 @@ class ActiveEffectPTR2e extends ActiveEffect {
 }
 
 interface ActiveEffectPTR2e {
-  constructor: typeof ActiveEffectPTR2e;
+  system: PTR.ActiveEffect.SystemInstance;
 
   _name: string;
 }

@@ -174,7 +174,7 @@ class DataInspector extends foundry.applications.api.HandlebarsApplicationMixin(
     };
   }
 
-  override async _prepareContext(options: foundry.applications.api.HandlebarsApplicationMixin.HandlebarsRenderOptions) {
+  override async _prepareContext(options: foundry.applications.api.HandlebarsApplicationMixin.HandlebarsRenderOptions): Promise<AnyObject> {
     const context = await super._prepareContext(options) as Record<string, unknown>,
       doc = this.document,
       type = doc.type;

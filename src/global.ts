@@ -249,6 +249,7 @@ declare global {
           removeOnExit: boolean;
           amount?: number;
         };
+        stacks?: boolean
       }
     }
     ChatMessage: {

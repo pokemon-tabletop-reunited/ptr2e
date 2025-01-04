@@ -1,4 +1,3 @@
-import type ChangeModel from "@module/effects/changes/change.ts";
 import { formatSlug } from "@utils";
 
 class Trait {
@@ -49,7 +48,7 @@ interface Trait {
   description: string,
   virtual?: boolean,
   type?: "narrative" | "automated"
-  changes: ChangeModel['_source'][]
+  changes: PTR.ActiveEffect.Changes.Source[]
 }
 
 // interface Keyword {
@@ -58,5 +57,15 @@ interface Trait {
 //     traits: string[],
 //     description: string,
 // }
+
+declare global {
+  namespace PTR {
+    namespace Models {
+      namespace Trait {
+        type Instance = Trait
+      }
+    }
+  }
+}
 
 export default Trait;

@@ -1,13 +1,12 @@
 import { PTRTour } from "./base.ts";
-import type ActiveEffectConfig from "@module/effects/sheet.ts";
 import { DataInspector } from "@module/apps/data-inspector/data-inspector.ts";
 
 export class AutomationTour extends PTRTour {
   private item: PTR.Item.System.Effect.ParentInstance | undefined;
 
-  private effectSheet: foundry.applications.api.ApplicationV2 | undefined;
-  private activeEffectSheet: foundry.applications.api.ApplicationV2 | undefined;
-  private dataInspector: foundry.applications.api.ApplicationV2 | undefined;
+  private effectSheet: foundry.applications.api.ApplicationV2.Any | undefined;
+  private activeEffectSheet: foundry.applications.api.ApplicationV2.Any | undefined;
+  private dataInspector: foundry.applications.api.ApplicationV2.Any | undefined;
 
   override get app() {
     if (["effect-overview", "effect-details", "effect-changes-1", "effect-changes-2", "effect-changes-3"].includes(this.currentStep?.id ?? "")) {
@@ -33,7 +32,7 @@ export class AutomationTour extends PTRTour {
         this.effectSheet = undefined;
       }
       if (!this.activeEffectSheet) {
-        this.activeEffectSheet = (this.item.effects.contents[0] as ActiveEffect.ConfiguredInstance).sheet as unknown as ActiveEffectConfig
+        this.activeEffectSheet = (this.item.effects.contents[0] as ActiveEffect.ConfiguredInstance).sheet
       }
     } else if (["data-inspector-actor", "data-inspector-chat"].includes(this.currentStep?.id ?? "")) {
       if (this.activeEffectSheet) {
@@ -149,7 +148,6 @@ export class AutomationTour extends PTRTour {
         }));
       }
       else {
-        //@ts-expect-error - Incorrect typing
         this.dataInspector = new DataInspector(new CONFIG.ChatMessage.documentClass({
           "type": "attack",
           "flavor": "Tackle",

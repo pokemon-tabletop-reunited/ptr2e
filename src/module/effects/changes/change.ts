@@ -441,6 +441,13 @@ interface ChangeModel {
     context,
   }: ChangeModel.PreCreateParams): Promise<void>;
 
+  /**
+   * Runs before this rules element's parent item is created. The item is temporarilly constructed. A rule element can
+   * alter itself before its parent item is stored on an actor; it can also alter the item source itself in the same
+   * manner.
+   */
+  preDelete?({ pendingItems, context }: ChangeModel.PreDeleteParams): Promise<void>;
+
   /** Runs before the rule's parent effect's owning actor is updated */
   preUpdateActor?(): Promise<{ create: Item.ConstructorData[]; delete: string[]; } | { createEffects: ActiveEffect.ConstructorData[]; deleteEffects: string[]; }>;
 }
