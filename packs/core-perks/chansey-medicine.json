@@ -43,84 +43,10 @@
         "flingItemId": null,
         "offensiveStat": null,
         "defensiveStat": null
-      },
-      {
-        "slug": "acutherapy",
-        "name": "Acutherapy",
-        "type": "attack",
-        "traits": [
-          "contact"
-        ],
-        "range": {
-          "target": "creature",
-          "distance": 1,
-          "unit": "m"
-        },
-        "cost": {
-          "activation": "complex",
-          "powerPoints": 2,
-          "delay": null,
-          "priority": null
-        },
-        "category": "status",
-        "types": [
-          "normal"
-        ],
-        "description": "<p>Effect: Roll 1d8 and raise the Stages of the stat in the corresponding table by +2 for 5 activations.</p><p><ol><li>ATK</li><li>DEF</li><li>SPATK</li><li>SPDEF</li><li>SPD</li><li>ACC</li><li>EVA</li><li>User Choice<></ol></p>",
-        "img": "icons/svg/explosion.svg",
-        "variant": null,
-        "power": null,
-        "accuracy": null,
-        "contestType": "",
-        "contestEffect": "",
-        "free": false,
-        "slot": null,
-        "summon": null,
-        "defaultVariant": null,
-        "flingItemId": null,
-        "offensiveStat": null,
-        "defensiveStat": null
-      },
-      {
-        "slug": "purify",
-        "name": "Purify",
-        "type": "attack",
-        "traits": [
-          "healing"
-        ],
-        "range": {
-          "target": "creature",
-          "distance": 5,
-          "unit": "m"
-        },
-        "cost": {
-          "activation": "simple",
-          "powerPoints": 5,
-          "delay": null,
-          "priority": null
-        },
-        "category": "status",
-        "types": [
-          "poison"
-        ],
-        "description": "<p>Effect: The target is cured of all [Major Affliction]s. If the target is cured this way, the user recovers HP equal to 1/2 their Max HP.</p>",
-        "img": "icons/svg/explosion.svg",
-        "variant": null,
-        "power": null,
-        "accuracy": null,
-        "contestType": "",
-        "contestEffect": "",
-        "free": false,
-        "slot": null,
-        "summon": null,
-        "defaultVariant": null,
-        "flingItemId": null,
-        "offensiveStat": null,
-        "defensiveStat": null
       }
     ],
     "slug": "chansey-medicine",
-    "description": "<p> You gain the [Healer] trait, gaining access to the [Healer] Tutor List. The user learns Touch Up, Purify, and Acutherapy.",
+    "description": "<p> You gain the [Healer] trait, gaining access to the [Healer] Tutor List. The user learns Touch Up, Purify, and Acupressure.",
     "traits": [],
     "prerequisites": [
       {
@@ -189,7 +115,45 @@
             "mode": 2,
             "priority": null,
             "ignored": false
-          }
+          },
+          {
+            "type": "grant-item",
+            "key": "",
+            "value": "Compendium.ptr2e.core-moves.Item.6OK8vhZYljL4X7cd",
+            "predicate": [],
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "reevaluateOnUpdate": false,
+            "inMemoryOnly": false,
+            "allowDuplicate": true,
+            "alterations": [],
+            "track": false,
+            "replaceSelf": false,
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            }
+          },
+          {
+            "type": "grant-item",
+            "key": "",
+            "value": "Compendium.ptr2e.core-moves.Item.Zsg9MXOaKH3vAb6q",
+            "predicate": [],
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "reevaluateOnUpdate": false,
+            "inMemoryOnly": false,
+            "allowDuplicate": true,
+            "alterations": [],
+            "track": false,
+            "replaceSelf": false,
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            }
+          }          
         ],
         "slug": null,
         "traits": [],
