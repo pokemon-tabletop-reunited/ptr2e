@@ -1,0 +1,101 @@
+{
+  "folder": "BImk1fcMbR5akA4z",
+  "name": "Eye of Nightmares",
+  "type": "move",
+  "system": {
+    "_migration": {
+      "version": 0.109,
+      "previous": null
+    },
+    "traits": [],
+    "actions": [
+      {
+        "name": "Eye of Nightmares",
+        "slug": "eye-of-nightmares",
+        "type": "attack",
+        "img": "systems/ptr2e/img/svg/dark_icon.svg",
+        "traits": [
+          "drain-1-10"
+        ],
+        "range": {
+          "target": "enemy",
+          "distance": 5,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 5
+        },
+        "types": [
+          "dark"
+        ],
+        "category": "special",
+        "power": 50,
+        "accuracy": 100,
+        "description": "<p>On hit, the target is @Affliction[confused] 5.</p>"
+      }
+    ],
+    "grade": "E"
+  },
+  "img": "systems/ptr2e/img/svg/dark_icon.svg",
+  "effects": [
+    {
+      "name": "Eye of Nightmares",
+      "type": "affliction",
+      "_id": "EKBdObldtYnbE8Ps",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "eye-of-nightmares-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.confusedconditem",
+            "predicate": [],
+            "chance": 100,
+            "affects": "target",
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0,
+        "priority": 50,
+        "formula": "",
+        "type": "damage"
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.5.0",
+        "createdTime": 1736398977431,
+        "modifiedTime": 1736399015468,
+        "lastModifiedBy": "IXsEzbSWqpGyrmcc"
+      }
+    }
+  ],
+  "flags": {},
+  "_id": "KDfjIv5STQco0KrW"
+}
