@@ -111,8 +111,8 @@ class TokenPTR2e extends Token {
   }
 
   /** Include actor overrides in the clone if it is a preview */
-  override clone(): this {
-    const clone = super.clone() as this;
+  override clone(): PlaceableObject {
+    const clone = super.clone() as unknown as TokenPTR2e;
 
     if (clone.isPreview) {
       clone.document.height = this.document.height;

@@ -18,16 +18,18 @@ import type { CheckContext, CheckContextParams, RollContext, RollContextParams }
 import { extractEffectRolls, extractEphemeralEffects, extractModifiers, extractTargetModifiers, processPreUpdateHooks } from "src/util/change-helpers.ts";
 import * as R from "remeda";
 import { ModifierPTR2e } from "@module/effects/modifiers.ts";
-import { sluggify } from "@utils";
 import { preImportJSON } from "@module/data/doc-helper.ts";
-import { MigrationRunnerBase } from "@module/migration/runner/base.ts";
-import { MigrationList, MigrationRunner } from "@module/migration/index.ts";
 import type SpeciesSystem from "@item/data/species.ts";
 import type { PickableThing } from "@module/apps/pick-a-thing-prompt.ts";
 import { ActorSizePTR2e } from "./data/size.ts";
 import { auraAffectsActor, checkAreaEffects } from "./helpers.ts";
-import type { DeepPartial, InexactPartial } from "fvtt-types/utils";
-import type { AnyDocument } from "node_modules/fvtt-types/src/foundry/client/data/abstract/client-document.d.mts";
+import type { DeepPartial } from "fvtt-types/utils";
+import { sluggify } from "@utils";
+// import type { InexactPartial } from "fvtt-types/utils";
+// import { MigrationRunnerBase } from "@module/migration/runner/base.ts";
+// import { MigrationList, MigrationRunner } from "@module/migration/index.ts";
+// import type { AnyDocument } from "node_modules/fvtt-types/src/foundry/client/data/abstract/client-document.d.mts";
+
 interface ActorParty {
   owner: ActorPTR2e | null;
   party: ActorPTR2e[];
@@ -520,7 +522,7 @@ class ActorPTR2e extends Actor {
     this.statuses.clear();
 
     // Organize non-disabled effects by their application priority
-    const changes = [];
+    const changes: PTR.ActiveEffect.Changes.Source[] = [];
     // Afflictions don't always have changes, so we need to track them separately
     const afflictions: ActiveEffect.ConfiguredInstance[] = [];
     for (const effect of this.allApplicableEffects() as unknown as Generator<
@@ -530,14 +532,14 @@ class ActorPTR2e extends Actor {
     >) {
       if (!effect.active) continue;
       changes.push(
-        ...effect.changes.map((change: PTR.ActiveEffect.Changes.Instance) => {
-          const c = foundry.utils.deepClone(change);
+        ...effect.system.changes.map((change: PTR.ActiveEffect.Changes.Instance) => {
+          const c = foundry.utils.deepClone(change) as PTR.ActiveEffect.Changes.Source;
           c.priority = c.priority ?? c.mode! * 10;
           return c;
         })
       );
       for (const statusId of effect.statuses) this.statuses.add(statusId);
-      if (!effect.changes.length && effect.type === "affliction")
+      if (!effect.system.changes.length && effect.type === "affliction")
         afflictions.push(
           effect as ActiveEffect.ConfiguredInstance
         );
@@ -545,7 +547,7 @@ class ActorPTR2e extends Actor {
     changes.sort((a, b) => a.priority! - b.priority!);
 
     // Apply all changes
-    for (const change of changes) {
+    for (const change of changes) { //@ts-expect-error - FIXME: Based on the above code this seems to be source, however the code clearly expects an Instance, I'm very confused how this functions, and I wrote it myself!
       change.effect.apply(this, change.clone());
     }
     for (const affliction of afflictions) {
@@ -678,7 +680,7 @@ class ActorPTR2e extends Actor {
    * @deprecated
    */
   get allEffects() {
-    const effects = [];
+    const effects: ActiveEffect.ConfiguredInstance[] = [];
     for (const effect of this.allApplicableEffects()) {
       effects.push(effect);
     }
@@ -1067,7 +1069,7 @@ class ActorPTR2e extends Actor {
     },
     health: { old: number; new: number }
   ): Promise<string[]> {
-    const output = [];
+    const output: string[] = [];
 
     for (const { formula, affliction } of group.afflictions) {
       if (!formula) continue;
@@ -1631,279 +1633,279 @@ class ActorPTR2e extends Actor {
     })
   }
 
-  static override async createDocuments<T extends foundry.abstract.Document.AnyConstructor, Temporary extends boolean | undefined>(
-    this: T,
-    data: Actor.ConstructorData[],
-    operation?: Record<string, unknown> & {
-      temporary?: Temporary;
-    }
-  ): Promise<foundry.abstract.Document.ToStoredIf<T, Temporary>[] | undefined> {
-    const sources = data.map((d) => (d instanceof CONFIG.Actor.documentClass ? d.toObject() : d));
+  // static override async createDocuments<T extends foundry.abstract.Document.AnyConstructor, Temporary extends boolean | undefined>(
+  //   this: T,
+  //   data: Actor.ConstructorData[],
+  //   operation?: Record<string, unknown> & {
+  //     temporary?: Temporary;
+  //   }
+  // ): Promise<foundry.abstract.Document.ToStoredIf<T, Temporary>[] | undefined> {
+  //   const sources = data.map((d) => (d instanceof CONFIG.Actor.documentClass ? d.toObject() : d));
 
-    for (const source of [...sources]) {
-      if (!["flags", "items", "system"].some((k) => k in source)) {
-        // The actor has no migratable data: set schema version and return early
-        source.system = {
-          _migration: { version: MigrationRunnerBase.LATEST_SCHEMA_VERSION },
-        };
-      }
-      const lowestSchemaVersion = Math.min(
-        (source.system as { _migration?: { version?: number } })?._migration?.version ?? MigrationRunnerBase.LATEST_SCHEMA_VERSION,
-        ...((source.items ?? []) as PTR.Item.Source[]).map(
-          (i) =>
-            (i?.system as unknown as PTR.Item.ItemSystemPTR)?._migration?.version ??
-            MigrationRunnerBase.LATEST_SCHEMA_VERSION
-        )
-      );
+  //   for (const source of [...sources]) {
+  //     if (!["flags", "items", "system"].some((k) => k in source)) {
+  //       // The actor has no migratable data: set schema version and return early
+  //       source.system = {
+  //         _migration: { version: MigrationRunnerBase.LATEST_SCHEMA_VERSION },
+  //       };
+  //     }
+  //     const lowestSchemaVersion = Math.min(
+  //       (source.system as { _migration?: { version?: number } })?._migration?.version ?? MigrationRunnerBase.LATEST_SCHEMA_VERSION,
+  //       ...((source.items ?? []) as PTR.Item.Source[]).map(
+  //         (i) =>
+  //           (i?.system as unknown as PTR.Item.ItemSystemPTR)?._migration?.version ??
+  //           MigrationRunnerBase.LATEST_SCHEMA_VERSION
+  //       )
+  //     );
 
-      const tokenDefaults = foundry.utils.deepClone(game.settings.get("core", "defaultToken"));
-      const actor = new CONFIG.Actor.documentClass(foundry.utils.mergeObject({ prototypeToken: tokenDefaults }, source));
-      await MigrationRunner.ensureSchemaVersion(
-        actor,
-        MigrationList.constructFromVersion(lowestSchemaVersion)
-      );
+  //     const tokenDefaults = foundry.utils.deepClone(game.settings.get("core", "defaultToken"));
+  //     const actor = new CONFIG.Actor.documentClass(foundry.utils.mergeObject({ prototypeToken: tokenDefaults }, source));
+  //     await MigrationRunner.ensureSchemaVersion(
+  //       actor,
+  //       MigrationList.constructFromVersion(lowestSchemaVersion)
+  //     );
 
-      sources.splice(sources.indexOf(source), 1, actor.toObject());
-    }
+  //     sources.splice(sources.indexOf(source), 1, actor.toObject());
+  //   }
 
-    return super.createDocuments(sources, operation) as Promise<foundry.abstract.Document.ToStoredIf<T, Temporary>[] | undefined>;
-  }
+  //   return super.createDocuments(sources, operation) as Promise<foundry.abstract.Document.ToStoredIf<T, Temporary>[] | undefined>;
+  // }
 
-  static override async createDialog(
-    data: Record<string, unknown> = {},
-    context: Record<string, unknown> & {
-      parent?: AnyDocument;
-      pack: string | null;
-    } &
-      InexactPartial<
-        DialogOptions & {
-          perksOnly?: boolean;
-          types?: string[];
-        }
-      > = { pack: null }) {
-    if (!Array.isArray(context.types)) context.types = this.TYPES.filter(t => t !== "ptu-actor");
-    else {
-      if (context.types.length) context.types = context.types.filter(t => t !== "ptu-actor");
-      else context.types = this.TYPES.filter(t => t !== "ptu-actor");
-    }
-    if (context.pack === undefined) context.pack = null;
-    return super.createDialog(data, context);
-  }
+  // static override async createDialog(
+  //   data: Record<string, unknown> = {},
+  //   context: Record<string, unknown> & {
+  //     parent?: AnyDocument;
+  //     pack: string | null;
+  //   } &
+  //     InexactPartial<
+  //       DialogOptions & {
+  //         perksOnly?: boolean;
+  //         types?: string[];
+  //       }
+  //     > = { pack: null }) {
+  //   if (!Array.isArray(context.types)) context.types = this.TYPES.filter(t => t !== "ptu-actor");
+  //   else {
+  //     if (context.types.length) context.types = context.types.filter(t => t !== "ptu-actor");
+  //     else context.types = this.TYPES.filter(t => t !== "ptu-actor");
+  //   }
+  //   if (context.pack === undefined) context.pack = null;
+  //   return super.createDialog(data, context);
+  // }
 
-  protected override _onEmbeddedDocumentChange(): void {
-    super._onEmbeddedDocumentChange();
+  // protected override _onEmbeddedDocumentChange(): void {
+  //   super._onEmbeddedDocumentChange();
 
-    // Send any accrued warnings to the console
-    this.synthetics.preparationWarnings.flush();
-  }
+  //   // Send any accrued warnings to the console
+  //   this.synthetics.preparationWarnings.flush();
+  // }
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  override async _preCreate(data: foundry.data.fields.SchemaField.AssignmentType<Actor.Schema>, options: foundry.abstract.Document.PreCreateOptions<any>, user: User): Promise<boolean | void> {
-    const result = await super._preCreate(data, options, user);
-    if (result === false) return false;
-    if (this.type === 'ptu-actor') throw new Error("PTU Actors cannot be created directly.");
-    if (options.fail === true) return false;
+  // // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  // override async _preCreate(data: foundry.data.fields.SchemaField.AssignmentType<Actor.Schema>, options: foundry.abstract.Document.PreCreateOptions<any>, user: User): Promise<boolean | void> {
+  //   const result = await super._preCreate(data, options, user);
+  //   if (result === false) return false;
+  //   if (this.type === 'ptu-actor') throw new Error("PTU Actors cannot be created directly.");
+  //   if (options.fail === true) return false;
 
-    if (this.system.party.ownerOf) {
-      const folder = game.folders.get(this.system.party.ownerOf) as Folder.ConfiguredInstance;
-      if (folder.owner) {
-        throw new Error("Cannot create an actor that owns a party folder already owned by another actor.");
-      }
-    }
-  }
+  //   if (this.system.party.ownerOf) {
+  //     const folder = game.folders.get(this.system.party.ownerOf) as Folder.ConfiguredInstance;
+  //     if (folder.owner) {
+  //       throw new Error("Cannot create an actor that owns a party folder already owned by another actor.");
+  //     }
+  //   }
+  // }
 
-  override async _preUpdate(
-    changed: PTR.Actor.SourceWithSystem,
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    options: foundry.abstract.Document.PreUpdateOptions<any>,
-    user: User
-  ): Promise<boolean | void> {
-    if (!changed) return false;
-    if (changed.system?.party?.ownerOf) {
-      const folder = game.folders.get(changed.system.party.ownerOf as string) as Folder.ConfiguredInstance;
-      if (folder?.owner && !this.uuid?.endsWith(folder.owner)) {
-        throw new Error("Cannot change the owner of a party folder to an actor that does not own it. Please remove the current party owner first.");
-      }
-    }
+  // override async _preUpdate(
+  //   changed: PTR.Actor.SourceWithSystem,
+  //   // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  //   options: foundry.abstract.Document.PreUpdateOptions<any>,
+  //   user: User
+  // ): Promise<boolean | void> {
+  //   if (!changed) return false;
+  //   if (changed.system?.party?.ownerOf) {
+  //     const folder = game.folders.get(changed.system.party.ownerOf as string) as Folder.ConfiguredInstance;
+  //     if (folder?.owner && !this.uuid?.endsWith(folder.owner)) {
+  //       throw new Error("Cannot change the owner of a party folder to an actor that does not own it. Please remove the current party owner first.");
+  //     }
+  //   }
 
-    if (changed.system?.health?.value !== undefined) {
-      const fainted = this.effects.get("faintedcondition") !== undefined;
-      if ((changed.system.health.value as number) <= 0 && !fainted) {
-        const effects: ActiveEffect.ConstructorData[] = [];
-        effects.push(
-          (
-            await CONFIG.ActiveEffect.documentClass.fromStatusEffect("dead")
-          ).toObject() as ActiveEffect.ConstructorData
-        );
+  //   if (changed.system?.health?.value !== undefined) {
+  //     const fainted = this.effects.get("faintedcondition") !== undefined;
+  //     if ((changed.system.health.value as number) <= 0 && !fainted) {
+  //       const effects: ActiveEffect.ConstructorData[] = [];
+  //       effects.push(
+  //         (
+  //           await CONFIG.ActiveEffect.documentClass.fromStatusEffect("dead")
+  //         ).toObject() as ActiveEffect.ConstructorData
+  //       );
 
-        const weary = this.effects.get("wearycondition00") as
-          | ActiveEffect.ConfiguredInstance
-          | undefined;
-        if (!weary) {
-          effects.push(
-            (
-              await CONFIG.ActiveEffect.documentClass.fromStatusEffect("weary")
-            ).toObject() as ActiveEffect.ConstructorData
-          );
-        } else {
-          await weary.update({ "system.stacks": weary.system.stacks + 1 });
-        }
+  //       const weary = this.effects.get("wearycondition00") as
+  //         | ActiveEffect.ConfiguredInstance
+  //         | undefined;
+  //       if (!weary) {
+  //         effects.push(
+  //           (
+  //             await CONFIG.ActiveEffect.documentClass.fromStatusEffect("weary")
+  //           ).toObject() as ActiveEffect.ConstructorData
+  //         );
+  //       } else {
+  //         await weary.update({ "system.stacks": weary.system.stacks + 1 });
+  //       }
 
-        await this.createEmbeddedDocuments("ActiveEffect", effects, { keepId: true });
-      } else if ((changed.system.health.value as number) > 0 && fainted) {
-        await this.deleteEmbeddedDocuments("ActiveEffect", ["faintedcondition"]);
-      }
-    }
+  //       await this.createEmbeddedDocuments("ActiveEffect", effects, { keepId: true });
+  //     } else if ((changed.system.health.value as number) > 0 && fainted) {
+  //       await this.deleteEmbeddedDocuments("ActiveEffect", ["faintedcondition"]);
+  //     }
+  //   }
 
-    if (changed.system?.advancement?.experience?.current !== undefined) {
-      const next = this.system.advancement.experience.next;
-      if (next && Number(changed.system.advancement.experience.current) >= next) {
-        changed.flags ??= {};
-        changed.flags.ptr2e ??= {};
-        changed.flags.ptr2e.sheet ??= {};
-        changed.flags.ptr2e.sheet.perkFlash = true;
-      }
-    }
+  //   if (changed.system?.advancement?.experience?.current !== undefined) {
+  //     const next = this.system.advancement.experience.next;
+  //     if (next && Number(changed.system.advancement.experience.current) >= next) {
+  //       changed.flags ??= {};
+  //       changed.flags.ptr2e ??= {};
+  //       changed.flags.ptr2e.sheet ??= {};
+  //       changed.flags.ptr2e.sheet.perkFlash = true;
+  //     }
+  //   }
 
-    if (changed.system?.shield !== undefined) {
-      if (
-        typeof changed.system.shield.value === "number" &&
-        changed.system.shield.value > this.system.shield.value
-      ) {
-        changed.system.shield.max ??= changed.system.shield.value;
-      } else if (changed.system.shield.value === 0) {
-        changed.system.shield.max = 0;
-      }
-    }
+  //   if (changed.system?.shield !== undefined) {
+  //     if (
+  //       typeof changed.system.shield.value === "number" &&
+  //       changed.system.shield.value > this.system.shield.value
+  //     ) {
+  //       changed.system.shield.max ??= changed.system.shield.value;
+  //     } else if (changed.system.shield.value === 0) {
+  //       changed.system.shield.max = 0;
+  //     }
+  //   }
 
-    if (changed.system?.traits !== undefined && this.system?.traits?.suppressedTraits?.size) {
-      if (changed.system.traits instanceof Set) {
-        changed.system.traits = Array.from(changed.system.traits);
-      }
-      else if (!Array.isArray(changed.system.traits)) {
-        //@ts-expect-error - During an update this should be an array
-        if (changed.system.traits instanceof Collection) changed.system.traits = [...changed.system.traits];
-        else changed.system.traits = [];
-      }
+  //   if (changed.system?.traits !== undefined && this.system?.traits?.suppressedTraits?.size) {
+  //     if (changed.system.traits instanceof Set) {
+  //       changed.system.traits = Array.from(changed.system.traits);
+  //     }
+  //     else if (!Array.isArray(changed.system.traits)) {
+  //       //@ts-expect-error - During an update this should be an array
+  //       if (changed.system.traits instanceof Collection) changed.system.traits = [...changed.system.traits];
+  //       else changed.system.traits = [];
+  //     }
 
-      const suppressedTraits = this.system.traits.suppressedTraits;
-      const sourceTraits = this.system._source.traits!;
-      const intersection = sourceTraits.filter(trait => suppressedTraits.has(trait));
-      if (intersection.length) {
-        changed.system.traits = Array.from(new Set([...changed.system.traits, ...intersection]))
-      }
-    }
+  //     const suppressedTraits = this.system.traits.suppressedTraits;
+  //     const sourceTraits = this.system._source.traits!;
+  //     const intersection = sourceTraits.filter(trait => suppressedTraits.has(trait));
+  //     if (intersection.length) {
+  //       changed.system.traits = Array.from(new Set([...changed.system.traits, ...intersection]))
+  //     }
+  //   }
 
-    if (changed.system?.advancement?.experience?.current !== undefined) {
-      if (this.species?.moves?.levelUp?.length) {
-        // Check if level-up occurs
-        const newExperience = Number(changed.system.advancement.experience.current);
-        const nextExperienceThreshold = this.system.advancement.experience.next;
-        if (nextExperienceThreshold && newExperience >= nextExperienceThreshold) {
-          const level = this.system.getLevel(newExperience);
-          const currentLevel = this.system.advancement.level;
+  //   if (changed.system?.advancement?.experience?.current !== undefined) {
+  //     if (this.species?.moves?.levelUp?.length) {
+  //       // Check if level-up occurs
+  //       const newExperience = Number(changed.system.advancement.experience.current);
+  //       const nextExperienceThreshold = this.system.advancement.experience.next;
+  //       if (nextExperienceThreshold && newExperience >= nextExperienceThreshold) {
+  //         const level = this.system.getLevel(newExperience);
+  //         const currentLevel = this.system.advancement.level;
 
-          const newMoves = this.species.moves.levelUp.filter(move => move.level > currentLevel && move.level <= level).filter(move => !this.itemTypes.move.some(item => item.slug == move.name));
-          if (newMoves.length) {
-            const moves = (await Promise.all(newMoves.map(move => fromUuid<PTR.Item.System.Move.ParentInstance>(move.uuid)))).flatMap((move) => move ?? []);
-            changed.items ??= [];
-            //@ts-expect-error - Asserted that this is an Array.
-            changed.items.push(...moves.map(move => move.toObject()));
-          }
-        }
-      }
-    }
+  //         const newMoves = this.species.moves.levelUp.filter(move => move.level > currentLevel && move.level <= level).filter(move => !this.itemTypes.move.some(item => item.slug == move.name));
+  //         if (newMoves.length) {
+  //           const moves = (await Promise.all(newMoves.map(move => fromUuid<PTR.Item.System.Move.ParentInstance>(move.uuid)))).flatMap((move) => move ?? []);
+  //           changed.items ??= [];
+  //           //@ts-expect-error - Asserted that this is an Array.
+  //           changed.items.push(...moves.map(move => move.toObject()));
+  //         }
+  //       }
+  //     }
+  //   }
 
-    // 
-    try {
-      const updated = this.clone(changed, { keepId: true, addSource: true });
-      await processPreUpdateHooks(updated);
-    } catch (err) {
-      console.error(err);
-    }
+  //   // 
+  //   try {
+  //     const updated = this.clone(changed, { keepId: true, addSource: true });
+  //     await processPreUpdateHooks(updated);
+  //   } catch (err) {
+  //     console.error(err);
+  //   }
 
-    return super._preUpdate(changed, options, user);
-  }
+  //   return super._preUpdate(changed, options, user);
+  // }
 
-  protected override _onUpdate(
-    changed: foundry.data.fields.SchemaField.InnerAssignmentType<Actor.Schema>,
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    options: foundry.abstract.Document.OnUpdateOptions<any>,
-    userId: string
-  ): void {
-    super._onUpdate(changed, options, userId);
+  // protected override _onUpdate(
+  //   changed: foundry.data.fields.SchemaField.InnerAssignmentType<Actor.Schema>,
+  //   // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  //   options: foundry.abstract.Document.OnUpdateOptions<any>,
+  //   userId: string
+  // ): void {
+  //   super._onUpdate(changed, options, userId);
 
-    // if (game.ptr.web.actor === this) game.ptr.web.refresh({ nodeRefresh: true });
-  }
+  //   // if (game.ptr.web.actor === this) game.ptr.web.refresh({ nodeRefresh: true });
+  // }
 
-  protected override async _onCreateDescendantDocuments(
-    parent: ClientDocument,
-    collection: "effects" | "items",
-    documents: ActiveEffect.ConfiguredInstance[] | Item.ConfiguredInstance[],
-    results: ActiveEffect.ConstructorData[] | Item.ConstructorData[],
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    options: foundry.abstract.Document.OnCreateOptions<any> & InexactPartial<{ render: boolean }>,
-    userId: string
-  ) {
-    super._onCreateDescendantDocuments(parent, collection, documents, results, options, userId);
-    // if (game.ptr.web.actor === this) await game.ptr.web.refresh({ nodeRefresh: true });
-    if (!this.unconnectedRoots.length) return;
+  // protected override async _onCreateDescendantDocuments(
+  //   parent: ClientDocument,
+  //   collection: "effects" | "items",
+  //   documents: ActiveEffect.ConfiguredInstance[] | Item.ConfiguredInstance[],
+  //   results: ActiveEffect.ConstructorData[] | Item.ConstructorData[],
+  //   // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  //   options: foundry.abstract.Document.OnCreateOptions<any> & InexactPartial<{ render: boolean }>,
+  //   userId: string
+  // ) {
+  //   super._onCreateDescendantDocuments(parent, collection, documents, results, options, userId);
+  //   // if (game.ptr.web.actor === this) await game.ptr.web.refresh({ nodeRefresh: true });
+  //   if (!this.unconnectedRoots.length) return;
 
-    function isEffect(
-      collection: "effects" | "items",
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      _documents: any[]
-    ): _documents is ActiveEffect.ConfiguredInstance[] {
-      return collection === "effects";
-    }
-    if (isEffect(collection, documents)) return;
+  //   function isEffect(
+  //     collection: "effects" | "items",
+  //     // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  //     _documents: any[]
+  //   ): _documents is ActiveEffect.ConfiguredInstance[] {
+  //     return collection === "effects";
+  //   }
+  //   if (isEffect(collection, documents)) return;
 
-    const perks = (documents as Item.ConfiguredInstance[]).filter((d) => d.type === "perk") as PTR.Item.System.Perk.ParentInstance[];
-    if (!perks.length) return;
+  //   const perks = (documents as Item.ConfiguredInstance[]).filter((d) => d.type === "perk") as PTR.Item.System.Perk.ParentInstance[];
+  //   if (!perks.length) return;
 
-    // const updates = [];
-    // const originalRoot = this.originalRoot;
-    // if (!originalRoot) throw new Error("No original root found.");
-    // // const originalRootNode = game.ptr.web.collection.getName(originalRoot.slug, {
-    // //   strict: true,
-    // // });
+  //   // const updates = [];
+  //   // const originalRoot = this.originalRoot;
+  //   // if (!originalRoot) throw new Error("No original root found.");
+  //   // // const originalRootNode = game.ptr.web.collection.getName(originalRoot.slug, {
+  //   // //   strict: true,
+  //   // // });
 
-    // // for (const root of this.unconnectedRoots) {
-    // //   // const rootNode = game.ptr.web.collection.getName(root.slug, { strict: true });
+  //   // // for (const root of this.unconnectedRoots) {
+  //   // //   // const rootNode = game.ptr.web.collection.getName(root.slug, { strict: true });
 
-    // //   // const path = game.ptr.web.collection.graph.getPurchasedPath(originalRootNode, rootNode);
-    // //   if (path) {
-    // //     updates.push({ _id: root.id, "system.cost": 1 });
-    // //   }
-    // // }
-    // if (updates.length) await this.updateEmbeddedDocuments("Item", updates);
-  }
+  //   // //   // const path = game.ptr.web.collection.graph.getPurchasedPath(originalRootNode, rootNode);
+  //   // //   if (path) {
+  //   // //     updates.push({ _id: root.id, "system.cost": 1 });
+  //   // //   }
+  //   // // }
+  //   // if (updates.length) await this.updateEmbeddedDocuments("Item", updates);
+  // }
 
-  protected override _onDeleteDescendantDocuments(
-    parent: ClientDocument,
-    collection: "effects" | "items",
-    documents: ClientDocument[],
-    ids: string[],
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    options: foundry.abstract.Document.OnDeleteOptions<any> & InexactPartial<{ render: boolean }>,
-    userId: string
-  ): void {
-    super._onDeleteDescendantDocuments(parent, collection, documents, ids, options, userId);
-    // if (game.ptr.web.actor === this) game.ptr.web.refresh({ nodeRefresh: true });
-  }
+  // protected override _onDeleteDescendantDocuments(
+  //   parent: ClientDocument,
+  //   collection: "effects" | "items",
+  //   documents: ClientDocument[],
+  //   ids: string[],
+  //   // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  //   options: foundry.abstract.Document.OnDeleteOptions<any> & InexactPartial<{ render: boolean }>,
+  //   userId: string
+  // ): void {
+  //   super._onDeleteDescendantDocuments(parent, collection, documents, ids, options, userId);
+  //   // if (game.ptr.web.actor === this) game.ptr.web.refresh({ nodeRefresh: true });
+  // }
 
-  protected override _onUpdateDescendantDocuments(
-    parent: ClientDocument,
-    collection: "effects" | "items",
-    documents: ClientDocument[], //ActiveEffect.ConfiguredInstance[] | Item.ConfiguredInstance[],
-    changes: ActiveEffect.ConstructorData[] | Item.ConstructorData[],
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    options: foundry.abstract.Document.OnUpdateOptions<any> & InexactPartial<{ render: boolean }>,
-    userId: string
-  ): void {
-    super._onUpdateDescendantDocuments(parent, collection, documents, changes, options, userId);
-    // if (game.ptr.web.actor === this) game.ptr.web.refresh({ nodeRefresh: true });
-  }
+  // protected override _onUpdateDescendantDocuments(
+  //   parent: ClientDocument,
+  //   collection: "effects" | "items",
+  //   documents: ClientDocument[], //ActiveEffect.ConfiguredInstance[] | Item.ConfiguredInstance[],
+  //   changes: ActiveEffect.ConstructorData[] | Item.ConstructorData[],
+  //   // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  //   options: foundry.abstract.Document.OnUpdateOptions<any> & InexactPartial<{ render: boolean }>,
+  //   userId: string
+  // ): void {
+  //   super._onUpdateDescendantDocuments(parent, collection, documents, changes, options, userId);
+  //   // if (game.ptr.web.actor === this) game.ptr.web.refresh({ nodeRefresh: true });
+  // }
 
   override async toggleStatusEffect(
     statusId: string,
@@ -1913,7 +1915,7 @@ class ActorPTR2e extends Actor {
     const status = CONFIG.statusEffects.find((e) => e.id === statusId);
     if (!status)
       throw new Error(`Invalid status ID "${statusId}" provided to Actor#toggleStatusEffect`);
-    const existing = [];
+    const existing: string[] = [];
 
     // Find the effect with the static _id of the status effect
     if (status._id) {
@@ -1998,7 +2000,7 @@ class ActorPTR2e extends Actor {
     );
     await this.deleteEmbeddedDocuments(
       "ActiveEffect",
-      applicable.map((s) => s.id)
+      applicable.map((s) => s.id!)
     );
 
 

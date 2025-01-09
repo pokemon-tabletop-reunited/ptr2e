@@ -55,8 +55,8 @@ class CombatPTR2e extends Combat {
   }
 
   public override _sortCombatants(
-    a: { initiative: Maybe<number>; id: string | null, actor: Actor.ConfiguredInstance | null, preview?: boolean },
-    b: { initiative: Maybe<number>; id: string | null, actor: Actor.ConfiguredInstance | null, preview?: boolean },
+    a: { initiative?: Maybe<number>; id: string | null, actor: Actor.ConfiguredInstance | null, preview?: boolean },
+    b: { initiative?: Maybe<number>; id: string | null, actor: Actor.ConfiguredInstance | null, preview?: boolean },
   ): number {
     // Sort initiative ascending, then by speed descending, finally by speed stages ascending
     const resolveTie = (a: Maybe<Actor.ConfiguredInstance>, b: Maybe<Actor.ConfiguredInstance>): number => {
@@ -361,7 +361,7 @@ class CombatPTR2e extends Combat {
   }
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  override async _preCreate(data: foundry.data.fields.SchemaField.AssignmentType<Combat.Schema>, options: foundry.abstract.Document.PreCreateOptions<any>, user: User): Promise<boolean | void> {
+  override async _preCreate(data: foundry.data.fields.SchemaField.AssignmentType<Combat.Schema>, options: foundry.abstract.Document.PreCreateOptions<any>, user: foundry.documents.BaseUser): Promise<boolean | void> {
     await super._preCreate(data, options, user);
 
     const round = new CONFIG.Combatant.documentClass({

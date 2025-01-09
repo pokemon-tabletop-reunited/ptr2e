@@ -147,7 +147,7 @@ const actorSystemSchema = (() => {
       types: new fields.SetField(
         new fields.StringField({
           required: true,
-          choices: getTypes().reduce<Record<PokemonType, string>>(
+          choices: getTypes().reduce(
             (acc, type) => ({ ...acc, [type]: type }),
             {} as Record<PokemonType, string>
           ),

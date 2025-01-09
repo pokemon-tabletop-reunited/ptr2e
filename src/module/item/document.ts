@@ -55,7 +55,7 @@ class ItemPTR2e extends Item {
   getRollOptions(prefix: string = this.type, { includeGranter = true } = {}): string[] {
     const traitOptions = ((): string[] => {
       if (!this.traits) return [];
-      const options = [];
+      const options: string[] = [];
       for (const trait of this.traits) {
         options.push(`trait:${trait.slug}`);
       }
@@ -150,7 +150,7 @@ class ItemPTR2e extends Item {
   }
 
   static override async fromDropData(
-    data: foundry.abstract.Document.DropData<Item.ConfiguredInstance>,
+    data: foundry.abstract.Document.DropData<Item.ConfiguredInstance> | foundry.abstract.Document.DropData<ActiveEffect.ConfiguredInstance>,
     options?: FromDropDataOptions
   ): Promise<Item.ConfiguredInstance | null> {
     if (data?.type !== "ActiveEffect")
@@ -404,9 +404,9 @@ class ItemPTR2e extends Item {
     return super.deleteDocuments(ids, context);
   }
 
-  override getEmbeddedCollection<EmbeddedName extends Exclude<foundry.CONST.EMBEDDED_DOCUMENT_TYPES, "Region" | "RegionBehavior"> | "Actions">(embeddedName: EmbeddedName): Collection<foundry.abstract.Document.ConfiguredInstanceForName<EmbeddedName extends foundry.abstract.Document.Type ? EmbeddedName : never>> {
+  override getEmbeddedCollection<EmbeddedName extends foundry.CONST.EMBEDDED_DOCUMENT_TYPES | "Actions">(embeddedName: EmbeddedName): Collection<foundry.abstract.Document.ConfiguredInstanceForName<EmbeddedName extends foundry.abstract.Document.Type ? EmbeddedName : never>> {
     if (embeddedName === "Actions" && this.hasActions()) return this.actions as unknown as ReturnType<Item["getEmbeddedCollection"]>;
-    return super.getEmbeddedCollection(embeddedName as Exclude<foundry.CONST.EMBEDDED_DOCUMENT_TYPES, "Region" | "RegionBehavior">);
+    return super.getEmbeddedCollection(embeddedName as foundry.CONST.EMBEDDED_DOCUMENT_TYPES);
   }
 
 }

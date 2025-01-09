@@ -227,228 +227,228 @@ class ActiveEffectPTR2e extends ActiveEffect {
   //   return data;
   // }
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  override async _preCreate(data: PTR.ActiveEffect.SourceWithSystem, options: foundry.abstract.Document.PreCreateOptions<any>, user: User): Promise<boolean | void> {
-    if (!options.keepId && data._id) {
-      const statusEffect = CONFIG.statusEffects.find((effect) => effect._id === data._id);
-      if (statusEffect) options.keepId = true;
-    }
+  // // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  // override async _preCreate(data: PTR.ActiveEffect.SourceWithSystem, options: foundry.abstract.Document.PreCreateOptions<any>, user: User): Promise<boolean | void> {
+  //   if (!options.keepId && data._id) {
+  //     const statusEffect = CONFIG.statusEffects.find((effect) => effect._id === data._id);
+  //     if (statusEffect) options.keepId = true;
+  //   }
 
-    const result = await super._preCreate(data, options, user);
-    if (result === false) return false;
+  //   const result = await super._preCreate(data, options, user);
+  //   if (result === false) return false;
 
-    if (this.targetsActor()) {
-      if (data.duration && data.system.stacks && data.system.stacks > 1) {
-        data.duration.turns = data.system.stacks;
-        this.updateSource({
-          duration: {
-            turns: data.system.stacks,
-          },
-        });
-      }
-      if (data.duration?.turns && !data.duration.startTurn) {
-        this.updateSource({
-          duration: {
-            startTurn: this.parent.combatant?.system.activations ?? 0,
-          },
-        });
-      }
+  //   if (this.targetsActor()) {
+  //     if (data.duration && data.system.stacks && data.system.stacks > 1) {
+  //       data.duration.turns = data.system.stacks;
+  //       this.updateSource({
+  //         duration: {
+  //           turns: data.system.stacks,
+  //         },
+  //       });
+  //     }
+  //     if (data.duration?.turns && !data.duration.startTurn) {
+  //       this.updateSource({
+  //         duration: {
+  //           startTurn: this.parent.combatant?.system.activations ?? 0,
+  //         },
+  //       });
+  //     }
 
-      if (this.target.isImmuneToEffect(this)) {
-        ui.notifications.warn(game.i18n.format("PTR2E.Effect.Immune", { effect: this.name, target: this.target.name }));
-        return false;
-      }
-    }
+  //     if (this.target.isImmuneToEffect(this)) {
+  //       ui.notifications.warn(game.i18n.format("PTR2E.Effect.Immune", { effect: this.name, target: this.target.name }));
+  //       return false;
+  //     }
+  //   }
 
-    if (data.description.startsWith("PTR2E.Effect.")) {
-      this.updateSource({
-        description: game.i18n.localize(data.description),
-      });
-    }
+  //   if (data.description.startsWith("PTR2E.Effect.")) {
+  //     this.updateSource({
+  //       description: game.i18n.localize(data.description),
+  //     });
+  //   }
 
-    if (!data.img) this.updateSource({ img: "systems/ptr2e/img/icons/effect_icon.webp" });
+  //   if (!data.img) this.updateSource({ img: "systems/ptr2e/img/icons/effect_icon.webp" });
 
-    return result;
-  }
+  //   return result;
+  // }
 
-  // TODO: Clean this up cause god it's a mess.
-  protected override async _preUpdate(
-    changed: PTR.ActiveEffect.SourceWithSystem,
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    options: foundry.abstract.Document.PreUpdateOptions<any>,
-    user: User
-  ): Promise<boolean | void> {
-    if (!changed?.changes && !changed?.system?.changes) return super._preUpdate(changed, options, user);
+  // // TODO: Clean this up cause god it's a mess.
+  // protected override async _preUpdate(
+  //   changed: PTR.ActiveEffect.SourceWithSystem,
+  //   // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  //   options: foundry.abstract.Document.PreUpdateOptions<any>,
+  //   user: User
+  // ): Promise<boolean | void> {
+  //   if (!changed?.changes && !changed?.system?.changes) return super._preUpdate(changed, options, user);
 
-    const parseChangePath = (expanded: { changes: unknown[]; system?: unknown }) => {
-      expanded.system = foundry.utils.mergeObject(expanded.system ?? {}, {
-        changes: expanded.changes,
-      });
-    };
+  //   const parseChangePath = (expanded: { changes: unknown[]; system?: unknown }) => {
+  //     expanded.system = foundry.utils.mergeObject(expanded.system ?? {}, {
+  //       changes: expanded.changes,
+  //     });
+  //   };
 
-    const parseIndexPaths = (data: { system: { changes: object } }): void => {
-      const current = this.system.changes.map((c) => c.toObject());
-      for (const [key, value] of Object.entries(data.system.changes)) {
-        const index = parseInt(key);
-        if (!current[index]) continue;
+  //   const parseIndexPaths = (data: { system: { changes: object } }): void => {
+  //     const current = this.system.changes.map((c) => c.toObject());
+  //     for (const [key, value] of Object.entries(data.system.changes)) {
+  //       const index = parseInt(key);
+  //       if (!current[index]) continue;
 
-        current[index] = foundry.utils.mergeObject(current[index], value);
-      }
-      data.system.changes = current;
-    };
+  //       current[index] = foundry.utils.mergeObject(current[index], value);
+  //     }
+  //     data.system.changes = current;
+  //   };
 
-    const isValidChargesArray = (data: Record<string, unknown>) => {
-      return "changes" in data && Array.isArray(data.changes) && data.changes.length > 0;
-    };
+  //   const isValidChargesArray = (data: Record<string, unknown>) => {
+  //     return "changes" in data && Array.isArray(data.changes) && data.changes.length > 0;
+  //   };
 
-    const isValidSystemPathObject = (data: Record<string, unknown>) => {
-      return "system" in data && data.system && typeof data.system === "object";
-    };
+  //   const isValidSystemPathObject = (data: Record<string, unknown>) => {
+  //     return "system" in data && data.system && typeof data.system === "object";
+  //   };
 
-    const isValidIndexPathObject = (system: Record<string, unknown>) => {
-      return (
-        "changes" in system &&
-        system.changes &&
-        typeof system.changes === "object" &&
-        !Array.isArray(system.changes) &&
-        Object.keys(system.changes).length > 0 &&
-        Object.keys(system.changes).every((k) => !isNaN(parseInt(k)))
-      );
-    };
+  //   const isValidIndexPathObject = (system: Record<string, unknown>) => {
+  //     return (
+  //       "changes" in system &&
+  //       system.changes &&
+  //       typeof system.changes === "object" &&
+  //       !Array.isArray(system.changes) &&
+  //       Object.keys(system.changes).length > 0 &&
+  //       Object.keys(system.changes).every((k) => !isNaN(parseInt(k)))
+  //     );
+  //   };
 
-    const expanded = foundry.utils.expandObject(changed) as PTR.ActiveEffect.SourceWithSystem
-    if (isValidChargesArray(expanded)) {
-      parseChangePath(expanded as { changes: unknown[]; system?: unknown });
-    } else if (isValidIndexPathObject(expanded)) {
-      parseChangePath(expanded as { changes: unknown[]; system?: unknown });
+  //   const expanded = foundry.utils.expandObject(changed) as PTR.ActiveEffect.SourceWithSystem
+  //   if (isValidChargesArray(expanded)) {
+  //     parseChangePath(expanded as { changes: unknown[]; system?: unknown });
+  //   } else if (isValidIndexPathObject(expanded)) {
+  //     parseChangePath(expanded as { changes: unknown[]; system?: unknown });
 
-      if (
-        isValidSystemPathObject(expanded) &&
-        isValidIndexPathObject(expanded.system as Record<string, unknown>)
-      ) {
-        parseIndexPaths(expanded as { system: { changes: Record<number, unknown> } });
-      }
-    } else if (
-      isValidSystemPathObject(expanded) &&
-      isValidIndexPathObject(expanded.system as Record<string, unknown>)
-    ) {
-      parseIndexPaths(expanded as { system: { changes: Record<number, unknown> } });
-    }
-    foundry.utils.setProperty(changed, "system.changes", (expanded.system as Record<string, unknown>).changes);
-    //@ts-expect-error - Should be optional
-    delete changed.changes;
+  //     if (
+  //       isValidSystemPathObject(expanded) &&
+  //       isValidIndexPathObject(expanded.system as Record<string, unknown>)
+  //     ) {
+  //       parseIndexPaths(expanded as { system: { changes: Record<number, unknown> } });
+  //     }
+  //   } else if (
+  //     isValidSystemPathObject(expanded) &&
+  //     isValidIndexPathObject(expanded.system as Record<string, unknown>)
+  //   ) {
+  //     parseIndexPaths(expanded as { system: { changes: Record<number, unknown> } });
+  //   }
+  //   foundry.utils.setProperty(changed, "system.changes", (expanded.system as Record<string, unknown>).changes);
+  //   //@ts-expect-error - Should be optional
+  //   delete changed.changes;
 
-    return super._preUpdate(changed, options, user);
-  }
+  //   return super._preUpdate(changed, options, user);
+  // }
 
-  static override async createDocuments(
-    data: ActiveEffect.ConstructorData[],
-    context: Record<string, unknown> & {
-      temporary?: boolean;
-      parent?: Actor.ConfiguredInstance | Item.ConfiguredInstance | null;
-    } = {}
-  ): Promise<ActiveEffect.ConfiguredInstance[] | undefined> {
-    const sources = data.map((d) =>
-      d instanceof ActiveEffectPTR2e ? (d.toObject()) : d
-    ) as PTR.ActiveEffect.SourceWithSystem[];
+  // static override async createDocuments(
+  //   data: ActiveEffect.ConstructorData[],
+  //   context: Record<string, unknown> & {
+  //     temporary?: boolean;
+  //     parent?: Actor.ConfiguredInstance | Item.ConfiguredInstance | null;
+  //   } = {}
+  // ): Promise<ActiveEffect.ConfiguredInstance[] | undefined> {
+  //   const sources = data.map((d) =>
+  //     d instanceof ActiveEffectPTR2e ? (d.toObject()) : d
+  //   ) as PTR.ActiveEffect.SourceWithSystem[];
 
-    const parent = context.parent;
-    if (!parent) return super.createDocuments(sources, context)
+  //   const parent = context.parent;
+  //   if (!parent) return super.createDocuments(sources, context)
 
-    const effects = await (async (): Promise<ActiveEffectPTR2e[]> => {
-      const effects = sources.flatMap((source) => {
-        if (!(context.keepId || context.keepEmbeddedIds)) {
-          source._id = foundry.utils.randomID();
-        }
+  //   const effects = await (async (): Promise<ActiveEffectPTR2e[]> => {
+  //     const effects = sources.flatMap((source) => {
+  //       if (!(context.keepId || context.keepEmbeddedIds)) {
+  //         source._id = foundry.utils.randomID();
+  //       }
 
-        if (source.flags?.ptr2e?.stacks !== false) {
-          const existing = (parent.effects.contents as ActiveEffectPTR2e[]).find(
-            (e) => e.slug === sluggify(source.name)
-          );
-          if (existing?.system.stacks) {
-            existing.update({ "system": { "stacks": existing.system.stacks + (source.system?.stacks || 1) } });
-            return [];
-          }
-          if ((
-            (source.system?.traits as string[])?.includes("major-affliction")
-            || (source.system?.traits as string[])?.includes("minor-affliction")
-          ) && existing?.duration.turns) {
-            existing.update({ "duration": { "turns": existing.duration.turns + (source.duration?.turns || 1) } });
-            return [];
-          }
-        }
+  //       if (source.flags?.ptr2e?.stacks !== false) {
+  //         const existing = (parent.effects.contents as ActiveEffectPTR2e[]).find(
+  //           (e) => e.slug === sluggify(source.name)
+  //         );
+  //         if (existing?.system.stacks) {
+  //           existing.update({ "system": { "stacks": existing.system.stacks + (source.system?.stacks || 1) } });
+  //           return [];
+  //         }
+  //         if ((
+  //           (source.system?.traits as string[])?.includes("major-affliction")
+  //           || (source.system?.traits as string[])?.includes("minor-affliction")
+  //         ) && existing?.duration.turns) {
+  //           existing.update({ "duration": { "turns": existing.duration.turns + (source.duration?.turns || 1) } });
+  //           return [];
+  //         }
+  //       }
 
-        return new this(source, { parent });
-      });
-      return effects;
-      // TODO: Possibly implement simple grants for Effects
-    })();
+  //       return new this(source, { parent });
+  //     });
+  //     return effects;
+  //     // TODO: Possibly implement simple grants for Effects
+  //   })();
 
-    const tempItems: Item.ConfiguredInstance[] = [];
-    const outputItemSources: foundry.data.fields.SchemaField.PersistedType<Item.Schema>[] = [];
-    const outputEffectSources = effects.map((e) => e._source);
+  //   const tempItems: Item.ConfiguredInstance[] = [];
+  //   const outputItemSources: foundry.data.fields.SchemaField.PersistedType<Item.Schema>[] = [];
+  //   const outputEffectSources = effects.map((e) => e._source);
 
-    // Process effect preCreate changes for all effects that are going to be added
-    // This may add additional effects or items (such as via GrantItem)
-    for (const effect of effects) {
-      const effectSource: foundry.data.fields.SchemaField.PersistedType<ActiveEffect.Schema> = effect._source;
-      const changes = effect.system.changes ?? [];
+  //   // Process effect preCreate changes for all effects that are going to be added
+  //   // This may add additional effects or items (such as via GrantItem)
+  //   for (const effect of effects) {
+  //     const effectSource: foundry.data.fields.SchemaField.PersistedType<ActiveEffect.Schema> = effect._source;
+  //     const changes = effect.system.changes ?? [];
 
-      for (const change of changes) {
-        const changeSource = change._source;
-        await change.preCreate?.({
-          effectSource,
-          changeSource,
-          pendingEffects: outputEffectSources,
-          pendingItems: outputItemSources,
-          tempItems,
-          context,
-        });
-      }
-    }
+  //     for (const change of changes) {
+  //       const changeSource = change._source;
+  //       await change.preCreate?.({
+  //         effectSource,
+  //         changeSource,
+  //         pendingEffects: outputEffectSources,
+  //         pendingItems: outputItemSources,
+  //         tempItems,
+  //         context,
+  //       });
+  //     }
+  //   }
 
-    if (outputItemSources.length) {
-      await CONFIG.Item.documentClass.createDocuments(
-        outputItemSources,
-        context
-      );
-    }
-    // Create the effects
-    return super.createDocuments(outputEffectSources, context);
-  }
+  //   if (outputItemSources.length) {
+  //     await CONFIG.Item.documentClass.createDocuments(
+  //       outputItemSources,
+  //       context
+  //     );
+  //   }
+  //   // Create the effects
+  //   return super.createDocuments(outputEffectSources, context);
+  // }
 
-  static override async deleteDocuments(
-    ids: string[],
-    context: Record<string, unknown> & {
-      pendingItems?: Item.ConfiguredInstance[];
-    } = {}
-  ): Promise<ActiveEffect.ConfiguredInstance[]> {
-    ids = Array.from(new Set(ids));
-    const actor = context.parent instanceof CONFIG.Actor.documentClass ? context.parent : null;
-    if (actor) {
-      const effects = ids.flatMap(id => actor.effects.get(id) ?? []) as ActiveEffectPTR2e[];
-      const items = context.pendingItems ? [...context.pendingItems] : [] as Item.ConfiguredInstance[];
+  // static override async deleteDocuments(
+  //   ids: string[],
+  //   context: Record<string, unknown> & {
+  //     pendingItems?: Item.ConfiguredInstance[];
+  //   } = {}
+  // ): Promise<ActiveEffect.ConfiguredInstance[]> {
+  //   ids = Array.from(new Set(ids));
+  //   const actor = context.parent instanceof CONFIG.Actor.documentClass ? context.parent : null;
+  //   if (actor) {
+  //     const effects = ids.flatMap(id => actor.effects.get(id) ?? []) as ActiveEffectPTR2e[];
+  //     const items = context.pendingItems ? [...context.pendingItems] : [] as Item.ConfiguredInstance[];
 
-      // Run Change Model pre-delete callbacks
-      for (const effect of effects) {
-        for (const change of effect.system.changes) {
-          await change.preDelete?.({ pendingItems: items, context });
-        }
+  //     // Run Change Model pre-delete callbacks
+  //     for (const effect of effects) {
+  //       for (const change of effect.system.changes) {
+  //         await change.preDelete?.({ pendingItems: items, context });
+  //       }
 
-        // const { processGrantDeletions } = await import("./changes/grant-item.ts");
-        // await processGrantDeletions(effect, null, items, effects, !!context.ignoreRestricted);
-      }
+  //       // const { processGrantDeletions } = await import("./changes/grant-item.ts");
+  //       // await processGrantDeletions(effect, null, items, effects, !!context.ignoreRestricted);
+  //     }
 
-      if (items.length) {
-        const itemIds = Array.from(new Set(items.map(i => i.id!))).filter(id => actor.items.has(id) && !context.pendingItems?.find(i => i.id === id));
-        if (itemIds.length) {
-          await CONFIG.Item.documentClass.deleteDocuments(itemIds, { pendingEffects: effects, parent: actor });
-        }
-      }
-      ids = Array.from(new Set(effects.map(i => i.id))).filter(id => actor.effects.has(id));
-    }
-    return super.deleteDocuments(ids, context);
-  }
+  //     if (items.length) {
+  //       const itemIds = Array.from(new Set(items.map(i => i.id!))).filter(id => actor.items.has(id) && !context.pendingItems?.find(i => i.id === id));
+  //       if (itemIds.length) {
+  //         await CONFIG.Item.documentClass.deleteDocuments(itemIds, { pendingEffects: effects, parent: actor });
+  //       }
+  //     }
+  //     ids = Array.from(new Set(effects.map(i => i.id))).filter(id => actor.effects.has(id));
+  //   }
+  //   return super.deleteDocuments(ids, context);
+  // }
 }
 
 interface ActiveEffectPTR2e {

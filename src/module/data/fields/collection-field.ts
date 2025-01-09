@@ -1,18 +1,18 @@
 import type { AnyObject } from "fvtt-types/utils";
-import type DataModel from "node_modules/fvtt-types/src/foundry/common/abstract/data.d.mts";
-import type { ArrayField, DataField } from "node_modules/fvtt-types/src/foundry/common/data/fields.d.mts";
+
+import fields = foundry.data.fields;
 
 class CollectionField<
-  ElementFieldType extends DataField.Any,
-  Options extends ArrayField.AnyOptions = ArrayField.DefaultOptions<
-    ArrayField.AssignmentElementType<ElementFieldType>
+  ElementFieldType extends fields.DataField.Any,
+  Options extends fields.ArrayField.AnyOptions = fields.ArrayField.DefaultOptions<
+  fields.ArrayField.AssignmentElementType<ElementFieldType>
   >,
-  AssignmentElementType = ArrayField.AssignmentElementType<ElementFieldType>,
-  InitializedElementType = ArrayField.InitializedElementType<ElementFieldType>,
-  AssignmentType = ArrayField.AssignmentType<AssignmentElementType, Options>,
+  AssignmentElementType = fields.ArrayField.AssignmentElementType<ElementFieldType>,
+  InitializedElementType = fields.ArrayField.InitializedElementType<ElementFieldType>,
+  AssignmentType = fields.ArrayField.AssignmentType<AssignmentElementType, Options>,
   InitializedType extends Collection<InitializedElementType> = Collection<InitializedElementType>,
-  PersistedElementType = ArrayField.PersistedElementType<ElementFieldType>,
-  PersistedType extends PersistedElementType[] | null | undefined = ArrayField.PersistedType<
+  PersistedElementType = fields.ArrayField.PersistedElementType<ElementFieldType>,
+  PersistedType extends PersistedElementType[] | null | undefined = fields.ArrayField.PersistedType<
     AssignmentElementType,
     PersistedElementType,
     Options
@@ -28,7 +28,7 @@ class CollectionField<
     this.keyField = keyField;
   }
 
-  override initialize(value: PersistedType, model: DataModel.Any, options?: AnyObject) {
+  override initialize(value: PersistedType, model: foundry.abstract.DataModel.Any, options?: AnyObject) {
     if (!value) return value as unknown as InitializedType;
 
     if (Array.isArray(value)) {
