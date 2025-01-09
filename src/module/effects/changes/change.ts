@@ -65,7 +65,7 @@ class ChangeModel<Schema extends ChangeModelSchema = ChangeModelSchema> extends 
   }
 
   get sourceIndex(): number | null {
-    return this.#sourceIndex ?? this.effect.changes.indexOf(this);
+    return this.#sourceIndex ?? this.effect.system.changes.indexOf(this);
   }
 
   #sourceIndex: number | null = null;
@@ -567,13 +567,13 @@ namespace ChangeModel {
     /** The source of the change in `effectSource`'s `system.changes` array */
     changeSource: foundry.data.fields.SchemaField.AssignmentType<Schema>;
     /** All effects pending creation in a `ActiveEffect.ConfiguredInstance.createDocuments` call */
-    pendingEffects: ActiveEffect.ConstructorData[];
+    pendingEffects: PTR.ActiveEffect.Source[];
     /** All items pending creation in a `ActiveEffect.ConfiguredInstance.createDocuments` call */
-    pendingItems: Item.ConstructorData[];
+    pendingItems: PTR.Item.Source[];
     /** Items temporarily constructed from pending item source */
     tempItems: Item.ConfiguredInstance[];
     /** The context object from the `CONFIG.Item.documentClass.createDocuments` call */
-    context: InexactPartial<Omit<foundry.abstract.Document.DatabaseOperationsFor<"Item", "create">, "ids">>;
+    context: InexactPartial<Omit<foundry.abstract.Document.Database.OperationOf<"Item", "create">, "ids">>;
     /** Whether this preCreate run is from a pre-update reevaluation */
     reevaluation?: boolean;
   }
@@ -582,7 +582,7 @@ namespace ChangeModel {
     /** All items pending deletion in a `CONFIG.Item.documentClass.deleteDocuments` call */
     pendingItems: Item.ConfiguredInstance[];
     /** The context object from the `CONFIG.Item.documentClass.deleteDocuments` call */
-    context: InexactPartial<Omit<foundry.abstract.Document.DatabaseOperationsFor<"Item", "delete">, "ids">>
+    context: InexactPartial<Omit<foundry.abstract.Document.Database.OperationOf<"Item", "delete">, "ids">>
   }
 
   export interface AfterRollParams { }

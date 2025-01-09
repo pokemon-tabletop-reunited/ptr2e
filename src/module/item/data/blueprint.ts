@@ -394,7 +394,7 @@ export default abstract class BlueprintSystem extends HasEmbed(HasMigrations(fou
       })();
 
       const { weight, height } = await (async (): Promise<{ weight: number, height: number }> => {
-        const isHumanoid = evolution.system.traits.includes("humanoid");
+        const isHumanoid = evolution.system.traits?.includes("humanoid");
 
         const randomH = (await new Roll(isHumanoid ? "1d10000000000" : "2d20000").evaluate()).total;
         const randomW = (await new Roll(isHumanoid ? "1d10000000000" : "2d20000").evaluate()).total;
@@ -474,7 +474,7 @@ export default abstract class BlueprintSystem extends HasEmbed(HasMigrations(fou
 
       // TODO: Add skill settings
       const skills = (() => {
-        const totalPoints = (evolution.system.traits.includes("ace") ? 400 : 110) + 10 * (level - 1);
+        const totalPoints = (evolution.system.traits?.includes("ace") ? 400 : 110) + 10 * (level - 1);
 
         const speciesPoints = Math.floor(totalPoints * 0.65);
         const leftOverPoints = totalPoints - speciesPoints;

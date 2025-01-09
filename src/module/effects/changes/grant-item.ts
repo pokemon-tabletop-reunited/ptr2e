@@ -5,7 +5,7 @@ import { isObject, sluggify, tupleHasValue } from "@utils";
 import * as R from "remeda";
 import { UUIDUtils } from "src/util/uuid.ts";
 import type { ChangeModelSchema } from "./change.ts";
-import type { ItemGrantDeleteAction } from "@item/data/data.ts";
+import type { ItemGrantData, ItemGrantDeleteAction } from "@item/data/data.ts";
 import type { InexactPartial } from "fvtt-types/utils";
 
 const ON_DELETE_ACTIONS = ["cascade", "detach", "restrict"] as const;
@@ -435,8 +435,8 @@ export async function processGrantDeletions(effect: ActiveEffect.ConfiguredInsta
   const actor = effect.targetsActor() ? effect.target : effect.parent.actor;
 
   const granter = actor.effects.get((item ? item.flags.ptr2e.grantedBy?.id : effect.flags.ptr2e.grantedBy?.id) ?? "") as ActiveEffect.ConfiguredInstance;
-  const parentGrant = Object.values(granter?.flags.ptr2e.itemGrants ?? {}).find(g => g.id === effect.id || g.id === item?.id);
-  const grants = Object.values(effect.flags.ptr2e.itemGrants ?? {});
+  const parentGrant: ItemGrantData = (Object.values(granter?.flags.ptr2e.itemGrants ?? {}) as ItemGrantData[]).find((g) => g.id === effect.id || g.id === item?.id);
+  const grants: ItemGrantData[] = Object.values(effect.flags.ptr2e.itemGrants ?? {});
 
   // Handle deletion restrictions, aborting early if found in either this item's granter or any of its grants
   if (!ignoreRestricted && granter && parentGrant?.onDelete === "restrict" && !pendingEffects.includes(granter)) {

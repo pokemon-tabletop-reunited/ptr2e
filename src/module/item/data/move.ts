@@ -5,7 +5,7 @@ import type SystemTraitsCollection from "@module/data/system-traits-collection.t
 import type { HasBaseSchema } from "@module/data/mixins/has-base.ts";
 
 const moveSchema = {
-  grade: new foundry.data.fields.StringField({
+  grade: new foundry.data.fields.StringField<{ required: true, initial: string, choices: Record<string, string> }, "E" | "D" | "C" | "B" | "A" | "S", "E" | "D" | "C" | "B" | "A" | "S">({
     required: true,
     initial: "E",
     choices: [
@@ -97,7 +97,7 @@ export default abstract class MoveSystem extends HasEmbed(
   }
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  override async _preCreate(data:  foundry.abstract.TypeDataModel.ParentAssignmentType<MoveSchema, Item.ConfiguredInstance>, options: foundry.abstract.Document.PreCreateOptions<any>, user: User): Promise<boolean | void> {
+  override async _preCreate(data: foundry.abstract.TypeDataModel.ParentAssignmentType<MoveSchema, Item.ConfiguredInstance>, options: foundry.abstract.Document.PreCreateOptions<any>, user: foundry.documents.BaseUser): Promise<boolean | void> {
     if (data.system === undefined) {
       //@ts-expect-error - Actions on source is not a collection but an array
       data.system = { actions: [] };

@@ -1700,7 +1700,7 @@ class ActorPTR2e extends Actor {
   // }
 
   // // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  // override async _preCreate(data: foundry.data.fields.SchemaField.AssignmentType<Actor.Schema>, options: foundry.abstract.Document.PreCreateOptions<any>, user: User): Promise<boolean | void> {
+  // override async _preCreate(data: foundry.data.fields.SchemaField.AssignmentType<Actor.Schema>, options: foundry.abstract.Document.PreCreateOptions<any>, user: foundry.documents.BaseUser): Promise<boolean | void> {
   //   const result = await super._preCreate(data, options, user);
   //   if (result === false) return false;
   //   if (this.type === 'ptu-actor') throw new Error("PTU Actors cannot be created directly.");
@@ -1718,7 +1718,7 @@ class ActorPTR2e extends Actor {
   //   changed: PTR.Actor.SourceWithSystem,
   //   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   //   options: foundry.abstract.Document.PreUpdateOptions<any>,
-  //   user: User
+  //   user: foundry.documents.BaseUser
   // ): Promise<boolean | void> {
   //   if (!changed) return false;
   //   if (changed.system?.party?.ownerOf) {

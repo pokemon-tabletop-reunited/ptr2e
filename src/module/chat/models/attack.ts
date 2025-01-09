@@ -471,7 +471,7 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel<Attack
           )
         ),
         selfEffectRolls: this.selfEffects ? await (async () => {
-          const rolls = [];
+          const rolls: string[] = [];
           for (const roll of this.selfEffects!.rolls) {
             const item = await fromUuid<Item.ConfiguredInstance>(roll.effect);
             if (!item) {

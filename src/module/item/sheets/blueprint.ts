@@ -285,7 +285,7 @@ export default class BlueprintSheet extends foundry.applications.api.HandlebarsA
 
     // If the item was pulled from another list
     if (event.pullMode) {
-      const updates = [];
+      const updates: Record<string, unknown>[] = [];
       if (event.to.className == 'main') {
         if (this.team.owner) {
           updates.push({ _id: this.team.owner.id, owner: false })

@@ -150,7 +150,7 @@ class ActiveEffectConfig extends foundry.applications.api.HandlebarsApplicationM
     }
   }
 
-  override async _prepareContext(options: foundry.applications.api.DocumentSheetV2.RenderOptions): Promise<AnyObject> {
+  override async _prepareContext(options: DeepPartial<foundry.applications.api.DocumentSheetV2.RenderOptions> & { isFirstRender: boolean }): Promise<AnyObject> {
     const context = (await super._prepareContext(options)) as Record<string, unknown>;
 
     context.descriptionHTML = await TextEditor.enrichHTML(this.document.description, {

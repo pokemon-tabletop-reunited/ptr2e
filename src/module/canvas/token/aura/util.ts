@@ -18,7 +18,7 @@ export function getAreaSquares(data: GetAreaSquaresParams): EffectAreaSquare[] {
       move: sources.PointMovementSource,
     }[collisionType];
     const tokenObject = data.token instanceof CONFIG.Token.documentClass ? data.token.object : data.token;
-    return new PointSource({ object: tokenObject });
+    return new PointSource({ object: tokenObject as PlaceableObject.Any});
   })();
 
   const positions = getGridHighlightPositions(data.token.center, data.shape);
@@ -58,7 +58,7 @@ export function getGridHighlightShape({ x, y }: { x: number, y: number }, circle
  * @returns {Point[]}
  * @protected
  */
-export function getGridHighlightPositions({ x, y }: { x: number, y: number }, shape: PIXI.Circle): Point[] {
+export function getGridHighlightPositions({ x, y }: { x: number, y: number }, shape: PIXI.Circle): Canvas.Point[] {
   const grid = canvas.grid!;
   const ox = x, oy = y;
   const bounds = shape.getBounds();
@@ -68,7 +68,7 @@ export function getGridHighlightPositions({ x, y }: { x: number, y: number }, sh
   bounds.pad(1);
 
   // Identify grid space that have their center points covered by the template shape
-  const positions = [];
+  const positions: Canvas.Point[] = [];
   const [i0, j0, i1, j1] = grid.getOffsetRange(bounds);
   for (let i = i0; i < i1; i++) {
     for (let j = j0; j < j1; j++) {

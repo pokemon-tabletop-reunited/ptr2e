@@ -86,7 +86,7 @@ export class FoldersTour extends PTRTour {
       }
       case "opened-party-sheet": {
         const { folder, tourSan, tourSanVoltorb } = await this.getDocuments();
-        
+
         await Actor.updateDocuments([
           {
             _id: tourSan.id,
@@ -117,7 +117,7 @@ export class FoldersTour extends PTRTour {
       }
       case "organize-party": {
         const { folder, tourSan, tourSanVoltorb } = await this.getDocuments();
-        
+
         await Actor.updateDocuments([
           {
             _id: tourSan.id,
@@ -215,7 +215,7 @@ export class FoldersTour extends PTRTour {
       }
       case "open-team-sheet": {
         const { folder, tourSan, tourSanVoltorb } = await this.getDocuments();
-        
+
         await Actor.updateDocuments([
           {
             _id: tourSan.id,
@@ -246,7 +246,7 @@ export class FoldersTour extends PTRTour {
       }
       case "opened-team-sheet": {
         const { folder, tourSan, tourSanVoltorb } = await this.getDocuments();
-        
+
         await Actor.updateDocuments([
           {
             _id: tourSan.id,
@@ -302,15 +302,15 @@ export class FoldersTour extends PTRTour {
     await super._tearDown(complete);
     this.closeDialog();
 
-    const actorsToDelete = [];
+    const actorsToDelete: string[] = [];
 
-    const tourSan = game.actors.get("toursantempactor") as Actor.ConfiguredInstance;
+    const tourSan: Actor.ConfiguredInstance | undefined = game.actors.get("toursantempactor");
     if (tourSan) actorsToDelete.push('toursantempactor')
 
-    const tourSanVoltorb = game.actors.get("toursanstvoltorb") as Actor.ConfiguredInstance;
+    const tourSanVoltorb: Actor.ConfiguredInstance | undefined = game.actors.get("toursanstvoltorb")
     if (tourSanVoltorb) actorsToDelete.push('toursanstvoltorb')
 
-    const folder = game.folders.get("toursantmpfolder") as Folder.ConfiguredInstance;
+    const folder: Folder.ConfiguredInstance | undefined = game.folders.get("toursantmpfolder")
     if (folder) await folder.delete();
 
     await Actor.deleteDocuments(actorsToDelete);

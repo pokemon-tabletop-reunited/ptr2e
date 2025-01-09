@@ -304,7 +304,7 @@ class PartySheetPTR2e extends foundry.applications.api.HandlebarsApplicationMixi
           const li = header.closest(".party-drag-item.box-header")[0];
           if (!li) return;
           const folder = game.folders.get(li.dataset.folderId!);
-          new DocumentOwnershipConfig(folder, {
+          new DocumentOwnershipConfig(folder!, {
             top: Math.min(li.offsetTop, window.innerHeight - 350),
             left: window.innerWidth - 720
           }).render(true);
@@ -324,6 +324,7 @@ class PartySheetPTR2e extends foundry.applications.api.HandlebarsApplicationMixi
           if (!li) return;
           const folder = game.folders.get(li.dataset.folderId!);
           if (!folder) return;
+          // @ts-expect-error - FIXME: fvtt-types are incorrect.
           return folder.exportDialog(null, {
             top: Math.min(li.offsetTop, window.innerHeight - 350),
             left: window.innerWidth - 720,

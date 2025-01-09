@@ -29,7 +29,7 @@ export class Migration104FolderUpdate extends MigrationBase {
             const id  =owner.split(".").at(-1)!;
             const entry = map.get(id) ?? { owner: "", party: "", team: new Set(), folder: folder.id! };
             entry.owner = folder.id!;
-            entry.folder ||= folder.id;
+            entry.folder ||= folder.id!;
             map.set(id, entry);
           }
 
@@ -38,7 +38,7 @@ export class Migration104FolderUpdate extends MigrationBase {
               const id = uuid.split(".").at(-1)!;
               const entry = map.get(id) ?? { owner: "", party: "", team: new Set(), folder: folder.id! };
               entry.party = folder.id!;
-              entry.folder ||= folder.id;
+              entry.folder ||= folder.id!;
               map.set(id, entry);
             }
           }

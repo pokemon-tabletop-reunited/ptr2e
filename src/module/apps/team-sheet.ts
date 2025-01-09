@@ -77,11 +77,11 @@ class TeamSheetPTR2e extends foundry.applications.api.HandlebarsApplicationMixin
   }
 
   override async _prepareContext() {
-    const team = [];
+    const team: {actor: Actor.ConfiguredInstance, party: Actor.ConfiguredInstance[], folder: Folder.ConfiguredInstance}[] = [];
     for (const memberUuid of this.folder.team) {
       const actor = await fromUuid<Actor.ConfiguredInstance>(memberUuid);
       if (actor && actor instanceof CONFIG.Actor.documentClass) {
-        const party = [];
+        const party: Actor.ConfiguredInstance[] = [];
         if (actor.folder?.isFolderOwner(actor.uuid)) {
           for (const partyMemberUuid of actor.folder.party) {
             const partyMember = await fromUuid(partyMemberUuid);

@@ -3,6 +3,8 @@ import type { CustomSkill, Skill } from "@module/data/models/skill.ts";
 import { sluggify } from "@utils";
 import type { AnyObject, DeepPartial } from "fvtt-types/utils";
 
+type SkillData = CustomSkill & { type: "custom" | "core" };
+
 class SkillsSettingsMenu extends foundry.applications.api.HandlebarsApplicationMixin(
   foundry.applications.api.ApplicationV2
 )<AnyObject> {
@@ -52,7 +54,7 @@ class SkillsSettingsMenu extends foundry.applications.api.HandlebarsApplicationM
     },
   };
 
-  skills: (CustomSkill & { type: "custom" | "core" })[];
+  skills: SkillData[];
 
   constructor(options: DeepPartial<foundry.applications.api.ApplicationV2.Configuration> = {}) {
     super(options);
@@ -118,8 +120,8 @@ class SkillsSettingsMenu extends foundry.applications.api.HandlebarsApplicationM
   }
 
   override async _prepareContext(options: foundry.applications.api.HandlebarsApplicationMixin.HandlebarsRenderOptions) {
-    const systemSkills = [];
-    const userSkills = [];
+    const systemSkills: SkillData[] = [];
+    const userSkills: SkillData[] = [];
     const moduleSkills = game.ptr.data.skills.rawModuleSkills;
     for (const skill of this.skills) {
       if (skill.type === "core") {

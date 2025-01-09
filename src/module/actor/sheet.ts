@@ -521,12 +521,12 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
     if (partId === "perks") {
       const traits = (() => {
         if ("traits" in this.document.system) {
-          const traits = [];
+          const traits: { value: string; label: string, virtual: boolean, type?: Trait["type"] }[] = [];
           for (const trait of this.document.system.traits) {
             traits.push({
               value: trait.slug,
               label: trait.label,
-              virtual: trait.virtual,
+              virtual: trait.virtual!,
               type: trait.type,
             });
           }
@@ -1112,7 +1112,7 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
 
     switch (type) {
       case "effect": {
-        return CONFIG.ActiveEffect.documentClass.createDialog({}, { parent: this.document, types: CONFIG.PTR.ActiveEffect.documentClass.TYPES.filter(s => s != "summon") });
+        return CONFIG.ActiveEffect.documentClass.createDialog({}, { parent: this.document, types: CONFIG.PTR.ActiveEffect.documentClass.TYPES.filter(s => s != "summon"), pack: null});
       }
       default: {
         const itemType = Item.TYPES.includes(type) ? type : null;

@@ -60,7 +60,7 @@ class FolderConfigPTR2e extends foundry.applications.api.HandlebarsApplicationMi
     const label = game.i18n.localize(Folder.implementation.metadata.label);
 
     const owner = this.document.owner ? await fromUuid<Actor.ConfiguredInstance>(this.document.owner) : null;
-    const team = [];
+    const team: Record<string, unknown>[] = [];
     for (const memberUuid of this.document.team) {
       const actor = await fromUuid<Actor.ConfiguredInstance>(memberUuid);
       if (actor && actor instanceof CONFIG.Actor.documentClass) {

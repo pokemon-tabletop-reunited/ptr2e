@@ -66,7 +66,7 @@ export class TemplateLayerPTR2e extends TemplateLayer {
 
   protected override _onMouseWheel(event: WheelEvent): ReturnType<MeasuredTemplate.ConfiguredInstance["rotate"]> | void {
     // Abort if there's no hovered template
-    const template = this.hover as Token.ConfiguredInstance;
+    const template = this.hover as unknown as Token.ConfiguredInstance;
     if (!template || !canvas!.scene || canvas!.grid!.type === CONST.GRID_TYPES.GRIDLESS) {
       return super._onMouseWheel(event);
     }

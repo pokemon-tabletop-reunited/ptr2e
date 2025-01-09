@@ -47,7 +47,7 @@ class FormActiveEffectSystem extends ActiveEffectSystem<FormActiveEffectSchema> 
   }
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  override async _preCreate(data: foundry.abstract.TypeDataModel.ParentAssignmentType<FormActiveEffectSchema, ActiveEffect.ConfiguredInstance>, options: foundry.abstract.Document.PreCreateOptions<any>, user: User): Promise<boolean | void> {
+  override async _preCreate(data: foundry.abstract.TypeDataModel.ParentAssignmentType<FormActiveEffectSchema, ActiveEffect.ConfiguredInstance>, options: foundry.abstract.Document.PreCreateOptions<any>, user: foundry.documents.BaseUser): Promise<boolean | void> {
     const self = this as FormActiveEffectSystem;
     const result = await super._preCreate(data, options, user);
     if (result === false) {

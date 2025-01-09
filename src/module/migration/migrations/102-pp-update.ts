@@ -1,11 +1,10 @@
 import { MigrationBase } from "../base.ts"
 import { sluggify } from "@utils";
-import type { MoveSchema } from "@item/data/move.ts";
 
 export class Migration102PPUpdate extends MigrationBase {
   static override version = 0.102;
 
-  _map: Map<string, PTR.Item.Source> | null = null;
+  _map: Map<string, PTR.Item.System.Move.ParentSource> | null = null;
 
   async getMap() {
     return this._map ?? (this._map = await (async () => {
@@ -13,14 +12,14 @@ export class Migration102PPUpdate extends MigrationBase {
       if (!entries) throw new Error("Could not find core moves pack.");
       return entries.reduce((map, entry) => {
         const slug = entry.system.slug || sluggify(entry.name);
-        map.set(slug, entry._source);
+        map.set(slug, entry._source as PTR.Item.System.Move.ParentSource);
         return map;
-      }, new Map<string, PTR.Item.Source>());
+      }, new Map<string, PTR.Item.System.Move.ParentSource>());
     })());
   }
 
-  isMoveItem(item: PTR.Item.Source): item is Omit<PTR.Item.Source, 'system'> & { system: foundry.data.fields.SchemaField.PersistedType<MoveSchema> } {
-    return item.type === "move";
+  isMoveItem(item: PTR.Item.Source): item is PTR.Item.System.Move.ParentSource {
+    return item.type === "move"
   }
 
   override async updateItem(source: PTR.Item.Source): Promise<void> {
@@ -32,7 +31,7 @@ export class Migration102PPUpdate extends MigrationBase {
     if (!entry) return;
 
     const primaryAction = source.system.actions.find(action => action.slug === slug) ?? source.system.actions.find(action => action.type === "attack");
-    const entryPrimaryAction = entry.system.actions.find(action => action.slug === slug) ?? entry.system.actions.find(action => action.type === "attack");
+    const entryPrimaryAction = entry.system.actions?.find(action => action.slug === slug) ?? entry.system.actions?.find(action => action.type === "attack");
     if (!primaryAction || !entryPrimaryAction) {
       console.warn(`Item ${source.name} is missing a primary action.`);
       return;

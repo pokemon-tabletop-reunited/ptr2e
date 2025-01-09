@@ -233,7 +233,7 @@ export class MigrationRunner extends MigrationRunnerBase {
       steps:
         game.actors.size +
         game.items.size +
-        game.scenes.contents.flatMap((s: Scene.ConfiguredInstance) => s.tokens.contents).filter((t: Scene.ConfiguredInstance) => !t.actorLink).length,
+        game.scenes.contents.flatMap((s) => s.tokens.contents).filter((t: TokenDocument.ConfiguredInstance) => !t.actorLink).length,
     });
 
     // Migrate World Actors

@@ -330,7 +330,7 @@ class DataStructure {
     if (this.isArray()) return this._childKeys = [this.value.map(k => new ChildKeyData(k as string))];
     if (this.isMap() || this.isCollection()) return this._childKeys = [Array.from(this.value.keys()).map(k => new ChildKeyData(k as string))];
     if (this.isObject() || this.isModel() || this.isCustom()) {
-      const allKeys = [], rvg = [], rvf = [];
+      const allKeys: ChildKeyData[] = [], rvg: ChildKeyData[] = [], rvf: ChildKeyData[] = [];
       const props = Object.getOwnPropertyNames(this.value).filter(k => {
         if(k.startsWith('_')) return false;
         if (this.isModel()) return !ignoreDataModelParts.includes(k);

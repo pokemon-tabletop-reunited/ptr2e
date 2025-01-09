@@ -963,7 +963,6 @@ export default class TooltipsPTR2e {
     // Assign styles
     for (const k of ["top", "right", "bottom", "left"]) {
       const v = position[k as keyof typeof position];
-      // @ts-expect-error - This is a valid assignment
       style[k] = v ? `${v}px` : null;
     }
 

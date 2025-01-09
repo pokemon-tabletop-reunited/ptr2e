@@ -37,7 +37,7 @@ export default class PTUSheet extends DocumentSheet<DocumentSheetOptions<PTUActo
       if (typeof branch !== "object") return branch ? `<li>${branch}</li>` : "";
       if (depth > 5) return "";
       try {
-        const nodes = [];
+        const nodes: string[] = [];
         const iterator: object = Array.isArray(branch)
           ? branch.reduce((acc, value, index) => {
             acc[value.name || index + ""] = value;

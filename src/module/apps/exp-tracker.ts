@@ -202,8 +202,8 @@ export class EXPTracker extends foundry.applications.api.HandlebarsApplicationMi
   private characters: Actor.ConfiguredInstance[] = [];
 
   override _prepareContext(options: foundry.applications.api.HandlebarsApplicationMixin.HandlebarsRenderOptions) {
-    const getBoxData = ((folder: Folder) => {
-      const recursive = (subFolders: Folder[]): Folder[] => {
+    const getBoxData = ((folder: Folder.ConfiguredInstance) => {
+      const recursive = (subFolders: Folder.ConfiguredInstance[]): Folder.ConfiguredInstance[] => {
         return subFolders.flatMap(data => [data, ...recursive(data.getSubfolders())]);
       }
 
@@ -232,12 +232,12 @@ export class EXPTracker extends foundry.applications.api.HandlebarsApplicationMi
     const pcs: Required<User.ConfiguredInstance["character"]>[] = game.users.contents.flatMap((user: User.ConfiguredInstance) => user.character ?? []);
     const characters = pcs.reduce((acc, pc) => {
       // Check if anyone from this party has already been added
-      const existing = acc.find((c: { pc: Actor.ConfiguredInstance, data: { folders: Folder[], entries: { actor: Actor.ConfiguredInstance, loafing?: ActiveEffect.ConfiguredInstance }[] }, slots: { actor?: Actor.ConfiguredInstance }[] }) => c.pc.folder?.id && c.pc.folder.id === pc.folder?.id);
+      const existing = acc.find((c: { pc: Actor.ConfiguredInstance, data: { folders: Folder.ConfiguredInstance[], entries: { actor: Actor.ConfiguredInstance, loafing?: ActiveEffect.ConfiguredInstance }[] }, slots: { actor?: Actor.ConfiguredInstance }[] }) => c.pc.folder?.id && c.pc.folder.id === pc.folder?.id);
       if (existing) {
         if (pc?.system.party.ownerOf === existing.pc.folder!.id) {
           delete this.slots[existing.pc.uuid];
           existing.pc = pc;
-          existing.slots = this._getSlots(pc);
+          existing.slots = this._getSlots(pc!);
         }
         return acc;
       }
@@ -248,7 +248,7 @@ export class EXPTracker extends foundry.applications.api.HandlebarsApplicationMi
         slots: this._getSlots(pc)
       });
       return acc;
-    }, [] satisfies { pc: Actor.ConfiguredInstance, data: { folders: Folder[], entries: { actor: Actor.ConfiguredInstance, loafing?: ActiveEffect.ConfiguredInstance }[] }, slots: { actor?: Actor.ConfiguredInstance }[] }[]);
+    }, [] as { pc: Actor.ConfiguredInstance, data: { folders: Folder.ConfiguredInstance[], entries: { actor: Actor.ConfiguredInstance, loafing?: ActiveEffect.ConfiguredInstance }[] }, slots: { actor?: Actor.ConfiguredInstance }[] }[]);
 
     const apl = pcs.reduce((acc, pc, index, arr) => {
       acc += pc.level
@@ -268,7 +268,7 @@ export class EXPTracker extends foundry.applications.api.HandlebarsApplicationMi
     this.characters = characters.reduce((acc, { pc, data }) => {
       acc.push(pc, ...data.entries.flatMap(entry => entry.loafing ? [] : entry.actor));
       return acc;
-    }, [] satisfies Actor.ConfiguredInstance[]);
+    }, [] as Actor.ConfiguredInstance[]);
 
     const open = this.openDetails;
     this.openDetails = null;

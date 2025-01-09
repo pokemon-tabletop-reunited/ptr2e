@@ -136,7 +136,7 @@ export default class ItemSheetPTR2e<
   override async _prepareContext(options: DeepPartial<foundry.applications.api.DocumentSheetV2.RenderOptions> & { isFirstRender: boolean }): Promise<Context> {
     const traits = (() => {
       if ("traits" in this.document.system && this.document.system.traits) {
-        const traits = [];
+        const traits: Record<string, unknown>[] = [];
         for (const trait of this.document.system.traits) {
           traits.push({
             value: trait.slug,

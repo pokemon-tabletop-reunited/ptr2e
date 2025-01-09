@@ -115,7 +115,7 @@ export class AttackModifierPopup extends ModifierPopup {
             }
 
             const seen = new Set();
-            const output = [];
+            const output: {name: string, img: string, uuid: ActorUUID, value: boolean}[] = [];
             for (const [key, value] of m.appliesTo.entries()) {
               seen.add(key);
               const actor = fromUuidSync(key) as Actor.ConfiguredInstance;
@@ -152,7 +152,7 @@ export class AttackModifierPopup extends ModifierPopup {
           appliesToAll: false,
           appliesTo: (() => {
             const seen = new Set();
-            const output = [];
+            const output: {name: string, img: string, uuid: ActorUUID, value: boolean}[] = [];
             for (const [key, value] of m.appliesTo.entries()) {
               seen.add(key);
               const actor = fromUuidSync(key) as Actor.ConfiguredInstance;

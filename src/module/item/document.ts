@@ -28,8 +28,8 @@ class ItemPTR2e extends Item {
     return Number((this.system as { _migration?: { version?: number } })._migration?.version) || null;
   }
 
-  get grantedBy(): Item.ConfiguredInstance | ActiveEffect.ConfiguredInstance | null {
-    return (this.actor?.items.get(this.flags.ptr2e?.grantedBy?.id ?? "") as Item.ConfiguredInstance | undefined | null)
+  get grantedBy(): ItemPTR2e | ActiveEffect.ConfiguredInstance | null {
+    return (this.actor?.items.get(this.flags.ptr2e?.grantedBy?.id ?? "") as ItemPTR2e | undefined | null)
       ?? (this.actor?.effects.get(this.flags.ptr2e?.grantedBy?.id ?? "") as ActiveEffect.ConfiguredInstance | undefined | null)
       ?? null;
   }
@@ -150,20 +150,20 @@ class ItemPTR2e extends Item {
   }
 
   static override async fromDropData(
-    data: foundry.abstract.Document.DropData<Item.ConfiguredInstance> | foundry.abstract.Document.DropData<ActiveEffect.ConfiguredInstance>,
+    data: foundry.abstract.Document.DropData<ItemPTR2e> | foundry.abstract.Document.DropData<ActiveEffect.ConfiguredInstance>,
     options?: FromDropDataOptions
-  ): Promise<Item.ConfiguredInstance | null> {
+  ): Promise<ItemPTR2e | null> {
     if (data?.type !== "ActiveEffect")
-      return super.fromDropData(data, options);
+      return super.fromDropData(data, options) as Promise<ItemPTR2e | null>;
 
     let document: ActiveEffect.ConfiguredInstance | null = null;
 
     // Case 1 - Data explicitly provided
     if (data.data) {
-      document = new CONFIG.ActiveEffect.documentClass(data.data) as ActiveEffect.ConfiguredInstance;
+      document = new CONFIG.ActiveEffect.documentClass(data.data as unknown as PTR.ActiveEffect.Source) as ActiveEffect.ConfiguredInstance;
     }
     // Case 2 - UUID provided
-    else if ('uuid' in data && data.uuid) document = await fromUuid<ActiveEffect.ConfiguredInstance>(data.uuid);
+    else if ('uuid' in data && data.uuid) document = await fromUuid<ActiveEffect.ConfiguredInstance>(data.uuid as string);
 
     // Ensure that we have an ActiveEffect document
     if (!document)
@@ -296,7 +296,7 @@ class ItemPTR2e extends Item {
           types?: string[];
         }
       >
-  ): Promise<Item.ConfiguredInstance> {
+  ): Promise<ItemPTR2e | null | undefined> {
     if (!context) context = {};
     const { parent, pack, ...options } = context;
 
@@ -340,14 +340,14 @@ class ItemPTR2e extends Item {
         if (!data.folder) delete data.folder;
         if (types.length === 1) data.type = types[0];
         if (!(data.name as string)?.trim()) data.name = this.defaultName();
-        return this.implementation.create(data, { parent, pack, renderSheet: true });
+        return this.implementation.create(data, { parent, pack, renderSheet: true }) as Promise<ItemPTR2e>;
       },
       rejectClose: false,
       options
-    })
+    })!
   }
 
-  override async update(data: Record<string, unknown>, context?: InexactPartial<Omit<foundry.abstract.Document.DatabaseOperationsFor<"Item", "update">, "updates">>): Promise<this | undefined> {
+  override async update(data: Record<string, unknown>, context?: InexactPartial<Omit<foundry.abstract.Document.Database.OperationOf<"Item", "update">, "updates">>): Promise<this | undefined> {
     if (!(this.system instanceof SpeciesSystemModel && this.system.virtual) && !this.flags.ptr2e?.virtual) return super.update(data, context);
 
     await this.actor?.updateEmbeddedDocuments("Item", [{ _id: "actorspeciesitem", "system.species": (foundry.utils.expandObject(data) as Record<string, unknown>).system }]);
@@ -367,7 +367,7 @@ class ItemPTR2e extends Item {
     context: InexactPartial<Omit<foundry.abstract.Document.DatabaseOperationsFor<"Item", "delete">, "ids">> & {
       pendingEffects?: ActiveEffect.ConfiguredInstance[],
       ignoreRestricted?: boolean
-    } = {}): Promise<Item.ConfiguredInstance[]> {
+    } = {}): Promise<ItemPTR2e[]> {
     ids = Array.from(new Set(ids)).filter(id => id !== "actorspeciesitem");
     const actor = context.parent as Actor | undefined
     if (actor) {
@@ -401,7 +401,7 @@ class ItemPTR2e extends Item {
       }
       ids = Array.from(new Set(items.map(i => i.id!))).filter(id => id && actor.items.has(id));
     }
-    return super.deleteDocuments(ids, context);
+    return super.deleteDocuments(ids, context) as Promise<ItemPTR2e[]>;
   }
 
   override getEmbeddedCollection<EmbeddedName extends foundry.CONST.EMBEDDED_DOCUMENT_TYPES | "Actions">(embeddedName: EmbeddedName): Collection<foundry.abstract.Document.ConfiguredInstanceForName<EmbeddedName extends foundry.abstract.Document.Type ? EmbeddedName : never>> {

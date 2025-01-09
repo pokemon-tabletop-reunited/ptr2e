@@ -143,7 +143,7 @@ class ChoiceSetPrompt extends PickAThingPrompt<Item.ConfiguredInstance, string |
     // Drop accepted, add to list/select menu
     const slugsAsValues = this.containsItems && this.choices.length > 0 && this.choices.every(c => !UUIDUtils.isItemUUID(c.value));
     const newChoice = {
-      value: slugsAsValues ? item.slug ?? sluggify(item.id) : item.uuid,
+      value: slugsAsValues ? item.slug ?? sluggify(item.id!) : item.uuid,
       label: item.name,
     }
     const choicesLength = this.choices.push(newChoice);
@@ -161,7 +161,7 @@ class ChoiceSetPrompt extends PickAThingPrompt<Item.ConfiguredInstance, string |
       dropZone?.remove();
     } else {
       const img = document.createElement("img");
-      img.src = item.img;
+      img.src = item.img!;
 
       const newButton = createHTMLElement("button", {
         classes: ["with-image"],

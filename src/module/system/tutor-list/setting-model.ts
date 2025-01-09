@@ -10,7 +10,7 @@ export const tutorListSchemaSchema = {
   slug: new SlugField({ required: true, nullable: false }),
   // Type of trait or Ability
   type: new foundry.data.fields.StringField<
-    {required: true, nullable: false, initial: string, choices: ["trait", "egg", "ability", "universal"]},
+    { required: true, nullable: false, initial: string, choices: ["trait", "egg", "ability", "universal"] },
     "trait" | "egg" | "ability" | "universal",
     "trait" | "egg" | "ability" | "universal"
   >({
@@ -84,7 +84,7 @@ export class TutorListSettings extends foundry.abstract.DataModel<TutorListSetti
         moveMap.set(sluggify(move.name!), move.uuid);
       }
 
-      const tutorData = [];
+      const tutorData: { moves: { slug: string, uuid: string }[], slug: string, type: "trait" | "ability" | "universal" }[] = [];
       // Initialize Tutor List
       for (const data of TutorListData) {
         const tutor = {

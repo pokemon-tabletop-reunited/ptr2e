@@ -87,7 +87,7 @@ class PerkGraph {
   getPathToRoot(node: PerkNode, mode: ("shortest" | "cheapest")): Path | null {
     const func = mode === "shortest" ? this.getShortestPath : this.getCheapestPath;
 
-    let currentBest = null;
+    let currentBest: Path | null = null;
     for (const root of this.store.rootNodes) {
       const path = func.bind(this)(node, root);
       if (!path) continue;
@@ -270,7 +270,7 @@ class PerkWebPath {
 
   get pathStrings() {
     function getPathString(path: Path) {
-      const steps = [];
+      const steps: string[] = [];
       let step: PathStep | null = path.startStep;
       while (step) {
         steps.push(`${step.node.entry.perk.slug} (${step.cost})`);

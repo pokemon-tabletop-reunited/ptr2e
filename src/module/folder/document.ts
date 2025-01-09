@@ -17,7 +17,8 @@ const folderSchema = {
 
 export type FolderSchema = typeof folderSchema & Folder.Schema;
 
-class FolderPTR2e extends Folder {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+class FolderPTR2e extends Folder<any> {
   static override defineSchema(): FolderSchema {
     return {
       ...super.defineSchema() as Folder.Schema,
@@ -43,11 +44,11 @@ class FolderPTR2e extends Folder {
 
   get party(): ActorUUID[] {
     if (this.type !== "Actor") return [];
-    return this.contents.filter(actor => (actor as unknown as Actor.ConfiguredInstance).system.party?.partyMemberOf == this.id).map(actor => actor.uuid);
+    return this.contents.filter(actor => (actor as unknown as Actor.ConfiguredInstance).system.party?.partyMemberOf == this.id).map(actor => actor.uuid as ActorUUID);
   }
 
   get team(): ActorUUID[] {
-    return game.actors.filter((actor: Actor.ConfiguredInstance) => actor.system.party?.teamMemberOf.includes(this.id)).map((actor: Actor.ConfiguredInstance) => actor.uuid);
+    return game.actors.filter((actor: Actor.ConfiguredInstance) => actor.system.party?.teamMemberOf.includes(this.id)).map((actor: Actor.ConfiguredInstance) => actor.uuid as ActorUUID);
   }
 
   get safeColor() {

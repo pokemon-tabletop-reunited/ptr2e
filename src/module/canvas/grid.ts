@@ -62,7 +62,7 @@ export class SquareGridPTR2e extends foundry.grid.SquareGrid {
 
     function generateOuterSquares(bounds: number[], elevation: number, height: number) {
       const [x1, y1, x2, y2] = bounds;
-      const squares = [];
+      const squares: {i: number, j: number, e: number}[] = [];
 
       // Top and bottom edges
       for (let x = x1; x <= x2; x++) {

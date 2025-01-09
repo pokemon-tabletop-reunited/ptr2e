@@ -12,7 +12,7 @@ export default abstract class EquipmentSystem extends GearSystem {
     // declare parent: EquipmentPTR2e;
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    override async _preCreate(data: foundry.abstract.TypeDataModel.ParentAssignmentType<EquipmentSchema, Item.ConfiguredInstance>, options: foundry.abstract.Document.PreCreateOptions<any>, user: User): Promise<boolean | void> {
+    override async _preCreate(data: foundry.abstract.TypeDataModel.ParentAssignmentType<EquipmentSchema, Item.ConfiguredInstance>, options: foundry.abstract.Document.PreCreateOptions<any>, user: foundry.documents.BaseUser): Promise<boolean | void> {
         const result = await super._preCreate(data, options, user);
         if (result === false) return false;
 

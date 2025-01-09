@@ -46,16 +46,16 @@ class PerkManager {
     for (const packId of this.packs) {
       const pack = game.packs.get(packId);
       if (pack) {
-        yield await pack.getDocuments();
+        yield await pack.getDocuments() as PTR.Item.System.Perk.ParentInstance[];
       }
     }
-    const items = [];
+    const items: PTR.Item.System.Perk.ParentInstance[] = [];
     for (const item of game.items) {
       if (this.isValidPerk(item)) {
         items.push(item);
       }
     }
-    yield items as PerkPTR2e[];
+    yield items as PTR.Item.System.Perk.ParentInstance[];
   }
 }
 

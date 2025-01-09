@@ -7,7 +7,7 @@ export class Migration109SpeciesItems extends MigrationBase {
   override requiresFlush = true;
 
   override async updateActor(source: PTR.Actor.SourceWithSystem): Promise<void> {
-    if (source.items?.find(i => i._id === "actorspeciesitem")) return void console.log("PTR2E | Migration 109: Actor already has a species item.");
+    if (source.items?.find((i: PTR.Item.Source) => i._id === "actorspeciesitem")) return void console.log("PTR2E | Migration 109: Actor already has a species item.");
     if (!source?.system?.species) {
       if (source.type !== "humanoid") return void console.error(`PTR2E | Migration 109: Actor '${source.name}' (${source._id}) does not have a species system.`, source);
 

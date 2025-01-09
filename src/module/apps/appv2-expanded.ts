@@ -153,8 +153,8 @@ export class DocumentSheetV2Expanded<
 
       for (const input of ["INPUT", "SELECT", "TEXTAREA", "BUTTON"]) {
         for (const element of content.getElementsByTagName(input)) {
-          if (input === "TEXTAREA") (element as HTMLTextAreaElement).readOnly = true;
-          else (element as HTMLInputElement).disabled = true;
+          if (input === "TEXTAREA") (element as unknown as HTMLTextAreaElement).readOnly = true;
+          else (element as unknown as HTMLInputElement).disabled = true;
         }
       }
       for (const element of htmlQueryAll(content, ".item-controls a")) {
@@ -508,7 +508,8 @@ export class ActorSheetV2Expanded<
    */
   async _onDropFolder(event: DragEvent, data: object) {
     if (!this.actor.isOwner) return [];
-    const folder = (await Folder.fromDropData(data as foundry.abstract.Document.DropData<Folder>)) as Folder;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const folder = (await Folder.fromDropData(data as foundry.abstract.Document.DropData<Folder<any>>)) as Folder.ConfiguredInstance;
     if (folder.type !== "Item") return [];
     const droppedItemData = await Promise.all(
       folder.contents.map(async (item) => {
@@ -557,7 +558,7 @@ export class ActorSheetV2Expanded<
     if (source.id === target.id) return;
 
     // Identify sibling items based on adjacent HTML elements
-    const siblings = [];
+    const siblings: Item.ConfiguredInstance[] = [];
     for (const el of dropTarget.parentElement!.children) {
       const siblingId = (el as HTMLElement).dataset.itemId;
       if (siblingId && siblingId !== source.id)
@@ -797,7 +798,7 @@ export class ItemSheetV2Expanded<
   }
 
   async _onDropItem(_event: DragEvent, data: object) {
-    const item = await CONFIG.Item.documentClass.fromDropData(data as TokenLayer.DropData);
+    const item = await CONFIG.Item.documentClass.fromDropData(data as foundry.abstract.Document.DropData<Item.ConfiguredInstance>);
     if (!item || item.type !== "effect") return;
     const effects = item.effects.map((effect: ActiveEffect.ConfiguredInstance) => effect.toObject());
     if (effects.length === 0) return;

@@ -165,7 +165,7 @@ export class ActionEditor<
   override async _prepareContext() {
     const traits = (() => {
       if ("traits" in this.action) {
-        const traits = [];
+        const traits: {value: string, label: string, type: Trait["type"]}[] = [];
         for (const trait of this.action.traits) {
           traits.push({
             value: trait.slug,
