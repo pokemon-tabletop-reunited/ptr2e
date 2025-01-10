@@ -184,7 +184,7 @@ class SummonCombatantSystem extends CombatantSystemPTR2e<SummonCombatantSchema> 
   }
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  override async _preCreate(data: foundry.abstract.TypeDataModel.ParentAssignmentType<SummonCombatantSchema, Combatant.ConfiguredInstance>, options: foundry.abstract.Document.PreCreateOptions<any>, user: foundry.documents.BaseUser): Promise<boolean | void> {
+  override async _preCreate(data: foundry.abstract.TypeDataModel.ParentAssignmentType<SummonCombatantSchema, Combatant.ConfiguredInstance>, options: foundry.abstract.Document.PreCreateOptions<any>, user: User.ConfiguredInstance): Promise<boolean | void> {
     const result = await super._preCreate(data, options, user);
     if (result === false) return false;
 
@@ -224,7 +224,7 @@ class SummonCombatantSystem extends CombatantSystemPTR2e<SummonCombatantSchema> 
   override _preDelete(
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     options: foundry.abstract.Document.PreDeleteOptions<any>,
-    user: foundry.documents.BaseUser
+    user: User.ConfiguredInstance
   ): Promise<boolean | void> {
     if (this.combat.combatant?.id === this.parent.id) return Promise.resolve(false);
     return super._preDelete(options, user);

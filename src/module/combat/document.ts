@@ -361,7 +361,7 @@ class CombatPTR2e extends Combat {
   }
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  override async _preCreate(data: foundry.data.fields.SchemaField.AssignmentType<Combat.Schema>, options: foundry.abstract.Document.PreCreateOptions<any>, user: foundry.documents.BaseUser): Promise<boolean | void> {
+  override async _preCreate(data: foundry.data.fields.SchemaField.AssignmentType<Combat.Schema>, options: foundry.abstract.Document.PreCreateOptions<any>, user: User.ConfiguredInstance): Promise<boolean | void> {
     await super._preCreate(data, options, user);
 
     const round = new CONFIG.Combatant.documentClass({

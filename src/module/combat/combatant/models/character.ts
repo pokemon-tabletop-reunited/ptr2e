@@ -102,7 +102,7 @@ class CharacterCombatantSystem extends CombatantSystemPTR2e {
   override _preDelete(
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     options: foundry.abstract.Document.PreDeleteOptions<any>,
-    user: foundry.documents.BaseUser
+    user: User.ConfiguredInstance
   ): Promise<boolean | void> {
     if (this.combat.combatant?.id === this.parent.id) return Promise.resolve(false);
     return super._preDelete(options, user);

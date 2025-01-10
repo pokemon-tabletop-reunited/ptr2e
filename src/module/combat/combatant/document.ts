@@ -18,7 +18,7 @@ class CombatantPTR2e extends Combatant {
   }
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  override async _preCreate(data: foundry.data.fields.SchemaField.AssignmentType<Combatant.Schema>, options: foundry.abstract.Document.PreCreateOptions<any>, user: foundry.documents.BaseUser): Promise<boolean | void> {
+  override async _preCreate(data: foundry.data.fields.SchemaField.AssignmentType<Combatant.Schema>, options: foundry.abstract.Document.PreCreateOptions<any>, user: User.ConfiguredInstance): Promise<boolean | void> {
     if (!data) return false;
     const result = await super._preCreate(data, options, user);
     if (result === false) return false;
@@ -33,7 +33,7 @@ class CombatantPTR2e extends Combatant {
     changed: foundry.data.fields.SchemaField.AssignmentType<Combatant.Schema>,
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     options: foundry.abstract.Document.PreUpdateOptions<any>,
-    user: foundry.documents.BaseUser
+    user: User.ConfiguredInstance
   ): Promise<boolean | void> {
     if (!changed) return Promise.resolve(false);
     if (changed["initiative"] === null || ('-=initiative' in changed) || Number(changed.initiative ?? 0) < 0) {
