@@ -88,7 +88,7 @@ class TeamSheetPTR2e extends foundry.applications.api.HandlebarsApplicationMixin
             if (partyMember) party.push(partyMember);
           }
         }
-        team.push({ actor, party, folder: actor.folder });
+        team.push({ actor, party, folder: actor.folder! });
       }
     }
 

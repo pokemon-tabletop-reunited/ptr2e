@@ -232,7 +232,7 @@ export class EXPTracker extends foundry.applications.api.HandlebarsApplicationMi
     const pcs: Required<User.ConfiguredInstance["character"]>[] = game.users.contents.flatMap((user: User.ConfiguredInstance) => user.character ?? []);
     const characters = pcs.reduce((acc, pc) => {
       // Check if anyone from this party has already been added
-      const existing = acc.find((c: { pc: Actor.ConfiguredInstance, data: { folders: Folder.ConfiguredInstance[], entries: { actor: Actor.ConfiguredInstance, loafing?: ActiveEffect.ConfiguredInstance }[] }, slots: { actor?: Actor.ConfiguredInstance }[] }) => c.pc.folder?.id && c.pc.folder.id === pc.folder?.id);
+      const existing = acc.find((c: { pc: Actor.ConfiguredInstance, data: { folders: Folder.ConfiguredInstance[], entries: { actor: Actor.ConfiguredInstance, loafing?: ActiveEffect.ConfiguredInstance }[] }, slots: { actor?: Actor.ConfiguredInstance }[] }) => c.pc!.folder?.id && c.pc!.folder.id === pc!.folder?.id);
       if (existing) {
         if (pc?.system.party.ownerOf === existing.pc.folder!.id) {
           delete this.slots[existing.pc.uuid];
@@ -244,14 +244,14 @@ export class EXPTracker extends foundry.applications.api.HandlebarsApplicationMi
 
       acc.push({
         pc,
-        data: pc.folder ? getBoxData(pc.folder) : { folders: [], entries: [] },
-        slots: this._getSlots(pc)
+        data: pc!.folder ? getBoxData(pc!.folder) : { folders: [], entries: [] },
+        slots: this._getSlots(pc!)
       });
       return acc;
     }, [] as { pc: Actor.ConfiguredInstance, data: { folders: Folder.ConfiguredInstance[], entries: { actor: Actor.ConfiguredInstance, loafing?: ActiveEffect.ConfiguredInstance }[] }, slots: { actor?: Actor.ConfiguredInstance }[] }[]);
 
     const apl = pcs.reduce((acc, pc, index, arr) => {
-      acc += pc.level
+      acc += pc!.level
       if (index === arr.length - 1) {
         return Math.round(acc / arr.length);
       }
