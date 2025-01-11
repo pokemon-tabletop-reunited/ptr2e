@@ -11,7 +11,7 @@
         ],
         "name": "Noctem",
         "slug": "noctem",
-        "type": "generic",
+        "type": "attack",
         "cost": {
           "activation": "free",
           "powerPoints": 2,
@@ -22,30 +22,12 @@
           "unit": "m"
         },
         "description": "<p>Trigger: The user declares New Moon.</p><p>Effect: The set Gloomy Weather has its duration increased by +2 Rounds.</p>",
-        "img": "icons/svg/explosion.svg"
-      },
-      {
-        "slug": "new-moon",
-        "name": "New Moon",
-        "type": "attack",
-        "traits": [
-          "weather"
-        ],
-        "range": {
-          "target": "field",
-          "unit": "m"
-        },
-        "cost": {
-          "activation": "complex",
-          "powerPoints": 4
-        },
-        "category": "status",
+        "img": "systems/ptr2e/img/svg/dark_icon.svg",
         "types": [
-          "dark"
+          "untyped"
         ],
-        "description": "<p>Effect: The Weather becomes Gloomy for 3 rounds.</p>",
-        "free": true,
-        "img": "icons/svg/explosion.svg"
+        "category": "status",
+        "summon": "Compendium.ptr2e.core-summons.Item.4HGIp01teAMwQOe1"
       }
     ],
     "description": "<p>Trigger: The user declares New Moon.</p><p>Effect: Connection - New Moon. The set Gloomy Weather has its duration increased by +2 Rounds.</p>",
