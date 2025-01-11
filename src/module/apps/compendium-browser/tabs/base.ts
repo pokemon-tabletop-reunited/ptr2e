@@ -12,6 +12,7 @@ import { CompendiumDirectoryPTR2e } from "@module/apps/sidebar/compendium-direct
 import * as R from "remeda";
 import { htmlQuery, sluggify } from "@utils";
 import { TableResultSource } from "types/foundry/common/documents/module.js";
+import { grades } from "@module/data/mixins/has-gear-data.ts";
 
 export abstract class CompendiumBrowserTab {
   /** A reference to the parent CompendiumBrowser */
@@ -264,10 +265,16 @@ export abstract class CompendiumBrowserTab {
     );
   }
 
-  /** Provide a best-effort sort of an object (e.g. CONFIG.PF2E.monsterTraits) */
+  /** Provide a best-effort sort of an object (e.g. Grades) */
   protected sortedConfig(obj: Record<string, string>): Record<string, string> {
     return Object.fromEntries(
-      [...Object.entries(obj)].sort((entryA, entryB) => entryA[1].localeCompare(entryB[1], game.i18n.lang)),
+      [...Object.entries(obj)].sort((entryA, entryB) => {
+        if(grades.includes(entryA[1] as typeof grades[number]) && grades.includes(entryB[1] as typeof grades[number])) {
+          return grades.indexOf(entryA[1] as typeof grades[number]) - grades.indexOf(entryB[1] as typeof grades[number]);
+        }
+
+        return entryA[1].localeCompare(entryB[1], game.i18n.lang);
+      }),
     );
   }
 
