@@ -4,17 +4,15 @@
   "img": "systems/ptr2e/img/svg/dark_icon.svg",
   "system": {
     "slug": "ruination",
-    "description": "<p>Effect: On hit, the Target's current HP is cut in half. This attack always deals a minimum of 1 HP in damage.</p>",
-    "traits": [
-      "legendary"
-    ],
+    "traits": [],
     "actions": [
       {
         "slug": "ruination",
         "name": "Ruination",
         "type": "attack",
         "traits": [
-          "legendary"
+          "legendary",
+          "pp-updated"
         ],
         "range": {
           "target": "emanation",
@@ -23,26 +21,22 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 7,
-          "delay": null,
-          "priority": null,
-          "trigger": null
+          "powerPoints": 5
         },
         "category": "special",
-        "power": null,
         "accuracy": 90,
         "types": [
           "dark"
         ],
         "description": "<p>Effect: On hit, all valid target's HP is cut in half. This attack always deals a minimum of 1 HP in damage.</p>",
-        "contestType": "",
-        "contestEffect": "",
-        "free": false,
-        "slot": null
+        "img": "systems/ptr2e/img/svg/dark_icon.svg"
       }
     ],
-    "container": null,
-    "grade": "C"
+    "grade": "C",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
   },
   "_id": "6MiHI8QGhMknDms5",
   "effects": []
