@@ -5,13 +5,17 @@
   "system": {
     "slug": "leech-seed",
     "description": "<p>Effect: On hit, the target gains @Affliction[leech] 5.</p>",
-    "traits": [],
+    "traits": [
+      "pp-updated"
+    ],
     "actions": [
       {
         "slug": "leech-seed",
         "name": "Leech Seed",
         "type": "attack",
-        "traits": [],
+        "traits": [
+          "pp-updated"
+        ],
         "range": {
           "target": "creature",
           "distance": 5,
@@ -19,7 +23,7 @@
         },
         "cost": {
           "activation": "simple",
-          "powerPoints": 7
+          "powerPoints": 4
         },
         "category": "status",
         "accuracy": 90,
@@ -30,7 +34,7 @@
         "img": "icons/svg/explosion.svg"
       }
     ],
-    "grade": "A",
+    "grade": "B",
     "_migration": {
       "version": null,
       "previous": null

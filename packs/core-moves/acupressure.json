@@ -7,7 +7,8 @@
     "description": "<p>Effect: Roll 1d8 and raise the Stages of one the target's stats in the corresponding table by +2 for 5 Activations.</p><p><ol><li>ATK</li><li>DEF</li><li>SPATK</li><li>SPDEF</li><li>SPD</li><li>ACC</li><li>EVA</li><li>User Choice<></ol></p>",
     "traits": [
       "contact",
-      "manipulate"
+      "manipulate",
+      "pp-updated"
     ],
     "actions": [
       {
@@ -15,7 +16,8 @@
         "name": "Acupressure (Self)",
         "type": "attack",
         "traits": [
-          "manipulate"
+          "manipulate",
+          "pp-updated"
         ],
         "range": {
           "target": "self",
@@ -42,14 +44,14 @@
         "free": false,
         "slot": null
       },
-      
       {
         "slug": "acupressure",
         "name": "Acupressure",
         "type": "attack",
         "traits": [
           "contact",
-          "manipulate"
+          "manipulate",
+          "pp-updated"
         ],
         "range": {
           "target": "self",
@@ -58,7 +60,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 1,
+          "powerPoints": 2,
           "delay": null,
           "priority": null,
           "trigger": null

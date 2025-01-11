@@ -7,7 +7,8 @@
     "description": "<p>Effect: The user reduces their HP to 0 and gains @Affliction[fainted]. After the user gains @Affliction[fainted], the Target recovers all of its HP and PP, and is cured of all [Major Affliction]s and [Minor Affliction]s. If the user is an owned Pokemon and their Trainer has another Pokemon that is not @Affliction[fainted] in a Poke Ball, that Pokemon may be designated the target of this Attack.</p>",
     "traits": [
       "legendary",
-      "dance"
+      "dance",
+      "pp-updated"
     ],
     "actions": [
       {
@@ -16,7 +17,8 @@
         "type": "attack",
         "traits": [
           "legendary",
-          "dance"
+          "dance",
+          "pp-updated"
         ],
         "range": {
           "target": "creature",
@@ -25,7 +27,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 7,
+          "powerPoints": 8,
           "delay": null,
           "priority": null,
           "trigger": null

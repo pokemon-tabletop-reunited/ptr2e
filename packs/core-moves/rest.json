@@ -5,13 +5,17 @@
   "system": {
     "slug": "rest",
     "description": "<p>Effect: The user is restored to Max HP, and is cured of all [Major Affliction]s and [Minor Affliction]s. Then the user gains @Affliction[drowsy] 5.</p>",
-    "traits": [],
+    "traits": [
+      "pp-updated"
+    ],
     "actions": [
       {
         "slug": "rest",
         "name": "Rest",
         "type": "attack",
-        "traits": [],
+        "traits": [
+          "pp-updated"
+        ],
         "range": {
           "target": "self",
           "distance": 0,
@@ -19,7 +23,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 8,
+          "powerPoints": 7,
           "delay": null,
           "priority": null,
           "trigger": null

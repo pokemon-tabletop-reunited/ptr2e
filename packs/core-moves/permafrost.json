@@ -7,7 +7,8 @@
     "description": "<p>Effect: Items and surfaces within the [Blast X] area become wickedly cold. A creature that starts their Activation in a space containing the Hazard takes a Tick of Ice-Type damage. Creature that move through spaces containing the Hazard while and touching an affected surface takes a Tick of Ice-Type damage for every meter they travel, and if they move 5m (4 with Snowy Weather, 3 with Intense Snowfall) through affected spaces this way in one Round, they gain @Affliction[frostbite] 5. If a creature touched at least one affected item since the end of their last Activation, they take a Tick of Ice-Type damage at the end of their current (or, upcoming, in case of doing so as a Free Action Interrupt) Activation.</p>",
     "traits": [
       "hazard",
-      "blast-4"
+      "blast-4",
+      "pp-updated"
     ],
     "actions": [
       {
@@ -16,7 +17,8 @@
         "type": "attack",
         "traits": [
           "hazard",
-          "blast-4"
+          "blast-4",
+          "pp-updated"
         ],
         "range": {
           "target": "blast",
@@ -25,7 +27,7 @@
         },
         "cost": {
           "activation": "simple",
-          "powerPoints": 5,
+          "powerPoints": 6,
           "delay": null,
           "priority": null,
           "trigger": null
@@ -44,7 +46,7 @@
       }
     ],
     "container": null,
-    "grade": "C"
+    "grade": "A"
   },
   "_id": "X3l0kNzXrQZMEotP",
   "effects": []

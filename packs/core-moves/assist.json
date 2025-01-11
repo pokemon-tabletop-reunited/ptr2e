@@ -5,13 +5,17 @@
   "system": {
     "slug": "assist",
     "description": "<p>Effect: The user's chooses 1 other active ally on the field or in their Team possesses an attack on its Active List. Roll a dX, where X is the number of Attacks in their Active List. The result corresponds to where the Attack is on their Active List. The user may freely use that Attack before the end of their Activation.</p>",
-    "traits": [],
+    "traits": [
+      "pp-updated"
+    ],
     "actions": [
       {
         "slug": "assist",
         "name": "Assist",
         "type": "attack",
-        "traits": [],
+        "traits": [
+          "pp-updated"
+        ],
         "range": {
           "target": "self",
           "distance": 0,
@@ -19,7 +23,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 5,
+          "powerPoints": 3,
           "delay": null,
           "priority": null,
           "trigger": null

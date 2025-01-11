@@ -5,13 +5,17 @@
   "system": {
     "slug": "gear-up",
     "description": "<p>Effect: The user and all allied creatures with the Ability Anionic or Cationic increase their DEF Stage and SPDEF Stage by +1 for 5 Activations. The Stage increase is doubled for creatures with both abilities.</p>",
-    "traits": [],
+    "traits": [
+      "pp-updated"
+    ],
     "actions": [
       {
         "slug": "chargen-veins",
         "name": "Charged Veins",
         "type": "attack",
-        "traits": [],
+        "traits": [
+          "pp-updated"
+        ],
         "range": {
           "target": "field",
           "distance": 0,
@@ -19,7 +23,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 5,
+          "powerPoints": 3,
           "delay": null,
           "priority": null,
           "trigger": null

@@ -5,13 +5,17 @@
   "system": {
     "slug": "heal-block",
     "description": "<p>Effect: The target gains @Affliction[stunted] 5.</p>",
-    "traits": [],
+    "traits": [
+      "pp-updated"
+    ],
     "actions": [
       {
         "slug": "heal-block",
         "name": "Heal Block",
         "type": "attack",
-        "traits": [],
+        "traits": [
+          "pp-updated"
+        ],
         "range": {
           "target": "creature",
           "distance": 10,
@@ -19,7 +23,7 @@
         },
         "cost": {
           "activation": "simple",
-          "powerPoints": 6
+          "powerPoints": 1
         },
         "category": "status",
         "accuracy": 100,
@@ -33,7 +37,7 @@
         "slot": null
       }
     ],
-    "grade": "B",
+    "grade": "E",
     "_migration": {
       "version": null,
       "previous": null

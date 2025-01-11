@@ -5,13 +5,17 @@
   "system": {
     "slug": "embargo",
     "description": "<p>Effect: The target cannot use or benefit from effects of equipped Accessory and Belt items until the end of combat, they are switched out, or gain @Affliction[fainted].</p>",
-    "traits": [],
+    "traits": [
+      "pp-updated"
+    ],
     "actions": [
       {
         "slug": "embargo",
         "name": "Embargo",
         "type": "attack",
-        "traits": [],
+        "traits": [
+          "pp-updated"
+        ],
         "range": {
           "target": "creature",
           "distance": 6,
@@ -19,7 +23,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 6,
+          "powerPoints": 3,
           "delay": null,
           "priority": null,
           "trigger": null
@@ -38,7 +42,7 @@
       }
     ],
     "container": null,
-    "grade": "B"
+    "grade": "D"
   },
   "_id": "9dEqQGUDJ3L0OTpc",
   "effects": []

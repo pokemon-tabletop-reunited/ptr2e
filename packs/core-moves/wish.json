@@ -7,7 +7,9 @@
     "description": "<p>Effect: Set-Up: The user makes a wish, ending their current Activation.</p><p>Resolution: On their next Activation, they can select 1 creature on the field (which can be the user), to recover HP equal to 1/2 the Wish User's Max HP.</p>",
     "traits": [
       "healing",
-      "set-up"
+      "set-up",
+      "pp-updated",
+      "requires-rework"
     ],
     "actions": [
       {
@@ -16,7 +18,8 @@
         "type": "attack",
         "traits": [
           "healing",
-          "set-up"
+          "set-up",
+          "pp-updated"
         ],
         "range": {
           "target": "field",
@@ -25,7 +28,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 7,
+          "powerPoints": 2,
           "delay": null,
           "priority": null,
           "trigger": null
@@ -44,7 +47,7 @@
       }
     ],
     "container": null,
-    "grade": "A"
+    "grade": "D"
   },
   "_id": "0mfq7wAjGYBPrmiN",
   "effects": []

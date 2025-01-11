@@ -5,13 +5,17 @@
   "system": {
     "slug": "stuff-cheeks",
     "description": "<p>Effect: Stuff Cheeks can only be used if the user has an equipped [Food] item, or is adjacent to a [Food] item. The user consumes the [Food] item and applies its effect immediately. Then, the user's DEF Stage increases by +2 for 5 Activations.</p>",
-    "traits": [],
+    "traits": [
+      "pp-updated"
+    ],
     "actions": [
       {
         "slug": "stuff-cheeks",
         "name": "Stuff Cheeks",
         "type": "attack",
-        "traits": [],
+        "traits": [
+          "pp-updated"
+        ],
         "range": {
           "target": "creature",
           "distance": 0,
@@ -19,7 +23,7 @@
         },
         "cost": {
           "activation": "simple",
-          "powerPoints": 7,
+          "powerPoints": 3,
           "delay": null,
           "priority": null,
           "trigger": null
@@ -38,7 +42,7 @@
       }
     ],
     "container": null,
-    "grade": "A"
+    "grade": "C"
   },
   "_id": "QJjxOISEcfO0vgmP",
   "effects": []

@@ -216,7 +216,7 @@
     "label": "Breathless",
     "related": [],
     "description": "This creature does not need to breathe. This does not grant immunity to [Powder] attacks or attacks that have \"Gas\" in their name.",
-    "type":"automated",
+    "type": "automated",
     "changes": [
       {
         "type": "roll-option",
@@ -593,13 +593,13 @@
   {
     "slug": "harvester",
     "label": "Harvester",
-    "description":"",
+    "description": "",
     "related": []
   },
   {
     "slug": "healer",
     "label": "Healer",
-    "description":"",
+    "description": "",
     "related": []
   },
   {
@@ -649,7 +649,7 @@
     "label": "Hover",
     "related": [],
     "description": "This creature naturally floats, granting immunity to damage and effects from [Earthbound] actions. Does not crash if its deliberate flight is interrupted.",
-    "type":"automated",
+    "type": "automated",
     "changes": [
       {
         "type": "roll-option",
@@ -997,7 +997,7 @@
   {
     "slug": "no-buoyancy",
     "label": "No Buoyancy",
-    "description":"",
+    "description": "",
     "related": []
   },
   {
@@ -1099,7 +1099,7 @@
   {
     "slug": "quadrupedal",
     "label": "Quadrupedal",
-    "description":"",
+    "description": "",
     "related": []
   },
   {
@@ -1976,19 +1976,19 @@
   {
     "slug": "delay-1",
     "label": "Delay 1",
-    "description":"",
+    "description": "",
     "related": []
   },
   {
     "slug": "delay-2",
     "label": "Delay 2",
-    "description":"",
+    "description": "",
     "related": []
   },
   {
     "slug": "delay-3",
     "label": "Delay 3",
-    "description":"",
+    "description": "",
     "related": []
   },
   {
@@ -3426,7 +3426,9 @@
   {
     "slug": "pp-updated",
     "label": "PP Updated",
-    "related": [],
+    "related": [
+      "requires-rework"
+    ],
     "description": "This action has had it's PP Errata'd, any action lacking this trait still has to undergo the PP Errata.\nOnce all actions have been errata'd this trait will be removed."
   },
   {
@@ -3448,6 +3450,16 @@
     "label": "Use Opponent's Stats",
     "related": [],
     "description": "An attack with this Trait will calculate the Offensive Stat using the Opponent's stats instead of the user's.",
+    "type": "automated",
+    "changes": []
+  },
+  {
+    "slug": "requires-rework",
+    "label": "Requires Rework",
+    "related": [
+      "pp-updated"
+    ],
+    "description": "The current version of this requires a rework, and will be changed or removed in the near future",
     "type": "automated",
     "changes": []
   }
