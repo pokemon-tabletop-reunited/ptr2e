@@ -238,7 +238,7 @@ class AttackCheck<TParent extends AttackStatistic = AttackStatistic> implements 
       this.attack.prepareDerivedData();
     }
 
-    const variants = args.variants ?? this.attack.variants?.length ? this.attack.variants : [];
+    const variants = args.variants ?? (this.attack.getVariants() || []);
     if (variants.length) args.skipDialog = false;
 
     // Get context without target for basic information 

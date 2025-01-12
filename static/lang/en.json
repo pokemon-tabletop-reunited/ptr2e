@@ -874,7 +874,7 @@
         },
         "Errors": {
           "UnableToSaveDueToValidationFailure": "Unable to save changes due to validation failure(s). Please check the changes and resolve the issues.",
-          "ChangeSyntax": "Syntax error in rule element definition: {message}"
+          "ChangeSyntax": "Syntax error in Change/Predicate definition: {message}"
         }
       }
     },
@@ -1828,6 +1828,10 @@
       "defensiveStat": {
         "label": "Defensive Stat",
         "hint": "The stat that should be used to calculate the 'Defense' portion of the Damage Calculation. Defaults to 'def'/'spd' depending on the Attack Category if unset."
+      },
+      "attackPredicate": {
+        "label": "Attack Predicate",
+        "hint": "Can be used to automate attacks that can only be used under certain conditions, such as, only in rainy weather."
       },
       "targetType": {
         "label": "Summon Target Type",
