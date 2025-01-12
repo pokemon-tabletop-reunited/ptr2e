@@ -362,14 +362,18 @@ class SpeciesSystem extends SpeciesExtension {
   override prepareBaseData(): void {
     super.prepareBaseData();
 
-    if(!this.evolutions) {
-      this.evolutions = new EvolutionData({
-        name: this.parent.slug,
-        uuid: this.parent.flags.core?.sourceId ?? this.parent.uuid,
-        methods: [],
-        evolutions: null,
-        perk: { x: 15, y: 15 }
-      });
+    if (!this.evolutions) {
+      const uuid = this.parent.flags.core?.sourceId ?? this.parent.uuid;
+      const result = fu.parseUuid(uuid);
+      if (result.documentId) {
+        this.evolutions = new EvolutionData({
+          name: this.parent.slug,
+          uuid,
+          methods: [],
+          evolutions: null,
+          perk: { x: 15, y: 15 }
+        });
+      }
     }
 
     this.moves.levelUp = this.moves.levelUp.sort((a, b) => {
