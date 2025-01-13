@@ -256,7 +256,7 @@ export default class AttackPTR2e extends ActionPTR2e {
     const isInteger = Number.isInteger(distance);
     const reachLimit = isInteger ? reach : Math.sqrt(2 * Math.pow(reach, 2));
 
-    if (this.range.distance <= 1) return distance >= reachLimit ? Infinity : 0;
+    if (this.range.distance <= 1) return distance > reachLimit ? Infinity : 0;
     const increment = this.range.distance * rangeMultiplier;
 
     const rangeIncrement = Math.max(Math.ceil(distance / increment), 1) - 1;
