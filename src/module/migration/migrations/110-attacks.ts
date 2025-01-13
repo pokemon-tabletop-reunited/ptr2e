@@ -3,8 +3,8 @@ import { MigrationBase } from "../base.ts"
 import { sluggify } from "@utils";
 import MoveSystem from "@item/data/move.ts";
 
-export class Migration102PPUpdate extends MigrationBase {
-  static override version = 0.102;
+export class Migration110Attacks extends MigrationBase {
+  static override version = 0.110;
 
   _map: Map<string, ItemPTR2e<MoveSystem>["_source"]> | null = null;
 
@@ -39,8 +39,21 @@ export class Migration102PPUpdate extends MigrationBase {
       return;
     }
 
-    primaryAction.cost.powerPoints = entryPrimaryAction.cost.powerPoints;
-    primaryAction.traits = entryPrimaryAction.traits;
+    for(const action of source.system.actions) {
+      const entryAction = entry.system.actions.find(action => action.slug === action.slug) ?? entry.system.actions.find(action => action.type === "attack");
+      if (!entryAction) {
+        console.warn(`Unable to find action ${action.slug} in ${entry.name}`);
+        return;
+      }
+      action.cost = entryAction.cost;
+      action.range = entryAction.range;
+      action.traits = entryAction.traits;
+      action.category = entryAction.category;
+      action.power = entryAction.power;
+      action.accuracy = entryAction.accuracy;
+      action.types = entryAction.types;
+      action.description = entryAction.description;
+    }
     source.system.grade = entry.system.grade;
   }
 }
