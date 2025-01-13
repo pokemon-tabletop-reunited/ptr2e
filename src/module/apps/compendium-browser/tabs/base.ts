@@ -192,6 +192,8 @@ export abstract class CompendiumBrowserTab {
           return entryA.name.localeCompare(entryB.name, lang);
         case "cost":
           return entryA.cost - entryB.cost;
+        case "number":
+          return entryA.number - entryB.number;
         default: return 0;
       }
     });
