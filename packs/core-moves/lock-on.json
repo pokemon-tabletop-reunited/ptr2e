@@ -5,13 +5,17 @@
   "system": {
     "slug": "lock-on",
     "description": "<p>Effect: The user's next attack used on the target gains [Danger Close].</p>",
-    "traits": [],
+    "traits": [
+      "pp-updated"
+    ],
     "actions": [
       {
         "slug": "lock-on",
         "name": "Lock-On",
         "type": "attack",
-        "traits": [],
+        "traits": [
+          "pp-updated"
+        ],
         "range": {
           "target": "creature",
           "distance": 10,
@@ -19,7 +23,7 @@
         },
         "cost": {
           "activation": "simple",
-          "powerPoints": 8,
+          "powerPoints": 1,
           "delay": null,
           "priority": null,
           "trigger": null
@@ -38,7 +42,7 @@
       }
     ],
     "container": null,
-    "grade": "B"
+    "grade": "E"
   },
   "_id": "HdLhWmzL0SPLVZMY",
   "effects": []

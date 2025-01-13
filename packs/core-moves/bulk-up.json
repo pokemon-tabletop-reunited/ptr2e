@@ -5,20 +5,24 @@
   "system": {
     "slug": "bulk-up",
     "description": "<p>Effect: The user gains +1 ATK and DEF Stages for 5 Activations.</p>",
-    "traits": [],
+    "traits": [
+      "pp-updated"
+    ],
     "actions": [
       {
         "slug": "bulk-up",
         "name": "Bulk Up",
         "type": "attack",
-        "traits": [],
+        "traits": [
+          "pp-updated"
+        ],
         "range": {
           "target": "self",
           "unit": "m"
         },
         "cost": {
           "activation": "simple",
-          "powerPoints": 5
+          "powerPoints": 3
         },
         "category": "status",
         "types": [

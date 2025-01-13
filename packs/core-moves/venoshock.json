@@ -4,7 +4,6 @@
   "img": "systems/ptr2e/img/svg/poison_icon.svg",
   "system": {
     "slug": "venoshock",
-    "description": "",
     "traits": [],
     "actions": [
       {
@@ -21,10 +20,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 5,
-          "delay": null,
-          "priority": null,
-          "trigger": null
+          "powerPoints": 5
         },
         "category": "special",
         "power": 65,
@@ -32,11 +28,7 @@
         "types": [
           "poison"
         ],
-        "description": "",
-        "contestType": "",
-        "contestEffect": "",
-        "free": false,
-        "slot": null
+        "img": "icons/svg/explosion.svg"
       },
       {
         "slug": "venoshock-poisoned",
@@ -53,26 +45,25 @@
         "cost": {
           "activation": "complex",
           "powerPoints": 5,
-          "delay": null,
-          "priority": null,
           "trigger": "<p>If the target has @Affliction[poison] or @Affliction[blight].</p>"
         },
         "category": "special",
-        "power": 65,
+        "power": 130,
         "accuracy": 100,
         "types": [
           "poison"
         ],
         "description": "<p>Trigger: If the target has @Affliction[poison] or @Affliction[blight].</p>",
-        "contestType": "",
-        "contestEffect": "",
         "variant": "venoshock",
         "free": true,
-        "slot": null
+        "img": "systems/ptr2e/img/svg/poison_icon.svg"
       }
     ],
-    "container": null,
-    "grade": "B"
+    "grade": "B",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
   },
   "_id": "jZK67alNjuQdhesC",
   "effects": []

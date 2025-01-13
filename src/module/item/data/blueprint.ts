@@ -407,7 +407,7 @@ export default abstract class BlueprintSystem extends HasEmbed(HasMigrations(fou
 
         const weight = isHumanoid
           ? NORMINV(randomW / 10000000000, BlueprintSystem.HumanoidHeightWeightData[gender].weight.average, BlueprintSystem.HumanoidHeightWeightData[gender].weight.deviation) * Math.pow(height, 2)
-          : ((randomW / 40000) * 0.4 + 8) * ((randomH / 40000) * 0.8 + 0.6) * (evolution.system.size.weight ?? 1);
+          : ((randomW / 40000) * 0.4 + 0.8) * ((randomH / 40000) * 0.8 + 0.6) * (evolution.system.size.weight ?? 1);
 
         return { height, weight };
       })();

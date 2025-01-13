@@ -183,7 +183,7 @@ export class ActionEditor<
     this.#allTraits = game.ptr.data.traits.map((trait) => ({ value: trait.slug, label: trait.label, type: trait.type }));
     const typeOptions = this.action.schema.fields.type.options.choices as Record<string, string>;
     const variants = this.action.type === "attack"
-      ? (this.action as AttackPTR2e).variants.flatMap(variant => this.action.item.actions.get(variant) ?? [])
+      ? (this.action as AttackPTR2e).getVariants(true).flatMap(variant => this.action.item.actions.get(variant) ?? [])
       : false;
 
     return {
@@ -213,6 +213,24 @@ export class ActionEditor<
         sluggify(trait.value)
       );
     }
+
+    if('predicate' in data && typeof data.predicate == 'string') {
+      if(data.predicate.trim() === "") {
+        delete data.predicate;
+      } else {
+        try {
+          data.predicate = JSON.parse(data.predicate);
+        } catch (error) {
+          if (error instanceof Error) {
+            ui.notifications.error(
+              game.i18n.format("PTR2E.EffectSheet.ChangeEditor.Errors.ChangeSyntax", { message: error.message }),
+            );
+            throw error; // prevent update, to give the user a chance to correct, and prevent bad data
+          }
+        }
+      }
+    }
+
     await this.action.update(data as Record<string, JSONValue>);
   }
 
@@ -291,6 +309,9 @@ export class ActionEditor<
     });
 
     const formData = new FormDataExtended(element);
+
+
+
     if (handler instanceof Function) await handler.call(this, event, element, formData);
     if (closeOnSubmit) await this.close();
   }

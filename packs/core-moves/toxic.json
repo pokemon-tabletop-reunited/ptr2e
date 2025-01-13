@@ -4,13 +4,17 @@
   "img": "systems/ptr2e/img/svg/poison_icon.svg",
   "system": {
     "slug": "toxic",
-    "traits": [],
+    "traits": [
+      "pp-updated"
+    ],
     "actions": [
       {
         "slug": "toxic",
         "name": "Toxic",
         "type": "attack",
-        "traits": [],
+        "traits": [
+          "pp-updated"
+        ],
         "range": {
           "target": "creature",
           "distance": 6,
@@ -18,7 +22,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 7
+          "powerPoints": 5
         },
         "category": "status",
         "accuracy": 90,
@@ -33,7 +37,8 @@
         "name": "Toxic (Poison-Type)",
         "type": "attack",
         "traits": [
-          "danger-close"
+          "danger-close",
+          "pp-updated"
         ],
         "range": {
           "target": "creature",
@@ -56,7 +61,7 @@
         "img": "systems/ptr2e/img/svg/poison_icon.svg"
       }
     ],
-    "grade": "A",
+    "grade": "B",
     "_migration": {
       "version": null,
       "previous": null

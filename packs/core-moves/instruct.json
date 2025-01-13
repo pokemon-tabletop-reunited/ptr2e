@@ -5,13 +5,17 @@
   "system": {
     "slug": "instruct",
     "description": "<p>Effect: The selected ally may make a extra Activation after this attack resolves.</p>",
-    "traits": [],
+    "traits": [
+      "pp-updated"
+    ],
     "actions": [
       {
         "slug": "instruct",
         "name": "Instruct",
         "type": "attack",
-        "traits": [],
+        "traits": [
+          "pp-updated"
+        ],
         "range": {
           "target": "creature",
           "distance": 10,
@@ -19,7 +23,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 6,
+          "powerPoints": 5,
           "delay": null,
           "priority": null,
           "trigger": null

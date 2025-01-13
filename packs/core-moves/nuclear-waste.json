@@ -5,13 +5,17 @@
   "system": {
     "slug": "nuclear-waste",
     "description": "<p>Effect: On hit, all valid targets gain @Affliction[blight] 8.</p>",
-    "traits": [],
+    "traits": [
+      "pp-updated"
+    ],
     "actions": [
       {
         "slug": "nuclear-waste",
         "name": "Nuclear Waste",
         "type": "attack",
-        "traits": [],
+        "traits": [
+          "pp-updated"
+        ],
         "range": {
           "target": "cone",
           "distance": 3,
@@ -19,7 +23,7 @@
         },
         "cost": {
           "activation": "simple",
-          "powerPoints": 7,
+          "powerPoints": 6,
           "delay": null,
           "priority": null,
           "trigger": null

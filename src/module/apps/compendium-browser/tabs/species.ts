@@ -236,11 +236,11 @@ export class CompendiumBrowserSpeciesTab extends CompendiumBrowserTab {
         }
       },
       order: {
-        by: "name",
+        by: "number",
         direction: "asc",
         options: {
-          name: "PTR2E.CompendiumBrowser.Filters.Sort.Name",
-          number: "PTR2E.CompendiumBrowser.Filters.Sort.Number"
+          number: "PTR2E.CompendiumBrowser.Filters.Sort.Number",
+          name: "PTR2E.CompendiumBrowser.Filters.Sort.Name"
         }
       },
       search: {

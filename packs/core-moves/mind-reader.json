@@ -5,13 +5,17 @@
   "system": {
     "slug": "mind-reader",
     "description": "<p>Effect: The user's next attack used on the target gains [Danger Close].</p>",
-    "traits": [],
+    "traits": [
+      "pp-updated"
+    ],
     "actions": [
       {
         "slug": "mind-reader",
         "name": "Mind Reader",
         "type": "attack",
-        "traits": [],
+        "traits": [
+          "pp-updated"
+        ],
         "range": {
           "target": "creature",
           "distance": "10",
@@ -19,7 +23,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 0,
+          "powerPoints": 1,
           "delay": null,
           "priority": null,
           "trigger": null
@@ -40,7 +44,9 @@
         "slug": "mind-reader-quick",
         "name": "Mind Reader (Quick)",
         "type": "attack",
-        "traits": [],
+        "traits": [
+          "pp-updated"
+        ],
         "range": {
           "target": "creature",
           "distance": "10",
@@ -68,7 +74,7 @@
       }
     ],
     "container": null,
-    "grade": "C"
+    "grade": "E"
   },
   "_id": "sHCD5RPNKDwV4CrU",
   "effects": []

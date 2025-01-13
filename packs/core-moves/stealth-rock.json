@@ -7,7 +7,8 @@
     "description": "<p>Effect: The user places 5 floating rock mine Hazards within Range. When a creature moves within 3m of a rock mine, it homes in on them, destroying itself and dealing a Tick of Rock-Type damage.</p>",
     "traits": [
       "hazard",
-      "missile"
+      "missile",
+      "pp-updated"
     ],
     "actions": [
       {
@@ -16,7 +17,8 @@
         "type": "attack",
         "traits": [
           "hazard",
-          "missile"
+          "missile",
+          "pp-updated"
         ],
         "range": {
           "target": "emanation",
@@ -25,7 +27,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 5,
+          "powerPoints": 3,
           "delay": null,
           "priority": null,
           "trigger": null

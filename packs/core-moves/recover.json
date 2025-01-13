@@ -6,7 +6,8 @@
     "slug": "recover",
     "description": "<p>Effect: The user recovers HP equal to 1/2 their Max HP.</p>",
     "traits": [
-      "healing"
+      "healing",
+      "pp-updated"
     ],
     "actions": [
       {
@@ -14,7 +15,8 @@
         "name": "Recover",
         "type": "attack",
         "traits": [
-          "healing"
+          "healing",
+          "pp-updated"
         ],
         "range": {
           "target": "creature",
@@ -23,7 +25,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 8,
+          "powerPoints": 4,
           "delay": null,
           "priority": null,
           "trigger": null
@@ -42,7 +44,7 @@
       }
     ],
     "container": null,
-    "grade": "E"
+    "grade": "B"
   },
   "_id": "n3gQmzykv7SFPL6K",
   "effects": []
