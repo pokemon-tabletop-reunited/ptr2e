@@ -745,6 +745,41 @@ class ActorPTR2e<
     return stat.value * stageModifier();
   }
 
+  async applyTickDamage({ticks, apply}: {ticks: number, apply: false}): Promise<{applied: number, update: Record<string, unknown>}>;
+  async applyTickDamage({ticks, apply}: {ticks: number, apply: true}): Promise<{applied: number, message: ChatMessagePTR2e}>;
+  async applyTickDamage({ticks, apply}: {ticks: number, apply?: boolean}): Promise<{applied: number, update?: Record<string, unknown>, message?: ChatMessagePTR2e}>;
+  async applyTickDamage({ticks, apply=true}: {ticks: number, apply?: boolean}): Promise<{applied: number, update?: Record<string, unknown>, message?: ChatMessagePTR2e}> {
+    const isDamage = ticks < 0;
+    const amount = Math.floor((this.system.health.max / 16) * Math.abs(ticks))
+    const applied = Math.min(amount || 0, isDamage ? this.system.health.value : this.system.health.max - this.system.health.value);
+
+    const update = {
+      "system.health.value": Math.clamp(
+        this.system.health.value + (isDamage ? -amount : amount),
+        0,
+        this.system.health.max
+      )
+    } as Record<string, unknown>;
+    if(!apply) {
+      update["_id"] = this.id;
+      return { applied, update };
+    }
+
+    await this.update(update);
+
+    return {
+      applied,
+      //@ts-expect-error - Chat messages have not been properly defined yet
+      message: await ChatMessagePTR2e.create({
+        type: "damage-applied",
+        system: {
+          damageApplied: isDamage ? applied : -applied,
+          target: this.uuid
+        }
+      })
+    }
+  }
+
   async applyDamage(
     damage: number,
     { silent, healShield } = { silent: false, healShield: false }
