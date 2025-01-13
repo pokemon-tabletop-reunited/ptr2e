@@ -34,6 +34,10 @@
         <input type="radio" name="{{basePath}}.affects" value="origin" {{#if (is change.affects 'origin')}}checked{{/if}} />
         <label>{{localize "PTR2E.Effect.FIELDS.ChangeAffects.origin"}}</label>
       </div>
+      <div>
+        <input type="radio" name="{{basePath}}.affects" value="defensive" {{#if (is change.affects 'defensive')}}checked{{/if}} />
+        <label>{{localize "PTR2E.Effect.FIELDS.ChangeAffects.defensive"}}</label>
+      </div>
     </div>
 </div>
 

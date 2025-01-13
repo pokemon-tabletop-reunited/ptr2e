@@ -677,7 +677,7 @@ class ActorPTR2e<
   }
 
   /** Get roll options from this actor's effects, traits, and other properties */
-  getSelfRollOptions(prefix: "self" | "target" | "origin" = "self"): string[] {
+  getSelfRollOptions(prefix: "self" | "target" | "origin" | "defensive" = "self"): string[] {
     const { rollOptions } = this;
     return Object.keys(rollOptions.all).flatMap((o) =>
       o.startsWith("self:") && rollOptions.all[o]
@@ -1484,6 +1484,19 @@ class ActorPTR2e<
       hasSenerenGrace: targetToken?.actor?.rollOptions?.all?.["special:serene-grace"] ?? false
     })
 
+    const targetDefensiveEffectRolls = await extractEffectRolls({
+      affects: "defensive",
+      origin: selfActor,
+      target: targetToken?.actor ?? null,
+      item: selfItem,
+      attack: params.attack ?? null,
+      action: params.action ?? null,
+      domains: params.domains,
+      options: [...params.options, ...itemOptions, ...targetRollOptions],
+      chanceModifier: (Number(targetToken?.actor?.system?.modifiers?.effectChance) || 0),
+      hasSenerenGrace: targetToken?.actor?.rollOptions?.all?.["special:serene-grace"] ?? false
+    });
+
     const targetOriginFlatModifiers = await extractTargetModifiers({
       origin: this,
       target: params.target?.actor ?? targetToken?.actor ?? null,
@@ -1545,7 +1558,7 @@ class ActorPTR2e<
       self,
       target,
       traits: actionTraits,
-      effectRolls: { target: targetEffectRolls, origin: targetOriginEffectRolls },
+      effectRolls: { target: targetEffectRolls, origin: targetOriginEffectRolls, defensive: targetDefensiveEffectRolls },
     };
   }
 
