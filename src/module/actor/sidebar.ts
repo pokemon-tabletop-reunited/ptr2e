@@ -158,7 +158,7 @@ export default class ActorDirectoryPTR2e<
     target: HTMLElement,
     data: DropCanvasData<string, object> & { targetFolderUuid?: string, noParty?: boolean }
   ): Promise<void> {
-    const { uuid, type, targetFolderUuid, noParty} = data;
+    const { uuid, type, targetFolderUuid, noParty } = data;
     // If the dropped data is not an Actor, defer to the parent class
     if (!uuid || type != "Actor") return super._handleDroppedEntry(target, data);
 
@@ -187,31 +187,50 @@ export default class ActorDirectoryPTR2e<
       folder: targetFolder?.id,
     } as Record<string, unknown>;
 
+    const oldParty = actor.system.party.partyMemberOf;
     // If the target Folder is a party, update the party membership
-    if(targetFolder && noParty !== true && targetFolder.owner) {
+    if (targetFolder && noParty !== true && targetFolder.owner) {
       update["system.party.partyMemberOf"] = targetFolder.id;
 
       const user = game.users.find((user) => user.character?.uuid === targetFolder.owner);
-      if(user) {
-        update['ownership'] = {[user.id]: CONST.DOCUMENT_OWNERSHIP_LEVELS.OWNER, default: CONST.DOCUMENT_OWNERSHIP_LEVELS.OBSERVER};
+      if (user) {
+        update['ownership'] = { [user.id]: CONST.DOCUMENT_OWNERSHIP_LEVELS.OWNER, default: CONST.DOCUMENT_OWNERSHIP_LEVELS.OBSERVER };
       }
-      else if(game.user.isGM) {
+      else if (game.user.isGM) {
         update["ownership"] = Object.keys(actor.ownership).reduce((acc, key) => ({ ...acc, [key]: CONST.DOCUMENT_OWNERSHIP_LEVELS.NONE }), {});
       }
     }
     else {
       update["system.party.partyMemberOf"] = undefined;
 
-      if(!targetFolder && game.user.isGM) {
+      if (!targetFolder && game.user.isGM) {
         update["ownership"] = Object.keys(actor.ownership).reduce((acc, key) => ({ ...acc, [key]: CONST.DOCUMENT_OWNERSHIP_LEVELS.NONE }), {});
       }
     }
 
     await actor.update(update);
     // If this is coming from the party sheet through a player account, don't handle the drop twice
-    if(targetFolderUuid && !target) return;
+    if (targetFolderUuid && !target) return;
 
-    return super._handleDroppedEntry(target, data);
+    return super._handleDroppedEntry(target, data).then(() => {
+      if (!targetFolder && !oldParty) return;
+
+      if (targetFolder) {
+        // Refresh actors in the party
+        for (const actor of targetFolder.contents) {
+          actor.reset();
+        }
+      }
+
+      if (!oldParty) return;
+      const oldFolder = game.folders.get(oldParty);
+      if (!oldFolder) return;
+
+      // Refresh actors in the old party
+      for (const actor of oldFolder.contents) {
+        actor.reset();
+      }
+    });
   }
 }
 
