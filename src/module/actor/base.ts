@@ -988,7 +988,7 @@ class ActorPTR2e<
           acc.groups[affliction.priority] ??= { afflictions: [] };
 
           acc.groups[affliction.priority].afflictions.push({
-            formula: result.damage?.formula,
+            formula: (acc.groups[affliction.priority].type === "both" && result.damage?.type === "healing" && result.damage.formula) ? `(${result.damage.formula}) * -1` : result.damage?.formula,
             affliction,
           });
           if (result.damage?.type) {
@@ -996,6 +996,15 @@ class ActorPTR2e<
               acc.groups[affliction.priority].type &&
               acc.groups[affliction.priority].type !== result.damage.type
             ) {
+              if(acc.groups[affliction.priority].type === "damage") {
+                const entry = acc.groups[affliction.priority].afflictions.at(-1)!
+                entry.formula = `(${entry.formula}) * -1`;
+              }
+              else {
+                for(const entry of acc.groups[affliction.priority].afflictions) {
+                  entry.formula = `(${entry.formula}) * -1`;
+                }
+              }
               acc.groups[affliction.priority].type = "both";
             } else {
               acc.groups[affliction.priority].type = result.damage.type;
