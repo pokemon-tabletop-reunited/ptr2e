@@ -14,18 +14,12 @@
         "type": "passive",
         "range": {
           "target": "self",
-          "unit": "m",
-          "distance": 0
+          "unit": "m"
         },
         "cost": {
-          "activation": "free",
-          "powerPoints": 0,
-          "delay": null,
-          "priority": null
+          "activation": "free"
         },
-        "img": "icons/svg/explosion.svg",
-        "variant": null,
-        "hidden": false
+        "img": "icons/svg/explosion.svg"
       }
     ],
     "slug": "hear-no-bell",
@@ -34,8 +28,12 @@
     "prerequisites": [],
     "cost": 5,
     "_migration": {
-      "version": null,
-      "previous": null
+      "version": 0.11,
+      "previous": {
+        "schema": null,
+        "foundry": "12.331",
+        "system": "0.10.0-alpha.5.0"
+      }
     },
     "nodes": [
       {
@@ -64,11 +62,62 @@
       }
     ],
     "autoUnlock": [],
-    "originSlug": null,
-    "variant": null,
-    "mode": null,
     "global": true,
     "webs": []
   },
-  "effects": []
+  "effects": [
+    {
+      "name": "Hear No Bell",
+      "type": "passive",
+      "_id": "CVhM2lljJfTSq5Tz",
+      "img": "systems/ptr2e/img/perk-icons/Combat.svg",
+      "system": {
+        "changes": [
+          {
+            "type": "alter-attack",
+            "key": "damaging-attack",
+            "value": "1+(min(50, 100 - @actor.system.health.percent) / 100)",
+            "predicate": [],
+            "mode": 1,
+            "priority": null,
+            "ignored": false,
+            "property": "power",
+            "definition": []
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "<p>The Power of your Moves are increased by 1% per 1% of your HP that you are missing, to a maximum of 50%.</p>",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": "Actor.vBCspn4IjAKk8EBj.Item.uIfc2ExBTcZKEZTL.ActiveEffect.CVhM2lljJfTSq5Tz",
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.5.0",
+        "createdTime": 1736858076120,
+        "modifiedTime": 1736858306546,
+        "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
+      }
+    }
+  ]
 }
