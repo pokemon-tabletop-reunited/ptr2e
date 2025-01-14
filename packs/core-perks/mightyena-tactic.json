@@ -14,17 +14,12 @@
         "type": "generic",
         "range": {
           "target": "creature",
-          "unit": "m",
-          "distance": 0
+          "unit": "m"
         },
         "cost": {
-          "activation": "simple",
-          "powerPoints": 0,
-          "delay": null,
-          "priority": null
+          "activation": "simple"
         },
-        "img": "icons/svg/explosion.svg",
-        "variant": null
+        "img": "icons/svg/explosion.svg"
       }
     ],
     "slug": "mightyena-tactic",
@@ -39,7 +34,11 @@
     "nodes": [
       {
         "connected": [
-          "hamstring"
+          "hamstring",
+          "skirmish",
+          "quick-and-the-dead",
+          "run-down",
+          "improved-overland-9"
         ],
         "config": {
           "alpha": null,
@@ -58,9 +57,6 @@
       }
     ],
     "autoUnlock": [],
-    "originSlug": null,
-    "variant": null,
-    "mode": null,
     "global": true,
     "webs": []
   },
