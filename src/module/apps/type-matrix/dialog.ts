@@ -25,7 +25,7 @@ export class TypeMatrixDialog extends foundry.applications.api.HandlebarsApplica
     actions: {
       delete: function (this: TypeMatrixDialog) {
         const coreTypes = Object.keys(defaultEffectiveness);
-        if (coreTypes.includes(this.type!)) {
+        if (!["nuclear", "shadow"].includes(this.type!) && coreTypes.includes(this.type!)) {
           return void ui.notifications.error(game.i18n.localize("PTR2E.TypeMatrix.Delete.Error"));
         }
 
@@ -39,6 +39,9 @@ export class TypeMatrixDialog extends foundry.applications.api.HandlebarsApplica
               if (this.type === "untyped") return;
 
               delete this.app.cache[this.type!]
+              for(const key in this.app.cache) {
+                delete this.app.cache[key as keyof TypeEffectiveness]!.effectiveness[this.type!];
+              }
 
               this.app.render({ parts: ["content"] });
               this.close();
