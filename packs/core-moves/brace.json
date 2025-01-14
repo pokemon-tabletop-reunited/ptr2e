@@ -6,7 +6,8 @@
     "slug": "brace",
     "description": "<p>Effect: The user gains @Affliction[braced] 5.</p>",
     "traits": [
-      "defensive"
+      "defensive",
+      "pp-updated"
     ],
     "actions": [
       {
@@ -14,36 +15,87 @@
         "name": "Brace",
         "type": "attack",
         "traits": [
-          "defensive"
+          "defensive",
+          "pp-updated"
         ],
         "range": {
           "target": "self",
-          "distance": 0,
           "unit": "m"
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 2,
-          "delay": null,
-          "priority": null,
-          "trigger": null
+          "powerPoints": 3
         },
         "category": "status",
-        "power": null,
-        "accuracy": null,
         "types": [
           "normal"
         ],
         "description": "<p>Effect: The user gains @Affliction[braced] 5.</p>",
-        "contestType": "",
-        "contestEffect": "",
         "free": true,
-        "slot": null
+        "img": "icons/svg/explosion.svg",
+        "predicate": []
       }
     ],
-    "container": null,
-    "grade": "E"
+    "grade": "C",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
   },
   "_id": "SxFXgSCqw5vnRzon",
-  "effects": []
+  "effects": [
+    {
+      "name": "Brace",
+      "type": "passive",
+      "_id": "6GvRrdpdamYYzWmC",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "brace-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.bracedcondititem",
+            "predicate": [],
+            "chance": 100,
+            "affects": "target",
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.5.1.2",
+        "createdTime": 1736894909938,
+        "modifiedTime": 1736894932822,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+      }
+    }
+  ]
 }
