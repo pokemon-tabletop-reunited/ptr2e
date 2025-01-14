@@ -5,13 +5,17 @@
   "system": {
     "slug": "venom-drench",
     "description": "<p>Effect: Can only be used on a target with the @Affliction[poison] or @Affliction[blight] condition. The target's ATK, SPATK, and SPD Stages are reduced by -1 for 5 Activations.</p>",
-    "traits": [],
+    "traits": [
+      "pp-updated"
+    ],
     "actions": [
       {
         "slug": "venom-drench",
         "name": "Venom Drench",
         "type": "attack",
-        "traits": [],
+        "traits": [
+          "pp-updated"
+        ],
         "range": {
           "target": "creature",
           "distance": 10,
@@ -19,7 +23,7 @@
         },
         "cost": {
           "activation": "simple",
-          "powerPoints": 5,
+          "powerPoints": 3,
           "delay": null,
           "priority": null,
           "trigger": null

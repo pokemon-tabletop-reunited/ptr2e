@@ -5,21 +5,25 @@
   "system": {
     "slug": "refresh",
     "description": "<p>Effect: The user cures itself of any [Major Affliction]s.</p>",
-    "traits": [],
+    "traits": [
+      "pp-updated"
+    ],
     "actions": [
       {
         "slug": "refresh",
         "name": "Refresh",
         "type": "attack",
-        "traits": [],
+        "traits": [
+          "pp-updated"
+        ],
         "range": {
           "target": "creature",
           "distance": 0,
           "unit": "m"
         },
         "cost": {
-          "activation": "complex",
-          "powerPoints": 5,
+          "activation": "simple",
+          "powerPoints": 3,
           "delay": null,
           "priority": null,
           "trigger": null
@@ -38,7 +42,7 @@
       }
     ],
     "container": null,
-    "grade": "E"
+    "grade": "C"
   },
   "_id": "gXtEg2PYHA3W8fnJ",
   "effects": []

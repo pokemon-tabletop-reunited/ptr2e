@@ -2,6 +2,7 @@ import { default as TypeEffectiveness } from "./config/effectiveness.ts";
 import { ClockDatabase } from "@data";
 import { SkillsSettingsMenu } from "@module/apps/skills.ts";
 import { TraitsSettingsMenu } from "@module/apps/traits.ts";
+import { TypeMatrix } from "@module/apps/type-matrix/sheet.ts";
 import { ExpTrackerSettings } from "@system/exp-tracker-model.ts";
 import { TutorListSettings } from "@system/tutor-list/setting-model.ts";
 
@@ -16,6 +17,15 @@ export function initializeSettings() {
     default: TypeEffectiveness,
     requiresReload: true,
   })
+
+  game.settings.registerMenu("ptr2e", "pokemonTypes", {
+    "name": "PTR2E.Settings.PokemonTypes.Name",
+    "label": "PTR2E.Settings.PokemonTypes.Label",
+    "hint": "PTR2E.Settings.PokemonTypes.Hint",
+    "icon": "fa-solid fa-shield-alt",
+    type: TypeMatrix,
+    restricted: true,
+  });
 
   game.settings.register("ptr2e", "clocks", {
     name: "PTR2E.Settings.Clocks.Name",

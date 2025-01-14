@@ -90,6 +90,14 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
               success: new fields.BooleanField({ required: true, nullable: true, initial: null }),
               critOnly: new fields.BooleanField({ required: true, initial: false })
             }), { required: true, initial: [] }),
+            defensive: new fields.ArrayField(new fields.SchemaField({
+              chance: new fields.NumberField({ required: true, min: 1, max: 100 }),
+              effect: new fields.DocumentUUIDField(),
+              label: new fields.StringField({ required: true, initial: "" }),
+              roll: new fields.JSONField({ required: true, nullable: true, initial: null }),
+              success: new fields.BooleanField({ required: true, nullable: true, initial: null }),
+              critOnly: new fields.BooleanField({ required: true, initial: false })
+            }), { required: true, initial: [] }),
           }, { required: true, nullable: true, initial: null }),
         }),
         {
@@ -219,6 +227,14 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
             success: e.success,
             critOnly: e.critOnly,
           })),
+          defensive: source.effectRolls.defensive.map((e) => ({
+            chance: e.chance,
+            effect: e.effect as ItemUUID,
+            label: e.label,
+            roll: fromRollData(e.roll),
+            success: e.success,
+            critOnly: e.critOnly,
+          })),
         }
       }
       result.target = fromActorData(source.target)!;
@@ -320,7 +336,7 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
         none: false
       };
       if (data.effectRolls) {
-        async function handleRoll(effectRoll: foundry.data.fields.ModelPropFromDataField<foundry.data.fields.SchemaField<EffectRollsSchema>>, target: "origin" | "target") {
+        async function handleRoll(effectRoll: foundry.data.fields.ModelPropFromDataField<foundry.data.fields.SchemaField<EffectRollsSchema>>, target: "origin" | "target" | "defensive") {
           const item = await fromUuid(effectRoll.effect);
           if (!item) {
             Hooks.onError("AttackMessageSystem#getHTMLContent", new Error(`Could not find item with uuid ${effectRoll.effect}`), { log: "error" });
@@ -348,6 +364,9 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
         for (const effectRoll of data.effectRolls.origin) {
           await handleRoll(effectRoll, "origin");
         }
+        for (const effectRoll of data.effectRolls.defensive) {
+          await handleRoll(effectRoll, "defensive");
+        }
       }
 
       if (!rolls.accuracy && !rolls.crit && !rolls.damage && !rolls.effects.length) rolls.none = true;
@@ -363,7 +382,7 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
         origin: this.origin,
         attack: this.attack,
         hasDamage: summonAttack?.damageType === "flat" ? true : this.results.some((result) => !!result.damage),
-        hasEffect: this.results.some((result) => result.effectRolls?.origin.length || result.effectRolls?.target.length),
+        hasEffect: this.results.some((result) => result.effectRolls?.origin.length || result.effectRolls?.target.length || result.effectRolls?.defensive.length),
         results: new Map<ActorUUID, AttackMessageRenderContextData>(
           // @ts-expect-error - This is a valid operation
           await Promise.all(
@@ -381,6 +400,7 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
                   effects: {
                     origin: result.effectRolls.origin,
                     target: result.effectRolls.target,
+                    defensive: result.effectRolls.defensive,
                   }
                 } : { some: false, applied: false },
                 hasCaptureRoll: !!(this.attack.slug.startsWith("fling") && this.attack.flingItemId),
@@ -567,6 +587,10 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
         if (!target) return;
         await applyEffects(target, result.effect.effects?.origin ?? [], result.hit === "critical");
       })(),
+      (async (): Promise<void> => {
+        const target = result.target;
+        await applyEffects(target, result.effect.effects?.defensive ?? [], result.hit === "critical");
+      })(),
     ]))[0];
   }
 
@@ -737,6 +761,7 @@ interface AttackMessageRenderContextData {
     effects?: {
       origin: foundry.data.fields.ModelPropFromDataField<foundry.data.fields.SchemaField<EffectRollsSchema>>[];
       target: foundry.data.fields.ModelPropFromDataField<foundry.data.fields.SchemaField<EffectRollsSchema>>[];
+      defensive: foundry.data.fields.ModelPropFromDataField<foundry.data.fields.SchemaField<EffectRollsSchema>>[];
     };
   };
   hasCaptureRoll?: boolean;
@@ -844,6 +869,11 @@ interface TargetEffectRollsSchema extends foundry.data.fields.DataSchema {
     foundry.data.fields.SourcePropFromDataField<foundry.data.fields.SchemaField<EffectRollsSchema>>[],
     foundry.data.fields.ModelPropFromDataField<foundry.data.fields.SchemaField<EffectRollsSchema>>[],
     true, false, true>;
+  defensive: foundry.data.fields.ArrayField<
+  foundry.data.fields.SchemaField<EffectRollsSchema>,
+  foundry.data.fields.SourcePropFromDataField<foundry.data.fields.SchemaField<EffectRollsSchema>>[],
+  foundry.data.fields.ModelPropFromDataField<foundry.data.fields.SchemaField<EffectRollsSchema>>[],
+  true, false, true>;
 }
 
 interface CheckContextSchema extends foundry.data.fields.DataSchema {

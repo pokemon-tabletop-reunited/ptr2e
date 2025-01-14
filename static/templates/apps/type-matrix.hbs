@@ -1,0 +1,27 @@
+<div class="type-grid" style="--grid-columns: {{length}};">
+  <div class="type" style="background: #222224;">
+
+  </div>
+  {{#each types as |data type|}}
+    {{#unless (is type "untyped")}}
+      <div class="type" data-defensive="{{type}}" data-type="{{type}}">
+        {{{getIcon type}}}
+      </div>
+    {{/unless}}
+  {{/each}}
+
+  {{#each types as |data type|}}
+    {{#unless (is type "untyped")}}
+      <div class="type" data-offensive="{{type}}" data-type="{{type}}">
+        {{{getIcon type}}}
+      </div>
+      {{#each data.effectiveness as |effectiveness type2|}}
+        {{#unless (is type2 "untyped")}}
+          <div class="type" data-offensive="{{type}}" data-defensive="{{type2}}" data-effectiveness="{{effectiveness}}">
+            <span>{{effectiveness}}</span>
+          </div>
+        {{/unless}}
+      {{/each}}
+    {{/unless}}
+  {{/each}}
+</div>

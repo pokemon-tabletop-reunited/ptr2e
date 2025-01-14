@@ -6,7 +6,8 @@
     "slug": "simple-beam",
     "description": "<p>Effect: The target's Starting Ability is changed to Simple until combat ends, they switch out, or are @Affliction[fainted]. If the target has more than one Starting Ability, they choose which Ability is replaced. A creature can only be affected by one instance of the effect of Simple Beam at a time.</p>",
     "traits": [
-      "ray"
+      "ray",
+      "pp-updated"
     ],
     "actions": [
       {
@@ -14,7 +15,8 @@
         "name": "Simple Beam",
         "type": "attack",
         "traits": [
-          "ray"
+          "ray",
+          "pp-updated"
         ],
         "range": {
           "target": "creature",
@@ -23,7 +25,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 6,
+          "powerPoints": 4,
           "delay": null,
           "priority": null,
           "trigger": null
@@ -42,7 +44,7 @@
       }
     ],
     "container": null,
-    "grade": "E"
+    "grade": "B"
   },
   "_id": "NGvOyOJclnGdaK1g",
   "effects": []

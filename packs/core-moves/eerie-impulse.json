@@ -5,13 +5,17 @@
   "system": {
     "slug": "eerie-impulse",
     "description": "<p>Effect: On hit, the target loses -2 SPATK Stages for 5 Activations.</p>",
-    "traits": [],
+    "traits": [
+      "pp-updated"
+    ],
     "actions": [
       {
         "slug": "eerie-impulse",
         "name": "Eerie Impulse",
         "type": "attack",
-        "traits": [],
+        "traits": [
+          "pp-updated"
+        ],
         "range": {
           "target": "creature",
           "distance": 10,
@@ -19,7 +23,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 6
+          "powerPoints": 3
         },
         "category": "status",
         "accuracy": 100,
@@ -30,7 +34,7 @@
         "img": "icons/svg/explosion.svg"
       }
     ],
-    "grade": "B",
+    "grade": "C",
     "_migration": {
       "version": null,
       "previous": null

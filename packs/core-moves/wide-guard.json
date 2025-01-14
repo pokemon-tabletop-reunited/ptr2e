@@ -7,7 +7,8 @@
     "description": "<p>Trigger: The user and/or one or more creatures in range are targeted by a [X-Strike] Attack or an Attack with multiple targets.</p><p>Effect: The triggering attack fails to hit its targets, and additional such attacks that would hit the user and allied creatures within range also fail to hit until the user's next Activation, or when the round ends, whichever is first. Attacks failing to hit do not activate on-miss effects.</p>",
     "traits": [
       "shield",
-      "interrupt-3"
+      "interrupt-3",
+      "pp-updated"
     ],
     "actions": [
       {
@@ -16,7 +17,8 @@
         "type": "attack",
         "traits": [
           "shield",
-          "interrupt-3"
+          "interrupt-3",
+          "pp-updated"
         ],
         "range": {
           "target": "creature",
@@ -25,7 +27,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 8,
+          "powerPoints": 3,
           "delay": null,
           "priority": null,
           "trigger": "<p>The user and/or one or more creatures in range are targeted by a [X-Strike] Attack or an Attack with multiple targets.</p>"

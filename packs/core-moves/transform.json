@@ -7,7 +7,8 @@
     "description": "<p>Effect: The user selects one other creature in range and transforms into the target species, copying the target's Base ATK, DEF, SPATK, SPDEF, and SPD stats. The user also copies the target's current Abilities and Active List, as well as any [Stage Change] effects. The user remains transformed for 5 Activations, or until they are switched out, combat ends, or are @Affliction[fainted].</p>",
     "traits": [
       "move-locked",
-      "transform"
+      "transform",
+      "pp-updated"
     ],
     "actions": [
       {
@@ -16,7 +17,8 @@
         "type": "attack",
         "traits": [
           "move-locked",
-          "transform"
+          "transform",
+          "pp-updated"
         ],
         "range": {
           "target": "creature",
@@ -25,7 +27,7 @@
         },
         "cost": {
           "activation": "simple",
-          "powerPoints": 4,
+          "powerPoints": 5,
           "delay": null,
           "priority": null,
           "trigger": null
@@ -44,7 +46,7 @@
       }
     ],
     "container": null,
-    "grade": "E"
+    "grade": "B"
   },
   "_id": "KYiKjOrakhVcye6X",
   "effects": []

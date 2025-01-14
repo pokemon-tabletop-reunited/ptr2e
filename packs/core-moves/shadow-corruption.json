@@ -4,7 +4,6 @@
   "img": "systems/ptr2e/img/svg/shadow_icon.svg",
   "system": {
     "slug": "shadow-corruption",
-    "description": "",
     "traits": [],
     "actions": [
       {
@@ -21,10 +20,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 1,
-          "delay": null,
-          "priority": null,
-          "trigger": null
+          "powerPoints": 1
         },
         "category": "special",
         "power": 30,
@@ -33,15 +29,80 @@
           "shadow"
         ],
         "description": "<p>Effect: On hit, the target has a 50% chance of gaining @Affliction[poison] 5, and a 50% chance of gaining @Affliction[burn] 5.</p>",
-        "contestType": "",
-        "contestEffect": "",
-        "free": false,
-        "slot": null
+        "img": "icons/svg/explosion.svg"
       }
     ],
-    "container": null,
-    "grade": "E"
+    "grade": "E",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
   },
   "_id": "NVPL4V25PvYi04If",
-  "effects": []
+  "effects": [
+    {
+      "name": "Shadow Corruption",
+      "type": "passive",
+      "_id": "2YY1tBzXaHb9aq1m",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "shadow-corruption-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.poisoncondititem",
+            "predicate": [],
+            "chance": 50,
+            "affects": "target",
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "roll-effect",
+            "key": "shadow-corruption-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.burnconditioitem",
+            "predicate": [],
+            "chance": 50,
+            "affects": "target",
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": "Compendium.ptr2e.core-moves.Item.NVPL4V25PvYi04If.ActiveEffect.2YY1tBzXaHb9aq1m",
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.5.0",
+        "createdTime": 1735910698847,
+        "modifiedTime": 1735910762141,
+        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
+      }
+    }
+  ]
 }

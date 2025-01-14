@@ -15,7 +15,7 @@ export default class EffectRollChangeSystem extends ChangeModel {
       chance: new fields.NumberField({ required: true, initial: 10, min: 1, max: 100 }),
       affects: new fields.StringField({
         required: true,
-        choices: ["self", "target", "origin"].reduce<Record<string, string>>((acc, affects) => ({ ...acc, [affects]: affects }), {}),
+        choices: ["self", "target", "origin", "defensive"].reduce<Record<string, string>>((acc, affects) => ({ ...acc, [affects]: affects }), {}),
         initial: "target",
       }),
     }
@@ -66,6 +66,7 @@ export default class EffectRollChangeSystem extends ChangeModel {
       self: [],
       target: [],
       origin: [],
+      defensive: [],
     });
     synthetics[this.affects].push(defferedEffect);
   }

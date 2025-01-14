@@ -613,7 +613,7 @@ export default {
 } as TypeEffectiveness;
 
 export function getTypes() {
-    return Object.keys(game.settings.get("ptr2e", "pokemonTypes") as TypeEffectiveness);
+    return Object.keys(game.settings.get("ptr2e", "pokemonTypes"));
 }
 
 export type TypeEffectiveness = {

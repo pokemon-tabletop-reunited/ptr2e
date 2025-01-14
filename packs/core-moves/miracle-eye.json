@@ -5,24 +5,29 @@
   "system": {
     "slug": "miracle-eye",
     "description": "<p>Effect: The user's next Psychic Type attack deals neutral damage against Dark Type creatures, and it gains [Danger Close].</p>",
-    "traits": [],
+    "traits": [
+      "interrupt-1",
+      "pp-updated"
+    ],
     "actions": [
       {
         "slug": "miracle-eye",
         "name": "Miracle Eye",
         "type": "attack",
-        "traits": [],
+        "traits": [
+          "pp-updated"
+        ],
         "range": {
           "target": "self",
           "distance": 0,
           "unit": "m"
         },
         "cost": {
-          "activation": "simple",
-          "powerPoints": 1,
+          "activation": "free",
+          "powerPoints": 3,
           "delay": null,
           "priority": null,
-          "trigger": null
+          "trigger": "When your Psychic Type attack hits a Dark-Type Creature."
         },
         "category": "status",
         "power": null,
@@ -30,7 +35,7 @@
         "types": [
           "psychic"
         ],
-        "description": "<p>Effect: The user's next Psychic Type attack deals neutral damage against Dark Type creatures, and it gains [Danger Close].</p>",
+        "description": "<p>Trigger: When your Psychic Type attack hits a Dark-Type Creature.</p><p>Effect: This Psychic Type attack ignores the natural immunity from the Dark-Type and instead counts as neutral effectiveness, still apply other types their effectiveness as normal.</p>",
         "contestType": "",
         "contestEffect": "",
         "free": false,
@@ -38,7 +43,7 @@
       }
     ],
     "container": null,
-    "grade": "E"
+    "grade": "C"
   },
   "_id": "ZejmguTpCD5q41cF",
   "effects": []

@@ -6,7 +6,8 @@
     "slug": "extreme-evoboost",
     "description": "<p>Trigger: User's partner uses Z-Pose! and triggers the appropriate Z-Power-Crystal.</p><p>Effect: The user's default ATK, DEF, SPATK, SPDEF, and SPD increase by +1, and heals 50% of their Max HP. If the user is an Eevee, the user's default stats increase by another +1 and have their HP fully restored.</p><p>Requirement: [Eevee] Z-Power-Crystal as an Accessory Item and Last Resort on the user's Active List.</p>",
     "traits": [
-      "zenith"
+      "zenith",
+      "pp-updated"
     ],
     "actions": [
       {
@@ -14,7 +15,8 @@
         "name": "Extreme Evoboost",
         "type": "attack",
         "traits": [
-          "zenith"
+          "zenith",
+          "pp-updated"
         ],
         "range": {
           "target": "self",
@@ -23,7 +25,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 0,
+          "powerPoints": 10,
           "delay": null,
           "priority": null,
           "trigger": "<p>User's partner uses Z-Pose! and triggers the appropriate Z-Power-Crystal.</p>"
@@ -42,7 +44,7 @@
       }
     ],
     "container": null,
-    "grade": "E"
+    "grade": "A"
   },
   "_id": "BlNt2Lh9xW0hCuZq",
   "effects": []

@@ -372,43 +372,44 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
     this.inventoryPoints.max = 12 + Math.floor((this.skills.get('resources')?.total ?? 0) / 10);
 
     this.details.size.heightClass = SpeciesSystemModel.getSpeciesSize(this.details.size.height || this.parent.species?.size.height || 0, this.parent.species?.size.type as "height" | "quad" | "length" || "height").sizeClass;
-    this.details.size.weightClass = (() => {
-      const weight = this.details.size.weight || this.parent.species?.size.weight || 0;
-      switch (true) {
-        case weight < 10:
-          return 1;
-        case weight < 20:
-          return 2;
-        case weight < 30:
-          return 3;
-        case weight < 40:
-          return 4;
-        case weight < 55:
-          return 5;
-        case weight < 70:
-          return 6;
-        case weight < 85:
-          return 7;
-        case weight < 100:
-          return 8;
-        case weight < 120:
-          return 9;
-        case weight < 145:
-          return 10;
-        case weight < 190:
-          return 11;
-        case weight < 240:
-          return 12;
-        case weight < 305:
-          return 13;
-        case weight < 350:
-          return 14;
-        case weight < 410:
-          return 15;
-        default:
-          return 16;
-      }
-    })();
+    this.details.size.weightClass = this.calculateWeightClass(this.details.size.weight || this.parent.species?.size.weight || 0);
+  }
+
+  private calculateWeightClass(weight: number) {
+    switch (true) {
+      case weight < 10:
+        return 1;
+      case weight < 20:
+        return 2;
+      case weight < 30:
+        return 3;
+      case weight < 40:
+        return 4;
+      case weight < 55:
+        return 5;
+      case weight < 70:
+        return 6;
+      case weight < 85:
+        return 7;
+      case weight < 100:
+        return 8;
+      case weight < 120:
+        return 9;
+      case weight < 145:
+        return 10;
+      case weight < 190:
+        return 11;
+      case weight < 240:
+        return 12;
+      case weight < 305:
+        return 13;
+      case weight < 350:
+        return 14;
+      case weight < 410:
+        return 15;
+      default:
+        return 16;
+    }
   }
 
   _initializeModifiers() {
@@ -427,7 +428,10 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
       spdMultiplier: 1,
       speMultiplier: 1,
       skills: 1,
-      movement: 0
+      movement: 0,
+      powerPoints: 0,
+      weightClass: 0,
+      heightClass: 0
     };
   }
 
@@ -562,7 +566,7 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
     this.health.max = this.attributes.hp.value;
     this.health.percent = Math.round((this.health.value / this.health.max) * 100);
 
-    this.powerPoints.max = 20 + Math.ceil(0.5 * this.advancement.level);
+    this.powerPoints.max = 20 + Math.ceil(0.5 * this.advancement.level) + (this.modifiers.powerPoints ?? 0);
     this.inventoryPoints.max = 12 + Math.floor((this.skills.get('resources')?.total ?? 0) / 10) + (this.modifiers.inventoryPoints ?? 0);
 
     // Apply type based immunities
@@ -586,6 +590,9 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
         movement.value = Math.max(1, movement.value + Number(this.modifiers.movement));
       }
     }
+
+    this.details.size.heightClass = Math.clamp(SpeciesSystemModel.getSpeciesSize(this.details.size.height || this.parent.species?.size.height || 0, this.parent.species?.size.type as "height" | "quad" | "length" || "height").sizeClass + (this.modifiers.heightClass ?? 0), 0, 8)
+    this.details.size.weightClass = Math.clamp(this.calculateWeightClass(this.details.size.weight || this.parent.species?.size.weight || 0) + (this.modifiers.weightClass ?? 0), 1, 16)
   }
 
   _calculateStatTotal(stat: Attribute | Omit<Attribute, "stage">): number {

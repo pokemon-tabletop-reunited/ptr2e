@@ -5,13 +5,17 @@
   "system": {
     "slug": "gear-up",
     "description": "<p>Effect: The user and all allied creatures with the Ability Plus or Minus increase their ATK Stage and SPATK Stage by +1 for 5 Activations. The Stage increase is doubled for creatures with both abilities.</p>",
-    "traits": [],
+    "traits": [
+      "pp-updated"
+    ],
     "actions": [
       {
         "slug": "gear-up",
         "name": "Gear Up",
         "type": "attack",
-        "traits": [],
+        "traits": [
+          "pp-updated"
+        ],
         "range": {
           "target": "field",
           "distance": 0,
@@ -19,7 +23,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 5,
+          "powerPoints": 3,
           "delay": null,
           "priority": null,
           "trigger": null
