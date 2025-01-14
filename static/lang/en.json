@@ -1159,6 +1159,17 @@
       "WorldSchemaVersion": {
         "Name": "World Schema Version",
         "Hint": "The version of the world schema. Don't change this unless you know what you're doing."
+      },
+      "PokemonTypes": {
+        "Name": "Type Editor",
+        "Label": "Open Editor",
+        "Hint": "Manage the Elemental Types available in the system."
+      },
+      "Tokens": {
+        "Autoscale": {
+          "Name": "Autoscale Tokens",
+          "Hint": "Enables auto scaling for smaller tokens."
+        }
       }
     },
     "SkillsEditor": {
@@ -2910,6 +2921,43 @@
       "aura": "An Aura is an Emanation that persists around the character token using this Action.",
       "allied-aura": "An Allied Aura is an Aura that only affects allies.",
       "enemy-aura": "An Enemy Aura is an Aura that only affects enemies."
+    },
+    "TypeMatrix": {
+      "Title": "Type Matrix",
+      "AddType": {
+        "Label": "Add Type",
+        "Hint": "Please provide the name & icons for the new type.",
+        "Name": {
+          "Name": "Type Name",
+          "Hint": "The name of the type."
+        },
+        "IconImg": {
+          "Name": "Type Icon",
+          "Hint": "The icon to use for the type."
+        },
+        "BarImg": {
+          "Name": "Type Bar Image",
+          "Hint": "The bar image to use for the type when displaying in Chat."
+        }
+      },
+      "Reset": {
+        "Label": "Reset to Default",
+        "Title": "Reset Type Matrix",
+        "Content": "Are you sure you want to reset the Type Matrix to its default values?"
+      },
+      "Submit": "Submit",
+      "Delete": {
+        "Title": "Delete type",
+        "Label": "Delete",
+        "Content": "Are you sure you want to delete this type?",
+        "Error": "Core types cannot be deleted by the GM. They can only be overridden by modules."
+      },
+      "Dialog": {
+        "Title": "Edit Type"
+      }
+    },
+    "DistanceToTarget": {
+      "Hint": "When clicked, outputs the distance between current selected token and all targeted tokens to chat."
     }
   }
 }
