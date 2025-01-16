@@ -20,12 +20,12 @@
         ],
         "range": {
           "target": "creature",
-          "distance": 1,
+          "distance": 10,
           "unit": "m"
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 2
+          "powerPoints": 4
         },
         "category": "special",
         "power": 80,
@@ -33,11 +33,12 @@
         "types": [
           "fire"
         ],
-        "description": "<p>Effect: On hit, the user has a 10% chance of gaining +1 SPATK Stage for 5 Activations.</p>",
-        "img": "icons/svg/explosion.svg"
+        "description": "<p>Effect: On hit, the user has a 50% chance of gaining +1 SPATK Stage for 5 Activations.</p>",
+        "img": "icons/svg/explosion.svg",
+        "predicate": []
       }
     ],
-    "grade": "E",
+    "grade": "B",
     "_migration": {
       "version": null,
       "previous": null
@@ -57,8 +58,8 @@
             "key": "fiery-dance-attack",
             "value": "Compendium.ptr2e.core-effects.Item.1TqcwIUNl32wJCAa",
             "predicate": [],
-            "chance": 10,
-            "affects": "target",
+            "chance": 50,
+            "affects": "self",
             "mode": 2,
             "priority": null,
             "ignored": false
@@ -92,10 +93,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "ptr2e",
-        "systemVersion": "0.10.0-alpha.3.0.0",
+        "systemVersion": "0.10.0-alpha.5.1.2",
         "createdTime": 1729543303447,
-        "modifiedTime": 1729543325524,
-        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
+        "modifiedTime": 1737066850195,
+        "lastModifiedBy": "IcBpMqhFuTck9VpX"
       }
     }
   ]
