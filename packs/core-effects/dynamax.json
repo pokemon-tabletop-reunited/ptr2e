@@ -1,0 +1,83 @@
+{
+  "name": "Dynamax!",
+  "type": "effect",
+  "system": {
+    "_migration": {
+      "version": 0.109,
+      "previous": {
+        "schema": 0.108,
+        "foundry": "12.331",
+        "system": "0.10.0-alpha.4.0.0"
+      }
+    },
+    "slug": "dynamax",
+    "description": "<p>This effect will Dynamax your Pokemon, increasing it's size and it's max HP accordingly. Other effects will need to be handled manually at this time.</p>",
+    "traits": [
+      "partial-automation"
+    ]
+  },
+  "img": "icons/magic/control/silhouette-grow-shrink-tan.webp",
+  "effects": [
+    {
+      "name": "Dynamax!",
+      "type": "passive",
+      "_id": "t8yIS103g8UpyjqL",
+      "img": "icons/magic/control/silhouette-grow-shrink-tan.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "basic",
+            "key": "system.modifiers.hpMultiplier",
+            "value": 2,
+            "mode": 1,
+            "predicate": [],
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "key": "system.modifiers.heightClass",
+            "value": 10,
+            "predicate": [],
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.5.1.2",
+        "createdTime": null,
+        "modifiedTime": 1737115807775,
+        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
+      }
+    }
+  ],
+  "_id": "Fe2dcQTF8GKSsMFt"
+}
