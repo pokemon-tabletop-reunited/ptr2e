@@ -4,14 +4,14 @@
   "img": "systems/ptr2e/img/svg/psychic_icon.svg",
   "system": {
     "slug": "ally-switch",
-    "description": "<p>Effect: The user and the selected Ally switch locations instantly.</p>",
-    "traits": ["requires-rework"],
     "actions": [
       {
         "slug": "ally-switch",
         "name": "Ally Switch",
         "type": "attack",
-        "traits": ["requires-rework"],
+        "traits": [
+          "requires-rework"
+        ],
         "range": {
           "target": "creature",
           "distance": 5,
@@ -19,10 +19,7 @@
         },
         "cost": {
           "activation": "simple",
-          "powerPoints": 6,
-          "delay": null,
-          "priority": null,
-          "trigger": null
+          "powerPoints": 6
         },
         "category": "status",
         "power": null,

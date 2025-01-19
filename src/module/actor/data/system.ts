@@ -567,6 +567,7 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
     this.health.percent = Math.round((this.health.value / this.health.max) * 100);
 
     this.powerPoints.max = 20 + Math.ceil(0.5 * this.advancement.level) + (this.modifiers.powerPoints ?? 0);
+    this.powerPoints.percent = Math.round((this.powerPoints.value / this.powerPoints.max) * 100);
     this.inventoryPoints.max = 12 + Math.floor((this.skills.get('resources')?.total ?? 0) / 10) + (this.modifiers.inventoryPoints ?? 0);
 
     // Apply type based immunities

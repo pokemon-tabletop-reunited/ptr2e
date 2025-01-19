@@ -627,7 +627,7 @@ export default abstract class BlueprintSystem extends HasEmbed(HasMigrations(fou
           {
             dexId: evolution.system.number,
             shiny,
-            forms: evolution.system.form ? [evolution.system.form] : [],
+            forms: evolution.system.form ? evolution.system.form.split("-") : [],
           },
           config
         );
@@ -637,7 +637,7 @@ export default abstract class BlueprintSystem extends HasEmbed(HasMigrations(fou
           {
             dexId: evolution.system.number,
             shiny,
-            forms: evolution.system.form ? [evolution.system.form, "token"] : ["token"],
+            forms: evolution.system.form ? [...evolution.system.form.split("-"), "token"] : ["token"],
           },
           config
         );

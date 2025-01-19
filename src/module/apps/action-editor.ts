@@ -4,6 +4,7 @@ import { ApplicationV2Expanded } from "./appv2-expanded.ts";
 import { htmlQuery, htmlQueryAll, sluggify } from "@utils";
 import { AttackPTR2e, Trait } from "@data";
 import * as R from "remeda";
+import { HandlebarsRenderOptions } from "types/foundry/common/applications/handlebars-application.ts";
 
 export class ActionEditor<
   TDocument extends ItemPTR2e<ItemSystemsWithActions>,
@@ -111,6 +112,19 @@ export class ActionEditor<
             },
           });
 
+        },
+        copyUuid: {
+          handler: function <TDocument extends ItemPTR2e<ItemSystemsWithActions>>(this: ActionEditor<TDocument>, event: MouseEvent) {
+            event.preventDefault(); // Don't open context menu
+            event.stopPropagation(); // Don't trigger other events
+            if (event.detail > 1) return; // Ignore repeated clicks
+            const id = event.button === 2 ? this.action.slug : this.action.uuid;
+            const type = event.button === 2 ? "slug" : "uuid";
+            //TODO: Setup localization
+            const label = "Action";
+            game.clipboard.copyPlainText(id);
+            ui.notifications.info(game.i18n.format("DOCUMENT.IdCopiedClipboard", { label, type, id }));
+          }, buttons: [0, 2]
         }
       }
     },
@@ -214,8 +228,8 @@ export class ActionEditor<
       );
     }
 
-    if('predicate' in data && typeof data.predicate == 'string') {
-      if(data.predicate.trim() === "") {
+    if ('predicate' in data && typeof data.predicate == 'string') {
+      if (data.predicate.trim() === "") {
         delete data.predicate;
       } else {
         try {
@@ -297,6 +311,23 @@ export class ActionEditor<
         });
       }
     }
+  }
+
+  override async _renderFrame(options: HandlebarsRenderOptions): Promise<HTMLElement> {
+    const frame = await super._renderFrame(options);
+    if (!this.hasFrame) return frame;
+
+    // Add document ID copy
+    if (this.action.slug) {
+      const copyLabel = game.i18n.localize("SHEETS.CopyUuid");
+      const copyId = `
+        <button type="button" class="header-control fa-solid fa-passport icon" data-action="copyUuid"
+                data-tooltip="${copyLabel}" aria-label="${copyLabel}"></button>
+      `;
+      this.window.close.insertAdjacentHTML("beforebegin", copyId);
+    }
+
+    return frame;
   }
 
   protected override async _onSubmitForm(config: foundry.applications.api.ApplicationFormConfiguration, event: Event | SubmitEvent): Promise<void> {

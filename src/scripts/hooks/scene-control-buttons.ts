@@ -55,7 +55,7 @@ export const GetSceneControlButtons: PTRHook = {
 
         hud.tools.push({
           name: "PTR2E.TypeMatrix.Title",
-          title: "PTR2E.ExpTracker.Hint",
+          title: "PTR2E.TypeMatrix.Hint",
           icon: "fas fa-grid-4",
           button: true,
           visible: true,

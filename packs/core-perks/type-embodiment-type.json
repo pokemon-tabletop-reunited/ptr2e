@@ -12,21 +12,15 @@
         "slug": "type-embodiment-type",
         "description": "<p>You gain a &lt;Type&gt; trait, from the baseline 18 &lt;Type&gt;s (at default). A recommended limit on &lt;Type&gt; traits is 3 total, but this can be revised at GM discretion. May replace an existing &lt;Type&gt;.</p>",
         "cost": {
-          "activation": "free",
-          "powerPoints": 0,
-          "delay": null,
-          "priority": null
+          "activation": "free"
         },
         "type": "passive",
         "traits": [],
         "img": "icons/svg/explosion.svg",
         "range": {
           "target": "enemy",
-          "unit": "m",
-          "distance": 0
-        },
-        "variant": null,
-        "hidden": false
+          "unit": "m"
+        }
       }
     ],
     "slug": "type-embodiment-type",
@@ -37,6 +31,10 @@
     },
     "nodes": [
       {
+        "x": 156,
+        "y": 105,
+        "hidden": false,
+        "type": "normal",
         "connected": [
           "type-harmony",
           "improved-overland-1",
@@ -44,6 +42,10 @@
           "root-3",
           "firefly"
         ],
+        "tier": {
+          "rank": null,
+          "uuid": null
+        },
         "config": {
           "alpha": null,
           "backgroundColor": "#161616",
@@ -52,18 +54,32 @@
           "texture": "systems/ptr2e/img/perk-icons/Touched.svg",
           "tint": "#ffffff",
           "scale": null
-        },
+        }
+      },
+      {
+        "x": null,
+        "y": null,
         "hidden": false,
         "type": "normal",
-        "x": 156,
-        "y": 105,
-        "tier": null
+        "connected": [],
+        "tier": {
+          "rank": 2,
+          "uuid": "Compendium.ptr2e.core-perks.Ele0eTIzN2GUFQD7"
+        },
+        "config": {
+          "alpha": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "borderWidth": null,
+          "texture": null,
+          "tint": null,
+          "scale": null
+        }
       }
     ],
     "autoUnlock": [],
-    "originSlug": null,
-    "variant": null,
-    "mode": null,
+    "variant": "tiered",
+    "mode": "coexist",
     "global": true,
     "webs": []
   },

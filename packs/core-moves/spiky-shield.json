@@ -4,13 +4,6 @@
   "img": "systems/ptr2e/img/svg/grass_icon.svg",
   "system": {
     "slug": "spiky-shield",
-    "description": "<p>Trigger: The user is targeted by a  Attack</p><p>Effect: The triggering attack fails to hit the user, and additional attacks that hit the user also fail to hit until the user's next Activation. Attacks failing to hit the user do not activate on-miss effects. If any of these attacks would make contact, that attacker loses a Tick of Hit Points.</p>",
-    "traits": [
-      "shield",
-      "exhaust",
-      "interrupt-4",
-      "pp-updated"
-    ],
     "actions": [
       {
         "slug": "spiky-shield",
@@ -30,8 +23,6 @@
         "cost": {
           "activation": "complex",
           "powerPoints": 3,
-          "delay": null,
-          "priority": null,
           "trigger": "<p>The user is targeted by a  Attack.</p>"
         },
         "category": "status",
