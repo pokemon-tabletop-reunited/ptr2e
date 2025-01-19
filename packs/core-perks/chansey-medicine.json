@@ -16,14 +16,11 @@
         ],
         "range": {
           "target": "creature",
-          "unit": "m",
-          "distance": 0
+          "unit": "m"
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 3,
-          "delay": null,
-          "priority": null
+          "powerPoints": 3
         },
         "category": "status",
         "types": [
@@ -31,18 +28,7 @@
         ],
         "description": "<p>Effect: The target recovers 4 Ticks of HP.</p>",
         "img": "icons/svg/explosion.svg",
-        "variant": null,
-        "power": null,
-        "accuracy": null,
-        "contestType": "",
-        "contestEffect": "",
-        "free": false,
-        "slot": null,
-        "summon": null,
-        "defaultVariant": null,
-        "flingItemId": null,
-        "offensiveStat": null,
-        "defensiveStat": null
+        "predicate": []
       }
     ],
     "slug": "chansey-medicine",
@@ -58,8 +44,12 @@
     ],
     "cost": 1,
     "_migration": {
-      "version": null,
-      "previous": null
+      "version": 0.11,
+      "previous": {
+        "schema": null,
+        "foundry": "12.331",
+        "system": "0.10.0-alpha.5.1.2"
+      }
     },
     "nodes": [
       {
@@ -93,9 +83,7 @@
     "autoUnlock": [
       "trait:healer"
     ],
-    "originSlug": null,
-    "variant": null,
-    "mode": null,
+    "originSlug": "chansey-medicine",
     "global": true,
     "webs": []
   },
@@ -118,8 +106,8 @@
           },
           {
             "type": "grant-item",
-            "key": "",
-            "value": "Compendium.ptr2e.core-moves.Item.6OK8vhZYljL4X7cd",
+            "key": "rage",
+            "value": "Compendium.ptr2e.core-moves.Item.W85QPAFdQRYn5Yfp",
             "predicate": [],
             "mode": 2,
             "priority": null,
@@ -137,8 +125,8 @@
           },
           {
             "type": "grant-item",
-            "key": "",
-            "value": "Compendium.ptr2e.core-moves.Item.Zsg9MXOaKH3vAb6q",
+            "key": "workUp",
+            "value": "Compendium.ptr2e.core-moves.Item.DymPJiI57iCzqLp1",
             "predicate": [],
             "mode": 2,
             "priority": null,
@@ -153,7 +141,7 @@
               "grantee": "detach",
               "granter": "cascade"
             }
-          }          
+          }
         ],
         "slug": null,
         "traits": [],
@@ -163,7 +151,7 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
+        "startTime": 0,
         "seconds": null,
         "combat": null,
         "rounds": null,
@@ -177,16 +165,29 @@
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "flags": {},
+      "flags": {
+        "ptr2e": {
+          "itemGrants": {
+            "rage": {
+              "id": "RDgSQIbNjQvDgq1t",
+              "onDelete": "detach"
+            },
+            "workUp": {
+              "id": "AWK4YzjeM0jv7ot8",
+              "onDelete": "detach"
+            }
+          }
+        }
+      },
       "_stats": {
         "compendiumSource": "Compendium.ptr2e.core-perks.Item.OWyKxGQEmvucwXQw.ActiveEffect.jYRRns43LCZAkrHB",
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "ptr2e",
-        "systemVersion": "0.10.0-alpha.3.4.1",
-        "createdTime": 1732231695711,
-        "modifiedTime": 1732231705543,
-        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
+        "systemVersion": "0.10.0-alpha.5.1.2",
+        "createdTime": null,
+        "modifiedTime": 1736879679418,
+        "lastModifiedBy": "u4k1601gjyRHOjtg"
       }
     }
   ]

@@ -4,12 +4,6 @@
   "img": "systems/ptr2e/img/svg/fighting_icon.svg",
   "system": {
     "slug": "focus-punch",
-    "description": "<p>Effect: If the user is hit by at least one Physical or Special attack after the declaration and before the resolution of this attack, its Power is reduced by half.</p>",
-    "traits": [
-      "punch",
-      "delay-3",
-      "contact"
-    ],
     "actions": [
       {
         "slug": "focus-punch",
@@ -29,9 +23,7 @@
         "cost": {
           "activation": "complex",
           "powerPoints": 5,
-          "delay": 3,
-          "priority": null,
-          "trigger": null
+          "delay": 3
         },
         "category": "physical",
         "power": 150,
@@ -64,7 +56,6 @@
           "activation": "complex",
           "powerPoints": 5,
           "delay": 3,
-          "priority": null,
           "trigger": "<p>The user was hit by at least one Physical or Special attack after the declaration and before the resolution of Focus Punch.</p>"
         },
         "category": "physical",

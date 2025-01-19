@@ -4,14 +4,6 @@
   "img": "systems/ptr2e/img/svg/electric_icon.svg",
   "system": {
     "slug": "wildbolt-storm",
-    "description": "<p>Effect: On hit, all valid targets have a 30% chance of gaining @Affliction[paralysis] 7. If there is Rainy or Windy Weather, this attack gains [Danger Close].</p>",
-    "traits": [
-      "legendary",
-      "blast-5",
-      "sky",
-      "wind",
-      "environ"
-    ],
     "actions": [
       {
         "slug": "wildbolt-storm",
@@ -32,10 +24,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 10,
-          "delay": null,
-          "priority": null,
-          "trigger": null
+          "powerPoints": 10
         },
         "category": "special",
         "power": 100,
@@ -69,8 +58,6 @@
         "cost": {
           "activation": "complex",
           "powerPoints": 8,
-          "delay": null,
-          "priority": null,
           "trigger": "Rainy or Windy Weather is present."
         },
         "category": "special",
