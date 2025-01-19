@@ -148,7 +148,7 @@ export class CompendiumBrowserSpeciesTab extends CompendiumBrowserTab {
               {
                 dexId: entry.number,
                 shiny: false,
-                forms: entry.form ? [entry.form] : [],
+                forms: entry.form ? entry.form.split("-") : [],
               },
               config
             );
