@@ -5,12 +5,6 @@
   "img": "systems/ptr2e/img/svg/dark_icon.svg",
   "system": {
     "slug": "trip-up",
-    "traits": [
-      "dash",
-      "interrupt-4",
-      "flinch-4",
-      "contact"
-    ],
     "actions": [
       {
         "name": "Trip Up",
@@ -29,8 +23,6 @@
         "cost": {
           "activation": "complex",
           "powerPoints": 3,
-          "delay": null,
-          "priority": null,
           "trigger": ""
         },
         "variant": null,
@@ -65,8 +57,6 @@
         "cost": {
           "activation": "complex",
           "powerPoints": 3,
-          "delay": null,
-          "priority": null,
           "trigger": "<p>A [Priority X] or [Interrupt X] Attack is declared against the user.</p>"
         },
         "variant": "trip-up",
@@ -83,7 +73,6 @@
         "description": "<p>Trigger: A [Priority X] or [Interrupt X] Attack is declared against the user.</p><p>Effect: The user can freely move up to half of the Movement Score of their choice towards the target and then attacks with Trip Up, if possible. On hit, the target is Flinched and gains -3 ACC Stages for 1 Activation. If the target gains @Affliction[fainted] due to damage from this attack, the triggering attack fails.</p>"
       }
     ],
-    "description": "<p>Trigger: A [Priority X] or [Interrupt X] Attack is declared against the user.</p><p>Effect: The user can freely move up to half of the Movement Score of their choice towards the target and then attacks with Trip Up, if possible. On hit, the target is Flinched and gains -3 ACC Stages for 1 Activation. If the target gains @Affliction[fainted] due to damage from this attack, the triggering attack fails.</p>",
     "container": null,
     "grade": "C"
   },

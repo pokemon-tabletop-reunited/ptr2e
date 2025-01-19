@@ -4,12 +4,6 @@
   "img": "systems/ptr2e/img/svg/normal_icon.svg",
   "system": {
     "slug": "max-guard",
-    "description": "<p>Trigger: The user would be hit by an attack.</p><p>Effect: The triggering attack fails to hit the user, and additional attacks that would hit also fail to hit the user until their next Activation, including [Max] attacks. Attacks failing to hit the user do not activate on-miss effects.</p><p>Requirement: User is Dynamaxed and has a Status-Category attack on their Active List.</p>",
-    "traits": [
-      "max",
-      "interrupt-7",
-      "pp-updated"
-    ],
     "actions": [
       {
         "slug": "max-guard",
@@ -28,8 +22,6 @@
         "cost": {
           "activation": "complex",
           "powerPoints": 5,
-          "delay": null,
-          "priority": null,
           "trigger": "<p>The user would be hit by an attack.</p>"
         },
         "category": "status",
