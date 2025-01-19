@@ -26,7 +26,7 @@ export class CompendiumBrowserMoveTab extends CompendiumBrowserTab {
     const debug = (msg: string, ...params: unknown[]) => console.debug(`PTR2e | Compendium Browser | Move Tab | ${msg}`, params);
     debug("Stated loading data");
     const moves: CompendiumBrowserIndexData[] = [];
-    const indexFields = ["img", "system.description", "system.traits", "system.actions", "system.grade"];
+    const indexFields = ["img", "system.description", "system.actions", "system.grade"];
     const allTraits = new Set<string>();
     let maxRange = 10;
 
@@ -41,7 +41,7 @@ export class CompendiumBrowserMoveTab extends CompendiumBrowserTab {
 
         moveData.filters = {};
 
-        if (!this.hasAllIndexFields(moveData, ["img", "system.traits", "system.actions", "system.grade"])) {
+        if (!this.hasAllIndexFields(moveData, ["img", "system.actions", "system.grade"])) {
           console.warn(`PTR2e | Compendium Browser | Move Tab | ${pack.metadata.label} | ${moveData.name} does not have all required data fields.`);
           continue;
         }
@@ -98,7 +98,7 @@ export class CompendiumBrowserMoveTab extends CompendiumBrowserTab {
       acc[grade] = grade;
       return acc;
     }, {} as Record<string, string>));
-    this.filterData.checkboxes.target.options = this.generateCheckboxOptions(Object.values(PTRCONSTS.TargetOptions).reduce<Record<string,string>>((acc, target) => ({...acc, [target]: formatSlug(target)}), {}));
+    this.filterData.checkboxes.target.options = this.generateCheckboxOptions(Object.values(PTRCONSTS.TargetOptions).reduce<Record<string, string>>((acc, target) => ({ ...acc, [target]: formatSlug(target) }), {}));
     this.filterData.selects.category.options = Object.values(PTRCONSTS.Categories).reduce<Record<string, string>>(
       (acc, category) => ({ ...acc, [category]: Handlebars.helpers.capitalizeFirst(category) }),
       {}
