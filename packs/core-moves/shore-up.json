@@ -4,10 +4,6 @@
   "img": "systems/ptr2e/img/svg/ground_icon.svg",
   "system": {
     "slug": "shore-up",
-    "description": "<p>Effect: The user recovers 8 Ticks of HP. If Dusty Weather is active, the user recovers 11 Ticks of HP and gains @Affliction[resolved] 3 instead.</p>",
-    "traits": [
-      "healing"
-    ],
     "actions": [
       {
         "slug": "shore-up",
@@ -23,10 +19,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 8,
-          "delay": null,
-          "priority": null,
-          "trigger": null
+          "powerPoints": 8
         },
         "category": "status",
         "power": null,
@@ -55,8 +48,6 @@
         "cost": {
           "activation": "complex",
           "powerPoints": 8,
-          "delay": null,
-          "priority": null,
           "trigger": "<p>Sandy Weather is active.</p>"
         },
         "category": "status",

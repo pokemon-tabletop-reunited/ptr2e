@@ -1,52 +1,44 @@
 {
-    "name": "Lotus Pods",
-    "type": "move",
-    "img": "systems/ptr2e/img/svg/normal_icon.svg",
-    "system": {
-      "slug": "lotus-pods",
-      "description": "",
-      "traits": [
-        "powder",
-        "blast-3"
-      ],
-      "actions": [
-        {
-          "slug": "lotus-pods",
-          "name": "Lotus Pods",
-          "type": "attack",
-          "traits": [
-            "powder",
-            "blast-3",
-            "pp-updated"
-          ],
-          "range": {
-            "target": "blast",
-            "distance": 10,
-            "unit": "m"
-          },
-          "cost": {
-            "activation": "complex",
-            "powerPoints": 8,
-            "delay": null,
-            "priority": null,
-            "trigger": null
-          },
-          "category": "special",
-          "power": 75,
-          "accuracy": 100,
-          "types": [
-            "normal"
-          ],
-          "description": "<p>Effect: On hit, all valid targets have a 30% chance of gaining @Affliction[drowsy] 5.</p>",
-          "contestType": "",
-          "contestEffect": "",
-          "free": false,
-          "slot": null
-        }
-      ],
-      "container": null,
-      "grade": "B"
-    },
-    "_id": "n4rGUelHpp7rVQoM",
-    "effects": []
-  }
+  "name": "Lotus Pods",
+  "type": "move",
+  "img": "systems/ptr2e/img/svg/normal_icon.svg",
+  "system": {
+    "slug": "lotus-pods",
+    "actions": [
+      {
+        "slug": "lotus-pods",
+        "name": "Lotus Pods",
+        "type": "attack",
+        "traits": [
+          "powder",
+          "blast-3",
+          "pp-updated"
+        ],
+        "range": {
+          "target": "blast",
+          "distance": 10,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 8
+        },
+        "category": "special",
+        "power": 75,
+        "accuracy": 100,
+        "types": [
+          "normal"
+        ],
+        "description": "<p>Effect: On hit, all valid targets have a 30% chance of gaining @Affliction[drowsy] 5.</p>",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      }
+    ],
+    "container": null,
+    "grade": "B"
+  },
+  "_id": "n4rGUelHpp7rVQoM",
+  "effects": []
+}
