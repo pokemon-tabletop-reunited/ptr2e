@@ -4,14 +4,14 @@
   "img": "systems/ptr2e/img/svg/normal_icon.svg",
   "system": {
     "slug": "odor-sleuth",
-    "description": "<p>Effect: The target becomes @Affliction[marked] 3. While the target is @Affliction[marked], the user ignores any positive EVA Stage the target has. If a @Affliction[marked] creature is Ghost-Type, it can be damaged by the user's Normal-Type and Fighting-Type attacks.</p>",
-    "traits": [],
     "actions": [
       {
         "slug": "odor-sleuth",
         "name": "Odor Sleuth",
         "type": "attack",
-        "traits": [],
+        "traits": [
+          "pp-updated"
+        ],
         "range": {
           "target": "creature",
           "distance": 10,
@@ -19,10 +19,7 @@
         },
         "cost": {
           "activation": "simple",
-          "powerPoints": 1,
-          "delay": null,
-          "priority": null,
-          "trigger": null
+          "powerPoints": 3
         },
         "category": "status",
         "power": null,
@@ -38,7 +35,7 @@
       }
     ],
     "container": null,
-    "grade": "E"
+    "grade": "C"
   },
   "_id": "9Vi2Ww1MqimtASOE",
   "effects": []

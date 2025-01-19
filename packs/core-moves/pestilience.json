@@ -4,16 +4,13 @@
   "_id": "hRRNesI4z7E1p8Va",
   "img": "systems/ptr2e/img/svg/bug_icon.svg",
   "system": {
-    "slug": null,
-    "traits": [
-      "blast-2"
-    ],
+    "slug": "pestilience",
     "actions": [
       {
         "name": "Item",
-        "slug": "item",
+        "slug": "pestilence",
         "type": "attack",
-        "img": "icons/svg/explosion.svg",
+        "img": "systems/ptr2e/img/svg/bug_icon.svg",
         "traits": [
           "blast-2"
         ],
@@ -24,43 +21,76 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 3,
-          "delay": null,
-          "priority": null
+          "powerPoints": 3
         },
-        "variant": null,
         "types": [
           "bug"
         ],
         "category": "special",
         "power": 85,
         "accuracy": 80,
-        "contestType": "",
-        "contestEffect": "",
-        "free": false,
-        "slot": null,
         "description": "<p>Effect: On hit, all valid targets have a 10% chance of gaining @Affliction[blight] 8.</p>"
       }
     ],
-    "description": "",
-    "container": null,
-    "grade": "C"
+    "grade": "C",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
   },
-  "effects": [],
-  "sort": 12300000,
-  "ownership": {
-    "default": 0,
-    "CYLdyr5mPSDmNpTp": 3
-  },
-  "flags": {},
-  "_stats": {
-    "compendiumSource": null,
-    "duplicateSource": null,
-    "coreVersion": "12.327",
-    "systemId": "ptr2e",
-    "systemVersion": "0.10.0-alpha.1.0.4",
-    "createdTime": 1718726964341,
-    "modifiedTime": 1719974910665,
-    "lastModifiedBy": "CYLdyr5mPSDmNpTp"
-  }
+  "effects": [
+    {
+      "name": "Pestilence",
+      "type": "passive",
+      "_id": "mGIsm6enhVTYaB7l",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "pestilence-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.blightcondititem",
+            "predicate": [],
+            "chance": 10,
+            "affects": "target",
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.5.0",
+        "createdTime": 1736636130689,
+        "modifiedTime": 1736636172479,
+        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
+      }
+    }
+  ]
 }

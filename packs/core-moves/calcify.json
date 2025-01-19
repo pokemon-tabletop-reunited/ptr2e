@@ -5,14 +5,15 @@
   "img": "systems/ptr2e/img/svg/rock_icon.svg",
   "system": {
     "slug": null,
-    "traits": [],
     "actions": [
       {
         "name": "Calcify",
         "slug": "calcify",
         "type": "attack",
         "img": "icons/svg/explosion.svg",
-        "traits": [],
+        "traits": [
+          "pp-updated"
+        ],
         "range": {
           "target": "creature",
           "distance": 10,
@@ -20,9 +21,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 3,
-          "delay": null,
-          "priority": null
+          "powerPoints": 4
         },
         "variant": null,
         "types": [
@@ -38,9 +37,8 @@
         "description": "<p>Effect: The target gains the Rock Type in addition to its other Types for 7 Activations.</p>"
       }
     ],
-    "description": "",
     "container": null,
-    "grade": "C"
+    "grade": "B"
   },
   "effects": [],
   "sort": 0,

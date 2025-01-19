@@ -5,9 +5,6 @@
   "img": "systems/ptr2e/img/svg/grass_icon.svg",
   "system": {
     "slug": null,
-    "traits": [
-      "powder"
-    ],
     "actions": [
       {
         "name": "Pepper Powder",
@@ -15,7 +12,8 @@
         "type": "attack",
         "img": "icons/svg/explosion.svg",
         "traits": [
-          "powder"
+          "powder",
+          "pp-updated"
         ],
         "range": {
           "target": "cone",
@@ -24,9 +22,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 5,
-          "delay": null,
-          "priority": null
+          "powerPoints": 4
         },
         "variant": null,
         "types": [
@@ -42,7 +38,6 @@
         "description": "<p>Effect: On hit, all valid targets lose -2 ATK and ACC Stages for 5 Activations.</p>"
       }
     ],
-    "description": "",
     "container": null,
     "grade": "B"
   },

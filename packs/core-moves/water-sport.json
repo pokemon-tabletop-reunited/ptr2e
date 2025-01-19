@@ -4,17 +4,14 @@
   "img": "systems/ptr2e/img/svg/water_icon.svg",
   "system": {
     "slug": "water-sport",
-    "description": "<p>Effect: The Terrain type is set to Flooded Terrain for 3 rounds.</p>",
-    "traits": [
-      "terrain"
-    ],
     "actions": [
       {
         "slug": "water-sport",
         "name": "Water Sport",
         "type": "attack",
         "traits": [
-          "terrain"
+          "terrain",
+          "pp-updated"
         ],
         "range": {
           "target": "field",
@@ -23,10 +20,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 3,
-          "delay": null,
-          "priority": null,
-          "trigger": null
+          "powerPoints": 3
         },
         "category": "status",
         "power": null,
@@ -42,7 +36,7 @@
       }
     ],
     "container": null,
-    "grade": "A"
+    "grade": "C"
   },
   "_id": "oLVu4JTAI7CmWoOx",
   "effects": []

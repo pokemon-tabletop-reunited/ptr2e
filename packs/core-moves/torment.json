@@ -4,17 +4,14 @@
   "img": "systems/ptr2e/img/svg/dark_icon.svg",
   "system": {
     "slug": "torment",
-    "description": "<p>Effect: On hit, the target cannot use the same attack consecutively on their Activations for 5 rounds.</p>",
-    "traits": [
-      "social"
-    ],
     "actions": [
       {
         "slug": "torment",
         "name": "Torment",
         "type": "attack",
         "traits": [
-          "social"
+          "social",
+          "pp-updated"
         ],
         "range": {
           "target": "creature",
@@ -23,10 +20,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 6,
-          "delay": null,
-          "priority": null,
-          "trigger": null
+          "powerPoints": 2
         },
         "category": "status",
         "power": null,
@@ -42,7 +36,7 @@
       }
     ],
     "container": null,
-    "grade": "B"
+    "grade": "D"
   },
   "_id": "Cu2xRbjUL4Uhm836",
   "effects": []

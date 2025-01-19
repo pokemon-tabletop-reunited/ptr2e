@@ -8,14 +8,15 @@ import { htmlQueryAll, sluggify } from "@utils";
 import { ApplicationHeaderControlsEntry } from "types/foundry/common/applications/api.js";
 
 export type ApplicationConfigurationExpanded = foundry.applications.api.ApplicationConfiguration & {
-  dragDrop: DragDropConfiguration[];
+  dragDrop?: DragDropConfiguration[];
 };
 
 export class ApplicationV2Expanded<
+  TConfiguration extends ApplicationConfigurationExpanded = ApplicationConfigurationExpanded,
   TRenderOptions extends
   foundry.applications.api.ApplicationRenderOptions = foundry.applications.api.HandlebarsRenderOptions,
-> extends foundry.applications.api.ApplicationV2<ApplicationConfigurationExpanded, TRenderOptions> {
-  declare options: ApplicationConfigurationExpanded;
+> extends foundry.applications.api.ApplicationV2<TConfiguration, TRenderOptions> {
+  declare options: TConfiguration;
 
   static override DEFAULT_OPTIONS: Omit<ApplicationConfigurationExpanded, "uniqueId"> =
     foundry.utils.mergeObject(foundry.applications.api.ApplicationV2.DEFAULT_OPTIONS, {
@@ -24,7 +25,7 @@ export class ApplicationV2Expanded<
 
   protected _dragDropHandlers: DragDrop[];
 
-  constructor(options: Partial<ApplicationConfigurationExpanded> = {}) {
+  constructor(options: Partial<TConfiguration> = {}) {
     super(options);
 
     this._dragDropHandlers = this._createDragDropHandlers();
@@ -43,7 +44,7 @@ export class ApplicationV2Expanded<
    * @private
    */
   _createDragDropHandlers() {
-    return this.options.dragDrop.map((d) => {
+    return this.options.dragDrop!.map((d) => {
       d.permissions = {
         dragstart: this._canDragStart.bind(this),
         drop: this._canDragDrop.bind(this),

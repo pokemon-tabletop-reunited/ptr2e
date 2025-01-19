@@ -4,14 +4,6 @@
   "img": "systems/ptr2e/img/svg/ground_icon.svg",
   "system": {
     "slug": "sandsear-storm",
-    "description": "<p>Effect: On hit, all valid targets have a 30% of gaining @Affliction[burn] 7. If Sandy or Windy Weather are active, this attack gains [Danger Close].</p>",
-    "traits": [
-      "legendary",
-      "blast-4",
-      "environ",
-      "wind",
-      "pp-updated"
-    ],
     "actions": [
       {
         "slug": "sandsear-storm",
@@ -30,10 +22,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 3,
-          "delay": null,
-          "priority": null,
-          "trigger": null
+          "powerPoints": 3
         },
         "category": "special",
         "power": 100,
@@ -67,8 +56,6 @@
         "cost": {
           "activation": "complex",
           "powerPoints": 8,
-          "delay": null,
-          "priority": null,
           "trigger": "Dusty or Windy Weather Weather is present."
         },
         "category": "special",

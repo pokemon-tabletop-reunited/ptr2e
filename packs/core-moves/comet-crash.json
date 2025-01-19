@@ -1,57 +1,46 @@
 {
-    "name": "Comet Crash",
-    "type": "move",
-    "img": "systems/ptr2e/img/svg/fire_icon.svg",
-    "system": {
-      "slug": "comet-crash",
-      "description": "",
-      "traits": [
-        "set-up",
-        "defensive",
-        "recoil-1-8",
-        "terrain",
-        "pp-updated"
-      ],
-      "actions": [
-        {
-          "slug": "comet-crash",
-          "name": "Comet Crash",
-          "type": "attack",
-          "traits": [
-            "set-up",
-            "defensive",
-            "recoil-1-8",
-            "terrain",
-            "pp-updated"
-          ],
-          "range": {
-            "target": "emanation",
-            "distance": 2,
-            "unit": "m"
-          },
-          "cost": {
-            "activation": "complex",
-            "powerPoints": 9,
-            "delay": null,
-            "priority": null,
-            "trigger": null
-          },
-          "category": "physical",
-          "power": 140,
-          "accuracy": 85,
-          "types": [
-            "fire"
-          ],
-          "description": "<p>Effect: Set-Up: The user gains +1 SPDEF and SPD Stage for 5 Activations, freely Moves up to the Movement Score of their choice into the air, and ends their Activation and ends their Activation.</p><p>Resolution: On their next Activation, they move 1.5 times the Movement Score of their choice to a surface, the attacking with and resolving this Attack. On resolution, the Terrain is set to Scorched Terrain.</p>",
-          "contestType": "",
-          "contestEffect": "",
-          "free": false,
-          "slot": null
-        }
-      ],
-      "container": null,
-      "grade": "A"
-    },
-    "_id": "D0vbXN13LTJsHpfp",
-    "effects": []
-  }
+  "name": "Comet Crash",
+  "type": "move",
+  "img": "systems/ptr2e/img/svg/fire_icon.svg",
+  "system": {
+    "slug": "comet-crash",
+    "actions": [
+      {
+        "slug": "comet-crash",
+        "name": "Comet Crash",
+        "type": "attack",
+        "traits": [
+          "set-up",
+          "defensive",
+          "recoil-1-8",
+          "terrain",
+          "pp-updated"
+        ],
+        "range": {
+          "target": "emanation",
+          "distance": 2,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 9
+        },
+        "category": "physical",
+        "power": 140,
+        "accuracy": 85,
+        "types": [
+          "fire"
+        ],
+        "description": "<p>Effect: Set-Up: The user gains +1 SPDEF and SPD Stage for 5 Activations, freely Moves up to the Movement Score of their choice into the air, and ends their Activation and ends their Activation.</p><p>Resolution: On their next Activation, they move 1.5 times the Movement Score of their choice to a surface, the attacking with and resolving this Attack. On resolution, the Terrain is set to Scorched Terrain.</p>",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      }
+    ],
+    "container": null,
+    "grade": "A"
+  },
+  "_id": "D0vbXN13LTJsHpfp",
+  "effects": []
+}

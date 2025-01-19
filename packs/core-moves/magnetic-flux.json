@@ -4,14 +4,14 @@
   "img": "systems/ptr2e/img/svg/electric_icon.svg",
   "system": {
     "slug": "magnetic-flux",
-    "description": "<p>Effect: The user and all allied creatures with the Abiliies Plus or Minus increase their DEF and SPDEF Stages by +1 for 5 Activations (doubled for creatures with both), and those with with the Abiliies Anionic or Cationic increase their ATK and SPATK Stages by +1 for 5 Activations (doubled for creatures with both).</p>",
-    "traits": [],
     "actions": [
       {
         "slug": "magnetic-flux",
         "name": "Magnetic Flux",
         "type": "attack",
-        "traits": [],
+        "traits": [
+          "pp-updated"
+        ],
         "range": {
           "target": "field",
           "distance": 0,
@@ -19,10 +19,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 5,
-          "delay": null,
-          "priority": null,
-          "trigger": null
+          "powerPoints": 3
         },
         "category": "status",
         "power": null,

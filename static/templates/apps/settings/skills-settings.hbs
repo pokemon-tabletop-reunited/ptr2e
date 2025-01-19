@@ -55,7 +55,9 @@
                                     {{#if skill.hidden}}
                                         <a style="color: slategray;" class="item-control hide-skill" data-tooltip-direction="UP" data-tooltip="Unhide {{formatSlug skill.slug}}" data-action="hide-skill"><i class="fas fa-eye-slash"></i></a>
                                     {{else}}
+                                      {{#unless skill.locked}}
                                         <a class="item-control hide-skill" data-tooltip-direction="UP" data-tooltip="Hide {{formatSlug skill.slug}}" data-action="hide-skill"><i class="far fa-eye"></i></a>
+                                      {{/unless}}
                                     {{/if}}
                                     <!-- Delete Skill -->
                                     {{#if (eq tab.id 'userSkills')}}

@@ -4,11 +4,6 @@
   "img": "systems/ptr2e/img/svg/normal_icon.svg",
   "system": {
     "slug": "substitute",
-    "description": "<p>Effect: The user sacrifices HP equal to 1/4 of their Max HP and creates a Substitute. The Substitute's HP is equal to the HP sacrificed.</p>",
-    "traits": [
-      "defensive",
-      "substitute"
-    ],
     "actions": [
       {
         "slug": "substitute",
@@ -16,7 +11,8 @@
         "type": "attack",
         "traits": [
           "defensive",
-          "substitute"
+          "substitute",
+          "pp-updated"
         ],
         "range": {
           "target": "creature",
@@ -25,10 +21,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 7,
-          "delay": null,
-          "priority": null,
-          "trigger": null
+          "powerPoints": 2
         },
         "category": "status",
         "power": null,
@@ -44,7 +37,7 @@
       }
     ],
     "container": null,
-    "grade": "A"
+    "grade": "D"
   },
   "_id": "wlCtO7DEZMMbEwcn",
   "effects": []

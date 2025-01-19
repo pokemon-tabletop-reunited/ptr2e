@@ -4,14 +4,15 @@
   "img": "systems/ptr2e/img/svg/normal_icon.svg",
   "system": {
     "slug": "acupressure",
-    "description": "<p>Effect: Roll 1d8 and raise the Stages of the stat in the corresponding table by +2 for 5 Activations.</p><p><ol><li>ATK</li><li>DEF</li><li>SPATK</li><li>SPDEF</li><li>SPD</li><li>ACC</li><li>EVA</li><li>User Choice<></ol></p>",
-    "traits": [],
     "actions": [
       {
-        "slug": "acupressure",
-        "name": "Acupressure",
+        "slug": "acupressure-self",
+        "name": "Acupressure (Self)",
         "type": "attack",
-        "traits": [],
+        "traits": [
+          "manipulate",
+          "pp-updated"
+        ],
         "range": {
           "target": "self",
           "distance": 0,
@@ -19,10 +20,38 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 3,
-          "delay": null,
-          "priority": null,
-          "trigger": null
+          "powerPoints": 1
+        },
+        "category": "status",
+        "power": null,
+        "accuracy": null,
+        "types": [
+          "normal"
+        ],
+        "description": "<p>Effect: Roll 1d8 and raise the Stages of the stat in the corresponding table by +2 for 5 Activations.</p><p><ol><li>ATK</li><li>DEF</li><li>SPATK</li><li>SPDEF</li><li>SPD</li><li>ACC</li><li>EVA</li><li>User Choice<></ol></p>",
+        "contestType": "",
+        "contestEffect": "",
+        "variant": "acupressure",
+        "free": false,
+        "slot": null
+      },
+      {
+        "slug": "acupressure",
+        "name": "Acupressure",
+        "type": "attack",
+        "traits": [
+          "contact",
+          "manipulate",
+          "pp-updated"
+        ],
+        "range": {
+          "target": "self",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 2
         },
         "category": "status",
         "power": null,

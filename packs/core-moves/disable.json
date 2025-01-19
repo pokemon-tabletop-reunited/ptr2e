@@ -4,17 +4,14 @@
   "img": "systems/ptr2e/img/svg/normal_icon.svg",
   "system": {
     "slug": "disable",
-    "description": "<p>Trigger: A foe uses an attack.</p><p>Effect: The triggering attack becomes @Affliction[disabled] 5 after it resolves.</p>",
-    "traits": [
-      "interrupt-1"
-    ],
     "actions": [
       {
         "slug": "disable",
         "name": "Disable",
         "type": "attack",
         "traits": [
-          "interrupt-1"
+          "interrupt-1",
+          "pp-updated"
         ],
         "range": {
           "target": "creature",
@@ -35,7 +32,7 @@
         "img": "icons/svg/explosion.svg"
       }
     ],
-    "grade": "C",
+    "grade": "D",
     "_migration": {
       "version": null,
       "previous": null

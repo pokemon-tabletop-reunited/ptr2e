@@ -4,14 +4,14 @@
   "img": "systems/ptr2e/img/svg/normal_icon.svg",
   "system": {
     "slug": "double-team",
-    "description": "<p>Effect: The user gains +1 EVA Stages for 5 Activations.</p>",
-    "traits": [],
     "actions": [
       {
         "slug": "double-team",
         "name": "Double Team",
         "type": "attack",
-        "traits": [],
+        "traits": [
+          "pp-updated"
+        ],
         "range": {
           "target": "self",
           "distance": 0,
@@ -19,10 +19,7 @@
         },
         "cost": {
           "activation": "simple",
-          "powerPoints": 5,
-          "delay": null,
-          "priority": null,
-          "trigger": null
+          "powerPoints": 2
         },
         "category": "status",
         "power": null,
@@ -38,7 +35,7 @@
       }
     ],
     "container": null,
-    "grade": "C"
+    "grade": "E"
   },
   "_id": "187bZlHjZF5QH7np",
   "effects": []

@@ -4,14 +4,14 @@
   "img": "systems/ptr2e/img/svg/steel_icon.svg",
   "system": {
     "slug": "shift-gear",
-    "description": "<p>Effect: The user raises their ATK Stage by +1 and their SPD Stage by +2 for 5 Activations.</p>",
-    "traits": [],
     "actions": [
       {
         "slug": "shift-gear",
         "name": "Shift Gear",
         "type": "attack",
-        "traits": [],
+        "traits": [
+          "pp-updated"
+        ],
         "range": {
           "target": "self",
           "distance": 0,
@@ -19,10 +19,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 7,
-          "delay": null,
-          "priority": null,
-          "trigger": null
+          "powerPoints": 5
         },
         "category": "status",
         "power": null,
@@ -38,7 +35,7 @@
       }
     ],
     "container": null,
-    "grade": "A"
+    "grade": "B"
   },
   "_id": "cip9DUR5L95c1JpS",
   "effects": []

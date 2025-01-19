@@ -4,11 +4,6 @@
   "img": "systems/ptr2e/img/svg/poison_icon.svg",
   "system": {
     "slug": "toxic-spikes",
-    "description": "<p>Effect: Poison tipped spikes are spread over the [Blast X] area on standing surfaces. A creature that starts an Activation on a surface containing the Hazard gains @Affliction[poison] 1. A creature that moves through through a space touching a surface containing the Hazard gain @Affliction[poison] 1 for each square travelled. After gaining 4 Stacks of @Affliction[poison] this way during the same Round, the creature's @Affliction[poison] Affliction becomes @Affliction[blight].</p>",
-    "traits": [
-      "hazard",
-      "blast-4"
-    ],
     "actions": [
       {
         "slug": "toxic-spikes",
@@ -16,7 +11,8 @@
         "type": "attack",
         "traits": [
           "hazard",
-          "blast-4"
+          "blast-4",
+          "pp-updated"
         ],
         "range": {
           "target": "blast",
@@ -24,11 +20,8 @@
           "unit": "m"
         },
         "cost": {
-          "activation": "simple",
-          "powerPoints": 5,
-          "delay": null,
-          "priority": null,
-          "trigger": null
+          "activation": "complex",
+          "powerPoints": 6
         },
         "category": "status",
         "power": null,
@@ -44,7 +37,7 @@
       }
     ],
     "container": null,
-    "grade": "C"
+    "grade": "B"
   },
   "_id": "ZPdwItj91QOBjAgC",
   "effects": []

@@ -4,17 +4,14 @@
   "img": "systems/ptr2e/img/svg/normal_icon.svg",
   "system": {
     "slug": "swagger",
-    "description": "<p>Effect: On hit, the target's ATK Stages increase by +2 for 5 Activations and they become @Affliction[confused] 5.</p>",
-    "traits": [
-      "social"
-    ],
     "actions": [
       {
         "slug": "swagger",
         "name": "Swagger",
         "type": "attack",
         "traits": [
-          "social"
+          "social",
+          "pp-updated"
         ],
         "range": {
           "target": "creature",
@@ -23,10 +20,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 6,
-          "delay": null,
-          "priority": null,
-          "trigger": null
+          "powerPoints": 2
         },
         "category": "status",
         "power": null,
@@ -42,7 +36,7 @@
       }
     ],
     "container": null,
-    "grade": "B"
+    "grade": "D"
   },
   "_id": "wYGAvakAQaDex43K",
   "effects": []

@@ -1,0 +1,36 @@
+<div class="d-flex flex-column">
+  <main>
+    {{!-- <p class="instructions">{{localize "PTR2E.TypeMatrix.AddType.Hint"}}</p> --}}
+    <div class="form-group">
+      <label for="name">{{localize "PTR2E.TypeMatrix.AddType.Name.Name"}}</label>
+      <div class="form-fields">
+        <input type="text" name="name" value="{{name}}" {{#if exists}}disabled{{/if}} required />
+      </div>
+      <p class="hint">{{localize "PTR2E.TypeMatrix.AddType.Name.Hint"}}</p>
+    </div>
+    <div class="form-group">
+      <label for="iconImg">{{localize "PTR2E.TypeMatrix.AddType.IconImg.Name"}}</label>
+      <div class="form-fields">
+        <file-picker name="iconImg" value="{{iconImg}}" type="image"></file-picker>
+      </div>
+      <p class="hint">{{localize "PTR2E.TypeMatrix.AddType.IconImg.Hint"}}</p>
+    </div>
+    {{!-- <div class="form-group">
+      <label for="barImg">{{localize "PTR2E.TypeMatrix.AddType.BarImg.Name"}}</label>
+      <div class="form-fields">
+        <file-picker name="barImg" value="{{barImg}}" type="image"></file-picker>
+      </div>
+      <p class="hint">{{localize "PTR2E.TypeMatrix.AddType.BarImg.Hint"}}</p>
+    </div> --}}
+  </main>
+  <footer>
+    <button type="submit">
+      <i class="fas fa-check"></i> {{localize "PTR2E.TypeMatrix.Submit"}}
+    </button>
+    {{#if exists}}
+      <button type="button" data-action="delete">
+        <i class="fas fa-trash"></i> {{localize "PTR2E.TypeMatrix.Delete.Label"}}
+      </button>
+    {{/if}}
+  </footer>
+</div>

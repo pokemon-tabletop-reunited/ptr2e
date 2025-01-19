@@ -4,14 +4,14 @@
   "img": "systems/ptr2e/img/svg/psychic_icon.svg",
   "system": {
     "slug": "kinesis",
-    "description": "<p>Effect: On hit, the target loses -1 ACC Stage for 5 rounds.</p>",
-    "traits": [],
     "actions": [
       {
         "slug": "kinesis",
         "name": "Kinesis",
         "type": "attack",
-        "traits": [],
+        "traits": [
+          "pp-updated"
+        ],
         "range": {
           "target": "creature",
           "distance": 5,
@@ -19,7 +19,7 @@
         },
         "cost": {
           "activation": "simple",
-          "powerPoints": 3
+          "powerPoints": 1
         },
         "category": "status",
         "accuracy": 80,
@@ -30,7 +30,7 @@
         "img": "systems/ptr2e/img/svg/psychic_icon.svg"
       }
     ],
-    "grade": "C",
+    "grade": "E",
     "_migration": {
       "version": null,
       "previous": null

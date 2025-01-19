@@ -4,17 +4,14 @@
   "img": "systems/ptr2e/img/svg/rock_icon.svg",
   "system": {
     "slug": "tar-shot",
-    "description": "<p>Effect: On hit, all valid targets lose -1 SPD Stage for 5 Activations. Targets hit by Tar Shot also gain Weakness to Fire-type attacks for 5 Activations. If a creature already has Fire-type weakness due to its base types, Tar Shot does not apply additional weakness.</p>",
-    "traits": [
-      "blast-2"
-    ],
     "actions": [
       {
         "slug": "tar-shot",
         "name": "Tar Shot",
         "type": "attack",
         "traits": [
-          "blast-2"
+          "blast-2",
+          "pp-updated"
         ],
         "range": {
           "target": "blast",
@@ -23,10 +20,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 5,
-          "delay": null,
-          "priority": null,
-          "trigger": null
+          "powerPoints": 4
         },
         "category": "status",
         "power": null,

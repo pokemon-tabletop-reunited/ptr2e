@@ -4,17 +4,14 @@
   "img": "systems/ptr2e/img/svg/poison_icon.svg",
   "system": {
     "slug": "gastro-acid",
-    "description": "<p>Effect: On hit, all valid targets have up to two of their Abilities @Affliction[nullified] 5.</p>",
-    "traits": [
-      "blast-1"
-    ],
     "actions": [
       {
         "slug": "gastro-acid",
         "name": "Gastro Acid",
         "type": "attack",
         "traits": [
-          "blast-1"
+          "blast-1",
+          "pp-updated"
         ],
         "range": {
           "target": "blast",
@@ -23,10 +20,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 7,
-          "delay": null,
-          "priority": null,
-          "trigger": null
+          "powerPoints": 4
         },
         "category": "status",
         "power": null,
@@ -42,7 +36,7 @@
       }
     ],
     "container": null,
-    "grade": "A"
+    "grade": "B"
   },
   "_id": "GmBPq27QxJ90SvUG",
   "effects": []

@@ -1,0 +1,178 @@
+{
+  "name": "Improved Teleportation",
+  "type": "perk",
+  "folder": "zrVtKATNxzLNxTUe",
+  "system": {
+    "prerequisites": [
+      "#A Teleportation Movement Allowance",
+      "#Occult (Psychic) 40 + 5 x (# of Improved Teleportation Perks already obtained)"
+    ],
+    "cost": 1,
+    "description": "<p>Improve your Teleportation Movement Allowance by 2.</p>",
+    "actions": [
+      {
+        "name": "Improved Teleportation",
+        "slug": "improved-teleportation",
+        "description": "<p>Improve your Teleportation Movement Allowance by 2.</p>",
+        "cost": {
+          "activation": "free",
+          "powerPoints": 0,
+          "delay": null,
+          "priority": null
+        },
+        "type": "passive",
+        "traits": [],
+        "img": "icons/svg/explosion.svg",
+        "range": {
+          "target": "enemy",
+          "unit": "m",
+          "distance": 0
+        },
+        "variant": null,
+        "hidden": false
+      }
+    ],
+    "slug": "improved-teleportation",
+    "traits": [],
+    "_migration": {
+      "version": 0.109,
+      "previous": {
+        "schema": null,
+        "foundry": "12.331",
+        "system": "0.10.0-alpha.4.2.3"
+      }
+    },
+    "variant": "multi",
+    "mode": "individual",
+    "nodes": [
+      {
+        "connected": [
+          "improved-overland-3",
+          "unbending-steel",
+          "screen-setter",
+          "improved-telekinesis",
+          "stat-iv-booster-1-4"
+        ],
+        "config": {
+          "alpha": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "borderWidth": null,
+          "texture": "systems/ptr2e/img/svg/psychic_icon.svg",
+          "tint": null,
+          "scale": null
+        },
+        "hidden": false,
+        "type": "normal",
+        "x": 122,
+        "y": 106,
+        "tier": null
+      },
+      {
+        "x": 168,
+        "y": 127,
+        "connected": [
+          "telekinetic-potential",
+          "root-3",
+          "psychoportation",
+          "long-range-psychoportation",
+          "improved-telekinesis-1",
+          "improved-teleportation-2"
+        ],
+        "config": {
+          "alpha": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "borderWidth": null,
+          "texture": null,
+          "tint": null,
+          "scale": null
+        },
+        "hidden": false,
+        "type": "normal",
+        "tier": null
+      },
+      {
+        "x": 152,
+        "y": 143,
+        "connected": [
+          "improved-telekinesis-1",
+          "improved-teleportation-1",
+          "telepathic-potential",
+          "root-4"
+        ],
+        "config": {
+          "alpha": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "borderWidth": null,
+          "texture": null,
+          "tint": null,
+          "scale": null
+        },
+        "hidden": false,
+        "type": "normal",
+        "tier": null
+      }
+    ],
+    "autoUnlock": [],
+    "originSlug": "improved-teleportation-2",
+    "global": true,
+    "webs": []
+  },
+  "_id": "7f24boNPqznIhjiv",
+  "img": "systems/ptr2e/img/svg/psychic_icon.svg",
+  "effects": [
+    {
+      "name": "Improved Teleportation",
+      "type": "passive",
+      "_id": "hE1QIY57H3Q9txfn",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "basic",
+            "key": "system.movement.teleport.value",
+            "value": 2,
+            "predicate": [],
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.4.2.3",
+        "createdTime": 1735220270467,
+        "modifiedTime": 1735220279891,
+        "lastModifiedBy": "wRgL6u6KEJDBDQIE"
+      }
+    }
+  ]
+}

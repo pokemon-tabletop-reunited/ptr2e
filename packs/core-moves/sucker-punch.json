@@ -4,13 +4,6 @@
   "img": "systems/ptr2e/img/svg/dark_icon.svg",
   "system": {
     "slug": "sucker-punch",
-    "description": "<p>Trigger: The user is targeted by a  Attack.</p><p>Effect: The user can freely move up to half of the Movement Score of their choice towards the target and then attacks with this Attack. If the target gains @Affliction[fainted] due to damage from this Attack, the triggering attack fails.</p>",
-    "traits": [
-      "punch",
-      "dash",
-      "interrupt-1",
-      "contact"
-    ],
     "actions": [
       {
         "slug": "sucker-punch",
@@ -31,8 +24,6 @@
         "cost": {
           "activation": "complex",
           "powerPoints": 4,
-          "delay": null,
-          "priority": null,
           "trigger": "<p>The user is targeted by a  Attack.</p>"
         },
         "category": "physical",

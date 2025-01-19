@@ -4,11 +4,6 @@
   "img": "systems/ptr2e/img/svg/bug_icon.svg",
   "system": {
     "slug": "heal-order",
-    "description": "<p>Effect: The user recovers 8 Ticks of HP. If there are two more more Bug-Type allies on the Field, the user recovers 12 Ticks of HP and gains @Affliction[ringed] 5.</p>",
-    "traits": [
-      "healing",
-      "dance"
-    ],
     "actions": [
       {
         "slug": "heal-order",
@@ -16,7 +11,8 @@
         "type": "attack",
         "traits": [
           "healing",
-          "dance"
+          "dance",
+          "pp-updated"
         ],
         "range": {
           "target": "self",
@@ -25,10 +21,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 7,
-          "delay": null,
-          "priority": null,
-          "trigger": null
+          "powerPoints": 4
         },
         "category": "status",
         "power": null,
@@ -47,7 +40,8 @@
         "name": "Heal Order (Allies)",
         "type": "attack",
         "traits": [
-          "dance"
+          "dance",
+          "pp-updated"
         ],
         "range": {
           "target": "self",
@@ -57,8 +51,6 @@
         "cost": {
           "activation": "complex",
           "powerPoints": 7,
-          "delay": null,
-          "priority": null,
           "trigger": "Two or more Bug-Type allies are present on the Field."
         },
         "category": "status",
@@ -76,7 +68,7 @@
       }
     ],
     "container": null,
-    "grade": "A"
+    "grade": "B"
   },
   "_id": "jAVzPMZah2qXr2qi",
   "effects": []

@@ -4,17 +4,14 @@
   "img": "systems/ptr2e/img/svg/psychic_icon.svg",
   "system": {
     "slug": "heart-swap",
-    "description": "<p>Effect: The user switches its Stages with those of the target.</p>",
-    "traits": [
-      "legendary"
-    ],
     "actions": [
       {
         "slug": "heart-swap",
         "name": "Heart Swap",
         "type": "attack",
         "traits": [
-          "legendary"
+          "legendary",
+          "pp-updated"
         ],
         "range": {
           "target": "creature",
@@ -23,10 +20,7 @@
         },
         "cost": {
           "activation": "simple",
-          "powerPoints": 4,
-          "delay": null,
-          "priority": null,
-          "trigger": null
+          "powerPoints": 2
         },
         "category": "status",
         "power": null,

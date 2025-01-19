@@ -1,0 +1,63 @@
+{
+  "name": "Type Specialist",
+  "type": "perk",
+  "system": {
+    "prerequisites": [],
+    "cost": 1,
+    "description": "<p>You gain +10 to social interaction Skill Tests when interacting with Pokemon of your preferred type. This perk may be purchased multiple times, each time selecting a new Type.</p>",
+    "actions": [
+      {
+        "name": "Type Specialty",
+        "slug": "type-specialty",
+        "description": "<p>You gain +10 to social interaction Skill Tests when interacting with Pokemon of your preferred type. The cost on this scales with each additional type chosen.</p>",
+        "cost": {
+          "activation": "free"
+        },
+        "type": "passive",
+        "traits": [],
+        "img": "icons/svg/explosion.svg",
+        "range": {
+          "target": "enemy",
+          "unit": "m"
+        }
+      }
+    ],
+    "slug": "type-specialist",
+    "traits": [],
+    "_migration": {
+      "version": null,
+      "previous": null
+    },
+    "nodes": [
+      {
+        "connected": [
+          "improved-overland-1-1",
+          "stat-iv-booster-1-1",
+          "type-harmony",
+          "type-embodiment-type"
+        ],
+        "config": {
+          "alpha": null,
+          "backgroundColor": "#c0c0c0",
+          "borderColor": null,
+          "borderWidth": null,
+          "texture": "systems/ptr2e/img/perk-icons/Socialite.svg",
+          "tint": "#ffffff",
+          "scale": null
+        },
+        "hidden": false,
+        "type": "normal",
+        "x": 154,
+        "y": 100,
+        "tier": null
+      }
+    ],
+    "autoUnlock": [],
+    "global": true,
+    "webs": []
+  },
+  "_id": "7M9EE1mHIJeoAWhp",
+  "img": "systems/ptr2e/img/perk-icons/Socialite.svg",
+  "effects": [],
+  "folder": "kWG8zov1UnSKOvEQ"
+}

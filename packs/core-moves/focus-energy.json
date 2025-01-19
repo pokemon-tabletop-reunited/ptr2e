@@ -4,17 +4,14 @@
   "img": "systems/ptr2e/img/svg/normal_icon.svg",
   "system": {
     "slug": "focus-energy",
-    "description": "<p>Effect: The user's gain +1 CRIT Stage for 5 Activations.</p>",
-    "traits": [
-      "aura"
-    ],
     "actions": [
       {
         "slug": "focus-energy",
         "name": "Focus Energy",
         "type": "attack",
         "traits": [
-          "aura"
+          "aura",
+          "pp-updated"
         ],
         "range": {
           "target": "creature",
@@ -23,10 +20,7 @@
         },
         "cost": {
           "activation": "simple",
-          "powerPoints": 3,
-          "delay": null,
-          "priority": null,
-          "trigger": null
+          "powerPoints": 2
         },
         "category": "status",
         "power": null,

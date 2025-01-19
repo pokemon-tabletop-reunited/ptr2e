@@ -4,11 +4,6 @@
   "img": "systems/ptr2e/img/svg/normal_icon.svg",
   "system": {
     "slug": "smokescreen",
-    "description": "<p>Effect: An Obscurring Cloud is created in the [Blast X] area for 5 rounds. Any creature that starts their Activation in or enters a space containing an Obscurring Cloud Hazard gains @Affliction[blinded] 2.</p>",
-    "traits": [
-      "hazard",
-      "blast-3"
-    ],
     "actions": [
       {
         "slug": "smokescreen",
@@ -16,7 +11,8 @@
         "type": "attack",
         "traits": [
           "hazard",
-          "blast-3"
+          "blast-3",
+          "pp-updated"
         ],
         "range": {
           "target": "creature",
@@ -24,11 +20,8 @@
           "unit": "m"
         },
         "cost": {
-          "activation": "simple",
-          "powerPoints": 5,
-          "delay": null,
-          "priority": null,
-          "trigger": null
+          "activation": "complex",
+          "powerPoints": 3
         },
         "category": "status",
         "power": null,
@@ -44,7 +37,7 @@
       }
     ],
     "container": null,
-    "grade": "E"
+    "grade": "C"
   },
   "_id": "pYNVsTCmUw7oWhRg",
   "effects": []

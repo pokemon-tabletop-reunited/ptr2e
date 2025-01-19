@@ -3,31 +3,75 @@
   "type": "ability",
   "img": "systems/ptr2e/img/item-icons/blue%20orb.webp",
   "system": {
-    "actions": [
+   "actions": [
       {
         "traits": [
           "legendary",
-          "weather"
+          "weather",
+          "interrupt-6"
         ],
         "name": "Primordial Sea",
         "slug": "primordial-sea",
-        "type": "passive",
+        "type": "generic",
         "cost": {
-          "activation": "free",
-          "trigger": "<p>The user enters combat or when the user gains this Ability.</p>"
+          "activation": "complex",
+          "trigger": "<p>The user enters combat or when the user gains this Ability.</p>",
+          "powerPoints": 4
         },
         "range": {
           "target": "field",
           "unit": "m"
         },
-        "description": "<p>Trigger: The user enters combat or when the user gains this Ability.</p><p>Effect: The Weather is changed to Deluge. When the user gains @Affliction[fainted] or switches out the weather changes to Thunderstorm for 5 rounds.</p>",
+        "description": "<p>Trigger: The user enters combat.</p><p>Effect: Connection - Rain Dance. Rainy Weather is set until it is overridden or if the user gains @Affliction[fainted] or leaves combat. If the user gains @Affliction[fainted] or leaves combat while Rainy Weather is present, Rainy Weather will remain for 3 Rounds.</p>",
+        "img": "icons/svg/explosion.svg"
+      },
+      {
+        "traits": [
+          "legendary",
+          "weather"
+        ],
+        "name": "Primordial Sea (Active)",
+        "slug": "primordial-sea-active",
+        "type": "generic",
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 10
+        },
+        "range": {
+          "target": "field",
+          "unit": "m"
+        },
+        "description": "<p>Intense Downpour Weather is set until it is overridden or the user gains @Affliction[fainted] or leaves combat. If the user gains @Affliction[fainted] or leaves combat while Intense Downpour is present, the Weather is set to Rain for 5 Rounds.</p>",
+        "img": "icons/svg/explosion.svg"
+      },
+      {
+        "traits": [
+          "legendary",
+          "weather",
+          "interrupt-6",
+          "phenomena"
+        ],
+        "name": "Primordial Sea (Primal)",
+        "slug": "primordial-sea-primal",
+        "type": "generic",
+        "cost": {
+          "activation": "complex",
+          "trigger": "<p>The user enters combat or when the user gains this Ability.</p>",
+          "powerPoints": 0
+        },
+        "range": {
+          "target": "field",
+          "unit": "m"
+        },
+        "description": "<p>Trigger: The user undergoes a Phenomenal Transformation.</p><p>Effect: Intense Downpour Weather is set until it is overridden or the user gains @Affliction[fainted] or leaves combat. If the user gains @Affliction[fainted] or leaves combat while Intense Downpour is present, the Weather is set to Rain for 5 Rounds.</p>",
         "img": "icons/svg/explosion.svg"
       }
     ],
-    "description": "<p>Trigger: The user enters combat or when the user gains this Ability.</p><p>Effect: The Weather is changed to Deluge. When the user gains @Affliction[fainted] or switches out the weather changes to Thunderstorm for 5 rounds.</p>",
+    "description": "<p>Trigger: The user enters combat.</p><p>Effect: Connection - Rain Dance. Rainy Weather is set until it is overridden or if the user gains @Affliction[fainted] or leaves combat. If the user gains @Affliction[fainted] or leaves combat while Rainy Weather is present, Rainy Weather will remain for 3 Rounds.<br>By spending 10 PP as a Complex Action, or after undergoing a Phenomenal Transformation, Intense Downpour Weather is set until it is overridden or the user gains @Affliction[fainted] or leaves combat. If the user gains @Affliction[fainted] or leaves combat while Intense Downpour is present, the Weather is set to Rain for 5 Rounds.</p>",
     "traits": [
       "legendary",
-      "weather"
+      "weather",
+      "connection"
     ],
     "slug": "primordial-sea",
     "_migration": {
@@ -36,5 +80,67 @@
     }
   },
   "_id": "vR7Inpc6VEMmEQEF",
-  "effects": []
+  "effects": [
+    {
+      "name": "Primordial Sea",
+      "type": "passive",
+      "_id": "zTlgGqk5jWhaOYZL",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "grant-item",
+            "key": "",
+            "value": "Compendium.ptr2e.core-abilities.Item.tILTZn18N9r8H7cs",
+            "predicate": [],
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "reevaluateOnUpdate": false,
+            "inMemoryOnly": false,
+            "allowDuplicate": true,
+            "alterations": [],
+            "track": false,
+            "replaceSelf": false,
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            }
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.4.1.0",
+        "createdTime": 1733069184244,
+        "modifiedTime": 1733069218211,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+      }
+    }
+  ]
 }

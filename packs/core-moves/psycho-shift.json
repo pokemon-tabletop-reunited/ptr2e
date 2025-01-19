@@ -4,14 +4,14 @@
   "img": "systems/ptr2e/img/svg/psychic_icon.svg",
   "system": {
     "slug": "psycho-shift",
-    "description": "<p>Effect: The user is cured of a Affliction and the target is given that Affliction. If the target cannot receive that Affliction, the user is only cured of the Affliction when using this Attack.</p>",
-    "traits": [],
     "actions": [
       {
         "slug": "psycho-shift",
         "name": "Psycho Shift",
         "type": "attack",
-        "traits": [],
+        "traits": [
+          "pp-updated"
+        ],
         "range": {
           "target": "creature",
           "distance": 5,
@@ -19,10 +19,7 @@
         },
         "cost": {
           "activation": "simple",
-          "powerPoints": 7,
-          "delay": null,
-          "priority": null,
-          "trigger": null
+          "powerPoints": 4
         },
         "category": "status",
         "power": null,
@@ -38,7 +35,7 @@
       }
     ],
     "container": null,
-    "grade": "A"
+    "grade": "C"
   },
   "_id": "QWmsqtBPOLShE4Wr",
   "effects": []

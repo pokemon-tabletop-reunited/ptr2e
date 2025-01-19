@@ -4,11 +4,6 @@
   "img": "systems/ptr2e/img/svg/normal_icon.svg",
   "system": {
     "slug": "howl",
-    "description": "<p>Effect: The user and all allies in range increase their ATK Stage by +1 for 5 Activations.</p>",
-    "traits": [
-      "sonic",
-      "social"
-    ],
     "actions": [
       {
         "slug": "howl",
@@ -16,7 +11,8 @@
         "type": "attack",
         "traits": [
           "sonic",
-          "social"
+          "social",
+          "pp-updated"
         ],
         "range": {
           "target": "emanation",
@@ -25,10 +21,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 4,
-          "delay": null,
-          "priority": null,
-          "trigger": null
+          "powerPoints": 5
         },
         "category": "status",
         "power": null,
@@ -44,7 +37,7 @@
       }
     ],
     "container": null,
-    "grade": "D"
+    "grade": "B"
   },
   "_id": "GiLR7xemzKdrCnl3",
   "effects": []

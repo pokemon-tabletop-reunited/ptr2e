@@ -4,14 +4,14 @@
   "img": "systems/ptr2e/img/svg/electric_icon.svg",
   "system": {
     "slug": "thunder-wave",
-    "description": "<p>Effect: On hit, all valid targets gain @Affliction[paralysis] 5.</p>",
-    "traits": [],
     "actions": [
       {
         "slug": "thunder-wave",
         "name": "Thunder Wave",
         "type": "attack",
-        "traits": [],
+        "traits": [
+          "pp-updated"
+        ],
         "range": {
           "target": "emanation",
           "distance": 2,
@@ -19,7 +19,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 5
+          "powerPoints": 3
         },
         "category": "status",
         "accuracy": 90,
@@ -37,7 +37,7 @@
       "version": null,
       "previous": null
     },
-    "grade": "E"
+    "grade": "C"
   },
   "_id": "dXkwy782GsUD2C2k",
   "effects": [

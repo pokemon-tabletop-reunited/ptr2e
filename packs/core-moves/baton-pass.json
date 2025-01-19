@@ -4,14 +4,14 @@
   "img": "systems/ptr2e/img/svg/normal_icon.svg",
   "system": {
     "slug": "baton-pass",
-    "description": "<p>Effect: This attack can only be used by an owned Pokemon. The user switches with an allied Pokemon, returning to their owned Pokeball in the process. The ally gains the User’s [Stage Change] effects, Order effects, and other beneficial effects.</p>",
-    "traits": [],
     "actions": [
       {
         "slug": "baton-pass",
         "name": "Baton Pass",
         "type": "attack",
-        "traits": [],
+        "traits": [
+          "pp-updated"
+        ],
         "range": {
           "target": "self",
           "distance": 0,
@@ -19,10 +19,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 4,
-          "delay": null,
-          "priority": null,
-          "trigger": null
+          "powerPoints": 2
         },
         "category": "status",
         "power": null,

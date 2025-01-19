@@ -4,14 +4,14 @@
   "img": "systems/ptr2e/img/svg/normal_icon.svg",
   "system": {
     "slug": "recycle",
-    "description": "<p>Effect: The user replenishes 1 item in its Belt Item slot that was used this combat.</p>",
-    "traits": [],
     "actions": [
       {
         "slug": "recycle",
         "name": "Recycle",
         "type": "attack",
-        "traits": [],
+        "traits": [
+          "pp-updated"
+        ],
         "range": {
           "target": "creature",
           "distance": 0,
@@ -19,10 +19,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 7,
-          "delay": null,
-          "priority": null,
-          "trigger": null
+          "powerPoints": 4
         },
         "category": "status",
         "power": null,
@@ -38,7 +35,7 @@
       }
     ],
     "container": null,
-    "grade": "E"
+    "grade": "B"
   },
   "_id": "zUA5pxTsvJsGHhEk",
   "effects": []

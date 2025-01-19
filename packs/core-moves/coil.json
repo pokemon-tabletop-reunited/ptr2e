@@ -4,14 +4,14 @@
   "img": "systems/ptr2e/img/svg/poison_icon.svg",
   "system": {
     "slug": "coil",
-    "description": "<p>Effect: The user's ATK Stage, DEF Stage and ACC Stage are increased by +1 for 5 Activations.</p>",
-    "traits": [],
     "actions": [
       {
         "slug": "coil",
         "name": "Coil",
         "type": "attack",
-        "traits": [],
+        "traits": [
+          "pp-updated"
+        ],
         "range": {
           "target": "self",
           "distance": 0,
@@ -19,10 +19,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 5,
-          "delay": null,
-          "priority": null,
-          "trigger": null
+          "powerPoints": 5
         },
         "category": "status",
         "power": null,
@@ -38,7 +35,7 @@
       }
     ],
     "container": null,
-    "grade": "C"
+    "grade": "B"
   },
   "_id": "7r57DxIctmNSW2oV",
   "effects": []
