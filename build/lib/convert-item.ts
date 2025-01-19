@@ -43,7 +43,7 @@ function getMarkdownPath({
     title: string;
     extension?: boolean;
 }): string {
-    const path = `${type}/${subtype ? `${subtype}/` : ""}${category ? `${category}/` : ""}${sluggify(title)}${
+    const path = `data/${type}/${subtype ? `${subtype}/` : ""}${category ? `${category}/` : ""}${sluggify(title)}${
         extension ? ".md" : ""
     }`;
     return path;
