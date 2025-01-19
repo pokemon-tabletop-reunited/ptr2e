@@ -4,11 +4,6 @@
   "img": "systems/ptr2e/img/svg/psychic_icon.svg",
   "system": {
     "slug": "lunar-blessing",
-    "description": "<p>Effect: The user and all allies in range heal 25% of their Max HP, and are cured of all status conditions.</p>",
-    "traits": [
-      "legendary",
-      "healing"
-    ],
     "actions": [
       {
         "slug": "lunar-blessing",
@@ -16,7 +11,8 @@
         "type": "attack",
         "traits": [
           "legendary",
-          "healing"
+          "healing",
+          "pp-updated"
         ],
         "range": {
           "target": "emanation",
@@ -25,10 +21,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 8,
-          "delay": null,
-          "priority": null,
-          "trigger": null
+          "powerPoints": 7
         },
         "category": "status",
         "power": null,

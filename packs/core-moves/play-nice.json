@@ -4,17 +4,14 @@
   "img": "systems/ptr2e/img/svg/normal_icon.svg",
   "system": {
     "slug": "play-nice",
-    "description": "<p>Effect: The target loses -1 ATK Stages for 5 Activations. Play Nice ignores the effects of [Shield] effects.</p>",
-    "traits": [
-      "social"
-    ],
     "actions": [
       {
         "slug": "play-nice",
         "name": "Play Nice",
         "type": "attack",
         "traits": [
-          "social"
+          "social",
+          "pp-updated"
         ],
         "range": {
           "target": "creature",
@@ -23,7 +20,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 5
+          "powerPoints": 2
         },
         "category": "status",
         "types": [
@@ -33,7 +30,7 @@
         "img": "icons/svg/explosion.svg"
       }
     ],
-    "grade": "C",
+    "grade": "D",
     "_migration": {
       "version": null,
       "previous": null

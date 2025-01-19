@@ -4,17 +4,14 @@
   "img": "systems/ptr2e/img/svg/shadow_icon.svg",
   "system": {
     "slug": "shadow-panic",
-    "description": "<p>Effect: On hit, all valid targets become @Affliction[confused] 5.</p>",
-    "traits": [
-      "sonic"
-    ],
     "actions": [
       {
         "slug": "shadow-panic",
         "name": "Shadow Panic",
         "type": "attack",
         "traits": [
-          "sonic"
+          "sonic",
+          "pp-updated"
         ],
         "range": {
           "target": "cone",
@@ -23,10 +20,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 2,
-          "delay": null,
-          "priority": null,
-          "trigger": null
+          "powerPoints": 1
         },
         "category": "status",
         "power": null,
@@ -42,7 +36,7 @@
       }
     ],
     "container": null,
-    "grade": "D"
+    "grade": "E"
   },
   "_id": "PsxctPOZBM3u4RWF",
   "effects": []

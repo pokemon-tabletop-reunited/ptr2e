@@ -677,7 +677,7 @@ class ActorPTR2e<
   }
 
   /** Get roll options from this actor's effects, traits, and other properties */
-  getSelfRollOptions(prefix: "self" | "target" | "origin" = "self"): string[] {
+  getSelfRollOptions(prefix: "self" | "target" | "origin" | "defensive" = "self"): string[] {
     const { rollOptions } = this;
     return Object.keys(rollOptions.all).flatMap((o) =>
       o.startsWith("self:") && rollOptions.all[o]
@@ -743,6 +743,41 @@ class ActorPTR2e<
       return stage > 0 ? (2 + stage) / 2 : 2 / (2 + Math.abs(stage));
     };
     return stat.value * stageModifier();
+  }
+
+  async applyTickDamage({ticks, apply}: {ticks: number, apply: false}): Promise<{applied: number, update: Record<string, unknown>}>;
+  async applyTickDamage({ticks, apply}: {ticks: number, apply: true}): Promise<{applied: number, message: ChatMessagePTR2e}>;
+  async applyTickDamage({ticks, apply}: {ticks: number, apply?: boolean}): Promise<{applied: number, update?: Record<string, unknown>, message?: ChatMessagePTR2e}>;
+  async applyTickDamage({ticks, apply=true}: {ticks: number, apply?: boolean}): Promise<{applied: number, update?: Record<string, unknown>, message?: ChatMessagePTR2e}> {
+    const isDamage = ticks < 0;
+    const amount = Math.floor((this.system.health.max / 16) * Math.abs(ticks))
+    const applied = Math.min(amount || 0, isDamage ? this.system.health.value : this.system.health.max - this.system.health.value);
+
+    const update = {
+      "system.health.value": Math.clamp(
+        this.system.health.value + (isDamage ? -amount : amount),
+        0,
+        this.system.health.max
+      )
+    } as Record<string, unknown>;
+    if(!apply) {
+      update["_id"] = this.id;
+      return { applied, update };
+    }
+
+    await this.update(update);
+
+    return {
+      applied,
+      //@ts-expect-error - Chat messages have not been properly defined yet
+      message: await ChatMessagePTR2e.create({
+        type: "damage-applied",
+        system: {
+          damageApplied: isDamage ? applied : -applied,
+          target: this.uuid
+        }
+      })
+    }
   }
 
   async applyDamage(
@@ -953,7 +988,7 @@ class ActorPTR2e<
           acc.groups[affliction.priority] ??= { afflictions: [] };
 
           acc.groups[affliction.priority].afflictions.push({
-            formula: result.damage?.formula,
+            formula: (acc.groups[affliction.priority].type === "both" && result.damage?.type === "healing" && result.damage.formula) ? `(${result.damage.formula}) * -1` : result.damage?.formula,
             affliction,
           });
           if (result.damage?.type) {
@@ -961,6 +996,15 @@ class ActorPTR2e<
               acc.groups[affliction.priority].type &&
               acc.groups[affliction.priority].type !== result.damage.type
             ) {
+              if(acc.groups[affliction.priority].type === "damage") {
+                const entry = acc.groups[affliction.priority].afflictions.at(-1)!
+                entry.formula = `(${entry.formula}) * -1`;
+              }
+              else {
+                for(const entry of acc.groups[affliction.priority].afflictions) {
+                  entry.formula = `(${entry.formula}) * -1`;
+                }
+              }
               acc.groups[affliction.priority].type = "both";
             } else {
               acc.groups[affliction.priority].type = result.damage.type;
@@ -1440,6 +1484,19 @@ class ActorPTR2e<
       hasSenerenGrace: targetToken?.actor?.rollOptions?.all?.["special:serene-grace"] ?? false
     })
 
+    const targetDefensiveEffectRolls = await extractEffectRolls({
+      affects: "defensive",
+      origin: selfActor,
+      target: targetToken?.actor ?? null,
+      item: selfItem,
+      attack: params.attack ?? null,
+      action: params.action ?? null,
+      domains: params.domains,
+      options: [...params.options, ...itemOptions, ...targetRollOptions],
+      chanceModifier: (Number(targetToken?.actor?.system?.modifiers?.effectChance) || 0),
+      hasSenerenGrace: targetToken?.actor?.rollOptions?.all?.["special:serene-grace"] ?? false
+    });
+
     const targetOriginFlatModifiers = await extractTargetModifiers({
       origin: this,
       target: params.target?.actor ?? targetToken?.actor ?? null,
@@ -1501,7 +1558,7 @@ class ActorPTR2e<
       self,
       target,
       traits: actionTraits,
-      effectRolls: { target: targetEffectRolls, origin: targetOriginEffectRolls },
+      effectRolls: { target: targetEffectRolls, origin: targetOriginEffectRolls, defensive: targetDefensiveEffectRolls },
     };
   }
 

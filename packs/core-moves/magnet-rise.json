@@ -4,14 +4,14 @@
   "img": "systems/ptr2e/img/svg/electric_icon.svg",
   "system": {
     "slug": "magnet-rise",
-    "description": "<p>Effect: The user gains [Hover], and Flight equal to half their highest Base Movement Score for 5 Activations.</p>",
-    "traits": [],
     "actions": [
       {
         "slug": "magnet-rise",
         "name": "Magnet Rise",
         "type": "attack",
-        "traits": [],
+        "traits": [
+          "pp-updated"
+        ],
         "range": {
           "target": "self",
           "distance": 0,
@@ -19,10 +19,7 @@
         },
         "cost": {
           "activation": "simple",
-          "powerPoints": 7,
-          "delay": null,
-          "priority": null,
-          "trigger": null
+          "powerPoints": 2
         },
         "category": "status",
         "power": null,
@@ -38,7 +35,7 @@
       }
     ],
     "container": null,
-    "grade": "A"
+    "grade": "D"
   },
   "_id": "hFYqkcoA1BddDKvk",
   "effects": []

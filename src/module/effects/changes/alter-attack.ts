@@ -1,6 +1,7 @@
 import { ActorPTR2e, AttackAdjustment } from "@actor";
 import { BasicChangeSystem, ChangeModel, ChangeSchema, PTRCONSTS, RangePTR2e } from "@data";
 import { PredicateField } from "@system/predication/schema-data-fields.ts";
+import { CHANGE_MODES } from "./change.ts";
 
 type AttackPropertyOptions = "power" | "accuracy" | "type" | "traits" | "pp-cost" | "range" | "rip" | "offensiveStat" | "defensiveStat";
 
@@ -17,7 +18,7 @@ export default class AlterAttackChangeSystem extends ChangeModel {
     "rip",
     "offensiveStat",
     "defensiveStat"
-] as const);
+  ] as const);
 
   static override defineSchema() {
     const fields = foundry.data.fields;
@@ -44,16 +45,16 @@ export default class AlterAttackChangeSystem extends ChangeModel {
     actor: ActorPTR2e | null = this.actor
   ): void {
     if (!actor) return;
-    if(!this.test()) return;
+    if (!this.test()) return;
 
     const change = this.resolveValue(this.value);
 
     const adjustment = ((): AttackAdjustment => {
-      if(!this.property) throw Error("Unexpected missing property in AlterActionChangeSystem");
+      if (!this.property) throw Error("Unexpected missing property in AlterActionChangeSystem");
 
       const definition = this.resolveInjectedProperties(this.definition);
 
-      switch(this.property) {
+      switch (this.property) {
         case "accuracy": {
           return {
             adjustAttack: (attack, options) => {
@@ -66,13 +67,13 @@ export default class AlterAttackChangeSystem extends ChangeModel {
               }
 
               const accuracy = attack.accuracy;
-              if(typeof accuracy !== "number") {
+              if (typeof accuracy !== "number") {
                 return this.failValidation("An attack that meets the definition of 'accuracy' must have a range with a distance value.");
               }
 
               const newAccuracy = BasicChangeSystem.getNewValue(this.mode, accuracy, change);
               attack.accuracy = Math.max(1, newAccuracy);
-              attack.updateSource({accuracy: attack.accuracy});
+              attack.updateSource({ accuracy: attack.accuracy });
             }
           }
         }
@@ -88,103 +89,103 @@ export default class AlterAttackChangeSystem extends ChangeModel {
               }
 
               const power = attack.power;
-              if(typeof power !== "number") {
+              if (typeof power !== "number") {
                 return this.failValidation("An attack that meets the definition of 'power' must have a range with a distance value.");
               }
 
               const newPower = BasicChangeSystem.getNewValue(this.mode, power, change);
-              
+
               attack.power = Math.max(1, newPower);
-              attack.updateSource({power: attack.power});
+              attack.updateSource({ power: attack.power });
             }
           }
         }
         case "type": {
           return {
             adjustAttack: (attack, options) => {
-              if(!([CONST.ACTIVE_EFFECT_MODES.ADD, "subtract","remove",CONST.ACTIVE_EFFECT_MODES.OVERRIDE] as unknown as ActiveEffectChangeMode[]).includes(this.mode)) {
+              if (!([CHANGE_MODES.ADD, CHANGE_MODES.REMOVE, CHANGE_MODES.OVERRIDE] as unknown as ActiveEffectChangeMode[]).includes(this.mode)) {
                 return this.failValidation(
                   "An attack alteration change of type 'type' must have a mode of 'add', 'subtract', 'remove' or 'override'."
                 );
               }
 
               const changeArray = change ? Array.isArray(change) ? change : [change] : [];
-              if(!changeArray.every(c => typeof c === "string" && Object.values(PTRCONSTS.Types).includes(c as PTRCONSTS.PokemonType))) {
+              if (!changeArray.every(c => typeof c === "string" && Object.values(PTRCONSTS.Types).includes(c as PTRCONSTS.PokemonType))) {
                 return this.failValidation("An attack alteration of type 'type' must have a lower-case type value.");
               }
               if (!definition.test(options)) {
                 return;
               }
 
-              if(this.mode === CONST.ACTIVE_EFFECT_MODES.ADD) {
-                for(const c of changeArray) {
-                  if(!attack.types.has(c)) {
+              if (this.mode === CHANGE_MODES.ADD) {
+                for (const c of changeArray) {
+                  if (!attack.types.has(c)) {
                     attack.types.add(c);
                   }
                 }
               }
-              else if((["subtract","remove"] as unknown as ActiveEffectChangeMode[]).includes(this.mode)) {
-                for(const c of changeArray) {
+              else if (this.mode === CHANGE_MODES.REMOVE) {
+                for (const c of changeArray) {
                   attack.types.delete(c);
                 }
               }
-              else if(this.mode === CONST.ACTIVE_EFFECT_MODES.OVERRIDE) {
+              else if (this.mode === CHANGE_MODES.OVERRIDE) {
                 attack.types = new Set(changeArray);
               }
-              attack.updateSource({types: Array.from(attack.types)});
+              attack.updateSource({ types: Array.from(attack.types) });
             },
             adjustTraits: (attack, traits, options) => {
-              if(!([CONST.ACTIVE_EFFECT_MODES.ADD, "subtract","remove",CONST.ACTIVE_EFFECT_MODES.OVERRIDE] as unknown as ActiveEffectChangeMode[]).includes(this.mode)) {
+              if (!([CHANGE_MODES.ADD, "subtract", "remove", CHANGE_MODES.OVERRIDE] as unknown as ActiveEffectChangeMode[]).includes(this.mode)) {
                 return this.failValidation(
                   "An attack alteration change of type 'type' must have a mode of 'add', 'subtract', 'remove' or 'override'."
                 );
               }
 
               const changeArray = change ? Array.isArray(change) ? change : [change] : [];
-              if(!changeArray.every(c => typeof c === "string" && Object.values(PTRCONSTS.Types).includes(c as PTRCONSTS.PokemonType))) {
+              if (!changeArray.every(c => typeof c === "string" && Object.values(PTRCONSTS.Types).includes(c as PTRCONSTS.PokemonType))) {
                 return this.failValidation("An attack alteration of type 'type' must have a lower-case type value.");
               }
               if (!definition.test(options)) {
                 return;
               }
 
-              if(this.mode === CONST.ACTIVE_EFFECT_MODES.ADD) {
+              if (this.mode === CHANGE_MODES.ADD) {
                 traits.push(...changeArray);
               }
-              else if((["subtract","remove"] as unknown as ActiveEffectChangeMode[]).includes(this.mode)) {
+              else if ((["subtract", "remove"] as unknown as ActiveEffectChangeMode[]).includes(this.mode)) {
                 changeArray.forEach(c => traits.findSplice(s => s === c));
               }
-              else if(this.mode === CONST.ACTIVE_EFFECT_MODES.OVERRIDE) {
-                for(const type of Object.values(PTRCONSTS.Types)) {
+              else if (this.mode === CHANGE_MODES.OVERRIDE) {
+                for (const type of Object.values(PTRCONSTS.Types)) {
                   traits.findSplice(s => s === type);
                 }
                 traits.push(...changeArray);
               }
-              attack.updateSource({traits: Array.from(traits)});
+              attack.updateSource({ traits: Array.from(traits) });
             }
           }
         }
         case "traits": {
           return {
             adjustTraits: (attack, traits, options) => {
-              if(!([CONST.ACTIVE_EFFECT_MODES.ADD,"subtract","remove"] as unknown as ActiveEffectChangeMode[]).includes(this.mode)) {
+              if (!([CHANGE_MODES.ADD, "subtract", "remove"] as unknown as ActiveEffectChangeMode[]).includes(this.mode)) {
                 return this.failValidation(
                   "An attack alteration change of type 'traits' must have a mode of 'add', 'subtract', or 'remove'."
                 );
               }
-              if(!change || typeof change !== "string" || change.toLowerCase() != change) {
+              if (!change || typeof change !== "string" || change.toLowerCase() != change) {
                 return this.failValidation("An attack alteration of type 'traits' must have a lower-case trait value.");
               }
               if (!definition.test(options)) {
                 return;
               }
 
-              if(this.mode === CONST.ACTIVE_EFFECT_MODES.ADD && !traits.includes(change)) {
+              if (this.mode === CHANGE_MODES.ADD && !traits.includes(change)) {
                 traits.push(change);
-              } else if((["subtract","remove"] as unknown as ActiveEffectChangeMode[]).includes(this.mode)) {
+              } else if ((["subtract", "remove"] as unknown as ActiveEffectChangeMode[]).includes(this.mode)) {
                 traits.findSplice(s => s === change);
               }
-              attack.updateSource({traits: Array.from(traits)});
+              attack.updateSource({ traits: Array.from(traits) });
             }
           }
         }
@@ -200,20 +201,20 @@ export default class AlterAttackChangeSystem extends ChangeModel {
               }
 
               const ppCost = attack.cost.powerPoints;
-              if(typeof ppCost !== "number") {
+              if (typeof ppCost !== "number") {
                 return this.failValidation("An attack that meets the definition of 'pp-cost' must have a range with a distance value.");
               }
 
               const newPpCost = BasicChangeSystem.getNewValue(this.mode, ppCost, change);
               attack.cost.powerPoints = newPpCost;
-              attack.updateSource({"cost.powerPoints": attack.cost.powerPoints});
+              attack.updateSource({ "cost.powerPoints": attack.cost.powerPoints });
             }
           }
         }
         case "range": {
           return {
             adjustAttack: (attack, options) => {
-              if(!change || typeof change !== "string" || !Object.values(PTRCONSTS.TargetOptions).includes(change as PTRCONSTS.TargetOption)) {
+              if (!change || typeof change !== "string" || !Object.values(PTRCONSTS.TargetOptions).includes(change as PTRCONSTS.TargetOption)) {
                 return this.failValidation("An attack alteration of type 'range' must have a supported 'Range' text value.");
               }
 
@@ -221,7 +222,7 @@ export default class AlterAttackChangeSystem extends ChangeModel {
                 return;
               }
 
-              if(!attack.range) {
+              if (!attack.range) {
                 attack.range = new RangePTR2e({
                   target: change as PTRCONSTS.TargetOption,
                   distance: 1,
@@ -230,7 +231,7 @@ export default class AlterAttackChangeSystem extends ChangeModel {
               else {
                 attack.range.target = change as PTRCONSTS.TargetOption;
               }
-              attack.updateSource({range: attack.range});
+              attack.updateSource({ range: attack.range });
             }
           }
         }
@@ -246,20 +247,20 @@ export default class AlterAttackChangeSystem extends ChangeModel {
               }
 
               const rip = attack.range?.distance;
-              if(typeof rip !== "number") {
+              if (typeof rip !== "number") {
                 return this.failValidation("An attack that meets the definition of 'rip' must have a range with a distance value.");
               }
 
               const newRangeIncrement = BasicChangeSystem.getNewValue(this.mode, rip, change);
               attack.range!.distance = newRangeIncrement;
-              attack.updateSource({range: attack.range});
+              attack.updateSource({ range: attack.range });
             }
           }
         }
         case "offensiveStat": {
           return {
             adjustAttack: (attack, options) => {
-              if(!change || typeof change !== "string" || !Object.values(PTRCONSTS.Stats).includes(change as PTRCONSTS.Stat)) {
+              if (!change || typeof change !== "string" || !Object.values(PTRCONSTS.Stats).includes(change as PTRCONSTS.Stat)) {
                 return this.failValidation("An attack alteration of type 'offensiveStat' must have a supported 'Stat' text value.");
               }
 
@@ -268,14 +269,14 @@ export default class AlterAttackChangeSystem extends ChangeModel {
               }
 
               attack.offensiveStat = change as PTRCONSTS.Stat;
-              attack.updateSource({offensiveStat: attack.offensiveStat});
+              attack.updateSource({ offensiveStat: attack.offensiveStat });
             }
           }
         }
         case "defensiveStat": {
           return {
             adjustAttack: (attack, options) => {
-              if(!change || typeof change !== "string" || !Object.values(PTRCONSTS.Stats).includes(change as PTRCONSTS.Stat)) {
+              if (!change || typeof change !== "string" || !Object.values(PTRCONSTS.Stats).includes(change as PTRCONSTS.Stat)) {
                 return this.failValidation("An attack alteration of type 'defensiveStat' must have a supported 'Stat' text value.");
               }
 
@@ -284,7 +285,7 @@ export default class AlterAttackChangeSystem extends ChangeModel {
               }
 
               attack.defensiveStat = change as PTRCONSTS.Stat;
-              attack.updateSource({defensiveStat: attack.defensiveStat});
+              attack.updateSource({ defensiveStat: attack.defensiveStat });
             }
           }
         }

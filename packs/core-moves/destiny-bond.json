@@ -4,14 +4,14 @@
   "img": "systems/ptr2e/img/svg/ghost_icon.svg",
   "system": {
     "slug": "destiny-bond",
-    "description": "<p>Effect: The target gains @Affliction[destined] 3.</p>",
-    "traits": [],
     "actions": [
       {
         "slug": "destiny-bond",
         "name": "Destiny Bond",
         "type": "attack",
-        "traits": [],
+        "traits": [
+          "pp-updated"
+        ],
         "range": {
           "target": "creature",
           "distance": 10,
@@ -19,10 +19,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 8,
-          "delay": null,
-          "priority": null,
-          "trigger": null
+          "powerPoints": 4
         },
         "category": "status",
         "power": null,
@@ -38,7 +35,7 @@
       }
     ],
     "container": null,
-    "grade": "A"
+    "grade": "B"
   },
   "_id": "KtSSIe0Sc2Ucby1Q",
   "effects": []

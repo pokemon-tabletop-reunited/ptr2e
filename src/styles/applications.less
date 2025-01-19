@@ -21,6 +21,11 @@ body {
         .application textarea:read-only {
             color: var(--color-dark-6);
         }
+
+        #type-matrix .type[data-effectiveness="0"] {
+          background: #222224cc !important;
+          color: var(--color-light-1);
+        }
     }
 
     .standard-form, .application.sheet {
@@ -1427,6 +1432,10 @@ body {
     &.data-inspector,
     &.active-effect-sheet {
         background: var(--appv2-background);
+
+        .form-fields button.file-picker {
+          padding: 0.3rem;
+        }
 
         .window-content {
             display: grid;
@@ -8069,5 +8078,107 @@ body {
 
   .editing {
     --appv2-background-opaque: linear-gradient(to right, #25191c, #1f1115);
+  }
+}
+
+#type-matrix {
+  section.window-content {
+    padding: 0.5rem;
+    display: flex;
+    gap: 0.25rem;
+  }
+
+  .type-grid {
+    display: grid;
+    grid-template-columns: repeat(var(--grid-columns), 40px);
+    grid-auto-flow: row;
+    grid-auto-rows: 40px;
+    overflow: auto;
+
+    .type {
+      overflow: hidden;
+      border: 1px solid var(--border-theme-color);
+      display: flex;
+
+      img {
+        border: unset;
+        border-radius: 0;
+        object-fit: fill;
+        flex: 1;
+      }
+
+      background: var(--appv2-background);
+      font-size: 15px;
+      text-align: center;
+
+      span {
+        align-self: center;
+        margin: auto;
+      }
+
+      &[data-effectiveness="0"] {
+        background: #bfbfbfaa;
+      }
+
+      &[data-effectiveness="0.5"] {
+        background: #ff8888aa;
+      }
+
+      &[data-effectiveness="2"] {
+        background: #88ff88aa;
+      }
+
+      &:hover {
+        box-shadow: inset 0 0 10px var(--appv2-text-color);
+      }
+
+      &.highlight-x {
+        border-top: 3px solid var(--appv2-text-color);
+        border-bottom: 3px solid var(--appv2-text-color);
+      }
+
+      &.highlight-y {
+        border-left: 3px solid var(--appv2-text-color);
+        border-right: 3px solid var(--appv2-text-color);
+      }
+    }
+  }
+
+  p.instructions {
+    text-align: center;
+  }
+
+  footer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+
+    button {
+      flex: 0 0 25%;
+    }
+  }
+}
+
+#type-matrix-dialog {
+  max-width: 450px;
+
+  section.window-content {
+    padding: 0.5rem;
+    display: flex;
+    gap: 0.25rem;
+
+    > div {
+      gap: 0.25rem;
+
+      footer {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+
+        button {
+          flex: 0 0 30%;
+        }
+      }
+    }
   }
 }

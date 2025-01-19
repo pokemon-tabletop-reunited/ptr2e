@@ -4,17 +4,14 @@
   "img": "systems/ptr2e/img/svg/normal_icon.svg",
   "system": {
     "slug": "perish-song",
-    "description": "<p>Effect: All valid targets gain @Affliction[perish] 5.</p>",
-    "traits": [
-      "sonic"
-    ],
     "actions": [
       {
         "slug": "perish-song",
         "name": "Perish Song",
         "type": "attack",
         "traits": [
-          "sonic"
+          "sonic",
+          "pp-updated"
         ],
         "range": {
           "target": "emanation",
@@ -23,10 +20,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 8,
-          "delay": null,
-          "priority": null,
-          "trigger": null
+          "powerPoints": 10
         },
         "category": "status",
         "power": null,
@@ -42,7 +36,7 @@
       }
     ],
     "container": null,
-    "grade": "B"
+    "grade": "A"
   },
   "_id": "im3tx4lD8l78ruz4",
   "effects": []

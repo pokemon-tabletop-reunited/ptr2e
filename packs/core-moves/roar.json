@@ -4,13 +4,6 @@
   "img": "systems/ptr2e/img/svg/normal_icon.svg",
   "system": {
     "slug": "roar",
-    "description": "<p>Effect: All valid targets gain @Affliction[fear] 5.</p>",
-    "traits": [
-      "social",
-      "sonic",
-      "friendly",
-      "delay-3"
-    ],
     "actions": [
       {
         "slug": "roar",
@@ -20,7 +13,8 @@
           "social",
           "sonic",
           "friendly",
-          "delay-3"
+          "delay-3",
+          "pp-updated"
         ],
         "range": {
           "target": "cone",
@@ -29,10 +23,8 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 5,
-          "delay": 3,
-          "priority": null,
-          "trigger": null
+          "powerPoints": 4,
+          "delay": 3
         },
         "category": "status",
         "power": null,
@@ -48,7 +40,7 @@
       }
     ],
     "container": null,
-    "grade": "C"
+    "grade": "B"
   },
   "_id": "JkdiBWMUql7JsHN6",
   "effects": []

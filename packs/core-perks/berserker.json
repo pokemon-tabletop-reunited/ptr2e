@@ -45,44 +45,6 @@
         "defensiveStat": null
       },
       {
-        "slug": "rage",
-        "name": "Rage",
-        "type": "attack",
-        "traits": [
-          "contact",
-          "pp-updated"
-        ],
-        "range": {
-          "target": "creature",
-          "distance": 1,
-          "unit": "m"
-        },
-        "cost": {
-          "activation": "complex",
-          "powerPoints": 1,
-          "delay": null,
-          "priority": null
-        },
-        "category": "physical",
-        "power": 20,
-        "accuracy": 100,
-        "types": [
-          "normal"
-        ],
-        "description": "<p>Effect: The user gains @Affliction[enraged] 2. While @Affliction[enraged], if the user is hit by a damaging attack, they gain +1 ATK Stage for 5 activations.</p>",
-        "img": "icons/svg/explosion.svg",
-        "variant": null,
-        "contestType": "",
-        "contestEffect": "",
-        "free": false,
-        "slot": null,
-        "summon": null,
-        "defaultVariant": null,
-        "flingItemId": null,
-        "offensiveStat": null,
-        "defensiveStat": null
-      },
-      {
         "name": "Frenzy Rush",
         "slug": "frenzy-rush",
         "type": "attack",
@@ -272,7 +234,65 @@
             "mode": 2,
             "priority": null,
             "ignored": false
+          },
+          {
+            "type": "grant-item",
+            "key": "",
+            "value": "Compendium.ptr2e.core-moves.Item.6OK8vhZYljL4X7cd",
+            "predicate": [],
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "reevaluateOnUpdate": false,
+            "inMemoryOnly": false,
+            "allowDuplicate": true,
+            "alterations": [],
+            "track": false,
+            "replaceSelf": false,
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            }
+          },
+          {
+            "type": "grant-item",
+            "key": "",
+            "value": "Compendium.ptr2e.core-moves.Item.ZNl94X4B6JuegB6H",
+            "predicate": [],
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "reevaluateOnUpdate": false,
+            "inMemoryOnly": false,
+            "allowDuplicate": true,
+            "alterations": [],
+            "track": false,
+            "replaceSelf": false,
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            }
+          },
+          {
+            "type": "grant-item",
+            "key": "",
+            "value": "Compendium.ptr2e.core-moves.Item.DymPJiI57iCzqLp1",
+            "predicate": [],
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "reevaluateOnUpdate": false,
+            "inMemoryOnly": false,
+            "allowDuplicate": true,
+            "alterations": [],
+            "track": false,
+            "replaceSelf": false,
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            }
           }
+
         ],
         "slug": null,
         "traits": [],

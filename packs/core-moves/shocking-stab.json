@@ -1,52 +1,44 @@
 {
-    "name": "Shocking-Stab",
-    "type": "move",
-    "img": "systems/ptr2e/img/svg/electric_icon.svg",
-    "system": {
-      "slug": "shocking-stab",
-      "description": "",
-      "traits": [
-        "horn",
-        "contact"
-      ],
-      "actions": [
-        {
-          "slug": "shocking-stab",
-          "name": "Shocking Stab",
-          "type": "attack",
-          "traits": [
-            "horn",
-            "contact",
-            "pp-updated"
-          ],
-          "range": {
-            "target": "creature",
-            "distance": 1,
-            "unit": "m"
-          },
-          "cost": {
-            "activation": "complex",
-            "powerPoints": 2,
-            "delay": null,
-            "priority": null,
-            "trigger": null
-          },
-          "category": "physical",
-          "power": 80,
-          "accuracy": 100,
-          "types": [
-            "electric"
-          ],
-          "description": "<p>Effect: On hit, the target has a 20% chance of gaining @Affliction[paralysis] 5.</p>",
-          "contestType": "",
-          "contestEffect": "",
-          "free": false,
-          "slot": null
-        }
-      ],
-      "container": null,
-      "grade": "D"
-    },
-    "_id": "VDWs6Y7AG2oVD8cN",
-    "effects": []
-  }
+  "name": "Shocking-Stab",
+  "type": "move",
+  "img": "systems/ptr2e/img/svg/electric_icon.svg",
+  "system": {
+    "slug": "shocking-stab",
+    "actions": [
+      {
+        "slug": "shocking-stab",
+        "name": "Shocking Stab",
+        "type": "attack",
+        "traits": [
+          "horn",
+          "contact",
+          "pp-updated"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 2
+        },
+        "category": "physical",
+        "power": 80,
+        "accuracy": 100,
+        "types": [
+          "electric"
+        ],
+        "description": "<p>Effect: On hit, the target has a 20% chance of gaining @Affliction[paralysis] 5.</p>",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      }
+    ],
+    "container": null,
+    "grade": "D"
+  },
+  "_id": "VDWs6Y7AG2oVD8cN",
+  "effects": []
+}

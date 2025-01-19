@@ -4,11 +4,6 @@
   "img": "systems/ptr2e/img/svg/normal_icon.svg",
   "system": {
     "slug": "retrograde",
-    "description": "<p>Effect: This attack can only affect creatures that have undergone a Phenomenal Transformation. The target loses the Phenomenal Transformation and is reverted to their base state.</p>",
-    "traits": [
-      "move-locked",
-      "transform"
-    ],
     "actions": [
       {
         "slug": "retrograde",
@@ -16,7 +11,8 @@
         "type": "attack",
         "traits": [
           "move-locked",
-          "transform"
+          "transform",
+          "pp-updated"
         ],
         "range": {
           "target": "emanation",
@@ -25,10 +21,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 8,
-          "delay": null,
-          "priority": null,
-          "trigger": null
+          "powerPoints": 8
         },
         "category": "status",
         "power": null,

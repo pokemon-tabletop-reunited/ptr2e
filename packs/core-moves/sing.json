@@ -4,17 +4,14 @@
   "img": "systems/ptr2e/img/svg/normal_icon.svg",
   "system": {
     "slug": "sing",
-    "description": "<p>Effect: On hit, all valid targets gain @Affliction[drowsy] 5.</p>",
-    "traits": [
-      "sonic"
-    ],
     "actions": [
       {
         "slug": "sing",
         "name": "Sing",
         "type": "attack",
         "traits": [
-          "sonic"
+          "sonic",
+          "pp-updated"
         ],
         "range": {
           "target": "emanation",
@@ -23,7 +20,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 6
+          "powerPoints": 2
         },
         "category": "status",
         "accuracy": 55,
@@ -37,7 +34,7 @@
         "slot": null
       }
     ],
-    "grade": "C",
+    "grade": "D",
     "_migration": {
       "version": null,
       "previous": null

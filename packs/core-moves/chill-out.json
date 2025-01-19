@@ -5,16 +5,15 @@
   "img": "systems/ptr2e/img/svg/ice_icon.svg",
   "system": {
     "slug": "chill-out",
-    "traits": [
-      "environ"
-    ],
     "actions": [
       {
         "name": "Chill Out",
         "slug": "chill-out",
         "type": "attack",
         "img": "icons/svg/explosion.svg",
-        "traits": [],
+        "traits": [
+          "pp-updated"
+        ],
         "range": {
           "target": "emanation",
           "distance": 2,
@@ -22,7 +21,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 9
+          "powerPoints": 6
         },
         "types": [
           "ice"
@@ -36,7 +35,8 @@
         "type": "attack",
         "img": "icons/svg/explosion.svg",
         "traits": [
-          "environ"
+          "environ",
+          "pp-updated"
         ],
         "range": {
           "target": "emanation",
@@ -54,7 +54,6 @@
         "description": "<p>Effect: On hit, all legal targets lose -2 ATK and SPD Stages for 7 Activations."
       }
     ],
-    "description": "<p>Effect: On hit, all legal targets lose -1 ATK and SPD Stages for 5 Activations. If there is Snowy Weather, they are decreased by -2 for 7 Activations instead.</p>",
     "grade": "A",
     "_migration": {
       "version": null,

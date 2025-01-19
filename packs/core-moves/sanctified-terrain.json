@@ -4,17 +4,14 @@
   "img": "systems/ptr2e/img/svg/normal_icon.svg",
   "system": {
     "slug": "sanctified-terrain",
-    "description": "<p>Effect: The Terrain becomes Sanctified Terrain for 3 rounds.</p>",
-    "traits": [
-      "terrain"
-    ],
     "actions": [
       {
         "slug": "sanctified-terrain",
         "name": "Sanctified Terrain",
         "type": "attack",
         "traits": [
-          "terrain"
+          "terrain",
+          "pp-updated"
         ],
         "range": {
           "target": "field",
@@ -23,10 +20,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 3,
-          "delay": null,
-          "priority": null,
-          "trigger": null
+          "powerPoints": 3
         },
         "category": "status",
         "power": null,
@@ -42,7 +36,7 @@
       }
     ],
     "container": null,
-    "grade": "A"
+    "grade": "C"
   },
   "_id": "GTbpzHPb4ZjttvkJ",
   "effects": []

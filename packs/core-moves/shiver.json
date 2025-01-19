@@ -5,14 +5,15 @@
   "img": "systems/ptr2e/img/svg/ice_icon.svg",
   "system": {
     "slug": null,
-    "traits": [],
     "actions": [
       {
         "name": "Shiver",
         "slug": "shiver",
         "type": "attack",
         "img": "icons/svg/explosion.svg",
-        "traits": [],
+        "traits": [
+          "pp-updated"
+        ],
         "range": {
           "target": "emanation",
           "distance": 2,
@@ -20,9 +21,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 3,
-          "delay": null,
-          "priority": null
+          "powerPoints": 5
         },
         "variant": null,
         "types": [
@@ -38,9 +37,8 @@
         "description": "<p>Effect: All valid targets lose -2 SPD Stages for 5 Activations.</p>"
       }
     ],
-    "description": "",
     "container": null,
-    "grade": "C"
+    "grade": "B"
   },
   "effects": [],
   "sort": 0,

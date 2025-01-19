@@ -4,25 +4,22 @@
   "img": "systems/ptr2e/img/svg/normal_icon.svg",
   "system": {
     "slug": "foresight",
-    "description": "<p>Effect: The user gains @Affliction[true-sight] 3 and can hit Ghost-Type creatures with Normal-Type and Fighting Type attacks while they have @Affliction[true-sight].</p>",
-    "traits": [],
     "actions": [
       {
         "slug": "foresight",
         "name": "Foresight",
         "type": "attack",
-        "traits": [],
+        "traits": [
+          "pp-updated"
+        ],
         "range": {
           "target": "self",
           "distance": 0,
           "unit": "m"
         },
         "cost": {
-          "activation": "complex",
-          "powerPoints": 1,
-          "delay": null,
-          "priority": null,
-          "trigger": null
+          "activation": "simple",
+          "powerPoints": 3
         },
         "category": "status",
         "power": null,
@@ -38,7 +35,7 @@
       }
     ],
     "container": null,
-    "grade": "E"
+    "grade": "C"
   },
   "_id": "B5u8TLbX10kgSB9d",
   "effects": []

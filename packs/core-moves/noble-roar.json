@@ -4,11 +4,6 @@
   "img": "systems/ptr2e/img/svg/normal_icon.svg",
   "system": {
     "slug": "noble-roar",
-    "description": "<p>Effect: All valid targets lose -1 ATK and SPATK Stages for 5 Activations.</p>",
-    "traits": [
-      "sonic",
-      "friendly"
-    ],
     "actions": [
       {
         "slug": "noble-roar",
@@ -16,7 +11,8 @@
         "type": "attack",
         "traits": [
           "sonic",
-          "friendly"
+          "friendly",
+          "pp-updated"
         ],
         "range": {
           "target": "emanation",
@@ -25,10 +21,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 4,
-          "delay": null,
-          "priority": null,
-          "trigger": null
+          "powerPoints": 7
         },
         "category": "status",
         "power": null,
@@ -44,7 +37,7 @@
       }
     ],
     "container": null,
-    "grade": "E"
+    "grade": "A"
   },
   "_id": "IphPhLWHEidcmFQX",
   "effects": []

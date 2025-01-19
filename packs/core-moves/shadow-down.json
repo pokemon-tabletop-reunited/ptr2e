@@ -4,17 +4,14 @@
   "img": "systems/ptr2e/img/svg/shadow_icon.svg",
   "system": {
     "slug": "shadow-down",
-    "description": "<p>Effect: On hit, all valid targets lose -2 DEF Stage for 5 Activations.</p>",
-    "traits": [
-      "friendly"
-    ],
     "actions": [
       {
         "slug": "shadow-down",
         "name": "Shadow Down",
         "type": "attack",
         "traits": [
-          "friendly"
+          "friendly",
+          "pp-updated"
         ],
         "range": {
           "target": "emanation",
@@ -23,10 +20,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 2,
-          "delay": null,
-          "priority": null,
-          "trigger": null
+          "powerPoints": 9
         },
         "category": "status",
         "power": null,
@@ -42,7 +36,7 @@
       }
     ],
     "container": null,
-    "grade": "D"
+    "grade": "A"
   },
   "_id": "R4t5pLgeDvmZ3fd6",
   "effects": []

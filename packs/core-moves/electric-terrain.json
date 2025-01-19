@@ -4,17 +4,14 @@
   "img": "systems/ptr2e/img/svg/electric_icon.svg",
   "system": {
     "slug": "electric-terrain",
-    "description": "<p>Effect: The Terrain type is set to Electric Terrain for 3 rounds.</p>",
-    "traits": [
-      "terrain"
-    ],
     "actions": [
       {
         "slug": "electric-terrain",
         "name": "Electric Terrain",
         "type": "attack",
         "traits": [
-          "terrain"
+          "terrain",
+          "pp-updated"
         ],
         "range": {
           "target": "field",
@@ -23,10 +20,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 2,
-          "delay": null,
-          "priority": null,
-          "trigger": null
+          "powerPoints": 3
         },
         "category": "status",
         "power": null,
@@ -42,7 +36,7 @@
       }
     ],
     "container": null,
-    "grade": "E"
+    "grade": "C"
   },
   "_id": "dPSChKwDs2PiIA7p",
   "effects": []

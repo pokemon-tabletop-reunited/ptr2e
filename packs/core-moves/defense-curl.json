@@ -4,14 +4,14 @@
   "img": "systems/ptr2e/img/svg/normal_icon.svg",
   "system": {
     "slug": "defense-curl",
-    "description": "<p>Effect: The user gains @Affliction[curled] 5.</p>",
-    "traits": [],
     "actions": [
       {
         "slug": "defense-curl",
         "name": "Defense Curl",
         "type": "attack",
-        "traits": [],
+        "traits": [
+          "pp-updated"
+        ],
         "range": {
           "target": "self",
           "distance": 0,
@@ -19,10 +19,7 @@
         },
         "cost": {
           "activation": "simple",
-          "powerPoints": 2,
-          "delay": null,
-          "priority": null,
-          "trigger": null
+          "powerPoints": 2
         },
         "category": "status",
         "power": null,
@@ -38,7 +35,7 @@
       }
     ],
     "container": null,
-    "grade": "E"
+    "grade": "D"
   },
   "_id": "jKO1iK8Z81n7LQXt",
   "effects": []

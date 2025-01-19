@@ -100,7 +100,7 @@ export class CompendiumBrowserMoveTab extends CompendiumBrowserTab {
     }, {} as Record<string, string>));
     this.filterData.checkboxes.target.options = this.generateCheckboxOptions(Object.values(PTRCONSTS.TargetOptions).reduce<Record<string,string>>((acc, target) => ({...acc, [target]: formatSlug(target)}), {}));
     this.filterData.selects.category.options = Object.values(PTRCONSTS.Categories).reduce<Record<string, string>>(
-      (acc, category) => ({ ...acc, [category]: category }),
+      (acc, category) => ({ ...acc, [category]: Handlebars.helpers.capitalizeFirst(category) }),
       {}
     )
     this.filterData.selects.cost.options = {

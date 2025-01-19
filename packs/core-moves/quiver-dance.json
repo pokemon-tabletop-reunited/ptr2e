@@ -4,17 +4,14 @@
   "img": "systems/ptr2e/img/svg/bug_icon.svg",
   "system": {
     "slug": "quiver-dance",
-    "description": "<p>Effect: The user raises their SPATK, SPDEF, and SPD Stages by +1 for 5 Activations.</p>",
-    "traits": [
-      "dance"
-    ],
     "actions": [
       {
         "slug": "quiver-dance",
         "name": "Quiver Dance",
         "type": "attack",
         "traits": [
-          "dance"
+          "dance",
+          "pp-updated"
         ],
         "range": {
           "target": "self",
@@ -23,10 +20,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 5,
-          "delay": null,
-          "priority": null,
-          "trigger": null
+          "powerPoints": 5
         },
         "category": "status",
         "power": null,
@@ -42,7 +36,7 @@
       }
     ],
     "container": null,
-    "grade": "C"
+    "grade": "B"
   },
   "_id": "c9FXYfGD2lhUFyJ5",
   "effects": []

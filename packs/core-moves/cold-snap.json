@@ -5,9 +5,6 @@
   "img": "systems/ptr2e/img/svg/ice_icon.svg",
   "system": {
     "slug": "cold-snap",
-    "traits": [
-      "legendary"
-    ],
     "actions": [
       {
         "name": "Cold Snap",
@@ -16,7 +13,8 @@
         "img": "icons/svg/explosion.svg",
         "traits": [
           "legendary",
-          "blast-2"
+          "blast-2",
+          "pp-updated"
         ],
         "range": {
           "target": "blast",
@@ -24,7 +22,7 @@
           "unit": "m"
         },
         "cost": {
-          "activation": "complex",
+          "activation": "simple",
           "powerPoints": 4
         },
         "types": [
@@ -44,7 +42,8 @@
         "type": "attack",
         "img": "icons/svg/explosion.svg",
         "traits": [
-          "legendary"
+          "legendary",
+          "pp-updated"
         ],
         "range": {
           "target": "emanation",
@@ -53,15 +52,14 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 8,
-          "trigger": "<p>The user has Absolute Zero as an Active Ability.</p>"
+          "powerPoints": 4
         },
         "types": [
           "ice"
         ],
         "category": "status",
         "accuracy": 85,
-        "description": "<p>Trigger: The user has Absolute Zero as an Active Ability.</p><p>Effect: On hit, all valid targets gain @Affliction[frostbite] 7, and have a 30% chance of gaining @Affliction[frozen] 3.</p>>",
+        "description": "<blockquote>Requirement: User must have Absolute Zero slotted as an Active Ability.</blockquote><p>Effect: On hit, all valid targets gain @Affliction[frostbite] 7, and have a 30% chance of gaining @Affliction[frozen] 3.</p>>",
         "contestType": "",
         "contestEffect": "",
         "variant": "cold-snap",
@@ -69,7 +67,7 @@
         "slot": null
       }
     ],
-    "grade": "B",
+    "grade": "C",
     "_migration": {
       "version": null,
       "previous": null

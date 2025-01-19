@@ -4,10 +4,6 @@
   "img": "systems/ptr2e/img/svg/fire_icon.svg",
   "system": {
     "slug": "fiery-dance",
-    "traits": [
-      "defrost",
-      "dance"
-    ],
     "actions": [
       {
         "slug": "fiery-dance",
@@ -20,12 +16,12 @@
         ],
         "range": {
           "target": "creature",
-          "distance": 1,
+          "distance": 10,
           "unit": "m"
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 2
+          "powerPoints": 4
         },
         "category": "special",
         "power": 80,
@@ -33,11 +29,11 @@
         "types": [
           "fire"
         ],
-        "description": "<p>Effect: On hit, the user has a 10% chance of gaining +1 SPATK Stage for 5 Activations.</p>",
+        "description": "<p>Effect: On hit, the user has a 50% chance of gaining +1 SPATK Stage for 5 Activations.</p>",
         "img": "icons/svg/explosion.svg"
       }
     ],
-    "grade": "E",
+    "grade": "B",
     "_migration": {
       "version": null,
       "previous": null
@@ -57,7 +53,7 @@
             "key": "fiery-dance-attack",
             "value": "Compendium.ptr2e.core-effects.Item.1TqcwIUNl32wJCAa",
             "predicate": [],
-            "chance": 10,
+            "chance": 50,
             "affects": "target",
             "mode": 2,
             "priority": null,

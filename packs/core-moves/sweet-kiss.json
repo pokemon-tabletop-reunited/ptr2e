@@ -4,17 +4,14 @@
   "img": "systems/ptr2e/img/svg/fairy_icon.svg",
   "system": {
     "slug": "sweet-kiss",
-    "description": "<p>Effect: On hit, the target becomes @Affliction[confused] 5.</p>",
-    "traits": [
-      "social"
-    ],
     "actions": [
       {
         "slug": "sweet-kiss",
         "name": "Sweet Kiss",
         "type": "attack",
         "traits": [
-          "social"
+          "social",
+          "pp-updated"
         ],
         "range": {
           "target": "creature",
@@ -23,10 +20,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 7,
-          "delay": null,
-          "priority": null,
-          "trigger": null
+          "powerPoints": 2
         },
         "category": "status",
         "power": null,
@@ -42,7 +36,7 @@
       }
     ],
     "container": null,
-    "grade": "A"
+    "grade": "E"
   },
   "_id": "B0vBMTGdIVQJAuaJ",
   "effects": []

@@ -406,6 +406,10 @@ class CheckPTR2e {
         effectRoll.roll = await new Roll("1d100ms@dc", { dc: effectRoll.chance }).roll();
         effectRoll.success = effectRoll.roll.total <= 0;
       }
+      for (const effectRoll of targetContext.effectRolls.defensive) {
+        effectRoll.roll = await new Roll("1d100ms@dc", { dc: effectRoll.chance }).roll();
+        effectRoll.success = effectRoll.roll.total <= 0;
+      }
 
       const messageContext: CheckRollContext & {
         notesList?: HTMLUListElement | null;
