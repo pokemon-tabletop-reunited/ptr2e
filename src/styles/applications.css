@@ -21,6 +21,10 @@ body.theme-light {
 body.theme-light .application textarea:read-only {
   color: var(--color-dark-6);
 }
+body.theme-light #type-matrix .type[data-effectiveness="0"] {
+  background: #222224cc !important;
+  color: var(--color-light-1);
+}
 body .standard-form fieldset,
 body .application.sheet fieldset {
   padding: 0.5rem;
@@ -1397,6 +1401,20 @@ body .application.sheet .form-group {
 .application.sheet.data-inspector,
 .application.sheet.active-effect-sheet {
   background: var(--appv2-background);
+}
+.application.sheet.default-sheet .form-fields button.file-picker,
+.application.sheet#perk-hud-base .form-fields button.file-picker,
+.application.sheet.pick-a-thing-prompt .form-fields button.file-picker,
+.application.sheet.known-actions-sheet .form-fields button.file-picker,
+.application.sheet.available-abilities-sheet .form-fields button.file-picker,
+.application.sheet.action-sheet .form-fields button.file-picker,
+.application.sheet.move-sheet .form-fields button.file-picker,
+.application.sheet.species-sheet .form-fields button.file-picker,
+.application.sheet.party-sheet .form-fields button.file-picker,
+.application.sheet.team-sheet .form-fields button.file-picker,
+.application.sheet.data-inspector .form-fields button.file-picker,
+.application.sheet.active-effect-sheet .form-fields button.file-picker {
+  padding: 0.3rem;
 }
 .application.sheet.default-sheet .window-content,
 .application.sheet#perk-hud-base .window-content,
@@ -6966,9 +6984,9 @@ ul.item-list.result-list li.item.rarity-unique {
   color: white;
   display: grid;
   overflow: hidden;
-  grid-template-areas: "hudHeader web search" "hudActor web search" "hudPerk web search" "hudPerk web searchResults" "hudControls web searchResults";
+  grid-template-areas: "hudHeader web search" "hudActor web search" "hudZoom web search" "hudPerk web search" "hudPerk web searchResults" "hudControls web searchResults";
   grid-template-columns: 250px minmax(0, 1fr) 250px;
-  grid-template-rows: 33px 100px 130px minmax(0, 1fr) min-content;
+  grid-template-rows: 33px 100px 30px 100px minmax(0, 1fr) min-content;
   --appv2-background-opaque: linear-gradient(to right, #07070a, #13111f);
 }
 #perk-web-app .hud {
@@ -7031,8 +7049,27 @@ ul.item-list.result-list li.item.rarity-unique {
 #perk-web-app [data-application-part="hudActor"] main input {
   width: 75%;
 }
+#perk-web-app [data-application-part="hudZoom"] {
+  grid-area: hudZoom;
+}
+#perk-web-app [data-application-part="hudZoom"] footer {
+  flex: 0 0 100%;
+  display: flex;
+  flex-direction: row;
+  gap: 0.25rem;
+  justify-content: space-evenly;
+  align-items: center;
+  text-align: center;
+}
+#perk-web-app [data-application-part="hudZoom"] footer label {
+  flex: 0 0 30%;
+}
+#perk-web-app [data-application-part="hudZoom"] footer select {
+  flex: 0 0 50%;
+}
 #perk-web-app [data-application-part="hudPerk"] {
   grid-area: hudPerk;
+  border-top: 1px solid var(--border-theme-color);
 }
 #perk-web-app [data-application-part="hudPerk"] h2 {
   font-family: inherit;
@@ -7616,4 +7653,84 @@ ul.item-list.result-list li.item.rarity-unique {
 }
 #perk-web-app .editing {
   --appv2-background-opaque: linear-gradient(to right, #25191c, #1f1115);
+}
+#type-matrix section.window-content {
+  padding: 0.5rem;
+  display: flex;
+  gap: 0.25rem;
+}
+#type-matrix .type-grid {
+  display: grid;
+  grid-template-columns: repeat(var(--grid-columns), 40px);
+  grid-auto-flow: row;
+  grid-auto-rows: 40px;
+  overflow: auto;
+}
+#type-matrix .type-grid .type {
+  overflow: hidden;
+  border: 1px solid var(--border-theme-color);
+  display: flex;
+  background: var(--appv2-background);
+  font-size: 15px;
+  text-align: center;
+}
+#type-matrix .type-grid .type img {
+  border: unset;
+  border-radius: 0;
+  object-fit: fill;
+  flex: 1;
+}
+#type-matrix .type-grid .type span {
+  align-self: center;
+  margin: auto;
+}
+#type-matrix .type-grid .type[data-effectiveness="0"] {
+  background: #bfbfbfaa;
+}
+#type-matrix .type-grid .type[data-effectiveness="0.5"] {
+  background: #ff8888aa;
+}
+#type-matrix .type-grid .type[data-effectiveness="2"] {
+  background: #88ff88aa;
+}
+#type-matrix .type-grid .type:hover {
+  box-shadow: inset 0 0 10px var(--appv2-text-color);
+}
+#type-matrix .type-grid .type.highlight-x {
+  border-top: 3px solid var(--appv2-text-color);
+  border-bottom: 3px solid var(--appv2-text-color);
+}
+#type-matrix .type-grid .type.highlight-y {
+  border-left: 3px solid var(--appv2-text-color);
+  border-right: 3px solid var(--appv2-text-color);
+}
+#type-matrix p.instructions {
+  text-align: center;
+}
+#type-matrix footer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+#type-matrix footer button {
+  flex: 0 0 25%;
+}
+#type-matrix-dialog {
+  max-width: 450px;
+}
+#type-matrix-dialog section.window-content {
+  padding: 0.5rem;
+  display: flex;
+  gap: 0.25rem;
+}
+#type-matrix-dialog section.window-content > div {
+  gap: 0.25rem;
+}
+#type-matrix-dialog section.window-content > div footer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+#type-matrix-dialog section.window-content > div footer button {
+  flex: 0 0 30%;
 }

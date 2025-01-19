@@ -800,6 +800,10 @@
                 "item": null,
                 "level": null,
                 "knownMove": null
+              },
+              "perk": {
+                "x": 15,
+                "y": 15
               }
             }
           ],
@@ -808,13 +812,24 @@
             "item": null,
             "level": null,
             "knownMove": null
+          },
+          "perk": {
+            "x": 15,
+            "y": 15
           }
         }
       ],
       "uuid": "Compendium.ptr2e.core-species.Item.E1QakqCVmnAbx4Uo",
-      "methods": []
+      "methods": [],
+      "perk": {
+        "x": 15,
+        "y": 15
+      }
     },
-    "habitats": [],
+    "habitats": [
+      "volcano",
+      "mountain"
+    ],
     "slug": "charizard",
     "_migration": {
       "version": null,
@@ -822,5 +837,412 @@
     }
   },
   "_id": "9PStsTvP0J3tLcER",
-  "effects": []
+  "effects": [
+    {
+      "name": "Mega Charizard X",
+      "type": "form",
+      "_id": "s8mbXztpSNsvB9GV",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-option",
+            "key": "manual-forme-toggle",
+            "value": "forme:mega-charizard-x:active",
+            "domain": "all",
+            "toggleable": true,
+            "label": "Toggle: Mega Charizard X Forme",
+            "predicate": [],
+            "alwaysActive": false,
+            "count": false,
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "suboptions": [],
+            "state": false
+          },
+          {
+            "type": "grant-item",
+            "predicate": [
+              "forme:mega-charizard-x:active"
+            ],
+            "key": "",
+            "value": "Compendium.ptr2e.core-abilities.Item.m9Ag7JCZvcx28Sy7",
+            "reevaluateOnUpdate": true,
+            "allowDuplicate": false,
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "inMemoryOnly": false,
+            "alterations": [],
+            "track": false,
+            "replaceSelf": false,
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            }
+          },
+          {
+            "type": "add-trait",
+            "predicate": [
+              "forme:mega-charizard-x:active"
+            ],
+            "key": "",
+            "value": "Drakelike",
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "add-trait",
+            "predicate": [
+              "forme:mega-charizard-x:active"
+            ],
+            "key": "",
+            "value": "Jump 4",
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "remove-trait",
+            "predicate": [
+              "forme:mega-charizard-x:active"
+            ],
+            "key": "",
+            "value": "Jump 2",
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "stats-alteration",
+            "predicate": [
+              "forme:mega-charizard-x:active"
+            ],
+            "key": "",
+            "value": 0,
+            "hp": null,
+            "atk": 18,
+            "def": 40,
+            "spa": 22,
+            "spd": 20,
+            "spe": null,
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-charizard-x:active"
+            ],
+            "key": "system.skills.climb.value",
+            "value": 10,
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-charizard-x:active"
+            ],
+            "key": "system.skills.intimidate.value",
+            "value": 10,
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-charizard-x:active"
+            ],
+            "key": "system.skills.lift.value",
+            "value": 10,
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-charizard-x:active"
+            ],
+            "key": "system.skills.dragon.value",
+            "value": 30,
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-charizard-x:active"
+            ],
+            "key": "system.skills.running.value",
+            "value": 10,
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "token-alterations",
+            "predicate": [
+              "forme:mega-charizard-x:active"
+            ],
+            "key": "",
+            "value": 0,
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "texture": "modules/ptr2e-pkmn-sprites/sprites/006_MEGA_X.webp",
+            "tint": null,
+            "scale": null,
+            "name": null,
+            "light": null,
+            "alpha": null
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0,
+        "trigger": "manual",
+        "conditions": []
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.5.0",
+        "createdTime": 1736701896752,
+        "modifiedTime": 1736706653960,
+        "lastModifiedBy": "7DirfY8mVLhqwsXB"
+      }
+    },
+    {
+      "name": "Mega Charizard Y",
+      "type": "form",
+      "_id": "2WhcBT8JATI6htcU",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-option",
+            "key": "manual-forme-toggle",
+            "value": "forme:mega-charizard-y:active",
+            "domain": "all",
+            "toggleable": true,
+            "label": "Toggle: Mega Charizard Y Forme",
+            "predicate": [],
+            "alwaysActive": false,
+            "count": false,
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "suboptions": [],
+            "state": false
+          },
+          {
+            "type": "grant-item",
+            "predicate": [
+              "forme:mega-charizard-y:active"
+            ],
+            "key": "",
+            "value": "Compendium.ptr2e.core-abilities.Item.o9y5NB42vrAfxz7L",
+            "reevaluateOnUpdate": true,
+            "allowDuplicate": false,
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "inMemoryOnly": false,
+            "alterations": [],
+            "track": false,
+            "replaceSelf": false,
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            }
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-charizard-y:active"
+            ],
+            "key": "system.movement.flight.value",
+            "value": 10,
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "add-trait",
+            "predicate": [
+              "forme:mega-charizard-y:active"
+            ],
+            "key": "",
+            "value": "Jump 3",
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "remove-trait",
+            "predicate": [
+              "forme:mega-charizard-y:active"
+            ],
+            "key": "",
+            "value": "Jump 2",
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "add-trait",
+            "predicate": [
+              "forme:mega-charizard-y:active"
+            ],
+            "key": "",
+            "value": "Jet",
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "stats-alteration",
+            "predicate": [
+              "forme:mega-charizard-y:active"
+            ],
+            "key": "",
+            "value": 0,
+            "hp": null,
+            "atk": 20,
+            "def": null,
+            "spa": 50,
+            "spd": 30,
+            "spe": null,
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-charizard-y:active"
+            ],
+            "key": "system.skills.climb.value",
+            "value": -10,
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-charizard-y:active"
+            ],
+            "key": "system.skills.intimidate.value",
+            "value": 5,
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-charizard-y:active"
+            ],
+            "key": "system.skills.flying.value",
+            "value": 15,
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-charizard-y:active"
+            ],
+            "key": "system.skills.navigate.value",
+            "value": 5,
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "token-alterations",
+            "predicate": [
+              "forme:mega-charizard-y:active"
+            ],
+            "key": "",
+            "value": 0,
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "texture": "modules/ptr2e-pkmn-sprites/sprites/006_MEGA_Y.webp",
+            "tint": null,
+            "scale": null,
+            "name": null,
+            "light": null,
+            "alpha": null
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0,
+        "trigger": "manual",
+        "conditions": []
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.5.0",
+        "createdTime": 1736701906472,
+        "modifiedTime": 1736705960174,
+        "lastModifiedBy": "Zx1g4MsxYSDwl39d"
+      }
+    }
+  ]
 }

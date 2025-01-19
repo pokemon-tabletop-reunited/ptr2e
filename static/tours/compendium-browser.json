@@ -1,0 +1,61 @@
+{
+  "title": "PTR2E.Tours.compendiumBrowser.title",
+  "description": "PTR2E.Tours.compendiumBrowser.description",
+  "canBeResumed": true,
+  "display": true,
+  "steps": [
+    {
+      "id": "welcome",
+      "selector": "",
+      "title": "PTR2E.Tours.compendiumBrowser.steps.welcome.title",
+      "content": "PTR2E.Tours.compendiumBrowser.steps.welcome.content",
+      "sidebarTab": "compendium"
+    },
+    {
+      "id": "browser-open",
+      "selector": ".compendium-browser-btn",
+      "title": "PTR2E.Tours.compendiumBrowser.steps.browser-open.title",
+      "content": "PTR2E.Tours.compendiumBrowser.steps.browser-open.content",
+      "sidebarTab": "compendium"
+    },
+    {
+      "id": "browser-opened",
+      "selector": "#compendium-browser",
+      "title": "PTR2E.Tours.compendiumBrowser.steps.browser-opened.title",
+      "content": "PTR2E.Tours.compendiumBrowser.steps.browser-opened.content",
+      "sidebarTab": "compendium",
+      "app": [
+        {}
+      ]
+    },
+    {
+      "id": "moves-tab",
+      "selector": "#compendium-browser .window-content",
+      "title": "PTR2E.Tours.compendiumBrowser.steps.moves-tab.title",
+      "content": "PTR2E.Tours.compendiumBrowser.steps.moves-tab.content",
+      "sidebarTab": "compendium",
+      "app": [
+        {
+          "tab": "move",
+          "group": "tabs"
+        }
+      ]
+    },
+    {
+      "id": "filtering",
+      "selector": "#compendium-browser [data-filter-name=\"traits\"]",
+      "title": "PTR2E.Tours.compendiumBrowser.steps.filtering.title",
+      "content": "PTR2E.Tours.compendiumBrowser.steps.filtering.content",
+      "sidebarTab": "compendium",
+      "app": [
+        {
+          "tab": "move",
+          "group": "tabs"
+        }
+      ]
+    }
+  ],
+  "suggestedNextTours": [
+    "ptr2e.misc"
+  ]
+}

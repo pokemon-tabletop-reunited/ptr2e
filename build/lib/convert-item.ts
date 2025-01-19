@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { sluggify } from "./helpers.ts";
+import { PredicateStatement, sluggify, StatementValidator } from "./helpers.ts";
 
 const categories = {
     "a-e": ["a", "b", "c", "d", "e"],
@@ -16,8 +16,8 @@ function capitalize(input: string): string {
     return input.charAt(0).toUpperCase() + input.slice(1);
 }
 
-function formatSlug(slug: string) {
-    return capitalize(slug)?.replaceAll("-", " ");
+function formatSlug(slug: Maybe<string>) {
+    return capitalize(slug!)?.replaceAll("-", " ");
 }
 
 function getCategory(title: string): keyof typeof categories {
@@ -43,7 +43,7 @@ function getMarkdownPath({
     title: string;
     extension?: boolean;
 }): string {
-    const path = `${type}/${subtype ? `${subtype}/` : ""}${category ? `${category}/` : ""}${sluggify(title)}${
+    const path = `data/${type}/${subtype ? `${subtype}/` : ""}${category ? `${category}/` : ""}${sluggify(title)}${
         extension ? ".md" : ""
     }`;
     return path;
@@ -350,6 +350,145 @@ function moveToMarkdown(move: any): MarkdownResult | null {
     };
 }
 
+function getPredicateStrings(prerequisites: PredicateStatement[]): string[] {
+  function handlePredicate(predicate: PredicateStatement | PredicateStatement[] | number): string | string[] {
+    // if (predicate instanceof Predicate) {
+    //   return Array.from(predicate.flatMap(handlePredicate));
+    // }
+
+    // Handle roll-option array
+    if (Array.isArray(predicate)) {
+      return Array.from(new Set(predicate.flatMap(handlePredicate)));
+    }
+
+    // Handle string
+    if (typeof predicate === "string") {
+      const number = Number(predicate);
+      if(!isNaN(number)) {
+        return handlePredicate(number);
+      }
+
+      if(predicate.trim().startsWith("#")) {
+        return `${predicate.replace("#", "")} (Not Automated)`;
+      }
+
+      const itemRollOption = predicate.trim().match(/^(item):(?<type>[-a-z]+):(?<slug>[-a-z0-9]+)$/);
+      if(itemRollOption) {
+        return `${formatSlug(itemRollOption.groups?.slug)} (${formatSlug(itemRollOption.groups?.type)})`;
+      }
+
+      const traitRollOption = predicate.trim().match(/^(trait):(?<slug>[-a-z0-9]+)$/);
+      if(traitRollOption) {
+        return `[${formatSlug(traitRollOption.groups?.slug)}]`;
+      }
+      
+      const injected = predicate.trim().match(/^{(?<type>actor|item|effect|change)\|(?<path>[\w.-]+)}$/);
+      if(injected) {
+        const path = injected.groups?.path;
+        if(!path) return predicate.toString();
+
+        if(path.startsWith("skills.") && path.endsWith(".mod")) {
+          return `${formatSlug(path.slice(7, -4))}`;
+        }
+        switch(path) {
+          case "level":
+          case "system.advancement.level":
+            return "Level";
+        }
+
+        return `'${path}'`;
+      }
+
+      return predicate.toString();
+    }
+
+    if(typeof predicate === "number") {
+      return predicate.toString();
+    }
+
+    // Handle object
+    if (predicate && typeof predicate === "object" && Object.keys(predicate).length > 0) {
+      const statement = predicate as object
+      if(StatementValidator.isBinaryOp(statement)) {
+        if('eq' in statement) {
+          //@ts-expect-error - Could be attempting to evaluate truthy value
+          if(statement.eq[1] == true) {
+            return handlePredicate(statement.eq[0]);
+          }
+          //@ts-expect-error - Could be attempting to evaluate falsey value
+          if(statement.eq[1] == false) {
+            return `Not: ${handlePredicate(statement.eq[0])}`;
+          }
+          return `${handlePredicate(statement.eq[0])} == ${handlePredicate(statement.eq[1])}`;
+        }
+        if('gt' in statement) {
+          return `${handlePredicate(statement.gt[0])} > ${handlePredicate(statement.gt[1])}`;
+        }
+        if('gte' in statement) {
+          return `${handlePredicate(statement.gte[0])} >= ${handlePredicate(statement.gte[1])}`;
+        }
+        if('lt' in statement) {
+          return `${handlePredicate(statement.lt[0])} < ${handlePredicate(statement.lt[1])}`;
+        }
+        if('lte' in statement) {
+          return `${handlePredicate(statement.lte[0])} <= ${handlePredicate(statement.lte[1])}`;
+        }
+      }
+      if (StatementValidator.isAnd(statement)) {
+        const and = handlePredicate(statement.and);
+        if(Array.isArray(and) && and.length === 1) {
+          return and[0];
+        }
+
+        return `All of: ${Array.isArray(and) ? `<ul><li>${and.join('</li><li>')}</li></ul>` : and}`;
+      }
+      if (StatementValidator.isOr(statement)) {
+        const or = handlePredicate(statement.or);
+        if(Array.isArray(or) && or.length === 1) {
+          return or[0];
+        }
+        return `One of: ${Array.isArray(or) ? `<ul><li>${or.join('</li><li>')}</li></ul>`: or}`;
+      }
+      if (StatementValidator.isNand(statement)) {
+        const nand = handlePredicate(statement.nand);
+        if(Array.isArray(nand) && nand.length === 1) {
+          return `Not: ${nand[0]}`;
+        }
+        return `None of: ${Array.isArray(nand) ? `<ul><li>${nand.join('</li><li>')}</li></ul>` : nand}`;
+      }
+      if (StatementValidator.isXor(statement)) {
+        const xor = handlePredicate(statement.xor);
+        if(Array.isArray(xor) && xor.length === 1) {
+          return xor[0];
+        }
+        return `Exactly one of: ${Array.isArray(xor) ? `<ul><li>${xor.join('</li><li>')}</li></ul>` : xor}`;
+      }
+      if (StatementValidator.isNor(statement)) {
+        const nor = handlePredicate(statement.nor);
+        if(Array.isArray(nor) && nor.length === 1) {
+          return `Not: ${nor[0]}`;
+        }
+        return `Not all of: ${Array.isArray(nor) ? `<ul><li>${nor.join('</li><li>')}</li></ul>` : nor}`;
+      }
+      if (StatementValidator.isNot(statement)) {
+        return `Not: ${handlePredicate(statement.not)}`;
+      }
+      if (StatementValidator.isIf(statement)) {
+        return `If: ${handlePredicate(statement.if)} then ${handlePredicate(statement.then)}`;
+      }
+      if (StatementValidator.isXOf(statement)) {
+        if(statement.x === 1) return handlePredicate(statement.xof);
+        const xof = handlePredicate(statement.xof);
+        return `${statement.x} of: ${Array.isArray(xof) ? `<ul><li>${xof.join('</li><li>')}</li></ul>` : xof}`;
+      }
+    }
+
+    return predicate.toString();
+  }
+
+  return prerequisites.flatMap(handlePredicate);
+}
+
 function perkToMarkdown(perk: any): MarkdownResult | null {
     const path = getMarkdownPath({
         type: "perks",
@@ -379,13 +518,20 @@ function perkToMarkdown(perk: any): MarkdownResult | null {
         );
     }
 
+    const nodesString = perk.system.nodes.map((node: {x: number, y: number, connected: string[]}, index: number) => {
+      return `#### Node ${index + 1}\n- **X**: ${node.x}\n- **Y**: ${node.y}\n- **Connections**: ${node.connected.map(c => `[${formatSlug(c)}](/${getMarkdownPath({
+        type: "perks",
+        category: getCategory(c),
+        title: c,
+        extension: false
+      })})`).join(", ")}`;
+    }).join("\n\n");
+
     return {
         metadata,
-        markdown: `- **Prerequisites**: ${perk.system.prerequisites?.join(", ")}\n- **AP Cost**: ${perk.system.cost}\n- **Connections**: ${connections.join(
-            ", "
-        )}\n\n${traitsString ? `### Traits\n${traitsString}\n\n` : ""}### Effect\n${perk.system.description}${
+        markdown: `- **AP Cost**: ${perk.system.cost}\n\n### Prerequisites\n${getPredicateStrings(perk.system.prerequisites)?.join("\n")}\n\n${traitsString ? `### Traits\n${traitsString}\n\n` : ""}### Effect\n${perk.system.description}${
             actionStrings.length > 0 ? `\n\n## Perk Actions\n${actionStrings.join("\n\n\n")}` : ""
-        }`,
+        }\n\n### Nodes\n${nodesString}`,
         path,
     };
 }

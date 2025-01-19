@@ -71,7 +71,7 @@ interface RollContext<
   self: AttackSelf<TActor, TStatistic, TItem>;
   target: RollTarget | null;
   traits: string[];
-  effectRolls: { target: EffectRoll[], origin: EffectRoll[] };
+  effectRolls: { target: EffectRoll[], origin: EffectRoll[], defensive: EffectRoll[] };
   flatDamage?: number;
 }
 

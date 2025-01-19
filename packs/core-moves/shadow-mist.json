@@ -4,9 +4,10 @@
   "img": "systems/ptr2e/img/svg/shadow_icon.svg",
   "system": {
     "slug": "shadow-mist",
-    "description": "<p>Effect: On hit, all valid targets lose -2 EVA Stage for 5 Activations.</p>",
+    "description": "<p>Effect: On hit, all valid targets lose -2 EVA Stage for 5 Activations and are Flinched.</p>",
     "traits": [
-      "friendly"
+      "friendly",
+      "pp-updated"
     ],
     "actions": [
       {
@@ -14,27 +15,29 @@
         "name": "Shadow Mist",
         "type": "attack",
         "traits": [
-          "friendly"
+          "friendly",
+          "flinch-3",
+          "pp-updated"
         ],
         "range": {
           "target": "emanation",
-          "distance": 3,
+          "distance": 4,
           "unit": "m"
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 3,
+          "powerPoints": 6,
           "delay": null,
           "priority": null,
           "trigger": null
         },
         "category": "status",
         "power": null,
-        "accuracy": 100,
+        "accuracy": 85,
         "types": [
           "shadow"
         ],
-        "description": "<p>Effect: On hit, all valid targets lose -2 EVA Stage for 5 Activations.</p>",
+        "description": "<p>Effect: On hit, all valid targets lose -2 EVA Stage for 5 Activations and are Flinched.</p>",
         "contestType": "",
         "contestEffect": "",
         "free": false,
@@ -42,7 +45,7 @@
       }
     ],
     "container": null,
-    "grade": "B"
+    "grade": "A"
   },
   "_id": "joTVpu34LTla2KBr",
   "effects": []

@@ -5,13 +5,17 @@
   "system": {
     "slug": "tidy-up",
     "description": "<p>Effect: The user gain +1 ATK and SPD Stage for 5 Activations. The user removes [Hazard] and [Substitute] effects in a 2m Burst.</p>",
-    "traits": [],
+    "traits": [
+      "pp-updated"
+    ],
     "actions": [
       {
         "slug": "tidy-up",
         "name": "Tidy Up",
         "type": "attack",
-        "traits": [],
+        "traits": [
+          "pp-updated"
+        ],
         "range": {
           "target": "self",
           "distance": 0,
@@ -19,7 +23,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 7,
+          "powerPoints": 6,
           "delay": null,
           "priority": null,
           "trigger": null

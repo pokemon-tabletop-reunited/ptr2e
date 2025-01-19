@@ -4,9 +4,10 @@
   "img": "systems/ptr2e/img/svg/psychic_icon.svg",
   "system": {
     "slug": "imprison",
-    "description": "<p>Effect: On hit, aLL valid targets gain @Affliction[suppressed] 5.</p>",
+    "description": "<p>Effect: On hit, all valid targets gain @Affliction[suppressed] 5.</p>",
     "traits": [
-      "friendly"
+      "friendly",
+      "pp-updated"
     ],
     "actions": [
       {
@@ -14,7 +15,8 @@
         "name": "Imprison",
         "type": "attack",
         "traits": [
-          "friendly"
+          "friendly",
+          "pp-updated"
         ],
         "range": {
           "target": "emanation",
@@ -22,22 +24,22 @@
           "unit": "m"
         },
         "cost": {
-          "activation": "simple",
-          "powerPoints": 6
+          "activation": "complex",
+          "powerPoints": 7
         },
         "category": "status",
         "accuracy": 90,
         "types": [
           "psychic"
         ],
-        "description": "<p>EEffect: On hit, aLL valid targets gain @Affliction[suppressed] 5.</p>",
+        "description": "<p>Effect: On hit, all valid targets gain @Affliction[suppressed] 5.</p>",
         "contestType": "",
         "contestEffect": "",
         "free": false,
         "slot": null
       }
     ],
-    "grade": "B",
+    "grade": "A",
     "_migration": {
       "version": null,
       "previous": null
@@ -47,7 +49,7 @@
   "effects": [
     {
       "name": "Imprison",
-      "type": "affliction",
+      "type": "passive",
       "_id": "zL8PklZBBXQaj8Mb",
       "img": "systems/ptr2e/img/icons/effect_icon.webp",
       "system": {

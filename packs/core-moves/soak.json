@@ -5,13 +5,17 @@
   "system": {
     "slug": "soak",
     "description": "<p>Effect: The target becomes Water-Type for 5 Activations.</p>",
-    "traits": [],
+    "traits": [
+      "pp-updated"
+    ],
     "actions": [
       {
         "slug": "soak",
         "name": "Soak",
         "type": "attack",
-        "traits": [],
+        "traits": [
+          "pp-updated"
+        ],
         "range": {
           "target": "creature",
           "distance": 5,
@@ -19,7 +23,7 @@
         },
         "cost": {
           "activation": "simple",
-          "powerPoints": 3,
+          "powerPoints": 2,
           "delay": null,
           "priority": null,
           "trigger": null
@@ -38,7 +42,7 @@
       }
     ],
     "container": null,
-    "grade": "C"
+    "grade": "D"
   },
   "_id": "P1oTLjrJIH8i7Jl2",
   "effects": []

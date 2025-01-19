@@ -7,7 +7,8 @@
     "description": "<p>Effect: The user's HP is set to 0. On hit, all valid targets in range have their ATK Stage and SPATK Stage reduced by -2 for 5 Activations.</p>",
     "traits": [
       "explode",
-      "friendly"
+      "friendly",
+      "pp-updated"
     ],
     "actions": [
       {
@@ -16,7 +17,8 @@
         "type": "attack",
         "traits": [
           "explode",
-          "friendly"
+          "friendly",
+          "pp-updated"
         ],
         "range": {
           "target": "emanation",
@@ -25,7 +27,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 7,
+          "powerPoints": 4,
           "delay": null,
           "priority": null,
           "trigger": null
@@ -44,7 +46,7 @@
       }
     ],
     "container": null,
-    "grade": "A"
+    "grade": "B"
   },
   "_id": "6VWrBC5kqwasXoKX",
   "effects": []

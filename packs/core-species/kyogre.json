@@ -40,7 +40,7 @@
     "abilities": {
       "starting": [
         {
-          "slug": "drizzle"
+          "slug": "primordial-sea"
         }
       ],
       "basic": [
@@ -530,10 +530,220 @@
     "evolutions": {
       "name": "kyogre",
       "details": null,
-      "evolutions": []
-    }
+      "evolutions": [],
+      "uuid": "Compendium.ptr2e.core-species.Item.3CVImW76YBhvjJca",
+      "methods": [],
+      "perk": {
+        "x": 15,
+        "y": 15
+      }
+    },
+    "_migration": {
+      "version": null,
+      "previous": null
+    },
+    "genderRatio": -1,
+    "habitats": []
   },
   "_id": "3CVImW76YBhvjJca",
-  "effects": [],
-  "folder": null
+  "effects": [
+    {
+      "name": "Primal Kyogre",
+      "type": "form",
+      "_id": "cUMJEbjFZiERfHnj",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-option",
+            "key": "manual-forme-toggle",
+            "value": "forme:primal-kyogre:active",
+            "domain": "all",
+            "toggleable": true,
+            "label": "Toggle: Primal Kyogre Forme",
+            "predicate": [],
+            "alwaysActive": false,
+            "count": false,
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "suboptions": [],
+            "state": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:primal-kyogre:active"
+            ],
+            "key": "system.details.size.height",
+            "value": 4.8,
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:primal-kyogre:active"
+            ],
+            "key": "system.details.size.weight",
+            "value": 78,
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "add-trait",
+            "predicate": [
+              "forme:primal-kyogre:active"
+            ],
+            "key": "",
+            "value": "Breathless",
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "add-trait",
+            "predicate": [
+              "forme:primal-kyogre:active"
+            ],
+            "key": "",
+            "value": "Glow 3",
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "stats-alteration",
+            "predicate": [
+              "forme:primal-kyogre:active"
+            ],
+            "key": "",
+            "value": 0,
+            "hp": null,
+            "atk": 50,
+            "def": null,
+            "spa": 30,
+            "spd": 20,
+            "spe": null,
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:primal-kyogre:active"
+            ],
+            "key": "system.skills.intimidate.value",
+            "value": 20,
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:primal-kyogre:active"
+            ],
+            "key": "system.skills.lift.value",
+            "value": 20,
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:primal-kyogre:active"
+            ],
+            "key": "system.skills.intimidate.value",
+            "value": 20,
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:primal-kyogre:active"
+            ],
+            "key": "system.skills.legendary.value",
+            "value": 20,
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:primal-kyogre:active"
+            ],
+            "key": "system.skills.survival.value",
+            "value": 20,
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:primal-kyogre:active"
+            ],
+            "key": "system.skills.swim.value",
+            "value": "system.skills.swim.value",
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:primal-kyogre:active"
+            ],
+            "key": "system.skills.track.value",
+            "value": 20,
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0,
+        "trigger": "manual",
+        "conditions": []
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.5.0",
+        "createdTime": 1735905824104,
+        "modifiedTime": 1735906872757,
+        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
+      }
+    }
+  ]
 }

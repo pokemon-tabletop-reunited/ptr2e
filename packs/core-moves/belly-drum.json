@@ -5,13 +5,17 @@
   "system": {
     "slug": "belly-drum",
     "description": "<p>Trigger: The user's current HP is greater than 50% of their Max HP.</p><p>Effect: The user reduces their HP by 50% of their Max HP. Then, they gain +12 ATK Stages for 5 Activations.</p>>",
-    "traits": [],
+    "traits": [
+      "pp-updated"
+    ],
     "actions": [
       {
         "slug": "belly-drum",
         "name": "Belly Drum",
         "type": "attack",
-        "traits": [],
+        "traits": [
+          "pp-updated"
+        ],
         "range": {
           "target": "self",
           "distance": 0,

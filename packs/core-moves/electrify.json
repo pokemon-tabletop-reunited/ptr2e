@@ -5,13 +5,17 @@
   "system": {
     "slug": "electrify",
     "description": "<p>Effect: The target's next damaging attack is Electric type until the end of their next Activation.</p>",
-    "traits": [],
+    "traits": [
+      "pp-updated"
+    ],
     "actions": [
       {
         "slug": "electrify",
         "name": "Electrify",
         "type": "attack",
-        "traits": [],
+        "traits": [
+          "pp-updated"
+        ],
         "range": {
           "target": "creature",
           "distance": 5,
@@ -19,7 +23,7 @@
         },
         "cost": {
           "activation": "simple",
-          "powerPoints": 5,
+          "powerPoints": 2,
           "delay": null,
           "priority": null,
           "trigger": null
@@ -38,7 +42,7 @@
       }
     ],
     "container": null,
-    "grade": "C"
+    "grade": "E"
   },
   "_id": "0xTFKZxCGt9jjcwD",
   "effects": []

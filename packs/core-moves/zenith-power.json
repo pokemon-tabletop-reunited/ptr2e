@@ -6,7 +6,8 @@
     "slug": "zenith-power",
     "description": "<p>Trigger: User's partner uses Z-Pose! and triggers the appropriate Z-Power-Crystal.</p><p>Effect: The user gains increases the default Stage of their highest Stat by +1 and heals 3 Ticks of Hit Points. The user then freely uses a Status-Category attack matching the <Type> of the Z-Crystal on their Active List.</p><p>Requirement: A Status-Category attack on the user's Active List and <Type> Z-Crystal matching the Type of that attack as an Accessory Item.</p>",
     "traits": [
-      "zenith"
+      "zenith",
+      "pp-updated"
     ],
     "actions": [
       {
@@ -14,7 +15,8 @@
         "name": "Zenith Power",
         "type": "attack",
         "traits": [
-          "zenith"
+          "zenith",
+          "pp-updated"
         ],
         "range": {
           "target": "self",
@@ -23,7 +25,7 @@
         },
         "cost": {
           "activation": "complete",
-          "powerPoints": 0,
+          "powerPoints": 4,
           "delay": null,
           "priority": null,
           "trigger": "<p>User's partner uses Z-Pose! and triggers the appropriate Z-Power-Crystal.</p>"
@@ -42,7 +44,7 @@
       }
     ],
     "container": null,
-    "grade": "E"
+    "grade": "C"
   },
   "_id": "OAxLTE1rCMmRNNPo",
   "effects": []

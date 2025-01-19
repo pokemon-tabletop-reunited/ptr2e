@@ -5,13 +5,17 @@
   "system": {
     "slug": "mirror-move",
     "description": "<p>Effect: The user of this attack must use the last attack the target has used as a Free Action without spending additional PP.</p>",
-    "traits": [],
+    "traits": [
+      "pp-updated"
+    ],
     "actions": [
       {
         "slug": "mirror-move",
         "name": "Mirror Move",
         "type": "attack",
-        "traits": [],
+        "traits": [
+          "pp-updated"
+        ],
         "range": {
           "target": "creature",
           "distance": 10,
@@ -19,7 +23,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 5,
+          "powerPoints": 4,
           "delay": null,
           "priority": null,
           "trigger": null
@@ -38,7 +42,7 @@
       }
     ],
     "container": null,
-    "grade": "C"
+    "grade": "B"
   },
   "_id": "hkU4S0v7upCZeY77",
   "effects": []

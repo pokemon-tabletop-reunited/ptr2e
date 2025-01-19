@@ -4,14 +4,17 @@
   "img": "systems/ptr2e/img/svg/psychic_icon.svg",
   "system": {
     "slug": "trick-room",
-    "traits": [],
+    "traits": [
+      "pp-updated"
+    ],
     "actions": [
       {
         "slug": "trick-room",
         "name": "Trick Room",
         "type": "attack",
         "traits": [
-          "room"
+          "room",
+          "pp-updated"
         ],
         "range": {
           "target": "field",
@@ -19,7 +22,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 8
+          "powerPoints": 3
         },
         "category": "status",
         "types": [
@@ -30,7 +33,7 @@
         "summon": "Compendium.ptr2e.core-summons.Item.R6JOV2LI9kcG8vSq"
       }
     ],
-    "grade": "A",
+    "grade": "C",
     "_migration": {
       "version": null,
       "previous": null

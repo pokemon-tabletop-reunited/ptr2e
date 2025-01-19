@@ -7,7 +7,8 @@
     "description": "<p>Effect: The user recovers 4 Ticks of HP. If the user is holding a [Food] item, then they may consume the [Food] item, regardless of the item's Activation condition, to increase this move's healing effect to 8 Ticks in addition to the food item's effect. All other creatures on the field may also consume an equipped food item in this fashion as a Free Action in response to this move's resolution.</p>",
     "traits": [
       "healing",
-      "social"
+      "social",
+      "pp-updated"
     ],
     "actions": [
       {
@@ -16,7 +17,8 @@
         "type": "attack",
         "traits": [
           "healing",
-          "social"
+          "social",
+          "pp-updated"
         ],
         "range": {
           "target": "field",
@@ -25,7 +27,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 7,
+          "powerPoints": 4,
           "delay": null,
           "priority": null,
           "trigger": null
@@ -44,7 +46,7 @@
       }
     ],
     "container": null,
-    "grade": "E"
+    "grade": "B"
   },
   "_id": "lR7K1KeX5KnrUp1L",
   "effects": []

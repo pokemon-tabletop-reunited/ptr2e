@@ -10,12 +10,12 @@
           "defensive",
           "interrupt-7"
         ],
-        "name": "Manifold Bridge",
-        "slug": "manifold-bridge-defensive",
+        "name": "Manifold Bridge (Reaction)",
+        "slug": "manifold-bridge-reaction",
         "type": "generic",
         "cost": {
           "activation": "simple",
-          "powerPoints": 7,
+          "powerPoints": 5,
           "trigger": "<p>The user would be affected by a declared Action, Attack, or Ability.</p>"
         },
         "range": {
@@ -31,12 +31,12 @@
           "legendary",
           "interrupt-4"
         ],
-        "name": "Tensor Contraction",
-        "slug": "tensor-contraction",
+        "name": "Manifold Bridge (Action)",
+        "slug": "manifold-bridge-action",
         "type": "generic",
         "cost": {
           "activation": "simple",
-          "powerPoints": 4,
+          "powerPoints": 3,
           "trigger": "<p>The user declares the use of an Action or Ability with a target other then Self.</p>"
         },
         "range": {
@@ -46,8 +46,7 @@
         },
         "description": "<p>Trigger: The user declares the use of an Action or Ability with a target other then Self.</p><p>Effect: The user freely moves, using Teleport Movement, to a spot within 8m of a target in Range.</p>",
         "img": "icons/svg/explosion.svg"
-      },
-      {
+      },{
         "slug": "spacial-rend",
         "name": "Spacial Rend",
         "type": "attack",
@@ -65,7 +64,10 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 7
+          "powerPoints": 7,
+          "delay": null,
+          "priority": null,
+          "trigger": null
         },
         "category": "special",
         "power": 100,
@@ -73,9 +75,46 @@
         "types": [
           "dragon"
         ],
-        "description": "<p>Effect: On hit, non-[Legendary] targets are @Affliction[lifted] 3. The user may spend 4 PP to have this attack lose [Blast 6] and change its Range to <q>15m Wide Line<q> until their next Activation.</p>",
+        "description": "<p>Effect: On hit, non-[Legendary] targets are @Affliction[lifted] 3.</p>",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      },
+      {
+        "slug": "spacial-rend-wave",
+        "name": "Spacial Rend (Wave)",
+        "type": "attack",
+        "traits": [
+          "legendary",
+          "crit-2",
+          "sharp",
+          "pp-updated"
+        ],
+        "range": {
+          "target": "wide-line",
+          "distance": 9,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 11,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "special",
+        "power": 100,
+        "accuracy": 95,
+        "types": [
+          "dragon"
+        ],
+        "description": "<p>Effect: On hit, non-[Legendary] targets are @Affliction[lifted] 3.</p>",
+        "contestType": "",
+        "contestEffect": "",
+        "variant": "spacial-rend",
         "free": true,
-        "img": "icons/svg/explosion.svg"
+        "slot": null
       }
     ],
     "description": "<p>Trigger: The user would be affected by a declared Action, Attack, or Ability.</p><p>Effect: Connection - Spacial Rend. The triggering effect does not affect the user, and the target is relocated 30-WC metres in the direction of the user's choice. When the user declares the use of an Action or Ability with a target other then Self, the user may use Tensor Contraction.</p>",

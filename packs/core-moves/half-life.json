@@ -4,9 +4,8 @@
   "img": "systems/ptr2e/img/svg/nuclear_icon.svg",
   "system": {
     "slug": "half-life",
-    "description": "<p>Effect: On hit, the Target's current HP is cut in half. This attack always deals a minimum of 1 HP in damage.</p>",
     "traits": [
-      "contact"
+      "pp-updated"
     ],
     "actions": [
       {
@@ -14,7 +13,8 @@
         "name": "Half-Life",
         "type": "attack",
         "traits": [
-          "contact"
+          "contact",
+          "pp-updated"
         ],
         "range": {
           "target": "creature",
@@ -23,26 +23,22 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 7,
-          "delay": null,
-          "priority": null,
-          "trigger": null
+          "powerPoints": 3
         },
         "category": "status",
-        "power": null,
         "accuracy": 90,
         "types": [
           "nuclear"
         ],
         "description": "<p>Effect: On hit, the Target's current HP is cut in half. This attack always deals a minimum of 1 HP in damage.</p>",
-        "contestType": "",
-        "contestEffect": "",
-        "free": false,
-        "slot": null
+        "img": "systems/ptr2e/img/svg/nuclear_icon.svg"
       }
     ],
-    "container": null,
-    "grade": "A"
+    "grade": "C",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
   },
   "_id": "G12o5lslJoDHkdER",
   "folder": "EpCOePz8omfXbp35",
