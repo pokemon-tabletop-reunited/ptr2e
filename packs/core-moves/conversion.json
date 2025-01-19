@@ -4,14 +4,14 @@
   "img": "systems/ptr2e/img/svg/normal_icon.svg",
   "system": {
     "slug": "conversion",
-    "description": "<p>Effect: The user changes its Type to that of an attack on its Active List for 5 Activations or until switched out. If the user is Multi-Typed, it changes a Type of its choice.</p>",
-    "traits": [],
     "actions": [
       {
         "slug": "conversion",
         "name": "Conversion",
         "type": "attack",
-        "traits": [],
+        "traits": [
+          "pp-updated"
+        ],
         "range": {
           "target": "creature",
           "distance": 0,
@@ -19,10 +19,7 @@
         },
         "cost": {
           "activation": "simple",
-          "powerPoints": 3,
-          "delay": null,
-          "priority": null,
-          "trigger": null
+          "powerPoints": 3
         },
         "category": "status",
         "power": null,
@@ -38,7 +35,7 @@
       }
     ],
     "container": null,
-    "grade": "E"
+    "grade": "C"
   },
   "_id": "IJy7LFH1fRT03kuJ",
   "effects": []

@@ -4,14 +4,14 @@
   "img": "systems/ptr2e/img/svg/psychic_icon.svg",
   "system": {
     "slug": "meditate",
-    "description": "<p>Effect: The user gains +1 ATK, ACC, and EVA Stages for 5 Activations.</p>",
-    "traits": [],
     "actions": [
       {
         "slug": "meditate",
         "name": "Meditate",
         "type": "attack",
-        "traits": [],
+        "traits": [
+          "pp-updated"
+        ],
         "range": {
           "target": "self",
           "distance": 0,
@@ -19,10 +19,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 4,
-          "delay": null,
-          "priority": null,
-          "trigger": null
+          "powerPoints": 5
         },
         "category": "status",
         "power": null,
@@ -38,7 +35,7 @@
       }
     ],
     "container": null,
-    "grade": "D"
+    "grade": "B"
   },
   "_id": "uLekM0i8CdzbuJfa",
   "effects": []

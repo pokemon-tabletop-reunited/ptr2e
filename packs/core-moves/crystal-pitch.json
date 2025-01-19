@@ -4,11 +4,6 @@
   "img": "systems/ptr2e/img/svg/untyped_icon.svg",
   "system": {
     "slug": "crystal-pitch",
-    "description": "<p>Effect: The targeted loses 4 PP, and undergoes Terastilization.</p>",
-    "traits": [
-      "phenomenon",
-      "fling"
-    ],
     "actions": [
       {
         "slug": "crystal-pitch",
@@ -16,7 +11,8 @@
         "type": "attack",
         "traits": [
           "phenomenon",
-          "fling"
+          "fling",
+          "pp-updated"
         ],
         "range": {
           "target": "ally",
@@ -25,10 +21,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 0,
-          "delay": null,
-          "priority": null,
-          "trigger": null
+          "powerPoints": 4
         },
         "category": "status",
         "power": null,
@@ -44,7 +37,7 @@
       }
     ],
     "container": null,
-    "grade": "E"
+    "grade": "B"
   },
   "_id": "BOSJE1lUpUiGajXp",
   "effects": []

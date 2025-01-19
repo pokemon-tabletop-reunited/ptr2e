@@ -4,11 +4,6 @@
   "img": "systems/ptr2e/img/svg/ice_icon.svg",
   "system": {
     "slug": "aurora-veil",
-    "description": "<p>Effect: For 3 Rounds, the user and its allies take half damage from damaging attacks. Aurora Veil may only be used in Snow Weather.</p>",
-    "traits": [
-      "environ",
-      "shield"
-    ],
     "actions": [
       {
         "slug": "aurora-veil",
@@ -16,7 +11,8 @@
         "type": "attack",
         "traits": [
           "environ",
-          "shield"
+          "shield",
+          "pp-updated"
         ],
         "range": {
           "target": "field",
@@ -25,10 +21,7 @@
         },
         "cost": {
           "activation": "simple",
-          "powerPoints": 5,
-          "delay": null,
-          "priority": null,
-          "trigger": null
+          "powerPoints": 2
         },
         "category": "status",
         "power": null,
@@ -44,7 +37,7 @@
       }
     ],
     "container": null,
-    "grade": "C"
+    "grade": "D"
   },
   "_id": "XNNeBcOamkYG9YRY",
   "effects": []

@@ -4,14 +4,14 @@
   "img": "systems/ptr2e/img/svg/rock_icon.svg",
   "system": {
     "slug": "rock-polish",
-    "description": "<p>Effect: The user's SPD Stage increases by +1 for 5 Activations.</p>",
-    "traits": [],
     "actions": [
       {
         "slug": "rock-polish",
         "name": "Rock Polish",
         "type": "attack",
-        "traits": [],
+        "traits": [
+          "pp-updated"
+        ],
         "range": {
           "target": "self",
           "distance": 0,
@@ -19,10 +19,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 5,
-          "delay": null,
-          "priority": null,
-          "trigger": null
+          "powerPoints": 1
         },
         "category": "status",
         "power": null,
@@ -38,7 +35,7 @@
       }
     ],
     "container": null,
-    "grade": "C"
+    "grade": "E"
   },
   "_id": "gl9grdDol5tujgPd",
   "effects": []

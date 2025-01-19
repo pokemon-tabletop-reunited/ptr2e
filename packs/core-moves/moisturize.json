@@ -5,14 +5,15 @@
   "img": "systems/ptr2e/img/svg/water_icon.svg",
   "system": {
     "slug": null,
-    "traits": [],
     "actions": [
       {
         "name": "Moisturize",
         "slug": "moisturize",
         "type": "attack",
         "img": "icons/svg/explosion.svg",
-        "traits": [],
+        "traits": [
+          "pp-updated"
+        ],
         "range": {
           "target": "self",
           "distance": 0,
@@ -20,9 +21,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 3,
-          "delay": null,
-          "priority": null
+          "powerPoints": 3
         },
         "variant": null,
         "types": [
@@ -38,7 +37,6 @@
         "description": "<p>Effect: The user gains +1 SPDEF Stage for 5 Activations. The user's next damaging Water-Type attack has its Power doubled.</p>"
       }
     ],
-    "description": "",
     "container": null,
     "grade": "C"
   },

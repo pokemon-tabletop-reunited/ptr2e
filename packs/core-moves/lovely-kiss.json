@@ -4,17 +4,14 @@
   "img": "systems/ptr2e/img/svg/normal_icon.svg",
   "system": {
     "slug": "lovely-kiss",
-    "description": "<p>Effect: The target gains @Affliction[drowsy] 5.</p>",
-    "traits": [
-      "social"
-    ],
     "actions": [
       {
         "slug": "lovely-kiss",
         "name": "Lovely Kiss",
         "type": "attack",
         "traits": [
-          "social"
+          "social",
+          "pp-updated"
         ],
         "range": {
           "target": "creature",
@@ -23,10 +20,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 3,
-          "delay": null,
-          "priority": null,
-          "trigger": null
+          "powerPoints": 1
         },
         "category": "status",
         "power": null,

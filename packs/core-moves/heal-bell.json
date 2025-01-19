@@ -4,17 +4,14 @@
   "img": "systems/ptr2e/img/svg/normal_icon.svg",
   "system": {
     "slug": "heal-bell",
-    "description": "<p>Effect: The user's allies on the field and on their respective Teams have all [Major Affliction]s and [Minor Affliction]s cleared.</p>",
-    "traits": [
-      "sonic"
-    ],
     "actions": [
       {
         "slug": "heal-bell",
         "name": "Heal Bell",
         "type": "attack",
         "traits": [
-          "sonic"
+          "sonic",
+          "pp-updated"
         ],
         "range": {
           "target": "emanation",
@@ -23,10 +20,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 8,
-          "delay": null,
-          "priority": null,
-          "trigger": null
+          "powerPoints": 8
         },
         "category": "status",
         "power": null,
@@ -42,7 +36,7 @@
       }
     ],
     "container": null,
-    "grade": "B"
+    "grade": "A"
   },
   "_id": "F67uuTBnGedgFgJj",
   "effects": []

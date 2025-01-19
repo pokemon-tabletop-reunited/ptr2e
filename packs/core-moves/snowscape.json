@@ -4,17 +4,14 @@
   "img": "systems/ptr2e/img/svg/ice_icon.svg",
   "system": {
     "slug": "snowscape",
-    "description": "<p>Effect: The Weather becomes Snowy for 3 rounds.</p>",
-    "traits": [
-      "weather"
-    ],
     "actions": [
       {
         "slug": "snowscape",
         "name": "Snowscape",
         "type": "attack",
         "traits": [
-          "weather"
+          "weather",
+          "pp-updated"
         ],
         "range": {
           "target": "field",
@@ -23,10 +20,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 4,
-          "delay": null,
-          "priority": null,
-          "trigger": null
+          "powerPoints": 4
         },
         "category": "status",
         "power": null,
@@ -42,7 +36,7 @@
       }
     ],
     "container": null,
-    "grade": "A"
+    "grade": "B"
   },
   "_id": "KQ8pNG4ebggQwd8k",
   "effects": []

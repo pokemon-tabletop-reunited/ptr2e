@@ -4,14 +4,14 @@
   "img": "systems/ptr2e/img/svg/fairy_icon.svg",
   "system": {
     "slug": "fairy-lock",
-    "description": "<p>Effect: No creatures on the field can be switched out or flee for 2 rounds.</p>",
-    "traits": [],
     "actions": [
       {
         "slug": "fairy-lock",
         "name": "Fairy Lock",
         "type": "attack",
-        "traits": [],
+        "traits": [
+          "pp-updated"
+        ],
         "range": {
           "target": "field",
           "distance": 0,
@@ -19,10 +19,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 7,
-          "delay": null,
-          "priority": null,
-          "trigger": null
+          "powerPoints": 5
         },
         "category": "status",
         "power": null,
@@ -38,7 +35,7 @@
       }
     ],
     "container": null,
-    "grade": "A"
+    "grade": "B"
   },
   "_id": "mj2rP5GKH4bjUUL1",
   "effects": []

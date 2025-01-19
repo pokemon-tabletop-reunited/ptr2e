@@ -4,17 +4,14 @@
   "img": "systems/ptr2e/img/svg/normal_icon.svg",
   "system": {
     "slug": "stockpile",
-    "description": "<p>Effect:The user gains 1 @Affliction[stockpile] Stack for 5 Activations. A @Affliction[stockpile] Stack raises the user's DEF and SPDEF Stage by +1. The user may only have a maximum of 3 @Affliction[stockpile] Stacks at a time.</p><p>The user gains Swallow and Spit Up as Free Attacks while they have Stockpile in their Active List.</p>",
-    "traits": [
-      "defensive"
-    ],
     "actions": [
       {
         "slug": "stockpile",
         "name": "Stockpile",
         "type": "attack",
         "traits": [
-          "defensive"
+          "defensive",
+          "pp-updated"
         ],
         "range": {
           "target": "creature",
@@ -23,10 +20,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 1,
-          "delay": null,
-          "priority": null,
-          "trigger": null
+          "powerPoints": 3
         },
         "category": "status",
         "power": null,
@@ -46,7 +40,8 @@
         "type": "attack",
         "traits": [
           "healing",
-          "linked"
+          "linked",
+          "pp-updated"
         ],
         "range": {
           "target": "creature",
@@ -56,8 +51,6 @@
         "cost": {
           "activation": "complex",
           "powerPoints": 2,
-          "delay": null,
-          "priority": null,
           "trigger": "<p>The user has exactly 1 Stack of @Affliction[stockpile].</p>"
         },
         "category": "status",
@@ -79,7 +72,8 @@
         "type": "attack",
         "traits": [
           "healing",
-          "linked"
+          "linked",
+          "pp-updated"
         ],
         "range": {
           "target": "creature",
@@ -89,8 +83,6 @@
         "cost": {
           "activation": "complex",
           "powerPoints": 2,
-          "delay": null,
-          "priority": null,
           "trigger": "<p>The user has exactly 2 Stacks of @Affliction[stockpile].</p>"
         },
         "category": "status",
@@ -112,7 +104,8 @@
         "type": "attack",
         "traits": [
           "healing",
-          "linked"
+          "linked",
+          "pp-updated"
         ],
         "range": {
           "target": "creature",
@@ -122,8 +115,6 @@
         "cost": {
           "activation": "complex",
           "powerPoints": 2,
-          "delay": null,
-          "priority": null,
           "trigger": "<p>The user has exactly 3 Stacks of @Affliction[stockpile].</p>"
         },
         "category": "status",
@@ -156,8 +147,6 @@
         "cost": {
           "activation": "complex",
           "powerPoints": 4,
-          "delay": null,
-          "priority": null,
           "trigger": "<p>The user has exactly 1 Stack of @Affliction[stockpile].</p>"
         },
         "category": "special",
@@ -190,8 +179,6 @@
         "cost": {
           "activation": "complex",
           "powerPoints": 4,
-          "delay": null,
-          "priority": null,
           "trigger": "<p>The user has exactly 2 Stacks of @Affliction[stockpile].</p>"
         },
         "category": "special",
@@ -224,8 +211,6 @@
         "cost": {
           "activation": "complex",
           "powerPoints": 4,
-          "delay": null,
-          "priority": null,
           "trigger": "<p>The user has exactly 3 Stacks of @Affliction[stockpile].</p>"
         },
         "category": "special",

@@ -4,14 +4,14 @@
   "img": "systems/ptr2e/img/svg/fairy_icon.svg",
   "system": {
     "slug": "decorate",
-    "description": "<p>Effect: The target's ATK Stage and SPATK Stage are increased by +2 for 5 Activations.</p>",
-    "traits": [],
     "actions": [
       {
         "slug": "decorate",
         "name": "Decorate",
         "type": "attack",
-        "traits": [],
+        "traits": [
+          "pp-updated"
+        ],
         "range": {
           "target": "creature",
           "distance": 1,
@@ -19,10 +19,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 6,
-          "delay": null,
-          "priority": null,
-          "trigger": null
+          "powerPoints": 6
         },
         "category": "status",
         "power": null,
@@ -38,7 +35,7 @@
       }
     ],
     "container": null,
-    "grade": "B"
+    "grade": "A"
   },
   "_id": "4UYOCa1N71EV0sfC",
   "effects": []

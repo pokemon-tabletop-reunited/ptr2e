@@ -5,14 +5,15 @@
   "img": "systems/ptr2e/img/svg/steel_icon.svg",
   "system": {
     "slug": null,
-    "traits": [],
     "actions": [
       {
         "name": "Tractor Beam",
         "slug": "tractor-beam",
         "type": "attack",
         "img": "icons/svg/explosion.svg",
-        "traits": [],
+        "traits": [
+          "pp-updated"
+        ],
         "range": {
           "target": "creature",
           "distance": 8,
@@ -20,9 +21,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 7,
-          "delay": null,
-          "priority": null
+          "powerPoints": 7
         },
         "variant": null,
         "types": [
@@ -38,7 +37,6 @@
         "description": "<p>Effect: The target is @Affliction[lifted] 5.</p>"
       }
     ],
-    "description": "",
     "container": null,
     "grade": "A"
   },

@@ -4,17 +4,14 @@
   "img": "systems/ptr2e/img/svg/flying_icon.svg",
   "system": {
     "slug": "tailwind",
-    "description": "<p>Effect: The weather becomes Windy for 3 rounds.</p>",
-    "traits": [
-      "weather"
-    ],
     "actions": [
       {
         "slug": "tailwind",
         "name": "Tailwind",
         "type": "attack",
         "traits": [
-          "weather"
+          "weather",
+          "pp-updated"
         ],
         "range": {
           "target": "field",
@@ -23,10 +20,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 4,
-          "delay": null,
-          "priority": null,
-          "trigger": null
+          "powerPoints": 4
         },
         "category": "status",
         "power": null,

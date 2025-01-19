@@ -4,17 +4,14 @@
   "img": "systems/ptr2e/img/svg/normal_icon.svg",
   "system": {
     "slug": "safeguard",
-    "description": "<p>Effect: The user and their allies cannot be inflicted with [Major Affliction]s for 3 rounds.</p>",
-    "traits": [
-      "defensive"
-    ],
     "actions": [
       {
         "slug": "safeguard",
         "name": "Safeguard",
         "type": "attack",
         "traits": [
-          "defensive"
+          "defensive",
+          "pp-updated"
         ],
         "range": {
           "target": "field",
@@ -23,10 +20,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 4,
-          "delay": null,
-          "priority": null,
-          "trigger": null
+          "powerPoints": 3
         },
         "category": "status",
         "power": null,
@@ -42,7 +36,7 @@
       }
     ],
     "container": null,
-    "grade": "E"
+    "grade": "C"
   },
   "_id": "X2ZRPMlCRzbcEwOS",
   "effects": []

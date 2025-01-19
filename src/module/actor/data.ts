@@ -48,7 +48,7 @@ interface ActorSynthetics {
   };
   afflictions: { data: AfflictionActiveEffectSystem[], ids: Set<string> };
   rollNotes: Record<string, RollNote[]>;
-  effects: Record<string, { self: DeferredEffectRoll[], target: DeferredEffectRoll[], origin: DeferredEffectRoll[] }>;
+  effects: Record<string, { self: DeferredEffectRoll[], target: DeferredEffectRoll[], origin: DeferredEffectRoll[], defensive: DeferredEffectRoll[] }>;
   toggles: RollOptionToggle[];
   attackAdjustments: (() => AttackAdjustment)[];
   tokenTags: Map<TokenDocumentUUID, string>;

@@ -4,17 +4,14 @@
   "img": "systems/ptr2e/img/svg/psychic_icon.svg",
   "system": {
     "slug": "magic-room",
-    "description": "<p>Effect: The Room is set to Magic Room for 3 Rounds.</p>",
-    "traits": [
-      "room"
-    ],
     "actions": [
       {
         "slug": "magic-room",
         "name": "Magic Room",
         "type": "attack",
         "traits": [
-          "room"
+          "room",
+          "pp-updated"
         ],
         "range": {
           "target": "field",
@@ -23,10 +20,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 8,
-          "delay": null,
-          "priority": null,
-          "trigger": null
+          "powerPoints": 3
         },
         "category": "status",
         "power": null,
@@ -42,7 +36,7 @@
       }
     ],
     "container": null,
-    "grade": "A"
+    "grade": "C"
   },
   "_id": "gdIWeMET7kMAXPVT",
   "effects": []

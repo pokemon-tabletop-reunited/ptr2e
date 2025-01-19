@@ -4,17 +4,14 @@
   "img": "systems/ptr2e/img/svg/grass_icon.svg",
   "system": {
     "slug": "synthesis",
-    "description": "<p>Effect: The user recovers HP equal to 50% of their Max HP. While there is Sunny, the user recovers HP equal to 2/3rds of their Max HP instead. In any other weather, the user recovers HP equal to 25% of their Max HP instead.</p>",
-    "traits": [
-      "healing"
-    ],
     "actions": [
       {
         "slug": "synthesis",
         "name": "Synthesis",
         "type": "attack",
         "traits": [
-          "healing"
+          "healing",
+          "pp-updated"
         ],
         "range": {
           "target": "self",
@@ -22,11 +19,8 @@
           "unit": "m"
         },
         "cost": {
-          "activation": "simple",
-          "powerPoints": 5,
-          "delay": null,
-          "priority": null,
-          "trigger": null
+          "activation": "complex",
+          "powerPoints": 4
         },
         "category": "status",
         "power": null,
@@ -42,7 +36,7 @@
       }
     ],
     "container": null,
-    "grade": "C"
+    "grade": "B"
   },
   "_id": "jSBCVKjECIriMoIr",
   "effects": []

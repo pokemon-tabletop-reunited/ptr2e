@@ -4,17 +4,14 @@
   "img": "systems/ptr2e/img/svg/grass_icon.svg",
   "system": {
     "slug": "stun-spore",
-    "description": "<p>Effect: On hit, all valid targets gain @Affliction[paralysis] 5.</p>",
-    "traits": [
-      "powder"
-    ],
     "actions": [
       {
         "slug": "stun-spore",
         "name": "Stun Spore",
         "type": "attack",
         "traits": [
-          "powder"
+          "powder",
+          "pp-updated"
         ],
         "range": {
           "target": "cone",
@@ -23,10 +20,7 @@
         },
         "cost": {
           "activation": "simple",
-          "powerPoints": 3,
-          "delay": null,
-          "priority": null,
-          "trigger": null
+          "powerPoints": 2
         },
         "category": "status",
         "power": null,

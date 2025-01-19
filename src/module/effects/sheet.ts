@@ -3,7 +3,7 @@ import ActiveEffectPTR2e from "./document.ts";
 import { CHANGE_FORMS, ChangeForm, ChangeFormOptions } from "./changes/sheet/index.ts";
 import * as R from "remeda";
 import { htmlQuery, htmlQueryAll, sluggify, SORTABLE_BASE_OPTIONS } from "@utils";
-import ChangeModel from "./changes/change.ts";
+import ChangeModel, { CHANGE_MODES } from "./changes/change.ts";
 import { BasicChangeSystem, ChangeModelTypes, Trait } from "@data";
 import { CodeMirror } from "./codemirror.ts";
 import Sortable from "sortablejs";
@@ -229,7 +229,7 @@ class ActiveEffectConfig extends foundry.applications.api.HandlebarsApplicationM
       isItemEffect: this.document.parent?.documentName === "Item",
       submitText: "EFFECT.Submit",
       statuses,
-      modes: Object.entries(CONST.ACTIVE_EFFECT_MODES).reduce((obj, e) => {
+      modes: Object.entries(CHANGE_MODES).reduce((obj, e) => {
         // @ts-expect-error - This is a valid operation
         obj[e[1]] = game.i18n.localize(`EFFECT.MODE_${e[0]}`);
         return obj;

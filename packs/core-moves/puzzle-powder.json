@@ -5,9 +5,6 @@
   "img": "systems/ptr2e/img/svg/grass_icon.svg",
   "system": {
     "slug": null,
-    "traits": [
-      "powder"
-    ],
     "actions": [
       {
         "name": "Puzzle Powder",
@@ -15,7 +12,8 @@
         "type": "attack",
         "img": "icons/svg/explosion.svg",
         "traits": [
-          "powder"
+          "powder",
+          "pp-updated"
         ],
         "range": {
           "target": "cone",
@@ -24,9 +22,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 3,
-          "delay": null,
-          "priority": null
+          "powerPoints": 2
         },
         "variant": null,
         "types": [
@@ -42,9 +38,8 @@
         "description": "<p>Effect: On hit, all valid targets are @Affliction[confused] 5.</p>"
       }
     ],
-    "description": "",
     "container": null,
-    "grade": "C"
+    "grade": "E"
   },
   "effects": [],
   "sort": 0,

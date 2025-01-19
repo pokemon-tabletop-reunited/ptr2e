@@ -1,54 +1,45 @@
 {
-    "name": "Wild Swing",
-    "type": "move",
-    "img": "systems/ptr2e/img/svg/fighting_icon.svg",
-    "system": {
-      "slug": "wild-swing",
-      "description": "",
-      "traits": [
-        "push-2",
-        "recoil-1-4",
-        "contact"
-      ],
-      "actions": [
-        {
-          "slug": "wild-swing",
-          "name": "Wild Swing",
-          "type": "attack",
-          "traits": [
-            "contact",
-            "push-3",
-            "recoil-1-4",
-            "pp-updated"
-          ],
-          "range": {
-            "target": "emanation",
-            "distance": 1,
-            "unit": "m"
-          },
-          "cost": {
-            "activation": "complex",
-            "powerPoints": 3,
-            "delay": null,
-            "priority": null,
-            "trigger": null
-          },
-          "category": "physical",
-          "power": 90,
-          "accuracy": 90,
-          "types": [
-            "fighting"
-          ],
-          "description": "",
-          "contestType": "",
-          "contestEffect": "",
-          "free": false,
-          "slot": null
-        }
-      ],
-      "container": null,
-      "grade": "D"
-    },
-    "_id": "3ctJ9HFWI8TXA5Fz",
-    "effects": []
-  }
+  "name": "Wild Swing",
+  "type": "move",
+  "img": "systems/ptr2e/img/svg/fighting_icon.svg",
+  "system": {
+    "slug": "wild-swing",
+    "actions": [
+      {
+        "slug": "wild-swing",
+        "name": "Wild Swing",
+        "type": "attack",
+        "traits": [
+          "contact",
+          "push-3",
+          "recoil-1-4",
+          "pp-updated"
+        ],
+        "range": {
+          "target": "emanation",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 3
+        },
+        "category": "physical",
+        "power": 90,
+        "accuracy": 90,
+        "types": [
+          "fighting"
+        ],
+        "description": "",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      }
+    ],
+    "container": null,
+    "grade": "D"
+  },
+  "_id": "3ctJ9HFWI8TXA5Fz",
+  "effects": []
+}

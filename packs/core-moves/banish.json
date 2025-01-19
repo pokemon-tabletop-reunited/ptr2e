@@ -5,16 +5,15 @@
   "img": "systems/ptr2e/img/svg/dark_icon.svg",
   "system": {
     "slug": null,
-    "traits": [
-      "friendly"
-    ],
     "actions": [
       {
         "name": "Banish",
         "slug": "banish",
         "type": "attack",
         "img": "icons/svg/explosion.svg",
-        "traits": [],
+        "traits": [
+          "pp-updated"
+        ],
         "range": {
           "target": "emanation",
           "distance": 3,
@@ -22,9 +21,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 7,
-          "delay": null,
-          "priority": null
+          "powerPoints": 4
         },
         "variant": null,
         "types": [
@@ -40,7 +37,6 @@
         "description": "<p>Effect: All valid targets gain @Affliction[fear] 5.</p>"
       }
     ],
-    "description": "",
     "container": null,
     "grade": "C"
   },

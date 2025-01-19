@@ -4,11 +4,6 @@
   "img": "systems/ptr2e/img/svg/normal_icon.svg",
   "system": {
     "slug": "me-first",
-    "description": "<p>Trigger: The target declares a damaging attack.</p><p>Effect: The user copies the triggering attack and uses it on the attacker with 50% increased Power.</p>",
-    "traits": [
-      "interrupt-2",
-      "danger-close"
-    ],
     "actions": [
       {
         "slug": "me-first",
@@ -16,7 +11,8 @@
         "type": "attack",
         "traits": [
           "interrupt-2",
-          "danger-close"
+          "danger-close",
+          "pp-updated"
         ],
         "range": {
           "target": "creature",
@@ -25,7 +21,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 5,
+          "powerPoints": 4,
           "trigger": "<p>The target declares a damaging attack.</p>"
         },
         "category": "status",
@@ -37,7 +33,7 @@
         "img": "systems/ptr2e/img/svg/normal_icon.svg"
       }
     ],
-    "grade": "D"
+    "grade": "B"
   },
   "_id": "FV5yzcRqoUnixDvC",
   "effects": []

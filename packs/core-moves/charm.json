@@ -4,17 +4,14 @@
   "img": "systems/ptr2e/img/svg/fairy_icon.svg",
   "system": {
     "slug": "charm",
-    "description": "<p>Effect: On hit, the target loses -2 ATK Stages for 5 Activations. If the target is affected by the @Affliction[charmed] condition, they lose -3 ATK Stages for 7 Activations instead.</p>",
-    "traits": [
-      "social"
-    ],
     "actions": [
       {
         "slug": "charm",
         "name": "Charm",
         "type": "attack",
         "traits": [
-          "social"
+          "social",
+          "pp-updated"
         ],
         "range": {
           "target": "creature",
@@ -23,7 +20,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 5
+          "powerPoints": 3
         },
         "category": "status",
         "accuracy": 100,
@@ -38,7 +35,8 @@
         "name": "Charm (Charmed)",
         "type": "attack",
         "traits": [
-          "social"
+          "social",
+          "pp-updated"
         ],
         "range": {
           "target": "creature",

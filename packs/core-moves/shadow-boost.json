@@ -4,14 +4,14 @@
   "img": "systems/ptr2e/img/svg/shadow_icon.svg",
   "system": {
     "slug": "shadow-boost",
-    "description": "<p>Effect: The user's DEF and SPDEF Stages are reduced by -1, and their ATK and SPATK Stages are increased by +3 for 5 Activations.</p>",
-    "traits": [],
     "actions": [
       {
         "slug": "shadow-boost",
         "name": "Shadow Boost",
         "type": "attack",
-        "traits": [],
+        "traits": [
+          "pp-updated"
+        ],
         "range": {
           "target": "self",
           "distance": 0,
@@ -19,10 +19,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 3,
-          "delay": null,
-          "priority": null,
-          "trigger": null
+          "powerPoints": 7
         },
         "category": "status",
         "power": null,
@@ -38,7 +35,7 @@
       }
     ],
     "container": null,
-    "grade": "D"
+    "grade": "A"
   },
   "_id": "8XIuyqZaczFmCebp",
   "effects": []

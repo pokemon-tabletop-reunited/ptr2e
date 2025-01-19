@@ -10,6 +10,16 @@ import * as R from "remeda";
 import ResolvableValueField from "@module/data/fields/resolvable-value-field.ts";
 import { ChangeModelTypes } from "@data";
 
+export const CHANGE_MODES = Object.freeze({
+  CUSTOM: 0,
+  MULTIPLY: 1,
+  ADD: 2,
+  DOWNGRADE: 3,
+  UPGRADE: 4,
+  OVERRIDE: 5,
+  REMOVE: 6
+})
+
 class ChangeModel<TSchema extends ChangeSchema = ChangeSchema> extends foundry.abstract.DataModel<
   ActiveEffectSystem,
   TSchema
@@ -68,8 +78,8 @@ class ChangeModel<TSchema extends ChangeSchema = ChangeSchema> extends foundry.a
       }),
       mode: new fields.NumberField({
         integer: true,
-        initial: CONST.ACTIVE_EFFECT_MODES.ADD,
-        choices: Object.fromEntries(Object.entries(CONST.ACTIVE_EFFECT_MODES).map(([k, v]) => [v, k])),
+        initial: CHANGE_MODES.ADD,
+        choices: Object.fromEntries(Object.entries(CHANGE_MODES).map(([k, v]) => [v, k])),
         label: "PTR2E.Effect.FIELDS.ChangeMode.label",
         hint: "PTR2E.Effect.FIELDS.ChangeMode.hint",
       }),

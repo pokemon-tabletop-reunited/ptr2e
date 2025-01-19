@@ -561,7 +561,8 @@
           "hint": "Whether this affects 'Self', 'Origin' or 'Target'",
           "target": "Target",
           "self": "Self",
-          "origin": "Origin"
+          "origin": "Origin",
+          "defensive": "Defensive"
         },
         "ChangeReevaluateOnUpdate": {
           "label": "Reevaluate on Update",
@@ -717,6 +718,7 @@
           "infested": "Infested",
           "wind-shear": "Wind Shear",
           "tased": "Tased",
+          "wracked": "Wracked",
           "disabled": "Disabled",
           "nullified": "Nullified",
           "suppressed": "Suppressed",
@@ -765,44 +767,45 @@
         },
         "Descriptions": {
           "fainted": "<p>When a creature's HP reaches and remains at 0, it is afflicted with Fainted.</p><p>A Fainted creature cannot use Actions, does not benefit from Abilities, and is cured of all @Trait[major-affliction], @Trait[minor-affliction], @Trait[pseudo-affliction], and @Trait[stage-change] effects they possess.</p><p>Fainted is cured when the afflicted creature's HP is greater than 0.</p><p>The creature's @Affliction[weary] count increases by 1 whenever they are cured of Fainted.</p>",
-          "burn": "The afflicted creature loses a Tick of HP at the end of each of their Activations. The creature has their default ATK stages reduced by 1 while Burn is active.",
-          "poison": "The afflicted creature loses a Tick of HP at the end of each of their Activations. The afflicted creature’s default SPATK stages are reduced by 1 while Poison is active.",
-          "blight": "At the end of the afflicted creature’s Activation, it loses X Stacks of Blight, where X is 2<sup style='font-size: x-small;'># of Activations passed with Blight</sup> and takes a Tick of HP per Stack lost. The afflicted creature’s default SPATK stages are reduced by 1 while Blight is active. When a creature receives Blight, it loses the Poison Condition, with Blight gaining 33% of its remaining Poison Stacks as extra Stacks on Blight. When afflicted with Poisoned X while Blighted, the creature gains +1 to its Blight Stacks.",
+          "burn": "The afflicted creature loses a Tick of HP at the end of each of their Activations. The creature has their default ATK Stages reduced by 1 while Burn is active.",
+          "poison": "The afflicted creature loses a Tick of HP at the end of each of their Activations. The afflicted creature’s default SPATK Stages are reduced by 1 while Poison is active.",
+          "blight": "At the end of the afflicted creature’s Activation, it loses X Stacks of Blight, where X is 2<sup style='font-size: x-small;'># of Activations passed with Blight</sup> and takes a Tick of HP per Stack lost. The afflicted creature’s default SPATK Stages are reduced by 1 while Blight is active. When a creature receives Blight, it loses the Poison Affliction, with Blight gaining 33% of its remaining Poison Stacks as extra Stacks on Blight. When afflicted with Poisoned X while Blighted, the creature gains +1 to its Blight Stacks.",
           "paralysis": "The afflicted creature's SPD is reduced by 50% and they have -2 default SPD Stages. The creature also has Slowed while Paralysis is active.",
-          "drowsy": "The Power of all of the afflicted creature's attacks is reduced by 33%, and the creature cannot utilize the [Priority X] or [Interrupt X] capabilities of their Actions. The afflicted creature's default SPDEF stages are reduced by 1 while Drowsy is active.",
-          "nightmares": "This Affliction can only be applied to Drowsy creatures. The Power of all of the afflicted creature's attacks is reduced by 50%, and the creature cannot utilize the [Priority X] or [Interrupt X] capabilities of their actions. The creature loses a Tick of HP at the end of each of its Activations and has their default SPDEF and ACC stages reduced by 1 while Nightmares is active. When a creature receives Nightmares, it loses the Drowsy Condition, and gains 33% of its remaining Drowsy Stacks onto Nightmares, and further Nightmares Stacks cannot be applied.",
-          "frozen": "The afflicted creature is unable to use actions (either during its Activations or as interrupts/reactions), but takes 33% less damage from all sources. The afflicted creature's default EVA stages are reduced by 1. Additional Frozen Stacks cannot be added while Frozen is on a creature. When Frozen ticks down to zero Stacks (not cured), the afflicted creature gains Frostbite 5 and their next Activation is Advanced by 50%.",
-          "frostbite": "The afflicted creature loses a Tick of HP at the end of each of their Activations. The creature has -1 default DEF stages while Frostbite is active.",
+          "drowsy": "The Power of all of the afflicted creature's attacks is reduced by 33%, and the creature cannot utilize the [Priority X] or [Interrupt X] capabilities of their Actions. The afflicted creature's default SPDEF Stages are reduced by 1 while Drowsy is active.",
+          "nightmares": "This Affliction can only be applied to Drowsy creatures. The Power of all of the afflicted creature's attacks is reduced by 50%, and the creature cannot utilize the [Priority X] or [Interrupt X] capabilities of their actions. The creature loses a Tick of HP at the end of each of its Activations and has their default SPDEF and ACC Stages reduced by 1 while Nightmares is active. When a creature receives Nightmares, it loses the Drowsy Affliction, and gains 33% of its remaining Drowsy Stacks onto Nightmares, and further Nightmares Stacks cannot be applied.",
+          "frozen": "The afflicted creature is unable to use actions (either during its Activations or as interrupts/reactions), but takes 33% less damage from all sources. The afflicted creature's default EVA Stages are reduced by 1. Additional Frozen Stacks cannot be added while Frozen is on a creature. When Frozen ticks down to zero Stacks (not cured), the afflicted creature gains Frostbite 5 and their next Activation is Advanced by 50%.",
+          "frostbite": "The afflicted creature loses a Tick of HP at the end of each of their Activations. The creature has -1 default DEF Stages while Frostbite is active.",
           "splinter": "The afflicted creature loses a Tick of HP when they are damaged by a Physical- or Special-Category attack. The creature has Stunted while Splinter is active.",
           "slowed": "The afflicted creature’s Movement Scores are reduced by 50%, rounding down (minimum 1).",
           "hindered": "The afflicted creature’s Skill DCs are reduced by -10. Hindered applied from different sources have their own Stacks.",
           "stunted": "When the afflicted creature recovers HP, that amount is reduced by 2 Ticks (to a minimum of 0 HP healed).",
           "confused": "At the end of the afflicted creature's Activations, it has a 50% chance of using Fumble.",
-          "hyper-mode": "While afflicted with Hyper Mode, the afflicted creature gains +20% to all of its Movement Scores, while dealing and taking 15% more damage. As well, the user’s Shadow-Type attacks gain [Crit 1], or have their [Crit X] value increase by +1. At the start of the afflicted creature’s Activations, it has:<ul><li>a 40% chance to act normally on that Activation.</li><li>a 25% chance to be Choice-Locked 1 to Shadow-Type attacks.</li><li>a 15% chance of ending its Activation and using Fumble.</li><li>a 15% chance of using Backlash.</li><li>a 5% chance to be cured of Hyper Mode.</li></ul>",
-          "weary": "While a creature is Weary, its default ACC and EVA stages are based on its Weary value, X. Specifically, the default ACC and EVA stages are set to the negative sum of all X and all integers between 0 and X (Weary 1 sets the defaults to -1, 2 to -3, and 3 to -6). Weary is automatically increased by 1 when a creature Faints. When a creature has 4 or more Weary, it is unable to battle until they reduce their Weary. Weary cannot wear off on its own - a creature must deliberately Rest or consume Items such as Apples to remove Stacks of Weary.",
-          "exposed": "While a creature is Exposed, its Weary status cannot be removed by Resting.",
+          "hyper-mode": "While afflicted with Hyper Mode, the afflicted creature gains +20% to all of its Movement Scores, while dealing and taking 15% more damage. As well, the user’s Shadow-Type attacks gain [Crit 2], or have their [Crit X] value increase by +2. At the start of the afflicted creature’s Activations, it has:<ul><li>a 40% chance to act normally on that Activation.</li><li>a 25% chance to be Choice-Locked 1 to Shadow-Type attacks.</li><li>a 15% chance of ending its Activation and using Fumble.</li><li>a 15% chance of using Backlash.</li><li>a 5% chance to be cured of Hyper Mode.</li></ul>",
+          "weary": "While a creature is Weary, its default ACC and EVA Stages are based on its Weary value, X. Specifically, the default ACC and EVA Stages are set to the negative sum of all X and all integers between 0 and X (Weary 1 sets the defaults to -1, 2 to -3, and 3 to -6). Weary is automatically increased by 1 when a creature Faints. When a creature has 4 or more Weary, it is unable to battle until they reduce their Weary. Weary cannot wear off on its own - a creature must deliberately Rest or consume Items such as Apples to remove Stacks of Weary.",
+          "exposed": "While a creature is Exposed, it cannot remove Weary by Resting.",
           "blinded": "The afflicted creature is unable to see, ocularly. The creature has their \"seeing-based\" vision options disabled (standard vision, Darkvision, X-Ray Vision, etc.) and can only perceive using their other senses (as listed in their Traits). If they do not have a way to see, or have someone guiding them, they are unable to target other creatures with Attacks or Actions.",
           "stuck": "While afflicted with Stuck, creatures may not leave the combat area. If the afflicted creature is an owned Pokemon, it cannot willingly switch out (or be switched out by another party). When a creature with the [Trainer] or [Ace] trait would gain Stuck; they instead gain Slowed X, rather than Stuck X.",
-          "bound": "The afflicted creature cannot willingly use any Movement. Stacks of Bound do not decrease at the end of a creature's Activation, instead the effect that applied Bound will provide a way of removing the Bound Condition.",
-          "drowning": "The afflicted creature loses a Tick of HP at the end of each of their Activations. The creature is Suppressed and has -1 default EVA stage while Drowning is active.",
-          "infested": "The afflicted creature loses a Tick of HP at the end of each of their Activations. The creature is Hindered and has -1 default DEF stage while Infested is active.",
-          "wind-shear": "The afflicted creature loses a Tick of HP at the end of each of their Activations. The creature has -1 default ACC stage while Wind Shear is active.",
-          "tased": "The afflicted creature loses a Tick of HP at the end of each of their Activations. The creature has -1 default SPDEF stage while Tased is active.",
+          "bound": "The afflicted creature cannot willingly use any Movement. Stacks of Bound do not decrease at the end of a creature's Activation, instead the effect that applied Bound will provide a way of removing the Bound Affliction.",
+          "drowning": "The afflicted creature loses a Tick of HP at the end of each of their Activations. The creature is Suppressed and has -1 default EVA Stage while Drowning is active.",
+          "infested": "The afflicted creature loses a Tick of HP at the end of each of their Activations. The creature is Hindered and has -1 default DEF Stage while Infested is active.",
+          "wind-shear": "The afflicted creature loses a Tick of HP at the end of each of their Activations. The creature has -1 default ACC Stage while Wind Shear is active.",
+          "tased": "The afflicted creature loses a Tick of HP at the end of each of their Activations. The creature has -1 default SPDEF Stage while Tased is active.",
+          "wracked": "The afflicted creature loses one and a half Ticks of HP at the end of each of their Activations. The creature has -1 default ATK and SPATK Stage while Wracked is active.",
           "disabled": "One of the afflicted creature’s attacks cannot be used, under any circumstances. The move in question is determined by the source of the disabled effect, usually being “the last attack the target used.” If this would prevent them from using any attack, they may Struggle instead.",
           "nullified": "One of the afflicted creature’s abilities is negated, and cannot be activated or benefited from. The ability in question is determined by the source of the nullification, usually determined randomly.",
           "suppressed": "The afflicted creature spends 50% more PP on all actions that use PP, minimum 1.",
-          "lifted": "the afflicted creature is held aloft, unable to act normally. The creature cannot use <Movement> other than [Teleport] while Lifted and is otherwise considered Stuck and Raised for the duration. A Lifted creature also suffers -6 EVA stages.",
+          "lifted": "The afflicted creature is held aloft. The creature cannot use [Movement] other than [Teleport] while Lifted and is otherwise considered @Affliction[stuck] and @Affliction[raised] for the duration. A Lifted creature also suffers -4 EVA Stages.",
           "raised": "While a creature is Raised, it is immune to attacks and effects with the [Earthbound] trait.",
           "harden": "While under the effect of Harden, the afflicted creature’s [Contact] attacks have +20 Power, and their [Dash] attacks gain [Crit 1] or have their [Crit X] increase by +1.",
           "sharpen": "While under the effect of Sharpen, the afflicted creature’s [Contact] attacks gain [Sharp], and their [Sharp] attacks gain [Crit 1] or have their [Crit X] increase by +1.",
-          "destined": "when the afflicted creature deals damage with a Damaging Attack to the source of Destined, the afflicted creature is inflicted with the same amount of damage.",
+          "destined": "When the afflicted creature deals damage with a Physical- or Special-Category Attack to the source of Destined, the afflicted creature is inflicted with the same amount of damage.",
           "disguised": "The user is not easily recognized by sight. Any creature that attempts to see through Disguised must make a contested Psychology or Spot skill check against the Disguised creature’s Disguise skill, and upon success ignores any effects that require Disguised to be active.",
-          "braced": "while a creature is Braced, its default DEF and SPDEF stages are increased by +2 and its default ATK and SPATK stages are decreased by 1. Additionally, a Braced creature is immune to critical damage. A creature loses the Brace Affliction after it moves or makes an attack of its own accord.",
+          "braced": "while a creature is Braced, its default DEF and SPDEF Stages are increased by +2 and its default ATK and SPATK Stages are decreased by 1. Additionally, a Braced creature is immune to critical damage. A creature loses the Brace Affliction after it Moves or makes an Attack of its own accord.",
           "duel": "while a creature is afflicted by Duel, the creature and the source of the Affliction have [Crit 2] on attacks they use against one another, and take and deal 1/3 less damage from/to creatures other than themselves. Creatures afflicted with Duel and the source of the Duel are also Stuck. If either the source or afflicted creature Faint or are otherwise removed from battle, the Duel Affliction is removed.",
-          "engulfed": "While a creature is afflicted with Engulfed, it is also considered to be Bound and Stuck. While Engulfed the afflicted creature cannot be targeted by Attacks, and it can only target the creature that has Engulfed it with Attacks, although these Attacks are resisted by two stages.",
-          "curled": "while Curled, a creature cannot use Held Items and has +1 default DEF stage. Additionally, moves with the [Curl] Trait have their Power doubled while their user is Curled.",
+          "engulfed": "While a creature is afflicted with Engulfed, it is also considered to be Bound and Stuck. While Engulfed the afflicted creature cannot be targeted by Attacks, and it can only target the creature that has Engulfed it with Attacks, although these Attacks are resisted by two steps.",
+          "curled": "while Curled, a creature cannot use Held Items and has +1 default DEF Stage. Additionally, moves with the [Curl] Trait have their Power doubled while their user is Curled.",
           "chanted": "If an attack were to deal critical damage to a creature with Chanted, the attack instead deals damage as if it were not a Critical Hit.",
-          "choice-locked": "While Choice-Locked, a creature may only use the last attack or action it used.",
+          "choice-locked": "While Choice-Locked, a creature may only use the last attack or action it used. A creature with the Choice-Locked affliction cannot gain further stacks of Choice-Locked in any way.",
           "grounded": "While Grounded, creatures become unable to use their [Flight] movement, nor can they be Lifted or Raised and have those effects removed.",
           "cursed": "While Cursed, an afflicted creature loses three ticks of HP at the end of each of their Activations.",
           "true-sight": "The afflicted creature ignores invisibility and illusions.",
@@ -811,20 +814,20 @@
           "marked": "While Marked, all creatures unallied to the afflicted creature and within 8m of it can only target the Marked creature with their attacks. Whenever the creature with Marked is hit by an Attack, reduce the Stack Value of its Marked by 1.",
           "unlucky": "While Unlucky, a creature cannot utilize its Luck.",
           "perish": "When a creature’s Perish count hits 0, the creature's HP is set to 0. Humans and ‘Ace’ creatures gain Weary 1 instead of losing HP when their Perish count is 0. The Perish Affliction is removed if a creature is switched out or leaves combat.",
-          "invisible": "The afflicted creature vanishes from sight, and cannot be detected by sight based vision or targeted by Attacks. In addition, the creature has +4 default EVA stages. Invisible ends when the creature uses an Attack, is hit by an Attack, by using a Free Action to end Invisible, or by the end conditions of the effect that granted Invisible. Any creature can perform an Intense Spot Check to ignore the effects of Invisible.",
-          "transient": "The afflicted creature, while still visible, is able to traverse through any material, as if it wasn’t even there. It may use any of its Movements to move through the air or any substance (as if it were always on or in the appropriate substance), ignoring any and all blocking terrain. The creature also possesses +6 default EVA stages. Afflicted creatures deal 75% less damage and take 50% less damage. The creature loses 2 PP per activation while Transient, and gains a Stack of Weary if it is out of PP while Transient.",
-          "fear": "The afflicted creature does 33% less damage to the source of Fear, and suffers -1 default ACC stage on attacks against them. Fear applied from different sources have their own Stacks.",
-          "stockpile": "While a creature has Stockpile, the default stages for DEF and SPDEF are increased by +1 for each Stack of Stockpile it possesses. Stockpile can have up to 3 Stacks.",
+          "invisible": "The afflicted creature vanishes from sight, and cannot be detected by sight based vision or targeted by Attacks. In addition, the creature has +4 default EVA Stages. Invisible ends when the creature uses an Attack, is hit by an Attack, by using a Free Action to end Invisible, or by the end conditions of the effect that granted Invisible. Any creature can perform an Intense Spot Check to ignore the effects of Invisible.",
+          "transient": "The afflicted creature, while still visible, is able to traverse through any material, as if it wasn’t even there. It may use any of its Movements to move through the air or any substance (as if it were always on or in the appropriate substance), ignoring any and all blocking terrain. The creature also possesses +6 default EVA Stages. Afflicted creatures deal 75% less damage and take 50% less damage. The creature loses 2 PP per activation while Transient, and gains a Stack of Weary if it is out of PP while Transient.",
+          "fear": "The afflicted creature does 33% less damage to the source of Fear, and suffers -1 default ACC Stage on attacks against them. Fear applied from different sources have their own Stacks.",
+          "stockpile": "The default stages for DEF and SPDEF are increased by +1 for each Stack of Stockpile it possesses. Stockpile can have up to 3 Stacks.",
           "leech": "The afflicted creature loses two Ticks of HP at the end of each of their Activations and the Source that applied Leech gains HP equal to the amount the afflicted creature lost.",
-          "rebound": "Damage inflicted on the afflicted creature by Physical or Special-Category attacks deals ¼ of the inflicted damage on the attacking creature.",
-          "ringed": "when a creature with Ringed concludes an Activation, they heal a Tick of HP, with additional effects from appropriate weathers/terrains as described by the effect that granted Ringed.",
+          "rebound": "Damage inflicted on the afflicted creature by Physical- or Special-Category attactks deals ¼ of the inflicted damage on the attacking creature.",
+          "ringed": "When a creature with Ringed concludes an Activation, they heal a Tick of HP, with additional effects from appropriate weathers/terrains as described by the effect that granted Ringed.",
           "enraged": "A creature may only use Physical- or Special-Category moves while it is Enraged.",
-          "charmed": "The afflicted creature believes the source of Infatuation is a dear friend or romantic interest. Afflicted creatures have a 50% chance of being unable to target the source of their infatuation with an attack, and have -2 stages of EVA against attacks from the source of their infatuation.",
+          "charmed": "The afflicted creature believes the source of Infatuation is a dear friend or romantic interest. Afflicted creatures have a 50% chance of being unable to target the source of their infatuation with an attack, and have -2 EVA Stages against attacks from the source of their infatuation.",
           "taunted": "The afflicted creature does 33% less damage to creatures other than the source of Taunted. The afflicted creature cannot use Status-category attacks for the duration of Taunted.",
           "grapple": "The afflicted creature possesses -1 default ACC and EVA and may only take Actions with the [Grapple] trait. Creatures that are not in control of a Grapple are also Bound. A creature in control of the Grapple can take a Free Action on their turn to end their participation in Grapple. The creature in control of the Grapple is treated as having the non-in-control creature(s) as being Mounted on itself.<br>If an afflicted creature is the only participant of a Grapple, they lose this Affliction.",
-          "resolved": "An afflicted creature creature gains +1 default DEF and SPDEF stages.",
-          "boosted": "An afflicted creature gains +1 default ATK and SPATK stages.",
-          "rapid": "A creature afflicted with Rapid may perform Complex Actions as Simple Actions OR [Exhaust] Actions are performed as though they lack the Trait OR [Set Up] Actions set up and resolve on the same activation, spending 50% more PP on all Actions (minimum +2). The creature has its Initiative delayed by 60% after its Activation and loses -1 EVA stages for 3 Activations.",
+          "boosted": "An afflicted creature gains +1 default ATK and SPATK Stages.",
+          "resolved": "An afflicted creature gains +1 default DEF and SPDEF Stages.",
+          "rapid": "A creature afflicted with Rapid may perform Complex Actions as Simple Actions OR [Exhaust] Actions are performed as though they lack the Trait OR [Set Up] Actions set up and resolve on the same activation, spending 50% more PP on all Actions (minimum +2). The creature has its Initiative delayed by 50% after its Activation and loses -1 EVA Stages for 3 Activations.",
           "strong": "While afflicted with Strong, the Power of the creature's Attacks are increased by +20% and has its Initiative delayed by 20% after its Activation.",
           "agile": "While afflicted with Agile, Power of the creature's Attacks are decreased by -20% and has its Initiative advanced by 20% after its Activation.",
           "precise": "While afflicted with Precise, the creature has +1 default ACC and has its Initiative delayed by 20% after its Activation.",
@@ -832,7 +835,7 @@
           "gambit": "While afflicted with Gambit, the creature has +2 default CRIT and -1 default ACC.",
           "stoked": "While afflicted with Stoked, the creature's next damaging @Trait[Fire] Attack has +100% Power.",
           "charged": "While afflicted with Charged, the creature's next damaging @Trait[Electric] Attack has +100% Power.",
-          "loafing": "<p>Automatically applies to creatures 2+ levels above the creature's owner's level. Gaining stacking debuffs for each stack of Loafing.</p><h3>1 Stack</h3><ul><li>-15% to all Damage</li><li>-15% to all Skill checks</li><li>-1 Speed Combat stage</li><li>+15% PP Cost</li></ul><h3>2 Stacks</h3><ul><li>-30% to all Damage</li><li>-30% to all Skill checks</li><li>-1 Speed Combat stage</li><li>+30% PP Cost</li><li>-10 Accuracy on all rolls</li><li>Gain @Affliction[unlucky]</li></ul><h3>3 Stacks</h3><ul><li>-50% to all Damage</li><li>-50% to all Skill checks</li><li>-2 Speed Combat stage</li><li>+50% PP Cost</li><li>-20 Accuracy on all rolls</li><li>Gain @Affliction[unlucky]</li><li>-2 to all Movement Scores</li></ul><h3>4 Stacks</h3><ul><li>-80% to all Damage</li><li>-80% to all Skill checks</li><li>-2 Speed Combat stage</li><li>+80% PP Cost</li><li>-30 Accuracy on all rolls</li><li>Gain @Affliction[unlucky]</li><li>-5 to all Movement Scores</li></ul>"
+          "loafing": "<p>Automatically applies to creatures 2+ levels above the creature's owner's level. Gaining stacking debuffs for each stack of Loafing.</p><h3>1 Stack</h3><ul><li>-15% to all Damage</li><li>-15% to all Skill checks</li><li>-1 Speed Stage</li><li>+15% PP Cost</li></ul><h3>2 Stacks</h3><ul><li>-30% to all Damage</li><li>-30% to all Skill checks</li><li>-1 Speed Stage</li><li>+30% PP Cost</li><li>-10 Accuracy on all rolls</li><li>Gain @Affliction[unlucky]</li></ul><h3>3 Stacks</h3><ul><li>-50% to all Damage</li><li>-50% to all Skill checks</li><li>-2 Speed Stage</li><li>+50% PP Cost</li><li>-20 Accuracy on all rolls</li><li>Gain @Affliction[unlucky]</li><li>-2 to all Movement Scores</li></ul><h3>4 Stacks</h3><ul><li>-80% to all Damage</li><li>-80% to all Skill checks</li><li>-2 Speed Stage</li><li>+80% PP Cost</li><li>-30 Accuracy on all rolls</li><li>Gain @Affliction[unlucky]</li><li>-5 to all Movement Scores</li></ul>"
         }
       }
     },
@@ -872,7 +875,7 @@
         },
         "Errors": {
           "UnableToSaveDueToValidationFailure": "Unable to save changes due to validation failure(s). Please check the changes and resolve the issues.",
-          "ChangeSyntax": "Syntax error in rule element definition: {message}"
+          "ChangeSyntax": "Syntax error in Change/Predicate definition: {message}"
         }
       }
     },
@@ -1156,6 +1159,17 @@
       "WorldSchemaVersion": {
         "Name": "World Schema Version",
         "Hint": "The version of the world schema. Don't change this unless you know what you're doing."
+      },
+      "PokemonTypes": {
+        "Name": "Type Editor",
+        "Label": "Open Editor",
+        "Hint": "Manage the Elemental Types available in the system."
+      },
+      "Tokens": {
+        "Autoscale": {
+          "Name": "Autoscale Tokens",
+          "Hint": "Enables auto scaling for smaller tokens."
+        }
       }
     },
     "SkillsEditor": {
@@ -1198,7 +1212,7 @@
         "Hint": "The Attack (ATK) of the actor.",
         "Stage": {
           "Label": "ATK Stages",
-          "Hint": "The ATK stages of the actor."
+          "Hint": "The ATK Stages of the actor."
         }
       },
       "def": {
@@ -1206,7 +1220,7 @@
         "Hint": "The Defense (DEF) of the actor.",
         "Stage": {
           "Label": "DEF Stages",
-          "Hint": "The DEF stages of the actor."
+          "Hint": "The DEF Stages of the actor."
         }
       },
       "spa": {
@@ -1238,7 +1252,7 @@
         "Hint": "The Accuracy (ACC) of the actor.",
         "Stage": {
           "Label": "ACC Stages",
-          "Hint": "The ACC stages of the actor."
+          "Hint": "The ACC Stages of the actor."
         }
       },
       "evasion": {
@@ -1246,7 +1260,7 @@
         "Hint": "The Evasion (EVA) of the actor.",
         "Stage": {
           "Label": "EVA Stages",
-          "Hint": "The EVA stages of the actor."
+          "Hint": "The EVA Stages of the actor."
         }
       },
       "crit-rate": {
@@ -1527,7 +1541,7 @@
       },
       "genderRatio": {
         "label": "Gender Ratio",
-        "hint": "Gender Ratio in 8ths chance of being Male, -1 if genderless."
+        "hint": "Gender Ratio in 8ths chance of being Female, -1 if genderless."
       },
       "eggGroups": {
         "label": "Egg Groups",
@@ -1827,6 +1841,10 @@
         "label": "Defensive Stat",
         "hint": "The stat that should be used to calculate the 'Defense' portion of the Damage Calculation. Defaults to 'def'/'spd' depending on the Attack Category if unset."
       },
+      "attackPredicate": {
+        "label": "Attack Predicate",
+        "hint": "Can be used to automate attacks that can only be used under certain conditions, such as, only in rainy weather."
+      },
       "targetType": {
         "label": "Summon Target Type",
         "hint": "Whom should be targeted, if this is 'Target', it will use the currently targeted token as the target based on when the summon is made, if it is 'Owner', it will use the owner of the summon as the target."
@@ -2031,11 +2049,11 @@
       },
       "CritDC": {
         "Label": "Critical Hit DC",
-        "Hint": "The Critical Hit DC of this attack, calculated based on the attacker's CRIT stages."
+        "Hint": "The Critical Hit DC of this attack, calculated based on the attacker's CRIT Stages."
       },
       "AdjustedStages": {
         "Label": "Adjusted Stages",
-        "Hint": "The combined accuracy stages of the attacker, and evasion stages of the defender. (max 6, min -6)"
+        "Hint": "The combined Accuracy Stages of the attacker, and Evasion Stages of the defender. (max 6, min -6)"
       },
       "CritStages": {
         "Label": "CRIT Stages",
@@ -2903,6 +2921,43 @@
       "aura": "An Aura is an Emanation that persists around the character token using this Action.",
       "allied-aura": "An Allied Aura is an Aura that only affects allies.",
       "enemy-aura": "An Enemy Aura is an Aura that only affects enemies."
+    },
+    "TypeMatrix": {
+      "Title": "Type Matrix",
+      "AddType": {
+        "Label": "Add Type",
+        "Hint": "Please provide the name & icons for the new type.",
+        "Name": {
+          "Name": "Type Name",
+          "Hint": "The name of the type."
+        },
+        "IconImg": {
+          "Name": "Type Icon",
+          "Hint": "The icon to use for the type."
+        },
+        "BarImg": {
+          "Name": "Type Bar Image",
+          "Hint": "The bar image to use for the type when displaying in Chat."
+        }
+      },
+      "Reset": {
+        "Label": "Reset to Default",
+        "Title": "Reset Type Matrix",
+        "Content": "Are you sure you want to reset the Type Matrix to its default values?"
+      },
+      "Submit": "Submit",
+      "Delete": {
+        "Title": "Delete type",
+        "Label": "Delete",
+        "Content": "Are you sure you want to delete this type?",
+        "Error": "Core types cannot be deleted by the GM. They can only be overridden by modules."
+      },
+      "Dialog": {
+        "Title": "Edit Type"
+      }
+    },
+    "DistanceToTarget": {
+      "Hint": "When clicked, outputs the distance between current selected token and all targeted tokens to chat."
     }
   }
 }

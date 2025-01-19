@@ -5,14 +5,15 @@
   "img": "systems/ptr2e/img/svg/poison_icon.svg",
   "system": {
     "slug": "corrode",
-    "traits": [],
     "actions": [
       {
         "name": "Corrode",
         "slug": "corrode",
         "type": "attack",
         "img": "systems/ptr2e/img/svg/poison_icon.svg",
-        "traits": [],
+        "traits": [
+          "pp-updated"
+        ],
         "range": {
           "target": "creature",
           "distance": 5,
@@ -20,7 +21,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 2
+          "powerPoints": 3
         },
         "types": [
           "poison"

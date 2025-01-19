@@ -4,11 +4,6 @@
   "img": "systems/ptr2e/img/svg/fairy_icon.svg",
   "system": {
     "slug": "baby-doll-eyes",
-    "description": "<p>Effect: On hit, the target loses -1 ATK Stage for 5 Activations.</p>",
-    "traits": [
-      "social",
-      "priority-1"
-    ],
     "actions": [
       {
         "slug": "baby-doll-eyes",
@@ -16,7 +11,8 @@
         "type": "attack",
         "traits": [
           "social",
-          "priority-1"
+          "priority-1",
+          "pp-updated"
         ],
         "range": {
           "target": "creature",
@@ -25,7 +21,7 @@
         },
         "cost": {
           "activation": "simple",
-          "powerPoints": 3,
+          "powerPoints": 2,
           "priority": 1
         },
         "category": "status",
