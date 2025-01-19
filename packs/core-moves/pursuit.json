@@ -4,12 +4,6 @@
   "img": "systems/ptr2e/img/svg/dark_icon.svg",
   "system": {
     "slug": "pursuit",
-    "description": "<p>Effect: The user can spend 3 PP use Pursuit as an [Interrupt 6] action, with the Trigger being <q>A creature uses Movement to move 4m or more away from the user or attempts to leave Combat.</q>. When using this move this way, the user can freely move up to half of the Movement Type of their choice towards the target and then attacks with this attack, which has its Power doubled.</p>",
-    "traits": [
-      "dash",
-      "contact",
-      "interrupt-6"
-    ],
     "actions": [
       {
         "slug": "pursuit-reaction",
@@ -28,9 +22,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 3,
-          "delay": null,
-          "priority": null,
+          "powerPoints": 2,
           "trigger": "<p>A creature uses Movement to move 4m or more away from the user or attempts to leave Combat.</p>"
         },
         "category": "physical",
@@ -40,11 +32,9 @@
           "dark"
         ],
         "description": "<p>Trigger: A creature uses Movement to move 4m or more away from the user or attempts to leave Combat.</p><p>Effect: The user may freely move up to half of the Movement Type of their choice towards the target and then attacks with this attack.</p>",
-        "contestType": "",
-        "contestEffect": "",
         "variant": "pursuit",
-        "free": true,
-        "slot": null
+        "img": "systems/ptr2e/img/svg/dark_icon.svg",
+        "predicate": []
       },
       {
         "slug": "pursuit",
@@ -62,10 +52,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 0,
-          "delay": null,
-          "priority": null,
-          "trigger": null
+          "powerPoints": 2
         },
         "category": "physical",
         "power": 40,
@@ -73,15 +60,16 @@
         "types": [
           "dark"
         ],
-        "description": "",
-        "contestType": "",
-        "contestEffect": "",
-        "free": false,
-        "slot": null
+        "img": "systems/ptr2e/img/svg/dark_icon.svg",
+        "predicate": []
       }
     ],
-    "container": null,
-    "grade": "E"
+    "grade": "E",
+    "traits": [],
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
   },
   "_id": "L4Q816PuV6qPq9mN",
   "effects": []
