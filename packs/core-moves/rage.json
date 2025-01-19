@@ -4,11 +4,6 @@
   "img": "systems/ptr2e/img/svg/normal_icon.svg",
   "system": {
     "slug": "rage",
-    "description": "",
-    "traits": [
-      "contact",
-      "pp-updated"
-    ],
     "actions": [
       {
         "slug": "rage",
@@ -33,11 +28,27 @@
         "types": [
           "normal"
         ],
-        "description": "<p>Effect: The user gains @Affliction[enraged] 2. While @Affliction[enraged], if the user is hit by a damaging attack, they gain +1 ATK Stage for 5 Activations.</p>"
+        "description": "<p>Effect: The user gains @Affliction[enraged] 2. While @Affliction[enraged], if the user is hit by a damaging attack, they gain +1 ATK Stage for 5 Activations.</p>",
+        "img": "icons/svg/explosion.svg",
+        "slot": 4,
+        "predicate": []
       }
     ],
-    "grade": "E"
+    "grade": "E",
+    "_migration": {
+      "version": null,
+      "previous": null
+    },
+    "traits": []
   },
   "_id": "6OK8vhZYljL4X7cd",
-  "effects": []
+  "effects": [],
+  "flags": {
+    "ptr2e": {
+      "grantedBy": {
+        "id": "c7XB9rHsJMCXrIsE",
+        "onDelete": "cascade"
+      }
+    }
+  }
 }
