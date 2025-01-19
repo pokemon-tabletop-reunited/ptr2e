@@ -600,7 +600,7 @@ function speciesToMarkdown(species: any): MarkdownResult | null {
     const addEvolution = (evolution: any): string => {
         let result = "";
 
-        if (evolution.name) {
+        if (evolution?.name) {
             result += `- [${formatSlug(evolution.name)}](/${getMarkdownPath({
                 type: "species",
                 category: getCategory(evolution.name),
@@ -627,7 +627,7 @@ function speciesToMarkdown(species: any): MarkdownResult | null {
             }`;
         }
 
-        for (const evo of evolution.evolutions ?? []) {
+        for (const evo of evolution?.evolutions ?? []) {
             result += addEvolution(evo);
         }
 
