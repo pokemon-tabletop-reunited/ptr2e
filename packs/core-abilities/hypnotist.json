@@ -5,9 +5,7 @@
   "system": {
     "actions": [
       {
-        "traits": [
-          
-        ],
+        "traits": [],
         "name": "Hypnotist",
         "slug": "hypnotist-active",
         "type": "generic",
@@ -31,34 +29,18 @@
           "activation": "free"
         },
         "description": "<p>Passive: The user's Hypnosis has +30 Accuracy and has +5 Range.</p>",
-        "img": "icons/svg/explosion.svg"
-      },
-      {
-        "slug": "hypnosis",
-        "name": "Hypnosis",
-        "type": "attack",
-        "traits": [],
+        "img": "icons/svg/explosion.svg",
         "range": {
-          "target": "creature",
-          "distance": 10,
+          "target": "enemy",
           "unit": "m"
-        },
-        "cost": {
-          "activation": "simple",
-          "powerPoints": 5
-        },
-        "category": "status",
-        "accuracy": 90,
-        "types": [
-          "psychic"
-        ],
-        "description": "<p>Effect: On hit, the target is afflicted with @Affliction[drowsy] 5.</p>",
-        "free": true,
-        "img": "icons/svg/explosion.svg"
+        }
       }
     ],
     "description": "<p>Effect: Connection - Hypnosis.  The user spends 5 PP and freely uses Hypnosis. Passive: The user's Hypnosis has +30 Accuracy and has +5 Range.</p>",
-    "traits": [],
+    "traits": [
+      "partial-automation",
+      "connection"
+    ],
     "slug": "hypnotist",
     "_migration": {
       "version": null,
@@ -66,5 +48,73 @@
     }
   },
   "_id": "NvSkgeJFdm9bintV",
-  "effects": []
+  "effects": [
+    {
+      "name": "Hypnotist",
+      "type": "passive",
+      "_id": "12kGPEsZxafjfNQ6",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "grant-item",
+            "key": "",
+            "value": "Compendium.ptr2e.core-moves.Item.s4q86Yo0UJilvVI0",
+            "predicate": [],
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "system.actions.0.free",
+                "value": "true"
+              }
+            ],
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "reevaluateOnUpdate": false,
+            "inMemoryOnly": false,
+            "allowDuplicate": true,
+            "track": false,
+            "replaceSelf": false,
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            }
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.5.1.5",
+        "createdTime": 1737403414513,
+        "modifiedTime": 1737403434865,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+      }
+    }
+  ]
 }

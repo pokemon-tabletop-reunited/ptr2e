@@ -23,30 +23,6 @@
         "img": "icons/svg/explosion.svg"
       },
       {
-        "slug": "stealth-rock",
-        "name": "Stealth Rock",
-        "type": "attack",
-        "traits": [
-          "hazard",
-          "missile"
-        ],
-        "range": {
-          "target": "emanation",
-          "distance": 8,
-          "unit": "m"
-        },
-        "cost": {
-          "activation": "complex",
-          "powerPoints": 5
-        },
-        "category": "status",
-        "types": [
-          "rock"
-        ],
-        "description": "<p>Effect: The user places 5 floating rock mine Hazards within Range. When a creature moves within 3m of a rock mine, it homes in on them, destroying itself and dealing a Tick of Rock-Type damage.</p>",
-        "img": "icons/svg/explosion.svg"
-      },
-      {
         "slug": "stealth-shard",
         "name": "Stealth Shard",
         "type": "attack",
@@ -70,7 +46,8 @@
         "description": "<p>Effect: The user places 2 floating rock mine Hazards within Range. When a creature moves within 3m of a rock mine, it homes in on them, destroying itself and dealing a Tick of Rock-Type damage.</p>",
         "variant": "stealth-rock",
         "free": true,
-        "img": "icons/svg/explosion.svg"
+        "img": "icons/svg/explosion.svg",
+        "predicate": []
       }
     ],
     "description": "<p>Trigger: The user is hit by a Physical or Special category attack.</p><p>Effect: Connection - Stealth Rock. The user has a 50% chance to freely use Stealth Shard.</p>",
@@ -84,5 +61,73 @@
     }
   },
   "_id": "o3CejPWadgrHGAej",
-  "effects": []
+  "effects": [
+    {
+      "name": "Loose Rocks",
+      "type": "passive",
+      "_id": "DypeCTupTZzYAhqt",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "grant-item",
+            "key": "",
+            "value": "Compendium.ptr2e.core-moves.Item.JSSINn7yRN0wXMZ2",
+            "predicate": [],
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "system.actions.0.free",
+                "value": "true"
+              }
+            ],
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "reevaluateOnUpdate": false,
+            "inMemoryOnly": false,
+            "allowDuplicate": true,
+            "track": false,
+            "replaceSelf": false,
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            }
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.5.1.5",
+        "createdTime": 1737404255022,
+        "modifiedTime": 1737404277126,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+      }
+    }
+  ]
 }

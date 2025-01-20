@@ -20,27 +20,6 @@
         },
         "description": "Effect: All creatures within Range gain @Affliction[lifted] 5.</p>",
         "img": "icons/svg/explosion.svg"
-      },
-      {
-        "slug": "gravity",
-        "name": "Gravity",
-        "type": "attack",
-        "traits": [],
-        "range": {
-          "target": "field",
-          "unit": "m"
-        },
-        "cost": {
-          "activation": "complex",
-          "powerPoints": 8
-        },
-        "category": "status",
-        "types": [
-          "psychic"
-        ],
-        "description": "<p>Effect: All creatures are @Affliction[grounded] 5.</p>",
-        "free": true,
-        "img": "icons/svg/explosion.svg"
       }
     ],
     "description": "Effect: Connection - Gravity. All creatures within Range gain @Affliction[lifted] 5.</p>",
@@ -52,5 +31,73 @@
     }
   },
   "_id": "fwwRKQnqEjKl2jgl",
-  "effects": []
+  "effects": [
+    {
+      "name": "Gravity",
+      "type": "passive",
+      "_id": "w9pFVhx7uNqics9o",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "grant-item",
+            "key": "",
+            "value": "Compendium.ptr2e.core-moves.Item.EGfHyGHlkgY53oIO",
+            "predicate": [],
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "system.actions.0.free",
+                "value": "true"
+              }
+            ],
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "reevaluateOnUpdate": false,
+            "inMemoryOnly": false,
+            "allowDuplicate": true,
+            "track": false,
+            "replaceSelf": false,
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            }
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.5.1.5",
+        "createdTime": 1737405699245,
+        "modifiedTime": 1737405721697,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+      }
+    }
+  ]
 }
