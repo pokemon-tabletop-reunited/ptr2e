@@ -4,12 +4,7 @@
   "_id": "tBtVuXzzJMlfmA7n",
   "img": "systems/ptr2e/img/svg/fairy_icon.svg",
   "system": {
-    "slug": null,
-    "traits": [
-      "social",
-      "exhaust",
-      "pp-updated"
-    ],
+    "slug": "pacify",
     "actions": [
       {
         "name": "Pacify",
@@ -27,43 +22,77 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 4,
-          "delay": null,
-          "priority": null
+          "powerPoints": 4
         },
-        "variant": null,
         "types": [
           "fairy"
         ],
         "category": "status",
-        "power": null,
         "accuracy": 80,
-        "contestType": "",
-        "contestEffect": "",
-        "free": false,
-        "slot": null,
-        "description": "<p>Effect: On hit, the target loses -3 ATK Stages for 5 Activations.</p>"
+        "description": "<p>Effect: On hit, the target loses -3 ATK Stages for 5 Activations.</p>",
+        "predicate": []
       }
     ],
-    "description": "",
-    "container": null,
-    "grade": "C"
+    "grade": "C",
+    "traits": [],
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
   },
-  "effects": [],
-  "sort": 6900000,
-  "ownership": {
-    "default": 0,
-    "CYLdyr5mPSDmNpTp": 3
-  },
-  "flags": {},
-  "_stats": {
-    "compendiumSource": null,
-    "duplicateSource": null,
-    "coreVersion": "12.327",
-    "systemId": "ptr2e",
-    "systemVersion": "0.10.0-alpha.1.0.4",
-    "createdTime": 1719585883093,
-    "modifiedTime": 1719971994938,
-    "lastModifiedBy": "CYLdyr5mPSDmNpTp"
-  }
+  "effects": [
+    {
+      "name": "Pacify",
+      "type": "passive",
+      "_id": "pqt4vVuK9QIsXc0r",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "pacify-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.uMWvv5ozhm5NRnjc",
+            "predicate": [],
+            "chance": 100,
+            "affects": "target",
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.5.1.4",
+        "createdTime": 1737313437210,
+        "modifiedTime": 1737313456262,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+      }
+    }
+  ]
 }
