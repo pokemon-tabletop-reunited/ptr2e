@@ -36,106 +36,17 @@
           "activation": "free"
         },
         "description": "<p>Passive: When first entering Combat in Crowned Forme, the Iron Head on the user's Active List is replaced with Behemoth Bash for the remainder of the combat. The user's default DEF Stage is +1.</p>",
-        "img": "icons/svg/explosion.svg"
-      },
-      {
-        "slug": "iron-head",
-        "name": "Iron Head",
-        "type": "attack",
-        "traits": [
-          "dash",
-          "push-2",
-          "flinch-chance-2",
-          "contact",
-          "pp-updated"
-        ],
+        "img": "icons/svg/explosion.svg",
         "range": {
-          "target": "creature",
-          "distance": 1,
+          "target": "enemy",
           "unit": "m"
-        },
-        "cost": {
-          "activation": "complex",
-          "powerPoints": 4
-        },
-        "category": "physical",
-        "power": 80,
-        "accuracy": 100,
-        "types": [
-          "steel"
-        ],
-        "description": "<p>Effect: On hit, the target has a 30% chance of being Flinched.</p>",
-        "free": true,
-        "img": "icons/svg/explosion.svg"
-      },
-      {
-        "slug": "behemoth-bash",
-        "name": "Behemoth Bash",
-        "type": "attack",
-        "traits": [
-          "legendary",
-          "dash",
-          "crushing",
-          "contact",
-          "pass-4",
-          "pp-updated"
-        ],
-        "range": {
-          "target": "creature",
-          "distance": 1,
-          "unit": "m"
-        },
-        "cost": {
-          "activation": "complex",
-          "powerPoints": 6
-        },
-        "category": "physical",
-        "power": 100,
-        "accuracy": 100,
-        "types": [
-          "steel"
-        ],
-        "free": true,
-        "variant": "iron-head",
-        "img": "icons/svg/explosion.svg"
-      },
-      {
-        "slug": "behemoth-bash-giant",
-        "name": "Behemoth Bash (Giant)",
-        "type": "attack",
-        "traits": [
-          "legendary",
-          "dash",
-          "crushing",
-          "contact",
-          "pass-4",
-          "pp-updated"
-        ],
-        "range": {
-          "target": "creature",
-          "distance": 1,
-          "unit": "m"
-        },
-        "cost": {
-          "activation": "complex",
-          "powerPoints": 6,
-          "trigger": "The target is Dynamaxed.</p>"
-        },
-        "category": "physical",
-        "power": 200,
-        "accuracy": 100,
-        "types": [
-          "steel"
-        ],
-        "description": "<p>Trigger: The target is Dynamaxed.</p>",
-        "variant": "behemoth-bash",
-        "free": true,
-        "img": "icons/svg/explosion.svg"
+        }
       }
     ],
     "description": "<p>Trigger: The user hits a creature that possess a higher CatMod than the user with Behemoth Bash.</p><p>Effect: Connection - Iron Head. The triggering creature gains @Affliction[taunted] 7, and the user gains @Affliction[rebound] 7. Passive:  When first entering Combat in Crowned Forme, the Iron Head on the user's Active List is replaced with Behemoth Bash for the remainder of the combat. The user's default DEF Stage is +1.</p>",
     "traits": [
-      "legendary"
+      "legendary",
+      "partial-automation"
     ],
     "slug": "dauntless-shield",
     "_migration": {
@@ -144,5 +55,73 @@
     }
   },
   "_id": "nseOdT3vpRN0AW0K",
-  "effects": []
+  "effects": [
+    {
+      "name": "Dauntless Shield",
+      "type": "passive",
+      "_id": "SL5wDgqnuATW2IkH",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "grant-item",
+            "key": "",
+            "value": "Compendium.ptr2e.core-moves.Item.0rhyfVFsZ1asQIwv",
+            "predicate": [],
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "system.actions.0.free",
+                "value": "true"
+              }
+            ],
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "reevaluateOnUpdate": false,
+            "inMemoryOnly": false,
+            "allowDuplicate": true,
+            "track": false,
+            "replaceSelf": false,
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            }
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.5.1.5",
+        "createdTime": 1737395977286,
+        "modifiedTime": 1737396021720,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+      }
+    }
+  ]
 }

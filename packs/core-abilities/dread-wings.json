@@ -36,44 +36,19 @@
           "activation": "free"
         },
         "description": "<p>Passive: The user's Dark-Type attacks are now Super Effective against Fairy-Type creatures.</p>",
-        "img": "icons/svg/explosion.svg"
-      },
-      {
-        "slug": "oblivion-wing",
-        "name": "Oblivion Wing",
-        "type": "attack",
-        "traits": [
-          "legendary",
-          "drain-3-4",
-          "ray",
-          "aura",
-          "pp-updated"
-        ],
+        "img": "icons/svg/explosion.svg",
         "range": {
-          "target": "line",
-          "distance": 8,
+          "target": "enemy",
           "unit": "m"
-        },
-        "cost": {
-          "activation": "complex",
-          "powerPoints": 4
-        },
-        "category": "special",
-        "power": 80,
-        "accuracy": 100,
-        "types": [
-          "flying"
-        ],
-        "description": "<p>Effect: This attack is considered both Flying and Dark Type.</p>",
-        "free": true,
-        "img": "icons/svg/explosion.svg"
+        }
       }
     ],
     "description": "<p>Trigger: The user causes a creature to gain @Affliction[fainted] with Oblivion Wing.</p><p>Effect: Connection - Oblivion Wing. The user gains 4 Ticks of HP.</p><p>Passive: The user's Dark-Type attacks are now Super Effective against Fairy-Type creatures.</p>",
     "traits": [
       "legendary",
       "aura",
-      "connection"
+      "connection",
+      "partial-automation"
     ],
     "slug": "dread-wings",
     "_migration": {
@@ -82,5 +57,73 @@
     }
   },
   "_id": "5BvWFPMPoP3eGWWs",
-  "effects": []
+  "effects": [
+    {
+      "name": "Dread Wings",
+      "type": "passive",
+      "_id": "9q1DRg2wFKGesdyJ",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "grant-item",
+            "key": "",
+            "value": "Compendium.ptr2e.core-moves.Item.dByLKnrdqTOoQg2O",
+            "predicate": [],
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "system.actions.0.free",
+                "value": "true"
+              }
+            ],
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "reevaluateOnUpdate": false,
+            "inMemoryOnly": false,
+            "allowDuplicate": true,
+            "track": false,
+            "replaceSelf": false,
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            }
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": "Compendium.ptr2e.core-abilities.Item.5BvWFPMPoP3eGWWs.ActiveEffect.9q1DRg2wFKGesdyJ",
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.5.1.5",
+        "createdTime": 1737396824976,
+        "modifiedTime": 1737396869862,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+      }
+    }
+  ]
 }

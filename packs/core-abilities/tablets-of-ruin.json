@@ -45,14 +45,16 @@
         ],
         "description": "<p>Effect: On hit, all valid target's HP is cut in half. This attack always deals a minimum of 1 HP in damage.</p>",
         "free": true,
-        "img": "icons/svg/explosion.svg"
+        "img": "icons/svg/explosion.svg",
+        "predicate": []
       }
     ],
     "description": "<p>Effect: Connection - Ruination. All other creatures have their ATK stat reduced by 25%. This reduction happens before any [Stage Change] effects.</p>",
     "traits": [
       "legendary",
       "aura",
-      "connection"
+      "connection",
+      "partial-automation"
     ],
     "slug": "tablets-of-ruin",
     "_migration": {
@@ -61,5 +63,73 @@
     }
   },
   "_id": "5KUeoSGMw8YWNwDO",
-  "effects": []
+  "effects": [
+    {
+      "name": "Treasure of Ruin",
+      "type": "passive",
+      "_id": "gyzlusEjK4iMgITC",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "grant-item",
+            "key": "",
+            "value": "Compendium.ptr2e.core-moves.Item.6MiHI8QGhMknDms5",
+            "predicate": [],
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "system.actions.0.free",
+                "value": "true"
+              }
+            ],
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "reevaluateOnUpdate": false,
+            "inMemoryOnly": false,
+            "allowDuplicate": true,
+            "track": false,
+            "replaceSelf": false,
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            }
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": "Compendium.ptr2e.core-abilities.Item.sWdQIvH00vsGkCYB.ActiveEffect.J2mZCtyIjIqYFGrQ",
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.5.1.5",
+        "createdTime": 1737392939156,
+        "modifiedTime": 1737392939156,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+      }
+    }
+  ]
 }
