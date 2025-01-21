@@ -22,35 +22,6 @@
         },
         "description": "<p>Trigger: The user resolves a Dragon-Type attack.</p><p>Effect: Negative [Stage Change] effects affecting the user are removed.</p>",
         "img": "icons/svg/explosion.svg"
-      },
-      {
-        "slug": "dragon-energy",
-        "name": "Dragon Energy",
-        "type": "attack",
-        "traits": [
-          "legendary",
-          "pulse",
-          "drain-1/4",
-          "pp-updated"
-        ],
-        "range": {
-          "target": "emanation",
-          "distance": 5,
-          "unit": "m"
-        },
-        "cost": {
-          "activation": "complex",
-          "powerPoints": 10
-        },
-        "category": "special",
-        "power": 150,
-        "accuracy": 100,
-        "types": [
-          "dragon"
-        ],
-        "description": "<p>Effect: This attack's Power ranges based on how healthy the user is, ranging from 1 to 150.</p><p><blockquote>Damage Formula: Power = max(1, 150 x UserCurrentHP/UserMaxHP)</blockquote>",
-        "free": true,
-        "img": "icons/svg/explosion.svg"
       }
     ],
     "description": "<p>Trigger: The user resolves a Dragon-Type attack.</p><p>Effect: Connection - Dragon Energy. Negative [Stage Change] effects affecting the user are removed. Passive: The user's Dragon Energy gains [Drain 1/4].</p>",
@@ -65,5 +36,73 @@
     }
   },
   "_id": "fgnUpZqSxSncHLqF",
-  "effects": []
+  "effects": [
+    {
+      "name": "Stout Aeronaut",
+      "type": "passive",
+      "_id": "yw1FfE7VzH6t42cu",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "grant-item",
+            "key": "",
+            "value": "Compendium.ptr2e.core-moves.Item.xf2NuI372VOQGVIL",
+            "predicate": [],
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "system.actions.0.free",
+                "value": "true"
+              }
+            ],
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "reevaluateOnUpdate": false,
+            "inMemoryOnly": false,
+            "allowDuplicate": true,
+            "track": false,
+            "replaceSelf": false,
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            }
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.5.1.5",
+        "createdTime": 1737421256366,
+        "modifiedTime": 1737421304136,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+      }
+    }
+  ]
 }

@@ -24,26 +24,6 @@
         "img": "icons/svg/explosion.svg"
       },
       {
-        "slug": "defense-curl",
-        "name": "Defense Curl",
-        "type": "attack",
-        "traits": [],
-        "range": {
-          "target": "self",
-          "unit": "m"
-        },
-        "cost": {
-          "activation": "simple",
-          "powerPoints": 2
-        },
-        "category": "status",
-        "types": [
-          "normal"
-        ],
-        "description": "<p>Effect: The user gains @Affliction[curled] 5.</p>",
-        "img": "icons/svg/explosion.svg"
-      },
-      {
         "slug": "defense-curl-rolled",
         "name": "Defense Curl (Rolled)",
         "type": "attack",
@@ -54,19 +34,21 @@
         },
         "cost": {
           "activation": "simple",
-          "powerPoints": 6
+          "powerPoints": 4
         },
         "category": "status",
         "types": [
           "normal"
         ],
         "description": "<p>Effect: The user gains @Affliction[curled] 9 and +1 SPD Stages for 5 Activations.</p>",
-        "img": "icons/svg/explosion.svg"
+        "img": "icons/svg/mole.svg",
+        "predicate": []
       }
     ],
     "description": "<p>Trigger: The user enters combat.</p><p>Effect: Connection - Defense Curl. The user freely uses Defense Curl and may also spend 4 additional PP to use Defense Curl (Rolled).</p>",
     "traits": [
-      "connection"
+      "connection",
+      "partial-automation"
     ],
     "slug": "lets-roll",
     "_migration": {
@@ -75,5 +57,73 @@
     }
   },
   "_id": "NKwlORX98U7JMiNa",
-  "effects": []
+  "effects": [
+    {
+      "name": "Let's Roll",
+      "type": "passive",
+      "_id": "ERM6vPRGKJx1RBll",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "grant-item",
+            "key": "",
+            "value": "Compendium.ptr2e.core-moves.Item.jKO1iK8Z81n7LQXt",
+            "predicate": [],
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "system.actions.0.free",
+                "value": "true"
+              }
+            ],
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "reevaluateOnUpdate": false,
+            "inMemoryOnly": false,
+            "allowDuplicate": true,
+            "track": false,
+            "replaceSelf": false,
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            }
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.5.1.5",
+        "createdTime": 1737403995872,
+        "modifiedTime": 1737404022817,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+      }
+    }
+  ]
 }

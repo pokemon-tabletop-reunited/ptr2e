@@ -23,35 +23,13 @@
         },
         "description": "<p>Trigger: The user declares Tailwind.</p><p>Effect: The set Windy Weather has its duration increased by +2 Rounds.</p>",
         "img": "icons/svg/explosion.svg"
-      },
-      {
-        "slug": "tailwind",
-        "name": "Tailwind",
-        "type": "attack",
-        "traits": [
-          "weather"
-        ],
-        "range": {
-          "target": "field",
-          "unit": "m"
-        },
-        "cost": {
-          "activation": "complex",
-          "powerPoints": 4
-        },
-        "category": "status",
-        "types": [
-          "flying"
-        ],
-        "description": "<p>Effect: The weather becomes Windy for 3 rounds.</p>",
-        "free": true,
-        "img": "icons/svg/explosion.svg"
       }
     ],
     "description": "<p>Trigger: The user declares Tailwind.</p><p>Effect: Connection - Tailwind. The set Windy Weather has its duration increased by +2 Rounds.</p>",
     "traits": [
       "connection",
-      "weather"
+      "weather",
+      "partial-automation"
     ],
     "slug": "windvane",
     "_migration": {
@@ -60,5 +38,73 @@
     }
   },
   "_id": "t8k9AGD2NcCxxW2f",
-  "effects": []
+  "effects": [
+    {
+      "name": "Windvane",
+      "type": "passive",
+      "_id": "MAgRjALWr8KOCtN6",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "grant-item",
+            "key": "",
+            "value": "Compendium.ptr2e.core-moves.Item.u9S8zbICHVUBS1Gx",
+            "predicate": [],
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "system.actions.0.free",
+                "value": "true"
+              }
+            ],
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "reevaluateOnUpdate": false,
+            "inMemoryOnly": false,
+            "allowDuplicate": true,
+            "track": false,
+            "replaceSelf": false,
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            }
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.5.1.5",
+        "createdTime": 1737422014067,
+        "modifiedTime": 1737422043698,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+      }
+    }
+  ]
 }

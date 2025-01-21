@@ -4,7 +4,7 @@
   "_id": "7rks31mDtXuY2MKb",
   "img": "systems/ptr2e/img/svg/fairy_icon.svg",
   "system": {
-    "slug": null,
+    "slug": "whirling-rondé",
     "actions": [
       {
         "name": "Whirling Rondé",
@@ -26,38 +26,76 @@
           "powerPoints": 4,
           "priority": 1
         },
-        "variant": null,
         "types": [
           "fairy"
         ],
         "category": "physical",
         "power": 55,
         "accuracy": 95,
-        "contestType": "",
-        "contestEffect": "",
-        "free": false,
-        "slot": null,
-        "description": "<p>Effect: On hit, all valid targets lose -1 SPATK Stage for 5 Activations.</p>"
+        "description": "<p>Effect: On hit, all valid targets lose -1 SPATK Stage for 5 Activations.</p>",
+        "predicate": []
       }
     ],
-    "container": null,
-    "grade": "A"
+    "grade": "A",
+    "traits": [],
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
   },
-  "effects": [],
-  "sort": 11400000,
-  "ownership": {
-    "default": 0,
-    "CYLdyr5mPSDmNpTp": 3
-  },
-  "flags": {},
-  "_stats": {
-    "compendiumSource": null,
-    "duplicateSource": null,
-    "coreVersion": "12.327",
-    "systemId": "ptr2e",
-    "systemVersion": "0.10.0-alpha.1.0.4",
-    "createdTime": 1719587074437,
-    "modifiedTime": 1719979262907,
-    "lastModifiedBy": "CYLdyr5mPSDmNpTp"
-  }
+  "effects": [
+    {
+      "name": "Whirling Rondé",
+      "type": "passive",
+      "_id": "lxHYaVudRk7bB2Gh",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "whirling-rondé",
+            "value": "Compendium.ptr2e.core-effects.Item.1JXumQz0QqthT9Iv",
+            "predicate": [],
+            "chance": 100,
+            "affects": "target",
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.5.1.5",
+        "createdTime": 1737331578526,
+        "modifiedTime": 1737331603670,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+      }
+    }
+  ]
 }

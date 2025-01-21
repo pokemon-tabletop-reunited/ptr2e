@@ -23,53 +23,6 @@
         },
         "description": "<p>Trigger: The user is hit by an attack. </p><p>Effect: The user freely uses Leech Seed on the triggering creature.</p>",
         "img": "icons/svg/explosion.svg"
-      },
-      {
-        "slug": "leech-seed",
-        "name": "Leech Seed",
-        "type": "attack",
-        "traits": [],
-        "range": {
-          "target": "creature",
-          "distance": 5,
-          "unit": "m"
-        },
-        "cost": {
-          "activation": "simple",
-          "powerPoints": 7
-        },
-        "category": "status",
-        "accuracy": 90,
-        "types": [
-          "grass"
-        ],
-        "description": "<p>Effect: On hit, the target gains @Affliction[leech] 5.</p>",
-        "free": true,
-        "img": "icons/svg/explosion.svg"
-      },
-      {
-        "slug": "leech-seed-bind",
-        "name": "Leech Seed (Bind)",
-        "type": "attack",
-        "traits": [],
-        "range": {
-          "target": "creature",
-          "distance": 5,
-          "unit": "m"
-        },
-        "cost": {
-          "activation": "simple",
-          "powerPoints": 9
-        },
-        "category": "status",
-        "accuracy": 90,
-        "types": [
-          "grass"
-        ],
-        "description": "<p>Effect: On hit, the target gains @Affliction[leech] 5 and @Affliction[bound] 5.</p>",
-        "variant": "leech-seed",
-        "free": true,
-        "img": "icons/svg/explosion.svg"
       }
     ],
     "description": "<p>Trigger: The user is hit by an attack. </p><p>Effect: Connection - Leech Seed. The user freely uses Leech Seed on the triggering creature. When using Leech Seed, the user can spend an additional 2 PP to have Leech Seed also apply @Affliction[bound] 5.</p>",
@@ -84,5 +37,73 @@
     }
   },
   "_id": "jwoQX0T7EjhPr26M",
-  "effects": []
+  "effects": [
+    {
+      "name": "Seed Sower",
+      "type": "passive",
+      "_id": "0O15DMhJdn2tw9Fa",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "grant-item",
+            "key": "",
+            "value": "Compendium.ptr2e.core-moves.Item.2LTnEFDRe24I7AQT",
+            "predicate": [],
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "system.actions.0.free",
+                "value": "true"
+              }
+            ],
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "reevaluateOnUpdate": false,
+            "inMemoryOnly": false,
+            "allowDuplicate": true,
+            "track": false,
+            "replaceSelf": false,
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            }
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.5.1.5",
+        "createdTime": 1737420230501,
+        "modifiedTime": 1737420253998,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+      }
+    }
+  ]
 }

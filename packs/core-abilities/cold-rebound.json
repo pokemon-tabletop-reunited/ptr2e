@@ -22,33 +22,6 @@
         },
         "description": "<p>Trigger: The user is hit with a [Contact] attack.</p><p>Effect: The user freely attacks the triggering creature with Icy Wind.</p>",
         "img": "icons/svg/explosion.svg"
-      },
-      {
-        "slug": "icy-wind",
-        "name": "Icy Wind",
-        "type": "attack",
-        "traits": [
-          "wind",
-          "pp-updated"
-        ],
-        "range": {
-          "target": "wide-line",
-          "distance": 3,
-          "unit": "m"
-        },
-        "cost": {
-          "activation": "complex",
-          "powerPoints": 4
-        },
-        "category": "special",
-        "power": 55,
-        "accuracy": 95,
-        "types": [
-          "ice"
-        ],
-        "description": "<p>Effect: On hit, all valid targets lose -1 SPD Stage for 5 activations.</p>",
-        "free": true,
-        "img": "icons/svg/explosion.svg"
       }
     ],
     "description": "<p>Trigger: The user is hit with a [Contact] attack.</p><p>Effect: Connection - Icy Wind. The user freely attacks the triggering creature with Icy Wind.</p>",
@@ -62,5 +35,73 @@
     }
   },
   "_id": "Kon1lC8YU7SMt62P",
-  "effects": []
+  "effects": [
+    {
+      "name": "Cold Rebound",
+      "type": "passive",
+      "_id": "rKYJmmW5W66NtvkN",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "grant-item",
+            "key": "",
+            "value": "Compendium.ptr2e.core-moves.Item.YoLEpica6f4PLgWO",
+            "predicate": [],
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "system.actions.0.free",
+                "value": "true"
+              }
+            ],
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "reevaluateOnUpdate": false,
+            "inMemoryOnly": false,
+            "allowDuplicate": true,
+            "track": false,
+            "replaceSelf": false,
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            }
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.5.1.5",
+        "createdTime": 1737395182970,
+        "modifiedTime": 1737395210925,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+      }
+    }
+  ]
 }

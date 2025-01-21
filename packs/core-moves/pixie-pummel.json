@@ -28,38 +28,87 @@
           "powerPoints": 4,
           "priority": 2
         },
-        "variant": null,
         "types": [
           "fairy"
         ],
         "category": "physical",
         "power": 30,
         "accuracy": 85,
-        "contestType": "",
-        "contestEffect": "",
-        "free": false,
-        "slot": null,
-        "description": "<p>Effect: On hit, the user loses -1 DEF and SPDEF Stage for 5 Activations.</p>"
+        "description": "<p>Effect: On hit, the user loses -1 DEF and SPDEF Stage for 5 Activations.</p>",
+        "predicate": []
       }
     ],
-    "container": null,
-    "grade": "B"
+    "grade": "B",
+    "traits": [],
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
   },
-  "effects": [],
-  "sort": 7300000,
-  "ownership": {
-    "default": 0,
-    "CYLdyr5mPSDmNpTp": 3
-  },
-  "flags": {},
-  "_stats": {
-    "compendiumSource": null,
-    "duplicateSource": null,
-    "coreVersion": "12.327",
-    "systemId": "ptr2e",
-    "systemVersion": "0.10.0-alpha.1.0.4",
-    "createdTime": 1719585983867,
-    "modifiedTime": 1719975227127,
-    "lastModifiedBy": "CYLdyr5mPSDmNpTp"
-  }
+  "effects": [
+    {
+      "name": "Pixie Pummel",
+      "type": "passive",
+      "_id": "IeRlvUwcRRctDSxK",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "pixie-pummel-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.bdYCJcqjMNqTpJJQ",
+            "predicate": [],
+            "chance": 100,
+            "affects": "self",
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "roll-effect",
+            "key": "pixie-pummel-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.qe5aLBJuwb9eYqvv",
+            "predicate": [],
+            "chance": 100,
+            "affects": "self",
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.5.1.5",
+        "createdTime": 1737314881585,
+        "modifiedTime": 1737314931899,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+      }
+    }
+  ]
 }

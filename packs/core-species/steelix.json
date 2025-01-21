@@ -31,7 +31,9 @@
       "serpentine",
       "breathless",
       "tremorsense-15",
-      "fully-evolved"
+      "fully-evolved",
+      "direction-sense",
+      "em-sense-15"
     ],
     "abilities": {
       "starting": [
@@ -618,11 +620,19 @@
             "level": null,
             "knownMove": null
           },
-          "evolutions": []
+          "evolutions": [],
+          "perk": {
+            "x": 15,
+            "y": 15
+          }
         }
       ],
       "uuid": "Compendium.ptr2e.core-species.Item.EkhJeHPiORiRxysb",
-      "methods": []
+      "methods": [],
+      "perk": {
+        "x": 15,
+        "y": 15
+      }
     },
     "_migration": {
       "version": null,
@@ -886,74 +896,6 @@
         "createdTime": 1733849401562,
         "modifiedTime": 1733856065105,
         "lastModifiedBy": "Kc3DOunCh3ClAeHS"
-      }
-    },
-    {
-      "name": "Breathless",
-      "type": "passive",
-      "system": {
-        "changes": [
-          {
-            "type": "roll-option",
-            "domain": "immunities",
-            "value": "trait:powder",
-            "key": "",
-            "mode": 2,
-            "priority": null,
-            "predicate": [],
-            "ignored": false,
-            "suboptions": [],
-            "state": true
-          },
-          {
-            "type": "roll-option",
-            "domain": "immunities",
-            "value": "trait:gas",
-            "key": "",
-            "mode": 2,
-            "priority": null,
-            "predicate": [],
-            "ignored": false,
-            "suboptions": [],
-            "state": true
-          }
-        ],
-        "traits": [
-          "breathless"
-        ],
-        "slug": null,
-        "removeAfterCombat": true,
-        "removeOnRecall": false,
-        "stacks": 0
-      },
-      "_id": null,
-      "img": null,
-      "disabled": false,
-      "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
-      },
-      "description": "",
-      "origin": null,
-      "tint": "#ffffff",
-      "transfer": true,
-      "statuses": [],
-      "sort": 0,
-      "flags": {},
-      "_stats": {
-        "coreVersion": "12.331",
-        "systemId": "ptr2e",
-        "systemVersion": "0.10.0-alpha.4.1.0",
-        "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null,
-        "compendiumSource": null,
-        "duplicateSource": null
       }
     }
   ]

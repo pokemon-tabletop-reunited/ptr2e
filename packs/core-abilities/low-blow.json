@@ -23,33 +23,6 @@
         "img": "icons/svg/explosion.svg"
       },
       {
-        "slug": "feint-attack",
-        "name": "Feint Attack",
-        "type": "attack",
-        "traits": [
-          "dash",
-          "contact",
-          "danger-close",
-          "pp-updated"
-        ],
-        "range": {
-          "target": "creature",
-          "distance": 1,
-          "unit": "m"
-        },
-        "cost": {
-          "activation": "complex",
-          "powerPoints": 3
-        },
-        "category": "physical",
-        "power": 60,
-        "accuracy": 100,
-        "types": [
-          "dark"
-        ],
-        "img": "systems/ptr2e/img/svg/dark_icon.svg"
-      },
-      {
         "slug": "feint-attack-dastardly",
         "name": "Feint Attack (Dastardly)",
         "type": "attack",
@@ -77,12 +50,14 @@
           "dark"
         ],
         "description": "<p>Trigger: Activated by an Effect.</p>",
-        "img": "systems/ptr2e/img/svg/dark_icon.svg"
+        "img": "systems/ptr2e/img/svg/dark_icon.svg",
+        "predicate": []
       }
     ],
     "description": "<p>Trigger: The user enters battle, or emerges from stealth.</p><p>Effect: Connection - Feint Attack. The the user freely moves up to and using the Movement Score of their choice, and uses Feint Attack (Dastardly).</p",
     "traits": [
-      "connection"
+      "connection",
+      "partial-automation"
     ],
     "slug": "low-blow",
     "_migration": {
@@ -91,5 +66,73 @@
     }
   },
   "_id": "RCSnbau25ch2YFfx",
-  "effects": []
+  "effects": [
+    {
+      "name": "Low Blow",
+      "type": "passive",
+      "_id": "9QgtjNlTYujY8RnD",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "grant-item",
+            "key": "",
+            "value": "Compendium.ptr2e.core-moves.Item.AtQsvtYLtT919vzU",
+            "predicate": [],
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "system.actions.0.free",
+                "value": "true"
+              }
+            ],
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "reevaluateOnUpdate": false,
+            "inMemoryOnly": false,
+            "allowDuplicate": true,
+            "track": false,
+            "replaceSelf": false,
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            }
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.5.1.5",
+        "createdTime": 1737404376517,
+        "modifiedTime": 1737404402837,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+      }
+    }
+  ]
 }

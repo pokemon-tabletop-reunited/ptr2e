@@ -35,35 +35,11 @@
           "activation": "free"
         },
         "description": "<p>Passive: The user has +1 default ATK and SPATK Stages.</p>",
-        "img": "icons/svg/explosion.svg"
-      },
-      {
-        "slug": "psystrike",
-        "name": "Psystrike",
-        "type": "attack",
-        "traits": [
-          "push-6",
-          "legendary",
-          "pp-updated"
-        ],
+        "img": "icons/svg/explosion.svg",
         "range": {
-          "target": "creature",
-          "distance": 15,
+          "target": "enemy",
           "unit": "m"
-        },
-        "cost": {
-          "activation": "complex",
-          "powerPoints": 6
-        },
-        "category": "special",
-        "power": 100,
-        "accuracy": 100,
-        "types": [
-          "psychic"
-        ],
-        "description": "<p>Effect: This attack calculates damage against the target's DEF, rather than SPDEF.</p>",
-        "free": true,
-        "img": "icons/svg/explosion.svg"
+        }
       }
     ],
     "description": "<p>Trigger: The user declares Psystrike.</p><p>Effect: Connection - Psystrike. The user can select up 5 additional targets with the triggering attack. Passive: The user has +1 default ATK and SPATK Stages.</p>",
@@ -78,5 +54,91 @@
     }
   },
   "_id": "7hopheHBAxN72Jon",
-  "effects": []
+  "effects": [
+    {
+      "name": "Perfect Specimen",
+      "type": "passive",
+      "_id": "2S8mD98VzwOO0Rsr",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "grant-item",
+            "key": "",
+            "value": "Compendium.ptr2e.core-moves.Item.Myq3zLTugQJaKrEY",
+            "predicate": [],
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "system.actions.0.free",
+                "value": "true"
+              }
+            ],
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "reevaluateOnUpdate": false,
+            "inMemoryOnly": false,
+            "allowDuplicate": true,
+            "track": false,
+            "replaceSelf": false,
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            }
+          },
+          {
+            "type": "basic",
+            "key": "system.attributes.atk.stage",
+            "value": 1,
+            "predicate": [],
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "key": "system.attributes.spa.stage",
+            "value": 1,
+            "predicate": [],
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.5.1.5",
+        "createdTime": 1737405877484,
+        "modifiedTime": 1737405996885,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+      }
+    }
+  ]
 }

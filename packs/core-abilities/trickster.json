@@ -23,32 +23,6 @@
         "img": "icons/svg/explosion.svg"
       },
       {
-        "slug": "disable",
-        "name": "Disable",
-        "type": "attack",
-        "traits": [
-          "interrupt-1"
-        ],
-        "range": {
-          "target": "creature",
-          "distance": 10,
-          "unit": "m"
-        },
-        "cost": {
-          "activation": "simple",
-          "powerPoints": 2,
-          "trigger": "<p>A foe uses an attack.</p>"
-        },
-        "category": "status",
-        "accuracy": 100,
-        "types": [
-          "normal"
-        ],
-        "description": "<p>Trigger: A foe uses an attack.</p><p>Effect: The triggering attack becomes @Affliction[disabled] 5 after it resolves.</p>",
-        "img": "icons/svg/explosion.svg",
-        "free": true
-      },
-      {
         "slug": "disable-preemptive",
         "name": "Disable (Preemptive)",
         "type": "attack",
@@ -72,12 +46,14 @@
         "description": "<p>Trigger: Triggered by an Ability.</p><p>Effect: The target has the last Move it used this combat @Affliction[disabled] 5, else, a random Move is selected.</p>",
         "img": "icons/svg/explosion.svg",
         "variant": "disable",
-        "free": true
+        "free": true,
+        "predicate": []
       }
     ],
-    "description": "<p>Trigger: The user enters battle, or emerges from stealth.</p><p>Effect: Connection - Feint Attack. The user freely moves up to and using the Movement Score of their choice, and uses Feint Attack (Dastardly).</p>",
+    "description": "<p>Trigger: The user enters battle, or emerges from stealth.</p><p>Effect: Connection - Disable. The user freely moves up to and using the Movement Score of their choice, and uses Disable (Preemptive).</p>",
     "traits": [
-      "connection"
+      "connection",
+      "partial-automation"
     ],
     "slug": "trickster",
     "_migration": {
@@ -86,5 +62,73 @@
     }
   },
   "_id": "RCSnbau25ch2YFfz",
-  "effects": []
+  "effects": [
+    {
+      "name": "Trickster",
+      "type": "passive",
+      "_id": "a6fWEisVUu1V84NE",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "grant-item",
+            "key": "",
+            "value": "Compendium.ptr2e.core-moves.Item.g2dBn6zaIVcZCIuM",
+            "predicate": [],
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "system.actions.0.free",
+                "value": "true"
+              }
+            ],
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "reevaluateOnUpdate": false,
+            "inMemoryOnly": false,
+            "allowDuplicate": true,
+            "track": false,
+            "replaceSelf": false,
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            }
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.5.1.5",
+        "createdTime": 1737421885411,
+        "modifiedTime": 1737421911170,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+      }
+    }
+  ]
 }

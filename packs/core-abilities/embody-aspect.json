@@ -106,35 +106,6 @@
         },
         "description": "<p>Effect: The user possesses Sturdy and Solid Rock as Extra Abilities, gains the Rock Type, may use Ivy Cudgel as Rock Type, and has its Tera Type replaced with Rock. While the user is Terastallized, they have +1 default DEF Stage.</p>",
         "img": "icons/svg/explosion.svg"
-      },
-      {
-        "slug": "ivy-cudgel",
-        "name": "Ivy Cudgel",
-        "type": "attack",
-        "traits": [
-          "legendary",
-          "crit-2",
-          "blast-1",
-          "contact",
-          "pp-updated"
-        ],
-        "range": {
-          "target": "blast",
-          "distance": 2,
-          "unit": "m"
-        },
-        "cost": {
-          "activation": "complex",
-          "powerPoints": 5
-        },
-        "category": "physical",
-        "power": 100,
-        "accuracy": 100,
-        "types": [
-          "grass"
-        ],
-        "free": true,
-        "img": "icons/svg/explosion.svg"
       }
     ],
     "description": "<p>Effect: Connection - Ivy Cudgel. While the user has a specific [Oni Mask] item equipped in a [Worn] slot, they gain the following benefits:</p><p>- Teal Mask: the user possesses Defiant and Antitoxin as Extra Abilities and has its Tera Type replaced with Grass. While the user is Terastallized, they have +1 default SPD Stage.</p><p>- Wellspring Mask: the user possesses Water Absorb and Seaweed as Extra Abilities, gains the Water Type, may use Ivy Cudgel as Water Type, and has its Tera Type replaced with Water. While the user is Terastallized, they have +1 default SPDEF Stage.</p><p>- Hearthflame Mask: the user possesses Mold Breaker and Flaming Soul as Extra Abilities. gains the Fire  Type, may use Ivy Cudgel as Fire Type, and has its Tera Type replaced with Fire. While the user is Terastallized, they have +1 default ATK Stage.</p><p>- Cornerstone Mask: the user possesses Sturdy and Solid Rock as Extra Abilities, gains the Rock Type, may use Ivy Cudgel as Rock Type, and has its Tera Type replaced with Rock. While the user is Terastallized, they have +1 default DEF Stage.</p>",
@@ -144,7 +115,8 @@
       "connection",
       "phenomenon",
       "forme-change",
-      "legendary"
+      "legendary",
+      "partial-automation"
     ],
     "slug": "embody-aspect",
     "_migration": {
@@ -153,5 +125,73 @@
     }
   },
   "_id": "kuCAeacxyPBxz7On",
-  "effects": []
+  "effects": [
+    {
+      "name": "Embody Aspect",
+      "type": "passive",
+      "_id": "5wX7VzteMyJ6ezMP",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "grant-item",
+            "key": "",
+            "value": "Compendium.ptr2e.core-moves.Item.uSp7iRwvQHZZ3M1Y",
+            "predicate": [],
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "system.actions.0.free",
+                "value": "true"
+              }
+            ],
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "reevaluateOnUpdate": false,
+            "inMemoryOnly": false,
+            "allowDuplicate": true,
+            "track": false,
+            "replaceSelf": false,
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            }
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.5.1.5",
+        "createdTime": 1737397735979,
+        "modifiedTime": 1737397773940,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+      }
+    }
+  ]
 }

@@ -28,25 +28,6 @@
       {
         "traits": [
           "legendary",
-          "weather"
-        ],
-        "name": "Delta Stream (Active)",
-        "slug": "delta-stream-active",
-        "type": "generic",
-        "cost": {
-          "activation": "complex",
-          "powerPoints": 10
-        },
-        "range": {
-          "target": "field",
-          "unit": "m"
-        },
-        "description": "<p>Intense Winds Weather is set until it is overridden or the user gains @Affliction[fainted] or leaves combat. If the user gains @Affliction[fainted] or leaves combat while Intense Winds is present, the Weather is set to Wind for 5 Rounds.</p>",
-        "img": "icons/svg/explosion.svg"
-      },
-      {
-        "traits": [
-          "legendary",
           "weather",
           "interrupt-6",
           "phenomena"
@@ -56,8 +37,7 @@
         "type": "generic",
         "cost": {
           "activation": "complex",
-          "trigger": "<p>The user enters combat or when the user gains this Ability.</p>",
-          "powerPoints": 0
+          "trigger": "<p>The user enters combat or when the user gains this Ability.</p>"
         },
         "range": {
           "target": "field",
@@ -71,7 +51,8 @@
     "traits": [
       "legendary",
       "weather",
-      "connection"
+      "connection",
+      "partial-automation"
     ],
     "slug": "delta-stream",
     "_migration": {
@@ -91,15 +72,21 @@
           {
             "type": "grant-item",
             "key": "",
-            "value": "Compendium.ptr2e.core-abilities.Item.u9S8zbICHVUBS1Gx",
+            "value": "Compendium.ptr2e.core-moves.Item.u9S8zbICHVUBS1Gx",
             "predicate": [],
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "system.actions.0.free",
+                "value": "true"
+              }
+            ],
             "mode": 2,
             "priority": null,
             "ignored": false,
             "reevaluateOnUpdate": false,
             "inMemoryOnly": false,
             "allowDuplicate": true,
-            "alterations": [],
             "track": false,
             "replaceSelf": false,
             "onDeleteActions": {
@@ -136,9 +123,9 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "ptr2e",
-        "systemVersion": "0.10.0-alpha.4.1.0",
+        "systemVersion": "0.10.0-alpha.5.1.5",
         "createdTime": 1733069184244,
-        "modifiedTime": 1733069218211,
+        "modifiedTime": 1737396139550,
         "lastModifiedBy": "mK35yvCqCgiTUvKf"
       }
     }

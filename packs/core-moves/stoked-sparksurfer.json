@@ -31,15 +31,72 @@
           "electric"
         ],
         "description": "<p>Trigger: User's partner uses Z-Pose! and triggers the appropriate Z-Power-Crystal.</p><p>Effect: The user may freely move up to double their Flight Score when declaring this attack. On hit, all legal targets gain @Affliction[paralysis] 5.</p><p>Requirement: [Pikachu] Z-Power-Crystal as an Accessory Item and Thunderbolt on the user's Active List.</p>",
-        "contestType": "",
-        "contestEffect": "",
         "free": true,
-        "slot": null
+        "img": "icons/svg/explosion.svg",
+        "predicate": []
       }
     ],
-    "container": null,
-    "grade": "E"
+    "grade": "E",
+    "traits": [],
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
   },
   "_id": "wlHWup7MYL88PcGg",
-  "effects": []
+  "effects": [
+    {
+      "name": "Stoked Sparksurfer",
+      "type": "passive",
+      "_id": "wH3UeRRfjmXpijQJ",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "stoked-sparksurfer-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.paralysisconitem",
+            "predicate": [],
+            "chance": 100,
+            "affects": "target",
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.5.1.5",
+        "createdTime": 1737322494015,
+        "modifiedTime": 1737322518136,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+      }
+    }
+  ]
 }
