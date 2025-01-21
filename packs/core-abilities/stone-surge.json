@@ -36,31 +36,11 @@
           "activation": "free"
         },
         "description": "<p>Passive: When resolving Stealth Rock, the user can spend an additional 2 PP double the number of Hazards created.</p>",
-        "img": "icons/svg/explosion.svg"
-      },
-      {
-        "slug": "stealth-rock",
-        "name": "Stealth Rock",
-        "type": "attack",
-        "traits": [
-          "hazard",
-          "missile"
-        ],
+        "img": "icons/svg/explosion.svg",
         "range": {
-          "target": "emanation",
-          "distance": 8,
+          "target": "enemy",
           "unit": "m"
-        },
-        "cost": {
-          "activation": "complex",
-          "powerPoints": 5
-        },
-        "category": "status",
-        "types": [
-          "rock"
-        ],
-        "description": "<p>Effect: The user places 5 floating rock mine Hazards within Range. When a creature moves within 3m of a rock mine, it homes in on them and deals a Tick of Rock-Type damage.</p>",
-        "img": "icons/svg/explosion.svg"
+        }
       },
       {
         "slug": "stealth-rock-surge",
@@ -86,7 +66,8 @@
         "description": "<p>Effect: The user places 10 floating rock mine Hazards within Range. When a creature moves within 3m of a rock mine, it homes in on them and deals a Tick of Rock-Type damage.</p>",
         "variant": "stealth-rock",
         "free": true,
-        "img": "icons/svg/explosion.svg"
+        "img": "icons/svg/explosion.svg",
+        "predicate": []
       }
     ],
     "description": "<p>Trigger: The user is hit by an attack.</p><p>Effect: Connection - Stealth Rock. The user freely uses Stealth Rock. Passive: When resolving Stealth Rock, the user can spend an additional 3 PP double the number of Hazards created.</p>",
@@ -101,5 +82,73 @@
     }
   },
   "_id": "Fm6nZyEho5NddbtV",
-  "effects": []
+  "effects": [
+    {
+      "name": "Stone Surge",
+      "type": "passive",
+      "_id": "wREx29ri3TlSKJX7",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "grant-item",
+            "key": "",
+            "value": "Compendium.ptr2e.core-moves.Item.JSSINn7yRN0wXMZ2",
+            "predicate": [],
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "system.actions.0.free",
+                "value": 0
+              }
+            ],
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "reevaluateOnUpdate": false,
+            "inMemoryOnly": false,
+            "allowDuplicate": true,
+            "track": false,
+            "replaceSelf": false,
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            }
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.5.1.5",
+        "createdTime": 1737421208876,
+        "modifiedTime": 1737421228560,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+      }
+    }
+  ]
 }

@@ -22,63 +22,6 @@
         },
         "description": "<p>Effect: While the user meets the [Intrepid 3/4] Condition, the user takes 50% less damage from Physical- and Special-Category Attacks. Upon leaving battle, the user returns to its Normal Forme.</p>",
         "img": "icons/svg/explosion.svg"
-      },
-      {
-        "slug": "tera-starstorm",
-        "name": "Tera Starstorm",
-        "type": "attack",
-        "traits": [
-          "legendary",
-          "blast-2",
-          "pp-updated"
-        ],
-        "range": {
-          "target": "blast",
-          "distance": 20,
-          "unit": "m"
-        },
-        "cost": {
-          "activation": "complex",
-          "powerPoints": 6
-        },
-        "category": "special",
-        "power": 120,
-        "accuracy": 100,
-        "types": [
-          "normal"
-        ],
-        "free": true,
-        "img": "icons/svg/explosion.svg"
-      },
-      {
-        "slug": "tera-starstorm-stellar",
-        "name": "Tera Starstorm (Stellar)",
-        "type": "attack",
-        "traits": [
-          "legendary",
-          "blast-5",
-          "pp-updated"
-        ],
-        "range": {
-          "target": "blast",
-          "distance": 20,
-          "unit": "m"
-        },
-        "cost": {
-          "activation": "complex",
-          "powerPoints": 6,
-          "trigger": "<p>The user is currently in their Stellar Forme.</p>"
-        },
-        "category": "special",
-        "power": 120,
-        "accuracy": 100,
-        "types": [
-          "normal"
-        ],
-        "description": "<p>Tigger: The user is currently in their Stellar Forme.</p>",
-        "variant": "tera-starstorm",
-        "free": true,
-        "img": "icons/svg/explosion.svg"
       }
     ],
     "description": "<p>Effect: Connection - Tera Starstorm. While the user meets the [Intrepid 3/4] Condition, the user takes 50% less damage from Physical- and Special-Category Attacks. Upon leaving battle, the user returns to its Normal Forme.</p>",
@@ -93,5 +36,90 @@
     }
   },
   "_id": "YTFTNio0VopMWf0s",
-  "effects": []
+  "effects": [
+    {
+      "name": "Tera Shell",
+      "type": "passive",
+      "_id": "8rPBDwrogEoSRHc5",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "grant-item",
+            "key": "",
+            "value": "Compendium.ptr2e.core-moves.Item.LNZi0GDKv5mYjS7F",
+            "predicate": [],
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "system.actions.0.free",
+                "value": "true"
+              },
+              {
+                "mode": 5,
+                "property": "system.actions.1.free",
+                "value": "true"
+              }
+            ],
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "reevaluateOnUpdate": false,
+            "inMemoryOnly": false,
+            "allowDuplicate": true,
+            "track": false,
+            "replaceSelf": false,
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            }
+          },
+          {
+            "type": "ephemeral-modifier",
+            "key": "damaging-attack-damage-percentile",
+            "value": -50,
+            "predicate": [
+              "self:state:intrepid-3-4"
+            ],
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "hideIfDisabled": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.5.1.5",
+        "createdTime": 1737421398604,
+        "modifiedTime": 1737421515833,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+      }
+    }
+  ]
 }

@@ -23,35 +23,13 @@
         },
         "description": "<p>Trigger: The user creates Smoggy Weather.</p><p>Effect: The triggering effect's duration is increased by +2.</p>",
         "img": "icons/svg/explosion.svg"
-      },
-      {
-        "slug": "acid-rain",
-        "name": "Acid Rain",
-        "type": "attack",
-        "traits": [
-          "weather"
-        ],
-        "range": {
-          "target": "field",
-          "unit": "m"
-        },
-        "cost": {
-          "activation": "complex",
-          "powerPoints": 4
-        },
-        "category": "status",
-        "types": [
-          "poison"
-        ],
-        "description": "<p>Effect: The weather becomes Smoggy for 3 rounds.</p>",
-        "free": true,
-        "img": "icons/svg/explosion.svg"
       }
     ],
     "description": "<p>Trigger: The user creates Smoggy Weather.</p><p>Effect: Connection - Acid Rain. The triggering effect's duration is increased by +2.</p>",
     "traits": [
       "connection",
-      "weather"
+      "weather",
+      "partial-automation"
     ],
     "slug": "pollution",
     "_migration": {
@@ -60,5 +38,73 @@
     }
   },
   "_id": "Yk1KzsEkovUtCx6L",
-  "effects": []
+  "effects": [
+    {
+      "name": "Pollution",
+      "type": "passive",
+      "_id": "26woZudx1pcxWNeo",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "grant-item",
+            "key": "",
+            "value": "Compendium.ptr2e.core-moves.Item.ufutclHyzVOmKmdi",
+            "predicate": [],
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "system.actions.0.free",
+                "value": "true"
+              }
+            ],
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "reevaluateOnUpdate": false,
+            "inMemoryOnly": false,
+            "allowDuplicate": true,
+            "track": false,
+            "replaceSelf": false,
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            }
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.5.1.5",
+        "createdTime": 1737418014094,
+        "modifiedTime": 1737418034839,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+      }
+    }
+  ]
 }

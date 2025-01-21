@@ -1,7 +1,7 @@
 {
   "name": "Sand Stream",
   "type": "ability",
-  "img": "systems/ptr2e/img/svg/ground_icon.svg",
+  "img": "systems/ptr2e/img/svg/rock_icon.svg",
   "system": {
     "actions": [
       {
@@ -23,35 +23,13 @@
         },
         "description": "<p>Trigger: The user declares Sandstorm.</p><p>Effect: The Dusty Weather set by the user has its duration extended by 2 Rounds.</p>",
         "img": "icons/svg/explosion.svg"
-      },
-      {
-        "slug": "sandstorm",
-        "name": "Sandstorm",
-        "type": "attack",
-        "traits": [
-          "weather"
-        ],
-        "range": {
-          "target": "field",
-          "unit": "m"
-        },
-        "cost": {
-          "activation": "complex",
-          "powerPoints": 4
-        },
-        "category": "status",
-        "types": [
-          "rock"
-        ],
-        "description": "<p>Effect: The weather becomes Sandy for 3 rounds.</p>",
-        "free": true,
-        "img": "icons/svg/explosion.svg"
       }
     ],
     "description": "<p>Trigger: The user declares Sandstorm.</p><p>Effect: Connection - Sandstorm. The Dusty Weather set by the user has its duration extended by 2 Rounds.</p>",
     "traits": [
       "connection",
-      "weather"
+      "weather",
+      "partial-automation"
     ],
     "slug": "sand-stream",
     "_migration": {
@@ -60,5 +38,73 @@
     }
   },
   "_id": "ZUDn8BmM24w3WHx9",
-  "effects": []
+  "effects": [
+    {
+      "name": "Sand Stream",
+      "type": "passive",
+      "_id": "41EmKjgI7EIdGS5b",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "grant-item",
+            "key": "",
+            "value": "Compendium.ptr2e.core-moves.Item.CUj5LvNodz0DfdaJ",
+            "predicate": [],
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "system.actions.0.free",
+                "value": "true"
+              }
+            ],
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "reevaluateOnUpdate": false,
+            "inMemoryOnly": false,
+            "allowDuplicate": true,
+            "track": false,
+            "replaceSelf": false,
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            }
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.5.1.5",
+        "createdTime": 1737420151974,
+        "modifiedTime": 1737420180107,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+      }
+    }
+  ]
 }

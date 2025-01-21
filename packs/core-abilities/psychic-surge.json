@@ -42,36 +42,14 @@
         },
         "description": "<p>Passive: If a space within range possesses Psychic Terrain, the user is affected by Psychic Terrain.</p>",
         "img": "icons/svg/explosion.svg"
-      },
-      {
-        "slug": "psychic-terrain",
-        "name": "Psychic Terrain",
-        "type": "attack",
-        "traits": [
-          "terrain"
-        ],
-        "range": {
-          "target": "field",
-          "unit": "m"
-        },
-        "cost": {
-          "activation": "complex",
-          "powerPoints": 3
-        },
-        "category": "status",
-        "types": [
-          "psychic"
-        ],
-        "description": "<p>Effect: The Terrain type is set to Psychic Terrain for 3 rounds.</p>",
-        "free": true,
-        "img": "icons/svg/explosion.svg"
       }
     ],
     "description": "<p>Trigger: The user declares Psychic Terrain.</p><p>Effect: Connection - Psychic Terrain. Increase the number of rounds Psychic Terrain persists by 2.</p><p>Passive: If a space within range possesses Psychic Terrain, the user is affected by Psychic Terrain.</p>",
     "traits": [
       "terrain",
       "connection",
-      "environ"
+      "environ",
+      "partial-automation"
     ],
     "slug": "psychic-surge",
     "_migration": {
@@ -80,5 +58,73 @@
     }
   },
   "_id": "lW75LfBFpHkKWpPA",
-  "effects": []
+  "effects": [
+    {
+      "name": "Psychic Surge",
+      "type": "passive",
+      "_id": "1NOOgSia33P7xYZR",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "grant-item",
+            "key": "",
+            "value": "Compendium.ptr2e.core-moves.Item.McNMuaosHAbgfV8b",
+            "predicate": [],
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "system.actions.0.free",
+                "value": "true"
+              }
+            ],
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "reevaluateOnUpdate": false,
+            "inMemoryOnly": false,
+            "allowDuplicate": true,
+            "track": false,
+            "replaceSelf": false,
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            }
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.5.1.5",
+        "createdTime": 1737418371174,
+        "modifiedTime": 1737418405097,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+      }
+    }
+  ]
 }

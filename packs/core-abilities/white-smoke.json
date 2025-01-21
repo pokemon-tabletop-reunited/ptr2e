@@ -24,31 +24,6 @@
         },
         "description": "<p>Trigger: A negative [Stage Change] effect is applied to the user.</p><p>Effect: The user freely uses Smokescreen centered on itself. Then, the triggering effect is cured.</p>",
         "img": "icons/svg/explosion.svg"
-      },
-      {
-        "slug": "smokescreen",
-        "name": "Smokescreen",
-        "type": "attack",
-        "traits": [
-          "hazard",
-          "blast-3"
-        ],
-        "range": {
-          "target": "creature",
-          "distance": 10,
-          "unit": "m"
-        },
-        "cost": {
-          "activation": "simple",
-          "powerPoints": 5
-        },
-        "category": "status",
-        "types": [
-          "normal"
-        ],
-        "description": "<p>Effect: An Obscurring Cloud is created in the [Blast X] area for 5 rounds. An enemy creature that starts their activation in or enters a space containing an Obscurring Cloud Hazard gains @Affliction[blinded] 2.</p>",
-        "free": true,
-        "img": "icons/svg/explosion.svg"
       }
     ],
     "description": "<p>Trigger: A negative [Stage Change] effect is applied to the user</p><p>Effect: Connection - Smokescreen. The user freely uses Smokescreen centered on itself. Then, the triggering effect is cured.</p><p>Passive: Smokescreen Hazards created by the user do not affect the user or their allies.</p>",
@@ -64,5 +39,73 @@
     }
   },
   "_id": "1Tiu4yez4jm3cqu7",
-  "effects": []
+  "effects": [
+    {
+      "name": "White Smoke",
+      "type": "passive",
+      "_id": "bIPC4PLGYvMM5zmr",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "grant-item",
+            "key": "",
+            "value": "Compendium.ptr2e.core-moves.Item.pYNVsTCmUw7oWhRg",
+            "predicate": [],
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "system.actions.0.free",
+                "value": "true"
+              }
+            ],
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "reevaluateOnUpdate": false,
+            "inMemoryOnly": false,
+            "allowDuplicate": true,
+            "track": false,
+            "replaceSelf": false,
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            }
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.5.1.5",
+        "createdTime": 1737421949545,
+        "modifiedTime": 1737421982805,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+      }
+    }
+  ]
 }

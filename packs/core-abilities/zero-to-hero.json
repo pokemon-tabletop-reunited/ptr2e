@@ -59,62 +59,6 @@
         },
         "description": "<p>Effect: The user enters their Hero Forme for 5 Activations.</p>",
         "img": "icons/svg/explosion.svg"
-      },
-      {
-        "slug": "flip-turn",
-        "name": "Flip Turn",
-        "type": "attack",
-        "traits": [
-          "contact",
-          "pp-updated"
-        ],
-        "range": {
-          "target": "creature",
-          "distance": 1,
-          "unit": "m"
-        },
-        "cost": {
-          "activation": "complex",
-          "powerPoints": 2
-        },
-        "category": "physical",
-        "power": 60,
-        "accuracy": 100,
-        "types": [
-          "water"
-        ],
-        "description": "<p>Effect: On hit, the user may freely move themselves up to half of the Movement Score of their choice away from the target. If the user is an owned Pokémon, they may then immediately be returned their Poké Ball and another Pokémon may immediately be sent out in their place.</p>",
-        "free": true,
-        "img": "icons/svg/explosion.svg"
-      },
-      {
-        "slug": "jet-punch",
-        "name": "Jet Punch (Hero Only)",
-        "type": "attack",
-        "traits": [
-          "punch",
-          "priority-4",
-          "contact",
-          "pp-updated"
-        ],
-        "range": {
-          "target": "creature",
-          "distance": 1,
-          "unit": "m"
-        },
-        "cost": {
-          "activation": "complex",
-          "powerPoints": 2,
-          "priority": 4
-        },
-        "category": "physical",
-        "power": 60,
-        "accuracy": 100,
-        "types": [
-          "water"
-        ],
-        "free": true,
-        "img": "icons/svg/explosion.svg"
       }
     ],
     "description": "<p>Trigger: The user switches-out.</p><p>Effect: Connection - Flip Turn. The user transforms into their Hero Forme until the end of combat or when the user gains @Affliction[fainted]. The user can spend an 4 PP to transform into their Hero Forme for 5 Activations as a Complex Action. This effect costs 2 more PP and gains [Exhaust] if the user has @Affliction[weary].</p><p>Passive: While the user is in their Hero Forme, they gain Connection - Jet Punch.</p>",
@@ -130,5 +74,73 @@
     }
   },
   "_id": "gfJ5DPR5rW4LmiZA",
-  "effects": []
+  "effects": [
+    {
+      "name": "Zero To Hero",
+      "type": "passive",
+      "_id": "gfa3qdsK7eDfydYV",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "grant-item",
+            "key": "",
+            "value": "Compendium.ptr2e.core-moves.Item.mQ7A5gRxvfUfZ8ew",
+            "predicate": [],
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "system.actions.0.free",
+                "value": "true"
+              }
+            ],
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "reevaluateOnUpdate": false,
+            "inMemoryOnly": false,
+            "allowDuplicate": true,
+            "track": false,
+            "replaceSelf": false,
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            }
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.5.1.5",
+        "createdTime": 1737422198535,
+        "modifiedTime": 1737422234674,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+      }
+    }
+  ]
 }

@@ -42,30 +42,6 @@
         },
         "description": "<p>Trigger: The user resolves Toxic Spikes.</p><p>Effect: All creatures occupying spaces shared by the triggering-attack's hazards gain @Affliction[poison] 1.</p>",
         "img": "icons/svg/explosion.svg"
-      },
-      {
-        "slug": "toxic-spikes",
-        "name": "Toxic Spikes",
-        "type": "attack",
-        "traits": [
-          "hazard",
-          "blast-4"
-        ],
-        "range": {
-          "target": "blast",
-          "distance": 10,
-          "unit": "m"
-        },
-        "cost": {
-          "activation": "simple",
-          "powerPoints": 5
-        },
-        "category": "status",
-        "types": [
-          "poison"
-        ],
-        "description": "<p>Effect: Poison tipped spikes are spread over the [Blast X] area on standing surfaces. A creature that starts an Activation on a surface containing the Hazard gains @Affliction[poison] 1. A creature that moves through through a space touching a surface containing the Hazard gain @Affliction[poison] 1 for each square travelled. After gaining 4 Stacks of @Affliction[poison] this way during the same Round, the creature's @Affliction[poison] Affliction becomes @Affliction[blight].</p>",
-        "img": "icons/svg/explosion.svg"
       }
     ],
     "description": "<p>Trigger: The user is hit by a Physical-Category Attack.</p><p>Effect: Connection - Toxic Spikes. The user freely uses Toxic Spikes. Passive: When using Toxic Spikes, the user can spend an additional 2 PP to have creatures occupying spaces shared by the triggering-attack's hazards gain @Affliction[poison] 1.</p>",
@@ -80,5 +56,73 @@
     }
   },
   "_id": "oOaKiFGlZvb15mXs",
-  "effects": []
+  "effects": [
+    {
+      "name": "Toxic Debris",
+      "type": "passive",
+      "_id": "RiqFLLZFPaCctz3h",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "grant-item",
+            "key": "",
+            "value": "Compendium.ptr2e.core-moves.Item.ZPdwItj91QOBjAgC",
+            "predicate": [],
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "system.actions.0.free",
+                "value": "true"
+              }
+            ],
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "reevaluateOnUpdate": false,
+            "inMemoryOnly": false,
+            "allowDuplicate": true,
+            "track": false,
+            "replaceSelf": false,
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            }
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.5.1.5",
+        "createdTime": 1737421720524,
+        "modifiedTime": 1737421771750,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+      }
+    }
+  ]
 }
