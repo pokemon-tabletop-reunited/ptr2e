@@ -56,66 +56,6 @@
         },
         "description": "<p>Effect: The user transforms into its Aria Forme.</p>",
         "img": "icons/svg/explosion.svg"
-      },
-      {
-        "slug": "relic-dance",
-        "name": "Relic Dance",
-        "type": "attack",
-        "traits": [
-          "legendary",
-          "dance",
-          "pass-6",
-          "push-2",
-          "pp-updated"
-        ],
-        "range": {
-          "target": "creature",
-          "distance": 1,
-          "unit": "m"
-        },
-        "cost": {
-          "activation": "complex",
-          "powerPoints": 5
-        },
-        "category": "physical",
-        "power": 75,
-        "accuracy": 100,
-        "types": [
-          "fighting"
-        ],
-        "description": "<p>Effect: On hit, all valid targets have a 30% chance of gaining @Affliction[splinter] 7 and @Affliction[confused] 7.</p>",
-        "free": true,
-        "img": "icons/svg/explosion.svg"
-      },
-      {
-        "traits": [],
-        "name": "Capoeira",
-        "slug": "capoeira",
-        "type": "passive",
-        "cost": {
-          "activation": "free"
-        },
-        "range": {
-          "target": "self",
-          "unit": "m"
-        },
-        "description": "<p>Effect: The user's [Kick] Attacks also have [Dance], and the user's [Dance] Attacks have their Power increased by 30%.</p>",
-        "img": "icons/svg/explosion.svg"
-      },
-      {
-        "traits": [],
-        "name": "Benevolent Gift",
-        "slug": "benevolent-gift",
-        "type": "passive",
-        "cost": {
-          "activation": "free"
-        },
-        "range": {
-          "target": "self",
-          "unit": "m"
-        },
-        "description": "<p>Effect: The duration of effects caused or created by the user is increased by 2.</p>",
-        "img": "icons/svg/explosion.svg"
       }
     ],
     "description": "<p>Trigger: The user resolves Relic Dance</p><p>Effect: Connection - Relic Dance. The user transforms into its Aria Forme. The user may also change Formes as either a Simple Action (4 PP), or as a Downtime Action. Passive: The user possesses the Abilities - Capoeira and Benevolent Gift",
@@ -130,5 +70,123 @@
     }
   },
   "_id": "PymIM1w7V6kBwEwm",
-  "effects": []
+  "effects": [
+    {
+      "name": "Relic Variation",
+      "type": "passive",
+      "_id": "IB3QcxOq04bXsOqi",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "grant-item",
+            "key": "",
+            "value": "Compendium.ptr2e.core-moves.Item.1XrF5LK5RjlKyxAf",
+            "predicate": [],
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "system.actions.0.free",
+                "value": "true"
+              }
+            ],
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "reevaluateOnUpdate": false,
+            "inMemoryOnly": false,
+            "allowDuplicate": true,
+            "track": false,
+            "replaceSelf": false,
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            }
+          },
+          {
+            "type": "grant-item",
+            "key": "",
+            "value": "Compendium.ptr2e.core-abilities.Item.ziFVuKuam7P7iQIP",
+            "predicate": [],
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "system.free",
+                "value": "true"
+              }
+            ],
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "reevaluateOnUpdate": false,
+            "inMemoryOnly": false,
+            "allowDuplicate": true,
+            "track": false,
+            "replaceSelf": false,
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            }
+          },
+          {
+            "type": "grant-item",
+            "key": "",
+            "value": "Compendium.ptr2e.core-abilities.Item.ne1QgdwhvAXeeaX8",
+            "predicate": [],
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "system.free",
+                "value": "true"
+              }
+            ],
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "reevaluateOnUpdate": false,
+            "inMemoryOnly": false,
+            "allowDuplicate": true,
+            "track": false,
+            "replaceSelf": false,
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            }
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.5.1.5",
+        "createdTime": 1737419769520,
+        "modifiedTime": 1737419887457,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+      }
+    }
+  ]
 }

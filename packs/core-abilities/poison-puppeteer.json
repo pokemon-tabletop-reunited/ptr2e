@@ -23,39 +23,13 @@
         },
         "description": "<p>Trigger: The user @Affliction[poison]s or @Affliction[blight]s a creature.</p><p>Effect: The affected creature is afflicted with @Affliction[confused] 5.</p>",
         "img": "icons/svg/explosion.svg"
-      },
-      {
-        "slug": "malignant-chain",
-        "name": "Malignant Chain",
-        "type": "attack",
-        "traits": [
-          "legendary",
-          "pp-updated"
-        ],
-        "range": {
-          "target": "creature",
-          "distance": 5,
-          "unit": "m"
-        },
-        "cost": {
-          "activation": "complex",
-          "powerPoints": 6
-        },
-        "category": "special",
-        "power": 100,
-        "accuracy": 100,
-        "types": [
-          "poison"
-        ],
-        "description": "<p>Effect: On hit, the target has a 50% chance of gaining @Affliction[blight] 8 and a 50% chance of gaining @Affliction[paralysis] 5.</p>",
-        "free": true,
-        "img": "icons/svg/explosion.svg"
       }
     ],
     "description": "<p>Trigger: The user @Affliction[poison]s or @Affliction[blight]s a creature.</p><p>Effect: Connection - Malignant Chain. The affected creature is afflicted with @Affliction[confused] 5.</p>",
     "traits": [
       "legendary",
-      "connection"
+      "connection",
+      "partial-automation"
     ],
     "slug": "poison-puppeteer",
     "_migration": {
@@ -64,5 +38,73 @@
     }
   },
   "_id": "V5KPS8wGvbHysehP",
-  "effects": []
+  "effects": [
+    {
+      "name": "Poison Puppeteer",
+      "type": "passive",
+      "_id": "AprbwnunoFLXdtPW",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "grant-item",
+            "key": "",
+            "value": "Compendium.ptr2e.core-moves.Item.fFKx2U3ztyLCAuRH",
+            "predicate": [],
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "system.actions.0.free",
+                "value": "true"
+              }
+            ],
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "reevaluateOnUpdate": false,
+            "inMemoryOnly": false,
+            "allowDuplicate": true,
+            "track": false,
+            "replaceSelf": false,
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            }
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.5.1.5",
+        "createdTime": 1737417932578,
+        "modifiedTime": 1737417985654,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+      }
+    }
+  ]
 }

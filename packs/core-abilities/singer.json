@@ -22,31 +22,6 @@
         },
         "description": "<p>Trigger: A creature on the field (other than the user) uses a [Sonic] attack</p><p>Effect: The user uses the triggering attack as if it was on the user's Active List as a Free Action, selecting new targets as needed.</p>",
         "img": "icons/svg/explosion.svg"
-      },
-      {
-        "slug": "sing",
-        "name": "Sing",
-        "type": "attack",
-        "traits": [
-          "sonic"
-        ],
-        "range": {
-          "target": "emanation",
-          "distance": 2,
-          "unit": "m"
-        },
-        "cost": {
-          "activation": "complex",
-          "powerPoints": 6
-        },
-        "category": "status",
-        "accuracy": 55,
-        "types": [
-          "normal"
-        ],
-        "description": "<p>Effect: On hit, all valid targets gain @Affliction[drowsy] 5.</p>",
-        "free": true,
-        "img": "icons/svg/explosion.svg"
       }
     ],
     "description": "<p>Trigger: A creature on the field (other than the user) uses a [Sonic] attack</p><p>Effect: Connection - Sing. The user uses the triggering attack as if it was on the user's Active List as a Free Action, selecting new targets as needed.</p>",
@@ -60,5 +35,73 @@
     }
   },
   "_id": "NUI3hbwz9PJ65Znw",
-  "effects": []
+  "effects": [
+    {
+      "name": "Singer",
+      "type": "passive",
+      "_id": "iHW7xT2gudLUOy6e",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "grant-item",
+            "key": "",
+            "value": "Compendium.ptr2e.core-moves.Item.ddcyCuH4t0mVmB7n",
+            "predicate": [],
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "system.actions.0.free",
+                "value": "true"
+              }
+            ],
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "reevaluateOnUpdate": false,
+            "inMemoryOnly": false,
+            "allowDuplicate": true,
+            "track": false,
+            "replaceSelf": false,
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            }
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.5.1.5",
+        "createdTime": 1737420519006,
+        "modifiedTime": 1737420546176,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+      }
+    }
+  ]
 }

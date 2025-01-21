@@ -22,62 +22,6 @@
         },
         "description": "<p>Trigger: The user is hit by a super effective Attack or by a Critical Hit.</p><p>Effect: The user freely uses Aftershock or Aftershock (Follow-Up) on an creature..</p>",
         "img": "icons/svg/explosion.svg"
-      },
-      {
-        "name": "Aftershock",
-        "slug": "aftershock",
-        "type": "attack",
-        "img": "icons/svg/explosion.svg",
-        "traits": [
-          "delay-3",
-          "earthbound"
-        ],
-        "range": {
-          "target": "creature",
-          "distance": 5,
-          "unit": "m"
-        },
-        "cost": {
-          "activation": "complex",
-          "powerPoints": 6,
-          "delay": 3
-        },
-        "types": [
-          "ground"
-        ],
-        "category": "physical",
-        "power": 50,
-        "accuracy": 100
-      },
-      {
-        "name": "Aftershock (Follow-Up)",
-        "slug": "aftershock-follow-up",
-        "type": "attack",
-        "img": "icons/svg/explosion.svg",
-        "traits": [
-          "delay-3",
-          "danger-close",
-          "earthbound"
-        ],
-        "range": {
-          "target": "creature",
-          "distance": 5,
-          "unit": "m"
-        },
-        "cost": {
-          "activation": "complex",
-          "powerPoints": 6,
-          "delay": 3
-        },
-        "variant": "aftershock",
-        "types": [
-          "ground"
-        ],
-        "category": "physical",
-        "power": 150,
-        "accuracy": 100,
-        "free": true,
-        "description": "<p>Effect: This attack may only be used if the target was hit with an [Earthbound] attack since the user's previous Activation.</p>"
       }
     ],
     "description": "<p>Trigger: The user is hit by a super effective Attack or by a Critical Hit.</p><p>Effect: Connection - Aftershock. The user freely uses Aftershock or Aftershock (Follow-Up) on an creature.</p>",
@@ -92,5 +36,78 @@
     }
   },
   "_id": "pI0Z1NiBcanHQKqP",
-  "effects": []
+  "effects": [
+    {
+      "name": "Shear Fault",
+      "type": "passive",
+      "_id": "fkEtgmvIxecdy3hh",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "grant-item",
+            "key": "",
+            "value": "Compendium.ptr2e.core-moves.Item.RuQs6by7zFAgsOhU",
+            "predicate": [],
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "system.actions.0.free",
+                "value": "true"
+              },
+              {
+                "mode": 5,
+                "property": "system.actions.1.free",
+                "value": "true"
+              }
+            ],
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "reevaluateOnUpdate": false,
+            "inMemoryOnly": false,
+            "allowDuplicate": true,
+            "track": false,
+            "replaceSelf": false,
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            }
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.5.1.5",
+        "createdTime": 1737420346047,
+        "modifiedTime": 1737420392390,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+      }
+    }
+  ]
 }
