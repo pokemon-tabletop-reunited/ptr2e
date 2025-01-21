@@ -34,40 +34,17 @@
           "activation": "free"
         },
         "description": "<p>Passive: The user's Ghost-Type attacks can hit Normal-Type creatures.</p>",
-        "img": "icons/svg/explosion.svg"
-      },
-      {
-        "slug": "moongeist-beam",
-        "name": "Moongeist Beam",
-        "type": "attack",
-        "traits": [
-          "legendary",
-          "ray",
-          "pp-updated"
-        ],
+        "img": "icons/svg/explosion.svg",
         "range": {
-          "target": "line",
-          "distance": 15,
+          "target": "enemy",
           "unit": "m"
-        },
-        "cost": {
-          "activation": "complex",
-          "powerPoints": 5
-        },
-        "category": "special",
-        "power": 100,
-        "accuracy": 100,
-        "types": [
-          "ghost"
-        ],
-        "description": "<p>Effect: This attack is unaffected by the abilities of other creatures.</p>",
-        "free": true,
-        "img": "icons/svg/explosion.svg"
+        }
       }
     ],
     "description": "<p>Trigger: The user declares Moongeist Beam</p><p>Effect: Connection - Moongeist Beam. The triggering attack has a 33% chance of inflicting @Affliction[cursed] 3 to valid targets on hit. Passive: The user's Ghost-Type attacks can hit Normal-Type creatures.</p>",
     "traits": [
-      "legendary"
+      "legendary",
+      "partial-automation"
     ],
     "slug": "cosmic-eclipse",
     "_migration": {
@@ -76,5 +53,73 @@
     }
   },
   "_id": "k9KxGgxPGZk9ohQj",
-  "effects": []
+  "effects": [
+    {
+      "name": "Cosmic Eclipse",
+      "type": "passive",
+      "_id": "a3jgHCGSIQv0OVVM",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "grant-item",
+            "key": "",
+            "value": "Compendium.ptr2e.core-moves.Item.DaHQKPYCD2Qy7e4r",
+            "predicate": [],
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "system.actions.0.free",
+                "value": "true"
+              }
+            ],
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "reevaluateOnUpdate": false,
+            "inMemoryOnly": false,
+            "allowDuplicate": true,
+            "track": false,
+            "replaceSelf": false,
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            }
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.5.1.5",
+        "createdTime": 1737395450078,
+        "modifiedTime": 1737395480630,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+      }
+    }
+  ]
 }

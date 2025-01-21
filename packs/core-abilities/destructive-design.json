@@ -33,53 +33,11 @@
           "activation": "free"
         },
         "description": "<p>Passive: the user gains the Ability Download.</p>",
-        "img": "icons/svg/explosion.svg"
-      },
-      {
-        "slug": "techno-blast",
-        "name": "Techno Blast",
-        "type": "attack",
-        "traits": [
-          "legendary",
-          "pulse",
-          "pp-updated"
-        ],
+        "img": "icons/svg/explosion.svg",
         "range": {
-          "target": "wide-line",
-          "distance": 10,
+          "target": "enemy",
           "unit": "m"
-        },
-        "cost": {
-          "activation": "complex",
-          "powerPoints": 6
-        },
-        "category": "special",
-        "power": 120,
-        "accuracy": 100,
-        "types": [
-          "normal"
-        ],
-        "description": "<p>Effect: Techno Blast's Type changes to match the <Type> of the user's held [Drive] item.</p>",
-        "free": true,
-        "img": "icons/svg/explosion.svg"
-      },
-      {
-        "traits": [],
-        "name": "Download",
-        "slug": "download",
-        "type": "generic",
-        "cost": {
-          "activation": "free",
-          "powerPoints": 3,
-          "trigger": "<p>At the start of battle, or when switched in.</p>"
-        },
-        "range": {
-          "target": "creature",
-          "distance": 15,
-          "unit": "m"
-        },
-        "description": "<p>Trigger: At the start of battle, or when switched in.</p><p>Effect: If the targeted creature's DEF stat is higher than its SPDEF, the user raises their SPATK Stage by +1 for 5 Activations. If the targeted creature's DEF stat is lower than its SPDEF Stat, the user raises their ATK Stage by +1 for 5 Activations.</p>",
-        "img": "icons/svg/explosion.svg"
+        }
       }
     ],
     "description": "<p>Effect: Connection - Techno Blast. The user may activate Download, ignoring the Ability's normal triggering Affliction. Passive: the user gains the Ability Download.</p>",
@@ -94,5 +52,98 @@
     }
   },
   "_id": "kHHBW7Auyfs6t4yE",
-  "effects": []
+  "effects": [
+    {
+      "name": "Destructive Design",
+      "type": "passive",
+      "_id": "qG2cImyJbkWVCohT",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "grant-item",
+            "key": "",
+            "value": "Compendium.ptr2e.core-moves.Item.gWjoYU30cvj8Vu4L",
+            "predicate": [],
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "system.actions.0.free",
+                "value": "true"
+              }
+            ],
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "reevaluateOnUpdate": false,
+            "inMemoryOnly": false,
+            "allowDuplicate": true,
+            "track": false,
+            "replaceSelf": false,
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            }
+          },
+          {
+            "type": "grant-item",
+            "key": "",
+            "value": "Compendium.ptr2e.core-abilities.Item.QFVLE2P6t5x6QRMN",
+            "predicate": [],
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "system.free",
+                "value": "true"
+              }
+            ],
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "reevaluateOnUpdate": false,
+            "inMemoryOnly": false,
+            "allowDuplicate": true,
+            "track": false,
+            "replaceSelf": false,
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            }
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.5.1.5",
+        "createdTime": 1737396339571,
+        "modifiedTime": 1737396402790,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+      }
+    }
+  ]
 }

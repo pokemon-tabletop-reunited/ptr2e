@@ -37,63 +37,6 @@
           "target": "enemy",
           "unit": "m"
         }
-      },
-      {
-        "slug": "future-sight",
-        "name": "Future Sight",
-        "type": "attack",
-        "traits": [
-          "pp-updated"
-        ],
-        "range": {
-          "target": "creature",
-          "distance": 15,
-          "unit": "m"
-        },
-        "cost": {
-          "activation": "complex",
-          "powerPoints": 5
-        },
-        "category": "special",
-        "power": 120,
-        "accuracy": 100,
-        "types": [
-          "psychic"
-        ],
-        "description": "<p>Effect: When this attack is used, it deals its damage to the target at the start of the user's first Activation in the following Round.</p>",
-        "free": true,
-        "img": "icons/svg/explosion.svg"
-      },
-      {
-        "slug": "future-sight",
-        "name": "Future Sight",
-        "type": "attack",
-        "traits": [
-          "pp-updated"
-        ],
-        "range": {
-          "target": "creature",
-          "distance": 15,
-          "unit": "m"
-        },
-        "cost": {
-          "activation": "complex",
-          "powerPoints": 5,
-          "delay": null,
-          "priority": null,
-          "trigger": null
-        },
-        "category": "special",
-        "power": 120,
-        "accuracy": 100,
-        "types": [
-          "psychic"
-        ],
-        "description": "<p>Effect: When this attack is used, it deals its damage to the target at the start of the user's first Activation in the following Round.</p>",
-        "contestType": "",
-        "contestEffect": "",
-        "free": true,
-        "slot": null
       }
     ],
     "description": "<p>Trigger: An enemy creature enters combat.</p><p>Effect: Connection - Future Sight. The user freely uses Future Sight on the triggering creature. Passive: The user has +1 default EVA Stage.</p>",
@@ -109,7 +52,7 @@
   "_id": "iwAF8yC0xgaUwmjK",
   "effects": [
     {
-      "name": "Foretold Passive",
+      "name": "Foretold",
       "type": "passive",
       "_id": "rZ0KChgC4SprpxNZ",
       "img": "systems/ptr2e/img/icons/effect_icon.webp",
@@ -117,12 +60,37 @@
         "changes": [
           {
             "type": "basic",
-            "key": "system.battleStats.evasion.Stage",
+            "key": "system.battleStats.evasion.stage",
             "value": 1,
             "predicate": [],
             "mode": 2,
             "priority": null,
             "ignored": false
+          },
+          {
+            "type": "grant-item",
+            "key": "Compendium.ptr2e.core-moves.Item.mFTIJjM1A7Ty1vBb",
+            "value": "Compendium.ptr2e.core-moves.Item.mFTIJjM1A7Ty1vBb",
+            "predicate": [],
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "system.actions.0.free",
+                "value": "true"
+              }
+            ],
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "reevaluateOnUpdate": false,
+            "inMemoryOnly": false,
+            "allowDuplicate": true,
+            "track": false,
+            "replaceSelf": false,
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            }
           }
         ],
         "slug": null,
@@ -153,10 +121,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "ptr2e",
-        "systemVersion": "0.10.0-alpha.2.0.3",
+        "systemVersion": "0.10.0-alpha.5.1.5",
         "createdTime": 1722259246709,
-        "modifiedTime": 1722259264297,
-        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
+        "modifiedTime": 1737398514469,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
       }
     }
   ]
