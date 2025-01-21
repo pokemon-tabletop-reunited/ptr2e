@@ -4,11 +4,11 @@
   "_id": "N2yNROP0PHQ4Nstj",
   "img": "systems/ptr2e/img/svg/bug_icon.svg",
   "system": {
-    "slug": null,
+    "slug": "parasite-swarm",
     "actions": [
       {
         "name": "Parasite Swarm",
-        "slug": "parasite-Swarm",
+        "slug": "parasite-swarm",
         "type": "attack",
         "img": "icons/svg/explosion.svg",
         "traits": [
@@ -26,38 +26,76 @@
           "activation": "complex",
           "powerPoints": 2
         },
-        "variant": null,
         "types": [
           "bug"
         ],
         "category": "physical",
         "power": 20,
         "accuracy": 90,
-        "contestType": "",
-        "contestEffect": "",
-        "free": false,
-        "slot": null,
-        "description": "<p>Effect: On hit, the target has a 10% chance of gaining @Affliction[leech] 5.</p>"
+        "description": "<p>Effect: On hit, the target has a 10% chance of gaining @Affliction[leech] 5.</p>",
+        "predicate": []
       }
     ],
-    "container": null,
-    "grade": "D"
+    "grade": "D",
+    "traits": [],
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
   },
-  "effects": [],
-  "sort": 12200000,
-  "ownership": {
-    "default": 0,
-    "CYLdyr5mPSDmNpTp": 3
-  },
-  "flags": {},
-  "_stats": {
-    "compendiumSource": null,
-    "duplicateSource": null,
-    "coreVersion": "12.327",
-    "systemId": "ptr2e",
-    "systemVersion": "0.10.0-alpha.1.0.4",
-    "createdTime": 1718729938664,
-    "modifiedTime": 1719974846401,
-    "lastModifiedBy": "CYLdyr5mPSDmNpTp"
-  }
+  "effects": [
+    {
+      "name": "Parasite Swarm",
+      "type": "passive",
+      "_id": "M1VmZrFU401KnXG1",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "parasite-swarm-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.leechconditiitem",
+            "predicate": [],
+            "chance": 10,
+            "affects": "target",
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.5.1.5",
+        "createdTime": 1737313667254,
+        "modifiedTime": 1737313703911,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+      }
+    }
+  ]
 }
