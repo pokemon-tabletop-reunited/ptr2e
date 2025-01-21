@@ -37,39 +37,19 @@
           "activation": "free"
         },
         "description": "<p>Passive: The first time the user would gain @Affliction[fainted] in combat, it does not and recovers 8 Ticks of HP and is cured of all Status Afflictions.</p>",
-        "img": "icons/svg/explosion.svg"
-      },
-      {
-        "slug": "geomancy",
-        "name": "Geomancy",
-        "type": "attack",
-        "traits": [
-          "legendary",
-          "aura",
-          "set-up"
-        ],
+        "img": "icons/svg/explosion.svg",
         "range": {
-          "target": "self",
+          "target": "enemy",
           "unit": "m"
-        },
-        "cost": {
-          "activation": "complex",
-          "powerPoints": 7
-        },
-        "category": "status",
-        "types": [
-          "fairy"
-        ],
-        "description": "<p>Effect: Set-up: The user begins to glow with mystical power, gaining @Affliction[braced] 1 and healing 3 Ticks of HP.</p><p>Resolution: The user gains +2 SPATK, SPDEF, and SPD Stages for 7 activations.</p>",
-        "free": true,
-        "img": "icons/svg/explosion.svg"
+        }
       }
     ],
     "description": "<p>Trigger: The user resolves Geomancy.</p><p>Effect: Connection - Geomancy. All allies gain the Resolution Effect of the triggering attack. Passive: The first time the user would gain @Affliction[fainted] in combat, it does not and recovers 8 Ticks of HP and is cured of all Status Afflictions.</p>",
     "traits": [
       "legendary",
       "aura",
-      "connection"
+      "connection",
+      "partial-automation"
     ],
     "slug": "lifestream",
     "_migration": {
@@ -78,5 +58,73 @@
     }
   },
   "_id": "rGtND9ArYDiFiJe1",
-  "effects": []
+  "effects": [
+    {
+      "name": "Lifestream",
+      "type": "passive",
+      "_id": "HwIyjAZcGq8akByp",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "grant-item",
+            "key": "",
+            "value": "Compendium.ptr2e.core-moves.Item.IDVUyCYBr3I1UAa9",
+            "predicate": [],
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "system.actions.0.free",
+                "value": "true"
+              }
+            ],
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "reevaluateOnUpdate": false,
+            "inMemoryOnly": false,
+            "allowDuplicate": true,
+            "track": false,
+            "replaceSelf": false,
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            }
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.5.1.5",
+        "createdTime": 1737404065515,
+        "modifiedTime": 1737404097033,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+      }
+    }
+  ]
 }

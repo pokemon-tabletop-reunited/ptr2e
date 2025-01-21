@@ -39,35 +39,12 @@
         },
         "description": "<p>Passive: The user is immune to negative effects from Snowy Weather.</p>",
         "img": "icons/svg/explosion.svg"
-      },
-      {
-        "slug": "aurora-veil",
-        "name": "Aurora Veil",
-        "type": "attack",
-        "traits": [
-          "environ",
-          "shield"
-        ],
-        "range": {
-          "target": "field",
-          "unit": "m"
-        },
-        "cost": {
-          "activation": "simple",
-          "powerPoints": 5
-        },
-        "category": "status",
-        "types": [
-          "ice"
-        ],
-        "description": "<p>Effect: For 3 Rounds, the user and its allies take half damage from damaging attacks. Aurora Veil may only be used in Snow Weather.</p>",
-        "free": true,
-        "img": "icons/svg/explosion.svg"
       }
     ],
     "description": "<p>Trigger: The user enters battle, or emerges from stealth.</p><p>Effect: Connection - Aurora Veil. The user freely uses Aurora Veil. </p><p>Passive: The user is immune to negative effects from Snowy Weather.</p>",
     "traits": [
-      "environ"
+      "environ",
+      "partial-automation"
     ],
     "slug": "north-wind",
     "_migration": {
@@ -76,5 +53,73 @@
     }
   },
   "_id": "rK8EVFd4WXdJNz1w",
-  "effects": []
+  "effects": [
+    {
+      "name": "North Wind",
+      "type": "passive",
+      "_id": "I86nLxhVzZIHap9z",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "grant-item",
+            "key": "",
+            "value": "Compendium.ptr2e.core-moves.Item.XNNeBcOamkYG9YRY",
+            "predicate": [],
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "system.actions.0.free",
+                "value": "true"
+              }
+            ],
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "reevaluateOnUpdate": false,
+            "inMemoryOnly": false,
+            "allowDuplicate": true,
+            "track": false,
+            "replaceSelf": false,
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            }
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.5.1.5",
+        "createdTime": 1737405383574,
+        "modifiedTime": 1737405426394,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+      }
+    }
+  ]
 }
