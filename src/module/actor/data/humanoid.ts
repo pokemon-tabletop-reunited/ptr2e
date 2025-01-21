@@ -82,7 +82,7 @@ class HumanoidActorSystem extends ActorSystemPTR2e {
         },
         {
           "slug": "natural-world",
-          "value": 5
+          "value": 10
         },
         {
           "slug": "navigate",
@@ -94,7 +94,7 @@ class HumanoidActorSystem extends ActorSystemPTR2e {
         },
         {
           "slug": "psychology",
-          "value": 5
+          "value": 10
         },
         {
           "slug": "read-lips",
