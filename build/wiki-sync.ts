@@ -124,7 +124,7 @@ function foundryItemJsonToWikiPages() {
       if (!item) continue;
 
       const page = `---\n${Object.entries(item.metadata)
-        .filter(([key]) => key !== "slug" && key !== "parent")
+        .filter(([key, value]) => key && value && key !== "slug" && key !== "parent")
         .map(([key, value]) => `${key}: ${value}`)
         .join("\n")}\n---\n\n# ${item.metadata.title}\n${item.markdown}`;
 
