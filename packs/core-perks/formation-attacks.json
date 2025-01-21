@@ -19,64 +19,21 @@
         "slug": "formation-attacks",
         "description": "<p>When within Reach of a creature, you gain +1 ACC on Attacks against that creature for every other Pack Member that is also within Reach of that creature.</p>",
         "cost": {
-          "activation": "free",
-          "powerPoints": 0,
-          "delay": null,
-          "priority": null
+          "activation": "free"
         },
         "type": "passive",
         "traits": [],
         "img": "icons/svg/explosion.svg",
         "range": {
           "target": "enemy",
-          "unit": "m",
-          "distance": 0
-        },
-        "variant": null,
-        "hidden": false
-      },
-      {
-        "slug": "beat-up",
-        "name": "Beat Up",
-        "type": "attack",
-        "traits": [
-          "dash",
-          "x-strike",
-          "pp-updated"
-        ],
-        "range": {
-          "target": "creature",
-          "distance": 1,
           "unit": "m"
-        },
-        "cost": {
-          "activation": "complex",
-          "powerPoints": 2,
-          "delay": null,
-          "priority": null
-        },
-        "category": "physical",
-        "power": 15,
-        "accuracy": 100,
-        "types": [
-          "dark"
-        ],
-        "description": "<p>This attacks's [X-Stike] value is equal to 1 plus the number of allied creatures that have the target within their Reach, to a maximum of 15 hits.</p>",
-        "free": true,
-        "img": "systems/ptr2e/img/perk-icons/Tactician.svg",
-        "variant": null,
-        "contestType": "",
-        "contestEffect": "",
-        "slot": null,
-        "summon": null,
-        "defaultVariant": null,
-        "flingItemId": null,
-        "offensiveStat": null,
-        "defensiveStat": null
+        }
       }
     ],
     "slug": "formation-attacks",
-    "traits": [],
+    "traits": [
+      "partial-automation"
+    ],
     "_migration": {
       "version": null,
       "previous": null
@@ -103,14 +60,79 @@
       }
     ],
     "autoUnlock": [],
-    "originSlug": null,
-    "variant": null,
-    "mode": null,
     "global": true,
     "webs": []
   },
   "_id": "zW2fOBtO1e0LEv2K",
   "img": "systems/ptr2e/img/perk-icons/Tactician.svg",
-  "effects": [],
+  "effects": [
+    {
+      "name": "Formation Attacks",
+      "type": "passive",
+      "_id": "KUJ5npMcKFqDTNcA",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "grant-item",
+            "key": "",
+            "value": "Compendium.ptr2e.core-moves.Item.V9TPmNdhcCvnw98x",
+            "predicate": [],
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "system.actions.0.free",
+                "value": "true"
+              }
+            ],
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "reevaluateOnUpdate": false,
+            "inMemoryOnly": false,
+            "allowDuplicate": true,
+            "track": false,
+            "replaceSelf": false,
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            }
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.5.1.5",
+        "createdTime": 1737391341790,
+        "modifiedTime": 1737391374354,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+      }
+    }
+  ],
   "folder": "UZGN1glVNXLieg48"
 }

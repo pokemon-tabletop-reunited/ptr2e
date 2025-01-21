@@ -23,31 +23,6 @@
         },
         "description": "<p>Trigger: The user is hit by a creature's [Contact] attack.</p><p>Effect: The user freely uses Magic Powder on the triggering creature.</p>",
         "img": "icons/svg/explosion.svg"
-      },
-      {
-        "slug": "magic-powder",
-        "name": "Magic Powder",
-        "type": "attack",
-        "traits": [
-          "powder"
-        ],
-        "range": {
-          "target": "cone",
-          "distance": 3,
-          "unit": "m"
-        },
-        "cost": {
-          "activation": "simple",
-          "powerPoints": 5
-        },
-        "category": "status",
-        "accuracy": 100,
-        "types": [
-          "psychic"
-        ],
-        "description": "<p>Effect: On hit, all valid targets have one of their Type(s) changed to Psychic for 5 activations. If they already have the Psychic Type, they lose one of their other Type(s), if applicable.</p>",
-        "free": true,
-        "img": "icons/svg/explosion.svg"
       }
     ],
     "description": "<p>Trigger: The user is hit by a creature's [Contact] attack.</p><p>Effect: Connection - Magic Powder. The user freely uses Magic Powder on the triggering creature.</p>",
@@ -61,5 +36,73 @@
     }
   },
   "_id": "rf1hhJ4YmPAxyC8I",
-  "effects": []
+  "effects": [
+    {
+      "name": "Magical Dust",
+      "type": "passive",
+      "_id": "giGTeTAcTmlBprNj",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "grant-item",
+            "key": "",
+            "value": "Compendium.ptr2e.core-moves.Item.0nowTFFieneYl1lU",
+            "predicate": [],
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "system.actions.0.free",
+                "value": "true"
+              }
+            ],
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "reevaluateOnUpdate": false,
+            "inMemoryOnly": false,
+            "allowDuplicate": true,
+            "track": false,
+            "replaceSelf": false,
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            }
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.5.1.5",
+        "createdTime": 1737404593374,
+        "modifiedTime": 1737404616858,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+      }
+    }
+  ]
 }

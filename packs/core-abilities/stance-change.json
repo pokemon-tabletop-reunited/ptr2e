@@ -52,32 +52,11 @@
           "activation": "free"
         },
         "description": "<p>Passive: The user starts combat in Shield Forme.</p>",
-        "img": "icons/svg/explosion.svg"
-      },
-      {
-        "slug": "kings-shield",
-        "name": "King's Shield",
-        "type": "attack",
-        "traits": [
-          "shield",
-          "interrupt-4"
-        ],
+        "img": "icons/svg/explosion.svg",
         "range": {
-          "target": "self",
+          "target": "enemy",
           "unit": "m"
-        },
-        "cost": {
-          "activation": "complex",
-          "powerPoints": 7,
-          "trigger": "<p>The user is targeted by an Attack.</p>"
-        },
-        "category": "status",
-        "types": [
-          "steel"
-        ],
-        "description": "<p>Trigger: The user is targeted by an Attack.</p><p>Effect: The triggering attack fails to hit the user, and additional attacks also fail to hit until the user's next activation, or when the round ends, whichever is first. Attacks failing to hit this way do not activate their secondary effects. If the triggering Attack has [Contact], the attacker loses -2 ATK Stages for 5 Activations.</p>",
-        "free": true,
-        "img": "icons/svg/explosion.svg"
+        }
       },
       {
         "slug": "kings-shield-supreme",
@@ -103,7 +82,8 @@
         "description": "<p>Trigger: The user is targeted by an Attack.</p><p>Effect: The triggering attack fails to hit the user, and additional attacks also fail to hit until the user's next activation, or when the round ends, whichever is first. Attacks failing to hit this way do not activate their secondary effects. If the triggering Attack has [Contact], the attacker loses -2 ATK Stages for 5 Activations. The user gains +1 DEF and SPDEF Stage for 5 Activations.</p>",
         "free": true,
         "variant": "kings-shield",
-        "img": "icons/svg/explosion.svg"
+        "img": "icons/svg/explosion.svg",
+        "predicate": []
       }
     ],
     "description": "<p>Effect: Connection - King's Shield. The user changes to Blade Forme when declaring a Physical- or Special-Category attack and changes to Shield Forme when declaring a Status-Category attack.  When using King's Shield, the user can spend an additional 4 AP to gains +1 DEF and SPDEF Stage for 5 Activations.</p><p>Passive: The user starts combat in Shield Forme.</p>",
@@ -119,5 +99,73 @@
     }
   },
   "_id": "cWgvYlEywzGnsOqG",
-  "effects": []
+  "effects": [
+    {
+      "name": "Stance Change",
+      "type": "passive",
+      "_id": "psMH6cgkpxjuWKhh",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "grant-item",
+            "key": "",
+            "value": "Compendium.ptr2e.core-moves.Item.KgS6ulU2aIjf0vbo",
+            "predicate": [],
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "system.actions.0.free",
+                "value": "true"
+              }
+            ],
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "reevaluateOnUpdate": false,
+            "inMemoryOnly": false,
+            "allowDuplicate": true,
+            "track": false,
+            "replaceSelf": false,
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            }
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.5.1.5",
+        "createdTime": 1737421123127,
+        "modifiedTime": 1737421155826,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+      }
+    }
+  ]
 }

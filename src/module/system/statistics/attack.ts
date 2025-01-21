@@ -196,8 +196,8 @@ class AttackCheck<TParent extends AttackStatistic = AttackStatistic> implements 
       game.user.targets.clear();
       const target = await new TagTokenPrompt({ prompt: "PTR2E.UI.TokenTagPrompt.TargetTokenFling", requirements: null }).resolveTarget();
       if (!target?.actor) return null;
-      if (!target.actor.isAllyOf(this.actor)) {
-        ui.notifications.warn(game.i18n.localize("PTR2E.AttackWarning.FlingTargetNotAlly"));
+      if (!target.actor.isAllyOf(this.actor) && !target.actor.rollOptions.getFromDomain("effect")["passive:grapple"]) {
+        ui.notifications.warn(game.i18n.localize("PTR2E.AttackWarning.FlingTargetNotAllyOrGrappled"));
         return null;
       }
       const index = targets.findIndex(t => t.actor === target.actor);

@@ -2793,22 +2793,22 @@
   {
     "slug": "major-affliction",
     "label": "Major Affliction",
-    "related": [],
-    "description": "Denotes is an effect is a Major Status Affliction. Major Status Afflictions are proposed to not have Stacks, and persist into Exploration and Downtime if left untreated.\nSUBJECT TO CHANGE",
+    "related": ["minor-affliction", "pseudo-affliction"],
+    "description": "Major Afflictions persist during a fight; even if the creature is Recalled.",
     "type": "automated"
   },
   {
     "slug": "minor-affliction",
     "label": "Minor Affliction",
-    "related": [],
-    "description": "Denotes is an effect is a Minor Status Affliction. Minor Status Afflictions are more temporary or tactical in nature, rather than strict \"afflictions\" like the Major Afflictions tend to be.\nSUBJECT TO CHANGE",
+    "related": ["major-affliction", "pseudo-affliction"],
+    "description": "Minor Afflictions get automatically removed when a creature is Recalled.",
     "type": "automated"
   },
   {
     "slug": "pseudo-affliction",
     "label": "Pseudo Affliction",
-    "related": [],
-    "description": "Denotes is an effect is a Pseudo Status Affliction. Pseudo Status Afflictions are more positive in nature, or break other conventions associated with Major and Minor Status Afflictions.\nSUBJECT TO CHANGE",
+    "related": ["major-affliction", "minor-affliction"],
+    "description": "Pseudo Afflictions are effects that are similar in nature to Major/Minor afflictions, but count as neither; and often have unique interactions with other effects.",
     "type": "automated"
   },
   {

@@ -15,34 +15,18 @@
           "activation": "free"
         },
         "description": "<p>Effect: While the user is affected with @Affliction[true-sight], their Normal- and Fighting-Type attacks gain [Danger Close] and deal Super Effective damage to Ghost-Type creatures.</p>",
-        "img": "icons/svg/explosion.svg"
-      },
-      {
-        "slug": "foresight",
-        "name": "Foresight",
-        "type": "attack",
-        "traits": [],
+        "img": "icons/svg/explosion.svg",
         "range": {
-          "target": "self",
+          "target": "enemy",
           "unit": "m"
-        },
-        "cost": {
-          "activation": "complex",
-          "powerPoints": 1
-        },
-        "category": "status",
-        "types": [
-          "normal"
-        ],
-        "description": "<p>Effect: The user gains @Affliction[true-sight] 3 and can hit Ghost-Type creatures with Normal-Type and Fighting Type attacks while they have @Affliction[true-sight].</p>",
-        "free": true,
-        "img": "icons/svg/explosion.svg"
+        }
       }
     ],
     "description": "<p>Effect: Connection - Foresight. While the user is affected with @Affliction[true-sight], their Normal- and Fighting-Type attacks gain [Danger Close] and deal Super Effective damage to Ghost-Type creatures.</p>",
     "traits": [
       "aura",
-      "connection"
+      "connection",
+      "partial-automation"
     ],
     "slug": "minds-eye",
     "_migration": {
@@ -51,5 +35,73 @@
     }
   },
   "_id": "pQdq1Q6pVQqxKCJX",
-  "effects": []
+  "effects": [
+    {
+      "name": "Mind's Eye",
+      "type": "passive",
+      "_id": "kkqjimAvS3lnN4ER",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "grant-item",
+            "key": "",
+            "value": "Compendium.ptr2e.core-moves.Item.B5u8TLbX10kgSB9d",
+            "predicate": [],
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "system.actions.0.free",
+                "value": "true"
+              }
+            ],
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "reevaluateOnUpdate": false,
+            "inMemoryOnly": false,
+            "allowDuplicate": true,
+            "track": false,
+            "replaceSelf": false,
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            }
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.5.1.5",
+        "createdTime": 1737404815783,
+        "modifiedTime": 1737404843789,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+      }
+    }
+  ]
 }

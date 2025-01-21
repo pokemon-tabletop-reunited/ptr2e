@@ -21,41 +21,14 @@
         },
         "description": "Effect: While Rainy or Windy Weather is active, the user's Water-Type and [Wind] attacks gain [Crit 1] (or have their [Crit X] increased by +1) and the user attacks with them as if they have +2 ACC Stages.</p>",
         "img": "icons/svg/explosion.svg"
-      },
-      {
-        "slug": "aeroblast",
-        "name": "Aeroblast",
-        "type": "attack",
-        "traits": [
-          "legendary",
-          "crit-3",
-          "wind",
-          "pp-updated"
-        ],
-        "range": {
-          "target": "wide-line",
-          "distance": 15,
-          "unit": "m"
-        },
-        "cost": {
-          "activation": "complex",
-          "powerPoints": 6
-        },
-        "category": "special",
-        "power": 100,
-        "accuracy": 95,
-        "types": [
-          "flying"
-        ],
-        "free": true,
-        "img": "icons/svg/explosion.svg"
       }
     ],
     "description": "Effect: Connection - Aeroblast. While Rainy or Windy Weather is active, the user's Water-Type and [Wind] attacks gain [Crit 1] (or have their [Crit X] increased by +1) and the user attacks with them as if they have +2 ACC Stages.</p>",
     "traits": [
       "legendary",
       "connection",
-      "environ"
+      "environ",
+      "partial-automation"
     ],
     "slug": "oceans-wrath",
     "_migration": {
@@ -64,5 +37,73 @@
     }
   },
   "_id": "wVN3NvZnjyL0rhRT",
-  "effects": []
+  "effects": [
+    {
+      "name": "Ocean's Wrath",
+      "type": "passive",
+      "_id": "KZVLjyR0adTfopgQ",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "grant-item",
+            "key": "",
+            "value": "Compendium.ptr2e.core-moves.Item.UAWw1tjhxISdiuBw",
+            "predicate": [],
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "system.actions.0.free",
+                "value": "true"
+              }
+            ],
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "reevaluateOnUpdate": false,
+            "inMemoryOnly": false,
+            "allowDuplicate": true,
+            "track": false,
+            "replaceSelf": false,
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            }
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.5.1.5",
+        "createdTime": 1737405566757,
+        "modifiedTime": 1737405585294,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+      }
+    }
+  ]
 }

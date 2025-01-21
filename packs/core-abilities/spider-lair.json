@@ -21,31 +21,6 @@
         },
         "description": "<p>Trigger: The user enters combat.</p><p>Effect: The user freely uses Sticky Web. Spider Web Hazards created by the user do not affect the user or their allies.</p>",
         "img": "icons/svg/explosion.svg"
-      },
-      {
-        "slug": "sticky-web",
-        "name": "Sticky Web",
-        "type": "attack",
-        "traits": [
-          "hazard",
-          "blast-4"
-        ],
-        "range": {
-          "target": "blast",
-          "distance": 10,
-          "unit": "m"
-        },
-        "cost": {
-          "activation": "simple",
-          "powerPoints": 5
-        },
-        "category": "status",
-        "types": [
-          "bug"
-        ],
-        "description": "<p>Effect: A weave of webs covers all surfaces in the [Blast X] area, with squares that have two or more surfaces covered treating the whole space as having the Hazard, not just the surfaces. Each time an enemy creature moves through a space and touches the Hazard, they lose -1 SPD Stage for 5 activations. An enemy creature that starts their Activation touching the Hazard is @Affliction[slowed] 1.</p>",
-        "free": true,
-        "img": "icons/svg/explosion.svg"
       }
     ],
     "description": "<p>Trigger: The user enters combat.</p><p>Effect: Connection - Sticky Web. The user freely uses Sticky Web. Spider Web Hazards created by the user do not affect the user or their allies.</p>",
@@ -60,5 +35,73 @@
     }
   },
   "_id": "iY9TDgK15i3JzWpq",
-  "effects": []
+  "effects": [
+    {
+      "name": "Spider Lair",
+      "type": "passive",
+      "_id": "TrdLexOXvavrAlU8",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "grant-item",
+            "key": "",
+            "value": "Compendium.ptr2e.core-moves.Item.diUUeh3zVUhQBuoh",
+            "predicate": [],
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "system.actions.0.free",
+                "value": "true"
+              }
+            ],
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "reevaluateOnUpdate": false,
+            "inMemoryOnly": false,
+            "allowDuplicate": true,
+            "track": false,
+            "replaceSelf": false,
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            }
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.5.1.5",
+        "createdTime": 1737420878406,
+        "modifiedTime": 1737420898480,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+      }
+    }
+  ]
 }

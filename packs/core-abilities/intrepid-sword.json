@@ -35,104 +35,17 @@
           "activation": "free"
         },
         "description": "<p>Passive: When first entering Combat in Crowned Forme, the Iron Head on the user's Active List is replaced with Behemoth Blade for the remainder of the combat. The user's default ATK Stage is +1.</p>",
-        "img": "icons/svg/explosion.svg"
-      },
-      {
-        "slug": "iron-head",
-        "name": "Iron Head",
-        "type": "attack",
-        "traits": [
-          "dash",
-          "push-2",
-          "flinch-chance-2",
-          "contact",
-          "pp-updated"
-        ],
+        "img": "icons/svg/explosion.svg",
         "range": {
-          "target": "creature",
-          "distance": 1,
+          "target": "enemy",
           "unit": "m"
-        },
-        "cost": {
-          "activation": "complex",
-          "powerPoints": 4
-        },
-        "category": "physical",
-        "power": 80,
-        "accuracy": 100,
-        "types": [
-          "steel"
-        ],
-        "description": "<p>Effect: On hit, the target has a 30% chance of being Flinched.</p>",
-        "free": true,
-        "img": "icons/svg/explosion.svg"
-      },
-      {
-        "slug": "behemoth-blade",
-        "name": "Behemoth Blade",
-        "type": "attack",
-        "traits": [
-          "legendary",
-          "pass-4",
-          "sharp",
-          "contact",
-          "pp-updated"
-        ],
-        "range": {
-          "target": "creature",
-          "distance": 1,
-          "unit": "m"
-        },
-        "cost": {
-          "activation": "complex",
-          "powerPoints": 6
-        },
-        "category": "physical",
-        "power": 100,
-        "accuracy": 100,
-        "types": [
-          "steel"
-        ],
-        "variant": "iron-head",
-        "free": true,
-        "img": "icons/svg/explosion.svg"
-      },
-      {
-        "slug": "behemoth-blade-giant",
-        "name": "Behemoth Blade (Giant)",
-        "type": "attack",
-        "traits": [
-          "legendary",
-          "pass-4",
-          "sharp",
-          "contact",
-          "pp-updated"
-        ],
-        "range": {
-          "target": "creature",
-          "distance": 1,
-          "unit": "m"
-        },
-        "cost": {
-          "activation": "complex",
-          "powerPoints": 6,
-          "trigger": "The target is Dynamaxed.</p>"
-        },
-        "category": "physical",
-        "power": 200,
-        "accuracy": 100,
-        "types": [
-          "steel"
-        ],
-        "description": "<p>Trigger: The target is Dynamaxed.</p>",
-        "free": true,
-        "variant": "behemoth-blade",
-        "img": "icons/svg/explosion.svg"
+        }
       }
     ],
     "description": "<p>Trigger: The user hits a creature that possess a higher CatMod than the user with Behemoth Blade.</p><p>Effect: Connection - Iron Head. The triggering creature gains @Affliction[fear] 7, and the user gains @Affliction[chanted] 7. Passive:  When first entering Combat in Crowned Forme, the Iron Head on the user's Active List is replaced with Behemoth Blade for the remainder of the combat. The user's default ATK Stage is +1.</p>",
     "traits": [
-      "legendary"
+      "legendary",
+      "partial-automation"
     ],
     "slug": "intrepid-sword",
     "_migration": {
@@ -141,5 +54,83 @@
     }
   },
   "_id": "oAcbRHt5mlUrMtux",
-  "effects": []
+  "effects": [
+    {
+      "name": "Intrepid Sword",
+      "type": "passive",
+      "_id": "CTvEpq4qEcMeSG9m",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "grant-item",
+            "key": "",
+            "value": "Compendium.ptr2e.core-moves.Item.0rhyfVFsZ1asQIwv",
+            "predicate": [],
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "system.actions.0.free",
+                "value": "true"
+              },
+              {
+                "mode": 2,
+                "property": "",
+                "value": 0
+              },
+              {
+                "mode": 2,
+                "property": "",
+                "value": 0
+              }
+            ],
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "reevaluateOnUpdate": false,
+            "inMemoryOnly": false,
+            "allowDuplicate": true,
+            "track": false,
+            "replaceSelf": false,
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            }
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": "Compendium.ptr2e.core-abilities.Item.nseOdT3vpRN0AW0K.ActiveEffect.SL5wDgqnuATW2IkH",
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.5.1.5",
+        "createdTime": 1737403811338,
+        "modifiedTime": 1737403822374,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+      }
+    }
+  ]
 }

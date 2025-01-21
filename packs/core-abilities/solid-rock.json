@@ -22,31 +22,6 @@
         },
         "description": "<p>Trigger: The user is hit by a super effective attack.</p><p>Effect: The user freely uses Endure.",
         "img": "icons/svg/explosion.svg"
-      },
-      {
-        "slug": "endure",
-        "name": "Endure",
-        "type": "attack",
-        "traits": [
-          "defensive",
-          "interrupt-4"
-        ],
-        "range": {
-          "target": "creature",
-          "unit": "m"
-        },
-        "cost": {
-          "activation": "complex",
-          "powerPoints": 7,
-          "trigger": "<p>The user is hit by a Physical- or Special-Category Attack.</p>"
-        },
-        "category": "status",
-        "types": [
-          "normal"
-        ],
-        "description": "<p>Trigger: The user is hit by a Physical- or Special-Category Attack</p><p>Effect: The user resists the attack by 1 step and cannot fall below 1 HP from the attack. The user gains @Affliction[resolved] 5.</p>",
-        "free": true,
-        "img": "icons/svg/explosion.svg"
       }
     ],
     "description": "<p>Trigger: The user is hit by a super effective attack.</p><p>Effect: Connection - Endure. The user freely uses Endure. When under the effect of Endure, all incoming damage from attacks is reduced by 20%",
@@ -61,5 +36,73 @@
     }
   },
   "_id": "KgcLrZ8cl6dviEuW",
-  "effects": []
+  "effects": [
+    {
+      "name": "Solid Rock",
+      "type": "passive",
+      "_id": "a9sCkodLzRtJdPe5",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "grant-item",
+            "key": "",
+            "value": "Compendium.ptr2e.core-moves.Item.eEQiYEm2y7wkcKnx",
+            "predicate": [],
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "system.actions.0.free",
+                "value": "true"
+              }
+            ],
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "reevaluateOnUpdate": false,
+            "inMemoryOnly": false,
+            "allowDuplicate": true,
+            "track": false,
+            "replaceSelf": false,
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            }
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.5.1.5",
+        "createdTime": 1737420634451,
+        "modifiedTime": 1737420656405,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+      }
+    }
+  ]
 }
