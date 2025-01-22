@@ -2,7 +2,7 @@
     <div class="scroll inventory">
         {{#each inventory as |items category|}}
             <header>
-                <span class="item-name">{{category}}</span>
+                <span class="item-name">{{localize (concat "PTR2E.Inventory." category)}}</span>
                 {{#if (isdefined items.0.system.quantity)}}
                 <span class="quantity">Quantity</span>
                 {{/if}}
@@ -22,33 +22,75 @@
                     </div>
                     {{#if (isdefined this.system.quantity)}}
                     <div class="quantity">
-                        <a class="decrease" data-action="decrease-quantity" title="[Click] Decrease by 1<br>[Shift-Click] Decrease by 5<br>[Control-Click] Decrease by 10" draggable="false">–</a>
+                        <a class="decrease" data-action="decrease-quantity" data-tooltip-direction="UP" data-tooltip="[Click] Decrease by 1<br>[Shift-Click] Decrease by 5<br>[Control-Click] Decrease by 10" draggable="false">–</a>
                         <span>{{this.system.quantity}}</span>
-                        <a class="increase" data-action="increase-quantity" title="[Click] Increase by 1<br>[Shift-Click] Increase by 5<br>[Control-Click] Increase by 10" draggable="false" {{#if (isdefined this.system.stack)}}{{#unless (lt this.system.quantity this.system.stack)}} disabled="disabled"{{/unless}}{{/if}}>+</a>
+                        <a class="increase" data-action="increase-quantity" data-tooltip-direction="UP" data-tooltip="[Click] Increase by 1<br>[Shift-Click] Increase by 5<br>[Control-Click] Increase by 10" draggable="false" {{#if (isdefined this.system.stack)}}{{#unless (lt this.system.quantity this.system.stack)}} disabled="disabled"{{/unless}}{{/if}}>+</a>
                     </div>
                     {{/if}}
                     <div class="item-controls">
                         {{!-- <a class="item-carry-type" data-tooltip="PTR2E.ActorSheet.Inventory.CarryType.OpenMenu" data-action="open-carry-type-menu" draggable="false"><i class="fa-solid {{this.system.carryTypeIcon}} fa-fw"></i></a> --}}
-                        {{!-- <a data-action="toggle-identified" data-tooltip="PTR2E.identification.Mystify" draggable="false"><i class="fa-regular fa-question-circle fa-fw"></i></a> --}}
                         <a data-action="edit-item" data-tooltip-direction="UP" data-tooltip="PTR2E.ActorSheet.Inventory.EditItem" draggable="false"><i class="fa-solid fa-fw fa-edit"></i></a>
                         <a data-action="delete-item" data-tooltip-direction="UP" data-tooltip="PTR2E.ActorSheet.Inventory.DeleteItem" draggable="false"><i class="fa-solid fa-fw fa-trash"></i></a>
                     </div>
+                </li>
+                {{else}}
+                <li class="item">
+                  <div class="center">
+                    <p>{{localize "PTR2E.Inventory.empty"}}</p>
+                  </div>
                 </li>
                 {{/each}}
             </ul>
         {{/each}}
     </div>
     <div class="inventory-points standard-form">
-        <fieldset>
-            <legend>Inventory Points</legend>
-            {{formGroup fields.inventoryPoints.fields.current value=source.system.inventoryPoints.current localize=true}}
-            <div class="form-group">
-                <label>{{localize 'PTR2E.FIELDS.inventoryPoints.max.label'}}</label>
-                <div class="form-fields">
-                    <input type="number" value="{{actor.system.inventoryPoints.max}}" disabled/>
-                </div>
-                <p class="hint">{{localize 'PTR2E.FIELDS.inventoryPoints.max.hint'}}</p>
+      <fieldset>
+          <legend>Inventory Points</legend>
+          {{formGroup fields.inventoryPoints.fields.current value=source.system.inventoryPoints.current localize=true}}
+          <div class="form-group">
+              <label>{{localize 'PTR2E.FIELDS.inventoryPoints.max.label'}}</label>
+              <div class="form-fields">
+                  <input type="number" value="{{actor.system.inventoryPoints.max}}" disabled/>
+              </div>
+              <p class="hint">{{localize 'PTR2E.FIELDS.inventoryPoints.max.hint'}}</p>
+          </div>
+      </fieldset>
+    </div>
+    <div class="inventory-slots standard-form">
+      <fieldset>
+          <legend>Inventory Slots</legend>
+          <div class="form-group">
+            <label>{{localize 'PTR2E.FIELDS.inventory.held.label'}}</label>
+            <div class="form-fields">
+              <input type="number" value="{{actor.system.inventory.held.used}}" disabled/>
+              /
+              <input type="number" value="{{actor.system.inventory.held.max}}" disabled/>
             </div>
-        </fieldset>
+          </div>
+          <div class="form-group">
+            <label>{{localize 'PTR2E.FIELDS.inventory.worn.label'}}</label>
+            <div class="form-fields">
+              <input type="number" value="{{actor.system.inventory.worn.used}}" disabled/>
+              /
+              <input type="number" value="{{actor.system.inventory.worn.max}}" disabled/>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>{{localize 'PTR2E.FIELDS.inventory.accessory.label'}}</label>
+            <div class="form-fields">
+              <input type="number" value="{{actor.system.inventory.accessory.used}}" disabled/>
+              /
+              <input type="number" value="{{actor.system.inventory.accessory.max}}" disabled/>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>{{localize 'PTR2E.FIELDS.inventory.belt.label'}}</label>
+            <div class="form-fields">
+              <input type="number" value="{{actor.system.inventory.belt.used}}" disabled/>
+              /
+              <input type="number" value="{{actor.system.inventory.belt.max}}" disabled/>
+            </div>
+          </div>
+      </fieldset>
     </div>
 </section>

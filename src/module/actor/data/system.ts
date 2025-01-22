@@ -268,6 +268,20 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
           heightClass: new fields.NumberField({required: true, initial: 0, min: 0, max: 7}),
           weightClass: new fields.NumberField({required: true, initial: 1, min: 1, max: 16}),
         })
+      }),
+      inventory: new fields.SchemaField({
+        held: new fields.SchemaField({
+          max: new fields.NumberField({required: true, initial: 1, min: 1, label: "PTR2E.FIELDS.inventory.held.max.label", hint: "PTR2E.FIELDS.inventory.held.max.hint"}),
+        }),
+        worn: new fields.SchemaField({
+          max: new fields.NumberField({required: true, initial: 1, min: 1, label: "PTR2E.FIELDS.inventory.worn.max.label", hint: "PTR2E.FIELDS.inventory.worn.max.hint"}),
+        }),
+        accessory: new fields.SchemaField({
+          max: new fields.NumberField({required: true, initial: 1, min: 1, label: "PTR2E.FIELDS.inventory.accessory.max.label", hint: "PTR2E.FIELDS.inventory.accessory.max.hint"}),
+        }),
+        belt: new fields.SchemaField({
+          max: new fields.NumberField({required: true, initial: 1, min: 1, label: "PTR2E.FIELDS.inventory.belt.max.label", hint: "PTR2E.FIELDS.inventory.belt.max.hint"}),
+        })
       })
     };
   }
@@ -313,6 +327,10 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
   override prepareBaseData(): void {
     super.prepareBaseData();
     this._initializeModifiers();
+
+    for(const key in this.inventory) {
+      this.inventory[key].used = 0;
+    }
 
     for(const k in this.attributes) {
       const key = k as keyof Attributes;
@@ -668,6 +686,14 @@ interface ActorSystemPTR2e extends ModelPropsFromSchema<ActorSystemSchema> {
       heightClass: number;
       weightClass: number;
     }
+  }
+
+  inventory: {
+    held: { used: number, max: number };
+    worn: { used: number, max: number };
+    accessory: { used: number, max: number };
+    belt: { used: number, max: number };
+    [key: string]: { used: number, max: number };
   }
 
   movement: Record<string, Movement>;

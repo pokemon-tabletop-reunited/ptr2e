@@ -319,6 +319,25 @@ body .application.sheet .form-group {
 .application.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] .inventory-points fieldset input {
   text-align: center;
 }
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] .inventory-slots {
+  grid-area: 3 / 4 / span 2 / span 2;
+  padding: 0 0.5rem 0.5rem 0;
+}
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] .inventory-slots fieldset {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  overflow: hidden;
+  height: unset;
+}
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] .inventory-slots fieldset .form-fields {
+  flex: 0 0 50%;
+  justify-content: space-evenly;
+}
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] .inventory-slots fieldset .form-fields input {
+  text-align: center;
+  flex: 0 0 35%;
+}
 .application.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] header {
   align-items: center;
   background: var(--appv2-background);
@@ -381,6 +400,17 @@ body .application.sheet .form-group {
 }
 .application.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] ul.items .item-name.rarity-unique {
   color: #a526ff;
+}
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] ul.items .item .center {
+  display: flex;
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] ul.items .item .center p {
+  flex: 0 0 50%;
+  color: var(--hint-text-color);
 }
 .application.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] header .item-name,
 .application.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] ul.items .item-name {

@@ -375,6 +375,29 @@ body {
                         }
                     }
 
+                    .inventory-slots {
+                      grid-area: 3 / 4 / span 2 / span 2;
+                      padding: 0 0.5rem 0.5rem 0;
+
+                      fieldset {
+                        display: flex;
+                        flex-direction: column;
+                        flex-wrap: nowrap;
+                        overflow: hidden;
+                        height: unset;
+
+                        .form-fields {
+                          flex: 0 0 50%;
+                          justify-content: space-evenly;
+
+                          input {
+                            text-align: center;
+                            flex: 0 0 35%;
+                          }
+                        }
+                      }
+                    }
+
                     header {
                         &:first-child {
                             margin-top: 0;
@@ -449,6 +472,18 @@ body {
                             &.rarity-unique {
                                 color: #a526ff;
                             }
+                        }
+
+                        .item .center {
+                          display: flex;
+                          flex: 1;
+                          justify-content: center;
+                          align-items: center;
+                          text-align: center;
+                          p {
+                            flex: 0 0 50%;
+                            color: var(--hint-text-color);
+                          }
                         }
                     }
                     header, ul.items {

@@ -492,9 +492,9 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
         for (const item of this.actor.items) {
           const physicalItems = [
             "weapon",
-            "gear",
-            "consumable",
             "equipment",
+            "consumable",
+            "gear",
             "container",
           ];
           for(const type of physicalItems) {
