@@ -12,9 +12,10 @@ import { UserVisibility } from "@scripts/ui/user-visibility.ts";
 import { ModifierPTR2e } from "@module/effects/modifiers.ts";
 import { RollNote } from "@system/notes.ts";
 import { ActiveEffectPTR2e } from "@effects";
-import { ConsumablePTR2e, ItemPTR2e, ItemSystemsWithActions } from "@item";
+import { ConsumablePTR2e, ItemPTR2e, ItemSourcePTR2e, ItemSystemsWithActions } from "@item";
 import ConsumableSystem from "@item/data/consumable.ts";
 import { CheckRoll } from "@system/rolls/check-roll.ts";
+import { ItemAlteration } from "@module/effects/alterations/item.ts";
 
 abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
   declare parent: ChatMessagePTR2e<AttackMessageSystem>;
@@ -80,7 +81,8 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
               label: new fields.StringField({ required: true, initial: "" }),
               roll: new fields.JSONField({ required: true, nullable: true, initial: null }),
               success: new fields.BooleanField({ required: true, nullable: true, initial: null }),
-              critOnly: new fields.BooleanField({ required: true, initial: false })
+              critOnly: new fields.BooleanField({ required: true, initial: false }),
+              alterations: new fields.ArrayField(new fields.EmbeddedDataField(ItemAlteration)),
             }), { required: true, initial: [] }),
             origin: new fields.ArrayField(new fields.SchemaField({
               chance: new fields.NumberField({ required: true, min: 1, max: 100 }),
@@ -88,7 +90,8 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
               label: new fields.StringField({ required: true, initial: "" }),
               roll: new fields.JSONField({ required: true, nullable: true, initial: null }),
               success: new fields.BooleanField({ required: true, nullable: true, initial: null }),
-              critOnly: new fields.BooleanField({ required: true, initial: false })
+              critOnly: new fields.BooleanField({ required: true, initial: false }),
+              alterations: new fields.ArrayField(new fields.EmbeddedDataField(ItemAlteration)),
             }), { required: true, initial: [] }),
             defensive: new fields.ArrayField(new fields.SchemaField({
               chance: new fields.NumberField({ required: true, min: 1, max: 100 }),
@@ -96,7 +99,8 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
               label: new fields.StringField({ required: true, initial: "" }),
               roll: new fields.JSONField({ required: true, nullable: true, initial: null }),
               success: new fields.BooleanField({ required: true, nullable: true, initial: null }),
-              critOnly: new fields.BooleanField({ required: true, initial: false })
+              critOnly: new fields.BooleanField({ required: true, initial: false }),
+              alterations: new fields.ArrayField(new fields.EmbeddedDataField(ItemAlteration)),
             }), { required: true, initial: [] }),
           }, { required: true, nullable: true, initial: null }),
         }),
@@ -128,6 +132,7 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
           roll: new fields.JSONField({ required: true, nullable: true, initial: null }),
           success: new fields.BooleanField({ required: true, nullable: true, initial: null }),
           critOnly: new fields.BooleanField({ required: true, initial: false }),
+          alterations: new fields.ArrayField(new fields.EmbeddedDataField(ItemAlteration)),
         }), { required: true, initial: [] }),
       }, { required: true, nullable: true, initial: null })
     };
@@ -218,6 +223,7 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
             roll: fromRollData(e.roll),
             success: e.success,
             critOnly: e.critOnly,
+            alterations: e.alterations?.map(a => new ItemAlteration(a)) ?? [],
           })),
           origin: source.effectRolls.origin.map((e) => ({
             chance: e.chance,
@@ -226,6 +232,7 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
             roll: fromRollData(e.roll),
             success: e.success,
             critOnly: e.critOnly,
+            alterations: e.alterations?.map(a => new ItemAlteration(a)) ?? [],
           })),
           defensive: source.effectRolls.defensive.map((e) => ({
             chance: e.chance,
@@ -234,6 +241,7 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
             roll: fromRollData(e.roll),
             success: e.success,
             critOnly: e.critOnly,
+            alterations: e.alterations?.map(a => new ItemAlteration(a)) ?? [],
           })),
         }
       }
@@ -248,6 +256,7 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
         roll: fromRollData(e.roll),
         success: e.success,
         critOnly: e.critOnly,
+        alterations: e.alterations?.map(a => new ItemAlteration(a)) ?? [],
       }))
     }
 
@@ -559,7 +568,18 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
             continue;
           }
 
-          toApply.push(...item.toObject().effects as ActiveEffectPTR2e['_source'][]);
+          const grantedSource = item.toObject();
+          
+          try {
+            for (const alteration of effectRoll.alterations ?? []) {
+              alteration.applyTo(grantedSource as ItemSourcePTR2e);
+            }
+
+            toApply.push(...grantedSource.effects as ActiveEffectPTR2e['_source'][]);
+          } catch (error) {
+            if (error instanceof Error) console.warn(error);
+          }
+
         }
         return toApply;
       })();
@@ -950,6 +970,7 @@ interface EffectRollsSchema extends foundry.data.fields.DataSchema {
   roll: foundry.data.fields.JSONField<Rolled<Roll>, true, true, true>;
   success: foundry.data.fields.BooleanField<boolean, boolean, true, true, true>;
   critOnly: foundry.data.fields.BooleanField<boolean, boolean, true, false, true>;
+  alterations: foundry.data.fields.ArrayField<foundry.data.fields.EmbeddedDataField<ItemAlteration>>;
 }
 
 export default AttackMessageSystem;

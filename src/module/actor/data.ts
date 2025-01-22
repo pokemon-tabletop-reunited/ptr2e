@@ -1,5 +1,6 @@
 import { AttackPTR2e, DistanceUnit, Trait, WeightUnit } from "@data";
 import { EffectSourcePTR2e } from "@effects";
+import { ItemAlteration } from "@module/effects/alterations/item.ts";
 import AfflictionActiveEffectSystem from "@module/effects/data/affliction.ts";
 import { DeferredPromise, DeferredValue, DeferredValueParams, ModifierAdjustment, ModifierPTR2e } from "@module/effects/modifiers.ts";
 import { RollNote } from "@system/notes.ts";
@@ -18,6 +19,7 @@ export interface EffectRoll {
   roll?: Rolled<Roll>;
   success?: boolean;
   critOnly?: boolean;
+  alterations?: ItemAlteration[];
   [key: string]: unknown;
 }
 

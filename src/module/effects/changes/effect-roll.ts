@@ -2,6 +2,7 @@ import { ActorPTR2e, DeferredEffectRoll, DeferredValueParams, EffectRoll } from 
 import { ChangeModel, ChangeSchema } from "@data";
 import { ItemPTR2e } from "@item";
 import { UUIDUtils } from "src/util/uuid.ts";
+import { ItemAlteration } from "../alterations/item.ts";
 
 export default class EffectRollChangeSystem extends ChangeModel {
   static override TYPE = "roll-effect";
@@ -18,6 +19,7 @@ export default class EffectRollChangeSystem extends ChangeModel {
         choices: ["self", "target", "origin", "defensive"].reduce<Record<string, string>>((acc, affects) => ({ ...acc, [affects]: affects }), {}),
         initial: "target",
       }),
+      alterations: new fields.ArrayField(new fields.EmbeddedDataField(ItemAlteration)),
     }
   }
 
@@ -92,6 +94,7 @@ export default class EffectRollChangeSystem extends ChangeModel {
         chance: this.chance,
         label: this.label,
         critOnly: isCrit,
+        alterations: this.alterations,
       };
     }
   }
@@ -114,4 +117,5 @@ export default interface EffectRollChangeSystem extends ChangeModel, ModelPropsF
 interface EffectRollSchema extends ChangeSchema {
   chance: foundry.data.fields.NumberField<number, number, true, false, true>;
   affects: foundry.data.fields.StringField<"self" | "target" | "origin", "self" | "target" | "origin", true, false, true>;
+  alterations: foundry.data.fields.ArrayField<foundry.data.fields.EmbeddedDataField<ItemAlteration>>;
 };
