@@ -133,12 +133,14 @@ class CombatPTR2e extends Combat<CombatSystemPTR2e> {
         updateData.combatants as EmbeddedDocumentUpdateData[]
       );
       delete updateData.combatants;
+      const oldCombatant = this.combatant;
       const result = await this.update(updateData);
       if (result) {
         if (updateData.round) await ChatMessage.create({
           type: "combat",
           flavor: game.i18n.format("PTR2E.Combat.Messages.Round", { round: updateData.round }),
         });
+        await oldCombatant?.onEndActivation();
         await this.combatant?.onStartActivation();
       }
       return result as this;

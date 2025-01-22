@@ -403,7 +403,7 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
                     defensive: result.effectRolls.defensive,
                   }
                 } : { some: false, applied: false },
-                hasCaptureRoll: !!(this.attack.slug.startsWith("fling") && this.attack.flingItemId),
+                hasCaptureRoll: !!(this.attack.slug?.startsWith("fling") && this.attack.flingItemId),
               };
               if (result.damage) {
                 const damage = result.damage.calculateDamageTotal({

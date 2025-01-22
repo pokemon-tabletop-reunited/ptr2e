@@ -29,25 +29,22 @@ export default abstract class MoveSystem extends HasEmbed(
         initial: "E",
         choices: [
           "E",
-          "E+",
-          "D-",
           "D",
-          "D+",
-          "C-",
           "C",
-          "C+",
-          "B-",
           "B",
-          "B+",
-          "A-",
           "A",
-          "A+",
-          "S-",
           "S",
-          "S+",
         ].reduce((acc, grade) => ({ ...acc, [grade]: grade }), {}),
       }),
     };
+  }
+
+  static override migrateData(source: Record<string, unknown>) {
+    const length = (source?.grade as string)?.length;
+    if(length && length > 1) {
+      source.grade = (source.grade as string).charAt(0);
+    }
+    return super.migrateData(source);
   }
 
   override get description(): string {
