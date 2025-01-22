@@ -4,16 +4,20 @@
   "folder": "e9XnhZdjIE7hroYs",
   "system": {
     "_migration": {
-      "version": 0.109,
-      "previous": null
+      "version": 0.11,
+      "previous": {
+        "schema": 0.109,
+        "foundry": "12.331",
+        "system": "0.10.0-alpha.5.1.5"
+      }
     },
     "actions": [
       {
-        "name": "Dizzy Daft (Active)",
-        "slug": "dizzy-daft-action-1",
+        "name": "Dizzy Daft",
+        "slug": "dizzy-daft",
         "description": "<p>You inflict @Affliction[confused] 5 on yourself.</p>",
         "traits": [],
-        "type": "generic",
+        "type": "attack",
         "img": "modules/ptr2e-pkmn-sprites/sprites/327.webp",
         "range": {
           "target": "self",
@@ -22,23 +26,13 @@
         "cost": {
           "activation": "simple",
           "powerPoints": 2
-        }
-      },
-      {
-        "name": "Dizzy Daft (Passive)",
-        "slug": "dizzy-daft-action-2",
-        "description": "<p>You are immune to the negative effects of the Confused condition, and never Fumble as a result of it.</p>",
-        "traits": [],
-        "type": "passive",
-        "img": "modules/ptr2e-pkmn-sprites/sprites/327.webp",
-        "range": {
-          "target": "self",
-          "unit": "m"
         },
-        "cost": {
-          "activation": "free"
-        },
-        "hidden": true
+        "types": [
+          "untyped"
+        ],
+        "category": "status",
+        "free": true,
+        "predicate": []
       }
     ],
     "description": "<p>You can confuse yourself, and avoid the ill-effects.</p>",
@@ -69,11 +63,69 @@
     "webs": [
       "Compendium.ptr2e.core-species.Item.DN39HBQfR7lFM73H"
     ],
-    "global": false,
     "slug": "dizzy-daft",
     "autoUnlock": []
   },
   "img": "systems/ptr2e/img/perk-icons/Breeder.svg",
-  "effects": [],
+  "effects": [
+    {
+      "name": "Dizzy Daft",
+      "type": "passive",
+      "_id": "03AB6rXnGwbeK2kJ",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "dizzy-daft-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.confusedconditem",
+            "predicate": [],
+            "chance": 100,
+            "affects": "self",
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "roll-option",
+            "value": "damage:affliction:confused",
+            "domain": "immunities"
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "<p>You can confuse yourself, and avoid the ill-effects.</p>",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.5.1.6",
+        "createdTime": 1737565815439,
+        "modifiedTime": 1737565838382,
+        "lastModifiedBy": "IcBpMqhFuTck9VpX"
+      }
+    }
+  ],
   "_id": "y3aSWoyIMrXrn0l1"
 }

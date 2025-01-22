@@ -119,7 +119,11 @@ class Blueprint extends foundry.abstract.DataModel {
         }, validationError: "The nature must be a valid nature, a UUID to a Rolltable or null.",
         label: "PTR2E.Blueprint.FIELDS.nature.label",
         hint: "PTR2E.Blueprint.FIELDS.nature.hint"
-
+      }),
+      gender: new fields.StringField({
+        required: true, initial: null, nullable: true, trim: true, blank: false, choices: ["random", "male", "female", "genderless"].reduce((acc, val) => ({...acc, [val]: val}), {}),
+        label: "PTR2E.Blueprint.FIELDS.gender.label",
+        hint: "PTR2E.Blueprint.FIELDS.gender.hint"
       }),
       evs: new fields.SchemaField({
         uuid: new fields.DocumentUUIDField({ required: false, nullable: false, embedded: false, type: "RollTable", initial: undefined }),
@@ -236,6 +240,7 @@ interface BlueprintSchema extends foundry.data.fields.DataSchema {
   sort: foundry.data.fields.NumberField<number, number, true, false, true>;
   preventEvolution: foundry.data.fields.BooleanField<boolean, boolean, true, false, true>;
   shiny: foundry.data.fields.NumberField<number, number, true, false, true>;
+  gender: foundry.data.fields.StringField<"random" | "male" | "female" | "genderless", "random" | "male" | "female" | "genderless", true, false, true>;
 }
 
 interface EVSSchema extends foundry.data.fields.DataSchema {

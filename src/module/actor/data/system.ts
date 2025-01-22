@@ -268,6 +268,20 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
           heightClass: new fields.NumberField({required: true, initial: 0, min: 0, max: 7}),
           weightClass: new fields.NumberField({required: true, initial: 1, min: 1, max: 16}),
         })
+      }),
+      inventory: new fields.SchemaField({
+        held: new fields.SchemaField({
+          max: new fields.NumberField({required: true, initial: 0, min: 0, label: "PTR2E.FIELDS.inventory.held.max.label", hint: "PTR2E.FIELDS.inventory.held.max.hint"}),
+        }),
+        worn: new fields.SchemaField({
+          max: new fields.NumberField({required: true, initial: 0, min: 0, label: "PTR2E.FIELDS.inventory.worn.max.label", hint: "PTR2E.FIELDS.inventory.worn.max.hint"}),
+        }),
+        accessory: new fields.SchemaField({
+          max: new fields.NumberField({required: true, initial: 0, min: 0, label: "PTR2E.FIELDS.inventory.accessory.max.label", hint: "PTR2E.FIELDS.inventory.accessory.max.hint"}),
+        }),
+        belt: new fields.SchemaField({
+          max: new fields.NumberField({required: true, initial: 0, min: 0, label: "PTR2E.FIELDS.inventory.belt.max.label", hint: "PTR2E.FIELDS.inventory.belt.max.hint"}),
+        })
       })
     };
   }
@@ -313,6 +327,14 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
   override prepareBaseData(): void {
     super.prepareBaseData();
     this._initializeModifiers();
+
+    for(const key in this.inventory) {
+      this.inventory[key].used = 0;
+      this.inventory[key].max = 0;
+    }
+    this.inventory.worn.max++;
+    this.inventory.accessory.max++;
+    this.inventory.belt.max++;
 
     for(const k in this.attributes) {
       const key = k as keyof Attributes;
@@ -594,6 +616,13 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
 
     this.details.size.heightClass = Math.clamp(SpeciesSystemModel.getSpeciesSize(this.details.size.height || this.parent.species?.size.height || 0, this.parent.species?.size.type as "height" | "quad" | "length" || "height").sizeClass + (this.modifiers.heightClass ?? 0), 0, 8)
     this.details.size.weightClass = Math.clamp(this.calculateWeightClass(this.details.size.weight || this.parent.species?.size.weight || 0) + (this.modifiers.weightClass ?? 0), 1, 16)
+
+    if(this.traits.has("ace")) {
+      this.inventory.belt.max += 2;
+    }
+    if(this.traits.has("wielder")) {
+      this.inventory.held.max++;
+    }
   }
 
   _calculateStatTotal(stat: Attribute | Omit<Attribute, "stage">): number {
@@ -668,6 +697,14 @@ interface ActorSystemPTR2e extends ModelPropsFromSchema<ActorSystemSchema> {
       heightClass: number;
       weightClass: number;
     }
+  }
+
+  inventory: {
+    held: { used: number, max: number };
+    worn: { used: number, max: number };
+    accessory: { used: number, max: number };
+    belt: { used: number, max: number };
+    [key: string]: { used: number, max: number };
   }
 
   movement: Record<string, Movement>;

@@ -1,5 +1,5 @@
 import { ActorPTR2e } from "@actor";
-import { ItemPTR2e, ItemSourcePTR2e, ItemSystemPTR } from "@item";
+import { GearPTR2e, ItemPTR2e, ItemSourcePTR2e, ItemSystemPTR } from "@item";
 import { ActiveEffectSystem, EffectSourcePTR2e } from "@effects";
 import { ChangeModel, Trait } from "@data";
 import { ActiveEffectSchema } from "types/foundry/common/documents/active-effect.js";
@@ -103,8 +103,15 @@ class ActiveEffectPTR2e<
   }
 
   override apply(actor: ActorPTR2e, change: ChangeModel, options?: string[]): unknown {
-    if (this.parent instanceof ItemPTR2e && this.parent && this.parent.system instanceof AbilitySystemModel) {
-      if (this.parent.system.suppress) return;
+    if (this.parent instanceof ItemPTR2e && this.parent) {
+      if(this.parent.system instanceof AbilitySystemModel && this.parent.system.isSuppressed) return;
+      if([
+        "weapon",
+        "equipment",
+        "consumable",
+        "gear",
+        "container",
+      ].includes(this.parent.type) && (this.parent as GearPTR2e).system.equipped.carryType !== "equipped") return;
     }
     return this.system.apply(actor, change, options);
   }

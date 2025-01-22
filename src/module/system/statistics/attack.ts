@@ -1,4 +1,4 @@
-import { AttackPTR2e, SummonAttackPTR2e } from "@data";
+import { AttackPTR2e, SummonAttackPTR2e, Trait } from "@data";
 import { AttackStatisticRollParameters, BaseStatisticCheck, RollOptionConfig, Statistic } from "./statistic.ts";
 import { StatisticData } from "./data.ts";
 import * as R from "remeda";
@@ -256,9 +256,16 @@ class AttackCheck<TParent extends AttackStatistic = AttackStatistic> implements 
       return null;
     }
 
+    const traitEffects = this.attack.traits.contents.flatMap(trait => {
+      if (!trait.changes?.length) return [];
+      const effect = Trait.effectsFromChanges.bind(trait)(this.actor)
+      if (effect) return effect.toObject();
+      return [];
+    }) ?? []
+
     const selfEffectRolls = await extractEffectRolls({
       affects: "self",
-      origin: this.actor,
+      origin: this.actor.clone({effects: [fu.deepClone(this.actor._source.effects), traitEffects].flat()}, {keepId: true}),
       target: this.actor,
       item: this.item,
       attack: this.attack,
