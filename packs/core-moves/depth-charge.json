@@ -4,11 +4,6 @@
   "img": "systems/ptr2e/img/svg/water_icon.svg",
   "system": {
     "slug": "depth-charge",
-    "description": "<p>Effect: This attack's Range is tripled if targeting submerged spaces. This attack ignores the valid Swimming targets' EVA Stage increases and has its Power doubled against them.</p>",
-    "traits": [
-      "blast-2",
-      "explode"
-    ],
     "actions": [
       {
         "slug": "depth-charge",
@@ -26,10 +21,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 6,
-          "delay": null,
-          "priority": null,
-          "trigger": null
+          "powerPoints": 6
         },
         "category": "special",
         "power": 70,
@@ -60,8 +52,6 @@
         "cost": {
           "activation": "complex",
           "powerPoints": 6,
-          "delay": null,
-          "priority": null,
           "trigger": "Target location is submerged, and valid targets are Swimming."
         },
         "category": "special",

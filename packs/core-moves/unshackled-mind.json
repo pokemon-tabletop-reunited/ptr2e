@@ -5,13 +5,14 @@
   "img": "systems/ptr2e/img/svg/psychic_icon.svg",
   "system": {
     "slug": "unshackled-mind",
-    "traits": [],
     "actions": [
       {
         "name": "Unshackled Mind",
         "slug": "unshackled-mind",
         "type": "attack",
-        "traits": [],
+        "traits": [
+          "pp-updated"
+        ],
         "range": {
           "target": "self",
           "distance": 0,
@@ -20,8 +21,6 @@
         "cost": {
           "activation": "complex",
           "powerPoints": 7,
-          "delay": null,
-          "priority": null,
           "trigger": "<p>The user's current HP is greater than 50% of their Max HP.</p>"
         },
         "category": "status",
@@ -37,7 +36,6 @@
         "slot": null
       }
     ],
-    "description": "<p>Trigger: The user's current HP is greater than 50% of their Max HP.</p><p>Effect: The user reduces their HP by 50% of their Max HP. Then, they gain +12 SPATK Stages for 5 Activations.</p>",
     "container": null,
     "grade": "A"
   },

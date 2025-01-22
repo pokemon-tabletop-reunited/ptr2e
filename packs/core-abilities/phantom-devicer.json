@@ -37,52 +37,11 @@
           "activation": "free"
         },
         "description": "<p>Passive: While in their base Forme, the user also has the Ability Static. While in another Forme due to possessing an appliance, they instead have the Ability Ectobiologist.</p>",
-        "img": "icons/svg/explosion.svg"
-      },
-      {
-        "slug": "thunder-shock",
-        "name": "Thunder Shock",
-        "type": "attack",
-        "traits": [
-          "pp-updated"
-        ],
+        "img": "icons/svg/explosion.svg",
         "range": {
-          "target": "creature",
-          "distance": 10,
+          "target": "enemy",
           "unit": "m"
-        },
-        "cost": {
-          "activation": "complex",
-          "powerPoints": 1
-        },
-        "category": "special",
-        "power": 40,
-        "accuracy": 100,
-        "types": [
-          "electric"
-        ],
-        "description": "<p>Effect: On hit, the target has a 10% chance of gaining @Affliction[paralysis] 5.</p>",
-        "free": true,
-        "img": "icons/svg/explosion.svg"
-      },
-      {
-        "traits": [
-          "defensive"
-        ],
-        "name": "Static",
-        "slug": "static",
-        "type": "passive",
-        "cost": {
-          "activation": "free",
-          "trigger": "<p>The user is hit by a [Contact] attack.</p>"
-        },
-        "range": {
-          "target": "creature",
-          "distance": 1,
-          "unit": "m"
-        },
-        "description": "<p>Trigger: The user is hit by a [Contact] attack.</p><p>Effect: The triggering creature has a 30% chance of gaining @Affliction[paralysis] 5.</p>",
-        "img": "icons/svg/explosion.svg"
+        }
       }
     ],
     "description": "<p>Trigger: The user is adjacent to an unoccupied appliance.</p><p>Effect: Connection: Thunder Shock. The user possesses the triggering object, changing Forme as appropriate.  They can spend 2 PP as a Complex Action to exit an appliance, changing into their base Forme. This can be separately done as an Exploration Action without consuming PP. When in a separate Forme, the user's Connected Thunder Shock is swapped for an appropriate Attack based on the Forme:</p><p>- Heat: Overheat</p><p>- Wash: Hydro Pump</p><p>- Frost: Blizzard</p><p>- Fan: Hurricane</p><p>- Mow: Leaf Storm</p><p>Passive: While in their base Forme, the user also has the Ability Static. While in another Forme due to possessing an appliance, they instead have the Ability Ectobiologist.</p>",
@@ -98,5 +57,98 @@
     }
   },
   "_id": "F0sV19dmngv5CVe9",
-  "effects": []
+  "effects": [
+    {
+      "name": "Phantom Devicer",
+      "type": "passive",
+      "_id": "BVIESZVMHgk0NEkT",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "grant-item",
+            "key": "",
+            "value": "Compendium.ptr2e.core-moves.Item.g0tf8DHabi55oj5C",
+            "predicate": [],
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "system.actions.0.free",
+                "value": "true"
+              }
+            ],
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "reevaluateOnUpdate": false,
+            "inMemoryOnly": false,
+            "allowDuplicate": true,
+            "track": false,
+            "replaceSelf": false,
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            }
+          },
+          {
+            "type": "grant-item",
+            "key": "",
+            "value": "Compendium.ptr2e.core-abilities.Item.WNpGnjZkiWLOta0C",
+            "predicate": [],
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "system.free",
+                "value": "true"
+              }
+            ],
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "reevaluateOnUpdate": false,
+            "inMemoryOnly": false,
+            "allowDuplicate": true,
+            "track": false,
+            "replaceSelf": false,
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            }
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.5.1.5",
+        "createdTime": 1737417652483,
+        "modifiedTime": 1737417721437,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+      }
+    }
+  ]
 }

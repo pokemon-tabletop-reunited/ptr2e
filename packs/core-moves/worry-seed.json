@@ -4,14 +4,14 @@
   "img": "systems/ptr2e/img/svg/grass_icon.svg",
   "system": {
     "slug": "worry-seed",
-    "description": "<p>Effect: On hit, the target has their Starting Ability set to Insomnia for 5 Activations.</p>",
-    "traits": [],
     "actions": [
       {
         "slug": "worry-seed",
         "name": "Worry Seed",
         "type": "attack",
-        "traits": [],
+        "traits": [
+          "pp-updated"
+        ],
         "range": {
           "target": "creature",
           "distance": 10,
@@ -19,10 +19,7 @@
         },
         "cost": {
           "activation": "simple",
-          "powerPoints": 7,
-          "delay": null,
-          "priority": null,
-          "trigger": null
+          "powerPoints": 3
         },
         "category": "status",
         "power": null,
@@ -38,7 +35,7 @@
       }
     ],
     "container": null,
-    "grade": "A"
+    "grade": "C"
   },
   "_id": "qmEhCoFXhJCORuB1",
   "effects": []

@@ -4,17 +4,14 @@
   "img": "systems/ptr2e/img/svg/normal_icon.svg",
   "system": {
     "slug": "screech",
-    "description": "<p>Effect: All valid targets lose -2 DEF Stages for 5 activations.</p>",
-    "traits": [
-      "sonic"
-    ],
     "actions": [
       {
         "slug": "screech",
         "name": "Screech",
         "type": "attack",
         "traits": [
-          "sonic"
+          "sonic",
+          "pp-updated"
         ],
         "range": {
           "target": "cone",
@@ -23,7 +20,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 1
+          "powerPoints": 5
         },
         "category": "status",
         "accuracy": 85,
@@ -34,7 +31,7 @@
         "img": "icons/svg/explosion.svg"
       }
     ],
-    "grade": "E",
+    "grade": "B",
     "_migration": {
       "version": null,
       "previous": null

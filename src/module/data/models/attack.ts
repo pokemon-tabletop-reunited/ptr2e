@@ -10,6 +10,7 @@ import { AttackRollResult } from "@system/rolls/check-roll.ts";
 import { ItemPTR2e, SummonPTR2e } from "@item";
 import { CombatantPTR2e } from "@combat";
 import { ActorSizePTR2e } from "@actor/data/size.ts";
+import { PredicateField } from "@system/predication/schema-data-fields.ts";
 
 export default class AttackPTR2e extends ActionPTR2e {
   declare type: "attack" | "summon";
@@ -119,6 +120,10 @@ export default class AttackPTR2e extends ActionPTR2e {
         initial: null,
         label: "PTR2E.FIELDS.defensiveStat.label",
         hint: "PTR2E.FIELDS.defensiveStat.hint",
+      }),
+      predicate: new PredicateField({
+        label: "PTR2E.FIELDS.attackPredicate.label",
+        hint: "PTR2E.FIELDS.attackPredicate.hint",
       })
     };
   }
@@ -153,13 +158,17 @@ export default class AttackPTR2e extends ActionPTR2e {
     };
   }
 
-  get hasVariants(): boolean {
-    return this.variants.length > 0;
+  hasVariants(options: Iterable<string> | true = true): boolean {
+    return this.getVariants(options).length > 0;
   }
 
-  get variants(): string[] {
-    if(this.variant) return this.actor?.actions.attack.get(this.variant)?.variants ?? [];
-    return this.actor?.actions.attack.filter(a => a.variant == this.slug).map(a => a.slug) ?? [];
+  getVariants(options: Iterable<string> | true = this.getFullRollOptions()): string[] {
+    if(this.variant) return this.actor?.actions.attack.get(this.variant)?.getVariants(options) ?? [];
+    return this.actor?.actions.attack.filter(a => a.variant == this.slug).filter(a => {
+      if(options === true) return true;
+      if(a.predicate.length === 0) return true;
+      return a.predicate.test(options);
+    }).map(a => a.slug) ?? [];
   }
 
   // TODO: This should add any relevant modifiers
@@ -247,7 +256,7 @@ export default class AttackPTR2e extends ActionPTR2e {
     const isInteger = Number.isInteger(distance);
     const reachLimit = isInteger ? reach : Math.sqrt(2 * Math.pow(reach, 2));
 
-    if (this.range.distance <= 1) return distance >= reachLimit ? Infinity : 0;
+    if (this.range.distance <= 1) return distance > reachLimit ? Infinity : 0;
     const increment = this.range.distance * rangeMultiplier;
 
     const rangeIncrement = Math.max(Math.ceil(distance / increment), 1) - 1;
@@ -328,6 +337,13 @@ export default class AttackPTR2e extends ActionPTR2e {
     return currentActions;
   }
 
+  getFullRollOptions(prefix = ""): Set<string> {
+    return new Set([
+      ...this.getRollOptions(prefix),
+      ...(this.actor?.getRollOptions() ?? []),
+    ]);
+  }
+
   override getRollOptions(prefix = ""): Set<string> {
     return new Set([
       `attack:${this.slug}`,
@@ -374,4 +390,5 @@ interface AttackSchema extends foundry.data.fields.DataSchema {
   flingItemId: foundry.data.fields.StringField<string, string, true, true, true>;
   offensiveStat: foundry.data.fields.StringField<PTRCONSTS.Stat, PTRCONSTS.Stat, true, true, true>;
   defensiveStat: foundry.data.fields.StringField<PTRCONSTS.Stat, PTRCONSTS.Stat, true, true, true>;
+  predicate: PredicateField;
 }

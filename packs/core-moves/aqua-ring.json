@@ -4,45 +4,34 @@
   "img": "systems/ptr2e/img/svg/water_icon.svg",
   "system": {
     "slug": "aqua-ring",
-    "description": "<p>Effect: The user gains @Affliction[ringed] 5.</p>",
-    "traits": [
-      "healing"
-    ],
     "actions": [
       {
         "slug": "aqua-ring",
         "name": "Aqua Ring",
         "type": "attack",
         "traits": [
-          "healing"
+          "healing",
+          "pp-updated"
         ],
         "range": {
           "target": "self",
-          "distance": 0,
           "unit": "m"
         },
         "cost": {
           "activation": "simple",
-          "powerPoints": 5,
-          "delay": null,
-          "priority": null,
-          "trigger": null
+          "powerPoints": 1
         },
         "category": "status",
-        "power": null,
-        "accuracy": null,
         "types": [
           "water"
         ],
         "description": "<p>Effect: The user gains @Affliction[ringed] 5.</p>",
-        "contestType": "",
-        "contestEffect": "",
-        "free": false,
-        "slot": null
+        "img": "icons/svg/explosion.svg",
+        "predicate": []
       }
     ],
     "container": null,
-    "grade": "C"
+    "grade": "E"
   },
   "_id": "VXZU46PpYNkTBZeR",
   "effects": []

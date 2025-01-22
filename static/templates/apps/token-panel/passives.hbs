@@ -1,5 +1,6 @@
 <section class="tab sheet-body {{tabs.passives.cssClass}} action-tab" data-tab="passives" data-group="sheet" {{#if actor}}data-parent="{{actor.uuid}}"{{/if}}>
-    {{#each actions.passive as |action|}}
+    {{#each actions.passives as |action|}}
+      {{#unless action.hidden}}
         <div class="action-item generic action" data-tooltip-direction="LEFT" data-action="{{action.slug}}" data-tooltip="{{action.name}}">
             <div class="icon">
                 <img src="{{action.img}}" alt="{{action.name}}">
@@ -8,6 +9,7 @@
                 {{action.name}}
             </div>
         </div>
+      {{/unless}}
     {{else}}
         <div class="action-item">
             <div class="name small">

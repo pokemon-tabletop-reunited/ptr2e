@@ -4,11 +4,6 @@
   "img": "systems/ptr2e/img/svg/dark_icon.svg",
   "system": {
     "slug": "dark-void",
-    "description": "<p>Effect: On hit, all valid targets gain @Affliction[drowsy] 7.</p>",
-    "traits": [
-      "legendary",
-      "blast-4"
-    ],
     "actions": [
       {
         "slug": "dark-void",
@@ -16,7 +11,8 @@
         "type": "attack",
         "traits": [
           "legendary",
-          "blast-4"
+          "blast-4",
+          "pp-updated"
         ],
         "range": {
           "target": "blast",
@@ -25,10 +21,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 7,
-          "delay": null,
-          "priority": null,
-          "trigger": null
+          "powerPoints": 6
         },
         "category": "status",
         "power": null,

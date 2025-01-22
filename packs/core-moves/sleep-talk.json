@@ -4,14 +4,14 @@
   "img": "systems/ptr2e/img/svg/normal_icon.svg",
   "system": {
     "slug": "sleep-talk",
-    "description": "<p>Trigger: The user has @Affliction[drowsy] or @Affliction[nightmares].</p><p> The user randomly selects and uses an Attack on its Active List or Extra Moves List (that it would normally be able to use) as a Free Action. If the Attack is Physical- or Special-Category, the triggered Attack gains +100% Power.</p>",
-    "traits": [],
     "actions": [
       {
         "slug": "sleep-talk",
         "name": "Sleep Talk",
         "type": "attack",
-        "traits": [],
+        "traits": [
+          "pp-updated"
+        ],
         "range": {
           "target": "creature",
           "distance": 0,
@@ -19,9 +19,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 1,
-          "delay": null,
-          "priority": null,
+          "powerPoints": 2,
           "trigger": "<p>The user has @Affliction[drowsy] or @Affliction[nightmares].</p>"
         },
         "category": "status",
@@ -38,7 +36,7 @@
       }
     ],
     "container": null,
-    "grade": "E"
+    "grade": "D"
   },
   "_id": "lmpvIU1s0odo4fmQ",
   "effects": []

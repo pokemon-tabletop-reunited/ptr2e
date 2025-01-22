@@ -21,7 +21,15 @@
         </section>
         <fieldset>
             <legend>{{localize fields.description.label}}</legend>
-            <div class="effect-description">{{{document.system.description}}}</div>
+            <div class="effect-description">
+              {{#if document.system.enrichedDescription}}
+                {{{document.system.enrichedDescription}}}
+              {{else if enrichedDescription}}
+                {{{enrichedDescription}}}
+              {{else}}
+                {{{document.system.description}}}
+              {{/if}}
+            </div>
         </fieldset>
     </main>
 </content>

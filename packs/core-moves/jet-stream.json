@@ -4,14 +4,14 @@
   "img": "systems/ptr2e/img/svg/dragon_icon.svg",
   "system": {
     "slug": "jet-stream",
-    "description": "<p>Effect: At the start of the next round, the user and all allies may use their first attack at [Priority 4].</p>",
-    "traits": [],
     "actions": [
       {
         "slug": "jet-stream",
         "name": "Jet Stream",
         "type": "attack",
-        "traits": [],
+        "traits": [
+          "pp-updated"
+        ],
         "range": {
           "target": "emanation",
           "distance": 5,
@@ -19,10 +19,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 6,
-          "delay": null,
-          "priority": null,
-          "trigger": null
+          "powerPoints": 7
         },
         "category": "status",
         "power": null,
@@ -30,7 +27,7 @@
         "types": [
           "dragon"
         ],
-        "description": "<p>Effect: At the start of the next round, the user and all allies may use their first attack at [Priority 4].</p>",
+        "description": "<p>Effect: At the start of the next round, the user and all allies in Range may use their first attack at [Priority 4].</p>",
         "contestType": "",
         "contestEffect": "",
         "free": false,
@@ -38,7 +35,7 @@
       }
     ],
     "container": null,
-    "grade": "B"
+    "grade": "A"
   },
   "_id": "kyH1DpPhK08IMJ3l",
   "effects": []

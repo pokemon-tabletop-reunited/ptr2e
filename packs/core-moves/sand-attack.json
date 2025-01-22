@@ -4,16 +4,14 @@
   "img": "systems/ptr2e/img/svg/ground_icon.svg",
   "system": {
     "slug": "sand-attack",
-    "description": "<p>Effect: On hit, all valid targets lose -1 ACC Stage for 5 activations. If Dusty Weather is active, the target loses -2 ACC Stages for 5 activations instead.</p>",
-    "traits": [
-      "environ"
-    ],
     "actions": [
       {
         "slug": "sand-attack",
         "name": "Sand Attack",
         "type": "attack",
-        "traits": [],
+        "traits": [
+          "pp-updated"
+        ],
         "range": {
           "target": "cone",
           "distance": 3,
@@ -21,7 +19,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 2
+          "powerPoints": 3
         },
         "category": "status",
         "accuracy": 100,
@@ -36,7 +34,8 @@
         "name": "Sand Attack (Dusty)",
         "type": "attack",
         "traits": [
-          "environ"
+          "environ",
+          "pp-updated"
         ],
         "range": {
           "target": "cone",
@@ -59,7 +58,7 @@
         "img": "icons/svg/explosion.svg"
       }
     ],
-    "grade": "B",
+    "grade": "C",
     "_migration": {
       "version": null,
       "previous": null

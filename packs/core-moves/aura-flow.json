@@ -5,11 +5,6 @@
   "img": "systems/ptr2e/img/svg/fighting_icon.svg",
   "system": {
     "slug": null,
-    "traits": [
-      "healing",
-      "set-up",
-      "aura"
-    ],
     "actions": [
       {
         "name": "Aura Flow",
@@ -19,7 +14,8 @@
         "traits": [
           "healing",
           "set-up",
-          "aura"
+          "aura",
+          "pp-updated"
         ],
         "range": {
           "target": "field",
@@ -28,9 +24,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 5,
-          "delay": null,
-          "priority": null
+          "powerPoints": 6
         },
         "variant": null,
         "types": [
@@ -46,9 +40,8 @@
         "description": "<p>Effect: Set-Up: The user starts to meditate, taking note of their current HP, gains @Affliction[resolved] 2, then their Activation ends.</p><p>Resolution: On their next Activation, they can select 1 creature on the field (which can be the user), to recover HP equal to 1/2 the user's HP they had at the time this Attack was initially used.</p>"
       }
     ],
-    "description": "",
     "container": null,
-    "grade": "B"
+    "grade": "A"
   },
   "effects": [],
   "sort": 600000,

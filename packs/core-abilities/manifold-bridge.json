@@ -10,12 +10,12 @@
           "defensive",
           "interrupt-7"
         ],
-        "name": "Manifold Bridge",
-        "slug": "manifold-bridge-defensive",
+        "name": "Manifold Bridge (Reaction)",
+        "slug": "manifold-bridge-reaction",
         "type": "generic",
         "cost": {
           "activation": "simple",
-          "powerPoints": 7,
+          "powerPoints": 5,
           "trigger": "<p>The user would be affected by a declared Action, Attack, or Ability.</p>"
         },
         "range": {
@@ -31,12 +31,12 @@
           "legendary",
           "interrupt-4"
         ],
-        "name": "Tensor Contraction",
-        "slug": "tensor-contraction",
+        "name": "Manifold Bridge (Action)",
+        "slug": "manifold-bridge-action",
         "type": "generic",
         "cost": {
           "activation": "simple",
-          "powerPoints": 4,
+          "powerPoints": 3,
           "trigger": "<p>The user declares the use of an Action or Ability with a target other then Self.</p>"
         },
         "range": {
@@ -45,36 +45,6 @@
           "unit": "m"
         },
         "description": "<p>Trigger: The user declares the use of an Action or Ability with a target other then Self.</p><p>Effect: The user freely moves, using Teleport Movement, to a spot within 8m of a target in Range.</p>",
-        "img": "icons/svg/explosion.svg"
-      },
-      {
-        "slug": "spacial-rend",
-        "name": "Spacial Rend",
-        "type": "attack",
-        "traits": [
-          "legendary",
-          "crit-2",
-          "sharp",
-          "blast-3",
-          "pp-updated"
-        ],
-        "range": {
-          "target": "blast",
-          "distance": 15,
-          "unit": "m"
-        },
-        "cost": {
-          "activation": "complex",
-          "powerPoints": 7
-        },
-        "category": "special",
-        "power": 100,
-        "accuracy": 95,
-        "types": [
-          "dragon"
-        ],
-        "description": "<p>Effect: On hit, non-[Legendary] targets are @Affliction[lifted] 3. The user may spend 4 PP to have this attack lose [Blast 6] and change its Range to <q>15m Wide Line<q> until their next Activation.</p>",
-        "free": true,
         "img": "icons/svg/explosion.svg"
       }
     ],
@@ -91,5 +61,78 @@
     }
   },
   "_id": "34jYiNQbDjMFeRrJ",
-  "effects": []
+  "effects": [
+    {
+      "name": "Manifold Bridge",
+      "type": "passive",
+      "_id": "VaXUcKDPtCNvJIiw",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "grant-item",
+            "key": "",
+            "value": "Compendium.ptr2e.core-moves.Item.SrGEHvXVGd311qxA",
+            "predicate": [],
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "system.actions.0.free",
+                "value": "true"
+              },
+              {
+                "mode": 5,
+                "property": "system.actions.1.free",
+                "value": "true"
+              }
+            ],
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "reevaluateOnUpdate": false,
+            "inMemoryOnly": false,
+            "allowDuplicate": true,
+            "track": false,
+            "replaceSelf": false,
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            }
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.5.1.5",
+        "createdTime": 1737404686587,
+        "modifiedTime": 1737404725859,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+      }
+    }
+  ]
 }

@@ -4,11 +4,6 @@
   "img": "systems/ptr2e/img/svg/normal_icon.svg",
   "system": {
     "slug": "leer",
-    "description": "<p>Effect: All valid targets lose -1 DEF Stages for 5 Activations and gain @Affliction[fear] 2.</p>",
-    "traits": [
-      "social",
-      "friendly"
-    ],
     "actions": [
       {
         "slug": "leer",
@@ -16,7 +11,8 @@
         "type": "attack",
         "traits": [
           "social",
-          "friendly"
+          "friendly",
+          "pp-updated"
         ],
         "range": {
           "target": "cone",
@@ -25,27 +21,149 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 3,
-          "delay": null,
-          "priority": null,
-          "trigger": null
+          "powerPoints": 4
         },
         "category": "status",
-        "power": null,
         "accuracy": 100,
         "types": [
           "normal"
         ],
         "description": "<p>Effect: All valid targets lose -1 DEF Stages for 5 Activations and gain @Affliction[fear] 2.</p>",
-        "contestType": "",
-        "contestEffect": "",
-        "free": false,
-        "slot": null
+        "slot": 1,
+        "img": "icons/svg/explosion.svg",
+        "predicate": []
       }
     ],
-    "container": null,
-    "grade": "E"
+    "grade": "C",
+    "traits": [],
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
   },
   "_id": "6xLPJIk5QClQKiGv",
-  "effects": []
+  "effects": [
+    {
+      "name": "-1 Defense Stage",
+      "type": "affliction",
+      "_id": "FTjaNUkBa1PIJpf6",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "basic",
+            "key": "system.attributes.def.stage",
+            "value": -1,
+            "predicate": [],
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0,
+        "priority": 50,
+        "formula": "",
+        "type": "damage"
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": 5,
+        "startRound": null,
+        "startTurn": 0
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.5.1.2",
+        "createdTime": 1736888238366,
+        "modifiedTime": 1736888238366,
+        "lastModifiedBy": "AvKKI5MO51DPYICj"
+      }
+    },
+    {
+      "name": "Fear 2",
+      "img": "icons/svg/silenced.svg",
+      "type": "affliction",
+      "duration": {
+        "turns": 2,
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "startRound": null,
+        "startTurn": 0
+      },
+      "system": {
+        "changes": [
+          {
+            "type": "percentile-modifier",
+            "key": "attack-power",
+            "value": -33,
+            "predicate": [],
+            "label": "Fear - targeting Source",
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "hideIfDisabled": false
+          },
+          {
+            "type": "basic",
+            "key": "system.battleStats.accuracy.stage",
+            "value": 1,
+            "predicate": [],
+            "label": "Fear - targeting Source",
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          }
+        ],
+        "formula": "",
+        "type": "damage",
+        "removeOnRecall": false,
+        "removeAfterCombat": true,
+        "traits": [
+          "minor-affliction"
+        ],
+        "slug": null,
+        "stacks": 0,
+        "priority": 50
+      },
+      "description": "The afflicted creature does 33% less damage to the source of Fear, and suffers -1 default ACC Stage on attacks against them. Fear applied from different sources have their own Stacks.",
+      "_id": "SPWkQnxY41SoZwUy",
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.5.1.2",
+        "createdTime": 1736888248384,
+        "modifiedTime": 1736888254856,
+        "lastModifiedBy": "AvKKI5MO51DPYICj"
+      },
+      "disabled": false,
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {}
+    }
+  ]
 }

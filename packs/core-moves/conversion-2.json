@@ -4,11 +4,6 @@
   "img": "systems/ptr2e/img/svg/normal_icon.svg",
   "system": {
     "slug": "conversion-2",
-    "description": "<p>Trigger: The user is targeted by a damaging attack.</p><p>Effect: The user changes to a Type that can resist the damage of the triggering attack for 7 Activations or until switched out. If the user is posseses more than one Type, it changes the Type of its choice.</p>",
-    "traits": [
-      "defensive",
-      "interrupt-2"
-    ],
     "actions": [
       {
         "slug": "conversion-2",
@@ -16,7 +11,8 @@
         "type": "attack",
         "traits": [
           "defensive",
-          "interrupt-2"
+          "interrupt-2",
+          "pp-updated"
         ],
         "range": {
           "target": "self",
@@ -25,9 +21,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 3,
-          "delay": null,
-          "priority": null,
+          "powerPoints": 4,
           "trigger": "<p>The user is targeted by a damaging attack.</p>"
         },
         "category": "status",
@@ -44,7 +38,7 @@
       }
     ],
     "container": null,
-    "grade": "E"
+    "grade": "B"
   },
   "_id": "1HYyCg3IDFWAlToO",
   "effects": []

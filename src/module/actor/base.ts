@@ -97,7 +97,7 @@ class ActorPTR2e<
       this._perks ??
       (this._perks = (this.itemTypes.perk as PerkPTR2e[]).reduce((acc, perk) => {
         acc.set(perk.system.originSlug ?? perk.slug, perk);
-        if(perk.flags?.ptr2e?.tierSlug) acc.set(perk.flags.ptr2e.tierSlug+"", perk);
+        if (perk.flags?.ptr2e?.tierSlug) acc.set(perk.flags.ptr2e.tierSlug + "", perk);
         return acc;
       }, new Map<string, PerkPTR2e>()))
     );
@@ -474,7 +474,7 @@ class ActorPTR2e<
         "actions": [getFlingAttack({
           free: true,
           variant: false
-        }),getFlingAttack({
+        }), getFlingAttack({
           name: "Actor Toss",
           slug: "actor-toss",
         })],
@@ -588,10 +588,10 @@ class ActorPTR2e<
         }
       }
     }
-    for(const trait of this.traits) {
-      if(!trait.changes?.length) continue;
+    for (const trait of this.traits) {
+      if (!trait.changes?.length) continue;
       const effect = Trait.effectsFromChanges.bind(trait)(this) as ActiveEffectPTR2e<this>;
-      if(effect) yield effect;
+      if (effect) yield effect;
     }
     yield* super.allApplicableEffects() as Generator<ActiveEffectPTR2e<this>>
   }
@@ -677,7 +677,7 @@ class ActorPTR2e<
   }
 
   /** Get roll options from this actor's effects, traits, and other properties */
-  getSelfRollOptions(prefix: "self" | "target" | "origin" = "self"): string[] {
+  getSelfRollOptions(prefix: "self" | "target" | "origin" | "defensive" = "self"): string[] {
     const { rollOptions } = this;
     return Object.keys(rollOptions.all).flatMap((o) =>
       o.startsWith("self:") && rollOptions.all[o]
@@ -737,12 +737,57 @@ class ActorPTR2e<
     function isAttribute(attribute: Attribute | Omit<Attribute, 'stage'>): attribute is Attribute {
       return attribute.slug !== "hp";
     }
-    if(!isAttribute(stat)) return stat.value;
+    if (!isAttribute(stat)) return stat.value;
     const stageModifier = () => {
       const stage = Math.clamp(stat.stage, -6, isCrit ? 0 : 6);
       return stage > 0 ? (2 + stage) / 2 : 2 / (2 + Math.abs(stage));
     };
     return stat.value * stageModifier();
+  }
+
+  async applyTickDamage({ ticks, apply, shield }: { ticks: number, apply: false, shield?: boolean }): Promise<{ applied: number, update: Record<string, unknown> }>;
+  async applyTickDamage({ ticks, apply, shield }: { ticks: number, apply: true, shield?: boolean }): Promise<{ applied: number, message: ChatMessagePTR2e }>;
+  async applyTickDamage({ ticks, apply, shield }: { ticks: number, apply?: boolean, shield?: boolean }): Promise<{ applied: number, update?: Record<string, unknown>, message?: ChatMessagePTR2e }>;
+  async applyTickDamage({ ticks, apply = true, shield = false }: { ticks: number, apply?: boolean, shield?: boolean }): Promise<{ applied: number, update?: Record<string, unknown>, message?: ChatMessagePTR2e }> {
+    const isDamage = ticks < 0;
+    const amount = Math.floor((this.system.health.max / 16) * Math.abs(ticks))
+    const applied = shield
+      ? Math.min(amount || 0, isDamage ? this.system.shield.value : Infinity)
+      : Math.min(amount || 0, isDamage ? this.system.health.value : this.system.health.max - this.system.health.value);
+
+    const update = shield
+      ? {
+        "system.shield.value": Math.max(
+          this.system.shield.value - (isDamage ? applied : -applied),
+          0
+        )
+      }
+      : {
+        "system.health.value": Math.clamp(
+          this.system.health.value + (isDamage ? -amount : amount),
+          0,
+          this.system.health.max
+        )
+      } as Record<string, unknown>;
+    if (!apply) {
+      update["_id"] = this.id;
+      return { applied, update };
+    }
+
+    await this.update(update);
+
+    return {
+      applied,
+      //@ts-expect-error - Chat messages have not been properly defined yet
+      message: await ChatMessagePTR2e.create({
+        type: "damage-applied",
+        system: {
+          damageApplied: isDamage ? applied : -applied,
+          shieldApplied: shield,
+          target: this.uuid
+        }
+      })
+    }
   }
 
   async applyDamage(
@@ -859,14 +904,34 @@ class ActorPTR2e<
     for (const type of moveTypes) {
       effectiveness *= this.system.type.effectiveness[type] ?? 1;
     }
-    if(ignoreImmune && effectiveness === 0) effectiveness = 1;
-    if(effectivenessStages !== 0) {
+    if (ignoreImmune && effectiveness === 0) effectiveness = 1;
+    if (effectivenessStages !== 0) {
       const positive = effectivenessStages > 0;
-      for(let i = 0; i < Math.abs(effectivenessStages); i++) {
+      for (let i = 0; i < Math.abs(effectivenessStages); i++) {
         effectiveness *= positive ? 2 : 0.5;
       }
     }
     return effectiveness;
+  }
+
+  async getUnderdogPerks(): Promise<PerkPTR2e[]> {
+    if (!this.traits.has("underdog")) return [];
+    if (!this.species) return [];
+
+    const underdogPerks = await game.packs.get("ptr2e.core-perks")!.getDocuments({
+      _id__in: [
+        "underdogperk0001",
+        "underdogperk0011",
+        "underdogperk0021",
+        "underdogperk0031",
+        "underdogperk0041",
+        "underdogperk0051",
+        "underdogperk0002",
+      ]
+    }) as PerkPTR2e[];
+    const webs = new Set([this.species!.evolutions?.uuid ?? this.species!.parent.flags?.core?.sourceId ?? []].flat());
+    const baseConnection = `evolution-${this.species!.evolutions?.name ?? this.species!.parent.slug}`;
+    return underdogPerks.map(perk => perk.clone({ "system.webs": webs, "system.nodes": perk.system._source.nodes.map(node => ({ ...node, connected: [baseConnection, ...node.connected] })) }));
   }
 
   isHumanoid(): this is ActorPTR2e<HumanoidActorSystem> {
@@ -935,7 +1000,7 @@ class ActorPTR2e<
           acc.groups[affliction.priority] ??= { afflictions: [] };
 
           acc.groups[affliction.priority].afflictions.push({
-            formula: result.damage?.formula,
+            formula: (acc.groups[affliction.priority].type === "both" && result.damage?.type === "healing" && result.damage.formula) ? `(${result.damage.formula}) * -1` : result.damage?.formula,
             affliction,
           });
           if (result.damage?.type) {
@@ -943,6 +1008,15 @@ class ActorPTR2e<
               acc.groups[affliction.priority].type &&
               acc.groups[affliction.priority].type !== result.damage.type
             ) {
+              if (acc.groups[affliction.priority].type === "damage") {
+                const entry = acc.groups[affliction.priority].afflictions.at(-1)!
+                entry.formula = `(${entry.formula}) * -1`;
+              }
+              else {
+                for (const entry of acc.groups[affliction.priority].afflictions) {
+                  entry.formula = `(${entry.formula}) * -1`;
+                }
+              }
               acc.groups[affliction.priority].type = "both";
             } else {
               acc.groups[affliction.priority].type = result.damage.type;
@@ -1150,7 +1224,7 @@ class ActorPTR2e<
       const target = context.target?.actor;
       if (!target) return null;
       const difference = target.size.difference(context.self.actor.size)
-      if(difference >= 2) return new ModifierPTR2e({
+      if (difference >= 2) return new ModifierPTR2e({
         label: "PTR2E.Modifiers.size",
         slug: `size-penalty-unicqi-${appliesTo ?? fu.randomID()}`,
         modifier: difference >= 4 ? 2 : 1,
@@ -1158,7 +1232,7 @@ class ActorPTR2e<
         type: "accuracy",
         appliesTo: appliesTo ? new Map([[appliesTo, true]]) : null,
       });
-      if(difference <= -2) return new ModifierPTR2e({
+      if (difference <= -2) return new ModifierPTR2e({
         label: "PTR2E.Modifiers.size",
         slug: `size-penalty-unicqi-${appliesTo ?? fu.randomID()}`,
         modifier: difference <= -4 ? -2 : -1,
@@ -1231,11 +1305,11 @@ class ActorPTR2e<
         ]
         : [null, null];
 
-    if(targetToken?.actor && selfToken?.actor) {
+    if (targetToken?.actor && selfToken?.actor) {
       const targetMarks = targetToken.actor.synthetics.tokenTags.get(selfToken.document.uuid);
       const originMarks = selfToken.actor.synthetics.tokenTags.get(targetToken.document.uuid);
-      if(targetMarks) params.options.add(`target:mark:${targetMarks}`);
-      if(originMarks) params.options.add(`origin:mark:${originMarks}`);
+      if (targetMarks) params.options.add(`target:mark:${targetMarks}`);
+      if (originMarks) params.options.add(`origin:mark:${originMarks}`);
     }
 
     const originEphemeralEffects = await extractEphemeralEffects({
@@ -1248,6 +1322,18 @@ class ActorPTR2e<
       domains: params.domains,
       options: [...params.options, ...(params.item?.getRollOptions("item") ?? [])],
     });
+
+    //TODO: Probably needs similar implementation to selfItem
+    const selfAttack = params.attack?.clone();
+    selfAttack?.prepareDerivedData();
+    const selfAction = params.action;
+
+    const actionTraitEffects = selfAttack?.traits.contents.flatMap(trait => {
+      if (!trait.changes?.length) return [];
+      const effect = Trait.effectsFromChanges.bind(trait)(this) as ActiveEffectPTR2e<this>;
+      if (effect) return effect.toObject() as unknown as EffectSourcePTR2e[];
+      return [];
+    }) ?? []
 
     const initialActionOptions =
       params.traits?.map((t) => `self:action:trait:${typeof t === "string" ? t : t.slug}`) ??
@@ -1262,7 +1348,7 @@ class ActorPTR2e<
             ...targetToken.actor.getSelfRollOptions("target"),
             ...initialActionOptions,
           ].filter(R.isTruthy),
-          originEphemeralEffects
+          [...originEphemeralEffects, ...actionTraitEffects]
         );
 
     //TODO: Implement Move Variants
@@ -1320,11 +1406,6 @@ class ActorPTR2e<
       return targetOptions.sort();
     };
 
-    //TODO: Probably needs similar implementation to selfItem
-    const selfAttack = params.attack?.clone();
-    selfAttack?.prepareDerivedData();
-    const selfAction = params.action;
-
     const itemOptions = selfItem?.getRollOptions("item") ?? [];
     const actionOptions = selfAttack?.getRollOptions() ?? [];
     const actionRollOptions = Array.from(new Set([...itemOptions, ...actionOptions, ...getTargetRollOptions(targetToken?.actor)]));
@@ -1348,10 +1429,10 @@ class ActorPTR2e<
     })();
 
     let newFlatModifiers: ModifierPTR2e[] = [];
-    if(selfAttack) {
+    if (selfAttack) {
       const actionTraitDomains = actionTraits.map((t) => `${t}-trait-${selfAttack.type}`)
       params.domains = R.unique([...params.domains, ...actionTraitDomains])
-    
+
       const originalModifiers = params.statistic?.modifiers ?? [];
       const flatModsFromTraitDomains = extractModifiers(this.synthetics, actionTraitDomains);
 
@@ -1360,7 +1441,7 @@ class ActorPTR2e<
       newFlatModifiers = flatModsFromTraitDomains.filter(
         (mod) => !originalModifiers.some((original) => original.slug === mod.slug)
       ).map(mod => {
-        if(target) mod.appliesTo = new Map([[target.uuid, true]]);
+        if (target) mod.appliesTo = new Map([[target.uuid, true]]);
         return mod;
       });
     }
@@ -1421,6 +1502,19 @@ class ActorPTR2e<
       chanceModifier: (Number(targetToken?.actor?.system?.modifiers?.effectChance) || 0),
       hasSenerenGrace: targetToken?.actor?.rollOptions?.all?.["special:serene-grace"] ?? false
     })
+
+    const targetDefensiveEffectRolls = await extractEffectRolls({
+      affects: "defensive",
+      origin: selfActor,
+      target: targetToken?.actor ?? null,
+      item: selfItem,
+      attack: params.attack ?? null,
+      action: params.action ?? null,
+      domains: params.domains,
+      options: [...params.options, ...itemOptions, ...targetRollOptions],
+      chanceModifier: (Number(targetToken?.actor?.system?.modifiers?.effectChance) || 0),
+      hasSenerenGrace: targetToken?.actor?.rollOptions?.all?.["special:serene-grace"] ?? false
+    });
 
     const targetOriginFlatModifiers = await extractTargetModifiers({
       origin: this,
@@ -1483,7 +1577,7 @@ class ActorPTR2e<
       self,
       target,
       traits: actionTraits,
-      effectRolls: { target: targetEffectRolls, origin: targetOriginEffectRolls },
+      effectRolls: { target: targetEffectRolls, origin: targetOriginEffectRolls, defensive: targetDefensiveEffectRolls },
     };
   }
 
@@ -1614,10 +1708,12 @@ class ActorPTR2e<
       if (oldEffect) {
         acc.stacksUpdated.push(oldEffect.uuid);
       } else {
-        acc.notApplied.push(effect);
+        if(effect.type !== "advancement") acc.notApplied.push(effect);
       }
       return acc;
     }, { notApplied: [] as ActiveEffectPTR2e[], stacksUpdated: [] as string[] });
+
+    if(!effects.length && !stacksUpdated.length && !notApplied.length) return;
 
     await ChatMessage.create({
       content: effects.length
@@ -1634,6 +1730,18 @@ class ActorPTR2e<
             : ""
         )
     })
+  }
+
+  private static getLoafingCount(creature: number, owner: number) {
+    function statByLevel(level: number, owner = false) {
+      return ((level + (owner ? 2 : 0)) / 100) + 70 + (level + (owner ? 2 : 0)) * ((Math.PI / 10) * Math.log((level + (owner ? 11 : 9)) / Math.PI));
+    }
+
+    const statByLevelOwner = statByLevel(owner, true);
+    const statByLevelCreature = statByLevel(creature);
+    const loafingCount = 1 + Math.floor((25 * (statByLevelCreature - statByLevelOwner)) / statByLevelOwner);
+
+    return Math.clamp(loafingCount, 0, 4);
   }
 
   static override async createDocuments<TDocument extends foundry.abstract.Document>(
@@ -1794,13 +1902,14 @@ class ActorPTR2e<
       }
     }
 
+    let newLevel: number | undefined;
     if (changed.system?.advancement?.experience?.current !== undefined) {
       if (this.species?.moves?.levelUp?.length) {
         // Check if level-up occurs
         const newExperience = Number(changed.system.advancement.experience.current);
         const nextExperienceThreshold = this.system.advancement.experience.next;
         if (nextExperienceThreshold && newExperience >= nextExperienceThreshold) {
-          const level = this.system.getLevel(newExperience);
+          const level = newLevel = this.system.getLevel(newExperience);
           const currentLevel = this.system.advancement.level;
 
           const newMoves = this.species.moves.levelUp.filter(move => move.level > currentLevel && move.level <= level).filter(move => !this.itemTypes.move.some(item => item.slug == move.name));
@@ -1811,9 +1920,50 @@ class ActorPTR2e<
             changed.items.push(...moves.map(move => move.toObject()));
           }
         }
+        else newLevel = this.system.getLevel(newExperience);
       }
     }
 
+    if (this.system.party.partyMemberOf || changed?.system?.party?.partyMemberOf) {
+      const owner = this.system.party.partyMemberOf ? this.party?.owner : (() => {
+        const party = game.folders.get(changed.system?.party?.partyMemberOf as string) as FolderPTR2e;
+        if (!party) return null;
+        if (party.owner)
+          return fromUuidSync<ActorPTR2e<TSystem, null>>(party.owner);
+        return null;
+      })()
+      if (owner?.hasPlayerOwner) {
+        const ownerLevel = owner.system.advancement.level;
+        const creatureLevel = newLevel ?? this.system.advancement.level;
+
+        const loafingCount = ActorPTR2e.getLoafingCount(creatureLevel, ownerLevel);
+
+        const loafingEffect = this.effects.get("loafingcondition") as ActiveEffectPTR2e | undefined;
+        const currentCount = loafingEffect?.system.stacks ?? 0;
+
+        if (loafingCount !== currentCount) {
+          if (loafingEffect) {
+            if (loafingCount === 0) {
+              await loafingEffect.delete();
+            } else {
+              await loafingEffect.update({ "system.stacks": loafingCount });
+            }
+          } else {
+            if (loafingCount > 0) {
+              const effect = await ActiveEffectPTR2e.fromStatusEffect("loafing");
+              const data = effect.clone({ "system.stacks": loafingCount }).toObject();
+              data._id = "loafingcondition";
+              await this.createEmbeddedDocuments("ActiveEffect", [data], { keepId: true });
+            }
+          }
+        }
+      } else {
+        const loafingEffect = this.effects.get("loafingcondition") as ActiveEffectPTR2e | undefined;
+        if (loafingEffect) {
+          await loafingEffect.delete();
+        }
+      }
+    }
     // 
     try {
       const updated = this.clone(changed, { keepId: true, addSource: true });

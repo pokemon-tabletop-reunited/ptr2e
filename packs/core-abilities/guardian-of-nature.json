@@ -42,38 +42,13 @@
         },
         "description": "<p>Passive: If a space within range possesses a Terrain with a Type that matches one of the user's Types, the user is affected by that Terrain.</p>",
         "img": "icons/svg/explosion.svg"
-      },
-      {
-        "slug": "natures-madness",
-        "name": "Nature's Madness",
-        "type": "attack",
-        "traits": [
-          "legendary",
-          "blast-3"
-        ],
-        "range": {
-          "target": "blast",
-          "distance": 15,
-          "unit": "m"
-        },
-        "cost": {
-          "activation": "complex",
-          "powerPoints": 7
-        },
-        "category": "special",
-        "accuracy": 90,
-        "types": [
-          "fairy"
-        ],
-        "description": "<p>Effect: On hit, all valid targets have their current HP cut in half. This attack always deals a minimum of 1 HP in damage.</p>",
-        "free": true,
-        "img": "icons/svg/explosion.svg"
       }
     ],
     "description": "<p>Trigger: The user declares Nature's Madness.</p><p>Effect: Connection - Nature's Madness. The user and any allies of the user's choice within a [Terrain] created by the user gain +1 DEF and SPDEF for 3 Activations.</p><p>Passive: If a space within range possesses a Terrain with a Type that matches one of the user's Types, the user is affected by that Terrain.</p>",
     "traits": [
       "legendary",
-      "connection"
+      "connection",
+      "partial-automation"
     ],
     "slug": "guardian-of-nature",
     "_migration": {
@@ -82,5 +57,73 @@
     }
   },
   "_id": "7EzYhtyaG7PxGOL4",
-  "effects": []
+  "effects": [
+    {
+      "name": "Guardian of Nature",
+      "type": "passive",
+      "_id": "jI5105PtpxBY3IPa",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "grant-item",
+            "key": "",
+            "value": "Compendium.ptr2e.core-moves.Item.IDXWn9iHZy95sqmc",
+            "predicate": [],
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "system.actions.0.free",
+                "value": "free"
+              }
+            ],
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "reevaluateOnUpdate": false,
+            "inMemoryOnly": false,
+            "allowDuplicate": true,
+            "track": false,
+            "replaceSelf": false,
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            }
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.5.1.5",
+        "createdTime": 1737402714994,
+        "modifiedTime": 1737402747893,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+      }
+    }
+  ]
 }

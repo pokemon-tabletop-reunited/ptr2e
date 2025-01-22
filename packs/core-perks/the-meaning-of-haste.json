@@ -9,22 +9,23 @@
       {
         "name": "The Meaning of Haste",
         "slug": "the-meaning-of-haste",
-        "description": "All allied creatures gain +2 SPD stages for 5 Activations.",
+        "description": "<p>All allied creatures gain +2 SPD stages for 5 Activations.</p>",
         "traits": [],
-        "type": "generic",
+        "type": "attack",
         "range": {
           "target": "field",
-          "unit": "m",
-          "distance": 0
+          "unit": "m"
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 6,
-          "delay": null,
-          "priority": null
+          "powerPoints": 6
         },
-        "img": "icons/svg/explosion.svg",
-        "variant": null
+        "img": "systems/ptr2e/img/perk-icons/Orders_Training.svg",
+        "types": [
+          "untyped"
+        ],
+        "category": "status",
+        "predicate": []
       }
     ],
     "slug": "the-meaning-of-haste",
@@ -66,11 +67,62 @@
       }
     ],
     "autoUnlock": [],
-    "originSlug": null,
-    "variant": null,
-    "mode": null,
     "global": true,
     "webs": []
   },
-  "effects": []
+  "effects": [
+    {
+      "name": "The Meaning of Haste",
+      "type": "passive",
+      "_id": "h6oOzXCzDtnujBxY",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "the-meaning-of-haste-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.XeiSuS3APUcN0MLZ",
+            "predicate": [],
+            "chance": 100,
+            "affects": "target",
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.5.1.2",
+        "createdTime": 1736877838885,
+        "modifiedTime": 1736877883752,
+        "lastModifiedBy": "IcBpMqhFuTck9VpX"
+      }
+    }
+  ]
 }

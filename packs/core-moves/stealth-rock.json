@@ -4,11 +4,6 @@
   "img": "systems/ptr2e/img/svg/rock_icon.svg",
   "system": {
     "slug": "stealth-rock",
-    "description": "<p>Effect: The user places 5 floating rock mine Hazards within Range. When a creature moves within 3m of a rock mine, it homes in on them, destroying itself and dealing a Tick of Rock-Type damage.</p>",
-    "traits": [
-      "hazard",
-      "missile"
-    ],
     "actions": [
       {
         "slug": "stealth-rock",
@@ -16,7 +11,8 @@
         "type": "attack",
         "traits": [
           "hazard",
-          "missile"
+          "missile",
+          "pp-updated"
         ],
         "range": {
           "target": "emanation",
@@ -25,10 +21,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 5,
-          "delay": null,
-          "priority": null,
-          "trigger": null
+          "powerPoints": 3
         },
         "category": "status",
         "power": null,

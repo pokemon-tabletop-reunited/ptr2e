@@ -4,17 +4,14 @@
   "img": "systems/ptr2e/img/svg/rock_icon.svg",
   "system": {
     "slug": "medusa-ray",
-    "description": "<p>Effect: The target becomes Rock Type for 5 Activations, and loses -1 SPD and EVA Stages for 5 Activations. If used on a target that already has the Rock Type, the target loses 4 Ticks of HP and gains @Affliction[splinter] 5.</p>",
-    "traits": [
-      "move-locked"
-    ],
     "actions": [
       {
         "slug": "medusa-ray",
         "name": "Medusa Ray",
         "type": "attack",
         "traits": [
-          "move-locked"
+          "move-locked",
+          "pp-updated"
         ],
         "range": {
           "target": "creature",
@@ -23,10 +20,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 5,
-          "delay": null,
-          "priority": null,
-          "trigger": null
+          "powerPoints": 5
         },
         "category": "status",
         "power": null,
@@ -45,7 +39,8 @@
         "name": "Medusa Ray (Statued)",
         "type": "attack",
         "traits": [
-          "move-locked"
+          "move-locked",
+          "pp-updated"
         ],
         "range": {
           "target": "creature",
@@ -55,8 +50,6 @@
         "cost": {
           "activation": "complex",
           "powerPoints": 5,
-          "delay": null,
-          "priority": null,
           "trigger": "The target has the Rock Type."
         },
         "category": "status",
@@ -74,7 +67,7 @@
       }
     ],
     "container": null,
-    "grade": "C"
+    "grade": "B"
   },
   "_id": "wRuFhK7ix6eelLX8",
   "effects": []

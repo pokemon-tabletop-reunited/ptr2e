@@ -23,32 +23,6 @@
         },
         "description": "<p>Trigger: The user enters combat.</p><p>Effect: The user freely uses Protect.</p>",
         "img": "icons/svg/explosion.svg"
-      },
-      {
-        "slug": "protect",
-        "name": "Protect",
-        "type": "attack",
-        "traits": [
-          "shield",
-          "exhaust",
-          "interrupt-4"
-        ],
-        "range": {
-          "target": "creature",
-          "unit": "m"
-        },
-        "cost": {
-          "activation": "complex",
-          "powerPoints": 7,
-          "trigger": "<p>The user is targeted by a Physical- or Special-Category Attack.</p>"
-        },
-        "category": "status",
-        "types": [
-          "normal"
-        ],
-        "description": "<p>Trigger: The user is targeted by a Physical- or Special-Category Attack.</p><p>Effect: The triggering attack fails, and additional attacks that target the user also fail until the user's next activation. Attacks failing to hit do not deal damage, activate secondary effects, or activate on-miss effects.</p>",
-        "free": true,
-        "img": "icons/svg/explosion.svg"
       }
     ],
     "description": "<p>Trigger: The user enters combat.</p><p>Effect: Connection - Protect. The user freely uses Protect.</p>",
@@ -62,5 +36,73 @@
     }
   },
   "_id": "g680DJ9tRpAx9ou7",
-  "effects": []
+  "effects": [
+    {
+      "name": "Coward",
+      "type": "passive",
+      "_id": "8MLq4kVHCrR68E1R",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "grant-item",
+            "key": "",
+            "value": "Compendium.ptr2e.core-moves.Item.DwzmkHqd28xR3P3c",
+            "predicate": [],
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "system.actions.0.free",
+                "value": "true"
+              }
+            ],
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "reevaluateOnUpdate": false,
+            "inMemoryOnly": false,
+            "allowDuplicate": true,
+            "track": false,
+            "replaceSelf": false,
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            }
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.5.1.5",
+        "createdTime": 1737395648457,
+        "modifiedTime": 1737395691324,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+      }
+    }
+  ]
 }

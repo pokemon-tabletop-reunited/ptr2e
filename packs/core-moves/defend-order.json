@@ -4,17 +4,14 @@
   "img": "systems/ptr2e/img/svg/bug_icon.svg",
   "system": {
     "slug": "defend-order",
-    "description": "<p>Effect: The user gains +1 DEF and SPDEF Stage for 5 Activations. If there are two more more Bug-Type allies on the Field, the user also gains @Affliction[resolved] 5.</p>",
-    "traits": [
-      "dance"
-    ],
     "actions": [
       {
         "slug": "defend-order",
         "name": "Defend Order",
         "type": "attack",
         "traits": [
-          "dance"
+          "dance",
+          "pp-updated"
         ],
         "range": {
           "target": "self",
@@ -23,10 +20,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 7,
-          "delay": null,
-          "priority": null,
-          "trigger": null
+          "powerPoints": 3
         },
         "category": "status",
         "power": null,
@@ -45,7 +39,8 @@
         "name": "Defend Order (Allies)",
         "type": "attack",
         "traits": [
-          "dance"
+          "dance",
+          "pp-updated"
         ],
         "range": {
           "target": "self",
@@ -55,8 +50,6 @@
         "cost": {
           "activation": "complex",
           "powerPoints": 7,
-          "delay": null,
-          "priority": null,
           "trigger": "Two or more Bug-Type allies are present on the Field."
         },
         "category": "status",
@@ -74,7 +67,7 @@
       }
     ],
     "container": null,
-    "grade": "A"
+    "grade": "C"
   },
   "_id": "NV0tKXfj3lUU0ueW",
   "effects": []

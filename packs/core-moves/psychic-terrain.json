@@ -4,17 +4,14 @@
   "img": "systems/ptr2e/img/svg/psychic_icon.svg",
   "system": {
     "slug": "psychic-terrain",
-    "description": "<p>Effect: The Terrain type is set to Psychic Terrain for 3 rounds.</p>",
-    "traits": [
-      "terrain"
-    ],
     "actions": [
       {
         "slug": "psychic-terrain",
         "name": "Psychic Terrain",
         "type": "attack",
         "traits": [
-          "terrain"
+          "terrain",
+          "pp-updated"
         ],
         "range": {
           "target": "field",
@@ -23,10 +20,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 3,
-          "delay": null,
-          "priority": null,
-          "trigger": null
+          "powerPoints": 3
         },
         "category": "status",
         "power": null,
@@ -42,7 +36,7 @@
       }
     ],
     "container": null,
-    "grade": "A"
+    "grade": "C"
   },
   "_id": "McNMuaosHAbgfV8b",
   "effects": []

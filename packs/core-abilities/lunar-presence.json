@@ -20,55 +20,6 @@
           "target": "enemy",
           "unit": "m"
         }
-      },
-      {
-        "slug": "lunar-dance",
-        "name": "Lunar Dance",
-        "type": "attack",
-        "traits": [
-          "legendary",
-          "dance"
-        ],
-        "range": {
-          "target": "creature",
-          "distance": 10,
-          "unit": "m"
-        },
-        "cost": {
-          "activation": "complex",
-          "powerPoints": 7
-        },
-        "category": "status",
-        "types": [
-          "psychic"
-        ],
-        "description": "<p>Effect: The user reduces their HP to 0 and gains @Affliction[fainted]. After the user gains @Affliction[fainted], the Target recovers all of its HP and PP, and is cured of all Status Conditions. If the user is an owned Pokemon and their Trainer has another Pokemon that is not @Affliction[fainted] in a Poke Ball, that Pokemon may be designated the target of this Attack.</p>",
-        "img": "icons/svg/explosion.svg"
-      },
-      {
-        "slug": "lunar-dance-full",
-        "name": "Lunar Dance (Full)",
-        "type": "attack",
-        "traits": [
-          "legendary",
-          "dance"
-        ],
-        "range": {
-          "target": "creature",
-          "distance": 10,
-          "unit": "m"
-        },
-        "cost": {
-          "activation": "complex",
-          "powerPoints": 10
-        },
-        "category": "status",
-        "types": [
-          "psychic"
-        ],
-        "description": "<p>Effect: The user reduces their HP to 0 and gains @Affliction[fainted]. After the user gains @Affliction[fainted], the Target recovers all of its HP and PP, is cured of all Status Afflictions, and gains @Affliction[boosted] 7. If the user is an owned Pokemon and their Trainer has another Pokemon that is not @Affliction[fainted] in a Poke Ball, that Pokemon may be designated the target of this Attack.</p>",
-        "free": true,
-        "img": "icons/svg/explosion.svg"
       }
     ],
     "description": "<p>Trigger: The user declares Lunar Dance</p><p>Effect: Connection - Lunar Dance. The creature targeted by the triggering attack gains @Affliction[boosted] 7. Passive: The user's Dark- and Fairy-Type attacks deal 50% more damage, and the user is considered to be Fairy-Type for the effects of Gloomy Weather.</p>",
@@ -113,6 +64,31 @@
             "priority": null,
             "ignored": false,
             "hideIfDisabled": false
+          },
+          {
+            "type": "grant-item",
+            "key": "",
+            "value": "Compendium.ptr2e.core-moves.Item.yj8uSVjgjqrwDUq6",
+            "predicate": [],
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "system.actions.0.free",
+                "value": "true"
+              }
+            ],
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "reevaluateOnUpdate": false,
+            "inMemoryOnly": false,
+            "allowDuplicate": true,
+            "track": false,
+            "replaceSelf": false,
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            }
           }
         ],
         "slug": null,
@@ -143,10 +119,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "ptr2e",
-        "systemVersion": "0.10.0-alpha.2.0.3",
+        "systemVersion": "0.10.0-alpha.5.1.5",
         "createdTime": 1722260005393,
-        "modifiedTime": 1722260063456,
-        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
+        "modifiedTime": 1737404549933,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
       }
     }
   ]

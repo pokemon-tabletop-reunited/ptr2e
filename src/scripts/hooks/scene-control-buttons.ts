@@ -1,6 +1,7 @@
 import { SquareGridPTR2e } from "@module/canvas/grid.ts";
 import { PTRHook } from "./data.ts";
 import { EXPTracker } from "@module/apps/exp-tracker.ts";
+import { TypeMatrix } from "@module/apps/type-matrix/sheet.ts";
 
 export const GetSceneControlButtons: PTRHook = {
   listen: () => {
@@ -49,6 +50,17 @@ export const GetSceneControlButtons: PTRHook = {
           visible: game.user.isGM,
           onClick: () => {
             return new EXPTracker().render(true);
+          }
+        })
+
+        hud.tools.push({
+          name: "PTR2E.TypeMatrix.Title",
+          title: "PTR2E.TypeMatrix.Hint",
+          icon: "fas fa-grid-4",
+          button: true,
+          visible: true,
+          onClick: () => {
+            return new TypeMatrix({ settings: false }).render(true);
           }
         })
       }

@@ -4,17 +4,14 @@
   "img": "systems/ptr2e/img/svg/dragon_icon.svg",
   "system": {
     "slug": "dragon-cheer",
-    "description": "<p>Effect: The user and all allies in range gain +1 CRIT Stage for 5 Activations. Dragon-type creature instead gain +2 CRIT Stages for 5 Activations.</p>",
-    "traits": [
-      "sonic"
-    ],
     "actions": [
       {
         "slug": "dragon-cheer",
         "name": "Dragon Cheer",
         "type": "attack",
         "traits": [
-          "sonic"
+          "sonic",
+          "pp-updated"
         ],
         "range": {
           "target": "emanation",
@@ -23,7 +20,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 5
+          "powerPoints": 8
         },
         "category": "status",
         "types": [
@@ -34,7 +31,7 @@
         "img": "systems/ptr2e/img/svg/dragon_icon.svg"
       }
     ],
-    "grade": "C"
+    "grade": "A"
   },
   "_id": "VoiUETAcuekeVO32",
   "effects": [

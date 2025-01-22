@@ -4,12 +4,6 @@
   "img": "systems/ptr2e/img/svg/fairy_icon.svg",
   "system": {
     "slug": "crafty-shield",
-    "description": "<p>Trigger: The user is targeted by a Status-Category attack.</p><p>Effect: The triggering attack fails to hit, and additional Status-Category attacks targeting the user also fail to hit until the user's next Activation, or when the round ends, whichever is first. Attacks failing to hit do not activate on-miss effects.</p>",
-    "traits": [
-      "shield",
-      "exhaust",
-      "interrupt-3"
-    ],
     "actions": [
       {
         "slug": "crafty-shield",
@@ -18,7 +12,8 @@
         "traits": [
           "shield",
           "exhaust",
-          "interrupt-3"
+          "interrupt-3",
+          "pp-updated"
         ],
         "range": {
           "target": "self",
@@ -27,9 +22,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 7,
-          "delay": null,
-          "priority": null,
+          "powerPoints": 2,
           "trigger": "<p>The user is targeted by a Status-Category attack.</p>"
         },
         "category": "status",
@@ -46,7 +39,7 @@
       }
     ],
     "container": null,
-    "grade": "A"
+    "grade": "E"
   },
   "_id": "y9s2IYFb7F5SnpMF",
   "effects": []

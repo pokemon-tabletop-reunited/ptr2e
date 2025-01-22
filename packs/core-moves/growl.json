@@ -4,12 +4,6 @@
   "img": "systems/ptr2e/img/svg/normal_icon.svg",
   "system": {
     "slug": "growl",
-    "description": "<p>Effect: All valid targets lose -1 ATK Stages for 5 Activations.</p>",
-    "traits": [
-      "social",
-      "sonic",
-      "friendly"
-    ],
     "actions": [
       {
         "slug": "growl",
@@ -19,7 +13,8 @@
           "social",
           "sonic",
           "friendly",
-          "growl-at"
+          "growl-at",
+          "pp-updated"
         ],
         "range": {
           "target": "cone",
@@ -28,7 +23,7 @@
         },
         "cost": {
           "activation": "simple",
-          "powerPoints": 1
+          "powerPoints": 3
         },
         "category": "status",
         "accuracy": 100,
@@ -42,7 +37,7 @@
         "slot": null
       }
     ],
-    "grade": "E",
+    "grade": "C",
     "_migration": {
       "version": null,
       "previous": null

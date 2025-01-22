@@ -5,14 +5,15 @@
   "img": "systems/ptr2e/img/svg/ghost_icon.svg",
   "system": {
     "slug": null,
-    "traits": [],
     "actions": [
       {
         "name": "Ghastly Eye",
         "slug": "ghastly-eye",
         "type": "attack",
         "img": "icons/svg/explosion.svg",
-        "traits": [],
+        "traits": [
+          "pp-updated"
+        ],
         "range": {
           "target": "self",
           "distance": 0,
@@ -20,9 +21,7 @@
         },
         "cost": {
           "activation": "simple",
-          "powerPoints": 3,
-          "delay": null,
-          "priority": null
+          "powerPoints": 3
         },
         "variant": null,
         "types": [
@@ -38,7 +37,6 @@
         "description": "<p>Effect: The user gains @Affliction[true-sight] 3 and can hit Normal-Type creatures with Ghost-Type attacks while they have @Affliction[true-sight].</p>"
       }
     ],
-    "description": "",
     "container": null,
     "grade": "C"
   },

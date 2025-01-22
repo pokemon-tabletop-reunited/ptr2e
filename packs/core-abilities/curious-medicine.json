@@ -23,27 +23,6 @@
         "img": "icons/svg/explosion.svg"
       },
       {
-        "slug": "haze",
-        "name": "Haze",
-        "type": "attack",
-        "traits": [],
-        "range": {
-          "target": "field",
-          "unit": "m"
-        },
-        "cost": {
-          "activation": "simple",
-          "powerPoints": 3
-        },
-        "category": "status",
-        "types": [
-          "ice"
-        ],
-        "description": "<p>Effect: The Stat Stages of all creatures in the combat are reset to their default values.</p>",
-        "free": true,
-        "img": "icons/svg/explosion.svg"
-      },
-      {
         "slug": "haze-allies",
         "name": "Haze (Allies)",
         "type": "attack",
@@ -63,7 +42,8 @@
         "description": "<p>Effect: The Stat Stages of all allied creatures in the combat are reset to their default values.</p>",
         "free": true,
         "variant": "haze",
-        "img": "icons/svg/explosion.svg"
+        "img": "icons/svg/explosion.svg",
+        "predicate": []
       },
       {
         "slug": "haze-foes",
@@ -85,7 +65,8 @@
         "description": "<p>Effect: The Stage of all enemy creatures in the combat are reset to their default values.</p>",
         "free": true,
         "variant": "haze",
-        "img": "icons/svg/explosion.svg"
+        "img": "icons/svg/explosion.svg",
+        "predicate": []
       }
     ],
     "description": "<p>Trigger: The user enters combat.</p><p>Effect: Connection - Haze. The user freely uses Haze. Whenever the user uses Haze, they can 2 PP to have either 1) the user and its allies or 2) foes be excluded from Haze's effect.</p>",
@@ -99,5 +80,73 @@
     }
   },
   "_id": "AEKdQTZi4O8tBpm5",
-  "effects": []
+  "effects": [
+    {
+      "name": "Curious Medicine",
+      "type": "passive",
+      "_id": "rkWHtztJEzqvpPmG",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "grant-item",
+            "key": "",
+            "value": "Compendium.ptr2e.core-moves.Item.eaBKFWmCB4ZeKP2k",
+            "predicate": [],
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "system.actions.0.free",
+                "value": "true"
+              }
+            ],
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "reevaluateOnUpdate": false,
+            "inMemoryOnly": false,
+            "allowDuplicate": true,
+            "track": false,
+            "replaceSelf": false,
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            }
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.5.1.5",
+        "createdTime": 1737395811820,
+        "modifiedTime": 1737395858509,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+      }
+    }
+  ]
 }

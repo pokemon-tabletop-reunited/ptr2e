@@ -25,69 +25,6 @@
         "img": "icons/svg/explosion.svg"
       },
       {
-        "slug": "hyperspace-hole",
-        "name": "Hyperspace Hole",
-        "type": "attack",
-        "traits": [
-          "legendary",
-          "danger-close",
-          "pierce",
-          "pp-updated"
-        ],
-        "range": {
-          "target": "creature",
-          "distance": 20,
-          "unit": "m"
-        },
-        "cost": {
-          "activation": "complex",
-          "powerPoints": 5,
-          "trigger": "<p>The user is in its Confined Forme.</p>"
-        },
-        "category": "special",
-        "power": 80,
-        "accuracy": 100,
-        "types": [
-          "psychic"
-        ],
-        "description": "<p>Trigger: The user is in its Confined Forme.</p>",
-        "free": true,
-        "img": "icons/svg/explosion.svg"
-      },
-      {
-        "slug": "hyperspace-fury",
-        "name": "Hyperspace Fury",
-        "type": "attack",
-        "traits": [
-          "legendary",
-          "crushing",
-          "punch",
-          "danger-close",
-          "pierce",
-          "contact",
-          "pp-updated"
-        ],
-        "range": {
-          "target": "creature",
-          "distance": 15,
-          "unit": "m"
-        },
-        "cost": {
-          "activation": "complex",
-          "powerPoints": 4,
-          "trigger": "<p>The user is in its Unbound Forme.</p>"
-        },
-        "category": "physical",
-        "power": 100,
-        "accuracy": 100,
-        "types": [
-          "dark"
-        ],
-        "free": true,
-        "description": "<p>The user is in its Unbound Forme.</p><p>Effect: On hit, the user loses -1 DEF Stage for 5 activations.</p>",
-        "img": "icons/svg/explosion.svg"
-      },
-      {
         "slug": "hyperspace-fury-unbound",
         "name": "Hyperspace Fury (Unbound)",
         "type": "attack",
@@ -119,7 +56,8 @@
         "free": true,
         "variant": "hyperspace-fury",
         "description": "<p>The user is in its Unbound Forme.</p><p>Effect: On resolution, the user loses -1 DEF Stage for 5 activations.</p>",
-        "img": "icons/svg/explosion.svg"
+        "img": "icons/svg/explosion.svg",
+        "predicate": []
       },
       {
         "slug": "hyperspace-fury-all-out",
@@ -153,7 +91,8 @@
         "free": true,
         "variant": "hyperspace-fury",
         "description": "<p>The user is in its Unbound Forme.</p><p>Effect: On resolution, the user loses -1 DEF Stage for 5 activations.</p>",
-        "img": "icons/svg/explosion.svg"
+        "img": "icons/svg/explosion.svg",
+        "predicate": []
       },
       {
         "traits": [
@@ -166,7 +105,11 @@
           "activation": "free"
         },
         "description": "<p>Passive: The user can choose to originate their attacks (other than Hyperspace Hole and Hyperspace Fury) any space within 10m of the user, and any such spaces can be treated as the user's space for originating Abilities (such as Magician). When in Unbound Forme, the user's Hyperspace Hole is replaced with Hyperspace Fury.</p>",
-        "img": "icons/svg/explosion.svg"
+        "img": "icons/svg/explosion.svg",
+        "range": {
+          "target": "enemy",
+          "unit": "m"
+        }
       }
     ],
     "description": "<p>Trigger: The user declares Hyperspace Hole or Hyperspace Fury.</p><p>Effect: Connection - Hyperspace Hole. At the end of a round, the user freely uses Metronome for each active Rift, originating its effect from a Rift that has not had a Metronome resolved through it, on a nearby target chosen by the user. A Rift lasts for 3 Rounds. When declaring Hyperspace Fury, the user can use Hyperspace Fury (Unbound) and Hyperspace Fury (All-Out).</p><p>Passive: The user can choose to originate their attacks (other than Hyperspace Hole and Hyperspace Fury) any space within 10m of the user, and any such spaces can be treated as the user's space for originating Abilities (such as Magician). When in Unbound Forme, the user's Hyperspace Hole is replaced with Hyperspace Fury.</p>",
@@ -181,5 +124,98 @@
     }
   },
   "_id": "0VYQA1KldrgnPZL7",
-  "effects": []
+  "effects": [
+    {
+      "name": "Dimensional Rifts",
+      "type": "passive",
+      "_id": "2La4pa52nRGWCHps",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "grant-item",
+            "key": "",
+            "value": "Compendium.ptr2e.core-moves.Item.45AOpbdj7b05bGeT",
+            "predicate": [],
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "system.actions.0.free",
+                "value": "true"
+              }
+            ],
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "reevaluateOnUpdate": false,
+            "inMemoryOnly": false,
+            "allowDuplicate": true,
+            "track": false,
+            "replaceSelf": false,
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            }
+          },
+          {
+            "type": "grant-item",
+            "key": "",
+            "value": "Compendium.ptr2e.core-moves.Item.i7b6zggR16BmZOQm",
+            "predicate": [],
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "system.actions.0.free",
+                "value": "true"
+              }
+            ],
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "reevaluateOnUpdate": false,
+            "inMemoryOnly": false,
+            "allowDuplicate": true,
+            "track": false,
+            "replaceSelf": false,
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            }
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.5.1.5",
+        "createdTime": 1737396590591,
+        "modifiedTime": 1737396698139,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+      }
+    }
+  ]
 }

@@ -126,7 +126,7 @@ async function extractEffectRolls({
   options,
   chanceModifier = 0,
   hasSenerenGrace = false,
-}: Omit<ExtractEphemeralEffectsParams, 'affects'> & { affects: "self" | "origin" | "target", chanceModifier?: number, hasSenerenGrace?: boolean }): Promise<EffectRoll[]> {
+}: Omit<ExtractEphemeralEffectsParams, 'affects'> & { affects: "self" | "origin" | "target" | "defensive", chanceModifier?: number, hasSenerenGrace?: boolean }): Promise<EffectRoll[]> {
   if (!(origin && target)) return [];
 
   const [effectsFrom, effectsTo] = affects === "target" ? [origin, target] : [target, origin];
@@ -140,16 +140,11 @@ async function extractEffectRolls({
   const effectRolls = (
     await Promise.all(
       domains
-        .flatMap((s) => (affects === 'origin' ? target : origin).synthetics.effects[s]?.[affects] ?? [])
+        .flatMap((s) => (["origin", "defensive"].includes(affects) ? target : origin).synthetics.effects[s]?.[affects] ?? [])
         .map((d) => d({ test: fullOptions, resolvables }))
     )
-  ).flatMap((e) => {
-    if (e) {
-      e.chance = e.chance + chanceModifier;
-      return e;
-    }
-    return [];
-  }).reduce((acc, val): EffectRoll[] => {
+  ).reduce((acc, val): EffectRoll[] => {
+    if(!val) return acc;
     const inMap = effectTargets.get(val.effect + (val.critOnly ? '-crit' : ''));
     const sameType = inMap?.critOnly === val.critOnly;
     if (!inMap) {
@@ -160,7 +155,13 @@ async function extractEffectRolls({
       inMap.chance += val.chance;
     }
     return acc;
-  }, [] as EffectRoll[]);
+  }, [] as EffectRoll[]).flatMap((e) => {
+    if (e) {
+      e.chance = e.chance + chanceModifier;
+      return e;
+    }
+    return [];
+  });
 
   const effectIncreases = (
     await Promise.all(

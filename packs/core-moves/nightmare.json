@@ -4,14 +4,14 @@
   "img": "systems/ptr2e/img/svg/ghost_icon.svg",
   "system": {
     "slug": "nightmare",
-    "description": "<p>Effect: This attack can only be used on a target afflicted with @Affliction[drowsy]. On hit, the target's @Affliction[drowsy] condition is changed to @Affliction[nightmares] and the duration is increased by 5 Activations.</p>",
-    "traits": [],
     "actions": [
       {
         "slug": "nightmare",
         "name": "Nightmare",
         "type": "attack",
-        "traits": [],
+        "traits": [
+          "pp-updated"
+        ],
         "range": {
           "target": "creature",
           "distance": 1,
@@ -19,10 +19,7 @@
         },
         "cost": {
           "activation": "simple",
-          "powerPoints": 6,
-          "delay": null,
-          "priority": null,
-          "trigger": null
+          "powerPoints": 3
         },
         "category": "status",
         "power": null,
@@ -38,7 +35,7 @@
       }
     ],
     "container": null,
-    "grade": "B"
+    "grade": "D"
   },
   "_id": "oZbObxyay184GL8l",
   "effects": []

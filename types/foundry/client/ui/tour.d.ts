@@ -33,10 +33,10 @@ declare global {
         targetElement: HTMLElement;
 
         /** The HTMLElement that fades out the rest of the screen */
-        fadeElement: HTMLElement;
+        fadeElement?: HTMLElement;
 
         /** The HTMLElement that blocks input while a Tour is active */
-        overlayElement: HTMLElement;
+        overlayElement?: HTMLElement;
 
         /** Padding around a Highlighted Element */
         static HIGHLIGHT_PADDING: number;
@@ -142,7 +142,7 @@ declare global {
          * @param event   A click event
          * @param buttons   The step buttons
          */
-        private _onButtonClick(event: MouseEvent, buttons: HTMLButtonElement[]): void;
+        protected _onButtonClick(event: MouseEvent, buttons: NodeListOf<HTMLButtonElement>): void;
 
         /** Saves the current progress of the Tour to a world setting */
         private _saveProgress(): void;

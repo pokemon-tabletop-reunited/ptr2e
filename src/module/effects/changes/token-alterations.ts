@@ -31,6 +31,8 @@ export default class TokenAlterationsChangeSystem extends ChangeModel {
     if (!isImageOrVideoPath(src)) return this.failValidation("Missing or invalid value field");
     if(!actor) return;
     if(!this.test()) return;
+
+    if(src.includes("modules/ptr2e-pkmn-sprites") && !game.modules.get("ptr2e-pkmn-sprites")?.active) return;
     
     const texture: { src: ImageFilePath | VideoFilePath; scaleX?: number; scaleY?: number; tint?: Maybe<Color> } = {
       src,

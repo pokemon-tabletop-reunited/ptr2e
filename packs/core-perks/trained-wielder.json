@@ -13,21 +13,15 @@
         "slug": "trained-wielder",
         "description": "<p>Gain a Wielded Item Slot.</p>",
         "cost": {
-          "activation": "free",
-          "powerPoints": 0,
-          "delay": null,
-          "priority": null
+          "activation": "free"
         },
         "type": "passive",
         "traits": [],
         "img": "icons/svg/explosion.svg",
         "range": {
           "target": "enemy",
-          "unit": "m",
-          "distance": 0
-        },
-        "variant": null,
-        "hidden": false
+          "unit": "m"
+        }
       }
     ],
     "slug": "trained-wielder",
@@ -63,10 +57,9 @@
         "tier": null
       }
     ],
-    "autoUnlock": [],
-    "originSlug": null,
-    "variant": null,
-    "mode": null,
+    "autoUnlock": [
+      "trait:wielder"
+    ],
     "global": true,
     "webs": []
   },

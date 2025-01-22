@@ -14,7 +14,7 @@ export function getAllSkillSlugs(): string[] {
 export function getInitialSkillList(): SkillPTR2e['_source'][] {
     return Array.from(getAllSkillSlugs()).map((skill) => {
         const baseValue = game.ptr.data.skills.get(skill) ?? BaseSkills[skill];
-        return partialSkillToSkill(baseValue ? baseValue : { slug: skill });
+        return partialSkillToSkill(baseValue ? fu.duplicate(baseValue) : { slug: skill });
     });
 }
 
@@ -77,6 +77,8 @@ const BaseSkills = {
     spiritual: { slug: "spiritual", group: "occult" },
     legendary: { slug: "legendary", group: "occult" },
     paradox: { slug: "paradox", group: "occult" },
+    alchemy: { slug: "alchemy", group: "occult" },
+    thaumaturgy: { slug: "thaumaturgy", group: "occult" },
     beauty: { slug: "beauty", group: "performance" },
     cool: { slug: "cool", group: "performance" },
     clever: { slug: "clever", group: "performance" },
@@ -91,6 +93,7 @@ const BaseSkills = {
     aircraft: { slug: "aircraft", group: "pilot" },
     "aerospace-vehicles": { slug: "aerospace-vehicles", group: "pilot" },
     watercraft: { slug: "watercraft", group: "pilot" },
+    "profession-specific": { slug: "profession-specific" },
     psychology: { slug: "psychology" },
     "read-lips": { slug: "read-lips" },
     research: { slug: "research" },

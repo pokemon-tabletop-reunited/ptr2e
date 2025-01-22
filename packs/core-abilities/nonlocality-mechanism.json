@@ -40,35 +40,6 @@
         "img": "icons/svg/explosion.svg"
       },
       {
-        "slug": "sacred-sword",
-        "name": "Sacred Sword",
-        "type": "attack",
-        "traits": [
-          "pass-3",
-          "sharp",
-          "contact",
-          "danger-close",
-          "pp-updated"
-        ],
-        "range": {
-          "target": "creature",
-          "distance": 1,
-          "unit": "m"
-        },
-        "cost": {
-          "activation": "complex",
-          "powerPoints": 5
-        },
-        "category": "physical",
-        "power": 90,
-        "accuracy": 100,
-        "types": [
-          "fighting"
-        ],
-        "img": "systems/ptr2e/img/svg/fighting_icon.svg",
-        "free": true
-      },
-      {
         "slug": "sacred-sword-nonlocal",
         "name": "Sacred Sword (Nonlocal)",
         "type": "attack",
@@ -94,13 +65,15 @@
         ],
         "img": "systems/ptr2e/img/svg/psychic_icon.svg",
         "variant": "sacred-sword",
-        "free": true
+        "free": true,
+        "predicate": []
       }
     ],
     "description": "<p>Effect: Connection - Sacred Sword. For 3 PP as a Free Action, the next [Sharp] attack used by the user has its target change to Wide Line, its range to 8, and loses [Contact] and [Pass X] until the attack resolves.</p><p>Passive: The user deals 30% more damage to creatures that possess Types that are super effective against any of the user's Types, and the user may use Sacred Sword as a Psychic-Type attack.</p>",
     "traits": [
       "paradox",
-      "connection"
+      "connection",
+      "partial-automation"
     ],
     "slug": "nonlocality-mechanism",
     "_migration": {
@@ -109,5 +82,73 @@
     }
   },
   "_id": "N0fiDUMwMeubxXc5",
-  "effects": []
+  "effects": [
+    {
+      "name": "Nonlocality Mechanism",
+      "type": "passive",
+      "_id": "xsEZXKuVD1A3GUsy",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "grant-item",
+            "key": "",
+            "value": "Compendium.ptr2e.core-moves.Item.DCo1YEm46bRMBLbB",
+            "predicate": [],
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "system.actions.0.free",
+                "value": "true"
+              }
+            ],
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "reevaluateOnUpdate": false,
+            "inMemoryOnly": false,
+            "allowDuplicate": true,
+            "track": false,
+            "replaceSelf": false,
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            }
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.5.1.5",
+        "createdTime": 1737405282274,
+        "modifiedTime": 1737405337847,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+      }
+    }
+  ]
 }

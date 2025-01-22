@@ -232,7 +232,7 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
               {
                 dexId: species.system.number,
                 shiny: this.actor!.system.shiny,
-                forms: species.system.form ? [species.system.form] : [],
+                forms: species.system.form ? species.system.form.split("-") : [],
               },
               config
             );
@@ -242,7 +242,7 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
               {
                 dexId: species.system.number,
                 shiny: this.actor!.system.shiny,
-                forms: species.system.form ? [species.system.form, "token"] : ["token"],
+                forms: species.system.form ? [...species.system.form.split("-"), "token"] : ["token"],
               },
               config
             );
@@ -306,6 +306,11 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
       template: "systems/ptr2e/templates/perk-tree/hud/actor.hbs",
       classes: ["hud"]
     },
+    hudZoom: {
+      id: "hudZoom",
+      template: "systems/ptr2e/templates/perk-tree/hud/zoom.hbs",
+      classes: ["hud"]
+    },
     hudPerk: {
       id: "hudPerk",
       template: "systems/ptr2e/templates/perk-tree/hud/perk.hbs",
@@ -366,7 +371,7 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
   currentNode: PerkNode | null = null;
   connectionNode: PerkNode | null = null;
   editMode = false;
-  zoomLevels = [0.2, 0.4, 0.65, 1, 1.3, 1.65] as const;
+  zoomLevels = [0.05, 0.1, 0.2, 0.4, 0.65, 1, 1.3, 1.65] as const;
 
   _onScroll: () => void | null;
   _lineCache = new Map<string, SVGLineElement>();
@@ -374,6 +379,7 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
 
   web: "global" | ItemUUID = "global";
   private speciesEvolutions: PerkPTR2e[] = [];
+  private underdogPerks: PerkPTR2e[] = [];
   private perkTab: CompendiumBrowserPerkTab | null = null;
 
   constructor(actor: ActorPTR2e, options?: Partial<ApplicationConfigurationExpanded>) {
@@ -397,6 +403,7 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
       y: number;
       classes: string[],
       state?: PerkPurchaseState;
+      uuid?: string;
     }
 
     const webOptions = [
@@ -405,7 +412,7 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
         label: this.actor?.name ? `${this.actor.name}'s Global Perk Web` : "Global Perk Web"
       }
     ]
-    const uuid = this.actor?.species?.evolutions?.uuid ?? this.actor?.species?.parent?.flags?.core?.sourceId;
+    const uuid = this.actor?.species?.evolutions?.uuid ?? this.actor?.species?.parent?.flags?.core?.sourceId ?? this.actor?.species?.parent?.uuid;
     if (uuid) webOptions.push({
       value: uuid,
       label: this.actor?.name ? `${this.actor.name}'s Species Perk Web` : "Species Perk Web"
@@ -413,7 +420,7 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
 
     if (!this._perkStore) {
       const perks = Array.from((await game.ptr.perks.initialize()).perks.values());
-      perks.push(...this.speciesEvolutions);
+      perks.push(...this.speciesEvolutions, ...this.underdogPerks);
       this._perkStore = new PerkStore({ perks, web: this.web });
     }
     if (!this._perkStore.initialized) {
@@ -458,7 +465,8 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
               x,
               y,
               classes,
-              state: node.state
+              state: node.state,
+              uuid: node.tierInfo.perk.uuid
             });
           }
           else {
@@ -468,7 +476,8 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
               x,
               y,
               classes,
-              state: node.state
+              state: node.state,
+              uuid: perk.uuid
             });
           }
         }
@@ -494,11 +503,12 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
         document: perk,
         fields: perk?.system.schema.fields,
         traits: perk?.system.traits.map((trait) => ({ value: trait.slug, label: trait.label, type: trait.type })),
-        actions: perk?.system?.actions?.map(action => ({
+        actions: await Promise.all(perk?.system?.actions?.map(async action => ({
           action,
           traits: action.traits.map(trait => ({ value: trait.slug, label: trait.label })),
           fields: action.schema.fields,
-        })),
+          enrichedDescription: action.description ? await TextEditor.enrichHTML(action.description) : null
+        })) ?? []),
         state: {
           available: [PerkState.connected, PerkState.available].includes(this.currentNode?.state as unknown as 1 | 2),
           purchasable: this.currentNode?.state === PerkState.available,
@@ -513,7 +523,8 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
             ? `${game.i18n.localize("PTR2E.PerkWebApp.RefundTier")} ${this.currentNode.tierInfo.maxTierPurchased ? this.currentNode.tierInfo.maxTier : (this.currentNode.tierInfo.tier - 1)} (${this.currentNode?.tierInfo.lastTier.system.cost} AP)`
             : `${game.i18n.localize("PTR2E.PerkWebApp.RefundPerk")} (${perk?.system.cost} AP)`,
           evolution: perk?.flags.ptr2e?.evolution ? game.i18n.format("PTR2E.PerkWebApp.Evolve", { name: Handlebars.helpers.capitalizeFirst(perk?.name?.replace("Evolution: ", '')) || "" }) : null
-        }
+        },
+        enrichedDescription: perk?.system.description ? await TextEditor.enrichHTML(perk.system.description) : null,
       },
       zoom: this._zoomAmount,
       editMode: this.editMode,
@@ -521,11 +532,15 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
       webOptions,
       web: this.web,
       filterData: this.perkTab.filterData,
-      noZoom: navigator.userAgent.includes("FoundryVirtualTabletop"),
+      noZoom: navigator.userAgent.includes("FoundryVirtualTabletop")
     }
   }
 
   override _preparePartContext(partId: string, context: ApplicationRenderContext): Promise<ApplicationRenderContext> {
+    if (partId === "hudZoom") {
+      context.zoomLevels = this.zoomLevels;
+      context.zoomLevel = this._zoomAmount;
+    }
 
     if (partId === "hudPerk" && 'perk' in context && context.perk && typeof context.perk === "object" && 'document' in context.perk && context.perk.document) {
       const perk = context.perk.document as PerkPTR2e;
@@ -555,6 +570,14 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
         }
         const species = await fromUuid<SpeciesPTR2e>(value);
         this.setWeb(species ?? null);
+      });
+    }
+
+    if (partId === "hudZoom") {
+      const zoomValueSelect = htmlElement.querySelector<HTMLSelectElement>("select[name='zoom-value']");
+      zoomValueSelect?.addEventListener("change", (event) => {
+        event.preventDefault();
+        this.zoom(Number(zoomValueSelect.value) as this['zoomLevels'][number], false);
       });
     }
 
@@ -1105,6 +1128,8 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
     }
   }
 
+  private multiPerkCycle: Record<ItemUUID, number> = {};
+
   /** Activate click listeners on loaded actors and items */
   #activateResultListeners(liElements: HTMLLIElement[] = []): void {
     for (const liElement of liElements) {
@@ -1115,15 +1140,18 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
       if (nameAnchor) {
         nameAnchor.addEventListener("click", async () => {
           const document = await fromUuid<PerkPTR2e>(entryUuid);
-          const position = this._perkStore.nodeFromSlug(document?.slug ?? "")?.position;
-          if (!position) return;
-          const perkElement = this.element.querySelector(`div.perk[data-x="${position.x}"][data-y="${position.y}"]`)
-          perkElement?.scrollIntoView({ inline: 'center', block: 'center', behavior: 'smooth' });
-        });
-        nameAnchor.addEventListener("click", async () => {
-          const document = await fromUuid<PerkPTR2e>(entryUuid);
-          const node = this._perkStore.nodeFromSlug(document?.slug ?? "");
+          let node = this._perkStore.nodeFromSlug(document?.slug ?? "");
           if (!node) return;
+
+          if (node.perk.system.variant === "multi") {
+            const current = this.multiPerkCycle[entryUuid as ItemUUID] ?? -1;
+            const cycle = this.multiPerkCycle[entryUuid as ItemUUID] = (current + 1);
+
+            const nodeData = node.perk.system.nodes.at(cycle);
+            const newNode = this._perkStore.get(`${nodeData?.x}-${nodeData?.y}`);
+            if (newNode) node = newNode;
+          }
+
           const perkElement = this.element.querySelector(`div.perk[data-x="${node.position.x}"][data-y="${node.position.y}"]`)
           this.currentNode = node;
           perkElement?.scrollIntoView({ inline: 'center', block: 'center', behavior: 'smooth' });
@@ -1295,7 +1323,7 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
       isDown = false;
       // element.style.cursor = this._zoomAmount === this.zoomLevels[0] ? "unset" : "zoom-in";
       element.style.cursor = "unset";
-      setTimeout(() => { isMoving = false }, 50);
+      setTimeout(() => { isMoving = false });
     });
 
     element.addEventListener("mousemove", (e) => {
@@ -1346,7 +1374,7 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
     });
   }
 
-  zoom(zoom = this._zoomAmount) {
+  zoom(zoom = this._zoomAmount, reRenderSelect = true) {
     const grid = this.element.querySelector<HTMLElement>(".perk-grid");
     const zoomElement = this.element.querySelector<HTMLElement>(`[data-application-part="web"] .scroll`);
     if (!grid || !zoomElement) return;
@@ -1378,6 +1406,8 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
 
     if (!isElectron) zoomElement.scrollTo(newCenter);
     else zoomElement.scrollTo({ top: (zoomElement.scrollWidth / 2) - (zoomElement.clientWidth / 2), left: (zoomElement.scrollHeight / 2) - (zoomElement.clientHeight / 2) });
+
+    if (reRenderSelect) this.render({ parts: ["hudZoom"] });
   }
 
   async setWeb(species: SpeciesPTR2e | null) {
@@ -1389,6 +1419,7 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
 
     this.web = species.uuid;
     this.speciesEvolutions = await species.system.getEvolutionPerks(!!this.actor?.system.shiny);
+    this.underdogPerks = this.actor ? await this.actor.getUnderdogPerks() : [];
     await PerkWebApp.refresh.call(this);
 
     setTimeout(() => {
@@ -1660,12 +1691,14 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
   }
 
   static async refresh(this: PerkWebApp) {
+    this.multiPerkCycle = {};
     this._lineCache.clear();
     await game.ptr.perks.reset();
     this.isSortableDragging = false;
     const perks = [
       ...Array.from(game.ptr.perks.perks.values()),
-      ...this.speciesEvolutions
+      ...this.speciesEvolutions,
+      ...this.underdogPerks
     ]
     this._perkStore.reinitialize({ perks, actor: this.actor ?? undefined, web: this.web });
 

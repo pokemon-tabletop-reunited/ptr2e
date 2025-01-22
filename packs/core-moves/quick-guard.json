@@ -4,12 +4,6 @@
   "img": "systems/ptr2e/img/svg/fighting_icon.svg",
   "system": {
     "slug": "quick-guard",
-    "description": "<p>Trigger: The user or an ally in range is targeted by a [Priority X] Action.</p><p>Effect: The triggering attack fails to hit, and additional attacks that use Priority that would hit also fail to hit until until the round ends. These attacks that would fail to hit do not activate on-miss effects.</p>",
-    "traits": [
-      "shield",
-      "exhaust",
-      "interrupt-4"
-    ],
     "actions": [
       {
         "slug": "quick-guard",
@@ -18,7 +12,8 @@
         "traits": [
           "shield",
           "exhaust",
-          "interrupt-4"
+          "interrupt-4",
+          "pp-updated"
         ],
         "range": {
           "target": "emanation",
@@ -27,9 +22,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 5,
-          "delay": null,
-          "priority": null,
+          "powerPoints": 3,
           "trigger": "<p>The user or an ally in range is targeted by a [Priority X] Action.</p>"
         },
         "category": "status",

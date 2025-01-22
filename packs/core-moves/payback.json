@@ -4,10 +4,6 @@
   "img": "systems/ptr2e/img/svg/dark_icon.svg",
   "system": {
     "slug": "payback",
-    "description": "<p>Effect: If user has been hit by a  Attack this round, this attack's Power is doubled.</p>",
-    "traits": [
-      "contact"
-    ],
     "actions": [
       {
         "slug": "payback",
@@ -24,10 +20,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 1,
-          "delay": null,
-          "priority": null,
-          "trigger": null
+          "powerPoints": 2
         },
         "category": "physical",
         "power": 50,
@@ -35,11 +28,8 @@
         "types": [
           "dark"
         ],
-        "description": "",
-        "contestType": "",
-        "contestEffect": "",
-        "free": false,
-        "slot": null
+        "img": "systems/ptr2e/img/svg/dark_icon.svg",
+        "predicate": []
       },
       {
         "slug": "payback-empowered",
@@ -56,9 +46,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 3,
-          "delay": null,
-          "priority": null,
+          "powerPoints": 2,
           "trigger": "<p>The user has been hit by a  Attack this round.</p>"
         },
         "category": "physical",
@@ -67,16 +55,18 @@
         "types": [
           "dark"
         ],
-        "description": "<p>Trigger: The user has been hit by a  Attack this round.</p>",
-        "contestType": "",
-        "contestEffect": "",
+        "description": "<p>Trigger: The user has been hit by a Attack this round.</p>",
         "variant": "payback",
-        "free": true,
-        "slot": null
+        "img": "systems/ptr2e/img/svg/dark_icon.svg",
+        "predicate": []
       }
     ],
-    "container": null,
-    "grade": "C"
+    "grade": "C",
+    "traits": [],
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
   },
   "_id": "IWtQyZKNtwfpsM1d",
   "effects": []

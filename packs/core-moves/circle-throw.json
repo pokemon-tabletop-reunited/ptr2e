@@ -4,14 +4,6 @@
   "img": "systems/ptr2e/img/svg/fighting_icon.svg",
   "system": {
     "slug": "circle-throw",
-    "description": "<p>Effect: On hit, the target loses the @Affliction[grapple] if applicable and is Pushed 10m minus their WC (minimum 1m). If the target is an owned Pokémon, they are immediately Recalled.</p>",
-    "traits": [
-      "push-x",
-      "delay-1",
-      "contact",
-      "grapple",
-      "pp-updated"
-    ],
     "actions": [
       {
         "slug": "circle-throw",
@@ -32,9 +24,7 @@
         "cost": {
           "activation": "complex",
           "powerPoints": 3,
-          "delay": 1,
-          "priority": null,
-          "trigger": null
+          "delay": 1
         },
         "category": "physical",
         "power": 60,

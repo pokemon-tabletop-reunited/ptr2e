@@ -4,11 +4,6 @@
   "img": "systems/ptr2e/img/svg/dark_icon.svg",
   "system": {
     "slug": "assurance",
-    "description": "<p>Effect: If the target has taken damage previously this round, Assurance's Power is doubled.</p>",
-    "traits": [
-      "dash",
-      "contact"
-    ],
     "actions": [
       {
         "slug": "assurance",
@@ -26,10 +21,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 3,
-          "delay": null,
-          "priority": null,
-          "trigger": null
+          "powerPoints": 3
         },
         "category": "physical",
         "power": 60,
@@ -37,11 +29,8 @@
         "types": [
           "dark"
         ],
-        "description": "",
-        "contestType": "",
-        "contestEffect": "",
-        "free": false,
-        "slot": null
+        "img": "icons/svg/explosion.svg",
+        "predicate": []
       },
       {
         "slug": "assurance-empowered",
@@ -60,8 +49,6 @@
         "cost": {
           "activation": "complex",
           "powerPoints": 3,
-          "delay": null,
-          "priority": null,
           "trigger": "<p>The target has taken damage previously this round.</p>"
         },
         "category": "physical",
@@ -71,15 +58,17 @@
           "dark"
         ],
         "description": "<p>Trigger: The target has taken damage previously this round.</p>",
-        "contestType": "",
-        "contestEffect": "",
-        "free": true,
         "variant": "assurance",
-        "slot": null
+        "img": "systems/ptr2e/img/svg/dark_icon.svg",
+        "predicate": []
       }
     ],
-    "container": null,
-    "grade": "B"
+    "grade": "B",
+    "traits": [],
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
   },
   "_id": "tvN34FsPsiy2u5U6",
   "effects": []

@@ -5,23 +5,33 @@
   "system": {
     "actions": [
       {
-        "traits": [],
+        "traits": [
+          "interrupt-3",
+          "priority-2"
+        ],
         "name": "Prankster",
         "slug": "prankster",
-        "type": "passive",
+        "type": "generic",
         "cost": {
-          "activation": "free"
+          "activation": "free",
+          "trigger": "<p>A creature within 6m of the user declares an Attack.</p>",
+          "powerPoints": 3,
+          "delay": null,
+          "priority": 2
         },
         "range": {
           "target": "self",
           "unit": "m"
         },
-        "description": "<p>Effect: The user's Status-Category Attacks have their [Priority X], [Interrupt X] and [Delay X] values increased by +1. The user's Status-Category Attacks that do not have a [Priority X], [Interrupt X] or [Delay X] trait gain [Priority 1].</p>",
+        "description": "<p>Trigger: A creature within 6m of the user declares an Attack.</p><p>Effect: The user spends 3 PP, and then uses a Status-Category Attack, as a Free Action, consuming PP as normal.</p>",
         "img": "icons/svg/explosion.svg"
       }
     ],
-    "description": "<p>Effect: The user's Status-Category Attacks have their [Priority X], [Interrupt X] and [Delay X] values increased by +1. The user's Status-Category Attacks that do not have a [Priority X], [Interrupt X] or [Delay X] trait gain [Priority 1].</p>",
-    "traits": [],
+    "description": "<p>Trigger: A creature within 6m of the user declares an Attack.</p><p>Effect: The user spends 3 PP, and then uses a Status-Category Attack, as a Free Action, consuming PP as normal.</p>",
+    "traits": [
+      "interrupt-3",
+      "priority-2"
+    ],
     "slug": "prankster",
     "_migration": {
       "version": null,

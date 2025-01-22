@@ -4,7 +4,6 @@
   "img": "systems/ptr2e/img/svg/dragon_icon.svg",
   "system": {
     "slug": "clangorous-soulblaze",
-    "traits": [],
     "actions": [
       {
         "slug": "clangorous-soulblaze",
@@ -32,7 +31,8 @@
         ],
         "description": "<p>Trigger: User's partner uses Z-Pose! and triggers the appropriate Z-Power-Crystal.</p><p>Effect: The user's gains Omniboost for 5 Activations.</p><p>Requirement: [Kommo-o] Z-Power-Crystal as an Accessory Item and either Clanging Scales or Clangorous Soul on the user's Active List.</p>",
         "free": true,
-        "img": "systems/ptr2e/img/svg/dragon_icon.svg"
+        "img": "systems/ptr2e/img/svg/dragon_icon.svg",
+        "predicate": []
       }
     ],
     "_migration": {
@@ -42,5 +42,59 @@
     "grade": "E"
   },
   "_id": "8oRKjmSuk6rgXg7e",
-  "effects": []
+  "effects": [
+    {
+      "name": "Clangorous Soulblaze",
+      "type": "passive",
+      "_id": "YsZvDL9X2vGZGiPU",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "clangorous-soulblaze",
+            "value": "Compendium.ptr2e.core-effects.Item.rMNLqloV5nLmCLrZ",
+            "predicate": [],
+            "chance": 100,
+            "affects": "self",
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.5.1.2",
+        "createdTime": 1737223395024,
+        "modifiedTime": 1737223439628,
+        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
+      }
+    }
+  ]
 }

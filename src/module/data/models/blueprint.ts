@@ -5,6 +5,9 @@ import { SlugField } from "../fields/slug-field.ts";
 import { ItemPTR2e } from "@item";
 import SpeciesSystem from "@item/data/species.ts";
 import { ActorPTR2e } from "@actor";
+import { DataUnionField } from "../fields/data-union-field.ts";
+import { StrictStringField } from "../fields/strict-primitive-fields.ts";
+import { HabitatRollTable } from "@system/habitat-table.ts";
 
 class Blueprint extends foundry.abstract.DataModel {
   static LOCALIZATION_PREFIXES = ["PTR2E.Blueprint"];
@@ -37,21 +40,28 @@ class Blueprint extends foundry.abstract.DataModel {
 
     return {
       id: new fields.DocumentIdField({ initial: fu.randomID(), required: true, nullable: false }),
-      species: new fields.DocumentUUIDField({
-        required: true, nullable: true, initial: null, embedded: false, validate: (value) => {
-          const uuid = fu.parseUuid(String(value));
-          return uuid && (uuid.documentType === "RollTable" || uuid.documentType === "Item" || uuid.documentType === "Actor");
-        }, validationError: "The species must be a valid (Species) Item, Actor, Rolltable UUID or null.",
+      species: new DataUnionField([
+        new fields.DocumentUUIDField({
+          required: true, nullable: true, initial: null, embedded: false, validate: (value) => {
+            const uuid = fu.parseUuid(String(value));
+            return uuid && (uuid.documentType === "RollTable" || uuid.documentType === "Item" || uuid.documentType === "Actor");
+          }, validationError: "The species must be a valid (Species) Item, Actor, Rolltable UUID or null.",
+        }),
+        new StrictStringField({ required: true, nullable: true, initial: null, validate: (value) => CONFIG.PTR.data.habitats[value as keyof typeof CONFIG.PTR.data.habitats] !== undefined })
+      ], {
+        required: true,
+        nullable: true,
+        initial: null,
         label: "PTR2E.Blueprint.FIELDS.species.label",
         hint: "PTR2E.Blueprint.FIELDS.species.hint"
       }),
       shiny: new fields.NumberField({
-        required: true, 
-        initial: 1, 
-        nullable: false, 
-        min: 0, 
+        required: true,
+        initial: 1,
+        nullable: false,
+        min: 0,
         max: 100,
-        step: 1, 
+        step: 1,
         label: "PTR2E.Blueprint.FIELDS.shiny.label",
         hint: "PTR2E.Blueprint.FIELDS.shiny.hint"
       }),
@@ -109,7 +119,11 @@ class Blueprint extends foundry.abstract.DataModel {
         }, validationError: "The nature must be a valid nature, a UUID to a Rolltable or null.",
         label: "PTR2E.Blueprint.FIELDS.nature.label",
         hint: "PTR2E.Blueprint.FIELDS.nature.hint"
-        
+      }),
+      gender: new fields.StringField({
+        required: true, initial: null, nullable: true, trim: true, blank: false, choices: ["random", "male", "female", "genderless"].reduce((acc, val) => ({...acc, [val]: val}), {}),
+        label: "PTR2E.Blueprint.FIELDS.gender.label",
+        hint: "PTR2E.Blueprint.FIELDS.gender.hint"
       }),
       evs: new fields.SchemaField({
         uuid: new fields.DocumentUUIDField({ required: false, nullable: false, embedded: false, type: "RollTable", initial: undefined }),
@@ -179,7 +193,15 @@ class Blueprint extends foundry.abstract.DataModel {
   async prepareAsyncData(): Promise<void> {
     if (this.preparedAsyncData) return;
 
-    const doc = await fromUuid<ItemPTR2e<SpeciesSystem> | RollTable | ActorPTR2e>(this._source.species);
+    const doc = await (async () => {
+      if(CONFIG.PTR.data.habitats[this._source.species as keyof typeof CONFIG.PTR.data.habitats] !== undefined) {
+        const table = new HabitatRollTable({habitat: this._source.species as keyof typeof CONFIG.PTR.data.habitats});
+        await table.init();
+        return table;
+      }
+
+      return await fromUuid<ItemPTR2e<SpeciesSystem> | RollTable | ActorPTR2e>(this._source.species);
+    })();
 
     const { name, img } = doc ?? { name: "Invalid UUID", img: "icons/svg/hazard.svg" };
 
@@ -194,7 +216,7 @@ class Blueprint extends foundry.abstract.DataModel {
 interface Blueprint extends foundry.abstract.DataModel, ModelPropsFromSchema<BlueprintSchema> {
   name: string;
   img: ImageFilePath | null;
-  doc: ItemPTR2e<SpeciesSystem> | RollTable | ActorPTR2e | null;
+  doc: ItemPTR2e<SpeciesSystem> | HabitatRollTable | RollTable | ActorPTR2e | null;
 
   _source: SourceFromSchema<BlueprintSchema>;
 }
@@ -202,7 +224,13 @@ interface Blueprint extends foundry.abstract.DataModel, ModelPropsFromSchema<Blu
 interface BlueprintSchema extends foundry.data.fields.DataSchema {
   id: foundry.data.fields.DocumentIdField<string, true, false, true>;
   children: CollectionField<foundry.data.fields.SchemaField<BlueprintSchema>>;
-  species: foundry.data.fields.DocumentUUIDField<SpeciesBlueprint, true, true, true>;
+  species: DataUnionField<
+    | foundry.data.fields.DocumentUUIDField<SpeciesBlueprint, true, true, true>
+    | StrictStringField<string, string, true, true, true>,
+    true,
+    true,
+    true
+  >;
   level: foundry.data.fields.StringField<LevelBlueprint, LevelBlueprint, true, true, true>;
   nature: foundry.data.fields.StringField<NatureBlueprint, NatureBlueprint, true, true, true>;
   evs: foundry.data.fields.SchemaField<EVSSchema, SourceFromSchema<EVSSchema>, ModelPropsFromSchema<EVSSchema>>;
@@ -212,6 +240,7 @@ interface BlueprintSchema extends foundry.data.fields.DataSchema {
   sort: foundry.data.fields.NumberField<number, number, true, false, true>;
   preventEvolution: foundry.data.fields.BooleanField<boolean, boolean, true, false, true>;
   shiny: foundry.data.fields.NumberField<number, number, true, false, true>;
+  gender: foundry.data.fields.StringField<"random" | "male" | "female" | "genderless", "random" | "male" | "female" | "genderless", true, false, true>;
 }
 
 interface EVSSchema extends foundry.data.fields.DataSchema {

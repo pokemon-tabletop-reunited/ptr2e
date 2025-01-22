@@ -4,11 +4,6 @@
   "img": "systems/ptr2e/img/svg/shadow_icon.svg",
   "system": {
     "slug": "shadow-hold",
-    "description": "<p>Effect: All valid targets are @Affliction[stuck] 5.</p>",
-    "traits": [
-      "social",
-      "friendly"
-    ],
     "actions": [
       {
         "slug": "shadow-hold",
@@ -16,7 +11,8 @@
         "type": "attack",
         "traits": [
           "social",
-          "friendly"
+          "friendly",
+          "pp-updated"
         ],
         "range": {
           "target": "cone",
@@ -25,18 +21,15 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 4,
-          "delay": null,
-          "priority": null,
-          "trigger": null
+          "powerPoints": 4
         },
         "category": "status",
         "power": null,
-        "accuracy": null,
+        "accuracy": 90,
         "types": [
           "shadow"
         ],
-        "description": "<p>Effect: All valid targets are @Affliction[stuck] 5.</p>",
+        "description": "<p>Effect: All valid targets are @Affliction[bound] 5, @Affliction[fear] 5, and @Affliction [wracked] 5.</p>",
         "contestType": "",
         "contestEffect": "",
         "free": false,
@@ -44,7 +37,7 @@
       }
     ],
     "container": null,
-    "grade": "A"
+    "grade": "C"
   },
   "_id": "CyMi4XRCGuVLIGPW",
   "effects": []

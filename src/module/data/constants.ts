@@ -104,8 +104,7 @@ type ContestType = typeof ContestTypes[keyof typeof ContestTypes];
 
 const CarryTypes = {
     stowed: "PTR2E.FIELDS.gear.equipped.carryType.stowed",
-    held: "PTR2E.FIELDS.gear.equipped.carryType.held",
-    worn: "PTR2E.FIELDS.gear.equipped.carryType.worn",
+    equipped: "PTR2E.FIELDS.gear.equipped.carryType.equipped",
     dropped: "PTR2E.FIELDS.gear.equipped.carryType.dropped"
 } as const;
 

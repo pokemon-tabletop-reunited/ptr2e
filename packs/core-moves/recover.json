@@ -4,17 +4,14 @@
   "img": "systems/ptr2e/img/svg/normal_icon.svg",
   "system": {
     "slug": "recover",
-    "description": "<p>Effect: The user recovers HP equal to 1/2 their Max HP.</p>",
-    "traits": [
-      "healing"
-    ],
     "actions": [
       {
         "slug": "recover",
         "name": "Recover",
         "type": "attack",
         "traits": [
-          "healing"
+          "healing",
+          "pp-updated"
         ],
         "range": {
           "target": "creature",
@@ -23,10 +20,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 8,
-          "delay": null,
-          "priority": null,
-          "trigger": null
+          "powerPoints": 4
         },
         "category": "status",
         "power": null,
@@ -42,7 +36,7 @@
       }
     ],
     "container": null,
-    "grade": "E"
+    "grade": "B"
   },
   "_id": "n3gQmzykv7SFPL6K",
   "effects": []
