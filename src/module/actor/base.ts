@@ -745,15 +745,24 @@ class ActorPTR2e<
     return stat.value * stageModifier();
   }
 
-  async applyTickDamage({ticks, apply}: {ticks: number, apply: false}): Promise<{applied: number, update: Record<string, unknown>}>;
-  async applyTickDamage({ticks, apply}: {ticks: number, apply: true}): Promise<{applied: number, message: ChatMessagePTR2e}>;
-  async applyTickDamage({ticks, apply}: {ticks: number, apply?: boolean}): Promise<{applied: number, update?: Record<string, unknown>, message?: ChatMessagePTR2e}>;
-  async applyTickDamage({ticks, apply=true}: {ticks: number, apply?: boolean}): Promise<{applied: number, update?: Record<string, unknown>, message?: ChatMessagePTR2e}> {
+  async applyTickDamage({ticks, apply, shield}: {ticks: number, apply: false, shield?: boolean}): Promise<{applied: number, update: Record<string, unknown>}>;
+  async applyTickDamage({ticks, apply, shield}: {ticks: number, apply: true, shield?: boolean}): Promise<{applied: number, message: ChatMessagePTR2e}>;
+  async applyTickDamage({ticks, apply, shield}: {ticks: number, apply?: boolean, shield?: boolean}): Promise<{applied: number, update?: Record<string, unknown>, message?: ChatMessagePTR2e}>;
+  async applyTickDamage({ticks, apply=true, shield=false}: {ticks: number, apply?: boolean, shield?: boolean}): Promise<{applied: number, update?: Record<string, unknown>, message?: ChatMessagePTR2e}> {
     const isDamage = ticks < 0;
     const amount = Math.floor((this.system.health.max / 16) * Math.abs(ticks))
-    const applied = Math.min(amount || 0, isDamage ? this.system.health.value : this.system.health.max - this.system.health.value);
+    const applied = shield 
+    ? Math.min(amount || 0, isDamage ? this.system.shield.value : Infinity)
+    : Math.min(amount || 0, isDamage ? this.system.health.value : this.system.health.max - this.system.health.value);
 
-    const update = {
+    const update = shield
+    ? {
+      "system.shield.value": Math.max(
+        this.system.shield.value - (isDamage ? applied : -applied),
+        0
+      )
+    }
+    : {
       "system.health.value": Math.clamp(
         this.system.health.value + (isDamage ? -amount : amount),
         0,
@@ -774,6 +783,7 @@ class ActorPTR2e<
         type: "damage-applied",
         system: {
           damageApplied: isDamage ? applied : -applied,
+          shieldApplied: shield,
           target: this.uuid
         }
       })
