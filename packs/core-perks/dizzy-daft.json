@@ -13,8 +13,8 @@
     },
     "actions": [
       {
-        "name": "Dizzy Daft (Active)",
-        "slug": "dizzy-daft-attack",
+        "name": "Dizzy Daft",
+        "slug": "dizzy-daft",
         "description": "<p>You inflict @Affliction[confused] 5 on yourself.</p>",
         "traits": [],
         "type": "attack",
@@ -33,22 +33,6 @@
         "category": "status",
         "free": true,
         "predicate": []
-      },
-      {
-        "name": "Dizzy Daft (Passive)",
-        "slug": "dizzy-daft-action-2",
-        "description": "<p>You are immune to the negative effects of the Confused condition, and never Fumble as a result of it.</p>",
-        "traits": [],
-        "type": "passive",
-        "img": "modules/ptr2e-pkmn-sprites/sprites/327.webp",
-        "range": {
-          "target": "self",
-          "unit": "m"
-        },
-        "cost": {
-          "activation": "free"
-        },
-        "hidden": true
       }
     ],
     "description": "<p>You can confuse yourself, and avoid the ill-effects.</p>",
@@ -105,7 +89,7 @@
           {
             "type": "roll-option",
             "value": "damage:affliction:confused",
-            "domain": "immunities",
+            "domain": "immunities"
           }
         ],
         "slug": null,
