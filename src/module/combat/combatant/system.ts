@@ -79,6 +79,13 @@ export default class CombatantSystemPTR2e extends foundry.abstract.TypeDataModel
     return;
   }
 
+  /**
+   * Overridden by subclasses to perform actions when the combatant's turn ends
+   */
+  async onEndActivation() {
+    return;
+  }
+
   override async _preUpdate(changed: DeepPartial<this["parent"]["_source"]>, options: DocumentUpdateContext<this["parent"]["parent"]>, user: User): Promise<boolean | void> {
     const result = await super._preUpdate(changed, options, user);
     if (result === false) return false;

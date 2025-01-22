@@ -154,7 +154,7 @@ export default abstract class PerkSystem extends PerkExtension {
 
         const traitRollOption = predicate.trim().match(/^(trait):(?<slug>[-a-z0-9]+)$/);
         if(traitRollOption) {
-          return `[${Handlebars.helpers.formatSlug(traitRollOption.groups?.slug)}]`;
+          return `<span class="trait" data-tooltip-direction="UP" data-trait="${traitRollOption.groups?.slug}" data-tooltip="${traitRollOption.groups?.slug}"><span>[</span><span class="tag">${Handlebars.helpers.formatSlug(traitRollOption.groups?.slug)}</span><span>]</span></span>`
         }
         
         const injected = predicate.trim().match(/^{(?<type>actor|item|effect|change)\|(?<path>[\w.-]+)}$/);

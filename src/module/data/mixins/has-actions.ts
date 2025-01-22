@@ -3,7 +3,7 @@ import { TemplateConstructor } from './data-template.ts';
 import { ActionPTR2e } from '@data';
 import { ActionModelTypes } from '../models/base.ts';
 import { ActorPTR2e } from '@actor';
-import { AbilityPTR2e, ItemPTR2e } from '@item';
+import { AbilityPTR2e, GearPTR2e, ItemPTR2e } from '@item';
 import { CollectionField } from '../fields/collection-field.ts';
 
 /**
@@ -38,6 +38,11 @@ export default function HasActions<BaseClass extends TemplateConstructor>(baseCl
           if (!this._isValidAbilityParent(this.parent)) continue;
         }
 
+        // If an item isn't equipped it should be ignored
+        if (this._isGearParent(this.parent)) {
+          if(this.parent.system.equipped.carryType !== "equipped") continue;
+        }
+
         action.prepareDerivedData();
         this.parent.actions.set(action.slug, action);
       }
@@ -57,6 +62,16 @@ export default function HasActions<BaseClass extends TemplateConstructor>(baseCl
     private _isValidAbilityParent(parent: AbilityPTR2e) {
       if(!parent.parent) return true;
       return !parent.system.isSuppressed && (parent.system.free || parent.system.slot !== null);
+    }
+
+    private _isGearParent(parent: ActorPTR2e | ItemPTR2e): parent is GearPTR2e {
+      return parent instanceof ItemPTR2e && [
+        "weapon",
+        "equipment",
+        "consumable",
+        "gear",
+        "container",
+      ].includes(parent.type);
     }
   }
 

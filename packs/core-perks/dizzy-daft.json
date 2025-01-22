@@ -4,8 +4,12 @@
   "folder": "e9XnhZdjIE7hroYs",
   "system": {
     "_migration": {
-      "version": 0.109,
-      "previous": null
+      "version": 0.11,
+      "previous": {
+        "schema": 0.109,
+        "foundry": "12.331",
+        "system": "0.10.0-alpha.5.1.5"
+      }
     },
     "actions": [
       {
@@ -81,9 +85,9 @@
   "img": "systems/ptr2e/img/perk-icons/Breeder.svg",
   "effects": [
     {
-      "name": "Dizzy Daft (Active)",
+      "name": "Dizzy Daft",
       "type": "passive",
-      "_id": "tweZIqQKb4F0W025",
+      "_id": "03AB6rXnGwbeK2kJ",
       "img": "systems/ptr2e/img/icons/effect_icon.webp",
       "system": {
         "changes": [
@@ -97,6 +101,11 @@
             "mode": 2,
             "priority": null,
             "ignored": false
+          },
+          {
+            "type": "roll-option",
+            "value": "damage:affliction:confused",
+            "domain": "immunities",
           }
         ],
         "slug": null,
@@ -115,7 +124,7 @@
         "startRound": null,
         "startTurn": null
       },
-      "description": "",
+      "description": "<p>You can confuse yourself, and avoid the ill-effects.</p>",
       "origin": null,
       "tint": "#ffffff",
       "transfer": true,
