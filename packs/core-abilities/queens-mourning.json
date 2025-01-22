@@ -8,7 +8,7 @@
         "traits": [],
         "name": "Queen's Mourning",
         "slug": "queens-mourning",
-        "type": "generic",
+        "type": "attack",
         "cost": {
           "activation": "free",
           "powerPoints": 3,
@@ -19,7 +19,13 @@
           "unit": "m"
         },
         "description": "<p>Trigger: The user gains a negative [Stage Change] effect.</p><p>Effect: The user's SPATK and SPDEF Stages are increased by +1 for 5 Activations.</p>",
-        "img": "icons/svg/explosion.svg"
+        "img": "systems/ptr2e/img/icons/special_icon.png",
+        "types": [
+          "untyped"
+        ],
+        "category": "status",
+        "free": true,
+        "predicate": []
       }
     ],
     "description": "<p>Trigger: The user gains a negative [Stage Change] effect.</p><p>Effect: The user's SPATK and SPDEF Stages are increased by +1 for 5 Activations.</p>",
@@ -31,5 +37,70 @@
     }
   },
   "_id": "8GvXZx8XZA5lTatw",
-  "effects": []
+  "effects": [
+    {
+      "name": "Queen's Mourning",
+      "type": "passive",
+      "_id": "7EKstT2fcGDFn6Xw",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "queens-mourning-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.1TqcwIUNl32wJCAa",
+            "predicate": [],
+            "chance": 100,
+            "affects": "self",
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "roll-effect",
+            "key": "queens-mourning-ttack",
+            "value": "Compendium.ptr2e.core-effects.Item.jEX7s3GbbAtzgyS3",
+            "predicate": [],
+            "chance": 100,
+            "affects": "self",
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.5.1.6",
+        "createdTime": 1737564686740,
+        "modifiedTime": 1737564735607,
+        "lastModifiedBy": "IcBpMqhFuTck9VpX"
+      }
+    }
+  ]
 }

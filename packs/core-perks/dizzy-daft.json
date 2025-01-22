@@ -14,10 +14,10 @@
     "actions": [
       {
         "name": "Dizzy Daft (Active)",
-        "slug": "dizzy-daft-action-1",
+        "slug": "dizzy-daft-attack",
         "description": "<p>You inflict @Affliction[confused] 5 on yourself.</p>",
         "traits": [],
-        "type": "generic",
+        "type": "attack",
         "img": "modules/ptr2e-pkmn-sprites/sprites/327.webp",
         "range": {
           "target": "self",
@@ -26,7 +26,13 @@
         "cost": {
           "activation": "simple",
           "powerPoints": 2
-        }
+        },
+        "types": [
+          "untyped"
+        ],
+        "category": "status",
+        "free": true,
+        "predicate": []
       },
       {
         "name": "Dizzy Daft (Passive)",
@@ -86,18 +92,20 @@
       "system": {
         "changes": [
           {
-            "type": "roll-option",
-            "key": "",
-            "value": "damage:affliction:confused",
+            "type": "roll-effect",
+            "key": "dizzy-daft-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.confusedconditem",
             "predicate": [],
-            "domain": "immunities",
-            "toggleable": false,
-            "count": false,
+            "chance": 100,
+            "affects": "self",
             "mode": 2,
             "priority": null,
-            "ignored": false,
-            "suboptions": [],
-            "state": true
+            "ignored": false
+          },
+          {
+            "type": "roll-option",
+            "value": "damage:affliction:confused",
+            "domain": "immunities",
           }
         ],
         "slug": null,
@@ -128,10 +136,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "ptr2e",
-        "systemVersion": "0.10.0-alpha.5.1.5",
-        "createdTime": 1737564859844,
-        "modifiedTime": 1737565139096,
-        "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
+        "systemVersion": "0.10.0-alpha.5.1.6",
+        "createdTime": 1737565815439,
+        "modifiedTime": 1737565838382,
+        "lastModifiedBy": "IcBpMqhFuTck9VpX"
       }
     }
   ],

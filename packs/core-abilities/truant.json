@@ -21,7 +21,9 @@
       }
     ],
     "description": "<p>Effect: All of the user's attacks have the [Exhaust] trait if they do not have the trait already. All of the user's attacks that are Simple Actions are Complex Actions instead. The user cannot use [Set-Up] attacks. The user's [Exhaust] attacks have +30% Power.</p>",
-    "traits": [],
+    "traits": [
+      "partial-automation"
+    ],
     "slug": "truant",
     "_migration": {
       "version": null,
@@ -29,5 +31,58 @@
     }
   },
   "_id": "1fZMWi8thyYYl8Sz",
-  "effects": []
+  "effects": [
+    {
+      "name": "Truant",
+      "type": "passive",
+      "_id": "xAtYTk5mKWjOkKRU",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "percentile-modifier",
+            "key": "exhaust-trait-attack-power",
+            "value": 30,
+            "predicate": [],
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "hideIfDisabled": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.5.1.6",
+        "createdTime": 1737563805624,
+        "modifiedTime": 1737563824337,
+        "lastModifiedBy": "IcBpMqhFuTck9VpX"
+      }
+    }
+  ]
 }
