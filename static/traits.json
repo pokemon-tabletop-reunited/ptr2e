@@ -2011,21 +2011,27 @@
     "description": "<p>The user may declare Actions with this Trait while they have the @Affliction[frozen] Affliction, curing themselves of the Affliction on declaration.</p><p>Whenever you use an Action with this Trait while suffering from @Affliction[frostbite], you may cure up to 5 stacks of Frostbite on yourself.</p><p>Targets hit by Actions with this Trait are cured of @Affliction[frozen] and up to 5 stacks of @Affliction[frostbite] after the action resolves, any damage dealt ignores the 33% damage reduction from the @Affliction[frozen] Affliction.</p>"
   },
   {
+    "slug": "delay-x",
+    "label": "Delay X",
+    "description": "This action resolves after X other activations have resolved.",
+    "related": []
+  },
+  {
     "slug": "delay-1",
     "label": "Delay 1",
-    "description": "",
+    "description": "This action resolves after 1 other activation has resolved.",
     "related": []
   },
   {
     "slug": "delay-2",
     "label": "Delay 2",
-    "description": "",
+    "description": "This action resolves after 2 other activations have resolved.",
     "related": []
   },
   {
     "slug": "delay-3",
     "label": "Delay 3",
-    "description": "",
+    "description": "This action resolves after 3 other activations have resolved.",
     "related": []
   },
   {
@@ -2353,6 +2359,12 @@
     "label": "Horn",
     "related": [],
     "description": "Denotes if an attack or ability utilizes a horn or a similar prominent pointy appendage."
+  },
+  {
+    "slug": "interrupt-x",
+    "label": "Interrupt X",
+    "related": [],
+    "description": "Denotes that an Action may be used as an Interrupt at hierachy tier \"X\", provided the conditions for using the Interrupt are met."
   },
   {
     "slug": "interrupt-1",
@@ -3611,6 +3623,20 @@
     "label": "Reload",
     "related": [],
     "description": "These weapons can only use their innate PP Pool for their attacks. The user can use a Simple Action to reload the weapon, refilling its PP Pool. This Action either consumes an Ammunition item relating to the weapon, or consumes the Character's IP at an increased cost."
+  },
+  {
+    "slug": "ranger",
+    "label": "Ranger",
+    "related": [],
+    "description": "Creature trait for denoting 'Ranger' type characters.",
+    "type": "narrative"
+  },
+  {
+    "slug": "explorer",
+    "label": "Explorer",
+    "related": [],
+    "description": "Creature trait for denoting 'Explorers' in a PMD-style Campaign.",
+    "type": "narrative"
   },
   {
     "slug": "pokemon",
