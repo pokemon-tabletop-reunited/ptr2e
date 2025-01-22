@@ -3,6 +3,7 @@ import CombatantSystemPTR2e from "../system.ts";
 import { ActorPTR2e } from "@actor";
 import { ActiveEffectPTR2e } from "@effects";
 import { ItemPTR2e } from "@item";
+import AdvancementActiveEffectSystem from "@module/effects/data/advancement.ts";
 
 class CharacterCombatantSystem extends CombatantSystemPTR2e {
   declare parent: CombatantPTR2e;
@@ -43,6 +44,16 @@ class CharacterCombatantSystem extends CombatantSystemPTR2e {
    * Handle Confused Effect
    */
   override async onEndActivation(): Promise<void> {
+    if (!this.actor) return;
+    await this.handleConfusedAffliction();
+
+    for(const effect of this.actor.allApplicableEffects()) {
+      if(effect.type !== "advancement") continue;
+      await (effect.system as AdvancementActiveEffectSystem).onEndActivation(this.parent);
+    }
+  }
+
+  private async handleConfusedAffliction() {
     if (!this.actor) return;
     const confusedEffect = this.actor.effects.find(effect => effect.statuses.has("confused")) as ActiveEffectPTR2e | undefined;
     if (!confusedEffect) return;

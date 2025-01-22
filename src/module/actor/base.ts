@@ -1323,6 +1323,18 @@ class ActorPTR2e<
       options: [...params.options, ...(params.item?.getRollOptions("item") ?? [])],
     });
 
+    //TODO: Probably needs similar implementation to selfItem
+    const selfAttack = params.attack?.clone();
+    selfAttack?.prepareDerivedData();
+    const selfAction = params.action;
+
+    const actionTraitEffects = selfAttack?.traits.contents.flatMap(trait => {
+      if (!trait.changes?.length) return [];
+      const effect = Trait.effectsFromChanges.bind(trait)(this) as ActiveEffectPTR2e<this>;
+      if (effect) return effect.toObject() as unknown as EffectSourcePTR2e[];
+      return [];
+    }) ?? []
+
     const initialActionOptions =
       params.traits?.map((t) => `self:action:trait:${typeof t === "string" ? t : t.slug}`) ??
       [];
@@ -1336,7 +1348,7 @@ class ActorPTR2e<
             ...targetToken.actor.getSelfRollOptions("target"),
             ...initialActionOptions,
           ].filter(R.isTruthy),
-          originEphemeralEffects
+          [...originEphemeralEffects, ...actionTraitEffects]
         );
 
     //TODO: Implement Move Variants
@@ -1393,11 +1405,6 @@ class ActorPTR2e<
       }
       return targetOptions.sort();
     };
-
-    //TODO: Probably needs similar implementation to selfItem
-    const selfAttack = params.attack?.clone();
-    selfAttack?.prepareDerivedData();
-    const selfAction = params.action;
 
     const itemOptions = selfItem?.getRollOptions("item") ?? [];
     const actionOptions = selfAttack?.getRollOptions() ?? [];
@@ -1701,10 +1708,12 @@ class ActorPTR2e<
       if (oldEffect) {
         acc.stacksUpdated.push(oldEffect.uuid);
       } else {
-        acc.notApplied.push(effect);
+        if(effect.type !== "advancement") acc.notApplied.push(effect);
       }
       return acc;
     }, { notApplied: [] as ActiveEffectPTR2e[], stacksUpdated: [] as string[] });
+
+    if(!effects.length && !stacksUpdated.length && !notApplied.length) return;
 
     await ChatMessage.create({
       content: effects.length

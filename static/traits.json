@@ -2164,31 +2164,141 @@
     "slug": "flinch-1",
     "label": "Flinch 1",
     "related": [],
-    "description": "Creature(s) that are target/hit by this Action are Flinched, having their next Activation delayed 10%."
+    "description": "Creature(s) that are target/hit by this Action are Flinched, having their next Activation delayed 10%.",
+    "changes": [
+      {
+        "type": "roll-effect",
+        "key": "attack",
+        "value": "Compendium.ptr2e.core-effects.Item.advanceffectitem",
+        "chance": 100,
+        "affects": "target",
+        "alterations": [
+          {
+            "mode": 5,
+            "property": "system.amount",
+            "value": -10
+          },
+          {
+            "mode": 5,
+            "property": "name",
+            "value": "Delay 10%"
+          }
+        ]
+      }
+    ],
+    "type": "automated"
   },
   {
     "slug": "flinch-2",
     "label": "Flinch 2",
     "related": [],
-    "description": "Creature(s) that are target/hit by this Action are Flinched, having their next Activation delayed 20%."
+    "description": "Creature(s) that are target/hit by this Action are Flinched, having their next Activation delayed 20%.",
+    "changes": [
+      {
+        "type": "roll-effect",
+        "key": "attack",
+        "value": "Compendium.ptr2e.core-effects.Item.advanceffectitem",
+        "chance": 100,
+        "affects": "target",
+        "alterations": [
+          {
+            "mode": 5,
+            "property": "system.amount",
+            "value": -20
+          },
+          {
+            "mode": 5,
+            "property": "name",
+            "value": "Delay 20%"
+          }
+        ]
+      }
+    ],
+    "type": "automated"
   },
   {
     "slug": "flinch-3",
     "label": "Flinch 3",
     "related": [],
-    "description": "Creature(s) that are target/hit by this Action are Flinched, having their next Activation delayed 30%."
+    "description": "Creature(s) that are target/hit by this Action are Flinched, having their next Activation delayed 30%.",
+    "changes": [
+      {
+        "type": "roll-effect",
+        "key": "attack",
+        "value": "Compendium.ptr2e.core-effects.Item.advanceffectitem",
+        "chance": 100,
+        "affects": "target",
+        "alterations": [
+          {
+            "mode": 5,
+            "property": "system.amount",
+            "value": -30
+          },
+          {
+            "mode": 5,
+            "property": "name",
+            "value": "Delay 30%"
+          }
+        ]
+      }
+    ],
+    "type": "automated"
   },
   {
     "slug": "flinch-4",
     "label": "Flinch 4",
     "related": [],
-    "description": "Creature(s) that are target/hit by this Action are Flinched, having their next Activation delayed 40%."
+    "description": "Creature(s) that are target/hit by this Action are Flinched, having their next Activation delayed 40%.",
+    "changes": [
+      {
+        "type": "roll-effect",
+        "key": "attack",
+        "value": "Compendium.ptr2e.core-effects.Item.advanceffectitem",
+        "chance": 100,
+        "affects": "target",
+        "alterations": [
+          {
+            "mode": 5,
+            "property": "system.amount",
+            "value": -40
+          },
+          {
+            "mode": 5,
+            "property": "name",
+            "value": "Delay 40%"
+          }
+        ]
+      }
+    ],
+    "type": "automated"
   },
   {
     "slug": "flinch-5",
     "label": "Flinch 5",
     "related": [],
-    "description": "Creature(s) that are target/hit by this Action are Flinched, having their next Activation delayed 50%."
+    "description": "Creature(s) that are target/hit by this Action are Flinched, having their next Activation delayed 50%.",
+    "changes": [
+      {
+        "type": "roll-effect",
+        "key": "attack",
+        "value": "Compendium.ptr2e.core-effects.Item.advanceffectitem",
+        "chance": 100,
+        "affects": "target",
+        "alterations": [
+          {
+            "mode": 5,
+            "property": "system.amount",
+            "value": -50
+          },
+          {
+            "mode": 5,
+            "property": "name",
+            "value": "Delay 50%"
+          }
+        ]
+      }
+    ],
+    "type": "automated"
   },
   {
     "slug": "flinch-chance-x",
@@ -2464,31 +2574,141 @@
     "slug": "priority-1",
     "label": "Priority 1",
     "related": [],
-    "description": "After resolving this Action, the user's next Activation is advanced 10%."
+    "description": "After resolving this Action, the user's next Activation is advanced 10%.",
+    "changes": [
+      {
+        "type": "roll-effect",
+        "key": "attack",
+        "value": "Compendium.ptr2e.core-effects.Item.advanceffectitem",
+        "chance": 100,
+        "affects": "self",
+        "alterations": [
+          {
+            "mode": 5,
+            "property": "system.amount",
+            "value": 10
+          },
+          {
+            "mode": 5,
+            "property": "name",
+            "value": "Advance 10%"
+          }
+        ]
+      }
+    ],
+    "type": "automated"
   },
   {
     "slug": "priority-2",
     "label": "Priority 2",
     "related": [],
-    "description": "After resolving this Action, the user's next Activation is advanced 20%."
+    "description": "After resolving this Action, the user's next Activation is advanced 20%.",
+    "changes": [
+      {
+        "type": "roll-effect",
+        "key": "attack",
+        "value": "Compendium.ptr2e.core-effects.Item.advanceffectitem",
+        "chance": 100,
+        "affects": "self",
+        "alterations": [
+          {
+            "mode": 5,
+            "property": "system.amount",
+            "value": 20
+          },
+          {
+            "mode": 5,
+            "property": "name",
+            "value": "Advance 20%"
+          }
+        ]
+      }
+    ],
+    "type": "automated"
   },
   {
     "slug": "priority-3",
     "label": "Priority 3",
     "related": [],
-    "description": "After resolving this Action, the user's next Activation is advanced 30%."
+    "description": "After resolving this Action, the user's next Activation is advanced 30%.",
+    "changes": [
+      {
+        "type": "roll-effect",
+        "key": "attack",
+        "value": "Compendium.ptr2e.core-effects.Item.advanceffectitem",
+        "chance": 100,
+        "affects": "self",
+        "alterations": [
+          {
+            "mode": 5,
+            "property": "system.amount",
+            "value": 30
+          },
+          {
+            "mode": 5,
+            "property": "name",
+            "value": "Advance 30%"
+          }
+        ]
+      }
+    ],
+    "type": "automated"
   },
   {
     "slug": "priority-4",
     "label": "Priority 4",
     "related": [],
-    "description": "After resolving this Action, the user's next Activation is advanced 40%."
+    "description": "After resolving this Action, the user's next Activation is advanced 40%.",
+    "changes": [
+      {
+        "type": "roll-effect",
+        "key": "attack",
+        "value": "Compendium.ptr2e.core-effects.Item.advanceffectitem",
+        "chance": 100,
+        "affects": "self",
+        "alterations": [
+          {
+            "mode": 5,
+            "property": "system.amount",
+            "value": 40
+          },
+          {
+            "mode": 5,
+            "property": "name",
+            "value": "Advance 40%"
+          }
+        ]
+      }
+    ],
+    "type": "automated"
   },
   {
     "slug": "priority-5",
     "label": "Priority 5",
     "related": [],
-    "description": "After resolving this Action, the user's next Activation is advanced 50%."
+    "description": "After resolving this Action, the user's next Activation is advanced 50%.",
+    "changes": [
+      {
+        "type": "roll-effect",
+        "key": "attack",
+        "value": "Compendium.ptr2e.core-effects.Item.advanceffectitem",
+        "chance": 100,
+        "affects": "self",
+        "alterations": [
+          {
+            "mode": 5,
+            "property": "system.amount",
+            "value": 50
+          },
+          {
+            "mode": 5,
+            "property": "name",
+            "value": "Advance 50%"
+          }
+        ]
+      }
+    ],
+    "type": "automated"
   },
   {
     "slug": "pulse",

@@ -16,6 +16,7 @@
   "TYPES.Item.summon": "Summon",
   "TYPES.ActiveEffect.passive": "Passive Effect",
   "TYPES.ActiveEffect.affliction": "Affliction",
+  "TYPES.ActiveEffect.advancement": "Advance/Delay",
   "TYPES.ActiveEffect.summon": "Summon Effect",
   "TYPES.ActiveEffect.form": "Forme",
   "ITEM.AddButton": "Add",
@@ -641,6 +642,10 @@
         "stacks": {
           "label": "Stacks",
           "hint": "The number of stacks this Affliction currently has."
+        },
+        "amount": {
+          "label": "Advance/Delay Amount",
+          "hint": "The % to Advance (positive) or Delay (negative) the target's turn by."
         },
         "duration": {
           "turns": {
@@ -1294,7 +1299,9 @@
         "Round": "Start of Round {round}",
         "End": "End of Combat",
         "ConfusionRoll": "{name} is Confused! Will they hit themselves...?",
-        "ConfusionRollSuccess": "{name} does not hit themselves!"
+        "ConfusionRollSuccess": "{name} does not hit themselves!",
+        "Advanced": "Advanced {name}'s activation by {amount}%!",
+        "Delayed": "Delayed {name}'s activation by {amount}%!"
       },
       "Round": {
         "Name": "Round"
