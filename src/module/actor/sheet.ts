@@ -497,6 +497,9 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
             "equipment",
             "container",
           ];
+          for(const type of physicalItems) {
+            if(!inventory[type]) inventory[type] = [];
+          }
           function isTypeOfPhysicalItem(
             item: Item
           ): item is ItemPTR2e<
@@ -511,7 +514,6 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
           }
           if (isTypeOfPhysicalItem(item)) {
             const category = item.type;
-            if (!inventory[category]) inventory[category] = [];
             inventory[category].push(item);
           }
         }
