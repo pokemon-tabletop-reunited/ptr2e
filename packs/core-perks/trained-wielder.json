@@ -2,34 +2,10 @@
   "name": "Trained Wielder",
   "type": "perk",
   "system": {
-    "prerequisites": [
-      "#Lack a Wielding slot."
-    ],
+    "prerequisites": [],
     "cost": 2,
-    "description": "<p>Gain a Wielded Item Slot.</p>",
-    "actions": [
-      {
-        "name": "Trained Wielder",
-        "slug": "trained-wielder",
-        "description": "<p>Gain a Wielded Item Slot.</p>",
-        "cost": {
-          "activation": "free",
-          "powerPoints": 0,
-          "delay": null,
-          "priority": null
-        },
-        "type": "passive",
-        "traits": [],
-        "img": "icons/svg/explosion.svg",
-        "range": {
-          "target": "enemy",
-          "unit": "m",
-          "distance": 0
-        },
-        "variant": null,
-        "hidden": false
-      }
-    ],
+    "description": "<p>You gain the @Trait[wielder] Trait</p>",
+    "actions": [],
     "slug": "trained-wielder",
     "traits": [],
     "_migration": {
@@ -63,15 +39,66 @@
         "tier": null
       }
     ],
-    "autoUnlock": [],
-    "originSlug": null,
-    "variant": null,
-    "mode": null,
+    "autoUnlock": [
+      "trait:wielder"
+    ],
     "global": true,
     "webs": []
   },
   "_id": "Noilrz4vhlRIcrO3",
   "img": "systems/ptr2e/img/perk-icons/Tactician.svg",
-  "effects": [],
+  "effects": [
+    {
+      "name": "Trained Wielder",
+      "type": "passive",
+      "_id": "bpQjAA2XFel5zc8B",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "add-trait",
+            "key": "",
+            "value": "wielder",
+            "predicate": [],
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "<p>You gain the @Trait[wielder] Trait.</p>",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.5.1.5",
+        "createdTime": 1737565954035,
+        "modifiedTime": 1737566017540,
+        "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
+      }
+    }
+  ],
   "folder": "oMMIXyKwOCIxMHrK"
 }
