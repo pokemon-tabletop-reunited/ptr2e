@@ -80,7 +80,7 @@ export interface TutorListSettings extends foundry.abstract.DataModel, ModelProp
   _source: SourceFromSchema<TutorListSettingsSchema>;
 }
 
-class TutorListSchema extends foundry.abstract.DataModel {
+export class TutorListSchema extends foundry.abstract.DataModel {
   static override defineSchema() {
     return {
       // Slug of trait or Ability Name
@@ -108,7 +108,7 @@ class TutorListSchema extends foundry.abstract.DataModel {
   }
 }
 
-interface TutorListSchema extends foundry.abstract.DataModel, ModelPropsFromSchema<_TutorListSettingsSchema> {
+export interface TutorListSchema extends foundry.abstract.DataModel, ModelPropsFromSchema<_TutorListSettingsSchema> {
   _source: SourceFromSchema<_TutorListSettingsSchema>;
 }
 

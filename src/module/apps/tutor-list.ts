@@ -2,6 +2,7 @@ import { formatSlug, sluggify } from "@utils";
 import { ApplicationConfigurationExpanded, ApplicationV2Expanded } from "./appv2-expanded.ts";
 import { HandlebarsRenderOptions } from "types/foundry/common/applications/handlebars-application.ts";
 import { ActorPTR2e } from "@actor";
+import { TutorListSchema } from "@system/tutor-list/setting-model.ts";
 
 export class TutorListApp extends foundry.applications.api.HandlebarsApplicationMixin(ApplicationV2Expanded) {
   static override DEFAULT_OPTIONS = fu.mergeObject(
@@ -68,6 +69,8 @@ export class TutorListApp extends foundry.applications.api.HandlebarsApplication
       lists: (this.actor ? this.filterList() : lists).sort((a, b) => {
         if (a.slug === "universal") return -1;
         if (b.slug === "universal") return 1;
+        if (a.slug === "species-list") return -1;
+        if (b.slug === "species-list") return 1;
         if (a.type === b.type) {
           return a.slug.localeCompare(b.slug);
         }
@@ -93,6 +96,17 @@ export class TutorListApp extends foundry.applications.api.HandlebarsApplication
     if (!actor) return tutorList.list.contents;
 
     const resultLists = [tutorList.get("universal-universal")!];
+
+    const speciesList = this.actor?.species?.moves.tutor.reduce((acc, val) => {
+      const slug = sluggify(val.name);
+      acc.moves.set(slug, {slug, uuid: val.uuid});
+      return acc;
+    }, {
+      slug: "species-list",
+      type: "universal",
+      moves: new Collection()
+    } as TutorListSchema) ?? null;
+    if(speciesList?.moves?.size) resultLists.push(speciesList);
 
     for (const trait of actor.traits) {
       const list = tutorList.getType(trait.slug, "trait");
