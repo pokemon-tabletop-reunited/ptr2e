@@ -4,8 +4,12 @@
   "folder": "e9XnhZdjIE7hroYs",
   "system": {
     "_migration": {
-      "version": 0.109,
-      "previous": null
+      "version": 0.11,
+      "previous": {
+        "schema": 0.109,
+        "foundry": "12.331",
+        "system": "0.10.0-alpha.5.1.5"
+      }
     },
     "actions": [
       {
@@ -69,11 +73,67 @@
     "webs": [
       "Compendium.ptr2e.core-species.Item.DN39HBQfR7lFM73H"
     ],
-    "global": false,
     "slug": "dizzy-daft",
     "autoUnlock": []
   },
   "img": "systems/ptr2e/img/perk-icons/Breeder.svg",
-  "effects": [],
+  "effects": [
+    {
+      "name": "Dizzy Daft",
+      "type": "passive",
+      "_id": "03AB6rXnGwbeK2kJ",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-option",
+            "key": "",
+            "value": "damage:affliction:confused",
+            "predicate": [],
+            "domain": "immunities",
+            "toggleable": false,
+            "count": false,
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "suboptions": [],
+            "state": true
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "<p>You can confuse yourself, and avoid the ill-effects.</p>",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.5.1.5",
+        "createdTime": 1737564859844,
+        "modifiedTime": 1737565139096,
+        "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
+      }
+    }
+  ],
   "_id": "y3aSWoyIMrXrn0l1"
 }
