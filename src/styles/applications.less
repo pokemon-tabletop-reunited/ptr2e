@@ -537,12 +537,34 @@ body {
                         }
     
                         .item-controls {
-                            flex-basis: 4.75rem;
-                            gap: 1px;
-                            justify-content: end;
-    
-                            align-items: center;
-                            display: flex;
+                          flex-basis: 4.75rem;
+                          gap: 1px;
+                          justify-content: end;
+  
+                          align-items: center;
+                          display: flex;
+
+                          > a {
+                            &.item-carry-type {
+                              color: color-mix(in srgb, var(--appv2-text-color) 40%, transparent);
+                              text-align: right;
+
+                              &.active {
+                                color: var(--user-color);
+                              }
+                            }
+
+                            // Hands-held with interior number
+                            .fa-stack {
+                              margin: calc(-1 * var(0.1875rem)) calc(-1 * var(0.125rem)) 0;
+
+                              .fa-1,
+                              .fa-2 {
+                                left: 0.0625rem;;
+                                position: relative;
+                              }
+                            }
+                          }
                         }
                     }
                 }

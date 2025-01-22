@@ -474,6 +474,26 @@ body .application.sheet .form-group {
   align-items: center;
   display: flex;
 }
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] header .item-controls > a.item-carry-type,
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] ul.items .item-controls > a.item-carry-type {
+  color: color-mix(in srgb, var(--appv2-text-color) 40%, transparent);
+  text-align: right;
+}
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] header .item-controls > a.item-carry-type.active,
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] ul.items .item-controls > a.item-carry-type.active {
+  color: var(--user-color);
+}
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] header .item-controls > a .fa-stack,
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] ul.items .item-controls > a .fa-stack {
+  margin: calc(-1 * var(0.1875rem)) calc(-1 * var(0.125rem)) 0;
+}
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] header .item-controls > a .fa-stack .fa-1,
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] ul.items .item-controls > a .fa-stack .fa-1,
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] header .item-controls > a .fa-stack .fa-2,
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] ul.items .item-controls > a .fa-stack .fa-2 {
+  left: 0.0625rem;
+  position: relative;
+}
 .application.sheet.actor.v2 .window-content .tab.active[data-tab="actions"] {
   display: grid;
   grid-template-areas: "subnav" "body";

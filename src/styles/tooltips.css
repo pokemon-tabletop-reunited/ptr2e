@@ -310,3 +310,38 @@ footer.suppressed {
   margin-top: 1rem;
   border: 1px solid var(--border-theme-color);
 }
+aside.locked-tooltip.ptr2e.carry-type-menu {
+  white-space: nowrap;
+  min-width: 7rem;
+}
+aside.locked-tooltip.ptr2e.carry-type-menu ul {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  justify-content: center;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+aside.locked-tooltip.ptr2e.carry-type-menu li {
+  align-items: center;
+  display: flex;
+}
+aside.locked-tooltip.ptr2e.carry-type-menu li a {
+  align-items: center;
+  color: rgba(255, 255, 255, 0.5);
+  display: flex;
+  gap: 0.125rem;
+  justify-content: space-around;
+  width: 100%;
+}
+aside.locked-tooltip.ptr2e.carry-type-menu li a:hover {
+  text-shadow: none;
+}
+aside.locked-tooltip.ptr2e.carry-type-menu li a.selected {
+  color: var(--text-light);
+}
+aside.locked-tooltip.ptr2e.carry-type-menu li a.selected:hover {
+  cursor: default;
+  text-shadow: none;
+}
