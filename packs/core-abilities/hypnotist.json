@@ -5,20 +5,22 @@
   "system": {
     "actions": [
       {
-        "traits": [],
+        "traits": [
+          "interrupt-3"
+        ],
         "name": "Hypnotist",
         "slug": "hypnotist-active",
         "type": "generic",
         "cost": {
           "activation": "free",
-          "powerPoints": 5
+          "powerPoints": 3
         },
         "range": {
           "target": "self",
           "unit": "m"
         },
-        "description": "<p>The user freely uses Hypnosis.</p>",
-        "img": "icons/svg/explosion.svg"
+        "description": "<p>Trigger: A creature moves to a space within 5m of the user that was previously not within a 5m radius of the user.<br><br>Effect: The user may spend 3PP to use Hypnosis against the creature as a Free Action Interrupt.</p>",
+        "img": "icons/magic/control/hypnosis-mesmerism-pendulum.webp"
       },
       {
         "traits": [],
@@ -28,15 +30,15 @@
         "cost": {
           "activation": "free"
         },
-        "description": "<p>Passive: The user's Hypnosis has +30 Accuracy and has +5 Range.</p>",
-        "img": "icons/svg/explosion.svg",
+        "description": "<p>Passive: The user's Hypnosis gains Danger Close.</p>",
+        "img": "icons/magic/control/hypnosis-mesmerism-pendulum.webp",
         "range": {
           "target": "enemy",
           "unit": "m"
         }
       }
     ],
-    "description": "<p>Effect: Connection - Hypnosis.  The user spends 5 PP and freely uses Hypnosis. Passive: The user's Hypnosis has +30 Accuracy and has +5 Range.</p>",
+    "description": "<p>Effect: Connection - Hypnosis. <br><br>Interrupt Trigger: An enemy moves into range, allowing the user to activate Hypnosis as a Free Action Interrupt.<br><br>Passive: The user's Hypnosis gains Danger Close.</p>",
     "traits": [
       "partial-automation",
       "connection"
@@ -110,10 +112,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "ptr2e",
-        "systemVersion": "0.10.0-alpha.5.1.5",
+        "systemVersion": "0.10.0-alpha.5.1.6",
         "createdTime": 1737403414513,
-        "modifiedTime": 1737403434865,
-        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+        "modifiedTime": 1737478641006,
+        "lastModifiedBy": "IcBpMqhFuTck9VpX"
       }
     }
   ]

@@ -4,10 +4,8 @@
   "img": "icons/commodities/tech/furnace-modern.webp",
   "system": {
     "actions": [],
-    "description": "<p>Trigger: The user is hit by a Water- or Fire-Type attack.</p><p>Effect: The user's SPD Stages are increased by +6 for 5 activations.<br><br>Note: Effect has to be manually dragged onto the actor at this time.<br><br>@embed[Compendium.ptr2e.core-effects.Item.MK3yA3vNby5Z3Yya.ActiveEffect.Oje9HVS8FwjF5cvR]</p>",
-    "traits": [
-      "partial-automation"
-    ],
+    "description": "<p>Trigger: The user is hit by a Water- or Fire-Type attack.</p><p>Effect: The user's SPD Stages are increased by +6 for 5 activations.</p>",
+    "traits": [],
     "slug": "steam-engine",
     "_migration": {
       "version": null,
@@ -15,5 +13,70 @@
     }
   },
   "_id": "eVG37vKjRQJBAvD4",
-  "effects": []
+  "effects": [
+    {
+      "name": "Steam Engine",
+      "type": "passive",
+      "_id": "dKht7gKjmlpvDLys",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "water-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.MK3yA3vNby5Z3Yya",
+            "predicate": [],
+            "chance": 100,
+            "affects": "defensive",
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "roll-effect",
+            "key": "fire-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.MK3yA3vNby5Z3Yya",
+            "predicate": [],
+            "chance": 100,
+            "affects": "defensive",
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.5.1.6",
+        "createdTime": 1737571105692,
+        "modifiedTime": 1737571145413,
+        "lastModifiedBy": "IcBpMqhFuTck9VpX"
+      }
+    }
+  ]
 }

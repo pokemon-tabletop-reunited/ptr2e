@@ -11,7 +11,7 @@
         ],
         "name": "Frighten",
         "slug": "frighten",
-        "type": "generic",
+        "type": "attack",
         "cost": {
           "activation": "free",
           "trigger": "<p>The user enters combat.</p>"
@@ -22,7 +22,13 @@
           "unit": "m"
         },
         "description": "<p>Trigger: The user enters combat.</p><p>Effect: All valid creatures in range lose -1 SPD Stage for 5 Activations and gain @Affliction[fear] 5.</p>",
-        "img": "icons/svg/explosion.svg"
+        "img": "icons/svg/terror.svg",
+        "types": [
+          "untyped"
+        ],
+        "category": "status",
+        "free": true,
+        "predicate": []
       }
     ],
     "description": "<p>Trigger: The user enters combat.</p><p>Effect: All valid creatures in range lose -1 SPD Stage for 5 Activations and gain @Affliction[fear] 5.</p>",
@@ -37,5 +43,70 @@
     }
   },
   "_id": "GlVWzzuSC6kJIil4",
-  "effects": []
+  "effects": [
+    {
+      "name": "Frighten",
+      "type": "passive",
+      "_id": "LP2OuWtdhQcs0qhh",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "frighten-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.HLAV9dhz632Rfp1K",
+            "predicate": [],
+            "chance": 100,
+            "affects": "target",
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "roll-effect",
+            "key": "frighten-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.fearconditioitem",
+            "predicate": [],
+            "chance": 100,
+            "affects": "target",
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.5.1.6",
+        "createdTime": 1737566382529,
+        "modifiedTime": 1737566420900,
+        "lastModifiedBy": "IcBpMqhFuTck9VpX"
+      }
+    }
+  ]
 }
