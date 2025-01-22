@@ -4,11 +4,6 @@
   "img": "systems/ptr2e/img/svg/psychic_icon.svg",
   "system": {
     "slug": "psystrike",
-    "description": "",
-    "traits": [
-      "push-6",
-      "legendary"
-    ],
     "actions": [
       {
         "slug": "psystrike",
@@ -26,10 +21,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 6,
-          "delay": null,
-          "priority": null,
-          "trigger": null
+          "powerPoints": 6
         },
         "category": "special",
         "power": 100,
@@ -38,14 +30,17 @@
           "psychic"
         ],
         "description": "<p>Effect: This attack calculates damage against the target's DEF, rather than SPDEF.</p>",
-        "contestType": "",
-        "contestEffect": "",
-        "free": false,
-        "slot": null
+        "img": "systems/ptr2e/img/svg/psychic_icon.svg",
+        "defensiveStat": "def",
+        "predicate": []
       }
     ],
-    "container": null,
-    "grade": "B"
+    "grade": "B",
+    "traits": [],
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
   },
   "_id": "Myq3zLTugQJaKrEY",
   "effects": []

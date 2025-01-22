@@ -5,10 +5,6 @@
   "img": "systems/ptr2e/img/svg/electric_icon.svg",
   "system": {
     "slug": null,
-    "traits": [
-      "delay-2",
-      "healing"
-    ],
     "actions": [
       {
         "name": "Recharge",
@@ -17,7 +13,8 @@
         "img": "icons/svg/explosion.svg",
         "traits": [
           "delay-2",
-          "healing"
+          "healing",
+          "pp-updated"
         ],
         "range": {
           "target": "emanation",
@@ -26,9 +23,8 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 7,
-          "delay": 2,
-          "priority": null
+          "powerPoints": 3,
+          "delay": 2
         },
         "variant": null,
         "types": [
@@ -41,12 +37,11 @@
         "contestEffect": "",
         "free": false,
         "slot": null,
-        "description": "<p>Effect: The user and any allies in range heal Hit Points equal to 1/4 of their Maximum Hit Points.</p>"
+        "description": "<p>Effect: The user and any allies in range heal 4 ticks of Hit Points.</p>"
       }
     ],
-    "description": "",
     "container": null,
-    "grade": "A"
+    "grade": "D"
   },
   "effects": [],
   "sort": 8300000,

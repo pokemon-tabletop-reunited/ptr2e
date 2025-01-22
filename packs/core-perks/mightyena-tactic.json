@@ -11,20 +11,15 @@
         "slug": "mightyena-tactic",
         "description": "<p>Gain +20 Power when attacking targets that have a net negative SPD stage.</p>",
         "traits": [],
-        "type": "generic",
+        "type": "passive",
         "range": {
           "target": "creature",
-          "unit": "m",
-          "distance": 0
+          "unit": "m"
         },
         "cost": {
-          "activation": "simple",
-          "powerPoints": 0,
-          "delay": null,
-          "priority": null
+          "activation": "free"
         },
-        "img": "icons/svg/explosion.svg",
-        "variant": null
+        "img": "systems/ptr2e/img/perk-icons/Hunting.svg"
       }
     ],
     "slug": "mightyena-tactic",
@@ -39,7 +34,11 @@
     "nodes": [
       {
         "connected": [
-          "hamstring"
+          "hamstring",
+          "skirmish",
+          "quick-and-the-dead",
+          "run-down",
+          "improved-overland-9"
         ],
         "config": {
           "alpha": null,
@@ -58,9 +57,6 @@
       }
     ],
     "autoUnlock": [],
-    "originSlug": null,
-    "variant": null,
-    "mode": null,
     "global": true,
     "webs": []
   },

@@ -4,12 +4,6 @@
   "img": "systems/ptr2e/img/svg/normal_icon.svg",
   "system": {
     "slug": "protect",
-    "description": "<p>Trigger: The user is targeted by a  Attack.</p><p>Effect: The triggering attack fails, and additional attacks that target the user also fail until the user's next Activation. Attacks failing to hit do not deal damage, activate secondary effects, or activate on-miss effects.</p>",
-    "traits": [
-      "shield",
-      "exhaust",
-      "interrupt-4"
-    ],
     "actions": [
       {
         "slug": "protect",
@@ -18,7 +12,8 @@
         "traits": [
           "shield",
           "exhaust",
-          "interrupt-4"
+          "interrupt-4",
+          "pp-updated"
         ],
         "range": {
           "target": "creature",
@@ -27,9 +22,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 7,
-          "delay": null,
-          "priority": null,
+          "powerPoints": 3,
           "trigger": "<p>The user is targeted by a  Attack.</p>"
         },
         "category": "status",
@@ -46,7 +39,7 @@
       }
     ],
     "container": null,
-    "grade": "E"
+    "grade": "D"
   },
   "_id": "DwzmkHqd28xR3P3c",
   "effects": []

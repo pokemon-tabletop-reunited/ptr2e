@@ -4,14 +4,14 @@
   "img": "systems/ptr2e/img/svg/psychic_icon.svg",
   "system": {
     "slug": "hypnosis",
-    "description": "<p>Effect: On hit, the target is afflicted with @Affliction[drowsy] 5.</p>",
-    "traits": [],
     "actions": [
       {
         "slug": "hypnosis",
         "name": "Hypnosis",
         "type": "attack",
-        "traits": [],
+        "traits": [
+          "pp-updated"
+        ],
         "range": {
           "target": "creature",
           "distance": 5,
@@ -19,7 +19,7 @@
         },
         "cost": {
           "activation": "simple",
-          "powerPoints": 5
+          "powerPoints": 1
         },
         "category": "status",
         "accuracy": 60,
@@ -33,7 +33,7 @@
         "slot": null
       }
     ],
-    "grade": "C",
+    "grade": "E",
     "_migration": {
       "version": null,
       "previous": null

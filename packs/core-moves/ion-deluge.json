@@ -4,11 +4,6 @@
   "img": "systems/ptr2e/img/svg/electric_icon.svg",
   "system": {
     "slug": "ion-deluge",
-    "description": "<p>Effect: The Room is set to Ion Deluge for 3 Rounds.</p>",
-    "traits": [
-      "room",
-      "priority-1"
-    ],
     "actions": [
       {
         "slug": "ion-deluge",
@@ -16,7 +11,8 @@
         "type": "attack",
         "traits": [
           "room",
-          "priority-1"
+          "priority-1",
+          "pp-updated"
         ],
         "range": {
           "target": "field",
@@ -26,9 +22,7 @@
         "cost": {
           "activation": "complex",
           "powerPoints": 4,
-          "delay": null,
-          "priority": 1,
-          "trigger": null
+          "priority": 1
         },
         "category": "status",
         "power": null,
@@ -44,7 +38,7 @@
       }
     ],
     "container": null,
-    "grade": "D"
+    "grade": "C"
   },
   "_id": "hF6zJaUnuawOma8P",
   "effects": []

@@ -4,17 +4,14 @@
   "img": "systems/ptr2e/img/svg/normal_icon.svg",
   "system": {
     "slug": "camouflage",
-    "description": "<p>Effect: The user's coloring matches that of the surrounding terrain, gaining Hidden. The user’s Type also changes to that of an associated type on the Terrain Chart.</p>",
-    "traits": [
-      "environ"
-    ],
     "actions": [
       {
         "slug": "camouflage",
         "name": "Camouflage",
         "type": "attack",
         "traits": [
-          "environ"
+          "environ",
+          "pp-updated"
         ],
         "range": {
           "target": "self",
@@ -23,10 +20,7 @@
         },
         "cost": {
           "activation": "simple",
-          "powerPoints": 5,
-          "delay": null,
-          "priority": null,
-          "trigger": null
+          "powerPoints": 4
         },
         "category": "status",
         "power": null,
@@ -42,7 +36,7 @@
       }
     ],
     "container": null,
-    "grade": "C"
+    "grade": "B"
   },
   "_id": "OLLOREnyfAEVULxw",
   "effects": []

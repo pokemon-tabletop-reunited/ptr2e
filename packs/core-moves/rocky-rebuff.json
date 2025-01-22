@@ -4,10 +4,7 @@
   "_id": "hBXyr28hEfRL3VQC",
   "img": "systems/ptr2e/img/svg/rock_icon.svg",
   "system": {
-    "slug": null,
-    "traits": [
-      "social"
-    ],
+    "slug": "rocky-rebuff",
     "actions": [
       {
         "name": "Rocky Rebuff",
@@ -15,7 +12,8 @@
         "type": "attack",
         "img": "icons/svg/explosion.svg",
         "traits": [
-          "social"
+          "social",
+          "pp-updated"
         ],
         "range": {
           "target": "cone",
@@ -24,43 +22,88 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 6,
-          "delay": null,
-          "priority": null
+          "powerPoints": 3
         },
-        "variant": null,
         "types": [
           "untyped"
         ],
         "category": "status",
-        "power": null,
         "accuracy": 100,
-        "contestType": "",
-        "contestEffect": "",
-        "free": false,
-        "slot": null,
-        "description": "<p>Effect: All valid targets lose -1 ATK Stages for 5 Activations, and user gains +1 DEF Stage for 5 Activations.</p>"
+        "description": "<p>Effect: All valid targets lose -1 ATK Stages for 5 Activations, and user gains +1 DEF Stage for 5 Activations.</p>",
+        "predicate": []
       }
     ],
-    "description": "",
-    "container": null,
-    "grade": "E"
+    "grade": "D",
+    "traits": [],
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
   },
-  "effects": [],
-  "sort": 0,
-  "ownership": {
-    "default": 0,
-    "CYLdyr5mPSDmNpTp": 3
-  },
-  "flags": {},
-  "_stats": {
-    "compendiumSource": null,
-    "duplicateSource": null,
-    "coreVersion": "12.328",
-    "systemId": "ptr2e",
-    "systemVersion": "0.10.0-alpha.1.5.2",
-    "createdTime": 1721269490476,
-    "modifiedTime": 1721269589459,
-    "lastModifiedBy": "CYLdyr5mPSDmNpTp"
-  }
+  "effects": [
+    {
+      "name": "Rocky Rebuff",
+      "type": "passive",
+      "_id": "9jwYtOzdmVkE2A8O",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "rocky-rebuff-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.ikCAv5w4iNfHHqaE",
+            "predicate": [],
+            "chance": 100,
+            "affects": "target",
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "roll-effect",
+            "key": "rocky-rebuff-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.sMystTj3FBJ00AZp",
+            "predicate": [],
+            "chance": 100,
+            "affects": "self",
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.5.1.5",
+        "createdTime": 1737316546935,
+        "modifiedTime": 1737316592786,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+      }
+    }
+  ]
 }

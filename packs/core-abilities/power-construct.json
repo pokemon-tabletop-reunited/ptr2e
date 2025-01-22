@@ -25,34 +25,6 @@
         },
         "description": "<p>Trigger: The user crosses the [Desperation 1/2] threshold, and is not in their Complete Forme.</p><p>Effect: The user transforms into their Complete Forme for the the rest of the Combat, gaining @Affliction[braced] 3 and recovering 8 Ticks of HP.</p>",
         "img": "icons/svg/explosion.svg"
-      },
-      {
-        "slug": "core-enforcer",
-        "name": "Core Enforcer",
-        "type": "attack",
-        "traits": [
-          "legendary",
-          "blast-5",
-          "pp-updated"
-        ],
-        "range": {
-          "target": "blast",
-          "distance": 15,
-          "unit": "m"
-        },
-        "cost": {
-          "activation": "complex",
-          "powerPoints": 10
-        },
-        "category": "special",
-        "power": 100,
-        "accuracy": 100,
-        "types": [
-          "dragon"
-        ],
-        "description": "<p>Effect: On hit, all valid targets gain @Affliction[nullified] 7. On resultion, the user gains a Tick of HP.</p>",
-        "free": true,
-        "img": "icons/svg/explosion.svg"
       }
     ],
     "description": "<p>Trigger: The user crosses the [Desperation 1/2] threshold, and is not in their Complete Forme.</p><p>Effect: Connection - Core Enforcer. The user transforms into their Complete Forme for the the rest of the Combat, gaining @Affliction[braced] 3 and recovering 8 Ticks of HP.</p><p><Passive: When the resolves Core Enforcer, they recover a Tick of HP.</p>",
@@ -61,7 +33,8 @@
       "forme-change",
       "connection",
       "desperation-1-2",
-      "healing"
+      "healing",
+      "partial-automation"
     ],
     "slug": "power-construct",
     "_migration": {
@@ -70,5 +43,73 @@
     }
   },
   "_id": "3fzi5kHXfB9DZ2Ew",
-  "effects": []
+  "effects": [
+    {
+      "name": "Power Construct",
+      "type": "passive",
+      "_id": "EEAvHJNgE1NTSMkU",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "grant-item",
+            "key": "",
+            "value": "Compendium.ptr2e.core-moves.Item.Dga2700B3ulU2Op0",
+            "predicate": [],
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "system.actions.0.free",
+                "value": "true"
+              }
+            ],
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "reevaluateOnUpdate": false,
+            "inMemoryOnly": false,
+            "allowDuplicate": true,
+            "track": false,
+            "replaceSelf": false,
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            }
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.5.1.5",
+        "createdTime": 1737418125833,
+        "modifiedTime": 1737418150556,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+      }
+    }
+  ]
 }

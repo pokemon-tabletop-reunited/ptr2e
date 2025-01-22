@@ -144,7 +144,7 @@ class GithubManager {
         Record<string, any>,
       ][]) {
         for (const [key, value] of Object.entries(action)) {
-          if (!value) {
+          if (value === null || value === undefined) {
             delete action[key];
           }
           if (isObject(value) && !fu.isEmpty(value)) {

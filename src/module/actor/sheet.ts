@@ -1,6 +1,6 @@
 import { AbilityPTR2e, ItemPTR2e, ItemSystemPTR, SpeciesPTR2e } from "@item";
 import ActorPTR2e from "./base.ts";
-import { htmlQuery, htmlQueryAll, sluggify } from "@utils";
+import { createHTMLElement, htmlClosest, htmlQuery, htmlQueryAll, sluggify } from "@utils";
 import { Tab } from "@item/sheets/document.ts";
 import { ActorComponentKey, ActorComponents, ComponentPopout } from "./components/sheet.ts";
 import { EffectComponent } from "./components/effect-component.ts";
@@ -20,7 +20,7 @@ import { ActionEditor } from "@module/apps/action-editor.ts";
 import SkillPTR2e from "@module/data/models/skill.ts";
 import { SkillsComponent } from "./components/skills-component.ts";
 import { SkillsEditor } from "@module/apps/skills-editor.ts";
-import { AttackPTR2e, Trait } from "@data";
+import { AttackPTR2e, PTRCONSTS, Trait } from "@data";
 import { PerksComponent } from "./components/perks-component.ts";
 import { AbilitiesComponent } from "./components/abilities-component.ts";
 import { StatsChart } from "./sheets/stats-chart.ts";
@@ -101,10 +101,11 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
         },
       ],
       actions: {
+        "open-carry-type-menu": ActorSheetPTRV2.openCarryTypeMenu,
         "species-header": async function (this: ActorSheetPTRV2, event: Event) {
           event.preventDefault();
           const species = this.actor.items.get("actorspeciesitem") as SpeciesPTR2e;
-          if(!species) return;
+          if (!species) return;
           species.sheet.render(true);
         },
         "open-inspector": async function (this: ActorSheetPTRV2, event: Event) {
@@ -125,10 +126,10 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
           new PartySheetPTR2e({ folder: this.actor.folder! }).render(true);
         },
         "edit-movelist": function (this: ActorSheetPTRV2) {
-          new KnownActionsApp(this.actor).render(true);
+          return new KnownActionsApp(this.actor).render(true);
         },
         "edit-abilitylist": function (this: ActorSheetPTRV2) {
-          new AvailableAbilitiesApp(this.actor).render(true);
+          return new AvailableAbilitiesApp(this.actor).render(true);
         },
         "roll-attack": async function (this: ActorSheetPTRV2, event: Event) {
           const actionDiv = (event.target as HTMLElement).closest(
@@ -169,7 +170,7 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
           }
         },
         "edit-skills": async function (this: ActorSheetPTRV2) {
-          new SkillsEditor(this.actor).render(true);
+          return new SkillsEditor(this.actor).render(true);
         },
         "luck-roll": async function (this: ActorSheetPTRV2) {
           const skill = this.actor.system.skills.get("luck")!;
@@ -205,13 +206,17 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
             content: `<p>${game.i18n.localize("PTR2E.ActorSheet.Settings.Content")}</p>
             <div class="form-group"><label>${game.i18n.localize("PTR2E.FIELDS.details.alliance.label")}</label><div class="form-fields"><select name="system.details.alliance">
             ${Object.entries(allianceOptions).map(([key, value]) => `<option value="${key}" ${key === alliance ? "selected" : ""}>${game.i18n.localize(value)}</option>`).join("")}
-            </select></div></div>${Handlebars.helpers.formField(sizeFields.height, {hash: {
-              localize: true,
-              value: this.actor._source.system.details.size.height
-            }})}${Handlebars.helpers.formField(sizeFields.weight, {hash: {
-              localize: true,
-              value: this.actor._source.system.details.size.weight
-            }})}<div class="form-group"><label>Height Class</label><div class="form-fields"><input readonly type="text" value="${game.i18n.localize(this.actor.size.toString())}"></div></div><div class="form-group"><label>Weight Class</label><div class="form-fields"><input readonly type="text" value="${this.actor.system.details.size.weightClass}"></div></div>`,
+            </select></div></div>${Handlebars.helpers.formField(sizeFields.height, {
+              hash: {
+                localize: true,
+                value: this.actor._source.system.details.size.height
+              }
+            })}${Handlebars.helpers.formField(sizeFields.weight, {
+              hash: {
+                localize: true,
+                value: this.actor._source.system.details.size.weight
+              }
+            })}<div class="form-group"><label>Height Class</label><div class="form-fields"><input readonly type="text" value="${game.i18n.localize(this.actor.size.toString())}"></div></div><div class="form-group"><label>Weight Class</label><div class="form-fields"><input readonly type="text" value="${this.actor.system.details.size.weightClass}"></div></div>`,
             window: { title: game.i18n.localize("PTR2E.ActorSheet.Settings.Title") },
             ok: {
               label: game.i18n.localize("PTR2E.ActorSheet.Settings.Save"),
@@ -306,28 +311,10 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
 
   tabGroups: Record<string, string> = {
     sheet: "overview",
-    actions: "actionsCombat",
+    actions: "slots",
   };
 
   subtabs: Record<string, Tab> = {
-    // actionsCombat: {
-    //     id: "actionsCombat",
-    //     group: "actions",
-    //     icon: "fa-solid fa-burst",
-    //     label: "PTR2E.ActorSheet.Tabs.actions.combat.label",
-    // },
-    // actionsDowntime: {
-    //     id: "actionsDowntime",
-    //     group: "actions",
-    //     icon: "fa-solid fa-clock",
-    //     label: "PTR2E.ActorSheet.Tabs.actions.downtime.label",
-    // },
-    // actionsOther: {
-    //     id: "actionsOther",
-    //     group: "actions",
-    //     icon: "fa-solid fa-dice-d20",
-    //     label: "PTR2E.ActorSheet.Tabs.actions.other.label",
-    // },
     slots: {
       id: "slots",
       group: "actions",
@@ -456,22 +443,22 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
     };
   }
 
-  _prepareEffectiveness(): Record<string, { value: number, name: string}[]> {
-    const effectiveness = { effective: [], ineffective: [], immune: [] } as Record<string, {value: number, name: string}[]>;
-    for(const [type, value] of Object.entries(this.actor.system.type.effectiveness)) {
+  _prepareEffectiveness(): Record<string, { value: number, name: string }[]> {
+    const effectiveness = { effective: [], ineffective: [], immune: [] } as Record<string, { value: number, name: string }[]>;
+    for (const [type, value] of Object.entries(this.actor.system.type.effectiveness)) {
       //TODO: Make this a setting
-      if(type === "nuclear") continue;
-      if(type === "shadow") continue;
+      if (type === "nuclear") continue;
+      if (type === "shadow") continue;
 
-      if(value === 1) continue;
-      if(value === 0) {
+      if (value === 1) continue;
+      if (value === 0) {
         effectiveness.immune.push({
           value,
           name: type
         });
         continue;
       }
-      if(value > 1) {
+      if (value > 1) {
         effectiveness.effective.push({
           value,
           name: type
@@ -510,11 +497,14 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
         for (const item of this.actor.items) {
           const physicalItems = [
             "weapon",
-            "gear",
-            "consumable",
             "equipment",
+            "consumable",
+            "gear",
             "container",
           ];
+          for (const type of physicalItems) {
+            if (!inventory[type]) inventory[type] = [];
+          }
           function isTypeOfPhysicalItem(
             item: Item
           ): item is ItemPTR2e<
@@ -529,7 +519,6 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
           }
           if (isTypeOfPhysicalItem(item)) {
             const category = item.type;
-            if (!inventory[category]) inventory[category] = [];
             inventory[category].push(item);
           }
         }
@@ -1035,7 +1024,7 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
     ) as HTMLElement;
     if (!abilityDiv) return;
 
-    if(ability.system.isSuppressed) return void ui.notifications.warn("This ability is suppressed and cannot be re-assigned.");
+    if (ability.system.isSuppressed) return void ui.notifications.warn("This ability is suppressed and cannot be re-assigned.");
 
     const slot = Number(abilityDiv.dataset.slot);
     if (isNaN(slot)) return;
@@ -1047,7 +1036,7 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
     }
     if (currentAbility === ability) return;
 
-    if(currentAbility.system.isSuppressed) return void ui.notifications.warn("That slot is filled with a suppressed ability which cannot be re-assigned");
+    if (currentAbility.system.isSuppressed) return void ui.notifications.warn("That slot is filled with a suppressed ability which cannot be re-assigned");
 
     this.actor.updateEmbeddedDocuments("Item", [
       { _id: currentAbility.id, "system.slot": ability.system.slot ?? null },
@@ -1168,6 +1157,32 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
   static #onAddClock(this: ActorSheetPTRV2, event: Event, clock?: Clock) {
     event.preventDefault();
     return new ClockEditor({}, clock instanceof Clock ? clock : new Clock({}, { parent: this.document.system })).render(true);
+  }
+
+  private static async openCarryTypeMenu(this: ActorSheetPTRV2, event: PointerEvent): Promise<void> {
+    // Close the menu and return early if any carry-type menu is already open
+    const menuOpen = !!document.body.querySelector("aside.locked-tooltip.carry-type-menu");
+    if (menuOpen) game.tooltip.dismissLockedTooltips();
+
+    const itemId = htmlClosest(event.target, "[data-item-id]")?.dataset.itemId;
+    const item = this.actor.items.get(itemId, { strict: true });
+    const template = await renderTemplate("systems/ptr2e/templates/apps/carry-type-menu.hbs", { item });
+    const content = createHTMLElement("ul", { innerHTML: template });
+    content.addEventListener("click", (event) => {
+      const menuOption = htmlClosest(event.target, "a[data-carry-type]");
+      if (!menuOption) return;
+
+      const carryType = menuOption.dataset.carryType;
+      if (!PTRCONSTS.CarryTypes[carryType as keyof typeof PTRCONSTS.CarryTypes]) {
+        throw Error("Unexpected error retrieving requested carry type");
+      }
+
+      const handsHeld = Number(menuOption.dataset.handsHeld) || 0;
+
+      item.update({ "system.equipped": {carryType, handsHeld} });
+      game.tooltip.dismissLockedTooltips();
+    })
+    game.tooltip.activate(event.target as HTMLElement, { cssClass: "ptr2e carry-type-menu", content, locked: true });
   }
 }
 

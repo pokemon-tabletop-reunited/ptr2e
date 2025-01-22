@@ -1,7 +1,7 @@
 {
   "name": "Sand Spit",
   "type": "ability",
-  "img": "systems/ptr2e/img/icons/ability_icon.webp",
+  "img": "systems/ptr2e/img/svg/ground_icon.svg",
   "system": {
     "actions": [
       {
@@ -22,55 +22,6 @@
           "unit": "m"
         },
         "description": "<p>Trigger: The user would be hit by an attack.</p><p>Effect: The user freely uses Sand Attack or Sand Attack (Dusty) on the attacking creature, and then the triggering attack is rerolled. The rerolled attack does not cost additional PP nor can it trigger this Ability again.</p>",
-        "img": "icons/svg/explosion.svg"
-      },
-      {
-        "slug": "sand-attack",
-        "name": "Sand Attack",
-        "type": "attack",
-        "traits": [],
-        "range": {
-          "target": "cone",
-          "distance": 3,
-          "unit": "m"
-        },
-        "cost": {
-          "activation": "complex",
-          "powerPoints": 2
-        },
-        "category": "status",
-        "accuracy": 100,
-        "types": [
-          "ground"
-        ],
-        "description": "<p>Effect: On hit, all valid targets lose -1 ACC Stage for 5 activations.</p>",
-        "img": "icons/svg/explosion.svg"
-      },
-      {
-        "slug": "sand-attack-dusty",
-        "name": "Sand Attack (Dusty)",
-        "type": "attack",
-        "traits": [
-          "environ"
-        ],
-        "range": {
-          "target": "cone",
-          "distance": 3,
-          "unit": "m"
-        },
-        "cost": {
-          "activation": "complex",
-          "powerPoints": 2,
-          "trigger": "<p>Dusty Weather is present.</p>"
-        },
-        "category": "status",
-        "accuracy": 100,
-        "types": [
-          "ground"
-        ],
-        "description": "<p>Trigger: Dusty Weather is present.</p><p>Effect: On hit, all valid targets lose -2 ACC Stage for 5 activations.</p>",
-        "variant": "sand-attack",
-        "free": true,
         "img": "icons/svg/explosion.svg"
       },
       {
@@ -96,7 +47,8 @@
         "description": "<p>Effect: On hit, all valid targets lose -1 ACC Stage for 5 activations.</p>",
         "variant": "sand-attack",
         "free": true,
-        "img": "icons/svg/explosion.svg"
+        "img": "icons/svg/explosion.svg",
+        "predicate": []
       },
       {
         "slug": "sand-attack-sand-spit-dusty",
@@ -124,13 +76,15 @@
         "description": "<p>Trigger: Dusty Weather is present.</p><p>Effect: On hit, all valid targets lose -2 ACC Stage for 5 activations.</p>",
         "variant": "sand-attack",
         "free": true,
-        "img": "icons/svg/explosion.svg"
+        "img": "icons/svg/explosion.svg",
+        "predicate": []
       }
     ],
     "description": "<p>Trigger: The user would hit by an attack.</p><p>Effect: Connection - Sand Attack. The user freely uses Sand Attack or Sand Attack (Dusty) on the attacking creature, and then the triggering attack is rerolled. The rerolled attack does not cost additional PP nor can it trigger this Ability again. When using Sand Attack, the user can spend an additional 2 PP to use it as a 25 Power Physical-Category Attack.</p>",
     "traits": [
       "connection",
-      "defensive"
+      "defensive",
+      "partial-automation"
     ],
     "slug": "sand-spit",
     "_migration": {
@@ -139,5 +93,78 @@
     }
   },
   "_id": "yWHCeJWiLgFtmIkV",
-  "effects": []
+  "effects": [
+    {
+      "name": "Sand Spit",
+      "type": "passive",
+      "_id": "BMfcAsHi3HrVlcRA",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "grant-item",
+            "key": "",
+            "value": "Compendium.ptr2e.core-moves.Item.RNsjfgPa66NJ8zR7",
+            "predicate": [],
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "system.actions.0.free",
+                "value": "true"
+              },
+              {
+                "mode": 5,
+                "property": "system.actions.1.free",
+                "value": "true"
+              }
+            ],
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "reevaluateOnUpdate": false,
+            "inMemoryOnly": false,
+            "allowDuplicate": true,
+            "track": false,
+            "replaceSelf": false,
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            }
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.5.1.5",
+        "createdTime": 1737420066036,
+        "modifiedTime": 1737420101649,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+      }
+    }
+  ]
 }

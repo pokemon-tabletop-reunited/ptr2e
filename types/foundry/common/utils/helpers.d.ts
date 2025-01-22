@@ -74,10 +74,10 @@ export function isEmpty(value: unknown): boolean;
  * ```
  */
 export function mergeObject<T extends object, U extends object = T>(
-    original: T,
-    other?: U | undefined,
-    options?: MergeObjectOptions,
-    _d?: number,
+  original: T,
+  other?: U | undefined,
+  options?: MergeObjectOptions,
+  _d?: number,
 ): T & U;
 
 /**
@@ -136,9 +136,17 @@ export function expandObject<T extends Record<string, unknown>>(obj: object, _d?
  * @return
  */
 export function diffObject<T extends Record<string, unknown> = Record<string, unknown>>(
-    original: object,
-    other: object,
+  original: object,
+  other: object,
 ): T;
+
+/**
+   * Test if two objects contain the same enumerable keys and values.
+   * @param a  The first object.
+   * @param b  The second object.
+   * @returns
+   */
+export function objectsEqual(a: Record<string, unknown>, b: Record<string, unknown>): boolean
 
 /**
  * A helper function which tests whether an object has a property or nested property given a string key.
@@ -290,52 +298,52 @@ export function threadLock(ms: number): Promise<void>;
  * @throws An Error if the mode is ERROR
  */
 export function logCompatibilityWarning(
-    message: string,
-    options?: {
-        mode?: CompatibilityMode;
-        since?: number | string;
-        until?: number | string;
-        details?: string;
-        stack?: boolean;
-    },
+  message: string,
+  options?: {
+    mode?: CompatibilityMode;
+    since?: number | string;
+    until?: number | string;
+    details?: string;
+    stack?: boolean;
+  },
 ): void;
 
 export * from "./http.ts";
 
 declare global {
-    interface MergeObjectOptions {
-        /**
-         * Control whether to insert new top-level objects into the resulting structure which do not previously exist
-         * in the original object.
-         */
-        insertKeys?: boolean;
-        /**
-         * Control whether to insert new nested values into child objects in the resulting structure which did not
-         * previously exist in the original object. */
-        insertValues?: boolean;
-        /**
-         * Control whether to replace existing values in the source, or only merge values which do not already exist
-         * in the original object.
-         */
-        overwrite?: boolean;
-        /**
-         * Control whether to merge inner-objects recursively (if true), or whether to simply replace inner objects
-         * with a provided new value.
-         */
-        recursive?: boolean;
-        /**
-         * Control whether to apply updates to the original object in-place (if true), otherwise the original object is
-         * duplicated and the copy is merged.
-         */
-        inplace?: boolean;
-        /**
-         * Control whether strict type checking requires that the value of a key in the other object must match the
-         * data type in the original data to be merged.
-         */
-        enforceTypes?: boolean;
-        /**
-         * Control whether to perform deletions on the original object if deletion keys are present in the other object.
-         */
-        performDeletions?: boolean;
-    }
+  interface MergeObjectOptions {
+    /**
+     * Control whether to insert new top-level objects into the resulting structure which do not previously exist
+     * in the original object.
+     */
+    insertKeys?: boolean;
+    /**
+     * Control whether to insert new nested values into child objects in the resulting structure which did not
+     * previously exist in the original object. */
+    insertValues?: boolean;
+    /**
+     * Control whether to replace existing values in the source, or only merge values which do not already exist
+     * in the original object.
+     */
+    overwrite?: boolean;
+    /**
+     * Control whether to merge inner-objects recursively (if true), or whether to simply replace inner objects
+     * with a provided new value.
+     */
+    recursive?: boolean;
+    /**
+     * Control whether to apply updates to the original object in-place (if true), otherwise the original object is
+     * duplicated and the copy is merged.
+     */
+    inplace?: boolean;
+    /**
+     * Control whether strict type checking requires that the value of a key in the other object must match the
+     * data type in the original data to be merged.
+     */
+    enforceTypes?: boolean;
+    /**
+     * Control whether to perform deletions on the original object if deletion keys are present in the other object.
+     */
+    performDeletions?: boolean;
+  }
 }

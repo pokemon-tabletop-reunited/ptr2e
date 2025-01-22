@@ -4,17 +4,14 @@
   "img": "systems/ptr2e/img/svg/nuclear_icon.svg",
   "system": {
     "slug": "fallout",
-    "description": "<p>Effect: The Weather becomes Glowy for 3 rounds.</p>",
-    "traits": [
-      "weather"
-    ],
     "actions": [
       {
         "slug": "fallout",
         "name": "Fallout",
         "type": "attack",
         "traits": [
-          "weather"
+          "weather",
+          "pp-updated"
         ],
         "range": {
           "target": "field",
@@ -23,10 +20,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 4,
-          "delay": null,
-          "priority": null,
-          "trigger": null
+          "powerPoints": 4
         },
         "category": "status",
         "power": null,
@@ -42,7 +36,7 @@
       }
     ],
     "container": null,
-    "grade": "A"
+    "grade": "B"
   },
   "_id": "tvJruA8VQvYfNvaV",
   "folder": "EpCOePz8omfXbp35",

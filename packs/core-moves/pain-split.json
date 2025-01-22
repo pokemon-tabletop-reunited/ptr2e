@@ -4,14 +4,14 @@
   "img": "systems/ptr2e/img/svg/normal_icon.svg",
   "system": {
     "slug": "pain-split",
-    "description": "<p>Effect: The user's and the target's current HP is added together, then divided by 2 and rounded down. The user's and the target's HP is set to the result.</p>",
-    "traits": [],
     "actions": [
       {
         "slug": "pain-split",
         "name": "Pain Split",
         "type": "attack",
-        "traits": [],
+        "traits": [
+          "pp-updated"
+        ],
         "range": {
           "target": "creature",
           "distance": 10,
@@ -19,10 +19,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 5,
-          "delay": null,
-          "priority": null,
-          "trigger": null
+          "powerPoints": 4
         },
         "category": "status",
         "power": null,
@@ -38,7 +35,7 @@
       }
     ],
     "container": null,
-    "grade": "D"
+    "grade": "B"
   },
   "_id": "NBXvKh7dHSzeiG3y",
   "effects": []

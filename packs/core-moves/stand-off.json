@@ -4,14 +4,14 @@
   "img": "systems/ptr2e/img/svg/dark_icon.svg",
   "system": {
     "slug": "stand-off",
-    "description": "<p>Effect: The target gains the @Affliction[duel] 5.</p>",
-    "traits": [],
     "actions": [
       {
         "slug": "stand-off",
         "name": "Stand Off",
         "type": "attack",
-        "traits": [],
+        "traits": [
+          "pp-updated"
+        ],
         "range": {
           "target": "creature",
           "distance": 20,
@@ -19,10 +19,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 8,
-          "delay": null,
-          "priority": null,
-          "trigger": null
+          "powerPoints": 3
         },
         "category": "status",
         "power": null,
@@ -38,7 +35,7 @@
       }
     ],
     "container": null,
-    "grade": "A"
+    "grade": "C"
   },
   "_id": "MBgMy5w6O5j5Ux9Q",
   "effects": []

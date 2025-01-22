@@ -1,52 +1,100 @@
 {
-    "name": "Shocking-Stab",
-    "type": "move",
-    "img": "systems/ptr2e/img/svg/electric_icon.svg",
-    "system": {
-      "slug": "shocking-stab",
-      "description": "",
-      "traits": [
-        "horn",
-        "contact"
-      ],
-      "actions": [
-        {
-          "slug": "shocking-stab",
-          "name": "Shocking Stab",
-          "type": "attack",
-          "traits": [
-            "horn",
-            "contact",
-            "pp-updated"
-          ],
-          "range": {
-            "target": "creature",
-            "distance": 1,
-            "unit": "m"
-          },
-          "cost": {
-            "activation": "complex",
-            "powerPoints": 2,
-            "delay": null,
+  "name": "Shocking-Stab",
+  "type": "move",
+  "img": "systems/ptr2e/img/svg/electric_icon.svg",
+  "system": {
+    "slug": "shocking-stab",
+    "actions": [
+      {
+        "slug": "shocking-stab",
+        "name": "Shocking Stab",
+        "type": "attack",
+        "traits": [
+          "horn",
+          "contact",
+          "pp-updated"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 2
+        },
+        "category": "physical",
+        "power": 80,
+        "accuracy": 100,
+        "types": [
+          "electric"
+        ],
+        "description": "<p>Effect: On hit, the target has a 20% chance of gaining @Affliction[paralysis] 5.</p>",
+        "img": "icons/svg/explosion.svg",
+        "predicate": []
+      }
+    ],
+    "grade": "D",
+    "traits": [],
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "VDWs6Y7AG2oVD8cN",
+  "effects": [
+    {
+      "name": "Shocking-Stab",
+      "type": "passive",
+      "_id": "X71TUpXsr8v6HVwP",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "shocking-stab",
+            "value": "Compendium.ptr2e.core-effects.Item.paralysisconitem",
+            "predicate": [],
+            "chance": 20,
+            "affects": "target",
+            "mode": 2,
             "priority": null,
-            "trigger": null
-          },
-          "category": "physical",
-          "power": 80,
-          "accuracy": 100,
-          "types": [
-            "electric"
-          ],
-          "description": "<p>Effect: On hit, the target has a 20% chance of gaining @Affliction[paralysis] 5.</p>",
-          "contestType": "",
-          "contestEffect": "",
-          "free": false,
-          "slot": null
-        }
-      ],
-      "container": null,
-      "grade": "D"
-    },
-    "_id": "VDWs6Y7AG2oVD8cN",
-    "effects": []
-  }
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.5.1.5",
+        "createdTime": 1737332829832,
+        "modifiedTime": 1737332856198,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+      }
+    }
+  ]
+}

@@ -4,12 +4,6 @@
   "img": "systems/ptr2e/img/svg/normal_icon.svg",
   "system": {
     "slug": "whirlwind",
-    "description": "<p>Effect: Valid targets that collide with other creatures or suffer fall damage lose an additional Tick of HP as damage.</p>",
-    "traits": [
-      "wind",
-      "push-6",
-      "delay-2"
-    ],
     "actions": [
       {
         "slug": "whirlwind",
@@ -18,7 +12,8 @@
         "traits": [
           "wind",
           "push-6",
-          "delay-2"
+          "delay-2",
+          "pp-updated"
         ],
         "range": {
           "target": "wide-line",
@@ -27,10 +22,8 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 5,
-          "delay": 2,
-          "priority": null,
-          "trigger": null
+          "powerPoints": 3,
+          "delay": 2
         },
         "category": "status",
         "power": null,
@@ -46,7 +39,7 @@
       }
     ],
     "container": null,
-    "grade": "E"
+    "grade": "C"
   },
   "_id": "TApjY3OyzhA8yaN8",
   "effects": []

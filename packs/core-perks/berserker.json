@@ -5,203 +5,9 @@
   "_id": "fTAcIGm5QGWoKB1D",
   "img": "systems/ptr2e/img/icons/physical_icon.png",
   "system": {
-    "actions": [
-      {
-        "slug": "rage",
-        "name": "Rage",
-        "type": "attack",
-        "traits": [
-          "contact",
-          "pp-updated"
-        ],
-        "range": {
-          "target": "creature",
-          "distance": 1,
-          "unit": "m"
-        },
-        "cost": {
-          "activation": "complex",
-          "powerPoints": 1,
-          "delay": null,
-          "priority": null
-        },
-        "category": "physical",
-        "power": 20,
-        "accuracy": 100,
-        "types": [
-          "normal"
-        ],
-        "description": "<p>Effect: The user gains @Affliction[enraged] 2. While @Affliction[enraged], if the user is hit by a damaging attack, they gain +1 ATK Stage for 5 activations.</p>",
-        "img": "icons/svg/explosion.svg",
-        "variant": null,
-        "contestType": "",
-        "contestEffect": "",
-        "free": false,
-        "slot": null,
-        "summon": null,
-        "defaultVariant": null,
-        "flingItemId": null,
-        "offensiveStat": null,
-        "defensiveStat": null
-      },
-      {
-        "slug": "rage",
-        "name": "Rage",
-        "type": "attack",
-        "traits": [
-          "contact",
-          "pp-updated"
-        ],
-        "range": {
-          "target": "creature",
-          "distance": 1,
-          "unit": "m"
-        },
-        "cost": {
-          "activation": "complex",
-          "powerPoints": 1,
-          "delay": null,
-          "priority": null
-        },
-        "category": "physical",
-        "power": 20,
-        "accuracy": 100,
-        "types": [
-          "normal"
-        ],
-        "description": "<p>Effect: The user gains @Affliction[enraged] 2. While @Affliction[enraged], if the user is hit by a damaging attack, they gain +1 ATK Stage for 5 activations.</p>",
-        "img": "icons/svg/explosion.svg",
-        "variant": null,
-        "contestType": "",
-        "contestEffect": "",
-        "free": false,
-        "slot": null,
-        "summon": null,
-        "defaultVariant": null,
-        "flingItemId": null,
-        "offensiveStat": null,
-        "defensiveStat": null
-      },
-      {
-        "name": "Frenzy Rush",
-        "slug": "frenzy-rush",
-        "type": "attack",
-        "img": "icons/svg/explosion.svg",
-        "traits": [
-          "5-strike",
-          "contact",
-          "sharp",
-          "jaw",
-          "horn",
-          "punch",
-          "kick",
-          "weapon",
-          "exhaust",
-          "basic",
-          "pp-updated"
-        ],
-        "range": {
-          "target": "creature",
-          "distance": 1,
-          "unit": "m"
-        },
-        "cost": {
-          "activation": "complex",
-          "powerPoints": 2,
-          "delay": null,
-          "priority": null
-        },
-        "types": [
-          "normal"
-        ],
-        "category": "physical",
-        "power": 30,
-        "accuracy": 75,
-        "variant": null,
-        "contestType": "",
-        "contestEffect": "",
-        "free": false,
-        "slot": null,
-        "summon": null,
-        "defaultVariant": null,
-        "flingItemId": null,
-        "offensiveStat": null,
-        "defensiveStat": null
-      },
-      {
-        "slug": "work-up",
-        "name": "Work Up",
-        "type": "attack",
-        "traits": [],
-        "range": {
-          "target": "self",
-          "unit": "m",
-          "distance": 0
-        },
-        "cost": {
-          "activation": "complex",
-          "powerPoints": 3,
-          "delay": null,
-          "priority": null
-        },
-        "category": "status",
-        "types": [
-          "normal"
-        ],
-        "description": "<p>Effect: The user raises their ATK and SPATK Stages by +1 for 5 activations.</p>",
-        "img": "icons/svg/explosion.svg",
-        "variant": null,
-        "power": null,
-        "accuracy": null,
-        "contestType": "",
-        "contestEffect": "",
-        "free": false,
-        "slot": null,
-        "summon": null,
-        "defaultVariant": null,
-        "flingItemId": null,
-        "offensiveStat": null,
-        "defensiveStat": null
-      },
-      {
-        "slug": "work-up-enraged",
-        "name": "Work Up (Enraged)",
-        "type": "attack",
-        "traits": [],
-        "range": {
-          "target": "self",
-          "unit": "m",
-          "distance": 0
-        },
-        "cost": {
-          "activation": "simple",
-          "powerPoints": 3,
-          "trigger": "<p>The user is @Affliction[enraged].</p>",
-          "delay": null,
-          "priority": null
-        },
-        "category": "status",
-        "types": [
-          "normal"
-        ],
-        "description": "<p>Trigger: The user is @Affliction[enraged].</p><p>Effect: The user gains +1 ATK and SPATK Stages for 5 activations.</p>",
-        "img": "icons/svg/explosion.svg",
-        "variant": null,
-        "power": null,
-        "accuracy": null,
-        "contestType": "",
-        "contestEffect": "",
-        "free": false,
-        "slot": null,
-        "summon": null,
-        "defaultVariant": null,
-        "flingItemId": null,
-        "offensiveStat": null,
-        "defensiveStat": null
-      }
-    ],
+    "actions": [],
     "slug": "berserker",
-    "description": "<p>Gain the [Berserker] trait and gain access to the Berserker Tutor List. The user learns Rage, Work Up, and Frenzy Rush.</p>",
+    "description": "<p>Gain the [Berserker] trait and gain access to the [Berserker] Tutor List. The user learns Rage, Work Up, and Frenzy Rush.</p>",
     "traits": [],
     "prerequisites": [
       {
@@ -250,9 +56,6 @@
     "autoUnlock": [
       "trait:berserker"
     ],
-    "originSlug": null,
-    "variant": null,
-    "mode": null,
     "global": true,
     "webs": []
   },
@@ -272,6 +75,69 @@
             "mode": 2,
             "priority": null,
             "ignored": false
+          },
+          {
+            "type": "grant-item",
+            "key": "",
+            "value": "Compendium.ptr2e.core-moves.Item.6OK8vhZYljL4X7cd",
+            "predicate": [],
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "reevaluateOnUpdate": false,
+            "inMemoryOnly": false,
+            "allowDuplicate": true,
+            "alterations": [],
+            "track": false,
+            "replaceSelf": false,
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            }
+          },
+          {
+            "type": "grant-item",
+            "key": "",
+            "value": "Compendium.ptr2e.core-moves.Item.ZNl94X4B6JuegB6H",
+            "predicate": [],
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "reevaluateOnUpdate": false,
+            "inMemoryOnly": false,
+            "allowDuplicate": true,
+            "alterations": [],
+            "track": false,
+            "replaceSelf": false,
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            }
+          },
+          {
+            "type": "grant-item",
+            "key": "",
+            "value": "Compendium.ptr2e.core-moves.Item.Zsg9MXOaKH3vAb6q",
+            "predicate": [],
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "system.actions.1.free",
+                "value": "true"
+              }
+            ],
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "reevaluateOnUpdate": false,
+            "inMemoryOnly": false,
+            "allowDuplicate": true,
+            "track": false,
+            "replaceSelf": false,
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            }
           }
         ],
         "slug": null,
@@ -302,10 +168,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "ptr2e",
-        "systemVersion": "0.10.0-alpha.3.4.1",
+        "systemVersion": "0.10.0-alpha.5.1.5",
         "createdTime": 1732232360900,
-        "modifiedTime": 1732232368578,
-        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
+        "modifiedTime": 1737391812514,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
       }
     }
   ]

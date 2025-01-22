@@ -1,0 +1,54 @@
+{
+  "name": "Hold!",
+  "type": "move",
+  "img": "systems/ptr2e/img/svg/untyped_icon.svg",
+  "system": {
+    "slug": "hold",
+    "actions": [
+      {
+        "slug": "hold",
+        "name": "Hold",
+        "type": "generic",
+        "traits": [
+          "command",
+          "basic"
+        ],
+        "range": {
+          "target": "self",
+          "distance": 0,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "free",
+          "powerPoints": 0
+        },
+        "description": "<p>Effect: Your next action gains [Delay X] (where X is your choice of 1, 2 or 3)</p>"
+      },
+      {
+        "slug": "hold-interrupt",
+        "name": "Hold (Interrupt)",
+        "type": "generic",
+        "traits": [
+          "command",
+          "basic"
+        ],
+        "range": {
+          "target": "self",
+          "distance": 0,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 0
+        },
+        "description": "<p>Effect: Select one Complex Action and specify a Trigger, the Action gains [Interrupt 1] as well as the trigger you specified until the start of your next Activation.</p><blockquote>The Trigger you specify can be as general as \"anything that enters range will be targeted and attacked\" or more specific as needed. Keep in mind that if the Trigger doesn't occur, the action is lost.</blockquote>",
+        "variant": "hold"
+      }
+    ],
+    "container": null,
+    "grade": "E"
+  },
+  "_id": "qVjoGO4S9qb8KEAz",
+  "effects": [],
+  "folder": "EpCOePz8omfXbp34"
+}

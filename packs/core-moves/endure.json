@@ -4,11 +4,6 @@
   "img": "systems/ptr2e/img/svg/normal_icon.svg",
   "system": {
     "slug": "endure",
-    "description": "<p>Trigger: The user is hit by a  Attack</p><p>Effect: The user resists the attack by 1 step and cannot fall below 1 HP from the attack.</p>",
-    "traits": [
-      "defensive",
-      "interrupt-4"
-    ],
     "actions": [
       {
         "slug": "endure",
@@ -16,7 +11,8 @@
         "type": "attack",
         "traits": [
           "defensive",
-          "interrupt-4"
+          "interrupt-4",
+          "pp-updated"
         ],
         "range": {
           "target": "creature",
@@ -25,9 +21,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 7,
-          "delay": null,
-          "priority": null,
+          "powerPoints": 2,
           "trigger": "<p>The user is hit by a  Attack.</p>"
         },
         "category": "status",
@@ -44,7 +38,7 @@
       }
     ],
     "container": null,
-    "grade": "A"
+    "grade": "D"
   },
   "_id": "eEQiYEm2y7wkcKnx",
   "effects": []

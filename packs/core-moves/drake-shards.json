@@ -1,50 +1,43 @@
 {
-    "name": "Drake Shards",
-    "type": "move",
-    "img": "systems/ptr2e/img/svg/dragon_icon.svg",
-    "system": {
-      "slug": "drake-shards",
-      "description": "",
-      "traits": [
-        "missile"
-      ],
-      "actions": [
-        {
-          "slug": "drake-shards",
-          "name": "Drake Shards",
-          "type": "attack",
-          "traits": [
-            "missile",
-            "pp-updated"
-          ],
-          "range": {
-            "target": "cone",
-            "distance": 4,
-            "unit": "m"
-          },
-          "cost": {
-            "activation": "complex",
-            "powerPoints": 4,
-            "delay": null,
-            "priority": null,
-            "trigger": null
-          },
-          "category": "physical",
-          "power": 90,
-          "accuracy": 85,
-          "types": [
-            "dragon"
-          ],
-          "description": "",
-          "contestType": "",
-          "contestEffect": "",
-          "free": false,
-          "slot": null
-        }
-      ],
-      "container": null,
-      "grade": "B"
-    },
-    "_id": "F4lLsCblumCrNBpE",
-    "effects": []
-  }
+  "name": "Drake Shards",
+  "type": "move",
+  "img": "systems/ptr2e/img/svg/dragon_icon.svg",
+  "system": {
+    "slug": "drake-shards",
+    "actions": [
+      {
+        "slug": "drake-shards",
+        "name": "Drake Shards",
+        "type": "attack",
+        "traits": [
+          "missile",
+          "pp-updated"
+        ],
+        "range": {
+          "target": "cone",
+          "distance": 4,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 4
+        },
+        "category": "physical",
+        "power": 90,
+        "accuracy": 85,
+        "types": [
+          "dragon"
+        ],
+        "description": "",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      }
+    ],
+    "container": null,
+    "grade": "B"
+  },
+  "_id": "F4lLsCblumCrNBpE",
+  "effects": []
+}

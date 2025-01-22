@@ -47,7 +47,8 @@
           "normal"
         ],
         "description": "<p>Effect: The user's HP becomes 0 on attack resolution.</p>",
-        "img": "icons/svg/explosion.svg"
+        "img": "icons/svg/explosion.svg",
+        "predicate": []
       },
       {
         "slug": "self-destruct-restrained",
@@ -75,13 +76,15 @@
         "description": "<p>Effect: The user loses 8 Ticks of HP.</p>",
         "variant": "self-destruct",
         "free": true,
-        "img": "icons/svg/explosion.svg"
+        "img": "icons/svg/explosion.svg",
+        "predicate": []
       }
     ],
     "description": "<p>Trigger: The user gains @Affliction[fainted].</p><p>Effect: Connection - Self-Destruct. The user freely uses Self-Destruct. The user cannot use this in response to gaining @Affliction[fainted] from setting its own HP to 0. When using Self-Destruct (separately from this Ability's Trigger Affliction), the user may spend an additional 4 PP to instead take damage equal to 1/2 their Max HP on resolving Self-Destruct instead of Fainting.</p>",
     "traits": [
       "explode",
-      "connection"
+      "connection",
+      "partial-automation"
     ],
     "slug": "aftermath",
     "_migration": {
@@ -90,5 +93,73 @@
     }
   },
   "_id": "gubM49aBQUdUKGQv",
-  "effects": []
+  "effects": [
+    {
+      "name": "Aftermath",
+      "type": "passive",
+      "_id": "ubnSxw79GYj7ND3z",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "grant-item",
+            "key": "",
+            "value": "Compendium.ptr2e.core-moves.Item.mooOpgSzALgXclFp",
+            "predicate": [],
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "system.actions.0.free",
+                "value": "true"
+              }
+            ],
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "reevaluateOnUpdate": false,
+            "inMemoryOnly": false,
+            "allowDuplicate": true,
+            "track": false,
+            "replaceSelf": false,
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            }
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.5.1.5",
+        "createdTime": 1737392539694,
+        "modifiedTime": 1737392570829,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+      }
+    }
+  ]
 }

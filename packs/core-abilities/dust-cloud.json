@@ -1,180 +1,166 @@
 {
-    "name": "Dust Cloud",
-    "type": "ability",
-    "img": "systems/ptr2e/img/icons/ability_icon.webp",
-    "system": {
-      "actions": [
-        {
-          "traits": [
-            "interrupt-3",
-            "defensive"
-          ],
-          "name": "Dust Cloud",
-          "slug": "dust-cloud",
-          "type": "generic",
-          "cost": {
-            "activation": "free",
-            "powerPoints": 0,
-            "trigger": "<p>The user enters combat.</p>",
-            "delay": null,
-            "priority": null
-          },
-          "range": {
-            "target": "self",
-            "distance": 0,
-            "unit": "m"
-          },
-          "description": "<p>Trigger: The user enters combat.</p><p>Effect: The user freely uses Dust Cloud (Spray), Dust Cloud (Spray Dusty), Dust Cloud (Plume), or Dust Cloud (Plume Dusty), as applicable.</p>"
+  "name": "Dust Cloud",
+  "type": "ability",
+  "img": "systems/ptr2e/img/svg/ground_icon.svg",
+  "system": {
+    "actions": [
+      {
+        "traits": [
+          "interrupt-3",
+          "defensive"
+        ],
+        "name": "Dust Cloud",
+        "slug": "dust-cloud",
+        "type": "generic",
+        "cost": {
+          "activation": "free",
+          "trigger": "<p>The user enters combat.</p>"
         },
-        {
-          "slug": "sand-attack",
-          "name": "Sand Attack",
-          "type": "attack",
-          "traits": [],
-          "range": {
-            "target": "cone",
-            "distance": 3,
-            "unit": "m"
-          },
-          "cost": {
-            "activation": "complex",
-            "powerPoints": 2,
-            "delay": null,
-            "priority": null,
-            "trigger": null
-          },
-          "category": "status",
-          "power": null,
-          "accuracy": 100,
-          "types": [
-            "ground"
-          ],
-          "description": "<p>Effect: On hit, all valid targets lose -1 ACC Stage for 5 activations.</p>",
-          "contestType": "",
-          "contestEffect": "",
-          "free": false,
-          "slot": null
+        "range": {
+          "target": "self",
+          "unit": "m"
         },
-        {
-          "slug": "sand-attack-dusty",
-          "name": "Sand Attack (Dusty)",
-          "type": "attack",
-          "traits": [
-            "environ"
-          ],
-          "range": {
-            "target": "cone",
-            "distance": 3,
-            "unit": "m"
-          },
-          "cost": {
-            "activation": "complex",
-            "powerPoints": 2,
-            "delay": null,
-            "priority": null,
-            "trigger": "<p>Dusty Weather is present.</p>"
-          },
-          "category": "status",
-          "power": null,
-          "accuracy": 100,
-          "types": [
-            "ground"
-          ],
-          "description": "<p>Trigger: Dusty Weather is present.</p><p>Effect: On hit, all valid targets lose -2 ACC Stage for 5 activations.</p>",
-          "contestType": "",
-          "contestEffect": "",
-          "variant": "sand-attack",
-          "free": true,
-          "slot": null
+        "description": "<p>Trigger: The user enters combat.</p><p>Effect: The user freely uses Dust Cloud (Spray), Dust Cloud (Spray Dusty), Dust Cloud (Plume), or Dust Cloud (Plume Dusty), as applicable.</p>",
+        "img": "icons/svg/explosion.svg"
+      },
+      {
+        "slug": "dust-cloud",
+        "name": "Dust Cloud",
+        "type": "attack",
+        "traits": [],
+        "range": {
+          "target": "emanation",
+          "distance": 3,
+          "unit": "m"
         },
-        {
-            "slug": "dust-cloud",
-            "name": "Dust Cloud",
-            "type": "attack",
-            "traits": [],
-            "range": {
-              "target": "emanation",
-              "distance": 3,
-              "unit": "m"
-            },
-            "cost": {
-              "activation": "complex",
-              "powerPoints": 4,
-              "delay": null,
-              "priority": null,
-              "trigger": null
-            },
-            "category": "status",
-            "power": null,
-            "accuracy": 100,
-            "types": [
-              "ground"
-            ],
-            "description": "<p>Effect: On hit, all valid targets lose -1 ACC Stage for 5 activations.</p>",
-            "contestType": "",
-            "contestEffect": "",
-            "variant": "sand-attack",
-            "free": true,
-            "slot": null
-          },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 4
+        },
+        "category": "status",
+        "accuracy": 100,
+        "types": [
+          "ground"
+        ],
+        "description": "<p>Effect: On hit, all valid targets lose -1 ACC Stage for 5 activations.</p>",
+        "variant": "sand-attack",
+        "free": true,
+        "img": "icons/svg/explosion.svg",
+        "predicate": []
+      },
+      {
+        "slug": "dust-cloud-dusty",
+        "name": "Dust Cloud (Dusty)",
+        "type": "attack",
+        "traits": [
+          "environ"
+        ],
+        "range": {
+          "target": "emanation",
+          "distance": 4,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 3,
+          "trigger": "<p>Dusty Weather is present.</p>"
+        },
+        "category": "status",
+        "accuracy": 100,
+        "types": [
+          "ground"
+        ],
+        "description": "<p>Trigger: Dusty Weather is present.</p><p>Effect: On hit, all valid targets lose -2 ACC Stage for 5 activations.</p>",
+        "variant": "sand-attack",
+        "free": true,
+        "img": "icons/svg/explosion.svg",
+        "predicate": []
+      }
+    ],
+    "description": "<p>Trigger: The user enters combat.</p><p>Effect: Connection - Sand Attack. The user freely uses Dust Cloud or Dust Cloud (Dusty).</p>",
+    "traits": [
+      "connection",
+      "partial-automation"
+    ],
+    "slug": "dust-cloud",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "1u2SNaKakrSMUV4N",
+  "effects": [
+    {
+      "name": "Dust Cloud",
+      "type": "passive",
+      "_id": "ntw7tNz4PH8JdQ2c",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
           {
-            "slug": "dust-cloud-dusty",
-            "name": "Dust Cloud (Dusty)",
-            "type": "attack",
-            "traits": [
-              "environ"
+            "type": "grant-item",
+            "key": "",
+            "value": "Compendium.ptr2e.core-moves.Item.RNsjfgPa66NJ8zR7",
+            "predicate": [],
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "system.actions.0.free",
+                "value": "true"
+              },
+              {
+                "mode": 5,
+                "property": "system.actions.1.free",
+                "value": "true"
+              }
             ],
-            "range": {
-              "target": "emanation",
-              "distance": 4,
-              "unit": "m"
-            },
-            "cost": {
-              "activation": "complex",
-              "powerPoints": 3,
-              "delay": null,
-              "priority": null,
-              "trigger": "<p>Dusty Weather is present.</p>"
-            },
-            "category": "status",
-            "power": null,
-            "accuracy": 100,
-            "types": [
-              "ground"
-            ],
-            "description": "<p>Trigger: Dusty Weather is present.</p><p>Effect: On hit, all valid targets lose -2 ACC Stage for 5 activations.</p>",
-            "contestType": "",
-            "contestEffect": "",
-            "variant": "sand-attack",
-            "free": true,
-            "slot": null
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "reevaluateOnUpdate": false,
+            "inMemoryOnly": false,
+            "allowDuplicate": true,
+            "track": false,
+            "replaceSelf": false,
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            }
           }
-      ],
-      "description": "<p>Trigger: The user enters combat.</p><p>Effect: Connection - Sand Attack. The user freely uses Dust Cloud or Dust Cloud (Dusty).</p>",
-      "traits": [
-        "connection"
-      ],
-      "slug": null,
-      "container": null
-    },
-    "_id": "1u2SNaKakrSMUV4N",
-    "effects": [],
-    "folder": null,
-    "sort": 0,
-    "ownership": {
-      "default": 0,
-      "tXAZ3QUgjuwX4gdV": 3
-    },
-    "flags": {},
-    "_stats": {
-      "compendiumSource": null,
-      "duplicateSource": null,
-      "coreVersion": "12.324",
-      "systemId": "ptr2e",
-      "systemVersion": "0.005",
-      "createdTime": 1716919240454,
-      "modifiedTime": 1716919240454,
-      "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
-    },
-    "_key": "!items!1u2SNaKakrSMUV4N"
-  }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.5.1.5",
+        "createdTime": 1737397441460,
+        "modifiedTime": 1737397494266,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+      }
+    }
+  ]
+}

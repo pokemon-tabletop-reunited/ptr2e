@@ -1,50 +1,44 @@
 {
-    "name": "Aura Blast",
-    "type": "move",
-    "_id": "glGGnrdd4Z5HZ50Z",
-    "img": "systems/ptr2e/img/svg/fighting_icon.svg",
-    "system": {
-      "slug": "aura-blast",
-      "traits": [
-        "aura",
-        "pulse",
-        "blast-3",
-        "delay-2"
-      ],
-      "actions": [
-        {
-          "name": "Aura Blast",
-          "slug": "aura-blast",
-          "type": "attack",
-          "img": "icons/svg/explosion.svg",
-          "traits": [
-            "aura",
-            "pulse",
-            "blast-1"
-          ],
-          "range": {
-            "target": "blast",
-            "distance": 12,
-            "unit": "m"
-          },
-          "cost": {
-            "activation": "complex",
-            "powerPoints": 7
-          },
-          "types": [
-            "fighting"
-          ],
-          "category": "special",
-          "power": 80,
-          "accuracy": 90,
-          "description": "<p>Effect: This Attack is super effective against the Ghost Type.</p>"
-        }
-      ],
-      "grade": "A",
-      "_migration": {
-        "version": null,
-        "previous": null
+  "name": "Aura Blast",
+  "type": "move",
+  "_id": "glGGnrdd4Z5HZ50Z",
+  "img": "systems/ptr2e/img/svg/fighting_icon.svg",
+  "system": {
+    "slug": "aura-blast",
+    "actions": [
+      {
+        "name": "Aura Blast",
+        "slug": "aura-blast",
+        "type": "attack",
+        "img": "icons/svg/explosion.svg",
+        "traits": [
+          "aura",
+          "pulse",
+          "blast-1"
+        ],
+        "range": {
+          "target": "blast",
+          "distance": 12,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 7
+        },
+        "types": [
+          "fighting"
+        ],
+        "category": "special",
+        "power": 80,
+        "accuracy": 90,
+        "description": "<p>Effect: This Attack is super effective against the Ghost Type.</p>"
       }
-    },
-    "effects": []
-  }
+    ],
+    "grade": "A",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "effects": []
+}

@@ -4,11 +4,6 @@
   "img": "systems/ptr2e/img/svg/normal_icon.svg",
   "system": {
     "slug": "present",
-    "description": "<p>Effect: When declaring this attack, this attack has a chance of changing properties until the end of the user's Activation. The user rolls a d100, with the results changing the attack's effects:</p><p> 1-40: Nothing changes.</p><p>41-60: Power doubles.</p><p>61-70: Power triples.</p><p>71-100: Instead of dealing damage, the targets each heal 4 Ticks of HP.</p>",
-    "traits": [
-      "blast-1",
-      "healing"
-    ],
     "actions": [
       {
         "slug": "present",
@@ -26,8 +21,6 @@
         "cost": {
           "activation": "complex",
           "powerPoints": 2,
-          "delay": null,
-          "priority": null,
           "trigger": "<p>User rolls 1 thru 40 on the declaration roll.</p>"
         },
         "category": "physical",
@@ -58,8 +51,6 @@
         "cost": {
           "activation": "complex",
           "powerPoints": 2,
-          "delay": null,
-          "priority": null,
           "trigger": "<p>User rolls 41 thru 60 on the declaration roll.</p>"
         },
         "category": "physical",
@@ -91,8 +82,6 @@
         "cost": {
           "activation": "complex",
           "powerPoints": 2,
-          "delay": null,
-          "priority": null,
           "trigger": "<p>Trigger: User rolls 61 thru 70 on the declaration roll.</p>"
         },
         "category": "physical",
@@ -125,8 +114,6 @@
         "cost": {
           "activation": "complex",
           "powerPoints": 2,
-          "delay": null,
-          "priority": null,
           "trigger": "<p>Trigger: User rolls 71 thru 100 on the declaration roll.</p>"
         },
         "category": "status",

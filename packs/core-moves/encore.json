@@ -4,17 +4,14 @@
   "img": "systems/ptr2e/img/svg/normal_icon.svg",
   "system": {
     "slug": "encore",
-    "description": "<p>Effect: The target's last used attack is @Affliction[choice-locked] 4.</p>",
-    "traits": [
-      "social"
-    ],
     "actions": [
       {
         "slug": "encore",
         "name": "Encore",
         "type": "attack",
         "traits": [
-          "social"
+          "social",
+          "pp-updated"
         ],
         "range": {
           "target": "creature",
@@ -23,10 +20,7 @@
         },
         "cost": {
           "activation": "simple",
-          "powerPoints": 8,
-          "delay": null,
-          "priority": null,
-          "trigger": null
+          "powerPoints": 3
         },
         "category": "status",
         "power": null,
@@ -42,7 +36,7 @@
       }
     ],
     "container": null,
-    "grade": "A"
+    "grade": "C"
   },
   "_id": "ZxIubCcCNv3MnafK",
   "effects": []

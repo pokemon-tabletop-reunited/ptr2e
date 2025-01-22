@@ -3,54 +3,7 @@
   "type": "ability",
   "img": "systems/ptr2e/img/icons/status_icon.png",
   "system": {
-    "actions": [
-      {
-        "slug": "trick-room",
-        "name": "Trick Room",
-        "type": "attack",
-        "traits": [
-          "room"
-        ],
-        "range": {
-          "target": "field",
-          "unit": "m"
-        },
-        "cost": {
-          "activation": "complex",
-          "powerPoints": 8
-        },
-        "category": "status",
-        "types": [
-          "psychic"
-        ],
-        "description": "<p>Effect: The Room is set to Trick Room for 3 Rounds.</p>",
-        "img": "icons/svg/explosion.svg"
-      },
-      {
-        "slug": "trick-room",
-        "name": "Trick Room",
-        "type": "attack",
-        "traits": [
-          "room",
-          "priority-5"
-        ],
-        "range": {
-          "target": "field",
-          "unit": "m"
-        },
-        "cost": {
-          "activation": "complex",
-          "powerPoints": 11,
-          "priority": 5
-        },
-        "category": "status",
-        "types": [
-          "psychic"
-        ],
-        "description": "<p>Effect: The Room is set to Trick Room for 5 Rounds.</p>",
-        "img": "icons/svg/explosion.svg"
-      }
-    ],
+    "actions": [],
     "description": "<p>Trigger: The user declares Trick Room.</p><p>Effect: Connection - Trick Room. The set Trick Room lasts 5 rounds, and the triggering attack gains [Priority 5] until the end of the user's Activation.</p>",
     "traits": [
       "room",
@@ -63,5 +16,73 @@
     }
   },
   "_id": "vHlzzoEuyzHoBsbT",
-  "effects": []
+  "effects": [
+    {
+      "name": "Regression Field",
+      "type": "passive",
+      "_id": "4WTJUYRZ3bskzqNB",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "grant-item",
+            "key": "",
+            "value": "Compendium.ptr2e.core-moves.Item.0o8uUraEHLc4mDq4",
+            "predicate": [],
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "system.actions.0.free",
+                "value": "true"
+              }
+            ],
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "reevaluateOnUpdate": false,
+            "inMemoryOnly": false,
+            "allowDuplicate": true,
+            "track": false,
+            "replaceSelf": false,
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            }
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.5.1.5",
+        "createdTime": 1737418447843,
+        "modifiedTime": 1737418486380,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+      }
+    }
+  ]
 }

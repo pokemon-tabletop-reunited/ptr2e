@@ -1,0 +1,199 @@
+{
+  "folder": "V4skAU6G3OH5fXaf",
+  "name": "Highland Thistle (Sword)",
+  "type": "weapon",
+  "system": {
+    "_migration": {
+      "version": 0.11,
+      "previous": {
+        "schema": 0.109,
+        "foundry": "12.331",
+        "system": "0.10.0-alpha.5.1"
+      }
+    },
+    "traits": [
+      "weapon",
+      "grass",
+      "sharp",
+      "fantasy"
+    ],
+    "actions": [
+      {
+        "slug": "leaf-blade",
+        "name": "Leaf Blade",
+        "type": "attack",
+        "traits": [
+          "crit-1",
+          "pass-3",
+          "sharp",
+          "contact",
+          "pp-updated"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 5
+        },
+        "category": "physical",
+        "power": 90,
+        "accuracy": 100,
+        "types": [
+          "grass"
+        ],
+        "free": true,
+        "img": "systems/ptr2e/img/icons/weapon_icon.webp",
+        "predicate": []
+      },
+      {
+        "name": "Sword Strike",
+        "slug": "sword-action-1",
+        "description": "<p>This is a standard, one-handed and straight-edged blade, such as a Jian or a Longsword.</p>",
+        "traits": [
+          "weapon",
+          "sharp",
+          "contact"
+        ],
+        "type": "attack",
+        "img": "/systems/ptr2e/img/icons/item_icon.webp",
+        "range": {
+          "target": "enemy",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex"
+        },
+        "types": [
+          "untyped"
+        ],
+        "category": "physical",
+        "power": 60,
+        "accuracy": 100,
+        "free": true,
+        "predicate": []
+      },
+      {
+        "slug": "solar-blade",
+        "name": "Solar Blade",
+        "type": "attack",
+        "traits": [
+          "set-up",
+          "defensive",
+          "sharp",
+          "pass-5",
+          "environ",
+          "contact",
+          "pp-updated"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 6
+        },
+        "category": "physical",
+        "power": 125,
+        "accuracy": 100,
+        "types": [
+          "grass"
+        ],
+        "description": "<p>Effect: Set-Up: The user gains +1 ATK and SPDEF stage for 5 activations, and ends their activation. If the weather is Sunny, the user does Sets-Up and resolves Solar Blade on the same activation.</p><p>Resolution: On their next activation, they attack with and resolve Solar Blade. If the weather is notSunny or Clear, Solar Blade’s Power is reduced by 50%.</p>",
+        "img": "icons/svg/explosion.svg",
+        "predicate": []
+      }
+    ],
+    "description": "<p>The Highland Thistle is a magical sword crafted by Wood Elves in times of old. It draws strength (power points) from it's wielder but enhances their strength (+10 Base Attack) and affords them access to potent Moves.</p>",
+    "crafting": {
+      "skill": "",
+      "spans": null,
+      "materials": []
+    },
+    "equipped": {
+      "carryType": "stowed",
+      "handsHeld": 1,
+      "slot": "held"
+    },
+    "grade": "B",
+    "fling": {
+      "type": "grass",
+      "power": 60,
+      "accuracy": 80,
+      "hide": false
+    },
+    "quantity": 1,
+    "rarity": "rare",
+    "identification": {
+      "misidentified": null,
+      "status": "identified",
+      "unidentified": {
+        "name": "Unidentified Item",
+        "img": "systems/ptu/css/images/icons/gear_icon.png",
+        "description": "<p>Unidentified Item</p>"
+      }
+    },
+    "weaponType": "Sword"
+  },
+  "img": "systems/ptr2e/img/icons/weapon_icon.webp",
+  "effects": [
+    {
+      "name": "Highland Thistle",
+      "type": "passive",
+      "_id": "bDT2JXdz7H6zuxyt",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "basic",
+            "key": "system.attributes.atk.base",
+            "value": 10,
+            "predicate": [],
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.5.1.5",
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      }
+    }
+  ],
+  "flags": {},
+  "_id": "bUNUTCwtpWtLID6P"
+}

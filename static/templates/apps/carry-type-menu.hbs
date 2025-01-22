@@ -1,0 +1,40 @@
+{{#if (eq item.system.equipped.slot "held")}}
+  <li>
+    <a {{#if (and (eq item.system.equipped.carryType "equipped" ) (eq item.system.equipped.handsHeld 1))}}class="selected" {{/if}} data-carry-type="equipped" data-hands-held="1">
+      <i class="fa-solid fa-fw fa-hand-rock"></i>{{localize "PTR2E.FIELDS.gear.equipped.held1"}}
+    </a>
+  </li>
+  <li>
+    <a {{#if (and (eq item.system.equipped.carryType "equipped" ) (eq item.system.equipped.handsHeld 2))}}class="selected" {{/if}} data-carry-type="equipped" data-hands-held="2">
+      <i class="fa-solid fa-fw fa-hand-rock"></i>{{localize "PTR2E.FIELDS.gear.equipped.held2"}}
+    </a>
+  </li>
+{{else if (eq item.system.equipped.slot "worn")}}
+  <li>
+    <a {{#if (eq item.system.equipped.carryType "equipped" )}}class="selected" {{/if}} data-carry-type="equipped">
+      <i class="fa-solid fa-fw fa-tshirt"></i>{{localize "PTR2E.FIELDS.gear.equipped.worn"}}
+    </a>
+  </li>
+{{else if (eq item.system.equipped.slot "belt")}}
+  <li>
+    <a {{#if (eq item.system.equipped.carryType "equipped" )}}class="selected" {{/if}} data-carry-type="equipped">
+      <i class="fa-duotone fa-solid fa-uniform-martial-arts"></i>{{localize "PTR2E.FIELDS.gear.equipped.belt"}}
+    </a>
+  </li>
+{{else}}
+  <li>
+    <a {{#if (eq item.system.equipped.carryType "equipped" )}}class="selected" {{/if}} data-carry-type="equipped">
+      <i class="fa-solid fa-gem fa-fw"></i>{{localize "PTR2E.FIELDS.gear.equipped.equipped"}}
+    </a>
+  </li>
+{{/if}}
+<li>
+  <a {{#if (eq item.system.equipped.carryType "stowed" )}}class="selected" {{/if}} data-carry-type="stowed">
+    <i class="fa-solid fa-fw fa-box"></i>{{localize "PTR2E.FIELDS.gear.equipped.stowed"}}
+  </a>
+</li>
+<li>
+  <a {{#if (eq item.system.equipped.carryType "dropped" )}}class="selected" {{/if}} data-carry-type="dropped">
+    <i class="fa-solid fa-fw fa-grip-lines"></i>{{localize "PTR2E.FIELDS.gear.equipped.dropped"}}
+  </a>
+</li>

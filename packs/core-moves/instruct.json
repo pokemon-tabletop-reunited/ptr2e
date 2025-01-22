@@ -4,14 +4,14 @@
   "img": "systems/ptr2e/img/svg/psychic_icon.svg",
   "system": {
     "slug": "instruct",
-    "description": "<p>Effect: The selected ally may make a extra Activation after this attack resolves.</p>",
-    "traits": [],
     "actions": [
       {
         "slug": "instruct",
         "name": "Instruct",
         "type": "attack",
-        "traits": [],
+        "traits": [
+          "pp-updated"
+        ],
         "range": {
           "target": "creature",
           "distance": 10,
@@ -19,10 +19,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 6,
-          "delay": null,
-          "priority": null,
-          "trigger": null
+          "powerPoints": 5
         },
         "category": "status",
         "power": null,

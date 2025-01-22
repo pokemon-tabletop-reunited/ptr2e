@@ -10,12 +10,12 @@
           "defensive",
           "interrupt-7"
         ],
-        "name": "Holographic Dominion",
-        "slug": "holographic-dominion-active",
+        "name": "Holographic Dominion (Reaction)",
+        "slug": "holographic-dominion-reaction",
         "type": "generic",
         "cost": {
           "activation": "simple",
-          "powerPoints": 7,
+          "powerPoints": 5,
           "trigger": "<p>The user would be affected by a declared Action, Attack, or Ability.</p>"
         },
         "range": {
@@ -29,12 +29,12 @@
         "traits": [
           "legendary"
         ],
-        "name": "distorted-reverse",
-        "slug": "distorted-reverse",
+        "name": "Holographic Dominion (Simple)",
+        "slug": "holographic-dominion-simple",
         "type": "generic",
         "cost": {
           "activation": "simple",
-          "powerPoints": 2
+          "powerPoints": 1
         },
         "range": {
           "target": "self",
@@ -47,49 +47,21 @@
         "traits": [
           "legendary"
         ],
-        "name": "Holographic Dominion",
+        "name": "Holographic Dominion (Passive)",
         "slug": "holographic-dominion-passive",
         "type": "passive",
         "cost": {
           "activation": "free"
         },
         "description": "<p>Passive: While @Affliction[transient], the user's Attacks deal twice as much damage, and the user gains 2 PP at the start of each of its Activations.</p>",
-        "img": "icons/svg/explosion.svg"
-      },
-      {
-        "slug": "shadow-force",
-        "name": "Shadow Force",
-        "type": "attack",
-        "traits": [
-          "legendary",
-          "set-up",
-          "pass-4",
-          "crushing",
-          "pierce",
-          "contact",
-          "pp-updated"
-        ],
+        "img": "icons/svg/explosion.svg",
         "range": {
-          "target": "creature",
-          "distance": 1,
+          "target": "enemy",
           "unit": "m"
-        },
-        "cost": {
-          "activation": "complex",
-          "powerPoints": 7
-        },
-        "category": "physical",
-        "power": 120,
-        "accuracy": 100,
-        "types": [
-          "ghost"
-        ],
-        "description": "<p>Effect: Set-Up: The user gains @Affliction[invisible] 3 and @Affliction[transient] 3, and ends their activation.</p><p>Resolution: On their next activation, the user freely Moves up to two times the Movement Score of their choice, is cured of @Affliction[transient] and @Affliction[invisible], and then attacks with and resolves this attack.</p>",
-        "free": true,
-        "img": "icons/svg/explosion.svg"
+        }
       }
     ],
-    "description": "<p>Trigger: The user would be affected by a declared Action, Attack, or Ability.</p><p>Effect: Connection - Shadow Force. The triggering effect does not affect the user, and the user gains @Affliction[transient]. The user consume a Simple Action to gain or lose @Affliction[transient] as it wishes. Passive: While @Affliction[transient], the user's Attacks deal twice as much damage, and the user gains 2 PP at the start of each of its Activations.</p>",
+    "description": "<p>Trigger: The user would be affected by a declared Action, Attack, or Ability.</p><p>Effect: Connection - Shadow Force. The triggering effect does not affect the user, and the user gains @Affliction[transient]. The user may use a Simple Action using 1 PP to gain or lose @Affliction[transient] as it wishes. Passive: While @Affliction[transient], the user's Attacks deal twice as much damage, and the user gains 2 PP at the start of each of its Activations.</p>",
     "traits": [
       "legendary",
       "connection",
@@ -102,5 +74,85 @@
     }
   },
   "_id": "ymmPtEzXzLSc9bOd",
-  "effects": []
+  "effects": [
+    {
+      "name": "Holographic Dominion",
+      "type": "passive",
+      "_id": "Q5UE1GjPXlzLk75a",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "grant-item",
+            "key": "",
+            "value": "Compendium.ptr2e.core-moves.Item.3FUbV3cOXazvisJ0",
+            "predicate": [],
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "system.actions.0.free",
+                "value": "true"
+              }
+            ],
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "reevaluateOnUpdate": false,
+            "inMemoryOnly": false,
+            "allowDuplicate": true,
+            "track": false,
+            "replaceSelf": false,
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            }
+          },
+          {
+            "type": "percentile-modifier",
+            "key": "damaging-attack-damage",
+            "value": 100,
+            "predicate": [
+              "effect:affliction:transient"
+            ],
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "hideIfDisabled": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.5.1.5",
+        "createdTime": 1737403251186,
+        "modifiedTime": 1737403346765,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+      }
+    }
+  ]
 }

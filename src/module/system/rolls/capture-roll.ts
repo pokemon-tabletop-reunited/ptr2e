@@ -78,7 +78,7 @@ class CaptureRoll extends CheckRoll {
       bonusStage: new Roll(this.bonusStageFormula, {
         netStages: data.target.netStages,
       }).evaluateSync().total,
-      bonusLevel: Math.pow(0.75, (data.target.level - (data.user?.level ?? 0) + 5) / 5 || 0), //Math.max((36 - 2 * (data.target.level || 1)) / 10, 1),
+      bonusLevel: Math.min(6, Math.pow(0.6, (data.target.level - (data.user?.level ?? 0) + 6) / 4 || 0)), //Math.max((36 - 2 * (data.target.level || 1)) / 10, 1),
       bonusMisc: data.miscMultiplier || 1,
     }).evaluateSync();
   }
@@ -86,8 +86,8 @@ class CaptureRoll extends CheckRoll {
   static readonly shakeDcFormula = "floor(100 * pow((@catchRate / 255), (3/16)))";
   static readonly critDcFormula = "ceil((@catchRate * min(8, 1 + (@caught / 75)) * @bonus) / (357 / 10)) + 1";
   static readonly catchRateFormula = "((3 * @hpMax - 2 * @hpCurrent) / (3 * @hpMax)) * @rate * @bonusBall * @bonusStatus * @bonusStage * @bonusLevel * @bonusMisc";
-  static readonly bonusStatusFormula = "pow(1.225, @major) * pow(1.05, @minor)";
-  static readonly bonusStageFormula = "pow(1.02, -@netStages)";
+  static readonly bonusStatusFormula = "pow(1.3, @major) * pow(1.06, @minor)";
+  static readonly bonusStageFormula = "pow(1.04, -@netStages)";
 }
 
 interface CaptureRollCreationData {

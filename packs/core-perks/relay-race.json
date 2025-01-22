@@ -7,44 +7,8 @@
       "version": 0.109,
       "previous": null
     },
-    "actions": [
-      {
-        "slug": "baton-pass",
-        "name": "Baton Pass",
-        "type": "attack",
-        "traits": [],
-        "range": {
-          "target": "self",
-          "unit": "m",
-          "distance": 0
-        },
-        "cost": {
-          "activation": "complex",
-          "powerPoints": 4,
-          "delay": null,
-          "priority": null
-        },
-        "category": "status",
-        "types": [
-          "normal"
-        ],
-        "description": "<p>Effect: This attack can only be used by an owned Pokemon. The user switches with an allied Pokemon, returning to their owned Pokeball in the process. The ally gains the user’s [Stage Change] effects, [Pseudo Affliction]s, and other beneficial effects.</p>",
-        "img": "icons/svg/explosion.svg",
-        "variant": null,
-        "power": null,
-        "accuracy": null,
-        "contestType": "",
-        "contestEffect": "",
-        "free": false,
-        "slot": null,
-        "summon": null,
-        "defaultVariant": null,
-        "flingItemId": null,
-        "offensiveStat": null,
-        "defensiveStat": null
-      }
-    ],
-    "description": "<p>You learn and are able to use Baton Pass on behalf of your Pokemon, switching them out as if they had used the Move themselves.</p>",
+    "actions": [],
+    "description": "<p>You learn and are able to use Baton Pass on behalf of your Pokemon, switching them out as if they had used the Move themselves.<br><br>Connection: Baton Pass</p>",
     "traits": [],
     "prerequisites": [
       "trait:trainer",
@@ -74,13 +38,78 @@
       }
     ],
     "autoUnlock": [],
-    "originSlug": null,
-    "variant": null,
-    "mode": null,
     "global": true,
     "webs": []
   },
   "img": "systems/ptr2e/img/perk-icons/Juggler.svg",
-  "effects": [],
+  "effects": [
+    {
+      "name": "Relay Race",
+      "type": "passive",
+      "_id": "Mph3cxdVSfe9UtGo",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "grant-item",
+            "key": "",
+            "value": "Compendium.ptr2e.core-moves.Item.OhO8s2Gaw1AAnuJl",
+            "predicate": [],
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "system.actions.0.free",
+                "value": "true"
+              }
+            ],
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "reevaluateOnUpdate": false,
+            "inMemoryOnly": false,
+            "allowDuplicate": true,
+            "track": false,
+            "replaceSelf": false,
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            }
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.5.1.5",
+        "createdTime": 1737392260800,
+        "modifiedTime": 1737392301952,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+      }
+    }
+  ],
   "_id": "jdQ27YKL5LkVTATx"
 }

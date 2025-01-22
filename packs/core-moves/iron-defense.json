@@ -4,42 +4,92 @@
   "img": "systems/ptr2e/img/svg/steel_icon.svg",
   "system": {
     "slug": "iron-defense",
-    "description": "<p>Effect: The user increases their WC by 3 Stages (max WC 16) for 5 Activations and increases their DEF Stage by +2 for 5 Activations.</p>",
-    "traits": [],
     "actions": [
       {
         "slug": "iron-defense",
         "name": "Iron Defense",
         "type": "attack",
-        "traits": [],
+        "traits": [
+          "pp-updated",
+          "partial-automation"
+        ],
         "range": {
           "target": "self",
-          "distance": 0,
           "unit": "m"
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 6,
-          "delay": null,
-          "priority": null,
-          "trigger": null
+          "powerPoints": 3
         },
         "category": "status",
-        "power": null,
-        "accuracy": null,
         "types": [
           "steel"
         ],
         "description": "<p>Effect: The user increases their WC by 3 Stages (max WC 16) for 5 Activations and increases their DEF Stage by +2 for 5 Activations.</p>",
-        "contestType": "",
-        "contestEffect": "",
-        "free": false,
-        "slot": null
+        "img": "icons/svg/explosion.svg",
+        "predicate": []
       }
     ],
-    "container": null,
-    "grade": "B"
+    "grade": "C",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
   },
   "_id": "qSWTxI39iL7ivEVw",
-  "effects": []
+  "effects": [
+    {
+      "name": "Iron Defense",
+      "type": "passive",
+      "_id": "HOl2oVB3iOBTL4Qb",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "iron-defense-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.DYJyYbH3EVwM4P90",
+            "predicate": [],
+            "chance": 100,
+            "affects": "target",
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.5.1.2",
+        "createdTime": 1736888535213,
+        "modifiedTime": 1736888558910,
+        "lastModifiedBy": "IcBpMqhFuTck9VpX"
+      }
+    }
+  ]
 }

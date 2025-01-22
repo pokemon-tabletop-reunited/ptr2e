@@ -5,16 +5,15 @@
   "img": "systems/ptr2e/img/svg/psychic_icon.svg",
   "system": {
     "slug": null,
-    "traits": [
-      "room"
-    ],
     "actions": [
       {
         "name": "Refreshing Field",
         "slug": "refreshing-field",
         "type": "attack",
         "img": "icons/svg/explosion.svg",
-        "traits": [],
+        "traits": [
+          "pp-updated"
+        ],
         "range": {
           "target": "field",
           "distance": 0,
@@ -22,9 +21,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 4,
-          "delay": null,
-          "priority": null
+          "powerPoints": 3
         },
         "variant": null,
         "types": [
@@ -40,9 +37,8 @@
         "description": "<p>Effect: The Room is set to Refreshing Field for 3 Rounds.</p>"
       }
     ],
-    "description": "",
     "container": null,
-    "grade": "B"
+    "grade": "C"
   },
   "effects": [],
   "sort": 0,

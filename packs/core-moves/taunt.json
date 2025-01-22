@@ -4,17 +4,14 @@
   "img": "systems/ptr2e/img/svg/dark_icon.svg",
   "system": {
     "slug": "taunt",
-    "description": "<p>Effect: On hit, the target becomes @Affliction[taunted] 5.</p>",
-    "traits": [
-      "social"
-    ],
     "actions": [
       {
         "slug": "taunt",
         "name": "Taunt",
         "type": "attack",
         "traits": [
-          "social"
+          "social",
+          "pp-updated"
         ],
         "range": {
           "target": "creature",
@@ -23,7 +20,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 5
+          "powerPoints": 3
         },
         "category": "status",
         "accuracy": 100,

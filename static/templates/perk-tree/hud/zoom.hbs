@@ -1,0 +1,12 @@
+<section class="{{#if editMode}}editing{{/if}}">
+  <footer class="h-100">
+    <label>
+      Zoom Level
+    </label>
+    <select name="zoom-value">
+      {{#each zoomLevels}}
+        <option value="{{this}}" {{#if (eq ../zoomLevel this)}}selected{{/if}}>{{this}}</option>
+      {{/each}}
+    </select>
+  </footer>
+</section>
