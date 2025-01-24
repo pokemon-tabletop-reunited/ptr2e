@@ -589,6 +589,10 @@
                 "item": null,
                 "level": null,
                 "knownMove": null
+              },
+              "perk": {
+                "x": 15,
+                "y": 15
               }
             }
           ],
@@ -597,11 +601,19 @@
             "item": null,
             "level": null,
             "knownMove": null
+          },
+          "perk": {
+            "x": 15,
+            "y": 15
           }
         }
       ],
       "uuid": "Compendium.ptr2e.core-species.Item.BmuDohMAWcHopUmk",
-      "methods": []
+      "methods": [],
+      "perk": {
+        "x": 15,
+        "y": 15
+      }
     },
     "habitats": [
       "forest",
@@ -614,5 +626,242 @@
     }
   },
   "_id": "PhFGJrxZDAK8PxwU",
-  "effects": []
+  "effects": [
+    {
+      "name": "Mega Beedrill",
+      "type": "form",
+      "_id": "cDS3TYVrWiBHnLGe",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-option",
+            "key": "manual-forme-toggle",
+            "value": "forme:mega-beedrill:active",
+            "domain": "all",
+            "toggleable": true,
+            "label": "Toggle: Mega Beedrill Forme",
+            "predicate": [],
+            "alwaysActive": false,
+            "count": false,
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "suboptions": [],
+            "state": false
+          },
+          {
+            "type": "grant-item",
+            "predicate": [
+              "forme:mega-beedrill:active"
+            ],
+            "key": "",
+            "value": "Compendium.ptr2e.core-abilities.Item.vEXfzPFttBFhylJ8",
+            "allowDuplicate": false,
+            "reevaluateOnUpdate": true,
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "inMemoryOnly": false,
+            "alterations": [],
+            "track": false,
+            "replaceSelf": false,
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            }
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-beedrill:active"
+            ],
+            "key": "system.movement.flight.value",
+            "value": 10,
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-beedrill:active"
+            ],
+            "key": "system.movement.overland.value",
+            "value": -5,
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "stats-alteration",
+            "predicate": [
+              "forme:mega-beedrill:active"
+            ],
+            "key": "",
+            "value": 0,
+            "hp": null,
+            "atk": 60,
+            "def": null,
+            "spa": -30,
+            "spd": null,
+            "spe": 70,
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "remove-trait",
+            "predicate": [
+              "forme:mega-beedrill:active"
+            ],
+            "key": "",
+            "value": "Wallclimber",
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "add-trait",
+            "predicate": [
+              "forme:mega-beedrill:active"
+            ],
+            "key": "",
+            "value": "Jet",
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-beedrill:active"
+            ],
+            "key": "system.skills.acrobatics.value",
+            "value": -20,
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-beedrill:active"
+            ],
+            "key": "system.skills.climb.value",
+            "value": -60,
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-beedrill:active"
+            ],
+            "key": "system.skills.flying.value",
+            "value": 15,
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-beedrill:active"
+            ],
+            "key": "system.skills.intimidate.value",
+            "value": 10,
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-beedrill:active"
+            ],
+            "key": "system.skills.navigate.value",
+            "value": 10,
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-beedrill:active"
+            ],
+            "key": "system.skills.spot.value",
+            "value": 5,
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-beedrill:active"
+            ],
+            "key": "system.modifiers.heightClass",
+            "value": 1,
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "token-alterations",
+            "predicate": [
+              "forme:mega-beedrill:active"
+            ],
+            "key": "",
+            "value": 0,
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "texture": "modules/ptr2e-pkmn-sprites/sprites/015_MEGA.webp",
+            "tint": null,
+            "scale": null,
+            "name": null,
+            "light": null,
+            "alpha": null
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0,
+        "trigger": "manual",
+        "conditions": []
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.5.2.1",
+        "createdTime": 1737675551143,
+        "modifiedTime": 1737677762402,
+        "lastModifiedBy": "7DirfY8mVLhqwsXB"
+      }
+    }
+  ]
 }
