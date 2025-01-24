@@ -31,14 +31,45 @@
         ],
         "description": "<p>Effect: This attack calculates damage against the target's DEF, rather than SPDEF. Coral Break's Power is doubled against Swimming targets.</p>",
         "img": "systems/ptr2e/img/svg/water_icon.svg",
-        "defensiveStat": "def"
+        "defensiveStat": "def",
+        "predicate": []
+      },
+      {
+        "slug": "coral-break-swimming",
+        "name": "Coral Break Variant",
+        "type": "attack",
+        "traits": [
+          "crushing",
+          "pp-updated"
+        ],
+        "range": {
+          "target": "wide-line",
+          "distance": 4,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 7
+        },
+        "category": "special",
+        "power": 80,
+        "accuracy": 90,
+        "types": [
+          "water"
+        ],
+        "description": "<p>Effect: This attack calculates damage against the target's DEF, rather than SPDEF. Coral Break's Power is doubled against Swimming targets.</p>",
+        "img": "systems/ptr2e/img/svg/water_icon.svg",
+        "defensiveStat": "def",
+        "variant": "coral-break",
+        "predicate": []
       }
     ],
     "grade": "A",
     "_migration": {
       "version": null,
       "previous": null
-    }
+    },
+    "traits": []
   },
   "_id": "a8tXijy7zx7TMFz2",
   "effects": []
