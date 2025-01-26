@@ -121,6 +121,11 @@ class NBASearchStatePool<N extends Node<PerkNodeData, unknown> = Node<PerkNodeDa
       cached.f1 = Number.POSITIVE_INFINITY;
       cached.f2 = Number.POSITIVE_INFINITY;
 
+      cached.rv1 = 0;
+      cached.rv2 = 0;
+      cached.skills1 = new Map();
+      cached.skills2 = new Map();
+
       // used to reconstruct heap when fScore is updated.
       cached.h1 = -1;
       cached.h2 = -1;
@@ -135,7 +140,7 @@ class NBASearchStatePool<N extends Node<PerkNodeData, unknown> = Node<PerkNodeDa
   reset() {
     this.currentInCache = 0;
   }
-  
+
   fullReset() {
     this.currentInCache = 0;
     this.nodeCache = [];
@@ -267,6 +272,22 @@ export class nba<NodeData extends PerkNodeData = PerkNodeData, LinkData = unknow
     let f2 = f1; // they should agree originally
     endNode.f2 = f2;
     open2Set.push(endNode)
+
+    // Calculate skills and RVs spent for Start & End nodes
+    const result1 = handleRVs.bind(this)({otherNode: from, rvs: startNode.rv1 + endNode.rv2, skills: startNode.skills1});
+    if(result1) {
+      if(typeof result1 !== 'boolean') {
+        startNode.rv1 += result1.requiredPoints;
+        startNode.skills1.set(result1.skill, {skill: result1.skill, value: result1.requiredPoints});
+      }
+    }
+    const result2 = handleRVs.bind(this)({otherNode: to, rvs: startNode.rv1 + endNode.rv2, skills: endNode.skills2});
+    if(result2) {
+      if(typeof result2 !== 'boolean') {
+        endNode.rv2 += result2.requiredPoints;
+        endNode.skills2.set(result2.skill, {skill: result2.skill, value: result2.requiredPoints});
+      }
+    }
 
     // this is the main algorithm loop:
     while (open2Set.length && open1Set.length) {

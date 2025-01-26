@@ -15,7 +15,7 @@ async function initializePerks({ perks }: { perks: Perk[] }) {
 
       graph.addNode(index > 0 ? `${perk.slug}-${index}` : perk.slug, {
         perk,
-        cost: perk.system.cost,
+        cost: node.type === "root" ? 1 : perk.system.cost,
         connected: new Set(node.connected ?? []),
         root: node.type === "root"
       })
@@ -28,61 +28,6 @@ async function initializePerks({ perks }: { perks: Perk[] }) {
     }
   }
   return [true];
-}
-
-async function getBestPathsToRoot({ slug, root, config }: { slug: string | number, root?: string | number, config?: GeneratorConfig }) {
-  const node = graph.getNode(slug);
-  if (!node) return [null];
-
-  config = Object.assign({
-    mode: "order",
-    priority: [],
-    cost: {
-      priority: "random",
-      resolution: "random"
-    },
-    entry: {
-      mode: "best"
-    },
-    randomness: 0,
-    points: {
-      ap: 0,
-      rv: 0
-    }
-  } satisfies GeneratorConfig, config);
-
-  const paths = {
-    shortest: null,
-    cheapest: null,
-  } as {
-    shortest: { path: Node<PerkNodeData>[], root: Node<PerkNodeData>, length: number, cost: number } | null;
-    cheapest: { path: Node<PerkNodeData>[], root: Node<PerkNodeData>, length: number, cost: number } | null;
-  }
-
-  const roots = root ? [graph.getNode(root)] : graph.rootNodes;
-  if (!roots[0]) return [null];
-
-  for (const root of graph.rootNodes) {
-    const shortest = graph.findPathMode(node.id, root.id, config, { mode: "shortest" });
-    const shortestData = {
-      length: shortest.length,
-      cost: shortest.reduce((acc, n) => acc + n.data.cost, node.data.cost)
-    }
-    const cheapest = graph.findPathMode(node.id, root.id, config, { mode: "cheapest" });
-    const cheapestData = {
-      length: cheapest.length,
-      cost: cheapest.reduce((acc, n) => acc + n.data.cost, node.data.cost)
-    }
-
-    if (!paths.shortest || shortestData.length < paths.shortest.length) {
-      paths.shortest = { path: shortest, root, ...shortestData };
-    }
-    if (!paths.cheapest || cheapestData.cost < paths.cheapest.cost) {
-      paths.cheapest = { path: cheapest, root, ...cheapestData };
-    }
-  }
-
-  return [paths];
 }
 
 async function generate({ config, actor: actorData, options }: { config: GeneratorConfig, actor: ActorData, options: string[] }) {
@@ -101,6 +46,9 @@ async function generate({ config, actor: actorData, options }: { config: Generat
     acc[skill.slug] = skill;
     return acc;
   }, {} as Record<string, Skill>);
+  
+  // Give Actor 1 additional AP to account for the free Root, since all roots in the generator are 1 cost.
+  config.points.ap += 1;
 
   // Restart the pathfinder pool between searches; this is necessary to prevent weird caching issues.
   graph.pathfinder.pool.fullReset();
@@ -319,11 +267,11 @@ function handleNoPriorityPerks({ config, priorities, currentPath, purchasedPerks
   }, {} as Record<string, Node<PerkNodeData>[]>);
 
   const bestNodes: { archetype: Node<PerkNodeData>[], none: Node<PerkNodeData>[] } = Object.entries(bestNodesByArchetype).reduce((acc, [archetype, nodes]) => {
-    if (!acc.archetype.length) {
-      if (archetype === "none") return { archetype: acc.archetype, none: nodes };
-      return { archetype: nodes, none: acc.none };
+    if (!acc.archetype?.length) {
+      if (archetype === "none") return { archetype: acc.archetype, none: nodes ?? [] };
+      return { archetype: nodes ?? acc.archetype, none: acc.none };
     }
-    if (archetype === "none") return { archetype: acc.archetype, none: nodes };
+    if (archetype === "none") return { archetype: acc.archetype, none: nodes ?? [] };
     if (nodes?.length > acc.archetype.length) return { archetype: nodes, none: acc.archetype };
 
     return acc;
@@ -510,13 +458,11 @@ function reducePath<NodeData extends PerkNodeData = PerkNodeData, LinkData = unk
 }
 
 self.initializePerks = initializePerks;
-self.getBestPathsToRoot = getBestPathsToRoot;
 self.generate = generate;
 
 declare global {
   interface Window {
     initializePerks: typeof initializePerks;
-    getBestPathsToRoot: typeof getBestPathsToRoot;
     generate: typeof generate;
   }
 }

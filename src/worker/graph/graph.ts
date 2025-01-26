@@ -34,9 +34,9 @@ export class Graph<NodeData extends PerkNodeData = PerkNodeData, LinkData = unkn
 
   findPath(from: NodeId, to: NodeId, config: GeneratorConfig, {actor, options}: {actor: Actor, options: string[]}): PathResult<NodeData, LinkData> {
     this.distanceFunction = config.cost.priority === "cheapest"
-      ? (_from, to) => to.data.cost
+      ? (_from, to) => to.data.root ? 1 : to.data.cost
       : config.cost.priority === "shortest" && config.cost.resolution === "costliest"
-        ? (_from, to) => 100 - to.data.cost
+        ? (_from, to) => 100 - (to.data.root ? 1 : to.data.cost)
         : () => 1;
 
     const result = this.pathfinder.find(from, to, config, {actor, options});
@@ -50,17 +50,6 @@ export class Graph<NodeData extends PerkNodeData = PerkNodeData, LinkData = unkn
       priority: result.priority,
       skills: result.skills,
     }
-  }
-
-  findPathMode(from: string | number, to: string | number, config: GeneratorConfig, { mode = "cheapest" }: { mode?: "shortest" | "cheapest" | "custom", func?: ((from: Node<PerkNodeData, LinkData>, to: Node<PerkNodeData, LinkData>) => number) } = {}): Node<PerkNodeData, LinkData>[] {
-    if (mode === "custom" && !this.distanceFunction) throw new Error("No custom distance function provided");
-
-    switch (mode) {
-      case "cheapest": this.distanceFunction = (_from, to) => to.data.cost; break;
-      case "shortest": this.distanceFunction = () => 1; break;
-    }
-
-    return this.pathfinder.find(from, to, config, {actor: {} as Actor, options: []}).path;
   }
 
   get rootNodes() {
