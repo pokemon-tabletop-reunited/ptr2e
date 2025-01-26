@@ -11,15 +11,22 @@
         "slug": "run-down",
         "description": "<p>Trigger: You successfully hit an opponent with an attack.<br><br>May spend 4 PP to gain +1 SPD stage for 5 activations as a Free Action at [Interrupt 2].</p>",
         "traits": [],
-        "type": "generic",
+        "type": "attack",
         "range": {
-          "target": "creature",
+          "target": "self",
           "unit": "m"
         },
         "cost": {
-          "activation": "free"
+          "activation": "free",
+          "powerPoints": 4
         },
-        "img": "icons/svg/explosion.svg"
+        "img": "systems/ptr2e/img/perk-icons/Cavalier.svg",
+        "types": [
+          "untyped"
+        ],
+        "category": "status",
+        "free": true,
+        "predicate": []
       }
     ],
     "slug": "run-down",
@@ -59,5 +66,60 @@
     "global": true,
     "webs": []
   },
-  "effects": []
+  "effects": [
+    {
+      "name": "Run Down",
+      "type": "passive",
+      "_id": "fD0IX4eexKRd9laq",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "run-down-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.XeiSuS3APUcN0MLM",
+            "predicate": [],
+            "chance": 100,
+            "affects": "self",
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "alterations": []
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.5.2.1",
+        "createdTime": 1737935246436,
+        "modifiedTime": 1737935273361,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+      }
+    }
+  ]
 }
