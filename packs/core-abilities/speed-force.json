@@ -29,5 +29,82 @@
     }
   },
   "_id": "Mptpo2O5mTiFH0wl",
-  "effects": []
+  "effects": [
+    {
+      "name": "Speed Force",
+      "type": "passive",
+      "_id": "rmVCBalJ9PaG8oOO",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "flat-modifier",
+            "key": "contact-trait-attack-damage-flat",
+            "value": "floor((@actor.system.attributes.spe.value * ((2 + @actor.system.attributes.spe.stage) / 2)) * 0.2)",
+            "predicate": [
+              {
+                "gte": [
+                  "{actor|system.attributes.spe.stage}",
+                  0
+                ]
+              }
+            ],
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "hideIfDisabled": false
+          },
+          {
+            "type": "flat-modifier",
+            "key": "contact-trait-attack-damage-flat",
+            "value": "floor((@actor.system.attributes.spe.value * (2 / (2 + abs(@actor.system.attributes.spe.stage)))) * 0.2)",
+            "predicate": [
+              {
+                "lte": [
+                  "{actor|system.attributes.spe.stage}",
+                  0
+                ]
+              }
+            ],
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "hideIfDisabled": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.5.1.6",
+        "createdTime": 1737568062124,
+        "modifiedTime": 1737568155470,
+        "lastModifiedBy": "IcBpMqhFuTck9VpX"
+      }
+    }
+  ]
 }

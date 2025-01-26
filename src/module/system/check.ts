@@ -1,5 +1,5 @@
 import { ChatMessagePTR2e } from "@chat";
-import { ConsumablePTR2e, ItemPTR2e, ItemSystemsWithFlingStats } from "@item";
+import { ConsumablePTR2e, ItemPTR2e, ItemSourcePTR2e, ItemSystemsWithFlingStats } from "@item";
 import { ModifierPopup } from "@module/apps/modifier-popup/modifier-popup.ts";
 import { AttackCheckModifier, CheckModifier, ModifierPTR2e } from "@module/effects/modifiers.ts";
 import { RollNote } from "@system/notes.ts";
@@ -469,7 +469,17 @@ class CheckPTR2e {
             continue;
           }
 
-          effectsToApply.push(...item.toObject().effects as ActiveEffectPTR2e['_source'][]);
+          const grantedSource = item.toObject();
+          
+          try {
+            for (const alteration of effectRoll.alterations ?? []) {
+              alteration.applyTo(grantedSource as ItemSourcePTR2e);
+            }
+
+            effectsToApply.push(...grantedSource.effects as ActiveEffectPTR2e['_source'][]);
+          } catch (error) {
+            if (error instanceof Error) console.warn(error);
+          }
         }
       }
     }

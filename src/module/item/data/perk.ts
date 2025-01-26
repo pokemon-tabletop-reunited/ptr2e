@@ -35,6 +35,12 @@ export default abstract class PerkSystem extends PerkExtension {
       cost: new fields.NumberField({ required: true, initial: 1, label: "PTR2E.FIELDS.apCost.label", hint: "PTR2E.FIELDS.apCost.hint" }),
       originSlug: new SlugField({ required: true, nullable: true, initial: null }),
 
+      design: new fields.SchemaField({
+        arena: new fields.StringField<"physical" | "mental" | "social", "physical" | "mental" | "social", true, true, true>({ required: true, nullable: true, initial: null, choices: ["physical", "mental", "social"].reduce<Record<string, string>>((acc, arena) => ({ ...acc, [arena]: arena }), {}), label: "PTR2E.FIELDS.design.arena.label", hint: "PTR2E.FIELDS.design.arena.hint" }),
+        approach: new fields.StringField<"power" | "finesse" | "resilience", "power" | "finesse" | "resilience", true, true, true>({ required: true, nullable: true, initial: null, choices: ["power", "finesse", "resilience"].reduce<Record<string, string>>((acc, approach) => ({ ...acc, [approach]: approach }), {}), label: "PTR2E.FIELDS.design.approach.label", hint: "PTR2E.FIELDS.design.approach.hint" }),
+        archetype: new fields.StringField({ required: true, nullable: true, initial: null, label: "PTR2E.FIELDS.design.archetype.label", hint: "PTR2E.FIELDS.design.archetype.hint" }),
+      }),
+
       variant: new fields.StringField({
         required: true,
         nullable: true,
@@ -139,33 +145,33 @@ export default abstract class PerkSystem extends PerkExtension {
       // Handle string
       if (typeof predicate === "string") {
         const number = Number(predicate);
-        if(!isNaN(number)) {
+        if (!isNaN(number)) {
           return handlePredicate(number);
         }
 
-        if(predicate.trim().startsWith("#")) {
+        if (predicate.trim().startsWith("#")) {
           return `${predicate.replace("#", "")} (Not Automated)`;
         }
 
         const itemRollOption = predicate.trim().match(/^(item):(?<type>[-a-z]+):(?<slug>[-a-z0-9]+)$/);
-        if(itemRollOption) {
+        if (itemRollOption) {
           return `${Handlebars.helpers.formatSlug(itemRollOption.groups?.slug)} (${Handlebars.helpers.formatSlug(itemRollOption.groups?.type)})`;
         }
 
         const traitRollOption = predicate.trim().match(/^(trait):(?<slug>[-a-z0-9]+)$/);
-        if(traitRollOption) {
-          return `[${Handlebars.helpers.formatSlug(traitRollOption.groups?.slug)}]`;
+        if (traitRollOption) {
+          return `<span class="trait" data-tooltip-direction="UP" data-trait="${traitRollOption.groups?.slug}" data-tooltip="${traitRollOption.groups?.slug}"><span>[</span><span class="tag">${Handlebars.helpers.formatSlug(traitRollOption.groups?.slug)}</span><span>]</span></span>`
         }
-        
-        const injected = predicate.trim().match(/^{(?<type>actor|item|effect|change)\|(?<path>[\w.-]+)}$/);
-        if(injected) {
-          const path = injected.groups?.path;
-          if(!path) return predicate.toString();
 
-          if(path.startsWith("skills.") && path.endsWith(".mod")) {
+        const injected = predicate.trim().match(/^{(?<type>actor|item|effect|change)\|(?<path>[\w.-]+)}$/);
+        if (injected) {
+          const path = injected.groups?.path;
+          if (!path) return predicate.toString();
+
+          if (path.startsWith("skills.") && path.endsWith(".mod")) {
             return `${Handlebars.helpers.formatSlug(path.slice(7, -4))}`;
           }
-          switch(path) {
+          switch (path) {
             case "level":
             case "system.advancement.level":
               return "Level";
@@ -177,41 +183,41 @@ export default abstract class PerkSystem extends PerkExtension {
         return predicate.toString();
       }
 
-      if(typeof predicate === "number") {
+      if (typeof predicate === "number") {
         return predicate.toString();
       }
 
       // Handle object
       if (predicate && typeof predicate === "object" && Object.keys(predicate).length > 0) {
         const statement = predicate as object
-        if(StatementValidator.isBinaryOp(statement)) {
-          if('eq' in statement) {
+        if (StatementValidator.isBinaryOp(statement)) {
+          if ('eq' in statement) {
             //@ts-expect-error - Could be attempting to evaluate truthy value
-            if(statement.eq[1] == true) {
+            if (statement.eq[1] == true) {
               return handlePredicate(statement.eq[0]);
             }
             //@ts-expect-error - Could be attempting to evaluate falsey value
-            if(statement.eq[1] == false) {
+            if (statement.eq[1] == false) {
               return `Not: ${handlePredicate(statement.eq[0])}`;
             }
             return `${handlePredicate(statement.eq[0])} == ${handlePredicate(statement.eq[1])}`;
           }
-          if('gt' in statement) {
+          if ('gt' in statement) {
             return `${handlePredicate(statement.gt[0])} > ${handlePredicate(statement.gt[1])}`;
           }
-          if('gte' in statement) {
+          if ('gte' in statement) {
             return `${handlePredicate(statement.gte[0])} >= ${handlePredicate(statement.gte[1])}`;
           }
-          if('lt' in statement) {
+          if ('lt' in statement) {
             return `${handlePredicate(statement.lt[0])} < ${handlePredicate(statement.lt[1])}`;
           }
-          if('lte' in statement) {
+          if ('lte' in statement) {
             return `${handlePredicate(statement.lte[0])} <= ${handlePredicate(statement.lte[1])}`;
           }
         }
         if (StatementValidator.isAnd(statement)) {
           const and = handlePredicate(statement.and);
-          if(Array.isArray(and) && and.length === 1) {
+          if (Array.isArray(and) && and.length === 1) {
             return and[0];
           }
 
@@ -219,28 +225,28 @@ export default abstract class PerkSystem extends PerkExtension {
         }
         if (StatementValidator.isOr(statement)) {
           const or = handlePredicate(statement.or);
-          if(Array.isArray(or) && or.length === 1) {
+          if (Array.isArray(or) && or.length === 1) {
             return or[0];
           }
-          return `One of: ${Array.isArray(or) ? `<ul><li>${or.join('</li><li>')}</li></ul>`: or}`;
+          return `One of: ${Array.isArray(or) ? `<ul><li>${or.join('</li><li>')}</li></ul>` : or}`;
         }
         if (StatementValidator.isNand(statement)) {
           const nand = handlePredicate(statement.nand);
-          if(Array.isArray(nand) && nand.length === 1) {
+          if (Array.isArray(nand) && nand.length === 1) {
             return `Not: ${nand[0]}`;
           }
           return `None of: ${Array.isArray(nand) ? `<ul><li>${nand.join('</li><li>')}</li></ul>` : nand}`;
         }
         if (StatementValidator.isXor(statement)) {
           const xor = handlePredicate(statement.xor);
-          if(Array.isArray(xor) && xor.length === 1) {
+          if (Array.isArray(xor) && xor.length === 1) {
             return xor[0];
           }
           return `Exactly one of: ${Array.isArray(xor) ? `<ul><li>${xor.join('</li><li>')}</li></ul>` : xor}`;
         }
         if (StatementValidator.isNor(statement)) {
           const nor = handlePredicate(statement.nor);
-          if(Array.isArray(nor) && nor.length === 1) {
+          if (Array.isArray(nor) && nor.length === 1) {
             return `Not: ${nor[0]}`;
           }
           return `Not all of: ${Array.isArray(nor) ? `<ul><li>${nor.join('</li><li>')}</li></ul>` : nor}`;
@@ -252,7 +258,7 @@ export default abstract class PerkSystem extends PerkExtension {
           return `If: ${handlePredicate(statement.if)} then ${handlePredicate(statement.then)}`;
         }
         if (StatementValidator.isXOf(statement)) {
-          if(statement.x === 1) return handlePredicate(statement.xof);
+          if (statement.x === 1) return handlePredicate(statement.xof);
           const xof = handlePredicate(statement.xof);
           return `${statement.x} of: ${Array.isArray(xof) ? `<ul><li>${xof.join('</li><li>')}</li></ul>` : xof}`;
         }
@@ -364,6 +370,14 @@ interface PerkSchema extends foundry.data.fields.DataSchema, PerkSystemSchemaExt
     false,
     true
   >;
+  design: foundry.data.fields.SchemaField<
+    PerkDesignSchema,
+    SourceFromSchema<PerkDesignSchema>,
+    ModelPropsFromSchema<PerkDesignSchema>,
+    true,
+    false,
+    true
+  >;
   variant: foundry.data.fields.StringField<"multi" | "tiered", "multi" | "tiered", true, true, true>;
   mode: foundry.data.fields.StringField<"shared" | "individual" | "replace" | "coexist", "shared" | "individual" | "replace" | "coexist", true, true, true>;
   global: foundry.data.fields.BooleanField<boolean, boolean, true, false, true>;
@@ -376,6 +390,12 @@ interface PerkSchema extends foundry.data.fields.DataSchema, PerkSystemSchemaExt
     true
   >;
 };
+
+interface PerkDesignSchema extends foundry.data.fields.DataSchema {
+  arena: foundry.data.fields.StringField<"physical" | "mental" | "social", "physical" | "mental" | "social", true, true, true>;
+  approach: foundry.data.fields.StringField<"power" | "finesse" | "resilience", "power" | "finesse" | "resilience", true, true, true>;
+  archetype: foundry.data.fields.StringField<string, string, true, true, true>;
+}
 
 interface NodeSchema extends foundry.data.fields.DataSchema {
   x: foundry.data.fields.NumberField<number, number, true, true, true>;

@@ -102,7 +102,7 @@ class SummonCombatantSystem extends CombatantSystemPTR2e {
     return;
   }
 
-  onEndActivation() {
+  override async onEndActivation() {
     return;
   }
 

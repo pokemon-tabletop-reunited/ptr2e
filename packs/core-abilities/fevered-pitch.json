@@ -29,5 +29,82 @@
     }
   },
   "_id": "dOOEOqzyV7gqWSDY",
-  "effects": []
+  "effects": [
+    {
+      "name": "Fevered Pitch",
+      "type": "passive",
+      "_id": "bWCJAKpnJgbAP29z",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "flat-modifier",
+            "key": "fire-attack-damage-flat",
+            "value": "floor((@actor.system.attributes.spe.value * ((2 + @actor.system.attributes.spe.stage) / 2)) * 0.2)",
+            "predicate": [
+              {
+                "gte": [
+                  "{actor|system.attributes.spe.stage}",
+                  0
+                ]
+              }
+            ],
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "hideIfDisabled": false
+          },
+          {
+            "type": "flat-modifier",
+            "key": "fire-attack-damage-flat",
+            "value": "floor((@actor.system.attributes.spe.value * (2 / (2 + abs(@actor.system.attributes.spe.stage)))) * 0.2)",
+            "predicate": [
+              {
+                "lte": [
+                  "{actor|system.attributes.spe.stage}",
+                  0
+                ]
+              }
+            ],
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "hideIfDisabled": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": "Compendium.ptr2e.core-abilities.Item.Mptpo2O5mTiFH0wl.ActiveEffect.rmVCBalJ9PaG8oOO",
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.5.1.6",
+        "createdTime": 1737570980643,
+        "modifiedTime": 1737570999967,
+        "lastModifiedBy": "IcBpMqhFuTck9VpX"
+      }
+    }
+  ]
 }
