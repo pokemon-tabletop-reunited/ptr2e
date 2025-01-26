@@ -319,6 +319,25 @@ body .application.sheet .form-group {
 .application.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] .inventory-points fieldset input {
   text-align: center;
 }
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] .inventory-slots {
+  grid-area: 3 / 4 / span 2 / span 2;
+  padding: 0 0.5rem 0.5rem 0;
+}
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] .inventory-slots fieldset {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  overflow: hidden;
+  height: unset;
+}
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] .inventory-slots fieldset .form-fields {
+  flex: 0 0 50%;
+  justify-content: space-evenly;
+}
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] .inventory-slots fieldset .form-fields input {
+  text-align: center;
+  flex: 0 0 35%;
+}
 .application.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] header {
   align-items: center;
   background: var(--appv2-background);
@@ -382,6 +401,17 @@ body .application.sheet .form-group {
 .application.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] ul.items .item-name.rarity-unique {
   color: #a526ff;
 }
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] ul.items .item .center {
+  display: flex;
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] ul.items .item .center p {
+  flex: 0 0 50%;
+  color: var(--hint-text-color);
+}
 .application.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] header .item-name,
 .application.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] ul.items .item-name {
   align-items: center;
@@ -443,6 +473,26 @@ body .application.sheet .form-group {
   justify-content: end;
   align-items: center;
   display: flex;
+}
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] header .item-controls > a.item-carry-type,
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] ul.items .item-controls > a.item-carry-type {
+  color: color-mix(in srgb, var(--appv2-text-color) 40%, transparent);
+  text-align: right;
+}
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] header .item-controls > a.item-carry-type.active,
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] ul.items .item-controls > a.item-carry-type.active {
+  color: var(--user-color);
+}
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] header .item-controls > a .fa-stack,
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] ul.items .item-controls > a .fa-stack {
+  margin: calc(-1 * var(0.1875rem)) calc(-1 * var(0.125rem)) 0;
+}
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] header .item-controls > a .fa-stack .fa-1,
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] ul.items .item-controls > a .fa-stack .fa-1,
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] header .item-controls > a .fa-stack .fa-2,
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] ul.items .item-controls > a .fa-stack .fa-2 {
+  left: 0.0625rem;
+  position: relative;
 }
 .application.sheet.actor.v2 .window-content .tab.active[data-tab="actions"] {
   display: grid;
@@ -2716,6 +2766,7 @@ body .application.sheet .form-group {
   display: flex;
   flex-direction: column;
   overflow: hidden;
+  gap: 0.25rem;
 }
 .application.sheet.skill-sheet .skill-editor .controls {
   display: flex;
@@ -2724,6 +2775,7 @@ body .application.sheet .form-group {
   align-items: center;
   gap: 0.5rem;
   flex: 0 0 min-content;
+  margin: 0;
 }
 .application.sheet.skill-sheet .skill-editor .controls .buttons {
   flex: 0 0 35%;
@@ -2740,6 +2792,8 @@ body .application.sheet .form-group {
 .application.sheet.skill-sheet .skill-editor .controls .points label {
   display: flex;
   flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
 }
 .application.sheet.skill-sheet .skill-editor .controls .points label span {
   margin-left: auto;
@@ -2758,6 +2812,7 @@ body .application.sheet .form-group {
   gap: 0.5rem;
   overflow: hidden;
   max-height: 520px;
+  margin: 0;
 }
 .application.sheet.skill-sheet .skill-editor .skills div.skill,
 .application.sheet.skill-sheet .skill-editor .skills header.skill {

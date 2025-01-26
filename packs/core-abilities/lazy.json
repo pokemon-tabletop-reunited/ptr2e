@@ -8,7 +8,7 @@
         "traits": [],
         "name": "Lazy",
         "slug": "lazy",
-        "type": "generic",
+        "type": "attack",
         "cost": {
           "activation": "free"
         },
@@ -17,7 +17,13 @@
           "unit": "m"
         },
         "description": "<p>Effect: The user gains @Affliction[drowsy] 5. While afflicted with @Affliction[drowsy], the user takes 30% less damage from all sources.</p>",
-        "img": "icons/svg/explosion.svg"
+        "img": "systems/ptr2e/img/conditions/sleep.svg",
+        "types": [
+          "untyped"
+        ],
+        "category": "status",
+        "free": true,
+        "predicate": []
       }
     ],
     "description": "<p>Effect: The user gains @Affliction[drowsy] 5. While afflicted with @Affliction[drowsy], the user takes 30% less damage from all sources.</p>",
@@ -29,5 +35,71 @@
     }
   },
   "_id": "3ZCH7gSdy6dr0L4N",
-  "effects": []
+  "effects": [
+    {
+      "name": "Lazy",
+      "type": "passive",
+      "_id": "NUieS7908D6nMLDj",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "lazy-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.drowsycondititem",
+            "predicate": [],
+            "chance": 100,
+            "affects": "self",
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "ephemeral-modifier",
+            "key": "damaging-attack-damage-percentile",
+            "value": -30,
+            "predicate": [
+              "effect:affliction:drowsy"
+            ],
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "hideIfDisabled": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.5.1.6",
+        "createdTime": 1737560217304,
+        "modifiedTime": 1737560293828,
+        "lastModifiedBy": "IcBpMqhFuTck9VpX"
+      }
+    }
+  ]
 }

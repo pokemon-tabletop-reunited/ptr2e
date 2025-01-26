@@ -25,6 +25,10 @@ class CombatantPTR2e<
     return this.system.onStartActivation();
   }
 
+  async onEndActivation() {
+    return this.system.onEndActivation();
+  }
+
   protected override async _preCreate(data: this["_source"], options: DocumentModificationContext<TParent>, user: User): Promise<boolean | void> {
     const result = await super._preCreate(data, options, user);
     if (result === false) return false;

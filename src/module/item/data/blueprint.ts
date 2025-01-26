@@ -336,7 +336,9 @@ export default abstract class BlueprintSystem extends HasEmbed(HasMigrations(fou
 
       const shiny = this.randomInteger(1, 100) <= shinyChance;
 
-      const gender = species.system.genderRatio === -1
+      const gender = blueprint.gender !== "random"
+      ? blueprint.gender
+      : species.system.genderRatio === -1
         ? "genderless"
         : Math.random() > species.system.genderRatio / 8
           ? "male"

@@ -1,6 +1,9 @@
 import { CombatantPTR2e, CombatPTR2e } from "@combat";
 import CombatantSystemPTR2e from "../system.ts";
 import { ActorPTR2e } from "@actor";
+import { ActiveEffectPTR2e } from "@effects";
+import { ItemPTR2e } from "@item";
+import AdvancementActiveEffectSystem from "@module/effects/data/advancement.ts";
 
 class CharacterCombatantSystem extends CombatantSystemPTR2e {
   declare parent: CombatantPTR2e;
@@ -17,7 +20,7 @@ class CharacterCombatantSystem extends CombatantSystemPTR2e {
   private set speedStages(value: number) {
     this._speedStages = Math.clamp(value, -6, 6);
   }
-  
+
   private _speedStages = 0;
   private _baseAV = 0;
 
@@ -35,6 +38,55 @@ class CharacterCombatantSystem extends CombatantSystemPTR2e {
 
     this._speedStages ||= this.actor?.speedStage ?? 0;
     this._baseAV ||= this.baseAV;
+  }
+
+  /**
+   * Handle Confused Effect
+   */
+  override async onEndActivation(): Promise<void> {
+    if (!this.actor) return;
+    await this.handleConfusedAffliction();
+
+    for(const effect of this.actor.allApplicableEffects()) {
+      if(effect.type !== "advancement") continue;
+      await (effect.system as AdvancementActiveEffectSystem).onEndActivation(this.parent);
+    }
+  }
+
+  private async handleConfusedAffliction() {
+    if (!this.actor) return;
+    const confusedEffect = this.actor.effects.find(effect => effect.statuses.has("confused")) as ActiveEffectPTR2e | undefined;
+    if (!confusedEffect) return;
+
+    if(this.actor.rollOptions.getFromDomain("immunities")["damage:affliction:confused"]) return;
+
+    const roll = await new Roll("1dcc").roll();
+    await roll.toMessage({ flavor: game.i18n.format("PTR2E.Combat.Messages.ConfusionRoll", { name: this.parent.name }) });
+    const success = !!roll.total;
+    if (success) return void await ChatMessage.create({
+      type: "combat",
+      flavor: game.i18n.format("PTR2E.Combat.Messages.ConfusionRollSuccess", { name: this.parent.name }),
+    });
+
+    const existingFumble = this.actor.actions.attack.get("fumble");
+    const fumble = existingFumble ?? await fromUuid<ItemPTR2e>("Compendium.ptr2e.core-moves.Item.xoFyO6Z8yZJ9Ko8e");
+    if (!fumble) return void await ChatMessage.create({
+      type: "combat",
+      flavor: "An error occured trying to resolve Fumble. Please resolve it manually."
+    })
+    try {
+      if (!existingFumble) {
+        await this.actor.createEmbeddedDocuments("Item", [fumble.toObject()]);
+      }
+
+      await this.actor.actions.attack.get("fumble")!.roll({ targets: [this.actor], skipDialog: true });
+    }
+    catch {
+      return void await ChatMessage.create({
+        type: "combat",
+        flavor: "An error occured trying to resolve Fumble. Please resolve it manually."
+      });
+    }
   }
 
   static calculateBaseAV(
@@ -90,9 +142,9 @@ class CharacterCombatantSystem extends CombatantSystemPTR2e {
 
   handleSummonEffects() {
     const summons = this.combat?.summons;
-    if(!summons?.length) return;
+    if (!summons?.length) return;
 
-    for(const summon of summons) {
+    for (const summon of summons) {
       summon.system.notifyActorsOfEffectsIfApplicable([this.parent]);
     }
   }

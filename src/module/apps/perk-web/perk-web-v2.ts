@@ -503,11 +503,12 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
         document: perk,
         fields: perk?.system.schema.fields,
         traits: perk?.system.traits.map((trait) => ({ value: trait.slug, label: trait.label, type: trait.type })),
-        actions: perk?.system?.actions?.map(action => ({
+        actions: await Promise.all(perk?.system?.actions?.map(async action => ({
           action,
           traits: action.traits.map(trait => ({ value: trait.slug, label: trait.label })),
           fields: action.schema.fields,
-        })),
+          enrichedDescription: action.description ? await TextEditor.enrichHTML(action.description) : null
+        })) ?? []),
         state: {
           available: [PerkState.connected, PerkState.available].includes(this.currentNode?.state as unknown as 1 | 2),
           purchasable: this.currentNode?.state === PerkState.available,
@@ -522,7 +523,8 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
             ? `${game.i18n.localize("PTR2E.PerkWebApp.RefundTier")} ${this.currentNode.tierInfo.maxTierPurchased ? this.currentNode.tierInfo.maxTier : (this.currentNode.tierInfo.tier - 1)} (${this.currentNode?.tierInfo.lastTier.system.cost} AP)`
             : `${game.i18n.localize("PTR2E.PerkWebApp.RefundPerk")} (${perk?.system.cost} AP)`,
           evolution: perk?.flags.ptr2e?.evolution ? game.i18n.format("PTR2E.PerkWebApp.Evolve", { name: Handlebars.helpers.capitalizeFirst(perk?.name?.replace("Evolution: ", '')) || "" }) : null
-        }
+        },
+        enrichedDescription: perk?.system.description ? await TextEditor.enrichHTML(perk.system.description) : null,
       },
       zoom: this._zoomAmount,
       editMode: this.editMode,

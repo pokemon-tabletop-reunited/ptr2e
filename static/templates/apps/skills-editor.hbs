@@ -7,12 +7,13 @@
             <button type="button" data-action="change-luck">Change Luck</button>
         </div>
         <div class="points">
-            <label>Spent Points: <span>{{points.spent}} / {{points.total}}</span></label>
-            <label>Points Available: <span><b>{{points.available}}</b></span></label>
-            <div class="skill-filter mt-1">
-              <label>Filter: </label>
-              <input name="filter" type="search" placeholder="Filter" value="">
-            </div>
+          <label>Spent Points: <span>{{points.spent}} / {{points.total}}</span></label>
+          <label>Points Available: <span><b>{{points.available}}</b></span></label>
+          <div class="skill-filter mt-1">
+            <label>Filter: </label>
+            <input name="filter" type="search" placeholder="Filter" value="">
+          </div>
+          <label>Sort mode: <button type="button" class="w-50" data-action="toggle-sort">{{#if sort}}Alphabetical{{else}}Total value{{/if}}</button></label>
         </div>
     </fieldset>
     <fieldset class="skills">
@@ -25,7 +26,7 @@
             </header>
             {{#each skills}}
                 <div class="skill" data-slug="{{slug}}" data-group="{{group}}">
-                    <label class="skill" data-tooltip-direction="LEFT" data-slug="{{slug}}" data-group="{{group}}" data-tooltip="{{slug}}">{{label}}</label>
+                    <label class="skill" data-tooltip-direction="LEFT" data-slug="{{slug}}" data-group="{{group}}" data-tooltip="{{slug}}">{{label}}{{#if group}} <small>({{formatSlug group}})</small>{{/if}}</label>
                     <label>{{value}}</label>
                     <label>{{rvs}}</label>
                     {{#if (eq this.slug "luck")}}

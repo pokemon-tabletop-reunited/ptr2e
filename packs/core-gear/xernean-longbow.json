@@ -17,15 +17,20 @@
         "name": "Light Arrow",
         "slug": "xernean-longbow-action-1",
         "description": "<p>A bow crafted from the shedding of the Horns of Xerneas. It has a faint pearl sheen that becomes a soft glow in the light of the moon.<br><br>The Light Arrow targets the victim's Special Defense.</p>",
-        "traits": [],
+        "traits": [
+          "weapon",
+          "missile"
+        ],
         "type": "attack",
         "img": "systems/ptr2e/img/icons/weapon_icon.webp",
         "range": {
           "target": "enemy",
-          "unit": "m"
+          "unit": "m",
+          "distance": 30
         },
         "cost": {
-          "activation": "complex"
+          "activation": "complex",
+          "powerPoints": 2
         },
         "types": [
           "fairy"
@@ -41,15 +46,20 @@
         "name": "Wyrmslayer Arrow",
         "slug": "xernean-longbow-action-2",
         "description": "<p>A bow crafted from the shedding of the Horns of Xerneas. It has a faint pearl sheen that becomes a soft glow in the light of the moon.</p>",
-        "traits": [],
+        "traits": [
+          "weapon",
+          "missile"
+        ],
         "type": "attack",
         "img": "systems/ptr2e/img/icons/weapon_icon.webp",
         "range": {
           "target": "enemy",
-          "unit": "m"
+          "unit": "m",
+          "distance": 30
         },
         "cost": {
-          "activation": "simple"
+          "activation": "simple",
+          "powerPoints": 5
         },
         "types": [
           "fairy"
@@ -58,7 +68,8 @@
         "power": 120,
         "accuracy": 80,
         "defensiveStat": "spd",
-        "predicate": []
+        "predicate": [],
+        "free": true
       }
     ],
     "description": "<p>A bow crafted from the shedding of the Horns of Xerneas. It has a faint pearl sheen that becomes a soft glow in the light of the moon.</p>",
@@ -68,7 +79,7 @@
       "materials": []
     },
     "equipped": {
-      "carryType": "stowed",
+      "carryType": "equipped",
       "handsHeld": null,
       "slot": "held"
     },
@@ -89,7 +100,8 @@
         "img": "systems/ptu/css/images/icons/gear_icon.png",
         "description": "<p>Unidentified Item</p>"
       }
-    }
+    },
+    "slug": "xernean-longbow"
   },
   "img": "systems/ptr2e/img/icons/weapon_icon.webp",
   "effects": [
@@ -146,6 +158,5 @@
     }
   ],
   "folder": "V4skAU6G3OH5fXaf",
-  "flags": {},
   "_id": "3DcwGXX9YCxh72T6"
 }
