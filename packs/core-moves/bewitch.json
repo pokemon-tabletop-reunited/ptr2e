@@ -4,7 +4,7 @@
   "_id": "Wh7nWwzI4J1tdBFD",
   "img": "systems/ptr2e/img/svg/fairy_icon.svg",
   "system": {
-    "slug": null,
+    "slug": "bewitch",
     "actions": [
       {
         "name": "Bewitch",
@@ -21,24 +21,19 @@
           "activation": "complex",
           "powerPoints": 4
         },
-        "variant": null,
         "types": [
           "fairy"
         ],
         "category": "special",
         "power": 55,
         "accuracy": 100,
-        "contestType": "",
-        "contestEffect": "",
-        "free": false,
-        "slot": null,
-        "description": ""
+        "predicate": []
       },
       {
         "name": "Bewitch (Afflicted)",
         "slug": "bewitch-afflicted",
         "type": "attack",
-        "img": "icons/svg/explosion.svg",
+        "img": "systems/ptr2e/img/svg/fairy_icon.svg",
         "traits": [],
         "range": {
           "target": "creature",
@@ -57,31 +52,16 @@
         "category": "special",
         "power": 110,
         "accuracy": 100,
-        "contestType": "",
-        "contestEffect": "",
-        "free": true,
-        "slot": null,
-        "description": "<p>Trigger: The target has a [Major Affliction].</p>"
+        "description": "<p>Trigger: The target has a [Major Affliction].</p>",
+        "predicate": []
       }
     ],
-    "container": null,
-    "grade": "B"
+    "grade": "B",
+    "traits": [],
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
   },
-  "effects": [],
-  "sort": 1200000,
-  "ownership": {
-    "default": 0,
-    "CYLdyr5mPSDmNpTp": 3
-  },
-  "flags": {},
-  "_stats": {
-    "compendiumSource": null,
-    "duplicateSource": null,
-    "coreVersion": "12.327",
-    "systemId": "ptr2e",
-    "systemVersion": "0.10.0-alpha.1.0.4",
-    "createdTime": 1718991481800,
-    "modifiedTime": 1719971994938,
-    "lastModifiedBy": "CYLdyr5mPSDmNpTp"
-  }
+  "effects": []
 }

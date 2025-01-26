@@ -28,7 +28,8 @@
         "types": [
           "poison"
         ],
-        "img": "icons/svg/explosion.svg"
+        "img": "icons/svg/explosion.svg",
+        "predicate": []
       },
       {
         "slug": "barb-barrage-poisoned",
@@ -57,14 +58,16 @@
         "description": "<p>Trigger: The target has @Affliction[poison] or @Affliction[blight].</p><p>Effect: On hit, the target has a 50% chance of gaining @Affliction[poison] 5.</p>",
         "variant": "barb-barrage",
         "free": true,
-        "img": "icons/svg/explosion.svg"
+        "img": "icons/svg/explosion.svg",
+        "predicate": []
       }
     ],
     "grade": "A",
     "_migration": {
       "version": null,
       "previous": null
-    }
+    },
+    "traits": []
   },
   "_id": "XGKRe0KUujC4PFqU",
   "effects": [
@@ -84,7 +87,20 @@
             "affects": "target",
             "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "alterations": []
+          },
+          {
+            "type": "roll-effect",
+            "key": "barb-barrage-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.poisoncondititem",
+            "predicate": [],
+            "chance": 50,
+            "affects": "target",
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "alterations": []
           }
         ],
         "slug": null,
@@ -115,9 +131,9 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "ptr2e",
-        "systemVersion": "0.10.0-alpha.2.4.3",
+        "systemVersion": "0.10.0-alpha.5.2.1",
         "createdTime": 1729169849070,
-        "modifiedTime": 1729169938423,
+        "modifiedTime": 1737834984729,
         "lastModifiedBy": "Kc3DOunCh3ClAeHS"
       }
     }
