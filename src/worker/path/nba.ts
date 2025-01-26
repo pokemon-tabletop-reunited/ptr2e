@@ -1,7 +1,8 @@
 import * as defaultSettings from './defaultSettings.ts';
 import { NodeHeap } from './nodeHeap.ts';
 import { Graph, Link, Node, NodeId } from '../graph/graph.ts';
-import { GeneratorConfig, PerkNodeData } from '../types.js';
+import { Actor, GeneratorConfig, PerkNodeData } from '../types.js';
+import { duplicate, getStatementType, validatePrerequisites } from '../perk-validator.ts';
 
 /**
  * Creates new instance of NBASearchState. The instance stores information
@@ -52,6 +53,22 @@ class NBASearchState<N extends Node<PerkNodeData, unknown> = Node<PerkNodeData, 
    * Index of this node in the reverse heap.
    */
   h2: number;
+  /**
+   * RV Spent from this node to the path-finding source
+   */
+  rv1: number;
+  /**
+   * RV Spent from this node to the path-finding target
+   */
+  rv2: number
+  /**
+   * The RVs spent on each skill shared between the two paths
+   */
+  skills1: Map<string, {skill: string, value: number}>;
+  /**
+   * The RVs spent on each skill shared between the two paths
+   */
+  skills2: Map<string, {skill: string, value: number}>;
 
   constructor(node: N) {
     this.node = node;
@@ -62,6 +79,10 @@ class NBASearchState<N extends Node<PerkNodeData, unknown> = Node<PerkNodeData, 
     this.g2 = Number.POSITIVE_INFINITY;
     this.f1 = Number.POSITIVE_INFINITY;
     this.f2 = Number.POSITIVE_INFINITY;
+    this.rv1 = 0;
+    this.rv2 = 0;
+    this.skills1 = new Map();
+    this.skills2 = new Map();
     // used to reconstruct heap when fScore is updated. TODO: do I need them both?
     this.h1 = -1;
     this.h2 = -1;
@@ -113,6 +134,11 @@ class NBASearchStatePool<N extends Node<PerkNodeData, unknown> = Node<PerkNodeDa
 
   reset() {
     this.currentInCache = 0;
+  }
+  
+  fullReset() {
+    this.currentInCache = 0;
+    this.nodeCache = [];
   }
 }
 
@@ -181,7 +207,7 @@ export class nba<NodeData extends PerkNodeData = PerkNodeData, LinkData = unknow
    * @returns {Array} of nodes between `toId` and `fromId`. Empty array is returned
    * if no path is found.
    */
-  find(fromId: NodeId, toId: NodeId, config: GeneratorConfig): { path: Node<NodeData, LinkData>[], priority: number } {
+  find(fromId: NodeId, toId: NodeId, config: GeneratorConfig, {actor, options}: {actor: Actor, options: string[]}): { path: Node<NodeData, LinkData>[], priority: number, skills: Map<string, {skill: string, value: number}> } {
     // I must apologize for the code duplication. This was the easiest way for me to
     // implement the algorithm fast.
     const from = this.graph.getNode(fromId);
@@ -310,13 +336,29 @@ export class nba<NodeData extends PerkNodeData = PerkNodeData, LinkData = unknow
       const tentativeDistance = this.cameFrom.g1 + getDistance.bind(this)(this.cameFrom.node, otherNode, link);
 
       if (tentativeDistance < otherSearchState.g1 || (tentativeDistance == otherSearchState.g1 && tieBreaker(otherNode, this.cameFrom.node))) {
-        otherSearchState.g1 = tentativeDistance;
-        otherSearchState.f1 = tentativeDistance + this.heuristic(otherSearchState.node, to!);
-        otherSearchState.p1 = this.cameFrom;
-        if (otherSearchState.h1 < 0) {
-          open1Set.push(otherSearchState);
-        } else {
-          open1Set.updateItem(otherSearchState.h1);
+        // Check for SP spent
+        otherSearchState.skills1 = new Map(duplicate(Array.from(this.cameFrom.skills1)));
+        const result = handleRVs.bind(this)({ otherNode, rvs: otherSearchState.rv1 + otherSearchState.rv2, skills: otherSearchState.skills1 });
+        if(result) {
+          if(typeof result !== 'boolean') {
+            otherSearchState.rv1 += result.requiredPoints;
+            const current = otherSearchState.skills1.get(result.skill);
+            if(current) {
+              current.value += result.requiredPoints;
+            }
+            else {
+              otherSearchState.skills1.set(result.skill, {skill: result.skill, value: result.requiredPoints});
+            }
+          }
+
+          otherSearchState.g1 = tentativeDistance;
+          otherSearchState.f1 = tentativeDistance + this.heuristic(otherSearchState.node, to!);
+          otherSearchState.p1 = this.cameFrom;
+          if (otherSearchState.h1 < 0) {
+            open1Set.push(otherSearchState);
+          } else {
+            open1Set.updateItem(otherSearchState.h1);
+          }
         }
       }
 
@@ -341,13 +383,29 @@ export class nba<NodeData extends PerkNodeData = PerkNodeData, LinkData = unknow
       const tentativeDistance = this.cameFrom.g2 + getDistance.bind(this)(this.cameFrom.node, otherNode, link);
 
       if (tentativeDistance < otherSearchState.g2 || (tentativeDistance == otherSearchState.g1 && tieBreaker(otherNode, this.cameFrom.node))) {
-        otherSearchState.g2 = tentativeDistance;
-        otherSearchState.f2 = tentativeDistance + this.heuristic(from!, otherSearchState.node);
-        otherSearchState.p2 = this.cameFrom;
-        if (otherSearchState.h2 < 0) {
-          open2Set.push(otherSearchState);
-        } else {
-          open2Set.updateItem(otherSearchState.h2);
+        // Check for SP spent
+        otherSearchState.skills2 = new Map(duplicate(Array.from(this.cameFrom.skills2)));
+        const result = handleRVs.bind(this)({ otherNode, rvs: otherSearchState.rv1 + otherSearchState.rv2, skills: otherSearchState.skills2 });
+        if(result) {
+          if(typeof result !== 'boolean') {
+            otherSearchState.rv2 += result.requiredPoints;
+            const current = otherSearchState.skills2.get(result.skill);
+            if(current) {
+              current.value += result.requiredPoints;
+            }
+            else {
+              otherSearchState.skills2.set(result.skill, {skill: result.skill, value: result.requiredPoints});
+            }
+          }
+        
+          otherSearchState.g2 = tentativeDistance;
+          otherSearchState.f2 = tentativeDistance + this.heuristic(from!, otherSearchState.node);
+          otherSearchState.p2 = this.cameFrom;
+          if (otherSearchState.h2 < 0) {
+            open2Set.push(otherSearchState);
+          } else {
+            open2Set.updateItem(otherSearchState.h2);
+          }
         }
       }
 
@@ -377,6 +435,49 @@ export class nba<NodeData extends PerkNodeData = PerkNodeData, LinkData = unknow
       }
     }
 
+    function handleRVs({
+      otherNode,
+      rvs,
+      skills
+    }: {
+      otherNode: Node<NodeData, LinkData>;
+      rvs: number,
+      skills: Map<string, {skill: string, value: number}>
+    }): { skill: string, requiredPoints: number } | boolean {
+      if (config.points.rv <= 0) return true;
+
+      const test = validatePrerequisites(otherNode.data.perk, actor, options);
+      if(test.passes) return true;
+
+      let returnVal = false;
+      for(const {statement, result} of test.results) {
+        if(result) continue;
+
+        const types = getStatementType(statement) as (string | number)[] | void;
+        if(!types) continue;
+        
+        if(types.length === 2 && typeof types[0] === 'string' && types[0].startsWith("skill:") && typeof types[1] === 'number') {
+          const skill = types[0].split(":")[1];
+          const value = types[1];
+
+          const actorSkill = actor.system.skills.get(skill)
+          if(!actorSkill) continue;
+
+          const alreadySpent = skills.get(skill)?.value ?? 0;
+
+          const requiredPoints = value - actorSkill.total - alreadySpent;
+          if(requiredPoints <= 0) {
+            if(alreadySpent > 0) returnVal = true;
+            continue
+          };
+          if((requiredPoints + rvs) > config.points.rv) continue;
+
+          return {skill, requiredPoints};
+        }
+      }
+      return returnVal;
+    }
+
     function visitN2Oriented(this: nba<NodeData, LinkData>, otherNode: Node<NodeData, LinkData>, link: Link<LinkData>) {
       // we are going backwards, graph needs to be reversed. 
       if (link.toId === this.cameFrom?.node.id) return visitN2.bind(this)(otherNode, link)
@@ -388,7 +489,21 @@ export class nba<NodeData extends PerkNodeData = PerkNodeData, LinkData = unknow
   }
 
   reconstructPath(searchState: NBASearchState<Node<NodeData, LinkData>> | undefined) {
-    if (!searchState) return { path: NO_PATH, priority: 0 };
+    if (!searchState) return { path: NO_PATH, priority: 0, skills: new Map() };
+
+    const skills = new Map<string, {skill: string, value: number}>();
+    for(const {skill, value} of searchState.skills1.values()) {
+      skills.set(skill, {skill, value});
+    }
+    for(const {skill, value} of searchState.skills2.values()) {
+      const current = skills.get(skill);
+      if(current) {
+        current.value = Math.max(current.value, value);
+      }
+      else {
+        skills.set(skill, {skill, value});
+      }
+    }
 
     const path = [searchState.node];
     let parent = searchState.p1;
@@ -404,9 +519,11 @@ export class nba<NodeData extends PerkNodeData = PerkNodeData, LinkData = unknow
       path.unshift(child.node);
       child = child.p2;
     }
+
     return {
       path,
-      priority: searchState.g1 + searchState.g2
+      priority: searchState.g1 + searchState.g2,
+      skills: skills
     };
   }
 }

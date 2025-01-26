@@ -1,3 +1,37 @@
+export interface ActorData {
+  name: string;
+  system: {
+    skills: SkillData[]
+    advancement: {
+      level: number
+    }
+    [key: string]: unknown;
+  }
+}
+
+export interface Actor {
+  name: string;
+  system: {
+    skills: Map<string, Skill>
+    advancement: {
+      level: number
+    }
+    [key: string]: unknown;
+  }
+  skills: Record<string, Skill>;
+}
+
+export interface Skill extends SkillData {
+  total: number;
+  mod: number
+}
+
+export interface SkillData {
+  slug: string;
+  value: number;
+  rvs: number;
+}
+
 export interface Perk {
   slug: string;
   name: string;

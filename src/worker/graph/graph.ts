@@ -1,6 +1,6 @@
 import { Collection } from "../collection.ts";
 import { nba } from "../path/nba.ts";
-import { GeneratorConfig, PerkNodeData } from "../types.js";
+import { Actor, GeneratorConfig, PerkNodeData } from "../types.js";
 
 export interface PathResult<NodeData extends PerkNodeData = PerkNodeData, LinkData = unknown> {
   path: Node<NodeData, LinkData>[];
@@ -9,13 +9,14 @@ export interface PathResult<NodeData extends PerkNodeData = PerkNodeData, LinkDa
   length: number;
   cost: number;
   priority: number;
+  skills: Map<string, {skill: string, value: number}>;
 }
 
 export class Graph<NodeData extends PerkNodeData = PerkNodeData, LinkData = unknown> extends Collection<NodeId, Node<NodeData, LinkData>> {
   private links = new Map<LinkId, Link<LinkData>>();
   private _rootNodes: Node<NodeData, LinkData>[] = [];
 
-  private pathfinder = new nba(this, {
+  public pathfinder = new nba(this, {
     // blocked: (_from, _to, _link) => {
     //   return false;
     // },
@@ -31,14 +32,14 @@ export class Graph<NodeData extends PerkNodeData = PerkNodeData, LinkData = unkn
     return this.distanceFunction?.(from, to) ?? 1;
   }
 
-  findPath(from: NodeId, to: NodeId, config: GeneratorConfig): PathResult<NodeData, LinkData> {
+  findPath(from: NodeId, to: NodeId, config: GeneratorConfig, {actor, options}: {actor: Actor, options: string[]}): PathResult<NodeData, LinkData> {
     this.distanceFunction = config.cost.priority === "cheapest"
       ? (_from, to) => to.data.cost
       : config.cost.priority === "shortest" && config.cost.resolution === "costliest"
         ? (_from, to) => 100 - to.data.cost
         : () => 1;
 
-    const result = this.pathfinder.find(from, to, config);
+    const result = this.pathfinder.find(from, to, config, {actor, options});
 
     return {
       path: result.path,
@@ -46,7 +47,8 @@ export class Graph<NodeData extends PerkNodeData = PerkNodeData, LinkData = unkn
       to,
       length: result.path.length,
       cost: result.path.reduce((acc, node) => acc + node.data.cost, 0),
-      priority: result.priority
+      priority: result.priority,
+      skills: result.skills,
     }
   }
 
@@ -58,7 +60,7 @@ export class Graph<NodeData extends PerkNodeData = PerkNodeData, LinkData = unkn
       case "shortest": this.distanceFunction = () => 1; break;
     }
 
-    return this.pathfinder.find(from, to, config).path;
+    return this.pathfinder.find(from, to, config, {actor: {} as Actor, options: []}).path;
   }
 
   get rootNodes() {
