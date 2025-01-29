@@ -7789,3 +7789,119 @@ ul.item-list.result-list li.item.rarity-unique {
 #type-matrix-dialog section.window-content > div footer button {
   flex: 0 0 30%;
 }
+.application.sheet.perk-config-sheet .window-content {
+  display: grid;
+  grid-template-columns: unset;
+  grid-template-rows: auto min-content 3rem;
+  grid-template-areas: "priorities" "config" "footer";
+  overflow: hidden;
+  height: 100%;
+}
+.application.sheet.perk-config-sheet .window-content .config {
+  grid-area: config;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5rem;
+  border-top: 1px solid var(--border-theme-color);
+  padding: 0.25rem 1rem 0.25rem 1rem;
+  margin: unset;
+}
+.application.sheet.perk-config-sheet .window-content .config .form-group .label {
+  height: 1.5rem;
+}
+.application.sheet.perk-config-sheet .window-content .config .form-group .form-fields:has(> select) {
+  height: 1.5rem;
+}
+.application.sheet.perk-config-sheet .window-content .config .form-group p.hint {
+  height: 100%;
+}
+.application.sheet.perk-config-sheet .window-content .priorities {
+  grid-area: priorities;
+  overflow-y: auto;
+  height: 100%;
+  min-height: 100px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-areas: "priority negative";
+  padding: 0.75rem;
+  gap: 0.25rem;
+}
+.application.sheet.perk-config-sheet .window-content .priorities ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.application.sheet.perk-config-sheet .window-content .priorities ul.priority {
+  grid-area: priority;
+}
+.application.sheet.perk-config-sheet .window-content .priorities ul.negative {
+  grid-area: negative;
+}
+.application.sheet.perk-config-sheet .window-content .priorities ul.inactive {
+  grid-area: inactive;
+}
+.application.sheet.perk-config-sheet .window-content .priorities ul li {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  padding: 0.5rem;
+  border: 1px solid var(--border-theme-color);
+  border-radius: 0.75rem;
+  text-align: center;
+  position: relative;
+}
+.application.sheet.perk-config-sheet .window-content .priorities ul li.flex-row {
+  flex-wrap: wrap;
+}
+.application.sheet.perk-config-sheet .window-content .priorities ul li button {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 0.25rem;
+  border-radius: 0.5rem;
+  width: 15px;
+  font-size: 12px;
+  border: unset;
+  background: unset;
+}
+.application.sheet.perk-config-sheet .window-content .priorities ul li span {
+  flex: 0 0 30%;
+  overflow: hidden;
+}
+.application.sheet.perk-config-sheet .window-content .priorities ul li span.priority {
+  flex: 0 0 20%;
+}
+.application.sheet.perk-config-sheet .window-content .priorities ul li span.header {
+  flex: 0 0 100%;
+  justify-content: center;
+  margin-bottom: 0.25rem;
+  padding-bottom: 0.25rem;
+  font-weight: bold;
+  border-bottom: 1px solid var(--border-theme-color);
+}
+.application.sheet.perk-config-sheet .window-content .priorities ul li span.header i {
+  cursor: help;
+}
+.application.sheet.perk-config-sheet .window-content .priorities ul span {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+}
+.application.sheet.perk-config-sheet .window-content .priorities ul span button {
+  flex: 0 0 60%;
+  border-radius: 1rem;
+}
+.application.sheet.perk-config-sheet .window-content footer {
+  grid-area: footer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 0.5rem;
+  border-top: 1px solid var(--border-theme-color);
+  min-height: 3rem;
+}
+.application.sheet.perk-config-sheet .window-content footer button {
+  flex: 0 0 35%;
+}

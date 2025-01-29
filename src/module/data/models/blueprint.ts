@@ -8,6 +8,7 @@ import { ActorPTR2e } from "@actor";
 import { DataUnionField } from "../fields/data-union-field.ts";
 import { StrictStringField } from "../fields/strict-primitive-fields.ts";
 import { HabitatRollTable } from "@system/habitat-table.ts";
+import { GeneratorConfig } from "./generator-config.ts";
 
 class Blueprint extends foundry.abstract.DataModel {
   static LOCALIZATION_PREFIXES = ["PTR2E.Blueprint"];
@@ -172,6 +173,7 @@ class Blueprint extends foundry.abstract.DataModel {
           chance: new fields.NumberField({ required: false, nullable: false, initial: 50, min: 0, max: 100, validationError: "The chance must be a positive integer between 0 and 100." }),
         }), { required: true, initial: [], label: "PTR2E.FIELDS.abilities.master.label", },),
       }),
+      config: new fields.EmbeddedDataField(GeneratorConfig, { required: true}),
       owner: new fields.BooleanField({ required: true, initial: false, nullable: false, label: "PTR2E.FIELDS.owner.label", hint: "PTR2E.FIELDS.owner.hint" }),
       sort: new fields.NumberField({ required: true, initial: 0, nullable: false }),
       preventEvolution: new fields.BooleanField({ required: true, initial: false, nullable: false, label: "PTR2E.FIELDS.preventEvolution.label", hint: "PTR2E.FIELDS.preventEvolution.hint" }),
@@ -241,6 +243,7 @@ interface BlueprintSchema extends foundry.data.fields.DataSchema {
   preventEvolution: foundry.data.fields.BooleanField<boolean, boolean, true, false, true>;
   shiny: foundry.data.fields.NumberField<number, number, true, false, true>;
   gender: foundry.data.fields.StringField<"random" | "male" | "female" | "genderless", "random" | "male" | "female" | "genderless", true, false, true>;
+  config: foundry.data.fields.EmbeddedDataField<GeneratorConfig, true, false>
 }
 
 interface EVSSchema extends foundry.data.fields.DataSchema {

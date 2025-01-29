@@ -77,7 +77,7 @@ export interface PerkNodeData {
 
 export interface GeneratorConfig {
   mode: PriorityMode;
-  priority: PriorityOrder[keyof PriorityOrder][];
+  priorities: PriorityOrder[keyof PriorityOrder][];
   cost: {
     priority: PriorityCostPriority;
     resolution: PriorityCostResolution;
@@ -108,23 +108,23 @@ export interface PriorityOrderBase<Type extends PriorityOrderType = PriorityOrde
 }
 
 export interface PriorityOrderArenaData extends PriorityOrderBase<"arena"> {
-  arena: "physical" | "mental" | "social";
+  slug: "physical" | "mental" | "social";
 }
 
 export interface PriorityOrderApproachData extends PriorityOrderBase<"approach"> {
-  approach: "power" | "finesse" | "resilience";
+  slug: "power" | "finesse" | "resilience";
 }
 
 export interface PriorityOrderArchetypeData extends PriorityOrderBase<"archetype"> {
-  archetype: string;
+
 }
 
 export interface PriorityOrderTraitData extends PriorityOrderBase<"trait"> {
-  trait: string;
+
 }
 
 export interface PriorityOrderPerkData extends PriorityOrderBase<"perk"> {
-  data?: Perk;
+
 }
 
 export type PriorityOrderType = "arena" | "approach" | "archetype" | "trait" | "perk";

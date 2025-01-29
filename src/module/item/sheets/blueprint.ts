@@ -6,6 +6,7 @@ import { htmlQuery } from "@utils";
 import Sortable from "sortablejs";
 import { SpeciesSystemModel } from "@item/data/index.ts";
 import { ActorPTR2e } from "@actor";
+import { PerkGeneratorConfig } from "@module/apps/perk-generator-config.ts";
 
 export default class BlueprintSheet extends foundry.applications.api.HandlebarsApplicationMixin(DocumentSheetV2<ItemPTR2e<BlueprintSystem>>) {
   static override DEFAULT_OPTIONS = fu.mergeObject(
@@ -32,12 +33,12 @@ export default class BlueprintSheet extends foundry.applications.api.HandlebarsA
         closeOnSubmit: false,
         handler: this.#onSubmit,
       },
-      dragDrop: [{ dropSelector: "aside" }, {dropSelector: ".species-fields"}],
+      dragDrop: [{ dropSelector: "aside" }, { dropSelector: ".species-fields" }],
       actions: {
         "rename": async function (this: BlueprintSheet) {
           const name = this.document.name;
           const dialog = await foundry.applications.api.DialogV2.prompt<string>({
-            window: {title: game.i18n.localize("PTR2E.Dialog.RenameDocumentTitle")},
+            window: { title: game.i18n.localize("PTR2E.Dialog.RenameDocumentTitle") },
             content: `<p>${game.i18n.localize("PTR2E.Dialog.RenameDocumentContent")}</p><input type="text" name="name" value="${name}">`,
             ok: {
               action: "ok",
@@ -47,10 +48,14 @@ export default class BlueprintSheet extends foundry.applications.api.HandlebarsA
               }
             }
           })
-          if(!dialog || name == dialog) return;
-          await this.document.update({name: dialog});
-          if(this.rendered) this._updateFrame({window: {title: this.title}});
-        }
+          if (!dialog || name == dialog) return;
+          await this.document.update({ name: dialog });
+          if (this.rendered) this._updateFrame({ window: { title: this.title } });
+        },
+        "open-config": async function (this: BlueprintSheet) {
+          if(!this.selected) return;
+          new PerkGeneratorConfig(this.selected.config)
+        },
       },
       tag: "form",
     },
@@ -245,17 +250,17 @@ export default class BlueprintSheet extends foundry.applications.api.HandlebarsA
         })
       }
     }
-    if(partId === "main") {
+    if (partId === "main") {
       const select = htmlElement.querySelector<HTMLSelectElement>("select.species-select");
       select?.addEventListener("change", async () => {
         const value = select.value;
-        if(!value) return;
-        if(!this.selected) return;
-        if(this.generation?.temporary) {
-          this.selected.updateSource({species: value});
-        } 
+        if (!value) return;
+        if (!this.selected) return;
+        if (this.generation?.temporary) {
+          this.selected.updateSource({ species: value });
+        }
         else {
-          await this.blueprint.updateChildren([{_id: this.selected.id, species: value}]);
+          await this.blueprint.updateChildren([{ _id: this.selected.id, species: value }]);
         }
       })
     }
@@ -388,9 +393,9 @@ export default class BlueprintSheet extends foundry.applications.api.HandlebarsA
 
           if (this.generation) {
             this.generation.parent = actor;
-            if(!this.team) return null;
+            if (!this.team) return null;
             // @ts-expect-error - Mock for UI purposes.
-            this.team.owner = {name: actor.name, img: actor.img};
+            this.team.owner = { name: actor.name, img: actor.img };
             this.render({ parts: ["side"] });
             return null;
           }
@@ -403,13 +408,13 @@ export default class BlueprintSheet extends foundry.applications.api.HandlebarsA
 
     if (!doc) return;
 
-    if((event.currentTarget as HTMLElement).classList.contains("species-fields")) {
-      if(!this.selected) return;
-      if(this.generation?.temporary) {
-        return void this.selected.updateSource({species: doc.uuid});
+    if ((event.currentTarget as HTMLElement).classList.contains("species-fields")) {
+      if (!this.selected) return;
+      if (this.generation?.temporary) {
+        return void this.selected.updateSource({ species: doc.uuid });
       } else {
         this.team = null
-        return void await this.blueprint.updateChildren([{_id: this.selected.id, species: doc.uuid}]);
+        return void await this.blueprint.updateChildren([{ _id: this.selected.id, species: doc.uuid }]);
       }
     }
     else {
@@ -434,7 +439,7 @@ export default class BlueprintSheet extends foundry.applications.api.HandlebarsA
           delete updateData[key];
         }
       }
-      if(updateData.species) this.team = null;
+      if (updateData.species) this.team = null;
       await this.blueprint.updateChildren([{
         _id: this.selected.id,
         ...updateData
@@ -456,10 +461,10 @@ export default class BlueprintSheet extends foundry.applications.api.HandlebarsA
       fu.mergeObject(blueprint, updateData, { inplace: true });
     }
 
-    const generation = this.generation ? {...this.generation, team: !this.team?.owner && (this.team?.members?.length ?? 0) > 1} : null;
+    const generation = this.generation ? { ...this.generation, team: !this.team?.owner && (this.team?.members?.length ?? 0) > 1 } : null;
 
     const result = this._dataOnly ? this.blueprint.generate(null, true) : this.blueprint.generate(generation);
-    if(this._dataOnly) {
+    if (this._dataOnly) {
       this.resolve(result);
       this._dataOnly = false;
     }

@@ -68,7 +68,7 @@ async function generateSpecies(config: GeneratorConfig, actor: Actor, options: s
 
 async function generateOrder(config: GeneratorConfig, actor: Actor, options: string[]) {
   if (config.mode !== "order") return [null];
-  config.priority ??= [];
+  config.priorities ??= [];
 
   // Organize priorities
   const priorities = {
@@ -81,7 +81,7 @@ async function generateOrder(config: GeneratorConfig, actor: Actor, options: str
       [K in PriorityOrderType]: PriorityOrder[K][];
     };
 
-  for (const priority of config.priority) {
+  for (const priority of config.priorities) {
     switch (priority.type) {
       case "arena": priorities.arena.push(priority as PriorityOrder["arena"]); break;
       case "approach": priorities.approach.push(priority as PriorityOrder["approach"]); break;

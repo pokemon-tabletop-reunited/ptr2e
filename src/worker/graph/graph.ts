@@ -210,24 +210,24 @@ export class Graph<NodeData extends PerkNodeData = PerkNodeData, LinkData = unkn
     }
   }
 
-  static getPriority<NodeData extends PerkNodeData = PerkNodeData, LinkData = unknown>(to: Node<NodeData, LinkData>, priority: GeneratorConfig["priority"]): number {
+  static getPriority<NodeData extends PerkNodeData = PerkNodeData, LinkData = unknown>(to: Node<NodeData, LinkData>, priority: GeneratorConfig["priorities"]): number {
     for (const p of priority.sort((a, b) => a.priority - b.priority)) {
       switch (p.type) {
         //case "perk": return priority.length + 1;
         case "trait": {
-          if (to.data.perk.system.traits.includes(p.trait)) return p.priority;
+          if (to.data.perk.system.traits.includes(p.slug)) return p.priority;
           break;
         }
         case "approach": {
-          if (to.data.perk.system.design.approach === p.approach) return p.priority;
+          if (to.data.perk.system.design.approach === p.slug) return p.priority;
           break;
         }
         case "archetype": {
-          if (to.data.perk.system.design.archetype === p.archetype) return p.priority;
+          if (to.data.perk.system.design.archetype === p.slug) return p.priority;
           break;
         }
         case "arena": {
-          if (to.data.perk.system.design.arena === p.arena) return p.priority;
+          if (to.data.perk.system.design.arena === p.slug) return p.priority;
           break;
         }
       }

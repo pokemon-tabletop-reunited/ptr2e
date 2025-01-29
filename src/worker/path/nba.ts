@@ -303,7 +303,7 @@ export class nba<NodeData extends PerkNodeData = PerkNodeData, LinkData = unknow
     return this.reconstructPath(minNode);
 
     function getDistance(this: nba<NodeData, LinkData>, from: Node<NodeData, LinkData>, to: Node<NodeData, LinkData>, link: Link<LinkData>): number {
-      const priority = Graph.getPriority(to, config.priority);
+      const priority = Graph.getPriority(to, config.priorities);
       const cost = this.distance(from, to, link);
       return Number((priority + (cost / 1000)).toFixed(3))
     }
@@ -438,8 +438,8 @@ export class nba<NodeData extends PerkNodeData = PerkNodeData, LinkData = unknow
     }
 
     function tieBreaker(otherNode: Node<NodeData, LinkData>, currentState: Node<NodeData, LinkData>): boolean {
-      const otherPriority = Graph.getPriority(otherNode, config.priority);
-      const currentPriority = Graph.getPriority(currentState, config.priority);
+      const otherPriority = Graph.getPriority(otherNode, config.priorities);
+      const currentPriority = Graph.getPriority(currentState, config.priorities);
       if (otherPriority > currentPriority) return true;
       if (otherPriority < currentPriority) return false;
       switch (config.cost.resolution) {
