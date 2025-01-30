@@ -394,9 +394,112 @@
       "reef",
       "polar"
     ],
-    "slug": "wishiwashi"
+    "slug": "wishiwashi",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
   },
   "_id": "BO5n9bW4Nf8brmR4",
-  "effects": [],
-  "folder": null
+  "effects": [
+    {
+      "name": "Schooling",
+      "type": "form",
+      "_id": "7cfQkVEyXBEhygMc",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-option",
+            "key": "manual-forme-toggle",
+            "value": "forme:schooling:active",
+            "domain": "all",
+            "toggleable": true,
+            "label": "Toggle: Schooling Forme",
+            "predicate": [],
+            "alwaysActive": false,
+            "count": false,
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "suboptions": [],
+            "state": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:schooling:active"
+            ],
+            "key": "system.details.size.height",
+            "value": 8,
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:schooling:active"
+            ],
+            "key": "system.details.size.weight",
+            "value": 78.3,
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "stats-alteration",
+            "predicate": [
+              "forme:schooling:active"
+            ],
+            "key": "",
+            "value": 0,
+            "hp": null,
+            "atk": 120,
+            "def": 110,
+            "spa": 115,
+            "spd": 110,
+            "spe": -10,
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0,
+        "trigger": "manual",
+        "conditions": []
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.5.2.1",
+        "createdTime": 1738152658321,
+        "modifiedTime": 1738152810792,
+        "lastModifiedBy": "IcBpMqhFuTck9VpX"
+      }
+    }
+  ]
 }
