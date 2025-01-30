@@ -42,6 +42,11 @@ class CheckPTR2e {
       check.calculateTotal(rollOptions);
     }
 
+    if(rollOptions.has("target:uncapturable")) {
+      ui.notifications.error(game.i18n.localize("PTR2E.AttackWarning.CannotCaptureTarget"));
+      return null;
+    }
+
     if (!context.skipDialog) {
       // Show dialog for adding/editing modifiers, unless skipped or flat check
       const dialog = await new ModifierPopup(check, context).wait();
