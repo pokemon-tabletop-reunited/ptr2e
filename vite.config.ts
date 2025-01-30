@@ -11,7 +11,7 @@ const EN_JSON = JSON.parse(fs.readFileSync("./static/lang/en.json", { encoding: 
 
 const config = Vite.defineConfig(({ command, mode }): Vite.UserConfig => {
     const buildMode = mode === "production" ? "production" : "development";
-    const outDir = "dist";
+    const outDir = path.resolve(__dirname, "dist");
 
     const plugins = [checker({ typescript: true }), tsconfigPaths()];
 
@@ -113,15 +113,22 @@ const config = Vite.defineConfig(({ command, mode }): Vite.UserConfig => {
             },
             rollupOptions: {
                 external: new RegExp(".webp$"),
+                input: {
+                  ptr2e: path.resolve(__dirname, "src/ptr2e.ts"),
+                  worker: path.resolve(__dirname, "src/worker/perk-worker.ts"),
+                },
                 output: {
                     assetFileNames: ({ name }): string =>
                         name === "style.css" ? "styles/ptr2e.css" : name ?? "",
                     chunkFileNames: "[name].mjs",
-                    entryFileNames: "ptr2e.mjs",
+                    entryFileNames: (chunkInfo) => {
+                      if(chunkInfo.name === "worker") return "scripts/perk-worker.js";
+                      return "[name].mjs";
+                    },
                     manualChunks: {
                         vendor:
                             buildMode === "production" ? Object.keys(packageJSON.dependencies) : [],
-                    },
+                    }
                 },
                 watch: { buildDelay: 100 },
             },

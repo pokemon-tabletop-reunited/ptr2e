@@ -4,7 +4,7 @@
   "_id": "yvtAuSFDqeuhhp3Z",
   "img": "systems/ptr2e/img/svg/ghost_icon.svg",
   "system": {
-    "slug": null,
+    "slug": "soul-storm",
     "actions": [
       {
         "name": "Soul Storm",
@@ -24,38 +24,77 @@
           "activation": "complex",
           "powerPoints": 6
         },
-        "variant": null,
         "types": [
           "ghost"
         ],
         "category": "special",
         "power": 110,
         "accuracy": 70,
-        "contestType": "",
-        "contestEffect": "",
-        "free": false,
-        "slot": null,
-        "description": "<p>Effect: On hit, the target has a 10% chance of gaining @Affliction[cursed] 5. If Gloomy Weather is active, this attack gains [Danger Close]. </p>"
+        "description": "<p>Effect: On hit, the target has a 10% chance of gaining @Affliction[cursed] 5. If Gloomy Weather is active, this attack gains [Danger Close]. </p>",
+        "predicate": []
       }
     ],
-    "container": null,
-    "grade": "A"
+    "grade": "A",
+    "traits": [],
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
   },
-  "effects": [],
-  "sort": 0,
-  "ownership": {
-    "default": 0,
-    "CYLdyr5mPSDmNpTp": 3
-  },
-  "flags": {},
-  "_stats": {
-    "compendiumSource": null,
-    "duplicateSource": null,
-    "coreVersion": "12.328",
-    "systemId": "ptr2e",
-    "systemVersion": "0.10.0-alpha.1.5.2",
-    "createdTime": 1720462600172,
-    "modifiedTime": 1720462708805,
-    "lastModifiedBy": "CYLdyr5mPSDmNpTp"
-  }
+  "effects": [
+    {
+      "name": "Soul Storm",
+      "type": "passive",
+      "_id": "xfXW8Im81Pdcao9J",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "soul-storm-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.cursedcondititem",
+            "predicate": [],
+            "chance": 10,
+            "affects": "target",
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "alterations": []
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.5.2.1",
+        "createdTime": 1737745888259,
+        "modifiedTime": 1737745914756,
+        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
+      }
+    }
+  ]
 }

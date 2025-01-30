@@ -75,6 +75,12 @@
 
       {{formField fields.description enriched=enrichedDescription value=source.system.description toggled=true localize=true}}
     </fieldset>
+    <fieldset>
+      <legend>Perk Design</legend>
+      {{formField fields.design.fields.arena value=source.system.design.arena localize=true}}
+      {{formField fields.design.fields.approach value=source.system.design.approach localize=true}}
+      {{formField fields.design.fields.archetype value=source.system.design.archetype localize=true}}
+    </fieldset>
     {{#each source.system.nodes as |node|}}
       <fieldset>
         <legend>
@@ -121,6 +127,18 @@
               Delete Node
             </button>
           {{/unless}}
+        </footer>
+      </fieldset>
+    {{else}}
+      <fieldset>
+        <legend>
+          Node Configuration
+        </legend>
+        <footer class="d-flex flex-row justify-content-center align-items-center">
+          <button type="button" class="fb-35" data-action="add-node">
+            <i class="fas fa-plus"></i>
+            Add Node
+          </button>
         </footer>
       </fieldset>
     {{/each}}

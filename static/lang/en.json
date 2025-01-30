@@ -16,6 +16,7 @@
   "TYPES.Item.summon": "Summon",
   "TYPES.ActiveEffect.passive": "Passive Effect",
   "TYPES.ActiveEffect.affliction": "Affliction",
+  "TYPES.ActiveEffect.advancement": "Advance/Delay",
   "TYPES.ActiveEffect.summon": "Summon Effect",
   "TYPES.ActiveEffect.form": "Forme",
   "ITEM.AddButton": "Add",
@@ -49,6 +50,82 @@
         "shiny": {
           "label": "Shiny",
           "hint": "The % chance for the Pokémon to be shiny."
+        },
+        "gender": {
+          "label": "Gender",
+          "hint": "The gender of the Pokémon, if 'Random' is selected, the species' gender ratio is used."
+        }
+      }
+    },
+    "GeneratorConfig": {
+      "label": "Perk Generator Config",
+      "hint": "The config that defines how the auto-perk generation should pick up perks. You can drag any config from another blueprint here to copy it.",
+      "FIELDS": {
+        "mode": {
+          "label": "Generation Mode",
+          "hint": "The overall generation mode; currently only 'Priority Order' mode is supported, but more will be added in the future.",
+          "order": "Priority Order",
+          "species": "Species Based"
+        },
+        "cost": {
+          "priority": {
+            "label": "Cost Prioritization",
+            "hint": "Should the generator prioritize picking up the cheapest perks towards its goal, or the shortest route regardless of price?",
+            "cheapest": "Cheapest",
+            "shortest": "Shortest",
+            "random": "Random"
+          },
+          "resolution": {
+            "label": "Tie-Resolution",
+            "hint": "If a tie occurs in prioritization, should the generator pick the cheapest or most expensive option?",
+            "cheapest": "Cheapest",
+            "costliest": "Costliest",
+            "random": "Random"
+          }
+        },
+        "entry": {
+          "mode": {
+            "label": "Entry Root",
+            "hint": "What entry root should be used for the generator?",
+            "best": "Best Result",
+            "random": "Random Root",
+            "choice": "Specific Root"
+          },
+          "choice": {
+            "label": "Specific Root",
+            "hint": "The specific root perk to use as the root node for the generator."
+          }
+        },
+        "randomness": {
+          "label": "Randomness",
+          "hint": "% Chance whenever the Generator attempts to make the best choice; it will instead just take a random choice. High % of randomness has performance implications."
+        },
+        "label": {
+          "label": "Config Label",
+          "hint": "Label for this Configuration when shown in the Global Configs list."
+        },
+        "link": {
+          "label": "Sync with Global Config?",
+          "hint": "Should this configuration's settings be synchronized with its version in the Global Configuration?"
+        },
+        "priorities": {
+          "slug": {
+            "label": "",
+            "hint": ""
+          },
+          "priority": {
+            "label": "",
+            "hint": ""
+          },
+          "type": {
+            "label": "",
+            "hint": "",
+            "arena": "Arena",
+            "approach": "Approach",
+            "archetype": "Archetype",
+            "trait": "Trait",
+            "perk": "Perk"
+          }
         }
       }
     },
@@ -106,6 +183,14 @@
           "Free": "Free"
         }
       }
+    },
+    "Inventory": {
+      "weapon": "Weapons",
+      "equipment": "Equipment",
+      "consumable": "Consumables",
+      "gear": "Gear",
+      "container": "Containers",
+      "empty": "No items yet..."
     },
     "PerkWebApp": {
       "Title": "Perk Web",
@@ -630,6 +715,10 @@
           "label": "Stacks",
           "hint": "The number of stacks this Affliction currently has."
         },
+        "amount": {
+          "label": "Advance/Delay Amount",
+          "hint": "The % to Advance (positive) or Delay (negative) the target's turn by."
+        },
         "duration": {
           "turns": {
             "label": "Affl. Duration (Activations)",
@@ -957,6 +1046,7 @@
       "Inspector": "Open Data Inspector",
       "Rest": "Rest & Relaxation",
       "PartySheet": "Open Party Sheet",
+      "CarryType": "Change Carry Type",
       "Tabs": {
         "overview": {
           "label": "Overview"
@@ -1279,7 +1369,11 @@
       "Messages": {
         "Activation": "Start of {name}'s Activation",
         "Round": "Start of Round {round}",
-        "End": "End of Combat"
+        "End": "End of Combat",
+        "ConfusionRoll": "{name} is Confused! Will they hit themselves...?",
+        "ConfusionRollSuccess": "{name} does not hit themselves!",
+        "Advanced": "Advanced {name}'s activation by {amount}%!",
+        "Delayed": "Delayed {name}'s activation by {amount}%!"
       },
       "Round": {
         "Name": "Round"
@@ -1304,6 +1398,20 @@
       }
     },
     "FIELDS": {
+      "inventory": {
+        "held": {
+          "label": "Held Slots"
+        },
+        "worn": {
+          "label": "Worn Slots"
+        },
+        "accessory": {
+          "label": "Accessory Slots"
+        },
+        "belt": {
+          "label": "Belt Slots"
+        }
+      },
       "consumable": {
         "type": {
           "label": "Type",
@@ -1351,7 +1459,8 @@
             "stowed": "Stowed",
             "held": "Held",
             "worn": "Worn",
-            "dropped": "Dropped"
+            "dropped": "Dropped",
+            "equipped": "Equipped"
           },
           "handsHeld": {
             "label": "Hands Held",
@@ -1365,7 +1474,14 @@
             "worn": "Worn",
             "belt": "Belt",
             "backpack": "Backpack"
-          }
+          },
+          "held1": "Held 1H",
+          "held2": "Held 2H",
+          "equipped": "Equipped",
+          "worn": "Worn",
+          "stowed": "Stowed",
+          "dropped": "Dropped",
+          "belt": "On Belt"
         },
         "fling": {
           "power": {
@@ -2280,6 +2396,10 @@
         "label": "Negotiation",
         "hint": "This skill covers the art of the deal. If you want something and the other creature is willing to give you it, for a price, then this skill can be used to determine who gets the better end of the deal."
       },
+      "profession-specific": {
+        "label": "Profession (Specific)",
+        "hint": "This skill represents the user's skill and experience in a specific line of work (businessman, chef, teacher, etc.)."
+      },
       "psychology": {
         "label": "Psychology",
         "hint": "This skill is used to determine someone's mental or emotional state. This can either be from a perspective of reading their intentions, providing them with treatment (such as traumatized Shadow Pokemon), or seeing through someone's Disguise act or Fast Talking."
@@ -2394,6 +2514,14 @@
         "paradox": {
           "label": "Paradox",
           "hint": "This skill is used to understand and interact with paradoxical entities."
+        },
+        "alchemy": {
+          "label": "Alchemy",
+          "hint": "Alchemy governs the rigorous, practical approach toward bridging the gap between convential science and supernatural phenomena. Usually focused on materials science, the foundational knowledge of alchemy generally requires a solid background in a number of other sciences and occult disciplines."
+        },
+        "thaumaturgy": {
+          "label": "Thaumaturgy",
+          "hint": "Thaumaturgy is the knowledge of the deeper magical mysteries - wisdom, theory, and speculation. Thaumaturgy is the purest, but the most dangerous, approach to learning and wielding magic. Mages must balance their own hubris with the great temptations beyond the veil."
         }
       },
       "performance": {
@@ -2549,6 +2677,8 @@
       "Progress": {
         "Prefix": "PTR2E | Pkmn Generator | ",
         "Step": "Preparing Actor Data for {name}...",
+        "Perks": "Generating perks for {name}...",
+        "PerksDone": "Finalizing Actor Data for {name}...",
         "GenerationStep": "Creating all prepared Actors...",
         "TokenGenerationStep": "Creating Tokens for all Generated Actors...",
         "Complete": "Actor Generation Complete!"
@@ -2902,6 +3032,7 @@
           "tooltips": {},
           "exp-tracker": {},
           "tutor-list": {},
+          "text-enrichers": {},
           "habitat-table": {}
         }
       }

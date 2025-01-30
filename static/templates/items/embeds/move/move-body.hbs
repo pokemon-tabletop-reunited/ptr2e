@@ -45,7 +45,13 @@
                 <legend>Effect Description</legend>
                 {{#if attack.description}}
                 <article>
+                  {{#if enrichedDescription}}
+                    {{{enrichedDescription}}}
+                  {{else if attack.enrichedDescription}}
+                    {{{attack.enrichedDescription}}}
+                  {{else}}
                     {{{attack.description}}}
+                  {{/if}}
                 </article>
                 {{else}}
                 <article class="center">

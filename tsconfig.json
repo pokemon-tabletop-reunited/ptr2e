@@ -3,7 +3,11 @@
     "target": "ES2022",
     "module": "NodeNext",
     "moduleResolution": "NodeNext",
-    "lib": ["esnext", "dom", "dom.iterable"],
+    "lib": [
+      "esnext",
+      "dom",
+      "dom.iterable"
+    ],
     "allowJs": true,
     "checkJs": false,
     "noEmit": true,
@@ -55,10 +59,10 @@
         "src/module/scene/index.ts"
       ],
       "@scene/*": [
-          "src/module/scene/*"
+        "src/module/scene/*"
       ],
       "@system/*": [
-          "src/module/system/*"
+        "src/module/system/*"
       ],
       "@scripts/*": [
         "src/scripts/*"
@@ -67,7 +71,7 @@
         "src/util/index.ts"
       ],
       "@module/*": [
-          "src/module/*"
+        "src/module/*"
       ],
     },
     "types": [
@@ -82,7 +86,6 @@
     ]
   },
   "watchOptions": {
-    "excludeDirectories": [
-    ]
-  }
+    "excludeDirectories": []
+  },
 }
