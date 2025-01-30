@@ -38,7 +38,7 @@ export default abstract class PerkSystem extends PerkExtension {
       design: new fields.SchemaField({
         arena: new fields.StringField<"physical" | "mental" | "social", "physical" | "mental" | "social", true, true, true>({ required: true, nullable: true, initial: null, choices: ["physical", "mental", "social"].reduce<Record<string, string>>((acc, arena) => ({ ...acc, [arena]: arena }), {[""]:""}), label: "PTR2E.FIELDS.design.arena.label", hint: "PTR2E.FIELDS.design.arena.hint" }),
         approach: new fields.StringField<"power" | "finesse" | "resilience", "power" | "finesse" | "resilience", true, true, true>({ required: true, nullable: true, initial: null, choices: ["power", "finesse", "resilience"].reduce<Record<string, string>>((acc, approach) => ({ ...acc, [approach]: approach }), {[""]:""}), label: "PTR2E.FIELDS.design.approach.label", hint: "PTR2E.FIELDS.design.approach.hint" }),
-        archetype: new fields.StringField({ required: true, nullable: true, initial: null, label: "PTR2E.FIELDS.design.archetype.label", hint: "PTR2E.FIELDS.design.archetype.hint" }),
+        archetype: new SlugField({ required: true, nullable: true, initial: null, label: "PTR2E.FIELDS.design.archetype.label", hint: "PTR2E.FIELDS.design.archetype.hint" }),
       }),
 
       variant: new fields.StringField({

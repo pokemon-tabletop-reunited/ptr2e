@@ -613,9 +613,11 @@ export default abstract class BlueprintSystem extends HasEmbed(HasMigrations(fou
           perks: Array.from(game.ptr.perks.perks.values()).map(i => ({ ...i.toObject(), slug: i.slug }))
         }]);
       }
+
       progress.advance(game.i18n.localize("PTR2E.PokemonGeneration.Progress.Prefix") + game.i18n.format("PTR2E.PokemonGeneration.Progress.Perks", {
         name: blueprint.name
       }));
+
       const perkGenResult = blueprint.config ? await worker.executeFunction("generate", [{
         config: await blueprint.config.toWorkerObject(temporaryActor),
         actor: temporaryActor.toObject(),
@@ -623,11 +625,20 @@ export default abstract class BlueprintSystem extends HasEmbed(HasMigrations(fou
       }]) : null;
       const [perks, perkSkills, pointsSpent] = perkGenResult ? (() => {
         const perks: PerkPTR2e['_source'][] = [];
-        const skills = new Map<string, {skill: string, value: number}>();
+        const owned = new Set<string>();
+        const skills = new Map<string, { skill: string, value: number }>();
         let totalPoints = 0;
         for (const step of perkGenResult) {
-          perks.push(...step.path.map(path => path.data.perk as unknown as PerkPTR2e['_source']));
-          for(const skill of step.skills.values()) {
+          for (const data of step.path.flatMap(path => ({ ...path.data.perk, system: { ...path.data.perk.system }, slug: path.id?.toString() }))) {
+            if (owned.has(data.slug)) continue;
+            const perk = data as unknown as PerkPTR2e['_source'];
+            perk.system.originSlug = data.slug;
+            //@ts-expect-error - Valid operation.
+            delete perk._id
+            perks.push(perk);
+            owned.add(data.slug);
+          }
+          for (const skill of step.skills.values()) {
             const existing = skills.get(skill.skill);
             if (existing) {
               skills.set(skill.skill, { skill: skill.skill, value: existing.value + skill.value });
@@ -637,9 +648,19 @@ export default abstract class BlueprintSystem extends HasEmbed(HasMigrations(fou
             totalPoints += skill.value;
           }
         }
-        return [perks, Array.from(skills.values()), totalPoints];
+        return [perks.reduce((acc, perk) => {
+          if (perk.system.nodes?.[0]?.type === "root") {
+            if (acc.hasRoot) perk.system.cost = 1;
+            else {
+              acc.hasRoot = true;
+              perk.system.cost = 0;
+            }
+          }
+          acc.perks.push(perk);
+          return acc;
+        }, { perks: [] as PerkPTR2e['_source'][], hasRoot: false }).perks, Array.from(skills.values()), totalPoints];
       })() : [null, [], 0];
-      if(perks) items.push(...perks);
+      if (perks) items.push(...perks);
       progress.advance(game.i18n.localize("PTR2E.PokemonGeneration.Progress.Prefix") + game.i18n.format("PTR2E.PokemonGeneration.Progress.PerksDone", {
         name: blueprint.name
       }));
@@ -680,7 +701,7 @@ export default abstract class BlueprintSystem extends HasEmbed(HasMigrations(fou
 
         const skills = new Map(getInitialSkillList().map((skill) => [skill.slug, skill]));
 
-        for(const skill of perkSkills) {
+        for (const skill of perkSkills) {
           const existing = skills.get(skill.skill);
           if (existing) {
             existing.rvs = (existing.rvs ?? 0) + skill.value;

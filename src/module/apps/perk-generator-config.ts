@@ -5,6 +5,7 @@ import Sortable from "sortablejs";
 import { ItemPTR2e, PerkPTR2e } from "@item";
 import { Blueprint } from "@module/data/models/blueprint.ts";
 import BlueprintSystem from "@item/data/blueprint.ts";
+import { sluggify } from "@utils";
 
 export class PerkGeneratorConfig extends foundry.applications.api.HandlebarsApplicationMixin(ApplicationV2Expanded) {
   static override DEFAULT_OPTIONS = fu.mergeObject(
@@ -111,9 +112,9 @@ export class PerkGeneratorConfig extends foundry.applications.api.HandlebarsAppl
     if (partId === "priorities") {
       if (!this.priorities) {
         const priority = this.priorities = {
-          priority: this.document.priorities.filter(p => p.priority > 0 && p.priority <= 500).sort((a, b) => a.priority - b.priority),
+          priority: this.document.priorities.filter(p => p.priority > 0 && p.priority < 500).sort((a, b) => a.priority - b.priority),
           // inactive: [] as GeneratorConfig["priorities"],
-          negative: this.document.priorities.filter(p => p.priority > 500).sort((a, b) => a.priority - b.priority)
+          negative: this.document.priorities.filter(p => p.priority >= 500).sort((a, b) => a.priority - b.priority)
         }
 
         // const priorities = new Set(priority.priority.map(p => p.slug));
@@ -208,7 +209,7 @@ export class PerkGeneratorConfig extends foundry.applications.api.HandlebarsAppl
         }
         for(const input of entry.querySelectorAll<HTMLInputElement>("input[name='slug']")) {
           input.addEventListener("change", (event) => {
-            this.priorities[parent][Number(index)].slug = (event.target as HTMLInputElement).value;
+            this.priorities[parent][Number(index)].slug = sluggify((event.target as HTMLInputElement).value);
           });
         }
       }

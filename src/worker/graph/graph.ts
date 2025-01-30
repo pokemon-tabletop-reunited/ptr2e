@@ -32,7 +32,7 @@ export class Graph<NodeData extends PerkNodeData = PerkNodeData, LinkData = unkn
     return this.distanceFunction?.(from, to) ?? 1;
   }
 
-  findPath(from: NodeId, to: NodeId, config: GeneratorConfig, {actor, options}: {actor: Actor, options: string[]}): PathResult<NodeData, LinkData> {
+  findPath(from: NodeId, to: NodeId, config: GeneratorConfig, {actor, options, alreadyPurchased}: {actor: Actor, options: string[], alreadyPurchased: Set<NodeId>}): PathResult<NodeData, LinkData> {
     this.distanceFunction = config.cost.priority === "cheapest"
       ? (_from, to) => to.data.root ? 1 : to.data.cost
       : config.cost.priority === "shortest" && config.cost.resolution === "costliest"
@@ -46,7 +46,7 @@ export class Graph<NodeData extends PerkNodeData = PerkNodeData, LinkData = unkn
       from,
       to,
       length: result.path.length,
-      cost: result.path.reduce((acc, node) => acc + node.data.cost, 0),
+      cost: result.path.reduce((acc, node) => acc + (alreadyPurchased.has(node.id) ? 0 : node.data.cost), 0),
       priority: result.priority,
       skills: result.skills,
     }
@@ -219,20 +219,20 @@ export class Graph<NodeData extends PerkNodeData = PerkNodeData, LinkData = unkn
           break;
         }
         case "approach": {
-          if (to.data.perk.system.design.approach === p.slug) return p.priority;
+          if (to.data.perk.system.design.approach == p.slug) return p.priority;
           break;
         }
         case "archetype": {
-          if (to.data.perk.system.design.archetype === p.slug) return p.priority;
+          if (to.data.perk.system.design.archetype == p.slug) return p.priority;
           break;
         }
         case "arena": {
-          if (to.data.perk.system.design.arena === p.slug) return p.priority;
+          if (to.data.perk.system.design.arena == p.slug) return p.priority;
           break;
         }
       }
     }
-    return priority.length + 1;
+    return priority.length + 10;
   }
 }
 
