@@ -172,6 +172,50 @@ function handlePriorityPerks({
       }
       return currentPath?.length ? [[...currentPath, path ?? []].flat()] : [path ? [path] : null];
     }
+    case "random": {
+      const path = (() => {
+        const baseNodes = purchasedPerks?.length ? purchasedPerks : [graph.rootNodes[Math.floor(Math.random() * graph.rootNodes.length)]]
+        const path = baseNodes.reduce(reducePath(graph, startingPerk, config, actor, options), undefined);
+        if (!path) {
+          // No valid path was found to this node period. It is impossible to reach this node.
+          if (path !== null) return null;
+
+          // Otherwise; there where paths, but they cost too much AP.
+          const visited = new Set<NodeId>();
+          const alternatives = Array.from(startingPerk.data.connected).flatMap(c => graph.getNode(c) ?? []);
+          while (alternatives.length) {
+            const alternative = alternatives.shift();
+            if (!alternative) continue;
+            visited.add(alternative.id);
+            const path = baseNodes.reduce(reducePath(graph, alternative, config, actor, options), undefined);
+            if (path) return path
+
+            alternatives.push(...Array.from(alternative.data.connected).flatMap(c => graph.getNode(c) ?? []).filter(n => !visited.has(n.id)));
+          }
+        }
+        return path ?? null;
+      })()
+      if (path?.from === startingPerk.id) {
+        const leftoverAP = config.points.ap - path.cost;
+
+        const skills = Array.from(path.skills.values());
+        const leftoverRV = config.points.rv - skills.reduce((acc, { value }) => acc + value, 0);
+        if (skills.length) {
+          for (const { skill, value } of skills) {
+            actor.skills[skill].rvs += value;
+            actor.skills[skill].mod = actor.skills[skill].total += value;
+          }
+        }
+
+        if (leftoverAP > 0) {
+          const newConfig = Object.assign({}, config, { points: { ap: leftoverAP, rv: leftoverRV } } satisfies Partial<GeneratorConfig>);
+          const newPerkPriorities = priorities.perk.slice(1);
+          return handlePriorityPerks({ config: newConfig, priorities: { ...priorities, perk: newPerkPriorities }, currentPath: currentPath?.length ? [...currentPath, path] : [path], purchasedPerks: purchasedPerks?.length ? [...purchasedPerks, ...path.path] : path.path, _depth: _depth + 1 }, { actor, options });
+        }
+      }
+
+      return currentPath?.length ? [[...currentPath, path ?? []].flat()] : [path ? [path] : null];
+    }
     case "best": {
       const path = (() => {
         const baseNodes = purchasedPerks?.length ? purchasedPerks : graph.rootNodes;
