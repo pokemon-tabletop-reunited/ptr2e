@@ -277,15 +277,19 @@ export class nba<NodeData extends PerkNodeData = PerkNodeData, LinkData = unknow
     const result1 = handleRVs.bind(this)({otherNode: from, rvs: startNode.rv1 + endNode.rv2, skills: startNode.skills1});
     if(result1) {
       if(typeof result1 !== 'boolean') {
-        startNode.rv1 += result1.requiredPoints;
-        startNode.skills1.set(result1.skill, {skill: result1.skill, value: result1.requiredPoints});
+        for(const {skill, requiredPoints} of result1) {
+          startNode.rv1 += requiredPoints;
+          startNode.skills1.set(skill, {skill: skill, value: requiredPoints});
+        }
       }
     }
     const result2 = handleRVs.bind(this)({otherNode: to, rvs: startNode.rv1 + endNode.rv2, skills: endNode.skills2});
     if(result2) {
       if(typeof result2 !== 'boolean') {
-        endNode.rv2 += result2.requiredPoints;
-        endNode.skills2.set(result2.skill, {skill: result2.skill, value: result2.requiredPoints});
+        for(const {skill, requiredPoints} of result2) {
+          endNode.rv2 += requiredPoints;
+          endNode.skills2.set(skill, {skill: skill, value: requiredPoints});
+        }
       }
     }
 
@@ -362,13 +366,15 @@ export class nba<NodeData extends PerkNodeData = PerkNodeData, LinkData = unknow
         const result = handleRVs.bind(this)({ otherNode, rvs: otherSearchState.rv1 + otherSearchState.rv2, skills: otherSearchState.skills1 });
         if(result) {
           if(typeof result !== 'boolean') {
-            otherSearchState.rv1 += result.requiredPoints;
-            const current = otherSearchState.skills1.get(result.skill);
-            if(current) {
-              current.value += result.requiredPoints;
-            }
-            else {
-              otherSearchState.skills1.set(result.skill, {skill: result.skill, value: result.requiredPoints});
+            for(const {skill, requiredPoints} of result) {
+              otherSearchState.rv1 += requiredPoints;
+              const current = otherSearchState.skills1.get(skill);
+              if(current) {
+                current.value += requiredPoints;
+              }
+              else {
+                otherSearchState.skills1.set(skill, {skill: skill, value: requiredPoints});
+              }
             }
           }
 
@@ -409,13 +415,15 @@ export class nba<NodeData extends PerkNodeData = PerkNodeData, LinkData = unknow
         const result = handleRVs.bind(this)({ otherNode, rvs: otherSearchState.rv1 + otherSearchState.rv2, skills: otherSearchState.skills2 });
         if(result) {
           if(typeof result !== 'boolean') {
-            otherSearchState.rv2 += result.requiredPoints;
-            const current = otherSearchState.skills2.get(result.skill);
-            if(current) {
-              current.value += result.requiredPoints;
-            }
-            else {
-              otherSearchState.skills2.set(result.skill, {skill: result.skill, value: result.requiredPoints});
+            for(const {skill, requiredPoints} of result) {
+              otherSearchState.rv2 += requiredPoints;
+              const current = otherSearchState.skills2.get(skill);
+              if(current) {
+                current.value += requiredPoints;
+              }
+              else {
+                otherSearchState.skills2.set(skill, {skill: skill, value: requiredPoints});
+              }
             }
           }
         
@@ -464,7 +472,7 @@ export class nba<NodeData extends PerkNodeData = PerkNodeData, LinkData = unknow
       otherNode: Node<NodeData, LinkData>;
       rvs: number,
       skills: Map<string, {skill: string, value: number}>
-    }): { skill: string, requiredPoints: number } | boolean {
+    }): { skill: string, requiredPoints: number }[] | boolean {
       if (config.points.rv <= 0) return true;
 
       const test = validatePrerequisites(otherNode.data.perk, actor, options);
@@ -473,8 +481,9 @@ export class nba<NodeData extends PerkNodeData = PerkNodeData, LinkData = unknow
       let returnVal = false;
       for(const {statement, result} of test.results) {
         if(result) continue;
+        const argument = Object.keys(statement)[0];
 
-        const types = getStatementType(statement) as (string | number)[] | void;
+        const types = getStatementType(statement) as (string | number)[] | (string | number)[][] | void;
         if(!types) continue;
         
         if(types.length === 2 && typeof types[0] === 'string' && types[0].startsWith("skill:") && typeof types[1] === 'number') {
@@ -493,7 +502,42 @@ export class nba<NodeData extends PerkNodeData = PerkNodeData, LinkData = unknow
           };
           if((requiredPoints + rvs) > config.points.rv) continue;
 
-          return {skill, requiredPoints};
+          return [{skill, requiredPoints}];
+        }
+        if(Array.isArray(types) && types.length > 0 && (types as (string | number)[][]).every(types => typeof types[0] === 'string' && types[0].startsWith("skill:") && typeof types[1] === 'number')) {
+          let valid = true;
+          let additionalSpending = 0;
+          const results = [];
+          for(const [skillString, value] of types as [string, number][]) {
+            const skill = skillString.split(":")[1];
+            const actorSkill = actor.system.skills.get(skill);
+            if(!actorSkill) {
+              valid = false;
+              break;
+            }
+
+            const alreadySpent = skills.get(skill)?.value ?? 0;
+
+            const requiredPoints = value - actorSkill.total - alreadySpent;
+            if(requiredPoints <= 0) {
+              if(alreadySpent > 0) returnVal = true;
+              continue
+            };
+            if((requiredPoints + rvs + additionalSpending) > config.points.rv) {
+              if(results.length && argument === "or") continue;
+              valid = false;
+              break;
+            }
+            additionalSpending += requiredPoints;
+            results.push({skill, requiredPoints});
+          }
+          if(valid) {
+            if(argument === "or") {
+              // Return random result
+              return [results[Math.floor(Math.random() * results.length)]];
+            }
+            return results;
+          }
         }
       }
       return returnVal;

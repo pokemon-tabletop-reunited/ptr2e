@@ -3,6 +3,8 @@ import { GeneratorConfig } from "@module/data/models/generator-config.ts";
 import { BlueprintSheetPTR2e } from "@item/sheets/index.ts";
 import Sortable from "sortablejs";
 import { ItemPTR2e, PerkPTR2e } from "@item";
+import { Blueprint } from "@module/data/models/blueprint.ts";
+import BlueprintSystem from "@item/data/blueprint.ts";
 
 export class PerkGeneratorConfig extends foundry.applications.api.HandlebarsApplicationMixin(ApplicationV2Expanded) {
   static override DEFAULT_OPTIONS = fu.mergeObject(
@@ -11,7 +13,7 @@ export class PerkGeneratorConfig extends foundry.applications.api.HandlebarsAppl
       tag: "form",
       classes: ["sheet", "perk-config-sheet", "default-sheet"],
       position: {
-        height: 500,
+        height: 560,
         width: 650,
       },
       form: {
@@ -79,10 +81,18 @@ export class PerkGeneratorConfig extends foundry.applications.api.HandlebarsAppl
   }
 
   constructor(document: GeneratorConfig = new GeneratorConfig(), application: BlueprintSheetPTR2e | null = null, options: Partial<foundry.applications.api.ApplicationConfiguration> = {}) {
-    options.id = `action-editor-${document.id}${document.link ? "" : `-${application ? '-blueprint' : '-global'}`}`;
+    options.id = `generator-config-${document.id}${document.link ? "" : `-${application ? 'blueprint' : 'global'}`}`;
     super(options);
     this.document = document;
     this.blueprintSheet = application;
+  }
+
+  override get title() {
+    return this.document.label
+      ? `Generator Config: ${this.document.label}`
+      : this.document.parent instanceof Blueprint
+        ? `Generator Config for: ${this.document.parent.name}`
+        : `Generator Config`;
   }
 
   override async _prepareContext() {
@@ -126,8 +136,33 @@ export class PerkGeneratorConfig extends foundry.applications.api.HandlebarsAppl
     return result;
   }
 
+  override _onFirstRender(context: foundry.applications.api.ApplicationRenderContext, options: foundry.applications.api.HandlebarsRenderOptions): void {
+    super._onFirstRender(context, options);
+
+    if(this.element.querySelector(".choice.hidden")) {
+      this.element.querySelector<HTMLInputElement>(`.choice input[name="config.entry.choice"]`)!.required = false;
+    }
+  }
+
   override _attachPartListeners(partId: string, htmlElement: HTMLElement, options: foundry.applications.api.HandlebarsRenderOptions): void {
     super._attachPartListeners(partId, htmlElement, options);
+
+    if(partId === "config") {
+      const entryRoot = htmlElement.querySelector<HTMLSelectElement>(`select[name="config.entry.mode"]`);
+      if(!entryRoot) return;
+
+      entryRoot.addEventListener("change", (event) => {
+        const value = (event.target as HTMLSelectElement).value as "choice" | "random" | "best";
+        if(value === "choice") {
+          htmlElement.querySelector<HTMLDivElement>(".choice")?.classList.remove("hidden");
+          htmlElement.querySelector<HTMLInputElement>(`.choice input[name="config.entry.choice"]`)!.required = true;
+        }
+        else {
+          htmlElement.querySelector<HTMLDivElement>(".choice")?.classList.add("hidden");
+          htmlElement.querySelector<HTMLInputElement>(`.choice input[name="config.entry.choice"]`)!.required = false;
+        }
+      });
+    }
 
     if (partId === "priorities") {
       const priority = htmlElement.querySelector<HTMLUListElement>("ul.priority"),
@@ -154,7 +189,7 @@ export class PerkGeneratorConfig extends foundry.applications.api.HandlebarsAppl
             this.render({ parts: ["priorities"] });
           })
         }
-        for (const input of entry.querySelectorAll<HTMLInputElement>(".priority input")) {
+        for (const input of entry.querySelectorAll<HTMLInputElement>("span.priority input")) {
           input.addEventListener("change", (event) => {
             const value = Number((event.target as HTMLInputElement).value);
             if (value < 0 || value > 500) {
@@ -169,6 +204,11 @@ export class PerkGeneratorConfig extends foundry.applications.api.HandlebarsAppl
               this.priorities.priority[Number(index)].priority = Math.clamp(value, 1, this.priorities.priority.length);
             }
             this.render({ parts: ["priorities"] });
+          });
+        }
+        for(const input of entry.querySelectorAll<HTMLInputElement>("input[name='slug']")) {
+          input.addEventListener("change", (event) => {
+            this.priorities[parent][Number(index)].slug = (event.target as HTMLInputElement).value;
           });
         }
       }
@@ -280,8 +320,29 @@ export class PerkGeneratorConfig extends foundry.applications.api.HandlebarsAppl
     return void this.render({ parts: ["priorities"] });
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  static async #onSubmit(this: PerkGeneratorConfig, _event: Event, _element: HTMLFormElement, _formData: FormDataExtended) {
+  
+  static async #onSubmit(this: PerkGeneratorConfig, _event: Event, _element: HTMLFormElement, formData: FormDataExtended) {
+    const data = fu.expandObject(formData.object);
+    if(!data.config) return;
+
+    const config = data.config as GeneratorConfig['_source'];
+
+    config.priorities = [...this.priorities.priority, ...this.priorities.negative] as GeneratorConfig['_source']['priorities'];
+    if(config.entry.mode !== "choice" && config.entry.choice) config.entry.choice = null;
+
+    // This is being submitted from a blueprint sheet.
+    if(this.blueprintSheet && this.document?.parent instanceof Blueprint && this.document.parent?.parent instanceof BlueprintSystem) {
+      const blueprint = this.document.parent.parent;
+      if(this.blueprintSheet.generation?.temporary) {
+        this.document.parent.updateSource({config: config});
+      }
+      else {
+        await blueprint.updateChildren([{_id: this.document.parent.id, config: config}]);
+      }
+    }
+
+    //Otherwise it's from the global sheet; which isn't yet implemented.
+
     return;
   }
 }

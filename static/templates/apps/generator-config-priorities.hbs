@@ -4,8 +4,8 @@
       <span class="header">
         Priorities <i class="far fa-circle-info ml-1" data-tooltip-direction="UP" data-tooltip="Priorities that are actively encouraged and desired while the generator picks perks."></i>
       </span>
-      <span class="priority">Priority</span>
       <span class="slug">Slug</span>
+      <span class="priority">Priority</span>
       <span class="type">Type</span>
       <button type="button" data-action="add-priority" data-tooltip-direction="UP" data-tooltip="Add Priority"><i class="fas fa-plus m-0"></i></button>
     </li>
@@ -26,8 +26,8 @@
       <span class="header">
         Negative Priorities <i class="far fa-circle-info ml-1" data-tooltip-direction="UP" data-tooltip="Negative Priorities are actively avoided while the generator picks perks."></i>
       </span>
-      <span class="priority">Priority</span>
       <span class="slug">Slug</span>
+      <span class="priority">Priority</span>
       <span class="type">Type</span>
       <button type="button" data-action="add-negative-priority" data-tooltip-direction="UP" data-tooltip="Add Priority"><i class="fas fa-plus m-0"></i></button>
     </li>
@@ -37,9 +37,6 @@
 
 {{#*inline "priority"}}
   <li class="entry" data-priority="{{priority}}" data-slug="{{slug}}" data-type="{{type}}" data-index="{{@index}}">
-    {{#if priority}}
-      <span class="priority"><input type="number" data-tooltip="{{localize "PTR2E.GeneratorConfig.FIELDS.priorities.priority.hint"}}" value="{{priority}}"/></span>
-    {{/if}}
     <span class="slug">
       {{#if (is type 'arena')}}
         <select name="slug">
@@ -60,9 +57,12 @@
           <small>Drag & Drop a Perk here</small>
         {{/if}}
       {{else}}
-        <input type="text" value="{{slug}}">
+        <input type="text" name="slug" value="{{slug}}">
       {{/if}}
     </span>
+    {{#if priority}}
+      <span class="priority"><input type="number" data-tooltip="{{localize "PTR2E.GeneratorConfig.FIELDS.priorities.priority.hint"}}" value="{{priority}}"/></span>
+    {{/if}}
     <span class="type">
       {{formInput @root.typeField value=type localize=true name="type"}}
     </span>

@@ -1,4 +1,6 @@
+import { ActorPTR2e } from "@actor";
 import { SlugField } from "../fields/slug-field.ts";
+import { PerkPTR2e } from "@item";
 
 export class GeneratorConfig extends foundry.abstract.DataModel {
   static LOCALIZATION_PREFIXES = ["PTR2E.GeneratorConfig"];
@@ -64,7 +66,7 @@ export class GeneratorConfig extends foundry.abstract.DataModel {
       }),
       priorities: new foundry.data.fields.ArrayField(
         new foundry.data.fields.SchemaField({
-          slug: new SlugField({ required: true }),
+          slug: new foundry.data.fields.StringField({ required: true }),
           priority: new foundry.data.fields.NumberField({ required: true }),
           type: new SlugField<PriorityOrderType, PriorityOrderType, true, false>({
             required: true,
@@ -78,7 +80,8 @@ export class GeneratorConfig extends foundry.abstract.DataModel {
           }),
         })
       ),
-      label: new foundry.data.fields.StringField({ required: true, initial: "", blank: true,
+      label: new foundry.data.fields.StringField({
+        required: true, initial: "", blank: true,
         label: "PTR2E.GeneratorConfig.FIELDS.label.label",
         hint: "PTR2E.GeneratorConfig.FIELDS.label.hint"
       }),
@@ -86,15 +89,37 @@ export class GeneratorConfig extends foundry.abstract.DataModel {
       id: new foundry.data.fields.StringField({ required: true, initial: fu.randomID() }),
     }
   }
+
+  async toWorkerObject(actor: ActorPTR2e): Promise<PerkWorkerConfig> {
+    return {
+      ...super.toObject(),
+      priorities: await Promise.all(this.priorities.flatMap(async (p) => {
+        if(p.type !== "perk") return p;
+        const perk = await fromUuid<PerkPTR2e>(p.slug);
+        if(!perk) return [];
+        return {
+          slug: perk.slug,
+          priority: p.priority,
+          type: p.type,
+        }
+      })),
+      points: {
+        ap: actor.system.advancement.advancementPoints.total,
+        rv: actor.system.advancement.rvs.total
+      }
+    }
+  }
 }
 
-export interface GeneratorConfig extends foundry.abstract.DataModel, ModelPropsFromSchema<GeneratorConfigSchema> {
-  _source: SourceFromSchema<GeneratorConfigSchema>;
-
+export type PerkWorkerConfig = GeneratorConfig['_source'] & {
   points: {
     ap: number;
     rv: number;
   }
+};
+
+export interface GeneratorConfig extends foundry.abstract.DataModel, ModelPropsFromSchema<GeneratorConfigSchema> {
+  _source: SourceFromSchema<GeneratorConfigSchema>;
 }
 
 interface GeneratorConfigSchema extends foundry.data.fields.DataSchema {
@@ -116,7 +141,7 @@ interface GeneratorConfigSchema extends foundry.data.fields.DataSchema {
 }
 
 interface ConfigPrioritySchema extends foundry.data.fields.DataSchema {
-  slug: SlugField<string, string, true, false, false>;
+  slug: foundry.data.fields.StringField<string, string, true, false, false>;
   priority: foundry.data.fields.NumberField<number, number, true, false, true>;
   type: SlugField<PriorityOrderType, PriorityOrderType, true, false, true>;
 }

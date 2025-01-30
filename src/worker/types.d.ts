@@ -1,3 +1,5 @@
+import { PathResult } from "./graph/graph.ts";
+
 export interface ActorData {
   name: string;
   system: {
@@ -133,3 +135,5 @@ export type PriorityMode = "species" | "order"
 export type PriorityCostPriority = "cheapest" | "shortest" | "random";
 export type PriorityCostResolution = "cheapest" | "costliest" | "random";
 export type EntryMode = "best" | "random" | "choice";
+
+export type PerkGeneratorResult = [PathResult<PerkNodeData, unknown>[] | null];

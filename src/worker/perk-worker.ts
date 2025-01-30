@@ -1,10 +1,13 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
-import { Skill, type Actor, type ActorData, type GeneratorConfig, type Perk, type PerkNodeData, type PriorityOrder, type PriorityOrderType } from "./types.js";
+import { PerkGeneratorResult, Skill, type Actor, type ActorData, type GeneratorConfig, type Perk, type PerkNodeData, type PriorityOrder, type PriorityOrderType } from "./types.js";
 import { Graph, Node, NodeId, PathResult } from "./graph/graph.ts";
 import { mergeObject } from "./perk-validator.ts";
 
-
 const graph = new Graph<PerkNodeData>();
+
+async function initialized() {
+  return [graph.size > 0];
+}
 
 async function initializePerks({ perks }: { perks: Perk[] }) {
   for (const perk of perks) {
@@ -30,7 +33,7 @@ async function initializePerks({ perks }: { perks: Perk[] }) {
   return [true];
 }
 
-async function generate({ config, actor: actorData, options }: { config: GeneratorConfig, actor: ActorData, options: string[] }) {
+async function generate({ config, actor: actorData, options }: { config: GeneratorConfig, actor: ActorData, options: string[] }): Promise<PerkGeneratorResult> {
   const actorSystem = mergeObject(actorData.system, {
     skills: actorData.system.skills.reduce((acc, skill) => {
       acc.set(skill.slug, {
@@ -61,12 +64,13 @@ async function generate({ config, actor: actorData, options }: { config: Generat
 }
 
 //TODO: Add this functionality
-async function generateSpecies(config: GeneratorConfig, actor: Actor, options: string[]) {
-  if (config.mode !== "species") return [null, actor, options];
+async function generateSpecies(config: GeneratorConfig, actor: Actor, options: string[]): Promise<PerkGeneratorResult> {
+  console.debug(actor, options);
+  if (config.mode !== "species") return [null];
   return [null];
 }
 
-async function generateOrder(config: GeneratorConfig, actor: Actor, options: string[]) {
+async function generateOrder(config: GeneratorConfig, actor: Actor, options: string[]): Promise<PerkGeneratorResult> {
   if (config.mode !== "order") return [null];
   config.priorities ??= [];
 
@@ -108,7 +112,7 @@ function handlePriorityPerks({
   currentPath?: PathResult<PerkNodeData>[],
   purchasedPerks?: Node<PerkNodeData>[],
   _depth?: number
-}, { actor, options }: { actor: Actor, options: string[] }) {
+}, { actor, options }: { actor: Actor, options: string[] }): PerkGeneratorResult {
   if (_depth > 500) return currentPath?.length ? [currentPath] : [null];
 
   // Step 2: Set highest priority perk as the starting point
@@ -225,7 +229,7 @@ function handleNoPriorityPerks({ config, priorities, currentPath, purchasedPerks
   oldNodesByArchetype?: Record<string, Node<PerkNodeData>[]>,
   triedArchetypes?: Set<string>,
   _depth?: number
-}, { actor, options }: { actor: Actor, options: string[] }): (PathResult<PerkNodeData>[] | null)[] {
+}, { actor, options }: { actor: Actor, options: string[] }): PerkGeneratorResult {
   if (_depth > 500) return currentPath?.length ? [currentPath] : [null];
   // If there are any perk priorities, we need to handle them first.
   if (priorities.perk.length) return handlePriorityPerks({ config, priorities, currentPath, purchasedPerks, _depth: _depth + 1 }, { actor, options });
@@ -457,11 +461,13 @@ function reducePath<NodeData extends PerkNodeData = PerkNodeData, LinkData = unk
   return pathReducer;
 }
 
+self.initialized = initialized;
 self.initializePerks = initializePerks;
 self.generate = generate;
 
 declare global {
   interface Window {
+    initialized: typeof initialized;
     initializePerks: typeof initializePerks;
     generate: typeof generate;
   }

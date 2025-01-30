@@ -122,7 +122,7 @@ class Blueprint extends foundry.abstract.DataModel {
         hint: "PTR2E.Blueprint.FIELDS.nature.hint"
       }),
       gender: new fields.StringField({
-        required: true, initial: null, nullable: true, trim: true, blank: false, choices: ["random", "male", "female", "genderless"].reduce((acc, val) => ({...acc, [val]: val}), {}),
+        required: true, initial: null, nullable: true, trim: true, blank: false, choices: ["random", "male", "female", "genderless"].reduce((acc, val) => ({ ...acc, [val]: val }), {}),
         label: "PTR2E.Blueprint.FIELDS.gender.label",
         hint: "PTR2E.Blueprint.FIELDS.gender.hint"
       }),
@@ -173,7 +173,7 @@ class Blueprint extends foundry.abstract.DataModel {
           chance: new fields.NumberField({ required: false, nullable: false, initial: 50, min: 0, max: 100, validationError: "The chance must be a positive integer between 0 and 100." }),
         }), { required: true, initial: [], label: "PTR2E.FIELDS.abilities.master.label", },),
       }),
-      config: new fields.EmbeddedDataField(GeneratorConfig, { required: true}),
+      config: new fields.EmbeddedDataField(GeneratorConfig, { required: true, nullable: true, initial: null }),
       owner: new fields.BooleanField({ required: true, initial: false, nullable: false, label: "PTR2E.FIELDS.owner.label", hint: "PTR2E.FIELDS.owner.hint" }),
       sort: new fields.NumberField({ required: true, initial: 0, nullable: false }),
       preventEvolution: new fields.BooleanField({ required: true, initial: false, nullable: false, label: "PTR2E.FIELDS.preventEvolution.label", hint: "PTR2E.FIELDS.preventEvolution.hint" }),
@@ -196,8 +196,8 @@ class Blueprint extends foundry.abstract.DataModel {
     if (this.preparedAsyncData) return;
 
     const doc = await (async () => {
-      if(CONFIG.PTR.data.habitats[this._source.species as keyof typeof CONFIG.PTR.data.habitats] !== undefined) {
-        const table = new HabitatRollTable({habitat: this._source.species as keyof typeof CONFIG.PTR.data.habitats});
+      if (CONFIG.PTR.data.habitats[this._source.species as keyof typeof CONFIG.PTR.data.habitats] !== undefined) {
+        const table = new HabitatRollTable({ habitat: this._source.species as keyof typeof CONFIG.PTR.data.habitats });
         await table.init();
         return table;
       }

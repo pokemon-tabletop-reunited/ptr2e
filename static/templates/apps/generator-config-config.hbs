@@ -3,7 +3,7 @@
   {{formField fields.cost.fields.priority value=source.cost.priority localize=true}}
   {{formField fields.cost.fields.resolution value=source.cost.resolution localize=true}}
   {{formField fields.entry.fields.mode value=source.entry.mode localize=true}}
-  {{#if (is source.entry.mode "choice")}}
-    {{formField fields.entry.fields.choice value=source.entry.choice localize=true}}
-  {{/if}}
+  <div class="choice {{#unless (is source.entry.mode "choice")}}hidden{{/unless}}">
+    {{formField fields.entry.fields.choice value=source.entry.choice localize=true required=true}}
+  </div>
 </section>
