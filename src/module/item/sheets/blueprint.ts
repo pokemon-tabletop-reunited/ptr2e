@@ -56,12 +56,12 @@ export default class BlueprintSheet extends foundry.applications.api.HandlebarsA
         },
         "open-config": async function (this: BlueprintSheet) {
           if (!this.selected) return;
-          return void new PerkGeneratorConfig(this.selected.config, this).render(true);
+          return void new PerkGeneratorConfig(this.selected.config!, this).render(true);
         },
         "create-config": async function (this: BlueprintSheet) {
           if (!this.selected) return;
           if (this.generation?.temporary) {
-            this.selected.updateSource({ config: new GeneratorConfig() });
+            this.selected.updateSource({ config: new GeneratorConfig().toObject() });
           } else {
             await this.blueprint.updateChildren([{ _id: this.selected.id, config: new GeneratorConfig() }]);
           }

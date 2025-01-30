@@ -243,7 +243,7 @@ interface BlueprintSchema extends foundry.data.fields.DataSchema {
   preventEvolution: foundry.data.fields.BooleanField<boolean, boolean, true, false, true>;
   shiny: foundry.data.fields.NumberField<number, number, true, false, true>;
   gender: foundry.data.fields.StringField<"random" | "male" | "female" | "genderless", "random" | "male" | "female" | "genderless", true, false, true>;
-  config: foundry.data.fields.EmbeddedDataField<GeneratorConfig, true, false>
+  config: foundry.data.fields.EmbeddedDataField<GeneratorConfig, true, true, true>;
 }
 
 interface EVSSchema extends foundry.data.fields.DataSchema {

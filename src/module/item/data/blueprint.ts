@@ -616,11 +616,11 @@ export default abstract class BlueprintSystem extends HasEmbed(HasMigrations(fou
       progress.advance(game.i18n.localize("PTR2E.PokemonGeneration.Progress.Prefix") + game.i18n.format("PTR2E.PokemonGeneration.Progress.Perks", {
         name: blueprint.name
       }));
-      const perkGenResult = await worker.executeFunction("generate", [{
+      const perkGenResult = blueprint.config ? await worker.executeFunction("generate", [{
         config: await blueprint.config.toWorkerObject(temporaryActor),
         actor: temporaryActor.toObject(),
         options: temporaryActor.getSelfRollOptions()
-      }])
+      }]) : null;
       const [perks, perkSkills, pointsSpent] = perkGenResult ? (() => {
         const perks: PerkPTR2e['_source'][] = [];
         const skills = new Map<string, {skill: string, value: number}>();

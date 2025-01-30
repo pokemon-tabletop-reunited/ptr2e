@@ -111,9 +111,9 @@ export class PerkGeneratorConfig extends foundry.applications.api.HandlebarsAppl
     if (partId === "priorities") {
       if (!this.priorities) {
         const priority = this.priorities = {
-          priority: this.document.priorities.sort((a, b) => a.priority - b.priority),
+          priority: this.document.priorities.filter(p => p.priority > 0 && p.priority <= 500).sort((a, b) => a.priority - b.priority),
           // inactive: [] as GeneratorConfig["priorities"],
-          negative: [] as GeneratorConfig["priorities"]
+          negative: this.document.priorities.filter(p => p.priority > 500).sort((a, b) => a.priority - b.priority)
         }
 
         // const priorities = new Set(priority.priority.map(p => p.slug));
