@@ -5,30 +5,9 @@
   "_id": "9sYLADeHfdZRQtgZ",
   "img": "systems/ptr2e/img/perk-icons/Hunting.svg",
   "system": {
-    "actions": [
-      {
-        "name": "High Noon",
-        "slug": "high-noon",
-        "description": "<p>The user and the target gain @Affliction[duel] 5, and the user gains 4 Ticks of Shields.</p>",
-        "traits": [],
-        "type": "generic",
-        "range": {
-          "target": "self",
-          "distance": 10,
-          "unit": "m"
-        },
-        "cost": {
-          "activation": "free",
-          "powerPoints": 4,
-          "delay": null,
-          "priority": null
-        },
-        "img": "icons/svg/explosion.svg",
-        "variant": null
-      }
-    ],
+    "actions": [],
     "slug": "high-noon",
-    "description": "<p>The user and the target gain @Affliction[duel] 5, and the user gains 4 Ticks of Shields.</p>",
+    "description": "<p>Connection: Stand Off<br><br>When using Stand Off, the user gains 4 ticks of shields.</p>",
     "traits": [],
     "prerequisites": [],
     "cost": 3,
@@ -62,9 +41,6 @@
       }
     ],
     "autoUnlock": [],
-    "originSlug": null,
-    "variant": null,
-    "mode": null,
     "global": true,
     "webs": [],
     "design": {
@@ -73,5 +49,73 @@
       "archetype": "Hunter"
     }
   },
-  "effects": []
+  "effects": [
+    {
+      "name": "High Noon",
+      "type": "passive",
+      "_id": "SOrQSrQB8xtD9KZj",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "grant-item",
+            "key": "",
+            "value": "Compendium.ptr2e.core-moves.Item.MBgMy5w6O5j5Ux9Q",
+            "predicate": [],
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "system.actions.0.free",
+                "value": "true"
+              }
+            ],
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "reevaluateOnUpdate": false,
+            "inMemoryOnly": false,
+            "allowDuplicate": true,
+            "track": false,
+            "replaceSelf": false,
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            }
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.5.2.1",
+        "createdTime": 1737935167337,
+        "modifiedTime": 1737935200437,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+      }
+    }
+  ]
 }
