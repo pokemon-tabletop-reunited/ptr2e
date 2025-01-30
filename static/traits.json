@@ -234,6 +234,11 @@
         "type": "roll-option",
         "domain": "immunities",
         "value": "trait:gas"
+      },
+      {
+        "type": "roll-option",
+        "domain": "immunities",
+        "value": "affliction:drowning"
       }
     ]
   },
@@ -518,7 +523,15 @@
     "slug": "gilled",
     "label": "Gilled",
     "related": [],
-    "description": "This creature is able to breathe underwater, ignoring the conditions for Drowning."
+    "description": "This creature is able to breathe underwater, ignoring the conditions for Drowning.",
+    "type": "automated",
+    "changes": [
+      {
+        "type": "roll-option",
+        "domain": "immunities",
+        "value": "affliction:drowning"
+      }
+    ]
   },
   {
     "slug": "glow-x",
@@ -642,7 +655,7 @@
   },
   {
     "slug": "legless",
-    "label": "legless",
+    "label": "Legless",
     "related": [],
     "description": "This creature has no legs, and must hop, roll, or drag itself in order to use its Overland Movement. \nSUBJECT TO CHANGE"
   },

@@ -57,6 +57,78 @@
         }
       }
     },
+    "GeneratorConfig": {
+      "label": "Perk Generator Config",
+      "hint": "The config that defines how the auto-perk generation should pick up perks. You can drag any config from another blueprint here to copy it.",
+      "FIELDS": {
+        "mode": {
+          "label": "Generation Mode",
+          "hint": "The overall generation mode; currently only 'Priority Order' mode is supported, but more will be added in the future.",
+          "order": "Priority Order",
+          "species": "Species Based"
+        },
+        "cost": {
+          "priority": {
+            "label": "Cost Prioritization",
+            "hint": "Should the generator prioritize picking up the cheapest perks towards its goal, or the shortest route regardless of price?",
+            "cheapest": "Cheapest",
+            "shortest": "Shortest",
+            "random": "Random"
+          },
+          "resolution": {
+            "label": "Tie-Resolution",
+            "hint": "If a tie occurs in prioritization, should the generator pick the cheapest or most expensive option?",
+            "cheapest": "Cheapest",
+            "costliest": "Costliest",
+            "random": "Random"
+          }
+        },
+        "entry": {
+          "mode": {
+            "label": "Entry Root",
+            "hint": "What entry root should be used for the generator?",
+            "best": "Best Result",
+            "random": "Random Root",
+            "choice": "Specific Root"
+          },
+          "choice": {
+            "label": "Specific Root",
+            "hint": "The specific root perk to use as the root node for the generator."
+          }
+        },
+        "randomness": {
+          "label": "Randomness",
+          "hint": "% Chance whenever the Generator attempts to make the best choice; it will instead just take a random choice. High % of randomness has performance implications."
+        },
+        "label": {
+          "label": "Config Label",
+          "hint": "Label for this Configuration when shown in the Global Configs list."
+        },
+        "link": {
+          "label": "Sync with Global Config?",
+          "hint": "Should this configuration's settings be synchronized with its version in the Global Configuration?"
+        },
+        "priorities": {
+          "slug": {
+            "label": "",
+            "hint": ""
+          },
+          "priority": {
+            "label": "",
+            "hint": ""
+          },
+          "type": {
+            "label": "",
+            "hint": "",
+            "arena": "Arena",
+            "approach": "Approach",
+            "archetype": "Archetype",
+            "trait": "Trait",
+            "perk": "Perk"
+          }
+        }
+      }
+    },
     "CompendiumBrowser": {
       "Title": "Compendium Browser",
       "SearchPlaceholder": "Search for items...",
@@ -2605,6 +2677,8 @@
       "Progress": {
         "Prefix": "PTR2E | Pkmn Generator | ",
         "Step": "Preparing Actor Data for {name}...",
+        "Perks": "Generating perks for {name}...",
+        "PerksDone": "Finalizing Actor Data for {name}...",
         "GenerationStep": "Creating all prepared Actors...",
         "TokenGenerationStep": "Creating Tokens for all Generated Actors...",
         "Complete": "Actor Generation Complete!"

@@ -66,16 +66,19 @@ class FolderConfigPTR2e extends foundry.applications.api.HandlebarsApplicationMi
   //     return super.close(options);
   // }
 
+  private owner: ActorPTR2e | null = null;
+  private team: ActorPTR2e[] = [];
+
   override async _prepareContext(options?: DocumentSheetConfiguration<FolderPTR2e>) {
     const context = await super._prepareContext(options);
     const folder = this.document.toObject();
     //@ts-expect-error - This property exists
     const label = game.i18n.localize(Folder.implementation.metadata.label);
 
-    const owner = this.document.owner ? await fromUuid(this.document.owner) : null;
+    const owner = this.owner ?? (this.document.owner ? await fromUuid<ActorPTR2e>(this.document.owner) : null)
     const team = [];
     for (const memberUuid of this.document.team) {
-      const actor = await fromUuid(memberUuid);
+      const actor = await fromUuid<ActorPTR2e>(memberUuid);
       if (actor && actor instanceof ActorPTR2e) {
         team.push({ actor, folder: actor.folder });
       }
@@ -126,13 +129,17 @@ class FolderConfigPTR2e extends foundry.applications.api.HandlebarsApplicationMi
     switch (type) {
       case "owner": {
         const owner = await fromUuid(uuid);
-        if (owner) await owner.update({ "folder": null, "system.party.ownerOf": null });
+        if (owner) {
+          if (!this.document.id) this.owner = null;
+          else await owner.update({ "folder": null, "system.party.ownerOf": null });
+        }
         break;
       }
       case "team": {
         const actor = await fromUuid(uuid);
         if (actor && actor instanceof ActorPTR2e) {
-          await actor.update({ "system.party.teamMemberOf": (actor as ActorPTR2e).system.party.teamMemberOf.filter(id => id !== this.document.id) });
+          if (!this.document.id) this.team = this.team.filter(member => member.id !== actor.id);
+          else await actor.update({ "system.party.teamMemberOf": (actor as ActorPTR2e).system.party.teamMemberOf.filter(id => id !== this.document.id) });
         }
         break
       }
@@ -157,7 +164,8 @@ class FolderConfigPTR2e extends foundry.applications.api.HandlebarsApplicationMi
     const actor = game.actors.get(data.id) ?? await fromUuid(data.uuid);
     if (!actor || !(actor instanceof ActorPTR2e)) return;
 
-    await actor.update({ "folder": this.document.id, "system.party.ownerOf": this.document.id, "system.party.partyMemberOf": null });
+    if (!this.document.id) this.owner = actor;
+    else await actor.update({ "folder": this.document.id, "system.party.ownerOf": this.document.id, "system.party.partyMemberOf": null });
 
     return this.render({ parts: ["members"] }).then(_ => { this.position.height = "auto"; return _ })
   }
@@ -171,7 +179,8 @@ class FolderConfigPTR2e extends foundry.applications.api.HandlebarsApplicationMi
     const actor = game.actors.get(data.id) ?? await fromUuid(data.uuid);
     if (!actor || !(actor instanceof ActorPTR2e)) return;
 
-    await actor.update({ "system.party.teamMemberOf": Array.from(new Set(actor.system.party.teamMemberOf.concat(this.document.id))) });
+    if (!this.document.id) this.team.push(actor);
+    else await actor.update({ "system.party.teamMemberOf": Array.from(new Set(actor.system.party.teamMemberOf.concat(this.document.id))) });
 
     return this.render({ parts: ["members"] }).then(_ => { this.position.height = "auto"; return _ })
   }
@@ -183,8 +192,8 @@ class FolderConfigPTR2e extends foundry.applications.api.HandlebarsApplicationMi
     formData: FormDataExtended
   ) {
     event.preventDefault();
-    if(!game.user.isGM) {
-      if(!game.users.activeGM) {
+    if (!game.user.isGM) {
+      if (!game.users.activeGM) {
         ui.notifications.error("Oops! A GM must be online to process this request.");
         // Throw error so that the form doesn't close
         throw new Error("No GM is currently online.");
@@ -198,10 +207,10 @@ class FolderConfigPTR2e extends foundry.applications.api.HandlebarsApplicationMi
 
       const listener = (data: SocketRequestData) => {
         if (typeof data !== 'object' || !('request' in data)) return;
-        if(data.id !== id && ["acknowledge","acknowledgeFailure"].includes(data.request)) return;
+        if (data.id !== id && ["acknowledge", "acknowledgeFailure"].includes(data.request)) return;
 
         ui.notifications.remove(notifId);
-        if(data.request === "acknowledgeFailure") ui.notifications.error(data.message || "GM failed to process request.");
+        if (data.request === "acknowledgeFailure") ui.notifications.error(data.message || "GM failed to process request.");
         else ui.notifications.info(data.message || "GM successfully processed request.");
         game.socket.off("system.ptr2e", listener);
         clearTimeout(timeout);
@@ -237,10 +246,20 @@ class FolderConfigPTR2e extends foundry.applications.api.HandlebarsApplicationMi
       if (this.document.id) return await this.document.update(data);
       else {
         this.document.updateSource(data);
-        return await FolderPTR2e.create(
+        const folder = await FolderPTR2e.create(
           this.document instanceof Folder ? this.document.toObject() : this.document,
-          { pack: this.document.pack }
+          { pack: this.document.pack, keepId: true }
         );
+        if(!folder) return folder;
+        if(this.owner) {
+          await this.owner.update({ "folder": folder.id, "system.party.ownerOf": folder.id, "system.party.partyMemberOf": null });
+        }
+        if(this.team.length) {
+          for (const member of this.team) {
+            await member.update({ "system.party.teamMemberOf": Array.from(new Set(member.system.party.teamMemberOf.concat(folder.id))) });
+          }
+        }
+        return folder;
       }
     })();
     if ("resolve" in this.options && typeof this.options.resolve === "function")

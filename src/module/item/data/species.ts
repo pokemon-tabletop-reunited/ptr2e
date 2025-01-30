@@ -371,7 +371,7 @@ class SpeciesSystem extends SpeciesExtension {
           uuid,
           methods: [],
           evolutions: null,
-          perk: { x: 15, y: 15 }
+          perk: { x: 26, y: 26 }
         });
       }
     }
@@ -540,10 +540,10 @@ class SpeciesSystem extends SpeciesExtension {
         let positive = true;
         let counter = 0;
         while (takenCoordinates.has(`${x}-${y}`)) {
-          y = 15 - (2 * depth);
+          y = 26 - (2 * depth);
           x = positive
-            ? 15 + (2 * counter)
-            : 15 + (-2 * (counter + 1));
+            ? 26 + (2 * counter)
+            : 26 + (-2 * (counter + 1));
 
           if (positive) positive = false;
           else {
@@ -551,7 +551,7 @@ class SpeciesSystem extends SpeciesExtension {
             positive = true;
           };
 
-          if (counter > 7) break;
+          if (counter > 12) break;
         }
         return [x, y];
       })()
@@ -766,8 +766,8 @@ export class EvolutionData extends foundry.abstract.DataModel {
         { required: true, nullable: true }
       ),
       perk: new fields.SchemaField({
-        x: new fields.NumberField({ required: true, initial: 15 }),
-        y: new fields.NumberField({ required: true, initial: 15 }),
+        x: new fields.NumberField({ required: true, initial: 26 }),
+        y: new fields.NumberField({ required: true, initial: 26 }),
       })
     });
 

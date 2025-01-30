@@ -1,0 +1,71 @@
+<section class="priorities">
+  <ul class="priority" data-type="priority">
+    <li class="d-flex flex-row">
+      <span class="header">
+        Priorities <i class="far fa-circle-info ml-1" data-tooltip-direction="UP" data-tooltip="Priorities that are actively encouraged and desired while the generator picks perks."></i>
+      </span>
+      <span class="slug">Slug</span>
+      <span class="priority">Priority</span>
+      <span class="type">Type</span>
+      <button type="button" data-action="add-priority" data-tooltip-direction="UP" data-tooltip="Add Priority"><i class="fas fa-plus m-0"></i></button>
+    </li>
+    {{#each priority.priority}}{{> priority}}{{/each}}
+  </ul>
+  {{!-- <ul class="inactive" data-type="inactive">
+    <li class="d-flex flex-row">
+      <span class="header">
+        Defaults <i class="far fa-circle-info ml-1" data-tooltip-direction="UP" data-tooltip="Some Default priority options, we recommend including these!"></i>
+      </span>
+      <span class="slug">Slug</span>
+      <span class="type">Type</span>
+    </li>
+    {{#each priority.inactive}}{{> priority}}{{/each}}
+  </ul> --}}
+  <ul class="negative" data-type="negative">
+    <li class="d-flex flex-row">
+      <span class="header">
+        Negative Priorities <i class="far fa-circle-info ml-1" data-tooltip-direction="UP" data-tooltip="Negative Priorities are actively avoided while the generator picks perks."></i>
+      </span>
+      <span class="slug">Slug</span>
+      <span class="priority">Priority</span>
+      <span class="type">Type</span>
+      <button type="button" data-action="add-negative-priority" data-tooltip-direction="UP" data-tooltip="Add Priority"><i class="fas fa-plus m-0"></i></button>
+    </li>
+    {{#each priority.negative}}{{> priority}}{{/each}}
+  </ul>
+</section>
+
+{{#*inline "priority"}}
+  <li class="entry" data-priority="{{priority}}" data-slug="{{slug}}" data-type="{{type}}" data-index="{{@index}}">
+    <span class="slug">
+      {{#if (is type 'arena')}}
+        <select name="slug">
+          <option value="physical" {{#if (is slug "physical")}}selected{{/if}}>{{localize "PTR2E.FIELDS.design.arena.physical"}}</option>
+          <option value="mental" {{#if (is slug "mental")}}selected{{/if}}>{{localize "PTR2E.FIELDS.design.arena.mental"}}</option>
+          <option value="social" {{#if (is slug "social")}}selected{{/if}}>{{localize "PTR2E.FIELDS.design.arena.social"}}</option>
+        </select>
+      {{else if (is type 'approach')}}
+        <select name="slug">
+          <option value="power" {{#if (is slug "power")}}selected{{/if}}>{{localize "PTR2E.FIELDS.design.approach.power"}}</option>
+          <option value="finesse" {{#if (is slug "finesse")}}selected{{/if}}>{{localize "PTR2E.FIELDS.design.approach.finesse"}}</option>
+          <option value="resilience" {{#if (is slug "resilience")}}selected{{/if}}>{{localize "PTR2E.FIELDS.design.approach.resilience"}}</option>
+        </select>
+      {{else if (is type 'perk')}}
+        {{#if slug}}
+          {{{asContentLink slug}}}
+        {{else}}
+          <small>Drag & Drop a Perk here</small>
+        {{/if}}
+      {{else}}
+        <input type="text" name="slug" value="{{slug}}">
+      {{/if}}
+    </span>
+    {{#if priority}}
+      <span class="priority"><input type="number" data-tooltip="{{localize "PTR2E.GeneratorConfig.FIELDS.priorities.priority.hint"}}" value="{{priority}}"/></span>
+    {{/if}}
+    <span class="type">
+      {{formInput @root.typeField value=type localize=true name="type"}}
+    </span>
+    <button type="button" data-action="delete-entry" data-tooltip="Remove Priority"><i class="fas fa-xmark m-0"></i></button>
+  </li>
+{{/inline}}
