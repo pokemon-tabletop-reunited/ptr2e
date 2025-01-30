@@ -49,7 +49,7 @@ async function generate({ config, actor: actorData, options }: { config: Generat
     acc[skill.slug] = skill;
     return acc;
   }, {} as Record<string, Skill>);
-  
+
   // Give Actor 1 additional AP to account for the free Root, since all roots in the generator are 1 cost.
   config.points.ap += 1;
 
@@ -96,8 +96,8 @@ async function generateOrder(config: GeneratorConfig, actor: Actor, options: str
   }
 
   // Step 1: Check if Priority items contains a perk.
-  if (priorities.perk.length === 0) return handleNoPriorityPerks({ config, priorities }, { actor, options });
-  else return handlePriorityPerks({ config, priorities }, { actor, options });
+  if (priorities.perk.length === 0) return handleNoPriorityPerks({ config, priorities, alreadyPurchased: new Set() }, { actor, options });
+  else return handlePriorityPerks({ config, priorities, alreadyPurchased: new Set() }, { actor, options });
 }
 
 function handlePriorityPerks({
@@ -105,12 +105,14 @@ function handlePriorityPerks({
   priorities,
   currentPath,
   purchasedPerks,
+  alreadyPurchased,
   _depth = 0
 }: {
   config: GeneratorConfig,
   priorities: { [K in PriorityOrderType]: PriorityOrder[K][] },
   currentPath?: PathResult<PerkNodeData>[],
   purchasedPerks?: Node<PerkNodeData>[],
+  alreadyPurchased: Set<NodeId>,
   _depth?: number
 }, { actor, options }: { actor: Actor, options: string[] }): PerkGeneratorResult {
   if (_depth > 500) return currentPath?.length ? [currentPath] : [null];
@@ -124,7 +126,7 @@ function handlePriorityPerks({
     }
     return null;
   })()
-  if (!startingPerk) return handleNoPriorityPerks({ config, priorities, currentPath, purchasedPerks, _depth: _depth + 1 }, { actor, options });
+  if (!startingPerk) return handleNoPriorityPerks({ config, priorities, currentPath, purchasedPerks, _depth: _depth + 1, alreadyPurchased }, { actor, options });
 
   switch (config.entry.mode) {
     case "choice": {
@@ -132,7 +134,7 @@ function handlePriorityPerks({
       if (!entryRoot) return [null];
       const baseNodes = purchasedPerks?.length ? purchasedPerks : [entryRoot];
       const path = (() => {
-        const path = baseNodes.reduce(reducePath(graph, startingPerk, config, actor, options), undefined);
+        const path = baseNodes.reduce(reducePath(graph, startingPerk, config, actor, options, alreadyPurchased), undefined);
         if (!path) {
           // No valid path was found to this node period. It is impossible to reach this node.
           if (path !== null) return null;
@@ -144,7 +146,7 @@ function handlePriorityPerks({
             const alternative = alternatives.shift();
             if (!alternative) continue;
             visited.add(alternative.id);
-            const path = baseNodes.reduce(reducePath(graph, alternative, config, actor, options), undefined);
+            const path = baseNodes.reduce(reducePath(graph, alternative, config, actor, options, alreadyPurchased), undefined);
             if (path) return path
 
             alternatives.push(...Array.from(alternative.data.connected).flatMap(c => graph.getNode(c) ?? []).filter(n => !visited.has(n.id)));
@@ -164,10 +166,14 @@ function handlePriorityPerks({
           }
         }
 
+        for (const perk of path.path) {
+          alreadyPurchased.add(perk.id);
+        }
+
         if (leftoverAP > 0) {
           const newConfig = Object.assign({}, config, { points: { ap: leftoverAP, rv: leftoverRV } } satisfies Partial<GeneratorConfig>);
           const newPerkPriorities = priorities.perk.slice(1);
-          return handlePriorityPerks({ config: newConfig, priorities: { ...priorities, perk: newPerkPriorities }, currentPath: currentPath?.length ? [...currentPath, path] : [path], purchasedPerks: purchasedPerks?.length ? [...purchasedPerks, ...path.path] : path.path, _depth: 0 }, { actor, options });
+          return handlePriorityPerks({ config: newConfig, priorities: { ...priorities, perk: newPerkPriorities }, currentPath: currentPath?.length ? [...currentPath, path] : [path], purchasedPerks: purchasedPerks?.length ? [...purchasedPerks, ...path.path] : path.path, _depth: 0, alreadyPurchased }, { actor, options });
         }
       }
       return currentPath?.length ? [[...currentPath, path ?? []].flat()] : [path ? [path] : null];
@@ -175,7 +181,7 @@ function handlePriorityPerks({
     case "random": {
       const path = (() => {
         const baseNodes = purchasedPerks?.length ? purchasedPerks : [graph.rootNodes[Math.floor(Math.random() * graph.rootNodes.length)]]
-        const path = baseNodes.reduce(reducePath(graph, startingPerk, config, actor, options), undefined);
+        const path = baseNodes.reduce(reducePath(graph, startingPerk, config, actor, options, alreadyPurchased), undefined);
         if (!path) {
           // No valid path was found to this node period. It is impossible to reach this node.
           if (path !== null) return null;
@@ -187,7 +193,7 @@ function handlePriorityPerks({
             const alternative = alternatives.shift();
             if (!alternative) continue;
             visited.add(alternative.id);
-            const path = baseNodes.reduce(reducePath(graph, alternative, config, actor, options), undefined);
+            const path = baseNodes.reduce(reducePath(graph, alternative, config, actor, options, alreadyPurchased), undefined);
             if (path) return path
 
             alternatives.push(...Array.from(alternative.data.connected).flatMap(c => graph.getNode(c) ?? []).filter(n => !visited.has(n.id)));
@@ -207,10 +213,14 @@ function handlePriorityPerks({
           }
         }
 
+        for (const perk of path.path) {
+          alreadyPurchased.add(perk.id);
+        }
+
         if (leftoverAP > 0) {
           const newConfig = Object.assign({}, config, { points: { ap: leftoverAP, rv: leftoverRV } } satisfies Partial<GeneratorConfig>);
           const newPerkPriorities = priorities.perk.slice(1);
-          return handlePriorityPerks({ config: newConfig, priorities: { ...priorities, perk: newPerkPriorities }, currentPath: currentPath?.length ? [...currentPath, path] : [path], purchasedPerks: purchasedPerks?.length ? [...purchasedPerks, ...path.path] : path.path, _depth: _depth + 1 }, { actor, options });
+          return handlePriorityPerks({ config: newConfig, priorities: { ...priorities, perk: newPerkPriorities }, currentPath: currentPath?.length ? [...currentPath, path] : [path], purchasedPerks: purchasedPerks?.length ? [...purchasedPerks, ...path.path] : path.path, _depth: _depth + 1, alreadyPurchased }, { actor, options });
         }
       }
 
@@ -219,7 +229,7 @@ function handlePriorityPerks({
     case "best": {
       const path = (() => {
         const baseNodes = purchasedPerks?.length ? purchasedPerks : graph.rootNodes;
-        const path = baseNodes.reduce(reducePath(graph, startingPerk, config, actor, options), undefined);
+        const path = baseNodes.reduce(reducePath(graph, startingPerk, config, actor, options, alreadyPurchased), undefined);
         if (!path) {
           // No valid path was found to this node period. It is impossible to reach this node.
           if (path !== null) return null;
@@ -231,7 +241,7 @@ function handlePriorityPerks({
             const alternative = alternatives.shift();
             if (!alternative) continue;
             visited.add(alternative.id);
-            const path = baseNodes.reduce(reducePath(graph, alternative, config, actor, options), undefined);
+            const path = baseNodes.reduce(reducePath(graph, alternative, config, actor, options, alreadyPurchased), undefined);
             if (path) return path
 
             alternatives.push(...Array.from(alternative.data.connected).flatMap(c => graph.getNode(c) ?? []).filter(n => !visited.has(n.id)));
@@ -251,10 +261,14 @@ function handlePriorityPerks({
           }
         }
 
+        for (const perk of path.path) {
+          alreadyPurchased.add(perk.id);
+        }
+
         if (leftoverAP > 0) {
           const newConfig = Object.assign({}, config, { points: { ap: leftoverAP, rv: leftoverRV } } satisfies Partial<GeneratorConfig>);
           const newPerkPriorities = priorities.perk.slice(1);
-          return handlePriorityPerks({ config: newConfig, priorities: { ...priorities, perk: newPerkPriorities }, currentPath: currentPath?.length ? [...currentPath, path] : [path], purchasedPerks: purchasedPerks?.length ? [...purchasedPerks, ...path.path] : path.path, _depth: _depth + 1 }, { actor, options });
+          return handlePriorityPerks({ config: newConfig, priorities: { ...priorities, perk: newPerkPriorities }, currentPath: currentPath?.length ? [...currentPath, path] : [path], purchasedPerks: purchasedPerks?.length ? [...purchasedPerks, ...path.path] : path.path, _depth: _depth + 1, alreadyPurchased }, { actor, options });
         }
       }
 
@@ -265,18 +279,19 @@ function handlePriorityPerks({
   return [null];
 }
 
-function handleNoPriorityPerks({ config, priorities, currentPath, purchasedPerks, oldNodesByArchetype, triedArchetypes, _depth = 0 }: {
+function handleNoPriorityPerks({ config, priorities, currentPath, purchasedPerks, oldNodesByArchetype, triedArchetypes, alreadyPurchased, _depth = 0 }: {
   config: GeneratorConfig,
   priorities: { [K in PriorityOrderType]: PriorityOrder[K][] },
   currentPath?: PathResult<PerkNodeData>[],
   purchasedPerks?: Node<PerkNodeData>[],
   oldNodesByArchetype?: Record<string, Node<PerkNodeData>[]>,
   triedArchetypes?: Set<string>,
+  alreadyPurchased: Set<NodeId>,
   _depth?: number
 }, { actor, options }: { actor: Actor, options: string[] }): PerkGeneratorResult {
   if (_depth > 500) return currentPath?.length ? [currentPath] : [null];
   // If there are any perk priorities, we need to handle them first.
-  if (priorities.perk.length) return handlePriorityPerks({ config, priorities, currentPath, purchasedPerks, _depth: _depth + 1 }, { actor, options });
+  if (priorities.perk.length) return handlePriorityPerks({ config, priorities, currentPath, purchasedPerks, _depth: _depth + 1, alreadyPurchased }, { actor, options });
   // If there aren't, and there are no other priorities, stop generating.
   if (!priorities.arena.length && !priorities.approach.length && !priorities.archetype.length && !priorities.trait.length) return currentPath?.length ? [currentPath] : [null];
 
@@ -307,7 +322,7 @@ function handleNoPriorityPerks({ config, priorities, currentPath, purchasedPerks
     if (priority > best.priority) return best;
     return { nodes: [...best.nodes, node], priority };
   }, { nodes: [], priority: Number.POSITIVE_INFINITY } as { nodes: Node<PerkNodeData>[], priority: number }).nodes.reduce((nodes, node) => {
-    const archetype = (["mobility", "stat ace"].includes(node.data.perk.system.design.archetype?.toLowerCase()) ? "none" : node.data.perk.system.design.archetype) || "none";
+    const archetype = (["mobility", "stat-ace"].includes(node.data.perk.system.design.archetype?.toLowerCase()) ? "none" : node.data.perk.system.design.archetype) || "none";
     if (triedArchetypes?.has(archetype)) return nodes;
     nodes[archetype] ??= [];
     nodes[archetype].push(node);
@@ -327,24 +342,24 @@ function handleNoPriorityPerks({ config, priorities, currentPath, purchasedPerks
 
   if (!bestNodes.archetype.length && !bestNodes.none.length) {
     filterOutPriority();
-    return handleNoPriorityPerks({ config, priorities, currentPath, purchasedPerks, _depth: _depth + 1 }, { actor, options });
+    return handleNoPriorityPerks({ config, priorities, currentPath, purchasedPerks, _depth: _depth + 1, alreadyPurchased }, { actor, options });
   }
 
   const nodes = bestNodes.archetype.length ? bestNodes.archetype : bestNodes.none;
 
   const paths = nodes.flatMap(node => {
-    const path = baseNodes.reduce(reducePath(graph, node, config, actor, options), undefined);
+    const path = baseNodes.reduce(reducePath(graph, node, config, actor, options, alreadyPurchased), undefined);
     return path ? path : [];
   });
   if (!paths.length || paths.every(p => p.length === 0)) {
     const oldNodesByArchetype = bestNodesByArchetype;
     const archetype = bestNodes.archetype.length ? bestNodes.archetype[0].data.perk.system.design.archetype : "none";
     delete oldNodesByArchetype[archetype];
-    return handleNoPriorityPerks({ config, priorities, currentPath, purchasedPerks, oldNodesByArchetype, triedArchetypes: new Set([...(triedArchetypes ?? []), archetype]), _depth: _depth + 1 }, { actor, options });
+    return handleNoPriorityPerks({ config, priorities, currentPath, purchasedPerks, oldNodesByArchetype, triedArchetypes: new Set([...(triedArchetypes ?? []), archetype]), _depth: _depth + 1, alreadyPurchased }, { actor, options });
   }
 
   const bestPath = paths.reduce((bestPath, path) => {
-    if(path.length === 0) return bestPath;
+    if (path.length === 0) return bestPath;
     if (!bestPath) {
       if (config.points.ap) {
         if (path.cost > config.points.ap) return bestPath ?? null;
@@ -409,7 +424,7 @@ function handleNoPriorityPerks({ config, priorities, currentPath, purchasedPerks
   }, undefined as PathResult<PerkNodeData> | undefined | null);
   if (!bestPath?.length) {
     filterOutPriority();
-    return handleNoPriorityPerks({ config, priorities, currentPath, purchasedPerks, _depth: _depth + 1 }, { actor, options });
+    return handleNoPriorityPerks({ config, priorities, currentPath, purchasedPerks, _depth: _depth + 1, alreadyPurchased }, { actor, options });
   }
 
   const leftoverAP = config.points.ap - bestPath.cost;
@@ -422,6 +437,10 @@ function handleNoPriorityPerks({ config, priorities, currentPath, purchasedPerks
     }
   }
 
+  for (const perk of bestPath.path) {
+    alreadyPurchased.add(perk.id);
+  }
+
   if (leftoverAP > 0) {
     const newConfig = Object.assign({}, config, { points: { ap: leftoverAP, rv: leftoverRV } } satisfies Partial<GeneratorConfig>);
     const oldNodesByArchetype = bestNodesByArchetype;
@@ -430,15 +449,15 @@ function handleNoPriorityPerks({ config, priorities, currentPath, purchasedPerks
       oldNodesByArchetype[archetype] = oldNodesByArchetype[archetype]?.filter(n => n.id !== perk.id);
     }
 
-    return handleNoPriorityPerks({ config: newConfig, priorities, currentPath: currentPath?.length ? [...currentPath, bestPath] : [bestPath], purchasedPerks: purchasedPerks?.length ? [...purchasedPerks, ...bestPath.path] : bestPath.path, oldNodesByArchetype, _depth: 0 }, { actor, options });
+    return handleNoPriorityPerks({ config: newConfig, priorities, currentPath: currentPath?.length ? [...currentPath, bestPath] : [bestPath], purchasedPerks: purchasedPerks?.length ? [...purchasedPerks, ...bestPath.path] : bestPath.path, oldNodesByArchetype, _depth: 0, alreadyPurchased }, { actor, options });
   }
 
   return currentPath?.length ? [[...currentPath, bestPath]] : [[bestPath]];
 }
 
-function reducePath<NodeData extends PerkNodeData = PerkNodeData, LinkData = unknown>(graph: Graph<PerkNodeData, LinkData>, from: Node<NodeData, LinkData>, config: GeneratorConfig, actor: Actor, options: string[]) {
+function reducePath<NodeData extends PerkNodeData = PerkNodeData, LinkData = unknown>(graph: Graph<PerkNodeData, LinkData>, from: Node<NodeData, LinkData>, config: GeneratorConfig, actor: Actor, options: string[], alreadyPurchased: Set<NodeId>) {
   function pathReducer(bestPath: PathResult<NodeData, LinkData> | undefined | null, to: Node<NodeData, LinkData>): PathResult<NodeData, LinkData> | null | undefined {
-    const path = graph.findPath(from.id, to.id, config, { actor, options }) as PathResult<NodeData, LinkData>;
+    const path = graph.findPath(from.id, to.id, config, { actor, options, alreadyPurchased }) as PathResult<NodeData, LinkData>;
     if (!bestPath) {
       if (config.points.ap) {
         if (path.cost > config.points.ap) return bestPath ?? null;

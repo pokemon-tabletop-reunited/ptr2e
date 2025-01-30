@@ -531,7 +531,7 @@ export class nba<NodeData extends PerkNodeData = PerkNodeData, LinkData = unknow
             additionalSpending += requiredPoints;
             results.push({skill, requiredPoints});
           }
-          if(valid) {
+          if(valid && results.length) {
             if(argument === "or") {
               // Return random result
               return [results[Math.floor(Math.random() * results.length)]];
