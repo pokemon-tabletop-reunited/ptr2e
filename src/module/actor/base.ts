@@ -745,30 +745,63 @@ class ActorPTR2e<
     return stat.value * stageModifier();
   }
 
-  async applyTickDamage({ ticks, apply, shield }: { ticks: number, apply: false, shield?: boolean }): Promise<{ applied: number, update: Record<string, unknown> }>;
-  async applyTickDamage({ ticks, apply, shield }: { ticks: number, apply: true, shield?: boolean }): Promise<{ applied: number, message: ChatMessagePTR2e }>;
-  async applyTickDamage({ ticks, apply, shield }: { ticks: number, apply?: boolean, shield?: boolean }): Promise<{ applied: number, update?: Record<string, unknown>, message?: ChatMessagePTR2e }>;
-  async applyTickDamage({ ticks, apply = true, shield = false }: { ticks: number, apply?: boolean, shield?: boolean }): Promise<{ applied: number, update?: Record<string, unknown>, message?: ChatMessagePTR2e }> {
+  async applyTickDamage({ ticks, apply, shield, pp }: { ticks: number, apply: false, shield?: boolean, pp?: boolean }): Promise<{ applied: number, update: Record<string, unknown> }>;
+  async applyTickDamage({ ticks, apply, shield, pp }: { ticks: number, apply: true, shield?: boolean, pp?: boolean }): Promise<{ applied: number, message: ChatMessagePTR2e }>;
+  async applyTickDamage({ ticks, apply, shield, pp }: { ticks: number, apply?: boolean, shield?: boolean, pp?: boolean }): Promise<{ applied: number, update?: Record<string, unknown>, message?: ChatMessagePTR2e }>;
+  async applyTickDamage({ ticks, apply = true, shield = false, pp = false }: { ticks: number, apply?: boolean, shield?: boolean, pp?: boolean }): Promise<{ applied: number, update?: Record<string, unknown>, message?: ChatMessagePTR2e }> {
     const isDamage = ticks < 0;
-    const amount = Math.floor((this.system.health.max / 16) * Math.abs(ticks))
-    const applied = shield
-      ? Math.min(amount || 0, isDamage ? this.system.shield.value : Infinity)
-      : Math.min(amount || 0, isDamage ? this.system.health.value : this.system.health.max - this.system.health.value);
+    if (!pp) {
+      const amount = Math.floor((this.system.health.max / 16) * Math.abs(ticks))
+      const applied = shield
+        ? Math.min(amount || 0, isDamage ? this.system.shield.value : Infinity)
+        : Math.min(amount || 0, isDamage ? this.system.health.value : this.system.health.max - this.system.health.value);
 
-    const update = shield
-      ? {
-        "system.shield.value": Math.max(
-          this.system.shield.value - (isDamage ? applied : -applied),
-          0
-        )
+      const update = shield
+        ? {
+          "system.shield.value": Math.max(
+            this.system.shield.value - (isDamage ? applied : -applied),
+            0
+          )
+        }
+        : {
+          "system.health.value": Math.clamp(
+            this.system.health.value + (isDamage ? -amount : amount),
+            0,
+            this.system.health.max
+          )
+        } as Record<string, unknown>;
+      if (!apply) {
+        update["_id"] = this.id;
+        return { applied, update };
       }
-      : {
-        "system.health.value": Math.clamp(
-          this.system.health.value + (isDamage ? -amount : amount),
-          0,
-          this.system.health.max
-        )
-      } as Record<string, unknown>;
+
+      await this.update(update);
+
+      return {
+        applied,
+        //@ts-expect-error - Chat messages have not been properly defined yet
+        message: await ChatMessagePTR2e.create({
+          type: "damage-applied",
+          system: {
+            damageApplied: isDamage ? applied : -applied,
+            shieldApplied: shield,
+            target: this.uuid
+          }
+        })
+      }
+    }
+
+    const amount = Math.floor((this.system.powerPoints.max / 16) * Math.abs(ticks));
+    const applied = Math.min(amount || 0, isDamage ? this.system.powerPoints.value : this.system.powerPoints.max - this.system.powerPoints.value);
+
+    const update = {
+      "system.powerPoints.value": Math.clamp(
+        this.system.powerPoints.value + (isDamage ? -amount : amount),
+        0,
+        this.system.powerPoints.max
+      )
+    } as Record<string, unknown>;
+
     if (!apply) {
       update["_id"] = this.id;
       return { applied, update };
@@ -783,8 +816,8 @@ class ActorPTR2e<
         type: "damage-applied",
         system: {
           damageApplied: isDamage ? applied : -applied,
-          shieldApplied: shield,
-          target: this.uuid
+          target: this.uuid,
+          ppApplied: true
         }
       })
     }
@@ -1708,12 +1741,12 @@ class ActorPTR2e<
       if (oldEffect) {
         acc.stacksUpdated.push(oldEffect.uuid);
       } else {
-        if(effect.type !== "advancement") acc.notApplied.push(effect);
+        if (effect.type !== "advancement") acc.notApplied.push(effect);
       }
       return acc;
     }, { notApplied: [] as ActiveEffectPTR2e[], stacksUpdated: [] as string[] });
 
-    if(!effects.length && !stacksUpdated.length && !notApplied.length) return;
+    if (!effects.length && !stacksUpdated.length && !notApplied.length) return;
 
     await ChatMessage.create({
       content: effects.length
