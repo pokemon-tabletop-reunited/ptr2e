@@ -837,7 +837,7 @@ body .application.sheet .form-group {
   padding: 0.5rem;
 }
 .application.sheet.actor.v2 .window-content .tab.active[data-tab="overview"] aside.stats-chart-aside fieldset {
-  background: linear-gradient(to right, rgba(7, 7, 10, 0.93), rgba(19, 17, 31, 0.95));
+  background: var(--appv2-background);
   border-radius: 8px;
   border: 1px solid var(--border-theme-color);
   display: flex;
@@ -869,7 +869,6 @@ body .application.sheet .form-group {
   padding: 0.5rem;
 }
 .application.sheet.actor.v2 .window-content .tab.active[data-tab="overview"] aside.effectiveness fieldset {
-  background: linear-gradient(to right, rgba(7, 7, 10, 0.93), rgba(19, 17, 31, 0.95));
   border-radius: 8px;
   border: 1px solid var(--border-theme-color);
   display: flex;
@@ -1131,6 +1130,11 @@ body .application.sheet .form-group {
 }
 .application.sheet.actor.v2 .window-content .tab.active .effects-display {
   grid-area: span 5 / span 3;
+}
+.application.sheet.actor.v2 .window-content .tab.active .effects-display img {
+  background: black;
+  border-radius: 25%;
+  padding: 0.1rem;
 }
 .application.sheet.actor.v2 .window-content .tab.active .toggles-display {
   grid-area: 1 / 4 / span 5 / span 2;
@@ -3867,7 +3871,7 @@ body .application.sheet .form-group {
 }
 .application.sheet.stats-form .window-content aside[data-application-part="statsChart"] .stats-chart-aside {
   align-items: center;
-  background: linear-gradient(to right, rgba(7, 7, 10, 0.93), rgba(19, 17, 31, 0.95));
+  background: var(--appv2-background);
   border-radius: 10px;
   margin: 0.25rem;
 }
