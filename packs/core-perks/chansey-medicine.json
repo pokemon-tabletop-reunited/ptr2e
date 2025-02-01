@@ -85,7 +85,12 @@
     ],
     "originSlug": "chansey-medicine",
     "global": true,
-    "webs": []
+    "webs": [],
+    "design": {
+      "arena": "mental",
+      "approach": "resilience",
+      "archetype": "healer"
+    }
   },
   "effects": [
     {
@@ -114,7 +119,14 @@
             "onDeleteActions": {
               "grantee": "detach",
               "granter": "cascade"
-            }
+            },
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "reevaluateOnUpdate": false,
+            "inMemoryOnly": false,
+            "alterations": [],
+            "track": false
           },
           {
             "type": "grant-item",
@@ -126,7 +138,14 @@
             "onDeleteActions": {
               "grantee": "detach",
               "granter": "cascade"
-            }
+            },
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "reevaluateOnUpdate": false,
+            "inMemoryOnly": false,
+            "alterations": [],
+            "track": false
           }
         ],
         "slug": null,
