@@ -63,13 +63,12 @@
     "webs": [
       "Compendium.ptr2e.core-species.Item.DN39HBQfR7lFM73H"
     ],
-    "global": false,
     "slug": "dizzy-daft",
     "autoUnlock": [],
     "design": {
-      "arena": "physical",
-      "approach": "power",
-      "archetype": ""
+      "arena": "mental",
+      "approach": "resilience",
+      "archetype": "species"
     }
   },
   "img": "systems/ptr2e/img/perk-icons/Breeder.svg",
@@ -90,12 +89,20 @@
             "affects": "self",
             "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "alterations": []
           },
           {
             "type": "roll-option",
             "value": "damage:affliction:confused",
-            "domain": "immunities"
+            "domain": "immunities",
+            "key": "",
+            "mode": 2,
+            "priority": null,
+            "predicate": [],
+            "ignored": false,
+            "suboptions": [],
+            "state": true
           }
         ],
         "slug": null,
