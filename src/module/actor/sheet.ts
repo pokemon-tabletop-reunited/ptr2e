@@ -35,6 +35,7 @@ import Sortable from "sortablejs";
 import PartySheetPTR2e from "@module/apps/party-sheet.ts";
 import { ToggleComponent } from "./components/toggle-component.ts";
 import { PerkWebApp } from "@module/apps/perk-web/perk-web-v2.ts";
+import { DexApp } from "@module/apps/dex.ts";
 
 class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixin(
   ActorSheetV2Expanded
@@ -154,6 +155,9 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
         "rest": function (this: ActorSheetPTRV2) {
           const toHeal = this.actor?.party ? [this.actor.party.owner!, ...(this.actor.party.party ?? [])] : [this.actor];
           new RestApp(this.document.name, toHeal).render(true);
+        },
+        "open-dex": async function (this: ActorSheetPTRV2) {
+          new DexApp(this.actor).render(true);
         },
         "add-clock": ActorSheetPTRV2.#onAddClock,
         "open-tutor-list": function (this: ActorSheetPTRV2) {

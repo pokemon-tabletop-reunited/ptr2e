@@ -263,25 +263,29 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
           hint: "PTR2E.FIELDS.details.alliance.hint",
         }),
         size: new fields.SchemaField({
-          height: new fields.NumberField({required: true, initial: 0, label: "PTR2E.FIELDS.size.height.label", hint: "PTR2E.FIELDS.size.height.hint"}),
-          weight: new fields.NumberField({required: true, initial: 0, label: "PTR2E.FIELDS.size.weight.label", hint: "PTR2E.FIELDS.size.weight.hint"}),
-          heightClass: new fields.NumberField({required: true, initial: 0, min: 0, max: 7}),
-          weightClass: new fields.NumberField({required: true, initial: 1, min: 1, max: 16}),
+          height: new fields.NumberField({ required: true, initial: 0, label: "PTR2E.FIELDS.size.height.label", hint: "PTR2E.FIELDS.size.height.hint" }),
+          weight: new fields.NumberField({ required: true, initial: 0, label: "PTR2E.FIELDS.size.weight.label", hint: "PTR2E.FIELDS.size.weight.hint" }),
+          heightClass: new fields.NumberField({ required: true, initial: 0, min: 0, max: 7 }),
+          weightClass: new fields.NumberField({ required: true, initial: 1, min: 1, max: 16 }),
         }),
-        biography: new fields.HTMLField({required: true, initial: "", label: "PTR2E.FIELDS.details.biography.label", hint: "PTR2E.FIELDS.details.biography.hint"}),
+        biography: new fields.HTMLField({ required: true, initial: "", label: "PTR2E.FIELDS.details.biography.label", hint: "PTR2E.FIELDS.details.biography.hint" }),
+        dex: new CollectionField(new fields.SchemaField({
+          slug: new fields.StringField({ required: true, nullable: false}),
+          state: new fields.StringField({ required: true, nullable: false, initial: "unknown", choices: ["unknown", "seen", "caught", "shiny"] }),
+        }))
       }),
       inventory: new fields.SchemaField({
         held: new fields.SchemaField({
-          max: new fields.NumberField({required: true, initial: 0, min: 0, label: "PTR2E.FIELDS.inventory.held.max.label", hint: "PTR2E.FIELDS.inventory.held.max.hint"}),
+          max: new fields.NumberField({ required: true, initial: 0, min: 0, label: "PTR2E.FIELDS.inventory.held.max.label", hint: "PTR2E.FIELDS.inventory.held.max.hint" }),
         }),
         worn: new fields.SchemaField({
-          max: new fields.NumberField({required: true, initial: 0, min: 0, label: "PTR2E.FIELDS.inventory.worn.max.label", hint: "PTR2E.FIELDS.inventory.worn.max.hint"}),
+          max: new fields.NumberField({ required: true, initial: 0, min: 0, label: "PTR2E.FIELDS.inventory.worn.max.label", hint: "PTR2E.FIELDS.inventory.worn.max.hint" }),
         }),
         accessory: new fields.SchemaField({
-          max: new fields.NumberField({required: true, initial: 0, min: 0, label: "PTR2E.FIELDS.inventory.accessory.max.label", hint: "PTR2E.FIELDS.inventory.accessory.max.hint"}),
+          max: new fields.NumberField({ required: true, initial: 0, min: 0, label: "PTR2E.FIELDS.inventory.accessory.max.label", hint: "PTR2E.FIELDS.inventory.accessory.max.hint" }),
         }),
         belt: new fields.SchemaField({
-          max: new fields.NumberField({required: true, initial: 0, min: 0, label: "PTR2E.FIELDS.inventory.belt.max.label", hint: "PTR2E.FIELDS.inventory.belt.max.hint"}),
+          max: new fields.NumberField({ required: true, initial: 0, min: 0, label: "PTR2E.FIELDS.inventory.belt.max.label", hint: "PTR2E.FIELDS.inventory.belt.max.hint" }),
         })
       })
     };
@@ -329,7 +333,7 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
     super.prepareBaseData();
     this._initializeModifiers();
 
-    for(const key in this.inventory) {
+    for (const key in this.inventory) {
       this.inventory[key].used = 0;
       this.inventory[key].max = 0;
     }
@@ -337,7 +341,7 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
     this.inventory.accessory.max++;
     this.inventory.belt.max++;
 
-    for(const k in this.attributes) {
+    for (const k in this.attributes) {
       const key = k as keyof Attributes;
       Object.defineProperty(this.attributes[key], "final", {
         get: () => key === "hp" ? this.attributes[key].value : this.parent.calcStatTotal(this.attributes[key], false),
@@ -396,6 +400,8 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
 
     this.details.size.heightClass = SpeciesSystemModel.getSpeciesSize(this.details.size.height || this.parent.species?.size.height || 0, this.parent.species?.size.type as "height" | "quad" | "length" || "height").sizeClass;
     this.details.size.weightClass = this.calculateWeightClass(this.details.size.weight || this.parent.species?.size.weight || 0);
+
+    this.details.caught = this.details.dex.filter(d => d.state === "caught" || d.state === "shiny").length;
   }
 
   private calculateWeightClass(weight: number) {
@@ -460,7 +466,7 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
   }
 
   _prepareSpeciesData() {
-    if(!this.parent.species?.prepareBaseData) return;
+    if (!this.parent.species?.prepareBaseData) return;
     this.parent.species.prepareBaseData();
 
     // Add species traits to actor traits
@@ -500,8 +506,8 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
     for (const k in this.attributes) {
       const key = k as keyof Attributes;
       if (this.parent.species?.stats[key]) {
-        if(this.parent.isHumanoid()) this.attributes[key].base ??= this.parent.species.stats[key];
-        if(this.parent.isPokemon()) this.attributes[key].base = this.parent.species.stats[key];
+        if (this.parent.isHumanoid()) this.attributes[key].base ??= this.parent.species.stats[key];
+        if (this.parent.isPokemon()) this.attributes[key].base = this.parent.species.stats[key];
       }
       if (this.attributes[key].base === undefined) this.attributes[key].base = 40;
       this.attributes[key].value = this._calculateStatTotal(this.attributes[key]);
@@ -610,7 +616,7 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
       this.parent.rollOptions.addOption("immunities", "affliction:paralysis");
     }
 
-    if(!isNaN(Number(this.modifiers.movement)) && this.modifiers.movement !== 0) {
+    if (!isNaN(Number(this.modifiers.movement)) && this.modifiers.movement !== 0) {
       for (const movement of Object.values(this.movement)) {
         movement.value = Math.max(1, movement.value + Number(this.modifiers.movement));
       }
@@ -619,10 +625,10 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
     this.details.size.heightClass = Math.clamp(SpeciesSystemModel.getSpeciesSize(this.details.size.height || this.parent.species?.size.height || 0, this.parent.species?.size.type as "height" | "quad" | "length" || "height").sizeClass + (this.modifiers.heightClass ?? 0), 0, 8)
     this.details.size.weightClass = Math.clamp(this.calculateWeightClass(this.details.size.weight || this.parent.species?.size.weight || 0) + (this.modifiers.weightClass ?? 0), 1, 16)
 
-    if(this.traits.has("ace")) {
+    if (this.traits.has("ace")) {
       this.inventory.belt.max += 2;
     }
-    if(this.traits.has("wielder")) {
+    if (this.traits.has("wielder")) {
       this.inventory.held.max++;
     }
   }
@@ -700,6 +706,8 @@ interface ActorSystemPTR2e extends ModelPropsFromSchema<ActorSystemSchema> {
       weightClass: number;
     }
     biography: string;
+    dex: Collection<{ slug: string, state: "unknown" | "seen" | "caught" | "shiny" }>;
+    caught: number;
   }
 
   inventory: {

@@ -7949,3 +7949,48 @@ ul.item-list.result-list li.item.rarity-unique {
 .application.sheet.perk-config-sheet .window-content footer button {
   flex: 0 0 35%;
 }
+.application.sheet.dex-sheet .window-content {
+  padding: 0;
+}
+.application.sheet.dex-sheet .window-content .dex {
+  padding: 0.5rem;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: center;
+  text-align: center;
+  overflow-y: auto;
+}
+.application.sheet.dex-sheet .window-content .dex .entry {
+  flex: 0 0 64px;
+  height: 64px;
+  width: 64px;
+  border: 3px solid var(--border-theme-color);
+  border-radius: 50%;
+  overflow: hidden;
+  background: color-mix(in srgb, white 40%, var(--user-color));
+  padding: 0.25rem;
+}
+.application.sheet.dex-sheet .window-content .dex .entry img {
+  border: unset;
+  border-radius: 0;
+  object-fit: contain;
+  height: 100%;
+  width: 100%;
+}
+.application.sheet.dex-sheet .window-content .dex .entry[data-state="unknown"] {
+  border-color: #4d4c4c;
+}
+.application.sheet.dex-sheet .window-content .dex .entry[data-state="unknown"] img {
+  filter: brightness(0);
+}
+.application.sheet.dex-sheet .window-content .dex .entry[data-state="seen"] img {
+  filter: blur(3px);
+}
+.application.sheet.dex-sheet .window-content .dex .entry[data-state="caught"] {
+  border-color: #379762;
+}
+.application.sheet.dex-sheet .window-content .dex .entry[data-state="shiny"] {
+  border-color: #f5c42e;
+}
