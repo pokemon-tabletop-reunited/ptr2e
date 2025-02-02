@@ -121,7 +121,7 @@ export class DexApp extends foundry.applications.api.HandlebarsApplicationMixin(
     }
 
     const source = this.actor.toObject().system.details.dex as unknown as { slug: string, state: "unknown" | "seen" | "caught" | "shiny" }[];
-    const index = source.findIndex(i => i.slug === slug);
+    const index = source.findIndex(i => i.slug === fullSlug);
 
     const newState = isLeftClick
       ? state === "seen"
