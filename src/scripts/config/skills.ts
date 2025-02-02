@@ -19,8 +19,7 @@ export function getInitialSkillList(): SkillPTR2e['_source'][] {
 }
 
 export function partialSkillToSkill(partialSkill: Partial<SkillPTR2e['_source']>): SkillPTR2e['_source'] {
-    const schema = SkillPTR2e.schema;
-    const initial = (schema.initial as () => SourceFromSchema<foundry.data.fields.DataSchema>)();
+    const initial = SkillPTR2e.schema.getInitialValue();
 
     if (!partialSkill.slug) throw new Error("Partial Skill is missing slug");
     return fu.mergeObject(initial, partialSkill) as SkillPTR2e['_source'];
