@@ -25,7 +25,7 @@ declare global {
         controls: SceneControls;
         items: TItemDirectory;
         notifications: Notifications;
-        settings: Settings;
+        settings: typeof Settings;
         sidebar: Sidebar;
         tables: RollTableDirectory;
         windows: Record<number, Application>;

@@ -4,3 +4,4 @@ export * as fields from "./fields.js";
 export * as sheets from "./sheets.js";
 export {instances} from "./instances.ts";
 export {parseHTML} from "./parse-html.ts";
+export * as sidebar from "./sidebar/index.js";

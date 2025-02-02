@@ -37,6 +37,7 @@ import { Habitats } from "./habitats.ts";
 import { HabitatRollTable } from "@system/habitat-table.ts";
 import { RollTableDirectoryPTR2e } from "@module/apps/sidebar/rolltables-directory.ts";
 import AdvancementActiveEffectSystem from "@module/effects/data/advancement.ts";
+import { SettingsSidebarPTR2e } from "@module/apps/sidebar/settings.ts";
 
 export const PTRCONFIG = {
   ActiveEffect: {
@@ -164,7 +165,7 @@ export const PTRCONFIG = {
     items: ItemDirectoryPTR2e,
     actors: ActorDirectoryPTR2e,
     compendium: CompendiumDirectoryPTR2e,
-    // settings: SettingsSidebarPTR2e,
+    settings: SettingsSidebarPTR2e,
     tables: RollTableDirectoryPTR2e
   },
   data: {

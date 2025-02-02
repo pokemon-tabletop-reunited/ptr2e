@@ -148,7 +148,7 @@ export class ApplicationV2<
      * The default configuration options which are assigned to every instance of this Application class.
      * @type {Omit<ApplicationConfiguration, uniqueId>}
      */
-    static DEFAULT_OPTIONS: Omit<ApplicationConfiguration, "uniqueId">;
+    static DEFAULT_OPTIONS: DeepPartial<Omit<ApplicationConfiguration, "uniqueId">>;
 
     /**
      * The sequence of rendering states that describe the Application life-cycle.

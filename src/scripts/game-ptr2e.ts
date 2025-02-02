@@ -59,15 +59,18 @@ const GamePTR = {
     // Initialize the text enricher
     TextEnricher.init();
 
-    const top = document.querySelector("#ui-top") as HTMLElement;
-    if (top) {
-      const clockTemplate = document.createElement("template");
-      clockTemplate.setAttribute("id", "ptr2e-clock-panel");
-      top?.insertAdjacentElement("afterend", clockTemplate);
-
+    const players = document.querySelector("#ui-left #ui-left-column-1 #players") as HTMLElement;
+    if(players) {
       const tokenTemplate = document.createElement("template");
       tokenTemplate.setAttribute("id", "ptr2e-token-panel");
-      top?.insertAdjacentElement("afterend", tokenTemplate);
+      players?.insertAdjacentElement("beforebegin", tokenTemplate);
+    }
+
+    const uiRight = document.querySelector("#ui-right-column-1") as HTMLElement;
+    if (uiRight) {
+      const clockTemplate = document.createElement("template");
+      clockTemplate.setAttribute("id", "ptr2e-clock-panel");
+      uiRight?.insertAdjacentElement("afterbegin", clockTemplate);
     }
 
     game.ptr = fu.mergeObject(game.ptr ?? {}, initData);

@@ -6232,20 +6232,18 @@ body .application.sheet .form-group {
   --checkbox-background-color: #3d343f;
 }
 .token-panel {
-  position: absolute;
-  right: 0;
-  bottom: 0;
+  position: relative;
   background: var(--appv2-background);
   color: var(--appv2-text-color);
-  margin: 0 15px 10px 0;
   pointer-events: all;
-  border-radius: 8px 8px 8px 0;
+  border-radius: 8px 8px 0 8px;
   border: 1px solid var(--border-theme-color);
   display: flex;
   flex-direction: column;
   word-wrap: break-word;
   width: 135px;
   z-index: 71;
+  font-size: var(--font-size-13);
 }
 .token-panel:has(template[data-application-part="info"]) {
   display: none !important;
@@ -6256,6 +6254,9 @@ body .application.sheet .form-group {
 .token-panel nav.tabs {
   order: 3;
   flex-direction: column;
+  gap: unset;
+  line-height: unset;
+  border: unset;
 }
 .token-panel nav.tabs a {
   padding: 0.25rem;
@@ -6267,14 +6268,14 @@ body .application.sheet .form-group {
   border-top: unset;
 }
 .token-panel nav.tabs a:last-child {
-  border-radius: 0 0 8px 0;
+  border-radius: 0 0 0 8px;
 }
 .token-panel .tab {
   position: absolute;
-  right: 100%;
+  left: 100%;
   bottom: -1px;
   background: var(--appv2-background);
-  border-radius: 8px 0px 0 8px;
+  border-radius: 0 8px 8px 0;
   border: 1px solid var(--border-theme-color);
   min-width: 150px;
 }
@@ -6296,31 +6297,15 @@ body .application.sheet .form-group {
   background: var(--appv2-background);
   border-top: 1px solid var(--border-theme-color);
 }
-.token-panel .tab.action-tab .attack-item:first-child .icon img,
-.token-panel .tab.skill-tab .attack-item:first-child .icon img,
-.token-panel .tab.action-tab .action-item:first-child .icon img,
-.token-panel .tab.skill-tab .action-item:first-child .icon img,
-.token-panel .tab.action-tab .skill-item:first-child .icon img,
-.token-panel .tab.skill-tab .skill-item:first-child .icon img {
-  border-radius: 8px 0 0 0;
-}
-.token-panel .tab.action-tab .attack-item:last-child .icon img,
-.token-panel .tab.skill-tab .attack-item:last-child .icon img,
-.token-panel .tab.action-tab .action-item:last-child .icon img,
-.token-panel .tab.skill-tab .action-item:last-child .icon img,
-.token-panel .tab.action-tab .skill-item:last-child .icon img,
-.token-panel .tab.skill-tab .skill-item:last-child .icon img {
-  border-radius: 0 0 0 8px;
-}
 .token-panel .tab.action-tab .attack-item .icon,
 .token-panel .tab.skill-tab .attack-item .icon,
 .token-panel .tab.action-tab .action-item .icon,
 .token-panel .tab.skill-tab .action-item .icon,
 .token-panel .tab.action-tab .skill-item .icon,
 .token-panel .tab.skill-tab .skill-item .icon {
-  flex: 0 0 32px;
-  height: 32px;
-  width: 32px;
+  flex: 0 0 28px;
+  height: 28px;
+  width: 28px;
   align-self: center;
   cursor: pointer;
 }
@@ -6393,29 +6378,17 @@ body .application.sheet .form-group {
 .token-panel .tab.action-tab .action-item:first-child,
 .token-panel .tab.skill-tab .action-item:first-child,
 .token-panel .tab.action-tab .skill-item:first-child,
-.token-panel .tab.skill-tab .skill-item:first-child,
-.token-panel .tab.action-tab .attack-item:first-child img,
-.token-panel .tab.skill-tab .attack-item:first-child img,
-.token-panel .tab.action-tab .action-item:first-child img,
-.token-panel .tab.skill-tab .action-item:first-child img,
-.token-panel .tab.action-tab .skill-item:first-child img,
-.token-panel .tab.skill-tab .skill-item:first-child img {
+.token-panel .tab.skill-tab .skill-item:first-child {
   border-top: unset;
-  border-radius: 8px 0 0 0;
+  border-radius: 0 0 0 8px;
 }
 .token-panel .tab.action-tab .attack-item:last-child,
 .token-panel .tab.skill-tab .attack-item:last-child,
 .token-panel .tab.action-tab .action-item:last-child,
 .token-panel .tab.skill-tab .action-item:last-child,
 .token-panel .tab.action-tab .skill-item:last-child,
-.token-panel .tab.skill-tab .skill-item:last-child,
-.token-panel .tab.action-tab .attack-item:last-child img,
-.token-panel .tab.skill-tab .attack-item:last-child img,
-.token-panel .tab.action-tab .action-item:last-child img,
-.token-panel .tab.skill-tab .action-item:last-child img,
-.token-panel .tab.action-tab .skill-item:last-child img,
-.token-panel .tab.skill-tab .skill-item:last-child img {
-  border-radius: 0 0 0 8px;
+.token-panel .tab.skill-tab .skill-item:last-child {
+  border-radius: 0 0 8px 0;
 }
 .token-panel .tab.action-tab .skill-item .icon,
 .token-panel .tab.skill-tab .skill-item .icon {
@@ -6447,9 +6420,9 @@ body .application.sheet .form-group {
   border-radius: 0 8px 0 0;
 }
 .token-panel .tab.effect-tab .effect .effect-icon {
-  flex: 0 0 32px;
-  height: 32px;
-  width: 32px;
+  flex: 0 0 28px;
+  height: 28px;
+  width: 28px;
   align-self: center;
 }
 .token-panel .tab.effect-tab .effect .effect-icon img {
@@ -6600,6 +6573,9 @@ body .application.sheet .form-group {
   -moz-user-select: text;
   -ms-user-select: text;
   user-select: text;
+}
+.info .system span.value {
+  text-align: right;
 }
 .ptr2e form .form-group {
   margin: 0.25rem;

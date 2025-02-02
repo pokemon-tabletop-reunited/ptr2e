@@ -11,7 +11,7 @@ export default class ClockPanel extends foundry.applications.api.HandlebarsAppli
   static override DEFAULT_OPTIONS = fu.mergeObject(
     super.DEFAULT_OPTIONS,
     {
-      classes: ["clock-panel sheet"],
+      classes: ["clock-panel", "sheet", "faded-ui"],
       tag: "aside",
       position: {
         width: 300,

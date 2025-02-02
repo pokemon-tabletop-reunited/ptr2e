@@ -6337,16 +6337,13 @@ body {
 }
 
 .token-panel {
-    position: absolute;
-    right: 0;
-    bottom: 0;
+    position: relative;
     background: var(--appv2-background);
     color: var(--appv2-text-color);
 
-    margin: 0 15px 10px 0;
     pointer-events: all;
 
-    border-radius: 8px 8px 8px 0;
+    border-radius: 8px 8px 0 8px;
     border: 1px solid var(--border-theme-color);
 
     display: flex;
@@ -6356,6 +6353,8 @@ body {
     width: 135px;
 
     z-index: 71;
+
+    font-size: var(--font-size-13);
 
     &:has(template[data-application-part="info"]) {
         display: none !important;
@@ -6369,6 +6368,10 @@ body {
         order: 3;
         flex-direction: column;
 
+        gap: unset;
+        line-height: unset;
+        border: unset;
+
         a {
             padding: 0.25rem;
             background: var(--appv2-background);
@@ -6380,18 +6383,18 @@ body {
             }
 
             &:last-child {
-                border-radius: 0 0 8px 0;
+                border-radius: 0 0 0 8px;
             }
         }
     }
 
     .tab {
         position: absolute;
-        right: 100%;
+        left: 100%;
         bottom: -1px;
         background: var(--appv2-background);
 
-        border-radius: 8px 0px 0 8px;
+        border-radius: 0 8px 8px 0;
         border: 1px solid var(--border-theme-color);
 
         min-width: 150px;
@@ -6408,18 +6411,10 @@ body {
                 flex-direction: row;
                 max-width: 150px;
 
-                &:first-child .icon img {
-                  border-radius: 8px 0 0 0;
-                }
-
-                &:last-child .icon img {
-                  border-radius: 0 0 0 8px;
-                }
-
                 .icon {
-                  flex: 0 0 32px;
-                  height: 32px;
-                  width: 32px;
+                  flex: 0 0 28px;
+                  height: 28px;
+                  width: 28px;
                   align-self: center;
 
                   cursor: pointer;
@@ -6468,13 +6463,13 @@ body {
 
                 border-top: 1px solid var(--border-theme-color);
 
-                &:first-child, &:first-child img{
+                &:first-child {
                     border-top: unset;
-                    border-radius: 8px 0 0 0;
+                    border-radius: 0 0 0 8px;
                 }
 
-                &:last-child, &:last-child img{
-                    border-radius: 0 0 0 8px;
+                &:last-child {
+                    border-radius: 0 0 8px 0;
                 }
             }
 
@@ -6512,9 +6507,9 @@ body {
                 }
 
                 .effect-icon {
-                    flex: 0 0 32px;
-                    height: 32px;
-                    width: 32px;
+                    flex: 0 0 28px;
+                    height: 28px;
+                    width: 28px;
                     align-self: center;
 
                     img {
@@ -6704,6 +6699,10 @@ body {
         -ms-user-select: text;
         user-select: text;
     }
+}
+
+.info .system span.value {
+  text-align: right;
 }
 
 .ptr2e {

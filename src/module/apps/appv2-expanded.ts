@@ -18,7 +18,7 @@ export class ApplicationV2Expanded<
 > extends foundry.applications.api.ApplicationV2<TConfiguration, TRenderOptions> {
   declare options: TConfiguration;
 
-  static override DEFAULT_OPTIONS: Omit<ApplicationConfigurationExpanded, "uniqueId"> =
+  static override DEFAULT_OPTIONS: DeepPartial<Omit<ApplicationConfigurationExpanded, "uniqueId">> =
     foundry.utils.mergeObject(foundry.applications.api.ApplicationV2.DEFAULT_OPTIONS, {
       dragDrop: [],
     });

@@ -89,8 +89,9 @@ export const Init: PTRHook = {
         //@ts-expect-error - Typing issue
         CONFIG.ui.tables = PTRCONFIG.ui.tables;
         CONFIG.ui.perksTab = PTRCONFIG.ui.perks;
-        CONFIG.ui.settings = PTRCONFIG.ui.settings;
       }
+      
+      CONFIG.ui.settings = PTRCONFIG.ui.settings;
 
       // Register custom sheets
       {

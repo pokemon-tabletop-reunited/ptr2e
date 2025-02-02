@@ -1,0 +1,1 @@
+export * as tabs from "./tabs/index.js";
