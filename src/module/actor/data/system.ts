@@ -267,7 +267,8 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
           weight: new fields.NumberField({required: true, initial: 0, label: "PTR2E.FIELDS.size.weight.label", hint: "PTR2E.FIELDS.size.weight.hint"}),
           heightClass: new fields.NumberField({required: true, initial: 0, min: 0, max: 7}),
           weightClass: new fields.NumberField({required: true, initial: 1, min: 1, max: 16}),
-        })
+        }),
+        biography: new fields.HTMLField({required: true, initial: "", label: "PTR2E.FIELDS.details.biography.label", hint: "PTR2E.FIELDS.details.biography.hint"}),
       }),
       inventory: new fields.SchemaField({
         held: new fields.SchemaField({
@@ -698,6 +699,7 @@ interface ActorSystemPTR2e extends ModelPropsFromSchema<ActorSystemSchema> {
       heightClass: number;
       weightClass: number;
     }
+    biography: string;
   }
 
   inventory: {

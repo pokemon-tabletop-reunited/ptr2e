@@ -273,8 +273,8 @@ body .application.sheet .form-group {
 .application.sheet.actor.v2 .window-content .tab.active {
   grid-area: main;
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-  grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: repeat(5, 1fr);
   overflow: hidden;
   height: 100%;
 }
@@ -306,8 +306,13 @@ body .application.sheet .form-group {
   height: 100%;
   gap: 0;
 }
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] .inventory-sidebar {
+  grid-area: 1 / 4 / span 5 / span 2;
+  display: flex;
+  flex-direction: column;
+}
 .application.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] .inventory-points {
-  grid-area: 1 / 4 / span 2 / span 2;
+  flex: 0 0 auto;
   padding: 0.5rem 0.5rem 0 0;
 }
 .application.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] .inventory-points fieldset {
@@ -320,7 +325,7 @@ body .application.sheet .form-group {
   text-align: center;
 }
 .application.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] .inventory-slots {
-  grid-area: 3 / 4 / span 2 / span 2;
+  flex: 0 0 auto;
   padding: 0 0.5rem 0.5rem 0;
 }
 .application.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] .inventory-slots fieldset {
@@ -987,6 +992,41 @@ body .application.sheet .form-group {
   align-items: center;
   margin-left: auto;
   gap: 5px;
+}
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="biography"] .free-form {
+  grid-area: 1 / 1 / span 3 / span 3;
+  display: flex;
+  flex-direction: column;
+}
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="biography"] .free-form .biography {
+  flex: 0 0 auto;
+  padding: 0.5rem;
+}
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="biography"] .right-side {
+  grid-area: 1 / 4 / span 5 / span 2;
+  display: flex;
+  flex-direction: column;
+}
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="biography"] .right-side .tools {
+  flex: 0 0 auto;
+  padding: 0.5rem 0.5rem 0 0;
+}
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="biography"] .right-side .settings {
+  flex: 0 0 auto;
+  padding-right: 0.5rem;
+}
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="biography"] .right-side .height-size {
+  flex: 0 0 auto;
+  padding: 0 0.5rem 0.5rem 0;
+}
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="biography"] .right-side .height-size .form-group label {
+  flex: 4;
+}
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="biography"] .right-side .height-size .form-group .form-fields {
+  flex: 3;
+}
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="biography"] .right-side .height-size .form-group input {
+  text-align: center;
 }
 .application.sheet.actor.v2 .window-content .tab.active .effects-display,
 .application.sheet.actor.v2 .window-content .tab.active .perks-display,

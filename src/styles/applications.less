@@ -318,8 +318,8 @@ body {
                 grid-area: main;
 
                 display: grid;
-                grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-                grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+                grid-template-columns: repeat(5, 1fr);
+                grid-template-rows: repeat(5, 1fr);
                 overflow: hidden;
                 height: 100%;
 
@@ -359,8 +359,14 @@ body {
                         gap: 0;
                     }
 
+                    .inventory-sidebar {
+                      grid-area: 1 / 4 / span 5 / span 2;
+                      display: flex;
+                      flex-direction: column;
+                    }
+
                     .inventory-points {
-                        grid-area: 1 / 4 / span 2 / span 2;
+                        flex: 0 0 auto;
                         padding: 0.5rem 0.5rem 0 0;
                         
                         fieldset {
@@ -376,7 +382,7 @@ body {
                     }
 
                     .inventory-slots {
-                      grid-area: 3 / 4 / span 2 / span 2;
+                      flex: 0 0 auto;
                       padding: 0 0.5rem 0.5rem 0;
 
                       fieldset {
@@ -1149,6 +1155,53 @@ body {
                             }
                         }
                     }
+                }
+
+                &[data-tab="biography"] {
+                  .free-form {
+                    grid-area: 1 / 1 / span 3 / span 3;
+                    display: flex;
+                    flex-direction: column;
+
+                    .biography {
+                      flex: 0 0 auto;
+                      padding: 0.5rem;
+                    }
+                  }
+
+                  .right-side {
+                    grid-area: 1 / 4 / span 5 / span 2;
+                    display: flex;
+                    flex-direction: column;
+
+                    .tools {
+                      flex: 0 0 auto;
+                      padding: 0.5rem 0.5rem 0 0;
+                    }
+
+                    .settings {
+                      flex: 0 0 auto;
+                      padding-right: 0.5rem;
+                    }
+
+                    .height-size {
+                      flex: 0 0 auto;
+                      padding: 0 0.5rem 0.5rem 0;
+
+                      .form-group {
+                        label {
+                          flex: 4;
+                        }
+                        .form-fields {
+                          flex: 3;
+                        }
+
+                        input {
+                          text-align: center;
+                        }
+                      }
+                    }
+                  }
                 }
 
                 .effects-display, .perks-display, .abilities-display, .toggles-display {

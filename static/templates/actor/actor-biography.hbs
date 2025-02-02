@@ -1,6 +1,73 @@
 <section class="tab sheet-body {{tabs.biography.cssClass}}" data-tab="biography" data-group="sheet">
-    <div class="scroll" style="grid-area: span 5 / span 5; align-items: center; place-content: center; font-size: xx-large;">
-      <span>The Biography tab</span>
-      <span>Will be added in a later build!</span>
+  <div class="free-form">
+    <div class="biography standard-form">
+      <fieldset>
+        <legend>{{localize "PTR2E.FIELDS.details.biography.label"}}</legend>
+        {{formInput fields.details.fields.biography enriched=enrichedBiography value=source.system.details.biography toggled=true localize=true}}
+        <p class="hint">{{localize "PTR2E.FIELDS.details.biography.hint"}}</p>
+      </fieldset>
     </div>
+  </div>
+  <div class="right-side">
+    <div class="tools standard-form">
+      <fieldset>
+        <legend>{{localize "PTR2E.ActorSheet.Tools"}}</legend>
+        <button type="button" data-action="open-dex">{{localize "PTR2E.ActorSheet.Dex"}}</button>
+        <button type="button" data-action="open-party-sheet">{{localize "PTR2E.ActorSheet.PartySheet"}}</button>
+        <button type="button" data-action="open-tutor-list">{{localize "PTR2E.OpenTutorList"}}</button>
+        <button type="button" data-action="rest">{{localize "PTR2E.ActorSheet.Rest"}}</button>
+      </fieldset>
+    </div>
+    <div class="settings standard-form">
+      <fieldset>
+        <legend>{{localize "PTR2E.ActorSheet.Settings.Title"}}</legend>
+        <div class="form-group">
+          <label>{{localize "PTR2E.FIELDS.details.alliance.label"}}</label>
+          <div class="form-fields">
+            <select name="system.details.alliance">
+              {{#each allianceOptions as |value key|}}
+                <option value="{{key}}" {{#if (is key ../alliance)}}selected{{/if}}>{{localize value}}</option>
+              {{/each}}
+            </select>
+          </div>
+          <p class="hint">{{localize "PTR2E.FIELDS.details.alliance.hint"}}</p>
+        </div>
+      </fieldset>
+    </div>
+    <div class="height-size standard-form">
+      <fieldset>
+        <legend>{{localize "PTR2E.ActorSheet.HeightWeight"}}</legend>
+        {{formField fields.details.fields.size.fields.height value=actor.system.details.size.height localize=true}}
+        {{formField fields.details.fields.size.fields.weight value=actor.system.details.size.weight localize=true}}
+        <div class="form-group">
+          <label>{{localize "PTR2E.FIELDS.size.height.class"}}</label>
+          <div class="form-fields">
+            <input type="text" readonly value="{{actor.size}}">
+          </div>
+        </div>
+        <div class="form-group">
+          <label>{{localize "PTR2E.FIELDS.size.weight.class"}}</label>
+          <div class="form-fields">
+            <input type="text" readonly value="{{actor.system.details.size.weightClass}}">
+          </div> 
+        </div>
+        {{#if actor.species.size.height}}
+        <div class="form-group">
+          <label style="font-size: 12px;">{{localize "PTR2E.FIELDS.size.height.average"}}</label>
+          <div class="form-fields">
+            <input type="text" readonly value="{{actor.species.size.height}}">
+          </div>
+        </div>
+        {{/if}}
+        {{#if actor.species.size.weight}}
+        <div class="form-group">
+          <label style="font-size: 12px;">{{localize "PTR2E.FIELDS.size.weight.average"}}</label>
+          <div class="form-fields">
+            <input type="text" readonly value="{{actor.species.size.weight}}">
+          </div>
+        </div>
+        {{/if}}
+      </fieldset>
+    </div>
+  </div>
 </section>

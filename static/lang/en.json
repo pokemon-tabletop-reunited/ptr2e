@@ -1047,6 +1047,9 @@
       "Inspector": "Open Data Inspector",
       "Rest": "Rest & Relaxation",
       "PartySheet": "Open Party Sheet",
+      "Dex": "Open Dex",
+      "Tools": "Tools",
+      "HeightWeight": "Height & Weight",
       "CarryType": "Change Carry Type",
       "Tabs": {
         "overview": {
@@ -1155,7 +1158,7 @@
         "Save": "Save Settings"
       },
       "Alliance": {
-        "Default": "Ownership Default ({alliance})",
+        "Default": "Default ({alliance})",
         "Party": "Party",
         "Opposition": "Opposition",
         "Neutral": "Neutral"
@@ -1648,10 +1651,14 @@
           "hint": "The Measurement Type of the Creature."
         },
         "height": {
+          "class": "Height Class",
+          "average": "Species Average Height",
           "label": "Height",
           "hint": "The Height of the Creature in Meters."
         },
         "weight": {
+          "class": "Weight Class",
+          "average": "Species Average Weight",
           "label": "Weight",
           "hint": "The Weight of the Creature in Kilos."
         }
@@ -1977,7 +1984,11 @@
       "details": {
         "alliance": {
           "label": "Alliance",
-          "hint": "The Allegiance of the actor."
+          "hint": "The Allegiance of the actor. The 'Default' value is calculated based on Foundry's ownership permissions."
+        },
+        "biography": {
+          "label": "Biography",
+          "hint": "A free form field to store any details about this character."
         }
       }
     },

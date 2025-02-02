@@ -51,54 +51,56 @@
             </ul>
         {{/each}}
     </div>
-    <div class="inventory-points standard-form">
-      <fieldset>
-          <legend>Inventory Points</legend>
-          {{formGroup fields.inventoryPoints.fields.current value=source.system.inventoryPoints.current localize=true}}
-          <div class="form-group">
-              <label>{{localize 'PTR2E.FIELDS.inventoryPoints.max.label'}}</label>
+    <div class="inventory-sidebar">
+      <div class="inventory-points standard-form">
+        <fieldset>
+            <legend>Inventory Points</legend>
+            {{formGroup fields.inventoryPoints.fields.current value=source.system.inventoryPoints.current localize=true}}
+            <div class="form-group">
+                <label>{{localize 'PTR2E.FIELDS.inventoryPoints.max.label'}}</label>
+                <div class="form-fields">
+                    <input type="number" value="{{actor.system.inventoryPoints.max}}" disabled/>
+                </div>
+                <p class="hint">{{localize 'PTR2E.FIELDS.inventoryPoints.max.hint'}}</p>
+            </div>
+        </fieldset>
+      </div>
+      <div class="inventory-slots standard-form">
+        <fieldset>
+            <legend>Inventory Slots</legend>
+            <div class="form-group">
+              <label>{{localize 'PTR2E.FIELDS.inventory.held.label'}}</label>
               <div class="form-fields">
-                  <input type="number" value="{{actor.system.inventoryPoints.max}}" disabled/>
+                <input type="number" value="{{actor.system.inventory.held.used}}" disabled/>
+                /
+                <input type="number" value="{{actor.system.inventory.held.max}}" disabled/>
               </div>
-              <p class="hint">{{localize 'PTR2E.FIELDS.inventoryPoints.max.hint'}}</p>
-          </div>
-      </fieldset>
-    </div>
-    <div class="inventory-slots standard-form">
-      <fieldset>
-          <legend>Inventory Slots</legend>
-          <div class="form-group">
-            <label>{{localize 'PTR2E.FIELDS.inventory.held.label'}}</label>
-            <div class="form-fields">
-              <input type="number" value="{{actor.system.inventory.held.used}}" disabled/>
-              /
-              <input type="number" value="{{actor.system.inventory.held.max}}" disabled/>
             </div>
-          </div>
-          <div class="form-group">
-            <label>{{localize 'PTR2E.FIELDS.inventory.worn.label'}}</label>
-            <div class="form-fields">
-              <input type="number" value="{{actor.system.inventory.worn.used}}" disabled/>
-              /
-              <input type="number" value="{{actor.system.inventory.worn.max}}" disabled/>
+            <div class="form-group">
+              <label>{{localize 'PTR2E.FIELDS.inventory.worn.label'}}</label>
+              <div class="form-fields">
+                <input type="number" value="{{actor.system.inventory.worn.used}}" disabled/>
+                /
+                <input type="number" value="{{actor.system.inventory.worn.max}}" disabled/>
+              </div>
             </div>
-          </div>
-          <div class="form-group">
-            <label>{{localize 'PTR2E.FIELDS.inventory.accessory.label'}}</label>
-            <div class="form-fields">
-              <input type="number" value="{{actor.system.inventory.accessory.used}}" disabled/>
-              /
-              <input type="number" value="{{actor.system.inventory.accessory.max}}" disabled/>
+            <div class="form-group">
+              <label>{{localize 'PTR2E.FIELDS.inventory.accessory.label'}}</label>
+              <div class="form-fields">
+                <input type="number" value="{{actor.system.inventory.accessory.used}}" disabled/>
+                /
+                <input type="number" value="{{actor.system.inventory.accessory.max}}" disabled/>
+              </div>
             </div>
-          </div>
-          <div class="form-group">
-            <label>{{localize 'PTR2E.FIELDS.inventory.belt.label'}}</label>
-            <div class="form-fields">
-              <input type="number" value="{{actor.system.inventory.belt.used}}" disabled/>
-              /
-              <input type="number" value="{{actor.system.inventory.belt.max}}" disabled/>
+            <div class="form-group">
+              <label>{{localize 'PTR2E.FIELDS.inventory.belt.label'}}</label>
+              <div class="form-fields">
+                <input type="number" value="{{actor.system.inventory.belt.used}}" disabled/>
+                /
+                <input type="number" value="{{actor.system.inventory.belt.max}}" disabled/>
+              </div>
             </div>
-          </div>
-      </fieldset>
+        </fieldset>
+      </div>
     </div>
 </section>
