@@ -161,7 +161,7 @@ class PerkStore extends Collection<PerkNode> {
           const species = actor.items.get('actorspeciesitem') as SpeciesPTR2e | undefined;
           if (!species) continue;
 
-          if (species.flags.core?.sourceId === evolution.uuid || species.slug === evolution.name) {
+          if (species.flags.core?.sourceId === evolution.uuid || (species.slug + (species?.system.form ? `-${species.system.form}` : "")) === evolution.name || species.slug === evolution.name) {
             node.state = PerkState.purchased;
             currentTier = Math.max(currentTier, evolution.tier);
 
@@ -301,7 +301,14 @@ class PerkStore extends Collection<PerkNode> {
 
             // If the connected node is a tiered perk, handle the tier info
             if (connectedNode.tierInfo && !connectedNode.tierInfo.maxTierPurchased) {
-              connectedNode.state = apAvailable >= connectedNode.tierInfo.perk.system.cost ? PerkState.available : PerkState.connected;
+              if(apAvailable >= connectedNode.tierInfo.perk.system.cost) {
+                connectedNode.state = this.isAvailableOrConnected({
+                  node: connectedNode,
+                  perk: connectedNode.tierInfo.perk,
+                  apAvailable,
+                  actor,
+                })
+              }
             }
           }
           // If the connected node is not purchased, update its state as appropriate
@@ -319,11 +326,17 @@ class PerkStore extends Collection<PerkNode> {
 
               if (evolution.tier < currentTier) {
                 connectedNode.state = PerkState.purchased;
-                if (evolution.tier !== 0) this.updateConnections({ purchasedPerks: [connectedNode], visited, apAvailable, currentTier: evolution.tier, highestTier, actor });
+                if(evolution.tier === 0) {
+                  for(const connection of connectedNode.connected) {
+                    if(connection.startsWith("evolution")) visited.add(connection);
+                  }
+                }
+                this.updateConnections({ purchasedPerks: [connectedNode], visited, apAvailable, currentTier: evolution.tier, highestTier, actor });
               }
               else if (highestTier === currentTier && evolution.tier === currentTier + 1) {
                 connectedNode.state = this.isAvailableOrConnected({
                   node: connectedNode,
+                  perk: connectedNode.tierInfo?.perk,
                   apAvailable,
                   actor,
                 })
@@ -334,13 +347,14 @@ class PerkStore extends Collection<PerkNode> {
             }
             else {
               const autoPurchase = this.isAutoPurchased({ node: connectedNode, actor });
-              if(autoPurchase) {
+              if (autoPurchase) {
                 connectedNode.state = PerkState.autoUnlocked;
                 this.updateConnections({ purchasedPerks: [connectedNode], visited, apAvailable, currentTier, highestTier, actor });
               }
               else {
                 connectedNode.state = this.isAvailableOrConnected({
                   node: connectedNode,
+                  perk: connectedNode.tierInfo?.perk,
                   apAvailable,
                   actor,
                 });
@@ -360,7 +374,7 @@ class PerkStore extends Collection<PerkNode> {
     node: PerkNode,
     actor: Maybe<ActorPTR2e>
   }) {
-    if(!actor) return false;
+    if (!actor) return false;
 
     const predicate = new Predicate(SummonStatistic.resolveValue(
       node.perk.system.autoUnlock,
@@ -369,7 +383,7 @@ class PerkStore extends Collection<PerkNode> {
       { evaluate: true, resolvables: { actor, item: node.perk } }
     ) as unknown as Predicate);
 
-    if(predicate.length === 0) return false;
+    if (predicate.length === 0) return false;
 
     return predicate.test(actor.getRollOptions());
   }
@@ -377,21 +391,23 @@ class PerkStore extends Collection<PerkNode> {
   isAvailableOrConnected({
     node,
     actor,
-    apAvailable
+    apAvailable,
+    perk
   }: {
     node: PerkNode,
     actor: Maybe<ActorPTR2e>,
-    apAvailable: number
+    apAvailable: number,
+    perk?: PerkPTR2e
   }) {
     if (apAvailable < node.perk.system.cost) return PerkState.connected;
 
-    if(!actor) return PerkState.available;
+    if (!actor) return PerkState.available;
 
     const predicate = new Predicate(SummonStatistic.resolveValue(
-      node.perk.system.prerequisites,
-      node.perk.system.prerequisites,
-      { actor, item: node.perk },
-      { evaluate: true, resolvables: { actor, item: node.perk } }
+      perk?.system.prerequisites ?? node.perk.system.prerequisites,
+      perk?.system.prerequisites ?? node.perk.system.prerequisites,
+      { actor, item: perk ?? node.perk },
+      { evaluate: true, resolvables: { actor, item: perk ?? node.perk } }
     ) as unknown as Predicate);
     if (!predicate.test(actor.getRollOptions())) {
       return PerkState.connected;
