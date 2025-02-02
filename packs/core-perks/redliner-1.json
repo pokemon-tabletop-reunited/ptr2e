@@ -1,0 +1,209 @@
+{
+  "name": "Redliner 1",
+  "type": "perk",
+  "system": {
+    "_migration": {
+      "version": 0.11,
+      "previous": null
+    },
+    "actions": [],
+    "slug": "redliner-1",
+    "description": "<p>The user selects 3 Pilot Group Skills with which their Species proficiency is greater than 1. The user’s Species proficiency with the selected skills is increased by +10. A Skill may only be increased 3 times with this Perk and cannot be increased past 50.</p>",
+    "traits": [],
+    "prerequisites": [
+      "item:perk:skill-refinement-3"
+    ],
+    "autoUnlock": [],
+    "cost": 1,
+    "variant": "tiered",
+    "mode": "coexist",
+    "global": true,
+    "webs": [],
+    "nodes": [
+      {
+        "x": 36,
+        "y": 90,
+        "hidden": false,
+        "type": "normal",
+        "connected": [
+          "skill-refinement-1"
+        ],
+        "tier": {
+          "rank": null,
+          "uuid": null
+        },
+        "config": {
+          "alpha": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "borderWidth": null,
+          "texture": null,
+          "tint": null,
+          "scale": null
+        }
+      },
+      {
+        "x": null,
+        "y": null,
+        "hidden": false,
+        "type": "normal",
+        "connected": [],
+        "tier": {
+          "rank": 2,
+          "uuid": "Compendium.ptr2e.core-perks.Item.w6WqiJzfay1dOQNj"
+        },
+        "config": {
+          "alpha": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "borderWidth": null,
+          "texture": null,
+          "tint": null,
+          "scale": null
+        }
+      },
+      {
+        "x": null,
+        "y": null,
+        "hidden": false,
+        "type": "normal",
+        "connected": [],
+        "tier": {
+          "rank": 3,
+          "uuid": "Compendium.ptr2e.core-perks.Item.f1D9AsRnxlyl4eqn"
+        },
+        "config": {
+          "alpha": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "borderWidth": null,
+          "texture": null,
+          "tint": null,
+          "scale": null
+        }
+      },
+      {
+        "x": null,
+        "y": null,
+        "hidden": false,
+        "type": "normal",
+        "connected": [],
+        "tier": {
+          "rank": 4,
+          "uuid": "Compendium.ptr2e.core-perks.Item.PR5Z8JYtgmBMmVRW"
+        },
+        "config": {
+          "alpha": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "borderWidth": null,
+          "texture": null,
+          "tint": null,
+          "scale": null
+        }
+      },
+      {
+        "x": null,
+        "y": null,
+        "hidden": false,
+        "type": "normal",
+        "connected": [],
+        "tier": {
+          "rank": 5,
+          "uuid": "Compendium.ptr2e.core-perks.Item.WYdqSnV6f9Pehmgl"
+        },
+        "config": {
+          "alpha": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "borderWidth": null,
+          "texture": null,
+          "tint": null,
+          "scale": null
+        }
+      }
+    ]
+  },
+  "_id": "rfL3NDd8v1udr0pf",
+  "img": "systems/ptr2e/img/icons/feat_icon.webp",
+  "effects": [
+    {
+      "name": "Redliner",
+      "type": "passive",
+      "_id": "YAyPsfJXmRzb952W",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "basic",
+            "key": "system.skills.x.value",
+            "value": 10,
+            "predicate": [],
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "key": "system.skills.y.value",
+            "value": 10,
+            "predicate": [],
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "key": "system.skills.z.value",
+            "value": 10,
+            "predicate": [],
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": false,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": "Item.xxuGLZ0QPnw7NYa8.ActiveEffect.V64elrUanozajfG2",
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.5.2.1",
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      }
+    }
+  ],
+  "folder": "P8RtSJE1K00CB5lL",
+  "flags": {
+    "exportSource": {
+      "world": "pokemon-mystery-dungeon-shrouded-kingdoms",
+      "system": "ptr2e",
+      "coreVersion": "12.331",
+      "systemVersion": "0.10.0-alpha.5.2.1"
+    }
+  }
+}
