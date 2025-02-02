@@ -3048,14 +3048,33 @@
         "description": "A collection of miscellaneous tips and tricks, as well as a FAQ!",
         "steps": {
           "welcome": {
-            "title": "Unfinished Tour",
-            "content": "This tour is coming in a future build!"
+            "title": "Welcome to the Miscellaneous & FAQ Tour!",
+            "content": "This tour is here to quickly show you a couple of buttons and features that you may have otherwise missed, as well as answer some frequently asked questions!"
           },
-          "tooltips": {},
-          "exp-tracker": {},
-          "tutor-list": {},
-          "text-enrichers": {},
-          "habitat-table": {}
+          "tooltips": {
+            "title": "Tooltips",
+            "content": "Hovering over most things in the system will show you a tooltip with more information, this can be a great way to quickly get more information on a topic!\nBut not only that, if you pause for a moment, you will see a circle fill up, once it's filled up the tooltip will be 'locked in place', allowing you to interact with it, copying text, pressing buttons, or hovering over other elements which may have their own Tooltips!\nYou can also 'Middle Mouse Click' to instantly lock a tooltip in place!"
+          },
+          "exp-tracker": {
+            "title": "EXP & Venture Tracker",
+            "content": "Over on the left hand-side controls, you can find some useful tools, like the EXP Tracker, which allows you to mark down any Cirumstance Modifiers for your current Venture as they occur!\nBesides this, you can also find the 'Training' tab here, which you can use for the 'Super Training' Camp Activity!"
+          },
+          "user-config": {
+            "title": "User Configuration",
+            "content": "A couple of features; like the EXP & Venture Tracker, make use of what characters are marked as PCs in Foundry.\nThus to get automation to fully function; players must set their PCs as their 'Player Character' in the Foundry User Configuration which they can access from down here, in the bottom left corner."
+          },
+          "tutor-list": {
+            "title": "Tutor List",
+            "content": "Ever wonder what moves are tutorable to your Characters? Worry not, you can find a list of all tutorable moves in the 'Tutor List' Application!\nIt can be accessed from the Sidebar, or by using the 'Open Tutor List' button in the Biography tab of the Actor Sheet!"
+          },
+          "text-enrichers": {
+            "title": "Text Enrichers",
+            "content": "PTR 2e supports a couple of custom Text Enrichers that can help you easily reference other data!<p>Unfamiliar with the term 'Text Enricher'? Text enrichers allow you to easily reference other types of data; for example, in a Journal Entry you can reference to another page, an actor, or even an item, by for example using <codeblock>@UUID[Compendium.ptr2e.core-effects.Item.burnconditioitem]</codeblock>, which would create a clickable button for the Burn Affliction!</p><p>The following enrichers are added by the system:</p><ul><li><codeblock>@Trait[slug-of-trait]</codeblock> This makes a hoverable Trait link so you can quickly reference the Trait's info!</li><li><codeblock>@Affliction[slug-of-affliction]</codeblock> This creates an item link much like <codeblock>@UUID</codeblock> without needing to know the full id of the affliction!</li><li><codeblock>@Tick[number]</codeblock> Allows the quick creation of buttons that heal or deal Tick based Damage. You can also use <codeblock>@Tick[number pp]</codeblock> and <codeblock>@Tick[number shield]</codeblock> to deal/heal against PP and Shield Health respectively.</li></ul>"
+          },
+          "habitat-table": {
+            "title": "Habitat Tables",
+            "content": "Dynamic Habitat Tables are generated automatically based on the 'habitat' field of Species in the Core Species Compendium.\nThese tables can be used in Blueprint Generation to generate random Pokémon based on their habitat, or to quickly find a Pokémon of a specific habitat!\n<b>Please note:</b> these tables are 'virtual' tables, meaning you cannot use them in Macros the same way you would a regular table, they are, *generally*, only available for use in the Blueprint Generation system."
+          }
         }
       }
     },
@@ -3077,6 +3096,7 @@
     },
     "TypeMatrix": {
       "Title": "Type Matrix",
+      "Hint": "Open Type Matrix",
       "AddType": {
         "Label": "Add Type",
         "Hint": "Please provide the name & icons for the new type.",
