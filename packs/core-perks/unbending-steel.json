@@ -7,43 +7,7 @@
       "version": 0.109,
       "previous": null
     },
-    "actions": [
-      {
-        "slug": "iron-defense",
-        "name": "Iron Defense",
-        "type": "attack",
-        "traits": [],
-        "range": {
-          "target": "self",
-          "unit": "m",
-          "distance": 0
-        },
-        "cost": {
-          "activation": "complex",
-          "powerPoints": 6,
-          "delay": null,
-          "priority": null
-        },
-        "category": "status",
-        "types": [
-          "steel"
-        ],
-        "description": "<p>Effect: The user increases their WC by 3 Stages (max WC 16) for 5 activations and increases their DEF Stage by +2 for 5 activations.</p>",
-        "free": true,
-        "img": "systems/ptr2e/img/svg/steel_icon.svg",
-        "variant": null,
-        "power": null,
-        "accuracy": null,
-        "contestType": "",
-        "contestEffect": "",
-        "slot": null,
-        "summon": null,
-        "defaultVariant": null,
-        "flingItemId": null,
-        "offensiveStat": null,
-        "defensiveStat": null
-      }
-    ],
+    "actions": [],
     "slug": "unbending-steel",
     "description": "<p>You gain Iron Defense as a Connected Move, and may spend an additional 2PP when using Iron Defense to gain 2 ticks of Shields.</p>",
     "traits": [],
@@ -77,13 +41,83 @@
       }
     ],
     "autoUnlock": [],
-    "originSlug": null,
-    "variant": null,
-    "mode": null,
     "global": true,
-    "webs": []
+    "webs": [],
+    "design": {
+      "arena": "physical",
+      "approach": "resilience",
+      "archetype": "Steel"
+    }
   },
   "_id": "Gxv0teWTcPT64AJu",
   "img": "systems/ptr2e/img/svg/steel_icon.svg",
-  "effects": []
+  "effects": [
+    {
+      "name": "Unbending Steel",
+      "type": "passive",
+      "_id": "LGmdT3NOqO6wZK6j",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "grant-item",
+            "key": "",
+            "value": "Compendium.ptr2e.core-moves.Item.qSWTxI39iL7ivEVw",
+            "predicate": [],
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "system.actions.0.free",
+                "value": "true"
+              }
+            ],
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "reevaluateOnUpdate": false,
+            "inMemoryOnly": false,
+            "allowDuplicate": true,
+            "track": false,
+            "replaceSelf": false,
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            }
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.5.2.1",
+        "createdTime": 1737922877806,
+        "modifiedTime": 1737922913974,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+      }
+    }
+  ]
 }

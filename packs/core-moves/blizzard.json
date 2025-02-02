@@ -31,7 +31,8 @@
           "ice"
         ],
         "description": "<p>Effect: On hit, the target has a 10% chance of gaining @Affliction[frozen] 2.</p>",
-        "img": "icons/svg/explosion.svg"
+        "img": "icons/svg/explosion.svg",
+        "predicate": []
       },
       {
         "slug": "blizzard-snowy",
@@ -62,14 +63,16 @@
         ],
         "description": "<p>Snowy Weather is present.</p><p>Effect: On hit, the target has a 10% chance of gaining @Affliction[frozen] 3.</p>",
         "variant": "blizzard",
-        "img": "icons/svg/explosion.svg"
+        "img": "icons/svg/explosion.svg",
+        "predicate": []
       }
     ],
     "grade": "B",
     "_migration": {
       "version": null,
       "previous": null
-    }
+    },
+    "traits": []
   },
   "_id": "pMSwY3ECWqqasF1a",
   "effects": [
@@ -87,6 +90,13 @@
             "predicate": [],
             "chance": 10,
             "affects": "target",
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "duration.turns",
+                "value": 2
+              }
+            ],
             "mode": 2,
             "priority": null,
             "ignored": false
@@ -98,6 +108,13 @@
             "predicate": [],
             "chance": 10,
             "affects": "target",
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "duration.turns",
+                "value": 2
+              }
+            ],
             "mode": 2,
             "priority": null,
             "ignored": false
@@ -131,9 +148,9 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "ptr2e",
-        "systemVersion": "0.10.0-alpha.2.4.3",
+        "systemVersion": "0.10.0-alpha.5.2.1",
         "createdTime": 1729171571064,
-        "modifiedTime": 1729171594283,
+        "modifiedTime": 1737719121640,
         "lastModifiedBy": "Kc3DOunCh3ClAeHS"
       }
     }

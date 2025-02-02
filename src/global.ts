@@ -1,6 +1,6 @@
 import { ActorPTR2e, ActorSystemPTR2e } from "@actor";
 import { CombatPTR2e, CombatantPTR2e, CombatTrackerPTR2e } from "@combat";
-import { ItemPTR2e, ItemSystemPTR } from "@item";
+import { ItemPTR2e, ItemSystemPTR, PerkPTR2e } from "@item";
 import { PerkManager } from "@module/apps/perk-manager/perk-manager.ts";
 import { PerkDirectory } from "@module/apps/sidebar/perks-directory.ts";
 import { ScenePTR2e } from "@module/canvas/scene.ts";
@@ -21,6 +21,8 @@ import { TutorListApp } from "@module/apps/tutor-list.ts";
 import GithubManager from "@module/apps/github.ts";
 import { ExpTrackerSettings } from "@system/exp-tracker-model.ts";
 import { type TypeEffectiveness } from "@scripts/config/effectiveness.ts";
+import { PerkWorkerConfig } from "@module/data/models/generator-config.ts";
+import { PerkGeneratorResult } from "./worker/types.js";
 
 interface GamePTR2e
   extends Game<
@@ -64,6 +66,23 @@ interface GamePTR2e
       }
     }
   };
+  workers: {
+    get(name: string): {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      executeFunction<T>(fn: string, args?: any[]): Promise<[T]>;
+    }
+    get(name: "PerkWorker"): {
+      executeFunction(fn: "initialized"): Promise<boolean>;
+      executeFunction(fn: "initializePerks", args: [{perks: PerkPTR2e['_source'][]}]): Promise<void>;
+      executeFunction(fn: "generate", args: [{
+        actor: ActorPTR2e['_source'],
+        options: string[],
+        config: PerkWorkerConfig
+      }]): Promise<PerkGeneratorResult[number]>;
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      executeFunction<T>(fn: string, args?: any[]): Promise<T>;
+    }
+  }
 }
 
 type ConfiguredConfig = Config<

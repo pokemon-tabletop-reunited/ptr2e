@@ -44,17 +44,38 @@
   "_id": "6xLPJIk5QClQKiGv",
   "effects": [
     {
-      "name": "-1 Defense Stage",
-      "type": "affliction",
-      "_id": "FTjaNUkBa1PIJpf6",
+      "name": "Leer",
+      "type": "passive",
+      "_id": "TODiBQ9bbbJd1I7F",
       "img": "systems/ptr2e/img/icons/effect_icon.webp",
       "system": {
         "changes": [
           {
-            "type": "basic",
-            "key": "system.attributes.def.stage",
-            "value": -1,
+            "type": "roll-effect",
+            "key": "leer-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.bdYCJcqjMNqTpJJQ",
             "predicate": [],
+            "chance": 100,
+            "affects": "target",
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "alterations": []
+          },
+          {
+            "type": "roll-effect",
+            "key": "leer-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.fearconditioitem",
+            "predicate": [],
+            "chance": 100,
+            "affects": "target",
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "duration.turns",
+                "value": 2
+              }
+            ],
             "mode": 2,
             "priority": null,
             "ignored": false
@@ -64,10 +85,7 @@
         "traits": [],
         "removeAfterCombat": true,
         "removeOnRecall": false,
-        "stacks": 0,
-        "priority": 50,
-        "formula": "",
-        "type": "damage"
+        "stacks": 0
       },
       "disabled": false,
       "duration": {
@@ -75,9 +93,9 @@
         "seconds": null,
         "combat": null,
         "rounds": null,
-        "turns": 5,
+        "turns": null,
         "startRound": null,
-        "startTurn": 0
+        "startTurn": null
       },
       "description": "",
       "origin": null,
@@ -91,79 +109,11 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "ptr2e",
-        "systemVersion": "0.10.0-alpha.5.1.2",
-        "createdTime": 1736888238366,
-        "modifiedTime": 1736888238366,
-        "lastModifiedBy": "AvKKI5MO51DPYICj"
+        "systemVersion": "0.10.0-alpha.5.2.1",
+        "createdTime": 1737646286479,
+        "modifiedTime": 1737646366195,
+        "lastModifiedBy": "IcBpMqhFuTck9VpX"
       }
-    },
-    {
-      "name": "Fear 2",
-      "img": "icons/svg/silenced.svg",
-      "type": "affliction",
-      "duration": {
-        "turns": 2,
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "startRound": null,
-        "startTurn": 0
-      },
-      "system": {
-        "changes": [
-          {
-            "type": "percentile-modifier",
-            "key": "attack-power",
-            "value": -33,
-            "predicate": [],
-            "label": "Fear - targeting Source",
-            "mode": 2,
-            "priority": null,
-            "ignored": false,
-            "hideIfDisabled": false
-          },
-          {
-            "type": "basic",
-            "key": "system.battleStats.accuracy.stage",
-            "value": 1,
-            "predicate": [],
-            "label": "Fear - targeting Source",
-            "mode": 2,
-            "priority": null,
-            "ignored": false
-          }
-        ],
-        "formula": "",
-        "type": "damage",
-        "removeOnRecall": false,
-        "removeAfterCombat": true,
-        "traits": [
-          "minor-affliction"
-        ],
-        "slug": null,
-        "stacks": 0,
-        "priority": 50
-      },
-      "description": "The afflicted creature does 33% less damage to the source of Fear, and suffers -1 default ACC Stage on attacks against them. Fear applied from different sources have their own Stacks.",
-      "_id": "SPWkQnxY41SoZwUy",
-      "_stats": {
-        "compendiumSource": null,
-        "duplicateSource": null,
-        "coreVersion": "12.331",
-        "systemId": "ptr2e",
-        "systemVersion": "0.10.0-alpha.5.1.2",
-        "createdTime": 1736888248384,
-        "modifiedTime": 1736888254856,
-        "lastModifiedBy": "AvKKI5MO51DPYICj"
-      },
-      "disabled": false,
-      "origin": null,
-      "tint": "#ffffff",
-      "transfer": true,
-      "statuses": [],
-      "sort": 0,
-      "flags": {}
     }
   ]
 }

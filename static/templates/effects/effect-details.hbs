@@ -35,6 +35,8 @@
       {{formField system.schema.fields.formula value=data.system.formula localize=true}}
 
       {{formField system.schema.fields.type value=data.system.type localize=true}}
+    {{else if (is data.type "advancement")}}
+      {{formField system.schema.fields.amount value = data.system.amount localize=true}}
     {{/if}}
 
     {{#if (gt data.system.stacks 0)}}

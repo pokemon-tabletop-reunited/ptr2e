@@ -36,6 +36,7 @@ import { CircumstanceModifierGroups } from "./circumstance-modifiers.ts";
 import { Habitats } from "./habitats.ts";
 import { HabitatRollTable } from "@system/habitat-table.ts";
 import { RollTableDirectoryPTR2e } from "@module/apps/sidebar/rolltables-directory.ts";
+import AdvancementActiveEffectSystem from "@module/effects/data/advancement.ts";
 
 export const PTRCONFIG = {
   ActiveEffect: {
@@ -43,6 +44,7 @@ export const PTRCONFIG = {
     dataModels: {
       passive: PassiveActiveEffectSystem,
       affliction: AfflictionActiveEffectSystem,
+      advancement: AdvancementActiveEffectSystem,
       summon: SummonActiveEffectSystem,
       form: FormActiveEffectSystem
     },

@@ -16,6 +16,7 @@
   "TYPES.Item.summon": "Summon",
   "TYPES.ActiveEffect.passive": "Passive Effect",
   "TYPES.ActiveEffect.affliction": "Affliction",
+  "TYPES.ActiveEffect.advancement": "Advance/Delay",
   "TYPES.ActiveEffect.summon": "Summon Effect",
   "TYPES.ActiveEffect.form": "Forme",
   "ITEM.AddButton": "Add",
@@ -49,6 +50,82 @@
         "shiny": {
           "label": "Shiny",
           "hint": "The % chance for the Pokémon to be shiny."
+        },
+        "gender": {
+          "label": "Gender",
+          "hint": "The gender of the Pokémon, if 'Random' is selected, the species' gender ratio is used."
+        }
+      }
+    },
+    "GeneratorConfig": {
+      "label": "Perk Generator Config",
+      "hint": "The config that defines how the auto-perk generation should pick up perks. You can drag any config from another blueprint here to copy it.",
+      "FIELDS": {
+        "mode": {
+          "label": "Generation Mode",
+          "hint": "The overall generation mode; currently only 'Priority Order' mode is supported, but more will be added in the future.",
+          "order": "Priority Order",
+          "species": "Species Based"
+        },
+        "cost": {
+          "priority": {
+            "label": "Cost Prioritization",
+            "hint": "Should the generator prioritize picking up the cheapest perks towards its goal, or the shortest route regardless of price?",
+            "cheapest": "Cheapest",
+            "shortest": "Shortest",
+            "random": "Random"
+          },
+          "resolution": {
+            "label": "Tie-Resolution",
+            "hint": "If a tie occurs in prioritization, should the generator pick the cheapest or most expensive option?",
+            "cheapest": "Cheapest",
+            "costliest": "Costliest",
+            "random": "Random"
+          }
+        },
+        "entry": {
+          "mode": {
+            "label": "Entry Root",
+            "hint": "What entry root should be used for the generator?",
+            "best": "Best Result",
+            "random": "Random Root",
+            "choice": "Specific Root"
+          },
+          "choice": {
+            "label": "Specific Root",
+            "hint": "The specific root perk to use as the root node for the generator."
+          }
+        },
+        "randomness": {
+          "label": "Randomness",
+          "hint": "% Chance whenever the Generator attempts to make the best choice; it will instead just take a random choice. High % of randomness has performance implications."
+        },
+        "label": {
+          "label": "Config Label",
+          "hint": "Label for this Configuration when shown in the Global Configs list."
+        },
+        "link": {
+          "label": "Sync with Global Config?",
+          "hint": "Should this configuration's settings be synchronized with its version in the Global Configuration?"
+        },
+        "priorities": {
+          "slug": {
+            "label": "",
+            "hint": ""
+          },
+          "priority": {
+            "label": "",
+            "hint": ""
+          },
+          "type": {
+            "label": "",
+            "hint": "",
+            "arena": "Arena",
+            "approach": "Approach",
+            "archetype": "Archetype",
+            "trait": "Trait",
+            "perk": "Perk"
+          }
         }
       }
     },
@@ -106,6 +183,14 @@
           "Free": "Free"
         }
       }
+    },
+    "Inventory": {
+      "weapon": "Weapons",
+      "equipment": "Equipment",
+      "consumable": "Consumables",
+      "gear": "Gear",
+      "container": "Containers",
+      "empty": "No items yet..."
     },
     "PerkWebApp": {
       "Title": "Perk Web",
@@ -299,7 +384,8 @@
       "AfflictionDisabled": "The action {name} is currently Disabled and cannot be used!",
       "NotEnoughPP": "Unable to spend {cost} power points. You only have {current}.",
       "UnableToAct": "{action} Failed! ",
-      "FlingTargetNotAllyOrGrappled": "Fling 'Actor-Toss' can only target allies or grappled enemies."
+      "FlingTargetNotAllyOrGrappled": "Fling 'Actor-Toss' can only target allies or grappled enemies.",
+      "CannotCaptureTarget": "Oops! This target is not capturable!"
     },
     "DataInspector": {
       "DataButton": "Data",
@@ -439,12 +525,12 @@
         "spent": "Successfully applied Luck to this roll, spending {amount} Luck from {actor}. New total: {total}"
       },
       "SpendLuckAttack": {
-        "label": "Spend Luck to Hit",
-        "hint": "Select the target for whom you'd like to spend luck to turn this miss into a hit",
+        "label": "Spend Luck",
+        "hint": "Select the roll to spend Luck on.",
         "title": "Are you sure you're Spending Luck?",
         "requires": "(Requires {amount} points of Luck)",
-        "content": "You're about to spend {amount} Luck to hit.",
-        "spent": "Successfully applied Luck to this roll, spending {amount} Luck from {actor}. New total: {total}"
+        "content": "You're about to spend {amount} Luck.",
+        "spent": "Successfully applied Luck to the {type} roll, spending {amount} Luck from {actor}. New total: {total}"
       },
       "RollInspector": {
         "label": "Open Roll Inspector"
@@ -629,6 +715,10 @@
         "stacks": {
           "label": "Stacks",
           "hint": "The number of stacks this Affliction currently has."
+        },
+        "amount": {
+          "label": "Advance/Delay Amount",
+          "hint": "The % to Advance (positive) or Delay (negative) the target's turn by."
         },
         "duration": {
           "turns": {
@@ -957,6 +1047,11 @@
       "Inspector": "Open Data Inspector",
       "Rest": "Rest & Relaxation",
       "PartySheet": "Open Party Sheet",
+      "OpenDex": "Open Dex",
+      "Dex": "Dex",
+      "Tools": "Tools",
+      "HeightWeight": "Height & Weight",
+      "CarryType": "Change Carry Type",
       "Tabs": {
         "overview": {
           "label": "Overview"
@@ -1064,7 +1159,7 @@
         "Save": "Save Settings"
       },
       "Alliance": {
-        "Default": "Ownership Default ({alliance})",
+        "Default": "Default ({alliance})",
         "Party": "Party",
         "Opposition": "Opposition",
         "Neutral": "Neutral"
@@ -1279,7 +1374,11 @@
       "Messages": {
         "Activation": "Start of {name}'s Activation",
         "Round": "Start of Round {round}",
-        "End": "End of Combat"
+        "End": "End of Combat",
+        "ConfusionRoll": "{name} is Confused! Will they hit themselves...?",
+        "ConfusionRollSuccess": "{name} does not hit themselves!",
+        "Advanced": "Advanced {name}'s activation by {amount}%!",
+        "Delayed": "Delayed {name}'s activation by {amount}%!"
       },
       "Round": {
         "Name": "Round"
@@ -1304,6 +1403,20 @@
       }
     },
     "FIELDS": {
+      "inventory": {
+        "held": {
+          "label": "Held Slots"
+        },
+        "worn": {
+          "label": "Worn Slots"
+        },
+        "accessory": {
+          "label": "Accessory Slots"
+        },
+        "belt": {
+          "label": "Belt Slots"
+        }
+      },
       "consumable": {
         "type": {
           "label": "Type",
@@ -1351,7 +1464,8 @@
             "stowed": "Stowed",
             "held": "Held",
             "worn": "Worn",
-            "dropped": "Dropped"
+            "dropped": "Dropped",
+            "equipped": "Equipped"
           },
           "handsHeld": {
             "label": "Hands Held",
@@ -1365,7 +1479,14 @@
             "worn": "Worn",
             "belt": "Belt",
             "backpack": "Backpack"
-          }
+          },
+          "held1": "Held 1H",
+          "held2": "Held 2H",
+          "equipped": "Equipped",
+          "worn": "Worn",
+          "stowed": "Stowed",
+          "dropped": "Dropped",
+          "belt": "On Belt"
         },
         "fling": {
           "power": {
@@ -1531,10 +1652,14 @@
           "hint": "The Measurement Type of the Creature."
         },
         "height": {
+          "class": "Height Class",
+          "average": "Species Average Height",
           "label": "Height",
           "hint": "The Height of the Creature in Meters."
         },
         "weight": {
+          "class": "Weight Class",
+          "average": "Species Average Weight",
           "label": "Weight",
           "hint": "The Weight of the Creature in Kilos."
         }
@@ -1860,7 +1985,11 @@
       "details": {
         "alliance": {
           "label": "Alliance",
-          "hint": "The Allegiance of the actor."
+          "hint": "The Allegiance of the actor. The 'Default' value is calculated based on Foundry's ownership permissions."
+        },
+        "biography": {
+          "label": "Biography",
+          "hint": "A free form field to store any details about this character."
         }
       }
     },
@@ -2160,7 +2289,16 @@
       },
       "TargetSelector": {
         "Target": "Target",
-        "Pick": "Pick {target}"
+        "Pick": "Pick {target}",
+        "Type": {
+          "accuracy": "Accuracy Roll",
+          "damage": "Damage Roll",
+          "crit": "Crit Roll",
+          "target-effect": "Target Effect: {name}",
+          "origin-effect": "Origin Effect: {name}",
+          "defensive-effect": "Defensive Effect: {name}",
+          "self-effect": "Self Effect: {name}"
+        }
       },
       "RenameDocumentTitle": "Rename Blueprint",
       "RenameDocumentContent": "Enter the new name for this blueprint.",
@@ -2280,6 +2418,10 @@
         "label": "Negotiation",
         "hint": "This skill covers the art of the deal. If you want something and the other creature is willing to give you it, for a price, then this skill can be used to determine who gets the better end of the deal."
       },
+      "profession-specific": {
+        "label": "Profession (Specific)",
+        "hint": "This skill represents the user's skill and experience in a specific line of work (businessman, chef, teacher, etc.)."
+      },
       "psychology": {
         "label": "Psychology",
         "hint": "This skill is used to determine someone's mental or emotional state. This can either be from a perspective of reading their intentions, providing them with treatment (such as traumatized Shadow Pokemon), or seeing through someone's Disguise act or Fast Talking."
@@ -2394,6 +2536,14 @@
         "paradox": {
           "label": "Paradox",
           "hint": "This skill is used to understand and interact with paradoxical entities."
+        },
+        "alchemy": {
+          "label": "Alchemy",
+          "hint": "Alchemy governs the rigorous, practical approach toward bridging the gap between convential science and supernatural phenomena. Usually focused on materials science, the foundational knowledge of alchemy generally requires a solid background in a number of other sciences and occult disciplines."
+        },
+        "thaumaturgy": {
+          "label": "Thaumaturgy",
+          "hint": "Thaumaturgy is the knowledge of the deeper magical mysteries - wisdom, theory, and speculation. Thaumaturgy is the purest, but the most dangerous, approach to learning and wielding magic. Mages must balance their own hubris with the great temptations beyond the veil."
         }
       },
       "performance": {
@@ -2549,6 +2699,8 @@
       "Progress": {
         "Prefix": "PTR2E | Pkmn Generator | ",
         "Step": "Preparing Actor Data for {name}...",
+        "Perks": "Generating perks for {name}...",
+        "PerksDone": "Finalizing Actor Data for {name}...",
         "GenerationStep": "Creating all prepared Actors...",
         "TokenGenerationStep": "Creating Tokens for all Generated Actors...",
         "Complete": "Actor Generation Complete!"
@@ -2896,13 +3048,33 @@
         "description": "A collection of miscellaneous tips and tricks, as well as a FAQ!",
         "steps": {
           "welcome": {
-            "title": "Unfinished Tour",
-            "content": "This tour is coming in a future build!"
+            "title": "Welcome to the Miscellaneous & FAQ Tour!",
+            "content": "This tour is here to quickly show you a couple of buttons and features that you may have otherwise missed, as well as answer some frequently asked questions!"
           },
-          "tooltips": {},
-          "exp-tracker": {},
-          "tutor-list": {},
-          "habitat-table": {}
+          "tooltips": {
+            "title": "Tooltips",
+            "content": "Hovering over most things in the system will show you a tooltip with more information, this can be a great way to quickly get more information on a topic!\nBut not only that, if you pause for a moment, you will see a circle fill up, once it's filled up the tooltip will be 'locked in place', allowing you to interact with it, copying text, pressing buttons, or hovering over other elements which may have their own Tooltips!\nYou can also 'Middle Mouse Click' to instantly lock a tooltip in place!"
+          },
+          "exp-tracker": {
+            "title": "EXP & Venture Tracker",
+            "content": "Over on the left hand-side controls, you can find some useful tools, like the EXP Tracker, which allows you to mark down any Cirumstance Modifiers for your current Venture as they occur!\nBesides this, you can also find the 'Training' tab here, which you can use for the 'Super Training' Camp Activity!"
+          },
+          "user-config": {
+            "title": "User Configuration",
+            "content": "A couple of features; like the EXP & Venture Tracker, make use of what characters are marked as PCs in Foundry.\nThus to get automation to fully function; players must set their PCs as their 'Player Character' in the Foundry User Configuration which they can access from down here, in the bottom left corner."
+          },
+          "tutor-list": {
+            "title": "Tutor List",
+            "content": "Ever wonder what moves are tutorable to your Characters? Worry not, you can find a list of all tutorable moves in the 'Tutor List' Application!\nIt can be accessed from the Sidebar, or by using the 'Open Tutor List' button in the Biography tab of the Actor Sheet!"
+          },
+          "text-enrichers": {
+            "title": "Text Enrichers",
+            "content": "PTR 2e supports a couple of custom Text Enrichers that can help you easily reference other data!<p>Unfamiliar with the term 'Text Enricher'? Text enrichers allow you to easily reference other types of data; for example, in a Journal Entry you can reference to another page, an actor, or even an item, by for example using <codeblock>@UUID[Compendium.ptr2e.core-effects.Item.burnconditioitem]</codeblock>, which would create a clickable button for the Burn Affliction!</p><p>The following enrichers are added by the system:</p><ul><li><codeblock>@Trait[slug-of-trait]</codeblock> This makes a hoverable Trait link so you can quickly reference the Trait's info!</li><li><codeblock>@Affliction[slug-of-affliction]</codeblock> This creates an item link much like <codeblock>@UUID</codeblock> without needing to know the full id of the affliction!</li><li><codeblock>@Tick[number]</codeblock> Allows the quick creation of buttons that heal or deal Tick based Damage. You can also use <codeblock>@Tick[number pp]</codeblock> and <codeblock>@Tick[number shield]</codeblock> to deal/heal against PP and Shield Health respectively.</li></ul>"
+          },
+          "habitat-table": {
+            "title": "Habitat Tables",
+            "content": "Dynamic Habitat Tables are generated automatically based on the 'habitat' field of Species in the Core Species Compendium.\nThese tables can be used in Blueprint Generation to generate random Pokémon based on their habitat, or to quickly find a Pokémon of a specific habitat!\n<b>Please note:</b> these tables are 'virtual' tables, meaning you cannot use them in Macros the same way you would a regular table, they are, *generally*, only available for use in the Blueprint Generation system."
+          }
         }
       }
     },
@@ -2924,6 +3096,7 @@
     },
     "TypeMatrix": {
       "Title": "Type Matrix",
+      "Hint": "Open Type Matrix",
       "AddType": {
         "Label": "Add Type",
         "Hint": "Please provide the name & icons for the new type.",

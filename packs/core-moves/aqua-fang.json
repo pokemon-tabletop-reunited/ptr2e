@@ -32,14 +32,16 @@
           "water"
         ],
         "description": "<p>Effect: On hit, the target has a 10% chance of being Flinched, and a 10% chance to lose -1 SPD for 5 Activations.</p>",
-        "img": "icons/svg/explosion.svg"
+        "img": "icons/svg/explosion.svg",
+        "predicate": []
       }
     ],
     "grade": "E",
     "_migration": {
       "version": null,
       "previous": null
-    }
+    },
+    "traits": []
   },
   "_id": "UJk9BTkjOZh8WeaX",
   "effects": [
@@ -57,6 +59,25 @@
             "predicate": [],
             "chance": 10,
             "affects": "target",
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "alterations": []
+          },
+          {
+            "type": "roll-effect",
+            "key": "aqua-fang-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.advanceffectitem",
+            "predicate": [],
+            "chance": 10,
+            "affects": "target",
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "system.amount",
+                "value": -40
+              }
+            ],
             "mode": 2,
             "priority": null,
             "ignored": false
@@ -90,10 +111,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "ptr2e",
-        "systemVersion": "0.10.0-alpha.2.4.3",
+        "systemVersion": "0.10.0-alpha.5.2.1",
         "createdTime": 1729165852859,
-        "modifiedTime": 1729166081106,
-        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
+        "modifiedTime": 1737676726884,
+        "lastModifiedBy": "IcBpMqhFuTck9VpX"
       }
     }
   ]
