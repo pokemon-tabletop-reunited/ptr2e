@@ -1,0 +1,7 @@
+<section class="dex scroll">
+  {{#each data as |entry|}}
+    <div class="entry" data-slug="{{entry.slug}}" data-state="{{entry.state}}" data-form="{{entry.form}}" data-tooltip="{{entry.tooltip}}" data-tooltip-direction="UP">
+      <img loading="lazy" src="{{entry.img}}" alt="{{entry.name}}">
+    </div>
+  {{/each}}
+</section>

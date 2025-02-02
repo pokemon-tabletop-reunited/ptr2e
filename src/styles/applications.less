@@ -318,8 +318,8 @@ body {
                 grid-area: main;
 
                 display: grid;
-                grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-                grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+                grid-template-columns: repeat(5, 1fr);
+                grid-template-rows: repeat(5, 1fr);
                 overflow: hidden;
                 height: 100%;
 
@@ -359,8 +359,14 @@ body {
                         gap: 0;
                     }
 
+                    .inventory-sidebar {
+                      grid-area: 1 / 4 / span 5 / span 2;
+                      display: flex;
+                      flex-direction: column;
+                    }
+
                     .inventory-points {
-                        grid-area: 1 / 4 / span 2 / span 2;
+                        flex: 0 0 auto;
                         padding: 0.5rem 0.5rem 0 0;
                         
                         fieldset {
@@ -376,7 +382,7 @@ body {
                     }
 
                     .inventory-slots {
-                      grid-area: 3 / 4 / span 2 / span 2;
+                      flex: 0 0 auto;
                       padding: 0 0.5rem 0.5rem 0;
 
                       fieldset {
@@ -954,7 +960,7 @@ body {
                         padding: 0.5rem;
 
                         fieldset {
-                            background: linear-gradient(to right, rgba(7, 7, 10, 0.93), rgba(19, 17, 31, 0.95));
+                            background: var(--appv2-background);
                             border-radius: 8px;
                             border: 1px solid var(--border-theme-color);
     
@@ -992,7 +998,7 @@ body {
                       padding: 0.5rem;
 
                       fieldset {
-                        background: linear-gradient(to right, rgba(7, 7, 10, 0.93), rgba(19, 17, 31, 0.95));
+                        // background: linear-gradient(to right, rgba(7, 7, 10, 0.93), rgba(19, 17, 31, 0.95));
                         border-radius: 8px;
                         border: 1px solid var(--border-theme-color);
 
@@ -1151,6 +1157,53 @@ body {
                     }
                 }
 
+                &[data-tab="biography"] {
+                  .free-form {
+                    grid-area: 1 / 1 / span 3 / span 3;
+                    display: flex;
+                    flex-direction: column;
+
+                    .biography {
+                      flex: 0 0 auto;
+                      padding: 0.5rem;
+                    }
+                  }
+
+                  .right-side {
+                    grid-area: 1 / 4 / span 5 / span 2;
+                    display: flex;
+                    flex-direction: column;
+
+                    .tools {
+                      flex: 0 0 auto;
+                      padding: 0.5rem 0.5rem 0 0;
+                    }
+
+                    .settings {
+                      flex: 0 0 auto;
+                      padding-right: 0.5rem;
+                    }
+
+                    .height-size {
+                      flex: 0 0 auto;
+                      padding: 0 0.5rem 0.5rem 0;
+
+                      .form-group {
+                        label {
+                          flex: 4;
+                        }
+                        .form-fields {
+                          flex: 3;
+                        }
+
+                        input {
+                          text-align: center;
+                        }
+                      }
+                    }
+                  }
+                }
+
                 .effects-display, .perks-display, .abilities-display, .toggles-display {
                     padding: 0.5rem;
 
@@ -1190,6 +1243,12 @@ body {
 
                 .effects-display {
                     grid-area: span 5 / span 3;
+
+                  img {
+                    background: black;
+                    border-radius: 25%;
+                    padding: 0.1rem;
+                  }
                 }
 
                 .toggles-display {
@@ -3464,7 +3523,6 @@ body {
 
             aside[data-application-part="baseStats"] {
                 grid-area: baseStats;
-
                 form#base-stats-form {
                     display: flex;
                     flex-direction: column;
@@ -3487,7 +3545,6 @@ body {
 
             aside[data-application-part="evStats"] {
                 grid-area: evStats;
-
                 margin-top: 0.25rem;
 
                 form#ev-stats-form {
@@ -3525,7 +3582,7 @@ body {
 
                 .stats-chart-aside {
                     align-items: center;
-                    background: linear-gradient(to right, rgba(7, 7, 10, 0.93), rgba(19, 17, 31, 0.95));
+                    background: var(--appv2-background);
                     border-radius: 10px;
                     margin: 0.25rem;
 
@@ -8386,6 +8443,65 @@ body {
 
       button {
         flex: 0 0 35%;
+      }
+    }
+  }
+}
+
+.application.sheet.dex-sheet {
+  .window-content {
+    padding: 0;
+
+    .dex {
+      padding: 0.5rem;
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      align-items: center;
+      text-align: center;
+      overflow-y: auto;
+
+      .entry {
+        flex: 0 0 64px;
+        height: 64px;
+        width: 64px;
+        border: 3px solid var(--border-theme-color);
+        border-radius: 50%;
+        overflow: hidden;
+
+        background: color-mix(in srgb, white 40%, var(--user-color));
+        padding: 0.25rem;
+
+        img {
+          border: unset;
+          border-radius: 0;
+          object-fit: contain;
+          height: 100%;
+          width: 100%;
+        }
+
+        &[data-state="unknown"] {
+          border-color: #4d4c4c;
+
+          img {
+            filter: brightness(0);
+          }
+        }
+
+        &[data-state="seen"] {
+          img {
+            filter: blur(3px);
+          }
+        }
+
+        &[data-state="caught"] {
+          border-color: #379762;
+        }
+
+        &[data-state="shiny"] {
+          border-color: #f5c42e;
+        }
       }
     }
   }

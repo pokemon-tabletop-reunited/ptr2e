@@ -42,6 +42,11 @@ class CheckPTR2e {
       check.calculateTotal(rollOptions);
     }
 
+    if(rollOptions.has("target:uncapturable")) {
+      ui.notifications.error(game.i18n.localize("PTR2E.AttackWarning.CannotCaptureTarget"));
+      return null;
+    }
+
     if (!context.skipDialog) {
       // Show dialog for adding/editing modifiers, unless skipped or flat check
       const dialog = await new ModifierPopup(check, context).wait();
@@ -71,7 +76,7 @@ class CheckPTR2e {
       check,
       ballBonus: (context.item?.system instanceof ConsumableSystemModel && context.item.system.consumableType === "pokeball" ? context.item.system.modifier : 1) || 1,
       critMultiplier: check.total?.crit?.percentile ?? 1,
-      caughtMons: check.total?.crit?.base ?? 1,
+      caughtMons: Math.max(1, (context.actor?.system?.details?.caught ?? 0) + (check.total?.crit?.base ?? 0)),
       miscMultiplier: check.total?.capture?.percentile ?? 1,
       target: context.target?.actor,
       user: context.actor

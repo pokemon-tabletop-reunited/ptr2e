@@ -40,7 +40,7 @@ export default function HasActions<BaseClass extends TemplateConstructor>(baseCl
 
         // If an item isn't equipped it should be ignored
         if (this._isGearParent(this.parent)) {
-          if(this.parent.system.equipped.carryType !== "equipped") continue;
+          if(this.parent.parent && this.parent.system.equipped.carryType !== "equipped") continue;
         }
 
         action.prepareDerivedData();

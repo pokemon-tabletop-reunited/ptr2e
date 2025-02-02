@@ -510,7 +510,7 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
     if (!(flingItem.type === "consumable" && (flingItem.system as ConsumableSystem).consumableType === "pokeball")) return;
 
     const action = PokeballActionPTR2e.fromConsumable(flingItem as ConsumablePTR2e);
-    await action.roll({ accuracyRoll, critRoll, targets: [target]})
+    await action.roll({ accuracyRoll, critRoll, targets: [target] })
   }
 
   async spendPP() {
@@ -569,7 +569,7 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
           }
 
           const grantedSource = item.toObject();
-          
+
           try {
             for (const alteration of effectRoll.alterations ?? []) {
               alteration.applyTo(grantedSource as ItemSourcePTR2e);
@@ -690,7 +690,7 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
     html.find("[data-action='consume-pp']").on("click", this.spendPP.bind(this));
     html.find("[data-action='apply-capture']").on("click", async (event) => {
       const targetUuid = (event.currentTarget.closest("[data-target-uuid]") as HTMLElement)?.dataset?.targetUuid;
-      if(!targetUuid) return;
+      if (!targetUuid) return;
       const result = this.results.find(r => r.target.uuid === targetUuid);
       if (!result) return;
       await this.rollCaptureCheck({
@@ -745,6 +745,128 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
       content: notification,
     });
   }
+
+  public async spendLuck({ entry, choice }: { entry: TargetData, choice: { type: string; amount: number; name?: string; index?: number } }) {
+    const actor = ["origin-effect", "defensive-effect"].includes(choice.type) ? await fromUuid<ActorPTR2e>(entry.uuid) : await this.currentOrigin;
+    if (!actor) return;
+
+    const luck = actor.system.skills.get("luck")!.total;
+    if (!entry.result) {
+      if (choice.type !== "self-effect") throw new Error("Attempting to spend luck on a Self Effect but no Self Effect was selected");
+      if (choice.index === undefined) throw new Error("No Self Effect index was provided");
+      if (!this.selfEffects) throw new Error("No Self Effects were found");
+
+      const results = fu.duplicate(this.selfEffects);
+      const currentResult = results[choice.index] as { roll: Rolled<AttackRoll>, success: boolean };
+      if (!currentResult) return;
+
+      const value = currentResult.roll!.total;
+      if (luck < value) {
+        ui.notifications.warn("You do not have enough Luck to apply this increase.");
+        return;
+      }
+
+      await actor.update({
+        "system.skills": actor.system.skills.map((skill) => {
+          return skill.slug === "luck"
+            ? {
+              ...skill,
+              value: luck - value,
+            }
+            : skill;
+        })
+      });
+
+      const notification = game.i18n.format("PTR2E.ChatContext.SpendLuckAttack.spent", {
+        amount: value,
+        actor: actor.name,
+        total: actor.system.skills.get("luck")!.total,
+        type: choice.name ?? "Self Effect "
+      });
+      ui.notifications.info(notification);
+
+      //@ts-expect-error - As this is an object duplicate, the property is no longer read-only.
+      currentResult.roll.total = 0;
+      currentResult.success = true;
+
+      await this.parent.update({ "system.selfEffects": results });
+
+      await ChatMessagePTR2e.create({
+        whisper: ChatMessagePTR2e.getWhisperRecipients("GM") as unknown as string[],
+        speaker: { alias: actor.name },
+        content: notification,
+      });
+    }
+
+    const results = fu.duplicate(this.parent.system.results);
+    const currentResult = results[this.parent.system.results.findIndex(r => r.target.uuid == entry.uuid)];
+    if (!currentResult) return;
+    
+    const result = (() => {
+      switch (choice.type) {
+        case "target-effect": return currentResult.effectRolls?.target[choice.index!];
+        case "origin-effect": return currentResult.effectRolls?.origin[choice.index!];
+        case "defensive-effect": return currentResult.effectRolls?.defensive[choice.index!];
+      }
+      return null;
+    })()
+    const roll = result ? result.roll : choice.type === "accuracy" ? currentResult.accuracy : choice.type === "crit" ? currentResult.crit : null;
+    if (!roll) return;
+
+    const value = roll.total;
+    if (luck < value) {
+      ui.notifications.warn("You do not have enough Luck to apply this increase.");
+      return;
+    }
+
+    await actor.update({
+      "system.skills": actor.system.skills.map((skill) => {
+        return skill.slug === "luck"
+          ? {
+            ...skill,
+            value: luck - value,
+          }
+          : skill;
+      })
+    });
+    
+    const notification = game.i18n.format("PTR2E.ChatContext.SpendLuckAttack.spent", {
+      amount: value,
+      actor: actor.name,
+      total: actor.system.skills.get("luck")!.total,
+      type: (() => {
+        switch (choice.type) {
+          case "accuracy": return "Accuracy";
+          case "crit": return "Crit";
+          case "target-effect":
+          case "origin-effect":
+          case "defensive-effect": return choice.name ?? "Effect"
+        }
+        return "";
+      })()
+    })
+    ui.notifications.info(notification);
+
+    //@ts-expect-error - As this is an object duplicate, the property is no longer read-only.
+    roll.total = 0;
+    if(result) result.success = true;
+
+    await this.parent.update({ "system.results": results });
+
+    await ChatMessagePTR2e.create({
+      whisper: ChatMessagePTR2e.getWhisperRecipients("GM") as unknown as string[],
+      speaker: { alias: actor.name },
+      content: notification,
+    });
+  }
+}
+
+export interface TargetData {
+  uuid: string;
+  name: string;
+  img: string;
+  result?: AttackResultsData;
+  results: { type: string; amount: number, name?: string, index?: number }[];
 }
 
 interface AttackMessageSystem extends ModelPropsFromSchema<AttackMessageSchema> {
@@ -786,6 +908,8 @@ interface AttackMessageRenderContextData {
   };
   hasCaptureRoll?: boolean;
 }
+
+export type AttackResultsData = ModelPropsFromSchema<AttackMessageSchema>["results"][number];
 
 interface AttackMessageSchema extends foundry.data.fields.DataSchema {
   origin: foundry.data.fields.JSONField<ActorPTR2e, true, false, false>;
@@ -890,10 +1014,10 @@ interface TargetEffectRollsSchema extends foundry.data.fields.DataSchema {
     foundry.data.fields.ModelPropFromDataField<foundry.data.fields.SchemaField<EffectRollsSchema>>[],
     true, false, true>;
   defensive: foundry.data.fields.ArrayField<
-  foundry.data.fields.SchemaField<EffectRollsSchema>,
-  foundry.data.fields.SourcePropFromDataField<foundry.data.fields.SchemaField<EffectRollsSchema>>[],
-  foundry.data.fields.ModelPropFromDataField<foundry.data.fields.SchemaField<EffectRollsSchema>>[],
-  true, false, true>;
+    foundry.data.fields.SchemaField<EffectRollsSchema>,
+    foundry.data.fields.SourcePropFromDataField<foundry.data.fields.SchemaField<EffectRollsSchema>>[],
+    foundry.data.fields.ModelPropFromDataField<foundry.data.fields.SchemaField<EffectRollsSchema>>[],
+    true, false, true>;
 }
 
 interface CheckContextSchema extends foundry.data.fields.DataSchema {
