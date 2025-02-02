@@ -525,12 +525,12 @@
         "spent": "Successfully applied Luck to this roll, spending {amount} Luck from {actor}. New total: {total}"
       },
       "SpendLuckAttack": {
-        "label": "Spend Luck to Hit",
-        "hint": "Select the target for whom you'd like to spend luck to turn this miss into a hit",
+        "label": "Spend Luck",
+        "hint": "Select the roll to spend Luck on.",
         "title": "Are you sure you're Spending Luck?",
         "requires": "(Requires {amount} points of Luck)",
-        "content": "You're about to spend {amount} Luck to hit.",
-        "spent": "Successfully applied Luck to this roll, spending {amount} Luck from {actor}. New total: {total}"
+        "content": "You're about to spend {amount} Luck.",
+        "spent": "Successfully applied Luck to the {type} roll, spending {amount} Luck from {actor}. New total: {total}"
       },
       "RollInspector": {
         "label": "Open Roll Inspector"
@@ -2289,7 +2289,16 @@
       },
       "TargetSelector": {
         "Target": "Target",
-        "Pick": "Pick {target}"
+        "Pick": "Pick {target}",
+        "Type": {
+          "accuracy": "Accuracy Roll",
+          "damage": "Damage Roll",
+          "crit": "Crit Roll",
+          "target-effect": "Target Effect: {name}",
+          "origin-effect": "Origin Effect: {name}",
+          "defensive-effect": "Defensive Effect: {name}",
+          "self-effect": "Self Effect: {name}"
+        }
       },
       "RenameDocumentTitle": "Rename Blueprint",
       "RenameDocumentContent": "Enter the new name for this blueprint.",

@@ -42,7 +42,7 @@ export const ChatContext: PTRHook = {
 
             if (["skill"].includes(message.type)) return !(message.system as SkillMessageSystem).luckRoll;
             if (["capture"].includes(message.type)) return true;
-            if (["attack"].includes(message.type)) return (message.system as AttackMessageSystem).results.some(r => (r?.accuracy?.total ?? 0) > 0);
+            if (["attack"].includes(message.type)) return true;
 
             return false;
           },
@@ -94,42 +94,81 @@ export const ChatContext: PTRHook = {
             else if (message.type == "attack") {
               const attackMessage = message as ChatMessagePTR2e<AttackMessageSystem>;
               // get the valid targets (the ones that have been missed)
-              const targets = attackMessage.system.results.map(r => {
-                // (r.accuracy?.total ?? 0) <= (r.accuracy?.options?.accuracyDC ?? -1)
-                const currentResult = r.accuracy?.total ?? 0;
-                const amount = Math.max(currentResult, 0);
-                return {
-                  uuid: r.target.uuid,
-                  name: r.target.name,
-                  img: r.target.img,
-                  description: game.i18n.format("PTR2E.ChatContext.SpendLuckAttack.requires", { amount }),
-                  amount,
-                  result: r,
-                };
-              }).filter(r => r.amount > 0);
+              const options = [
+                ...attackMessage.system.results.flatMap(r => {
+                  const results: { type: string, amount: number, name?: string, index?: number}[] = [];
+
+                  if ((r.accuracy?.total ?? 0) > 0) results.push({ type: 'accuracy', amount: r.accuracy!.total })
+                  if ((r.crit?.total ?? 0) > 0) results.push({ type: 'crit', amount: r.crit!.total })
+
+                  let i = 0;
+                  for (const data of r.effectRolls?.target || []) {
+                    if ((data.roll?.total ?? 0) > 0) results.push({ type: 'target-effect', amount: data.roll!.total, name: data.label, index: i })
+                    i++;
+                  }
+
+                  i = 0;
+                  for (const data of r.effectRolls?.origin || []) {
+                    if ((data.roll?.total ?? 0) > 0) results.push({ type: 'origin-effect', amount: data.roll!.total, name: data.label, index: i })
+                    i++;
+                  }
+
+                  i = 0;
+                  for (const data of r.effectRolls?.defensive || []) {
+                    if ((data.roll?.total ?? 0) > 0) results.push({ type: 'defensive-effect', amount: data.roll!.total, name: data.label, index: i })
+                    i++;
+                  }
+
+                  if (!results.length) return [];
+
+                  return {
+                    uuid: r.target.uuid,
+                    name: r.target.name,
+                    img: r.target.img,
+                    results,
+                    result: r,
+                    // description: game.i18n.format("PTR2E.ChatContext.SpendLuckAttack.requires", { amount }),
+                  };
+                }),
+                ...(attackMessage.system.selfEffects
+                  ? [
+                    attackMessage.system.selfEffects?.rolls.reduce((acc, r, i) => {
+                      if ((r.roll?.total ?? 0) > 0) acc.results.push({ type: 'self-effect', amount: r.roll!.total, name: r.label, index: i })
+                      return acc;
+                    }, {
+                      uuid: attackMessage.system.origin.uuid,
+                      name: attackMessage.system.origin.name,
+                      img: attackMessage.system.origin.img,
+                      results: [] as { type: string, amount: number, name?: string, index?: number}[],
+                    })]
+                  : []
+                )
+              ]
 
               // check if there are no targets (and bail early)
-              if (targets.length == 0) {
+              if (options.length == 0) {
                 ui.notifications.error("There are no rolls to apply a luck increase to!");
                 return;
               }
 
               // check if there is exactly one relevant target (if there is, no need to disambiguate)
-              const targetUuid: Maybe<string> = targets.length === 1
-                ? targets[0]?.uuid
-                : await new TargetSelectorPopup(targets).wait();
+              const selectedRoll = options.length === 1 && options[0].results.length === 1
+                ? { entry: options[0], choice: options[0].results[0] }
+                : await new TargetSelectorPopup(options).wait();
 
-              const target = targets.find(r => r.uuid == targetUuid);
+              if (!selectedRoll) return;
+
+              const target = options.find(r => r.uuid == selectedRoll.entry.uuid);
               if (!target) return;
 
               foundry.applications.api.DialogV2.confirm({
                 window: {
                   title: "PTR2E.ChatContext.SpendLuckAttack.title",
                 },
-                content: game.i18n.format("PTR2E.ChatContext.SpendLuckAttack.content", { amount: target.amount }),
+                content: game.i18n.format("PTR2E.ChatContext.SpendLuckAttack.content", { amount: selectedRoll.choice.amount }),
                 yes: {
                   callback: async () => {
-                    await attackMessage.system.applyLuckIncrease(target.uuid as ActorUUID);
+                    await attackMessage.system.spendLuck(selectedRoll);
                   }
                 }
               });
