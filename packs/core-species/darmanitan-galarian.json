@@ -4,7 +4,6 @@
   "img": "systems/ptr2e/img/icons/species_icon.webp",
   "system": {
     "number": 555,
-    "form": "galarian",
     "size": {
       "category": "medium",
       "type": "quad",
@@ -33,7 +32,6 @@
       "chiller",
       "freezer",
       "semi-bipedal",
-      "underdog",
       "fully-evolved"
     ],
     "abilities": {
@@ -173,7 +171,7 @@
         "group": null
       }
     ],
-    "slug": "darmanitan",
+    "slug": "darmanitan-galarian",
     "stats": {
       "hp": 105,
       "atk": 140,
@@ -505,11 +503,11 @@
     "genderRatio": 4,
     "habitats": [],
     "evolutions": {
-      "name": "darumaka-galarian",
+      "name": "galarian-darumaka",
       "details": null,
       "evolutions": [
         {
-          "name": "darmanitan-galarian",
+          "name": "galarian-darmanitan",
           "uuid": "Compendium.ptr2e.core-species.Item.gYXT4R9q1Fk21SZ5",
           "methods": [
             {
@@ -532,21 +530,25 @@
           },
           "evolutions": [],
           "perk": {
-            "x": 15,
-            "y": 15
+            "x": 26,
+            "y": 26
           }
         }
       ],
       "uuid": "Compendium.ptr2e.core-species.Item.OxiRikjnbwrn4hqS",
       "methods": [],
       "perk": {
-        "x": 15,
-        "y": 15
+        "x": 26,
+        "y": 26
       }
     },
     "_migration": {
-      "version": null,
-      "previous": null
+      "version": 0.11,
+      "previous": {
+        "schema": 0.109,
+        "foundry": "12.331",
+        "system": "0.10.0-alpha.5.1"
+      }
     }
   },
   "_id": "gYXT4R9q1Fk21SZ5",
@@ -592,13 +594,19 @@
             ],
             "key": "",
             "value": "Compendium.ptr2e.core-abilities.Item.fmuCUbeLJbHsVIMM",
+            "reevaluateOnUpdate": true,
+            "allowDuplicate": false,
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "system.free",
+                "value": "type"
+              }
+            ],
             "mode": 2,
             "priority": null,
             "ignored": false,
-            "reevaluateOnUpdate": false,
             "inMemoryOnly": false,
-            "allowDuplicate": true,
-            "alterations": [],
             "track": false,
             "replaceSelf": false,
             "onDeleteActions": {
@@ -646,6 +654,18 @@
             "ignored": false
           },
           {
+            "type": "ephemeral-modifier",
+            "predicate": [
+              "forme:zen-mode:active"
+            ],
+            "key": "damaging-attack-damage-percentile",
+            "value": -15,
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "hideIfDisabled": false
+          },
+          {
             "type": "suppress-ability",
             "predicate": [
               "forme:zen-mode:active"
@@ -687,10 +707,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "ptr2e",
-        "systemVersion": "0.10.0-alpha.5.1.5",
-        "createdTime": 1735660426098,
-        "modifiedTime": 1737331885760,
-        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+        "systemVersion": "0.10.0-alpha.5.2.1",
+        "createdTime": null,
+        "modifiedTime": 1738152137574,
+        "lastModifiedBy": "IcBpMqhFuTck9VpX"
       }
     }
   ]
