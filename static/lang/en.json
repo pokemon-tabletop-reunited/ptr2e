@@ -16,6 +16,7 @@
   "TYPES.Item.summon": "Summon",
   "TYPES.ActiveEffect.passive": "Passive Effect",
   "TYPES.ActiveEffect.affliction": "Affliction",
+  "TYPES.ActiveEffect.advancement": "Advance/Delay",
   "TYPES.ActiveEffect.summon": "Summon Effect",
   "TYPES.ActiveEffect.form": "Forme",
   "ITEM.AddButton": "Add",
@@ -23,6 +24,8 @@
   "SETTINGS.TutorList": "Manage Tutor Lists",
   "SETTINGS.Github": "Manage Github PR",
   "PTR2E": {
+    "DynamicTableRefresh": "Reset Dynamic Table Cache",
+    "DynamicTableCopy": "Copy Dynamic Table",
     "Rename": "Rename",
     "Actor": {
       "Plural": "Actors"
@@ -34,7 +37,7 @@
       "FIELDS": {
         "species": {
           "label": "Species",
-          "hint": "A Species, Actor or Rolltable (containing Species or Actors) UUID."
+          "hint": "A Species, Actor or Rolltable (containing Species or Actors) UUID, or the slug of a Dynamic Habitat Table"
         },
         "level": {
           "label": "Level",
@@ -47,6 +50,82 @@
         "shiny": {
           "label": "Shiny",
           "hint": "The % chance for the Pokémon to be shiny."
+        },
+        "gender": {
+          "label": "Gender",
+          "hint": "The gender of the Pokémon, if 'Random' is selected, the species' gender ratio is used."
+        }
+      }
+    },
+    "GeneratorConfig": {
+      "label": "Perk Generator Config",
+      "hint": "The config that defines how the auto-perk generation should pick up perks. You can drag any config from another blueprint here to copy it.",
+      "FIELDS": {
+        "mode": {
+          "label": "Generation Mode",
+          "hint": "The overall generation mode; currently only 'Priority Order' mode is supported, but more will be added in the future.",
+          "order": "Priority Order",
+          "species": "Species Based"
+        },
+        "cost": {
+          "priority": {
+            "label": "Cost Prioritization",
+            "hint": "Should the generator prioritize picking up the cheapest perks towards its goal, or the shortest route regardless of price?",
+            "cheapest": "Cheapest",
+            "shortest": "Shortest",
+            "random": "Random"
+          },
+          "resolution": {
+            "label": "Tie-Resolution",
+            "hint": "If a tie occurs in prioritization, should the generator pick the cheapest or most expensive option?",
+            "cheapest": "Cheapest",
+            "costliest": "Costliest",
+            "random": "Random"
+          }
+        },
+        "entry": {
+          "mode": {
+            "label": "Entry Root",
+            "hint": "What entry root should be used for the generator?",
+            "best": "Best Result",
+            "random": "Random Root",
+            "choice": "Specific Root"
+          },
+          "choice": {
+            "label": "Specific Root",
+            "hint": "The specific root perk to use as the root node for the generator."
+          }
+        },
+        "randomness": {
+          "label": "Randomness",
+          "hint": "% Chance whenever the Generator attempts to make the best choice; it will instead just take a random choice. High % of randomness has performance implications."
+        },
+        "label": {
+          "label": "Config Label",
+          "hint": "Label for this Configuration when shown in the Global Configs list."
+        },
+        "link": {
+          "label": "Sync with Global Config?",
+          "hint": "Should this configuration's settings be synchronized with its version in the Global Configuration?"
+        },
+        "priorities": {
+          "slug": {
+            "label": "",
+            "hint": ""
+          },
+          "priority": {
+            "label": "",
+            "hint": ""
+          },
+          "type": {
+            "label": "",
+            "hint": "",
+            "arena": "Arena",
+            "approach": "Approach",
+            "archetype": "Archetype",
+            "trait": "Trait",
+            "perk": "Perk"
+          }
         }
       }
     },
@@ -104,6 +183,14 @@
           "Free": "Free"
         }
       }
+    },
+    "Inventory": {
+      "weapon": "Weapons",
+      "equipment": "Equipment",
+      "consumable": "Consumables",
+      "gear": "Gear",
+      "container": "Containers",
+      "empty": "No items yet..."
     },
     "PerkWebApp": {
       "Title": "Perk Web",
@@ -297,7 +384,8 @@
       "AfflictionDisabled": "The action {name} is currently Disabled and cannot be used!",
       "NotEnoughPP": "Unable to spend {cost} power points. You only have {current}.",
       "UnableToAct": "{action} Failed! ",
-      "FlingTargetNotAlly": "Fling 'Actor-Toss' can only target allies."
+      "FlingTargetNotAllyOrGrappled": "Fling 'Actor-Toss' can only target allies or grappled enemies.",
+      "CannotCaptureTarget": "Oops! This target is not capturable!"
     },
     "DataInspector": {
       "DataButton": "Data",
@@ -437,12 +525,12 @@
         "spent": "Successfully applied Luck to this roll, spending {amount} Luck from {actor}. New total: {total}"
       },
       "SpendLuckAttack": {
-        "label": "Spend Luck to Hit",
-        "hint": "Select the target for whom you'd like to spend luck to turn this miss into a hit",
+        "label": "Spend Luck",
+        "hint": "Select the roll to spend Luck on.",
         "title": "Are you sure you're Spending Luck?",
         "requires": "(Requires {amount} points of Luck)",
-        "content": "You're about to spend {amount} Luck to hit.",
-        "spent": "Successfully applied Luck to this roll, spending {amount} Luck from {actor}. New total: {total}"
+        "content": "You're about to spend {amount} Luck.",
+        "spent": "Successfully applied Luck to the {type} roll, spending {amount} Luck from {actor}. New total: {total}"
       },
       "RollInspector": {
         "label": "Open Roll Inspector"
@@ -559,7 +647,8 @@
           "hint": "Whether this affects 'Self', 'Origin' or 'Target'",
           "target": "Target",
           "self": "Self",
-          "origin": "Origin"
+          "origin": "Origin",
+          "defensive": "Defensive"
         },
         "ChangeReevaluateOnUpdate": {
           "label": "Reevaluate on Update",
@@ -626,6 +715,10 @@
         "stacks": {
           "label": "Stacks",
           "hint": "The number of stacks this Affliction currently has."
+        },
+        "amount": {
+          "label": "Advance/Delay Amount",
+          "hint": "The % to Advance (positive) or Delay (negative) the target's turn by."
         },
         "duration": {
           "turns": {
@@ -715,6 +808,7 @@
           "infested": "Infested",
           "wind-shear": "Wind Shear",
           "tased": "Tased",
+          "wracked": "Wracked",
           "disabled": "Disabled",
           "nullified": "Nullified",
           "suppressed": "Suppressed",
@@ -763,44 +857,45 @@
         },
         "Descriptions": {
           "fainted": "<p>When a creature's HP reaches and remains at 0, it is afflicted with Fainted.</p><p>A Fainted creature cannot use Actions, does not benefit from Abilities, and is cured of all @Trait[major-affliction], @Trait[minor-affliction], @Trait[pseudo-affliction], and @Trait[stage-change] effects they possess.</p><p>Fainted is cured when the afflicted creature's HP is greater than 0.</p><p>The creature's @Affliction[weary] count increases by 1 whenever they are cured of Fainted.</p>",
-          "burn": "The afflicted creature loses a Tick of HP at the end of each of their Activations. The creature has their default ATK stages reduced by 1 while Burn is active.",
-          "poison": "The afflicted creature loses a Tick of HP at the end of each of their Activations. The afflicted creature’s default SPATK stages are reduced by 1 while Poison is active.",
-          "blight": "At the end of the afflicted creature’s Activation, it loses X Stacks of Blight, where X is 2<sup style='font-size: x-small;'># of Activations passed with Blight</sup> and takes a Tick of HP per Stack lost. The afflicted creature’s default SPATK stages are reduced by 1 while Blight is active. When a creature receives Blight, it loses the Poison Condition, with Blight gaining 33% of its remaining Poison Stacks as extra Stacks on Blight. When afflicted with Poisoned X while Blighted, the creature gains +1 to its Blight Stacks.",
-          "paralysis": "The afflicted creature's SPD is reduced by 50% and they have -2 default SPD Stages. The creature also has Slowed while Paralysis is active.",
-          "drowsy": "The Power of all of the afflicted creature's attacks is reduced by 33%, and the creature cannot utilize the [Priority X] or [Interrupt X] capabilities of their Actions. The afflicted creature's default SPDEF stages are reduced by 1 while Drowsy is active.",
-          "nightmares": "This Affliction can only be applied to Drowsy creatures. The Power of all of the afflicted creature's attacks is reduced by 50%, and the creature cannot utilize the [Priority X] or [Interrupt X] capabilities of their actions. The creature loses a Tick of HP at the end of each of its Activations and has their default SPDEF and ACC stages reduced by 1 while Nightmares is active. When a creature receives Nightmares, it loses the Drowsy Condition, and gains 33% of its remaining Drowsy Stacks onto Nightmares, and further Nightmares Stacks cannot be applied.",
-          "frozen": "The afflicted creature is unable to use actions (either during its Activations or as interrupts/reactions), but takes 33% less damage from all sources. The afflicted creature's default EVA stages are reduced by 1, and has its SPD increased by 50%. Additional Frozen Stacks cannot be added while Frozen is on a creature. When Frozen ticks down to zero Stacks (not cured), the afflicted creature gains Frostbite 5.",
-          "frostbite": "The afflicted creature loses a Tick of HP at the end of each of their Activations. The creature has -1 default DEF stages while Frostbite is active.",
+          "burn": "The afflicted creature loses a Tick of HP at the end of each of their Activations. The creature has their default ATK Stages reduced by 1 while Burn is active.",
+          "poison": "The afflicted creature loses a Tick of HP at the end of each of their Activations. The afflicted creature’s default SPATK Stages are reduced by 1 while Poison is active.",
+          "blight": "At the end of the afflicted creature’s Activation, it loses X Stacks of Blight, where X is 2<sup style='font-size: x-small;'># of Activations passed with Blight</sup> and takes a Tick of HP per Stack lost. The afflicted creature’s default SPATK Stages are reduced by 1 while Blight is active. When a creature receives Blight, it loses the Poison Affliction, with Blight gaining 33% of its remaining Poison Stacks as extra Stacks on Blight. When afflicted with Poisoned X while Blighted, the creature gains +1 to its Blight Stacks.",
+          "paralysis": "The afflicted creature's SPD is reduced by 50% and also has @Affliction[slowed] while Paralysis is active. Additionally, whenever the creature takes an Action, there is a 25% chance to apply @Affliction[tased]{Tased 2} to themselves.",
+          "drowsy": "The Power of all of the afflicted creature's attacks is reduced by 33%, and the creature cannot utilize the [Priority X] or [Interrupt X] capabilities of their Actions. The afflicted creature's default SPDEF Stages are reduced by 1 while Drowsy is active.",
+          "nightmares": "This Affliction can only be applied to Drowsy creatures. The Power of all of the afflicted creature's attacks is reduced by 50%, and the creature cannot utilize the [Priority X] or [Interrupt X] capabilities of their actions. The creature loses a Tick of HP at the end of each of its Activations and has their default SPDEF and ACC Stages reduced by 1 while Nightmares is active. When a creature receives Nightmares, it loses the Drowsy Affliction, and gains 33% of its remaining Drowsy Stacks onto Nightmares, and further Nightmares Stacks cannot be applied.",
+          "frozen": "The afflicted creature is unable to use actions (either during its Activations or as interrupts/reactions), but takes 33% less damage from all sources. The afflicted creature's default EVA Stages are reduced by 1. Additional Frozen Stacks cannot be added while Frozen is on a creature. When Frozen ticks down to zero Stacks (not cured), the afflicted creature gains Frostbite 5 and their next Activation is Advanced by 50%.",
+          "frostbite": "The afflicted creature loses a Tick of HP at the end of each of their Activations. The creature has -1 default DEF Stages while Frostbite is active.",
           "splinter": "The afflicted creature loses a Tick of HP when they are damaged by a Physical- or Special-Category attack. The creature has Stunted while Splinter is active.",
           "slowed": "The afflicted creature’s Movement Scores are reduced by 50%, rounding down (minimum 1).",
           "hindered": "The afflicted creature’s Skill DCs are reduced by -10. Hindered applied from different sources have their own Stacks.",
           "stunted": "When the afflicted creature recovers HP, that amount is reduced by 2 Ticks (to a minimum of 0 HP healed).",
           "confused": "At the end of the afflicted creature's Activations, it has a 50% chance of using Fumble.",
-          "hyper-mode": "While afflicted with Hyper Mode, the afflicted creature gains +20% to all of its Movement Scores, while dealing and taking 15% more damage. As well, the user’s Shadow-Type attacks gain [Crit 1], or have their [Crit X] value increase by +1. At the start of the afflicted creature’s Activations, it has:<ul><li>a 40% chance to act normally on that Activation.</li><li>a 25% chance to be Choice-Locked 1 to Shadow-Type attacks.</li><li>a 15% chance of ending its Activation and using Fumble.</li><li>a 15% chance of using Backlash.</li><li>a 5% chance to be cured of Hyper Mode.</li></ul>",
-          "weary": "While a creature is Weary, its default ACC and EVA stages are based on its Weary value, X. Specifically, the default ACC and EVA stages are set to the negative sum of all X and all integers between 0 and X (Weary 1 sets the defaults to -1, 2 to -3, and 3 to -6). Weary is automatically increased by 1 when a creature Faints. When a creature has 4 or more Weary, it is unable to battle until they reduce their Weary. Weary cannot wear off on its own - a creature must deliberately Rest or consume Items such as Apples to remove Stacks of Weary.",
-          "exposed": "While a creature is Exposed, its Weary status cannot be removed by Resting.",
+          "hyper-mode": "While afflicted with Hyper Mode, the afflicted creature gains +20% to all of its Movement Scores, while dealing and taking 15% more damage. As well, the user’s Shadow-Type attacks gain [Crit 2], or have their [Crit X] value increase by +2. At the start of the afflicted creature’s Activations, it has:<ul><li>a 40% chance to act normally on that Activation.</li><li>a 25% chance to be Choice-Locked 1 to Shadow-Type attacks.</li><li>a 15% chance of ending its Activation and using Fumble.</li><li>a 15% chance of using Backlash.</li><li>a 5% chance to be cured of Hyper Mode.</li></ul>",
+          "weary": "While a creature is Weary, its default ACC and EVA Stages are based on its Weary value, X. Specifically, the default ACC and EVA Stages are set to the negative sum of all X and all integers between 0 and X (Weary 1 sets the defaults to -1, 2 to -3, and 3 to -6). Weary is automatically increased by 1 when a creature Faints. When a creature has 4 or more Weary, it is unable to battle until they reduce their Weary. Weary cannot wear off on its own - a creature must deliberately Rest or consume Items such as Apples to remove Stacks of Weary.",
+          "exposed": "While a creature is Exposed, it cannot remove Weary by Resting.",
           "blinded": "The afflicted creature is unable to see, ocularly. The creature has their \"seeing-based\" vision options disabled (standard vision, Darkvision, X-Ray Vision, etc.) and can only perceive using their other senses (as listed in their Traits). If they do not have a way to see, or have someone guiding them, they are unable to target other creatures with Attacks or Actions.",
           "stuck": "While afflicted with Stuck, creatures may not leave the combat area. If the afflicted creature is an owned Pokemon, it cannot willingly switch out (or be switched out by another party). When a creature with the [Trainer] or [Ace] trait would gain Stuck; they instead gain Slowed X, rather than Stuck X.",
-          "bound": "The afflicted creature cannot willingly use any Movement. Stacks of Bound do not decrease at the end of a creature's Activation, instead the effect that applied Bound will provide a way of removing the Bound Condition.",
-          "drowning": "The afflicted creature loses a Tick of HP at the end of each of their Activations. The creature is Suppressed and has -1 default EVA stage while Drowning is active.",
-          "infested": "The afflicted creature loses a Tick of HP at the end of each of their Activations. The creature is Hindered and has -1 default DEF stage while Infested is active.",
-          "wind-shear": "The afflicted creature loses a Tick of HP at the end of each of their Activations. The creature has -1 default ACC stage while Wind Shear is active.",
-          "tased": "The afflicted creature loses a Tick of HP at the end of each of their Activations. The creature has -1 default SPDEF stage while Tased is active.",
+          "bound": "The afflicted creature cannot willingly use any Movement. Stacks of Bound do not decrease at the end of a creature's Activation, instead the effect that applied Bound will provide a way of removing the Bound Affliction.",
+          "drowning": "The afflicted creature loses a Tick of HP at the end of each of their Activations. The creature is Suppressed and has -1 default EVA Stage while Drowning is active.",
+          "infested": "The afflicted creature loses a Tick of HP at the end of each of their Activations. The creature is Hindered and has -1 default DEF Stage while Infested is active.",
+          "wind-shear": "The afflicted creature loses a Tick of HP at the end of each of their Activations. The creature has -1 default ACC Stage while Wind Shear is active.",
+          "tased": "The afflicted creature loses a Tick of HP at the end of each of their Activations. The creature has -1 default SPDEF Stage while Tased is active.",
+          "wracked": "The afflicted creature loses one and a half Ticks of HP at the end of each of their Activations. The creature has -1 default ATK and SPATK Stage while Wracked is active.",
           "disabled": "One of the afflicted creature’s attacks cannot be used, under any circumstances. The move in question is determined by the source of the disabled effect, usually being “the last attack the target used.” If this would prevent them from using any attack, they may Struggle instead.",
           "nullified": "One of the afflicted creature’s abilities is negated, and cannot be activated or benefited from. The ability in question is determined by the source of the nullification, usually determined randomly.",
           "suppressed": "The afflicted creature spends 50% more PP on all actions that use PP, minimum 1.",
-          "lifted": "the afflicted creature is held aloft, unable to act normally. The creature cannot use <Movement> other than [Teleport] while Lifted and is otherwise considered Stuck and Raised for the duration. A Lifted creature also suffers -6 EVA stages.",
+          "lifted": "The afflicted creature is held aloft. The creature cannot use [Movement] other than [Teleport] while Lifted and is otherwise considered @Affliction[stuck] and @Affliction[raised] for the duration. A Lifted creature also suffers -4 EVA Stages.",
           "raised": "While a creature is Raised, it is immune to attacks and effects with the [Earthbound] trait.",
           "harden": "While under the effect of Harden, the afflicted creature’s [Contact] attacks have +20 Power, and their [Dash] attacks gain [Crit 1] or have their [Crit X] increase by +1.",
           "sharpen": "While under the effect of Sharpen, the afflicted creature’s [Contact] attacks gain [Sharp], and their [Sharp] attacks gain [Crit 1] or have their [Crit X] increase by +1.",
-          "destined": "when the afflicted creature deals damage with a Damaging Attack to the source of Destined, the afflicted creature is inflicted with the same amount of damage.",
+          "destined": "When the afflicted creature deals damage with a Physical- or Special-Category Attack to the source of Destined, the afflicted creature is inflicted with the same amount of damage.",
           "disguised": "The user is not easily recognized by sight. Any creature that attempts to see through Disguised must make a contested Psychology or Spot skill check against the Disguised creature’s Disguise skill, and upon success ignores any effects that require Disguised to be active.",
-          "braced": "while a creature is Braced, its default DEF and SPDEF stages are increased by +2 and its default ATK and SPATK stages are decreased by 1. Additionally, a Braced creature is immune to critical damage. A creature loses the Brace Affliction after it moves or makes an attack of its own accord.",
+          "braced": "while a creature is Braced, its default DEF and SPDEF Stages are increased by +2 and its default ATK and SPATK Stages are decreased by 1. Additionally, a Braced creature is immune to critical damage. A creature loses the Brace Affliction after it Moves or makes an Attack of its own accord.",
           "duel": "while a creature is afflicted by Duel, the creature and the source of the Affliction have [Crit 2] on attacks they use against one another, and take and deal 1/3 less damage from/to creatures other than themselves. Creatures afflicted with Duel and the source of the Duel are also Stuck. If either the source or afflicted creature Faint or are otherwise removed from battle, the Duel Affliction is removed.",
-          "engulfed": "While a creature is afflicted with Engulfed, it is also considered to be Bound and Stuck. While Engulfed the afflicted creature cannot be targeted by Attacks, and it can only target the creature that has Engulfed it with Attacks, although these Attacks are resisted by two stages.",
-          "curled": "while Curled, a creature cannot use Held Items and has +1 default DEF stage. Additionally, moves with the [Curl] Trait have their Power doubled while their user is Curled.",
+          "engulfed": "While a creature is afflicted with Engulfed, it is also considered to be Bound and Stuck. While Engulfed the afflicted creature cannot be targeted by Attacks, and it can only target the creature that has Engulfed it with Attacks, although these Attacks are resisted by two steps.",
+          "curled": "while Curled, a creature cannot use Held Items and has +1 default DEF Stage. Additionally, moves with the [Curl] Trait have their Power doubled while their user is Curled.",
           "chanted": "If an attack were to deal critical damage to a creature with Chanted, the attack instead deals damage as if it were not a Critical Hit.",
-          "choice-locked": "While Choice-Locked, a creature may only use the last attack or action it used.",
+          "choice-locked": "While Choice-Locked, a creature may only use the last attack or action it used. A creature with the Choice-Locked affliction cannot gain further stacks of Choice-Locked in any way.",
           "grounded": "While Grounded, creatures become unable to use their [Flight] movement, nor can they be Lifted or Raised and have those effects removed.",
           "cursed": "While Cursed, an afflicted creature loses three ticks of HP at the end of each of their Activations.",
           "true-sight": "The afflicted creature ignores invisibility and illusions.",
@@ -809,20 +904,20 @@
           "marked": "While Marked, all creatures unallied to the afflicted creature and within 8m of it can only target the Marked creature with their attacks. Whenever the creature with Marked is hit by an Attack, reduce the Stack Value of its Marked by 1.",
           "unlucky": "While Unlucky, a creature cannot utilize its Luck.",
           "perish": "When a creature’s Perish count hits 0, the creature's HP is set to 0. Humans and ‘Ace’ creatures gain Weary 1 instead of losing HP when their Perish count is 0. The Perish Affliction is removed if a creature is switched out or leaves combat.",
-          "invisible": "The afflicted creature vanishes from sight, and cannot be detected by sight based vision or targeted by Attacks. In addition, the creature has +4 default EVA stages. Invisible ends when the creature uses an Attack, is hit by an Attack, by using a Free Action to end Invisible, or by the end conditions of the effect that granted Invisible. Any creature can perform an Intense Spot Check to ignore the effects of Invisible.",
-          "transient": "The afflicted creature, while still visible, is able to traverse through any material, as if it wasn’t even there. It may use any of its Movements to move through the air or any substance (as if it were always on or in the appropriate substance), ignoring any and all blocking terrain. The creature also possesses +6 default EVA stages. Afflicted creatures deal 75% less damage and take 50% less damage. The creature loses 2 PP per activation while Transient, and gains a Stack of Weary if it is out of PP while Transient.",
-          "fear": "The afflicted creature does 33% less damage to the source of Fear, and suffers -1 default ACC stage on attacks against them. Fear applied from different sources have their own Stacks.",
-          "stockpile": "While a creature has Stockpile, the default stages for DEF and SPDEF are increased by +1 for each Stack of Stockpile it possesses. Stockpile can have up to 3 Stacks.",
+          "invisible": "The afflicted creature vanishes from sight, and cannot be detected by sight based vision or targeted by Attacks. In addition, the creature has +4 default EVA Stages. Invisible ends when the creature uses an Attack, is hit by an Attack, by using a Free Action to end Invisible, or by the end conditions of the effect that granted Invisible. Any creature can perform an Intense Spot Check to ignore the effects of Invisible.",
+          "transient": "The afflicted creature, while still visible, is able to traverse through any material, as if it wasn’t even there. It may use any of its Movements to move through the air or any substance (as if it were always on or in the appropriate substance), ignoring any and all blocking terrain. The creature also possesses +6 default EVA Stages. Afflicted creatures deal 75% less damage and take 50% less damage. The creature loses 2 PP per activation while Transient, and gains a Stack of Weary if it is out of PP while Transient.",
+          "fear": "The afflicted creature does 33% less damage to the source of Fear, and suffers -1 default ACC Stage on attacks against them. Fear applied from different sources have their own Stacks.",
+          "stockpile": "The default stages for DEF and SPDEF are increased by +1 for each Stack of Stockpile it possesses. Stockpile can have up to 3 Stacks.",
           "leech": "The afflicted creature loses two Ticks of HP at the end of each of their Activations and the Source that applied Leech gains HP equal to the amount the afflicted creature lost.",
-          "rebound": "Damage inflicted on the afflicted creature by Physical or Special-Category attacks deals ¼ of the inflicted damage on the attacking creature.",
-          "ringed": "when a creature with Ringed concludes an Activation, they heal a Tick of HP, with additional effects from appropriate weathers/terrains as described by the effect that granted Ringed.",
+          "rebound": "Damage inflicted on the afflicted creature by Physical- or Special-Category attactks deals ¼ of the inflicted damage on the attacking creature.",
+          "ringed": "When a creature with Ringed concludes an Activation, they heal a Tick of HP, with additional effects from appropriate weathers/terrains as described by the effect that granted Ringed.",
           "enraged": "A creature may only use Physical- or Special-Category moves while it is Enraged.",
-          "charmed": "The afflicted creature believes the source of Infatuation is a dear friend or romantic interest. Afflicted creatures have a 50% chance of being unable to target the source of their infatuation with an attack, and have -2 stages of EVA against attacks from the source of their infatuation.",
+          "charmed": "The afflicted creature believes the source of Infatuation is a dear friend or romantic interest. Afflicted creatures have a 50% chance of being unable to target the source of their infatuation with an attack, and have -2 EVA Stages against attacks from the source of their infatuation.",
           "taunted": "The afflicted creature does 33% less damage to creatures other than the source of Taunted. The afflicted creature cannot use Status-category attacks for the duration of Taunted.",
           "grapple": "The afflicted creature possesses -1 default ACC and EVA and may only take Actions with the [Grapple] trait. Creatures that are not in control of a Grapple are also Bound. A creature in control of the Grapple can take a Free Action on their turn to end their participation in Grapple. The creature in control of the Grapple is treated as having the non-in-control creature(s) as being Mounted on itself.<br>If an afflicted creature is the only participant of a Grapple, they lose this Affliction.",
-          "resolved": "An afflicted creature creature gains +1 default DEF and SPDEF stages.",
-          "boosted": "An afflicted creature gains +1 default ATK and SPATK stages.",
-          "rapid": "A creature afflicted with Rapid may perform Complex Actions as Simple Actions OR [Exhaust] Actions are performed as though they lack the Trait OR [Set Up] Actions set up and resolve on the same activation, spending 50% more PP on all Actions (minimum +2). The creature has its Initiative delayed by 60% after its Activation and loses -1 EVA stages for 3 Activations.",
+          "boosted": "An afflicted creature gains +1 default ATK and SPATK Stages.",
+          "resolved": "An afflicted creature gains +1 default DEF and SPDEF Stages.",
+          "rapid": "A creature afflicted with Rapid may perform Complex Actions as Simple Actions OR [Exhaust] Actions are performed as though they lack the Trait OR [Set Up] Actions set up and resolve on the same activation, spending 50% more PP on all Actions (minimum +2). The creature has its Initiative delayed by 50% after its Activation and loses -1 EVA Stages for 3 Activations.",
           "strong": "While afflicted with Strong, the Power of the creature's Attacks are increased by +20% and has its Initiative delayed by 20% after its Activation.",
           "agile": "While afflicted with Agile, Power of the creature's Attacks are decreased by -20% and has its Initiative advanced by 20% after its Activation.",
           "precise": "While afflicted with Precise, the creature has +1 default ACC and has its Initiative delayed by 20% after its Activation.",
@@ -830,7 +925,7 @@
           "gambit": "While afflicted with Gambit, the creature has +2 default CRIT and -1 default ACC.",
           "stoked": "While afflicted with Stoked, the creature's next damaging @Trait[Fire] Attack has +100% Power.",
           "charged": "While afflicted with Charged, the creature's next damaging @Trait[Electric] Attack has +100% Power.",
-          "loafing": "<p>Automatically applies to creatures 2+ levels above the creature's owner's level. Gaining stacking debuffs for each stack of Loafing.</p><h3>1 Stack</h3><ul><li>-15% to all Damage</li><li>-15% to all Skill checks</li><li>-1 Speed Combat stage</li><li>+15% PP Cost</li></ul><h3>2 Stacks</h3><ul><li>-30% to all Damage</li><li>-30% to all Skill checks</li><li>-1 Speed Combat stage</li><li>+30% PP Cost</li><li>-10 Accuracy on all rolls</li><li>Gain @Affliction[unlucky]</li></ul><h3>3 Stacks</h3><ul><li>-50% to all Damage</li><li>-50% to all Skill checks</li><li>-2 Speed Combat stage</li><li>+50% PP Cost</li><li>-20 Accuracy on all rolls</li><li>Gain @Affliction[unlucky]</li><li>-2 to all Movement Scores</li></ul><h3>4 Stacks</h3><ul><li>-80% to all Damage</li><li>-80% to all Skill checks</li><li>-2 Speed Combat stage</li><li>+80% PP Cost</li><li>-30 Accuracy on all rolls</li><li>Gain @Affliction[unlucky]</li><li>-5 to all Movement Scores</li></ul>"
+          "loafing": "<p>Automatically applies to creatures 2+ levels above the creature's owner's level. Gaining stacking debuffs for each stack of Loafing.</p><h3>1 Stack</h3><ul><li>-15% to all Damage</li><li>-15% to all Skill checks</li><li>-1 Speed Stage</li><li>+15% PP Cost</li></ul><h3>2 Stacks</h3><ul><li>-30% to all Damage</li><li>-30% to all Skill checks</li><li>-1 Speed Stage</li><li>+30% PP Cost</li><li>-10 Accuracy on all rolls</li><li>Gain @Affliction[unlucky]</li></ul><h3>3 Stacks</h3><ul><li>-50% to all Damage</li><li>-50% to all Skill checks</li><li>-2 Speed Stage</li><li>+50% PP Cost</li><li>-20 Accuracy on all rolls</li><li>Gain @Affliction[unlucky]</li><li>-2 to all Movement Scores</li></ul><h3>4 Stacks</h3><ul><li>-80% to all Damage</li><li>-80% to all Skill checks</li><li>-2 Speed Stage</li><li>+80% PP Cost</li><li>-30 Accuracy on all rolls</li><li>Gain @Affliction[unlucky]</li><li>-5 to all Movement Scores</li></ul>"
         }
       }
     },
@@ -870,7 +965,7 @@
         },
         "Errors": {
           "UnableToSaveDueToValidationFailure": "Unable to save changes due to validation failure(s). Please check the changes and resolve the issues.",
-          "ChangeSyntax": "Syntax error in rule element definition: {message}"
+          "ChangeSyntax": "Syntax error in Change/Predicate definition: {message}"
         }
       }
     },
@@ -952,6 +1047,11 @@
       "Inspector": "Open Data Inspector",
       "Rest": "Rest & Relaxation",
       "PartySheet": "Open Party Sheet",
+      "OpenDex": "Open Dex",
+      "Dex": "Dex",
+      "Tools": "Tools",
+      "HeightWeight": "Height & Weight",
+      "CarryType": "Change Carry Type",
       "Tabs": {
         "overview": {
           "label": "Overview"
@@ -1059,7 +1159,7 @@
         "Save": "Save Settings"
       },
       "Alliance": {
-        "Default": "Ownership Default ({alliance})",
+        "Default": "Default ({alliance})",
         "Party": "Party",
         "Opposition": "Opposition",
         "Neutral": "Neutral"
@@ -1154,6 +1254,17 @@
       "WorldSchemaVersion": {
         "Name": "World Schema Version",
         "Hint": "The version of the world schema. Don't change this unless you know what you're doing."
+      },
+      "PokemonTypes": {
+        "Name": "Type Editor",
+        "Label": "Open Editor",
+        "Hint": "Manage the Elemental Types available in the system."
+      },
+      "Tokens": {
+        "Autoscale": {
+          "Name": "Autoscale Tokens",
+          "Hint": "Enables auto scaling for smaller tokens."
+        }
       }
     },
     "SkillsEditor": {
@@ -1196,7 +1307,7 @@
         "Hint": "The Attack (ATK) of the actor.",
         "Stage": {
           "Label": "ATK Stages",
-          "Hint": "The ATK stages of the actor."
+          "Hint": "The ATK Stages of the actor."
         }
       },
       "def": {
@@ -1204,7 +1315,7 @@
         "Hint": "The Defense (DEF) of the actor.",
         "Stage": {
           "Label": "DEF Stages",
-          "Hint": "The DEF stages of the actor."
+          "Hint": "The DEF Stages of the actor."
         }
       },
       "spa": {
@@ -1236,7 +1347,7 @@
         "Hint": "The Accuracy (ACC) of the actor.",
         "Stage": {
           "Label": "ACC Stages",
-          "Hint": "The ACC stages of the actor."
+          "Hint": "The ACC Stages of the actor."
         }
       },
       "evasion": {
@@ -1244,7 +1355,7 @@
         "Hint": "The Evasion (EVA) of the actor.",
         "Stage": {
           "Label": "EVA Stages",
-          "Hint": "The EVA stages of the actor."
+          "Hint": "The EVA Stages of the actor."
         }
       },
       "crit-rate": {
@@ -1263,7 +1374,11 @@
       "Messages": {
         "Activation": "Start of {name}'s Activation",
         "Round": "Start of Round {round}",
-        "End": "End of Combat"
+        "End": "End of Combat",
+        "ConfusionRoll": "{name} is Confused! Will they hit themselves...?",
+        "ConfusionRollSuccess": "{name} does not hit themselves!",
+        "Advanced": "Advanced {name}'s activation by {amount}%!",
+        "Delayed": "Delayed {name}'s activation by {amount}%!"
       },
       "Round": {
         "Name": "Round"
@@ -1288,6 +1403,20 @@
       }
     },
     "FIELDS": {
+      "inventory": {
+        "held": {
+          "label": "Held Slots"
+        },
+        "worn": {
+          "label": "Worn Slots"
+        },
+        "accessory": {
+          "label": "Accessory Slots"
+        },
+        "belt": {
+          "label": "Belt Slots"
+        }
+      },
       "consumable": {
         "type": {
           "label": "Type",
@@ -1335,7 +1464,8 @@
             "stowed": "Stowed",
             "held": "Held",
             "worn": "Worn",
-            "dropped": "Dropped"
+            "dropped": "Dropped",
+            "equipped": "Equipped"
           },
           "handsHeld": {
             "label": "Hands Held",
@@ -1349,7 +1479,14 @@
             "worn": "Worn",
             "belt": "Belt",
             "backpack": "Backpack"
-          }
+          },
+          "held1": "Held 1H",
+          "held2": "Held 2H",
+          "equipped": "Equipped",
+          "worn": "Worn",
+          "stowed": "Stowed",
+          "dropped": "Dropped",
+          "belt": "On Belt"
         },
         "fling": {
           "power": {
@@ -1515,17 +1652,21 @@
           "hint": "The Measurement Type of the Creature."
         },
         "height": {
+          "class": "Height Class",
+          "average": "Species Average Height",
           "label": "Height",
           "hint": "The Height of the Creature in Meters."
         },
         "weight": {
+          "class": "Weight Class",
+          "average": "Species Average Weight",
           "label": "Weight",
           "hint": "The Weight of the Creature in Kilos."
         }
       },
       "genderRatio": {
         "label": "Gender Ratio",
-        "hint": "Gender Ratio in 8ths chance of being Male, -1 if genderless."
+        "hint": "Gender Ratio in 8ths chance of being Female, -1 if genderless."
       },
       "eggGroups": {
         "label": "Egg Groups",
@@ -1825,6 +1966,10 @@
         "label": "Defensive Stat",
         "hint": "The stat that should be used to calculate the 'Defense' portion of the Damage Calculation. Defaults to 'def'/'spd' depending on the Attack Category if unset."
       },
+      "attackPredicate": {
+        "label": "Attack Predicate",
+        "hint": "Can be used to automate attacks that can only be used under certain conditions, such as, only in rainy weather."
+      },
       "targetType": {
         "label": "Summon Target Type",
         "hint": "Whom should be targeted, if this is 'Target', it will use the currently targeted token as the target based on when the summon is made, if it is 'Owner', it will use the owner of the summon as the target."
@@ -1840,7 +1985,11 @@
       "details": {
         "alliance": {
           "label": "Alliance",
-          "hint": "The Allegiance of the actor."
+          "hint": "The Allegiance of the actor. The 'Default' value is calculated based on Foundry's ownership permissions."
+        },
+        "biography": {
+          "label": "Biography",
+          "hint": "A free form field to store any details about this character."
         }
       }
     },
@@ -2029,11 +2178,11 @@
       },
       "CritDC": {
         "Label": "Critical Hit DC",
-        "Hint": "The Critical Hit DC of this attack, calculated based on the attacker's CRIT stages."
+        "Hint": "The Critical Hit DC of this attack, calculated based on the attacker's CRIT Stages."
       },
       "AdjustedStages": {
         "Label": "Adjusted Stages",
-        "Hint": "The combined accuracy stages of the attacker, and evasion stages of the defender. (max 6, min -6)"
+        "Hint": "The combined Accuracy Stages of the attacker, and Evasion Stages of the defender. (max 6, min -6)"
       },
       "CritStages": {
         "Label": "CRIT Stages",
@@ -2140,7 +2289,16 @@
       },
       "TargetSelector": {
         "Target": "Target",
-        "Pick": "Pick {target}"
+        "Pick": "Pick {target}",
+        "Type": {
+          "accuracy": "Accuracy Roll",
+          "damage": "Damage Roll",
+          "crit": "Crit Roll",
+          "target-effect": "Target Effect: {name}",
+          "origin-effect": "Origin Effect: {name}",
+          "defensive-effect": "Defensive Effect: {name}",
+          "self-effect": "Self Effect: {name}"
+        }
       },
       "RenameDocumentTitle": "Rename Blueprint",
       "RenameDocumentContent": "Enter the new name for this blueprint.",
@@ -2260,6 +2418,10 @@
         "label": "Negotiation",
         "hint": "This skill covers the art of the deal. If you want something and the other creature is willing to give you it, for a price, then this skill can be used to determine who gets the better end of the deal."
       },
+      "profession-specific": {
+        "label": "Profession (Specific)",
+        "hint": "This skill represents the user's skill and experience in a specific line of work (businessman, chef, teacher, etc.)."
+      },
       "psychology": {
         "label": "Psychology",
         "hint": "This skill is used to determine someone's mental or emotional state. This can either be from a perspective of reading their intentions, providing them with treatment (such as traumatized Shadow Pokemon), or seeing through someone's Disguise act or Fast Talking."
@@ -2374,6 +2536,14 @@
         "paradox": {
           "label": "Paradox",
           "hint": "This skill is used to understand and interact with paradoxical entities."
+        },
+        "alchemy": {
+          "label": "Alchemy",
+          "hint": "Alchemy governs the rigorous, practical approach toward bridging the gap between convential science and supernatural phenomena. Usually focused on materials science, the foundational knowledge of alchemy generally requires a solid background in a number of other sciences and occult disciplines."
+        },
+        "thaumaturgy": {
+          "label": "Thaumaturgy",
+          "hint": "Thaumaturgy is the knowledge of the deeper magical mysteries - wisdom, theory, and speculation. Thaumaturgy is the purest, but the most dangerous, approach to learning and wielding magic. Mages must balance their own hubris with the great temptations beyond the veil."
         }
       },
       "performance": {
@@ -2529,6 +2699,8 @@
       "Progress": {
         "Prefix": "PTR2E | Pkmn Generator | ",
         "Step": "Preparing Actor Data for {name}...",
+        "Perks": "Generating perks for {name}...",
+        "PerksDone": "Finalizing Actor Data for {name}...",
         "GenerationStep": "Creating all prepared Actors...",
         "TokenGenerationStep": "Creating Tokens for all Generated Actors...",
         "Complete": "Actor Generation Complete!"
@@ -2541,23 +2713,23 @@
         "steps": {
           "welcome": {
             "title": "Welcome to the Alpha!",
-            "content": "Thank you for participating in the Closed Alpha Test of Pokemon Tabletop Reunited: Evolved!\nThis is a \"tour\" to help get you started!"
+            "content": "Thank you for participating in the Beta Test of Pokemon Tabletop Reunited: Evolved!\nThis is a \"tour\" to help get you started!"
           },
-          "alpha": {
-            "title": "Alpha Test",
-            "content": "As you're aware the system both in Foundry and the ruleset are in Alpha.\nThis means that not only are you likely to run into Foundry Bugs, but you'll likely find things that are unfinished, or not quite as balanced as we'd like in the regular rules too!\nPlease keep this in mind while testing and provide feedback where you can!"
+          "beta": {
+            "title": "Beta Test",
+            "content": "Since you are playing a Beta of PTR2e, you are likely to run into Foundry Bugs and likely even find certain aspects of the rules that aren't quite fully fleshed out, or may not be quite as balanced as we would like!\nThat said, we have been in Closed Alpha for about a year now, and have run multiple successfull campaigns in that period of time, so we expect most things to go quite smoothly!\nPlease be sure to provide feedback whenever you can, now is the time to get your suggestions in!"
           },
           "discord": {
             "title": "Discord",
-            "content": "The Discord is the primary place for communication and support for the system.\nYou can find the Discord <a href=\"https://discord.gg/ptrfvtt\">here</a>.\nIf you're not already in the Discord, please join and have whomever invited you to the Alpha let us know so we can give you the Alpha Tester role!"
+            "content": "The Discord is the primary place for communication and support for the system.\nYou can find the Discord <a href=\"https://discord.gg/ptrfvtt\">here</a>."
           },
           "feedback": {
             "title": "Reporting Bugs, providing Feedback and Suggestions!",
-            "content": "If you ever run into a bug, or have feedback or suggestions, please let us know!\nThere are a couple ways you can do so:<ul><li>On the discord post in #2e-alpha-feedback</li><li>Use one of the following commands on the Discord Server:<ul><li><code>/create-issue 2e</code></li><li><code>/bug-report 2e</code></li><li><code>/feature-request 2e</code></li></ul></li><li>Directly report things over on the <a href=\"https://github.com/pokemon-tabletop-reunited/ptr2e/issues\">Github</a></li></ul>"
+            "content": "If you ever run into a bug, or have feedback or suggestions, please let us know!\nThere are a couple ways you can do so:<ul><li>On the discord post in #2e-feedback</li><li>Use one of the following commands on the Discord Server:<ul><li><code>/create-issue 2e</code></li><li><code>/bug-report 2e</code></li><li><code>/feature-request 2e</code></li></ul></li><li>Directly report things over on the <a href=\"https://github.com/pokemon-tabletop-reunited/ptr2e/issues\">Github</a></li></ul>"
           },
           "rules": {
             "title": "Finding the Rules",
-            "content": "Currently the rules are not yet available in Foundry, so for the foreseeable future you will have to grab them from the <a href=\"https://2e.ptr.wiki/rules\">PTR2e Wiki</a>.\nThis page requires you to be logged in and have the Alpha Tester role to view.\nIf you don't have access please reach out in #2e-alpha on the Discord after having created a Wiki Account."
+            "content": "The rules can both be found on the <a href=\"https://2e.ptr.wiki/rules\">PTR2e Wiki</a> as well as in <a style=\"color: black;\" class=\"content-link\" draggable=\"true\" data-link=\"\" data-uuid=\"Compendium.ptr2e.core-rules.JournalEntry.GxFi9xM5vjCEUUfN\" data-type=\"JournalEntry\" data-tooltip=\"Journal Entry\" data-id=\"GxFi9xM5vjCEUUfN\" data-pack=\"ptr2e.core-rules\"><i class=\"fas fa-book-open\"></i>The Rules</a> journal here within Foundry!."
           },
           "style": {
             "title": "Style Tip!",
@@ -2571,7 +2743,7 @@
       },
       "folders": {
         "title": "Folders",
-        "description": "Learn more about the PTR2e Unique; Team & Party Folders. There to upgrade your organisational needs!",
+        "description": "Learn more about the PTR2e Unique Team & Party Folders. There to upgrade your organisational needs!",
         "steps": {
           "welcome": {
             "title": "Welcome to the Folders Tour!",
@@ -2591,7 +2763,11 @@
           },
           "openedPartySheet": {
             "title": "Opened Party Sheet",
-            "content": "Here you can see the Party Sheet for Tour-san, including all their Party Members.\nIn the Parties' Tab you can see all the Parties owned by the Owner, and manage them from here. (Coming Soon!)"
+            "content": "Here you can see the Party Sheet for Tour-san, including all their Party Members.\nIn the 'Organize Party/Boxes' Tab you can see all the Actors owned by the Owner, and manage them from here."
+          },
+          "organizeParty": {
+            "title": "Organize party",
+            "content": "Simply by Dragging & Dropping actors between the Party & Boxes sections you can easily manage your Party Members and Boxed Pokémon.\nTip: You can drag an entire box into the party to swap the contents of that box with the party!"
           },
           "addPartyMembers": {
             "title": "Adding Party Members",
@@ -2607,11 +2783,11 @@
           },
           "openedTeamSheet": {
             "title": "Opened Team Sheet",
-            "content": "Here you can see the Team Sheet of which Tour-san and their Voltorb are part of.\nIn the Team's Parties Tab you can see all the Parties owned by Team Members, and manage them from here."
+            "content": "Here you can see the Team Sheet of which Tour-san and their Voltorb are part of.\nIn the Team's Parties Tab you can see all the Parties owned by Team Members, and manage them from here. (Coming Soon!)"
           }
         }
       },
-      "characterCreation": {
+      "actorSheet": {
         "title": "Actor Sheet Walkthrough",
         "description": "A walkthrough of the Character Sheet, to help you get started with making your first character!",
         "steps": {
@@ -2621,7 +2797,7 @@
           },
           "overview": {
             "title": "Character Overview",
-            "content": "On the overview tab you can see some basic details of your Character.\nAt the moment this tab comes pre-loaded with your favourite skill list, movement speeds, and stats.\nIn the future this page will be fully customizable, allowing you to add any information from any tab to this page as you wish!"
+            "content": "On the overview tab you can see some basic details of your Character.\nSuch as your type effectiveness chart, favourited skills list, movement speeds, and stats."
           },
           "favouriteSkills": {
             "title": "Favourite Skills",
@@ -2653,11 +2829,11 @@
           },
           "knownAttacks": {
             "title": "Known Attacks",
-            "content": "From here you can simply drag & drop the Attacks you want to use today into the right slot on the Actor Sheet, as well as manage which Attacks you know in general.\n'Free' Attacks, those that do not take up an Attack Slot, are not shown here."
+            "content": "From here you can simply drag & drop the Attacks you want to use today into the right slot on the Actor Sheet, as well as manage which Attacks you know in general.\n'Free' Attacks, those that do not take up an Attack Slot such as Fling, are not shown here."
           },
           "otherAttacks": {
             "title": "Other Attacks",
-            "content": "Any Attack that doesn't take up an Attack Slot, show up here.\nThis currently also includes 'Move Variants', like the different types of Weather Ball, these will stay here until 'Move Variants' are fully implemented into the 'Roll Window'"
+            "content": "Any Attack that doesn't take up an Attack Slot, shows up here."
           },
           "genericActions": {
             "title": "Generic Actions",
@@ -2699,13 +2875,207 @@
       },
       "perkWeb": {
         "title": "Perk Web",
-        "description": "The Perk Web is how you can see and purchase Perks for your Characters and NPCs! This tour will guide you on how to use it!",
-        "steps": {}
+        "description": "The Perk Web is how you can see and purchase Perks for your Player Characters and NPCs! This tour will guide you on how to use it!",
+        "steps": {
+          "welcome": {
+            "title": "Welcome to the Perk Web Tour!",
+            "content": "This tour will guide you through the Perk Web, where you can see all the Perks available to your Character!"
+          },
+          "rules": {
+            "title": "Perk Rules Overview",
+            "content": "Perks are purchased using 'Advancement Points' which are gained through leveling up, and can be spent on any Perk that you meet the prerequisites for.\nBesides any prerequisite you may need, every Perk can only be picked up if you have a different perk that connects to it on the Web!\nThat's why the very first perk you will pick up will be one of the 6 'Root' perks, these perks are special in the sense that you can always pick them up, even with no connection, and the first one is free!"
+          },
+          "open-web": {
+            "title": "Open the Perk Web",
+            "content": "On the Actor Sheet, in the bottom left corner, you will find the button to open the Perk Web.\nWhenever you gain new Advancement Points from level-up, the button will glow to indicate you have Perk Points to spend!"
+          },
+          "web-overview": {
+            "title": "Perk Web Overview",
+            "content": "The Perk Web consists of 3 parts, the left sidebar shows you information about your character as well as any info about a perk you have selected.\nThe center shows you the Perk Web itself\nFinally, the right sidebar allows you to search for perks and filter them.\nLets quickly cover the left sidebar!"
+          },
+          "hud-header": {
+            "title": "Header Bar",
+            "content": "The header bar has 3 important functions, the left most button allows you to refresh the Perk Web's data, in case you or your GM makes any changes to your Actor or a Perk on the web; so you can see the changes reflected!\nBesides that, on the right end, you can find the perk web close button! Very useful, lest you get stuck in here forever!"
+          },
+          "hud-header-webs": {
+            "title": "Web Selector",
+            "content": "Finally, the select bar in the center allows you to swap to different webs unique to your Actor, for example, a Species' Personal Perk Web, which will also show their Evolution Perks!"
+          },
+          "hud-actor": {
+            "title": "Actor Info",
+            "content": "Right below we can find the Actor Info, showing you how many Advancement Points you currently have available to spend!"
+          },
+          "actor-sheet": {
+            "title": "Actor Sheet",
+            "content": "While you're in the Web, you can open any Foundry Sheet like normal, your Actor Sheet will always show up in minimized in th top left corner.\nIf you have a module such as Quick Insert installed, you can also search for any Actor/Item/etc. to open it on-top of the Perk Web View."
+          },
+          "web-controls": {
+            "title": "Controls",
+            "content": "You can move the web either by using the scroll bars on the right and bottom, using the [Scroll Wheel] (while holding [Shift] for Horizontal scroll), or by dragging the web around while holding [Right Click].\nYou can zoom in and out using [Left Click]/[Right Click], or by using the Zoom Level Dropdown on the left sidebar.\nTo view detailed information on a Perk, you can [Left Click] it to reveal its details.\nHovering over a Perk will show you its Tooltip overview."
+          },
+          "perk-overview": {
+            "title": "Perk Overview",
+            "content": "I've gone ahead and selected 'Root 1' for you, as you can see over on the left, it's a very simple perk, it's even free!\nYou can easily buy a perk by clicking the purchasing button right below the perk's details, or, if you already own the perk, you will find that the button has changed to a 'Refund' button!\n\nPlease Note: As of Beta 1, there is no automation to check whether a Refund is a 'Valid' Refund. This means that you by refunding a perk you could invalidate other perks, please make sure to only refund perks with the permission of your GM and after making sure it doesn't break any connections!"
+          },
+          "perk-styling": {
+            "title": "Perk Colors & Styling",
+            "content": "A Perk's availability can quickly be glanced by looking at its border color & style, go over each option:<ul style='max-height: 30vh; overflow-y: auto;'><li><span style='font-weight: bold; color: #2ECFF5;'>Purchased:</span> These perks can easily be identified by their <span style='font-weight: bold; color: #2ECFF5;'>thick blue border</span>, and are the perks you have already obtained!</li><li><span style='font-weight: bold; color: #379762;'>Available:</span> These perks can be identified by their <span style='font-weight: bold; color: #379762;'>Green Border</span> & <span style='font-weight: bold; color: #ffffff;'>White Glow</span>, these are perks you have a valid connection to, meet all the Prerequisites for *and* have enough Advancement Points to purchase!</li><li><span style='font-weight: bold; color: #FBA151;'>Missing Prerequisite:</span> These perks are easily identified by their <span style='font-weight: bold; color: #FBA151;'>Dashed Orange Borders</span>. These are perks that you currently have access to, but do not meet all the Prerequisites for, or do not have enough Advancement Points for. Check their details to figure out what you're missing!</li><li><span style='font-weight: bold; color: #4254bb;'>Skipped Perk:</span> Sometimes you may find a perk with a <span style='font-weight: bold; color: #4254bb;'>Dark Blue/Purple Border</span>, these are perks that are 'Auto Purchased' or 'Skipped' for your Character, for example, the perk Inner Warmth gives your Fire type the [Heater] trait, however, your Torchic already gets this trait from their Species! Thus, while you haven't purchased this perks with your Advancement Points, it counts as having been purchased since Torchic already has the [Heater] trait.</li><li><span style='font-weight: bold; color: #9E4FCE;'>Tiered Perk:</span> Another uncommon perk collor is <span style='font-weight: bold; color: #9E4FCE;'>Purple Bordered</span> perks, these are perks that have multiple tiers and can thus be purchased multiple times!</li><li><span style='font-weight: bold; color: #851a1a;'>Invalid Connection:</span> Perks that your actor owns, but do not have a Valid Connection can be identified by their <span style='font-weight: bold; color: #851a1a;'>Red Dashed Borders & Glow</span>. These Perks lack a valid connection leading back to a Root, and thus are 'Invalid', if you ever find yourself with an Invalid Perk, please resolve the issue by fixing purchasing its connections; or discuss with your GM how to fix the situation. A build with an 'Invalid' perk would be considered 'cheating'.</li><li><span style='font-weight: bold; color: #919AA2;'>Unavailable Perk:</span> Last but not least, unavailable perks which can be identified by their <span style='font-weight: bold; color: #919AA2;'>Dashed Gray Borders & Greyed out icon</span>. These perks simply don't have any connection to your currently picked up perks, so you have to work towards them if you wish to unlock them!</li></ul>"
+          },
+          "perk-example": {
+            "title": "Example",
+            "content": "As an example, Tour-san has purchased Root 1, which is connected to these two perks here, Tactician & Mobilize. Tactician requires us to have at least 30 in the Leadership Skill, meanwhile Mobilize only requires 20. As Tour-san only has 25, Mobilize is currently available, but Tactician is not, as indicated by their Green & Orange Borders respectively."
+          },
+          "search": {
+            "title": "Search & Filter",
+            "content": "Over on the right-hand side, you can Search & Filter for Perks, and makes use of the Compendium Browser's Perk Tab. By default, the search won't load any perks to keep the web snappy, but you can easily load them in by clicking the 'Load Perk Search' button. After which, you can search for any perk you may want!\nClicking on a perk will make the Web pan to that perk, and show you its details! Sometimes Perks are on the web multiple times, clicking on the same perk again will cycle through all the locations it can be found in!"
+          }
+        }
+      },
+      "characterCreation": {
+        "title": "Character Creation",
+        "description": "An interactive walkthrough of the Character Creation process, to help you get started with making your first character!",
+        "steps": {
+          "welcome": {
+            "title": "Unfinished Tour",
+            "content": "This tour is coming in a future build!"
+          }
+        }
       },
       "generatingPokemon": {
-        "title": "Quick-Generating Pokémon",
-        "description": "A Walkthrough on 'Dex Drag-In' a returning fan-favourite feature for quickly generating Pokémon!",
-        "steps": {}
+        "title": "Generating Pokémon & How to use Blueprints",
+        "description": "A Walkthrough on 'Blueprints' and the 'Dex Drag-In' system, a returning fan-favourite feature from 1e for quickly generating Pokémon!",
+        "steps": {
+          "welcome": {
+            "title": "Welcome to the Pokémon Generation Tour!",
+            "content": "This is a short tour to grant you one of the most powerful tools in the PTR2e system, the 'Dex Drag-In' & Blueprint system!"
+          },
+          "dex-drag-in": {
+            "title": "Dex Drag-In",
+            "content": "It's incredibly simple, to generate a Pokemon you can do so by dragging any species item, whether that's from the world, the compendium (browser), or what we would recommed; using the module <a href=\"https://foundryvtt.com/packages/quick-insert\">Quick Insert</a>, onto the Canvas! (your Scene)\nThis will open up the Blueprint screen, where you can change certain generation settings."
+          },
+          "example": {
+            "title": "Example",
+            "content": "For example, when I drag Bulbasaur's species item onto the Canvas, this screen would be shown!\nAllowing you to set properties such as the Level or Level Range of the generated mon.\nOnce you've set all the options you want, you simply hit 'Generate Actor(s)'!"
+          },
+          "blueprints": {
+            "title": "Using Blueprints",
+            "content": "Blueprints can also be created as Items of their own, at which point they allow creating any range of creatures, from single specialized NPCs, to a Trainer & their party, whether those members are set-in-stone, or even from a random table!\nThis is also one of the easiest way to create a Trainer & their Party and share it with the Community!\nYou can Import/Export Blueprints through Foundry's regular way of doing so: right clicking the Item in the Item Tab and selecting the appropriate option."
+          }
+        }
+      },
+      "compendiumBrowser": {
+        "title": "Finding your items in the Compendium Browser",
+        "description": "A guide on how to use the Compendium Browser to find all the items you need!",
+        "steps": {
+          "welcome": {
+            "title": "Welcome to the Compendium Browser Tour!",
+            "content": "The Compendium Browser is a useful tool that allows you to look for & filter data more easily then through the regular Foundry interface."
+          },
+          "browser-open": {
+            "title": "Open Compendium Browser",
+            "content": "Step 1 is opening up the Compendium Browser, the button to do so can be found in the 'Compendiums' tab of the Sidebar."
+          },
+          "browser-opened": {
+            "title": "Initial Load",
+            "content": "Whenever you open the Compendium Browser, it will show you a blank screen, as to avoid loading unnecessary data by default.\nTo continue you simply click one of the item-type options at the top."
+          },
+          "moves-tab": {
+            "title": "Moves Tab",
+            "content": "For example, once we have opened the Moves Tab we'll get a list of Moves in the System. You can filter these on the left-hand side.\nUseful to know is that you can hover over items in the Compendium Browser like you can in Actor Sheets to view their tooltip preview!"
+          },
+          "filtering": {
+            "title": "Example: Filter for 'Dash' Moves",
+            "content": "Using the 'Traits' filter, we can for example search for all moves that contain the 'Dash' Trait.\nYou can combine any amount of filters to find exactly what you're looking for!"
+          }
+        }
+      },
+      "automation": {
+        "title": "Effects Automation & The Data Inspector",
+        "description": "A technical guide on how to use the Data Inspector to automate effects, and how to use the Automation System!",
+        "steps": {
+          "welcome": {
+            "title": "Welcome to the Automation Tour!",
+            "content": "The Automation Tour will give you a quick overview of where in the UI to find the automation tools, for an in-depth technical guide you will want to check out the <a href=\"https://2e.ptr.wiki/en/rules/foundry/automation-guide\">Wiki</a>."
+          },
+          "effects": {
+            "title": "Active Effect Automation",
+            "content": "PTR2e uses a heavily upgraded variant of the Foundry Active Effect system to automate the effects of basically any item, whether that's a move, ability, perk or otherwise. If you are familiar with PTR 1e or the PF2e system, you will find that the automation system is very compatible to the 'Rules based Automation' of those two systems.\nAn effect can be added to any type of item, including the 'Effect' item, which can be useful to store effects you may wish to temporarily include on Actors, such as the '+1 Attack Stages' effect item."
+          },
+          "effects-tab": {
+            "title": "Effects Tab",
+            "content": "In the effects tab of any Item/Actor you will see which effects are currently active, and on items you will be able to create new ones with the [+] button at the top right corner."
+          },
+          "create-effect": {
+            "title": "Create Effect Dialog",
+            "content": "There are two types of Active Effect, Afflictions & Passive Effects. An Affliction will automatically expire after a certain amount of turns have passed and also have the option to trigger 'End of Turn' effects, meanwhile Passive Effects, as the name implies, don't expire nor have the capability to trigger 'End of Turn' effects.\nThe '+1 Attack Stage' effect is an example of an Affliction."
+          },
+          "effect-overview": {
+            "title": "Effect Overview",
+            "content": "In this tab you can change default Active Effect settings; important to note is for effects to properly work the 'Transfer Effect' option should be enabled, and the 'Effect Suspended' option should be disabled."
+          },
+          "effect-details": {
+            "title": "Effect Details",
+            "content": "Meanwhile in the Details tab you can set more detailed options, such as the duration of the affliction, any End of Turn damage it should deal, and more."
+          },
+          "effect-changes-1": {
+            "title": "Effect Changes [1/3]",
+            "content": "And then we get to the meat of the Automation system, Effect Changes.\nAs mentioned earlier, if you are familiar with the 'Rules Based Automation' system, you should find the functionality here very familiar, except instead of 'Rules' we now have 'Changes'.\nChanges can be anything from a simple stat change, to a more complex modifier on a roll, or even adding effect applications to attacks, or granting different items & effect! For full details please check the <a href=\"https://2e.ptr.wiki/en/rules/foundry/automation-guide\">Automation Guide on the wiki</a>."
+          },
+          "effect-changes-2": {
+            "title": "Effect Changes [2/3]",
+            "content": "You can simply add changes with the 'Create Change' button, and change the type of change you wish to create with the dropdown.\nFor '+1 Attack Stage' you can see there is one change of type 'AE-Like', which allows for a simple stat change, in this case, +1 to the Attack Combat Stage."
+          },
+          "effect-changes-3": {
+            "title": "Effect Changes [3/3]",
+            "content": "A useful tool to know about is the 'Edit as JSON' button, this will open the JSON view of the change, allowing you to make more complex changes than the UI allows for, or to copy a change to another item."
+          },
+          "data-inspector": {
+            "title": "Data Inspector",
+            "content": "The Data Inspector is a powerful tool that allows you to see the data of an Item, Actor or Chat Message.\nYou can open the Data Inspector either by selecting 'Open Data Inspector' from an Actor/Item sheet's toolbar dropdown menu or by right-clicking a Chat Message that has a Roll and selecting 'Open Data Inspector'"
+          },
+          "data-inspector-actor": {
+            "title": "Data Inspector - Actor",
+            "content": "This is the Data Inspector for an Actor.\nHere you can view all underlying data.\nUseful for figuring out the path of an attribute, or which Rolloptions are currently applied to an Actor.\nYou can check usage & control details by hovering on the [?] icon in the toolbar."
+          },
+          "data-inspector-chat": {
+            "title": "Data Inspector - Chat Roll",
+            "content": "This is the Data Inspector for a Chat Message that contains a Roll.\nHere you can see all Selectors that this roll checked against as well as all Roll Options that where applied from the User and possible Target.\nOn the right side you can see the modifiers to the roll itself.\nIn the case of a roll that targets multiple Actors, you can choose to view target-based details by selecting the appropriate target on the left."
+          }
+        }
+      },
+      "misc": {
+        "title": "Miscellaneous & FAQ",
+        "description": "A collection of miscellaneous tips and tricks, as well as a FAQ!",
+        "steps": {
+          "welcome": {
+            "title": "Welcome to the Miscellaneous & FAQ Tour!",
+            "content": "This tour is here to quickly show you a couple of buttons and features that you may have otherwise missed, as well as answer some frequently asked questions!"
+          },
+          "tooltips": {
+            "title": "Tooltips",
+            "content": "Hovering over most things in the system will show you a tooltip with more information, this can be a great way to quickly get more information on a topic!\nBut not only that, if you pause for a moment, you will see a circle fill up, once it's filled up the tooltip will be 'locked in place', allowing you to interact with it, copying text, pressing buttons, or hovering over other elements which may have their own Tooltips!\nYou can also 'Middle Mouse Click' to instantly lock a tooltip in place!"
+          },
+          "exp-tracker": {
+            "title": "EXP & Venture Tracker",
+            "content": "Over on the left hand-side controls, you can find some useful tools, like the EXP Tracker, which allows you to mark down any Cirumstance Modifiers for your current Venture as they occur!\nBesides this, you can also find the 'Training' tab here, which you can use for the 'Super Training' Camp Activity!"
+          },
+          "user-config": {
+            "title": "User Configuration",
+            "content": "A couple of features; like the EXP & Venture Tracker, make use of what characters are marked as PCs in Foundry.\nThus to get automation to fully function; players must set their PCs as their 'Player Character' in the Foundry User Configuration which they can access from down here, in the bottom left corner."
+          },
+          "tutor-list": {
+            "title": "Tutor List",
+            "content": "Ever wonder what moves are tutorable to your Characters? Worry not, you can find a list of all tutorable moves in the 'Tutor List' Application!\nIt can be accessed from the Sidebar, or by using the 'Open Tutor List' button in the Biography tab of the Actor Sheet!"
+          },
+          "text-enrichers": {
+            "title": "Text Enrichers",
+            "content": "PTR 2e supports a couple of custom Text Enrichers that can help you easily reference other data!<p>Unfamiliar with the term 'Text Enricher'? Text enrichers allow you to easily reference other types of data; for example, in a Journal Entry you can reference to another page, an actor, or even an item, by for example using <codeblock>@UUID[Compendium.ptr2e.core-effects.Item.burnconditioitem]</codeblock>, which would create a clickable button for the Burn Affliction!</p><p>The following enrichers are added by the system:</p><ul><li><codeblock>@Trait[slug-of-trait]</codeblock> This makes a hoverable Trait link so you can quickly reference the Trait's info!</li><li><codeblock>@Affliction[slug-of-affliction]</codeblock> This creates an item link much like <codeblock>@UUID</codeblock> without needing to know the full id of the affliction!</li><li><codeblock>@Tick[number]</codeblock> Allows the quick creation of buttons that heal or deal Tick based Damage. You can also use <codeblock>@Tick[number pp]</codeblock> and <codeblock>@Tick[number shield]</codeblock> to deal/heal against PP and Shield Health respectively.</li></ul>"
+          },
+          "habitat-table": {
+            "title": "Habitat Tables",
+            "content": "Dynamic Habitat Tables are generated automatically based on the 'habitat' field of Species in the Core Species Compendium.\nThese tables can be used in Blueprint Generation to generate random Pokémon based on their habitat, or to quickly find a Pokémon of a specific habitat!\n<b>Please note:</b> these tables are 'virtual' tables, meaning you cannot use them in Macros the same way you would a regular table, they are, *generally*, only available for use in the Blueprint Generation system."
+          }
+        }
       }
     },
     "Ranges": {
@@ -2723,6 +3093,44 @@
       "aura": "An Aura is an Emanation that persists around the character token using this Action.",
       "allied-aura": "An Allied Aura is an Aura that only affects allies.",
       "enemy-aura": "An Enemy Aura is an Aura that only affects enemies."
+    },
+    "TypeMatrix": {
+      "Title": "Type Matrix",
+      "Hint": "Open Type Matrix",
+      "AddType": {
+        "Label": "Add Type",
+        "Hint": "Please provide the name & icons for the new type.",
+        "Name": {
+          "Name": "Type Name",
+          "Hint": "The name of the type."
+        },
+        "IconImg": {
+          "Name": "Type Icon",
+          "Hint": "The icon to use for the type."
+        },
+        "BarImg": {
+          "Name": "Type Bar Image",
+          "Hint": "The bar image to use for the type when displaying in Chat."
+        }
+      },
+      "Reset": {
+        "Label": "Reset to Default",
+        "Title": "Reset Type Matrix",
+        "Content": "Are you sure you want to reset the Type Matrix to its default values?"
+      },
+      "Submit": "Submit",
+      "Delete": {
+        "Title": "Delete type",
+        "Label": "Delete",
+        "Content": "Are you sure you want to delete this type?",
+        "Error": "Core types cannot be deleted by the GM. They can only be overridden by modules."
+      },
+      "Dialog": {
+        "Title": "Edit Type"
+      }
+    },
+    "DistanceToTarget": {
+      "Hint": "When clicked, outputs the distance between current selected token and all targeted tokens to chat."
     }
   }
 }

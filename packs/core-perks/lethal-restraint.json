@@ -28,16 +28,12 @@
         "img": "icons/svg/explosion.svg",
         "range": {
           "target": "self",
-          "unit": "m",
-          "distance": 0
+          "unit": "m"
         },
         "cost": {
           "activation": "free",
-          "powerPoints": 2,
-          "delay": null,
-          "priority": null
-        },
-        "variant": null
+          "powerPoints": 2
+        }
       }
     ],
     "slug": "lethal-restraint",
@@ -49,7 +45,12 @@
     "nodes": [
       {
         "connected": [
-          "fast-pitch"
+          "guard-up",
+          "beastmaster",
+          "improved-overland-4",
+          "forensic-accountant",
+          "curveball-technique",
+          "new-foundations-2"
         ],
         "config": {
           "alpha": null,
@@ -62,17 +63,19 @@
         },
         "hidden": false,
         "type": "normal",
-        "x": 67,
-        "y": 117,
+        "x": 56,
+        "y": 111,
         "tier": null
       }
     ],
     "autoUnlock": [],
-    "originSlug": null,
-    "variant": null,
-    "mode": null,
     "global": true,
-    "webs": []
+    "webs": [],
+    "design": {
+      "arena": "physical",
+      "approach": "finesse",
+      "archetype": "Capture"
+    }
   },
   "_id": "NqzvD99KvVF4Vw7c",
   "img": "systems/ptr2e/img/perk-icons/Capture%20Spec.svg",

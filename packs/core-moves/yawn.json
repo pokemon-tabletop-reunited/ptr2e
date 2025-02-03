@@ -4,17 +4,14 @@
   "img": "systems/ptr2e/img/svg/normal_icon.svg",
   "system": {
     "slug": "yawn",
-    "description": "<p>Effect: All affected targets gain @Affliction[drowsy] 5 at the end of their next Activation.</p>",
-    "traits": [
-      "social"
-    ],
     "actions": [
       {
         "slug": "yawn",
         "name": "Yawn",
         "type": "attack",
         "traits": [
-          "social"
+          "social",
+          "pp-updated"
         ],
         "range": {
           "target": "cone",
@@ -23,10 +20,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 7,
-          "delay": null,
-          "priority": null,
-          "trigger": null
+          "powerPoints": 4
         },
         "category": "status",
         "power": null,
@@ -42,7 +36,7 @@
       }
     ],
     "container": null,
-    "grade": "A"
+    "grade": "C"
   },
   "_id": "oIZflAoEMkl6QvCv",
   "effects": []

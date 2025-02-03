@@ -7,27 +7,52 @@
       {
         "traits": [
           "legendary",
-          "weather"
+          "weather",
+          "interrupt-6"
         ],
         "name": "Delta Stream",
         "slug": "delta-stream",
-        "type": "passive",
+        "type": "generic",
         "cost": {
-          "activation": "free",
+          "activation": "complex",
+          "trigger": "<p>The user enters combat or when the user gains this Ability.</p>",
+          "powerPoints": 4
+        },
+        "range": {
+          "target": "field",
+          "unit": "m"
+        },
+        "description": "<p>Trigger: The user enters combat.</p><p>Effect: Connection - Tailwind. Wind Weather is set until it is overridden or if the user gains @Affliction[fainted] or leaves combat. If the user gains @Affliction[fainted] or leaves combat while Wind Weather is present, Wind Weather will remain for 3 Rounds.</p>",
+        "img": "icons/svg/explosion.svg"
+      },
+      {
+        "traits": [
+          "legendary",
+          "weather",
+          "interrupt-6",
+          "phenomena"
+        ],
+        "name": "Delta Stream (Mega)",
+        "slug": "delta-stream-mega",
+        "type": "generic",
+        "cost": {
+          "activation": "complex",
           "trigger": "<p>The user enters combat or when the user gains this Ability.</p>"
         },
         "range": {
           "target": "field",
           "unit": "m"
         },
-        "description": "<p>Trigger: The user enters combat or when the user gains this Ability.</p><p>Effect: The Weather is changed to Intense Winds. When the user gains @Affliction[fainted] or switches out the weather will change to Windy for 5 rounds.</p>",
+        "description": "<p>Trigger: The user undergoes a Phenomenal Transformation.</p><p>Effect: Intense Winds Weather is set until it is overridden or the user gains @Affliction[fainted] or leaves combat. If the user gains @Affliction[fainted] or leaves combat while Intense Winds is present, the Weather is set to Wind for 5 Rounds.</p>",
         "img": "icons/svg/explosion.svg"
       }
     ],
-    "description": "<p>Trigger: The user enters combat or when the user gains this Ability.</p><p>Effect: The Weather is changed to Intense Winds. When the user gains @Affliction[fainted] or switches out the weather will change to Windy for 5 rounds.</p>",
+    "description": "<p>Trigger: The user enters combat.</p><p>Effect: Connection - Tailwind. Wind Weather is set until it is overridden or if the user gains @Affliction[fainted] or leaves combat. If the user gains @Affliction[fainted] or leaves combat while Wind Weather is present, Wind Weather will remain for 3 Rounds.<br>By spending 10 PP as a Complex Action, or after undergoing a Phenomenal Transformation, Intense Winds Weather is set until it is overridden or the user gains @Affliction[fainted] or leaves combat. If the user gains @Affliction[fainted] or leaves combat while Intense Winds is present, the Weather is set to Wind for 5 Rounds.</p>",
     "traits": [
       "legendary",
-      "weather"
+      "weather",
+      "connection",
+      "partial-automation"
     ],
     "slug": "delta-stream",
     "_migration": {
@@ -35,6 +60,74 @@
       "previous": null
     }
   },
-  "_id": "HDra4AQB3wDxWw5D",
-  "effects": []
+  "_id": "sdRq4AQB3wDxWw5D",
+  "effects": [
+    {
+      "name": "Delta Stream",
+      "type": "passive",
+      "_id": "zTlgGqk5jWhaOYZL",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "grant-item",
+            "key": "",
+            "value": "Compendium.ptr2e.core-moves.Item.u9S8zbICHVUBS1Gx",
+            "predicate": [],
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "system.actions.0.free",
+                "value": "true"
+              }
+            ],
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "reevaluateOnUpdate": false,
+            "inMemoryOnly": false,
+            "allowDuplicate": true,
+            "track": false,
+            "replaceSelf": false,
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            }
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.5.1.5",
+        "createdTime": 1733069184244,
+        "modifiedTime": 1737396139550,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+      }
+    }
+  ]
 }

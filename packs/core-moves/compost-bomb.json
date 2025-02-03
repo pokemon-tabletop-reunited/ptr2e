@@ -5,11 +5,6 @@
   "img": "systems/ptr2e/img/svg/grass_icon.svg",
   "system": {
     "slug": null,
-    "traits": [
-      "explode",
-      "blast-1",
-      "flinch-chance-3"
-    ],
     "actions": [
       {
         "name": "Compost Bomb",
@@ -28,9 +23,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 7,
-          "delay": null,
-          "priority": null
+          "powerPoints": 7
         },
         "variant": null,
         "types": [
@@ -63,8 +56,6 @@
         "cost": {
           "activation": "complex",
           "powerPoints": 7,
-          "delay": null,
-          "priority": null,
           "trigger": "<p>The user has consumed a [Food] item during this combat.</p>"
         },
         "variant": "compost-bomb",
@@ -81,7 +72,6 @@
         "description": "<p>Trigger: The user has consumed a [Food] item during this combat.</p><p>Effect: On hit, all valid targets have a 20% chance of being Flinched.</p>"
       }
     ],
-    "description": "",
     "container": null,
     "grade": "A"
   },

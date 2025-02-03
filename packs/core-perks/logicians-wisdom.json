@@ -11,20 +11,16 @@
         "slug": "logicians-wisdom",
         "description": "<p>Effect: The target takes +10% more Damage per [Major Affliction] and +5% more Damage per [Minor Affliction] they possess from the triggering attack.</p>",
         "traits": [],
-        "type": "generic",
+        "type": "passive",
         "range": {
           "target": "creature",
           "distance": 20,
           "unit": "m"
         },
         "cost": {
-          "activation": "free",
-          "powerPoints": 5,
-          "delay": null,
-          "priority": null
+          "activation": "free"
         },
-        "img": "icons/svg/explosion.svg",
-        "variant": null
+        "img": "systems/ptr2e/img/perk-icons/Tactician.svg"
       }
     ],
     "slug": "logicians-wisdom",
@@ -62,11 +58,13 @@
       }
     ],
     "autoUnlock": [],
-    "originSlug": null,
-    "variant": null,
-    "mode": null,
     "global": true,
-    "webs": []
+    "webs": [],
+    "design": {
+      "arena": "mental",
+      "approach": "finesse",
+      "archetype": "tactician"
+    }
   },
   "effects": []
 }

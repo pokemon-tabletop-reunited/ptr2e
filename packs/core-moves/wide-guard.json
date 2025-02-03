@@ -4,11 +4,6 @@
   "img": "systems/ptr2e/img/svg/rock_icon.svg",
   "system": {
     "slug": "wide-guard",
-    "description": "<p>Trigger: The user and/or one or more creatures in range are targeted by a [X-Strike] Attack or an Attack with multiple targets.</p><p>Effect: The triggering attack fails to hit its targets, and additional such attacks that would hit the user and allied creatures within range also fail to hit until the user's next Activation, or when the round ends, whichever is first. Attacks failing to hit do not activate on-miss effects.</p>",
-    "traits": [
-      "shield",
-      "interrupt-3"
-    ],
     "actions": [
       {
         "slug": "wide-guard",
@@ -16,7 +11,8 @@
         "type": "attack",
         "traits": [
           "shield",
-          "interrupt-3"
+          "interrupt-3",
+          "pp-updated"
         ],
         "range": {
           "target": "creature",
@@ -25,26 +21,24 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 8,
-          "delay": null,
-          "priority": null,
+          "powerPoints": 3,
           "trigger": "<p>The user and/or one or more creatures in range are targeted by a [X-Strike] Attack or an Attack with multiple targets.</p>"
         },
         "category": "status",
-        "power": null,
-        "accuracy": null,
         "types": [
           "rock"
         ],
-        "description": "<p>Trigger: The user and/or one or more creatures in range are targeted by a [X-Strike] Attack or an Attack with multiple targets.</p><p>Effect: The triggering attack fails to hit its targets, and additional such attacks that would hit the user and allied creatures within range also fail to hit until the user's next Activation, or when the round ends, whichever is first. Attacks failing to hit do not activate on-miss effects.</p>",
-        "contestType": "",
-        "contestEffect": "",
-        "free": false,
-        "slot": null
+        "description": "<p>Trigger: The user and/or one or more creatures in range are targeted by a [X-Strike] Attack, Area of Effect Attack or an Attack with multiple targets.</p><p>Effect: The triggering attack fails to hit its targets, and additional such attacks that would hit the user and allied creatures within range also fail to hit until the user's next Activation, or when the round ends, whichever is first. Attacks failing to hit do not activate on-miss effects.</p>",
+        "img": "systems/ptr2e/img/svg/rock_icon.svg",
+        "predicate": []
       }
     ],
-    "container": null,
-    "grade": "D"
+    "grade": "D",
+    "traits": [],
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
   },
   "_id": "RLqWyTR3dKM0FZdm",
   "effects": []

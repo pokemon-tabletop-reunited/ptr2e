@@ -11,7 +11,7 @@
         ],
         "name": "Noctem",
         "slug": "noctem",
-        "type": "generic",
+        "type": "attack",
         "cost": {
           "activation": "free",
           "powerPoints": 2,
@@ -22,30 +22,14 @@
           "unit": "m"
         },
         "description": "<p>Trigger: The user declares New Moon.</p><p>Effect: The set Gloomy Weather has its duration increased by +2 Rounds.</p>",
-        "img": "icons/svg/explosion.svg"
-      },
-      {
-        "slug": "new-moon",
-        "name": "New Moon",
-        "type": "attack",
-        "traits": [
-          "weather"
-        ],
-        "range": {
-          "target": "field",
-          "unit": "m"
-        },
-        "cost": {
-          "activation": "complex",
-          "powerPoints": 4
-        },
-        "category": "status",
+        "img": "systems/ptr2e/img/svg/dark_icon.svg",
         "types": [
-          "dark"
+          "untyped"
         ],
-        "description": "<p>Effect: The Weather becomes Gloomy for 3 rounds.</p>",
+        "category": "status",
+        "summon": "Compendium.ptr2e.core-summons.Item.4HGIp01teAMwQOe1",
         "free": true,
-        "img": "icons/svg/explosion.svg"
+        "predicate": []
       }
     ],
     "description": "<p>Trigger: The user declares New Moon.</p><p>Effect: Connection - New Moon. The set Gloomy Weather has its duration increased by +2 Rounds.</p>",
@@ -60,5 +44,73 @@
     }
   },
   "_id": "csKDGpV163qnxNun",
-  "effects": []
+  "effects": [
+    {
+      "name": "Noctem",
+      "type": "passive",
+      "_id": "qs9hq79clqVUttQM",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "grant-item",
+            "key": "",
+            "value": "Compendium.ptr2e.core-moves.Item.hDb0r3fgTXBjN9SO",
+            "predicate": [],
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "system.actions.0.free",
+                "value": "true"
+              }
+            ],
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "reevaluateOnUpdate": false,
+            "inMemoryOnly": false,
+            "allowDuplicate": true,
+            "track": false,
+            "replaceSelf": false,
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            }
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.5.1.5",
+        "createdTime": 1737405191536,
+        "modifiedTime": 1737405224392,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+      }
+    }
+  ]
 }

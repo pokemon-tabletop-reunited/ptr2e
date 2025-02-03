@@ -5,14 +5,15 @@
   "img": "systems/ptr2e/img/svg/normal_icon.svg",
   "system": {
     "slug": null,
-    "traits": [],
     "actions": [
       {
         "name": "Coin Toss",
         "slug": "coin-toss",
         "type": "attack",
         "img": "icons/svg/explosion.svg",
-        "traits": [],
+        "traits": [
+          "pp-updated"
+        ],
         "range": {
           "target": "creature",
           "distance": 5,
@@ -20,9 +21,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 5,
-          "delay": null,
-          "priority": null
+          "powerPoints": 3
         },
         "variant": null,
         "types": [
@@ -38,9 +37,8 @@
         "description": "<p>Effect: Roll 1d6 and flip a coin. On a heads the target is inflicted with the corresponding Affliction for 5 Activations, and on Tails both the user and target are inflicted with corresponding Affliction for 5 Activations.</p><p><ol><li>@Affliction[burn]</li><li>@Affliction[drowsy]</li><li>@Affliction[frostbite]</li><li>@Affliction[paralysis]</li><li>@Affliction[poison]</li><li>@Affliction[splinter]</li></ol></p>"
       }
     ],
-    "description": "",
     "container": null,
-    "grade": "B"
+    "grade": "D"
   },
   "effects": [],
   "sort": 0,

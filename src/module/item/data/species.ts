@@ -362,6 +362,20 @@ class SpeciesSystem extends SpeciesExtension {
   override prepareBaseData(): void {
     super.prepareBaseData();
 
+    if (!this.evolutions) {
+      const uuid = this.parent.flags.core?.sourceId ?? this.parent.uuid;
+      const result = fu.parseUuid(uuid);
+      if (result.documentId) {
+        this.evolutions = new EvolutionData({
+          name: this.parent.slug,
+          uuid,
+          methods: [],
+          evolutions: null,
+          perk: { x: 26, y: 26 }
+        });
+      }
+    }
+
     this.moves.levelUp = this.moves.levelUp.sort((a, b) => {
       const levelDifference = a.level - b.level;
       if (levelDifference !== 0) return levelDifference;
@@ -447,17 +461,17 @@ class SpeciesSystem extends SpeciesExtension {
 
     const img = await (async () => {
       const species = await fromUuid<SpeciesPTR2e>(evolution.uuid);
-      if (!species) return `systems/ptr2e/img/icons/species_icon.webp`;
+      if (!species) return this.parent?.img ?? `systems/ptr2e/img/icons/species_icon.webp`;
 
       const config = game.ptr.data.artMap.get(species.slug);
-      if (!config) return `systems/ptr2e/img/icons/species_icon.webp`;
+      if (!config) return this.parent?.img ?? `systems/ptr2e/img/icons/species_icon.webp`;
 
       const resolver = await ImageResolver.createFromSpeciesData({
         dexId: species.system.number,
         shiny: isShiny,
         forms: []
       }, config);
-      return resolver?.result ?? `systems/ptr2e/img/icons/species_icon.webp`;
+      return resolver?.result ?? this.parent?.img ?? `systems/ptr2e/img/icons/species_icon.webp`;
     })();
 
     return {
@@ -526,10 +540,10 @@ class SpeciesSystem extends SpeciesExtension {
         let positive = true;
         let counter = 0;
         while (takenCoordinates.has(`${x}-${y}`)) {
-          y = 15 - (2 * depth);
+          y = 26 - (2 * depth);
           x = positive
-            ? 15 + (2 * counter)
-            : 15 + (-2 * (counter + 1));
+            ? 26 + (2 * counter)
+            : 26 + (-2 * (counter + 1));
 
           if (positive) positive = false;
           else {
@@ -537,7 +551,7 @@ class SpeciesSystem extends SpeciesExtension {
             positive = true;
           };
 
-          if (counter > 7) break;
+          if (counter > 12) break;
         }
         return [x, y];
       })()
@@ -752,8 +766,8 @@ export class EvolutionData extends foundry.abstract.DataModel {
         { required: true, nullable: true }
       ),
       perk: new fields.SchemaField({
-        x: new fields.NumberField({ required: true, initial: 15 }),
-        y: new fields.NumberField({ required: true, initial: 15 }),
+        x: new fields.NumberField({ required: true, initial: 26 }),
+        y: new fields.NumberField({ required: true, initial: 26 }),
       })
     });
 

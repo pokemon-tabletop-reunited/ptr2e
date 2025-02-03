@@ -9,27 +9,22 @@
       {
         "name": "Acute Affliction",
         "slug": "acute-affliction",
-        "description": "<p>Trigger: The target is afflicted with a [Major Affliction] the user caused.<p></p>Effect: The target's default DEF and SPDEF are reduced by -1.</p>",
+        "description": "<p>Trigger: The target is afflicted with a @Trait[major-affliction] the user caused.<p></p>Effect: The target's default DEF and SPDEF are reduced by -1.</p>",
         "traits": [],
         "type": "generic",
         "range": {
           "target": "creature",
-          "unit": "m",
-          "distance": 0
+          "unit": "m"
         },
         "cost": {
           "activation": "free",
-          "trigger": "The target is afflicted with a [Major Affliction] the user caused.",
-          "powerPoints": 0,
-          "delay": null,
-          "priority": null
+          "trigger": "The target is afflicted with a [Major Affliction] the user caused."
         },
-        "img": "systems/ptr2e/img/perk-icons/Arcana.svg",
-        "variant": null
+        "img": "systems/ptr2e/img/perk-icons/Arcana.svg"
       }
     ],
     "slug": "acute-affliction",
-    "description": "<p>Trigger: The target is afflicted with a [Major Affliction] the user caused.<p></p>Effect: The target's default DEF and SPDEF are reduced by -1.</p>",
+    "description": "<p>Trigger: The target is afflicted with a @Trait[major-affliction] the user caused.<p></p>Effect: The target's default DEF and SPDEF are reduced by -1.</p>",
     "traits": [],
     "prerequisites": [
       "item:perk:potent-afflictions"
@@ -65,11 +60,13 @@
       }
     ],
     "autoUnlock": [],
-    "originSlug": null,
-    "variant": null,
-    "mode": null,
     "global": true,
-    "webs": []
+    "webs": [],
+    "design": {
+      "arena": "mental",
+      "approach": "power",
+      "archetype": "affliction"
+    }
   },
   "effects": []
 }

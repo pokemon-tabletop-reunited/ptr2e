@@ -4,11 +4,7 @@
   "_id": "jcfvalGWvnCcEhgj",
   "img": "systems/ptr2e/img/svg/dark_icon.svg",
   "system": {
-    "slug": null,
-    "traits": [
-      "wind",
-      "blast-3"
-    ],
+    "slug": "night-storm",
     "actions": [
       {
         "name": "Night Storm",
@@ -26,43 +22,78 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 7,
-          "delay": null,
-          "priority": null
+          "powerPoints": 7
         },
-        "variant": null,
         "types": [
           "dark"
         ],
         "category": "special",
         "power": 110,
         "accuracy": 70,
-        "contestType": "",
-        "contestEffect": "",
-        "free": false,
-        "slot": null,
-        "description": "<p>Effect: On hit, all valid targets have a 10% chance of gaining @Affliction[blinded] 5.</p>"
+        "description": "<p>Effect: On hit, all valid targets have a 10% chance of gaining @Affliction[blinded] 5.</p>",
+        "predicate": []
       }
     ],
-    "description": "",
-    "container": null,
-    "grade": "A"
+    "grade": "A",
+    "traits": [],
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
   },
-  "effects": [],
-  "sort": 6700000,
-  "ownership": {
-    "default": 0,
-    "CYLdyr5mPSDmNpTp": 3
-  },
-  "flags": {},
-  "_stats": {
-    "compendiumSource": null,
-    "duplicateSource": null,
-    "coreVersion": "12.327",
-    "systemId": "ptr2e",
-    "systemVersion": "0.10.0-alpha.1.0.4",
-    "createdTime": 1718737581155,
-    "modifiedTime": 1719974607390,
-    "lastModifiedBy": "CYLdyr5mPSDmNpTp"
-  }
+  "effects": [
+    {
+      "name": "Night Storm",
+      "type": "passive",
+      "_id": "jCI0fTLA6aKpvmkZ",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "night-storm-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.blindedcondiitem",
+            "predicate": [],
+            "chance": 10,
+            "affects": "target",
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.5.1.4",
+        "createdTime": 1737308576170,
+        "modifiedTime": 1737308598019,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+      }
+    }
+  ]
 }

@@ -7,7 +7,7 @@
   "system": {
     "actions": [],
     "slug": "metamove-empower",
-    "description": "<p>Spend X PP, up to 10. The triggering Attack gains +5*X Power until it is resolved. This cannot be used with the [X-Strike] trait.</p>",
+    "description": "<p>Spend X PP, up to 10. The triggering Attack gains +5*X Power until it is resolved. This cannot be used with the @Trait[x-strike] trait.</p>",
     "traits": [],
     "prerequisites": [],
     "cost": 3,
@@ -21,7 +21,7 @@
           "metamove-dirty-trick",
           "metamove-target-split",
           "stat-iv-booster-1-13",
-          "improved-overland-1-12",
+          "improved-overland-12",
           "pack-mon"
         ],
         "config": {
@@ -41,11 +41,13 @@
       }
     ],
     "autoUnlock": [],
-    "originSlug": null,
-    "variant": null,
-    "mode": null,
     "global": true,
-    "webs": []
+    "webs": [],
+    "design": {
+      "arena": "physical",
+      "approach": "power",
+      "archetype": "Metamove"
+    }
   },
   "effects": []
 }

@@ -5,46 +5,7 @@
   "_id": "ZPI6ynhdFdYyxJUx",
   "img": "systems/ptr2e/img/svg/fighting_icon.svg",
   "system": {
-    "actions": [
-      {
-        "slug": "rage",
-        "name": "Rage",
-        "type": "attack",
-        "traits": [
-          "contact",
-          "pp-updated"
-        ],
-        "range": {
-          "target": "creature",
-          "distance": 1,
-          "unit": "m"
-        },
-        "cost": {
-          "activation": "complex",
-          "powerPoints": 1,
-          "delay": null,
-          "priority": null
-        },
-        "category": "physical",
-        "power": 20,
-        "accuracy": 100,
-        "types": [
-          "normal"
-        ],
-        "description": "<p>Effect: The user gains @Affliction[enraged] 2. While @Affliction[enraged], if the user is hit by a damaging attack, they gain +1 ATK Stage for 5 activations.</p>",
-        "img": "systems/ptr2e/img/svg/fighting_icon.svg",
-        "free": true,
-        "variant": null,
-        "contestType": "",
-        "contestEffect": "",
-        "slot": null,
-        "summon": null,
-        "defaultVariant": null,
-        "flingItemId": null,
-        "offensiveStat": null,
-        "defensiveStat": null
-      }
-    ],
+    "actions": [],
     "slug": "seeing-red",
     "description": "<p>When you would gain @Affliction[enraged], the set duration increases by +3 Stacks.<br><br>Connection: Rage</p>",
     "traits": [],
@@ -79,11 +40,13 @@
       }
     ],
     "autoUnlock": [],
-    "originSlug": null,
-    "variant": null,
-    "mode": null,
     "global": true,
-    "webs": []
+    "webs": [],
+    "design": {
+      "arena": "physical",
+      "approach": "power",
+      "archetype": "Berserker"
+    }
   },
   "effects": [
     {
@@ -103,6 +66,31 @@
             "mode": 2,
             "priority": null,
             "ignored": false
+          },
+          {
+            "type": "grant-item",
+            "key": "",
+            "value": "Compendium.ptr2e.core-moves.Item.6OK8vhZYljL4X7cd",
+            "predicate": [],
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "system.actions.0.free",
+                "value": "true"
+              }
+            ],
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "reevaluateOnUpdate": false,
+            "inMemoryOnly": false,
+            "allowDuplicate": true,
+            "track": false,
+            "replaceSelf": false,
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            }
           }
         ],
         "slug": null,
@@ -133,10 +121,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "ptr2e",
-        "systemVersion": "0.10.0-alpha.4.1.0",
+        "systemVersion": "0.10.0-alpha.5.1.5",
         "createdTime": 1733496068419,
-        "modifiedTime": 1733496094596,
-        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
+        "modifiedTime": 1737391150981,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
       }
     }
   ]

@@ -5,7 +5,7 @@ import { htmlQueryAll } from "@utils";
 import { ApplicationRenderOptions } from "types/foundry/common/applications/api.js";
 
 
-type SkillBeingEdited = SkillPTR2e["_source"] & { label: string; investment: number; max: number; min: number };
+type SkillBeingEdited = SkillPTR2e["_source"] & { label: string; investment: number; max: number; min: number, total: number };
 
 export class SkillsEditor extends foundry.applications.api.HandlebarsApplicationMixin(
   foundry.applications.api.ApplicationV2
@@ -17,7 +17,7 @@ export class SkillsEditor extends foundry.applications.api.HandlebarsApplication
       classes: ["sheet skill-sheet"],
       position: {
         height: 'auto',
-        width: 500,
+        width: 550,
       },
       form: {
         submitOnChange: false,
@@ -33,6 +33,10 @@ export class SkillsEditor extends foundry.applications.api.HandlebarsApplication
         "change-resources": SkillsEditor.#onChangeResources,
         "change-luck": SkillsEditor.#onChangeLuck,
         "roll-luck": SkillsEditor.#onRollLuck,
+        "toggle-sort": async function (this: SkillsEditor) {
+          this.sort = this.sort === "a" ? "v" : "a";
+          this.render({ parts: ["skills"] });
+        }
       },
     },
     { inplace: false }
@@ -48,6 +52,7 @@ export class SkillsEditor extends foundry.applications.api.HandlebarsApplication
   document: ActorPTR2e;
   skills: SkillBeingEdited[];
   filter: SearchFilter;
+  sort: "a" | "v" = "a";
 
   override get title() {
     return `${this.document.name}'s Skills Editor`;
@@ -128,7 +133,27 @@ export class SkillsEditor extends foundry.applications.api.HandlebarsApplication
     const skills = this.skills.map((s) => ({
       ...s,
       max: Math.max(s.min, Math.min(s.max, s.investment + points.available!)),
-    }))
+    })).sort((a, b) => {
+      if(a.slug === "luck") return -1;
+      if(b.slug === "luck") return 1;
+      if(a.slug === "resources") return -1;
+      if(b.slug === "resources") return 1;
+      function alphaSort(a: SkillBeingEdited, b: SkillBeingEdited) {
+        if (a.group === b.group) return a.label.localeCompare(b.label);
+        if (!a.group) return -1;
+        if (!b.group) return 1;
+        return a.group.localeCompare(b.group);
+      }
+      if (this.sort === "a") {
+        return alphaSort(a, b);
+      }
+      else {
+        if (a.total === b.total) {
+          return (b.value === a.value ? alphaSort(a, b) : b.value - a.value);
+        }
+        return b.total - a.total;
+      }
+    })
 
     // check if this configuration is valid, and can pass validation
     const valid = points.available >= 0 && !skills.some((skill) => (skill.slug === "resources" ? (skill.investment <= -skill.value) : (skill.investment < skill.min)) || skill.investment > skill.max);
@@ -142,6 +167,7 @@ export class SkillsEditor extends foundry.applications.api.HandlebarsApplication
       levelOne,
       valid,
       showOverrideSubmit: game?.user?.isGM ?? false,
+      sort: this.sort === "a"
     };
   }
 
@@ -423,8 +449,8 @@ export class SkillsEditor extends foundry.applications.api.HandlebarsApplication
       if (isNaN(investment) || !investment) continue;
 
       if (skill.slug === "resources") {
-        if(investment < 0) resourceMod = investment;
-        if(levelOne) {
+        if (investment < 0) resourceMod = investment;
+        if (levelOne) {
           resourceMod = investment
           delete data[skill.slug];
           continue;

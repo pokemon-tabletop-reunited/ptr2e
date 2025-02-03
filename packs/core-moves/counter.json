@@ -4,11 +4,6 @@
   "img": "systems/ptr2e/img/svg/fighting_icon.svg",
   "system": {
     "slug": "counter",
-    "description": "<p>Trigger: The user is damaged by a Physical damaging attack.</p><p>Effect: The user attacks the creature that attacked it, dealing twice the amount of damage it were dealt by the triggering attack (this is not modified by the target's DEF or other effects).</p>",
-    "traits": [
-      "interrupt-3",
-      "contact"
-    ],
     "actions": [
       {
         "slug": "counter",
@@ -16,7 +11,8 @@
         "type": "attack",
         "traits": [
           "interrupt-3",
-          "contact"
+          "contact",
+          "pp-updated"
         ],
         "range": {
           "target": "creature",
@@ -25,9 +21,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 5,
-          "delay": null,
-          "priority": null,
+          "powerPoints": 3,
           "trigger": "<p>The user is damaged by a Physical damaging attack.</p>"
         },
         "category": "status",
@@ -44,7 +38,7 @@
       }
     ],
     "container": null,
-    "grade": "C"
+    "grade": "D"
   },
   "_id": "TzmxWMEVbUTipXGX",
   "effects": []

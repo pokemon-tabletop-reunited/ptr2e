@@ -1,0 +1,123 @@
+{
+  "name": "Improved Telekinesis",
+  "type": "perk",
+  "folder": "zrVtKATNxzLNxTUe",
+  "system": {
+    "prerequisites": [
+      "#[Telekinetic X]",
+      "#Occult (Psychic) 20 + 10 x (# of Improved Telekinesis Perks already obtained)"
+    ],
+    "cost": 1,
+    "description": "<p>Improve your [Telekinesis X] by 2.</p>",
+    "actions": [
+      {
+        "name": "Improved Telekinesis",
+        "slug": "improved-telekinesis",
+        "description": "<p>Improve your [Telekinesis X] by 2.</p>",
+        "cost": {
+          "activation": "free"
+        },
+        "type": "passive",
+        "traits": [],
+        "img": "icons/svg/explosion.svg",
+        "range": {
+          "target": "enemy",
+          "unit": "m"
+        }
+      }
+    ],
+    "slug": "improved-telekinesis",
+    "variant": "multi",
+    "mode": "individual",
+    "nodes": [
+      {
+        "x": 129,
+        "y": 116,
+        "connected": [
+          "telekinetic-potential",
+          "stat-iv-booster-1-4",
+          "improved-teleportation"
+        ],
+        "config": {
+          "alpha": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "borderWidth": null,
+          "texture": null,
+          "tint": null,
+          "scale": null
+        },
+        "hidden": false,
+        "type": "normal",
+        "tier": null
+      },
+      {
+        "x": 156,
+        "y": 134,
+        "connected": [
+          "telekinetic-potential",
+          "stat-iv-booster-1-2",
+          "improved-teleportation-1",
+          "improved-teleportation-2",
+          "new-foundations-1"
+        ],
+        "config": {
+          "alpha": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "borderWidth": null,
+          "texture": null,
+          "tint": null,
+          "scale": null
+        },
+        "hidden": false,
+        "type": "normal",
+        "tier": null
+      },
+      {
+        "x": 103,
+        "y": 150,
+        "connected": [
+          "stat-iv-booster-1-9",
+          "improved-overland-11",
+          "improved-flight-5",
+          "stat-iv-booster-1-8",
+          "telepathic-potential",
+          "improved-swim-1",
+          "stat-iv-booster-1-12",
+          "improved-overland-15",
+          "mental-alarm",
+          "new-foundations-3"
+        ],
+        "config": {
+          "alpha": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "borderWidth": null,
+          "texture": null,
+          "tint": null,
+          "scale": null
+        },
+        "hidden": false,
+        "type": "normal",
+        "tier": null
+      }
+    ],
+    "traits": [],
+    "_migration": {
+      "version": null,
+      "previous": null
+    },
+    "autoUnlock": [],
+    "global": true,
+    "webs": [],
+    "design": {
+      "arena": "mental",
+      "approach": "power",
+      "archetype": "[Psychic]"
+    }
+  },
+  "_id": "QmK8catssCQpdnaA",
+  "img": "systems/ptr2e/img/icons/feat_icon.webp",
+  "effects": []
+}

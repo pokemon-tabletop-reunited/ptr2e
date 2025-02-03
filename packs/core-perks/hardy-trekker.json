@@ -17,7 +17,7 @@
       }
     ],
     "cost": 2,
-    "description": "<p>Until the start of the next Round, the user is immune to effect damage and negative effects of active Terrains, Weathers, and Hazards. The user adds all [Terrain] Attacks to their Tutor List, learning 2 of them immediately upon taking this Perk.</p>",
+    "description": "<p>Until the start of the next Round, the user is immune to effect damage and negative effects of active Terrains, Weathers, and Hazards. The user gains the [Trekker] Trait, and learns one Move from that Tutor List.</p>",
     "actions": [
       {
         "name": "Hardy Trekker",
@@ -28,18 +28,14 @@
         ],
         "cost": {
           "activation": "free",
-          "powerPoints": 4,
-          "delay": null,
-          "priority": null
+          "powerPoints": 4
         },
         "range": {
           "target": "self",
-          "unit": "m",
-          "distance": 0
+          "unit": "m"
         },
         "description": "<p>Until the start of the next Round, the user is immune to effect damage and negative effects of active Terrains and Weathers.</p>",
-        "img": "icons/svg/explosion.svg",
-        "variant": null
+        "img": "icons/svg/explosion.svg"
       }
     ],
     "slug": "hardy-trekker",
@@ -51,7 +47,7 @@
     "nodes": [
       {
         "connected": [
-          "improved-overland-1",
+          "improved-overland",
           "all-seasonal",
           "mankey-see-mankey-do",
           "parkour",
@@ -77,11 +73,13 @@
       }
     ],
     "autoUnlock": [],
-    "originSlug": null,
-    "variant": null,
-    "mode": null,
     "global": true,
-    "webs": []
+    "webs": [],
+    "design": {
+      "arena": "physical",
+      "approach": "resilience",
+      "archetype": "exploration"
+    }
   },
   "_id": "iOlwna5vtQnrFxtc",
   "img": "systems/ptr2e/img/perk-icons/Exploration.svg",

@@ -35,6 +35,7 @@
           "mode": 2
         }
       ],
+      "priority": 30,
       "formula": "1/16",
       "type": "damage",
       "removeOnRecall": false,
@@ -63,6 +64,7 @@
           "mode": 2
         }
       ],
+      "priority": 30,
       "formula": "1/16",
       "type": "damage",
       "removeOnRecall": false,
@@ -88,6 +90,7 @@
           "mode": 2
         }
       ],
+      "priority": 30,
       "formula": "(1/16 * @stacksToRemove)",
       "type": "damage",
       "removeOnRecall": false,
@@ -118,12 +121,6 @@
           "mode": 1,
           "priority": null,
           "ignored": false
-        },
-        {
-          "type": "basic",
-          "key": "system.attributes.spe.stage",
-          "value": -2,
-          "mode": 2
         },
         {
           "type": "grant-effect",
@@ -200,6 +197,7 @@
           "value": "slowed"
         }
       ],
+      "priority": 30,
       "formula": "1/16",
       "type": "damage",
       "removeOnRecall": false,
@@ -222,7 +220,7 @@
       }
     },
     "duration": {
-      "turns": 5
+      "turns": 1
     },
     "system": {
       "changes": [
@@ -276,6 +274,7 @@
           "mode": 2
         }
       ],
+      "priority": 30,
       "formula": "1/16",
       "type": "damage",
       "removeOnRecall": false,
@@ -433,12 +432,66 @@
     "img": "icons/svg/hazard.svg",
     "type": "passive",
     "system": {
-      "changes": [],
+      "changes": [
+        {
+          "type": "grant-item",
+          "key": "",
+          "value": "Compendium.ptr2e.core-moves.Item.xoFyO6Z8yZJ9Ko8e",
+          "predicate": [],
+          "replaceSelf": true,
+          "allowDuplicate": false,
+          "mode": 2,
+          "priority": null,
+          "ignored": false,
+          "reevaluateOnUpdate": false,
+          "inMemoryOnly": false,
+          "alterations": [],
+          "track": false,
+          "onDeleteActions": {
+            "grantee": "detach",
+            "granter": "cascade"
+          }
+        },
+        {
+          "type": "grant-item",
+          "key": "",
+          "value": "Compendium.ptr2e.core-moves.Item.3RvYsD6CXrWCW0YS",
+          "predicate": [],
+          "replaceSelf": true,
+          "allowDuplicate": false,
+          "mode": 2,
+          "priority": null,
+          "ignored": false,
+          "reevaluateOnUpdate": false,
+          "inMemoryOnly": false,
+          "alterations": [],
+          "track": false,
+          "onDeleteActions": {
+            "grantee": "detach",
+            "granter": "cascade"
+          }
+        },
+        {
+          "type": "ephemeral-modifier",
+          "key": "attack-damage-percentile",
+          "value": 15,
+          "predicate": [],
+          "mode": 2,
+          "priority": null,
+          "ignored": false,
+          "hideIfDisabled": false
+        },
+        {
+          "type": "percentile-modifier",
+          "key": "all-damage",
+          "value": 15
+        }
+      ],
       "traits": [
         "minor-affliction"
-      ],
-      "description": "PTR2E.Effect.Statuses.Descriptions.hyper-mode"
-    }
+      ]
+    },
+    "description": "PTR2E.Effect.Statuses.Descriptions.hyper-mode"
   },
   {
     "id": "weary",
@@ -507,7 +560,7 @@
     "id": "bound",
     "name": "PTR2E.Effect.Statuses.Labels.bound",
     "img": "icons/svg/aura.svg",
-    "type": "affliction",
+    "type": "passive",
     "system": {
       "changes": [],
       "traits": [
@@ -537,13 +590,14 @@
           "mode": 2
         }
       ],
+      "priority": 30,
       "formula": "1/16",
       "type": "damage",
       "removeOnRecall": false,
       "removeAfterCombat": true,
       "traits": [
         "water",
-        "minor-affliction"
+        "major-affliction"
       ]
     },
     "description": "PTR2E.Effect.Statuses.Descriptions.drowning"
@@ -569,13 +623,14 @@
           "mode": 2
         }
       ],
+      "priority": 30,
       "formula": "1/16",
       "type": "damage",
       "removeOnRecall": false,
       "removeAfterCombat": true,
       "traits": [
-        "water",
-        "minor-affliction"
+        "bug",
+        "major-affliction"
       ]
     },
     "description": "PTR2E.Effect.Statuses.Descriptions.infested"
@@ -597,13 +652,14 @@
           "mode": 2
         }
       ],
+      "priority": 30,
       "formula": "1/16",
       "type": "damage",
       "removeOnRecall": false,
       "removeAfterCombat": true,
       "traits": [
         "electric",
-        "minor-affliction"
+        "major-affliction"
       ]
     },
     "description": "PTR2E.Effect.Statuses.Descriptions.tased"
@@ -625,13 +681,49 @@
           "mode": 2
         }
       ],
+      "priority": 30,
       "formula": "1/16",
       "type": "damage",
       "removeOnRecall": false,
       "removeAfterCombat": true,
       "traits": [
         "flying",
-        "minor-affliction"
+        "major-affliction"
+      ]
+    },
+    "description": "PTR2E.Effect.Statuses.Descriptions.wind-shear"
+  },
+  {
+    "id": "wracked",
+    "name": "PTR2E.Effect.Statuses.Labels.wracked",
+    "img": "systems/ptr2e/img/svg/shadow_icon.svg",
+    "type": "affliction",
+    "duration": {
+      "turns": 5
+    },
+    "system": {
+      "changes": [
+        {
+          "type": "basic",
+          "key": "system.battleStats.atk.stage",
+          "value": -1,
+          "mode": 2
+        },
+        {
+          "type": "basic",
+          "key": "system.battleStats.spatk.stage",
+          "value": -1,
+          "mode": 2
+        }
+      ],
+      "priority": 30,
+      "formula": "1.5/16",
+      "type": "damage",
+      "removeOnRecall": false,
+      "removeAfterCombat": true,
+      "traits": [
+        "flying",
+        "major-affliction"
       ]
     },
     "description": "PTR2E.Effect.Statuses.Descriptions.wind-shear"
@@ -950,7 +1042,10 @@
           "value": 2,
           "label": "Duel - Duel Partner",
           "mode": 2,
-          "predicate": ["target:mark:duel", "origin:mark:duel"]
+          "predicate": [
+            "target:mark:duel",
+            "origin:mark:duel"
+          ]
         },
         {
           "type": "percentile-modifier",
@@ -1084,9 +1179,9 @@
       "removeAfterCombat": true,
       "traits": [
         "minor-affliction"
-      ],
-      "description": "PTR2E.Effect.Statuses.Descriptions.choice-locked"
-    }
+      ]
+    },
+    "description": "PTR2E.Effect.Statuses.Descriptions.choice-locked"
   },
   {
     "id": "grounded",
@@ -1129,6 +1224,7 @@
     },
     "system": {
       "changes": [],
+      "priority": 30,
       "formula": "1/4",
       "type": "damage",
       "removeOnRecall": false,
@@ -1155,9 +1251,9 @@
       "removeAfterCombat": true,
       "traits": [
         "minor-affliction"
-      ],
-      "description": "PTR2E.Effect.Statuses.Descriptions.true-sight"
-    }
+      ]
+    },
+    "description": "PTR2E.Effect.Statuses.Descriptions.true-sight"
   },
   {
     "id": "shrink",
@@ -1388,6 +1484,7 @@
     },
     "system": {
       "changes": [],
+      "priority": 30,
       "formula": "1/8",
       "type": "damage",
       "removeOnRecall": false,
@@ -1428,6 +1525,7 @@
     },
     "system": {
       "changes": [],
+      "priority": 0,
       "formula": "1/16",
       "type": "healing",
       "removeOnRecall": false,
@@ -1527,6 +1625,42 @@
           "key": "system.battleStats.accuracy.stage",
           "value": -1,
           "mode": 2
+        },
+        {
+          "type": "grant-item",
+          "key": "",
+          "value": "Compendium.ptr2e.core-moves.Item.I40AiRBdVJWdtmAJ",
+          "predicate": [],
+          "replaceSelf": false,
+          "allowDuplicate": false,
+          "onDeleteActions": {
+            "grantee": "detach",
+            "granter": "cascade"
+          }
+        },
+        {
+          "type": "grant-item",
+          "key": "",
+          "value": "Compendium.ptr2e.core-moves.Item.NJy3eYAmlcqfqIua",
+          "predicate": [],
+          "replaceSelf": false,
+          "allowDuplicate": false,
+          "onDeleteActions": {
+            "grantee": "detach",
+            "granter": "cascade"
+          }
+        },
+        {
+          "type": "grant-item",
+          "key": "",
+          "value": "Compendium.ptr2e.core-moves.Item.YI7aL87CCQU797GH",
+          "predicate": [],
+          "replaceSelf": false,
+          "allowDuplicate": false,
+          "onDeleteActions": {
+            "grantee": "detach",
+            "granter": "cascade"
+          }
         }
       ],
       "removeOnRecall": true,

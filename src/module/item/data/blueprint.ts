@@ -10,9 +10,11 @@ import { Progress } from "src/util/progress.ts";
 import FolderPTR2e from "@module/folder/document.ts";
 import natureToStatArray from "@scripts/config/natures.ts";
 import SpeciesSystem, { EvolutionData, LevelUpMoveSchema } from "./species.ts";
-import { AbilityPTR2e, MovePTR2e, SpeciesPTR2e } from "@item";
+import { AbilityPTR2e, MovePTR2e, SpeciesPTR2e, PerkPTR2e } from "@item";
 import { ImageResolver, NORMINV, sluggify } from "@utils";
 import { TokenDocumentPTR2e } from "@module/canvas/token/document.ts";
+import { getInitialSkillList, partialSkillToSkill } from "@scripts/config/skills.ts";
+import { SkillSchema } from "@module/data/models/skill.ts";
 
 export default abstract class BlueprintSystem extends HasEmbed(HasMigrations(foundry.abstract.TypeDataModel), "blueprint") {
   /**
@@ -145,6 +147,7 @@ export default abstract class BlueprintSystem extends HasEmbed(HasMigrations(fou
     // If no options, then we're generating from a blueprint window instead of a drag-and-drop
     // Thus ask for a location where to spawn the Actor(s)
     if (!options) {
+      canvas.tokens.controlled.forEach(t => t.release());
       const notification = ui.notifications.notify("Please hover over the Canvas and press 'S' to select Blueprint Spawn Location (press 'esc' to cancel)", "info", { permanent: true })
 
       options = await new Promise((resolve) => {
@@ -202,7 +205,7 @@ export default abstract class BlueprintSystem extends HasEmbed(HasMigrations(fou
       })()
     }
 
-    const progress = new Progress({ steps: this.blueprints.size + 2 });
+    const progress = new Progress({ steps: (this.blueprints.size * 3) + 2 });
     progress.advance(game.i18n.localize("PTR2E.PokemonGeneration.Progress.Prefix"));
 
     const toBeCreated: Partial<ActorPTR2e['_source']>[] = [];
@@ -334,11 +337,13 @@ export default abstract class BlueprintSystem extends HasEmbed(HasMigrations(fou
 
       const shiny = this.randomInteger(1, 100) <= shinyChance;
 
-      const gender = species.system.genderRatio === -1
-        ? "genderless"
-        : Math.random() < species.system.genderRatio / 8
-          ? "male"
-          : "female";
+      const gender = blueprint.gender !== "random"
+        ? blueprint.gender
+        : species.system.genderRatio === -1
+          ? "genderless"
+          : Math.random() > species.system.genderRatio / 8
+            ? "male"
+            : "female";
 
       const evolution = await (async (): Promise<NonNullable<SpeciesPTR2e['_source'] & {
         system: SpeciesSystemModel['_source'];
@@ -405,7 +410,7 @@ export default abstract class BlueprintSystem extends HasEmbed(HasMigrations(fou
 
         const weight = isHumanoid
           ? NORMINV(randomW / 10000000000, BlueprintSystem.HumanoidHeightWeightData[gender].weight.average, BlueprintSystem.HumanoidHeightWeightData[gender].weight.deviation) * Math.pow(height, 2)
-          : ((randomW / 40000) * 0.4 + 8) * ((randomH / 40000) * 0.8 + 0.6) * (evolution.system.size.weight ?? 1);
+          : ((randomW / 40000) * 0.4 + 0.8) * ((randomH / 40000) * 0.8 + 0.6) * (evolution.system.size.weight ?? 1);
 
         return { height, weight };
       })();
@@ -538,7 +543,7 @@ export default abstract class BlueprintSystem extends HasEmbed(HasMigrations(fou
           {
             dexId: evolution.system.number,
             shiny,
-            forms: evolution.system.form ? [evolution.system.form] : [],
+            forms: evolution.system.form ? evolution.system.form.split("-") : [],
           },
           config
         );
@@ -548,7 +553,7 @@ export default abstract class BlueprintSystem extends HasEmbed(HasMigrations(fou
           {
             dexId: evolution.system.number,
             shiny,
-            forms: evolution.system.form ? [evolution.system.form, "token"] : ["token"],
+            forms: evolution.system.form ? [...evolution.system.form.split("-"), "token"] : ["token"],
           },
           config
         );
@@ -567,6 +572,195 @@ export default abstract class BlueprintSystem extends HasEmbed(HasMigrations(fou
         _id: "actorspeciesitem",
         effects: evolution.effects
       })
+
+      // Generate Perks
+      const perkGenData = {
+        name: Handlebars.helpers.formatSlug(evolution.system.slug) || blueprint.name,
+        img,
+        type: evolution.system.traits?.includes("humanoid") ? "humanoid" : "pokemon",
+        folder: options.folder?.id,
+        ownership: options.parent ? options.parent.ownership : {},
+        system: {
+          attributes: stats,
+          shiny,
+          advancement: {
+            experience: {
+              current: experience
+            }
+          },
+          nature,
+          gender,
+          party: {
+            ownerOf: blueprint.owner ? options.folder?.id : undefined,
+            partyMemberOf: hasOwner ? blueprint.owner ? null : options.folder?.id : null,
+            teamMemberOf: options.team ? [options.folder?.id] : [],
+          },
+          details: {
+            size: {
+              weight,
+              height
+            }
+          }
+        },
+        items
+      } as unknown as Partial<ActorPTR2e['_source']>;
+      const temporaryActor = new ActorPTR2e(perkGenData);
+
+      const worker = game.workers.get("PerkWorker");
+      const initialized = await worker.executeFunction<boolean>("initialized")
+      if (!initialized) {
+        await game.ptr.perks.initialize();
+        await worker.executeFunction("initializePerks", [{
+          perks: Array.from(game.ptr.perks.perks.values()).map(i => ({ ...i.toObject(), slug: i.slug }))
+        }]);
+      }
+
+      progress.advance(game.i18n.localize("PTR2E.PokemonGeneration.Progress.Prefix") + game.i18n.format("PTR2E.PokemonGeneration.Progress.Perks", {
+        name: blueprint.name
+      }));
+
+      const perkGenResult = blueprint.config ? await worker.executeFunction("generate", [{
+        config: await blueprint.config.toWorkerObject(temporaryActor),
+        actor: temporaryActor.toObject(),
+        options: temporaryActor.getSelfRollOptions()
+      }]) : null;
+      const [perks, perkSkills, pointsSpent] = perkGenResult ? (() => {
+        const perks: PerkPTR2e['_source'][] = [];
+        const owned = new Set<string>();
+        const skills = new Map<string, { skill: string, value: number }>();
+        let totalPoints = 0;
+        for (const step of perkGenResult) {
+          for (const data of step.path.flatMap(path => ({ ...path.data.perk, system: { ...path.data.perk.system }, slug: path.id?.toString() }))) {
+            if (owned.has(data.slug)) continue;
+            const perk = data as unknown as PerkPTR2e['_source'];
+            perk.system.originSlug = data.slug;
+            //@ts-expect-error - Valid operation.
+            delete perk._id
+            perks.push(perk);
+            owned.add(data.slug);
+          }
+          for (const skill of step.skills.values()) {
+            const existing = skills.get(skill.skill);
+            if (existing) {
+              skills.set(skill.skill, { skill: skill.skill, value: existing.value + skill.value });
+            } else {
+              skills.set(skill.skill, { skill: skill.skill, value: skill.value });
+            }
+            totalPoints += skill.value;
+          }
+        }
+        return [perks.reduce((acc, perk) => {
+          if (perk.system.nodes?.[0]?.type === "root") {
+            if (acc.hasRoot) perk.system.cost = 1;
+            else {
+              acc.hasRoot = true;
+              perk.system.cost = 0;
+            }
+          }
+          acc.perks.push(perk);
+          return acc;
+        }, { perks: [] as PerkPTR2e['_source'][], hasRoot: false }).perks, Array.from(skills.values()), totalPoints];
+      })() : [null, [], 0];
+      if (perks) items.push(...perks);
+      progress.advance(game.i18n.localize("PTR2E.PokemonGeneration.Progress.Prefix") + game.i18n.format("PTR2E.PokemonGeneration.Progress.PerksDone", {
+        name: blueprint.name
+      }));
+
+      // TODO: Add skill settings
+      const skills = (() => {
+        const totalPoints = ((evolution.system.traits.includes("ace") ? 400 : 110) + 10 * (level - 1)) - pointsSpent;
+
+        const speciesPoints = Math.floor(totalPoints * 0.65);
+        const leftOverPoints = totalPoints - speciesPoints;
+
+        const randomSpeciesPoints = Math.ceil(Math.random() * speciesPoints * 0.30)
+        const randomPoints = Math.ceil(Math.random() * leftOverPoints * 0.50)
+
+        class WeightedBag<T> {
+          private entries: { entry: T; weight: number }[] = [];
+          private totalWeight = 0;
+
+          addEntry(entry: T, weight: number) {
+            this.entries.push({ entry, weight });
+            this.totalWeight += weight;
+          }
+
+          get() {
+            const rand = Math.random() * this.totalWeight;
+            let cumulativeWeight = 0;
+
+            for (const { entry, weight } of this.entries) {
+              cumulativeWeight += weight;
+              if (rand < cumulativeWeight) {
+                return entry;
+              }
+            }
+
+            return null; // In case there are no entries
+          }
+        }
+
+        const skills = new Map(getInitialSkillList().map((skill) => [skill.slug, skill]));
+
+        for (const skill of perkSkills) {
+          const existing = skills.get(skill.skill);
+          if (existing) {
+            existing.rvs = (existing.rvs ?? 0) + skill.value;
+          } else {
+            console.warn(`PTR2e Blueprint Generator | Skill ${skill.skill} set from Perk Generator was not found in skill list!`);
+          }
+        }
+
+        const calculateSkills = (points: number, weighted: boolean, speciesOnly: boolean) => {
+          const bag = new WeightedBag<SourceFromSchema<SkillSchema>>();
+
+          const pool = speciesOnly ? evolution.system.skills : Array.from(skills.values());
+
+          for (const skillData of pool) {
+            const skill = skills.get(skillData.slug) ?? (() => {
+              const skill = (game.ptr.data.skills.get(skillData.slug) ?? partialSkillToSkill({ slug: skillData.slug })) as SourceFromSchema<SkillSchema>;
+              skills.set(skillData.slug, skill);
+              return skill;
+            })();
+            if (skill.hidden) continue;
+            bag.addEntry(
+              skill,
+              weighted
+                ? speciesOnly
+                  ? skill.value
+                  : (skill.rvs ?? 1) >= 45
+                    ? 1
+                    : (skill.rvs ?? skill.value)
+                : 1
+            );
+          }
+
+          let invested = 0;
+          let retry = 0;
+          while (invested < points) {
+            const result = bag.get();
+            if (result && (result.rvs ?? 0) < 70) {
+              result.rvs = (result.rvs ?? 0) + 1;
+              invested++;
+              retry = 0;
+            }
+            else {
+              retry++;
+              if (retry > 10) {
+                console.warn("Skill generation failed to allocate points");
+                break;
+              }
+            }
+          }
+        };
+
+        calculateSkills(speciesPoints - randomSpeciesPoints, true, true);
+        calculateSkills(randomSpeciesPoints, false, true);
+        calculateSkills(randomPoints, false, false);
+        calculateSkills(leftOverPoints - randomPoints, true, false);
+
+        return Array.from(skills.values());
+      })();
 
       const foundryDefaultTokenSettings = game.settings.get("core", "defaultToken");
 
@@ -596,7 +790,8 @@ export default abstract class BlueprintSystem extends HasEmbed(HasMigrations(fou
               weight,
               height
             }
-          }
+          },
+          skills
         },
         items,
         prototypeToken: fu.mergeObject(foundryDefaultTokenSettings, {
@@ -676,3 +871,4 @@ export type BlueprintSource = BaseItemSourcePTR2e<"blueprint", BlueprintSystemSo
 interface BlueprintSystemSource {
   slug: string;
 }
+

@@ -1,4 +1,4 @@
-import { AttackPTR2e, SummonAttackPTR2e } from "@data";
+import { AttackPTR2e, SummonAttackPTR2e, Trait } from "@data";
 import { AttackStatisticRollParameters, BaseStatisticCheck, RollOptionConfig, Statistic } from "./statistic.ts";
 import { StatisticData } from "./data.ts";
 import * as R from "remeda";
@@ -196,8 +196,8 @@ class AttackCheck<TParent extends AttackStatistic = AttackStatistic> implements 
       game.user.targets.clear();
       const target = await new TagTokenPrompt({ prompt: "PTR2E.UI.TokenTagPrompt.TargetTokenFling", requirements: null }).resolveTarget();
       if (!target?.actor) return null;
-      if (!target.actor.isAllyOf(this.actor)) {
-        ui.notifications.warn(game.i18n.localize("PTR2E.AttackWarning.FlingTargetNotAlly"));
+      if (!target.actor.isAllyOf(this.actor) && !target.actor.rollOptions.getFromDomain("effect")["passive:grapple"]) {
+        ui.notifications.warn(game.i18n.localize("PTR2E.AttackWarning.FlingTargetNotAllyOrGrappled"));
         return null;
       }
       const index = targets.findIndex(t => t.actor === target.actor);
@@ -238,7 +238,7 @@ class AttackCheck<TParent extends AttackStatistic = AttackStatistic> implements 
       this.attack.prepareDerivedData();
     }
 
-    const variants = args.variants ?? this.attack.variants?.length ? this.attack.variants : [];
+    const variants = args.variants ?? (this.attack.getVariants() || []);
     if (variants.length) args.skipDialog = false;
 
     // Get context without target for basic information 
@@ -256,9 +256,16 @@ class AttackCheck<TParent extends AttackStatistic = AttackStatistic> implements 
       return null;
     }
 
+    const traitEffects = this.attack.traits.contents.flatMap(trait => {
+      if (!trait.changes?.length) return [];
+      const effect = Trait.effectsFromChanges.bind(trait)(this.actor)
+      if (effect) return effect.toObject();
+      return [];
+    }) ?? []
+
     const selfEffectRolls = await extractEffectRolls({
       affects: "self",
-      origin: this.actor,
+      origin: this.actor.clone({effects: [fu.deepClone(this.actor._source.effects), traitEffects].flat()}, {keepId: true}),
       target: this.actor,
       item: this.item,
       attack: this.attack,

@@ -5,103 +5,7 @@
   "_id": "1eZASTA0wlCgvJ9v",
   "img": "systems/ptr2e/img/perk-icons/Hunting.svg",
   "system": {
-    "actions": [
-      {
-        "name": "Weak Spot",
-        "slug": "weak-spot",
-        "description": "<p>Connection - Focus Energy. The user learns Laser Focus.</p>",
-        "traits": [],
-        "type": "passive",
-        "range": {
-          "target": "self",
-          "unit": "m",
-          "distance": 0
-        },
-        "cost": {
-          "activation": "free",
-          "powerPoints": 0,
-          "delay": null,
-          "priority": null
-        },
-        "img": "icons/svg/explosion.svg",
-        "variant": null,
-        "hidden": false
-      },
-      {
-        "slug": "focus-energy",
-        "name": "Focus Energy",
-        "type": "attack",
-        "traits": [
-          "aura"
-        ],
-        "range": {
-          "target": "creature",
-          "unit": "m",
-          "distance": 0
-        },
-        "cost": {
-          "activation": "simple",
-          "powerPoints": 3,
-          "delay": null,
-          "priority": null
-        },
-        "category": "status",
-        "types": [
-          "normal"
-        ],
-        "description": "Effect: The user's gain +1 CRIT stage for 5 activations.",
-        "free": true,
-        "img": "icons/svg/explosion.svg",
-        "variant": null,
-        "power": null,
-        "accuracy": null,
-        "contestType": "",
-        "contestEffect": "",
-        "slot": null,
-        "summon": null,
-        "defaultVariant": null,
-        "flingItemId": null,
-        "offensiveStat": null,
-        "defensiveStat": null
-      },
-      {
-        "slug": "laser-focus",
-        "name": "Laser Focus",
-        "type": "attack",
-        "traits": [
-          "aura"
-        ],
-        "range": {
-          "target": "self",
-          "unit": "m",
-          "distance": 0
-        },
-        "cost": {
-          "activation": "simple",
-          "powerPoints": 3,
-          "delay": null,
-          "priority": null
-        },
-        "category": "status",
-        "types": [
-          "normal"
-        ],
-        "description": "Effect: The user gains +4 CRIT stages for 2 activations.",
-        "img": "icons/svg/explosion.svg",
-        "variant": null,
-        "power": null,
-        "accuracy": null,
-        "contestType": "",
-        "contestEffect": "",
-        "free": false,
-        "slot": null,
-        "summon": null,
-        "defaultVariant": null,
-        "flingItemId": null,
-        "offensiveStat": null,
-        "defensiveStat": null
-      }
-    ],
+    "actions": [],
     "slug": "weak-spot",
     "description": "<p>Connection - Focus Energy. The user learns Laser Focus.</p>",
     "traits": [],
@@ -138,11 +42,100 @@
       }
     ],
     "autoUnlock": [],
-    "originSlug": null,
-    "variant": null,
-    "mode": null,
     "global": true,
-    "webs": []
+    "webs": [],
+    "design": {
+      "arena": "physical",
+      "approach": "finesse",
+      "archetype": "Hunter"
+    }
   },
-  "effects": []
+  "effects": [
+    {
+      "name": "Weak Spot",
+      "type": "passive",
+      "_id": "xwhPSQA6Qpr33ewK",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "grant-item",
+            "key": "",
+            "value": "Compendium.ptr2e.core-moves.Item.9gYKmjjtwxu0i5GC",
+            "predicate": [],
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "system.actions.0.free",
+                "value": "true"
+              }
+            ],
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "reevaluateOnUpdate": false,
+            "inMemoryOnly": false,
+            "allowDuplicate": true,
+            "track": false,
+            "replaceSelf": false,
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            }
+          },
+          {
+            "type": "grant-item",
+            "key": "",
+            "value": "Compendium.ptr2e.core-moves.Item.783co7i5n9s15xpq",
+            "predicate": [],
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "reevaluateOnUpdate": false,
+            "inMemoryOnly": false,
+            "allowDuplicate": true,
+            "alterations": [],
+            "track": false,
+            "replaceSelf": false,
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            }
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.5.1.5",
+        "createdTime": 1737391595802,
+        "modifiedTime": 1737391652332,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+      }
+    }
+  ]
 }

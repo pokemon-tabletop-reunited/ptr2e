@@ -6,80 +6,7 @@
       "version": 0.109,
       "previous": null
     },
-    "actions": [
-      {
-        "slug": "dragon-cheer",
-        "name": "Dragon Cheer",
-        "type": "attack",
-        "traits": [
-          "sonic"
-        ],
-        "range": {
-          "target": "emanation",
-          "distance": 5,
-          "unit": "m"
-        },
-        "cost": {
-          "activation": "complex",
-          "powerPoints": 5,
-          "delay": null,
-          "priority": null
-        },
-        "category": "status",
-        "types": [
-          "dragon"
-        ],
-        "description": "<p>Effect: The user and all allies in range gain +1 CRIT Stage for 5 activations. Dragon-type creature instead gain +2 CRIT Stages for 5 activations.</p>",
-        "slot": 3,
-        "img": "systems/ptr2e/img/svg/dragon_icon.svg",
-        "free": true,
-        "variant": null,
-        "power": null,
-        "accuracy": null,
-        "contestType": "",
-        "contestEffect": "",
-        "summon": null,
-        "defaultVariant": null,
-        "flingItemId": null,
-        "offensiveStat": null,
-        "defensiveStat": null
-      },
-      {
-        "slug": "coaching",
-        "name": "Coaching",
-        "type": "attack",
-        "traits": [],
-        "range": {
-          "target": "emanation",
-          "distance": 3,
-          "unit": "m"
-        },
-        "cost": {
-          "activation": "simple",
-          "powerPoints": 7,
-          "delay": null,
-          "priority": null
-        },
-        "category": "status",
-        "types": [
-          "fighting"
-        ],
-        "description": "<p>Effect: The user and all allies in range gain +1 ATK and DEF Stage for 5 activations.</p>",
-        "free": true,
-        "img": "systems/ptr2e/img/perk-icons/Orders_Training.svg",
-        "variant": null,
-        "power": null,
-        "accuracy": null,
-        "contestType": "",
-        "contestEffect": "",
-        "slot": null,
-        "summon": null,
-        "defaultVariant": null,
-        "flingItemId": null,
-        "offensiveStat": null,
-        "defensiveStat": null
-      }
-    ],
+    "actions": [],
     "description": "<p>You learn the moves Dragon Cheer and Coaching, and gain them as Connected Moves.</p>",
     "traits": [],
     "prerequisites": [
@@ -115,14 +42,109 @@
       }
     ],
     "autoUnlock": [],
-    "originSlug": null,
-    "variant": null,
-    "mode": null,
     "global": true,
-    "webs": []
+    "webs": [],
+    "design": {
+      "arena": "social",
+      "approach": "power",
+      "archetype": ""
+    }
   },
   "img": "systems/ptr2e/img/perk-icons/Orders_Training.svg",
-  "effects": [],
+  "effects": [
+    {
+      "name": "Drill Sergeant",
+      "type": "passive",
+      "_id": "42H6epwnrk9UnKyT",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "grant-item",
+            "key": "",
+            "value": "Compendium.ptr2e.core-moves.Item.VoiUETAcuekeVO32",
+            "predicate": [],
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "system.actions.0.free",
+                "value": "true"
+              }
+            ],
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "reevaluateOnUpdate": false,
+            "inMemoryOnly": false,
+            "allowDuplicate": true,
+            "track": false,
+            "replaceSelf": false,
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            }
+          },
+          {
+            "type": "grant-item",
+            "key": "",
+            "value": "Compendium.ptr2e.core-moves.Item.F4GCikgU29LS0wu7",
+            "predicate": [],
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "system.actions.0.free",
+                "value": "true"
+              }
+            ],
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "reevaluateOnUpdate": false,
+            "inMemoryOnly": false,
+            "allowDuplicate": true,
+            "track": false,
+            "replaceSelf": false,
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            }
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.5.1.5",
+        "createdTime": 1737392003677,
+        "modifiedTime": 1737392098018,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+      }
+    }
+  ],
   "_id": "F4l5fiHA0sXoMbx6",
   "folder": "PAZ8zWUPw7Azm5V6"
 }

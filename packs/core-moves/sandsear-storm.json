@@ -4,14 +4,6 @@
   "img": "systems/ptr2e/img/svg/ground_icon.svg",
   "system": {
     "slug": "sandsear-storm",
-    "description": "<p>Effect: On hit, all valid targets have a 30% of gaining @Affliction[burn] 7. If Sandy or Windy Weather are active, this attack gains [Danger Close].</p>",
-    "traits": [
-      "legendary",
-      "blast-4",
-      "environ",
-      "wind",
-      "pp-updated"
-    ],
     "actions": [
       {
         "slug": "sandsear-storm",
@@ -30,10 +22,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 3,
-          "delay": null,
-          "priority": null,
-          "trigger": null
+          "powerPoints": 3
         },
         "category": "special",
         "power": 100,
@@ -41,11 +30,8 @@
         "types": [
           "ground"
         ],
-        "description": "",
-        "contestType": "",
-        "contestEffect": "",
-        "free": false,
-        "slot": null
+        "img": "icons/svg/explosion.svg",
+        "predicate": []
       },
       {
         "slug": "sandsear-storm-blowing",
@@ -67,8 +53,6 @@
         "cost": {
           "activation": "complex",
           "powerPoints": 8,
-          "delay": null,
-          "priority": null,
           "trigger": "Dusty or Windy Weather Weather is present."
         },
         "category": "special",
@@ -78,16 +62,80 @@
           "ground"
         ],
         "description": "<pTrigger: Dusty or Windy Weather is present.</p><p>Effect: On hit, all valid targets have a 30% of gaining @Affliction[burn] 7.</p>",
-        "contestType": "",
-        "contestEffect": "",
         "variant": "sandsear-storm",
         "free": true,
-        "slot": null
+        "img": "icons/svg/explosion.svg",
+        "predicate": []
       }
     ],
-    "container": null,
-    "grade": "C"
+    "grade": "C",
+    "traits": [],
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
   },
   "_id": "RjC3zQO0l8woLVRk",
-  "effects": []
+  "effects": [
+    {
+      "name": "Sandsear Storm",
+      "type": "passive",
+      "_id": "jOgEK1NJFhtxNM5L",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "sandsear-storm-blowing-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.burnconditioitem",
+            "predicate": [],
+            "chance": 100,
+            "affects": "target",
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "duration.turns",
+                "value": 7
+              }
+            ],
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.5.2.1",
+        "createdTime": 1737744637491,
+        "modifiedTime": 1737744702745,
+        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
+      }
+    }
+  ]
 }

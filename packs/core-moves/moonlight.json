@@ -4,11 +4,6 @@
   "img": "systems/ptr2e/img/svg/fairy_icon.svg",
   "system": {
     "slug": "moonlight",
-    "description": "<p>Effect: The user recovers HP equal to 50% of their Max HP. While there is Gloomy Weather, the user recovers HP equal to 2/3rds of their Max HP instead. In any other weather, the user recovers HP equal to 25% of their Max HP instead.</p>",
-    "traits": [
-      "healing",
-      "environ"
-    ],
     "actions": [
       {
         "slug": "moonlight",
@@ -16,7 +11,8 @@
         "type": "attack",
         "traits": [
           "healing",
-          "environ"
+          "environ",
+          "pp-updated"
         ],
         "range": {
           "target": "self",
@@ -25,10 +21,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 8,
-          "delay": null,
-          "priority": null,
-          "trigger": null
+          "powerPoints": 4
         },
         "category": "status",
         "power": null,
@@ -44,7 +37,7 @@
       }
     ],
     "container": null,
-    "grade": "A"
+    "grade": "B"
   },
   "_id": "X3F57CfU9m8vx1ws",
   "effects": []

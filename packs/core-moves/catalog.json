@@ -4,17 +4,14 @@
   "img": "systems/ptr2e/img/svg/normal_icon.svg",
   "system": {
     "slug": "catalog",
-    "description": "<p>Effect: When used, the user rolls on the Catalog Table. The user can swap one of its Abilities (user's choice) with the rolled Ability until the end of the battle.</p>",
-    "traits": [
-      "move-locked"
-    ],
     "actions": [
       {
         "slug": "catalog",
         "name": "Catalog",
         "type": "attack",
         "traits": [
-          "move-locked"
+          "move-locked",
+          "pp-updated"
         ],
         "range": {
           "target": "self",
@@ -23,10 +20,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 6,
-          "delay": null,
-          "priority": null,
-          "trigger": null
+          "powerPoints": 3
         },
         "category": "status",
         "power": null,

@@ -4,17 +4,15 @@
   "img": "systems/ptr2e/img/svg/dragon_icon.svg",
   "system": {
     "slug": "dragon-cheer",
-    "description": "<p>Effect: The user and all allies in range gain +1 CRIT Stage for 5 Activations. Dragon-type creature instead gain +2 CRIT Stages for 5 Activations.</p>",
-    "traits": [
-      "sonic"
-    ],
     "actions": [
       {
         "slug": "dragon-cheer",
         "name": "Dragon Cheer",
         "type": "attack",
         "traits": [
-          "sonic"
+          "sonic",
+          "pp-updated",
+          "partial-automation"
         ],
         "range": {
           "target": "emanation",
@@ -23,7 +21,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 5
+          "powerPoints": 8
         },
         "category": "status",
         "types": [
@@ -31,10 +29,16 @@
         ],
         "description": "<p>Effect: The user and all allies in range gain +1 CRIT Stage for 5 Activations. Dragon-type creature instead gain +2 CRIT Stages for 5 Activations.</p>",
         "slot": 3,
-        "img": "systems/ptr2e/img/svg/dragon_icon.svg"
+        "img": "systems/ptr2e/img/svg/dragon_icon.svg",
+        "predicate": []
       }
     ],
-    "grade": "C"
+    "grade": "A",
+    "traits": [],
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
   },
   "_id": "VoiUETAcuekeVO32",
   "effects": [
@@ -46,13 +50,16 @@
       "system": {
         "changes": [
           {
-            "type": "basic",
-            "key": "system.battleStats.critRate.Stage",
-            "value": 1,
+            "type": "roll-effect",
+            "key": "dragon-cheer-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.CEdcrWbb1KDTNIKl",
             "predicate": [],
+            "chance": 100,
+            "affects": "target",
             "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "alterations": []
           }
         ],
         "slug": null,
@@ -84,66 +91,12 @@
       "_stats": {
         "compendiumSource": "Actor.7Oya3WGVjs2Pgx2h.Item.lvapVW6S8cvvw0BW.ActiveEffect.Ea5z2W4QPwWu8M0b",
         "duplicateSource": null,
-        "coreVersion": "12.327",
+        "coreVersion": "12.331",
         "systemId": "ptr2e",
-        "systemVersion": "0.10.0-alpha.1.0.2",
+        "systemVersion": "0.10.0-alpha.5.2.1",
         "createdTime": 1717881627901,
-        "modifiedTime": 1717881669389,
-        "lastModifiedBy": "01onCaJSVMVOgMDI"
-      }
-    },
-    {
-      "name": "Dragon Cheer (Dragon)",
-      "type": "affliction",
-      "_id": "NH3hV3bOesN1j19c",
-      "img": "systems/ptr2e/img/icons/effect_icon.webp",
-      "system": {
-        "changes": [
-          {
-            "type": "basic",
-            "key": "system.battleStats.critRate.Stage",
-            "value": 2,
-            "predicate": [],
-            "mode": 2,
-            "priority": null,
-            "ignored": false
-          }
-        ],
-        "slug": null,
-        "traits": [],
-        "removeAfterCombat": true,
-        "removeOnRecall": false,
-        "stacks": 0,
-        "priority": 50,
-        "formula": "",
-        "type": "damage"
-      },
-      "disabled": false,
-      "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": 5,
-        "startRound": null,
-        "startTurn": null
-      },
-      "description": "<p>Temporary status condition to apply the effect of Dragon Cheer</p>",
-      "origin": null,
-      "tint": "#ffffff",
-      "transfer": false,
-      "statuses": [],
-      "sort": 0,
-      "flags": {},
-      "_stats": {
-        "compendiumSource": "Actor.7Oya3WGVjs2Pgx2h.Item.lvapVW6S8cvvw0BW.ActiveEffect.NH3hV3bOesN1j19c",
-        "duplicateSource": null,
-        "coreVersion": "12.327",
-        "systemId": "ptr2e",
-        "systemVersion": "0.10.0-alpha.1.0.2",
-        "createdTime": 1717881701258,
-        "modifiedTime": 1717881725015,
-        "lastModifiedBy": "01onCaJSVMVOgMDI"
+        "modifiedTime": 1737721945458,
+        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
       }
     }
   ]

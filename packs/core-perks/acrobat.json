@@ -3,14 +3,12 @@
   "type": "perk",
   "system": {
     "prerequisites": [
-      [
-        {
-          "gte": [
-            "{actor|skills.acrobatics.mod}",
-            30
-          ]
-        }
-      ]
+      {
+        "gte": [
+          "{actor|skills.acrobatics.mod}",
+          30
+        ]
+      }
     ],
     "cost": 1,
     "description": "<p>You gain a +10 to Acrobatics checks when benefitting from a running start.</p>",
@@ -20,21 +18,15 @@
         "slug": "acrobat",
         "description": "<p>You gain a +10 to Acrobatics checks when benefitting from a running start.</p>",
         "cost": {
-          "activation": "free",
-          "powerPoints": 0,
-          "delay": null,
-          "priority": null
+          "activation": "free"
         },
         "type": "passive",
         "traits": [],
         "img": "icons/svg/explosion.svg",
         "range": {
           "target": "enemy",
-          "unit": "m",
-          "distance": 0
-        },
-        "variant": null,
-        "hidden": false
+          "unit": "m"
+        }
       }
     ],
     "slug": "acrobat",
@@ -51,7 +43,7 @@
           "drifter",
           "root-2",
           "powerlifter",
-          "cyclist"
+          "rigorous-fundamentals"
         ],
         "config": {
           "alpha": null,
@@ -70,11 +62,13 @@
       }
     ],
     "autoUnlock": [],
-    "originSlug": null,
-    "variant": null,
-    "mode": null,
     "global": true,
-    "webs": []
+    "webs": [],
+    "design": {
+      "arena": "physical",
+      "approach": "finesse",
+      "archetype": "athleticism"
+    }
   },
   "_id": "MDkJ0KhnAvqw0v3J",
   "img": "systems/ptr2e/img/perk-icons/Exploration.svg",

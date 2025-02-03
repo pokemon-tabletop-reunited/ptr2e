@@ -1,5 +1,5 @@
 import { ChatMessagePTR2e } from "@chat";
-import { ConsumablePTR2e, ItemPTR2e, ItemSystemsWithFlingStats } from "@item";
+import { ConsumablePTR2e, ItemPTR2e, ItemSourcePTR2e, ItemSystemsWithFlingStats } from "@item";
 import { ModifierPopup } from "@module/apps/modifier-popup/modifier-popup.ts";
 import { AttackCheckModifier, CheckModifier, ModifierPTR2e } from "@module/effects/modifiers.ts";
 import { RollNote } from "@system/notes.ts";
@@ -42,6 +42,11 @@ class CheckPTR2e {
       check.calculateTotal(rollOptions);
     }
 
+    if(rollOptions.has("target:uncapturable")) {
+      ui.notifications.error(game.i18n.localize("PTR2E.AttackWarning.CannotCaptureTarget"));
+      return null;
+    }
+
     if (!context.skipDialog) {
       // Show dialog for adding/editing modifiers, unless skipped or flat check
       const dialog = await new ModifierPopup(check, context).wait();
@@ -71,7 +76,7 @@ class CheckPTR2e {
       check,
       ballBonus: (context.item?.system instanceof ConsumableSystemModel && context.item.system.consumableType === "pokeball" ? context.item.system.modifier : 1) || 1,
       critMultiplier: check.total?.crit?.percentile ?? 1,
-      caughtMons: check.total?.crit?.base ?? 1,
+      caughtMons: Math.max(1, (context.actor?.system?.details?.caught ?? 0) + (check.total?.crit?.base ?? 0)),
       miscMultiplier: check.total?.capture?.percentile ?? 1,
       target: context.target?.actor,
       user: context.actor
@@ -406,6 +411,10 @@ class CheckPTR2e {
         effectRoll.roll = await new Roll("1d100ms@dc", { dc: effectRoll.chance }).roll();
         effectRoll.success = effectRoll.roll.total <= 0;
       }
+      for (const effectRoll of targetContext.effectRolls.defensive) {
+        effectRoll.roll = await new Roll("1d100ms@dc", { dc: effectRoll.chance }).roll();
+        effectRoll.success = effectRoll.roll.total <= 0;
+      }
 
       const messageContext: CheckRollContext & {
         notesList?: HTMLUListElement | null;
@@ -465,7 +474,17 @@ class CheckPTR2e {
             continue;
           }
 
-          effectsToApply.push(...item.toObject().effects as ActiveEffectPTR2e['_source'][]);
+          const grantedSource = item.toObject();
+          
+          try {
+            for (const alteration of effectRoll.alterations ?? []) {
+              alteration.applyTo(grantedSource as ItemSourcePTR2e);
+            }
+
+            effectsToApply.push(...grantedSource.effects as ActiveEffectPTR2e['_source'][]);
+          } catch (error) {
+            if (error instanceof Error) console.warn(error);
+          }
         }
       }
     }

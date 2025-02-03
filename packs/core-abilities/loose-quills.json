@@ -23,31 +23,6 @@
         "img": "icons/svg/explosion.svg"
       },
       {
-        "slug": "spikes",
-        "name": "Spikes",
-        "type": "attack",
-        "traits": [
-          "hazard",
-          "blast-4"
-        ],
-        "range": {
-          "target": "blast",
-          "distance": 10,
-          "unit": "m"
-        },
-        "cost": {
-          "activation": "simple",
-          "powerPoints": 5
-        },
-        "category": "status",
-        "types": [
-          "ground"
-        ],
-        "description": "<p>Effect: Sharp spikes are scattered in the [Blast X] area on standing surfaces. A creature that starts an Activation on a surface containing the Hazard takes a Tick of HP damage. A creature that moves through through a space touching a surface containing the Hazard takes a Tick of HP damage for every meter they travel. If a creature moves at least 3m through the Hazard this way during one Round, they lose another 4 Tick of HP.</p>",
-        "free": true,
-        "img": "icons/svg/explosion.svg"
-      },
-      {
         "slug": "loose-spikes",
         "name": "Loose Spikes",
         "type": "attack",
@@ -71,7 +46,8 @@
         "description": "<p>Effect: Sharp spikes are scattered in the [Blast X] area on standing surfaces. A creature that starts an Activation on a surface containing the Hazard takes a Tick of HP damage. A creature that moves through through a space touching a surface containing the Hazard takes a Tick of HP damage for every meter they travel. If a creature moves at least 3m through the Hazard this way during one Round, they lose another 4 Tick of HP.</p>",
         "variant": "spikes",
         "free": true,
-        "img": "icons/svg/explosion.svg"
+        "img": "icons/svg/explosion.svg",
+        "predicate": []
       }
     ],
     "description": "<p>Trigger: The user is hit by a [Contact] attack.</p><p>Effect: Connection - Spikes. The user has a 50% chance to freely use Loose Spikes.</p>",
@@ -85,5 +61,73 @@
     }
   },
   "_id": "rsv5mrwBBagNtAQd",
-  "effects": []
+  "effects": [
+    {
+      "name": "Loose Quills",
+      "type": "passive",
+      "_id": "c4cvs47LzRiGcWPd",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "grant-item",
+            "key": "",
+            "value": "Compendium.ptr2e.core-moves.Item.sPdy5PU5itGhlL6e",
+            "predicate": [],
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "system.actions.0.free",
+                "value": "true"
+              }
+            ],
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "reevaluateOnUpdate": false,
+            "inMemoryOnly": false,
+            "allowDuplicate": true,
+            "track": false,
+            "replaceSelf": false,
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            }
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.5.1.5",
+        "createdTime": 1737404191773,
+        "modifiedTime": 1737404227981,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+      }
+    }
+  ]
 }

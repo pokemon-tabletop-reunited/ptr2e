@@ -19,19 +19,21 @@
         "description": "<p>Your skill at manipulating your own Aura allows you to create an indistinct haze about yourself. You gain +1 EVA stage for 5 Activations.</p>",
         "cost": {
           "activation": "simple",
-          "powerPoints": 4,
-          "delay": null,
-          "priority": null
+          "powerPoints": 2
         },
-        "type": "generic",
+        "type": "attack",
         "traits": [],
-        "img": "icons/svg/explosion.svg",
+        "img": "systems/ptr2e/img/perk-icons/Aura.svg",
         "range": {
-          "target": "enemy",
-          "unit": "m",
-          "distance": 0
+          "target": "self",
+          "unit": "m"
         },
-        "variant": null
+        "types": [
+          "untyped"
+        ],
+        "category": "status",
+        "free": true,
+        "predicate": []
       }
     ],
     "slug": "aura-haze",
@@ -63,14 +65,70 @@
       }
     ],
     "autoUnlock": [],
-    "originSlug": null,
-    "variant": null,
-    "mode": null,
     "global": true,
-    "webs": []
+    "webs": [],
+    "design": {
+      "arena": "physical",
+      "approach": "resilience",
+      "archetype": "Aura"
+    }
   },
   "_id": "UmbmjzRANft3PAxG",
   "img": "systems/ptr2e/img/perk-icons/Aura.svg",
-  "effects": [],
+  "effects": [
+    {
+      "name": "Aura Haze",
+      "type": "passive",
+      "_id": "Uh6oIjyCAA77vnOT",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "aura-haze-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.OUBNweJOMjAEtAye",
+            "predicate": [],
+            "chance": 10,
+            "affects": "target",
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.5.1.2",
+        "createdTime": 1736876041388,
+        "modifiedTime": 1736876155757,
+        "lastModifiedBy": "IcBpMqhFuTck9VpX"
+      }
+    }
+  ],
   "folder": "I7ocNlZvZjyhwUcw"
 }

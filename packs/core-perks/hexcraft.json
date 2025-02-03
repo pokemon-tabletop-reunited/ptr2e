@@ -7,7 +7,7 @@
   "system": {
     "actions": [],
     "slug": "hexcraft",
-    "description": "<p>You gain access to the [Hexcraft] trait and Tutor List, and may learn 3 moves from the [Hexcraft] Tutor List that you qualify for immediately.</p>",
+    "description": "<p>You gain access to the [Hexcraft] trait and Tutor List, and you learn Spite, Grudge, and Night Shade.</p>",
     "traits": [],
     "prerequisites": [
       {
@@ -36,7 +36,8 @@
           "suspicious-minds",
           "root-2",
           "dustoff",
-          "enchanting-smile"
+          "enchanting-smile",
+          "rigorous-fundamentals-6"
         ],
         "config": {
           "alpha": null,
@@ -51,11 +52,13 @@
       }
     ],
     "autoUnlock": [],
-    "originSlug": null,
-    "variant": null,
-    "mode": null,
     "global": true,
-    "webs": []
+    "webs": [],
+    "design": {
+      "arena": "mental",
+      "approach": "finesse",
+      "archetype": "Affliction"
+    }
   },
   "effects": [
     {
@@ -73,6 +76,63 @@
             "mode": 2,
             "priority": null,
             "ignored": false
+          },
+          {
+            "type": "grant-item",
+            "key": "",
+            "value": "Compendium.ptr2e.core-moves.Item.K2lzFMHQ5Ey3bnzZ",
+            "predicate": [],
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "reevaluateOnUpdate": false,
+            "inMemoryOnly": false,
+            "allowDuplicate": true,
+            "alterations": [],
+            "track": false,
+            "replaceSelf": false,
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            }
+          },
+          {
+            "type": "grant-item",
+            "key": "",
+            "value": "Compendium.ptr2e.core-moves.Item.fUiCzF9ucUhoJLBq",
+            "predicate": [],
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "reevaluateOnUpdate": false,
+            "inMemoryOnly": false,
+            "allowDuplicate": true,
+            "alterations": [],
+            "track": false,
+            "replaceSelf": false,
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            }
+          },
+          {
+            "type": "grant-item",
+            "key": "",
+            "value": "Compendium.ptr2e.core-moves.Item.9ajTWumV2CHLWvWK",
+            "predicate": [],
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "reevaluateOnUpdate": false,
+            "inMemoryOnly": false,
+            "allowDuplicate": true,
+            "alterations": [],
+            "track": false,
+            "replaceSelf": false,
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            }
           }
         ],
         "slug": null,
@@ -91,7 +151,7 @@
         "startRound": null,
         "startTurn": null
       },
-      "description": "",
+      "description": "<p>You gain access to the [Hexcraft] trait and Tutor List, and you learn Spite, Grudge, and Night Shade.</p>",
       "origin": null,
       "tint": "#ffffff",
       "transfer": true,
@@ -103,10 +163,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "ptr2e",
-        "systemVersion": "0.10.0-alpha.4.0.0",
+        "systemVersion": "0.10.0-alpha.5.1.5",
         "createdTime": 1732231964521,
-        "modifiedTime": 1732564242928,
-        "lastModifiedBy": "IcBpMqhFuTck9VpX"
+        "modifiedTime": 1737392158961,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
       }
     }
   ]

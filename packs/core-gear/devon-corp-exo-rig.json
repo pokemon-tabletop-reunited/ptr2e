@@ -24,11 +24,12 @@
       "handsHeld": 0,
       "slot": "backpack"
     },
-    "grade": "E",
+    "grade": "D",
     "fling": {
       "type": "untyped",
       "power": 40,
-      "accuracy": 35
+      "accuracy": 35,
+      "hide": false
     },
     "quantity": 1,
     "rarity": "uncommon",
@@ -40,7 +41,8 @@
         "img": "systems/ptu/css/images/icons/gear_icon.png",
         "description": "<p>Unidentified Item</p>"
       }
-    }
+    },
+    "slug": "devon-corp-exo-rig"
   },
   "img": "systems/ptr2e/img/icons/equipment_icon.webp",
   "effects": [
@@ -68,6 +70,16 @@
             "mode": 2,
             "priority": null,
             "ignored": false
+          },
+          {
+            "type": "ephemeral-modifier",
+            "key": "electric-attack-damage-percentile",
+            "value": 25,
+            "predicate": [],
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "hideIfDisabled": false
           }
         ],
         "slug": null,
@@ -98,14 +110,13 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "ptr2e",
-        "systemVersion": "0.10.0-alpha.3.4.1",
+        "systemVersion": "0.10.0-alpha.5.2.1",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1737931019370,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
       }
     }
   ],
   "folder": "V4skAU6G3OH5fXad",
-  "flags": {},
   "_id": "e9TZKDFHvjfrwDfJ"
 }

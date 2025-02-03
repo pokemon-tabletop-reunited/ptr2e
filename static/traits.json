@@ -88,6 +88,12 @@
     "label": "Ace",
     "related": [],
     "description": "Ace creatures are generally PCs and PC grade creatures. Can be used for bosses, story significant entities, first partner creature etc. Awards more skill points at character creation and possibly other effects.",
+    "changes": [
+      {
+        "type": "add-trait",
+        "value": "wielder"
+      }
+    ],
     "type": "automated"
   },
   {
@@ -209,14 +215,15 @@
     "slug": "breathing-bubble",
     "label": "Breathing Bubble",
     "related": [],
-    "description": "TO BE DETERMINED"
+    "description": "A creature with this trait requires a breathing bubble of water in order to survive.",
+    "type": "narrative"
   },
   {
     "slug": "breathless",
     "label": "Breathless",
     "related": [],
     "description": "This creature does not need to breathe. This does not grant immunity to [Powder] attacks or attacks that have \"Gas\" in their name.",
-    "type":"automated",
+    "type": "automated",
     "changes": [
       {
         "type": "roll-option",
@@ -227,6 +234,11 @@
         "type": "roll-option",
         "domain": "immunities",
         "value": "trait:gas"
+      },
+      {
+        "type": "roll-option",
+        "domain": "immunities",
+        "value": "affliction:drowning"
       }
     ]
   },
@@ -240,7 +252,8 @@
     "slug": "calming",
     "label": "Calming",
     "related": [],
-    "description": "This creature has the ability to calm others around it.\nSUBJECT TO CHANGE"
+    "description": "This creature has the ability to calm others around it.\nSUBJECT TO CHANGE",
+    "type": "narrative"
   },
   {
     "slug": "chiller",
@@ -258,19 +271,21 @@
     "slug": "combustion",
     "label": "Combustion",
     "related": [],
-    "description": "The creature can act as a heat source for the pruposes of crafting and cooking.\nSUBJECT TO CHANGE"
+    "description": "The creature can act as a heat source for the purposes of crafting and cooking.\nSUBJECT TO CHANGE"
   },
   {
     "slug": "construct-commander",
     "label": "Construct Commander",
     "related": [],
-    "description": "This creature is capable of commanding and controlling constructs which it has created even if they belong to a different trainer."
+    "description": "This creature is capable of commanding and controlling constructs which it has created even if they belong to a different trainer.",
+    "type": "narrative"
   },
   {
     "slug": "construct",
     "label": "Construct",
     "related": [],
-    "description": "This creature was created through artificial means. Construct creatures always have an owner. \nSUBJECT TO CHANGE"
+    "description": "This creature was created through artificial means. Construct creatures always have an owner. \nSUBJECT TO CHANGE",
+    "type": "narrative"
   },
   {
     "slug": "cotton-production",
@@ -301,6 +316,24 @@
     "label": "Hex Caster",
     "related": [],
     "description": "The creature is able to utilize the attack Curse as if it were a [Ghost] type creature. The creature also has a +10 bonus to Occult skill checks when identifying Occult phenomenon.\nSUBJECT TO CHANGE"
+  },
+  {
+    "slug": "climatologist",
+    "label": "Climatologist",
+    "related": [],
+    "description": "Denotes the user is keen at indentifying climatological phenomena, and has the capacity to potentially control them, like some snake-themed supervillain. Grants a Tutor List.\nSUBJECT TO CHANGE"
+  },
+  {
+    "slug": "trekker",
+    "label": "Trekker",
+    "related": [],
+    "description": "Denotes the user is adept at crossing and utilizing various Terrains. Grants a Tutor List.\nSUBJECT TO CHANGE"
+  },
+  {
+    "slug": "chamberlain",
+    "label": "Chamberlain",
+    "related": [],
+    "description": "Relating to all of 'the Rooms', granting the user access to the Wiseauan Tutor List.\nSUBJECT TO CHANGE"
   },
   {
     "slug": "cushioned-fall",
@@ -372,7 +405,8 @@
     "slug": "delectable",
     "label": "Delectable",
     "related": [],
-    "description": "This creature is considered particularly desirable as a foodstuff, or as a specific delicacy. There is no social impact for hunting this creature as a food source."
+    "description": "This creature is considered particularly desirable as a foodstuff, or as a specific delicacy. There is no social impact for hunting this creature as a food source.",
+    "type": "narrative"
   },
   {
     "slug": "delta-evolution",
@@ -396,7 +430,8 @@
     "slug": "direction-sense",
     "label": "Direction Sense",
     "related": [],
-    "description": "This creature inherently knows it's location, either through innately knowing Magnetic North, some manner of clairvoyance, or some other physical or supernatural means. The creature has a +20 bonus to Navigate Skill checks and always knows which way Magnetic North is."
+    "description": "This creature inherently knows it's location, either through innately knowing Magnetic North, some manner of clairvoyance, or some other physical or supernatural means. The creature has a +20 bonus to Navigate Skill checks and always knows which way Magnetic North is.",
+    "type": "narrative"
   },
   {
     "slug": "disaster-predictor",
@@ -444,7 +479,8 @@
     "slug": "emotion-eraser",
     "label": "Emotion Eraser",
     "related": [],
-    "description": "This creature is capable of removing others' ability to feel emotions. \nSUBJECT TO CHANGE"
+    "description": "This creature is capable of removing others' ability to feel emotions. \nSUBJECT TO CHANGE",
+    "type": "narrative"
   },
   {
     "slug": "fermenter",
@@ -474,7 +510,8 @@
     "slug": "galarian",
     "label": "Galarian",
     "related": [],
-    "description": "Denotes if the creature originates from the Galar Region. For @Trait[pokemon], it denotes Regional Variants.\nSUBJECT TO CHANGE"
+    "description": "Denotes if the creature originates from the Galar Region. For @Trait[pokemon], it denotes Regional Variants.\nSUBJECT TO CHANGE",
+    "type": "narrative"
   },
   {
     "slug": "gestalt",
@@ -486,7 +523,15 @@
     "slug": "gilled",
     "label": "Gilled",
     "related": [],
-    "description": "This creature is able to breathe underwater, ignoring the conditions for Drowning."
+    "description": "This creature is able to breathe underwater, ignoring the conditions for Drowning.",
+    "type": "automated",
+    "changes": [
+      {
+        "type": "roll-option",
+        "domain": "immunities",
+        "value": "affliction:drowning"
+      }
+    ]
   },
   {
     "slug": "glow-x",
@@ -575,13 +620,13 @@
   {
     "slug": "harvester",
     "label": "Harvester",
-    "description":"",
+    "description": "",
     "related": []
   },
   {
     "slug": "healer",
     "label": "Healer",
-    "description":"",
+    "description": "",
     "related": []
   },
   {
@@ -610,7 +655,7 @@
   },
   {
     "slug": "legless",
-    "label": "legless",
+    "label": "Legless",
     "related": [],
     "description": "This creature has no legs, and must hop, roll, or drag itself in order to use its Overland Movement. \nSUBJECT TO CHANGE"
   },
@@ -631,7 +676,7 @@
     "label": "Hover",
     "related": [],
     "description": "This creature naturally floats, granting immunity to damage and effects from [Earthbound] actions. Does not crash if its deliberate flight is interrupted.",
-    "type":"automated",
+    "type": "automated",
     "changes": [
       {
         "type": "roll-option",
@@ -656,7 +701,8 @@
     "slug": "ice-controller",
     "label": "Ice Controller",
     "related": [],
-    "description": "This creature can control and form ice."
+    "description": "This creature can control and form ice.",
+    "type": "narrative"
   },
   {
     "slug": "ice-stallion",
@@ -692,7 +738,8 @@
     "slug": "interdimensional",
     "label": "Interdimensional",
     "related": [],
-    "description": "This creature is capable of interdimensional travel.\nSUBJECT TO CHANGE"
+    "description": "This creature is capable of interdimensional travel.\nSUBJECT TO CHANGE",
+    "type": "narrative"
   },
   {
     "slug": "invisibility",
@@ -872,7 +919,7 @@
     "slug": "living-weapon",
     "label": "Living Weapon",
     "related": [],
-    "description": "The creature can be used as a [Held] item. When used this way, the creature has a Struggle and Fling Power equal to 10+(Highest Attacking Stat/10) and 90 Accuracy. \nThe wielder can use attakcs on the [Held] creatures Known Attack List as if they know the Attack themselves, using the better of the two's attacking stats for damaging attacks. Using attacks in this way still consumes the [Held] creatures PP.\nThe [Held] creature can use attacks from the wielder's Known Attack List as if they know the Attack themselves, using the better of the two's attacking stats for damaging attacks. Using attacks in this way still consumes the [Held] creaures PP."
+    "description": "Needs review. The creature can be used as a [Held] item. When used this way, the creature has a Struggle and Fling Power equal to 10+(Highest Attacking Stat/10) and 90 Accuracy. \nThe wielder can use attakcs on the [Held] creatures Known Attack List as if they know the Attack themselves, using the better of the two's attacking stats for damaging attacks. Using attacks in this way still consumes the [Held] creatures PP.\nThe [Held] creature can use attacks from the wielder's Known Attack List as if they know the Attack themselves, using the better of the two's attacking stats for damaging attacks. Using attacks in this way still consumes the [Held] creaures PP."
   },
   {
     "slug": "lockjaw",
@@ -902,7 +949,8 @@
     "slug": "medium",
     "label": "Medium",
     "related": [],
-    "description": "Aura-adjacent trait. Allows the creature to communicate with the dead. Does not cover Ghost-Type creatures.\nSUBJECT TO CHANGE"
+    "description": "Aura-adjacent trait. Allows the creature to communicate with the dead. Does not cover Ghost-Type creatures.\nSUBJECT TO CHANGE",
+    "type": "narrative"
   },
   {
     "slug": "mega-stone-conversion",
@@ -914,7 +962,8 @@
     "slug": "memory-eraser",
     "label": "Memory Eraser",
     "related": [],
-    "description": "This creature is capable of erasing others' memories.\nSUBJECT TO CHANGE"
+    "description": "This creature is capable of erasing others' memories.\nSUBJECT TO CHANGE",
+    "type": "narrative"
   },
   {
     "slug": "milk-production",
@@ -938,7 +987,8 @@
     "slug": "mind-reader",
     "label": "Mind Reader",
     "related": [],
-    "description": "This creature can sense thoughts or feelings."
+    "description": "This creature can sense thoughts or feelings.",
+    "type": "narrative"
   },
   {
     "slug": "mud-runner",
@@ -950,7 +1000,7 @@
     "slug": "multitype-perks",
     "label": "Multitype Perks",
     "related": [],
-    "description": "TO BE DETERMINED"
+    "description": "Allows the user to select any Perk that has a Type based requirement without possessing that type."
   },
   {
     "slug": "mushroom-harvest",
@@ -979,8 +1029,9 @@
   {
     "slug": "no-buoyancy",
     "label": "No Buoyancy",
-    "description":"",
-    "related": []
+    "description": "This creature lacks buoyancy and thus cannot swim, it merely sinks.",
+    "related": [],
+    "type": "narrative"
   },
   {
     "slug": "noisy",
@@ -992,7 +1043,8 @@
     "slug": "original-one",
     "label": "Original One",
     "related": [],
-    "description": "This creature is capable of incredibly powerful feats such as bringing back things that it once destroyed, making certain things vanish into thin air, halting time, splitting itself in two, and overturning the very laws of nature. The user may use its Handiwork skill in place of any other Skill."
+    "description": "This creature is capable of incredibly powerful feats such as bringing back things that it once destroyed, making certain things vanish into thin air, halting time, splitting itself in two, and overturning the very laws of nature. The user may use its Handiwork skill in place of any other Skill.",
+    "type": "narrative"
   },
   {
     "slug": "pack-leader",
@@ -1010,13 +1062,15 @@
     "slug": "paldean",
     "label": "Paldean",
     "related": [],
-    "description": "Denotes if the creature originates from the Paldea Region. For @Trait[pokemon], it denotes Regional Variants.\nSUBJECT TO CHANGE"
+    "description": "Denotes if the creature originates from the Paldea Region. For @Trait[pokemon], it denotes Regional Variants.\nSUBJECT TO CHANGE",
+    "type": "narrative"
   },
   {
     "slug": "paradox-sense",
     "label": "Paradox Sense",
     "related": [],
-    "description": "This creature can naturally sense the presence of [Paradox] creatures. The creature innately knows the general location of [Paradox] creatures in the current dimension it resides."
+    "description": "This creature can naturally sense the presence of [Paradox] creatures. The creature innately knows the general location of [Paradox] creatures in the current dimension it resides.",
+    "type": "narrative"
   },
   {
     "slug": "paradox",
@@ -1076,12 +1130,13 @@
     "slug": "psychic-radar",
     "label": "Psychic Radar",
     "related": [],
-    "description": "TO BE DETERMINED"
+    "description": "TO BE DETERMINED",
+    "type": "narrative"
   },
   {
     "slug": "quadrupedal",
     "label": "Quadrupedal",
-    "description":"",
+    "description": "",
     "related": []
   },
   {
@@ -1154,19 +1209,22 @@
     "slug": "slumbering-statue",
     "label": "Slumbering Statue",
     "related": [],
-    "description": "Zacian/Zamazenta unique trait. Able to turn into statues/gargoyles to hibernate/slumber.\nSUBJECT TO CHANGE"
+    "description": "Zacian/Zamazenta unique trait. Able to turn into statues/gargoyles to hibernate/slumber.\nSUBJECT TO CHANGE",
+    "type": "narrative"
   },
   {
     "slug": "speech",
     "label": "Speech",
     "related": [],
-    "description": "This creature is capable of coherent speech. Can be awarded to PCs with the [Creature] trait in games that include Human characters."
+    "description": "This creature is capable of coherent speech. Can be awarded to PCs with the [Creature] trait in games that include Human characters.",
+    "type": "narrative"
   },
   {
     "slug": "spirit-traveler",
     "label": "Spirit Traveler",
     "related": [],
-    "description": "This creature is capable of turning into a spirit and temporarily leaving its body.\nSUBJECT TO CHANGE"
+    "description": "This creature is capable of turning into a spirit and temporarily leaving its body.\nSUBJECT TO CHANGE",
+    "type": "narrative"
   },
   {
     "slug": "split-evolution",
@@ -1268,13 +1326,15 @@
     "slug": "time-controller",
     "label": "Time Controller",
     "related": [],
-    "description": "This creature is capable of controlling time.\nSUBJECT TO CHANGE"
+    "description": "This creature is capable of controlling time.\nSUBJECT TO CHANGE",
+    "type": "narrative"
   },
   {
     "slug": "time-traveller",
     "label": "Time Traveller",
     "related": [],
-    "description": "This creature can time-travel. This is a powerful narrative ability and needs to be well regulated.\nSUBJECT TO CHANGE"
+    "description": "This creature can time-travel. This is a powerful narrative ability and needs to be well regulated.\nSUBJECT TO CHANGE",
+    "type": "narrative"
   },
   {
     "slug": "tox-cleanse",
@@ -1286,7 +1346,8 @@
     "slug": "treasure-of-ruin",
     "label": "Treasure Of Ruin",
     "related": [],
-    "description": "TO BE DETERMINED"
+    "description": "TO BE DETERMINED",
+    "type": "narrative"
   },
   {
     "slug": "tremorsense-x",
@@ -1340,8 +1401,9 @@
     "slug": "ultra-beast",
     "label": "Ultra Beast",
     "related": [],
-    "description": "This creature has been flung through Ultra Space, and appear to resonate in one form or another with Z-Energy. These creatures tend to be quite formidable. These creatures also possess [Ultra].\nSUBJECT TO CHANGE"
-  },
+    "description": "This creature has been flung through Ultra Space, and appear to resonate in one form or another with Z-Energy. These creatures tend to be quite formidable. These creatures also possess [Ultra].\nSUBJECT TO CHANGE",
+    "type": "narrative" 
+ },
   {
     "slug": "ultra-burst",
     "label": "Ultra Burst",
@@ -1352,25 +1414,29 @@
     "slug": "ultra-wormhole",
     "label": "Ultra Wormhole",
     "related": [],
-    "description": "This creature is capable of breaking the barrier between the current universe/dimension and Ultra Space, opening and closing Ultra Wormholes in exchange for 10 PP. They may traverse the interdimensional void with the Movement Allowance of their choice, protecting creatures within a 3m radius from the void's hazards and propelling them alongside the user through the void.\nSUBJECT TO CHANGE"
+    "description": "This creature is capable of breaking the barrier between the current universe/dimension and Ultra Space, opening and closing Ultra Wormholes in exchange for 10 PP. They may traverse the interdimensional void with the Movement Allowance of their choice, protecting creatures within a 3m radius from the void's hazards and propelling them alongside the user through the void.\nSUBJECT TO CHANGE",
+    "type": "narrative"
   },
   {
     "slug": "ultra",
     "label": "Ultra",
     "related": [],
-    "description": "A trait used to identify creatures whom traversed Ultra Space, or originate from the interdimensional void itself."
+    "description": "A trait used to identify creatures whom traversed Ultra Space, or originate from the interdimensional void itself.",
+    "type": "narrative"
   },
   {
     "slug": "underdog",
     "label": "Underdog",
     "related": [],
-    "description": "An creature with lower base stats, making them eligible for Underdog perks."
+    "description": "An creature with lower base stats, making them eligible for Underdog perks.",
+    "type": "automated"
   },
   {
     "slug": "unown-choir",
     "label": "Unown Choir",
     "related": [],
-    "description": "The Unown are able to do a lot of weird shit when they sing together.\nSUBJECT TO CHANGE"
+    "description": "The Unown are able to do a lot of weird shit when they sing together.\nSUBJECT TO CHANGE",
+    "type": "narrative"
   },
   {
     "slug": "volatile-bomb",
@@ -1388,13 +1454,15 @@
     "slug": "water-locator",
     "label": "Water Locator",
     "related": [],
-    "description": "This creature is capable of locating clean water.\nSUBJECT TO CHANGE"
+    "description": "This creature is capable of locating clean water.\nSUBJECT TO CHANGE",
+    "type": "narrative"
   },
   {
     "slug": "water-purity",
     "label": "Water Purity",
     "related": [],
-    "description": "This creature can naturally purify water on contact.\nSUBJECT TO CHANGE"
+    "description": "This creature can naturally purify water on contact.\nSUBJECT TO CHANGE",
+    "type": "narrative"
   },
   {
     "slug": "waterwalker",
@@ -1472,7 +1540,8 @@
     "slug": "willpower-eraser",
     "label": "Willpower Eraser",
     "related": [],
-    "description": "This creature is capable of removing others' willpower and motivation.\nSUBJECT TO CHANGE"
+    "description": "This creature is capable of removing others' willpower and motivation.\nSUBJECT TO CHANGE",
+    "type": "narrative"
   },
   {
     "slug": "winged",
@@ -1952,24 +2021,30 @@
     "slug": "defrost",
     "label": "Defrost",
     "related": [],
-    "description": "The user may declare Actions with this Trait while they have @Affliction[frozen], curing themselves of the Affliction on declaration. Targets hit by Actions with the Trait are cured of @Affliction[frozen]."
+    "description": "<p>The user may declare Actions with this Trait while they have the @Affliction[frozen] Affliction, curing themselves of the Affliction on declaration.</p><p>Whenever you use an Action with this Trait while suffering from @Affliction[frostbite], you may cure up to 5 stacks of Frostbite on yourself.</p><p>Targets hit by Actions with this Trait are cured of @Affliction[frozen] and up to 5 stacks of @Affliction[frostbite] after the action resolves, any damage dealt ignores the 33% damage reduction from the @Affliction[frozen] Affliction.</p>"
+  },
+  {
+    "slug": "delay-x",
+    "label": "Delay X",
+    "description": "This action resolves after X other activations have resolved.",
+    "related": []
   },
   {
     "slug": "delay-1",
     "label": "Delay 1",
-    "description":"",
+    "description": "This action resolves after 1 other activation has resolved.",
     "related": []
   },
   {
     "slug": "delay-2",
     "label": "Delay 2",
-    "description":"",
+    "description": "This action resolves after 2 other activations have resolved.",
     "related": []
   },
   {
     "slug": "delay-3",
     "label": "Delay 3",
-    "description":"",
+    "description": "This action resolves after 3 other activations have resolved.",
     "related": []
   },
   {
@@ -2108,31 +2183,141 @@
     "slug": "flinch-1",
     "label": "Flinch 1",
     "related": [],
-    "description": "Creature(s) that are target/hit by this Action are Flinched, having their next Activation delayed 10%."
+    "description": "Creature(s) that are target/hit by this Action are Flinched, having their next Activation delayed 10%.",
+    "changes": [
+      {
+        "type": "roll-effect",
+        "key": "attack",
+        "value": "Compendium.ptr2e.core-effects.Item.advanceffectitem",
+        "chance": 100,
+        "affects": "target",
+        "alterations": [
+          {
+            "mode": 5,
+            "property": "system.amount",
+            "value": -10
+          },
+          {
+            "mode": 5,
+            "property": "name",
+            "value": "Delay 10%"
+          }
+        ]
+      }
+    ],
+    "type": "automated"
   },
   {
     "slug": "flinch-2",
     "label": "Flinch 2",
     "related": [],
-    "description": "Creature(s) that are target/hit by this Action are Flinched, having their next Activation delayed 20%."
+    "description": "Creature(s) that are target/hit by this Action are Flinched, having their next Activation delayed 20%.",
+    "changes": [
+      {
+        "type": "roll-effect",
+        "key": "attack",
+        "value": "Compendium.ptr2e.core-effects.Item.advanceffectitem",
+        "chance": 100,
+        "affects": "target",
+        "alterations": [
+          {
+            "mode": 5,
+            "property": "system.amount",
+            "value": -20
+          },
+          {
+            "mode": 5,
+            "property": "name",
+            "value": "Delay 20%"
+          }
+        ]
+      }
+    ],
+    "type": "automated"
   },
   {
     "slug": "flinch-3",
     "label": "Flinch 3",
     "related": [],
-    "description": "Creature(s) that are target/hit by this Action are Flinched, having their next Activation delayed 30%."
+    "description": "Creature(s) that are target/hit by this Action are Flinched, having their next Activation delayed 30%.",
+    "changes": [
+      {
+        "type": "roll-effect",
+        "key": "attack",
+        "value": "Compendium.ptr2e.core-effects.Item.advanceffectitem",
+        "chance": 100,
+        "affects": "target",
+        "alterations": [
+          {
+            "mode": 5,
+            "property": "system.amount",
+            "value": -30
+          },
+          {
+            "mode": 5,
+            "property": "name",
+            "value": "Delay 30%"
+          }
+        ]
+      }
+    ],
+    "type": "automated"
   },
   {
     "slug": "flinch-4",
     "label": "Flinch 4",
     "related": [],
-    "description": "Creature(s) that are target/hit by this Action are Flinched, having their next Activation delayed 40%."
+    "description": "Creature(s) that are target/hit by this Action are Flinched, having their next Activation delayed 40%.",
+    "changes": [
+      {
+        "type": "roll-effect",
+        "key": "attack",
+        "value": "Compendium.ptr2e.core-effects.Item.advanceffectitem",
+        "chance": 100,
+        "affects": "target",
+        "alterations": [
+          {
+            "mode": 5,
+            "property": "system.amount",
+            "value": -40
+          },
+          {
+            "mode": 5,
+            "property": "name",
+            "value": "Delay 40%"
+          }
+        ]
+      }
+    ],
+    "type": "automated"
   },
   {
     "slug": "flinch-5",
     "label": "Flinch 5",
     "related": [],
-    "description": "Creature(s) that are target/hit by this Action are Flinched, having their next Activation delayed 50%."
+    "description": "Creature(s) that are target/hit by this Action are Flinched, having their next Activation delayed 50%.",
+    "changes": [
+      {
+        "type": "roll-effect",
+        "key": "attack",
+        "value": "Compendium.ptr2e.core-effects.Item.advanceffectitem",
+        "chance": 100,
+        "affects": "target",
+        "alterations": [
+          {
+            "mode": 5,
+            "property": "system.amount",
+            "value": -50
+          },
+          {
+            "mode": 5,
+            "property": "name",
+            "value": "Delay 50%"
+          }
+        ]
+      }
+    ],
+    "type": "automated"
   },
   {
     "slug": "flinch-chance-x",
@@ -2187,6 +2372,12 @@
     "label": "Horn",
     "related": [],
     "description": "Denotes if an attack or ability utilizes a horn or a similar prominent pointy appendage."
+  },
+  {
+    "slug": "interrupt-x",
+    "label": "Interrupt X",
+    "related": [],
+    "description": "Denotes that an Action may be used as an Interrupt at hierachy tier \"X\", provided the conditions for using the Interrupt are met."
   },
   {
     "slug": "interrupt-1",
@@ -2408,31 +2599,141 @@
     "slug": "priority-1",
     "label": "Priority 1",
     "related": [],
-    "description": "After resolving this Action, the user's next Activation is advanced 10%."
+    "description": "After resolving this Action, the user's next Activation is advanced 10%.",
+    "changes": [
+      {
+        "type": "roll-effect",
+        "key": "attack",
+        "value": "Compendium.ptr2e.core-effects.Item.advanceffectitem",
+        "chance": 100,
+        "affects": "self",
+        "alterations": [
+          {
+            "mode": 5,
+            "property": "system.amount",
+            "value": 10
+          },
+          {
+            "mode": 5,
+            "property": "name",
+            "value": "Advance 10%"
+          }
+        ]
+      }
+    ],
+    "type": "automated"
   },
   {
     "slug": "priority-2",
     "label": "Priority 2",
     "related": [],
-    "description": "After resolving this Action, the user's next Activation is advanced 20%."
+    "description": "After resolving this Action, the user's next Activation is advanced 20%.",
+    "changes": [
+      {
+        "type": "roll-effect",
+        "key": "attack",
+        "value": "Compendium.ptr2e.core-effects.Item.advanceffectitem",
+        "chance": 100,
+        "affects": "self",
+        "alterations": [
+          {
+            "mode": 5,
+            "property": "system.amount",
+            "value": 20
+          },
+          {
+            "mode": 5,
+            "property": "name",
+            "value": "Advance 20%"
+          }
+        ]
+      }
+    ],
+    "type": "automated"
   },
   {
     "slug": "priority-3",
     "label": "Priority 3",
     "related": [],
-    "description": "After resolving this Action, the user's next Activation is advanced 30%."
+    "description": "After resolving this Action, the user's next Activation is advanced 30%.",
+    "changes": [
+      {
+        "type": "roll-effect",
+        "key": "attack",
+        "value": "Compendium.ptr2e.core-effects.Item.advanceffectitem",
+        "chance": 100,
+        "affects": "self",
+        "alterations": [
+          {
+            "mode": 5,
+            "property": "system.amount",
+            "value": 30
+          },
+          {
+            "mode": 5,
+            "property": "name",
+            "value": "Advance 30%"
+          }
+        ]
+      }
+    ],
+    "type": "automated"
   },
   {
     "slug": "priority-4",
     "label": "Priority 4",
     "related": [],
-    "description": "After resolving this Action, the user's next Activation is advanced 40%."
+    "description": "After resolving this Action, the user's next Activation is advanced 40%.",
+    "changes": [
+      {
+        "type": "roll-effect",
+        "key": "attack",
+        "value": "Compendium.ptr2e.core-effects.Item.advanceffectitem",
+        "chance": 100,
+        "affects": "self",
+        "alterations": [
+          {
+            "mode": 5,
+            "property": "system.amount",
+            "value": 40
+          },
+          {
+            "mode": 5,
+            "property": "name",
+            "value": "Advance 40%"
+          }
+        ]
+      }
+    ],
+    "type": "automated"
   },
   {
     "slug": "priority-5",
     "label": "Priority 5",
     "related": [],
-    "description": "After resolving this Action, the user's next Activation is advanced 50%."
+    "description": "After resolving this Action, the user's next Activation is advanced 50%.",
+    "changes": [
+      {
+        "type": "roll-effect",
+        "key": "attack",
+        "value": "Compendium.ptr2e.core-effects.Item.advanceffectitem",
+        "chance": 100,
+        "affects": "self",
+        "alterations": [
+          {
+            "mode": 5,
+            "property": "system.amount",
+            "value": 50
+          },
+          {
+            "mode": 5,
+            "property": "name",
+            "value": "Advance 50%"
+          }
+        ]
+      }
+    ],
+    "type": "automated"
   },
   {
     "slug": "pulse",
@@ -2743,22 +3044,22 @@
   {
     "slug": "major-affliction",
     "label": "Major Affliction",
-    "related": [],
-    "description": "Denotes is an effect is a Major Status Affliction. Major Status Afflictions are proposed to not have Stacks, and persist into Exploration and Downtime if left untreated.\nSUBJECT TO CHANGE",
+    "related": ["minor-affliction", "pseudo-affliction"],
+    "description": "Major Afflictions persist during a fight; even if the creature is Recalled.",
     "type": "automated"
   },
   {
     "slug": "minor-affliction",
     "label": "Minor Affliction",
-    "related": [],
-    "description": "Denotes is an effect is a Minor Status Affliction. Minor Status Afflictions are more temporary or tactical in nature, rather than strict \"afflictions\" like the Major Afflictions tend to be.\nSUBJECT TO CHANGE",
+    "related": ["major-affliction", "pseudo-affliction"],
+    "description": "Minor Afflictions get automatically removed when a creature is Recalled.",
     "type": "automated"
   },
   {
     "slug": "pseudo-affliction",
     "label": "Pseudo Affliction",
-    "related": [],
-    "description": "Denotes is an effect is a Pseudo Status Affliction. Pseudo Status Afflictions are more positive in nature, or break other conventions associated with Major and Minor Status Afflictions.\nSUBJECT TO CHANGE",
+    "related": ["major-affliction", "minor-affliction"],
+    "description": "Pseudo Afflictions are effects that are similar in nature to Major/Minor afflictions, but count as neither; and often have unique interactions with other effects.",
     "type": "automated"
   },
   {
@@ -3337,6 +3638,20 @@
     "description": "These weapons can only use their innate PP Pool for their attacks. The user can use a Simple Action to reload the weapon, refilling its PP Pool. This Action either consumes an Ammunition item relating to the weapon, or consumes the Character's IP at an increased cost."
   },
   {
+    "slug": "ranger",
+    "label": "Ranger",
+    "related": [],
+    "description": "Creature trait for denoting 'Ranger' type characters.",
+    "type": "narrative"
+  },
+  {
+    "slug": "explorer",
+    "label": "Explorer",
+    "related": [],
+    "description": "Creature trait for denoting 'Explorers' in a PMD-style Campaign.",
+    "type": "narrative"
+  },
+  {
     "slug": "pokemon",
     "label": "Pokemon",
     "related": [],
@@ -3348,6 +3663,12 @@
     "label": "Humanoid",
     "related": [],
     "description": "This is a Humanoid.",
+    "changes": [
+      {
+        "type": "add-trait",
+        "value": "wielder"
+      }
+    ],
     "type": "automated"
   },
   {
@@ -3407,7 +3728,9 @@
   {
     "slug": "pp-updated",
     "label": "PP Updated",
-    "related": [],
+    "related": [
+      "requires-rework"
+    ],
     "description": "This action has had it's PP Errata'd, any action lacking this trait still has to undergo the PP Errata.\nOnce all actions have been errata'd this trait will be removed."
   },
   {
@@ -3431,5 +3754,29 @@
     "description": "An attack with this Trait will calculate the Offensive Stat using the Opponent's stats instead of the user's.",
     "type": "automated",
     "changes": []
+  },
+  {
+    "slug": "requires-rework",
+    "label": "Requires Rework",
+    "related": [
+      "pp-updated"
+    ],
+    "description": "The current version of this requires a rework, and will be changed or removed in the near future",
+    "type": "automated",
+    "changes": []
+  },
+  {
+    "slug": "uncapturable",
+    "label": "Uncapturable",
+    "related": [],
+    "description": "This creature cannot be captured by any means.",
+    "type": "automated",
+    "changes": [
+      {
+        "type": "roll-option",
+        "domain": "self",
+        "value": "uncapturable"
+      }
+    ]
   }
 ]

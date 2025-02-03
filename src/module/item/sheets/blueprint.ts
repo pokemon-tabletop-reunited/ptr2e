@@ -6,6 +6,9 @@ import { htmlQuery } from "@utils";
 import Sortable from "sortablejs";
 import { SpeciesSystemModel } from "@item/data/index.ts";
 import { ActorPTR2e } from "@actor";
+import { PerkGeneratorConfig } from "@module/apps/perk-generator-config.ts";
+import { GeneratorConfig } from "@module/data/models/generator-config.ts";
+import { BlueprintPTR2e } from "@item";
 
 export default class BlueprintSheet extends foundry.applications.api.HandlebarsApplicationMixin(DocumentSheetV2<ItemPTR2e<BlueprintSystem>>) {
   static override DEFAULT_OPTIONS = fu.mergeObject(
@@ -32,12 +35,12 @@ export default class BlueprintSheet extends foundry.applications.api.HandlebarsA
         closeOnSubmit: false,
         handler: this.#onSubmit,
       },
-      dragDrop: [{ dropSelector: "aside" }],
+      dragDrop: [{ dropSelector: "aside" }, { dropSelector: ".species-fields" }, { dragSelector: ".perk-config .content-link", dropSelector: ".perk-config" }],
       actions: {
         "rename": async function (this: BlueprintSheet) {
           const name = this.document.name;
           const dialog = await foundry.applications.api.DialogV2.prompt<string>({
-            window: {title: game.i18n.localize("PTR2E.Dialog.RenameDocumentTitle")},
+            window: { title: game.i18n.localize("PTR2E.Dialog.RenameDocumentTitle") },
             content: `<p>${game.i18n.localize("PTR2E.Dialog.RenameDocumentContent")}</p><input type="text" name="name" value="${name}">`,
             ok: {
               action: "ok",
@@ -47,9 +50,22 @@ export default class BlueprintSheet extends foundry.applications.api.HandlebarsA
               }
             }
           })
-          if(!dialog || name == dialog) return;
-          await this.document.update({name: dialog});
-          if(this.rendered) this._updateFrame({window: {title: this.title}});
+          if (!dialog || name == dialog) return;
+          await this.document.update({ name: dialog });
+          if (this.rendered) this._updateFrame({ window: { title: this.title } });
+        },
+        "open-config": async function (this: BlueprintSheet) {
+          if (!this.selected) return;
+          return void new PerkGeneratorConfig(this.selected.config!, this).render(true);
+        },
+        "create-config": async function (this: BlueprintSheet) {
+          if (!this.selected) return;
+          if (this.generation?.temporary) {
+            this.selected.updateSource({ config: new GeneratorConfig().toObject() });
+          } else {
+            await this.blueprint.updateChildren([{ _id: this.selected.id, config: new GeneratorConfig() }]);
+          }
+          return void this.render({ parts: ["main"] });
         }
       },
       tag: "form",
@@ -152,6 +168,8 @@ export default class BlueprintSheet extends foundry.applications.api.HandlebarsA
       blueprint: this.selected,
       fields: Blueprint.schema.fields,
       isGenerator: !!this.generation,
+      habitats: CONFIG.PTR.data.habitats,
+      uuid: this.document.uuid,
     };
   }
 
@@ -244,6 +262,20 @@ export default class BlueprintSheet extends foundry.applications.api.HandlebarsA
         })
       }
     }
+    if (partId === "main") {
+      const select = htmlElement.querySelector<HTMLSelectElement>("select.species-select");
+      select?.addEventListener("change", async () => {
+        const value = select.value;
+        if (!value) return;
+        if (!this.selected) return;
+        if (this.generation?.temporary) {
+          this.selected.updateSource({ species: value });
+        }
+        else {
+          await this.blueprint.updateChildren([{ _id: this.selected.id, species: value }]);
+        }
+      })
+    }
   }
 
   override _onRender(context: foundry.applications.api.ApplicationRenderContext, options: foundry.applications.api.HandlebarsDocumentSheetConfiguration): void {
@@ -332,6 +364,25 @@ export default class BlueprintSheet extends foundry.applications.api.HandlebarsA
     return false;
   }
 
+  override _onDragStart(event: DragEvent) {
+    const target = event.currentTarget as HTMLElement;
+    if (target.dataset.action !== "open-config") return super._onDragStart(event);
+
+    const {id, uuid} = target.dataset;
+    if(!id || !uuid) return;
+
+    // Create drag data
+    const dragData = {
+      type: "GeneratorConfig",
+      id,
+      uuid,
+    }
+    if (!dragData) return;
+
+    // Set data transfer
+    event.dataTransfer!.setData("text/plain", JSON.stringify(dragData));
+  }
+
   override async _onDrop(event: DragEvent) {
     const data = TextEditor.getDragEventData(event) as Record<string, string>;
     const doc = await (async () => {
@@ -373,14 +424,29 @@ export default class BlueprintSheet extends foundry.applications.api.HandlebarsA
 
           if (this.generation) {
             this.generation.parent = actor;
-            if(!this.team) return null;
+            if (!this.team) return null;
             // @ts-expect-error - Mock for UI purposes.
-            this.team.owner = {name: actor.name, img: actor.img};
+            this.team.owner = { name: actor.name, img: actor.img };
             this.render({ parts: ["side"] });
             return null;
           }
 
           return actor;
+        }
+        case "GeneratorConfig": {
+          const blueprintItem = await fromUuid<BlueprintPTR2e>(data.uuid);
+          if (!blueprintItem) {
+            ui.notifications.error("The dropped blueprint could not be found");
+            return;
+          }
+
+          const blueprint = blueprintItem.system.blueprints.get(data.id);
+          if (!blueprint) {
+            ui.notifications.error("The dropped blueprint could not be found");
+            return;
+          }
+
+          return blueprint;
         }
       }
       return null;
@@ -388,8 +454,28 @@ export default class BlueprintSheet extends foundry.applications.api.HandlebarsA
 
     if (!doc) return;
 
-    this.team = null;
-    this.blueprint.createChildren([doc]);
+    if ((event.currentTarget as HTMLElement).classList.contains("species-fields")) {
+      if (!this.selected) return;
+      if (this.generation?.temporary) {
+        return void this.selected.updateSource({ species: doc.uuid });
+      } else {
+        this.team = null
+        return void await this.blueprint.updateChildren([{ _id: this.selected.id, species: doc.uuid }]);
+      }
+    }
+    else if ((event.currentTarget as HTMLElement).classList.contains("perk-config") && doc instanceof Blueprint) {
+      if (!this.selected) return;
+      if (this.generation?.temporary) {
+        return void this.selected.updateSource({ config: doc.toObject().config });
+      } else {
+        return void await this.blueprint.updateChildren([{ _id: this.selected.id, config: doc.toObject().config }]);
+      }
+    }
+    else {
+      if (doc instanceof Blueprint) return;
+      this.team = null;
+      this.blueprint.createChildren([doc]);
+    }
   }
 
   static async #onSubmit(
@@ -408,6 +494,7 @@ export default class BlueprintSheet extends foundry.applications.api.HandlebarsA
           delete updateData[key];
         }
       }
+      if (updateData.species) this.team = null;
       await this.blueprint.updateChildren([{
         _id: this.selected.id,
         ...updateData
@@ -429,10 +516,10 @@ export default class BlueprintSheet extends foundry.applications.api.HandlebarsA
       fu.mergeObject(blueprint, updateData, { inplace: true });
     }
 
-    const generation = this.generation ? {...this.generation, team: !this.team?.owner && (this.team?.members?.length ?? 0) > 1} : null;
+    const generation = this.generation ? { ...this.generation, team: !this.team?.owner && (this.team?.members?.length ?? 0) > 1 } : null;
 
     const result = this._dataOnly ? this.blueprint.generate(null, true) : this.blueprint.generate(generation);
-    if(this._dataOnly) {
+    if (this._dataOnly) {
       this.resolve(result);
       this._dataOnly = false;
     }

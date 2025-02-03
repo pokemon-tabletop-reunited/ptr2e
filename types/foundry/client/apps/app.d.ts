@@ -191,6 +191,15 @@ declare global {
         activateListeners(html: JQuery): void;
 
         /**
+         * Change the currently active tab
+         * @param {string} tabName      The target tab name to switch to
+         * @param {object} options      Options which configure changing the tab
+         * @param {string} options.group    A specific named tab group, useful if multiple sets of tabs are present
+         * @param {boolean} options.triggerCallback  Whether to trigger tab-change callback functions
+         */
+        activateTab(tabName: string, options?: { group?: string; triggerCallback?: boolean }): void;
+
+        /**
          * Handle changes to the active tab in a configured Tabs controller
          * @param event     A left click event
          * @param tabs      The TabsV2 controller

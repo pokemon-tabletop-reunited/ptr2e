@@ -443,7 +443,7 @@ function erf(x: number) {
 
 function NORMINV(p: number, mean: number, std: number) {
   const sqrt2 = Math.SQRT2;
-  let pFix = p >= 1 ? 0.9999999999 : p <= 0 ? 0.0000000001 : p;
+  const pFix = p >= 1 ? 0.9999999999 : p <= 0 ? 0.0000000001 : p;
   return -sqrt2 * std * erfcinv(2 * pFix) + mean;
 }
 

@@ -23,34 +23,13 @@
         },
         "description": "<p>Trigger: The user declares Sunny Day.</p><p>Effect: The set Sunny Weather has its duration increased by +2 Rounds.</p>",
         "img": "icons/svg/explosion.svg"
-      },
-      {
-        "slug": "sunny-day",
-        "name": "Sunny Day",
-        "type": "attack",
-        "traits": [
-          "weather"
-        ],
-        "range": {
-          "target": "field",
-          "unit": "m"
-        },
-        "cost": {
-          "activation": "complex",
-          "powerPoints": 4
-        },
-        "category": "status",
-        "types": [
-          "fire"
-        ],
-        "description": "<p>Effect: The Weather becomes Sunny for 3 rounds.</p>",
-        "img": "icons/svg/explosion.svg"
       }
     ],
     "description": "<p>Trigger: The user declares Sunny Day.</p><p>Effect: Connection - Sunny Day. The set Sunny Weather has its duration increased by +2 Rounds.</p>",
     "traits": [
       "connection",
-      "weather"
+      "weather",
+      "partial-automation"
     ],
     "slug": "drought",
     "_migration": {
@@ -59,5 +38,73 @@
     }
   },
   "_id": "o9y5NB42vrAfxz7L",
-  "effects": []
+  "effects": [
+    {
+      "name": "Drought",
+      "type": "passive",
+      "_id": "177y4emwACuj6djX",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "grant-item",
+            "key": "",
+            "value": "Compendium.ptr2e.core-moves.Item.oZFYMEJhZ3CZSNEZ",
+            "predicate": [],
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "system.actions.0.free",
+                "value": "true"
+              }
+            ],
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "reevaluateOnUpdate": false,
+            "inMemoryOnly": false,
+            "allowDuplicate": true,
+            "track": false,
+            "replaceSelf": false,
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            }
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.5.1.5",
+        "createdTime": 1737397324717,
+        "modifiedTime": 1737397365980,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+      }
+    }
+  ]
 }

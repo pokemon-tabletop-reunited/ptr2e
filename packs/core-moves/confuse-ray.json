@@ -4,14 +4,14 @@
   "img": "systems/ptr2e/img/svg/ghost_icon.svg",
   "system": {
     "slug": "confuse-ray",
-    "description": "<p>Effect: On hit, all valid targets are @Affliction[confused] 5.</p>",
-    "traits": [],
     "actions": [
       {
         "slug": "confuse-ray",
         "name": "Confuse Ray",
         "type": "attack",
-        "traits": [],
+        "traits": [
+          "pp-updated"
+        ],
         "range": {
           "target": "cone",
           "distance": 4,
@@ -19,7 +19,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 7
+          "powerPoints": 3
         },
         "category": "status",
         "accuracy": 100,
@@ -30,7 +30,7 @@
         "img": "icons/svg/explosion.svg"
       }
     ],
-    "grade": "A",
+    "grade": "D",
     "_migration": {
       "version": null,
       "previous": null

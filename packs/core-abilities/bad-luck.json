@@ -24,7 +24,8 @@
     ],
     "description": "<p>Effect: The user cannot be hit with Critical Hits. Luck cannot be spent on Actions targeting the user, and attacks targeting the user have -5 Accuracy.</p>",
     "traits": [
-      "defensive"
+      "defensive",
+      "partial-automation"
     ],
     "slug": "bad-luck",
     "_migration": {
@@ -33,5 +34,59 @@
     }
   },
   "_id": "12QRpOtMbxVlLSoA",
-  "effects": []
+  "effects": [
+    {
+      "name": "Bad Luck",
+      "type": "passive",
+      "_id": "ZNWzxoImXzeHPr9n",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "ephemeral-modifier",
+            "key": "attack-accuracy",
+            "value": -5,
+            "predicate": [],
+            "label": "Bad Luck Ability",
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "hideIfDisabled": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.5.1.6",
+        "createdTime": 1737563442853,
+        "modifiedTime": 1737563491305,
+        "lastModifiedBy": "IcBpMqhFuTck9VpX"
+      }
+    }
+  ]
 }

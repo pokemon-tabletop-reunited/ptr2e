@@ -41,7 +41,7 @@
           "root-4",
           "muse",
           "formation-attacks",
-          "improved-overland-1-12",
+          "improved-overland-12",
           "metamove-empower",
           "stat-iv-booster-1-13"
         ],
@@ -59,6 +59,51 @@
         "x": 150,
         "y": 172,
         "tier": null
+      },
+      {
+        "x": 143,
+        "y": 86,
+        "connected": [
+          "root-3",
+          "rigorous-fundamentals-3",
+          "thug",
+          "stat-iv-booster-1-3"
+        ],
+        "config": {
+          "alpha": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "borderWidth": null,
+          "texture": null,
+          "tint": null,
+          "scale": null
+        },
+        "hidden": false,
+        "type": "normal",
+        "tier": null
+      },
+      {
+        "x": 24,
+        "y": 75,
+        "connected": [
+          "tactician",
+          "breeder",
+          "root-6",
+          "chansey-medicine",
+          "heroic-transformation"
+        ],
+        "config": {
+          "alpha": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "borderWidth": null,
+          "texture": null,
+          "tint": null,
+          "scale": null
+        },
+        "hidden": false,
+        "type": "normal",
+        "tier": null
       }
     ],
     "variant": "multi",
@@ -68,10 +113,67 @@
     ],
     "originSlug": null,
     "global": true,
-    "webs": []
+    "webs": [],
+    "design": {
+      "arena": "social",
+      "approach": "resilience",
+      "archetype": "Pack Mon"
+    }
   },
   "_id": "g7RkEg1WRz28MU8R",
   "img": "systems/ptr2e/img/perk-icons/Breeder.svg",
-  "effects": [],
+  "effects": [
+    {
+      "name": "Pack Mon",
+      "type": "passive",
+      "_id": "9sPoZxBVcS4lYsy5",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "add-trait",
+            "key": "",
+            "value": "pack-mon",
+            "predicate": [],
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.4.1.0",
+        "createdTime": 1733019363144,
+        "modifiedTime": 1733019373225,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+      }
+    }
+  ],
   "folder": "UZGN1glVNXLieg48"
 }

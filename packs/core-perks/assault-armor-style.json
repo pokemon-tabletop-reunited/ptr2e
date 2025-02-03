@@ -20,14 +20,11 @@
         },
         "cost": {
           "activation": "simple",
-          "powerPoints": 3,
-          "delay": null,
-          "priority": null
+          "powerPoints": 3
         },
         "description": "Effect: The target may use DEF in place of their ATK when using a Physical-Category Attack for 1 Activation.",
         "type": "generic",
-        "img": "icons/svg/explosion.svg",
-        "variant": null
+        "img": "icons/svg/explosion.svg"
       },
       {
         "name": "Assault Armor! (Self)",
@@ -38,23 +35,19 @@
         ],
         "range": {
           "target": "self",
-          "unit": "m",
-          "distance": 0
+          "unit": "m"
         },
         "cost": {
           "activation": "simple",
-          "powerPoints": 3,
-          "delay": null,
-          "priority": null
+          "powerPoints": 3
         },
         "description": "Effect: The user may use DEF in place of their ATK when using a Physical-Category Attack until the end of their next Activation.",
         "type": "generic",
-        "img": "icons/svg/explosion.svg",
-        "variant": null
+        "img": "icons/svg/explosion.svg"
       }
     ],
     "slug": "assault-armor-style",
-    "description": "<p>Simple Action, 2 PP cost. Target self or allied creature. The affected creature may use DEF in place of their SPDEF when using a Physical-Category Attack until the end of their next full Activation.</p>",
+    "description": "<p>Simple Action, 2 PP cost. Target self or allied creature. The affected creature may use DEF in place of their ATK when using a Physical-Category Attack until the end of their next full Activation.</p>",
     "traits": [
       "command"
     ],
@@ -77,9 +70,9 @@
           "gambit-style",
           "evasive-style",
           "stat-iv-booster-1-11",
-          "improved-burrow-1-3",
-          "improved-overland-1-13",
-          "improved-overland-1-5"
+          "improved-burrow-3",
+          "improved-overland-13",
+          "improved-overland-5"
         ],
         "config": {
           "alpha": null,
@@ -98,11 +91,13 @@
       }
     ],
     "autoUnlock": [],
-    "originSlug": null,
-    "variant": null,
-    "mode": null,
     "global": true,
-    "webs": []
+    "webs": [],
+    "design": {
+      "arena": "physical",
+      "approach": "resilience",
+      "archetype": "Tactician"
+    }
   },
   "effects": []
 }

@@ -428,7 +428,9 @@
       "plant"
     ],
     "genderRatio": 4,
-    "habitats": [],
+    "habitats": [
+      "forest"
+    ],
     "evolutions": {
       "name": "cherubi",
       "details": null,
@@ -452,10 +454,97 @@
           }
         }
       ],
-      "uuid": "Compendium.ptr2e.core-species.Item.gvY2vyuQqc9YPg4y"
+      "uuid": "Compendium.ptr2e.core-species.Item.gvY2vyuQqc9YPg4y",
+      "methods": []
+    },
+    "_migration": {
+      "version": null,
+      "previous": null
     }
   },
   "_id": "zEz3oqCULVcENsLD",
-  "effects": [],
-  "folder": null
+  "effects": [
+    {
+      "name": "Sunshine",
+      "type": "form",
+      "_id": "i1rq1SucjfVBtDI4",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-option",
+            "key": "manual-forme-toggle",
+            "value": "forme:sunshine:active",
+            "domain": "all",
+            "toggleable": true,
+            "label": "Toggle: Sunshine Forme",
+            "predicate": [],
+            "alwaysActive": false,
+            "count": false,
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "suboptions": [],
+            "state": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:sunshine:active"
+            ],
+            "key": "system.modifiers.atkMultiplier",
+            "value": 1.5,
+            "mode": 1,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:sunshine:active"
+            ],
+            "key": "system.modifiers.spdMultiplier",
+            "value": 1.5,
+            "mode": 1,
+            "priority": null,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0,
+        "trigger": "manual",
+        "conditions": []
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.5.2.1",
+        "createdTime": 1738146981069,
+        "modifiedTime": 1738147034829,
+        "lastModifiedBy": "IcBpMqhFuTck9VpX"
+      }
+    }
+  ]
 }

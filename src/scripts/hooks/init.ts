@@ -8,14 +8,17 @@ import { initializeSettings } from "@scripts/settings.ts";
 import { default as enrichers } from "@scripts/ui/text-enrichers.ts";
 import { WelcomeTour } from "@module/tours/welcome.ts";
 import { FoldersTour } from "@module/tours/folders.ts";
-import { CharacterCreationTour } from "@module/tours/character-creation.ts";
+import { ActorSheetTour } from "@module/tours/actor-sheet.ts";
 import { storeInitialWorldVersions } from "@scripts/store-versions.ts";
 import { MigrationList, MigrationRunner } from "@module/migration/index.ts";
 import { MigrationSummary } from "@module/apps/migration-summary.ts";
 import { TokenConfigPTR2e } from "@module/canvas/token/sheet.ts";
 import { TokenDocumentPTR2e } from "@module/canvas/token/document.ts";
-// import { PerkWebTour } from "@module/tours/perk-web.ts";
-// import { GeneratingPokemonTour } from "@module/tours/generating-pokemon.ts";
+import { PerkWebTour } from "@module/tours/perk-web.ts";
+import { GeneratingPokemonTour } from "@module/tours/generating-pokemon.ts";
+import { AutomationTour } from "@module/tours/automation.ts";
+import { MiscTour } from "@module/tours/misc.ts";
+import { CompendiumBrowserTour } from "@module/tours/compendium-browser.ts";
 
 export const Init: PTRHook = {
   listen() {
@@ -40,8 +43,6 @@ export const Init: PTRHook = {
       if (game.release.generation === 12) {
         CONFIG.Token.prototypeSheetClass = TokenConfigPTR2e;
       }
-
-      
 
       // Define custom Entity classes
       CONFIG.ActiveEffect.documentClass = PTRCONFIG.ActiveEffect.documentClass;
@@ -85,6 +86,8 @@ export const Init: PTRHook = {
         CONFIG.ui.items = PTRCONFIG.ui.items;
         CONFIG.ui.actors = PTRCONFIG.ui.actors;
         CONFIG.ui.compendium = PTRCONFIG.ui.compendium;
+        //@ts-expect-error - Typing issue
+        CONFIG.ui.tables = PTRCONFIG.ui.tables;
         CONFIG.ui.perksTab = PTRCONFIG.ui.perks;
         CONFIG.ui.settings = PTRCONFIG.ui.settings;
       }
@@ -120,7 +123,6 @@ export const Init: PTRHook = {
       (async () => {
         // Monkeypatch the game.tooltip class to stop auto-dismissing tooltips
         const original = game.tooltip.deactivate.bind(game.tooltip);
-        //@ts-expect-error - Monkeypatching game.tooltip
         game.tooltip.deactivate = (force) => {
           if (Tour.tourInProgress && !force) return;
           original();
@@ -129,10 +131,13 @@ export const Init: PTRHook = {
         try {
           game.tours.register("ptr2e", "welcome", await WelcomeTour.fromJSON("systems/ptr2e/tours/welcome.json"));
           game.tours.register("ptr2e", "folders", await FoldersTour.fromJSON("systems/ptr2e/tours/folders.json"));
-          game.tours.register("ptr2e", "character-creation", await CharacterCreationTour.fromJSON("systems/ptr2e/tours/character-creation.json"));
-          // game.tours.register("ptr2e", "perk-web", await PerkWebTour.fromJSON("systems/ptr2e/tours/perk-web.json"));
-          // game.tours.register("ptr2e", "generating-pokemon", await GeneratingPokemonTour.fromJSON("systems/ptr2e/tours/generating-pokemon.json"));
-          // game.tours.register("ptr2e", "combat", await CombatTour.fromJSON("systems/ptr2e/tours/combat.json"));
+          game.tours.register("ptr2e", "actor-sheet", await ActorSheetTour.fromJSON("systems/ptr2e/tours/actor-sheet.json"));
+          game.tours.register("ptr2e", "perk-web", await PerkWebTour.fromJSON("systems/ptr2e/tours/perk-web.json"));
+          // game.tours.register("ptr2e", "character-creation", await CharacterCreationTour.fromJSON("systems/ptr2e/tours/character-creation.json"));
+          game.tours.register("ptr2e", "compendium-browser", await CompendiumBrowserTour.fromJSON("systems/ptr2e/tours/compendium-browser.json"));
+          game.tours.register("ptr2e", "generating-pokemon", await GeneratingPokemonTour.fromJSON("systems/ptr2e/tours/generating-pokemon.json"));
+          game.tours.register("ptr2e", "automation", await AutomationTour.fromJSON("systems/ptr2e/tours/automation.json"));
+          game.tours.register("ptr2e", "misc", await MiscTour.fromJSON("systems/ptr2e/tours/misc.json"));
         }
         catch (err) {
           console.error(err);
@@ -160,6 +165,7 @@ export const Init: PTRHook = {
 
     Hooks.once('ready', () => {
       console.log('PTR 2e | Ready');
+
       // Add ready code here
       GamePTR.onReady();
 

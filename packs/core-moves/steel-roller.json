@@ -4,14 +4,6 @@
   "img": "systems/ptr2e/img/svg/steel_icon.svg",
   "system": {
     "slug": "steel-roller",
-    "description": "",
-    "traits": [
-      "environ",
-      "crushing",
-      "contact",
-      "field",
-      "pp-updated"
-    ],
     "actions": [
       {
         "slug": "steel-roller",
@@ -22,7 +14,8 @@
           "crushing",
           "contact",
           "field",
-          "pp-updated"
+          "pp-updated",
+          "curl"
         ],
         "range": {
           "target": "wide-line",
@@ -32,8 +25,6 @@
         "cost": {
           "activation": "complex",
           "powerPoints": 8,
-          "delay": null,
-          "priority": null,
           "trigger": "A [Terrain] is present."
         },
         "category": "physical",
@@ -43,14 +34,16 @@
           "steel"
         ],
         "description": "<p>Effect: This attack ends all [Terrain] effects on use. If there is no active [Terrain] effect, this attack fails. The user may freely move to any open space in this attacks range.</p>",
-        "contestType": "",
-        "contestEffect": "",
-        "free": false,
-        "slot": null
+        "img": "icons/svg/explosion.svg",
+        "predicate": []
       }
     ],
-    "container": null,
-    "grade": "A"
+    "grade": "A",
+    "traits": [],
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
   },
   "_id": "f1owTUALsuAOxqFj",
   "effects": []

@@ -4,17 +4,14 @@
   "img": "systems/ptr2e/img/svg/psychic_icon.svg",
   "system": {
     "slug": "mirror-coat",
-    "description": "<p>Trigger: The user is damaged by a Special damaging attack.</p><p>Effect: The user attacks the creature that attacked it, dealing twice the amount of damage it were dealt by the triggering attack (this is not modified by the target's SPDEF or other effects).</p>",
-    "traits": [
-      "interrupt-3"
-    ],
     "actions": [
       {
         "slug": "mirror-coat",
         "name": "Mirror Coat",
         "type": "attack",
         "traits": [
-          "interrupt-3"
+          "interrupt-3",
+          "pp-updated"
         ],
         "range": {
           "target": "creature",
@@ -23,9 +20,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 5,
-          "delay": null,
-          "priority": null,
+          "powerPoints": 3,
           "trigger": "<p>The user is damaged by a Special damaging attack.</p>"
         },
         "category": "status",

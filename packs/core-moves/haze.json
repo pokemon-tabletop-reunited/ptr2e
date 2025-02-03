@@ -4,14 +4,14 @@
   "img": "systems/ptr2e/img/svg/ice_icon.svg",
   "system": {
     "slug": "haze",
-    "description": "<p>Effect: The Stat Stages of all creatures in the combat are reset to their default values.</p>",
-    "traits": [],
     "actions": [
       {
         "slug": "haze",
         "name": "Haze",
         "type": "attack",
-        "traits": [],
+        "traits": [
+          "pp-updated"
+        ],
         "range": {
           "target": "field",
           "distance": 0,
@@ -19,10 +19,7 @@
         },
         "cost": {
           "activation": "simple",
-          "powerPoints": 3,
-          "delay": null,
-          "priority": null,
-          "trigger": null
+          "powerPoints": 6
         },
         "category": "status",
         "power": null,
@@ -38,7 +35,7 @@
       }
     ],
     "container": null,
-    "grade": "E"
+    "grade": "A"
   },
   "_id": "eaBKFWmCB4ZeKP2k",
   "effects": []

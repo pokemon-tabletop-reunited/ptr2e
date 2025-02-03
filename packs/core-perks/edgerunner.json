@@ -7,7 +7,7 @@
   "system": {
     "actions": [],
     "slug": "edgerunner",
-    "description": "<p>You gain +10 Power to your non-Struggle moves for every 20% of your Maximum PP that you are missing from your reservoir. If using a Weapon, this is based on your personal PP reservoir and not the weapon's PP reservoir.</p>",
+    "description": "<p>Your non-struggle moves gain a 1% Power increase per 4% of your Max PP that has been spent prior to the declaration of the move.</p>",
     "traits": [],
     "prerequisites": [],
     "cost": 2,
@@ -37,11 +37,13 @@
       }
     ],
     "autoUnlock": [],
-    "originSlug": null,
-    "variant": null,
-    "mode": null,
     "global": true,
-    "webs": []
+    "webs": [],
+    "design": {
+      "arena": "physical",
+      "approach": "resilience",
+      "archetype": "Blitzer"
+    }
   },
   "effects": []
 }

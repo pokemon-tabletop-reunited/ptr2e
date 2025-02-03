@@ -2,11 +2,40 @@
   {{#if blueprint}}
     <fieldset class="species">
       <legend>Species</legend>
-      {{formField fields.species value=blueprint._source.species localize=true}}
+      <div class="form-group"> 
+        <label>{{localize fields.species.label}}</label>
+        <div class="form-fields species-fields">
+          <select class="species-select" data-tooltip="You can use this dropdown to select a Dynamic Habitat Table instead.">
+            <option value=""></option>
+            {{#each habitats as |habitat|}}
+              <option value="{{habitat.slug}}" {{#if (is habitat.slug ../blueprint._source.species)}}selected{{/if}}>{{habitat.name}}</option>
+            {{/each}}
+          </select>
+          <input type="text" name="species" value="{{blueprint._source.species}}">
+        </div>
+        <p class="hint">{{localize fields.species.hint}}</p>
+      </div>
       {{formField fields.level value=blueprint._source.level localize=true}}
       {{formField fields.nature value=blueprint._source.nature localize=true}}
+      {{formField fields.gender value=blueprint._source.gender localize=true}}
       {{formField fields.shiny value=blueprint._source.shiny localize=true}}
       {{formField fields.preventEvolution value=blueprint._source.preventEvolution localize=true}}
+    </fieldset>
+    <fieldset class="perk-config">
+      <legend>Perk Generation</legend>
+      <div class="form-group">
+        <label>{{localize "PTR2E.GeneratorConfig.label"}}</label>
+        <div class="form-fields">
+          {{#if blueprint.config}}
+            <a class="content-link" draggable="true" data-action="open-config" data-uuid="{{uuid}}" data-id="{{blueprint.id}}" data-type="GeneratorConfig" data-tooltip="Open {{#if blueprint.config.label}}{{blueprint.config.label}}{{else}}Perk Generator Config{{/if}}"><i class="fas fa-rectangle-list"></i>{{#if blueprint.config.label}}{{blueprint.config.label}}{{else}}Perk Generator Config{{/if}}</a>
+          {{else}}
+            <div class="empty">
+              <span class="name">No Perk Generator Config created yet, drag one here or <button type="button" data-action="create-config">Create New Config</button></span>
+            </div>
+          {{/if}}
+        </div>
+        <p class="hint">{{localize "PTR2E.GeneratorConfig.hint"}}</p>
+      </div>
     </fieldset>
   {{else}}
     <div class="empty">

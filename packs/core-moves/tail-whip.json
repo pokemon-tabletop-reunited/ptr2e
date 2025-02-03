@@ -4,11 +4,6 @@
   "img": "systems/ptr2e/img/svg/normal_icon.svg",
   "system": {
     "slug": "tail-whip",
-    "description": "<p>Effect: On hit, the target loses -1 DEF Stage for 5 Activations.</p>",
-    "traits": [
-      "social",
-      "tail"
-    ],
     "actions": [
       {
         "slug": "tail-whip",
@@ -16,7 +11,8 @@
         "type": "attack",
         "traits": [
           "social",
-          "tail"
+          "tail",
+          "pp-updated"
         ],
         "range": {
           "target": "creature",
@@ -25,7 +21,7 @@
         },
         "cost": {
           "activation": "simple",
-          "powerPoints": 3
+          "powerPoints": 1
         },
         "category": "status",
         "accuracy": 100,

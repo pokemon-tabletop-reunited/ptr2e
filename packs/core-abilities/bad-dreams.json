@@ -20,38 +20,13 @@
         },
         "description": "<p>Effect: All other creatures on the field that would gain @Affliction[drowsy] instead gain @Affliction[nightmares].</p>",
         "img": "icons/svg/explosion.svg"
-      },
-      {
-        "slug": "dark-void",
-        "name": "Dark Void",
-        "type": "attack",
-        "traits": [
-          "legendary",
-          "blast-4"
-        ],
-        "range": {
-          "target": "blast",
-          "distance": 15,
-          "unit": "m"
-        },
-        "cost": {
-          "activation": "complex",
-          "powerPoints": 7
-        },
-        "category": "status",
-        "accuracy": 80,
-        "types": [
-          "dark"
-        ],
-        "description": "<p>Effect: On hit, all valid targets gain @Affliction[drowsy] 7.</p>",
-        "free": true,
-        "img": "icons/svg/explosion.svg"
       }
     ],
     "description": "<p>Effect: Connection - Dark Void. All other creatures on the field that would gain @Affliction[drowsy] instead gain @Affliction[nightmares].</p>",
     "traits": [
       "legendary",
-      "connection"
+      "connection",
+      "partial-automation"
     ],
     "slug": "bad-dreams",
     "_migration": {
@@ -60,5 +35,73 @@
     }
   },
   "_id": "CWnmOQJSLpNPlOVN",
-  "effects": []
+  "effects": [
+    {
+      "name": "Bad Dreams",
+      "type": "passive",
+      "_id": "D61PMB78clUblKK5",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "grant-item",
+            "key": "",
+            "value": "Compendium.ptr2e.core-moves.Item.1PokUazkRwGGoiG7",
+            "predicate": [],
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "system.actions.0.free",
+                "value": "true"
+              }
+            ],
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "reevaluateOnUpdate": false,
+            "inMemoryOnly": false,
+            "allowDuplicate": true,
+            "track": false,
+            "replaceSelf": false,
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            }
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.5.1.5",
+        "createdTime": 1737392799179,
+        "modifiedTime": 1737392826880,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+      }
+    }
+  ]
 }

@@ -11,10 +11,9 @@
         ],
         "name": "Sap Sipper",
         "slug": "sap-sipper",
-        "type": "generic",
+        "type": "passive",
         "cost": {
           "activation": "free",
-          "powerPoints": 2,
           "trigger": "<p>The user is hit by a Grass-Type attack.</p>"
         },
         "range": {
@@ -22,7 +21,7 @@
           "unit": "m"
         },
         "description": "<p>Trigger: The user is hit by a Grass-Type attack.</p><p>Effect: The user takes no damage from the triggering attack, and the triggering attack's effects are not applied. Then the user's ATK Stage is raised by +1 for 5 Activations.</p>",
-        "img": "icons/svg/explosion.svg"
+        "img": "systems/ptr2e/img/svg/grass_icon.svg"
       }
     ],
     "description": "<p>Trigger: The user is hit by a Grass-Type attack.</p><p>Effect: The user takes no damage from the triggering attack, and the triggering attack's effects are not applied. Then the user's ATK Stage is raised by +1 for 5 Activations.</p>",
@@ -36,5 +35,69 @@
     }
   },
   "_id": "VRKURBrbkh2y2G62",
-  "effects": []
+  "effects": [
+    {
+      "name": "Sap Sipper",
+      "type": "passive",
+      "_id": "Lx0CEL5qt72xq6s4",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "ephemeral-modifier",
+            "key": "grass-attack-damage-percentile",
+            "value": -1000,
+            "predicate": [],
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "hideIfDisabled": false
+          },
+          {
+            "type": "roll-effect",
+            "key": "grass-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.ZGwaMlzUwkSuCPyH",
+            "predicate": [],
+            "chance": 100,
+            "affects": "defensive",
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.5.1.2",
+        "createdTime": 1737051405810,
+        "modifiedTime": 1737051467625,
+        "lastModifiedBy": "IcBpMqhFuTck9VpX"
+      }
+    }
+  ]
 }

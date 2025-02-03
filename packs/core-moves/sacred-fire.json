@@ -4,11 +4,6 @@
   "img": "systems/ptr2e/img/svg/fire_icon.svg",
   "system": {
     "slug": "sacred-fire",
-    "description": "<p>Effect: On hit, all valid targets have a 50% chance of gaining @Affliction[burn] 7. A creature that has @Affliction[burn] has a 50% chance of also gaining @Affliction[splinter] 7.</p>",
-    "traits": [
-      "defrost",
-      "legendary"
-    ],
     "actions": [
       {
         "slug": "sacred-fire",
@@ -26,10 +21,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 7,
-          "delay": null,
-          "priority": null,
-          "trigger": null
+          "powerPoints": 7
         },
         "category": "physical",
         "power": 100,
@@ -38,10 +30,8 @@
           "fire"
         ],
         "description": "<p>Effect: On hit, all valid targets have a 50% chance of gaining @Affliction[burn] 7.</p>",
-        "contestType": "",
-        "contestEffect": "",
-        "free": false,
-        "slot": null
+        "img": "icons/svg/explosion.svg",
+        "predicate": []
       },
       {
         "slug": "sacred-fire-burned",
@@ -60,8 +50,6 @@
         "cost": {
           "activation": "complex",
           "powerPoints": 7,
-          "delay": null,
-          "priority": null,
           "trigger": "<p>Valid target(s) have @Affliction[burn].</p>"
         },
         "category": "physical",
@@ -71,15 +59,18 @@
           "fire"
         ],
         "description": "<p>Trigger: Valid target(s) have @Affliction[burn].</p><p>Effect: On hit, all valid targets have a 50% chance of gaining @Affliction[burn] 7 and a 50% chance of gaining @Affliction[splinter] 7.",
-        "contestType": "",
-        "contestEffect": "",
         "variant": "sacred-fire",
         "free": true,
-        "slot": null
+        "img": "icons/svg/explosion.svg",
+        "predicate": []
       }
     ],
-    "container": null,
-    "grade": "B"
+    "grade": "B",
+    "traits": [],
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
   },
   "_id": "hoQZlSqWhAC3WujH",
   "effects": []

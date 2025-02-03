@@ -16,14 +16,11 @@
         ],
         "range": {
           "target": "creature",
-          "unit": "m",
-          "distance": 0
+          "unit": "m"
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 3,
-          "delay": null,
-          "priority": null
+          "powerPoints": 3
         },
         "category": "status",
         "types": [
@@ -31,96 +28,11 @@
         ],
         "description": "<p>Effect: The target recovers 4 Ticks of HP.</p>",
         "img": "icons/svg/explosion.svg",
-        "variant": null,
-        "power": null,
-        "accuracy": null,
-        "contestType": "",
-        "contestEffect": "",
-        "free": false,
-        "slot": null,
-        "summon": null,
-        "defaultVariant": null,
-        "flingItemId": null,
-        "offensiveStat": null,
-        "defensiveStat": null
-      },
-      {
-        "slug": "acutherapy",
-        "name": "Acutherapy",
-        "type": "attack",
-        "traits": [
-          "contact"
-        ],
-        "range": {
-          "target": "creature",
-          "distance": 1,
-          "unit": "m"
-        },
-        "cost": {
-          "activation": "complex",
-          "powerPoints": 2,
-          "delay": null,
-          "priority": null
-        },
-        "category": "status",
-        "types": [
-          "normal"
-        ],
-        "description": "<p>Effect: Roll 1d8 and raise the Stages of the stat in the corresponding table by +2 for 5 activations.</p><p><ol><li>ATK</li><li>DEF</li><li>SPATK</li><li>SPDEF</li><li>SPD</li><li>ACC</li><li>EVA</li><li>User Choice<></ol></p>",
-        "img": "icons/svg/explosion.svg",
-        "variant": null,
-        "power": null,
-        "accuracy": null,
-        "contestType": "",
-        "contestEffect": "",
-        "free": false,
-        "slot": null,
-        "summon": null,
-        "defaultVariant": null,
-        "flingItemId": null,
-        "offensiveStat": null,
-        "defensiveStat": null
-      },
-      {
-        "slug": "purify",
-        "name": "Purify",
-        "type": "attack",
-        "traits": [
-          "healing"
-        ],
-        "range": {
-          "target": "creature",
-          "distance": 5,
-          "unit": "m"
-        },
-        "cost": {
-          "activation": "simple",
-          "powerPoints": 5,
-          "delay": null,
-          "priority": null
-        },
-        "category": "status",
-        "types": [
-          "poison"
-        ],
-        "description": "<p>Effect: The target is cured of all [Major Affliction]s. If the target is cured this way, the user recovers HP equal to 1/2 their Max HP.</p>",
-        "img": "icons/svg/explosion.svg",
-        "variant": null,
-        "power": null,
-        "accuracy": null,
-        "contestType": "",
-        "contestEffect": "",
-        "free": false,
-        "slot": null,
-        "summon": null,
-        "defaultVariant": null,
-        "flingItemId": null,
-        "offensiveStat": null,
-        "defensiveStat": null
+        "predicate": []
       }
     ],
     "slug": "chansey-medicine",
-    "description": "<p> You gain the [Healer] trait, gaining access to the [Healer] Tutor List. The user learns Touch Up, Purify, and Acutherapy.",
+    "description": "<p> You gain the [Healer] trait, gaining access to the [Healer] Tutor List. The user learns Touch Up, Purify, and Acupressure.",
     "traits": [],
     "prerequisites": [
       {
@@ -132,8 +44,12 @@
     ],
     "cost": 1,
     "_migration": {
-      "version": null,
-      "previous": null
+      "version": 0.11,
+      "previous": {
+        "schema": null,
+        "foundry": "12.331",
+        "system": "0.10.0-alpha.5.1.2"
+      }
     },
     "nodes": [
       {
@@ -150,7 +66,8 @@
           "tactician",
           "heroic-transformation",
           "breeder",
-          "stat-iv-booster-1-10"
+          "stat-iv-booster-1-10",
+          "pack-mon-2"
         ],
         "config": {
           "alpha": null,
@@ -167,11 +84,14 @@
     "autoUnlock": [
       "trait:healer"
     ],
-    "originSlug": null,
-    "variant": null,
-    "mode": null,
+    "originSlug": "chansey-medicine",
     "global": true,
-    "webs": []
+    "webs": [],
+    "design": {
+      "arena": "mental",
+      "approach": "resilience",
+      "archetype": "healer"
+    }
   },
   "effects": [
     {
@@ -189,6 +109,44 @@
             "mode": 2,
             "priority": null,
             "ignored": false
+          },
+          {
+            "type": "grant-item",
+            "key": "purify",
+            "value": "Compendium.ptr2e.core-moves.Item.W85QPAFdQRYn5Yfp",
+            "predicate": [],
+            "allowDuplicate": false,
+            "replaceSelf": false,
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            },
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "reevaluateOnUpdate": false,
+            "inMemoryOnly": false,
+            "alterations": [],
+            "track": false
+          },
+          {
+            "type": "grant-item",
+            "key": "acupressure",
+            "value": "Compendium.ptr2e.core-moves.Item.DymPJiI57iCzqLp1",
+            "predicate": [],
+            "allowDuplicate": false,
+            "replaceSelf": false,
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            },
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "reevaluateOnUpdate": false,
+            "inMemoryOnly": false,
+            "alterations": [],
+            "track": false
           }
         ],
         "slug": null,
@@ -199,7 +157,7 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
+        "startTime": 0,
         "seconds": null,
         "combat": null,
         "rounds": null,

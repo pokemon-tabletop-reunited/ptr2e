@@ -4,45 +4,39 @@
   "img": "systems/ptr2e/img/svg/ice_icon.svg",
   "system": {
     "slug": "chilly-reception",
-    "description": "<p>Effect: The Weather becomes Snowy for 3 rounds. The user may then freely attack themselves up to half of the Movement Score of their choice away from the target. If the user is an owned Pokémon, they may then immediately be returned their Poké Ball and another Pokémon may immediately be sent out in their place.</p>",
-    "traits": [
-      "weather"
-    ],
     "actions": [
       {
         "slug": "chilly-reception",
         "name": "Chilly Reception",
         "type": "attack",
         "traits": [
-          "weather"
+          "weather",
+          "pp-updated"
         ],
         "range": {
           "target": "field",
-          "distance": 0,
           "unit": "m"
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 5,
-          "delay": null,
-          "priority": null,
-          "trigger": null
+          "powerPoints": 4
         },
         "category": "status",
-        "power": null,
-        "accuracy": null,
         "types": [
           "ice"
         ],
         "description": "<p>Effect: The Weather becomes Snowy for 3 rounds. The user may then freely attack themselves up to half of the Movement Score of their choice away from the target. If the user is an owned Pokémon, they may then immediately be returned their Poké Ball and another Pokémon may immediately be sent out in their place.</p>",
-        "contestType": "",
-        "contestEffect": "",
-        "free": false,
-        "slot": null
+        "img": "systems/ptr2e/img/svg/ice_icon.svg",
+        "summon": "Compendium.ptr2e.core-summons.8EVtue4CUOjddZIP",
+        "predicate": []
       }
     ],
-    "container": null,
-    "grade": "A"
+    "grade": "B",
+    "traits": [],
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
   },
   "_id": "qVOJkDERjMf3LuDq",
   "effects": []

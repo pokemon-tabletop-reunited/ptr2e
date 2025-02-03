@@ -5,14 +5,15 @@
   "img": "systems/ptr2e/img/svg/water_icon.svg",
   "system": {
     "slug": null,
-    "traits": [],
     "actions": [
       {
         "name": "Cold Shower",
         "slug": "cold-shower",
         "type": "attack",
         "img": "icons/svg/explosion.svg",
-        "traits": [],
+        "traits": [
+          "pp-updated"
+        ],
         "range": {
           "target": "field",
           "distance": 0,
@@ -20,9 +21,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 6,
-          "delay": null,
-          "priority": null
+          "powerPoints": 6
         },
         "variant": null,
         "types": [
@@ -38,7 +37,6 @@
         "description": "<p>Effect: All creatures on the Field have their [Stage Change] effects removed.</p>"
       }
     ],
-    "description": "",
     "container": null,
     "grade": "A"
   },

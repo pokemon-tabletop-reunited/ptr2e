@@ -4,18 +4,12 @@
   "img": "systems/ptr2e/img/svg/ghost_icon.svg",
   "system": {
     "slug": "engulf",
-    "description": "",
-    "traits": [
-      "move-locked",
-      "exhaust"
-    ],
     "actions": [
       {
         "slug": "engulf",
         "name": "Engulf",
         "type": "attack",
         "traits": [
-          "move-locked",
           "exhaust",
           "pp-updated"
         ],
@@ -26,10 +20,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 4,
-          "delay": null,
-          "priority": null,
-          "trigger": null
+          "powerPoints": 4
         },
         "category": "special",
         "power": 50,
@@ -38,14 +29,16 @@
           "ghost"
         ],
         "description": "<p>Effect: All [Hazard] and [Shield] attack effects in Range are cleared, as are the @Affliction[leech] and @Affliction[bound] conditions.</p>",
-        "contestType": "",
-        "contestEffect": "",
-        "free": false,
-        "slot": null
+        "img": "icons/svg/explosion.svg",
+        "predicate": []
       }
     ],
-    "container": null,
-    "grade": "C"
+    "grade": "C",
+    "traits": [],
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
   },
   "_id": "v7DeY7cPLe5xLE9Y",
   "effects": []

@@ -1,5 +1,6 @@
 import { AttackPTR2e, DistanceUnit, Trait, WeightUnit } from "@data";
 import { EffectSourcePTR2e } from "@effects";
+import { ItemAlteration } from "@module/effects/alterations/item.ts";
 import AfflictionActiveEffectSystem from "@module/effects/data/affliction.ts";
 import { DeferredPromise, DeferredValue, DeferredValueParams, ModifierAdjustment, ModifierPTR2e } from "@module/effects/modifiers.ts";
 import { RollNote } from "@system/notes.ts";
@@ -18,6 +19,7 @@ export interface EffectRoll {
   roll?: Rolled<Roll>;
   success?: boolean;
   critOnly?: boolean;
+  alterations?: ItemAlteration[];
   [key: string]: unknown;
 }
 
@@ -48,7 +50,7 @@ interface ActorSynthetics {
   };
   afflictions: { data: AfflictionActiveEffectSystem[], ids: Set<string> };
   rollNotes: Record<string, RollNote[]>;
-  effects: Record<string, { self: DeferredEffectRoll[], target: DeferredEffectRoll[], origin: DeferredEffectRoll[] }>;
+  effects: Record<string, { self: DeferredEffectRoll[], target: DeferredEffectRoll[], origin: DeferredEffectRoll[], defensive: DeferredEffectRoll[] }>;
   toggles: RollOptionToggle[];
   attackAdjustments: (() => AttackAdjustment)[];
   tokenTags: Map<TokenDocumentUUID, string>;
@@ -107,10 +109,10 @@ interface Stat {
   stage: number
 }
 
-type PTRSkill = string | ArtSkill | OccultSkill | PerformanceSkill | PilotingSkills | ScienceSkills | "accounting" | "acrobatics" | "appraise" | "archaeology" | "aura-sense" | "climb" | "computers" | "conversation" | "disguise" | "electronics" | "engineering" | "fast-talk" | "handiwork" | "history" | "husbandry" | "intimidate" | "leadership" | "legal" | "lift" | "listen" | "locksmith" | "mechanics" | "medicine" | "natural-world" | "navigate" | "negotiation" | "psychology" | "read-lips" | "research" | "resources" | "ride" | "running" | "sleight-of-hand" | "spot-hidden" | "stealth" | "survival" | "swim" | "teaching" | "track" | "luck";
+type PTRSkill = string | ArtSkill | OccultSkill | PerformanceSkill | PilotingSkills | ScienceSkills | "accounting" | "acrobatics"| "appraise" | "archaeology" | "aura-sense" | "climb" | "computers" | "conversation" | "disguise" | "electronics" | "engineering" | "fast-talk" | "handiwork" | "history" | "husbandry" | "intimidate" | "leadership" | "legal" | "lift" | "listen" | "locksmith" | "mechanics" | "medicine" | "natural-world" | "navigate" | "negotiation" | "profession-specific" | "psychology" | "read-lips" | "research" | "resources" | "ride" | "running" | "sleight-of-hand" | "spot-hidden" | "stealth" | "survival" | "swim" | "teaching" | "track" | "luck";
 
 type ArtSkill = "painting" | "sculpting" | "acting" | "dancing" | "singing" | "flower-arrangement" | "writing";
-type OccultSkill = "psychic" | "ghost" | "dragon" | "fairy" | "spiritual" | "legendary" | "paradox";
+type OccultSkill = "psychic" | "ghost" | "dragon" | "fairy" | "spiritual" | "legendary" | "paradox" | "alchemy" | "thaumaturgy";
 type PerformanceSkill = "cool" | "cute" | "beautiful" | "tough" | "smart";
 type PilotingSkills = "bike" | "small-motor-vehicles" | "cars" | "utility-vehicles" | "military-ground-vehicles" | "walkers" | "aircraft" | "aerospace-vehicles" | "watercraft";
 type ScienceSkills = "astronomy" | "biology" | "botany" | "chemistry" | "cryptography" | "forensics" | "geology" | "mathematics" | "meteorology" | "palaeontology" | "parapsychology" | "pharmacy" | "physics" | "zoology" | "eschatobiology" | "megalobiology" | "terastology" | "ultrology" | "paradoxian-studies"

@@ -4,45 +4,39 @@
   "img": "systems/ptr2e/img/svg/ice_icon.svg",
   "system": {
     "slug": "snowscape",
-    "description": "<p>Effect: The Weather becomes Snowy for 3 rounds.</p>",
-    "traits": [
-      "weather"
-    ],
     "actions": [
       {
         "slug": "snowscape",
         "name": "Snowscape",
         "type": "attack",
         "traits": [
-          "weather"
+          "weather",
+          "pp-updated"
         ],
         "range": {
           "target": "field",
-          "distance": 0,
           "unit": "m"
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 4,
-          "delay": null,
-          "priority": null,
-          "trigger": null
+          "powerPoints": 4
         },
         "category": "status",
-        "power": null,
-        "accuracy": null,
         "types": [
           "ice"
         ],
         "description": "<p>Effect: The Weather becomes Snowy for 3 rounds.</p>",
-        "contestType": "",
-        "contestEffect": "",
-        "free": false,
-        "slot": null
+        "img": "systems/ptr2e/img/svg/ice_icon.svg",
+        "summon": "Compendium.ptr2e.core-summons.8EVtue4CUOjddZIP",
+        "predicate": []
       }
     ],
-    "container": null,
-    "grade": "A"
+    "grade": "B",
+    "traits": [],
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
   },
   "_id": "KQ8pNG4ebggQwd8k",
   "effects": []

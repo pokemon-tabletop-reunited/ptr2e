@@ -4,12 +4,7 @@
   "_id": "P2J1CVUTH03AzzTm",
   "img": "systems/ptr2e/img/svg/normal_icon.svg",
   "system": {
-    "slug": null,
-    "traits": [
-      "aura",
-      "contact",
-      "pp-updated"
-    ],
+    "slug": "turnabout",
     "actions": [
       {
         "name": "Turnabout",
@@ -27,9 +22,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 2,
-          "delay": null,
-          "priority": null
+          "powerPoints": 2
         },
         "types": [
           "normal"
@@ -38,13 +31,70 @@
         "power": 75,
         "accuracy": 90,
         "description": "<p>Effect: After this attack resolves, the user has a 10% chance of gaining ATK, DEF, SPATK, SPDEF and SPD Stage by 1 for 5 Activations.</p>",
-        "img": "systems/ptr2e/img/svg/normal_icon.svg"
+        "img": "systems/ptr2e/img/svg/normal_icon.svg",
+        "predicate": []
       }
     ],
-    "description": "",
-    "container": null,
-    "grade": "E"
+    "grade": "E",
+    "traits": [],
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
   },
-  "effects": [],
-  "folder": ""
+  "effects": [
+    {
+      "name": "Turnabout",
+      "type": "passive",
+      "_id": "LixO8UO5lvWeDxK8",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "turnabout-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.rMNLqloV5nLmCLrZ",
+            "predicate": [],
+            "chance": 10,
+            "affects": "target",
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.5.1.5",
+        "createdTime": 1737326360313,
+        "modifiedTime": 1737326382423,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+      }
+    }
+  ]
 }

@@ -1,0 +1,162 @@
+{
+  "name": "Xernean Longbow",
+  "type": "weapon",
+  "system": {
+    "_migration": {
+      "version": 0.11,
+      "previous": null
+    },
+    "traits": [
+      "weapon",
+      "bow",
+      "fantasy",
+      "fairy"
+    ],
+    "actions": [
+      {
+        "name": "Light Arrow",
+        "slug": "xernean-longbow-action-1",
+        "description": "<p>A bow crafted from the shedding of the Horns of Xerneas. It has a faint pearl sheen that becomes a soft glow in the light of the moon.<br><br>The Light Arrow targets the victim's Special Defense.</p>",
+        "traits": [
+          "weapon",
+          "missile"
+        ],
+        "type": "attack",
+        "img": "systems/ptr2e/img/icons/weapon_icon.webp",
+        "range": {
+          "target": "enemy",
+          "unit": "m",
+          "distance": 30
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 2
+        },
+        "types": [
+          "fairy"
+        ],
+        "category": "physical",
+        "power": 95,
+        "accuracy": 95,
+        "free": true,
+        "defensiveStat": "spd",
+        "predicate": []
+      },
+      {
+        "name": "Wyrmslayer Arrow",
+        "slug": "xernean-longbow-action-2",
+        "description": "<p>A bow crafted from the shedding of the Horns of Xerneas. It has a faint pearl sheen that becomes a soft glow in the light of the moon.</p>",
+        "traits": [
+          "weapon",
+          "missile"
+        ],
+        "type": "attack",
+        "img": "systems/ptr2e/img/icons/weapon_icon.webp",
+        "range": {
+          "target": "enemy",
+          "unit": "m",
+          "distance": 30
+        },
+        "cost": {
+          "activation": "simple",
+          "powerPoints": 5
+        },
+        "types": [
+          "fairy"
+        ],
+        "category": "physical",
+        "power": 120,
+        "accuracy": 80,
+        "defensiveStat": "spd",
+        "predicate": [],
+        "free": true
+      }
+    ],
+    "description": "<p>A bow crafted from the shedding of the Horns of Xerneas. It has a faint pearl sheen that becomes a soft glow in the light of the moon.</p>",
+    "crafting": {
+      "skill": "",
+      "spans": null,
+      "materials": []
+    },
+    "equipped": {
+      "carryType": "equipped",
+      "handsHeld": null,
+      "slot": "held"
+    },
+    "grade": "A",
+    "fling": {
+      "type": "fairy",
+      "power": 60,
+      "accuracy": 100,
+      "hide": false
+    },
+    "quantity": 1,
+    "rarity": "rare",
+    "identification": {
+      "misidentified": null,
+      "status": "identified",
+      "unidentified": {
+        "name": "Unidentified Item",
+        "img": "systems/ptu/css/images/icons/gear_icon.png",
+        "description": "<p>Unidentified Item</p>"
+      }
+    },
+    "slug": "xernean-longbow"
+  },
+  "img": "systems/ptr2e/img/icons/weapon_icon.webp",
+  "effects": [
+    {
+      "name": "Xernean Longbow",
+      "type": "passive",
+      "_id": "TqpfXm3BqL5WpcUW",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "basic",
+            "key": "system.attributes.atk.value",
+            "value": 25,
+            "predicate": [],
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.5.1.5",
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      }
+    }
+  ],
+  "folder": "V4skAU6G3OH5fXaf",
+  "_id": "3DcwGXX9YCxh72T6"
+}

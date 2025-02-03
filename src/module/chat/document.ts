@@ -143,8 +143,8 @@ class ChatMessagePTR2e<TSchema extends TypeDataModel = TypeDataModel> extends Ch
       event.preventDefault();
       event.stopPropagation();
 
-      const { attackUuid } = event.currentTarget.dataset;
-      const action = await fromUuid(attackUuid) as unknown as AttackPTR2e;
+      const { actionUuid } = event.currentTarget.dataset;
+      const action = await fromUuid(actionUuid) as unknown as AttackPTR2e;
       if (!action) return void ui.notifications.error("Action not found.");
 
       const ppCost = action.cost.powerPoints

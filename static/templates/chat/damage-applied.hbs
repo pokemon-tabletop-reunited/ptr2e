@@ -1,9 +1,37 @@
 <main {{#if undone}}class="undone"{{/if}}>
-    <p>{{#if target}}{{target.link}}{{else}}@UUID[{{_source.target}}]{{/if}} {{#if (lt damageApplied 0)}}healed for {{abs damageApplied}} {{else}}took {{damageApplied}} damage {{/if}}{{#if _notesHTML}}<i class="fas fa-info-circle small damage-info" data-tooltip="Additional Info" data-tooltip-direction="UP" data-message="{{parent.uuid}}"></i>{{/if}}</p>
-    {{#if (isGm)}}{{#unless undone}}<button class="revert-damage" data-tooltip="Revert Damage"><i class="fa-solid fa-rotate-left"></i></button>{{/unless}}{{/if}}
+  <p>
+    {{#if target}}{{target.link}}{{else}}@UUID[{{_source.target}}]{{/if}}
+      {{#if shieldApplied}}
+        {{#if (lt damageApplied 0)}}
+          Gained {{abs damageApplied}} Shield
+        {{else}}
+          Took {{damageApplied}} Shield Damage
+        {{/if}}
+      {{else if ppApplied}}
+        {{#if (lt damageApplied 0)}}
+          Gained {{abs damageApplied}} PP
+        {{else}}
+          Lost {{damageApplied}} PP
+        {{/if}}
+      {{else}}
+        {{#if (lt damageApplied 0)}}
+          Healed for {{abs damageApplied}} 
+        {{else}}
+        Took {{damageApplied}} Damage
+        {{/if}}
+      {{/if}}
+      {{#if _notesHTML}}
+        <i class="fas fa-info-circle small damage-info" data-tooltip="Additional Info" data-tooltip-direction="UP" data-message="{{parent.uuid}}"></i>
+      {{/if}}
+    </p>
+  {{#if (isGm)}}
+    {{#unless undone}}
+      <button class="revert-damage" data-tooltip="Revert Damage"><i class="fa-solid fa-rotate-left"></i></button>
+    {{/unless}}
+  {{/if}}
   {{#if rollNotes}}
-      <section class="notes">
-          {{{rollNotes}}}
-      </section>
+    <section class="notes">
+      {{{rollNotes}}}
+    </section>
   {{/if}}
 </main>

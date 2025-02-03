@@ -5,14 +5,15 @@
   "img": "systems/ptr2e/img/svg/dark_icon.svg",
   "system": {
     "slug": null,
-    "traits": [],
     "actions": [
       {
         "name": "Parodize",
         "slug": "parodize",
         "type": "attack",
         "img": "icons/svg/explosion.svg",
-        "traits": [],
+        "traits": [
+          "pp-updated"
+        ],
         "range": {
           "target": "self",
           "distance": 0,
@@ -20,9 +21,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 5,
-          "delay": null,
-          "priority": null
+          "powerPoints": 4
         },
         "variant": null,
         "types": [
@@ -38,9 +37,8 @@
         "description": "<p>Effect: Roll a dX, where X is the number of Attacks in the target's Active List. The result corresponds to where the Attack is on their Active List. The user may freely use that Attack before the end of their next Activation.</p>"
       }
     ],
-    "description": "",
     "container": null,
-    "grade": "C"
+    "grade": "B"
   },
   "effects": [],
   "sort": 7000000,

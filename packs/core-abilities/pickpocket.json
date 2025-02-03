@@ -5,33 +5,6 @@
   "system": {
     "actions": [
       {
-        "slug": "thief",
-        "name": "Thief",
-        "type": "attack",
-        "traits": [
-          "contact",
-          "pp-updated"
-        ],
-        "range": {
-          "target": "creature",
-          "distance": 1,
-          "unit": "m"
-        },
-        "cost": {
-          "activation": "complex",
-          "powerPoints": 2
-        },
-        "category": "physical",
-        "power": 60,
-        "accuracy": 100,
-        "types": [
-          "dark"
-        ],
-        "description": "<p>Effect: On hit, the user steals a random item in the target's [Accessory], [Belt], or [Held] slots and equips it to itself in a [Held] slot. If the user already has a [Held] slot occupied, the stolen item is dropped on the ground in a square adjacent to the user.</p>",
-        "free": true,
-        "img": "icons/svg/explosion.svg"
-      },
-      {
         "slug": "thief-pickpocket",
         "name": "Thief (Pickpocket)",
         "type": "attack",
@@ -57,12 +30,14 @@
         "description": "<p>Effect: On hit, the user steals a random item in the target's [Accessory], [Belt], or [Held] slots and equips it to itself in a [Held] slot. If the user already has a [Held] slot occupied, the stolen item may either be added to the user's Inventory, or the user freely uses Fling to Bewstow the item to an allied creature.</p>",
         "variant": "thief",
         "free": true,
-        "img": "icons/svg/explosion.svg"
+        "img": "icons/svg/explosion.svg",
+        "predicate": []
       }
     ],
     "description": "<p>Effect: Connection - Thief. On hitting with Thief (Pickpocket), the user steals a random item in the target's [Accessory], [Belt], or [Held] slots and equips it to itself in a [Held] slot. If the user already has a [Held] slot occupied, the stolen item may either be added to the user's Inventory, or the user freely uses Fling to Bewstow the item to an allied creature.</p>",
     "traits": [
-      "connection"
+      "connection",
+      "partial-automation"
     ],
     "slug": "pickpocket",
     "_migration": {
@@ -71,5 +46,73 @@
     }
   },
   "_id": "RbNW8PmXowslwwP3",
-  "effects": []
+  "effects": [
+    {
+      "name": "Pickpocket",
+      "type": "passive",
+      "_id": "ediOw0qtvQtGNirV",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "grant-item",
+            "key": "",
+            "value": "Compendium.ptr2e.core-moves.Item.jxorjVcjferdaDBc",
+            "predicate": [],
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "system.actions.0.free",
+                "value": "true"
+              }
+            ],
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "reevaluateOnUpdate": false,
+            "inMemoryOnly": false,
+            "allowDuplicate": true,
+            "track": false,
+            "replaceSelf": false,
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            }
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.5.1.5",
+        "createdTime": 1737417843881,
+        "modifiedTime": 1737417894502,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+      }
+    }
+  ]
 }

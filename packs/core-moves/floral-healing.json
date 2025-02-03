@@ -4,18 +4,14 @@
   "img": "systems/ptr2e/img/svg/fairy_icon.svg",
   "system": {
     "slug": "floral-healing",
-    "description": "<p>Effect: The target recovers 8 Ticks of HP. If Grassy Terrain is present, the target instead recovers 11 Ticks of HP and gains @Affliction[chanted] 5.</p>",
-    "traits": [
-      "healing",
-      "environ"
-    ],
     "actions": [
       {
         "slug": "floral-healing",
         "name": "Floral Healing",
         "type": "attack",
         "traits": [
-          "healing"
+          "healing",
+          "pp-updated"
         ],
         "range": {
           "target": "creature",
@@ -24,10 +20,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 7,
-          "delay": null,
-          "priority": null,
-          "trigger": null
+          "powerPoints": 4
         },
         "category": "status",
         "power": null,
@@ -47,7 +40,8 @@
         "type": "attack",
         "traits": [
           "healing",
-          "environ"
+          "environ",
+          "pp-updated"
         ],
         "range": {
           "target": "creature",
@@ -57,8 +51,6 @@
         "cost": {
           "activation": "complex",
           "powerPoints": 7,
-          "delay": null,
-          "priority": null,
           "trigger": "<p>Grassy Terrain is present.</p>"
         },
         "category": "status",
@@ -76,7 +68,7 @@
       }
     ],
     "container": null,
-    "grade": "A"
+    "grade": "B"
   },
   "_id": "MgFcIohy6I6MCeGg",
   "effects": []

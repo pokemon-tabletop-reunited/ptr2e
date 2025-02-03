@@ -21,6 +21,10 @@ body.theme-light {
 body.theme-light .application textarea:read-only {
   color: var(--color-dark-6);
 }
+body.theme-light #type-matrix .type[data-effectiveness="0"] {
+  background: #222224cc !important;
+  color: var(--color-light-1);
+}
 body .standard-form fieldset,
 body .application.sheet fieldset {
   padding: 0.5rem;
@@ -269,8 +273,8 @@ body .application.sheet .form-group {
 .application.sheet.actor.v2 .window-content .tab.active {
   grid-area: main;
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-  grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: repeat(5, 1fr);
   overflow: hidden;
   height: 100%;
 }
@@ -302,8 +306,13 @@ body .application.sheet .form-group {
   height: 100%;
   gap: 0;
 }
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] .inventory-sidebar {
+  grid-area: 1 / 4 / span 5 / span 2;
+  display: flex;
+  flex-direction: column;
+}
 .application.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] .inventory-points {
-  grid-area: 1 / 4 / span 2 / span 2;
+  flex: 0 0 auto;
   padding: 0.5rem 0.5rem 0 0;
 }
 .application.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] .inventory-points fieldset {
@@ -314,6 +323,25 @@ body .application.sheet .form-group {
 }
 .application.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] .inventory-points fieldset input {
   text-align: center;
+}
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] .inventory-slots {
+  flex: 0 0 auto;
+  padding: 0 0.5rem 0.5rem 0;
+}
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] .inventory-slots fieldset {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  overflow: hidden;
+  height: unset;
+}
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] .inventory-slots fieldset .form-fields {
+  flex: 0 0 50%;
+  justify-content: space-evenly;
+}
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] .inventory-slots fieldset .form-fields input {
+  text-align: center;
+  flex: 0 0 35%;
 }
 .application.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] header {
   align-items: center;
@@ -378,6 +406,17 @@ body .application.sheet .form-group {
 .application.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] ul.items .item-name.rarity-unique {
   color: #a526ff;
 }
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] ul.items .item .center {
+  display: flex;
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] ul.items .item .center p {
+  flex: 0 0 50%;
+  color: var(--hint-text-color);
+}
 .application.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] header .item-name,
 .application.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] ul.items .item-name {
   align-items: center;
@@ -439,6 +478,26 @@ body .application.sheet .form-group {
   justify-content: end;
   align-items: center;
   display: flex;
+}
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] header .item-controls > a.item-carry-type,
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] ul.items .item-controls > a.item-carry-type {
+  color: color-mix(in srgb, var(--appv2-text-color) 40%, transparent);
+  text-align: right;
+}
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] header .item-controls > a.item-carry-type.active,
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] ul.items .item-controls > a.item-carry-type.active {
+  color: var(--user-color);
+}
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] header .item-controls > a .fa-stack,
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] ul.items .item-controls > a .fa-stack {
+  margin: calc(-1 * var(0.1875rem)) calc(-1 * var(0.125rem)) 0;
+}
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] header .item-controls > a .fa-stack .fa-1,
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] ul.items .item-controls > a .fa-stack .fa-1,
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] header .item-controls > a .fa-stack .fa-2,
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] ul.items .item-controls > a .fa-stack .fa-2 {
+  left: 0.0625rem;
+  position: relative;
 }
 .application.sheet.actor.v2 .window-content .tab.active[data-tab="actions"] {
   display: grid;
@@ -783,7 +842,7 @@ body .application.sheet .form-group {
   padding: 0.5rem;
 }
 .application.sheet.actor.v2 .window-content .tab.active[data-tab="overview"] aside.stats-chart-aside fieldset {
-  background: linear-gradient(to right, rgba(7, 7, 10, 0.93), rgba(19, 17, 31, 0.95));
+  background: var(--appv2-background);
   border-radius: 8px;
   border: 1px solid var(--border-theme-color);
   display: flex;
@@ -815,7 +874,6 @@ body .application.sheet .form-group {
   padding: 0.5rem;
 }
 .application.sheet.actor.v2 .window-content .tab.active[data-tab="overview"] aside.effectiveness fieldset {
-  background: linear-gradient(to right, rgba(7, 7, 10, 0.93), rgba(19, 17, 31, 0.95));
   border-radius: 8px;
   border: 1px solid var(--border-theme-color);
   display: flex;
@@ -934,6 +992,41 @@ body .application.sheet .form-group {
   align-items: center;
   margin-left: auto;
   gap: 5px;
+}
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="biography"] .free-form {
+  grid-area: 1 / 1 / span 3 / span 3;
+  display: flex;
+  flex-direction: column;
+}
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="biography"] .free-form .biography {
+  flex: 0 0 auto;
+  padding: 0.5rem;
+}
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="biography"] .right-side {
+  grid-area: 1 / 4 / span 5 / span 2;
+  display: flex;
+  flex-direction: column;
+}
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="biography"] .right-side .tools {
+  flex: 0 0 auto;
+  padding: 0.5rem 0.5rem 0 0;
+}
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="biography"] .right-side .settings {
+  flex: 0 0 auto;
+  padding-right: 0.5rem;
+}
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="biography"] .right-side .height-size {
+  flex: 0 0 auto;
+  padding: 0 0.5rem 0.5rem 0;
+}
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="biography"] .right-side .height-size .form-group label {
+  flex: 4;
+}
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="biography"] .right-side .height-size .form-group .form-fields {
+  flex: 3;
+}
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="biography"] .right-side .height-size .form-group input {
+  text-align: center;
 }
 .application.sheet.actor.v2 .window-content .tab.active .effects-display,
 .application.sheet.actor.v2 .window-content .tab.active .perks-display,
@@ -1077,6 +1170,11 @@ body .application.sheet .form-group {
 }
 .application.sheet.actor.v2 .window-content .tab.active .effects-display {
   grid-area: span 5 / span 3;
+}
+.application.sheet.actor.v2 .window-content .tab.active .effects-display img {
+  background: black;
+  border-radius: 25%;
+  padding: 0.1rem;
 }
 .application.sheet.actor.v2 .window-content .tab.active .toggles-display {
   grid-area: 1 / 4 / span 5 / span 2;
@@ -1397,6 +1495,20 @@ body .application.sheet .form-group {
 .application.sheet.data-inspector,
 .application.sheet.active-effect-sheet {
   background: var(--appv2-background);
+}
+.application.sheet.default-sheet .form-fields button.file-picker,
+.application.sheet#perk-hud-base .form-fields button.file-picker,
+.application.sheet.pick-a-thing-prompt .form-fields button.file-picker,
+.application.sheet.known-actions-sheet .form-fields button.file-picker,
+.application.sheet.available-abilities-sheet .form-fields button.file-picker,
+.application.sheet.action-sheet .form-fields button.file-picker,
+.application.sheet.move-sheet .form-fields button.file-picker,
+.application.sheet.species-sheet .form-fields button.file-picker,
+.application.sheet.party-sheet .form-fields button.file-picker,
+.application.sheet.team-sheet .form-fields button.file-picker,
+.application.sheet.data-inspector .form-fields button.file-picker,
+.application.sheet.active-effect-sheet .form-fields button.file-picker {
+  padding: 0.3rem;
 }
 .application.sheet.default-sheet .window-content,
 .application.sheet#perk-hud-base .window-content,
@@ -2698,6 +2810,7 @@ body .application.sheet .form-group {
   display: flex;
   flex-direction: column;
   overflow: hidden;
+  gap: 0.25rem;
 }
 .application.sheet.skill-sheet .skill-editor .controls {
   display: flex;
@@ -2706,6 +2819,7 @@ body .application.sheet .form-group {
   align-items: center;
   gap: 0.5rem;
   flex: 0 0 min-content;
+  margin: 0;
 }
 .application.sheet.skill-sheet .skill-editor .controls .buttons {
   flex: 0 0 35%;
@@ -2722,6 +2836,8 @@ body .application.sheet .form-group {
 .application.sheet.skill-sheet .skill-editor .controls .points label {
   display: flex;
   flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
 }
 .application.sheet.skill-sheet .skill-editor .controls .points label span {
   margin-left: auto;
@@ -2740,6 +2856,7 @@ body .application.sheet .form-group {
   gap: 0.5rem;
   overflow: hidden;
   max-height: 520px;
+  margin: 0;
 }
 .application.sheet.skill-sheet .skill-editor .skills div.skill,
 .application.sheet.skill-sheet .skill-editor .skills header.skill {
@@ -3794,7 +3911,7 @@ body .application.sheet .form-group {
 }
 .application.sheet.stats-form .window-content aside[data-application-part="statsChart"] .stats-chart-aside {
   align-items: center;
-  background: linear-gradient(to right, rgba(7, 7, 10, 0.93), rgba(19, 17, 31, 0.95));
+  background: var(--appv2-background);
   border-radius: 10px;
   margin: 0.25rem;
 }
@@ -6966,9 +7083,9 @@ ul.item-list.result-list li.item.rarity-unique {
   color: white;
   display: grid;
   overflow: hidden;
-  grid-template-areas: "hudHeader web search" "hudActor web search" "hudPerk web search" "hudPerk web searchResults" "hudControls web searchResults";
+  grid-template-areas: "hudHeader web search" "hudActor web search" "hudZoom web search" "hudPerk web search" "hudPerk web searchResults" "hudControls web searchResults";
   grid-template-columns: 250px minmax(0, 1fr) 250px;
-  grid-template-rows: 33px 100px 130px minmax(0, 1fr) min-content;
+  grid-template-rows: 33px 100px 30px 100px minmax(0, 1fr) min-content;
   --appv2-background-opaque: linear-gradient(to right, #07070a, #13111f);
 }
 #perk-web-app .hud {
@@ -7031,8 +7148,27 @@ ul.item-list.result-list li.item.rarity-unique {
 #perk-web-app [data-application-part="hudActor"] main input {
   width: 75%;
 }
+#perk-web-app [data-application-part="hudZoom"] {
+  grid-area: hudZoom;
+}
+#perk-web-app [data-application-part="hudZoom"] footer {
+  flex: 0 0 100%;
+  display: flex;
+  flex-direction: row;
+  gap: 0.25rem;
+  justify-content: space-evenly;
+  align-items: center;
+  text-align: center;
+}
+#perk-web-app [data-application-part="hudZoom"] footer label {
+  flex: 0 0 30%;
+}
+#perk-web-app [data-application-part="hudZoom"] footer select {
+  flex: 0 0 50%;
+}
 #perk-web-app [data-application-part="hudPerk"] {
   grid-area: hudPerk;
+  border-top: 1px solid var(--border-theme-color);
 }
 #perk-web-app [data-application-part="hudPerk"] h2 {
   font-family: inherit;
@@ -7158,8 +7294,8 @@ ul.item-list.result-list li.item.rarity-unique {
   flex: 1;
 }
 #perk-web-app [data-application-part="web"] section.perk-grid.species-web {
-  grid-template-columns: repeat(30, 48px);
-  grid-template-rows: repeat(30, 48px);
+  grid-template-columns: repeat(51, 48px);
+  grid-template-rows: repeat(51, 48px);
 }
 #perk-web-app [data-application-part="web"] section.perk-grid .perk {
   height: 48px;
@@ -7616,4 +7752,245 @@ ul.item-list.result-list li.item.rarity-unique {
 }
 #perk-web-app .editing {
   --appv2-background-opaque: linear-gradient(to right, #25191c, #1f1115);
+}
+#type-matrix section.window-content {
+  padding: 0.5rem;
+  display: flex;
+  gap: 0.25rem;
+}
+#type-matrix .type-grid {
+  display: grid;
+  grid-template-columns: repeat(var(--grid-columns), 40px);
+  grid-auto-flow: row;
+  grid-auto-rows: 40px;
+  overflow: auto;
+}
+#type-matrix .type-grid .type {
+  overflow: hidden;
+  border: 1px solid var(--border-theme-color);
+  display: flex;
+  background: var(--appv2-background);
+  font-size: 15px;
+  text-align: center;
+}
+#type-matrix .type-grid .type img {
+  border: unset;
+  border-radius: 0;
+  object-fit: fill;
+  flex: 1;
+}
+#type-matrix .type-grid .type span {
+  align-self: center;
+  margin: auto;
+}
+#type-matrix .type-grid .type[data-effectiveness="0"] {
+  background: #bfbfbfaa;
+}
+#type-matrix .type-grid .type[data-effectiveness="0.5"] {
+  background: #ff8888aa;
+}
+#type-matrix .type-grid .type[data-effectiveness="2"] {
+  background: #88ff88aa;
+}
+#type-matrix .type-grid .type:hover {
+  box-shadow: inset 0 0 10px var(--appv2-text-color);
+}
+#type-matrix .type-grid .type.highlight-x {
+  border-top: 3px solid var(--appv2-text-color);
+  border-bottom: 3px solid var(--appv2-text-color);
+}
+#type-matrix .type-grid .type.highlight-y {
+  border-left: 3px solid var(--appv2-text-color);
+  border-right: 3px solid var(--appv2-text-color);
+}
+#type-matrix p.instructions {
+  text-align: center;
+}
+#type-matrix footer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+#type-matrix footer button {
+  flex: 0 0 25%;
+}
+#type-matrix-dialog {
+  max-width: 450px;
+}
+#type-matrix-dialog section.window-content {
+  padding: 0.5rem;
+  display: flex;
+  gap: 0.25rem;
+}
+#type-matrix-dialog section.window-content > div {
+  gap: 0.25rem;
+}
+#type-matrix-dialog section.window-content > div footer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+#type-matrix-dialog section.window-content > div footer button {
+  flex: 0 0 30%;
+}
+.application.sheet.perk-config-sheet .window-content {
+  display: grid;
+  grid-template-columns: unset;
+  grid-template-rows: auto min-content 3rem;
+  grid-template-areas: "priorities" "config" "footer";
+  overflow: hidden;
+  height: 100%;
+}
+.application.sheet.perk-config-sheet .window-content .config {
+  grid-area: config;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5rem;
+  border-top: 1px solid var(--border-theme-color);
+  padding: 0.25rem 1rem 0.25rem 1rem;
+  margin: unset;
+}
+.application.sheet.perk-config-sheet .window-content .config .form-group .label {
+  height: 1.5rem;
+}
+.application.sheet.perk-config-sheet .window-content .config .form-group .form-fields:has(> select) {
+  height: 1.5rem;
+}
+.application.sheet.perk-config-sheet .window-content .config .form-group p.hint {
+  height: 100%;
+}
+.application.sheet.perk-config-sheet .window-content .priorities {
+  grid-area: priorities;
+  overflow-y: auto;
+  height: 100%;
+  min-height: 100px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-areas: "priority negative";
+  padding: 0.75rem;
+  gap: 0.25rem;
+}
+.application.sheet.perk-config-sheet .window-content .priorities ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.application.sheet.perk-config-sheet .window-content .priorities ul.priority {
+  grid-area: priority;
+}
+.application.sheet.perk-config-sheet .window-content .priorities ul.negative {
+  grid-area: negative;
+}
+.application.sheet.perk-config-sheet .window-content .priorities ul.inactive {
+  grid-area: inactive;
+}
+.application.sheet.perk-config-sheet .window-content .priorities ul li {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  padding: 0.5rem;
+  border: 1px solid var(--border-theme-color);
+  border-radius: 0.75rem;
+  text-align: center;
+  position: relative;
+}
+.application.sheet.perk-config-sheet .window-content .priorities ul li.flex-row {
+  flex-wrap: wrap;
+}
+.application.sheet.perk-config-sheet .window-content .priorities ul li button {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 0.25rem;
+  border-radius: 0.5rem;
+  width: 15px;
+  font-size: 12px;
+  border: unset;
+  background: unset;
+}
+.application.sheet.perk-config-sheet .window-content .priorities ul li span {
+  flex: 0 0 30%;
+  overflow: hidden;
+}
+.application.sheet.perk-config-sheet .window-content .priorities ul li span.priority {
+  flex: 0 0 20%;
+}
+.application.sheet.perk-config-sheet .window-content .priorities ul li span.header {
+  flex: 0 0 100%;
+  justify-content: center;
+  margin-bottom: 0.25rem;
+  padding-bottom: 0.25rem;
+  font-weight: bold;
+  border-bottom: 1px solid var(--border-theme-color);
+}
+.application.sheet.perk-config-sheet .window-content .priorities ul li span.header i {
+  cursor: help;
+}
+.application.sheet.perk-config-sheet .window-content .priorities ul span {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+}
+.application.sheet.perk-config-sheet .window-content .priorities ul span button {
+  flex: 0 0 60%;
+  border-radius: 1rem;
+}
+.application.sheet.perk-config-sheet .window-content footer {
+  grid-area: footer;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  text-align: center;
+  padding: 0.5rem;
+  border-top: 1px solid var(--border-theme-color);
+  min-height: 3rem;
+}
+.application.sheet.perk-config-sheet .window-content footer button {
+  flex: 0 0 35%;
+}
+.application.sheet.dex-sheet .window-content {
+  padding: 0;
+}
+.application.sheet.dex-sheet .window-content .dex {
+  padding: 0.5rem;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: center;
+  text-align: center;
+  overflow-y: auto;
+}
+.application.sheet.dex-sheet .window-content .dex .entry {
+  flex: 0 0 64px;
+  height: 64px;
+  width: 64px;
+  border: 3px solid var(--border-theme-color);
+  border-radius: 50%;
+  overflow: hidden;
+  background: color-mix(in srgb, white 40%, var(--user-color));
+  padding: 0.25rem;
+}
+.application.sheet.dex-sheet .window-content .dex .entry img {
+  border: unset;
+  border-radius: 0;
+  object-fit: contain;
+  height: 100%;
+  width: 100%;
+}
+.application.sheet.dex-sheet .window-content .dex .entry[data-state="unknown"] {
+  border-color: #4d4c4c;
+}
+.application.sheet.dex-sheet .window-content .dex .entry[data-state="unknown"] img {
+  filter: brightness(0);
+}
+.application.sheet.dex-sheet .window-content .dex .entry[data-state="seen"] img {
+  filter: blur(3px);
+}
+.application.sheet.dex-sheet .window-content .dex .entry[data-state="caught"] {
+  border-color: #379762;
+}
+.application.sheet.dex-sheet .window-content .dex .entry[data-state="shiny"] {
+  border-color: #f5c42e;
 }

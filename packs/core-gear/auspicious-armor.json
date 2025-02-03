@@ -1,0 +1,137 @@
+{
+  "name": "Auspicious Armor",
+  "type": "equipment",
+  "system": {
+    "_migration": {
+      "version": 0.11,
+      "previous": {
+        "schema": 0.109,
+        "foundry": "12.331",
+        "system": "0.10.0-alpha.5.1.2"
+      }
+    },
+    "slug": "auspicious-armor",
+    "traits": [
+      "charcadet",
+      "armarogue",
+      "evolution",
+      "psychic",
+      "worn"
+    ],
+    "actions": [],
+    "description": "<p>Effect: Increases the user's Base DEF by +20, Base SPDEF by +30, and decreases Base SPD by -10. Increases the Power and Accuracy of [Psychic] Attacks by 10%.</p><p>Restriction: Only affects [Charcadet] or [Armarogue] creatures.</p>",
+    "crafting": {
+      "skill": "",
+      "spans": null,
+      "materials": []
+    },
+    "equipped": {
+      "carryType": "equipped",
+      "handsHeld": null,
+      "slot": "held"
+    },
+    "grade": "A",
+    "fling": {
+      "type": "psychic",
+      "power": 65,
+      "accuracy": 85,
+      "hide": false
+    },
+    "quantity": 1,
+    "rarity": "rare",
+    "identification": {
+      "misidentified": null,
+      "status": "identified",
+      "unidentified": {
+        "name": "Unidentified Item",
+        "img": "systems/ptu/css/images/icons/gear_icon.png",
+        "description": "<p>Unidentified Item</p>"
+      }
+    }
+  },
+  "img": "systems/ptr2e/img/icons/equipment_icon.webp",
+  "effects": [
+    {
+      "name": "Auspicious Armor",
+      "type": "passive",
+      "_id": "f7JtTvJPtCsazfIH",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "stats-alteration",
+            "key": "",
+            "value": 0,
+            "predicate": [],
+            "hp": null,
+            "atk": null,
+            "def": 20,
+            "spa": null,
+            "spd": 30,
+            "spe": -10,
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "percentile-modifier",
+            "key": "psychic-attack-power",
+            "value": 10,
+            "predicate": [],
+            "label": "Auspicious Armor (Power)",
+            "mode": 1,
+            "priority": null,
+            "ignored": false,
+            "hideIfDisabled": false
+          },
+          {
+            "type": "percentile-modifier",
+            "key": "psychic-attack-accuracy",
+            "value": 10,
+            "predicate": [],
+            "label": "Auspicious Armor (Accuracy)",
+            "mode": 1,
+            "priority": null,
+            "ignored": false,
+            "hideIfDisabled": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": "Item.H8Jyu9wupiygpqxO.ActiveEffect.KDfvrk0ejLb9PQUP",
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.5.2.1",
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      }
+    }
+  ],
+  "folder": "V4skAU6G3OH5fXad",
+  "flags": {},
+  "_id": "CFFlKZuXaoUni0V8"
+}
