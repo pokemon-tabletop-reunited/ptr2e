@@ -1888,9 +1888,8 @@ body {
 
     &.tutor-list {
       .window-content {
-        display: grid;
-        grid-template-columns: 40% 60%;
-        grid-template-rows: 1fr;
+        display: flex;
+        flex-direction: row;
       }
 
       aside {
@@ -1898,6 +1897,8 @@ body {
         flex-direction: column;
         padding: 1rem;
         overflow: hidden;
+        flex: 1 1 auto;
+        min-width: 220px;
 
         header {
           display: flex;
@@ -1968,8 +1969,15 @@ body {
           border-color: var(--border-theme-color);
         }
 
-        ul li {
-          margin-bottom: 0.35rem;
+        ul {
+          display: flex;
+          flex-direction: row;
+          flex-wrap: wrap;
+          gap: 0.25rem;
+
+          li {
+            list-style: none;;
+          }
         }
       }
     }
