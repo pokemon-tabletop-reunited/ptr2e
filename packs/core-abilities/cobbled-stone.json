@@ -36,10 +36,14 @@
           "activation": "free"
         },
         "description": "<p>Passive: All of the user's Rock-type attacks gain [Drain 3/8].</p>",
-        "img": "icons/svg/explosion.svg"
+        "img": "icons/svg/explosion.svg",
+        "range": {
+          "target": "enemy",
+          "unit": "m"
+        }
       }
     ],
-    "description": "<p>Trigger: The user resolves Atlas Crash.</p><p>Effect: The user freely uses Stealth Rock as if it were on their Active List. Passive: All of the user's Rock-type attacks have [Drain 3/8].</p>",
+    "description": "<p>Trigger: The user resolves Atlas Crash.</p><p>Effect: The user freely uses Stealth Rock as if it were on their Active List. Passive: All of the user's Rock-type attacks have [Drain 3/8].<br><br>Connection: Atlas Crash</p>",
     "traits": [
       "legendary",
       "defensive"
@@ -51,5 +55,73 @@
     }
   },
   "_id": "WSsH1saeCoCsJOw1",
-  "effects": []
+  "effects": [
+    {
+      "name": "Cobbled Stone",
+      "type": "passive",
+      "_id": "oBcDxWEwMYpXjzcH",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "grant-item",
+            "key": "",
+            "value": "Compendium.ptr2e.core-moves.Item.nGNLKSSBn9QOTUn6",
+            "predicate": [],
+            "allowDuplicate": false,
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "system.actions.0.free",
+                "value": "true"
+              }
+            ],
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "reevaluateOnUpdate": false,
+            "inMemoryOnly": false,
+            "track": false,
+            "replaceSelf": false,
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            }
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "1.0.0.beta-ready.2",
+        "createdTime": 1739145883001,
+        "modifiedTime": 1739145929779,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+      }
+    }
+  ]
 }
