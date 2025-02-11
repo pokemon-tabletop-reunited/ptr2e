@@ -1,0 +1,55 @@
+{
+  "name": "Salted",
+  "type": "effect",
+  "_id": "SENukczAWLKe8spK",
+  "system": {
+    "_migration": {
+      "version": 0.11,
+      "previous": null
+    },
+    "slug": null,
+    "description": "<p>Until full automation implemented, will need to be manually adjusted to 1/8 in the damage formula when applied to steel and water types.</p>",
+    "traits": [
+      "minor-affliction",
+      "damage-over-time",
+      "rock",
+      "partial-automation"
+    ]
+  },
+  "img": "systems/ptr2e/img/item-icons/shoal%20salt.webp",
+  "effects": [
+    {
+      "name": "Salted",
+      "type": "affliction",
+      "_id": "JDZhC1UWeuQZ3834",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0,
+        "priority": 50,
+        "formula": "1/16",
+        "type": "damage"
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": 5,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": []
+    }
+  ],
+  "folder": null
+}
