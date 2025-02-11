@@ -32,10 +32,10 @@ import { DataInspector } from "@module/apps/data-inspector/data-inspector.ts";
 import Clock from "@module/data/models/clock.ts";
 import ClockEditor from "@module/apps/clocks/clock-editor.ts";
 import Sortable from "sortablejs";
-import { ApplicationHeaderControlsEntry } from "types/foundry/common/applications/api.js";
 import PartySheetPTR2e from "@module/apps/party-sheet.ts";
 import { ToggleComponent } from "./components/toggle-component.ts";
 import { PerkWebApp } from "@module/apps/perk-web/perk-web-v2.ts";
+import { DexApp } from "@module/apps/dex.ts";
 
 class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixin(
   ActorSheetV2Expanded
@@ -52,42 +52,18 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
       classes: ["ptr2e", "sheet", "actor", "v2"],
       position: {
         width: 900,
-        height: 700,
+        height: 720,
       },
       window: {
         resizable: true,
         controls: [
           ...(super.DEFAULT_OPTIONS?.window?.controls ?? []),
           {
-            icon: "fas fa-cog",
-            label: "PTR2E.ActorSheet.Settings.Title",
-            action: "open-settings",
-            visible: true,
-          },
-          {
             icon: "fas fa-atom",
             label: "PTR2E.ActorSheet.Inspector",
             action: "open-inspector",
             visible: true
-          },
-          {
-            icon: "fas fa-user-group",
-            label: "PTR2E.ActorSheet.PartySheet",
-            action: "open-party-sheet",
-            visible: true,
-          },
-          {
-            icon: "fas fa-list",
-            label: "PTR2E.OpenTutorList",
-            action: "open-tutor-list",
-            visible: true,
-          },
-          {
-            icon: "fas fa-heart-circle-plus",
-            label: "PTR2E.ActorSheet.Rest",
-            action: "rest",
-            visible: true,
-          },
+          }
         ],
       },
       form: {
@@ -180,66 +156,12 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
           const toHeal = this.actor?.party ? [this.actor.party.owner!, ...(this.actor.party.party ?? [])] : [this.actor];
           new RestApp(this.document.name, toHeal).render(true);
         },
+        "open-dex": async function (this: ActorSheetPTRV2) {
+          new DexApp(this.actor).render(true);
+        },
         "add-clock": ActorSheetPTRV2.#onAddClock,
         "open-tutor-list": function (this: ActorSheetPTRV2) {
           game.ptr.tutorList.render({ force: true, actor: this.actor });
-        },
-        "open-settings": function (this: ActorSheetPTRV2) {
-          const alliance =
-            this.actor._source.system.details?.alliance === null ? "neutral" : (this.actor._source.system.details?.alliance || "default");
-          const defaultValue = game.i18n.localize(
-            this.actor.hasPlayerOwner
-              ? "PTR2E.ActorSheet.Alliance.Party"
-              : "PTR2E.ActorSheet.Alliance.Opposition",
-          );
-
-          const allianceOptions = {
-            default: game.i18n.format("PTR2E.ActorSheet.Alliance.Default", { alliance: defaultValue }),
-            opposition: "PTR2E.ActorSheet.Alliance.Opposition",
-            party: "PTR2E.ActorSheet.Alliance.Party",
-            neutral: "PTR2E.ActorSheet.Alliance.Neutral",
-          };
-          //@ts-expect-error - Type incomplete
-          const sizeFields = this.actor.system.schema.fields.details.fields.size.fields as foundry.data.fields.DataSchema;
-
-          return void foundry.applications.api.DialogV2.prompt({
-            content: `<p>${game.i18n.localize("PTR2E.ActorSheet.Settings.Content")}</p>
-            <div class="form-group"><label>${game.i18n.localize("PTR2E.FIELDS.details.alliance.label")}</label><div class="form-fields"><select name="system.details.alliance">
-            ${Object.entries(allianceOptions).map(([key, value]) => `<option value="${key}" ${key === alliance ? "selected" : ""}>${game.i18n.localize(value)}</option>`).join("")}
-            </select></div></div>${Handlebars.helpers.formField(sizeFields.height, {
-              hash: {
-                localize: true,
-                value: this.actor._source.system.details.size.height
-              }
-            })}${Handlebars.helpers.formField(sizeFields.weight, {
-              hash: {
-                localize: true,
-                value: this.actor._source.system.details.size.weight
-              }
-            })}<div class="form-group"><label>Height Class</label><div class="form-fields"><input readonly type="text" value="${game.i18n.localize(this.actor.size.toString())}"></div></div><div class="form-group"><label>Weight Class</label><div class="form-fields"><input readonly type="text" value="${this.actor.system.details.size.weightClass}"></div></div>`,
-            window: { title: game.i18n.localize("PTR2E.ActorSheet.Settings.Title") },
-            ok: {
-              label: game.i18n.localize("PTR2E.ActorSheet.Settings.Save"),
-              action: "ok",
-              callback: async (_event, target, element) => {
-                const html = element ?? target;
-                const alliance = htmlQuery<HTMLInputElement>(html, '[name="system.details.alliance"]')?.value;
-                const height = htmlQuery<HTMLInputElement>(html, '[name="system.details.size.height"]')?.value;
-                const weight = htmlQuery<HTMLInputElement>(html, '[name="system.details.size.weight"]')?.value;
-                const updateData = {
-                  ...(alliance === "default"
-                    ? { "system.details.alliance": '' }
-                    : alliance === "neutral"
-                      ? { "system.details.alliance": null }
-                      : { "system.details.alliance": alliance }),
-                  "system.details.size.height": height,
-                  "system.details.size.weight": weight,
-                }
-                return void this.actor.update(updateData);
-              }
-            },
-            rejectClose: false
-          });
         }
       },
     },
@@ -429,6 +351,21 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
         ? false
         : this.actor.system.advancement.advancementPoints.available > 0;
 
+    const alliance =
+      this.actor._source.system.details?.alliance === null ? "neutral" : (this.actor._source.system.details?.alliance || "default");
+    const defaultValue = game.i18n.localize(
+      this.actor.hasPlayerOwner
+        ? "PTR2E.ActorSheet.Alliance.Party"
+        : "PTR2E.ActorSheet.Alliance.Opposition",
+    );
+
+    const allianceOptions = {
+      default: game.i18n.format("PTR2E.ActorSheet.Alliance.Default", { alliance: defaultValue }),
+      opposition: "PTR2E.ActorSheet.Alliance.Opposition",
+      party: "PTR2E.ActorSheet.Alliance.Party",
+      neutral: "PTR2E.ActorSheet.Alliance.Neutral",
+    };
+
     return {
       ...(await super._prepareContext(options)),
       actor: this.actor,
@@ -440,6 +377,9 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
       hideHiddenSkills,
       shouldPerkFlash,
       natures: natures,
+      enrichedBiography: await TextEditor.enrichHTML(this.actor.system.details.biography),
+      allianceOptions,
+      alliance
     };
   }
 
@@ -889,7 +829,7 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
     }
   }
 
-  override _getHeaderControls(): ApplicationHeaderControlsEntry[] {
+  override _getHeaderControls(): foundry.applications.api.ApplicationHeaderControlsEntry[] {
     const controls = fu.duplicate(super._getHeaderControls());
 
     if (!this.actor.party) controls.findSplice(c => c.action === "open-party-sheet")
@@ -914,6 +854,12 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
       submitData["system.traits"] = submitData["system.traits"].filter(t => !t.virtual).map(
         (trait: { value: string }) => sluggify(trait.value)
       );
+    }
+
+    if("system.details.alliance" in submitData) {
+      const alliance = submitData["system.details.alliance"];
+      if (alliance === "default") submitData["system.details.alliance"] = '';
+      if (alliance === "neutral") submitData["system.details.alliance"] = null;
     }
 
     return super._prepareSubmitData(event, form, formData);
@@ -1179,7 +1125,7 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
 
       const handsHeld = Number(menuOption.dataset.handsHeld) || 0;
 
-      item.update({ "system.equipped": {carryType, handsHeld} });
+      item.update({ "system.equipped": { carryType, handsHeld } });
       game.tooltip.dismissLockedTooltips();
     })
     game.tooltip.activate(event.target as HTMLElement, { cssClass: "ptr2e carry-type-menu", content, locked: true });

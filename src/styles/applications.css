@@ -273,8 +273,8 @@ body .application.sheet .form-group {
 .application.sheet.actor.v2 .window-content .tab.active {
   grid-area: main;
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-  grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: repeat(5, 1fr);
   overflow: hidden;
   height: 100%;
 }
@@ -306,8 +306,13 @@ body .application.sheet .form-group {
   height: 100%;
   gap: 0;
 }
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] .inventory-sidebar {
+  grid-area: 1 / 4 / span 5 / span 2;
+  display: flex;
+  flex-direction: column;
+}
 .application.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] .inventory-points {
-  grid-area: 1 / 4 / span 2 / span 2;
+  flex: 0 0 auto;
   padding: 0.5rem 0.5rem 0 0;
 }
 .application.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] .inventory-points fieldset {
@@ -320,7 +325,7 @@ body .application.sheet .form-group {
   text-align: center;
 }
 .application.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] .inventory-slots {
-  grid-area: 3 / 4 / span 2 / span 2;
+  flex: 0 0 auto;
   padding: 0 0.5rem 0.5rem 0;
 }
 .application.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] .inventory-slots fieldset {
@@ -837,7 +842,7 @@ body .application.sheet .form-group {
   padding: 0.5rem;
 }
 .application.sheet.actor.v2 .window-content .tab.active[data-tab="overview"] aside.stats-chart-aside fieldset {
-  background: linear-gradient(to right, rgba(7, 7, 10, 0.93), rgba(19, 17, 31, 0.95));
+  background: var(--appv2-background);
   border-radius: 8px;
   border: 1px solid var(--border-theme-color);
   display: flex;
@@ -869,7 +874,6 @@ body .application.sheet .form-group {
   padding: 0.5rem;
 }
 .application.sheet.actor.v2 .window-content .tab.active[data-tab="overview"] aside.effectiveness fieldset {
-  background: linear-gradient(to right, rgba(7, 7, 10, 0.93), rgba(19, 17, 31, 0.95));
   border-radius: 8px;
   border: 1px solid var(--border-theme-color);
   display: flex;
@@ -988,6 +992,41 @@ body .application.sheet .form-group {
   align-items: center;
   margin-left: auto;
   gap: 5px;
+}
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="biography"] .free-form {
+  grid-area: 1 / 1 / span 3 / span 3;
+  display: flex;
+  flex-direction: column;
+}
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="biography"] .free-form .biography {
+  flex: 0 0 auto;
+  padding: 0.5rem;
+}
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="biography"] .right-side {
+  grid-area: 1 / 4 / span 5 / span 2;
+  display: flex;
+  flex-direction: column;
+}
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="biography"] .right-side .tools {
+  flex: 0 0 auto;
+  padding: 0.5rem 0.5rem 0 0;
+}
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="biography"] .right-side .settings {
+  flex: 0 0 auto;
+  padding-right: 0.5rem;
+}
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="biography"] .right-side .height-size {
+  flex: 0 0 auto;
+  padding: 0 0.5rem 0.5rem 0;
+}
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="biography"] .right-side .height-size .form-group label {
+  flex: 4;
+}
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="biography"] .right-side .height-size .form-group .form-fields {
+  flex: 3;
+}
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="biography"] .right-side .height-size .form-group input {
+  text-align: center;
 }
 .application.sheet.actor.v2 .window-content .tab.active .effects-display,
 .application.sheet.actor.v2 .window-content .tab.active .perks-display,
@@ -1131,6 +1170,11 @@ body .application.sheet .form-group {
 }
 .application.sheet.actor.v2 .window-content .tab.active .effects-display {
   grid-area: span 5 / span 3;
+}
+.application.sheet.actor.v2 .window-content .tab.active .effects-display img {
+  background: black;
+  border-radius: 25%;
+  padding: 0.1rem;
 }
 .application.sheet.actor.v2 .window-content .tab.active .toggles-display {
   grid-area: 1 / 4 / span 5 / span 2;
@@ -2468,15 +2512,17 @@ body .application.sheet .form-group {
   overflow-y: auto;
 }
 .application.sheet.tutor-list .window-content {
-  display: grid;
-  grid-template-columns: 40% 60%;
-  grid-template-rows: 1fr;
+  display: flex;
+  flex-direction: row;
 }
 .application.sheet.tutor-list aside {
   display: flex;
   flex-direction: column;
   padding: 1rem;
   overflow: hidden;
+  flex: 1 1 auto;
+  min-width: 220px;
+  max-width: 220px;
 }
 .application.sheet.tutor-list aside header {
   display: flex;
@@ -2536,8 +2582,14 @@ body .application.sheet .form-group {
 .application.sheet.tutor-list main h3 {
   border-color: var(--border-theme-color);
 }
+.application.sheet.tutor-list main ul {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+}
 .application.sheet.tutor-list main ul li {
-  margin-bottom: 0.35rem;
+  list-style: none;
 }
 .application.sheet.exp-tracker .window-content {
   display: grid;
@@ -3867,7 +3919,7 @@ body .application.sheet .form-group {
 }
 .application.sheet.stats-form .window-content aside[data-application-part="statsChart"] .stats-chart-aside {
   align-items: center;
-  background: linear-gradient(to right, rgba(7, 7, 10, 0.93), rgba(19, 17, 31, 0.95));
+  background: var(--appv2-background);
   border-radius: 10px;
   margin: 0.25rem;
 }
@@ -7904,4 +7956,49 @@ ul.item-list.result-list li.item.rarity-unique {
 }
 .application.sheet.perk-config-sheet .window-content footer button {
   flex: 0 0 35%;
+}
+.application.sheet.dex-sheet .window-content {
+  padding: 0;
+}
+.application.sheet.dex-sheet .window-content .dex {
+  padding: 0.5rem;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: center;
+  text-align: center;
+  overflow-y: auto;
+}
+.application.sheet.dex-sheet .window-content .dex .entry {
+  flex: 0 0 64px;
+  height: 64px;
+  width: 64px;
+  border: 3px solid var(--border-theme-color);
+  border-radius: 50%;
+  overflow: hidden;
+  background: color-mix(in srgb, white 40%, var(--user-color));
+  padding: 0.25rem;
+}
+.application.sheet.dex-sheet .window-content .dex .entry img {
+  border: unset;
+  border-radius: 0;
+  object-fit: contain;
+  height: 100%;
+  width: 100%;
+}
+.application.sheet.dex-sheet .window-content .dex .entry[data-state="unknown"] {
+  border-color: #4d4c4c;
+}
+.application.sheet.dex-sheet .window-content .dex .entry[data-state="unknown"] img {
+  filter: brightness(0);
+}
+.application.sheet.dex-sheet .window-content .dex .entry[data-state="seen"] img {
+  filter: blur(3px);
+}
+.application.sheet.dex-sheet .window-content .dex .entry[data-state="caught"] {
+  border-color: #379762;
+}
+.application.sheet.dex-sheet .window-content .dex .entry[data-state="shiny"] {
+  border-color: #f5c42e;
 }

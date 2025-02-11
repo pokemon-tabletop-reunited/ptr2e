@@ -291,6 +291,9 @@ export default class BlueprintSheet extends foundry.applications.api.HandlebarsA
           doc?.sheet?.render(true);
         })
       });
+
+      const button = this.element.querySelector<HTMLButtonElement>("div.footer button");
+      if(button) button.disabled = false;
     }
   }
 

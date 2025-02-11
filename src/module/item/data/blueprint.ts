@@ -147,6 +147,7 @@ export default abstract class BlueprintSystem extends HasEmbed(HasMigrations(fou
     // If no options, then we're generating from a blueprint window instead of a drag-and-drop
     // Thus ask for a location where to spawn the Actor(s)
     if (!options) {
+      canvas.tokens.controlled.forEach(t => t.release());
       const notification = ui.notifications.notify("Please hover over the Canvas and press 'S' to select Blueprint Spawn Location (press 'esc' to cancel)", "info", { permanent: true })
 
       options = await new Promise((resolve) => {
@@ -482,7 +483,7 @@ export default abstract class BlueprintSystem extends HasEmbed(HasMigrations(fou
         const moveItems = await Promise.all(
           levelUpMoves.map(async (move) => fromUuid(move.uuid))
         );
-        return moveItems.reduce(
+        return moveItems.reverse().reduce(
           (acc, move, index) => {
             if (move && move instanceof ItemPTR2e) {
               const moveData = move.toObject();

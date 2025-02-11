@@ -55,7 +55,7 @@ export function initializeSettings() {
     scope: "world",
     config: true,
     type: Boolean,
-    default: true,
+    default: false,
   });
 
   game.settings.register("ptr2e", "player-folder-create-permission", {

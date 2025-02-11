@@ -103,7 +103,7 @@ const GamePTR = {
     TutorListSettings.initializeAndMigrate();
 
     //@ts-expect-error No types for workers
-    game.workers.createWorker("PerkWorker", {scripts: ["/systems/ptr2e/scripts/perk-worker.js"]});
+    game.workers.createWorker("PerkWorker", {scripts: ["../systems/ptr2e/scripts/perk-worker.js"]});
   },
 };
 
