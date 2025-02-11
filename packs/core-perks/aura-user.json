@@ -18,21 +18,15 @@
         "slug": "aura-user",
         "description": "<p>You gain [Aura User].</p>",
         "cost": {
-          "activation": "free",
-          "powerPoints": 0,
-          "delay": null,
-          "priority": null
+          "activation": "free"
         },
         "type": "passive",
         "traits": [],
         "img": "icons/svg/explosion.svg",
         "range": {
           "target": "enemy",
-          "unit": "m",
-          "distance": 0
-        },
-        "variant": null,
-        "hidden": false
+          "unit": "m"
+        }
       }
     ],
     "slug": "aura-user",
@@ -67,16 +61,15 @@
         "tier": null
       }
     ],
-    "autoUnlock": [],
-    "originSlug": null,
-    "variant": null,
-    "mode": null,
+    "autoUnlock": [
+      "trait:aura-user"
+    ],
     "global": true,
     "webs": [],
     "design": {
       "arena": "mental",
       "approach": "resilience",
-      "archetype": "Aura"
+      "archetype": "aura"
     }
   },
   "_id": "ft8sIBRLOGVjp70g",
