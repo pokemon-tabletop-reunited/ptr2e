@@ -2,6 +2,7 @@
 Welcome to the Pokemon Tabletop Reunited: Evolved System, better known as PTR 2e.
 
 For full info on this system please check out [the Wiki](https://2e.ptr.wiki).
+For any questions, please join our [Discord](https://discord.gg/ptrfvtt)
 
 ## Installation Instructions
 Installing the system is incredibly easy, just plug the manifest URL into Foundry's System Install window:
