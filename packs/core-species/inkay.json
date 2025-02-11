@@ -17,19 +17,22 @@
       "primary": [
         {
           "type": "swim",
-          "value": 4
+          "value": 5
+        },
+        {
+          "type": "flight",
+          "value": 7
         }
       ],
       "secondary": [
         {
-          "type": "flight",
-          "value": 4
+          "type": "overland",
+          "value": 3
         }
       ]
     },
     "traits": [
       "pokemon",
-      "underdog",
       "hover",
       "glow-2",
       "wallclimber"
@@ -48,7 +51,7 @@
           "slug": "infiltrator"
         },
         {
-          "slug": "run-away"
+          "slug": "psych-out"
         }
       ],
       "advanced": [
@@ -56,15 +59,15 @@
           "slug": "illuminate"
         },
         {
-          "slug": "feisty"
+          "slug": "run-away"
         }
       ],
       "master": [
         {
-          "slug": "hypnotist"
+          "slug": "simple"
         },
         {
-          "slug": "simple"
+          "slug": "alluring"
         }
       ]
     },
@@ -94,7 +97,15 @@
         "group": null
       },
       {
-        "slug": "intimidation",
+        "slug": "flying",
+        "value": 25,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "intimidate",
         "value": 10,
         "rvs": 0,
         "favourite": false,
@@ -134,8 +145,24 @@
         "group": null
       },
       {
-        "slug": "running",
-        "value": 10,
+        "slug": "negotiation",
+        "value": 20,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "psychic",
+        "value": 15,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "psychology",
+        "value": 25,
         "rvs": 0,
         "favourite": false,
         "hidden": false,
@@ -151,7 +178,7 @@
       },
       {
         "slug": "stealth",
-        "value": 15,
+        "value": 20,
         "rvs": 0,
         "favourite": false,
         "hidden": false,
@@ -166,8 +193,16 @@
         "group": null
       },
       {
-        "slug": "woomy",
-        "value": 6,
+        "slug": "swim",
+        "value": 25,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "track",
+        "value": 20,
         "rvs": 0,
         "favourite": false,
         "hidden": false,
@@ -184,110 +219,150 @@
       "spe": 45
     },
     "types": [
-      "dark",
-      "psychic"
+      "psychic",
+      "dark"
     ],
     "moves": {
       "levelUp": [
         {
-          "name": "tackle",
-          "level": 1,
-          "gen": "scarlet-violet"
+          "name": "constrict",
+          "gen": "ultra-sun-ultra-moon",
+          "level": 1
         },
         {
           "name": "peck",
-          "level": 1,
-          "gen": "scarlet-violet"
+          "gen": "scarlet-violet",
+          "level": 1
         },
         {
-          "name": "constrict",
-          "level": 1,
-          "gen": "ultra-sun-ultra-moon"
+          "name": "tackle",
+          "gen": "scarlet-violet",
+          "level": 1
         },
         {
           "name": "hypnosis",
-          "level": 3,
-          "gen": "scarlet-violet"
+          "gen": "scarlet-violet",
+          "level": 3
         },
         {
           "name": "reflect",
-          "level": 4,
-          "gen": "ultra-sun-ultra-moon"
+          "gen": "ultra-sun-ultra-moon",
+          "level": 4
         },
         {
           "name": "wrap",
-          "level": 6,
-          "gen": "scarlet-violet"
+          "gen": "scarlet-violet",
+          "level": 6
         },
         {
           "name": "payback",
-          "level": 9,
-          "gen": "scarlet-violet"
+          "gen": "scarlet-violet",
+          "level": 9
         },
         {
           "name": "pluck",
-          "level": 12,
-          "gen": "scarlet-violet"
+          "gen": "scarlet-violet",
+          "level": 12
         },
         {
           "name": "psywave",
-          "level": 13,
-          "gen": "ultra-sun-ultra-moon"
+          "gen": "ultra-sun-ultra-moon",
+          "level": 13
         },
         {
           "name": "psybeam",
-          "level": 15,
-          "gen": "scarlet-violet"
+          "gen": "scarlet-violet",
+          "level": 15
         },
         {
           "name": "swagger",
-          "level": 18,
-          "gen": "scarlet-violet"
+          "gen": "scarlet-violet",
+          "level": 18
         },
         {
           "name": "slash",
-          "level": 21,
-          "gen": "scarlet-violet"
+          "gen": "scarlet-violet",
+          "level": 21
         },
         {
           "name": "night-slash",
-          "level": 24,
-          "gen": "scarlet-violet"
+          "gen": "scarlet-violet",
+          "level": 24
         },
         {
           "name": "psycho-cut",
-          "level": 27,
-          "gen": "scarlet-violet"
+          "gen": "scarlet-violet",
+          "level": 27
         },
         {
           "name": "light-screen",
-          "level": 31,
-          "gen": "ultra-sun-ultra-moon"
+          "gen": "ultra-sun-ultra-moon",
+          "level": 31
         },
         {
           "name": "switcheroo",
-          "level": 31,
-          "gen": "scarlet-violet"
+          "gen": "scarlet-violet",
+          "level": 31
         },
         {
           "name": "foul-play",
-          "level": 33,
-          "gen": "scarlet-violet"
+          "gen": "scarlet-violet",
+          "level": 33
         },
         {
           "name": "topsy-turvy",
-          "level": 36,
-          "gen": "scarlet-violet"
+          "gen": "scarlet-violet",
+          "level": 36
         },
         {
           "name": "superpower",
-          "level": 39,
-          "gen": "scarlet-violet"
+          "gen": "scarlet-violet",
+          "level": 39
         }
       ],
       "tutor": [
         {
-          "name": "disable",
+          "name": "acupressure",
+          "gen": "scarlet-violet"
+        },
+        {
+          "name": "aerial-ace",
+          "gen": "scarlet-violet"
+        },
+        {
+          "name": "ally-switch",
+          "gen": "ultra-sun-ultra-moon"
+        },
+        {
+          "name": "attract",
+          "gen": "sword-shield"
+        },
+        {
+          "name": "baton-pass",
+          "gen": "scarlet-violet"
+        },
+        {
+          "name": "bind",
+          "gen": "ultra-sun-ultra-moon"
+        },
+        {
+          "name": "calm-mind",
+          "gen": "scarlet-violet"
+        },
+        {
+          "name": "camouflage",
+          "gen": "ultra-sun-ultra-moon"
+        },
+        {
+          "name": "confide",
+          "gen": "ultra-sun-ultra-moon"
+        },
+        {
+          "name": "cut",
+          "gen": "omega-ruby-alpha-sapphire"
+        },
+        {
+          "name": "dark-pulse",
           "gen": "scarlet-violet"
         },
         {
@@ -295,15 +370,55 @@
           "gen": "scarlet-violet"
         },
         {
+          "name": "disable",
+          "gen": "scarlet-violet"
+        },
+        {
+          "name": "double-team",
+          "gen": "ultra-sun-ultra-moon"
+        },
+        {
+          "name": "embargo",
+          "gen": "ultra-sun-ultra-moon"
+        },
+        {
+          "name": "endure",
+          "gen": "scarlet-violet"
+        },
+        {
+          "name": "expanding-force",
+          "gen": "sword-shield"
+        },
+        {
+          "name": "facade",
+          "gen": "scarlet-violet"
+        },
+        {
+          "name": "fake-tears",
+          "gen": "scarlet-violet"
+        },
+        {
+          "name": "flamethrower",
+          "gen": "scarlet-violet"
+        },
+        {
+          "name": "flash",
+          "gen": "omega-ruby-alpha-sapphire"
+        },
+        {
           "name": "flatter",
           "gen": "ultra-sun-ultra-moon"
         },
         {
-          "name": "camouflage",
+          "name": "frustration",
           "gen": "ultra-sun-ultra-moon"
         },
         {
-          "name": "acupressure",
+          "name": "future-sight",
+          "gen": "scarlet-violet"
+        },
+        {
+          "name": "gravity",
           "gen": "scarlet-violet"
         },
         {
@@ -311,15 +426,99 @@
           "gen": "ultra-sun-ultra-moon"
         },
         {
+          "name": "helping-hand",
+          "gen": "scarlet-violet"
+        },
+        {
+          "name": "hidden-power",
+          "gen": "ultra-sun-ultra-moon"
+        },
+        {
+          "name": "knock-off",
+          "gen": "ultra-sun-ultra-moon"
+        },
+        {
+          "name": "lash-out",
+          "gen": "sword-shield"
+        },
+        {
+          "name": "liquidation",
+          "gen": "scarlet-violet"
+        },
+        {
+          "name": "lunge",
+          "gen": "scarlet-violet"
+        },
+        {
+          "name": "nasty-plot",
+          "gen": "scarlet-violet"
+        },
+        {
           "name": "power-split",
           "gen": "ultra-sun-ultra-moon"
+        },
+        {
+          "name": "protect",
+          "gen": "scarlet-violet"
+        },
+        {
+          "name": "psych-up",
+          "gen": "scarlet-violet"
+        },
+        {
+          "name": "psychic",
+          "gen": "scarlet-violet"
+        },
+        {
+          "name": "psyshock",
+          "gen": "scarlet-violet"
+        },
+        {
+          "name": "rain-dance",
+          "gen": "scarlet-violet"
+        },
+        {
+          "name": "rest",
+          "gen": "scarlet-violet"
+        },
+        {
+          "name": "retaliate",
+          "gen": "sword-shield"
+        },
+        {
+          "name": "return",
+          "gen": "ultra-sun-ultra-moon"
+        },
+        {
+          "name": "rock-slide",
+          "gen": "scarlet-violet"
+        },
+        {
+          "name": "role-play",
+          "gen": "ultra-sun-ultra-moon"
+        },
+        {
+          "name": "round",
+          "gen": "sword-shield"
+        },
+        {
+          "name": "secret-power",
+          "gen": "omega-ruby-alpha-sapphire"
         },
         {
           "name": "simple-beam",
           "gen": "ultra-sun-ultra-moon"
         },
         {
-          "name": "bind",
+          "name": "skill-swap",
+          "gen": "scarlet-violet"
+        },
+        {
+          "name": "sleep-talk",
+          "gen": "scarlet-violet"
+        },
+        {
+          "name": "snatch",
           "gen": "ultra-sun-ultra-moon"
         },
         {
@@ -331,71 +530,7 @@
           "gen": "ultra-sun-ultra-moon"
         },
         {
-          "name": "role-play",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "knock-off",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "snatch",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "telekinesis",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "ally-switch",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "expanding-force",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "lash-out",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "cut",
-          "gen": "omega-ruby-alpha-sapphire"
-        },
-        {
-          "name": "flamethrower",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "thunderbolt",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "toxic",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "psychic",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "double-team",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "swift",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "flash",
-          "gen": "omega-ruby-alpha-sapphire"
-        },
-        {
-          "name": "rest",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "rock-slide",
+          "name": "stored-power",
           "gen": "scarlet-violet"
         },
         {
@@ -403,63 +538,11 @@
           "gen": "scarlet-violet"
         },
         {
-          "name": "thief",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "protect",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "endure",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "attract",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "sleep-talk",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "return",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "frustration",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "baton-pass",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "hidden-power",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "rain-dance",
-          "gen": "scarlet-violet"
-        },
-        {
           "name": "sunny-day",
           "gen": "scarlet-violet"
         },
         {
-          "name": "psych-up",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "future-sight",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "torment",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "facade",
+          "name": "swift",
           "gen": "scarlet-violet"
         },
         {
@@ -467,83 +550,35 @@
           "gen": "scarlet-violet"
         },
         {
-          "name": "helping-hand",
+          "name": "telekinesis",
+          "gen": "ultra-sun-ultra-moon"
+        },
+        {
+          "name": "tera-blast",
           "gen": "scarlet-violet"
+        },
+        {
+          "name": "thief",
+          "gen": "scarlet-violet"
+        },
+        {
+          "name": "thunderbolt",
+          "gen": "scarlet-violet"
+        },
+        {
+          "name": "torment",
+          "gen": "ultra-sun-ultra-moon"
+        },
+        {
+          "name": "toxic",
+          "gen": "ultra-sun-ultra-moon"
         },
         {
           "name": "trick",
           "gen": "scarlet-violet"
         },
         {
-          "name": "skill-swap",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "secret-power",
-          "gen": "omega-ruby-alpha-sapphire"
-        },
-        {
-          "name": "fake-tears",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "aerial-ace",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "calm-mind",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "gravity",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "embargo",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "dark-pulse",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "nasty-plot",
-          "gen": "scarlet-violet"
-        },
-        {
           "name": "trick-room",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "psyshock",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "round",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "stored-power",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "retaliate",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "confide",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "lunge",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "liquidation",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "tera-blast",
           "gen": "scarlet-violet"
         }
       ]
@@ -577,13 +612,25 @@
             "item": null,
             "level": null,
             "knownMove": null
+          },
+          "perk": {
+            "x": 26,
+            "y": 26
           }
         }
       ],
-      "uuid": "Compendium.ptr2e.core-species.Item.Ka9QR5URX4MiaC2I"
+      "uuid": "Compendium.ptr2e.core-species.Item.Ka9QR5URX4MiaC2I",
+      "methods": [],
+      "perk": {
+        "x": 26,
+        "y": 26
+      }
+    },
+    "_migration": {
+      "version": null,
+      "previous": null
     }
   },
   "_id": "Ka9QR5URX4MiaC2I",
-  "effects": [],
-  "folder": null
+  "effects": []
 }
