@@ -17,13 +17,30 @@
       </div>
       {{formField fields.level value=blueprint._source.level localize=true}}
       {{formField fields.nature value=blueprint._source.nature localize=true}}
+      {{formField fields.gender value=blueprint._source.gender localize=true}}
       {{formField fields.shiny value=blueprint._source.shiny localize=true}}
       {{formField fields.preventEvolution value=blueprint._source.preventEvolution localize=true}}
+    </fieldset>
+    <fieldset class="perk-config">
+      <legend>Perk Generation</legend>
+      <div class="form-group">
+        <label>{{localize "PTR2E.GeneratorConfig.label"}}</label>
+        <div class="form-fields">
+          {{#if blueprint.config}}
+            <a class="content-link" draggable="true" data-action="open-config" data-uuid="{{uuid}}" data-id="{{blueprint.id}}" data-type="GeneratorConfig" data-tooltip="Open {{#if blueprint.config.label}}{{blueprint.config.label}}{{else}}Perk Generator Config{{/if}}"><i class="fas fa-rectangle-list"></i>{{#if blueprint.config.label}}{{blueprint.config.label}}{{else}}Perk Generator Config{{/if}}</a>
+          {{else}}
+            <div class="empty">
+              <span class="name">No Perk Generator Config created yet, drag one here or <button type="button" data-action="create-config">Create New Config</button></span>
+            </div>
+          {{/if}}
+        </div>
+        <p class="hint">{{localize "PTR2E.GeneratorConfig.hint"}}</p>
+      </div>
     </fieldset>
   {{else}}
     <div class="empty">
       <span class="name">No Blueprint has been selected, please select one from the side</span>
-  </div>
+    </div>
   {{/if}}
   <div class="footer">
     <button>Generate Actor(s)</button>

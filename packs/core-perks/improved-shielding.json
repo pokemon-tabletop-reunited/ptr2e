@@ -7,7 +7,7 @@
   "system": {
     "actions": [],
     "slug": "improved-shielding",
-    "description": "<p>Whenever you would gain Shields, you gain an additional 2 Ticks of Shields.</p>",
+    "description": "<p>Whenever you would gain Shields, you gain an additional @Tick[2 shield].<br><br></p>",
     "traits": [],
     "prerequisites": [
       "#A Perk which grants Shields"
@@ -42,11 +42,13 @@
       }
     ],
     "autoUnlock": [],
-    "originSlug": null,
-    "variant": null,
-    "mode": null,
     "global": true,
-    "webs": []
+    "webs": [],
+    "design": {
+      "arena": "physical",
+      "approach": "resilience",
+      "archetype": "tank"
+    }
   },
   "effects": []
 }

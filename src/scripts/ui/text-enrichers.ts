@@ -91,11 +91,22 @@ export class TextEnricher {
     const isDamage = amount < 0;
     const biggerThanOne = Math.abs(amount) > 1;
 
+    const isPPBased = !!options?.pp;
+    const isShieldBased = !!options?.shield && !isPPBased;
+
     const span = document.createElement("span");
     span.classList.add("tick");
     span.dataset.tooltipDirection = options?.direction || "UP";
     span.dataset.amount = amount.toString();
-    span.dataset.tooltip = `${amount} Tick ${isDamage ? "Damage" : "Healing"}`;
+    span.dataset.pp = isPPBased.toString();
+    span.dataset.shield = isShieldBased.toString();
+    span.dataset.tooltip = isPPBased
+      ? isDamage
+        ? `Drain ${amount} Ticks of PP`
+        : `Restore ${amount} Ticks of PP`
+      : isShieldBased
+        ? `${amount} Tick${biggerThanOne ? "s" : ""} of Shield${isDamage ? " Damage" : ""}`
+        : `${amount} Tick${biggerThanOne ? "s" : ""} of ${isDamage ? "Damage" : "Healing"}`;
     span.append((() => {
       const name = label || `${amount} Tick${biggerThanOne ? "s" : ""}`;
       return TextEditor.createAnchor({
@@ -105,8 +116,20 @@ export class TextEnricher {
         dataset: {
           type: "Tick",
           amount: amount.toString(),
+          shield: isShieldBased.toString(),
+          pp: isPPBased.toString(),
         },
-        icon: isDamage ? "fas fa-burst" : "fas fa-heart",
+        icon: isPPBased
+          ? isDamage
+            ? "fa-solid fa-battery-slash"
+            : "fa-solid fa-battery-bolt"
+          : isShieldBased
+            ? isDamage
+              ? "fa-duotone fa-solid fa-shield-slash"
+              : "fas fa-shield"
+            : isDamage
+              ? "fas fa-burst"
+              : "fas fa-heart",
       })
     })());
     return span;
@@ -138,9 +161,12 @@ export class TextEnricher {
     const targets = canvas.tokens.controlled.length ? canvas.tokens.controlled.flatMap(t => t.actor ?? []) : game.user.character ? [game.user.character] : [];
     if (!targets.length) return void ui.notifications.error(game.i18n.localize("PTR2E.Notifications.NoTokenSelected"));
 
+    const isShieldBased = a.dataset.shield === "true";
+    const isPPBased = a.dataset.pp === "true";
+
     //TODO: This should probably be updated to allow for doing all updates in one, as well as merging all chat messages.
     for (const actor of targets) {
-      await actor.applyTickDamage({ ticks: amount, apply: true });
+      await actor.applyTickDamage({ ticks: amount, apply: true, shield: isShieldBased, pp: isPPBased });
     }
   }
 
@@ -167,7 +193,7 @@ export class TextEnricher {
         }
 
         const colonIdx = part.indexOf(":");
-        const portions = colonIdx >= 0 ? [part.slice(0, colonIdx), part.slice(colonIdx + 1)] : [part, ""];
+        const portions = colonIdx >= 0 ? [part.slice(0, colonIdx).trim(), part.slice(colonIdx + 1)] : [part.trim(), "true"];
         result[portions[0]] = portions[1];
 
         return result;
@@ -194,7 +220,7 @@ const AfflictionEnricher: TextEditorEnricherConfig = {
 }
 
 const TickEnricher: TextEditorEnricherConfig = {
-  pattern: /@(?<type>Tick)\[(?<amount>[0-9-]+)](?:{(?<label>[^}]+)})?/gi,
+  pattern: /@(?<type>Tick)\[(?<amount>[0-9-]+)(?<options>[^\]]*)](?:{(?<label>[^}]+)})?/gi,
   enricher: async (match: RegExpMatchArray): Promise<HTMLElement | null> => {
     return TextEnricher.enrich(match);
   }

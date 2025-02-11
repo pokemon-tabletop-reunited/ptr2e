@@ -75,6 +75,12 @@
 
       {{formField fields.description enriched=enrichedDescription value=source.system.description toggled=true localize=true}}
     </fieldset>
+    <fieldset>
+      <legend>Perk Design</legend>
+      {{formField fields.design.fields.arena value=source.system.design.arena localize=true}}
+      {{formField fields.design.fields.approach value=source.system.design.approach localize=true}}
+      {{formField fields.design.fields.archetype value=source.system.design.archetype localize=true}}
+    </fieldset>
     {{#each source.system.nodes as |node|}}
       <fieldset>
         <legend>
@@ -99,13 +105,13 @@
             <legend>
               Display Configuration
             </legend>
-            {{formField ../fields.nodes.element.fields.config.fields.alpha value=node.config.alpha localize=true name=(concat "system.nodes." @index ".config.alpha")}}
+            {{!-- {{formField ../fields.nodes.element.fields.config.fields.alpha value=node.config.alpha localize=true name=(concat "system.nodes." @index ".config.alpha")}}
             {{formField ../fields.nodes.element.fields.config.fields.backgroundColor value=node.config.backgroundColor localize=true name=(concat "system.nodes." @index ".config.backgroundColor")}}
             {{formField ../fields.nodes.element.fields.config.fields.borderColor value=node.config.borderColor localize=true name=(concat "system.nodes." @index ".config.borderColor")}}
-            {{formField ../fields.nodes.element.fields.config.fields.borderWidth value=node.config.borderWidth localize=true name=(concat "system.nodes." @index ".config.borderWidth")}}
+            {{formField ../fields.nodes.element.fields.config.fields.borderWidth value=node.config.borderWidth localize=true name=(concat "system.nodes." @index ".config.borderWidth")}} --}}
             {{formField ../fields.nodes.element.fields.config.fields.texture value=node.config.texture localize=true name=(concat "system.nodes." @index ".config.texture")}}
-            {{formField ../fields.nodes.element.fields.config.fields.tint value=node.config.tint localize=true name=(concat "system.nodes." @index ".config.tint")}}
-            {{formField ../fields.nodes.element.fields.config.fields.scale value=node.config.scale localize=true name=(concat "system.nodes." @index ".config.scale")}}
+            {{!-- {{formField ../fields.nodes.element.fields.config.fields.tint value=node.config.tint localize=true name=(concat "system.nodes." @index ".config.tint")}}
+            {{formField ../fields.nodes.element.fields.config.fields.scale value=node.config.scale localize=true name=(concat "system.nodes." @index ".config.scale")}} --}}
           </fieldset>
         </div>
         <footer class="d-flex flex-row justify-content-center align-items-center">
@@ -121,6 +127,18 @@
               Delete Node
             </button>
           {{/unless}}
+        </footer>
+      </fieldset>
+    {{else}}
+      <fieldset>
+        <legend>
+          Node Configuration
+        </legend>
+        <footer class="d-flex flex-row justify-content-center align-items-center">
+          <button type="button" class="fb-35" data-action="add-node">
+            <i class="fas fa-plus"></i>
+            Add Node
+          </button>
         </footer>
       </fieldset>
     {{/each}}

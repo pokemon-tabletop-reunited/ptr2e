@@ -318,8 +318,8 @@ body {
                 grid-area: main;
 
                 display: grid;
-                grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-                grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+                grid-template-columns: repeat(5, 1fr);
+                grid-template-rows: repeat(5, 1fr);
                 overflow: hidden;
                 height: 100%;
 
@@ -359,8 +359,14 @@ body {
                         gap: 0;
                     }
 
+                    .inventory-sidebar {
+                      grid-area: 1 / 4 / span 5 / span 2;
+                      display: flex;
+                      flex-direction: column;
+                    }
+
                     .inventory-points {
-                        grid-area: 1 / 4 / span 2 / span 2;
+                        flex: 0 0 auto;
                         padding: 0.5rem 0.5rem 0 0;
                         
                         fieldset {
@@ -373,6 +379,29 @@ body {
                                 text-align: center;
                             }
                         }
+                    }
+
+                    .inventory-slots {
+                      flex: 0 0 auto;
+                      padding: 0 0.5rem 0.5rem 0;
+
+                      fieldset {
+                        display: flex;
+                        flex-direction: column;
+                        flex-wrap: nowrap;
+                        overflow: hidden;
+                        height: unset;
+
+                        .form-fields {
+                          flex: 0 0 50%;
+                          justify-content: space-evenly;
+
+                          input {
+                            text-align: center;
+                            flex: 0 0 35%;
+                          }
+                        }
+                      }
                     }
 
                     header {
@@ -450,6 +479,18 @@ body {
                                 color: #a526ff;
                             }
                         }
+
+                        .item .center {
+                          display: flex;
+                          flex: 1;
+                          justify-content: center;
+                          align-items: center;
+                          text-align: center;
+                          p {
+                            flex: 0 0 50%;
+                            color: var(--hint-text-color);
+                          }
+                        }
                     }
                     header, ul.items {
                         .item-name {
@@ -502,12 +543,34 @@ body {
                         }
     
                         .item-controls {
-                            flex-basis: 4.75rem;
-                            gap: 1px;
-                            justify-content: end;
-    
-                            align-items: center;
-                            display: flex;
+                          flex-basis: 4.75rem;
+                          gap: 1px;
+                          justify-content: end;
+  
+                          align-items: center;
+                          display: flex;
+
+                          > a {
+                            &.item-carry-type {
+                              color: color-mix(in srgb, var(--appv2-text-color) 40%, transparent);
+                              text-align: right;
+
+                              &.active {
+                                color: var(--user-color);
+                              }
+                            }
+
+                            // Hands-held with interior number
+                            .fa-stack {
+                              margin: calc(-1 * var(0.1875rem)) calc(-1 * var(0.125rem)) 0;
+
+                              .fa-1,
+                              .fa-2 {
+                                left: 0.0625rem;;
+                                position: relative;
+                              }
+                            }
+                          }
                         }
                     }
                 }
@@ -897,7 +960,7 @@ body {
                         padding: 0.5rem;
 
                         fieldset {
-                            background: linear-gradient(to right, rgba(7, 7, 10, 0.93), rgba(19, 17, 31, 0.95));
+                            background: var(--appv2-background);
                             border-radius: 8px;
                             border: 1px solid var(--border-theme-color);
     
@@ -935,7 +998,7 @@ body {
                       padding: 0.5rem;
 
                       fieldset {
-                        background: linear-gradient(to right, rgba(7, 7, 10, 0.93), rgba(19, 17, 31, 0.95));
+                        // background: linear-gradient(to right, rgba(7, 7, 10, 0.93), rgba(19, 17, 31, 0.95));
                         border-radius: 8px;
                         border: 1px solid var(--border-theme-color);
 
@@ -1094,6 +1157,53 @@ body {
                     }
                 }
 
+                &[data-tab="biography"] {
+                  .free-form {
+                    grid-area: 1 / 1 / span 3 / span 3;
+                    display: flex;
+                    flex-direction: column;
+
+                    .biography {
+                      flex: 0 0 auto;
+                      padding: 0.5rem;
+                    }
+                  }
+
+                  .right-side {
+                    grid-area: 1 / 4 / span 5 / span 2;
+                    display: flex;
+                    flex-direction: column;
+
+                    .tools {
+                      flex: 0 0 auto;
+                      padding: 0.5rem 0.5rem 0 0;
+                    }
+
+                    .settings {
+                      flex: 0 0 auto;
+                      padding-right: 0.5rem;
+                    }
+
+                    .height-size {
+                      flex: 0 0 auto;
+                      padding: 0 0.5rem 0.5rem 0;
+
+                      .form-group {
+                        label {
+                          flex: 4;
+                        }
+                        .form-fields {
+                          flex: 3;
+                        }
+
+                        input {
+                          text-align: center;
+                        }
+                      }
+                    }
+                  }
+                }
+
                 .effects-display, .perks-display, .abilities-display, .toggles-display {
                     padding: 0.5rem;
 
@@ -1133,6 +1243,12 @@ body {
 
                 .effects-display {
                     grid-area: span 5 / span 3;
+
+                  img {
+                    background: black;
+                    border-radius: 25%;
+                    padding: 0.1rem;
+                  }
                 }
 
                 .toggles-display {
@@ -1772,9 +1888,8 @@ body {
 
     &.tutor-list {
       .window-content {
-        display: grid;
-        grid-template-columns: 40% 60%;
-        grid-template-rows: 1fr;
+        display: flex;
+        flex-direction: row;
       }
 
       aside {
@@ -1782,6 +1897,9 @@ body {
         flex-direction: column;
         padding: 1rem;
         overflow: hidden;
+        flex: 1 1 auto;
+        min-width: 220px;
+        max-width: 220px;
 
         header {
           display: flex;
@@ -1852,8 +1970,15 @@ body {
           border-color: var(--border-theme-color);
         }
 
-        ul li {
-          margin-bottom: 0.35rem;
+        ul {
+          display: flex;
+          flex-direction: row;
+          flex-wrap: wrap;
+          gap: 0.25rem;
+
+          li {
+            list-style: none;;
+          }
         }
       }
     }
@@ -2144,6 +2269,7 @@ body {
             display: flex;
             flex-direction: column;
             overflow: hidden;
+            gap: 0.25rem;
 
             .controls {
                 display: flex;
@@ -2152,6 +2278,7 @@ body {
                 align-items: center;
                 gap: 0.5rem;
                 flex: 0 0 min-content;
+                margin: 0;
 
                 .buttons {
                     flex: 0 0 35%;
@@ -2169,6 +2296,9 @@ body {
                     label {
                         display: flex;
                         flex-direction: row;
+                        align-items: center;
+                        justify-content: space-between;
+
                         span {
                             margin-left: auto;
                             align-self: flex-end;
@@ -2191,6 +2321,7 @@ body {
                 gap: 0.5rem;
                 overflow: hidden;
                 max-height: 520px;
+                margin: 0;
 
                 div.skill, header.skill {
                     display: flex;
@@ -3401,7 +3532,6 @@ body {
 
             aside[data-application-part="baseStats"] {
                 grid-area: baseStats;
-
                 form#base-stats-form {
                     display: flex;
                     flex-direction: column;
@@ -3424,7 +3554,6 @@ body {
 
             aside[data-application-part="evStats"] {
                 grid-area: evStats;
-
                 margin-top: 0.25rem;
 
                 form#ev-stats-form {
@@ -3462,7 +3591,7 @@ body {
 
                 .stats-chart-aside {
                     align-items: center;
-                    background: linear-gradient(to right, rgba(7, 7, 10, 0.93), rgba(19, 17, 31, 0.95));
+                    background: var(--appv2-background);
                     border-radius: 10px;
                     margin: 0.25rem;
 
@@ -7459,8 +7588,8 @@ body {
       flex: 1;
 
       &.species-web {
-        grid-template-columns: repeat(30, 48px);
-        grid-template-rows: repeat(30, 48px);
+        grid-template-columns: repeat(51, 48px);
+        grid-template-rows: repeat(51, 48px);
       }
 
       .perk {
@@ -8177,6 +8306,210 @@ body {
 
         button {
           flex: 0 0 30%;
+        }
+      }
+    }
+  }
+}
+
+.application.sheet.perk-config-sheet {
+  .window-content {
+    display: grid;
+    grid-template-columns: unset;
+    grid-template-rows: auto min-content 3rem;
+    grid-template-areas: 
+      "priorities"
+      "config"
+      "footer";
+    overflow: hidden;
+    height: 100%;
+
+    .config {
+      grid-area: config;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.5rem;
+      border-top: 1px solid var(--border-theme-color);
+      padding: 0.25rem 1rem 0.25rem 1rem;
+      margin: unset;
+
+      .form-group {
+        .label {
+          height: 1.5rem;
+        }
+        .form-fields:has(> select) {
+          height: 1.5rem;
+        }
+        p.hint {
+          height: 100%;
+        }
+      }
+    }
+
+    .priorities {
+      grid-area: priorities;
+      overflow-y: auto;
+      height: 100%;
+      min-height: 100px;
+
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-areas: 
+        "priority negative";
+
+      padding: 0.75rem;
+      gap: 0.25rem;
+
+      ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+
+        &.priority {
+          grid-area: priority;
+        }
+
+        &.negative {
+          grid-area: negative;
+        }
+
+        &.inactive {
+          grid-area: inactive;
+        }
+
+        li {
+          display: flex;
+          flex-direction: row;
+          justify-content: space-evenly;
+          padding: 0.5rem;
+          border: 1px solid var(--border-theme-color);
+          border-radius: 0.75rem;
+          text-align: center;
+          position: relative;
+
+          &.flex-row {
+            flex-wrap: wrap;
+          }
+
+          button {
+            position: absolute;
+            top: 0;
+            right: 0;
+            padding: 0.25rem;
+            border-radius: 0.5rem;
+            width: 15px;
+            font-size: 12px;
+            border: unset;
+            background: unset;
+          }
+
+          span {
+            flex: 0 0 30%;
+            overflow: hidden;
+
+            &.priority {
+              flex: 0 0 20%;
+            }
+
+            &.header {
+              flex: 0 0 100%;
+              justify-content: center;
+              margin-bottom: 0.25rem;
+              padding-bottom: 0.25rem;
+              font-weight: bold;
+              border-bottom: 1px solid var(--border-theme-color);
+
+              i {
+                cursor: help;
+              }
+            }
+          }
+        }
+
+        span {
+          display: flex;
+          flex-direction: row;
+          justify-content: space-evenly;
+          align-items: center;
+
+          button {
+            flex: 0 0 60%;
+            border-radius: 1rem;
+          }
+        }
+      }
+    }
+
+    footer {
+      grid-area: footer;
+      display: flex;
+      justify-content: space-evenly;
+      align-items: center;
+      text-align: center;
+      padding: 0.5rem;
+      border-top: 1px solid var(--border-theme-color);
+      min-height: 3rem;
+
+      button {
+        flex: 0 0 35%;
+      }
+    }
+  }
+}
+
+.application.sheet.dex-sheet {
+  .window-content {
+    padding: 0;
+
+    .dex {
+      padding: 0.5rem;
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      align-items: center;
+      text-align: center;
+      overflow-y: auto;
+
+      .entry {
+        flex: 0 0 64px;
+        height: 64px;
+        width: 64px;
+        border: 3px solid var(--border-theme-color);
+        border-radius: 50%;
+        overflow: hidden;
+
+        background: color-mix(in srgb, white 40%, var(--user-color));
+        padding: 0.25rem;
+
+        img {
+          border: unset;
+          border-radius: 0;
+          object-fit: contain;
+          height: 100%;
+          width: 100%;
+        }
+
+        &[data-state="unknown"] {
+          border-color: #4d4c4c;
+
+          img {
+            filter: brightness(0);
+          }
+        }
+
+        &[data-state="seen"] {
+          img {
+            filter: blur(3px);
+          }
+        }
+
+        &[data-state="caught"] {
+          border-color: #379762;
+        }
+
+        &[data-state="shiny"] {
+          border-color: #f5c42e;
         }
       }
     }

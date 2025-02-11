@@ -24,11 +24,12 @@
         "img": "icons/svg/explosion.svg"
       }
     ],
-    "description": "<p>Effect: The user takes no damage from attacks that are not super effective.</p>",
+    "description": "<p>Effect: The user takes no damage from attacks that are not super effective. Your HP may never be greater than 1.</p>",
     "traits": [
       "defensive",
       "aura",
-      "innate"
+      "innate",
+      "partial-automation"
     ],
     "slug": "wonder-guard",
     "_migration": {
@@ -37,5 +38,57 @@
     }
   },
   "_id": "Xq5kvoc607r5Le0C",
-  "effects": []
+  "effects": [
+    {
+      "name": "Wonder Guard",
+      "type": "passive",
+      "_id": "q81LzCfKsJT9URrs",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "basic",
+            "key": "system.health.max",
+            "value": 1,
+            "mode": 5,
+            "predicate": [],
+            "priority": null,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "1.0.0.beta-ready.2",
+        "createdTime": 1739053745194,
+        "modifiedTime": 1739053775750,
+        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
+      }
+    }
+  ]
 }

@@ -24,7 +24,8 @@
     ],
     "description": "<p>Effect: The user is immune to the damage and effects of [Sonic] Actions and Attacks.</p>",
     "traits": [
-      "defensive"
+      "defensive",
+      "partial-automation"
     ],
     "slug": "soundproof",
     "_migration": {
@@ -33,5 +34,58 @@
     }
   },
   "_id": "Rvu4BklCGJmPB6cf",
-  "effects": []
+  "effects": [
+    {
+      "name": "Soundproof",
+      "type": "passive",
+      "_id": "5Ro1zcINwDZcHyUh",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "ephemeral-modifier",
+            "key": "sonic-trait-attack-damage-percentile",
+            "value": -100,
+            "predicate": [],
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "hideIfDisabled": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.5.1.6",
+        "createdTime": 1737568944899,
+        "modifiedTime": 1737568974700,
+        "lastModifiedBy": "IcBpMqhFuTck9VpX"
+      }
+    }
+  ]
 }

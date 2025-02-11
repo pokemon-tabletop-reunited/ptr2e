@@ -4,7 +4,7 @@
   "_id": "kcSZtxZKLGvv9E6M",
   "img": "systems/ptr2e/img/svg/grass_icon.svg",
   "system": {
-    "slug": null,
+    "slug": "natures-chorale",
     "actions": [
       {
         "name": "Nature's Chorale",
@@ -25,38 +25,89 @@
           "activation": "complex",
           "powerPoints": 6
         },
-        "variant": null,
         "types": [
           "grass"
         ],
         "category": "special",
         "power": 70,
         "accuracy": 90,
-        "contestType": "",
-        "contestEffect": "",
-        "free": false,
-        "slot": null,
-        "description": "<p>Effect: On hit, all valid targets have a 20% chance of gaining @Affliction[unlucky] 5 and a 20% chance of gaining @Affliction[disabled] 5 for a random attack on their Active List.</p>"
+        "description": "<p>Effect: On hit, all valid targets have a 20% chance of gaining @Affliction[unlucky] 5 and a 20% chance of gaining @Affliction[disabled] 5 for a random attack on their Active List.</p>",
+        "predicate": []
       }
     ],
-    "container": null,
-    "grade": "A"
+    "grade": "A",
+    "traits": [],
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
   },
-  "effects": [],
-  "sort": 0,
-  "ownership": {
-    "default": 0,
-    "CYLdyr5mPSDmNpTp": 3
-  },
-  "flags": {},
-  "_stats": {
-    "compendiumSource": null,
-    "duplicateSource": null,
-    "coreVersion": "12.328",
-    "systemId": "ptr2e",
-    "systemVersion": "0.10.0-alpha.1.5.2",
-    "createdTime": 1720796870145,
-    "modifiedTime": 1720797036305,
-    "lastModifiedBy": "CYLdyr5mPSDmNpTp"
-  }
+  "effects": [
+    {
+      "name": "Nature's Chorale",
+      "type": "passive",
+      "_id": "h3Pl91g3K4ItDYUA",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "natures-chorale-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.unluckycondiitem",
+            "predicate": [],
+            "chance": 20,
+            "affects": "target",
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "alterations": []
+          },
+          {
+            "type": "roll-effect",
+            "key": "natures-chorale-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.disabledconditem",
+            "predicate": [],
+            "chance": 20,
+            "affects": "target",
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "alterations": []
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.5.2.1",
+        "createdTime": 1737742604545,
+        "modifiedTime": 1737742650627,
+        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
+      }
+    }
+  ]
 }

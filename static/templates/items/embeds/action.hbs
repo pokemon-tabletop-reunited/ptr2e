@@ -59,7 +59,13 @@
           <legend>Effect Description</legend>
           {{#if action.description}}
             <article>
-              {{{action.description}}}
+              {{#if action.enrichedDescription}}
+                {{{action.enrichedDescription}}}
+              {{else if enrichedDescription}}
+                {{{enrichedDescription}}}
+              {{else}}
+                {{{action.description}}}
+              {{/if}}
             </article>
           {{else}}
             <article class="center">

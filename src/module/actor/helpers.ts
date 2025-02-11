@@ -128,6 +128,29 @@ async function resolveCapture(originUuid: string, targetUuid: string, success: b
             }
           }).toObject());
           if(!newActor) return void ui.notifications.error("Unable to resolve capture; new actor could not be created.");
+          
+          if(newActor.species) {
+            const dexSource = trainerActor.toObject().system.details.dex  as unknown as { slug: string, state: "unknown" | "seen" | "caught" | "shiny" }[];
+            const fullSlug = newActor.species.slug + (newActor.species.form ? `-${newActor.species.form}` : "");
+            const existing = trainerActor.system.details.dex.get(fullSlug);
+            const newState = newActor.species?.shiny ? "shiny" : "caught";
+            if(existing && existing.state !== "shiny" && existing.state !== newState) {
+              const index = dexSource.findIndex(d => d.slug === fullSlug);
+              dexSource[index].state = newState;
+              await trainerActor.update({
+                "system.details.dex": dexSource
+              })
+            } else if(!existing) {
+              dexSource.push({
+                slug: fullSlug,
+                state: newState
+              });
+              await trainerActor.update({
+                "system.details.dex": dexSource
+              })
+            }
+          }
+
           return void await ChatMessagePTR2e.create({
             speaker: { alias: "Pokemon Tabletop Reunited"},
             content: `${trainerActor.link} has captured ${newActor.link}!`
@@ -145,6 +168,28 @@ async function resolveCapture(originUuid: string, targetUuid: string, success: b
             actorLink: true
           }
         })
+
+        if(targetActor.species) {
+          const fullSlug = targetActor.species.slug + (targetActor.species.form ? `-${targetActor.species.form}` : "");
+          const dexSource = trainerActor.toObject().system.details.dex as unknown as { slug: string, state: "unknown" | "seen" | "caught" | "shiny" }[];
+          const existing = trainerActor.system.details.dex.get(fullSlug);
+          const newState = targetActor.species?.shiny ? "shiny" : "caught";
+          if(existing && existing.state !== "shiny" && existing.state !== newState) {
+            const index = dexSource.findIndex(d => d.slug === fullSlug);
+            dexSource[index].state = newState;
+            await trainerActor.update({
+              "system.details.dex": dexSource
+            })
+          } else if(!existing) {
+            dexSource.push({
+              slug: fullSlug,
+              state: newState
+            });
+            await trainerActor.update({
+              "system.details.dex": dexSource
+            })
+          }
+        }
 
         await ChatMessagePTR2e.create({
           speaker: { alias: "Pokemon Tabletop Reunited"},

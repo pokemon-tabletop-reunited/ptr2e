@@ -20,12 +20,20 @@ class EquipmentData extends foundry.abstract.DataModel {
             }, initial:"held", label: "PTR2E.FIELDS.gear.equipped.slot.label", hint: "PTR2E.FIELDS.gear.equipped.slot.hint"}),
         }
     }
+
+    static override migrateData(source: Record<string, unknown>) {
+      if(source.carryType === "held" || source.carryType === "worn") {
+        source.carryType = "equipped";
+      }
+  
+      return super.migrateData(source);
+    }
 }
 
 interface EquipmentData extends foundry.abstract.DataModel {
     carryType: PTRCONSTS.CarryType;
     handsHeld: number;
-    slot: string;
+    slot: "held" | "worn" | "accessory" | "belt" | "backpack";
 }
 
 export default EquipmentData;

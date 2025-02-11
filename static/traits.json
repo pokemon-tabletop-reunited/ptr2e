@@ -88,6 +88,12 @@
     "label": "Ace",
     "related": [],
     "description": "Ace creatures are generally PCs and PC grade creatures. Can be used for bosses, story significant entities, first partner creature etc. Awards more skill points at character creation and possibly other effects.",
+    "changes": [
+      {
+        "type": "add-trait",
+        "value": "wielder"
+      }
+    ],
     "type": "automated"
   },
   {
@@ -228,6 +234,11 @@
         "type": "roll-option",
         "domain": "immunities",
         "value": "trait:gas"
+      },
+      {
+        "type": "roll-option",
+        "domain": "immunities",
+        "value": "affliction:drowning"
       }
     ]
   },
@@ -512,7 +523,15 @@
     "slug": "gilled",
     "label": "Gilled",
     "related": [],
-    "description": "This creature is able to breathe underwater, ignoring the conditions for Drowning."
+    "description": "This creature is able to breathe underwater, ignoring the conditions for Drowning.",
+    "type": "automated",
+    "changes": [
+      {
+        "type": "roll-option",
+        "domain": "immunities",
+        "value": "affliction:drowning"
+      }
+    ]
   },
   {
     "slug": "glow-x",
@@ -636,7 +655,7 @@
   },
   {
     "slug": "legless",
-    "label": "legless",
+    "label": "Legless",
     "related": [],
     "description": "This creature has no legs, and must hop, roll, or drag itself in order to use its Overland Movement. \nSUBJECT TO CHANGE"
   },
@@ -2005,21 +2024,27 @@
     "description": "<p>The user may declare Actions with this Trait while they have the @Affliction[frozen] Affliction, curing themselves of the Affliction on declaration.</p><p>Whenever you use an Action with this Trait while suffering from @Affliction[frostbite], you may cure up to 5 stacks of Frostbite on yourself.</p><p>Targets hit by Actions with this Trait are cured of @Affliction[frozen] and up to 5 stacks of @Affliction[frostbite] after the action resolves, any damage dealt ignores the 33% damage reduction from the @Affliction[frozen] Affliction.</p>"
   },
   {
+    "slug": "delay-x",
+    "label": "Delay X",
+    "description": "This action resolves after X other activations have resolved.",
+    "related": []
+  },
+  {
     "slug": "delay-1",
     "label": "Delay 1",
-    "description": "",
+    "description": "This action resolves after 1 other activation has resolved.",
     "related": []
   },
   {
     "slug": "delay-2",
     "label": "Delay 2",
-    "description": "",
+    "description": "This action resolves after 2 other activations have resolved.",
     "related": []
   },
   {
     "slug": "delay-3",
     "label": "Delay 3",
-    "description": "",
+    "description": "This action resolves after 3 other activations have resolved.",
     "related": []
   },
   {
@@ -2158,31 +2183,141 @@
     "slug": "flinch-1",
     "label": "Flinch 1",
     "related": [],
-    "description": "Creature(s) that are target/hit by this Action are Flinched, having their next Activation delayed 10%."
+    "description": "Creature(s) that are target/hit by this Action are Flinched, having their next Activation delayed 10%.",
+    "changes": [
+      {
+        "type": "roll-effect",
+        "key": "attack",
+        "value": "Compendium.ptr2e.core-effects.Item.advanceffectitem",
+        "chance": 100,
+        "affects": "target",
+        "alterations": [
+          {
+            "mode": 5,
+            "property": "system.amount",
+            "value": -10
+          },
+          {
+            "mode": 5,
+            "property": "name",
+            "value": "Delay 10%"
+          }
+        ]
+      }
+    ],
+    "type": "automated"
   },
   {
     "slug": "flinch-2",
     "label": "Flinch 2",
     "related": [],
-    "description": "Creature(s) that are target/hit by this Action are Flinched, having their next Activation delayed 20%."
+    "description": "Creature(s) that are target/hit by this Action are Flinched, having their next Activation delayed 20%.",
+    "changes": [
+      {
+        "type": "roll-effect",
+        "key": "attack",
+        "value": "Compendium.ptr2e.core-effects.Item.advanceffectitem",
+        "chance": 100,
+        "affects": "target",
+        "alterations": [
+          {
+            "mode": 5,
+            "property": "system.amount",
+            "value": -20
+          },
+          {
+            "mode": 5,
+            "property": "name",
+            "value": "Delay 20%"
+          }
+        ]
+      }
+    ],
+    "type": "automated"
   },
   {
     "slug": "flinch-3",
     "label": "Flinch 3",
     "related": [],
-    "description": "Creature(s) that are target/hit by this Action are Flinched, having their next Activation delayed 30%."
+    "description": "Creature(s) that are target/hit by this Action are Flinched, having their next Activation delayed 30%.",
+    "changes": [
+      {
+        "type": "roll-effect",
+        "key": "attack",
+        "value": "Compendium.ptr2e.core-effects.Item.advanceffectitem",
+        "chance": 100,
+        "affects": "target",
+        "alterations": [
+          {
+            "mode": 5,
+            "property": "system.amount",
+            "value": -30
+          },
+          {
+            "mode": 5,
+            "property": "name",
+            "value": "Delay 30%"
+          }
+        ]
+      }
+    ],
+    "type": "automated"
   },
   {
     "slug": "flinch-4",
     "label": "Flinch 4",
     "related": [],
-    "description": "Creature(s) that are target/hit by this Action are Flinched, having their next Activation delayed 40%."
+    "description": "Creature(s) that are target/hit by this Action are Flinched, having their next Activation delayed 40%.",
+    "changes": [
+      {
+        "type": "roll-effect",
+        "key": "attack",
+        "value": "Compendium.ptr2e.core-effects.Item.advanceffectitem",
+        "chance": 100,
+        "affects": "target",
+        "alterations": [
+          {
+            "mode": 5,
+            "property": "system.amount",
+            "value": -40
+          },
+          {
+            "mode": 5,
+            "property": "name",
+            "value": "Delay 40%"
+          }
+        ]
+      }
+    ],
+    "type": "automated"
   },
   {
     "slug": "flinch-5",
     "label": "Flinch 5",
     "related": [],
-    "description": "Creature(s) that are target/hit by this Action are Flinched, having their next Activation delayed 50%."
+    "description": "Creature(s) that are target/hit by this Action are Flinched, having their next Activation delayed 50%.",
+    "changes": [
+      {
+        "type": "roll-effect",
+        "key": "attack",
+        "value": "Compendium.ptr2e.core-effects.Item.advanceffectitem",
+        "chance": 100,
+        "affects": "target",
+        "alterations": [
+          {
+            "mode": 5,
+            "property": "system.amount",
+            "value": -50
+          },
+          {
+            "mode": 5,
+            "property": "name",
+            "value": "Delay 50%"
+          }
+        ]
+      }
+    ],
+    "type": "automated"
   },
   {
     "slug": "flinch-chance-x",
@@ -2237,6 +2372,12 @@
     "label": "Horn",
     "related": [],
     "description": "Denotes if an attack or ability utilizes a horn or a similar prominent pointy appendage."
+  },
+  {
+    "slug": "interrupt-x",
+    "label": "Interrupt X",
+    "related": [],
+    "description": "Denotes that an Action may be used as an Interrupt at hierachy tier \"X\", provided the conditions for using the Interrupt are met."
   },
   {
     "slug": "interrupt-1",
@@ -2458,31 +2599,141 @@
     "slug": "priority-1",
     "label": "Priority 1",
     "related": [],
-    "description": "After resolving this Action, the user's next Activation is advanced 10%."
+    "description": "After resolving this Action, the user's next Activation is advanced 10%.",
+    "changes": [
+      {
+        "type": "roll-effect",
+        "key": "attack",
+        "value": "Compendium.ptr2e.core-effects.Item.advanceffectitem",
+        "chance": 100,
+        "affects": "self",
+        "alterations": [
+          {
+            "mode": 5,
+            "property": "system.amount",
+            "value": 10
+          },
+          {
+            "mode": 5,
+            "property": "name",
+            "value": "Advance 10%"
+          }
+        ]
+      }
+    ],
+    "type": "automated"
   },
   {
     "slug": "priority-2",
     "label": "Priority 2",
     "related": [],
-    "description": "After resolving this Action, the user's next Activation is advanced 20%."
+    "description": "After resolving this Action, the user's next Activation is advanced 20%.",
+    "changes": [
+      {
+        "type": "roll-effect",
+        "key": "attack",
+        "value": "Compendium.ptr2e.core-effects.Item.advanceffectitem",
+        "chance": 100,
+        "affects": "self",
+        "alterations": [
+          {
+            "mode": 5,
+            "property": "system.amount",
+            "value": 20
+          },
+          {
+            "mode": 5,
+            "property": "name",
+            "value": "Advance 20%"
+          }
+        ]
+      }
+    ],
+    "type": "automated"
   },
   {
     "slug": "priority-3",
     "label": "Priority 3",
     "related": [],
-    "description": "After resolving this Action, the user's next Activation is advanced 30%."
+    "description": "After resolving this Action, the user's next Activation is advanced 30%.",
+    "changes": [
+      {
+        "type": "roll-effect",
+        "key": "attack",
+        "value": "Compendium.ptr2e.core-effects.Item.advanceffectitem",
+        "chance": 100,
+        "affects": "self",
+        "alterations": [
+          {
+            "mode": 5,
+            "property": "system.amount",
+            "value": 30
+          },
+          {
+            "mode": 5,
+            "property": "name",
+            "value": "Advance 30%"
+          }
+        ]
+      }
+    ],
+    "type": "automated"
   },
   {
     "slug": "priority-4",
     "label": "Priority 4",
     "related": [],
-    "description": "After resolving this Action, the user's next Activation is advanced 40%."
+    "description": "After resolving this Action, the user's next Activation is advanced 40%.",
+    "changes": [
+      {
+        "type": "roll-effect",
+        "key": "attack",
+        "value": "Compendium.ptr2e.core-effects.Item.advanceffectitem",
+        "chance": 100,
+        "affects": "self",
+        "alterations": [
+          {
+            "mode": 5,
+            "property": "system.amount",
+            "value": 40
+          },
+          {
+            "mode": 5,
+            "property": "name",
+            "value": "Advance 40%"
+          }
+        ]
+      }
+    ],
+    "type": "automated"
   },
   {
     "slug": "priority-5",
     "label": "Priority 5",
     "related": [],
-    "description": "After resolving this Action, the user's next Activation is advanced 50%."
+    "description": "After resolving this Action, the user's next Activation is advanced 50%.",
+    "changes": [
+      {
+        "type": "roll-effect",
+        "key": "attack",
+        "value": "Compendium.ptr2e.core-effects.Item.advanceffectitem",
+        "chance": 100,
+        "affects": "self",
+        "alterations": [
+          {
+            "mode": 5,
+            "property": "system.amount",
+            "value": 50
+          },
+          {
+            "mode": 5,
+            "property": "name",
+            "value": "Advance 50%"
+          }
+        ]
+      }
+    ],
+    "type": "automated"
   },
   {
     "slug": "pulse",
@@ -3387,6 +3638,20 @@
     "description": "These weapons can only use their innate PP Pool for their attacks. The user can use a Simple Action to reload the weapon, refilling its PP Pool. This Action either consumes an Ammunition item relating to the weapon, or consumes the Character's IP at an increased cost."
   },
   {
+    "slug": "ranger",
+    "label": "Ranger",
+    "related": [],
+    "description": "Creature trait for denoting 'Ranger' type characters.",
+    "type": "narrative"
+  },
+  {
+    "slug": "explorer",
+    "label": "Explorer",
+    "related": [],
+    "description": "Creature trait for denoting 'Explorers' in a PMD-style Campaign.",
+    "type": "narrative"
+  },
+  {
     "slug": "pokemon",
     "label": "Pokemon",
     "related": [],
@@ -3398,6 +3663,12 @@
     "label": "Humanoid",
     "related": [],
     "description": "This is a Humanoid.",
+    "changes": [
+      {
+        "type": "add-trait",
+        "value": "wielder"
+      }
+    ],
     "type": "automated"
   },
   {
@@ -3493,5 +3764,19 @@
     "description": "The current version of this requires a rework, and will be changed or removed in the near future",
     "type": "automated",
     "changes": []
+  },
+  {
+    "slug": "uncapturable",
+    "label": "Uncapturable",
+    "related": [],
+    "description": "This creature cannot be captured by any means.",
+    "type": "automated",
+    "changes": [
+      {
+        "type": "roll-option",
+        "domain": "self",
+        "value": "uncapturable"
+      }
+    ]
   }
 ]

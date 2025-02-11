@@ -19,7 +19,6 @@ import { GeneratingPokemonTour } from "@module/tours/generating-pokemon.ts";
 import { AutomationTour } from "@module/tours/automation.ts";
 import { MiscTour } from "@module/tours/misc.ts";
 import { CompendiumBrowserTour } from "@module/tours/compendium-browser.ts";
-import { CharacterCreationTour } from "@module/tours/character-creation.ts";
 
 export const Init: PTRHook = {
   listen() {
@@ -134,7 +133,7 @@ export const Init: PTRHook = {
           game.tours.register("ptr2e", "folders", await FoldersTour.fromJSON("systems/ptr2e/tours/folders.json"));
           game.tours.register("ptr2e", "actor-sheet", await ActorSheetTour.fromJSON("systems/ptr2e/tours/actor-sheet.json"));
           game.tours.register("ptr2e", "perk-web", await PerkWebTour.fromJSON("systems/ptr2e/tours/perk-web.json"));
-          game.tours.register("ptr2e", "character-creation", await CharacterCreationTour.fromJSON("systems/ptr2e/tours/character-creation.json"));
+          // game.tours.register("ptr2e", "character-creation", await CharacterCreationTour.fromJSON("systems/ptr2e/tours/character-creation.json"));
           game.tours.register("ptr2e", "compendium-browser", await CompendiumBrowserTour.fromJSON("systems/ptr2e/tours/compendium-browser.json"));
           game.tours.register("ptr2e", "generating-pokemon", await GeneratingPokemonTour.fromJSON("systems/ptr2e/tours/generating-pokemon.json"));
           game.tours.register("ptr2e", "automation", await AutomationTour.fromJSON("systems/ptr2e/tours/automation.json"));

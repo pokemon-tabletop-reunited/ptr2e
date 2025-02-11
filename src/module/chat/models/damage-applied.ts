@@ -14,6 +14,7 @@ abstract class DamageAppliedMessageSystem extends foundry.abstract.TypeDataModel
       target: new fields.DocumentUUIDField({ required: true, type: 'Actor' }),
       damageApplied: new fields.NumberField({ required: true }),
       shieldApplied: new fields.BooleanField({ required: true, initial: false }),
+      ppApplied: new fields.BooleanField({ required: true, initial: false }),
       undone: new fields.BooleanField({ required: true, initial: false }),
       notes: new fields.ArrayField(new fields.ArrayField(new fields.HTMLField({ blank: false, nullable: false })), { required: true, initial: [] }),
       rollNotes: new fields.ArrayField(new fields.StringField({ blank: false, nullable: false }), { required: true, initial: [] }),
@@ -58,7 +59,18 @@ abstract class DamageAppliedMessageSystem extends foundry.abstract.TypeDataModel
     if (!this.target) return;
 
     await this.parent.update({ "system.undone": true });
-    await this.target.applyDamage(-this.damageApplied, { silent: true, healShield: this.shieldApplied });
+    if(this.ppApplied) {
+      await this.target.update({
+        "system.powerPoints.value": Math.clamp(
+          this.target.system.powerPoints.value - -this.damageApplied,
+          0,
+          this.target.system.powerPoints.max
+        )
+      })
+    }
+    else {
+      await this.target.applyDamage(-this.damageApplied, { silent: true, healShield: this.shieldApplied });
+    }
   }
 
   activateListeners(html: JQuery<HTMLElement>) {
@@ -76,6 +88,7 @@ interface DamageAppliedMessageSchema extends foundry.data.fields.DataSchema {
   target: foundry.data.fields.DocumentUUIDField<ActorPTR2e, true, true, false>;
   damageApplied: foundry.data.fields.NumberField<number, number, true, false, false>;
   shieldApplied: foundry.data.fields.BooleanField<boolean, boolean, true, false, true>;
+  ppApplied: foundry.data.fields.BooleanField<boolean, boolean, true, false, true>;
   undone: foundry.data.fields.BooleanField<boolean, boolean, true, false, true>;
   notes: foundry.data.fields.ArrayField<foundry.data.fields.ArrayField<foundry.data.fields.HTMLField>>;
   result: foundry.data.fields.SchemaField<

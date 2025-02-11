@@ -1,0 +1,105 @@
+{
+  "folder": "P8RtSJE1K00CB5lL",
+  "name": "Skill Refinement 4",
+  "type": "perk",
+  "system": {
+    "_migration": {
+      "version": 0.11,
+      "previous": null
+    },
+    "actions": [],
+    "slug": "skill-refinement-4",
+    "description": "<p>The user selects 3 Skills with which their Species proficiency is greater than 1, besides Resources. The user’s Species proficiency with the selected skills is increased by +5. A Skill may only be increased 4 times with this Perk and cannot be increased past 40.</p>",
+    "traits": [],
+    "prerequisites": [],
+    "autoUnlock": [],
+    "cost": 1,
+    "global": true,
+    "webs": [],
+    "nodes": [],
+    "design": {
+      "arena": null,
+      "approach": null,
+      "archetype": null
+    }
+  },
+  "img": "systems/ptr2e/img/icons/feat_icon.webp",
+  "effects": [
+    {
+      "name": "Skill Refinement",
+      "type": "passive",
+      "_id": "D82pbUBiKChgvU3V",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "flat-modifier",
+            "key": "insertskill-roll",
+            "value": 5,
+            "predicate": [],
+            "label": "InsertSkill SkiRef 1",
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "hideIfDisabled": false
+          },
+          {
+            "type": "flat-modifier",
+            "key": "insertskill-roll",
+            "value": 5,
+            "predicate": [],
+            "label": "InsertSkill SkiRef 1",
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "hideIfDisabled": false
+          },
+          {
+            "type": "flat-modifier",
+            "key": "insertskill-roll",
+            "value": 5,
+            "predicate": [],
+            "label": "InsertSkill SkiRef 1",
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "hideIfDisabled": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": false,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": "Item.xxuGLZ0QPnw7NYa8.ActiveEffect.V64elrUanozajfG2",
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "1.0.0.beta-ready.2",
+        "createdTime": 1738606481189,
+        "modifiedTime": 1738606481189,
+        "lastModifiedBy": "5ImYyhOS2D6D7ypO"
+      }
+    }
+  ],
+  "_id": "2P7D9uTNzSzAX7E2"
+}

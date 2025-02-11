@@ -2,6 +2,8 @@ import { EquipmentData, PokemonType, PTRCONSTS } from "@data";
 import { TemplateConstructor } from "./data-template.ts";
 import { getTypes } from "@scripts/config/effectiveness.ts";
 import { SlugField } from "../fields/slug-field.ts";
+import { ActorPTR2e, ActorSystemPTR2e } from "@actor";
+import { ConsumablePTR2e, ItemPTR2e } from "@item";
 
 /**
  * Extracted data properties from the Gear data model, so that they can be used in other data models that don't need the full Gear data model.
@@ -104,11 +106,40 @@ export default function HasGearData<BaseClass extends TemplateConstructor>(baseC
       // Pokeballs should never be hidden from fling dialog
       if ('consumableType' in this && this.consumableType == "pokeball") {
         this.fling.hide = false;
-        return;
-      }
+      } else 
       // If the fling 'hide' mode is not set, and the values are the default fling values, set 'hide' to true
       if (this.fling?.hide === null && (!this.fling.power || this.fling.power === 25) && (!this.fling.accuracy || this.fling.accuracy === 100) && (!this.fling.type || this.fling.type === PTRCONSTS.Types.UNTYPED)) {
         this.fling.hide = true;
+      }
+
+      if(this.equipped.carryType === "equipped") {
+        if(!(this.parent instanceof ItemPTR2e)) return;
+        if(!(this.parent.actor instanceof ActorPTR2e)) return;
+        const actorSystem = this.parent.actor.system as ActorSystemPTR2e;
+
+        switch(this.equipped.slot) {
+          case "accessory": actorSystem.inventory.accessory.used += this.quantity; break;
+          case "worn": actorSystem.inventory.worn.used += this.quantity; break;
+          case "held": {
+            actorSystem.inventory.held.used += this.equipped.handsHeld || 1;
+            break;
+          }
+          case "belt": {
+            if(this.parent.type === "consumable") {
+              const consumableSystem = (this.parent as ConsumablePTR2e).system;
+              if(consumableSystem.stack) {
+                const slotsNeeded = Math.ceil(this.quantity / consumableSystem.stack);
+                actorSystem.inventory.belt.used += slotsNeeded;
+              }
+              else {
+                actorSystem.inventory.belt.used += this.quantity;
+              }
+            }
+            else {
+              actorSystem.inventory.belt.used += this.quantity;
+            }
+          }
+        }
       }
     }
   }
