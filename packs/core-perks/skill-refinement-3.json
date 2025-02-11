@@ -23,43 +23,54 @@
     "cost": 1,
     "global": true,
     "webs": [],
-    "nodes": []
+    "nodes": [],
+    "design": {
+      "arena": null,
+      "approach": null,
+      "archetype": null
+    }
   },
   "img": "systems/ptr2e/img/icons/feat_icon.webp",
   "effects": [
     {
       "name": "Skill Refinement",
       "type": "passive",
-      "_id": "lgemzY0RlZhWvfAj",
+      "_id": "LX3BVASsO84dQnQa",
       "img": "systems/ptr2e/img/icons/effect_icon.webp",
       "system": {
         "changes": [
           {
-            "type": "basic",
-            "key": "system.skills.x.value",
+            "type": "flat-modifier",
+            "key": "insertskill-roll",
             "value": 5,
             "predicate": [],
+            "label": "InsertSkill SkiRef 1",
             "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "hideIfDisabled": false
           },
           {
-            "type": "basic",
-            "key": "system.skills.y.value",
+            "type": "flat-modifier",
+            "key": "insertskill-roll",
             "value": 5,
             "predicate": [],
+            "label": "InsertSkill SkiRef 1",
             "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "hideIfDisabled": false
           },
           {
-            "type": "basic",
-            "key": "system.skills.z.value",
+            "type": "flat-modifier",
+            "key": "insertskill-roll",
             "value": 5,
             "predicate": [],
+            "label": "InsertSkill SkiRef 1",
             "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "hideIfDisabled": false
           }
         ],
         "slug": null,
@@ -90,13 +101,12 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "ptr2e",
-        "systemVersion": "0.10.0-alpha.5.2.1",
-        "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "systemVersion": "1.0.0.beta-ready.2",
+        "createdTime": 1738606489724,
+        "modifiedTime": 1738606489724,
+        "lastModifiedBy": "5ImYyhOS2D6D7ypO"
       }
     }
   ],
-  "flags": {},
   "_id": "qMKJJLaZdVutPHRl"
 }

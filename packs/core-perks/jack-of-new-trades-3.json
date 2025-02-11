@@ -22,7 +22,12 @@
     "cost": 1,
     "global": true,
     "webs": [],
-    "nodes": []
+    "nodes": [],
+    "design": {
+      "arena": null,
+      "approach": null,
+      "archetype": null
+    }
   },
   "_id": "ju0XsrjeU4JeODgS",
   "img": "systems/ptr2e/img/icons/feat_icon.webp",
@@ -30,36 +35,42 @@
     {
       "name": "Jack of New Trades",
       "type": "passive",
-      "_id": "ErBIpIw65UNl1VmF",
+      "_id": "Ndunlr7hrR5Cc3yY",
       "img": "systems/ptr2e/img/icons/effect_icon.webp",
       "system": {
         "changes": [
           {
-            "type": "basic",
-            "key": "system.skills.x.value",
+            "type": "flat-modifier",
+            "key": "insertskill-roll",
             "value": 9,
             "predicate": [],
+            "label": "Jack of New Trades",
             "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "hideIfDisabled": false
           },
           {
-            "type": "basic",
-            "key": "system.skills.y.value",
+            "type": "flat-modifier",
+            "key": "insertskill-roll",
             "value": 9,
             "predicate": [],
+            "label": "Jack of New Trades",
             "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "hideIfDisabled": false
           },
           {
-            "type": "basic",
-            "key": "system.skills.z.value",
+            "type": "flat-modifier",
+            "key": "insertskill-roll",
             "value": 9,
             "predicate": [],
+            "label": "Jack of New Trades",
             "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "hideIfDisabled": false
           }
         ],
         "slug": null,
@@ -90,13 +101,12 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "ptr2e",
-        "systemVersion": "0.10.0-alpha.5.2.1",
-        "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "systemVersion": "1.0.0.beta-ready.2",
+        "createdTime": 1738606299922,
+        "modifiedTime": 1738606299922,
+        "lastModifiedBy": "5ImYyhOS2D6D7ypO"
       }
     }
   ],
-  "folder": "P8RtSJE1K00CB5lL",
-  "flags": {}
+  "folder": "P8RtSJE1K00CB5lL"
 }

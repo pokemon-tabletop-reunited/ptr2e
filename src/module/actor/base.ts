@@ -1845,8 +1845,8 @@ class ActorPTR2e<
     if (options.fail === true) return false;
 
     if (this.system.party.ownerOf) {
-      const folder = game.folders.get(this.system.party.ownerOf) as FolderPTR2e;
-      if (folder.owner) {
+      const folder = game.folders.get(this.system.party.ownerOf) as FolderPTR2e | undefined;
+      if (folder?.owner) {
         throw new Error("Cannot create an actor that owns a party folder already owned by another actor.");
       }
     }

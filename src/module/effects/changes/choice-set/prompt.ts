@@ -102,10 +102,10 @@ class ChoiceSetPrompt extends PickAThingPrompt<ItemPTR2e<ItemSystemPTR, ActorPTR
     }
   }
 
-  override async resolveSelection(): Promise<PickableThing<string | number | object> | null> {
+  override async resolveSelection(forceSelection = false): Promise<PickableThing<string | number | object> | null> {
     // Return early if there is only one choice
     const firstChoice = this.choices.at(0);
-    if(!this.allowedDrops && firstChoice && this.choices.length === 1) return (this.selection = firstChoice);
+    if(!this.allowedDrops && firstChoice && this.choices.length === 1 && !forceSelection) return (this.selection = firstChoice);
 
     // Exit early if there are no valid choices
     if(this.choices.length === 0 && !this.allowedDrops) {

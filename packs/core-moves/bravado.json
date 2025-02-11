@@ -10,32 +10,34 @@
         "name": "Bravado",
         "slug": "bravado",
         "type": "attack",
-        "img": "icons/svg/explosion.svg",
+        "img": "systems/ptr2e/img/svg/normal_icon.svg",
         "traits": [
           "social"
         ],
         "range": {
           "target": "cone",
-          "distance": 3,
+          "distance": 4,
           "unit": "m"
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 6
+          "powerPoints": 7
         },
         "types": [
           "normal"
         ],
-        "category": "physical",
+        "category": "status",
         "accuracy": 100,
-        "description": "<p>Effect: All valid targets lose -1 DEF for 5 Activations, and the user gains +1 ATK for 5 Activations.</p>"
+        "description": "<p>Effect: All valid targets lose -1 DEF for 5 Activations, and the user gains +1 ATK for 5 Activations.</p>",
+        "predicate": []
       }
     ],
     "grade": "A",
     "_migration": {
       "version": null,
       "previous": null
-    }
+    },
+    "traits": []
   },
   "effects": [
     {
@@ -54,7 +56,8 @@
             "affects": "target",
             "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "alterations": []
           },
           {
             "type": "roll-effect",
@@ -65,7 +68,8 @@
             "affects": "self",
             "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "alterations": []
           }
         ],
         "slug": null,

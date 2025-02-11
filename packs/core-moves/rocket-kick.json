@@ -4,17 +4,18 @@
   "_id": "IjSCmFpB2odL17UL",
   "img": "systems/ptr2e/img/svg/fire_icon.svg",
   "system": {
-    "slug": null,
+    "slug": "rocket-kick",
     "actions": [
       {
         "name": "Rocket Kick",
         "slug": "rocket-kick",
         "type": "attack",
-        "img": "icons/svg/explosion.svg",
+        "img": "systems/ptr2e/img/svg/fire_icon.svg",
         "traits": [
           "2-strike",
           "kick",
-          "contact"
+          "contact",
+          "priority-2"
         ],
         "range": {
           "target": "creature",
@@ -23,40 +24,24 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 0
+          "powerPoints": 1,
+          "priority": 2
         },
-        "variant": null,
         "types": [
           "fire"
         ],
         "category": "physical",
         "power": 30,
-        "accuracy": 100,
-        "contestType": "",
-        "contestEffect": "",
-        "free": false,
-        "slot": null,
-        "description": ""
+        "accuracy": 90,
+        "predicate": []
       }
     ],
-    "container": null,
-    "grade": "E"
+    "grade": "E",
+    "traits": [],
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
   },
-  "effects": [],
-  "sort": 8700000,
-  "ownership": {
-    "default": 0,
-    "CYLdyr5mPSDmNpTp": 3
-  },
-  "flags": {},
-  "_stats": {
-    "compendiumSource": null,
-    "duplicateSource": null,
-    "coreVersion": "12.327",
-    "systemId": "ptr2e",
-    "systemVersion": "0.10.0-alpha.1.0.4",
-    "createdTime": 1719596498632,
-    "modifiedTime": 1719977057481,
-    "lastModifiedBy": "CYLdyr5mPSDmNpTp"
-  }
+  "effects": []
 }

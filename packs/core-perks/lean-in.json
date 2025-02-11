@@ -5,7 +5,7 @@
     "prerequisites": [
       {
         "gte": [
-          "{actor|skills.riding.mod}",
+          "{actor|skills.ride.mod}",
           40
         ]
       }
@@ -19,19 +19,15 @@
         "description": "<p>When you or your mount are hit with an non-single target Attack while riding, you may activate this perk to have you both resist the damage one step.</p>",
         "cost": {
           "activation": "free",
-          "powerPoints": 4,
-          "delay": null,
-          "priority": null
+          "powerPoints": 4
         },
         "type": "generic",
         "traits": [],
         "img": "icons/svg/explosion.svg",
         "range": {
           "target": "enemy",
-          "unit": "m",
-          "distance": 0
-        },
-        "variant": null
+          "unit": "m"
+        }
       }
     ],
     "slug": "lean-in",
@@ -65,13 +61,10 @@
     "autoUnlock": [],
     "global": true,
     "webs": [],
-    "originSlug": null,
-    "variant": null,
-    "mode": null,
     "design": {
       "arena": "physical",
       "approach": "finesse",
-      "archetype": "Cavalier"
+      "archetype": "cavalier"
     }
   },
   "_id": "d5QAjSgWP4KbjSz6",

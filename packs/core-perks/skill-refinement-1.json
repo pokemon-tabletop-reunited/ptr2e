@@ -232,7 +232,12 @@
           "scale": null
         }
       }
-    ]
+    ],
+    "design": {
+      "arena": null,
+      "approach": null,
+      "archetype": null
+    }
   },
   "_id": "ZQRhkQgVJhzoEWuz",
   "img": "systems/ptr2e/img/icons/feat_icon.webp",
@@ -245,31 +250,37 @@
       "system": {
         "changes": [
           {
-            "type": "basic",
-            "key": "system.skills.x.value",
+            "type": "flat-modifier",
+            "key": "insertskill-roll",
             "value": 5,
             "predicate": [],
+            "label": "InsertSkill SkiRef 1",
             "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "hideIfDisabled": false
           },
           {
-            "type": "basic",
-            "key": "system.skills.y.value",
+            "type": "flat-modifier",
+            "key": "insertskill-roll",
             "value": 5,
             "predicate": [],
+            "label": "InsertSkill SkiRef 1",
             "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "hideIfDisabled": false
           },
           {
-            "type": "basic",
-            "key": "system.skills.z.value",
+            "type": "flat-modifier",
+            "key": "insertskill-roll",
             "value": 5,
             "predicate": [],
+            "label": "InsertSkill SkiRef 1",
             "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "hideIfDisabled": false
           }
         ],
         "slug": null,
@@ -300,10 +311,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "ptr2e",
-        "systemVersion": "0.10.0-alpha.5.2.1",
+        "systemVersion": "1.0.0.beta-ready.2",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1738606432625,
+        "lastModifiedBy": "5ImYyhOS2D6D7ypO"
       }
     }
   ],

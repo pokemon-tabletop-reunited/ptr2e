@@ -483,7 +483,7 @@ export default abstract class BlueprintSystem extends HasEmbed(HasMigrations(fou
         const moveItems = await Promise.all(
           levelUpMoves.map(async (move) => fromUuid(move.uuid))
         );
-        return moveItems.reduce(
+        return moveItems.reverse().reduce(
           (acc, move, index) => {
             if (move && move instanceof ItemPTR2e) {
               const moveData = move.toObject();

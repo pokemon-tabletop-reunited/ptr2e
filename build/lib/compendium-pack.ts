@@ -3,7 +3,7 @@ import path from "path";
 import { getFilesRecursively, isObject, PackError, sluggify } from "./helpers.ts";
 import { DBFolder, LevelDatabase } from "./level-database.ts";
 import { PackEntry } from "./types.ts";
-import coreIconsJSON from "../core-icons.json" assert { type: "json" };
+import coreIconsJSON from "../core-icons.json" with { type: "json" };
 import { ItemSchema } from "types/foundry/common/documents/item.js";
 
 type ActorSourcePTR2e = Actor["_source"];
@@ -295,6 +295,7 @@ class CompendiumPack {
             ...d,
             name: name || "Unnamed Effect",
             ...(d.description ? { description: localize(d.description) } : {}),
+            statuses: [d.id]
           }
         ],
         folder: "V4skAU6G3OH5fXgD",

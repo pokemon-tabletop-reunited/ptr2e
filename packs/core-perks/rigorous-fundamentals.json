@@ -12,7 +12,7 @@
     "traits": [],
     "prerequisites": [],
     "autoUnlock": [],
-    "cost": 3,
+    "cost": 2,
     "variant": "multi",
     "mode": "individual",
     "global": true,
@@ -197,7 +197,12 @@
         "type": "normal",
         "tier": null
       }
-    ]
+    ],
+    "design": {
+      "arena": null,
+      "approach": null,
+      "archetype": null
+    }
   },
   "_id": "gH6z0NmKq0Suh7iZ",
   "img": "systems/ptr2e/img/icons/feat_icon.webp",
@@ -205,45 +210,53 @@
     {
       "name": "Rigorous Fundamentals",
       "type": "passive",
-      "_id": "V64elrUanozajfG2",
+      "_id": "o5rOIHQaMRzygoVh",
       "img": "systems/ptr2e/img/icons/effect_icon.webp",
       "system": {
         "changes": [
           {
-            "type": "basic",
-            "key": "system.skills.w.value",
+            "type": "flat-modifier",
+            "key": "insertskill-roll",
             "value": 5,
             "predicate": [],
+            "label": "InsertSkill RigFun 1",
             "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "hideIfDisabled": false
           },
           {
-            "type": "basic",
-            "key": "system.skills.x.value",
+            "type": "flat-modifier",
+            "key": "insertskill-roll",
             "value": 5,
             "predicate": [],
+            "label": "InsertSkill RigFun 1",
             "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "hideIfDisabled": false
           },
           {
-            "type": "basic",
-            "key": "system.skills.y.value",
+            "type": "flat-modifier",
+            "key": "insertskill-roll",
             "value": 5,
             "predicate": [],
+            "label": "InsertSkill RigFun 1",
             "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "hideIfDisabled": false
           },
           {
-            "type": "basic",
-            "key": "system.skills.z.value",
+            "type": "flat-modifier",
+            "key": "insertskill-roll",
             "value": 5,
             "predicate": [],
+            "label": "InsertSkill RigFun 1",
             "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "hideIfDisabled": false
           }
         ],
         "slug": null,
@@ -270,14 +283,14 @@
       "sort": 0,
       "flags": {},
       "_stats": {
-        "compendiumSource": null,
+        "compendiumSource": "Item.xxuGLZ0QPnw7NYa8.ActiveEffect.V64elrUanozajfG2",
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "ptr2e",
-        "systemVersion": "0.10.0-alpha.5.2.1",
-        "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "systemVersion": "1.0.0.beta-ready.2",
+        "createdTime": 1738606944598,
+        "modifiedTime": 1738606993955,
+        "lastModifiedBy": "5ImYyhOS2D6D7ypO"
       }
     }
   ],

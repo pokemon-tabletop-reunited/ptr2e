@@ -1,0 +1,129 @@
+{
+  "folder": "V4skAU6G3OH5fXaf",
+  "name": "Wand of Sprouts",
+  "type": "weapon",
+  "system": {
+    "_migration": {
+      "version": 0.11,
+      "previous": null
+    },
+    "traits": [
+      "fantasy",
+      "arcane",
+      "weapon",
+      "grass"
+    ],
+    "actions": [],
+    "description": "<p>An Apprentice's wand, grants the move Leafage.<br><br>\"Don't tell anyone, but these leaves might be Poison Oak.\" Magus Yew</p>",
+    "crafting": {
+      "skill": "",
+      "spans": null,
+      "materials": []
+    },
+    "equipped": {
+      "carryType": "stowed",
+      "handsHeld": 1,
+      "slot": "held"
+    },
+    "grade": "E",
+    "fling": {
+      "type": "untyped",
+      "power": null,
+      "accuracy": 100,
+      "hide": false
+    },
+    "quantity": 1,
+    "rarity": "common",
+    "identification": {
+      "misidentified": null,
+      "status": "identified",
+      "unidentified": {
+        "name": "Unidentified Item",
+        "img": "systems/ptu/css/images/icons/gear_icon.png",
+        "description": "<p>Unidentified Item</p>"
+      }
+    }
+  },
+  "img": "systems/ptr2e/img/icons/weapon_icon.webp",
+  "effects": [
+    {
+      "name": "Wand of Sprouts",
+      "type": "passive",
+      "_id": "BYTdz4uirZD2DSqj",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "grant-item",
+            "key": "",
+            "value": "Compendium.ptr2e.core-moves.Item.v2n6hZCzO4yhv4CV",
+            "predicate": [],
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "change system.actions.0.free",
+                "value": "true"
+              },
+              {
+                "mode": 5,
+                "property": "System.actions.0.category",
+                "value": "special"
+              },
+              {
+                "mode": 2,
+                "property": "system.actions.0.trait",
+                "value": "weapon"
+              }
+            ],
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "reevaluateOnUpdate": false,
+            "inMemoryOnly": false,
+            "allowDuplicate": true,
+            "track": false,
+            "replaceSelf": false,
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            }
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "1.0.0.beta-ready.2",
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      }
+    }
+  ],
+  "flags": {},
+  "_id": "c8MVtToR9sfwagv2"
+}

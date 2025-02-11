@@ -82,7 +82,12 @@
           "scale": null
         }
       }
-    ]
+    ],
+    "design": {
+      "arena": null,
+      "approach": null,
+      "archetype": null
+    }
   },
   "_id": "dkEYiHMSltAtaRGE",
   "img": "systems/ptr2e/img/icons/feat_icon.webp",
@@ -90,27 +95,31 @@
     {
       "name": "Headliner",
       "type": "passive",
-      "_id": "uu6Pu3dtUBmDW1jw",
+      "_id": "UCr4RgfchgKSpLKJ",
       "img": "systems/ptr2e/img/icons/effect_icon.webp",
       "system": {
         "changes": [
           {
-            "type": "basic",
-            "key": "system.skills.y.value",
+            "type": "flat-modifier",
+            "key": "insertskill-roll",
             "value": 10,
             "predicate": [],
+            "label": "InsertSkill Headli 1",
             "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "hideIfDisabled": false
           },
           {
-            "type": "basic",
-            "key": "system.skills.z.value",
+            "type": "flat-modifier",
+            "key": "insertskill-roll",
             "value": 10,
             "predicate": [],
+            "label": "InsertSkill Headli 1",
             "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "hideIfDisabled": false
           }
         ],
         "slug": null,
@@ -141,10 +150,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "ptr2e",
-        "systemVersion": "0.10.0-alpha.5.2.1",
-        "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "systemVersion": "1.0.0.beta-ready.2",
+        "createdTime": 1738607544777,
+        "modifiedTime": 1738607571488,
+        "lastModifiedBy": "5ImYyhOS2D6D7ypO"
       }
     }
   ],

@@ -2,6 +2,8 @@ import { ActorPTR2e } from "@actor";
 import { ApplicationV2Expanded } from "./appv2-expanded.ts";
 import { sluggify } from "@utils";
 import { HandlebarsRenderOptions } from "types/foundry/common/applications/handlebars-application.ts";
+import { ChoiceSetPrompt } from "@module/effects/changes/choice-set/prompt.ts";
+import FolderPTR2e from "@module/folder/document.ts";
 
 export class DexApp extends foundry.applications.api.HandlebarsApplicationMixin(ApplicationV2Expanded) {
   static override DEFAULT_OPTIONS = fu.mergeObject(
@@ -16,6 +18,63 @@ export class DexApp extends foundry.applications.api.HandlebarsApplicationMixin(
       window: {
         minimizable: true,
         resizable: true,
+        controls: [
+          {
+            action: "sync",
+            icon: "fas fa-sync",
+            label: "PTR2E.ActorSheet.DexSync",
+            visible: () => game.user.isGM,
+          }
+        ]
+      },
+      actions: {
+        "sync": async function(this: DexApp) {
+          const teams = this.actor.system.party?.teamMemberOf ?? [];
+          const players = game.users.contents.flatMap(u => u.character ?? []).filter(u => u !== this.actor);
+          const options = [
+            ...teams.flatMap(t => {
+              const folder = game.folders.get(t);
+              if(!folder) return [];
+              return {label: `Team: ${folder.name}`, value: folder.id};
+            }),
+            ...players.map(p => ({ label: p.name, value: p.id, img: p.img }))
+          ]
+
+          const prompt = new ChoiceSetPrompt({
+            choices: options, 
+            title: game.i18n.localize("PTR2E.ActorSheet.DexSyncPrompt.Title"),
+            prompt: "PTR2E.ActorSheet.DexSyncPrompt.Prompt", 
+            containsItems: false,
+            allowedDrops: null,
+            item: null
+          });
+
+          const result = await prompt.resolveSelection(true);
+          if(!result || typeof result.value !== "string") return;
+
+          const toUpdate: string[] = [];
+          if(teams.includes(result.value)) {
+            const team = game.folders.get(result.value) as FolderPTR2e
+            if(team) {
+              const members = team.team;
+              for(const member of members) {
+                const actor = await fromUuid<ActorPTR2e>(member);
+                if(!actor || actor.pack) continue;
+
+                toUpdate.push(actor.id);
+              }
+            }
+          }
+          else {
+            toUpdate.push(result.value);
+          }
+
+          if(!toUpdate.length) return void ui.notifications.warn("PTR2E.ActorSheet.DexSyncPrompt.NoResult", {localize: true});
+
+          const dex = this.actor.toObject().system.details.dex;
+          await Actor.updateDocuments(toUpdate.map(id => ({_id: id, "system.details.dex": dex})));
+          ui.notifications.info("PTR2E.ActorSheet.DexSyncPrompt.Success", {localize: true});
+        }
       }
     },
     { inplace: false }

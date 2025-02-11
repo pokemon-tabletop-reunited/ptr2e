@@ -2512,15 +2512,17 @@ body .application.sheet .form-group {
   overflow-y: auto;
 }
 .application.sheet.tutor-list .window-content {
-  display: grid;
-  grid-template-columns: 40% 60%;
-  grid-template-rows: 1fr;
+  display: flex;
+  flex-direction: row;
 }
 .application.sheet.tutor-list aside {
   display: flex;
   flex-direction: column;
   padding: 1rem;
   overflow: hidden;
+  flex: 1 1 auto;
+  min-width: 220px;
+  max-width: 220px;
 }
 .application.sheet.tutor-list aside header {
   display: flex;
@@ -2580,8 +2582,14 @@ body .application.sheet .form-group {
 .application.sheet.tutor-list main h3 {
   border-color: var(--border-theme-color);
 }
+.application.sheet.tutor-list main ul {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+}
 .application.sheet.tutor-list main ul li {
-  margin-bottom: 0.35rem;
+  list-style: none;
 }
 .application.sheet.exp-tracker .window-content {
   display: grid;

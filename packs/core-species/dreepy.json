@@ -18,33 +18,33 @@
     "moves": {
       "levelUp": [
         {
-          "name": "bite",
-          "level": 1,
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "quick-attack",
-          "level": 1,
-          "gen": "scarlet-violet"
-        },
-        {
           "name": "astonish",
-          "level": 1,
-          "gen": "scarlet-violet"
+          "gen": "scarlet-violet",
+          "level": 1
+        },
+        {
+          "name": "bite",
+          "gen": "scarlet-violet",
+          "level": 1
         },
         {
           "name": "infestation",
-          "level": 1,
-          "gen": "scarlet-violet"
+          "gen": "scarlet-violet",
+          "level": 1
+        },
+        {
+          "name": "quick-attack",
+          "gen": "scarlet-violet",
+          "level": 1
         }
       ],
       "tutor": [
         {
-          "name": "disable",
-          "gen": "scarlet-violet"
+          "name": "attract",
+          "gen": "sword-shield"
         },
         {
-          "name": "double-team",
+          "name": "baton-pass",
           "gen": "scarlet-violet"
         },
         {
@@ -56,15 +56,11 @@
           "gen": "scarlet-violet"
         },
         {
-          "name": "grudge",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "sucker-punch",
+          "name": "disable",
           "gen": "scarlet-violet"
         },
         {
-          "name": "dragon-tail",
+          "name": "double-team",
           "gen": "scarlet-violet"
         },
         {
@@ -72,27 +68,7 @@
           "gen": "sword-shield"
         },
         {
-          "name": "thunder-wave",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "swift",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "rest",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "substitute",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "snore",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "protect",
+          "name": "dragon-tail",
           "gen": "scarlet-violet"
         },
         {
@@ -100,23 +76,23 @@
           "gen": "scarlet-violet"
         },
         {
-          "name": "attract",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "sleep-talk",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "baton-pass",
-          "gen": "scarlet-violet"
-        },
-        {
           "name": "facade",
           "gen": "scarlet-violet"
         },
         {
+          "name": "grudge",
+          "gen": "sword-shield"
+        },
+        {
           "name": "helping-hand",
+          "gen": "scarlet-violet"
+        },
+        {
+          "name": "protect",
+          "gen": "scarlet-violet"
+        },
+        {
+          "name": "rest",
           "gen": "scarlet-violet"
         },
         {
@@ -124,7 +100,31 @@
           "gen": "sword-shield"
         },
         {
+          "name": "sleep-talk",
+          "gen": "scarlet-violet"
+        },
+        {
+          "name": "snore",
+          "gen": "sword-shield"
+        },
+        {
+          "name": "substitute",
+          "gen": "scarlet-violet"
+        },
+        {
+          "name": "sucker-punch",
+          "gen": "scarlet-violet"
+        },
+        {
+          "name": "swift",
+          "gen": "scarlet-violet"
+        },
+        {
           "name": "tera-blast",
+          "gen": "scarlet-violet"
+        },
+        {
+          "name": "thunder-wave",
           "gen": "scarlet-violet"
         }
       ]
@@ -178,23 +178,36 @@
                 "level": null,
                 "knownMove": null
               },
-              "evolutions": []
+              "evolutions": [],
+              "perk": {
+                "x": 26,
+                "y": 26
+              }
             }
-          ]
+          ],
+          "perk": {
+            "x": 26,
+            "y": 26
+          }
         }
       ],
-      "uuid": "Compendium.ptr2e.core-species.Item.D7EFVprVAaeNuqrX"
+      "uuid": "Compendium.ptr2e.core-species.Item.D7EFVprVAaeNuqrX",
+      "methods": [],
+      "perk": {
+        "x": 26,
+        "y": 26
+      }
     },
     "number": 885,
     "traits": [
       "pokemon",
-      "underdog",
       "living-weapon",
       "missile",
       "breathless",
       "hover",
       "jet",
-      "pack-mon"
+      "pack-mon",
+      "phasing"
     ],
     "diet": [
       "nullivore"
@@ -252,6 +265,14 @@
         "group": null
       },
       {
+        "slug": "ghosts",
+        "value": 25,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
         "slug": "intimidate",
         "value": 15,
         "rvs": 0,
@@ -292,14 +313,6 @@
         "group": null
       },
       {
-        "slug": "ghosts",
-        "value": 25,
-        "rvs": 0,
-        "favourite": false,
-        "hidden": false,
-        "group": "occult"
-      },
-      {
         "slug": "ride",
         "value": 30,
         "rvs": 0,
@@ -338,9 +351,12 @@
       "riverside",
       "beach"
     ],
-    "slug": "dreepy"
+    "slug": "dreepy",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
   },
   "_id": "D7EFVprVAaeNuqrX",
-  "effects": [],
-  "folder": null
+  "effects": []
 }
