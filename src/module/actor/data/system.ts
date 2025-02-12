@@ -9,7 +9,7 @@ import {
 import { SpeciesSystemModel } from "@item/data/index.ts";
 import { getInitialSkillList } from "@scripts/config/skills.ts";
 import { CollectionField } from "@module/data/fields/collection-field.ts";
-import SkillPTR2e from "@module/data/models/skill.ts";
+import SkillPTR2e, { CustomSkill } from "@module/data/models/skill.ts";
 import natureToStatArray, { natures } from "@scripts/config/natures.ts";
 import { SlugField } from "@module/data/fields/slug-field.ts";
 import { TraitsSchema } from "@module/data/mixins/has-traits.ts";
@@ -17,6 +17,7 @@ import { MigrationSchema } from "@module/data/mixins/has-migrations.ts";
 import { ActorSystemSchema, AttributeSchema, StatSchema, TypeField, GenderOptions, AttributesSchema, AdvancementSchema, Movement } from "./data.ts";
 import { addDataFieldMigration, sluggify } from "@utils";
 import { AbilityReferenceSchema } from "@item/data/species.ts";
+import { PickableThing } from "@module/apps/pick-a-thing-prompt.ts";
 
 class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeDataModel)) {
   static LOCALIZATION_PREFIXES = ["PTR2E.ActorSystem"];
@@ -559,12 +560,84 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
         this.parent.rollOptions.addOption("self", "state:intrepid-1-4");
       }
     }
+
+    //@ts-expect-error - The getter needs to be added afterwards.
+    this.parent.flags.ptr2e.skillOptions = {
+      data: this.skills.reduce((acc, skill) => {
+        if (["luck", "resources"].includes(skill.slug)) return acc;
+        const label = (() => {
+          const baseKey = skill.group
+            ? `PTR2E.Skills.${skill.group}.${skill.slug}`
+            : `PTR2E.Skills.${skill.slug}`;
+          if (game.i18n.has(baseKey + ".label"))
+            return game.i18n.localize(baseKey + ".label");
+          const customSkill = game.ptr.data.skills.get(skill.slug) as CustomSkill;
+          return customSkill?.label ?? Handlebars.helpers.formatSlug(skill.slug);
+        })();
+        acc.push({ label, value: skill.slug, investment: skill.rvs ?? 0, base: skill.value, group: skill.group });
+        return acc;
+      }, [] as (PickableThing & { investment: number, base: number, group?: string })[])
+    }
+    Object.defineProperties(this.parent.flags.ptr2e.skillOptions, {
+      "all": {
+        get: () => {
+          return this.parent.flags.ptr2e.skillOptions!.data
+        }
+      },
+      "species": {
+        get: () => {
+          return this.parent.flags.ptr2e.skillOptions!.data.filter(skill => skill.base > 1);
+        }
+      },
+      "baseOne": {
+        get: () => {
+          return this.parent.flags.ptr2e.skillOptions!.data.filter(skill => skill.base === 1);
+        }
+      },
+      "arts": {
+        get: () => {
+          return this.parent.flags.ptr2e.skillOptions!.data.filter(skill => skill.group === "arts" && skill.base > 1);
+        }
+      },
+      "science": {
+        get: () => {
+          return this.parent.flags.ptr2e.skillOptions!.data.filter(skill => skill.group === "science" && skill.base > 1);
+        }
+      },
+      "performance": {
+        get: () => {
+          return this.parent.flags.ptr2e.skillOptions!.data.filter(skill => skill.group === "performance" && skill.base > 1);
+        }
+      },
+      "occult": {
+        get: () => {
+          return this.parent.flags.ptr2e.skillOptions!.data.filter(skill => skill.group === "occult" && skill.base > 1);
+        }
+      },
+      "pilot": {
+        get: () => {
+          return this.parent.flags.ptr2e.skillOptions!.data.filter(skill => skill.group === "pilot" && skill.base > 1);
+        }
+      }
+    });
   }
 
   override prepareDerivedData(): void {
     super.prepareDerivedData();
     this.species?.prepareDerivedData?.();
     this.parent.species?.prepareDerivedData?.();
+
+    for (const key in this.skills) {
+      const skill = this.skills.get(key);
+      if(!skill) continue;
+
+      const { value, rvs } = this.skills[key]!;
+      if(value) skill.value += value;
+      if(rvs) skill.rvs = skill.rvs ? skill.rvs + rvs : rvs;
+      if(value || rvs) {
+        skill.total = skill.value + (skill.rvs ?? 0);
+      }
+    }
 
     for (const ptype of this.type.types) {
       if (!this.traits.has(ptype) && Trait.isValid(ptype) && ptype != "untyped") {
@@ -719,6 +792,8 @@ interface ActorSystemPTR2e extends ModelPropsFromSchema<ActorSystemSchema> {
   }
 
   movement: Record<string, Movement>;
+
+  skills: Collection<SkillPTR2e> & Record<string, { value?: number, rvs?: number} | undefined>;
 
   _source: SourceFromSchema<ActorSystemSchema>;
 }

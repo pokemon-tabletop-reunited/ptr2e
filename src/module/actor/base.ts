@@ -2265,6 +2265,11 @@ type ActorFlags2e = ActorFlags & {
       disabled: ActionUUID[];
     }
     editedSkills?: boolean
+    skillOptions?: {
+      data: (PickableThing & { base: number, investment: number, group?: string })[];
+      get all(): PickableThing[];
+      get species(): PickableThing[];
+    }
   };
 };
 
