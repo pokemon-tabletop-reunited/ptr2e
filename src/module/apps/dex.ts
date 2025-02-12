@@ -163,7 +163,7 @@ export class DexApp extends foundry.applications.api.HandlebarsApplicationMixin(
       source.push({ slug: fullSlug, state: isLeftClick ? "seen" : "shiny" });
       this.actor.update({ system: { details: { dex: source } } });
       target.dataset.state = isLeftClick ? "seen" : "shiny";
-      target.dataset.tooltip = `${target.dataset.name}<hr>${isLeftClick ? "seen" : "shiny"}`;
+      target.dataset.tooltip = `${target.dataset.slug}<hr>${isLeftClick ? "seen" : "shiny"}`;
 
       if(!isLeftClick) {
         const img = target.querySelector("img");
@@ -201,7 +201,7 @@ export class DexApp extends foundry.applications.api.HandlebarsApplicationMixin(
     else source[index].state = newState;
     this.actor.update({ system: { details: { dex: source } } });
     target.dataset.state = newState;
-    target.dataset.tooltip = `${target.dataset.name}<hr>${newState}`;
+    target.dataset.tooltip = `${target.dataset.slug}<hr>${newState}`;
 
     if (newState === "shiny") {
       const img = target.querySelector("img");
