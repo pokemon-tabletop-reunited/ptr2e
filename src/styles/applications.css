@@ -852,10 +852,24 @@ body .application.sheet .form-group {
   flex-direction: row;
   justify-content: center;
   align-items: center;
+  position: relative;
 }
 .application.sheet.actor.v2 .window-content .tab.active[data-tab="overview"] aside.stats-chart-aside fieldset canvas {
   max-width: 100%;
   max-height: 100%;
+}
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="overview"] aside.stats-chart-aside fieldset button[data-action="open-stats-chart"] {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 0.25rem;
+  background: var(--appv2-background);
+  border: 1px solid var(--border-theme-color);
+  border-radius: 4px;
+  font-size: small;
+  width: fit-content;
+  height: fit-content;
+  line-height: normal;
 }
 .application.sheet.actor.v2 .window-content .tab.active[data-tab="overview"] .movement-component {
   grid-area: 5 / 5 / span 3 / span 3;

@@ -163,6 +163,9 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
         "add-clock": ActorSheetPTRV2.#onAddClock,
         "open-tutor-list": function (this: ActorSheetPTRV2) {
           game.ptr.tutorList.render({ force: true, actor: this.actor });
+        },
+        "open-stats-chart": function (this: ActorSheetPTRV2) {
+          new StatsForm({ document: this.actor }).render(true);
         }
       },
     },
