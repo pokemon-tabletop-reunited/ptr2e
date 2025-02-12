@@ -1,4 +1,4 @@
-import { AbilityPTR2e, ItemPTR2e, ItemSystemPTR, SpeciesPTR2e } from "@item";
+import { AbilityPTR2e, ItemPTR2e, ItemSystemPTR, MovePTR2e, SpeciesPTR2e } from "@item";
 import ActorPTR2e from "./base.ts";
 import { createHTMLElement, htmlClosest, htmlQuery, htmlQueryAll, sluggify } from "@utils";
 import { Tab } from "@item/sheets/document.ts";
@@ -36,6 +36,7 @@ import PartySheetPTR2e from "@module/apps/party-sheet.ts";
 import { ToggleComponent } from "./components/toggle-component.ts";
 import { PerkWebApp } from "@module/apps/perk-web/perk-web-v2.ts";
 import { DexApp } from "@module/apps/dex.ts";
+import MoveSystem from "@item/data/move.ts";
 
 class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixin(
   ActorSheetV2Expanded
@@ -918,15 +919,33 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
         item.type == "ability" &&
         this.actor.items.get(item.id) === item
       ) {
-        this._onDropAbility(event, item);
-        return;
+        return void this._onDropAbility(event, item);
+      }
+      if(
+        this.actor.isOwner &&
+        item instanceof ItemPTR2e &&
+        item.type == "move" &&
+        this.actor.uuid !== item.parent?.uuid
+      ) {
+        const move = item.toObject() as MovePTR2e['_source'];
+        const actionDiv = (event.target as HTMLElement).closest(".action[data-slot]") as HTMLElement;
+        if(actionDiv) {
+          const slot = Number(actionDiv.dataset.slot);
+          if (isNaN(slot)) return;
+
+          const primaryAction = (move.system as unknown as MoveSystem["_source"]).actions[0]
+          const currentAction = this.actor.attacks.actions[slot];
+          if(currentAction) await currentAction.update({ slot: null });
+          primaryAction.slot = slot;
+
+          return this.actor.createEmbeddedDocuments("Item", [move]);
+        }
       }
     }
 
     if (!data.action?.slug) return super._onDrop(event, data);
     //@ts-expect-error - This is a custom method
-    this._onDropAction(event, data);
-    return;
+    return void this._onDropAction(event, data);
   }
 
   _onDropAction(
