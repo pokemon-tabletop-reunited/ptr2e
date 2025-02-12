@@ -6,8 +6,8 @@
       <ul>
         {{#each list.moves as |move|}}
         <li>
-          <a class="content-link" data-uuid="{{move.uuid}}" data-link="{{move.uuid}}" data-tooltip="{{move.title}}"
-            data-type="Item" data-tooltip-direction="RIGHT">
+          <a class="content-link" {{#if move.pack}}data-pack="{{move.pack}}" {{/if}}data-uuid="{{move.uuid}}" data-link="{{move.uuid}}" data-tooltip="{{move.title}}"
+            data-type="Item" data-tooltip-direction="RIGHT" draggable="true">
             <i class="fas fa-suitcase"></i> {{move.title}}
           </a>
         </li>

@@ -33,37 +33,70 @@
       "system": {
         "changes": [
           {
-            "type": "flat-modifier",
-            "key": "insertskill-roll",
-            "value": 10,
+            "type": "choice-set",
+            "key": "",
+            "value": 0,
             "predicate": [],
-            "label": "InsertSkill Redlin 1",
             "mode": 2,
             "priority": null,
-            "ignored": false,
-            "hideIfDisabled": false
+            "ignored": true,
+            "choices": "flags.ptr2e.skillOptions.pilot",
+            "prompt": "PTR2E.ChoiceSetPrompt.Prompt",
+            "adjustName": true,
+            "rollOption": "rl31"
           },
           {
-            "type": "flat-modifier",
-            "key": "insertskill-roll",
+            "type": "basic",
+            "key": "system.skills.{effect|flags.ptr2e.choiceSelections.rl31}.value",
             "value": 10,
             "predicate": [],
-            "label": "InsertSkill Redlin 1",
             "mode": 2,
             "priority": null,
-            "ignored": false,
-            "hideIfDisabled": false
+            "ignored": false
           },
           {
-            "type": "flat-modifier",
-            "key": "insertskill-roll",
-            "value": 10,
+            "type": "choice-set",
+            "key": "",
+            "value": 0,
             "predicate": [],
-            "label": "InsertSkill Redlin 1",
             "mode": 2,
             "priority": null,
-            "ignored": false,
-            "hideIfDisabled": false
+            "ignored": true,
+            "choices": "flags.ptr2e.skillOptions.pilot",
+            "prompt": "PTR2E.ChoiceSetPrompt.Prompt",
+            "adjustName": true,
+            "rollOption": "rl32"
+          },
+          {
+            "type": "basic",
+            "key": "system.skills.{effect|flags.ptr2e.choiceSelections.rl32}.value",
+            "value": 10,
+            "predicate": [],
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "choice-set",
+            "key": "",
+            "value": 0,
+            "predicate": [],
+            "mode": 2,
+            "priority": null,
+            "ignored": true,
+            "choices": "flags.ptr2e.skillOptions.pilot",
+            "prompt": "PTR2E.ChoiceSetPrompt.Prompt",
+            "adjustName": true,
+            "rollOption": "rl33"
+          },
+          {
+            "type": "basic",
+            "key": "system.skills.{effect|flags.ptr2e.choiceSelections.rl33}.value",
+            "value": 10,
+            "predicate": [],
+            "mode": 2,
+            "priority": null,
+            "ignored": false
           }
         ],
         "slug": null,

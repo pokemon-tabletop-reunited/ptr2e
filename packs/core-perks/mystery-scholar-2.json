@@ -41,37 +41,48 @@
       "system": {
         "changes": [
           {
-            "type": "flat-modifier",
-            "key": "insertskill-roll",
-            "value": 10,
+            "type": "choice-set",
+            "key": "",
+            "value": 0,
             "predicate": [],
-            "label": "InsertSkill MysSch 1",
             "mode": 2,
             "priority": null,
             "ignored": false,
-            "hideIfDisabled": false
+            "choices": "flags.ptr2e.skillOptions.occult",
+            "prompt": "PTR2E.ChoiceSetPrompt.Prompt",
+            "adjustName": true,
+            "rollOption": "ms21"
           },
           {
-            "type": "flat-modifier",
-            "key": "insertskill-roll",
+            "type": "basic",
+            "key": "system.skills.{effect|flags.ptr2e.choiceSelections.ms21}.value",
             "value": 10,
             "predicate": [],
-            "label": "InsertSkill MysSch 1",
             "mode": 2,
             "priority": null,
-            "ignored": false,
-            "hideIfDisabled": false
+            "ignored": false
           },
           {
-            "type": "flat-modifier",
-            "key": "insertskill-roll",
-            "value": 10,
+            "type": "choice-set",
+            "key": "",
+            "value": 0,
             "predicate": [],
-            "label": "InsertSkill MysSch 1",
             "mode": 2,
             "priority": null,
             "ignored": false,
-            "hideIfDisabled": false
+            "choices": "flags.ptr2e.skillOptions.arts",
+            "prompt": "PTR2E.ChoiceSetPrompt.Prompt",
+            "adjustName": true,
+            "rollOption": "ms22"
+          },
+          {
+            "type": "basic",
+            "key": "system.skills.{effect|flags.ptr2e.choiceSelections.ms22}.value",
+            "value": 10,
+            "predicate": [],
+            "mode": 2,
+            "priority": null,
+            "ignored": false
           }
         ],
         "slug": null,

@@ -135,42 +135,75 @@
     {
       "name": "Redliner",
       "type": "passive",
-      "_id": "SOKdEjK4Lb16YgSi",
+      "_id": "AE6svt0DNpYNFGch",
       "img": "systems/ptr2e/img/icons/effect_icon.webp",
       "system": {
         "changes": [
           {
-            "type": "flat-modifier",
-            "key": "insertskill-roll",
-            "value": 10,
+            "type": "choice-set",
+            "key": "",
+            "value": 0,
             "predicate": [],
-            "label": "InsertSkill Redlin 1",
             "mode": 2,
             "priority": null,
-            "ignored": false,
-            "hideIfDisabled": false
+            "ignored": true,
+            "choices": "flags.ptr2e.skillOptions.pilot",
+            "prompt": "PTR2E.ChoiceSetPrompt.Prompt",
+            "adjustName": true,
+            "rollOption": "rl11"
           },
           {
-            "type": "flat-modifier",
-            "key": "insertskill-roll",
+            "type": "basic",
+            "key": "system.skills.{effect|flags.ptr2e.choiceSelections.rl11}.value",
             "value": 10,
             "predicate": [],
-            "label": "InsertSkill Redlin 1",
             "mode": 2,
             "priority": null,
-            "ignored": false,
-            "hideIfDisabled": false
+            "ignored": false
           },
           {
-            "type": "flat-modifier",
-            "key": "insertskill-roll",
-            "value": 10,
+            "type": "choice-set",
+            "key": "",
+            "value": 0,
             "predicate": [],
-            "label": "InsertSkill Redlin 1",
             "mode": 2,
             "priority": null,
-            "ignored": false,
-            "hideIfDisabled": false
+            "ignored": true,
+            "choices": "flags.ptr2e.skillOptions.pilot",
+            "prompt": "PTR2E.ChoiceSetPrompt.Prompt",
+            "adjustName": true,
+            "rollOption": "rl12"
+          },
+          {
+            "type": "basic",
+            "key": "system.skills.{effect|flags.ptr2e.choiceSelections.rl12}.value",
+            "value": 10,
+            "predicate": [],
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "choice-set",
+            "key": "",
+            "value": 0,
+            "predicate": [],
+            "mode": 2,
+            "priority": null,
+            "ignored": true,
+            "choices": "flags.ptr2e.skillOptions.pilot",
+            "prompt": "PTR2E.ChoiceSetPrompt.Prompt",
+            "adjustName": true,
+            "rollOption": "rl13"
+          },
+          {
+            "type": "basic",
+            "key": "system.skills.{effect|flags.ptr2e.choiceSelections.rl13}.value",
+            "value": 10,
+            "predicate": [],
+            "mode": 2,
+            "priority": null,
+            "ignored": false
           }
         ],
         "slug": null,
@@ -201,10 +234,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "ptr2e",
-        "systemVersion": "1.0.0.beta-ready.2",
-        "createdTime": 1738607127523,
-        "modifiedTime": 1738607167994,
-        "lastModifiedBy": "5ImYyhOS2D6D7ypO"
+        "systemVersion": "1.0.1.beta",
+        "createdTime": 1739370047783,
+        "modifiedTime": 1739370097477,
+        "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
       }
     }
   ],

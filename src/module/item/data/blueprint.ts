@@ -483,7 +483,7 @@ export default abstract class BlueprintSystem extends HasEmbed(HasMigrations(fou
         const moveItems = await Promise.all(
           levelUpMoves.map(async (move) => fromUuid(move.uuid))
         );
-        return moveItems.reverse().reduce(
+        return moveItems.reduce(
           (acc, move, index) => {
             if (move && move instanceof ItemPTR2e) {
               const moveData = move.toObject();
@@ -508,20 +508,28 @@ export default abstract class BlueprintSystem extends HasEmbed(HasMigrations(fou
         if (level >= 80) sets.push(evolution.system.abilities.master);
 
         const abilityItems = await Promise.all(
-          sets.map((set) => {
+          sets.map(async (set) => {
             // Pick one random ability from this set
             const ability = set[Math.floor(Math.random() * set.length)];
-            return fromUuid(ability?.uuid);
+            return {
+              selected: await fromUuid(ability.uuid),
+              remaining: await Promise.all(set.filter((a) => a.uuid !== ability.uuid).map((a) => fromUuid(a.uuid)))
+            }
           })
         );
 
         let i = 0;
         return abilityItems.reduce(
-          (acc, ability) => {
-            if (ability && ability instanceof ItemPTR2e) {
-              const abilityData = ability.toObject();
+          (acc, entry) => {
+            if (entry?.selected && entry.selected instanceof ItemPTR2e) {
+              const abilityData = entry.selected.toObject();
               abilityData.system.slot = i++;
               acc.push(abilityData);
+            }
+            for(const maybeAbility of entry?.remaining ?? []) {
+              if(maybeAbility && maybeAbility instanceof ItemPTR2e) {
+                acc.push(maybeAbility.toObject());
+              }
             }
             return acc;
           },

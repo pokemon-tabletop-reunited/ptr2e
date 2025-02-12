@@ -41,37 +41,48 @@
       "system": {
         "changes": [
           {
-            "type": "flat-modifier",
-            "key": "insertskill-roll",
-            "value": 10,
+            "type": "choice-set",
+            "key": "",
+            "value": 0,
             "predicate": [],
-            "label": "InsertSkill Maestr 1",
             "mode": 2,
             "priority": null,
             "ignored": false,
-            "hideIfDisabled": false
+            "choices": "flags.ptr2e.skillOptions.arts",
+            "prompt": "PTR2E.ChoiceSetPrompt.Prompt",
+            "adjustName": true,
+            "rollOption": "ma21"
           },
           {
-            "type": "flat-modifier",
-            "key": "insertskill-roll",
+            "type": "basic",
+            "key": "system.skills.{effect|flags.ptr2e.choiceSelections.ma21}.value",
             "value": 10,
             "predicate": [],
-            "label": "InsertSkill Maestr 1",
             "mode": 2,
             "priority": null,
-            "ignored": false,
-            "hideIfDisabled": false
+            "ignored": false
           },
           {
-            "type": "flat-modifier",
-            "key": "insertskill-roll",
-            "value": 10,
+            "type": "choice-set",
+            "key": "",
+            "value": 0,
             "predicate": [],
-            "label": "InsertSkill Maestr 1",
             "mode": 2,
             "priority": null,
             "ignored": false,
-            "hideIfDisabled": false
+            "choices": "flags.ptr2e.skillOptions.arts",
+            "prompt": "PTR2E.ChoiceSetPrompt.Prompt",
+            "adjustName": true,
+            "rollOption": "ma22"
+          },
+          {
+            "type": "basic",
+            "key": "system.skills.{effect|flags.ptr2e.choiceSelections.ma22}.value",
+            "value": 10,
+            "predicate": [],
+            "mode": 2,
+            "priority": null,
+            "ignored": false
           }
         ],
         "slug": null,
