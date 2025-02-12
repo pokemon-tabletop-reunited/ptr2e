@@ -91,9 +91,8 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
           inspector.render(true);
         },
         "open-perk-web": async function (this: ActorSheetPTRV2) {
-          // if ([true, undefined].includes(this.actor.flags.ptr2e?.sheet?.perkFlash))
-          //   await this.actor.setFlag("ptr2e", "sheet.perkFlash", false);
-          // game.ptr.web.open(this.actor);
+          if ([true, undefined].includes(this.actor.flags.ptr2e?.sheet?.perkFlash))
+            await this.actor.setFlag("ptr2e", "sheet.perkFlash", false);
 
           const app = new PerkWebApp(this.actor);
           app.render(true);
