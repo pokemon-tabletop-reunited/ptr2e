@@ -100,26 +100,48 @@
       "system": {
         "changes": [
           {
-            "type": "flat-modifier",
-            "key": "insertskill-roll",
-            "value": 10,
+            "type": "choice-set",
+            "key": "",
+            "value": 0,
             "predicate": [],
-            "label": "InsertSkill Headli 1",
             "mode": 2,
             "priority": null,
             "ignored": false,
-            "hideIfDisabled": false
+            "choices": "flags.ptr2e.skillOptions.performance",
+            "prompt": "PTR2E.ChoiceSetPrompt.Prompt",
+            "adjustName": true,
+            "rollOption": "hl11"
           },
           {
-            "type": "flat-modifier",
-            "key": "insertskill-roll",
+            "type": "basic",
+            "key": "system.skills.{effect|flags.ptr2e.choiceSelections.hl11}.value",
             "value": 10,
             "predicate": [],
-            "label": "InsertSkill Headli 1",
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "choice-set",
+            "key": "",
+            "value": 0,
+            "predicate": [],
             "mode": 2,
             "priority": null,
             "ignored": false,
-            "hideIfDisabled": false
+            "choices": "flags.ptr2e.skillOptions.performance",
+            "prompt": "PTR2E.ChoiceSetPrompt.Prompt",
+            "adjustName": true,
+            "rollOption": "hl12"
+          },
+          {
+            "type": "basic",
+            "key": "system.skills.{effect|flags.ptr2e.choiceSelections.hl12}.value",
+            "value": 10,
+            "predicate": [],
+            "mode": 2,
+            "priority": null,
+            "ignored": false
           }
         ],
         "slug": null,
@@ -150,10 +172,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "ptr2e",
-        "systemVersion": "1.0.0.beta-ready.2",
+        "systemVersion": "1.0.1.beta",
         "createdTime": 1738607544777,
-        "modifiedTime": 1738607571488,
-        "lastModifiedBy": "5ImYyhOS2D6D7ypO"
+        "modifiedTime": 1739369498329,
+        "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
       }
     }
   ],
