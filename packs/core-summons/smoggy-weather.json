@@ -6,12 +6,11 @@
       "version": 0.11,
       "previous": null
     },
-    "traits": [
-      "partial-automation"
-    ],
+    "traits": [],
     "actions": [],
     "baseAV": 150,
-    "duration": 3
+    "duration": 3,
+    "slug": "smoggy-weather"
   },
   "img": "icons/magic/death/skeleton-skull-soul-blue.webp",
   "effects": [
@@ -27,6 +26,27 @@
             "key": "poison-attack-damage",
             "value": 20,
             "predicate": [],
+            "label": "Poison Damage Increase",
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "hideIfDisabled": false
+          },
+          {
+            "type": "ephemeral-modifier",
+            "key": "physical-attack-damage-percentile",
+            "value": 25,
+            "predicate": [
+              {
+                "not": "target:trait:poison"
+              },
+              {
+                "nor": [
+                  "target:trait:steel"
+                ]
+              }
+            ],
+            "label": "Physical Damage Increase",
             "mode": 2,
             "priority": null,
             "ignored": false,
@@ -92,13 +112,12 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "ptr2e",
-        "systemVersion": "0.10.0-alpha.5.2.1",
+        "systemVersion": "1.0.3.beta",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1739484678261,
+        "lastModifiedBy": "OCI1vTFsIMTEwU21"
       }
     }
   ],
-  "flags": {},
   "_id": "AUpYPhcmwB7BsQ8I"
 }
