@@ -321,8 +321,9 @@ class GithubManager {
     try {
       await GithubManager.saveBlobToGithub(realDiff as ItemPTR2e["_source"], diff);
     }
-    catch {
+    catch (error) {
       ui.notifications.error("An unexpected error occured.");
+      console.error(error);
     }
     return new GithubSheet().render(true);
   }
@@ -404,13 +405,13 @@ class GithubManager {
             return null;
           }
           const reference = window.open(commitJson['auth_url'], identity, "popup=true");
-          await new Promise((resolve) => {
-            reference?.addEventListener("close", () => {
-              resolve(true);
-            });
-            reference?.addEventListener("unload", () => {
-              resolve(true);
-            });
+          await new Promise((resolve, reject) => {
+            function check(depth = 0) {
+              if(reference?.closed) resolve(true);
+              if(depth > 100) return void reject();
+              setTimeout(() => check(depth + 1), 2500);
+            }
+            check();
           });
           return await authenticateAndCommit(identity, { retry: true });
         }
