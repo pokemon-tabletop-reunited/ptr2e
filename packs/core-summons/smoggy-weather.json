@@ -38,10 +38,8 @@
             "value": 25,
             "predicate": [
               {
-                "not": "target:trait:poison"
-              },
-              {
-                "nor": [
+                "nand": [
+                  "target:trait:poison",
                   "target:trait:steel"
                 ]
               }
