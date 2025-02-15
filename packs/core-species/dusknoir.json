@@ -16,11 +16,15 @@
     "movement": {
       "primary": [
         {
-          "type": "overland",
-          "value": 5
+          "type": "flight",
+          "value": 7
         }
       ],
       "secondary": [
+        {
+          "type": "overland",
+          "value": 3
+        },
         {
           "type": "swim",
           "value": 3
@@ -34,7 +38,7 @@
       "phasing",
       "medium",
       "hover",
-      "aura"
+      "aura-user"
     ],
     "abilities": {
       "starting": [
@@ -73,7 +77,7 @@
     "skills": [
       {
         "slug": "acrobatics",
-        "value": 15,
+        "value": 40,
         "rvs": 0,
         "favourite": false,
         "hidden": false,
@@ -81,7 +85,7 @@
       },
       {
         "slug": "climb",
-        "value": 35,
+        "value": 40,
         "rvs": 0,
         "favourite": false,
         "hidden": false,
@@ -96,8 +100,16 @@
         "group": null
       },
       {
-        "slug": "ghost",
-        "value": 60,
+        "slug": "fast-talk",
+        "value": 35,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "flying",
+        "value": 45,
         "rvs": 0,
         "favourite": false,
         "hidden": false,
@@ -113,7 +125,7 @@
       },
       {
         "slug": "lift",
-        "value": 55,
+        "value": 60,
         "rvs": 0,
         "favourite": false,
         "hidden": false,
@@ -121,7 +133,7 @@
       },
       {
         "slug": "listen",
-        "value": 50,
+        "value": 55,
         "rvs": 0,
         "favourite": false,
         "hidden": false,
@@ -137,7 +149,7 @@
       },
       {
         "slug": "navigate",
-        "value": 45,
+        "value": 55,
         "rvs": 0,
         "favourite": false,
         "hidden": false,
@@ -153,23 +165,31 @@
       },
       {
         "slug": "running",
-        "value": 45,
+        "value": 35,
         "rvs": 0,
         "favourite": false,
         "hidden": false,
         "group": null
+      },
+      {
+        "slug": "ghost",
+        "value": 60,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": "occult"
       },
       {
         "slug": "spiritual",
-        "value": 70,
+        "value": 40,
         "rvs": 0,
         "favourite": false,
         "hidden": false,
-        "group": null
+        "group": "occult"
       },
       {
         "slug": "spot",
-        "value": 50,
+        "value": 55,
         "rvs": 0,
         "favourite": false,
         "hidden": false,
@@ -177,7 +197,7 @@
       },
       {
         "slug": "stealth",
-        "value": 60,
+        "value": 55,
         "rvs": 0,
         "favourite": false,
         "hidden": false,
@@ -186,6 +206,14 @@
       {
         "slug": "survival",
         "value": 45,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "track",
+        "value": 55,
         "rvs": 0,
         "favourite": false,
         "hidden": false,
