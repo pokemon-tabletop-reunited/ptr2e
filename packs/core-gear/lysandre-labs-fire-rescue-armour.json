@@ -9,8 +9,7 @@
     "traits": [
       "armour",
       "modern",
-      "sci-fi",
-      "partial-automation"
+      "sci-fi"
     ],
     "actions": [],
     "description": "<p>This fire-resistant armour is produced by Lysandre Labs to protect firefighters during dangerous rescue operations, although it's a little cumbersome.<br><br>The takes 50% less Fire-Type damage and cannot be Burned. <span style=\"font-family: Signika, sans-serif\">Grants +10 Base DEF, +5 Base SPDEF, and -10 Base SPD.</span></p>",
@@ -30,7 +29,8 @@
     "fling": {
       "type": "untyped",
       "power": 30,
-      "accuracy": 35
+      "accuracy": 35,
+      "hide": false
     },
     "quantity": 1,
     "rarity": "rare",
@@ -42,14 +42,15 @@
         "img": "systems/ptu/css/images/icons/gear_icon.png",
         "description": "<p>Unidentified Item</p>"
       }
-    }
+    },
+    "slug": "lysandre-labs-fire-rescue-armour"
   },
   "img": "systems/ptr2e/img/icons/equipment_icon.webp",
   "effects": [
     {
       "name": "Fire Rescue Armour",
       "type": "passive",
-      "_id": "17e4qYWGAKQfkaIt",
+      "_id": "1W6Me8JZRNUCmxqm",
       "img": "systems/ptr2e/img/icons/effect_icon.webp",
       "system": {
         "changes": [
@@ -93,6 +94,17 @@
             "mode": 2,
             "priority": null,
             "ignored": false
+          },
+          {
+            "type": "ephemeral-modifier",
+            "key": "fire-attack-damage-percentile",
+            "value": -50,
+            "predicate": [],
+            "label": "Fire Rescue Armour",
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "hideIfDisabled": false
           }
         ],
         "slug": null,
@@ -119,18 +131,17 @@
       "sort": 0,
       "flags": {},
       "_stats": {
-        "compendiumSource": null,
+        "compendiumSource": "Item.odrpewFngco9a07E.ActiveEffect.17e4qYWGAKQfkaIt",
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "ptr2e",
-        "systemVersion": "0.10.0-alpha.3.4.1",
-        "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "systemVersion": "1.0.3.beta",
+        "createdTime": 1739581996175,
+        "modifiedTime": 1739581996175,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
       }
     }
   ],
   "folder": "V4skAU6G3OH5fXad",
-  "flags": {},
   "_id": "afRRYQLeS5sfcmOn"
 }
