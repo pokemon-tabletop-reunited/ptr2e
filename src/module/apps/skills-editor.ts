@@ -239,7 +239,7 @@ export class SkillsEditor extends foundry.applications.api.HandlebarsApplication
       yes: {
         callback: async () => {
           await document.update({
-            "system.skills": document.system.skills.map((skill) => {
+            "system.skills": document.system._source.skills.map((skill) => {
               if (skill.slug === "resources") return {
                 ...skill,
                 rvs: 0,
