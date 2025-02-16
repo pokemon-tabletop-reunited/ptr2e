@@ -40,37 +40,70 @@
       "system": {
         "changes": [
           {
-            "type": "flat-modifier",
-            "key": "insertskill-roll",
-            "value": 9,
+            "type": "choice-set",
+            "key": "",
+            "value": 0,
             "predicate": [],
-            "label": "Jack of New Trades",
             "mode": 2,
             "priority": null,
             "ignored": false,
-            "hideIfDisabled": false
+            "choices": "flags.ptr2e.skillOptions.baseOne",
+            "prompt": "PTR2E.ChoiceSetPrompt.Prompt",
+            "adjustName": true,
+            "rollOption": "joat31"
           },
           {
-            "type": "flat-modifier",
-            "key": "insertskill-roll",
-            "value": 9,
+            "type": "basic",
+            "key": "system.skills.{effect|flags.ptr2e.choiceSelections.joat31}.value",
+            "value": 10,
             "predicate": [],
-            "label": "Jack of New Trades",
             "mode": 2,
             "priority": null,
-            "ignored": false,
-            "hideIfDisabled": false
+            "ignored": false
           },
           {
-            "type": "flat-modifier",
-            "key": "insertskill-roll",
-            "value": 9,
+            "type": "choice-set",
+            "key": "",
+            "value": 0,
             "predicate": [],
-            "label": "Jack of New Trades",
             "mode": 2,
             "priority": null,
             "ignored": false,
-            "hideIfDisabled": false
+            "choices": "flags.ptr2e.skillOptions.baseOne",
+            "prompt": "PTR2E.ChoiceSetPrompt.Prompt",
+            "adjustName": true,
+            "rollOption": "joat32"
+          },
+          {
+            "type": "basic",
+            "key": "system.skills.{effect|flags.ptr2e.choiceSelections.joat32}.value",
+            "value": 10,
+            "predicate": [],
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "choice-set",
+            "key": "",
+            "value": 0,
+            "predicate": [],
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "choices": "flags.ptr2e.skillOptions.baseOne",
+            "prompt": "PTR2E.ChoiceSetPrompt.Prompt",
+            "adjustName": true,
+            "rollOption": "joat32"
+          },
+          {
+            "type": "basic",
+            "key": "system.skills.{effect|flags.ptr2e.choiceSelections.joat33}.value",
+            "value": 10,
+            "predicate": [],
+            "mode": 2,
+            "priority": null,
+            "ignored": false
           }
         ],
         "slug": null,

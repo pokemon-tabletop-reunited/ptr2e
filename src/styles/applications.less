@@ -3,6 +3,7 @@ body {
     --appv2-background-flat: rgba(12,11,22, 0.94);
     --appv2-background: linear-gradient(to right, rgba(7, 7, 10, 0.93), rgba(19, 17, 31, 0.95));
     --appv2-background-alt: linear-gradient(to right, rgba(28, 25, 46, 0.5), rgba(24, 24, 34, 0.53));
+    --appv2-background-opaque: linear-gradient(to right, rgb(7, 7, 10), rgb(19, 17, 31));
     --appv2-text-color: var(--color-light-1);
     --hint-text-color: var(--color-light-5);
     --border-theme-color: var(--color-light-6);
@@ -14,6 +15,7 @@ body {
         --appv2-background-flat: rgba(225, 222 , 210, 0.94);
         --appv2-background: linear-gradient(to right, rgba(212, 210, 198, 0.93), rgba(240, 237, 223, 0.95));
         --appv2-background-alt: linear-gradient(to right, rgba(240, 237, 223, 0.5), rgba(225, 222 , 210, 0.53));
+        --appv2-background-opaque: linear-gradient(to right, rgb(240, 237, 223), rgb(225, 222 , 210));
         --appv2-text-color: var(--color-dark-1);
         --hint-text-color: var(--color-dark-5);
         --border-theme-color: var(--color-dark-6);
@@ -666,6 +668,7 @@ body {
                                             font-size: 13.5px;
                                             max-height: 42px;
                                             background: #0f0d18a3;
+                                            color: var(--color-light-1);
                                             padding: 4px;
                                             border-radius: 8px;
                                             width: auto;
@@ -972,6 +975,21 @@ body {
                             canvas {
                                 max-width: 100%;
                                 max-height: 100%;
+                            }
+
+                            position: relative;
+                            button[data-action="open-stats-chart"] {
+                                position: absolute;
+                                top: 0;
+                                bottom: 0.25rem;
+                                padding: 0.25rem;
+                                background: var(--appv2-background);
+                                border: 1px solid var(--border-theme-color);
+                                border-radius: 4px;
+                                font-size: small;
+                                width: fit-content;
+                                height: fit-content;
+                                line-height: normal;
                             }
                         }
                     }
@@ -3831,7 +3849,7 @@ body {
 
                 .level {
                     font-size: x-small;
-                    color: var(--color-text-light-primary);
+                    color: var(--appv2-text-color);
                 }
             }
         }
@@ -3894,7 +3912,7 @@ body {
 
                         span {
                             font-size: 12px;
-                            color: var(--color-text-light-primary);
+                            color: var(--appv2-text-color);
                         }
 
                         .divider {
@@ -3917,7 +3935,7 @@ body {
 
                         span {
                             font-size: 12px;
-                            color: var(--color-text-light-primary);
+                            color: var(--appv2-text-color);
                         }
 
                         .divider {
@@ -4006,7 +4024,7 @@ body {
 
                     &.value {
                         grid-area: experience-value;
-                        color: var(--color-text-light-primary);
+                        color: var(--appv2-text-color);
                     }
 
                     display: flex;
@@ -4073,7 +4091,7 @@ body {
 
                             span {
                                 font-size: x-small;
-                                color: var(--color-text-light-primary);
+                                color: var(--appv2-text-color);
                             }
 
                             .divider {
@@ -4098,7 +4116,7 @@ body {
 
                             span {
                                 font-size: x-small;
-                                color: var(--color-text-light-primary);
+                                color: var(--appv2-text-color);
                             }
 
                             .divider {
@@ -7199,7 +7217,7 @@ body {
 
                 .actor-level {
                     font-size: x-small;
-                    color: var(--color-text-light-primary);
+                    color: var(--appv2-text-color);
                 }
             }
         }
@@ -7326,7 +7344,7 @@ body {
   position: fixed;
   height: 100%;
   width: 100%;
-  color: white;
+  color: var(--appv2-text-color);
 
   display: grid;
   overflow: hidden;
@@ -7339,8 +7357,6 @@ body {
     "hudControls web searchResults";
   grid-template-columns: 250px minmax(0, 1fr) 250px;
   grid-template-rows: 33px 100px 30px 100px minmax(0, 1fr) min-content;
-
-  --appv2-background-opaque: linear-gradient(to right, rgb(7, 7, 10), rgb(19, 17, 31));
 
   .hud {
     border-right: 1px solid var(--border-theme-color);
@@ -7540,7 +7556,7 @@ body {
     grid-area: hudControls;
 
     padding: 0.5rem;
-    color: white;
+    color: var(--appv2-text-color);
     border-top: 1px solid var(--border-theme-color);
     border-radius: 0;
     display: flex;
@@ -7597,7 +7613,7 @@ body {
         width: 48px;
         border: 1px solid var(--border-theme-color);
         cursor: pointer;
-        background: var(--appv2-background-opaque);
+        background: linear-gradient(to right, rgb(7, 7, 10), rgb(19, 17, 31));
 
         &.selected {
           border-color: #973748;
@@ -7743,7 +7759,7 @@ body {
                   background: none;
                   border: none;
                   box-shadow: none;
-                  color: var(--text-light);
+                  color: var(--appv2-text-color);
                   cursor: grab;
                   font-size: var(--font-size-16);
                   height: 14px;
@@ -7780,7 +7796,7 @@ body {
           .noUi-active .noUi-tooltip {
               display: block;
               background-color: rgba(black, 0.9);
-              color: var(--text-light);
+              color: var(--appv2-text-color);
               line-height: 18px;
               padding: 6px 14px;
           }
@@ -7861,6 +7877,8 @@ body {
             h3 {
                 margin: 0;
                 cursor: pointer;
+                color: var(--appv2-text-color);
+                text-shadow: unset;
             }
             button {
                 width: fit-content;
@@ -7937,6 +7955,8 @@ body {
     dt {
         display: inline-block;
         padding-left: 5px;
+        color: var(--appv2-text-color);
+        text-shadow: unset;
     }
 
     dd {
@@ -8199,7 +8219,7 @@ body {
           flex: 0 0 min-content;
           text-wrap: nowrap;
           padding-right: 0.5rem;
-          color: var(--color-text-primary);
+          color: var(--appv2-text-color);
         }
       }
     }
