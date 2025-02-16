@@ -287,6 +287,9 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
         }),
         belt: new fields.SchemaField({
           max: new fields.NumberField({ required: true, initial: 0, min: 0, label: "PTR2E.FIELDS.inventory.belt.max.label", hint: "PTR2E.FIELDS.inventory.belt.max.hint" }),
+        }),
+        backpack: new fields.SchemaField({
+          max: new fields.NumberField({ required: true, initial: 0, min: 0, label: "PTR2E.FIELDS.inventory.backpack.max.label", hint: "PTR2E.FIELDS.inventory.backpack.max.hint" }),
         })
       })
     };
@@ -341,6 +344,7 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
     this.inventory.worn.max++;
     this.inventory.accessory.max++;
     this.inventory.belt.max++;
+    this.inventory.backpack.max++;
 
     for (const k in this.attributes) {
       const key = k as keyof Attributes;
@@ -700,6 +704,7 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
 
     if (this.traits.has("ace")) {
       this.inventory.belt.max += 2;
+      this.inventory.backpack.max++;
     }
     if (this.traits.has("wielder")) {
       this.inventory.held.max++;
