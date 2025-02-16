@@ -204,4 +204,13 @@ export function initializeSettings() {
     type: ExpTrackerSettings,
     scope: "world"
   })
+
+  game.settings.register("ptr2e", "dev-identity", {
+    name: "dev-identity",
+    hint: "dev-identity",
+    default: {},
+    config: false,
+    type: String,
+    scope: "client"
+  })
 }
