@@ -12,21 +12,15 @@
         "slug": "type-embodiment-type-2",
         "description": "<p>You gain a &lt;Type&gt; trait, from the baseline 18 &lt;Type&gt;s (at default). A recommended limit on &lt;Type&gt; traits is 3 total, but this can be revised at GM discretion. May replace an existing &lt;Type&gt;.</p>",
         "cost": {
-          "activation": "free",
-          "powerPoints": 0,
-          "delay": null,
-          "priority": null
+          "activation": "free"
         },
         "type": "passive",
         "traits": [],
         "range": {
           "target": "self",
-          "unit": "m",
-          "distance": 0
+          "unit": "m"
         },
-        "img": "icons/svg/explosion.svg",
-        "variant": null,
-        "hidden": false
+        "img": "icons/svg/explosion.svg"
       }
     ],
     "slug": "type-embodiment-type-2",
@@ -61,18 +55,165 @@
       }
     ],
     "autoUnlock": [],
-    "originSlug": null,
-    "variant": null,
-    "mode": null,
     "global": true,
     "webs": [],
     "design": {
       "arena": "mental",
       "approach": "resilience",
-      "archetype": "Elemental"
+      "archetype": "elemental"
     }
   },
   "_id": "Ele0eTIzN2GUFQD7",
   "img": "systems/ptr2e/img/perk-icons/Touched.svg",
-  "effects": []
+  "effects": [
+    {
+      "name": "Type Embodiment",
+      "type": "passive",
+      "_id": "IwqAlkqG7JAMUhkb",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "choice-set",
+            "key": "",
+            "value": 0,
+            "predicate": [],
+            "mode": 2,
+            "priority": null,
+            "ignored": true,
+            "choices": [
+              {
+                "label": "Add Type",
+                "value": "add"
+              },
+              {
+                "label": "Replace Type",
+                "value": "replace"
+              }
+            ],
+            "prompt": "PTR2E.ChoiceSetPrompt.Prompt",
+            "adjustName": true,
+            "rollOption": "te-option"
+          },
+          {
+            "type": "choice-set",
+            "key": "",
+            "value": 0,
+            "predicate": [
+              {
+                "eq": [
+                  "{effect|flags.ptr2e.choiceSelections.te-option}",
+                  "add"
+                ]
+              }
+            ],
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "choices": "flags.ptr2e.typeOptions.options",
+            "prompt": "PTR2E.ChoiceSetPrompt.Prompt",
+            "adjustName": true,
+            "rollOption": "te-add"
+          },
+          {
+            "type": "choice-set",
+            "key": "",
+            "value": 0,
+            "predicate": [
+              {
+                "eq": [
+                  "{effect|flags.ptr2e.choiceSelections.te-option}",
+                  "replace"
+                ]
+              }
+            ],
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "choices": "flags.ptr2e.typeOptions.types",
+            "prompt": "PTR2E.ChoiceSetPrompt.Prompt",
+            "adjustName": true,
+            "rollOption": "te-remove"
+          },
+          {
+            "type": "choice-set",
+            "key": "",
+            "value": 0,
+            "predicate": [
+              {
+                "eq": [
+                  "{effect|flags.ptr2e.choiceSelections.te-option}",
+                  "replace"
+                ]
+              }
+            ],
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "choices": "flags.ptr2e.typeOptions.options",
+            "prompt": "PTR2E.ChoiceSetPrompt.Prompt",
+            "adjustName": true,
+            "rollOption": "te-add"
+          },
+          {
+            "type": "basic",
+            "key": "system.type.types",
+            "value": "{effect|flags.ptr2e.choiceSelections.te-remove}",
+            "predicate": [
+              {
+                "eq": [
+                  "{effect|flags.ptr2e.choiceSelections.te-option}",
+                  "replace"
+                ]
+              }
+            ],
+            "mode": 6,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "key": "system.type.types",
+            "value": "{effect|flags.ptr2e.choiceSelections.te-add}",
+            "predicate": [],
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "<p>You gain a &lt;Type&gt; trait, from the baseline 18 &lt;Type&gt;s (at default). A recommended limit on &lt;Type&gt; traits is 3 total, but this can be revised at GM discretion. May replace an existing &lt;Type&gt;.</p>",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": "Compendium.ptr2e.core-perks.Item.3hmeZeafNkHeCKvi.ActiveEffect.GE0TilBXs6WMXRph",
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "1.0.3.beta",
+        "createdTime": 1739730444929,
+        "modifiedTime": 1739730444929,
+        "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
+      }
+    }
+  ]
 }
