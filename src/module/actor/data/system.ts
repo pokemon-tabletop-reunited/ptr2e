@@ -271,7 +271,7 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
         }),
         biography: new fields.HTMLField({ required: true, initial: "", label: "PTR2E.FIELDS.details.biography.label", hint: "PTR2E.FIELDS.details.biography.hint" }),
         dex: new CollectionField(new fields.SchemaField({
-          slug: new fields.StringField({ required: true, nullable: false}),
+          slug: new fields.StringField({ required: true, nullable: false }),
           state: new fields.StringField({ required: true, nullable: false, initial: "unknown", choices: ["unknown", "seen", "caught", "shiny"] }),
         }))
       }),
@@ -624,6 +624,26 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
         }
       }
     });
+    //@ts-expect-error - The getter are added afterwards.
+    this.parent.flags.ptr2e.typeOptions = {};
+    Object.defineProperties(this.parent.flags.ptr2e.typeOptions, {
+      "options": {
+        get: () => {
+          const types = Object.keys(game.settings.get("ptr2e", "pokemonTypes") as TypeEffectiveness ?? {}) as PokemonType[];
+
+          return types.filter(type => !this.type.types.has(type) || type === "untyped").map(type => {
+            return { label: Handlebars.helpers.formatSlug(type), value: type };
+          });
+        }
+      },
+      "types": {
+        get: () => {
+          return Array.from(this.type.types).map(type => {
+            return { label: Handlebars.helpers.formatSlug(type), value: type };
+          });
+        }
+      }
+    })
   }
 
   override prepareDerivedData(): void {
@@ -633,12 +653,12 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
 
     for (const key in this.skills) {
       const skill = this.skills.get(key);
-      if(!skill) continue;
+      if (!skill) continue;
 
       const { value, rvs } = this.skills[key]!;
-      if(value) skill.value += value;
-      if(rvs) skill.rvs = skill.rvs ? skill.rvs + rvs : rvs;
-      if(value || rvs) {
+      if (value) skill.value += value;
+      if (rvs) skill.rvs = skill.rvs ? skill.rvs + rvs : rvs;
+      if (value || rvs) {
         skill.total = skill.value + (skill.rvs ?? 0);
       }
     }
@@ -798,7 +818,7 @@ interface ActorSystemPTR2e extends ModelPropsFromSchema<ActorSystemSchema> {
 
   movement: Record<string, Movement>;
 
-  skills: Collection<SkillPTR2e> & Record<string, { value?: number, rvs?: number} | undefined>;
+  skills: Collection<SkillPTR2e> & Record<string, { value?: number, rvs?: number } | undefined>;
 
   _source: SourceFromSchema<ActorSystemSchema>;
 }
