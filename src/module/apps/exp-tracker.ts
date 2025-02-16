@@ -286,7 +286,9 @@ export class EXPTracker extends foundry.applications.api.HandlebarsApplicationMi
       circumstanceGroups,
       cmsPercent,
       total,
-      open
+      open,
+      //@ts-expect-error - This is a hack to get around the fact that pf2e typing doesn't support nested properties
+      amountField: game.settings.get("ptr2e", "expTrackerData").schema.fields.data.element.fields.amount
     }
   }
 
@@ -296,7 +298,7 @@ export class EXPTracker extends foundry.applications.api.HandlebarsApplicationMi
     for (const group in circumstanceGroups) {
       const modifiers = circumstanceGroups[group as keyof typeof circumstanceGroups].modifiers;
       for (const mod of modifiers) {
-        mod.checked = setting.get(mod.name)?.checked ?? mod.checked;
+        mod.amount =  setting.get(mod.name)?.amount ?? mod.amount ?? ((setting.get(mod.name) as {checked?: boolean})?.checked ?? (mod as {checked?: boolean}).checked) ?? 0;
       }
     }
     circumstanceGroups.custom.modifiers = setting.custom.map(custom => ({
@@ -305,7 +307,7 @@ export class EXPTracker extends foundry.applications.api.HandlebarsApplicationMi
       id: custom.id.replace("custom.", "")
     }));
 
-    const cmsPercent = Object.values(circumstanceGroups).reduce((acc, group) => acc + group.modifiers.reduce((acc, mod) => acc + (mod.checked ? mod.value : 0), 0), 1);
+    const cmsPercent = Object.values(circumstanceGroups).reduce((acc, group) => acc + group.modifiers.reduce((acc, mod) => acc + (mod.amount ? mod.value * mod.amount : 0), 0), 1);
     const total = Math.ceil(this.ber * cmsPercent);
     return {
       circumstanceGroups,
@@ -328,23 +330,6 @@ export class EXPTracker extends foundry.applications.api.HandlebarsApplicationMi
 
     if (partId === "venture") {
       this.filter.bind(this.element);
-
-      for (const checkbox of htmlElement.querySelectorAll<HTMLInputElement>("input[type='checkbox']")) {
-        checkbox.addEventListener("change", async () => {
-          const setting = game.settings.get("ptr2e", "expTrackerData");
-          const id = checkbox.name;
-          const checked = checkbox.checked;
-          if (!setting || !id) return;
-
-          await setting.update(id, checked);
-
-          const { cmsPercent, total } = this._prepareModifiers();
-          const percentElement = htmlElement.querySelector<HTMLElement>("[data-name='cms-percent']");
-          const expTotalElement = htmlElement.querySelector<HTMLElement>("[data-name='exp-total']");
-          if (percentElement) percentElement.textContent = `${(cmsPercent * 100).toFixed(0)}%`;
-          if (expTotalElement) expTotalElement.textContent = total.toString();
-        });
-      }
     }
     if (partId === "training") {
       for (const element of htmlElement.querySelectorAll<HTMLDivElement>(".slot .actor:not(.empty)")) {
@@ -356,6 +341,28 @@ export class EXPTracker extends foundry.applications.api.HandlebarsApplicationMi
           return this.render({ parts: ["training"] })
         });
       }
+    }
+  }
+
+  override _onRender(context: foundry.applications.api.ApplicationRenderContext, options: foundry.applications.api.HandlebarsRenderOptions): void {
+    super._onRender(context, options);
+
+    for (const input of this.element.querySelectorAll<HTMLInputElement>("range-picker input")) {
+      input.addEventListener("change", async () => {
+        const setting = game.settings.get("ptr2e", "expTrackerData");
+        const id = (input.parentElement as HTMLInputElement)?.name;
+        const value = parseInt(input.value);
+        if (!setting || !id) return;
+        if(isNaN(value)) return;
+
+        await setting.update(id, value);
+
+        const { cmsPercent, total } = this._prepareModifiers();
+        const percentElement = this.element.querySelector<HTMLElement>("[data-name='cms-percent']");
+        const expTotalElement = this.element.querySelector<HTMLElement>("[data-name='exp-total']");
+        if (percentElement) percentElement.textContent = `${(cmsPercent * 100).toFixed(0)}%`;
+        if (expTotalElement) expTotalElement.textContent = total.toString();
+      });
     }
   }
 

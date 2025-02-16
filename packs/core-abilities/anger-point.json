@@ -3,28 +3,7 @@
   "type": "ability",
   "img": "icons/skills/melee/unarmed-punch-fist-white.webp",
   "system": {
-    "actions": [
-      {
-        "traits": [
-          "defensive",
-          "interrupt-1"
-        ],
-        "name": "Anger Point",
-        "slug": "anger-point",
-        "type": "generic",
-        "cost": {
-          "activation": "free",
-          "powerPoints": 2,
-          "trigger": "<p>The user takes a Critical Hit.</p>"
-        },
-        "range": {
-          "target": "self",
-          "unit": "m"
-        },
-        "description": "<p>Trigger: The user takes a Critical Hit.</p><p>Effect: The user gains +6 ATK Stages for 5 Activations.</p>",
-        "img": "icons/svg/explosion.svg"
-      }
-    ],
+    "actions": [],
     "description": "<p>Trigger: The user takes a Critical Hit.</p><p>Effect: The user gains +6 ATK Stages for 5 Activations.</p>",
     "traits": [
       "defensive"
@@ -55,10 +34,11 @@
             "value": "Compendium.ptr2e.core-effects.Item.tH75RuGeGEDpXSaZ",
             "predicate": [],
             "chance": 100,
-            "affects": "self",
+            "affects": "defensive",
             "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "alterations": []
           }
         ],
         "slug": null,
@@ -91,10 +71,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "ptr2e",
-        "systemVersion": "0.10.0-alpha.4.0.0",
+        "systemVersion": "1.0.3.beta",
         "createdTime": 1731351525679,
-        "modifiedTime": 1732922868916,
-        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
+        "modifiedTime": 1739524142690,
+        "lastModifiedBy": "IcBpMqhFuTck9VpX"
       }
     }
   ]

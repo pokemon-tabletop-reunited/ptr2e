@@ -9,6 +9,7 @@ import * as R from "remeda";
 import { BrowserFilter, CheckboxData, RangesInputData, RenderResultListOptions, SelectData, SliderData } from "./tabs/data.ts";
 import Tagify from "@yaireo/tagify";
 import noUiSlider from "nouislider";
+import { ConsumablePTR2e } from "@item";
 
 export class CompendiumBrowser extends foundry.applications.api.HandlebarsApplicationMixin(ApplicationV2Expanded) {
   static override DEFAULT_OPTIONS = fu.mergeObject(
@@ -35,7 +36,30 @@ export class CompendiumBrowser extends foundry.applications.api.HandlebarsApplic
       },
       dragDrop: [{ dragSelector: "li.item[data-type]" }],
       actions: {
-        tutorList: () => game.ptr.tutorList.render({ force: true, actor: null })
+        tutorList: () => game.ptr.tutorList.render({ force: true, actor: null }),
+        purchase: async function (this: CompendiumBrowser, event: PointerEvent) {
+          const actor = canvas?.tokens?.controlled?.[0]?.actor ?? game.user.character;
+          if(!actor) return void ui.notifications.error("PTR2E.CompendiumBrowser.Purchase.NotControlledToken", {localize: true});
+
+          const itemUuid = htmlClosest(event.target, "[data-entry-uuid]")?.dataset.entryUuid;
+          const item = await fromUuid<ConsumablePTR2e>(itemUuid);
+          if(!item) return void ui.notifications.error("PTR2E.CompendiumBrowser.Purchase.ItemNotFound", {localize: true});
+
+          const cost = item.system.cost;
+          if(!cost) return void ui.notifications.error("PTR2E.CompendiumBrowser.Purchase.NoCost", {localize: true});
+
+          const availableIP = actor.system.inventoryPoints.current;
+          if(cost > availableIP) return void ui.notifications.error(game.i18n.format("PTR2E.CompendiumBrowser.Purchase.NotEnoughIP", { required: cost, current: availableIP }));
+
+          const newIP = availableIP - cost;
+          await actor.update({ "system.inventoryPoints.current": newIP });
+
+          await actor.createEmbeddedDocuments("Item", [item.clone({"system.temporary": true}).toObject()]);
+          ui.notifications.info(game.i18n.format("PTR2E.CompendiumBrowser.Purchase.Success", { actor: actor.name, item: item.name, cost, remaining: newIP }));          
+          if(item.system.rarity !== "common") {
+            ui.notifications.warn("PTR2E.CompendiumBrowser.Purchase.RarityWarning", {localize: true});
+          }
+        }
       }
     },
     { inplace: false }

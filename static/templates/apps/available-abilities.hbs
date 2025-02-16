@@ -1,11 +1,11 @@
 <article class="available-abilities">
     {{#each abilities as |ability|}}
-        {{> ability ability=ability direction="RIGHT"}}
+        {{> ability ability=ability direction="LEFT"}}
     {{/each}}
 </article>
 
 {{#*inline "ability"}}
-    <div class="ability" data-tooltip-direction="{{direction}}" data-id="{{ability.id}}" data-tooltip="{{ability.name}}">
+    <div class="ability item" data-tooltip-direction="{{direction}}" data-uuid="{{ability.uuid}}" data-tooltip="{{ability.name}}">
         <div class="ability-icon">
             <img class="icon" src="{{ability.img}}"/>
         </div>
