@@ -8495,6 +8495,18 @@ body {
       text-align: center;
       overflow-y: auto;
 
+      &.search {
+        flex: 0 0 auto;
+        border-bottom: 1px solid var(--border-theme-color);
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+
+        input {
+          flex: 0 0 60%;
+        }
+      }
+
       .entry {
         flex: 0 0 64px;
         height: 64px;
