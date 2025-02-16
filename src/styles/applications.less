@@ -562,6 +562,10 @@ body {
                               }
                             }
 
+                            &.item-temporary.active {
+                              color: var(--user-color);
+                            }
+
                             // Hands-held with interior number
                             .fa-stack {
                               margin: calc(-1 * var(0.1875rem)) calc(-1 * var(0.125rem)) 0;
@@ -3519,7 +3523,7 @@ body {
             flex: 1;
           }
 
-          .grade, .cost {
+          .grade, .cost, .purchase {
             flex: 0 0 min-content;
             text-wrap: nowrap;
             padding-right: 0.5rem;

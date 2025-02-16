@@ -490,6 +490,10 @@ body .application.sheet .form-group {
 .application.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] ul.items .item-controls > a.item-carry-type.active {
   color: var(--user-color);
 }
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] header .item-controls > a.item-temporary.active,
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] ul.items .item-controls > a.item-temporary.active {
+  color: var(--user-color);
+}
 .application.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] header .item-controls > a .fa-stack,
 .application.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] ul.items .item-controls > a .fa-stack {
   margin: calc(-1 * var(0.1875rem)) calc(-1 * var(0.125rem)) 0;
@@ -3869,7 +3873,8 @@ body .application.sheet .form-group {
   flex: 1;
 }
 .application.sheet#compendium-browser .item-list.result-list li .grade,
-.application.sheet#compendium-browser .item-list.result-list li .cost {
+.application.sheet#compendium-browser .item-list.result-list li .cost,
+.application.sheet#compendium-browser .item-list.result-list li .purchase {
   flex: 0 0 min-content;
   text-wrap: nowrap;
   padding-right: 0.5rem;
