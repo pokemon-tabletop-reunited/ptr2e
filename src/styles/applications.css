@@ -3853,6 +3853,7 @@ body .application.sheet .form-group {
   overflow-y: scroll;
   overflow-x: hidden;
   margin: unset;
+  margin-top: 0.25rem;
 }
 .application.sheet#compendium-browser .item-list.result-list li {
   display: flex;
@@ -3879,6 +3880,28 @@ body .application.sheet .form-group {
   text-wrap: nowrap;
   padding-right: 0.5rem;
   color: var(--color-text-primary);
+}
+.application.sheet#compendium-browser .item-list.result-list li .description {
+  flex: 1;
+  padding: 0.25rem;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+.application.sheet#compendium-browser .item-list.result-list span.trait {
+  color: #222224;
+  background: var(--color-theme-4);
+  padding: 0.25rem;
+  border: 1px solid var(--border-theme-color);
+  border-radius: 8px;
+}
+.application.sheet#compendium-browser .item-list.result-list span.trait.narrative {
+  background: #79af7a;
+  border-color: #79af7a;
+}
+.application.sheet#compendium-browser .item-list.result-list span.trait.automated {
+  background: #7fcbc8;
+  border-color: #7fcbc8;
 }
 .application.sheet.stats-form .window-content {
   padding-top: 0.5rem;

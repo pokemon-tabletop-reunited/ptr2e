@@ -6,7 +6,7 @@ import { PackLoader } from "./loader.ts";
 import { Tab } from "@item/sheets/document.ts";
 import { ItemType } from "@item/data/system.ts";
 import * as R from "remeda";
-import { BrowserFilter, CheckboxData, RangesInputData, RenderResultListOptions, SelectData, SliderData } from "./tabs/data.ts";
+import { BrowserFilter, CheckboxData, MultiselectData, RangesInputData, RenderResultListOptions, SelectData, SliderData } from "./tabs/data.ts";
 import Tagify from "@yaireo/tagify";
 import noUiSlider from "nouislider";
 import { ConsumablePTR2e } from "@item";
@@ -117,6 +117,12 @@ export class CompendiumBrowser extends foundry.applications.api.HandlebarsApplic
       icon: "",
       label: "PTR2E.CompendiumBrowser.Tabs.Species",
     },
+    "traits": {
+      id: "traits",
+      group: "tabs",
+      icon: "",
+      label: "PTR2E.CompendiumBrowser.Tabs.Traits",
+    },
   }
 
   _getTabs() {
@@ -139,7 +145,7 @@ export class CompendiumBrowser extends foundry.applications.api.HandlebarsApplic
   // #allTraits: { value: string; label: string, type?: Trait["type"] }[] | undefined;
 
   settings: CompendiumBrowserSettings;
-  dataTabsList = ["ability", "gear", "move", "perk", "species"] as const;
+  dataTabsList = ["ability", "gear", "move", "perk", "species", "traits"] as const;
   // navigationTab: Tabs;
   compendiumTabs: BrowserTabs;
 
@@ -157,6 +163,7 @@ export class CompendiumBrowser extends foundry.applications.api.HandlebarsApplic
       move: new browserTabs.Moves(this),
       perk: new browserTabs.Perks(this),
       species: new browserTabs.Species(this),
+      traits: new browserTabs.Traits(this),
     }
     this.initCompendiumList();
   }
@@ -168,6 +175,7 @@ export class CompendiumBrowser extends foundry.applications.api.HandlebarsApplic
       move: {},
       perk: {},
       species: {},
+      traits: {}
     }
 
     const loadDefault: Record<string, boolean | undefined> = {
@@ -345,7 +353,7 @@ export class CompendiumBrowser extends foundry.applications.api.HandlebarsApplic
           });
         }
 
-        if (currentTab.isOfType("species", "move")) {
+        if (currentTab.isOfType("species", "move", "perk")) {
           const selects = currentTab.filterData.selects;
           if (selects) {
             const selectElements = sortContainer.querySelectorAll<HTMLSelectElement>("select[name]");
@@ -473,7 +481,7 @@ export class CompendiumBrowser extends foundry.applications.api.HandlebarsApplic
               `input[name=${filterName}][data-tagify-select]`,
             );
             if (!multiselect) continue;
-            const data = multiselects[filterName];
+            const data = multiselects[filterName] as MultiselectData
 
             const tagify = new Tagify(multiselect, {
               enforceWhitelist: true,

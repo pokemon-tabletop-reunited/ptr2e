@@ -23,8 +23,9 @@ export default class FlatModifierChangeSystem extends ChangeModel {
 
   override beforePrepareData(
     actor: ActorPTR2e | null = this.actor,
-    providedMethod: ModifierPTR2e["method"] = "flat"
-  ): void {
+    providedMethod: ModifierPTR2e["method"] = "flat",
+    returnEarly = false
+  ): void | ((options?: DeferredValueParams) => ModifierPTR2e | null) {
     if (this.ignored) return;
     if (!actor) return;
 
@@ -85,6 +86,8 @@ export default class FlatModifierChangeSystem extends ChangeModel {
 
       return modifier;
     };
+
+    if(returnEarly) return construct;
 
     const modifiers = (actor.synthetics.modifiers[selector] ??= []);
     modifiers.push(construct);

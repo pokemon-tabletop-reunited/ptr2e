@@ -1,0 +1,120 @@
+{
+  "folder": "V4skAU6G3OH5fXad",
+  "name": "Electirizer",
+  "type": "equipment",
+  "system": {
+    "_migration": {
+      "version": 0.11,
+      "previous": null
+    },
+    "slug": "electirizer",
+    "traits": [
+      "combat",
+      "type",
+      "dragon",
+      "evolution",
+      "elekid",
+      "electabuzz",
+      "electivire"
+    ],
+    "actions": [],
+    "description": "<p><span style=\"font-family: bp_gender, sans-serif\">A box packed with a tremendous amount of electric energy that boosts the power of Electric-type moves. It's loved by a certain Pokémon.</span></p><p></p><p><span style=\"font-family: Signika, sans-serif\">Effect: Increases the Power and Accuracy of attacks by 10%</span></p>",
+    "crafting": {
+      "skill": "",
+      "spans": null,
+      "materials": []
+    },
+    "equipped": {
+      "carryType": "stowed",
+      "handsHeld": null,
+      "slot": "accessory"
+    },
+    "grade": "C",
+    "fling": {
+      "type": "electric",
+      "power": 70,
+      "accuracy": 100,
+      "hide": false
+    },
+    "quantity": 1,
+    "rarity": "rare",
+    "identification": {
+      "misidentified": null,
+      "status": "identified",
+      "unidentified": {
+        "name": "Unidentified Item",
+        "img": "systems/ptu/css/images/icons/gear_icon.png",
+        "description": "<p>Unidentified Item</p>"
+      }
+    }
+  },
+  "img": "systems/ptr2e/img/icons/equipment_icon.webp",
+  "effects": [
+    {
+      "name": "Type Booster (Dragon)",
+      "type": "passive",
+      "_id": "Q6zn9sod4O2yqmp1",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "percentile-modifier",
+            "key": "dragon-attack-power",
+            "value": 10,
+            "predicate": [],
+            "label": "Type Booster (Dragon) Power",
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "hideIfDisabled": false
+          },
+          {
+            "type": "percentile-modifier",
+            "key": "dragon-attack-accuracy",
+            "value": 10,
+            "predicate": [],
+            "label": "Type Booster (Dragon)",
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "hideIfDisabled": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": "Compendium.ptr2e.core-gear.Item.JhU4x5wZQlVuqvfz.ActiveEffect.pMVRnjGSvrhLNVtr",
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "1.0.3.beta",
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      }
+    }
+  ],
+  "flags": {},
+  "_id": "zQRQn1X9bw5xOApv"
+}

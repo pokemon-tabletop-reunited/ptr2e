@@ -344,7 +344,6 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
     this.inventory.worn.max++;
     this.inventory.accessory.max++;
     this.inventory.belt.max++;
-    this.inventory.backpack.max++;
 
     for (const k in this.attributes) {
       const key = k as keyof Attributes;

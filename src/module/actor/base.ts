@@ -1614,7 +1614,7 @@ class ActorPTR2e<
     };
   }
 
-  protected getContextualClone(
+  public getContextualClone(
     rollOptions: string[],
     ephemeralEffects: EffectSourcePTR2e[]
   ): this {
