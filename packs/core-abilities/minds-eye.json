@@ -14,15 +14,15 @@
         "cost": {
           "activation": "free"
         },
-        "description": "<p>Effect: While the user is affected with @Affliction[true-sight], their Normal- and Fighting-Type attacks gain [Danger Close] and deal Super Effective damage to Ghost-Type creatures.</p>",
-        "img": "icons/svg/explosion.svg",
+        "description": "<p>Effect: While the user is affected with @Affliction[true-sight], their Normal- and Fighting-Type attacks deal Super Effective damage to Ghost-Type creatures, and gain [Danger Close].</p>",
+        "img": "icons/svg/eye.svg",
         "range": {
           "target": "enemy",
           "unit": "m"
         }
       }
     ],
-    "description": "<p>Effect: Connection - Foresight. While the user is affected with @Affliction[true-sight], their Normal- and Fighting-Type attacks gain [Danger Close] and deal Super Effective damage to Ghost-Type creatures.</p>",
+    "description": "<p>Effect: Connection - Foresight. While the user is affected with @Affliction[true-sight], their Normal- and Fighting-Type attacks deal Super Effective damage to Ghost-Type creatures, and gain [Danger Close].</p>",
     "traits": [
       "aura",
       "connection",
@@ -47,7 +47,9 @@
             "type": "grant-item",
             "key": "",
             "value": "Compendium.ptr2e.core-moves.Item.B5u8TLbX10kgSB9d",
-            "predicate": [],
+            "predicate": [
+              "item:ability:minds-eye:active"
+            ],
             "alterations": [
               {
                 "mode": 5,
@@ -55,12 +57,12 @@
                 "value": "true"
               }
             ],
+            "allowDuplicate": false,
+            "reevaluateOnUpdate": true,
             "mode": 2,
             "priority": null,
             "ignored": false,
-            "reevaluateOnUpdate": false,
             "inMemoryOnly": false,
-            "allowDuplicate": true,
             "track": false,
             "replaceSelf": false,
             "onDeleteActions": {
@@ -97,10 +99,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "ptr2e",
-        "systemVersion": "0.10.0-alpha.5.1.5",
+        "systemVersion": "1.0.3.beta",
         "createdTime": 1737404815783,
-        "modifiedTime": 1737404843789,
-        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+        "modifiedTime": 1739656475019,
+        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
       }
     }
   ]

@@ -137,6 +137,14 @@
       "SearchPlaceholder": "Search for items...",
       "SortByLabel": "Sort By",
       "ClearFilters": "Clear Filters",
+      "Purchase": {
+        "NotControlledToken": "Please make sure to select a token you control or make sure you have a Player Character set on your User.",
+        "ItemNotFound": "Oops. We could not load the item to purchase.",
+        "NoCost":"This item doesn't have an IP cost so cannot be purchased.",
+        "NotEnoughIP": "You do not have enough IP to purchase this item. (Required: {required}, Current: {current})",
+        "Success": "{actor} successfully purchased {item} for {cost} IP. (Remaining IP: {remaining})",
+        "RarityWarning": "Items of higher rarity than 'Common' are normally not obtainable through IP!"
+      },
       "FilterConjunction": {
         "AndLabel": "And",
         "OrLabel": "Or"
@@ -1064,6 +1072,14 @@
       "Tools": "Tools",
       "HeightWeight": "Height & Weight",
       "CarryType": "Change Carry Type",
+      "Temporary": {
+        "Active": "This item <u>was</u> created using IP.<br>Click to toggle.",
+        "Inactive": "This item was <u>not</u> created with IP.<br>Click to toggle."
+      },
+      "ResetIP": {
+        "title": "Reset IP for {name}?",
+        "content": "Are you sure you wish to reset your IP to the Max, and delete all Temporary Consumables on this actor?"
+      },
       "Tabs": {
         "overview": {
           "label": "Overview"
@@ -1107,7 +1123,7 @@
         "hint": "Drag & Drop moves onto the actor / known attack sheet to add them as available options.<br><br>Drag & Drop from the Known Attack's sheet onto the Actor's Attack Slots to assign moves to the slots!"
       },
       "AvailableAbilities": {
-        "hint": "Drag & Drop abilities onto the actor / available ability sheet to add them as available options.<br><br>Drag & Drop from the Available Abilities's sheet onto the Actor's Ability Slots to assign abilities to the slots!<br><br>You gain an Ability Slot at level 20, 50 and 80, whenever you gain an ability from your Species it must be slotted into a slot of the same tier or higher (f.e., you cannot put a Master ability in any but the last slot, but you can put a Basic ability in slot 3 (advanced) or 4 (master))<br><br>Meanwhile, any abilities learned through other sources can only ever be fitted in the 2nd or 3rd slots (basic & advanced)"
+        "hint": "Drag & drop abilities onto the Actor sheet or the Available Abilities pop-out window to add them as available options. Then, you drag & drop from the Available Abilities pop-out window into an open Ability Slot to assign abilities to the slots!<br><br>Actors gain additional Ability Slots at level 20, 50 and 80. Whenever you gain an Ability from your Species beyond Starting, it must be slotted in these additional Ability Slots. Starting Abilities may be slotted in any slots (meaning, creatures with one Starting Ability will always have that one slotted in the first slot at all times).<br><br> Additional Abilities learned through other sources (i.e. via Perks and Tutoring) may only ever be slotted in the 2nd through 4th slots."
       },
       "Buttons": {
         "perkWeb": "Open Perk Web"
@@ -1427,6 +1443,9 @@
         },
         "belt": {
           "label": "Belt Slots"
+        },
+        "backpack": {
+          "label": "Backpack Slots"
         }
       },
       "consumable": {

@@ -490,6 +490,10 @@ body .application.sheet .form-group {
 .application.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] ul.items .item-controls > a.item-carry-type.active {
   color: var(--user-color);
 }
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] header .item-controls > a.item-temporary.active,
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] ul.items .item-controls > a.item-temporary.active {
+  color: var(--user-color);
+}
 .application.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] header .item-controls > a .fa-stack,
 .application.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] ul.items .item-controls > a .fa-stack {
   margin: calc(-1 * var(0.1875rem)) calc(-1 * var(0.125rem)) 0;
@@ -1018,6 +1022,9 @@ body .application.sheet .form-group {
 .application.sheet.actor.v2 .window-content .tab.active[data-tab="biography"] .free-form .biography {
   flex: 0 0 auto;
   padding: 0.5rem;
+}
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="biography"] .free-form .hint {
+  flex: 1;
 }
 .application.sheet.actor.v2 .window-content .tab.active[data-tab="biography"] .right-side {
   grid-area: 1 / 4 / span 5 / span 2;
@@ -2717,7 +2724,7 @@ body .application.sheet .form-group {
   height: 100%;
 }
 .application.sheet.exp-tracker .window-content [data-application-part="venture"].active fieldset.cms .form-group > label {
-  flex-basis: 65%;
+  flex-basis: 30%;
 }
 .application.sheet.exp-tracker .window-content [data-application-part="venture"].active fieldset.cms details {
   overflow-y: auto;
@@ -3866,7 +3873,8 @@ body .application.sheet .form-group {
   flex: 1;
 }
 .application.sheet#compendium-browser .item-list.result-list li .grade,
-.application.sheet#compendium-browser .item-list.result-list li .cost {
+.application.sheet#compendium-browser .item-list.result-list li .cost,
+.application.sheet#compendium-browser .item-list.result-list li .purchase {
   flex: 0 0 min-content;
   text-wrap: nowrap;
   padding-right: 0.5rem;
@@ -7989,6 +7997,16 @@ ul.item-list.result-list li.item.rarity-unique {
   align-items: center;
   text-align: center;
   overflow-y: auto;
+}
+.application.sheet.dex-sheet .window-content .dex.search {
+  flex: 0 0 auto;
+  border-bottom: 1px solid var(--border-theme-color);
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+.application.sheet.dex-sheet .window-content .dex.search input {
+  flex: 0 0 60%;
 }
 .application.sheet.dex-sheet .window-content .dex .entry {
   flex: 0 0 64px;

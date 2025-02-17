@@ -211,7 +211,6 @@ export class SkillsEditor extends foundry.applications.api.HandlebarsApplication
   }
 
   _onSearchFilter(_event: KeyboardEvent, query: string, rgx: RegExp, html: HTMLElement) {
-    const visibleLists = new Set();
     for (const entry of html.querySelectorAll<HTMLAnchorElement>("div.skill")) {
       if (!query) {
         entry.classList.remove("hidden");
@@ -220,7 +219,6 @@ export class SkillsEditor extends foundry.applications.api.HandlebarsApplication
       const { slug, group } = entry.dataset;
       const match = (slug && rgx.test(SearchFilter.cleanQuery(slug))) || (group && rgx.test(SearchFilter.cleanQuery(group)));
       entry.classList.toggle("hidden", !match);
-      if (match) visibleLists.add(slug);
     }
   }
 
@@ -239,7 +237,7 @@ export class SkillsEditor extends foundry.applications.api.HandlebarsApplication
       yes: {
         callback: async () => {
           await document.update({
-            "system.skills": document.system.skills.map((skill) => {
+            "system.skills": document.system._source.skills.map((skill) => {
               if (skill.slug === "resources") return {
                 ...skill,
                 rvs: 0,

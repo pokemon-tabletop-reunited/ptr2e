@@ -2270,6 +2270,10 @@ type ActorFlags2e = ActorFlags & {
       get all(): PickableThing[];
       get species(): PickableThing[];
     }
+    typeOptions?: {
+      get options(): PickableThing[],
+      get types(): PickableThing[];
+    }
   };
 };
 
