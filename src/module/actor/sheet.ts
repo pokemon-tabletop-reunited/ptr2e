@@ -120,6 +120,8 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
           if ([true, undefined].includes(this.actor.flags.ptr2e?.sheet?.perkFlash))
             await this.actor.setFlag("ptr2e", "sheet.perkFlash", false);
 
+          canvas.tokens.controlled.forEach(t => t.release());
+
           const app = new PerkWebApp(this.actor);
           app.render(true);
         },

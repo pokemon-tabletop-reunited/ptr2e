@@ -1293,9 +1293,11 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
     this.attachElementListeners(element);
   }
 
+  isMoving = false;
+
   attachElementListeners(element: HTMLElement) {
     let isDown = false;
-    let isMoving = false;
+    this.isMoving = false;
     let startX: number;
     let startY: number;
     let scrollLeft: number = element.scrollLeft;
@@ -1316,7 +1318,7 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
 
     element.addEventListener("mouseleave", () => {
       isDown = false;
-      isMoving = false;
+      this.isMoving = false;
       // element.style.cursor = this._zoomAmount === this.zoomLevels[0] ? "unset" : "zoom-in";
     });
 
@@ -1324,12 +1326,12 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
       isDown = false;
       // element.style.cursor = this._zoomAmount === this.zoomLevels[0] ? "unset" : "zoom-in";
       element.style.cursor = "unset";
-      setTimeout(() => { isMoving = false });
+      setTimeout(() => { this.isMoving = false });
     });
 
     element.addEventListener("mousemove", (e) => {
       if (!isDown) return;
-      isMoving = true;
+      this.isMoving = true;
       e.preventDefault();
       const x = e.pageX - element.offsetLeft;
       const y = e.pageY - element.offsetTop;
@@ -1345,34 +1347,46 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
       element.scrollTo(left, top);
     });
 
+    element.addEventListener("click", this.zoomIn.bind(this))
+    element.addEventListener("contextmenu", this.zoomOut.bind(this));
+  }
+
+  zoomIn(event?: MouseEvent) {
+    const element = this.element.querySelector<HTMLElement>(`[data-application-part="web"] .scroll`);
+    if (!element) return;
     const web = element.firstElementChild as HTMLElement;
 
-    element.addEventListener("click", (e) => {
-      if (!([element, web] as unknown as Maybe<EventTarget>[]).includes(e.target)) return;
-      e.preventDefault();
+    if (event && !([element, web] as unknown as Maybe<EventTarget>[]).includes(event?.target)) return;
+    event?.preventDefault();
 
-      const currentZoomLevel = this.zoomLevels.indexOf(this._zoomAmount);
-      if (currentZoomLevel === -1) return this.zoom(1);
+    const currentZoomLevel = this.zoomLevels.indexOf(this._zoomAmount);
+    if (currentZoomLevel === -1) return this.zoom(1);
 
-      const nextZoomLevel = Math.max(0, currentZoomLevel + 1);
-      if (nextZoomLevel === currentZoomLevel) return;
+    const nextZoomLevel = Math.max(0, currentZoomLevel + 1);
+    if (nextZoomLevel === currentZoomLevel) return;
 
-      this.zoom(this.zoomLevels[nextZoomLevel]);
-    })
+    this.zoom(this.zoomLevels[nextZoomLevel]);
+    return true;
+  }
 
-    element.addEventListener("contextmenu", (e) => {
-      if (isMoving) return;
-      if (!([element, web] as unknown as Maybe<EventTarget>[]).includes(e.target)) return;
-      e.preventDefault();
+  zoomOut(event?: MouseEvent) {
+    if (this.isMoving) return;
 
-      const currentZoomLevel = this.zoomLevels.indexOf(this._zoomAmount);
-      if (currentZoomLevel === -1) return this.zoom(1);
+    const element = this.element.querySelector<HTMLElement>(`[data-application-part="web"] .scroll`);
+    if (!element) return;
+    const web = element.firstElementChild as HTMLElement;
 
-      const nextZoomLevel = Math.max(0, currentZoomLevel - 1, this.web === "global" ? 0 : 0.65);
-      if (nextZoomLevel === currentZoomLevel) return;
+    if (event && !([element, web] as unknown as Maybe<EventTarget>[]).includes(event?.target)) return;
+    event?.preventDefault();
 
-      this.zoom(this.zoomLevels[nextZoomLevel]);
-    });
+    const currentZoomLevel = this.zoomLevels.indexOf(this._zoomAmount);
+    if (currentZoomLevel === -1) return this.zoom(1);
+
+    const nextZoomLevel = Math.max(0, currentZoomLevel - 1, this.web === "global" ? 0 : 0.65);
+    if (nextZoomLevel === currentZoomLevel) return;
+
+    this.zoom(this.zoomLevels[nextZoomLevel]);
+    return true;
   }
 
   zoom(zoom = this._zoomAmount, reRenderSelect = true) {
@@ -1409,6 +1423,60 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
     else zoomElement.scrollTo({ top: (zoomElement.scrollWidth / 2) - (zoomElement.clientWidth / 2), left: (zoomElement.scrollHeight / 2) - (zoomElement.clientHeight / 2) });
 
     if (reRenderSelect) this.render({ parts: ["hudZoom"] });
+  }
+
+  private moveKeys = new Set<string>();
+  private moveTime = 0;
+
+  onPan(context: KeyboardEventContext, movementDirections: string[]) {
+    // Case 1: Check for Tour
+    if((Tour.tourInProgress) && (!context.repeat) && (!context.up)) return false;
+
+    // Case 2: Check if Perk Web is open
+    if(!this.rendered) return false;
+
+    // Remove Keys on Up
+    if ( context.up ) {
+      for ( const d of movementDirections ) {
+        this.moveKeys.delete(d);
+      }
+      return true;
+    }
+
+    // Keep track of when we last moved
+    const now = Date.now();
+    const delta = now - this.moveTime;
+
+    // Track the movement set
+    for ( const d of movementDirections ) {
+      this.moveKeys.add(d);
+    }
+
+    // Delay 50ms before panning the web in order to capture diagonal movements
+    if(delta < 100) return true;
+    setTimeout(() => this.handlePan(), 50)
+    this.moveTime = now;
+    return true;
+  }
+
+  private handlePan() {
+    if(!this.moveKeys.size) return;
+
+    const element = this.element.querySelector<HTMLElement>(`[data-application-part="web"] .scroll`);
+    if (!element) return;
+
+    let dx = 0;
+    let dy = 0;
+    const directions = this.moveKeys;
+    if ( directions.has(ClientKeybindings.MOVEMENT_DIRECTIONS.LEFT) ) dx -= 1;
+    if ( directions.has(ClientKeybindings.MOVEMENT_DIRECTIONS.RIGHT) ) dx += 1;
+    if ( directions.has(ClientKeybindings.MOVEMENT_DIRECTIONS.UP) ) dy -= 1;
+    if ( directions.has(ClientKeybindings.MOVEMENT_DIRECTIONS.DOWN) ) dy += 1;
+
+    const newLeft = element.scrollLeft + (dx * 75);
+    const newTop = element.scrollTop + (dy * 75);
+    
+    element.scrollTo({left: newLeft, top: newTop, behavior: "smooth"});
   }
 
   async setWeb(species: SpeciesPTR2e | null) {
