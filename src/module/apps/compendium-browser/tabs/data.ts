@@ -88,6 +88,7 @@ interface MoveFilters extends BaseFilterData {
 }
 
 interface PerkFilters extends BaseFilterData {
+  selects: Record<"showOnlyOnWeb", SelectData>;
   multiselects: {
     traits: MultiselectData<string>;
     // prerequisites: MultiselectData<string>;

@@ -393,6 +393,7 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
 
     if (!this.perkTab?.isInitialized) {
       this.perkTab = new CompendiumBrowserPerkTab(game.ptr.compendiumBrowser);
+      this.perkTab.filterData.selects.showOnlyOnWeb.selected = "yes";
       this.perkTab.filterData.sliders.apCost.isExpanded = true;
     }
 

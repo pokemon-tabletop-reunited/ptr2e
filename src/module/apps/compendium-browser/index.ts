@@ -345,7 +345,7 @@ export class CompendiumBrowser extends foundry.applications.api.HandlebarsApplic
           });
         }
 
-        if (currentTab.isOfType("species", "move")) {
+        if (currentTab.isOfType("species", "move", "perk")) {
           const selects = currentTab.filterData.selects;
           if (selects) {
             const selectElements = sortContainer.querySelectorAll<HTMLSelectElement>("select[name]");
