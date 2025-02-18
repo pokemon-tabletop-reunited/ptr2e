@@ -216,9 +216,9 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
       gender: new fields.StringField<GenderOptions, GenderOptions, true, false, true>({
         required: true,
         choices: {
-          "genderless": "genderless",
-          "male": "male",
-          "female": "female"
+          "genderless": "PTR2E.ActorSystem.FIELDS.gender.genderless",
+          "male": "PTR2E.ActorSystem.FIELDS.gender.male",
+          "female": "PTR2E.ActorSystem.FIELDS.gender.female"
         },
         initial: "genderless"
       }),

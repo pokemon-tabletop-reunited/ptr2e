@@ -462,6 +462,10 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
       context.clocks = game.user.isGM ? this.document.system.clocks.contents : this.document.system.clocks.contents.filter(c => !c.private);
     }
 
+    if(partId === "skills") {
+      context.noAce = !this.actor.traits.has("ace");
+    }
+
     if (partId === "inventory") {
       const inventory = (() => {
         const inventory: Record<string, ItemPTR2e<ItemSystemPTR, ActorPTR2e>[]> = {};
