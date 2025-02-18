@@ -567,7 +567,7 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
     //@ts-expect-error - The getter needs to be added afterwards.
     this.parent.flags.ptr2e.skillOptions = {
       data: this.skills.reduce((acc, skill) => {
-        if (["luck", "resources"].includes(skill.slug)) return acc;
+        if (["luck", "resources"].includes(skill.slug) || skill.hidden) return acc;
         const label = (() => {
           const baseKey = skill.group
             ? `PTR2E.Skills.${skill.group}.${skill.slug}`
