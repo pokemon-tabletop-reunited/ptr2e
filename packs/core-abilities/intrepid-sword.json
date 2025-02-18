@@ -66,36 +66,37 @@
             "type": "grant-item",
             "key": "",
             "value": "Compendium.ptr2e.core-moves.Item.0rhyfVFsZ1asQIwv",
-            "predicate": [],
+            "predicate": [
+              "item:ability:intrepid-sword:active"
+            ],
             "alterations": [
               {
                 "mode": 5,
                 "property": "system.actions.0.free",
                 "value": "true"
-              },
-              {
-                "mode": 2,
-                "property": "",
-                "value": 0
-              },
-              {
-                "mode": 2,
-                "property": "",
-                "value": 0
               }
             ],
+            "reevaluateOnUpdate": true,
+            "allowDuplicate": false,
             "mode": 2,
             "priority": null,
             "ignored": false,
-            "reevaluateOnUpdate": false,
             "inMemoryOnly": false,
-            "allowDuplicate": true,
             "track": false,
             "replaceSelf": false,
             "onDeleteActions": {
               "grantee": "detach",
               "granter": "cascade"
             }
+          },
+          {
+            "type": "basic",
+            "key": "system.attributes.atk.stage",
+            "value": 1,
+            "predicate": [],
+            "mode": 2,
+            "priority": null,
+            "ignored": false
           }
         ],
         "slug": null,
@@ -126,10 +127,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "ptr2e",
-        "systemVersion": "0.10.0-alpha.5.1.5",
+        "systemVersion": "1.0.6.beta",
         "createdTime": 1737403811338,
-        "modifiedTime": 1737403822374,
-        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+        "modifiedTime": 1739816174716,
+        "lastModifiedBy": "IcBpMqhFuTck9VpX"
       }
     }
   ]
