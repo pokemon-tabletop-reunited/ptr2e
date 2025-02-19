@@ -4,7 +4,7 @@
   "type": "equipment",
   "system": {
     "crafting": {
-      "skill": null,
+      "skill": "",
       "spans": null,
       "materials": []
     },
@@ -17,7 +17,8 @@
     "fling": {
       "type": "untyped",
       "power": null,
-      "accuracy": 100
+      "accuracy": 100,
+      "hide": false
     },
     "rarity": "uncommon",
     "traits": [
@@ -34,21 +35,16 @@
         ],
         "range": {
           "target": "creature",
-          "distance": 0,
           "unit": "m"
         },
         "cost": {
-          "activation": "complex",
-          "powerPoints": 0,
-          "delay": null,
-          "priority": null
+          "activation": "complex"
         },
-        "variant": null
+        "img": "icons/svg/explosion.svg"
       }
     ],
     "description": "Effect: When the user declares an Attack, they have a 20% chance of gaining [Priority 1] on that Attack (or increasing that Action's existing Priority value by +1 for that Attack's use).",
-    "slug": null,
-    "container": null,
+    "slug": "quick-claw",
     "quantity": 1,
     "identification": {
       "misidentified": null,
@@ -58,26 +54,13 @@
         "img": "systems/ptu/css/images/icons/item_icon.png",
         "description": "<p>Unidentified Item</p>"
       }
+    },
+    "_migration": {
+      "version": null,
+      "previous": null
     }
   },
   "_id": "QhuAmW1i4HVqoqmU",
   "effects": [],
-  "folder": "V4skAU6G3OH5fXad",
-  "sort": 0,
-  "ownership": {
-    "default": 0,
-    "tXAZ3QUgjuwX4gdV": 3
-  },
-  "flags": {},
-  "_stats": {
-    "compendiumSource": null,
-    "duplicateSource": null,
-    "coreVersion": "12.327",
-    "systemId": "ptr2e",
-    "systemVersion": "0.0.0-alpha.1.0",
-    "createdTime": 1717878484297,
-    "modifiedTime": 1717878484297,
-    "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
-  },
-  "_key": "!items!QhuAmW1i4HVqoqmU"
+  "folder": "6VDJBcrqVDh5bYtA"
 }
