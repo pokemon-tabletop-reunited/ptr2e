@@ -28,14 +28,16 @@
           "ice"
         ],
         "description": "<p>Effect: On hit, the target has a 20% chance of gaining @Affliction[frostbite] 5. This attack is super effective against the Water Type.</p>",
-        "contestType": "",
-        "contestEffect": "",
-        "free": false,
-        "slot": null
+        "img": "icons/svg/explosion.svg",
+        "predicate": []
       }
     ],
-    "container": null,
-    "grade": "C"
+    "grade": "C",
+    "traits": [],
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
   },
   "_id": "y5H4C8WkE4feSmwt",
   "effects": [
@@ -47,6 +49,19 @@
       "system": {
         "changes": [
           {
+            "type": "percentile-modifier",
+            "key": "freeze-dry-attack-damage-percentile",
+            "value": 300,
+            "predicate": [
+              "target:trait:water"
+            ],
+            "label": "Super Effective vs Water",
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "hideIfDisabled": false
+          },
+          {
             "type": "roll-effect",
             "key": "freeze-dry-attack",
             "value": "Compendium.ptr2e.core-effects.Item.frostbiteconitem",
@@ -55,7 +70,8 @@
             "affects": "target",
             "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "alterations": []
           }
         ],
         "slug": null,
@@ -86,10 +102,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "ptr2e",
-        "systemVersion": "0.10.0-alpha.3.0.0",
+        "systemVersion": "1.0.3.beta",
         "createdTime": 1729547235568,
-        "modifiedTime": 1729547257083,
-        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
+        "modifiedTime": 1739584461375,
+        "lastModifiedBy": "OCI1vTFsIMTEwU21"
       }
     }
   ]

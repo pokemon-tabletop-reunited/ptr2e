@@ -220,11 +220,13 @@ class ChangeModel<TSchema extends ChangeSchema = ChangeSchema> extends foundry.a
    */
   resolveInjectedProperties<T extends string | number | object | null | undefined>(
     source: T,
-    options?: { warn?: boolean }
+    options?: { warn?: boolean },
+    resolvables?: Record<string, unknown>
   ): T;
   resolveInjectedProperties(
     source: string | number | object | null | undefined,
-    { warn = true } = {}
+    { warn = true } = {},
+    resolvables: Record<string, Record<string, unknown>> = {}
   ): string | number | object | null | undefined {
     if (
       source === null ||
@@ -248,14 +250,14 @@ class ChangeModel<TSchema extends ChangeSchema = ChangeSchema> extends foundry.a
       return source;
     } else if (typeof source === "string") {
       return source.replace(
-        /{(actor|item|change|effect)\|(.*?)}/g,
+        /{(actor|item|change|effect|attack)\|(.*?)}/g,
         (_match, key: string, prop: string) => {
           const data =
             key === "change"
               ? this
               : key === "actor" || key === "item" || key === "effect"
-                ? this[key]
-                : this.effect;
+                ? this[key] ?? resolvables[key]
+                : resolvables[key] ?? this.effect;
           const value = fu.getProperty(data ?? {}, prop);
           if (value === undefined) {
             this.ignored = true;
@@ -294,7 +296,7 @@ class ChangeModel<TSchema extends ChangeSchema = ChangeSchema> extends foundry.a
     if (typeof value === "number" || typeof value === "boolean" || value === null) {
       return value;
     }
-    value = this.resolveInjectedProperties(value, { warn });
+    value = this.resolveInjectedProperties(value, { warn }, resolvables);
 
     const resolvedFromBracket = this.isBracketedValue(value)
       ? this.#resolveBracketedValue(value, defaultValue)

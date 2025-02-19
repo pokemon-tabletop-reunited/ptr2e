@@ -1,0 +1,120 @@
+{
+  "folder": "V4skAU6G3OH5fXad",
+  "name": "Dubious Disc",
+  "type": "equipment",
+  "system": {
+    "_migration": {
+      "version": 0.11,
+      "previous": null
+    },
+    "slug": "dubious-disc",
+    "traits": [
+      "combat",
+      "type",
+      "normal",
+      "evolution",
+      "porygon",
+      "porygon2",
+      "porygon-z"
+    ],
+    "actions": [],
+    "description": "<p>A transparent device overflowing with dubious data that boosts the power Normal-type moves. It's loved by a certain Pokémon<br><br>Effect: Increases the Power and Accuracy of attacks by 10%.</p>",
+    "crafting": {
+      "skill": "",
+      "spans": null,
+      "materials": []
+    },
+    "equipped": {
+      "carryType": "stowed",
+      "handsHeld": null,
+      "slot": "accessory"
+    },
+    "grade": "C",
+    "fling": {
+      "type": "normal",
+      "power": 70,
+      "accuracy": 100,
+      "hide": false
+    },
+    "quantity": 1,
+    "rarity": "rare",
+    "identification": {
+      "misidentified": null,
+      "status": "identified",
+      "unidentified": {
+        "name": "Unidentified Item",
+        "img": "systems/ptu/css/images/icons/gear_icon.png",
+        "description": "<p>Unidentified Item</p>"
+      }
+    }
+  },
+  "img": "systems/ptr2e/img/icons/equipment_icon.webp",
+  "effects": [
+    {
+      "name": "Type Booster (Normal)",
+      "type": "passive",
+      "_id": "Buja40HsH5dQ7120",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "percentile-modifier",
+            "key": "normal-attack-power",
+            "value": 10,
+            "predicate": [],
+            "label": "Type Booster (Normal) Power",
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "hideIfDisabled": false
+          },
+          {
+            "type": "percentile-modifier",
+            "key": "normal-attack-accuracy",
+            "value": 10,
+            "predicate": [],
+            "label": "Type Booster (Normal)",
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "hideIfDisabled": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": "Compendium.ptr2e.core-gear.Item.JhU4x5wZQlVuqvfz.ActiveEffect.pMVRnjGSvrhLNVtr",
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "1.0.3.beta",
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      }
+    }
+  ],
+  "flags": {},
+  "_id": "snBkkT4L8tAqShnG"
+}

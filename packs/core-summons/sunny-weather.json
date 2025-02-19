@@ -11,7 +11,8 @@
     ],
     "actions": [],
     "baseAV": 150,
-    "duration": 3
+    "duration": 3,
+    "slug": "sunny-weather"
   },
   "img": "icons/magic/air/weather-sunlight-sky.webp",
   "effects": [
@@ -27,6 +28,7 @@
             "key": "fire-attack-damage",
             "value": 30,
             "predicate": [],
+            "label": "Fire Damage Boost",
             "mode": 2,
             "priority": null,
             "ignored": false,
@@ -37,6 +39,20 @@
             "key": "water-attack-damage",
             "value": -30,
             "predicate": [],
+            "label": "Water Damage Reduction",
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "hideIfDisabled": false
+          },
+          {
+            "type": "ephemeral-modifier",
+            "key": "fire-attack-damage-percentage",
+            "value": 100,
+            "predicate": [
+              "traget:trait:water"
+            ],
+            "label": "Neutral Fire Damage to Water",
             "mode": 2,
             "priority": null,
             "ignored": false,
@@ -50,20 +66,9 @@
               "actor:trait:grass"
             ],
             "mode": 1,
+            "label": "Grass Speed Boost",
             "priority": null,
             "ignored": false
-          },
-          {
-            "type": "flat-modifier",
-            "key": "fire-attack-effectiveness-stage",
-            "value": 100,
-            "predicate": [
-              "target:trait:water"
-            ],
-            "mode": 2,
-            "priority": null,
-            "ignored": false,
-            "hideIfDisabled": true
           },
           {
             "type": "roll-option",
@@ -88,7 +93,8 @@
             "affects": "target",
             "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "alterations": []
           },
           {
             "type": "roll-effect",
@@ -99,7 +105,8 @@
             "affects": "target",
             "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "alterations": []
           },
           {
             "type": "roll-effect",
@@ -112,7 +119,8 @@
             "affects": "target",
             "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "alterations": []
           }
         ],
         "slug": null,
@@ -148,13 +156,12 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "ptr2e",
-        "systemVersion": "0.10.0-alpha.4.1.0",
+        "systemVersion": "1.0.3.beta",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1739583368751,
+        "lastModifiedBy": "OCI1vTFsIMTEwU21"
       }
     }
   ],
-  "flags": {},
   "_id": "9cgLo9qwotwZUqPT"
 }

@@ -73,6 +73,12 @@ export default abstract class ConsumableSystem extends ConsumableExtension {
         label: "PTR2E.FIELDS.consumable.cost.label",
         hint: "PTR2E.FIELDS.consumable.cost.hint",
       }),
+      temporary: new fields.BooleanField({
+        required: true,
+        initial: false,
+        label: "PTR2E.FIELDS.consumable.temporary.label",
+        hint: "PTR2E.FIELDS.consumable.temporary.hint",
+      }),
     };
   }
 
@@ -111,6 +117,7 @@ interface ConsumableSystemSchema extends foundry.data.fields.DataSchema, Consuma
   stack: foundry.data.fields.NumberField<number, number, true, true, true>;
   modifier: foundry.data.fields.NumberField<number, number, true, true, true>;
   cost: foundry.data.fields.NumberField<number, number, true, true, true>;
+  temporary: foundry.data.fields.BooleanField<boolean, boolean, true, false, true>;
 }
 
 type ConsumableSystemSchemaExtension = SlugSchema & MigrationSchema & TraitsSchema & DescriptionSchema & ContainerSchema & GearSchema;

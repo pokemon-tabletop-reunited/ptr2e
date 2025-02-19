@@ -212,6 +212,7 @@ abstract class CaptureMessageSystem extends foundry.abstract.TypeDataModel {
       target: this.target ? await fromUuid<ActorPTR2e>(this.target) : null,
     });
 
+    context.defaultExpanded = game.settings.get("ptr2e", "expand-rolls");
     return renderTemplate("systems/ptr2e/templates/chat/capture.hbs", context);
   }
 
@@ -297,7 +298,8 @@ interface CaptureMessageRenderContext {
     success: boolean;
     delay: number;
   }
-  target: Maybe<ActorPTR2e>
+  target: Maybe<ActorPTR2e>;
+  defaultExpanded?: boolean;
 }
 
 interface CaptureMessageSchema extends foundry.data.fields.DataSchema {

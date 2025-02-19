@@ -429,10 +429,19 @@
             "item": null,
             "level": null,
             "knownMove": null
+          },
+          "perk": {
+            "x": 26,
+            "y": 26
           }
         }
       ],
-      "uuid": "Compendium.ptr2e.core-species.Item.0G61OYdWnLgfB6NB"
+      "uuid": "Compendium.ptr2e.core-species.Item.0G61OYdWnLgfB6NB",
+      "methods": [],
+      "perk": {
+        "x": 26,
+        "y": 26
+      }
     },
     "number": 849,
     "traits": [
@@ -603,9 +612,233 @@
       "badland",
       "swamp"
     ],
-    "slug": "toxtricity"
+    "slug": "toxtricity",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
   },
   "_id": "snM71ATVvgDT7QMq",
-  "effects": [],
-  "folder": null
+  "effects": [
+    {
+      "name": "Amped Up",
+      "type": "form",
+      "_id": "33ExyJ6x9a3eufzG",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-option",
+            "key": "manual-forme-toggle",
+            "value": "forme:amped-up:active",
+            "domain": "all",
+            "toggleable": true,
+            "label": "Toggle: Amped Up Forme",
+            "predicate": [],
+            "alwaysActive": false,
+            "count": false,
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "suboptions": [],
+            "state": false
+          },
+          {
+            "type": "percentile-modifier",
+            "predicate": [
+              "forme:amped-up:active"
+            ],
+            "key": "electric-attack-power",
+            "value": 20,
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "hideIfDisabled": false
+          },
+          {
+            "type": "percentile-modifier",
+            "predicate": [
+              "forme:amped-up:active"
+            ],
+            "key": "sonic-trait-attack-power",
+            "value": 20,
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "hideIfDisabled": false
+          },
+          {
+            "type": "grant-item",
+            "predicate": [
+              "forme:amped-up:active"
+            ],
+            "key": "",
+            "value": "Compendium.ptr2e.core-abilities.Item.N4iNQzyU492WWozy",
+            "allowDuplicate": false,
+            "reevaluateOnUpdate": true,
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "system.free",
+                "value": "true"
+              }
+            ],
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "inMemoryOnly": false,
+            "track": false,
+            "replaceSelf": false,
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            }
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0,
+        "trigger": "manual",
+        "conditions": []
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "1.0.3.beta",
+        "createdTime": 1739641276275,
+        "modifiedTime": 1739641464424,
+        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
+      }
+    },
+    {
+      "name": "Low Key",
+      "type": "form",
+      "_id": "WTAOYrJ7PWJPLE4q",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-option",
+            "key": "manual-forme-toggle",
+            "value": "forme:low-key:active",
+            "domain": "all",
+            "toggleable": true,
+            "label": "Toggle: Low Key Forme",
+            "predicate": [],
+            "alwaysActive": false,
+            "count": false,
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "suboptions": [],
+            "state": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:low-key:active"
+            ],
+            "key": "system.battleStats.accuracy.stage",
+            "value": 1,
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:low-key:active"
+            ],
+            "key": "system.battleStats.evasion.stage",
+            "value": 1,
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "grant-item",
+            "predicate": [
+              "forme:low-key:active"
+            ],
+            "key": "",
+            "value": "Compendium.ptr2e.core-abilities.Item.jsFFHr4t5qwwCzMt",
+            "allowDuplicate": false,
+            "reevaluateOnUpdate": true,
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "system.free",
+                "value": "true"
+              }
+            ],
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "inMemoryOnly": false,
+            "track": false,
+            "replaceSelf": false,
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            }
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0,
+        "trigger": "manual",
+        "conditions": []
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "1.0.3.beta",
+        "createdTime": 1739641493096,
+        "modifiedTime": 1739641633239,
+        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
+      }
+    }
+  ]
 }

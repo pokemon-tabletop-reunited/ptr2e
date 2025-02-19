@@ -88,6 +88,7 @@ interface MoveFilters extends BaseFilterData {
 }
 
 interface PerkFilters extends BaseFilterData {
+  selects: Record<"showOnlyOnWeb", SelectData>;
   multiselects: {
     traits: MultiselectData<string>;
     // prerequisites: MultiselectData<string>;
@@ -105,13 +106,20 @@ interface SpeciesFilters extends BaseFilterData {
   // sliders: Record<"height" | "weight", SliderData>;
 }
 
+interface TraitsFilters extends BaseFilterData {
+  multiselects: {
+    type: MultiselectData<string>;
+  }
+}
+
 
 type BrowserFilter =
   | AbilityFilters
   | GearFilters
   | MoveFilters
   | PerkFilters
-  | SpeciesFilters;
+  | SpeciesFilters
+  | TraitsFilters;
 
 type CompendiumBrowserIndexData = Omit<CompendiumIndexData, "_id"> & Partial<SearchResult>;
 
@@ -136,5 +144,6 @@ export type {
   GearFilters,
   MoveFilters,
   PerkFilters,
-  SpeciesFilters
+  SpeciesFilters,
+  TraitsFilters
 };

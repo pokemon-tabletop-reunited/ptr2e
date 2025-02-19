@@ -28,6 +28,11 @@
                     </div>
                     {{/if}}
                     <div class="item-controls">
+                        {{#if (isdefined this.system.temporary)}}
+                        <a class="item-temporary{{#if this.system.temporary}} active{{/if}}" data-tooltip="{{#if this.system.temporary}}PTR2E.ActorSheet.Temporary.Active{{else}}PTR2E.ActorSheet.Temporary.Inactive{{/if}}" data-tooltip-direction="UP" data-action="toggle-temporary" draggable="false">
+                            <i class="{{#if this.system.temporary}}fa-duotone fa-solid fa-fw fa-hourglass{{else}}fa-light fa-fw fa-hourglass{{/if}}"></i>
+                        </a>
+                        {{/if}}
                         <a class="item-carry-type{{#if (eq this.system.equipped.carryType "equipped")}} active{{/if}}" data-tooltip="PTR2E.ActorSheet.CarryType" data-tooltip-direction="UP" data-action="open-carry-type-menu" draggable="false">
                           {{~#if (and (eq this.system.equipped.carryType "equipped") (eq this.system.equipped.handsHeld 1))}}<span class="fa-stack fa-fw fa-2xs"><i class="fa-solid fa-hand-back-fist fa-stack-2x"></i><i class="fa-solid fa-1 fa-inverse fa-stack-1x"></i></span>
                           {{~else if (and (eq this.system.equipped.carryType "equipped") (eq this.system.equipped.handsHeld 2))}}<span class="fa-stack fa-fw fa-2xs"><i class="fa-solid fa-hand-back-fist fa-stack-2x"></i><i class="fa-solid fa-2 fa-inverse fa-stack-1x"></i></span>
@@ -63,6 +68,7 @@
                 </div>
                 <p class="hint">{{localize 'PTR2E.FIELDS.inventoryPoints.max.hint'}}</p>
             </div>
+            <button class="mt-1" type="button" data-action="reset-ip">Reset IP & Delete Temporary Items</button>
         </fieldset>
       </div>
       <div class="inventory-slots standard-form">
@@ -98,6 +104,14 @@
                 <input type="number" value="{{actor.system.inventory.belt.used}}" disabled/>
                 /
                 <input type="number" value="{{actor.system.inventory.belt.max}}" disabled/>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>{{localize 'PTR2E.FIELDS.inventory.backpack.label'}}</label>
+              <div class="form-fields">
+                <input type="number" value="{{actor.system.inventory.backpack.used}}" disabled/>
+                /
+                <input type="number" value="{{actor.system.inventory.backpack.max}}" disabled/>
               </div>
             </div>
         </fieldset>

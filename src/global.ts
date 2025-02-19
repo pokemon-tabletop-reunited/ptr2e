@@ -134,7 +134,7 @@ declare global {
     get(module: "ptr2e", key: "compendiumBrowserPacks"): CompendiumBrowserSettings
     get(module: "ptr2e", key: "tutorListData"): TutorListSettings
     get(module: "ptr2e", key: "expTrackerData"): ExpTrackerSettings
-    get(module: "ptr2e", key: "tokens.autoscale"): boolean
+    get(module: "ptr2e", key: "tokens.autoscale" | "expand-rolls"): boolean
     get(module: "ptr2e", key: "pokemonTypes"): TypeEffectiveness
     set(module: "ptr2e", key: "expTrackerData", value: ExpTrackerSettings['_source']): ExpTrackerSettings
   }
