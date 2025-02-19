@@ -1,0 +1,90 @@
+{
+  "name": "Calyrex Rider",
+  "type": "effect",
+  "system": {
+    "_migration": {
+      "version": 0.11,
+      "previous": null
+    },
+    "description": "<p>+20 Base ATK, DEF, SPATK, SPDEF, SPD</p><p>+40% to all Movements (minimum +2).</p><p>+15 to Skill Rolls.</p><p>Effect: The user gains Defend as One, Fight as One, and Intercept (Noble Steed).</p>",
+    "traits": []
+  },
+  "img": "systems/ptr2e/img/perk-icons/Cavalier.svg",
+  "effects": [
+    {
+      "name": "Calyrex Rider",
+      "type": "passive",
+      "_id": "6bXSWgYQgYizNH0O",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "stats-alteration",
+            "key": "",
+            "value": 0,
+            "predicate": [],
+            "hp": null,
+            "atk": 20,
+            "def": 20,
+            "spa": 20,
+            "spd": 20,
+            "spe": 20,
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "roll-option",
+            "key": "",
+            "value": "Ridden by Calyrex",
+            "predicate": [],
+            "domain": "all",
+            "label": "SKILL ROLLS",
+            "toggleable": true,
+            "count": false,
+            "alwaysActive": false,
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "suboptions": [],
+            "state": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "1.0.6.beta",
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      }
+    }
+  ],
+  "flags": {},
+  "_id": "W27Z0zdJ3apwYcxv"
+}

@@ -24,7 +24,6 @@
         "description": "<p>Trigger: The user causes at least one creature to gain @Affliction[fainted].</p><p>Effect: The user's ATK Stage is increased by +1 for 7 Activations.</p>",
         "img": "icons/svg/explosion.svg"
       },
-      
       {
         "traits": [
           "legendary"
@@ -34,7 +33,6 @@
         "type": "passive",
         "cost": {
           "activation": "free",
-          "powerPoints": 0,
           "trigger": "<p>The user possesses the effect Calyrex Rider.</p>"
         },
         "range": {
@@ -45,7 +43,7 @@
         "img": "icons/svg/explosion.svg"
       }
     ],
-    "description": "<p>Trigger: The user causes at least one creature to gain @Affliction[fainted]</p><p>Effect: The user's ATK Stage is increased by +1 for 5 Activations.</p><p>Passive: If the user has the effect Calyrex Rider, the user gains Connection - Glacial Lance and takes 33% less damage from Special-Category Attacks.</p>",
+    "description": "<p>Trigger: The user causes at least one creature to gain @Affliction[fainted]</p><p>Effect: The user's ATK Stage is increased by +1 for 7 Activations.</p><p>Passive: If the user has the effect Calyrex Rider, the user gains Connection - Glacial Lance and takes 33% less damage from Special-Category Attacks.</p>",
     "traits": [
       "legendary"
     ],
@@ -56,5 +54,73 @@
     }
   },
   "_id": "Y6uBelrwgxzHQMkY",
-  "effects": []
+  "effects": [
+    {
+      "name": "Glacial Lance",
+      "type": "passive",
+      "_id": "sNNhUcJIjygHHBiF",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "grant-item",
+            "key": "",
+            "value": "Compendium.ptr2e.core-moves.Item.VWtxhdUlCpAZ7pvr",
+            "predicate": [],
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "system.free",
+                "value": "true"
+              }
+            ],
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "reevaluateOnUpdate": false,
+            "inMemoryOnly": false,
+            "allowDuplicate": true,
+            "track": false,
+            "replaceSelf": false,
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            }
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": false,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": "Item.5TPjCjAsFMgdFVSR.ActiveEffect.X2J9s78aixergPau",
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "1.0.6.beta",
+        "createdTime": 1739813701982,
+        "modifiedTime": 1739813701982,
+        "lastModifiedBy": "IcBpMqhFuTck9VpX"
+      }
+    }
+  ]
 }
