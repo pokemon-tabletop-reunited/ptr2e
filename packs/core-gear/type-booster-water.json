@@ -1,6 +1,6 @@
 {
   "name": "Type Booster (Water)",
-  "folder": "V4skAU6G3OH5fXaf",
+  "folder": "V4skAU6G3OH5fXad",
   "img": "systems/ptr2e/img/icons/equipment_icon.webp",
   "type": "equipment",
   "system": {
@@ -11,19 +11,20 @@
     },
     "equipped": {
       "slot": "accessory",
-      "carryType": "worn",
+      "carryType": "stowed",
       "handsHeld": null
     },
     "grade": "E",
     "fling": {
-      "type": "untyped",
-      "power": null,
-      "accuracy": 100
+      "type": "water",
+      "power": 40,
+      "accuracy": 100,
+      "hide": false
     },
     "rarity": "uncommon",
     "traits": [
       "combat",
-      "type"
+      "water"
     ],
     "actions": [
       {
@@ -41,11 +42,12 @@
         },
         "cost": {
           "activation": "complex"
-        }
+        },
+        "img": "icons/svg/explosion.svg"
       }
     ],
-    "description": "Effect: Increases the Power and Accuracy of <Type> attacks by 10%.",
-    "slug": "type-booster",
+    "description": "<p>Effect: Increases the Power and Accuracy of Water-Type attacks by 10%.</p>",
+    "slug": "type-booster-water",
     "quantity": 1,
     "identification": {
       "misidentified": null,
@@ -123,7 +125,7 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.330",
+        "coreVersion": "12.331",
         "systemId": "ptr2e",
         "systemVersion": "0.10.0-alpha.2.1.5",
         "createdTime": null,
