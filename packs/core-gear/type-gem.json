@@ -4,7 +4,7 @@
   "type": "consumable",
   "system": {
     "crafting": {
-      "skill": null,
+      "skill": "",
       "spans": null,
       "materials": []
     },
@@ -17,7 +17,8 @@
     "fling": {
       "type": "untyped",
       "power": 30,
-      "accuracy": 95
+      "accuracy": 95,
+      "hide": false
     },
     "rarity": "common",
     "traits": [
@@ -27,66 +28,17 @@
       "stack-3",
       "type-fling"
     ],
-    "actions": [
-      {
-        "name": "Type Gem",
-        "slug": "type-gem",
-        "type": "generic",
-        "description": "Trigger: The user declares an Attack that shares a %lt;Type&gt; with the item.\nEffect: The triggering Attack doesn't consume PP, and has its Power increased by 50% until it is resolved.",
-        "traits": [
-          "combat",
-          "consumable",
-          "held",
-          "stack-3",
-          "type-fling"
-        ],
-        "range": {
-          "target": "creature",
-          "distance": 0,
-          "unit": "m"
-        },
-        "cost": {
-          "activation": "complex",
-          "trigger": "The user declares an Attack that shares a %lt;Type&gt; with the item.",
-          "powerPoints": 0,
-          "delay": null,
-          "priority": null
-        },
-        "variant": null
-      }
-    ],
-    "description": "Trigger: The user declares an Attack that shares a %lt;Type&gt; with the item.\nEffect: The triggering Attack doesn't consume PP, and has its Power increased by 50% until it is resolved.",
-    "slug": null,
-    "container": null,
+    "description": "<p>Trigger: The user declares an Attack that shares a &lt;Type&gt; with the item. Effect: The triggering Attack doesn't consume PP, and has its Power increased by 50% until it is resolved.</p>",
+    "slug": "type-gem",
     "quantity": 1,
-    "identification": {
-      "misidentified": null,
-      "status": "identified",
-      "unidentified": {
-        "name": "Unidentified Item",
-        "img": "systems/ptu/css/images/icons/item_icon.png",
-        "description": "<p>Unidentified Item</p>"
-      }
-    }
+    "_migration": {
+      "version": null,
+      "previous": null
+    },
+    "consumableType": "other",
+    "stack": 1
   },
   "_id": "ZSg2vRJgDD93RzAX",
   "effects": [],
-  "folder": "V4skAU6G3OH5fXab",
-  "sort": 0,
-  "ownership": {
-    "default": 0,
-    "tXAZ3QUgjuwX4gdV": 3
-  },
-  "flags": {},
-  "_stats": {
-    "compendiumSource": null,
-    "duplicateSource": null,
-    "coreVersion": "12.327",
-    "systemId": "ptr2e",
-    "systemVersion": "0.0.0-alpha.1.0",
-    "createdTime": 1717878484297,
-    "modifiedTime": 1717878484297,
-    "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
-  },
-  "_key": "!items!ZSg2vRJgDD93RzAX"
+  "folder": "V4skAU6G3OH5fXab"
 }
