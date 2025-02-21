@@ -102,6 +102,12 @@ interface ItemSystemSource {
     container?: DocumentUUID | null;
 
     _migration?: MigrationRecord;
+
+    publication: {
+      title: string;
+      authors: string[]
+      notes?: string;
+    }
 }
 
 export type {

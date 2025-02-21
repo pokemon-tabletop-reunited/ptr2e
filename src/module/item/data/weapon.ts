@@ -10,6 +10,7 @@ import { ActionPTR2e } from "@data";
 import { TraitsSchema } from "@module/data/mixins/has-traits.ts";
 import { SlugSchema } from "@module/data/mixins/has-slug.ts";
 import { GearSchema } from "@module/data/mixins/has-gear-data.ts";
+import { PublicationSchema } from "@module/data/mixins/has-publication.ts";
 
 /**
  * @category Item Data Models
@@ -57,7 +58,7 @@ interface WeaponSystemSchema extends foundry.data.fields.DataSchema, WeaponSyste
   weaponRange: foundry.data.fields.StringField<string, string, true, false, true>;
 }
 
-type WeaponSystemSchemaExtension = IdentificationSchema & MigrationSchema & ContainerSchema & DescriptionSchema & ActionsSchema & TraitsSchema & SlugSchema & GearSchema;
+type WeaponSystemSchemaExtension = IdentificationSchema & MigrationSchema & ContainerSchema & DescriptionSchema & ActionsSchema & TraitsSchema & SlugSchema & GearSchema & PublicationSchema;
 
 export type WeaponSource = BaseItemSourcePTR2e<"weapon", WeaponSystemSource>;
 
