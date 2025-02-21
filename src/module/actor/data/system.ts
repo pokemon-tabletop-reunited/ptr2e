@@ -216,9 +216,9 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
       gender: new fields.StringField<GenderOptions, GenderOptions, true, false, true>({
         required: true,
         choices: {
-          "genderless": "genderless",
-          "male": "male",
-          "female": "female"
+          "genderless": "PTR2E.ActorSystem.FIELDS.gender.genderless",
+          "male": "PTR2E.ActorSystem.FIELDS.gender.male",
+          "female": "PTR2E.ActorSystem.FIELDS.gender.female"
         },
         initial: "genderless"
       }),
@@ -567,7 +567,7 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
     //@ts-expect-error - The getter needs to be added afterwards.
     this.parent.flags.ptr2e.skillOptions = {
       data: this.skills.reduce((acc, skill) => {
-        if (["luck", "resources"].includes(skill.slug)) return acc;
+        if (["luck", "resources"].includes(skill.slug) || skill.hidden) return acc;
         const label = (() => {
           const baseKey = skill.group
             ? `PTR2E.Skills.${skill.group}.${skill.slug}`
@@ -599,27 +599,27 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
       },
       "arts": {
         get: () => {
-          return this.parent.flags.ptr2e.skillOptions!.data.filter(skill => skill.group === "arts" && skill.base > 1);
+          return this.parent.flags.ptr2e.skillOptions!.data.filter(skill => skill.group === "arts");
         }
       },
       "science": {
         get: () => {
-          return this.parent.flags.ptr2e.skillOptions!.data.filter(skill => skill.group === "science" && skill.base > 1);
+          return this.parent.flags.ptr2e.skillOptions!.data.filter(skill => skill.group === "science");
         }
       },
       "performance": {
         get: () => {
-          return this.parent.flags.ptr2e.skillOptions!.data.filter(skill => skill.group === "performance" && skill.base > 1);
+          return this.parent.flags.ptr2e.skillOptions!.data.filter(skill => skill.group === "performance");
         }
       },
       "occult": {
         get: () => {
-          return this.parent.flags.ptr2e.skillOptions!.data.filter(skill => skill.group === "occult" && skill.base > 1);
+          return this.parent.flags.ptr2e.skillOptions!.data.filter(skill => skill.group === "occult");
         }
       },
       "pilot": {
         get: () => {
-          return this.parent.flags.ptr2e.skillOptions!.data.filter(skill => skill.group === "pilot" && skill.base > 1);
+          return this.parent.flags.ptr2e.skillOptions!.data.filter(skill => skill.group === "pilot");
         }
       }
     });

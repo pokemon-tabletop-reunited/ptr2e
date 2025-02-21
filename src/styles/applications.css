@@ -1014,16 +1014,16 @@ body .application.sheet .form-group {
   margin-left: auto;
   gap: 5px;
 }
-.application.sheet.actor.v2 .window-content .tab.active[data-tab="biography"] .free-form {
-  grid-area: 1 / 1 / span 3 / span 3;
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="biography"] .left-side {
+  grid-area: 1 / 1 / span 5 / span 3;
   display: flex;
   flex-direction: column;
 }
-.application.sheet.actor.v2 .window-content .tab.active[data-tab="biography"] .free-form .biography {
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="biography"] .left-side .biography {
   flex: 0 0 auto;
   padding: 0.5rem;
 }
-.application.sheet.actor.v2 .window-content .tab.active[data-tab="biography"] .free-form .hint {
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="biography"] .left-side .hint {
   flex: 1;
 }
 .application.sheet.actor.v2 .window-content .tab.active[data-tab="biography"] .right-side {
@@ -7819,8 +7819,8 @@ ul.item-list.result-list li.item.rarity-unique {
 }
 #type-matrix .type-grid {
   display: grid;
-  grid-template-columns: repeat(var(--grid-columns), 40px);
-  grid-auto-flow: row;
+  grid-template-rows: repeat(var(--grid-columns), 40px);
+  grid-auto-flow: column;
   grid-auto-rows: 40px;
   overflow: auto;
 }

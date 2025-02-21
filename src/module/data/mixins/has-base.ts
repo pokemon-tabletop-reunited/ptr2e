@@ -7,6 +7,7 @@ import HasMigrations, { MigrationSchema } from './has-migrations.ts';
 import HasSlug, { SlugSchema } from './has-slug.ts';
 import HasTraits, { TraitsSchema } from './has-traits.ts';
 import ActionPTR2e from '../models/action.ts';
+import HasPublication, { PublicationSchema } from './has-publication.ts';
 
 /**
  * Adds the base properties of *almost* every item together to target data model.
@@ -19,7 +20,7 @@ import ActionPTR2e from '../models/action.ts';
  * @group Mixins
  */
 export default function HasBase<BaseClass extends TemplateConstructor>(baseClass: BaseClass) {
-  abstract class TemplateClass extends HasMigrations(HasContainer(HasDescription(HasActions(HasTraits(HasSlug(baseClass)))))) {
+  abstract class TemplateClass extends HasMigrations(HasContainer(HasDescription(HasActions(HasTraits(HasPublication(HasSlug(baseClass))))))) {
     // This is an empty class, but it's necessary to combine the properties of the other classes.
   }
 
@@ -31,4 +32,4 @@ export default function HasBase<BaseClass extends TemplateConstructor>(baseClass
   return TemplateClass;
 }
 
-export type HasBaseSchema = ContainerSchema & DescriptionSchema & TraitsSchema & SlugSchema & MigrationSchema & ActionsSchema;
+export type HasBaseSchema = ContainerSchema & DescriptionSchema & TraitsSchema & SlugSchema & MigrationSchema & ActionsSchema & PublicationSchema;

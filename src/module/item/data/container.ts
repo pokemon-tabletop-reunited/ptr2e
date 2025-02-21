@@ -1,5 +1,5 @@
 import { ContainerPTR2e } from "@item";
-import { HasContainer, HasDescription, HasSlug, HasTraits, HasGearData, HasEmbed, HasMigrations } from "@module/data/index.ts";
+import { HasContainer, HasDescription, HasSlug, HasTraits, HasGearData, HasEmbed, HasMigrations, HasPublication } from "@module/data/index.ts";
 import { BaseItemSourcePTR2e } from "./system.ts";
 import { GearSystemSource } from "./gear.ts";
 import { SlugSchema } from "@module/data/mixins/has-slug.ts";
@@ -8,8 +8,9 @@ import { TraitsSchema } from "@module/data/mixins/has-traits.ts";
 import { DescriptionSchema } from "@module/data/mixins/has-description.ts";
 import { ContainerSchema } from "@module/data/mixins/has-container.ts";
 import { GearSchema } from "@module/data/mixins/has-gear-data.ts";
+import { PublicationSchema } from "@module/data/mixins/has-publication.ts";
 
-const ContainerExtension = HasEmbed(HasMigrations(HasGearData(HasTraits(HasDescription(HasSlug(HasContainer(foundry.abstract.TypeDataModel)))))), "container");
+const ContainerExtension = HasEmbed(HasMigrations(HasGearData(HasTraits(HasDescription(HasSlug(HasContainer(HasPublication(foundry.abstract.TypeDataModel))))))), "container");
 
 /**
  * @category Item Data Models
@@ -52,7 +53,7 @@ interface ContainerSystemSchema extends foundry.data.fields.DataSchema, Containe
 
 }
 
-type ContainerSystemSchemaExtension = SlugSchema & MigrationSchema & TraitsSchema & DescriptionSchema & ContainerSchema & GearSchema;
+type ContainerSystemSchemaExtension = SlugSchema & MigrationSchema & TraitsSchema & DescriptionSchema & ContainerSchema & GearSchema & PublicationSchema
 
 export type ContainerSource = BaseItemSourcePTR2e<"container", ContainerSystemSource>;
 

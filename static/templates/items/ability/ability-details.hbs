@@ -11,5 +11,13 @@
             {{formField fields.free value=source.system.free localize=true}}
             {{formField fields.description enriched=enrichedDescription value=source.system.description toggled=true localize=true}}
         </fieldset>
+        <fieldset>
+          <legend>
+            Publication Details
+          </legend>
+          {{formField fields.publication.fields.source value=source.system.publication.source localize=true}}
+          {{formField fields.publication.fields.authors value=source.system.publication.authors localize=true}}
+          {{formField fields.publication.fields.notes enriched=enrichedNotes value=source.system.publication.notes toggled=true localize=true}}
+        </fieldset>
     </div>
 </section>
