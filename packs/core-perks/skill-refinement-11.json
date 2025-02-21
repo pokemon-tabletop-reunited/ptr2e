@@ -1,0 +1,142 @@
+{
+  "name": "Skill Refinement 11",
+  "type": "perk",
+  "system": {
+    "_migration": {
+      "version": 0.11,
+      "previous": null
+    },
+    "actions": [],
+    "slug": "skill-refinement-11",
+    "description": "<p>The user selects 3 Skills, besides Resources. The user’s Species proficiency with the selected skills is increased by +10. A Skill may only be increased 3 times with this Perk and cannot be increased past 40 (with the last increase needing to be manually reduced to prevent the Skill from exceeding 40).</p>",
+    "traits": [],
+    "prerequisites": [],
+    "autoUnlock": [],
+    "cost": 1,
+    "design": {
+      "arena": null,
+      "approach": null,
+      "archetype": null
+    },
+    "global": true,
+    "webs": [],
+    "nodes": []
+  },
+  "img": "systems/ptr2e/img/icons/feat_icon.webp",
+  "effects": [
+    {
+      "name": "Skill Refinement",
+      "type": "passive",
+      "_id": "GGEMGdfPD0gc1Fah",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "choice-set",
+            "key": "",
+            "value": 0,
+            "predicate": [],
+            "mode": 2,
+            "priority": null,
+            "ignored": true,
+            "choices": "flags.ptr2e.skillOptions.species",
+            "prompt": "PTR2E.ChoiceSetPrompt.Prompt",
+            "adjustName": true,
+            "rollOption": "sr111",
+            "flag": "skillRefinement"
+          },
+          {
+            "type": "basic",
+            "key": "system.skills.{effect|flags.ptr2e.choiceSelections.sr111}.value",
+            "value": 10,
+            "predicate": [],
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "choice-set",
+            "key": "",
+            "value": 0,
+            "predicate": [],
+            "mode": 2,
+            "priority": null,
+            "ignored": true,
+            "choices": "flags.ptr2e.skillOptions.species",
+            "prompt": "PTR2E.ChoiceSetPrompt.Prompt",
+            "adjustName": true,
+            "rollOption": "sr112",
+            "flag": "skillRefinement"
+          },
+          {
+            "type": "basic",
+            "key": "system.skills.{effect|flags.ptr2e.choiceSelections.sr112}.value",
+            "value": 10,
+            "predicate": [],
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "choice-set",
+            "key": "",
+            "value": 0,
+            "predicate": [],
+            "mode": 2,
+            "priority": null,
+            "ignored": true,
+            "choices": "flags.ptr2e.skillOptions.species",
+            "prompt": "PTR2E.ChoiceSetPrompt.Prompt",
+            "adjustName": true,
+            "rollOption": "sr113",
+            "flag": "skillRefinement"
+          },
+          {
+            "type": "basic",
+            "key": "system.skills.{effect|flags.ptr2e.choiceSelections.sr113}.value",
+            "value": 10,
+            "predicate": [],
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": false,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": "Item.xxuGLZ0QPnw7NYa8.ActiveEffect.V64elrUanozajfG2",
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "1.0.6.beta",
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      }
+    }
+  ],
+  "folder": "P8RtSJE1K00CB5lL",
+  "flags": {},
+  "_id": "VJSlPeFH3g5v8uMe"
+}

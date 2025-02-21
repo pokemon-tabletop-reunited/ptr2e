@@ -8,13 +8,13 @@
     },
     "actions": [],
     "slug": "skill-refinement-1",
-    "description": "<p>The user selects 3 Skills with which their Species proficiency is greater than 1, besides Resources. The user’s Species proficiency with the selected skills is increased by +5. A Skill may only be increased 4 times with this Perk and cannot be increased past 40.</p><p>HUMANOID SPECIES WEB, from Jack of New Trades.</p><p>10 Tiers.</p><p></p>",
+    "description": "<p>The user selects 3 Skills, besides Resources. The user’s Species proficiency with the selected skills is increased by +10. A Skill may only be increased 3 times with this Perk and cannot be increased past 40 (with the last increase needing to be manually reduced to prevent the Skill from exceeding 40).</p>",
     "traits": [],
     "prerequisites": [
       {
-        "gte": [
-          "{actor|level}",
-          10
+        "or": [
+          "trait:humanoid",
+          "trait:ace"
         ]
       }
     ],
@@ -26,28 +26,28 @@
     "webs": [],
     "nodes": [
       {
-        "x": 31,
-        "y": 93,
+        "x": 27,
+        "y": 95,
         "hidden": false,
         "type": "normal",
         "connected": [
-          "jack-of-new-trades-1",
           "maestro-1",
           "mystery-scholar-1",
           "redliner-1",
           "headliner",
-          "academic-careerist-1"
+          "academic-careerist-1",
+          "root-6"
         ],
         "tier": {
           "rank": null,
           "uuid": null
         },
         "config": {
+          "texture": null,
           "alpha": null,
           "backgroundColor": null,
           "borderColor": null,
           "borderWidth": null,
-          "texture": null,
           "tint": null,
           "scale": null
         }
@@ -63,11 +63,11 @@
           "uuid": "Compendium.ptr2e.core-perks.Item.lsAKsNYUjQUY9wuY"
         },
         "config": {
+          "texture": null,
           "alpha": null,
           "backgroundColor": null,
           "borderColor": null,
           "borderWidth": null,
-          "texture": null,
           "tint": null,
           "scale": null
         }
@@ -83,11 +83,11 @@
           "uuid": "Compendium.ptr2e.core-perks.Item.qMKJJLaZdVutPHRl"
         },
         "config": {
+          "texture": null,
           "alpha": null,
           "backgroundColor": null,
           "borderColor": null,
           "borderWidth": null,
-          "texture": null,
           "tint": null,
           "scale": null
         }
@@ -103,11 +103,11 @@
           "uuid": "Compendium.ptr2e.core-perks.Item.2P7D9uTNzSzAX7E2"
         },
         "config": {
+          "texture": null,
           "alpha": null,
           "backgroundColor": null,
           "borderColor": null,
           "borderWidth": null,
-          "texture": null,
           "tint": null,
           "scale": null
         }
@@ -123,11 +123,11 @@
           "uuid": "Compendium.ptr2e.core-perks.Item.vllayeLlMH7i3YnV"
         },
         "config": {
+          "texture": null,
           "alpha": null,
           "backgroundColor": null,
           "borderColor": null,
           "borderWidth": null,
-          "texture": null,
           "tint": null,
           "scale": null
         }
@@ -143,11 +143,11 @@
           "uuid": "Compendium.ptr2e.core-perks.Item.v07YlPf0kpqGxpS3"
         },
         "config": {
+          "texture": null,
           "alpha": null,
           "backgroundColor": null,
           "borderColor": null,
           "borderWidth": null,
-          "texture": null,
           "tint": null,
           "scale": null
         }
@@ -163,11 +163,11 @@
           "uuid": "Compendium.ptr2e.core-perks.Item.9eDxXR7wKrLx4UXM"
         },
         "config": {
+          "texture": null,
           "alpha": null,
           "backgroundColor": null,
           "borderColor": null,
           "borderWidth": null,
-          "texture": null,
           "tint": null,
           "scale": null
         }
@@ -183,11 +183,11 @@
           "uuid": "Compendium.ptr2e.core-perks.Item.zDvn94Jmr5ZEgVpV"
         },
         "config": {
+          "texture": null,
           "alpha": null,
           "backgroundColor": null,
           "borderColor": null,
           "borderWidth": null,
-          "texture": null,
           "tint": null,
           "scale": null
         }
@@ -203,11 +203,11 @@
           "uuid": "Compendium.ptr2e.core-perks.Item.SgQ1CvPPyXiNfPZ2"
         },
         "config": {
+          "texture": null,
           "alpha": null,
           "backgroundColor": null,
           "borderColor": null,
           "borderWidth": null,
-          "texture": null,
           "tint": null,
           "scale": null
         }
@@ -223,11 +223,91 @@
           "uuid": "Compendium.ptr2e.core-perks.Item.VpsPlIjT1rjd8bdQ"
         },
         "config": {
+          "texture": null,
           "alpha": null,
           "backgroundColor": null,
           "borderColor": null,
           "borderWidth": null,
+          "tint": null,
+          "scale": null
+        }
+      },
+      {
+        "x": null,
+        "y": null,
+        "hidden": false,
+        "type": "normal",
+        "connected": [],
+        "tier": {
+          "rank": 11,
+          "uuid": "Compendium.ptr2e.core-perks.Item.VJSlPeFH3g5v8uMe"
+        },
+        "config": {
           "texture": null,
+          "alpha": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "borderWidth": null,
+          "tint": null,
+          "scale": null
+        }
+      },
+      {
+        "x": null,
+        "y": null,
+        "hidden": false,
+        "type": "normal",
+        "connected": [],
+        "tier": {
+          "rank": 12,
+          "uuid": "Compendium.ptr2e.core-perks.Item.8nWueu3vvYPAOUU5"
+        },
+        "config": {
+          "texture": null,
+          "alpha": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "borderWidth": null,
+          "tint": null,
+          "scale": null
+        }
+      },
+      {
+        "x": null,
+        "y": null,
+        "hidden": false,
+        "type": "normal",
+        "connected": [],
+        "tier": {
+          "rank": 13,
+          "uuid": "Compendium.ptr2e.core-perks.Item.onB4QleOvcxFycbk"
+        },
+        "config": {
+          "texture": null,
+          "alpha": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "borderWidth": null,
+          "tint": null,
+          "scale": null
+        }
+      },
+      {
+        "x": null,
+        "y": null,
+        "hidden": false,
+        "type": "normal",
+        "connected": [],
+        "tier": {
+          "rank": 14,
+          "uuid": "Compendium.ptr2e.core-perks.Item.ZbloHdkbhWu8Rdvt"
+        },
+        "config": {
+          "texture": null,
+          "alpha": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "borderWidth": null,
           "tint": null,
           "scale": null
         }
@@ -344,10 +424,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "ptr2e",
-        "systemVersion": "1.0.0.beta-ready.2",
+        "systemVersion": "1.0.6.beta",
         "createdTime": null,
-        "modifiedTime": 1738606432625,
-        "lastModifiedBy": "5ImYyhOS2D6D7ypO"
+        "modifiedTime": 1739928340324,
+        "lastModifiedBy": "UTlFSVhgfIUeTsoW"
       }
     }
   ],
