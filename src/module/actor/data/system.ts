@@ -599,27 +599,27 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
       },
       "arts": {
         get: () => {
-          return this.parent.flags.ptr2e.skillOptions!.data.filter(skill => skill.group === "arts" && skill.base > 1);
+          return this.parent.flags.ptr2e.skillOptions!.data.filter(skill => skill.group === "arts");
         }
       },
       "science": {
         get: () => {
-          return this.parent.flags.ptr2e.skillOptions!.data.filter(skill => skill.group === "science" && skill.base > 1);
+          return this.parent.flags.ptr2e.skillOptions!.data.filter(skill => skill.group === "science");
         }
       },
       "performance": {
         get: () => {
-          return this.parent.flags.ptr2e.skillOptions!.data.filter(skill => skill.group === "performance" && skill.base > 1);
+          return this.parent.flags.ptr2e.skillOptions!.data.filter(skill => skill.group === "performance");
         }
       },
       "occult": {
         get: () => {
-          return this.parent.flags.ptr2e.skillOptions!.data.filter(skill => skill.group === "occult" && skill.base > 1);
+          return this.parent.flags.ptr2e.skillOptions!.data.filter(skill => skill.group === "occult");
         }
       },
       "pilot": {
         get: () => {
-          return this.parent.flags.ptr2e.skillOptions!.data.filter(skill => skill.group === "pilot" && skill.base > 1);
+          return this.parent.flags.ptr2e.skillOptions!.data.filter(skill => skill.group === "pilot");
         }
       }
     });
