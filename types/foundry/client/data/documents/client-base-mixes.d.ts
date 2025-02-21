@@ -5438,7 +5438,7 @@ export class ClientBaseItem<
     ): void;
 
     /** Gets the default new name for a Document */
-    static defaultName(): string;
+    static defaultName(options?:{type?: string, parent: unknown}): string;
 
     /* -------------------------------------------- */
     /*  Importing and Exporting                     */

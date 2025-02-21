@@ -1,4 +1,4 @@
-import { AttackPTR2e, SummonAttackPTR2e, Trait } from "@data";
+import { AttackPTR2e, FlatModifierChangeSystem, SummonAttackPTR2e, Trait } from "@data";
 import { AttackStatisticRollParameters, BaseStatisticCheck, RollOptionConfig, Statistic } from "./statistic.ts";
 import { StatisticData } from "./data.ts";
 import * as R from "remeda";
@@ -16,6 +16,7 @@ import { ActionUUID } from "src/util/uuid.ts";
 import { TagTokenPrompt } from "@module/effects/changes/token-tag/prompt.ts";
 import ConsumableSystem from "@item/data/consumable.ts";
 import PokeballActionPTR2e from "@module/data/models/pokeball-action.ts";
+import { ActiveEffectPTR2e } from "@effects";
 
 type AttackStatisticData = StatisticData & Required<Pick<StatisticData, "defferedValueParams" | 'modifiers' | 'domains' | 'rollOptions'>>;
 type AttackRollParameters = AttackStatisticRollParameters
@@ -95,12 +96,30 @@ class AttackStatistic extends Statistic {
       }
     }
 
+    const actionTraitEffects = attack.traits.contents.flatMap(trait => {
+      if (!trait.changes?.length) return [];
+      const effect = Trait.effectsFromChanges.bind(trait)(actor, attack) as ActiveEffectPTR2e<ActorPTR2e>;
+      if (effect) return effect;
+      return [];
+    }) ?? []
+
     data.rollOptions = [
       ...actor.getRollOptions(data.domains),
       ...itemRollOptions,
       itemTraits.map((t) => t.slug),
       meleeOrRanged,
     ].flat()
+
+    if(actionTraitEffects.length) {
+      for(const effect of actionTraitEffects) {
+        for(const change of effect.changes) {
+          if(change instanceof FlatModifierChangeSystem) {
+            const mod = change.beforePrepareData()?.();
+            if(mod) data.modifiers.push(mod);
+          }
+        }
+      }
+    }
 
     super(actor, data);
 

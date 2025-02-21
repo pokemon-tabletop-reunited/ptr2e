@@ -1614,7 +1614,7 @@ class ActorPTR2e<
     };
   }
 
-  protected getContextualClone(
+  public getContextualClone(
     rollOptions: string[],
     ephemeralEffects: EffectSourcePTR2e[]
   ): this {
@@ -2269,6 +2269,10 @@ type ActorFlags2e = ActorFlags & {
       data: (PickableThing & { base: number, investment: number, group?: string })[];
       get all(): PickableThing[];
       get species(): PickableThing[];
+    }
+    typeOptions?: {
+      get options(): PickableThing[],
+      get types(): PickableThing[];
     }
   };
 };

@@ -490,6 +490,10 @@ body .application.sheet .form-group {
 .application.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] ul.items .item-controls > a.item-carry-type.active {
   color: var(--user-color);
 }
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] header .item-controls > a.item-temporary.active,
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] ul.items .item-controls > a.item-temporary.active {
+  color: var(--user-color);
+}
 .application.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] header .item-controls > a .fa-stack,
 .application.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] ul.items .item-controls > a .fa-stack {
   margin: calc(-1 * var(0.1875rem)) calc(-1 * var(0.125rem)) 0;
@@ -1010,14 +1014,17 @@ body .application.sheet .form-group {
   margin-left: auto;
   gap: 5px;
 }
-.application.sheet.actor.v2 .window-content .tab.active[data-tab="biography"] .free-form {
-  grid-area: 1 / 1 / span 3 / span 3;
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="biography"] .left-side {
+  grid-area: 1 / 1 / span 5 / span 3;
   display: flex;
   flex-direction: column;
 }
-.application.sheet.actor.v2 .window-content .tab.active[data-tab="biography"] .free-form .biography {
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="biography"] .left-side .biography {
   flex: 0 0 auto;
   padding: 0.5rem;
+}
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="biography"] .left-side .hint {
+  flex: 1;
 }
 .application.sheet.actor.v2 .window-content .tab.active[data-tab="biography"] .right-side {
   grid-area: 1 / 4 / span 5 / span 2;
@@ -2717,7 +2724,7 @@ body .application.sheet .form-group {
   height: 100%;
 }
 .application.sheet.exp-tracker .window-content [data-application-part="venture"].active fieldset.cms .form-group > label {
-  flex-basis: 65%;
+  flex-basis: 30%;
 }
 .application.sheet.exp-tracker .window-content [data-application-part="venture"].active fieldset.cms details {
   overflow-y: auto;
@@ -3846,6 +3853,7 @@ body .application.sheet .form-group {
   overflow-y: scroll;
   overflow-x: hidden;
   margin: unset;
+  margin-top: 0.25rem;
 }
 .application.sheet#compendium-browser .item-list.result-list li {
   display: flex;
@@ -3866,11 +3874,34 @@ body .application.sheet .form-group {
   flex: 1;
 }
 .application.sheet#compendium-browser .item-list.result-list li .grade,
-.application.sheet#compendium-browser .item-list.result-list li .cost {
+.application.sheet#compendium-browser .item-list.result-list li .cost,
+.application.sheet#compendium-browser .item-list.result-list li .purchase {
   flex: 0 0 min-content;
   text-wrap: nowrap;
   padding-right: 0.5rem;
   color: var(--color-text-primary);
+}
+.application.sheet#compendium-browser .item-list.result-list li .description {
+  flex: 1;
+  padding: 0.25rem;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+.application.sheet#compendium-browser .item-list.result-list span.trait {
+  color: #222224;
+  background: var(--color-theme-4);
+  padding: 0.25rem;
+  border: 1px solid var(--border-theme-color);
+  border-radius: 8px;
+}
+.application.sheet#compendium-browser .item-list.result-list span.trait.narrative {
+  background: #79af7a;
+  border-color: #79af7a;
+}
+.application.sheet#compendium-browser .item-list.result-list span.trait.automated {
+  background: #7fcbc8;
+  border-color: #7fcbc8;
 }
 .application.sheet.stats-form .window-content {
   padding-top: 0.5rem;
@@ -7788,8 +7819,8 @@ ul.item-list.result-list li.item.rarity-unique {
 }
 #type-matrix .type-grid {
   display: grid;
-  grid-template-columns: repeat(var(--grid-columns), 40px);
-  grid-auto-flow: row;
+  grid-template-rows: repeat(var(--grid-columns), 40px);
+  grid-auto-flow: column;
   grid-auto-rows: 40px;
   overflow: auto;
 }
@@ -7989,6 +8020,16 @@ ul.item-list.result-list li.item.rarity-unique {
   align-items: center;
   text-align: center;
   overflow-y: auto;
+}
+.application.sheet.dex-sheet .window-content .dex.search {
+  flex: 0 0 auto;
+  border-bottom: 1px solid var(--border-theme-color);
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+.application.sheet.dex-sheet .window-content .dex.search input {
+  flex: 0 0 60%;
 }
 .application.sheet.dex-sheet .window-content .dex .entry {
   flex: 0 0 64px;

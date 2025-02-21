@@ -320,9 +320,7 @@
       "turns": 5
     },
     "system": {
-      "changes": [
-        {}
-      ],
+      "changes": [],
       "formula": null,
       "type": null,
       "removeOnRecall": false,
@@ -545,7 +543,21 @@
       "turns": 5
     },
     "system": {
-      "changes": [],
+      "changes": [
+        {
+          "type": "grant-effect",
+          "value": "slowed",
+          "predicate": [{"or": ["trait:ace", "trait:trainer"]}],
+          "replaceSelf": true,
+          "alterations": [
+            {
+              "mode": 5,
+              "property": "effects.0.duration.turns",
+              "value": "{effect|duration.turns}"
+            }
+          ]
+        }
+      ],
       "formula": null,
       "type": null,
       "removeOnRecall": false,
@@ -722,11 +734,11 @@
       "removeOnRecall": false,
       "removeAfterCombat": true,
       "traits": [
-        "flying",
+        "shadow",
         "major-affliction"
       ]
     },
-    "description": "PTR2E.Effect.Statuses.Descriptions.wind-shear"
+    "description": "PTR2E.Effect.Statuses.Descriptions.wracked"
   },
   {
     "id": "disabled",

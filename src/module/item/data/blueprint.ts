@@ -383,7 +383,7 @@ export default abstract class BlueprintSystem extends HasEmbed(HasMigrations(fou
                   : false;
           });
 
-          if (!evolutions.length) return evolution;
+          if (!evolutions?.length) return evolution;
           if (evolutions.length > 1) {
             // Pick a random evolution path to follow
             return getEvolution(randomFromList(evolutions));
@@ -511,6 +511,7 @@ export default abstract class BlueprintSystem extends HasEmbed(HasMigrations(fou
           sets.map(async (set) => {
             // Pick one random ability from this set
             const ability = set[Math.floor(Math.random() * set.length)];
+            if(!ability) return {};
             return {
               selected: await fromUuid(ability.uuid),
               remaining: await Promise.all(set.filter((a) => a.uuid !== ability.uuid).map((a) => fromUuid(a.uuid)))
