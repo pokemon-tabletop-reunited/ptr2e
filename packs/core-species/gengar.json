@@ -37,7 +37,8 @@
       "telekinetic-4",
       "shapeshifter",
       "amorphous",
-      "shadow-meld"
+      "shadow-meld",
+      "jump-3"
     ],
     "abilities": {
       "starting": [
@@ -50,10 +51,10 @@
       ],
       "basic": [
         {
-          "slug": "haunt"
+          "slug": "insomnia"
         },
         {
-          "slug": "insomnia"
+          "slug": "shadow-tag"
         }
       ],
       "advanced": [
@@ -845,5 +846,171 @@
     }
   },
   "_id": "rFyrG3L7PpbEBVEx",
-  "effects": []
+  "effects": [
+    {
+      "name": "Mega Gengar",
+      "type": "form",
+      "_id": "ZLSWdsylrx5d23PD",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-option",
+            "key": "manual-forme-toggle",
+            "value": "forme:mega-gengar:active",
+            "domain": "all",
+            "toggleable": true,
+            "label": "Toggle: Mega Gengar Forme",
+            "predicate": [],
+            "alwaysActive": false,
+            "count": false,
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "suboptions": [],
+            "state": false
+          },
+          {
+            "type": "grant-item",
+            "predicate": [
+              "forme:mega-gengar:active"
+            ],
+            "key": "",
+            "value": "Compendium.ptr2e.core-abilities.Item.4WVgBaQE53psR0ED",
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "system.free",
+                "value": "true"
+              }
+            ],
+            "allowDuplicate": false,
+            "reevaluateOnUpdate": true,
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "inMemoryOnly": false,
+            "track": false,
+            "replaceSelf": false,
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            }
+          },
+          {
+            "type": "remove-trait",
+            "predicate": [
+              "forme:mega-gengar:active"
+            ],
+            "key": "",
+            "value": "Jump 3",
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "add-trait",
+            "predicate": [
+              "forme:mega-gengar:active"
+            ],
+            "key": "",
+            "value": "Jump 1",
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "add-trait",
+            "predicate": [
+              "forme:mega-gengar:active"
+            ],
+            "key": "",
+            "value": "Interdimensional",
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "stats-alteration",
+            "predicate": [
+              "forme:mega-gengar:active"
+            ],
+            "key": "",
+            "value": 0,
+            "hp": null,
+            "atk": null,
+            "def": 20,
+            "spa": 40,
+            "spd": 20,
+            "spe": 20,
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-gengar:active"
+            ],
+            "key": "system.skills.track.value",
+            "value": 50,
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "token-alterations",
+            "predicate": [
+              "forme:mega-gengar:active"
+            ],
+            "key": "",
+            "value": 0,
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "texture": "modules/ptr2e-pkmn-sprites/sprites/094_MEGA.webp",
+            "tint": null,
+            "scale": null,
+            "name": null,
+            "light": null,
+            "alpha": null
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0,
+        "trigger": "manual",
+        "conditions": []
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "1.0.6.beta",
+        "createdTime": 1740104268492,
+        "modifiedTime": 1740104987663,
+        "lastModifiedBy": "QJgrK2D5gkPoparS"
+      }
+    }
+  ]
 }
