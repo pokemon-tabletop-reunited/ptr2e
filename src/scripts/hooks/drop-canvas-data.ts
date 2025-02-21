@@ -18,7 +18,7 @@ export const DropCanvasData = {
             });
           })()
 
-          const blueprint = await ItemPTR2e.create<ItemPTR2e<BlueprintSystemModel, null>>(
+          const blueprint = new ItemPTR2e(
             {
               name: item.name,
               type: "blueprint",
@@ -27,10 +27,8 @@ export const DropCanvasData = {
                 blueprints: [{
                   species: item.uuid,
                 }]
-              }
-            },
-            {
-              temporary: true
+              },
+              ownership: {default: CONST.DOCUMENT_OWNERSHIP_LEVELS.OWNER}
             }
           );
           if(!blueprint || !canvas.scene) return;

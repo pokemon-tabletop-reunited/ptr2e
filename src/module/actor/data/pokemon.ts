@@ -2,7 +2,7 @@ import { ActorPTR2e } from "@actor";
 import { ActorSystemPTR2e } from "./index.ts";
 import { SpeciesDropSheet } from "@actor/sheets/species-drop-sheet.ts";
 import { ItemPTR2e } from "@item";
-import { BlueprintSystemModel, SpeciesSystemModel } from "@item/data/index.ts";
+import { SpeciesSystemModel } from "@item/data/index.ts";
 import { BlueprintSheetPTR2e } from "@item/sheets/index.ts";
 
 class PokemonActorSystem extends ActorSystemPTR2e {
@@ -20,7 +20,7 @@ class PokemonActorSystem extends ActorSystemPTR2e {
       });
 
       if (promise instanceof ItemPTR2e && promise.system instanceof SpeciesSystemModel) {
-        const blueprint = await ItemPTR2e.create<ItemPTR2e<BlueprintSystemModel, null>>(
+        const blueprint = new ItemPTR2e(
           {
             name: promise.name,
             type: "blueprint",
@@ -28,13 +28,11 @@ class PokemonActorSystem extends ActorSystemPTR2e {
               blueprints: [{
                 species: promise.uuid,
               }]
-            }
-          },
-          {
-            temporary: true
+            },
+            ownership: {default: CONST.DOCUMENT_OWNERSHIP_LEVELS.OWNER}
           }
         );
-        if(!blueprint) {
+        if (!blueprint) {
           options.fail = true;
           return false;
         }
@@ -58,7 +56,7 @@ class PokemonActorSystem extends ActorSystemPTR2e {
 
         const source = this.parent.toObject();
         const update = fu.mergeObject(source, generatedData[0], { inplace: false });
-        if(source.folder && source.folder !== update.folder) update.folder = source.folder;
+        if (source.folder && source.folder !== update.folder) update.folder = source.folder;
         this.parent.updateSource(update);
 
         if (!data.name.includes(game.i18n.localize("TYPES.Actor.pokemon"))) {

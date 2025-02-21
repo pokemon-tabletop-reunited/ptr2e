@@ -47,6 +47,10 @@ class SpeciesDropSheetV2 extends foundry.applications.api.HandlebarsApplicationM
     return "Creating a Pokemon...";
   }
 
+  override _canDragDrop(): boolean {
+    return true;
+  }
+
   override async _onDrop(event: DragEvent) {
     const data = TextEditor.getDragEventData(event) as Record<string, string>;
     if (data.type === "Item") {

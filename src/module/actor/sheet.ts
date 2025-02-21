@@ -1,4 +1,4 @@
-import { AbilityPTR2e, ItemPTR2e, ItemSystemPTR, MovePTR2e, SpeciesPTR2e } from "@item";
+import { AbilityPTR2e, ConsumablePTR2e, ItemPTR2e, ItemSystemPTR, MovePTR2e, SpeciesPTR2e } from "@item";
 import ActorPTR2e from "./base.ts";
 import { createHTMLElement, htmlClosest, htmlQuery, htmlQueryAll, sluggify } from "@utils";
 import { Tab } from "@item/sheets/document.ts";
@@ -78,6 +78,32 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
         },
       ],
       actions: {
+        "toggle-temporary": async function (this: ActorSheetPTRV2, event: Event) {
+          const itemId = htmlClosest(event.target, "[data-item-id]")?.dataset.itemId;
+          const item = this.actor.items.get(itemId, { strict: true }) as ConsumablePTR2e;
+          item.update({"system.temporary": !item.system.temporary});
+        },
+        "reset-ip": async function (this: ActorSheetPTRV2) {
+          foundry.applications.api.DialogV2.confirm({
+            window: {
+              title: game.i18n.format("PTR2E.ActorSheet.ResetIP.title", {
+                name: this.document.name,
+              }),
+            },
+            content: game.i18n.format("PTR2E.ActorSheet.ResetIP.content", {
+              name: this.document.name,
+            }),
+            yes: {
+              callback: async () => {
+                await this.document.update({
+                  "system.inventoryPoints.current": this.document.system.inventoryPoints.max,
+                });
+                await this.document.deleteEmbeddedDocuments("Item", this.document.itemTypes.consumable.filter(i => i.system.temporary).map((i) => i.id));
+                this.render({parts: ["inventory"]});
+              },
+            },
+          });
+        },
         "open-carry-type-menu": ActorSheetPTRV2.openCarryTypeMenu,
         "species-header": async function (this: ActorSheetPTRV2, event: Event) {
           event.preventDefault();
@@ -93,6 +119,8 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
         "open-perk-web": async function (this: ActorSheetPTRV2) {
           if ([true, undefined].includes(this.actor.flags.ptr2e?.sheet?.perkFlash))
             await this.actor.setFlag("ptr2e", "sheet.perkFlash", false);
+
+          canvas.tokens.controlled.forEach(t => t.release());
 
           const app = new PerkWebApp(this.actor);
           app.render(true);
@@ -165,6 +193,15 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
         },
         "open-stats-chart": function (this: ActorSheetPTRV2) {
           new StatsForm({ document: this.actor }).render(true);
+        },
+        "create-item": async function (this: ActorSheetPTRV2, event: Event) {
+          const type = ((event.target as HTMLElement).closest("[data-type]") as HTMLElement)?.dataset.type;
+          if(!type) return;
+
+          return void await this.document.createEmbeddedDocuments("Item", [{
+            name: ItemPTR2e.defaultName({type, parent: this.document}),
+            type,
+          }]);
         }
       },
     },
@@ -432,6 +469,10 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
 
     if (partId === "clocks") {
       context.clocks = game.user.isGM ? this.document.system.clocks.contents : this.document.system.clocks.contents.filter(c => !c.private);
+    }
+
+    if(partId === "skills") {
+      context.noAce = !this.actor.traits.has("ace");
     }
 
     if (partId === "inventory") {

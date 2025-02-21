@@ -36,5 +36,84 @@
     }
   },
   "_id": "7sx007BIaNLCnueb",
-  "effects": []
+  "effects": [
+    {
+      "name": "Interstellar Shift",
+      "type": "passive",
+      "_id": "uSFBaC78PX4bnnyJ",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "grant-item",
+            "key": "pressure",
+            "value": "Compendium.ptr2e.core-abilities.Item.RmLYmSTJEvyBNTh5",
+            "predicate": [
+              "item:ability:interstellar-shift:active"
+            ],
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "system.free",
+                "value": "true"
+              }
+            ],
+            "allowDuplicate": false,
+            "reevaluateOnUpdate": true,
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "inMemoryOnly": false,
+            "track": false,
+            "replaceSelf": false,
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            }
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {
+        "ptr2e": {
+          "itemGrants": {
+            "pressure": {
+              "id": "pDBLwA3Aj4NsM8K7",
+              "onDelete": "detach"
+            }
+          }
+        }
+      },
+      "_stats": {
+        "compendiumSource": "Actor.WJADdiB6SFiT5m3Z.Item.7sx007BIaNLCnueb.ActiveEffect.PAi1fAjPUDVvwJKV",
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "1.0.3.beta",
+        "createdTime": 1739621740879,
+        "modifiedTime": 1739621740879,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+      }
+    }
+  ]
 }

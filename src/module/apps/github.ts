@@ -321,8 +321,9 @@ class GithubManager {
     try {
       await GithubManager.saveBlobToGithub(realDiff as ItemPTR2e["_source"], diff);
     }
-    catch {
+    catch (error) {
       ui.notifications.error("An unexpected error occured.");
+      console.error(error);
     }
     return new GithubSheet().render(true);
   }
@@ -330,7 +331,7 @@ class GithubManager {
   static API_URL = "https://2e.ptr.wiki/foundry" as const;
 
   static async getIdentity() {
-    const id = game.user.getFlag("ptr2e", "dev-identity") as string;
+    const id = game.settings.get("ptr2e", "dev-identity") as string;
     if (id) {
       const result = await fetch(GithubManager.API_URL + "/identify", {
         method: "POST",
@@ -341,7 +342,7 @@ class GithubManager {
         body: JSON.stringify({ id }),
       });
       if (result.status === 200) {
-        game.user.unsetFlag("ptr2e", "dev-identity");
+        game.settings.set("ptr2e", "dev-identity", "");
 
       } else if (result.status === 202) {
         return id;
@@ -361,7 +362,7 @@ class GithubManager {
       const identity = json.identity as string;
       if (!identity) return null;
 
-      await game.user.setFlag("ptr2e", "dev-identity", atob(identity));
+      await game.settings.set("ptr2e", "dev-identity", atob(identity));
       return atob(identity);
     } else if (result.status === 202) {
       throw new Error("An unexpected error occured.");
@@ -404,13 +405,13 @@ class GithubManager {
             return null;
           }
           const reference = window.open(commitJson['auth_url'], identity, "popup=true");
-          await new Promise((resolve) => {
-            reference?.addEventListener("close", () => {
-              resolve(true);
-            });
-            reference?.addEventListener("unload", () => {
-              resolve(true);
-            });
+          await new Promise((resolve, reject) => {
+            function check(depth = 0) {
+              if(reference?.closed) resolve(true);
+              if(depth > 100) return void reject();
+              setTimeout(() => check(depth + 1), 2500);
+            }
+            check();
           });
           return await authenticateAndCommit(identity, { retry: true });
         }

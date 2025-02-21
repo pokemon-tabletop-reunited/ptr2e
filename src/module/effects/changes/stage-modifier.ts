@@ -4,7 +4,7 @@ import FlatModifierChangeSystem from "./flat-modifier.ts";
 export default class StageModifierSystem extends FlatModifierChangeSystem {
     static override TYPE = "stage-modifier";
 
-    override beforePrepareData(actor: ActorPTR2e | null = this.actor): void {
+    override beforePrepareData(actor: ActorPTR2e | null = this.actor) {
         return super.beforePrepareData(actor, "stage");
     } 
 }

@@ -180,7 +180,7 @@ export class ActionEditor<
 
   override async _prepareContext() {
     const traits = (() => {
-      if ("traits" in this.action) {
+      if ("traits" in (this.action ?? {})) {
         const traits = [];
         for (const trait of this.action.traits) {
           traits.push({

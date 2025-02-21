@@ -3,8 +3,8 @@ import { MigrationBase } from "../base.ts"
 import { sluggify } from "@utils";
 import MoveSystem from "@item/data/move.ts";
 
-export class Migration110Attacks extends MigrationBase {
-  static override version = 0.110;
+export class Migration111Attacks extends MigrationBase {
+  static override version = 0.111;
 
   _map: Map<string, ItemPTR2e<MoveSystem>["_source"]> | null = null;
 
@@ -40,7 +40,7 @@ export class Migration110Attacks extends MigrationBase {
     }
 
     for(const action of source.system.actions) {
-      const entryAction = entry.system.actions.find(action => action.slug === action.slug) ?? entry.system.actions.find(action => action.type === "attack");
+      const entryAction = entry.system.actions.find(a => a.slug === action.slug)
       if (!entryAction) {
         console.warn(`Unable to find action ${action.slug} in ${entry.name}`);
         return;

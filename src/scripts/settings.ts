@@ -158,8 +158,8 @@ export function initializeSettings() {
   });
 
   game.settings.register("ptr2e", "compendiumBrowserPacks", {
-    name: "PTR2E.SETTINGS.CompendiumBrowserPacks.Name",
-    hint: "PTR2E.SETTINGS.CompendiumBrowserPacks.Hint",
+    name: "PTR2E.Settings.CompendiumBrowserPacks.Name",
+    hint: "PTR2E.Settings.CompendiumBrowserPacks.Hint",
     default: {},
     type: Object,
     scope: "world",
@@ -169,8 +169,8 @@ export function initializeSettings() {
   });
 
   game.settings.register("ptr2e", "compendiumBrowserSources", {
-    name: "PTR2E.SETTINGS.compendiumBrowserSources.Name",
-    hint: "PTR2E.SETTINGS.compendiumBrowserSources.Hint",
+    name: "PTR2E.Settings.compendiumBrowserSources.Name",
+    hint: "PTR2E.Settings.compendiumBrowserSources.Hint",
     default: {
       ignoreAsGM: true,
       showEmptySources: true,
@@ -186,8 +186,8 @@ export function initializeSettings() {
   });
 
   game.settings.register("ptr2e", "tutorListData", {
-    name: "PTR2E.SETTINGS.TutorListData.Name",
-    hint: "PTR2E.SETTINGS.TutorListData.Hint",
+    name: "PTR2E.Settings.TutorListData.Name",
+    hint: "PTR2E.Settings.TutorListData.Hint",
     default: {},
     type: TutorListSettings,
     scope: "world",
@@ -197,11 +197,29 @@ export function initializeSettings() {
   })
 
   game.settings.register("ptr2e", "expTrackerData", {
-    name: "PTR2E.SETTINGS.ExpTrackerData.Name",
-    hint: "PTR2E.SETTINGS.ExpTrackerData.Hint",
+    name: "PTR2E.Settings.ExpTrackerData.Name",
+    hint: "PTR2E.Settings.ExpTrackerData.Hint",
     default: {},
     config: false,
     type: ExpTrackerSettings,
     scope: "world"
+  })
+
+  game.settings.register("ptr2e", "dev-identity", {
+    name: "dev-identity",
+    hint: "dev-identity",
+    default: {},
+    config: false,
+    type: String,
+    scope: "client"
+  })
+
+  game.settings.register("ptr2e", "expand-rolls", {
+    name: "PTR2E.Settings.ExpandRolls.Name",
+    hint: "PTR2E.Settings.ExpandRolls.Hint",
+    default: false,
+    config: true,
+    type: Boolean,
+    scope: "client"
   })
 }

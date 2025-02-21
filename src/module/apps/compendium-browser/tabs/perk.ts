@@ -9,7 +9,7 @@ export class CompendiumBrowserPerkTab extends CompendiumBrowserTab {
   templatePath = "systems/ptr2e/templates/apps/compendium-browser/tabs/perk.hbs";
 
   override searchFields = ["name", "description"];
-  override storeFields = ["type", "name", "img", "uuid", "traits", "description", "cost", "prerequisites"];
+  override storeFields = ["type", "name", "img", "uuid", "traits", "description", "cost", "prerequisites", "global"];
 
   constructor(browser: CompendiumBrowser) {
     super(browser);
@@ -22,7 +22,7 @@ export class CompendiumBrowserPerkTab extends CompendiumBrowserTab {
     const debug = (msg: string, ...params: unknown[]) => console.debug(`PTR2e | Compendium Browser | Perk Tab | ${msg}`, params);
     debug("Stated loading data");
     const perks: CompendiumBrowserIndexData[] = [];
-    const indexFields = ["img", "system.description", "system.traits", "system.cost", "system.prerequisites"];
+    const indexFields = ["img", "system.description", "system.traits", "system.cost", "system.prerequisites", "system.global", "system.nodes"];
     const traits = new Set<string>();
     const prerequisites = new Set<string>();
 
@@ -58,7 +58,8 @@ export class CompendiumBrowserPerkTab extends CompendiumBrowserTab {
           traits: perkData.system.traits,
           description: perkData.system.description,
           cost: perkData.system.cost,
-          prerequisites: perkData.system.prerequisites ?? []
+          prerequisites: perkData.system.prerequisites ?? [],
+          global: perkData.system.global ? (perkData.system.nodes?.[0]?.x && perkData.system.nodes?.[0]?.y) : false,
         })
       }
     }
@@ -67,6 +68,10 @@ export class CompendiumBrowserPerkTab extends CompendiumBrowserTab {
     this.indexData = perks;
 
     // Set Filters
+    this.filterData.selects.showOnlyOnWeb.options = {
+      yes: game.i18n.localize("PTR2E.CompendiumBrowser.Filters.ShowOnlyOnWeb.Yes")
+    }
+
     this.filterData.multiselects.traits.options = this.generateMultiselectOptions(traits.reduce((acc, trait) => {
       const traitData = game.ptr.data.traits.get(trait);
       if (!traitData) return acc;
@@ -79,7 +84,10 @@ export class CompendiumBrowserPerkTab extends CompendiumBrowserTab {
   }
 
   protected override filterIndexData(entry: CompendiumBrowserIndexData): boolean {
-    const { multiselects, sliders } = this.filterData;
+    const { selects, multiselects, sliders } = this.filterData;
+
+    // Filter out perks not on web
+    if(selects.showOnlyOnWeb.selected === "yes" && !entry.global) return false;
 
     // Cost
     if(!(entry.cost >= sliders.apCost.values.min && entry.cost <= sliders.apCost.values.max)) return false;
@@ -95,6 +103,13 @@ export class CompendiumBrowserPerkTab extends CompendiumBrowserTab {
 
   protected override prepareFilterData(): PerkFilters {
     return {
+      selects: {
+        showOnlyOnWeb: {
+          label: "PTR2E.CompendiumBrowser.Filters.ShowOnlyOnWeb.Label",
+          options: {},
+          selected: ""
+        }
+      },
       multiselects: {
         traits: {
           conjunction: "and",
