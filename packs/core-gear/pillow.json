@@ -1,133 +1,106 @@
 {
-    "name": "Pillow",
-    "img": "systems/ptr2e/img/icons/weapon_icon.webp",
-    "type": "weapon",
-    "system": {
-      "crafting": {
-        "skill": "handiwork",
-        "spans": 3,
-        "materials": []
-      },
-      "equipped": {
-        "slot": "held",
-        "carryType": "stowed",
-        "handsHeld": null
-      },
-      "grade": "E",
-      "fling": {
-        "type": "normal",
-        "power": 30,
-        "accuracy": 85
-      },
-      "rarity": "common",
-      "traits": [
-        "weapon",
-        "fling",
-        "blunt",
-        "switch-grip",
-        "normal"
-      ],
-      "actions": [
-        {
-          "name": "Pillow",
-          "slug": "pillow",
-          "type": "attack",
-          "description": "",
-          "traits": [
-            "weapon",
-            "fling",
-            "blunt",
-            "switch-grip",
-            "normal"
-          ],
-          "range": {
-            "target": "creature",
-            "distance": 0,
-            "unit": "m"
-          },
-          "cost": {
-            "activation": "complex",
-            "powerPoints": 0,
-            "delay": null,
-            "priority": null
-          },
-          "variant": null,
-          "types": [
-            "untyped"
-          ],
-          "category": "physical",
-          "power": 40,
-          "accuracy": 95,
-          "contestType": "",
-          "contestEffect": "",
-          "free": true,
-          "slot": null
+  "name": "Pillow",
+  "img": "systems/ptr2e/img/icons/weapon_icon.webp",
+  "type": "weapon",
+  "system": {
+    "crafting": {
+      "skill": "handiwork",
+      "spans": 3,
+      "materials": []
+    },
+    "equipped": {
+      "slot": "held",
+      "carryType": "stowed",
+      "handsHeld": null
+    },
+    "grade": "E",
+    "fling": {
+      "type": "normal",
+      "power": 30,
+      "accuracy": 85,
+      "hide": null
+    },
+    "rarity": "common",
+    "traits": [
+      "weapon",
+      "fling",
+      "blunt",
+      "switch-grip",
+      "normal"
+    ],
+    "actions": [
+      {
+        "name": "Pillow",
+        "slug": "pillow",
+        "type": "attack",
+        "traits": [
+          "weapon",
+          "fling",
+          "blunt",
+          "switch-grip",
+          "normal"
+        ],
+        "range": {
+          "target": "creature",
+          "unit": "m"
         },
-        {
-            "slug": "sleep-talk",
-            "name": "Sleep Talk",
-            "type": "attack",
-            "traits": [],
-            "range": {
-              "target": "creature",
-              "distance": 0,
-              "unit": "m"
-            },
-            "cost": {
-              "activation": "complex",
-              "powerPoints": 1,
-              "delay": null,
-              "priority": null,
-              "trigger": "<p>The user has @Affliction[drowsy] or @Affliction[nightmares].</p>"
-            },
-            "category": "status",
-            "power": null,
-            "accuracy": null,
-            "types": [
-              "normal"
-            ],
-            "description": "<p>Trigger: The user has @Affliction[drowsy] or @Affliction[nightmares].</p><p> The user randomly selects and uses an Attack on its Active List or Extra Moves List (that it would normally be able to use) as a Free Action. If the Attack is Physical- or Special-Category, the triggered Attack gains +100% Power.</p>",
-            "contestType": "",
-            "contestEffect": "",
-            "free": true,
-            "slot": null
-          }
-      ],
-      "description": "Effect: The user may use the Attack Pillow, drawing upon this item's PP Pool or the user's PP to use the Attack. While held, the user may use the Attack Sleep Talk.",
-      "weaponType": "untyped",
-      "weaponRange": "Creature",
-      "slug": null,
-      "container": null,
-      "quantity": 1,
-      "identification": {
-        "misidentified": null,
-        "status": "identified",
-        "unidentified": {
-          "name": "Unidentified Item",
-          "img": "systems/ptu/css/images/icons/item_icon.png",
-          "description": "<p>Unidentified Item</p>"
-        }
+        "cost": {
+          "activation": "complex"
+        },
+        "types": [
+          "untyped"
+        ],
+        "category": "physical",
+        "power": 40,
+        "accuracy": 95,
+        "free": true,
+        "img": "icons/svg/explosion.svg",
+        "predicate": []
       },
-      "weaponPp": 0
+      {
+        "slug": "sleep-talk",
+        "name": "Sleep Talk",
+        "type": "attack",
+        "traits": [],
+        "range": {
+          "target": "creature",
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 1,
+          "trigger": "<p>The user has @Affliction[drowsy] or @Affliction[nightmares].</p>"
+        },
+        "category": "status",
+        "types": [
+          "normal"
+        ],
+        "description": "<p>Trigger: The user has @Affliction[drowsy] or @Affliction[nightmares].</p><p> The user randomly selects and uses an Attack on its Active List or Extra Moves List (that it would normally be able to use) as a Free Action. If the Attack is Physical- or Special-Category, the triggered Attack gains +100% Power.</p>",
+        "free": true,
+        "img": "icons/svg/explosion.svg",
+        "predicate": []
+      }
+    ],
+    "description": "Effect: The user may use the Attack Pillow, drawing upon this item's PP Pool or the user's PP to use the Attack. While held, the user may use the Attack Sleep Talk.",
+    "weaponType": "untyped",
+    "weaponRange": "Creature",
+    "slug": "pillow",
+    "quantity": 1,
+    "identification": {
+      "misidentified": null,
+      "status": "identified",
+      "unidentified": {
+        "name": "Unidentified Item",
+        "img": "systems/ptu/css/images/icons/item_icon.png",
+        "description": "<p>Unidentified Item</p>"
+      }
     },
-    "_id": "ZdqWbLPYdCt4fPzv",
-    "effects": [],
-    "folder": "V4skAU6G3OH5fXaf",
-    "sort": 0,
-    "ownership": {
-      "default": 0,
-      "tXAZ3QUgjuwX4gdV": 3
-    },
-    "flags": {},
-    "_stats": {
-      "compendiumSource": null,
-      "duplicateSource": null,
-      "coreVersion": "12.327",
-      "systemId": "ptr2e",
-      "systemVersion": "0.0.0-alpha.1.0",
-      "createdTime": 1717878484297,
-      "modifiedTime": 1717878484297,
-      "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
-    },
-    "_key": "!items!ZdqWbLPYdCt4fPzv"
-  }
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "ZdqWbLPYdCt4fPzv",
+  "effects": [],
+  "folder": "PhrQtZzEwKPjfmK2"
+}
