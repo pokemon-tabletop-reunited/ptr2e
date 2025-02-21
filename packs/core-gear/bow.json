@@ -1,5 +1,5 @@
 {
-  "folder": "V4skAU6G3OH5fXaf",
+  "folder": "PhrQtZzEwKPjfmK2",
   "name": "Bow",
   "type": "weapon",
   "system": {
@@ -17,7 +17,6 @@
       {
         "name": "Standard Arrow",
         "slug": "standard-arrow",
-        "description": "",
         "traits": [
           "weapon",
           "missile"
@@ -29,8 +28,7 @@
           "unit": "m"
         },
         "cost": {
-          "activation": "complex",
-          "powerPoints": 0
+          "activation": "complex"
         },
         "types": [
           "untyped"
@@ -38,7 +36,9 @@
         "category": "physical",
         "power": 60,
         "accuracy": 95,
-        "free": true
+        "free": true,
+        "img": "icons/svg/explosion.svg",
+        "predicate": []
       },
       {
         "name": "Blunthead Arrow",
@@ -56,8 +56,7 @@
           "unit": "m"
         },
         "cost": {
-          "activation": "complex",
-          "powerPoints": 0
+          "activation": "complex"
         },
         "variant": "standard-arrow",
         "types": [
@@ -66,7 +65,9 @@
         "category": "physical",
         "power": 40,
         "accuracy": 95,
-        "free": true
+        "free": true,
+        "img": "icons/svg/explosion.svg",
+        "predicate": []
       },
       {
         "name": "Broadhead Arrow",
@@ -93,12 +94,13 @@
         "category": "physical",
         "power": 80,
         "accuracy": 85,
-        "free": true
+        "free": true,
+        "img": "icons/svg/explosion.svg",
+        "predicate": []
       },
       {
         "name": "Bodkin Arrow",
         "slug": "bodkin-arrow",
-        "description": "",
         "traits": [
           "weapon",
           "missile",
@@ -121,7 +123,9 @@
         "category": "physical",
         "power": 50,
         "accuracy": 90,
-        "free": true
+        "free": true,
+        "img": "icons/svg/explosion.svg",
+        "predicate": []
       }
     ],
     "description": "<p>A bow's attack profile can be altered by changing the ammunition used for it. Arrows may be lit on fire to change their typing to Fire Type. Otherwise, damage type may be altered through alchemical treatments.</p>",
@@ -139,7 +143,8 @@
     "fling": {
       "type": "untyped",
       "power": 20,
-      "accuracy": 100
+      "accuracy": 100,
+      "hide": null
     },
     "quantity": 1,
     "rarity": "common",
@@ -175,7 +180,8 @@
             "affects": "target",
             "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "alterations": []
           }
         ],
         "slug": null,
