@@ -13,21 +13,15 @@
         "slug": "telekinetic-potential",
         "description": "<p>You gain the [Telekinetic 2] trait.</p>",
         "cost": {
-          "activation": "free",
-          "powerPoints": 0,
-          "delay": null,
-          "priority": null
+          "activation": "free"
         },
         "type": "passive",
         "traits": [],
         "img": "icons/svg/explosion.svg",
         "range": {
           "target": "enemy",
-          "unit": "m",
-          "distance": 0
-        },
-        "variant": null,
-        "hidden": false
+          "unit": "m"
+        }
       }
     ],
     "slug": "telekinetic-potential",
@@ -66,17 +60,24 @@
       }
     ],
     "autoUnlock": [
-      "trait:telekinetic-2"
+      {
+        "or": [
+          "trait:telekinetic-x",
+          "trait:telekinetic-2",
+          "trait:telekinetic-4",
+          "trait:telekinetic-6",
+          "trait:telekinetic-8",
+          "trait:telekinetic-10",
+          "trait:telekinetic-12"
+        ]
+      }
     ],
-    "originSlug": null,
-    "variant": null,
-    "mode": null,
     "global": true,
     "webs": [],
     "design": {
       "arena": "mental",
       "approach": "power",
-      "archetype": "[Psychic]"
+      "archetype": "psychic"
     }
   },
   "_id": "d152HgMF55iaUMiu",
