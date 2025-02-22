@@ -20,7 +20,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 9
+          "powerPoints": 5
         },
         "category": "physical",
         "power": 20,
@@ -28,16 +28,72 @@
         "types": [
           "fighting"
         ],
-        "description": "<p>Effect: This attack's Power ranges based on how damaged the user is, ranging from 20 to 200.</p><p><blockquote>Damage Formula: Power = min(20, (200 x (UserMaxHP-UserCurrentHP)/UserMaxHP + 20))</blockquote>",
-        "contestType": "",
-        "contestEffect": "",
-        "free": false,
-        "slot": null
+        "description": "<p>Effect: This attack's Power ranges based on how damaged the user is, ranging from 20 to 200.</p><p></p><blockquote><p>Damage Formula: Power = min(20, (200 x (UserMaxHP-UserCurrentHP)/UserMaxHP + 20))</p></blockquote>",
+        "img": "systems/ptr2e/img/svg/fighting_icon.svg",
+        "predicate": []
       }
     ],
-    "container": null,
-    "grade": "A"
+    "grade": "A",
+    "traits": [],
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
   },
   "_id": "tIQTfOlIt3xkZvQZ",
-  "effects": []
+  "effects": [
+    {
+      "name": "Reversal",
+      "type": "passive",
+      "_id": "eS1hXYfkbCprsR4b",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "flat-modifier",
+            "key": "reversal-attack-power",
+            "value": "1.8 * system.health.percent",
+            "label": "Reversal",
+            "predicate": [],
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "hideIfDisabled": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": false,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": "Item.48mv2v1fZIB425Wn.ActiveEffect.3Igoq5pxc0DPxQXN",
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "1.0.6.beta",
+        "createdTime": 1740186777414,
+        "modifiedTime": 1740187141499,
+        "lastModifiedBy": "UTlFSVhgfIUeTsoW"
+      }
+    }
+  ]
 }
