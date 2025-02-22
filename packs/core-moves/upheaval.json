@@ -4,7 +4,7 @@
   "_id": "DLelp3vMFN5rrPi0",
   "img": "systems/ptr2e/img/svg/ground_icon.svg",
   "system": {
-    "slug": null,
+    "slug": "upheaval",
     "actions": [
       {
         "name": "Upheaval",
@@ -23,38 +23,76 @@
           "activation": "complex",
           "powerPoints": 9
         },
-        "variant": null,
         "types": [
           "ground"
         ],
         "category": "physical",
         "power": 150,
         "accuracy": 100,
-        "contestType": "",
-        "contestEffect": "",
-        "free": false,
-        "slot": null,
-        "description": "<p>Effect: This attack's Power ranges based on how healthy the user is, ranging from 1 to 150.</p><blockquote><p>Damage Formula: Power = max(1, 150 x UserCurrentHP/UserMaxHP)</p></blockquote>"
+        "description": "<p>Effect: This attack's Power ranges based on how healthy the user is, ranging from 1 to 150.</p><blockquote><p>Damage Formula: Power = max(1, 150 x UserCurrentHP/UserMaxHP)</p></blockquote>",
+        "predicate": []
       }
     ],
-    "container": null,
-    "grade": "A"
+    "grade": "A",
+    "traits": [],
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
   },
-  "effects": [],
-  "sort": 0,
-  "ownership": {
-    "default": 0,
-    "CYLdyr5mPSDmNpTp": 3
-  },
-  "flags": {},
-  "_stats": {
-    "compendiumSource": null,
-    "duplicateSource": null,
-    "coreVersion": "12.328",
-    "systemId": "ptr2e",
-    "systemVersion": "0.10.0-alpha.1.5.2",
-    "createdTime": 1720800447486,
-    "modifiedTime": 1720800525515,
-    "lastModifiedBy": "CYLdyr5mPSDmNpTp"
-  }
+  "effects": [
+    {
+      "name": "Upheaval",
+      "type": "passive",
+      "_id": "ApuuuulKdgqxCEjN",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "percentile-modifier",
+            "key": "upheaval-attack-power",
+            "value": "(@actor.system.health.percent)-100",
+            "predicate": [],
+            "label": "Upheaval",
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "hideIfDisabled": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": false,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": "Compendium.ptr2e.core-moves.Item.xf2NuI372VOQGVIL.ActiveEffect.YKMJMRUWhZfZFacZ",
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "1.0.6.beta",
+        "createdTime": 1740185423808,
+        "modifiedTime": 1740185440031,
+        "lastModifiedBy": "UTlFSVhgfIUeTsoW"
+      }
+    }
+  ]
 }
