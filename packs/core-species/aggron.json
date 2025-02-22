@@ -740,6 +740,10 @@
                 "item": null,
                 "level": null,
                 "knownMove": null
+              },
+              "perk": {
+                "x": 26,
+                "y": 26
               }
             }
           ],
@@ -748,11 +752,19 @@
             "item": null,
             "level": null,
             "knownMove": null
+          },
+          "perk": {
+            "x": 26,
+            "y": 26
           }
         }
       ],
       "uuid": "Compendium.ptr2e.core-species.Item.c1rDcyTKJ5oeSu5S",
-      "methods": []
+      "methods": [],
+      "perk": {
+        "x": 26,
+        "y": 26
+      }
     },
     "_migration": {
       "version": null,
@@ -764,5 +776,209 @@
     ]
   },
   "_id": "W7wfzW73LnJ24wxi",
-  "effects": []
+  "effects": [
+    {
+      "name": "Mega Aggron",
+      "type": "form",
+      "_id": "9gCWsnEMnW4md6EG",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-option",
+            "key": "manual-forme-toggle",
+            "value": "forme:mega-aggron:active",
+            "domain": "all",
+            "toggleable": true,
+            "label": "Toggle: Mega Aggron Forme",
+            "predicate": [],
+            "alwaysActive": false,
+            "count": false,
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "suboptions": [],
+            "state": false
+          },
+          {
+            "type": "stats-alteration",
+            "predicate": [
+              "forme:mega-aggron:active"
+            ],
+            "key": "",
+            "value": 0,
+            "hp": null,
+            "atk": 30,
+            "def": 50,
+            "spa": null,
+            "spd": 20,
+            "spe": null,
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "grant-item",
+            "predicate": [
+              "forme:mega-aggron:active"
+            ],
+            "key": "",
+            "value": "Compendium.ptr2e.core-abilities.Item.nMyIYhgTztXvdMGh",
+            "allowDuplicate": false,
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "system.free",
+                "value": "true"
+              }
+            ],
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "reevaluateOnUpdate": false,
+            "inMemoryOnly": false,
+            "track": false,
+            "replaceSelf": false,
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            }
+          },
+          {
+            "type": "add-trait",
+            "predicate": [
+              "forme:mega-aggron:active"
+            ],
+            "key": "",
+            "value": "lumbering",
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-aggron:active"
+            ],
+            "key": "system.type.types",
+            "value": "rock",
+            "mode": 6,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "remove-trait",
+            "predicate": [
+              "forme:mega-aggron:active"
+            ],
+            "key": "",
+            "value": "rock",
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-aggron:active"
+            ],
+            "key": "system.movement.overland.value",
+            "value": -2,
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-aggron:active"
+            ],
+            "key": "system.skills.acrobatics.value",
+            "value": -25,
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-aggron:active"
+            ],
+            "key": "system.skills.climb.value",
+            "value": 15,
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-aggron:active"
+            ],
+            "key": "system.skills.intimidate.value",
+            "value": 15,
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-aggron:active"
+            ],
+            "key": "system.skills.lift.value",
+            "value": 20,
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-aggron:active"
+            ],
+            "key": "system.skills.running.value",
+            "value": 15,
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0,
+        "trigger": "manual",
+        "conditions": []
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "1.0.6.beta",
+        "createdTime": 1740238864510,
+        "modifiedTime": 1740239608743,
+        "lastModifiedBy": "NGSbEbIP7O7ThFIb"
+      }
+    }
+  ]
 }
