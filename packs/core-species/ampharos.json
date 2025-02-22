@@ -636,6 +636,10 @@
                 "item": null,
                 "level": null,
                 "knownMove": null
+              },
+              "perk": {
+                "x": 26,
+                "y": 26
               }
             }
           ],
@@ -644,11 +648,19 @@
             "item": null,
             "level": null,
             "knownMove": null
+          },
+          "perk": {
+            "x": 26,
+            "y": 26
           }
         }
       ],
       "uuid": "Compendium.ptr2e.core-species.Item.K0oYKggAwByvrW9X",
-      "methods": []
+      "methods": [],
+      "perk": {
+        "x": 26,
+        "y": 26
+      }
     },
     "_migration": {
       "version": null,
@@ -724,20 +736,180 @@
               "forme:mega-ampharos:active"
             ],
             "key": "",
-            "value": "Compendium.ptr2e.core-abilities.Item.i2YkuytUf6z6fm34",
-            "allowDuplicate": false,
+            "value": "Compendium.ptr2e.core-abilities.Item.5jz8GZsbhiv85gQd",
             "reevaluateOnUpdate": true,
+            "allowDuplicate": false,
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "system.free",
+                "value": "true"
+              }
+            ],
             "mode": 2,
             "priority": null,
             "ignored": false,
             "inMemoryOnly": false,
-            "alterations": [],
             "track": false,
             "replaceSelf": false,
             "onDeleteActions": {
               "grantee": "detach",
               "granter": "cascade"
             }
+          },
+          {
+            "type": "remove-trait",
+            "predicate": [
+              "forme:mega-ampharos:active"
+            ],
+            "key": "",
+            "value": "Glow-4",
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "add-trait",
+            "predicate": [
+              "forme:mega-ampharos:active"
+            ],
+            "key": "",
+            "value": "Glow-6",
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "add-trait",
+            "predicate": [
+              "forme:mega-ampharos:active"
+            ],
+            "key": "",
+            "value": "Drakelike",
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-ampharos:active"
+            ],
+            "key": "system.type.types",
+            "value": "dragon",
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-ampharos:active"
+            ],
+            "key": "system.movement.overland.value",
+            "value": -1,
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-ampharos:active"
+            ],
+            "key": "",
+            "value": 0,
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-ampharos:active"
+            ],
+            "key": "system.skills.acrobatics.value",
+            "value": 5,
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-ampharos:active"
+            ],
+            "key": "system.skills.climb.value",
+            "value": 5,
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-ampharos:active"
+            ],
+            "key": "system.skills.intimidate.value",
+            "value": 40,
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-ampharos:active"
+            ],
+            "key": "system.skills.leadership.value",
+            "value": 15,
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-ampharos:active"
+            ],
+            "key": "system.skills.lift.value",
+            "value": 5,
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-ampharos:active"
+            ],
+            "key": "system.skills.dragon.value",
+            "value": 40,
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-ampharos:active"
+            ],
+            "key": "system.skills.running.value",
+            "value": 5,
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-ampharos:active"
+            ],
+            "key": "system.skills.swim.value",
+            "value": 5,
+            "mode": 2,
+            "priority": null,
+            "ignored": false
           }
         ],
         "slug": null,
@@ -770,10 +942,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "ptr2e",
-        "systemVersion": "0.10.0-alpha.4.1.0",
+        "systemVersion": "1.0.6.beta",
         "createdTime": 1732364715309,
-        "modifiedTime": 1734448518605,
-        "lastModifiedBy": "IcBpMqhFuTck9VpX"
+        "modifiedTime": 1740191860988,
+        "lastModifiedBy": "UTlFSVhgfIUeTsoW"
       }
     }
   ]
