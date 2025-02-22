@@ -19,24 +19,81 @@
         },
         "cost": {
           "activation": "complex",
-          "power": null,
-          "accuracy": 100
+          "powerPoints": 4
         },
         "category": "special",
         "accuracy": 100,
         "types": [
           "ghost"
         ],
-        "description": "<p>Effect: This attack deals flat damage based on the user's level.</p><blockquote><p>Damage Formula: Damage = 1.5 x UserLevel</p></blockquote>",
-        "contestType": "",
-        "contestEffect": "",
-        "free": false,
-        "slot": null
+        "description": "<p>Effect: This attack deals flat damage based on the user's level.</p><blockquote><p>Damage Formula: Damage = 1.75 x UserLevel</p></blockquote>",
+        "img": "systems/ptr2e/img/svg/ghost_icon.svg",
+        "predicate": []
       }
     ],
-    "container": null,
-    "grade": "E"
+    "grade": "D",
+    "traits": [],
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
   },
   "_id": "9ajTWumV2CHLWvWK",
-  "effects": []
+  "effects": [
+    {
+      "name": "Night Shade",
+      "type": "passive",
+      "_id": "p3MwBTvJB013EZEK",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "flat-modifier",
+            "key": "night-shade-attack-damage-flat",
+            "value": "(@actor.system.advancement.level)*1.75",
+            "predicate": [
+              "item:move:night-shade"
+            ],
+            "label": "Night Shade",
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "hideIfDisabled": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": false,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": "Item.48mv2v1fZIB425Wn.ActiveEffect.3Igoq5pxc0DPxQXN",
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "1.0.6.beta",
+        "createdTime": 1740182062758,
+        "modifiedTime": 1740184119012,
+        "lastModifiedBy": "UTlFSVhgfIUeTsoW"
+      }
+    }
+  ]
 }

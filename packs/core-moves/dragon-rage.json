@@ -19,19 +19,81 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 2
+          "powerPoints": 3
         },
         "category": "special",
-        "power": null,
         "accuracy": 100,
         "types": [
           "dragon"
         ],
-        "description": "<p>Effect: This attack always deals 70 damage on hit.</p>"
+        "description": "<p>Effect: This attack always deals 70 damage on hit.</p>",
+        "img": "systems/ptr2e/img/svg/dragon_icon.svg",
+        "predicate": []
       }
     ],
-    "grade": "D"
+    "grade": "C",
+    "traits": [],
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
   },
   "_id": "PFcT7WCVrxW0GXub",
-  "effects": []
+  "effects": [
+    {
+      "name": "Dragon Rage",
+      "type": "passive",
+      "_id": "74frxdejaaJMCMwX",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "flat-modifier",
+            "key": "dragon-rage-attack-damage-flat",
+            "value": 70,
+            "predicate": [
+              "item:move:dragon-rage"
+            ],
+            "label": "Dragon Rage",
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "hideIfDisabled": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": false,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "1.0.6.beta",
+        "createdTime": 1740182436630,
+        "modifiedTime": 1740184147886,
+        "lastModifiedBy": "UTlFSVhgfIUeTsoW"
+      }
+    }
+  ]
 }
