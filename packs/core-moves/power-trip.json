@@ -29,16 +29,72 @@
         "types": [
           "dark"
         ],
-        "description": "<p>Effect: This attack's Power increases based on the totals of the user's Stat Stages, increasing if a Stat's total Stages are positive.</p><p><blockquote>Damage Formula: Power = 20 + 20 x (max(0,ATKStages)+max(0,DEFStages)+max(0,SPATKStages)+max(0,SPDEFStages)+max(0,SPDStages)+max(0,ACCStages)+max(0,EVAStages))</blockquote>",
-        "contestType": "",
-        "contestEffect": "",
-        "free": false,
-        "slot": null
+        "description": "<p>Effect: This attack's Power increases based on the totals of the user's Stat Stages.</p>",
+        "img": "systems/ptr2e/img/svg/dark_icon.svg",
+        "predicate": []
       }
     ],
-    "container": null,
-    "grade": "B"
+    "grade": "B",
+    "traits": [],
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
   },
   "_id": "yoBSCEEZtzbZESMt",
-  "effects": []
+  "effects": [
+    {
+      "name": "Power Trip",
+      "type": "passive",
+      "_id": "SGs4pJyAdVY8y4Ah",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "flat-modifier",
+            "key": "power-trip-attack-power",
+            "value": "20 * (@actor.system.attributes.atk.stage+@actor.system.attributes.def.stage+@actor.system.attributes.spa.stage+@actor.system.attributes.spd.stage+@actor.system.attributes.spd.stage+@actor.system.battleStats.accuracy.stage+@actor.system.battleStats.evasion.stage+@actor.system.battleStats.critRate.stage)",
+            "predicate": [],
+            "label": "Power Trip",
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "hideIfDisabled": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": false,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "1.0.6.beta",
+        "createdTime": 1740187535596,
+        "modifiedTime": 1740188810565,
+        "lastModifiedBy": "UTlFSVhgfIUeTsoW"
+      }
+    }
+  ]
 }
