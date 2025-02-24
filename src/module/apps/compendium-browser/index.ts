@@ -425,7 +425,7 @@ export class CompendiumBrowser extends foundry.applications.api.HandlebarsApplic
           };
           switch (filterType) {
             case "checkboxes": {
-              if (!currentTab.isOfType("species", "gear", "move")) return;
+              if (currentTab.isOfType("traits")) return;
               if (objectHasKey(currentTab.filterData.checkboxes, filterName)) {
                 toggleFilter(currentTab.filterData.checkboxes[filterName]);
               }
@@ -444,7 +444,7 @@ export class CompendiumBrowser extends foundry.applications.api.HandlebarsApplic
         if (filterType === "checkboxes") {
           container.querySelectorAll<HTMLInputElement>("input[type=checkbox]").forEach((checkboxElement) => {
             checkboxElement.addEventListener("click", () => {
-              if (!currentTab.isOfType("species", "gear", "move")) return;
+              if (currentTab.isOfType("traits")) return;
               if (objectHasKey(currentTab.filterData.checkboxes, filterName)) {
                 const optionName = checkboxElement.name;
                 const checkbox = currentTab.filterData.checkboxes[filterName] as CheckboxData;
