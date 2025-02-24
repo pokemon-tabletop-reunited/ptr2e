@@ -3903,6 +3903,108 @@ body .application.sheet .form-group {
   background: #7fcbc8;
   border-color: #7fcbc8;
 }
+.application.sheet#compendium-browser-settings {
+  max-height: 800px;
+}
+.application.sheet#compendium-browser-settings .window-content {
+  display: grid;
+  grid-template-columns: unset;
+  grid-template-rows: min-content auto min-content;
+  grid-template-areas: "tabs" "content" "footer";
+}
+.application.sheet#compendium-browser-settings .window-content .tabs {
+  grid-area: tabs;
+  border-left: unset;
+}
+.application.sheet#compendium-browser-settings .window-content [data-application-part="footer"] {
+  grid-area: footer;
+  display: flex;
+  justify-content: center;
+  border-top: 1px solid var(--border-theme-color);
+}
+.application.sheet#compendium-browser-settings .window-content [data-application-part].active {
+  grid-area: content;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 0.5rem;
+}
+.application.sheet#compendium-browser-settings .window-content [data-application-part].active .scroll {
+  padding: unset;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 100%;
+  gap: 0.5rem;
+}
+.application.sheet#compendium-browser-settings .window-content [data-application-part].active .setting-section {
+  gap: 0;
+  /* Checkbox */
+}
+.application.sheet#compendium-browser-settings .window-content [data-application-part].active .setting-section h3 {
+  margin: 0;
+  cursor: pointer;
+  border: unset;
+  text-decoration: underline;
+}
+.application.sheet#compendium-browser-settings .window-content [data-application-part].active .setting-section dt {
+  width: 10%;
+}
+.application.sheet#compendium-browser-settings .window-content [data-application-part].active .setting-section dt > input[type="checkbox"] {
+  transform: none;
+  flex: none;
+  height: auto;
+  margin: 1px;
+}
+.application.sheet#compendium-browser-settings .window-content [data-application-part].active .setting-section dd {
+  width: 88%;
+}
+.application.sheet#compendium-browser-settings .window-content [data-application-part].active .setting-section button {
+  width: 50%;
+  align-self: center;
+  margin: 0.5rem;
+}
+.application.sheet#compendium-browser-settings .window-content [data-application-part].active dl {
+  margin: 5px 0;
+}
+.application.sheet#compendium-browser-settings .window-content [data-application-part].active dl > label {
+  display: flex;
+}
+.application.sheet#compendium-browser-settings .window-content [data-application-part].active dt {
+  margin: unset;
+  display: inline-block;
+  width: 40%;
+  padding-left: 5px;
+}
+.application.sheet#compendium-browser-settings .window-content [data-application-part].active dd {
+  margin: unset;
+  display: inline-block;
+  width: 58%;
+  margin-left: 0;
+  align-self: center;
+  align-content: center;
+}
+.application.sheet#compendium-browser-settings .window-content [data-application-part].active .single-column {
+  width: 100%;
+}
+.application.sheet#compendium-browser-settings .window-content [data-application-part].active h2 {
+  margin-top: unset;
+  margin-bottom: 0.5em;
+  width: 100%;
+  padding: unset;
+  border-color: var(--border-theme-color);
+  font-family: unset;
+  padding: 0.5rem 0.25rem 0 0.25rem;
+}
+.application.sheet#compendium-browser-settings .window-content [data-application-part].active div,
+.application.sheet#compendium-browser-settings .window-content [data-application-part].active fieldset {
+  width: 365px;
+}
+.application.sheet#compendium-browser-settings .window-content [data-application-part].active fieldset {
+  gap: unset;
+}
 .application.sheet.stats-form .window-content {
   padding-top: 0.5rem;
   display: grid;
