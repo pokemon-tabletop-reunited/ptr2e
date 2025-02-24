@@ -17,6 +17,7 @@ export class PackLoader {
   ): AsyncGenerator<{ pack: CompendiumCollection<CompendiumDocument>; index: CompendiumIndex }, void, unknown> {
     const localize = localizer("PTR2E.ProgressBar");
     const sources = this.#getSources();
+    if(!indexFields.includes("system.publication.source")) indexFields.push("system.publication.source");
 
     const progress = new Progress({ steps: packs.length });
     for (const packId of packs) {

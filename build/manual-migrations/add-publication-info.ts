@@ -19,6 +19,71 @@ for(const pack of packs) {
       authors: ["PTR 2e Team"]
     }
 
+    if(data.system.number) {
+      const number = parseInt(data.system.number);
+      switch(true) {
+        case number > 0 && number <= 151: {
+          data.system.publication.source = "PTR 2e Core - Kanto Dex";
+          break;
+        }
+        case number > 151 && number <= 251: {
+          data.system.publication.source = "PTR 2e Core - Johto Dex";
+          break;
+        }
+        case number > 251 && number <= 386: {
+          data.system.publication.source = "PTR 2e Core - Hoenn Dex";
+          break;
+        }
+        case number > 386 && number <= 493: {
+          data.system.publication.source = "PTR 2e Core - Sinnoh Dex";
+          break;
+        }
+        case number > 493 && number <= 649: {
+          data.system.publication.source = "PTR 2e Core - Unova Dex";
+          break;
+        }
+        case number > 649 && number <= 721: {
+          data.system.publication.source = "PTR 2e Core - Kalos Dex";
+          break;
+        }
+        case number > 721 && number <= 809: {
+          data.system.publication.source = "PTR 2e Core - Alola Dex";
+          break;
+        }
+        case number > 809 && number <= 898: {
+          data.system.publication.source = "PTR 2e Core - Galar Dex";
+          break;
+        }
+        case number > 899 && number <= 905: {
+          data.system.publication.source = "PTR 2e Core - Hisui Dex";
+          break;
+        }
+        case number > 905 && number <= 1025: {
+          data.system.publication.source = "PTR 2e Core - Paldea Dex";
+          break;
+        }
+      }
+      switch(data.system.form) {
+        case "paldean": {
+          data.system.publication.source = "PTR 2e Core - Paldea Dex";
+          break;
+        }
+        case "galarian": {
+          data.system.publication.source = "PTR 2e Core - Galar Dex";
+          break;
+        }
+        case "alolan": {
+          data.system.publication.source = "PTR 2e Core - Alola Dex";
+          break;
+        }
+        case "hisuian": {
+          data.system.publication.source = "PTR 2e Core - Hisui Dex";
+          break
+        }
+        default: break;
+      }
+    }
+
     fs.writeFileSync(filePath, JSON.stringify(data, null, 2));
   }
 }

@@ -164,12 +164,12 @@ export class CompendiumBrowserSettings extends foundry.applications.api.Handleba
         delete this.browser.packLoader.sourcesSettings.sources[key]; // just to make sure we clean up
         continue;
       }
-      source.load = formData.has(`source-${key}`);
+      source.load = formData.get(`source-${key}`) === "true";
     }
 
-    this.browser.packLoader.sourcesSettings.showEmptySources = formData.has("show-empty-sources");
-    this.browser.packLoader.sourcesSettings.showUnknownSources = formData.has("show-unknown-sources");
-    this.browser.packLoader.sourcesSettings.ignoreAsGM = formData.has("ignore-as-gm");
+    this.browser.packLoader.sourcesSettings.showEmptySources = formData.get("show-empty-sources") === "true";
+    this.browser.packLoader.sourcesSettings.showUnknownSources = formData.get("show-unknown-sources") === "true";
+    this.browser.packLoader.sourcesSettings.ignoreAsGM = formData.get("ignore-as-gm") === "true";
     await game.settings.set("ptr2e", "compendiumBrowserSources", this.browser.packLoader.sourcesSettings);
 
     // await this.#resetInitializedTabs();
