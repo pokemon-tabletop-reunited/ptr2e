@@ -23,21 +23,70 @@
           "powerPoints": 1
         },
         "category": "special",
-        "power": null,
         "accuracy": 90,
         "types": [
           "normal"
         ],
         "description": "<p>Effect: This attack always deals 35 damage on hit.</p>",
-        "contestType": "",
-        "contestEffect": "",
-        "free": false,
-        "slot": null
+        "img": "icons/svg/explosion.svg",
+        "predicate": []
       }
     ],
-    "container": null,
-    "grade": "E"
+    "grade": "E",
+    "traits": [],
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ]
+    }
   },
   "_id": "wpWy5nsl4AjbSYjs",
-  "effects": []
+  "effects": [
+    {
+      "name": "Sonic Boom",
+      "type": "passive",
+      "_id": "ZA5HqPkGpWcrkVbX",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "flat-modifier",
+            "key": "sonic-boom-attack-damage-flat",
+            "value": 35,
+            "predicate": [
+              "item:move:sonic-boom"
+            ],
+            "label": "Sonic Boom",
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "hideIfDisabled": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": false,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {}
+    }
+  ]
 }
