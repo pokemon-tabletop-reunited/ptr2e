@@ -575,6 +575,7 @@ class ActorPTR2e<
   }
 
   override *allApplicableEffects(): Generator<ActiveEffectPTR2e<this>> {
+    if(this.type === "ptu-actor") return super.allApplicableEffects() as Generator<ActiveEffectPTR2e<this>>;
     if (game.ready) {
       const combatant = this.combatant;
       if (combatant) {

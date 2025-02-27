@@ -1,5 +1,5 @@
 import { ItemPTR2e, PerkPTR2e, SpeciesPTR2e } from "@item";
-import { HasDescription, HasEmbed, HasMigrations, HasSlug, HasTraits, PTRCONSTS, Trait } from "@module/data/index.ts";
+import { HasDescription, HasEmbed, HasMigrations, HasPublication, HasSlug, HasTraits, PTRCONSTS, Trait } from "@module/data/index.ts";
 import { PokemonType } from "@data";
 import { BaseItemSourcePTR2e, ItemSystemSource } from "./system.ts";
 import { getTypes } from "@scripts/config/effectiveness.ts";
@@ -14,9 +14,10 @@ import { SlugSchema } from "@module/data/mixins/has-slug.ts";
 import { getInitialSkillList } from "@scripts/config/skills.ts";
 import { Predicate, PredicateStatement } from "@system/predication/predication.ts";
 import { ImageResolver, sluggify } from "@utils";
+import { PublicationSchema } from "@module/data/mixins/has-publication.ts";
 
 const SpeciesExtension = HasEmbed(
-  HasMigrations(HasTraits(HasDescription(HasSlug(foundry.abstract.TypeDataModel)))),
+  HasMigrations(HasTraits(HasDescription(HasSlug(HasPublication(foundry.abstract.TypeDataModel))))),
   "species"
 );
 
@@ -52,7 +53,7 @@ class SpeciesSystem extends SpeciesExtension {
     }
 
     return {
-      ...super.defineSchema() as TraitsSchema & MigrationSchema & DescriptionSchema & SlugSchema,
+      ...super.defineSchema() as TraitsSchema & MigrationSchema & DescriptionSchema & SlugSchema & PublicationSchema,
       number: new fields.NumberField({
         required: true,
         min: 0,
@@ -906,7 +907,7 @@ interface SpeciesSystem extends ModelPropsFromSchema<SpeciesSchema> {
   // virtual: boolean;
 }
 
-export interface SpeciesSchema extends foundry.data.fields.DataSchema, TraitsSchema, MigrationSchema, DescriptionSchema, SlugSchema {
+export interface SpeciesSchema extends foundry.data.fields.DataSchema, TraitsSchema, MigrationSchema, DescriptionSchema, SlugSchema, PublicationSchema {
   number: foundry.data.fields.NumberField<number, number, true, false, true>;
   form: SlugField<string, string, false, true, true>;
   stats: foundry.data.fields.SchemaField<StatsSchema, SourceFromSchema<StatsSchema>, ModelPropsFromSchema<StatsSchema>>;
