@@ -104,8 +104,8 @@ class ActiveEffectPTR2e<
 
   override apply(actor: ActorPTR2e, change: ChangeModel, options?: string[]): unknown {
     if (this.parent instanceof ItemPTR2e && this.parent) {
-      if(this.parent.system instanceof AbilitySystemModel && this.parent.system.isSuppressed) return;
-      if([
+      if (this.parent.system instanceof AbilitySystemModel && this.parent.system.isSuppressed) return;
+      if ([
         "weapon",
         "equipment",
         "consumable",
@@ -376,6 +376,9 @@ class ActiveEffectPTR2e<
       const effects = sources.flatMap((source) => {
         if (!(context.keepId || context.keepEmbeddedIds)) {
           source._id = fu.randomID();
+        }
+        else if (source.changes?.some(c => ["grant-item", "grant-effect"].includes((c as { type: string })?.type))) {
+          source._id ??= fu.randomID();
         }
 
         if (source.flags?.ptr2e?.stacks !== false) {
