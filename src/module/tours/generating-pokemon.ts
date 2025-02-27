@@ -20,7 +20,8 @@ export class GeneratingPokemonTour extends PTRTour {
             blueprints: [{
               species: "Compendium.ptr2e.core-species.Item.pCSOFZ2UvRx8QTGs"
             }]
-          }
+          },
+          ownership: {default: CONST.DOCUMENT_OWNERSHIP_LEVELS.OWNER}
         }) as BlueprintPTR2e,
         generation: {
           x: 0,

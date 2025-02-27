@@ -167,7 +167,8 @@ export class SkillsEditor extends foundry.applications.api.HandlebarsApplication
       levelOne,
       valid,
       showOverrideSubmit: game?.user?.isGM ?? false,
-      sort: this.sort === "a"
+      sort: this.sort === "a",
+      hasLuck: this.document.traits.has("ace"),
     };
   }
 
