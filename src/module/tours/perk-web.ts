@@ -16,6 +16,7 @@ export class PerkWebTour extends PTRTour {
 
   protected override async _preStep(): Promise<void> {
     if (!this.actor) {
+      //@ts-expect-error - Create types aren't properly setup
       this.actor = await ActorPTR2e.create({
         name: "Tour-san",
         type: "humanoid",

@@ -60,6 +60,7 @@ export default class BlueprintSheet extends foundry.applications.api.HandlebarsA
         },
         "create-config": async function (this: BlueprintSheet) {
           if (!this.selected) return;
+          await BlueprintSheet.#onSubmit.bind(this)(new Event("save"), this.element as HTMLFormElement, new FormDataExtended(this.element));
           if (this.generation?.temporary) {
             this.selected.updateSource({ config: new GeneratorConfig().toObject() });
           } else {
@@ -504,8 +505,6 @@ export default class BlueprintSheet extends foundry.applications.api.HandlebarsA
       }]);
     }
 
-    if (!closeAndGenerate) return;
-
     if (this.generation?.temporary) {
       const blueprint = this.selected;
       if (!blueprint) return;
@@ -516,8 +515,14 @@ export default class BlueprintSheet extends foundry.applications.api.HandlebarsA
           delete updateData[key];
         }
       }
-      fu.mergeObject(blueprint, updateData, { inplace: true });
+      if(!closeAndGenerate) {
+        blueprint.updateSource(updateData);
+      } else {
+        fu.mergeObject(blueprint, updateData, { inplace: true });
+      }
     }
+
+    if (!closeAndGenerate) return;
 
     const generation = this.generation ? { ...this.generation, team: !this.team?.owner && (this.team?.members?.length ?? 0) > 1 } : null;
 

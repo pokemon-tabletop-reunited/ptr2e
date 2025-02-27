@@ -11,7 +11,7 @@
 </header>
 <main>
     <div class="collapse-button">
-        <button type="button" class="collapse-rolls" data-uuid="{{uuid}}">Show All Rolls</button>
+        <button type="button" class="collapse-rolls {{#if @root.defaultExpanded}} expanded{{/if}}" data-uuid="{{uuid}}">Show All Rolls</button>
     </div>
     <article class="collapsed">
         {{#if rolls.accuracy}}{{{rolls.accuracy}}}{{/if}}

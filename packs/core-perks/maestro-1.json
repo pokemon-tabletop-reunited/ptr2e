@@ -8,10 +8,10 @@
     },
     "actions": [],
     "slug": "maestro-1",
-    "description": "<p>The user selects 2 Arts Group Skills with which their Species proficiency is greater than 1. The user’s Species proficiency with the selected skills is increased by +10. A Skill may only be increased 3 times with this Perk and cannot be increased past 50.</p>",
+    "description": "<p>The user selects 2 Arts Group Skills. The user’s Species proficiency with the selected skills is increased by +10. A Skill may only be increased 3 times with this Perk and cannot be increased past 60 (with the last increase needing to be manually reduced to prevent the Skill from exceeding 60).</p>",
     "traits": [],
     "prerequisites": [
-      "item:perk:skill-refinement-3"
+      "item:perk:skill-refinement-5"
     ],
     "autoUnlock": [],
     "cost": 1,
@@ -127,6 +127,12 @@
       "arena": null,
       "approach": null,
       "archetype": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ]
     }
   },
   "_id": "oXpQ2tiJXc3e9xRv",
@@ -135,42 +141,53 @@
     {
       "name": "Maestro",
       "type": "passive",
-      "_id": "3lKmhJgCF9PzbtI0",
+      "_id": "loW69wGp6n2faLej",
       "img": "systems/ptr2e/img/icons/effect_icon.webp",
       "system": {
         "changes": [
           {
-            "type": "flat-modifier",
-            "key": "insertskill-roll",
-            "value": 10,
+            "type": "choice-set",
+            "key": "",
+            "value": 0,
             "predicate": [],
-            "label": "InsertSkill Maestr 1",
             "mode": 2,
             "priority": null,
             "ignored": false,
-            "hideIfDisabled": false
+            "choices": "flags.ptr2e.skillOptions.arts",
+            "prompt": "PTR2E.ChoiceSetPrompt.Prompt",
+            "adjustName": true,
+            "rollOption": "ma11"
           },
           {
-            "type": "flat-modifier",
-            "key": "insertskill-roll",
+            "type": "basic",
+            "key": "system.skills.{effect|flags.ptr2e.choiceSelections.ma11}.value",
             "value": 10,
             "predicate": [],
-            "label": "InsertSkill Maestr 1",
             "mode": 2,
             "priority": null,
-            "ignored": false,
-            "hideIfDisabled": false
+            "ignored": false
           },
           {
-            "type": "flat-modifier",
-            "key": "insertskill-roll",
-            "value": 10,
+            "type": "choice-set",
+            "key": "",
+            "value": 0,
             "predicate": [],
-            "label": "InsertSkill Maestr 1",
             "mode": 2,
             "priority": null,
             "ignored": false,
-            "hideIfDisabled": false
+            "choices": "flags.ptr2e.skillOptions.arts",
+            "prompt": "PTR2E.ChoiceSetPrompt.Prompt",
+            "adjustName": true,
+            "rollOption": "ma12"
+          },
+          {
+            "type": "basic",
+            "key": "system.skills.{effect|flags.ptr2e.choiceSelections.ma12}.value",
+            "value": 10,
+            "predicate": [],
+            "mode": 2,
+            "priority": null,
+            "ignored": false
           }
         ],
         "slug": null,
@@ -201,10 +218,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "ptr2e",
-        "systemVersion": "1.0.0.beta-ready.2",
-        "createdTime": 1738607388511,
-        "modifiedTime": 1738607438206,
-        "lastModifiedBy": "5ImYyhOS2D6D7ypO"
+        "systemVersion": "1.0.1.beta",
+        "createdTime": 1739369759741,
+        "modifiedTime": 1739369802463,
+        "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
       }
     }
   ],
