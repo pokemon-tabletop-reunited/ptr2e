@@ -3,6 +3,7 @@ import { ActiveEffectPTR2e } from "@effects";
 import { ItemPTR2e } from "@item";
 import ChangeModel from "@module/effects/changes/change.ts";
 import { formatSlug } from "@utils";
+import AttackPTR2e from "./attack.ts";
 
 class Trait {
   static isValid(value: unknown): value is Trait {
@@ -33,8 +34,10 @@ class Trait {
     }
   }
 
-  static effectsFromChanges<TParent extends ActorPTR2e | ItemPTR2e>(this: Trait, parent: TParent) {
-    return new ActiveEffectPTR2e<TParent>({
+  static effectsFromChanges<TParent extends ActorPTR2e | ItemPTR2e>(this: Trait, parent: TParent, attack?: AttackPTR2e) {
+    const actor = parent instanceof ActorPTR2e ? parent : parent.actor;
+    const item = parent instanceof ItemPTR2e ? parent : null;
+    const effect = new ActiveEffectPTR2e<TParent>({
       name: this.label ?? formatSlug(this.slug),
       type: "passive",
       system: {
@@ -42,6 +45,25 @@ class Trait {
         traits: [this.slug]
       }
     }, { parent });
+    effect.changes.forEach(c => {
+      c.key = c.resolveValue(c.key, c.key, {
+        evaluate: false, resolvables: {
+          actor,
+          item,
+          effect,
+          attack
+        }
+      }) as string;
+      c.value = c.resolveValue(c.value, c.value, {
+        evaluate: false, resolvables: {
+          actor,
+          item,
+          effect,
+          attack
+        }
+      }) as string | number;
+    })
+    return effect;
   }
 }
 
