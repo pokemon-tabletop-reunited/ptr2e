@@ -78,6 +78,12 @@ class AttackStatistic extends Statistic {
       ].flat()
     );
 
+    if(attack.power && attack.stab > 1) {
+      data.domains.push(`stab-${attack.type}`, `stab`);
+      data.check!.domains.push(`stab-${attack.type}`, `stab`);
+      data.rollOptions.push(`stab-${attack.type}`, `stab`);
+    }
+
     // Power and category based Modifiers
     if (attack.category !== "status" && !data.modifiers.length) {
       if (typeof attack.power === "number") {
