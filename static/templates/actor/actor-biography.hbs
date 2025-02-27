@@ -1,8 +1,10 @@
 <section class="tab sheet-body {{tabs.biography.cssClass}}" data-tab="biography" data-group="sheet">
-  <div class="free-form">
+  <div class="left-side">
     <div class="biography standard-form">
       <fieldset>
         <legend>{{localize "PTR2E.FIELDS.details.biography.label"}}</legend>
+        {{formField fields.gender value=source.system.gender localize=true}}
+        {{formField fields.shiny value=source.system.shiny localize=true}}
         {{formInput fields.details.fields.biography enriched=enrichedBiography value=source.system.details.biography toggled=true localize=true}}
         <p class="hint">{{localize "PTR2E.FIELDS.details.biography.hint"}}</p>
       </fieldset>
