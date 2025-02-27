@@ -8,6 +8,7 @@ import { ActionEditor } from "@module/apps/action-editor.ts";
 import { ItemSheetV2Expanded } from "@module/apps/appv2-expanded.ts";
 import { ActionPTR2e, Trait } from "@data";
 import { DataInspector } from "@module/apps/data-inspector/data-inspector.ts";
+import BlueprintSystem from "@item/data/blueprint.ts";
 
 export default class ItemSheetPTR2e<
   TSystem extends ItemSystemPTR,
@@ -175,6 +176,7 @@ export default class ItemSheetPTR2e<
       traits,
       effects,
       enrichedDescription,
+      enrichedNotes: (this.document.system instanceof BlueprintSystem) ? "" : await TextEditor.enrichHTML(this.document.system.publication.notes ?? ""),
     };
   }
 
