@@ -3,6 +3,7 @@ body {
   --appv2-background-flat: rgba(12, 11, 22, 0.94);
   --appv2-background: linear-gradient(to right, rgba(7, 7, 10, 0.93), rgba(19, 17, 31, 0.95));
   --appv2-background-alt: linear-gradient(to right, rgba(28, 25, 46, 0.5), rgba(24, 24, 34, 0.53));
+  --appv2-background-opaque: linear-gradient(to right, #07070a, #13111f);
   --appv2-text-color: var(--color-light-1);
   --hint-text-color: var(--color-light-5);
   --border-theme-color: var(--color-light-6);
@@ -14,6 +15,7 @@ body.theme-light {
   --appv2-background-flat: rgba(225, 222, 210, 0.94);
   --appv2-background: linear-gradient(to right, rgba(212, 210, 198, 0.93), rgba(240, 237, 223, 0.95));
   --appv2-background-alt: linear-gradient(to right, rgba(240, 237, 223, 0.5), rgba(225, 222, 210, 0.53));
+  --appv2-background-opaque: linear-gradient(to right, #f0eddf, #e1ded2);
   --appv2-text-color: var(--color-dark-1);
   --hint-text-color: var(--color-dark-5);
   --border-theme-color: var(--color-dark-6);
@@ -488,6 +490,10 @@ body .application.sheet .form-group {
 .application.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] ul.items .item-controls > a.item-carry-type.active {
   color: var(--user-color);
 }
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] header .item-controls > a.item-temporary.active,
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] ul.items .item-controls > a.item-temporary.active {
+  color: var(--user-color);
+}
 .application.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] header .item-controls > a .fa-stack,
 .application.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] ul.items .item-controls > a .fa-stack {
   margin: calc(-1 * var(0.1875rem)) calc(-1 * var(0.125rem)) 0;
@@ -587,6 +593,7 @@ body .application.sheet .form-group {
   font-size: 13.5px;
   max-height: 42px;
   background: #0f0d18a3;
+  color: var(--color-light-1);
   padding: 4px;
   border-radius: 8px;
   width: auto;
@@ -849,10 +856,24 @@ body .application.sheet .form-group {
   flex-direction: row;
   justify-content: center;
   align-items: center;
+  position: relative;
 }
 .application.sheet.actor.v2 .window-content .tab.active[data-tab="overview"] aside.stats-chart-aside fieldset canvas {
   max-width: 100%;
   max-height: 100%;
+}
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="overview"] aside.stats-chart-aside fieldset button[data-action="open-stats-chart"] {
+  position: absolute;
+  top: 0;
+  bottom: 0.25rem;
+  padding: 0.25rem;
+  background: var(--appv2-background);
+  border: 1px solid var(--border-theme-color);
+  border-radius: 4px;
+  font-size: small;
+  width: fit-content;
+  height: fit-content;
+  line-height: normal;
 }
 .application.sheet.actor.v2 .window-content .tab.active[data-tab="overview"] .movement-component {
   grid-area: 5 / 5 / span 3 / span 3;
@@ -993,14 +1014,17 @@ body .application.sheet .form-group {
   margin-left: auto;
   gap: 5px;
 }
-.application.sheet.actor.v2 .window-content .tab.active[data-tab="biography"] .free-form {
-  grid-area: 1 / 1 / span 3 / span 3;
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="biography"] .left-side {
+  grid-area: 1 / 1 / span 5 / span 3;
   display: flex;
   flex-direction: column;
 }
-.application.sheet.actor.v2 .window-content .tab.active[data-tab="biography"] .free-form .biography {
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="biography"] .left-side .biography {
   flex: 0 0 auto;
   padding: 0.5rem;
+}
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="biography"] .left-side .hint {
+  flex: 1;
 }
 .application.sheet.actor.v2 .window-content .tab.active[data-tab="biography"] .right-side {
   grid-area: 1 / 4 / span 5 / span 2;
@@ -2700,7 +2724,7 @@ body .application.sheet .form-group {
   height: 100%;
 }
 .application.sheet.exp-tracker .window-content [data-application-part="venture"].active fieldset.cms .form-group > label {
-  flex-basis: 65%;
+  flex-basis: 30%;
 }
 .application.sheet.exp-tracker .window-content [data-application-part="venture"].active fieldset.cms details {
   overflow-y: auto;
@@ -3829,6 +3853,7 @@ body .application.sheet .form-group {
   overflow-y: scroll;
   overflow-x: hidden;
   margin: unset;
+  margin-top: 0.25rem;
 }
 .application.sheet#compendium-browser .item-list.result-list li {
   display: flex;
@@ -3849,11 +3874,137 @@ body .application.sheet .form-group {
   flex: 1;
 }
 .application.sheet#compendium-browser .item-list.result-list li .grade,
-.application.sheet#compendium-browser .item-list.result-list li .cost {
+.application.sheet#compendium-browser .item-list.result-list li .cost,
+.application.sheet#compendium-browser .item-list.result-list li .purchase {
   flex: 0 0 min-content;
   text-wrap: nowrap;
   padding-right: 0.5rem;
   color: var(--color-text-primary);
+}
+.application.sheet#compendium-browser .item-list.result-list li .description {
+  flex: 1;
+  padding: 0.25rem;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+.application.sheet#compendium-browser .item-list.result-list span.trait {
+  color: #222224;
+  background: var(--color-theme-4);
+  padding: 0.25rem;
+  border: 1px solid var(--border-theme-color);
+  border-radius: 8px;
+}
+.application.sheet#compendium-browser .item-list.result-list span.trait.narrative {
+  background: #79af7a;
+  border-color: #79af7a;
+}
+.application.sheet#compendium-browser .item-list.result-list span.trait.automated {
+  background: #7fcbc8;
+  border-color: #7fcbc8;
+}
+.application.sheet#compendium-browser-settings {
+  max-height: 800px;
+}
+.application.sheet#compendium-browser-settings .window-content {
+  display: grid;
+  grid-template-columns: unset;
+  grid-template-rows: min-content auto min-content;
+  grid-template-areas: "tabs" "content" "footer";
+}
+.application.sheet#compendium-browser-settings .window-content .tabs {
+  grid-area: tabs;
+  border-left: unset;
+}
+.application.sheet#compendium-browser-settings .window-content [data-application-part="footer"] {
+  grid-area: footer;
+  display: flex;
+  justify-content: center;
+  border-top: 1px solid var(--border-theme-color);
+}
+.application.sheet#compendium-browser-settings .window-content [data-application-part].active {
+  grid-area: content;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 0.5rem;
+}
+.application.sheet#compendium-browser-settings .window-content [data-application-part].active .scroll {
+  padding: unset;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 100%;
+  gap: 0.5rem;
+}
+.application.sheet#compendium-browser-settings .window-content [data-application-part].active .setting-section {
+  gap: 0;
+  /* Checkbox */
+}
+.application.sheet#compendium-browser-settings .window-content [data-application-part].active .setting-section h3 {
+  margin: 0;
+  cursor: pointer;
+  border: unset;
+  text-decoration: underline;
+}
+.application.sheet#compendium-browser-settings .window-content [data-application-part].active .setting-section dt {
+  width: 10%;
+}
+.application.sheet#compendium-browser-settings .window-content [data-application-part].active .setting-section dt > input[type="checkbox"] {
+  transform: none;
+  flex: none;
+  height: auto;
+  margin: 1px;
+}
+.application.sheet#compendium-browser-settings .window-content [data-application-part].active .setting-section dd {
+  width: 88%;
+}
+.application.sheet#compendium-browser-settings .window-content [data-application-part].active .setting-section button {
+  width: 50%;
+  align-self: center;
+  margin: 0.5rem;
+}
+.application.sheet#compendium-browser-settings .window-content [data-application-part].active dl {
+  margin: 5px 0;
+}
+.application.sheet#compendium-browser-settings .window-content [data-application-part].active dl > label {
+  display: flex;
+  margin-bottom: 0.25rem;
+}
+.application.sheet#compendium-browser-settings .window-content [data-application-part].active dt {
+  margin: unset;
+  display: inline-block;
+  width: 40%;
+  padding-left: 5px;
+}
+.application.sheet#compendium-browser-settings .window-content [data-application-part].active dd {
+  margin: unset;
+  display: inline-block;
+  width: 58%;
+  margin-left: 0;
+  align-self: center;
+  align-content: center;
+}
+.application.sheet#compendium-browser-settings .window-content [data-application-part].active .single-column {
+  width: 100%;
+}
+.application.sheet#compendium-browser-settings .window-content [data-application-part].active h2 {
+  margin-top: unset;
+  margin-bottom: 0.5em;
+  width: 100%;
+  padding: unset;
+  border-color: var(--border-theme-color);
+  font-family: unset;
+  padding: 0.5rem 0.25rem 0 0.25rem;
+}
+.application.sheet#compendium-browser-settings .window-content [data-application-part].active div,
+.application.sheet#compendium-browser-settings .window-content [data-application-part].active fieldset {
+  width: 365px;
+}
+.application.sheet#compendium-browser-settings .window-content [data-application-part].active fieldset {
+  gap: unset;
 }
 .application.sheet.stats-form .window-content {
   padding-top: 0.5rem;
@@ -4115,7 +4266,7 @@ body .application.sheet .form-group {
 .application.sheet.party-sheet .party-member .title .level,
 .application.sheet.party-sheet .box-item .title .level {
   font-size: x-small;
-  color: var(--color-text-light-primary);
+  color: var(--appv2-text-color);
 }
 .application.sheet.party-sheet header.party-member {
   grid-area: owner;
@@ -4166,7 +4317,7 @@ body .application.sheet .form-group {
 }
 .application.sheet.party-sheet header.party-member main .health .details span {
   font-size: 12px;
-  color: var(--color-text-light-primary);
+  color: var(--appv2-text-color);
 }
 .application.sheet.party-sheet header.party-member main .health .details .divider {
   margin: 0 0.25rem;
@@ -4184,7 +4335,7 @@ body .application.sheet .form-group {
 }
 .application.sheet.party-sheet header.party-member main .pp .details span {
   font-size: 12px;
-  color: var(--color-text-light-primary);
+  color: var(--appv2-text-color);
 }
 .application.sheet.party-sheet header.party-member main .pp .details .divider {
   margin: 0 0.25rem;
@@ -4253,7 +4404,7 @@ body .application.sheet .form-group {
 }
 .application.sheet.party-sheet header.party-member main .experience.value {
   grid-area: experience-value;
-  color: var(--color-text-light-primary);
+  color: var(--appv2-text-color);
 }
 .application.sheet.party-sheet main,
 .application.sheet.party-sheet article.party,
@@ -4350,7 +4501,7 @@ body .application.sheet .form-group {
 .application.sheet.party-sheet article.party section.box-item main .health .details span,
 .application.sheet.party-sheet article.box section.box-item main .health .details span {
   font-size: x-small;
-  color: var(--color-text-light-primary);
+  color: var(--appv2-text-color);
 }
 .application.sheet.party-sheet main section.party-member main .health .details .divider,
 .application.sheet.party-sheet article.party section.party-member main .health .details .divider,
@@ -4389,7 +4540,7 @@ body .application.sheet .form-group {
 .application.sheet.party-sheet article.party section.box-item main .pp .details span,
 .application.sheet.party-sheet article.box section.box-item main .pp .details span {
   font-size: x-small;
-  color: var(--color-text-light-primary);
+  color: var(--appv2-text-color);
 }
 .application.sheet.party-sheet main section.party-member main .pp .details .divider,
 .application.sheet.party-sheet article.party section.party-member main .pp .details .divider,
@@ -6989,7 +7140,7 @@ body .application.sheet .form-group {
 }
 .ptr2e .directory-item.document .entry-name.document-name .actor-level {
   font-size: x-small;
-  color: var(--color-text-light-primary);
+  color: var(--appv2-text-color);
 }
 .ptr2e.rest-sheet .window-content {
   padding: 0.5rem;
@@ -7088,13 +7239,12 @@ ul.item-list.result-list li.item.rarity-unique {
   position: fixed;
   height: 100%;
   width: 100%;
-  color: white;
+  color: var(--appv2-text-color);
   display: grid;
   overflow: hidden;
   grid-template-areas: "hudHeader web search" "hudActor web search" "hudZoom web search" "hudPerk web search" "hudPerk web searchResults" "hudControls web searchResults";
   grid-template-columns: 250px minmax(0, 1fr) 250px;
   grid-template-rows: 33px 100px 30px 100px minmax(0, 1fr) min-content;
-  --appv2-background-opaque: linear-gradient(to right, #07070a, #13111f);
 }
 #perk-web-app .hud {
   border-right: 1px solid var(--border-theme-color);
@@ -7258,7 +7408,7 @@ ul.item-list.result-list li.item.rarity-unique {
 #perk-web-app [data-application-part="hudControls"] {
   grid-area: hudControls;
   padding: 0.5rem;
-  color: white;
+  color: var(--appv2-text-color);
   border-top: 1px solid var(--border-theme-color);
   border-radius: 0;
   display: flex;
@@ -7310,7 +7460,7 @@ ul.item-list.result-list li.item.rarity-unique {
   width: 48px;
   border: 1px solid var(--border-theme-color);
   cursor: pointer;
-  background: var(--appv2-background-opaque);
+  background: linear-gradient(to right, #07070a, #13111f);
 }
 #perk-web-app [data-application-part="web"] section.perk-grid .perk.selected {
   border-color: #973748;
@@ -7430,7 +7580,7 @@ ul.item-list.result-list li.item.rarity-unique {
   background: none;
   border: none;
   box-shadow: none;
-  color: var(--text-light);
+  color: var(--appv2-text-color);
   cursor: grab;
   font-size: var(--font-size-16);
   height: 14px;
@@ -7461,7 +7611,7 @@ ul.item-list.result-list li.item.rarity-unique {
 #perk-web-app [data-application-part="search"] div[class^="slider-"] .noUi-base .noUi-active .noUi-tooltip {
   display: block;
   background-color: rgba(0, 0, 0, 0.9);
-  color: var(--text-light);
+  color: var(--appv2-text-color);
   line-height: 18px;
   padding: 6px 14px;
 }
@@ -7527,6 +7677,8 @@ ul.item-list.result-list li.item.rarity-unique {
 #perk-web-app [data-application-part="search"] .sortcontainer div.title h3 {
   margin: 0;
   cursor: pointer;
+  color: var(--appv2-text-color);
+  text-shadow: unset;
 }
 #perk-web-app [data-application-part="search"] .filtercontainer div.title button,
 #perk-web-app [data-application-part="search"] .sortcontainer div.title button {
@@ -7585,6 +7737,8 @@ ul.item-list.result-list li.item.rarity-unique {
 #perk-web-app [data-application-part="search"] dt {
   display: inline-block;
   padding-left: 5px;
+  color: var(--appv2-text-color);
+  text-shadow: unset;
 }
 #perk-web-app [data-application-part="search"] dd {
   display: inline-block;
@@ -7756,7 +7910,7 @@ ul.item-list.result-list li.item.rarity-unique {
   flex: 0 0 min-content;
   text-wrap: nowrap;
   padding-right: 0.5rem;
-  color: var(--color-text-primary);
+  color: var(--appv2-text-color);
 }
 #perk-web-app .editing {
   --appv2-background-opaque: linear-gradient(to right, #25191c, #1f1115);
@@ -7768,8 +7922,8 @@ ul.item-list.result-list li.item.rarity-unique {
 }
 #type-matrix .type-grid {
   display: grid;
-  grid-template-columns: repeat(var(--grid-columns), 40px);
-  grid-auto-flow: row;
+  grid-template-rows: repeat(var(--grid-columns), 40px);
+  grid-auto-flow: column;
   grid-auto-rows: 40px;
   overflow: auto;
 }
@@ -7969,6 +8123,16 @@ ul.item-list.result-list li.item.rarity-unique {
   align-items: center;
   text-align: center;
   overflow-y: auto;
+}
+.application.sheet.dex-sheet .window-content .dex.search {
+  flex: 0 0 auto;
+  border-bottom: 1px solid var(--border-theme-color);
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+.application.sheet.dex-sheet .window-content .dex.search input {
+  flex: 0 0 60%;
 }
 .application.sheet.dex-sheet .window-content .dex .entry {
   flex: 0 0 64px;
