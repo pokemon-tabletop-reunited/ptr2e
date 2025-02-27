@@ -7,4 +7,4 @@ export { Migration106AbilityUUIDs } from "./106-ability-uuids.ts";
 export { Migration107AbsolutePaths } from "./107-absolute-paths.ts";
 export { Migration108ConsumableStack } from "./108-consumable-stack.ts";
 export { Migration109SpeciesItems } from "./109-species-items.ts";
-export { Migration110Attacks } from "./110-attacks.ts";
+export { Migration111Attacks as Migration110Attacks } from "./111-attacks.ts";
