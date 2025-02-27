@@ -23,6 +23,7 @@ import { ExpTrackerSettings } from "@system/exp-tracker-model.ts";
 import { type TypeEffectiveness } from "@scripts/config/effectiveness.ts";
 import { PerkWorkerConfig } from "@module/data/models/generator-config.ts";
 import { PerkGeneratorResult } from "./worker/types.js";
+import { PickableThing } from "@module/apps/pick-a-thing-prompt.ts";
 
 interface GamePTR2e
   extends Game<
@@ -110,7 +111,12 @@ type ConfiguredConfig = Config<
 
 declare global {
   interface ConfigPTR2e extends ConfiguredConfig {
-    PTR: typeof PTRCONFIG;
+    PTR: typeof PTRCONFIG & {
+      data: {
+        types: string[]
+      }
+      options: Record<string, PickableThing[]>
+    };
     ui: ConfiguredConfig["ui"] & {
       perksTab: new () => PerkDirectory;
     };

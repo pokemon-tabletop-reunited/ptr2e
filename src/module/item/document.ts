@@ -232,9 +232,17 @@ class ItemPTR2e<
         return [];
       }
     }
+
+    if (!(context.keepId || context.keepEmbeddedIds)) {
+      for (const source of sources) {
+        source._id = fu.randomID();
+      }
+      context.keepEmbeddedIds = true;
+      context.keepId = true;
+    }
     
     async function processSources(sources: ItemSourcePTR2e[]) {
-      const outputItemSources: ItemSourcePTR2e[] = [];
+      const outputItemSources: ItemSourcePTR2e[] = sources;
 
       for (const source of sources) {
         if (!source.effects?.length) continue;
@@ -270,14 +278,6 @@ class ItemPTR2e<
     }
      
     const outputItemSources = await processSources(sources as ItemSourcePTR2e[]);
-
-    if (!(context.keepId || context.keepEmbeddedIds)) {
-      for (const source of sources) {
-        source._id = fu.randomID();
-      }
-      context.keepEmbeddedIds = true;
-      context.keepId = true;
-    }
 
     return super.createDocuments<TDocument>(sources.concat(outputItemSources) as PreCreate<TDocument["_source"]>[], context);
   }
