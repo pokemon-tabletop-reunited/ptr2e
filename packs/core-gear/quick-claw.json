@@ -10,8 +10,7 @@
     },
     "equipped": {
       "slot": "accessory",
-      "carryType": "stowed",
-      "handsHeld": null
+      "carryType": "stowed"
     },
     "grade": "C",
     "fling": {
@@ -43,22 +42,9 @@
         "img": "icons/svg/explosion.svg"
       }
     ],
-    "description": "Effect: When the user declares an Attack, they have a 20% chance of gaining [Priority 1] on that Attack (or increasing that Action's existing Priority value by +1 for that Attack's use).",
+    "description": "<p>Effect: When the user declares an Attack, they have a 20% chance of gaining @Trait[priority-2] on that Attack (or increasing that Action's existing Priority value by +2 for that Attack's use).</p>",
     "slug": "quick-claw",
     "quantity": 1,
-    "identification": {
-      "misidentified": null,
-      "status": "identified",
-      "unidentified": {
-        "name": "Unidentified Item",
-        "img": "systems/ptu/css/images/icons/item_icon.png",
-        "description": "<p>Unidentified Item</p>"
-      }
-    },
-    "_migration": {
-      "version": null,
-      "previous": null
-    },
     "publication": {
       "source": "PTR 2e Core",
       "authors": [
@@ -67,6 +53,72 @@
     }
   },
   "_id": "QhuAmW1i4HVqoqmU",
-  "effects": [],
+  "effects": [
+    {
+      "name": "Quick Claw",
+      "type": "passive",
+      "_id": "qJpGOvUuSDEPKYEB",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "attack",
+            "value": "Compendium.ptr2e.core-effects.Item.advanceffectitem",
+            "predicate": [],
+            "chance": 20,
+            "affects": "self",
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "system.amount",
+                "value": 20
+              },
+              {
+                "mode": 5,
+                "property": "name",
+                "value": "Quick Claw: Advance 20%"
+              }
+            ],
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": 0,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "<p>Effect: When the user declares an Attack, they have a 20% chance of gaining [Priority 2] on that Attack (or increasing that Action's existing Priority value by +2 for that Attack's use).</p>",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "1.0.6.beta",
+        "createdTime": null,
+        "modifiedTime": 1740496892365,
+        "lastModifiedBy": "RCVWvEWYrH5WfLlS"
+      }
+    }
+  ],
   "folder": "6VDJBcrqVDh5bYtA"
 }
