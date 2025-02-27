@@ -78,12 +78,6 @@ class AttackStatistic extends Statistic {
       ].flat()
     );
 
-    if(attack.power && attack.stab > 1) {
-      data.domains.push(`stab-${attack.type}`, `stab`);
-      data.check!.domains.push(`stab-${attack.type}`, `stab`);
-      data.rollOptions.push(`stab-${attack.type}`, `stab`);
-    }
-
     // Power and category based Modifiers
     if (attack.category !== "status" && !data.modifiers.length) {
       if (typeof attack.power === "number") {
@@ -145,6 +139,7 @@ class AttackCheck<TParent extends AttackStatistic = AttackStatistic> implements 
   domains: string[];
   mod: number;
   modifiers: ModifierPTR2e[];
+  additionalOptions: Set<string>;
 
   constructor(parent: TParent, data: StatisticData, config: RollOptionConfig = {}) {
     this.parent = parent;
@@ -152,6 +147,14 @@ class AttackCheck<TParent extends AttackStatistic = AttackStatistic> implements 
 
     data.check.domains = Array.from(new Set(data.check.domains ?? []));
     this.domains = R.unique(R.filter([data.domains, data.check.domains].flat(), R.isTruthy));
+
+    this.additionalOptions = new Set<string>();
+    if(this.attack.power && this.attack.stab > 1) {
+      const options = [...this.attack.types.map(t => `stab-${t}`), `stab`];
+      this.domains.push(...options);
+      data.check!.domains.push(...options);
+      for(const option of options) this.additionalOptions.add(option);
+    }
 
     this.label = data.check?.label
       ? game.i18n.localize(data.check.label) || this.parent.label
@@ -175,6 +178,8 @@ class AttackCheck<TParent extends AttackStatistic = AttackStatistic> implements 
       });
 
     const rollOptions = parent.createRollOptions(this.domains, config);
+    for(const option of this.additionalOptions) rollOptions.add(option);
+
     this.modifiers = [
       ...parentModifiers,
       ...checkOnlyModifiers.map((modifier) => modifier.clone({ test: rollOptions })),
@@ -211,6 +216,7 @@ class AttackCheck<TParent extends AttackStatistic = AttackStatistic> implements 
     options.add(`attack:slug:${this.attack.slug}`);
     options.add(`attack:category:${this.attack.category}`);
     for (const type of this.attack.types) options.add(`attack:type:${type}`);
+    for (const option of this.additionalOptions) options.add(option);
 
     const targets: { actor: ActorPTR2e, token?: TokenPTR2e }[] = (() => {
       if (args.targets) return args.targets.map(t => ({ actor: t, token: t.token?.object as TokenPTR2e }));
