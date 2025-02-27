@@ -144,6 +144,7 @@ class GithubManager {
         Record<string, any>,
       ][]) {
         for (const [key, value] of Object.entries(action)) {
+          if(key === "slot") delete action[key];
           if (value === null || value === undefined) {
             delete action[key];
           }
@@ -165,6 +166,9 @@ class GithubManager {
       if (fu.isEmpty(diff.system.actions)) {
         delete diff.system.actions;
       }
+    }
+    if(diff.system?.slot !== undefined && !isNaN(Number(diff.system.slot))) {
+      delete diff.system.slot;
     }
     if (fu.isEmpty(diff.system)) {
       delete diff.system;
