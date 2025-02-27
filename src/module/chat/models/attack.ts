@@ -478,6 +478,7 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
         })() : [],
       });
 
+    context.defaultExpanded = game.settings.get("ptr2e", "expand-rolls");
     return renderTemplate("systems/ptr2e/templates/chat/attack.hbs", context);
   }
 
@@ -883,6 +884,7 @@ interface AttackMessageRenderContext {
   results: Map<ActorUUID, AttackMessageRenderContextData>;
   pp: ModelPropsFromSchema<PPSchema>;
   selfEffectRolls: string[];
+  defaultExpanded?: boolean;
 }
 
 interface AttackMessageRenderContextData {
