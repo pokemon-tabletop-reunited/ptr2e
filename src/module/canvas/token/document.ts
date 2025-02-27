@@ -169,6 +169,17 @@ class TokenDocumentPTR2e<TParent extends ScenePTR2e | null = ScenePTR2e | null> 
       token.texture.scaleY = mirrorY * absoluteScale;
     }
   }
+
+  protected override _preDelete(options: DocumentModificationContext<TParent>, user: User): Promise<boolean | void> {
+    if(this.actor) {
+      if(this.actor.statuses.has("stuck")) {
+        ui.notifications.warn("PTR2E.TokenDeleteWarning", {localize: true})
+        return Promise.resolve(false);
+      }
+    }
+
+    return super._preDelete(options, user);
+  }
 }
 
 interface TokenDocumentPTR2e<TParent extends ScenePTR2e | null = ScenePTR2e | null> extends TokenDocument<TParent> {

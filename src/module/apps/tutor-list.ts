@@ -82,7 +82,8 @@ export class TutorListApp extends foundry.applications.api.HandlebarsApplication
         moves: list.moves.map(move => ({
           slug: move.slug,
           title: formatSlug(move.slug),
-          uuid: move.uuid
+          uuid: move.uuid,
+          pack: move.uuid?.split("Compendium.")?.[1].split(".Item")?.[0] ?? "",
         }))
       })),
       tab: this.currentTab,
