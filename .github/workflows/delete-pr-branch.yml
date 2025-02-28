@@ -32,4 +32,4 @@ jobs:
               repo: context.repo.repo,
               body: `The branch ${branch_name} has been successfully deleted.`
             })
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
