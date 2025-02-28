@@ -26,12 +26,14 @@
         </dd>
     </dl>
     {{#each filterData.selects as |selectData type|}}
+      {{#unless (is type "showOnlyOnWeb")}}
         <dl class="{{type}}">
             <dt>{{localize selectData.label}}:</dt>
             <dd><select name="{{type}}">
                 {{selectOptions selectData.options selected=selectData.selected blank="-"}}
             </select></dd>
         </dl>
+      {{/unless}}
     {{/each}}
     <button type="button" class="clear-filters">{{localize "PTR2E.CompendiumBrowser.ClearFilters"}}</button>
   </div>
