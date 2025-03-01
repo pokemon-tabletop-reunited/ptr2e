@@ -2,7 +2,7 @@
   "name": "Mana Cannon",
   "type": "move",
   "_id": "fAOqThi2wPLSKPY2",
-  "img": "systems/ptr2e/img/svg/fairy_icon.svg",
+  "img": "systems/ptr2e/img/svg/untyped_icon.svg",
   "system": {
     "slug": "mana-cannon",
     "actions": [
@@ -10,10 +10,12 @@
         "name": "Mana Cannon",
         "slug": "mana-cannon",
         "type": "attack",
-        "img": "icons/svg/explosion.svg",
+        "img": "systems/ptr2e/img/svg/untyped_icon.svg",
         "traits": [
           "blast-1",
-          "pulse"
+          "pulse",
+          "arcane",
+          "adaptable"
         ],
         "range": {
           "target": "blast",
@@ -22,15 +24,16 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 5
+          "powerPoints": 6
         },
         "types": [
-          "fairy"
+          "untyped"
         ],
         "category": "special",
-        "power": 105,
+        "power": 110,
         "accuracy": 85,
-        "description": "<p>Effect: On hit, the user has a 10% chance of increasing their SPATK Stage by +1 for 5 Activations.</p>"
+        "description": "<p>Effect: On hit, the user has a 10% chance of increasing their SPATK Stage by +1 for 5 Activations.</p>",
+        "predicate": []
       }
     ],
     "grade": "B",
@@ -42,8 +45,10 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
-    }
+      ],
+      "notes": "undefined"
+    },
+    "traits": []
   },
   "effects": [
     {
@@ -62,7 +67,8 @@
             "affects": "self",
             "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "alterations": []
           }
         ],
         "slug": null,
