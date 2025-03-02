@@ -326,6 +326,11 @@ export default class BlueprintSheet extends foundry.applications.api.HandlebarsA
     }
   }
 
+  override _preClose(options: foundry.applications.api.HandlebarsDocumentSheetConfiguration): Promise<void> {
+    this.team = null;
+    return super._preClose(options);
+  }
+
   private onEndSort(event: Sortable.SortableEvent) {
     const id = event.item.dataset.blueprintId;
     if (!id) return;
