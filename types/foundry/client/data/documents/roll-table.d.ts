@@ -148,7 +148,7 @@ declare global {
         /*  Importing and Exporting                     */
         /* -------------------------------------------- */
 
-        override toCompendium(pack: CompendiumCollection<this>): this["_source"];
+        override toCompendium(pack: CompendiumCollection<this> | null, options?: Record<string, unknown>): this["_source"];
 
         /**
          * Create a new RollTable entity using all of the Entities from a specific Folder as new results.
