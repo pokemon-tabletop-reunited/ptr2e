@@ -2,7 +2,7 @@
   "name": "Spellbind",
   "type": "move",
   "_id": "0ODL9uCw44Tre4AX",
-  "img": "systems/ptr2e/img/svg/fairy_icon.svg",
+  "img": "systems/ptr2e/img/svg/untyped_icon.svg",
   "system": {
     "slug": "spellbind",
     "actions": [
@@ -10,11 +10,14 @@
         "name": "Spellbind",
         "slug": "spellbind",
         "type": "attack",
-        "img": "icons/svg/explosion.svg",
-        "traits": [],
+        "img": "systems/ptr2e/img/svg/untyped_icon.svg",
+        "traits": [
+          "arcane",
+          "adaptable"
+        ],
         "range": {
           "target": "creature",
-          "distance": 5,
+          "distance": 8,
           "unit": "m"
         },
         "cost": {
@@ -31,11 +34,18 @@
         "predicate": []
       }
     ],
-    "grade": "A",
+    "grade": "C",
     "traits": [],
     "_migration": {
       "version": null,
       "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": "undefined"
     }
   },
   "effects": [

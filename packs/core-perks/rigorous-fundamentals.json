@@ -8,7 +8,7 @@
     },
     "actions": [],
     "slug": "rigorous-fundamentals",
-    "description": "<p>The user selects 4 Skills with which their Species proficiency is greater than 1, besides Resources. The user’s Species proficiency with the selected skills is increased by +5. A Skill may only be increased 3 times with this Perk and cannot be increased past 40.</p>",
+    "description": "<p>The user selects 4 Skills, besides Resources. The user’s Species proficiency with the selected skills is increased by +5. A Skill may only be increased 3 times with this Perk and cannot be increased past 40.</p>",
     "traits": [],
     "prerequisites": [],
     "autoUnlock": [],
@@ -202,6 +202,12 @@
       "arena": null,
       "approach": null,
       "archetype": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ]
     }
   },
   "_id": "gH6z0NmKq0Suh7iZ",
@@ -222,7 +228,7 @@
             "mode": 2,
             "priority": null,
             "ignored": true,
-            "choices": "flags.ptr2e.skillOptions.species",
+            "choices": "flags.ptr2e.skillOptions.all",
             "prompt": "PTR2E.ChoiceSetPrompt.Prompt",
             "adjustName": true,
             "rollOption": "rf11"
@@ -230,7 +236,7 @@
           {
             "type": "basic",
             "key": "system.skills.{effect|flags.ptr2e.choiceSelections.rf11}.value",
-            "value": 10,
+            "value": 5,
             "predicate": [],
             "mode": 2,
             "priority": null,
@@ -244,7 +250,7 @@
             "mode": 2,
             "priority": null,
             "ignored": true,
-            "choices": "flags.ptr2e.skillOptions.species",
+            "choices": "flags.ptr2e.skillOptions.all",
             "prompt": "PTR2E.ChoiceSetPrompt.Prompt",
             "adjustName": true,
             "rollOption": "rf12"
@@ -252,7 +258,7 @@
           {
             "type": "basic",
             "key": "system.skills.{effect|flags.ptr2e.choiceSelections.rf12}.value",
-            "value": 10,
+            "value": 5,
             "predicate": [],
             "mode": 2,
             "priority": null,
@@ -266,7 +272,7 @@
             "mode": 2,
             "priority": null,
             "ignored": true,
-            "choices": "flags.ptr2e.skillOptions.species",
+            "choices": "flags.ptr2e.skillOptions.all",
             "prompt": "PTR2E.ChoiceSetPrompt.Prompt",
             "adjustName": true,
             "rollOption": "rf13"
@@ -274,7 +280,7 @@
           {
             "type": "basic",
             "key": "system.skills.{effect|flags.ptr2e.choiceSelections.rf13}.value",
-            "value": 10,
+            "value": 5,
             "predicate": [],
             "mode": 2,
             "priority": null,
@@ -288,7 +294,7 @@
             "mode": 2,
             "priority": null,
             "ignored": true,
-            "choices": "flags.ptr2e.skillOptions.species",
+            "choices": "flags.ptr2e.skillOptions.all",
             "prompt": "PTR2E.ChoiceSetPrompt.Prompt",
             "adjustName": true,
             "rollOption": "rf14"
@@ -296,7 +302,7 @@
           {
             "type": "basic",
             "key": "system.skills.{effect|flags.ptr2e.choiceSelections.rf14}.value",
-            "value": 10,
+            "value": 5,
             "predicate": [],
             "mode": 2,
             "priority": null,
@@ -331,10 +337,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "ptr2e",
-        "systemVersion": "1.0.0.beta-ready.2",
+        "systemVersion": "1.0.3.beta",
         "createdTime": 1738606944598,
-        "modifiedTime": 1738606993955,
-        "lastModifiedBy": "5ImYyhOS2D6D7ypO"
+        "modifiedTime": 1739400935205,
+        "lastModifiedBy": "IcBpMqhFuTck9VpX"
       }
     }
   ],
