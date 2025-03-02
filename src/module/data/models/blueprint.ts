@@ -9,6 +9,7 @@ import { DataUnionField } from "../fields/data-union-field.ts";
 import { StrictStringField } from "../fields/strict-primitive-fields.ts";
 import { HabitatRollTable } from "@system/habitat-table.ts";
 import { GeneratorConfig } from "./generator-config.ts";
+import { addDataFieldMigration } from "@utils";
 
 class Blueprint extends foundry.abstract.DataModel {
   static LOCALIZATION_PREFIXES = ["PTR2E.Blueprint"];
@@ -173,7 +174,7 @@ class Blueprint extends foundry.abstract.DataModel {
           chance: new fields.NumberField({ required: false, nullable: false, initial: 50, min: 0, max: 100, validationError: "The chance must be a positive integer between 0 and 100." }),
         }), { required: true, initial: [], label: "PTR2E.FIELDS.abilities.master.label", },),
       }),
-      config: new fields.EmbeddedDataField(GeneratorConfig, { required: true, nullable: true, initial: null }),
+      _config: new fields.EmbeddedDataField(GeneratorConfig, { required: true, nullable: true, initial: null }),
       owner: new fields.BooleanField({ required: true, initial: false, nullable: false, label: "PTR2E.FIELDS.owner.label", hint: "PTR2E.FIELDS.owner.hint" }),
       sort: new fields.NumberField({ required: true, initial: 0, nullable: false }),
       preventEvolution: new fields.BooleanField({ required: true, initial: false, nullable: false, label: "PTR2E.FIELDS.preventEvolution.label", hint: "PTR2E.FIELDS.preventEvolution.hint" }),
@@ -185,9 +186,29 @@ class Blueprint extends foundry.abstract.DataModel {
     }
   }
 
-  prepareBaseData(): void {
-    console.log("intellisense func")
+  get config() {
+    const config = this._config
+    if (!config) return config;
+    if (!config.link) return config;
+    if (!config.id) {
+      config.link = false;
+      return config;
+    };
 
+    const configs = game.settings.get("ptr2e", "global-perk-configs");
+    const exists = configs.find(c => c.id === config.id);
+    if (exists) {
+      return new GeneratorConfig(fu.duplicate(exists), { parent: this });
+    }
+    return config;
+  }
+
+  static override migrateData(source: Record<string, unknown>) {
+    if ('config' in source && source.config != null && typeof source.config === "string") {
+      source.config = null;
+    }
+    addDataFieldMigration(source, "config", "_config")
+    return super.migrateData(source);
   }
 
   preparedAsyncData = false;
@@ -243,7 +264,7 @@ interface BlueprintSchema extends foundry.data.fields.DataSchema {
   preventEvolution: foundry.data.fields.BooleanField<boolean, boolean, true, false, true>;
   shiny: foundry.data.fields.NumberField<number, number, true, false, true>;
   gender: foundry.data.fields.StringField<"random" | "male" | "female" | "genderless", "random" | "male" | "female" | "genderless", true, false, true>;
-  config: foundry.data.fields.EmbeddedDataField<GeneratorConfig, true, true, true>;
+  _config: foundry.data.fields.EmbeddedDataField<GeneratorConfig, true, true, true>;
 }
 
 interface EVSSchema extends foundry.data.fields.DataSchema {
