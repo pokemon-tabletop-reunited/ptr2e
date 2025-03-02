@@ -83,7 +83,7 @@ export class CompendiumBrowserSpeciesTab extends CompendiumBrowserTab {
           }
         }
 
-        const pubSource = (speciesData.system.publication.source ?? "").trim()
+        const pubSource = (speciesData.system.publication?.source ?? "").trim()
         publications.add(pubSource);
 
         species.push({

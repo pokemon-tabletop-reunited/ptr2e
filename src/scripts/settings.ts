@@ -222,4 +222,13 @@ export function initializeSettings() {
     type: Boolean,
     scope: "client"
   })
+
+  game.settings.register("ptr2e", "global-perk-configs", {
+    name: "PTR2E.SETTINGS.GlobalPerkConfigs.Name",
+    hint: "PTR2E.SETTINGS.GlobalPerkConfigs.Hint",
+    default: [],
+    config: false,
+    type: Object,
+    scope: "world"
+  });
 }

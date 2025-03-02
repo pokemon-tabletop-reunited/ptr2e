@@ -10,6 +10,7 @@ import { MigrationList, MigrationRunner } from "@module/migration/index.ts";
 import * as R from "remeda";
 import { MigrationRunnerBase } from "@module/migration/runner/base.ts";
 import { processGrantDeletions } from "@module/effects/changes/grant-item.ts";
+import BlueprintSystem from "./data/blueprint.ts";
 
 /**
  * @extends {PTRItemData}
@@ -358,8 +359,15 @@ class ItemPTR2e<
 
   /** Assess and pre-process this JSON data, ensuring it's importable and fully migrated */
   override async importFromJSON(json: string): Promise<this> {
-    const processed = await preImportJSON(this, json);
-    return processed ? super.importFromJSON(processed) : this;
+    const parsed = JSON.parse(json);
+    if(parsed.type !== "PackagedBlueprint") {
+      const processed = await preImportJSON(this, json);
+      return processed ? super.importFromJSON(processed) : this;
+    }
+    else {
+      const blueprint = await BlueprintSystem.importFromJSON(this, parsed);
+      return blueprint as this ?? this;
+    }
   }
 
   static override async deleteDocuments<TDocument extends foundry.abstract.Document>(this: ConstructorOf<TDocument>, ids?: string[], context?: DocumentModificationContext<TDocument["parent"]> & { pendingEffects?: ActiveEffectPTR2e<ActorPTR2e | ItemPTR2e<ItemSystemPTR, ActorPTR2e>>[] }): Promise<TDocument[]>;
@@ -424,6 +432,11 @@ class ItemPTR2e<
 
   //   return super.updateDocuments(updates, operation);
   // }
+
+  override exportToJSON(options?: Record<string, unknown>): void {
+    if(this.type !== "blueprint") return super.exportToJSON(options);
+    return void (this.system as BlueprintSystem).exportToJSON();
+  }
 }
 
 interface ItemPTR2e<
