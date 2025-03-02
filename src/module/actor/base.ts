@@ -1394,7 +1394,7 @@ class ActorPTR2e<
         if (params.attack) {
           const attack = selfActor.actions.attack.get(params.attack?.slug);
           if (!attack) return null;
-          return attack.statistic?.check as Maybe<StatisticCheck>;
+          return attack.statistic?.getCheck(params.target?.actor ?? targetToken?.actor) as Maybe<StatisticCheck>;
         } else if (params.action) {
           const action = selfActor.actions.get(params.action.slug);
           if (!action) return null;
@@ -1403,6 +1403,20 @@ class ActorPTR2e<
         }
         return null;
       })() ?? params.statistic;
+
+    const newFlatModifiers: ModifierPTR2e[] = [];
+    if(statistic) {
+      const originalModifiers = params.statistic?.modifiers ?? [];
+
+      // Figure out which are new flat modifiers
+      const target = params.target?.actor ?? targetToken?.actor ?? null;
+      newFlatModifiers.push(...statistic.modifiers.filter(
+        (mod) => !originalModifiers.some((original) => original.slug === mod.slug)
+      ).map(mod => {
+        if (target) mod.appliesTo = new Map([[target.uuid, true]]);
+        return mod;
+      }));
+    }
 
     const selfItem = ((): ItemPTR2e<ItemSystemsWithActions, ActorPTR2e> | null => {
       // 1. Simplest case: no context clone, so used the item passed to this method
@@ -1462,7 +1476,6 @@ class ActorPTR2e<
       return R.unique(traits).sort();
     })();
 
-    let newFlatModifiers: ModifierPTR2e[] = [];
     if (selfAttack) {
       const actionTraitDomains = actionTraits.map((t) => `${t}-trait-${selfAttack.type}`)
       params.domains = R.unique([...params.domains, ...actionTraitDomains])
@@ -1472,12 +1485,12 @@ class ActorPTR2e<
 
       // Figure out which are new flat modifiers
       const target = params.target?.actor ?? targetToken?.actor ?? null;
-      newFlatModifiers = flatModsFromTraitDomains.filter(
+      newFlatModifiers.push(...flatModsFromTraitDomains.filter(
         (mod) => !originalModifiers.some((original) => original.slug === mod.slug)
       ).map(mod => {
         if (target) mod.appliesTo = new Map([[target.uuid, true]]);
         return mod;
-      });
+      }));
     }
 
     // Calculate distance and range increment, set as a roll option

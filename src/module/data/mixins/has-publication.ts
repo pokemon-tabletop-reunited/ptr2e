@@ -13,7 +13,7 @@ export default function HasPublication<BaseClass extends TemplateConstructor>(ba
         publication: new foundry.data.fields.SchemaField({
           source: new foundry.data.fields.StringField({ required: true, label: "PTR2E.FIELDS.publication.source.label", hint: "PTR2E.FIELDS.publication.source.hint", initial: "" }),
           authors: new foundry.data.fields.SetField(new foundry.data.fields.StringField(), { required: true, label: "PTR2E.FIELDS.publication.authors.label", hint: "PTR2E.FIELDS.publication.authors.hint", initial: []}),
-          notes: new foundry.data.fields.HTMLField({ required: false, label: "PTR2E.FIELDS.publication.notes.label", hint: "PTR2E.FIELDS.publication.notes.hint" }),
+          notes: new foundry.data.fields.HTMLField({ required: true, blank: true, label: "PTR2E.FIELDS.publication.notes.label", hint: "PTR2E.FIELDS.publication.notes.hint", initial: ""}),
         }),
       };
     }
@@ -33,5 +33,5 @@ export interface PublicationSchema extends foundry.data.fields.DataSchema {
 interface _PublicationSchema extends foundry.data.fields.DataSchema {
   source: foundry.data.fields.StringField<string, string, true, false, true>;
   authors: foundry.data.fields.SetField<foundry.data.fields.StringField, string[], Set<string>, true, false, true>;
-  notes: foundry.data.fields.HTMLField<string, string, false, false, false>;
+  notes: foundry.data.fields.HTMLField<string, string, true, false, true>;
 }
