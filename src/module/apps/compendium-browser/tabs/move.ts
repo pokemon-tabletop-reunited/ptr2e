@@ -72,7 +72,7 @@ export class CompendiumBrowserMoveTab extends CompendiumBrowserTab {
           maxRange = Math.max(maxRange, Number(attack.range!.distance));
         }
 
-        const pubSource = (moveData.system.publication.source ?? "").trim()
+        const pubSource = (moveData.system.publication?.source ?? "").trim()
         publications.add(pubSource);
 
         moves.push({
