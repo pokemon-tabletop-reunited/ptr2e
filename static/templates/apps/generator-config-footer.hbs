@@ -1,4 +1,9 @@
-<footer>
+<footer {{#if hasGlobal}}style="justify-content: space-between;"{{/if}}>
   {{formField fields.label value=source.label localize=true hint="" placeholder="Label..."}}
-  <button type="submit">Save Changes</button>
+  
+  <button class="fb-25" type="submit">Save Changes</button>
+  
+  {{#if hasGlobal}}
+    <label class="fb-25"><i>{{#if source.link}}Linked to Global{{else}}Unlinked from Global{{/if}}</i></label>
+  {{/if}}
 </footer>
