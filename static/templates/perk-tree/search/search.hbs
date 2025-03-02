@@ -26,7 +26,7 @@
         </dd>
     </dl>
     {{#each filterData.selects as |selectData type|}}
-      {{#unless (is type "showOnlyOnWeb")}}
+      {{#unless (or (is type "showOnlyOnWeb") (is type "source"))}}
         <dl class="{{type}}">
             <dt>{{localize selectData.label}}:</dt>
             <dd><select name="{{type}}">

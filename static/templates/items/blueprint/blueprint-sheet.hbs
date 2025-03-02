@@ -24,15 +24,17 @@
     <fieldset class="perk-config">
       <legend>Perk Generation</legend>
       <div class="form-group">
-        <label>{{localize "PTR2E.GeneratorConfig.label"}}</label>
+        <label style="flex: 0 0 fit-content; margin-right: 0.5rem;">{{localize "PTR2E.GeneratorConfig.label"}}</label>
         <div class="form-fields">
           {{#if blueprint.config}}
-            <a class="content-link" draggable="true" data-action="open-config" data-uuid="{{uuid}}" data-id="{{blueprint.id}}" data-type="GeneratorConfig" data-tooltip="Open {{#if blueprint.config.label}}{{blueprint.config.label}}{{else}}Perk Generator Config{{/if}}"><i class="fas fa-rectangle-list"></i>{{#if blueprint.config.label}}{{blueprint.config.label}}{{else}}Perk Generator Config{{/if}}</a>
+            <a class="content-link" draggable="true" data-action="open-config" data-uuid="{{uuid}}" data-id="{{blueprint.id}}" data-type="GeneratorConfig" data-tooltip-direction="UP" data-tooltip="Open {{#if blueprint.config.label}}{{blueprint.config.label}}{{else}}Perk Generator Config{{/if}}"><i class="fas fa-rectangle-list"></i>{{#if blueprint.config.label}}{{blueprint.config.label}}{{else}}Perk Generator Config{{/if}}</a>
+            <a class="content-link delete" style="flex: 0;" data-action="delete-config" data-uuid="{{uuid}}" data-id="{{blueprint.id}}" data-type="GeneratorConfig" data-tooltip-direction="UP" data-tooltip="Delete {{#if blueprint.config.label}}{{blueprint.config.label}}{{else}}Perk Generator Config{{/if}}"><i class="fas fa-trash m-0"></i></a>
           {{else}}
             <div class="empty">
               <span class="name">No Perk Generator Config created yet, drag one here or <button type="button" data-action="create-config">Create New Config</button></span>
             </div>
           {{/if}}
+          <a class="content-link open-global-configs" style="flex: 0;" data-action="open-global-configs" data-tooltip-direction="UP" data-tooltip="Open Global Perk Generator Configs"><i class="fas fa-arrow-up-right-from-square m-0"></i></a>
         </div>
         <p class="hint">{{localize "PTR2E.GeneratorConfig.hint"}}</p>
       </div>
