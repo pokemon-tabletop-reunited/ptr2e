@@ -9,6 +9,7 @@ import { ActorPTR2e } from "@actor";
 import { PerkGeneratorConfig } from "@module/apps/perk-generator-config.ts";
 import { GeneratorConfig } from "@module/data/models/generator-config.ts";
 import { BlueprintPTR2e } from "@item";
+import { GlobalPerkGeneratorConfig } from "@module/apps/global-perk-generator-config.ts";
 
 export default class BlueprintSheet extends foundry.applications.api.HandlebarsApplicationMixin(DocumentSheetV2<ItemPTR2e<BlueprintSystem>>) {
   static override DEFAULT_OPTIONS = fu.mergeObject(
@@ -62,11 +63,38 @@ export default class BlueprintSheet extends foundry.applications.api.HandlebarsA
           if (!this.selected) return;
           await BlueprintSheet.#onSubmit.bind(this)(new Event("save"), this.element as HTMLFormElement, new FormDataExtended(this.element));
           if (this.generation?.temporary) {
-            this.selected.updateSource({ config: new GeneratorConfig().toObject() });
+            this.selected.updateSource({ _config: new GeneratorConfig({}, { parent: this.selected }).toObject() });
           } else {
-            await this.blueprint.updateChildren([{ _id: this.selected.id, config: new GeneratorConfig() }]);
+            await this.blueprint.updateChildren([{ _id: this.selected.id, _config: new GeneratorConfig() }]);
           }
           return void this.render({ parts: ["main"] });
+        },
+        "delete-config": async function (this: BlueprintSheet) {
+          if (!this.selected?.config) return;
+          const selection = this.selected;
+          foundry.applications.api.DialogV2.confirm({
+            window: {
+              title: game.i18n.format("PTR2E.GeneratorConfig.Global.Delete.Title", {
+                name: this.selected.config.label,
+              }),
+            },
+            content: game.i18n.format("PTR2E.GeneratorConfig.Global.Delete.Content", {
+              name: this.selected.config.label
+            }),
+            yes: {
+              callback: async () => {
+                if (this.generation?.temporary) {
+                  selection.updateSource({ _config: null });
+                } else {
+                  await this.blueprint.updateChildren([{ _id: selection.id, _config: null }]);
+                }
+                this.render({ parts: ["main"] });
+              },
+            },
+          });
+        },
+        "open-global-configs": () => {
+          new GlobalPerkGeneratorConfig().render(true);
         }
       },
       tag: "form",
@@ -294,8 +322,13 @@ export default class BlueprintSheet extends foundry.applications.api.HandlebarsA
       });
 
       const button = this.element.querySelector<HTMLButtonElement>("div.footer button");
-      if(button) button.disabled = false;
+      if (button) button.disabled = false;
     }
+  }
+
+  override _preClose(options: foundry.applications.api.HandlebarsDocumentSheetConfiguration): Promise<void> {
+    this.team = null;
+    return super._preClose(options);
   }
 
   private onEndSort(event: Sortable.SortableEvent) {
@@ -372,8 +405,8 @@ export default class BlueprintSheet extends foundry.applications.api.HandlebarsA
     const target = event.currentTarget as HTMLElement;
     if (target.dataset.action !== "open-config") return super._onDragStart(event);
 
-    const {id, uuid} = target.dataset;
-    if(!id || !uuid) return;
+    const { id, uuid } = target.dataset;
+    if (!id || !uuid) return;
 
     // Create drag data
     const dragData = {
@@ -438,6 +471,10 @@ export default class BlueprintSheet extends foundry.applications.api.HandlebarsA
           return actor;
         }
         case "GeneratorConfig": {
+          // Check if it exists on Global Perk Configs
+          const config = game.settings.get("ptr2e", "global-perk-configs")?.find((d) => d.id === data.id);
+          if (config) return new GeneratorConfig(config);
+
           const blueprintItem = await fromUuid<BlueprintPTR2e>(data.uuid);
           if (!blueprintItem) {
             ui.notifications.error("The dropped blueprint could not be found");
@@ -467,16 +504,27 @@ export default class BlueprintSheet extends foundry.applications.api.HandlebarsA
         return void await this.blueprint.updateChildren([{ _id: this.selected.id, species: doc.uuid }]);
       }
     }
-    else if ((event.currentTarget as HTMLElement).classList.contains("perk-config") && doc instanceof Blueprint) {
-      if (!this.selected) return;
-      if (this.generation?.temporary) {
-        return void this.selected.updateSource({ config: doc.toObject().config });
-      } else {
-        return void await this.blueprint.updateChildren([{ _id: this.selected.id, config: doc.toObject().config }]);
+    else if ((event.currentTarget as HTMLElement).classList.contains("perk-config")) {
+      if (doc instanceof Blueprint) {
+        if (!this.selected) return;
+        if (this.generation?.temporary) {
+          return void this.selected.updateSource({ _config: doc.toObject().config });
+        } else {
+          return void await this.blueprint.updateChildren([{ _id: this.selected.id, _config: doc.toObject().config }]);
+        }
+      }
+      else if (doc instanceof GeneratorConfig) {
+        if (!this.selected) return;
+        if (this.generation?.temporary) {
+          this.selected.updateSource({ _config: { ...doc, id: doc.id, link: true } });
+        } else {
+          await this.blueprint.updateChildren([{ _id: this.selected.id, _config: { ...doc, id: doc.id, link: true } }]);
+        }
+        return void this.render({ parts: ["main"] });
       }
     }
     else {
-      if (doc instanceof Blueprint) return;
+      if (doc instanceof Blueprint || doc instanceof GeneratorConfig) return;
       this.team = null;
       this.blueprint.createChildren([doc]);
     }
@@ -515,7 +563,7 @@ export default class BlueprintSheet extends foundry.applications.api.HandlebarsA
           delete updateData[key];
         }
       }
-      if(!closeAndGenerate) {
+      if (!closeAndGenerate) {
         blueprint.updateSource(updateData);
       } else {
         fu.mergeObject(blueprint, updateData, { inplace: true });
