@@ -35,10 +35,14 @@
           "activation": "free"
         },
         "description": "<p>Passive: the creature gains [Berry Grower] if it did not already possess it.</p>",
-        "img": "icons/svg/explosion.svg"
+        "img": "icons/svg/explosion.svg",
+        "range": {
+          "target": "enemy",
+          "unit": "m"
+        }
       }
     ],
-    "description": "<p>Trigger: The user's equipped [Natural][Food] item is consumed.</p><p>Effect: The user rolls an Easy Natural World skill check and on a success recycles a copy of the consumed item and equips it. If Sunny Weather is active, this is a Trivial Natural World check instead. Passive: the creature gains [Berry Grower] if it did not already possess it.</p>",
+    "description": "<p>Trigger: The user's equipped [Natural][Food] item is consumed.</p><p>Effect: The user rolls a Challenging Natural World skill check and on a success recycles a copy of the consumed item and equips it. If Sunny Weather is active, this is a Trivial Natural World check instead. Passive: the creature gains [Berry Grower] if it did not already possess it.</p>",
     "traits": [
       "environ"
     ],
@@ -51,7 +55,8 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
+      ],
+      "notes": ""
     }
   },
   "_id": "ZO9RQ2a15jMpXOuc",
