@@ -1,0 +1,56 @@
+{
+  "name": "Mana Shot",
+  "type": "move",
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "slug": "mana-shot",
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": "<p>Effect: This attack calculates damage against the target's DEF, rather than SPDEF.</p>"
+    },
+    "traits": [],
+    "actions": [
+      {
+        "name": "Mana Shot",
+        "slug": "mana-shot",
+        "type": "attack",
+        "img": "systems/ptr2e/img/svg/untyped_icon.svg",
+        "traits": [
+          "arcane",
+          "adaptable",
+          "pulse",
+          "missile"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 15,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 2
+        },
+        "types": [
+          "untyped"
+        ],
+        "category": "special",
+        "power": 40,
+        "accuracy": 100,
+        "defensiveStat": "def",
+        "predicate": [],
+        "description": "<p>Effect: This attack calculates damage against the target's DEF, rather than SPDEF.</p>"
+      }
+    ],
+    "grade": "D"
+  },
+  "img": "systems/ptr2e/img/svg/untyped_icon.svg",
+  "effects": [],
+  "flags": {},
+  "_id": "LEWxzncsMGrEC6JR"
+}
