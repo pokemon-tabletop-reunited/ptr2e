@@ -10,41 +10,39 @@
         "name": "Detect",
         "type": "attack",
         "traits": [
-          "shield",
-          "exhaust",
-          "interrupt-4",
-          "pp-updated"
+          "pp-updated",
+          "interrupt-6"
         ],
         "range": {
           "target": "self",
-          "distance": 0,
           "unit": "m"
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 3,
+          "powerPoints": 6,
           "trigger": "<p>The user is hit by an attack.</p>"
         },
         "category": "status",
-        "power": null,
-        "accuracy": null,
         "types": [
           "fighting"
         ],
-        "description": "<p>Trigger: The user is hit by an attack.</p><p>Effect: The triggering attack fails, and additional attacks that target the user also fail until the user's next Activation. Attacks failing to hit do not deal damage, activate secondary effects, or activate on-miss effects.</p>",
-        "contestType": "",
-        "contestEffect": "",
-        "free": false,
-        "slot": null
+        "description": "<p>Trigger: The user is hit by an attack.</p><p>Effect: The triggering attack fails, and additional attacks that target the user also fail until the end of the user's next Activation. Attacks failing to hit do not deal damage, activate secondary effects, or activate on-miss effects.</p><p>On resolution, the user gains @Affliction[disabled] 6 on this Attack.</p>",
+        "img": "systems/ptr2e/img/svg/fighting_icon.svg",
+        "predicate": []
       }
     ],
-    "container": null,
-    "grade": "D",
+    "grade": "B",
     "publication": {
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
+      ],
+      "notes": "<p>Trigger: The user would be hit by an attack.</p><p>Effect: The triggering attack fails, and additional attacks that target the user also fail until the end of the user's next Activation. Attacks failing to hit do not deal damage, activate secondary effects, or activate on-miss effects.</p><p>On resolution, the user gains @Affliction[disabled] 6 on this Attack.</p>"
+    },
+    "traits": [],
+    "_migration": {
+      "version": null,
+      "previous": null
     }
   },
   "_id": "DXiHMvQg1n9LOIAM",
