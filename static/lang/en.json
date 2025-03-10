@@ -23,7 +23,11 @@
   "ITEM.DeleteButton": "Delete",
   "SETTINGS.TutorList": "Manage Tutor Lists",
   "SETTINGS.Github": "Manage Github PR",
+  "SETTINGS.GlobalPerkConfig": "Perk Generator Configs",
+  "DOCUMENT.ImportDataErrorType": "The imported data is not of the correct type. Looking for {type}, but got {got}.",
+  "DOCUMENT.ImportDataErrorParse": "An error occurred while parsing the imported data. Please ensure it is valid JSON.",
   "PTR2E": {
+    "BrowserSettingsSaved": "Settings have been saved",
     "Keybindings": {
       "PerkZoomIn": {
         "Name": "Perk Zoom In",
@@ -150,7 +154,7 @@
           "hint": "Label for this Configuration when shown in the Global Configs list."
         },
         "link": {
-          "label": "Sync with Global Config?",
+          "label": "Linked",
           "hint": "Should this configuration's settings be synchronized with its version in the Global Configuration?"
         },
         "priorities": {
@@ -172,17 +176,25 @@
             "perk": "Perk"
           }
         }
+      },
+      "Global": {
+        "Delete": {
+          "Title": "Delete config: {name}", 
+          "Content": "Are you sure you wish to delete config: {name}?"
+        }
       }
     },
     "CompendiumBrowser": {
       "Title": "Compendium Browser",
+      "SettingsTitle": "Compendium Browser Settings",
       "SearchPlaceholder": "Search for items...",
       "SortByLabel": "Sort By",
       "ClearFilters": "Clear Filters",
+      "OpenSettings": "Open Settings",
       "Purchase": {
         "NotControlledToken": "Please make sure to select a token you control or make sure you have a Player Character set on your User.",
         "ItemNotFound": "Oops. We could not load the item to purchase.",
-        "NoCost":"This item doesn't have an IP cost so cannot be purchased.",
+        "NoCost": "This item doesn't have an IP cost so cannot be purchased.",
         "NotEnoughIP": "You do not have enough IP to purchase this item. (Required: {required}, Current: {current})",
         "Success": "{actor} successfully purchased {item} for {cost} IP. (Remaining IP: {remaining})",
         "RarityWarning": "Items of higher rarity than 'Common' are normally not obtainable through IP!"
@@ -197,7 +209,9 @@
         "Move": "Moves",
         "Perk": "Perks",
         "Species": "Species",
-        "Traits": "Traits"
+        "Traits": "Traits",
+        "Sources": "Sources",
+        "Packs": "Packs"
       },
       "Filters": {
         "Type": "Item Subtype",
@@ -221,6 +235,7 @@
         "LevelUpMoves": "Level Up Moves",
         "TutorMoves": "Tutor Moves",
         "Abilities": "Abilities",
+        "Source": "Source",
         "Sort": {
           "Name": "Name",
           "Number": "Number"
@@ -246,6 +261,24 @@
           "Complex": "Complex",
           "Free": "Free"
         }
+      }
+    },
+    "SETTINGS": {
+      "Settings": "Settings",
+      "CompendiumBrowserSources": {
+        "DeleteAllInfo": "All compendium documents will become browseable, including those with empty sources.",
+        "DeleteAllQuestion": "Are you sure you want to reset all settings for included sources?",
+        "DeleteAllTitle": "Reset Settings",
+        "Hint": "Settings to display only entries with specified sources in the compendium browser.",
+        "IgnoreAsGM": "Let GMs ignore filtering and see all entries.",
+        "Name": "Included Sources",
+        "ShowEmptySources": "Do not filter entries with empty sources.",
+        "ShowUnknownSources": "Do not filter entries with unknown sources.",
+        "SourcesListHeader": "Specified Sources"
+      },
+      "CompendiumBrowserPacks": {
+        "Hint": "Settings to exclude packs from loading",
+        "Name": "Compendium Browser Packs"
       }
     },
     "Inventory": {
@@ -965,7 +998,7 @@
           "choice-locked": "While Choice-Locked, a creature may only use the last attack or action it used. A creature with the Choice-Locked affliction cannot gain further stacks of Choice-Locked in any way.",
           "grounded": "While Grounded, creatures become unable to use their [Flight] movement, nor can they be Lifted or Raised and have those effects removed.",
           "cursed": "While Cursed, an afflicted creature loses three ticks of HP at the end of each of their Activations.",
-          "true-sight": "The afflicted creature ignores invisibility and illusions.",
+          "true-sight": "<p>The afflicted creature ignores invisibility and illusions.</p><p>Additionally, the user's Normal- and Fighting-Type attacks can hit Ghost-Type creatures, and the user's Ghost-Type attacks can hit Normal-Type creatures.</p>",
           "shrink": "The afflicted creature’s Size Category is reduced by one.",
           "enlarge": "The afflicted creature’s Size Category is increased by one.",
           "marked": "While Marked, all creatures unallied to the afflicted creature and within 8m of it can only target the Marked creature with their attacks. Whenever the creature with Marked is hit by an Attack, reduce the Stack Value of its Marked by 1.",
@@ -984,7 +1017,7 @@
           "grapple": "The afflicted creature possesses -1 default ACC and EVA and may only take Actions with the [Grapple] trait. Creatures that are not in control of a Grapple are also Bound. A creature in control of the Grapple can take a Free Action on their turn to end their participation in Grapple. The creature in control of the Grapple is treated as having the non-in-control creature(s) as being Mounted on itself.<br>If an afflicted creature is the only participant of a Grapple, they lose this Affliction.",
           "boosted": "An afflicted creature gains +1 default ATK and SPATK Stages.",
           "resolved": "An afflicted creature gains +1 default DEF and SPDEF Stages.",
-          "rapid": "A creature afflicted with Rapid may perform Complex Actions as Simple Actions OR [Exhaust] Actions are performed as though they lack the Trait OR [Set Up] Actions set up and resolve on the same activation, spending 50% more PP on all Actions (minimum +2). The creature has its Initiative delayed by 50% after its Activation and loses -1 EVA Stages for 3 Activations.",
+          "rapid": "A creature afflicted with Rapid may perform Complex Actions as Simple Actions OR [Exhaust] Actions are performed as though they lack the Trait OR [Set Up] Actions set up and resolve on the same activation, spending 50% more PP on all Actions (minimum +2). The creature has its Initiative delayed by 50% after its Activation and loses -1 EVA Stages for 3 Activations. You may not make more than one Attack targeting enemies per activation.",
           "strong": "While afflicted with Strong, the Power of the creature's Attacks are increased by +20% and has its Initiative delayed by 20% after its Activation.",
           "agile": "While afflicted with Agile, Power of the creature's Attacks are decreased by -20% and has its Initiative advanced by 20% after its Activation.",
           "precise": "While afflicted with Precise, the creature has +1 default ACC and has its Initiative delayed by 20% after its Activation.",
@@ -1071,6 +1104,15 @@
           "toggleHidden": "Toggle Hidden Skills",
           "editSkills": "Open Skills Editor",
           "luckRoll": "Roll 'End of Day' Luck Check"
+        },
+        "gender": {
+          "label": "Gender",
+          "male": "Male",
+          "female": "Female",
+          "genderless": "Genderless"
+        },
+        "shiny": {
+          "label": "Shiny"
         }
       }
     },
@@ -2079,6 +2121,20 @@
         "biography": {
           "label": "Biography",
           "hint": "A free form field to store any details about this character."
+        }
+      },
+      "publication": {
+        "source": {
+          "label": "Source",
+          "hint": "What is the source of this data? E.g. Core Dex"
+        },
+        "authors": {
+          "label": "Authors",
+          "hint": "Authors to Credit"
+        },
+        "notes": {
+          "label": "Notes",
+          "hint": "Any additional notes about this data, you can also use this for Dex Entries."
         }
       }
     },
@@ -3216,6 +3272,9 @@
     },
     "DistanceToTarget": {
       "Hint": "When clicked, outputs the distance between current selected token and all targeted tokens to chat."
-    }
+    },
+    "Save": "Save",
+    "Link": "Link",
+    "Unlink": "Unlink"
   }
 }
