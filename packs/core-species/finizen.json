@@ -84,39 +84,7 @@
       ],
       "tutor": [
         {
-          "name": "counter",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "haze",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "tickle",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "bounce",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "boomburst",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "body-slam",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "take-down",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "surf",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "ice-beam",
+          "name": "agility",
           "gen": "scarlet-violet"
         },
         {
@@ -124,63 +92,23 @@
           "gen": "scarlet-violet"
         },
         {
-          "name": "agility",
+          "name": "body-slam",
           "gen": "scarlet-violet"
         },
         {
-          "name": "waterfall",
+          "name": "boomburst",
           "gen": "scarlet-violet"
         },
         {
-          "name": "swift",
+          "name": "bounce",
           "gen": "scarlet-violet"
         },
         {
-          "name": "rest",
+          "name": "chilling-water",
           "gen": "scarlet-violet"
         },
         {
-          "name": "substitute",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "protect",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "icy-wind",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "endure",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "sleep-talk",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "rain-dance",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "psych-up",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "facade",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "helping-hand",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "water-pulse",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "zen-headbutt",
+          "name": "counter",
           "gen": "scarlet-violet"
         },
         {
@@ -192,7 +120,67 @@
           "gen": "scarlet-violet"
         },
         {
+          "name": "endure",
+          "gen": "scarlet-violet"
+        },
+        {
+          "name": "facade",
+          "gen": "scarlet-violet"
+        },
+        {
+          "name": "haze",
+          "gen": "scarlet-violet"
+        },
+        {
+          "name": "helping-hand",
+          "gen": "scarlet-violet"
+        },
+        {
+          "name": "ice-beam",
+          "gen": "scarlet-violet"
+        },
+        {
+          "name": "icy-wind",
+          "gen": "scarlet-violet"
+        },
+        {
           "name": "liquidation",
+          "gen": "scarlet-violet"
+        },
+        {
+          "name": "protect",
+          "gen": "scarlet-violet"
+        },
+        {
+          "name": "psych-up",
+          "gen": "scarlet-violet"
+        },
+        {
+          "name": "rain-dance",
+          "gen": "scarlet-violet"
+        },
+        {
+          "name": "rest",
+          "gen": "scarlet-violet"
+        },
+        {
+          "name": "sleep-talk",
+          "gen": "scarlet-violet"
+        },
+        {
+          "name": "substitute",
+          "gen": "scarlet-violet"
+        },
+        {
+          "name": "surf",
+          "gen": "scarlet-violet"
+        },
+        {
+          "name": "swift",
+          "gen": "scarlet-violet"
+        },
+        {
+          "name": "take-down",
           "gen": "scarlet-violet"
         },
         {
@@ -200,7 +188,19 @@
           "gen": "scarlet-violet"
         },
         {
-          "name": "chilling-water",
+          "name": "tickle",
+          "gen": "scarlet-violet"
+        },
+        {
+          "name": "water-pulse",
+          "gen": "scarlet-violet"
+        },
+        {
+          "name": "waterfall",
+          "gen": "scarlet-violet"
+        },
+        {
+          "name": "zen-headbutt",
           "gen": "scarlet-violet"
         }
       ]
@@ -237,10 +237,19 @@
             "item": null,
             "level": null,
             "knownMove": null
+          },
+          "perk": {
+            "x": 26,
+            "y": 26
           }
         }
       ],
-      "uuid": "Compendium.ptr2e.core-species.Item.MYptb932OldurRgQ"
+      "uuid": "Compendium.ptr2e.core-species.Item.MYptb932OldurRgQ",
+      "methods": [],
+      "perk": {
+        "x": 26,
+        "y": 26
+      }
     },
     "number": 963,
     "traits": [
@@ -249,7 +258,6 @@
       "direction-sense",
       "mind-reader",
       "pack-mon",
-      "underdog",
       "wavesense-15",
       "fountain"
     ],
@@ -297,7 +305,12 @@
           "value": 8
         }
       ],
-      "secondary": []
+      "secondary": [
+        {
+          "type": "overland",
+          "value": 3
+        }
+      ]
     },
     "skills": [
       {
@@ -381,14 +394,6 @@
         "group": null
       },
       {
-        "slug": "running",
-        "value": 50,
-        "rvs": 0,
-        "favourite": false,
-        "hidden": false,
-        "group": null
-      },
-      {
         "slug": "spot",
         "value": 35,
         "rvs": 0,
@@ -413,6 +418,14 @@
         "group": null
       },
       {
+        "slug": "swim",
+        "value": 40,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
         "slug": "track",
         "value": 45,
         "rvs": 0,
@@ -430,10 +443,14 @@
       "source": "PTR 2e Core - Paldea Dex",
       "authors": [
         "PTR 2e Team"
-      ]
+      ],
+      "notes": "undefined"
+    },
+    "_migration": {
+      "version": null,
+      "previous": null
     }
   },
   "_id": "MYptb932OldurRgQ",
-  "effects": [],
-  "folder": null
+  "effects": []
 }
