@@ -20,11 +20,30 @@
           "target": "self",
           "unit": "m"
         },
-        "description": "<p>Effect: The user freely Moves up to 4m of a Movement Type of its choice and chance Forme. Depending on its Forme, it gains another Ability.</p><p>- Normal Forme - Pressure</p><p>- Attack Forme - Mold Breaker</p><p>- Speed Forme - Speed Boost</p><p>- Defense Forme - Sturdy",
-        "img": "icons/svg/explosion.svg"
+        "description": "<p>Effect: The user freely Moves up to 6m of a Movement Type of its choice and change Forme, healing @Tick[2] of HP. Depending on its Forme, it gains another Ability.</p><p>- Normal Forme - Pressure</p><p>- Attack Forme - Mold Breaker</p><p>- Speed Forme - Speed Boost</p><p>- Defense Forme - Sturdy</p>",
+        "img": "icons/magic/control/silhouette-grow-shrink-blue.webp"
+      },
+      {
+        "name": "Interstellar Virulence",
+        "slug": "interstellar-virulence",
+        "description": "<p>Effect: The user freely Moves up to 6m of a Movement Type of its choice and change Forme. Depending on its Forme, it gains another Ability.</p><p>- Normal Forme - Pressure</p><p>- Attack Forme - Mold Breaker</p><p>- Speed Forme - Speed Boost</p><p>- Defense Forme - Sturdy</p><p>While the user is @Affliction[fainted], they may spend 8 PP. They lose @Affliction[fainted], not accruing @Affliction[weary], heal @Tick[6] of HP, and gain @Affliction[resolved] 7 and @Affliction[braced].</p>",
+        "traits": [
+          "legendary",
+          "forme-change",
+          "healing"
+        ],
+        "type": "generic",
+        "img": "icons/magic/control/silhouette-grow-shrink-blue.webp",
+        "range": {
+          "target": "enemy",
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "simple"
+        }
       }
     ],
-    "description": "<p>Effect: The user freely Moves up to 4m of a Movement Type of its choice and chance Forme. Depending on its Forme, it gains another Ability.</p><p>- Normal Forme - Pressure</p><p>- Attack Forme - Mold Breaker</p><p>- Speed Forme - Speed Boost</p><p>- Defense Forme - Sturdy",
+    "description": "<p>Effect: The user freely Moves up to 6m of a Movement Type of its choice and change Forme, healing @Tick[2] of HP. Depending on its Forme, it gains another Ability.</p><p>- Normal Forme - Pressure</p><p>- Attack Forme - Mold Breaker</p><p>- Speed Forme - Speed Boost</p><p>- Defense Forme - Sturdy</p><p>While the user is @Affliction[fainted], they may spend 8 PP during their Activation. They lose @Affliction[fainted], not accruing @Affliction[weary], heal @Tick[6] of HP, and gain @Affliction[resolved] 7 and @Affliction[braced].</p>",
     "traits": [
       "legendary",
       "forme-change"
@@ -38,7 +57,8 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
+      ],
+      "notes": ""
     }
   },
   "_id": "7sx007BIaNLCnueb",
