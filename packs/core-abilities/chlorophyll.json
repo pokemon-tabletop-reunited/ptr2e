@@ -18,11 +18,11 @@
           "target": "self",
           "unit": "m"
         },
-        "description": "<p>Effect: The user's SPD stat is increased by 50% and the user has +2 default SPD Stages in Sunny Weather. The user is treated as having the Grass Type for the effects of Sunny Weather.</p>",
-        "img": "icons/svg/explosion.svg"
+        "description": "<p>Effect: The user has +2 default SPD Stages in Sunny Weather. The user is treated as having the Grass Type for the effects of Sunny Weather.</p>",
+        "img": "systems/ptr2e/img/svg/grass_icon.svg"
       }
     ],
-    "description": "<p>Effect: The user's SPD stat is increased by 50% and the user has +2 default SPD Stages in Sunny Weather. The user is treated as having the Grass Type for the effects of Sunny Weather.</p>",
+    "description": "<p>Effect: The user has +2 default SPD Stages in Sunny Weather. The user is treated as having the Grass Type for the effects of Sunny Weather.</p>",
     "traits": [
       "environ"
     ],
@@ -39,7 +39,8 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
+      ],
+      "notes": ""
     }
   },
   "_id": "8RkpxP9VcH6mzSEM",
@@ -52,28 +53,24 @@
       "system": {
         "changes": [
           {
-            "type": "roll-option",
-            "key": "",
-            "value": "weather:sunny",
-            "predicate": [],
-            "domain": "all",
-            "toggleable": true,
-            "count": false,
-            "alwaysActive": false,
-            "state": true,
-            "mode": 2,
-            "priority": null,
-            "ignored": false,
-            "suboptions": []
-          },
-          {
             "type": "basic",
-            "key": "system.modifiers.speMultiplier",
+            "key": "system.attributes.spe.stage",
             "value": 2,
             "mode": 1,
             "predicate": [
-              "weather:sunny"
+              "effect:summon:sunny-weather"
             ],
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "add-trait",
+            "key": "",
+            "value": "grass",
+            "predicate": [
+              "effect:summon:sunny-weather"
+            ],
+            "mode": 2,
             "priority": null,
             "ignored": false
           }
@@ -106,10 +103,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "ptr2e",
-        "systemVersion": "0.10.0-alpha.3.2.0",
+        "systemVersion": "1.1.0.beta",
         "createdTime": null,
-        "modifiedTime": 1730629510330,
-        "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
+        "modifiedTime": 1741610457583,
+        "lastModifiedBy": "IcBpMqhFuTck9VpX"
       }
     }
   ]
