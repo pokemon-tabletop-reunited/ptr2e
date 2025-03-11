@@ -1,0 +1,112 @@
+{
+  "folder": "ANyTBaCvsFOl1tzn",
+  "name": "Firecracker",
+  "type": "ability",
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "slug": "firecracker",
+    "publication": {
+      "source": "PTR 2e Digidex",
+      "authors": [
+        "PTR 2e Team",
+        "Stitched"
+      ],
+      "notes": ""
+    },
+    "traits": [
+      "defensive"
+    ],
+    "actions": [
+      {
+        "name": "Firecracker",
+        "slug": "firecracker",
+        "description": "<p>Effect: The User is immune to the damage and effects of [Explode] attacks, Aswell as the User's [Explode] attacks Loses -75% Power.</p>",
+        "traits": [
+          "defensive"
+        ],
+        "type": "passive",
+        "img": "systems/ptr2e/img/icons/ability_icon.webp",
+        "range": {
+          "target": "enemy",
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "free"
+        }
+      }
+    ],
+    "description": "<p>Effect: The User is immune to the damage and effects of [Explode] attacks, Aswell as the User's [Explode] attacks Loses -75% Power.</p>"
+  },
+  "img": "systems/ptr2e/img/tour-san-voltorb.webp",
+  "effects": [
+    {
+      "name": "Firecracker",
+      "type": "passive",
+      "_id": "cbG1d0JDFLgtvfvj",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "ephemeral-modifier",
+            "key": "explode-trait-attack-damage-percentile",
+            "value": -100,
+            "predicate": [],
+            "label": "Firecracker",
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "hideIfDisabled": false
+          },
+          {
+            "type": "percentile-modifier",
+            "key": "explode-trait-attack-power",
+            "value": -75,
+            "predicate": [],
+            "label": "Firecracker",
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "hideIfDisabled": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": "Compendium.ptr2e.core-abilities.Item.dJh6rsnvbEuEbGS3.ActiveEffect.RCNwutICgnYP2BDd",
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "1.1.0.beta",
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      }
+    }
+  ],
+  "flags": {},
+  "_id": "2NFQ88BA4VgkoEqS"
+}
