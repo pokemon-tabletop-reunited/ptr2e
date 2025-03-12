@@ -66,6 +66,27 @@ class ActorPTR2e<
     });
   }
 
+  get afflictionCount() {
+    const domainRecord = this.rollOptions.getFromDomain("effect");
+    const minorAfflictions = Object.keys(domainRecord)
+      .flatMap((key: string) => ({
+        key,
+        count: Number(new RegExp(`^minor-affliction:(\\d+)$`).exec(key)?.[1]) || 0,
+      }))
+      .find((kc) => !!kc.count);
+    const majorAfflictions = Object.keys(domainRecord)
+      .flatMap((key: string) => ({
+        key,
+        count: Number(new RegExp(`^major-affliction:(\\d+)$`).exec(key)?.[1]) || 0,
+      }))
+      .find((kc) => !!kc.count);
+
+    return {
+      minor: minorAfflictions?.count ?? 0,
+      major: majorAfflictions?.count ?? 0,
+    };
+  }
+
   get traits() {
     return this.system.traits;
   }
