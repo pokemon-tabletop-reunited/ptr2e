@@ -2042,6 +2042,7 @@ class ActorPTR2e<
     userId: string
   ) {
     super._onCreateDescendantDocuments(parent, collection, documents, results, options, userId);
+    if(game.users.activeGM?.id !== game.user.id) return;
     // if (game.ptr.web.actor === this) await game.ptr.web.refresh({ nodeRefresh: true });
     if (!this.unconnectedRoots.length) return;
 
@@ -2178,7 +2179,6 @@ class ActorPTR2e<
     }
     return false;
   };
-
 
   async heal({ fractionToHeal = 1.0, removeWeary = true, removeExposed = false, removeAllStacks = false }: { fractionToHeal?: number, removeWeary?: boolean; removeExposed?: boolean; removeAllStacks?: boolean } = {}): Promise<void> {
     const health = Math.clamp(
