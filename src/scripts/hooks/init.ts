@@ -19,6 +19,7 @@ import { GeneratingPokemonTour } from "@module/tours/generating-pokemon.ts";
 import { AutomationTour } from "@module/tours/automation.ts";
 import { MiscTour } from "@module/tours/misc.ts";
 import { CompendiumBrowserTour } from "@module/tours/compendium-browser.ts";
+import { initializeKeybindings } from "@scripts/keybindings.ts";
 
 export const Init: PTRHook = {
   listen() {
@@ -37,6 +38,7 @@ export const Init: PTRHook = {
       }
 
       // Setup PTR Config
+      // @ts-expect-error - Certain config options are added in the Ready Hook.
       CONFIG.PTR = PTRCONFIG;
       Object.freeze(CONFIG.PTR);
 
@@ -118,6 +120,7 @@ export const Init: PTRHook = {
       }
 
       initializeSettings();
+      initializeKeybindings();
 
       // Register tours
       (async () => {

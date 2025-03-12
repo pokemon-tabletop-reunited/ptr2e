@@ -1,5 +1,5 @@
 import { ContainerPTR2e } from "@item";
-import { HasContainer, HasDescription, HasEmbed, HasGearData, HasMigrations, HasSlug, HasTraits, Trait } from "@module/data/index.ts";
+import { HasContainer, HasDescription, HasEmbed, HasGearData, HasMigrations, HasPublication, HasSlug, HasTraits, Trait } from "@module/data/index.ts";
 import { BaseItemSourcePTR2e, ItemSystemSource } from "./system.ts";
 import { MigrationSchema } from "@module/data/mixins/has-migrations.ts";
 import { TraitsSchema } from "@module/data/mixins/has-traits.ts";
@@ -7,6 +7,7 @@ import { DescriptionSchema } from "@module/data/mixins/has-description.ts";
 import { SlugSchema } from "@module/data/mixins/has-slug.ts";
 import { ContainerSchema } from "@module/data/mixins/has-container.ts";
 import { GearSchema } from "@module/data/mixins/has-gear-data.ts";
+import { PublicationSchema } from "@module/data/mixins/has-publication.ts";
 
 const CONSUMABLE_TYPES = {
   ammo: "PTR2E.FIELDS.consumable.type.ammo",
@@ -18,7 +19,7 @@ const CONSUMABLE_TYPES = {
   other: "PTR2E.FIELDS.consumable.type.other",
 } as const
 type ConsumableType = keyof typeof CONSUMABLE_TYPES;
-const ConsumableExtension = HasEmbed(HasMigrations(HasTraits(HasDescription(HasSlug(HasContainer(HasGearData(foundry.abstract.TypeDataModel)))))), "consumable");
+const ConsumableExtension = HasEmbed(HasMigrations(HasTraits(HasDescription(HasSlug(HasContainer(HasPublication(HasGearData(foundry.abstract.TypeDataModel))))))), "consumable");
 
 /**
  * @category Item Data Models
@@ -73,6 +74,12 @@ export default abstract class ConsumableSystem extends ConsumableExtension {
         label: "PTR2E.FIELDS.consumable.cost.label",
         hint: "PTR2E.FIELDS.consumable.cost.hint",
       }),
+      temporary: new fields.BooleanField({
+        required: true,
+        initial: false,
+        label: "PTR2E.FIELDS.consumable.temporary.label",
+        hint: "PTR2E.FIELDS.consumable.temporary.hint",
+      }),
     };
   }
 
@@ -111,9 +118,10 @@ interface ConsumableSystemSchema extends foundry.data.fields.DataSchema, Consuma
   stack: foundry.data.fields.NumberField<number, number, true, true, true>;
   modifier: foundry.data.fields.NumberField<number, number, true, true, true>;
   cost: foundry.data.fields.NumberField<number, number, true, true, true>;
+  temporary: foundry.data.fields.BooleanField<boolean, boolean, true, false, true>;
 }
 
-type ConsumableSystemSchemaExtension = SlugSchema & MigrationSchema & TraitsSchema & DescriptionSchema & ContainerSchema & GearSchema;
+type ConsumableSystemSchemaExtension = SlugSchema & MigrationSchema & TraitsSchema & DescriptionSchema & ContainerSchema & GearSchema & PublicationSchema
 
 export type ConsumableSource = BaseItemSourcePTR2e<"consumable", ConsumableSystemSource>;
 

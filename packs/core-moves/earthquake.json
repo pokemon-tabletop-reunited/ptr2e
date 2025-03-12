@@ -15,12 +15,12 @@
         ],
         "range": {
           "target": "emanation",
-          "distance": 6,
+          "distance": 4,
           "unit": "m"
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 15
+          "powerPoints": 11
         },
         "category": "physical",
         "power": 100,
@@ -28,11 +28,8 @@
         "types": [
           "ground"
         ],
-        "description": "",
-        "contestType": "",
-        "contestEffect": "",
-        "free": false,
-        "slot": null
+        "img": "systems/ptr2e/img/svg/ground_icon.svg",
+        "predicate": []
       },
       {
         "slug": "earthquake-burrowing",
@@ -44,12 +41,12 @@
         ],
         "range": {
           "target": "emanation",
-          "distance": 6,
+          "distance": 4,
           "unit": "m"
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 15,
+          "powerPoints": 11,
           "trigger": "<p>Valid target(s) is Burrowing.</p>"
         },
         "category": "physical",
@@ -59,15 +56,24 @@
           "ground"
         ],
         "description": "<p>Trigger: Valid target(s) is Burrowing.</p><p>Effect: This attack ignores the target's EVA Stage increases.</p>",
-        "contestType": "",
-        "contestEffect": "",
-        "varant": "earthquake",
-        "free": false,
-        "slot": null
+        "variant": "earthquake",
+        "img": "systems/ptr2e/img/svg/ground_icon.svg",
+        "predicate": []
       }
     ],
-    "container": null,
-    "grade": "S"
+    "grade": "A",
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": "<p>Effect: This attack's Power is doubled against Burrowing targets.</p>"
+    },
+    "traits": [],
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
   },
   "_id": "XNpXPx2w9KKZ8chL",
   "effects": []
