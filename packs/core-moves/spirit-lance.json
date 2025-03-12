@@ -1,0 +1,55 @@
+{
+  "name": "Spirit Lance",
+  "type": "move",
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "slug": "spirit-lance",
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "traits": [],
+    "actions": [
+      {
+        "name": "Spirit Lance",
+        "slug": "spirit-lance",
+        "type": "attack",
+        "img": "systems/ptr2e/img/svg/untyped_icon.svg",
+        "traits": [
+          "adaptable",
+          "arcane",
+          "pulse",
+          "horn"
+        ],
+        "range": {
+          "target": "line",
+          "distance": 10,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 5
+        },
+        "types": [
+          "untyped"
+        ],
+        "category": "special",
+        "power": 60,
+        "accuracy": 80,
+        "predicate": [],
+        "description": "<p>Effect: On hit, all targets lose @Tick[-1] for every 2 targets hit.</p>"
+      }
+    ],
+    "grade": "B"
+  },
+  "img": "systems/ptr2e/img/svg/untyped_icon.svg",
+  "effects": [],
+  "flags": {},
+  "_id": "FYyxeQUkAOgyd4cD"
+}
