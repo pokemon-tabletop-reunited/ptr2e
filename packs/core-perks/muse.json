@@ -9,8 +9,8 @@
     "actions": [
       {
         "name": "Muse",
-        "slug": "muse-action-1",
-        "description": "<p>As a Simple Action, designate an ally as your Muse and set a Muse Clock for 6 Spans. When that ally ends an Activation, tick one Span on the Muse Clock. When the Clock fills, your next Attack has its Power doubled.</p><p>NOTE: create generic action</p>",
+        "slug": "muse",
+        "description": "<p>Effect: As a Simple Action, the user designates an ally as their Muse, setting a Muse Clock on the user's sheet with 6 Spans. When the designated ally ends an Activation, tick one Span on the Muse Clock. For every Span that is filled, the user's Attacks have their Power increased by 20%, up to a max increase of 100%. When the Muse Clock expires, the user is healed of all Afflictions with the @Trait[major-affliction] or @Trait[minor-affliction] traits. The Muse Clock disappears resets if either the user or their Muse is switched out or @Affliction[fainted], or if combat ends. The user may only possess one Muse Clock at any given time.</p>",
         "traits": [],
         "type": "generic",
         "img": "systems/ptr2e/img/conditions/cheered.svg",
@@ -23,7 +23,7 @@
         }
       }
     ],
-    "description": "<p>As a Simple Action, designate an ally as your Muse and set a Muse Clock for 6 Spans. When that ally ends an Activation, tick one Span on the Muse Clock. When the Clock fills, your next Attack has its Power doubled.</p>",
+    "description": "<p>Effect: As a Simple Action, the user designates an ally as their Muse, setting a Muse Clock on the user's sheet with 6 Spans. When the designated ally ends an Activation, tick one Span on the Muse Clock. For every Span that is filled, the user's Attacks have their Power increased by 20%, up to a max increase of 100%. When the Muse Clock expires, the user is healed of all Afflictions with the @Trait[major-affliction] or @Trait[minor-affliction] traits. The Muse Clock disappears resets if either the user or their Muse is switched out or @Affliction[fainted], or if combat ends. The user may only possess one Muse Clock at any given time.</p>",
     "traits": [],
     "prerequisites": [],
     "cost": 2,
@@ -66,7 +66,8 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
+      ],
+      "notes": ""
     }
   },
   "img": "systems/ptr2e/img/conditions/cheered.svg",
