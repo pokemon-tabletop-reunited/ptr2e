@@ -1,0 +1,146 @@
+{
+  "name": "Stagnancy Curse",
+  "type": "move",
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "slug": "stagnancy-curse",
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "traits": [],
+    "actions": [
+      {
+        "name": "Stagnancy Curse",
+        "slug": "stagnancy-curse",
+        "type": "attack",
+        "img": "systems/ptr2e/img/svg/untyped_icon.svg",
+        "traits": [
+          "arcane",
+          "adaptable",
+          "ray",
+          "manipulate"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 4,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 5
+        },
+        "types": [
+          "untyped"
+        ],
+        "category": "special",
+        "power": 45,
+        "accuracy": 90,
+        "predicate": [],
+        "description": "<p>Effect: On hit, the target has a 30% chance of losing -2 SPD and CRIT Stages for 5 Activations, and a 50% of gaining @Affliction[slowed] 5 and @Affliction[suppressed] 5.</p>"
+      }
+    ],
+    "grade": "B"
+  },
+  "img": "systems/ptr2e/img/svg/untyped_icon.svg",
+  "effects": [
+    {
+      "name": "Stagnancy Curse",
+      "type": "passive",
+      "_id": "hf273Sr2yc5XEn2u",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "stagnancy-curse-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.bdYCJcqjMNqTpJJQ",
+            "predicate": [],
+            "chance": 30,
+            "affects": "target",
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "alterations": []
+          },
+          {
+            "type": "roll-effect",
+            "key": "stagnancy-curse-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.qe5aLBJuwb9eYqvv",
+            "predicate": [],
+            "chance": 30,
+            "affects": "target",
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "alterations": []
+          },
+          {
+            "type": "roll-effect",
+            "key": "stagnancy-curse-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.3BSugEZLheQIiDAk",
+            "predicate": [],
+            "chance": 50,
+            "affects": "target",
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "alterations": []
+          },
+          {
+            "type": "roll-effect",
+            "key": "stagnancy-curse-attack",
+            "value": 0,
+            "predicate": [],
+            "chance": 50,
+            "affects": "target",
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "alterations": []
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": "Compendium.ptr2e.core-moves.Item.15GtkCYhWPhaRycg.ActiveEffect.kD9guYXqkGZD6vb0",
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "1.1.0.beta",
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      }
+    }
+  ],
+  "flags": {},
+  "_id": "5Wa6PuAdcPXbfbnm"
+}

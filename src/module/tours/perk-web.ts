@@ -31,7 +31,8 @@ export class PerkWebTour extends PTRTour {
               rvs: 0
             }
           ]
-        }
+        },
+        ownership: { [game.user.id]: CONST.DOCUMENT_OWNERSHIP_LEVELS.OWNER, default: CONST.DOCUMENT_OWNERSHIP_LEVELS.OBSERVER }
       }, { temporary: true });
     }
 
@@ -97,7 +98,8 @@ export class PerkWebTour extends PTRTour {
               ],
               "global": true,
               "originSlug": "root-1"
-            }
+            },
+            ownership: { [game.user.id]: CONST.DOCUMENT_OWNERSHIP_LEVELS.OWNER, default: CONST.DOCUMENT_OWNERSHIP_LEVELS.OBSERVER }
           }));
           await this.perkWeb.constructor.refresh.call(this.perkWeb);
         }

@@ -66,6 +66,27 @@ class ActorPTR2e<
     });
   }
 
+  get afflictionCount() {
+    const domainRecord = this.rollOptions.getFromDomain("effect");
+    const minorAfflictions = Object.keys(domainRecord)
+      .flatMap((key: string) => ({
+        key,
+        count: Number(new RegExp(`^minor-affliction:(\\d+)$`).exec(key)?.[1]) || 0,
+      }))
+      .find((kc) => !!kc.count);
+    const majorAfflictions = Object.keys(domainRecord)
+      .flatMap((key: string) => ({
+        key,
+        count: Number(new RegExp(`^major-affliction:(\\d+)$`).exec(key)?.[1]) || 0,
+      }))
+      .find((kc) => !!kc.count);
+
+    return {
+      minor: minorAfflictions?.count ?? 0,
+      major: majorAfflictions?.count ?? 0,
+    };
+  }
+
   get traits() {
     return this.system.traits;
   }
@@ -1261,16 +1282,16 @@ class ActorPTR2e<
       if (difference >= 2) return new ModifierPTR2e({
         label: "PTR2E.Modifiers.size",
         slug: `size-penalty-unicqi-${appliesTo ?? fu.randomID()}`,
-        modifier: difference >= 4 ? 2 : 1,
-        method: "stage",
+        modifier: difference >= 4 ? 25 : 10,
+        method: "flat",
         type: "accuracy",
         appliesTo: appliesTo ? new Map([[appliesTo, true]]) : null,
       });
       if (difference <= -2) return new ModifierPTR2e({
         label: "PTR2E.Modifiers.size",
         slug: `size-penalty-unicqi-${appliesTo ?? fu.randomID()}`,
-        modifier: difference <= -4 ? -2 : -1,
-        method: "stage",
+        modifier: difference <= -4 ? -25 : -10,
+        method: "flat",
         type: "accuracy",
         appliesTo: appliesTo ? new Map([[appliesTo, true]]) : null,
       });
@@ -2042,6 +2063,7 @@ class ActorPTR2e<
     userId: string
   ) {
     super._onCreateDescendantDocuments(parent, collection, documents, results, options, userId);
+    if(game.users.activeGM?.id !== game.user.id) return;
     // if (game.ptr.web.actor === this) await game.ptr.web.refresh({ nodeRefresh: true });
     if (!this.unconnectedRoots.length) return;
 
@@ -2178,7 +2200,6 @@ class ActorPTR2e<
     }
     return false;
   };
-
 
   async heal({ fractionToHeal = 1.0, removeWeary = true, removeExposed = false, removeAllStacks = false }: { fractionToHeal?: number, removeWeary?: boolean; removeExposed?: boolean; removeAllStacks?: boolean } = {}): Promise<void> {
     const health = Math.clamp(

@@ -749,4 +749,8 @@ export class CompendiumBrowser extends foundry.applications.api.HandlebarsApplic
     }
     super._onClose(options);
   }
+
+  override _canDragStart(): boolean {
+    return true;
+  }
 }

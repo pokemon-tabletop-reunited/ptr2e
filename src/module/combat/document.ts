@@ -436,6 +436,7 @@ class CombatPTR2e extends Combat<CombatSystemPTR2e> {
 
   protected override _onDelete(options: DocumentModificationContext<null>, userId: string): void {
     super._onDelete(options, userId);
+    if(game.users.activeGM?.id !== game.user.id) return;
 
     const participants = this.system.participants;
     for (const uuid of participants) {
@@ -451,6 +452,7 @@ class CombatPTR2e extends Combat<CombatSystemPTR2e> {
 
   protected override _onUpdate(changed: DeepPartial<this["_source"]>, options: DocumentModificationContext<null>, userId: string): void {
     super._onUpdate(changed, options, userId);
+    if(game.users.activeGM?.id !== game.user.id) return;
 
     const toDelete = [];
     for (const combatant of (this.combatants?.filter(c => c.type === "summon") ?? []) as CombatantPTR2e<this, null, SummonCombatantSystem>[]) {
