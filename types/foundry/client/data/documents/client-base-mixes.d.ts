@@ -1534,7 +1534,7 @@ export class ClientBaseActor<TParent extends CanvasBaseToken<ClientBaseScene | n
      * @returns A data object of cleaned data suitable for compendium import
      */
     toCompendium(
-        pack?: CompendiumCollection<CompendiumDocument>,
+        pack?: CompendiumCollection<CompendiumDocument> | null,
         options?: {
             clearSort?: boolean;
             clearFlags?: boolean;
@@ -5536,7 +5536,7 @@ export class ClientBaseItem<
      * @returns A data object of cleaned data suitable for compendium import
      */
     toCompendium(
-        pack?: CompendiumCollection<CompendiumDocument>,
+        pack?: CompendiumCollection<CompendiumDocument> | null,
         options?: {
             clearSort?: boolean;
             clearFlags?: boolean;
