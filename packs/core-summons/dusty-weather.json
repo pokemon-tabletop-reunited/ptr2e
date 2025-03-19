@@ -16,8 +16,10 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
-    }
+      ],
+      "notes": ""
+    },
+    "slug": "dusty-weather"
   },
   "img": "icons/magic/air/fog-gas-smoke-brown.webp",
   "effects": [
@@ -33,7 +35,7 @@
             "key": "system.modifiers.spdMultiplier",
             "value": 1.5,
             "predicate": [
-              "self:trait:rock"
+              "target:trait:rock"
             ],
             "mode": 1,
             "priority": null,
@@ -44,7 +46,7 @@
             "key": "system.modifiers.spdMultiplier",
             "value": 1.5,
             "predicate": [
-              "self:trait:ground"
+              "target:trait:ground"
             ],
             "mode": 1,
             "priority": null,
@@ -84,13 +86,12 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "ptr2e",
-        "systemVersion": "0.10.0-alpha.5.2.1",
+        "systemVersion": "1.1.1.beta",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1742136698731,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
       }
     }
   ],
-  "flags": {},
   "_id": "2pDL6hkh4fjFIEAe"
 }
