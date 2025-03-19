@@ -176,7 +176,7 @@ export default class ItemSheetPTR2e<
       traits,
       effects,
       enrichedDescription,
-      enrichedNotes: (this.document.system instanceof BlueprintSystem) ? "" : await TextEditor.enrichHTML(this.document.system.publication.notes ?? ""),
+      enrichedNotes: (this.document.system instanceof BlueprintSystem) ? "" : await TextEditor.enrichHTML(this.document.system.publication?.notes ?? ""),
     };
   }
 

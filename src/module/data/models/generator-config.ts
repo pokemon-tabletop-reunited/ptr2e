@@ -85,7 +85,11 @@ export class GeneratorConfig extends foundry.abstract.DataModel {
         label: "PTR2E.GeneratorConfig.FIELDS.label.label",
         hint: "PTR2E.GeneratorConfig.FIELDS.label.hint"
       }),
-      link: new foundry.data.fields.BooleanField({ required: true, initial: false }),
+      link: new foundry.data.fields.BooleanField({ 
+        required: true, initial: false,
+        label: "PTR2E.GeneratorConfig.FIELDS.link.label",
+        hint: "PTR2E.GeneratorConfig.FIELDS.link.hint"
+       }),
       id: new foundry.data.fields.StringField({ required: true, initial: fu.randomID() }),
     }
   }
