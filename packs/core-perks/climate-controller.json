@@ -3,25 +3,19 @@
   "type": "perk",
   "system": {
     "prerequisites": [
-      "item:perk:climate-change",
-      {
-        "gte": [
-          "{actor|level}",
-          25
-        ]
-      }
+      "item:perk:climate-change"
     ],
     "cost": 3,
-    "description": "<p>Trigger: A [Weather] Effect the user created is removed by either expiring or due to the effect of an Attack or Ability (but not Intense Weather).<br><br> Effect: The user may use a [Weather] Attack or Ability as a Free Action at [Interrupt 3], if able. If the cancelling effect and its source lack [Legendary], the source creature gains @Affliction[suppressed] 5 and the source Attack/Ability is @Affliction[disabled] 5 or @Affliction[nullified] 5.</p>",
+    "description": "<p>Trigger: A @Trait[weather] Effect is created by a creature other than a user using an Attack or Ability (but not Intense Weather).</p><p>Effect: The triggering @Trait[weather] is removed, and the source creature has their Activation delayed 20%. If the Effect and its source lack [Legendary], the source creature gains @Affliction[suppressed] 5 and the source Attack/Ability is @Affliction[disabled] 5 or @Affliction[nullified] 5, and has their Activation delayed another 20%.</p>",
     "actions": [
       {
         "name": "Climate Controller",
         "slug": "climate-controller",
-        "description": "<p>Effect: The user may use a [Weather] Attack or Ability as a Free Action at [Interrupt 3], if able. If the cancelling effect and its source lack [Legendary], the source creature gains @Affliction[suppressed] 5 and the source Attack/Ability is @Affliction[disabled] 5 or @Affliction[nullified] 5.</p>",
+        "description": "<p>Trigger: A @Trait[weather] Effect is created by a creature other than a user using an Attack or Ability (but not Intense Weather).</p><p>Effect: The triggering @Trait[weather] is removed, and the source creature has their Activation delayed 20%. If the Effect and its source lack [Legendary], the source creature gains @Affliction[suppressed] 5 and the source Attack/Ability is @Affliction[disabled] 5 or @Affliction[nullified] 5, and has their Activation delayed another 20%.</p>",
         "cost": {
           "activation": "complex",
-          "powerPoints": 6,
-          "trigger": "A [Weather] Effect you created would be removed by either expiring or due to the effect of an Attack or Ability (but not Intense Weather).",
+          "powerPoints": 5,
+          "trigger": "Trigger: A [Weather] Effect is created by a creature other than a user using an Attack or Ability (but not Intense Weather).",
           "delay": null,
           "priority": null
         },

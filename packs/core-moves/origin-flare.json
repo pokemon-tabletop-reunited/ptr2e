@@ -1,7 +1,7 @@
 {
   "name": "Origin Flare",
   "type": "move",
-  "img": "systems/ptr2e/img/svg/fire_icon.svg",
+  "img": "systems/ptr2e/img/svg/steel_icon.svg",
   "system": {
     "slug": "origin-flare",
     "actions": [
@@ -12,7 +12,8 @@
         "traits": [
           "blast-1",
           "legendary",
-          "pp-updated"
+          "pp-updated",
+          "defrost"
         ],
         "range": {
           "target": "creature",
@@ -27,22 +28,25 @@
         "power": 100,
         "accuracy": 100,
         "types": [
-          "fire"
+          "steel"
         ],
         "description": "<p>Effect: On hit, the target has a 30% chance of gaining @Affliction[burn] 5. When using this attack while @Affliction[harden], the user gains 2 Ticks of HP.</p>",
-        "contestType": "",
-        "contestEffect": "",
-        "free": false,
-        "slot": null
+        "img": "systems/ptr2e/img/svg/steel_icon.svg",
+        "predicate": []
       }
     ],
-    "container": null,
     "grade": "B",
     "publication": {
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
+      ],
+      "notes": ""
+    },
+    "traits": [],
+    "_migration": {
+      "version": null,
+      "previous": null
     }
   },
   "_id": "NcQ2Uf4CfgYujK72",
