@@ -43,7 +43,7 @@
         "img": "icons/svg/explosion.svg"
       }
     ],
-    "description": "<p>Trigger: The user causes at least one creature to gain @Affliction[fainted]</p><p>Effect: The user's ATK Stage is increased by +1 for 7 Activations.</p><p>Passive: If the user has the effect Calyrex Rider, the user gains Connection - Glacial Lance and takes 33% less damage from Special-Category Attacks.</p>",
+    "description": "<p>Trigger: The user causes at least one creature to gain @Affliction[fainted].</p><p>Effect: The user's ATK Stage is increased by +1 for 7 Activations.</p><p>Passive: If the user has the effect Calyrex Rider, the user gains Connection - Glacial Lance and takes 33% less damage from Special-Category Attacks.</p>",
     "traits": [
       "legendary"
     ],
@@ -56,13 +56,14 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
+      ],
+      "notes": ""
     }
   },
   "_id": "Y6uBelrwgxzHQMkY",
   "effects": [
     {
-      "name": "Glacial Lance",
+      "name": "Chilling Neigh",
       "type": "passive",
       "_id": "sNNhUcJIjygHHBiF",
       "img": "systems/ptr2e/img/icons/effect_icon.webp",
@@ -72,26 +73,35 @@
             "type": "grant-item",
             "key": "",
             "value": "Compendium.ptr2e.core-moves.Item.VWtxhdUlCpAZ7pvr",
-            "predicate": [],
-            "alterations": [
-              {
-                "mode": 5,
-                "property": "system.free",
-                "value": "true"
-              }
+            "predicate": [
+              "effect:passive:calyrex-rider"
             ],
+            "reevaluateOnUpdate": true,
+            "allowDuplicate": false,
             "mode": 2,
             "priority": null,
             "ignored": false,
-            "reevaluateOnUpdate": false,
             "inMemoryOnly": false,
-            "allowDuplicate": true,
+            "alterations": [],
             "track": false,
             "replaceSelf": false,
             "onDeleteActions": {
               "grantee": "detach",
               "granter": "cascade"
             }
+          },
+          {
+            "type": "ephemeral-modifier",
+            "key": "special-attack-damage-percentile",
+            "value": -33,
+            "predicate": [
+              "effect:passive:calyrex-rider"
+            ],
+            "label": "Calyrex Rider - Chilling Neigh",
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "hideIfDisabled": false
           }
         ],
         "slug": null,
@@ -122,10 +132,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "ptr2e",
-        "systemVersion": "1.0.6.beta",
+        "systemVersion": "1.1.2.beta",
         "createdTime": 1739813701982,
-        "modifiedTime": 1739813701982,
-        "lastModifiedBy": "IcBpMqhFuTck9VpX"
+        "modifiedTime": 1742427706863,
+        "lastModifiedBy": "NGSbEbIP7O7ThFIb"
       }
     }
   ]
