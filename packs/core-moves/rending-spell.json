@@ -1,0 +1,56 @@
+{
+  "name": "Rending Spell",
+  "type": "move",
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "slug": "rending-spell",
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "traits": [],
+    "actions": [
+      {
+        "name": "Rending Spell",
+        "slug": "rending-spell",
+        "type": "attack",
+        "img": "systems/ptr2e/img/svg/untyped_icon.svg",
+        "traits": [
+          "adaptable",
+          "arcane",
+          "ray",
+          "pierce",
+          "manipulate"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 10,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 4
+        },
+        "types": [
+          "untyped"
+        ],
+        "category": "special",
+        "power": 35,
+        "accuracy": 90,
+        "predicate": [],
+        "description": "<p>Effect: On hit, the target takes @Tick[-1].</p>"
+      }
+    ],
+    "grade": "B"
+  },
+  "img": "systems/ptr2e/img/svg/untyped_icon.svg",
+  "effects": [],
+  "flags": {},
+  "_id": "6NULx72JeXAvsstZ"
+}

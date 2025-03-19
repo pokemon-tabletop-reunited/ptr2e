@@ -193,6 +193,15 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
         },
         "open-stats-chart": function (this: ActorSheetPTRV2) {
           new StatsForm({ document: this.actor }).render(true);
+        },
+        "create-item": async function (this: ActorSheetPTRV2, event: Event) {
+          const type = ((event.target as HTMLElement).closest("[data-type]") as HTMLElement)?.dataset.type;
+          if(!type) return;
+
+          return void await this.document.createEmbeddedDocuments("Item", [{
+            name: ItemPTR2e.defaultName({type, parent: this.document}),
+            type,
+          }]);
         }
       },
     },
@@ -460,6 +469,10 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
 
     if (partId === "clocks") {
       context.clocks = game.user.isGM ? this.document.system.clocks.contents : this.document.system.clocks.contents.filter(c => !c.private);
+    }
+
+    if(partId === "skills") {
+      context.noAce = !this.actor.traits.has("ace");
     }
 
     if (partId === "inventory") {

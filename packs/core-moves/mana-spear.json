@@ -2,19 +2,21 @@
   "name": "Mana Spear",
   "type": "move",
   "_id": "sgvceQ0swcoPD2ag",
-  "img": "systems/ptr2e/img/svg/fairy_icon.svg",
+  "img": "systems/ptr2e/img/svg/untyped_icon.svg",
   "system": {
-    "slug": null,
+    "slug": "mana-spear",
     "actions": [
       {
         "name": "Mana Spear",
         "slug": "mana-spear",
         "type": "attack",
-        "img": "systems/ptr2e/img/svg/fairy_icon.svg",
+        "img": "systems/ptr2e/img/svg/untyped_icon.svg",
         "traits": [
           "sharp",
           "pulse",
-          "missile"
+          "missile",
+          "adaptable",
+          "arcane"
         ],
         "range": {
           "target": "creature",
@@ -26,7 +28,7 @@
           "powerPoints": 3
         },
         "types": [
-          "fairy"
+          "untyped"
         ],
         "category": "special",
         "power": 80,
@@ -35,8 +37,19 @@
         "predicate": []
       }
     ],
-    "container": null,
-    "grade": "C"
+    "grade": "C",
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": "undefined"
+    },
+    "traits": [],
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
   },
   "effects": [
     {
@@ -55,7 +68,8 @@
             "affects": "target",
             "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "alterations": []
           }
         ],
         "slug": null,

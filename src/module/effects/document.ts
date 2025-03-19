@@ -99,6 +99,30 @@ class ActiveEffectPTR2e<
 
     if (this.parent?.rollOptions) {
       this.parent.rollOptions.addOption("effect", `${this.type}:${this.slug}`);
+      if(this.traits.has("major-affliction")) {
+        this.setCount(this.parent.rollOptions.getFromDomain("effect"), "major-affliction");
+        this.setCount(this.parent.rollOptions.getFromDomain("all"), "effect:major-affliction");
+      }
+      if(this.traits.has("minor-affliction")) {
+        this.setCount(this.parent.rollOptions.getFromDomain("effect"), "minor-affliction");
+        this.setCount(this.parent.rollOptions.getFromDomain("all"), "effect:minor-affliction");
+      }
+    }
+  }
+
+  private setCount(domainRecord: Record<string, boolean>, option: string) {
+    const existing = Object.keys(domainRecord)
+      .flatMap((key: string) => ({
+        key,
+        count: Number(new RegExp(`^${option}:(\\d+)$`).exec(key)?.[1]) || 0,
+      }))
+      .find((kc) => !!kc.count);
+    if(existing) {
+      delete domainRecord[existing.key];
+      domainRecord[`${option}:${existing.count + 1}`] = true;
+    }
+    else {
+      domainRecord[`${option}:1`] = true;
     }
   }
 

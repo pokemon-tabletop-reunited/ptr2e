@@ -4,7 +4,7 @@
   "type": "equipment",
   "system": {
     "crafting": {
-      "skill": null,
+      "skill": "",
       "spans": null,
       "materials": []
     },
@@ -17,15 +17,13 @@
     "fling": {
       "type": "untyped",
       "power": null,
-      "accuracy": 100
+      "accuracy": 100,
+      "hide": false
     },
     "rarity": "rare",
     "traits": [
       "combat",
-      "pichu",
-      "pikachu",
-      "raichu",
-      "raichu-alolan"
+      "pikalike"
     ],
     "actions": [
       {
@@ -47,7 +45,7 @@
         "img": "icons/svg/explosion.svg"
       }
     ],
-    "description": "Effect: The user has their Base ATK and SPATK are increased by 100%.",
+    "description": "<p>Effect: The user has their Base ATK and SPATK are increased by 50%.</p>",
     "slug": "light-ball",
     "quantity": 1,
     "identification": {
@@ -62,6 +60,13 @@
     "_migration": {
       "version": null,
       "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
     }
   },
   "_id": "vLE9wUHRZVCjdZVE",
@@ -76,7 +81,7 @@
           {
             "type": "basic",
             "key": "system.attributes.atk.base",
-            "value": 2,
+            "value": 1.5,
             "predicate": [],
             "mode": 1,
             "priority": null,
@@ -85,7 +90,7 @@
           {
             "type": "basic",
             "key": "system.attributes.spa.base",
-            "value": 2,
+            "value": 1.5,
             "predicate": [],
             "mode": 1,
             "priority": null,
@@ -120,12 +125,12 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "ptr2e",
-        "systemVersion": "0.10.0-alpha.3.2.0",
+        "systemVersion": "1.1.0.beta",
         "createdTime": 1731023050767,
-        "modifiedTime": 1731023050767,
-        "lastModifiedBy": "NGSbEbIP7O7ThFIb"
+        "modifiedTime": 1741129518883,
+        "lastModifiedBy": "01onCaJSVMVOgMDI"
       }
     }
   ],
-  "folder": "V4skAU6G3OH5fXad"
+  "folder": "6VDJBcrqVDh5bYtA"
 }

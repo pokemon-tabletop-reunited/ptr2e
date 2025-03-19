@@ -8,8 +8,8 @@ export class CompendiumBrowserPerkTab extends CompendiumBrowserTab {
   filterData: PerkFilters;
   templatePath = "systems/ptr2e/templates/apps/compendium-browser/tabs/perk.hbs";
 
-  override searchFields = ["name", "description"];
-  override storeFields = ["type", "name", "img", "uuid", "traits", "description", "cost", "prerequisites", "global"];
+  override searchFields = ["name", "description", "prerequisites"];
+  override storeFields = ["type", "name", "img", "uuid", "traits", "description", "cost", "prerequisites", "global", "source"];
 
   constructor(browser: CompendiumBrowser) {
     super(browser);
@@ -25,6 +25,7 @@ export class CompendiumBrowserPerkTab extends CompendiumBrowserTab {
     const indexFields = ["img", "system.description", "system.traits", "system.cost", "system.prerequisites", "system.global", "system.nodes"];
     const traits = new Set<string>();
     const prerequisites = new Set<string>();
+    const publications = new Set<string>();
 
     for await (const { pack, index } of this.browser.packLoader.loadPacks(
       "Item",
@@ -50,6 +51,9 @@ export class CompendiumBrowserPerkTab extends CompendiumBrowserTab {
           prerequisites.add(prereq);
         }
 
+        const pubSource = (perkData.system.publication?.source ?? "").trim()
+        publications.add(pubSource);
+
         perks.push({
           name: perkData.name,
           img: perkData.img,
@@ -60,6 +64,7 @@ export class CompendiumBrowserPerkTab extends CompendiumBrowserTab {
           cost: perkData.system.cost,
           prerequisites: perkData.system.prerequisites ?? [],
           global: perkData.system.global ? (perkData.system.nodes?.[0]?.x && perkData.system.nodes?.[0]?.y) : false,
+          source: pubSource
         })
       }
     }
@@ -80,11 +85,13 @@ export class CompendiumBrowserPerkTab extends CompendiumBrowserTab {
     }, {} as Record<string, string>));
     // this.filterData.multiselects.prerequisites.options = this.generateMultiselectOptions(prerequisites.reduce((acc, prereq) => ({...acc, [prereq]: prereq}), {} as Record<string, string>));
 
+    this.filterData.checkboxes.source.options = this.generateCheckboxOptions(publications.reduce((acc, source) => ({[source]: source, ...acc}), {} as Record<string, string>));
+
     debug("Finished loading data");
   }
 
   protected override filterIndexData(entry: CompendiumBrowserIndexData): boolean {
-    const { selects, multiselects, sliders } = this.filterData;
+    const { selects, checkboxes, multiselects, sliders } = this.filterData;
 
     // Filter out perks not on web
     if(selects.showOnlyOnWeb.selected === "yes" && !entry.global) return false;
@@ -98,6 +105,11 @@ export class CompendiumBrowserPerkTab extends CompendiumBrowserTab {
     // Prerequisites
     // if (!this.filterTraits(entry.prerequisites, multiselects.prerequisites.selected, multiselects.prerequisites.conjunction)) return false;
 
+    // Source
+    if (checkboxes.source.selected.length) {
+      if (!checkboxes.source.selected.includes(entry.source)) return false;
+    }
+
     return true;
   }
 
@@ -108,6 +120,14 @@ export class CompendiumBrowserPerkTab extends CompendiumBrowserTab {
           label: "PTR2E.CompendiumBrowser.Filters.ShowOnlyOnWeb.Label",
           options: {},
           selected: ""
+        }
+      },
+      checkboxes: {
+        source: {
+          isExpanded: false,
+          label: "PTR2E.CompendiumBrowser.Filters.Source",
+          options: {},
+          selected: [],
         }
       },
       multiselects: {
