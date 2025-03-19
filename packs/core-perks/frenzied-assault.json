@@ -4,18 +4,18 @@
   "system": {
     "prerequisites": [],
     "cost": 2,
-    "description": "<p>While @Affliction[enraged], the user's Attacks have a 30% chance on resolution to grant the user +1 SPD Stage for 5 Activations.</p>",
+    "description": "<p>While @Affliction[enraged], the user's Damaging Attacks have a 30% chance on resolution to grant the user +1 SPD Stage for 5 Activations.</p>",
     "actions": [
       {
         "name": "Frenzied Assault",
         "slug": "frenzied-assault",
-        "description": "<p>While @Affliction[enraged], the user's Attacks have a 30% chance on resolution to grant the user +1 SPD Stage for 5 Activations for 5 Activations.</p>",
+        "description": "<p>While @Affliction[enraged], the user's Damaging Attacks have a 30% chance on resolution to grant the user +1 SPD Stage for 5 Activations for 5 Activations.</p>",
         "cost": {
           "activation": "free"
         },
         "type": "generic",
         "traits": [],
-        "img": "icons/svg/explosion.svg",
+        "img": "systems/ptr2e/img/perk-icons/Combat.svg",
         "range": {
           "target": "enemy",
           "unit": "m"
@@ -67,7 +67,8 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
+      ],
+      "notes": ""
     }
   },
   "_id": "IMn0UktiyUWZXQty",
@@ -82,7 +83,7 @@
         "changes": [
           {
             "type": "roll-effect",
-            "key": "attack",
+            "key": "damaging-attack",
             "value": "Compendium.ptr2e.core-effects.Item.XeiSuS3APUcN0MLM",
             "predicate": [
               "effect:affliction:enraged"
@@ -123,10 +124,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "ptr2e",
-        "systemVersion": "1.0.6.beta",
+        "systemVersion": "1.1.1.beta",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1742140638683,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
       }
     }
   ],
