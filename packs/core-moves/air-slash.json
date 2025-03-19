@@ -39,14 +39,20 @@
     "_migration": {
       "version": null,
       "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ]
     }
   },
   "_id": "lxpXiXqapEF8GFPC",
   "effects": [
     {
-      "name": "Air Slash",
-      "type": "advancement",
-      "_id": "VrxettEItzXCeva9",
+      "name": "Air Slash (Roll Effect)",
+      "type": "passive",
+      "_id": "XLHPx6oPkaiE2Ije",
       "img": "systems/ptr2e/img/icons/effect_icon.webp",
       "system": {
         "changes": [
@@ -62,6 +68,11 @@
                 "mode": 5,
                 "property": "system.amount",
                 "value": -30
+              },
+              {
+                "mode": 5,
+                "property": "name",
+                "value": "Flinch 30%"
               }
             ],
             "mode": 2,
@@ -73,8 +84,7 @@
         "traits": [],
         "removeAfterCombat": true,
         "removeOnRecall": false,
-        "stacks": 0,
-        "amount": 0
+        "stacks": 0
       },
       "disabled": false,
       "duration": {
@@ -98,10 +108,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "ptr2e",
-        "systemVersion": "0.10.0-alpha.5.2.1",
-        "createdTime": 1737651928799,
-        "modifiedTime": 1737676628954,
-        "lastModifiedBy": "IcBpMqhFuTck9VpX"
+        "systemVersion": "1.0.7.beta",
+        "createdTime": 1740921940039,
+        "modifiedTime": 1740922008149,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
       }
     }
   ]

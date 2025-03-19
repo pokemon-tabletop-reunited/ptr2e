@@ -99,13 +99,37 @@ class ActiveEffectPTR2e<
 
     if (this.parent?.rollOptions) {
       this.parent.rollOptions.addOption("effect", `${this.type}:${this.slug}`);
+      if(this.traits.has("major-affliction")) {
+        this.setCount(this.parent.rollOptions.getFromDomain("effect"), "major-affliction");
+        this.setCount(this.parent.rollOptions.getFromDomain("all"), "effect:major-affliction");
+      }
+      if(this.traits.has("minor-affliction")) {
+        this.setCount(this.parent.rollOptions.getFromDomain("effect"), "minor-affliction");
+        this.setCount(this.parent.rollOptions.getFromDomain("all"), "effect:minor-affliction");
+      }
+    }
+  }
+
+  private setCount(domainRecord: Record<string, boolean>, option: string) {
+    const existing = Object.keys(domainRecord)
+      .flatMap((key: string) => ({
+        key,
+        count: Number(new RegExp(`^${option}:(\\d+)$`).exec(key)?.[1]) || 0,
+      }))
+      .find((kc) => !!kc.count);
+    if(existing) {
+      delete domainRecord[existing.key];
+      domainRecord[`${option}:${existing.count + 1}`] = true;
+    }
+    else {
+      domainRecord[`${option}:1`] = true;
     }
   }
 
   override apply(actor: ActorPTR2e, change: ChangeModel, options?: string[]): unknown {
     if (this.parent instanceof ItemPTR2e && this.parent) {
-      if(this.parent.system instanceof AbilitySystemModel && this.parent.system.isSuppressed) return;
-      if([
+      if (this.parent.system instanceof AbilitySystemModel && this.parent.system.isSuppressed) return;
+      if ([
         "weapon",
         "equipment",
         "consumable",
@@ -376,6 +400,9 @@ class ActiveEffectPTR2e<
       const effects = sources.flatMap((source) => {
         if (!(context.keepId || context.keepEmbeddedIds)) {
           source._id = fu.randomID();
+        }
+        else if (source.changes?.some(c => ["grant-item", "grant-effect"].includes((c as { type: string })?.type))) {
+          source._id ??= fu.randomID();
         }
 
         if (source.flags?.ptr2e?.stacks !== false) {
