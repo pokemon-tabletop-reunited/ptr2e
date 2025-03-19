@@ -38,6 +38,7 @@ export const Init: PTRHook = {
       }
 
       // Setup PTR Config
+      // @ts-expect-error - Certain config options are added in the Ready Hook.
       CONFIG.PTR = PTRCONFIG;
       Object.freeze(CONFIG.PTR);
 

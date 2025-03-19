@@ -18,22 +18,29 @@
         },
         "cost": {
           "activation": "simple",
-          "powerPoints": 2
+          "powerPoints": 4
         },
         "category": "status",
         "types": [
           "fighting"
         ],
-        "description": "<p>Effect: The user gains @Affliction[stuck] 5, @Affliction[boosted] 5, and @Affliction[resolved] 5.</p>",
+        "description": "<p>Effect: The user gains @Affliction[stuck] 5, @Affliction[boosted] 5, @Affliction[resolved] 5, and @Affliction[chanted] 5.</p>",
         "img": "systems/ptr2e/img/svg/fighting_icon.svg",
         "predicate": []
       }
     ],
-    "grade": "D",
+    "grade": "B",
     "traits": [],
     "_migration": {
       "version": null,
       "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
     }
   },
   "_id": "Yl9mMjXxnNloKmMS",
@@ -92,6 +99,18 @@
             "mode": 2,
             "priority": null,
             "ignored": false
+          },
+          {
+            "type": "roll-effect",
+            "key": "no-retreat-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.chantedcondiitem",
+            "predicate": [],
+            "chance": 100,
+            "affects": "target",
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "alterations": []
           }
         ],
         "slug": null,
@@ -122,10 +141,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "ptr2e",
-        "systemVersion": "0.10.0-alpha.5.2.1",
+        "systemVersion": "1.1.0.beta",
         "createdTime": 1737742958125,
-        "modifiedTime": 1737743121975,
-        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
+        "modifiedTime": 1741131366627,
+        "lastModifiedBy": "UTlFSVhgfIUeTsoW"
       }
     }
   ]

@@ -656,18 +656,269 @@
             "item": null,
             "level": null,
             "knownMove": null
+          },
+          "perk": {
+            "x": 26,
+            "y": 26
           }
         }
       ],
-      "uuid": "Compendium.ptr2e.core-species.Item.yMPdk3fZMYcERLbS"
+      "uuid": "Compendium.ptr2e.core-species.Item.yMPdk3fZMYcERLbS",
+      "methods": [],
+      "perk": {
+        "x": 26,
+        "y": 26
+      }
     },
     "habitats": [
       "woodland",
       "volcano",
       "badland"
-    ]
+    ],
+    "publication": {
+      "source": "PTR 2e Core - Johto Dex",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
   },
   "_id": "endPT5oqGlyAy1L9",
-  "effects": [],
-  "folder": null
+  "effects": [
+    {
+      "name": "Mega Houndoom",
+      "type": "form",
+      "_id": "I0PnVeRAO5td8iHh",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-option",
+            "key": "manual-forme-toggle",
+            "value": "forme:mega-houndoom:active",
+            "domain": "all",
+            "toggleable": true,
+            "label": "Toggle: Mega Houndoom Forme",
+            "predicate": [],
+            "alwaysActive": false,
+            "count": false,
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "suboptions": [],
+            "state": false
+          },
+          {
+            "type": "stats-alteration",
+            "predicate": [
+              "forme:mega-houndoom:active"
+            ],
+            "key": "",
+            "value": 0,
+            "hp": null,
+            "atk": null,
+            "def": 40,
+            "spa": 30,
+            "spd": 10,
+            "spe": 20,
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "add-trait",
+            "predicate": [
+              "forme:mega-houndoom:active"
+            ],
+            "key": "",
+            "value": "Glow 3",
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-houndoom:active"
+            ],
+            "key": "system.movement.overland.value",
+            "value": 4,
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-houndoom:active"
+            ],
+            "key": "system.movement.swim.value",
+            "value": 1,
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "grant-item",
+            "predicate": [
+              "forme:mega-houndoom:active"
+            ],
+            "key": "",
+            "value": "Compendium.ptr2e.core-abilities.Item.flFcwY1c7U31HDRz",
+            "allowDuplicate": false,
+            "reevaluateOnUpdate": true,
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "system.free",
+                "value": "true"
+              }
+            ],
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "inMemoryOnly": false,
+            "track": false,
+            "replaceSelf": false,
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            }
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-houndoom:active"
+            ],
+            "key": "system.skills.climb.value",
+            "value": 5,
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-houndoom:active"
+            ],
+            "key": "system.skills.intimidate.value",
+            "value": 20,
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-houndoom:active"
+            ],
+            "key": "system.skills.leadership.value",
+            "value": 20,
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-houndoom:active"
+            ],
+            "key": "system.skills.lift.value",
+            "value": 25,
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-houndoom:active"
+            ],
+            "key": "system.skills.running.value",
+            "value": 5,
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-houndoom:active"
+            ],
+            "key": "system.skills.track.value",
+            "value": 5,
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-houndoom:active"
+            ],
+            "key": "system.skills.swim.value",
+            "value": 5,
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "token-alterations",
+            "predicate": [
+              "forme:mega-houndoom:active"
+            ],
+            "key": "",
+            "value": 0,
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "texture": "modules/ptr2e-pkmn-sprites/sprites/229_MEGA.webp",
+            "tint": null,
+            "scale": null,
+            "name": null,
+            "light": null,
+            "alpha": null
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0,
+        "trigger": "manual",
+        "conditions": []
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "1.1.0.beta",
+        "createdTime": 1741566395423,
+        "modifiedTime": 1741567193184,
+        "lastModifiedBy": "QJgrK2D5gkPoparS"
+      }
+    }
+  ]
 }

@@ -1,7 +1,7 @@
 import { PerkManager } from "@module/apps/perk-manager/perk-manager.ts";
 import TooltipsPTR2e from "@module/tooltips/tooltips.ts";
 import { ImageResolver, sluggify } from "@utils";
-import { ArtMapCollection, ClockDatabase, SkillsCollection, TraitsCollection } from "@data";
+import { ArtMapCollection, ClockDatabase, PokemonType, SkillsCollection, TraitsCollection } from "@data";
 import ClockPanel from "@module/apps/clocks/clock-panel.ts";
 import { Pokedex } from "pokeapi-js-wrapper";
 import { UUIDUtils } from "src/util/uuid.ts";
@@ -15,6 +15,7 @@ import { TutorListSettings } from "@system/tutor-list/setting-model.ts";
 import { TutorListApp } from "@module/apps/tutor-list.ts";
 import { CombatPTR2e } from "@combat";
 import GithubManager from "@module/apps/github.ts";
+import { getTypes, TypeEffectiveness } from "./config/effectiveness.ts";
 
 const GamePTR = {
   onInit() {
@@ -45,7 +46,7 @@ const GamePTR = {
         panel: new ClockPanel({ id: "ptr2e-clock-panel" }),
       },
       tokenPanel: new TokenPanel(null, { id: "ptr2e-token-panel" }),
-      tutorList: new TutorListApp({id: "ptr2e-tutor-list"}),
+      tutorList: new TutorListApp({ id: "ptr2e-tutor-list" }),
       settings: {
         tokens: {
           autoscale: game.settings.get("ptr2e", "tokens.autoscale")
@@ -71,6 +72,19 @@ const GamePTR = {
     }
 
     game.ptr = fu.mergeObject(game.ptr ?? {}, initData);
+
+    CONFIG.PTR.data.types = getTypes();
+    Object.defineProperties(CONFIG.PTR.options, {
+      types: {
+        get: () => {
+          const types = Object.keys(game.settings.get("ptr2e", "pokemonTypes") as TypeEffectiveness ?? {}) as PokemonType[];
+
+          return types.filter(type => type !== "untyped").map(type => {
+            return { label: Handlebars.helpers.formatSlug(type), value: type };
+          })
+        }
+      }
+    });
   },
   onSetup() {
     // Run "delayed" constructor of game.ptr.tooltips
@@ -79,16 +93,16 @@ const GamePTR = {
   onReady() {
     // If there are any active combats, make sure to handle Summon Effects
     // This needs to be done in Setup as Combat & Combatants aren't yet initialized when actors get initialized.
-    for(const combat of (game.combats?.contents ?? []) as CombatPTR2e[]) {
-      if(!combat.active) continue;
+    for (const combat of (game.combats?.contents ?? []) as CombatPTR2e[]) {
+      if (!combat.active) continue;
       const summons = combat.summons;
-      if(!summons?.length) continue;
+      if (!summons?.length) continue;
 
-      for(const summon of summons) {
+      for (const summon of summons) {
         summon.system.notifyActorsOfEffectsIfApplicable(combat.combatants.contents);
       }
     }
-    
+
     game.ptr.clocks.panel.render(true);
     game.ptr.tokenPanel.render(true);
     game.ptr.tokenPanel.token = game.user.character?.getActiveTokens().at(0) as TokenPTR2e | null;
@@ -103,7 +117,7 @@ const GamePTR = {
     TutorListSettings.initializeAndMigrate();
 
     //@ts-expect-error No types for workers
-    game.workers.createWorker("PerkWorker", {scripts: ["../systems/ptr2e/scripts/perk-worker.js"]});
+    game.workers.createWorker("PerkWorker", { scripts: ["../systems/ptr2e/scripts/perk-worker.js"] });
   },
 };
 
