@@ -1,8 +1,9 @@
 {
   "name": "Eject Button",
   "img": "systems/ptr2e/img/icons/equipment_icon.webp",
-  "type": "equipment",
+  "type": "consumable",
   "system": {
+    "cost": 5,
     "crafting": {
       "skill": "",
       "spans": null,
@@ -21,9 +22,9 @@
       "hide": false
     },
     "rarity": "uncommon",
+    "consumableType": "other",
     "traits": [
       "combat",
-      "consumable",
       "defensive"
     ],
     "actions": [
@@ -51,15 +52,7 @@
     "description": "Trigger: The user is hit by an attack.\nEffect: The user takes 50% less damage from the triggering attack, and then freely moves themselves up to half of the Movement type of their choice away from triggering attack's source. If the user is an owned Pokémon, they may then immediately be returned their Poké Ball and another Pokémon may immediately be sent out in their place.",
     "slug": "eject-button",
     "quantity": 1,
-    "identification": {
-      "misidentified": null,
-      "status": "identified",
-      "unidentified": {
-        "name": "Unidentified Item",
-        "img": "systems/ptu/css/images/icons/item_icon.png",
-        "description": "<p>Unidentified Item</p>"
-      }
-    },
+    "stack": 1,
     "_migration": {
       "version": null,
       "previous": null
