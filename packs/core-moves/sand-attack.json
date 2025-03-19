@@ -19,7 +19,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 3
+          "powerPoints": 2
         },
         "category": "status",
         "accuracy": 100,
@@ -27,7 +27,8 @@
           "ground"
         ],
         "description": "<p>Effect: On hit, all valid targets lose -1 ACC Stage for 5 activations.</p>",
-        "img": "icons/svg/explosion.svg"
+        "img": "systems/ptr2e/img/svg/ground_icon.svg",
+        "predicate": []
       },
       {
         "slug": "sand-attack-dusty",
@@ -55,10 +56,11 @@
         "description": "<p>Trigger: Dusty Weather is present.</p><p>Effect: On hit, all valid targets lose -2 ACC Stage for 5 activations.</p>",
         "variant": "sand-attack",
         "free": true,
-        "img": "icons/svg/explosion.svg"
+        "img": "icons/svg/explosion.svg",
+        "predicate": []
       }
     ],
-    "grade": "C",
+    "grade": "D",
     "_migration": {
       "version": null,
       "previous": null
@@ -67,8 +69,10 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
-    }
+      ],
+      "notes": ""
+    },
+    "traits": []
   },
   "_id": "RNsjfgPa66NJ8zR7",
   "effects": [
@@ -88,7 +92,8 @@
             "affects": "target",
             "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "alterations": []
           },
           {
             "type": "roll-effect",
@@ -99,7 +104,8 @@
             "affects": "target",
             "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "alterations": []
           }
         ],
         "slug": null,
