@@ -10,7 +10,7 @@
         ],
         "name": "Destructive Design",
         "slug": "destructive-design-active",
-        "type": "passive",
+        "type": "generic",
         "cost": {
           "activation": "free",
           "powerPoints": 5
@@ -20,7 +20,7 @@
           "unit": "m"
         },
         "description": "<p>Effect: The user may activate Download, ignoring the Ability's normal triggering Affliction.</p>",
-        "img": "icons/svg/explosion.svg"
+        "img": "systems/ptr2e/img/item-icons/chill%20drive.webp"
       },
       {
         "traits": [
@@ -38,9 +38,27 @@
           "target": "enemy",
           "unit": "m"
         }
+      },
+      {
+        "name": "Flight Change",
+        "slug": "flight-change",
+        "description": "<p>Effect: Connection - Techno Blast. The user may activate Download, ignoring the Ability's normal triggering Affliction. Passive: the user gains the Ability Download.</p><p>Bonus: By consuming 5m of Movement as a Free Action on one of its Activations, the user may transform into its High Speed Forme. While in High Speed Forme, the user's Techno Blast is @Affliction[disabled].</p>",
+        "traits": [
+          "legendary",
+          "forme-change"
+        ],
+        "type": "generic",
+        "img": "systems/ptr2e/img/item-icons/chill%20drive.webp",
+        "range": {
+          "target": "enemy",
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "simple"
+        }
       }
     ],
-    "description": "<p>Effect: Connection - Techno Blast. The user may activate Download, ignoring the Ability's normal triggering Affliction. Passive: the user gains the Ability Download.</p>",
+    "description": "<p>Effect: Connection - Techno Blast. The user may activate Download, ignoring the Ability's normal triggering Affliction. Passive: the user gains the Ability Download.</p><p>Bonus: By consuming 5m of Movement as a Free Action on one of its Activations, the user may transform into to or from its High Speed Forme. While in High Speed Forme, the user's Techno Blast is @Affliction[disabled].</p>",
     "traits": [
       "legendary",
       "connection"
@@ -54,7 +72,8 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
+      ],
+      "notes": ""
     }
   },
   "_id": "kHHBW7Auyfs6t4yE",
