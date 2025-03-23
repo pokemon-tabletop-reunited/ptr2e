@@ -626,7 +626,14 @@ class ActorPTR2e<
       effectiveness[typeKey] = 1;
       for (const key of this.system.type.types) {
         const type = key as PokemonType;
-        effectiveness[typeKey] *= types[type].effectiveness[typeKey];
+        if(typeKey === "shadow") {
+          if(type === "shadow") {
+            effectiveness[typeKey] = 0.5;
+            break;
+          }
+          else effectiveness[typeKey] = 2;
+        }
+        else effectiveness[typeKey] *= types[type].effectiveness[typeKey];
       }
     }
     const typeImmunities = Object.keys(this.rollOptions.getFromDomain("immunities") ?? {}).filter(o => o.startsWith("type:"));
