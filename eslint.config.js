@@ -58,9 +58,14 @@ export default ts.config(
         },
       ],
 
+      "@typescript-eslint/no-non-null-assertion": "off",
+      "@typescript-eslint/no-unnecessary-type-parameters": "off",
+      "@typescript-eslint/no-invalid-void-type": "off",
+      "@typescript-eslint/no-unsafe-argument": "off",
+
       "@typescript-eslint/no-namespace": ["error", { allowDeclarations: true }],
 
-      "tsdoc/syntax": "warn",
+      "tsdoc/syntax": "off",
     },
   },
   {

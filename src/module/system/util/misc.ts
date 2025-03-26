@@ -1,0 +1,567 @@
+import type { DeepPartial } from "fvtt-types/utils";
+import type { BracketedValue } from "../effects/data.ts";
+import * as R from "remeda";
+import Sortable from "sortablejs";
+
+const wordCharacter = String.raw`[\p{Alphabetic}\p{Mark}\p{Decimal_Number}\p{Join_Control}]`;
+const nonWordCharacter = String.raw`[^\p{Alphabetic}\p{Mark}\p{Decimal_Number}\p{Join_Control}]`;
+const nonWordCharacterRE = new RegExp(nonWordCharacter, "gu");
+
+const wordBoundary = String.raw`(?:${wordCharacter})(?=${nonWordCharacter})|(?:${nonWordCharacter})(?=${wordCharacter})`;
+const nonWordBoundary = String.raw`(?:${wordCharacter})(?=${wordCharacter})`;
+const lowerCaseLetter = String.raw`\p{Lowercase_Letter}`;
+const upperCaseLetter = String.raw`\p{Uppercase_Letter}`;
+const lowerCaseThenUpperCaseRE = new RegExp(
+  `(${lowerCaseLetter})(${upperCaseLetter}${nonWordBoundary})`,
+  "gu"
+);
+
+const nonWordCharacterHyphenOrSpaceRE =
+  /[^-\p{White_Space}\p{Alphabetic}\p{Mark}\p{Decimal_Number}\p{Join_Control}]/gu;
+const upperOrWordBoundariedLowerRE = new RegExp(
+  `${upperCaseLetter}|(?:${wordBoundary})${lowerCaseLetter}`,
+  "gu"
+);
+
+/**
+ * The system's sluggification algorithm for labels and other terms.
+ * @param text - The text to sluggify
+ * @param [options.camel=null] The sluggification style to use
+ */
+function sluggify(text: string, { camel }: { camel: string | null } = { camel: null }): string {
+  if (typeof text !== "string") {
+    console.warn("Non-string argument passed to `sluggify`");
+    return "";
+  }
+
+  // A hyphen by its lonesome would be wiped: return it as-is
+  if (text === "-") return text;
+
+  if (camel === null)
+    return text
+      .replace(lowerCaseThenUpperCaseRE, "$1-$2")
+      .toLowerCase()
+      .replace(/['’]/g, "")
+      .replace(nonWordCharacterRE, " ")
+      .trim()
+      .replace(/[-\s]+/g, "-");
+
+  if (camel === "bactrian") {
+    const dromedary = sluggify(text, { camel: "dromedary" });
+    return dromedary.charAt(0).toUpperCase() + dromedary.slice(1);
+  }
+
+  if (camel === "dromedary")
+    return text
+      .replace(nonWordCharacterHyphenOrSpaceRE, "")
+      .replace(/[-_]+/g, " ")
+      .replace(upperOrWordBoundariedLowerRE, (part, index) =>
+        index === 0 ? part.toLowerCase() : part.toUpperCase()
+      )
+      .replace(/\s+/g, "");
+
+  throw new Error(`I'm pretty sure that's not a real camel: ${camel}`);
+}
+
+type SlugCamel = "dromedary" | "bactrian" | null;
+
+function formatSlug(slug: string): string;
+function formatSlug(slug: Maybe<string>): Maybe<string>;
+function formatSlug(slug: Maybe<string>) {
+  return capitalize(slug)?.replaceAll("-", " ");
+}
+
+function capitalize(input: string): string;
+function capitalize(input: Maybe<string>): Maybe<string>;
+function capitalize(input: Maybe<string>) {
+  if (!input) return input;
+  let i, j, str;
+  str = input.replace(/([^\W_]+[^\s-]*) */g, function (txt) {
+    return txt.charAt(0).toUpperCase() + txt.substring(1).toLowerCase();
+  });
+
+  // Certain minor words should be left lowercase unless
+  // they are the first or last words in the string
+  const lowers = [
+    "A",
+    "An",
+    "The",
+    "And",
+    "But",
+    "Or",
+    "For",
+    "Nor",
+    "As",
+    "At",
+    "By",
+    "For",
+    "From",
+    "In",
+    "Into",
+    "Near",
+    "Of",
+    "On",
+    "Onto",
+    "To",
+    "With",
+  ];
+  for (i = 0, j = lowers.length; i < j; i++)
+    str = str.replace(new RegExp("\\s" + lowers[i]! + "\\s", "g"), function (txt) {
+      return txt.toLowerCase();
+    });
+
+  // Certain words such as initialisms or acronyms should be left uppercase
+  const uppers = ["Id", "Tv"];
+  for (i = 0, j = uppers.length; i < j; i++)
+    str = str.replace(new RegExp("\\b" + uppers[i]! + "\\b", "g"), uppers[i]!.toUpperCase());
+
+  return str;
+}
+
+function exportToJSON({ type, data, label }: { type: string, data: unknown, label?: string }) {
+  const object = {
+    type,
+    data: data,
+    source: {
+      world: game.world.id,
+      system: game.system.id,
+      coreVersion: game.version,
+      systemVersion: game.system.version,
+    }
+  }
+  const filename = ["fvtt", sluggify(type), sluggify(label || (data as { label: string} | undefined)?.label || (data as { name: string } | undefined)?.name || "")].filterJoin("-");
+  saveDataToFile(JSON.stringify(object, null, 2), "application/json", `${filename}.json`);
+}
+
+// eslint-disable-next-line @typescript-eslint/no-unnecessary-type-parameters
+async function importFromJSON<T>({ name, type }: { name: string, type: string }): Promise<Maybe<{
+  type: string;
+  data: T;
+  source: {
+    world: string;
+    system: string;
+    coreVersion: string;
+    systemVersion: string;
+  };
+}>> {
+  const content = await renderTemplate("templates/apps/import-data.html", {
+    hint1: game.i18n.format("DOCUMENT.ImportDataHint1", { document: type }),
+    hint2: game.i18n.format("DOCUMENT.ImportDataHint2", { name: Handlebars.Utils.escapeExpression(name) })
+  });
+
+  return new Promise((resolve) => {
+    new Dialog({
+      title: `Import Data: ${name}`,
+      content,
+      buttons: {
+        import: {
+          icon: '<i class="fas fa-file-import"></i>',
+          label: "Import",
+          callback: html => {
+            const form = html.find("form")[0];
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+            if (!form?.data?.files?.length) {
+              //@ts-expect-error - This shouldn't be nullish but `AssumeHookRun` `ready: never` isn't working
+              return void ui.notifications.error("DOCUMENT.ImportDataError", { localize: true });
+            }
+            // eslint-disable-next-line @typescript-eslint/no-floating-promises, @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-member-access, @typescript-eslint/require-await
+            readTextFromFile(form.data.files[0]).then(async json => {
+              try {
+                // Create a document from the JSON data
+                const parsedJSON = JSON.parse(json) as {
+                  type: string;
+                  data: T;
+                  source: {
+                    world: string;
+                    system: string;
+                    coreVersion: string;
+                    systemVersion: string;
+                  };
+                };
+                if (parsedJSON.type !== type) {
+                  //@ts-expect-error - This shouldn't be nullish but `AssumeHookRun` `ready: never` isn't working
+                  ui.notifications.error(game.i18n.format("DOCUMENT.ImportDataErrorType", { type, got: parsedJSON.type }));
+                  resolve(null);
+                }
+
+                resolve(parsedJSON);
+              }
+              catch (error) {
+                //@ts-expect-error - This shouldn't be nullish but `AssumeHookRun` `ready: never` isn't working
+                ui.notifications.error("DOCUMENT.ImportDataErrorParse", { localize: true });
+                console.error(error);
+                resolve(null);
+              }
+            });
+          }
+        },
+        no: {
+          icon: '<i class="fas fa-times"></i>',
+          label: "Cancel"
+        }
+      },
+      default: "import"
+    }, {
+      width: 400
+    }).render(true);
+  })
+}
+
+// async function findItemInCompendium({ type, name, compendium }) {
+//     if (!type || !name) return undefined;
+//     const pack = (() => {
+//         if (game.packs.get(compendium)) return game.packs.get(compendium);
+//         switch (type) {
+//             case "move": return game.packs.get("ptu.moves");
+//             case "ability": return game.packs.get("ptu.abilities");
+//             case "capability": return game.packs.get("ptu.capabilities");
+//             case "species": return game.packs.get("ptu.species");
+//             case "item": return game.packs.get("ptu.items");
+//             case "edge": return game.packs.get("ptu.edges");
+//             case "feat": return game.packs.get("ptu.feats");
+//             case "effect": return game.packs.get("ptu.effects");
+//             default: throw new Error(`Unknown type: ${type}`);
+//         }
+//     })();
+
+//     const find = (items) => {
+//         return items?.find((item) => item.slug === sluggify(name) || item.name === name);
+//     }
+
+//     const indexed = find(pack.contents);
+//     if (indexed) return indexed;
+//     return find(await pack.getDocuments());
+
+// }
+
+// async function querySpeciesCompendium(filterQuery) {
+//     const pack = game.packs.get("ptu.species");
+//     const species = await pack.getDocuments();
+//     return species.filter(filterQuery);
+// }
+
+function isBracketedValue(value: unknown): value is BracketedValue {
+  return (
+    R.isPlainObject(value) &&
+    Array.isArray(value.brackets) &&
+    (typeof value.field === "string" || !("fields" in value))
+  );
+}
+
+/** Generate and return an HTML element for a FontAwesome icon */
+type FontAwesomeStyle = "solid" | "regular" | "duotone";
+
+function fontAwesomeIcon(
+  glyph: string,
+  { style = "solid", fixedWidth = false }: { style?: FontAwesomeStyle; fixedWidth?: boolean } = {}
+): HTMLElement {
+  const styleClass = `fa-${style}`;
+  const glyphClass = glyph.startsWith("fa-") ? glyph : `fa-${glyph}`;
+  const icon = document.createElement("i");
+  icon.classList.add(styleClass, glyphClass);
+  if (fixedWidth) icon.classList.add("fa-fw");
+
+  return icon;
+}
+
+/** Check if an element is present in the provided set. Especially useful for checking against literal sets */
+function setHasElement<T extends Set<unknown>>(set: T, value: unknown): value is SetElement<T> {
+  return set.has(value);
+}
+
+/** Does the parameter look like an image file path? */
+function isImageFilePath(path: unknown): path is ImageFilePath {
+  return typeof path === "string" && ImageHelper.hasImageExtension(path);
+}
+
+/** Does the parameter look like a video file path? */
+function isVideoFilePath(path: unknown): path is ImageFilePath {
+  return typeof path === "string" && VideoHelper.hasVideoExtension(path);
+}
+
+function isImageOrVideoPath(path: unknown): path is ImageFilePath | VideoFilePath {
+  return typeof path === "string" && (ImageHelper.hasImageExtension(path) || VideoHelper.hasVideoExtension(path));
+}
+
+/** Create a localization function with a prefixed localization object path */
+function localizer(prefix: string): (...args: Parameters<Localization["format"]>) => string {
+  return (...[suffix, formatArgs]: Parameters<Localization["format"]>) =>
+    formatArgs ? game.i18n.format(`${prefix}.${suffix}`, formatArgs) : game.i18n.localize(`${prefix}.${suffix}`);
+}
+
+/** Short form of type and non-null check */
+function isObject<T extends object>(value: unknown): value is DeepPartial<T>;
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+function isObject<T extends object>(value: unknown): value is Record<string, unknown>;
+function isObject<T extends string>(value: unknown): value is { [K in T]?: unknown };
+function isObject(value: unknown): boolean {
+  return typeof value === "object" && value !== null;
+}
+
+function isItemUUID(uuid: unknown): uuid is ItemUUID {
+  if (typeof uuid !== "string") return false;
+  if (/^(?:Actor\.[a-zA-Z0-9]{16}\.)?Item\.[a-zA-Z0-9]{16}$/.test(uuid)) {
+    return true;
+  }
+
+  const [type, scope, packId, id] = uuid.split(".");
+  if (type !== "Compendium") return false;
+  if (!(scope && packId && id)) throw Error(`Unable to parse UUID: ${uuid}`);
+
+  const pack = game.packs.get(`${scope}.${packId}`);
+  return pack?.documentName === "Item";
+}
+
+function isTokenUUID(uuid: unknown) {
+  return (
+    typeof uuid === "string" && /^Scene\.[A-Za-z0-9]{16}\.Token\.[A-Za-z0-9]{16}$/.test(uuid)
+  );
+}
+
+function sortStringRecord(record: Record<string, string>) {
+  return Object.fromEntries(
+    Object.entries(record)
+      .map((entry) => {
+        entry[1] = game.i18n.localize(entry[1]);
+        return entry;
+      })
+      .sort((a, b) => a[1].localeCompare(b[1], game.i18n.lang))
+  );
+}
+
+// /**
+//  * @param uuid The UUID of the item to get and first search param
+//  * @param name The name of the item to get and second search param, type required to succeed
+//  * @param type The type of the item required for name search
+//  * @param item Original item to derrive search params from
+//  */
+// async function getItemFromCompendium({ uuid, name, type, item }) {
+//     let found = null;
+//     if (uuid) {
+//         found = await fromUuid(uuid);
+//     }
+//     if (!found && name && type) {
+//         found = await findItemInCompendium({ name, type });
+//     }
+//     if (!found && item) {
+//         found = await getItemFromCompendium({ uuid: item.flags?.core?.sourceId, name: item.name, type: item.type });
+//     }
+//     return found;
+// }
+
+/** Check if a value is present in the provided array. Especially useful for checking against literal tuples */
+function tupleHasValue<const A extends readonly unknown[]>(
+  array: A,
+  value: unknown
+): value is A[number] {
+  return array.includes(value);
+}
+
+/** Create a "reduced" item name; that is, one without an "Effect:" or similar prefix */
+function reduceItemName(label: string): string {
+  return label.includes(":") ? label.replace(/^[^:]+:\s*|\s*\([^)]+\)$/g, "") : label;
+}
+
+let intlNumberFormat: Intl.NumberFormat | undefined;
+/**
+ * Return an integer string of a number, always with sign (+/-)
+ * @param value The number to convert to a string
+ * @param options.emptyStringZero If the value is zero, return an empty string
+ * @param options.zeroIsNegative Treat zero as a negative value
+ */
+function signedInteger(
+  value: number,
+  { emptyStringZero = false, zeroIsNegative = false } = {}
+): string {
+  if (value === 0 && emptyStringZero) return "";
+  const nf = (intlNumberFormat ??= new Intl.NumberFormat(game.i18n.lang, {
+    maximumFractionDigits: 0,
+    signDisplay: "always",
+  }));
+  const maybeNegativeZero = zeroIsNegative && value === 0 ? -0 : value;
+
+  return nf.format(maybeNegativeZero);
+}
+
+const SORTABLE_BASE_OPTIONS: Sortable.Options = {
+  animation: 200,
+  direction: "vertical",
+  dragClass: "drag-preview",
+  dragoverBubble: true,
+  easing: "cubic-bezier(1, 0, 0, 1)",
+  fallbackOnBody: true,
+  ghostClass: "drag-gap",
+  // group: "inventory",
+  // filter: "div.item-summary",
+  // preventOnFilter: false,
+  // swapThreshold: 0.25,
+
+  // // These options are from the Autoscroll plugin and serve as a fallback on mobile/safari/ie/edge
+  // // Other browsers use the native implementation
+  // scroll: true,
+  // scrollSensitivity: 30,
+  // scrollSpeed: 15,
+
+  // delay: 500,
+  // delayOnTouchOnly: true,
+};
+
+/**
+ * Converts a possible UUID string to an embedded UUID string if it is a valid UUID
+ */
+function maybeUuidStringToUuidEmbed(uuid: string) {
+  const result = uuid ? foundry.utils.parseUuid(uuid) : null;
+  if (result?.id) {
+    return `@UUID[${uuid}]`;
+  }
+  return uuid;
+}
+
+/**
+ * Check if a key is present in a given object in a type safe way
+ *
+ * @param obj The object to check
+ * @param key The key to check
+ */
+function objectHasKey<O extends object>(obj: O, key: unknown): key is keyof O {
+  return (typeof key === "string" || typeof key === "number") && key in obj;
+}
+
+/**
+ * Wrap a callback in a debounced timeout.
+ * Delay execution of the callback function until the function has not been called for delay milliseconds
+ * @param {Function} callback       A function to execute once the debounced threshold has been passed
+ * @param {number} delay            An amount of time in milliseconds to delay
+ * @return {Function}               A wrapped function which can be called to debounce execution
+ */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function debounceAsync<T = any>(callback: () => T, delay: number): (...args: any[]) => Promise<T> {
+  let timeoutId: number | null = null;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  return function (...args: any[]) {
+    return new Promise((resolve) => {
+      //@ts-expect-error - This is a valid check
+      clearTimeout(timeoutId);
+      //@ts-expect-error - This is a valid check
+      timeoutId = setTimeout(() => {
+        //@ts-expect-error - This is a valid check
+        resolve(callback.apply(this, args));
+      }, delay);
+    });
+  };
+}
+
+/**
+   * Define a simple migration from one field name to another.
+   * The value of the data can be transformed during the migration by an optional application function.
+   * @param {object} data     The data object being migrated
+   * @param {string} oldKey   The old field name
+   * @param {string} newKey   The new field name
+   * @param {function(data: object): any} [apply] An application function, otherwise the old value is applied
+   * @returns {boolean}       Whether a migration was applied.
+   * @internal
+   */
+function _addDataFieldMigration(data: Record<string, unknown>, oldKey: string, newKey: string, apply?: (data: Record<string, unknown>) => unknown): boolean {
+  if (!foundry.utils.hasProperty(data, newKey) && foundry.utils.hasProperty(data, oldKey)) {
+    const prop = Object.getOwnPropertyDescriptor(data, oldKey);
+    if (prop && !prop.writable) return false;
+    foundry.utils.setProperty(data, newKey, apply ? apply(data) : foundry.utils.getProperty(data, oldKey));
+    delete data[oldKey];
+    return true;
+  }
+  return false;
+}
+
+function erfcinv(p: number) {
+  let j = 0;
+  let x, err;
+  if (p >= 2)
+    return -100;
+  if (p <= 0)
+    return 100;
+  const pp = (p < 1) ? p : 2 - p;
+  const t = Math.sqrt(-2 * Math.log(pp / 2));
+  x = -0.70711 * ((2.30753 + t * 0.27061) /
+    (1 + t * (0.99229 + t * 0.04481)) - t);
+  for (; j < 2; j++) {
+    err = erfc(x) - pp;
+    const precisionConstant = 1.1283791670955126;
+    x += err / (precisionConstant * Math.exp(-x * x) - x * err);
+  }
+  return (p < 1) ? x : -x;
+}
+
+function erfc(x: number) {
+  return 1 - erf(x);
+}
+
+function erf(x: number) {
+  const cof = [Number("-1.3026537197817094"), Number("6.4196979235649026e-1"), Number("1.9476473204185836e-2"),
+  -9.561514786808631e-3, -9.46595344482036e-4, 3.66839497852761e-4,
+    4.2523324806907e-5, -2.0278578112534e-5, -1.624290004647e-6,
+    1.303655835580e-6, 1.5626441722e-8, -8.5238095915e-8,
+    6.529054439e-9, 5.059343495e-9, -9.91364156e-10,
+  -2.27365122e-10, 9.6467911e-11, 2.394038e-12,
+  -6.886027e-12, 8.94487e-13, 3.13092e-13,
+  -1.12708e-13, 3.81e-16, 7.106e-15,
+  -1.523e-15, -9.4e-17, 1.21e-16,
+  -2.8e-17
+  ];
+  let j = cof.length - 1;
+  let isneg = false;
+  let d = 0;
+  let dd = 0;
+  let tmp;
+
+  if (x < 0) {
+    x = -x;
+    isneg = true;
+  }
+
+  const t = 2 / (2 + x);
+  const ty = 4 * t - 2;
+
+  for (; j > 0; j--) {
+    tmp = d;
+    d = ty * d - dd + cof[j]!;
+    dd = tmp;
+  }
+
+  const res = t * Math.exp(-x * x + 0.5 * (cof[0]! + ty * d) - dd);
+  return isneg ? res - 1 : 1 - res;
+}
+
+function NORMINV(p: number, mean: number, std: number) {
+  const sqrt2 = Math.SQRT2;
+  const pFix = p >= 1 ? 0.9999999999 : p <= 0 ? 0.0000000001 : p;
+  return -sqrt2 * std * erfcinv(2 * pFix) + mean;
+}
+
+export {
+  fontAwesomeIcon,
+  formatSlug,
+  isBracketedValue,
+  isItemUUID,
+  isObject,
+  isTokenUUID,
+  reduceItemName,
+  signedInteger,
+  sluggify,
+  sortStringRecord,
+  tupleHasValue,
+  capitalize,
+  SORTABLE_BASE_OPTIONS,
+  maybeUuidStringToUuidEmbed,
+  objectHasKey,
+  debounceAsync,
+  _addDataFieldMigration as addDataFieldMigration,
+  localizer,
+  setHasElement,
+  isImageFilePath,
+  isVideoFilePath,
+  isImageOrVideoPath,
+  NORMINV,
+  exportToJSON,
+  importFromJSON
+};
+export type { FontAwesomeStyle, SlugCamel };

@@ -6,12 +6,4 @@ export class ActorPTR2e extends Actor {
   isKnown(): this is Actor.Known {
     return !this.type.includes(".") && !this.type.includes("ptu-actor");
   }
-
-  get asdf() {
-    return this.ofType("humanoid")
-      ? this.system.asdf
-      : this.isKnown()
-        ? this.system.value
-        : null
-  }
 }
