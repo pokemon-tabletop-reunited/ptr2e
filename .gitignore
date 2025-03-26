@@ -1,3 +1,26 @@
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions
+
+# Swap the comments on the following lines if you wish to use zero-installs
+# In that case, don't forget to run `yarn config set enableGlobalCache false`!
+# Documentation here: https://yarnpkg.com/features/caching#zero-installs
+
+#!.yarn/cache
+.pnp.*
+
+node_modules
+vite.config.ts.timestamp-*-*.mjs
+dist
+
+# In build mode the TypeScript compiler forces sub-project state to be emitted.
+# This is in the gitignore because they're never useful files and ideally would be hidden.
+.typescript-build
+
+
 # IDE
 .idea/
 .vscode/
@@ -39,3 +62,5 @@ temp.json
 
 .vscode/
 json-assets/
+
+backup/

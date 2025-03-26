@@ -1,42 +1,72 @@
-import globals from "globals";
-import pluginJs from "@eslint/js";
-import tseslint from "typescript-eslint";
+// @ts-check
+import js from "@eslint/js";
+import ts from "typescript-eslint";
+import prettierEslint from "eslint-config-prettier";
+import tsdoc from "eslint-plugin-tsdoc";
+import * as importPlugin from "eslint-plugin-import-x";
+import { includeIgnoreFile } from "@eslint/compat";
 
-export default [
+import * as path from "path";
+
+export default ts.config(
+  js.configs.recommended,
+  ...ts.configs.strictTypeChecked,
+  prettierEslint,
+  importPlugin.flatConfigs.recommended,
+
+  // Automatically includes the .gitignore file in ESLint's ignore list.
+  // I find this the most intuitive behavior.
+  includeIgnoreFile(path.resolve(import.meta.dirname, ".gitignore")),
   {
-    "plugins": { "html": {} }
-  },
-  { files: ["**/*.{js,mjs,cjs,ts}"] },
-  { files: ["**/*.js"], languageOptions: { sourceType: "script" } },
-  { languageOptions: { globals: globals.browser } },
-  pluginJs.configs.recommended,
-  {
+    languageOptions: {
+      ecmaVersion: 2023,
+      parserOptions: {
+        projectService: true,
+        tsconfigRootDir: import.meta.dirname,
+      },
+    },
+    ignores: [".yarn"],
+    plugins: {
+      tsdoc,
+    },
+    settings: {
+      "import-x/resolver": "typescript",
+    },
     rules: {
-      "no-prototype-builtins": "off",
-    }
+      // Avoiding `any` is good practice in TypeScript
+      // Many users of TypeScript struggle to avoid `any` though and this rule helps make sure they do.
+      // `foundry-vtt-types` ships with common helper types like `AnyObject`, `AnyArray`, `AnyFunction`, etc.
+      // If you're still having problems feel free to ask for help avoiding `any` on the League Of Extraordinary developers Discord.
+      // However if you an very experienced user of TypeScript there are some niche uses of `any` and you can disable this rule, though using a `eslint-ignore` directive would be recommended.
+      // "@typescript-eslint/no-explicit-any": "off",
+
+      "@typescript-eslint/no-unused-vars": [
+        "error",
+        // Ignore unused parameters and caught errors that are prefixed with an underscore.
+        // These are generally the two cases where throwing away a variable makes sense.
+        {
+          argsIgnorePattern: "^_",
+          caughtErrorsIgnorePattern: "^_",
+        },
+      ],
+
+      "@typescript-eslint/restrict-template-expressions": [
+        "error",
+        {
+          allowBoolean: true,
+          allowNumber: true,
+        },
+      ],
+
+      "@typescript-eslint/no-namespace": ["error", { allowDeclarations: true }],
+
+      "tsdoc/syntax": "warn",
+    },
   },
-  ...tseslint.configs.strict,
   {
+    files: ["**/*.js"],
     rules: {
-      "@typescript-eslint/no-unsafe-declaration-merging": "off",
-      "@typescript-eslint/no-non-null-assertion": "off",
-      "@typescript-eslint/no-invalid-void-type": "off",
-      "@typescript-eslint/no-dynamic-delete": "off",
-    }
+      "tsdoc/syntax": "off",
+    },
   },
-  ...tseslint.configs.stylistic,
-  {
-    rules: {
-      "@typescript-eslint/no-empty-interface": "off",
-      "@typescript-eslint/no-extraneous-class": "off",
-      "@typescript-eslint/class-literal-property-style": "off",
-      "@typescript-eslint/ban-ts-comment": ["error", {
-        "ts-expect-error": "allow-with-description",
-        "ts-ignore": true,
-        "ts-nocheck": false,
-        "ts-check": false,
-        minimumDescriptionLength: 10,
-      }],
-    }
-  }
-];
+);
