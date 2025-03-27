@@ -6,7 +6,7 @@
     "number": 384,
     "size": {
       "category": "gigantic",
-      "type": "length",
+      "type": "height",
       "height": 7,
       "weight": 206.5
     },
@@ -692,5 +692,264 @@
     }
   },
   "_id": "sNc45Kp3GYTWr6OZ",
-  "effects": []
+  "effects": [
+    {
+      "name": "Mega Rayquaza",
+      "type": "form",
+      "_id": "eECbzZWxVWXezgOi",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-option",
+            "key": "manual-forme-toggle",
+            "value": "forme:mega-rayquaza:active",
+            "domain": "all",
+            "toggleable": true,
+            "label": "Toggle: Mega Rayquaza Forme",
+            "predicate": [],
+            "alwaysActive": false,
+            "count": false,
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "suboptions": [],
+            "state": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-rayquaza:active"
+            ],
+            "key": "system.details.size.height",
+            "value": 3.8,
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-rayquaza:active"
+            ],
+            "key": "system.details.size.weight",
+            "value": 185.5,
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "grant-item",
+            "predicate": [
+              "forme:mega-rayquaza:active"
+            ],
+            "key": "",
+            "value": "Compendium.ptr2e.core-abilities.Item.s5NucqHPK1dgvfMd",
+            "allowDuplicate": false,
+            "reevaluateOnUpdate": true,
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "system.free",
+                "value": "true"
+              }
+            ],
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "inMemoryOnly": false,
+            "track": false,
+            "replaceSelf": false,
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            }
+          },
+          {
+            "type": "remove-trait",
+            "predicate": [
+              "forme:mega-rayquaza:active"
+            ],
+            "key": "",
+            "value": "glow 2",
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "add-trait",
+            "predicate": [
+              "forme:mega-rayquaza:active"
+            ],
+            "key": "",
+            "value": "glow 3",
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-rayquaza:active"
+            ],
+            "key": "system.movement.flight.value",
+            "value": 5,
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "stats-alteration",
+            "predicate": [
+              "forme:mega-rayquaza:active"
+            ],
+            "key": "",
+            "value": 0,
+            "hp": null,
+            "atk": 30,
+            "def": 10,
+            "spa": 30,
+            "spd": 10,
+            "spe": 20,
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-rayquaza:active"
+            ],
+            "key": "system.movement.overland.value",
+            "value": 1,
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-rayquaza:active"
+            ],
+            "key": "system.skills.flying.value",
+            "value": 15,
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-rayquaza:active"
+            ],
+            "key": "system.skills.intimidate.value",
+            "value": 20,
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-rayquaza:active"
+            ],
+            "key": "system.skills.lift.value",
+            "value": 20,
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-rayquaza:active"
+            ],
+            "key": "system.skills.navigate.value",
+            "value": 20,
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-rayquaza:active"
+            ],
+            "key": "system.skills.dragon.value",
+            "value": 15,
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-rayquaza:active"
+            ],
+            "key": "system.skills.legendary.value",
+            "value": 20,
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-rayquaza:active"
+            ],
+            "key": "system.skills.survival.value",
+            "value": 20,
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-rayquaza:active"
+            ],
+            "key": "system.skills.track.value",
+            "value": 20,
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0,
+        "trigger": "manual",
+        "conditions": []
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "1.1.2.beta",
+        "createdTime": 1743028333130,
+        "modifiedTime": 1743077733430,
+        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
+      }
+    }
+  ]
 }
