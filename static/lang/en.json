@@ -23,6 +23,9 @@
   "ITEM.DeleteButton": "Delete",
   "SETTINGS.TutorList": "Manage Tutor Lists",
   "SETTINGS.Github": "Manage Github PR",
+  "SETTINGS.GlobalPerkConfig": "Perk Generator Configs",
+  "DOCUMENT.ImportDataErrorType": "The imported data is not of the correct type. Looking for {type}, but got {got}.",
+  "DOCUMENT.ImportDataErrorParse": "An error occurred while parsing the imported data. Please ensure it is valid JSON.",
   "PTR2E": {
     "BrowserSettingsSaved": "Settings have been saved",
     "Keybindings": {
@@ -151,7 +154,7 @@
           "hint": "Label for this Configuration when shown in the Global Configs list."
         },
         "link": {
-          "label": "Sync with Global Config?",
+          "label": "Linked",
           "hint": "Should this configuration's settings be synchronized with its version in the Global Configuration?"
         },
         "priorities": {
@@ -173,6 +176,12 @@
             "perk": "Perk"
           }
         }
+      },
+      "Global": {
+        "Delete": {
+          "Title": "Delete config: {name}", 
+          "Content": "Are you sure you wish to delete config: {name}?"
+        }
       }
     },
     "CompendiumBrowser": {
@@ -185,7 +194,7 @@
       "Purchase": {
         "NotControlledToken": "Please make sure to select a token you control or make sure you have a Player Character set on your User.",
         "ItemNotFound": "Oops. We could not load the item to purchase.",
-        "NoCost":"This item doesn't have an IP cost so cannot be purchased.",
+        "NoCost": "This item doesn't have an IP cost so cannot be purchased.",
         "NotEnoughIP": "You do not have enough IP to purchase this item. (Required: {required}, Current: {current})",
         "Success": "{actor} successfully purchased {item} for {cost} IP. (Remaining IP: {remaining})",
         "RarityWarning": "Items of higher rarity than 'Common' are normally not obtainable through IP!"
@@ -298,7 +307,8 @@
         }
       },
       "title": "EXP / Venture Tracker",
-      "hint": "Open EXP / Venture Tracker"
+      "hint": "Open EXP / Venture Tracker",
+      "NoPermission": "Currently only GMs can use this application."
     },
     "CircumstanceModifiers": {
       "CustomEntry": {
@@ -989,7 +999,7 @@
           "choice-locked": "While Choice-Locked, a creature may only use the last attack or action it used. A creature with the Choice-Locked affliction cannot gain further stacks of Choice-Locked in any way.",
           "grounded": "While Grounded, creatures become unable to use their [Flight] movement, nor can they be Lifted or Raised and have those effects removed.",
           "cursed": "While Cursed, an afflicted creature loses three ticks of HP at the end of each of their Activations.",
-          "true-sight": "The afflicted creature ignores invisibility and illusions.",
+          "true-sight": "<p>The afflicted creature ignores invisibility and illusions.</p><p>Additionally, the user's Normal- and Fighting-Type attacks can hit Ghost-Type creatures, and the user's Ghost-Type attacks can hit Normal-Type creatures.</p>",
           "shrink": "The afflicted creature’s Size Category is reduced by one.",
           "enlarge": "The afflicted creature’s Size Category is increased by one.",
           "marked": "While Marked, all creatures unallied to the afflicted creature and within 8m of it can only target the Marked creature with their attacks. Whenever the creature with Marked is hit by an Attack, reduce the Stack Value of its Marked by 1.",
@@ -1006,9 +1016,9 @@
           "charmed": "The afflicted creature believes the source of Infatuation is a dear friend or romantic interest. Afflicted creatures have a 50% chance of being unable to target the source of their infatuation with an attack, and have -2 EVA Stages against attacks from the source of their infatuation.",
           "taunted": "The afflicted creature does 33% less damage to creatures other than the source of Taunted. The afflicted creature cannot use Status-category attacks for the duration of Taunted.",
           "grapple": "The afflicted creature possesses -1 default ACC and EVA and may only take Actions with the [Grapple] trait. Creatures that are not in control of a Grapple are also Bound. A creature in control of the Grapple can take a Free Action on their turn to end their participation in Grapple. The creature in control of the Grapple is treated as having the non-in-control creature(s) as being Mounted on itself.<br>If an afflicted creature is the only participant of a Grapple, they lose this Affliction.",
-          "boosted": "An afflicted creature gains +1 default ATK and SPATK Stages.",
-          "resolved": "An afflicted creature gains +1 default DEF and SPDEF Stages.",
-          "rapid": "A creature afflicted with Rapid may perform Complex Actions as Simple Actions OR [Exhaust] Actions are performed as though they lack the Trait OR [Set Up] Actions set up and resolve on the same activation, spending 50% more PP on all Actions (minimum +2). The creature has its Initiative delayed by 50% after its Activation and loses -1 EVA Stages for 3 Activations. You may not make more than one Attack targeting enemies per activation.",
+          "boosted": "An afflicted creature has the Power of its Physical- and Special-Category Attacks increase by 20%.",
+          "resolved": "An afflicted creature takes 20% more damage from Physical- and Special-Category Attacks.",
+          "rapid": "A creature afflicted with Rapid may perform [Exhaust] Actions as though they lack the Trait AND resolve [Set Up] Actions on the same activation they are set up.",
           "strong": "While afflicted with Strong, the Power of the creature's Attacks are increased by +20% and has its Initiative delayed by 20% after its Activation.",
           "agile": "While afflicted with Agile, Power of the creature's Attacks are decreased by -20% and has its Initiative advanced by 20% after its Activation.",
           "precise": "While afflicted with Precise, the creature has +1 default ACC and has its Initiative delayed by 20% after its Activation.",
@@ -2112,6 +2122,10 @@
         "biography": {
           "label": "Biography",
           "hint": "A free form field to store any details about this character."
+        },
+        "device": {
+          "label": "Capture Device",
+          "hint": "The type of Pokéball (/capture device) this Creature is caught in. (this field has no automation associated with it.)"
         }
       },
       "publication": {
@@ -3263,6 +3277,9 @@
     },
     "DistanceToTarget": {
       "Hint": "When clicked, outputs the distance between current selected token and all targeted tokens to chat."
-    }
+    },
+    "Save": "Save",
+    "Link": "Link",
+    "Unlink": "Unlink"
   }
 }

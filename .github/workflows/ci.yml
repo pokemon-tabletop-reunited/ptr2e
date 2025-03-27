@@ -5,9 +5,14 @@ on:
     push:
         branches: [Stable]
     workflow_dispatch:
+    merge_group:
+        branches: [Stable, Staging]
+    pull_request:
+        branches: [Stable]
+        types: [opened, synchronize, reopened]
 jobs:
     build:
-        if: github.event.review.state == 'approved' || github.event_name == 'push' || github.event_name == 'workflow_dispatch'
+        if: github.event.review.state == 'approved' || github.event_name == 'push' || github.event_name == 'workflow_dispatch' || (github.event_name == 'pull_request' && github.event.pull_request.draft == false) || github.event_name == 'merge_group'
         runs-on: ubuntu-latest
         steps:
             - uses: actions/checkout@v4

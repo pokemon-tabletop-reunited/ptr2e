@@ -6,27 +6,23 @@
       "trait:dark"
     ],
     "cost": 2,
-    "description": "<p>You create a 3m radius bubble of Darkness aroud you. You are considered to have 3 stages of Cover versus Ranged Attacks for 3 Activations.</p>",
+    "description": "<p>You create a 3m radius bubble of Darkness around you that moves with you. Attacks against you from creatures without special senses that allow them to detect you are treated as though you have Heavy Cover (+2 Evasion Stages ad-hoc).</p>",
     "actions": [
       {
         "name": "Shadow Bubble",
         "slug": "shadow-bubble",
-        "description": "<p>You create a 3m radius bubble of Darkness aroud you. You are considered to have 3 stages of Cover versus Ranged Attacks for 3 Activations.</p>",
+        "description": "<p>You create a 3m radius bubble of Darkness around you that moves with you. Attacks against you from creatures without special senses that allow them to detect you are treated as though you have Heavy Cover (+2 Evasion Stages ad-hoc).</p>",
         "cost": {
           "activation": "complex",
-          "powerPoints": 3,
-          "delay": null,
-          "priority": null
+          "powerPoints": 3
         },
         "type": "generic",
         "traits": [],
-        "img": "icons/svg/explosion.svg",
+        "img": "systems/ptr2e/img/svg/dark_icon.svg",
         "range": {
           "target": "enemy",
-          "unit": "m",
-          "distance": 0
-        },
-        "variant": null
+          "unit": "m"
+        }
       }
     ],
     "slug": "shadow-bubble",
@@ -58,21 +54,19 @@
       }
     ],
     "autoUnlock": [],
-    "originSlug": null,
-    "variant": null,
-    "mode": null,
     "global": true,
     "webs": [],
     "design": {
       "arena": "mental",
       "approach": "power",
-      "archetype": "[Dark]"
+      "archetype": "dark"
     },
     "publication": {
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
+      ],
+      "notes": ""
     }
   },
   "_id": "A182pJvsuUmdsxeR",
