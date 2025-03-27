@@ -126,11 +126,11 @@ class ActorPTR2e<
 
   get combatant(): CombatantPTR2e | null {
     const combatants = (game.combat as CombatPTR2e | undefined)?.combatants.filter(
-      (c) => c.actor === this
+      (c) => c.actor?._id === this._id
     );
     return combatants?.length
       ? combatants.length > 1
-        ? combatants.find((c) => c.actor === this) ?? null
+        ? combatants.find((c) => c.actor === this) ?? combatants[0] ?? null
         : combatants[0]
       : null;
   }
