@@ -1256,7 +1256,47 @@
       "turns": 5
     },
     "system": {
-      "changes": [],
+      "changes": [
+        {
+          "type": "alter-attack",
+          "key": "normal-attack",
+          "value": "ignore-type-immunity",
+          "predicate": [],
+          "mode": 2,
+          "priority": null,
+          "ignored": false,
+          "property": "traits",
+          "definition": [
+            "target:trait:ghost"
+          ]
+        },
+        {
+          "type": "alter-attack",
+          "key": "fighting-attack",
+          "value": "ignore-type-immunity",
+          "predicate": [],
+          "mode": 2,
+          "priority": null,
+          "ignored": false,
+          "property": "traits",
+          "definition": [
+            "target:trait:ghost"
+          ]
+        },
+        {
+          "type": "alter-attack",
+          "key": "ghost-attack",
+          "value": "ignore-type-immunity",
+          "predicate": [],
+          "mode": 2,
+          "priority": null,
+          "ignored": false,
+          "property": "traits",
+          "definition": [
+            "target:trait:normal"
+          ]
+        }
+      ],
       "formula": null,
       "type": null,
       "removeOnRecall": false,
@@ -1442,7 +1482,7 @@
         {
           "type": "basic",
           "key": "system.battleStats.accuracy.stage",
-          "value": 1,
+          "value": -1,
           "predicate": [],
           "label": "Fear - targeting Source",
           "mode": 2,

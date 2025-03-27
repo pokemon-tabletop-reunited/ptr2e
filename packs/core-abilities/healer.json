@@ -12,18 +12,19 @@
         "slug": "healer",
         "type": "passive",
         "cost": {
-          "activation": "free"
+          "activation": "free",
+          "trigger": "Trigger: The user ends their Activation."
         },
         "range": {
-          "target": "allied-aura",
+          "target": "emanation",
           "distance": 5,
           "unit": "m"
         },
-        "description": "<p>Effect: The user and allies within range recover from Major Status Afflictions at twice the normal rate, removing 2 stacks at the end of the Activation instead of 1.</p>",
-        "img": "icons/svg/explosion.svg"
+        "description": "<p>Trigger: The user ends their Activation.</p><p>Effect: The user and allies within range have a 30% chance of being cured of all of their @Trait[major-affliction]s.</p>",
+        "img": "icons/magic/life/cross-worn-green.webp"
       }
     ],
-    "description": "<p>Effect: The user and allies within range recover from Major Status Afflictions at twice the normal rate, removing 2 stacks at the end of the Activation instead of 1.</p>",
+    "description": "<p>Trigger: The user ends their Activation.</p><p>Effect: The user and allies within range have a 30% chance of being cured of all of their @Trait[major-affliction]s.</p>",
     "traits": [
       "aura"
     ],
@@ -36,7 +37,8 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
+      ],
+      "notes": ""
     }
   },
   "_id": "cEAOUdK51hPAaOtP",

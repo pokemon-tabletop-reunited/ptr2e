@@ -1,0 +1,100 @@
+{
+  "name": "Moon-Kissed Blade (Effect)",
+  "type": "effect",
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": {
+        "schema": 0.109,
+        "foundry": "12.331",
+        "system": "1.1.0.beta"
+      }
+    },
+    "slug": "moon-kissed-blade",
+    "publication": {
+      "source": "PTR 2e Digimon Supplement - Digi Dex",
+      "authors": [
+        "PTR 2e Team",
+        "Gwen"
+      ],
+      "notes": ""
+    },
+    "traits": []
+  },
+  "img": "systems/ptr2e/img/svg/fairy_icon.svg",
+  "effects": [
+    {
+      "name": "Moon-Kissed Blade",
+      "type": "passive",
+      "_id": "YQYk3dQAjX6XIDpM",
+      "img": "https://assets.forge-vtt.com/6132db9efd99d052c06b70e3/systems/ptr2e/img/svg/fairy_icon.svg",
+      "system": {
+        "changes": [
+          {
+            "type": "percentile-modifier",
+            "key": "fairy-attack-power",
+            "value": 10,
+            "predicate": [],
+            "label": "Moon-Kissed Blade Dark",
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "hideIfDisabled": false
+          },
+          {
+            "type": "percentile-modifier",
+            "key": "water-attack-power",
+            "value": 10,
+            "predicate": [],
+            "label": "Moon-Kissed Blade Water",
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "hideIfDisabled": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "duplicateSource": null,
+        "compendiumSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "1.1.0.beta",
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      }
+    }
+  ],
+  "flags": {
+    "exportSource": {
+      "world": "ptr-test",
+      "system": "ptr2e",
+      "coreVersion": "12.331",
+      "systemVersion": "1.1.0.beta"
+    }
+  },
+  "_id": "2ZXLjaOzPUCMOjUL"
+}
