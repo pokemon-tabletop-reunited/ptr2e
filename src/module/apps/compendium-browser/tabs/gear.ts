@@ -55,7 +55,7 @@ export class CompendiumBrowserGearTab extends CompendiumBrowserTab {
           flingTypes.add(gearData.system.fling.type);
         }
 
-        const pubSource = (gearData.system.publication.source ?? "").trim()
+        const pubSource = (gearData.system.publication?.source ?? "").trim()
         publications.add(pubSource);
 
         gear.push({

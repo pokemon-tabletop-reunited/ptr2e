@@ -273,7 +273,8 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
         dex: new CollectionField(new fields.SchemaField({
           slug: new fields.StringField({ required: true, nullable: false }),
           state: new fields.StringField({ required: true, nullable: false, initial: "unknown", choices: ["unknown", "seen", "caught", "shiny"] }),
-        }))
+        })),
+        device: new fields.StringField({required: true, blank: true, initial: "", label: "PTR2E.FIELDS.details.device.label", hint: "PTR2E.FIELDS.details.device.hint" }),
       }),
       inventory: new fields.SchemaField({
         held: new fields.SchemaField({
