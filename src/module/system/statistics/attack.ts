@@ -127,6 +127,10 @@ class AttackStatistic extends Statistic {
     this.attack = attack;
   }
 
+  getCheck(targetData?: ActorPTR2e | null ): AttackCheck<this> {
+    return this.#check ??= new AttackCheck(this, this.data, this.config, targetData);
+  }
+
   override get check(): AttackCheck<this> {
     return this.#check ??= new AttackCheck(this, this.data, this.config);
   }
@@ -141,7 +145,7 @@ class AttackCheck<TParent extends AttackStatistic = AttackStatistic> implements 
   modifiers: ModifierPTR2e[];
   additionalOptions: Set<string>;
 
-  constructor(parent: TParent, data: StatisticData, config: RollOptionConfig = {}) {
+  constructor(parent: TParent, data: StatisticData, config: RollOptionConfig = {}, targetData?: ActorPTR2e | null) {
     this.parent = parent;
     data.check = fu.mergeObject(data.check ?? {}, { type: this.type });
 
@@ -163,7 +167,7 @@ class AttackCheck<TParent extends AttackStatistic = AttackStatistic> implements 
     const parentModifiers = parent.modifiers.map((modifier) => modifier.clone());
     const checkOnlyModifiers = [
       data.check?.modifiers ?? [],
-      extractModifiers(parent.actor.synthetics, data.check?.domains ?? []),
+      extractModifiers(parent.actor.synthetics, data.check?.domains ?? [], {resolvables: { target: targetData }}),
     ]
       .flat()
       .map((modifier) => {

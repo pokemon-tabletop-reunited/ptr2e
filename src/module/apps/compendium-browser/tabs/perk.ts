@@ -8,7 +8,7 @@ export class CompendiumBrowserPerkTab extends CompendiumBrowserTab {
   filterData: PerkFilters;
   templatePath = "systems/ptr2e/templates/apps/compendium-browser/tabs/perk.hbs";
 
-  override searchFields = ["name", "description"];
+  override searchFields = ["name", "description", "prerequisites"];
   override storeFields = ["type", "name", "img", "uuid", "traits", "description", "cost", "prerequisites", "global", "source"];
 
   constructor(browser: CompendiumBrowser) {
@@ -51,7 +51,7 @@ export class CompendiumBrowserPerkTab extends CompendiumBrowserTab {
           prerequisites.add(prereq);
         }
 
-        const pubSource = (perkData.system.publication.source ?? "").trim()
+        const pubSource = (perkData.system.publication?.source ?? "").trim()
         publications.add(pubSource);
 
         perks.push({
