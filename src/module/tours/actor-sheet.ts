@@ -156,7 +156,8 @@ export class ActorSheetTour extends PTRTour {
               }
             ]
           }
-        ]
+        ],
+        ownership: { [game.user.id]: CONST.DOCUMENT_OWNERSHIP_LEVELS.OWNER, default: CONST.DOCUMENT_OWNERSHIP_LEVELS.OBSERVER }
       }, { temporary: true });
     }
 

@@ -32,7 +32,8 @@
       "winged",
       "legendary",
       "zapper",
-      "glow-3"
+      "glow-3",
+      "fully-evolved"
     ],
     "abilities": {
       "starting": [
@@ -107,6 +108,14 @@
         "group": null
       },
       {
+        "slug": "legendary",
+        "value": 35,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
         "slug": "lift",
         "value": 50,
         "rvs": 0,
@@ -145,14 +154,6 @@
         "favourite": false,
         "hidden": false,
         "group": null
-      },
-      {
-        "slug": "legendary",
-        "value": 35,
-        "rvs": 0,
-        "favourite": false,
-        "hidden": false,
-        "group": "occult"
       },
       {
         "slug": "running",
@@ -205,209 +206,13 @@
       "spe": 100
     },
     "types": [
-      "electric",
-      "flying"
+      "flying",
+      "electric"
     ],
     "moves": {
       "tutor": [
         {
-          "name": "double-edge",
-          "gen": "xd"
-        },
-        {
-          "name": "mimic",
-          "gen": "xd"
-        },
-        {
-          "name": "swift",
-          "gen": "heartgold-soulsilver"
-        },
-        {
-          "name": "substitute",
-          "gen": "xd"
-        },
-        {
-          "name": "snore",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "mud-slap",
-          "gen": "heartgold-soulsilver"
-        },
-        {
-          "name": "endure",
-          "gen": "emerald"
-        },
-        {
-          "name": "swagger",
-          "gen": "xd"
-        },
-        {
-          "name": "sleep-talk",
-          "gen": "black-2-white-2"
-        },
-        {
-          "name": "twister",
-          "gen": "heartgold-soulsilver"
-        },
-        {
-          "name": "heat-wave",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "air-cutter",
-          "gen": "heartgold-soulsilver"
-        },
-        {
-          "name": "signal-beam",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "shock-wave",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "tailwind",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "defog",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "ominous-wind",
-          "gen": "heartgold-soulsilver"
-        },
-        {
-          "name": "laser-focus",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "rising-voltage",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "dual-wingbeat",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "razor-wind",
-          "gen": "yellow"
-        },
-        {
-          "name": "whirlwind",
-          "gen": "yellow"
-        },
-        {
-          "name": "fly",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "headbutt",
-          "gen": "lets-go-pikachu-lets-go-eevee"
-        },
-        {
-          "name": "take-down",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "roar",
-          "gen": "brilliant-diamond-and-shining-pearl"
-        },
-        {
-          "name": "hyper-beam",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "toxic",
-          "gen": "lets-go-pikachu-lets-go-eevee"
-        },
-        {
-          "name": "rage",
-          "gen": "yellow"
-        },
-        {
-          "name": "double-team",
-          "gen": "brilliant-diamond-and-shining-pearl"
-        },
-        {
-          "name": "reflect",
-          "gen": "lets-go-pikachu-lets-go-eevee"
-        },
-        {
-          "name": "bide",
-          "gen": "yellow"
-        },
-        {
-          "name": "flash",
-          "gen": "brilliant-diamond-and-shining-pearl"
-        },
-        {
-          "name": "rest",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "curse",
-          "gen": "crystal"
-        },
-        {
-          "name": "protect",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "sandstorm",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "steel-wing",
-          "gen": "brilliant-diamond-and-shining-pearl"
-        },
-        {
-          "name": "return",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "frustration",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "baton-pass",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "hidden-power",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "sunny-day",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "rock-smash",
-          "gen": "brilliant-diamond-and-shining-pearl"
-        },
-        {
-          "name": "hail",
-          "gen": "brilliant-diamond-and-shining-pearl"
-        },
-        {
-          "name": "facade",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "helping-hand",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "secret-power",
-          "gen": "omega-ruby-alpha-sapphire"
-        },
-        {
-          "name": "weather-ball",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "metal-sound",
+          "name": "acrobatics",
           "gen": "scarlet-violet"
         },
         {
@@ -415,19 +220,23 @@
           "gen": "scarlet-violet"
         },
         {
-          "name": "natural-gift",
+          "name": "air-cutter",
           "gen": "heartgold-soulsilver"
         },
         {
-          "name": "u-turn",
+          "name": "baton-pass",
           "gen": "scarlet-violet"
+        },
+        {
+          "name": "bide",
+          "gen": "yellow"
+        },
+        {
+          "name": "bolt-beak",
+          "gen": "dev"
         },
         {
           "name": "brave-bird",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "giga-impact",
           "gen": "scarlet-violet"
         },
         {
@@ -435,36 +244,28 @@
           "gen": "brilliant-diamond-and-shining-pearl"
         },
         {
-          "name": "electro-ball",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "round",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "sky-drop",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "acrobatics",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "volt-switch",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "wild-charge",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "hurricane",
-          "gen": "scarlet-violet"
-        },
-        {
           "name": "confide",
           "gen": "ultra-sun-ultra-moon"
+        },
+        {
+          "name": "curse",
+          "gen": "crystal"
+        },
+        {
+          "name": "defog",
+          "gen": "ultra-sun-ultra-moon"
+        },
+        {
+          "name": "double-edge",
+          "gen": "xd"
+        },
+        {
+          "name": "double-team",
+          "gen": "brilliant-diamond-and-shining-pearl"
+        },
+        {
+          "name": "dual-wingbeat",
+          "gen": "sword-shield"
         },
         {
           "name": "eerie-impulse",
@@ -475,7 +276,163 @@
           "gen": "scarlet-violet"
         },
         {
-          "name": "tera-blast",
+          "name": "electro-ball",
+          "gen": "scarlet-violet"
+        },
+        {
+          "name": "endure",
+          "gen": "emerald"
+        },
+        {
+          "name": "facade",
+          "gen": "scarlet-violet"
+        },
+        {
+          "name": "flash",
+          "gen": "brilliant-diamond-and-shining-pearl"
+        },
+        {
+          "name": "fly",
+          "gen": "scarlet-violet"
+        },
+        {
+          "name": "frustration",
+          "gen": "ultra-sun-ultra-moon"
+        },
+        {
+          "name": "giga-impact",
+          "gen": "scarlet-violet"
+        },
+        {
+          "name": "hail",
+          "gen": "brilliant-diamond-and-shining-pearl"
+        },
+        {
+          "name": "headbutt",
+          "gen": "lets-go-pikachu-lets-go-eevee"
+        },
+        {
+          "name": "heat-wave",
+          "gen": "ultra-sun-ultra-moon"
+        },
+        {
+          "name": "helping-hand",
+          "gen": "scarlet-violet"
+        },
+        {
+          "name": "hidden-power",
+          "gen": "ultra-sun-ultra-moon"
+        },
+        {
+          "name": "hurricane",
+          "gen": "scarlet-violet"
+        },
+        {
+          "name": "hyper-beam",
+          "gen": "scarlet-violet"
+        },
+        {
+          "name": "laser-focus",
+          "gen": "ultra-sun-ultra-moon"
+        },
+        {
+          "name": "metal-sound",
+          "gen": "scarlet-violet"
+        },
+        {
+          "name": "mimic",
+          "gen": "xd"
+        },
+        {
+          "name": "mud-slap",
+          "gen": "heartgold-soulsilver"
+        },
+        {
+          "name": "natural-gift",
+          "gen": "heartgold-soulsilver"
+        },
+        {
+          "name": "ominous-wind",
+          "gen": "heartgold-soulsilver"
+        },
+        {
+          "name": "protect",
+          "gen": "scarlet-violet"
+        },
+        {
+          "name": "rage",
+          "gen": "yellow"
+        },
+        {
+          "name": "razor-wind",
+          "gen": "yellow"
+        },
+        {
+          "name": "reflect",
+          "gen": "lets-go-pikachu-lets-go-eevee"
+        },
+        {
+          "name": "rest",
+          "gen": "scarlet-violet"
+        },
+        {
+          "name": "return",
+          "gen": "ultra-sun-ultra-moon"
+        },
+        {
+          "name": "rising-voltage",
+          "gen": "sword-shield"
+        },
+        {
+          "name": "roar",
+          "gen": "brilliant-diamond-and-shining-pearl"
+        },
+        {
+          "name": "rock-smash",
+          "gen": "brilliant-diamond-and-shining-pearl"
+        },
+        {
+          "name": "round",
+          "gen": "sword-shield"
+        },
+        {
+          "name": "sandstorm",
+          "gen": "scarlet-violet"
+        },
+        {
+          "name": "secret-power",
+          "gen": "omega-ruby-alpha-sapphire"
+        },
+        {
+          "name": "shock-wave",
+          "gen": "ultra-sun-ultra-moon"
+        },
+        {
+          "name": "signal-beam",
+          "gen": "ultra-sun-ultra-moon"
+        },
+        {
+          "name": "sky-drop",
+          "gen": "ultra-sun-ultra-moon"
+        },
+        {
+          "name": "sleep-talk",
+          "gen": "black-2-white-2"
+        },
+        {
+          "name": "snore",
+          "gen": "ultra-sun-ultra-moon"
+        },
+        {
+          "name": "steel-wing",
+          "gen": "brilliant-diamond-and-shining-pearl"
+        },
+        {
+          "name": "substitute",
+          "gen": "xd"
+        },
+        {
+          "name": "sunny-day",
           "gen": "scarlet-violet"
         },
         {
@@ -483,8 +440,52 @@
           "gen": "scarlet-violet"
         },
         {
-          "name": "bolt-beak",
-          "gen": "dev"
+          "name": "swagger",
+          "gen": "xd"
+        },
+        {
+          "name": "swift",
+          "gen": "heartgold-soulsilver"
+        },
+        {
+          "name": "tailwind",
+          "gen": "ultra-sun-ultra-moon"
+        },
+        {
+          "name": "take-down",
+          "gen": "scarlet-violet"
+        },
+        {
+          "name": "tera-blast",
+          "gen": "scarlet-violet"
+        },
+        {
+          "name": "toxic",
+          "gen": "lets-go-pikachu-lets-go-eevee"
+        },
+        {
+          "name": "twister",
+          "gen": "heartgold-soulsilver"
+        },
+        {
+          "name": "u-turn",
+          "gen": "scarlet-violet"
+        },
+        {
+          "name": "volt-switch",
+          "gen": "scarlet-violet"
+        },
+        {
+          "name": "weather-ball",
+          "gen": "scarlet-violet"
+        },
+        {
+          "name": "whirlwind",
+          "gen": "yellow"
+        },
+        {
+          "name": "wild-charge",
+          "gen": "scarlet-violet"
         }
       ],
       "levelUp": [
@@ -592,16 +593,28 @@
     "evolutions": {
       "name": "zapdos",
       "details": null,
-      "evolutions": []
+      "evolutions": [],
+      "uuid": null,
+      "methods": [],
+      "perk": {
+        "x": 26,
+        "y": 26
+      }
     },
     "publication": {
       "source": "PTR 2e Core - Kanto Dex",
       "authors": [
         "PTR 2e Team"
-      ]
-    }
+      ],
+      "notes": ""
+    },
+    "_migration": {
+      "version": null,
+      "previous": null
+    },
+    "genderRatio": -1,
+    "habitats": []
   },
   "_id": "bsSynJh597ezewCA",
-  "effects": [],
-  "folder": null
+  "effects": []
 }

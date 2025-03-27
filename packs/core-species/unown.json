@@ -31,7 +31,7 @@
       "telepath",
       "telekinetic-8",
       "glow-3",
-      "underdog"
+      "fully-evolved"
     ],
     "abilities": {
       "starting": [
@@ -82,6 +82,30 @@
         "group": null
       },
       {
+        "slug": "dragon",
+        "value": 25,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "fairy",
+        "value": 25,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "ghost",
+        "value": 25,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
         "slug": "history",
         "value": 45,
         "rvs": 0,
@@ -92,6 +116,14 @@
       {
         "slug": "leadership",
         "value": 40,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "legendary",
+        "value": 50,
         "rvs": 0,
         "favourite": false,
         "hidden": false,
@@ -114,64 +146,32 @@
         "group": null
       },
       {
-        "slug": "psychic",
-        "value": 50,
-        "rvs": 0,
-        "favourite": false,
-        "hidden": false,
-        "group": "occult"
-      },
-      {
-        "slug": "ghost",
-        "value": 25,
-        "rvs": 0,
-        "favourite": false,
-        "hidden": false,
-        "group": "occult"
-      },
-      {
-        "slug": "dragon",
-        "value": 25,
-        "rvs": 0,
-        "favourite": false,
-        "hidden": false,
-        "group": "occult"
-      },
-      {
-        "slug": "fairy",
-        "value": 25,
-        "rvs": 0,
-        "favourite": false,
-        "hidden": false,
-        "group": "occult"
-      },
-      {
-        "slug": "spiritual",
-        "value": 45,
-        "rvs": 0,
-        "favourite": false,
-        "hidden": false,
-        "group": "occult"
-      },
-      {
-        "slug": "legendary",
-        "value": 50,
-        "rvs": 0,
-        "favourite": false,
-        "hidden": false,
-        "group": "occult"
-      },
-      {
         "slug": "paradox",
         "value": 30,
         "rvs": 0,
         "favourite": false,
         "hidden": false,
-        "group": "occult"
+        "group": null
+      },
+      {
+        "slug": "psychic",
+        "value": 50,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
       },
       {
         "slug": "running",
         "value": 35,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "spiritual",
+        "value": 45,
         "rvs": 0,
         "favourite": false,
         "hidden": false,
@@ -213,7 +213,13 @@
     "evolutions": {
       "name": "unown",
       "details": null,
-      "evolutions": []
+      "evolutions": [],
+      "uuid": null,
+      "methods": [],
+      "perk": {
+        "x": 26,
+        "y": 26
+      }
     },
     "moves": {
       "levelUp": [
@@ -222,7 +228,8 @@
           "level": 1,
           "gen": "brilliant-diamond-and-shining-pearl"
         }
-      ]
+      ],
+      "tutor": []
     },
     "habitats": [
       "ruin"
@@ -231,10 +238,15 @@
       "source": "PTR 2e Core - Johto Dex",
       "authors": [
         "PTR 2e Team"
-      ]
-    }
+      ],
+      "notes": ""
+    },
+    "_migration": {
+      "version": null,
+      "previous": null
+    },
+    "genderRatio": -1
   },
   "_id": "xLNQQNY9sPyryF47",
-  "effects": [],
-  "folder": null
+  "effects": []
 }
