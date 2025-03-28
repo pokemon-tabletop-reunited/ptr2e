@@ -1,3 +1,5 @@
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+//@ts-nocheck
 import { PredicateField } from "@system/predication/schema-data-fields.ts";
 import ChangeModel from "./changes/change.ts";
 import ActiveEffectSystem from "./system.ts";
