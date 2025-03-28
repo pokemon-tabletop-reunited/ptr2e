@@ -1,4 +1,4 @@
-import type { PokemonType } from "../../data/constants";
+import type { PokemonType } from "../../constants";
 
 type TypeEffectiveness = {
   [type in PokemonType]: {

@@ -28,6 +28,7 @@ const scriptsEntrypoint = "./src/module/index.ts";
 const stylesEntrypoint = "./src/styles/styles.scss";
 
 // @ts-expect-error the types are set to invalid values to ensure the user sets them.
+// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
 if (packageType == "REPLACE ME" || packageID == "REPLACE ME") {
   throw new Error(
     `Must set the "packageType" and the "packageID" variables in vite.config.ts`,
@@ -98,7 +99,7 @@ const config = Vite.defineConfig(({ command, mode }): Vite.UserConfig => {
         },
       },
     },
-    plugins,
+    plugins
   };
 });
 

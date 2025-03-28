@@ -46,7 +46,6 @@ class RecursiveEmbeddedDataField<
 
   override initialize(value: PersistedType, model?: foundry.abstract.DataModel.Any, options?: AnyObject): InitializedType {
     if (!value) return value as unknown as InitializedType;
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call
     const m = new this.model(value, { parent: model, ...options });
     Object.defineProperty(m, "schema", { value: this });
     return m as unknown as InitializedType;

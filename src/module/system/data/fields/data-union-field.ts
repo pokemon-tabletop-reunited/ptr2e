@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import type { AnyObject } from "fvtt-types/utils";
 import { StrictArrayField } from "./strict-primitive-fields";
 
@@ -37,7 +36,7 @@ class DataUnionField<
   ): InitializedType {
     if (Array.isArray(value) && this.fields.some((f) => f instanceof foundry.data.fields.ArrayField)) {
       const arrayField = this.fields.find((f) => f instanceof StrictArrayField);
-      const cleanValue = arrayField?.clean(value, options);
+      const cleanValue = arrayField?.clean(value, options) as InitializedType;
       return (cleanValue ?? value) as InitializedType;
     }
 

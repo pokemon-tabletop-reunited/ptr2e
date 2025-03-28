@@ -1,5 +1,12 @@
-import type ClockPanel from "./apps/clock-panel";
-import type ClockDatabase from "./data/models/clock-db";
+import type ClockPanel from "./system/apps/clock-panel";
+import type { ActorPTR2e } from "./system/data/actor/document";
+import type { HumanoidActorSystem } from "./system/data/actor/models/humanoid";
+import type { PokemonActorSystem } from "./system/data/actor/models/pokemon";
+import type { ActorSystem } from "./system/data/actor/models/system";
+import type { PTRCONFIG } from "./system/data/config";
+import type ClockDatabase from "./system/data/models/clock-db";
+import type { CustomSkill } from "./system/data/models/skill";
+import type SkillsCollection from "./system/data/skills-collection";
 
 export {};
 
@@ -10,11 +17,47 @@ declare global {
         db: typeof ClockDatabase;
         panel: ClockPanel;
       }
+      data: {
+        skills: SkillsCollection;
+      }
     }
   }
 
+  interface CONFIG {
+    PTR: typeof PTRCONFIG & {}
+  }
+
+  namespace globalThis {
+    let fu: typeof foundry.utils;
+    let actor: () => Actor.Implementation | null;
+  }
+
+  namespace PTR {
+    namespace Documents {
+      namespace Actor {
+        type Document = ActorPTR2e;
+        type System = ActorSystem;
+        type Humanoid = HumanoidActorSystem;
+        type Pokemon = PokemonActorSystem;
+      }
+    }
+  }
+
+  interface DocumentClassConfig {
+    Actor: typeof ActorPTR2e
+  }
+
+  // foundry-vtt-types needs to know what data models you register with Foundry at runtime.
+  interface DataModelConfig {
+    Actor: {
+      humanoid: typeof HumanoidActorSystem;
+      pokemon: typeof PokemonActorSystem;
+    };
+  }
+
   interface SettingConfig {
-    "ptr2e.clocks": ClockDatabase
+    "ptr2e.clocks": ClockDatabase,
+    "ptr2e.skills": CustomSkill[]
   }
 
   interface AssumeHookRan {

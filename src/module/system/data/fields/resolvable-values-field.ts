@@ -1,5 +1,5 @@
 import * as R from "remeda";
-import type { BracketedValue, RuleValue } from "../../effects/data";
+import type { BracketedValue, RuleValue } from "../effect/data";
 import { isObject } from "../../util/misc";
 
 class ResolvableValueField<Options extends foundry.data.fields.DataField.Options.Any = foundry.data.fields.DataField.DefaultOptions> 
@@ -32,7 +32,9 @@ class ResolvableValueField<Options extends foundry.data.fields.DataField.Options
       value.field ||= "actor|level";
       const brackets = (value.brackets = R.filter(Object.values(value.brackets ?? {}), R.isTruthy));
       for (const bracket of brackets) {
+        // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
         if (bracket.start === null) delete bracket.start;
+        // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
         if (bracket.end === null) delete bracket.end;
         bracket.value = typeof bracket.value === "string" ? this.#coerceNumber(bracket.value) : bracket.value;
       }

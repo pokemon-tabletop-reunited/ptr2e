@@ -5,9 +5,9 @@ import { isObject } from "../../util/misc";
 class LaxSchemaField<
   Fields extends foundry.data.fields.DataSchema,
   Options extends foundry.data.fields.SchemaField.Options<Fields> = foundry.data.fields.SchemaField.DefaultOptions,
-  AssignmentType = foundry.data.fields.SchemaField.AssignmentType<Fields, SimpleMerge<Options, foundry.data.fields.SchemaField.DefaultOptions>>,
-  InitializedType = foundry.data.fields.SchemaField.InitializedType<Fields, SimpleMerge<Options, foundry.data.fields.SchemaField.DefaultOptions>>,
-  PersistedType extends AnyObject | null | undefined = foundry.data.fields.SchemaField.PersistedType<
+  AssignmentType = foundry.data.fields.SchemaField.Internal.AssignmentType<Fields, SimpleMerge<Options, foundry.data.fields.SchemaField.DefaultOptions>>,
+  InitializedType = foundry.data.fields.SchemaField.Internal.InitializedType<Fields, SimpleMerge<Options, foundry.data.fields.SchemaField.DefaultOptions>>,
+  PersistedType extends AnyObject | null | undefined = foundry.data.fields.SchemaField.Internal.PersistedType<
       Fields,
       SimpleMerge<Options, foundry.data.fields.SchemaField.DefaultOptions>
     >

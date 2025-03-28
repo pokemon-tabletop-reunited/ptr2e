@@ -1,7 +1,7 @@
 import type { DeepPartial } from "fvtt-types/utils";
-import type { BracketedValue } from "../effects/data.ts";
 import * as R from "remeda";
 import Sortable from "sortablejs";
+import type { BracketedValue } from "../data/effect/data";
 
 const wordCharacter = String.raw`[\p{Alphabetic}\p{Mark}\p{Decimal_Number}\p{Join_Control}]`;
 const nonWordCharacter = String.raw`[^\p{Alphabetic}\p{Mark}\p{Decimal_Number}\p{Join_Control}]`;
@@ -133,7 +133,6 @@ function exportToJSON({ type, data, label }: { type: string, data: unknown, labe
   saveDataToFile(JSON.stringify(object, null, 2), "application/json", `${filename}.json`);
 }
 
-// eslint-disable-next-line @typescript-eslint/no-unnecessary-type-parameters
 async function importFromJSON<T>({ name, type }: { name: string, type: string }): Promise<Maybe<{
   type: string;
   data: T;
@@ -164,7 +163,7 @@ async function importFromJSON<T>({ name, type }: { name: string, type: string })
               //@ts-expect-error - This shouldn't be nullish but `AssumeHookRun` `ready: never` isn't working
               return void ui.notifications.error("DOCUMENT.ImportDataError", { localize: true });
             }
-            // eslint-disable-next-line @typescript-eslint/no-floating-promises, @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-member-access, @typescript-eslint/require-await
+            // eslint-disable-next-line @typescript-eslint/no-floating-promises, @typescript-eslint/no-unsafe-member-access, @typescript-eslint/require-await
             readTextFromFile(form.data.files[0]).then(async json => {
               try {
                 // Create a document from the JSON data

@@ -10,7 +10,7 @@ import DataModel = foundry.abstract.DataModel;
 Hooks.on("ready", () => {
   // This is an example of why using the `import =` syntax is helpful.
   // Try changing the `import` above to `const` and see what happens.
-  const exampleActor: DataModel.Any = new Actor.implementation({ name: "Example Actor", type: 'humanoid'});
+  const exampleActor: DataModel.Any = new Actor.implementation({ name: "Example Actor", type: 'humanoid' });
 
   console.log(exampleActor);
   console.log("Hello world!");

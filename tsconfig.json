@@ -20,7 +20,7 @@
     // The files this tsconfig.json includes won't even have `fvtt-types`.
     // See `src/tsconfig.json` for how it sets up its type.
     // You can add types here if necessary. It'll only be scoped to the root files though.
-    "types": [],
+    "types": ["fvtt-types"],
 
     // Strict is _highly_ recommended. It's a whole suite of options in tsc that help you catch bugs early.
     // If you want to disable it for some reason, you must add "strictNullChecks": true or else foundry-vtt-types may not function correctly.
@@ -59,8 +59,8 @@
     //
     // console.log(withNumber.x * 5); // This will throw a runtime error.
     // ```
-    "noPropertyAccessFromIndexSignature": true,
-
+    "noPropertyAccessFromIndexSignature": false,
+    
     "noImplicitOverride": true,
 
     "allowJs": true,
@@ -73,7 +73,7 @@
     // This means that even `.d.ts` files in your own repo aren't type checked which can be an issue for some repositories. Secondly `skipLibCheck` silences some of
     // the most interesting errors; those which occur within fvtt-types files. When this happens it's a strong indication that the durability of fvtt-types isn't high
     // enough to your configuration in this area and it's best to be reported.
-    "skipLibCheck": false
+    "skipLibCheck": false,
 
     // Consider enabling this if you have JS files and want TypeScript to lint them.
     // Most starting projects will probably want to simply write in TypeScript and most existing projects will probably not have JS files that pass typechecking so this is disabled.
@@ -92,7 +92,5 @@
   },
 
   // Exclude the src directory from the root project to avoid double type checking and causing an error due to mismatched `compilerOptions.types`.
-  "exclude": ["src/**", "backup/**"],
-
-  "references": [{ "path": "./src/module" }]
+  "exclude": ["backup/**"]
 }

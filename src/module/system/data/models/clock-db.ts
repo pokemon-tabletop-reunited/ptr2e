@@ -1,12 +1,12 @@
-import Clock from "./clock.ts";
+import {ClockPTR2e} from "./clock.ts";
 
 const clockDbSchema = {
-  clocks: new foundry.data.fields.ArrayField(new foundry.data.fields.EmbeddedDataField(Clock), {
+  clocks: new foundry.data.fields.ArrayField(new foundry.data.fields.EmbeddedDataField(ClockPTR2e), {
     required: true,
     label: "PTR2E.FIELDS.clocks.label",
     hint: "PTR2E.FIELDS.clocks.hint",
   }),
-} satisfies foundry.data.fields.DataSchema;
+};
 
 declare namespace ClockDatabase {
   type Schema = typeof clockDbSchema;
@@ -26,7 +26,7 @@ class ClockDatabase extends foundry.abstract.DataModel<ClockDatabase.Schema> {
   }
 
   static refresh() {
-    if (canvas?.ready) game.ptr.clocks.panel.refresh({});
+    if (canvas?.ready) game.ptr.clocks.panel.refresh({} as boolean);
   }
 
   static async update(data: ClockDatabase['_source'], refresh = true): Promise<ClockDatabase> {
@@ -38,42 +38,42 @@ class ClockDatabase extends foundry.abstract.DataModel<ClockDatabase.Schema> {
     return this.instance;
   }
 
-  static async createClock(data: ClockDatabase['_source']) {
+  static async createClock(data: foundry.data.fields.SchemaField.PersistedData<ClockPTR2e.Schema>) {
     const instance = this.instance.toObject();
     instance.clocks.push(data);
     return this.update(instance);
   }
 
-  async createClock(data: ClockDatabase['_source']) {
+  async createClock(data: foundry.data.fields.SchemaField.PersistedData<ClockPTR2e.Schema>) {
     return ClockDatabase.createClock(data);
   }
 
-  static async updateClocks(data: ({ _id: Clock['id'] } & Partial<Omit<ClockDatabase['_source'], 'id'>>)[]) {
+  static async updateClocks(data: ({ _id: ClockPTR2e['id'] } & Partial<Omit<foundry.data.fields.SchemaField.PersistedData<ClockPTR2e.Schema>, 'id'>>)[]) {
     const instance = this.instance.toObject();
 
     for (const update of data) {
       const clockIndex = instance.clocks.findIndex((c) => c.id === update._id);
       if (clockIndex === -1) continue;
 
-      instance.clocks[clockIndex] = foundry.utils.mergeObject(instance.clocks[clockIndex], update);
+      instance.clocks[clockIndex] = foundry.utils.mergeObject(instance.clocks[clockIndex]!, update) as unknown as foundry.data.fields.SchemaField.PersistedData<ClockPTR2e.Schema>
     }
 
     return this.update(instance);
   }
 
-  async updateClocks(data: ({ _id: Clock['id'] } & Partial<Omit<ClockDatabase['_source'], 'id'>>)[]) {
+  async updateClocks(data: ({ _id: ClockPTR2e['id'] } & Partial<Omit<foundry.data.fields.SchemaField.PersistedData<ClockPTR2e.Schema>, 'id'>>)[]) {
     return ClockDatabase.updateClocks(data);
   }
 
-  static async updateClock(id: string, data: Partial<ClockDatabase['_source']>) {
+  static async updateClock(id: string, data: Partial<foundry.data.fields.SchemaField.PersistedData<ClockPTR2e.Schema>>) {
     const instance = this.instance.toObject();
     const index = instance.clocks.findIndex((clock) => clock.id === id);
     if (index === -1) return undefined;
-    instance.clocks[index] = foundry.utils.mergeObject(instance.clocks[index], data);
+    instance.clocks[index] = foundry.utils.mergeObject(instance.clocks[index]!, data) as unknown as foundry.data.fields.SchemaField.PersistedData<ClockPTR2e.Schema>;
     return this.update(instance);
   }
 
-  async updateClock(id: string, data: Partial<ClockDatabase['_source']>) {
+  async updateClock(id: string, data: Partial<foundry.data.fields.SchemaField.PersistedData<ClockPTR2e.Schema>>) {
     return ClockDatabase.updateClock(id, data);
   }
 
@@ -92,8 +92,8 @@ class ClockDatabase extends foundry.abstract.DataModel<ClockDatabase.Schema> {
   static override validateJoint(data: ClockDatabase['_source']) {
     const ids = new Set<string>();
     for (const clock of data.clocks) {
-      if (ids.has(clock.id as string)) throw new Error("Clock IDs must be unique");
-      ids.add(clock.id as string);
+      if (ids.has(clock.id)) throw new Error("Clock IDs must be unique");
+      ids.add(clock.id);
     }
   }
 
@@ -105,13 +105,5 @@ class ClockDatabase extends foundry.abstract.DataModel<ClockDatabase.Schema> {
     return ClockDatabase.get(id);
   }
 }
-
-// interface ClockDatabase {
-//   clocks: Clock[];
-
-//   _source: InstanceType<typeof foundry.abstract.DataModel>['_source'] & {
-//     clocks: SourceFromSchema<ClockSchema>[];
-//   };
-// }
 
 export default ClockDatabase;
