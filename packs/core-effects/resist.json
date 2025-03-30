@@ -1,0 +1,89 @@
+{
+  "name": "Resist",
+  "type": "effect",
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "slug": "resist",
+    "publication": {
+      "source": "",
+      "authors": [],
+      "notes": ""
+    },
+    "description": "<p>While afflicted with Resist,the Power the creature would take from Physical- and Special-attacks is decreased by 20% and the creature has -2 default EVA.</p>",
+    "traits": [
+      "pseudo-affliction"
+    ]
+  },
+  "img": "systems/ptr2e/img/icons/effect_icon.webp",
+  "effects": [
+    {
+      "name": "Resist",
+      "type": "affliction",
+      "_id": "BBXdQxyptfOVD9QQ",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "ephemeral-modifier",
+            "key": "attack-power-percentile",
+            "value": -20,
+            "predicate": [],
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "hideIfDisabled": false
+          },
+          {
+            "type": "basic",
+            "key": "system.battleStats.evasion.stage",
+            "value": -2,
+            "predicate": [],
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0,
+        "priority": 50,
+        "formula": "",
+        "type": "damage"
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "<p><span style=\"font-family:Arial,sans-serif\"><strong style=\"font-weight:normal\" id=\"docs-internal-guid-a5a60ee4-7fff-6533-a112-f8506ec1cbe5\">While afflicted with Resist,the Power the creature would take from Physical- and Special-attacks is decreased by 20% and the creature has -2 default EVA.</strong></span></p><p></p>",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "1.1.2.beta",
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      }
+    }
+  ],
+  "flags": {},
+  "_id": "D9yUJTFzZriJ4Fw9"
+}
