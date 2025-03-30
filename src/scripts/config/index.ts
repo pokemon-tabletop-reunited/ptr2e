@@ -37,6 +37,7 @@ import { Habitats } from "./habitats.ts";
 import { HabitatRollTable } from "@system/habitat-table.ts";
 import { RollTableDirectoryPTR2e } from "@module/apps/sidebar/rolltables-directory.ts";
 import AdvancementActiveEffectSystem from "@module/effects/data/advancement.ts";
+import { PickableThing } from "@module/apps/pick-a-thing-prompt.ts";
 
 export const PTRCONFIG = {
   ActiveEffect: {
@@ -195,5 +196,6 @@ export const PTRCONFIG = {
   } as Record<Size, string>,
   utils: {
     predicate: Predicate
-  }
+  },
+  options: {} as Record<string, PickableThing[]>
 }

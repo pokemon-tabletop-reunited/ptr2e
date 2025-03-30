@@ -1180,8 +1180,8 @@ body {
                 }
 
                 &[data-tab="biography"] {
-                  .free-form {
-                    grid-area: 1 / 1 / span 3 / span 3;
+                  .left-side {
+                    grid-area: 1 / 1 / span 5 / span 3;
                     display: flex;
                     flex-direction: column;
 
@@ -3560,6 +3560,133 @@ body {
       }
     }
 
+    &#compendium-browser-settings {
+      max-height: 800px;
+
+      .window-content {
+        display: grid;
+        grid-template-columns: unset;
+        grid-template-rows: min-content auto min-content;
+        grid-template-areas:
+          "tabs"
+          "content"
+          "footer";
+
+        .tabs {
+          grid-area: tabs;
+          border-left: unset;
+        }
+
+        [data-application-part="footer"] {
+          grid-area: footer;
+
+          display: flex;
+          justify-content: center;
+          border-top: 1px solid var(--border-theme-color);
+        }
+
+        [data-application-part].active {
+          grid-area: content;
+
+          display: flex;
+          flex-direction: column;
+          gap: 0.5rem;
+          padding: 0.5rem;
+                    
+          .scroll {
+            padding: unset;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: center;
+            width: 100%;
+            gap: 0.5rem;
+          }
+          
+          .setting-section {
+            gap: 0;
+
+            h3 {
+              margin: 0;
+              cursor: pointer;
+              border: unset;
+              text-decoration: underline;
+            }
+
+            dt {
+              width: 10%;
+            }
+
+            /* Checkbox */
+            dt > input[type="checkbox"] {
+              transform: none;
+              flex: none;
+              height: auto;
+              margin: 1px;
+            }
+
+            dd {
+              width: 88%;
+            }
+
+            button {
+              width: 50%;
+              align-self: center;
+              margin: 0.5rem;
+            }
+          }
+
+          dl {
+            margin: 5px 0;
+
+            > label {
+              display: flex;
+              margin-bottom: 0.25rem;
+            }
+          }
+
+          dt {
+            margin: unset;
+            display: inline-block;
+            width: 40%;
+            padding-left: 5px;
+          }
+
+          dd {
+            margin: unset;
+            display: inline-block;
+            width: 58%;
+            margin-left: 0;
+            align-self: center;
+            align-content: center;
+          }
+
+          .single-column {
+            width: 100%;
+          }
+
+          h2 {
+            margin-top: unset;
+            margin-bottom: 0.5em;
+            width: 100%;
+            padding: unset;
+            border-color: var(--border-theme-color);
+            font-family: unset;
+            padding: 0.5rem 0.25rem 0 0.25rem;
+          }
+
+          div, fieldset {
+            width: 365px;
+          }
+
+          fieldset {
+            gap: unset;
+          }
+        }
+      }
+    }
+
     &.stats-form {
         .window-content {
             padding-top: 0.5rem;
@@ -4274,6 +4401,8 @@ body {
     }
 
     &.team-sheet {
+        min-width: 425px;
+
         .window-content {
             grid-template-columns: unset;
             grid-template-rows: 44px auto;
@@ -4595,6 +4724,8 @@ body {
                 }
 
                 &[data-tab="changes"] {
+                  max-height: 80vh;
+
                     .change-editing {
                         display: contents;
 
@@ -8274,8 +8405,8 @@ body {
 
   .type-grid {
     display: grid;
-    grid-template-columns: repeat(var(--grid-columns), 40px);
-    grid-auto-flow: row;
+    grid-template-rows: repeat(var(--grid-columns), 40px);
+    grid-auto-flow: column;
     grid-auto-rows: 40px;
     overflow: auto;
 
@@ -8506,9 +8637,15 @@ body {
       min-height: 3rem;
 
       button {
-        flex: 0 0 35%;
+        flex: 0 0 25%;
       }
     }
+  }
+}
+
+.application#global-perk-config {
+  .window-content {
+    padding: 0.5rem;
   }
 }
 

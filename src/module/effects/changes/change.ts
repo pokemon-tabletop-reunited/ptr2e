@@ -250,8 +250,8 @@ class ChangeModel<TSchema extends ChangeSchema = ChangeSchema> extends foundry.a
       return source;
     } else if (typeof source === "string") {
       return source.replace(
-        /{(actor|item|change|effect|attack)\|(.*?)}/g,
-        (_match, key: string, prop: string) => {
+        /{(actor|item|change|effect|attack)\|(.*?)(\|C)?}/g,
+        (_match, key: string, prop: string, modifier: string) => {
           const data =
             key === "change"
               ? this
@@ -264,7 +264,7 @@ class ChangeModel<TSchema extends ChangeSchema = ChangeSchema> extends foundry.a
             if (warn)
               this.failValidation(`Failed to resolve injected property "${source}"`);
           }
-          return String(value);
+          return modifier ? Handlebars.helpers.capitalize(String(value)) : String(value);
         }
       );
     }
