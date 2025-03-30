@@ -197,7 +197,9 @@
         "NoCost": "This item doesn't have an IP cost so cannot be purchased.",
         "NotEnoughIP": "You do not have enough IP to purchase this item. (Required: {required}, Current: {current})",
         "Success": "{actor} successfully purchased {item} for {cost} IP. (Remaining IP: {remaining})",
-        "RarityWarning": "Items of higher rarity than 'Common' are normally not obtainable through IP!"
+        "RarityWarning": "Items of higher rarity than 'Common' are normally not obtainable through IP!",
+        "NoGrade": "This item doesn't have a grade so cannot be purchased.",
+        "GradeNotAllowed": "Your Character's Grade ({char}) is too low to purchase an item of {grade} Grade with IP."
       },
       "FilterConjunction": {
         "AndLabel": "And",
@@ -238,7 +240,10 @@
         "Source": "Source",
         "Sort": {
           "Name": "Name",
-          "Number": "Number"
+          "Number": "Number",
+          "Cost": "Cost",
+          "Rarity": "Rarity",
+          "Grade": "Grade"
         },
         "TraitType": {
           "Label": "Trait Type",
@@ -1219,6 +1224,7 @@
         }
       },
       "CreateItem": "Create Item",
+      "Browse": "Search in Compendium Browser",
       "KnownAttacks": {
         "hint": "Drag & Drop moves onto the actor / known attack sheet to add them as available options.<br><br>Drag & Drop from the Known Attack's sheet onto the Actor's Attack Slots to assign moves to the slots!"
       },
@@ -1278,7 +1284,8 @@
       "Inventory": {
         "CreateItem": "Create Item",
         "EditItem": "Edit Item",
-        "DeleteItem": "Delete Item"
+        "DeleteItem": "Delete Item",
+        "Grade": "Actor Grade"
       },
       "Unspent": "{num} Unspent",
       "Settings": {

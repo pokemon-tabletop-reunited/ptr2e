@@ -40,6 +40,30 @@ export class CompendiumBrowser extends foundry.applications.api.HandlebarsApplic
 
           const cost = item.system.cost;
           if (!cost) return void ui.notifications.error("PTR2E.CompendiumBrowser.Purchase.NoCost", { localize: true });
+          
+          const grade = actor.grade;
+          const itemGrade = item.system.grade;
+          if(!itemGrade) return void ui.notifications.error("PTR2E.CompendiumBrowser.Purchase.NoGrade", { localize: true });
+
+          const allowedGrade = (() => {
+            if(grade === "A") {
+              return itemGrade !== "S";
+            }
+            if(["A", "B"].includes(grade)) {
+              return !["S", "A"].includes(itemGrade);
+            }
+            if(["A", "B", "C"].includes(grade)) {
+              return !["S", "A", "B"].includes(itemGrade);
+            }
+            if(["A", "B", "C", "D"].includes(grade)) {
+              return !["S", "A", "B", "C"].includes(itemGrade);
+            }
+            if(["A", "B", "C", "D", "E"].includes(grade)) {
+              return !["S", "A", "B", "C", "D"].includes(itemGrade);
+            }
+            return false;
+          })();
+          if(!allowedGrade) return void ui.notifications.error(game.i18n.format("PTR2E.CompendiumBrowser.Purchase.GradeNotAllowed", { char: grade, grade: itemGrade }));
 
           const availableIP = actor.system.inventoryPoints.current;
           if (cost > availableIP) return void ui.notifications.error(game.i18n.format("PTR2E.CompendiumBrowser.Purchase.NotEnoughIP", { required: cost, current: availableIP }));

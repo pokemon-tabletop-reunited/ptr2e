@@ -99,6 +99,19 @@ class ActorPTR2e<
     return this._actions;
   }
 
+  get grade() {
+    const level = this.system.advancement.level;
+    return level >= 45
+      ? "A"
+      : level >= 35
+        ? "B"
+        : level >= 25
+          ? "C"
+          : level >= 15
+            ? "D"
+            : "E";
+  }
+
   get originalRoot(): PerkPTR2e | null {
     return (
       (this.itemTypes.perk as PerkPTR2e[]).find(
@@ -596,7 +609,7 @@ class ActorPTR2e<
   }
 
   override *allApplicableEffects(): Generator<ActiveEffectPTR2e<this>> {
-    if(this.type === "ptu-actor") return super.allApplicableEffects() as Generator<ActiveEffectPTR2e<this>>;
+    if (this.type === "ptu-actor") return super.allApplicableEffects() as Generator<ActiveEffectPTR2e<this>>;
     if (game.ready) {
       const combatant = this.combatant;
       if (combatant) {
@@ -626,8 +639,8 @@ class ActorPTR2e<
       effectiveness[typeKey] = 1;
       for (const key of this.system.type.types) {
         const type = key as PokemonType;
-        if(typeKey === "shadow") {
-          if(type === "shadow") {
+        if (typeKey === "shadow") {
+          if (type === "shadow") {
             effectiveness[typeKey] = 0.5;
             break;
           }
@@ -1433,7 +1446,7 @@ class ActorPTR2e<
       })() ?? params.statistic;
 
     const newFlatModifiers: ModifierPTR2e[] = [];
-    if(statistic) {
+    if (statistic) {
       const originalModifiers = params.statistic?.modifiers ?? [];
 
       // Figure out which are new flat modifiers
@@ -2070,7 +2083,7 @@ class ActorPTR2e<
     userId: string
   ) {
     super._onCreateDescendantDocuments(parent, collection, documents, results, options, userId);
-    if(game.users.activeGM?.id !== game.user.id) return;
+    if (game.users.activeGM?.id !== game.user.id) return;
     // if (game.ptr.web.actor === this) await game.ptr.web.refresh({ nodeRefresh: true });
     if (!this.unconnectedRoots.length) return;
 

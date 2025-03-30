@@ -47,7 +47,7 @@ export class CompendiumBrowserAbilityTab extends CompendiumBrowserTab {
         }
 
         const pubSource = (abilityData.system.publication?.source ?? "").trim()
-        publications.add(pubSource);
+        if(pubSource) publications.add(pubSource);
 
         abilities.push({
           name: abilityData.name,

@@ -202,6 +202,43 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
             name: ItemPTR2e.defaultName({type, parent: this.document}),
             type,
           }]);
+        },
+        "browse": async function (this: ActorSheetPTRV2, event: Event) {
+          const type = ((event.target as HTMLElement).closest("[data-type]") as HTMLElement)?.dataset.type;
+          if(!type) return;
+
+          await game.ptr.compendiumBrowser.loadTab("gear");
+          const gearTab = game.ptr.compendiumBrowser.compendiumTabs.gear;
+          if(!gearTab.filterData.checkboxes.type.options[type]) return;
+          
+          gearTab.resetFilters();
+          gearTab.filterData.checkboxes.type.options[type].selected = true;
+          gearTab.filterData.checkboxes.type.selected = [type];
+
+          const grade = this.actor.grade;
+          gearTab.filterData.checkboxes.grade.selected = [];
+          if(grade === "A") {
+            gearTab.filterData.checkboxes.grade.options.A.selected = true;
+            gearTab.filterData.checkboxes.grade.selected.push("A");  
+          }
+          if(["A", "B"].includes(grade)) {
+            gearTab.filterData.checkboxes.grade.options.B.selected = true;
+            gearTab.filterData.checkboxes.grade.selected.push("B");
+          }
+          if(["A", "B", "C"].includes(grade)) {
+            gearTab.filterData.checkboxes.grade.options.C.selected = true;
+            gearTab.filterData.checkboxes.grade.selected.push("C");
+          }
+          if(["A", "B", "C", "D"].includes(grade)) {
+            gearTab.filterData.checkboxes.grade.options.D.selected = true;
+            gearTab.filterData.checkboxes.grade.selected.push("D");
+          }
+          if(["A", "B", "C", "D", "E"].includes(grade)) {
+            gearTab.filterData.checkboxes.grade.options.E.selected = true;
+            gearTab.filterData.checkboxes.grade.selected.push("E");
+          }
+
+          await game.ptr.compendiumBrowser.render(true);
         }
       },
     },
