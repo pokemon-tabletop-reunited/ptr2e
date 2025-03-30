@@ -73,7 +73,7 @@ export class CompendiumBrowserMoveTab extends CompendiumBrowserTab {
         }
 
         const pubSource = (moveData.system.publication?.source ?? "").trim()
-        publications.add(pubSource);
+        if(pubSource) publications.add(pubSource);
 
         moves.push({
           name: moveData.name,

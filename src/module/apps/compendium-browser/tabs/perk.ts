@@ -52,7 +52,7 @@ export class CompendiumBrowserPerkTab extends CompendiumBrowserTab {
         }
 
         const pubSource = (perkData.system.publication?.source ?? "").trim()
-        publications.add(pubSource);
+        if(pubSource) publications.add(pubSource);
 
         perks.push({
           name: perkData.name,

@@ -99,6 +99,19 @@ class ActorPTR2e<
     return this._actions;
   }
 
+  get grade() {
+    const level = this.system.advancement.level;
+    return level >= 45
+      ? "A"
+      : level >= 35
+        ? "B"
+        : level >= 25
+          ? "C"
+          : level >= 15
+            ? "D"
+            : "E";
+  }
+
   get originalRoot(): PerkPTR2e | null {
     return (
       (this.itemTypes.perk as PerkPTR2e[]).find(
@@ -126,11 +139,11 @@ class ActorPTR2e<
 
   get combatant(): CombatantPTR2e | null {
     const combatants = (game.combat as CombatPTR2e | undefined)?.combatants.filter(
-      (c) => c.actor === this
+      (c) => c.actor?._id === this._id
     );
     return combatants?.length
       ? combatants.length > 1
-        ? combatants.find((c) => c.actor === this) ?? null
+        ? combatants.find((c) => c.actor === this) ?? combatants[0] ?? null
         : combatants[0]
       : null;
   }
@@ -596,7 +609,7 @@ class ActorPTR2e<
   }
 
   override *allApplicableEffects(): Generator<ActiveEffectPTR2e<this>> {
-    if(this.type === "ptu-actor") return super.allApplicableEffects() as Generator<ActiveEffectPTR2e<this>>;
+    if (this.type === "ptu-actor") return super.allApplicableEffects() as Generator<ActiveEffectPTR2e<this>>;
     if (game.ready) {
       const combatant = this.combatant;
       if (combatant) {
@@ -626,7 +639,14 @@ class ActorPTR2e<
       effectiveness[typeKey] = 1;
       for (const key of this.system.type.types) {
         const type = key as PokemonType;
-        effectiveness[typeKey] *= types[type].effectiveness[typeKey];
+        if (typeKey === "shadow") {
+          if (type === "shadow") {
+            effectiveness[typeKey] = 0.5;
+            break;
+          }
+          else effectiveness[typeKey] = 2;
+        }
+        else effectiveness[typeKey] *= types[type].effectiveness[typeKey];
       }
     }
     const typeImmunities = Object.keys(this.rollOptions.getFromDomain("immunities") ?? {}).filter(o => o.startsWith("type:"));
@@ -1426,7 +1446,7 @@ class ActorPTR2e<
       })() ?? params.statistic;
 
     const newFlatModifiers: ModifierPTR2e[] = [];
-    if(statistic) {
+    if (statistic) {
       const originalModifiers = params.statistic?.modifiers ?? [];
 
       // Figure out which are new flat modifiers
@@ -2063,7 +2083,7 @@ class ActorPTR2e<
     userId: string
   ) {
     super._onCreateDescendantDocuments(parent, collection, documents, results, options, userId);
-    if(game.users.activeGM?.id !== game.user.id) return;
+    if (game.users.activeGM?.id !== game.user.id) return;
     // if (game.ptr.web.actor === this) await game.ptr.web.refresh({ nodeRefresh: true });
     if (!this.unconnectedRoots.length) return;
 

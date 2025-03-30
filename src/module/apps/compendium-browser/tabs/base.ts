@@ -12,7 +12,7 @@ import { CompendiumDirectoryPTR2e } from "@module/apps/sidebar/compendium-direct
 import * as R from "remeda";
 import { htmlQuery, sluggify } from "@utils";
 import { TableResultSource } from "types/foundry/common/documents/module.js";
-import { grades } from "@module/data/mixins/has-gear-data.ts";
+import { grades, rarities } from "@module/data/mixins/has-gear-data.ts";
 
 export abstract class CompendiumBrowserTab {
   /** A reference to the parent CompendiumBrowser */
@@ -194,6 +194,16 @@ export abstract class CompendiumBrowserTab {
           return entryA.cost - entryB.cost;
         case "number":
           return entryA.number - entryB.number;
+        case "rarity": {
+          const rarityA = rarities.indexOf(entryA.rarity as typeof rarities[number]);
+          const rarityB = rarities.indexOf(entryB.rarity as typeof rarities[number]);
+          return rarityA - rarityB;
+        }
+        case "grade": {
+          const gradeA = grades.indexOf(entryA.grade as typeof grades[number]);
+          const gradeB = grades.indexOf(entryB.grade as typeof grades[number]);
+          return gradeA - gradeB;
+        }
         default: return 0;
       }
     });

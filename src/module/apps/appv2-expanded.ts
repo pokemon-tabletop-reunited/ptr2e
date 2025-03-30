@@ -309,7 +309,13 @@ export class ActorSheetV2Expanded<
     const effect = await ActiveEffectPTR2e.fromStatusEffect(affliction.id) as ActiveEffectPTR2e;
     if (!effect) return false;
 
-    return ActiveEffectPTR2e.create(effect.toObject(), { parent: this.actor });
+    const effectData = effect.toObject();
+    if('amount' in data && !isNaN(Number(data.amount))) {
+      if(effectData.system.stacks) effectData.system.stacks = Number(data.amount);
+      effectData.duration.turns = Number(data.amount);
+    }
+
+    return ActiveEffectPTR2e.create(effectData, { parent: this.actor });
   }
 
   /* -------------------------------------------- */
@@ -687,7 +693,13 @@ export class ItemSheetV2Expanded<
     const effect = await ActiveEffectPTR2e.fromStatusEffect(affliction.id) as ActiveEffectPTR2e;
     if (!effect) return false;
 
-    return ActiveEffectPTR2e.create(effect.toObject(), { parent: this.document });
+    const effectData = effect.toObject();
+    if('amount' in data && !isNaN(Number(data.amount))) {
+      if(effectData.system.stacks) effectData.system.stacks = Number(data.amount);
+      effectData.duration.turns = Number(data.amount);
+    }
+
+    return ActiveEffectPTR2e.create(effectData, { parent: this.document });
   }
 
   async _onDropActiveEffect(_event: DragEvent, data: object) {

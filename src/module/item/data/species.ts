@@ -470,6 +470,7 @@ class SpeciesSystem extends SpeciesExtension {
       const resolver = await ImageResolver.createFromSpeciesData({
         dexId: species.system.number,
         shiny: isShiny,
+        female: (this.parent?.actor?.system?.gender ?? "") == "female",
         forms: []
       }, config);
       return resolver?.result ?? this.parent?.img ?? `systems/ptr2e/img/icons/species_icon.webp`;

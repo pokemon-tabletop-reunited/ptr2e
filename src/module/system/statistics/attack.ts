@@ -110,12 +110,12 @@ class AttackStatistic extends Statistic {
       meleeOrRanged,
     ].flat()
 
-    if(actionTraitEffects.length) {
-      for(const effect of actionTraitEffects) {
-        for(const change of effect.changes) {
-          if(change instanceof FlatModifierChangeSystem) {
+    if (actionTraitEffects.length) {
+      for (const effect of actionTraitEffects) {
+        for (const change of effect.changes) {
+          if (change instanceof FlatModifierChangeSystem) {
             const mod = change.beforePrepareData()?.();
-            if(mod) data.modifiers.push(mod);
+            if (mod) data.modifiers.push(mod);
           }
         }
       }
@@ -127,7 +127,7 @@ class AttackStatistic extends Statistic {
     this.attack = attack;
   }
 
-  getCheck(targetData?: ActorPTR2e | null ): AttackCheck<this> {
+  getCheck(targetData?: ActorPTR2e | null): AttackCheck<this> {
     return this.#check ??= new AttackCheck(this, this.data, this.config, targetData);
   }
 
@@ -153,11 +153,11 @@ class AttackCheck<TParent extends AttackStatistic = AttackStatistic> implements 
     this.domains = R.unique(R.filter([data.domains, data.check.domains].flat(), R.isTruthy));
 
     this.additionalOptions = new Set<string>();
-    if(this.attack.power && this.attack.stab > 1) {
+    if (this.attack.power && this.attack.stab > 1) {
       const options = [...this.attack.types.map(t => `stab-${t}`), `stab`];
       this.domains.push(...options);
       data.check!.domains.push(...options);
-      for(const option of options) this.additionalOptions.add(option);
+      for (const option of options) this.additionalOptions.add(option);
     }
 
     this.label = data.check?.label
@@ -167,7 +167,7 @@ class AttackCheck<TParent extends AttackStatistic = AttackStatistic> implements 
     const parentModifiers = parent.modifiers.map((modifier) => modifier.clone());
     const checkOnlyModifiers = [
       data.check?.modifiers ?? [],
-      extractModifiers(parent.actor.synthetics, data.check?.domains ?? [], {resolvables: { target: targetData }}),
+      extractModifiers(parent.actor.synthetics, data.check?.domains ?? [], { resolvables: { target: targetData } }),
     ]
       .flat()
       .map((modifier) => {
@@ -182,7 +182,7 @@ class AttackCheck<TParent extends AttackStatistic = AttackStatistic> implements 
       });
 
     const rollOptions = parent.createRollOptions(this.domains, config);
-    for(const option of this.additionalOptions) rollOptions.add(option);
+    for (const option of this.additionalOptions) rollOptions.add(option);
 
     this.modifiers = [
       ...parentModifiers,
@@ -265,16 +265,18 @@ class AttackCheck<TParent extends AttackStatistic = AttackStatistic> implements 
 
       this.attack.power = power;
       this.attack.accuracy = accuracy;
-      if(this.attack.range) {
+      if (this.attack.range) {
         this.attack.range.distance = range;
       }
       this.attack.name = `Fling - ${target.actor.name}`;
-      this.attack.updateSource({ name: `Fling - ${target.actor.name}`, power, accuracy, range: {distance: range}, traits: this.attack._source.traits });
+      this.attack.updateSource({ name: `Fling - ${target.actor.name}`, power, accuracy, range: { distance: range }, traits: this.attack._source.traits });
       this.attack.prepareDerivedData();
     }
 
     const variants = args.variants ?? (this.attack.getVariants() || []);
     if (variants.length) args.skipDialog = false;
+
+    const selfOptions = new Set([...options, "targets:self"]);
 
     // Get context without target for basic information 
     const context = await this.actor.getCheckContext({
@@ -282,7 +284,7 @@ class AttackCheck<TParent extends AttackStatistic = AttackStatistic> implements 
       domains: this.domains,
       statistic: this,
       item: this.item,
-      options,
+      options: selfOptions,
       traits: args.traits ?? this.item.traits,
     }) as CheckContext<ActorPTR2e, AttackCheck<TParent>, ItemPTR2e<ItemSystemsWithActions, ActorPTR2e>>;
 
@@ -300,13 +302,13 @@ class AttackCheck<TParent extends AttackStatistic = AttackStatistic> implements 
 
     const selfEffectRolls = await extractEffectRolls({
       affects: "self",
-      origin: this.actor.clone({effects: [fu.deepClone(this.actor._source.effects), traitEffects].flat()}, {keepId: true}),
+      origin: this.actor.clone({ effects: [fu.deepClone(this.actor._source.effects), traitEffects].flat() }, { keepId: true }),
       target: this.actor,
       item: this.item,
       attack: this.attack,
       action: this.attack,
       domains: this.domains,
-      options,
+      options: selfOptions,
       chanceModifier: (Number(this.actor.system?.modifiers?.effectChance) || 0),
       hasSenerenGrace: this.actor.rollOptions?.all?.["special:serene-grace"] ?? false
     });
@@ -316,13 +318,22 @@ class AttackCheck<TParent extends AttackStatistic = AttackStatistic> implements 
     let anyValidTargets = false;
     for (const target of targets) {
       const allyOrEnemy = this.actor.isAllyOf(target.actor) ? "ally" : this.actor.isEnemyOf(target.actor) ? "enemy" : "neutral";
+      const targetsSelf = target.actor === this.actor;
+
+      const targetDomains = allyOrEnemy === "enemy"
+        ? this.domains.map(d => `hostile-${d}`)
+        : allyOrEnemy === "ally"
+          ? this.domains.map(d => `allied-${d}`)
+          : [];
+
+      const domains = R.unique([...this.domains, ...targetDomains]);
 
       const currContext = contexts[target.actor.uuid] = await this.actor.getCheckContext({
         attack: this.attack,
-        domains: this.domains,
+        domains: domains,
         statistic: this,
         target: target,
-        options: new Set([...options, `origin:${allyOrEnemy}`]),
+        options: new Set([...options, `origin:${allyOrEnemy}`, ...(targetsSelf ? ["targets:self"] : [])]),
         traits: args.traits ?? this.item.traits,
       }) as CheckContext<ActorPTR2e, AttackCheck<TParent>, ItemPTR2e<ItemSystemsWithActions, ActorPTR2e>>
 
@@ -348,7 +359,7 @@ class AttackCheck<TParent extends AttackStatistic = AttackStatistic> implements 
         anyValidTargets = true;
       }
 
-      currContext.notes = extractNotes(currContext.self.actor.synthetics.rollNotes, this.domains).filter(n => n.predicate.test(options))
+      currContext.notes = extractNotes(currContext.self.actor.synthetics.rollNotes, domains).filter(n => n.predicate.test(options))
 
       // extraModifiers.push(...currContext?.self.modifiers ?? []);
     }
@@ -402,20 +413,20 @@ class AttackCheck<TParent extends AttackStatistic = AttackStatistic> implements 
     const rolls = await CheckPTR2e.rolls(check, checkContext, args.callback);
     if (rolls?.length) {
       //TODO: Apply post-roll options from changes
-      if(rolls[0].accuracy && rolls[0].crit) {
+      if (rolls[0].accuracy && rolls[0].crit) {
         if (this.attack.slug.startsWith("fling") && this.attack.flingItemId) {
           const flingItemId = this.attack.flingItemId;
           const flingItem = this.actor.items.get(flingItemId) as ItemPTR2e;
-          if(flingItem?.type === "consumable" && (flingItem.system as ConsumableSystem).consumableType === "pokeball") {
+          if (flingItem?.type === "consumable" && (flingItem.system as ConsumableSystem).consumableType === "pokeball") {
             const action = PokeballActionPTR2e.fromConsumable(flingItem as ConsumablePTR2e)
-            await action.roll({ accuracyRoll: rolls[0].accuracy, critRoll: rolls[0].crit});
+            await action.roll({ accuracyRoll: rolls[0].accuracy, critRoll: rolls[0].crit });
           }
         }
       }
     }
 
     // Reset the fling actor toss attack data.
-    if(this.attack.slug === "fling-actor-toss") {
+    if (this.attack.slug === "fling-actor-toss") {
       this.actor.generateFlingAttack();
     }
 
