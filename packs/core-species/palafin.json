@@ -336,7 +336,8 @@
       "pack-mon",
       "wavesense-15",
       "fountain",
-      "fully-evolved"
+      "fully-evolved",
+      "jump-2"
     ],
     "diet": [
       "carnivore"
@@ -349,29 +350,26 @@
       ],
       "basic": [
         {
-          "slug": "shielding-mist"
+          "slug": "swift-swim"
         },
         {
-          "slug": "rain-dish"
-        },
-        {
-          "slug": "overcoat"
+          "slug": "justified"
         }
       ],
       "advanced": [
         {
-          "slug": "swift-swim"
+          "slug": "friend-guard"
         },
         {
-          "slug": "inner-focus"
+          "slug": "tidal-rush"
         }
       ],
       "master": [
         {
-          "slug": "storm-drain"
+          "slug": "acceleration"
         },
         {
-          "slug": "torrent"
+          "slug": "anticipation"
         }
       ]
     },
@@ -379,13 +377,13 @@
       "primary": [
         {
           "type": "swim",
-          "value": 10
+          "value": 15
         }
       ],
       "secondary": [
         {
           "type": "overland",
-          "value": 3
+          "value": 5
         }
       ]
     },
@@ -408,15 +406,7 @@
       },
       {
         "slug": "conversation",
-        "value": 70,
-        "rvs": 0,
-        "favourite": false,
-        "hidden": false,
-        "group": null
-      },
-      {
-        "slug": "intimidate",
-        "value": 30,
+        "value": 50,
         "rvs": 0,
         "favourite": false,
         "hidden": false,
@@ -424,7 +414,7 @@
       },
       {
         "slug": "leadership",
-        "value": 55,
+        "value": 20,
         "rvs": 0,
         "favourite": false,
         "hidden": false,
@@ -440,7 +430,7 @@
       },
       {
         "slug": "listen",
-        "value": 70,
+        "value": 55,
         "rvs": 0,
         "favourite": false,
         "hidden": false,
@@ -448,7 +438,7 @@
       },
       {
         "slug": "natural-world",
-        "value": 40,
+        "value": 45,
         "rvs": 0,
         "favourite": false,
         "hidden": false,
@@ -456,7 +446,7 @@
       },
       {
         "slug": "navigate",
-        "value": 50,
+        "value": 40,
         "rvs": 0,
         "favourite": false,
         "hidden": false,
@@ -464,7 +454,15 @@
       },
       {
         "slug": "negotiation",
-        "value": 25,
+        "value": 40,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "psychology",
+        "value": 45,
         "rvs": 0,
         "favourite": false,
         "hidden": false,
@@ -480,7 +478,7 @@
       },
       {
         "slug": "stealth",
-        "value": 60,
+        "value": 55,
         "rvs": 0,
         "favourite": false,
         "hidden": false,
@@ -504,14 +502,17 @@
       },
       {
         "slug": "track",
-        "value": 45,
+        "value": 40,
         "rvs": 0,
         "favourite": false,
         "hidden": false,
         "group": null
       }
     ],
-    "habitats": [],
+    "habitats": [
+      "ocean",
+      "reef"
+    ],
     "slug": "palafin",
     "publication": {
       "source": "PTR 2e Core - Paldea Dex",
@@ -526,5 +527,439 @@
     }
   },
   "_id": "FIO0qX2OsiUJqPAt",
-  "effects": []
+  "effects": [
+    {
+      "name": "Palafin Hero",
+      "type": "form",
+      "_id": "kpCk49USPZbIuNcD",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-option",
+            "key": "manual-forme-toggle",
+            "value": "forme:palafin-hero:active",
+            "domain": "all",
+            "toggleable": true,
+            "label": "Toggle: Palafin Hero Forme",
+            "predicate": [],
+            "alwaysActive": false,
+            "count": false,
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "suboptions": [],
+            "state": false
+          },
+          {
+            "type": "stats-alteration",
+            "predicate": [
+              "forme:palafin-hero:active"
+            ],
+            "key": "",
+            "value": 0,
+            "hp": null,
+            "atk": 90,
+            "def": 25,
+            "spa": 53,
+            "spd": 25,
+            "spe": null,
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "suppress-ability",
+            "predicate": [
+              "forme:palafin-hero:active"
+            ],
+            "key": "water-veil",
+            "value": 0,
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "suppress-ability",
+            "predicate": [
+              "forme:palafin-hero:active"
+            ],
+            "key": "run-away",
+            "value": 0,
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "grant-item",
+            "predicate": [
+              "forme:palafin-hero:active"
+            ],
+            "key": "",
+            "value": "Compendium.ptr2e.core-abilities.Item.urMg5doRiuVtnIsi",
+            "allowDuplicate": false,
+            "reevaluateOnUpdate": true,
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "system.free",
+                "value": "true"
+              }
+            ],
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "inMemoryOnly": false,
+            "track": false,
+            "replaceSelf": false,
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            }
+          },
+          {
+            "type": "grant-item",
+            "predicate": [
+              "forme:palafin-hero:active"
+            ],
+            "key": "",
+            "value": "Compendium.ptr2e.core-abilities.Item.Dh63Xai1qofF7Zo8",
+            "reevaluateOnUpdate": true,
+            "allowDuplicate": false,
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "system.free",
+                "value": "true"
+              }
+            ],
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "inMemoryOnly": false,
+            "track": false,
+            "replaceSelf": false,
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            }
+          },
+          {
+            "type": "add-trait",
+            "predicate": [
+              "forme:palafin-hero:active"
+            ],
+            "key": "",
+            "value": "propulsion",
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "add-trait",
+            "predicate": [
+              "forme:palafin-hero:active"
+            ],
+            "key": "",
+            "value": "well-built",
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "remove-trait",
+            "predicate": [
+              "forme:palafin-hero:active"
+            ],
+            "key": "",
+            "value": "jump-2",
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "add-trait",
+            "predicate": [
+              "forme:palafin-hero:active"
+            ],
+            "key": "",
+            "value": "jump-5",
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:palafin-hero:active"
+            ],
+            "key": "system.movement.overland.value",
+            "value": 5,
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "add-trait",
+            "predicate": [
+              "forme:palafin-hero:active"
+            ],
+            "key": "",
+            "value": "pack-leader",
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "add-trait",
+            "predicate": [
+              "forme:palafin-hero:active"
+            ],
+            "key": "",
+            "value": "ir-vision-15",
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "add-trait",
+            "predicate": [
+              "forme:palafin-hero:active"
+            ],
+            "key": "",
+            "value": "deep-diver",
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:palafin-hero:active"
+            ],
+            "key": "system.skills.acrobatics.value",
+            "value": 15,
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:palafin-hero:active"
+            ],
+            "key": "system.skills.climb.value",
+            "value": 20,
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:palafin-hero:active"
+            ],
+            "key": "system.skills.conversation.value",
+            "value": 10,
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:palafin-hero:active"
+            ],
+            "key": "system.skills.intimidate.value",
+            "value": 60,
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:palafin-hero:active"
+            ],
+            "key": "system.skills.leadership.value",
+            "value": 45,
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:palafin-hero:active"
+            ],
+            "key": "system.skills.lift.value",
+            "value": 45,
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:palafin-hero:active"
+            ],
+            "key": "system.skills.listen.value",
+            "value": 10,
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:palafin-hero:active"
+            ],
+            "key": "system.skills.navigate.value",
+            "value": 15,
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:palafin-hero:active"
+            ],
+            "key": "system.skills.negotitation.value",
+            "value": 15,
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:palafin-hero:active"
+            ],
+            "key": "system.skills.psychology.value",
+            "value": 10,
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:palafin-hero:active"
+            ],
+            "key": "system.skills.spot.value",
+            "value": 15,
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:palafin-hero:active"
+            ],
+            "key": "system.skills.survival.value",
+            "value": 20,
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:palafin-hero:active"
+            ],
+            "key": "system.skills.swim.value",
+            "value": 20,
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:palafin-hero:active"
+            ],
+            "key": "system.skills.track.value",
+            "value": 20,
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:palafin-hero:active"
+            ],
+            "key": "system.skills.running.value",
+            "value": 45,
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "grant-item",
+            "predicate": [
+              "forme:palafin-hero:active"
+            ],
+            "key": "",
+            "value": "Compendium.ptr2e.core-moves.Item.lyjLX6WIIrbdvqXS",
+            "reevaluateOnUpdate": true,
+            "allowDuplicate": false,
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "system.actions.0.free",
+                "value": "true"
+              }
+            ],
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "inMemoryOnly": false,
+            "track": false,
+            "replaceSelf": false,
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            }
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": false,
+        "removeOnRecall": false,
+        "stacks": 0,
+        "trigger": "manual",
+        "conditions": []
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "1.1.2.beta",
+        "createdTime": 1742824365123,
+        "modifiedTime": 1742828149316,
+        "lastModifiedBy": "pGrHtiBvIl79uG8D"
+      }
+    }
+  ]
 }
