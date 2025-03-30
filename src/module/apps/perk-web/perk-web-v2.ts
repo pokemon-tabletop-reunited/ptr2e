@@ -232,6 +232,7 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
               {
                 dexId: species.system.number,
                 shiny: this.actor!.system.shiny,
+                female: this.actor!.system.gender === "female",
                 forms: species.system.form ? species.system.form.split("-") : [],
               },
               config
@@ -242,6 +243,7 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
               {
                 dexId: species.system.number,
                 shiny: this.actor!.system.shiny,
+                female: this.actor!.system.gender === "female",
                 forms: species.system.form ? [...species.system.form.split("-"), "token"] : ["token"],
               },
               config
