@@ -10,6 +10,7 @@ import { BrowserFilter, CheckboxData, MultiselectData, RangesInputData, RenderRe
 import Tagify from "@yaireo/tagify";
 import noUiSlider from "nouislider";
 import { ConsumablePTR2e } from "@item";
+import { CompendiumBrowserSettings as CompendiumBrowserSettingsApp } from "./settings.ts";
 
 export class CompendiumBrowser extends foundry.applications.api.HandlebarsApplicationMixin(ApplicationV2Expanded) {
   static override DEFAULT_OPTIONS = fu.mergeObject(
@@ -24,42 +25,35 @@ export class CompendiumBrowser extends foundry.applications.api.HandlebarsApplic
       },
       window: {
         minimizable: true,
-        resizable: true,
-        controls: [
-          // TODO: Add button to Open Settings
-          // {
-          //   label: "PTR2E.ItemSheet.SendToChatLabel",
-          //   icon: "fas fa-arrow-up-right-from-square",
-          //   action: "toChat"
-          // },
-        ]
+        resizable: true
       },
       dragDrop: [{ dragSelector: "li.item[data-type]" }],
       actions: {
         tutorList: () => game.ptr.tutorList.render({ force: true, actor: null }),
         purchase: async function (this: CompendiumBrowser, event: PointerEvent) {
           const actor = canvas?.tokens?.controlled?.[0]?.actor ?? game.user.character;
-          if(!actor) return void ui.notifications.error("PTR2E.CompendiumBrowser.Purchase.NotControlledToken", {localize: true});
+          if (!actor) return void ui.notifications.error("PTR2E.CompendiumBrowser.Purchase.NotControlledToken", { localize: true });
 
           const itemUuid = htmlClosest(event.target, "[data-entry-uuid]")?.dataset.entryUuid;
           const item = await fromUuid<ConsumablePTR2e>(itemUuid);
-          if(!item) return void ui.notifications.error("PTR2E.CompendiumBrowser.Purchase.ItemNotFound", {localize: true});
+          if (!item) return void ui.notifications.error("PTR2E.CompendiumBrowser.Purchase.ItemNotFound", { localize: true });
 
           const cost = item.system.cost;
-          if(!cost) return void ui.notifications.error("PTR2E.CompendiumBrowser.Purchase.NoCost", {localize: true});
+          if (!cost) return void ui.notifications.error("PTR2E.CompendiumBrowser.Purchase.NoCost", { localize: true });
 
           const availableIP = actor.system.inventoryPoints.current;
-          if(cost > availableIP) return void ui.notifications.error(game.i18n.format("PTR2E.CompendiumBrowser.Purchase.NotEnoughIP", { required: cost, current: availableIP }));
+          if (cost > availableIP) return void ui.notifications.error(game.i18n.format("PTR2E.CompendiumBrowser.Purchase.NotEnoughIP", { required: cost, current: availableIP }));
 
           const newIP = availableIP - cost;
           await actor.update({ "system.inventoryPoints.current": newIP });
 
-          await actor.createEmbeddedDocuments("Item", [item.clone({"system.temporary": true}).toObject()]);
-          ui.notifications.info(game.i18n.format("PTR2E.CompendiumBrowser.Purchase.Success", { actor: actor.name, item: item.name, cost, remaining: newIP }));          
-          if(item.system.rarity !== "common") {
-            ui.notifications.warn("PTR2E.CompendiumBrowser.Purchase.RarityWarning", {localize: true});
+          await actor.createEmbeddedDocuments("Item", [item.clone({ "system.temporary": true }).toObject()]);
+          ui.notifications.info(game.i18n.format("PTR2E.CompendiumBrowser.Purchase.Success", { actor: actor.name, item: item.name, cost, remaining: newIP }));
+          if (item.system.rarity !== "common") {
+            ui.notifications.warn("PTR2E.CompendiumBrowser.Purchase.RarityWarning", { localize: true });
           }
-        }
+        },
+        settings: () => new CompendiumBrowserSettingsApp().render(true),
       }
     },
     { inplace: false }
@@ -122,7 +116,7 @@ export class CompendiumBrowser extends foundry.applications.api.HandlebarsApplic
       group: "tabs",
       icon: "",
       label: "PTR2E.CompendiumBrowser.Tabs.Traits",
-    },
+    }
   }
 
   _getTabs() {
@@ -179,11 +173,11 @@ export class CompendiumBrowser extends foundry.applications.api.HandlebarsApplic
     }
 
     const loadDefault: Record<string, boolean | undefined> = {
-      ability: true,
-      gear: true,
-      move: true,
-      perk: true,
-      species: true,
+      "ptr2e.core-abilities": true,
+      "ptr2e.core-gear": true,
+      "ptr2e.core-moves": true,
+      "ptr2e.core-perks": true,
+      "ptr2e.core-species": true
     }
 
     const browsableTypes = new Set([
@@ -252,6 +246,8 @@ export class CompendiumBrowser extends foundry.applications.api.HandlebarsApplic
     this.activeTab = tabName;
 
     if (tabName === "settings") {
+      await this.packLoader.updateSources(this.loadedPacksAll());
+      this.render({ parts: ["controls", "content"] });
       return;
     }
     if (!this.dataTabsList.includes(tabName)) {
@@ -280,11 +276,17 @@ export class CompendiumBrowser extends foundry.applications.api.HandlebarsApplic
   override async _renderFrame(options: foundry.applications.api.HandlebarsRenderOptions): Promise<HTMLElement> {
     const frame = await super._renderFrame(options);
 
-    // Add send to chat button
+    // Add Open Tutor List button
     const openTutorList = game.i18n.localize("PTR2E.OpenTutorList");
     const tutorList = `<button type="button" class="header-control fa-solid fa-list" data-action="tutorList"
                                 data-tooltip="${openTutorList}" aria-label="${openTutorList}"></button>`;
     this.window.controls.insertAdjacentHTML("afterend", tutorList);
+
+    // Add Open Settings button
+    const openSettingsList = game.i18n.localize("PTR2E.CompendiumBrowser.OpenSettings");
+    const openSettings = `<button type="button" class="header-control fa-solid fa-cog" data-action="settings"
+                                data-tooltip="${openSettingsList}" aria-label="${openSettingsList}"></button>`;
+    this.window.controls.insertAdjacentHTML("afterend", openSettings);
 
     return frame;
   }
@@ -304,7 +306,7 @@ export class CompendiumBrowser extends foundry.applications.api.HandlebarsApplic
       filterData: tab?.filterData,
       [activeTab]: activeTab === "settings" ? settings : { filterData: tab?.filterData },
       scrollLimit: tab?.scrollLimit,
-      tabs: this._getTabs()
+      tabs: this._getTabs(),
     };
   }
 
@@ -316,7 +318,15 @@ export class CompendiumBrowser extends foundry.applications.api.HandlebarsApplic
     super._attachPartListeners(partId, htmlElement, options);
 
     const activeTabName = this.activeTab;
-    if (!activeTabName || activeTabName === "settings") return;
+    if (!activeTabName) return;
+
+    if (activeTabName === "settings") {
+      const settings = htmlQuery(htmlElement, ".compendium-browser-settings");
+      const form = settings?.querySelector<HTMLFormElement>("form");
+      if (!form) return;
+
+      return;
+    }
 
     if (this.tabGroups["tabs"] !== activeTabName) {
       this.changeTab(activeTabName, "tabs", { force: true });
@@ -415,7 +425,7 @@ export class CompendiumBrowser extends foundry.applications.api.HandlebarsApplic
           };
           switch (filterType) {
             case "checkboxes": {
-              if (!currentTab.isOfType("species", "gear", "move")) return;
+              if (currentTab.isOfType("traits")) return;
               if (objectHasKey(currentTab.filterData.checkboxes, filterName)) {
                 toggleFilter(currentTab.filterData.checkboxes[filterName]);
               }
@@ -434,7 +444,7 @@ export class CompendiumBrowser extends foundry.applications.api.HandlebarsApplic
         if (filterType === "checkboxes") {
           container.querySelectorAll<HTMLInputElement>("input[type=checkbox]").forEach((checkboxElement) => {
             checkboxElement.addEventListener("click", () => {
-              if (!currentTab.isOfType("species", "gear", "move")) return;
+              if (currentTab.isOfType("traits")) return;
               if (objectHasKey(currentTab.filterData.checkboxes, filterName)) {
                 const optionName = checkboxElement.name;
                 const checkbox = currentTab.filterData.checkboxes[filterName] as CheckboxData;
@@ -738,5 +748,9 @@ export class CompendiumBrowser extends foundry.applications.api.HandlebarsApplic
       tab.filterData.search.text = "";
     }
     super._onClose(options);
+  }
+
+  override _canDragStart(): boolean {
+    return true;
   }
 }
