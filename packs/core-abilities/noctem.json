@@ -7,10 +7,30 @@
       {
         "traits": [
           "weather",
-          "interrupt-2"
+          "interrupt-4"
         ],
         "name": "Noctem",
         "slug": "noctem",
+        "type": "generic",
+        "cost": {
+          "activation": "free",
+          "powerPoints": 6,
+          "trigger": "<p>The user enters combat or emerges from stealth.</p>"
+        },
+        "range": {
+          "target": "self",
+          "unit": "m"
+        },
+        "description": "<p>Trigger: The user enters combat or emerges from stealth.</p><p>Effect: The user freely uses New Moon.</p>",
+        "img": "icons/svg/explosion.svg"
+      },
+      {
+        "traits": [
+          "weather",
+          "interrupt-2"
+        ],
+        "name": "Noctem (Extend)",
+        "slug": "noctem-extend",
         "type": "attack",
         "cost": {
           "activation": "free",
@@ -32,7 +52,7 @@
         "predicate": []
       }
     ],
-    "description": "<p>Trigger: The user declares New Moon.</p><p>Effect: Connection - New Moon. The set Gloomy Weather has its duration increased by +2 Rounds.</p>",
+    "description": "<p>Trigger: The user enters combat or emerges from stealth.</p><p>Effect: Connection - New Moon. The user freely uses New Moon. When the user sets Gloomy Weather, they may spend 2 PP to increase its duration by +2 Rounds.</p>",
     "traits": [
       "connection",
       "weather"
