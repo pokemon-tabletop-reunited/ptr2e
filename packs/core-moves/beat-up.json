@@ -11,8 +11,8 @@
         "type": "attack",
         "traits": [
           "dash",
-          "x-strike",
-          "pp-updated"
+          "pp-updated",
+          "5-strike"
         ],
         "range": {
           "target": "creature",
@@ -21,7 +21,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 2
+          "powerPoints": 4
         },
         "category": "physical",
         "power": 15,
@@ -29,20 +29,23 @@
         "types": [
           "dark"
         ],
-        "description": "<p>This attacks's [X-Stike] value is equal to 1 plus the number of allied creatures that have the target within their Reach, to a maximum of 15 hits.</p>",
-        "contestType": "",
-        "contestEffect": "",
-        "free": false,
-        "slot": null
+        "description": "<p>Effect: The number of times this attack \"hits\" due to @Trait[5-Stike] is increased by +1 for each of the users' allies that have the target within their Reach, maxing out at <em>11+d4</em> hits for having 10 allies within Reach.</p>",
+        "img": "systems/ptr2e/img/svg/dark_icon.svg",
+        "predicate": []
       }
     ],
-    "container": null,
     "grade": "D",
     "publication": {
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
+      ],
+      "notes": ""
+    },
+    "traits": [],
+    "_migration": {
+      "version": null,
+      "previous": null
     }
   },
   "_id": "V9TPmNdhcCvnw98x",
