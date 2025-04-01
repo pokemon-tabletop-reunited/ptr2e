@@ -27,14 +27,30 @@
       "system": {
         "changes": [
           {
-            "type": "ephemeral-modifier",
-            "key": "attack-damage-percentile",
-            "value": -75,
+            "type": "roll-option",
+            "key": "",
+            "value": "boss-dr-active",
             "predicate": [],
+            "domain": "all",
+            "toggleable": true,
+            "count": false,
+            "state": true,
+            "alwaysActive": false,
             "mode": 2,
             "priority": null,
             "ignored": false,
-            "hideIfDisabled": false
+            "suboptions": []
+          },
+          {
+            "type": "basic",
+            "key": "system.modifiers.vulnerabilityMultiplier",
+            "value": -0.75,
+            "predicate": [
+              "boss-dr-active"
+            ],
+            "mode": 2,
+            "priority": null,
+            "ignored": false
           }
         ],
         "slug": null,

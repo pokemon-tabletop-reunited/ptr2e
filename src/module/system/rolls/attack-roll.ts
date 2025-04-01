@@ -208,15 +208,17 @@ class AttackRoll extends CheckRoll {
 
   static calculateFlatDamage(attack: SummonAttackPTR2e, target: ActorPTR2e): Maybe<DamageCalc> {
     const formula = attack.getFormula()
+    const multiplier = isNaN(target.system.modifiers["vulnerabilityMultiplier"] ?? 1) ? 1 : (target.system.modifiers["vulnerabilityMultiplier"] ?? 1);
     const roll = new Roll(
-      formula,
+      formula + (multiplier !== 1 ? ` * @multiplier` : ""),
       {
         actor: target,
         health: {
           max: target.system.health.max,
           current: target.system.health.value,
         },
-        formula: formula
+        formula: formula,
+        multiplier
       }
     ).evaluateSync();
 
