@@ -39,6 +39,11 @@ class AttackRoll extends CheckRoll {
 
     options.moveAccuracy = attack.accuracy ?? 100
 
+    const isUnaware = {
+      target: options.targetUnaware,
+      origin: options.originUnaware
+    }
+
     const formula = "1d100ms@dc";
     const dc = ((
       baseAccuracy: number,
@@ -47,9 +52,9 @@ class AttackRoll extends CheckRoll {
     ) => {
       const { flat: accuracyFlat, stage: accuracyStage, percentile: accuracyPercent } = accuracyModifiers;
       const stageBonus = (() => {
-        const accuracy = accuracyStage;
+        const accuracy = isUnaware.target ? 0 : accuracyStage;
         if (Math.abs(accuracy) === Infinity) return -Infinity;
-        const evasion = evasionStage;
+        const evasion = isUnaware.origin ? 0 : evasionStage;
         const stages = Math.clamp(accuracy - evasion, -6, 6);
         options.adjustedStages = stages;
         return stages >= 0 ? (3 + stages) / 3 : 3 / (3 - stages);
@@ -82,7 +87,7 @@ class AttackRoll extends CheckRoll {
     // Status moves cannot crit
     if (attack.category === "status") return null;
 
-    options.critStages = Math.clamp(data.check.total?.crit?.stage ?? 0, 0, 4)
+    options.critStages = options.targetUnaware ? 0 : Math.clamp(data.check.total?.crit?.stage ?? 0, 0, 4)
 
     const formula = "1d100ms@dc";
     const dc = ((stage: 0 | 1 | 2 | 3 | 4): number => {
@@ -155,15 +160,20 @@ class AttackRoll extends CheckRoll {
     // Get the randomness of the Roll
     const damageRoll = Number(this.result);
 
+    const isUnaware = {
+      target: !!target.rollOptions.all["special:unaware"],
+      origin: !!origin.rollOptions.all["special:unaware"]
+    }
+
     // Attack & Defense stats of the origin and target
-    const attackStat = attack.getAttackStat(useEnemyStats ? target : attack.actor);
-    const defenseStat = target.getDefenseStat(attack, isCritHit);
+    const attackStat = attack.getAttackStat(useEnemyStats ? target : attack.actor, useEnemyStats ? false : isUnaware.target);
+    const defenseStat = target.getDefenseStat(attack, isCritHit, isUnaware.origin);
 
     // Check for Sniper
     const hasSniper = origin.rollOptions.getFromDomain("item")["ability:sniper:active"];
 
     // Type effectiveness
-    const effectivenessStage = parseInt(this.options.effectivenessStage+"");
+    const effectivenessStage = parseInt(this.options.effectivenessStage + "");
     const typeEffectiveness = target.getEffectiveness(attack.types, effectivenessStage, this.options.ignoreImmune ?? false);
 
     // Other modifiers
@@ -253,6 +263,8 @@ type AttackRollDataPTR2e = CheckRollDataPTR2e & {
   statMod: number;
   effectivenessStage: number;
   ignoreImmune: boolean;
+  targetUnaware: boolean;
+  originUnaware: boolean;
 } & AccuracyContext
 
 export { AttackRoll, type AttackRollDataPTR2e, type AttackRollCreationData };

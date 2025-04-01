@@ -765,23 +765,23 @@ class ActorPTR2e<
     return this.system.attributes.spe.stage + (this.system.modifiers["speed"] ?? 0);
   }
 
-  getDefenseStat(attack: { category: AttackPTR2e["category"], defensiveStat: PTRCONSTS.Stat | null }, isCrit: boolean) {
+  getDefenseStat(attack: { category: AttackPTR2e["category"], defensiveStat: PTRCONSTS.Stat | null }, isCrit: boolean, ignoreStages: boolean) {
     const stat: PTRCONSTS.Stat = attack.defensiveStat ?? (attack.category === "physical" ? "def" : "spd");
-    return this.calcStatTotal(this.system.attributes[stat], isCrit);
+    return this.calcStatTotal(this.system.attributes[stat], isCrit, ignoreStages ?? false);
   }
 
-  getAttackStat(attack: { category: AttackPTR2e["category"], offensiveStat: PTRCONSTS.Stat | null }) {
+  getAttackStat(attack: { category: AttackPTR2e["category"], offensiveStat: PTRCONSTS.Stat | null }, ignoreStages: boolean) {
     const stat: PTRCONSTS.Stat = attack.offensiveStat ?? (attack.category === "physical" ? "atk" : "spa");
-    return this.calcStatTotal(this.system.attributes[stat], false);
+    return this.calcStatTotal(this.system.attributes[stat], false, ignoreStages ?? false);
   }
 
-  calcStatTotal(stat: Attribute | Omit<Attribute, 'stage'>, isCrit: boolean): number {
+  calcStatTotal(stat: Attribute | Omit<Attribute, 'stage'>, isCrit: boolean, ignoreStages: boolean): number {
     function isAttribute(attribute: Attribute | Omit<Attribute, 'stage'>): attribute is Attribute {
       return attribute.slug !== "hp";
     }
     if (!isAttribute(stat)) return stat.value;
     const stageModifier = () => {
-      const stage = Math.clamp(stat.stage, -6, isCrit ? 0 : 6);
+      const stage = ignoreStages ? 0 : Math.clamp(stat.stage, -6, isCrit ? 0 : 6);
       return stage > 0 ? (2 + stage) / 2 : 2 / (2 + Math.abs(stage));
     };
     return stat.value * stageModifier();
