@@ -268,48 +268,6 @@
         }
       }
     },
-    "SETTINGS": {
-      "Settings": "Settings",
-      "CompendiumBrowserSources": {
-        "DeleteAllInfo": "All compendium documents will become browseable, including those with empty sources.",
-        "DeleteAllQuestion": "Are you sure you want to reset all settings for included sources?",
-        "DeleteAllTitle": "Reset Settings",
-        "Hint": "Settings to display only entries with specified sources in the compendium browser.",
-        "IgnoreAsGM": "Let GMs ignore filtering and see all entries.",
-        "Name": "Included Sources",
-        "ShowEmptySources": "Do not filter entries with empty sources.",
-        "ShowUnknownSources": "Do not filter entries with unknown sources.",
-        "SourcesListHeader": "Specified Sources"
-      },
-      "CompendiumBrowserPacks": {
-        "Hint": "Settings to exclude packs from loading",
-        "Name": "Compendium Browser Packs"
-      },
-      "Defaults": {
-        "Blueprint": {
-          "Level": {
-            "Name": "Default Blueprint Level",
-            "Hint": "The level must be a positive integer, a range in the format `a-b`, a Rolltable UUID or blank (random)."
-          },
-          "Shiny": {
-            "Name": "Default Blueprint Shiny",
-            "Hint": "The % chance for the Pokémon to be shiny."
-          },
-          "Nature": {
-            "Name": "Default Blueprint Nature",
-            "Hint": "The nature must be a valid nature, a UUID to a Rolltable or blank (random)."
-          },
-          "Gender": {
-            "Name": "Default Blueprint Gender",
-            "Hint": "The gender of the Pokémon, if 'Random' is selected, the species' gender ratio is used."
-          },
-          "Perk": {
-            "Name": "Default Blueprint Perk Config",
-            "Hint": "Label or ID of the globally saved Perk Generator Config."
-          }
-        }
-      }
-    },
     "Inventory": {
       "weapon": "Weapons",
       "equipment": "Equipment",
@@ -514,7 +472,8 @@
       "NotEnoughPP": "Unable to spend {cost} power points. You only have {current}.",
       "UnableToAct": "{action} Failed! ",
       "FlingTargetNotAllyOrGrappled": "Fling 'Actor-Toss' can only target allies or grappled enemies.",
-      "CannotCaptureTarget": "Oops! This target is not capturable!"
+      "CannotCaptureTarget": "Oops! This target is not capturable!",
+      "NoValidTargets": "Make sure you are targeting a token before using this action!"
     },
     "TokenDeleteWarning": "You cannot delete Tokens that are Stuck!",
     "DataInspector": {
@@ -1428,6 +1387,46 @@
       "ExpandRolls": {
         "Name": "Auto Expand Rolls",
         "Hint": "Expand the roll details by default."
+      },
+      "Settings": "Settings",
+      "CompendiumBrowserSources": {
+        "DeleteAllInfo": "All compendium documents will become browseable, including those with empty sources.",
+        "DeleteAllQuestion": "Are you sure you want to reset all settings for included sources?",
+        "DeleteAllTitle": "Reset Settings",
+        "Hint": "Settings to display only entries with specified sources in the compendium browser.",
+        "IgnoreAsGM": "Let GMs ignore filtering and see all entries.",
+        "Name": "Included Sources",
+        "ShowEmptySources": "Do not filter entries with empty sources.",
+        "ShowUnknownSources": "Do not filter entries with unknown sources.",
+        "SourcesListHeader": "Specified Sources"
+      },
+      "CompendiumBrowserPacks": {
+        "Hint": "Settings to exclude packs from loading",
+        "Name": "Compendium Browser Packs"
+      },
+      "Defaults": {
+        "Blueprint": {
+          "Level": {
+            "Name": "Default Blueprint Level",
+            "Hint": "The level must be a positive integer, a range in the format `a-b`, a Rolltable UUID or blank (random)."
+          },
+          "Shiny": {
+            "Name": "Default Blueprint Shiny",
+            "Hint": "The % chance for the Pokémon to be shiny."
+          },
+          "Nature": {
+            "Name": "Default Blueprint Nature",
+            "Hint": "The nature must be a valid nature, a UUID to a Rolltable or blank (random)."
+          },
+          "Gender": {
+            "Name": "Default Blueprint Gender",
+            "Hint": "The gender of the Pokémon, if 'Random' is selected, the species' gender ratio is used."
+          },
+          "Perk": {
+            "Name": "Default Blueprint Perk Config",
+            "Hint": "Label or ID of the globally saved Perk Generator Config."
+          }
+        }
       }
     },
     "SkillsEditor": {

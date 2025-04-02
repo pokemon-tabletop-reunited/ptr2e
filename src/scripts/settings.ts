@@ -224,18 +224,27 @@ export function initializeSettings() {
     scope: "client"
   })
 
+  game.settings.register("ptr2e", "preferences.must-target", {
+    name: "PTR2E.Settings.Preferences.MustTarget.Name",
+    hint: "PTR2E.Settings.Preferences.MustTarget.Hint",
+    default: true,
+    config: true,
+    type: Boolean,
+    scope: "client"
+  })
+
   game.settings.register("ptr2e", "global-perk-configs", {
-    name: "PTR2E.SETTINGS.GlobalPerkConfigs.Name",
-    hint: "PTR2E.SETTINGS.GlobalPerkConfigs.Hint",
+    name: "PTR2E.Settings.GlobalPerkConfigs.Name",
+    hint: "PTR2E.Settings.GlobalPerkConfigs.Hint",
     default: [],
     config: false,
     type: Object,
     scope: "world"
   });
 
-  game.settings.register("ptr2e", "defaults-blueprint-level", {
-    name: "PTR2E.SETTINGS.Defaults.Blueprint.Level.Name",
-    hint: "PTR2E.SETTINGS.Defaults.Blueprint.Level.Hint",
+  game.settings.register("ptr2e", "defaults.blueprint.level", {
+    name: "PTR2E.Settings.Defaults.Blueprint.Level.Name",
+    hint: "PTR2E.Settings.Defaults.Blueprint.Level.Hint",
     config: true,
     default: null,
     type: new foundry.data.fields.StringField({
@@ -275,9 +284,9 @@ export function initializeSettings() {
     scope: "world"
   });
 
-  game.settings.register("ptr2e", "defaults-blueprint-nature", {
-    name: "PTR2E.SETTINGS.Defaults.Blueprint.Nature.Name",
-    hint: "PTR2E.SETTINGS.Defaults.Blueprint.Nature.Hint",
+  game.settings.register("ptr2e", "defaults.blueprint.nature", {
+    name: "PTR2E.Settings.Defaults.Blueprint.Nature.Name",
+    hint: "PTR2E.Settings.Defaults.Blueprint.Nature.Hint",
     config: true,
     default: null,
     type: new foundry.data.fields.StringField({
@@ -303,9 +312,9 @@ export function initializeSettings() {
     scope: "world"
   });
 
-  game.settings.register("ptr2e", "defaults-blueprint-gender", {
-    name: "PTR2E.SETTINGS.Defaults.Blueprint.Gender.Name",
-    hint: "PTR2E.SETTINGS.Defaults.Blueprint.Gender.Hint",
+  game.settings.register("ptr2e", "defaults.blueprint.gender", {
+    name: "PTR2E.Settings.Defaults.Blueprint.Gender.Name",
+    hint: "PTR2E.Settings.Defaults.Blueprint.Gender.Hint",
     config: true,
     default: null,
     type: new foundry.data.fields.StringField({
@@ -318,9 +327,9 @@ export function initializeSettings() {
     scope: "world"
   });
 
-  game.settings.register("ptr2e", "defaults-blueprint-shiny", {
-    name: "PTR2E.SETTINGS.Defaults.Blueprint.Shiny.Name",
-    hint: "PTR2E.SETTINGS.Defaults.Blueprint.Shiny.Hint",
+  game.settings.register("ptr2e", "defaults.blueprint.shiny", {
+    name: "PTR2E.Settings.Defaults.Blueprint.Shiny.Name",
+    hint: "PTR2E.Settings.Defaults.Blueprint.Shiny.Hint",
     config: true,
     default: 1,
     type: new foundry.data.fields.NumberField({
@@ -334,9 +343,9 @@ export function initializeSettings() {
     scope: "world"
   });
 
-  game.settings.register("ptr2e", "defaults-blueprint-perk", {
-    name: "PTR2E.SETTINGS.Defaults.Blueprint.Perk.Name",
-    hint: "PTR2E.SETTINGS.Defaults.Blueprint.Perk.Hint",
+  game.settings.register("ptr2e", "defaults.blueprint.perk", {
+    name: "PTR2E.Settings.Defaults.Blueprint.Perk.Name",
+    hint: "PTR2E.Settings.Defaults.Blueprint.Perk.Hint",
     config: true,
     default: null,
     type: String,

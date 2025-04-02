@@ -365,7 +365,7 @@ class AttackCheck<TParent extends AttackStatistic = AttackStatistic> implements 
     }
     // TODO: Change 'false' here to game setting
     // eslint-disable-next-line no-constant-condition
-    if (!anyValidTargets && false) {
+    if (!anyValidTargets && game.settings.get("ptr2e", "preferences.must-target")) {
       ui.notifications.warn(game.i18n.localize("PTR2E.AttackWarning.NoValidTargets"));
       return null;
     }

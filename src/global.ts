@@ -140,12 +140,12 @@ declare global {
     get(module: "ptr2e", key: "compendiumBrowserPacks"): CompendiumBrowserSettings
     get(module: "ptr2e", key: "tutorListData"): TutorListSettings
     get(module: "ptr2e", key: "expTrackerData"): ExpTrackerSettings
-    get(module: "ptr2e", key: "tokens.autoscale" | "expand-rolls"): boolean
+    get(module: "ptr2e", key: "tokens.autoscale" | "expand-rolls" | "preferences.must-target"): boolean
     get(module: "ptr2e", key: "pokemonTypes"): TypeEffectiveness
     get(module: "ptr2e", key: "global-perk-configs"): GeneratorConfig['_source'][]
-    get(module: "ptr2e", key: "defaults-blueprint-level" | "defaults-blueprint-nature" | "defaults-blueprint-perk"): string | null
-    get(module: "ptr2e", key: "defaults-blueprint-gender"): "random" | "male" | "female" | "genderless" | null
-    get(module: "ptr2e", key: "defaults-blueprint-shiny"): number;
+    get(module: "ptr2e", key: "defaults.blueprint.level" | "defaults.blueprint.nature" | "defaults.blueprint.perk"): string | null
+    get(module: "ptr2e", key: "defaults.blueprint.gender"): "random" | "male" | "female" | "genderless" | null
+    get(module: "ptr2e", key: "defaults.blueprint.shiny"): number;
     set(module: "ptr2e", key: "expTrackerData", value: ExpTrackerSettings['_source']): ExpTrackerSettings
   }
 

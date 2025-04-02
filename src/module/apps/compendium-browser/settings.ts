@@ -129,7 +129,7 @@ export class CompendiumBrowserSettings extends foundry.applications.api.Handleba
 
     const deleteButton = htmlQuery<HTMLInputElement>(htmlElement, "button[data-action=settings-sources-delete]");
     deleteButton?.addEventListener("click", async () => {
-      const localize = localizer("PTR2E.SETTINGS.CompendiumBrowserSources");
+      const localize = localizer("PTR2E.Settings.CompendiumBrowserSources");
       const confirm = await Dialog.confirm({
         title: localize("DeleteAllTitle"),
         content: `

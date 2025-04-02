@@ -61,7 +61,7 @@ class Blueprint extends foundry.abstract.DataModel {
         required: true,
         initial: () => {
           if(game?.settings) {
-            return game.settings.get("ptr2e", "defaults-blueprint-shiny") ?? 1;
+            return game.settings.get("ptr2e", "defaults.blueprint.shiny") ?? 1;
           }
           return 1;
         },
@@ -76,7 +76,7 @@ class Blueprint extends foundry.abstract.DataModel {
         required: true, 
         initial: () => {
           if(game?.settings) {
-            return game.settings.get("ptr2e", "defaults-blueprint-level") || null;
+            return game.settings.get("ptr2e", "defaults.blueprint.level") || null;
           }
           return null;
         }, 
@@ -119,7 +119,7 @@ class Blueprint extends foundry.abstract.DataModel {
       nature: new fields.StringField({
         required: true, initial: () => {
           if(game?.settings) {
-            return game.settings.get("ptr2e", "defaults-blueprint-nature") || null;
+            return game.settings.get("ptr2e", "defaults.blueprint.nature") || null;
           }
           return null;
         }, nullable: true, blank: false, trim: true, validate: (value) => {
@@ -146,7 +146,7 @@ class Blueprint extends foundry.abstract.DataModel {
       gender: new fields.StringField({
         required: true, initial: () => {
           if(game?.settings) {
-            return game.settings.get("ptr2e", "defaults-blueprint-gender") || null;
+            return game.settings.get("ptr2e", "defaults.blueprint.gender") || null;
           }
           return null;
         }, nullable: true, trim: true, blank: false, choices: ["random", "male", "female", "genderless"].reduce((acc, val) => ({ ...acc, [val]: val }), {}),
@@ -202,7 +202,7 @@ class Blueprint extends foundry.abstract.DataModel {
       }),
       _config: new fields.EmbeddedDataField(GeneratorConfig, { required: true, nullable: true, initial: () => {
         if(game?.settings) {
-          const setting = game.settings.get("ptr2e", "defaults-blueprint-perk") || null;
+          const setting = game.settings.get("ptr2e", "defaults.blueprint.perk") || null;
           if(!setting) return null;
           const configs = game.settings.get("ptr2e", "global-perk-configs");
           const exists = configs.find(c => c.id === setting || c.label === setting);
