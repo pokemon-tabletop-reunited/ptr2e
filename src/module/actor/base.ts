@@ -639,6 +639,7 @@ class ActorPTR2e<
       effectiveness[typeKey] = 1;
       for (const key of this.system.type.types) {
         const type = key as PokemonType;
+        if(types[type] === undefined) continue;
         if (typeKey === "shadow") {
           if (type === "shadow") {
             effectiveness[typeKey] = 0.5;
