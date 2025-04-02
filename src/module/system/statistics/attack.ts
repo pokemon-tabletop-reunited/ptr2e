@@ -357,6 +357,8 @@ class AttackCheck<TParent extends AttackStatistic = AttackStatistic> implements 
         // TODO: Calculate Accuracy and determine if RIP is within range
         // This includes target evasion
         anyValidTargets = true;
+      } else {
+        anyValidTargets = true;
       }
 
       currContext.notes = extractNotes(currContext.self.actor.synthetics.rollNotes, domains).filter(n => n.predicate.test(options))

@@ -6,6 +6,7 @@ import { BasicChangeSystem, ResolveValueParams } from "@data";
 import { BracketedValue, RuleValue } from "../data.ts";
 import { isBracketedValue, isObject } from "@utils";
 import * as R from "remeda";
+import { ActorPTR2e } from "@actor";
 
 class ItemAlteration extends foundry.abstract.DataModel<ChangeModel> {
 
@@ -35,21 +36,24 @@ class ItemAlteration extends foundry.abstract.DataModel<ChangeModel> {
   }
 
   get effect() {
-    return this.change.effect;
+    return this.change?.effect;
   }
 
   get actor() {
-    return this.change.actor;
+    return this.change?.actor ?? this._actor;
   }
 
-  applyTo(item: ItemPTR2e | ItemSourcePTR2e): void {
+  private _actor: ActorPTR2e | null = null;
+
+  applyTo(item: ItemPTR2e | ItemSourcePTR2e, actor?: ActorPTR2e): void {
     if(item instanceof ItemPTR2e) {
       return this.applyToItem(item);
     }
+    if(actor) this._actor = actor;
 
     const property = item.type === "effect" && !this.property.startsWith("effects.") ? `effects.0.${this.property}` : this.property;
-    const current = fu.getProperty(item, property);
-    const value = typeof this.value === "boolean" ? this.value : this.resolveInjectedProperties(this.value);
+    const current = fu.getProperty(item, property) as JSONValue;
+    const value = typeof this.value === "boolean" ? this.value : this.resolveValue(this.value, current, {evaluate: true} );
     const change = BasicChangeSystem.getNewValue(this.mode, current, value, false)
 
     const isArrayChange = (Array.isArray(current) || current instanceof Set) && (current as unknown[]).every(e => typeof e === typeof value)

@@ -573,7 +573,7 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
 
           try {
             for (const alteration of effectRoll.alterations ?? []) {
-              alteration.applyTo(grantedSource as ItemSourcePTR2e);
+              alteration.applyTo(grantedSource as ItemSourcePTR2e, target);
             }
 
             toApply.push(...grantedSource.effects as ActiveEffectPTR2e['_source'][]);
