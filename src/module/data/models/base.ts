@@ -1,4 +1,4 @@
-import { ActionPTR2e, AttackPTR2e, PassivePTR2e, BasicChangeSystem, RollOptionChangeSystem, FlatModifierChangeSystem, GrantItemChangeSystem, StageModifierSystem, PercentileModifierSystem, GrantEffectChangeSystem, EphemeralEffectChangeSystem, RollNoteChangeSystem, EffectRollChangeSystem, ChoiceSetChangeSystem, AddTraitChangeSystem, RemoveTraitChangeSystem, AlterAttackChangeSystem, SummonAttackPTR2e, EphemeralModifierChangeSystem, SuppresAbilityChangeSystem, TokenAlterationsChangeSystem, StatsAlterationChangeSystem, AuraChangeSystem, TokenTagChangeSystem } from "@data";
+import { ActionPTR2e, AttackPTR2e, PassivePTR2e, BasicChangeSystem, RollOptionChangeSystem, FlatModifierChangeSystem, GrantItemChangeSystem, StageModifierSystem, PercentileModifierSystem, GrantEffectChangeSystem, EphemeralEffectChangeSystem, RollNoteChangeSystem, EffectRollChangeSystem, ChoiceSetChangeSystem, AddTraitChangeSystem, RemoveTraitChangeSystem, AlterAttackChangeSystem, SummonAttackPTR2e, EphemeralModifierChangeSystem, SuppresAbilityChangeSystem, TokenAlterationsChangeSystem, StatsAlterationChangeSystem, AuraChangeSystem, TokenTagChangeSystem, CreateClockChangeSystem } from "@data";
 
 let changeTypes;
 export function ChangeModelTypes() {
@@ -23,6 +23,7 @@ export function ChangeModelTypes() {
     [TokenTagChangeSystem.TYPE]: TokenTagChangeSystem,
     [TokenAlterationsChangeSystem.TYPE]: TokenAlterationsChangeSystem,
     [EphemeralEffectChangeSystem.TYPE]: EphemeralEffectChangeSystem,
+    [CreateClockChangeSystem.TYPE]: CreateClockChangeSystem,
   });
 }
 

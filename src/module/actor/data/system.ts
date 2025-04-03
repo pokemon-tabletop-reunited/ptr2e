@@ -368,6 +368,14 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
       this.parent.rollOptions.addOption("clocks", `${clock.id}:value:${clock.value}`)
       this.parent.rollOptions.addOption("clocks", `${clock.id}:max:${clock.max}`)
     }
+    Object.defineProperty(this.clocks, "lookup", {
+      get: () => {
+        return this.clocks.contents.reduce((acc, clock) => {
+          acc[clock.id] = clock.value;
+          return acc;
+        }, {} as Record<string, number>);
+      }
+    })
 
     this.advancement.level = this.getLevel();
     if (this.parent.isHumanoid()) {

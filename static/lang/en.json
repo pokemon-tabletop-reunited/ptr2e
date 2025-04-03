@@ -685,7 +685,8 @@
           "token-alterations": "Token Alteration",
           "stats-alteration": "Stats Alteration",
           "aura": "Aura",
-          "token-tag": "Token Tag"
+          "token-tag": "Token Tag",
+          "create-clock": "Create Clock"
         },
         "ChangeLabel": {
           "label": "Label",
@@ -726,6 +727,9 @@
             "notAnItemUuid": "UUID must be a valid Item UUID.",
             "itemNotFound": "Failed to find an Item with UUID \"{uuid}\"."
           }
+        },
+        "ChangeId": {
+          "invalid": "The ID must be a valid alphanumeric string of exactly 16 characters."
         },
         "ChangeChance": {
           "label": "Chance",
@@ -1872,7 +1876,7 @@
       "clock": {
         "id": {
           "label": "Clock ID",
-          "hint": "The unique identifier of the clock."
+          "hint": "The unique identifier of the clock. Must be exactly 16 characters long and only contain letters and numbers."
         },
         "label": {
           "label": "Clock Label",
@@ -1892,7 +1896,7 @@
         },
         "private": {
           "label": "Private Clock",
-          "hint": "Whether the clock is private."
+          "hint": "Whether the clock is only visible to GMs."
         }
       },
       "prerequisites": {

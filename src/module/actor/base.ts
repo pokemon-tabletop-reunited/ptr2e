@@ -274,6 +274,17 @@ class ActorPTR2e<
       })) ?? [];
   }
 
+  get clocks() {
+    return this._clocks ?? (this._clocks = this.system.clocks.reduce((acc, clock) => {
+      Object.defineProperty(acc, clock.id, {
+        get: () => {
+          return this.system.clocks.get(clock.id)?.value ?? null;
+        }
+      })
+      return acc;
+    }, {}));
+  }
+
   protected override _initializeSource(
     data: Record<string, unknown>,
     options?: DataModelConstructionOptions<TParent> | undefined
@@ -324,6 +335,7 @@ class ActorPTR2e<
     this._party = null;
     this._perks = null;
     this._species = null;
+    this._clocks = null;
 
     this.rollOptions = new RollOptionManager(this);
 
@@ -639,7 +651,7 @@ class ActorPTR2e<
       effectiveness[typeKey] = 1;
       for (const key of this.system.type.types) {
         const type = key as PokemonType;
-        if(types[type] === undefined) continue;
+        if (types[type] === undefined) continue;
         if (typeKey === "shadow") {
           if (type === "shadow") {
             effectiveness[typeKey] = 0.5;
@@ -2295,6 +2307,7 @@ interface ActorPTR2e<
 
   _actions: ActionsCollections;
   _perks: Map<string, PerkPTR2e> | null;
+  _clocks: Record<string, unknown> | null;
 
   level: number;
 
