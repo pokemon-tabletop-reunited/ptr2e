@@ -255,10 +255,10 @@ class ItemAlteration extends foundry.abstract.DataModel<ChangeModel> {
     }
 
     if (typeof resolvedFromBracket === "string") {
-      const saferEval = (formula: string): number => {
+      const saferEval = (formula: string): string | number => {
         try {
           // If any resolvables were not provided for this formula, return the default value
-          const unresolveds = formula.match(/@[a-z0-9.]+/gi) ?? [];
+          const unresolveds = formula.match(/@[a-z0-9.]+/g) ?? [];
           // Allow failure of "@target" and "@actor.conditions" with no warning
           if (unresolveds.length > 0) {
             const shouldWarn =
@@ -276,7 +276,7 @@ class ItemAlteration extends foundry.abstract.DataModel<ChangeModel> {
           return Roll.safeEval(formula);
         } catch {
           this.failValidation(`unable to evaluate formula, "${formula}"`);
-          return 0;
+          return formula || 0;
         }
       };
 
