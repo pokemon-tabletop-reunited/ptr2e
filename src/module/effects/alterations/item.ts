@@ -1,5 +1,5 @@
 import ResolvableValueField from "@module/data/fields/resolvable-value-field.ts";
-import ChangeModel from "../changes/change.ts";
+import ChangeModel, { CHANGE_MODES } from "../changes/change.ts";
 import { ItemPTR2e, ItemSourcePTR2e } from "@item";
 import { StringField } from "types/foundry/common/data/fields.js";
 import { BasicChangeSystem, ResolveValueParams } from "@data";
@@ -15,7 +15,7 @@ class ItemAlteration extends foundry.abstract.DataModel<ChangeModel> {
       mode: new fields.NumberField({
         required: true,
         initial: CONST.ACTIVE_EFFECT_MODES.ADD,
-        choices: Object.fromEntries(Object.entries(CONST.ACTIVE_EFFECT_MODES).map(([k, v]) => [v, k])),
+        choices: Object.fromEntries(Object.entries(CHANGE_MODES).map(([k, v]) => [v, k])),
       }),
       property: new fields.StringField({
         required: true,
@@ -51,7 +51,40 @@ class ItemAlteration extends foundry.abstract.DataModel<ChangeModel> {
     const current = fu.getProperty(item, property);
     const value = typeof this.value === "boolean" ? this.value : this.resolveInjectedProperties(this.value);
     const change = BasicChangeSystem.getNewValue(this.mode, current, value, false)
-    fu.setProperty(item, property, change);
+
+    const isArrayChange = (Array.isArray(current) || current instanceof Set) && (current as unknown[]).every(e => typeof e === typeof value)
+    if(isArrayChange) {
+      switch(this.mode) {
+        case CONST.ACTIVE_EFFECT_MODES.ADD: {
+          if(Array.isArray(current)) {
+            current.push(value);
+          } else {
+            current.add(value);
+          }
+          break;
+        }
+        case CONST.ACTIVE_EFFECT_MODES.OVERRIDE: {
+          if(Array.isArray(current)) {
+            current.splice(0, current.length, value);
+          } else {
+            current.clear();
+            current.add(value);
+          }
+          break;
+        }
+        case CHANGE_MODES.REMOVE: {
+          if(Array.isArray(current)) {
+            current.splice(current.indexOf(value), 1);
+          } else {
+            current.delete(value);
+          }
+          break; 
+        }
+      }
+    }
+    else {
+      fu.setProperty(item, property, change);
+    }
   }
 
   applyToItem(item: ItemPTR2e): void {
@@ -149,8 +182,8 @@ class ItemAlteration extends foundry.abstract.DataModel<ChangeModel> {
       return source;
     } else if (typeof source === "string") {
       return source.replace(
-        /{(actor|item|change|effect)\|(.*?)}/g,
-        (_match, key: string, prop: string) => {
+        /{(actor|item|change|effect)\|(.*?)(\|C)?}/g,
+        (_match, key: string, prop: string, modifier: string) => {
           const data =
             key === "change"
               ? this
@@ -163,7 +196,7 @@ class ItemAlteration extends foundry.abstract.DataModel<ChangeModel> {
             if (warn)
               this.failValidation(`Failed to resolve injected property "${source}"`);
           }
-          return String(value);
+          return modifier ? Handlebars.helpers.capitalize(String(value)) : String(value);
         }
       );
     }

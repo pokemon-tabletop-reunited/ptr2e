@@ -2,20 +2,22 @@
   "name": "Mana Spark",
   "type": "move",
   "_id": "hsw4D5WYThON2L3l",
-  "img": "systems/ptr2e/img/svg/fairy_icon.svg",
+  "img": "systems/ptr2e/img/svg/untyped_icon.svg",
   "system": {
-    "slug": null,
+    "slug": "mana-spark",
     "actions": [
       {
         "name": "Mana Spark",
         "slug": "mana-spark",
         "type": "attack",
-        "img": "systems/ptr2e/img/svg/fairy_icon.svg",
+        "img": "systems/ptr2e/img/svg/untyped_icon.svg",
         "traits": [
           "basic",
           "aura",
           "pulse",
-          "pp-updated"
+          "pp-updated",
+          "arcane",
+          "adaptable"
         ],
         "range": {
           "target": "creature",
@@ -24,20 +26,31 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 0
+          "powerPoints": 1
         },
         "types": [
-          "fairy"
+          "untyped"
         ],
         "category": "special",
         "power": 50,
         "accuracy": 90,
-        "description": "<p>On hit, the user has a 10% chance of increasing their SPATK Stage by +1 for 5 Activations.</p>",
+        "description": "<p>Effect: On hit, the user has a 10% chance of increasing their SPATK Stage by +1 for 5 Activations.</p>",
         "predicate": []
       }
     ],
-    "container": null,
-    "grade": "E"
+    "grade": "E",
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": "<p>Effect: On hit, the user has a 10% chance of increasing their SPATK Stage by +1 for 5 Activations.</p>"
+    },
+    "traits": [],
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
   },
   "effects": [
     {
@@ -52,11 +65,12 @@
             "key": "mana-spark-attack",
             "value": "Compendium.ptr2e.core-effects.Item.1TqcwIUNl32wJCAa",
             "predicate": [],
-            "chance": 100,
-            "affects": "target",
+            "chance": 10,
+            "affects": "self",
             "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "alterations": []
           }
         ],
         "slug": null,
@@ -87,10 +101,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "ptr2e",
-        "systemVersion": "0.10.0-alpha.5.1.2",
+        "systemVersion": "1.0.7.beta",
         "createdTime": 1737239704378,
-        "modifiedTime": 1737239730047,
-        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
+        "modifiedTime": 1740844815409,
+        "lastModifiedBy": "01onCaJSVMVOgMDI"
       }
     }
   ]

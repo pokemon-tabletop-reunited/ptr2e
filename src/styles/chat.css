@@ -552,6 +552,28 @@
   margin-top: 0.25rem;
   margin-bottom: 0;
 }
+.chat-message.message.skill .skill-roll .breakdown {
+  display: flex;
+  flex-direction: column;
+  margin-top: 5px;
+}
+.chat-message.message.skill .skill-roll .breakdown .dice-tooltip {
+  padding: 0.25rem 0;
+  margin: 0.25rem 0;
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  border: 1px solid var(--color-border-light-2);
+}
+.chat-message.message.skill .skill-roll .breakdown > span {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.chat-message.message.skill .skill-roll .breakdown span.pos {
+  color: #18520b;
+}
+.chat-message.message.skill .skill-roll .breakdown span.neg {
+  color: #aa0200;
+}
 .chat-message.message.capture section.results {
   display: flex;
   flex-direction: column;

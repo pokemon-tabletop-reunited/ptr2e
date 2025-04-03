@@ -118,6 +118,7 @@ export default function HasGearData<BaseClass extends TemplateConstructor>(baseC
         const actorSystem = this.parent.actor.system as ActorSystemPTR2e;
 
         switch(this.equipped.slot) {
+          case "backpack": actorSystem.inventory.backpack.used += this.quantity; break;
           case "accessory": actorSystem.inventory.accessory.used += this.quantity; break;
           case "worn": actorSystem.inventory.worn.used += this.quantity; break;
           case "held": {
@@ -269,4 +270,5 @@ interface _FlingSchema extends foundry.data.fields.DataSchema {
 }
 
 export const grades = ["E", "D", "C", "B", "A", "S"] as const;
+export const rarities = ["common", "uncommon", "rare", "unique"] as const;
 export type GearGrade = typeof grades[number];

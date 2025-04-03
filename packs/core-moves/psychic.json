@@ -6,7 +6,7 @@
     "slug": "psychic",
     "actions": [
       {
-        "slug": "psychic-move",
+        "slug": "psychic",
         "name": "Psychic",
         "type": "attack",
         "traits": [
@@ -29,7 +29,7 @@
           "psychic"
         ],
         "description": "<p>Effect: On hit, the target has a 10% chance of losing -1 SPDEF Stage for 5 activations.</p>",
-        "img": "icons/svg/explosion.svg",
+        "img": "systems/ptr2e/img/svg/psychic_icon.svg",
         "predicate": []
       }
     ],
@@ -37,6 +37,13 @@
     "_migration": {
       "version": null,
       "previous": null
+    },
+    "traits": [],
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ]
     }
   },
   "_id": "NO3wo8dZeZsPzeW5",
@@ -50,14 +57,15 @@
         "changes": [
           {
             "type": "roll-effect",
-            "key": "psychic-move-attack",
+            "key": "{item|slug}-attack",
             "value": "Compendium.ptr2e.core-effects.Item.qe5aLBJuwb9eYqvv",
             "predicate": [],
             "chance": 10,
             "affects": "target",
             "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "alterations": []
           }
         ],
         "slug": null,
@@ -88,10 +96,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "ptr2e",
-        "systemVersion": "0.10.0-alpha.5.1.2",
+        "systemVersion": "1.0.6.beta",
         "createdTime": 1732970407385,
-        "modifiedTime": 1737227736695,
-        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
+        "modifiedTime": 1739888146038,
+        "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
       }
     }
   ]
