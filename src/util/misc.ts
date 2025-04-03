@@ -117,6 +117,80 @@ function capitalize(input: Maybe<string>) {
   return str;
 }
 
+function exportToJSON({type, data, label}: {type: string, data: unknown, label?: string} ) {
+  const object = {
+    type,
+    data: data,
+    source: {
+      world: game.world.id,
+      system: game.system.id,
+      coreVersion: game.version,
+      systemVersion: game.system.version,
+    }
+  }
+  const filename = ["fvtt", sluggify(type), sluggify(label || (data as {label: string})?.label || (data as {name: string})?.name || "")].filterJoin("-");
+  saveDataToFile(JSON.stringify(object, null, 2), "application/json", `${filename}.json`);
+}
+
+async function importFromJSON<T>({name, type}: {name: string, type: string}): Promise<Maybe<{
+  type: string;
+  data: T;
+  source: {
+    world: string;
+    system: string;
+    coreVersion: string;
+    systemVersion: string;
+  };
+}>> {
+  const content = await renderTemplate("templates/apps/import-data.html", {
+    hint1: game.i18n.format("DOCUMENT.ImportDataHint1", {document: type}),
+    hint2: game.i18n.format("DOCUMENT.ImportDataHint2", {name: Handlebars.Utils.escapeExpression(name)})
+  });
+
+  return new Promise((resolve) => {
+    new Dialog({
+      title: `Import Data: ${name}`,
+      content,
+      buttons: {
+        import: {
+          icon: '<i class="fas fa-file-import"></i>',
+          label: "Import",
+          callback: html => {
+            const form = html.find("form")[0];
+            if ( !form.data.files.length ) {
+              return void ui.notifications.error("DOCUMENT.ImportDataError", {localize: true});
+            }
+            readTextFromFile(form.data.files[0]).then(async json => {
+              try {
+                // Create a document from the JSON data
+                const parsedJSON = JSON.parse(json);
+                if(parsedJSON.type !== type) {
+                  ui.notifications.error(game.i18n.format("DOCUMENT.ImportDataErrorType", {type, got: parsedJSON.type}));
+                  resolve(null);
+                }
+                
+                resolve(parsedJSON);
+              }
+              catch (error) {
+                ui.notifications.error("DOCUMENT.ImportDataErrorParse", {localize: true});
+                console.error(error);
+                resolve(null);
+              }
+            });
+          }
+        },
+        no: {
+          icon: '<i class="fas fa-times"></i>',
+          label: "Cancel"
+        }
+      },
+      default: "import"
+    }, {
+      width: 400
+    }).render(true);
+  })
+}
+
 // async function findItemInCompendium({ type, name, compendium }) {
 //     if (!type || !name) return undefined;
 //     const pack = (() => {
@@ -470,6 +544,8 @@ export {
   isImageFilePath,
   isVideoFilePath,
   isImageOrVideoPath,
-  NORMINV
+  NORMINV,
+  exportToJSON,
+  importFromJSON
 };
 export type { FontAwesomeStyle, SlugCamel };

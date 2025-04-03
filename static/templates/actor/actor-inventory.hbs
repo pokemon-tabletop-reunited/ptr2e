@@ -7,8 +7,12 @@
                 <span class="quantity">Quantity</span>
                 {{/if}}
                 <div class="item-controls">
-                    <a data-action="create-item" data-tooltip="PTR2E.ActorSheet.CreateItem" data-type="{{category}}"><i
-                            class="fa-solid fa-fw fa-plus"></i></a>
+                  {{#unless (is category "container")}}
+                  <a data-action="browse" data-tooltip="PTR2E.ActorSheet.Browse" data-type="{{category}}"><i
+                            class="fa-solid fa-fw fa-magnifying-glass"></i></a>
+                  {{/unless}}
+                  <a data-action="create-item" data-tooltip="PTR2E.ActorSheet.CreateItem" data-type="{{category}}"><i
+                          class="fa-solid fa-fw fa-plus"></i></a>
                 </div>
             </header>
             <ul class="items" data-item-types="{{category}}">
@@ -67,6 +71,12 @@
                     <input type="number" value="{{actor.system.inventoryPoints.max}}" disabled/>
                 </div>
                 <p class="hint">{{localize 'PTR2E.FIELDS.inventoryPoints.max.hint'}}</p>
+            </div>
+            <div class="form-group">
+                <label>{{localize 'PTR2E.ActorSheet.Inventory.Grade'}}</label>
+                <div class="form-fields">
+                    <input type="text" value="{{actor.grade}}" disabled/>
+                </div>
             </div>
             <button class="mt-1" type="button" data-action="reset-ip">Reset IP & Delete Temporary Items</button>
         </fieldset>

@@ -40,7 +40,8 @@
       "horned",
       "blindsight-15",
       "bipedal",
-      "winged"
+      "winged",
+      "fully-evolved"
     ],
     "abilities": {
       "starting": [
@@ -79,7 +80,7 @@
     "skills": [
       {
         "slug": "acrobatics",
-        "value": 50,
+        "value": 60,
         "rvs": 0,
         "favourite": false,
         "hidden": false,
@@ -175,7 +176,7 @@
       },
       {
         "slug": "spot",
-        "value": 45,
+        "value": 50,
         "rvs": 0,
         "favourite": false,
         "hidden": false,
@@ -191,7 +192,7 @@
       },
       {
         "slug": "survival",
-        "value": 45,
+        "value": 40,
         "rvs": 0,
         "favourite": false,
         "hidden": false,
@@ -207,7 +208,7 @@
       },
       {
         "slug": "track",
-        "value": 50,
+        "value": 55,
         "rvs": 0,
         "favourite": false,
         "hidden": false,
@@ -678,15 +679,328 @@
           }
         }
       ],
-      "uuid": "Compendium.ptr2e.core-species.Item.CyUEOZ2fEns96iNe"
+      "uuid": "Compendium.ptr2e.core-species.Item.CyUEOZ2fEns96iNe",
+      "methods": [],
+      "perk": {
+        "x": 26,
+        "y": 26
+      }
     },
     "publication": {
       "source": "PTR 2e Core - Sinnoh Dex",
       "authors": [
         "PTR 2e Team"
-      ]
+      ],
+      "notes": ""
+    },
+    "_migration": {
+      "version": null,
+      "previous": null
     }
   },
   "_id": "qmZycoT4LJnHvgYb",
-  "effects": []
+  "effects": [
+    {
+      "name": "Mega Garchomp",
+      "type": "form",
+      "_id": "8v55AxuXvzuxgg1W",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-option",
+            "key": "manual-forme-toggle",
+            "value": "forme:mega-garchomp:active",
+            "domain": "all",
+            "toggleable": true,
+            "label": "Toggle: Mega Garchomp Forme",
+            "predicate": [],
+            "alwaysActive": false,
+            "count": false,
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "suboptions": [],
+            "state": false
+          },
+          {
+            "type": "stats-alteration",
+            "predicate": [
+              "forme:mega-garchomp:active"
+            ],
+            "key": "",
+            "value": 0,
+            "hp": null,
+            "atk": 40,
+            "def": 20,
+            "spa": 30,
+            "spd": 20,
+            "spe": -10,
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-garchomp:active"
+            ],
+            "key": "system.movement.overland.value",
+            "value": 1,
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-garchomp:active"
+            ],
+            "key": "system.movement.burrow.value",
+            "value": 1,
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-garchomp:active"
+            ],
+            "key": "system.movement.flight.value",
+            "value": -7,
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-garchomp:active"
+            ],
+            "key": "system.movement.swim.value",
+            "value": 1,
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "add-trait",
+            "predicate": [
+              "forme:mega-garchomp:active"
+            ],
+            "key": "",
+            "value": "semi-bipedal",
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "add-trait",
+            "predicate": [
+              "forme:mega-garchomp:active"
+            ],
+            "key": "",
+            "value": "bladed",
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "add-trait",
+            "predicate": [
+              "forme:mega-garchomp:active"
+            ],
+            "key": "",
+            "value": "jump-3",
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "remove-trait",
+            "predicate": [
+              "forme:mega-garchomp:active"
+            ],
+            "key": "",
+            "value": "jump-4",
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "remove-trait",
+            "predicate": [
+              "forme:mega-garchomp:active"
+            ],
+            "key": "",
+            "value": "winged",
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "remove-trait",
+            "predicate": [
+              "forme:mega-garchomp:active"
+            ],
+            "key": "",
+            "value": "bipedal",
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "grant-item",
+            "predicate": [
+              "forme:mega-garchomp:active"
+            ],
+            "key": "",
+            "value": "Compendium.ptr2e.core-abilities.Item.S1kDHZK7cWPREuwT",
+            "reevaluateOnUpdate": true,
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "system.free",
+                "value": "true"
+              }
+            ],
+            "allowDuplicate": false,
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "inMemoryOnly": false,
+            "track": false,
+            "replaceSelf": false,
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            }
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-garchomp:active"
+            ],
+            "key": "system.skills.acrobatics.value",
+            "value": -15,
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-garchomp:active"
+            ],
+            "key": "system.skills.climb.value",
+            "value": 30,
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-garchomp:active"
+            ],
+            "key": "system.skills.flying.value",
+            "value": -45,
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-garchomp:active"
+            ],
+            "key": "system.skills.intimidate.value",
+            "value": 20,
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-garchomp:active"
+            ],
+            "key": "system.skills.lift.value",
+            "value": 30,
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-garchomp:active"
+            ],
+            "key": "system.skills.running.value",
+            "value": 15,
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-garchomp:active"
+            ],
+            "key": "system.skills.track.value",
+            "value": 5,
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-garchomp:active"
+            ],
+            "key": "system.skills.swim.value",
+            "value": 10,
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0,
+        "trigger": "manual",
+        "conditions": []
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "1.1.2.beta",
+        "createdTime": 1743114522732,
+        "modifiedTime": 1743114993146,
+        "lastModifiedBy": "UTlFSVhgfIUeTsoW"
+      }
+    }
+  ]
 }

@@ -66,19 +66,22 @@ export class TextEnricher {
     const affliction = game.ptr.data.afflictions.get(slug!);
     if (!affliction) return null;
 
+    const amount = options ? parseInt(Object.keys(options)[0]) : null;
+
     const span = document.createElement("span");
     span.classList.add("affliction");
     span.dataset.tooltipDirection = options?.direction || "UP";
     span.dataset.affliction = affliction.id;
     span.dataset.tooltip = affliction.id;
     span.append((() => {
-      const name = label || game.i18n.localize(affliction.name);
+      const name = label || (game.i18n.localize(affliction.name) + (amount ? ` ${amount}` : ""));
       return TextEditor.createAnchor({
         classes: ["content-link"],
         attrs: { draggable: true as unknown as string },
         name,
         dataset: {
           id: affliction.id,
+          ...(amount ? { amount: amount.toString() } : {}),
         },
         icon: "fas fa-sparkles",
       })
@@ -176,6 +179,7 @@ export class TextEnricher {
     const dragData = {
       type: "Affliction",
       id: a.dataset.id,
+      amount: a.dataset.amount,
     };
     event.originalEvent?.dataTransfer?.setData("text/plain", JSON.stringify(dragData));
   }
@@ -213,7 +217,7 @@ const TraitEnricher: TextEditorEnricherConfig = {
 }
 
 const AfflictionEnricher: TextEditorEnricherConfig = {
-  pattern: /@(?<type>Affliction)\[(?<slug>[-a-z]+)(\s+)?](?:{(?<label>[^}]+)})?/gi,
+  pattern: /@(?<type>Affliction)\[(?<slug>[-a-z]+)((\s+)(?<options>[0-9]*))?](?:{(?<label>[^}]+)})?/gi,
   enricher: async (match: RegExpMatchArray): Promise<HTMLElement | null> => {
     return TextEnricher.enrich(match);
   }

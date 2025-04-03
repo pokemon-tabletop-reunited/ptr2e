@@ -21,7 +21,7 @@ import { TutorListApp } from "@module/apps/tutor-list.ts";
 import GithubManager from "@module/apps/github.ts";
 import { ExpTrackerSettings } from "@system/exp-tracker-model.ts";
 import { type TypeEffectiveness } from "@scripts/config/effectiveness.ts";
-import { PerkWorkerConfig } from "@module/data/models/generator-config.ts";
+import { GeneratorConfig, PerkWorkerConfig } from "@module/data/models/generator-config.ts";
 import { PerkGeneratorResult } from "./worker/types.js";
 import { PickableThing } from "@module/apps/pick-a-thing-prompt.ts";
 
@@ -142,6 +142,7 @@ declare global {
     get(module: "ptr2e", key: "expTrackerData"): ExpTrackerSettings
     get(module: "ptr2e", key: "tokens.autoscale" | "expand-rolls"): boolean
     get(module: "ptr2e", key: "pokemonTypes"): TypeEffectiveness
+    get(module: "ptr2e", key: "global-perk-configs"): GeneratorConfig['_source'][]
     set(module: "ptr2e", key: "expTrackerData", value: ExpTrackerSettings['_source']): ExpTrackerSettings
   }
 
@@ -170,6 +171,9 @@ declare global {
     let actor: () => ActorPTR2e<ActorSystemPTR2e, TokenDocumentPTR2e<ScenePTR2e> | null> | null;
 
     let _maxZ: number;
+
+    function saveDataToFile(data: unknown, filetype: string, filename: string): void;
+    function readTextFromFile(file: File): Promise<string>;
   }
 
   const BUILD_MODE: "development" | "production";

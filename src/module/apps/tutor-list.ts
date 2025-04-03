@@ -124,7 +124,7 @@ export class TutorListApp extends foundry.applications.api.HandlebarsApplication
 
     for (const eggGroup of actor.species?.eggGroups ?? []) {
       const list = tutorList.getType(sluggify(eggGroup), "egg");
-      if (list) resultLists
+      if (list) resultLists.push(list);
     }
 
     return resultLists;

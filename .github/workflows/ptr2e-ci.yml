@@ -1,13 +1,16 @@
 name: PTR2e CI
 on:
-    pull_request_review:
-        types: [submitted]
     push:
         branches: [Stable]
     workflow_dispatch:
+    pull_request:
+        branches: [Stable, Staging]
+        types: [opened, synchronize, reopened]
+    merge_group:
+        branches: [Stable, Staging]
 jobs:
     build:
-        if: github.event.review.state == 'approved' || github.event_name == 'push' || github.event_name == 'workflow_dispatch'
+        if: github.event_name == 'push' || github.event_name == 'workflow_dispatch' || (github.event_name == 'pull_request' && github.event.pull_request.draft == false) || github.event_name == 'merge_group'
         runs-on: ubuntu-latest
         steps:
             - uses: actions/checkout@v4

@@ -20,6 +20,7 @@ export interface EffectRoll {
   success?: boolean;
   critOnly?: boolean;
   alterations?: ItemAlteration[];
+  dontMerge: boolean;
   [key: string]: unknown;
 }
 

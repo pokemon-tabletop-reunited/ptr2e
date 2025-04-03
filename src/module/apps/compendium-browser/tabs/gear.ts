@@ -55,8 +55,8 @@ export class CompendiumBrowserGearTab extends CompendiumBrowserTab {
           flingTypes.add(gearData.system.fling.type);
         }
 
-        const pubSource = (gearData.system.publication.source ?? "").trim()
-        publications.add(pubSource);
+        const pubSource = (gearData.system.publication?.source ?? "").trim()
+        if(pubSource) publications.add(pubSource);
 
         gear.push({
           name: gearData.name,
@@ -263,6 +263,9 @@ export class CompendiumBrowserGearTab extends CompendiumBrowserTab {
         direction: "asc",
         options: {
           name: "PTR2E.CompendiumBrowser.Filters.Sort.Name",
+          rarity: "PTR2E.CompendiumBrowser.Filters.Sort.Rarity",
+          grade: "PTR2E.CompendiumBrowser.Filters.Sort.Grade",
+          cost: "PTR2E.CompendiumBrowser.Filters.Sort.Cost"
         }
       },
       search: {

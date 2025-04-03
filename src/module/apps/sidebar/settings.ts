@@ -1,4 +1,5 @@
 import { GithubSheet } from "../github.ts";
+import { GlobalPerkGeneratorConfig } from "../global-perk-generator-config.ts";
 
 export class SettingsSidebarPTR2e extends Settings {
   static override get defaultOptions() {
@@ -15,6 +16,7 @@ export class SettingsSidebarPTR2e extends Settings {
       case "tutor-list": return void game.ptr.tutorList.render({force: true, actor: null});
       case "compendium-browser": return void game.ptr.compendiumBrowser.render(true);
       case "github-app": return void new GithubSheet().render(true);
+      case "global-perk-config": return void new GlobalPerkGeneratorConfig().render(true);
     }
 
     return super._onSettingsButton(event);
