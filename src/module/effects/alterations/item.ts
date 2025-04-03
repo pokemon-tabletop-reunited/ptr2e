@@ -200,7 +200,7 @@ class ItemAlteration extends foundry.abstract.DataModel<ChangeModel> {
             if (warn)
               this.failValidation(`Failed to resolve injected property "${source}"`);
           }
-          return modifier ? Handlebars.helpers.capitalize(String(value)) : String(value);
+          return modifier ? Handlebars.helpers.capitalize(String(value)) : typeof value === "object" ? "JSON::"+JSON.stringify(value) : String(value);
         }
       );
     }
@@ -238,6 +238,15 @@ class ItemAlteration extends foundry.abstract.DataModel<ChangeModel> {
       ? this.#resolveBracketedValue(value, defaultValue)
       : value;
     if (typeof resolvedFromBracket === "number") return resolvedFromBracket;
+
+    if(typeof resolvedFromBracket === "string" && resolvedFromBracket.startsWith("JSON::")) {
+      try {
+        return JSON.parse(resolvedFromBracket.slice(6));
+      } catch (error) {
+        this.failValidation(`unable to parse JSON value, "${resolvedFromBracket}"`);
+        return defaultValue;
+      }
+    }
 
     if (resolvedFromBracket instanceof Object) {
       return defaultValue instanceof Object
