@@ -6,28 +6,22 @@
       "trait:poison"
     ],
     "cost": 1,
-    "description": "<p>You gain the [Venomous] Trait.</p>",
+    "description": "<p>You gain the @Trait[venomous] Trait.</p>",
     "actions": [
       {
         "name": "Venomous",
         "slug": "venomous",
         "description": "<p>You gain the [Venomous] Trait.</p>",
         "cost": {
-          "activation": "free",
-          "powerPoints": 0,
-          "delay": null,
-          "priority": null
+          "activation": "free"
         },
         "type": "passive",
         "traits": [],
         "img": "icons/svg/explosion.svg",
         "range": {
           "target": "enemy",
-          "unit": "m",
-          "distance": 0
-        },
-        "variant": null,
-        "hidden": false
+          "unit": "m"
+        }
       }
     ],
     "slug": "venomous",
@@ -62,21 +56,19 @@
     "autoUnlock": [
       "trait:venomous"
     ],
-    "originSlug": null,
-    "variant": null,
-    "mode": null,
     "global": true,
     "webs": [],
     "design": {
       "arena": "physical",
       "approach": "finesse",
-      "archetype": "[Poison]"
+      "archetype": "poison"
     },
     "publication": {
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
+      ],
+      "notes": ""
     }
   },
   "_id": "hvuakkloMFHGmBMe",
