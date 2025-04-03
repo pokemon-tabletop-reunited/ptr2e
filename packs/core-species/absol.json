@@ -33,10 +33,10 @@
       "horned",
       "disaster-predictor",
       "evil-touch",
-      "underdog",
       "bladed",
       "dark",
-      "mega-evolution"
+      "mega-evolution",
+      "fully-evolved"
     ],
     "abilities": {
       "starting": [
@@ -682,7 +682,11 @@
       "details": null,
       "evolutions": [],
       "uuid": null,
-      "methods": []
+      "methods": [],
+      "perk": {
+        "x": 26,
+        "y": 26
+      }
     },
     "_migration": {
       "version": null,
@@ -691,7 +695,14 @@
     "habitats": [
       "mountain",
       "ruin"
-    ]
+    ],
+    "publication": {
+      "source": "PTR 2e Core - Hoenn Dex",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    }
   },
   "_id": "RjmlMnPqKge1H7hd",
   "effects": [
@@ -761,7 +772,11 @@
             "inMemoryOnly": false,
             "alterations": [],
             "track": false,
-            "replaceSelf": false
+            "replaceSelf": false,
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            }
           },
           {
             "type": "basic",
