@@ -7,13 +7,33 @@
       {
         "traits": [
           "weather",
-          "interrupt-2"
+          "interrupt-4"
         ],
         "name": "Morning Fog",
         "slug": "morning-fog",
         "type": "generic",
         "cost": {
-          "activation": "simple",
+          "activation": "free",
+          "powerPoints": 6,
+          "trigger": "<p>The user enters combat or emerges from stealth.</p>"
+        },
+        "range": {
+          "target": "self",
+          "unit": "m"
+        },
+        "description": "<p>Trigger: The user enters combat or emerges from stealth.</p><p>Effect: The user freely uses Foghorn.</p>",
+        "img": "icons/svg/explosion.svg"
+      },
+      {
+        "traits": [
+          "weather",
+          "interrupt-2"
+        ],
+        "name": "Morning Fog (Extend)",
+        "slug": "morning-fog-extend",
+        "type": "generic",
+        "cost": {
+          "activation": "free",
           "powerPoints": 2,
           "trigger": "<p>The user declares Foghorn.</p>"
         },
@@ -25,7 +45,7 @@
         "img": "icons/svg/explosion.svg"
       }
     ],
-    "description": "<p>Trigger: The user declares Foghorn.</p><p>Effect: Connection - Foghorn. The set Foggy Weather has its duration increased by +2 Rounds.</p>",
+    "description": "<p>Trigger: The user enters combat or emerges from stealth.</p><p>Effect: Connection - Foghorn. The user freely uses Foghorn. When the user sets Foggy Weather, they may spend 2 PP to increase its duration by +2 Rounds.</p>",
     "traits": [
       "connection",
       "weather",
