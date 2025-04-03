@@ -20,5 +20,6 @@ export { default as StatsAlterationChangeSystem } from "./stats-alteration.ts";
 export { default as AuraChangeSystem } from "./aura.ts";
 export { default as TokenTagChangeSystem } from "./token-tag/token-tag.ts";
 export { default as CreateClockChangeSystem } from "./create-clock.ts";
+export { default as IncrementClockChangeSystem } from "./increment-clock.ts";
 export type * from "./choice-set/change-model.ts";
 export type * from "./data.ts";
