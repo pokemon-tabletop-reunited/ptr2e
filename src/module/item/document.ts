@@ -454,6 +454,29 @@ class ItemPTR2e<
     if (this.type !== "blueprint") return super.exportToJSON(options);
     return void (this.system as BlueprintSystem).exportToJSON();
   }
+
+  async syncData(): Promise<void> {
+    const sourceId = this.flags.core?.sourceId;
+    if(!sourceId) {
+      return void ui.notifications.error("Unable to detect source for this item, unable to sync.");
+    }
+
+    const source = await fromUuid(sourceId) as this;
+    if(!source) {
+      return void ui.notifications.error("The source this item references no longer exists.");
+    }
+
+    const sourceData = R.pick(source.toObject(), ["name", "type", "img", "system", "effects"]);
+    const thisData = R.pick(this.toObject(), ["name", "type", "img", "system", "effects"]);
+
+    const diff = fu.diffObject(thisData, sourceData);
+    if (fu.isEmpty(diff)) {
+      return void ui.notifications.warn("No changes detected.");
+    }
+    const changes = fu.flattenObject(diff);
+    await this.update(changes);
+    ui.notifications.info("Changes synced.");
+  }
 }
 
 interface ItemPTR2e<
