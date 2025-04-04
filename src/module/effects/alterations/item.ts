@@ -6,6 +6,7 @@ import { BasicChangeSystem, ResolveValueParams } from "@data";
 import { BracketedValue, RuleValue } from "../data.ts";
 import { isBracketedValue, isObject } from "@utils";
 import * as R from "remeda";
+import { ActorPTR2e } from "@actor";
 
 class ItemAlteration extends foundry.abstract.DataModel<ChangeModel> {
 
@@ -35,21 +36,24 @@ class ItemAlteration extends foundry.abstract.DataModel<ChangeModel> {
   }
 
   get effect() {
-    return this.change.effect;
+    return this.change?.effect;
   }
 
   get actor() {
-    return this.change.actor;
+    return this.change?.actor ?? this._actor;
   }
 
-  applyTo(item: ItemPTR2e | ItemSourcePTR2e): void {
+  private _actor: ActorPTR2e | null = null;
+
+  applyTo(item: ItemPTR2e | ItemSourcePTR2e, actor?: ActorPTR2e): void {
     if(item instanceof ItemPTR2e) {
       return this.applyToItem(item);
     }
+    if(actor) this._actor = actor;
 
     const property = item.type === "effect" && !this.property.startsWith("effects.") ? `effects.0.${this.property}` : this.property;
-    const current = fu.getProperty(item, property);
-    const value = typeof this.value === "boolean" ? this.value : this.resolveInjectedProperties(this.value);
+    const current = fu.getProperty(item, property) as JSONValue;
+    const value = typeof this.value === "boolean" ? this.value : this.resolveValue(this.value, current, {evaluate: true} );
     const change = BasicChangeSystem.getNewValue(this.mode, current, value, false)
 
     const isArrayChange = (Array.isArray(current) || current instanceof Set) && (current as unknown[]).every(e => typeof e === typeof value)
@@ -196,7 +200,7 @@ class ItemAlteration extends foundry.abstract.DataModel<ChangeModel> {
             if (warn)
               this.failValidation(`Failed to resolve injected property "${source}"`);
           }
-          return modifier ? Handlebars.helpers.capitalize(String(value)) : String(value);
+          return modifier ? Handlebars.helpers.capitalize(String(value)) : typeof value === "object" ? "JSON::"+JSON.stringify(value) : String(value);
         }
       );
     }
@@ -235,6 +239,15 @@ class ItemAlteration extends foundry.abstract.DataModel<ChangeModel> {
       : value;
     if (typeof resolvedFromBracket === "number") return resolvedFromBracket;
 
+    if(typeof resolvedFromBracket === "string" && resolvedFromBracket.startsWith("JSON::")) {
+      try {
+        return JSON.parse(resolvedFromBracket.slice(6));
+      } catch (error) {
+        this.failValidation(`unable to parse JSON value, "${resolvedFromBracket}"`);
+        return defaultValue;
+      }
+    }
+
     if (resolvedFromBracket instanceof Object) {
       return defaultValue instanceof Object
         ? fu.mergeObject(defaultValue, resolvedFromBracket, { inplace: false })
@@ -242,10 +255,10 @@ class ItemAlteration extends foundry.abstract.DataModel<ChangeModel> {
     }
 
     if (typeof resolvedFromBracket === "string") {
-      const saferEval = (formula: string): number => {
+      const saferEval = (formula: string): string | number => {
         try {
           // If any resolvables were not provided for this formula, return the default value
-          const unresolveds = formula.match(/@[a-z0-9.]+/gi) ?? [];
+          const unresolveds = formula.match(/@[a-z0-9.]+/g) ?? [];
           // Allow failure of "@target" and "@actor.conditions" with no warning
           if (unresolveds.length > 0) {
             const shouldWarn =
@@ -263,7 +276,7 @@ class ItemAlteration extends foundry.abstract.DataModel<ChangeModel> {
           return Roll.safeEval(formula);
         } catch {
           this.failValidation(`unable to evaluate formula, "${formula}"`);
-          return 0;
+          return formula || 0;
         }
       };
 

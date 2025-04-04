@@ -352,6 +352,8 @@ class CheckPTR2e {
         statMod: targetCheck.total.stat?.flat ?? 0,
         effectivenessStage: targetCheck.total.effectiveness?.stage ?? 0,
         ignoreImmune: !!targetContext.options.has("self:action:trait:ignore-type-immunity"),
+        targetUnaware: !!targetContext.target?.actor.rollOptions.all["special:unaware"],
+        originUnaware: !!targetContext.self.actor.rollOptions.all["special:unaware"],
       };
 
       const rolls: {

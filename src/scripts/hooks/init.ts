@@ -20,6 +20,7 @@ import { AutomationTour } from "@module/tours/automation.ts";
 import { MiscTour } from "@module/tours/misc.ts";
 import { CompendiumBrowserTour } from "@module/tours/compendium-browser.ts";
 import { initializeKeybindings } from "@scripts/keybindings.ts";
+import { UUID_REDIRECTS } from "@scripts/config/uuid-redirects.ts";
 
 export const Init: PTRHook = {
   listen() {
@@ -45,6 +46,10 @@ export const Init: PTRHook = {
       if (game.release.generation === 12) {
         CONFIG.Token.prototypeSheetClass = TokenConfigPTR2e;
       }
+
+      //Add UUID Redirects
+      //@ts-expect-error - Missing types
+      CONFIG.compendium.uuidRedirects = UUID_REDIRECTS;
 
       // Define custom Entity classes
       CONFIG.ActiveEffect.documentClass = PTRCONFIG.ActiveEffect.documentClass;

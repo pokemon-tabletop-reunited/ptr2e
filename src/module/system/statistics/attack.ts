@@ -357,6 +357,8 @@ class AttackCheck<TParent extends AttackStatistic = AttackStatistic> implements 
         // TODO: Calculate Accuracy and determine if RIP is within range
         // This includes target evasion
         anyValidTargets = true;
+      } else {
+        anyValidTargets = true;
       }
 
       currContext.notes = extractNotes(currContext.self.actor.synthetics.rollNotes, domains).filter(n => n.predicate.test(options))
@@ -365,7 +367,7 @@ class AttackCheck<TParent extends AttackStatistic = AttackStatistic> implements 
     }
     // TODO: Change 'false' here to game setting
     // eslint-disable-next-line no-constant-condition
-    if (!anyValidTargets && false) {
+    if (!anyValidTargets && game.settings.get("ptr2e", "preferences.must-target")) {
       ui.notifications.warn(game.i18n.localize("PTR2E.AttackWarning.NoValidTargets"));
       return null;
     }

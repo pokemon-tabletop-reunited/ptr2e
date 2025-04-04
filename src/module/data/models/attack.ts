@@ -188,8 +188,8 @@ export default class AttackPTR2e extends ActionPTR2e {
     return true//this.accuracy !== null || this.power !== null;
   }
 
-  getAttackStat(actor: Maybe<ActorPTR2e> = this.actor): number {
-    return actor?.getAttackStat(this) ?? 0;
+  getAttackStat(actor: Maybe<ActorPTR2e> = this.actor, ignoreStages = false): number {
+    return actor?.getAttackStat(this, ignoreStages) ?? 0;
   }
 
   async roll(args?: AttackStatisticRollParameters): Promise<AttackRollResult['rolls'][] | null | false> {
