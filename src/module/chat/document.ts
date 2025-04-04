@@ -396,7 +396,7 @@ class ChatMessagePTR2e<TSchema extends TypeDataModel = TypeDataModel> extends Ch
 
     if (type == "skill") {
       system.result = {
-        modifiers: context.modifiers,
+        modifiers: context.modifiers?.map(m => m.toObject()) ?? [],
         ...R.pick(context, ["action", "domains", "notes", "title", "type"]),
         options: Array.from(context.options ?? [])
       }
@@ -436,7 +436,7 @@ class ChatMessagePTR2e<TSchema extends TypeDataModel = TypeDataModel> extends Ch
       slug: context.action ?? context.title ?? type,
       target: context.target?.actor.uuid ?? null,
       result: {
-        modifiers: results.context.modifiers,
+        modifiers: results.context.modifiers?.map(m => m.toObject()) ?? [],
         ...R.pick(results.context, ["action", "domains", "notes", "title", "type"]),
         options: Array.from(results.context.options ?? [])
       }
