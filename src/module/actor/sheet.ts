@@ -496,6 +496,7 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
   ) {
     if (partId === "overview") {
       context.movement = Object.values(this.actor.system.movement);
+      context.jump = this.actor.jump;
 
       context.effectiveness = this._prepareEffectiveness();
     }

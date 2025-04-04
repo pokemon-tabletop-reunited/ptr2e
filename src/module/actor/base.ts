@@ -265,6 +265,25 @@ class ActorPTR2e<
       ) ?? 0 - 1, 0)
   }
 
+  get jump(): number {
+    const trait = this.traits.find(t => t.slug.startsWith("jump"))?.slug.replace("jump-", "");
+    const jumpTraitValue = parseInt(trait!);
+    if (isNaN(jumpTraitValue)) return 0;
+
+    const jumpMultiplier = {
+      1: 0.1,
+      2: 0.4,
+      3: 0.8,
+      4: 1.4,
+      5: 3,
+      6: 8,
+      7: 16,
+      8: 30
+    }[jumpTraitValue] ?? 0;
+
+    return parseFloat((this.system.details.size.height * jumpMultiplier).toFixed(2));
+  }
+
   get nullifiableAbilities(): PickableThing[] {
     //@ts-expect-error - UUID only is valid.
     return this.itemTypes?.ability
