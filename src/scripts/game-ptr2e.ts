@@ -118,6 +118,8 @@ const GamePTR = {
 
     //@ts-expect-error No types for workers
     game.workers.createWorker("PerkWorker", { scripts: ["../systems/ptr2e/scripts/perk-worker.js"] });
+
+    ui?.sidebar?.expand?.();
   },
 };
 

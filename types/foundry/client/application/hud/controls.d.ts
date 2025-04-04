@@ -57,7 +57,7 @@ declare interface SceneControl {
     title: string;
     layer: string;
     visible: boolean;
-    tools: SceneControlTool[];
+    tools: Record<string, SceneControlTool>;
     activeTool: string;
 }
 

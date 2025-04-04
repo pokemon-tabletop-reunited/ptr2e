@@ -308,6 +308,39 @@ export function logCompatibilityWarning(
   },
 ): void;
 
+/**
+ * Parse an HTML string, returning a processed HTMLElement or HTMLCollection.
+ * A single HTMLElement is returned if the provided string contains only a single top-level element.
+ * An HTMLCollection is returned if the provided string contains multiple top-level elements.
+ */
+export function parseHTML(htmlString: string): HTMLCollection | HTMLElement;
+
+/**
+ * Escape the given unescaped string.
+ *
+ * Escaped strings are safe to use inside inner HTML of most tags and in most quoted HTML attributes.
+ * They are not NOT safe to use in `<script>` tags, unquoted attributes, `href`, `onmouseover`, and similar.
+ * They must be unescaped first if they are used inside a context that would escape them.
+ *
+ * Handles only `&`, `<`, `>`, `"`, and `'`.
+ * @see {@link unescapeHTML}
+ * @param {string|any} value    An unescaped string
+ * @returns {string}            The escaped string
+ */
+export function escapeHTML(value: string | unknown): string;
+
+/* -------------------------------------------- */
+
+/**
+ * Unescape the given escaped string.
+ *
+ * Handles only `&amp;`, `&lt;`, `&gt;`, `&quot;`, and `&#x27;`.
+ * @see {@link escapeHTML}
+ * @param {string} value    An escaped string
+ * @returns {string}        The escaped string
+ */
+export function unescapeHTML(value: string): string;
+
 export * from "./http.ts";
 
 declare global {

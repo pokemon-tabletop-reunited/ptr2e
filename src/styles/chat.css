@@ -4,6 +4,14 @@
   color: #1e1e1e;
   --color-underline-header: #6f6c66;
 }
+.chat-message.message h3 {
+  font-size: 1.25em;
+  font-weight: normal;
+}
+.chat-message.message a.button,
+.chat-message.message button {
+  background: rgba(255, 255, 240, 0.8);
+}
 .chat-message.message.whisper {
   background-color: #bcbcbc;
 }
@@ -139,11 +147,12 @@
 .chat-message.message.capture .message-content > main .collapse-button .collapse-rolls {
   background-color: #eee;
   cursor: pointer;
-  font-size: 15px;
-  border: none;
+  border: none !important;
   outline: none;
   padding: 0 0.5rem;
-  border-bottom: 1px solid var(--color-underline-header);
+  border-bottom: 1px solid var(--color-underline-header) !important;
+  flex: 1;
+  white-space: nowrap;
 }
 .chat-message.message.attack .message-content > main .collapse-button .collapse-rolls:after,
 .chat-message.message.skill .message-content > main .collapse-button .collapse-rolls:after,
@@ -159,6 +168,11 @@
 .chat-message.message.skill .message-content > main .collapse-button .collapse-rolls.expanded:after,
 .chat-message.message.capture .message-content > main .collapse-button .collapse-rolls.expanded:after {
   content: "▼";
+}
+.chat-message.message.attack .message-content > main .collapse-button .collapse-rolls:hover,
+.chat-message.message.skill .message-content > main .collapse-button .collapse-rolls:hover,
+.chat-message.message.capture .message-content > main .collapse-button .collapse-rolls:hover {
+  color: #2e2e2e;
 }
 .chat-message.message.attack .message-content > main ul.notes,
 .chat-message.message.skill .message-content > main ul.notes,
@@ -474,7 +488,7 @@
   align-items: center;
   font-size: 14px;
   color: #1e1e1e;
-  padding: 0;
+  padding: 0.25rem;
 }
 .chat-message.message.attack .message-content > footer .target .apply button[disabled],
 .chat-message.message.skill .message-content > footer .target .apply button[disabled],
@@ -657,12 +671,11 @@
 }
 .chat-message.message.combat {
   border: none;
-  border-radius: 0px;
-  background: unset;
+  border-radius: 8px;
+  background: url(/ui/denim075.png);
   padding: 0pc 5px;
-  margin: 0px;
   box-shadow: none;
-  border-bottom: 1px solid #e9d7a1;
+  border: 1px solid #e9d7a1;
 }
 .chat-message.message.combat .message-header {
   flex-direction: row-reverse;
