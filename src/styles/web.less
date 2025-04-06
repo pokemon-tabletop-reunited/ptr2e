@@ -17,13 +17,11 @@
     > * {
         height: 100%;
         width: 100%;
-
         pointer-events: all;
     }
 
     [data-application-part="header"] {
         grid-area: header;
-
         display: flex;
         flex-direction: row;
         border-bottom: 1px solid var(--border-theme-color);
@@ -50,17 +48,17 @@
 
     [data-application-part="actor"] {
         grid-area: actor;
-
         display: flex;
         flex-direction: row;
         border-bottom: 1px solid var(--border-theme-color);
 
         aside {
             flex: 0 0 40%;
+
             img {
-               height: 100%;
-               border-radius: 0px;
-               object-fit: contain; 
+                height: 100%;
+                border-radius: 0px;
+                object-fit: contain;
             }
         }
 
@@ -76,6 +74,11 @@
             }
 
             input {
+                input[type="number"] {
+                    width: 75%;
+                    align-items: center;
+                }
+
                 width: 75%;
             }
         }
@@ -108,14 +111,15 @@
             border-radius: 8px;
 
             header {
-              margin-bottom: 0.25rem;
-              h2 {
                 margin-bottom: 0.25rem;
-              }
 
-              &.traits {
-                margin: 0.25rem 0;
-              }
+                h2 {
+                    margin-bottom: 0.25rem;
+                }
+
+                &.traits {
+                    margin: 0.25rem 0;
+                }
             }
 
             .perk-embed {
@@ -123,7 +127,7 @@
                 border-radius: unset;
                 background: unset;
                 display: contents;
-                
+
                 main {
                     padding: 0.5rem;
                     display: flex;
@@ -132,27 +136,27 @@
                 }
             }
 
-          figure {
-            fieldset {
-              padding: 1rem;
-              display: flex;
-              flex-direction: row;
-              flex-wrap: nowrap;
-              gap: 0.5rem;
-              border-radius: 8px;
-              border-color: var(--border-theme-color);
-              p {
-                margin: 0;
-              }
+            figure {
+                fieldset {
+                    padding: 1rem;
+                    display: flex;
+                    flex-direction: row;
+                    flex-wrap: nowrap;
+                    gap: 0.5rem;
+                    border-radius: 8px;
+                    border-color: var(--border-theme-color);
+
+                    p {
+                        margin: 0;
+                    }
+                }
             }
-          }
         }
 
         footer {
             display: flex;
             flex-direction: row;
             justify-content: space-evenly;
-
             padding: 0.5rem 0;
             border-top: 1px solid var(--color-light-6);
             border-bottom: 1px solid var(--color-light-6);
@@ -163,7 +167,7 @@
                 }
 
                 &.refund {
-                  border-color: #851a1a;
+                    border-color: #851a1a;
                 }
 
                 &.unavailable {
@@ -172,12 +176,10 @@
                 }
             }
         }
-
     }
 
     .controls {
         grid-area: controls;
-
         padding: 0.5rem;
         color: white;
         border-radius: 15px;
