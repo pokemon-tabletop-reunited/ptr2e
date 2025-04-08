@@ -1006,6 +1006,7 @@ export interface LevelUpMoveSchema extends MoveSchema {
 interface MoveSchema extends foundry.data.fields.DataSchema {
   name: SlugField<string, string, true, false, true>;
   uuid: foundry.data.fields.DocumentUUIDField<string, true, false, true>;
+  grade: foundry.data.fields.DocumentUUIDField<string, true, false, true>;
   gen: SlugField<string, string, false, true, true>;
 }
 
