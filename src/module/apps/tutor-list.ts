@@ -4,6 +4,7 @@ import { HandlebarsRenderOptions } from "types/foundry/common/applications/handl
 import { ActorPTR2e } from "@actor";
 import { TutorListSchema, TutorListSettings } from "@system/tutor-list/setting-model.ts";
 import { forEach } from "remeda";
+import { grades } from "../data/mixins/has-gear-data.ts";
 
 export class TutorListApp extends foundry.applications.api.HandlebarsApplicationMixin(ApplicationV2Expanded) {
   static override DEFAULT_OPTIONS = fu.mergeObject(
@@ -98,13 +99,11 @@ export class TutorListApp extends foundry.applications.api.HandlebarsApplication
               if (a.grade === b.grade) {
                 return (a.slug ?? "").localeCompare(b.slug ?? "");
               }
-              if (a.grade === "S" && b.grade !== "S") {
-                return -1;
-              } else if (a.grade !== "S" && b.grade === "S") {
-                return 1;
-              } else {
-                return (a.grade ?? "").localeCompare(b.grade ?? "");
-              }
+
+              const gradeA = grades.indexOf(a.grade as typeof grades[number]);
+              const gradeB = grades.indexOf(b.grade as typeof grades[number]);
+              return gradeB - gradeA;
+
             } else {
               return 0;
             }

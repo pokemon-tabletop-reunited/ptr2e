@@ -10,7 +10,7 @@
       {{/if}}
     </div>
     <label>
-      <input type="checkbox" name="sort-grade" {{#if (sortByGrade)}} checked{{/if}}> Sort Moves by Grade
+      <input type="checkbox" name="sort-grade" {{#if (eq sortByGrade true)}} checked{{/if}}> Sort Moves by Grade
     </label>
     <div class="grade-filters">
       <button type="button" class="grade-filter{{#if (includes selectedGrades "S")}} active{{/if}}" data-grade="S">S</button>
