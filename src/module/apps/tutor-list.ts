@@ -103,7 +103,7 @@ export class TutorListApp extends foundry.applications.api.HandlebarsApplication
               } else if (a.grade !== "S" && b.grade === "S") {
                 return 1;
               } else {
-                return (a.grade ?? "").localeCompare(a.grade ?? "");
+                return (a.grade ?? "").localeCompare(b.grade ?? "");
               }
             } else {
               return 0;
