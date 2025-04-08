@@ -95,6 +95,9 @@ export class TutorListApp extends foundry.applications.api.HandlebarsApplication
           .filter((move) => this.selectedGrades.size === 0 || this.selectedGrades.has(move.grade))
           .sort((a, b) => {
             if (this.sortByGrade) {
+              if (a.grade === b.grade) {
+                return (a.slug ?? "").localeCompare(b.slug ?? "");
+              }
               if (a.grade === "S" && b.grade !== "S") {
                 return -1;
               } else if (a.grade !== "S" && b.grade === "S") {
