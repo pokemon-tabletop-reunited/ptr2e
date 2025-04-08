@@ -125,7 +125,16 @@ filterList() {
 
     const speciesList = this.actor?.species?.moves.tutor.reduce((acc, val) => {
       const slug = sluggify(val.name);
-      const grade = tutorList.list.contents.find(m => m.uuid === val.uuid)?.grade ?? "";
+      let grade = "";
+      forEach(tutorList.list.contents, (list) => {
+        const move = list.moves.find(m => m.uuid == val.uuid);
+        if (move) {
+          grade = move.grade;
+        }
+        if (grade != "") {
+          return;
+        }
+      });
       acc.moves.set(slug, { slug, uuid: val.uuid, grade: grade as string });
       return acc;
     }, {
