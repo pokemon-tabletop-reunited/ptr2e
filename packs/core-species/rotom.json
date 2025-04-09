@@ -76,6 +76,22 @@
         "group": null
       },
       {
+        "slug": "disguise",
+        "value": 55,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "electronics",
+        "value": 60,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
         "slug": "flying",
         "value": 45,
         "rvs": 0,
@@ -140,8 +156,16 @@
         "group": null
       },
       {
+        "slug": "psychology",
+        "value": 35,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
         "slug": "running",
-        "value": 40,
+        "value": 25,
         "rvs": 0,
         "favourite": false,
         "hidden": false,
@@ -596,6 +620,83 @@
               "grantee": "detach",
               "granter": "cascade"
             }
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:frost:active"
+            ],
+            "key": "system.type.types",
+            "value": "ice",
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:frost:active"
+            ],
+            "key": "system.type.types",
+            "value": "ghost",
+            "mode": 6,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "remove-trait",
+            "predicate": [
+              "forme:frost:active"
+            ],
+            "key": "ghost",
+            "value": "ghost",
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:frost:active"
+            ],
+            "key": "system.skills.flying.value",
+            "value": 10,
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:frost:active"
+            ],
+            "key": "system.skills.intimidate.value",
+            "value": 10,
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:frost:active"
+            ],
+            "key": "system.skills.running.value",
+            "value": 15,
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:frost:active"
+            ],
+            "key": "system.skills.lift.value",
+            "value": 10,
+            "mode": 2,
+            "priority": null,
+            "ignored": false
           }
         ],
         "slug": null,
@@ -628,10 +729,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "ptr2e",
-        "systemVersion": "1.0.3.beta",
+        "systemVersion": "1.2.0.beta",
         "createdTime": 1739630481930,
-        "modifiedTime": 1739723735047,
-        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+        "modifiedTime": 1743980892516,
+        "lastModifiedBy": "5ImYyhOS2D6D7ypO"
       }
     },
     {
@@ -760,6 +861,61 @@
             "mode": 6,
             "priority": null,
             "ignored": false
+          },
+          {
+            "type": "remove-trait",
+            "predicate": [
+              "forme:fan:active"
+            ],
+            "key": "ghost",
+            "value": "ghost",
+            "mode": 6,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:fan:active"
+            ],
+            "key": "system.skills.flying.value",
+            "value": 10,
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:fan:active"
+            ],
+            "key": "system.skills.intimidate.value",
+            "value": 10,
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:fan:active"
+            ],
+            "key": "system.skills.running.value",
+            "value": 15,
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:fan:active"
+            ],
+            "key": "system.skills.lift.value",
+            "value": 10,
+            "mode": 2,
+            "priority": null,
+            "ignored": false
           }
         ],
         "slug": null,
@@ -792,10 +948,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "ptr2e",
-        "systemVersion": "1.0.3.beta",
+        "systemVersion": "1.2.0.beta",
         "createdTime": 1739630491982,
-        "modifiedTime": 1739723874526,
-        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+        "modifiedTime": 1743981036470,
+        "lastModifiedBy": "5ImYyhOS2D6D7ypO"
       }
     },
     {
@@ -874,11 +1030,17 @@
             "value": "Compendium.ptr2e.core-abilities.Item.vXvFp7PqPkhPr0zX",
             "allowDuplicate": false,
             "reevaluateOnUpdate": true,
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "system.free",
+                "value": "true"
+              }
+            ],
             "mode": 2,
             "priority": null,
             "ignored": false,
             "inMemoryOnly": false,
-            "alterations": [],
             "track": false,
             "replaceSelf": false,
             "onDeleteActions": {
@@ -918,6 +1080,61 @@
             "mode": 6,
             "priority": null,
             "ignored": false
+          },
+          {
+            "type": "remove-trait",
+            "predicate": [
+              "forme:wash:active"
+            ],
+            "key": "",
+            "value": "ghost",
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:wash:active"
+            ],
+            "key": "system.skills.flying.value",
+            "value": 10,
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:wash:active"
+            ],
+            "key": "system.skills.intimidate.value",
+            "value": 10,
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:wash:active"
+            ],
+            "key": "system.skills.running.value",
+            "value": 15,
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:wash:active"
+            ],
+            "key": "system.skills.lift.value",
+            "value": 10,
+            "mode": 2,
+            "priority": null,
+            "ignored": false
           }
         ],
         "slug": null,
@@ -950,10 +1167,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "ptr2e",
-        "systemVersion": "1.0.3.beta",
+        "systemVersion": "1.2.0.beta",
         "createdTime": 1739630505039,
-        "modifiedTime": 1739723934727,
-        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+        "modifiedTime": 1743981301298,
+        "lastModifiedBy": "5ImYyhOS2D6D7ypO"
       }
     },
     {
@@ -1082,6 +1299,61 @@
             "mode": 6,
             "priority": null,
             "ignored": false
+          },
+          {
+            "type": "remove-trait",
+            "predicate": [
+              "forme:mow:active"
+            ],
+            "key": "",
+            "value": "ghost",
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mow:active"
+            ],
+            "key": "system.skills.flying.value",
+            "value": 10,
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mow:active"
+            ],
+            "key": "system.skills.intimidate.value",
+            "value": 10,
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mow:active"
+            ],
+            "key": "system.skills.running.value",
+            "value": 15,
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mow:active"
+            ],
+            "key": "system.skills.running.value",
+            "value": 10,
+            "mode": 2,
+            "priority": null,
+            "ignored": false
           }
         ],
         "slug": null,
@@ -1114,10 +1386,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "ptr2e",
-        "systemVersion": "1.0.3.beta",
+        "systemVersion": "1.2.0.beta",
         "createdTime": 1739630514422,
-        "modifiedTime": 1739723983518,
-        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+        "modifiedTime": 1743981431827,
+        "lastModifiedBy": "5ImYyhOS2D6D7ypO"
       }
     },
     {
@@ -1212,12 +1484,12 @@
                 "value": "true"
               }
             ],
+            "reevaluateOnUpdate": true,
+            "allowDuplicate": false,
             "mode": 2,
             "priority": null,
             "ignored": false,
-            "reevaluateOnUpdate": false,
             "inMemoryOnly": false,
-            "allowDuplicate": true,
             "track": false,
             "replaceSelf": false,
             "onDeleteActions": {
@@ -1244,6 +1516,61 @@
             "key": "system.type.types",
             "value": "ghost",
             "mode": 6,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "remove-trait",
+            "predicate": [
+              "forme:heat:active"
+            ],
+            "key": "",
+            "value": "ghost",
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:heat:active"
+            ],
+            "key": "system.skills.flying.value",
+            "value": 10,
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:heat:active"
+            ],
+            "key": "system.skills.intimidate.value",
+            "value": 10,
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:heat:active"
+            ],
+            "key": "system.skills.running.value",
+            "value": 15,
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:heat:active"
+            ],
+            "key": "system.skills.running.value",
+            "value": 10,
+            "mode": 2,
             "priority": null,
             "ignored": false
           }
@@ -1278,10 +1605,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "ptr2e",
-        "systemVersion": "1.0.3.beta",
+        "systemVersion": "1.2.0.beta",
         "createdTime": 1739630523926,
-        "modifiedTime": 1739724022009,
-        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+        "modifiedTime": 1743981505326,
+        "lastModifiedBy": "5ImYyhOS2D6D7ypO"
       }
     }
   ]
