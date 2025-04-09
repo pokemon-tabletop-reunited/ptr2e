@@ -90,6 +90,7 @@ class ChatMessagePTR2e<TSchema extends TypeDataModel = TypeDataModel> extends Ch
         isWhisper ? "whisper" : null,
         this.blind ? "blind" : null,
         this.type,
+        "ptr2e"
       ].filterJoin(" "),
       isWhisper: this.whisper.length,
       whisperTo: this.whisper

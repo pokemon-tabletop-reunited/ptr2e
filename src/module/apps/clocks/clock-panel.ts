@@ -11,7 +11,7 @@ export default class ClockPanel extends foundry.applications.api.HandlebarsAppli
   static override DEFAULT_OPTIONS = fu.mergeObject(
     super.DEFAULT_OPTIONS,
     {
-      classes: ["clock-panel sheet"],
+      classes: ["clock-panel", "sheet", "faded-ui"],
       tag: "aside",
       position: {
         width: 300,
@@ -116,6 +116,10 @@ export default class ClockPanel extends foundry.applications.api.HandlebarsAppli
             ?.getAttribute("data-id");
           const clock = this._getClock(id as string);
           if (!clock) return;
+
+          if ('shiftKey' in event && event.shiftKey) {
+            return await game.ptr.clocks.db.deleteClock(clock.id);
+          }
 
           return await foundry.applications.api.DialogV2.prompt({
             buttons: [

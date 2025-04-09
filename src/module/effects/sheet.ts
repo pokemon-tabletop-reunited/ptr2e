@@ -13,49 +13,45 @@ import Tagify from "@yaireo/tagify";
 class ActiveEffectConfig extends foundry.applications.api.HandlebarsApplicationMixin(
   DocumentSheetV2<ActiveEffectPTR2e>
 ) {
-  static override DEFAULT_OPTIONS = fu.mergeObject(
-    super.DEFAULT_OPTIONS,
-    {
-      classes: ["active-effect-sheet"],
-      position: {
-        width: 550,
-        height: "auto",
-      },
-      form: {
-        handler: ActiveEffectConfig.#onSubmit,
-        closeOnSubmit: false,
-        submitOnChange: true,
-      },
-      actions: {
-        "open-inspector": async function (this: ActiveEffectConfig, event: Event) {
-          event.preventDefault();
-          const inspector = new DataInspector(this.document);
-          inspector.render(true);
-        },
-        "convert-to-affliction": async function (this: ActiveEffectConfig, event: Event) {
-          event.preventDefault();
-          const newEffect = this.document.clone({ type: "affliction" }, { keepId: true });
-          const parent = this.document.parent;
-          await this.document.delete();
-          const docs = await ActiveEffectPTR2e.createDocuments([newEffect], {keepId: true, parent});
-          docs?.at(0)?.sheet?.render(true);
-        }
-      },
-      window: {
-        resizable: true,
-        controls: [
-          ...(super.DEFAULT_OPTIONS?.window?.controls ?? []),
-          {
-            icon: "fas fa-atom",
-            label: "PTR2E.ActorSheet.Inspector",
-            action: "open-inspector",
-            visible: true
-          }
-        ],
-      },
+  static override DEFAULT_OPTIONS = {
+    classes: ["active-effect-sheet", "ptr2e", "standard-form"],
+    position: {
+      width: 550,
+      height: "auto" as const
     },
-    { inplace: false }
-  );
+    form: {
+      handler: ActiveEffectConfig.#onSubmit,
+      closeOnSubmit: false,
+      submitOnChange: true,
+    },
+    actions: {
+      "open-inspector": async function (this: ActiveEffectConfig, event: Event) {
+        event.preventDefault();
+        const inspector = new DataInspector(this.document);
+        inspector.render(true);
+      },
+      "convert-to-affliction": async function (this: ActiveEffectConfig, event: Event) {
+        event.preventDefault();
+        const newEffect = this.document.clone({ type: "affliction" }, { keepId: true });
+        const parent = this.document.parent;
+        await this.document.delete();
+        const docs = await ActiveEffectPTR2e.createDocuments([newEffect], { keepId: true, parent });
+        docs?.at(0)?.sheet?.render(true);
+      }
+    },
+    window: {
+      resizable: true,
+      controls: [
+        ...(super.DEFAULT_OPTIONS?.window?.controls ?? []),
+        {
+          icon: "fas fa-atom",
+          label: "PTR2E.ActorSheet.Inspector",
+          action: "open-inspector",
+          visible: true
+        }
+      ],
+    },
+  };
 
   #allTraits: { value: string; label: string, virtual: boolean, type?: Trait["type"] }[] | undefined;
 
@@ -193,7 +189,7 @@ class ActiveEffectConfig extends foundry.applications.api.HandlebarsApplicationM
       });
     }
 
-    const traits  = (() => {
+    const traits = (() => {
       if ("traits" in this.document.system) {
         const traits = [];
         for (const trait of this.document.system.traits) {
@@ -670,13 +666,13 @@ class ActiveEffectConfig extends foundry.applications.api.HandlebarsApplicationM
 
   static async #onSubmit(
     this: ActiveEffectConfig,
-    event: SubmitEvent,
+    event: SubmitEvent | Event,
     form: HTMLFormElement,
     formData: FormDataExtended
   ) {
     event.preventDefault();
     event.stopPropagation();
-    const submitData = this._prepareSubmitData(event, form, formData);
+    const submitData = this._prepareSubmitData(event as SubmitEvent, form, formData);
     if (fu.isEmpty(submitData)) return;
 
     await this.document.update(submitData);

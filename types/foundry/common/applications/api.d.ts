@@ -77,7 +77,7 @@ type ApplicationHeaderControlsEntry = {
     /** The action name triggered by clicking the control button */
     action: string;
     /** Is the control button visible for the current client? */
-    visible: boolean;
+    visible?: boolean;
 };
 
 type ApplicationConstructorParams = {
@@ -148,7 +148,7 @@ export class ApplicationV2<
      * The default configuration options which are assigned to every instance of this Application class.
      * @type {Omit<ApplicationConfiguration, uniqueId>}
      */
-    static DEFAULT_OPTIONS: Omit<ApplicationConfiguration, "uniqueId">;
+    static DEFAULT_OPTIONS: Omit<DeepPartial<ApplicationConfiguration>, "uniqueId">;
 
     /**
      * The sequence of rendering states that describe the Application life-cycle.

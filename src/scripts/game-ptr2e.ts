@@ -60,12 +60,15 @@ const GamePTR = {
     // Initialize the text enricher
     TextEnricher.init();
 
-    const top = document.querySelector("#ui-top") as HTMLElement;
-    if (top) {
+    const right = document.querySelector("#ui-right-column-1") as HTMLElement;
+    if (right) {
       const clockTemplate = document.createElement("template");
       clockTemplate.setAttribute("id", "ptr2e-clock-panel");
-      top?.insertAdjacentElement("afterend", clockTemplate);
+      right?.insertAdjacentElement("afterbegin", clockTemplate);
+    }
 
+    const top = document.querySelector("#ui-top") as HTMLElement;
+    if (top) {
       const tokenTemplate = document.createElement("template");
       tokenTemplate.setAttribute("id", "ptr2e-token-panel");
       top?.insertAdjacentElement("afterend", tokenTemplate);
