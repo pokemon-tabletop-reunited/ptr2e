@@ -232,6 +232,7 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
               {
                 dexId: species.system.number,
                 shiny: this.actor!.system.shiny,
+                female: this.actor!.system.gender === "female",
                 forms: species.system.form ? species.system.form.split("-") : [],
               },
               config
@@ -242,6 +243,7 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
               {
                 dexId: species.system.number,
                 shiny: this.actor!.system.shiny,
+                female: this.actor!.system.gender === "female",
                 forms: species.system.form ? [...species.system.form.split("-"), "token"] : ["token"],
               },
               config
@@ -687,14 +689,20 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
           this.currentNode = this._perkStore.get(perkKey) ?? null;
           this.render({ parts: ["hudPerk"] });
         });
-        perk.addEventListener("dblclick", (event) => {
+        perk.addEventListener("dblclick", async (event) => {
           event.preventDefault();
           event.stopPropagation();
           const { x, y } = perk.dataset;
           if (!x || !y) return;
           const perkKey = `${Number(x)}-${Number(y)}`;
           const node = this._perkStore.get(perkKey) ?? null;
-          node?.perk?.sheet?.render(true);
+          const evolution = node?.perk?.flags?.ptr2e?.evolution as {name: string, tier: number, uuid: string} | undefined;
+          if(evolution) {
+            const species = await fromUuid<SpeciesPTR2e>(evolution.uuid);
+            if(species) return void species.sheet?.render(true);
+          }
+          
+          node?.perk?.sheet?.render(true); 
         });
         perk.addEventListener("contextmenu", (event) => {
           if (!this.editMode) return;

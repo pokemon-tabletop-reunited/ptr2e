@@ -29,7 +29,9 @@
       "firestarter",
       "heater",
       "wallclimber",
-      "glow-2"
+      "glow-2",
+      "fully-evolved",
+      "jump-2"
     ],
     "abilities": {
       "starting": [
@@ -96,6 +98,14 @@
         "group": null
       },
       {
+        "slug": "legendary",
+        "value": 55,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
         "slug": "lift",
         "value": 50,
         "rvs": 0,
@@ -134,14 +144,6 @@
         "favourite": false,
         "hidden": false,
         "group": null
-      },
-      {
-        "slug": "legendary",
-        "value": 55,
-        "rvs": 0,
-        "favourite": false,
-        "hidden": false,
-        "group": "occult"
       },
       {
         "slug": "running",
@@ -191,99 +193,107 @@
     "moves": {
       "levelUp": [
         {
-          "name": "leer",
-          "level": 1,
-          "gen": "scarlet-violet"
+          "name": "fire-spin",
+          "gen": "scarlet-violet",
+          "level": 1
         },
         {
-          "name": "fire-spin",
-          "level": 1,
-          "gen": "scarlet-violet"
+          "name": "leer",
+          "gen": "scarlet-violet",
+          "level": 1
         },
         {
           "name": "metal-claw",
-          "level": 6,
-          "gen": "scarlet-violet"
+          "gen": "scarlet-violet",
+          "level": 6
         },
         {
           "name": "ancient-power",
-          "level": 12,
-          "gen": "scarlet-violet"
+          "gen": "scarlet-violet",
+          "level": 12
         },
         {
           "name": "fire-fang",
-          "level": 18,
-          "gen": "scarlet-violet"
+          "gen": "scarlet-violet",
+          "level": 18
         },
         {
           "name": "scary-face",
-          "level": 24,
-          "gen": "scarlet-violet"
+          "gen": "scarlet-violet",
+          "level": 24
         },
         {
           "name": "iron-head",
-          "level": 30,
-          "gen": "scarlet-violet"
+          "gen": "scarlet-violet",
+          "level": 30
         },
         {
           "name": "crunch",
-          "level": 36,
-          "gen": "scarlet-violet"
+          "gen": "scarlet-violet",
+          "level": 36
         },
         {
           "name": "lava-plume",
-          "level": 42,
-          "gen": "scarlet-violet"
+          "gen": "scarlet-violet",
+          "level": 42
         },
         {
           "name": "metal-sound",
-          "level": 48,
-          "gen": "scarlet-violet"
+          "gen": "scarlet-violet",
+          "level": 48
         },
         {
           "name": "earth-power",
-          "level": 54,
-          "gen": "scarlet-violet"
+          "gen": "scarlet-violet",
+          "level": 54
         },
         {
           "name": "heat-wave",
-          "level": 60,
-          "gen": "scarlet-violet"
+          "gen": "scarlet-violet",
+          "level": 60
         },
         {
           "name": "stone-edge",
-          "level": 66,
-          "gen": "scarlet-violet"
+          "gen": "scarlet-violet",
+          "level": 66
         },
         {
           "name": "magma-storm",
-          "level": 72,
-          "gen": "scarlet-violet"
+          "gen": "scarlet-violet",
+          "level": 72
         }
       ],
       "tutor": [
         {
-          "name": "headbutt",
-          "gen": "heartgold-soulsilver"
+          "name": "attract",
+          "gen": "brilliant-diamond-and-shining-pearl"
         },
         {
-          "name": "snore",
+          "name": "body-press",
+          "gen": "scarlet-violet"
+        },
+        {
+          "name": "body-slam",
+          "gen": "scarlet-violet"
+        },
+        {
+          "name": "bug-bite",
           "gen": "ultra-sun-ultra-moon"
         },
         {
-          "name": "mud-slap",
+          "name": "bulldoze",
+          "gen": "scarlet-violet"
+        },
+        {
+          "name": "burning-jealousy",
+          "gen": "sword-shield"
+        },
+        {
+          "name": "captivate",
           "gen": "heartgold-soulsilver"
         },
         {
-          "name": "sleep-talk",
-          "gen": "black-2-white-2"
-        },
-        {
-          "name": "uproar",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "iron-defense",
+          "name": "confide",
           "gen": "ultra-sun-ultra-moon"
         },
         {
@@ -291,19 +301,195 @@
           "gen": "black-2-white-2"
         },
         {
+          "name": "dig",
+          "gen": "scarlet-violet"
+        },
+        {
+          "name": "double-team",
+          "gen": "brilliant-diamond-and-shining-pearl"
+        },
+        {
           "name": "dragon-pulse",
           "gen": "ultra-sun-ultra-moon"
         },
         {
+          "name": "earthquake",
+          "gen": "scarlet-violet"
+        },
+        {
+          "name": "endure",
+          "gen": "scarlet-violet"
+        },
+        {
+          "name": "explosion",
+          "gen": "brilliant-diamond-and-shining-pearl"
+        },
+        {
+          "name": "facade",
+          "gen": "scarlet-violet"
+        },
+        {
+          "name": "fire-blast",
+          "gen": "scarlet-violet"
+        },
+        {
+          "name": "flame-charge",
+          "gen": "scarlet-violet"
+        },
+        {
+          "name": "flamethrower",
+          "gen": "scarlet-violet"
+        },
+        {
+          "name": "flare-blitz",
+          "gen": "scarlet-violet"
+        },
+        {
+          "name": "flash-cannon",
+          "gen": "scarlet-violet"
+        },
+        {
+          "name": "frustration",
+          "gen": "ultra-sun-ultra-moon"
+        },
+        {
+          "name": "giga-impact",
+          "gen": "scarlet-violet"
+        },
+        {
+          "name": "hard-press",
+          "gen": "scarlet-violet"
+        },
+        {
+          "name": "headbutt",
+          "gen": "heartgold-soulsilver"
+        },
+        {
+          "name": "heat-crash",
+          "gen": "scarlet-violet"
+        },
+        {
+          "name": "heavy-slam",
+          "gen": "scarlet-violet"
+        },
+        {
+          "name": "hidden-power",
+          "gen": "ultra-sun-ultra-moon"
+        },
+        {
+          "name": "hyper-beam",
+          "gen": "scarlet-violet"
+        },
+        {
+          "name": "incinerate",
+          "gen": "omega-ruby-alpha-sapphire"
+        },
+        {
+          "name": "iron-defense",
+          "gen": "ultra-sun-ultra-moon"
+        },
+        {
+          "name": "lunge",
+          "gen": "scarlet-violet"
+        },
+        {
+          "name": "mud-slap",
+          "gen": "heartgold-soulsilver"
+        },
+        {
+          "name": "natural-gift",
+          "gen": "heartgold-soulsilver"
+        },
+        {
+          "name": "nature-power",
+          "gen": "ultra-sun-ultra-moon"
+        },
+        {
+          "name": "overheat",
+          "gen": "scarlet-violet"
+        },
+        {
+          "name": "payback",
+          "gen": "brilliant-diamond-and-shining-pearl"
+        },
+        {
+          "name": "pounce",
+          "gen": "scarlet-violet"
+        },
+        {
+          "name": "power-gem",
+          "gen": "scarlet-violet"
+        },
+        {
+          "name": "protect",
+          "gen": "scarlet-violet"
+        },
+        {
+          "name": "rest",
+          "gen": "scarlet-violet"
+        },
+        {
+          "name": "return",
+          "gen": "ultra-sun-ultra-moon"
+        },
+        {
+          "name": "roar",
+          "gen": "brilliant-diamond-and-shining-pearl"
+        },
+        {
+          "name": "rock-blast",
+          "gen": "scarlet-violet"
+        },
+        {
+          "name": "rock-climb",
+          "gen": "brilliant-diamond-and-shining-pearl"
+        },
+        {
+          "name": "rock-slide",
+          "gen": "scarlet-violet"
+        },
+        {
+          "name": "rock-smash",
+          "gen": "brilliant-diamond-and-shining-pearl"
+        },
+        {
+          "name": "rock-tomb",
+          "gen": "scarlet-violet"
+        },
+        {
+          "name": "round",
+          "gen": "sword-shield"
+        },
+        {
+          "name": "sandstorm",
+          "gen": "scarlet-violet"
+        },
+        {
+          "name": "scorching-sands",
+          "gen": "sword-shield"
+        },
+        {
+          "name": "secret-power",
+          "gen": "omega-ruby-alpha-sapphire"
+        },
+        {
+          "name": "self-destruct",
+          "gen": "sword-shield"
+        },
+        {
+          "name": "sleep-talk",
+          "gen": "black-2-white-2"
+        },
+        {
+          "name": "snore",
+          "gen": "ultra-sun-ultra-moon"
+        },
+        {
+          "name": "solar-beam",
+          "gen": "scarlet-violet"
+        },
+        {
           "name": "stealth-rock",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "bug-bite",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "stomping-tantrum",
           "gen": "ultra-sun-ultra-moon"
         },
         {
@@ -315,91 +501,19 @@
           "gen": "sword-shield"
         },
         {
-          "name": "burning-jealousy",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "scorching-sands",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "body-slam",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "take-down",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "roar",
-          "gen": "brilliant-diamond-and-shining-pearl"
-        },
-        {
-          "name": "flamethrower",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "hyper-beam",
-          "gen": "scarlet-violet"
+          "name": "stomping-tantrum",
+          "gen": "ultra-sun-ultra-moon"
         },
         {
           "name": "strength",
           "gen": "brilliant-diamond-and-shining-pearl"
         },
         {
-          "name": "solar-beam",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "earthquake",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "dig",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "toxic",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "double-team",
-          "gen": "brilliant-diamond-and-shining-pearl"
-        },
-        {
-          "name": "self-destruct",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "fire-blast",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "explosion",
-          "gen": "brilliant-diamond-and-shining-pearl"
-        },
-        {
-          "name": "rest",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "rock-slide",
-          "gen": "scarlet-violet"
-        },
-        {
           "name": "substitute",
           "gen": "scarlet-violet"
         },
         {
-          "name": "protect",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "sandstorm",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "endure",
+          "name": "sunny-day",
           "gen": "scarlet-violet"
         },
         {
@@ -407,131 +521,11 @@
           "gen": "brilliant-diamond-and-shining-pearl"
         },
         {
-          "name": "attract",
-          "gen": "brilliant-diamond-and-shining-pearl"
-        },
-        {
-          "name": "return",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "frustration",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "hidden-power",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "sunny-day",
+          "name": "take-down",
           "gen": "scarlet-violet"
-        },
-        {
-          "name": "rock-smash",
-          "gen": "brilliant-diamond-and-shining-pearl"
-        },
-        {
-          "name": "torment",
-          "gen": "brilliant-diamond-and-shining-pearl"
-        },
-        {
-          "name": "will-o-wisp",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "facade",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "nature-power",
-          "gen": "ultra-sun-ultra-moon"
         },
         {
           "name": "taunt",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "secret-power",
-          "gen": "omega-ruby-alpha-sapphire"
-        },
-        {
-          "name": "overheat",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "rock-tomb",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "rock-blast",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "natural-gift",
-          "gen": "heartgold-soulsilver"
-        },
-        {
-          "name": "payback",
-          "gen": "brilliant-diamond-and-shining-pearl"
-        },
-        {
-          "name": "flare-blitz",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "power-gem",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "giga-impact",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "flash-cannon",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "rock-climb",
-          "gen": "brilliant-diamond-and-shining-pearl"
-        },
-        {
-          "name": "captivate",
-          "gen": "heartgold-soulsilver"
-        },
-        {
-          "name": "heavy-slam",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "flame-charge",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "round",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "incinerate",
-          "gen": "omega-ruby-alpha-sapphire"
-        },
-        {
-          "name": "bulldoze",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "heat-crash",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "confide",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "lunge",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "body-press",
           "gen": "scarlet-violet"
         },
         {
@@ -539,11 +533,19 @@
           "gen": "scarlet-violet"
         },
         {
-          "name": "pounce",
-          "gen": "scarlet-violet"
+          "name": "torment",
+          "gen": "brilliant-diamond-and-shining-pearl"
         },
         {
-          "name": "hard-press",
+          "name": "toxic",
+          "gen": "ultra-sun-ultra-moon"
+        },
+        {
+          "name": "uproar",
+          "gen": "ultra-sun-ultra-moon"
+        },
+        {
+          "name": "will-o-wisp",
           "gen": "scarlet-violet"
         }
       ]
@@ -557,11 +559,27 @@
     "evolutions": {
       "name": "heatran",
       "details": null,
-      "evolutions": []
+      "evolutions": [],
+      "uuid": null,
+      "methods": [],
+      "perk": {
+        "x": 26,
+        "y": 26
+      }
     },
-    "slug": "heatran"
+    "slug": "heatran",
+    "publication": {
+      "source": "PTR 2e Core - Sinnoh Dex",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
   },
   "_id": "3LS7sZlnFpHNypJ6",
-  "effects": [],
-  "folder": null
+  "effects": []
 }

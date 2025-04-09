@@ -216,9 +216,9 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
       gender: new fields.StringField<GenderOptions, GenderOptions, true, false, true>({
         required: true,
         choices: {
-          "genderless": "genderless",
-          "male": "male",
-          "female": "female"
+          "genderless": "PTR2E.ActorSystem.FIELDS.gender.genderless",
+          "male": "PTR2E.ActorSystem.FIELDS.gender.male",
+          "female": "PTR2E.ActorSystem.FIELDS.gender.female"
         },
         initial: "genderless"
       }),
@@ -273,7 +273,8 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
         dex: new CollectionField(new fields.SchemaField({
           slug: new fields.StringField({ required: true, nullable: false }),
           state: new fields.StringField({ required: true, nullable: false, initial: "unknown", choices: ["unknown", "seen", "caught", "shiny"] }),
-        }))
+        })),
+        device: new fields.StringField({required: true, blank: true, initial: "", label: "PTR2E.FIELDS.details.device.label", hint: "PTR2E.FIELDS.details.device.hint" }),
       }),
       inventory: new fields.SchemaField({
         held: new fields.SchemaField({
@@ -348,7 +349,7 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
     for (const k in this.attributes) {
       const key = k as keyof Attributes;
       Object.defineProperty(this.attributes[key], "final", {
-        get: () => key === "hp" ? this.attributes[key].value : this.parent.calcStatTotal(this.attributes[key], false),
+        get: () => key === "hp" ? this.attributes[key].value : this.parent.calcStatTotal(this.attributes[key], false, false),
       });
     }
 
@@ -367,6 +368,14 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
       this.parent.rollOptions.addOption("clocks", `${clock.id}:value:${clock.value}`)
       this.parent.rollOptions.addOption("clocks", `${clock.id}:max:${clock.max}`)
     }
+    Object.defineProperty(this.clocks, "lookup", {
+      get: () => {
+        return this.clocks.contents.reduce((acc, clock) => {
+          acc[clock.id] = clock.value;
+          return acc;
+        }, {} as Record<string, number>);
+      }
+    })
 
     this.advancement.level = this.getLevel();
     if (this.parent.isHumanoid()) {
@@ -465,7 +474,8 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
       movement: 0,
       powerPoints: 0,
       weightClass: 0,
-      heightClass: 0
+      heightClass: 0,
+      vulnerabilityMultiplier: 1
     };
   }
 
@@ -567,7 +577,7 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
     //@ts-expect-error - The getter needs to be added afterwards.
     this.parent.flags.ptr2e.skillOptions = {
       data: this.skills.reduce((acc, skill) => {
-        if (["luck", "resources"].includes(skill.slug)) return acc;
+        if (["luck", "resources"].includes(skill.slug) || skill.hidden) return acc;
         const label = (() => {
           const baseKey = skill.group
             ? `PTR2E.Skills.${skill.group}.${skill.slug}`
@@ -599,27 +609,27 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
       },
       "arts": {
         get: () => {
-          return this.parent.flags.ptr2e.skillOptions!.data.filter(skill => skill.group === "arts" && skill.base > 1);
+          return this.parent.flags.ptr2e.skillOptions!.data.filter(skill => skill.group === "arts");
         }
       },
       "science": {
         get: () => {
-          return this.parent.flags.ptr2e.skillOptions!.data.filter(skill => skill.group === "science" && skill.base > 1);
+          return this.parent.flags.ptr2e.skillOptions!.data.filter(skill => skill.group === "science");
         }
       },
       "performance": {
         get: () => {
-          return this.parent.flags.ptr2e.skillOptions!.data.filter(skill => skill.group === "performance" && skill.base > 1);
+          return this.parent.flags.ptr2e.skillOptions!.data.filter(skill => skill.group === "performance");
         }
       },
       "occult": {
         get: () => {
-          return this.parent.flags.ptr2e.skillOptions!.data.filter(skill => skill.group === "occult" && skill.base > 1);
+          return this.parent.flags.ptr2e.skillOptions!.data.filter(skill => skill.group === "occult");
         }
       },
       "pilot": {
         get: () => {
-          return this.parent.flags.ptr2e.skillOptions!.data.filter(skill => skill.group === "pilot" && skill.base > 1);
+          return this.parent.flags.ptr2e.skillOptions!.data.filter(skill => skill.group === "pilot");
         }
       }
     });

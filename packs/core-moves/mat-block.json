@@ -10,10 +10,9 @@
         "name": "Mat Block",
         "type": "attack",
         "traits": [
-          "shield",
-          "exhaust",
-          "interrupt-4",
-          "pp-updated"
+          "pp-updated",
+          "interrupt-6",
+          "shield"
         ],
         "range": {
           "target": "emanation",
@@ -21,25 +20,32 @@
           "unit": "m"
         },
         "cost": {
-          "activation": "complex",
+          "activation": "free",
           "powerPoints": 2,
           "trigger": "<p>The user or an ally in range is hit by an attack.</p>"
         },
         "category": "status",
-        "power": null,
-        "accuracy": null,
         "types": [
           "fighting"
         ],
-        "description": "<p>Trigger: The user or an ally in range is hit by an attack.</p><p>Effect: The triggering attack fails to hit. Attacks failing to any of the affected creatures in range do not activate on-miss effects.</p>",
-        "contestType": "",
-        "contestEffect": "",
-        "free": false,
-        "slot": null
+        "description": "<p>Trigger: The user or an ally in range would be hit by an attack.</p><p>Effect: The triggering attack fails to hit its target(s) in range. Attacks failing to any of the affected creature(s) do not activate on-miss effects.</p><p>On resolution, the user gains @Affliction[disabled] 2 on this Attack.</p>",
+        "img": "systems/ptr2e/img/svg/fighting_icon.svg",
+        "predicate": []
       }
     ],
-    "container": null,
-    "grade": "D"
+    "grade": "D",
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "traits": [],
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
   },
   "_id": "7LVFs3caikwmWiFj",
   "effects": []

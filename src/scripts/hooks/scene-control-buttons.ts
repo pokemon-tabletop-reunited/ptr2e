@@ -47,8 +47,9 @@ export const GetSceneControlButtons: PTRHook = {
           title: "PTR2E.ExpTracker.hint",
           icon: "fas fa-book",
           button: true,
-          visible: game.user.isGM,
+          visible: true,
           onClick: () => {
+            if(!game.user.isGM) return ui.notifications.error("PTR2E.ExpTracker.NoPermission", { localize: true });
             return new EXPTracker().render(true);
           }
         })

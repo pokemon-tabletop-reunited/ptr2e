@@ -172,13 +172,15 @@ export default class AttackPTR2e extends ActionPTR2e {
   }
 
   // TODO: This should add any relevant modifiers
-  get stab(): 0 | 1 | 1.5 {
+  get stab(): 0 | 1 | 1.5 | 2 {
     if (!this.actor) return 1;
     const intersection = this.actor.system.type.types.intersection(this.types);
     return intersection.size === 1 && this.types.has(PTRCONSTS.Types.UNTYPED)
       ? 1
       : intersection.size > 0
-        ? 1.5
+        ? this.actor.rollOptions?.all?.["special:adaptability"] 
+          ? 2
+          : 1.5
         : 1;
   }
 
@@ -186,8 +188,8 @@ export default class AttackPTR2e extends ActionPTR2e {
     return true//this.accuracy !== null || this.power !== null;
   }
 
-  getAttackStat(actor: Maybe<ActorPTR2e> = this.actor): number {
-    return actor?.getAttackStat(this) ?? 0;
+  getAttackStat(actor: Maybe<ActorPTR2e> = this.actor, ignoreStages = false): number {
+    return actor?.getAttackStat(this, ignoreStages) ?? 0;
   }
 
   async roll(args?: AttackStatisticRollParameters): Promise<AttackRollResult['rolls'][] | null | false> {

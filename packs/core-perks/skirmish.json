@@ -9,21 +9,27 @@
       {
         "name": "Skirmish",
         "slug": "skirmish",
-        "description": "<p>Trigger: The user enters Combat.</p><p>Effect: The user advances their Initiative by 50%.</p><blockquote>Ideally this should be done prior to the GM pressing the 'Begin Combat' button.</blockquote>",
+        "description": "<p>Trigger: The user enters Combat.</p><p>Effect: The user advances their Initiative by 50%.</p><blockquote><p>Ideally this should be done prior to the GM pressing the 'Begin Combat' button.</p></blockquote>",
         "traits": [
           "interrupt-2"
         ],
-        "type": "generic",
+        "type": "attack",
         "cost": {
           "activation": "free",
-          "powerPoints": 2,
+          "powerPoints": 6,
           "trigger": "The user enters Combat."
         },
         "range": {
           "target": "self",
           "unit": "m"
         },
-        "img": "systems/ptr2e/img/perk-icons/Ninja.svg"
+        "img": "systems/ptr2e/img/perk-icons/Ninja.svg",
+        "types": [
+          "untyped"
+        ],
+        "category": "status",
+        "free": true,
+        "predicate": []
       }
     ],
     "slug": "skirmish",
@@ -65,8 +71,92 @@
     "design": {
       "arena": "physical",
       "approach": "finesse",
-      "archetype": "Hunter"
+      "archetype": "hunter"
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
     }
   },
-  "effects": []
+  "effects": [
+    {
+      "name": "Skirmish",
+      "type": "passive",
+      "_id": "K8myFiH8KtoNqkyD",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "skirmish-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.advanceffectitem",
+            "predicate": [],
+            "chance": 100,
+            "affects": "target",
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "system.amount",
+                "value": 50
+              },
+              {
+                "mode": 5,
+                "property": "name",
+                "value": "Skirmish - Advance 50%"
+              }
+            ],
+            "label": "Skirmish",
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "roll-note",
+            "key": "combat-enter",
+            "value": "{actor|link} enters combat and may spend {item|system.cost} PP to use {item|link}!",
+            "predicate": [],
+            "visibility": null,
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "1.1.1.beta",
+        "createdTime": 1742128039172,
+        "modifiedTime": 1742128109855,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+      }
+    }
+  ]
 }
