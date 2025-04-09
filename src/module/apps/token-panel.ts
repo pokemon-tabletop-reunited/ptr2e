@@ -33,7 +33,7 @@ export default class TokenPanel extends foundry.applications.api.HandlebarsAppli
   static override DEFAULT_OPTIONS = fu.mergeObject(
     super.DEFAULT_OPTIONS,
     {
-      classes: ["token-panel"],
+      classes: ["ptr2e","token-panel"],
       tag: "aside",
       window: {
         minimizable: false,

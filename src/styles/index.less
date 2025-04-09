@@ -1,29 +1,105 @@
-// Utility classes
-@import "utils.less";
-// Main styles
-@import "main.less";
-// Tooltip styles
-@import "tooltips.less";
-// Embed styles
-@import "embeds.less";
-// Chat styles
-@import "chat.less";
-// Sidebar styles
-@import "sidebar.less";
-// Application styles
-@import "applications.less";
-// Clock styles
-@import "clocks.less";
-// Perk Web Styles
-@import "web.less";
-// Icons
-@import "icons.less";
 
-// Library Styles
-@import "tagify.css";
+@layer variables, utils, chat, embeds, applications, misc;
 
-@layer {
-  .fa-classic, .fa-light, .fa-regular, .fa-solid, .fa-thin, .fal, .far, .fas, .fat {
+@layer variables {
+  body {
+    --appv2-background-flat: rgba(12,11,22, 0.94);
+    --appv2-background: linear-gradient(to right, rgba(7, 7, 10, 0.93), rgba(19, 17, 31, 0.95));
+    --appv2-background-alt: linear-gradient(to right, rgba(28, 25, 46, 0.5), rgba(24, 24, 34, 0.53));
+    --appv2-background-opaque: linear-gradient(to right, rgb(7, 7, 10), rgb(19, 17, 31));
+    --appv2-text-color: var(--color-light-1);
+    --hint-text-color: var(--color-light-5);
+    --border-theme-color: var(--color-light-6);
+    --color-theme-4: var(--color-light-4);
+    --color-theme-3: var(--color-light-3);
+    --input-height: 1.5rem;
+
+    /** Icon Colors */
+    --normal-color: #919AA2;
+    --fighting-color: #CE416B;
+    --flying-color: #8FA9DE;
+    --poison-color: #AA6BC8;
+    --ground-color: #D97845;
+    --rock-color: #C5B78C;
+    --bug-color: #91C12F;
+    --ghost-color: #5269AD;
+    --steel-color: #5A8EA2;
+    --fire-color: #FF9D55;
+    --water-color: #5090D6;
+    --grass-color: #63BC5A;
+    --electric-color: #F4D23C;
+    --psychic-color: #FA7179;
+    --ice-color: #73CEC0;
+    --dragon-color: #0B6DC3;
+    --dark-color: #5A5465;
+    --fairy-color: #EC8FE6;
+    --nuclear-color: #19FF00;
+    --shadow-color: #222224;
+    --untyped-color: #919AA2;
+    --physical-color: #ce2918;
+    --special-color: #5a637b;
+    --status-color: #969296;
+
+    &.theme-light {
+        --appv2-background-flat: rgba(225, 222 , 210, 0.94);
+        --appv2-background: linear-gradient(to right, rgba(212, 210, 198, 0.93), rgba(240, 237, 223, 0.95));
+        --appv2-background-alt: linear-gradient(to right, rgba(240, 237, 223, 0.5), rgba(225, 222 , 210, 0.53));
+        --appv2-background-opaque: linear-gradient(to right, rgb(240, 237, 223), rgb(225, 222 , 210));
+        --appv2-text-color: var(--color-dark-1);
+        --hint-text-color: var(--color-dark-5);
+        --border-theme-color: var(--color-dark-6);
+    }
+  }
+}
+
+@layer utils {
+  // Utility classes
+  @import "utils.less";
+
+  // Icons
+  @import "icons.less";
+}
+
+@layer chat {
+  // Chat styles
+  @import "chat.less";
+}
+
+@layer embeds {
+  // Embed styles
+  @import "embeds.less";
+  // Tooltip styles
+  @import "tooltips.less";
+}
+
+@layer applications {
+  // Sidebar styles
+  @import "sidebar.less";
+  // Application styles
+  @import "applications.less";
+  // Clock styles
+  @import "clocks.less";
+  // Perk Web Styles
+  @import "web.less";
+
+}
+
+@layer misc {
+  // Library Styles
+  @import "tagify.less";
+
+  .fa-classic,
+  .fa-light,
+  .fa-regular,
+  .fa-solid,
+  .fa-thin,
+  .fal,
+  .far,
+  .fas,
+  .fat {
     font-family: "Font Awesome 6 Pro";
   }
 }
+
+// Main styles
+@import "main.less";

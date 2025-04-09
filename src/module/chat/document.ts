@@ -246,22 +246,22 @@ class ChatMessagePTR2e<TSchema extends TypeDataModel = TypeDataModel> extends Ch
       });
     });
 
-    html.find(".dice-roll").on("click", (event) => {
-      event.preventDefault();
-      event.stopImmediatePropagation();
+    // html.find(".dice-roll").on("click", (event) => {
+    //   event.preventDefault();
+    //   event.stopImmediatePropagation();
 
-      const roll = event.currentTarget;
-      const expanded = !roll.classList.contains("opened");
+    //   const roll = event.currentTarget;
+    //   const expanded = !roll.classList.contains("opened");
 
-      const tooltips = roll.querySelectorAll(".dice-tooltip");
-      for (const tip of tooltips) {
-        if (expanded) $(tip).slideDown(200);
-        else $(tip).slideUp(200);
-        tip.classList.toggle("expanded", expanded);
-      }
+    //   const tooltips = roll.querySelectorAll(".dice-tooltip");
+    //   for (const tip of tooltips) {
+    //     if (expanded) $(tip).slideDown(200);
+    //     else $(tip).slideUp(200);
+    //     tip.classList.toggle("expanded", expanded);
+    //   }
 
-      roll.classList.toggle("opened", expanded);
-    });
+    //   roll.classList.toggle("opened", expanded);
+    // });
 
     html.find(".collapse-rolls").each((_i, el) => {
       $(el).on("click", (event) => {

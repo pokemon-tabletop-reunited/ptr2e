@@ -134,10 +134,10 @@ export class SkillsEditor extends foundry.applications.api.HandlebarsApplication
       ...s,
       max: Math.max(s.min, Math.min(s.max, s.investment + points.available!)),
     })).sort((a, b) => {
-      if(a.slug === "luck") return -1;
-      if(b.slug === "luck") return 1;
-      if(a.slug === "resources") return -1;
-      if(b.slug === "resources") return 1;
+      if (a.slug === "luck") return -1;
+      if (b.slug === "luck") return 1;
+      if (a.slug === "resources") return -1;
+      if (b.slug === "resources") return 1;
       function alphaSort(a: SkillBeingEdited, b: SkillBeingEdited) {
         if (a.group === b.group) return a.label.localeCompare(b.label);
         if (!a.group) return -1;
@@ -269,10 +269,15 @@ export class SkillsEditor extends foundry.applications.api.HandlebarsApplication
           name: document.name,
         }),
       },
-      content: game.i18n.format("PTR2E.SkillsEditor.ChangeResources.content", {
-        name: document.name,
-        value: resources.total,
-      }),
+      content: (() => {
+        const htmlString = game.i18n.format("PTR2E.SkillsEditor.ChangeResources.content", {
+          name: document.name,
+          value: resources.total,
+        });
+        const html = globalThis.document.createElement("div");
+        html.innerHTML = htmlString;
+        return html;
+      })(),
       ok: {
         action: "submit",
         label: game.i18n.localize("PTR2E.SkillsEditor.ChangeResources.submit"),
@@ -324,10 +329,15 @@ export class SkillsEditor extends foundry.applications.api.HandlebarsApplication
           name: document.name,
         }),
       },
-      content: game.i18n.format("PTR2E.SkillsEditor.ChangeLuck.content", {
-        name: document.name,
-        value: luck.total,
-      }),
+      content: (() => {
+        const htmlString = game.i18n.format("PTR2E.SkillsEditor.ChangeLuck.content", {
+          name: document.name,
+          value: luck.total,
+        });
+        const html = globalThis.document.createElement("div");
+        html.innerHTML = htmlString;
+        return html;
+      })(),
       ok: {
         action: "submit",
         label: game.i18n.localize("PTR2E.SkillsEditor.ChangeLuck.submit"),
@@ -418,9 +428,14 @@ export class SkillsEditor extends foundry.applications.api.HandlebarsApplication
           name: document.name,
         }),
       },
-      content: game.i18n.format("PTR2E.SkillsEditor.RollLuck.content", {
-        name: document.name,
-      }),
+      content: (() => {
+        const htmlString = game.i18n.format("PTR2E.SkillsEditor.RollLuck.content", {
+          name: document.name,
+        })
+        const html = globalThis.document.createElement("div");
+        html.innerHTML = htmlString;
+        return html;
+      })(),
       yes: {
         callback: rollAndApplyLuck.bind(this, true),
       },

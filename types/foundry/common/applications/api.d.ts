@@ -845,7 +845,7 @@ export * from "./handlebars-application.ts";
 type DialogV2Configuration = {
     buttons?: DialogV2Button[];
     ok?: DialogV2Button;
-    content: string;
+    content: string | HTMLElement;
     submit: (...args: any[]) => Promise<void>;
     rejectClose?: boolean;
 } & ApplicationConfiguration;

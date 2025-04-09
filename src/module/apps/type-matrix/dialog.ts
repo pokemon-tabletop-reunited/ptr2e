@@ -6,7 +6,7 @@ import { sluggify } from "@utils";
 export class TypeMatrixDialog extends foundry.applications.api.HandlebarsApplicationMixin(ApplicationV2Expanded) {
   static override DEFAULT_OPTIONS = {
     tag: "form",
-    classes: ["sheet", "type-matrix", "default-sheet"],
+    classes: ["sheet", "type-matrix", "default-sheet", "ptr2e"],
     id: "type-matrix-dialog",
     position: {
       height: "auto" as const,
