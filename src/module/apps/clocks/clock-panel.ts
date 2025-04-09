@@ -8,26 +8,22 @@ export default class ClockPanel extends foundry.applications.api.HandlebarsAppli
 ) {
   public refresh = fu.debounce(this.render, 100);
 
-  static override DEFAULT_OPTIONS = fu.mergeObject(
-    super.DEFAULT_OPTIONS,
-    {
-      classes: ["clock-panel", "sheet", "faded-ui"],
-      tag: "aside",
-      position: {
-        width: 300,
-        height: "auto",
-      },
-      window: {
-        minimizable: false,
-        frame: false,
-        positioned: false,
-      },
-      actions: {
-        "add-clock": ClockPanel.#onAddClock,
-      },
+  static override DEFAULT_OPTIONS = {
+    classes: ["clock-panel", "sheet", "faded-ui"],
+    tag: "aside",
+    position: {
+      width: 300,
+      height: "auto",
     },
-    { inplace: false }
-  );
+    window: {
+      minimizable: false,
+      frame: false,
+      positioned: false,
+    },
+    actions: {
+      "add-clock": ClockPanel.#onAddClock,
+    },
+  } as unknown as Omit<DeepPartial<foundry.applications.api.ApplicationConfiguration>, "uniqueId">;
 
   static override PARTS = {
     clocks: {

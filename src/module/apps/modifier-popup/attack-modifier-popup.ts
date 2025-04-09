@@ -7,19 +7,15 @@ import { htmlQueryAll, htmlQuery, tupleHasValue } from "@utils";
 import { AttackPTR2e } from "@data";
 
 export class AttackModifierPopup extends ModifierPopup {
-  static override DEFAULT_OPTIONS = fu.mergeObject(
-    super.DEFAULT_OPTIONS,
-    {
-      classes: ["attack"],
-      position: {
-        width: 440,
-      },
-      form: {
-        handler: AttackModifierPopup.#onSubmit,
-      },
+  static override DEFAULT_OPTIONS = {
+    classes: ["attack"],
+    position: {
+      width: 440,
     },
-    { inplace: false }
-  );
+    form: {
+      handler: AttackModifierPopup.#onSubmit,
+    },
+  } as unknown as Omit<DeepPartial<foundry.applications.api.ApplicationConfiguration>, "uniqueId">;
 
   static override PARTS: Record<string, foundry.applications.api.HandlebarsTemplatePart> = {
     modifiers: {
@@ -200,7 +196,7 @@ export class AttackModifierPopup extends ModifierPopup {
     })();
 
     const variants = (() => {
-      if(!this.context.variants?.length || !this.context.actor) return null;
+      if (!this.context.variants?.length || !this.context.actor) return null;
 
       interface AttackVariant {
         slug: string;
@@ -213,29 +209,29 @@ export class AttackModifierPopup extends ModifierPopup {
       let original = false;
       let selected = false;
 
-      for(const variant of this.context.variants) {
+      for (const variant of this.context.variants) {
         const action = this.context.actor.actions.attack.get(variant);
-        if(!action) continue;
-        if(!action.variant) original = true;
-        if(this.context.action === variant) {
-          variantMap.set(variant, {slug: variant, uuid: action.uuid, label: action.name, category: action.category, selected: true });
+        if (!action) continue;
+        if (!action.variant) original = true;
+        if (this.context.action === variant) {
+          variantMap.set(variant, { slug: variant, uuid: action.uuid, label: action.name, category: action.category, selected: true });
           selected = true;
         }
         else {
-          variantMap.set(variant, {slug: variant, uuid: action.uuid, label: action.name, category: action.category});
-        }  
+          variantMap.set(variant, { slug: variant, uuid: action.uuid, label: action.name, category: action.category });
+        }
       }
 
       const variants = Array.from(variantMap.values()).sort((a, b) => a.label.localeCompare(b.label));
-      if(!original) {
+      if (!original) {
         const original = this.context.actor.actions.attack.get(variants[0].slug)!.original as AttackPTR2e;
-        if(!original) return null;
+        if (!original) return null;
         variants.unshift({
           slug: original.slug,
-          label: original.slug === 'fling' ? `${original.name} (No Item)` :`${original.name} (Original)`,
+          label: original.slug === 'fling' ? `${original.name} (No Item)` : `${original.name} (Original)`,
           category: original.category,
           uuid: original.uuid,
-          ...(!selected ? {selected: true} : {})
+          ...(!selected ? { selected: true } : {})
         })
       }
       return variants;
@@ -495,16 +491,16 @@ export class AttackModifierPopup extends ModifierPopup {
 
     const uuid = this.context.actor?.uuid ?? this.context.attack?.actor?.uuid;
     const origin = await fromUuid<ActorPTR2e>(uuid);
-    if(!origin) return;
+    if (!origin) return;
 
     const variant = origin.actions.attack.get(variantSlug);
-    if(!variant) return void ui.notifications.error(`Unable to find variant ${variantSlug}`);
+    if (!variant) return void ui.notifications.error(`Unable to find variant ${variantSlug}`);
 
     this.resolve?.(null);
     this.promise = null;
     this.resolve = undefined;
 
-    variant.roll({modifierDialog: this});
+    variant.roll({ modifierDialog: this });
   }
 
   updateDetails(

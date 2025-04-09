@@ -9,6 +9,7 @@ import { CodeMirror } from "./codemirror.ts";
 import Sortable from "sortablejs";
 import { DataInspector } from "@module/apps/data-inspector/data-inspector.ts";
 import Tagify from "@yaireo/tagify";
+import { DocumentSheetConfigurationExpanded } from "@module/apps/appv2-expanded.ts";
 
 class ActiveEffectConfig extends foundry.applications.api.HandlebarsApplicationMixin(
   DocumentSheetV2<ActiveEffectPTR2e>
@@ -51,7 +52,7 @@ class ActiveEffectConfig extends foundry.applications.api.HandlebarsApplicationM
         }
       ],
     },
-  };
+  } as unknown as Omit<DeepPartial<DocumentSheetConfigurationExpanded>, "uniqueId">;
 
   #allTraits: { value: string; label: string, virtual: boolean, type?: Trait["type"] }[] | undefined;
 

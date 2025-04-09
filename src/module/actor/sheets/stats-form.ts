@@ -1,6 +1,7 @@
 import { StatsChart } from "./stats-chart.ts";
 import { Attributes, ActorPTR2e } from "@actor";
 import { DocumentSheetConfiguration } from "@item/sheets/document.ts";
+import { DocumentSheetConfigurationExpanded } from "@module/apps/appv2-expanded.ts";
 import { debounceAsync } from "@utils";
 
 export default class StatsForm extends foundry.applications.api.HandlebarsApplicationMixin(foundry.applications.api.DocumentSheetV2<ActorPTR2e, foundry.applications.api.HandlebarsDocumentSheetConfiguration>) {
@@ -12,7 +13,7 @@ export default class StatsForm extends foundry.applications.api.HandlebarsApplic
     this._statsChart = new StatsChart(this, {});
   }
 
-  static override DEFAULT_OPTIONS = fu.mergeObject(super.DEFAULT_OPTIONS, {
+  static override DEFAULT_OPTIONS = {
     classes: ["stats-form"],
     position: {
       height: 620,
@@ -21,7 +22,7 @@ export default class StatsForm extends foundry.applications.api.HandlebarsApplic
     form: {
       handler: null
     }
-  }, { inplace: false });
+  } as unknown as Omit<DeepPartial<DocumentSheetConfigurationExpanded>, "uniqueId">;
 
   static override PARTS: Record<string, foundry.applications.api.HandlebarsTemplatePart> = {
     baseStats: {

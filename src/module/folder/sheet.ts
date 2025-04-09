@@ -1,28 +1,24 @@
 import { DocumentSheetConfiguration, DocumentSheetV2 } from "@item/sheets/document.ts";
 import FolderPTR2e from "./document.ts";
-import { HandlebarsRenderOptions } from "types/foundry/common/applications/api.js";
 import { ActorPTR2e } from "@actor";
 import { SocketRequestData } from "@scripts/hooks/socket.ts";
+import { DocumentSheetConfigurationExpanded } from "@module/apps/appv2-expanded.ts";
 
 class FolderConfigPTR2e extends foundry.applications.api.HandlebarsApplicationMixin(
   DocumentSheetV2<FolderPTR2e>
 ) {
-  static override DEFAULT_OPTIONS = fu.mergeObject(
-    super.DEFAULT_OPTIONS,
-    {
-      classes: ["folder-edit"],
-      position: {
-        width: 360,
-        height: "auto",
-      },
-      form: {
-        handler: FolderConfigPTR2e.#onSubmit,
-        closeOnSubmit: true,
-        submitOnChange: false,
-      },
+  static override DEFAULT_OPTIONS = {
+    classes: ["folder-edit"],
+    position: {
+      width: 360,
+      height: "auto",
     },
-    { inplace: false }
-  );
+    form: {
+      handler: FolderConfigPTR2e.#onSubmit,
+      closeOnSubmit: true,
+      submitOnChange: false,
+    },
+  } as unknown as Omit<DeepPartial<DocumentSheetConfigurationExpanded>, "uniqueId">;
 
   override get isEditable() {
     return true;
@@ -105,7 +101,7 @@ class FolderConfigPTR2e extends foundry.applications.api.HandlebarsApplicationMi
   override _attachPartListeners(
     partId: string,
     htmlElement: HTMLElement,
-    _options: HandlebarsRenderOptions
+    _options: foundry.applications.api.HandlebarsRenderOptions
   ): void {
     super._attachPartListeners(partId, htmlElement, _options);
     if (partId === "members") {
@@ -250,11 +246,11 @@ class FolderConfigPTR2e extends foundry.applications.api.HandlebarsApplicationMi
           this.document instanceof Folder ? this.document.toObject() : this.document,
           { pack: this.document.pack, keepId: true }
         );
-        if(!folder) return folder;
-        if(this.owner) {
+        if (!folder) return folder;
+        if (this.owner) {
           await this.owner.update({ "folder": folder.id, "system.party.ownerOf": folder.id, "system.party.partyMemberOf": null });
         }
-        if(this.team.length) {
+        if (this.team.length) {
           for (const member of this.team) {
             await member.update({ "system.party.teamMemberOf": Array.from(new Set(member.system.party.teamMemberOf.concat(folder.id))) });
           }

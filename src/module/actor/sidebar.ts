@@ -40,7 +40,7 @@ export default class ActorDirectoryPTR2e<
           document: folder!,
           position: {
             top: r.top,
-            left: r.left - FolderConfigPTR2e.DEFAULT_OPTIONS.position.width - 10,
+            left: r.left - (FolderConfigPTR2e.DEFAULT_OPTIONS.position!.width as number) - 10,
           },
         };
         new FolderConfigPTR2e(context).render(true);
@@ -147,7 +147,7 @@ export default class ActorDirectoryPTR2e<
       pack?: string;
     } = {
       top: button.offsetTop,
-      left: window.innerWidth - 310 - FolderConfigPTR2e.DEFAULT_OPTIONS.position.width,
+      left: window.innerWidth - 310 - (FolderConfigPTR2e.DEFAULT_OPTIONS.position!.width as number),
     };
     if (this.collection instanceof CompendiumCollection)
       options.pack = this.collection.collection;

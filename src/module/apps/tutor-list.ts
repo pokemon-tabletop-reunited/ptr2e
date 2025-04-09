@@ -7,27 +7,23 @@ import { forEach } from "remeda";
 import { grades } from "../data/mixins/has-gear-data.ts";
 
 export class TutorListApp extends foundry.applications.api.HandlebarsApplicationMixin(ApplicationV2Expanded) {
-  static override DEFAULT_OPTIONS = fu.mergeObject(
-    super.DEFAULT_OPTIONS,
-    {
-      tag: "div",
-      classes: ["sheet", "tutor-list", "default-sheet"],
-      position: {
-        height: 680,
-        width: 550,
-      },
-      window: {
-        title: "PTR2E.TutorList",
-        minimizable: true,
-        resizable: true,
-      },
-      dragDrop: [{ dragSelector: null, dropSelector: '.window-content' }],
-      actions: {
-        "clear": function (this: TutorListApp) { this.render({ actor: null, parts: ["aside", "list"] }) },
-      }
+  static override DEFAULT_OPTIONS = {
+    tag: "div",
+    classes: ["sheet", "tutor-list", "default-sheet"],
+    position: {
+      height: 680,
+      width: 550,
     },
-    { inplace: false }
-  );
+    window: {
+      title: "PTR2E.TutorList",
+      minimizable: true,
+      resizable: true,
+    },
+    dragDrop: [{ dragSelector: null, dropSelector: '.window-content' }],
+    actions: {
+      "clear": function (this: TutorListApp) { this.render({ actor: null, parts: ["aside", "list"] }) },
+    }
+  } as unknown as Omit<DeepPartial<ApplicationConfigurationExpanded>, "uniqueId">;
 
   static override PARTS: Record<string, foundry.applications.api.HandlebarsTemplatePart> = {
     aside: {
@@ -66,7 +62,7 @@ export class TutorListApp extends foundry.applications.api.HandlebarsApplication
   }
 
   override _prepareContext(options?: foundry.applications.api.HandlebarsRenderOptions | undefined) {
-    const lists =  getGradedTutorList().list.contents;
+    const lists = getGradedTutorList().list.contents;
 
     return {
       ...super._prepareContext(options),
@@ -93,8 +89,7 @@ export class TutorListApp extends foundry.applications.api.HandlebarsApplication
           }))
           .filter((move) => this.selectedGrades.size === 0 || this.selectedGrades.has(move.grade))
           .sort((a, b) => {
-            switch (this.sortBy)
-            {
+            switch (this.sortBy) {
               case SortOptions.Grade:
                 if (a.grade === b.grade) {
                   return (a.slug ?? "").localeCompare(b.slug ?? "");
@@ -117,10 +112,10 @@ export class TutorListApp extends foundry.applications.api.HandlebarsApplication
   }
 
 
-filterList() {
+  filterList() {
     const actor = this.actor;
     const tutorList = getGradedTutorList();
-    
+
     if (!actor) return tutorList.list.contents;
 
     const resultLists = [tutorList.get("universal-universal")!];
@@ -240,7 +235,7 @@ filterList() {
     const actor = await fromUuid<ActorPTR2e>(data.uuid);
     if (!actor) return;
     this.render({ actor, parts: ["aside", "list"] });
-    }
+  }
 }
 
 

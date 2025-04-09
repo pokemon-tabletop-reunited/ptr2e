@@ -47,203 +47,199 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
     this.statsChart = new StatsChart(this);
   }
 
-  static override DEFAULT_OPTIONS = fu.mergeObject(
-    super.DEFAULT_OPTIONS,
-    {
-      classes: ["ptr2e", "sheet", "actor", "v2"],
-      position: {
-        width: 900,
-        height: 720,
-      },
-      window: {
-        resizable: true,
-        controls: [
-          ...(super.DEFAULT_OPTIONS?.window?.controls ?? []),
-          {
-            icon: "fas fa-atom",
-            label: "PTR2E.ActorSheet.Inspector",
-            action: "open-inspector",
-            visible: true
-          }
-        ],
-      },
-      form: {
-        submitOnChange: true,
-      },
-      dragDrop: [
+  static override DEFAULT_OPTIONS = {
+    classes: ["ptr2e", "sheet", "actor", "v2"],
+    position: {
+      width: 900,
+      height: 720,
+    },
+    window: {
+      resizable: true,
+      controls: [
+        ...(super.DEFAULT_OPTIONS?.window?.controls ?? []),
         {
-          dropSelector: ".window-content",
-          dragSelector:
-            "fieldset .item, fieldset .effect, fieldset .action, ul.items > li",
-        },
+          icon: "fas fa-atom",
+          label: "PTR2E.ActorSheet.Inspector",
+          action: "open-inspector",
+          visible: true
+        }
       ],
-      actions: {
-        "toggle-temporary": async function (this: ActorSheetPTRV2, event: Event) {
-          const itemId = htmlClosest(event.target, "[data-item-id]")?.dataset.itemId;
-          const item = this.actor.items.get(itemId, { strict: true }) as ConsumablePTR2e;
-          item.update({ "system.temporary": !item.system.temporary });
-        },
-        "reset-ip": async function (this: ActorSheetPTRV2) {
-          foundry.applications.api.DialogV2.confirm({
-            window: {
-              title: game.i18n.format("PTR2E.ActorSheet.ResetIP.title", {
-                name: this.document.name,
-              }),
-            },
-            content: game.i18n.format("PTR2E.ActorSheet.ResetIP.content", {
+    },
+    form: {
+      submitOnChange: true,
+    },
+    dragDrop: [
+      {
+        dropSelector: ".window-content",
+        dragSelector:
+          "fieldset .item, fieldset .effect, fieldset .action, ul.items > li",
+      },
+    ],
+    actions: {
+      "toggle-temporary": async function (this: ActorSheetPTRV2, event: Event) {
+        const itemId = htmlClosest(event.target, "[data-item-id]")?.dataset.itemId;
+        const item = this.actor.items.get(itemId, { strict: true }) as ConsumablePTR2e;
+        item.update({ "system.temporary": !item.system.temporary });
+      },
+      "reset-ip": async function (this: ActorSheetPTRV2) {
+        foundry.applications.api.DialogV2.confirm({
+          window: {
+            title: game.i18n.format("PTR2E.ActorSheet.ResetIP.title", {
               name: this.document.name,
             }),
-            yes: {
-              callback: async () => {
-                await this.document.update({
-                  "system.inventoryPoints.current": this.document.system.inventoryPoints.max,
-                });
-                await this.document.deleteEmbeddedDocuments("Item", this.document.itemTypes.consumable.filter(i => i.system.temporary).map((i) => i.id));
-                this.render({ parts: ["inventory"] });
-              },
+          },
+          content: game.i18n.format("PTR2E.ActorSheet.ResetIP.content", {
+            name: this.document.name,
+          }),
+          yes: {
+            callback: async () => {
+              await this.document.update({
+                "system.inventoryPoints.current": this.document.system.inventoryPoints.max,
+              });
+              await this.document.deleteEmbeddedDocuments("Item", this.document.itemTypes.consumable.filter(i => i.system.temporary).map((i) => i.id));
+              this.render({ parts: ["inventory"] });
             },
-          });
-        },
-        "open-carry-type-menu": ActorSheetPTRV2.openCarryTypeMenu,
-        "species-header": async function (this: ActorSheetPTRV2, event: Event) {
-          event.preventDefault();
-          const species = this.actor.items.get("actorspeciesitem") as SpeciesPTR2e;
-          if (!species) return;
-          species.sheet.render(true);
-        },
-        "open-inspector": async function (this: ActorSheetPTRV2, event: Event) {
-          event.preventDefault();
-          const inspector = new DataInspector(this.actor);
-          inspector.render(true);
-        },
-        "open-perk-web": async function (this: ActorSheetPTRV2) {
-          if ([true, undefined].includes(this.actor.flags.ptr2e?.sheet?.perkFlash))
-            await this.actor.setFlag("ptr2e", "sheet.perkFlash", false);
+          },
+        });
+      },
+      "open-carry-type-menu": ActorSheetPTRV2.openCarryTypeMenu,
+      "species-header": async function (this: ActorSheetPTRV2, event: Event) {
+        event.preventDefault();
+        const species = this.actor.items.get("actorspeciesitem") as SpeciesPTR2e;
+        if (!species) return;
+        species.sheet.render(true);
+      },
+      "open-inspector": async function (this: ActorSheetPTRV2, event: Event) {
+        event.preventDefault();
+        const inspector = new DataInspector(this.actor);
+        inspector.render(true);
+      },
+      "open-perk-web": async function (this: ActorSheetPTRV2) {
+        if ([true, undefined].includes(this.actor.flags.ptr2e?.sheet?.perkFlash))
+          await this.actor.setFlag("ptr2e", "sheet.perkFlash", false);
 
-          canvas.tokens.controlled.forEach(t => t.release());
+        canvas.tokens.controlled.forEach(t => t.release());
 
-          const app = new PerkWebApp(this.actor);
-          app.render(true);
-        },
-        "open-party-sheet": async function (this: ActorSheetPTRV2) {
-          if (!this.actor.party) return;
-          new PartySheetPTR2e({ folder: this.actor.folder! }).render(true);
-        },
-        "edit-movelist": function (this: ActorSheetPTRV2) {
-          return new KnownActionsApp(this.actor).render(true);
-        },
-        "edit-abilitylist": function (this: ActorSheetPTRV2) {
-          return new AvailableAbilitiesApp(this.actor).render(true);
-        },
-        "roll-attack": async function (this: ActorSheetPTRV2, event: Event) {
-          const actionDiv = (event.target as HTMLElement).closest(
-            ".action"
-          ) as HTMLElement;
-          if (!actionDiv) return;
+        const app = new PerkWebApp(this.actor);
+        app.render(true);
+      },
+      "open-party-sheet": async function (this: ActorSheetPTRV2) {
+        if (!this.actor.party) return;
+        new PartySheetPTR2e({ folder: this.actor.folder! }).render(true);
+      },
+      "edit-movelist": function (this: ActorSheetPTRV2) {
+        return new KnownActionsApp(this.actor).render(true);
+      },
+      "edit-abilitylist": function (this: ActorSheetPTRV2) {
+        return new AvailableAbilitiesApp(this.actor).render(true);
+      },
+      "roll-attack": async function (this: ActorSheetPTRV2, event: Event) {
+        const actionDiv = (event.target as HTMLElement).closest(
+          ".action"
+        ) as HTMLElement;
+        if (!actionDiv) return;
 
-          const slug = actionDiv.dataset.slug;
-          if (!slug) return;
+        const slug = actionDiv.dataset.slug;
+        if (!slug) return;
 
-          const action = this.actor.actions.get(slug);
-          if (!action) return;
-          if ("rollable" in action && action.rollable === true)
-            await (action as AttackPTR2e).roll();
-        },
-        "action-to-chat": ActorSheetPTRV2._onToChatAction,
-        "action-edit": ActorSheetPTRV2._onEditAction,
-        "action-delete": ActorSheetPTRV2._onDeleteAction,
-        "favourite-skill": ActorSheetPTRV2._onFavouriteSkill,
-        "hide-skill": ActorSheetPTRV2._onHideSkill,
-        "toggle-hidden-skills": async function (this: ActorSheetPTRV2) {
-          const appSettings = fu.duplicate(
-            game.user.getFlag("ptr2e", "appSettings") ?? {}
-          ) as Record<string, Record<string, unknown>>;
-          if (!appSettings[this.appId])
-            appSettings[this.appId] = { hideHiddenSkills: true };
-          appSettings[this.appId].hideHiddenSkills =
-            !appSettings[this.appId].hideHiddenSkills;
-          await game.user.setFlag("ptr2e", "appSettings", appSettings);
+        const action = this.actor.actions.get(slug);
+        if (!action) return;
+        if ("rollable" in action && action.rollable === true)
+          await (action as AttackPTR2e).roll();
+      },
+      "action-to-chat": ActorSheetPTRV2._onToChatAction,
+      "action-edit": ActorSheetPTRV2._onEditAction,
+      "action-delete": ActorSheetPTRV2._onDeleteAction,
+      "favourite-skill": ActorSheetPTRV2._onFavouriteSkill,
+      "hide-skill": ActorSheetPTRV2._onHideSkill,
+      "toggle-hidden-skills": async function (this: ActorSheetPTRV2) {
+        const appSettings = fu.duplicate(
+          game.user.getFlag("ptr2e", "appSettings") ?? {}
+        ) as Record<string, Record<string, unknown>>;
+        if (!appSettings[this.appId])
+          appSettings[this.appId] = { hideHiddenSkills: true };
+        appSettings[this.appId].hideHiddenSkills =
+          !appSettings[this.appId].hideHiddenSkills;
+        await game.user.setFlag("ptr2e", "appSettings", appSettings);
 
-          for (const app of Object.values(this.actor.apps)) {
-            if (app instanceof foundry.applications.api.ApplicationV2) {
-              const parts = (app as unknown as { parts: Record<string, unknown> })
-                .parts;
-              if ("popout" in parts) app.render({ parts: ["popout"] });
-              if ("skills" in parts) app.render({ parts: ["skills"] });
-            } else app?.render();
-          }
-        },
-        "edit-skills": async function (this: ActorSheetPTRV2) {
-          return new SkillsEditor(this.actor).render(true);
-        },
-        "luck-roll": async function (this: ActorSheetPTRV2) {
-          const skill = this.actor.system.skills.get("luck")!;
-          await skill.endOfDayLuckRoll();
-        },
-        "rest": function (this: ActorSheetPTRV2) {
-          const toHeal = this.actor?.party ? [this.actor.party.owner!, ...(this.actor.party.party ?? [])] : [this.actor];
-          new RestApp(this.document.name, toHeal).render(true);
-        },
-        "open-dex": async function (this: ActorSheetPTRV2) {
-          new DexApp(this.actor).render(true);
-        },
-        "add-clock": ActorSheetPTRV2.#onAddClock,
-        "open-tutor-list": function (this: ActorSheetPTRV2) {
-          game.ptr.tutorList.render({ force: true, actor: this.actor });
-        },
-        "open-stats-chart": function (this: ActorSheetPTRV2) {
-          new StatsForm({ document: this.actor }).render(true);
-        },
-        "create-item": async function (this: ActorSheetPTRV2, event: Event) {
-          const type = ((event.target as HTMLElement).closest("[data-type]") as HTMLElement)?.dataset.type;
-          if (!type) return;
-
-          return void await this.document.createEmbeddedDocuments("Item", [{
-            name: ItemPTR2e.defaultName({ type, parent: this.document }),
-            type,
-          }]);
-        },
-        "browse": async function (this: ActorSheetPTRV2, event: Event) {
-          const type = ((event.target as HTMLElement).closest("[data-type]") as HTMLElement)?.dataset.type;
-          if (!type) return;
-
-          await game.ptr.compendiumBrowser.loadTab("gear");
-          const gearTab = game.ptr.compendiumBrowser.compendiumTabs.gear;
-          if (!gearTab.filterData.checkboxes.type.options[type]) return;
-
-          gearTab.resetFilters();
-          gearTab.filterData.checkboxes.type.options[type].selected = true;
-          gearTab.filterData.checkboxes.type.selected = [type];
-
-          const grade = this.actor.grade;
-          gearTab.filterData.checkboxes.grade.selected = [];
-          if (grade === "A") {
-            gearTab.filterData.checkboxes.grade.options.A.selected = true;
-            gearTab.filterData.checkboxes.grade.selected.push("A");
-          }
-          if (["A", "B"].includes(grade)) {
-            gearTab.filterData.checkboxes.grade.options.B.selected = true;
-            gearTab.filterData.checkboxes.grade.selected.push("B");
-          }
-          if (["A", "B", "C"].includes(grade)) {
-            gearTab.filterData.checkboxes.grade.options.C.selected = true;
-            gearTab.filterData.checkboxes.grade.selected.push("C");
-          }
-          if (["A", "B", "C", "D"].includes(grade)) {
-            gearTab.filterData.checkboxes.grade.options.D.selected = true;
-            gearTab.filterData.checkboxes.grade.selected.push("D");
-          }
-          if (["A", "B", "C", "D", "E"].includes(grade)) {
-            gearTab.filterData.checkboxes.grade.options.E.selected = true;
-            gearTab.filterData.checkboxes.grade.selected.push("E");
-          }
-
-          await game.ptr.compendiumBrowser.render(true);
+        for (const app of Object.values(this.actor.apps)) {
+          if (app instanceof foundry.applications.api.ApplicationV2) {
+            const parts = (app as unknown as { parts: Record<string, unknown> })
+              .parts;
+            if ("popout" in parts) app.render({ parts: ["popout"] });
+            if ("skills" in parts) app.render({ parts: ["skills"] });
+          } else app?.render();
         }
       },
+      "edit-skills": async function (this: ActorSheetPTRV2) {
+        return new SkillsEditor(this.actor).render(true);
+      },
+      "luck-roll": async function (this: ActorSheetPTRV2) {
+        const skill = this.actor.system.skills.get("luck")!;
+        await skill.endOfDayLuckRoll();
+      },
+      "rest": function (this: ActorSheetPTRV2) {
+        const toHeal = this.actor?.party ? [this.actor.party.owner!, ...(this.actor.party.party ?? [])] : [this.actor];
+        new RestApp(this.document.name, toHeal).render(true);
+      },
+      "open-dex": async function (this: ActorSheetPTRV2) {
+        new DexApp(this.actor).render(true);
+      },
+      "add-clock": ActorSheetPTRV2.#onAddClock,
+      "open-tutor-list": function (this: ActorSheetPTRV2) {
+        game.ptr.tutorList.render({ force: true, actor: this.actor });
+      },
+      "open-stats-chart": function (this: ActorSheetPTRV2) {
+        new StatsForm({ document: this.actor }).render(true);
+      },
+      "create-item": async function (this: ActorSheetPTRV2, event: Event) {
+        const type = ((event.target as HTMLElement).closest("[data-type]") as HTMLElement)?.dataset.type;
+        if (!type) return;
+
+        return void await this.document.createEmbeddedDocuments("Item", [{
+          name: ItemPTR2e.defaultName({ type, parent: this.document }),
+          type,
+        }]);
+      },
+      "browse": async function (this: ActorSheetPTRV2, event: Event) {
+        const type = ((event.target as HTMLElement).closest("[data-type]") as HTMLElement)?.dataset.type;
+        if (!type) return;
+
+        await game.ptr.compendiumBrowser.loadTab("gear");
+        const gearTab = game.ptr.compendiumBrowser.compendiumTabs.gear;
+        if (!gearTab.filterData.checkboxes.type.options[type]) return;
+
+        gearTab.resetFilters();
+        gearTab.filterData.checkboxes.type.options[type].selected = true;
+        gearTab.filterData.checkboxes.type.selected = [type];
+
+        const grade = this.actor.grade;
+        gearTab.filterData.checkboxes.grade.selected = [];
+        if (grade === "A") {
+          gearTab.filterData.checkboxes.grade.options.A.selected = true;
+          gearTab.filterData.checkboxes.grade.selected.push("A");
+        }
+        if (["A", "B"].includes(grade)) {
+          gearTab.filterData.checkboxes.grade.options.B.selected = true;
+          gearTab.filterData.checkboxes.grade.selected.push("B");
+        }
+        if (["A", "B", "C"].includes(grade)) {
+          gearTab.filterData.checkboxes.grade.options.C.selected = true;
+          gearTab.filterData.checkboxes.grade.selected.push("C");
+        }
+        if (["A", "B", "C", "D"].includes(grade)) {
+          gearTab.filterData.checkboxes.grade.options.D.selected = true;
+          gearTab.filterData.checkboxes.grade.selected.push("D");
+        }
+        if (["A", "B", "C", "D", "E"].includes(grade)) {
+          gearTab.filterData.checkboxes.grade.options.E.selected = true;
+          gearTab.filterData.checkboxes.grade.selected.push("E");
+        }
+
+        await game.ptr.compendiumBrowser.render(true);
+      }
     },
-    { inplace: false }
-  );
+  } as unknown as Omit<Partial<DocumentSheetConfigurationExpanded>, "uniqueId">;
 
   get appId() {
     return this.id.replaceAll(".", "-");
@@ -741,7 +737,7 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
           const clock = this.document.system.clocks.get(id as string);
           if (!clock) return;
 
-          if(!this.document.system._source.clocks.find(c => c.id === clock.id)) {
+          if (!this.document.system._source.clocks.find(c => c.id === clock.id)) {
             return void ui.notifications.warn("Temporary clocks cannot be manually deleted, please make sure to alter this clock once first to make it permanent.");
           }
 

@@ -360,7 +360,7 @@ export class FoldersTour extends PTRTour {
         left:
           window.innerWidth -
           310 -
-          CONFIG.PTR.Folder.sheetClasses.folder.DEFAULT_OPTIONS.position.width,
+          (CONFIG.PTR.Folder.sheetClasses.folder.DEFAULT_OPTIONS.position!.width as number),
       }
     );
     return this.delay(150);
@@ -374,7 +374,7 @@ export class FoldersTour extends PTRTour {
   protected openTourSanDialog(folder: FolderPTR2e = game.folders.get("toursantmpfolder") as FolderPTR2e) {
     const li = htmlQuery(document.body, "li.folder[data-folder-id='toursantmpfolder']");
     const r = li?.getBoundingClientRect();
-    const context = r ? { document: folder, position: { top: r.top, left: r.left - FolderConfigPTR2e.DEFAULT_OPTIONS.position.width - 10 } } : { document: folder };
+    const context = r ? { document: folder, position: { top: r.top, left: r.left - (FolderConfigPTR2e.DEFAULT_OPTIONS.position!.width as number) - 10 } } : { document: folder };
     return new FolderConfigPTR2e(context).render(true);
   }
 

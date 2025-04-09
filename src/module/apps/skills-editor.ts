@@ -2,7 +2,6 @@ import { ActorPTR2e, Skill } from "@actor";
 import { SkillsComponent } from "@actor/components/skills-component.ts";
 import SkillPTR2e from "@module/data/models/skill.ts";
 import { htmlQueryAll } from "@utils";
-import { ApplicationRenderOptions } from "types/foundry/common/applications/api.js";
 
 
 type SkillBeingEdited = SkillPTR2e["_source"] & { label: string; investment: number; max: number; min: number, total: number };
@@ -10,37 +9,33 @@ type SkillBeingEdited = SkillPTR2e["_source"] & { label: string; investment: num
 export class SkillsEditor extends foundry.applications.api.HandlebarsApplicationMixin(
   foundry.applications.api.ApplicationV2
 ) {
-  static override DEFAULT_OPTIONS = fu.mergeObject(
-    super.DEFAULT_OPTIONS,
-    {
-      tag: "form",
-      classes: ["sheet skill-sheet"],
-      position: {
-        height: 'auto',
-        width: 550,
-      },
-      form: {
-        submitOnChange: false,
-        closeOnSubmit: true,
-        handler: SkillsEditor.#onSubmit,
-      },
-      window: {
-        minimizable: true,
-        resizable: false,
-      },
-      actions: {
-        "reset-skills": SkillsEditor.#onResetSkills,
-        "change-resources": SkillsEditor.#onChangeResources,
-        "change-luck": SkillsEditor.#onChangeLuck,
-        "roll-luck": SkillsEditor.#onRollLuck,
-        "toggle-sort": async function (this: SkillsEditor) {
-          this.sort = this.sort === "a" ? "v" : "a";
-          this.render({ parts: ["skills"] });
-        }
-      },
+  static override DEFAULT_OPTIONS = {
+    tag: "form",
+    classes: ["sheet skill-sheet"],
+    position: {
+      height: 'auto' as const,
+      width: 550,
     },
-    { inplace: false }
-  );
+    form: {
+      submitOnChange: false,
+      closeOnSubmit: true,
+      handler: SkillsEditor.#onSubmit,
+    },
+    window: {
+      minimizable: true,
+      resizable: false,
+    },
+    actions: {
+      "reset-skills": SkillsEditor.#onResetSkills,
+      "change-resources": SkillsEditor.#onChangeResources,
+      "change-luck": SkillsEditor.#onChangeLuck,
+      "roll-luck": SkillsEditor.#onRollLuck,
+      "toggle-sort": async function (this: SkillsEditor) {
+        this.sort = this.sort === "a" ? "v" : "a";
+        this.render({ parts: ["skills"] });
+      }
+    },
+  };
 
   static override PARTS: Record<string, foundry.applications.api.HandlebarsTemplatePart> = {
     skills: {
@@ -172,7 +167,7 @@ export class SkillsEditor extends foundry.applications.api.HandlebarsApplication
     };
   }
 
-  override async render(options: boolean | ApplicationRenderOptions, _options?: ApplicationRenderOptions): Promise<this> {
+  override async render(options: boolean | foundry.applications.api.ApplicationRenderOptions, _options?: foundry.applications.api.ApplicationRenderOptions): Promise<this> {
     const scrollTop = this.element?.querySelector(".scroll")?.scrollTop;
     const renderResult = await super.render(options, _options);
     // set the scroll location

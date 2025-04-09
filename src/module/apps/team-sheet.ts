@@ -15,21 +15,17 @@ class TeamSheetPTR2e extends foundry.applications.api.HandlebarsApplicationMixin
     this.folder = options.folder;
   }
 
-  static override DEFAULT_OPTIONS = fu.mergeObject(
-    super.DEFAULT_OPTIONS,
-    {
-      id: "{id}",
-      classes: ["sheet", "team-sheet"],
-      position: {
-        height: 600,
-        width: 450,
-      },
-      window: {
-        resizable: true
-      }
+  static override DEFAULT_OPTIONS = {
+    id: "{id}",
+    classes: ["sheet", "team-sheet"],
+    position: {
+      height: 600,
+      width: 450,
     },
-    { inplace: false }
-  );
+    window: {
+      resizable: true
+    }
+  };
 
   static override PARTS: Record<string, foundry.applications.api.HandlebarsTemplatePart> = {
     tabs: {
