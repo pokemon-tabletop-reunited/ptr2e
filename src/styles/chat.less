@@ -55,21 +55,25 @@
             >main {
                 display: flex;
                 flex-direction: row;
-                flex-wrap: wrap;
+                flex-wrap: nowrap;
 
                 padding: 0.25rem 0.5rem;
+                align-items: center;
+                gap: 0.25rem;
 
                 &.undone {
                     text-decoration: line-through;
                 }
 
                 p {
-                    flex: 1;
+                  flex: 1;
+                  min-width: 0;
                 }
 
                 button {
-                    flex: 0 0 50px;
-                    padding: 0;
+                  flex: 0 0 50px;
+                  padding: 0;
+                  margin-left: 0.25rem;
                 }
 
                 .notes {
