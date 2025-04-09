@@ -185,30 +185,6 @@ export class ActorSheetV2Expanded<
   }
 
   /**
-   * Add compatability with modules that add buttons to the header of the sheet using the AppV1 method
-   */
-  override _getHeaderControls(): ApplicationHeaderControlsEntry[] {
-    const controls = super._getHeaderControls();
-
-    Hooks.callAll("getActorSheetHeaderButtons", this, controls);
-
-    for (const control of controls) {
-      if ('onclick' in control && !control.action) {
-        const slug = sluggify(control.label + ' ' + control.icon);
-        if (controls.filter(c => c.action == slug).length > 0) {
-          controls.splice(controls.indexOf(control), 1);
-          continue;
-        }
-        // @ts-expect-error - Add AppV1 support for modules that use the old method
-        this.options.actions[slug] = control.onclick;
-        control.action = slug;
-      }
-    }
-
-    return controls;
-  }
-
-  /**
    * Define whether a user is able to begin a dragstart workflow for a given drag selector
    * @param {string} selector       The candidate HTML selector for dragging
    * @returns {boolean}             Can the current user drag this selector?
@@ -532,30 +508,6 @@ export class ItemSheetV2Expanded<
       };
       return new DragDrop(d);
     });
-  }
-
-  /**
-   * Add compatability with modules that add buttons to the header of the sheet using the AppV1 method
-   */
-  override _getHeaderControls(): ApplicationHeaderControlsEntry[] {
-    const controls = super._getHeaderControls();
-
-    Hooks.callAll("getActorSheetHeaderButtons", this, controls);
-
-    for (const control of controls) {
-      if ('onclick' in control && !control.action) {
-        const slug = sluggify(control.label + ' ' + control.icon);
-        if (controls.filter(c => c.action == slug).length > 0) {
-          controls.splice(controls.indexOf(control), 1);
-          continue;
-        }
-        // @ts-expect-error - Add AppV1 support for modules that use the old method
-        this.options.actions[slug] = control.onclick;
-        control.action = slug;
-      }
-    }
-
-    return controls;
   }
 
   /**
