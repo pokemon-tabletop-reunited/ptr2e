@@ -12,8 +12,7 @@ import { BlueprintPTR2e } from "@item";
 import { GlobalPerkGeneratorConfig } from "@module/apps/global-perk-generator-config.ts";
 
 export default class BlueprintSheet extends foundry.applications.api.HandlebarsApplicationMixin(DocumentSheetV2<ItemPTR2e<BlueprintSystem>>) {
-  static override DEFAULT_OPTIONS = fu.mergeObject(
-    super.DEFAULT_OPTIONS,
+  static override DEFAULT_OPTIONS =
     {
       classes: ["blueprint", "sheet"],
       position: {
@@ -98,9 +97,7 @@ export default class BlueprintSheet extends foundry.applications.api.HandlebarsA
         }
       },
       tag: "form",
-    },
-    { inplace: false }
-  );
+    };
 
   static override PARTS: Record<string, foundry.applications.api.HandlebarsTemplatePart> = {
     side: {

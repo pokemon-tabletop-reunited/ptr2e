@@ -9,127 +9,123 @@ import { HandlebarsRenderOptions } from "types/foundry/common/applications/handl
 export class ActionEditor<
   TDocument extends ItemPTR2e<ItemSystemsWithActions>,
 > extends foundry.applications.api.HandlebarsApplicationMixin(ApplicationV2Expanded) {
-  static override DEFAULT_OPTIONS = fu.mergeObject(
-    super.DEFAULT_OPTIONS,
-    {
-      tag: "form",
-      classes: ["sheet action-sheet"],
-      position: {
-        height: 750,
-        width: 500,
-      },
-      form: {
-        submitOnChange: true,
-        closeOnSubmit: false,
-        handler: ActionEditor.#onSubmit,
-      },
-      window: {
-        minimizable: true,
-        resizable: true,
-        controls: [
-          {
-            label: "PTR2E.ItemSheet.SendToChatLabel",
-            icon: "fas fa-arrow-up-right-from-square",
-            action: "toChat"
-          },
-          {
-            label: "PTR2E.Actions.OpenItemLabel",
-            icon: "fas fa-suitcase",
-            action: "openItem"
-          },
-          {
-            label: "PTR2E.Actions.CreateVariantLabel",
-            icon: "fas fa-plus",
-            action: "createVariant"
-          },
-          {
-            label: "PTR2E.Actions.VariantOfLabel",
-            icon: "fas fa-burst",
-            action: "openOriginal"
-          },
-          {
-            label: "PTR2E.Actions.DeleteVariantLabel",
-            icon: "fas fa-trash",
-            action: "deleteVariant"
-          }
-        ]
-      },
-      actions: {
-        toChat: function toChat<TDocument extends ItemPTR2e<ItemSystemsWithActions>>(this: ActionEditor<TDocument>) {
-          this.document.toChat();
-        },
-        openItem: function openItem<TDocument extends ItemPTR2e<ItemSystemsWithActions>>(this: ActionEditor<TDocument>) {
-          this.document.sheet.render(true);
-        },
-        createVariant: async function createVariant<TDocument extends ItemPTR2e<ItemSystemsWithActions>>(this: ActionEditor<TDocument>) {
-          const actions = this.document.system.toObject().actions;
-          const action = actions.find(a => a.slug === this.action.slug);
-          if (!action) return;
-
-          const variant = fu.duplicate(action);
-          variant.slug += sluggify(`-${fu.randomID()}`);
-          variant.name += ` Variant`;
-          variant.variant = action.slug;
-          actions.push(variant);
-          await this.document.update({ "system.actions": actions });
-
-          const variantAction = this.document.system.actions.get(variant.slug);
-          if (!variantAction) return;
-          ui.notifications.info(`Created variant of ${action.name}`);
-
-          const editor = new ActionEditor(this.document, variant.slug);
-          editor.render(true);
-        },
-        openOriginal: function openOriginal<TDocument extends ItemPTR2e<ItemSystemsWithActions>>(this: ActionEditor<TDocument>) {
-          const original = this.action.original
-          if (!original) return;
-
-          const editor = new ActionEditor(this.document, original.slug);
-          editor.render(true);
-        },
-        deleteVariant: async function deleteVariant<TDocument extends ItemPTR2e<ItemSystemsWithActions>>(this: ActionEditor<TDocument>) {
-          const actions = this.document.system.toObject().actions;
-          const index = actions.findIndex(a => a.slug === this.action.slug);
-          if (index === -1) return;
-          const action = actions[index];
-          if (!action.variant) return;
-
-          foundry.applications.api.DialogV2.confirm({
-            window: {
-              title: game.i18n.localize("PTR2E.Dialog.DeleteAction.Title"),
-            },
-            content: game.i18n.format("PTR2E.Dialog.DeleteAction.Content", { name: action.name }),
-            yes: {
-              callback: async () => {
-                const actions = this.document.system.toObject().actions;
-                const index = actions.findIndex(a => a.slug === action.slug);
-                if (index === -1 || !actions[index].variant) return;
-
-                actions.splice(index, 1);
-                await this.document.update({ "system.actions": actions });
-                this.close();
-              },
-            },
-          });
-
-        },
-        copyUuid: {
-          handler: function <TDocument extends ItemPTR2e<ItemSystemsWithActions>>(this: ActionEditor<TDocument>, event: MouseEvent) {
-            event.preventDefault(); // Don't open context menu
-            event.stopPropagation(); // Don't trigger other events
-            if (event.detail > 1) return; // Ignore repeated clicks
-            const id = event.button === 2 ? this.action.slug : this.action.uuid;
-            const type = event.button === 2 ? "slug" : "uuid";
-            //TODO: Setup localization
-            const label = "Action";
-            game.clipboard.copyPlainText(id);
-            ui.notifications.info(game.i18n.format("DOCUMENT.IdCopiedClipboard", { label, type, id }));
-          }, buttons: [0, 2]
-        }
-      }
+  static override DEFAULT_OPTIONS = {
+    tag: "form",
+    classes: ["sheet", "ptr2e", "action-sheet", "standard-form"],
+    position: {
+      height: 750,
+      width: 500,
     },
-    { inplace: false }
-  );
+    form: {
+      submitOnChange: true,
+      closeOnSubmit: false,
+      handler: ActionEditor.#onSubmit,
+    },
+    window: {
+      minimizable: true,
+      resizable: true,
+      controls: [
+        {
+          label: "PTR2E.ItemSheet.SendToChatLabel",
+          icon: "fas fa-arrow-up-right-from-square",
+          action: "toChat"
+        },
+        {
+          label: "PTR2E.Actions.OpenItemLabel",
+          icon: "fas fa-suitcase",
+          action: "openItem"
+        },
+        {
+          label: "PTR2E.Actions.CreateVariantLabel",
+          icon: "fas fa-plus",
+          action: "createVariant"
+        },
+        {
+          label: "PTR2E.Actions.VariantOfLabel",
+          icon: "fas fa-burst",
+          action: "openOriginal"
+        },
+        {
+          label: "PTR2E.Actions.DeleteVariantLabel",
+          icon: "fas fa-trash",
+          action: "deleteVariant"
+        }
+      ]
+    },
+    actions: {
+      toChat: function toChat<TDocument extends ItemPTR2e<ItemSystemsWithActions>>(this: ActionEditor<TDocument>) {
+        this.document.toChat();
+      },
+      openItem: function openItem<TDocument extends ItemPTR2e<ItemSystemsWithActions>>(this: ActionEditor<TDocument>) {
+        this.document.sheet.render(true);
+      },
+      createVariant: async function createVariant<TDocument extends ItemPTR2e<ItemSystemsWithActions>>(this: ActionEditor<TDocument>) {
+        const actions = this.document.system.toObject().actions;
+        const action = actions.find(a => a.slug === this.action.slug);
+        if (!action) return;
+
+        const variant = fu.duplicate(action);
+        variant.slug += sluggify(`-${fu.randomID()}`);
+        variant.name += ` Variant`;
+        variant.variant = action.slug;
+        actions.push(variant);
+        await this.document.update({ "system.actions": actions });
+
+        const variantAction = this.document.system.actions.get(variant.slug);
+        if (!variantAction) return;
+        ui.notifications.info(`Created variant of ${action.name}`);
+
+        const editor = new ActionEditor(this.document, variant.slug);
+        editor.render(true);
+      },
+      openOriginal: function openOriginal<TDocument extends ItemPTR2e<ItemSystemsWithActions>>(this: ActionEditor<TDocument>) {
+        const original = this.action.original
+        if (!original) return;
+
+        const editor = new ActionEditor(this.document, original.slug);
+        editor.render(true);
+      },
+      deleteVariant: async function deleteVariant<TDocument extends ItemPTR2e<ItemSystemsWithActions>>(this: ActionEditor<TDocument>) {
+        const actions = this.document.system.toObject().actions;
+        const index = actions.findIndex(a => a.slug === this.action.slug);
+        if (index === -1) return;
+        const action = actions[index];
+        if (!action.variant) return;
+
+        foundry.applications.api.DialogV2.confirm({
+          window: {
+            title: game.i18n.localize("PTR2E.Dialog.DeleteAction.Title"),
+          },
+          content: game.i18n.format("PTR2E.Dialog.DeleteAction.Content", { name: action.name }),
+          yes: {
+            callback: async () => {
+              const actions = this.document.system.toObject().actions;
+              const index = actions.findIndex(a => a.slug === action.slug);
+              if (index === -1 || !actions[index].variant) return;
+
+              actions.splice(index, 1);
+              await this.document.update({ "system.actions": actions });
+              this.close();
+            },
+          },
+        });
+
+      },
+      copyUuid: {
+        handler: function <TDocument extends ItemPTR2e<ItemSystemsWithActions>>(this: ActionEditor<TDocument>, event: MouseEvent) {
+          event.preventDefault(); // Don't open context menu
+          event.stopPropagation(); // Don't trigger other events
+          if (event.detail > 1) return; // Ignore repeated clicks
+          const id = event.button === 2 ? this.action.slug : this.action.uuid;
+          const type = event.button === 2 ? "slug" : "uuid";
+          //TODO: Setup localization
+          const label = "Action";
+          game.clipboard.copyPlainText(id);
+          ui.notifications.info(game.i18n.format("DOCUMENT.IdCopiedClipboard", { label, type, id }));
+        }, buttons: [0, 2]
+      }
+    }
+  };
 
   #allTraits: { value: string; label: string, type?: Trait["type"] }[] | undefined;
 

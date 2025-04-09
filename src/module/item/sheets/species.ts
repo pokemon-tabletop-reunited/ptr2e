@@ -10,20 +10,16 @@ import { partialSkillToSkill } from "@scripts/config/skills.ts";
 import { ActiveEffectPTR2e } from "@effects";
 
 export default class SpeciesSheet extends ItemSheetPTR2e<SpeciesPTR2e["system"]> {
-  static override DEFAULT_OPTIONS = fu.mergeObject(
-    super.DEFAULT_OPTIONS,
-    {
-      position: {
-        width: 600,
-      },
-      classes: ["species-sheet"],
-      actions: {
-        "copy-evolution-tree": SpeciesSheet.#copyEvolutionTree,
-        "paste-evolution-tree": SpeciesSheet.#pasteEvolutionTree,
-      },
+  static override DEFAULT_OPTIONS = {
+    position: {
+      width: 600,
     },
-    { inplace: false }
-  );
+    classes: ["species-sheet"],
+    actions: {
+      "copy-evolution-tree": SpeciesSheet.#copyEvolutionTree,
+      "paste-evolution-tree": SpeciesSheet.#pasteEvolutionTree,
+    },
+  };
 
   static override readonly overviewTemplate =
     "systems/ptr2e/templates/items/species/species-overview.hbs";

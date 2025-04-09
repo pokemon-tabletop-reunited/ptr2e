@@ -786,7 +786,7 @@ export class DocumentSheetV2<
     TConfiguration extends DocumentSheetConfiguration = DocumentSheetConfiguration,
 > extends ApplicationV2<TConfiguration, TRenderOptions> {
     /** @inheritdoc */
-    static override DEFAULT_OPTIONS: Omit<DocumentSheetConfiguration, "uniqueId">;
+    static override DEFAULT_OPTIONS: Omit<Partial<DocumentSheetConfiguration>, "uniqueId">;
 
     get document(): TDocument;
     #document: TDocument;

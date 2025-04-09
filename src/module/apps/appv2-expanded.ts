@@ -121,7 +121,7 @@ export class ActorSheetV2Expanded<
   TRenderOptions,
   DocumentSheetConfigurationExpanded
 > {
-  static override DEFAULT_OPTIONS: Omit<DocumentSheetConfigurationExpanded, "uniqueId"> =
+  static override DEFAULT_OPTIONS: Omit<Partial<DocumentSheetConfigurationExpanded>, "uniqueId"> =
     foundry.utils.mergeObject(foundry.applications.sheets.ActorSheetV2.DEFAULT_OPTIONS, {
       dragDrop: [],
     });
@@ -469,7 +469,7 @@ export class ItemSheetV2Expanded<
   TRenderOptions,
   DocumentSheetConfigurationExpanded
 > {
-  static override DEFAULT_OPTIONS: Omit<DocumentSheetConfigurationExpanded, "uniqueId"> =
+  static override DEFAULT_OPTIONS: Omit<Partial<DocumentSheetConfigurationExpanded>, "uniqueId"> =
     foundry.utils.mergeObject(foundry.applications.api.DocumentSheetV2.DEFAULT_OPTIONS, {
       dragDrop: [],
     });

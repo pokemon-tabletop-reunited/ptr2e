@@ -19,7 +19,7 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
     {
       id: "perk-web-app",
       tag: "article",
-      classes: ["sheet", "perk-web-app", "perk-hud", "default-sheet", "application"],
+      classes: ["sheet", "perk-web-app", "perk-hud", "default-sheet", "ptr2e"],
       window: {
         title: "PTR2E.PerkWebApp.Title",
         frame: false,
