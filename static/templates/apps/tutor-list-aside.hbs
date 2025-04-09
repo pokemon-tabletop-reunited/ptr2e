@@ -9,9 +9,13 @@
       <p>Viewing All Tutor Data<br><small>Drag an Actor here to view their Tutor List</small></p>
       {{/if}}
     </div>
-    <label>
-      <input type="checkbox" name="sort-grade" {{#if (eq sortByGrade true)}} checked{{/if}}> Sort Moves by Grade
-    </label>
+    <div class="sort-container">
+      <label for="sort-by">Sort moves by: </label>
+      <select name="sort-by">
+        <option value="name" {{#if (eq sortBy "name")}} selected{{/if}}>Name</option>
+        <option value="grade" {{#if (eq sortBy "grade")}} selected{{/if}}>Grade</option>
+      </select>
+    </div>
     <div class="grade-filters">
       <button type="button" class="grade-filter{{#if (includes selectedGrades "S")}} active{{/if}}" data-grade="S">S</button>
       <button type="button" class="grade-filter{{#if (includes selectedGrades "A")}} active{{/if}}" data-grade="A">A</button>

@@ -47,7 +47,7 @@ export class TutorListApp extends foundry.applications.api.HandlebarsApplication
   filter: SearchFilter;
   actor: ActorPTR2e | null = null;
   currentTab = "";
-  sortByGrade = false;
+  sortBy: SortOptions = SortOptions.Name;
   selectedGrades: Set<string> = new Set();
 
   constructor(options?: Partial<ApplicationConfigurationExpanded>) {
@@ -58,8 +58,6 @@ export class TutorListApp extends foundry.applications.api.HandlebarsApplication
       contentSelector: "nav.tutor-list-options",
       callback: this._onSearchFilter.bind(this),
     });
-
-    this.selectedGrades = new Set();
   }
 
   override render(options: boolean | Partial<HandlebarsRenderOptions & { actor: ActorPTR2e | null }>, _options?: (HandlebarsRenderOptions & { actor?: ActorPTR2e | null }) | undefined): Promise<this> {
@@ -95,23 +93,25 @@ export class TutorListApp extends foundry.applications.api.HandlebarsApplication
           }))
           .filter((move) => this.selectedGrades.size === 0 || this.selectedGrades.has(move.grade))
           .sort((a, b) => {
-            if (this.sortByGrade) {
-              if (a.grade === b.grade) {
+            switch (this.sortBy)
+            {
+              case SortOptions.Grade:
+                if (a.grade === b.grade) {
+                  return (a.slug ?? "").localeCompare(b.slug ?? "");
+                }
+
+                const gradeA = grades.indexOf(a.grade as typeof grades[number]);
+                const gradeB = grades.indexOf(b.grade as typeof grades[number]);
+                return gradeB - gradeA;
+              case SortOptions.Name:
+              default:
                 return (a.slug ?? "").localeCompare(b.slug ?? "");
-              }
-
-              const gradeA = grades.indexOf(a.grade as typeof grades[number]);
-              const gradeB = grades.indexOf(b.grade as typeof grades[number]);
-              return gradeB - gradeA;
-
-            } else {
-              return 0;
             }
           })
       })),
       tab: this.currentTab,
       actor: this.actor,
-      sortByGrade: this.sortByGrade,
+      sortBy: this.sortBy,
       selectedGrades: Array.from(this.selectedGrades)
     }
   }
@@ -185,11 +185,11 @@ filterList() {
         });
       });
 
-      const sortCheckbox = htmlElement.querySelector<HTMLInputElement>("input[name='sort-grade']");
-      if (sortCheckbox) {
-        sortCheckbox.addEventListener("change", event => {
+      const sortDropdown = htmlElement.querySelector<HTMLSelectElement>("select[name='sort-by']");
+      if (sortDropdown) {
+        sortDropdown.addEventListener("change", event => {
           event.preventDefault();
-          this.sortByGrade = (event.target as HTMLInputElement).checked;
+          this.sortBy = (event.target as HTMLSelectElement).value as SortOptions;
           this.render({ actor: this.actor, parts: ["list"] });
         });
       }
@@ -246,6 +246,11 @@ filterList() {
 
 export interface TutorListApp {
   constructor: typeof TutorListApp;
+}
+
+enum SortOptions {
+  Name = "name",
+  Grade = "grade"
 }
 
 function getGradedTutorList(): TutorListSettings {
