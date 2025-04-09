@@ -349,7 +349,7 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
     for (const k in this.attributes) {
       const key = k as keyof Attributes;
       Object.defineProperty(this.attributes[key], "final", {
-        get: () => key === "hp" ? this.attributes[key].value : this.parent.calcStatTotal(this.attributes[key], false),
+        get: () => key === "hp" ? this.attributes[key].value : this.parent.calcStatTotal(this.attributes[key], false, false),
       });
     }
 
@@ -368,6 +368,14 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
       this.parent.rollOptions.addOption("clocks", `${clock.id}:value:${clock.value}`)
       this.parent.rollOptions.addOption("clocks", `${clock.id}:max:${clock.max}`)
     }
+    Object.defineProperty(this.clocks, "lookup", {
+      get: () => {
+        return this.clocks.contents.reduce((acc, clock) => {
+          acc[clock.id] = clock.value;
+          return acc;
+        }, {} as Record<string, number>);
+      }
+    })
 
     this.advancement.level = this.getLevel();
     if (this.parent.isHumanoid()) {
@@ -466,7 +474,8 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
       movement: 0,
       powerPoints: 0,
       weightClass: 0,
-      heightClass: 0
+      heightClass: 0,
+      vulnerabilityMultiplier: 1
     };
   }
 

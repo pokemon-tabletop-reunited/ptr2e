@@ -1234,6 +1234,12 @@
     "description": "Indicates this creature can evolve into more than one option."
   },
   {
+    "slug": "shed-evolution",
+    "label": "Shed Evolution",
+    "related": [],
+    "description": "When Nincada evolves into Ninjask, if another Capture Container is available, a Shedinja will take its residence inside of said container.\nThe GM should spawn in a new Shedinja and allow the player to freely capture it."
+  },
+  {
     "slug": "steel-officer",
     "label": "Steel Officer",
     "related": [],
@@ -1403,8 +1409,8 @@
     "label": "Ultra Beast",
     "related": [],
     "description": "This creature has been flung through Ultra Space, and appear to resonate in one form or another with Z-Energy. These creatures tend to be quite formidable. These creatures also possess [Ultra].\nSUBJECT TO CHANGE",
-    "type": "narrative" 
- },
+    "type": "narrative"
+  },
   {
     "slug": "ultra-burst",
     "label": "Ultra Burst",
@@ -2973,7 +2979,9 @@
   {
     "slug": "set-up",
     "label": "Set-Up",
-    "related": ["grapple"],
+    "related": [
+      "grapple"
+    ],
     "description": "The action has a two-step activation and resolution, split across two activations (Set-Up and Resolution) and consumes Complex Actions on both Activations, but PP only once. It may have separate effects on both the set up activation and resolution activation, though usually the attack's accuracy and damage roll occur on the resolution activation. Set-up moves temporarily gain @Trait[grapple] during the resolution phase."
   },
   {
@@ -3087,21 +3095,30 @@
   {
     "slug": "major-affliction",
     "label": "Major Affliction",
-    "related": ["minor-affliction", "pseudo-affliction"],
+    "related": [
+      "minor-affliction",
+      "pseudo-affliction"
+    ],
     "description": "Major Afflictions persist during a fight; even if the creature is Recalled.",
     "type": "automated"
   },
   {
     "slug": "minor-affliction",
     "label": "Minor Affliction",
-    "related": ["major-affliction", "pseudo-affliction"],
+    "related": [
+      "major-affliction",
+      "pseudo-affliction"
+    ],
     "description": "Minor Afflictions get automatically removed when a creature is Recalled.",
     "type": "automated"
   },
   {
     "slug": "pseudo-affliction",
     "label": "Pseudo Affliction",
-    "related": ["major-affliction", "minor-affliction"],
+    "related": [
+      "major-affliction",
+      "minor-affliction"
+    ],
     "description": "Pseudo Afflictions are effects that are similar in nature to Major/Minor afflictions, but count as neither; and often have unique interactions with other effects.",
     "type": "automated"
   },
@@ -3723,7 +3740,9 @@
   {
     "slug": "grapple",
     "label": "Grapple",
-    "related": ["contact"],
+    "related": [
+      "contact"
+    ],
     "description": "Denotes if an Action can be utilized while the Action's user is affected by the Grapple affliction. All [Grapple] actions are considered to have the @Trait[contact] Trait whenever they are used as part of a Grapple."
   },
   {

@@ -35,6 +35,10 @@ export default class ItemSheetPTR2e<
           const inspector = new DataInspector(this.item);
           inspector.render(true);
         },
+        sync: async function<TSystem extends ItemSystemPTR>(this: ItemSheetPTR2e<TSystem>, event: Event) {
+          event.preventDefault();
+          return this.document.syncData();
+        }
       },
       form: {
         submitOnChange: true,
@@ -49,6 +53,12 @@ export default class ItemSheetPTR2e<
             icon: "fas fa-atom",
             label: "PTR2E.ActorSheet.Inspector",
             action: "open-inspector",
+            visible: true
+          },
+          {
+            icon: "fas fa-sync",
+            label: "PTR2E.ActorSheet.Sync",
+            action: "sync",
             visible: true
           }
         ],
