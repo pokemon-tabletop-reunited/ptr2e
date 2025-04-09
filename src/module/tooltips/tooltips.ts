@@ -627,7 +627,8 @@ export default class TooltipsPTR2e {
         target,
         effects: {
           target: target.effect.effects!.target.map(t => ({ ...t, success: t.success ?? ((t.roll?.total ?? 1) <= 0) })),
-          origin: target.effect.effects!.origin.map(o => ({ ...o, success: o.success ?? ((o.roll?.total ?? 1) <= 0) }))
+          origin: target.effect.effects!.origin.map(o => ({ ...o, success: o.success ?? ((o.roll?.total ?? 1) <= 0) })),
+          defensive: target.effect.effects!.defensive.map(d => ({ ...d, success: d.success ?? ((d.roll?.total ?? 1) <= 0) }))
         },
         messageId,
         targetUuid
