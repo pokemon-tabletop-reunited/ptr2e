@@ -1260,6 +1260,9 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
 
         const color = (() => {
           if (this.editMode) return "#ffffff";
+          if ((node.state === PerkState.purchased || !!node.tierInfo) && (connectedNode.state === PerkState.purchased || !!connectedNode.tierInfo)) {
+            return "#2ECFF5"; // Change to blue if both nodes are unlocked
+          }
           if (node.state === PerkState.purchased || !!node.tierInfo || connectedNode.state === PerkState.purchased || !!connectedNode.tierInfo) return "#ffffff";
           return "#898989";
         })();
@@ -1269,7 +1272,16 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
         line.setAttribute("x2", x2.toString());
         line.setAttribute("y2", y2.toString());
         line.setAttribute("stroke", color);
-        line.setAttribute("stroke-width", (2.5 * zoom * zoom * (color === '#ffffff' ? 1 : 0.85)).toString());
+        
+        // Add class for purchased lines
+        if ((node.state === PerkState.purchased || !!node.tierInfo) && (connectedNode.state === PerkState.purchased || !!connectedNode.tierInfo)) {
+          line.setAttribute("stroke-width", (7.5 * zoom * zoom).toString());
+          line.setAttribute("filter", "drop-shadow(0 0 10px rgba(46, 207, 245, 1))");
+        }
+        else {
+          line.setAttribute("stroke-width", (2.5 * zoom * zoom * (color === '#ffffff' ? 1 : 0.85)).toString());
+        }
+
         if (existing) continue;
 
         svg.appendChild(line);
