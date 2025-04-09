@@ -268,24 +268,6 @@
         }
       }
     },
-    "SETTINGS": {
-      "Settings": "Settings",
-      "CompendiumBrowserSources": {
-        "DeleteAllInfo": "All compendium documents will become browseable, including those with empty sources.",
-        "DeleteAllQuestion": "Are you sure you want to reset all settings for included sources?",
-        "DeleteAllTitle": "Reset Settings",
-        "Hint": "Settings to display only entries with specified sources in the compendium browser.",
-        "IgnoreAsGM": "Let GMs ignore filtering and see all entries.",
-        "Name": "Included Sources",
-        "ShowEmptySources": "Do not filter entries with empty sources.",
-        "ShowUnknownSources": "Do not filter entries with unknown sources.",
-        "SourcesListHeader": "Specified Sources"
-      },
-      "CompendiumBrowserPacks": {
-        "Hint": "Settings to exclude packs from loading",
-        "Name": "Compendium Browser Packs"
-      }
-    },
     "Inventory": {
       "weapon": "Weapons",
       "equipment": "Equipment",
@@ -490,7 +472,8 @@
       "NotEnoughPP": "Unable to spend {cost} power points. You only have {current}.",
       "UnableToAct": "{action} Failed! ",
       "FlingTargetNotAllyOrGrappled": "Fling 'Actor-Toss' can only target allies or grappled enemies.",
-      "CannotCaptureTarget": "Oops! This target is not capturable!"
+      "CannotCaptureTarget": "Oops! This target is not capturable!",
+      "NoValidTargets": "Make sure you are targeting a token before using this action!"
     },
     "TokenDeleteWarning": "You cannot delete Tokens that are Stuck!",
     "DataInspector": {
@@ -678,6 +661,7 @@
       "size": "Size Accuracy Modifier"
     },
     "Effect": {
+      "IncrementClock": "<p>{clock} has been incremented by {value} <span style='font-size: var(--font-size-12); white-space: nowrap;'>(total: {total})</span></p><blockquote><i>Effect: [{effect}] has been deleted due to not having any other Changes to resolve.</i></blockquote>",
       "Immune": "{target} is Immune to {effect}. No effect was applied.",
       "FIELDS": {
         "ChangeType": {
@@ -702,7 +686,9 @@
           "token-alterations": "Token Alteration",
           "stats-alteration": "Stats Alteration",
           "aura": "Aura",
-          "token-tag": "Token Tag"
+          "token-tag": "Token Tag",
+          "create-clock": "Create Clock",
+          "increment-clock": "Increment Clock"
         },
         "ChangeLabel": {
           "label": "Label",
@@ -743,6 +729,9 @@
             "notAnItemUuid": "UUID must be a valid Item UUID.",
             "itemNotFound": "Failed to find an Item with UUID \"{uuid}\"."
           }
+        },
+        "ChangeId": {
+          "invalid": "The ID must be a valid alphanumeric string of exactly 16 characters."
         },
         "ChangeChance": {
           "label": "Chance",
@@ -1010,7 +999,7 @@
           "true-sight": "<p>The afflicted creature ignores invisibility and illusions.</p><p>Additionally, the user's Normal- and Fighting-Type attacks can hit Ghost-Type creatures, and the user's Ghost-Type attacks can hit Normal-Type creatures.</p>",
           "shrink": "The afflicted creature’s Size Category is reduced by one.",
           "enlarge": "The afflicted creature’s Size Category is increased by one.",
-          "marked": "While Marked, all creatures unallied to the afflicted creature and within 8m of it can only target the Marked creature with their attacks. Whenever the creature with Marked is hit by an Attack, reduce the Stack Value of its Marked by 1.",
+          "marked": "While Marked, all creatures unallied to the afflicted creature and within 8m of it can only target the Marked creature with their attacks. Whenever the creature with Marked is hit by an Attack, reduce the Stack Value of its Marked by 1. A creature that starts or enters the Marked creature's range at any point during their Activation must from that moment on target the Marked creature with any attacks they make, even when leaving the 8m range of the Marked effect.",
           "unlucky": "While Unlucky, a creature cannot utilize its Luck.",
           "perish": "When a creature’s Perish count hits 0, the creature's HP is set to 0. Humans and ‘Ace’ creatures gain Weary 1 instead of losing HP when their Perish count is 0. The Perish Affliction is removed if a creature is switched out or leaves combat.",
           "invisible": "The afflicted creature vanishes from sight, and cannot be detected by sight based vision or targeted by Attacks. In addition, the creature has +4 default EVA Stages. Invisible ends when the creature uses an Attack, is hit by an Attack, by using a Free Action to end Invisible, or by the end conditions of the effect that granted Invisible. Any creature can perform an Intense Spot Check to ignore the effects of Invisible.",
@@ -1167,6 +1156,7 @@
       "PartySheet": "Open Party Sheet",
       "OpenDex": "Open Dex",
       "Dex": "Dex",
+      "Sync": "Sync Item Data",
       "DexSync": "Sync Dex",
       "DexSyncPrompt": {
         "Title": "Synchronize Dex",
@@ -1404,6 +1394,46 @@
       "ExpandRolls": {
         "Name": "Auto Expand Rolls",
         "Hint": "Expand the roll details by default."
+      },
+      "Settings": "Settings",
+      "CompendiumBrowserSources": {
+        "DeleteAllInfo": "All compendium documents will become browseable, including those with empty sources.",
+        "DeleteAllQuestion": "Are you sure you want to reset all settings for included sources?",
+        "DeleteAllTitle": "Reset Settings",
+        "Hint": "Settings to display only entries with specified sources in the compendium browser.",
+        "IgnoreAsGM": "Let GMs ignore filtering and see all entries.",
+        "Name": "Included Sources",
+        "ShowEmptySources": "Do not filter entries with empty sources.",
+        "ShowUnknownSources": "Do not filter entries with unknown sources.",
+        "SourcesListHeader": "Specified Sources"
+      },
+      "CompendiumBrowserPacks": {
+        "Hint": "Settings to exclude packs from loading",
+        "Name": "Compendium Browser Packs"
+      },
+      "Defaults": {
+        "Blueprint": {
+          "Level": {
+            "Name": "Default Blueprint Level",
+            "Hint": "The level must be a positive integer, a range in the format `a-b`, a Rolltable UUID or blank (random)."
+          },
+          "Shiny": {
+            "Name": "Default Blueprint Shiny",
+            "Hint": "The % chance for the Pokémon to be shiny."
+          },
+          "Nature": {
+            "Name": "Default Blueprint Nature",
+            "Hint": "The nature must be a valid nature, a UUID to a Rolltable or blank (random)."
+          },
+          "Gender": {
+            "Name": "Default Blueprint Gender",
+            "Hint": "The gender of the Pokémon, if 'Random' is selected, the species' gender ratio is used."
+          },
+          "Perk": {
+            "Name": "Default Blueprint Perk Config",
+            "Hint": "Label or ID of the globally saved Perk Generator Config."
+          }
+        }
       }
     },
     "SkillsEditor": {
@@ -1849,7 +1879,7 @@
       "clock": {
         "id": {
           "label": "Clock ID",
-          "hint": "The unique identifier of the clock."
+          "hint": "The unique identifier of the clock. Must be exactly 16 characters long and only contain letters and numbers."
         },
         "label": {
           "label": "Clock Label",
@@ -1869,7 +1899,7 @@
         },
         "private": {
           "label": "Private Clock",
-          "hint": "Whether the clock is private."
+          "hint": "Whether the clock is only visible to GMs."
         }
       },
       "prerequisites": {

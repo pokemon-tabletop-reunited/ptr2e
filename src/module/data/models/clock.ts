@@ -32,6 +32,12 @@ class Clock extends foundry.abstract.DataModel {
   }
 }
 
+// eslint-disable-next-line @typescript-eslint/no-namespace
+namespace Clock {
+  export type Source = SourceFromSchema<ClockSchema>;
+  export type Schema = ClockSchema;
+}
+
 interface Clock {
   id: string;
   value: number;

@@ -26,6 +26,10 @@ import SuppresAbilityChangeSystem from "../suppress-ability.ts";
 import SuppresAbilityForm from "./suppress-ability.ts";
 import StatsAlterationChangeSystem from "../stats-alteration.ts";
 import StatsAlterationForm from "./stats-alteration.ts";
+import CreateClockChangeSystem from "../create-clock.ts";
+import CreateClockForm from "./create-clock.ts";
+import IncrementClockChangeSystem from "../increment-clock.ts";
+import IncrementClockForm from "./increment-clock.ts";
 // import AlterAttackChangeSystem from "../alter-attack.ts";
 // import AlterAttackForm from "./alter-attack.ts";
 
@@ -43,7 +47,9 @@ const CHANGE_FORMS: Partial<Record<string, ConstructorOf<ChangeForm>>> = {
     [AddTraitChangeSystem.TYPE]: AddTraitForm,
     [RemoveTraitChangeSystem.TYPE]: RemoveTraitForm,
     [SuppresAbilityChangeSystem.TYPE]: SuppresAbilityForm,
-    [StatsAlterationChangeSystem.TYPE]: StatsAlterationForm
+    [StatsAlterationChangeSystem.TYPE]: StatsAlterationForm,
+    [CreateClockChangeSystem.TYPE]: CreateClockForm,
+    [IncrementClockChangeSystem.TYPE]: IncrementClockForm,
     // [AlterAttackChangeSystem.TYPE]: AlterActionForm,
 };
 

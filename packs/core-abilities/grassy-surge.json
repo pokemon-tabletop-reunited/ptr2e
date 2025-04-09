@@ -7,10 +7,30 @@
       {
         "traits": [
           "terrain",
-          "interrupt-2"
+          "interrupt-4"
         ],
         "name": "Grassy Surge",
-        "slug": "grassy-surge-active",
+        "slug": "grassy-surge",
+        "type": "generic",
+        "cost": {
+          "activation": "free",
+          "powerPoints": 5,
+          "trigger": "<p>The user enters combat or emerges from stealth.</p>"
+        },
+        "range": {
+          "target": "self",
+          "unit": "m"
+        },
+        "description": "<p>Trigger: The user enters combat or emerges from stealth.</p><p>Effect: The user freely uses Grassy Terrain.</p>",
+        "img": "icons/svg/explosion.svg"
+      },
+      {
+        "traits": [
+          "terrain",
+          "interrupt-2"
+        ],
+        "name": "Grassy Surge (Extend)",
+        "slug": "grassy-surge-extend",
         "type": "generic",
         "cost": {
           "activation": "free",
@@ -29,8 +49,8 @@
           "terrain",
           "environ"
         ],
-        "name": "Grassy Surge",
-        "slug": "grassy-surge-passive",
+        "name": "Grassy Surge (Adjacency)",
+        "slug": "grassy-surge-adjaceny",
         "type": "passive",
         "cost": {
           "activation": "free"
@@ -44,7 +64,7 @@
         "img": "icons/svg/explosion.svg"
       }
     ],
-    "description": "<p>Trigger: The user declares Grassy Terrain.</p><p>Effect: Connection - Grassy Terrain. Increase the number of rounds Grassy Terrain persists by 2.</p><p>Passive: If a space within range possesses Grassy Terrain, the user is affected by Grassy Terrain.</p>",
+    "description": "<p>Trigger: The user enters combat or emerges from stealth.</p><p>Effect: Connection - Grassy Terrain. The user freely uses Grassy Terrain. When the user sets Grassy Terrain, they may spend 2 PP to increase the number of rounds Grassy Terrain persists by 2.</p><p>Passive: If a space within range possesses Grassy Terrain, the user is affected by Grassy Terrain.</p>",
     "traits": [
       "terrain",
       "connection",

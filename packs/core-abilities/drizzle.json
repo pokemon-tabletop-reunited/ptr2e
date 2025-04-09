@@ -7,15 +7,35 @@
       {
         "traits": [
           "weather",
-          "interrupt-2"
+          "interrupt-4"
         ],
         "name": "Drizzle",
         "slug": "drizzle",
-        "type": "passive",
+        "type": "generic",
         "cost": {
           "activation": "free",
-          "powerPoints": 4,
-          "trigger": "<p>The user declares Rain Dance.</p>"
+          "powerPoints": 6,
+          "trigger": "<p>The user enters combat or emerges from stealth.</p>"
+        },
+        "range": {
+          "target": "self",
+          "unit": "m"
+        },
+        "description": "<p>Trigger: The user enters combat or emerges from stealth.</p><p>Effect: The user freely uses Rain Dance.</p>",
+        "img": "icons/magic/air/weather-clouds-rain.webp"
+      },
+      {
+        "traits": [
+          "weather",
+          "interrupt-2"
+        ],
+        "name": "Drizzle (Extend)",
+        "slug": "drizzle-extend",
+        "type": "generic",
+        "cost": {
+          "activation": "free",
+          "powerPoints": 2,
+          "trigger": "<p>The user declares Drizzle.</p>"
         },
         "range": {
           "target": "field",
@@ -25,7 +45,7 @@
         "img": "icons/magic/air/weather-clouds-rain.webp"
       }
     ],
-    "description": "<p>Trigger: The user declares Rain Dance.</p><p>Effect: Connection - Rain Dance. The set Rainy Weather has its duration increased by +2 Rounds.</p>",
+    "description": "<p>Trigger: The user enters combat or emerges from stealth.</p><p>Effect: Connection - Rain Dance. The user freely uses Rain Dance. When the user sets Rainy Weather, they may spend 2 PP to increase its duration by +2 Rounds.</p>",
     "traits": [
       "connection",
       "weather",

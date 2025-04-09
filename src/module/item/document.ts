@@ -73,12 +73,12 @@ class ItemPTR2e<
         .map((o) => `${prefix}:${o}`) ?? []
       : [];
 
-    const gearOptions = 'equipped' in this.system 
-    ? [
-      `${this.slug}:${(this.system.equipped as EquipmentData).carryType}`,
-      ...(["held", "worn"].includes((this.system.equipped as EquipmentData).carryType) ? `${this.slug}:equipped`: [])
-    ]
-    : [] as string[];
+    const gearOptions = 'equipped' in this.system
+      ? [
+        `${this.slug}:${(this.system.equipped as EquipmentData).carryType}`,
+        ...(["held", "worn"].includes((this.system.equipped as EquipmentData).carryType) ? `${this.slug}:equipped` : [])
+      ]
+      : [] as string[];
 
     const options = [
       `${prefix}:id:${this.id}`,
@@ -241,7 +241,7 @@ class ItemPTR2e<
       context.keepEmbeddedIds = true;
       context.keepId = true;
     }
-    
+
     async function processSources(sources: ItemSourcePTR2e[]) {
       const outputItemSources: ItemSourcePTR2e[] = sources;
 
@@ -277,7 +277,7 @@ class ItemPTR2e<
 
       return outputItemSources;
     }
-     
+
     const outputItemSources = await processSources(sources as ItemSourcePTR2e[]);
 
     return super.createDocuments<TDocument>(sources.concat(outputItemSources) as PreCreate<TDocument["_source"]>[], context);
@@ -360,7 +360,7 @@ class ItemPTR2e<
   /** Assess and pre-process this JSON data, ensuring it's importable and fully migrated */
   override async importFromJSON(json: string): Promise<this> {
     const parsed = JSON.parse(json);
-    if(parsed.type !== "PackagedBlueprint") {
+    if (parsed.type !== "PackagedBlueprint") {
       const processed = await preImportJSON(this, json);
       return processed ? super.importFromJSON(processed) : this;
     }
@@ -408,8 +408,25 @@ class ItemPTR2e<
     return super.deleteDocuments(ids, context);
   }
 
+  protected override _onDelete(options: DocumentModificationContext<TParent>, userId: string): void {
+    super._onDelete(options, userId);
+    if (!(this.actor && game.user.id === userId)) return;
+
+    const actorUpdates: Record<string, unknown> = {};
+    for (const effect of this.effects) {
+      for (const change of (effect as unknown as ActiveEffectPTR2e).changes) {
+        change.onDelete?.(actorUpdates);
+      }
+    }
+
+    const updateKeys = Object.keys(actorUpdates);
+    if (updateKeys.length > 0 && !updateKeys.every((k) => k === "_id")) {
+      this.actor.update(actorUpdates);
+    }
+  }
+
   override getEmbeddedCollection(embeddedName: string) {
-    if(embeddedName === "Actions" && this.hasActions()) return this.actions as unknown as ReturnType<Item["getEmbeddedCollection"]>;
+    if (embeddedName === "Actions" && this.hasActions()) return this.actions as unknown as ReturnType<Item["getEmbeddedCollection"]>;
     return super.getEmbeddedCollection(embeddedName);
   }
 
@@ -434,8 +451,31 @@ class ItemPTR2e<
   // }
 
   override exportToJSON(options?: Record<string, unknown>): void {
-    if(this.type !== "blueprint") return super.exportToJSON(options);
+    if (this.type !== "blueprint") return super.exportToJSON(options);
     return void (this.system as BlueprintSystem).exportToJSON();
+  }
+
+  async syncData(): Promise<void> {
+    const sourceId = this.flags.core?.sourceId;
+    if(!sourceId) {
+      return void ui.notifications.error("Unable to detect source for this item, unable to sync.");
+    }
+
+    const source = await fromUuid(sourceId) as this;
+    if(!source) {
+      return void ui.notifications.error("The source this item references no longer exists.");
+    }
+
+    const sourceData = R.pick(source.toObject(), ["name", "type", "img", "system", "effects"]);
+    const thisData = R.pick(this.toObject(), ["name", "type", "img", "system", "effects"]);
+
+    const diff = fu.diffObject(thisData, sourceData);
+    if (fu.isEmpty(diff)) {
+      return void ui.notifications.warn("No changes detected.");
+    }
+    const changes = fu.flattenObject(diff);
+    await this.update(changes);
+    ui.notifications.info("Changes synced.");
   }
 }
 

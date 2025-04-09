@@ -122,11 +122,14 @@ class CombatTrackerPTR2e<TEncounter extends CombatPTR2e | null> extends CombatTr
                 const combatant = this.viewed?.combatants.get(li.data("combatantId"));
                 if(!combatant) return;
 
+                const hasBossDelayImmunity = !!combatant.actor?.rollOptions?.all?.["special:boss-delay"];
+                const maxDelta = Math.clamp(-150/combatant.baseAV, hasBossDelayImmunity ? -0.3 : -99, 1);
+
                 foundry.applications.api.DialogV2.prompt({
                     window: {
                         title: game.i18n.format("PTR2E.Combat.ContextMenu.ApplyDelayOrAdvancement.title", {name: combatant.name}),
                     },
-                    content: game.i18n.format("PTR2E.Combat.ContextMenu.ApplyDelayOrAdvancement.content", { current: +(combatant.system.advanceDelayPercent * 100).toFixed(2), max: +(-150/combatant.baseAV * 100).toFixed(2) }),
+                    content: game.i18n.format("PTR2E.Combat.ContextMenu.ApplyDelayOrAdvancement.content", { current: +(combatant.system.advanceDelayPercent * 100).toFixed(2), max: +(maxDelta * 100).toFixed(2) }),
                     ok: {
                         label: game.i18n.localize("PTR2E.Combat.ContextMenu.ApplyDelayOrAdvancement.ok"),
                         action: 'ok',

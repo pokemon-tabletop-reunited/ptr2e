@@ -14,7 +14,8 @@
         "PTR 2e Team"
       ],
       "notes": ""
-    }
+    },
+    "description": "<p>Adds a togglable 75% damage reduction from all sources to this Boss. </p><p>The toggle can be found in the Effects tab under 'Toggles'</p>"
   },
   "_id": "WyIdpwgbw0rWWfWW",
   "img": "icons/magic/defensive/shield-barrier-glowing-blue.webp",
@@ -27,14 +28,30 @@
       "system": {
         "changes": [
           {
-            "type": "ephemeral-modifier",
-            "key": "attack-damage-percentile",
-            "value": -75,
+            "type": "roll-option",
+            "key": "",
+            "value": "boss-dr-active",
             "predicate": [],
+            "domain": "all",
+            "toggleable": true,
+            "count": false,
+            "state": true,
+            "alwaysActive": false,
             "mode": 2,
             "priority": null,
             "ignored": false,
-            "hideIfDisabled": false
+            "suboptions": []
+          },
+          {
+            "type": "basic",
+            "key": "system.modifiers.vulnerabilityMultiplier",
+            "value": -0.75,
+            "predicate": [
+              "boss-dr-active"
+            ],
+            "mode": 2,
+            "priority": null,
+            "ignored": false
           }
         ],
         "slug": null,
@@ -53,7 +70,7 @@
         "startRound": null,
         "startTurn": null
       },
-      "description": "",
+      "description": "<p>Adds a togglable 75% damage reduction from all sources to this Boss. </p><p>The toggle can be found in the Effects tab under 'Toggles'</p>",
       "origin": null,
       "tint": "#ffffff",
       "transfer": true,
@@ -65,10 +82,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "ptr2e",
-        "systemVersion": "0.10.0-alpha.4.1.0",
+        "systemVersion": "1.1.2.beta",
         "createdTime": 1734210390162,
-        "modifiedTime": 1735915856910,
-        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
+        "modifiedTime": 1743595876869,
+        "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
       }
     }
   ],
