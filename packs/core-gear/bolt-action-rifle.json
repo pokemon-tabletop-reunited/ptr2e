@@ -4,7 +4,7 @@
   "type": "weapon",
   "system": {
     "crafting": {
-      "skill": null,
+      "skill": "",
       "spans": null,
       "materials": []
     },
@@ -18,7 +18,7 @@
       "type": "steel",
       "power": 50,
       "accuracy": 95,
-      "hide": null
+      "hide": false
     },
     "rarity": "uncommon",
     "traits": [
@@ -27,7 +27,8 @@
       "firearm",
       "reload",
       "steel",
-      "charge-pool-7"
+      "rearm-1",
+      "charge-pool-8"
     ],
     "actions": [
       {
@@ -69,10 +70,7 @@
         "accuracy": 85,
         "free": true,
         "traits": [
-          "load-adaptive",
-          "two-handed",
           "2-strike",
-          "readied",
           "missile"
         ],
         "name": "Bolt-Action Rifle (Snap Shot)",
@@ -82,7 +80,7 @@
         "type": "attack",
         "range": {
           "target": "creature",
-          "distance": 36,
+          "distance": 38,
           "unit": "m"
         },
         "cost": {
@@ -97,12 +95,10 @@
           "untyped"
         ],
         "category": "special",
-        "power": 60,
+        "power": 65,
         "accuracy": 75,
         "free": true,
         "traits": [
-          "load-adaptive",
-          "two-handed",
           "dash",
           "missile"
         ],
@@ -113,7 +109,7 @@
         "type": "attack",
         "range": {
           "target": "creature",
-          "distance": 12,
+          "distance": 15,
           "unit": "m"
         },
         "cost": {
@@ -145,10 +141,66 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
-    }
+      ],
+      "notes": ""
+    },
+    "description": "<p>Bolt action is a type of manual firearm action that is operated by directly manipulating the turn-bolt via a bolt handle, most commonly placed on the right-hand side of the firearm (as most users are right-handed). The majority of bolt-action firearms are rifles, and generally are chambered in fuller powered calibers.</p>"
   },
   "_id": "7SB0KILKuBpiLVmr",
-  "effects": [],
+  "effects": [
+    {
+      "name": "Bolt-Action Rifle",
+      "type": "passive",
+      "_id": "vFhsiUUe4ZU036z3",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "flat-modifier",
+            "key": "{item|id}-attack-damage-flat",
+            "value": 33,
+            "predicate": [],
+            "label": "Bolt-Action Rifle",
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "hideIfDisabled": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": "Compendium.ptr2e.core-gear.Item.Ba3EyqpUePgGrfQk.ActiveEffect.uOxpw5kHcRtpv4pa",
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "1.1.3.beta",
+        "createdTime": 1743901236922,
+        "modifiedTime": 1743901765782,
+        "lastModifiedBy": "UTlFSVhgfIUeTsoW"
+      }
+    }
+  ],
   "folder": "MKaFm5Pvt7tvgdAa"
 }
