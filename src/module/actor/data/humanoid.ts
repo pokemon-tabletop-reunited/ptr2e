@@ -11,7 +11,7 @@ class HumanoidActorSystem extends ActorSystemPTR2e {
   static constructSpecies(system: HumanoidActorSystem, name = system.parent.name): SpeciesSystemModel {
     const data = {
       slug: sluggify(name),
-      traits: ["humanoid", "underdog", "unique-egg-group", "bipedal", "speech", "wielder"],
+      traits: ["humanoid", "underdog", "unique-egg-group", "bipedal", "speech", "wielder", "jump-2"],
       number: 0,
       stats: {
         hp: system.attributes.hp.base,

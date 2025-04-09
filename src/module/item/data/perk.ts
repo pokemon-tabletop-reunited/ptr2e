@@ -1,5 +1,5 @@
 import { PerkPTR2e } from "@item";
-import { HasTraits, HasActions, HasSlug, HasDescription, HasEmbed, HasMigrations } from "@module/data/index.ts";
+import { HasTraits, HasActions, HasSlug, HasDescription, HasEmbed, HasMigrations, HasPublication } from "@module/data/index.ts";
 import { BaseItemSourcePTR2e, ItemSystemSource } from "./system.ts";
 import { SlugField } from "@module/data/fields/slug-field.ts";
 import { SlugSchema } from "@module/data/mixins/has-slug.ts";
@@ -10,9 +10,10 @@ import { MigrationSchema } from "@module/data/mixins/has-migrations.ts";
 import { TraitsSchema } from "@module/data/mixins/has-traits.ts";
 import { PredicateField } from "@system/predication/schema-data-fields.ts";
 import { Predicate, PredicateStatement, StatementValidator } from "@system/predication/predication.ts";
+import { PublicationSchema } from "@module/data/mixins/has-publication.ts";
 
 const PerkExtension = HasEmbed(
-  HasTraits(HasMigrations(HasDescription(HasSlug(HasActions(foundry.abstract.TypeDataModel))))),
+  HasTraits(HasMigrations(HasDescription(HasSlug(HasActions(HasPublication(foundry.abstract.TypeDataModel)))))),
   "perk"
 );
 
@@ -453,7 +454,7 @@ interface NodeTierSchema extends foundry.data.fields.DataSchema {
   uuid: foundry.data.fields.DocumentUUIDField<string, true, false, true>;
 }
 
-type PerkSystemSchemaExtension = SlugSchema & ActionsSchema & DescriptionSchema & MigrationSchema & TraitsSchema;
+type PerkSystemSchemaExtension = SlugSchema & ActionsSchema & DescriptionSchema & MigrationSchema & TraitsSchema & PublicationSchema;
 
 export type PerkSource = BaseItemSourcePTR2e<"perk", PerkSystemSource>;
 

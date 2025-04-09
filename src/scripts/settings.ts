@@ -5,6 +5,7 @@ import { TraitsSettingsMenu } from "@module/apps/traits.ts";
 import { TypeMatrix } from "@module/apps/type-matrix/sheet.ts";
 import { ExpTrackerSettings } from "@system/exp-tracker-model.ts";
 import { TutorListSettings } from "@system/tutor-list/setting-model.ts";
+import { natures } from "./config/natures.ts";
 
 export function initializeSettings() {
 
@@ -222,4 +223,132 @@ export function initializeSettings() {
     type: Boolean,
     scope: "client"
   })
+
+  game.settings.register("ptr2e", "preferences.must-target", {
+    name: "PTR2E.Settings.Preferences.MustTarget.Name",
+    hint: "PTR2E.Settings.Preferences.MustTarget.Hint",
+    default: true,
+    config: true,
+    type: Boolean,
+    scope: "client"
+  })
+
+  game.settings.register("ptr2e", "global-perk-configs", {
+    name: "PTR2E.Settings.GlobalPerkConfigs.Name",
+    hint: "PTR2E.Settings.GlobalPerkConfigs.Hint",
+    default: [],
+    config: false,
+    type: Object,
+    scope: "world"
+  });
+
+  game.settings.register("ptr2e", "defaults.blueprint.level", {
+    name: "PTR2E.Settings.Defaults.Blueprint.Level.Name",
+    hint: "PTR2E.Settings.Defaults.Blueprint.Level.Hint",
+    config: true,
+    default: null,
+    type: new foundry.data.fields.StringField({
+      required: true,
+      nullable: true,
+      initial: null,
+      validate: (value) => {
+        // Level can be either a integer value, a range in the format `a-b`, a Rolltable UUID or null
+        if (value === null) return true;
+
+        // Check if the value is a number
+        const number = Number(value);
+        if (!isNaN(number)) {
+          if (Number.isInteger(number) && number >= 1) return true;
+          throw new Error("The level must be a positive integer.");
+        }
+        if (typeof value !== "string") return false;
+
+        // Check if the value is a range
+        if (value.match(/^\d+-\d+$/)) {
+          const [min, max] = value.split("-").map(Number);
+          if (min >= 1 && max >= min) return true;
+
+          throw new Error("The range must be in the format `a-b` where `a` and `b` are integers and `a` is less than or equal to `b`.");
+        }
+
+        // Check if the value is a Rolltable UUID
+        const uuid = fu.parseUuid(value);
+        if (uuid && uuid.documentId) {
+          if (uuid.documentType === "RollTable") return true;
+          throw new Error("The UUID must point to a Rolltable.");
+        }
+
+        return false;
+      },
+    }),
+    scope: "world"
+  });
+
+  game.settings.register("ptr2e", "defaults.blueprint.nature", {
+    name: "PTR2E.Settings.Defaults.Blueprint.Nature.Name",
+    hint: "PTR2E.Settings.Defaults.Blueprint.Nature.Hint",
+    config: true,
+    default: null,
+    type: new foundry.data.fields.StringField({
+      required: true, initial: null, nullable: true, trim: true, validate: (value) => {
+        //Natures can either be a valid nature typed out, a UUID to a Rolltable or null
+        if (value === null) return true;
+        if (typeof value !== "string") return false;
+
+        // Check if the value is a valid nature
+        const nature = value.toLowerCase();
+        if (natures[nature] !== undefined) return true;
+
+        // Check if the value is a Rolltable UUID
+        const uuid = fu.parseUuid(value);
+        if (uuid && uuid.documentId) {
+          if (uuid.documentType === "RollTable") return true;
+          throw new Error("The UUID must point to a Rolltable.");
+        }
+
+        return false;
+      }, validationError: "The nature must be a valid nature, a UUID to a Rolltable or null."
+    }),
+    scope: "world"
+  });
+
+  game.settings.register("ptr2e", "defaults.blueprint.gender", {
+    name: "PTR2E.Settings.Defaults.Blueprint.Gender.Name",
+    hint: "PTR2E.Settings.Defaults.Blueprint.Gender.Hint",
+    config: true,
+    default: null,
+    type: new foundry.data.fields.StringField({
+      required: true, 
+      initial: null, 
+      nullable: true, 
+      trim: true, 
+      choices: ["random", "male", "female", "genderless"].reduce((acc, val) => ({ ...acc, [val]: val }), {}),
+    }),
+    scope: "world"
+  });
+
+  game.settings.register("ptr2e", "defaults.blueprint.shiny", {
+    name: "PTR2E.Settings.Defaults.Blueprint.Shiny.Name",
+    hint: "PTR2E.Settings.Defaults.Blueprint.Shiny.Hint",
+    config: true,
+    default: 1,
+    type: new foundry.data.fields.NumberField({
+      required: true,
+      initial: 1,
+      nullable: false,
+      min: 0,
+      max: 100,
+      step: 1
+    }),
+    scope: "world"
+  });
+
+  game.settings.register("ptr2e", "defaults.blueprint.perk", {
+    name: "PTR2E.Settings.Defaults.Blueprint.Perk.Name",
+    hint: "PTR2E.Settings.Defaults.Blueprint.Perk.Hint",
+    config: true,
+    default: null,
+    type: String,
+    scope: "world"
+  });
 }

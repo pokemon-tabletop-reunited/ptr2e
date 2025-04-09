@@ -1,6 +1,7 @@
 import { TokenDocumentPTR2e } from "@module/canvas/token/document.ts";
 import { CombatPTR2e } from "@combat";
 import { CombatantSystemPTR2e } from "@combat";
+import { RollNote } from "@system/notes.ts";
 
 class CombatantPTR2e<
   TParent extends CombatPTR2e | null = CombatPTR2e | null,
@@ -37,6 +38,17 @@ class CombatantPTR2e<
       this.updateSource({ type: 'character' });
     }
     if (!data.initiative) this.updateSource({ initiative: this.baseAV || 150 });
+
+    if (this.actor) {
+      const notes = this.actor.synthetics.rollNotes["combat-enter"];
+      if (notes?.length) {
+        const content = RollNote.notesToHTML(notes)?.outerHTML;
+        if (content?.length) await ChatMessage.create({
+          speaker: ChatMessage.getSpeaker({ actor: this.actor }),
+          content
+        });
+      }
+    }
   }
 
   protected override _preUpdate(changed: DeepPartial<this["_source"]>, options: DocumentUpdateContext<TParent>, user: User): Promise<boolean | void> {

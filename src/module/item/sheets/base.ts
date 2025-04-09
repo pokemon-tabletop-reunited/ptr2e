@@ -8,6 +8,7 @@ import { ActionEditor } from "@module/apps/action-editor.ts";
 import { ItemSheetV2Expanded } from "@module/apps/appv2-expanded.ts";
 import { ActionPTR2e, Trait } from "@data";
 import { DataInspector } from "@module/apps/data-inspector/data-inspector.ts";
+import BlueprintSystem from "@item/data/blueprint.ts";
 
 export default class ItemSheetPTR2e<
   TSystem extends ItemSystemPTR,
@@ -34,6 +35,10 @@ export default class ItemSheetPTR2e<
           const inspector = new DataInspector(this.item);
           inspector.render(true);
         },
+        sync: async function<TSystem extends ItemSystemPTR>(this: ItemSheetPTR2e<TSystem>, event: Event) {
+          event.preventDefault();
+          return this.document.syncData();
+        }
       },
       form: {
         submitOnChange: true,
@@ -48,6 +53,12 @@ export default class ItemSheetPTR2e<
             icon: "fas fa-atom",
             label: "PTR2E.ActorSheet.Inspector",
             action: "open-inspector",
+            visible: true
+          },
+          {
+            icon: "fas fa-sync",
+            label: "PTR2E.ActorSheet.Sync",
+            action: "sync",
             visible: true
           }
         ],
@@ -175,6 +186,7 @@ export default class ItemSheetPTR2e<
       traits,
       effects,
       enrichedDescription,
+      enrichedNotes: (this.document.system instanceof BlueprintSystem) ? "" : await TextEditor.enrichHTML(this.document.system.publication?.notes ?? ""),
     };
   }
 
