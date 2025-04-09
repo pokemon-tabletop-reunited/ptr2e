@@ -297,6 +297,10 @@ function _registerBasicHelpers() {
     return haystack.indexOf(needle) > -1 ? true : false;
   });
 
+  Handlebars.registerHelper("includes", function (array, value) {
+    return array.includes(value);
+  });
+
   Handlebars.registerHelper("ifContains", function (needle, haystack, options) {
     needle = Handlebars.escapeExpression(needle);
     haystack = Handlebars.escapeExpression(haystack); // @ts-ignore
