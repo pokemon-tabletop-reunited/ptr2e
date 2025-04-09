@@ -98,6 +98,8 @@ export class TutorListSchema extends foundry.abstract.DataModel {
           slug: new SlugField({ required: true, nullable: false }),
           // Uuid of move
           uuid: new foundry.data.fields.StringField(),
+          // Grade of move
+          grade: new foundry.data.fields.StringField({ required: true, nullable: false })
         })
       ),
     };
@@ -146,6 +148,7 @@ export interface _TutorListSettingsSchema extends foundry.data.fields.DataSchema
 
 interface _MoveSchema extends foundry.data.fields.DataSchema {
   slug: SlugField<string, string, true, false, false>,
+  grade: foundry.data.fields.StringField<string, string, true, false, true>,
   uuid: foundry.data.fields.StringField<string, string, true, true, true>,
 }
 

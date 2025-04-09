@@ -561,7 +561,7 @@ export default class SpeciesSheet extends ItemSheetPTR2e<SpeciesPTR2e["system"]>
       const i = levelUp.findIndex((move) => move.name === slug);
       const move = levelUp[i];
       if (!move) return;
-      tutor.push(R.omit(move, ["level"]) as { name: string; uuid: string, gen: string | null });
+      tutor.push(R.omit(move, ["level"]) as { name: string; uuid: string, grade: string, gen: string | null });
       levelUp.splice(i, 1);
     }
 

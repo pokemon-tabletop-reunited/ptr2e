@@ -34,11 +34,12 @@
           "untyped"
         ],
         "category": "physical",
-        "power": 60,
+        "power": 42,
         "accuracy": 95,
         "free": true,
-        "img": "icons/svg/explosion.svg",
-        "predicate": []
+        "img": "systems/ptr2e/img/icons/weapon_icon.webp",
+        "predicate": [],
+        "description": "<p>undefined</p>"
       },
       {
         "name": "Blunthead Arrow",
@@ -63,10 +64,10 @@
           "untyped"
         ],
         "category": "physical",
-        "power": 40,
+        "power": 28,
         "accuracy": 95,
         "free": true,
-        "img": "icons/svg/explosion.svg",
+        "img": "systems/ptr2e/img/icons/weapon_icon.webp",
         "predicate": []
       },
       {
@@ -92,10 +93,10 @@
           "untyped"
         ],
         "category": "physical",
-        "power": 80,
+        "power": 60,
         "accuracy": 85,
         "free": true,
-        "img": "icons/svg/explosion.svg",
+        "img": "systems/ptr2e/img/icons/weapon_icon.webp",
         "predicate": []
       },
       {
@@ -121,11 +122,12 @@
           "untyped"
         ],
         "category": "physical",
-        "power": 50,
+        "power": 35,
         "accuracy": 90,
         "free": true,
-        "img": "icons/svg/explosion.svg",
-        "predicate": []
+        "img": "systems/ptr2e/img/icons/weapon_icon.webp",
+        "predicate": [],
+        "description": "<p>undefined</p>"
       }
     ],
     "description": "<p>A bow's attack profile can be altered by changing the ammunition used for it. Arrows may be lit on fire to change their typing to Fire Type. Otherwise, damage type may be altered through alchemical treatments.</p>",
@@ -164,7 +166,8 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
+      ],
+      "notes": ""
     }
   },
   "_id": "lvWIPtRom0SHwdMn",
@@ -187,7 +190,8 @@
             "mode": 2,
             "priority": null,
             "ignored": false,
-            "alterations": []
+            "alterations": [],
+            "dontMerge": false
           }
         ],
         "slug": null,
@@ -222,6 +226,59 @@
         "createdTime": 1729161823663,
         "modifiedTime": 1729161853985,
         "lastModifiedBy": "Kc3DOunCh3ClAeHS"
+      }
+    },
+    {
+      "name": "Bow",
+      "type": "passive",
+      "_id": "QIzI6zPDNJYtxuRx",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "flat-modifier",
+            "key": "{item|id}-attack-damage-flat",
+            "value": 15,
+            "predicate": [],
+            "label": "Bow",
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "hideIfDisabled": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": "Compendium.ptr2e.core-gear.Item.Ba3EyqpUePgGrfQk.ActiveEffect.uOxpw5kHcRtpv4pa",
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "1.1.3.beta",
+        "createdTime": 1743879487195,
+        "modifiedTime": 1743980430948,
+        "lastModifiedBy": "UTlFSVhgfIUeTsoW"
       }
     }
   ]

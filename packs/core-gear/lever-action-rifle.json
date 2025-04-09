@@ -4,7 +4,7 @@
   "type": "weapon",
   "system": {
     "crafting": {
-      "skill": null,
+      "skill": "",
       "spans": null,
       "materials": []
     },
@@ -18,7 +18,7 @@
       "type": "steel",
       "power": 50,
       "accuracy": 95,
-      "hide": null
+      "hide": false
     },
     "rarity": "uncommon",
     "traits": [
@@ -27,7 +27,8 @@
       "firearm",
       "reload",
       "steel",
-      "charge-pool-10"
+      "charge-pool-10",
+      "rearm-2"
     ],
     "actions": [
       {
@@ -35,18 +36,14 @@
           "untyped"
         ],
         "category": "special",
-        "power": 60,
+        "power": 40,
         "accuracy": 95,
         "free": true,
         "traits": [
-          "load-adaptive",
-          "two-handed",
-          "readied",
           "missile"
         ],
         "name": "Lever-Action Rifle",
         "slug": "lever-action-rifle",
-        "description": "<p>Effect: This attack calculates damage against the target's DEF, rather than SPDEF.</p>",
         "img": "systems/ptr2e/img/svg/untyped_icon.svg",
         "type": "attack",
         "range": {
@@ -65,19 +62,15 @@
           "untyped"
         ],
         "category": "special",
-        "power": 45,
-        "accuracy": 90,
+        "power": 28,
+        "accuracy": 85,
         "free": true,
         "traits": [
-          "load-adaptive",
-          "two-handed",
-          "readied",
           "missile",
           "3-strike"
         ],
         "name": "Lever-Action Rifle (Snap Shot)",
         "slug": "lever-action-rifle-snap-shot",
-        "description": "<p>Effect: This attack calculates damage against the target's DEF, rather than SPDEF.</p>",
         "img": "systems/ptr2e/img/svg/untyped_icon.svg",
         "type": "attack",
         "range": {
@@ -97,18 +90,14 @@
           "untyped"
         ],
         "category": "special",
-        "power": 60,
+        "power": 40,
         "accuracy": 80,
         "free": true,
         "traits": [
-          "load-adaptive",
-          "two-handed",
-          "readied",
           "missile"
         ],
         "name": "Lever-Action Rifle (Hip Fire)",
         "slug": "lever-action-rifle-hip-fire",
-        "description": "<p>Effect: This attack calculates damage against the target's DEF, rather than SPDEF.</p>",
         "img": "systems/ptr2e/img/svg/untyped_icon.svg",
         "type": "attack",
         "range": {
@@ -124,7 +113,7 @@
         "predicate": []
       }
     ],
-    "description": "Effect: The user may use the Attack Lever-Action Rifle, drawing upon this item's PP Pool or the user's PP to use the Attack.",
+    "description": "<p>A lever-action rifle is a firearm where the loading, firing, and unloading processes are all cycled by a lever located behind the trigger, which extracts and ejects the cartridge case and recocks the weapon. The contemporary version of these rifles utilize smaller calibres, primarily for small game-hunting.</p>",
     "weaponType": "untyped",
     "weaponPp": 10,
     "weaponRange": "Creature",
@@ -147,10 +136,65 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
+      ],
+      "notes": ""
     }
   },
   "_id": "RWXsZNovxO0dstWt",
-  "effects": [],
+  "effects": [
+    {
+      "name": "Lever-Action Rifle",
+      "type": "passive",
+      "_id": "MUQM4qtnX83AnniG",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "flat-modifier",
+            "key": "{item|id}-attack-damage-flat",
+            "value": 26,
+            "predicate": [],
+            "label": "Lever-Action Rifle",
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "hideIfDisabled": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": "Compendium.ptr2e.core-gear.Item.Ba3EyqpUePgGrfQk.ActiveEffect.uOxpw5kHcRtpv4pa",
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "1.1.3.beta",
+        "createdTime": 1743880813905,
+        "modifiedTime": 1743883281938,
+        "lastModifiedBy": "UTlFSVhgfIUeTsoW"
+      }
+    }
+  ],
   "folder": "GPebepuiQbZSuf35"
 }

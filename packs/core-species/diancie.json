@@ -17,7 +17,7 @@
       "primary": [
         {
           "type": "flight",
-          "value": 5
+          "value": 8
         }
       ],
       "secondary": [
@@ -49,18 +49,18 @@
       ],
       "basic": [
         {
-          "slug": "bedrock"
+          "slug": "telepathy"
         },
         {
-          "slug": "telepathy"
+          "slug": "queenly-majesty"
         }
       ],
       "advanced": [
         {
-          "slug": "mystification"
+          "slug": "regenerator"
         },
         {
-          "slug": "regenerator"
+          "slug": "magic-guard"
         }
       ],
       "master": [
@@ -92,6 +92,14 @@
       {
         "slug": "conversation",
         "value": 70,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "fairy",
+        "value": 50,
         "rvs": 0,
         "favourite": false,
         "hidden": false,
@@ -196,6 +204,14 @@
       {
         "slug": "survival",
         "value": 50,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "thaumaturgy",
+        "value": 40,
         "rvs": 0,
         "favourite": false,
         "hidden": false,
@@ -631,5 +647,259 @@
     }
   },
   "_id": "LuxIchjFRSr5lvwT",
-  "effects": []
+  "effects": [
+    {
+      "name": "Mega Diancie",
+      "type": "form",
+      "_id": "I43OvzRqRuEK79nM",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-option",
+            "key": "manual-forme-toggle",
+            "value": "forme:mega-diancie:active",
+            "domain": "all",
+            "toggleable": true,
+            "label": "Toggle: Mega Diancie Forme",
+            "predicate": [],
+            "alwaysActive": false,
+            "count": false,
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "suboptions": [],
+            "state": false
+          },
+          {
+            "type": "stats-alteration",
+            "predicate": [
+              "forme:mega-diancie:active"
+            ],
+            "key": "",
+            "value": 0,
+            "hp": null,
+            "atk": 60,
+            "def": -40,
+            "spa": 60,
+            "spd": -40,
+            "spe": 60,
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "add-trait",
+            "predicate": [
+              "forme:mega-diancie:active"
+            ],
+            "key": "",
+            "value": "glow 6",
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "add-trait",
+            "predicate": [
+              "forme:mega-diancie:active"
+            ],
+            "key": "",
+            "value": "telekinetic 8",
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "remove-trait",
+            "predicate": [
+              "forme:mega-diancie:active"
+            ],
+            "key": "",
+            "value": "glow 3",
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "remove-trait",
+            "predicate": [
+              "forme:mega-diancie:active"
+            ],
+            "key": "",
+            "value": "telekinetic 6",
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-diancie:active"
+            ],
+            "key": "system.movement.flight.value",
+            "value": 9,
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-diancie:active"
+            ],
+            "key": "system.movement.overland.value",
+            "value": 3,
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-diancie:active"
+            ],
+            "key": "system.skills.acrobatics.value",
+            "value": 20,
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-diancie:active"
+            ],
+            "key": "system.skills.conversation.value",
+            "value": 15,
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-diancie:active"
+            ],
+            "key": "system.skills.flying.value",
+            "value": 15,
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-diancie:active"
+            ],
+            "key": "system.skills.intimidate.value",
+            "value": 10,
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-diancie:active"
+            ],
+            "key": "system.skills.leadership.value",
+            "value": 25,
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-diancie:active"
+            ],
+            "key": "system.skills.legendary.value",
+            "value": 25,
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-diancie:active"
+            ],
+            "key": "system.skills.lift.value",
+            "value": 10,
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-diancie:active"
+            ],
+            "key": "system.skills.negotiation.value",
+            "value": 15,
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-diancie:active"
+            ],
+            "key": "system.skills.thaumaturgy.value",
+            "value": 20,
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-diancie:active"
+            ],
+            "key": "system.skills.fairy.value",
+            "value": 20,
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0,
+        "trigger": "manual",
+        "conditions": []
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "1.2.0.beta",
+        "createdTime": 1743992853763,
+        "modifiedTime": 1743993413144,
+        "lastModifiedBy": "fjFnY9UQ3QBBalRU"
+      }
+    }
+  ]
 }
