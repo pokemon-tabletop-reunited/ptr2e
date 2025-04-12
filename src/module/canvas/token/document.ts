@@ -136,6 +136,29 @@ class TokenDocumentPTR2e<TParent extends ScenePTR2e | null = ScenePTR2e | null> 
     }
   }
 
+  override prepareDerivedData(): void {
+    super.prepareDerivedData();
+    this.registerSpentMovement();
+  }
+
+  registerSpentMovement(reset?: boolean): void {
+    if(!this.actor || !canvas.ready || !game.ready) return;
+    if(reset === true) {
+      for(const movement in this.actor.system.movement) {
+        this.actor.system.movement[movement].available = this.actor.system.movement[movement].value;
+      }
+    } 
+    else {
+      if(this.movementHistory.length === 0 || this.movementHistory.every(w => w.action === "walk")) return;
+      this.actor.system.registerSpentMovement(this.object!);
+    }
+
+    if(this.actor.sheet?.rendered) {
+      //@ts-expect-error - Outdated types
+      this.actor.sheet.render({ force: true });
+    }
+  }
+
   /**
    * Whenever the token's actor delta changes, or the base actor changes, perform associated refreshes.
    * @param {object} [update]                               The update delta.
@@ -144,6 +167,8 @@ class TokenDocumentPTR2e<TParent extends ScenePTR2e | null = ScenePTR2e | null> 
    */
   protected override _onRelatedUpdate(update: Record<string, unknown> = {}, options: DocumentModificationContext<null> = {}): void {
     super._onRelatedUpdate(update, options);
+
+    this.registerSpentMovement();
 
     // If the actor's speed combat stages are different from the token's combatant, update the combatant's speed stages
     const combatant = this.combatant as CombatantPTR2e<CombatPTR2e> | null;

@@ -297,6 +297,21 @@ class CombatPTR2e extends Combat<CombatSystemPTR2e> {
       );
   }
 
+  /** Do not clear movement history on start of turn ever. */
+  protected override _clearMovementHistoryOnStartTurn() {
+    return Promise.resolve();
+  }
+
+  protected override async _onEndRound(): Promise<void> {
+    await super._onEndRound();
+
+    await this.clearMovementHistories();
+
+    for(const combatant of this.combatants) {
+      if(combatant.token) combatant.token.registerSpentMovement(true);
+    }
+  }
+
   /**
    * Exact copy of the original method, however with added handling for Delay Summons.
    * Return the Array of combatants sorted into initiative order, breaking ties alphabetically by name.

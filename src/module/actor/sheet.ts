@@ -1246,6 +1246,11 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
     })
     game.tooltip.activate(event.target as HTMLElement, { cssClass: "ptr2e carry-type-menu", content, locked: true });
   }
+
+  override async _preFirstRender(context: foundry.applications.api.ApplicationRenderContext, options: foundry.applications.api.HandlebarsRenderOptions): Promise<void> {
+    await super._preFirstRender(context, options);
+    this.actor.system.registerSpentMovement();
+  }
 }
 
 export default ActorSheetPTRV2;

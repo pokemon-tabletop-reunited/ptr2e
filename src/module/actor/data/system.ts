@@ -18,6 +18,7 @@ import { ActorSystemSchema, AttributeSchema, StatSchema, TypeField, GenderOption
 import { addDataFieldMigration, sluggify } from "@utils";
 import { AbilityReferenceSchema } from "@item/data/species.ts";
 import { PickableThing } from "@module/apps/pick-a-thing-prompt.ts";
+import { TokenPTR2e } from "@module/canvas/token/object.ts";
 
 class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeDataModel)) {
   static LOCALIZATION_PREFIXES = ["PTR2E.ActorSystem"];
@@ -511,13 +512,13 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
     }
 
     this.movement = Object.fromEntries([
-      ...this.parent.species.movement.primary.map<(readonly [string, Movement])>(m => [m.type, { method: m.type, value: m.value, type: "primary" }]),
-      ...this.parent.species.movement.secondary.map<(readonly [string, Movement])>(m => [m.type, { method: m.type, value: m.value, type: "secondary" }])
+      ...this.parent.species.movement.primary.map<(readonly [string, Movement])>(m => [m.type, { method: m.type, value: m.value, available: m.value, type: "primary" }]),
+      ...this.parent.species.movement.secondary.map<(readonly [string, Movement])>(m => [m.type, { method: m.type, value: m.value, available: m.value, type: "secondary" }])
     ]);
 
     // Every creature has a base overland of 3 at least.
     if ((Number(this.movement["overland"]?.value) || 0) <= 3) {
-      this.movement["overland"] = { method: "overland", value: 3, type: "secondary" };
+      this.movement["overland"] = { method: "overland", value: 3, available: 3, type: "secondary" };
     }
   }
 
@@ -745,6 +746,51 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
     }
     if (this.traits.has("wielder")) {
       this.inventory.held.max++;
+    }
+
+    this.registerSpentMovement();
+  }
+
+  registerSpentMovement(token: TokenPTR2e = this.parent.getActiveTokens()?.at(0) as TokenPTR2e ): void {
+    if(!token?.document || token.document.movementHistory.length === 0) return;
+    let highest: Movement[] = [];
+    for(const movement in this.movement) {
+      if(!highest.length) {
+        highest.push(this.movement[movement]);
+      }
+      else {
+        if(this.movement[movement].value > highest[0].value) {
+          highest = [this.movement[movement]];
+        }
+        else if(this.movement[movement].value === highest[0].value) {
+          highest.push(this.movement[movement]);
+        }
+      }
+      this.movement[movement].available = this.movement[movement].value;
+    }
+    for(const waypoint of token.document.movementHistory) {
+      if(waypoint.forced) continue;
+      const movement = this.movement[waypoint.action];
+      if(!movement) {
+        console.warn(`ActorSystemPTR2e#prepareDerivedData: No movement data for ${waypoint.action}`);
+        continue;
+      }
+      if(!waypoint.cost) continue;
+
+      if(!highest.find(m => m.method === waypoint.action)) {
+        movement.available -= waypoint.cost;
+      }
+
+      for(const m of highest) {
+        m.available -= waypoint.cost;
+      }
+
+      const newHighest: typeof highest = [];
+      for(const m in this.movement) {
+        this.movement[m].available = Math.min(this.movement[m].available, highest[0].available);
+        if(this.movement[m].available == highest[0].available) newHighest.push(this.movement[m]);
+      }
+      highest = newHighest;
     }
   }
 

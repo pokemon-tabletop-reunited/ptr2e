@@ -138,6 +138,9 @@ declare global {
          */
         protected _sortCombatants(a: Combatant<this>, b: Combatant<this>): number;
 
+        clearMovementHistories(combatants?: Iterable<Combatant<this>>): Promise<void>;
+        protected _clearMovementHistoryOnStartTurn(combatant: Combatant<this>, context: object): Promise<void>;
+
         /* -------------------------------------------- */
         /*  Event Handlers                              */
         /* -------------------------------------------- */
