@@ -1,0 +1,61 @@
+{
+  "folder": "lzLExT1c5IqNcbnB",
+  "name": "Break-Up Song",
+  "type": "perk",
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "Fox"
+      ],
+      "notes": ""
+    },
+    "actions": [
+      {
+        "name": "Break-Up Song Action (#1)",
+        "slug": "break-up-song",
+        "description": "<p>The user can cure nearby allies of @Affliction[charmed].</p>",
+        "traits": [],
+        "type": "generic",
+        "img": "systems/ptr2e/img/perk-icons/Musician.svg",
+        "range": {
+          "target": "emanation",
+          "distance": 5,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "simple",
+          "powerPoints": 3
+        }
+      }
+    ],
+    "description": "<p>The user can cure nearby allies of @Affliction[charmed].</p>",
+    "traits": [],
+    "prerequisites": [
+      {
+        "gte": [
+          "{actor|skills.singing.mod}",
+          40
+        ]
+      }
+    ],
+    "autoUnlock": [],
+    "cost": 2,
+    "design": {
+      "arena": "social",
+      "approach": "power",
+      "archetype": "musician"
+    },
+    "global": true,
+    "webs": [],
+    "nodes": []
+  },
+  "img": "systems/ptr2e/img/perk-icons/Musician.svg",
+  "effects": [],
+  "flags": {},
+  "_id": "ecTtuQNB6QPAwGwU"
+}
