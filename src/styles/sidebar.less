@@ -1,55 +1,75 @@
-.combat-sidebar .combat-tracker {
-  overflow-x: hidden;
-
-  .combatant.preview {
-    filter: opacity(0.5);
-    padding: 0.25rem;
-    height: 48px;
-
-    .token-image {
-      height: calc(48px - 0.5rem);
-      object-fit: contain;
-    }
-
-    .token-name {
-      height: calc(48px - 0.5rem);
-
-      h4 {
-        flex: 0 0 16px;
-        line-height: 16px;
-      }
-
-      .combatant-controls {
-        flex: 0 0 12px;
-      }
-    }
-
-    .token-initiative {
-      height: calc(48px - 0.5rem);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    @keyframes move-right-left {
-      0% {
-        transform: translateX(0);
-      }
-
-      50% {
-        transform: translateX(10px);
-      }
-
-      100% {
-        transform: translateX(0);
-      }
-    }
-
-    animation: move-right-left 2.5s linear infinite;
+.combat-sidebar {
+  .combat-tracker-header {
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border-theme-color);
+    border-radius: 0 0 6px 6px;
   }
 
-  .token-resource {
-    font-size: small;
-    color: var(--color-light-5)
+  .combat-tracker {
+    overflow-x: hidden;
+  
+    .combatant.preview {
+      filter: opacity(0.5);
+      padding: 0.25rem;
+      height: 48px;
+  
+      .token-image {
+        height: calc(48px - 0.5rem);
+        object-fit: contain;
+      }
+  
+      .token-name {
+        height: calc(48px - 0.5rem);
+  
+        h4 {
+          flex: 0 0 16px;
+          line-height: 16px;
+        }
+  
+        .combatant-controls {
+          flex: 0 0 12px;
+        }
+      }
+  
+      .token-initiative {
+        height: calc(48px - 0.5rem);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+  
+      @keyframes move-right-left {
+        0% {
+          transform: translateX(0);
+        }
+  
+        50% {
+          transform: translateX(10px);
+        }
+  
+        100% {
+          transform: translateX(0);
+        }
+      }
+  
+      animation: move-right-left 2.5s linear infinite;
+    }
+  
+    .token-resource {
+      font-size: small;
+      color: var(--color-light-5)
+    }
   }
+}
+
+.directory .directory-header {
+  margin-block: unset;
+  padding-block: 6px;
+  margin-bottom: 2px;
+  border-bottom: 1px solid var(--border-theme-color);
+  border-radius: 0 0 6px 6px;
+}
+
+.directory .directory-header search input {
+  background: var(--input-background-color);
 }

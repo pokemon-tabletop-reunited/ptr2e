@@ -292,6 +292,14 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
         backpack: new fields.SchemaField({
           max: new fields.NumberField({ required: true, initial: 0, min: 0, label: "PTR2E.FIELDS.inventory.backpack.max.label", hint: "PTR2E.FIELDS.inventory.backpack.max.hint" }),
         })
+      }),
+      movementType: new fields.StringField({
+        required: true,
+        initial: "overland",
+        choices: Object.entries(CONFIG.PTR.movementTypes).reduce(
+          (acc, [type, {label}]) => ({ ...acc, [type]: label }),
+          {} as Record<string, string>
+        ),
       })
     };
   }
@@ -826,6 +834,7 @@ interface ActorSystemPTR2e extends ModelPropsFromSchema<ActorSystemSchema> {
   }
 
   movement: Record<string, Movement>;
+  movementType: string;
 
   skills: Collection<SkillPTR2e> & Record<string, { value?: number, rvs?: number } | undefined>;
 

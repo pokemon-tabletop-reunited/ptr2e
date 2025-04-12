@@ -56,6 +56,13 @@ class TokenDocumentPTR2e<TParent extends ScenePTR2e | null = ScenePTR2e | null> 
     return anyoneCanSee.includes(nameDisplayMode) || this.actor?.alliance === "party";
   }
 
+  get movementType() {
+    if(this.actor) return this.actor.movementType;
+    const type = this.getFlag("ptr2e", "movementType") as string;
+    if(type in CONFIG.Token.movement.actions) return type;
+    else return CONFIG.Token.movement.defaultAction;
+  }
+
   protected override _initialize(options?: Record<string, unknown>): void {
     this.initialized = false;
     this.auras = new Map();

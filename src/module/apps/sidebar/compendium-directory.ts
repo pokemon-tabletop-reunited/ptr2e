@@ -20,7 +20,7 @@ export class CompendiumDirectoryPTR2e extends CompendiumDirectory {
     //@ts-expect-error - Untyped property
     context.buttons.push({
       type: "button",
-      cssClass: "plain compendium-browser-btn",
+      cssClass: "compendium-browser-btn",
       icon: "fa-solid fa-magnifying-glass",
       label: game.i18n.localize("PTR2E.CompendiumBrowser.Title"),
       action: "openCompendiumBrowser",

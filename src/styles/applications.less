@@ -1981,9 +1981,11 @@
               align-items: center;
               text-align: center;
 
-              label,
+              label {
+                flex: 0 0 35%;
+              }
               input {
-                flex: 0 0 45%;
+                flex: 0 0 25%;
               }
             }
           }
@@ -8761,5 +8763,50 @@
     -moz-user-select: text;
     -ms-user-select: text;
     user-select: text;
+  }
+}
+
+#token-hud .token-movement {
+  position: relative;
+  display: flex;
+  gap: 5px;
+
+  button {
+    height: auto;
+  }
+
+  .movement-modes {
+    --movement-columns: 2;
+    --movement-size: 130px;
+    visibility: hidden;
+    position: absolute;
+    bottom: 45px;
+    left: calc(-1* var(--column-width) - 170px);
+    display: grid;
+    grid-template-columns: repeat(var(--movement-columns), var(--movement-size));
+    padding: 3px;
+    gap: 3px;
+    background: var(--color-cool-5-90);
+    box-shadow: 0 0 15px #000;
+    border: 1px solid var(--color-cool-4);
+    border-radius: 4px;
+    pointer-events: all;
+    
+    &.active {
+      visibility: visible;
+    }
+
+    .control-icon {
+      text-align: left;
+      cursor: var(--cursor-pointer);
+      color: var(--button-text-color);
+      opacity: 0.5;
+      width: inherit;
+      font-size: 20px;
+
+      &.active, &:hover {
+        opacity: 1;
+      }
+    }
   }
 }

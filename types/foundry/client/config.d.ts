@@ -2,6 +2,12 @@ import type * as TinyMCE from "tinymce";
 import { ActiveEffectSource } from "../common/documents/active-effect.js";
 
 declare global {
+  interface TokenMovementAction {
+    label: string;
+    icon: string;
+    deriveDifficulty?: (nonDerivedDifficulties: Record<string, number>) => number;
+  }
+
     interface Config<
         TAmbientLightDocument extends AmbientLightDocument<TScene | null>,
         TActiveEffect extends ActiveEffect<TActor | TItem | null>,
@@ -269,6 +275,13 @@ declare global {
             objectClass: ConstructorOf<NonNullable<TTokenDocument["object"]>>;
             layerClass: ConstructorOf<NonNullable<TTokenDocument["object"]>["layer"]>;
             prototypeSheetClass: ConstructorOf<TTokenDocument["sheet"]>;
+            movement: {
+              TerrainData: any;
+              actions: Record<string, TokenMovementAction>;
+              defaultAction: string;
+              defaultSpeed: number;
+            }
+            hudClass: unknown;
         };
 
         /** Configuration for the Wall embedded document type and its representation on the game Canvas */

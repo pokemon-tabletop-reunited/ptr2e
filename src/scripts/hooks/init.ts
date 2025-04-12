@@ -73,6 +73,9 @@ export const Init: PTRHook = {
       };
       CONFIG.Token.documentClass = PTRCONFIG.Token.documentClass;
       CONFIG.Token.objectClass = PTRCONFIG.Token.objectClass;
+      CONFIG.Token.hudClass = PTRCONFIG.Token.hudClass;
+      CONFIG.Token.movement.defaultAction = "overland";
+      CONFIG.Token.movement.actions = PTRCONFIG.movementTypes;
       CONFIG.Dice.rolls = CONFIG.Dice.rolls.concat(PTRCONFIG.Dice.rolls);
 
       CONFIG.Folder.documentClass = PTRCONFIG.Folder.documentClass;

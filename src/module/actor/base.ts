@@ -386,6 +386,7 @@ class ActorPTR2e<
 
     // Todo: Add appropriate `self:` options to the rollOptions
     this.rollOptions.addOption("self", `type:${this.type}`);
+    this.rollOptions.addOption("self", `state:${this.movementType}`);
 
     this.system.type.effectiveness = this._calculateEffectiveness();
 
@@ -1068,6 +1069,19 @@ class ActorPTR2e<
 
   isEnemyOf(actor: ActorPTR2e): boolean {
     return this.alliance !== null && actor.alliance !== null && this.alliance !== actor.alliance;
+  }
+
+  get movementType() {
+    const type = this.system.movementType;
+    if(type in CONFIG.Token.movement.actions) return type;
+    else return CONFIG.Token.movement.defaultAction;
+  }
+
+  hasMovementType(type: string): boolean {
+    for(const record in this.system.movement) {
+      if(this.system.movement[record].method === type) return true;
+    }
+    return false;
   }
 
   async spendLuck(amount: number, pendingUpdates: Record<string, unknown>[] = [], notifications: { name: string, amount: number, leftover: number }[] = []): Promise<{ name: string, amount: number, leftover: number }[]> {

@@ -38,6 +38,7 @@ import { HabitatRollTable } from "@system/habitat-table.ts";
 import { RollTableDirectoryPTR2e } from "@module/apps/sidebar/rolltables-directory.ts";
 import AdvancementActiveEffectSystem from "@module/effects/data/advancement.ts";
 import { PickableThing } from "@module/apps/pick-a-thing-prompt.ts";
+import { TokenHUDPTR2e } from "@module/apps/token-hud.ts";
 
 export const PTRCONFIG = {
   ActiveEffect: {
@@ -151,7 +152,8 @@ export const PTRCONFIG = {
   Token: {
     documentClass: TokenDocumentPTR2e,
     objectClass: TokenPTR2e,
-    trackableAttributes
+    trackableAttributes,
+    hudClass: TokenHUDPTR2e
   },
   Scene: {
     documentClass: ScenePTR2e,
@@ -197,5 +199,37 @@ export const PTRCONFIG = {
   utils: {
     predicate: Predicate
   },
-  options: {} as Record<string, PickableThing[]>
+  options: {} as Record<string, PickableThing[]>,
+  movementTypes: {
+    overland: {
+      label: "PTR2E.TokenMovement.Actions.Overland",
+      icon: "fa-solid fa-fw fa-person-walking",
+      speedOption: true
+    },
+    burrow:{
+      label: "PTR2E.TokenMovement.Actions.Burrow",
+      icon: "fa-solid fa-fw fa-shovel",
+      speedOption: true
+    },
+    swim: {
+      label: "PTR2E.TokenMovement.Actions.Swim",
+      icon: "fa-solid fa-fw fa-fish",
+      speedOption: true
+    },
+    flight: {
+      label: "PTR2E.TokenMovement.Actions.Flight",
+      icon: "fa-solid fa-fw fa-dove",
+      speedOption: true
+    },
+    threaded: {
+      label: "PTR2E.TokenMovement.Actions.Threaded",
+      icon: "fa-solid fa-fw fa-reel",
+      speedOption: true
+    },
+    teleport: {
+      label: "PTR2E.TokenMovement.Actions.Teleport",
+      icon: "fa-solid fa-fw fa-transporter",
+      speedOption: false
+    },
+  }
 }

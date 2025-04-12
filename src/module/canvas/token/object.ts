@@ -172,6 +172,25 @@ class TokenPTR2e<TDocument extends TokenDocumentPTR2e = TokenDocumentPTR2e> exte
       game.ptr.tokenPanel.token = (game.user.character?.getActiveTokens().at(0) as this) ?? null;
     }
   }
+
+  /** @inheritdoc */
+  _getKeyboardMovementAction() {
+    return this.document.movementType;
+  }
+
+  /** @inheritdoc */
+  _getHUDMovementAction() {
+    return this.document.movementType;
+  }
+
+  /** @inheritdoc */
+  _getDragWaypointProperties() {
+    const action = this.document.movementType;
+    return {
+      action,
+      teleport: action === "teleport",
+    };
+  }
 }
 
 export { TokenPTR2e }
