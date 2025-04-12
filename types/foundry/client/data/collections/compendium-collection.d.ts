@@ -177,16 +177,21 @@ declare global {
     type CompendiumUUID = `Compendium.${string}.${string}` | `Compendium.${string}.${CompendiumDocumentType}.${string}`;
     type DocumentUUID = WorldDocumentUUID | CompendiumUUID | TokenDocumentUUID;
 
+    /**@deprecated */
     function fromUuid(uuid: Maybe<CompendiumUUID>, relative?: Maybe<ClientDocument>): Promise<CompendiumDocument | null>;
+    /**@deprecated */
     function fromUuid(
         uuid: Maybe<ActorUUID>,
         relative?: Maybe<ClientDocument>,
     ): Promise<Actor<TokenDocument<Scene> | null> | null>;
+    /**@deprecated */
     function fromUuid(
         uuid: Maybe<ItemUUID>,
         relative?: Maybe<ClientDocument>,
     ): Promise<Item<Actor<TokenDocument<Scene> | null>> | null>;
+    /**@deprecated */
     function fromUuid(uuid: Maybe<TokenDocumentUUID>, relative?: Maybe<ClientDocument>): Promise<TokenDocument<Scene> | null>;
+    /**@deprecated */
     function fromUuid<TDocument extends ClientDocument>(
         uuid: Maybe<string>,
         options?: {relative?: Maybe<ClientDocument>},

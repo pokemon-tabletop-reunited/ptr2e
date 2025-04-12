@@ -736,6 +736,35 @@ export class ApplicationV2<
      * @internal
      */
     _awaitTransition(element: HTMLElement, timeout: number): Promise<void>;
+
+    /**
+     * Create a ContextMenu instance used in this Application.
+     * @param {() => ContextMenuEntry[]} handler  A handler function that provides initial context options
+     * @param {string} selector                   A CSS selector to which the ContextMenu will be bound
+     * @param {object} [options]                  Additional options which affect ContextMenu construction
+     * @param {HTMLElement} [options.container]   A parent HTMLElement which contains the selector target
+     * @param {string} [options.hookName]         The hook name
+     * @param {boolean} [options.parentClassHooks=true]  Whether to call hooks for the parent classes in the inheritance
+     *                                                   chain.
+     * @returns {ContextMenu|null}                A created ContextMenu or null if no menu items were defined
+     * @protected
+     */
+    _createContextMenu(
+        handler: () => ContextMenuEntry[],
+        selector: string,
+        options?: {
+          container?: HTMLElement;
+          hookName?: string;
+          parentClassHooks?: boolean;
+        } & Record<string, unknown>
+    ): ContextMenu | null;
+
+    /**
+     * Wait for any images in the given element to load.
+     * @param {HTMLElement} element  The element.
+     * @returns {Promise<void>}
+     */
+    static waitForImages(element: HTMLElement): Promise<void>;
 }
 
 type AppV2Constructor<

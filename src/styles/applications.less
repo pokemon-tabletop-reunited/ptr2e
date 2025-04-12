@@ -2366,13 +2366,13 @@
 
       background: var(--owner-folder-background);
       border: 3px solid var(--owner-folder-background) !important;
-      border-top: unset !important;
 
-      .document-name {
+      .entry-name {
         flex: 1;
         display: flex;
         justify-content: center;
         margin: unset;
+        line-height: normal;
 
         span {
           color: var(--color-text-light-highlight);
@@ -2405,7 +2405,7 @@
         }
       }
 
-      .entry-name.document-name {
+      .entry-name.ellipsis {
         line-height: normal;
         display: flex;
         flex-direction: column;
@@ -6024,7 +6024,7 @@
   
       .window-content {
         grid-template-columns: unset;
-        grid-template-rows: 44px auto;
+        grid-template-rows: 55px auto;
         grid-template-areas:
           "nav" "main";
   
@@ -6618,7 +6618,7 @@
   
       .window-content {
         grid-template-columns: unset;
-        grid-template-rows: 44px auto;
+        grid-template-rows: 55px auto;
         grid-template-areas:
           "nav" "main";
   

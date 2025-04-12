@@ -48,7 +48,7 @@ export class FoldersTour extends PTRTour {
             }
           }
         ])
-
+        //@ts-expect-error - Outdated types
         await dialog.render({ parts: ["members"] })
         //@ts-expect-error - Bypass protected property
         await ui.actors._render(true)
@@ -88,7 +88,7 @@ export class FoldersTour extends PTRTour {
       }
       case "opened-party-sheet": {
         const { folder, tourSan, tourSanVoltorb } = await this.getDocuments();
-        
+
         await Actor.updateDocuments([
           {
             _id: tourSan.id,
@@ -119,7 +119,7 @@ export class FoldersTour extends PTRTour {
       }
       case "organize-party": {
         const { folder, tourSan, tourSanVoltorb } = await this.getDocuments();
-        
+
         await Actor.updateDocuments([
           {
             _id: tourSan.id,
@@ -207,7 +207,7 @@ export class FoldersTour extends PTRTour {
             }
           }
         ])
-
+        //@ts-expect-error - Outdated types
         await dialog.render({ parts: ["members"] })
         //@ts-expect-error - Bypass protected property
         await ui.actors._render(true)
@@ -217,7 +217,7 @@ export class FoldersTour extends PTRTour {
       }
       case "open-team-sheet": {
         const { folder, tourSan, tourSanVoltorb } = await this.getDocuments();
-        
+
         await Actor.updateDocuments([
           {
             _id: tourSan.id,
@@ -248,7 +248,7 @@ export class FoldersTour extends PTRTour {
       }
       case "opened-team-sheet": {
         const { folder, tourSan, tourSanVoltorb } = await this.getDocuments();
-        
+
         await Actor.updateDocuments([
           {
             _id: tourSan.id,
@@ -354,7 +354,7 @@ export class FoldersTour extends PTRTour {
 
   protected createDialog() {
     CONFIG.PTR.Folder.documentClass.createDialog(
-      { type: "Actor" },
+      { type: "Actor" }, {},
       {
         top: $('[data-tab="actors"] button.create-folder')[0].offsetTop,
         left:

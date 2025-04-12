@@ -1,17 +1,14 @@
-import { DocumentSheetConfiguration, DocumentSheetV2 } from "@item/sheets/document.ts";
+import { DocumentSheetConfiguration } from "@item/sheets/document.ts";
 import FolderPTR2e from "./document.ts";
 import { ActorPTR2e } from "@actor";
 import { SocketRequestData } from "@scripts/hooks/socket.ts";
 import { DocumentSheetConfigurationExpanded } from "@module/apps/appv2-expanded.ts";
 
-class FolderConfigPTR2e extends foundry.applications.api.HandlebarsApplicationMixin(
-  DocumentSheetV2<FolderPTR2e>
-) {
-  static override DEFAULT_OPTIONS = {
+class FolderConfigPTR2e extends FolderConfig {
+  static DEFAULT_OPTIONS = {
     classes: ["folder-edit"],
     position: {
-      width: 360,
-      height: "auto",
+      width: 480
     },
     form: {
       handler: FolderConfigPTR2e.#onSubmit,
@@ -24,11 +21,11 @@ class FolderConfigPTR2e extends foundry.applications.api.HandlebarsApplicationMi
     return true;
   }
 
-  override get isVisible() {
+  get isVisible() {
     return true;
   }
 
-  static override PARTS: Record<string, foundry.applications.api.HandlebarsTemplatePart> = {
+  static PARTS: Record<string, foundry.applications.api.HandlebarsTemplatePart> = {
     base: {
       id: "base",
       template: "systems/ptr2e/templates/folder/folder-edit.hbs",
@@ -37,72 +34,39 @@ class FolderConfigPTR2e extends foundry.applications.api.HandlebarsApplicationMi
       id: "members",
       template: "systems/ptr2e/templates/folder/folder-members.hbs",
     },
-    submit: {
-      id: "submit",
-      template: "systems/ptr2e/templates/folder/folder-submit.hbs",
-    },
+    footer: { template: "templates/generic/form-footer.hbs" }
   };
-
-  override get id() {
-    return this.document.id ? super.id : "folder-create";
-  }
-
-  /* -------------------------------------------- */
-
-  override get title() {
-    if (this.document.id)
-      return `${game.i18n.localize("FOLDER.Update")}: ${this.document.name}`;
-    return game.i18n.localize("FOLDER.Create");
-  }
-
-  /* -------------------------------------------- */
-
-  // override async close(options={}) {
-  //     if ( !this.options.form?.submitOnChange ) this.options.resolve?.(null);
-  //     return super.close(options);
-  // }
 
   private owner: ActorPTR2e | null = null;
   private team: ActorPTR2e[] = [];
 
-  override async _prepareContext(options?: DocumentSheetConfiguration<FolderPTR2e>) {
-    const context = await super._prepareContext(options);
-    const folder = this.document.toObject();
-    //@ts-expect-error - This property exists
-    const label = game.i18n.localize(Folder.implementation.metadata.label);
+  async _prepareContext(options?: DocumentSheetConfiguration<FolderPTR2e>) {
+    //@ts-expect-error - Outdated types
+    const context = await super._prepareContext(options) as Record<string, unknown> & {document: FolderPTR2e, team: {actor: ActorPTR2e, folder: FolderPTR2e}[]}
+    const folder = context.document
 
-    const owner = this.owner ?? (this.document.owner ? await fromUuid<ActorPTR2e>(this.document.owner) : null)
-    const team = [];
-    for (const memberUuid of this.document.team) {
-      const actor = await fromUuid<ActorPTR2e>(memberUuid);
+    context.owner = this.owner ?? (folder.owner ? await fu.fromUuid<ActorPTR2e>(folder.owner) : null)
+    context.team = [];
+    for (const memberUuid of folder.team) {
+      const actor = await fu.fromUuid<ActorPTR2e>(memberUuid);
       if (actor && actor instanceof ActorPTR2e) {
-        team.push({ actor, folder: actor.folder });
+        context.team.push({ actor, folder: actor.folder as FolderPTR2e});
       }
     }
+    for(const member of this.team) {
+      if(context.team.find(m => m.actor.id === member.id)) continue;
+      context.team.push({ actor: member, folder: member.folder as FolderPTR2e });
+    }
 
-    return {
-      ...context,
-      folder: folder,
-      owner,
-      team,
-      name: folder._id ? folder.name : "",
-      newName: game.i18n.format("DOCUMENT.New", { type: label }),
-      safeColor:
-        typeof folder.color === "string"
-          ? folder.color
-          : //@ts-expect-error - This property exists
-          folder.color?.css ?? "#000000",
-      sortingModes: { a: "FOLDER.SortAlphabetical", m: "FOLDER.SortManual" },
-      submitText: game.i18n.localize(folder._id ? "FOLDER.Update" : "FOLDER.Create"),
-      fields: this.document.schema.fields
-    };
+    return context;
   }
 
-  override _attachPartListeners(
+  _attachPartListeners(
     partId: string,
     htmlElement: HTMLElement,
     _options: foundry.applications.api.HandlebarsRenderOptions
   ): void {
+    // @ts-expect-error - Outdated types
     super._attachPartListeners(partId, htmlElement, _options);
     if (partId === "members") {
       const ownerFieldset = htmlElement.querySelector<HTMLFieldSetElement>("fieldset.owner");
@@ -141,6 +105,7 @@ class FolderConfigPTR2e extends foundry.applications.api.HandlebarsApplicationMi
       }
     }
 
+    //@ts-expect-error - Outdated types
     return this.render({ parts: ["members"] }).then(_ => { this.position.height = "auto"; return _ })
   }
 
@@ -163,7 +128,8 @@ class FolderConfigPTR2e extends foundry.applications.api.HandlebarsApplicationMi
     if (!this.document.id) this.owner = actor;
     else await actor.update({ "folder": this.document.id, "system.party.ownerOf": this.document.id, "system.party.partyMemberOf": null });
 
-    return this.render({ parts: ["members"] }).then(_ => { this.position.height = "auto"; return _ })
+    //@ts-expect-error - Outdated types
+    return this.render({ parts: ["members"] });//.then(_ => { this.position.height = "auto"; return _ })
   }
 
   static async _onDropTeam(this: FolderConfigPTR2e, event: DragEvent) {
@@ -178,7 +144,8 @@ class FolderConfigPTR2e extends foundry.applications.api.HandlebarsApplicationMi
     if (!this.document.id) this.team.push(actor);
     else await actor.update({ "system.party.teamMemberOf": Array.from(new Set(actor.system.party.teamMemberOf.concat(this.document.id))) });
 
-    return this.render({ parts: ["members"] }).then(_ => { this.position.height = "auto"; return _ })
+    //@ts-expect-error - Outdated types
+    return this.render({ parts: ["members"] });//.then(_ => { this.position.height = "auto"; return _ })
   }
 
   static async #onSubmit(
@@ -262,6 +229,8 @@ class FolderConfigPTR2e extends foundry.applications.api.HandlebarsApplicationMi
       this.options.resolve(folder);
     return folder;
   }
+
+  declare document: FolderPTR2e
 }
 
 export default FolderConfigPTR2e;

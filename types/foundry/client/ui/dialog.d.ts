@@ -204,4 +204,13 @@ interface ConfirmDialogParameters<Y = true, N = false> {
     options?: ApplicationOptions;
     top?: number;
     left?: number;
+    window?: Record<string, unknown>;
+    position?: {
+        width?: number;
+        height?: number;
+        top?: number;
+        left?: number;
+        resizable?: boolean;
+        minimizable?: boolean;
+    }
 }

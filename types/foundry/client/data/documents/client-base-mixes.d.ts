@@ -5079,7 +5079,7 @@ export class ClientBaseFolder extends foundry.documents.BaseFolder {
     ): void;
 
     /** Gets the default new name for a Document */
-    static defaultName(): string;
+    static defaultName(options?: Record<string, unknown>): string;
 
     /* -------------------------------------------- */
     /*  Importing and Exporting                     */

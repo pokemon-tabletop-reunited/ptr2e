@@ -1,3 +1,18 @@
+export function fromUuid(uuid: Maybe<CompendiumUUID>, relative?: Maybe<ClientDocument>): Promise<CompendiumDocument | null>;
+export function fromUuid(
+    uuid: Maybe<ActorUUID>,
+    relative?: Maybe<ClientDocument>,
+): Promise<Actor<TokenDocument<Scene> | null> | null>;
+export function fromUuid(
+    uuid: Maybe<ItemUUID>,
+    relative?: Maybe<ClientDocument>,
+): Promise<Item<Actor<TokenDocument<Scene> | null>> | null>;
+export function fromUuid(uuid: Maybe<TokenDocumentUUID>, relative?: Maybe<ClientDocument>): Promise<TokenDocument<Scene> | null>;
+export function fromUuid<TDocument extends ClientDocument>(
+    uuid: Maybe<string>,
+    options?: {relative?: Maybe<ClientDocument>},
+): Promise<TDocument | null>;
+
 /**
  * Wrap a callback in a debounced timeout.
  * Delay execution of the callback function until the function has not been called for delay milliseconds
