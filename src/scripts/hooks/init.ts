@@ -90,6 +90,7 @@ export const Init: PTRHook = {
 
       CONFIG.ui.actors = PTRCONFIG.ui.actors;
       CONFIG.ui.compendium = PTRCONFIG.ui.compendium;
+      CONFIG.ui.settings = PTRCONFIG.ui.settings;
 
       if (game.release.generation === 12) {
         CONFIG.ui.combat = PTRCONFIG.ui.combat
@@ -97,7 +98,6 @@ export const Init: PTRHook = {
         //@ts-expect-error - Typing issue
         CONFIG.ui.tables = PTRCONFIG.ui.tables;
         CONFIG.ui.perksTab = PTRCONFIG.ui.perks;
-        CONFIG.ui.settings = PTRCONFIG.ui.settings;
       }
 
       // Register custom sheets

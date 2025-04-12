@@ -1,6 +1,6 @@
+//TODO: Refactor this file & functionality to be not only AppV2 compatible, but also less hacky.
 import { HabitatRollTable } from "@system/habitat-table.ts";
 
-/** TODO: Extend CompendiumDirectory to support a search bar */
 export class RollTableDirectoryPTR2e extends RollTableDirectory {
   static override get defaultOptions() {
     return {
