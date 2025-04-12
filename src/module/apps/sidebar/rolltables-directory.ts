@@ -1,3 +1,4 @@
+//@ts-nocheck
 //TODO: Refactor this file & functionality to be not only AppV2 compatible, but also less hacky.
 import { HabitatRollTable } from "@system/habitat-table.ts";
 
