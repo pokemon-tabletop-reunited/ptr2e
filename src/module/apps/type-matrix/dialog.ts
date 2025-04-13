@@ -16,6 +16,7 @@ export class TypeMatrixDialog extends foundry.applications.api.HandlebarsApplica
       title: "PTR2E.TypeMatrix.Dialog.Title",
       minimizable: false,
       resizable: false,
+      contentClasses: ["standard-form"]
     },
     form: {
       handler: TypeMatrixDialog.onSubmit,
@@ -148,13 +149,9 @@ export class TypeMatrixDialog extends foundry.applications.api.HandlebarsApplica
 
     const typeData = {
       images: data.images,
-      effectiveness: defaultEffectiveness.untyped.effectiveness
+      effectiveness: app.cache[data.type]?.effectiveness ?? defaultEffectiveness.untyped.effectiveness
     }
-
     app.cache[data.type] = typeData;
-    for (const key in app.cache) {
-      app.cache[key as keyof TypeEffectiveness]!.effectiveness[data.type] = 1;
-    }
 
     return void app.render({ parts: ["content"] });
   }
