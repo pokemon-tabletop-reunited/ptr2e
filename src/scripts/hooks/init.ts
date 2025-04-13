@@ -95,11 +95,11 @@ export const Init: PTRHook = {
       CONFIG.ui.combat = PTRCONFIG.ui.combat
       CONFIG.ui.compendium = PTRCONFIG.ui.compendium;
       CONFIG.ui.settings = PTRCONFIG.ui.settings;
+      //@ts-expect-error - Typing issue
+      CONFIG.ui.tables = PTRCONFIG.ui.tables;
 
       if (game.release.generation === 12) {
         CONFIG.ui.items = PTRCONFIG.ui.items;
-        //@ts-expect-error - Typing issue
-        CONFIG.ui.tables = PTRCONFIG.ui.tables;
         CONFIG.ui.perksTab = PTRCONFIG.ui.perks;
       }
 
