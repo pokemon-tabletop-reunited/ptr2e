@@ -170,7 +170,10 @@ class TokenPTR2e<TDocument extends TokenDocumentPTR2e = TokenDocumentPTR2e> exte
     super._onRelease(options);
 
     //@ts-expect-error - Incomplete types
-    if (game.ready && ui.hotbar.rendered) ui.hotbar.token = (game.user.character?.getActiveTokens().at(0) as this) ?? null;
+    if (game.ready && ui.hotbar.rendered) {
+      //@ts-expect-error - Incomplete types
+      ui.hotbar.token = (game.user.character?.getActiveTokens().at(0) as this) ?? null;
+    }
     
   }
 

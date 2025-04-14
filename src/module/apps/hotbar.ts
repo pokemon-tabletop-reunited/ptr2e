@@ -3,16 +3,22 @@ import { SkillsComponent } from "@actor/components/skills-component.ts";
 import { ActionPTR2e, AttackPTR2e } from "@data";
 import { ActiveEffectPTR2e } from "@effects";
 import { TokenPTR2e } from "@module/canvas/token/object.ts";
+import { Statistic } from "@system/statistics/statistic.ts";
+import { formatSlug } from "@utils";
 import { ApplicationRenderOptions } from "types/foundry/common/applications/_types.js"
 import { HandlebarsRenderOptions } from "types/foundry/common/applications/api/handlebars-application.ts";
 
 export class HotbarPTR2e extends Hotbar {
   static override DEFAULT_OPTIONS = {
     actions: {
+      execute: HotbarPTR2e.#onExecute,
       party: HotbarPTR2e.#onToggleParty,
       movement: HotbarPTR2e.#onToggleMovement,
       passives: HotbarPTR2e.#onTogglePassives,
       effects: HotbarPTR2e.#onToggleEffects,
+      attacks: HotbarPTR2e.#onAttackTab,
+      other: HotbarPTR2e.#onOtherTab,
+      skills: HotbarPTR2e.#onSkillsTab,
     }
   }
 
@@ -66,7 +72,7 @@ export class HotbarPTR2e extends Hotbar {
     if (this._token === value) return;
     this._token = value;
     //@ts-expect-error - Incomplete types
-    this.render({parts: ["left"]});;
+    this.render({ parts: ["left", "hotbar"] });;
   }
 
   private _token: TokenPTR2e | null;
@@ -74,10 +80,22 @@ export class HotbarPTR2e extends Hotbar {
   /** The currently rendered side tab. */
   shown: "party" | "movement" | "passives" | "effects" | null = null;
 
+  get tab() {
+    return this._tab;
+  }
+  set tab(value: "slots" | "other" | "skills") {
+    if (this._tab === value) return;
+    this._tab = value;
+    //@ts-expect-error - Incomplete types
+    this.render({ parts: ["left", "hotbar"] });
+  }
+
+  private _tab: "slots" | "other" | "skills" = "slots";
+
   override async _prepareContext(options: ApplicationRenderOptions): Promise<Hotbar.HotbarContext> {
     const context = await super._prepareContext(options);
 
-    if(this.token?.actor) {
+    if (this.token?.actor) {
       const actor = this.token.actor;
       context.actions = {
         passives: actor.actions.passive,
@@ -93,21 +111,68 @@ export class HotbarPTR2e extends Hotbar {
   protected override async _preparePartContext(partId: string, context: Hotbar.HotbarContext, options: HandlebarsRenderOptions): Promise<object> {
     await super._preparePartContext(partId, context, options);
 
-    if(partId === "left") {
+    if (partId === "left") {
       context.toggle = this.shown;
+      context.tab = this.tab;
 
-      if(!this.token) return context;
+      if (!this.token) return context;
       const actor = this.token.actor;
-      if(!actor) return context;
+      if (!actor) return context;
       context.actor = actor;
       const party = context.party = actor.party;
       context.isOwner = party?.owner == actor;
       context.effects = actor.effects.contents as ActiveEffectPTR2e[] ?? [];
-      context.skills = SkillsComponent.prepareSkillsData(actor).skills.favourites.flatMap(s => s.skills);
     }
 
     if (partId === "hotbar") {
-      context.slots = context.slots.map((slot: Hotbar.HotbarSlotData) => {
+      const skills = this.token?.actor ? SkillsComponent.prepareSkillsData(this.token.actor).skills.favourites.flatMap(s => s.skills) : [];
+      context.slots = context.slots.map((slot: Hotbar.HotbarSlotData, i) => {
+        const index = i + (this.page - 1) * 10;
+        if (!this.token?.actor) return slot;
+        if (this.tab === "slots" && index <= 5) {
+          const actor = this.token.actor;
+          const attack = actor.attacks.actions[index];
+          if (attack) return {
+            key: index < 9 ? index + 1 : 0,
+            img: attack.img ?? null,
+            cssClass: "full attack",
+            tooltip: attack.name,
+            ariaLabel: attack.name,
+            attack,
+            macro: null,
+            slot: index + 1
+          };
+        }
+        else if (this.tab === "other") {
+          if (index < context.actions.other.length) {
+            const attack = context.actions.other[index];
+            return {
+              key: index < 9 ? index + 1 : 0,
+              img: attack.img ?? null,
+              cssClass: "full attack",
+              tooltip: attack.name,
+              ariaLabel: attack.name,
+              attack,
+              macro: null,
+              slot: index + 1
+            };
+          }
+        }
+        else if (this.tab === "skills") {
+          if (index < skills.length) {
+            const skill = skills[index];
+            return {
+              key: index < 9 ? index + 1 : 0,
+              img: "icons/svg/d20.svg",
+              cssClass: "full skill",
+              tooltip: `Roll ${formatSlug(skill.slug)}`,
+              ariaLabel: `Roll ${formatSlug(skill.slug)}`,
+              skill,
+              macro: null,
+              slot: index + 1
+            };
+          }
+        }
         return slot;
       });
     }
@@ -117,6 +182,81 @@ export class HotbarPTR2e extends Hotbar {
 
   protected override async _onRender(context: object, options: ApplicationRenderOptions): Promise<void> {
     await super._onRender(context, options);
+
+    this.#updateFadedUI();
+  }
+
+  protected override _attachPartListeners(partId: string, htmlElement: HTMLElement, options: HandlebarsRenderOptions): void {
+    super._attachPartListeners(partId, htmlElement, options);
+    if(partId === "right") {
+      const button = htmlElement.querySelector<HTMLButtonElement>(`[data-action="lock"]`);
+      if (button) {
+        button.addEventListener("click", () => this.#updateFadedUI(!this.locked));
+      }
+    }
+  }
+
+  #updateFadedUI(locked: boolean = this.locked) {
+    if (locked) {
+      this.element.classList.remove("faded-ui");
+    } else {
+      this.element.classList.add("faded-ui");
+    }
+  }
+
+  static async #onExecute(this: HotbarPTR2e, _event: PointerEvent, target: HTMLElement): Promise<void> {
+    const slot = await ( async () => {
+      if (this.tab === "slots" && this.token?.actor && this.page === 1) {
+        const attack = this.token.actor.attacks.actions[parseInt(target.dataset.slot!) - 1];
+        if (attack) return attack;
+      }
+      if (this.tab === "other" && this.token?.actor) {
+        const attack = await fu.fromUuid(target.dataset.uuid!) as unknown as AttackPTR2e;
+        if (attack) return attack;
+      }
+      if (this.tab === "skills" && this.token?.actor) {
+        const skill = this.token.actor.skills[target.dataset.skill!];
+        if (skill) return skill;
+      }
+
+      const slot = parseInt(this.element.dataset.slot!);
+      const macroId = game.user.hotbar[slot];
+      return macroId ? game.macros.get(macroId) ?? null : null
+    })();
+
+    // Create a temporary Macro
+    if (!slot) {
+      //@ts-expect-error - Incomplete types
+      const cls = fu.getDocumentClass("Macro");
+      const macro = new cls({ name: cls.defaultName({ type: "chat" }), type: "chat", scope: "global" });
+      const hotbarSlot = target.dataset.slot;
+      return void await macro.sheet.render({ force: true, hotbarSlot });
+    }
+
+    if (slot instanceof Macro) return void await slot.execute();
+
+    if (slot instanceof ActionPTR2e) {
+      return void await slot.roll();
+    }
+
+    if (slot instanceof Statistic) {
+      return void await slot.roll();
+    }
+  }
+
+  static async #onAttackTab(this: HotbarPTR2e) {
+    if(this.tab === "slots") return;
+    this.tab = "slots";
+  }
+
+  static async #onOtherTab(this: HotbarPTR2e) {
+    if(this.tab === "other") return;
+    this.tab = "other";
+  }
+
+  static async #onSkillsTab(this: HotbarPTR2e) {
+    if(this.tab === "skills") return;
+    this.tab = "skills";
   }
 
   /**
@@ -131,14 +271,14 @@ export class HotbarPTR2e extends Hotbar {
     //@ts-expect-error - Incomplete types
     await this.render({ parts: ["left"] });
 
-    for ( const [action, config] of Object.entries(this.#toggles) ) {
+    for (const [action, config] of Object.entries(this.#toggles)) {
       const button = this.element.querySelector<HTMLButtonElement>(`button[data-action="${action}"]`);
-      if ( !button ) continue;
+      if (!button) continue;
       const remove = config.state ? config.inactive : config.active;
       const add = config.state ? config.active : config.inactive;
       button.classList.remove(remove.icon);
       button.classList.add(add.icon);
-      if(config.state) button.classList.add("active");
+      if (config.state) button.classList.add("active");
       else button.classList.remove("active");
       button.dataset.tooltip = add.tooltip;
       button.setAttribute("aria-label", game.i18n.localize(add.tooltip));
@@ -171,6 +311,7 @@ declare global {
   namespace Hotbar {
     interface HotbarContext {
       toggle: string | null;
+      tab: string;
       isOwner: boolean;
       party: ActorPTR2e["party"] | null;
       effects: ActiveEffectPTR2e[];
@@ -183,6 +324,11 @@ declare global {
         slots: ActorPTR2e["attacks"]["actions"];
         other: AttackPTR2e[]
       };
+    }
+
+    interface HotbarSlotData {
+      attack?: AttackPTR2e | null;
+      skill?: Skill | null;
     }
   }
 }

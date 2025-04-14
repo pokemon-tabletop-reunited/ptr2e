@@ -27,8 +27,8 @@ declare global {
       macro: Macro | null;
       key: number;
       tooltip: string;
-      ariaLabel: string;
-      style: string;
+      ariaLabel?: string;
+      style?: string;
     }
   }
 
