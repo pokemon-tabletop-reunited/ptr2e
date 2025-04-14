@@ -19,6 +19,17 @@ export class HotbarPTR2e extends Hotbar {
       attacks: HotbarPTR2e.#onAttackTab,
       other: HotbarPTR2e.#onOtherTab,
       skills: HotbarPTR2e.#onSkillsTab,
+      "open-actor": async function (this: HotbarPTR2e) {
+        if (this.token?.actor) {
+          await this.token.actor.sheet.render(true);
+        }
+      },
+      "open-entry": async function (this: HotbarPTR2e, _event: PointerEvent, target: HTMLElement) {
+        const entry = await fu.fromUuid(target.dataset.uuid!) as ActiveEffectPTR2e;
+        if (entry?.sheet) {
+          await entry.sheet.render(true);
+        }
+      }
     }
   }
 
@@ -165,8 +176,8 @@ export class HotbarPTR2e extends Hotbar {
               key: index < 9 ? index + 1 : 0,
               img: "icons/svg/d20.svg",
               cssClass: "full skill",
-              tooltip: `Roll ${formatSlug(skill.slug)}`,
-              ariaLabel: `Roll ${formatSlug(skill.slug)}`,
+              tooltip: `Roll ${formatSlug(skill.slug)} (${skill.total > 0 ? `+${skill.total}` : skill.total})`,
+              ariaLabel: `Roll ${formatSlug(skill.slug)} (${skill.total > 0 ? `+${skill.total}` : skill.total})`,
               skill,
               macro: null,
               slot: index + 1
@@ -180,6 +191,16 @@ export class HotbarPTR2e extends Hotbar {
     return context;
   }
 
+  protected override async _onFirstRender(context: object, options: ApplicationRenderOptions): Promise<void> {
+    await super._onFirstRender(context, options);
+
+    //@ts-expect-error - Incomplete types
+    this._createContextMenu(this._getEffectContextMenuOptions, ".entry.effect", {
+      hookName: "getHotbarEffectContextOptions",
+      parentClassHooks: false
+    });
+  }
+
   protected override async _onRender(context: object, options: ApplicationRenderOptions): Promise<void> {
     await super._onRender(context, options);
 
@@ -188,7 +209,7 @@ export class HotbarPTR2e extends Hotbar {
 
   protected override _attachPartListeners(partId: string, htmlElement: HTMLElement, options: HandlebarsRenderOptions): void {
     super._attachPartListeners(partId, htmlElement, options);
-    if(partId === "right") {
+    if (partId === "right") {
       const button = htmlElement.querySelector<HTMLButtonElement>(`[data-action="lock"]`);
       if (button) {
         button.addEventListener("click", () => this.#updateFadedUI(!this.locked));
@@ -204,25 +225,112 @@ export class HotbarPTR2e extends Hotbar {
     }
   }
 
-  static async #onExecute(this: HotbarPTR2e, _event: PointerEvent, target: HTMLElement): Promise<void> {
-    const slot = await ( async () => {
-      if (this.tab === "slots" && this.token?.actor && this.page === 1) {
-        const attack = this.token.actor.attacks.actions[parseInt(target.dataset.slot!) - 1];
-        if (attack) return attack;
-      }
-      if (this.tab === "other" && this.token?.actor) {
-        const attack = await fu.fromUuid(target.dataset.uuid!) as unknown as AttackPTR2e;
-        if (attack) return attack;
-      }
-      if (this.tab === "skills" && this.token?.actor) {
-        const skill = this.token.actor.skills[target.dataset.skill!];
-        if (skill) return skill;
-      }
+  _getEffectContextMenuOptions(): ContextMenuEntry[] {
+    return [
+      {
+        name: "Send to Chat",
+        icon: '<i class="fa-solid fa-arrow-up-right-from-square"></i>',
+        callback: async li => {
+          const uuid = li.dataset.uuid;
+          const effect = await fu.fromUuid(uuid!) as ActiveEffectPTR2e;
+          effect?.toChat();
+        }
+      },
+      {
+        name: "Delete Effect",
+        icon: '<i class="fa-solid fa-trash"></i>',
+        callback: async li => {
+          const uuid = li.dataset.uuid;
+          const effect = await fu.fromUuid(uuid!) as ActiveEffectPTR2e;
+          effect?.deleteDialog();
+        }
+      },
+    ]
+  }
 
-      const slot = parseInt(this.element.dataset.slot!);
-      const macroId = game.user.hotbar[slot];
-      return macroId ? game.macros.get(macroId) ?? null : null
-    })();
+  protected override _getContextMenuOptions(): ContextMenuEntry[] {
+    const options = super._getContextMenuOptions();
+    for (const option of options) {
+      switch (option.name) {
+        case "MACRO.Edit": {
+          const condition = option.condition!;
+          option.condition = (li) => {
+            const slot = this.#getSlot(li);
+            if (slot && slot instanceof Macro) {
+              return condition(li);
+            }
+            return false;
+          }
+          break;
+        }
+        case "MACRO.Remove": {
+          option.condition = (li) => {
+            const slot = this.#getSlot(li);
+            if (slot && slot instanceof Macro) {
+              return true;
+            }
+            return false;
+          }
+          break;
+        }
+        case "MACRO.Delete": {
+          const condition = option.condition!;
+          option.condition = (li) => {
+            const slot = this.#getSlot(li);
+            if (slot && slot instanceof Macro) {
+              return condition(li);
+            }
+            return false;
+          }
+        }
+      }
+    }
+
+    options.push(
+      {
+        name: "Send to Chat",
+        icon: '<i class="fa-solid fa-arrow-up-right-from-square"></i>',
+        condition: (li) => {
+          const slot = this.#getSlot(li);
+          if (slot && slot instanceof AttackPTR2e) {
+            return true;
+          }
+          return false;
+        },
+        callback: async li => {
+          const slot = this.#getSlot(li) as AttackPTR2e;
+          if (slot) {
+            await slot.toChat();
+          }
+        }
+      }
+    );
+
+    return options;
+  }
+
+  #getSlot(element: HTMLElement) {
+    if (this.tab === "slots" && this.token?.actor && this.page === 1) {
+      const attack = this.token.actor.attacks.actions[parseInt(element.dataset.slot!) - 1];
+      if (attack) return attack;
+    }
+    if (this.tab === "other" && this.token?.actor) {
+      const attack = fu.fromUuidSync(element.dataset.uuid!) as unknown as AttackPTR2e;
+      if (attack) return attack;
+    }
+    if (this.tab === "skills" && this.token?.actor) {
+      const skill = this.token.actor.skills[element.dataset.skill!];
+      if (skill) return skill;
+    }
+
+    const slot = element.dataset.slot;
+    const macroId = game.user.hotbar[slot as unknown as number];
+    if (!macroId) return null;
+    return game.macros.get(macroId) ?? null;
+  }
+
+  static async #onExecute(this: HotbarPTR2e, _event: PointerEvent, target: HTMLElement): Promise<void> {
+    const slot = this.#getSlot(target);
 
     // Create a temporary Macro
     if (!slot) {
@@ -245,17 +353,17 @@ export class HotbarPTR2e extends Hotbar {
   }
 
   static async #onAttackTab(this: HotbarPTR2e) {
-    if(this.tab === "slots") return;
+    if (this.tab === "slots") return;
     this.tab = "slots";
   }
 
   static async #onOtherTab(this: HotbarPTR2e) {
-    if(this.tab === "other") return;
+    if (this.tab === "other") return;
     this.tab = "other";
   }
 
   static async #onSkillsTab(this: HotbarPTR2e) {
-    if(this.tab === "skills") return;
+    if (this.tab === "skills") return;
     this.tab = "skills";
   }
 

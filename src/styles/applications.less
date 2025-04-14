@@ -8843,7 +8843,6 @@
     min-width: 142px;
     min-height: var(--hotbar-height);
     max-height: calc(var(--hotbar-height)* 3);
-    overflow-y: auto;
     border: 1px solid var(--border-theme-color);
     border-radius: 10px;
     background: var(--appv2-background);
@@ -8857,6 +8856,10 @@
 
     &.party, &.movement, &.passives, &.effects {
       visibility: visible;
+    }
+
+    &.passives {
+      overflow-y: auto;
     }
 
     &.party {
@@ -8952,6 +8955,7 @@
     --columns: 5;
     width: calc(var(--hotbar-width)*var(--columns) + (8px * (var(--columns) - 1)));
     flex-direction: column;
+    position: relative;
 
     .slot {
       width: var(--hotbar-width);

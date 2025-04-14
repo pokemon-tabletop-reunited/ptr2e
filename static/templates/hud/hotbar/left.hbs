@@ -33,21 +33,27 @@
             </div>
           {{/if}}
         {{/unless}}
-        <div class="party-header">
-          <span>Party Members</span>
-        </div>
-        {{#each party.party as |actor|}}
-          <div class="icon actor" data-tooltip="{{actor.name}}" data-tooltip-direction="UP" data-uuid="{{actor.uuid}}">
-            <img draggable="true" src="{{actor.img}}" alt="{{actor.name}}">
+        {{#if party.party}}
+          <div class="party-header">
+            <span>Party Members</span>
           </div>
-        {{/each}}
+          {{#each party.party as |actor|}}
+            <div class="icon actor" data-tooltip="{{actor.name}}" data-tooltip-direction="UP" data-uuid="{{actor.uuid}}">
+              <img draggable="true" src="{{actor.img}}" alt="{{actor.name}}">
+            </div>
+          {{/each}}
+          {{else}}
+          <li class="entry open" style="align-self: center;">
+            <span class="label"><small>No Party Details</small></span>
+          </li>
+        {{/if}}
       {{/if}}
       {{#if (is toggle "movement")}}
       {{/if}}
       {{#if (is toggle "passives")}}
         {{#each actions.passives as |action|}}
           {{#unless action.hidden}}
-            <li class="entry full" data-tooltip-direction="LEFT" data-action="{{action.slug}}" data-tooltip aria-label="{{action.name}}">
+            <li class="entry full" data-tooltip-direction="LEFT" data-uuid="{{action.uuid}}" data-tooltip aria-label="{{action.name}}">
               <img src="{{action.img}}" alt="{{action.name}}" class="entry-icon">
               <span class="label">{{action.name}}</span>
             </li>
@@ -60,7 +66,7 @@
       {{/if}}
       {{#if (is toggle "effects")}}
         {{#each effects as |effect|}}
-          <li class="effect entry full" data-tooltip-direction="LEFT" data-id="{{effect.id}}" data-tooltip aria-label="{{effect.name}}">
+          <li class="effect entry full" data-tooltip-direction="LEFT" data-action="open-entry" data-uuid="{{effect.uuid}}" data-tooltip aria-label="{{effect.name}}">
             <img src="{{effect.img}}" alt="{{effect.name}}" class="entry-icon">
             <span class="label">{{effect.name}}</span>
           </li>

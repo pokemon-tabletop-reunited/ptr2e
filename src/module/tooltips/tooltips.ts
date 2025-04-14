@@ -188,15 +188,25 @@ export default class TooltipsPTR2e {
   }
 
   async _onEffectTooltip() {
-    const effectId = game.tooltip.element?.dataset.id;
-    if (!effectId) return false;
+    const effect = await (async () => {
+      const effectId = game.tooltip.element?.dataset.id;
+      if (!effectId) return null;
 
-    const parent = await fromUuid<ActorPTR2e>(
-      (game.tooltip.element?.closest("[data-parent]") as HTMLElement)?.dataset.parent
-    );
-    if (!parent) return false;
+      const parent = await fromUuid<ActorPTR2e>(
+        (game.tooltip.element?.closest("[data-parent]") as HTMLElement)?.dataset.parent
+      );
+      if (!parent) return null;
 
-    const effect = parent.effects.get(effectId);
+      const effect = parent.effects.get(effectId);
+      return effect ?? null
+    })() ?? await (async () => {
+      const effectUuid = game.tooltip.element?.dataset.uuid;
+      if (!effectUuid) return null;
+
+      const effect = (await fu.fromUuid(effectUuid)) as unknown as ActiveEffectPTR2e | undefined;
+      return effect ?? null;
+    })();
+
     if (!effect) return false;
 
     this.tooltip.classList.add("effect");

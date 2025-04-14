@@ -63,7 +63,7 @@ declare global {
 
     override _prepareContext(options: ApplicationRenderOptions): Promise<Hotbar.HotbarContext<SlotData>>;
 
-    protected override _onFirstRender(context: object, options: ApplicationRenderOptions): void;
+    protected override _onFirstRender(context: object, options: ApplicationRenderOptions): Promise<void>;
 
     protected override _onRender(context: object, options: ApplicationRenderOptions): Promise<void>;
 
