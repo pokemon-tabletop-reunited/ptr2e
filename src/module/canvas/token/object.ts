@@ -162,15 +162,16 @@ class TokenPTR2e<TDocument extends TokenDocumentPTR2e = TokenDocumentPTR2e> exte
   override _onControl(options: { releaseOthers?: boolean; pan?: boolean } = {}) {
     super._onControl(options);
 
-    if (game.ready) game.ptr.tokenPanel.token = this;
+    //@ts-expect-error - Incomplete types
+    if (game.ready && ui.hotbar.rendered) ui.hotbar.token = this;
   }
 
   override _onRelease(options: Record<string, unknown> = {}) {
     super._onRelease(options);
 
-    if (game.ready) {
-      game.ptr.tokenPanel.token = (game.user.character?.getActiveTokens().at(0) as this) ?? null;
-    }
+    //@ts-expect-error - Incomplete types
+    if (game.ready && ui.hotbar.rendered) ui.hotbar.token = (game.user.character?.getActiveTokens().at(0) as this) ?? null;
+    
   }
 
   /** @inheritdoc */

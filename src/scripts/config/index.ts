@@ -39,6 +39,7 @@ import { RollTableDirectoryPTR2e } from "@module/apps/sidebar/rolltables-directo
 import AdvancementActiveEffectSystem from "@module/effects/data/advancement.ts";
 import { PickableThing } from "@module/apps/pick-a-thing-prompt.ts";
 import { TokenHUDPTR2e } from "@module/apps/token-hud.ts";
+import { HotbarPTR2e } from "@module/apps/hotbar.ts";
 
 export const PTRCONFIG = {
   ActiveEffect: {
@@ -168,7 +169,8 @@ export const PTRCONFIG = {
     actors: ActorDirectoryPTR2e,
     compendium: CompendiumDirectoryPTR2e,
     settings: SettingsSidebarPTR2e,
-    tables: RollTableDirectoryPTR2e
+    tables: RollTableDirectoryPTR2e,
+    hotbar: HotbarPTR2e
   },
   data: {
     traits: Traits,

@@ -1,119 +1,94 @@
-export {};
+import type ApplicationV2 from "../../common/applications/api/application.js";
+import type { ApplicationConfiguration, ApplicationRenderOptions } from "../../common/applications/_types.d.ts";
+import type HandlebarsApplicationMixin from "../../common/applications/api/handlebars-application.d.ts";
+import type { HandlebarsTemplatePart } from "../../common/applications/api/handlebars-application.d.ts";
+
+export { };
 
 declare global {
-    /**
-     * The global action bar displayed at the bottom of the game view.
-     * The Hotbar is a UI element at the bottom of the screen which contains Macros as interactive buttons.
-     * The Hotbar supports 5 pages of global macros which can be dragged and dropped to organize as you wish.
-     *
-     * Left clicking a Macro button triggers its effect.
-     * Right clicking the button displays a context menu of Macro options.
-     * The number keys 1 through 0 activate numbered hotbar slots.
-     * Pressing the delete key while hovering over a Macro will remove it from the bar.
-     *
-     * @extends {Application}
-     *
-     * @see {@link Macros}
-     * @see {@link Macro}
-     */
-    class Hotbar<TMacro extends Macro = Macro> extends Application {
-        constructor(options: ApplicationOptions);
+  
+  abstract class BaseHotbar<SlotsData extends Hotbar.HotbarSlotData> extends ApplicationV2<
+    ApplicationConfiguration,
+    ApplicationRenderOptions,
+    Hotbar.HotbarContext<SlotsData>
+  > { }
 
-        /** The currently viewed macro page */
-        page: number;
-
-        /** The currently displayed set of macros */
-        macros: TMacro[];
-
-        /** Track collapsed state */
-        protected _collapsed: false;
-
-        /** Track which hotbar slot is the current hover target, if any */
-        protected _hover: number | null;
-
-        static override get defaultOptions(): ApplicationOptions;
-
-        override getData(options?: {}): {
-            page: number;
-            macros: TMacro[];
-            barClass: string;
-        };
-
-        /**
-         * Get the Array of Macro (or null) values that should be displayed on a numbered page of the bar
-         * @param page
-         */
-        protected _getMacrosByPage(page: number): TMacro[];
-
-        /**
-         * Collapse the Hotbar, minimizing its display.
-         * @return A promise which resolves once the collapse animation completes
-         */
-        collapse(): Promise<void>;
-
-        /**
-         * Expand the Hotbar, displaying it normally.
-         * @return A promise which resolves once the expand animation completes
-         */
-        expand(): Promise<void>;
-
-        /**
-         * Change to a specific numbered page from 1 to 5
-         * @param page The page number to change to.
-         */
-        changePage(page: number): void;
-
-        /**
-         * Change the page of the hotbar by cycling up (positive) or down (negative)
-         * @param direction The direction to cycle
-         */
-        cyclePage(direction: number): void;
-
-        override activateListeners(html: JQuery): void;
-
-        /**
-         * Create a Context Menu attached to each Macro button
-         * @param html
-         */
-        protected _contextMenu(html: JQuery): void;
-
-        /** Get the Macro entry context options */
-        protected _getEntryContextOptions(): EntryContextOption[];
-
-        /** Handle left-click events to */
-        protected _onClickMacro(event: MouseEvent): Promise<void>;
-
-        /**
-         * Handle hover events on a macro button to track which slot is the hover target
-         * @param event The originating mouseover or mouseleave event
-         */
-        protected _onHoverMacro(event: MouseEvent): void;
-
-        /**
-         * Handle pagination controls
-         * @param event   The originating click event
-         */
-        protected _onClickPageControl(event: MouseEvent): void;
-
-        protected override _canDragStart(selector: string): boolean;
-
-        protected override _onDragStart(event: DragEvent): void;
-
-        protected override _canDragDrop(selector: string): boolean;
-
-        protected override _onDrop(event: DragEvent): Promise<void>;
-
-        /**
-         * Get the Macro entity being dropped in the Hotbar. If the data comes from a non-World source, create the Macro
-         * @param data The data transfer attached to the DragEvent
-         * @return A Promise which returns the dropped Macro, or null
-         */
-        protected _getDropMacro(data: unknown): Promise<TMacro | null>;
-
-        /**
-         * Handle click events to toggle display of the macro bar
-         * @param event
-         */
-        protected _onToggleBar(event: Event): void;
+  namespace Hotbar {
+    interface HotbarContext<SlotsData extends HotbarSlotData = HotbarSlotData> { 
+      /** The current hotbar page number. */
+      page: number;
+  
+      /** The currently rendered macro data. */
+      slots: SlotsData[];
     }
+
+    interface HotbarSlotData {
+      slot: number;
+      macro: Macro | null;
+      key: number;
+      tooltip: string;
+      ariaLabel: string;
+      style: string;
+    }
+  }
+
+  /**
+   * The global action bar displayed at the bottom of the game view.
+   * The Hotbar is a UI element at the bottom of the screen which contains Macros as interactive buttons.
+   * The Hotbar supports 5 pages of global macros which can be dragged and dropped to organize as you wish.
+   *
+   * Left clicking a Macro button triggers its effect.
+   * Right clicking the button displays a context menu of Macro options.
+   * The number keys 1 through 0 activate numbered hotbar slots.
+   * Pressing the delete key while hovering over a Macro will remove it from the bar.
+   *
+   * @extends {Application}
+   *
+   * @see {@link Macros}
+   * @see {@link Macro}
+   */
+  class Hotbar<TMacro extends Macro = Macro, SlotData extends Hotbar.HotbarSlotData = Hotbar.HotbarSlotData> extends HandlebarsApplicationMixin(BaseHotbar)<SlotData> {
+    static override DEFAULT_OPTIONS: DeepPartial<ApplicationConfiguration>;
+
+    static override PARTS: Record<string, HandlebarsTemplatePart>;
+
+    /** * The current hotbar page number. */
+    get page(): number;
+
+    /** The currently rendered macro data. */
+    get slots(): SlotData[];
+
+    /** Whether the hotbar is locked. */
+    get locked(): boolean;
+
+    override _prepareContext(options: ApplicationRenderOptions): Promise<Hotbar.HotbarContext<SlotData>>;
+
+    protected override _onFirstRender(context: object, options: ApplicationRenderOptions): void;
+
+    protected override _onRender(context: object, options: ApplicationRenderOptions): Promise<void>;
+
+    protected _getContextMenuOptions(): ContextMenuEntry[];
+
+    /* -------------------------------------------- */
+    /*  Public API                                 */
+    /* -------------------------------------------- */
+
+    /** Change to a specific numbered page from 1 to 5 */
+    changePage(page: number): Promise<void>;
+
+    /** Change the page of the hotbar by cycling up (positive) or down (negative). */
+    cyclePage(direction: number): Promise<void>;
+
+    /** A reusable helper that can be used for toggling display of a document sheet. */
+    static toggleDocumentSheet(uuid: string): Promise<void>;
+
+    /** Update hotbar display based on viewport size. */
+    protected _onResize(): void;
+
+    /** Create a Macro which rolls a RollTable when executed */
+    protected _createRollTableRollMacro(table: RollTable): Promise<TMacro>;
+
+    /** Create a Macro document which can be used to toggle display of a Journal Entry. */
+    protected _createDocumentSheetToggle(document: foundry.abstract.Document): Promise<TMacro>;
+  }
 }

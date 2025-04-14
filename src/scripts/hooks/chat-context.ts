@@ -1,3 +1,4 @@
+//@ts-nocheck
 import { AttackMessageSystem, CaptureMessageSystem, ChatMessagePTR2e, DamageAppliedMessageSystem, SkillMessageSystem } from "@chat";
 import { PTRHook } from "./data.ts";
 import { DataInspector } from "@module/apps/data-inspector/data-inspector.ts";

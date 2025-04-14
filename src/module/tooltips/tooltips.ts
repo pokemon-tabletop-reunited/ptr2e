@@ -97,6 +97,8 @@ export default class TooltipsPTR2e {
           return this._onSkillTooltip();
         case "effect":
           return this._onEffectTooltip();
+        case "entry": 
+          return this._onActionTooltip();
         case "affliction":
           return this._onAfflictionTooltip();
         case "effect-rolls":

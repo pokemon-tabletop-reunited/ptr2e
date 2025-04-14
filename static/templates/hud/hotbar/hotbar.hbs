@@ -1,0 +1,12 @@
+<menu id="action-bar" class="flexrow" data-tooltip-direction="UP">
+    {{#each slots as |slot|}}
+    <li class="slot {{slot.cssClass}}" role="button" data-action="execute" data-slot="{{slot.slot}}"
+        style="{{slot.style}}" aria-label="{{slot.ariaLabel}}"
+        {{#if slot.tooltip}}data-tooltip-text="{{slot.tooltip}}"{{/if}}>
+        {{#if slot.img}}<img class="slot-icon" src="{{slot.img}}" alt="{{slot.ariaLabel}}">{{/if}}
+        <span class="key">{{slot.key}}</span>
+        {{#if slot.macro}}<span class="label">{{macro.name}}</span>{{/if}}
+        
+    </li>
+    {{/each}}
+</menu>
