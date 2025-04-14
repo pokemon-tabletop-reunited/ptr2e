@@ -12,4 +12,12 @@
         {{#if slot.skill}}<span class="label">{{formatSlug slot.skill.slug}}</span>{{/if}}
     </li>
     {{/each}}
+    {{#if actor}}
+      <div class="footer">
+        <label>{{actor.name}}</label>
+        <div class="avatar">
+          <img src="{{actor.img}}">
+        </div>
+      </div>
+    {{/if}}
 </menu>

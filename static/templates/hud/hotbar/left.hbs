@@ -22,16 +22,14 @@
       {{#if (is toggle "party")}}
         {{#unless isOwner}}
           {{#if party.owner}}
-            <div class="party-header">
+            <div class="party-header mb-0">
               <span>Party Leader</span>
             </div>
             <div class="owner">
               <div class="icon actor" data-tooltip="{{party.owner.name}}" data-tooltip-direction="UP" data-uuid="{{party.owner.uuid}}">
                 <img draggable="true" src="{{party.owner.img}}" alt="{{party.owner.name}}">
               </div>
-              <div class="name">
-                <span class="leader-name">{{party.owner.name}}</span>
-              </div>
+              <div class="name">{{party.owner.name}}</div>
             </div>
           {{/if}}
         {{/unless}}

@@ -8874,6 +8874,29 @@
         flex: 0 0 100%;
         place-content: center;
       }
+
+      .owner {
+        display: flex;
+        flex-direction: row;
+        flex: 0 0 100%;
+        align-items: center;
+        border-bottom: 1px solid var(--border-theme-color);
+        max-width: 140px;
+
+        .icon {
+          flex: 0 0 48px;
+          height: 48px;
+          border-radius: 2px;
+        }
+
+        .name {
+          overflow: hidden;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+          flex: 1;
+        }
+      }
+
       .icon.actor {
         --button-size: 32px;
         flex: 0 0 var(--button-size);
@@ -8953,6 +8976,37 @@
         text-overflow: ellipsis;
         overflow: hidden;
         align-content: center;
+      }
+    }
+  }
+
+  .footer {
+    position: absolute;
+    top: -24px;
+    left: 196px;
+    width: 240px;
+    height: 20px;
+    background: var(--appv2-background);
+    border-radius: 10px 10px 2px 2px;
+    text-align: center;
+    align-content: center;
+    font-size: var(--font-size-12);
+
+    .avatar {
+      position: absolute;
+      top: -72px;
+      height: 72px;
+      width: 72px;
+      left: calc(120px - 36px);
+      padding: 4px;
+      background: var(--appv2-background);
+      border-radius: 10px 10px 0 0;
+
+      img {
+        height: 64px;
+        width: 64px;
+        object-fit: scale-down;
+        border-radius: 10px 10px 0 0;
       }
     }
   }
