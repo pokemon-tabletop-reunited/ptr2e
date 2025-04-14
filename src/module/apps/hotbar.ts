@@ -140,8 +140,8 @@ export class HotbarPTR2e extends Hotbar {
       context.slots = context.slots.map((slot: Hotbar.HotbarSlotData, i) => {
         const index = i + (this.page - 1) * 10;
         if (!this.token?.actor) return slot;
-        if (this.tab === "slots" && index <= 5) {
-          const actor = this.token.actor;
+        const actor = this.token.actor;
+        if (this.tab === "slots" && index < actor.attacks.slots) {
           const attack = actor.attacks.actions[index];
           if (attack) return {
             key: index < 9 ? index + 1 : 0,
@@ -327,6 +327,12 @@ export class HotbarPTR2e extends Hotbar {
     const macroId = game.user.hotbar[slot as unknown as number];
     if (!macroId) return null;
     return game.macros.get(macroId) ?? null;
+  }
+
+  async executeMacro(slot: number) {
+    const li = this.element.querySelector<HTMLLIElement>(`li.slot[data-slot="${slot + (this.page - 1) * 10}"]`);
+    if (!li) return;
+    await HotbarPTR2e.#onExecute.bind(this)(new PointerEvent("click"), li);
   }
 
   static async #onExecute(this: HotbarPTR2e, _event: PointerEvent, target: HTMLElement): Promise<void> {

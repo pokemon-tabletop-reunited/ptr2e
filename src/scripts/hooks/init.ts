@@ -174,6 +174,21 @@ export const Init: PTRHook = {
       console.log('PTR 2e | Setup');
       // Add setup code here
       GamePTR.onSetup();
+
+      // Monkeypatch core macro keyboard bindings
+      //@ts-expect-error - Monkey Patching
+      const core = game.keybindings._registerCoreKeybindings;
+      //@ts-expect-error - Monkey Patching
+      game.keybindings._registerCoreKeybindings = (view: string) => {
+        // Run core code
+        core.call(this, view)
+        // Override the macro keybinding to use the PTR2E macro bar instead of the core one
+        for ( const number of Array.fromRange(9, 1).concat([0]) ) {
+          const action = game.keybindings.actions.get(`core.executeMacro${number}`);
+          if (!action) continue; // @ts-expect-error - Incomplete types
+          action.onDown =() => ui.hotbar.executeMacro(number);
+        }
+      }
     })
 
     Hooks.once('ready', () => {
