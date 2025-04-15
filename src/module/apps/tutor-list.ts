@@ -65,12 +65,12 @@ export class TutorListApp extends foundry.applications.api.HandlebarsApplication
     return super.render(options, _options);
   }
 
-  override _prepareContext(options?: foundry.applications.api.HandlebarsRenderOptions | undefined) {
-    const lists =  getGradedTutorList().list.contents;
+  override async _prepareContext(options?: foundry.applications.api.HandlebarsRenderOptions | undefined) {
+    const lists = (await getGradedTutorList()).list.contents;
 
     return {
       ...super._prepareContext(options),
-      lists: (this.actor ? this.filterList() : lists).sort((a, b) => {
+      lists: (this.actor ? await this.filterList() : lists).sort((a, b) => {
         if (a.slug === "universal") return -1;
         if (b.slug === "universal") return 1;
         if (a.slug === "species-list") return -1;
@@ -117,9 +117,9 @@ export class TutorListApp extends foundry.applications.api.HandlebarsApplication
   }
 
 
-filterList() {
+async filterList() {
     const actor = this.actor;
-    const tutorList = getGradedTutorList();
+    const tutorList = await getGradedTutorList();
     
     if (!actor) return tutorList.list.contents;
 
@@ -253,7 +253,7 @@ enum SortOptions {
   Grade = "grade"
 }
 
-function getGradedTutorList(): TutorListSettings {
+async function getGradedTutorList(): Promise<TutorListSettings> {
   const tutorList = game.ptr.data.tutorList;
   const packMap: Map<string, any[]> = new Map();
 
@@ -269,9 +269,10 @@ function getGradedTutorList(): TutorListSettings {
     });
   });
 
-  const moveMap: Map<string, any> = new Map();
+  const gradeMap: Map<string, string> = new Map();
 
-  Array.from(packMap.entries()).forEach(async ([pack, moves]) => {
+  // Collect all promises
+  const promises = Array.from(packMap.entries()).map(async ([pack, moves]) => {
     const packIndex = await game.packs.get(pack)?.getIndex({ fields: ["system.grade"] });
 
     if (packIndex == null) {
@@ -282,19 +283,21 @@ function getGradedTutorList(): TutorListSettings {
     packIndex.forEach((item: any) => {
       const move = moves.find(m => m.uuid === item.uuid);
       if (move) {
-        move.grade = item.system.grade;
-        moveMap.set(move.uuid, move);
+        gradeMap.set(move.uuid, item.system.grade);
       }
     });
   });
+
+  // Wait for all promises to complete
+  await Promise.all(promises);
 
   // Now iterate over the original tutorList and populate the grade value from sortedMoves
   forEach(tutorList.list.contents, (list) => {
     forEach(list.moves.contents, (move) => {
       if (move.uuid) {
-        const gradedMove = moveMap.get(move.uuid);
-        if (gradedMove) {
-          move.grade = gradedMove.grade;
+        const grade = gradeMap.get(move.uuid);
+        if (grade) {
+          move.grade = grade;
         }
       }
     });
