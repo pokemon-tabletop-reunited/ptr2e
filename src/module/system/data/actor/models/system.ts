@@ -241,7 +241,7 @@ class ActorSystem extends foundry.abstract.TypeDataModel<ActorSystem.Schema, Act
     return {
       level: this.advancement.experience.current,
       test: this.skills.get("acrobatics")?.value,
-      device: this.details.device
+      device: this.details.device,
     };
   }
 }

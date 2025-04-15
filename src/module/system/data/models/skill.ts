@@ -23,7 +23,7 @@ declare namespace SkillPTR2e {
   type Schema = typeof skillSchema;
 }
 
-class SkillPTR2e extends foundry.abstract.DataModel<SkillPTR2e.Schema> {
+class SkillPTR2e extends foundry.abstract.DataModel<SkillPTR2e.Schema, PTR.Documents.Actor.System> {
   static override defineSchema(): SkillPTR2e.Schema {
     return skillSchema;
   }
@@ -79,7 +79,7 @@ class SkillPTR2e extends foundry.abstract.DataModel<SkillPTR2e.Schema> {
   // }
 }
 
-interface SkillPTR2e extends foundry.abstract.DataModel<SkillPTR2e.Schema> {
+interface SkillPTR2e extends foundry.abstract.DataModel<SkillPTR2e.Schema, PTR.Documents.Actor.System> {
   total: number;
 }
 
