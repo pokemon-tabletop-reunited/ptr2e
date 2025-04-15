@@ -36,12 +36,15 @@ export class HotbarPTR2e extends Hotbar {
   static override PARTS = {
     left: {
       template: "systems/ptr2e/templates/hud/hotbar/left.hbs",
+      root: false
     },
     hotbar: {
       template: "systems/ptr2e/templates/hud/hotbar/hotbar.hbs",
+      root: false
     },
     right: {
       template: "systems/ptr2e/templates/hud/hotbar/right.hbs",
+      root: false
     },
   }
 
@@ -82,8 +85,28 @@ export class HotbarPTR2e extends Hotbar {
   set token(value: TokenPTR2e | null) {
     if (this._token === value) return;
     this._token = value;
+
     //@ts-expect-error - Incomplete types
-    this.render({ parts: ["left", "hotbar"] });;
+    this.debouncedRender({ parts: ["left", "hotbar"]});
+  }
+
+  debouncedRender = foundry.utils.debounce(this.transitionRender.bind(this), 100);
+
+  async transitionRender(options: HandlebarsRenderOptions) {
+    const app = this.element
+    if (app) {
+      if(this.timeline) this.timeline.progress(1);
+      const currentState = app.cloneNode(true) as HTMLElement;
+
+      // Ensure images in the cloned element use cached versions
+      const images = Array.from(currentState.querySelectorAll<HTMLImageElement>("img"));
+      await Promise.all(images.map(img => img.decode().catch((err) => {console.error(err)}))); // Wait for all images to decode
+
+      this.element.insertAdjacentElement("beforebegin", currentState);
+      this.oldState = currentState;
+    }
+    
+    this.render(options);
   }
 
   private _token: TokenPTR2e | null;
@@ -107,7 +130,7 @@ export class HotbarPTR2e extends Hotbar {
     const context = await super._prepareContext(options);
 
     if (this.token?.actor) {
-      const actor = this.token.actor;
+      const actor = context.actor = this.token.actor;
       context.actions = {
         passives: actor.actions.passive,
         generic: [...actor.actions.generic, ...actor.actions.pokeball],
@@ -205,6 +228,8 @@ export class HotbarPTR2e extends Hotbar {
     await super._onRender(context, options);
 
     this.#updateFadedUI();
+
+    this.#fadeOldState();
   }
 
   protected override _attachPartListeners(partId: string, htmlElement: HTMLElement, options: HandlebarsRenderOptions): void {
@@ -223,6 +248,48 @@ export class HotbarPTR2e extends Hotbar {
     } else {
       this.element.classList.add("faded-ui");
     }
+  }
+
+  oldState: HTMLElement | null = null;
+  timeline: gsap.core.Timeline | null = null;
+
+  #fadeOldState(): void {
+    if (!this.element) return
+
+    if(this.timeline) this.timeline.kill();
+    const tl = this.timeline = gsap.timeline();
+    tl.fromTo(
+      this.element,
+      {
+        autoAlpha: 0,
+        top: "+=150"
+      },
+      {
+        autoAlpha: 1,
+        duration: 1.5,
+        top: "-=150",
+        ease: "power3.out"
+      }
+    );
+
+    if(!this.oldState) return;
+    tl.fromTo(
+      this.oldState,
+      {
+        autoAlpha: 1,
+      },
+      {
+        duration: 1.5,
+        autoAlpha: 0,
+        top: "+=150",
+        ease: "power3.out",
+        onComplete: () => {
+          this.oldState?.remove();
+          this.oldState = null;
+        }
+      },
+      "<"
+    )
   }
 
   _getEffectContextMenuOptions(): ContextMenuEntry[] {

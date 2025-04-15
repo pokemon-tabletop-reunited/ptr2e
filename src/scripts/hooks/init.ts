@@ -166,6 +166,8 @@ export const Init: PTRHook = {
       registerHandlebarsHelpers();
       HandlebarTemplates.register();
 
+      gsap.registerPlugin(Flip);
+
       // Create and populate initial game.ptr interface
       GamePTR.onInit();
     });
