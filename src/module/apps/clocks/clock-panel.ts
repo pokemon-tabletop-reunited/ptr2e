@@ -2,6 +2,7 @@ import Clock from "@module/data/models/clock.ts";
 import { HandlebarsRenderOptions } from "types/foundry/common/applications/handlebars-application.ts";
 import ClockEditor from "./clock-editor.ts";
 import Sortable from "sortablejs";
+import { ApplicationRenderContext, ApplicationRenderOptions } from "types/foundry/common/applications/api.js";
 
 export default class ClockPanel extends foundry.applications.api.HandlebarsApplicationMixin(
   foundry.applications.api.ApplicationV2
@@ -57,6 +58,23 @@ export default class ClockPanel extends foundry.applications.api.HandlebarsAppli
       clocks,
       editable: isGM,
     };
+  }
+
+  override _onFirstRender(context: ApplicationRenderContext, options: ApplicationRenderOptions): void {
+    super._onFirstRender(context, options);
+
+    const {x, y} = game.settings.get("ptr2e", "clocksPosition") as {x: number, y: number};
+    if(x !== null && y !== null) {
+      gsap.set("aside#ptr2e-clock-panel", {x, y});
+    }
+    
+    Draggable.create("aside#ptr2e-clock-panel", {
+      inertia: false,
+      bounds: "#interface",
+      onRelease: function() {
+        game.settings.set("ptr2e", "clocksPosition", {x: this.x, y: this.y});
+      }  
+    })
   }
 
   override _attachPartListeners(

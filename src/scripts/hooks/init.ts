@@ -21,6 +21,7 @@ import { MiscTour } from "@module/tours/misc.ts";
 import { CompendiumBrowserTour } from "@module/tours/compendium-browser.ts";
 import { initializeKeybindings } from "@scripts/keybindings.ts";
 import { UUID_REDIRECTS } from "@scripts/config/uuid-redirects.ts";
+import { Draggable } from "gsap/all";
 
 export const Init: PTRHook = {
   listen() {
@@ -166,7 +167,7 @@ export const Init: PTRHook = {
       registerHandlebarsHelpers();
       HandlebarTemplates.register();
 
-      gsap.registerPlugin(Flip);
+      gsap.registerPlugin(Flip, Draggable, InertiaPlugin);
 
       // Create and populate initial game.ptr interface
       GamePTR.onInit();

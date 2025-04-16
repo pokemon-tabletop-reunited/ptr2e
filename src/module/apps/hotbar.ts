@@ -268,7 +268,10 @@ export class HotbarPTR2e extends Hotbar {
         autoAlpha: 1,
         duration: 1.5,
         top: "-=150",
-        ease: "power3.out"
+        ease: "power3.out",
+        onComplete: () => {
+          this.element.style.opacity = "";
+        }
       }
     );
 
