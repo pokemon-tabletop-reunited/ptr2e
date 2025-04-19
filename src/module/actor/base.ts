@@ -1077,11 +1077,21 @@ class ActorPTR2e<
     else return CONFIG.Token.movement.defaultAction;
   }
 
+  availableMovement(type: string) {
+    const movement = this.getMovement(type);
+    return movement?.available ?? 0;
+  }
+
   hasMovementType(type: string): boolean {
-    for(const record in this.system.movement) {
-      if(this.system.movement[record].method === type) return true;
-    }
+    if(this.getMovement(type)) return true;
     return false;
+  }
+
+  getMovement(type: string) {
+    for(const record in this.system.movement) {
+      if(this.system.movement[record].method === type) return this.system.movement[record];
+    }
+    return null;
   }
 
   async spendLuck(amount: number, pendingUpdates: Record<string, unknown>[] = [], notifications: { name: string, amount: number, leftover: number }[] = []): Promise<{ name: string, amount: number, leftover: number }[]> {

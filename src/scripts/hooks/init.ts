@@ -74,9 +74,10 @@ export const Init: PTRHook = {
       };
       CONFIG.Token.documentClass = PTRCONFIG.Token.documentClass;
       CONFIG.Token.objectClass = PTRCONFIG.Token.objectClass;
-      CONFIG.Token.hudClass = PTRCONFIG.Token.hudClass;
+      // CONFIG.Token.hudClass = PTRCONFIG.Token.hudClass;
+      CONFIG.Token.rulerClass = PTRCONFIG.Token.rulerClass;
       CONFIG.Token.movement.defaultAction = "overland";
-      CONFIG.Token.movement.actions = PTRCONFIG.movementTypes;
+      CONFIG.Token.movement.actions = fu.mergeObject(PTRCONFIG.movementTypes, { displace: CONFIG.Token.movement.actions["displace"] }, { inplace: false });
       CONFIG.Dice.rolls = CONFIG.Dice.rolls.concat(PTRCONFIG.Dice.rolls);
 
       CONFIG.Folder.documentClass = PTRCONFIG.Folder.documentClass;
@@ -186,10 +187,10 @@ export const Init: PTRHook = {
         // Run core code
         core.call(this, view)
         // Override the macro keybinding to use the PTR2E macro bar instead of the core one
-        for ( const number of Array.fromRange(9, 1).concat([0]) ) {
+        for (const number of Array.fromRange(9, 1).concat([0])) {
           const action = game.keybindings.actions.get(`core.executeMacro${number}`);
           if (!action) continue; // @ts-expect-error - Incomplete types
-          action.onDown =() => ui.hotbar.executeMacro(number);
+          action.onDown = () => ui.hotbar.executeMacro(number);
         }
       }
     })

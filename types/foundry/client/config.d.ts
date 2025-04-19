@@ -2,11 +2,30 @@ import type * as TinyMCE from "tinymce";
 import { ActiveEffectSource } from "../common/documents/active-effect.js";
 
 declare global {
-  interface TokenMovementAction {
+
+  interface GridOffset3D {
+    i: number;
+    j: number;
+    k: number;
+  }
+
+  type TokenMovementSegmentData = Pick<TokenMeasuredMovementWaypoint, "width"|"height"|"shape"|"action"|"terrain">;
+
+  interface TokenMovementAction<TObject extends Token, TTokenDocument extends TokenDocument<Scene | null>> {
     label: string;
     icon: string;
-    deriveDifficulty?: (nonDerivedDifficulties: Record<string, number>) => number;
+    order?: number;
+    teleport?: boolean;
+    measure?: boolean;
+    walls?: string | null;
+    visualize?: boolean;
+    getAnimationOptions?(token: TObject): Partial<TokenAnimationOptions<TObject>>;
+    canSelect?(token: TTokenDocument): boolean;
+    deriveTerrainDifficulty?: (nonDerivedDifficulties: Record<string, number>) => number | null;
+    getCostFunction?(token: TTokenDocument, options: {preview?: boolean}): (baseCost: number, from: Readonly<GridOffset3D>, to: Readonly<GridOffset3D>, distance: number, segment: Readonly<TokenMovementSegmentData>) => number;
   }
+
+  export type TokenMovementActionConfig<TObject extends Token, TTokenDocument extends TokenDocument<Scene | null>> = TokenMovementAction<TObject, TTokenDocument>;
 
     interface Config<
         TAmbientLightDocument extends AmbientLightDocument<TScene | null>,
@@ -282,6 +301,7 @@ declare global {
               defaultSpeed: number;
             }
             hudClass: unknown;
+            rulerClass: unknown;
         };
 
         /** Configuration for the Wall embedded document type and its representation on the game Canvas */

@@ -40,6 +40,7 @@ import AdvancementActiveEffectSystem from "@module/effects/data/advancement.ts";
 import { PickableThing } from "@module/apps/pick-a-thing-prompt.ts";
 import { TokenHUDPTR2e } from "@module/apps/token-hud.ts";
 import { HotbarPTR2e } from "@module/apps/hotbar.ts";
+import { TokenRulerPTR2e } from "@module/canvas/token-ruler.ts";
 
 export const PTRCONFIG = {
   ActiveEffect: {
@@ -154,7 +155,8 @@ export const PTRCONFIG = {
     documentClass: TokenDocumentPTR2e,
     objectClass: TokenPTR2e,
     trackableAttributes,
-    hudClass: TokenHUDPTR2e
+    hudClass: TokenHUDPTR2e,
+    rulerClass: TokenRulerPTR2e,
   },
   Scene: {
     documentClass: ScenePTR2e,
@@ -206,32 +208,53 @@ export const PTRCONFIG = {
     overland: {
       label: "PTR2E.TokenMovement.Actions.Overland",
       icon: "fa-solid fa-fw fa-person-walking",
-      speedOption: true
+      canSelect: (token) => token?.actor?.hasMovementType("overland") ?? false,
+      order: 1
     },
     burrow:{
       label: "PTR2E.TokenMovement.Actions.Burrow",
       icon: "fa-solid fa-fw fa-shovel",
-      speedOption: true
+      canSelect: (token) => token?.actor?.hasMovementType("burrow") ?? false,
+      getAnimationOptions: () => ({movementSpeed: 4}),
+      order: 2
     },
     swim: {
       label: "PTR2E.TokenMovement.Actions.Swim",
       icon: "fa-solid fa-fw fa-fish",
-      speedOption: true
+      canSelect: (token) => token?.actor?.hasMovementType("swim") ?? false,
+      getAnimationOptions: () => ({movementSpeed: 4}),
+      order: 3
     },
     flight: {
       label: "PTR2E.TokenMovement.Actions.Flight",
       icon: "fa-solid fa-fw fa-dove",
-      speedOption: true
+      canSelect: (token) => token?.actor?.hasMovementType("flight") ?? false,
+      getAnimationOptions: () => ({movementSpeed: 9}),
+      order: 4
     },
     threaded: {
       label: "PTR2E.TokenMovement.Actions.Threaded",
       icon: "fa-solid fa-fw fa-reel",
-      speedOption: true
+      canSelect: (token) => token?.actor?.hasMovementType("threaded") ?? false,
+      order: 5
     },
     teleport: {
       label: "PTR2E.TokenMovement.Actions.Teleport",
       icon: "fa-solid fa-fw fa-transporter",
-      speedOption: false
+      canSelect: (token) => token?.actor?.hasMovementType("teleport") ?? false,
+      teleport: true,
+      getAnimationOptions: () => ({movementSpeed: 12}),
+      order: 6
     },
-  }
+    free: {
+      label: "PTR2E.TokenMovement.Actions.Free",
+      icon: "fa-solid fa-fw fa-street-view",
+      canSelect: (token) => !!token?.actor,
+      getCostFunction: () => () => 0,
+      measure: false,
+      visualize: false,
+      teleport: true,
+      order: 999
+    }
+  } as Record<string, TokenMovementAction<TokenPTR2e, TokenDocumentPTR2e>>
 }

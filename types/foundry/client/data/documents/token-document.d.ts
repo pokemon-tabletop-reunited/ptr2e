@@ -67,6 +67,37 @@ declare global {
     cost: number;
   }
 
+  interface TokenRulerData {
+    passedWaypoints: TokenMeasuredMovementWaypoint[];
+    pendingWaypoints: TokenMeasuredMovementWaypoint[];
+    plannedMovement: Record<string, TokenPlannedMovement>;
+  }
+
+  interface TokenPlannedMovement {
+    foundPath: Omit<TokenMeasuredMovementWaypoint, "userId"|"movementId">[];
+    unreachableWaypoints: Omit<TokenMeasuredMovementWaypoint, "userId"|"movementId">[];
+    history: TokenMeasuredMovementWaypoint[];
+    hidden: boolean;
+    searching: boolean;
+  }
+
+  interface TokenRulerWaypointData {
+    actionConfig: TokenMovementActionConfig<Token, TokenDocument>;
+    movementId: string | null;
+    index: number;
+    stage: "passed" | "pending" | "planned";
+    hidden: boolean;
+    unreachable: boolean;
+    center: Point;
+    size: { width: number; height: number };
+    ray: Ray | null;
+    measurement: GridMeasurePathResultWaypoint;
+    previous: TokenRulerWaypoint | null;
+    next: TokenRulerWaypoint | null;
+  }
+  
+  type TokenRulerWaypoint = Omit<TokenMeasuredMovementWaypoint, "movementId"> & TokenRulerWaypointData
+
   type TokenMovementWaypoint = Omit<TokenMeasuredMovementWaypoint, "terrain" | "intermediate" | "userId" | "cost">
 
   interface TokenPosition {
