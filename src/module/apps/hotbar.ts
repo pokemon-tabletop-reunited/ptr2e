@@ -120,6 +120,7 @@ export class HotbarPTR2e extends Hotbar {
   set tab(value: "slots" | "other" | "skills") {
     if (this._tab === value) return;
     this._tab = value;
+    this.noFade = true;
     //@ts-expect-error - Incomplete types
     this.render({ parts: ["left", "hotbar"] });
   }
@@ -252,9 +253,11 @@ export class HotbarPTR2e extends Hotbar {
 
   oldState: HTMLElement | null = null;
   timeline: gsap.core.Timeline | null = null;
+  noFade = false;
 
   #fadeOldState(): void {
     if (!this.element) return
+    if(this.noFade) return void (this.noFade = false);
 
     if(this.timeline) this.timeline.kill();
     const tl = this.timeline = gsap.timeline();
