@@ -195,6 +195,34 @@ class TokenPTR2e<TDocument extends TokenDocumentPTR2e = TokenDocumentPTR2e> exte
       teleport: action === "teleport",
     };
   }
+
+  //@ts-expect-error - Incomplete types
+  override _prepareDragLeftDropUpdates(event: PIXI.FederatedPointerEvent) {
+    //@ts-expect-error - Incomplete types
+    const updates = super._prepareDragLeftDropUpdates(event) as [[], {movement: Record<string, {waypoints: {width: number, height: number}[]}>}];
+
+    if(Array.isArray(updates) && updates.length > 1) {
+      const update = updates[1];
+      if(update && typeof update === "object" && "movement" in update) {
+        for(const user in update.movement) {
+          const waypoints = update.movement[user].waypoints;
+          if(Array.isArray(waypoints)) {
+            const size = TokenDocumentPTR2e.prepareSize(this.document);
+            if(size) {
+              for(const waypoint of waypoints) {
+                if(waypoint.width !== size.width || waypoint.height !== size.height) {
+                  waypoint.width = size.width;
+                  waypoint.height = size.height;
+                }
+              }
+            }
+          }
+        };
+      }
+    }
+
+    return updates;
+  }
 }
 
 export { TokenPTR2e }

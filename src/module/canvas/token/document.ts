@@ -7,6 +7,7 @@ import { CombatantPTR2e, CombatPTR2e } from "@combat";
 import CharacterCombatantSystem from "../../combat/combatant/models/character.ts";
 import { TokenAura } from "./aura/aura.ts";
 import { TokenConfigPTR2e } from "./sheet.ts";
+import BaseUser from "types/foundry/common/documents/user.js";
 
 class TokenDocumentPTR2e<TParent extends ScenePTR2e | null = ScenePTR2e | null> extends TokenDocument<TParent> {
 
@@ -97,9 +98,6 @@ class TokenDocumentPTR2e<TParent extends ScenePTR2e | null = ScenePTR2e | null> 
     const autoscale = linkToActorSize ? (this.flags.ptr2e.autoscale ?? autoscaleDefault) : false;
     this.flags.ptr2e = fu.mergeObject(this.flags.ptr2e ?? {}, { linkToActorSize, autoscale });
 
-    // Token dimensions from actor size
-    TokenDocumentPTR2e.prepareSize(this);
-
     // Add token overrides from effects
     const tokenOverrides = actor.synthetics.tokenOverrides;
     this.name = tokenOverrides.name ?? this.name;
@@ -183,22 +181,107 @@ class TokenDocumentPTR2e<TParent extends ScenePTR2e | null = ScenePTR2e | null> 
   }
 
   /** Set a TokenData instance's dimensions from actor data. Static so actors can use for their prototypes */
-  static prepareSize(token: TokenDocumentPTR2e /*| PrototypeTokenPTR2e<ActorPTR2e>*/): void {
+  static prepareSize(token: TokenDocumentPTR2e, {linkToActorSize = !!token.flags.ptr2e.linkToActorSize, autoscale = !!token.flags.ptr2e.autoscale}: {linkToActorSize?: boolean, autoscale?: boolean} = {}): {width: number; height: number, scaleX: number, scaleY: number} | null {
     const actor = token.actor;
-    if (!(actor && token.flags.ptr2e.linkToActorSize)) return;
+    if (!(actor && linkToActorSize)) return null;
 
     // If not overridden by an actor override, set according to creature size (skipping gargantuan)
     const size = actor.dimensions; // In case an AE-like corrupted actor size data
+    const result = {
+      width: token.width,
+      height: token.height,
+      scaleX: token.texture.scaleX,
+      scaleY: token.texture.scaleY,
+    }
 
-    token.width = size.width;
-    token.height = size.length;
+    if(token.width !== size.width || token.height !== size.length) {
+      result.width = size.width;
+      result.height = size.length;
+    }
 
-    if (game.ptr.settings.tokens.autoscale && token.flags.ptr2e.autoscale !== false) {
-      const absoluteScale = ["diminutive", "small"].includes(actor.size.value) ? 0.75 : 1;
+    if (game.ptr.settings.tokens.autoscale && autoscale !== false) {
+      const absoluteScale = ["diminutive", "tiny", "small"].includes(actor.size.value) ? 0.75 : 1;
       const mirrorX = token.texture.scaleX < 0 ? -1 : 1;
-      token.texture.scaleX = mirrorX * absoluteScale;
+      result.scaleX = mirrorX * absoluteScale;
       const mirrorY = token.texture.scaleY < 0 ? -1 : 1;
-      token.texture.scaleY = mirrorY * absoluteScale;
+      result.scaleY = mirrorY * absoluteScale;
+    }
+    return result;
+  }
+
+  protected override async _preCreate(data: this["_source"], options: DocumentModificationContext<TParent>, user: BaseUser): Promise<boolean | void> {
+    const result = await super._preCreate(data, options, user);
+    if (result === false) return false;
+
+    const flags = {
+      autoscale: !!this.flags.ptr2e.autoscale,
+      linkToActorSize: !!this.flags.ptr2e.linkToActorSize,
+    }
+    if ('flags' in data && typeof data.flags === "object" && data.flags && 'ptr2e' in data.flags && typeof data.flags.ptr2e === "object" && data.flags.ptr2e) {
+      if ('autoscale' in data.flags.ptr2e) {
+        flags.autoscale = !!data.flags.ptr2e.autoscale;
+      }
+      if ('linkToActorSize' in data.flags.ptr2e) {
+        flags.linkToActorSize = !!data.flags.ptr2e.linkToActorSize;
+      }
+    }
+    const size = TokenDocumentPTR2e.prepareSize(this, flags);
+
+    if (size) {
+      const { width, height, scaleX, scaleY } = size;
+      if (width !== this.width || height !== this.height) {
+        this.updateSource({ width, height });
+      }
+      if (scaleX !== this.texture.scaleX || scaleY !== this.texture.scaleY) {
+        this.updateSource({ texture: { scaleX, scaleY } });
+      }
+    }
+  }
+
+  //@ts-expect-error - Outdated types
+  override async move(waypoints, options = {}): Promise<boolean> {
+    if ( !Array.isArray(waypoints) ) waypoints = [waypoints];
+
+    const size = TokenDocumentPTR2e.prepareSize(this);
+    if(size) {
+      const { width, height } = size;
+      for(const waypoint of waypoints) {
+        if(waypoint.width !== width || waypoint.height !== height) {
+          waypoint.width = width;
+          waypoint.height = height;
+        }
+      }
+    }
+
+    //@ts-expect-error - Outdated types
+    return super.move(waypoints, options);
+  }
+
+  protected override async _preUpdate(changed: Record<string, unknown>, options: TokenUpdateContext<TParent>, user: User): Promise<boolean | void> {
+    const allowed = await super._preUpdate(changed, options, user);
+    if (allowed === false) return false;
+
+    const flags = {
+      autoscale: !!this.flags.ptr2e.autoscale,
+      linkToActorSize: !!this.flags.ptr2e.linkToActorSize,
+    }
+    if('flags' in changed && typeof changed.flags === "object" && changed.flags && 'ptr2e' in changed.flags && typeof changed.flags.ptr2e === "object" && changed.flags.ptr2e) {
+      if('autoscale' in changed.flags.ptr2e) {
+        options.autoscale = !!changed.flags.ptr2e.autoscale;
+      }
+      if('linkToActorSize' in changed.flags.ptr2e) {
+        options.linkToActorSize = !!changed.flags.ptr2e.linkToActorSize;
+      }
+    }
+
+    const size = TokenDocumentPTR2e.prepareSize(this, flags);
+    if(size) {
+      const {scaleX, scaleY} = size
+      if (scaleX !== this.texture.scaleX || scaleY !== this.texture.scaleY) {
+        changed.texture = changed.texture || {};
+        (changed.texture as {scaleX: number}).scaleX = scaleX;
+        (changed.texture as {scaleY: number}).scaleY = scaleY;
+      }
     }
   }
 

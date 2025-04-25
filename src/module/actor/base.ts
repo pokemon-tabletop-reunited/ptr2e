@@ -1934,7 +1934,14 @@ class ActorPTR2e<
         )
       );
 
-      const tokenDefaults = fu.deepClone(game.settings.get("core", "defaultToken"));
+      const tokenDefaults = ((): Partial<foundry.data.PrototypeTokenSource> => {
+        try {
+          return fu.duplicate(game.settings.get("core", "defaultToken"));
+        }
+        catch {
+          return game.settings.storage.get("world").find(s => s.key === "core.defaultToken")?.value as Partial<foundry.data.PrototypeTokenSource>
+        }
+      })() ?? {};
       const actor = new this(fu.mergeObject({ prototypeToken: tokenDefaults }, source));
       await MigrationRunner.ensureSchemaVersion(
         actor,

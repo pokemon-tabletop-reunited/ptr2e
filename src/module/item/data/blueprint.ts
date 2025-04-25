@@ -774,7 +774,14 @@ export default abstract class BlueprintSystem extends HasEmbed(HasMigrations(fou
         return Array.from(skills.values());
       })();
 
-      const foundryDefaultTokenSettings = game.settings.get("core", "defaultToken");
+      const foundryDefaultTokenSettings = ((): Partial<foundry.data.PrototypeTokenSource> => {
+        try {
+          return game.settings.get("core", "defaultToken");
+        }
+        catch {
+          return game.settings.storage.get("world").find(s => s.key === "core.defaultToken")?.value as Partial<foundry.data.PrototypeTokenSource>
+        }
+      })() ?? {};
 
       const data = {
         name: Handlebars.helpers.formatSlug(evolution.system.slug) || blueprint.name,

@@ -183,9 +183,9 @@ export const Init: PTRHook = {
       //@ts-expect-error - Monkey Patching
       const core = game.keybindings._registerCoreKeybindings;
       //@ts-expect-error - Monkey Patching
-      game.keybindings._registerCoreKeybindings = (view: string) => {
+      game.keybindings._registerCoreKeybindings = function(view: string) {
         // Run core code
-        core.call(this, view)
+        core.bind(this)(view)
         // Override the macro keybinding to use the PTR2E macro bar instead of the core one
         for (const number of Array.fromRange(9, 1).concat([0])) {
           const action = game.keybindings.actions.get(`core.executeMacro${number}`);
