@@ -3,7 +3,7 @@ import type { ActorPTR2e } from "../document";
 
 import fields = foundry.data.fields;
 import { CollectionField } from "../../fields/collection-field";
-import type { TypeField, TypesFieldOptions } from "./data.d.mts";
+import type { TypeField, TypesFieldOptions } from "./data";
 import { Natures, type PokemonType } from "../../constants";
 import { getTypes } from "../../config/effectiveness";
 import { SlugField } from "../../fields/slug-field";
@@ -11,6 +11,7 @@ import SkillPTR2e from "../../models/skill";
 import { getInitialSkillList } from "../../config/skills";
 import { ClockPTR2e } from "../../models/clock";
 import { SpeciesSystem } from "../../item/models/species";
+import { addDataFieldMigration, exactKeys } from "../../../util/misc";
 
 const actorSystemSchema = {
   advancement: new fields.SchemaField({
@@ -235,6 +236,23 @@ declare namespace ActorSystem {
 class ActorSystem extends foundry.abstract.TypeDataModel<ActorSystem.Schema, ActorPTR2e> {
   static override defineSchema(): fields.DataSchema {
     return actorSystemSchema;
+  }
+
+  static override migrateData(source: foundry.data.fields.SchemaField.SourceData<ActorSystem.Schema>) {
+    // Migrate the `health.shield` field to the new `shield` field
+    addDataFieldMigration(source, "health.shield", "shield");
+
+    // Migrate species Abilities data to the new format
+    if (source.species?.abilities) {
+      for (const abGroup of exactKeys(source.species.abilities)) {
+        source.species.abilities[abGroup] = source.species.abilities[abGroup].map(g => {
+          if (typeof g == "object") return g;
+          return { slug: g, uuid: null };
+        });
+      }
+    }
+
+    return super.migrateData(source);
   }
 
   test(this: ActorSystem) {

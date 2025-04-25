@@ -5,6 +5,7 @@ import type { PokemonActorSystem } from "./system/data/actor/models/pokemon";
 import type { ActorSystem } from "./system/data/actor/models/system";
 import type { PTRCONFIG } from "./system/data/config";
 import type { PokemonType } from "./system/data/constants";
+import type { ItemPTR2e } from "./system/data/item/document";
 import type ClockDatabase from "./system/data/models/clock-db";
 import type { CustomSkill } from "./system/data/models/skill";
 import type SkillsCollection from "./system/data/skills-collection";
@@ -46,6 +47,7 @@ declare global {
 
   interface DocumentClassConfig {
     Actor: typeof ActorPTR2e
+    Item: typeof ItemPTR2e
   }
 
   // foundry-vtt-types needs to know what data models you register with Foundry at runtime.
@@ -57,7 +59,7 @@ declare global {
   }
 
   interface SettingConfig {
-    "ptr2e.clocks": ClockDatabase,
+    "ptr2e.clocks": typeof ClockDatabase,
     "ptr2e.skills": CustomSkill[],
     "ptr2e.pokemonTypes": PokemonType[],
   }

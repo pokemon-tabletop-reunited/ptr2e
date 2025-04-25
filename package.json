@@ -1,7 +1,6 @@
 {
   "name": "ptr2e-foundry",
   "type": "module",
-  "packageManager": "yarn@4.6.0",
   "scripts": {
     "build": "vite build",
     "dev": "vite",
@@ -13,10 +12,11 @@
     "@eslint/compat": "^1.2.4",
     "@eslint/js": "^9.16.0",
     "@types/eslint": "^9.6.1",
-    "@types/eslint-config-prettier": "^6.11.3",
     "@types/eslint__js": "^8.42.3",
+    "@types/eslint-config-prettier": "^6.11.3",
     "@types/node": "^22.10.2",
     "@types/sortablejs": "^1.15.7",
+    "@types/yaireo__tagify": "^4.27.0",
     "esbuild": "^0.24.0",
     "eslint": "^9.16.0",
     "eslint-config-prettier": "^9.1.0",
@@ -36,11 +36,11 @@
     "vite-tsconfig-paths": "^5.1.4"
   },
   "dependencies": {
+    "@yaireo/tagify": "^4.35.0",
     "remeda": "^2.16.0",
     "sortablejs": "^1.15.2"
   },
-  "resolutions": {
-    "vite-plugin-checker/ansi-escapes": "^7.0.0",
+  "overrides": {
     "@types/earcut": "^3.0.0"
   }
 }

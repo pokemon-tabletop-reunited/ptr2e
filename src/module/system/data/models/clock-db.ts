@@ -30,7 +30,6 @@ class ClockDatabase extends foundry.abstract.DataModel<ClockDatabase.Schema> {
   }
 
   static async update(data: ClockDatabase['_source'], refresh = true): Promise<ClockDatabase> {
-    //@ts-expect-error - Valid operation, learn how to type this properly.
     await game.settings.set("ptr2e", "clocks", data);
 
     if (refresh) this.refresh();
@@ -38,42 +37,42 @@ class ClockDatabase extends foundry.abstract.DataModel<ClockDatabase.Schema> {
     return this.instance;
   }
 
-  static async createClock(data: foundry.data.fields.SchemaField.PersistedData<ClockPTR2e.Schema>) {
+  static async createClock(data: foundry.data.fields.SchemaField.SourceData<ClockPTR2e.Schema>) {
     const instance = this.instance.toObject();
     instance.clocks.push(data);
     return this.update(instance);
   }
 
-  async createClock(data: foundry.data.fields.SchemaField.PersistedData<ClockPTR2e.Schema>) {
+  async createClock(data: foundry.data.fields.SchemaField.SourceData<ClockPTR2e.Schema>) {
     return ClockDatabase.createClock(data);
   }
 
-  static async updateClocks(data: ({ _id: ClockPTR2e['id'] } & Partial<Omit<foundry.data.fields.SchemaField.PersistedData<ClockPTR2e.Schema>, 'id'>>)[]) {
+  static async updateClocks(data: ({ _id: ClockPTR2e['id'] } & Partial<Omit<foundry.data.fields.SchemaField.SourceData<ClockPTR2e.Schema>, 'id'>>)[]) {
     const instance = this.instance.toObject();
 
     for (const update of data) {
       const clockIndex = instance.clocks.findIndex((c) => c.id === update._id);
       if (clockIndex === -1) continue;
 
-      instance.clocks[clockIndex] = foundry.utils.mergeObject(instance.clocks[clockIndex]!, update) as unknown as foundry.data.fields.SchemaField.PersistedData<ClockPTR2e.Schema>
+      instance.clocks[clockIndex] = foundry.utils.mergeObject(instance.clocks[clockIndex]!, update) as unknown as foundry.data.fields.SchemaField.SourceData<ClockPTR2e.Schema>
     }
 
     return this.update(instance);
   }
 
-  async updateClocks(data: ({ _id: ClockPTR2e['id'] } & Partial<Omit<foundry.data.fields.SchemaField.PersistedData<ClockPTR2e.Schema>, 'id'>>)[]) {
+  async updateClocks(data: ({ _id: ClockPTR2e['id'] } & Partial<Omit<foundry.data.fields.SchemaField.SourceData<ClockPTR2e.Schema>, 'id'>>)[]) {
     return ClockDatabase.updateClocks(data);
   }
 
-  static async updateClock(id: string, data: Partial<foundry.data.fields.SchemaField.PersistedData<ClockPTR2e.Schema>>) {
+  static async updateClock(id: string, data: Partial<foundry.data.fields.SchemaField.SourceData<ClockPTR2e.Schema>>) {
     const instance = this.instance.toObject();
     const index = instance.clocks.findIndex((clock) => clock.id === id);
     if (index === -1) return undefined;
-    instance.clocks[index] = foundry.utils.mergeObject(instance.clocks[index]!, data) as unknown as foundry.data.fields.SchemaField.PersistedData<ClockPTR2e.Schema>;
+    instance.clocks[index] = foundry.utils.mergeObject(instance.clocks[index]!, data) as unknown as foundry.data.fields.SchemaField.SourceData<ClockPTR2e.Schema>;
     return this.update(instance);
   }
 
-  async updateClock(id: string, data: Partial<foundry.data.fields.SchemaField.PersistedData<ClockPTR2e.Schema>>) {
+  async updateClock(id: string, data: Partial<foundry.data.fields.SchemaField.SourceData<ClockPTR2e.Schema>>) {
     return ClockDatabase.updateClock(id, data);
   }
 

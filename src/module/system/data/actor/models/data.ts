@@ -21,3 +21,22 @@ type TypeField = foundry.data.fields.StringField<TypeFieldOptions, keyof TypeEff
 type TypeFieldOptions = { required: true, initial: keyof TypeEffectiveness, nullable: false }
 
 type GenderOptions = "genderless" | "male" | "female";
+
+type SizeTypes = "height" | "quad" | "length";
+type SizeCategory = "Diminutive" | "Tiny" | "Small" | "Medium" | "Large" | "Huge" | "Gigantic" | "Titanic" | "Max";
+type SpeciesSize = {
+  sizeClass: number;
+  sizeCategory: SizeCategory;
+}
+
+export type {
+  TypeEffectiveness,
+  TypeSchema,
+  TypesFieldOptions,
+  TypeField,
+  TypeFieldOptions,
+  GenderOptions,
+  SizeTypes,
+  SizeCategory,
+  SpeciesSize,
+}

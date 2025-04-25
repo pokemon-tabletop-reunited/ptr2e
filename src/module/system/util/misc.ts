@@ -536,6 +536,25 @@ function NORMINV(p: number, mean: number, std: number) {
   return -sqrt2 * std * erfcinv(2 * pFix) + mean;
 }
 
+type ExactEntries<Obj extends object> = Array<{
+  [K in keyof Obj]: [K, Obj[K]];
+}[keyof Obj]>;
+
+type ExactKeys<Obj extends object> = Array<keyof Obj>;
+type ExactValues<Obj extends object> = Array<Obj[keyof object]>;
+
+function exactEntries<Obj extends object>(obj: Obj): ExactEntries<Obj> {
+  return Object.entries(obj) as ExactEntries<Obj>;
+}
+
+function exactKeys<Obj extends object>(obj: Obj): ExactKeys<Obj> {
+  return Object.keys(obj) as ExactKeys<Obj>;
+}
+
+function exactValues<Obj extends object>(obj: Obj): ExactValues<Obj> {
+  return Object.values(obj) as ExactValues<Obj>;
+}
+
 export {
   fontAwesomeIcon,
   formatSlug,
@@ -561,6 +580,9 @@ export {
   isImageOrVideoPath,
   NORMINV,
   exportToJSON,
-  importFromJSON
+  importFromJSON,
+  exactEntries,
+  exactKeys,
+  exactValues,
 };
 export type { FontAwesomeStyle, SlugCamel };
