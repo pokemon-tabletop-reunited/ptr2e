@@ -211,6 +211,14 @@ export class ActionEditor<
 
   static async #onSubmit<TDocument extends ItemPTR2e<ItemSystemsWithActions>>(this: ActionEditor<TDocument>, _event: Event, _element: HTMLFormElement, formData: FormDataExtended) {
     const data = formData.object;
+    for(const key in data) {
+      //TODO: Realistically this should be done in the template, but this is the 'quick and dirty' fix for now.
+      const newKey = key.replace("system.", "").replace("actions.", "").replace("element.", "").replace("attack.", "").replace("generic.", "").replace("summon.", "").replace("action.", "").replace("passive.", "").replace("exploration.", "").replace("downtime.", "").replace("pokeball.", "");
+      if (newKey !== key) {
+        data[newKey] = data[key];
+        delete data[key];
+      }
+    }
 
     if (
       "traits" in data &&
