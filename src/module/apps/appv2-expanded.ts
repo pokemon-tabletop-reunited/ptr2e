@@ -123,14 +123,6 @@ export class ActorSheetV2Expanded<
     dragDrop: [],
   };
 
-  protected _dragDropHandlers: DragDrop[];
-
-  constructor(options: Partial<DocumentSheetConfigurationExpanded> = {}) {
-    super(options);
-
-    this._dragDropHandlers = this._createDragDropHandlers();
-  }
-
   override get title() {
     if (!this.actor.isToken) return this.actor.name;
     return `[${game.i18n.localize(TokenDocument.metadata.label)}] ${this.actor.name}`;
@@ -152,33 +144,6 @@ export class ActorSheetV2Expanded<
     const formData = new FormDataExtended(element);
     if (handler instanceof Function) await handler.call(this, event, element, formData);
     if (closeOnSubmit) await this.close();
-  }
-
-  override _onRender(context: foundry.applications.api.ApplicationRenderContext, options: TRenderOptions): void {
-    super._onRender(context, options);
-
-    // Attach drag-and-drop handlers
-    this._dragDropHandlers.forEach((handler) => handler.bind(this.element));
-  }
-
-  /**
-   * Create drag-and-drop workflow handlers for this Application
-   * @returns {DragDrop[]}     An array of DragDrop handlers
-   * @private
-   */
-  _createDragDropHandlers() {
-    return this.options.dragDrop.map((d) => {
-      d.permissions = {
-        dragstart: this._canDragStart.bind(this),
-        drop: this._canDragDrop.bind(this),
-      };
-      d.callbacks = {
-        dragstart: this._onDragStart.bind(this),
-        dragover: this._onDragOver.bind(this),
-        drop: this._onDrop.bind(this),
-      };
-      return new DragDrop(d);
-    });
   }
 
   /**
