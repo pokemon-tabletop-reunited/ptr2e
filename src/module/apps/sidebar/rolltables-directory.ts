@@ -1,7 +1,7 @@
 //TODO: Refactor this file & functionality to be not only AppV2 compatible, but also less hacky.
 import { HabitatRollTable } from "@system/habitat-table.ts";
 
-export class RollTableDirectoryPTR2e extends RollTableDirectory {
+export class RollTableDirectoryPTR2e extends foundry.applications.sidebar.tabs.RollTableDirectory {
   // static DEFAULT_OPTIONS = {
   //   actions: {
   //     "open-habitat": RollTableDirectoryPTR2e.#onHabitatClick

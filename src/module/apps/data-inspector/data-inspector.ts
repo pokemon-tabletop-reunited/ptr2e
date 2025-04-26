@@ -491,7 +491,7 @@ class DataInspector extends foundry.applications.api.HandlebarsApplicationMixin(
   override async _onDrop(event: DragEvent) {
     event.preventDefault();
 
-    const data: { type: string, uuid: string } = TextEditor.getDragEventData(event);
+    const data: { type: string, uuid: string } = foundry.applications.ux.TextEditor.getDragEventData(event);
     if (!data?.uuid) return;
 
     const document = await fromUuid(data.uuid);

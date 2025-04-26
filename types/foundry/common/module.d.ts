@@ -32,6 +32,10 @@ declare global {
             export import applications = Applications;
 
             export import canvas = CanvasS;
+
+            //V13 aliases
+            export const nue: {Tour: typeof Tour}
+            export const appv1: {sheets: {ItemSheet: typeof ItemSheet, ActorSheet: typeof ActorSheet, }}
         }
     }
 }

@@ -27,13 +27,13 @@ class FolderPTR2e<
 
   get owner(): string {
     if (this.type !== "Actor") return '';
-    if(this.compendium) return '';
+    if(this.inCompendium) return '';
     return this.contents.find(actor => (actor as unknown as ActorPTR2e).system.party?.ownerOf == this.id)?.uuid ?? '';
   }
 
   get ownerActor(): ActorPTR2e | null {
     if (this.type !== "Actor") return null;
-    if(this.compendium) return null;
+    if(this.inCompendium) return null;
     return this.contents.find(actor => (actor as unknown as ActorPTR2e).system.party?.ownerOf == this.id) as unknown as ActorPTR2e | null;
   }
 
@@ -45,7 +45,7 @@ class FolderPTR2e<
 
   get party() {
     if (this.type !== "Actor") return [];
-    if(this.compendium) return [];
+    if(this.inCompendium) return [];
     return this.contents.filter(actor => (actor as unknown as ActorPTR2e).system.party?.partyMemberOf == this.id).map(actor => actor.uuid);
   }
 

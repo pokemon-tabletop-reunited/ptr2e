@@ -104,7 +104,7 @@ export default class MoveSheet extends ItemSheetPTR2e<MovePTR2e["system"]> {
         attack: attack,
         source: attack?._source,
         fields: attack?.schema.fields,
-        enrichedDescription: await TextEditor.enrichHTML(attack?.description ?? null),
+        enrichedDescription: await foundry.applications.ux.TextEditor.enrichHTML(attack?.description ?? null),
       },
     };
   }

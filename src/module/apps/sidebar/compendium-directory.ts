@@ -1,4 +1,4 @@
-export class CompendiumDirectoryPTR2e extends CompendiumDirectory {
+export class CompendiumDirectoryPTR2e extends foundry.applications.sidebar.tabs.CompendiumDirectory {
   static readonly STOP_WORDS = new Set(["of", "th", "the"])
 
   static DEFAULT_OPTIONS = {

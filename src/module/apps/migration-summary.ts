@@ -44,7 +44,7 @@ export class MigrationSummary extends Application<MigrationSummaryOptions> {
         const canRemigrate =
             this.options.troubleshoot || actors.successful < actors.total || items.successful < items.total;
 
-        const helpResourcesText = await TextEditor.enrichHTML(
+        const helpResourcesText = await foundry.applications.ux.TextEditor.enrichHTML(
             game.i18n.localize("PTR2E.Migrations.Summary.HelpResources"),
             { async: true },
         );

@@ -1,7 +1,7 @@
 import { GithubSheet } from "../github.ts";
 import { GlobalPerkGeneratorConfig } from "../global-perk-generator-config.ts";
 
-export class SettingsSidebarPTR2e extends Settings {
+export class SettingsSidebarPTR2e extends foundry.applications.sidebar.tabs.Settings {
 
   static DEFAULT_OPTIONS = {
     actions: {

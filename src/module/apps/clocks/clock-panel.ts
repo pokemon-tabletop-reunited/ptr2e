@@ -2,6 +2,7 @@ import Clock from "@module/data/models/clock.ts";
 import { HandlebarsRenderOptions } from "types/foundry/common/applications/handlebars-application.ts";
 import ClockEditor from "./clock-editor.ts";
 import Sortable from "sortablejs";
+import { Draggable } from "gsap/all";
 import { ApplicationRenderContext, ApplicationRenderOptions } from "types/foundry/common/applications/api.js";
 
 export default class ClockPanel extends foundry.applications.api.HandlebarsApplicationMixin(

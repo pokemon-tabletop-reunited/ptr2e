@@ -412,7 +412,7 @@ class PartySheetPTR2e extends foundry.applications.api.HandlebarsApplicationMixi
   }
 
   override async _onDrop(event: DragEvent) {
-    const data = TextEditor.getDragEventData(event) as DropCanvasData;
+    const data = foundry.applications.ux.TextEditor.getDragEventData(event) as DropCanvasData;
     switch (data.type) {
       case "Folder": return this._onDropFolder(event, data);
       case "Actor": return this._onDropEntry(event, data);

@@ -312,7 +312,7 @@ export class TutorListApp extends foundry.applications.api.HandlebarsApplication
 
   override async _onDrop(event: DragEvent) {
     event.preventDefault();
-    const data: { uuid: string, type: string } = TextEditor.getDragEventData(event);
+    const data: { uuid: string, type: string } = foundry.applications.ux.TextEditor.getDragEventData(event);
     if (data.type !== "Actor" || !data.uuid) return;
 
     const actor = await fromUuid<ActorPTR2e>(data.uuid);

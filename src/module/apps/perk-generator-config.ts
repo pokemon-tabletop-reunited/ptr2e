@@ -336,7 +336,7 @@ export class PerkGeneratorConfig extends foundry.applications.api.HandlebarsAppl
   }
 
   override async _onDrop(event: DragEvent) {
-    const data: { type: string } = TextEditor.getDragEventData(event);
+    const data: { type: string } = foundry.applications.ux.TextEditor.getDragEventData(event);
     if (data.type !== "Item") return;
 
     const item = (await ItemPTR2e.implementation.fromDropData(data)) as PerkPTR2e;

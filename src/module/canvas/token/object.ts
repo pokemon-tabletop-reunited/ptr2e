@@ -3,7 +3,7 @@ import { SquareGridPTR2e } from "../grid.ts";
 import { AuraRenderers } from "./aura/map.ts";
 import * as R from "remeda";
 
-class TokenPTR2e<TDocument extends TokenDocumentPTR2e = TokenDocumentPTR2e> extends Token<TDocument> {
+class TokenPTR2e<TDocument extends TokenDocumentPTR2e = TokenDocumentPTR2e> extends foundry.canvas.placeables.Token<TDocument> {
   /** Visual representation and proximity-detection facilities for auras */
   readonly auras: AuraRenderers;
 

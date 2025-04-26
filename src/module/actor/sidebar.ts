@@ -5,7 +5,7 @@ import FolderConfigPTR2e from "@module/folder/sheet.ts";
 
 export default class ActorDirectoryPTR2e<
   TActor extends ActorPTR2e<ActorSystemPTR2e, null>,
-> extends ActorDirectory<TActor> {
+> extends foundry.applications.sidebar.tabs.ActorDirectory<TActor> {
 
   static DEFAULT_OPTIONS = {
     classes: ["ptr2e"],

@@ -31,7 +31,7 @@ export class TokenHUDPTR2e extends foundry.applications.hud.TokenHUD {
       return acc;
     }, []);
 
-    const tokenMovement = await renderTemplate("systems/ptr2e/templates/hud/token-movement.hbs", {
+    const tokenMovement = await foundry.applications.handlebars.renderTemplate("systems/ptr2e/templates/hud/token-movement.hbs", {
       movementModes,
       movementTray: this.#movementTrayActive ? "active" : "",
       currentMovement: movement[movementType as keyof typeof movement],

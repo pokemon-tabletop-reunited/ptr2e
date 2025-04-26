@@ -185,7 +185,7 @@ abstract class SkillMessageSystem extends foundry.abstract.TypeDataModel {
       const luckRollHTML = context.luckRoll
         ? await context.luckRoll.render({ isPrivate })
         : null;
-      return renderTemplate("systems/ptr2e/templates/chat/rolls/skill-check.hbs", {
+      return foundry.applications.handlebars.renderTemplate("systems/ptr2e/templates/chat/rolls/skill-check.hbs", {
         roll: context.roll,
         inner: innerRollHTML,
         innerLuck: luckRollHTML,
@@ -215,7 +215,7 @@ abstract class SkillMessageSystem extends foundry.abstract.TypeDataModel {
       context.label = "End of Day Luck Roll";
     }
 
-    return renderTemplate("systems/ptr2e/templates/chat/skill.hbs", context);
+    return foundry.applications.handlebars.renderTemplate("systems/ptr2e/templates/chat/skill.hbs", context);
   }
 
   activateListeners(html: JQuery<HTMLElement>) {

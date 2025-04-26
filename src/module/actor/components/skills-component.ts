@@ -90,7 +90,7 @@ class SkillsComponent extends ActorComponent {
         const {skills, hideHiddenSkills} = SkillsComponent.prepareSkillsData(this.actor);
         data.skills = skills;
         data.hideHiddenSkills = hideHiddenSkills;
-        return renderTemplate(this.template, data);
+        return foundry.applications.handlebars.renderTemplate(this.template, data);
     }
 
     override renderFrame(close: HTMLElement): void {

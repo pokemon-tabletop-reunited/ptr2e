@@ -68,7 +68,7 @@ export class EXPTracker extends foundry.applications.api.HandlebarsApplicationMi
         await ActorPTR2e.updateDocuments(updates);
         await game.settings.set("ptr2e", "expTrackerData", { custom: game.settings.get("ptr2e", "expTrackerData").custom.map(c => ({ ...c, checked: false })) });
         await ChatMessage.create({
-          content: await renderTemplate("systems/ptr2e/templates/chat/exp-tracker.hbs", { messages, total, percent: cmsPercent }),
+          content: await foundry.applications.handlebars.renderTemplate("systems/ptr2e/templates/chat/exp-tracker.hbs", { messages, total, percent: cmsPercent }),
           speaker: ChatMessage.getSpeaker({ alias: game.i18n.localize("PTR2E.ExpTracker.title") }),
           flags: {
             ptr2e: {
@@ -119,7 +119,7 @@ export class EXPTracker extends foundry.applications.api.HandlebarsApplicationMi
         game.user.unsetFlag("ptr2e", "exp-training-slots");
 
         await ChatMessage.create({
-          content: await renderTemplate("systems/ptr2e/templates/chat/exp-tracker.hbs", { messages, total }),
+          content: await foundry.applications.handlebars.renderTemplate("systems/ptr2e/templates/chat/exp-tracker.hbs", { messages, total }),
           speaker: ChatMessage.getSpeaker({ alias: game.i18n.localize("PTR2E.ExpTracker.title") }),
           flags: {
             ptr2e: {
@@ -405,7 +405,7 @@ export class EXPTracker extends foundry.applications.api.HandlebarsApplicationMi
     const slot = parseInt(target.parentElement?.dataset.slot ?? "");
     if (isNaN(slot)) return;
 
-    const data = TextEditor.getDragEventData(event) as { type: string, uuid: string };
+    const data = foundry.applications.ux.TextEditor.getDragEventData(event) as { type: string, uuid: string };
     if (!(data?.type === "Actor" && data.uuid)) return;
 
     const actor = await fromUuid<ActorPTR2e>(data.uuid);

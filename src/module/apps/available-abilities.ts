@@ -79,7 +79,7 @@ export class AvailableAbilitiesApp extends foundry.applications.api.HandlebarsAp
   }
 
   override async _onDrop(event: DragEvent) {
-    const data = TextEditor.getDragEventData<DropCanvasData>(event);
+    const data = foundry.applications.ux.TextEditor.getDragEventData<DropCanvasData>(event);
     const item = await ItemPTR2e.fromDropData(data);
     if (!item || item.type !== "ability" || item.parent?.uuid === this.document.uuid) return;
 

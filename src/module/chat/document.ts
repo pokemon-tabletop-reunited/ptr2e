@@ -72,7 +72,7 @@ class ChatMessagePTR2e<TSchema extends TypeDataModel = TypeDataModel> extends Ch
 
     // Determine some metadata
     const data = this.toObject(false);
-    data.content = await TextEditor.enrichHTML(content, {
+    data.content = await foundry.applications.ux.TextEditor.enrichHTML(content, {
       rollData: this.getRollData() as Record<string, unknown>,
     });
     const isWhisper = this.whisper.length;
@@ -110,7 +110,6 @@ class ChatMessagePTR2e<TSchema extends TypeDataModel = TypeDataModel> extends Ch
       messageData.borderColor = (this.author?.color as Color).css;
 
     // Render the chat message
-    //@ts-expect-error - Missing type defs for foundry.applications.handlebars
     const template = await foundry.applications.handlebars.renderTemplate(CONFIG.ChatMessage.template, messageData);
     const html = foundry.utils.parseHTML(template) as HTMLElement;
 

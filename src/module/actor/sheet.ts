@@ -450,7 +450,7 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
       hideHiddenSkills,
       shouldPerkFlash,
       natures: natures,
-      enrichedBiography: await TextEditor.enrichHTML(this.actor.system.details.biography),
+      enrichedBiography: await foundry.applications.ux.TextEditor.enrichHTML(this.actor.system.details.biography),
       allianceOptions,
       alliance
     };
@@ -1007,7 +1007,7 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
         type: string;
       };
       uuid?: string;
-    } = TextEditor.getDragEventData(event);
+    } = foundry.applications.ux.TextEditor.getDragEventData(event);
 
     if (data.uuid) {
       const item = await fromUuid(data.uuid);
@@ -1228,7 +1228,7 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
 
     const itemId = htmlClosest(event.target, "[data-item-id]")?.dataset.itemId;
     const item = this.actor.items.get(itemId, { strict: true });
-    const template = await renderTemplate("systems/ptr2e/templates/apps/carry-type-menu.hbs", { item });
+    const template = await foundry.applications.handlebars.renderTemplate("systems/ptr2e/templates/apps/carry-type-menu.hbs", { item });
     const content = createHTMLElement("ul", { innerHTML: template });
     content.addEventListener("click", (event) => {
       const menuOption = htmlClosest(event.target, "a[data-carry-type]");

@@ -80,7 +80,7 @@ export class KnownActionsApp extends foundry.applications.api.HandlebarsApplicat
   }
 
   override async _onDrop(event: DragEvent) {
-    const data = TextEditor.getDragEventData<DropCanvasData>(event);
+    const data = foundry.applications.ux.TextEditor.getDragEventData<DropCanvasData>(event);
     const item = await ItemPTR2e.fromDropData(data);
     if (!item || item.type !== "move" || item.parent?.uuid === this.document.uuid) return;
 

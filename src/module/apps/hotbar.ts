@@ -8,7 +8,7 @@ import { formatSlug } from "@utils";
 import { ApplicationRenderOptions } from "types/foundry/common/applications/_types.js"
 import { HandlebarsRenderOptions } from "types/foundry/common/applications/api/handlebars-application.ts";
 
-export class HotbarPTR2e extends Hotbar {
+export class HotbarPTR2e extends foundry.applications.ui.Hotbar {
   static override DEFAULT_OPTIONS = {
     actions: {
       execute: HotbarPTR2e.#onExecute,

@@ -148,7 +148,7 @@ export class GlobalPerkGeneratorConfig extends foundry.applications.api.Handleba
   }
 
   override async _onDrop(event: DragEvent) {
-    const data = TextEditor.getDragEventData(event) as Record<string, string>;
+    const data = foundry.applications.ux.TextEditor.getDragEventData(event) as Record<string, string>;
     if (data.type !== "GeneratorConfig") return;
 
     const config = data.uuid ? await (async () => {

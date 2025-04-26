@@ -171,7 +171,7 @@ export default class ItemSheetPTR2e<
 
     const effects = this.document.effects.contents;
 
-    const enrichedDescription = await TextEditor.enrichHTML(this.document.system.description);
+    const enrichedDescription = await foundry.applications.ux.TextEditor.enrichHTML(this.document.system.description);
 
     return {
       ...((await super._prepareContext()) as Record<string, unknown>),
@@ -182,7 +182,7 @@ export default class ItemSheetPTR2e<
       traits,
       effects,
       enrichedDescription,
-      enrichedNotes: (this.document.system instanceof BlueprintSystem) ? "" : await TextEditor.enrichHTML(this.document.system.publication?.notes ?? ""),
+      enrichedNotes: (this.document.system instanceof BlueprintSystem) ? "" : await foundry.applications.ux.TextEditor.enrichHTML(this.document.system.publication?.notes ?? ""),
     };
   }
 

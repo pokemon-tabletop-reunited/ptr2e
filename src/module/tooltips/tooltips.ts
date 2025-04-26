@@ -37,7 +37,7 @@ export default class TooltipsPTR2e {
    * @param _observer - The observer that triggered the mutations
    */
   _onMutation(mutations: MutationRecord[]) {
-    if(Tour.activeTour) return;
+    if(foundry.nue.Tour.activeTour) return;
     for (const { type, attributeName, oldValue } of mutations) {
       if (type === "attributes" && attributeName === "class") {
         const diff = new Set(this.tooltip.classList).difference(
@@ -130,7 +130,7 @@ export default class TooltipsPTR2e {
     if (!data) return false;
 
     this.tooltip.innerHTML = `<h4 class="trait">[${data.label
-      }]</h4><content>${await TextEditor.enrichHTML(data.description)}</content>
+      }]</h4><content>${await foundry.applications.ux.TextEditor.enrichHTML(data.description)}</content>
         <div class="progress-circle">
             <svg width="20" height="20" viewBox="0 0 20 20" class="circular-progress">
                 <circle class="bg"></circle>
@@ -160,7 +160,7 @@ export default class TooltipsPTR2e {
         const skill = game.ptr.data.skills.get(skillSlug) as CustomSkill;
         return {
           localizedContent: skill?.description
-            ? await TextEditor.enrichHTML(skill.description)
+            ? await foundry.applications.ux.TextEditor.enrichHTML(skill.description)
             : null,
           localizedLabel:
             skill?.label ?? (Handlebars.helpers.formatSlug(skill?.slug ?? "") || null),
@@ -229,7 +229,7 @@ export default class TooltipsPTR2e {
     if (!affliction) return false;
 
     const effect = await ActiveEffectPTR2e.fromStatusEffect(affliction.id);
-    effect.description = await TextEditor.enrichHTML(
+    effect.description = await foundry.applications.ux.TextEditor.enrichHTML(
       game.i18n.localize(affliction.description!)
     );
 
@@ -545,7 +545,7 @@ export default class TooltipsPTR2e {
     const range = (element as HTMLSelectElement).value ?? element.dataset.rangeValue;
     if (!range) return false;
 
-    this.tooltip.innerHTML = await TextEditor.enrichHTML(game.i18n.localize(`PTR2E.Ranges.${range}`));
+    this.tooltip.innerHTML = await foundry.applications.ux.TextEditor.enrichHTML(game.i18n.localize(`PTR2E.Ranges.${range}`));
     requestAnimationFrame(() => this._positionTooltip(game.tooltip.element?.dataset.tooltipDirection as TooltipDirections | undefined || TooltipManager.TOOLTIP_DIRECTIONS.DOWN));
 
     return 500;
@@ -892,7 +892,7 @@ export default class TooltipsPTR2e {
     direction?: TooltipDirections;
     autoLock?: boolean;
   }) {
-    let html = await renderTemplate(path, data);
+    let html = await foundry.applications.handlebars.renderTemplate(path, data);
     if (autoLock)
       html += `<div class="progress-circle">
             <svg width="20" height="20" viewBox="0 0 20 20" class="circular-progress">
@@ -901,7 +901,7 @@ export default class TooltipsPTR2e {
                 <circle class="fgb"></circle>
             </svg>
         </div>`;
-    this.tooltip.innerHTML = await TextEditor.enrichHTML(html);
+    this.tooltip.innerHTML = await foundry.applications.ux.TextEditor.enrichHTML(html);
     requestAnimationFrame(() => this._positionTooltip(direction));
   }
 

@@ -202,7 +202,7 @@ export class ActionEditor<
       source: this.action.toObject(),
       fields: this.action.schema.fields,
       traits,
-      enrichedDescription: await TextEditor.enrichHTML(this.action.description),
+      enrichedDescription: await foundry.applications.ux.TextEditor.enrichHTML(this.action.description),
       rangeData: { tooltip: "range-tooltip", range: this.action?.range?.target },
       typeOptions: this.action.item.type === "summon" ? R.pick(typeOptions, ["summon", "generic"]) : R.omit(typeOptions, ["summon"]),
       variants

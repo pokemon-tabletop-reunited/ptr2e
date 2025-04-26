@@ -172,7 +172,7 @@ export abstract class CompendiumBrowserTab {
     const indexData = fn ? await fn(this.getIndexData(start)) : this.getIndexData(start);;
     const liElements: HTMLLIElement[] = [];
     for (const entry of indexData) {
-      const htmlString = await renderTemplate(this.templatePath, {
+      const htmlString = await foundry.applications.handlebars.renderTemplate(this.templatePath, {
         entry: entry,
         filterData: this.filterData,
       });
@@ -342,7 +342,7 @@ export abstract class CompendiumBrowserTab {
       return;
     }
 
-    const content = await renderTemplate("systems/ptr2e/templates/compendium-browser/roll-table-dialog.hbs", {
+    const content = await foundry.applications.handlebars.renderTemplate("systems/ptr2e/templates/compendium-browser/roll-table-dialog.hbs", {
       count: this.currentIndex.length,
     });
     Dialog.confirm({
@@ -380,7 +380,7 @@ export abstract class CompendiumBrowserTab {
       return;
     }
 
-    const content = await renderTemplate("systems/ptr2e/templates/compendium-browser/roll-table-dialog.hbs", {
+    const content = await foundry.applications.handlebars.renderTemplate("systems/ptr2e/templates/compendium-browser/roll-table-dialog.hbs", {
       count: this.currentIndex.length,
       rollTables: game.tables.contents,
     });

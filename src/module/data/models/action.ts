@@ -181,7 +181,7 @@ class ActionPTR2e extends foundry.abstract.DataModel {
     classes.unshift(this.type, "action");
 
     name ??= this.name;
-    return TextEditor.createAnchor({ attrs, dataset, name, classes, icon: anchorIcon });
+    return foundry.applications.ux.TextEditor.createAnchor({ attrs, dataset, name, classes, icon: anchorIcon });
   }
 
   _onClickDocumentLink() {

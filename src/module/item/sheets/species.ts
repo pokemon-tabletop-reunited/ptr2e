@@ -441,7 +441,7 @@ export default class SpeciesSheet extends ItemSheetPTR2e<SpeciesPTR2e["system"]>
     const { path } = target.dataset;
     if (!path) return;
 
-    const data = TextEditor.getDragEventData(event) as Record<string, string>;
+    const data = foundry.applications.ux.TextEditor.getDragEventData(event) as Record<string, string>;
     if (data.type !== "Item" || !data.uuid) return;
     const item = await fromUuid<ItemPTR2e>(data.uuid);
     if (!item || !(item instanceof ItemPTR2e)) return;
@@ -488,7 +488,7 @@ export default class SpeciesSheet extends ItemSheetPTR2e<SpeciesPTR2e["system"]>
     const { path } = target.dataset;
     if (!path) return;
 
-    const data = TextEditor.getDragEventData(event) as Record<string, string>;
+    const data = foundry.applications.ux.TextEditor.getDragEventData(event) as Record<string, string>;
     if (data.type !== "Item" || !data.uuid) return;
     const item = await fromUuid<ItemPTR2e>(data.uuid);
     if (!item || !(item instanceof ItemPTR2e)) return;
@@ -605,7 +605,7 @@ export default class SpeciesSheet extends ItemSheetPTR2e<SpeciesPTR2e["system"]>
 
     target.classList.remove("dragover");
 
-    const data = TextEditor.getDragEventData(event) as Record<string, string>;
+    const data = foundry.applications.ux.TextEditor.getDragEventData(event) as Record<string, string>;
     if (data.type !== "Item" || !data.uuid) return;
     const item = await fromUuid<MovePTR2e>(data.uuid);
     if (!item || !(item instanceof ItemPTR2e)) return;

@@ -10,7 +10,7 @@ class AbilitiesComponent extends ActorComponent {
     override renderComponent(data: Record<string, unknown>): Promise<string> {
         data.abilities = this.actor.itemTypes.ability;
         data.direction = "LEFT";
-        return renderTemplate(this.template, data);
+        return foundry.applications.handlebars.renderTemplate(this.template, data);
     }
 
     override attachListeners(htmlElement: HTMLElement) {

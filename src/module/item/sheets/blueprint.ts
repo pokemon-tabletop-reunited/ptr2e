@@ -418,7 +418,7 @@ export default class BlueprintSheet extends foundry.applications.api.HandlebarsA
   }
 
   override async _onDrop(event: DragEvent) {
-    const data = TextEditor.getDragEventData(event) as Record<string, string>;
+    const data = foundry.applications.ux.TextEditor.getDragEventData(event) as Record<string, string>;
     const doc = await (async () => {
       switch (data.type) {
         case "RollTable": {

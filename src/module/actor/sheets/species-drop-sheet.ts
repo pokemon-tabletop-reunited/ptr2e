@@ -48,7 +48,7 @@ class SpeciesDropSheetV2 extends foundry.applications.api.HandlebarsApplicationM
   }
 
   override async _onDrop(event: DragEvent) {
-    const data = TextEditor.getDragEventData(event) as Record<string, string>;
+    const data = foundry.applications.ux.TextEditor.getDragEventData(event) as Record<string, string>;
     if (data.type === "Item") {
       const item = await fromUuid(data.uuid);
       if (!item) {

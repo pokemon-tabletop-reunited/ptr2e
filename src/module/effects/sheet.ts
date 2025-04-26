@@ -153,7 +153,7 @@ class ActiveEffectConfig extends foundry.applications.api.HandlebarsApplicationM
   override async _prepareContext(options?: DocumentSheetConfiguration<ActiveEffectPTR2e>) {
     const context = (await super._prepareContext(options)) as Record<string, unknown>;
 
-    context.descriptionHTML = await TextEditor.enrichHTML(this.document.description, {
+    context.descriptionHTML = await foundry.applications.ux.TextEditor.enrichHTML(this.document.description, {
       secrets: this.document.isOwner,
     });
     const legacyTransfer = CONFIG.ActiveEffect.legacyTransferral;
@@ -184,7 +184,7 @@ class ActiveEffectConfig extends foundry.applications.api.HandlebarsApplicationM
 
     context.hasDescription = "description" in this.document;
     if (context.hasDescription) {
-      context.descriptionHTML = await TextEditor.enrichHTML(this.document.description, {
+      context.descriptionHTML = await foundry.applications.ux.TextEditor.enrichHTML(this.document.description, {
         secrets: this.document.isOwner,
         relativeTo: this.document,
       });

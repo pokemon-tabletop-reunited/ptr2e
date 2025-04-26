@@ -125,8 +125,8 @@ class ChangeForm<TChange extends ChangeModel = ChangeModel> {
 
   async render(): Promise<string> {
     const context = await this._prepareContext();
-    context.template = await renderTemplate(this.template, context)
-    return renderTemplate("systems/ptr2e/templates/effects/changes/partials/outer.hbs", context);
+    context.template = await foundry.applications.handlebars.renderTemplate(this.template, context)
+    return foundry.applications.handlebars.renderTemplate("systems/ptr2e/templates/effects/changes/partials/outer.hbs", context);
   }
 
   /**

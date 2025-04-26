@@ -505,7 +505,7 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
           action,
           traits: action.traits.map(trait => ({ value: trait.slug, label: trait.label })),
           fields: action.schema.fields,
-          enrichedDescription: action.description ? await TextEditor.enrichHTML(action.description) : null
+          enrichedDescription: action.description ? await foundry.applications.ux.TextEditor.enrichHTML(action.description) : null
         })) ?? []),
         state: {
           available: [PerkState.connected, PerkState.available].includes(this.currentNode?.state as unknown as 1 | 2),
@@ -522,7 +522,7 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
             : `${game.i18n.localize("PTR2E.PerkWebApp.RefundPerk")} (${perk?.system.cost} AP)`,
           evolution: perk?.flags.ptr2e?.evolution ? game.i18n.format("PTR2E.PerkWebApp.Evolve", { name: Handlebars.helpers.capitalizeFirst(perk?.name?.replace("Evolution: ", '')) || "" }) : null
         },
-        enrichedDescription: perk?.system.description ? await TextEditor.enrichHTML(perk.system.description) : null,
+        enrichedDescription: perk?.system.description ? await foundry.applications.ux.TextEditor.enrichHTML(perk.system.description) : null,
       },
       zoom: this._zoomAmount,
       editMode: this.editMode,
@@ -1445,7 +1445,7 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
 
   onPan(context: KeyboardEventContext, movementDirections: string[]) {
     // Case 1: Check for Tour
-    if ((Tour.tourInProgress) && (!context.repeat) && (!context.up)) return false;
+    if ((foundry.nue.Tour.tourInProgress) && (!context.repeat) && (!context.up)) return false;
 
     // Case 2: Check if Perk Web is open
     if (!this.rendered) return false;
@@ -1533,7 +1533,7 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
           })
         )
         : await (async () => {
-          const data = TextEditor.getDragEventData(event) as DropCanvasData
+          const data = foundry.applications.ux.TextEditor.getDragEventData(event) as DropCanvasData
           if (!data) return [];
           const perk = await fromUuid(data.uuid) as PerkPTR2e;
           if (!(perk instanceof ItemPTR2e && perk.type === "perk")) return [];

@@ -317,7 +317,7 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
       const result = this.overrides.get(data.target.uuid)?.value || AttackRoll.successCategory(data.accuracy, data.crit);
 
       const rolls = {
-        accuracy: await renderTemplate(
+        accuracy: await foundry.applications.handlebars.renderTemplate(
           "systems/ptr2e/templates/chat/rolls/accuracy-check.hbs",
           {
             inner: await AttackMessageSystem.renderInnerRoll(data.accuracy, isPrivate, ["hit", "critical"].includes(result)),
@@ -326,13 +326,13 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
             label: "PTR2E.Attack.AccuracyCheck",
           }
         ),
-        crit: await renderTemplate("systems/ptr2e/templates/chat/rolls/crit-check.hbs", {
+        crit: await foundry.applications.handlebars.renderTemplate("systems/ptr2e/templates/chat/rolls/crit-check.hbs", {
           inner: await AttackMessageSystem.renderInnerRoll(data.crit, isPrivate, result === "critical"),
           isPrivate,
           type: "crit",
           label: "PTR2E.Attack.CritCheck",
         }),
-        damage: await renderTemplate(
+        damage: await foundry.applications.handlebars.renderTemplate(
           "systems/ptr2e/templates/chat/rolls/damage-randomness.hbs",
           {
             inner: await AttackMessageSystem.renderInnerRoll(data.damage, isPrivate, null),
@@ -356,7 +356,7 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
             return;
           }
 
-          rolls.effects.push(await renderTemplate(
+          rolls.effects.push(await foundry.applications.handlebars.renderTemplate(
             "systems/ptr2e/templates/chat/rolls/effect-roll.hbs",
             {
               inner: await AttackMessageSystem.renderInnerRoll(effectRoll.roll, isPrivate, effectRoll.success),
@@ -464,7 +464,7 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
               continue;
             }
 
-            rolls.push(await renderTemplate(
+            rolls.push(await foundry.applications.handlebars.renderTemplate(
               "systems/ptr2e/templates/chat/rolls/effect-roll.hbs",
               {
                 inner: await AttackMessageSystem.renderInnerRoll(roll.roll, false, roll.success),
@@ -479,7 +479,7 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
       });
 
     context.defaultExpanded = game.settings.get("ptr2e", "expand-rolls");
-    return renderTemplate("systems/ptr2e/templates/chat/attack.hbs", context);
+    return foundry.applications.handlebars.renderTemplate("systems/ptr2e/templates/chat/attack.hbs", context);
   }
 
   async updateTarget(targetUuid: ActorUUID, { status }: { status: AccuracySuccessCategory }) {

@@ -1,7 +1,7 @@
 import { CombatantPTR2e, CombatPTR2e, SummonCombatantSystem } from "@combat";
 import { htmlQuery } from "@utils";
 
-class CombatTrackerPTR2e<TEncounter extends CombatPTR2e | null> extends CombatTracker<TEncounter> {
+class CombatTrackerPTR2e<TEncounter extends CombatPTR2e | null> extends foundry.applications.sidebar.tabs.CombatTracker<TEncounter> {
 
   static DEFAULT_OPTIONS = {
     actions: {}

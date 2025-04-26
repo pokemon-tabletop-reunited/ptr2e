@@ -108,12 +108,12 @@ export const Init: PTRHook = {
 
       // Register custom sheets
       {
-        Actors.unregisterSheet("core", ActorSheet);
+        Actors.unregisterSheet("core", foundry.appv1.sheets.ActorSheet);
         //@ts-expect-error - Application V2 Compatability
         Actors.registerSheet("ptr2e", ActorSheetPTR2e, { types: ["humanoid", "pokemon"], makeDefault: true })
         Actors.registerSheet("ptr2e", PTRCONFIG.Actor.sheetClasses["ptu-actor"], { types: ["ptu-actor"], makeDefault: true })
 
-        Items.unregisterSheet("core", ItemSheet);
+        Items.unregisterSheet("core", foundry.appv1.sheets.ItemSheet);
         for (const type in PTRCONFIG.Item.sheetClasses) {
           const key = type as keyof typeof PTRCONFIG.Item.sheetClasses;
           for (const sheet of PTRCONFIG.Item.sheetClasses[key]) {
@@ -139,7 +139,7 @@ export const Init: PTRHook = {
         // Monkeypatch the game.tooltip class to stop auto-dismissing tooltips
         const original = game.tooltip.deactivate.bind(game.tooltip);
         game.tooltip.deactivate = (force) => {
-          if (Tour.tourInProgress && !force) return;
+          if (foundry.nue.Tour.tourInProgress && !force) return;
           original();
         }
 

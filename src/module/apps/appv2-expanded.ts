@@ -52,7 +52,7 @@ export class ApplicationV2Expanded<
         dragover: this._onDragOver.bind(this),
         drop: this._onDrop.bind(this),
       };
-      return new DragDrop(d);
+      return new foundry.applications.ux.DragDrop(d);
     });
   }
 
@@ -217,7 +217,7 @@ export class ActorSheetV2Expanded<
    * @protected
    */
   async _onDrop(event: DragEvent, upstreamData?: { type: string }) {
-    const data: { type: string } = upstreamData ?? TextEditor.getDragEventData(event);
+    const data: { type: string } = upstreamData ?? foundry.applications.ux.TextEditor.getDragEventData(event);
     const actor = this.actor;
     const allowed = Hooks.call("dropActorSheetData", actor, this, data);
     if (allowed === false) return;
@@ -467,7 +467,7 @@ export class ItemSheetV2Expanded<
         dragover: this._onDragOver.bind(this),
         drop: this._onDrop.bind(this),
       };
-      return new DragDrop(d);
+      return new foundry.applications.ux.DragDrop(d);
     });
   }
 
@@ -548,7 +548,7 @@ export class ItemSheetV2Expanded<
    */
   async _onDrop(event: DragEvent): Promise<void> {
     event.preventDefault();
-    const data = TextEditor.getDragEventData<{ type: string }>(event);
+    const data = foundry.applications.ux.TextEditor.getDragEventData<{ type: string }>(event);
     const item = this.document;
     const allowed = Hooks.call("dropItemSheetData", item, data, event);
     if (allowed === false) return;
