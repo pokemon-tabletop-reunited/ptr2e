@@ -205,9 +205,11 @@ class TokenPTR2e<TDocument extends TokenDocumentPTR2e = TokenDocumentPTR2e> exte
       const update = updates[1];
       if(update && typeof update === "object" && "movement" in update) {
         for(const user in update.movement) {
+          const token = canvas.tokens.get(user);
+          if(!token) continue;
           const waypoints = update.movement[user].waypoints;
           if(Array.isArray(waypoints)) {
-            const size = TokenDocumentPTR2e.prepareSize(this.document);
+            const size = TokenDocumentPTR2e.prepareSize(token.document);
             if(size) {
               for(const waypoint of waypoints) {
                 if(waypoint.width !== size.width || waypoint.height !== size.height) {
