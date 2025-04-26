@@ -7,8 +7,9 @@ import { AttackRollResult, CheckRoll, PokeballRollResults } from "../system/roll
 import AttackMessageSystem from "./models/attack.ts";
 import * as R from "remeda";
 import { SummonPTR2e } from "@item";
-import { AttackPTR2e } from "@data";
+import { AttackPTR2e, Trait } from "@data";
 import { CombatantPTR2e } from "@combat";
+import Tagify, { BaseTagData } from "@yaireo/tagify";
 
 class ChatMessagePTR2e<TSchema extends TypeDataModel = TypeDataModel> extends ChatMessage<TSchema> {
   /** Get the actor associated with this chat message */
@@ -55,7 +56,7 @@ class ChatMessagePTR2e<TSchema extends TypeDataModel = TypeDataModel> extends Ch
    * The override is purely to replace the basic `this.content` call with a call to `this.system.getHTMLContent` if it exists.
    * If a foundry update changes the `getHTML` method, this override will need to be updated to match.
    */
-  override async renderHTML({ canDelete, canClose = false, ...rest } = {} as {canDelete?: boolean, canClose: boolean}): Promise<HTMLElement> {
+  override async renderHTML({ canDelete, canClose = false, ...rest } = {} as { canDelete?: boolean, canClose: boolean }): Promise<HTMLElement> {
     canDelete ??= game.user.isGM; // By default, GM users have the trash-bin icon in the chat log itself
 
     if ('renderHTML' in this.system && typeof this.system.renderHTML === "function") {
@@ -247,23 +248,6 @@ class ChatMessagePTR2e<TSchema extends TypeDataModel = TypeDataModel> extends Ch
       });
     });
 
-    // html.find(".dice-roll").on("click", (event) => {
-    //   event.preventDefault();
-    //   event.stopImmediatePropagation();
-
-    //   const roll = event.currentTarget;
-    //   const expanded = !roll.classList.contains("opened");
-
-    //   const tooltips = roll.querySelectorAll(".dice-tooltip");
-    //   for (const tip of tooltips) {
-    //     if (expanded) $(tip).slideDown(200);
-    //     else $(tip).slideUp(200);
-    //     tip.classList.toggle("expanded", expanded);
-    //   }
-
-    //   roll.classList.toggle("opened", expanded);
-    // });
-
     html.find(".collapse-rolls").each((_i, el) => {
       $(el).on("click", (event) => {
         event.preventDefault();
@@ -339,6 +323,32 @@ class ChatMessagePTR2e<TSchema extends TypeDataModel = TypeDataModel> extends Ch
         });
       }
     });
+
+    for (const input of html[0].querySelectorAll<HTMLInputElement>(
+      "input.ptr2e-tagify"
+    )) {
+      new Tagify(input, {
+        editTags: false, //@ts-expect-error - Tagify types are not correct
+        tagTextProp: "label",
+        dropdown: {
+          enabled: 0,
+          mapValueTo: "label",
+        },
+        templates: { //@ts-expect-error - Tagify types are not correct
+          tag: function (tagData: BaseTagData & {type: keyof typeof Trait.bgColors, label: string}): string {
+            return `
+                  <tag contenteditable="false" spellcheck="false" tabindex="-1" class="tagify__tag" ${this.getAttributes(tagData)}style="${Trait.bgColors[tagData.type || "default"] ? `--tag-bg: ${Trait.bgColors[tagData.type || "default"]!["bg"]}; --tag-hover: ${Trait.bgColors[tagData.type || "default"]!["hover"]}; --tag-border-color: ${Trait.bgColors[tagData.type || "default"]!["border"]};` : ""}">
+                  <x title="" class="tagify__tag__removeBtn" role="button" aria-label="remove tag"></x>
+                  <div>
+                      <span class='tagify__tag-text'>
+                          <span class="trait" data-tooltip-direction="UP" data-trait="${tagData.value}" data-tooltip="${tagData.label}"><span>[</span><span class="tag">${tagData.label}</span><span>]</span></span>
+                      </span>
+                  </div>
+                  `;
+          },
+        },
+      });
+    }
   }
 
   static async expandCollapsible(element: HTMLElement): Promise<void> {
