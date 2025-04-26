@@ -1709,7 +1709,7 @@ class ActorPTR2e<
     );
 
     const rangeIncrement = selfAttack
-      ? selfAttack.getRangeIncrement(distance, selfActor.size)
+      ? selfAttack.getRangeIncrement(distance, selfActor.size, rollOptions.has("actor:trait:reach"))
       : selfAction &&
         "getRangeIncrement" in selfAction &&
         selfAction.getRangeIncrement &&

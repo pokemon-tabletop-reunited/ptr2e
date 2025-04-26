@@ -223,7 +223,7 @@ export default class AttackPTR2e extends ActionPTR2e {
     return new AttackStatistic(this);
   }
 
-  public getRangeIncrement(distance: number | null, size: ActorSizePTR2e): number | null {
+  public getRangeIncrement(distance: number | null, size: ActorSizePTR2e, hasReach: boolean): number | null {
     if (
       distance === null ||
       !this.range ||
@@ -232,7 +232,7 @@ export default class AttackPTR2e extends ActionPTR2e {
       return null;
     const dangerClose = !!this.traits.get("danger-close");
 
-    const reach = {
+    const reach = ({
       0: 1,
       1: 1,
       2: 1,
@@ -242,7 +242,7 @@ export default class AttackPTR2e extends ActionPTR2e {
       6: 4,
       7: 5,
       8: 6
-    }[size.rank] ?? 1;
+    }[size.rank] ?? 1) * (hasReach ? 2 : 1);
     const rangeMultiplier = {
       0: 1,
       1: 1,
