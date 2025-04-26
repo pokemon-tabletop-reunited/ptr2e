@@ -246,22 +246,16 @@ class AttackCheck<TParent extends AttackStatistic = AttackStatistic> implements 
         return null;
       }
       const actorLift = this.actor.skills["lift"]?.mod ?? 1;
+      const actorWC = this.actor.species?.size?.weightClass ?? 1
       const targetWC = target.actor.species?.size?.weightClass ?? 1;
-      const power = powerModifier.modifier = Math.floor(20 + (actorLift / 4) + (targetWC * 3));
-
       const actorCatMod = this.actor.size?.rank ?? 1;
       const thrownCatMod = target.actor.size?.rank ?? 1;
-      const accuracy = Math.floor(75 + (actorLift / 5) + actorCatMod - (4 * thrownCatMod));
-      if (accuracy < 0) {
-        ui.notifications.warn(game.i18n.localize("PTR2E.AttackWarning.FlingAccuracyTooLow"));
-        return null;
-      }
 
-      const range = Math.floor(8 + (actorLift / 6) + actorCatMod - (2 * thrownCatMod));
-      if (range < 0) {
-        ui.notifications.warn(game.i18n.localize("PTR2E.AttackWarning.FlingRangeTooLow"));
-        return null;
-      }
+      const power = powerModifier.modifier = Math.max(25, Math.floor(17 + (Math.pow(actorLift+10, 0.5) / 5) * (3 + targetWC/6) * (2 + thrownCatMod/6) * (1.5 + actorWC/18) * (1.25 + actorCatMod/18)));
+
+      const accuracy = Math.min(100, Math.floor(10 + 50 * ((1 + actorWC/18) * (1 + actorCatMod/6) * (1+ actorLift / 200) / ((1 + targetWC/9) * (1 + thrownCatMod/3)))));
+
+      const range = Math.max(1, Math.floor(((Math.pow(actorLift+10, 2/3) / 3) - 0.5) * Math.pow(((1.05 * actorWC) + (1.35 * actorCatMod)) / ((1.35 * targetWC) + (1.7 * thrownCatMod)), 0.5) * ((3 + (actorCatMod/3)) / 10)));
 
       this.attack.power = power;
       this.attack.accuracy = accuracy;
