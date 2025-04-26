@@ -124,7 +124,7 @@ type ApplicationClosingOptions = {
     closeKey: boolean;
 };
 
-type ApplicationClickAction = (event: PointerEvent, target: HTMLElement, element?: HTMLElement) => any;
+type ApplicationClickAction = (event: PointerEvent, target: HTMLElement, element?: ApplicationV2) => any;
 
 export class ApplicationV2<
     TConfiguration extends ApplicationConfiguration = ApplicationConfiguration,

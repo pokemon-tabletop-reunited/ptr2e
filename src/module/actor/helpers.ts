@@ -107,7 +107,7 @@ async function resolveCapture(originUuid: string, targetUuid: string, success: b
       label: game.i18n.localize("PTR2E.ActorSheet.Settings.Save"),
       action: "ok",
       callback: async (_event, target, element) => {
-        const html = element ?? target;
+        const html = (element?.element) ?? target;
         const trainer = htmlQuery<HTMLInputElement>(html, '[name="trainer"]')?.value;
         const party = htmlQuery<HTMLInputElement>(html, '[name="party"]')?.checked ?? false;
 

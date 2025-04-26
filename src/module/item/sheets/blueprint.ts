@@ -46,7 +46,7 @@ export default class BlueprintSheet extends foundry.applications.api.HandlebarsA
               action: "ok",
               label: "Confirm",
               callback: (_event, _button, dialog) => {
-                return dialog?.querySelector<HTMLInputElement>("input[name='name']")?.value ?? name
+                return dialog?.element?.querySelector<HTMLInputElement>("input[name='name']")?.value ?? name
               }
             }
           })

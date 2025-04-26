@@ -283,7 +283,7 @@ export default class AttackPTR2e extends ActionPTR2e {
           action: "ok",
           label: "Delay Action",
           callback: (_event, _button, dialog) => {
-            return dialog?.querySelector<HTMLInputElement>("input[name='delay']")?.value
+            return dialog?.element?.querySelector<HTMLInputElement>("input[name='delay']")?.value
           }
         }
       })

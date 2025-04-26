@@ -194,7 +194,7 @@ class CombatTrackerPTR2e<TEncounter extends CombatPTR2e | null> extends CombatTr
             label: game.i18n.localize("PTR2E.Combat.ContextMenu.ApplyDelayOrAdvancement.ok"),
             action: 'ok',
             callback: async (_event, target, element) => {
-              const html = element ?? target;
+              const html = (element?.element) ?? target;
               const value = htmlQuery<HTMLInputElement>(html, 'input[name="value"]')?.value;
               if (!value) return;
 
