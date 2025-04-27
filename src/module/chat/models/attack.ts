@@ -149,7 +149,7 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
   }
 
   get currentOrigin(): Promise<Maybe<ActorPTR2e>> {
-    return this.context?.origin?.uuid ? fromUuid<ActorPTR2e>(this.context.origin.uuid) : Promise.resolve(null);
+    return this.context?.origin?.uuid ? fu.fromUuid<ActorPTR2e>(this.context.origin.uuid) : Promise.resolve(null);
   }
 
   override prepareBaseData(): void {
@@ -478,6 +478,13 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
         })() : [],
       });
 
+    if(this.pendingResolutions?.size) {
+      for(const targetUuid of this.pendingResolutions) {
+        this.applyDamage(targetUuid);
+      }
+      this.pendingResolutions.clear();
+    }
+
     context.defaultExpanded = game.settings.get("ptr2e", "expand-rolls");
     return foundry.applications.handlebars.renderTemplate("systems/ptr2e/templates/chat/attack.hbs", context);
   }
@@ -543,8 +550,14 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
     return true;
   }
 
+  pendingResolutions = new Set<ActorUUID>();
+
   async applyDamage(targetUuid: ActorUUID): Promise<false | number> {
-    const result = this.context!.results.get(targetUuid);
+    if(!this.context) {
+      this.pendingResolutions.add(targetUuid);
+      return false;
+    } 
+    const result = this.context.results.get(targetUuid);
     if (!result) return false;
 
     async function applyEffects(target: ActorPTR2e, effects: foundry.data.fields.ModelPropFromDataField<foundry.data.fields.SchemaField<EffectRollsSchema>>[], isCrit = false) {

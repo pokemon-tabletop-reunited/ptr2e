@@ -294,7 +294,7 @@ class AttackCheck<TParent extends AttackStatistic = AttackStatistic> implements 
       return [];
     }) ?? []
 
-    const selfEffectRolls = await extractEffectRolls({
+    const selfEffectRolls = args.skipEffectRolls ? [] : await extractEffectRolls({
       affects: "self",
       origin: this.actor.clone({ effects: [fu.deepClone(this.actor._source.effects), traitEffects].flat() }, { keepId: true }),
       target: this.actor,
@@ -329,6 +329,7 @@ class AttackCheck<TParent extends AttackStatistic = AttackStatistic> implements 
         target: target,
         options: new Set([...options, `origin:${allyOrEnemy}`, ...(targetsSelf ? ["targets:self"] : [])]),
         traits: args.traits ?? this.item.traits,
+        skipEffectRolls: args.skipEffectRolls,
       }) as CheckContext<ActorPTR2e, AttackCheck<TParent>, ItemPTR2e<ItemSystemsWithActions, ActorPTR2e>>
 
       if (currContext.self.actor.flags.ptr2e.disableActionOptions?.disabled.includes(this.attack.uuid as ActionUUID)) {

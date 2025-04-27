@@ -1646,7 +1646,7 @@ class ActorPTR2e<
       options: [...params.options, ...itemOptions, ...targetRollOptions],
     });
 
-    const targetEffectRolls = await extractEffectRolls({
+    const targetEffectRolls = params.skipEffectRolls ? [] : await extractEffectRolls({
       affects: "target",
       origin: selfActor,
       target: targetToken?.actor ?? null,
@@ -1659,7 +1659,7 @@ class ActorPTR2e<
       hasSenerenGrace: selfActor?.rollOptions?.all?.["special:serene-grace"] ?? false,
     })
 
-    const targetOriginEffectRolls = await extractEffectRolls({
+    const targetOriginEffectRolls = params.skipEffectRolls ? [] : await extractEffectRolls({
       affects: "origin",
       origin: selfActor,
       target: targetToken?.actor ?? null,
@@ -1672,7 +1672,7 @@ class ActorPTR2e<
       hasSenerenGrace: targetToken?.actor?.rollOptions?.all?.["special:serene-grace"] ?? false
     })
 
-    const targetDefensiveEffectRolls = await extractEffectRolls({
+    const targetDefensiveEffectRolls = params.skipEffectRolls ? [] : await extractEffectRolls({
       affects: "defensive",
       origin: selfActor,
       target: targetToken?.actor ?? null,
