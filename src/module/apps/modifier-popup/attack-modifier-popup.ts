@@ -226,6 +226,12 @@ export class AttackModifierPopup extends ModifierPopup {
       if (!original) {
         const original = this.context.actor.actions.attack.get(variants[0].slug)!.original as AttackPTR2e;
         if (!original) return null;
+        const specialAdaptableVariant = variants.findIndex(v => v.slug === `${original.slug}-physical` || v.slug === `${original.slug}-special`);
+        if (specialAdaptableVariant !== -1) {
+          const specialVariant = variants[specialAdaptableVariant];
+          variants.splice(specialAdaptableVariant, 1);
+          variants.unshift(specialVariant);
+        }
         variants.unshift({
           slug: original.slug,
           label: original.slug === 'fling' ? `${original.name} (No Item)` : `${original.name} (Original)`,

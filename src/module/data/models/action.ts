@@ -94,6 +94,7 @@ class ActionPTR2e extends foundry.abstract.DataModel {
         }),
       }),
       variant: new SlugField({ required: false, nullable: true }),
+      ephemeralVariant: new fields.BooleanField({required: true, initial: false})
     };
   }
 
@@ -234,7 +235,9 @@ class ActionPTR2e extends foundry.abstract.DataModel {
   }
 
   prepareUpdate(data: DeepPartial<SourceFromSchema<ActionSchema>>) {
-    const currentActions = this.item.system.toObject().actions;
+    const currentActions = this.item.system.toObject().actions.filter(a => !a.ephemeralVariant);
+    if(data.ephemeralVariant) return currentActions;
+
     const actionIndex = currentActions.findIndex((a) => a.slug === this.slug);
     fu.mergeObject(currentActions[actionIndex], data);
 
@@ -278,6 +281,7 @@ export interface ActionSchema extends foundry.data.fields.DataSchema {
     priority: Priority;
   }>;
   variant: SlugField<string, string, false>;
+  ephemeralVariant: foundry.data.fields.BooleanField<boolean, boolean>;
 }
 
 export default ActionPTR2e;

@@ -163,6 +163,10 @@ export class ActionEditor<
     this.actionSlug = actionSlug;
 
     if (!this.action) throw new Error(`Action ${actionSlug} not found on item ${document.name}`);
+    if(this.action.ephemeralVariant || this.action.item.id === "flingattackitem0") {
+      ui.notifications.warn(game.i18n.localize("PTR2E.ItemSheet.Actions.EphemeralVariantWarning"));
+      throw new Error(game.i18n.localize("PTR2E.ItemSheet.Actions.EphemeralVariantWarning"));
+    }
   }
 
   override _getHeaderControls(): foundry.applications.api.ApplicationHeaderControlsEntry[] {

@@ -369,6 +369,10 @@ export default class ItemSheetPTR2e<
           const action = (this.document.system.actions as Collection<ActionPTR2e>).get(slug);
           if (!action) return;
 
+          if(action.ephemeralVariant) {
+            return void ui.notifications.warn(game.i18n.localize("PTR2E.ItemSheet.Actions.EphemeralVariantWarning"));
+          }
+
           switch (actionType) {
             case "edit-action": {
               const sheet = new ActionEditor(

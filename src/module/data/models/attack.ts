@@ -204,7 +204,54 @@ export default class AttackPTR2e extends ActionPTR2e {
   override prepareDerivedData(): void {
     super.prepareDerivedData();
 
+    if(this.traits.has("adaptable") && !this.variant) {
+      this.generateAdaptableVariants();
+    }
+
     this.statistic = this.prepareStatistic();
+  }
+
+  generateAdaptableVariants(): void{
+    if (!this.actor) return;
+
+    const options = this.actor.rollOptions.getFromDomain("adaptable");
+
+    const types = getTypes();
+    const adaptableTypes = Object.keys(options).concat(Array.from(this.actor.system.type.types)).filter(type => type !== "untyped" && (types.includes(type) || type.startsWith("category:")))
+    if(adaptableTypes.length === 0) return; // No options to add
+    
+    let category: string | null = null;
+    const attacks = this.item.system._source.actions.filter(a => !a.ephemeralVariant) as unknown as ActionPTR2e["_source"][];
+    for(const type of adaptableTypes) {
+      if(type.startsWith("category:")) {
+        category = type.split(":")[1];
+        continue;
+      }
+      const attack = this.actor.actions.attack.get(this.slug);
+      if(!attack) continue;
+
+      const newAttack = attack.clone({types: [...this.types, type], slug: `${this.slug}-${type}`, name: `${this.name} (${Handlebars.helpers.capitalizeFirst(type)})`, variant: this.slug, free: false, ephemeralVariant: true});
+      attacks.push(newAttack.toObject());
+    }
+
+    const finalAttacks = Array.from(attacks);
+    if(category) {
+      for(const attack of attacks) {
+        if(attack.type !== "attack") continue;
+        if(attack.flingItemId || attack.slug === "fling-actor-toss") continue;
+        if([category, "status"].includes(attack.category as string)) continue;
+        const newAttack = fu.duplicate(attack) as AttackPTR2e["_source"];
+        newAttack.category = category;
+        newAttack.slug = `${attack.slug}-${category}`;
+        newAttack.name = `${attack.name} (${Handlebars.helpers.capitalizeFirst(category)})`;
+        newAttack.variant = this.slug;
+        newAttack.free = false;
+        newAttack.ephemeralVariant = true;
+        finalAttacks.push(newAttack);
+      }
+    }
+
+    this.item.updateSource({"system.actions": finalAttacks});
   }
 
   // eslint-disable-next-line @typescript-eslint/class-literal-property-style

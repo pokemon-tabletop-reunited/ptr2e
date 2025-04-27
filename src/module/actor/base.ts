@@ -485,6 +485,12 @@ class ActorPTR2e<
       this.abilities.entries[ability.system.slot] = ability;
     }
 
+    for(const attack of this.actions.attack) {
+      if(attack.traits.has("adaptable") && !attack.variant) {
+        attack.generateAdaptableVariants();
+      }
+    }
+
     // Create Fling Action
     this.generateFlingAttack();
   }
@@ -1987,6 +1993,15 @@ class ActorPTR2e<
         throw new Error("Cannot create an actor that owns a party folder already owned by another actor.");
       }
     }
+
+    if(!this.items.get("struggleattaitem")) {
+      const struggle = await fu.fromUuid<ItemPTR2e<MoveSystem>>("Compendium.ptr2e.core-moves.Item.struggleattaitem");
+      if(struggle) {
+        const items = fu.duplicate(this._source.items ?? []);
+        items.push(struggle.toObject());
+        this.updateSource({ items });
+      }
+    }
   }
 
   protected override async _preUpdate(
@@ -1994,6 +2009,30 @@ class ActorPTR2e<
     options: DocumentModificationContext<TParent>,
     user: User
   ): Promise<boolean | void> {
+    if(!this.items.get("struggleattaitem") && (!changed.items?.length || !(changed.items as ItemPTR2e['_source'][])?.some(i => i.type === "move" && i._id === "struggleattaitem"))) {
+      const struggles = this.actions.filter(a => a.type === "attack" && a.slug === "struggle");
+      if(struggles.length) {
+        const toDelete = new Set<string>();
+        for(const struggle of struggles) {
+          toDelete.add(struggle.item.id);
+        }
+        await this.deleteEmbeddedDocuments("Item", [...toDelete], {noHook: true});
+      }
+
+      const struggle = await fu.fromUuid<ItemPTR2e<MoveSystem>>("Compendium.ptr2e.core-moves.Item.struggleattaitem");
+      if(struggle) {
+        if(Array.isArray(changed.items) && changed.items.length && !options.keepEmbeddedIds) { 
+          for(const item of changed.items) {
+            item._id = fu.randomID();
+          }
+        }
+
+        changed.items ??= [];
+        (changed.items as ItemPTR2e['_source'][]).push(struggle.toObject());
+        options.keepEmbeddedIds = true;
+      }
+    }
+
     if (changed.system?.party?.ownerOf) {
       const folder = game.folders.get(changed.system.party.ownerOf as Maybe<string>) as FolderPTR2e;
       if (folder?.owner && !this.uuid?.endsWith(folder.owner)) {
