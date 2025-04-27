@@ -90,24 +90,24 @@ export class HotbarPTR2e extends foundry.applications.ui.Hotbar {
     this.debouncedRender({ parts: ["left", "hotbar"]});
   }
 
-  debouncedRender = foundry.utils.debounce(this.transitionRender.bind(this), 100);
+  debouncedRender = foundry.utils.debounce(this.render.bind(this), 100);
 
-  async transitionRender(options: HandlebarsRenderOptions) {
-    const app = this.element
-    if (app) {
-      if(this.timeline) this.timeline.progress(1);
-      const currentState = app.cloneNode(true) as HTMLElement;
+  // async transitionRender(options: HandlebarsRenderOptions) {
+  //   const app = this.element
+  //   if (app) {
+  //     if(this.timeline) this.timeline.progress(1);
+  //     const currentState = app.cloneNode(true) as HTMLElement;
 
-      // Ensure images in the cloned element use cached versions
-      const images = Array.from(currentState.querySelectorAll<HTMLImageElement>("img"));
-      await Promise.all(images.map(img => img.decode().catch((err) => {console.error(err)}))); // Wait for all images to decode
+  //     // Ensure images in the cloned element use cached versions
+  //     const images = Array.from(currentState.querySelectorAll<HTMLImageElement>("img"));
+  //     await Promise.all(images.map(img => img.decode().catch((err) => {console.error(err)}))); // Wait for all images to decode
 
-      this.element.insertAdjacentElement("beforebegin", currentState);
-      this.oldState = currentState;
-    }
+  //     this.element.insertAdjacentElement("beforebegin", currentState);
+  //     this.oldState = currentState;
+  //   }
     
-    this.render(options);
-  }
+  //   this.render(options);
+  // }
 
   private _token: TokenPTR2e | null;
 
@@ -120,7 +120,7 @@ export class HotbarPTR2e extends foundry.applications.ui.Hotbar {
   set tab(value: "slots" | "other" | "skills") {
     if (this._tab === value) return;
     this._tab = value;
-    this.noFade = true;
+    // this.noFade = true;
     //@ts-expect-error - Incomplete types
     this.render({ parts: ["left", "hotbar"] });
   }
@@ -230,7 +230,7 @@ export class HotbarPTR2e extends foundry.applications.ui.Hotbar {
 
     this.#updateFadedUI();
 
-    this.#fadeOldState();
+    // this.#fadeOldState();
   }
 
   protected override _attachPartListeners(partId: string, htmlElement: HTMLElement, options: HandlebarsRenderOptions): void {
@@ -251,52 +251,52 @@ export class HotbarPTR2e extends foundry.applications.ui.Hotbar {
     }
   }
 
-  oldState: HTMLElement | null = null;
-  timeline: gsap.core.Timeline | null = null;
-  noFade = false;
+  // oldState: HTMLElement | null = null;
+  // timeline: gsap.core.Timeline | null = null;
+  // noFade = false;
 
-  #fadeOldState(): void {
-    if (!this.element) return
-    if(this.noFade) return void (this.noFade = false);
+  // #fadeOldState(): void {
+  //   if (!this.element) return
+  //   if(this.noFade) return void (this.noFade = false);
 
-    if(this.timeline) this.timeline.kill();
-    const tl = this.timeline = gsap.timeline();
-    tl.fromTo(
-      this.element,
-      {
-        autoAlpha: 0,
-        top: "+=150"
-      },
-      {
-        autoAlpha: 1,
-        duration: 1.5,
-        top: "-=150",
-        ease: "power3.out",
-        onComplete: () => {
-          this.element.style.opacity = "";
-        }
-      }
-    );
+  //   if(this.timeline) this.timeline.kill();
+  //   const tl = this.timeline = gsap.timeline();
+  //   tl.fromTo(
+  //     this.element,
+  //     {
+  //       autoAlpha: 0,
+  //       top: "+=150"
+  //     },
+  //     {
+  //       autoAlpha: 1,
+  //       duration: 1.5,
+  //       top: "-=150",
+  //       ease: "power3.out",
+  //       onComplete: () => {
+  //         this.element.style.opacity = "";
+  //       }
+  //     }
+  //   );
 
-    if(!this.oldState) return;
-    tl.fromTo(
-      this.oldState,
-      {
-        autoAlpha: 1,
-      },
-      {
-        duration: 1.5,
-        autoAlpha: 0,
-        top: "+=150",
-        ease: "power3.out",
-        onComplete: () => {
-          this.oldState?.remove();
-          this.oldState = null;
-        }
-      },
-      "<"
-    )
-  }
+  //   if(!this.oldState) return;
+  //   tl.fromTo(
+  //     this.oldState,
+  //     {
+  //       autoAlpha: 1,
+  //     },
+  //     {
+  //       duration: 1.5,
+  //       autoAlpha: 0,
+  //       top: "+=150",
+  //       ease: "power3.out",
+  //       onComplete: () => {
+  //         this.oldState?.remove();
+  //         this.oldState = null;
+  //       }
+  //     },
+  //     "<"
+  //   )
+  // }
 
   _getEffectContextMenuOptions(): ContextMenuEntry[] {
     return [
