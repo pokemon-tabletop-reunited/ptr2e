@@ -7,7 +7,7 @@ import { CHANGE_MODES, ChangeModel } from "./";
 export default class BasicChangeSystem extends ChangeModel {
   static override TYPE = "basic" as const;
 
-  override apply(actor: Actor.Implementation, rollOptions?: string[] | Set<string> | null): void {
+  override apply(actor: Actor.Known, rollOptions?: string[] | Set<string> | null): void {
     // eslint-disable-next-line @typescript-eslint/no-this-alias
     const change = this;
 

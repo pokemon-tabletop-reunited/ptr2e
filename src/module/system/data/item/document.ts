@@ -1,6 +1,12 @@
 import type { ActionsCollections } from "../actions-collection";
 
-export class ItemPTR2e extends Item {
+declare namespace ItemPTR2e {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  type Any = ItemPTR2e<any>;
+}
+
+class ItemPTR2e<SubType extends Item.SubType> extends Item<SubType> {
+
   ofType<Type extends Item.SubType>(type: Type): this is Item.OfType<Type> {
     return this.type === type;
   }
@@ -10,4 +16,13 @@ export class ItemPTR2e extends Item {
   }
 
   declare actions: ActionsCollections
+
+  async toChat() {
+    return ChatMessage.create({
+      content: `<span>@Embed[${this.uuid} caption=false classes=no-tooltip]</span>`,
+      speaker: ChatMessage.getSpeaker({ actor: this.actor }),
+    });
+  }
 }
+
+export { ItemPTR2e };

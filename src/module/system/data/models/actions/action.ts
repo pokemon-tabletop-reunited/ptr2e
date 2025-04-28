@@ -6,8 +6,8 @@ import { CollectionField } from "../../fields/collection-field";
 import { PTRCONSTS } from "../..";
 import Trait from "../trait";
 import { RangePTR2e } from "../range";
-import type { ActorPTR2e } from "../../actor/document";
-import { ItemPTR2e } from "../../item/document";
+// import { ActorPTR2e } from "../../actor/document";
+// import { ItemPTR2e } from "../../item/document";
 import { formatSlug } from "../../../util/misc";
 import SystemTraitsCollection from "../../system-traits-collection";
 
@@ -34,8 +34,13 @@ const actionSchema = (type: (typeof ActionTypes)[keyof typeof ActionTypes]) => (
     categories: ["IMAGE"],
     initial: () => ActionPTR2e.baseImg,
   }),
+  traits: new CollectionField<
+    SlugField<{required: true, nullable: false, validate: typeof Trait.isValid}>,
+    {label: string, hint: string},
+    string,
+    Trait
   // eslint-disable-next-line @typescript-eslint/unbound-method
-  traits: new CollectionField(new fields.StringField({ validate: Trait.isValid }), "slug", {
+  >(new SlugField<{required: true, nullable: false, validate: typeof Trait.isValid}>({ required: true, nullable: false, validate: Trait.isValid }), "slug", {
     label: "PTR2E.FIELDS.actionTraits.label",
     hint: "PTR2E.FIELDS.actionTraits.hint",
   }),
@@ -89,7 +94,8 @@ const actionSchema = (type: (typeof ActionTypes)[keyof typeof ActionTypes]) => (
       hint: "PTR2E.FIELDS.priority.hint",
     }),
   }),
-  variant: new SlugField({ required: false, nullable: true })
+  variant: new SlugField({ required: false, nullable: true }),
+  ephemeralVariant: new fields.BooleanField({required: true, initial: false})
 })
 
 declare namespace ActionPTR2e {
@@ -105,27 +111,27 @@ class ActionPTR2e<TSchema extends ActionPTR2e.Schema = ActionPTR2e.Schema> exten
     return actionSchema(this.TYPE);
   }
 
-  get actor(): ActorPTR2e | null {
-    //@ts-expect-error - Unsound but intended.
-    if (this.parent?.parent instanceof ActorPTR2e) return this.parent.parent;
-    //@ts-expect-error - Unsound but intended.
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-return
-    if (this.parent instanceof SummonSystem) return this.parent.actor;
-    if (
-      this.parent?.parent instanceof ItemPTR2e &&
-      //@ts-expect-error - Unsound but intended.
-      this.parent.parent.actor instanceof ActorPTR2e
-    ) {
-      return this.parent.parent.actor;
-    }
-    return null;
-  }
+  // get actor(): Actor.Known | null {
+  //   //@ts-expect-error - Unsound but intended.
+  //   if (this.parent?.parent instanceof ActorPTR2e) return this.parent.parent;
+  //   //@ts-expect-error - Unsound but intended.
+  //   // eslint-disable-next-line @typescript-eslint/no-unsafe-return
+  //   if (this.parent instanceof SummonSystem) return this.parent.actor;
+  //   if (
+  //     this.parent?.parent instanceof ItemPTR2e &&
+  //     //@ts-expect-error - Unsound but intended.
+  //     this.parent.parent.actor instanceof ActorPTR2e
+  //   ) {
+  //     return this.parent.parent.actor;
+  //   }
+  //   return null;
+  // }
 
-  get item(): ItemPTR2e {
-    if (this.parent instanceof ItemPTR2e) return this.parent;
-    if (this.parent?.parent instanceof ItemPTR2e) return this.parent.parent;
-    throw new Error("Action is not a child of an item");
-  }
+  // get item(): Item.Known {
+  //   if (this.parent instanceof ItemPTR2e) return this.parent;
+  //   if (this.parent?.parent instanceof ItemPTR2e) return this.parent.parent;
+  //   throw new Error("Action is not a child of an item");
+  // }
 
   get original(): ActionPTR2e | null {
     if (!this.variant) return null;
@@ -217,7 +223,7 @@ class ActionPTR2e<TSchema extends ActionPTR2e.Schema = ActionPTR2e.Schema> exten
     }, new SystemTraitsCollection());
 
     if (this.img === ActionPTR2e.baseImg && this.item.img !== (this.item.constructor as typeof Item).implementation.DEFAULT_ICON) {
-      this.img = this.item.img;
+      this.img = this.item.img!;
     }
   }
 
@@ -244,15 +250,20 @@ class ActionPTR2e<TSchema extends ActionPTR2e.Schema = ActionPTR2e.Schema> exten
   /**
    * Apply an update to the Action through it's parent Item.
    */
-  async update(this: ActionPTR2e, data: foundry.data.fields.SchemaField.UpdateData<TSchema>) {
+  async update(this: ActionPTR2e, data: foundry.data.fields.SchemaField.UpdateData<ActionPTR2e.Schema>) {
     const currentActions = this.prepareUpdate(data);
-    return this.item.update({ "system.actions": currentActions });
+    return this.item.update({ "system": {"actions": currentActions }});
   }
 
-  prepareUpdate(this: ActionPTR2e, data: foundry.data.fields.SchemaField.UpdateData<TSchema>) {
-    const currentActions = this.item.system.toObject().actions as foundry.data.fields.SchemaField.SourceData<TSchema>[];
+  prepareUpdate(this: ActionPTR2e, data: foundry.data.fields.SchemaField.UpdateData<ActionPTR2e.Schema>) {
+    //@ts-expect-error - Have yet to type Item & its systems.
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
+    const currentActions = this.item.system.toObject().actions.filter((a: ActionPTR2e) => !a.ephemeralVariant) as foundry.data.fields.SchemaField.SourceData<TSchema>[];
+    if(data.ephemeralVariant) return currentActions;
+
     const actionIndex = currentActions.findIndex((a) => a.slug === this.slug);
-    fu.mergeObject(currentActions[actionIndex], data);
+    //if(actionIndex === -1) throw new Error(`Action ${this.slug} not found in ${this.item.name}`);
+    fu.mergeObject(currentActions[actionIndex]!, data);
 
     return currentActions;
   }

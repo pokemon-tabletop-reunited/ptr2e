@@ -15,33 +15,34 @@ export function HasActions<BaseClass extends typeof MixableTypeDataModel>(baseCl
       super.prepareDerivedData();
 
       if (!this._isValidParent(this.parent)) return;
+      const parent = this.parent as Actor.Known | Item.Known;
 
       for (const action of this.actions) {
-        if (this.parent.actions.has(action.slug)) continue;
+        if (parent.actions.has(action.slug)) continue;
 
         // If an ability isn't free or slotted in it should be ignored
-        if (this._isAbilityParent(this.parent)) {
-          if (!this._isValidAbilityParent(this.parent)) continue;
+        if (this._isAbilityParent(parent)) {
+          if (!this._isValidAbilityParent(parent)) continue;
         }
 
         // If an item isn't equipped it should be ignored
-        if (this._isGearParent(this.parent)) {
-          if(this.parent.parent && this.parent.system.equipped.carryType !== "equipped") continue;
+        if (this._isGearParent(parent)) {
+          if(parent.parent && parent.system.equipped.carryType !== "equipped") continue;
         }
 
         action.prepareDerivedData();
-        this.parent.actions.set(action.slug, action);
+        parent.actions.set(action.slug, action);
       }
     }
 
-    private _isValidParent(parent: foundry.abstract.DataModel.Any | null): parent is ActorPTR2e | ItemPTR2e {
+    private _isValidParent(parent: foundry.abstract.DataModel.Any | null): parent is Actor.Known | Item.Known {
       return (
         parent instanceof ActorPTR2e ||
         parent instanceof ItemPTR2e
       );
     }
 
-    private _isAbilityParent(parent: ActorPTR2e | ItemPTR2e): parent is Item.OfType<"ability"> {
+    private _isAbilityParent(parent: Actor.Known | Item.Known): parent is Item.OfType<"ability"> {
       return parent instanceof ItemPTR2e && parent.type === "ability";
     }
 
@@ -50,7 +51,7 @@ export function HasActions<BaseClass extends typeof MixableTypeDataModel>(baseCl
       return !parent.system.isSuppressed && (parent.system.free || parent.system.slot !== null);
     }
 
-    private _isGearParent(parent: ActorPTR2e | ItemPTR2e): parent is Item.OfType<"gear"> {
+    private _isGearParent(parent: Actor.Known | Item.Known): parent is Item.OfType<"gear"> {
       return parent instanceof ItemPTR2e && [
         "weapon",
         "equipment",

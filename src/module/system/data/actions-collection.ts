@@ -1,14 +1,15 @@
 import { PTRCONSTS } from ".";
 import { ActorPTR2e } from "./actor/document";
+import type { ActionType } from "./constants";
 import type { AttackPTR2e } from "./models/actions";
 import ActionPTR2e from "./models/actions/action";
 
 export class ActionsCollections extends Collection<ActionPTR2e> {
   //@ts-expect-error - Intended.
-  parent: Actor.Implementation | Item.Implementation;
+  parent: Actor.Known | Item.Known;
   declare attack: Collection<AttackPTR2e>;
 
-  constructor(parent: Actor.Implementation | Item.Implementation, sourceArray: ActionPTR2e[] = []) {
+  constructor(parent: Actor.Known | Item.Known, sourceArray: ActionPTR2e[] = []) {
     super(sourceArray.map((source) => [source.slug, source]));
 
     const data: PropertyDescriptorMap = Object.values(
@@ -22,7 +23,7 @@ export class ActionsCollections extends Collection<ActionPTR2e> {
     Object.defineProperties(this, data);
   }
 
-  //@ts-expect-error - Incorrect FVTT-Types
+  // //@ts-expect-error - Incorrect FVTT-Types
   override set(slug: Maybe<string>, value: ActionPTR2e) {
     if (!(value instanceof ActionPTR2e))
       throw new Error("ActionsCollection can only contain ActionPTR2e instances");
@@ -40,7 +41,7 @@ export class ActionsCollections extends Collection<ActionPTR2e> {
     return this;
   }
 
-  //@ts-expect-error - Incorrect FVTT-Types
+  // //@ts-expect-error - Incorrect FVTT-Types
   override delete(key: string): boolean {
     const action = this.get(key);
     if (!action) return false;
@@ -52,7 +53,7 @@ export class ActionsCollections extends Collection<ActionPTR2e> {
     return super.delete(key);
   }
 
-  //@ts-expect-error - Incorrect FVTT-Types
+  // //@ts-expect-error - Incorrect FVTT-Types
   override clear(): void {
     super.clear();
     for (const key of Object.values(PTRCONSTS.ActionTypes)) {
@@ -63,7 +64,7 @@ export class ActionsCollections extends Collection<ActionPTR2e> {
   /**
    * Add all actions from an item to the collection
    */
-  addActionsFromItem(item: Item.Implementation) {
+  addActionsFromItem(item: Item.Known) {
     const actions = item.actions;
     for (const action of actions) {
       this.set(action.slug, action);
@@ -80,8 +81,8 @@ export class ActionsCollections extends Collection<ActionPTR2e> {
   /**
    * Get the item hosting a given action by its slug
    */
-  getItem(actionSlug: string): Maybe<Item.Implementation> {
-    return this.get(actionSlug)?.item as Maybe<Item.Implementation>;
+  getItem(actionSlug: string): Maybe<Item.Known> {
+    return this.get(actionSlug)?.item as Maybe<Item.Known>;
   }
 }
 

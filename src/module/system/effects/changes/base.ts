@@ -23,7 +23,7 @@ class ChangeModel<TSchema extends ChangeModel.Schema = ChangeModel.Schema> exten
     return changeModelSchema;
   }
 
-  public apply(_: Actor.Implementation, __?: string[] | Set<string>): unknown {
+  public apply(_: Actor.Known, __?: string[] | Set<string>): unknown {
     throw new Error("The apply method must be implemented by the subclass");
   }
 } 

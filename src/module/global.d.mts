@@ -2,15 +2,43 @@ import type ClockPanel from "./system/apps/clock-panel";
 import type { ActorPTR2e } from "./system/data/actor/document";
 import type { HumanoidActorSystem } from "./system/data/actor/models/humanoid";
 import type { PokemonActorSystem } from "./system/data/actor/models/pokemon";
-import type { ActorSystem } from "./system/data/actor/models/system";
+// import type { ActorSystem } from "./system/data/actor/models/system";
 import type { PTRCONFIG } from "./system/data/config";
 import type { PokemonType } from "./system/data/constants";
 import type { ItemPTR2e } from "./system/data/item/document";
+import type { AbilitySystem, GearSystem, SpeciesSystem } from "./system/data/item/models";
 import type ClockDatabase from "./system/data/models/clock-db";
 import type { CustomSkill } from "./system/data/models/skill";
 import type SkillsCollection from "./system/data/skills-collection";
 
 export {};
+
+declare module "fvtt-types/configuration" {
+  // interface DocumentClassConfig {
+  //   Actor: typeof ActorPTR2e
+  //   Item: typeof ItemPTR2e
+  // }
+
+  interface DataModelConfig {
+    Actor: {
+      humanoid: typeof HumanoidActorSystem;
+      pokemon: typeof PokemonActorSystem;
+    };
+    Item: {
+      ability: typeof AbilitySystem;
+      species: typeof SpeciesSystem;
+      gear: typeof GearSystem;
+    }
+  }
+
+  interface ConfiguredActor<SubType extends Actor.SubType> {
+    document: ActorPTR2e<SubType>;
+  }
+
+  interface ConfiguredItem<SubType extends Item.SubType> {
+    document: ItemPTR2e<SubType>;
+  }
+}
 
 declare global {
   interface Game {
@@ -34,29 +62,34 @@ declare global {
     let actor: () => Actor.Implementation | null;
   }
 
-  namespace PTR {
-    namespace Documents {
-      namespace Actor {
-        type Document = ActorPTR2e;
-        type System = ActorSystem;
-        type Humanoid = HumanoidActorSystem;
-        type Pokemon = PokemonActorSystem;
-      }
-    }
-  }
+  // namespace PTR {
+  //   namespace Documents {
+  //     namespace Actor {
+  //       type Document = ActorPTR2e;
+  //       type System = ActorSystem;
+  //       type Humanoid = HumanoidActorSystem;
+  //       type Pokemon = PokemonActorSystem;
+  //     }
+  //   }
+  // }
 
-  interface DocumentClassConfig {
-    Actor: typeof ActorPTR2e
-    Item: typeof ItemPTR2e
-  }
+  // interface DocumentClassConfig {
+  //   Actor: typeof ActorPTR2e
+  //   Item: typeof ItemPTR2e
+  // }
 
   // foundry-vtt-types needs to know what data models you register with Foundry at runtime.
-  interface DataModelConfig {
-    Actor: {
-      humanoid: typeof HumanoidActorSystem;
-      pokemon: typeof PokemonActorSystem;
-    };
-  }
+  // interface DataModelConfig {
+  //   Actor: {
+  //     humanoid: typeof HumanoidActorSystem;
+  //     pokemon: typeof PokemonActorSystem;
+  //   };
+  //   Item: {
+  //     ability: typeof AbilitySystem;
+  //     species: typeof SpeciesSystem;
+  //     gear: typeof GearSystem;
+  //   }
+  // }
 
   interface SettingConfig {
     "ptr2e.clocks": typeof ClockDatabase,
