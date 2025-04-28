@@ -1945,7 +1945,7 @@ class ActorPTR2e<
           return fu.duplicate(game.settings.get("core", "defaultToken"));
         }
         catch {
-          return game.settings.storage.get("world").find(s => s.key === "core.defaultToken")?.value as Partial<foundry.data.PrototypeTokenSource>
+          return fu.duplicate(game.settings.storage.get("world").find(s => s.key === "core.defaultToken")?.value as Partial<foundry.data.PrototypeTokenSource>)
         }
       })() ?? {};
       const actor = new this(fu.mergeObject({ prototypeToken: tokenDefaults }, source));

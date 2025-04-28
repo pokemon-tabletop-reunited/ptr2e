@@ -222,7 +222,14 @@ export class AttackModifierPopup extends ModifierPopup {
         }
       }
 
-      const variants = Array.from(variantMap.values()).sort((a, b) => a.label.localeCompare(b.label));
+      const variants = Array.from(variantMap.values()).sort((a, b) => {
+        const varA = this.context.actor?.actions.attack.get(a.slug);
+        const varB = this.context.actor?.actions.attack.get(b.slug);
+        if (!varA || !varB) return 0;
+        if(!varA.flingItemId && varB.flingItemId) return -1;
+        if(varA.flingItemId && !varB.flingItemId) return 1;
+        return a.label.localeCompare(b.label);
+      });
       if (!original) {
         const original = this.context.actor.actions.attack.get(variants[0].slug)!.original as AttackPTR2e;
         if (!original) return null;

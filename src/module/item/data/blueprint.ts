@@ -779,7 +779,7 @@ export default abstract class BlueprintSystem extends HasEmbed(HasMigrations(fou
           return game.settings.get("core", "defaultToken");
         }
         catch {
-          return game.settings.storage.get("world").find(s => s.key === "core.defaultToken")?.value as Partial<foundry.data.PrototypeTokenSource>
+          return fu.duplicate(game.settings.storage.get("world").find(s => s.key === "core.defaultToken")?.value as Partial<foundry.data.PrototypeTokenSource>)
         }
       })() ?? {};
 

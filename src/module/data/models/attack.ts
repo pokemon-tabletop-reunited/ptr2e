@@ -217,7 +217,7 @@ export default class AttackPTR2e extends ActionPTR2e {
     const options = this.actor.rollOptions.getFromDomain("adaptable");
 
     const types = getTypes();
-    const adaptableTypes = Object.keys(options).concat(Array.from(this.actor.system.type.types)).filter(type => type !== "untyped" && (types.includes(type) || type.startsWith("category:")))
+    const adaptableTypes = Object.keys(options).filter(type => type !== "untyped" && (types.includes(type) || type.startsWith("category:")))
     if(adaptableTypes.length === 0) return; // No options to add
     
     let category: string | null = null;
