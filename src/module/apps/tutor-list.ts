@@ -2,7 +2,9 @@ import { formatSlug, sluggify } from "@utils";
 import { ApplicationConfigurationExpanded, ApplicationV2Expanded } from "./appv2-expanded.ts";
 import { HandlebarsRenderOptions } from "types/foundry/common/applications/handlebars-application.ts";
 import { ActorPTR2e } from "@actor";
-import { TutorListSchema } from "@system/tutor-list/setting-model.ts";
+import { TutorListSchema, TutorListSettings } from "@system/tutor-list/setting-model.ts";
+import { forEach } from "remeda";
+import { grades } from "../data/mixins/has-gear-data.ts";
 
 export class TutorListApp extends foundry.applications.api.HandlebarsApplicationMixin(ApplicationV2Expanded) {
   static override DEFAULT_OPTIONS = fu.mergeObject(
@@ -45,6 +47,8 @@ export class TutorListApp extends foundry.applications.api.HandlebarsApplication
   filter: SearchFilter;
   actor: ActorPTR2e | null = null;
   currentTab = "";
+  sortBy: SortOptions = SortOptions.Name;
+  selectedGrades: Set<string> = new Set();
 
   constructor(options?: Partial<ApplicationConfigurationExpanded>) {
     super(options);
@@ -62,7 +66,7 @@ export class TutorListApp extends foundry.applications.api.HandlebarsApplication
   }
 
   override _prepareContext(options?: foundry.applications.api.HandlebarsRenderOptions | undefined) {
-    const lists = game.ptr.data.tutorList.list.contents;
+    const lists =  getGradedTutorList().list.contents;
 
     return {
       ...super._prepareContext(options),
@@ -74,40 +78,74 @@ export class TutorListApp extends foundry.applications.api.HandlebarsApplication
         if (a.type === b.type) {
           return a.slug.localeCompare(b.slug);
         }
-        return a.type.localeCompare(b.type);
+        return (a.type ?? "").localeCompare(b.type ?? "");
       }).map(list => ({
         slug: list.slug,
         title: list.type !== "universal" ? `${formatSlug(list.slug)} (${list.type === 'egg' ? 'Egg Group' : formatSlug(list.type)})` : formatSlug(list.slug),
         hidden: this.currentTab !== "" ? this.currentTab !== list.slug : false,
-        moves: list.moves.map(move => ({
-          slug: move.slug,
-          title: formatSlug(move.slug),
-          uuid: move.uuid,
-          pack: move.uuid?.split("Compendium.")?.[1].split(".Item")?.[0] ?? "",
-        }))
+        moves: Array.from(list.moves.values())
+          .map((move) => ({
+            slug: move.slug,
+            title: formatSlug(move.slug),
+            grade: move.grade,
+            uuid: move.uuid,
+            pack: move.uuid?.split("Compendium.")?.[1].split(".Item")?.[0] ?? "",
+          }))
+          .filter((move) => this.selectedGrades.size === 0 || this.selectedGrades.has(move.grade))
+          .sort((a, b) => {
+            switch (this.sortBy)
+            {
+              case SortOptions.Grade:
+                if (a.grade === b.grade) {
+                  return (a.slug ?? "").localeCompare(b.slug ?? "");
+                }
+
+                const gradeA = grades.indexOf(a.grade as typeof grades[number]);
+                const gradeB = grades.indexOf(b.grade as typeof grades[number]);
+                return gradeB - gradeA;
+              case SortOptions.Name:
+              default:
+                return (a.slug ?? "").localeCompare(b.slug ?? "");
+            }
+          })
       })),
       tab: this.currentTab,
-      actor: this.actor
+      actor: this.actor,
+      sortBy: this.sortBy,
+      selectedGrades: Array.from(this.selectedGrades)
     }
   }
 
-  filterList() {
+
+filterList() {
     const actor = this.actor;
-    const tutorList = game.ptr.data.tutorList;
+    const tutorList = getGradedTutorList();
+    
     if (!actor) return tutorList.list.contents;
 
     const resultLists = [tutorList.get("universal-universal")!];
 
     const speciesList = this.actor?.species?.moves.tutor.reduce((acc, val) => {
       const slug = sluggify(val.name);
-      acc.moves.set(slug, {slug, uuid: val.uuid});
+      let grade = "";
+      forEach(tutorList.list.contents, (list) => {
+        const move = list.moves.find(m => m.uuid == val.uuid);
+        if (move) {
+          grade = move.grade;
+        }
+        if (grade != "") {
+          return;
+        }
+      });
+      acc.moves.set(slug, { slug, uuid: val.uuid, grade: grade as string });
       return acc;
     }, {
       slug: "species-list",
       type: "universal",
       moves: new Collection()
     } as TutorListSchema) ?? null;
-    if(speciesList?.moves?.size) resultLists.push(speciesList);
+
+    if (speciesList?.moves?.size) resultLists.push(speciesList);
 
     for (const trait of actor.traits) {
       const list = tutorList.getType(trait.slug, "trait");
@@ -124,7 +162,7 @@ export class TutorListApp extends foundry.applications.api.HandlebarsApplication
 
     for (const eggGroup of actor.species?.eggGroups ?? []) {
       const list = tutorList.getType(sluggify(eggGroup), "egg");
-      if (list) resultLists
+      if (list) resultLists.push(list);
     }
 
     return resultLists;
@@ -143,6 +181,30 @@ export class TutorListApp extends foundry.applications.api.HandlebarsApplication
             const input = htmlElement.querySelector<HTMLInputElement>("input[name='filter']")
             if (input) input.value = "";
           }
+          this.render({ actor: this.actor, parts: ["aside", "list"] });
+        });
+      });
+
+      const sortDropdown = htmlElement.querySelector<HTMLSelectElement>("select[name='sort-by']");
+      if (sortDropdown) {
+        sortDropdown.addEventListener("change", event => {
+          event.preventDefault();
+          this.sortBy = (event.target as HTMLSelectElement).value as SortOptions;
+          this.render({ actor: this.actor, parts: ["list"] });
+        });
+      }
+
+      htmlElement.querySelectorAll<HTMLButtonElement>(".grade-filter").forEach(button => {
+        button.addEventListener("click", event => {
+          event.preventDefault();
+          const target = event.target as HTMLButtonElement;
+          const grade = target.getAttribute("data-grade");
+          if (target.classList.contains("active")) {
+            this.selectedGrades.delete(grade!);
+          } else {
+            this.selectedGrades.add(grade!);
+          }
+          target.classList.toggle("active");
           this.render({ actor: this.actor, parts: ["aside", "list"] });
         });
       });
@@ -178,9 +240,65 @@ export class TutorListApp extends foundry.applications.api.HandlebarsApplication
     const actor = await fromUuid<ActorPTR2e>(data.uuid);
     if (!actor) return;
     this.render({ actor, parts: ["aside", "list"] });
-  }
+    }
 }
+
 
 export interface TutorListApp {
   constructor: typeof TutorListApp;
+}
+
+enum SortOptions {
+  Name = "name",
+  Grade = "grade"
+}
+
+function getGradedTutorList(): TutorListSettings {
+  const tutorList = game.ptr.data.tutorList;
+  const packMap: Map<string, any[]> = new Map();
+
+  forEach(tutorList.list.contents, (list) => {
+    forEach(list.moves.contents, (move) => {
+      const pack = move.uuid?.split("Compendium.")?.[1].split(".Item")?.[0] ?? "";
+      if (pack) {
+        if (!packMap.has(pack)) {
+          packMap.set(pack, []);
+        }
+        packMap.get(pack)!.push(move);
+      }
+    });
+  });
+
+  const moveMap: Map<string, any> = new Map();
+
+  Array.from(packMap.entries()).forEach(async ([pack, moves]) => {
+    const packIndex = await game.packs.get(pack)?.getIndex({ fields: ["system.grade"] });
+
+    if (packIndex == null) {
+      return;
+    }
+
+    // Map over the packIndex to assign grades to the moves
+    packIndex.forEach((item: any) => {
+      const move = moves.find(m => m.uuid === item.uuid);
+      if (move) {
+        move.grade = item.system.grade;
+        moveMap.set(move.uuid, move);
+      }
+    });
+  });
+
+  // Now iterate over the original tutorList and populate the grade value from sortedMoves
+  forEach(tutorList.list.contents, (list) => {
+    forEach(list.moves.contents, (move) => {
+      if (move.uuid) {
+        const gradedMove = moveMap.get(move.uuid);
+        if (gradedMove) {
+          move.grade = gradedMove.grade;
+        }
+      }
+    });
+  });
+
+  return tutorList;
 }

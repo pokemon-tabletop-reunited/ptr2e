@@ -4,12 +4,12 @@
   "type": "equipment",
   "system": {
     "crafting": {
-      "skill": null,
+      "skill": "",
       "spans": null,
       "materials": []
     },
     "equipped": {
-      "slot": "held",
+      "slot": "accessory",
       "carryType": "stowed",
       "handsHeld": null
     },
@@ -17,16 +17,16 @@
     "fling": {
       "type": "untyped",
       "power": null,
-      "accuracy": 100
+      "accuracy": 100,
+      "hide": false
     },
     "rarity": "common",
     "traits": [
       "combat",
-      "consumable",
-      "resorative",
       "natural",
       "food",
-      "stack-4"
+      "restorative",
+      "healing"
     ],
     "actions": [
       {
@@ -44,21 +44,16 @@
         ],
         "range": {
           "target": "creature",
-          "distance": 0,
           "unit": "m"
         },
         "cost": {
-          "activation": "complex",
-          "powerPoints": 0,
-          "delay": null,
-          "priority": null
+          "activation": "complex"
         },
-        "variant": null
+        "img": "icons/svg/explosion.svg"
       }
     ],
-    "description": "Effect: As a Simple Action, the user can use this item to heal 2 Ticks of HP.",
-    "slug": null,
-    "container": null,
+    "description": "<p>Effect: At the end of  their Activation, the user gains @Tick[1].</p>",
+    "slug": "leftovers",
     "quantity": 1,
     "identification": {
       "misidentified": null,
@@ -68,26 +63,20 @@
         "img": "systems/ptu/css/images/icons/item_icon.png",
         "description": "<p>Unidentified Item</p>"
       }
+    },
+    "_migration": {
+      "version": null,
+      "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
     }
   },
   "_id": "1OAL4zFYg8gxROW6",
   "effects": [],
-  "folder": "V4skAU6G3OH5fXad",
-  "sort": 0,
-  "ownership": {
-    "default": 0,
-    "tXAZ3QUgjuwX4gdV": 3
-  },
-  "flags": {},
-  "_stats": {
-    "compendiumSource": null,
-    "duplicateSource": null,
-    "coreVersion": "12.327",
-    "systemId": "ptr2e",
-    "systemVersion": "0.0.0-alpha.1.0",
-    "createdTime": 1717878484297,
-    "modifiedTime": 1717878484297,
-    "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
-  },
-  "_key": "!items!1OAL4zFYg8gxROW6"
+  "folder": "PGpYU7mfnRpzOZSm"
 }

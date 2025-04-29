@@ -10,7 +10,7 @@ import { ScenePTR2e } from "@module/canvas/scene.ts";
 import { BasicChangeSystem, ChangeModel } from "@data";
 import { ActiveEffectPTR2e } from "@module/effects/index.ts";
 import { AttackMessageSystem, ChatMessagePTR2e, DamageAppliedMessageSystem, ItemMessageSystem, SkillMessageSystem, CaptureMessageSystem } from "@module/chat/index.ts";
-import Traits from "static/traits.json" assert { type: "json" };
+import Traits from "static/traits.json" with { type: "json" };
 import ItemDirectoryPTR2e from "@item/sidebar.ts";
 import { StatusEffects } from "./effects.ts";
 import FolderPTR2e from "@module/folder/document.ts";
@@ -37,6 +37,7 @@ import { Habitats } from "./habitats.ts";
 import { HabitatRollTable } from "@system/habitat-table.ts";
 import { RollTableDirectoryPTR2e } from "@module/apps/sidebar/rolltables-directory.ts";
 import AdvancementActiveEffectSystem from "@module/effects/data/advancement.ts";
+import { PickableThing } from "@module/apps/pick-a-thing-prompt.ts";
 
 export const PTRCONFIG = {
   ActiveEffect: {
@@ -195,5 +196,6 @@ export const PTRCONFIG = {
   } as Record<Size, string>,
   utils: {
     predicate: Predicate
-  }
+  },
+  options: {} as Record<string, PickableThing[]>
 }

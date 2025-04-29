@@ -37,7 +37,13 @@
         "system": "0.10.0-alpha.3.0.0"
       }
     },
-    "slot": 1
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    }
   },
   "_id": "dnKczVUT14Kp8vjB",
   "effects": [
@@ -45,31 +51,26 @@
       "name": "Snow Cloak",
       "type": "passive",
       "_id": "tWgSdhloRhfwJyYS",
-      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "img": "icons/magic/air/weather-clouds-snow.webp",
       "system": {
         "changes": [
           {
-            "type": "roll-option",
-            "key": "",
-            "value": "weather:snowy",
-            "predicate": [],
-            "domain": "all",
-            "toggleable": true,
-            "count": false,
-            "state": true,
-            "label": "In Snowy Weather?",
-            "alwaysActive": false,
-            "mode": 2,
-            "priority": null,
-            "ignored": false,
-            "suboptions": []
-          },
-          {
             "type": "basic",
-            "key": "system.battleStats.evasion.Stage",
+            "key": "system.battleStats.evasion.stage",
             "value": 1,
             "predicate": [
-              "weather:snowy"
+              "effect:summon:snowy-weather"
+            ],
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "add-trait",
+            "key": "",
+            "value": "ice",
+            "predicate": [
+              "effect:summon:snowy-weather"
             ],
             "mode": 2,
             "priority": null,
@@ -104,10 +105,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "ptr2e",
-        "systemVersion": "0.10.0-alpha.3.0.0",
+        "systemVersion": "1.1.0.beta",
         "createdTime": 1730213276790,
-        "modifiedTime": 1730213358828,
-        "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
+        "modifiedTime": 1741610895583,
+        "lastModifiedBy": "IcBpMqhFuTck9VpX"
       }
     }
   ]

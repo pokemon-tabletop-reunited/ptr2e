@@ -9,7 +9,7 @@
       {
         "name": "Run Down",
         "slug": "run-down",
-        "description": "<p>Trigger: You successfully hit an opponent with an attack.<br><br>May spend 4 PP to gain +1 SPD stage for 5 activations as a Free Action at [Interrupt 2].</p>",
+        "description": "<p>Trigger: The user successfully hits an opponent with an attack.<br><br>Effect: The user may spend 3 PP to gain +1 SPD stage for 5 activations as a Free Action at [Interrupt 2].</p>",
         "traits": [],
         "type": "attack",
         "range": {
@@ -18,7 +18,7 @@
         },
         "cost": {
           "activation": "free",
-          "powerPoints": 4
+          "powerPoints": 2
         },
         "img": "systems/ptr2e/img/perk-icons/Cavalier.svg",
         "types": [
@@ -30,7 +30,7 @@
       }
     ],
     "slug": "run-down",
-    "description": "<p>Trigger: You successfully hit an opponent with an attack.<br><br>May spend 4 PP to gain +1 SPD stage for 5 activations as a Free Action at [Interrupt 2].</p>",
+    "description": "<p>Trigger: You successfully hit an opponent with an attack.<br><br>May spend 3 PP to gain +1 SPD stage for 5 activations as a Free Action at [Interrupt 2].</p>",
     "traits": [],
     "prerequisites": [],
     "cost": 3,
@@ -40,6 +40,10 @@
     },
     "nodes": [
       {
+        "x": 67,
+        "y": 185,
+        "hidden": false,
+        "type": "normal",
         "connected": [
           "hobby-gardener",
           "hamstring",
@@ -47,18 +51,14 @@
           "mightyena-tactic"
         ],
         "config": {
+          "texture": "systems/ptr2e/img/perk-icons/Cavalier.svg",
           "alpha": null,
-          "backgroundColor": "#000000",
+          "backgroundColor": null,
           "borderColor": null,
           "borderWidth": null,
-          "texture": "systems/ptr2e/img/perk-icons/Cavalier.svg",
           "tint": null,
           "scale": null
         },
-        "hidden": false,
-        "type": "normal",
-        "x": 67,
-        "y": 185,
         "tier": null
       }
     ],
@@ -68,7 +68,14 @@
     "design": {
       "arena": "physical",
       "approach": "power",
-      "archetype": "Hunter"
+      "archetype": "hunter"
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
     }
   },
   "effects": [
@@ -89,7 +96,8 @@
             "mode": 2,
             "priority": null,
             "ignored": false,
-            "alterations": []
+            "alterations": [],
+            "dontMerge": false
           }
         ],
         "slug": null,

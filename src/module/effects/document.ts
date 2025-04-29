@@ -99,13 +99,37 @@ class ActiveEffectPTR2e<
 
     if (this.parent?.rollOptions) {
       this.parent.rollOptions.addOption("effect", `${this.type}:${this.slug}`);
+      if (this.traits.has("major-affliction")) {
+        this.setCount(this.parent.rollOptions.getFromDomain("effect"), "major-affliction");
+        this.setCount(this.parent.rollOptions.getFromDomain("all"), "effect:major-affliction");
+      }
+      if (this.traits.has("minor-affliction")) {
+        this.setCount(this.parent.rollOptions.getFromDomain("effect"), "minor-affliction");
+        this.setCount(this.parent.rollOptions.getFromDomain("all"), "effect:minor-affliction");
+      }
+    }
+  }
+
+  private setCount(domainRecord: Record<string, boolean>, option: string) {
+    const existing = Object.keys(domainRecord)
+      .flatMap((key: string) => ({
+        key,
+        count: Number(new RegExp(`^${option}:(\\d+)$`).exec(key)?.[1]) || 0,
+      }))
+      .find((kc) => !!kc.count);
+    if (existing) {
+      delete domainRecord[existing.key];
+      domainRecord[`${option}:${existing.count + 1}`] = true;
+    }
+    else {
+      domainRecord[`${option}:1`] = true;
     }
   }
 
   override apply(actor: ActorPTR2e, change: ChangeModel, options?: string[]): unknown {
     if (this.parent instanceof ItemPTR2e && this.parent) {
-      if(this.parent.system instanceof AbilitySystemModel && this.parent.system.isSuppressed) return;
-      if([
+      if (this.parent.system instanceof AbilitySystemModel && this.parent.system.isSuppressed) return;
+      if ([
         "weapon",
         "equipment",
         "consumable",
@@ -377,6 +401,9 @@ class ActiveEffectPTR2e<
         if (!(context.keepId || context.keepEmbeddedIds)) {
           source._id = fu.randomID();
         }
+        else if (source.changes?.some(c => ["grant-item", "grant-effect"].includes((c as { type: string })?.type))) {
+          source._id ??= fu.randomID();
+        }
 
         if (source.flags?.ptr2e?.stacks !== false) {
           const existing = (parent.effects.contents as ActiveEffectPTR2e[]).find(
@@ -460,6 +487,21 @@ class ActiveEffectPTR2e<
       ids = Array.from(new Set(effects.map(i => i.id))).filter(id => actor.effects.has(id));
     }
     return super.deleteDocuments(ids, context);
+  }
+
+  protected override _onDelete(options: DocumentModificationContext<TParent>, userId: string): void {
+    super._onDelete(options, userId);
+    if (!(this.targetsActor() && this.target && game.user.id === userId)) return;
+
+    const actorUpdates: Record<string, unknown> = {};
+    for (const change of this.changes) {
+      change.onDelete?.(actorUpdates);
+    }
+
+    const updateKeys = Object.keys(actorUpdates);
+    if (updateKeys.length > 0 && !updateKeys.every((k) => k === "_id")) {
+      this.target.update(actorUpdates, { noHook: true });
+    }
   }
 }
 

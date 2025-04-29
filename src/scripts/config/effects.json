@@ -320,9 +320,7 @@
       "turns": 5
     },
     "system": {
-      "changes": [
-        {}
-      ],
+      "changes": [],
       "formula": null,
       "type": null,
       "removeOnRecall": false,
@@ -545,7 +543,21 @@
       "turns": 5
     },
     "system": {
-      "changes": [],
+      "changes": [
+        {
+          "type": "grant-effect",
+          "value": "slowed",
+          "predicate": [{"or": ["trait:ace", "trait:trainer"]}],
+          "replaceSelf": true,
+          "alterations": [
+            {
+              "mode": 5,
+              "property": "effects.0.duration.turns",
+              "value": "{effect|duration.turns}"
+            }
+          ]
+        }
+      ],
       "formula": null,
       "type": null,
       "removeOnRecall": false,
@@ -722,11 +734,11 @@
       "removeOnRecall": false,
       "removeAfterCombat": true,
       "traits": [
-        "flying",
+        "shadow",
         "major-affliction"
       ]
     },
-    "description": "PTR2E.Effect.Statuses.Descriptions.wind-shear"
+    "description": "PTR2E.Effect.Statuses.Descriptions.wracked"
   },
   {
     "id": "disabled",
@@ -1244,7 +1256,47 @@
       "turns": 5
     },
     "system": {
-      "changes": [],
+      "changes": [
+        {
+          "type": "alter-attack",
+          "key": "normal-attack",
+          "value": "ignore-type-immunity",
+          "predicate": [],
+          "mode": 2,
+          "priority": null,
+          "ignored": false,
+          "property": "traits",
+          "definition": [
+            "target:trait:ghost"
+          ]
+        },
+        {
+          "type": "alter-attack",
+          "key": "fighting-attack",
+          "value": "ignore-type-immunity",
+          "predicate": [],
+          "mode": 2,
+          "priority": null,
+          "ignored": false,
+          "property": "traits",
+          "definition": [
+            "target:trait:ghost"
+          ]
+        },
+        {
+          "type": "alter-attack",
+          "key": "ghost-attack",
+          "value": "ignore-type-immunity",
+          "predicate": [],
+          "mode": 2,
+          "priority": null,
+          "ignored": false,
+          "property": "traits",
+          "definition": [
+            "target:trait:normal"
+          ]
+        }
+      ],
       "formula": null,
       "type": null,
       "removeOnRecall": false,
@@ -1430,7 +1482,7 @@
         {
           "type": "basic",
           "key": "system.battleStats.accuracy.stage",
-          "value": 1,
+          "value": -1,
           "predicate": [],
           "label": "Fear - targeting Source",
           "mode": 2,
@@ -1682,16 +1734,14 @@
     "system": {
       "changes": [
         {
-          "type": "basic",
-          "key": "system.attributes.def.stage",
-          "value": 1,
-          "mode": 2
-        },
-        {
-          "type": "basic",
-          "key": "system.attributes.spd.stage",
-          "value": 1,
-          "mode": 2
+          "type": "ephemeral-modifier",
+          "key": "attack-damage-percentile",
+          "value": -20,
+          "predicate": [],
+          "mode": 2,
+          "priority": null,
+          "ignored": false,
+          "hideIfDisabled": false
         }
       ],
       "removeOnRecall": false,
@@ -1713,16 +1763,15 @@
     "system": {
       "changes": [
         {
-          "type": "basic",
-          "key": "system.attributes.atk.stage",
-          "value": 1,
-          "mode": 2
-        },
-        {
-          "type": "basic",
-          "key": "system.attributes.spa.stage",
-          "value": 1,
-          "mode": 2
+          "type": "percentile-modifier",
+          "key": "attack-damage-percentile",
+          "value": 20,
+          "predicate": [],
+          "label": "Boosted",
+          "mode": 2,
+          "priority": null,
+          "ignored": false,
+          "hideIfDisabled": false
         }
       ],
       "removeOnRecall": true,

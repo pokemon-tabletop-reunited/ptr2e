@@ -1,0 +1,52 @@
+<section class="tab sheet-body {{tabs.sources.cssClass}}" data-tab="sources" data-group="tabs">
+  <section class="scroll">
+    <h2 class="m-0">{{localize "PTR2E.Settings.CompendiumBrowserSources.Name"}}</h2>
+    <p class="m-2">
+      {{localize "PTR2E.Settings.CompendiumBrowserSources.Hint"}}
+    </p>
+
+    <fieldset class="setting-section single-column">
+      <legend>{{localize "PTR2E.Settings.Settings"}}</legend>
+      <dl>
+        <label>
+          <dt><input type="checkbox" name="show-empty-sources" {{checked sources.showEmptySources}}></dt>
+          <dd>{{localize "PTR2E.Settings.CompendiumBrowserSources.ShowEmptySources"}}</dd>
+        </label>
+      </dl>
+
+      <dl>
+        <label>
+          <dt><input type="checkbox" name="show-unknown-sources" {{checked sources.showUnknownSources}}></dt>
+          <dd>{{localize "PTR2E.Settings.CompendiumBrowserSources.ShowUnknownSources"}}</dd>
+        </label>
+      </dl>
+
+      <dl>
+        <label>
+          <dt><input type="checkbox" name="ignore-as-gm" {{checked sources.ignoreAsGM}}></dt>
+          <dd>{{localize "PTR2E.Settings.CompendiumBrowserSources.IgnoreAsGM"}}</dd>
+        </label>
+      </dl>
+
+      <button type="button" data-action="settings-sources-delete">{{localize
+        "PTR2E.Settings.CompendiumBrowserSources.DeleteAllTitle"}}</button>
+    </fieldset>
+
+  
+    <fieldset class="setting-section single-column">
+      <legend>{{localize "PTR2E.Settings.CompendiumBrowserSources.SourcesListHeader"}}</legend>
+        <dl>
+          <label class="mb-2">
+            <dt><input type="checkbox" data-action="setting-sources-toggle-visible" /></dt>
+            <dd><input type="text" data-element="setting-sources-search" placeholder="Search for sources..."/></dd>
+          </label>
+          {{#each sources.sources}}
+          <label data-element="setting-source" data-name="{{this.name}}">
+            <dt><input type="checkbox" name="source-{{@key}}" {{checked this.load}}></dt>
+            <dd>{{this.name}}</dd>
+          </label>
+          {{/each}}
+        </dl>
+    </fieldset>
+  </section>
+</section>
