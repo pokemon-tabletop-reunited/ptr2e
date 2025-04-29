@@ -81,6 +81,10 @@ export class DexApp extends foundry.applications.api.HandlebarsApplicationMixin(
   );
 
   static override PARTS: Record<string, foundry.applications.api.HandlebarsTemplatePart> = {
+    search: {
+      id: "search",
+      template: "systems/ptr2e/templates/apps/dex-search.hbs",
+    },
     dex: {
       id: "dex",
       template: "systems/ptr2e/templates/apps/dex.hbs",
@@ -89,11 +93,17 @@ export class DexApp extends foundry.applications.api.HandlebarsApplicationMixin(
   };
 
   actor: ActorPTR2e;
+  filter: SearchFilter;
 
   constructor(actor: ActorPTR2e, options: Partial<foundry.applications.api.ApplicationConfiguration> = {}) {
     options.id = `dex-${actor.id || fu.randomID()}`;
     super(options);
     this.actor = actor;
+    this.filter = new SearchFilter({
+      inputSelector: "input[name='search']",
+      contentSelector: ".dex.scroll",
+      callback: this._onSearchFilter.bind(this),
+    })
   }
 
   override get title() {
@@ -145,6 +155,19 @@ export class DexApp extends foundry.applications.api.HandlebarsApplicationMixin(
         e.addEventListener("click", (event) => DexApp.#handleClick.call(this, event as PointerEvent, e));
         e.addEventListener("contextmenu", (event) => DexApp.#handleClick.call(this, event as PointerEvent, e));
       });
+    }
+    this.filter.bind(this.element);
+  }
+
+  _onSearchFilter(_event: KeyboardEvent, query: string, rgx: RegExp, html: HTMLElement) {
+    for (const entry of html.querySelectorAll<HTMLAnchorElement>("div.entry")) {
+      if (!query) {
+        entry.classList.remove("hidden");
+        continue;
+      }
+      const { slug } = entry.dataset;
+      const match = (slug && rgx.test(SearchFilter.cleanQuery(slug)));
+      entry.classList.toggle("hidden", !match);
     }
   }
 

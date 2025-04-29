@@ -66,6 +66,27 @@ class ActorPTR2e<
     });
   }
 
+  get afflictionCount() {
+    const domainRecord = this.rollOptions.getFromDomain("effect");
+    const minorAfflictions = Object.keys(domainRecord)
+      .flatMap((key: string) => ({
+        key,
+        count: Number(new RegExp(`^minor-affliction:(\\d+)$`).exec(key)?.[1]) || 0,
+      }))
+      .find((kc) => !!kc.count);
+    const majorAfflictions = Object.keys(domainRecord)
+      .flatMap((key: string) => ({
+        key,
+        count: Number(new RegExp(`^major-affliction:(\\d+)$`).exec(key)?.[1]) || 0,
+      }))
+      .find((kc) => !!kc.count);
+
+    return {
+      minor: minorAfflictions?.count ?? 0,
+      major: majorAfflictions?.count ?? 0,
+    };
+  }
+
   get traits() {
     return this.system.traits;
   }
@@ -76,6 +97,19 @@ class ActorPTR2e<
 
   get actions() {
     return this._actions;
+  }
+
+  get grade() {
+    const level = this.system.advancement.level;
+    return level >= 45
+      ? "A"
+      : level >= 35
+        ? "B"
+        : level >= 25
+          ? "C"
+          : level >= 15
+            ? "D"
+            : "E";
   }
 
   get originalRoot(): PerkPTR2e | null {
@@ -105,11 +139,11 @@ class ActorPTR2e<
 
   get combatant(): CombatantPTR2e | null {
     const combatants = (game.combat as CombatPTR2e | undefined)?.combatants.filter(
-      (c) => c.actor === this
+      (c) => c.actor?._id === this._id
     );
     return combatants?.length
       ? combatants.length > 1
-        ? combatants.find((c) => c.actor === this) ?? null
+        ? combatants.find((c) => c.actor === this) ?? combatants[0] ?? null
         : combatants[0]
       : null;
   }
@@ -231,6 +265,25 @@ class ActorPTR2e<
       ) ?? 0 - 1, 0)
   }
 
+  get jump(): number {
+    const trait = this.traits.find(t => t.slug.startsWith("jump"))?.slug.replace("jump-", "");
+    const jumpTraitValue = parseInt(trait!);
+    if (isNaN(jumpTraitValue)) return 0;
+
+    const jumpMultiplier = {
+      1: 0.1,
+      2: 0.4,
+      3: 0.8,
+      4: 1.4,
+      5: 3,
+      6: 8,
+      7: 16,
+      8: 30
+    }[jumpTraitValue] ?? 0;
+
+    return parseFloat((this.system.details.size.height * jumpMultiplier).toFixed(2));
+  }
+
   get nullifiableAbilities(): PickableThing[] {
     //@ts-expect-error - UUID only is valid.
     return this.itemTypes?.ability
@@ -238,6 +291,17 @@ class ActorPTR2e<
       .map(ability => ({
         value: ability.uuid
       })) ?? [];
+  }
+
+  get clocks() {
+    return this._clocks ?? (this._clocks = this.system.clocks.reduce((acc, clock) => {
+      Object.defineProperty(acc, clock.id, {
+        get: () => {
+          return this.system.clocks.get(clock.id)?.value ?? null;
+        }
+      })
+      return acc;
+    }, {}));
   }
 
   protected override _initializeSource(
@@ -290,6 +354,7 @@ class ActorPTR2e<
     this._party = null;
     this._perks = null;
     this._species = null;
+    this._clocks = null;
 
     this.rollOptions = new RollOptionManager(this);
 
@@ -575,6 +640,7 @@ class ActorPTR2e<
   }
 
   override *allApplicableEffects(): Generator<ActiveEffectPTR2e<this>> {
+    if (this.type === "ptu-actor") return super.allApplicableEffects() as Generator<ActiveEffectPTR2e<this>>;
     if (game.ready) {
       const combatant = this.combatant;
       if (combatant) {
@@ -604,7 +670,15 @@ class ActorPTR2e<
       effectiveness[typeKey] = 1;
       for (const key of this.system.type.types) {
         const type = key as PokemonType;
-        effectiveness[typeKey] *= types[type].effectiveness[typeKey];
+        if (types[type] === undefined) continue;
+        if (typeKey === "shadow") {
+          if (type === "shadow") {
+            effectiveness[typeKey] = 0.5;
+            break;
+          }
+          else effectiveness[typeKey] = 2;
+        }
+        else effectiveness[typeKey] *= types[type].effectiveness[typeKey];
       }
     }
     const typeImmunities = Object.keys(this.rollOptions.getFromDomain("immunities") ?? {}).filter(o => o.startsWith("type:"));
@@ -723,23 +797,23 @@ class ActorPTR2e<
     return this.system.attributes.spe.stage + (this.system.modifiers["speed"] ?? 0);
   }
 
-  getDefenseStat(attack: { category: AttackPTR2e["category"], defensiveStat: PTRCONSTS.Stat | null }, isCrit: boolean) {
+  getDefenseStat(attack: { category: AttackPTR2e["category"], defensiveStat: PTRCONSTS.Stat | null }, isCrit: boolean, ignoreStages: boolean) {
     const stat: PTRCONSTS.Stat = attack.defensiveStat ?? (attack.category === "physical" ? "def" : "spd");
-    return this.calcStatTotal(this.system.attributes[stat], isCrit);
+    return this.calcStatTotal(this.system.attributes[stat], isCrit, ignoreStages ?? false);
   }
 
-  getAttackStat(attack: { category: AttackPTR2e["category"], offensiveStat: PTRCONSTS.Stat | null }) {
+  getAttackStat(attack: { category: AttackPTR2e["category"], offensiveStat: PTRCONSTS.Stat | null }, ignoreStages: boolean) {
     const stat: PTRCONSTS.Stat = attack.offensiveStat ?? (attack.category === "physical" ? "atk" : "spa");
-    return this.calcStatTotal(this.system.attributes[stat], false);
+    return this.calcStatTotal(this.system.attributes[stat], false, ignoreStages ?? false);
   }
 
-  calcStatTotal(stat: Attribute | Omit<Attribute, 'stage'>, isCrit: boolean): number {
+  calcStatTotal(stat: Attribute | Omit<Attribute, 'stage'>, isCrit: boolean, ignoreStages: boolean): number {
     function isAttribute(attribute: Attribute | Omit<Attribute, 'stage'>): attribute is Attribute {
       return attribute.slug !== "hp";
     }
     if (!isAttribute(stat)) return stat.value;
     const stageModifier = () => {
-      const stage = Math.clamp(stat.stage, -6, isCrit ? 0 : 6);
+      const stage = ignoreStages ? 0 : Math.clamp(stat.stage, -6, isCrit ? 0 : 6);
       return stage > 0 ? (2 + stage) / 2 : 2 / (2 + Math.abs(stage));
     };
     return stat.value * stageModifier();
@@ -750,8 +824,11 @@ class ActorPTR2e<
   async applyTickDamage({ ticks, apply, shield, pp }: { ticks: number, apply?: boolean, shield?: boolean, pp?: boolean }): Promise<{ applied: number, update?: Record<string, unknown>, message?: ChatMessagePTR2e }>;
   async applyTickDamage({ ticks, apply = true, shield = false, pp = false }: { ticks: number, apply?: boolean, shield?: boolean, pp?: boolean }): Promise<{ applied: number, update?: Record<string, unknown>, message?: ChatMessagePTR2e }> {
     const isDamage = ticks < 0;
+    const multiplier = !isNaN((this.system.modifiers["vulnerabilityMultiplier"] ?? 1)) ? (this.system.modifiers["vulnerabilityMultiplier"] ?? 1) : 1;
+
     if (!pp) {
-      const amount = Math.floor((this.system.health.max / 16) * Math.abs(ticks))
+      const originalAmount = Math.floor((this.system.health.max / 16) * Math.abs(ticks));
+      const amount = Math.floor(originalAmount * (isDamage ? multiplier : 1))
       const applied = shield
         ? Math.min(amount || 0, isDamage ? this.system.shield.value : Infinity)
         : Math.min(amount || 0, isDamage ? this.system.health.value : this.system.health.max - this.system.health.value);
@@ -785,13 +862,14 @@ class ActorPTR2e<
           system: {
             damageApplied: isDamage ? applied : -applied,
             shieldApplied: shield,
-            target: this.uuid
+            target: this.uuid,
+            notes: isDamage && multiplier !== 1 ? [`Original Damage: ${originalAmount}`, `Vulnerability Multiplier: ${multiplier}`] : []
           }
         })
       }
     }
 
-    const amount = Math.floor((this.system.powerPoints.max / 16) * Math.abs(ticks));
+    const amount = Math.floor(Math.floor((this.system.powerPoints.max / 16) * Math.abs(ticks)) * (isDamage ? multiplier : 1));
     const applied = Math.min(amount || 0, isDamage ? this.system.powerPoints.value : this.system.powerPoints.max - this.system.powerPoints.value);
 
     const update = {
@@ -817,7 +895,8 @@ class ActorPTR2e<
         system: {
           damageApplied: isDamage ? applied : -applied,
           target: this.uuid,
-          ppApplied: true
+          ppApplied: true,
+          notes: multiplier !== 1 ? [`Vulnerability Multiplier: ${multiplier}`] : []
         }
       })
     }
@@ -827,6 +906,12 @@ class ActorPTR2e<
     damage: number,
     { silent, healShield } = { silent: false, healShield: false }
   ) {
+    // If this is damage, apply the vulnerability multiplier
+    const multiplier = (this.system.modifiers["vulnerabilityMultiplier"] ?? 1)
+    const originalDamage = damage;
+    if (damage > 0) {
+      if (multiplier !== 1 && !isNaN(multiplier)) damage = Math.floor(damage * this.system.modifiers["vulnerabilityMultiplier"]!);
+    }
     // Damage is applied to shield first, then health
     // Shields cannot be healed
     if (damage > 0 || healShield) {
@@ -841,25 +926,26 @@ class ActorPTR2e<
           ),
         });
         if (!silent) {
+          const baseNotes = multiplier !== 1 ? [`Original Damage: ${originalDamage}`, `Vulnerability Multiplier: ${multiplier}`] : []
+          baseNotes.push(...(damage < 0
+            ? [
+              `Shield healed for ${Math.abs(
+                damageAppliedToShield
+              )} health`,
+              `Shield remaining: ${this.system.shield.value}`,
+            ]
+            : [
+              `Shield took ${damageAppliedToShield} damage`,
+              isShieldBroken
+                ? "Shield broken!"
+                : `Shield remaining: ${this.system.shield.value}`,
+            ]))
           //@ts-expect-error - Chat messages have not been properly defined yet
           await ChatMessagePTR2e.create(
             {
               type: "damage-applied",
               system: {
-                notes:
-                  damage < 0
-                    ? [
-                      `Shield healed for ${Math.abs(
-                        damageAppliedToShield
-                      )} health`,
-                      `Shield remaining: ${this.system.shield.value}`,
-                    ]
-                    : [
-                      `Shield took ${damageAppliedToShield} damage`,
-                      isShieldBroken
-                        ? "Shield broken!"
-                        : `Shield remaining: ${this.system.shield.value}`,
-                    ],
+                notes: baseNotes,
                 damageApplied: damageAppliedToShield,
                 shieldApplied: true,
                 target: this.uuid,
@@ -887,6 +973,7 @@ class ActorPTR2e<
         system: {
           damageApplied: damageApplied,
           target: this.uuid,
+          notes: multiplier !== 1 ? [`Vulnerability Multiplier: ${multiplier}`] : []
         },
       });
     }
@@ -1015,6 +1102,8 @@ class ActorPTR2e<
   async onEndActivation() {
     if (!(game.user === game.users.activeGM)) return;
     if (!this.synthetics.afflictions.data.length) return;
+    const vulnerabilityMultiplier = isNaN(this.system.modifiers["vulnerabilityMultiplier"] ?? 1) ? 1 : (this.system.modifiers["vulnerabilityMultiplier"] ?? 1);
+
     const rollNotes: { options: string[], domains: string[], html: string }[] = [];
     const afflictions = this.synthetics.afflictions.data.reduce<{
       toDelete: string[];
@@ -1073,7 +1162,7 @@ class ActorPTR2e<
         case "healing":
           return "floor(min(((@formula) * @health.max) + @health.value, @health.max))";
         case "damage":
-          return "ceil(max(0, @health.value - ((@formula) * @health.max)))";
+          return "ceil(max(0, @health.value - (((@formula) * @health.max) * @vulnerability)))";
         case "both":
           return "round(clamp(@health.value - ((@formula) * @health.max), 0, @health.max))";
       }
@@ -1098,6 +1187,7 @@ class ActorPTR2e<
             max: this.system.health.max,
             value: newHealth,
           },
+          vulnerability: vulnerabilityMultiplier,
         }).roll()
       ).total;
 
@@ -1107,7 +1197,7 @@ class ActorPTR2e<
           await this._generateHealthChangeNotes(group, {
             old: newHealth,
             new: numberResult,
-          })
+          }, vulnerabilityMultiplier)
         );
         newHealth = numberResult;
       }
@@ -1177,16 +1267,19 @@ class ActorPTR2e<
       afflictions: { formula?: string; affliction: AfflictionActiveEffectSystem }[];
       type?: "healing" | "damage" | "both";
     },
-    health: { old: number; new: number }
+    health: { old: number; new: number },
+    multiplier: number
   ): Promise<string[]> {
     const output = [];
+    if (multiplier !== 1) output.push(`Vulnerability multiplier: ${multiplier}`);
 
     for (const { formula, affliction } of group.afflictions) {
       if (!formula) continue;
       const result = (
-        await new Roll("@formula * @actor.system.health.max", {
+        await new Roll(multiplier !== 1 ? "@formula * @actor.system.health.max * @multiplier" : "@formula * @actor.system.health.max", {
           formula,
           actor: this,
+          multiplier
         }).roll()
       ).total;
       output.push(`${affliction.parent.link}: ${formula} (${result})`);
@@ -1260,16 +1353,16 @@ class ActorPTR2e<
       if (difference >= 2) return new ModifierPTR2e({
         label: "PTR2E.Modifiers.size",
         slug: `size-penalty-unicqi-${appliesTo ?? fu.randomID()}`,
-        modifier: difference >= 4 ? 2 : 1,
-        method: "stage",
+        modifier: difference >= 4 ? 25 : 10,
+        method: "flat",
         type: "accuracy",
         appliesTo: appliesTo ? new Map([[appliesTo, true]]) : null,
       });
       if (difference <= -2) return new ModifierPTR2e({
         label: "PTR2E.Modifiers.size",
         slug: `size-penalty-unicqi-${appliesTo ?? fu.randomID()}`,
-        modifier: difference <= -4 ? -2 : -1,
-        method: "stage",
+        modifier: difference <= -4 ? -25 : -10,
+        method: "flat",
         type: "accuracy",
         appliesTo: appliesTo ? new Map([[appliesTo, true]]) : null,
       });
@@ -1393,7 +1486,7 @@ class ActorPTR2e<
         if (params.attack) {
           const attack = selfActor.actions.attack.get(params.attack?.slug);
           if (!attack) return null;
-          return attack.statistic?.check as Maybe<StatisticCheck>;
+          return attack.statistic?.getCheck(params.target?.actor ?? targetToken?.actor) as Maybe<StatisticCheck>;
         } else if (params.action) {
           const action = selfActor.actions.get(params.action.slug);
           if (!action) return null;
@@ -1402,6 +1495,20 @@ class ActorPTR2e<
         }
         return null;
       })() ?? params.statistic;
+
+    const newFlatModifiers: ModifierPTR2e[] = [];
+    if (statistic) {
+      const originalModifiers = params.statistic?.modifiers ?? [];
+
+      // Figure out which are new flat modifiers
+      const target = params.target?.actor ?? targetToken?.actor ?? null;
+      newFlatModifiers.push(...statistic.modifiers.filter(
+        (mod) => !originalModifiers.some((original) => original.slug === mod.slug)
+      ).map(mod => {
+        if (target) mod.appliesTo = new Map([[target.uuid, true]]);
+        return mod;
+      }));
+    }
 
     const selfItem = ((): ItemPTR2e<ItemSystemsWithActions, ActorPTR2e> | null => {
       // 1. Simplest case: no context clone, so used the item passed to this method
@@ -1461,7 +1568,6 @@ class ActorPTR2e<
       return R.unique(traits).sort();
     })();
 
-    let newFlatModifiers: ModifierPTR2e[] = [];
     if (selfAttack) {
       const actionTraitDomains = actionTraits.map((t) => `${t}-trait-${selfAttack.type}`)
       params.domains = R.unique([...params.domains, ...actionTraitDomains])
@@ -1471,12 +1577,12 @@ class ActorPTR2e<
 
       // Figure out which are new flat modifiers
       const target = params.target?.actor ?? targetToken?.actor ?? null;
-      newFlatModifiers = flatModsFromTraitDomains.filter(
+      newFlatModifiers.push(...flatModsFromTraitDomains.filter(
         (mod) => !originalModifiers.some((original) => original.slug === mod.slug)
       ).map(mod => {
         if (target) mod.appliesTo = new Map([[target.uuid, true]]);
         return mod;
-      });
+      }));
     }
 
     // Calculate distance and range increment, set as a roll option
@@ -1614,7 +1720,7 @@ class ActorPTR2e<
     };
   }
 
-  protected getContextualClone(
+  public getContextualClone(
     rollOptions: string[],
     ephemeralEffects: EffectSourcePTR2e[]
   ): this {
@@ -2028,6 +2134,7 @@ class ActorPTR2e<
     userId: string
   ) {
     super._onCreateDescendantDocuments(parent, collection, documents, results, options, userId);
+    if (game.users.activeGM?.id !== game.user.id) return;
     // if (game.ptr.web.actor === this) await game.ptr.web.refresh({ nodeRefresh: true });
     if (!this.unconnectedRoots.length) return;
 
@@ -2165,7 +2272,6 @@ class ActorPTR2e<
     return false;
   };
 
-
   async heal({ fractionToHeal = 1.0, removeWeary = true, removeExposed = false, removeAllStacks = false }: { fractionToHeal?: number, removeWeary?: boolean; removeExposed?: boolean; removeAllStacks?: boolean } = {}): Promise<void> {
     const health = Math.clamp(
       (this.system.health?.value ?? 0) + Math.floor((this.system.health?.max ?? 0) * fractionToHeal),
@@ -2220,6 +2326,7 @@ interface ActorPTR2e<
 
   _actions: ActionsCollections;
   _perks: Map<string, PerkPTR2e> | null;
+  _clocks: Record<string, unknown> | null;
 
   level: number;
 
@@ -2269,6 +2376,10 @@ type ActorFlags2e = ActorFlags & {
       data: (PickableThing & { base: number, investment: number, group?: string })[];
       get all(): PickableThing[];
       get species(): PickableThing[];
+    }
+    typeOptions?: {
+      get options(): PickableThing[],
+      get types(): PickableThing[];
     }
   };
 };

@@ -478,6 +478,7 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
         })() : [],
       });
 
+    context.defaultExpanded = game.settings.get("ptr2e", "expand-rolls");
     return renderTemplate("systems/ptr2e/templates/chat/attack.hbs", context);
   }
 
@@ -572,7 +573,7 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
 
           try {
             for (const alteration of effectRoll.alterations ?? []) {
-              alteration.applyTo(grantedSource as ItemSourcePTR2e);
+              alteration.applyTo(grantedSource as ItemSourcePTR2e, target);
             }
 
             toApply.push(...grantedSource.effects as ActiveEffectPTR2e['_source'][]);
@@ -883,6 +884,7 @@ interface AttackMessageRenderContext {
   results: Map<ActorUUID, AttackMessageRenderContextData>;
   pp: ModelPropsFromSchema<PPSchema>;
   selfEffectRolls: string[];
+  defaultExpanded?: boolean;
 }
 
 interface AttackMessageRenderContextData {

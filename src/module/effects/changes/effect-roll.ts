@@ -20,6 +20,7 @@ export default class EffectRollChangeSystem extends ChangeModel {
         initial: "target",
       }),
       alterations: new fields.ArrayField(new fields.EmbeddedDataField(ItemAlteration)),
+      dontMerge: new fields.BooleanField({ required: true, initial: false }),
     }
   }
 
@@ -95,6 +96,7 @@ export default class EffectRollChangeSystem extends ChangeModel {
         label: this.label,
         critOnly: isCrit,
         alterations: this.alterations,
+        dontMerge: this.dontMerge,
       };
     }
   }
@@ -118,4 +120,5 @@ interface EffectRollSchema extends ChangeSchema {
   chance: foundry.data.fields.NumberField<number, number, true, false, true>;
   affects: foundry.data.fields.StringField<"self" | "target" | "origin", "self" | "target" | "origin", true, false, true>;
   alterations: foundry.data.fields.ArrayField<foundry.data.fields.EmbeddedDataField<ItemAlteration>>;
+  dontMerge: foundry.data.fields.BooleanField<boolean, boolean, true, false, true>;
 };

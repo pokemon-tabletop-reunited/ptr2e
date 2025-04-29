@@ -9,5 +9,10 @@
     <div class="cost">
       IP Cost: <b>{{entry.cost}}</b>
     </div>
+    <div class="purchase">
+      <a data-tooltip="Purchase for {{entry.cost}} IP?" data-tooltip-direction="UP" data-action="purchase" draggable="false">
+        <i class="fa-regular fa-fw fa-bag-shopping"></i>
+      </a>
+    </div>
     {{/if}}
 </li>

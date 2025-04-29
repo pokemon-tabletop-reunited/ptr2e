@@ -1,0 +1,178 @@
+{
+  "name": "Type Brace",
+  "type": "equipment",
+  "system": {
+    "_migration": {
+      "version": 0.11,
+      "previous": null
+    },
+    "slug": "type-brace",
+    "traits": [],
+    "actions": [],
+    "description": "<p>Effect: The user takes 33% reduced damage from &lt;Type&gt;-Type attacks.</p>",
+    "crafting": {
+      "skill": "",
+      "spans": null,
+      "materials": []
+    },
+    "equipped": {
+      "carryType": "stowed",
+      "handsHeld": null,
+      "slot": "accessory"
+    },
+    "grade": "D",
+    "fling": {
+      "type": "untyped",
+      "power": 70,
+      "accuracy": 80,
+      "hide": false
+    },
+    "quantity": 1,
+    "rarity": "rare",
+    "identification": {
+      "misidentified": null,
+      "status": "identified",
+      "unidentified": {
+        "name": "Unidentified Item",
+        "img": "systems/ptu/css/images/icons/gear_icon.png",
+        "description": "<p>Unidentified Item</p>"
+      }
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ]
+    }
+  },
+  "img": "systems/ptr2e/img/icons/equipment_icon.webp",
+  "effects": [
+    {
+      "name": "Type Brace",
+      "type": "passive",
+      "_id": "N77jPg3NoTDWYb18",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "choice-set",
+            "key": "",
+            "value": 0,
+            "predicate": [],
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "choices": "options.types",
+            "prompt": "PTR2E.ChoiceSetPrompt.Prompt",
+            "adjustName": false,
+            "rollOption": "type-brace-type"
+          },
+          {
+            "type": "grant-item",
+            "key": "",
+            "value": "Compendium.ptr2e.core-gear.Item.MEQ8hovZpdvF72MS",
+            "predicate": [],
+            "alterations": [
+              {
+                "mode": 6,
+                "property": "system.traits",
+                "value": "type"
+              },
+              {
+                "mode": 2,
+                "property": "system.traits",
+                "value": "{effect|flags.ptr2e.choiceSelections.type-brace-type}"
+              },
+              {
+                "mode": 5,
+                "property": "name",
+                "value": "Type Brace ({effect|flags.ptr2e.choiceSelections.type-brace-type|C})"
+              },
+              {
+                "mode": 5,
+                "property": "system.description",
+                "value": "<p>Effect: The user takes 33% reduced damage from @Trait[{effect|flags.ptr2e.choiceSelections.type-brace-type}]-Type attacks.</p>"
+              },
+              {
+                "mode": 5,
+                "property": "effects.0.name",
+                "value": "Type Brace ({effect|flags.ptr2e.choiceSelections.type-brace-type|C})"
+              },
+              {
+                "mode": 5,
+                "property": "effects.0.system.changes.0.selection",
+                "value": "{effect|flags.ptr2e.choiceSelections.type-brace-type}"
+              },
+              {
+                "mode": 5,
+                "property": "effects.0.system.changes.1.label",
+                "value": "Type Brace ({effect|flags.ptr2e.choiceSelections.type-brace-type|C})"
+              },
+              {
+                "mode": 5,
+                "property": "effects.0.system.changes.1.key",
+                "value": "{effect|flags.ptr2e.choiceSelections.type-brace-type}-attack-damage-percentile"
+              }
+            ],
+            "replaceSelf": true,
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "reevaluateOnUpdate": false,
+            "inMemoryOnly": false,
+            "allowDuplicate": true,
+            "track": false,
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            }
+          },
+          {
+            "type": "ephemeral-modifier",
+            "key": "attack-damage-percentile",
+            "value": -33,
+            "predicate": [],
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "hideIfDisabled": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "1.0.6.beta",
+        "createdTime": 1740666763620,
+        "modifiedTime": 1740667101742,
+        "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
+      }
+    }
+  ],
+  "folder": "6VDJBcrqVDh5bYtA",
+  "_id": "MEQ8hovZpdvF72MS"
+}
