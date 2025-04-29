@@ -22,7 +22,7 @@
     {{#each results as |data uuid|}}
       {{#unless data.rolls.none}}
           <div class="collapse-button">
-              <button type="button" class="collapse-rolls" data-uuid="{{uuid}}">Show Rolls for {{data.target.name}}</button>
+              <button type="button" class="collapse-rolls{{#if @root.defaultExpanded}} expanded{{/if}}" data-uuid="{{uuid}}">Show Rolls for {{data.target.name}}</button>
           </div>
           <article class="collapsed">
               {{#if data.rolls.accuracy}}{{{data.rolls.accuracy}}}{{/if}}

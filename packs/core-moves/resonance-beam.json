@@ -1,0 +1,54 @@
+{
+  "name": "Resonance Beam",
+  "type": "move",
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": "<p>Effect: </p>"
+    },
+    "traits": [],
+    "actions": [
+      {
+        "name": "Resonance Beam",
+        "slug": "resonance-beam",
+        "type": "attack",
+        "img": "systems/ptr2e/img/svg/untyped_icon.svg",
+        "traits": [
+          "use-opponents-stats",
+          "adaptable",
+          "arcane",
+          "ray"
+        ],
+        "range": {
+          "target": "line",
+          "distance": 6,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 6
+        },
+        "types": [
+          "untyped"
+        ],
+        "category": "special",
+        "power": 90,
+        "accuracy": 90,
+        "predicate": [],
+        "description": "<p>Effect: This attack uses the targets' SPATK stats for damage calculation instead of the user's.</p>"
+      }
+    ],
+    "grade": "B",
+    "slug": "resonance-beam"
+  },
+  "img": "systems/ptr2e/img/svg/untyped_icon.svg",
+  "effects": [],
+  "_id": "cMUvjHD8KAJRf1Bt"
+}

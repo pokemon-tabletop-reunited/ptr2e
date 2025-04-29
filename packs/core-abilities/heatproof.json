@@ -22,16 +22,86 @@
         "img": "icons/svg/explosion.svg"
       }
     ],
-    "description": "<p>Effect: The user takes 50% reduced damage from Fire-Type attacks. If the user has @Affliction[burn], they only take half damage from the @Affliction[burn] damage.</p>",
+    "description": "<p>Effect: The user takes 50% reduced damage from Fire-Type attacks. If the user has @Affliction[burn], they only take half damage from the @Affliction[burn] damage. Heatproof also confers the @Trait[magma-wader] trait whilst active.</p>",
     "traits": [
-      "defensive"
+      "defensive",
+      "partial-automation"
     ],
     "slug": "heatproof",
     "_migration": {
       "version": null,
       "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
     }
   },
   "_id": "oRkwEqDiODRGWCX1",
-  "effects": []
+  "effects": [
+    {
+      "name": "Heatproof",
+      "type": "passive",
+      "_id": "7fjuBNum04fmwBqd",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "ephemeral-modifier",
+            "key": "fire-attack-damage-percentile",
+            "value": -50,
+            "predicate": [],
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "hideIfDisabled": false
+          },
+          {
+            "type": "add-trait",
+            "key": "",
+            "value": "magma-wader",
+            "predicate": [],
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "1.2.1.beta",
+        "createdTime": 1741605124301,
+        "modifiedTime": 1744796023540,
+        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
+      }
+    }
+  ]
 }

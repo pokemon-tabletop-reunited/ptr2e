@@ -20,7 +20,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 6
+          "powerPoints": 4
         },
         "category": "special",
         "power": 45,
@@ -28,16 +28,79 @@
         "types": [
           "flying"
         ],
-        "description": "<p>Effect: This attack is more powerful the faster the user is compared to the target, ranging from 45 to 135.</p><p><blockquote>Damage Formula: Power = min(135, (20*UserSPD / TargetSPD) + 45)</blockquote>",
-        "contestType": "",
-        "contestEffect": "",
-        "free": false,
-        "slot": null
+        "description": "<p>Effect: This attack is more powerful the faster the user is compared to the target, ranging from 45 to 135.</p>",
+        "img": "systems/ptr2e/img/svg/flying_icon.svg",
+        "predicate": []
       }
     ],
-    "container": null,
-    "grade": "A"
+    "grade": "B",
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "traits": [],
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
   },
   "_id": "k20VFQLHV61MKECa",
-  "effects": []
+  "effects": [
+    {
+      "name": "Wind Shear",
+      "type": "passive",
+      "_id": "xyD2jTI420t6c7aK",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "percentile-modifier",
+            "key": "wind-shear-attack-power",
+            "value": "round(min(200,@actor.system.attributes.spe.final/@target.system.attributes.spe.final*40))",
+            "predicate": [],
+            "label": "Wind Shear Scaling",
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "hideIfDisabled": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": false,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": "Compendium.ptr2e.core-moves.Item.eMhdr1eKjt0NLcfO.ActiveEffect.gn6RsjanbR62xSHt",
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "1.1.3.beta",
+        "createdTime": 1743552007752,
+        "modifiedTime": 1743552072493,
+        "lastModifiedBy": "5ImYyhOS2D6D7ypO"
+      }
+    }
+  ]
 }

@@ -1,4 +1,4 @@
-import { AbilityPTR2e, ItemPTR2e, ItemSystemPTR, MovePTR2e, SpeciesPTR2e } from "@item";
+import { AbilityPTR2e, ConsumablePTR2e, ItemPTR2e, ItemSystemPTR, MovePTR2e, SpeciesPTR2e } from "@item";
 import ActorPTR2e from "./base.ts";
 import { createHTMLElement, htmlClosest, htmlQuery, htmlQueryAll, sluggify } from "@utils";
 import { Tab } from "@item/sheets/document.ts";
@@ -78,6 +78,32 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
         },
       ],
       actions: {
+        "toggle-temporary": async function (this: ActorSheetPTRV2, event: Event) {
+          const itemId = htmlClosest(event.target, "[data-item-id]")?.dataset.itemId;
+          const item = this.actor.items.get(itemId, { strict: true }) as ConsumablePTR2e;
+          item.update({ "system.temporary": !item.system.temporary });
+        },
+        "reset-ip": async function (this: ActorSheetPTRV2) {
+          foundry.applications.api.DialogV2.confirm({
+            window: {
+              title: game.i18n.format("PTR2E.ActorSheet.ResetIP.title", {
+                name: this.document.name,
+              }),
+            },
+            content: game.i18n.format("PTR2E.ActorSheet.ResetIP.content", {
+              name: this.document.name,
+            }),
+            yes: {
+              callback: async () => {
+                await this.document.update({
+                  "system.inventoryPoints.current": this.document.system.inventoryPoints.max,
+                });
+                await this.document.deleteEmbeddedDocuments("Item", this.document.itemTypes.consumable.filter(i => i.system.temporary).map((i) => i.id));
+                this.render({ parts: ["inventory"] });
+              },
+            },
+          });
+        },
         "open-carry-type-menu": ActorSheetPTRV2.openCarryTypeMenu,
         "species-header": async function (this: ActorSheetPTRV2, event: Event) {
           event.preventDefault();
@@ -93,6 +119,8 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
         "open-perk-web": async function (this: ActorSheetPTRV2) {
           if ([true, undefined].includes(this.actor.flags.ptr2e?.sheet?.perkFlash))
             await this.actor.setFlag("ptr2e", "sheet.perkFlash", false);
+
+          canvas.tokens.controlled.forEach(t => t.release());
 
           const app = new PerkWebApp(this.actor);
           app.render(true);
@@ -165,6 +193,52 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
         },
         "open-stats-chart": function (this: ActorSheetPTRV2) {
           new StatsForm({ document: this.actor }).render(true);
+        },
+        "create-item": async function (this: ActorSheetPTRV2, event: Event) {
+          const type = ((event.target as HTMLElement).closest("[data-type]") as HTMLElement)?.dataset.type;
+          if (!type) return;
+
+          return void await this.document.createEmbeddedDocuments("Item", [{
+            name: ItemPTR2e.defaultName({ type, parent: this.document }),
+            type,
+          }]);
+        },
+        "browse": async function (this: ActorSheetPTRV2, event: Event) {
+          const type = ((event.target as HTMLElement).closest("[data-type]") as HTMLElement)?.dataset.type;
+          if (!type) return;
+
+          await game.ptr.compendiumBrowser.loadTab("gear");
+          const gearTab = game.ptr.compendiumBrowser.compendiumTabs.gear;
+          if (!gearTab.filterData.checkboxes.type.options[type]) return;
+
+          gearTab.resetFilters();
+          gearTab.filterData.checkboxes.type.options[type].selected = true;
+          gearTab.filterData.checkboxes.type.selected = [type];
+
+          const grade = this.actor.grade;
+          gearTab.filterData.checkboxes.grade.selected = [];
+          if (grade === "A") {
+            gearTab.filterData.checkboxes.grade.options.A.selected = true;
+            gearTab.filterData.checkboxes.grade.selected.push("A");
+          }
+          if (["A", "B"].includes(grade)) {
+            gearTab.filterData.checkboxes.grade.options.B.selected = true;
+            gearTab.filterData.checkboxes.grade.selected.push("B");
+          }
+          if (["A", "B", "C"].includes(grade)) {
+            gearTab.filterData.checkboxes.grade.options.C.selected = true;
+            gearTab.filterData.checkboxes.grade.selected.push("C");
+          }
+          if (["A", "B", "C", "D"].includes(grade)) {
+            gearTab.filterData.checkboxes.grade.options.D.selected = true;
+            gearTab.filterData.checkboxes.grade.selected.push("D");
+          }
+          if (["A", "B", "C", "D", "E"].includes(grade)) {
+            gearTab.filterData.checkboxes.grade.options.E.selected = true;
+            gearTab.filterData.checkboxes.grade.selected.push("E");
+          }
+
+          await game.ptr.compendiumBrowser.render(true);
         }
       },
     },
@@ -422,6 +496,7 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
   ) {
     if (partId === "overview") {
       context.movement = Object.values(this.actor.system.movement);
+      context.jump = this.actor.jump;
 
       context.effectiveness = this._prepareEffectiveness();
     }
@@ -432,6 +507,10 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
 
     if (partId === "clocks") {
       context.clocks = game.user.isGM ? this.document.system.clocks.contents : this.document.system.clocks.contents.filter(c => !c.private);
+    }
+
+    if (partId === "skills") {
+      context.noAce = !this.actor.traits.has("ace");
     }
 
     if (partId === "inventory") {
@@ -604,7 +683,15 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
 
           const clocks = fu.duplicate(this.document.system._source.clocks);
           const index = clocks.findIndex((c) => c.id === clock.id);
-          if (index === -1) return;
+          if (index === -1) {
+            const clock = this.document.system.clocks.get(id as string)?.toObject() as Clock.Source;
+            if (!clock) return;
+            clocks.push({
+              ...clock,
+              value: clock.value >= clock.max ? 0 : clock.value + 1,
+            });
+            return this.document.update({ "system.clocks": clocks });
+          }
           clocks[index].value = clock.value >= clock.max ? 0 : clock.value + 1;
 
           return this.document.update({ "system.clocks": clocks });
@@ -619,7 +706,15 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
 
           const clocks = fu.duplicate(this.document.system._source.clocks);
           const index = clocks.findIndex((c) => c.id === clock.id);
-          if (index === -1) return;
+          if (index === -1) {
+            const clock = this.document.system.clocks.get(id as string)?.toObject() as Clock.Source;
+            if (!clock) return;
+            clocks.push({
+              ...clock,
+              value: clock.value <= 0 ? clock.max : clock.value - 1,
+            });
+            return this.document.update({ "system.clocks": clocks });
+          }
           clocks[index].value = clock.value <= 0 ? clock.max : clock.value - 1;
 
           return this.document.update({ "system.clocks": clocks });
@@ -645,6 +740,10 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
             ?.getAttribute("data-id");
           const clock = this.document.system.clocks.get(id as string);
           if (!clock) return;
+
+          if(!this.document.system._source.clocks.find(c => c.id === clock.id)) {
+            return void ui.notifications.warn("Temporary clocks cannot be manually deleted, please make sure to alter this clock once first to make it permanent.");
+          }
 
           return await foundry.applications.api.DialogV2.prompt({
             buttons: [
@@ -859,7 +958,7 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
       );
     }
 
-    if("system.details.alliance" in submitData) {
+    if ("system.details.alliance" in submitData) {
       const alliance = submitData["system.details.alliance"];
       if (alliance === "default") submitData["system.details.alliance"] = '';
       if (alliance === "neutral") submitData["system.details.alliance"] = null;
@@ -923,7 +1022,7 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
       ) {
         return void this._onDropAbility(event, item);
       }
-      if(
+      if (
         this.actor.isOwner &&
         item instanceof ItemPTR2e &&
         item.type == "move" &&
@@ -931,13 +1030,13 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
       ) {
         const move = item.toObject() as MovePTR2e['_source'];
         const actionDiv = (event.target as HTMLElement).closest(".action[data-slot]") as HTMLElement;
-        if(actionDiv) {
+        if (actionDiv) {
           const slot = Number(actionDiv.dataset.slot);
           if (isNaN(slot)) return;
 
           const primaryAction = (move.system as unknown as MoveSystem["_source"]).actions[0]
           const currentAction = this.actor.attacks.actions[slot];
-          if(currentAction) await currentAction.update({ slot: null });
+          if (currentAction) await currentAction.update({ slot: null });
           primaryAction.slot = slot;
 
           return this.actor.createEmbeddedDocuments("Item", [move]);

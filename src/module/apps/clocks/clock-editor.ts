@@ -103,7 +103,11 @@ export default class ClockEditor extends foundry.applications.api.HandlebarsAppl
         const clocks = fu.duplicate(this.clock.parent._source.clocks);
         const index = clocks.findIndex((c) => c.id === this.clock!.id);
         if (index === -1) {
-          clocks.push(formData.object as SourceFromSchema<ClockSchema>);
+          clocks.push({
+            ...formData.object as SourceFromSchema<ClockSchema>,
+            id: this.clock.id,
+            sort: this.clock.sort,
+          });
         }
         else {
           clocks[index] = fu.mergeObject(clocks[index], formData.object as SourceFromSchema<ClockSchema>);

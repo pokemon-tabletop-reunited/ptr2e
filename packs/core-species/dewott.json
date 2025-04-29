@@ -28,10 +28,10 @@
     },
     "traits": [
       "pokemon",
-      "underdog",
       "fountain",
       "bipedal",
-      "deep-breath"
+      "deep-breath",
+      "jump-3"
     ],
     "abilities": {
       "starting": [
@@ -450,6 +450,10 @@
           "gen": "omega-ruby-alpha-sapphire"
         },
         {
+          "name": "shell-smash",
+          "gen": "dev"
+        },
+        {
           "name": "sleep-talk",
           "gen": "black-2-white-2"
         },
@@ -520,10 +524,6 @@
         {
           "name": "x-scissor",
           "gen": "scarlet-violet"
-        },
-        {
-          "name": "shell-smash",
-          "gen": "dev"
         }
       ]
     },
@@ -549,6 +549,10 @@
               "operand": "and"
             }
           ],
+          "perk": {
+            "x": 26,
+            "y": 26
+          },
           "evolutions": [
             {
               "name": "samurott",
@@ -560,6 +564,10 @@
                   "operand": "and"
                 }
               ],
+              "perk": {
+                "x": 26,
+                "y": 26
+              },
               "details": {
                 "gender": null,
                 "item": null,
@@ -579,11 +587,15 @@
                 },
                 {
                   "type": "item",
-                  "item": "linking-chord",
+                  "item": "linking-cord",
                   "operand": "or",
                   "held": false
                 }
               ],
+              "perk": {
+                "x": 26,
+                "y": 26
+              },
               "details": {
                 "gender": null,
                 "item": null,
@@ -602,9 +614,23 @@
         }
       ],
       "uuid": "Compendium.ptr2e.core-species.Item.r8t3J1rYshJ6K3oI",
-      "methods": []
+      "methods": [],
+      "perk": {
+        "x": 26,
+        "y": 26
+      }
     },
-    "slug": "dewott"
+    "slug": "dewott",
+    "_migration": {
+      "version": null,
+      "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core - Unova Dex",
+      "authors": [
+        "PTR 2e Team"
+      ]
+    }
   },
   "_id": "GLmbqDFnI4bJDpHI",
   "effects": []

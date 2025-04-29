@@ -46,7 +46,8 @@
           <div class="form-group" data-filter="{{modifier.name}}">
             <label for="{{modifier.name}}" class="short">{{localize modifier.label}} ({{multiply modifier.value 100}}%)</label>
             <div class="form-fields">
-              <input type="checkbox" id="{{modifier.name}}" name="{{modifier.name}}" {{checked modifier.checked}} />
+              {{formInput @root.amountField value=modifier.amount name=modifier.name}}
+              {{!-- <input type="checkbox" id="{{modifier.name}}" name="{{modifier.name}}" {{checked modifier.checked}} /> --}}
               {{#if (is ../group.id "custom")}} 
                 <a class="fas fa-trash" data-action="delete-modifier" data-modifier="{{modifier.name}}" data-tooltip="Delete modifier {{localize modifier.label}}" style="flex: 0 0 20px; margin-left: 5px;"></a>
               {{/if}}

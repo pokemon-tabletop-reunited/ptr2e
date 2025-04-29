@@ -17,9 +17,10 @@ interface BrowserTabs {
   move: browserTabs.Moves;
   perk: browserTabs.Perks;
   species: browserTabs.Species;
+  traits: browserTabs.Traits;
 }
 
-type TabName = "ability" | "gear" | "move" | "perk" | "species" | "settings";
+type TabName = "ability" | "gear" | "move" | "perk" | "species" | "settings" | "traits";
 type ContentTabName = Exclude<TabName, "settings">;
 type BrowserTab = InstanceType<(typeof browserTabs)[keyof typeof browserTabs]>;
 type TabData<T> = Record<TabName, T | null>;
