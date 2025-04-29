@@ -4,12 +4,12 @@
   "type": "equipment",
   "system": {
     "crafting": {
-      "skill": null,
+      "skill": "",
       "spans": null,
       "materials": []
     },
     "equipped": {
-      "slot": "held",
+      "slot": "accessory",
       "carryType": "stowed",
       "handsHeld": null
     },
@@ -18,16 +18,15 @@
       "type": "untyped",
       "power": null,
       "accuracy": 100,
-      "hide": null
+      "hide": false
     },
     "rarity": "common",
     "traits": [
       "combat",
-      "consumable",
-      "resorative",
       "natural",
       "food",
-      "stack-4"
+      "restorative",
+      "healing"
     ],
     "actions": [
       {
@@ -53,7 +52,7 @@
         "img": "icons/svg/explosion.svg"
       }
     ],
-    "description": "Effect: As a Simple Action, the user can use this item to heal 2 Ticks of HP.",
+    "description": "<p>Effect: At the end of  their Activation, the user gains @Tick[1].</p>",
     "slug": "leftovers",
     "quantity": 1,
     "identification": {
@@ -73,7 +72,8 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
+      ],
+      "notes": ""
     }
   },
   "_id": "1OAL4zFYg8gxROW6",
