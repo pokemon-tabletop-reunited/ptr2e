@@ -2479,7 +2479,7 @@
       "hudPerk web searchResults"
       "hudControls web searchResults";
     grid-template-columns: 250px minmax(0, 1fr) 250px;
-    grid-template-rows: 33px 100px 30px 100px minmax(0, 1fr) min-content;
+    grid-template-rows: 33px 100px 30px 145px minmax(0, 1fr) min-content;
   
     .hud {
       border-right: 1px solid var(--border-theme-color);
@@ -2885,65 +2885,65 @@
       }
   
       div[class^="slider-"] {
-        height: 10px;
-        width: 80%;
-        border: 1px solid black;
+        height: 10px !important;
+        width: 80% !important;
+        border: 1px solid black !important;
   
         .noUi-base {
-          background: #dddddd;
+          background: #dddddd !important;
   
           .noUi-origin {
             .noUi-handle {
-              background: none;
-              border: none;
-              box-shadow: none;
-              color: var(--appv2-text-color);
-              cursor: grab;
-              font-size: var(--font-size-16);
-              height: 14px;
-              right: -7px; // Half width
-              text-shadow: 0 0 4px black;
-              top: -4px;
-              width: 14px;
+              background: none !important;
+              border: none !important;
+              box-shadow: none !important;
+              color: var(--appv2-text-color) !important;
+              cursor: grab !important;
+              font-size: var(--font-size-16) !important;
+              height: 14px !important;
+              right: -7px !important; // Half width
+              text-shadow: 0 0 4px black !important;
+              top: -4px !important;
+              width: 14px !important;
   
               &:active {
-                cursor: grabbing;
+                cursor: grabbing !important;
               }
   
               &.handle {
-                background: #c85019;
-                border-radius: 2px;
-                border: 1px solid black;
-                box-shadow: 1px 1px 4px black;
+                background: #c85019 !important;
+                border-radius: 2px !important;
+                border: 1px solid black !important;
+                box-shadow: 1px 1px 4px black !important;
               }
   
               &::before,
               &::after {
-                background: none;
+                background: none !important;
               }
   
               .noUi-touch-area {
-                cursor: pointer;
+                cursor: pointer !important;
               }
             }
           }
   
           .noUi-tooltip {
-            display: none;
+            display: none !important;
           }
   
           .noUi-active .noUi-tooltip {
-            display: block;
-            background-color: rgba(black, 0.9);
-            color: var(--appv2-text-color);
-            line-height: 18px;
-            padding: 6px 14px;
+            display: block !important;
+            background-color: rgba(black, 0.9) !important;
+            color: var(--appv2-text-color) !important;
+            line-height: 18px !important;
+            padding: 6px 14px !important;
           }
   
           .noUi-connect {
             &.range {
               &_selected {
-                background: rgba(255, 255, 240, 0.8);
+                background: rgba(255, 255, 240, 0.8) !important;
               }
             }
           }
@@ -3028,6 +3028,7 @@
   
         button.clear-filters {
           margin-bottom: 5px;
+          width: 100%;
         }
   
         >dl {
@@ -3338,6 +3339,10 @@
         overflow-x: hidden;
         margin: unset;
         height: 100%;
+
+        [data-action="load-search"] {
+          width: 100%;
+        }
   
         li {
           display: flex;
@@ -5365,115 +5370,70 @@
         }
   
         div[class^="slider-"] {
-          height: 10px;
-          width: 80%;
-          border: 1px solid black;
+          height: 10px !important;
+          width: 80% !important;
+          border: 1px solid black !important;
   
           .noUi-base {
-            background: #dddddd;
+            background: #dddddd !important;
   
             .noUi-origin {
               .noUi-handle {
-                background: none;
-                border: none;
-                box-shadow: none;
-                color: var(--text-light);
-                cursor: grab;
-                font-size: var(--font-size-16);
-                height: 14px;
-                right: -7px; // Half width
-                text-shadow: 0 0 4px black;
-                top: -4px;
-                width: 14px;
+                background: none !important;
+                border: none !important;
+                box-shadow: none !important;
+                color: var(--text-light) !important;
+                cursor: grab !important;
+                font-size: var(--font-size-16) !important;
+                height: 14px !important;
+                right: -7px !important; // Half width
+                text-shadow: 0 0 4px black !important;
+                top: -4px !important;
+                width: 14px !important;
   
                 &:active {
-                  cursor: grabbing;
+                  cursor: grabbing !important;
                 }
   
                 &.handle {
-                  background: #c85019;
-                  border-radius: 2px;
-                  border: 1px solid black;
-                  box-shadow: 1px 1px 4px black;
+                  background: #c85019 !important;
+                  border-radius: 2px !important;
+                  border: 1px solid black !important;
+                  box-shadow: 1px 1px 4px black !important;
                 }
   
                 &::before,
                 &::after {
-                  background: none;
+                  background: none !important;
                 }
   
                 .noUi-touch-area {
-                  cursor: pointer;
+                  cursor: pointer !important;
                 }
               }
             }
   
             .noUi-tooltip {
-              display: none;
+              display: none !important;
             }
   
             .noUi-active .noUi-tooltip {
-              display: block;
-              background-color: rgba(black, 0.9);
-              color: var(--text-light);
-              line-height: 18px;
-              padding: 6px 14px;
+              display: block !important;
+              background-color: rgba(black, 0.9) !important;
+              color: var(--text-light) !important;
+              line-height: 18px !important;
+              padding: 6px 14px !important;
             }
   
             .noUi-connect {
               &.range {
                 &_selected {
-                  background: rgba(255, 255, 240, 0.8);
+                  background: rgba(255, 255, 240, 0.8) !important;
                 }
               }
             }
           }
         }
-  
-        // .noUi-base {
-        //   background: #ddd;
-        //   .noUi-origin .noUi-handle {
-        //     background: none;
-        //     border: none;
-        //     box-shadow: none;
-        //     color: var(--text-light);
-        //     cursor: grab;
-        //     font-size: var(--font-size-16);
-        //     height: 14px;
-        //     right: -7px;
-        //     text-shadow: 0 0 4px black;
-        //     top: -4px;
-        //     width: 14px;
-        //     &:active {
-        //       cursor: grabbing;
-        //     }
-        //     &.handle {
-        //       background: #c85019;
-        //       border-radius: 2px;
-        //       border: 1px solid black;
-        //       box-shadow: 1px 1px 4px black;
-        //     }
-        //     &::before {
-        //       background: none;
-        //     }
-        //     .noUi-touch-area {
-        //       cursor: pointer;
-        //     }
-        //   }
-        //   .noUi-tooltip {
-        //     display: none;
-        //   }
-        //   .noUi-active .noUi-tooltip {
-        //     display: block;
-        //     background-color: rgba(0, 0, 0, 0.9);
-        //     color: var(--text-light);
-        //     line-height: 18px;
-        //     padding: 6px 14px;
-        //   }
-        //   .noUi-connect.range_selected {
-        //     background: rgba(255, 255, 240, 0.8);
-        //   }
-        // }
   
         tags {
           --tags-border-color: var(--border-theme-color);
