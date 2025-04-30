@@ -97,7 +97,7 @@ class CombatTrackerPTR2e<TEncounter extends CombatPTR2e | null> extends foundry.
 
   async _prepareTurnContext(combat: CombatPTR2e, combatant: CombatantPTR2e, index: number) {
     // @ts-expect-error - Missing types for this function
-    const turn = super._prepareTurnContext(combat, combatant, index) as {
+    const turn = await super._prepareTurnContext(combat, combatant, index) as {
       hasDecimals: boolean;
       hidden: boolean;
       id: string;
