@@ -107,7 +107,7 @@ export class GlobalPerkGeneratorConfig extends foundry.applications.api.Handleba
   constructor(options?: Partial<ApplicationConfigurationExpanded>) {
     super(options);
 
-    this.filter = new SearchFilter({
+    this.filter = new foundry.applications.ux.SearchFilter({
       inputSelector: "input[name='filter']",
       contentSelector: ".configs.scroll",
       callback: this._onSearchFilter.bind(this),
@@ -190,7 +190,7 @@ export class GlobalPerkGeneratorConfig extends foundry.applications.api.Handleba
         continue;
       }
       const label = entry.dataset.label;
-      const match = (label && rgx.test(SearchFilter.cleanQuery(label)));
+      const match = (label && rgx.test(foundry.applications.ux.SearchFilter.cleanQuery(label)));
       entry.classList.toggle("hidden", !match);
     }
   }

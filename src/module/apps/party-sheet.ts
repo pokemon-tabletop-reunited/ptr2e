@@ -60,7 +60,7 @@ class PartySheetPTR2e extends foundry.applications.api.HandlebarsApplicationMixi
         }, {}, {
           top: rect.top + rect.height + 10,
           //@ts-expect-error - Types are not up-to-date
-          left: rect.left - Number(FolderConfig.DEFAULT_OPTIONS.position.width) + rect.width,
+          left: rect.left - Number(foundry.applications.sheets.FolderConfig.DEFAULT_OPTIONS.position.width) + rect.width,
         }).then((folder) => {
           if (folder instanceof FolderPTR2e) {
             //@ts-expect-error - App v1 compatability
@@ -215,7 +215,7 @@ class PartySheetPTR2e extends foundry.applications.api.HandlebarsApplicationMixi
             if (!folder) return;
             const r = li.getBoundingClientRect();
             //@ts-expect-error - Types are not up-to-date
-            const options = { top: r.top, left: r.left - Number(FolderConfig.DEFAULT_OPTIONS.position.width) - 10 };
+            const options = { top: r.top, left: r.left - Number(foundry.applications.sheets.FolderConfig.DEFAULT_OPTIONS.position.width) - 10 };
             new FolderConfigPTR2e({
               document: folder,
               position: options

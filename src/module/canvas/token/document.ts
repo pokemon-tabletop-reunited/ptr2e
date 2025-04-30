@@ -6,7 +6,7 @@ import { CombatantPTR2e, CombatPTR2e } from "@combat";
 // TODO: Fix circular dependency when imported from @combat
 import CharacterCombatantSystem from "../../combat/combatant/models/character.ts";
 import { TokenAura } from "./aura/aura.ts";
-import { TokenConfigPTR2e } from "./sheet.ts";
+// import { TokenConfigPTR2e } from "./sheet.ts";
 import BaseUser from "types/foundry/common/documents/user.js";
 
 class TokenDocumentPTR2e<TParent extends ScenePTR2e | null = ScenePTR2e | null> extends TokenDocument<TParent> {
@@ -306,7 +306,6 @@ interface TokenDocumentPTR2e<TParent extends ScenePTR2e | null = ScenePTR2e | nu
   get actor(): ActorPTR2e<ActorSystemPTR2e, this | null> | null;
   get combatant(): Combatant<Combat, this> | null;
   get object(): TokenPTR2e<this> | null;
-  get sheet(): TokenConfigPTR2e<this>;
 }
 
 export { TokenDocumentPTR2e }

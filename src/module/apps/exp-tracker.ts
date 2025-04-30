@@ -178,7 +178,7 @@ export class EXPTracker extends foundry.applications.api.HandlebarsApplicationMi
   constructor(options?: Partial<ApplicationConfigurationExpanded>) {
     super(options);
 
-    this.filter = new SearchFilter({
+    this.filter = new foundry.applications.ux.SearchFilter({
       inputSelector: "input[name='filter']",
       contentSelector: "fieldset.cms",
       callback: this._onSearchFilter.bind(this),
@@ -370,7 +370,7 @@ export class EXPTracker extends foundry.applications.api.HandlebarsApplicationMi
         continue;
       }
       const slug = entry.dataset.filter;
-      const match = (slug && rgx.test(SearchFilter.cleanQuery(slug)));
+      const match = (slug && rgx.test(foundry.applications.ux.SearchFilter.cleanQuery(slug)));
       entry.classList.toggle("hidden", !match);
       if (match) visibleLists.add(slug);
     }

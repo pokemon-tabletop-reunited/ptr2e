@@ -61,7 +61,7 @@ export class SkillsEditor extends foundry.applications.api.HandlebarsApplication
     super(options);
     this.document = document;
     this.skills = this.resetSkills();
-    this.filter = new SearchFilter({
+    this.filter = new foundry.applications.ux.SearchFilter({
       inputSelector: "input[name='filter']",
       contentSelector: "fieldset.skills .scroll",
       callback: this._onSearchFilter.bind(this),
@@ -213,7 +213,7 @@ export class SkillsEditor extends foundry.applications.api.HandlebarsApplication
         continue;
       }
       const { slug, group } = entry.dataset;
-      const match = (slug && rgx.test(SearchFilter.cleanQuery(slug))) || (group && rgx.test(SearchFilter.cleanQuery(group)));
+      const match = (slug && rgx.test(foundry.applications.ux.SearchFilter.cleanQuery(slug))) || (group && rgx.test(foundry.applications.ux.SearchFilter.cleanQuery(group)));
       entry.classList.toggle("hidden", !match);
     }
   }

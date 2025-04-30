@@ -1,5 +1,5 @@
 import { ActorPTR2e } from "@actor";
-import { ItemSheetPTR2e, ItemSourcePTR2e, ItemSystemPTR, ItemSystemsWithActions } from "@item";
+import { ItemSourcePTR2e, ItemSystemPTR, ItemSystemsWithActions } from "@item";
 import { ActionPTR2e, EquipmentData, RollOptionManager, Trait } from "@data";
 import { ActiveEffectPTR2e, EffectSourcePTR2e } from "@effects";
 import { ItemFlagsPTR2e } from "./data/system.ts";
@@ -11,6 +11,7 @@ import * as R from "remeda";
 import { MigrationRunnerBase } from "@module/migration/runner/base.ts";
 import { processGrantDeletions } from "@module/effects/changes/grant-item.ts";
 import BlueprintSystem from "./data/blueprint.ts";
+import ItemSheetPTR2e from "./sheets/base.ts";
 
 /**
  * @extends {PTRItemData}
@@ -22,10 +23,10 @@ class ItemPTR2e<
   /** Has this document completed `DataModel` initialization? */
   declare initialized: boolean;
 
-  declare _sheet: ItemSheetPTR2e<this> | null;
+  declare _sheet: ItemSheetPTR2e<TSystem> | null;
 
-  override get sheet(): ItemSheetPTR2e<this> {
-    return super.sheet as ItemSheetPTR2e<this>;
+  override get sheet(): ItemSheetPTR2e<TSystem> {
+    return super.sheet as ItemSheetPTR2e<TSystem>;
   }
 
   /** The recorded schema version of this item, updated after each data migration */

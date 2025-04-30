@@ -72,7 +72,7 @@ export abstract class CompendiumBrowserTab {
       processTerm: (term): string[] | null => {
         if (term.length <= 1 || CompendiumDirectoryPTR2e.STOP_WORDS.has(term)) return null;
         return Array.from(wordSegmenter.segment(term)).map(t =>
-          SearchFilter.cleanQuery(t.segment.toLocaleLowerCase(game.i18n.lang)).replace(/['"]/g, "")
+          foundry.applications.ux.SearchFilter.cleanQuery(t.segment.toLocaleLowerCase(game.i18n.lang)).replace(/['"]/g, "")
         )
           .filter(t => t.length > 1);
       },
@@ -107,7 +107,7 @@ export abstract class CompendiumBrowserTab {
     }
 
     this.currentIndex = (() => {
-      const searchText = SearchFilter.cleanQuery(this.filterData.search.text);
+      const searchText = foundry.applications.ux.SearchFilter.cleanQuery(this.filterData.search.text);
       if (searchText) {
         const searchResult = this.searchEngine.search(searchText);
         return this.sortResult(searchResult.filter(this.filterIndexData.bind(this)));

@@ -95,7 +95,7 @@ export class DexApp extends foundry.applications.api.HandlebarsApplicationMixin(
     options.id = `dex-${actor.id || fu.randomID()}`;
     super(options);
     this.actor = actor;
-    this.filter = new SearchFilter({
+    this.filter = new foundry.applications.ux.SearchFilter({
       inputSelector: "input[name='search']",
       contentSelector: ".dex.scroll",
       callback: this._onSearchFilter.bind(this),
@@ -162,7 +162,7 @@ export class DexApp extends foundry.applications.api.HandlebarsApplicationMixin(
         continue;
       }
       const { slug } = entry.dataset;
-      const match = (slug && rgx.test(SearchFilter.cleanQuery(slug)));
+      const match = (slug && rgx.test(foundry.applications.ux.SearchFilter.cleanQuery(slug)));
       entry.classList.toggle("hidden", !match);
     }
   }

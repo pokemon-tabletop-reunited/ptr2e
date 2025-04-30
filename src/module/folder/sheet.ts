@@ -4,8 +4,8 @@ import { ActorPTR2e } from "@actor";
 import { SocketRequestData } from "@scripts/hooks/socket.ts";
 import { DocumentSheetConfigurationExpanded } from "@module/apps/appv2-expanded.ts";
 
-class FolderConfigPTR2e extends FolderConfig {
-  static DEFAULT_OPTIONS = {
+class FolderConfigPTR2e extends foundry.applications.sheets.FolderConfig {
+  static override DEFAULT_OPTIONS = {
     classes: ["folder-edit"],
     position: {
       width: 480
@@ -21,7 +21,7 @@ class FolderConfigPTR2e extends FolderConfig {
     return true;
   }
 
-  get isVisible() {
+  override get isVisible() {
     return true;
   }
 
@@ -40,8 +40,7 @@ class FolderConfigPTR2e extends FolderConfig {
   private owner: ActorPTR2e | null = null;
   private team: ActorPTR2e[] = [];
 
-  async _prepareContext(options?: DocumentSheetConfiguration<FolderPTR2e>) {
-    //@ts-expect-error - Outdated types
+  override async _prepareContext(options?: DocumentSheetConfiguration<FolderPTR2e>) {
     const context = await super._prepareContext(options) as Record<string, unknown> & {document: FolderPTR2e, team: {actor: ActorPTR2e, folder: FolderPTR2e}[]}
     const folder = context.document
 
@@ -66,7 +65,7 @@ class FolderConfigPTR2e extends FolderConfig {
     htmlElement: HTMLElement,
     _options: foundry.applications.api.HandlebarsRenderOptions
   ): void {
-    // @ts-expect-error - Outdated types
+    //@ts-expect-error - Outdated Types
     super._attachPartListeners(partId, htmlElement, _options);
     if (partId === "members") {
       const ownerFieldset = htmlElement.querySelector<HTMLFieldSetElement>("fieldset.owner");
@@ -105,7 +104,6 @@ class FolderConfigPTR2e extends FolderConfig {
       }
     }
 
-    //@ts-expect-error - Outdated types
     return this.render({ parts: ["members"] }).then(_ => { this.position.height = "auto"; return _ })
   }
 
@@ -128,7 +126,6 @@ class FolderConfigPTR2e extends FolderConfig {
     if (!this.document.id) this.owner = actor;
     else await actor.update({ "folder": this.document.id, "system.party.ownerOf": this.document.id, "system.party.partyMemberOf": null });
 
-    //@ts-expect-error - Outdated types
     return this.render({ parts: ["members"] });//.then(_ => { this.position.height = "auto"; return _ })
   }
 
@@ -144,7 +141,6 @@ class FolderConfigPTR2e extends FolderConfig {
     if (!this.document.id) this.team.push(actor);
     else await actor.update({ "system.party.teamMemberOf": Array.from(new Set(actor.system.party.teamMemberOf.concat(this.document.id))) });
 
-    //@ts-expect-error - Outdated types
     return this.render({ parts: ["members"] });//.then(_ => { this.position.height = "auto"; return _ })
   }
 
@@ -229,8 +225,10 @@ class FolderConfigPTR2e extends FolderConfig {
       this.options.resolve(folder);
     return folder;
   }
+}
 
-  declare document: FolderPTR2e
+interface FolderConfigPTR2e {
+  get document(): FolderPTR2e
 }
 
 export default FolderConfigPTR2e;

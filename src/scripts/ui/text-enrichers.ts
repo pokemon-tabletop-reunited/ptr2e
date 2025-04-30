@@ -4,7 +4,7 @@
 import { ActiveEffectPTR2e } from "@effects";
 export class TextEnricher {
   static init() {
-    const original = foundry.applications.ux.TextEditor.activateListeners.bind(TextEditor);
+    const original = foundry.applications.ux.TextEditor.activateListeners.bind(foundry.applications.ux.TextEditor);
     foundry.applications.ux.TextEditor.activateListeners = function () {
       original();
 

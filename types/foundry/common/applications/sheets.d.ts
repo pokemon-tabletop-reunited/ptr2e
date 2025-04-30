@@ -37,7 +37,12 @@ declare class ItemSheetV2<
     get item(): TDocument;
 }
 
+declare class FolderConfig extends DocumentSheetV2<Folder> {
+}
+
 export {
     ActorSheetV2,
     ItemSheetV2,
+    ActiveEffectConfig,
+    FolderConfig,
 }

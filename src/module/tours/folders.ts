@@ -48,7 +48,6 @@ export class FoldersTour extends PTRTour {
             }
           }
         ])
-        //@ts-expect-error - Outdated types
         await dialog.render({ parts: ["members"] })
         //@ts-expect-error - Bypass protected property
         await ui.actors._render(true)
@@ -207,7 +206,6 @@ export class FoldersTour extends PTRTour {
             }
           }
         ])
-        //@ts-expect-error - Outdated types
         await dialog.render({ parts: ["members"] })
         //@ts-expect-error - Bypass protected property
         await ui.actors._render(true)

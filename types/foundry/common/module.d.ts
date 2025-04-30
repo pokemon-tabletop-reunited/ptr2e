@@ -7,6 +7,8 @@ import * as Packages from "./packages/module.ts";
 import * as Utils from "./utils/module.ts";
 import * as Applications from "./applications/module.ts";
 import * as CanvasS from "../client-esm/canvas/module.ts";
+import * as Grid from "./grid/module.ts";
+import type {ImageHelper} from "../client/core/image.ts"
 
 // global-modifying module
 import "./primitives/module.d.ts";
@@ -33,9 +35,12 @@ declare global {
 
             export import canvas = CanvasS;
 
+            export import grid = Grid;
+
             //V13 aliases
             export const nue: {Tour: typeof Tour}
             export const appv1: {sheets: {ItemSheet: typeof ItemSheet, ActorSheet: typeof ActorSheet, }}
+            export const helpers: {media: {ImageHelper: typeof ImageHelper}}
         }
     }
 }

@@ -6,8 +6,7 @@ export * as hud from "./hud/_module.mts";
 export {instances} from "./instances.ts";
 export {parseHTML} from "./parse-html.ts";
 //V13 aliases
-export const ux: {DragDrop: typeof DragDrop, TextEditor: typeof TextEditor}
-export const handlebars: {renderTemplate: typeof renderTemplate}
+export const handlebars: {renderTemplate: typeof renderTemplate, loadTemplates: typeof loadTemplates}
 export const sidebar: {
   tabs: {
     Settings: typeof Settings
@@ -16,9 +15,17 @@ export const sidebar: {
     ActorDirectory: typeof ActorDirectory
     ItemDirectory: typeof ItemDirectory
     CombatTracker: typeof CombatTracker
-
+    
   }
+}
+export const ux: {
+  DragDrop: typeof DragDrop, 
+  TextEditor: typeof TextEditor,
+  SearchFilter: typeof SearchFilter,
 }
 export const ui: {
   Hotbar: typeof Hotbar
+}
+export const apps: {
+  DocumentSheetConfig: typeof DocumentSheetConfig
 }

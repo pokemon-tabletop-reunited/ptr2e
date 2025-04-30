@@ -5191,7 +5191,7 @@ export class ClientBaseFolder extends foundry.documents.BaseFolder {
 export class ClientBaseItem<
     TParent extends ClientBaseActor<CanvasBaseToken<ClientBaseScene | null> | null> | null,
 > extends foundry.documents.BaseItem<TParent> {
-    protected _sheet: DocumentSheet<this> | null;
+    protected _sheet: any | null;
 
     /**
      * A collection of Application instances which should be re-rendered whenever this document is updated.

@@ -48,7 +48,7 @@ export class TutorListApp extends foundry.applications.api.HandlebarsApplication
   constructor(options?: Partial<ApplicationConfigurationExpanded>) {
     super(options);
 
-    this.filter = new SearchFilter({
+    this.filter = new foundry.applications.ux.SearchFilter({
       inputSelector: "input[name='filter']",
       contentSelector: "nav.tutor-list-options",
       callback: this._onSearchFilter.bind(this),
@@ -297,7 +297,7 @@ export class TutorListApp extends foundry.applications.api.HandlebarsApplication
         continue;
       }
       const slug = entry.dataset.tab;
-      const match = (slug && rgx.test(SearchFilter.cleanQuery(slug)));
+      const match = (slug && rgx.test(foundry.applications.ux.SearchFilter.cleanQuery(slug)));
       entry.classList.toggle("hidden", !match);
       if (match) visibleLists.add(slug);
     }

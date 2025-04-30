@@ -20,7 +20,7 @@ export class HandlebarTemplates {
     }) as Record<string, string>;
 
     static async register() {
-        return loadTemplates(Object.values(this.templates)).then(() => {
+        return foundry.applications.handlebars.loadTemplates(Object.values(this.templates)).then(() => {
             for (const [key, value] of Object.entries(this.templates)) {
                 Handlebars.registerPartial(key, `{{> ${value}}}`);
             }
