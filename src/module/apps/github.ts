@@ -9,7 +9,7 @@ class GithubSheet extends foundry.applications.api.HandlebarsApplicationMixin(Ap
   static override DEFAULT_OPTIONS = {
     id: "github-commit-manager",
     tag: "form",
-    classes: ["sheet", "github-commit-manager", "default-sheet"],
+    classes: ["sheet", "ptr2e", "github-commit-manager", "default-sheet", "standard-form"],
     position: {
       width: 565,
     },
