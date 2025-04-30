@@ -17,7 +17,7 @@
             </header>
             <ul class="items" data-item-types="{{category}}">
                 {{#each items}}
-                <li class="item" data-item-id="{{this.id}}">
+                <li class="item draggable" data-item-id="{{this.id}}">
                     <div class="item-name item" data-uuid={{this.uuid}} data-tooltip="{{this.name}}" data-tooltip-direction="LEFT">
                         <div class="item-image">
                             <img src="{{this.img}}" title="{{this.name}}">
