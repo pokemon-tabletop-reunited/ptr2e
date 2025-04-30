@@ -6,7 +6,7 @@
     "number": 519,
     "size": {
       "category": "tiny",
-      "type": "height",
+      "type": "quad",
       "height": 0.3,
       "weight": 2.1
     },
@@ -30,7 +30,6 @@
     "traits": [
       "pokemon",
       "winged",
-      "underdog",
       "guster",
       "jump-4"
     ],
@@ -40,23 +39,23 @@
           "slug": "big-pecks"
         },
         {
-          "slug": "rivalry"
+          "slug": "super-luck"
         }
       ],
       "basic": [
         {
-          "slug": "super-luck"
+          "slug": "early-bird"
         },
         {
-          "slug": "early-bird"
+          "slug": "rivalry"
         }
       ],
       "advanced": [
         {
-          "slug": "absorbing-down"
+          "slug": "intimidate"
         },
         {
-          "slug": "cheap-tactics"
+          "slug": "perfectionist"
         }
       ],
       "master": [
@@ -151,7 +150,7 @@
       },
       {
         "slug": "running",
-        "value": 20,
+        "value": 15,
         "rvs": 0,
         "favourite": false,
         "hidden": false,
@@ -206,92 +205,212 @@
     "moves": {
       "levelUp": [
         {
-          "name": "gust",
-          "level": 1,
-          "gen": "sword-shield"
+          "name": "growl",
+          "gen": "sword-shield",
+          "level": 1
         },
         {
-          "name": "growl",
-          "level": 1,
-          "gen": "sword-shield"
+          "name": "gust",
+          "gen": "sword-shield",
+          "level": 1
         },
         {
           "name": "leer",
-          "level": 4,
-          "gen": "sword-shield"
+          "gen": "sword-shield",
+          "level": 4
         },
         {
           "name": "quick-attack",
-          "level": 8,
-          "gen": "sword-shield"
+          "gen": "sword-shield",
+          "level": 8
         },
         {
           "name": "taunt",
-          "level": 12,
-          "gen": "sword-shield"
+          "gen": "sword-shield",
+          "level": 12
         },
         {
           "name": "air-cutter",
-          "level": 16,
-          "gen": "sword-shield"
+          "gen": "sword-shield",
+          "level": 16
         },
         {
           "name": "swagger",
-          "level": 20,
-          "gen": "sword-shield"
+          "gen": "sword-shield",
+          "level": 20
         },
         {
           "name": "feather-dance",
-          "level": 24,
-          "gen": "sword-shield"
+          "gen": "sword-shield",
+          "level": 24
         },
         {
           "name": "detect",
-          "level": 28,
-          "gen": "sword-shield"
-        },
-        {
-          "name": "razor-wind",
-          "level": 32,
-          "gen": "ultra-sun-ultra-moon"
+          "gen": "sword-shield",
+          "level": 28
         },
         {
           "name": "air-slash",
-          "level": 32,
-          "gen": "sword-shield"
+          "gen": "sword-shield",
+          "level": 32
+        },
+        {
+          "name": "razor-wind",
+          "gen": "ultra-sun-ultra-moon",
+          "level": 32
         },
         {
           "name": "roost",
-          "level": 36,
-          "gen": "sword-shield"
+          "gen": "sword-shield",
+          "level": 36
         },
         {
           "name": "tailwind",
-          "level": 40,
-          "gen": "sword-shield"
+          "gen": "sword-shield",
+          "level": 40
         },
         {
           "name": "facade",
-          "level": 43,
-          "gen": "ultra-sun-ultra-moon"
+          "gen": "ultra-sun-ultra-moon",
+          "level": 43
         },
         {
           "name": "sky-attack",
-          "level": 44,
-          "gen": "sword-shield"
+          "gen": "sword-shield",
+          "level": 44
         }
       ],
       "tutor": [
         {
+          "name": "aerial-ace",
+          "gen": "ultra-sun-ultra-moon"
+        },
+        {
+          "name": "agility",
+          "gen": "sword-shield"
+        },
+        {
+          "name": "attract",
+          "gen": "sword-shield"
+        },
+        {
+          "name": "confide",
+          "gen": "ultra-sun-ultra-moon"
+        },
+        {
+          "name": "defog",
+          "gen": "sword-shield"
+        },
+        {
+          "name": "double-team",
+          "gen": "ultra-sun-ultra-moon"
+        },
+        {
+          "name": "dual-wingbeat",
+          "gen": "sword-shield"
+        },
+        {
+          "name": "echoed-voice",
+          "gen": "ultra-sun-ultra-moon"
+        },
+        {
+          "name": "endure",
+          "gen": "sword-shield"
+        },
+        {
+          "name": "fly",
+          "gen": "sword-shield"
+        },
+        {
+          "name": "focus-energy",
+          "gen": "sword-shield"
+        },
+        {
+          "name": "frustration",
+          "gen": "ultra-sun-ultra-moon"
+        },
+        {
+          "name": "heat-wave",
+          "gen": "ultra-sun-ultra-moon"
+        },
+        {
+          "name": "hidden-power",
+          "gen": "ultra-sun-ultra-moon"
+        },
+        {
           "name": "hypnosis",
           "gen": "sword-shield"
+        },
+        {
+          "name": "lucky-chant",
+          "gen": "ultra-sun-ultra-moon"
+        },
+        {
+          "name": "morning-sun",
+          "gen": "sword-shield"
+        },
+        {
+          "name": "night-slash",
+          "gen": "sword-shield"
+        },
+        {
+          "name": "pluck",
+          "gen": "black-2-white-2"
+        },
+        {
+          "name": "protect",
+          "gen": "sword-shield"
+        },
+        {
+          "name": "rain-dance",
+          "gen": "sword-shield"
+        },
+        {
+          "name": "rest",
+          "gen": "sword-shield"
+        },
+        {
+          "name": "return",
+          "gen": "ultra-sun-ultra-moon"
+        },
+        {
+          "name": "round",
+          "gen": "sword-shield"
+        },
+        {
+          "name": "secret-power",
+          "gen": "omega-ruby-alpha-sapphire"
+        },
+        {
+          "name": "sleep-talk",
+          "gen": "black-2-white-2"
+        },
+        {
+          "name": "snore",
+          "gen": "ultra-sun-ultra-moon"
         },
         {
           "name": "steel-wing",
           "gen": "ultra-sun-ultra-moon"
         },
         {
-          "name": "morning-sun",
+          "name": "substitute",
+          "gen": "sword-shield"
+        },
+        {
+          "name": "sunny-day",
+          "gen": "sword-shield"
+        },
+        {
+          "name": "swift",
+          "gen": "sword-shield"
+        },
+        {
+          "name": "toxic",
+          "gen": "ultra-sun-ultra-moon"
+        },
+        {
+          "name": "u-turn",
           "gen": "sword-shield"
         },
         {
@@ -303,128 +422,8 @@
           "gen": "sword-shield"
         },
         {
-          "name": "lucky-chant",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "night-slash",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "defog",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "snore",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "sleep-talk",
-          "gen": "black-2-white-2"
-        },
-        {
-          "name": "heat-wave",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "dual-wingbeat",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "fly",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "toxic",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "agility",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "double-team",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "focus-energy",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "swift",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "rest",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "substitute",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "protect",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "endure",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "attract",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "return",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "frustration",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "hidden-power",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "rain-dance",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "sunny-day",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "secret-power",
-          "gen": "omega-ruby-alpha-sapphire"
-        },
-        {
-          "name": "aerial-ace",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "pluck",
-          "gen": "black-2-white-2"
-        },
-        {
-          "name": "u-turn",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "round",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "echoed-voice",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
           "name": "work-up",
           "gen": "sword-shield"
-        },
-        {
-          "name": "confide",
-          "gen": "ultra-sun-ultra-moon"
         }
       ]
     },
@@ -469,6 +468,10 @@
                 "item": null,
                 "level": null,
                 "knownMove": null
+              },
+              "perk": {
+                "x": 26,
+                "y": 26
               }
             }
           ],
@@ -477,19 +480,32 @@
             "item": null,
             "level": null,
             "knownMove": null
+          },
+          "perk": {
+            "x": 26,
+            "y": 26
           }
         }
       ],
-      "uuid": "Compendium.ptr2e.core-species.Item.yloo6we2L1Mk4rU7"
+      "uuid": "Compendium.ptr2e.core-species.Item.yloo6we2L1Mk4rU7",
+      "methods": [],
+      "perk": {
+        "x": 26,
+        "y": 26
+      }
     },
     "publication": {
       "source": "PTR 2e Core - Unova Dex",
       "authors": [
         "PTR 2e Team"
-      ]
+      ],
+      "notes": ""
+    },
+    "_migration": {
+      "version": null,
+      "previous": null
     }
   },
   "_id": "yloo6we2L1Mk4rU7",
-  "effects": [],
-  "folder": null
+  "effects": []
 }
