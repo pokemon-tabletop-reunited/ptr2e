@@ -47,7 +47,7 @@ const BaseSkills = {
     singing: { slug: "singing", group: "arts" },
     "flower-arrangement": { slug: "flower-arrangement", group: "arts" },
     writing: { slug: "writing", group: "arts" },
-    "aura-sense": { slug: "aura-sense" },
+    "aura-control": { slug: "aura-control" },
     climb: { slug: "climb" },
     computers: { slug: "computers" },
     conversation: { slug: "conversation" },

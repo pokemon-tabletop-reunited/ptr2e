@@ -5,18 +5,18 @@
     "prerequisites": [
       {
         "gte": [
-          "{actor|skills.aura-sense.mod}",
+          "{actor|skills.aura-control.mod}",
           50
         ]
       }
     ],
     "cost": 2,
-    "description": "<p>You have practiced the technique known as Channeling, and may use it to communicate with the spirits of the dead. You also gain +10 on Aura Sense skill checks pertaining to [Ghost][Pokemon].</p>",
+    "description": "<p>You have practiced the technique known as Channeling, and may use it to communicate with the spirits of the dead. You also gain +10 on Aura Control skill checks pertaining to [Ghost][Pokemon].</p>",
     "actions": [
       {
         "name": "Aura Channeling",
         "slug": "aura-channeling",
-        "description": "<p>You have practiced the technique known as Channeling, and may use it to communicate with the spirits of the dead. You also gain +10 on Aura Sense skill checks pertaining to [Ghost][Pokemon].</p>",
+        "description": "<p>You have practiced the technique known as Channeling, and may use it to communicate with the spirits of the dead. You also gain +10 on Aura Control skill checks pertaining to [Ghost][Pokemon].</p>",
         "cost": {
           "activation": "complex",
           "powerPoints": 3,
@@ -91,7 +91,7 @@
         "changes": [
           {
             "type": "flat-modifier",
-            "key": "aura-sense-check",
+            "key": "aura-control-check",
             "value": 10,
             "predicate": [
               "Manual"
