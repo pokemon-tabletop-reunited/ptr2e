@@ -1,23 +1,25 @@
 <main>
-  <div class="scroll">
+  <div class="scroll h-100">
     {{#each lists as |list|}}
-    <section class="tutor-list{{#if list.hidden}} hidden{{/if}}" data-tab="{{list.id}}" data-flip-id="{{list.id}}">
-      <h3>{{list.title}}</h3>
-      <ul>
-        {{#each list.moves as |move|}}
-        <li{{#if move.hidden}} class="hidden"{{/if}} data-flip-id="{{move.uuid}}" data-slug="{{move.slug}}">
-          <a class="content-link" {{#if move.pack}}data-pack="{{move.pack}}" {{/if}}data-uuid="{{move.uuid}}" data-link="{{move.uuid}}" data-tooltip="{{move.title}}"
-            data-type="Item" data-tooltip-direction="RIGHT" draggable="true">
-            <i class="fas fa-suitcase"></i> {{move.title}}
-          </a>
-        </li>
-        {{else}}
-        <li>
-          <p>No moves found.</p>
-        </li>
-        {{/each}}
-      </ul>
-    </section>
+    {{#if list.visible}}
+      <section class="tutor-list{{#if list.hidden}} hidden{{/if}}" data-tab-slug="{{list.slug}}" data-tab="{{list.id}}" data-flip-id="{{list.id}}">
+        <h3>{{list.title}}</h3>
+        <ul>
+          {{#each list.moves as |move|}}
+            <li{{#if move.hidden}} class="hidden"{{/if}} data-flip-id="{{list.id}}-{{move.uuid}}" data-slug="{{move.slug}}" data-grade="{{move.grade}}">
+              <a class="content-link" {{#if move.pack}}data-pack="{{move.pack}}" {{/if}}data-uuid="{{move.uuid}}" data-link="{{move.uuid}}" data-tooltip="{{move.title}}"
+                data-type="Item" data-tooltip-direction="RIGHT" draggable="true">
+                <i class="fas fa-suitcase"></i> {{move.title}}
+              </a>
+            </li>
+          {{else}}
+            <li>
+              <p>No moves found.</p>
+            </li>
+          {{/each}}
+        </ul>
+      </section>
+    {{/if}}
     {{/each}}
   </div>
 </main>

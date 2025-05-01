@@ -4203,6 +4203,8 @@
         .grade-filters {
           display: flex;
           gap: 5px;
+          justify-content: center;
+          margin-bottom: 0.5rem;
         }
   
         .grade-filter {
@@ -4237,8 +4239,12 @@
       }
   
       main {
-        padding: 1rem;
-        border-left: 1px solid var(--border-theme-color);
+        display: contents;
+        
+        .scroll {
+          padding: 1rem;
+          border-left: 1px solid var(--border-theme-color);
+        }
   
         h3 {
           border-color: var(--border-theme-color);
@@ -4252,7 +4258,11 @@
   
           li {
             list-style: none;
-            ;
+            filter: brightness(1);
+            
+            &.darken {
+              filter: brightness(0.5);
+            }
           }
         }
       }

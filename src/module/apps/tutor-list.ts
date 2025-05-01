@@ -75,36 +75,44 @@ export class TutorListApp extends foundry.applications.api.HandlebarsApplication
     });
     return {
       ...super._prepareContext(options),
-      lists: this.lists.map(list => ({
-        id: list.id,
-        slug: list.slug,
-        title: list.type !== "universal" ? `${formatSlug(list.slug)} (${list.type === 'egg' ? 'Egg Group' : formatSlug(list.type)})` : formatSlug(list.slug),
-        hidden: this.currentTab !== "" ? this.currentTab !== list.slug : false,
-        moves: list.moves.map((move) => ({
-            slug: move.slug,
-            title: formatSlug(move.slug),
-            grade: move.grade,
-            uuid: move.uuid,
-            pack: move.uuid?.split("Compendium.")?.[1].split(".Item")?.[0] ?? "",
-            hidden: this.selectedGrades.size > 0 && !this.selectedGrades.has(move.grade),
-          }))
-          .sort((a, b) => {
-            switch (this.sortBy) {
-              case SortOptions.Grade: {
-                if (a.grade === b.grade) {
-                  return (a.slug ?? "").localeCompare(b.slug ?? "");
-                }
-
-                const gradeA = grades.indexOf(a.grade as typeof grades[number]);
-                const gradeB = grades.indexOf(b.grade as typeof grades[number]);
-                return gradeA - gradeB;
-              }
-              case SortOptions.Name:
-              default:
-                return (a.slug ?? "").localeCompare(b.slug ?? "");
-            }
+      lists: this.lists.map(list => {
+        let visible = false;
+        return {
+          id: list.id,
+          slug: list.slug,
+          title: list.type !== "universal" ? `${formatSlug(list.slug)} (${list.type === 'egg' ? 'Egg Group' : formatSlug(list.type)})` : formatSlug(list.slug),
+          hidden: this.currentTab !== "" ? this.currentTab !== list.slug : false,
+          moves: list.moves.map((move) => {
+            const result = {
+              slug: move.slug,
+              title: formatSlug(move.slug),
+              grade: move.grade,
+              uuid: move.uuid,
+              pack: move.uuid?.split("Compendium.")?.[1].split(".Item")?.[0] ?? "",
+              hidden: this.selectedGrades.size > 0 && !this.selectedGrades.has(move.grade),
+            };
+            if (!result.hidden) visible = true;
+            return result;
           })
-      })),
+            .sort((a, b) => {
+              switch (this.sortBy) {
+                case SortOptions.Grade: {
+                  if (a.grade === b.grade) {
+                    return (a.slug ?? "").localeCompare(b.slug ?? "");
+                  }
+
+                  const gradeA = grades.indexOf(a.grade as typeof grades[number]);
+                  const gradeB = grades.indexOf(b.grade as typeof grades[number]);
+                  return gradeA - gradeB;
+                }
+                case SortOptions.Name:
+                default:
+                  return (a.slug ?? "").localeCompare(b.slug ?? "");
+              }
+            }),
+          visible
+        }
+      }),
       tab: this.currentTab,
       actor: this.actor,
       sortBy: this.sortBy,
@@ -116,14 +124,23 @@ export class TutorListApp extends foundry.applications.api.HandlebarsApplication
     const tutorLists = game.ptr.data.tutorList;
 
     const resultLists: TutorListSchema[] = this.actor ? [tutorLists.get("universal-universal")!] : tutorLists.list.contents;
-    if(this.actor) {
-      // const speciesList = this.actor.species?.moves.tutor;
+    if (this.actor) {
+      const speciesList = this.actor.species?.moves.tutor.reduce((acc, val) => {
+        const slug = sluggify(val.name);
+        acc.moves.set(slug, { slug, uuid: val.uuid, grade: val.grade })
+        return acc;
+      }, {
+        slug: "species-list",
+        type: "universal",
+        moves: new Collection()
+      } as TutorListSchema) ?? null;
+      if (speciesList?.moves?.size) resultLists.push(speciesList);
 
       for (const trait of this.actor.traits) {
         const list = tutorLists.getType(trait.slug, "trait");
         if (list) resultLists.push(list);
       }
-  
+
       for (const ability of Object.keys(this.actor.rollOptions.getFromDomain("item")).reduce((acc, val) => {
         if (val.startsWith("ability:")) acc.push(val.slice(8));
         return acc;
@@ -131,7 +148,7 @@ export class TutorListApp extends foundry.applications.api.HandlebarsApplication
         const list = tutorLists.getType(ability, "ability");
         if (list) resultLists.push(list);
       }
-  
+
       for (const eggGroup of this.actor.species?.eggGroups ?? []) {
         const list = tutorLists.getType(sluggify(eggGroup), "egg");
         if (list) resultLists.push(list);
@@ -139,83 +156,36 @@ export class TutorListApp extends foundry.applications.api.HandlebarsApplication
     }
 
     const packs = new Set<string>();
-    const moves = new Map<string, TutorListMove>();
+    const moveLists = new Map<string, TutorListMove[]>();
 
-    for(const list of resultLists) {
-      for(const move of list.moves) {
-        if(!move.uuid) continue;
-        if(moves.has(move.uuid)) continue;
+    for (const list of resultLists) {
+      for (const move of list.moves) {
+        if (!move.uuid) continue;
+        const existing = moveLists.get(move.uuid);
+        if (existing?.length) {
+          moveLists.set(move.uuid, existing.concat(move));
+          continue;
+        }
         const pack = move.uuid.split("Compendium.")?.[1].split(".Item")[0] ?? "";
-        if(!pack) continue;
+        if (!pack) continue;
         packs.add(pack);
-        moves.set(move.uuid, move);
+        moveLists.set(move.uuid, [move]);
       }
     }
 
-    for(const pack of packs) {
+    for (const pack of packs) {
       const packIndex = await game.packs.get(pack)?.getIndex({ fields: ["system.grade"] });
-      if(!packIndex) continue;
+      if (!packIndex) continue;
 
-      for(const item of packIndex) {
-        const move = moves.get(item.uuid);
-        if(!move) continue;
-        move.grade = item.system.grade;
+      for (const item of packIndex) {
+        const moves = moveLists.get(item.uuid);
+        if (!moves) continue;
+        for (const move of moves) move.grade = item.system.grade;
       }
     }
 
     return resultLists;
   }
-
-
-  // async filterList() {
-  //   const actor = this.actor;
-  //   const tutorList = await getGradedTutorList();
-  //   if (!actor) return tutorList.list.contents;
-
-  //   const resultLists = [tutorList.get("universal-universal")!];
-
-  //   const speciesList = this.actor?.species?.moves.tutor.reduce((acc, val) => {
-  //     const slug = sluggify(val.name);
-  //     let grade = "";
-  //     forEach(tutorList.list.contents, (list) => {
-  //       const move = list.moves.find(m => m.uuid == val.uuid);
-  //       if (move) {
-  //         grade = move.grade;
-  //       }
-  //       if (grade != "") {
-  //         return;
-  //       }
-  //     });
-  //     acc.moves.set(slug, { slug, uuid: val.uuid, grade: grade as string });
-  //     return acc;
-  //   }, {
-  //     slug: "species-list",
-  //     type: "universal",
-  //     moves: new Collection()
-  //   } as TutorListSchema) ?? null;
-
-  //   if (speciesList?.moves?.size) resultLists.push(speciesList);
-
-  //   for (const trait of actor.traits) {
-  //     const list = tutorList.getType(trait.slug, "trait");
-  //     if (list) resultLists.push(list);
-  //   }
-
-  //   for (const ability of Object.keys(actor.rollOptions.getFromDomain("item")).reduce((acc, val) => {
-  //     if (val.startsWith("ability:")) acc.push(val.slice(8));
-  //     return acc;
-  //   }, [] as string[])) {
-  //     const list = tutorList.getType(ability, "ability");
-  //     if (list) resultLists.push(list);
-  //   }
-
-  //   for (const eggGroup of actor.species?.eggGroups ?? []) {
-  //     const list = tutorList.getType(sluggify(eggGroup), "egg");
-  //     if (list) resultLists.push(list);
-  //   }
-
-  //   return resultLists;
-  // }
 
   override _attachPartListeners(partId: string, htmlElement: HTMLElement, options: HandlebarsRenderOptions): void {
     super._attachPartListeners(partId, htmlElement, options);
@@ -225,12 +195,41 @@ export class TutorListApp extends foundry.applications.api.HandlebarsApplication
       htmlElement.querySelectorAll<HTMLAnchorElement>("a.item").forEach(tab => {
         tab.addEventListener("click", event => {
           event.preventDefault();
-          this.currentTab = tab.dataset.tab ?? "";
-          if (this.currentTab === "") {
-            const input = htmlElement.querySelector<HTMLInputElement>("input[name='filter']")
-            if (input) input.value = "";
+          if(this.currentTab === tab.dataset.tab) return;
+
+          if (this.#state) {
+            Flip.killFlipsOf("#ptr2e-tutor-list main section.tutor-list");
           }
-          this.render({ actor: this.actor, parts: ["aside", "list"] });
+          this.#state = Flip.getState("#ptr2e-tutor-list main section.tutor-list", {props: "background"});
+
+          if(this.currentTab) {
+            const currentTab = this.element.querySelector<HTMLAnchorElement>(`nav.tutor-list-options a.item[data-tab='${this.currentTab}']`)
+            
+            if(currentTab) {
+              const state = Flip.getState(currentTab, {props: "background"});
+              currentTab.classList.remove("active");
+              Flip.from(state, {duration: 1.2, simple: true});
+            }
+          } else {
+            const allTab = this.element.querySelector<HTMLAnchorElement>(`nav.tutor-list-options a.item[data-tab='']`)
+            if(allTab) {
+              const state = Flip.getState(allTab, {props: "background"});
+              allTab.classList.remove("active");
+              Flip.from(state, {duration: 1.2, simple: true});
+            }
+          }
+          this.currentTab = tab.dataset.tab ?? "";
+
+          for (const section of this.element.querySelectorAll<HTMLElement>("main section.tutor-list")) {
+            gsap.set(section, { display: section.dataset.tabSlug === this.currentTab ? "block" : "none" });
+          }
+          const option = this.element.querySelector<HTMLAnchorElement>(`nav.tutor-list-options a.item[data-tab='${this.currentTab}']`)
+          if(option) {
+            const state = Flip.getState(option, {props: "background"});
+            option.classList.add("active");
+            Flip.from(state, {duration: 1.2, simple: true});
+          }
+          this._onSearchFilter(new KeyboardEvent("input", { key: "Enter", code: "Enter" }), this.filter.query, new RegExp(RegExp.escape(this.filter.query), "i"), this.element.querySelector("nav.tutor-list-options")!);
         });
       });
 
@@ -239,7 +238,67 @@ export class TutorListApp extends foundry.applications.api.HandlebarsApplication
         sortDropdown.addEventListener("change", event => {
           event.preventDefault();
           this.sortBy = (event.target as HTMLSelectElement).value as SortOptions;
-          this.render({ actor: this.actor, parts: ["list"] });
+
+          if (this.#state) {
+            Flip.killFlipsOf("#ptr2e-tutor-list main section.tutor-list");
+          }
+
+          const container = this.element.querySelector<HTMLElement>("main .scroll")!;
+          const isVisible = function (element: HTMLElement) {
+            const eleTop = element.offsetTop;
+            const eleBottom = eleTop + element.clientHeight;
+
+            const containerTop = container.scrollTop;
+            const containerBottom = containerTop + container.clientHeight;
+
+            // The element is fully visible in the container
+            return (
+              (eleTop >= containerTop && eleBottom <= containerBottom) ||
+              // Some part of the element is visible in the container
+              (eleTop < containerTop && containerTop < eleBottom) ||
+              (eleTop < containerBottom && containerBottom < eleBottom)
+            );
+          };
+
+          const sections = Array.from(this.element.querySelectorAll<HTMLElement>("main section.tutor-list"));
+          const stateSections = sections.filter(section => isVisible(section)).reduce((acc: HTMLElement[], section: HTMLElement) => {
+            const entries = Array.from(section.querySelectorAll<HTMLElement>("ul li[data-slug]")).filter(entry => !entry.classList.contains("hidden"));
+            if (entries.length) {
+              acc.push(...entries);
+            }
+            return acc;
+          }, [])
+
+          const state = Flip.getState(sections.concat(stateSections));
+          for (const section of sections) {
+            const ordered = [...section.querySelectorAll<HTMLElement>("ul li[data-slug]")].sort((a, b) => {
+              const aSlug = a.dataset.slug ?? "";
+              const bSlug = b.dataset.slug ?? "";
+              switch (this.sortBy) {
+                case SortOptions.Grade: {
+                  const aGrade = a.dataset.grade;
+                  const bGrade = b.dataset.grade;
+                  if (aGrade === bGrade) return aSlug.localeCompare(bSlug);
+                  const gradeA = grades.indexOf(aGrade as typeof grades[number]);
+                  const gradeB = grades.indexOf(bGrade as typeof grades[number]);
+                  return gradeA - gradeB;
+                }
+                case SortOptions.Name:
+                default:
+                  return aSlug.localeCompare(bSlug);
+              }
+            })
+            for (let i = 0; i < ordered.length; i++) {
+              gsap.set(ordered[i], { order: i });
+            }
+          }
+          Flip.from(state, {
+            duration: 1.2,
+            absolute: true,
+            prune: true,
+            simple: true,
+            nested: true
+          })
         });
       }
 
@@ -255,59 +314,122 @@ export class TutorListApp extends foundry.applications.api.HandlebarsApplication
           }
           target.classList.toggle("active");
 
-          // this.listState = Flip.getState("#ptr2e-tutor-list main[data-application-part='list'] section.tutor-list, #ptr2e-tutor-list main[data-application-part='list'] section.tutor-list li" );
-          
+          if (this.#state) {
+            Flip.killFlipsOf("#ptr2e-tutor-list main section.tutor-list");
+          }
 
-          // Flip.from(this.listState, {
-          //   duration: 1,
-          //   ease: "ease-in-out",
-          //   absolute: true,
-          //   // targets: "#ptr2e-tutor-list main[data-application-part='list'] section.tutor-list li",
-          //   onEnter: elements => gsap.fromTo(elements, {opacity: 0}, {opacity: 1}),
-          //   onLeave: elements => gsap.fromTo(elements, {opacity: 1}, {opacity: 0}),
-          //   onComplete: () => this.listState = null,
-          // });
+          const container = this.element.querySelector<HTMLElement>("main .scroll")!;
+          const isVisible = function (element: HTMLElement) {
+            const eleTop = element.offsetTop;
+            const eleBottom = eleTop + element.clientHeight;
 
-          this.render({ actor: this.actor, parts: ["aside", "list"] });
+            const containerTop = container.scrollTop;
+            const containerBottom = containerTop + container.clientHeight;
+
+            // The element is fully visible in the container
+            return (
+              (eleTop >= containerTop && eleBottom <= containerBottom) ||
+              // Some part of the element is visible in the container
+              (eleTop < containerTop && containerTop < eleBottom) ||
+              (eleTop < containerBottom && containerBottom < eleBottom)
+            );
+          };
+
+          const sections = Array.from(this.element.querySelectorAll<HTMLElement>("main section.tutor-list"));
+          const stateSections = sections.filter(section => isVisible(section)).reduce((acc: HTMLElement[], section: HTMLElement) => {
+            const entries = Array.from(section.querySelectorAll<HTMLElement>("ul li[data-slug]")).filter(entry => !entry.classList.contains("hidden"));
+            if (entries.length) {
+              acc.push(...entries);
+            }
+            return acc;
+          }, [])
+
+          this.#state = Flip.getState(sections.concat(stateSections));
+          for (const section of sections) {
+            const menuEntry = this.element.querySelector<HTMLAnchorElement>(`aside a.item.list-tab[data-tab='${section.dataset.tabSlug}']`);
+            let hasAnyEntry = false;
+            for (const entry of section.querySelectorAll<HTMLElement>("ul li[data-slug]")) {
+              const grade = entry.dataset.grade;
+              if (this.selectedGrades.size > 0) {
+                if (this.selectedGrades.has(grade!)) {
+                  hasAnyEntry = true;
+                  gsap.set(entry, { display: "block" });
+                }
+                else gsap.set(entry, { display: "none" });
+              } else {
+                hasAnyEntry = true;
+                gsap.set(entry, { display: "block" });
+              }
+            }
+            gsap.set([section, menuEntry], { display: hasAnyEntry ? "block" : "none" });
+          }
+          this._onSearchFilter(new KeyboardEvent("input", { key: "Enter", code: "Enter" }), this.filter.query, new RegExp(RegExp.escape(this.filter.query), "i"), this.element.querySelector("nav.tutor-list-options")!);
         });
       });
     }
   }
 
-  override _onRender(context: foundry.applications.api.ApplicationRenderContext, options: HandlebarsRenderOptions): void {
-    super._onRender(context, options);
-    if (this.listState) {
-      Flip.from(this.listState, {
-        duration: 0.5,
-        ease: "ease-in-out",
-        absolute: true,
-        targets: "#ptr2e-tutor-list main[data-application-part='list'] section.tutor-list",
-        onComplete: () => this.listState = null,
-      });
-    }
-  }
-
-  listState: Flip.FlipState | null = null;
+  #state: Flip.FlipState | null = null;
 
   _onSearchFilter(_event: KeyboardEvent, query: string, rgx: RegExp, html: HTMLElement) {
+    const listState = this.#state ||= Flip.getState("#ptr2e-tutor-list main section.tutor-list");
+
     const visibleLists = new Set();
+    const itemMatch = new Set();
     for (const entry of html.querySelectorAll<HTMLAnchorElement>("a.item.list-tab")) {
       if (!query) {
         entry.classList.remove("hidden");
+        visibleLists.add(entry.dataset.tab ?? "");
         continue;
       }
       const slug = entry.dataset.tab;
-      const match = (slug && rgx.test(foundry.applications.ux.SearchFilter.cleanQuery(slug)));
+      const match = (() => {
+        const listNameMatch = !!(slug && rgx.test(foundry.applications.ux.SearchFilter.cleanQuery(slug)));
+
+        let anyItem = false;
+        for (const li of this.element.querySelectorAll<HTMLElement>(`main section.tutor-list[data-tab-slug='${slug}'] ul li[data-slug]`)) {
+          const item = {
+            slug: li.dataset.slug,
+            hidden: li.classList.contains("hidden") || li.style.display === "none",
+          }
+
+          if (item.hidden) continue;
+          if (item.slug && rgx.test(foundry.applications.ux.SearchFilter.cleanQuery(item.slug))) {
+            itemMatch.add(item.slug);
+            anyItem = true;
+          } else if (listNameMatch) {
+            itemMatch.add(item.slug!);
+            anyItem = true;
+          }
+        }
+        return anyItem;
+      })()
       entry.classList.toggle("hidden", !match);
+
       if (match) visibleLists.add(slug);
     }
 
     // Hide lists that don't match the query
     if (!this.currentTab) {
       for (const section of this.element.querySelectorAll<HTMLElement>("main section.tutor-list")) {
-        section.classList.toggle("hidden", !!query && !visibleLists.has(section.dataset.tab));
+        gsap.set(section, { display: visibleLists.has(section.dataset.tabSlug) ? "block" : "none" });
       }
     }
+    for (const entry of this.element.querySelectorAll<HTMLElement>("main section.tutor-list ul li[data-slug]")) {
+      gsap.to(entry, { filter: !itemMatch.size || (!!query && itemMatch.has(entry.dataset.slug)) ? "brightness(1)" : "brightness(0.5)", duration: 1.2 });
+    }
+
+    Flip.from(listState, {
+      duration: 1.2,
+      absolute: true,
+      prune: true,
+      simple: true,
+      onEnter: elements => gsap.fromTo(elements, { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.8 }),
+      onLeave: elements => gsap.to(elements, { autoAlpha: 0, duration: 0.8 }),
+      onComplete: () => {
+        this.#state = null;
+      }
+    })
   }
 
   override async _onDrop(event: DragEvent) {
