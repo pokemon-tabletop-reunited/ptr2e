@@ -17,7 +17,7 @@ export class FoldersTour extends PTRTour {
       case "create-dialog": {
         await this.createDialog();
         //@ts-expect-error - Bypass protected property
-        await ui.actors._render(true)
+        ui.sidebar.changeTab("actors", "primary")
         await this.delay(250)
         break;
       }
@@ -50,7 +50,7 @@ export class FoldersTour extends PTRTour {
         ])
         await dialog.render({ parts: ["members"] })
         //@ts-expect-error - Bypass protected property
-        await ui.actors._render(true)
+        ui.sidebar.changeTab("actors", "primary")
         await this.delay(250)
         htmlQuery(document.body, "li.folder[data-folder-id='toursantmpfolder']")?.classList.remove("collapsed");
         break;
@@ -81,7 +81,7 @@ export class FoldersTour extends PTRTour {
           }
         ])
         //@ts-expect-error - Bypass protected property
-        await ui.actors._render(true)
+        ui.sidebar.changeTab("actors", "primary")
         await this.delay(250)
         break;
       }
@@ -113,7 +113,7 @@ export class FoldersTour extends PTRTour {
 
         await folder.renderPartySheet();
         //@ts-expect-error - Bypass protected property
-        await ui.actors._render(true)
+        ui.sidebar.changeTab("actors", "primary")
         break;
       }
       case "organize-party": {
@@ -145,7 +145,7 @@ export class FoldersTour extends PTRTour {
         const sheet = await folder.renderPartySheet();
         sheet?.changeTab("party", "sheet");
         //@ts-expect-error - Bypass protected property
-        await ui.actors._render(true)
+        ui.sidebar.changeTab("actors", "primary")
         break;
       }
       case "add-party-members": {
@@ -175,7 +175,7 @@ export class FoldersTour extends PTRTour {
         ])
 
         //@ts-expect-error - Bypass protected property
-        await ui.actors._render(true)
+        ui.sidebar.changeTab("actors", "primary")
         await this.delay(250)
         htmlQuery(document.body, "li.folder[data-folder-id='toursantmpfolder']")?.classList.remove("collapsed");
         break;
@@ -208,7 +208,7 @@ export class FoldersTour extends PTRTour {
         ])
         await dialog.render({ parts: ["members"] })
         //@ts-expect-error - Bypass protected property
-        await ui.actors._render(true)
+        ui.sidebar.changeTab("actors", "primary")
         await this.delay(250)
         htmlQuery(document.body, "li.folder[data-folder-id='toursantmpfolder']")?.classList.remove("collapsed");
         break;
@@ -240,7 +240,7 @@ export class FoldersTour extends PTRTour {
         ])
 
         //@ts-expect-error - Bypass protected property
-        await ui.actors._render(true)
+        ui.sidebar.changeTab("actors", "primary")
         await this.delay(250)
         break;
       }
@@ -272,7 +272,7 @@ export class FoldersTour extends PTRTour {
 
         await folder.renderTeamSheet();
         //@ts-expect-error - Bypass protected property
-        await ui.actors._render(true)
+        ui.sidebar.changeTab("actors", "primary")
         await this.delay(250)
         break;
       }
