@@ -8829,7 +8829,7 @@ footer#ui-bottom {
 
   .panel {
     --hotbar-size: 28px; 
-    --hotbar-width: 140px;
+    --hotbar-width: 160px;
     position: absolute;
     right: calc(var(--button-size) * 2 + 8px);
     bottom: 0;
@@ -8849,10 +8849,8 @@ footer#ui-bottom {
 
     &.party, &.movement, &.passives, &.effects {
       visibility: visible;
-    }
-
-    &.passives {
       overflow-y: auto;
+      overflow-x: clip;
     }
 
     &.party {
@@ -8946,7 +8944,8 @@ footer#ui-bottom {
 
   #action-bar {
     --columns: 5;
-    width: calc(var(--hotbar-width)*var(--columns) + (8px * (var(--columns) - 1)));
+    --action-bar-width: calc(var(--hotbar-width)*var(--columns) + (8px * (var(--columns) - 1)))
+    width: var(--action-bar-width);
     flex-direction: column;
     position: relative;
 
@@ -8974,34 +8973,69 @@ footer#ui-bottom {
         overflow: hidden;
         align-content: center;
       }
+
+      &.attack.full, &.skill.full {
+        border: 1px dashed var(--border-theme-color);
+        padding: 1px;
+      }
     }
   }
 
   .footer {
+    --footer-height: 34px;
+    --footer-width: 200px;
     position: absolute;
-    top: -24px;
-    left: 196px;
-    width: 240px;
-    height: 20px;
+    top: calc(calc(var(--footer-height) * -1) - 4px);
+    left: calc(calc(var(--action-bar-width) - var(--footer-width)) / 2);
+    width: var(--footer-width);
+    height: var(--footer-height);
     background: var(--appv2-background);
     border-radius: 10px 10px 2px 2px;
     text-align: center;
     align-content: center;
     font-size: var(--font-size-12);
+    display: grid;
+    grid-template-rows: 14px calc(var(--footer-height) - 14px);
+    grid-template-columns: var(--footer-width);
+
+    .movement {
+      display: flex;
+      width: 100%;
+      height: 100%;
+      justify-content: center;
+      gap: 0.5rem;
+      align-items: anchor-center;
+      white-space: nowrap;
+
+      i {
+        color: var(--color-text-subtle);
+      }
+      span {
+        color: var(--appv2-text-color);
+      }
+
+      .capped {
+        i, span {
+          color: var(--color-level-error);
+        }
+      }
+    }
 
     .avatar {
+      --avatar-size: 72px;
+      --avatar-padding: 4px;
       position: absolute;
-      top: -72px;
-      height: 72px;
-      width: 72px;
-      left: calc(120px - 36px);
-      padding: 4px;
+      top: calc(var(--avatar-size) * -1);
+      height: var(--avatar-size);
+      width: var(--avatar-size);
+      left: calc(calc(var(--footer-width) / 2) - calc(var(--avatar-size) / 2));
+      padding: var(--avatar-padding);
       background: var(--appv2-background);
       border-radius: 10px 10px 0 0;
 
       img {
-        height: 64px;
-        width: 64px;
+        height: calc(var(--avatar-size) - var(--avatar-padding) - var(--avatar-padding));
+        width: calc(var(--avatar-size) - var(--avatar-padding) - var(--avatar-padding));
         object-fit: scale-down;
         border-radius: 10px 10px 0 0;
       }

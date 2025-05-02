@@ -155,6 +155,11 @@ class TokenDocumentPTR2e<TParent extends ScenePTR2e | null = ScenePTR2e | null> 
       //@ts-expect-error - Outdated types
       this.actor.sheet.render({ force: true });
     }
+    //@ts-expect-error - Outdated types
+    if(ui.hotbar.token === this.object) {
+      //@ts-expect-error - Outdated types
+      ui.hotbar.updateFooterMovement();  
+    }
   }
 
   /**

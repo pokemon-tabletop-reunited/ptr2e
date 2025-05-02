@@ -61,7 +61,7 @@ declare global {
     /** Whether the hotbar is locked. */
     get locked(): boolean;
 
-    override _prepareContext(options: ApplicationRenderOptions): Promise<Hotbar.HotbarContext<SlotData>>;
+    override _prepareContext(options: Partial<ApplicationRenderOptions>): Promise<Hotbar.HotbarContext<SlotData>>;
 
     protected override _onFirstRender(context: object, options: ApplicationRenderOptions): Promise<void>;
 

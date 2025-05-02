@@ -13,8 +13,16 @@
     </li>
     {{/each}}
     {{#if actor}}
-      <div class="footer">
+      <div class="footer" {{#if style}}style="{{style}}"{{/if}}>
         <label>{{actor.name}}</label>
+        <div class="movement" data-flip-id="footer-movement">
+          {{#each movement as |movement|}}
+            <div class="movement-entry{{#if movement.css}} {{css}}{{/if}}" data-tooltip-direction="UP" data-tooltip-text="{{localize movement.label}}: Max {{movement.value}}">
+              <i class="{{movement.icon}}"></i>
+              <span>{{numberFormat movement.available decimals=1}}</span>
+            </div>
+          {{/each}}
+        </div>
         <div class="avatar" data-action="open-actor">
           <img src="{{actor.img}}">
         </div>

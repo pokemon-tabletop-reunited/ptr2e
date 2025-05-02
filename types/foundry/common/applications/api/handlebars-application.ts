@@ -54,7 +54,7 @@ export default function HandlebarsApplicationMixin<TBase extends AbstractConstru
         protected async _preparePartContext(
             partId: string,
             context: object,
-            options: HandlebarsRenderOptions,
+            options: Partial<HandlebarsRenderOptions>,
         ): Promise<object> {
             partId;
             context;

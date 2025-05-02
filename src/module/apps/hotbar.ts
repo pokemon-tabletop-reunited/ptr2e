@@ -25,9 +25,12 @@ export class HotbarPTR2e extends foundry.applications.ui.Hotbar {
         }
       },
       "open-entry": async function (this: HotbarPTR2e, _event: PointerEvent, target: HTMLElement) {
-        const entry = await fu.fromUuid(target.dataset.uuid!) as ActiveEffectPTR2e;
+        const entry = await fu.fromUuid(target.dataset.uuid!);
         if (entry?.sheet) {
           await entry.sheet.render(true);
+        }
+        if(entry instanceof ActionPTR2e) {
+          await entry.item.sheet.render(true);
         }
       }
     }
@@ -86,6 +89,10 @@ export class HotbarPTR2e extends foundry.applications.ui.Hotbar {
     if (this._token === value) return;
     this._token = value;
 
+    if(this.token?.actor && !this.token.actor.sheet?.rendered) {
+      this.token.actor.system.registerSpentMovement(this.token);
+    }
+
     //@ts-expect-error - Incomplete types
     this.debouncedRender({ parts: ["left", "hotbar"]});
   }
@@ -127,7 +134,7 @@ export class HotbarPTR2e extends foundry.applications.ui.Hotbar {
 
   private _tab: "slots" | "other" | "skills" = "slots";
 
-  override async _prepareContext(options: ApplicationRenderOptions): Promise<Hotbar.HotbarContext> {
+  override async _prepareContext(options: Partial<ApplicationRenderOptions>): Promise<Hotbar.HotbarContext> {
     const context = await super._prepareContext(options);
 
     if (this.token?.actor) {
@@ -143,7 +150,7 @@ export class HotbarPTR2e extends foundry.applications.ui.Hotbar {
     return context;
   }
 
-  protected override async _preparePartContext(partId: string, context: Hotbar.HotbarContext, options: HandlebarsRenderOptions): Promise<object> {
+  protected override async _preparePartContext(partId: string, context: Hotbar.HotbarContext, options: Partial<HandlebarsRenderOptions>): Promise<object> {
     await super._preparePartContext(partId, context, options);
 
     if (partId === "left") {
@@ -210,6 +217,19 @@ export class HotbarPTR2e extends foundry.applications.ui.Hotbar {
         }
         return slot;
       });
+
+      if(this.token?.actor) {
+        context.movement = Object.values(this.token.actor.system.movement).map(m => ({
+          css: `${m.available <= 0 ? "capped" : ""} ${m.method}`,
+          icon: CONFIG.Token.movement.actions[m.method]?.icon,
+          available: m.available,
+          label: CONFIG.Token.movement.actions[m.method]?.label,
+          value: m.value,
+        }))
+        if(context.movement.length > 4) {
+          context.style = `--footer-width: ${context.movement.length == 5 ? "240" : "290"}px;`;
+        }
+      }
     }
 
     return context;
@@ -221,6 +241,11 @@ export class HotbarPTR2e extends foundry.applications.ui.Hotbar {
     //@ts-expect-error - Incomplete types
     this._createContextMenu(this._getEffectContextMenuOptions, ".entry.effect", {
       hookName: "getHotbarEffectContextOptions",
+      parentClassHooks: false
+    });
+    //@ts-expect-error - Incomplete types
+    this._createContextMenu(this._getPassiveContextMenuOptions, ".entry.passive", {
+      hookName: "getHotbarPassiveContextOptions",
       parentClassHooks: false
     });
   }
@@ -298,6 +323,27 @@ export class HotbarPTR2e extends foundry.applications.ui.Hotbar {
   //   )
   // }
 
+  async updateFooterMovement() {
+    if(!this.token?.actor) return;
+    const element = this.element.querySelector<HTMLDivElement>(`.footer .movement`);
+    if (!element) return;
+
+    const state = Flip.getState(element, {props: "color"});
+
+    const context = await this._preparePartContext("hotbar", await this._prepareContext({}), {});
+    const html = await renderTemplate(HotbarPTR2e.PARTS.hotbar.template, context);
+    const newElement = document.createElement("div");
+    newElement.innerHTML = html;
+    const newMovement = newElement.querySelector<HTMLDivElement>(`.footer .movement`);
+    if (!newMovement) return;
+    
+    element.innerHTML = newMovement.innerHTML;
+
+    Flip.from(state, {
+      duration: 1,
+    })
+  }
+
   _getEffectContextMenuOptions(): ContextMenuEntry[] {
     return [
       {
@@ -318,6 +364,20 @@ export class HotbarPTR2e extends foundry.applications.ui.Hotbar {
           effect?.deleteDialog();
         }
       },
+    ]
+  }
+
+  _getPassiveContextMenuOptions(): ContextMenuEntry[] {
+    return [
+      {
+        name: "Send to Chat",
+        icon: '<i class="fa-solid fa-arrow-up-right-from-square"></i>',
+        callback: async li => {
+          const uuid = li.dataset.uuid;
+          const passive = await fu.fromUuid(uuid!) as unknown as ActionPTR2e;
+          passive?.toChat();
+        }
+      }
     ]
   }
 
@@ -511,6 +571,14 @@ declare global {
         slots: ActorPTR2e["attacks"]["actions"];
         other: AttackPTR2e[]
       };
+
+      movement: {
+        css: string;
+        available: number;
+        label: string;
+        value: number;
+      }[] | null;
+      style: string | null;
     }
 
     interface HotbarSlotData {

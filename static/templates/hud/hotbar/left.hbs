@@ -26,7 +26,7 @@
               <span>Party Leader</span>
             </div>
             <div class="owner">
-              <div class="icon actor" data-tooltip="{{party.owner.name}}" data-tooltip-direction="UP" data-uuid="{{party.owner.uuid}}">
+              <div class="icon actor" data-action="open-entry" data-tooltip="{{party.owner.name}}" data-tooltip-direction="UP" data-uuid="{{party.owner.uuid}}">
                 <img draggable="true" src="{{party.owner.img}}" alt="{{party.owner.name}}">
               </div>
               <div class="name">{{party.owner.name}}</div>
@@ -38,7 +38,7 @@
             <span>Party Members</span>
           </div>
           {{#each party.party as |actor|}}
-            <div class="icon actor" data-tooltip="{{actor.name}}" data-tooltip-direction="UP" data-uuid="{{actor.uuid}}">
+            <div class="icon actor" data-action="open-entry" data-tooltip="{{actor.name}}" data-tooltip-direction="UP" data-uuid="{{actor.uuid}}">
               <img draggable="true" src="{{actor.img}}" alt="{{actor.name}}">
             </div>
           {{/each}}
@@ -53,7 +53,7 @@
       {{#if (is toggle "passives")}}
         {{#each actions.passives as |action|}}
           {{#unless action.hidden}}
-            <li class="entry full" data-tooltip-direction="LEFT" data-uuid="{{action.uuid}}" data-tooltip aria-label="{{action.name}}">
+            <li class="entry full passive" data-action="open-entry" data-tooltip-direction="LEFT" data-uuid="{{action.uuid}}" data-tooltip aria-label="{{action.name}}">
               <img src="{{action.img}}" alt="{{action.name}}" class="entry-icon">
               <span class="label">{{action.name}}</span>
             </li>
