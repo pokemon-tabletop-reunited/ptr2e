@@ -1253,9 +1253,12 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
         const x2 = (((connectedRect.x + scroll.x) * zoom) + ((connectedRect.width * zoom) / 2) - (elementRect.x * zoom));
         const y2 = (((connectedRect.y + scroll.y) * zoom) + ((connectedRect.height * zoom) / 2) - (elementRect.y * zoom));
 
+        
+        const unlockedPerkStates: PerkPurchaseState[] = [PerkState.purchased, PerkState.autoUnlocked];
+
         const color = (() => {
           if (this.editMode) return "#ffffff";
-          if ((node.state === PerkState.purchased || !!node.tierInfo) && (connectedNode.state === PerkState.purchased || !!connectedNode.tierInfo)) {
+          if ((unlockedPerkStates.includes(node.state) || !!node.tierInfo) && (unlockedPerkStates.includes(connectedNode.state) || !!connectedNode.tierInfo)) {
             return "#2ECFF5"; // Change to blue if both nodes are unlocked
           }
           if (node.state === PerkState.purchased || !!node.tierInfo || connectedNode.state === PerkState.purchased || !!connectedNode.tierInfo) return "#ffffff";
@@ -1269,7 +1272,7 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
         line.setAttribute("stroke", color);
 
         // Add class for purchased lines
-        if ((node.state === PerkState.purchased || !!node.tierInfo) && (connectedNode.state === PerkState.purchased || !!connectedNode.tierInfo)) {
+        if ((unlockedPerkStates.includes(node.state) || !!node.tierInfo) && (unlockedPerkStates.includes(connectedNode.state) || !!connectedNode.tierInfo)) {
           line.setAttribute("stroke-width", (7.5 * zoom * zoom).toString());
           line.setAttribute("filter", "drop-shadow(0 0 10px rgba(46, 207, 245, 1))");
         }
