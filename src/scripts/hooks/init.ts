@@ -193,10 +193,26 @@ export const Init: PTRHook = {
           action.onDown = () => ui.hotbar.executeMacro(number);
         }
       }
+
+      //@ts-expect-error - Monkey Patching
+      const original = CONFIG.Token.hudClass.prototype._getMovementActionChoices as (() => Record<string, Record<string, object>>);
+      //@ts-expect-error - Monkey Patching
+      CONFIG.Token.hudClass.prototype._getMovementActionChoices = function() {
+        const results = original.bind(this)()
+        if(Object.keys(results).length > 1) delete results[""];
+        return results;
+      }
     })
 
     Hooks.once('ready', () => {
       console.log('PTR 2e | Ready');
+
+      const config = game.settings.get("core", "combatTrackerConfig") as {turnMarker: {src: string, animation: string}};
+      if(config?.turnMarker && config.turnMarker.src == "") {
+        config.turnMarker.src = "icons/svg/circle.svg";
+        config.turnMarker.animation = "spinPulse";
+        game.settings.set("core", "combatTrackerConfig", config);
+      }
 
       // Add ready code here
       GamePTR.onReady();
