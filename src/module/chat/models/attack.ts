@@ -572,7 +572,7 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
           if (!effectRoll.success) continue;
 
 
-          const item = await fromUuid(effectRoll.effect);
+          const item = await fu.fromUuid(effectRoll.effect);
           if (!item) {
             Hooks.onError("AttackMessageSystem#applyDamage", new Error(`Could not find item with uuid ${effectRoll.effect}`), { log: "error" });
             continue;

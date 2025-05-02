@@ -23,7 +23,7 @@ import { ActionsCollections } from "./actions.ts";
 import { CustomSkill } from "@module/data/models/skill.ts";
 import { BaseStatisticCheck, Statistic, StatisticCheck } from "@system/statistics/statistic.ts";
 import { CheckContext, CheckContextParams, RollContext, RollContextParams } from "@system/data.ts";
-import { extractEffectRolls, extractEphemeralEffects, extractModifiers, extractTargetModifiers, processPreUpdateHooks } from "src/util/change-helpers.ts";
+import { extractEffectRolls, extractEphemeralEffects, extractModifiers, extractNotes, extractTargetModifiers, processPreUpdateHooks } from "src/util/change-helpers.ts";
 import { TokenPTR2e } from "@module/canvas/token/object.ts";
 import * as R from "remeda";
 import { ModifierPTR2e } from "@module/effects/modifiers.ts";
@@ -37,6 +37,7 @@ import { PickableThing } from "@module/apps/pick-a-thing-prompt.ts";
 import { ActionUUID } from "src/util/uuid.ts";
 import { ActorSizePTR2e } from "./data/size.ts";
 import { auraAffectsActor, checkAreaEffects } from "./helpers.ts";
+import { RollNote } from "@system/notes.ts";
 
 interface ActorParty {
   owner: ActorPTR2e<ActorSystemPTR2e, null> | null;
@@ -1864,7 +1865,7 @@ class ActorPTR2e<
     return false;
   }
 
-  async applyRollEffects(toApply: ActiveEffectPTR2e["_source"][]) {
+  async applyRollEffects(toApply: ActiveEffectPTR2e["_source"][], isHostile = true) {
     const oldEffects = this.effects.filter(e => e.type === "affliction").map(e => e.clone({}, { keepId: true })) as unknown as ActiveEffectPTR2e[];
     const effects = await this.createEmbeddedDocuments("ActiveEffect", toApply) as ActiveEffectPTR2e[];
 
@@ -1899,6 +1900,17 @@ class ActorPTR2e<
             : ""
         )
     })
+
+    if(isHostile) {
+      const notes = extractNotes(this.synthetics.rollNotes, ["effect-applied"])
+      if (notes?.length) {
+        const content = RollNote.notesToHTML(notes)?.outerHTML;
+        if (content?.length) await ChatMessage.create({
+          speaker: ChatMessage.getSpeaker({ actor: this }),
+          content
+        });
+      }
+    }
   }
 
   private static getLoafingCount(creature: number, owner: number) {
