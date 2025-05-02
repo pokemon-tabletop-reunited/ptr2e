@@ -98,7 +98,7 @@ class GithubManager {
     pack: CompendiumCollection<ItemPTR2e<ItemSystemPTR, null>>
   ) {
     const existing = await (async () => {
-      const sourceId = item.flags?.core?.sourceId;
+      const sourceId = item.flags?.core?.sourceId || item._stats?.compendiumSource;
       if (sourceId) {
         const existing = await pack.getDocument(sourceId.split(".").at(-1)!);
         if (existing) return existing;

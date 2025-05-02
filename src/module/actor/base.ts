@@ -1056,7 +1056,7 @@ class ActorPTR2e<
         "underdogperk0002",
       ]
     }) as PerkPTR2e[];
-    const webs = new Set([this.species!.evolutions?.uuid ?? this.species!.parent.flags?.core?.sourceId ?? []].flat());
+    const webs = new Set([(this.species!.evolutions?.uuid ?? this.species!.parent.flags?.core?.sourceId) || this.species!.parent._stats?.compendiumSource || []].flat());
     const baseConnection = `evolution-${this.species!.evolutions?.name ?? this.species!.parent.slug}`;
     return underdogPerks.map(perk => perk.clone({ "system.webs": webs, "system.nodes": perk.system._source.nodes.map(node => ({ ...node, connected: [baseConnection, ...node.connected] })) }));
   }
@@ -1787,7 +1787,7 @@ class ActorPTR2e<
 
     // Predicate for appliesSelfOnly is checking how many actors in the aura count, not whether it should apply to this actor.
     for (const data of aura.effects.filter(e => e.appliesSelfOnly ? origin.actor === this : e.predicate.test(rollOptions))) {
-      const existing = this.appliedEffects.find(e => e.flags?.core?.sourceId === data.uuid) as ActiveEffectPTR2e | undefined;
+      const existing = this.appliedEffects.find(e => e.flags?.core?.sourceId === data.uuid || e._stats?.compendiumSource === data.uuid) as ActiveEffectPTR2e | undefined;
       if (existing && !data.appliesSelfOnly) continue;
 
       if (!auraAffectsActor(data, origin.actor, this)) continue;

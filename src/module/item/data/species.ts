@@ -364,7 +364,7 @@ class SpeciesSystem extends SpeciesExtension {
     super.prepareBaseData();
 
     if (!this.evolutions) {
-      const uuid = this.parent.flags.core?.sourceId ?? this.parent.uuid;
+      const uuid = (this.parent.flags.core?.sourceId || this.parent._stats?.compendiumSource) ?? this.parent.uuid;
       const result = fu.parseUuid(uuid);
       if (result.documentId) {
         this.evolutions = new EvolutionData({
@@ -526,9 +526,9 @@ class SpeciesSystem extends SpeciesExtension {
 
     const evolutions = this.evolutions ? this.evolutions : {
       name: this.parent.slug,
-      uuid: this.parent.flags?.core?.sourceId ?? this.parent.uuid,
+      uuid: (this.parent.flags?.core?.sourceId || this.parent._stats.compendiumSource) ?? this.parent.uuid,
     } as EvolutionData;
-    if (!evolutions.uuid) evolutions.uuid = this.parent.flags?.core?.sourceId ?? this.parent.uuid;
+    if (!evolutions.uuid) evolutions.uuid = (this.parent.flags?.core?.sourceId || this.parent._stats.compendiumSource) ?? this.parent.uuid;
 
     for await (const [evolution, depth] of recursiveEvolution(evolutions)) {
       const data = await this.createEvolutionPerk(evolution, isShiny);

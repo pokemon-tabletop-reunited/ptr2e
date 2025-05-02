@@ -410,7 +410,7 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
         label: this.actor?.name ? `${this.actor.name}'s Global Perk Web` : "Global Perk Web"
       }
     ]
-    const uuid = this.actor?.species?.evolutions?.uuid ?? this.actor?.species?.parent?.flags?.core?.sourceId ?? this.actor?.species?.parent?.uuid;
+    const uuid = (this.actor?.species?.evolutions?.uuid ?? this.actor?.species?.parent?.flags?.core?.sourceId) || this.actor?.species?.parent?._stats?.compendiumSource || this.actor?.species?.parent?.uuid;
     if (uuid) webOptions.push({
       value: uuid,
       label: this.actor?.name ? `${this.actor.name}'s Species Perk Web` : "Species Perk Web"

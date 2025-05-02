@@ -457,12 +457,12 @@ class ItemPTR2e<
   }
 
   async syncData(): Promise<void> {
-    const sourceId = this.flags.core?.sourceId;
+    const sourceId = this.flags.core?.sourceId || this._stats?.compendiumSource;
     if(!sourceId) {
       return void ui.notifications.error("Unable to detect source for this item, unable to sync.");
     }
 
-    const source = await fromUuid(sourceId) as this;
+    const source = await fu.fromUuid(sourceId) as this;
     if(!source) {
       return void ui.notifications.error("The source this item references no longer exists.");
     }
