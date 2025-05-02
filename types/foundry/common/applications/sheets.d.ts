@@ -40,9 +40,16 @@ declare class ItemSheetV2<
 declare class FolderConfig extends DocumentSheetV2<Folder> {
 }
 
+declare class _TokenConfig<
+  TDocument extends TokenDocument,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  TOptions extends DocumentSheetOptions = DocumentSheetOptions,
+> extends DocumentSheetV2<TDocument> {}
+
 export {
     ActorSheetV2,
     ItemSheetV2,
     ActiveEffectConfig,
     FolderConfig,
+    _TokenConfig as TokenConfig
 }

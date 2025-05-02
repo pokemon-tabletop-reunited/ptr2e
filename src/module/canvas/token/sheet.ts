@@ -1,101 +1,46 @@
-// import { TokenDocumentPTR2e } from "./document.ts";
-// // import { htmlQuery } from "@utils";
-// // import { ActorSizePTR2e } from "@actor/data/size.ts";
+import { TokenDocumentPTR2e } from "./document.ts";
+import { htmlQuery } from "@utils";
 
-// export class TokenConfigPTR2e<TDocument extends TokenDocumentPTR2e> extends foundry.applications.sheets.TokenConfig<TDocument> {
-//   // static override get defaultOptions(): DocumentSheetOptions {
-//   //   return {
-//   //     ...super.defaultOptions,
-//   //     template: "systems/ptr2e/templates/apps/token/sheet.hbs",
-//   //     sheetConfig: false,
-//   //   };
-//   // }
+export class TokenConfigPTR2e<TDocument extends TokenDocumentPTR2e> extends foundry.applications.sheets.TokenConfig<TDocument> {
+  declare token: TDocument;
 
-//   // override async getData(options?: Partial<DocumentSheetOptions> | undefined) {
-//   //   const data = await super.getData(options);
+  static override DEFAULT_OPTIONS = {
+    actions: {
+      "toggle-link-to-size": async function(this: TokenConfigPTR2e<TokenDocumentPTR2e>, event: Event) {
+        event.preventDefault();
+        const token = this.token;
+        const linkToActorSize = !token.flags.ptr2e?.linkToActorSize;
+        await token.update({ "flags.ptr2e.linkToActorSize": linkToActorSize });
+        this.render({parts: ["appearance"]});
+      }
+    }
+  }
 
-//   //   return {
-//   //     ...data,
-//   //     linkToActorSize: !!this.token.flags.ptr2e?.linkToActorSize,
-//   //     autoscale: !!this.token.flags.ptr2e?.autoscale,
-//   //     sizeLinkable: !!this.actor,
-//   //     linkToSizeTitle: this.token.flags.ptr2e?.linkToActorSize ? "Unlink" : "Link",
-//   //     autoscaleTitle: this.token.flags.ptr2e?.autoscale ? "Unlink" : "Link",
-//   //   }
-//   // }
+  override async _renderHTML(context: foundry.applications.api.ApplicationRenderContext, options: foundry.applications.api.DocumentSheetRenderOptions): Promise<HTMLElement | HTMLCollection | Record<string, HTMLElement>> {
+    const html = await super._renderHTML(context, options);
+    
+    if('identity' in html) {
+      const disposition = htmlQuery(html.identity, ".form-group:has(label[for$='disposition'])");
+      disposition?.remove();
+    }
+    if('appearance' in html) {
+      const dimensions = htmlQuery(html.appearance, ".form-group.slim:has(label[for$='width'])");
+      if(dimensions?.firstElementChild) {
+        const anchor = document.createElement("a");
+        anchor.dataset.action = "toggle-link-to-size";
+        anchor.title = game.i18n.localize(`PTR2E.Token.Size.LinkToActorSize.${this.token.flags.ptr2e?.linkToActorSize ? "Unlink" : "Link"}`);
+        const icon = document.createElement("i");
+        icon.classList.add("fas","fa-fw", `fa-lock${this.token.flags.ptr2e?.linkToActorSize ? "" : "-open"}`);
+        anchor.append(icon);
+        dimensions.firstElementChild.append(anchor);
 
-//   // override activateListeners($html: JQuery): void {
-//   //   super.activateListeners($html);
-//   //   const html = $html[0];
+        if(this.token.flags.ptr2e?.linkToActorSize) {
+          htmlQuery(html.appearance, "input[name=width]")?.setAttribute("disabled", "true");
+          htmlQuery(html.appearance, "input[name=height]")?.setAttribute("disabled", "true");
+        }
+      }
+    }
 
-//   //   if (this.token.flags.ptr2e?.linkToActorSize === true ? !!this.token.flags.ptr2e?.autoscale : false) {
-//   //     this.#disableScale(html)
-//   //   }
-
-//   //   const linkToSizeButton = htmlQuery(html, "a[data-action=toggle-link-to-size]");
-//   //   linkToSizeButton?.addEventListener("click", async () => {
-//   //     await this.token.update({ "flags.ptr2e.linkToActorSize": !this.token.flags.ptr2e?.linkToActorSize });
-//   //     this.#reestablishPrototype();
-//   //     this.render();
-//   //   });
-
-//   //   const autoscaleButton = htmlQuery(html, "a[data-action=toggle-autoscale]");
-//   //   autoscaleButton?.addEventListener("click", async () => {
-//   //     await this.token.update({ "flags.ptr2e.autoscale": !this.token.flags.ptr2e?.autoscale });
-//   //     this.#reestablishPrototype();
-//   //     this.render();
-//   //   });
-//   // }
-
-//   // /** Disable the range input for token scale and style to indicate as much */
-//   // #disableScale(html: HTMLElement): void {
-//   //   // If autoscaling is globally disabled, keep form input enabled
-//   //   if (!game.settings.get("ptr2e", "tokens.autoscale")) return;
-
-//   //   const scale = html.querySelector(".form-group.scale");
-//   //   if (!scale) throw Error("Scale form group missing");
-//   //   scale.classList.add("children-disabled");
-
-//   //   const constrainedScale = String(["diminutive", "small"].includes(this.actor?.size.value ?? "") ? 0.8 : 1);
-//   //   const rangeInput = scale.querySelector<HTMLInputElement>("input[type=range]");
-//   //   if (rangeInput) {
-//   //     rangeInput.disabled = true;
-//   //     rangeInput.value = constrainedScale;
-//   //     const rangeDisplayValue = scale.querySelector(".range-value");
-//   //     if (rangeDisplayValue) rangeDisplayValue.innerHTML = constrainedScale;
-//   //   }
-//   // }
-
-//   // /**
-//   //  * A core bug present as of 10.291 will cause a `TokenConfig`'s `object`/`token` reference to become stale
-//   //  * following an update: reestablish it.
-//   //  */
-//   // #reestablishPrototype(): void {
-//   //   if (this.isPrototype && this.actor) {
-//   //     const realPrototype = this.actor.prototypeToken as unknown as TDocument;
-//   //     this.object = this.token = realPrototype;
-//   //     setTimeout(() => this.render(true), 100);
-//   //   }
-//   // }
-
-//   // /** Readd scale property to form data if input is disabled: necessary for mirroring checkboxes to function */
-//   // protected override _getSubmitData(updateData: Record<string, unknown> | null = {}): Record<string, unknown> {
-//   //   const changes = updateData ?? {};
-//   //   if (this.form.querySelector<HTMLInputElement>("input[name=scale]")?.disabled) {
-//   //     changes["scale"] = Math.abs(this.token._source.texture.scaleX);
-//   //   }
-//   //   return super._getSubmitData(changes);
-//   // }
-
-//   // protected override async _updateObject(event: Event, formData: Record<string, unknown>): Promise<void> {
-//   //   if (formData["flags.ptr2e.linkToActorSize"] === true) {
-//   //     const size = this.actor?.size ?? new ActorSizePTR2e({ value: "medium" });
-//   //     formData["width"] = formData["height"] = Math.min(size.length, size.width);
-//   //   }
-//   //   return super._updateObject(event, formData);
-//   // }
-// }
-
-// export interface TokenConfigPTR2e<TDocument extends TokenDocumentPTR2e> extends foundry.applications.sheets.TokenConfig<TDocument> {
-
-// }
+    return html;
+  }
+}

@@ -293,7 +293,7 @@ declare global {
             documentClass: ConstructorOf<TTokenDocument>;
             objectClass: ConstructorOf<NonNullable<TTokenDocument["object"]>>;
             layerClass: ConstructorOf<NonNullable<TTokenDocument["object"]>["layer"]>;
-            prototypeSheetClass: ConstructorOf<TTokenDocument["sheet"]>;
+            prototypeSheetClass: unknown;
             movement: {
               TerrainData: any;
               actions: Record<string, TokenMovementAction>;
