@@ -233,7 +233,7 @@ declare namespace ActorSystem {
   type DerivedData = EmptyObject
 }
 
-class ActorSystem extends foundry.abstract.TypeDataModel<ActorSystem.Schema, ActorPTR2e> {
+class ActorSystem extends foundry.abstract.TypeDataModel<ActorSystem.Schema, ActorPTR2e.Any> {
   static override defineSchema(): fields.DataSchema {
     return actorSystemSchema;
   }

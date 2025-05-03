@@ -1,8 +1,7 @@
 import type { ActionsCollections } from "../actions-collection";
 
 declare namespace ItemPTR2e {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  type Any = ItemPTR2e<any>;
+  type Any = ItemPTR2e<Item.SubType>;
 }
 
 class ItemPTR2e<SubType extends Item.SubType> extends Item<SubType> {

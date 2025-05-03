@@ -1,15 +1,16 @@
 import { PTRCONSTS } from ".";
 import { ActorPTR2e } from "./actor/document";
 import type { ActionType } from "./constants";
+import type { ItemPTR2e } from "./item/document";
 import type { AttackPTR2e } from "./models/actions";
 import ActionPTR2e from "./models/actions/action";
 
 export class ActionsCollections extends Collection<ActionPTR2e> {
   //@ts-expect-error - Intended.
-  parent: Actor.Known | Item.Known;
+  parent: ActorPTR2e.Any | ItemPTR2e.Any;
   declare attack: Collection<AttackPTR2e>;
 
-  constructor(parent: Actor.Known | Item.Known, sourceArray: ActionPTR2e[] = []) {
+  constructor(parent: ActorPTR2e.Any | ItemPTR2e.Any, sourceArray: ActionPTR2e[] = []) {
     super(sourceArray.map((source) => [source.slug, source]));
 
     const data: PropertyDescriptorMap = Object.values(
@@ -23,7 +24,6 @@ export class ActionsCollections extends Collection<ActionPTR2e> {
     Object.defineProperties(this, data);
   }
 
-  // //@ts-expect-error - Incorrect FVTT-Types
   override set(slug: Maybe<string>, value: ActionPTR2e) {
     if (!(value instanceof ActionPTR2e))
       throw new Error("ActionsCollection can only contain ActionPTR2e instances");
@@ -36,24 +36,22 @@ export class ActionsCollections extends Collection<ActionPTR2e> {
 
     //Add the action to the appropriate collection, as well as the main collection
     super.set(slug, value);
-    this[value.type].set(slug, value as AttackPTR2e);
+    (this as Record<ActionType, Collection<ActionPTR2e>>)[value.type as ActionType].set(slug, value as AttackPTR2e);
 
     return this;
   }
 
-  // //@ts-expect-error - Incorrect FVTT-Types
   override delete(key: string): boolean {
     const action = this.get(key);
     if (!action) return false;
 
     // Remove the action from the appropriate collection
-    this[action.type].delete(key);
+    (this as Record<ActionType, Collection<ActionPTR2e>>)[action.type as ActionType].delete(key);
 
     // Remove the action from the main collection
     return super.delete(key);
   }
 
-  // //@ts-expect-error - Incorrect FVTT-Types
   override clear(): void {
     super.clear();
     for (const key of Object.values(PTRCONSTS.ActionTypes)) {
@@ -64,14 +62,16 @@ export class ActionsCollections extends Collection<ActionPTR2e> {
   /**
    * Add all actions from an item to the collection
    */
-  addActionsFromItem(item: Item.Known) {
+  addActionsFromItem(item: ItemPTR2e.Any) {
     const actions = item.actions;
     for (const action of actions) {
       this.set(action.slug, action);
       if (this.parent instanceof ActorPTR2e) {
         if(!["attack", "generic"].includes(action.type)) continue;
-        if (action.variant && !action.free) continue;
+        if (action.variant && !(action as AttackPTR2e).free) continue;
 
+        //@ts-expect-error - Flags has not yet been typed
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
         this.parent.flags.ptr2e.disableActionOptions!.collection.set(action.slug, action);
       }
     }
@@ -81,8 +81,8 @@ export class ActionsCollections extends Collection<ActionPTR2e> {
   /**
    * Get the item hosting a given action by its slug
    */
-  getItem(actionSlug: string): Maybe<Item.Known> {
-    return this.get(actionSlug)?.item as Maybe<Item.Known>;
+  getItem(actionSlug: string): Maybe<ItemPTR2e.Any> {
+    return this.get(actionSlug)?.item as Maybe<ItemPTR2e.Any>;
   }
 }
 

@@ -14,10 +14,10 @@ import type SkillsCollection from "./system/data/skills-collection";
 export {};
 
 declare module "fvtt-types/configuration" {
-  // interface DocumentClassConfig {
-  //   Actor: typeof ActorPTR2e
-  //   Item: typeof ItemPTR2e
-  // }
+  interface DocumentClassConfig {
+    Actor: typeof ActorPTR2e<Actor.SubType>
+    Item: typeof ItemPTR2e<Item.SubType>
+  }
 
   interface DataModelConfig {
     Actor: {
@@ -25,9 +25,9 @@ declare module "fvtt-types/configuration" {
       pokemon: typeof PokemonActorSystem;
     };
     Item: {
-      ability: typeof AbilitySystem;
+      // ability: typeof AbilitySystem;
       species: typeof SpeciesSystem;
-      gear: typeof GearSystem;
+      // gear: typeof GearSystem;
     }
   }
 

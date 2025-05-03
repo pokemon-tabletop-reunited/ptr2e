@@ -1,13 +1,18 @@
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+//@ts-nocheck - This file is not done yet.
+
+
 /* eslint-disable @typescript-eslint/no-base-to-string */
 /* eslint-disable @typescript-eslint/restrict-template-expressions */
 /* eslint-disable @typescript-eslint/no-redundant-type-constituents */
+import type { ActorPTR2e } from "../../data/actor/document";
 import { isObject } from "../../util/misc";
 import { CHANGE_MODES, ChangeModel } from "./";
 
 export default class BasicChangeSystem extends ChangeModel {
   static override TYPE = "basic" as const;
 
-  override apply(actor: Actor.Known, rollOptions?: string[] | Set<string> | null): void {
+  override apply(actor: ActorPTR2e.Any, rollOptions?: string[] | Set<string> | null): void {
     // eslint-disable-next-line @typescript-eslint/no-this-alias
     const change = this;
 

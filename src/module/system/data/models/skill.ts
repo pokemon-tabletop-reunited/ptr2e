@@ -1,3 +1,4 @@
+import type { ActorSystem } from "../actor/models/system.ts";
 import { SlugField } from "../fields/slug-field.ts";
 
 const skillSchema = {
@@ -23,12 +24,12 @@ declare namespace SkillPTR2e {
   type Schema = typeof skillSchema;
 }
 
-class SkillPTR2e extends foundry.abstract.DataModel<SkillPTR2e.Schema, PTR.Documents.Actor.System> {
+class SkillPTR2e extends foundry.abstract.DataModel<SkillPTR2e.Schema, ActorSystem> {
   static override defineSchema(): SkillPTR2e.Schema {
     return skillSchema;
   }
 
-  static override validateJoint(data: foundry.data.fields.SchemaField.PersistedData<SkillPTR2e.Schema>): void {
+  static override validateJoint(data: foundry.data.fields.SchemaField.SourceData<SkillPTR2e.Schema>): void {
     if ((data.rvs ?? 0) < 0 && !["resources"].includes(data.slug)) {
       throw new Error("Skill value must be at least 1");
     }
@@ -79,11 +80,11 @@ class SkillPTR2e extends foundry.abstract.DataModel<SkillPTR2e.Schema, PTR.Docum
   // }
 }
 
-interface SkillPTR2e extends foundry.abstract.DataModel<SkillPTR2e.Schema, PTR.Documents.Actor.System> {
+interface SkillPTR2e extends foundry.abstract.DataModel<SkillPTR2e.Schema, ActorSystem> {
   total: number;
 }
 
-type CoreSkill = Pick<foundry.data.fields.SchemaField.PersistedData<SkillPTR2e.Schema>, 'slug' | 'favourite' | 'hidden' | 'group'>;
+type CoreSkill = Pick<foundry.data.fields.SchemaField.SourceData<SkillPTR2e.Schema>, 'slug' | 'favourite' | 'hidden' | 'group'>;
 type CustomSkill = CoreSkill & { label: string; description: string };
 type Skill = CoreSkill | CustomSkill;
 

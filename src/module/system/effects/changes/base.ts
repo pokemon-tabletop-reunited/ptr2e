@@ -1,3 +1,5 @@
+import type { ActorPTR2e } from "../../data/actor/document";
+
 export const CHANGE_MODES = Object.freeze({
   CUSTOM: 0,
   MULTIPLY: 1,
@@ -23,7 +25,7 @@ class ChangeModel<TSchema extends ChangeModel.Schema = ChangeModel.Schema> exten
     return changeModelSchema;
   }
 
-  public apply(_: Actor.Known, __?: string[] | Set<string>): unknown {
+  public apply(_: ActorPTR2e.Any, __?: string[] | Set<string>): unknown {
     throw new Error("The apply method must be implemented by the subclass");
   }
 } 

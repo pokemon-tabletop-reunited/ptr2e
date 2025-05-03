@@ -1,8 +1,7 @@
 import type { ActionsCollections } from "../actions-collection";
 
 declare namespace ActorPTR2e {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  type Any = ActorPTR2e<any>;
+  type Any = ActorPTR2e<Actor.SubType>;
 }
 
 class ActorPTR2e<SubType extends Actor.SubType> extends Actor<SubType> {

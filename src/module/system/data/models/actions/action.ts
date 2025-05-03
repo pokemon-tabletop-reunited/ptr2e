@@ -6,8 +6,8 @@ import { CollectionField } from "../../fields/collection-field";
 import { PTRCONSTS } from "../..";
 import Trait from "../trait";
 import { RangePTR2e } from "../range";
-// import { ActorPTR2e } from "../../actor/document";
-// import { ItemPTR2e } from "../../item/document";
+import { ActorPTR2e } from "../../actor/document";
+import { ItemPTR2e } from "../../item/document";
 import { formatSlug } from "../../../util/misc";
 import SystemTraitsCollection from "../../system-traits-collection";
 
@@ -100,6 +100,7 @@ const actionSchema = (type: (typeof ActionTypes)[keyof typeof ActionTypes]) => (
 
 declare namespace ActionPTR2e {
   type Schema = ReturnType<typeof actionSchema>;
+  
 }
 
 class ActionPTR2e<TSchema extends ActionPTR2e.Schema = ActionPTR2e.Schema> extends foundry.abstract.DataModel<TSchema, foundry.abstract.DataModel.Any> {
@@ -111,27 +112,25 @@ class ActionPTR2e<TSchema extends ActionPTR2e.Schema = ActionPTR2e.Schema> exten
     return actionSchema(this.TYPE);
   }
 
-  // get actor(): Actor.Known | null {
-  //   //@ts-expect-error - Unsound but intended.
-  //   if (this.parent?.parent instanceof ActorPTR2e) return this.parent.parent;
-  //   //@ts-expect-error - Unsound but intended.
-  //   // eslint-disable-next-line @typescript-eslint/no-unsafe-return
-  //   if (this.parent instanceof SummonSystem) return this.parent.actor;
-  //   if (
-  //     this.parent?.parent instanceof ItemPTR2e &&
-  //     //@ts-expect-error - Unsound but intended.
-  //     this.parent.parent.actor instanceof ActorPTR2e
-  //   ) {
-  //     return this.parent.parent.actor;
-  //   }
-  //   return null;
-  // }
+  get actor(): ActorPTR2e.Any | null {
+    if (this.parent?.parent instanceof ActorPTR2e) return this.parent.parent;
+    // //@ts-expect-error - Unsound but intended.
+    // // eslint-disable-next-line @typescript-eslint/no-unsafe-return
+    // if (this.parent instanceof SummonSystem) return this.parent.actor;
+    if (
+      this.parent?.parent instanceof ItemPTR2e &&
+      this.parent.parent.actor instanceof ActorPTR2e
+    ) {
+      return this.parent.parent.actor;
+    }
+    return null;
+  }
 
-  // get item(): Item.Known {
-  //   if (this.parent instanceof ItemPTR2e) return this.parent;
-  //   if (this.parent?.parent instanceof ItemPTR2e) return this.parent.parent;
-  //   throw new Error("Action is not a child of an item");
-  // }
+  get item(): ItemPTR2e.Any {
+    if (this.parent instanceof ItemPTR2e) return this.parent;
+    if (this.parent?.parent instanceof ItemPTR2e) return this.parent.parent;
+    throw new Error("Action is not a child of an item");
+  }
 
   get original(): ActionPTR2e | null {
     if (!this.variant) return null;
