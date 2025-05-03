@@ -32,6 +32,10 @@ class AbilitySystem extends HasEmbed(HasBase(foundry.abstract.TypeDataModel), "a
   get isSuppressed(): boolean {
     return this.suppress ?? false;
   } 
+
+  get test() {
+    return this.actions.get("")?.actor?.system
+  }
 }
 
 interface AbilitySystem {

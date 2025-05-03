@@ -112,14 +112,15 @@ class ActionPTR2e<TSchema extends ActionPTR2e.Schema = ActionPTR2e.Schema> exten
     return actionSchema(this.TYPE);
   }
 
-  get actor(): ActorPTR2e.Any | null {
+  get actor(): Actor.Known | null {
     if (this.parent?.parent instanceof ActorPTR2e) return this.parent.parent;
-    // //@ts-expect-error - Unsound but intended.
-    // // eslint-disable-next-line @typescript-eslint/no-unsafe-return
-    // if (this.parent instanceof SummonSystem) return this.parent.actor;
+    //@ts-expect-error - Unsound but intended.
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-return
+    if (this.parent instanceof SummonSystem) return this.parent.actor;
     if (
       this.parent?.parent instanceof ItemPTR2e &&
-      this.parent.parent.actor instanceof ActorPTR2e
+      this.parent.parent.actor instanceof ActorPTR2e &&
+      this.parent.parent.actor.isKnown()
     ) {
       return this.parent.parent.actor;
     }
@@ -249,12 +250,12 @@ class ActionPTR2e<TSchema extends ActionPTR2e.Schema = ActionPTR2e.Schema> exten
   /**
    * Apply an update to the Action through it's parent Item.
    */
-  async update(this: ActionPTR2e, data: foundry.data.fields.SchemaField.UpdateData<ActionPTR2e.Schema>) {
+  async update(this: ActionPTR2e, data: foundry.data.fields.SchemaField.UpdateData<ActionPTR2e.Schema>): Promise<foundry.abstract.Document.Any | undefined> {
     const currentActions = this.prepareUpdate(data);
     return this.item.update({ "system": {"actions": currentActions }});
   }
 
-  prepareUpdate(this: ActionPTR2e, data: foundry.data.fields.SchemaField.UpdateData<ActionPTR2e.Schema>) {
+  prepareUpdate(this: ActionPTR2e, data: foundry.data.fields.SchemaField.UpdateData<ActionPTR2e.Schema>): foundry.data.fields.SchemaField.SourceData<TSchema>[] {
     //@ts-expect-error - Have yet to type Item & its systems.
     // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
     const currentActions = this.item.system.toObject().actions.filter((a: ActionPTR2e) => !a.ephemeralVariant) as foundry.data.fields.SchemaField.SourceData<TSchema>[];
@@ -267,7 +268,7 @@ class ActionPTR2e<TSchema extends ActionPTR2e.Schema = ActionPTR2e.Schema> exten
     return currentActions;
   }
 
-  toChat(this: ActionPTR2e) {
+  toChat(this: ActionPTR2e): Promise<ChatMessage | void> {
     return this.item.toChat();
   }
 }

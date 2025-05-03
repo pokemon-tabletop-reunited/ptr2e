@@ -4,7 +4,7 @@ import { ActionPTR2e, AttackPTR2e, PassivePTR2e, SummonAttackPTR2e } from "./act
 let changeTypes: {
   [BasicChangeSystem.TYPE]: typeof BasicChangeSystem;
 };
-export function ChangeModelTypes() {
+export function ChangeModelTypes(): typeof changeTypes {
   return changeTypes ??= Object.freeze({
     [BasicChangeSystem.TYPE]: BasicChangeSystem,
     // [FlatModifierChangeSystem.TYPE]: FlatModifierChangeSystem,
@@ -32,20 +32,21 @@ export function ChangeModelTypes() {
 }
 
 let actionTypes: {
-  [ActionPTR2e.TYPE]: typeof ActionPTR2e;
-  [AttackPTR2e.TYPE]: typeof AttackPTR2e;
-  [PassivePTR2e.TYPE]: typeof PassivePTR2e;
-  [SummonAttackPTR2e.TYPE]: typeof SummonAttackPTR2e;
+  "generic": typeof ActionPTR2e;
+  "attack": typeof AttackPTR2e;
+  "passive": typeof PassivePTR2e;
+  "summon": typeof SummonAttackPTR2e;
   "exploration": typeof ActionPTR2e;
   "downtime": typeof ActionPTR2e;
   "camping": typeof ActionPTR2e;
 };
-export function ActionModelTypes() {
+
+export function ActionModelTypes(): typeof actionTypes {
   return actionTypes ??= Object.freeze({
-    [ActionPTR2e.TYPE]: ActionPTR2e,
-    [AttackPTR2e.TYPE]: AttackPTR2e,
-    [PassivePTR2e.TYPE]: PassivePTR2e,
-    [SummonAttackPTR2e.TYPE]: SummonAttackPTR2e,
+    "generic": ActionPTR2e,
+    "attack": AttackPTR2e,
+    "passive": PassivePTR2e,
+    "summon": SummonAttackPTR2e,
     "exploration": ActionPTR2e,
     "downtime": ActionPTR2e,
     "camping": ActionPTR2e,

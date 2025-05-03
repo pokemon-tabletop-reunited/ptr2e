@@ -25,9 +25,9 @@ declare module "fvtt-types/configuration" {
       pokemon: typeof PokemonActorSystem;
     };
     Item: {
-      // ability: typeof AbilitySystem;
+      ability: typeof AbilitySystem;
       species: typeof SpeciesSystem;
-      // gear: typeof GearSystem;
+      gear: typeof GearSystem;
     }
   }
 
