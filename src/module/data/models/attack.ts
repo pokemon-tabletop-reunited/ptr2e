@@ -56,7 +56,7 @@ export default class AttackPTR2e extends ActionPTR2e {
         required: false,
         nullable: true,
         min: 10,
-        max: 250,
+        max: 500,
         label: "PTR2E.FIELDS.power.label",
         hint: "PTR2E.FIELDS.power.hint",
       }),

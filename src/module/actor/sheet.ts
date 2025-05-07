@@ -24,7 +24,6 @@ import { AttackPTR2e, PTRCONSTS, Trait } from "@data";
 import { PerksComponent } from "./components/perks-component.ts";
 import { AbilitiesComponent } from "./components/abilities-component.ts";
 import { StatsChart } from "./sheets/stats-chart.ts";
-import StatsForm from "./sheets/stats-form.ts";
 import { ActiveEffectPTR2e } from "@effects";
 import { natures } from "@scripts/config/natures.ts";
 import { AvailableAbilitiesApp } from "@module/apps/available-abilities.ts";
@@ -37,6 +36,7 @@ import { ToggleComponent } from "./components/toggle-component.ts";
 import { PerkWebApp } from "@module/apps/perk-web/perk-web-v2.ts";
 import { DexApp } from "@module/apps/dex.ts";
 import MoveSystem from "@item/data/move.ts";
+import { StatsEditor } from "./sheets/stats-editor.ts";
 
 class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixin(
   ActorSheetV2Expanded
@@ -190,7 +190,7 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
         game.ptr.tutorList.render({ force: true, actor: this.actor });
       },
       "open-stats-chart": function (this: ActorSheetPTRV2) {
-        new StatsForm({ document: this.actor }).render(true);
+        new StatsEditor({ document: this.actor }).render(true);
       },
       "create-item": async function (this: ActorSheetPTRV2, event: Event) {
         const type = ((event.target as HTMLElement).closest("[data-type]") as HTMLElement)?.dataset.type;
@@ -644,7 +644,7 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
     if (partId === "overview") {
       this.statsChart.render();
       htmlQuery(htmlElement, ".stats-chart")?.addEventListener("dblclick", () =>
-        new StatsForm({ document: this.actor }).render(true)
+        new StatsEditor({ document: this.actor }).render(true)
       );
     }
 
@@ -1250,6 +1250,11 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
   override async _preFirstRender(context: foundry.applications.api.ApplicationRenderContext, options: foundry.applications.api.HandlebarsRenderOptions): Promise<void> {
     await super._preFirstRender(context, options);
     this.actor.system.registerSpentMovement();
+  }
+
+  override bringToFront(): void {
+    if(foundry.applications.instances.has(`stats-editor-${this.actor.id}`)) return;
+    return super.bringToFront();
   }
 }
 

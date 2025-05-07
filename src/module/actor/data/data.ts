@@ -37,7 +37,22 @@ interface ActorSystemSchema extends TraitsSchema, MigrationSchema, foundry.data.
     true, false, true
   >;
   immunities: foundry.data.fields.SetField<SlugField, string[], Set<string>, true, false, true>;
+  investments: foundry.data.fields.SchemaField<InvestmentSchema, SourceFromSchema<InvestmentSchema>, ModelPropsFromSchema<InvestmentSchema>, true, false, false>;
 }
+
+interface InvestmentSchema extends foundry.data.fields.DataSchema {
+  ivs: foundry.data.fields.SchemaField<InvestmentIVsSchema, SourceFromSchema<InvestmentIVsSchema>, ModelPropsFromSchema<InvestmentIVsSchema>, true, false, false>;
+}
+
+interface InvestmentIVsSchema extends foundry.data.fields.DataSchema {
+  hp: foundry.data.fields.NumberField<number, number, true, false, true>;
+  atk: foundry.data.fields.NumberField<number, number, true, false, true>;
+  def: foundry.data.fields.NumberField<number, number, true, false, true>;
+  spa: foundry.data.fields.NumberField<number, number, true, false, true>;
+  spd: foundry.data.fields.NumberField<number, number, true, false, true>;
+  spe: foundry.data.fields.NumberField<number, number, true, false, true>;
+}
+
 
 interface PartySchema extends foundry.data.fields.DataSchema {
   ownerOf: foundry.data.fields.DocumentIdField<string, false, false, false>;

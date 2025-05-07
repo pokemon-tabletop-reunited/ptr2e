@@ -77,6 +77,24 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
       return output as StatSchema | Omit<StatSchema, "stage">;
     };
 
+    function getUnderdogField() {
+      return new fields.SchemaField({
+        value: new fields.NumberField({ required: true, nullable: false, initial: 0, min: 0, max: 20 }),
+        stat: new fields.StringField({
+          required: true,
+          nullable: true,
+          initial: null,
+          choices: {
+            "atk": "PTR2E.Attributes.atk.Label",
+            "def": "PTR2E.Attributes.def.Label",
+            "spa": "PTR2E.Attributes.spa.Label",
+            "spd": "PTR2E.Attributes.spd.Label",
+            "spe": "PTR2E.Attributes.spe.Label",
+          }
+        })
+      })
+    }
+
     return {
       ...super.defineSchema() as MigrationSchema & TraitsSchema,
       advancement: new fields.SchemaField({
@@ -275,7 +293,7 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
           slug: new fields.StringField({ required: true, nullable: false }),
           state: new fields.StringField({ required: true, nullable: false, initial: "unknown", choices: ["unknown", "seen", "caught", "shiny"] }),
         })),
-        device: new fields.StringField({required: true, blank: true, initial: "", label: "PTR2E.FIELDS.details.device.label", hint: "PTR2E.FIELDS.details.device.hint" }),
+        device: new fields.StringField({ required: true, blank: true, initial: "", label: "PTR2E.FIELDS.details.device.label", hint: "PTR2E.FIELDS.details.device.hint" }),
       }),
       inventory: new fields.SchemaField({
         held: new fields.SchemaField({
@@ -298,9 +316,60 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
         required: true,
         initial: "overland",
         choices: Object.entries(CONFIG.PTR.movementTypes).reduce(
-          (acc, [type, {label}]) => ({ ...acc, [type]: label }),
+          (acc, [type, { label }]) => ({ ...acc, [type]: label }),
           {} as Record<string, string>
         ),
+      }),
+      investments: new fields.SchemaField({
+        ivs: new fields.SchemaField({
+          hp: new fields.NumberField({ required: true, nullable: false, initial: 0, min: 0, max: 30 }),
+          atk: new fields.NumberField({ required: true, nullable: false, initial: 0, min: 0, max: 30 }),
+          def: new fields.NumberField({ required: true, nullable: false, initial: 0, min: 0, max: 30 }),
+          spa: new fields.NumberField({ required: true, nullable: false, initial: 0, min: 0, max: 30 }),
+          spd: new fields.NumberField({ required: true, nullable: false, initial: 0, min: 0, max: 30 }),
+          spe: new fields.NumberField({ required: true, nullable: false, initial: 0, min: 0, max: 30 })
+        }),
+        underdog: new fields.SchemaField({
+          boosts: new fields.SchemaField({
+            "1": new fields.SchemaField({
+              value: new fields.NumberField({ required: true, nullable: false, initial: 0, min: 0, max: 10 }),
+            }),
+            "2": getUnderdogField(),
+            "3": getUnderdogField(),
+            "4": getUnderdogField(),
+            "5": getUnderdogField(),
+            "6": getUnderdogField(),
+          }),
+          swap: new fields.SchemaField({
+            from: new fields.StringField({
+              required: true,
+              nullable: true,
+              initial: null,
+              choices: {
+                "hp": "PTR2E.Attributes.hp.Label",
+                "atk": "PTR2E.Attributes.atk.Label",
+                "def": "PTR2E.Attributes.def.Label",
+                "spa": "PTR2E.Attributes.spa.Label",
+                "spd": "PTR2E.Attributes.spd.Label",
+                "spe": "PTR2E.Attributes.spe.Label",
+              }
+            }),
+            to: new fields.StringField({
+              required: true,
+              nullable: true,
+              initial: null,
+              choices: {
+                "hp": "PTR2E.Attributes.hp.Label",
+                "atk": "PTR2E.Attributes.atk.Label",
+                "def": "PTR2E.Attributes.def.Label",
+                "spa": "PTR2E.Attributes.spa.Label",
+                "spd": "PTR2E.Attributes.spd.Label",
+                "spe": "PTR2E.Attributes.spe.Label",
+              }
+            }),
+            value: new fields.NumberField({required: true, nullable: false, initial: 0, min: 0, max: 10})
+          })
+        })
       })
     };
   }
@@ -336,6 +405,32 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
       Object.defineProperty(this.advancement.advancementPoints, "available", {
         get: () => this.advancement.advancementPoints.total - this.advancement.advancementPoints.spent
       })
+    }
+    if(this.investments.ivs.unlocked === undefined) {
+      this.investments.ivs.unlocked = 0;
+    }
+    if(this.investments.ivs.available === undefined) {
+      Object.defineProperty(this.investments.ivs, "available", {
+        get: () => Object.entries(this.investments.ivs).reduce((acc, [key, value]) => {
+          if(!["hp", "atk", "def", "spa", "spd", "spe"].includes(key)) return acc;
+          return acc + value;
+        }, this.investments.ivs.unlocked)
+      });
+    }
+    if(this.investments.underdog.unlocked === undefined) {
+      this.investments.underdog.unlocked = 0;
+    }
+    if(this.investments.underdog.available === undefined) {
+      Object.defineProperty(this.investments.underdog, "available", {
+        get: () => {
+          const available: (1 | 2 | 3 | 4 | 5 | 6)[] = [];
+          for(let i = 1; i <= this.investments.underdog.unlocked; i++) {
+            if(this.investments.underdog.boosts[i as keyof typeof this.investments.underdog.boosts]?.value) continue;
+            available.push(i as 1 | 2 | 3 | 4 | 5 | 6);
+          }
+          return available;
+        }
+      });
     }
   }
 
@@ -751,44 +846,44 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
     this.registerSpentMovement();
   }
 
-  registerSpentMovement(token: TokenPTR2e = this.parent.getActiveTokens()?.at(0) as TokenPTR2e ): void {
-    if(!token?.document || token.document.movementHistory.length === 0) return;
+  registerSpentMovement(token: TokenPTR2e = this.parent.getActiveTokens()?.at(0) as TokenPTR2e): void {
+    if (!token?.document || token.document.movementHistory.length === 0) return;
     let highest: Movement[] = [];
-    for(const movement in this.movement) {
-      if(!highest.length) {
+    for (const movement in this.movement) {
+      if (!highest.length) {
         highest.push(this.movement[movement]);
       }
       else {
-        if(this.movement[movement].value > highest[0].value) {
+        if (this.movement[movement].value > highest[0].value) {
           highest = [this.movement[movement]];
         }
-        else if(this.movement[movement].value === highest[0].value) {
+        else if (this.movement[movement].value === highest[0].value) {
           highest.push(this.movement[movement]);
         }
       }
       this.movement[movement].available = this.movement[movement].value;
     }
-    for(const waypoint of token.document.movementHistory) {
-      if(waypoint.forced) continue;
+    for (const waypoint of token.document.movementHistory) {
+      if (waypoint.forced) continue;
       const movement = this.movement[waypoint.action];
-      if(!movement) {
+      if (!movement) {
         console.warn(`ActorSystemPTR2e#prepareDerivedData: No movement data for ${waypoint.action}`);
         continue;
       }
-      if(!waypoint.cost) continue;
+      if (!waypoint.cost) continue;
 
-      if(!highest.find(m => m.method === waypoint.action)) {
+      if (!highest.find(m => m.method === waypoint.action)) {
         movement.available -= waypoint.cost;
       }
 
-      for(const m of highest) {
+      for (const m of highest) {
         m.available -= waypoint.cost;
       }
 
       const newHighest: typeof highest = [];
-      for(const m in this.movement) {
+      for (const m in this.movement) {
         this.movement[m].available = Math.min(this.movement[m].available, highest[0].available);
-        if(this.movement[m].available == highest[0].available) newHighest.push(this.movement[m]);
+        if (this.movement[m].available == highest[0].available) newHighest.push(this.movement[m]);
       }
       highest = newHighest;
     }
@@ -884,7 +979,41 @@ interface ActorSystemPTR2e extends ModelPropsFromSchema<ActorSystemSchema> {
 
   skills: Collection<SkillPTR2e> & Record<string, { value?: number, rvs?: number } | undefined>;
 
+  investments: {
+    ivs: {
+      unlocked: number;
+      get available(): number;
+      hp: number;
+      atk: number;
+      def: number;
+      spa: number;
+      spd: number;
+      spe: number;
+    }
+    underdog: {
+      unlocked: number;
+      get available(): (1 | 2 | 3 | 4 | 5 | 6)[];
+      boosts: Record<2 | 3 | 4 | 5 | 6, {
+        value: number;
+        stat: Omit<StatKey, "hp">;
+      }> & {
+        1: {
+          value: number;
+          stat: "hp";
+        };
+      }
+      swap: {
+        unlocked: boolean;
+        from: StatKey | null;
+        to: StatKey | null;
+        value: number;
+      }
+    }
+  }
+
   _source: SourceFromSchema<ActorSystemSchema>;
 }
+
+type StatKey = "hp" | "atk" | "def" | "spa" | "spd" | "spe";
 
 export default ActorSystemPTR2e;
