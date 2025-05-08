@@ -1,0 +1,94 @@
+{
+  "folder": "W85LoOCz3WlwbyhZ",
+  "name": "Duelist's Glory",
+  "type": "perk",
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "publication": {
+      "source": "PTR2e Core",
+      "authors": [
+        "Fox"
+      ],
+      "notes": ""
+    },
+    "actions": [],
+    "description": "<p>Whilst under the effects of @Affliction[duel], you gain +10% Damage when attacking your Duel Partner.</p>",
+    "traits": [
+      "hunter"
+    ],
+    "prerequisites": [],
+    "autoUnlock": [],
+    "cost": 2,
+    "design": {
+      "arena": null,
+      "approach": null,
+      "archetype": null
+    },
+    "global": true,
+    "webs": [],
+    "nodes": []
+  },
+  "img": "systems/ptr2e/img/icons/weapon_icon.webp",
+  "effects": [
+    {
+      "name": "Duelist's Glory",
+      "type": "passive",
+      "_id": "MONpfyDg5RuPCOJy",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "percentile-modifier",
+            "key": "attack-damage",
+            "value": 10,
+            "predicate": [
+              "effect:affliction:duel"
+            ],
+            "label": "Duelist's Glory - Duel Partner?",
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "hideIfDisabled": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "1.2.1.beta",
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      }
+    }
+  ],
+  "flags": {},
+  "_id": "eikDsQbPZgZBF4Pv"
+}
