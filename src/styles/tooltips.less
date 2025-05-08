@@ -1,3 +1,17 @@
+.waypoint-label {
+  &.overextended {
+    border: 1px solid #822727;
+    
+    span {
+      color: #822727 !important;
+      &.total-measurement {
+        text-decoration: underline;
+        font-weight: bold;
+      }
+    }
+  }
+}
+
 #loading {
     margin-bottom: 0.5em;
     label {
@@ -7,6 +21,10 @@
 
 aside[role="tooltip"] {
     min-width: 165px;
+
+    > figure {
+      overflow: hidden;
+    }
     
     --tooltip-background: linear-gradient(to right, rgba(7, 7, 10, 0.9), rgba(19, 17, 31, 0.95));
     background: var(--tooltip-background) !important;
@@ -30,7 +48,7 @@ aside[role="tooltip"] {
         -ms-user-select: text;
         user-select: text;
 
-        border-color: var(--ground-color) !important;
+        border-color: var(--user-color) !important;
 
         .circular-progress {
             animation: none;
@@ -74,7 +92,7 @@ aside[role="tooltip"] {
         --radius: calc((var(--size) - var(--stroke-width)) / 2);
         --circumference: calc(var(--radius) * pi * 2);
         --dash: calc((var(--progress) * var(--circumference)) / 100);
-        --stroke: var(--ground-color);//#fdb953;
+        --stroke: var(--user-color);//#fdb953;
         animation: progress-animation 2s ease-out 0s 1 forwards;
 
         circle {
@@ -120,11 +138,24 @@ aside[role="tooltip"] {
 
     &.status, &.damage {
         header {
-            h3 {
-                border-bottom: 1px solid #6f6c66;
-                padding: 0.25rem;
-                margin: 0;
-            }
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+
+          small {
+            text-align: center;
+          }
+
+          h3 {
+            border-bottom: unset;
+            padding: 0.25rem;
+            margin: 0;
+            text-align: center;
+          }
+
+          &:not(:first-child) {
+            margin-top: 0.5rem;
+          }
         }
 
         main {
@@ -132,15 +163,15 @@ aside[role="tooltip"] {
             flex-direction: column;
 
             figure {
-                margin: 0.1rem 0.25rem;
-                border: 2px groove #6f6c66;
-                padding: 0.25rem;
-                text-align: center;
+              margin: 0.1rem 0.25rem;
+              text-align: center;
+              border: 2px groove #6f6c66;
 
-                code {
-                    font-size: 0.8rem;
-                    word-wrap: pre-wrap;
-                }
+              code {
+                font-size: 0.8rem;
+                white-space: pre-wrap;
+                border: unset;
+              }
             }
             .form-group {
                 display: flex;
@@ -151,6 +182,7 @@ aside[role="tooltip"] {
                 margin: 0.1rem 0.25rem;
                 border: 2px groove #6f6c66;
                 padding: 0.25rem;
+                width: 100%;
 
                 label {
                     flex: 0 0 auto;    
@@ -173,10 +205,11 @@ aside[role="tooltip"] {
             justify-content: space-between;
             align-items: center;
             padding: 0.25rem;
+            gap: 0.5rem;
 
-            .button {
-                flex: 0 0 auto;
-                margin: 0 0.25rem;
+            button {
+              flex: 1 0 auto;
+              padding: 0.25rem 0.5rem;
             }
         }
     }
@@ -184,6 +217,10 @@ aside[role="tooltip"] {
     &:has(.damage-info) {
         padding: 0 !important;
         min-width: 165px;
+
+        .progress-circle {
+          display: none;
+        }
     }
 
     &.damage-info {
@@ -192,10 +229,10 @@ aside[role="tooltip"] {
 
         header {
             padding: 0.5rem;
-            padding-right: 0.75rem;
 
             h5 {
                 margin: 0;
+                color: unset;
             }
 
             border-bottom: 1px solid var(--color-light-6);
@@ -206,11 +243,11 @@ aside[role="tooltip"] {
             display: flex;
             flex-direction: column;
 
-            padding: 0.5rem;
+            padding: 0;
 
             figure {
                 margin: 0;
-                padding-bottom: 0.5rem;
+                padding: 0.25rem 0.5rem;
                 min-height: 20px;
 
                 a.content-link {
@@ -228,18 +265,10 @@ aside[role="tooltip"] {
                 //     }
                 // }
 
-                &:first-child {
-                    padding-top: unset;
-                }
-
-                &:last-child {
-                    padding: 0.5rem 0 0.25rem 0;
-                }
-
                 &.damage {
-                    padding: 0;
+                    padding: 0.25rem 0.5rem;
                     align-content: center;
-                    // border-top: 1px solid var(--color-light-6);
+                    border-top: 1px solid var(--user-color);
                 }
             }
         }

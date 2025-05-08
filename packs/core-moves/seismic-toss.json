@@ -53,10 +53,7 @@
           {
             "type": "flat-modifier",
             "key": "seismic-toss-attack-damage-flat",
-            "value": "(@actor.system.advancement.level)*1.75",
-            "predicate": [
-              "item:move:seismic-toss"
-            ],
+            "value": "floor(@actor.system.advancement.level * 1.75)",
             "label": "Seismic Toss",
             "mode": 2,
             "priority": null,

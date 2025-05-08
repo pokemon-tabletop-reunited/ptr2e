@@ -23,14 +23,10 @@ class ChoiceSetPrompt extends PickAThingPrompt<ItemPTR2e<ItemSystemPTR, ActorPTR
     this.allowedDrops = this.containsItems ? data.allowedDrops : null;
   }
 
-  static override DEFAULT_OPTIONS = fu.mergeObject(
-    super.DEFAULT_OPTIONS,
-    {
-      classes: ["choice-set-prompt"],
-      dragDrop: [{ dropSelector: ".drop-zone" }]
-    },
-    { inplace: false }
-  );
+  static override DEFAULT_OPTIONS = {
+    classes: ["choice-set-prompt"],
+    dragDrop: [{ dropSelector: ".drop-zone" }]
+  } as unknown as Omit<foundry.applications.api.ApplicationConfiguration, "uniqueId">;
 
   static override PARTS: Record<string, foundry.applications.api.HandlebarsTemplatePart> = {
     choices: {
@@ -83,13 +79,13 @@ class ChoiceSetPrompt extends PickAThingPrompt<ItemPTR2e<ItemSystemPTR, ActorPTR
 
       this.selectMenu.on("change", event => {
         const data = event.detail.tagify.value.at(0);
-        if(!data) return updateAnchor(true);
+        if (!data) return updateAnchor(true);
 
         const index = Number(data.value)
-        if(isNaN(index)) return;
+        if (isNaN(index)) return;
 
         const choice = this.choices.at(index);
-        if(UUIDUtils.isItemUUID(choice?.value)) return void updateAnchor(false, data.value);
+        if (UUIDUtils.isItemUUID(choice?.value)) return void updateAnchor(false, data.value);
         return void updateAnchor(true);
       })
     }
@@ -105,12 +101,12 @@ class ChoiceSetPrompt extends PickAThingPrompt<ItemPTR2e<ItemSystemPTR, ActorPTR
   override async resolveSelection(forceSelection = false): Promise<PickableThing<string | number | object> | null> {
     // Return early if there is only one choice
     const firstChoice = this.choices.at(0);
-    if(!this.allowedDrops && firstChoice && this.choices.length === 1 && !forceSelection) return (this.selection = firstChoice);
+    if (!this.allowedDrops && firstChoice && this.choices.length === 1 && !forceSelection) return (this.selection = firstChoice);
 
     // Exit early if there are no valid choices
-    if(this.choices.length === 0 && !this.allowedDrops) {
-      ui.notifications.warn(game.i18n.format("PTR2E.ChoiceSetPrompt.NoValidOptions", {actor: this.actor?.name ?? "", item: this.item?.name ?? ""}));
-      this.close({animate: false});
+    if (this.choices.length === 0 && !this.allowedDrops) {
+      ui.notifications.warn(game.i18n.format("PTR2E.ChoiceSetPrompt.NoValidOptions", { actor: this.actor?.name ?? "", item: this.item?.name ?? "" }));
+      this.close({ animate: false });
       return null;
     }
 
@@ -118,8 +114,8 @@ class ChoiceSetPrompt extends PickAThingPrompt<ItemPTR2e<ItemSystemPTR, ActorPTR
   }
 
   override async close(options?: Partial<foundry.applications.api.ApplicationClosingOptions>): Promise<foundry.applications.api.ApplicationV2> {
-    if(this.choices.length > 0 && !this.selection && !this.allowNoSelection) {
-      ui.notifications.warn(game.i18n.format("PTR2E.ChoiceSetPrompt.NoSelectionMade", {item: this.item?.name ?? ""}));
+    if (this.choices.length > 0 && !this.selection && !this.allowNoSelection) {
+      ui.notifications.warn(game.i18n.format("PTR2E.ChoiceSetPrompt.NoSelectionMade", { item: this.item?.name ?? "" }));
     }
     return super.close(options);
   }
@@ -128,13 +124,13 @@ class ChoiceSetPrompt extends PickAThingPrompt<ItemPTR2e<ItemSystemPTR, ActorPTR
     event.preventDefault();
     const dataString = event.dataTransfer?.getData("text/plain");
     const dropData: DropCanvasData<"Item"> | undefined = JSON.parse(dataString ?? "");
-    if(dropData?.type !== "Item") return void ui.notifications.error(game.i18n.localize("PTR2E.ChoiceSetPrompt.DropItemError"));
+    if (dropData?.type !== "Item") return void ui.notifications.error(game.i18n.localize("PTR2E.ChoiceSetPrompt.DropItemError"));
 
     const item = await ItemPTR2e.fromDropData(dropData);
-    if(!item) throw Error("Unexpectedly failed to create an item from dropped data");
+    if (!item) throw Error("Unexpectedly failed to create an item from dropped data");
 
     const isAllowedDrop = !!this.allowedDrops?.predicate.test(item.getRollOptions("item"));
-    if(this.allowedDrops && !isAllowedDrop) return void ui.notifications.error(game.i18n.format("PTR2E.ChoiceSetPrompt.DropItemNotAllowed", {
+    if (this.allowedDrops && !isAllowedDrop) return void ui.notifications.error(game.i18n.format("PTR2E.ChoiceSetPrompt.DropItemNotAllowed", {
       badType: item.type,
       goodType: game.i18n.localize(this.allowedDrops.label ?? "")
     }));
@@ -148,8 +144,8 @@ class ChoiceSetPrompt extends PickAThingPrompt<ItemPTR2e<ItemSystemPTR, ActorPTR
     const choicesLength = this.choices.push(newChoice);
 
     const dropZone = this.element.querySelector(".drop-zone");
-    if(this.selectMenu) {
-      const {whitelist} = this.selectMenu.settings;
+    if (this.selectMenu) {
+      const { whitelist } = this.selectMenu.settings;
       const menuChoice = { value: String(choicesLength - 1), label: newChoice.label };
       whitelist?.push(menuChoice.value as string & { label: string; value: string })
 
@@ -164,7 +160,7 @@ class ChoiceSetPrompt extends PickAThingPrompt<ItemPTR2e<ItemSystemPTR, ActorPTR
 
       const newButton = createHTMLElement("button", {
         classes: ["with-image"],
-        children: [img, createHTMLElement("span", { children: [item.name]})],
+        children: [img, createHTMLElement("span", { children: [item.name] })],
       })
       newButton.type = "button";
       newButton.value = String(choicesLength - 1);

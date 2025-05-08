@@ -1,4 +1,4 @@
-import { ApplicationV2Expanded } from "./appv2-expanded.ts";
+import { ApplicationConfigurationExpanded, ApplicationV2Expanded } from "./appv2-expanded.ts";
 import { GeneratorConfig } from "@module/data/models/generator-config.ts";
 import { BlueprintSheetPTR2e } from "@item/sheets/index.ts";
 import Sortable from "sortablejs";
@@ -6,116 +6,111 @@ import { ItemPTR2e, PerkPTR2e } from "@item";
 import { Blueprint } from "@module/data/models/blueprint.ts";
 import BlueprintSystem from "@item/data/blueprint.ts";
 import { sluggify } from "@utils";
-import { ApplicationHeaderControlsEntry } from "types/foundry/common/applications/api.js";
 
 export class PerkGeneratorConfig extends foundry.applications.api.HandlebarsApplicationMixin(ApplicationV2Expanded) {
-  static override DEFAULT_OPTIONS = fu.mergeObject(
-    super.DEFAULT_OPTIONS,
-    {
-      tag: "form",
-      classes: ["sheet", "perk-config-sheet", "default-sheet"],
-      position: {
-        height: 560,
-        width: 650,
-      },
-      form: {
-        submitOnChange: false,
-        closeOnSubmit: true,
-        handler: PerkGeneratorConfig.#onSubmit,
-      },
-      window: {
-        minimizable: true,
-        resizable: true,
-        controls: [
-          {
-            action: "save",
-            icon: "fas fa-save",
-            label: "PTR2E.Save",
-            visible: false
-          },
-          {
-            action: "toggle-link",
-            icon: "fas fa-link",
-            label: "PTR2E.Link",
-            visible: false
+  static override DEFAULT_OPTIONS = {
+    tag: "form",
+    classes: ["sheet", "perk-config-sheet", "default-sheet"],
+    position: {
+      height: 560,
+      width: 650,
+    },
+    form: {
+      submitOnChange: false,
+      closeOnSubmit: true,
+      handler: PerkGeneratorConfig.#onSubmit,
+    },
+    window: {
+      minimizable: true,
+      resizable: true,
+      controls: [
+        {
+          action: "save",
+          icon: "fas fa-save",
+          label: "PTR2E.Save",
+          visible: false
+        },
+        {
+          action: "toggle-link",
+          icon: "fas fa-link",
+          label: "PTR2E.Link",
+          visible: false
+        }
+      ]
+    },
+    actions: {
+      "save": async function (this: PerkGeneratorConfig) {
+        if (!this.document) return;
+        if (!this.document.label) return void ui.notifications.error("You must provide a label for this config before it can be saved to the global configs.");
+
+        const configs = fu.duplicate(game.settings.get("ptr2e", "global-perk-configs"));
+        const exists = configs.find(c => c.id === this.document.id)
+        if (exists) {
+          if (exists.label === this.document.label) {
+            return void ui.notifications.error("It appears this config is already saved to the Global Config.");
           }
-        ]
-      },
-      actions: {
-        "save": async function (this: PerkGeneratorConfig) {
-          if (!this.document) return;
-          if (!this.document.label) return void ui.notifications.error("You must provide a label for this config before it can be saved to the global configs.");
+          this.document.updateSource({ id: fu.randomID() });
+        }
 
-          const configs = fu.duplicate(game.settings.get("ptr2e", "global-perk-configs"));
-          const exists = configs.find(c => c.id === this.document.id)
-          if (exists) {
-            if (exists.label === this.document.label) {
-              return void ui.notifications.error("It appears this config is already saved to the Global Config.");
-            }
-            this.document.updateSource({ id: fu.randomID() });
+        const config = this.document.toObject();
+        config.link = true;
+
+        configs.push(config);
+        await game.settings.set("ptr2e", "global-perk-configs", configs);
+
+        // This is being submitted from a blueprint sheet.
+        if (this.blueprintSheet && this.document?.parent instanceof Blueprint && this.document.parent?.parent instanceof BlueprintSystem) {
+          const blueprint = this.document.parent.parent;
+          if (this.blueprintSheet.generation?.temporary) {
+            this.document.parent.updateSource({ _config: { id: config.id, link: true } });
           }
-
-          const config = this.document.toObject();
-          config.link = true;
-
-          configs.push(config);
-          await game.settings.set("ptr2e", "global-perk-configs", configs);
-
-          // This is being submitted from a blueprint sheet.
-          if (this.blueprintSheet && this.document?.parent instanceof Blueprint && this.document.parent?.parent instanceof BlueprintSystem) {
-            const blueprint = this.document.parent.parent;
-            if (this.blueprintSheet.generation?.temporary) {
-              this.document.parent.updateSource({ _config: { id: config.id, link: true } });
-            }
-            else {
-              await blueprint.updateChildren([{ _id: this.document.parent.id, _config: { id: config.id, link: true } }]);
-            }
+          else {
+            await blueprint.updateChildren([{ _id: this.document.parent.id, _config: { id: config.id, link: true } }]);
           }
-        },
-        "toggle-link": async function (this: PerkGeneratorConfig) {
-          if (!this.document) return;
-          if (this.blueprintSheet && this.document?.parent instanceof Blueprint && this.document.parent?.parent instanceof BlueprintSystem) {
-            const blueprint = this.document.parent.parent;
-            if (this.blueprintSheet.generation?.temporary) {
-              this.document.parent.updateSource({ _config: { link: !this.document.link } });
-            }
-            else {
-              await blueprint.updateChildren([{ _id: this.document.parent.id, _config: { link: !this.document.link } }]);
-            }
-
-            this.close();
-            //@ts-expect-error - Arguments not required.
-            return void this.blueprintSheet.options.actions["open-config"].call(this.blueprintSheet);
-          }
-        },
-        "add-priority": function (this: PerkGeneratorConfig, event: PointerEvent/*, _target: HTMLElement, element?: HTMLElement*/) {
-          return PerkGeneratorConfig.#addPriority.call(this, event, false);
-        },
-        "add-negative-priority": function (this: PerkGeneratorConfig, event: PointerEvent/*, _target: HTMLElement, element?: HTMLElement*/) {
-          return PerkGeneratorConfig.#addPriority.call(this, event, true);
-        },
-        "delete-entry": function (this: PerkGeneratorConfig, event: PointerEvent) {
-          const parent = (event.target as HTMLElement).closest("li.entry") as HTMLElement | null;
-          if (!parent) return;
-
-          const { index } = parent.dataset;
-          if (index === undefined) return;
-
-          const { type } = (parent.parentElement as HTMLElement)?.dataset ?? {};
-          if (!type) return;
-
-          this.priorities[type as "priority" | "negative"].splice(Number(index), 1);
-          if (type !== "inactive") this.priorities[type as "priority" | "negative"].forEach((p, i) => p.priority = i + (type === "priority" ? 1 : 500));
-          return void this.render({ parts: ["priorities"] });
-        },
-        close: function (this: PerkGeneratorConfig) {
-          return this.close();
         }
       },
-      dragDrop: [{ dropSelector: "ul.priority, ul.negative" }]
+      "toggle-link": async function (this: PerkGeneratorConfig) {
+        if (!this.document) return;
+        if (this.blueprintSheet && this.document?.parent instanceof Blueprint && this.document.parent?.parent instanceof BlueprintSystem) {
+          const blueprint = this.document.parent.parent;
+          if (this.blueprintSheet.generation?.temporary) {
+            this.document.parent.updateSource({ _config: { link: !this.document.link } });
+          }
+          else {
+            await blueprint.updateChildren([{ _id: this.document.parent.id, _config: { link: !this.document.link } }]);
+          }
+
+          this.close();
+          //@ts-expect-error - Arguments not required.
+          return void this.blueprintSheet.options.actions["open-config"].call(this.blueprintSheet);
+        }
+      },
+      "add-priority": function (this: PerkGeneratorConfig, event: PointerEvent/*, _target: HTMLElement, element?: HTMLElement*/) {
+        return PerkGeneratorConfig.#addPriority.call(this, event, false);
+      },
+      "add-negative-priority": function (this: PerkGeneratorConfig, event: PointerEvent/*, _target: HTMLElement, element?: HTMLElement*/) {
+        return PerkGeneratorConfig.#addPriority.call(this, event, true);
+      },
+      "delete-entry": function (this: PerkGeneratorConfig, event: PointerEvent) {
+        const parent = (event.target as HTMLElement).closest("li.entry") as HTMLElement | null;
+        if (!parent) return;
+
+        const { index } = parent.dataset;
+        if (index === undefined) return;
+
+        const { type } = (parent.parentElement as HTMLElement)?.dataset ?? {};
+        if (!type) return;
+
+        this.priorities[type as "priority" | "negative"].splice(Number(index), 1);
+        if (type !== "inactive") this.priorities[type as "priority" | "negative"].forEach((p, i) => p.priority = i + (type === "priority" ? 1 : 500));
+        return void this.render({ parts: ["priorities"] });
+      },
+      close: function (this: PerkGeneratorConfig) {
+        return this.close();
+      }
     },
-    { inplace: false }
-  );
+    dragDrop: [{ dropSelector: "ul.priority, ul.negative" }]
+  } as unknown as Omit<DeepPartial<ApplicationConfigurationExpanded>, "uniqueId">;
 
   static override PARTS: Record<string, foundry.applications.api.HandlebarsTemplatePart> = {
     config: {
@@ -165,7 +160,7 @@ export class PerkGeneratorConfig extends foundry.applications.api.HandlebarsAppl
     return game.settings.get("ptr2e", "global-perk-configs").find(c => c.id === this.document.id);
   }
 
-  override _getHeaderControls(): ApplicationHeaderControlsEntry[] {
+  override _getHeaderControls(): foundry.applications.api.ApplicationHeaderControlsEntry[] {
     const controls = super._getHeaderControls();
     const save = controls.find(c => c.action === "save");
     if (save) {
@@ -203,7 +198,7 @@ export class PerkGeneratorConfig extends foundry.applications.api.HandlebarsAppl
   override async _preparePartContext(partId: string, context: foundry.applications.api.ApplicationRenderContext) {
     const result = await super._preparePartContext(partId, context);
 
-    if(partId === "footer") {
+    if (partId === "footer") {
       result.hasGlobal = !!this.globalConfig;
     }
 
@@ -341,7 +336,7 @@ export class PerkGeneratorConfig extends foundry.applications.api.HandlebarsAppl
   }
 
   override async _onDrop(event: DragEvent) {
-    const data: { type: string } = TextEditor.getDragEventData(event);
+    const data: { type: string } = foundry.applications.ux.TextEditor.getDragEventData(event);
     if (data.type !== "Item") return;
 
     const item = (await ItemPTR2e.implementation.fromDropData(data)) as PerkPTR2e;

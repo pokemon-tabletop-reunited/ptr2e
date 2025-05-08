@@ -1,6 +1,114 @@
+import DataModel from "../../../common/abstract/data.js";
 import type { CanvasBaseToken } from "./client-base-mixes.d.ts";
 
+
 declare global {
+  interface TokenMovementData {
+    id: string;
+    chain: string[];
+    origin: TokenPosition;
+    destination: TokenPosition;
+    passed: TokenMovementSectionData;
+    pending: TokenMovementSectionData;
+    history: TokenMovementHistoryData;
+    recorded: boolean;
+    method: TokenMovementMethod;
+    constrainOptions: Omit<TokenConstrainMovementPathOptions, "preview" | "history">;
+    autoRotate: boolean;
+    showRuler: boolean;
+    user: User;
+    state: TokenMovementState;
+    updateOptions: object;
+  }
+
+  type TokenMovementMethod = "api" | "config" | "dragging" | "keyboard" | "undo";
+  type TokenMovementState = "completed"|"paused"|"pending"|"stopped";
+
+  interface TokenMovementSectionData {
+    waypoints: TokenMeasuredMovementWaypoint[];
+    distance: number;
+    cost: number;
+    spaces: number;
+    diagonals: number;
+  }
+
+  interface TokenMovementHistoryData {
+    recorded: TokenMovementSectionData;
+    unrecorded: TokenMovementHistoryData;
+    distance: number;
+    cost: number;
+    spaces: number;
+    diagonals: number;
+  }
+
+  interface TokenConstrainMovementPathOptions {
+    preview?: boolean;
+    ignoreWalls?: boolean;
+    ignoreCost?: boolean;
+    history?: boolean | readonly TokenMeasuredMovementWaypoint[];
+  }
+
+  interface TokenMeasuredMovementWaypoint {
+    x: number;
+    y: number;
+    elevation: number;
+    width: number;
+    height: number;
+    shape: string;
+    action: string;
+    teleport: boolean;
+    forced: boolean;
+    terrain: DataModel | null;
+    snapped: boolean;
+    explicit: boolean;
+    checkpoint: boolean;
+    intermediate: boolean;
+    userId: string;
+    cost: number;
+  }
+
+  interface TokenRulerData {
+    passedWaypoints: TokenMeasuredMovementWaypoint[];
+    pendingWaypoints: TokenMeasuredMovementWaypoint[];
+    plannedMovement: Record<string, TokenPlannedMovement>;
+  }
+
+  interface TokenPlannedMovement {
+    foundPath: Omit<TokenMeasuredMovementWaypoint, "userId"|"movementId">[];
+    unreachableWaypoints: Omit<TokenMeasuredMovementWaypoint, "userId"|"movementId">[];
+    history: TokenMeasuredMovementWaypoint[];
+    hidden: boolean;
+    searching: boolean;
+  }
+
+  interface TokenRulerWaypointData {
+    actionConfig: TokenMovementActionConfig<Token, TokenDocument>;
+    movementId: string | null;
+    index: number;
+    stage: "passed" | "pending" | "planned";
+    hidden: boolean;
+    unreachable: boolean;
+    center: Point;
+    size: { width: number; height: number };
+    ray: Ray | null;
+    measurement: GridMeasurePathResultWaypoint;
+    previous: TokenRulerWaypoint | null;
+    next: TokenRulerWaypoint | null;
+  }
+  
+  type TokenRulerWaypoint = Omit<TokenMeasuredMovementWaypoint, "movementId"> & TokenRulerWaypointData
+
+  type TokenMovementWaypoint = Omit<TokenMeasuredMovementWaypoint, "terrain" | "intermediate" | "userId" | "cost">
+
+  interface TokenPosition {
+    x: number;
+    y: number;
+    elevation: number;
+    width: number;
+    height: number;
+    shape: Record<string, number>;
+  }
+
     class TokenDocument<TParent extends Scene | null = Scene | null> extends CanvasBaseToken<TParent> {
         /* -------------------------------------------- */
         /*  Properties                                  */
@@ -8,6 +116,8 @@ declare global {
 
         /** A singleton collection which holds a reference to the synthetic token actor by its base actor's ID. */
         actors: Collection<Actor>;
+
+        regions: ReadonlySet<any>
 
         /**
          * A lazily evaluated reference to the Actor this Token modifies.
@@ -30,6 +140,9 @@ declare global {
 
         /** An indicator for whether or not this Token is currently involved in the active combat encounter. */
         get inCombat(): boolean;
+
+        get movement(): Readonly<TokenMovementData>;
+        get movementHistory(): readonly TokenMeasuredMovementWaypoint[];
 
         /**
          * Define a sort order for this TokenDocument.

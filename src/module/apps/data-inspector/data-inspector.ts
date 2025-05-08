@@ -1,5 +1,5 @@
 import { ActorPTR2e, ActorSystemPTR2e } from "@actor";
-import { ApplicationV2Expanded } from "../appv2-expanded.ts";
+import { ApplicationConfigurationExpanded, ApplicationV2Expanded } from "../appv2-expanded.ts";
 import { DataStructure } from "./data-handler.ts";
 import { ItemPTR2e, ItemSystemPTR } from "@item";
 import { AttackMessageSystem, CaptureMessageSystem, ChatMessagePTR2e, DamageAppliedMessageSystem, SkillMessageSystem } from "@chat";
@@ -14,29 +14,25 @@ type AllowedDocumentTypes = ActorPTR2e | ActorPTR2e<ActorSystemPTR2e, TokenDocum
 
 class DataInspector extends foundry.applications.api.HandlebarsApplicationMixin(ApplicationV2Expanded) {
 
-  static override DEFAULT_OPTIONS = fu.mergeObject(
-    super.DEFAULT_OPTIONS,
-    {
-      tag: "aside",
-      classes: ["sheet", "data-inspector"],
-      position: {
-        height: 700,
-        width: 685,
-      },
-      window: {
-        minimizable: true,
-        resizable: true,
-      },
-      dragDrop: [{ dragSelector: null, dropSelector: ".window-content" }],
-      actions: {
-        refresh: function (this: DataInspector) {
-          this.resetCache()
-          this.render(true);
-        }
-      }
+  static override DEFAULT_OPTIONS = {
+    tag: "aside",
+    classes: ["sheet", "data-inspector"],
+    position: {
+      height: 700,
+      width: 685,
     },
-    { inplace: false }
-  );
+    window: {
+      minimizable: true,
+      resizable: true,
+    },
+    dragDrop: [{ dragSelector: null, dropSelector: ".window-content" }],
+    actions: {
+      refresh: function (this: DataInspector) {
+        this.resetCache()
+        this.render(true);
+      }
+    }
+  } as unknown as Omit<DeepPartial<ApplicationConfigurationExpanded>, "uniqueId">;
 
   static override PARTS: Record<string, foundry.applications.api.HandlebarsTemplatePart> = {
     // header: {
@@ -142,7 +138,7 @@ class DataInspector extends foundry.applications.api.HandlebarsApplicationMixin(
         if (!('getRollData' in document)) return { data: {}, path: '' };
         if (this.rollData == null) {
           this.rollData = document.getRollData() as Record<string, unknown>;
-          if(this.rollData.actor) this.rollData = fu.duplicate(this.rollData.actor as Record<string, unknown>);
+          if (this.rollData.actor) this.rollData = fu.duplicate(this.rollData.actor as Record<string, unknown>);
         }
         return { data: this.rollData, path: '' };
       }
@@ -495,7 +491,7 @@ class DataInspector extends foundry.applications.api.HandlebarsApplicationMixin(
   override async _onDrop(event: DragEvent) {
     event.preventDefault();
 
-    const data: { type: string, uuid: string } = TextEditor.getDragEventData(event);
+    const data: { type: string, uuid: string } = foundry.applications.ux.TextEditor.getDragEventData(event);
     if (!data?.uuid) return;
 
     const document = await fromUuid(data.uuid);
