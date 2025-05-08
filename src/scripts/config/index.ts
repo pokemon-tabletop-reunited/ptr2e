@@ -41,6 +41,7 @@ import { PickableThing } from "@module/apps/pick-a-thing-prompt.ts";
 import { TokenHUDPTR2e } from "@module/apps/token-hud.ts";
 import { HotbarPTR2e } from "@module/apps/hotbar.ts";
 import { TokenRulerPTR2e } from "@module/canvas/token-ruler.ts";
+import { PrototypeTokenConfigPTR2e, TokenConfigPTR2e } from "@module/canvas/token/sheet.ts";
 
 export const PTRCONFIG = {
   ActiveEffect: {
@@ -157,6 +158,8 @@ export const PTRCONFIG = {
     trackableAttributes,
     hudClass: TokenHUDPTR2e,
     rulerClass: TokenRulerPTR2e,
+    sheetClass: TokenConfigPTR2e,
+    prototypeSheetClass: PrototypeTokenConfigPTR2e
   },
   Scene: {
     documentClass: ScenePTR2e,

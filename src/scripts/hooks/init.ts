@@ -9,7 +9,6 @@ import { default as enrichers } from "@scripts/ui/text-enrichers.ts";
 import { storeInitialWorldVersions } from "@scripts/store-versions.ts";
 import { MigrationList, MigrationRunner } from "@module/migration/index.ts";
 import { MigrationSummary } from "@module/apps/migration-summary.ts";
-import { TokenConfigPTR2e } from "@module/canvas/token/sheet.ts";
 import { TokenDocumentPTR2e } from "@module/canvas/token/document.ts";
 import { WelcomeTour } from "@module/tours/welcome.ts";
 import { ActorSheetTour } from "@module/tours/actor-sheet.ts";
@@ -45,7 +44,7 @@ export const Init: PTRHook = {
       Object.freeze(CONFIG.PTR);
 
       // if (game.release.generation === 12) {
-      CONFIG.Token.prototypeSheetClass = TokenConfigPTR2e;
+      CONFIG.Token.prototypeSheetClass = PTRCONFIG.Token.prototypeSheetClass;
       // }
 
       //Add UUID Redirects
@@ -128,7 +127,7 @@ export const Init: PTRHook = {
         //@ts-expect-error - Application V2 Compatability
         foundry.applications.apps.DocumentSheetConfig.registerSheet(ActiveEffect, "ptr2e", PTRCONFIG.ActiveEffect.sheetClasses.form, { types: ['form'], makeDefault: true });
         //@ts-expect-error - Application V2 Compatability
-        foundry.applications.apps.DocumentSheetConfig.registerSheet(TokenDocumentPTR2e, "ptr2e", TokenConfigPTR2e, { makeDefault: true });
+        foundry.applications.apps.DocumentSheetConfig.registerSheet(TokenDocumentPTR2e, "ptr2e", PTRCONFIG.Token.sheetClass, { makeDefault: true });
       }
 
       initializeSettings();
