@@ -21,7 +21,7 @@ function formatSlug(slug: Maybe<string>) {
 }
 
 function getCategory(title: string): keyof typeof categories {
-  const firstLetter = title.toLowerCase()[0];
+  const firstLetter = sluggify(title)[0];
   if (firstLetter >= "a" && firstLetter <= "e") return "a-e";
   if (firstLetter >= "f" && firstLetter <= "j") return "f-j";
   if (firstLetter >= "k" && firstLetter <= "o") return "k-o";
