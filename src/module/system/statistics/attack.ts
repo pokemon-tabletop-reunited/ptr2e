@@ -149,8 +149,18 @@ class AttackCheck<TParent extends AttackStatistic = AttackStatistic> implements 
     this.parent = parent;
     data.check = fu.mergeObject(data.check ?? {}, { type: this.type });
 
+    const extraDomains = new Set<string>();
+    if(this.attack.variant) {
+      const original = this.attack.original as AttackPTR2e;
+      if(original) {
+        for(const od of original.statistic?.domains ?? []) {
+          extraDomains.add(od);
+        }
+      }
+    }
+
     data.check.domains = Array.from(new Set(data.check.domains ?? []));
-    this.domains = R.unique(R.filter([data.domains, data.check.domains].flat(), R.isTruthy));
+    this.domains = R.unique(R.filter([data.domains, data.check.domains, ...extraDomains].flat(), R.isTruthy));
 
     this.additionalOptions = new Set<string>();
     if (this.attack.power && this.attack.stab > 1) {
@@ -221,6 +231,13 @@ class AttackCheck<TParent extends AttackStatistic = AttackStatistic> implements 
     options.add(`attack:category:${this.attack.category}`);
     for (const type of this.attack.types) options.add(`attack:type:${type}`);
     for (const option of this.additionalOptions) options.add(option);
+
+    if(this.attack.variant) {
+      const original = this.attack.original;
+      if(original) {
+        options.add(`attack:original:${original.slug}`);
+      }
+    }
 
     const targets: { actor: ActorPTR2e, token?: TokenPTR2e }[] = (() => {
       if (args.targets) return args.targets.map(t => ({ actor: t, token: t.token?.object as TokenPTR2e }));
