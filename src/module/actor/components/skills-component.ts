@@ -73,7 +73,7 @@ class SkillsComponent extends ActorComponent {
 
         const hideHiddenSkills = (() => {
             const appSettings = game.user.getFlag("ptr2e", "appSettings") as Record<string, Record<string, unknown>>;
-            const appId = `ActorSheetPTRV2-${actor.uuid.replaceAll(".", "-")}`;
+            const appId = `ActorSheetPTRV2-${actor.uuid?.replaceAll(".", "-")}`;
             if(appSettings?.[appId]) {
                 return appSettings[appId].hideHiddenSkills;
             }
