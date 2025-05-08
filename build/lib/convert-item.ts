@@ -476,6 +476,15 @@ function perkToMarkdown(perk: any): MarkdownResult | null {
     editor: "markdown",
     tags: traitsToTags(perk.system.traits, perk.system.actions),
   };
+  if(perk.system.design?.archetype) {
+    perk.system.design.archetype = sluggify(perk.system.design.archetype);
+    if(metadata.tags.length) {
+      metadata.tags += `, ${perk.system.design.archetype}`;
+    }
+    else {
+      metadata.tags = perk.system.design.archetype;
+    }
+  }
 
   const actionStrings = actionsToActionsStrings(perk.system.actions);
   const traitsString = traitsToTraitsList(perk.system.traits, perk.system.actions);
@@ -503,7 +512,7 @@ function perkToMarkdown(perk: any): MarkdownResult | null {
 
   return {
     metadata,
-    markdown: `- **AP Cost**: ${perk.system.cost}\n\n### Prerequisites\n${getPredicateStrings(perk.system.prerequisites)?.join("\n")}\n\n${traitsString ? `### Traits\n${traitsString}\n\n` : ""}### Effect\n${perk.system.description}${actionStrings.length > 0 ? `\n\n## Perk Actions\n${actionStrings.join("\n\n\n")}` : ""
+    markdown: `- **AP Cost**: ${perk.system.cost}\n- **Archetype**: ${perk.system.design?.archetype ? `[${perk.system.design.archetype}](/t/${perk.system.design.archetype})` : "None"}\n\n### Prerequisites\n${getPredicateStrings(perk.system.prerequisites)?.join("\n")}\n\n${traitsString ? `### Traits\n${traitsString}\n\n` : ""}### Effect\n${perk.system.description}${actionStrings.length > 0 ? `\n\n## Perk Actions\n${actionStrings.join("\n\n\n")}` : ""
       }\n\n### Nodes\n${nodesString}`,
     path,
   };
