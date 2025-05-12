@@ -11,19 +11,26 @@
         "slug": "chemical-burn",
         "type": "attack",
         "img": "systems/ptr2e/img/svg/poison_icon.svg",
-        "traits": [],
+        "traits": [
+          "crit-2"
+        ],
         "range": {
           "target": "creature",
-          "unit": "m"
+          "unit": "m",
+          "distance": 6
         },
         "cost": {
-          "activation": "complex"
+          "activation": "complex",
+          "powerPoints": 3
         },
         "types": [
           "poison"
         ],
-        "category": "physical",
-        "description": "<p>Effect: On hit, the target has a 50% chance of gaining Burn 5.</p>"
+        "category": "special",
+        "description": "<p>Effect: On hit, the target has a 50% chance of gaining Burn 5.</p>",
+        "power": 65,
+        "accuracy": 95,
+        "predicate": []
       }
     ],
     "grade": "C",
@@ -35,8 +42,10 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
-    }
+      ],
+      "notes": ""
+    },
+    "traits": []
   },
   "effects": [
     {
@@ -55,7 +64,9 @@
             "affects": "target",
             "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "alterations": [],
+            "dontMerge": false
           }
         ],
         "slug": null,
@@ -84,12 +95,13 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.342",
         "systemId": "ptr2e",
         "systemVersion": "0.10.0-alpha.3.0.0",
         "createdTime": 1729531816716,
         "modifiedTime": 1729531840403,
-        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
+        "lastModifiedBy": "Kc3DOunCh3ClAeHS",
+        "exportSource": null
       }
     }
   ]
