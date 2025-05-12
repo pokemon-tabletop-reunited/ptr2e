@@ -242,6 +242,8 @@ declare global {
 
         override render(renderer: PIXI.Renderer): void;
 
+        movementAnimationPromise: Promise<unknown> | null;
+
         /**
          * Render the bound mesh detection filter.
          * Note: this method does not verify that the detection filter exists.
