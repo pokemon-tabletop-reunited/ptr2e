@@ -10,31 +10,30 @@
         "name": "Sky Fall",
         "type": "attack",
         "traits": [
-          "dash",
-          "pass-3",
-          "pp-updated"
+          "pp-updated",
+          "wind"
         ],
         "range": {
           "target": "creature",
-          "distance": 1,
+          "distance": 10,
           "unit": "m"
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 7
+          "powerPoints": 5
         },
-        "category": "physical",
+        "category": "special",
         "power": 85,
-        "accuracy": 95,
+        "accuracy": 100,
         "types": [
           "flying"
         ],
         "description": "<p>Effect: On hit, all valid targets have a 30% chance of gaining @Affliction[paralysis] 5.</p>",
-        "img": "icons/svg/explosion.svg",
+        "img": "systems/ptr2e/img/svg/flying_icon.svg",
         "predicate": []
       }
     ],
-    "grade": "A",
+    "grade": "B",
     "traits": [],
     "_migration": {
       "version": null,
@@ -44,7 +43,8 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
+      ],
+      "notes": ""
     }
   },
   "_id": "e1PMYoHlbRDJtC3v",
@@ -65,7 +65,9 @@
             "affects": "target",
             "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "alterations": [],
+            "dontMerge": false
           }
         ],
         "slug": null,
@@ -94,12 +96,13 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.342",
         "systemId": "ptr2e",
         "systemVersion": "0.10.0-alpha.5.1.5",
         "createdTime": 1737321069687,
         "modifiedTime": 1737321095577,
-        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+        "lastModifiedBy": "mK35yvCqCgiTUvKf",
+        "exportSource": null
       }
     }
   ]
