@@ -43,7 +43,8 @@
       "fighting",
       "psychic",
       "teleporter",
-      "bladed"
+      "bladed",
+      "jump-3"
     ],
     "abilities": {
       "starting": [
@@ -856,11 +857,9 @@
               "operand": "and"
             }
           ],
-          "details": {
-            "gender": null,
-            "item": null,
-            "level": null,
-            "knownMove": null
+          "perk": {
+            "x": 26,
+            "y": 26
           },
           "evolutions": [
             {
@@ -884,19 +883,22 @@
                   "operand": "or"
                 }
               ],
-              "details": {
-                "gender": null,
-                "item": null,
-                "level": null,
-                "knownMove": null
+              "perk": {
+                "x": 26,
+                "y": 26
               },
-              "evolutions": []
+              "details": null
             }
-          ]
+          ],
+          "details": null
         }
       ],
       "uuid": "Compendium.ptr2e.core-species.Item.uwQ2qQceyYUneOVT",
-      "methods": []
+      "methods": [],
+      "perk": {
+        "x": 26,
+        "y": 26
+      }
     },
     "_migration": {
       "version": null,
@@ -906,7 +908,13 @@
       "city"
     ],
     "slug": "gallade",
-    "genderRatio": -1
+    "publication": {
+      "source": "PTR 2e Core - Sinnoh Dex",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    }
   },
   "_id": "IrEX1Wq0tB8K0aWm",
   "effects": [
@@ -1001,13 +1009,19 @@
             ],
             "key": "",
             "value": "Compendium.ptr2e.core-abilities.Item.SaEKwKaz49q3qV4M",
+            "allowDuplicate": false,
+            "reevaluateOnUpdate": true,
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "system.free",
+                "value": "true"
+              }
+            ],
             "mode": 2,
             "priority": null,
             "ignored": false,
-            "reevaluateOnUpdate": false,
             "inMemoryOnly": false,
-            "allowDuplicate": true,
-            "alterations": [],
             "track": false,
             "replaceSelf": false,
             "onDeleteActions": {
@@ -1154,12 +1168,13 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.342",
         "systemId": "ptr2e",
-        "systemVersion": "0.10.0-alpha.5.0",
+        "systemVersion": "1.1.1.beta",
         "createdTime": 1735651940389,
-        "modifiedTime": 1735653883406,
-        "lastModifiedBy": "IcBpMqhFuTck9VpX"
+        "modifiedTime": 1742047969494,
+        "lastModifiedBy": "Kc3DOunCh3ClAeHS",
+        "exportSource": null
       }
     }
   ]
