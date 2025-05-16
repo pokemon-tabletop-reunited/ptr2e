@@ -232,7 +232,7 @@ export const PTRCONFIG = {
       label: "PTR2E.TokenMovement.Actions.Flight",
       icon: "fa-solid fa-fw fa-dove",
       canSelect: (token) => token?.actor?.hasMovementType("flight") ?? false,
-      getAnimationOptions: () => ({movementSpeed: 9}),
+      getAnimationOptions: () => ({movementSpeed: 8, easing: "easeInCircle"}),
       order: 4
     },
     threaded: {
@@ -246,7 +246,7 @@ export const PTRCONFIG = {
       icon: "fa-solid fa-fw fa-transporter",
       canSelect: (token) => token?.actor?.hasMovementType("teleport") ?? false,
       teleport: true,
-      getAnimationOptions: () => ({movementSpeed: 12}),
+      getAnimationOptions: () => ({movementSpeed: 10, easing: "easeOutCircle"}),
       order: 6
     },
     free: {

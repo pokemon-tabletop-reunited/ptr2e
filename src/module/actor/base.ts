@@ -492,6 +492,11 @@ class ActorPTR2e<
       }
     }
 
+    // Add movement based roll options
+    for(const key in this.system.movement) {
+      this.rollOptions.addOption("self", `movement:${key}`);
+    }
+
     // Create Fling Action
     this.generateFlingAttack();
   }

@@ -9,7 +9,7 @@ import SkillPTR2e from "@module/data/models/skill.ts";
 import { TypeEffectiveness } from "@scripts/config/effectiveness.ts";
 import { Nature } from "@scripts/config/natures.ts";
 
-interface Movement { method: string; value: number; available: number; type: "primary" | "secondary" }
+interface Movement { method: string; value: number; available: number; }
 
 interface ActorSystemSchema extends TraitsSchema, MigrationSchema, foundry.data.fields.DataSchema {
   species: foundry.data.fields.SchemaField<SpeciesSchema, SourceFromSchema<SpeciesSchema>, SpeciesSystem, false, true, true>;

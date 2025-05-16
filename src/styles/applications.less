@@ -272,7 +272,7 @@
       }
     }
     
-    .dex-sheet {
+    &.dex-sheet {
       .window-content {
         padding: 0;
     
@@ -8514,16 +8514,18 @@
             align-items: center;
             justify-content: start;
             padding-left: 0;
+            height: 26px;
+            flex: 1;
   
             img {
-              border: 1px solid #444;
-              height: 32px;
-              margin-right: 0.5em;
+              height: 26px;
+              border-radius: 3px 0 0 3px;
+              margin-right: 0.25rem;
             }
           }
         }
   
-        .choice-buttons {
+        .choice-buttons, .drop-zone.with-image {
           align-items: center;
           display: flex;
           flex-direction: column;
@@ -8536,6 +8538,7 @@
             width: 100%;
             min-width: 170px;
             place-content: center;
+            padding: 0 0.5rem;
   
             &.select {
               margin-bottom: 0.5rem;
@@ -8573,16 +8576,22 @@
           font-size: var(--font-size-14);
           line-height: 1.75rem;
           padding: var(--space-1) var(--space-6);
+          margin-top: 0.5rem;
+          padding: 0 0.5rem;
+
+          .choice {
+            border: 1px dashed var(--border-theme-color);
+          }
   
           i {
             align-items: center;
             border: 1px solid var(--color-text-light-4);
             border-radius: 2px;
             display: flex;
-            height: 1.6em;
             justify-content: center;
-            margin-right: 0.5em;
-            width: 1.6em;
+            margin-right: 0.25rem;
+            height: 26px;
+            width: 26px;
   
             &:after {
               font-size: var(--font-size-20);
@@ -8946,7 +8955,7 @@ footer#ui-bottom {
 
   #action-bar {
     --columns: 5;
-    --action-bar-width: calc(var(--hotbar-width)*var(--columns) + (8px * (var(--columns) - 1)))
+    --action-bar-width: calc(var(--hotbar-width)*var(--columns) + (8px * (var(--columns) - 1)));
     width: var(--action-bar-width);
     flex-direction: column;
     position: relative;

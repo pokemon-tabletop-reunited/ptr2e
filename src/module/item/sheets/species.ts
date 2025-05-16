@@ -119,41 +119,31 @@ export default class SpeciesSheet extends ItemSheetPTR2e<SpeciesPTR2e["system"]>
           const action = element.dataset.action;
           switch (action) {
             case "add": {
-              const { field, subField } = element.dataset;
+              const { field } = element.dataset;
 
               if (field === "movement") {
                 const movementArr = fu.deepClone(
-                  document.system.movement[
-                  subField as keyof typeof document.system.movement
-                  ]
+                  document.system.movement
                 ) as { type: string; value: number }[];
                 movementArr.push({ type: "", value: 0 });
                 document.update({
                   system: {
-                    movement: {
-                      [subField as keyof typeof document.system.movement]:
-                        movementArr,
-                    },
+                    movement: movementArr
                   },
                 });
               }
               break;
             }
             case "delete": {
-              const { field, subField, index } = element.dataset;
-              if (field === "movement" && subField && index) {
+              const { field, index } = element.dataset;
+              if (field === "movement" && index) {
                 const movementArr = fu.deepClone(
-                  document.system.movement[
-                  subField as keyof typeof document.system.movement
-                  ]
+                  document.system.movement
                 ) as { type: string; value: number }[];
                 movementArr.splice(parseInt(index ?? ""), 1);
                 document.update({
                   system: {
-                    movement: {
-                      [subField as keyof typeof document.system.movement]:
-                        movementArr,
-                    },
+                    movement: movementArr,
                   },
                 });
               }
