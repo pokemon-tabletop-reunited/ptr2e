@@ -16,7 +16,7 @@
         "type": "attack",
         "cost": {
           "activation": "free",
-          "powerPoints": 6,
+          "powerPoints": 4,
           "trigger": "The user enters Combat."
         },
         "range": {
@@ -33,7 +33,7 @@
       }
     ],
     "slug": "skirmish",
-    "description": "<p>Upon entering combat, as a Free Action at [Interrupt 2], you may spend 2 PP advance their Initiative by 50%.</p>",
+    "description": "<p>Upon entering combat, as a Free Action at [Interrupt 2], you may spend 4 PP advance their Initiative by 50%.</p>",
     "traits": [],
     "prerequisites": [],
     "cost": 2,
@@ -43,6 +43,10 @@
     },
     "nodes": [
       {
+        "x": 65,
+        "y": 177,
+        "hidden": false,
+        "type": "normal",
         "connected": [
           "quick-and-the-dead",
           "stat-iv-booster-1-7",
@@ -50,18 +54,14 @@
           "mightyena-tactic"
         ],
         "config": {
+          "texture": "systems/ptr2e/img/perk-icons/Ninja.svg",
           "alpha": null,
-          "backgroundColor": "#ff0000",
+          "backgroundColor": null,
           "borderColor": null,
           "borderWidth": null,
-          "texture": "systems/ptr2e/img/perk-icons/Ninja.svg",
           "tint": null,
           "scale": null
         },
-        "hidden": false,
-        "type": "normal",
-        "x": 65,
-        "y": 177,
         "tier": null
       }
     ],
@@ -111,7 +111,8 @@
             "label": "Skirmish",
             "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "dontMerge": false
           },
           {
             "type": "roll-note",

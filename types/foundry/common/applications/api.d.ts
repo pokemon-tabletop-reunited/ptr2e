@@ -77,7 +77,7 @@ type ApplicationHeaderControlsEntry = {
     /** The action name triggered by clicking the control button */
     action: string;
     /** Is the control button visible for the current client? */
-    visible: boolean;
+    visible?: boolean;
 };
 
 type ApplicationConstructorParams = {
@@ -124,7 +124,7 @@ type ApplicationClosingOptions = {
     closeKey: boolean;
 };
 
-type ApplicationClickAction = (event: PointerEvent, target: HTMLElement, element?: HTMLElement) => any;
+type ApplicationClickAction = (event: PointerEvent, target: HTMLElement, element?: ApplicationV2) => any;
 
 export class ApplicationV2<
     TConfiguration extends ApplicationConfiguration = ApplicationConfiguration,
@@ -148,7 +148,7 @@ export class ApplicationV2<
      * The default configuration options which are assigned to every instance of this Application class.
      * @type {Omit<ApplicationConfiguration, uniqueId>}
      */
-    static DEFAULT_OPTIONS: Omit<ApplicationConfiguration, "uniqueId">;
+    static DEFAULT_OPTIONS: Omit<DeepPartial<ApplicationConfiguration>, "uniqueId">;
 
     /**
      * The sequence of rendering states that describe the Application life-cycle.
@@ -736,6 +736,35 @@ export class ApplicationV2<
      * @internal
      */
     _awaitTransition(element: HTMLElement, timeout: number): Promise<void>;
+
+    /**
+     * Create a ContextMenu instance used in this Application.
+     * @param {() => ContextMenuEntry[]} handler  A handler function that provides initial context options
+     * @param {string} selector                   A CSS selector to which the ContextMenu will be bound
+     * @param {object} [options]                  Additional options which affect ContextMenu construction
+     * @param {HTMLElement} [options.container]   A parent HTMLElement which contains the selector target
+     * @param {string} [options.hookName]         The hook name
+     * @param {boolean} [options.parentClassHooks=true]  Whether to call hooks for the parent classes in the inheritance
+     *                                                   chain.
+     * @returns {ContextMenu|null}                A created ContextMenu or null if no menu items were defined
+     * @protected
+     */
+    _createContextMenu(
+        handler: () => ContextMenuEntry[],
+        selector: string,
+        options?: {
+          container?: HTMLElement;
+          hookName?: string;
+          parentClassHooks?: boolean;
+        } & Record<string, unknown>
+    ): ContextMenu | null;
+
+    /**
+     * Wait for any images in the given element to load.
+     * @param {HTMLElement} element  The element.
+     * @returns {Promise<void>}
+     */
+    static waitForImages(element: HTMLElement): Promise<void>;
 }
 
 type AppV2Constructor<
@@ -786,7 +815,7 @@ export class DocumentSheetV2<
     TConfiguration extends DocumentSheetConfiguration = DocumentSheetConfiguration,
 > extends ApplicationV2<TConfiguration, TRenderOptions> {
     /** @inheritdoc */
-    static override DEFAULT_OPTIONS: Omit<DocumentSheetConfiguration, "uniqueId">;
+    static override DEFAULT_OPTIONS: Omit<DeepPartial<DocumentSheetConfiguration>, "uniqueId">;
 
     get document(): TDocument;
     #document: TDocument;
@@ -845,7 +874,7 @@ export * from "./handlebars-application.ts";
 type DialogV2Configuration = {
     buttons?: DialogV2Button[];
     ok?: DialogV2Button;
-    content: string;
+    content: string | HTMLElement;
     submit: (...args: any[]) => Promise<void>;
     rejectClose?: boolean;
 } & ApplicationConfiguration;

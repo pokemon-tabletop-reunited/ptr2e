@@ -5,13 +5,9 @@ import SummonActiveEffectSystem from "@module/effects/data/summon.ts";
 import { ActiveEffectSchema } from "types/foundry/common/documents/active-effect.js";
 
 export default class SummonSheet extends ItemSheetPTR2e<SummonPTR2e["system"]> {
-  static override DEFAULT_OPTIONS = fu.mergeObject(
-    super.DEFAULT_OPTIONS,
-    {
-      classes: ["summon-sheet"],
-    },
-    { inplace: false }
-  );
+  static override DEFAULT_OPTIONS = {
+    classes: ["summon-sheet"],
+  }
 
   static override readonly overviewTemplate = "systems/ptr2e/templates/items/summon/summon-overview.hbs";
   static override readonly detailsTemplate = "systems/ptr2e/templates/items/summon/summon-details.hbs";

@@ -263,38 +263,17 @@ class CombatPTR2e extends Combat<CombatSystemPTR2e> {
     );
   }
 
-  /**
-   * Exact copy of the original method, but with the call to this.update removed, as turns shouldn't advance.
-   */
-  protected override async _manageTurnEvents(): Promise<void> {
-    if (!game.users.activeGM?.isSelf) return;
+  /** Do not clear movement history on start of turn ever. */
+  protected override _clearMovementHistoryOnStartTurn() {
+    return Promise.resolve();
+  }
 
-    // Adjust the turn order before proceeding. Used for embedded document workflows
-    //if (Number.isNumeric(adjustedTurn)) await this.update({ turn: adjustedTurn }, { turnEvents: false });
-    if (!this.started) return;
+  protected override async _onEndRound(context: Record<string, unknown>): Promise<void> {
+    await super._onEndRound(context);
 
-    // Identify what progressed
-    const advanceRound = this.current.round! > (this.previous.round ?? -1);
-    const advanceTurn = this.current.turn! > (this.previous.turn ?? -1);
-    const changeCombatant = this.current.combatantId !== this.previous.combatantId;
-    if (!(advanceTurn || advanceRound || changeCombatant)) return;
+    await this.clearMovementHistories();
 
-    // Conclude the prior Combatant turn
-    const prior = this.combatants.get(this.previous.combatantId!);
-    if ((advanceTurn || changeCombatant) && prior) await this._onEndTurn(prior);
-
-    // Conclude the prior round
-    if (advanceRound && this.previous.round !== null) await this._onEndRound();
-
-    // Begin the new round
-    if (advanceRound) await this._onStartRound();
-
-    // Begin a new Combatant turn
-    const next = this.combatant;
-    if ((advanceTurn || changeCombatant) && next)
-      await this._onStartTurn(
-        this.combatant as CombatantPTR2e<this, TokenDocumentPTR2e | null>
-      );
+    this.updateCombatantActors();
   }
 
   /**

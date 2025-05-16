@@ -51,7 +51,7 @@ abstract class DamageAppliedMessageSystem extends foundry.abstract.TypeDataModel
   }
 
   async getHTMLContent() {
-    return renderTemplate('systems/ptr2e/templates/chat/damage-applied.hbs', this);
+    return foundry.applications.handlebars.renderTemplate('systems/ptr2e/templates/chat/damage-applied.hbs', this);
   }
 
   async undoDamage() {

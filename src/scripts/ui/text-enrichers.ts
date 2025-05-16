@@ -4,8 +4,8 @@
 import { ActiveEffectPTR2e } from "@effects";
 export class TextEnricher {
   static init() {
-    const original = TextEditor.activateListeners.bind(TextEditor);
-    TextEditor.activateListeners = function () {
+    const original = foundry.applications.ux.TextEditor.activateListeners.bind(foundry.applications.ux.TextEditor);
+    foundry.applications.ux.TextEditor.activateListeners = function () {
       original();
 
       const body = $("body");
@@ -75,7 +75,7 @@ export class TextEnricher {
     span.dataset.tooltip = affliction.id;
     span.append((() => {
       const name = label || (game.i18n.localize(affliction.name) + (amount ? ` ${amount}` : ""));
-      return TextEditor.createAnchor({
+      return foundry.applications.ux.TextEditor.createAnchor({
         classes: ["content-link"],
         attrs: { draggable: true as unknown as string },
         name,
@@ -112,7 +112,7 @@ export class TextEnricher {
         : `${amount} Tick${biggerThanOne ? "s" : ""} of ${isDamage ? "Damage" : "Healing"}`;
     span.append((() => {
       const name = label || `${amount} Tick${biggerThanOne ? "s" : ""}`;
-      return TextEditor.createAnchor({
+      return foundry.applications.ux.TextEditor.createAnchor({
         classes: ["content-link"],
         attrs: { draggable: true as unknown as string },
         name,

@@ -90,7 +90,7 @@ class ChangeModel<TSchema extends ChangeSchema = ChangeSchema> extends foundry.a
         required: true,
         blank: false,
         initial: this.TYPE,
-        choices: ChangeModelTypes,
+        choices: Object.entries(ChangeModelTypes() as Record<string, {label: string}>).reduce((acc, [k, v]: [string, {label: string}]) => ({...acc, [k]: v.label}), {}),
         validate: (value) => value === this.TYPE,
         validationError: `must be equal to "${this.TYPE}"`,
         label: "PTR2E.Effect.FIELDS.ChangeType.label",

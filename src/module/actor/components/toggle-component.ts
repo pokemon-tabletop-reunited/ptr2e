@@ -8,7 +8,7 @@ class ToggleComponent extends ActorComponent {
 
     override renderComponent(data: Record<string, unknown>): Promise<string> {
         data.toggles = this.actor.synthetics.toggles;
-        return renderTemplate(this.template, data);
+        return foundry.applications.handlebars.renderTemplate(this.template, data);
     }
 
     override attachListeners(htmlElement: HTMLElement) {
