@@ -607,13 +607,12 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
     }
 
     this.movement = Object.fromEntries([
-      ...this.parent.species.movement.primary.map<(readonly [string, Movement])>(m => [m.type, { method: m.type, value: m.value, available: m.value, type: "primary" }]),
-      ...this.parent.species.movement.secondary.map<(readonly [string, Movement])>(m => [m.type, { method: m.type, value: m.value, available: m.value, type: "secondary" }])
+      ...this.parent.species.movement.map<(readonly [string, Movement])>(m => [m.type, { method: m.type, value: m.value, available: m.value }])
     ]);
 
     // Every creature has a base overland of 3 at least.
     if ((Number(this.movement["overland"]?.value) || 0) <= 3) {
-      this.movement["overland"] = { method: "overland", value: 3, available: 3, type: "secondary" };
+      this.movement["overland"] = { method: "overland", value: 3, available: 3};
     }
   }
 
