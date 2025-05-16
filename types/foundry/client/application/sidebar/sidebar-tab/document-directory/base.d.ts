@@ -134,7 +134,7 @@ declare global {
          * @param {PointerEvent} event    The originating button click event
          * @protected
          */
-        protected _onCreateFolder(event: PointerEvent): void;
+        protected _onCreateFolder(event: PointerEvent, target: HTMLElement): void;
     }
 
     interface SidebarDirectoryOptions extends ApplicationOptions {

@@ -142,7 +142,7 @@ async function importFromJSON<T>({name, type}: {name: string, type: string}): Pr
     systemVersion: string;
   };
 }>> {
-  const content = await renderTemplate("templates/apps/import-data.html", {
+  const content = await foundry.applications.handlebars.renderTemplate("templates/apps/import-data.html", {
     hint1: game.i18n.format("DOCUMENT.ImportDataHint1", {document: type}),
     hint2: game.i18n.format("DOCUMENT.ImportDataHint2", {name: Handlebars.Utils.escapeExpression(name)})
   });
@@ -255,7 +255,7 @@ function setHasElement<T extends Set<unknown>>(set: T, value: unknown): value is
 
 /** Does the parameter look like an image file path? */
 function isImageFilePath(path: unknown): path is ImageFilePath {
-  return typeof path === "string" && ImageHelper.hasImageExtension(path);
+  return typeof path === "string" && foundry.helpers.media.ImageHelper.hasImageExtension(path);
 }
 
 /** Does the parameter look like a video file path? */
@@ -264,7 +264,7 @@ function isVideoFilePath(path: unknown): path is ImageFilePath {
 }
 
 function isImageOrVideoPath(path: unknown): path is ImageFilePath | VideoFilePath {
-  return typeof path === "string" && (ImageHelper.hasImageExtension(path) || VideoHelper.hasVideoExtension(path));
+  return typeof path === "string" && (foundry.helpers.media.ImageHelper.hasImageExtension(path) || VideoHelper.hasVideoExtension(path));
 }
 
 /** Create a localization function with a prefixed localization object path */

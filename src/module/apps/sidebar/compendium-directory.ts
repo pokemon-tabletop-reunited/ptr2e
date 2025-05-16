@@ -1,19 +1,29 @@
-/** TODO: Extend CompendiumDirectory to support a search bar */
-export class CompendiumDirectoryPTR2e extends CompendiumDirectory {
+export class CompendiumDirectoryPTR2e extends foundry.applications.sidebar.tabs.CompendiumDirectory {
   static readonly STOP_WORDS = new Set(["of", "th", "the"])
 
-  static override get defaultOptions() {
-    return {
-      ...super.defaultOptions,
-      template: "systems/ptr2e/templates/sidebar/compendium-directory.hbs",
+  static DEFAULT_OPTIONS = {
+    actions: {
+      "openCompendiumBrowser": () => game.ptr.compendiumBrowser.render({ force: true })
     }
   }
 
-  override activateListeners(html: JQuery): void {
-    super.activateListeners(html)
+  async _preparePartContext(partId: string, context: foundry.applications.api.ApplicationRenderContext, options: foundry.applications.api.HandlebarsRenderOptions) {
+    //@ts-expect-error - Missing types for this function
+    super._preparePartContext(partId, context, options);
 
-    html[0].querySelector("footer > button")?.addEventListener("click", () => {
-      game.ptr.compendiumBrowser.render(true);
-    });
+    if (partId === "footer") await this._prepareFooterContext(context);
+    return context;
+  }
+
+  async _prepareFooterContext(context: foundry.applications.api.ApplicationRenderContext) {
+    context.buttons ??= [];
+    //@ts-expect-error - Untyped property
+    context.buttons.push({
+      type: "button",
+      cssClass: "compendium-browser-btn",
+      icon: "fa-solid fa-magnifying-glass",
+      label: game.i18n.localize("PTR2E.CompendiumBrowser.Title"),
+      action: "openCompendiumBrowser",
+    })
   }
 }

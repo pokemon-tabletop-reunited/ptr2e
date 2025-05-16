@@ -3,62 +3,57 @@ import { ActionPTR2e } from "@data";
 import { ItemPTR2e, ItemSystemPTR } from "@item";
 import { DocumentSheetV2 } from "@item/sheets/document.ts";
 import { isObject } from "@utils";
-import { ApplicationV2Expanded } from "./appv2-expanded.ts";
-import { HandlebarsRenderOptions } from "types/foundry/common/applications/handlebars-application.ts";
+import { ApplicationConfigurationExpanded, ApplicationV2Expanded } from "./appv2-expanded.ts";
 
 class GithubSheet extends foundry.applications.api.HandlebarsApplicationMixin(ApplicationV2Expanded) {
-  static override DEFAULT_OPTIONS = fu.mergeObject(
-    super.DEFAULT_OPTIONS,
-    {
-      id: "github-commit-manager",
-      tag: "form",
-      classes: ["sheet", "github-commit-manager", "default-sheet"],
-      position: {
-        width: 565,
-      },
-      window: {
-        title: "Github Commit Manager",
-        minimizable: true,
-        resizable: true,
-      },
-      actions: {
-        finalize: async function (this: GithubSheet) {
-          ui.notifications.info("Finalizing commit to Github");
-
-          const commitMessage = this.element.querySelector<HTMLTextAreaElement>("[name='commit-message']")?.value;
-          const prTitle = this.element.querySelector<HTMLInputElement>("[name='pr-title']")?.value;
-
-          const result = await GithubManager.finalizeCommitToGithub({ message: commitMessage, title: prTitle });
-          if (result.success) {
-            ui.notifications.info("Successfully finalized commit to Github");
-          }
-          this.close();
-        },
-        cancel: async function (this: GithubSheet) {
-          if (this.ongoing) {
-            ui.notifications.info("Cancelling commit to Github");
-            await GithubManager.finalizeCommitToGithub({ deletePR: true });
-          }
-          this.close();
-        },
-        delete: async function (this: GithubSheet, event: MouseEvent) {
-          if (!this.ongoing) return;
-
-          const button = event.target as HTMLButtonElement;
-          const path = button.dataset.path;
-          if (!path) return;
-          button.disabled = true;
-
-          const result = await GithubManager.finalizeCommitToGithub({ deletePR: path });
-          if (result.success) {
-            ui.notifications.info("Successfully deleted entry");
-          }
-          return this.render(true);
-        },
-      }
+  static override DEFAULT_OPTIONS = {
+    id: "github-commit-manager",
+    tag: "form",
+    classes: ["sheet", "ptr2e", "github-commit-manager", "default-sheet", "standard-form"],
+    position: {
+      width: 565,
     },
-    { inplace: false }
-  );
+    window: {
+      title: "Github Commit Manager",
+      minimizable: true,
+      resizable: true,
+    },
+    actions: {
+      finalize: async function (this: GithubSheet) {
+        ui.notifications.info("Finalizing commit to Github");
+
+        const commitMessage = this.element.querySelector<HTMLTextAreaElement>("[name='commit-message']")?.value;
+        const prTitle = this.element.querySelector<HTMLInputElement>("[name='pr-title']")?.value;
+
+        const result = await GithubManager.finalizeCommitToGithub({ message: commitMessage, title: prTitle });
+        if (result.success) {
+          ui.notifications.info("Successfully finalized commit to Github");
+        }
+        this.close();
+      },
+      cancel: async function (this: GithubSheet) {
+        if (this.ongoing) {
+          ui.notifications.info("Cancelling commit to Github");
+          await GithubManager.finalizeCommitToGithub({ deletePR: true });
+        }
+        this.close();
+      },
+      delete: async function (this: GithubSheet, event: MouseEvent) {
+        if (!this.ongoing) return;
+
+        const button = event.target as HTMLButtonElement;
+        const path = button.dataset.path;
+        if (!path) return;
+        button.disabled = true;
+
+        const result = await GithubManager.finalizeCommitToGithub({ deletePR: path });
+        if (result.success) {
+          ui.notifications.info("Successfully deleted entry");
+        }
+        return this.render(true);
+      },
+    }
+  } as unknown as Omit<DeepPartial<ApplicationConfigurationExpanded>, "uniqueId">;
 
   static override PARTS: Record<string, foundry.applications.api.HandlebarsTemplatePart> = {
     main: {
@@ -70,7 +65,7 @@ class GithubSheet extends foundry.applications.api.HandlebarsApplicationMixin(Ap
 
   ongoing = false;
 
-  override async _prepareContext(options?: HandlebarsRenderOptions | undefined) {
+  override async _prepareContext(options?: foundry.applications.api.HandlebarsRenderOptions | undefined) {
     const context = await super._prepareContext(options);
 
     const status = await GithubManager.getCommitStatus();
@@ -103,7 +98,7 @@ class GithubManager {
     pack: CompendiumCollection<ItemPTR2e<ItemSystemPTR, null>>
   ) {
     const existing = await (async () => {
-      const sourceId = item.flags?.core?.sourceId;
+      const sourceId = item.flags?.core?.sourceId || item._stats?.compendiumSource;
       if (sourceId) {
         const existing = await pack.getDocument(sourceId.split(".").at(-1)!);
         if (existing) return existing;
@@ -144,7 +139,7 @@ class GithubManager {
         Record<string, any>,
       ][]) {
         for (const [key, value] of Object.entries(action)) {
-          if(key === "slot") delete action[key];
+          if (key === "slot") delete action[key];
           if (value === null || value === undefined) {
             delete action[key];
           }
@@ -167,7 +162,7 @@ class GithubManager {
         delete diff.system.actions;
       }
     }
-    if(diff.system?.slot !== undefined && !isNaN(Number(diff.system.slot))) {
+    if (diff.system?.slot !== undefined && !isNaN(Number(diff.system.slot))) {
       delete diff.system.slot;
     }
     if (fu.isEmpty(diff.system)) {
@@ -411,8 +406,8 @@ class GithubManager {
           const reference = window.open(commitJson['auth_url'], identity, "popup=true");
           await new Promise((resolve, reject) => {
             function check(depth = 0) {
-              if(reference?.closed) resolve(true);
-              if(depth > 100) return void reject();
+              if (reference?.closed) resolve(true);
+              if (depth > 100) return void reject();
               setTimeout(() => check(depth + 1), 2500);
             }
             check();

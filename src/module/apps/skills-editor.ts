@@ -2,7 +2,6 @@ import { ActorPTR2e, Skill } from "@actor";
 import { SkillsComponent } from "@actor/components/skills-component.ts";
 import SkillPTR2e from "@module/data/models/skill.ts";
 import { htmlQueryAll } from "@utils";
-import { ApplicationRenderOptions } from "types/foundry/common/applications/api.js";
 
 
 type SkillBeingEdited = SkillPTR2e["_source"] & { label: string; investment: number; max: number; min: number, total: number };
@@ -10,37 +9,33 @@ type SkillBeingEdited = SkillPTR2e["_source"] & { label: string; investment: num
 export class SkillsEditor extends foundry.applications.api.HandlebarsApplicationMixin(
   foundry.applications.api.ApplicationV2
 ) {
-  static override DEFAULT_OPTIONS = fu.mergeObject(
-    super.DEFAULT_OPTIONS,
-    {
-      tag: "form",
-      classes: ["sheet skill-sheet"],
-      position: {
-        height: 'auto',
-        width: 550,
-      },
-      form: {
-        submitOnChange: false,
-        closeOnSubmit: true,
-        handler: SkillsEditor.#onSubmit,
-      },
-      window: {
-        minimizable: true,
-        resizable: false,
-      },
-      actions: {
-        "reset-skills": SkillsEditor.#onResetSkills,
-        "change-resources": SkillsEditor.#onChangeResources,
-        "change-luck": SkillsEditor.#onChangeLuck,
-        "roll-luck": SkillsEditor.#onRollLuck,
-        "toggle-sort": async function (this: SkillsEditor) {
-          this.sort = this.sort === "a" ? "v" : "a";
-          this.render({ parts: ["skills"] });
-        }
-      },
+  static override DEFAULT_OPTIONS = {
+    tag: "form",
+    classes: ["sheet skill-sheet"],
+    position: {
+      height: 'auto' as const,
+      width: 550,
     },
-    { inplace: false }
-  );
+    form: {
+      submitOnChange: false,
+      closeOnSubmit: true,
+      handler: SkillsEditor.#onSubmit,
+    },
+    window: {
+      minimizable: true,
+      resizable: false,
+    },
+    actions: {
+      "reset-skills": SkillsEditor.#onResetSkills,
+      "change-resources": SkillsEditor.#onChangeResources,
+      "change-luck": SkillsEditor.#onChangeLuck,
+      "roll-luck": SkillsEditor.#onRollLuck,
+      "toggle-sort": async function (this: SkillsEditor) {
+        this.sort = this.sort === "a" ? "v" : "a";
+        this.render({ parts: ["skills"] });
+      }
+    },
+  };
 
   static override PARTS: Record<string, foundry.applications.api.HandlebarsTemplatePart> = {
     skills: {
@@ -66,7 +61,7 @@ export class SkillsEditor extends foundry.applications.api.HandlebarsApplication
     super(options);
     this.document = document;
     this.skills = this.resetSkills();
-    this.filter = new SearchFilter({
+    this.filter = new foundry.applications.ux.SearchFilter({
       inputSelector: "input[name='filter']",
       contentSelector: "fieldset.skills .scroll",
       callback: this._onSearchFilter.bind(this),
@@ -134,10 +129,10 @@ export class SkillsEditor extends foundry.applications.api.HandlebarsApplication
       ...s,
       max: Math.max(s.min, Math.min(s.max, s.investment + points.available!)),
     })).sort((a, b) => {
-      if(a.slug === "luck") return -1;
-      if(b.slug === "luck") return 1;
-      if(a.slug === "resources") return -1;
-      if(b.slug === "resources") return 1;
+      if (a.slug === "luck") return -1;
+      if (b.slug === "luck") return 1;
+      if (a.slug === "resources") return -1;
+      if (b.slug === "resources") return 1;
       function alphaSort(a: SkillBeingEdited, b: SkillBeingEdited) {
         if (a.group === b.group) return a.label.localeCompare(b.label);
         if (!a.group) return -1;
@@ -172,7 +167,7 @@ export class SkillsEditor extends foundry.applications.api.HandlebarsApplication
     };
   }
 
-  override async render(options: boolean | ApplicationRenderOptions, _options?: ApplicationRenderOptions): Promise<this> {
+  override async render(options: boolean | foundry.applications.api.ApplicationRenderOptions, _options?: foundry.applications.api.ApplicationRenderOptions): Promise<this> {
     const scrollTop = this.element?.querySelector(".scroll")?.scrollTop;
     const renderResult = await super.render(options, _options);
     // set the scroll location
@@ -218,7 +213,7 @@ export class SkillsEditor extends foundry.applications.api.HandlebarsApplication
         continue;
       }
       const { slug, group } = entry.dataset;
-      const match = (slug && rgx.test(SearchFilter.cleanQuery(slug))) || (group && rgx.test(SearchFilter.cleanQuery(group)));
+      const match = (slug && rgx.test(foundry.applications.ux.SearchFilter.cleanQuery(slug))) || (group && rgx.test(foundry.applications.ux.SearchFilter.cleanQuery(group)));
       entry.classList.toggle("hidden", !match);
     }
   }
@@ -269,10 +264,15 @@ export class SkillsEditor extends foundry.applications.api.HandlebarsApplication
           name: document.name,
         }),
       },
-      content: game.i18n.format("PTR2E.SkillsEditor.ChangeResources.content", {
-        name: document.name,
-        value: resources.total,
-      }),
+      content: (() => {
+        const htmlString = game.i18n.format("PTR2E.SkillsEditor.ChangeResources.content", {
+          name: document.name,
+          value: resources.total,
+        });
+        const html = globalThis.document.createElement("div");
+        html.innerHTML = htmlString;
+        return html;
+      })(),
       ok: {
         action: "submit",
         label: game.i18n.localize("PTR2E.SkillsEditor.ChangeResources.submit"),
@@ -324,10 +324,15 @@ export class SkillsEditor extends foundry.applications.api.HandlebarsApplication
           name: document.name,
         }),
       },
-      content: game.i18n.format("PTR2E.SkillsEditor.ChangeLuck.content", {
-        name: document.name,
-        value: luck.total,
-      }),
+      content: (() => {
+        const htmlString = game.i18n.format("PTR2E.SkillsEditor.ChangeLuck.content", {
+          name: document.name,
+          value: luck.total,
+        });
+        const html = globalThis.document.createElement("div");
+        html.innerHTML = htmlString;
+        return html;
+      })(),
       ok: {
         action: "submit",
         label: game.i18n.localize("PTR2E.SkillsEditor.ChangeLuck.submit"),
@@ -418,9 +423,14 @@ export class SkillsEditor extends foundry.applications.api.HandlebarsApplication
           name: document.name,
         }),
       },
-      content: game.i18n.format("PTR2E.SkillsEditor.RollLuck.content", {
-        name: document.name,
-      }),
+      content: (() => {
+        const htmlString = game.i18n.format("PTR2E.SkillsEditor.RollLuck.content", {
+          name: document.name,
+        })
+        const html = globalThis.document.createElement("div");
+        html.innerHTML = htmlString;
+        return html;
+      })(),
       yes: {
         callback: rollAndApplyLuck.bind(this, true),
       },

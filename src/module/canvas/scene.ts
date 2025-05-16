@@ -1,3 +1,4 @@
+import { BaseGrid } from "types/foundry/common/grid/base.js";
 import { SquareGridPTR2e } from "./grid.ts";
 import { checkAuras } from "./helpers.ts";
 import { TokenDocumentPTR2e } from "./token/document.ts";
@@ -41,7 +42,6 @@ export class ScenePTR2e extends Scene {
 
   static #getGrid(scene: Scene): BaseGrid | null {
     const grid = scene.grid;
-    //@ts-expect-error - Foundry types are incomplete
     if (grid instanceof foundry.grid.GridlessGrid) return grid;
 
     const T = CONST.GRID_TYPES;
