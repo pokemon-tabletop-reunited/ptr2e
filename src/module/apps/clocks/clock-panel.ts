@@ -2,32 +2,30 @@ import Clock from "@module/data/models/clock.ts";
 import { HandlebarsRenderOptions } from "types/foundry/common/applications/handlebars-application.ts";
 import ClockEditor from "./clock-editor.ts";
 import Sortable from "sortablejs";
+import { Draggable } from "gsap/all";
+import { ApplicationRenderContext, ApplicationRenderOptions } from "types/foundry/common/applications/api.js";
 
 export default class ClockPanel extends foundry.applications.api.HandlebarsApplicationMixin(
   foundry.applications.api.ApplicationV2
 ) {
   public refresh = fu.debounce(this.render, 100);
 
-  static override DEFAULT_OPTIONS = fu.mergeObject(
-    super.DEFAULT_OPTIONS,
-    {
-      classes: ["clock-panel sheet"],
-      tag: "aside",
-      position: {
-        width: 300,
-        height: "auto",
-      },
-      window: {
-        minimizable: false,
-        frame: false,
-        positioned: false,
-      },
-      actions: {
-        "add-clock": ClockPanel.#onAddClock,
-      },
+  static override DEFAULT_OPTIONS = {
+    classes: ["clock-panel", "sheet", "faded-ui"],
+    tag: "aside",
+    position: {
+      width: 300,
+      height: "auto",
     },
-    { inplace: false }
-  );
+    window: {
+      minimizable: false,
+      frame: false,
+      positioned: false,
+    },
+    actions: {
+      "add-clock": ClockPanel.#onAddClock,
+    },
+  } as unknown as Omit<DeepPartial<foundry.applications.api.ApplicationConfiguration>, "uniqueId">;
 
   static override PARTS = {
     clocks: {
@@ -61,6 +59,23 @@ export default class ClockPanel extends foundry.applications.api.HandlebarsAppli
       clocks,
       editable: isGM,
     };
+  }
+
+  override _onFirstRender(context: ApplicationRenderContext, options: ApplicationRenderOptions): void {
+    super._onFirstRender(context, options);
+
+    const {x, y} = game.settings.get("ptr2e", "clocksPosition") as {x: number, y: number};
+    if(x !== null && y !== null) {
+      gsap.set("aside#ptr2e-clock-panel", {x, y});
+    }
+    
+    Draggable.create("aside#ptr2e-clock-panel", {
+      inertia: false,
+      bounds: "#interface",
+      onRelease: function() {
+        game.settings.set("ptr2e", "clocksPosition", {x: this.x, y: this.y});
+      }  
+    })
   }
 
   override _attachPartListeners(
@@ -116,6 +131,10 @@ export default class ClockPanel extends foundry.applications.api.HandlebarsAppli
             ?.getAttribute("data-id");
           const clock = this._getClock(id as string);
           if (!clock) return;
+
+          if ('shiftKey' in event && event.shiftKey) {
+            return await game.ptr.clocks.db.deleteClock(clock.id);
+          }
 
           return await foundry.applications.api.DialogV2.prompt({
             buttons: [

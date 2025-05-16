@@ -6,7 +6,7 @@
     "slug": "stored-power",
     "actions": [
       {
-        "slug": "stored-power",
+        "slug": "stored-pwr",
         "name": "Stored Power",
         "type": "attack",
         "traits": [
@@ -42,8 +42,10 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
-    }
+      ],
+      "notes": ""
+    },
+    "traits": []
   },
   "_id": "7Mhbg8HQUtPGaWSg",
   "effects": [
@@ -56,7 +58,7 @@
         "changes": [
           {
             "type": "flat-modifier",
-            "key": "stored-power-attack-power",
+            "key": "stored-pwr-attack-power",
             "value": "20 * (@actor.system.attributes.atk.stage+@actor.system.attributes.def.stage+@actor.system.attributes.spa.stage+@actor.system.attributes.spd.stage+@actor.system.attributes.spd.stage+@actor.system.battleStats.accuracy.stage+@actor.system.battleStats.evasion.stage+@actor.system.battleStats.critRate.stage)",
             "predicate": [],
             "label": "Stored Power",
@@ -94,10 +96,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "ptr2e",
-        "systemVersion": "1.0.6.beta",
+        "systemVersion": "1.2.1.beta",
         "createdTime": 1740188922597,
-        "modifiedTime": 1740188944278,
-        "lastModifiedBy": "UTlFSVhgfIUeTsoW"
+        "modifiedTime": 1745090631006,
+        "lastModifiedBy": "n5bBYe2ClImhFeB2"
       }
     }
   ]

@@ -29,6 +29,123 @@ export const ACTIVE_EFFECT_MODES: {
     OVERRIDE: 5;
 };
 
+export const REGION_EVENTS: {
+
+  /**
+   * Triggered when the shapes or bottom/top elevation of the Region are changed.
+   */
+  REGION_BOUNDARY: "regionBoundary",
+
+  /**
+   * Triggered when the Region Behavior becomes active, i.e. is enabled or created without being disabled.
+   *
+   * The event is triggered only for this Region Behavior.
+   */
+  BEHAVIOR_ACTIVATED: "behaviorActivated",
+
+  /**
+   * Triggered when the Region Behavior becomes inactive, i.e. is disabled or deleted without being disabled.
+   *
+   * The event is triggered only for this Region Behavior.
+   */
+  BEHAVIOR_DEACTIVATED: "behaviorDeactivated",
+
+  /**
+   * Triggered when the Region Behavior becomes viewed, i.e. active and the Scene of its Region is viewed.
+   *
+   * The event is triggered only for this Region Behavior.
+   */
+  BEHAVIOR_VIEWED: "behaviorViewed",
+
+  /**
+   * Triggered when the Region Behavior becomes unviewed, i.e. inactive or the Scene of its Region is unviewed.
+   *
+   * The event is triggered only for this Region Behavior.
+   */
+  BEHAVIOR_UNVIEWED: "behaviorUnviewed",
+
+  /**
+   * Triggered when a Token enters a Region.
+   *
+   * A Token enters a Region whenever ...
+   *   - it is created within the Region,
+   *   - the boundary of the Region has changed such that the Token is now inside the Region,
+   *   - the Token moves into the Region (the Token's x, y, elevation, width, height, or shape
+   *     has changed such that it is now inside the Region), or
+   *   - a Region Behavior becomes active (i.e., is enabled or created while enabled), in which case
+   *     the event it triggered only for this Region Behavior.
+   */
+  TOKEN_ENTER: "tokenEnter",
+
+  /**
+   * Triggered when a Token exits a Region.
+   *
+   * A Token exits a Region whenever ...
+   *   - it is deleted while inside the Region,
+   *   - the boundary of the Region has changed such that the Token is no longer inside the Region,
+   *   - the Token moves out of the Region (the Token's x, y, elevation, width, height, or shape
+   *     has changed such that it is no longer inside the Region), or
+   *   - a Region Behavior becomes inactive (i.e., is disabled or deleted while enabled), in which case
+   *     the event it triggered only for this Region Behavior.
+   */
+  TOKEN_EXIT: "tokenExit",
+
+  /**
+   * Triggered when a Token moves into a Region.
+   *
+   * A Token moves whenever its x, y, elevation, width, height, or shape is changed.
+   */
+  TOKEN_MOVE_IN: "tokenMoveIn",
+
+  /**
+   * Triggered when a Token moves out of a Region.
+   *
+   * A Token moves whenever its x, y, elevation, width, height, or shape is changed.
+   */
+  TOKEN_MOVE_OUT: "tokenMoveOut",
+
+  /**
+   * Triggered when a Token moves within a Region.
+   *
+   * A token moves whenever its x, y, elevation, width, height, or shape is changed.
+   */
+  TOKEN_MOVE_WITHIN: "tokenMoveWithin",
+
+  /**
+   * Triggered when a Token animates into a Region.
+   *
+   * This event is only triggered only if the Scene the Token is in is viewed.
+   */
+  TOKEN_ANIMATE_IN: "tokenAnimateIn",
+
+  /**
+   * Triggered when a Token animates out of a Region.
+   *
+   * This event is triggered only if the Scene the Token is in is viewed.
+   */
+  TOKEN_ANIMATE_OUT: "tokenAnimateOut",
+
+  /**
+   * Triggered when a Token starts its Combat turn in a Region.
+   */
+  TOKEN_TURN_START: "tokenTurnStart",
+
+  /**
+   * Triggered when a Token ends its Combat turn in a Region.
+   */
+  TOKEN_TURN_END: "tokenTurnEnd",
+
+  /**
+   * Triggered when a Token starts the Combat round in a Region.
+   */
+  TOKEN_ROUND_START: "tokenRoundStart",
+
+  /**
+   * Triggered when a Token ends the Combat round in a Region.
+   */
+  TOKEN_ROUND_END: "tokenRoundEnd"
+};
+
 /** Define the string name used for the base document type when specific sub-types are not defined by the system */
 export const BASE_DOCUMENT_TYPE: "base";
 

@@ -6,10 +6,10 @@ import { TypeMatrix } from "@module/apps/type-matrix/sheet.ts";
 export const GetSceneControlButtons: PTRHook = {
   listen: () => {
     Hooks.on('getSceneControlButtons', function (hudButtons) {
-      const hud = hudButtons.find(val => val.name == "token")
+      const hud = hudButtons["tokens"];
       if (hud) {
-        hud.tools.push({
-          name: "PTR2E.DistanceToTarget.Label",
+        hud.tools["distance-to-target"] = {
+          name: "distance-to-target",
           title: "PTR2E.DistanceToTarget.Hint",
           icon: "fas fa-ruler-combined",
           button: true,
@@ -40,22 +40,22 @@ export const GetSceneControlButtons: PTRHook = {
               whisper: [game.user.id]
             })
           },
-        })
+        }
 
-        hud.tools.push({
-          name: "PTR2E.ExpTracker.label",
+        hud.tools["exp-tracker"] = {
+          name: "exp-tracker",
           title: "PTR2E.ExpTracker.hint",
           icon: "fas fa-book",
           button: true,
           visible: true,
           onClick: () => {
-            if(!game.user.isGM) return ui.notifications.error("PTR2E.ExpTracker.NoPermission", { localize: true });
+            if (!game.user.isGM) return ui.notifications.error("PTR2E.ExpTracker.NoPermission", { localize: true });
             return new EXPTracker().render(true);
           }
-        })
+        }
 
-        hud.tools.push({
-          name: "PTR2E.TypeMatrix.Title",
+        hud.tools["type-matrix"] = {
+          name: "type-matrix",
           title: "PTR2E.TypeMatrix.Hint",
           icon: "fas fa-grid-4",
           button: true,
@@ -63,7 +63,7 @@ export const GetSceneControlButtons: PTRHook = {
           onClick: () => {
             return new TypeMatrix({ settings: false }).render(true);
           }
-        })
+        }
       }
     });
   },

@@ -17,7 +17,7 @@ class ActorComponent {
     }
 
     async renderComponent(data: Record<string, unknown>) {
-        const html = await renderTemplate(this.template, data);
+        const html = await foundry.applications.handlebars.renderTemplate(this.template, data);
         return html;
     }
 

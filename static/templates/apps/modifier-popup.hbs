@@ -57,7 +57,7 @@
       <select name="rollmode">
         {{#select rollMode}}
           {{#each rollModes as |label key|}}
-            <option value="{{key}}">{{localize label}}</option>
+            <option value="{{key}}">{{localize label.label}}</option>
           {{/each}}
         {{/select}}
       </select>

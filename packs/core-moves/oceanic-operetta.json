@@ -16,13 +16,12 @@
           "blast-4"
         ],
         "range": {
-          "target": "creature",
+          "target": "blast",
           "distance": 15,
           "unit": "m"
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 0,
           "trigger": "<p>User's partner uses Z-Pose! and triggers the appropriate Z-Power-Crystal.</p>"
         },
         "category": "special",
@@ -33,7 +32,7 @@
         ],
         "description": "<p>Trigger: User's partner uses Z-Pose! and triggers the appropriate Z-Power-Crystal.</p><p>Effect: After resolving this attack, the user increases its default SPATK and SPDEF by +1.</p><p>Requirement: [Primarina] Z-Power-Crystal as an Accessory Item and Sparkling Aria on the user's Active List.</p>",
         "free": true,
-        "img": "icons/svg/explosion.svg",
+        "img": "systems/ptr2e/img/svg/water_icon.svg",
         "predicate": []
       }
     ],
@@ -47,7 +46,8 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
+      ],
+      "notes": ""
     }
   },
   "_id": "QlvmbOkzMwys6B7v",
@@ -68,7 +68,9 @@
             "affects": "self",
             "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "alterations": [],
+            "dontMerge": false
           },
           {
             "type": "roll-effect",
@@ -79,7 +81,9 @@
             "affects": "self",
             "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "alterations": [],
+            "dontMerge": false
           }
         ],
         "slug": null,

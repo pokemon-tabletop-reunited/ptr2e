@@ -168,7 +168,17 @@
     "slug": "bladed",
     "label": "Bladed",
     "related": [],
-    "description": "This creature possesses effective edged limbs, body parts, or tools. Confers [Sharp] to @Trait[adaptable] actions, and grants access to the [Bladed] Tutor List."
+    "description": "This creature possesses effective edged limbs, body parts, or tools. Confers [Sharp] to @Trait[adaptable] actions, and grants access to the [Bladed] Tutor List.",
+    "type": "automated",
+    "changes": [
+      {
+        "type": "alter-attack",
+        "key": "adaptable-trait-attack",
+        "property": "traits",
+        "mode": "2",
+        "value": "sharp"
+      }
+    ]
   },
   {
     "slug": "blindsight-x",
@@ -388,7 +398,17 @@
     "slug": "deafening",
     "label": "Deafening",
     "related": [],
-    "description": "This creature is capable of being extremely loud, to the point of pain. The user adds the [Sonic] trait to its @Trait[adaptable] attacks. As a Simple Action, the creature can spend 4 PP to give its Sonic Attacks +20% Power and a 10% chance to inflict Suppressed 5 on hit for the next 4 Activations. The creature gains access to the [Deafening] Tutor List."
+    "description": "This creature is capable of being extremely loud, to the point of pain. The user adds the [Sonic] trait to its @Trait[adaptable] attacks. As a Simple Action, the creature can spend 4 PP to give its Sonic Attacks +20% Power and a 10% chance to inflict Suppressed 5 on hit for the next 4 Activations. The creature gains access to the [Deafening] Tutor List.",
+    "type": "automated",
+    "changes": [
+      {
+        "type": "alter-attack",
+        "key": "adaptable-trait-attack",
+        "property": "traits",
+        "mode": "2",
+        "value": "sonic"
+      }
+    ]
   },
   {
     "slug": "deep-breath",
@@ -664,7 +684,17 @@
     "slug": "horned",
     "label": "Horned",
     "related": [],
-    "description": "This creature possesses a prominent horn or spike. Confers [Horn] to @Trait[adaptable] actions. Grants access to the [Horn] Tutor list."
+    "description": "This creature possesses a prominent horn or spike. Confers [Horn] to @Trait[adaptable] actions. Grants access to the [Horn] Tutor list.",
+    "type": "automated",
+    "changes": [
+      {
+        "type": "alter-attack",
+        "key": "adaptable-trait-attack",
+        "property": "traits",
+        "mode": "2",
+        "value": "horn"
+      }
+    ]
   },
   {
     "slug": "hostile-dynamax",
@@ -1273,37 +1303,85 @@
     "slug": "telekinetic-2",
     "label": "Telekinetic 2",
     "related": [],
-    "description": "This creature is able to use the Lift skill telekinetically at range 2 / This creature can use Occult (Psychic) in place of the Lift skill."
+    "description": "This creature is able to use the Lift skill telekinetically at range 2 / This creature can use Occult (Psychic) in place of the Lift skill.",
+    "type": "automated",
+    "changes": [
+      {
+        "type": "roll-option",
+        "domain": "adaptable",
+        "value": "category:special"
+      }
+    ]
   },
   {
     "slug": "telekinetic-4",
     "label": "Telekinetic 4",
     "related": [],
-    "description": "This creature is able to use the Lift skill telekinetically at range 4 / This creature can use Occult (Psychic) in place of the Lift skill."
+    "description": "This creature is able to use the Lift skill telekinetically at range 4 / This creature can use Occult (Psychic) in place of the Lift skill.",
+    "type": "automated",
+    "changes": [
+      {
+        "type": "roll-option",
+        "domain": "adaptable",
+        "value": "category:special"
+      }
+    ]
   },
   {
     "slug": "telekinetic-6",
     "label": "Telekinetic 6",
     "related": [],
-    "description": "This creature is able to use the Lift skill telekinetically at range 6 / This creature can use Occult (Psychic) in place of the Lift skill."
+    "description": "This creature is able to use the Lift skill telekinetically at range 6 / This creature can use Occult (Psychic) in place of the Lift skill.",
+    "type": "automated",
+    "changes": [
+      {
+        "type": "roll-option",
+        "domain": "adaptable",
+        "value": "category:special"
+      }
+    ]
   },
   {
     "slug": "telekinetic-8",
     "label": "Telekinetic 8",
     "related": [],
-    "description": "This creature is able to use the Lift skill telekinetically at range 8 / This creature can use Occult (Psychic) in place of the Lift skill."
+    "description": "This creature is able to use the Lift skill telekinetically at range 8 / This creature can use Occult (Psychic) in place of the Lift skill.",
+    "type": "automated",
+    "changes": [
+      {
+        "type": "roll-option",
+        "domain": "adaptable",
+        "value": "category:special"
+      }
+    ]
   },
   {
     "slug": "telekinetic-10",
     "label": "Telekinetic 10",
     "related": [],
-    "description": "This creature is able to use the Lift skill telekinetically at range 10 / This creature can use Occult (Psychic) in place of the Lift skill."
+    "description": "This creature is able to use the Lift skill telekinetically at range 10 / This creature can use Occult (Psychic) in place of the Lift skill.",
+    "type": "automated",
+    "changes": [
+      {
+        "type": "roll-option",
+        "domain": "adaptable",
+        "value": "category:special"
+      }
+    ]
   },
   {
     "slug": "telekinetic-12",
     "label": "Telekinetic 12",
     "related": [],
-    "description": "This creature is able to use the Lift skill telekinetically at range 12 / This creature can use Occult (Psychic) in place of the Lift skill."
+    "description": "This creature is able to use the Lift skill telekinetically at range 12 / This creature can use Occult (Psychic) in place of the Lift skill.",
+    "type": "automated",
+    "changes": [
+      {
+        "type": "roll-option",
+        "domain": "adaptable",
+        "value": "category:special"
+      }
+    ]
   },
   {
     "slug": "telepath",
@@ -1535,7 +1613,7 @@
     "slug": "weathervane",
     "label": "Weathervane",
     "related": [],
-    "description": "The creature changes Forme depending on the most recent Weather, changing %lt;Type&gt;and granting the appropriate <Adaptable Type> Trait.\nSUBJECT TO CHANGE"
+    "description": "The creature changes Forme depending on the most recent Weather, changing %lt;Type&gt;and granting the appropriate %lt;Adaptable Type&gt; Trait.\nSUBJECT TO CHANGE"
   },
   {
     "slug": "wielder",
@@ -1590,121 +1668,281 @@
     "slug": "creepy-crawly",
     "label": "Creepy Crawly",
     "related": [],
-    "description": "Allows the user to Type-Shift @Trait[adaptable] actions and attacks to the Bug-Type."
+    "description": "Allows the user to Type-Shift @Trait[adaptable] actions and attacks to the Bug-Type.",
+    "type": "automated",
+    "changes": [
+      {
+        "type": "roll-option",
+        "domain": "adaptable",
+        "value": "bug"
+      }
+    ]
   },
   {
     "slug": "evil-touch",
     "label": "Evil Touch",
     "related": [],
-    "description": "Allows the user to Type-Shift @Trait[adaptable] actions and attacks to the Dark-Type."
+    "description": "Allows the user to Type-Shift @Trait[adaptable] actions and attacks to the Dark-Type.",
+    "type": "automated",
+    "changes": [
+      {
+        "type": "roll-option",
+        "domain": "adaptable",
+        "value": "dark"
+      }
+    ]
   },
   {
     "slug": "drakelike",
     "label": "Drakelike",
     "related": [],
-    "description": "Allows the user to Type-Shift @Trait[adaptable] actions and attacks to the Dragon-Type."
+    "description": "Allows the user to Type-Shift @Trait[adaptable] actions and attacks to the Dragon-Type.",
+    "type": "automated",
+    "changes": [
+      {
+        "type": "roll-option",
+        "domain": "adaptable",
+        "value": "dragon"
+      }
+    ]
   },
   {
     "slug": "zapper",
     "label": "Zapper",
     "related": [],
-    "description": "Allows the user to Type-Shift @Trait[adaptable] actions and attacks to the Electric-Type."
+    "description": "Allows the user to Type-Shift @Trait[adaptable] actions and attacks to the Electric-Type.",
+    "type": "automated",
+    "changes": [
+      {
+        "type": "roll-option",
+        "domain": "adaptable",
+        "value": "electric"
+      }
+    ]
   },
   {
     "slug": "sparkler",
     "label": "Sparkler",
     "related": [],
-    "description": "Allows the user to Type-Shift @Trait[adaptable] actions and attacks to the Fairy-Type."
+    "description": "Allows the user to Type-Shift @Trait[adaptable] actions and attacks to the Fairy-Type.",
+    "type": "automated",
+    "changes": [
+      {
+        "type": "roll-option",
+        "domain": "adaptable",
+        "value": "fairy"
+      }
+    ]
   },
   {
     "slug": "well-built",
     "label": "Well Built",
     "related": [],
-    "description": "Allows the user to Type-Shift @Trait[adaptable] actions and attacks to the Fighting-Type."
+    "description": "Allows the user to Type-Shift @Trait[adaptable] actions and attacks to the Fighting-Type.",
+    "type": "automated",
+    "changes": [
+      {
+        "type": "roll-option",
+        "domain": "adaptable",
+        "value": "fighting"
+      }
+    ]
   },
   {
     "slug": "firestarter",
     "label": "Firestarter",
     "related": [],
-    "description": "Allows the user to Type-Shift @Trait[adaptable] actions and attacks to the Fire-Type."
+    "description": "Allows the user to Type-Shift @Trait[adaptable] actions and attacks to the Fire-Type.",
+    "type": "automated",
+    "changes": [
+      {
+        "type": "roll-option",
+        "domain": "adaptable",
+        "value": "fire"
+      }
+    ]
   },
   {
     "slug": "guster",
     "label": "Guster",
     "related": [],
-    "description": "Allows the user to Type-Shift @Trait[adaptable] actions and attacks to the Flying-Type."
+    "description": "Allows the user to Type-Shift @Trait[adaptable] actions and attacks to the Flying-Type.",
+    "type": "automated",
+    "changes": [
+      {
+        "type": "roll-option",
+        "domain": "adaptable",
+        "value": "flying"
+      }
+    ]
   },
   {
     "slug": "spooky",
     "label": "Spooky",
     "related": [],
-    "description": "Allows the user to Type-Shift @Trait[adaptable] actions and attacks to the Ghost-Type."
+    "description": "Allows the user to Type-Shift @Trait[adaptable] actions and attacks to the Ghost-Type.",
+    "type": "automated",
+    "changes": [
+      {
+        "type": "roll-option",
+        "domain": "adaptable",
+        "value": "ghost"
+      }
+    ]
   },
   {
     "slug": "floratic",
     "label": "Floratic",
     "related": [],
-    "description": "Allows the user to Type-Shift @Trait[adaptable] actions and attacks to the Grass-Type."
+    "description": "Allows the user to Type-Shift @Trait[adaptable] actions and attacks to the Grass-Type.",
+    "type": "automated",
+    "changes": [
+      {
+        "type": "roll-option",
+        "domain": "adaptable",
+        "value": "grass"
+      }
+    ]
   },
   {
     "slug": "fictile",
     "label": "Fictile",
     "related": [],
-    "description": "Allows the user to Type-Shift @Trait[adaptable] actions and attacks to the Ground-Type."
+    "description": "Allows the user to Type-Shift @Trait[adaptable] actions and attacks to the Ground-Type.",
+    "type": "automated",
+    "changes": [
+      {
+        "type": "roll-option",
+        "domain": "adaptable",
+        "value": "ground"
+      }
+    ]
   },
   {
     "slug": "freezer",
     "label": "Freezer",
     "related": [],
-    "description": "Allows the user to Type-Shift @Trait[adaptable] actions and attacks to the Ice-Type."
+    "description": "Allows the user to Type-Shift @Trait[adaptable] actions and attacks to the Ice-Type.",
+    "type": "automated",
+    "changes": [
+      {
+        "type": "roll-option",
+        "domain": "adaptable",
+        "value": "ice"
+      }
+    ]
   },
   {
     "slug": "generalizer",
     "label": "Generalizer",
     "related": [],
-    "description": "Allows the user to Type-Shift @Trait[adaptable] actions and attacks to the Normal-Type."
+    "description": "Allows the user to Type-Shift @Trait[adaptable] actions and attacks to the Normal-Type.",
+    "type": "automated",
+    "changes": [
+      {
+        "type": "roll-option",
+        "domain": "adaptable",
+        "value": "normal"
+      }
+    ]
   },
   {
     "slug": "emitter",
     "label": "Emitter",
     "related": [],
-    "description": "Allows the user to Type-Shift @Trait[adaptable] actions and attacks to the Nuclear-Type."
+    "description": "Allows the user to Type-Shift @Trait[adaptable] actions and attacks to the Nuclear-Type.",
+    "type": "automated",
+    "changes": [
+      {
+        "type": "roll-option",
+        "domain": "adaptable",
+        "value": "nuclear"
+      }
+    ]
   },
   {
     "slug": "venomous",
     "label": "Venomous",
     "related": [],
-    "description": "Allows the user to Type-Shift @Trait[adaptable] actions and attacks to the Poison-Type."
+    "description": "Allows the user to Type-Shift @Trait[adaptable] actions and attacks to the Poison-Type.",
+    "type": "automated",
+    "changes": [
+      {
+        "type": "roll-option",
+        "domain": "adaptable",
+        "value": "poison"
+      }
+    ]
   },
   {
     "slug": "psycher",
     "label": "Psycher",
     "related": [],
-    "description": "Allows the user to Type-Shift @Trait[adaptable] actions and attacks to the Psychic-Type."
+    "description": "Allows the user to Type-Shift @Trait[adaptable] actions and attacks to the Psychic-Type.",
+    "type": "automated",
+    "changes": [
+      {
+        "type": "roll-option",
+        "domain": "adaptable",
+        "value": "psychic"
+      }
+    ]
   },
   {
     "slug": "lithic",
     "label": "Lithic",
     "related": [],
-    "description": "Allows the user to Type-Shift @Trait[adaptable] actions and attacks to the Rock-Type."
+    "description": "Allows the user to Type-Shift @Trait[adaptable] actions and attacks to the Rock-Type.",
+    "type": "automated",
+    "changes": [
+      {
+        "type": "roll-option",
+        "domain": "adaptable",
+        "value": "rock"
+      }
+    ]
   },
   {
     "slug": "rancor",
     "label": "Rancor",
     "related": [],
-    "description": "Allows the user to Type-Shift @Trait[adaptable] actions and attacks to the Shadow-Type."
+    "description": "Allows the user to Type-Shift @Trait[adaptable] actions and attacks to the Shadow-Type.",
+    "type": "automated",
+    "changes": [
+      {
+        "type": "roll-option",
+        "domain": "adaptable",
+        "value": "shadow"
+      }
+    ]
   },
   {
     "slug": "natural-steel",
     "label": "Natural Steel",
     "related": [],
-    "description": "Allows the user to Type-Shift @Trait[adaptable] actions and attacks to the Steel-Type."
+    "description": "Allows the user to Type-Shift @Trait[adaptable] actions and attacks to the Steel-Type.",
+    "type": "automated",
+    "changes": [
+      {
+        "type": "roll-option",
+        "domain": "adaptable",
+        "value": "steel"
+      }
+    ]
   },
   {
     "slug": "fountain",
     "label": "Fountain",
     "related": [],
-    "description": "Allows the user to Type-Shift @Trait[adaptable] actions and attacks to the Water-Type."
+    "description": "Allows the user to Type-Shift @Trait[adaptable] actions and attacks to the Water-Type.",
+    "type": "automated",
+    "changes": [
+      {
+        "type": "roll-option",
+        "domain": "adaptable",
+        "value": "water"
+      }
+    ]
   },
   {
     "slug": "stack-x",

@@ -40,6 +40,8 @@ interface RollContextParams<
   melee?: boolean;
   /** Action traits associated with the roll */
   traits?: string[] | Collection<Trait> | null;
+
+  skipEffectRolls?: boolean;
 }
 
 interface CheckContext<
