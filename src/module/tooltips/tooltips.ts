@@ -90,6 +90,7 @@ export default class TooltipsPTR2e {
           return this._onDamageTooltip();
         case "content-link":
         case "item":
+        case "perk":
           return this._onContentLinkTooltip();
         case "damage-info":
           return this._onDamageInfoTooltip();
