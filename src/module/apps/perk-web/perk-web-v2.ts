@@ -29,7 +29,7 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
       "toggle-edit-mode": function (this: PerkWebApp) {
         this.editMode = !this.editMode;
         if (this.editMode) {
-          if (!ui.perksTab.popout || ui.perksTab.popout.minimized) ui.perksTab.renderPopout();
+          if (!ui.perksTab?.popout || ui.perksTab?.popout.minimized) ui.perksTab?.renderPopout?.();
 
           if (game.settings.get("ptr2e", "dev-mode")) {
             const pack = game.packs.get("ptr2e.core-perks");
@@ -40,7 +40,7 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
           }
         }
         else {
-          ui.perksTab.popout?.close();
+          ui.perksTab?.popout?.close?.();
 
           if (game.settings.get("ptr2e", "dev-mode")) {
             const pack = game.packs.get("ptr2e.core-perks");
@@ -1367,6 +1367,29 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
 
     element.addEventListener("click", this.zoomIn.bind(this))
     element.addEventListener("contextmenu", this.zoomOut.bind(this));
+  }
+
+  async deletePerk() {
+    if(!this.rendered || !this.editMode || !this.currentNode) return;
+    const {perk: current, position} = this.currentNode;
+    foundry.applications.api.DialogV2.confirm({
+      window: {
+        title: "Delete Perk"
+      },
+      content: await foundry.applications.ux.TextEditor.enrichHTML(`<p>Are you sure you want to delete this node of ${current.link}?</p>`),
+      yes: {
+        callback: async () => {
+          const nodes = current.system.toObject().nodes;
+          const index = nodes.findIndex(node => node.x === position.x && node.y === position.y);
+          if (index === -1) return;
+          nodes.splice(index, 1);
+          await current.update({
+            "system.nodes": nodes
+          }, current.pack ? { pack: current.pack } : {});
+          await PerkWebApp.refresh.call(this);
+        },
+      },
+    });
   }
 
   zoomIn(event?: MouseEvent) {
