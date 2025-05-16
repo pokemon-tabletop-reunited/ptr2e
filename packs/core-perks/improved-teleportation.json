@@ -4,8 +4,7 @@
   "folder": "zrVtKATNxzLNxTUe",
   "system": {
     "prerequisites": [
-      "#A Teleportation Movement Allowance",
-      "#Occult (Psychic) 40 + 5 x (# of Improved Teleportation Perks already obtained)"
+      "#A Teleportation Movement Allowance"
     ],
     "cost": 1,
     "description": "<p>Improve your Teleportation Movement Allowance by 2.</p>",
@@ -33,7 +32,9 @@
       }
     ],
     "slug": "improved-teleportation",
-    "traits": [],
+    "traits": [
+      "minor-buff"
+    ],
     "_migration": {
       "version": 0.109,
       "previous": {
@@ -117,7 +118,7 @@
     ],
     "autoUnlock": [],
     "originSlug": "improved-teleportation-2",
-    "global": true,
+    "global": false,
     "webs": [],
     "design": {
       "arena": "mental",
@@ -149,6 +150,12 @@
             "mode": 2,
             "priority": null,
             "ignored": false
+          },
+          {
+            "type": "roll-option",
+            "value": "improved-teleportation",
+            "domain": "all",
+            "count": true
           }
         ],
         "slug": null,

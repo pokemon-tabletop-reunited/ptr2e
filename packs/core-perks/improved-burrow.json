@@ -4,8 +4,7 @@
   "folder": "zrVtKATNxzLNxTUe",
   "system": {
     "prerequisites": [
-      "#A Burrow Movement Allowance",
-      "#Climb 20 + 10 x (# of Improved Burrow Perks already obtained)"
+      "#A Burrow Movement Allowance"
     ],
     "cost": 1,
     "description": "<p>Improve your Burrow Movement Allowance by 2.</p>",
@@ -27,7 +26,9 @@
       }
     ],
     "slug": "improved-burrow",
-    "traits": [],
+    "traits": [
+      "minor-buff"
+    ],
     "_migration": {
       "version": null,
       "previous": null
@@ -128,7 +129,7 @@
       }
     ],
     "autoUnlock": [],
-    "global": true,
+    "global": false,
     "webs": [],
     "design": {
       "arena": "physical",
@@ -160,6 +161,12 @@
             "mode": 2,
             "priority": null,
             "ignored": false
+          },
+          {
+            "type": "roll-option",
+            "value": "improved-burrow",
+            "domain": "all",
+            "count": true
           }
         ],
         "slug": null,
