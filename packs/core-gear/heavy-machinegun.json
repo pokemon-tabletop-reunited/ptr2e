@@ -4,7 +4,7 @@
   "type": "weapon",
   "system": {
     "crafting": {
-      "skill": null,
+      "skill": "",
       "spans": null,
       "materials": []
     },
@@ -17,7 +17,8 @@
     "fling": {
       "type": "steel",
       "power": 70,
-      "accuracy": 90
+      "accuracy": 90,
+      "hide": false
     },
     "rarity": "rare",
     "traits": [
@@ -29,7 +30,8 @@
       "shouldered",
       "readied",
       "steel",
-      "charge-pool-18"
+      "rearm-4",
+      "charge-pool-24"
     ],
     "actions": [
       {
@@ -58,28 +60,20 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 1,
-          "delay": null,
-          "priority": null
+          "powerPoints": 1
         },
-        "variant": null,
-        "contestType": "",
-        "contestEffect": "",
-        "slot": null
+        "predicate": []
       },
       {
         "types": [
           "untyped"
         ],
         "category": "special",
-        "power": 125,
+        "power": 160,
         "accuracy": 80,
         "free": true,
         "traits": [
-          "load-adaptive",
-          "two-handed",
-          "missile",
-          "readied"
+          "missile"
         ],
         "name": "Heavy Machinegun (Burst)",
         "slug": "heavy-machinegun-burst",
@@ -93,14 +87,10 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 3,
-          "delay": null,
-          "priority": null
+          "powerPoints": 3
         },
         "variant": "heavy-machinegun",
-        "contestType": "",
-        "contestEffect": "",
-        "slot": null
+        "predicate": []
       },
       {
         "types": [
@@ -111,17 +101,13 @@
         "accuracy": 75,
         "free": true,
         "traits": [
-          "load-adaptive",
-          "two-handed",
           "missile",
           "set-up",
-          "8-strike",
-          "readied",
-          "flinch-4"
+          "8-strike"
         ],
         "name": "Heavy Machinegun (Salvo)",
         "slug": "heavy-machinegun-salvo",
-        "description": "<p>Effect: Set-Up: The user gains @Affliction[braced], and ends their Activation.</p><p>Resolution: On their next activation, they attack with and resolve this Attack, and are Flinched. This attack calculates damage against the target's DEF, rather than SPDEF.</p>",
+        "description": "<p>Effect: Set-Up: The user gains @Affliction[braced], and ends their Activation.</p><p>Resolution: On their next activation, they attack with and resolve this Attack, and are Flinched 2. This attack calculates damage against the target's DEF, rather than SPDEF.</p>",
         "img": "systems/ptr2e/img/svg/untyped_icon.svg",
         "type": "attack",
         "range": {
@@ -131,14 +117,10 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 8,
-          "delay": null,
-          "priority": null
+          "powerPoints": 8
         },
         "variant": "heavy-machinegun",
-        "contestType": "",
-        "contestEffect": "",
-        "slot": null
+        "predicate": []
       },
       {
         "types": [
@@ -149,8 +131,6 @@
         "accuracy": 65,
         "free": true,
         "traits": [
-          "load-adaptive",
-          "two-handed",
           "missile"
         ],
         "name": "Heavy Machinegun (Hip Fire)",
@@ -160,27 +140,20 @@
         "type": "attack",
         "range": {
           "target": "wide-line",
-          "distance": 9,
+          "distance": 11,
           "unit": "m"
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 4,
-          "delay": null,
-          "priority": null
+          "powerPoints": 4
         },
         "variant": "heavy-machinegun",
-        "contestType": "",
-        "contestEffect": "",
-        "slot": null
+        "predicate": []
       }
     ],
-    "description": "",
     "weaponType": "untyped",
     "weaponPp": 18,
-    "weaponRange": "",
-    "slug": null,
-    "container": null,
+    "slug": "heavy-machinegun",
     "quantity": 1,
     "identification": {
       "misidentified": null,
@@ -190,26 +163,75 @@
         "img": "systems/ptu/css/images/icons/item_icon.png",
         "description": "<p>Unidentified Item</p>"
       }
-    }
+    },
+    "_migration": {
+      "version": null,
+      "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "description": "<p>A machine gun (MG) is a fully automatic and rifled firearm designed for sustained direct fire with rifle cartridges. A heavy machine gun (HMG) is significantly larger than light, medium or general-purpose machine guns. HMGs are typically too heavy to be man-portable (carried by one person) and require mounting onto a weapons platform to be operably stable or tactically mobile, have more formidable firepower, and generally require a team of personnel for operation and maintenance.</p>"
   },
   "_id": "TJMOmuMwyLSuCWZD",
-  "effects": [],
-  "folder": "V4skAU6G3OH5fXaf",
-  "sort": 0,
-  "ownership": {
-    "default": 0,
-    "tXAZ3QUgjuwX4gdV": 3
-  },
-  "flags": {},
-  "_stats": {
-    "compendiumSource": null,
-    "duplicateSource": null,
-    "coreVersion": "12.327",
-    "systemId": "ptr2e",
-    "systemVersion": "0.0.0-alpha.1.0",
-    "createdTime": 1717878484297,
-    "modifiedTime": 1717878484297,
-    "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
-  },
-  "_key": "!items!TJMOmuMwyLSuCWZD"
+  "effects": [
+    {
+      "name": "Heavy Machinegun",
+      "type": "passive",
+      "_id": "pXczUQu3lvZRBRFa",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "flat-modifier",
+            "key": "{item|id}-attack-damage-flat",
+            "value": 50,
+            "predicate": [],
+            "label": "Heavy Machinegun",
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "hideIfDisabled": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": "Compendium.ptr2e.core-gear.Item.Ba3EyqpUePgGrfQk.ActiveEffect.uOxpw5kHcRtpv4pa",
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "1.1.3.beta",
+        "createdTime": 1743893056846,
+        "modifiedTime": 1743893090390,
+        "lastModifiedBy": "UTlFSVhgfIUeTsoW"
+      }
+    }
+  ],
+  "folder": "Tn65RZTafVbxqEXT"
 }

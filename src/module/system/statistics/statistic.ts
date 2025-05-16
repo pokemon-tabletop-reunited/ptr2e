@@ -406,6 +406,7 @@ interface AttackStatisticRollParameters extends StatisticRollParameters<AttackRo
   consumeAmmo?: boolean
   variants?: string[]
   modifierDialog?: AttackModifierPopup
+  skipEffectRolls?: boolean
 }
 
 interface CheckDCReference {

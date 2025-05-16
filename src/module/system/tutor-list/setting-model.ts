@@ -3,7 +3,7 @@ import { SlugField } from "@module/data/fields/slug-field.ts";
 import { TutorListData } from "@scripts/config/tutor-list.ts";
 import { sluggify } from "@utils";
 
-export const TutorListVersion = 3.2 as const;
+export const TutorListVersion = 3.4 as const;
 
 export class TutorListSettings extends foundry.abstract.DataModel {
   static override defineSchema(): TutorListSettingsSchema {
@@ -98,6 +98,8 @@ export class TutorListSchema extends foundry.abstract.DataModel {
           slug: new SlugField({ required: true, nullable: false }),
           // Uuid of move
           uuid: new foundry.data.fields.StringField(),
+          // Grade of move
+          grade: new foundry.data.fields.StringField({ required: true, nullable: false })
         })
       ),
     };
@@ -144,8 +146,11 @@ export interface _TutorListSettingsSchema extends foundry.data.fields.DataSchema
   >;
 }
 
+export type TutorListMove = ModelPropsFromSchema<_MoveSchema>;
+
 interface _MoveSchema extends foundry.data.fields.DataSchema {
   slug: SlugField<string, string, true, false, false>,
+  grade: foundry.data.fields.StringField<string, string, true, false, true>,
   uuid: foundry.data.fields.StringField<string, string, true, true, true>,
 }
 

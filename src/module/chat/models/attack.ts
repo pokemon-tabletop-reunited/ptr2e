@@ -149,7 +149,7 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
   }
 
   get currentOrigin(): Promise<Maybe<ActorPTR2e>> {
-    return this.context?.origin?.uuid ? fromUuid<ActorPTR2e>(this.context.origin.uuid) : Promise.resolve(null);
+    return this.context?.origin?.uuid ? fu.fromUuid<ActorPTR2e>(this.context.origin.uuid) : Promise.resolve(null);
   }
 
   override prepareBaseData(): void {
@@ -317,7 +317,7 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
       const result = this.overrides.get(data.target.uuid)?.value || AttackRoll.successCategory(data.accuracy, data.crit);
 
       const rolls = {
-        accuracy: await renderTemplate(
+        accuracy: await foundry.applications.handlebars.renderTemplate(
           "systems/ptr2e/templates/chat/rolls/accuracy-check.hbs",
           {
             inner: await AttackMessageSystem.renderInnerRoll(data.accuracy, isPrivate, ["hit", "critical"].includes(result)),
@@ -326,13 +326,13 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
             label: "PTR2E.Attack.AccuracyCheck",
           }
         ),
-        crit: await renderTemplate("systems/ptr2e/templates/chat/rolls/crit-check.hbs", {
+        crit: await foundry.applications.handlebars.renderTemplate("systems/ptr2e/templates/chat/rolls/crit-check.hbs", {
           inner: await AttackMessageSystem.renderInnerRoll(data.crit, isPrivate, result === "critical"),
           isPrivate,
           type: "crit",
           label: "PTR2E.Attack.CritCheck",
         }),
-        damage: await renderTemplate(
+        damage: await foundry.applications.handlebars.renderTemplate(
           "systems/ptr2e/templates/chat/rolls/damage-randomness.hbs",
           {
             inner: await AttackMessageSystem.renderInnerRoll(data.damage, isPrivate, null),
@@ -356,7 +356,7 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
             return;
           }
 
-          rolls.effects.push(await renderTemplate(
+          rolls.effects.push(await foundry.applications.handlebars.renderTemplate(
             "systems/ptr2e/templates/chat/rolls/effect-roll.hbs",
             {
               inner: await AttackMessageSystem.renderInnerRoll(effectRoll.roll, isPrivate, effectRoll.success),
@@ -464,7 +464,7 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
               continue;
             }
 
-            rolls.push(await renderTemplate(
+            rolls.push(await foundry.applications.handlebars.renderTemplate(
               "systems/ptr2e/templates/chat/rolls/effect-roll.hbs",
               {
                 inner: await AttackMessageSystem.renderInnerRoll(roll.roll, false, roll.success),
@@ -478,7 +478,15 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
         })() : [],
       });
 
-    return renderTemplate("systems/ptr2e/templates/chat/attack.hbs", context);
+    if(this.pendingResolutions?.size) {
+      for(const targetUuid of this.pendingResolutions) {
+        this.applyDamage(targetUuid);
+      }
+      this.pendingResolutions.clear();
+    }
+
+    context.defaultExpanded = game.settings.get("ptr2e", "expand-rolls");
+    return foundry.applications.handlebars.renderTemplate("systems/ptr2e/templates/chat/attack.hbs", context);
   }
 
   async updateTarget(targetUuid: ActorUUID, { status }: { status: AccuracySuccessCategory }) {
@@ -542,8 +550,14 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
     return true;
   }
 
+  pendingResolutions = new Set<ActorUUID>();
+
   async applyDamage(targetUuid: ActorUUID): Promise<false | number> {
-    const result = this.context!.results.get(targetUuid);
+    if(!this.context) {
+      this.pendingResolutions.add(targetUuid);
+      return false;
+    } 
+    const result = this.context.results.get(targetUuid);
     if (!result) return false;
 
     async function applyEffects(target: ActorPTR2e, effects: foundry.data.fields.ModelPropFromDataField<foundry.data.fields.SchemaField<EffectRollsSchema>>[], isCrit = false) {
@@ -558,7 +572,7 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
           if (!effectRoll.success) continue;
 
 
-          const item = await fromUuid(effectRoll.effect);
+          const item = await fu.fromUuid(effectRoll.effect);
           if (!item) {
             Hooks.onError("AttackMessageSystem#applyDamage", new Error(`Could not find item with uuid ${effectRoll.effect}`), { log: "error" });
             continue;
@@ -572,7 +586,7 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
 
           try {
             for (const alteration of effectRoll.alterations ?? []) {
-              alteration.applyTo(grantedSource as ItemSourcePTR2e);
+              alteration.applyTo(grantedSource as ItemSourcePTR2e, target);
             }
 
             toApply.push(...grantedSource.effects as ActiveEffectPTR2e['_source'][]);
@@ -883,6 +897,7 @@ interface AttackMessageRenderContext {
   results: Map<ActorUUID, AttackMessageRenderContextData>;
   pp: ModelPropsFromSchema<PPSchema>;
   selfEffectRolls: string[];
+  defaultExpanded?: boolean;
 }
 
 interface AttackMessageRenderContextData {

@@ -4,6 +4,8 @@ import { ActorPTR2e } from "@actor";
 import { ActiveEffectPTR2e } from "@effects";
 import { ItemPTR2e } from "@item";
 import AdvancementActiveEffectSystem from "@module/effects/data/advancement.ts";
+import { AttackRollCallback } from "@system/rolls/check-roll.ts";
+import { AttackMessageSystem } from "@chat";
 
 class CharacterCombatantSystem extends CombatantSystemPTR2e {
   declare parent: CombatantPTR2e;
@@ -69,7 +71,7 @@ class CharacterCombatantSystem extends CombatantSystemPTR2e {
     });
 
     const existingFumble = this.actor.actions.attack.get("fumble");
-    const fumble = existingFumble ?? await fromUuid<ItemPTR2e>("Compendium.ptr2e.core-moves.Item.xoFyO6Z8yZJ9Ko8e");
+    const fumble = existingFumble ?? await fu.fromUuid<ItemPTR2e>("Compendium.ptr2e.core-moves.Item.xoFyO6Z8yZJ9Ko8e");
     if (!fumble) return void await ChatMessage.create({
       type: "combat",
       flavor: "An error occured trying to resolve Fumble. Please resolve it manually."
@@ -79,7 +81,12 @@ class CharacterCombatantSystem extends CombatantSystemPTR2e {
         await this.actor.createEmbeddedDocuments("Item", [fumble.toObject()]);
       }
 
-      await this.actor.actions.attack.get("fumble")!.roll({ targets: [this.actor], skipDialog: true });
+      const actorUuid = this.actor.uuid;
+      const applyDamage: AttackRollCallback = async (_context, _results, message) => {
+        await (message?.system as AttackMessageSystem)?.applyDamage(actorUuid);
+      }
+
+      await this.actor.actions.attack.get("fumble")!.roll({ targets: [this.actor], skipDialog: true, callback: applyDamage, skipEffectRolls: true });
     }
     catch {
       return void await ChatMessage.create({

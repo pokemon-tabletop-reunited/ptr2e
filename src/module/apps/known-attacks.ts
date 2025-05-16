@@ -1,35 +1,31 @@
 import { ActorPTR2e } from "@actor";
-import { ApplicationV2Expanded } from "./appv2-expanded.ts";
+import { ApplicationConfigurationExpanded, ApplicationV2Expanded } from "./appv2-expanded.ts";
 import { ItemPTR2e } from "@item";
 import { ActionEditor } from "./action-editor.ts";
 
 export class KnownActionsApp extends foundry.applications.api.HandlebarsApplicationMixin(ApplicationV2Expanded) {
-  static override DEFAULT_OPTIONS = fu.mergeObject(
-    super.DEFAULT_OPTIONS,
-    {
-      tag: "aside",
-      classes: ["sheet", "known-actions-sheet"],
-      position: {
-        height: 'auto',
-        width: 230,
-      },
-      window: {
-        minimizable: true,
-        resizable: false,
-      },
-      dragDrop: [
-        {
-          dragSelector: ".action",
-          dropSelector: ".window-content",
-        }
-      ],
-      actions: {
-        "action-edit": KnownActionsApp._onEditAction,
-        "action-delete": KnownActionsApp._onDeleteAction,
-      }
+  static override DEFAULT_OPTIONS = {
+    tag: "aside",
+    classes: ["sheet", "known-actions-sheet"],
+    position: {
+      height: 'auto',
+      width: 230,
     },
-    { inplace: false }
-  );
+    window: {
+      minimizable: true,
+      resizable: false,
+    },
+    dragDrop: [
+      {
+        dragSelector: ".action",
+        dropSelector: ".window-content",
+      }
+    ],
+    actions: {
+      "action-edit": KnownActionsApp._onEditAction,
+      "action-delete": KnownActionsApp._onDeleteAction,
+    }
+  } as unknown as Omit<DeepPartial<ApplicationConfigurationExpanded>, "uniqueId">;
 
   static override PARTS: Record<string, foundry.applications.api.HandlebarsTemplatePart> = {
     actions: {
@@ -84,7 +80,7 @@ export class KnownActionsApp extends foundry.applications.api.HandlebarsApplicat
   }
 
   override async _onDrop(event: DragEvent) {
-    const data = TextEditor.getDragEventData<DropCanvasData>(event);
+    const data = foundry.applications.ux.TextEditor.getDragEventData<DropCanvasData>(event);
     const item = await ItemPTR2e.fromDropData(data);
     if (!item || item.type !== "move" || item.parent?.uuid === this.document.uuid) return;
 

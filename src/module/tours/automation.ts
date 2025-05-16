@@ -149,7 +149,8 @@ export class AutomationTour extends PTRTour {
           ],
           effects: [
             this.item.effects.contents[0].toObject()
-          ]
+          ],
+          ownership: { [game.user.id]: CONST.DOCUMENT_OWNERSHIP_LEVELS.OWNER, default: CONST.DOCUMENT_OWNERSHIP_LEVELS.OBSERVER }
         }));
       }
       else {
