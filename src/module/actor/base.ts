@@ -1002,8 +1002,13 @@ class ActorPTR2e<
     suboption: string | null = null,
   ): Promise<boolean | null> {
     if (!(typeof effectUuid === "string")) return null;
+    if(effectUuid.startsWith("trait:")) {
+      const newValue = value ?? !(this.flags.ptr2e?.traitEffects?.[effectUuid] ?? true);
+      await this.update({"flags.ptr2e.traitEffects": { [effectUuid]: newValue }});
+      return newValue;
+    }
 
-    const effect = await fromUuid<ActiveEffectPTR2e>(effectUuid, { relative: this as Actor });
+    const effect = await fu.fromUuid<ActiveEffectPTR2e>(effectUuid, { relative: this as Actor });
     const change = effect?.changes.find(
       (c): c is RollOptionChangeSystem =>
         c instanceof RollOptionChangeSystem && c.domain === domain && c.option === option,
@@ -2460,7 +2465,8 @@ type ActorFlags2e = ActorFlags & {
     typeOptions?: {
       get options(): PickableThing[],
       get types(): PickableThing[];
-    }
+    },
+    traitEffects?: Record<string, boolean>;
   };
 };
 

@@ -40,6 +40,11 @@ class Trait {
     const effect = new ActiveEffectPTR2e<TParent>({
       name: this.label ?? formatSlug(this.slug),
       type: "passive",
+      flags: {
+        ptr2e: {
+          traitEffect: `trait:${this.slug}`
+        }
+      },
       system: {
         changes: this.changes,
         traits: [this.slug]

@@ -527,6 +527,7 @@ interface ActiveEffectPTR2e<
         removeOnExit: boolean;
         amount?: number;
       };
+      traitEffect?: string;
     };
   }
 
