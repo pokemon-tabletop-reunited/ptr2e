@@ -1261,7 +1261,16 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
           if ((unlockedPerkStates.includes(node.state) || !!node.tierInfo) && (unlockedPerkStates.includes(connectedNode.state) || !!connectedNode.tierInfo)) {
             return "#2ECFF5"; // Change to blue if both nodes are unlocked
           }
-          if (node.state === PerkState.purchased || !!node.tierInfo || connectedNode.state === PerkState.purchased || !!connectedNode.tierInfo) return "#ffffff";
+          if (unlockedPerkStates.includes(node.state) || !!node.tierInfo || unlockedPerkStates.includes(connectedNode.state) || !!connectedNode.tierInfo) {
+            if((node.state === PerkState.connected || connectedNode.state === PerkState.connected)) {
+              return "#fba151"; // Change to orange to signify connected state
+            }
+            else if(node.state === PerkState.available || connectedNode.state === PerkState.available) {
+              return "#208C4B"; // Change to green to signify available state
+            }
+            
+            return "#ffffff";
+          }
           return "#898989";
         })();
 
