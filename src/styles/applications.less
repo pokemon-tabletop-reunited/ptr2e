@@ -7925,6 +7925,7 @@
             }
   
             section.tabs {
+              display: flex;
               flex-direction: column;
               gap: 0.25rem;
               padding: 0.5rem 0;
@@ -7932,6 +7933,7 @@
               border-radius: 8px;
               background: var(--appv2-background);
               overflow-y: auto;
+              text-align: center;
   
               .header {
                 font-weight: bold;
@@ -7944,9 +7946,15 @@
                 border: 1px solid var(--border-theme-color);
                 border-radius: 8px;
                 background: var(--appv2-background-alt);
+                margin: 0 0.5rem;
   
                 small {
                   font-size: xx-small;
+                }
+
+                &.active {
+                  border-width: 2px;
+                  font-weight: bold;
                 }
               }
             }
