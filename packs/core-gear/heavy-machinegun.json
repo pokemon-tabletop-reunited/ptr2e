@@ -25,12 +25,11 @@
       "weapon",
       "fling",
       "firearm",
-      "reload",
       "two-handed",
       "shouldered",
       "readied",
       "steel",
-      "rearm-4",
+      "reload-4",
       "charge-pool-24"
     ],
     "actions": [
@@ -102,12 +101,12 @@
         "free": true,
         "traits": [
           "missile",
-          "set-up",
+          "delay-3",
           "8-strike"
         ],
         "name": "Heavy Machinegun (Salvo)",
         "slug": "heavy-machinegun-salvo",
-        "description": "<p>Effect: Set-Up: The user gains @Affliction[braced], and ends their Activation.</p><p>Resolution: On their next activation, they attack with and resolve this Attack, and are Flinched 2. This attack calculates damage against the target's DEF, rather than SPDEF.</p>",
+        "description": "<p>Effect: This attack calculates damage against the target's DEF, rather than SPDEF.</p>",
         "img": "systems/ptr2e/img/svg/untyped_icon.svg",
         "type": "attack",
         "range": {
@@ -117,7 +116,8 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 8
+          "powerPoints": 8,
+          "delay": 3
         },
         "variant": "heavy-machinegun",
         "predicate": []

@@ -25,10 +25,9 @@
       "weapon",
       "fling",
       "firearm",
-      "reload",
       "readied",
       "steel",
-      "rearm-3",
+      "reload-3",
       "charge-pool-30"
     ],
     "actions": [
@@ -97,13 +96,12 @@
         "free": true,
         "traits": [
           "missile",
-          "set-up",
-          "10-strike",
-          "blast-3"
+          "delay-3",
+          "10-strike"
         ],
         "name": "Medium Machinegun (Salvo)",
         "slug": "medium-machinegun-salvo",
-        "description": "<p>Effect: Set-Up: The user gains @Affliction[braced], and ends their Activation.</p><p>Resolution: On their next activation, they attack with and resolve this Attack, and are Flinched 2. This attack calculates damage against the target's DEF, rather than SPDEF.</p>",
+        "description": "<p>Effect: This attack calculates damage against the target's DEF, rather than SPDEF.</p>",
         "img": "systems/ptr2e/img/svg/untyped_icon.svg",
         "type": "attack",
         "range": {
@@ -113,7 +111,8 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 10
+          "powerPoints": 10,
+          "delay": 3
         },
         "variant": "medium-machinegun",
         "predicate": []

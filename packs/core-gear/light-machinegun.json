@@ -25,9 +25,8 @@
       "weapon",
       "fling",
       "firearm",
-      "reload",
       "steel",
-      "rearm-3",
+      "reload-3",
       "charge-pool-36"
     ],
     "actions": [
@@ -96,23 +95,23 @@
         "free": true,
         "traits": [
           "missile",
-          "set-up",
-          "12-strike",
-          "blast-3"
+          "delay-2",
+          "12-strike"
         ],
         "name": "Light Machinegun (Salvo)",
         "slug": "light-machinegun-salvo",
-        "description": "<p>Effect: Set-Up: The user gains @Affliction[braced], and ends their Activation.</p><p>Resolution: On their next activation, they attack with and resolve this Attack, and are Flinched 2. This attack calculates damage against the target's DEF, rather than SPDEF.</p>",
+        "description": "<p>Effect: This attack calculates damage against the target's DEF, rather than SPDEF.</p>",
         "img": "systems/ptr2e/img/svg/untyped_icon.svg",
         "type": "attack",
         "range": {
-          "target": "blast",
+          "target": "creature",
           "distance": 45,
           "unit": "m"
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 12
+          "powerPoints": 12,
+          "delay": 3
         },
         "variant": "light-machinegun",
         "predicate": []
