@@ -2499,26 +2499,153 @@
   {
     "slug": "delay-x",
     "label": "Delay X",
-    "description": "This action resolves after X other activations have resolved.",
+    "description": "After resolving this Action, the user's next Activation is delayed X0%.",
     "related": []
   },
   {
     "slug": "delay-1",
     "label": "Delay 1",
-    "description": "This action resolves after 1 other activation has resolved.",
-    "related": []
+    "description": "After resolving this Action, the user's next Activation is delayed 10%.",
+    "related": [],
+    "changes": [
+      {
+        "type": "roll-effect",
+        "key": "attack",
+        "value": "Compendium.ptr2e.core-effects.Item.advanceffectitem",
+        "chance": 100,
+        "dontMerge": true,
+        "affects": "self",
+        "alterations": [
+          {
+            "mode": 5,
+            "property": "system.amount",
+            "value": -10
+          },
+          {
+            "mode": 5,
+            "property": "name",
+            "value": "Delay 10%"
+          }
+        ]
+      }
+    ],
+    "type": "automated"
   },
   {
     "slug": "delay-2",
     "label": "Delay 2",
-    "description": "This action resolves after 2 other activations have resolved.",
-    "related": []
+    "description": "After resolving this Action, the user's next Activation is delayed 20%.",
+    "related": [],
+    "changes": [
+      {
+        "type": "roll-effect",
+        "key": "attack",
+        "value": "Compendium.ptr2e.core-effects.Item.advanceffectitem",
+        "chance": 100,
+        "dontMerge": true,
+        "affects": "self",
+        "alterations": [
+          {
+            "mode": 5,
+            "property": "system.amount",
+            "value": -20
+          },
+          {
+            "mode": 5,
+            "property": "name",
+            "value": "Delay 20%"
+          }
+        ]
+      }
+    ],
+    "type": "automated"
   },
   {
     "slug": "delay-3",
     "label": "Delay 3",
-    "description": "This action resolves after 3 other activations have resolved.",
-    "related": []
+    "description": "After resolving this Action, the user's next Activation is delayed 30%.",
+    "related": [],
+    "changes": [
+      {
+        "type": "roll-effect",
+        "key": "attack",
+        "value": "Compendium.ptr2e.core-effects.Item.advanceffectitem",
+        "chance": 100,
+        "dontMerge": true,
+        "affects": "self",
+        "alterations": [
+          {
+            "mode": 5,
+            "property": "system.amount",
+            "value": -30
+          },
+          {
+            "mode": 5,
+            "property": "name",
+            "value": "Delay 30%"
+          }
+        ]
+      }
+    ],
+    "type": "automated"
+  },
+  {
+    "slug": "delay-4",
+    "label": "Delay 4",
+    "description": "After resolving this Action, the user's next Activation is delayed 40%.",
+    "related": [],
+    "changes": [
+      {
+        "type": "roll-effect",
+        "key": "attack",
+        "value": "Compendium.ptr2e.core-effects.Item.advanceffectitem",
+        "chance": 100,
+        "dontMerge": true,
+        "affects": "self",
+        "alterations": [
+          {
+            "mode": 5,
+            "property": "system.amount",
+            "value": -40
+          },
+          {
+            "mode": 5,
+            "property": "name",
+            "value": "Delay 40%"
+          }
+        ]
+      }
+    ],
+    "type": "automated"
+  },
+  {
+    "slug": "delay-5",
+    "label": "Delay 5",
+    "description": "After resolving this Action, the user's next Activation is delayed 50%.",
+    "related": [],
+    "changes": [
+      {
+        "type": "roll-effect",
+        "key": "attack",
+        "value": "Compendium.ptr2e.core-effects.Item.advanceffectitem",
+        "chance": 100,
+        "dontMerge": true,
+        "affects": "self",
+        "alterations": [
+          {
+            "mode": 5,
+            "property": "system.amount",
+            "value": -50
+          },
+          {
+            "mode": 5,
+            "property": "name",
+            "value": "Delay 50%"
+          }
+        ]
+      }
+    ],
+    "type": "automated"
   },
   {
     "slug": "drain-x",
