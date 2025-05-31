@@ -6,12 +6,11 @@
     "slug": "bide",
     "actions": [
       {
-        "name": "Bide",
-        "slug": "bide",
+        "name": "Bide (Resolution)",
+        "slug": "bide-resolution",
         "type": "attack",
         "traits": [
           "defensive",
-          "draw-in",
           "set-up",
           "danger-close"
         ],
@@ -22,28 +21,54 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 6
+          "powerPoints": 3
         },
         "category": "physical",
-        "power": null,
-        "accuracy": null,
         "types": [
           "normal"
         ],
-        "description": "<p>Effect: Set Up: the user gains @Affliction[marked] 6 and @Affliction[braced] 2. The user's is then Flinched 3. </p><p>Resolution: On the user's next Activation, they target a valid creature, dealing twice the damage they took since declaring Bide to the target.</p>.</p>",
-        "contestType": "",
-        "contestEffect": "",
-        "free": false,
-        "slot": null
+        "description": "<p>Trigger: The user used Bide (Set Up) as their last Action.</p><p>Effect: The user deals twice the damage they took since declaring Bide (Set Up) to the target.</p>",
+        "img": "systems/ptr2e/img/svg/normal_icon.svg",
+        "predicate": []
+      },
+      {
+        "name": "Bide (Set-Up)",
+        "slug": "bide-set-up",
+        "description": "<p>Effect: The user gains @Affliction[marked 6] and @Affliction[braced 2].</p><p></p>",
+        "traits": [
+          "set-up",
+          "defensive",
+          "draw-in"
+        ],
+        "type": "attack",
+        "img": "systems/ptr2e/img/svg/normal_icon.svg",
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 3
+        },
+        "range": {
+          "target": "self",
+          "unit": "m"
+        },
+        "types": [
+          "normal"
+        ],
+        "category": "status",
+        "predicate": []
       }
     ],
-    "container": null,
     "grade": "C",
     "publication": {
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
+      ],
+      "notes": ""
+    },
+    "traits": [],
+    "_migration": {
+      "version": null,
+      "previous": null
     }
   },
   "_id": "Do4KJ9riUaghCF4B",

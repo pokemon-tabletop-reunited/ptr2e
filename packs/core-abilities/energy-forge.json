@@ -8,22 +8,23 @@
         "traits": [
           "legendary",
           "defensive",
-          "aura"
+          "aura",
+          "interrupt-1"
         ],
-        "name": "Energy Forge",
-        "slug": "energy-forge",
+        "name": "Energy Forge (Fortify)",
+        "slug": "energy-forge-aura",
         "type": "generic",
         "cost": {
           "activation": "free",
-          "powerPoints": 4,
-          "trigger": "<p>The user resolves Fortify.</p>"
+          "trigger": "The user resolves Fortify (Resolution), and affected 2 or more allies with the triggering Attack.  Effect: The user gains @Affliction[boosted 7] and +2 CRIT Stages for 7 Activations."
         },
         "range": {
-          "target": "self",
-          "unit": "m"
+          "target": "aura",
+          "unit": "m",
+          "distance": 10
         },
-        "description": "<p>Trigger: The user resolves Fortify.</p><p>Effect: The user gains +1 default DEF and SPDEF Stages.</p>",
-        "img": "icons/svg/explosion.svg"
+        "description": "<p>Trigger: <span style=\"font-family: Signika, &#x27;Palatino Linotype&#x27;, sans-serif\">The user resolves Fortify (Resolution), and affected 2 or more allies with the triggering Attack.</span></p><p><span style=\"font-family: Signika, &#x27;Palatino Linotype&#x27;, sans-serif\">Effect: The user gains @Affliction[boosted 7] and +2 CRIT Stages for 7 Activations.</span></p>",
+        "img": "icons/tools/smithing/crucible.webp"
       },
       {
         "traits": [
@@ -31,7 +32,7 @@
           "defensive",
           "aura"
         ],
-        "name": "Energy Forge",
+        "name": "Energy Forge (Aura)",
         "slug": "energy-forge",
         "type": "passive",
         "cost": {
@@ -43,7 +44,7 @@
           "unit": "m"
         },
         "description": "<p>Passive: The user and all creatures within Range increase the Power of their Dragon- and Steel-Type attacks by 20%.</p>",
-        "img": "icons/svg/explosion.svg"
+        "img": "icons/tools/smithing/crucible.webp"
       }
     ],
     "description": "<p>Trigger: The user resolves Fortify.</p><p>Effect: Connection - Fortify. When the user resolves Fortify, they gain +1 DEF and SPDEF Stages for 5 activations. Passive: The user and all creatures within 10m increase the Power of their Dragon- and Steel-Type attacks by 20%.</p>",
@@ -62,7 +63,8 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
+      ],
+      "notes": ""
     }
   },
   "_id": "XUoFs30VOQeUd2BU",
@@ -108,7 +110,9 @@
             "affects": "target",
             "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "alterations": [],
+            "dontMerge": false
           },
           {
             "type": "roll-effect",
@@ -119,7 +123,9 @@
             "affects": "target",
             "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "alterations": [],
+            "dontMerge": false
           }
         ],
         "slug": null,
@@ -148,12 +154,13 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.344",
         "systemId": "ptr2e",
         "systemVersion": "0.10.0-alpha.5.1.5",
         "createdTime": 1737397898752,
         "modifiedTime": 1737398013510,
-        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+        "lastModifiedBy": "mK35yvCqCgiTUvKf",
+        "exportSource": null
       }
     }
   ]

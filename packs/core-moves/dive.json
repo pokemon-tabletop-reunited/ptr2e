@@ -6,12 +6,11 @@
     "slug": "dive",
     "actions": [
       {
-        "slug": "dive",
-        "name": "Dive",
+        "slug": "dive-resolution",
+        "name": "Dive (Resolution)",
         "type": "attack",
         "traits": [
           "set-up",
-          "defensive",
           "contact",
           "pass-3",
           "field",
@@ -32,20 +31,49 @@
         "types": [
           "water"
         ],
-        "description": "<p>Effect: Set-Up: The user freely Moves up to half of their Base Swim Score, and ends their Activation. While in this state, they have +4 EVA Stages.</p><p>Resolution: On their next Activation, the user freely Moves up to one-and-a-half times their Base Swim Score and attacks with Dive.</p>",
-        "contestType": "",
-        "contestEffect": "",
-        "free": false,
-        "slot": null
+        "description": "<p>Trigger: The user used Dive (Set Up) as their last Action.</p><p>Effect: The user freely Moves up to one-and-a-half times their Swim Score (if the user lacks a Swim Score, they may move up to 4m via Swim) before attacking with this Attack.</p>",
+        "img": "systems/ptr2e/img/svg/water_icon.svg",
+        "predicate": []
+      },
+      {
+        "name": "Dive (Set-Up)",
+        "slug": "dive-set-up",
+        "description": "<p>Effect: The user gains +4 EVA stages for 3 Activations, and freely Moves up to freely Moves up to their Swim Score (if the user lacks a Swim Score, they may move up to 3m via Swim).</p>",
+        "traits": [
+          "set-up",
+          "defensive",
+          "delay-1"
+        ],
+        "type": "attack",
+        "img": "systems/ptr2e/img/svg/water_icon.svg",
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 2,
+          "delay": 1
+        },
+        "range": {
+          "target": "self",
+          "unit": "m"
+        },
+        "types": [
+          "water"
+        ],
+        "category": "status",
+        "predicate": []
       }
     ],
-    "container": null,
     "grade": "D",
     "publication": {
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
+      ],
+      "notes": ""
+    },
+    "traits": [],
+    "_migration": {
+      "version": null,
+      "previous": null
     }
   },
   "_id": "G4SRScedf5uS7s1I",

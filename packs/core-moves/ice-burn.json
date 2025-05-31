@@ -6,14 +6,13 @@
     "slug": "ice-burn",
     "actions": [
       {
-        "slug": "ice-burn",
-        "name": "Ice Burn",
+        "slug": "ice-burn-resolution",
+        "name": "Ice Burn (Resolution)",
         "type": "attack",
         "traits": [
-          "set-up",
-          "defensive",
-          "blast-5",
           "legendary",
+          "set-up",
+          "blast-5",
           "pp-updated"
         ],
         "range": {
@@ -23,28 +22,59 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 10
+          "powerPoints": 5
         },
         "category": "special",
         "power": 140,
         "accuracy": 90,
         "types": [
+          "fire",
           "ice"
         ],
-        "description": "<p>Effect: Set-Up: The user may freely Move using a Movement Score of their choice, and gains @Affliction[braced] 1.</p><p>Resolution: On their next Activation, the user attacks with and resolve Ice Burn. On hit, all valid targets have a 30% chance of gaining @Affliction[burn] 7.</p>",
-        "contestType": "",
-        "contestEffect": "",
-        "free": false,
-        "slot": null
+        "description": "<p>Trigger: The user used Ice Burn (Set Up) as their last Action.</p><p>Resolution: On hit, all valid targets have a 30% chance of gaining @Affliction[burn 7].</p>",
+        "img": "systems/ptr2e/img/svg/ice_icon.svg",
+        "predicate": []
+      },
+      {
+        "name": "Ice Burn (Set-Up)",
+        "slug": "ice-burn-set-up",
+        "description": "<p>Effect: The user may freely Move using a Movement Score of their choice, and gains @Affliction[braced 1].</p>",
+        "traits": [
+          "legendary",
+          "set-up",
+          "defensive",
+          "priority-2"
+        ],
+        "type": "attack",
+        "img": "systems/ptr2e/img/svg/ice_icon.svg",
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 5,
+          "priority": 2
+        },
+        "range": {
+          "target": "self",
+          "unit": "m"
+        },
+        "types": [
+          "ice"
+        ],
+        "category": "status",
+        "predicate": []
       }
     ],
-    "container": null,
     "grade": "A",
     "publication": {
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
+      ],
+      "notes": ""
+    },
+    "traits": [],
+    "_migration": {
+      "version": null,
+      "previous": null
     }
   },
   "_id": "gFKeZJpItbUkPUmO",

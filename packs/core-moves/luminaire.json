@@ -17,8 +17,8 @@
     "traits": [],
     "actions": [
       {
-        "name": "Luminaire",
-        "slug": "luminaire",
+        "name": "Luminaire (Resolution)",
+        "slug": "luminaire-resolution",
         "type": "attack",
         "img": "systems/ptr2e/img/svg/untyped_icon.svg",
         "traits": [
@@ -35,7 +35,8 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 11
+          "powerPoints": 5,
+          "trigger": "The user used Luminaire (Set-Up) as their last Action."
         },
         "types": [
           "untyped"
@@ -44,7 +45,34 @@
         "power": 160,
         "accuracy": 90,
         "predicate": [],
-        "description": "<p>Effect: Set-Up: The user gains +1 SPATK and EVA Stage for 5 Activations, and ends their Activation.</p><p>Resolution: On their next Activation, they attack with and resolve Luminaire. On hit, all valid targets have a 30% chance of losing -1 ACC for 5 Activations, and a 10% chance of gaining @Affliction[blinded] 5.</p>"
+        "description": "<p>Trigger: The user used Luminaire (Set-Up) as their last Action.</p><p>Effect: On hit, all valid targets have a 30% chance of losing -1 ACC for 5 Activations, and a 10% chance of gaining @Affliction[blinded 5].</p>"
+      },
+      {
+        "name": "Luminaire (Set-Up)",
+        "slug": "luminaire-set-up",
+        "description": "<p>Effect: The user gains +1 SPATK and SPD Stage for 5 Activations.</p>",
+        "traits": [
+          "arcane",
+          "set-up",
+          "defensive",
+          "delay-2"
+        ],
+        "type": "attack",
+        "img": "systems/ptr2e/img/svg/untyped_icon.svg",
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 5,
+          "delay": 2
+        },
+        "range": {
+          "target": "self",
+          "unit": "m"
+        },
+        "types": [
+          "untyped"
+        ],
+        "category": "status",
+        "predicate": []
       }
     ],
     "grade": "A"
@@ -68,7 +96,8 @@
             "mode": 2,
             "priority": null,
             "ignored": false,
-            "alterations": []
+            "alterations": [],
+            "dontMerge": false
           },
           {
             "type": "roll-effect",
@@ -80,7 +109,8 @@
             "mode": 2,
             "priority": null,
             "ignored": false,
-            "alterations": []
+            "alterations": [],
+            "dontMerge": false
           }
         ],
         "slug": null,
@@ -109,15 +139,15 @@
       "_stats": {
         "compendiumSource": "Compendium.ptr2e.core-moves.Item.15GtkCYhWPhaRycg.ActiveEffect.kD9guYXqkGZD6vb0",
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.344",
         "systemId": "ptr2e",
         "systemVersion": "1.1.0.beta",
         "createdTime": null,
         "modifiedTime": null,
-        "lastModifiedBy": null
+        "lastModifiedBy": null,
+        "exportSource": null
       }
     }
   ],
-  "flags": {},
   "_id": "jdY1fMOVV4wODaSR"
 }

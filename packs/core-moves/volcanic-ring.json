@@ -13,18 +13,18 @@
         "img": "systems/ptr2e/img/svg/fire_icon.svg",
         "traits": [
           "set-up",
-          "defensive",
-          "blast-2",
-          "defrost"
+          "defrost",
+          "blast-3"
         ],
         "range": {
           "target": "blast",
-          "distance": 5,
+          "distance": 8,
           "unit": "m"
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 6
+          "powerPoints": 4,
+          "trigger": "The user used Volcanic Ring (Set-Up) as their last Action."
         },
         "types": [
           "fire"
@@ -32,11 +32,36 @@
         "category": "special",
         "power": 100,
         "accuracy": 90,
-        "description": "<p>Effect: Set-Up: The user forms a swirling ring of flames, gaining @Affliction[rebound] until this attack is resolved.</p><p>Resolution: On their next Activation, the user attacks with and resolves this attack. Upon resolving this attack, the user gains Ring 5.</p>",
+        "description": "<p>Trigger: The user used Volcanic Ring (Set-Up) as their last Action.</p><p>Effect: On hit, all valid targets have a 30% chance of gaining @Affliction[burn 5]. On resolution, the user gains @Affliction[ringed 5].</p>",
+        "predicate": []
+      },
+      {
+        "name": "Volcanic Ring (Set-Up)",
+        "slug": "volcanic-ring-set-up",
+        "description": "<p>Effect: The user gains @Affliction[braced 2] and @Affliction[rebound 2].</p>",
+        "traits": [
+          "set-up",
+          "defensive",
+          "defrost"
+        ],
+        "type": "attack",
+        "img": "systems/ptr2e/img/svg/fire_icon.svg",
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 4
+        },
+        "range": {
+          "target": "self",
+          "unit": "m"
+        },
+        "types": [
+          "fire"
+        ],
+        "category": "status",
         "predicate": []
       }
     ],
-    "grade": "A",
+    "grade": "B",
     "traits": [],
     "_migration": {
       "version": null,
@@ -46,7 +71,8 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
+      ],
+      "notes": ""
     }
   },
   "effects": []

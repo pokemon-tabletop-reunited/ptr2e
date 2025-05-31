@@ -6,35 +6,61 @@
     "slug": "quantum-leap",
     "actions": [
       {
-        "slug": "quantum-leap",
-        "name": "Quantum Leap",
-        "type": "attack",
+        "name": "Quantum Leap (Resolution)",
+        "slug": "quantum-leap-resolution",
+        "description": "<p>Trigger: The user used Quantum Leap (Set-Up) as their last Action.</p><p>Effect: The user freely Moves up to twice the Movement Score of their choice and is cured of @Affliction[transient] before attacking with this Attack.</p>",
         "traits": [
           "legendary",
           "set-up",
-          "crushing",
-          "pierce",
-          "crit-2",
           "contact",
-          "pp-updated"
+          "pierce",
+          "crit-2"
         ],
+        "type": "attack",
+        "img": "systems/ptr2e/img/svg/nuclear_icon.svg",
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 2,
+          "trigger": "The user used Quantum Leap (Set-Up) as their last Action."
+        },
         "range": {
           "target": "creature",
           "distance": 1,
           "unit": "m"
         },
-        "cost": {
-          "activation": "complex",
-          "powerPoints": 3
-        },
-        "category": "physical",
-        "power": 100,
-        "accuracy": 100,
         "types": [
           "nuclear"
         ],
-        "description": "<p>Effect: Set-Up: The user gains @Affliction[transient] 1 and @Affliction[braced] 1 and ends their Activation.</p><p>Resolution: On their next Activation, the user freely Moves up to twice the Movement Score of their choice, is cured of @Affliction[transient], and attacks with and resolves this attack.</p>",
-        "img": "icons/svg/explosion.svg",
+        "category": "physical",
+        "defensiveStat": "spd",
+        "predicate": [],
+        "power": 100,
+        "accuracy": 100
+      },
+      {
+        "name": "Quantum Leap (Set-Up)",
+        "slug": "quantum-leap-set-up",
+        "description": "<p>Effect: The user gains @Affliction[transient 1] and @Affliction[braced 1].</p>",
+        "traits": [
+          "legendary",
+          "set-up",
+          "defensive",
+          "priority-4"
+        ],
+        "type": "attack",
+        "img": "systems/ptr2e/img/svg/nuclear_icon.svg",
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 2
+        },
+        "range": {
+          "target": "self",
+          "unit": "m"
+        },
+        "types": [
+          "nuclear"
+        ],
+        "category": "status",
         "predicate": []
       }
     ],

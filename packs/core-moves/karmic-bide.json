@@ -3,14 +3,13 @@
   "type": "move",
   "img": "systems/ptr2e/img/svg/psychic_icon.svg",
   "system": {
-    "slug": "bide",
+    "slug": "karmic-bide",
     "actions": [
       {
-        "name": "Karmic Bide",
+        "name": "Karmic Bide (Resolution)",
         "slug": "karmic-bide",
         "type": "attack",
         "traits": [
-          "defensive",
           "set-up",
           "danger-close",
           "friendly"
@@ -22,28 +21,55 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 7
+          "powerPoints": 5
         },
         "category": "special",
-        "power": null,
-        "accuracy": null,
         "types": [
           "psychic"
         ],
-        "description": "<p>Effect: Set Up: the user gains @Affliction[braced] 2, and allied creatures within 10m of the user gain @Affliction[marked] 3. The user's next Initiative is delayed 30%.</p><p>Resolution: On the user's next Activation, they deal twice the total damage the @Affliction[marked] allies took since the user declared this attack, evenly split amongst all valid targets.</p>",
-        "contestType": "",
-        "contestEffect": "",
-        "free": false,
-        "slot": null
+        "description": "<p>Trigger: The user used Karmic Bide (Set-Up) as their last Action.</p><p>Resolution: The user deals twice the total damage their @Affliction[marked] allies have taken since the user declared Karmic Bide (Set-Up), evenly split amongst all valid targets.</p>",
+        "img": "systems/ptr2e/img/svg/psychic_icon.svg",
+        "predicate": []
+      },
+      {
+        "name": "Karmic Bide (Set-Up)",
+        "slug": "karmic-bide-set-up",
+        "description": "<p>Effect: The user gains @Affliction[braced 2], and allied creatures within range gain @Affliction[marked 3].</p>",
+        "traits": [
+          "set-up",
+          "defensive",
+          "delay-3"
+        ],
+        "type": "attack",
+        "img": "systems/ptr2e/img/svg/psychic_icon.svg",
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 5
+        },
+        "range": {
+          "target": "emanation",
+          "distance": 10,
+          "unit": "m"
+        },
+        "types": [
+          "psychic"
+        ],
+        "category": "status",
+        "predicate": []
       }
     ],
-    "container": null,
-    "grade": "C",
+    "grade": "B",
     "publication": {
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
+      ],
+      "notes": ""
+    },
+    "traits": [],
+    "_migration": {
+      "version": null,
+      "previous": null
     }
   },
   "_id": "Co4KJ9riUaghDK9Z",
