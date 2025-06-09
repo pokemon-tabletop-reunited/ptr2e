@@ -40,7 +40,7 @@ declare global {
             //V13 aliases
             export const nue: {Tour: typeof Tour}
             export const appv1: {sheets: {ItemSheet: typeof ItemSheet, ActorSheet: typeof ActorSheet, }}
-            export const helpers: {media: {ImageHelper: typeof ImageHelper}}
+            export const helpers: {media: {ImageHelper: typeof ImageHelper}, interaction: {TooltipManager: typeof TooltipManager}}
         }
     }
 }

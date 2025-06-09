@@ -136,10 +136,17 @@ class CombatPTR2e extends Combat<CombatSystemPTR2e> {
       const oldCombatant = this.combatant;
       const result = await this.update(updateData);
       if (result) {
-        if (updateData.round) await ChatMessage.create({
-          type: "combat",
-          flavor: game.i18n.format("PTR2E.Combat.Messages.Round", { round: updateData.round }),
-        });
+        if (updateData.round) {
+          await ChatMessage.create({
+            type: "combat",
+            flavor: game.i18n.format("PTR2E.Combat.Messages.Round", { round: updateData.round }),
+          });
+          for(const combatant of this.combatants) {
+            if(combatant.token) {
+              combatant.token.registerSpentMovement(true);
+            }
+          }
+        }
         await oldCombatant?.onEndActivation();
         await this.combatant?.onStartActivation();
       }

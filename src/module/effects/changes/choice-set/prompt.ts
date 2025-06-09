@@ -41,7 +41,8 @@ class ChoiceSetPrompt extends PickAThingPrompt<ItemPTR2e<ItemSystemPTR, ActorPTR
       choices: this.choices.map((c, i) => ({
         ...c,
         value: i,
-        hasUUID: UUIDUtils.isItemUUID(c.value)
+        hasUUID: UUIDUtils.isItemUUID(c.value),
+        uuid: c.value,
       })),
       prompt: this.prompt,
       includeDropZone: !!this.allowedDrops,

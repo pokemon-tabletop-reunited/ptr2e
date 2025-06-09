@@ -90,6 +90,7 @@ export default class TooltipsPTR2e {
           return this._onDamageTooltip();
         case "content-link":
         case "item":
+        case "perk":
           return this._onContentLinkTooltip();
         case "damage-info":
           return this._onDamageInfoTooltip();
@@ -546,7 +547,7 @@ export default class TooltipsPTR2e {
     if (!range) return false;
 
     this.tooltip.innerHTML = await foundry.applications.ux.TextEditor.enrichHTML(game.i18n.localize(`PTR2E.Ranges.${range}`));
-    requestAnimationFrame(() => this._positionTooltip(game.tooltip.element?.dataset.tooltipDirection as TooltipDirections | undefined || TooltipManager.TOOLTIP_DIRECTIONS.DOWN));
+    requestAnimationFrame(() => this._positionTooltip(game.tooltip.element?.dataset.tooltipDirection as TooltipDirections | undefined || foundry.helpers.interaction.TooltipManager.TOOLTIP_DIRECTIONS.DOWN));
 
     return 500;
   }
@@ -744,7 +745,7 @@ export default class TooltipsPTR2e {
     await this._renderTooltip({
       path: "systems/ptr2e/templates/apps/data-inspector/tooltip.hbs",
       data,
-      direction: TooltipManager.TOOLTIP_DIRECTIONS.UP,
+      direction: foundry.helpers.interaction.TooltipManager.TOOLTIP_DIRECTIONS.UP,
     });
 
     return 500;
@@ -883,7 +884,7 @@ export default class TooltipsPTR2e {
   async _renderTooltip({
     path,
     data,
-    direction = TooltipManager.TOOLTIP_DIRECTIONS.DOWN,
+    direction = foundry.helpers.interaction.TooltipManager.TOOLTIP_DIRECTIONS.DOWN,
     autoLock = true,
   }: {
     path: string;
@@ -909,8 +910,8 @@ export default class TooltipsPTR2e {
    * Position the tooltip
    * @param direction - The direction to position the tooltip
    */
-  _positionTooltip(direction: TooltipDirections = TooltipManager.TOOLTIP_DIRECTIONS.DOWN) {
-    const padding = TooltipManager.TOOLTIP_MARGIN_PX;
+  _positionTooltip(direction: TooltipDirections = foundry.helpers.interaction.TooltipManager.TOOLTIP_DIRECTIONS.DOWN) {
+    const padding = foundry.helpers.interaction.TooltipManager.TOOLTIP_MARGIN_PX;
     const targetBox = game.tooltip.element?.getBoundingClientRect() ?? new DOMRect();
     let position: {
       textAlign?: "left" | "center" | "right";
@@ -920,35 +921,35 @@ export default class TooltipsPTR2e {
       bottom?: number | null;
     } = {};
     switch (direction) {
-      case TooltipManager.TOOLTIP_DIRECTIONS.DOWN:
+      case foundry.helpers.interaction.TooltipManager.TOOLTIP_DIRECTIONS.DOWN:
         position = {
           textAlign: "center",
           left: targetBox.left - this.tooltip.offsetWidth / 2 + targetBox.width / 2,
           top: targetBox.bottom + padding,
         };
         break;
-      case TooltipManager.TOOLTIP_DIRECTIONS.LEFT:
+      case foundry.helpers.interaction.TooltipManager.TOOLTIP_DIRECTIONS.LEFT:
         position = {
           textAlign: "left",
           right: window.innerWidth - targetBox.left + padding,
           top: targetBox.top + targetBox.height / 2 - this.tooltip.offsetHeight / 2,
         };
         break;
-      case TooltipManager.TOOLTIP_DIRECTIONS.RIGHT:
+      case foundry.helpers.interaction.TooltipManager.TOOLTIP_DIRECTIONS.RIGHT:
         position = {
           textAlign: "right",
           left: targetBox.right + padding,
           top: targetBox.top + targetBox.height / 2 - this.tooltip.offsetHeight / 2,
         };
         break;
-      case TooltipManager.TOOLTIP_DIRECTIONS.UP:
+      case foundry.helpers.interaction.TooltipManager.TOOLTIP_DIRECTIONS.UP:
         position = {
           textAlign: "center",
           left: targetBox.left - this.tooltip.offsetWidth / 2 + targetBox.width / 2,
           bottom: window.innerHeight - targetBox.top + padding,
         };
         break;
-      case TooltipManager.TOOLTIP_DIRECTIONS.CENTER:
+      case foundry.helpers.interaction.TooltipManager.TOOLTIP_DIRECTIONS.CENTER:
         position = {
           textAlign: "center",
           left: targetBox.left - this.tooltip.offsetWidth / 2 + targetBox.width / 2,

@@ -29,7 +29,7 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
       "toggle-edit-mode": function (this: PerkWebApp) {
         this.editMode = !this.editMode;
         if (this.editMode) {
-          if (!ui.perksTab.popout || ui.perksTab.popout._minimized) ui.perksTab.renderPopout();
+          if (!ui.perksTab.popout || ui.perksTab.popout.minimized) ui.perksTab.renderPopout();
 
           if (game.settings.get("ptr2e", "dev-mode")) {
             const pack = game.packs.get("ptr2e.core-perks");

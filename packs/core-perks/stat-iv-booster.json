@@ -1,14 +1,16 @@
 {
   "name": "<Stat> IV Booster",
   "type": "perk",
-  "folder": "zrVtKATNxzLNxTUf",
+  "folder": "minorbuffsfolder",
   "system": {
     "prerequisites": [],
     "cost": 1,
     "description": "<p>Increase one <Stat>'s IV by 5.</p>",
     "actions": [],
     "slug": "stat-iv-booster-1",
-    "traits": [],
+    "traits": [
+      "minor-buff"
+    ],
     "_migration": {
       "version": null,
       "previous": null
@@ -406,27 +408,33 @@
             "choices": [
               {
                 "value": "system.attributes.hp.ivs",
-                "label": "HP"
+                "label": "HP",
+                "predicate": [{"lte": ["{actor|system.attributes.hp.ivs}", 25]}]
               },
               {
                 "value": "system.attributes.atk.ivs",
-                "label": "Attack"
+                "label": "Attack",
+                "predicate": [{"lte": ["{actor|system.attributes.atk.ivs}", 25]}]
               },
               {
                 "value": "system.attributes.def.ivs",
-                "label": "Defense"
+                "label": "Defense",
+                "predicate": [{"lte": ["{actor|system.attributes.def.ivs}", 25]}]
               },
               {
                 "value": "system.attributes.spa.ivs",
-                "label": "Special Attack"
+                "label": "Special Attack",
+                "predicate": [{"lte": ["{actor|system.attributes.spa.ivs}", 25]}]
               },
               {
                 "value": "system.attributes.spd.ivs",
-                "label": "Special Defense"
+                "label": "Special Defense",
+                "predicate": [{"lte": ["{actor|system.attributes.spd.ivs}", 25]}]
               },
               {
                 "value": "system.attributes.spe.ivs",
-                "label": "Speed"
+                "label": "Speed",
+                "predicate": [{"lte": ["{actor|system.attributes.spe.ivs}", 25]}]
               }
             ],
             "prompt": "Pick a Stat",
