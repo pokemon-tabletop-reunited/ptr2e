@@ -24,7 +24,6 @@ import { AttackPTR2e, PTRCONSTS, Trait } from "@data";
 import { PerksComponent } from "./components/perks-component.ts";
 import { AbilitiesComponent } from "./components/abilities-component.ts";
 import { StatsChart } from "./sheets/stats-chart.ts";
-import StatsForm from "./sheets/stats-form.ts";
 import { ActiveEffectPTR2e } from "@effects";
 import { natures } from "@scripts/config/natures.ts";
 import { AvailableAbilitiesApp } from "@module/apps/available-abilities.ts";
@@ -37,6 +36,7 @@ import { ToggleComponent } from "./components/toggle-component.ts";
 import { PerkWebApp } from "@module/apps/perk-web/perk-web-v2.ts";
 import { DexApp } from "@module/apps/dex.ts";
 import MoveSystem from "@item/data/move.ts";
+import { StatsEditor } from "./sheets/stats-editor.ts";
 
 class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixin(
   ActorSheetV2Expanded
@@ -47,157 +47,199 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
     this.statsChart = new StatsChart(this);
   }
 
-  static override DEFAULT_OPTIONS = fu.mergeObject(
-    super.DEFAULT_OPTIONS,
-    {
-      classes: ["ptr2e", "sheet", "actor", "v2"],
-      position: {
-        width: 900,
-        height: 720,
-      },
-      window: {
-        resizable: true,
-        controls: [
-          ...(super.DEFAULT_OPTIONS?.window?.controls ?? []),
-          {
-            icon: "fas fa-atom",
-            label: "PTR2E.ActorSheet.Inspector",
-            action: "open-inspector",
-            visible: true
-          }
-        ],
-      },
-      form: {
-        submitOnChange: true,
-      },
-      dragDrop: [
+  static override DEFAULT_OPTIONS = {
+    classes: ["ptr2e", "sheet", "actor", "v2"],
+    position: {
+      width: 900,
+      height: 720,
+    },
+    window: {
+      resizable: true,
+      controls: [
+        ...(super.DEFAULT_OPTIONS?.window?.controls ?? []),
         {
-          dropSelector: ".window-content",
-          dragSelector:
-            "fieldset .item, fieldset .effect, fieldset .action, ul.items > li",
-        },
+          icon: "fas fa-atom",
+          label: "PTR2E.ActorSheet.Inspector",
+          action: "open-inspector",
+          visible: true
+        }
       ],
-      actions: {
-        "toggle-temporary": async function (this: ActorSheetPTRV2, event: Event) {
-          const itemId = htmlClosest(event.target, "[data-item-id]")?.dataset.itemId;
-          const item = this.actor.items.get(itemId, { strict: true }) as ConsumablePTR2e;
-          item.update({"system.temporary": !item.system.temporary});
-        },
-        "reset-ip": async function (this: ActorSheetPTRV2) {
-          foundry.applications.api.DialogV2.confirm({
-            window: {
-              title: game.i18n.format("PTR2E.ActorSheet.ResetIP.title", {
-                name: this.document.name,
-              }),
-            },
-            content: game.i18n.format("PTR2E.ActorSheet.ResetIP.content", {
+    },
+    form: {
+      submitOnChange: true,
+    },
+    dragDrop: [
+      {
+        dropSelector: ".window-content",
+        dragSelector:
+          "fieldset .item, fieldset .effect, fieldset .action, ul.items > li",
+      },
+    ],
+    actions: {
+      "toggle-temporary": async function (this: ActorSheetPTRV2, event: Event) {
+        const itemId = htmlClosest(event.target, "[data-item-id]")?.dataset.itemId;
+        const item = this.actor.items.get(itemId, { strict: true }) as ConsumablePTR2e;
+        item.update({ "system.temporary": !item.system.temporary });
+      },
+      "reset-ip": async function (this: ActorSheetPTRV2) {
+        foundry.applications.api.DialogV2.confirm({
+          window: {
+            title: game.i18n.format("PTR2E.ActorSheet.ResetIP.title", {
               name: this.document.name,
             }),
-            yes: {
-              callback: async () => {
-                await this.document.update({
-                  "system.inventoryPoints.current": this.document.system.inventoryPoints.max,
-                });
-                await this.document.deleteEmbeddedDocuments("Item", this.document.itemTypes.consumable.filter(i => i.system.temporary).map((i) => i.id));
-                this.render({parts: ["inventory"]});
-              },
+          },
+          content: game.i18n.format("PTR2E.ActorSheet.ResetIP.content", {
+            name: this.document.name,
+          }),
+          yes: {
+            callback: async () => {
+              await this.document.update({
+                "system.inventoryPoints.current": this.document.system.inventoryPoints.max,
+              });
+              await this.document.deleteEmbeddedDocuments("Item", this.document.itemTypes.consumable.filter(i => i.system.temporary).map((i) => i.id));
+              this.render({ parts: ["inventory"] });
             },
-          });
-        },
-        "open-carry-type-menu": ActorSheetPTRV2.openCarryTypeMenu,
-        "species-header": async function (this: ActorSheetPTRV2, event: Event) {
-          event.preventDefault();
-          const species = this.actor.items.get("actorspeciesitem") as SpeciesPTR2e;
-          if (!species) return;
-          species.sheet.render(true);
-        },
-        "open-inspector": async function (this: ActorSheetPTRV2, event: Event) {
-          event.preventDefault();
-          const inspector = new DataInspector(this.actor);
-          inspector.render(true);
-        },
-        "open-perk-web": async function (this: ActorSheetPTRV2) {
-          if ([true, undefined].includes(this.actor.flags.ptr2e?.sheet?.perkFlash))
-            await this.actor.setFlag("ptr2e", "sheet.perkFlash", false);
+          },
+        });
+      },
+      "open-carry-type-menu": ActorSheetPTRV2.openCarryTypeMenu,
+      "species-header": async function (this: ActorSheetPTRV2, event: Event) {
+        event.preventDefault();
+        const species = this.actor.items.get("actorspeciesitem") as SpeciesPTR2e;
+        if (!species) return;
+        species.sheet.render(true);
+      },
+      "open-inspector": async function (this: ActorSheetPTRV2, event: Event) {
+        event.preventDefault();
+        const inspector = new DataInspector(this.actor);
+        inspector.render(true);
+      },
+      "open-perk-web": async function (this: ActorSheetPTRV2) {
+        if ([true, undefined].includes(this.actor.flags.ptr2e?.sheet?.perkFlash))
+          await this.actor.setFlag("ptr2e", "sheet.perkFlash", false);
 
-          canvas.tokens.controlled.forEach(t => t.release());
+        canvas.tokens.controlled.forEach(t => t.release());
 
-          const app = new PerkWebApp(this.actor);
-          app.render(true);
-        },
-        "open-party-sheet": async function (this: ActorSheetPTRV2) {
-          if (!this.actor.party) return;
-          new PartySheetPTR2e({ folder: this.actor.folder! }).render(true);
-        },
-        "edit-movelist": function (this: ActorSheetPTRV2) {
-          return new KnownActionsApp(this.actor).render(true);
-        },
-        "edit-abilitylist": function (this: ActorSheetPTRV2) {
-          return new AvailableAbilitiesApp(this.actor).render(true);
-        },
-        "roll-attack": async function (this: ActorSheetPTRV2, event: Event) {
-          const actionDiv = (event.target as HTMLElement).closest(
-            ".action"
-          ) as HTMLElement;
-          if (!actionDiv) return;
+        const app = new PerkWebApp(this.actor);
+        app.render(true);
+      },
+      "open-party-sheet": async function (this: ActorSheetPTRV2) {
+        if (!this.actor.party) return;
+        new PartySheetPTR2e({ folder: this.actor.folder! }).render(true);
+      },
+      "edit-movelist": function (this: ActorSheetPTRV2) {
+        return new KnownActionsApp(this.actor).render(true);
+      },
+      "edit-abilitylist": function (this: ActorSheetPTRV2) {
+        return new AvailableAbilitiesApp(this.actor).render(true);
+      },
+      "roll-attack": async function (this: ActorSheetPTRV2, event: Event) {
+        const actionDiv = (event.target as HTMLElement).closest(
+          ".action"
+        ) as HTMLElement;
+        if (!actionDiv) return;
 
-          const slug = actionDiv.dataset.slug;
-          if (!slug) return;
+        const slug = actionDiv.dataset.slug;
+        if (!slug) return;
 
-          const action = this.actor.actions.get(slug);
-          if (!action) return;
-          if ("rollable" in action && action.rollable === true)
-            await (action as AttackPTR2e).roll();
-        },
-        "action-to-chat": ActorSheetPTRV2._onToChatAction,
-        "action-edit": ActorSheetPTRV2._onEditAction,
-        "action-delete": ActorSheetPTRV2._onDeleteAction,
-        "favourite-skill": ActorSheetPTRV2._onFavouriteSkill,
-        "hide-skill": ActorSheetPTRV2._onHideSkill,
-        "toggle-hidden-skills": async function (this: ActorSheetPTRV2) {
-          const appSettings = fu.duplicate(
-            game.user.getFlag("ptr2e", "appSettings") ?? {}
-          ) as Record<string, Record<string, unknown>>;
-          if (!appSettings[this.appId])
-            appSettings[this.appId] = { hideHiddenSkills: true };
-          appSettings[this.appId].hideHiddenSkills =
-            !appSettings[this.appId].hideHiddenSkills;
-          await game.user.setFlag("ptr2e", "appSettings", appSettings);
+        const action = this.actor.actions.get(slug);
+        if (!action) return;
+        if ("rollable" in action && action.rollable === true)
+          await (action as AttackPTR2e).roll();
+      },
+      "action-to-chat": ActorSheetPTRV2._onToChatAction,
+      "action-edit": ActorSheetPTRV2._onEditAction,
+      "action-delete": ActorSheetPTRV2._onDeleteAction,
+      "favourite-skill": ActorSheetPTRV2._onFavouriteSkill,
+      "hide-skill": ActorSheetPTRV2._onHideSkill,
+      "toggle-hidden-skills": async function (this: ActorSheetPTRV2) {
+        const appSettings = fu.duplicate(
+          game.user.getFlag("ptr2e", "appSettings") ?? {}
+        ) as Record<string, Record<string, unknown>>;
+        if (!appSettings[this.appId])
+          appSettings[this.appId] = { hideHiddenSkills: true };
+        appSettings[this.appId].hideHiddenSkills =
+          !appSettings[this.appId].hideHiddenSkills;
+        await game.user.setFlag("ptr2e", "appSettings", appSettings);
 
-          for (const app of Object.values(this.actor.apps)) {
-            if (app instanceof foundry.applications.api.ApplicationV2) {
-              const parts = (app as unknown as { parts: Record<string, unknown> })
-                .parts;
-              if ("popout" in parts) app.render({ parts: ["popout"] });
-              if ("skills" in parts) app.render({ parts: ["skills"] });
-            } else app?.render();
-          }
-        },
-        "edit-skills": async function (this: ActorSheetPTRV2) {
-          return new SkillsEditor(this.actor).render(true);
-        },
-        "luck-roll": async function (this: ActorSheetPTRV2) {
-          const skill = this.actor.system.skills.get("luck")!;
-          await skill.endOfDayLuckRoll();
-        },
-        "rest": function (this: ActorSheetPTRV2) {
-          const toHeal = this.actor?.party ? [this.actor.party.owner!, ...(this.actor.party.party ?? [])] : [this.actor];
-          new RestApp(this.document.name, toHeal).render(true);
-        },
-        "open-dex": async function (this: ActorSheetPTRV2) {
-          new DexApp(this.actor).render(true);
-        },
-        "add-clock": ActorSheetPTRV2.#onAddClock,
-        "open-tutor-list": function (this: ActorSheetPTRV2) {
-          game.ptr.tutorList.render({ force: true, actor: this.actor });
-        },
-        "open-stats-chart": function (this: ActorSheetPTRV2) {
-          new StatsForm({ document: this.actor }).render(true);
+        for (const app of Object.values(this.actor.apps)) {
+          if (app instanceof foundry.applications.api.ApplicationV2) {
+            const parts = (app as unknown as { parts: Record<string, unknown> })
+              .parts;
+            if ("popout" in parts) app.render({ parts: ["popout"] });
+            if ("skills" in parts) app.render({ parts: ["skills"] });
+          } else app?.render();
         }
       },
+      "edit-skills": async function (this: ActorSheetPTRV2) {
+        return new SkillsEditor(this.actor).render(true);
+      },
+      "luck-roll": async function (this: ActorSheetPTRV2) {
+        const skill = this.actor.system.skills.get("luck")!;
+        await skill.endOfDayLuckRoll();
+      },
+      "rest": function (this: ActorSheetPTRV2) {
+        const toHeal = this.actor?.party ? [this.actor.party.owner!, ...(this.actor.party.party ?? [])] : [this.actor];
+        new RestApp(this.document.name, toHeal).render(true);
+      },
+      "open-dex": async function (this: ActorSheetPTRV2) {
+        new DexApp(this.actor).render(true);
+      },
+      "add-clock": ActorSheetPTRV2.#onAddClock,
+      "open-tutor-list": function (this: ActorSheetPTRV2) {
+        game.ptr.tutorList.render({ force: true, actor: this.actor });
+      },
+      "open-stats-chart": function (this: ActorSheetPTRV2) {
+        new StatsEditor({ document: this.actor }).render(true);
+      },
+      "create-item": async function (this: ActorSheetPTRV2, event: Event) {
+        const type = ((event.target as HTMLElement).closest("[data-type]") as HTMLElement)?.dataset.type;
+        if (!type) return;
+
+        return void await this.document.createEmbeddedDocuments("Item", [{
+          name: ItemPTR2e.defaultName({ type, parent: this.document }),
+          type,
+        }]);
+      },
+      "browse": async function (this: ActorSheetPTRV2, event: Event) {
+        const type = ((event.target as HTMLElement).closest("[data-type]") as HTMLElement)?.dataset.type;
+        if (!type) return;
+
+        await game.ptr.compendiumBrowser.loadTab("gear");
+        const gearTab = game.ptr.compendiumBrowser.compendiumTabs.gear;
+        if (!gearTab.filterData.checkboxes.type.options[type]) return;
+
+        gearTab.resetFilters();
+        gearTab.filterData.checkboxes.type.options[type].selected = true;
+        gearTab.filterData.checkboxes.type.selected = [type];
+
+        const grade = this.actor.grade;
+        gearTab.filterData.checkboxes.grade.selected = [];
+        if (grade === "A") {
+          gearTab.filterData.checkboxes.grade.options.A.selected = true;
+          gearTab.filterData.checkboxes.grade.selected.push("A");
+        }
+        if (["A", "B"].includes(grade)) {
+          gearTab.filterData.checkboxes.grade.options.B.selected = true;
+          gearTab.filterData.checkboxes.grade.selected.push("B");
+        }
+        if (["A", "B", "C"].includes(grade)) {
+          gearTab.filterData.checkboxes.grade.options.C.selected = true;
+          gearTab.filterData.checkboxes.grade.selected.push("C");
+        }
+        if (["A", "B", "C", "D"].includes(grade)) {
+          gearTab.filterData.checkboxes.grade.options.D.selected = true;
+          gearTab.filterData.checkboxes.grade.selected.push("D");
+        }
+        if (["A", "B", "C", "D", "E"].includes(grade)) {
+          gearTab.filterData.checkboxes.grade.options.E.selected = true;
+          gearTab.filterData.checkboxes.grade.selected.push("E");
+        }
+
+        await game.ptr.compendiumBrowser.render(true);
+      }
     },
-    { inplace: false }
-  );
+  } as unknown as Omit<Partial<DocumentSheetConfigurationExpanded>, "uniqueId">;
 
   get appId() {
     return this.id.replaceAll(".", "-");
@@ -408,7 +450,7 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
       hideHiddenSkills,
       shouldPerkFlash,
       natures: natures,
-      enrichedBiography: await TextEditor.enrichHTML(this.actor.system.details.biography),
+      enrichedBiography: await foundry.applications.ux.TextEditor.enrichHTML(this.actor.system.details.biography),
       allianceOptions,
       alliance
     };
@@ -450,6 +492,7 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
   ) {
     if (partId === "overview") {
       context.movement = Object.values(this.actor.system.movement);
+      context.jump = this.actor.jump;
 
       context.effectiveness = this._prepareEffectiveness();
     }
@@ -460,6 +503,10 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
 
     if (partId === "clocks") {
       context.clocks = game.user.isGM ? this.document.system.clocks.contents : this.document.system.clocks.contents.filter(c => !c.private);
+    }
+
+    if (partId === "skills") {
+      context.noAce = !this.actor.traits.has("ace");
     }
 
     if (partId === "inventory") {
@@ -597,7 +644,7 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
     if (partId === "overview") {
       this.statsChart.render();
       htmlQuery(htmlElement, ".stats-chart")?.addEventListener("dblclick", () =>
-        new StatsForm({ document: this.actor }).render(true)
+        new StatsEditor({ document: this.actor }).render(true)
       );
     }
 
@@ -632,7 +679,15 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
 
           const clocks = fu.duplicate(this.document.system._source.clocks);
           const index = clocks.findIndex((c) => c.id === clock.id);
-          if (index === -1) return;
+          if (index === -1) {
+            const clock = this.document.system.clocks.get(id as string)?.toObject() as Clock.Source;
+            if (!clock) return;
+            clocks.push({
+              ...clock,
+              value: clock.value >= clock.max ? 0 : clock.value + 1,
+            });
+            return this.document.update({ "system.clocks": clocks });
+          }
           clocks[index].value = clock.value >= clock.max ? 0 : clock.value + 1;
 
           return this.document.update({ "system.clocks": clocks });
@@ -647,7 +702,15 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
 
           const clocks = fu.duplicate(this.document.system._source.clocks);
           const index = clocks.findIndex((c) => c.id === clock.id);
-          if (index === -1) return;
+          if (index === -1) {
+            const clock = this.document.system.clocks.get(id as string)?.toObject() as Clock.Source;
+            if (!clock) return;
+            clocks.push({
+              ...clock,
+              value: clock.value <= 0 ? clock.max : clock.value - 1,
+            });
+            return this.document.update({ "system.clocks": clocks });
+          }
           clocks[index].value = clock.value <= 0 ? clock.max : clock.value - 1;
 
           return this.document.update({ "system.clocks": clocks });
@@ -673,6 +736,10 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
             ?.getAttribute("data-id");
           const clock = this.document.system.clocks.get(id as string);
           if (!clock) return;
+
+          if (!this.document.system._source.clocks.find(c => c.id === clock.id)) {
+            return void ui.notifications.warn("Temporary clocks cannot be manually deleted, please make sure to alter this clock once first to make it permanent.");
+          }
 
           return await foundry.applications.api.DialogV2.prompt({
             buttons: [
@@ -887,7 +954,7 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
       );
     }
 
-    if("system.details.alliance" in submitData) {
+    if ("system.details.alliance" in submitData) {
       const alliance = submitData["system.details.alliance"];
       if (alliance === "default") submitData["system.details.alliance"] = '';
       if (alliance === "neutral") submitData["system.details.alliance"] = null;
@@ -940,7 +1007,7 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
         type: string;
       };
       uuid?: string;
-    } = TextEditor.getDragEventData(event);
+    } = foundry.applications.ux.TextEditor.getDragEventData(event);
 
     if (data.uuid) {
       const item = await fromUuid(data.uuid);
@@ -951,7 +1018,7 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
       ) {
         return void this._onDropAbility(event, item);
       }
-      if(
+      if (
         this.actor.isOwner &&
         item instanceof ItemPTR2e &&
         item.type == "move" &&
@@ -959,13 +1026,13 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
       ) {
         const move = item.toObject() as MovePTR2e['_source'];
         const actionDiv = (event.target as HTMLElement).closest(".action[data-slot]") as HTMLElement;
-        if(actionDiv) {
+        if (actionDiv) {
           const slot = Number(actionDiv.dataset.slot);
           if (isNaN(slot)) return;
 
           const primaryAction = (move.system as unknown as MoveSystem["_source"]).actions[0]
           const currentAction = this.actor.attacks.actions[slot];
-          if(currentAction) await currentAction.update({ slot: null });
+          if (currentAction) await currentAction.update({ slot: null });
           primaryAction.slot = slot;
 
           return this.actor.createEmbeddedDocuments("Item", [move]);
@@ -1161,7 +1228,7 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
 
     const itemId = htmlClosest(event.target, "[data-item-id]")?.dataset.itemId;
     const item = this.actor.items.get(itemId, { strict: true });
-    const template = await renderTemplate("systems/ptr2e/templates/apps/carry-type-menu.hbs", { item });
+    const template = await foundry.applications.handlebars.renderTemplate("systems/ptr2e/templates/apps/carry-type-menu.hbs", { item });
     const content = createHTMLElement("ul", { innerHTML: template });
     content.addEventListener("click", (event) => {
       const menuOption = htmlClosest(event.target, "a[data-carry-type]");
@@ -1178,6 +1245,16 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
       game.tooltip.dismissLockedTooltips();
     })
     game.tooltip.activate(event.target as HTMLElement, { cssClass: "ptr2e carry-type-menu", content, locked: true });
+  }
+
+  override async _preFirstRender(context: foundry.applications.api.ApplicationRenderContext, options: foundry.applications.api.HandlebarsRenderOptions): Promise<void> {
+    await super._preFirstRender(context, options);
+    this.actor.system.registerSpentMovement();
+  }
+
+  override bringToFront(): void {
+    if(foundry.applications.instances.has(`stats-editor-${this.actor.id}`)) return;
+    return super.bringToFront();
   }
 }
 

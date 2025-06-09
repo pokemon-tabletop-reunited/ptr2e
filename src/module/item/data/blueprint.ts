@@ -11,10 +11,11 @@ import FolderPTR2e from "@module/folder/document.ts";
 import natureToStatArray from "@scripts/config/natures.ts";
 import SpeciesSystem, { EvolutionData, LevelUpMoveSchema } from "./species.ts";
 import { AbilityPTR2e, MovePTR2e, SpeciesPTR2e, PerkPTR2e } from "@item";
-import { ImageResolver, NORMINV, sluggify } from "@utils";
+import { exportToJSON, ImageResolver, NORMINV, sluggify } from "@utils";
 import { TokenDocumentPTR2e } from "@module/canvas/token/document.ts";
 import { getInitialSkillList, partialSkillToSkill } from "@scripts/config/skills.ts";
 import { SkillSchema } from "@module/data/models/skill.ts";
+import { GeneratorConfig } from "@module/data/models/generator-config.ts";
 
 export default abstract class BlueprintSystem extends HasEmbed(HasMigrations(foundry.abstract.TypeDataModel), "blueprint") {
   /**
@@ -511,7 +512,7 @@ export default abstract class BlueprintSystem extends HasEmbed(HasMigrations(fou
           sets.map(async (set) => {
             // Pick one random ability from this set
             const ability = set[Math.floor(Math.random() * set.length)];
-            if(!ability) return {};
+            if (!ability) return {};
             return {
               selected: await fromUuid(ability.uuid),
               remaining: await Promise.all(set.filter((a) => a.uuid !== ability.uuid).map((a) => fromUuid(a.uuid)))
@@ -527,8 +528,8 @@ export default abstract class BlueprintSystem extends HasEmbed(HasMigrations(fou
               abilityData.system.slot = i++;
               acc.push(abilityData);
             }
-            for(const maybeAbility of entry?.remaining ?? []) {
-              if(maybeAbility && maybeAbility instanceof ItemPTR2e) {
+            for (const maybeAbility of entry?.remaining ?? []) {
+              if (maybeAbility && maybeAbility instanceof ItemPTR2e) {
                 acc.push(maybeAbility.toObject());
               }
             }
@@ -552,6 +553,7 @@ export default abstract class BlueprintSystem extends HasEmbed(HasMigrations(fou
           {
             dexId: evolution.system.number,
             shiny,
+            female: gender === "female",
             forms: evolution.system.form ? evolution.system.form.split("-") : [],
           },
           config
@@ -562,6 +564,7 @@ export default abstract class BlueprintSystem extends HasEmbed(HasMigrations(fou
           {
             dexId: evolution.system.number,
             shiny,
+            female: gender === "female",
             forms: evolution.system.form ? [...evolution.system.form.split("-"), "token"] : ["token"],
           },
           config
@@ -771,7 +774,13 @@ export default abstract class BlueprintSystem extends HasEmbed(HasMigrations(fou
         return Array.from(skills.values());
       })();
 
-      const foundryDefaultTokenSettings = game.settings.get("core", "defaultToken");
+      //TODO: Add foundry overrides for token settings
+      const foundryDefaultTokenSettings = {
+        displayBars: CONST.TOKEN_DISPLAY_MODES.OWNER_HOVER,
+        displayName: CONST.TOKEN_DISPLAY_MODES.OWNER,
+        bar1: { attribute: "health" },
+        bar2: { attribute: "powerPoints" },
+      };
 
       const data = {
         name: Handlebars.helpers.formatSlug(evolution.system.slug) || blueprint.name,
@@ -830,7 +839,7 @@ export default abstract class BlueprintSystem extends HasEmbed(HasMigrations(fou
     //@ts-expect-error - This is valid actor data
     const actors = await ActorPTR2e.createDocuments(toBeCreated);
 
-    progress.advance(game.i18n.localize("PTR2E.PokemonGeneration.Progress.Prefix" + game.i18n.localize("PTR2E.PokemonGeneration.Progress.TokenGenerationStep")));
+    progress.advance(game.i18n.localize("PTR2E.PokemonGeneration.Progress.Prefix") + game.i18n.localize("PTR2E.PokemonGeneration.Progress.TokenGenerationStep"));
 
     const { x, y } = options;
     const tokensToCreate: TokenDocumentPTR2e[] = [];
@@ -860,6 +869,204 @@ export default abstract class BlueprintSystem extends HasEmbed(HasMigrations(fou
     );
   }
 
+  async exportToJSON() {
+    const additionalData = {
+      items: new Map<string, unknown>(),
+      actors: new Map<string, unknown>(),
+      tables: new Map<string, unknown>(),
+      configs: new Map<string, unknown>(),
+    } as Record<string, Map<string, unknown>>;
+    const requiredPacks = new Set<string>();
+
+    const data = this.toObject();
+    for (const blueprint of data.blueprints) {
+      // Handle Species
+
+      // If habitat tables are being used, no special handling is needed.
+      if (CONFIG.PTR.data.habitats[blueprint.species as keyof typeof CONFIG.PTR.data.habitats] !== undefined) { ; }
+      else {
+        // If the species is not a compendium item, add it to the additional data
+        if (!(blueprint.species as string)?.startsWith("Compendium.")) {
+          const uuid = blueprint.species as string;
+          const doc = await fromUuid(uuid);
+
+          if (doc instanceof ItemPTR2e && doc.system instanceof SpeciesSystem) {
+            if (!additionalData.items.has(uuid!)) additionalData.items.set(uuid!, doc.toCompendium(null, { keepId: true }));
+          }
+          else if (doc instanceof ActorPTR2e) {
+            if (!additionalData.actors.has(uuid!)) additionalData.actors.set(uuid!, doc.toCompendium(null, { keepId: true }));
+          }
+          else if (doc instanceof RollTable) {
+            if (!additionalData.tables.has(uuid!)) {
+              additionalData.tables.set(uuid!, doc.toCompendium(null, { keepId: true }));
+              for (const result of doc.results) {
+                if (result.type === CONST.TABLE_RESULT_TYPES.COMPENDIUM) {
+                  const [mod, pack] = result.documentCollection?.split(".") ?? [];
+                  if (mod && pack) requiredPacks.add(`${mod}.${pack}`);
+                }
+                else if (result.type === CONST.TABLE_RESULT_TYPES.DOCUMENT) {
+                  const pack = {
+                    Actor: game.actors,
+                    Item: game.items,
+                  }[result.documentCollection!];
+                  if (!pack) return void ui.notifications.error(`Invalid species reference in table ${doc.name}`);
+                  //@ts-expect-error - This is totally fine.
+                  const innerDoc: ClientDocument = pack.get(result.documentId!);
+                  if (innerDoc instanceof ItemPTR2e && innerDoc.system instanceof SpeciesSystem) {
+                    if (!additionalData.items.has(result.documentId!)) additionalData.items.set(result.documentId!, innerDoc.toCompendium(null, { keepId: true }));
+                  }
+                  else if (innerDoc instanceof ActorPTR2e) {
+                    if (!additionalData.actors.has(result.documentId!)) additionalData.actors.set(result.documentId!, innerDoc.toCompendium(null, { keepId: true }));
+                  }
+                  else {
+                    return void ui.notifications.error(`Invalid species reference in table ${doc.name}`);
+                  }
+                }
+              }
+            }
+          }
+          else {
+            return void ui.notifications.error("Invalid species reference");
+          }
+        }
+        // If the species is a compendium item, add the pack to the required packs
+        else {
+          const doc = await fromUuid(blueprint.species as string);
+          if (!doc) return void ui.notifications.error("Invalid species reference");
+          if (!(doc instanceof ItemPTR2e && doc.system instanceof SpeciesSystem) && !(doc instanceof ActorPTR2e) && !(doc instanceof RollTable)) return void ui.notifications.error("Invalid species reference");
+
+          const [, mod, pack] = (blueprint.species as string).split(".");
+          requiredPacks.add(`${mod}.${pack}`);
+        }
+      }
+
+      // Handle Level Table
+      if (blueprint.level === null) { ; }
+      else if (!Number.isNaN(Number(blueprint.level))) { ; }
+      else if ((blueprint.level as string).match(/^\d+-\d+$/)) { ; }
+      else {
+        const doc = await fromUuid(blueprint.level as string);
+        if (doc instanceof RollTable) {
+          const uuid = blueprint.level as string;
+          if (!additionalData.tables.has(uuid!)) additionalData.tables.set(uuid!, doc.toCompendium(null, { keepId: true }));
+        }
+        else {
+          return void ui.notifications.error("Invalid level table reference");
+        }
+      }
+
+      // Handle Nature Table
+      if (!blueprint.nature) { ; }
+      else if (typeof blueprint.nature === "string" && Object.keys(natureToStatArray).includes(blueprint.nature.toLowerCase())) { ; }
+      else {
+        const doc = await fromUuid(blueprint.nature as string);
+        if (doc instanceof RollTable) {
+          const uuid = blueprint.nature as string;
+          if (!additionalData.tables.has(uuid!)) additionalData.tables.set(uuid!, doc.toCompendium(null, { keepId: true }));
+        }
+        else {
+          return void ui.notifications.error("Invalid nature table reference");
+        }
+      }
+
+      // Handle Perk Configs
+      if (blueprint._config && (blueprint._config as GeneratorConfig["_source"]).link) {
+        const configs = game.settings.get("ptr2e", "global-perk-configs");
+        const exists = configs.find(c => c.id === (blueprint._config as GeneratorConfig["_source"])?.id);
+        if (exists) {
+          if (!additionalData.configs.has(exists.id)) additionalData.configs.set(exists.id, exists);
+        }
+        else {
+          (blueprint._config as GeneratorConfig["_source"]).link = false;
+        }
+      }
+    }
+
+    const blueprint = this.parent as ItemPTR2e<BlueprintSystem>;
+    const exportData = {
+      blueprint: {
+        name: blueprint.name,
+        img: blueprint.img,
+        blueprints: data.blueprints,
+      },
+      additionalData: Object.entries(additionalData).reduce((acc, [key, value]) => ({ ...acc, [key]: Array.from(value.values()) }), {}),
+      requiredPacks: Array.from(requiredPacks),
+    }
+    exportToJSON({ data: exportData, type: "PackagedBlueprint", label: blueprint.name });
+  }
+
+  static async importFromJSON<T extends ItemPTR2e<BlueprintSystem>>(item: ItemPTR2e, data: {
+    type: "PackagedBlueprint";
+    data: {
+      blueprint: {
+        name: string;
+        img: ImageFilePath;
+        blueprints: Blueprint["_source"][];
+      }
+      additionalData: {
+        items: ItemPTR2e["_source"][];
+        actors: ActorPTR2e["_source"][];
+        tables: RollTable["_source"][];
+        configs: GeneratorConfig["_source"][];
+      };
+      requiredPacks: string[];
+    }
+  }): Promise<undefined | T> {
+    if (data.type !== "PackagedBlueprint") return void ui.notifications.error("Invalid data type");
+
+    const { blueprint, additionalData, requiredPacks } = data.data;
+    if (!blueprint.blueprints.length) return void ui.notifications.error("No blueprints found in data");
+
+    if (requiredPacks.length) {
+      const missingPacks = requiredPacks.filter(p => !game.packs.has(p));
+      if (missingPacks.length) return void ui.notifications.error(`Aborting Import. Missing required packs: ${missingPacks.join(", ")}`);
+    }
+
+    if (additionalData.items.length && !additionalData.items.every(i => game.items.has(i._id!))) {
+      const folder = await Folder.create({
+        name: `Blueprint ${blueprint.name} Imports`,
+        type: "Item",
+      })
+      if (!folder) return void ui.notifications.error("Failed to create folder for imported items");
+      await ItemPTR2e.createDocuments(additionalData.items.map(i => ({ ...i, folder: folder.id })), { keepId: true, renderSheet: false });
+    }
+    if (additionalData.actors.length && !additionalData.actors.every(a => game.actors.has(a._id!))) {
+      const folder = await Folder.create({
+        name: `Blueprint ${blueprint.name} Imports`,
+        type: "Actor",
+      });
+      if (!folder) return void ui.notifications.error("Failed to create folder for imported items");
+      await ActorPTR2e.createDocuments(additionalData.actors.map(a => ({ ...a, folder: folder.id })), { keepId: true, renderSheet: false });
+    }
+    if (additionalData.tables.length && !additionalData.tables.every(t => game.tables.has(t._id!))) {
+      const folder = await Folder.create({
+        name: `Blueprint ${blueprint.name} Imports`,
+        type: "RollTable",
+      });
+      if (!folder) return void ui.notifications.error("Failed to create folder for imported items");
+      await RollTable.createDocuments(additionalData.tables.map(t => ({ ...t, folder: folder.id })), { keepId: true, renderSheet: false });
+    }
+    if (additionalData.configs.length) {
+      const configs = game.settings.get("ptr2e", "global-perk-configs");
+      for (const config of additionalData.configs) {
+        const exists = configs.find(c => c.id === config.id);
+        if (!exists) configs.push(config);
+      }
+      await game.settings.set("ptr2e", "global-perk-configs", configs);
+    }
+
+    const result = await item.update({
+      name: blueprint.name,
+      img: blueprint.img,
+      type: "blueprint",
+      system: {
+        blueprints: blueprint.blueprints,
+      }
+    }, { diff: false, recursive: false, noHook: true }) as T;
+    ui.notifications.info(game.i18n.format("DOCUMENT.Imported", { document: item.documentName, name: this.name }));
+
+    return result;
+  }
 }
 
 function randomFromList<T>(list: T[]): T {

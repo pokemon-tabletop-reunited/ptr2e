@@ -1,22 +1,21 @@
 {
   "name": "Hit & Run",
   "type": "perk",
-  "folder": "zrVtKATNxzLNxTUe",
   "system": {
     "prerequisites": [],
-    "cost": 1,
-    "description": "<p>After resolving an Attack, you cannot be targeted with [Interrupt X] Actions until the end of your Activation.</p>",
+    "cost": 3,
+    "description": "<p>You gain Run Away as a free, slotless ability.</p>",
     "actions": [
       {
         "name": "Hit & Run",
         "slug": "hit-run",
-        "description": "<p>After resolving an Attack, the user cannot be targeted with [Interrupt X] Actions until the end of their Activation.</p>",
+        "description": "<p>You gain Run Away as a free, slotless ability.</p>",
         "cost": {
           "activation": "free"
         },
         "type": "passive",
         "traits": [],
-        "img": "icons/svg/explosion.svg",
+        "img": "systems/ptr2e/img/perk-icons/Combat.svg",
         "range": {
           "target": "creature",
           "unit": "m"
@@ -31,6 +30,10 @@
     },
     "nodes": [
       {
+        "x": 130,
+        "y": 145,
+        "hidden": false,
+        "type": "normal",
         "connected": [
           "muse",
           "root-4",
@@ -39,22 +42,17 @@
           "stat-iv-booster-1-9",
           "improved-overland-12",
           "improved-swim-1",
-          "new-foundations-3",
           "type-style"
         ],
         "config": {
+          "texture": "systems/ptr2e/img/perk-icons/Combat.svg",
           "alpha": null,
-          "backgroundColor": "#ff8000",
+          "backgroundColor": null,
           "borderColor": null,
           "borderWidth": null,
-          "texture": "systems/ptr2e/img/perk-icons/Combat.svg",
           "tint": null,
           "scale": null
         },
-        "hidden": false,
-        "type": "normal",
-        "x": 130,
-        "y": 145,
         "tier": null
       }
     ],
@@ -65,9 +63,86 @@
       "arena": "physical",
       "approach": "finesse",
       "archetype": "hunter"
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
     }
   },
   "_id": "1SjUYN4180BTBYCk",
   "img": "systems/ptr2e/img/perk-icons/Combat.svg",
-  "effects": []
+  "effects": [
+    {
+      "name": "Hit & Run",
+      "type": "passive",
+      "_id": "lNLvKfZVHtQnE5dy",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "grant-item",
+            "key": "",
+            "value": "Compendium.ptr2e.core-abilities.Item.Iyq0hYJwLpuCncDP",
+            "predicate": [
+              "item:perk:hit-run"
+            ],
+            "allowDuplicate": false,
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "system.free",
+                "value": "true"
+              }
+            ],
+            "reevaluateOnUpdate": true,
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "inMemoryOnly": false,
+            "track": false,
+            "replaceSelf": false,
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            }
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "1.1.0.beta",
+        "createdTime": 1741635788212,
+        "modifiedTime": 1741635847818,
+        "lastModifiedBy": "IcBpMqhFuTck9VpX"
+      }
+    }
+  ]
 }

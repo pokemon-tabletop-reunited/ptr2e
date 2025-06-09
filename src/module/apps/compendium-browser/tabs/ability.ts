@@ -9,7 +9,7 @@ export class CompendiumBrowserAbilityTab extends CompendiumBrowserTab {
   templatePath = "systems/ptr2e/templates/apps/compendium-browser/tabs/ability.hbs";
   
   override searchFields = ["name", "description"];
-  override storeFields = ["type", "name", "img", "uuid", "traits", "description"]
+  override storeFields = ["type", "name", "img", "uuid", "traits", "description", "source"]
 
   constructor(browser: CompendiumBrowser) {
     super(browser);
@@ -24,6 +24,7 @@ export class CompendiumBrowserAbilityTab extends CompendiumBrowserTab {
     const abilities: CompendiumBrowserIndexData[] = [];
     const indexFields = ["img", "system.description", "system.traits"];
     const traits = new Set<string>();
+    const publications = new Set<string>();
 
     for await(const {pack, index} of this.browser.packLoader.loadPacks(
       "Item",
@@ -45,13 +46,17 @@ export class CompendiumBrowserAbilityTab extends CompendiumBrowserTab {
           traits.add(trait);
         }
 
+        const pubSource = (abilityData.system.publication?.source ?? "").trim()
+        if(pubSource) publications.add(pubSource);
+
         abilities.push({
           name: abilityData.name,
           img: abilityData.img,
           uuid: abilityData.uuid,
           type: abilityData.type,
           traits: abilityData.system.traits,
-          description: abilityData.system.description
+          description: abilityData.system.description,
+          source: pubSource
         })
       }
     }
@@ -67,19 +72,34 @@ export class CompendiumBrowserAbilityTab extends CompendiumBrowserTab {
       return acc;
     }, {} as Record<string, string>));
 
+    this.filterData.checkboxes.source.options = this.generateCheckboxOptions(publications.reduce((acc, source) => ({[source]: source, ...acc}), {} as Record<string, string>));
+
     debug("Finished loading data");
   }
 
   protected override filterIndexData(entry: CompendiumBrowserIndexData): boolean {
-    const { multiselects } = this.filterData;
+    const { checkboxes, multiselects } = this.filterData;
 
     if(!this.filterTraits(entry.traits, multiselects.traits.selected, multiselects.traits.conjunction)) return false;
+
+    // Source
+    if (checkboxes.source.selected.length) {
+      if (!checkboxes.source.selected.includes(entry.source)) return false;
+    }
 
     return true;
   }
 
   protected override prepareFilterData(): AbilityFilters {
     return {
+      checkboxes: {
+        source: {
+          isExpanded: false,
+          label: "PTR2E.CompendiumBrowser.Filters.Source",
+          options: {},
+          selected: [],
+        }
+      },
       multiselects: {
         traits: {
           conjunction: "and",

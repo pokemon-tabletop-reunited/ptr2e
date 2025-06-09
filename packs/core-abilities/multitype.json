@@ -6,43 +6,59 @@
     "actions": [
       {
         "traits": [
-          "legendary",
-          "interrupt-7"
+          "legendary"
         ],
-        "name": "Multitype",
+        "name": "Multitype (Judgment)",
         "slug": "multitype",
         "type": "generic",
         "cost": {
           "activation": "free",
-          "powerPoints": 1,
-          "trigger": "<p>The user declares Judgment.</p>"
+          "trigger": "The user declares Judgment."
         },
         "range": {
           "target": "self",
           "unit": "m"
         },
-        "description": "<p>Trigger: The user declares Judgment.</p><p>Effect: The user may change the Type of the triggering attack to any available Type of their choosing (except Typeless) for the rest of their Activation.</p>",
-        "img": "icons/svg/explosion.svg"
+        "description": "<p><span style=\"font-family: Signika, sans-serif\">Trigger: The user declares Judgment.</span></p><p style=\"box-sizing: border-box; user-select: text; scrollbar-width: thin; scrollbar-color: rgb(93, 20, 43) rgba(0, 0, 0, 0); margin: 0.5rem 0px; color: rgb(239, 230, 216); font-family: Signika, sans-serif; font-size: 14px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: normal; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; text-align: start\"><span style=\"font-family: Signika, sans-serif\">Effect: The user may change the Type of the triggering attack to any available Type of their choosing (except Typeless) for the rest of their Activation.</span></p>",
+        "img": "systems/ptr2e/img/perk-icons/Touched.svg"
       },
       {
         "traits": [
           "legendary"
         ],
         "name": "Multitype",
-        "slug": "multitype",
+        "slug": "multitype-passive",
         "type": "passive",
         "cost": {
           "activation": "free"
         },
-        "description": "<p>Passive: The user can equip a Type Plate item without using their Accessory Slot, and the user's type changes to match the Type Plate. If the user has two different Type Plates equipped, the user gains both types. If the user possesses the Legend Plate, Judgement instead always receives STAB and always deals damage as if it was one step super effective.</p>",
-        "img": "icons/svg/explosion.svg",
+        "description": "<p>Passive: The user can equip Type Plate items without using their Accessory Slot, and have their effects' intensity doubled. If the user possesses the Legend Plate, the user's Judgment always receives STAB and deals damage as if it was one step super effective.</p>",
+        "img": "systems/ptr2e/img/perk-icons/Touched.svg",
         "range": {
-          "target": "enemy",
+          "target": "creature",
           "unit": "m"
+        }
+      },
+      {
+        "name": "Multitype (Plate Change)",
+        "slug": "multitype-plate-change",
+        "description": "<p>Effect: Once, on each of their Activations, as a Free Action at @Trait[interrupt-7] the user can change their Type(s), to those of up to 3 of the Type Plates the user has equipped.</p>",
+        "traits": [
+          "legendary",
+          "interrupt-7"
+        ],
+        "type": "generic",
+        "img": "systems/ptr2e/img/perk-icons/Touched.svg",
+        "range": {
+          "target": "self",
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "free"
         }
       }
     ],
-    "description": "<p>Trigger: The user declares Judgment.</p><p>Effect: The user may change the Type of the triggering attack to any available Type of their choosing (except Typeless) for the rest of their Activation. Passive: The user can equip a Type Plate item without using their Accessory Slot, and the user's type changes to match the Type Plate. If the user has two different Type Plates equipped, the user gains both types. If the user possesses the Legend Plate, Judgement instead always receives STAB and always deals damage as if it was one step super effective.</p>",
+    "description": "<p>Trigger: The user declares Judgment.</p><p>Effect: Connection - Judgment. The user may change the Type of the triggering attack to any available Type of their choosing (except Typeless) for the rest of their Activation. Once, on each of their Activations, as a Free Action at @Trait[interrupt-7] the user can change their Type(s), to those of up to 3 of the Type Plates the user has equipped.</p><p>Passive: The user can equip Type Plate items without using their Accessory Slot, and have their effects' intensity doubled. If the user possesses the Legend Plate, the user's Judgment always receives STAB and deals damage as if it was one step super effective.</p>",
     "traits": [
       "legendary"
     ],
@@ -50,8 +66,84 @@
     "_migration": {
       "version": null,
       "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
     }
   },
   "_id": "HJnjAGEDc4lmRMP4",
-  "effects": []
+  "effects": [
+    {
+      "name": "Multitype",
+      "type": "passive",
+      "_id": "jYdFZiHaSr9SryqE",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "grant-item",
+            "key": "",
+            "value": "Compendium.ptr2e.core-moves.Item.E6mtSx71sinnVvZH",
+            "predicate": [],
+            "alterations": [
+              {
+                "mode": 2,
+                "property": "system.actions.0.free",
+                "value": "true"
+              }
+            ],
+            "reevaluateOnUpdate": true,
+            "allowDuplicate": false,
+            "label": "Multitype",
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "inMemoryOnly": false,
+            "track": false,
+            "replaceSelf": false,
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            }
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "1.2.1.beta",
+        "createdTime": 1745174587112,
+        "modifiedTime": 1745174734401,
+        "lastModifiedBy": "5ImYyhOS2D6D7ypO"
+      }
+    }
+  ]
 }

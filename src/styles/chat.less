@@ -1,9 +1,31 @@
+// .dice-roll .dice-tooltip > .wrapper {
+//   overflow: unset !important;
+// }
+
 .chat-message.message {
     background: var(--user-color, #fefefe);
     padding: 0;
     color: #1e1e1e;
 
     --color-underline-header: #6f6c66;
+
+    h3 {
+      font-size: 1.25em;
+      font-weight: normal;
+    }
+
+    a.button, button {
+      background: rgba(255, 255, 240, 0.8);
+      min-height: unset;
+
+      &:hover {
+        color: var(--hint-text-color);
+      }
+
+      &.consume-pp {
+        height: 20px;
+      }
+    }
 
     &.whisper {
         background-color: #bcbcbc;
@@ -42,21 +64,25 @@
             >main {
                 display: flex;
                 flex-direction: row;
-                flex-wrap: wrap;
+                flex-wrap: nowrap;
 
                 padding: 0.25rem 0.5rem;
+                align-items: center;
+                gap: 0.25rem;
 
                 &.undone {
                     text-decoration: line-through;
                 }
 
                 p {
-                    flex: 1;
+                  flex: 1;
+                  min-width: 0;
                 }
 
                 button {
-                    flex: 0 0 50px;
-                    padding: 0;
+                  flex: 0 0 50px;
+                  padding: 0;
+                  margin-left: 0.25rem;
                 }
 
                 .notes {
@@ -150,11 +176,12 @@
                     .collapse-rolls {
                         background-color: #eee;
                         cursor: pointer;
-                        font-size: 15px;
-                        border: none;
+                        border: none !important;
                         outline: none;
                         padding: 0 0.5rem;
-                        border-bottom: 1px solid var(--color-underline-header);
+                        border-bottom: 1px solid var(--color-underline-header) !important;
+                        flex: 1;
+                        white-space: nowrap;
 
                         &:after {
                             content: "▶";
@@ -167,6 +194,10 @@
 
                         &.expanded:after {
                             content: "▼";
+                        }
+
+                        &:hover {
+                          color: #2e2e2e;
                         }
                     }
                 }
@@ -285,6 +316,7 @@
 
                                 .icon {
                                     border: unset;
+                                    box-shadow: unset;
                                 }
                             }
 
@@ -398,7 +430,7 @@
                             align-items: center;
                             font-size: 14px;
                             color: #1e1e1e;
-                            padding: 0;
+                            padding: 0.25rem;
 
                             &[disabled] {
                               filter: contrast(0.7);
@@ -496,8 +528,35 @@
                 padding: 0.5rem;
                 border: 1px solid var(--border-theme-color);
                 border-radius: 8px;
-                margin-top: 0.25rem;
+                margin-top: 0;
                 margin-bottom: 0;
+            }
+
+            .breakdown {
+              display: flex;
+              flex-direction: column;
+              margin-top: 5px;
+              
+              .dice-tooltip .wrapper > * {
+                padding: 0.25rem 0;
+                margin-bottom: 0.25rem;
+                background: rgba(0, 0, 0, 0.1);
+                border-radius: 8px;
+                border: 1px solid var(--color-border-light-2);
+              }
+
+              > span {
+                white-space: nowrap;
+                text-overflow: ellipsis;
+              }
+
+              span.pos {
+                color: #18520b;
+              }
+
+              span.neg {
+                color: #aa0200;
+              }
             }
         }
     }
@@ -596,12 +655,11 @@
 
     &.combat {
       border: none;
-      border-radius: 0px;
-      background: unset;
+      border-radius: 8px;
+      background: url(/ui/denim075.png);
       padding: 0pc 5px;
-      margin: 0px;
       box-shadow: none;
-      border-bottom: 1px solid #e9d7a1;
+      border: 1px solid #e9d7a1;
 
       .message-header {
         .message-sender {

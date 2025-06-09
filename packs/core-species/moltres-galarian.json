@@ -14,20 +14,16 @@
     "diet": [
       "carnivore"
     ],
-    "movement": {
-      "primary": [
-        {
-          "type": "flight",
-          "value": 12
-        }
-      ],
-      "secondary": [
-        {
-          "type": "overland",
-          "value": 4
-        }
-      ]
-    },
+    "movement": [
+      {
+        "type": "flight",
+        "value": 12
+      },
+      {
+        "type": "overland",
+        "value": 4
+      }
+    ],
     "traits": [
       "pokemon",
       "winged",
@@ -35,7 +31,9 @@
       "ir-vision-15",
       "glow-4",
       "evil-touch",
-      "galarian"
+      "galarian",
+      "fully-evolved",
+      "jump-2"
     ],
     "abilities": {
       "starting": [
@@ -102,6 +100,14 @@
         "group": null
       },
       {
+        "slug": "legendary",
+        "value": 35,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
         "slug": "lift",
         "value": 50,
         "rvs": 0,
@@ -140,14 +146,6 @@
         "favourite": false,
         "hidden": false,
         "group": null
-      },
-      {
-        "slug": "legendary",
-        "value": 35,
-        "rvs": 0,
-        "favourite": false,
-        "hidden": false,
-        "group": "occult"
       },
       {
         "slug": "running",
@@ -200,8 +198,8 @@
       "spe": 90
     },
     "types": [
-      "dark",
-      "flying"
+      "flying",
+      "dark"
     ],
     "moves": {
       "levelUp": [
@@ -288,19 +286,51 @@
       ],
       "tutor": [
         {
-          "name": "lash-out",
+          "name": "acrobatics",
+          "gen": "scarlet-violet"
+        },
+        {
+          "name": "aerial-ace",
+          "gen": "scarlet-violet"
+        },
+        {
+          "name": "assurance",
           "gen": "sword-shield"
+        },
+        {
+          "name": "brave-bird",
+          "gen": "scarlet-violet"
+        },
+        {
+          "name": "dark-pulse",
+          "gen": "scarlet-violet"
         },
         {
           "name": "dual-wingbeat",
           "gen": "sword-shield"
         },
         {
+          "name": "facade",
+          "gen": "scarlet-violet"
+        },
+        {
           "name": "fly",
           "gen": "scarlet-violet"
         },
         {
-          "name": "take-down",
+          "name": "foul-play",
+          "gen": "scarlet-violet"
+        },
+        {
+          "name": "giga-impact",
+          "gen": "scarlet-violet"
+        },
+        {
+          "name": "helping-hand",
+          "gen": "scarlet-violet"
+        },
+        {
+          "name": "hex",
           "gen": "scarlet-violet"
         },
         {
@@ -308,7 +338,27 @@
           "gen": "scarlet-violet"
         },
         {
-          "name": "swift",
+          "name": "hyper-voice",
+          "gen": "scarlet-violet"
+        },
+        {
+          "name": "imprison",
+          "gen": "scarlet-violet"
+        },
+        {
+          "name": "lash-out",
+          "gen": "sword-shield"
+        },
+        {
+          "name": "pain-split",
+          "gen": "scarlet-violet"
+        },
+        {
+          "name": "protect",
+          "gen": "scarlet-violet"
+        },
+        {
+          "name": "rain-dance",
           "gen": "scarlet-violet"
         },
         {
@@ -316,11 +366,27 @@
           "gen": "scarlet-violet"
         },
         {
-          "name": "substitute",
+          "name": "round",
+          "gen": "sword-shield"
+        },
+        {
+          "name": "sandstorm",
           "gen": "scarlet-violet"
         },
         {
-          "name": "thief",
+          "name": "scary-face",
+          "gen": "scarlet-violet"
+        },
+        {
+          "name": "shadow-ball",
+          "gen": "scarlet-violet"
+        },
+        {
+          "name": "sleep-talk",
+          "gen": "scarlet-violet"
+        },
+        {
+          "name": "snarl",
           "gen": "scarlet-violet"
         },
         {
@@ -332,31 +398,11 @@
           "gen": "scarlet-violet"
         },
         {
-          "name": "protect",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "scary-face",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "sandstorm",
-          "gen": "scarlet-violet"
-        },
-        {
           "name": "steel-wing",
           "gen": "sword-shield"
         },
         {
-          "name": "sleep-talk",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "pain-split",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "rain-dance",
+          "name": "substitute",
           "gen": "scarlet-violet"
         },
         {
@@ -364,31 +410,7 @@
           "gen": "scarlet-violet"
         },
         {
-          "name": "shadow-ball",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "facade",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "taunt",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "helping-hand",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "imprison",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "hyper-voice",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "aerial-ace",
+          "name": "swift",
           "gen": "scarlet-violet"
         },
         {
@@ -396,47 +418,23 @@
           "gen": "scarlet-violet"
         },
         {
-          "name": "u-turn",
+          "name": "take-down",
           "gen": "scarlet-violet"
         },
         {
-          "name": "assurance",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "dark-pulse",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "brave-bird",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "giga-impact",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "foul-play",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "round",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "hex",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "acrobatics",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "snarl",
+          "name": "taunt",
           "gen": "scarlet-violet"
         },
         {
           "name": "tera-blast",
+          "gen": "scarlet-violet"
+        },
+        {
+          "name": "thief",
+          "gen": "scarlet-violet"
+        },
+        {
+          "name": "u-turn",
           "gen": "scarlet-violet"
         }
       ]
@@ -449,10 +447,27 @@
       "name": "moltres-galarian",
       "details": null,
       "evolutions": [],
-      "uuid": "Compendium.ptr2e.core-species.Item.s6hEmvQsk62yT5xm"
-    }
+      "uuid": "Compendium.ptr2e.core-species.Item.s6hEmvQsk62yT5xm",
+      "methods": [],
+      "perk": {
+        "x": 26,
+        "y": 26
+      }
+    },
+    "publication": {
+      "source": "PTR 2e Core - Galar Dex",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "_migration": {
+      "version": null,
+      "previous": null
+    },
+    "genderRatio": -1,
+    "habitats": []
   },
   "_id": "s6hEmvQsk62yT5xm",
-  "effects": [],
-  "folder": null
+  "effects": []
 }

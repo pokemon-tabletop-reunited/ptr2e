@@ -8,181 +8,102 @@ import PerkStore, { PerkNode, PerkPurchaseState, PerkState } from "./perk-store.
 import { ActiveEffectPTR2e } from "@effects";
 import { LevelUpMoveSchema } from "@item/data/species.ts";
 import { createHTMLElement, fontAwesomeIcon, htmlClosest, htmlQuery, htmlQueryAll, ImageResolver, isObject, objectHasKey, sluggify } from "@utils";
-import { ApplicationRenderContext } from "types/foundry/common/applications/api.js";
 import { CompendiumBrowserPerkTab } from "../compendium-browser/tabs/perk.ts";
 import { CheckboxData, RangesInputData, RenderResultListOptions, SelectData, SliderData } from "../compendium-browser/tabs/data.ts";
 import noUiSlider from "nouislider";
 
 export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMixin(ApplicationV2Expanded) {
-  static override DEFAULT_OPTIONS = fu.mergeObject(
-    super.DEFAULT_OPTIONS,
-    {
-      id: "perk-web-app",
-      tag: "article",
-      classes: ["sheet", "perk-web-app", "perk-hud", "default-sheet", "application"],
-      window: {
-        title: "PTR2E.PerkWebApp.Title",
-        frame: false,
-        positioned: false,
-        minimizable: false,
-        resizable: false,
+  static override DEFAULT_OPTIONS = {
+    id: "perk-web-app",
+    tag: "article",
+    classes: ["sheet", "perk-web-app", "perk-hud", "default-sheet", "ptr2e"],
+    window: {
+      title: "PTR2E.PerkWebApp.Title",
+      frame: false,
+      positioned: false,
+      minimizable: false,
+      resizable: false,
+    },
+    dragDrop: [{ dropSelector: `[data-application-part="web"]` }],
+    actions: {
+      "toggle-edit-mode": function (this: PerkWebApp) {
+        this.editMode = !this.editMode;
+        if (this.editMode) {
+          if (!ui.perksTab.popout || ui.perksTab.popout.minimized) ui.perksTab.renderPopout();
+
+          if (game.settings.get("ptr2e", "dev-mode")) {
+            const pack = game.packs.get("ptr2e.core-perks");
+            if (pack) {
+              pack.configure({ locked: false });
+              pack.render(true, { top: 0, left: window.innerWidth - 310 - 360 });
+            }
+          }
+        }
+        else {
+          ui.perksTab.popout?.close();
+
+          if (game.settings.get("ptr2e", "dev-mode")) {
+            const pack = game.packs.get("ptr2e.core-perks");
+            if (pack) {
+              pack.configure({ locked: true });
+              pack.apps.forEach((app) => app.close());
+            }
+          }
+        }
+        this.currentNode = null;
+        this.connectionNode = null;
+        this.render(true);
       },
-      dragDrop: [{ dropSelector: `[data-application-part="web"]` }],
-      actions: {
-        "toggle-edit-mode": function (this: PerkWebApp) {
-          this.editMode = !this.editMode;
-          if (this.editMode) {
-            if (!ui.perksTab.popout || ui.perksTab.popout._minimized) ui.perksTab.renderPopout();
+      "refresh": PerkWebApp.refresh,
+      "close-hud": function (this: PerkWebApp) { this.close(); },
+      "purchase": async function (this: PerkWebApp) {
+        if (!this.currentNode || !this.actor) return;
+        if (this.currentNode.state !== PerkState.available) return;
 
-            if (game.settings.get("ptr2e", "dev-mode")) {
-              const pack = game.packs.get("ptr2e.core-perks");
-              if (pack) {
-                pack.configure({ locked: false });
-                pack.render(true, { top: 0, left: window.innerWidth - 310 - 360 });
-              }
-            }
-          }
-          else {
-            ui.perksTab.popout?.close();
+        const perk = this.currentNode.tierInfo?.perk ?? this.currentNode.perk;
+        if (this.currentNode.perk.system.variant === "tiered" && this.currentNode.perk.system.mode === "replace") {
+          const current = this.actor.perks.get(this.currentNode.perk.slug);
+          const oldChoiceSets = new Map<string, ChoiceSetChangeSystem>(current?.effects.contents.flatMap(effect =>
+            (effect as ActiveEffectPTR2e).changes.flatMap(change => change.type === ChoiceSetChangeSystem.TYPE ? change : []).flat() as ChoiceSetChangeSystem[]
+          ).map(change => [change.rollOption ?? change.flag, change]));
 
-            if (game.settings.get("ptr2e", "dev-mode")) {
-              const pack = game.packs.get("ptr2e.core-perks");
-              if (pack) {
-                pack.configure({ locked: true });
-                pack.apps.forEach((app) => app.close());
-              }
-            }
-          }
-          this.currentNode = null;
-          this.connectionNode = null;
-          this.render(true);
-        },
-        "refresh": PerkWebApp.refresh,
-        "close-hud": function (this: PerkWebApp) { this.close(); },
-        "purchase": async function (this: PerkWebApp) {
-          if (!this.currentNode || !this.actor) return;
-          if (this.currentNode.state !== PerkState.available) return;
-
-          const perk = this.currentNode.tierInfo?.perk ?? this.currentNode.perk;
-          if (this.currentNode.perk.system.variant === "tiered" && this.currentNode.perk.system.mode === "replace") {
-            const current = this.actor.perks.get(this.currentNode.perk.slug);
-            const oldChoiceSets = new Map<string, ChoiceSetChangeSystem>(current?.effects.contents.flatMap(effect =>
-              (effect as ActiveEffectPTR2e).changes.flatMap(change => change.type === ChoiceSetChangeSystem.TYPE ? change : []).flat() as ChoiceSetChangeSystem[]
-            ).map(change => [change.rollOption ?? change.flag, change]));
-
-            const newPerk = perk.clone({
-              system: {
-                cost: perk.system.cost,
-                originSlug: this.currentNode.tierInfo?.perk.slug ?? this.currentNode.slug
-              }
-            }).toObject()
-
-            for (const effect of newPerk.effects as ActiveEffectPTR2e["_source"][]) {
-              for (const csChange of effect.system.changes.flatMap(change => change.type === ChoiceSetChangeSystem.TYPE ? change : []) as ChoiceSetChangeSystem[]) {
-                const old = oldChoiceSets.get(csChange.rollOption ?? csChange.flag);
-                if (!old || !old.selection) continue;
-
-                csChange.selection = old.selection;
-              }
-            }
-
-            const hasEffectGrants = newPerk.effects.some(effect =>
-              (effect as ActiveEffectPTR2e['_source']).system.changes.some(change => [GrantItemChangeSystem.TYPE, GrantEffectChangeSystem.TYPE].includes(change.type))
-            );
-
-            if (current) {
-              newPerk.flags ??= {};
-              newPerk.flags.ptr2e ??= {};
-              newPerk.flags.ptr2e = fu.mergeObject(newPerk.flags.ptr2e, current.toObject().flags.ptr2e, { inplace: false });
-              newPerk.flags.ptr2e.tierSlug = this.currentNode.tierInfo?.perk.slug ?? this.currentNode.slug;
-              newPerk.system.originSlug = current.system.originSlug;
-            }
-
-            if (hasEffectGrants) {
-              current?.delete();
-              await ItemPTR2e.create(newPerk, {
-                parent: this.actor
-              });
-              return void PerkWebApp.refresh.call(this);
-            }
-            else {
-              if (current) {
-                if (current.effects.size) await current.deleteEmbeddedDocuments("ActiveEffect", current.effects.map(effect => effect.id));
-                await current.update({
-                  name: newPerk.name,
-                  img: newPerk.img,
-                  effects: newPerk.effects,
-                  system: newPerk.system,
-                  "flags.ptr2e": newPerk.flags.ptr2e
-                })
-                return void PerkWebApp.refresh.call(this);
-              }
-            }
-          }
-
-          await ItemPTR2e.create(perk.clone({
+          const newPerk = perk.clone({
             system: {
               cost: perk.system.cost,
               originSlug: this.currentNode.tierInfo?.perk.slug ?? this.currentNode.slug
             }
-          }).toObject(), {
-            parent: this.actor,
-          });
+          }).toObject()
 
-          PerkWebApp.refresh.call(this);
-        },
-        "refund": async function (this: PerkWebApp) {
-          if (!this.currentNode || !this.actor) return;
-          if (this.currentNode.state !== PerkState.purchased && !this.currentNode.tierInfo) return;
+          for (const effect of newPerk.effects as ActiveEffectPTR2e["_source"][]) {
+            for (const csChange of effect.system.changes.flatMap(change => change.type === ChoiceSetChangeSystem.TYPE ? change : []) as ChoiceSetChangeSystem[]) {
+              const old = oldChoiceSets.get(csChange.rollOption ?? csChange.flag);
+              if (!old || !old.selection) continue;
 
-          if (this.currentNode.tierInfo && this.currentNode.perk.system.mode === "replace") {
-            const perk = this.currentNode.tierInfo.previousTier;
-            const current = this.actor.perks.get(this.currentNode.perk.slug);
-            if (!current) return;
-            // This is the minimum tier, so delete the perk instead of replace.
-            if (!perk) {
-              await current.delete();
-              return void PerkWebApp.refresh.call(this);
+              csChange.selection = old.selection;
             }
+          }
 
-            const oldChoiceSets = new Map<string, ChoiceSetChangeSystem>(current?.effects.contents.flatMap(effect =>
-              (effect as ActiveEffectPTR2e).changes.flatMap(change => change.type === ChoiceSetChangeSystem.TYPE ? change : []).flat() as ChoiceSetChangeSystem[]
-            ).map(change => [change.rollOption ?? change.flag, change]));
+          const hasEffectGrants = newPerk.effects.some(effect =>
+            (effect as ActiveEffectPTR2e['_source']).system.changes.some(change => [GrantItemChangeSystem.TYPE, GrantEffectChangeSystem.TYPE].includes(change.type))
+          );
 
-            const newPerk = perk.clone({
-              system: {
-                cost: perk.system.cost,
-                originSlug: this.currentNode.tierInfo?.perk.slug ?? this.currentNode.slug
-              }
-            }).toObject()
-
-            for (const effect of newPerk.effects as ActiveEffectPTR2e["_source"][]) {
-              for (const csChange of effect.system.changes.flatMap(change => change.type === ChoiceSetChangeSystem.TYPE ? change : []) as ChoiceSetChangeSystem[]) {
-                const old = oldChoiceSets.get(csChange.rollOption ?? csChange.flag);
-                if (!old || !old.selection) continue;
-
-                csChange.selection = old.selection;
-              }
-            }
-
-            const hasEffectGrants = newPerk.effects.some(effect =>
-              (effect as ActiveEffectPTR2e['_source']).system.changes.some(change => [GrantItemChangeSystem.TYPE, GrantEffectChangeSystem.TYPE].includes(change.type))
-            );
-
+          if (current) {
             newPerk.flags ??= {};
             newPerk.flags.ptr2e ??= {};
             newPerk.flags.ptr2e = fu.mergeObject(newPerk.flags.ptr2e, current.toObject().flags.ptr2e, { inplace: false });
-            newPerk.flags.ptr2e.tierSlug = perk.slug;
+            newPerk.flags.ptr2e.tierSlug = this.currentNode.tierInfo?.perk.slug ?? this.currentNode.slug;
             newPerk.system.originSlug = current.system.originSlug;
+          }
 
-            if (hasEffectGrants) {
-              current?.delete();
-              await ItemPTR2e.create(newPerk, {
-                parent: this.actor
-              });
-              return void PerkWebApp.refresh.call(this);
-            }
-            else {
+          if (hasEffectGrants) {
+            current?.delete();
+            await ItemPTR2e.create(newPerk, {
+              parent: this.actor
+            });
+            return void PerkWebApp.refresh.call(this);
+          }
+          else {
+            if (current) {
               if (current.effects.size) await current.deleteEmbeddedDocuments("ActiveEffect", current.effects.map(effect => effect.id));
               await current.update({
                 name: newPerk.name,
@@ -194,106 +115,182 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
               return void PerkWebApp.refresh.call(this);
             }
           }
-
-          await this.actor.perks.get(
-            this.currentNode.perk.system.variant === "multi"
-              ? this.currentNode.perk.system.mode === "shared"
-                ? this.currentNode.perk.slug
-                : this.currentNode.slug
-              : this.currentNode.tierInfo?.lastTier.slug ?? this.currentNode.tierInfo?.perk.slug ?? this.currentNode.slug
-          )?.delete();
-          PerkWebApp.refresh.call(this);
-        },
-        "evolve": async function (this: PerkWebApp) {
-          if (!this.currentNode || !this.actor) return;
-          if (!this.currentNode.perk.flags.ptr2e?.evolution) return;
-
-          const perk = this.currentNode.perk;
-          const species = await fromUuid<SpeciesPTR2e>((perk.flags.ptr2e.evolution as { uuid: string }).uuid);
-          if (!species) return;
-
-          const current = this.actor.species;
-          if (!current) return;
-
-          const level = this.actor.system.advancement.level;
-          const currentMoveSlugs = new Set(this.actor.itemTypes.move.map(move => move.slug));
-          const newMoves = await (async () => {
-            const levelUpMoves = (species.system.moves.levelUp as ModelPropsFromSchema<LevelUpMoveSchema>[]).filter((move) => move.level <= level && !currentMoveSlugs.has(sluggify(move.name)));
-
-            return (await Promise.all(
-              levelUpMoves.map(async (move) => fromUuid<MovePTR2e>(move.uuid))
-            )).flatMap((move) => move ? [move] : []);
-          })();
-
-          const { portrait: img, token: tokenImage } = await (async () => {
-            const config = game.ptr.data.artMap.get(species.system.slug || sluggify(species.name));
-            if (!config) return { portrait: "icons/svg/mystery-man.svg", token: "icons/svg/mystery-man.svg" };
-            const resolver = await ImageResolver.createFromSpeciesData(
-              {
-                dexId: species.system.number,
-                shiny: this.actor!.system.shiny,
-                forms: species.system.form ? species.system.form.split("-") : [],
-              },
-              config
-            );
-            if (!resolver?.result) return { portrait: "icons/svg/mystery-man.svg", token: "icons/svg/mystery-man.svg" };
-
-            const tokenResolver = await ImageResolver.createFromSpeciesData(
-              {
-                dexId: species.system.number,
-                shiny: this.actor!.system.shiny,
-                forms: species.system.form ? [...species.system.form.split("-"), "token"] : ["token"],
-              },
-              config
-            );
-            return {
-              portrait: resolver.result,
-              token: tokenResolver?.result ?? resolver.result
-            }
-          })();
-
-          const flags = species.flags;
-          flags.core ??= {};
-          flags.core.sourceId = species.uuid;
-
-          await this.actor.update({
-            name: this.actor.name == current.name ? species.name : this.actor.name,
-            img: img,
-            prototypeToken: {
-              img: tokenImage,
-              texture: {
-                src: tokenImage,
-              }
-            }
-          });
-
-          this.actor.updateEmbeddedDocuments("Item", [
-            {
-              flags,
-              name: species.system.slug ? Handlebars.helpers.formatSlug(species.system.slug) : species.name,
-              type: 'species',
-              img: img,
-              system: species.system.toObject(),
-              _id: "actorspeciesitem",
-              effects: species.effects.map(e => e.toObject())
-            }
-          ]);
-
-          await this.actor.createEmbeddedDocuments("Item", newMoves.map(move => move.toObject()));
-
-          return void PerkWebApp.refresh.call(this);
-        },
-        "load-search": async function (this: PerkWebApp) {
-          if (!this.perkTab) return;
-          if (this.perkTab.isInitialized) return;
-
-          await this.perkTab.init();
-          this.render({ parts: ["search"] });
         }
+
+        await ItemPTR2e.create(perk.clone({
+          system: {
+            cost: perk.system.cost,
+            originSlug: this.currentNode.tierInfo?.perk.slug ?? this.currentNode.slug
+          }
+        }).toObject(), {
+          parent: this.actor,
+        });
+
+        PerkWebApp.refresh.call(this);
+      },
+      "refund": async function (this: PerkWebApp) {
+        if (!this.currentNode || !this.actor) return;
+        if (this.currentNode.state !== PerkState.purchased && !this.currentNode.tierInfo) return;
+
+        if (this.currentNode.tierInfo && this.currentNode.perk.system.mode === "replace") {
+          const perk = this.currentNode.tierInfo.previousTier;
+          const current = this.actor.perks.get(this.currentNode.perk.slug);
+          if (!current) return;
+          // This is the minimum tier, so delete the perk instead of replace.
+          if (!perk) {
+            await current.delete();
+            return void PerkWebApp.refresh.call(this);
+          }
+
+          const oldChoiceSets = new Map<string, ChoiceSetChangeSystem>(current?.effects.contents.flatMap(effect =>
+            (effect as ActiveEffectPTR2e).changes.flatMap(change => change.type === ChoiceSetChangeSystem.TYPE ? change : []).flat() as ChoiceSetChangeSystem[]
+          ).map(change => [change.rollOption ?? change.flag, change]));
+
+          const newPerk = perk.clone({
+            system: {
+              cost: perk.system.cost,
+              originSlug: this.currentNode.tierInfo?.perk.slug ?? this.currentNode.slug
+            }
+          }).toObject()
+
+          for (const effect of newPerk.effects as ActiveEffectPTR2e["_source"][]) {
+            for (const csChange of effect.system.changes.flatMap(change => change.type === ChoiceSetChangeSystem.TYPE ? change : []) as ChoiceSetChangeSystem[]) {
+              const old = oldChoiceSets.get(csChange.rollOption ?? csChange.flag);
+              if (!old || !old.selection) continue;
+
+              csChange.selection = old.selection;
+            }
+          }
+
+          const hasEffectGrants = newPerk.effects.some(effect =>
+            (effect as ActiveEffectPTR2e['_source']).system.changes.some(change => [GrantItemChangeSystem.TYPE, GrantEffectChangeSystem.TYPE].includes(change.type))
+          );
+
+          newPerk.flags ??= {};
+          newPerk.flags.ptr2e ??= {};
+          newPerk.flags.ptr2e = fu.mergeObject(newPerk.flags.ptr2e, current.toObject().flags.ptr2e, { inplace: false });
+          newPerk.flags.ptr2e.tierSlug = perk.slug;
+          newPerk.system.originSlug = current.system.originSlug;
+
+          if (hasEffectGrants) {
+            current?.delete();
+            await ItemPTR2e.create(newPerk, {
+              parent: this.actor
+            });
+            return void PerkWebApp.refresh.call(this);
+          }
+          else {
+            if (current.effects.size) await current.deleteEmbeddedDocuments("ActiveEffect", current.effects.map(effect => effect.id));
+            await current.update({
+              name: newPerk.name,
+              img: newPerk.img,
+              effects: newPerk.effects,
+              system: newPerk.system,
+              "flags.ptr2e": newPerk.flags.ptr2e
+            })
+            return void PerkWebApp.refresh.call(this);
+          }
+        }
+
+        await this.actor.perks.get(
+          this.currentNode.perk.system.variant === "multi"
+            ? this.currentNode.perk.system.mode === "shared"
+              ? this.currentNode.perk.slug
+              : this.currentNode.slug
+            : this.currentNode.tierInfo?.lastTier.slug ?? this.currentNode.tierInfo?.perk.slug ?? this.currentNode.slug
+        )?.delete();
+        PerkWebApp.refresh.call(this);
+      },
+      "evolve": async function (this: PerkWebApp) {
+        if (!this.currentNode || !this.actor) return;
+        if (!this.currentNode.perk.flags.ptr2e?.evolution) return;
+
+        const perk = this.currentNode.perk;
+        const species = await fromUuid<SpeciesPTR2e>((perk.flags.ptr2e.evolution as { uuid: string }).uuid);
+        if (!species) return;
+
+        const current = this.actor.species;
+        if (!current) return;
+
+        const level = this.actor.system.advancement.level;
+        const currentMoveSlugs = new Set(this.actor.itemTypes.move.map(move => move.slug));
+        const newMoves = await (async () => {
+          const levelUpMoves = (species.system.moves.levelUp as ModelPropsFromSchema<LevelUpMoveSchema>[]).filter((move) => move.level <= level && !currentMoveSlugs.has(sluggify(move.name)));
+
+          return (await Promise.all(
+            levelUpMoves.map(async (move) => fromUuid<MovePTR2e>(move.uuid))
+          )).flatMap((move) => move ? [move] : []);
+        })();
+
+        const { portrait: img, token: tokenImage } = await (async () => {
+          const config = game.ptr.data.artMap.get(species.system.slug || sluggify(species.name));
+          if (!config) return { portrait: "icons/svg/mystery-man.svg", token: "icons/svg/mystery-man.svg" };
+          const resolver = await ImageResolver.createFromSpeciesData(
+            {
+              dexId: species.system.number,
+              shiny: this.actor!.system.shiny,
+              female: this.actor!.system.gender === "female",
+              forms: species.system.form ? species.system.form.split("-") : [],
+            },
+            config
+          );
+          if (!resolver?.result) return { portrait: "icons/svg/mystery-man.svg", token: "icons/svg/mystery-man.svg" };
+
+          const tokenResolver = await ImageResolver.createFromSpeciesData(
+            {
+              dexId: species.system.number,
+              shiny: this.actor!.system.shiny,
+              female: this.actor!.system.gender === "female",
+              forms: species.system.form ? [...species.system.form.split("-"), "token"] : ["token"],
+            },
+            config
+          );
+          return {
+            portrait: resolver.result,
+            token: tokenResolver?.result ?? resolver.result
+          }
+        })();
+
+        const flags = species.flags;
+        flags.core ??= {};
+        flags.core.sourceId = species.uuid;
+
+        await this.actor.update({
+          name: this.actor.name == current.name ? species.name : this.actor.name,
+          img: img,
+          prototypeToken: {
+            img: tokenImage,
+            texture: {
+              src: tokenImage,
+            }
+          }
+        });
+
+        this.actor.updateEmbeddedDocuments("Item", [
+          {
+            flags,
+            name: species.system.slug ? Handlebars.helpers.formatSlug(species.system.slug) : species.name,
+            type: 'species',
+            img: img,
+            system: species.system.toObject(),
+            _id: "actorspeciesitem",
+            effects: species.effects.map(e => e.toObject())
+          }
+        ]);
+
+        await this.actor.createEmbeddedDocuments("Item", newMoves.map(move => move.toObject()));
+
+        return void PerkWebApp.refresh.call(this);
+      },
+      "load-search": async function (this: PerkWebApp) {
+        if (!this.perkTab) return;
+        if (this.perkTab.isInitialized) return;
+
+        await this.perkTab.init();
+        this.render({ parts: ["search"] });
       }
-    },
-    { inplace: false }
-  );
+    }
+  };
 
   static override PARTS: Record<string, foundry.applications.api.HandlebarsTemplatePart> = {
     hudHeader: {
@@ -413,7 +410,7 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
         label: this.actor?.name ? `${this.actor.name}'s Global Perk Web` : "Global Perk Web"
       }
     ]
-    const uuid = this.actor?.species?.evolutions?.uuid ?? this.actor?.species?.parent?.flags?.core?.sourceId ?? this.actor?.species?.parent?.uuid;
+    const uuid = (this.actor?.species?.evolutions?.uuid ?? this.actor?.species?.parent?.flags?.core?.sourceId) || this.actor?.species?.parent?._stats?.compendiumSource || this.actor?.species?.parent?.uuid;
     if (uuid) webOptions.push({
       value: uuid,
       label: this.actor?.name ? `${this.actor.name}'s Species Perk Web` : "Species Perk Web"
@@ -508,7 +505,7 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
           action,
           traits: action.traits.map(trait => ({ value: trait.slug, label: trait.label })),
           fields: action.schema.fields,
-          enrichedDescription: action.description ? await TextEditor.enrichHTML(action.description) : null
+          enrichedDescription: action.description ? await foundry.applications.ux.TextEditor.enrichHTML(action.description) : null
         })) ?? []),
         state: {
           available: [PerkState.connected, PerkState.available].includes(this.currentNode?.state as unknown as 1 | 2),
@@ -525,7 +522,7 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
             : `${game.i18n.localize("PTR2E.PerkWebApp.RefundPerk")} (${perk?.system.cost} AP)`,
           evolution: perk?.flags.ptr2e?.evolution ? game.i18n.format("PTR2E.PerkWebApp.Evolve", { name: Handlebars.helpers.capitalizeFirst(perk?.name?.replace("Evolution: ", '')) || "" }) : null
         },
-        enrichedDescription: perk?.system.description ? await TextEditor.enrichHTML(perk.system.description) : null,
+        enrichedDescription: perk?.system.description ? await foundry.applications.ux.TextEditor.enrichHTML(perk.system.description) : null,
       },
       zoom: this._zoomAmount,
       editMode: this.editMode,
@@ -537,7 +534,7 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
     }
   }
 
-  override _preparePartContext(partId: string, context: ApplicationRenderContext): Promise<ApplicationRenderContext> {
+  override _preparePartContext(partId: string, context: foundry.applications.api.ApplicationRenderContext): Promise<foundry.applications.api.ApplicationRenderContext> {
     if (partId === "hudZoom") {
       context.zoomLevels = this.zoomLevels;
       context.zoomLevel = this._zoomAmount;
@@ -687,13 +684,19 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
           this.currentNode = this._perkStore.get(perkKey) ?? null;
           this.render({ parts: ["hudPerk"] });
         });
-        perk.addEventListener("dblclick", (event) => {
+        perk.addEventListener("dblclick", async (event) => {
           event.preventDefault();
           event.stopPropagation();
           const { x, y } = perk.dataset;
           if (!x || !y) return;
           const perkKey = `${Number(x)}-${Number(y)}`;
           const node = this._perkStore.get(perkKey) ?? null;
+          const evolution = node?.perk?.flags?.ptr2e?.evolution as { name: string, tier: number, uuid: string } | undefined;
+          if (evolution) {
+            const species = await fromUuid<SpeciesPTR2e>(evolution.uuid);
+            if (species) return void species.sheet?.render(true);
+          }
+
           node?.perk?.sheet?.render(true);
         });
         perk.addEventListener("contextmenu", (event) => {
@@ -1250,8 +1253,14 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
         const x2 = (((connectedRect.x + scroll.x) * zoom) + ((connectedRect.width * zoom) / 2) - (elementRect.x * zoom));
         const y2 = (((connectedRect.y + scroll.y) * zoom) + ((connectedRect.height * zoom) / 2) - (elementRect.y * zoom));
 
+        
+        const unlockedPerkStates: PerkPurchaseState[] = [PerkState.purchased, PerkState.autoUnlocked];
+
         const color = (() => {
           if (this.editMode) return "#ffffff";
+          if ((unlockedPerkStates.includes(node.state) || !!node.tierInfo) && (unlockedPerkStates.includes(connectedNode.state) || !!connectedNode.tierInfo)) {
+            return "#2ECFF5"; // Change to blue if both nodes are unlocked
+          }
           if (node.state === PerkState.purchased || !!node.tierInfo || connectedNode.state === PerkState.purchased || !!connectedNode.tierInfo) return "#ffffff";
           return "#898989";
         })();
@@ -1261,7 +1270,16 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
         line.setAttribute("x2", x2.toString());
         line.setAttribute("y2", y2.toString());
         line.setAttribute("stroke", color);
-        line.setAttribute("stroke-width", (2.5 * zoom * zoom * (color === '#ffffff' ? 1 : 0.85)).toString());
+
+        // Add class for purchased lines
+        if ((unlockedPerkStates.includes(node.state) || !!node.tierInfo) && (unlockedPerkStates.includes(connectedNode.state) || !!connectedNode.tierInfo)) {
+          line.setAttribute("stroke-width", (7.5 * zoom * zoom).toString());
+          line.setAttribute("filter", "drop-shadow(0 0 10px rgba(46, 207, 245, 1))");
+        }
+        else {
+          line.setAttribute("stroke-width", (2.5 * zoom * zoom * (color === '#ffffff' ? 1 : 0.85)).toString());
+        }
+
         if (existing) continue;
 
         svg.appendChild(line);
@@ -1430,14 +1448,14 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
 
   onPan(context: KeyboardEventContext, movementDirections: string[]) {
     // Case 1: Check for Tour
-    if((Tour.tourInProgress) && (!context.repeat) && (!context.up)) return false;
+    if ((foundry.nue.Tour.tourInProgress) && (!context.repeat) && (!context.up)) return false;
 
     // Case 2: Check if Perk Web is open
-    if(!this.rendered) return false;
+    if (!this.rendered) return false;
 
     // Remove Keys on Up
-    if ( context.up ) {
-      for ( const d of movementDirections ) {
+    if (context.up) {
+      for (const d of movementDirections) {
         this.moveKeys.delete(d);
       }
       return true;
@@ -1448,19 +1466,19 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
     const delta = now - this.moveTime;
 
     // Track the movement set
-    for ( const d of movementDirections ) {
+    for (const d of movementDirections) {
       this.moveKeys.add(d);
     }
 
     // Delay 50ms before panning the web in order to capture diagonal movements
-    if(delta < 100) return true;
+    if (delta < 100) return true;
     setTimeout(() => this.handlePan(), 50)
     this.moveTime = now;
     return true;
   }
 
   private handlePan() {
-    if(!this.moveKeys.size) return;
+    if (!this.moveKeys.size) return;
 
     const element = this.element.querySelector<HTMLElement>(`[data-application-part="web"] .scroll`);
     if (!element) return;
@@ -1468,15 +1486,15 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
     let dx = 0;
     let dy = 0;
     const directions = this.moveKeys;
-    if ( directions.has(ClientKeybindings.MOVEMENT_DIRECTIONS.LEFT) ) dx -= 1;
-    if ( directions.has(ClientKeybindings.MOVEMENT_DIRECTIONS.RIGHT) ) dx += 1;
-    if ( directions.has(ClientKeybindings.MOVEMENT_DIRECTIONS.UP) ) dy -= 1;
-    if ( directions.has(ClientKeybindings.MOVEMENT_DIRECTIONS.DOWN) ) dy += 1;
+    if (directions.has(ClientKeybindings.MOVEMENT_DIRECTIONS.LEFT)) dx -= 1;
+    if (directions.has(ClientKeybindings.MOVEMENT_DIRECTIONS.RIGHT)) dx += 1;
+    if (directions.has(ClientKeybindings.MOVEMENT_DIRECTIONS.UP)) dy -= 1;
+    if (directions.has(ClientKeybindings.MOVEMENT_DIRECTIONS.DOWN)) dy += 1;
 
     const newLeft = element.scrollLeft + (dx * 75);
     const newTop = element.scrollTop + (dy * 75);
-    
-    element.scrollTo({left: newLeft, top: newTop, behavior: "smooth"});
+
+    element.scrollTo({ left: newLeft, top: newTop, behavior: "smooth" });
   }
 
   async setWeb(species: SpeciesPTR2e | null) {
@@ -1518,7 +1536,7 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
           })
         )
         : await (async () => {
-          const data = TextEditor.getDragEventData(event) as DropCanvasData
+          const data = foundry.applications.ux.TextEditor.getDragEventData(event) as DropCanvasData
           if (!data) return [];
           const perk = await fromUuid(data.uuid) as PerkPTR2e;
           if (!(perk instanceof ItemPTR2e && perk.type === "perk")) return [];

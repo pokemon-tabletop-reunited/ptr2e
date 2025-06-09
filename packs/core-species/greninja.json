@@ -13,19 +13,16 @@
     "diet": [
       "omnivore"
     ],
-    "movement": {
-      "primary": [
-        {
-          "type": "overland",
-          "value": 12
-        },
-        {
-          "type": "swim",
-          "value": 12
-        }
-      ],
-      "secondary": []
-    },
+    "movement": [
+      {
+        "type": "overland",
+        "value": 12
+      },
+      {
+        "type": "swim",
+        "value": 12
+      }
+    ],
     "traits": [
       "pokemon",
       "fully-evolved",
@@ -33,7 +30,8 @@
       "bipedal",
       "wallclimber",
       "fountain",
-      "evil-touch"
+      "evil-touch",
+      "jump-6"
     ],
     "abilities": {
       "starting": [
@@ -46,18 +44,18 @@
       ],
       "basic": [
         {
-          "slug": "limber"
+          "slug": "low-blow"
         },
         {
-          "slug": "long-reach"
+          "slug": "dual-wield"
         }
       ],
       "advanced": [
         {
-          "slug": "low-blow"
+          "slug": "anticipation"
         },
         {
-          "slug": "anticipation"
+          "slug": "tidal-rush"
         }
       ],
       "master": [
@@ -655,6 +653,10 @@
                 "item": null,
                 "level": null,
                 "knownMove": null
+              },
+              "perk": {
+                "x": 26,
+                "y": 26
               }
             }
           ],
@@ -663,13 +665,31 @@
             "item": null,
             "level": null,
             "knownMove": null
+          },
+          "perk": {
+            "x": 26,
+            "y": 26
           }
         }
       ],
-      "uuid": "Compendium.ptr2e.core-species.Item.2qA1FvQQ4S4eC3Jc"
+      "uuid": "Compendium.ptr2e.core-species.Item.2qA1FvQQ4S4eC3Jc",
+      "methods": [],
+      "perk": {
+        "x": 26,
+        "y": 26
+      }
+    },
+    "publication": {
+      "source": "PTR 2e Core - Kalos Dex",
+      "authors": [
+        "PTR 2e Team"
+      ]
+    },
+    "_migration": {
+      "version": null,
+      "previous": null
     }
   },
   "_id": "vY8gAoHLFZ7fChvA",
-  "effects": [],
-  "folder": null
+  "effects": []
 }

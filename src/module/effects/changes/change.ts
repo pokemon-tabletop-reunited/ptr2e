@@ -90,7 +90,7 @@ class ChangeModel<TSchema extends ChangeSchema = ChangeSchema> extends foundry.a
         required: true,
         blank: false,
         initial: this.TYPE,
-        choices: ChangeModelTypes,
+        choices: Object.entries(ChangeModelTypes() as Record<string, {label: string}>).reduce((acc, [k, v]: [string, {label: string}]) => ({...acc, [k]: v.label}), {}),
         validate: (value) => value === this.TYPE,
         validationError: `must be equal to "${this.TYPE}"`,
         label: "PTR2E.Effect.FIELDS.ChangeType.label",
@@ -250,8 +250,8 @@ class ChangeModel<TSchema extends ChangeSchema = ChangeSchema> extends foundry.a
       return source;
     } else if (typeof source === "string") {
       return source.replace(
-        /{(actor|item|change|effect|attack)\|(.*?)}/g,
-        (_match, key: string, prop: string) => {
+        /{(actor|item|change|effect|attack)\|(.*?)(\|C)?}/g,
+        (_match, key: string, prop: string, modifier: string) => {
           const data =
             key === "change"
               ? this
@@ -264,7 +264,7 @@ class ChangeModel<TSchema extends ChangeSchema = ChangeSchema> extends foundry.a
             if (warn)
               this.failValidation(`Failed to resolve injected property "${source}"`);
           }
-          return String(value);
+          return modifier ? Handlebars.helpers.capitalize(String(value)) : String(value);
         }
       );
     }

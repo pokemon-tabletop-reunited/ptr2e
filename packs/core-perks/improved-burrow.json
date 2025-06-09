@@ -4,8 +4,7 @@
   "folder": "zrVtKATNxzLNxTUe",
   "system": {
     "prerequisites": [
-      "#A Burrow Movement Allowance",
-      "#Climb 20 + 10 x (# of Improved Burrow Perks already obtained)"
+      "#A Burrow Movement Allowance"
     ],
     "cost": 1,
     "description": "<p>Improve your Burrow Movement Allowance by 2.</p>",
@@ -27,7 +26,9 @@
       }
     ],
     "slug": "improved-burrow",
-    "traits": [],
+    "traits": [
+      "minor-buff"
+    ],
     "_migration": {
       "version": null,
       "previous": null
@@ -108,7 +109,7 @@
           "stat-iv-booster-1-11",
           "assault-armor-style",
           "evasive-style",
-          "rapid-fire-style-1",
+          "rapid-fire-style",
           "gambit-style",
           "improved-overland-13",
           "improved-flight-6"
@@ -134,6 +135,12 @@
       "arena": "physical",
       "approach": "power",
       "archetype": "Mobility"
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ]
     }
   },
   "_id": "QmK7pugsgkpdnaHA",
@@ -154,6 +161,12 @@
             "mode": 2,
             "priority": null,
             "ignored": false
+          },
+          {
+            "type": "roll-option",
+            "value": "improved-burrow",
+            "domain": "all",
+            "count": true
           }
         ],
         "slug": null,

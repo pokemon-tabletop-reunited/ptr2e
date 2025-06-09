@@ -21,69 +21,66 @@ class PartySheetPTR2e extends foundry.applications.api.HandlebarsApplicationMixi
     this.folder = options.folder;
   }
 
-  static override DEFAULT_OPTIONS = fu.mergeObject(
-    super.DEFAULT_OPTIONS,
-    {
-      id: "{id}",
-      classes: ["sheet", "party-sheet"],
-      position: {
-        height: 465,
-        width: 528,
-      },
-      window: {
-        resizable: true,
-        controls: [
-          ...(super.DEFAULT_OPTIONS?.window?.controls ?? []),
-          {
-            icon: "fas fa-heart-circle-plus",
-            label: "PTR2E.ActorSheet.Rest",
-            action: "rest",
-            visible: true,
-          }
-        ]
-      },
-      dragDrop: [
-        {
-          dragSelector: ".tab[data-tab=party] .party-drag-item",
-          dropSelector: ".tab[data-tab=party] article.party, .tab[data-tab=party] main.boxes"
-        }
-      ],
-      scrollY: [".scroll"],
-      actions: {
-        "create-folder": function (this: PartySheetPTR2e, event: Event) {
-          event.preventDefault();
-          event.stopPropagation();
-          const button = event.target as HTMLButtonElement;
-          const rect = button.getBoundingClientRect();
-
-          FolderPTR2e.createDialog({
-            folder: this.folder.id,
-            type: this.folder.type
-          }, {
-            top: rect.top + rect.height + 10,
-            left: rect.left - Number(FolderConfig.defaultOptions.width) + rect.width,
-          }).then((folder) => {
-            if(folder instanceof FolderPTR2e) {
-              //@ts-expect-error - App v1 compatability
-              this.boundBoxes[folder.id] = folder;
-              //@ts-expect-error - App v1 compatability
-              folder.apps[this.id] = this;
-              this.render({ parts: ["party"] });
-            }
-          });
-        },
-        "rest": async function (this: PartySheetPTR2e) {
-          const restParticipants: ActorPTR2e[] = await this.party();
-          const owner = await this.owner();
-          if (owner as ActorPTR2e) {
-            restParticipants.unshift(owner as unknown as ActorPTR2e);
-          }
-          new RestApp(this.folder.name, restParticipants).render(true);
-        },
-      }
+  static override DEFAULT_OPTIONS = {
+    id: "{id}",
+    classes: ["sheet", "party-sheet"],
+    position: {
+      height: 465,
+      width: 528,
     },
-    { inplace: false }
-  );
+    window: {
+      resizable: true,
+      controls: [
+        ...(super.DEFAULT_OPTIONS?.window?.controls ?? []),
+        {
+          icon: "fas fa-heart-circle-plus",
+          label: "PTR2E.ActorSheet.Rest",
+          action: "rest",
+          visible: true,
+        }
+      ]
+    },
+    dragDrop: [
+      {
+        dragSelector: ".tab[data-tab=party] .party-drag-item",
+        dropSelector: ".tab[data-tab=party] article.party, .tab[data-tab=party] main.boxes"
+      }
+    ],
+    scrollY: [".scroll"],
+    actions: {
+      "create-folder": function (this: PartySheetPTR2e, event: Event) {
+        event.preventDefault();
+        event.stopPropagation();
+        const button = event.target as HTMLButtonElement;
+        const rect = button.getBoundingClientRect();
+
+        FolderPTR2e.createDialog({
+          folder: this.folder.id,
+          type: this.folder.type
+        }, {}, {
+          top: rect.top + rect.height + 10,
+          //@ts-expect-error - Types are not up-to-date
+          left: rect.left - Number(foundry.applications.sheets.FolderConfig.DEFAULT_OPTIONS.position.width) + rect.width,
+        }).then((folder) => {
+          if (folder instanceof FolderPTR2e) {
+            //@ts-expect-error - App v1 compatability
+            this.boundBoxes[folder.id] = folder;
+            //@ts-expect-error - App v1 compatability
+            folder.apps[this.id] = this;
+            this.render({ parts: ["party"] });
+          }
+        });
+      },
+      "rest": async function (this: PartySheetPTR2e) {
+        const restParticipants: ActorPTR2e[] = await this.party();
+        const owner = await this.owner();
+        if (owner as ActorPTR2e) {
+          restParticipants.unshift(owner as unknown as ActorPTR2e);
+        }
+        new RestApp(this.folder.name, restParticipants).render(true);
+      },
+    }
+  } as unknown as Omit<DeepPartial<ApplicationConfigurationExpanded>, "uniqueId">;
 
   static override PARTS: Record<string, foundry.applications.api.HandlebarsTemplatePart> = {
     tabs: {
@@ -159,9 +156,9 @@ class PartySheetPTR2e extends foundry.applications.api.HandlebarsApplicationMixi
     const party: ActorPTR2e[] = await this.party();
 
     const nonParty: ActorPTR2e[] = [];
-    for(const actor of this.folder.contents) {
-      if(actor === owner) continue;
-      if(!party.includes(actor)) nonParty.push(actor);
+    for (const actor of this.folder.contents) {
+      if (actor === owner) continue;
+      if (!party.includes(actor)) nonParty.push(actor);
     }
 
     const boxData = (() => {
@@ -200,247 +197,167 @@ class PartySheetPTR2e extends foundry.applications.api.HandlebarsApplicationMixi
         member.addEventListener("dblclick", this._onPartyMemberClick.bind(this));
       }
 
-      ContextMenu.create(this, $(htmlElement), ".party-drag-item.box-header", this._getFolderContextOptions());
-      ContextMenu.create(this, $(htmlElement), ".party-drag-item[data-actor-id]", this._getActorContextOptions());
+      this._createContextMenu(this._getFolderContextOptions, ".party-drag-item.box-header", { fixed: true, hookName: "getPartyFolderContextOptions", parentClassHooks: false });
+      this._createContextMenu(this._getActorContextOptions, ".party-drag-item[data-actor-id]", { fixed: true, hookName: "getPartyActorContextOptions", parentClassHooks: false });
     }
   }
 
   _getFolderContextOptions() {
-    return [
-      {
-        name: "FOLDER.Edit",
-        icon: '<i class="fas fa-edit"></i>',
-        condition: true,
-        callback: async (header: JQuery) => {
-          const li = header.closest(".party-drag-item.box-header")[0];
-          if(!li) return void console.warn("No directory item found for folder edit context menu option");
-          const folder = game.folders.get(li.dataset.folderId);
-          if(!folder) return;
-          const r = li.getBoundingClientRect();
-          const options = {top: r.top, left: r.left - Number(FolderConfig.defaultOptions.width) - 10};
-          new FolderConfigPTR2e({
-            document: folder,
-            position: options
-          }).render(true);
+    //@ts-expect-error - Types are not up-to-date
+    const options = ui.actors._getFolderContextOptions() as ContextMenuEntry[];
+    for (const option of options) {
+      switch (option.name) {
+        case "FOLDER.Edit": {
+          option.callback = async (header: HTMLElement) => {
+            const li = header.closest<HTMLElement>(".party-drag-item.box-header");
+            if (!li) return void console.warn("No directory item found for folder edit context menu option");
+            const folder = game.folders.get(li.dataset.folderId);
+            if (!folder) return;
+            const r = li.getBoundingClientRect();
+            //@ts-expect-error - Types are not up-to-date
+            const options = { top: r.top, left: r.left - Number(foundry.applications.sheets.FolderConfig.DEFAULT_OPTIONS.position.width) - 10 };
+            new FolderConfigPTR2e({
+              document: folder,
+              position: options
+            }).render(true);
+          }
+          break;
         }
-      },
-      {
-        name: "FOLDER.CreateTable",
-        icon: `<i class="${CONFIG.RollTable.sidebarIcon}"></i>`,
-        condition: async (header: JQuery) => {
-          const li = header.closest(".party-drag-item.box-header")[0];
-          if(!li) return false;
-          const folder = game.folders.get(li.dataset.folderId);
-          if(!folder) return false;
-          return CONST.COMPENDIUM_DOCUMENT_TYPES.includes(folder.type);
-        },
-        callback: async (header: JQuery) => {
-          const li = header.closest(".party-drag-item.box-header")[0];
-          if(!li) return false;
-          const folder = game.folders.get(li.dataset.folderId);
-          if(!folder) return;
-          const r = li.getBoundingClientRect();
-          // @ts-expect-error - This is valid
-          return Dialog.confirm({
-            title: `${game.i18n.localize("FOLDER.CreateTable")}: ${folder.name}`,
-            content: game.i18n.localize("FOLDER.CreateTableConfirm"),
-            yes: () => RollTable.fromFolder(folder),
-            options: {
-              top: r.top + r.height + 10,
-              left: r.left,
-              width: 360
-            }
-          });
+        case "FOLDER.CreateTable": {
+          option.condition = (header: HTMLElement) => {
+            const li = header.closest<HTMLElement>(".party-drag-item.box-header");
+            if (!li) return false;
+            const folder = game.folders.get(li.dataset.folderId);
+            if (!folder) return false;
+            return CONST.COMPENDIUM_DOCUMENT_TYPES.includes(folder.type);
+          }
+          option.callback = async (header: HTMLElement) => {
+            const li = header.closest<HTMLElement>(".party-drag-item.box-header");
+            if (!li) return false;
+            const folder = game.folders.get(li.dataset.folderId);
+            if (!folder) return false;
+            const title = game.i18n.format("FOLDER.CreateTableConfirm.Title", { folder: folder.name });
+
+            return foundry.applications.api.DialogV2.confirm({
+              window: { title },
+              position: {
+                top: Math.min(li.offsetTop, window.innerHeight - 350),
+                left: window.innerWidth - 740,
+                width: 420
+              },
+              content: `<p>${game.i18n.localize("FOLDER.CreateTableConfirm.Question")}</p>`,
+              //@ts-expect-error - Outdated Types
+              yes: { callback: () => RollTable.implementation.fromFolder(folder), default: true }
+            });
+          }
+          break;
         }
-      },
-      {
-        name: "FOLDER.Remove",
-        icon: '<i class="fas fa-trash"></i>',
-        condition: game.user.isGM,
-        callback: async (header: JQuery) => {
-          const li = header.closest(".party-drag-item.box-header")[0];
-          if(!li) return;
-          const folder = game.folders.get(li.dataset.folderId);
-          if(!folder) return;
-          const r = li.getBoundingClientRect();
-          // @ts-expect-error - This is valid
-          return Dialog.confirm({
-            title: `${game.i18n.localize("FOLDER.Remove")} ${folder.name}`,
-            content: `<h4>${game.i18n.localize("AreYouSure")}</h4><p>${game.i18n.localize("FOLDER.RemoveWarning")}</p>`,
-            yes: () => folder.delete({deleteSubfolders: false, deleteContents: false}),
-            options: {
-              top: r.top + r.height + 10,
-              left: r.left,
+        case "FOLDER.Remove": {
+          option.callback = async (header: HTMLElement) => {
+            const li = header.closest<HTMLElement>(".party-drag-item.box-header");
+            if (!li) return;
+            const folder = game.folders.get(li.dataset.folderId);
+            if (!folder) return;
+            const question = game.i18n.localize("AreYouSure");
+            const warning = game.i18n.localize("FOLDER.RemoveWarning");
+            const title = game.i18n.format("FOLDER.Remove", { name: folder.name });
+            return folder.deleteDialog({
+              content: `<p><strong>${question}</strong> ${warning}</p>`,
+              window: { title, icon: "fas fa-trash" },
+              position: {
+                top: Math.min(li.offsetTop, window.innerHeight - 350),
+                left: window.innerWidth - 770,
+                width: 450
+              }
+            });
+          }
+          break;
+        }
+        case "FOLDER.Delete": {
+          option.callback = async (header: HTMLElement) => {
+            const li = header.closest<HTMLElement>(".party-drag-item.box-header");
+            if (!li) return;
+            const folder = game.folders.get(li.dataset.folderId);
+            if (!folder) return;
+            const question = game.i18n.localize("AreYouSure");
+            const warning = game.i18n.localize("FOLDER.DeleteWarning");
+            const title = game.i18n.format("FOLDER.Delete", { name: folder.name });
+            return folder.deleteDialog({
+              window: { title, icon: "fas fa-dumpster" },
+              position: {
+                top: Math.min(li.offsetTop, window.innerHeight - 350),
+                left: window.innerWidth - 770,
+                width: 450
+              },
+              content: `<p><strong>${question}</strong> ${warning}</p>`,
+              yes: {
+                //@ts-expect-error - Outdated Types
+                callback: () => folder.delete({ deleteSubfolders: true, deleteContents: true })
+              }
+            });
+          }
+          break;
+        }
+        case "OWNERSHIP.Configure": {
+          option.callback = async (header: HTMLElement) => {
+            const li = header.closest<HTMLElement>(".party-drag-item.box-header");
+            if (!li) return;
+            const folder = game.folders.get(li.dataset.folderId);
+            // @ts-expect-error - Typing for this sheet is missing
+            new foundry.applications.apps.DocumentOwnershipConfig(folder, {
+              top: Math.min(li.offsetTop, window.innerHeight - 350),
+              left: window.innerWidth - 720
+            }).render({ force: true });
+          }
+          break;
+        }
+        case "FOLDER.Export": {
+          option.condition = (header: HTMLElement) => {
+            const li = header.closest<HTMLElement>(".party-drag-item.box-header");
+            if (!li) return false;
+            const folder = game.folders.get(li.dataset.folderId);
+            if (!folder) return false;
+            return CONST.COMPENDIUM_DOCUMENT_TYPES.includes(folder.type);
+          }
+          option.callback = async (header: HTMLElement) => {
+            const li = header.closest<HTMLElement>(".party-drag-item.box-header");
+            if (!li) return;
+            const folder = game.folders.get(li.dataset.folderId);
+            if (!folder) return;
+            return folder.exportDialog(null, {
+              top: Math.min(li.offsetTop, window.innerHeight - 350),
+              left: window.innerWidth - 720,
               width: 400
-            }
-          });
+            });
+          }
+          break;
         }
-      },
-      {
-        name: "FOLDER.Delete",
-        icon: '<i class="fas fa-dumpster"></i>',
-        condition: game.user.isGM,
-        callback: async (header: JQuery) => {
-          const li = header.closest(".party-drag-item.box-header")[0];
-          if(!li) return;
-          const folder = game.folders.get(li.dataset.folderId);
-          if(!folder) return;
-          const r = li.getBoundingClientRect();
-          // @ts-expect-error - This is valid
-          return Dialog.confirm({
-            title: `${game.i18n.localize("FOLDER.Delete")} ${folder.name}`,
-            content: `<h4>${game.i18n.localize("AreYouSure")}</h4><p>${game.i18n.localize("FOLDER.DeleteWarning")}</p>`,
-            yes: () => folder.delete({deleteSubfolders: true, deleteContents: true}),
-            options: {
-              top: r.top + r.height + 10,
-              left: r.left,
-              width: 400
-            }
-          });
-        }
-      },
-      {
-        name: "OWNERSHIP.Configure",
-        icon: '<i class="fas fa-lock"></i>',
-        condition: () => game.user.isGM,
-        callback: async (header: JQuery) => {
-          const li = header.closest(".party-drag-item.box-header")[0];
-          if(!li) return;
-          const folder = game.folders.get(li.dataset.folderId);
-          // @ts-expect-error - Typing for this sheet is missing
-          new DocumentOwnershipConfig(folder, {
-            top: Math.min(li.offsetTop, window.innerHeight - 350),
-            left: window.innerWidth - 720
-          }).render(true);
-        }
-      },
-      {
-        name: "FOLDER.Export",
-        icon: '<i class="fas fa-atlas"></i>',
-        condition: (header: JQuery) => {
-          const li = header.closest(".party-drag-item.box-header")[0];
-          const folder = game.folders.get(li.dataset.folderId);
-          if(!folder) return false;
-          return CONST.COMPENDIUM_DOCUMENT_TYPES.includes(folder.type);
-        },
-        callback: async (header: JQuery) => {
-          const li = header.closest(".party-drag-item.box-header")[0];
-          if(!li) return;
-          const folder = game.folders.get(li.dataset.folderId);
-          if(!folder) return;
-          return folder.exportDialog(null, {
-            top: Math.min(li.offsetTop, window.innerHeight - 350),
-            left: window.innerWidth - 720,
-            width: 400
-          });
-        }
+        default: break;
       }
-    ] as unknown as ContextMenuEntry[];
+    }
+
+    return options;
   }
 
   _getActorContextOptions() {
-    return [
-      {
-        name: "SIDEBAR.CharArt",
-        icon: '<i class="fas fa-image"></i>',
-        condition: (li: JQuery) => {
-          const actor = game.actors.get(li.data("actorId"));
-          return actor?.img !== CONST.DEFAULT_TOKEN;
-        },
-        callback: (li: JQuery) => {
-          const actor = game.actors.get(li.data("actorId"));
-          if(!actor) return;
-          new ImagePopout(actor.img, {
-            title: actor.name,
-            uuid: actor.uuid
-          }).render(true);
+    //@ts-expect-error - Types are not up-to-date
+    const options = ui.actors._getEntryContextOptions() as ContextMenuEntry[];
+    const getDocument = (li: HTMLElement) => ui.actors.collection.get(li.closest<HTMLElement>("[data-entry-id]")?.dataset.entryId);
+    for (const option of options) {
+      switch (option.name) {
+        case "FOLDER.Clear": {
+          option.condition = (header => {
+            const li = header.closest<HTMLElement>(".party-drag-item");
+            if (!li) return false;
+            return game.user.isGM && !!getDocument(li)?.folder
+          })
+          break;
         }
-      },
-      {
-        name: "SIDEBAR.TokenArt",
-        icon: '<i class="fas fa-image"></i>',
-        condition: (li: JQuery) => {
-          const actor = game.actors.get(li.data("actorId"));
-          if(!actor) return false;
-          if ( actor.prototypeToken.randomImg ) return false; //@ts-expect-error - This is correct
-          return ![null, undefined, CONST.DEFAULT_TOKEN].includes(actor.prototypeToken.texture.src);
-        },
-        callback: (li: JQuery) => {
-          const actor = game.actors.get(li.data("actorId"));
-          if(!actor) return;
-          new ImagePopout(actor.prototypeToken.texture.src, {
-            title: actor.name,
-            uuid: actor.uuid
-          }).render(true);
-        }
-      },
-      {
-        name: "OWNERSHIP.Configure",
-        icon: '<i class="fas fa-lock"></i>',
-        condition: () => game.user.isGM,
-        callback: (header: JQuery) => {
-          const li = header.closest(".party-drag-item");
-          const document = ui.actors.collection.get(li.data("actorId"));
-          // @ts-expect-error - Typing for this sheet is missing
-          new DocumentOwnershipConfig(document, {
-            top: Math.min(li[0].offsetTop, window.innerHeight - 350),
-            left: window.innerWidth - 720
-          }).render(true);
-        }
-      },
-      {
-        name: "SIDEBAR.Export",
-        icon: '<i class="fas fa-file-export"></i>',
-        condition: (header: JQuery) => {
-          const li = header.closest(".party-drag-item");
-          const document = ui.actors.collection.get(li.data("actorId"));
-          return document?.isOwner;
-        },
-        callback: (header: JQuery) => {
-          const li = header.closest(".party-drag-item");
-          const document = ui.actors.collection.get(li.data("actorId"));
-          return document?.exportToJSON();
-        }
-      },
-      {
-        name: "SIDEBAR.Import",
-        icon: '<i class="fas fa-file-import"></i>',
-        condition: (header: JQuery) => {
-          const li = header.closest(".party-drag-item");
-          const document = ui.actors.collection.get(li.data("actorId"));
-          return document?.isOwner;
-        },
-        callback: (header: JQuery) => {
-          const li = header.closest(".party-drag-item");
-          const document = ui.actors.collection.get(li.data("actorId"));
-          return document?.importFromJSONDialog();
-        }
-      },
-      {
-        name: "SIDEBAR.Delete",
-        icon: '<i class="fas fa-trash"></i>',
-        condition: () => game.user.isGM,
-        callback: (header: JQuery) => {
-          const li = header.closest(".party-drag-item");
-          const entry = ui.actors.collection.get(li.data("actorId"));
-          if ( !entry ) return;
-          return entry.deleteDialog({
-            top: Math.min(li[0].offsetTop, window.innerHeight - 350),
-            left: window.innerWidth - 720
-          });
-        }
-      },
-      {
-        name: "SIDEBAR.Duplicate",
-        icon: '<i class="far fa-copy"></i>', //@ts-expect-error - Typing is missing
-        condition: () => game.user.isGM || ui.actors.collection.documentClass.canUserCreate(game.user),
-        callback: (header: JQuery) => {
-          const li = header.closest(".party-drag-item");
-          const original = ui.actors.collection.get(li.data("actorId"));
-          return original?.clone({name: `${original._source.name} (Copy)`}, {save: true, addSource: true});
-        }
+
+        default: break;
       }
-    ] as unknown as ContextMenuEntry[];
+    }
+    return options;
   }
 
   _onPartyMemberClick(event: Event) {
@@ -495,7 +412,7 @@ class PartySheetPTR2e extends foundry.applications.api.HandlebarsApplicationMixi
   }
 
   override async _onDrop(event: DragEvent) {
-    const data = TextEditor.getDragEventData(event) as DropCanvasData;
+    const data = foundry.applications.ux.TextEditor.getDragEventData(event) as DropCanvasData;
     switch (data.type) {
       case "Folder": return this._onDropFolder(event, data);
       case "Actor": return this._onDropEntry(event, data);
@@ -507,37 +424,37 @@ class PartySheetPTR2e extends foundry.applications.api.HandlebarsApplicationMixi
     if (!folder || folder.type !== "Actor") return;
 
     const article = (event.target as HTMLElement).closest("[data-folder-id]") as HTMLElement;
-    if(!article) return;
+    if (!article) return;
 
-    if(article.dataset.folderId === 'party') {
+    if (article.dataset.folderId === 'party') {
       const currentFolderContents = folder.contents.filter(a => a.isOwner).map(actor => actor.id);
       const currentPartyContents = this.folder.party.map(uuid => fu.parseUuid(uuid).id).filter(id => !!id) as string[];
       const updates = [
-        ...currentFolderContents.map(id => ({_id: id, "folder": this.folder.id, system: {party: { partyMemberOf: this.folder.id }}})),
-        ...currentPartyContents.map(id => ({_id: id, "folder": folder.id, system: {party: { partyMemberOf: null }}}))
+        ...currentFolderContents.map(id => ({ _id: id, "folder": this.folder.id, system: { party: { partyMemberOf: this.folder.id } } })),
+        ...currentPartyContents.map(id => ({ _id: id, "folder": folder.id, system: { party: { partyMemberOf: null } } }))
       ]
       await ActorPTR2e.updateDocuments(updates);
       return void await this.render({ parts: ["party"] });
     }
 
-    const targetFolder =game.folders.get(article.dataset.folderId) as Maybe<FolderPTR2e<ActorPTR2e<ActorSystemPTR2e, null>>>;
+    const targetFolder = game.folders.get(article.dataset.folderId) as Maybe<FolderPTR2e<ActorPTR2e<ActorSystemPTR2e, null>>>;
     if (!targetFolder || targetFolder.type !== "Actor") return;
 
     const target = ui.actors.element.find(`[data-folder-id="${targetFolder.id}"]`);
-    
-    //@ts-expect-error - Accessing protected member
-    await (target.length ? ui.actors._handleDroppedFolder(target[0], data) : ui.actors._handleDroppedFolder(null, {...data, targetFolderUuid: folder.uuid}));
 
-    if(game.user.isGM && folder.contents.length) {
+    //@ts-expect-error - Accessing protected member
+    await (target.length ? ui.actors._handleDroppedFolder(target[0], data) : ui.actors._handleDroppedFolder(null, { ...data, targetFolderUuid: folder.uuid }));
+
+    if (game.user.isGM && folder.contents.length) {
       const user = this.folder.userFromAvatarIfOwner;
-      if(user) {
+      if (user) {
         const updates = [];
-        for(const actor of folder.contents as unknown as ActorPTR2e[]) {
-          if(actor.ownership[user.id!] !== CONST.DOCUMENT_OWNERSHIP_LEVELS.OWNER) {
-            updates.push({_id: actor.id, "ownership": {[user.id!]: CONST.DOCUMENT_OWNERSHIP_LEVELS.OWNER, default: CONST.DOCUMENT_OWNERSHIP_LEVELS.OBSERVER} });
+        for (const actor of folder.contents as unknown as ActorPTR2e[]) {
+          if (actor.ownership[user.id!] !== CONST.DOCUMENT_OWNERSHIP_LEVELS.OWNER) {
+            updates.push({ _id: actor.id, "ownership": { [user.id!]: CONST.DOCUMENT_OWNERSHIP_LEVELS.OWNER, default: CONST.DOCUMENT_OWNERSHIP_LEVELS.OBSERVER } });
           }
         }
-        if(updates.length) {
+        if (updates.length) {
           await ActorPTR2e.updateDocuments(updates);
         }
       }
@@ -553,32 +470,32 @@ class PartySheetPTR2e extends foundry.applications.api.HandlebarsApplicationMixi
     const targetActor = game.actors.get(((event.target as HTMLElement)?.closest(".party-drag-item") as HTMLElement)?.dataset?.actorId);
 
     const article = (event.target as HTMLElement).closest("article[data-folder-id], main[data-folder-id]") as HTMLElement;
-    if(!article) return;
+    if (!article) return;
 
     const folderId = article.dataset.folderId;
     if (folderId === 'party') {
-      const target = ui.actors.element.find(targetActor ? `[data-entry-id="${targetActor.id}"]` : `[data-folder-id="${this.folder.id}"]`)
+      const target = $(ui.actors.element).find(targetActor ? `[data-entry-id="${targetActor.id}"]` : `[data-folder-id="${this.folder.id}"]`)
 
       //@ts-expect-error - Accessing protected member
-      await (target.length ? ui.actors._handleDroppedEntry(target[0], data) : ui.actors._handleDroppedEntry(null, {...data, targetFolderUuid: this.folder.uuid}));
+      await (target.length ? ui.actors._handleDroppedEntry(target[0], data) : ui.actors._handleDroppedEntry(null, { ...data, targetFolderUuid: this.folder.uuid }));
     }
     else {
       const folder = game.folders.get(folderId) as FolderPTR2e<ActorPTR2e<ActorSystemPTR2e, null>>;
       if (!folder) return;
 
-      const target = ui.actors.element.find(targetActor ? `[data-entry-id="${targetActor.id}"]` : `[data-folder-id="${folder.id}"]`);
+      const target = $(ui.actors.element).find(targetActor ? `[data-entry-id="${targetActor.id}"]` : `[data-folder-id="${folder.id}"]`);
 
-      
+
       await (
         target.length //@ts-expect-error - Accessing protected member
-        ? ui.actors._handleDroppedEntry(target[0], {...data, noParty: folderId === this.folder.id}) //@ts-expect-error - Accessing protected member
-        : ui.actors._handleDroppedEntry(null, {...data, targetFolderUuid: folder.uuid, noParty: folderId === this.folder.id})
+          ? ui.actors._handleDroppedEntry(target[0], { ...data, noParty: folderId === this.folder.id }) //@ts-expect-error - Accessing protected member
+          : ui.actors._handleDroppedEntry(null, { ...data, targetFolderUuid: folder.uuid, noParty: folderId === this.folder.id })
       );
-    
-      if(game.user.isGM) {
+
+      if (game.user.isGM) {
         const user = this.folder.userFromAvatarIfOwner;
-        if(user && actor.ownership[user.id!] !== CONST.DOCUMENT_OWNERSHIP_LEVELS.OWNER) {
-          await actor.update({ "ownership": {[user.id!]: CONST.DOCUMENT_OWNERSHIP_LEVELS.OWNER, default: CONST.DOCUMENT_OWNERSHIP_LEVELS.OBSERVER} });
+        if (user && actor.ownership[user.id!] !== CONST.DOCUMENT_OWNERSHIP_LEVELS.OWNER) {
+          await actor.update({ "ownership": { [user.id!]: CONST.DOCUMENT_OWNERSHIP_LEVELS.OWNER, default: CONST.DOCUMENT_OWNERSHIP_LEVELS.OBSERVER } });
         }
       }
     }

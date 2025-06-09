@@ -110,12 +110,12 @@ class AttackStatistic extends Statistic {
       meleeOrRanged,
     ].flat()
 
-    if(actionTraitEffects.length) {
-      for(const effect of actionTraitEffects) {
-        for(const change of effect.changes) {
-          if(change instanceof FlatModifierChangeSystem) {
+    if (actionTraitEffects.length) {
+      for (const effect of actionTraitEffects) {
+        for (const change of effect.changes) {
+          if (change instanceof FlatModifierChangeSystem) {
             const mod = change.beforePrepareData()?.();
-            if(mod) data.modifiers.push(mod);
+            if (mod) data.modifiers.push(mod);
           }
         }
       }
@@ -125,6 +125,10 @@ class AttackStatistic extends Statistic {
 
     this.item = item as ItemPTR2e<ItemSystemsWithActions, ActorPTR2e>;
     this.attack = attack;
+  }
+
+  getCheck(targetData?: ActorPTR2e | null): AttackCheck<this> {
+    return this.#check ??= new AttackCheck(this, this.data, this.config, targetData);
   }
 
   override get check(): AttackCheck<this> {
@@ -139,13 +143,32 @@ class AttackCheck<TParent extends AttackStatistic = AttackStatistic> implements 
   domains: string[];
   mod: number;
   modifiers: ModifierPTR2e[];
+  additionalOptions: Set<string>;
 
-  constructor(parent: TParent, data: StatisticData, config: RollOptionConfig = {}) {
+  constructor(parent: TParent, data: StatisticData, config: RollOptionConfig = {}, targetData?: ActorPTR2e | null) {
     this.parent = parent;
     data.check = fu.mergeObject(data.check ?? {}, { type: this.type });
 
+    const extraDomains = new Set<string>();
+    if(this.attack.variant) {
+      const original = this.attack.original as AttackPTR2e;
+      if(original) {
+        for(const od of original.statistic?.domains ?? []) {
+          extraDomains.add(od);
+        }
+      }
+    }
+
     data.check.domains = Array.from(new Set(data.check.domains ?? []));
-    this.domains = R.unique(R.filter([data.domains, data.check.domains].flat(), R.isTruthy));
+    this.domains = R.unique(R.filter([data.domains, data.check.domains, ...extraDomains].flat(), R.isTruthy));
+
+    this.additionalOptions = new Set<string>();
+    if (this.attack.power && this.attack.stab > 1) {
+      const options = [...this.attack.types.map(t => `stab-${t}`), `stab`];
+      this.domains.push(...options);
+      data.check!.domains.push(...options);
+      for (const option of options) this.additionalOptions.add(option);
+    }
 
     this.label = data.check?.label
       ? game.i18n.localize(data.check.label) || this.parent.label
@@ -154,7 +177,7 @@ class AttackCheck<TParent extends AttackStatistic = AttackStatistic> implements 
     const parentModifiers = parent.modifiers.map((modifier) => modifier.clone());
     const checkOnlyModifiers = [
       data.check?.modifiers ?? [],
-      extractModifiers(parent.actor.synthetics, data.check?.domains ?? []),
+      extractModifiers(parent.actor.synthetics, data.check?.domains ?? [], { resolvables: { target: targetData } }),
     ]
       .flat()
       .map((modifier) => {
@@ -169,6 +192,8 @@ class AttackCheck<TParent extends AttackStatistic = AttackStatistic> implements 
       });
 
     const rollOptions = parent.createRollOptions(this.domains, config);
+    for (const option of this.additionalOptions) rollOptions.add(option);
+
     this.modifiers = [
       ...parentModifiers,
       ...checkOnlyModifiers.map((modifier) => modifier.clone({ test: rollOptions })),
@@ -205,6 +230,14 @@ class AttackCheck<TParent extends AttackStatistic = AttackStatistic> implements 
     options.add(`attack:slug:${this.attack.slug}`);
     options.add(`attack:category:${this.attack.category}`);
     for (const type of this.attack.types) options.add(`attack:type:${type}`);
+    for (const option of this.additionalOptions) options.add(option);
+
+    if(this.attack.variant) {
+      const original = this.attack.original;
+      if(original) {
+        options.add(`attack:original:${original.slug}`);
+      }
+    }
 
     const targets: { actor: ActorPTR2e, token?: TokenPTR2e }[] = (() => {
       if (args.targets) return args.targets.map(t => ({ actor: t, token: t.token?.object as TokenPTR2e }));
@@ -230,35 +263,31 @@ class AttackCheck<TParent extends AttackStatistic = AttackStatistic> implements 
         return null;
       }
       const actorLift = this.actor.skills["lift"]?.mod ?? 1;
+      const actorWC = this.actor.species?.size?.weightClass ?? 1
       const targetWC = target.actor.species?.size?.weightClass ?? 1;
-      const power = powerModifier.modifier = Math.floor(20 + (actorLift / 4) + (targetWC * 3));
-
       const actorCatMod = this.actor.size?.rank ?? 1;
       const thrownCatMod = target.actor.size?.rank ?? 1;
-      const accuracy = Math.floor(75 + (actorLift / 5) + actorCatMod - (4 * thrownCatMod));
-      if (accuracy < 0) {
-        ui.notifications.warn(game.i18n.localize("PTR2E.AttackWarning.FlingAccuracyTooLow"));
-        return null;
-      }
 
-      const range = Math.floor(8 + (actorLift / 6) + actorCatMod - (2 * thrownCatMod));
-      if (range < 0) {
-        ui.notifications.warn(game.i18n.localize("PTR2E.AttackWarning.FlingRangeTooLow"));
-        return null;
-      }
+      const power = powerModifier.modifier = Math.max(25, Math.floor(17 + (Math.pow(actorLift+10, 0.5) / 5) * (3 + targetWC/6) * (2 + thrownCatMod/6) * (1.5 + actorWC/18) * (1.25 + actorCatMod/18)));
+
+      const accuracy = Math.min(100, Math.floor(10 + 50 * ((1 + actorWC/18) * (1 + actorCatMod/6) * (1+ actorLift / 200) / ((1 + targetWC/9) * (1 + thrownCatMod/3)))));
+
+      const range = Math.max(1, Math.floor(((Math.pow(actorLift+10, 2/3) / 3) - 0.5) * Math.pow(((1.05 * actorWC) + (1.35 * actorCatMod)) / ((1.35 * targetWC) + (1.7 * thrownCatMod)), 0.5) * ((3 + (actorCatMod/3)) / 10)));
 
       this.attack.power = power;
       this.attack.accuracy = accuracy;
-      if(this.attack.range) {
+      if (this.attack.range) {
         this.attack.range.distance = range;
       }
       this.attack.name = `Fling - ${target.actor.name}`;
-      this.attack.updateSource({ name: `Fling - ${target.actor.name}`, power, accuracy, range: {distance: range}, traits: this.attack._source.traits });
+      this.attack.updateSource({ name: `Fling - ${target.actor.name}`, power, accuracy, range: { distance: range }, traits: this.attack._source.traits });
       this.attack.prepareDerivedData();
     }
 
     const variants = args.variants ?? (this.attack.getVariants() || []);
     if (variants.length) args.skipDialog = false;
+
+    const selfOptions = new Set([...options, "targets:self"]);
 
     // Get context without target for basic information 
     const context = await this.actor.getCheckContext({
@@ -266,7 +295,7 @@ class AttackCheck<TParent extends AttackStatistic = AttackStatistic> implements 
       domains: this.domains,
       statistic: this,
       item: this.item,
-      options,
+      options: selfOptions,
       traits: args.traits ?? this.item.traits,
     }) as CheckContext<ActorPTR2e, AttackCheck<TParent>, ItemPTR2e<ItemSystemsWithActions, ActorPTR2e>>;
 
@@ -282,15 +311,15 @@ class AttackCheck<TParent extends AttackStatistic = AttackStatistic> implements 
       return [];
     }) ?? []
 
-    const selfEffectRolls = await extractEffectRolls({
+    const selfEffectRolls = args.skipEffectRolls ? [] : await extractEffectRolls({
       affects: "self",
-      origin: this.actor.clone({effects: [fu.deepClone(this.actor._source.effects), traitEffects].flat()}, {keepId: true}),
+      origin: this.actor.clone({ effects: [fu.deepClone(this.actor._source.effects), traitEffects].flat() }, { keepId: true }),
       target: this.actor,
       item: this.item,
       attack: this.attack,
       action: this.attack,
       domains: this.domains,
-      options,
+      options: selfOptions,
       chanceModifier: (Number(this.actor.system?.modifiers?.effectChance) || 0),
       hasSenerenGrace: this.actor.rollOptions?.all?.["special:serene-grace"] ?? false
     });
@@ -300,14 +329,24 @@ class AttackCheck<TParent extends AttackStatistic = AttackStatistic> implements 
     let anyValidTargets = false;
     for (const target of targets) {
       const allyOrEnemy = this.actor.isAllyOf(target.actor) ? "ally" : this.actor.isEnemyOf(target.actor) ? "enemy" : "neutral";
+      const targetsSelf = target.actor === this.actor;
+
+      const targetDomains = allyOrEnemy === "enemy"
+        ? this.domains.map(d => `hostile-${d}`)
+        : allyOrEnemy === "ally"
+          ? this.domains.map(d => `allied-${d}`)
+          : [];
+
+      const domains = R.unique([...this.domains, ...targetDomains]);
 
       const currContext = contexts[target.actor.uuid] = await this.actor.getCheckContext({
         attack: this.attack,
-        domains: this.domains,
+        domains: domains,
         statistic: this,
         target: target,
-        options: new Set([...options, `origin:${allyOrEnemy}`]),
+        options: new Set([...options, `origin:${allyOrEnemy}`, ...(targetsSelf ? ["targets:self"] : [])]),
         traits: args.traits ?? this.item.traits,
+        skipEffectRolls: args.skipEffectRolls,
       }) as CheckContext<ActorPTR2e, AttackCheck<TParent>, ItemPTR2e<ItemSystemsWithActions, ActorPTR2e>>
 
       if (currContext.self.actor.flags.ptr2e.disableActionOptions?.disabled.includes(this.attack.uuid as ActionUUID)) {
@@ -330,15 +369,17 @@ class AttackCheck<TParent extends AttackStatistic = AttackStatistic> implements 
         // TODO: Calculate Accuracy and determine if RIP is within range
         // This includes target evasion
         anyValidTargets = true;
+      } else {
+        anyValidTargets = true;
       }
 
-      currContext.notes = extractNotes(currContext.self.actor.synthetics.rollNotes, this.domains).filter(n => n.predicate.test(options))
+      currContext.notes = extractNotes(currContext.self.actor.synthetics.rollNotes, domains).filter(n => n.predicate.test(options))
 
       // extraModifiers.push(...currContext?.self.modifiers ?? []);
     }
     // TODO: Change 'false' here to game setting
     // eslint-disable-next-line no-constant-condition
-    if (!anyValidTargets && false) {
+    if (!anyValidTargets && game.settings.get("ptr2e", "preferences.must-target")) {
       ui.notifications.warn(game.i18n.localize("PTR2E.AttackWarning.NoValidTargets"));
       return null;
     }
@@ -386,20 +427,20 @@ class AttackCheck<TParent extends AttackStatistic = AttackStatistic> implements 
     const rolls = await CheckPTR2e.rolls(check, checkContext, args.callback);
     if (rolls?.length) {
       //TODO: Apply post-roll options from changes
-      if(rolls[0].accuracy && rolls[0].crit) {
+      if (rolls[0].accuracy && rolls[0].crit) {
         if (this.attack.slug.startsWith("fling") && this.attack.flingItemId) {
           const flingItemId = this.attack.flingItemId;
           const flingItem = this.actor.items.get(flingItemId) as ItemPTR2e;
-          if(flingItem?.type === "consumable" && (flingItem.system as ConsumableSystem).consumableType === "pokeball") {
+          if (flingItem?.type === "consumable" && (flingItem.system as ConsumableSystem).consumableType === "pokeball") {
             const action = PokeballActionPTR2e.fromConsumable(flingItem as ConsumablePTR2e)
-            await action.roll({ accuracyRoll: rolls[0].accuracy, critRoll: rolls[0].crit});
+            await action.roll({ accuracyRoll: rolls[0].accuracy, critRoll: rolls[0].crit });
           }
         }
       }
     }
 
     // Reset the fling actor toss attack data.
-    if(this.attack.slug === "fling-actor-toss") {
+    if (this.attack.slug === "fling-actor-toss") {
       this.actor.generateFlingAttack();
     }
 

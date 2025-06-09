@@ -28,16 +28,16 @@
             </div>
             <!-- Movement -->
             <div class="movement-header">
-                <h5>Primary Movement</h5>
+                <h5>Movement</h5>
                 <div class="item-controls">
-                    <a class="item-control item-create" data-tooltip="Add Primary Movement Option" data-field="movement" data-sub-field="primary" data-action="add">
+                    <a class="item-control item-create" data-tooltip="Add Movement Option" data-field="movement" data-action="add">
                         <i class="fas fa-plus-circle" style="margin-right: 3px;"></i>
                         <span class="readable">{{localize "ITEM.AddButton"}}</span>
                     </a>
                 </div>
             </div>
-            {{#if source.system.movement.primary.length}}
-                {{#each source.system.movement.primary as |movement|}}
+            {{#if source.system.movement.length}}
+                {{#each source.system.movement as |movement|}}
                     <div class="movement">
                         <div class="form-group">
                             <label>Type</label>
@@ -54,49 +54,13 @@
                             </div>
                         </div>
                         <div class="item-controls">
-                            <a class="item-control" data-action="delete" data-field="movement" data-sub-field="primary" data-index="{{@index}}" data-tooltip="Delete Movement"><i class="fas fa-trash"></i></a>
+                            <a class="item-control" data-action="delete" data-field="movement" data-index="{{@index}}" data-tooltip="Delete Movement"><i class="fas fa-trash"></i></a>
                         </div>
                     </div>
                 {{/each}}
             {{else}}
                 <div class="movement center">
                     <p><small>No Primary Movement Options. Please create one with the Add button</small></p>
-                </div>
-            {{/if}}
-            <div class="movement-header">
-                <h5>Secondary Movement</h5>
-                <div class="item-controls">
-                    <a class="item-control item-create" data-tooltip="Add Secondary Movement Option" data-field="movement" data-sub-field="secondary" data-action="add">
-                        <i class="fas fa-plus-circle" style="margin-right: 3px;"></i>
-                        <span class="readable">{{localize "ITEM.AddButton"}}</span>
-                    </a>
-                </div>
-            </div>
-            {{#if source.system.movement.secondary.length}}
-                {{#each source.system.movement.secondary as |movement|}}
-                    <div class="movement">
-                        <div class="form-group">
-                            <label>Type</label>
-                            <div class="form-fields">
-                                <input type="text" name="system.movement.secondary.{{@index}}.type" class="form-control"
-                                    data-dtype="String" value={{movement.type}}>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label>Value</label>
-                            <div class="form-fields">
-                                <input type="number" name="system.movement.secondary.{{@index}}.value" class="form-control"
-                                    data-dtype="Number" value={{movement.value}}>
-                            </div>
-                        </div>
-                        <div class="item-controls">
-                            <a class="item-control" data-action="delete" data-field="movement" data-sub-field="secondary" data-index="{{@index}}" data-tooltip="Delete Movement"><i class="fas fa-trash"></i></a>
-                        </div>
-                    </div>
-                {{/each}}
-            {{else}}
-                <div class="movement center">
-                    <p><small>No Secondary Movement Options. Please create one with the Add button</small></p>
                 </div>
             {{/if}}
         </fieldset>
@@ -201,6 +165,14 @@
                 <label>Master Abilities</label>
                 {{> abilityGroup abilities=abilities.master path="system.abilities.master"}}
             </div>
+        </fieldset>
+        <fieldset>
+          <legend>
+            Publication Details
+          </legend>
+          {{formField fields.publication.fields.source value=source.system.publication.source localize=true}}
+          {{formField fields.publication.fields.authors value=source.system.publication.authors localize=true}}
+          {{formField fields.publication.fields.notes enriched=enrichedNotes value=source.system.publication.notes toggled=true localize=true}}
         </fieldset>
     </div>
 </section>

@@ -28,7 +28,6 @@
           "dragon"
         ],
         "description": "<p>Effect: The user and all allies in range gain +1 CRIT Stage for 5 Activations. Dragon-type creature instead gain +2 CRIT Stages for 5 Activations.</p>",
-        "slot": 3,
         "img": "systems/ptr2e/img/svg/dragon_icon.svg",
         "predicate": []
       }
@@ -38,6 +37,13 @@
     "_migration": {
       "version": null,
       "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
     }
   },
   "_id": "VoiUETAcuekeVO32",
@@ -56,10 +62,25 @@
             "predicate": [],
             "chance": 100,
             "affects": "target",
-            "mode": 2,
             "priority": null,
-            "ignored": false,
-            "alterations": []
+            "alterations": [],
+            "dontMerge": false,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "roll-effect",
+            "key": "dragon-cheer-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.CEdcrWbb1KDTNIKl",
+            "predicate": [
+              "target:trait:dragon"
+            ],
+            "chance": 100,
+            "affects": "target",
+            "alterations": [],
+            "dontMerge": false,
+            "mode": 2,
+            "ignored": false
           }
         ],
         "slug": null,
@@ -91,12 +112,13 @@
       "_stats": {
         "compendiumSource": "Actor.7Oya3WGVjs2Pgx2h.Item.lvapVW6S8cvvw0BW.ActiveEffect.Ea5z2W4QPwWu8M0b",
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.342",
         "systemId": "ptr2e",
-        "systemVersion": "0.10.0-alpha.5.2.1",
+        "systemVersion": "1.3.2.beta",
         "createdTime": 1717881627901,
-        "modifiedTime": 1737721945458,
-        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
+        "modifiedTime": 1747518610662,
+        "lastModifiedBy": "Kc3DOunCh3ClAeHS",
+        "exportSource": null
       }
     }
   ]

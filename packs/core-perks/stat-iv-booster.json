@@ -1,14 +1,16 @@
 {
   "name": "<Stat> IV Booster",
   "type": "perk",
-  "folder": "zrVtKATNxzLNxTUf",
+  "folder": "minorbuffsfolder",
   "system": {
     "prerequisites": [],
     "cost": 1,
     "description": "<p>Increase one <Stat>'s IV by 5.</p>",
     "actions": [],
     "slug": "stat-iv-booster-1",
-    "traits": [],
+    "traits": [
+      "minor-buff"
+    ],
     "_migration": {
       "version": null,
       "previous": null
@@ -52,7 +54,9 @@
           "improved-overland-1",
           "plain-irritating",
           "night-eyes",
-          "mindscramble"
+          "mindscramble",
+          "type-specialist",
+          "pack-mon-1"
         ],
         "config": {
           "alpha": null,
@@ -125,7 +129,7 @@
           "improved-telekinesis",
           "improved-overland-6",
           "improved-teleportation",
-          "rapid-fire-style-1"
+          "rapid-fire-style"
         ],
         "config": {
           "alpha": null,
@@ -369,13 +373,18 @@
       }
     ],
     "autoUnlock": [],
-    "originSlug": null,
     "global": true,
     "webs": [],
     "design": {
       "arena": "physical",
       "approach": "resilience",
-      "archetype": "Stat Ace"
+      "archetype": "stat-ace"
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ]
     }
   },
   "_id": "wqHZnaqbcQqOeLO7",
@@ -399,27 +408,33 @@
             "choices": [
               {
                 "value": "system.attributes.hp.ivs",
-                "label": "HP"
+                "label": "HP",
+                "predicate": [{"lte": ["{actor|system.attributes.hp.ivs}", 25]}]
               },
               {
                 "value": "system.attributes.atk.ivs",
-                "label": "Attack"
+                "label": "Attack",
+                "predicate": [{"lte": ["{actor|system.attributes.atk.ivs}", 25]}]
               },
               {
                 "value": "system.attributes.def.ivs",
-                "label": "Defense"
+                "label": "Defense",
+                "predicate": [{"lte": ["{actor|system.attributes.def.ivs}", 25]}]
               },
               {
                 "value": "system.attributes.spa.ivs",
-                "label": "Special Attack"
+                "label": "Special Attack",
+                "predicate": [{"lte": ["{actor|system.attributes.spa.ivs}", 25]}]
               },
               {
                 "value": "system.attributes.spd.ivs",
-                "label": "Special Defense"
+                "label": "Special Defense",
+                "predicate": [{"lte": ["{actor|system.attributes.spd.ivs}", 25]}]
               },
               {
                 "value": "system.attributes.spe.ivs",
-                "label": "Speed"
+                "label": "Speed",
+                "predicate": [{"lte": ["{actor|system.attributes.spe.ivs}", 25]}]
               }
             ],
             "prompt": "Pick a Stat",
@@ -453,11 +468,23 @@
         "startRound": null,
         "startTurn": null
       },
-      "description": "<p><span style=\"font-family:Signika, sans-serif\">Increase one 's IV by 5.</span></p>",
+      "description": "<p>Increase one 's IV by 5.</p>",
       "origin": null,
       "tint": "#ffffff",
       "transfer": true,
-      "statuses": []
+      "statuses": [],
+      "_stats": {
+        "coreVersion": "12.331",
+        "systemId": null,
+        "systemVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null,
+        "compendiumSource": null,
+        "duplicateSource": null
+      },
+      "sort": 0,
+      "flags": {}
     }
   ]
 }

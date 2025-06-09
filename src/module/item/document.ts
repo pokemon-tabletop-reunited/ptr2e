@@ -1,5 +1,5 @@
 import { ActorPTR2e } from "@actor";
-import { ItemSheetPTR2e, ItemSourcePTR2e, ItemSystemPTR, ItemSystemsWithActions } from "@item";
+import { ItemSourcePTR2e, ItemSystemPTR, ItemSystemsWithActions } from "@item";
 import { ActionPTR2e, EquipmentData, RollOptionManager, Trait } from "@data";
 import { ActiveEffectPTR2e, EffectSourcePTR2e } from "@effects";
 import { ItemFlagsPTR2e } from "./data/system.ts";
@@ -10,6 +10,8 @@ import { MigrationList, MigrationRunner } from "@module/migration/index.ts";
 import * as R from "remeda";
 import { MigrationRunnerBase } from "@module/migration/runner/base.ts";
 import { processGrantDeletions } from "@module/effects/changes/grant-item.ts";
+import BlueprintSystem from "./data/blueprint.ts";
+import ItemSheetPTR2e from "./sheets/base.ts";
 
 /**
  * @extends {PTRItemData}
@@ -21,10 +23,10 @@ class ItemPTR2e<
   /** Has this document completed `DataModel` initialization? */
   declare initialized: boolean;
 
-  declare _sheet: ItemSheetPTR2e<this> | null;
+  declare _sheet: ItemSheetPTR2e<TSystem> | null;
 
-  override get sheet(): ItemSheetPTR2e<this> {
-    return super.sheet as ItemSheetPTR2e<this>;
+  override get sheet(): ItemSheetPTR2e<TSystem> {
+    return super.sheet as ItemSheetPTR2e<TSystem>;
   }
 
   /** The recorded schema version of this item, updated after each data migration */
@@ -72,12 +74,12 @@ class ItemPTR2e<
         .map((o) => `${prefix}:${o}`) ?? []
       : [];
 
-    const gearOptions = 'equipped' in this.system 
-    ? [
-      `${this.slug}:${(this.system.equipped as EquipmentData).carryType}`,
-      ...(["held", "worn"].includes((this.system.equipped as EquipmentData).carryType) ? `${this.slug}:equipped`: [])
-    ]
-    : [] as string[];
+    const gearOptions = 'equipped' in this.system
+      ? [
+        `${this.slug}:${(this.system.equipped as EquipmentData).carryType}`,
+        ...(["held", "worn"].includes((this.system.equipped as EquipmentData).carryType) ? `${this.slug}:equipped` : [])
+      ]
+      : [] as string[];
 
     const options = [
       `${prefix}:id:${this.id}`,
@@ -232,9 +234,17 @@ class ItemPTR2e<
         return [];
       }
     }
-    
+
+    if (!(context.keepId || context.keepEmbeddedIds)) {
+      for (const source of sources) {
+        source._id = fu.randomID();
+      }
+      context.keepEmbeddedIds = true;
+      context.keepId = true;
+    }
+
     async function processSources(sources: ItemSourcePTR2e[]) {
-      const outputItemSources: ItemSourcePTR2e[] = [];
+      const outputItemSources: ItemSourcePTR2e[] = sources;
 
       for (const source of sources) {
         if (!source.effects?.length) continue;
@@ -268,16 +278,8 @@ class ItemPTR2e<
 
       return outputItemSources;
     }
-     
-    const outputItemSources = await processSources(sources as ItemSourcePTR2e[]);
 
-    if (!(context.keepId || context.keepEmbeddedIds)) {
-      for (const source of sources) {
-        source._id = fu.randomID();
-      }
-      context.keepEmbeddedIds = true;
-      context.keepId = true;
-    }
+    const outputItemSources = await processSources(sources as ItemSourcePTR2e[]);
 
     return super.createDocuments<TDocument>(sources.concat(outputItemSources) as PreCreate<TDocument["_source"]>[], context);
   }
@@ -312,7 +314,7 @@ class ItemPTR2e<
     const label = context.perksOnly ? game.i18n.localize("TYPES.Item.perk") : game.i18n.localize(this.metadata.label);
     const title = game.i18n.format("DOCUMENT.Create", { type: label });
     // Render the document creation form
-    const html = await renderTemplate("templates/sidebar/document-create.html", {
+    const html = await foundry.applications.handlebars.renderTemplate("templates/sidebar/document-create.html", {
       folders,
       name: data.name || game.i18n.format("DOCUMENT.New", { type: label }),
       folder: data.folder,
@@ -358,8 +360,15 @@ class ItemPTR2e<
 
   /** Assess and pre-process this JSON data, ensuring it's importable and fully migrated */
   override async importFromJSON(json: string): Promise<this> {
-    const processed = await preImportJSON(this, json);
-    return processed ? super.importFromJSON(processed) : this;
+    const parsed = JSON.parse(json);
+    if (parsed.type !== "PackagedBlueprint") {
+      const processed = await preImportJSON(this, json);
+      return processed ? super.importFromJSON(processed) : this;
+    }
+    else {
+      const blueprint = await BlueprintSystem.importFromJSON(this, parsed);
+      return blueprint as this ?? this;
+    }
   }
 
   static override async deleteDocuments<TDocument extends foundry.abstract.Document>(this: ConstructorOf<TDocument>, ids?: string[], context?: DocumentModificationContext<TDocument["parent"]> & { pendingEffects?: ActiveEffectPTR2e<ActorPTR2e | ItemPTR2e<ItemSystemPTR, ActorPTR2e>>[] }): Promise<TDocument[]>;
@@ -400,8 +409,25 @@ class ItemPTR2e<
     return super.deleteDocuments(ids, context);
   }
 
+  protected override _onDelete(options: DocumentModificationContext<TParent>, userId: string): void {
+    super._onDelete(options, userId);
+    if (!(this.actor && game.user.id === userId)) return;
+
+    const actorUpdates: Record<string, unknown> = {};
+    for (const effect of this.effects) {
+      for (const change of (effect as unknown as ActiveEffectPTR2e).changes) {
+        change.onDelete?.(actorUpdates);
+      }
+    }
+
+    const updateKeys = Object.keys(actorUpdates);
+    if (updateKeys.length > 0 && !updateKeys.every((k) => k === "_id")) {
+      this.actor.update(actorUpdates);
+    }
+  }
+
   override getEmbeddedCollection(embeddedName: string) {
-    if(embeddedName === "Actions" && this.hasActions()) return this.actions as unknown as ReturnType<Item["getEmbeddedCollection"]>;
+    if (embeddedName === "Actions" && this.hasActions()) return this.actions as unknown as ReturnType<Item["getEmbeddedCollection"]>;
     return super.getEmbeddedCollection(embeddedName);
   }
 
@@ -424,6 +450,34 @@ class ItemPTR2e<
 
   //   return super.updateDocuments(updates, operation);
   // }
+
+  override exportToJSON(options?: Record<string, unknown>): void {
+    if (this.type !== "blueprint") return super.exportToJSON(options);
+    return void (this.system as BlueprintSystem).exportToJSON();
+  }
+
+  async syncData(): Promise<void> {
+    const sourceId = this.flags.core?.sourceId || this._stats?.compendiumSource;
+    if(!sourceId) {
+      return void ui.notifications.error("Unable to detect source for this item, unable to sync.");
+    }
+
+    const source = await fu.fromUuid(sourceId) as this;
+    if(!source) {
+      return void ui.notifications.error("The source this item references no longer exists.");
+    }
+
+    const sourceData = R.pick(source.toObject(), ["name", "type", "img", "system", "effects"]);
+    const thisData = R.pick(this.toObject(), ["name", "type", "img", "system", "effects"]);
+
+    const diff = fu.diffObject(thisData, sourceData);
+    if (fu.isEmpty(diff)) {
+      return void ui.notifications.warn("No changes detected.");
+    }
+    const changes = fu.flattenObject(diff);
+    await this.update(changes);
+    ui.notifications.info("Changes synced.");
+  }
 }
 
 interface ItemPTR2e<

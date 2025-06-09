@@ -28,3 +28,4 @@ export { default as BaseTile, TileSource } from "./tile.ts";
 export { default as BaseToken, TokenSource } from "./token.ts";
 export { default as BaseUser, UserSource } from "./user.ts";
 export { default as BaseWall, WallSource } from "./wall.ts";
+export const collections: {Actors: typeof Actors, Items: typeof Items}

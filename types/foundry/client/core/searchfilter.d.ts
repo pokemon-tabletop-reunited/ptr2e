@@ -34,6 +34,8 @@ declare class SearchFilter {
      */
     protected _filter: () => void;
 
+    filter(event: KeyboardEvent, query: string): void;
+
     constructor({
         inputSelector,
         contentSelector,
