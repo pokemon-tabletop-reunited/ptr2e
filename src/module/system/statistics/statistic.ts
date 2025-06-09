@@ -15,9 +15,9 @@ import { CheckDC } from "@system/rolls/degree-of-success.ts";
 import { RollNote, RollNoteSource } from "@system/notes.ts";
 import { TokenPTR2e } from "@module/canvas/token/object.ts";
 import { CheckContext, RollTarget } from "../data.ts";
-import { CheckRollContext } from "@system/rolls/data.ts";
+import { AttackModifierPopup } from "../../apps/modifier-popup/attack-modifier-popup.ts";
+import { CheckRollContext } from "../rolls/data.ts";
 import { CheckPTR2e } from "../check.ts";
-import { AttackModifierPopup } from "@module/apps/modifier-popup/attack-modifier-popup.ts";
 
 class Statistic extends BaseStatistic {
   /** The `Statistic` from which this one was derived (set by `Statistic#extend`), or otherwise `null`. */

@@ -8,6 +8,8 @@ import SystemTraitsCollection from "../system-traits-collection.ts";
 import SummonSystem from "@item/data/summon.ts";
 import { ActionEditor } from "@module/apps/action-editor.ts";
 import { formatSlug } from "@utils";
+import { Statistic, StatisticRollParameters } from "@system/statistics/statistic.ts";
+import { GenericActionStatistic } from "@system/statistics/action.ts";
 
 class ActionPTR2e extends foundry.abstract.DataModel {
   static TYPE: ActionType = "generic" as const;
@@ -204,6 +206,19 @@ class ActionPTR2e extends foundry.abstract.DataModel {
     if (this.img === ActionPTR2e.baseImg && this.item.img !== this.item.constructor.implementation.DEFAULT_ICON) {
       this.img = this.item.img;
     }
+
+    if(this.type === "attack") return;
+    this.statistic = this.prepareStatistic();
+  }
+
+  get rollable(): boolean {
+    return this.type === "generic" && !!this.statistic;
+  }
+
+  public prepareStatistic({ force }: { force?: boolean } = {}): Statistic | null {
+    if (!force && this.statistic) return this.statistic;
+    if (!this.actor) return null;
+    return new GenericActionStatistic(this);
   }
 
   /**
@@ -247,8 +262,15 @@ class ActionPTR2e extends foundry.abstract.DataModel {
   toChat() {
     return this.item.toChat();
   }
+
+  //@ts-expect-error - Details are unknown, this is correct.
+  async roll(args?: StatisticRollParameters<unknown>): Promise<unknown> {
+    return this.statistic!.check.roll(args)
+  }
 }
 interface ActionPTR2e extends foundry.abstract.DataModel, ModelPropsFromSchema<ActionSchema> {
+  statistic: Maybe<Statistic>;
+
   _source: SourceFromSchema<ActionSchema>;
   get schema(): foundry.data.fields.SchemaField<ActionSchema>;
 }

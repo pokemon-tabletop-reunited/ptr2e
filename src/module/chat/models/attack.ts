@@ -1,5 +1,5 @@
 import { ActorPTR2e } from "@actor";
-import AttackPTR2e from "@module/data/models/attack.ts";
+import AttackPTR2e from "../../../module/data/models/attack.ts";
 import { ChatMessagePTR2e } from "@chat";
 import { AccuracySuccessCategory, PokeballActionPTR2e, PTRCONSTS, SummonAttackPTR2e } from "@data";
 import { SlugField } from "@module/data/fields/slug-field.ts";
@@ -264,7 +264,7 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
     this.originItem = fromItemData(this._source.originItem);
 
     this.attack = ((): AttackPTR2e => {
-      if (!this._source.attack) return this.origin.actions.attack.get(this._source.attackSlug) as AttackPTR2e;
+      if (!this._source.attack) return this.origin.actions.get(this._source.attackSlug) as AttackPTR2e;
       const jsonData = (() => {
         try {
           return JSON.parse(this._source.attack);

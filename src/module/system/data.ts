@@ -90,6 +90,7 @@ interface AttackSelf<
   statistic: TStatistic,
   item: TItem,
   attack: AttackPTR2e,
+  action: ActionPTR2e,
   modifiers: ModifierPTR2e[]
 }
 

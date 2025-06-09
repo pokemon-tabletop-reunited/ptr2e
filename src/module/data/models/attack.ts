@@ -184,7 +184,7 @@ export default class AttackPTR2e extends ActionPTR2e {
         : 1;
   }
 
-  get rollable(): boolean {
+  override get rollable(): boolean {
     return true//this.accuracy !== null || this.power !== null;
   }
 
@@ -192,7 +192,7 @@ export default class AttackPTR2e extends ActionPTR2e {
     return actor?.getAttackStat(this, ignoreStages) ?? 0;
   }
 
-  async roll(args?: AttackStatisticRollParameters): Promise<AttackRollResult['rolls'][] | null | false> {
+  override async roll(args?: AttackStatisticRollParameters): Promise<AttackRollResult['rolls'][] | null | false> {
     if (!this.rollable) return false;
     if(!args?.modifierDialog && !this.variant && this.defaultVariant) {
       const variant = this.actor?.actions.attack.get(this.defaultVariant);
@@ -264,7 +264,7 @@ export default class AttackPTR2e extends ActionPTR2e {
     return false; // TODO: Implement
   }
 
-  public prepareStatistic({ force }: { force?: boolean } = {}): AttackStatistic | null {
+  public override prepareStatistic({ force }: { force?: boolean } = {}): AttackStatistic | null {
     if (!force && this.statistic) return this.statistic;
     if (!this.actor) return null;
     return new AttackStatistic(this);
