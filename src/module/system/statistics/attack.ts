@@ -409,7 +409,7 @@ class AttackCheck<TParent extends AttackStatistic = AttackStatistic> implements 
       omittedSubrolls: (() => {
         const ommited = new Set<"damage" | "crit" | "accuracy">();
         if (args.noCrit) ommited.add("crit");
-        if (context.self.attack.category === "status" || !context.self.attack.power) ommited.add("damage");
+        if (context.self.attack.category === "status" || (!context.self.attack.power && !context.self.attack.traits.has("flat"))) ommited.add("damage");
         if (context.self.attack.category === "status") ommited.add("crit");
         if (!context.self.attack.accuracy) ommited.add("accuracy");
         if (context.self.attack instanceof SummonAttackPTR2e && context.self.attack.damageType === "flat") ommited.add("crit");

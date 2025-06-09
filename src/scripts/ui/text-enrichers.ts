@@ -2,7 +2,6 @@
 // /@(?<type>Key)\[(?<slug>[-a-z]+)(\s+)?(?<options>[^\]]+)*](?:{(?<label>[^}]+)})?/gi
 
 import { ActiveEffectPTR2e } from "@effects";
-import { param } from "jquery";
 export class TextEnricher {
   static init() {
     const original = foundry.applications.ux.TextEditor.activateListeners.bind(foundry.applications.ux.TextEditor);
