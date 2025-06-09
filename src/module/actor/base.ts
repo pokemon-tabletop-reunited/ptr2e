@@ -1976,13 +1976,29 @@ class ActorPTR2e<
   }
 
   static override async createDialog<TDocument extends foundry.abstract.Document>(this: ConstructorOf<TDocument>, data?: Record<string, unknown>, context?: { parent?: TDocument["parent"]; pack?: Collection<TDocument> | null; types?: string[] } & Partial<FormApplicationOptions>): Promise<TDocument | null>;
-  static override async createDialog(data: Record<string, unknown> = {}, context: { parent?: TokenDocumentPTR2e | null; pack?: Collection<ActorPTR2e> | null; types?: string[] } & Partial<FormApplicationOptions> = {}) {
-    if (!Array.isArray(context.types)) context.types = this.TYPES.filter(t => t !== "ptu-actor");
-    else {
-      if (context.types.length) context.types = context.types.filter(t => t !== "ptu-actor");
-      else context.types = this.TYPES.filter(t => t !== "ptu-actor");
-    }
-    return super.createDialog(data, context);
+  static override async createDialog(
+    data: Record<string, unknown> = {}, 
+    createOptions: Record<string, unknown> = {},
+    {
+      folders, 
+      types, 
+      template, 
+      context, 
+      ...dialogOptions
+    }: {
+      folders?: {id: string, name: string}[];
+      types?: string[];
+      template?: string;
+    } & {
+      context?: { parent?: TokenDocumentPTR2e | null; pack?: Collection<ActorPTR2e> | null; types?: string[] } & Partial<FormApplicationOptions>;
+    } = {}
+  ) {
+    if(types?.length) types = types.filter(t => t !== "ptu-actor");
+    else types = this.TYPES.filter(t => t !== "ptu-actor");
+
+    return super.createDialog(data, createOptions, {
+      folders, types, template, context, ...dialogOptions
+    });
   }
 
   protected override _onEmbeddedDocumentChange(): void {
