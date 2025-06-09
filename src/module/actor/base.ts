@@ -841,7 +841,7 @@ class ActorPTR2e<
 
     if (!pp) {
       const originalAmount = Math.floor((this.system.health.max / 16) * Math.abs(ticks));
-      const amount = Math.floor(originalAmount * (isDamage ? multiplier : 1))
+      const amount = isDamage ? Math.max(Math.floor(originalAmount * multiplier), 1) : Math.floor(originalAmount);
       const applied = shield
         ? Math.min(amount || 0, isDamage ? this.system.shield.value : Infinity)
         : Math.min(amount || 0, isDamage ? this.system.health.value : this.system.health.max - this.system.health.value);
@@ -923,7 +923,7 @@ class ActorPTR2e<
     const multiplier = (this.system.modifiers["vulnerabilityMultiplier"] ?? 1)
     const originalDamage = damage;
     if (damage > 0) {
-      if (multiplier !== 1 && !isNaN(multiplier)) damage = Math.floor(damage * this.system.modifiers["vulnerabilityMultiplier"]!);
+      if (multiplier !== 1 && !isNaN(multiplier)) damage = Math.max(1, Math.floor(damage * this.system.modifiers["vulnerabilityMultiplier"]!));
     }
     // Damage is applied to shield first, then health
     // Shields cannot be healed
