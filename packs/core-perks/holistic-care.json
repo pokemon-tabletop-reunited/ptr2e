@@ -7,13 +7,13 @@
   "system": {
     "actions": [],
     "slug": "holistic-care",
-    "description": "<p>When healing a creature, you may spend an additional 3PP to remove 1 Stack from any Afflictions the creature may be suffering, without triggering the negative effects of removing those Stacks.</p>",
+    "description": "<p>Effect: The user gains Healer as a Tutored Ability.</p>",
     "traits": [],
     "prerequisites": [
       {
         "gte": [
           "{actor|skills.medicine.mod}",
-          30
+          60
         ]
       }
     ],
@@ -24,23 +24,23 @@
     },
     "nodes": [
       {
+        "x": 46,
+        "y": 80,
+        "hidden": false,
+        "type": "normal",
         "connected": [
           "chansey-medicine",
           "involuntary-transfusion"
         ],
         "config": {
+          "texture": "systems/ptr2e/img/perk-icons/Knowledge.svg",
           "alpha": null,
-          "backgroundColor": "#ff0000",
+          "backgroundColor": null,
           "borderColor": null,
           "borderWidth": null,
-          "texture": "systems/ptr2e/img/perk-icons/Knowledge.svg",
           "tint": null,
           "scale": null
         },
-        "hidden": false,
-        "type": "normal",
-        "x": 46,
-        "y": 80,
         "tier": null
       }
     ],
@@ -56,8 +56,71 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
+      ],
+      "notes": ""
     }
   },
-  "effects": []
+  "effects": [
+    {
+      "name": "Holistic Care",
+      "type": "passive",
+      "_id": "2njpYM0zfxEWHjoW",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "grant-item",
+            "key": "",
+            "value": "Compendium.ptr2e.core-abilities.Item.cEAOUdK51hPAaOtP",
+            "predicate": [],
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "reevaluateOnUpdate": false,
+            "inMemoryOnly": false,
+            "allowDuplicate": true,
+            "alterations": [],
+            "track": false,
+            "replaceSelf": false,
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            }
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": false,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "1.2.1.beta",
+        "createdTime": 1746675474333,
+        "modifiedTime": 1746675498283,
+        "lastModifiedBy": "5ImYyhOS2D6D7ypO"
+      }
+    }
+  ]
 }

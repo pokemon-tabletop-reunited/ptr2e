@@ -146,6 +146,8 @@ export interface _TutorListSettingsSchema extends foundry.data.fields.DataSchema
   >;
 }
 
+export type TutorListMove = ModelPropsFromSchema<_MoveSchema>;
+
 interface _MoveSchema extends foundry.data.fields.DataSchema {
   slug: SlugField<string, string, true, false, false>,
   grade: foundry.data.fields.StringField<string, string, true, false, true>,

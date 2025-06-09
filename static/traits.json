@@ -168,7 +168,17 @@
     "slug": "bladed",
     "label": "Bladed",
     "related": [],
-    "description": "This creature possesses effective edged limbs, body parts, or tools. Confers [Sharp] to @Trait[adaptable] actions, and grants access to the [Bladed] Tutor List."
+    "description": "This creature possesses effective edged limbs, body parts, or tools. Confers [Sharp] to @Trait[adaptable] actions, and grants access to the [Bladed] Tutor List.",
+    "type": "automated",
+    "changes": [
+      {
+        "type": "alter-attack",
+        "key": "adaptable-trait-attack",
+        "property": "traits",
+        "mode": "2",
+        "value": "sharp"
+      }
+    ]
   },
   {
     "slug": "blindsight-x",
@@ -388,7 +398,17 @@
     "slug": "deafening",
     "label": "Deafening",
     "related": [],
-    "description": "This creature is capable of being extremely loud, to the point of pain. The user adds the [Sonic] trait to its @Trait[adaptable] attacks. As a Simple Action, the creature can spend 4 PP to give its Sonic Attacks +20% Power and a 10% chance to inflict Suppressed 5 on hit for the next 4 Activations. The creature gains access to the [Deafening] Tutor List."
+    "description": "This creature is capable of being extremely loud, to the point of pain. The user adds the [Sonic] trait to its @Trait[adaptable] attacks. As a Simple Action, the creature can spend 4 PP to give its Sonic Attacks +20% Power and a 10% chance to inflict Suppressed 5 on hit for the next 4 Activations. The creature gains access to the [Deafening] Tutor List.",
+    "type": "automated",
+    "changes": [
+      {
+        "type": "alter-attack",
+        "key": "adaptable-trait-attack",
+        "property": "traits",
+        "mode": "2",
+        "value": "sonic"
+      }
+    ]
   },
   {
     "slug": "deep-breath",
@@ -664,7 +684,17 @@
     "slug": "horned",
     "label": "Horned",
     "related": [],
-    "description": "This creature possesses a prominent horn or spike. Confers [Horn] to @Trait[adaptable] actions. Grants access to the [Horn] Tutor list."
+    "description": "This creature possesses a prominent horn or spike. Confers [Horn] to @Trait[adaptable] actions. Grants access to the [Horn] Tutor list.",
+    "type": "automated",
+    "changes": [
+      {
+        "type": "alter-attack",
+        "key": "adaptable-trait-attack",
+        "property": "traits",
+        "mode": "2",
+        "value": "horn"
+      }
+    ]
   },
   {
     "slug": "hostile-dynamax",
@@ -1267,43 +1297,287 @@
     "slug": "telekinetic-x",
     "label": "Telekinetic X",
     "related": [],
-    "description": "This creature is able to use the Lift skill telekinetically at range X / This creature can use Occult (Psychic) in place of the Lift skill."
+    "description": "This creature is able to project their psionic will at a distance of Xm. The user has fine (remote) motor control in this space, able to interact with objects and use the Lift skill telekinetically up to that range, so long as they can sense/observe the target(s). The creature may originate the Use, Draw/Store, Drop, Bestow, Grab, Fling, and Struggle from a space within Xm of the creature. This creature can use Occult (Psychic) or Parapsychology (if utilizing special tools) in place of the Lift skill, and may have their Struggle be used as Special-Category."
+  },
+  {
+    "slug": "telekinetic-1",
+    "label": "Telekinetic 1",
+    "related": [],
+    "description": "This creature is able to project their psionic will at a distance of 1m. The user has fine (remote) motor control in this space, able to interact with objects and use the Lift skill telekinetically up to that range, so long as they can sense/observe the target(s). The creature may originate the Use, Draw/Store, Drop, Bestow, Grab, Fling, and Struggle from a space within 1m of the creature. This creature can use Occult (Psychic) or Parapsychology (if utilizing special tools) in place of the Lift skill, and may have their Struggle be used as Special-Category.",
+    "type": "automated",
+    "changes": [
+      {
+        "type": "roll-option",
+        "domain": "adaptable",
+        "value": "category:special"
+      }
+    ]
   },
   {
     "slug": "telekinetic-2",
     "label": "Telekinetic 2",
     "related": [],
-    "description": "This creature is able to use the Lift skill telekinetically at range 2 / This creature can use Occult (Psychic) in place of the Lift skill."
+    "description": "This creature is able to project their psionic will at a distance of 2m. The user has fine (remote) motor control in this space, able to interact with objects and use the Lift skill telekinetically up to that range, so long as they can sense/observe the target(s). The creature may originate the Use, Draw/Store, Drop, Bestow, Grab, Fling, and Struggle from a space within 2m of the creature. This creature can use Occult (Psychic) or Parapsychology (if utilizing special tools) in place of the Lift skill, and may have their Struggle be used as Special-Category.",
+    "type": "automated",
+    "changes": [
+      {
+        "type": "roll-option",
+        "domain": "adaptable",
+        "value": "category:special"
+      }
+    ]
+  },
+  {
+    "slug": "telekinetic-3",
+    "label": "Telekinetic 3",
+    "related": [],
+    "description": "This creature is able to project their psionic will at a distance of 3m. The user has fine (remote) motor control in this space, able to interact with objects and use the Lift skill telekinetically up to that range, so long as they can sense/observe the target(s). The creature may originate the Use, Draw/Store, Drop, Bestow, Grab, Fling, and Struggle from a space within 3m of the creature. This creature can use Occult (Psychic) or Parapsychology (if utilizing special tools) in place of the Lift skill, and may have their Struggle be used as Special-Category.",
+    "type": "automated",
+    "changes": [
+      {
+        "type": "roll-option",
+        "domain": "adaptable",
+        "value": "category:special"
+      }
+    ]
   },
   {
     "slug": "telekinetic-4",
     "label": "Telekinetic 4",
     "related": [],
-    "description": "This creature is able to use the Lift skill telekinetically at range 4 / This creature can use Occult (Psychic) in place of the Lift skill."
+    "description": "This creature is able to project their psionic will at a distance of 4m. The user has fine (remote) motor control in this space, able to interact with objects and use the Lift skill telekinetically up to that range, so long as they can sense/observe the target(s). The creature may originate the Use, Draw/Store, Drop, Bestow, Grab, Fling, and Struggle from a space within 4m of the creature. This creature can use Occult (Psychic) or Parapsychology (if utilizing special tools) in place of the Lift skill, and may have their Struggle be used as Special-Category.",
+    "type": "automated",
+    "changes": [
+      {
+        "type": "roll-option",
+        "domain": "adaptable",
+        "value": "category:special"
+      }
+    ]
+  },
+  {
+    "slug": "telekinetic-5",
+    "label": "Telekinetic 5",
+    "related": [],
+    "description": "This creature is able to project their psionic will at a distance of 5m. The user has fine (remote) motor control in this space, able to interact with objects and use the Lift skill telekinetically up to that range, so long as they can sense/observe the target(s). The creature may originate the Use, Draw/Store, Drop, Bestow, Grab, Fling, and Struggle from a space within 5m of the creature. This creature can use Occult (Psychic) or Parapsychology (if utilizing special tools) in place of the Lift skill, and may have their Struggle be used as Special-Category.",
+    "type": "automated",
+    "changes": [
+      {
+        "type": "roll-option",
+        "domain": "adaptable",
+        "value": "category:special"
+      }
+    ]
   },
   {
     "slug": "telekinetic-6",
     "label": "Telekinetic 6",
     "related": [],
-    "description": "This creature is able to use the Lift skill telekinetically at range 6 / This creature can use Occult (Psychic) in place of the Lift skill."
+    "description": "This creature is able to project their psionic will at a distance of 6m. The user has fine (remote) motor control in this space, able to interact with objects and use the Lift skill telekinetically up to that range, so long as they can sense/observe the target(s). The creature may originate the Use, Draw/Store, Drop, Bestow, Grab, Fling, and Struggle from a space within 6m of the creature. This creature can use Occult (Psychic) or Parapsychology (if utilizing special tools) in place of the Lift skill, and may have their Struggle be used as Special-Category.",
+    "type": "automated",
+    "changes": [
+      {
+        "type": "roll-option",
+        "domain": "adaptable",
+        "value": "category:special"
+      }
+    ]
+  },
+  {
+    "slug": "telekinetic-7",
+    "label": "Telekinetic 7",
+    "related": [],
+    "description": "This creature is able to project their psionic will at a distance of 7m. The user has fine (remote) motor control in this space, able to interact with objects and use the Lift skill telekinetically up to that range, so long as they can sense/observe the target(s). The creature may originate the Use, Draw/Store, Drop, Bestow, Grab, Fling, and Struggle from a space within 7m of the creature. This creature can use Occult (Psychic) or Parapsychology (if utilizing special tools) in place of the Lift skill, and may have their Struggle be used as Special-Category.",
+    "type": "automated",
+    "changes": [
+      {
+        "type": "roll-option",
+        "domain": "adaptable",
+        "value": "category:special"
+      }
+    ]
   },
   {
     "slug": "telekinetic-8",
     "label": "Telekinetic 8",
     "related": [],
-    "description": "This creature is able to use the Lift skill telekinetically at range 8 / This creature can use Occult (Psychic) in place of the Lift skill."
+    "description": "This creature is able to project their psionic will at a distance of 8m. The user has fine (remote) motor control in this space, able to interact with objects and use the Lift skill telekinetically up to that range, so long as they can sense/observe the target(s). The creature may originate the Use, Draw/Store, Drop, Bestow, Grab, Fling, and Struggle from a space within 8m of the creature. This creature can use Occult (Psychic) or Parapsychology (if utilizing special tools) in place of the Lift skill, and may have their Struggle be used as Special-Category.",
+    "type": "automated",
+    "changes": [
+      {
+        "type": "roll-option",
+        "domain": "adaptable",
+        "value": "category:special"
+      }
+    ]
+  },
+  {
+    "slug": "telekinetic-9",
+    "label": "Telekinetic 9",
+    "related": [],
+    "description": "This creature is able to project their psionic will at a distance of 9m. The user has fine (remote) motor control in this space, able to interact with objects and use the Lift skill telekinetically up to that range, so long as they can sense/observe the target(s). The creature may originate the Use, Draw/Store, Drop, Bestow, Grab, Fling, and Struggle from a space within 9m of the creature. This creature can use Occult (Psychic) or Parapsychology (if utilizing special tools) in place of the Lift skill, and may have their Struggle be used as Special-Category.",
+    "type": "automated",
+    "changes": [
+      {
+        "type": "roll-option",
+        "domain": "adaptable",
+        "value": "category:special"
+      }
+    ]
   },
   {
     "slug": "telekinetic-10",
     "label": "Telekinetic 10",
     "related": [],
-    "description": "This creature is able to use the Lift skill telekinetically at range 10 / This creature can use Occult (Psychic) in place of the Lift skill."
+    "description": "This creature is able to project their psionic will at a distance of 10m. The user has fine (remote) motor control in this space, able to interact with objects and use the Lift skill telekinetically up to that range, so long as they can sense/observe the target(s). The creature may originate the Use, Draw/Store, Drop, Bestow, Grab, Fling, and Struggle from a space within 10m of the creature. This creature can use Occult (Psychic) or Parapsychology (if utilizing special tools) in place of the Lift skill, and may have their Struggle be used as Special-Category.",
+    "type": "automated",
+    "changes": [
+      {
+        "type": "roll-option",
+        "domain": "adaptable",
+        "value": "category:special"
+      }
+    ]
+  },
+  {
+    "slug": "telekinetic-11",
+    "label": "Telekinetic 11",
+    "related": [],
+    "description": "This creature is able to project their psionic will at a distance of 11m. The user has fine (remote) motor control in this space, able to interact with objects and use the Lift skill telekinetically up to that range, so long as they can sense/observe the target(s). The creature may originate the Use, Draw/Store, Drop, Bestow, Grab, Fling, and Struggle from a space within 11m of the creature. This creature can use Occult (Psychic) or Parapsychology (if utilizing special tools) in place of the Lift skill, and may have their Struggle be used as Special-Category.",
+    "type": "automated",
+    "changes": [
+      {
+        "type": "roll-option",
+        "domain": "adaptable",
+        "value": "category:special"
+      }
+    ]
   },
   {
     "slug": "telekinetic-12",
     "label": "Telekinetic 12",
     "related": [],
-    "description": "This creature is able to use the Lift skill telekinetically at range 12 / This creature can use Occult (Psychic) in place of the Lift skill."
+    "description": "This creature is able to project their psionic will at a distance of 12m. The user has fine (remote) motor control in this space, able to interact with objects and use the Lift skill telekinetically up to that range, so long as they can sense/observe the target(s). The creature may originate the Use, Draw/Store, Drop, Bestow, Grab, Fling, and Struggle from a space within 12m of the creature. This creature can use Occult (Psychic) or Parapsychology (if utilizing special tools) in place of the Lift skill, and may have their Struggle be used as Special-Category.",
+    "type": "automated",
+    "changes": [
+      {
+        "type": "roll-option",
+        "domain": "adaptable",
+        "value": "category:special"
+      }
+    ]
+  },
+  {
+    "slug": "telekinetic-13",
+    "label": "Telekinetic 13",
+    "related": [],
+    "description": "This creature is able to project their psionic will at a distance of 13m. The user has fine (remote) motor control in this space, able to interact with objects and use the Lift skill telekinetically up to that range, so long as they can sense/observe the target(s). The creature may originate the Use, Draw/Store, Drop, Bestow, Grab, Fling, and Struggle from a space within 13m of the creature. This creature can use Occult (Psychic) or Parapsychology (if utilizing special tools) in place of the Lift skill, and may have their Struggle be used as Special-Category.",
+    "type": "automated",
+    "changes": [
+      {
+        "type": "roll-option",
+        "domain": "adaptable",
+        "value": "category:special"
+      }
+    ]
+  },
+  {
+    "slug": "telekinetic-14",
+    "label": "Telekinetic 14",
+    "related": [],
+    "description": "This creature is able to project their psionic will at a distance of 14m. The user has fine (remote) motor control in this space, able to interact with objects and use the Lift skill telekinetically up to that range, so long as they can sense/observe the target(s). The creature may originate the Use, Draw/Store, Drop, Bestow, Grab, Fling, and Struggle from a space within 14m of the creature. This creature can use Occult (Psychic) or Parapsychology (if utilizing special tools) in place of the Lift skill, and may have their Struggle be used as Special-Category.",
+    "type": "automated",
+    "changes": [
+      {
+        "type": "roll-option",
+        "domain": "adaptable",
+        "value": "category:special"
+      }
+    ]
+  },
+  {
+    "slug": "telekinetic-15",
+    "label": "Telekinetic 15",
+    "related": [],
+    "description": "This creature is able to project their psionic will at a distance of 15m. The user has fine (remote) motor control in this space, able to interact with objects and use the Lift skill telekinetically up to that range, so long as they can sense/observe the target(s). The creature may originate the Use, Draw/Store, Drop, Bestow, Grab, Fling, and Struggle from a space within 15m of the creature. This creature can use Occult (Psychic) or Parapsychology (if utilizing special tools) in place of the Lift skill, and may have their Struggle be used as Special-Category.",
+    "type": "automated",
+    "changes": [
+      {
+        "type": "roll-option",
+        "domain": "adaptable",
+        "value": "category:special"
+      }
+    ]
+  },
+  {
+    "slug": "telekinetic-16",
+    "label": "Telekinetic 16",
+    "related": [],
+    "description": "This creature is able to project their psionic will at a distance of 16m. The user has fine (remote) motor control in this space, able to interact with objects and use the Lift skill telekinetically up to that range, so long as they can sense/observe the target(s). The creature may originate the Use, Draw/Store, Drop, Bestow, Grab, Fling, and Struggle from a space within 16m of the creature. This creature can use Occult (Psychic) or Parapsychology (if utilizing special tools) in place of the Lift skill, and may have their Struggle be used as Special-Category.",
+    "type": "automated",
+    "changes": [
+      {
+        "type": "roll-option",
+        "domain": "adaptable",
+        "value": "category:special"
+      }
+    ]
+  },
+  {
+    "slug": "telekinetic-17",
+    "label": "Telekinetic 17",
+    "related": [],
+    "description": "This creature is able to project their psionic will at a distance of 17m. The user has fine (remote) motor control in this space, able to interact with objects and use the Lift skill telekinetically up to that range, so long as they can sense/observe the target(s). The creature may originate the Use, Draw/Store, Drop, Bestow, Grab, Fling, and Struggle from a space within 17m of the creature. This creature can use Occult (Psychic) or Parapsychology (if utilizing special tools) in place of the Lift skill, and may have their Struggle be used as Special-Category.",
+    "type": "automated",
+    "changes": [
+      {
+        "type": "roll-option",
+        "domain": "adaptable",
+        "value": "category:special"
+      }
+    ]
+  },
+  {
+    "slug": "telekinetic-18",
+    "label": "Telekinetic 18",
+    "related": [],
+    "description": "This creature is able to project their psionic will at a distance of 18m. The user has fine (remote) motor control in this space, able to interact with objects and use the Lift skill telekinetically up to that range, so long as they can sense/observe the target(s). The creature may originate the Use, Draw/Store, Drop, Bestow, Grab, Fling, and Struggle from a space within 18m of the creature. This creature can use Occult (Psychic) or Parapsychology (if utilizing special tools) in place of the Lift skill, and may have their Struggle be used as Special-Category.",
+    "type": "automated",
+    "changes": [
+      {
+        "type": "roll-option",
+        "domain": "adaptable",
+        "value": "category:special"
+      }
+    ]
+  },
+  {
+    "slug": "telekinetic-19",
+    "label": "Telekinetic 19",
+    "related": [],
+    "description": "This creature is able to project their psionic will at a distance of 19m. The user has fine (remote) motor control in this space, able to interact with objects and use the Lift skill telekinetically up to that range, so long as they can sense/observe the target(s). The creature may originate the Use, Draw/Store, Drop, Bestow, Grab, Fling, and Struggle from a space within 19m of the creature. This creature can use Occult (Psychic) or Parapsychology (if utilizing special tools) in place of the Lift skill, and may have their Struggle be used as Special-Category.",
+    "type": "automated",
+    "changes": [
+      {
+        "type": "roll-option",
+        "domain": "adaptable",
+        "value": "category:special"
+      }
+    ]
+  },
+  {
+    "slug": "telekinetic-20",
+    "label": "Telekinetic 20",
+    "related": [],
+    "description": "This creature is able to project their psionic will at a distance of 20m. The user has fine (remote) motor control in this space, able to interact with objects and use the Lift skill telekinetically up to that range, so long as they can sense/observe the target(s). The creature may originate the Use, Draw/Store, Drop, Bestow, Grab, Fling, and Struggle from a space within 20m of the creature. This creature can use Occult (Psychic) or Parapsychology (if utilizing special tools) in place of the Lift skill, and may have their Struggle be used as Special-Category.",
+    "type": "automated",
+    "changes": [
+      {
+        "type": "roll-option",
+        "domain": "adaptable",
+        "value": "category:special"
+      }
+    ]
   },
   {
     "slug": "telepath",
@@ -1535,7 +1809,7 @@
     "slug": "weathervane",
     "label": "Weathervane",
     "related": [],
-    "description": "The creature changes Forme depending on the most recent Weather, changing %lt;Type&gt;and granting the appropriate <Adaptable Type> Trait.\nSUBJECT TO CHANGE"
+    "description": "The creature changes Forme depending on the most recent Weather, changing %lt;Type&gt;and granting the appropriate %lt;Adaptable Type&gt; Trait.\nSUBJECT TO CHANGE"
   },
   {
     "slug": "wielder",
@@ -1590,121 +1864,281 @@
     "slug": "creepy-crawly",
     "label": "Creepy Crawly",
     "related": [],
-    "description": "Allows the user to Type-Shift @Trait[adaptable] actions and attacks to the Bug-Type."
+    "description": "Allows the user to Type-Shift @Trait[adaptable] actions and attacks to the Bug-Type.",
+    "type": "automated",
+    "changes": [
+      {
+        "type": "roll-option",
+        "domain": "adaptable",
+        "value": "bug"
+      }
+    ]
   },
   {
     "slug": "evil-touch",
     "label": "Evil Touch",
     "related": [],
-    "description": "Allows the user to Type-Shift @Trait[adaptable] actions and attacks to the Dark-Type."
+    "description": "Allows the user to Type-Shift @Trait[adaptable] actions and attacks to the Dark-Type.",
+    "type": "automated",
+    "changes": [
+      {
+        "type": "roll-option",
+        "domain": "adaptable",
+        "value": "dark"
+      }
+    ]
   },
   {
     "slug": "drakelike",
     "label": "Drakelike",
     "related": [],
-    "description": "Allows the user to Type-Shift @Trait[adaptable] actions and attacks to the Dragon-Type."
+    "description": "Allows the user to Type-Shift @Trait[adaptable] actions and attacks to the Dragon-Type.",
+    "type": "automated",
+    "changes": [
+      {
+        "type": "roll-option",
+        "domain": "adaptable",
+        "value": "dragon"
+      }
+    ]
   },
   {
     "slug": "zapper",
     "label": "Zapper",
     "related": [],
-    "description": "Allows the user to Type-Shift @Trait[adaptable] actions and attacks to the Electric-Type."
+    "description": "Allows the user to Type-Shift @Trait[adaptable] actions and attacks to the Electric-Type.",
+    "type": "automated",
+    "changes": [
+      {
+        "type": "roll-option",
+        "domain": "adaptable",
+        "value": "electric"
+      }
+    ]
   },
   {
     "slug": "sparkler",
     "label": "Sparkler",
     "related": [],
-    "description": "Allows the user to Type-Shift @Trait[adaptable] actions and attacks to the Fairy-Type."
+    "description": "Allows the user to Type-Shift @Trait[adaptable] actions and attacks to the Fairy-Type.",
+    "type": "automated",
+    "changes": [
+      {
+        "type": "roll-option",
+        "domain": "adaptable",
+        "value": "fairy"
+      }
+    ]
   },
   {
     "slug": "well-built",
     "label": "Well Built",
     "related": [],
-    "description": "Allows the user to Type-Shift @Trait[adaptable] actions and attacks to the Fighting-Type."
+    "description": "Allows the user to Type-Shift @Trait[adaptable] actions and attacks to the Fighting-Type.",
+    "type": "automated",
+    "changes": [
+      {
+        "type": "roll-option",
+        "domain": "adaptable",
+        "value": "fighting"
+      }
+    ]
   },
   {
     "slug": "firestarter",
     "label": "Firestarter",
     "related": [],
-    "description": "Allows the user to Type-Shift @Trait[adaptable] actions and attacks to the Fire-Type."
+    "description": "Allows the user to Type-Shift @Trait[adaptable] actions and attacks to the Fire-Type.",
+    "type": "automated",
+    "changes": [
+      {
+        "type": "roll-option",
+        "domain": "adaptable",
+        "value": "fire"
+      }
+    ]
   },
   {
     "slug": "guster",
     "label": "Guster",
     "related": [],
-    "description": "Allows the user to Type-Shift @Trait[adaptable] actions and attacks to the Flying-Type."
+    "description": "Allows the user to Type-Shift @Trait[adaptable] actions and attacks to the Flying-Type.",
+    "type": "automated",
+    "changes": [
+      {
+        "type": "roll-option",
+        "domain": "adaptable",
+        "value": "flying"
+      }
+    ]
   },
   {
     "slug": "spooky",
     "label": "Spooky",
     "related": [],
-    "description": "Allows the user to Type-Shift @Trait[adaptable] actions and attacks to the Ghost-Type."
+    "description": "Allows the user to Type-Shift @Trait[adaptable] actions and attacks to the Ghost-Type.",
+    "type": "automated",
+    "changes": [
+      {
+        "type": "roll-option",
+        "domain": "adaptable",
+        "value": "ghost"
+      }
+    ]
   },
   {
     "slug": "floratic",
     "label": "Floratic",
     "related": [],
-    "description": "Allows the user to Type-Shift @Trait[adaptable] actions and attacks to the Grass-Type."
+    "description": "Allows the user to Type-Shift @Trait[adaptable] actions and attacks to the Grass-Type.",
+    "type": "automated",
+    "changes": [
+      {
+        "type": "roll-option",
+        "domain": "adaptable",
+        "value": "grass"
+      }
+    ]
   },
   {
     "slug": "fictile",
     "label": "Fictile",
     "related": [],
-    "description": "Allows the user to Type-Shift @Trait[adaptable] actions and attacks to the Ground-Type."
+    "description": "Allows the user to Type-Shift @Trait[adaptable] actions and attacks to the Ground-Type.",
+    "type": "automated",
+    "changes": [
+      {
+        "type": "roll-option",
+        "domain": "adaptable",
+        "value": "ground"
+      }
+    ]
   },
   {
     "slug": "freezer",
     "label": "Freezer",
     "related": [],
-    "description": "Allows the user to Type-Shift @Trait[adaptable] actions and attacks to the Ice-Type."
+    "description": "Allows the user to Type-Shift @Trait[adaptable] actions and attacks to the Ice-Type.",
+    "type": "automated",
+    "changes": [
+      {
+        "type": "roll-option",
+        "domain": "adaptable",
+        "value": "ice"
+      }
+    ]
   },
   {
     "slug": "generalizer",
     "label": "Generalizer",
     "related": [],
-    "description": "Allows the user to Type-Shift @Trait[adaptable] actions and attacks to the Normal-Type."
+    "description": "Allows the user to Type-Shift @Trait[adaptable] actions and attacks to the Normal-Type.",
+    "type": "automated",
+    "changes": [
+      {
+        "type": "roll-option",
+        "domain": "adaptable",
+        "value": "normal"
+      }
+    ]
   },
   {
     "slug": "emitter",
     "label": "Emitter",
     "related": [],
-    "description": "Allows the user to Type-Shift @Trait[adaptable] actions and attacks to the Nuclear-Type."
+    "description": "Allows the user to Type-Shift @Trait[adaptable] actions and attacks to the Nuclear-Type.",
+    "type": "automated",
+    "changes": [
+      {
+        "type": "roll-option",
+        "domain": "adaptable",
+        "value": "nuclear"
+      }
+    ]
   },
   {
     "slug": "venomous",
     "label": "Venomous",
     "related": [],
-    "description": "Allows the user to Type-Shift @Trait[adaptable] actions and attacks to the Poison-Type."
+    "description": "Allows the user to Type-Shift @Trait[adaptable] actions and attacks to the Poison-Type.",
+    "type": "automated",
+    "changes": [
+      {
+        "type": "roll-option",
+        "domain": "adaptable",
+        "value": "poison"
+      }
+    ]
   },
   {
     "slug": "psycher",
     "label": "Psycher",
     "related": [],
-    "description": "Allows the user to Type-Shift @Trait[adaptable] actions and attacks to the Psychic-Type."
+    "description": "Allows the user to Type-Shift @Trait[adaptable] actions and attacks to the Psychic-Type.",
+    "type": "automated",
+    "changes": [
+      {
+        "type": "roll-option",
+        "domain": "adaptable",
+        "value": "psychic"
+      }
+    ]
   },
   {
     "slug": "lithic",
     "label": "Lithic",
     "related": [],
-    "description": "Allows the user to Type-Shift @Trait[adaptable] actions and attacks to the Rock-Type."
+    "description": "Allows the user to Type-Shift @Trait[adaptable] actions and attacks to the Rock-Type.",
+    "type": "automated",
+    "changes": [
+      {
+        "type": "roll-option",
+        "domain": "adaptable",
+        "value": "rock"
+      }
+    ]
   },
   {
     "slug": "rancor",
     "label": "Rancor",
     "related": [],
-    "description": "Allows the user to Type-Shift @Trait[adaptable] actions and attacks to the Shadow-Type."
+    "description": "Allows the user to Type-Shift @Trait[adaptable] actions and attacks to the Shadow-Type.",
+    "type": "automated",
+    "changes": [
+      {
+        "type": "roll-option",
+        "domain": "adaptable",
+        "value": "shadow"
+      }
+    ]
   },
   {
     "slug": "natural-steel",
     "label": "Natural Steel",
     "related": [],
-    "description": "Allows the user to Type-Shift @Trait[adaptable] actions and attacks to the Steel-Type."
+    "description": "Allows the user to Type-Shift @Trait[adaptable] actions and attacks to the Steel-Type.",
+    "type": "automated",
+    "changes": [
+      {
+        "type": "roll-option",
+        "domain": "adaptable",
+        "value": "steel"
+      }
+    ]
   },
   {
     "slug": "fountain",
     "label": "Fountain",
     "related": [],
-    "description": "Allows the user to Type-Shift @Trait[adaptable] actions and attacks to the Water-Type."
+    "description": "Allows the user to Type-Shift @Trait[adaptable] actions and attacks to the Water-Type.",
+    "type": "automated",
+    "changes": [
+      {
+        "type": "roll-option",
+        "domain": "adaptable",
+        "value": "water"
+      }
+    ]
   },
   {
     "slug": "stack-x",
@@ -1722,7 +2156,7 @@
     "slug": "fling",
     "label": "Fling",
     "related": [],
-    "description": "Denotes if an item can be used as part of the Fling attack action."
+    "description": "Denotes if an item can be used as part of the Fling Attack Action, or if an Action is a Fling Action. Flung items or creatures that would miss their target Scatter, being relocated to a space a random distance away from the target creature/space in a random direction. The Scatter Direction is determined with a d8, interating clockwise from 1 (to the map's 'north' of the target) to 8 (to the map's 'northwest' of the target). The Scatter Distance is dX meters in the rolled Direction away from the target, being based on which Range Increment the target was in, times 2 - RI1 is d2, RI2 is d4, RI3 is d6, and RI4 is d8."
   },
   {
     "slug": "combat",
@@ -2398,6 +2832,193 @@
     "label": "Flinch Chance 5",
     "related": [],
     "description": "Creature(s) that are target/hit by this Action have a chance to be Flinched, having their next Activation delayed 50%. This chance is detailed within this Action's description."
+  },
+  {
+    "slug": "progress-x",
+    "label": "Progress X",
+    "related": [],
+    "description": "Creature(s) that are target/hit by this Action are Progressed, having their next Activation advanced X0%."
+  },
+  {
+    "slug": "progress-1",
+    "label": "Progress 1",
+    "related": [],
+    "description": "Creature(s) that are target/hit by this Action are Progressed, having their next Activation advanced 10%.",
+    "changes": [
+      {
+        "type": "roll-effect",
+        "key": "attack",
+        "value": "Compendium.ptr2e.core-effects.Item.advanceffectitem",
+        "chance": 100,
+        "dontMerge": true,
+        "affects": "target",
+        "alterations": [
+          {
+            "mode": 5,
+            "property": "system.amount",
+            "value": 10
+          },
+          {
+            "mode": 5,
+            "property": "name",
+            "value": "Advance 10%"
+          }
+        ]
+      }
+    ],
+    "type": "automated"
+  },
+  {
+    "slug": "progress-2",
+    "label": "Progress 2",
+    "related": [],
+    "description": "Creature(s) that are target/hit by this Action are Progressed, having their next Activation advanced 20%.",
+    "changes": [
+      {
+        "type": "roll-effect",
+        "key": "attack",
+        "value": "Compendium.ptr2e.core-effects.Item.advanceffectitem",
+        "chance": 100,
+        "dontMerge": true,
+        "affects": "target",
+        "alterations": [
+          {
+            "mode": 5,
+            "property": "system.amount",
+            "value": 20
+          },
+          {
+            "mode": 5,
+            "property": "name",
+            "value": "Advance 20%"
+          }
+        ]
+      }
+    ],
+    "type": "automated"
+  },
+  {
+    "slug": "progress-3",
+    "label": "Progress 3",
+    "related": [],
+    "description": "Creature(s) that are target/hit by this Action are Progressed, having their next Activation advanced 30%.",
+    "changes": [
+      {
+        "type": "roll-effect",
+        "key": "attack",
+        "value": "Compendium.ptr2e.core-effects.Item.advanceffectitem",
+        "chance": 100,
+        "dontMerge": true,
+        "affects": "target",
+        "alterations": [
+          {
+            "mode": 5,
+            "property": "system.amount",
+            "value": 30
+          },
+          {
+            "mode": 5,
+            "property": "name",
+            "value": "Advance 30%"
+          }
+        ]
+      }
+    ],
+    "type": "automated"
+  },
+  {
+    "slug": "progress-4",
+    "label": "Progress 4",
+    "related": [],
+    "description": "Creature(s) that are target/hit by this Action are Progressed, having their next Activation advanced 40%.",
+    "changes": [
+      {
+        "type": "roll-effect",
+        "key": "attack",
+        "value": "Compendium.ptr2e.core-effects.Item.advanceffectitem",
+        "chance": 100,
+        "dontMerge": true,
+        "affects": "target",
+        "alterations": [
+          {
+            "mode": 5,
+            "property": "system.amount",
+            "value": 40
+          },
+          {
+            "mode": 5,
+            "property": "name",
+            "value": "Advance 40%"
+          }
+        ]
+      }
+    ],
+    "type": "automated"
+  },
+  {
+    "slug": "progress-5",
+    "label": "Progress 5",
+    "related": [],
+    "description": "Creature(s) that are target/hit by this Action are Progressed, having their next Activation advanced 50%.",
+    "changes": [
+      {
+        "type": "roll-effect",
+        "key": "attack",
+        "value": "Compendium.ptr2e.core-effects.Item.advanceffectitem",
+        "chance": 100,
+        "dontMerge": true,
+        "affects": "target",
+        "alterations": [
+          {
+            "mode": 5,
+            "property": "system.amount",
+            "value": 50
+          },
+          {
+            "mode": 5,
+            "property": "name",
+            "value": "Advance 50%"
+          }
+        ]
+      }
+    ],
+    "type": "automated"
+  },
+  {
+    "slug": "progress-chance-x",
+    "label": "Progress Chance X",
+    "related": [],
+    "description": "Creature(s) that are target/hit by this Action have a chance to be Progressed, having their next Activation advanced X0%. This chance is detailed within this Action's description."
+  },
+  {
+    "slug": "progress-chance-1",
+    "label": "Progress Chance 1",
+    "related": [],
+    "description": "Creature(s) that are target/hit by this Action have a chance to be Progressed, having their next Activation advanced 10%. This chance is detailed within this Action's description."
+  },
+  {
+    "slug": "progress-chance-2",
+    "label": "Progress Chance 2",
+    "related": [],
+    "description": "Creature(s) that are target/hit by this Action have a chance to be Progressed, having their next Activation advanced 20%. This chance is detailed within this Action's description."
+  },
+  {
+    "slug": "progress-chance-3",
+    "label": "Progress Chance 3",
+    "related": [],
+    "description": "Creature(s) that are target/hit by this Action have a chance to be Progressed, having their next Activation advanced 30%. This chance is detailed within this Action's description."
+  },
+  {
+    "slug": "progress-chance-4",
+    "label": "Progress Chance 4",
+    "related": [],
+    "description": "Creature(s) that are target/hit by this Action have a chance to be Progressed, having their next Activation advanced 40%. This chance is detailed within this Action's description."
+  },
+  {
+    "slug": "progress-chance-5",
+    "label": "Progress Chance 5",
+    "related": [],
+    "description": "Creature(s) that are target/hit by this Action have a chance to be Progressed, having their next Activation advanced 50%. This chance is detailed within this Action's description."
   },
   {
     "slug": "hazard",
@@ -3840,5 +4461,12 @@
         "value": "uncapturable"
       }
     ]
+  },
+  {
+    "slug": "minor-buff",
+    "label": "Minor Buff",
+    "related": [],
+    "description": "[Minor Buff] perks, also known as 'Spacer Perks' are perks which are not present on the web, and instead are widely available through one of the many @UUID[Compendium.ptr2e.core-perks.Item.minorbuffperk000] perks present on the web. You can use the Compendium Browser to find a full list of options, or check the Minor Buff folder in the PTR 2e Perks Compendium.",
+    "type": "automated"
   }
 ]

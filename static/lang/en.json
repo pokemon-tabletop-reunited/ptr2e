@@ -70,6 +70,18 @@
         "Hint": "Pan the Perk Web down-right"
       }
     },
+    "TokenMovement": {
+      "SelectType": "Select Movement Type",
+      "Actions": {
+        "Overland": "Overland",
+        "Burrow": "Burrowing",
+        "Swim": "Swiming",
+        "Flight": "Flying",
+        "Threaded": "Threaded",
+        "Teleport": "Teleport",
+        "Free": "Forced Movement"
+      }
+    },
     "DynamicTableRefresh": "Reset Dynamic Table Cache",
     "DynamicTableCopy": "Copy Dynamic Table",
     "Rename": "Rename",
@@ -463,7 +475,12 @@
       "SkillLabel": "Skill",
       "YesLabel": "Yes",
       "NoSelectionMade": "No selection was made, aborting.",
-      "NoValidOptions": "There are no valid options to choose from, aborting."
+      "NoValidOptions": "There are no valid options to choose from, aborting.",
+      "DropItemError": "You must drop an Item here.",
+      "DropItemNotAllowed": "{badType} cannot be dropped here (must be {goodType})",
+      "MinorBuffPrompt": "Select which<br>[Minor Buff] Perk<br>you wish to obtain",
+      "MinorBuffDrop": "Perk with [Minor Buff] Trait",
+      "ImprovedMovementPrompt": "Select which Movement<br>you wish to increase"
     },
     "AttackWarning": {
       "FlingItemConsumed": "Reduced the quantity of the flung {name} by 1 (new total: {quantity}).",
@@ -970,7 +987,7 @@
           "confused": "At the end of the afflicted creature's Activations, it has a 50% chance of using Fumble.",
           "hyper-mode": "While afflicted with Hyper Mode, the afflicted creature gains +20% to all of its Movement Scores, while dealing and taking 15% more damage. As well, the user’s Shadow-Type attacks gain [Crit 2], or have their [Crit X] value increase by +2. At the start of the afflicted creature’s Activations, it has:<ul><li>a 40% chance to act normally on that Activation.</li><li>a 25% chance to be Choice-Locked 1 to Shadow-Type attacks.</li><li>a 15% chance of ending its Activation and using Fumble.</li><li>a 15% chance of using Backlash.</li><li>a 5% chance to be cured of Hyper Mode.</li></ul>",
           "weary": "While a creature is Weary, its default ACC and EVA Stages are based on its Weary value, X. Specifically, the default ACC and EVA Stages are set to the negative sum of all X and all integers between 0 and X (Weary 1 sets the defaults to -1, 2 to -3, and 3 to -6). Weary is automatically increased by 1 when a creature Faints. When a creature has 4 or more Weary, it is unable to battle until they reduce their Weary. Weary cannot wear off on its own - a creature must deliberately Rest or consume Items such as Apples to remove Stacks of Weary.",
-          "exposed": "While a creature is Exposed, it cannot remove Weary by Resting.",
+          "exposed": "While a creature is Exposed, it cannot remove Weary.",
           "blinded": "The afflicted creature is unable to see, ocularly. The creature has their \"seeing-based\" vision options disabled (standard vision, Darkvision, X-Ray Vision, etc.) and can only perceive using their other senses (as listed in their Traits). If they do not have a way to see, or have someone guiding them, they are unable to target other creatures with Attacks or Actions.",
           "stuck": "While afflicted with Stuck, creatures may not leave the combat area. If the afflicted creature is an owned Pokemon, it cannot willingly switch out (or be switched out by another party). When a creature with the [Trainer] or [Ace] trait would gain Stuck; they instead gain Slowed X, rather than Stuck X.",
           "bound": "The afflicted creature cannot willingly use any Movement. Stacks of Bound do not decrease at the end of a creature's Activation, instead the effect that applied Bound will provide a way of removing the Bound Affliction.",
@@ -1014,7 +1031,7 @@
           "taunted": "The afflicted creature does 33% less damage to creatures other than the source of Taunted. The afflicted creature cannot use Status-category attacks for the duration of Taunted.",
           "grapple": "The afflicted creature possesses -1 default ACC and EVA and may only take Actions with the [Grapple] trait. Creatures that are not in control of a Grapple are also Bound. A creature in control of the Grapple can take a Free Action on their turn to end their participation in Grapple. The creature in control of the Grapple is treated as having the non-in-control creature(s) as being Mounted on itself.<br>If an afflicted creature is the only participant of a Grapple, they lose this Affliction. Hostile actions made whilst Grappled must target a participant of the Grapple.",
           "boosted": "An afflicted creature has the Power of its Physical- and Special-Category Attacks increase by 20%.",
-          "resolved": "An afflicted creature takes 20% more damage from Physical- and Special-Category Attacks.",
+          "resolved": "An afflicted creature takes 20% less damage from Physical- and Special-Category Attacks.",
           "rapid": "A creature afflicted with Rapid may perform [Exhaust] Actions as though they lack the Trait AND resolve [Set Up] Actions on the same activation they are set up.",
           "strong": "While afflicted with Strong, the Power of the creature's Attacks are increased by +20% and has its Initiative delayed by 20% after its Activation.",
           "agile": "While afflicted with Agile, Power of the creature's Attacks are decreased by -20% and has its Initiative advanced by 20% after its Activation.",
@@ -1327,6 +1344,9 @@
       }
     },
     "Settings": {
+      "Sidebar": {
+        "Header": "PTR 2e System Settings"
+      },
       "DevMode": {
         "Name": "Developer Mode",
         "Hint": "Enable developer mode, this will allow you to commit changes to the Github repository."
@@ -1443,19 +1463,19 @@
       },
       "ChangeResources": {
         "title": "Change Resources for {name}",
-        "content": "<header style='color: var(--hint-text-color);'><h3 style='color: var(--hint-text-color); margin-bottom: 0; text-align: center; border-bottom: unset;'>Editing Resources</h3><p>this should only be done with explicit GM Permission!</p><p style='text-align: center;'>Current Value: {value}</p></header><content><div class='form-group'><label style='flex-basis: 30%;'>Modify by</label><div class='form-fields'><input style='text-align: center;' type='number' value='0' step='1'/></div></div></content>",
+        "content": "<header style='color: var(--hint-text-color);'><h3 style='color: var(--hint-text-color); margin-bottom: 0; text-align: center; border-bottom: unset;'>Editing Resources</h3><p class='center-text'>This should only be done with explicit GM Permission!</p><p class='center-text'>Current Value: <b>{value}</b></p></header><content><div class='form-group'><label style='flex-basis: 30%;'>Modify by</label><div class='form-fields'><input style='text-align: center;' type='number' value='0' step='1'/></div></div></content>",
         "submit": "Change Resources",
         "warn": "Resource total for {name} cannot drop below 1."
       },
       "ChangeLuck": {
         "title": "Change Luck for {name}",
-        "content": "<header style='color: var(--hint-text-color);'><h3 style='color: var(--hint-text-color); margin-bottom: 0; text-align: center; border-bottom: unset;'>Modifying Luck</h3><p>this should only be done with explicit GM Permission!</p><p style='text-align: center;'>Current Value: {value}</p></header><content><div class='form-group'><label style='flex-basis: 30%;'>Modify by</label><div class='form-fields'><input style='text-align: center;' type='number' value='0' step='1'/></div></div></content>",
+        "content": "<header style='color: var(--hint-text-color);'><h3 style='color: var(--hint-text-color); margin-bottom: 0; text-align: center; border-bottom: unset;'>Modifying Luck</h3><p class='center-text'>This should only be done with explicit GM Permission!</p><p class='center-text'>Current Value: <b>{value}</b></p></header><content><div class='form-group'><label style='flex-basis: 30%;'>Modify by</label><div class='form-fields'><input style='text-align: center;' type='number' value='0' step='1'/></div></div></content>",
         "submit": "Change Luck",
         "warn": "Luck total for {name} cannot drop below 1."
       },
       "RollLuck": {
         "title": "Reroll Luck for {name}",
-        "content": "Are you sure you want to reroll the luck for {name}?<br>This should only be done with <b>explicit permission</b> from the GM!",
+        "content": "<p>Are you sure you want to reroll the luck for {name}?<br>This should only be done with <b>explicit permission</b> from the GM!</p>",
         "roll": "{name}'s Luck Roll!",
         "reroll": "{name} just <b style='color: #aa0200;' data-tooltip-direction='UP' data-tooltip='Rerolling your luck may only be done with explicit permission from the GM!'>Rerolled</b> their Luck!!",
         "result": "The new score of {result} has been applied to their Luck Skill."
@@ -2034,10 +2054,7 @@
       },
       "movement": {
         "primary": {
-          "label": "Primary Movement"
-        },
-        "secondary": {
-          "label": "Secondary Movement"
+          "label": "Movement"
         }
       },
       "powerPoints": {
@@ -2228,7 +2245,10 @@
           "label": "Effects"
         }
       },
-      "SendToChatLabel": "Send to Chat"
+      "SendToChatLabel": "Send to Chat",
+      "Actions": {
+        "EphemeralVariantWarning": "You are unable to edit/delete auto-generated Attack Variants."
+      }
     },
     "SpeciesSheet": {
       "Tabs": {
@@ -2334,22 +2354,44 @@
     "TokenPanel": {
       "Tabs": {
         "attack-slots": {
-          "label": "Attack Slots"
+          "label": "Attack Slots",
+          "inactive": "",
+          "active": ""
         },
         "attack-other": {
-          "label": "Other Attacks"
+          "label": "Other Attacks",
+          "inactive": "",
+          "active": ""
         },
         "passives": {
-          "label": "Passives"
+          "label": "Passives",
+          "inactive": "Show Passives",
+          "active": "Hide Passives"
         },
         "generic-actions": {
-          "label": "Generic Actions"
+          "label": "Generic Actions",
+          "inactive": "",
+          "active": ""
         },
         "skills": {
-          "label": "Skills"
+          "label": "Skills",
+          "inactive": "Show Skills",
+          "active": "Hide Skills"
         },
         "effects": {
-          "label": "Effects"
+          "label": "Effects",
+          "inactive": "Show Effects",
+          "active": "Hide Effects"
+        },
+        "party": {
+          "label": "Party",
+          "inactive": "Show Party",
+          "active": "Hide Party"
+        },
+        "movement": {
+          "label": "Movement",
+          "inactive": "Show Movement Panel",
+          "active": "Hide Movement Panel"
         }
       }
     },
@@ -2381,7 +2423,15 @@
       "OtherModifiers": "Other Modifiers",
       "ChangeToCritical": "Make Crit",
       "ChangeToMiss": "Make Miss",
-      "ChangeToHit": "Make Hit"
+      "ChangeToHit": "Make Hit",
+      "AccuracyPercentileMod": {
+        "Label": "Percentile Accuracy Mod",
+        "Hint": "Percentile modifier applied to this attack's accuracy."
+      },
+      "AccuracyFlatMod": {
+        "Label": "Flat Accuracy Mod",
+        "Hint": "Flat modifier applied to this attack's accuracy."
+      }
     },
     "Damage": {
       "ApplyDamage": "Apply Damage",

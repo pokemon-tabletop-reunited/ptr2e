@@ -125,6 +125,21 @@
         {
           "type": "grant-effect",
           "value": "slowed"
+        },
+        {
+          "type": "roll-effect",
+          "label": "Paralysis Taze Check",
+          "key": "attack",
+          "value": "Compendium.ptr2e.core-effects.Item.tasedconditiitem",
+          "chance": 25,
+          "affects": "self",
+          "alterations": [
+            {
+              "mode": 5,
+              "property": "effects.0.duration.turns",
+              "value": 2
+            }
+          ]
         }
       ],
       "formula": null,
@@ -150,7 +165,7 @@
       "changes": [
         {
           "type": "percentile-modifier",
-          "key": "all-power",
+          "key": "attack-power",
           "value": -33.33
         },
         {
@@ -547,7 +562,14 @@
         {
           "type": "grant-effect",
           "value": "slowed",
-          "predicate": [{"or": ["trait:ace", "trait:trainer"]}],
+          "predicate": [
+            {
+              "or": [
+                "trait:ace",
+                "trait:trainer"
+              ]
+            }
+          ],
           "replaceSelf": true,
           "alterations": [
             {

@@ -351,4 +351,16 @@ export function initializeSettings() {
     type: String,
     scope: "world"
   });
+
+  game.settings.register("ptr2e", "clocksPosition", {
+    name: "PTR2E.Settings.ClocksPosition.Name",
+    hint: "PTR2E.Settings.ClocksPosition.Hint",
+    scope: "client",
+    config: false,
+    type: Object,
+    default: {
+      x: null,
+      y: null
+    },
+  });
 }

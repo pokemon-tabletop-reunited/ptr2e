@@ -13,7 +13,7 @@ declare global {
   }
 }
 
-export class PTRTour extends Tour {
+export class PTRTour extends foundry.nue.Tour {
   override exit(): void {
     super.exit();
     this._tearDown();
@@ -89,9 +89,9 @@ export class PTRTour extends Tour {
     }
 
     // Ensure that only one Tour is active at a given time
-    if (Tour.activeTour && (Tour.activeTour !== this)) {
+    if (foundry.nue.Tour.activeTour && (foundry.nue.Tour.activeTour !== this)) {
       if ((stepIndex !== -1) && (stepIndex !== this.steps.length)) throw new Error(`You cannot begin the ${this.title} Tour because the `
-        + `${Tour.activeTour.title} Tour is already in progress`);
+        + `${foundry.nue.Tour.activeTour.title} Tour is already in progress`);
     }
 
     if (stepIndex === 0 && this.currentStep) {

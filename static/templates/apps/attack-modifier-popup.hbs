@@ -2,7 +2,7 @@
   {{#if variants}}
     <fieldset class="variants">
       <legend>Attack Variants</legend>
-      <select name="variant" size="{{#if (gte variants.length 3)}}3{{else}}2{{/if}}">
+      <select name="variant" size="{{#if (gte variants.length 5)}}5{{else}}{{#if (gte variants.length 4)}}4{{else}}{{#if (gte variants.length 3)}}3{{else}}2{{/if}}{{/if}}{{/if}}">
         {{#each variants as |variant|}}
           <option 
             class="attack action" 

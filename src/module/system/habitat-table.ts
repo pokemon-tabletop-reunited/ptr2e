@@ -18,6 +18,11 @@ class HabitatRollTable extends RollTable {
     data.name = habitat.name;
     data.description = habitat.description;
     data.replacement = true;
+    data._id = `phtid0${(() => {
+      if(habitatSlug.length == 10) return habitatSlug;
+      if(habitatSlug.length > 10) return habitatSlug.slice(0, 10);
+      return Handlebars.helpers.lpad(habitatSlug, 10, "0");
+    })()}`
     super(data, context);
     this.isInitialized = false;
     this.habitat = habitatSlug;
@@ -60,9 +65,8 @@ class HabitatRollTable extends RollTable {
     this.updateSource({
       results: (species.map( (s, i) => {
         return {
-          type: CONST.TABLE_RESULT_TYPES.COMPENDIUM,
-          documentCollection: "ptr2e.core-species",
-          documentId: s._id,
+          type: CONST.TABLE_RESULT_TYPES.DOCUMENT,
+          documentUuid: s.uuid,
           range: [i + 1, i + 1],
           text: s.name,
           img: s.img
@@ -101,3 +105,5 @@ interface HabitatRollTable {
 }
 
 export { HabitatRollTable };
+// @ts-expect-error - Ignore the change in typing
+globalThis.habitat = HabitatRollTable;
