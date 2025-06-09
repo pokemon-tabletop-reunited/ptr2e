@@ -57,7 +57,17 @@ export class TextEnricher {
     }
 
     const trait = game.ptr.data.traits.get(slug);
-    if (!trait) return null;
+    if (!trait) {
+      const decorator = ['[', ']'];
+
+      const span = document.createElement("span");
+      span.classList.add("trait", "invalid");
+      span.dataset.tooltipDirection = options?.direction || "UP";
+      span.dataset.trait = slug;
+      span.dataset.tooltip = `Unknown trait: ${slug}`;
+      span.innerHTML = `<span>${decorator[0]}</span><span class="tag">${label || Handlebars.helpers.formatSlug(slug)}</span><span>${decorator[1]}</span>`
+      return span;
+    }
 
     // TODO: Add keyword decorator
     // eslint-disable-next-line no-constant-condition
@@ -296,7 +306,7 @@ export class TextEnricher {
 }
 
 const TraitEnricher: TextEditorEnricherConfig = {
-  pattern: /@(?<type>Trait)\[(?<slug>[-a-z]+)(\s+)?](?:{(?<label>[^}]+)})?/gi,
+  pattern: /@(?<type>Trait)\[(?<slug>[-a-z0-9]+)(\s+)?](?:{(?<label>[^}]+)})?/gi,
   enricher: async (match: RegExpMatchArray): Promise<HTMLElement | null> => {
     return TextEnricher.enrich(match);
   }
