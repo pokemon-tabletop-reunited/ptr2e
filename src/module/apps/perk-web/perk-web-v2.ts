@@ -530,7 +530,7 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
       webOptions,
       web: this.web,
       filterData: this.perkTab.filterData,
-      noZoom: navigator.userAgent.includes("FoundryVirtualTabletop")
+      // noZoom: navigator.userAgent.includes("FoundryVirtualTabletop")
     }
   }
 
@@ -1457,7 +1457,7 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
     }
 
     this._zoomAmount = zoom;
-    const isElectron = navigator.userAgent.includes("FoundryVirtualTabletop");
+    const isElectron = false// navigator.userAgent.includes("FoundryVirtualTabletop");
     if (!isElectron) {
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore - Zoom is a valid property
@@ -1788,15 +1788,6 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
     if (this.actor) {
       this.actor.sheet.setPosition({ left: 270, top: 20 });
       this.actor.sheet.minimize();
-    }
-
-    if (navigator.userAgent.includes("FoundryVirtualTabletop")) {
-      ui.notifications.warn("We've detected you're using the Foundry VTT Electron Client as your web browser. Please see chat for the full message...")
-      ChatMessage.create({
-        content: "<p>We've detected you're using the Foundry VTT Electron Client as your web browser.</p><p>Due to a problem in the older version of the Electron Client that Foundry V12 uses, the Perk Web's zoom feature is broken.</p><p>Since this is a browser issue, we cannot fix this at a system level, luckily, with Foundry V13, the Electron Version has been updated and this issue is fixed.</p><p>For now, you can still use the Perk Web, but the zoom feature will not work as intended.</p><p>As thus, we recommend using a different browser for the best experience.</p>",
-        speaker: ChatMessage.getSpeaker({ alias: "PTR2e" }),
-        whisper: [game.user.id]
-      }).then(message => ui.chat.renderPopout(message!));
     }
   }
 

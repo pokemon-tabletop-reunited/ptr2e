@@ -20,13 +20,13 @@ export class TokenRulerPTR2e extends foundry.canvas.placeables.tokens.TokenRuler
 
   // @ts-expect-error - Incomplete types
   override refresh({ passedWaypoints, pendingWaypoints, plannedMovement }: TokenRulerData) {
-    this.getMovementInfo({ passedWaypoints, pendingWaypoints, plannedMovement });
+    const options = this.getMovementInfo({ passedWaypoints, pendingWaypoints, plannedMovement });
 
-    return super.refresh({ passedWaypoints, pendingWaypoints, plannedMovement });
+    return super.refresh(options);
   }
 
   getMovementInfo({ passedWaypoints, pendingWaypoints, plannedMovement }: TokenRulerData) {
-    if (!this.token.document?.actor) return;
+    if (!this.token.document?.actor) return { passedWaypoints: passedWaypoints ?? [], pendingWaypoints: pendingWaypoints ?? [], plannedMovement: plannedMovement ?? {} };
 
     const movements = fu.duplicate(this.token.document.actor.system.movement);
     let highest: typeof movements[string][] = []
@@ -46,15 +46,24 @@ export class TokenRulerPTR2e extends foundry.canvas.placeables.tokens.TokenRuler
 
     let exceededTotal = false;
 
-    execute(passedWaypoints);
-    execute(pendingWaypoints);
+    passedWaypoints = execute(passedWaypoints) as typeof passedWaypoints;
+    pendingWaypoints = execute(pendingWaypoints) as typeof pendingWaypoints;
+    const planned: Record<string, TokenPlannedMovement> = {};
     for (const user in plannedMovement) {
       const waypoint = plannedMovement[user];
       if (!waypoint) continue;
-      execute(waypoint.foundPath);
+      planned[user] = fu.duplicate(waypoint);
+      planned[user].foundPath = execute(waypoint.foundPath);
+    }
+
+    return {
+      passedWaypoints: passedWaypoints ?? [],
+      pendingWaypoints: pendingWaypoints ?? [],
+      plannedMovement: planned ?? {}
     }
 
     function execute(array: Omit<TokenMeasuredMovementWaypoint, "userId" | "movementId">[]) {
+      array = array.map(w => fu.duplicate(w));
       for (const waypoint of array) {
         const move = movements[waypoint.action];
         if (!move) { Object.assign(waypoint, { availableMovement: 0 }); continue; }
@@ -80,6 +89,7 @@ export class TokenRulerPTR2e extends foundry.canvas.placeables.tokens.TokenRuler
           exceededTotal = true;
         }
       }
+      return array;
     }
   }
 

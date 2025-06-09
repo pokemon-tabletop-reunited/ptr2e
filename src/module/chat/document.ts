@@ -423,7 +423,7 @@ class ChatMessagePTR2e<TSchema extends TypeDataModel = TypeDataModel> extends Ch
       type,
       speaker,
       flavor,
-      system,
+      system: fu.duplicate(system),
     }, { rollMode: context.rollMode });
   }
 
@@ -464,7 +464,7 @@ class ChatMessagePTR2e<TSchema extends TypeDataModel = TypeDataModel> extends Ch
       type,
       speaker,
       flavor,
-      system,
+      system: fu.duplicate(system),
     }, { rollMode: context.rollMode });
   }
 
@@ -563,7 +563,7 @@ class ChatMessagePTR2e<TSchema extends TypeDataModel = TypeDataModel> extends Ch
         type: "attack",
         speaker,
         flavor,
-        system,
+        system: fu.duplicate(system),
       }, { rollMode: context.rollMode });
   }
 

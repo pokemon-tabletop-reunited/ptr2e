@@ -284,70 +284,70 @@ class ItemPTR2e<
     return super.createDocuments<TDocument>(sources.concat(outputItemSources) as PreCreate<TDocument["_source"]>[], context);
   }
 
-  /**
-   * Exact copy of the original createDialog method except:
-   * Removed 'ptu-item' from appearing in the list.
-   */
-  static override async createDialog<TDocument extends foundry.abstract.Document>(
-    this: ConstructorOf<TDocument>,
-    data: Record<string, unknown> = {},
-    context: {
-      parent?: TDocument["parent"];
-      pack?: Collection<TDocument> | null;
-      perksOnly?: boolean;
-      types?: string[];
-    } & Partial<FormApplicationOptions>,
-  ): Promise<TDocument | null> {
-    const { parent, pack, ...options } = context;
+  // /**
+  //  * Exact copy of the original createDialog method except:
+  //  * Removed 'ptu-item' from appearing in the list.
+  //  */
+  // static override async createDialog<TDocument extends foundry.abstract.Document>(
+  //   this: ConstructorOf<TDocument>,
+  //   data: Record<string, unknown> = {},
+  //   context: {
+  //     parent?: TDocument["parent"];
+  //     pack?: Collection<TDocument> | null;
+  //     perksOnly?: boolean;
+  //     types?: string[];
+  //   } & Partial<FormApplicationOptions>,
+  // ): Promise<TDocument | null> {
+  //   const { parent, pack, ...options } = context;
 
-    // Collect data
-    //@ts-expect-error - This is a valid string property
-    const documentName = this.metadata.name;
-    const types = context.perksOnly ? ["perk"] : game.documentTypes[documentName].filter(t => t !== CONST.BASE_DOCUMENT_TYPE && t !== "ptu-item");
-    let collection: Items<ItemPTR2e<ItemSystemPTR, null>> | undefined;
-    if (!parent) {
-      if (pack) collection = game.packs.get(pack as unknown as string) as unknown as Items<ItemPTR2e<ItemSystemPTR, null>>;
-      else collection = game.collections.get(documentName);
-    }
-    const folders = collection?._formatFolderSelectOptions() ?? [];
-    //@ts-expect-error - This is a valid string property
-    const label = context.perksOnly ? game.i18n.localize("TYPES.Item.perk") : game.i18n.localize(this.metadata.label);
-    const title = game.i18n.format("DOCUMENT.Create", { type: label });
-    // Render the document creation form
-    const html = await foundry.applications.handlebars.renderTemplate("templates/sidebar/document-create.html", {
-      folders,
-      name: data.name || game.i18n.format("DOCUMENT.New", { type: label }),
-      folder: data.folder,
-      hasFolders: folders.length >= 1,
-      type: data.type || (CONFIG[documentName as keyof typeof CONFIG] as { defaultType?: string })?.defaultType || types[0],
-      types: types.reduce((obj, t) => {
-        const label = (CONFIG[documentName as keyof typeof CONFIG] as { typeLabels?: Record<string, string> })?.typeLabels?.[t] ?? t;
-        obj[t as keyof typeof obj] = game.i18n.has(label) ? game.i18n.localize(label) : t;
-        return obj;
-      }, {} as Record<string, unknown>),
-      hasTypes: types.length > 1
-    });
+  //   // Collect data
+  //   //@ts-expect-error - This is a valid string property
+  //   const documentName = this.metadata.name;
+  //   const types = context.perksOnly ? ["perk"] : game.documentTypes[documentName].filter(t => t !== CONST.BASE_DOCUMENT_TYPE && t !== "ptu-item");
+  //   let collection: Items<ItemPTR2e<ItemSystemPTR, null>> | undefined;
+  //   if (!parent) {
+  //     if (pack) collection = game.packs.get(pack as unknown as string) as unknown as Items<ItemPTR2e<ItemSystemPTR, null>>;
+  //     else collection = game.collections.get(documentName);
+  //   }
+  //   const folders = collection?._formatFolderSelectOptions() ?? [];
+  //   //@ts-expect-error - This is a valid string property
+  //   const label = context.perksOnly ? game.i18n.localize("TYPES.Item.perk") : game.i18n.localize(this.metadata.label);
+  //   const title = game.i18n.format("DOCUMENT.Create", { type: label });
+  //   // Render the document creation form
+  //   const html = await foundry.applications.handlebars.renderTemplate("templates/sidebar/document-create.html", {
+  //     folders,
+  //     name: data.name || game.i18n.format("DOCUMENT.New", { type: label }),
+  //     folder: data.folder,
+  //     hasFolders: folders.length >= 1,
+  //     type: data.type || (CONFIG[documentName as keyof typeof CONFIG] as { defaultType?: string })?.defaultType || types[0],
+  //     types: types.reduce((obj, t) => {
+  //       const label = (CONFIG[documentName as keyof typeof CONFIG] as { typeLabels?: Record<string, string> })?.typeLabels?.[t] ?? t;
+  //       obj[t as keyof typeof obj] = game.i18n.has(label) ? game.i18n.localize(label) : t;
+  //       return obj;
+  //     }, {} as Record<string, unknown>),
+  //     hasTypes: types.length > 1
+  //   });
 
-    // Render the confirmation dialog window
-    return Dialog.prompt({
-      title: title,
-      content: html,
-      label: title,
-      callback: html => {
-        const form = html[0].querySelector("form");
-        const fd = new FormDataExtended(form!);
-        foundry.utils.mergeObject(data, fd.object, { inplace: true });
-        if (!data.folder) delete data.folder;
-        if (types.length === 1) data.type = types[0];
-        //@ts-expect-error - This is a valid string property
-        if (!data.name?.trim()) data.name = this.defaultName();
-        //@ts-expect-error - This is a valid string property
-        return this.implementation.create(data, { parent, pack, renderSheet: true });
-      },
-      rejectClose: false,
-      options
-    }) as unknown as TDocument | null;
-  }
+  //   // Render the confirmation dialog window
+  //   return Dialog.prompt({
+  //     title: title,
+  //     content: html,
+  //     label: title,
+  //     callback: html => {
+  //       const form = html[0].querySelector("form");
+  //       const fd = new FormDataExtended(form!);
+  //       foundry.utils.mergeObject(data, fd.object, { inplace: true });
+  //       if (!data.folder) delete data.folder;
+  //       if (types.length === 1) data.type = types[0];
+  //       //@ts-expect-error - This is a valid string property
+  //       if (!data.name?.trim()) data.name = this.defaultName();
+  //       //@ts-expect-error - This is a valid string property
+  //       return this.implementation.create(data, { parent, pack, renderSheet: true });
+  //     },
+  //     rejectClose: false,
+  //     options
+  //   }) as unknown as TDocument | null;
+  // }
 
   override async update(data: Record<string, unknown>, context?: DocumentModificationContext<TParent> | undefined): Promise<this | undefined> {
     if (!(this.system instanceof SpeciesSystemModel && this.system.virtual) && !this.flags.ptr2e.virtual) return super.update(data, context);

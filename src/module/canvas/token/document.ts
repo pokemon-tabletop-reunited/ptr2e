@@ -184,7 +184,7 @@ class TokenDocumentPTR2e<TParent extends ScenePTR2e | null = ScenePTR2e | null> 
 
   /**
    * Whenever the token's actor delta changes, or the base actor changes, perform associated refreshes.
-   * @param {object} [update]                               The update delta.
+   * @param {object|object[]} [update]                               The update delta.
    * @param {Partial<DatabaseUpdateOperation>} [operation]  The database operation that was performed
    * @protected
    */
