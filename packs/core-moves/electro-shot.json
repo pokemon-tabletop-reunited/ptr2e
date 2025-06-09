@@ -23,7 +23,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 4,
+          "powerPoints": 3,
           "trigger": "The user used Electro Shot (Set-Up) as their last Action."
         },
         "category": "special",
@@ -39,17 +39,19 @@
       {
         "name": "Electro Shot (Set-Up)",
         "slug": "electro-shot-set-up",
-        "description": "<p>Effect: Set-Up: The user ends their Activation. If Rainy Weather is present, the user does the Set-Up and resolves Attack on the same Activation.</p><p>Resolution: On their next Activation, they attack with and resolve this Attack.</p>",
+        "description": "<p>Effect: Set-Up: The user ends their Activation. If Rainy Weather is present or the user is affected by Electric Terrain, the user does the Set-Up and resolves this Attack on the same Activation.</p><p>Resolution: On their next Activation, they attack with and resolve this Attack.</p>",
         "traits": [
           "set-up",
           "defensive",
-          "environ"
+          "environ",
+          "delay-5"
         ],
         "type": "attack",
         "img": "systems/ptr2e/img/svg/electric_icon.svg",
         "cost": {
           "activation": "complex",
-          "powerPoints": 4
+          "powerPoints": 4,
+          "delay": 4
         },
         "range": {
           "target": "self",
