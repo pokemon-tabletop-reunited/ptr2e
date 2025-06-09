@@ -271,6 +271,7 @@ export default class AttackPTR2e extends ActionPTR2e {
   }
 
   public getRangeIncrement(distance: number | null, size: ActorSizePTR2e, hasReach: boolean): number | null {
+    if(this.range?.target === "self") return -Infinity;
     if (
       distance === null ||
       !this.range ||

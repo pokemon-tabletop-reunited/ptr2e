@@ -407,6 +407,7 @@ interface AttackStatisticRollParameters extends StatisticRollParameters<AttackRo
   variants?: string[]
   modifierDialog?: AttackModifierPopup
   skipEffectRolls?: boolean
+  noCrit?: boolean;
 }
 
 interface CheckDCReference {

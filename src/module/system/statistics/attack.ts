@@ -150,10 +150,10 @@ class AttackCheck<TParent extends AttackStatistic = AttackStatistic> implements 
     data.check = fu.mergeObject(data.check ?? {}, { type: this.type });
 
     const extraDomains = new Set<string>();
-    if(this.attack.variant) {
+    if (this.attack.variant) {
       const original = this.attack.original as AttackPTR2e;
-      if(original) {
-        for(const od of original.statistic?.domains ?? []) {
+      if (original) {
+        for (const od of original.statistic?.domains ?? []) {
           extraDomains.add(od);
         }
       }
@@ -232,9 +232,9 @@ class AttackCheck<TParent extends AttackStatistic = AttackStatistic> implements 
     for (const type of this.attack.types) options.add(`attack:type:${type}`);
     for (const option of this.additionalOptions) options.add(option);
 
-    if(this.attack.variant) {
+    if (this.attack.variant) {
       const original = this.attack.original;
-      if(original) {
+      if (original) {
         options.add(`attack:original:${original.slug}`);
       }
     }
@@ -268,11 +268,11 @@ class AttackCheck<TParent extends AttackStatistic = AttackStatistic> implements 
       const actorCatMod = this.actor.size?.rank ?? 1;
       const thrownCatMod = target.actor.size?.rank ?? 1;
 
-      const power = powerModifier.modifier = Math.max(25, Math.floor(17 + (Math.pow(actorLift+10, 0.5) / 5) * (3 + targetWC/6) * (2 + thrownCatMod/6) * (1.5 + actorWC/18) * (1.25 + actorCatMod/18)));
+      const power = powerModifier.modifier = Math.max(25, Math.floor(17 + (Math.pow(actorLift + 10, 0.5) / 5) * (3 + targetWC / 6) * (2 + thrownCatMod / 6) * (1.5 + actorWC / 18) * (1.25 + actorCatMod / 18)));
 
-      const accuracy = Math.min(100, Math.floor(10 + 50 * ((1 + actorWC/18) * (1 + actorCatMod/6) * (1+ actorLift / 200) / ((1 + targetWC/9) * (1 + thrownCatMod/3)))));
+      const accuracy = Math.min(100, Math.floor(10 + 50 * ((1 + actorWC / 18) * (1 + actorCatMod / 6) * (1 + actorLift / 200) / ((1 + targetWC / 9) * (1 + thrownCatMod / 3)))));
 
-      const range = Math.max(1, Math.floor(((Math.pow(actorLift+10, 2/3) / 3) - 0.5) * Math.pow(((1.05 * actorWC) + (1.35 * actorCatMod)) / ((1.35 * targetWC) + (1.7 * thrownCatMod)), 0.5) * ((3 + (actorCatMod/3)) / 10)));
+      const range = Math.max(1, Math.floor(((Math.pow(actorLift + 10, 2 / 3) / 3) - 0.5) * Math.pow(((1.05 * actorWC) + (1.35 * actorCatMod)) / ((1.35 * targetWC) + (1.7 * thrownCatMod)), 0.5) * ((3 + (actorCatMod / 3)) / 10)));
 
       this.attack.power = power;
       this.attack.accuracy = accuracy;
@@ -408,6 +408,7 @@ class AttackCheck<TParent extends AttackStatistic = AttackStatistic> implements 
       skipDialog: args.skipDialog ?? targets.length === 0,
       omittedSubrolls: (() => {
         const ommited = new Set<"damage" | "crit" | "accuracy">();
+        if (args.noCrit) ommited.add("crit");
         if (context.self.attack.category === "status" || !context.self.attack.power) ommited.add("damage");
         if (context.self.attack.category === "status") ommited.add("crit");
         if (!context.self.attack.accuracy) ommited.add("accuracy");
