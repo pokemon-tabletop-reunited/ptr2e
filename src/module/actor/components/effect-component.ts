@@ -9,7 +9,7 @@ class EffectComponent extends ActorComponent {
 
     override renderComponent(data: Record<string, unknown>): Promise<string> {
         data.effects = this.actor.effects.contents;
-        return renderTemplate(this.template, data);
+        return foundry.applications.handlebars.renderTemplate(this.template, data);
     }
 
     override attachListeners(htmlElement: HTMLElement) {

@@ -537,7 +537,7 @@ class CheckPTR2e {
     }
 
     if (effectsToApply.length) {
-      await context.actor?.applyRollEffects(effectsToApply);
+      await context.actor?.applyRollEffects(effectsToApply, false);
     }
 
     return results.map((r) => r.rolls);

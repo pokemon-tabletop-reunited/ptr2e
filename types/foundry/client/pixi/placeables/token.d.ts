@@ -242,6 +242,8 @@ declare global {
 
         override render(renderer: PIXI.Renderer): void;
 
+        movementAnimationPromise: Promise<unknown> | null;
+
         /**
          * Render the bound mesh detection filter.
          * Note: this method does not verify that the detection filter exists.
@@ -635,10 +637,14 @@ declare global {
     }
 
     interface TokenAnimationOptions<TObject extends Token> extends CanvasAnimationOptions<TObject> {
-        /** A desired token movement speed in grid spaces per second */
-        movementSpeed?: number;
-        a0?: Partial<TokenMeshDisplayAttributes>;
-        hoverInOut?: boolean;
+      /** A desired token movement speed in grid spaces per second */
+      movementSpeed?: number;
+      a0?: Partial<TokenMeshDisplayAttributes>;
+      hoverInOut?: boolean;
+      chain?: boolean;
+      action?: string;
+      transition?: "crosshatch"|"dots"|"fade"|"glitch"|"hole"|"holeSwirl"|"hologram"|"morph"|"swirl"|"waterDrop"|"waves"|"wind"|"whiteNoise";
+      
     }
 
     interface TokenAnimationData {

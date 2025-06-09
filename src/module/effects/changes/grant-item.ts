@@ -161,7 +161,7 @@ export default class GrantItemChangeSystem extends ChangeModel {
     // If we shouldn't allow duplicates, check for an existing item with this source ID
     const existingItem = this.type === "grant-effect"
       ? this.actor.effects.find(e => (e as ActiveEffectPTR2e).slug === grantedDocument.slug) as ActiveEffectPTR2e
-      : this.actor.items.find((i) => (i as ItemPTR2e)?.flags?.core?.sourceId === uuid) as ItemPTR2e;
+      : this.actor.items.find((i) => (i as ItemPTR2e)?.flags?.core?.sourceId === uuid || i?._stats.compendiumSource === uuid) as ItemPTR2e;
     if (!this.allowDuplicate && existingItem) {
       this.#setGrantFlags(effectSource, existingItem);
 
@@ -180,7 +180,7 @@ export default class GrantItemChangeSystem extends ChangeModel {
     grantedSource._id = fu.randomID();
 
     // An item may grant another copy of itself, but at least strip the copy of its grant CMs
-    if (this.item?.flags?.core?.sourceId === (grantedSource.flags.core?.sourceId ?? "")) {
+    if (this.item?.flags?.core?.sourceId === (grantedSource.flags.core?.sourceId || grantedSource._stats?.compendiumSource)) {
       if (this.type === "grant-effect") {
         (grantedSource as ActiveEffectPTR2e['_source']).system.changes = (grantedSource as ActiveEffectPTR2e['_source']).system.changes.filter(c => c.type !== GrantItemChangeSystem.TYPE);
       }

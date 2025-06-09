@@ -249,7 +249,7 @@ class ItemAlteration extends foundry.abstract.DataModel<ChangeModel> {
     }
 
     if (resolvedFromBracket instanceof Object) {
-      return defaultValue instanceof Object
+      return defaultValue instanceof Object && !Array.isArray(defaultValue)
         ? fu.mergeObject(defaultValue, resolvedFromBracket, { inplace: false })
         : resolvedFromBracket;
     }

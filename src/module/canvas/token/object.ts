@@ -3,7 +3,7 @@ import { SquareGridPTR2e } from "../grid.ts";
 import { AuraRenderers } from "./aura/map.ts";
 import * as R from "remeda";
 
-class TokenPTR2e<TDocument extends TokenDocumentPTR2e = TokenDocumentPTR2e> extends Token<TDocument> {
+class TokenPTR2e<TDocument extends TokenDocumentPTR2e = TokenDocumentPTR2e> extends foundry.canvas.placeables.Token<TDocument> {
   /** Visual representation and proximity-detection facilities for auras */
   readonly auras: AuraRenderers;
 
@@ -21,7 +21,7 @@ class TokenPTR2e<TDocument extends TokenDocumentPTR2e = TokenDocumentPTR2e> exte
 
   /** Is this token currently animating? */
   get isAnimating(): boolean {
-    return !!this.animation;
+    return !!this.animation || !!this.movementAnimationPromise;
   }
 
   get isTiny(): boolean {
@@ -162,15 +162,68 @@ class TokenPTR2e<TDocument extends TokenDocumentPTR2e = TokenDocumentPTR2e> exte
   override _onControl(options: { releaseOthers?: boolean; pan?: boolean } = {}) {
     super._onControl(options);
 
-    if (game.ready) game.ptr.tokenPanel.token = this;
+    //@ts-expect-error - Incomplete types
+    if (game.ready && ui.hotbar.rendered) ui.hotbar.token = this;
   }
 
   override _onRelease(options: Record<string, unknown> = {}) {
     super._onRelease(options);
 
-    if (game.ready) {
-      game.ptr.tokenPanel.token = (game.user.character?.getActiveTokens().at(0) as this) ?? null;
+    //@ts-expect-error - Incomplete types
+    if (game.ready && ui.hotbar.rendered) {
+      //@ts-expect-error - Incomplete types
+      ui.hotbar.token = (game.user.character?.getActiveTokens().at(0) as this) ?? null;
     }
+    
+  }
+
+  /** @inheritdoc */
+  _getKeyboardMovementAction() {
+    return this.document.movementType;
+  }
+
+  /** @inheritdoc */
+  _getHUDMovementAction() {
+    return this.document.movementType;
+  }
+
+  /** @inheritdoc */
+  _getDragWaypointProperties() {
+    const action = this.document.movementType;
+    return {
+      action,
+      teleport: action === "teleport",
+    };
+  }
+
+  //@ts-expect-error - Incomplete types
+  override _prepareDragLeftDropUpdates(event: PIXI.FederatedPointerEvent) {
+    //@ts-expect-error - Incomplete types
+    const updates = super._prepareDragLeftDropUpdates(event) as [[], {movement: Record<string, {waypoints: {width: number, height: number}[]}>}];
+
+    if(Array.isArray(updates) && updates.length > 1) {
+      const update = updates[1];
+      if(update && typeof update === "object" && "movement" in update) {
+        for(const user in update.movement) {
+          const token = canvas.tokens.get(user);
+          if(!token) continue;
+          const waypoints = update.movement[user].waypoints;
+          if(Array.isArray(waypoints)) {
+            const size = TokenDocumentPTR2e.prepareSize(token.document);
+            if(size) {
+              for(const waypoint of waypoints) {
+                if(waypoint.width !== size.width || waypoint.height !== size.height) {
+                  waypoint.width = size.width;
+                  waypoint.height = size.height;
+                }
+              }
+            }
+          }
+        };
+      }
+    }
+
+    return updates;
   }
 }
 
