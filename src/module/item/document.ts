@@ -183,6 +183,7 @@ class ItemPTR2e<
 
     // Create item document with the ActiveEffect data
     return new this({
+      img: document.img,
       name: document.name,
       type: "effect",
       effects: [document.toObject()],

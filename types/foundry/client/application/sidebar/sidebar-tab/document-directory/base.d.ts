@@ -114,7 +114,7 @@ declare global {
          * @returns {Promise<DirectoryMixinEntry>}  The created Entry
          * @protected
          */
-        protected _createDroppedEntry(entry: TDocument, folderId?: string): Promise<TDocument>;
+        protected _createDroppedEntry(entry: TDocument, folder?: {folder?: string}): Promise<TDocument>;
 
         /**
          * Default folder context actions
