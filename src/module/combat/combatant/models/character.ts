@@ -86,7 +86,7 @@ class CharacterCombatantSystem extends CombatantSystemPTR2e {
         await (message?.system as AttackMessageSystem)?.applyDamage(actorUuid);
       }
 
-      await this.actor.actions.attack.get("fumble")!.roll({ targets: [this.actor], skipDialog: true, callback: applyDamage, skipEffectRolls: true });
+      await this.actor.actions.attack.get("fumble")!.roll({ targets: [this.actor], skipDialog: true, callback: applyDamage, skipEffectRolls: true, noCrit: true });
     }
     catch {
       return void await ChatMessage.create({

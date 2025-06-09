@@ -841,7 +841,7 @@ class ActorPTR2e<
 
     if (!pp) {
       const originalAmount = Math.floor((this.system.health.max / 16) * Math.abs(ticks));
-      const amount = Math.floor(originalAmount * (isDamage ? multiplier : 1))
+      const amount = isDamage ? Math.max(Math.floor(originalAmount * multiplier), 1) : Math.floor(originalAmount);
       const applied = shield
         ? Math.min(amount || 0, isDamage ? this.system.shield.value : Infinity)
         : Math.min(amount || 0, isDamage ? this.system.health.value : this.system.health.max - this.system.health.value);
@@ -923,7 +923,7 @@ class ActorPTR2e<
     const multiplier = (this.system.modifiers["vulnerabilityMultiplier"] ?? 1)
     const originalDamage = damage;
     if (damage > 0) {
-      if (multiplier !== 1 && !isNaN(multiplier)) damage = Math.floor(damage * this.system.modifiers["vulnerabilityMultiplier"]!);
+      if (multiplier !== 1 && !isNaN(multiplier)) damage = Math.max(1, Math.floor(damage * this.system.modifiers["vulnerabilityMultiplier"]!));
     }
     // Damage is applied to shield first, then health
     // Shields cannot be healed
@@ -1002,8 +1002,13 @@ class ActorPTR2e<
     suboption: string | null = null,
   ): Promise<boolean | null> {
     if (!(typeof effectUuid === "string")) return null;
+    if(effectUuid.startsWith("trait:")) {
+      const newValue = value ?? !(this.flags.ptr2e?.traitEffects?.[effectUuid] ?? true);
+      await this.update({"flags.ptr2e.traitEffects": { [effectUuid]: newValue }});
+      return newValue;
+    }
 
-    const effect = await fromUuid<ActiveEffectPTR2e>(effectUuid, { relative: this as Actor });
+    const effect = await fu.fromUuid<ActiveEffectPTR2e>(effectUuid, { relative: this as Actor });
     const change = effect?.changes.find(
       (c): c is RollOptionChangeSystem =>
         c instanceof RollOptionChangeSystem && c.domain === domain && c.option === option,
@@ -1859,7 +1864,7 @@ class ActorPTR2e<
     if (effect.traits.has("ignore-immunity")) return false;
 
     if (effect.traits.has("major-affliction") || effect.traits.has("minor-affliction")) {
-      const name = effect.slug === "burn" ? "burned" : effect.slug;
+      const name = effect.slug === "burned" ? "burn" : effect.slug;
       if (immunities[`affliction:${name}`] && !effect.traits.has(`ignore-immunity-${name}`)) return true;
     }
 
@@ -1971,13 +1976,29 @@ class ActorPTR2e<
   }
 
   static override async createDialog<TDocument extends foundry.abstract.Document>(this: ConstructorOf<TDocument>, data?: Record<string, unknown>, context?: { parent?: TDocument["parent"]; pack?: Collection<TDocument> | null; types?: string[] } & Partial<FormApplicationOptions>): Promise<TDocument | null>;
-  static override async createDialog(data: Record<string, unknown> = {}, context: { parent?: TokenDocumentPTR2e | null; pack?: Collection<ActorPTR2e> | null; types?: string[] } & Partial<FormApplicationOptions> = {}) {
-    if (!Array.isArray(context.types)) context.types = this.TYPES.filter(t => t !== "ptu-actor");
-    else {
-      if (context.types.length) context.types = context.types.filter(t => t !== "ptu-actor");
-      else context.types = this.TYPES.filter(t => t !== "ptu-actor");
-    }
-    return super.createDialog(data, context);
+  static override async createDialog(
+    data: Record<string, unknown> = {}, 
+    createOptions: Record<string, unknown> = {},
+    {
+      folders, 
+      types, 
+      template, 
+      context, 
+      ...dialogOptions
+    }: {
+      folders?: {id: string, name: string}[];
+      types?: string[];
+      template?: string;
+    } & {
+      context?: { parent?: TokenDocumentPTR2e | null; pack?: Collection<ActorPTR2e> | null; types?: string[] } & Partial<FormApplicationOptions>;
+    } = {}
+  ) {
+    if(types?.length) types = types.filter(t => t !== "ptu-actor");
+    else types = this.TYPES.filter(t => t !== "ptu-actor");
+
+    return super.createDialog(data, createOptions, {
+      folders, types, template, context, ...dialogOptions
+    });
   }
 
   protected override _onEmbeddedDocumentChange(): void {
@@ -2488,7 +2509,8 @@ type ActorFlags2e = ActorFlags & {
     typeOptions?: {
       get options(): PickableThing[],
       get types(): PickableThing[];
-    }
+    },
+    traitEffects?: Record<string, boolean>;
   };
 };
 

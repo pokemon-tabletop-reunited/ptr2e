@@ -29,6 +29,10 @@
   "PTR2E": {
     "BrowserSettingsSaved": "Settings have been saved",
     "Keybindings": {
+      "PerkEditModeDelete": {
+        "Name": "Perk Web (Edit Mode) Delete",
+        "Hint": "Delete the selected Perk from the Perk Web"
+      },
       "PerkZoomIn": {
         "Name": "Perk Zoom In",
         "Hint": "Zoom in the Perk Web"
@@ -250,6 +254,7 @@
         "TutorMoves": "Tutor Moves",
         "Abilities": "Abilities",
         "Source": "Source",
+        "Archetypes": "Archetypes",
         "Sort": {
           "Name": "Name",
           "Number": "Number",
@@ -954,6 +959,7 @@
           "leech": "Leech",
           "rebound": "Rebound",
           "ringed": "Ringed",
+          "bleed": "Bleed",
           "enraged": "Enraged",
           "charmed": "Charmed",
           "taunted": "Taunted",
@@ -1025,7 +1031,8 @@
           "stockpile": "The default stages for DEF and SPDEF are increased by +1 for each Stack of Stockpile it possesses. Stockpile can have up to 3 Stacks.",
           "leech": "The afflicted creature loses two Ticks of HP at the end of each of their Activations and the Source that applied Leech gains HP equal to the amount the afflicted creature lost.",
           "rebound": "Damage inflicted on the afflicted creature by Physical- or Special-Category attactks deals ¼ of the inflicted damage on the attacking creature.",
-          "ringed": "When a creature with Ringed concludes an Activation, they heal a Tick of HP, with additional effects from appropriate weathers/terrains as described by the effect that granted Ringed.",
+          "ringed": "When a creature with Ringed concludes an Activation, they heal a Tick of HP.",
+          "bleed": "When a creature with Bleed concludes an Activation, they lose a Tick of HP.",
           "enraged": "A creature may only use Physical- or Special-Category moves while it is Enraged.",
           "charmed": "The afflicted creature believes the source of Infatuation is a dear friend or romantic interest. Afflicted creatures have a 50% chance of being unable to target the source of their infatuation with an attack, and have -2 EVA Stages against attacks from the source of their infatuation.",
           "taunted": "The afflicted creature does 33% less damage to creatures other than the source of Taunted. The afflicted creature cannot use Status-category attacks for the duration of Taunted.",
@@ -1453,6 +1460,12 @@
             "Name": "Default Blueprint Perk Config",
             "Hint": "Label or ID of the globally saved Perk Generator Config."
           }
+        }
+      },
+      "Preferences": {
+        "MustTarget": {
+          "Name": "Force Targeting before Attack",
+          "Hint": "When Enabled, you will be forced to target any amount of creatures before you can resolve an attack."
         }
       }
     },

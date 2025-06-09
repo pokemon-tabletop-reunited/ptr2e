@@ -1,5 +1,10 @@
-import { ChatMessagePTR2e } from "@chat";
-import { ConsumablePTR2e, ItemPTR2e, ItemSourcePTR2e, ItemSystemsWithFlingStats } from "@item";
+import ChatMessagePTR2e from "../chat/document.ts";
+import { 
+  ConsumablePTR2e, 
+  ItemPTR2e, 
+  ItemSourcePTR2e, 
+  ItemSystemsWithFlingStats 
+} from "@item";
 import { ModifierPopup } from "@module/apps/modifier-popup/modifier-popup.ts";
 import { AttackCheckModifier, CheckModifier, ModifierPTR2e } from "@module/effects/modifiers.ts";
 import { RollNote } from "@system/notes.ts";
@@ -448,7 +453,7 @@ class CheckPTR2e {
     }
 
     if (context.ppCost && context.consumePP) {
-      const actor = await fromUuid<ActorPTR2e>(context.actor?.uuid) ?? game.actors.get(context.actor?.id);
+      const actor = await fu.fromUuid<ActorPTR2e>(context.actor?.uuid) ?? game.actors.get(context.actor?.id);
       if (actor) {
         const pp = actor.system.powerPoints.value;
 

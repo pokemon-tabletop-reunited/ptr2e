@@ -14,6 +14,8 @@ export class TextEnricher {
       body.on("dragstart", "span.affliction > .content-link", TextEnricher._onDragStartAffliction);
 
       body.on("click", "span.tick > .content-link", TextEnricher._onClickTick);
+
+      body.on("click", "span.flat > .content-link", TextEnricher._onClickFlat);
     }
   }
 
@@ -34,6 +36,16 @@ export class TextEnricher {
       case "Tick": {
         return this.#createTick({ amount: parseInt(amount), options: params, label });
       }
+      case "Shield":
+      case "HP":
+      case "PP": {
+        if (params?.tick || params?.ticks) {
+          if (type === "Shield") params.shield = "true";
+          else if (type === "PP") params.pp = "true";
+          return this.#createTick({ amount: parseInt(amount), options: params, label });
+        }
+        return this.#createFlat({ type, amount: parseInt(amount), options: params, label });
+      }
     }
     return null;
   }
@@ -45,7 +57,17 @@ export class TextEnricher {
     }
 
     const trait = game.ptr.data.traits.get(slug);
-    if (!trait) return null;
+    if (!trait) {
+      const decorator = ['[', ']'];
+
+      const span = document.createElement("span");
+      span.classList.add("trait", "invalid");
+      span.dataset.tooltipDirection = options?.direction || "UP";
+      span.dataset.trait = slug;
+      span.dataset.tooltip = `Unknown trait: ${slug}`;
+      span.innerHTML = `<span>${decorator[0]}</span><span class="tag">${label || Handlebars.helpers.formatSlug(slug)}</span><span>${decorator[1]}</span>`
+      return span;
+    }
 
     // TODO: Add keyword decorator
     // eslint-disable-next-line no-constant-condition
@@ -128,7 +150,55 @@ export class TextEnricher {
             : "fa-solid fa-battery-bolt"
           : isShieldBased
             ? isDamage
-              ? "fa-duotone fa-solid fa-shield-slash"
+              ? "fa-duotone fa-shield-slash"
+              : "fas fa-shield"
+            : isDamage
+              ? "fas fa-burst"
+              : "fas fa-heart",
+      })
+    })());
+    return span;
+  }
+
+  static async #createFlat({ type, amount, options, label }: { type: "Shield" | "HP" | "PP", amount: number, options: Record<string, string | undefined> | null, label?: string }): Promise<HTMLElement | null> {
+    if (!amount) return null;
+    const isDamage = amount < 0;
+
+    const isPPBased = type === "PP";
+    const isShieldBased = type === "Shield";
+
+    const span = document.createElement("span");
+    span.classList.add("flat");
+    span.dataset.tooltipDirection = options?.direction || "UP";
+    span.dataset.amount = amount.toString();
+    span.dataset.pp = isPPBased.toString();
+    span.dataset.shield = isShieldBased.toString();
+    span.dataset.tooltip = isPPBased
+      ? isDamage
+        ? `Drain ${amount} PP`
+        : `Restore ${amount} PP`
+      : isShieldBased
+        ? `${amount} Shield${isDamage ? " Damage" : ""}`
+        : `${amount} ${isDamage ? "Damage" : "Healing"}`;
+    span.append((() => {
+      const name = label || `${amount} ${type}`;
+      return foundry.applications.ux.TextEditor.createAnchor({
+        classes: ["content-link"],
+        attrs: { draggable: true as unknown as string },
+        name,
+        dataset: {
+          type: "Flat",
+          amount: amount.toString(),
+          shield: isShieldBased.toString(),
+          pp: isPPBased.toString(),
+        },
+        icon: isPPBased
+          ? isDamage
+            ? "fa-solid fa-battery-slash"
+            : "fa-solid fa-battery-bolt"
+          : isShieldBased
+            ? isDamage
+              ? "fa-duotone fa-shield-slash"
               : "fas fa-shield"
             : isDamage
               ? "fas fa-burst"
@@ -173,6 +243,32 @@ export class TextEnricher {
     }
   }
 
+  static async _onClickFlat(event: JQuery.ClickEvent): Promise<void> {
+    event.preventDefault();
+    const a = event.currentTarget as HTMLAnchorElement;
+    const amount = parseInt(a.dataset.amount ?? "0");
+    if (!amount) return;
+
+    const targets = canvas.tokens.controlled.length ? canvas.tokens.controlled.flatMap(t => t.actor ?? []) : game.user.character ? [game.user.character] : [];
+    if (!targets.length) return void ui.notifications.error(game.i18n.localize("PTR2E.Notifications.NoTokenSelected"));
+
+    const isShieldBased = a.dataset.shield === "true";
+    const isPPBased = a.dataset.pp === "true";
+
+    //TODO: This should probably be updated to allow for doing all updates in one, as well as merging all chat messages.
+    for (const actor of targets) {
+      if (isPPBased) {
+        const current = actor.system.powerPoints.value;
+        const newValue = Math.clamp(actor.system.powerPoints.value + amount, 0, actor.system.powerPoints.max);
+        await actor.update({ "system.powerPoints.value": newValue });
+        ui.notifications.info(`Updated ${actor.name}'s Power Points from ${current} to ${newValue}.`);
+      }
+      else {
+        await actor.applyDamage(amount * -1, { healShield: isShieldBased && amount > 0, silent: false })
+      }
+    }
+  }
+
   static _onDragStartAffliction(event: JQuery.DragEvent) {
     event.stopPropagation();
     const a = event.currentTarget as HTMLAnchorElement;
@@ -210,7 +306,7 @@ export class TextEnricher {
 }
 
 const TraitEnricher: TextEditorEnricherConfig = {
-  pattern: /@(?<type>Trait)\[(?<slug>[-a-z]+)(\s+)?](?:{(?<label>[^}]+)})?/gi,
+  pattern: /@(?<type>Trait)\[(?<slug>[-a-z0-9]+)(\s+)?](?:{(?<label>[^}]+)})?/gi,
   enricher: async (match: RegExpMatchArray): Promise<HTMLElement | null> => {
     return TextEnricher.enrich(match);
   }
@@ -230,8 +326,32 @@ const TickEnricher: TextEditorEnricherConfig = {
   }
 }
 
+const FlatShieldEnricher: TextEditorEnricherConfig = {
+  pattern: /@(?<type>Shield)\[(?<amount>[0-9-]+)(?<options>[^\]]*)](?:{(?<label>[^}]+)})?/gi,
+  enricher: async (match: RegExpMatchArray): Promise<HTMLElement | null> => {
+    return TextEnricher.enrich(match);
+  }
+}
+
+const FlatHPEnricher: TextEditorEnricherConfig = {
+  pattern: /@(?<type>HP)\[(?<amount>[0-9-]+)(?<options>[^\]]*)](?:{(?<label>[^}]+)})?/gi,
+  enricher: async (match: RegExpMatchArray): Promise<HTMLElement | null> => {
+    return TextEnricher.enrich(match);
+  }
+}
+
+const FlatPPEnricher: TextEditorEnricherConfig = {
+  pattern: /@(?<type>PP)\[(?<amount>[0-9-]+)(?<options>[^\]]*)](?:{(?<label>[^}]+)})?/gi,
+  enricher: async (match: RegExpMatchArray): Promise<HTMLElement | null> => {
+    return TextEnricher.enrich(match);
+  }
+}
+
 export default [
   TraitEnricher,
   AfflictionEnricher,
   TickEnricher,
+  FlatShieldEnricher,
+  FlatHPEnricher,
+  FlatPPEnricher,
 ] as TextEditorEnricherConfig[];

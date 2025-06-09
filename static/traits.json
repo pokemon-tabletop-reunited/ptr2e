@@ -168,7 +168,7 @@
     "slug": "bladed",
     "label": "Bladed",
     "related": [],
-    "description": "This creature possesses effective edged limbs, body parts, or tools. Confers [Sharp] to @Trait[adaptable] actions, and grants access to the [Bladed] Tutor List.",
+    "description": "This creature possesses effective edged limbs, body parts, or tools as part of its anatomy. Confers [Sharp] to @Trait[adaptable] actions, and grants access to the [Bladed] Tutor List.",
     "type": "automated",
     "changes": [
       {
@@ -564,73 +564,337 @@
     "slug": "glow-1",
     "label": "Glow 1",
     "related": [],
-    "description": "This creature may choose, as a Free Action to illuminate (or no longer illuminate) an area with Bright/Dim Light in an Emanation up to 1m and 3m respectively (3m of Dim Light per 1m of Bright Light)."
+    "description": "This creature may choose, as a Free Action to illuminate (or no longer illuminate) an area with Bright/Dim Light in an Emanation up to 1m and 3m respectively (3m of Dim Light per 1m of Bright Light).",
+    "type": "automated",
+    "changes": [
+      {
+        "type": "roll-option",
+        "value": "toggle:glow",
+        "domain": "all",
+        "toggleable": true,
+        "state": true
+      },
+      {
+        "type": "token-alterations",
+        "predicate": [
+          "toggle:glow"
+        ],
+        "texture": "{actor|img}",
+        "light": {
+          "bright": 1,
+          "angle": 360,
+          "dim": 3
+        }
+      }
+    ]
   },
   {
     "slug": "glow-2",
     "label": "Glow 2",
     "related": [],
-    "description": "This creature may choose, as a Free Action to illuminate (or no longer illuminate) an area with Bright/Dim Light in an Emanation up to 2m and 6m respectively (3m of Dim Light per 1m of Bright Light)."
+    "description": "This creature may choose, as a Free Action to illuminate (or no longer illuminate) an area with Bright/Dim Light in an Emanation up to 2m and 6m respectively (3m of Dim Light per 1m of Bright Light).",
+    "type": "automated",
+    "changes": [
+      {
+        "type": "roll-option",
+        "value": "toggle:glow",
+        "domain": "all",
+        "toggleable": true,
+        "state": true
+      },
+      {
+        "type": "token-alterations",
+        "predicate": [
+          "toggle:glow"
+        ],
+        "texture": "{actor|img}",
+        "light": {
+          "bright": 2,
+          "angle": 360,
+          "dim": 6
+        }
+      }
+    ]
   },
   {
     "slug": "glow-3",
     "label": "Glow 3",
     "related": [],
-    "description": "This creature may choose, as a Free Action to illuminate (or no longer illuminate) an area with Bright/Dim Light in an Emanation up to 3m and 9m respectively (3m of Dim Light per 1m of Bright Light)."
+    "description": "This creature may choose, as a Free Action to illuminate (or no longer illuminate) an area with Bright/Dim Light in an Emanation up to 3m and 9m respectively (3m of Dim Light per 1m of Bright Light).",
+    "type": "automated",
+    "changes": [
+      {
+        "type": "roll-option",
+        "value": "toggle:glow",
+        "domain": "all",
+        "toggleable": true,
+        "state": true
+      },
+      {
+        "type": "token-alterations",
+        "predicate": [
+          "toggle:glow"
+        ],
+        "texture": "{actor|img}",
+        "light": {
+          "bright": 3,
+          "angle": 360,
+          "dim": 9
+        }
+      }
+    ]
   },
   {
     "slug": "glow-4",
     "label": "Glow 4",
     "related": [],
-    "description": "This creature may choose, as a Free Action to illuminate (or no longer illuminate) an area with Bright/Dim Light in an Emanation up to 4m and 12m respectively (3m of Dim Light per 1m of Bright Light)."
+    "description": "This creature may choose, as a Free Action to illuminate (or no longer illuminate) an area with Bright/Dim Light in an Emanation up to 4m and 12m respectively (3m of Dim Light per 1m of Bright Light).",
+    "type": "automated",
+    "changes": [
+      {
+        "type": "roll-option",
+        "value": "toggle:glow",
+        "domain": "all",
+        "toggleable": true,
+        "state": true
+      },
+      {
+        "type": "token-alterations",
+        "predicate": [
+          "toggle:glow"
+        ],
+        "texture": "{actor|img}",
+        "light": {
+          "bright": 4,
+          "angle": 360,
+          "dim": 12
+        }
+      }
+    ]
   },
   {
     "slug": "glow-5",
     "label": "Glow 5",
     "related": [],
-    "description": "This creature may choose, as a Free Action to illuminate (or no longer illuminate) an area with Bright/Dim Light in an Emanation up to 5m and 15m respectively (3m of Dim Light per 1m of Bright Light)."
+    "description": "This creature may choose, as a Free Action to illuminate (or no longer illuminate) an area with Bright/Dim Light in an Emanation up to 5m and 15m respectively (3m of Dim Light per 1m of Bright Light).",
+    "type": "automated",
+    "changes": [
+      {
+        "type": "roll-option",
+        "value": "toggle:glow",
+        "domain": "all",
+        "toggleable": true,
+        "state": true
+      },
+      {
+        "type": "token-alterations",
+        "predicate": [
+          "toggle:glow"
+        ],
+        "texture": "{actor|img}",
+        "light": {
+          "bright": 5,
+          "angle": 360,
+          "dim": 15
+        }
+      }
+    ]
   },
   {
     "slug": "glow-6",
     "label": "Glow 6",
     "related": [],
-    "description": "This creature may choose, as a Free Action to illuminate (or no longer illuminate) an area with Bright/Dim Light in an Emanation up to 6m and 18m respectively (3m of Dim Light per 1m of Bright Light)."
+    "description": "This creature may choose, as a Free Action to illuminate (or no longer illuminate) an area with Bright/Dim Light in an Emanation up to 6m and 18m respectively (3m of Dim Light per 1m of Bright Light).",
+    "type": "automated",
+    "changes": [
+      {
+        "type": "roll-option",
+        "value": "toggle:glow",
+        "domain": "all",
+        "toggleable": true,
+        "state": true
+      },
+      {
+        "type": "token-alterations",
+        "predicate": [
+          "toggle:glow"
+        ],
+        "texture": "{actor|img}",
+        "light": {
+          "bright": 7,
+          "angle": 360,
+          "dim": 18
+        }
+      }
+    ]
   },
   {
     "slug": "glow-7",
     "label": "Glow 7",
     "related": [],
-    "description": "This creature may choose, as a Free Action to illuminate (or no longer illuminate) an area with Bright/Dim Light in an Emanation up to 7m and 21m respectively (3m of Dim Light per 1m of Bright Light)."
+    "description": "This creature may choose, as a Free Action to illuminate (or no longer illuminate) an area with Bright/Dim Light in an Emanation up to 7m and 21m respectively (3m of Dim Light per 1m of Bright Light).",
+    "type": "automated",
+    "changes": [
+      {
+        "type": "roll-option",
+        "value": "toggle:glow",
+        "domain": "all",
+        "toggleable": true,
+        "state": true
+      },
+      {
+        "type": "token-alterations",
+        "predicate": [
+          "toggle:glow"
+        ],
+        "texture": "{actor|img}",
+        "light": {
+          "bright": 7,
+          "angle": 360,
+          "dim": 21
+        }
+      }
+    ]
   },
   {
     "slug": "glow-8",
     "label": "Glow 8",
     "related": [],
-    "description": "This creature may choose, as a Free Action to illuminate (or no longer illuminate) an area with Bright/Dim Light in an Emanation up to 8m and 24m respectively (3m of Dim Light per 1m of Bright Light)."
+    "description": "This creature may choose, as a Free Action to illuminate (or no longer illuminate) an area with Bright/Dim Light in an Emanation up to 8m and 24m respectively (3m of Dim Light per 1m of Bright Light).",
+    "type": "automated",
+    "changes": [
+      {
+        "type": "roll-option",
+        "value": "toggle:glow",
+        "domain": "all",
+        "toggleable": true,
+        "state": true
+      },
+      {
+        "type": "token-alterations",
+        "predicate": [
+          "toggle:glow"
+        ],
+        "texture": "{actor|img}",
+        "light": {
+          "bright": 8,
+          "angle": 360,
+          "dim": 24
+        }
+      }
+    ]
   },
   {
     "slug": "glow-9",
     "label": "Glow 9",
     "related": [],
-    "description": "This creature may choose, as a Free Action to illuminate (or no longer illuminate) an area with Bright/Dim Light in an Emanation up to 9m and 27m respectively (3m of Dim Light per 1m of Bright Light)."
+    "description": "This creature may choose, as a Free Action to illuminate (or no longer illuminate) an area with Bright/Dim Light in an Emanation up to 9m and 27m respectively (3m of Dim Light per 1m of Bright Light).",
+    "type": "automated",
+    "changes": [
+      {
+        "type": "roll-option",
+        "value": "toggle:glow",
+        "domain": "all",
+        "toggleable": true,
+        "state": true
+      },
+      {
+        "type": "token-alterations",
+        "predicate": [
+          "toggle:glow"
+        ],
+        "texture": "{actor|img}",
+        "light": {
+          "bright": 9,
+          "angle": 360,
+          "dim": 27
+        }
+      }
+    ]
   },
   {
     "slug": "glow-10",
     "label": "Glow 10",
     "related": [],
-    "description": "This creature may choose, as a Free Action to illuminate (or no longer illuminate) an area with Bright/Dim Light in an Emanation up to 10m and 30m respectively (3m of Dim Light per 1m of Bright Light)."
+    "description": "This creature may choose, as a Free Action to illuminate (or no longer illuminate) an area with Bright/Dim Light in an Emanation up to 10m and 30m respectively (3m of Dim Light per 1m of Bright Light).",
+    "type": "automated",
+    "changes": [
+      {
+        "type": "roll-option",
+        "value": "toggle:glow",
+        "domain": "all",
+        "toggleable": true,
+        "state": true
+      },
+      {
+        "type": "token-alterations",
+        "predicate": [
+          "toggle:glow"
+        ],
+        "texture": "{actor|img}",
+        "light": {
+          "bright": 10,
+          "angle": 360,
+          "dim": 30
+        }
+      }
+    ]
   },
   {
     "slug": "glow-11",
     "label": "Glow 11",
     "related": [],
-    "description": "This creature may choose, as a Free Action to illuminate (or no longer illuminate) an area with Bright/Dim Light in an Emanation up to 11m and 33m respectively (3m of Dim Light per 1m of Bright Light)."
+    "description": "This creature may choose, as a Free Action to illuminate (or no longer illuminate) an area with Bright/Dim Light in an Emanation up to 11m and 33m respectively (3m of Dim Light per 1m of Bright Light).",
+    "type": "automated",
+    "changes": [
+      {
+        "type": "roll-option",
+        "value": "toggle:glow",
+        "domain": "all",
+        "toggleable": true,
+        "state": true
+      },
+      {
+        "type": "token-alterations",
+        "predicate": [
+          "toggle:glow"
+        ],
+        "texture": "{actor|img}",
+        "light": {
+          "bright": 11,
+          "angle": 360,
+          "dim": 33
+        }
+      }
+    ]
   },
   {
     "slug": "glow-12",
     "label": "Glow 12",
     "related": [],
-    "description": "This creature may choose, as a Free Action to illuminate (or no longer illuminate) an area with Bright/Dim Light in an Emanation up to 12m and 36m respectively (3m of Dim Light per 1m of Bright Light)."
+    "description": "This creature may choose, as a Free Action to illuminate (or no longer illuminate) an area with Bright/Dim Light in an Emanation up to 12m and 36m respectively (3m of Dim Light per 1m of Bright Light).",
+    "type": "automated",
+    "changes": [
+      {
+        "type": "roll-option",
+        "value": "toggle:glow",
+        "domain": "all",
+        "toggleable": true,
+        "state": true
+      },
+      {
+        "type": "token-alterations",
+        "predicate": [
+          "toggle:glow"
+        ],
+        "texture": "{actor|img}",
+        "light": {
+          "bright": 12,
+          "angle": 360,
+          "dim": 36
+        }
+      }
+    ]
   },
   {
     "slug": "grotesque-fusion",
@@ -1294,6 +1558,54 @@
     "description": "This creature can create or clear stormy conditions. The user has access to the [Stormcaller] Tutor List."
   },
   {
+    "slug": "mouthy",
+    "label": "Mouthy",
+    "related": [],
+    "description": "This creature has an advanced and developed mouth (or something resembling one) that allows them to bite, chew, rip and tear with decent offensive effectiveness. The user has access to the [Jaw] Tutor List.",
+    "type": "automated",
+    "changes": [
+      {
+        "type": "alter-attack",
+        "key": "adaptable-trait-attack",
+        "property": "traits",
+        "mode": "2",
+        "value": "jaw"
+      }
+    ]
+  },
+  {
+    "slug": "tailed",
+    "label": "Tailed",
+    "related": [],
+    "description": "This creature has a significantly sized physical appendage or tool that is great for smashing and crushing. The user has access to the [Hammer] Tutor List.",
+    "type": "automated",
+    "changes": [
+      {
+        "type": "alter-attack",
+        "key": "adaptable-trait-attack",
+        "property": "traits",
+        "mode": "2",
+        "value": "hammer"
+      }
+    ]
+  },
+  {
+    "slug": "tailed",
+    "label": "Tailed",
+    "related": [],
+    "description": "This creature has a sizeable tail. The user has access to the [Tailed] Tutor List.",
+    "type": "automated",
+    "changes": [
+      {
+        "type": "alter-attack",
+        "key": "adaptable-trait-attack",
+        "property": "traits",
+        "mode": "2",
+        "value": "tailed"
+      }
+    ]
+  },
+  {
     "slug": "telekinetic-x",
     "label": "Telekinetic X",
     "related": [],
@@ -1797,13 +2109,55 @@
     "slug": "weapon-training",
     "label": "Weapon Training",
     "related": [],
-    "description": "This creature is trained in the use of human-made weaponry."
+    "description": "This creature is trained in the use of human-made weaponry. NOTE: NEEDS AUTOMATION TO OFFSET WEAPON PENALTY."
   },
   {
     "slug": "weapon",
     "label": "Weapon",
     "related": [],
-    "description": "This trait applies to weapons and weapon-interactive moves."
+    "description": "This trait applies to weapons and weapon-interactive moves. NOTE: NEEDS AUTOMATION FOR INNATE PENALTY."
+  },
+  {
+    "slug": "blade",
+    "label": "Blade",
+    "related": [],
+    "description": "This weapons possesses a sharp, edged surface that the user is able to utilize for the weapons' Attacks, which usually have @trait[sharp]."
+  },
+  {
+    "slug": "blunt",
+    "label": "Blunt",
+    "related": [],
+    "description": "This weapon is weighty and solid, making it ideal for brute force physical Attacks, often being @trait[hammer] Attacks."
+  },
+  {
+    "slug": "projectile",
+    "label": "Projectile",
+    "related": [],
+    "description": "This weapon, via a chemical, mechanical, or physical method, launches physical projectiles as its intended form of Attack, usually possessing @trait[missile]."
+  },
+  {
+    "slug": "bomb",
+    "label": "Bomb",
+    "related": [],
+    "description": "This weapon utilizes a powerful reaction to produce explosions, utlizing the shockwaves and fragmentation as its primary vector of Attack. These weapons' Attacks often possess @trait[explode]."
+  },
+  {
+    "slug": "dew",
+    "label": "DEW",
+    "related": [],
+    "description": "This weapon is a directed energy weapon, or 'DEW', which compresses fundamental energies in a tight, controlled beam that is used to inflict @trait[ray] damage."
+  },
+  {
+    "slug": "emission",
+    "label": "Emission",
+    "related": [],
+    "description": "This weapon expels energy or matter toward targets, usually less controlled as a DEW, but often in more signficiant quantities. This weapon's attacks are likely to possess @trait[pulse]."
+  },
+  {
+    "slug": "firearm",
+    "label": "Firearm",
+    "related": [],
+    "description": "This trait refers to guns and other such @trait[projectile] devices that utilize an explosive charge to propel one or more projectiles down a barrel to inflict damage on a target. Firearms tend to be synonymous with more cold and calculated modern-style warfare, away from the romanticized sword and spear combat of the Middle Ages and Antiquity, and are ubiquitious in many settings that resemble contemporary society to any degree."
   },
   {
     "slug": "weathervane",
@@ -2144,7 +2498,127 @@
     "slug": "stack-x",
     "label": "Stack X",
     "related": [],
-    "description": "Denotes the number of individual items that make up a stack of that item."
+    "description": "Items with this trait may have between 1 and X of this item occupying a single item slot."
+  },
+  {
+    "slug": "stack-1",
+    "label": "Stack 1",
+    "related": [],
+    "description": "Items with this trait may have 1 of this item occupying a single item slot."
+  },
+  {
+    "slug": "stack-2",
+    "label": "Stack 2",
+    "related": [],
+    "description": "Items with this trait may have between 1 and 2 of this item occupying a single item slot."
+  },
+  {
+    "slug": "stack-3",
+    "label": "Stack 3",
+    "related": [],
+    "description": "Items with this trait may have between 1 and 3 of this item occupying a single item slot."
+  },
+  {
+    "slug": "stack-4",
+    "label": "Stack 4",
+    "related": [],
+    "description": "Items with this trait may have between 1 and 4 of this item occupying a single item slot."
+  },
+  {
+    "slug": "stack-5",
+    "label": "Stack 5",
+    "related": [],
+    "description": "Items with this trait may have between 1 and 5 of this item occupying a single item slot."
+  },
+  {
+    "slug": "stack-6",
+    "label": "Stack 6",
+    "related": [],
+    "description": "Items with this trait may have between 1 and 6 of this item occupying a single item slot."
+  },
+  {
+    "slug": "stack-7",
+    "label": "Stack 7",
+    "related": [],
+    "description": "Items with this trait may have between 1 and 7 of this item occupying a single item slot."
+  },
+  {
+    "slug": "stack-8",
+    "label": "Stack 8",
+    "related": [],
+    "description": "Items with this trait may have between 1 and 8 of this item occupying a single item slot."
+  },
+  {
+    "slug": "stack-9",
+    "label": "Stack 9",
+    "related": [],
+    "description": "Items with this trait may have between 1 and 9 of this item occupying a single item slot."
+  },
+  {
+    "slug": "stack-10",
+    "label": "Stack 10",
+    "related": [],
+    "description": "Items with this trait may have between 1 and 10 of this item occupying a single item slot."
+  },
+  {
+    "slug": "stack-11",
+    "label": "Stack 11",
+    "related": [],
+    "description": "Items with this trait may have between 1 and 11 of this item occupying a single item slot."
+  },
+  {
+    "slug": "stack-12",
+    "label": "Stack 12",
+    "related": [],
+    "description": "Items with this trait may have between 1 and 12 of this item occupying a single item slot."
+  },
+  {
+    "slug": "stack-13",
+    "label": "Stack 13",
+    "related": [],
+    "description": "Items with this trait may have between 1 and 13 of this item occupying a single item slot."
+  },
+  {
+    "slug": "stack-14",
+    "label": "Stack 14",
+    "related": [],
+    "description": "Items with this trait may have between 1 and 14 of this item occupying a single item slot."
+  },
+  {
+    "slug": "stack-15",
+    "label": "Stack 15",
+    "related": [],
+    "description": "Items with this trait may have between 1 and 15 of this item occupying a single item slot."
+  },
+  {
+    "slug": "stack-16",
+    "label": "Stack 16",
+    "related": [],
+    "description": "Items with this trait may have between 1 and 16 of this item occupying a single item slot."
+  },
+  {
+    "slug": "stack-17",
+    "label": "Stack 17",
+    "related": [],
+    "description": "Items with this trait may have between 1 and 17 of this item occupying a single item slot."
+  },
+  {
+    "slug": "stack-18",
+    "label": "Stack 18",
+    "related": [],
+    "description": "Items with this trait may have between 1 and 18 of this item occupying a single item slot."
+  },
+  {
+    "slug": "stack-19",
+    "label": "Stack 19",
+    "related": [],
+    "description": "Items with this trait may have between 1 and 19 of this item occupying a single item slot."
+  },
+  {
+    "slug": "stack-20",
+    "label": "Stack 20",
+    "related": [],
+    "description": "Items with this trait may have between 1 and 20 of this item occupying a single item slot."
   },
   {
     "slug": "belt",
@@ -2163,6 +2637,24 @@
     "label": "Combat",
     "related": [],
     "description": "Denotes the general use of a item or piece of gear. [Consumable] items cannot be used in combat if they lack this trait."
+  },
+  {
+    "slug": "consumable",
+    "label": "Consumable",
+    "related": [],
+    "description": "Items with this trait are destroyed when they are used. Items with @trait[stack-x] remove one item from their Stack, until the count hits zero, and then the item is destroyed."
+  },
+  {
+    "slug": "battle",
+    "label": "Battle",
+    "related": [],
+    "description": "Items with this trait are particularly designed for combat use. These items may used be Used during Combat."
+  },
+  {
+    "slug": "ball",
+    "label": "Ball",
+    "related": [],
+    "description": "Items with this trait are spherical and perfectly sized to be thrown. Gear with self-compression and miniaturization technology, such as Poke Balls and Pester Balls, usually possess this trait."
   },
   {
     "slug": "x-strike",
@@ -4307,16 +4799,172 @@
     "description": "Denotes if an item possesses a pool governing the number of times the item may be used before the pool needs to be refilled (requirements and conditions vary depending on the item's other Traits). This count is maintained as a Clock on the holding Actor's page, Clock Size equal to 50."
   },
   {
+    "slug": "1-Handed",
+    "label": "1-handed",
+    "related": [],
+    "description": "Items with this Trait usually require one or more hands to properly utilize, if not hold outright, taking up 1 Held Slot."
+  },
+  {
+    "slug": "2-Handed",
+    "label": "2-handed",
+    "related": [],
+    "description": "Items with this Trait usually require one or more hands to properly utilize, if not hold outright, taking up 2 Held Slots."
+  },
+  {
     "slug": "switch-grip",
     "label": "Switch Grip",
     "related": [],
-    "description": "One-handed: can hold item in one hand, and another held item in the other hand. Two-handed: power of weapon attacks +30%, loses second held item slot"
+    "description": "@trait[1-handed] weapons with this trait are able to be optionally held in two slots, which boosts the Power of those weapon's Attacks by +50%."
   },
   {
-    "slug": "reload",
-    "label": "Reload",
+    "slug": "reload-X",
+    "label": "Reload X",
     "related": [],
-    "description": "These weapons utilize a Clock, ticking down, to track the PP Cost of their Attacks, rather than their user's. The user can use a Simple Action to reload the weapon, refilling the Clock. This Action either consumes an Ammunition item relating to the weapon, or consumes the Character's IP at an increased cost."
+    "description": "These weapons utilize a Clock, ticking down, to track the PP Cost of their Attacks, rather than their user's. Creatures can use X Simple Actions to reload the weapon, refilling the Clock. Reloading a weapon either consumes an Ammunition item relating to the weapon, or consumes a creature's IP at an increased cost."
+  },
+  {
+    "slug": "reload-1",
+    "label": "Reload 1",
+    "related": [],
+    "description": "These weapons utilize a Clock, ticking down, to track the PP Cost of their Attacks, rather than their user's. Creatures can use 1 Simple Action to reload the weapon, refilling the Clock. Reloading a weapon either consumes an Ammunition item relating to the weapon, or consumes a creature's IP at an increased cost."
+  },
+  {
+    "slug": "reload-2",
+    "label": "Reload 2",
+    "related": [],
+    "description": "These weapons utilize a Clock, ticking down, to track the PP Cost of their Attacks, rather than their user's. Creatures can use 2 Simple Actions to reload the weapon, refilling the Clock. Reloading a weapon either consumes an Ammunition item relating to the weapon, or consumes a creature's IP at an increased cost."
+  },
+  {
+    "slug": "reload-3",
+    "label": "Reload 3",
+    "related": [],
+    "description": "These weapons utilize a Clock, ticking down, to track the PP Cost of their Attacks, rather than their user's. Creatures can use 3 Simple Actions to reload the weapon, refilling the Clock. Reloading a weapon either consumes an Ammunition item relating to the weapon, or consumes a creature's IP at an increased cost."
+  },
+  {
+    "slug": "reload-3",
+    "label": "Reload 3",
+    "related": [],
+    "description": "These weapons utilize a Clock, ticking down, to track the PP Cost of their Attacks, rather than their user's. Creatures can use 3 Simple Actions to reload the weapon, refilling the Clock. Reloading a weapon either consumes an Ammunition item relating to the weapon, or consumes a creature's IP at an increased cost."
+  },
+  {
+    "slug": "reload-4",
+    "label": "Reload 4",
+    "related": [],
+    "description": "These weapons utilize a Clock, ticking down, to track the PP Cost of their Attacks, rather than their user's. Creatures can use 4 Simple Actions to reload the weapon, refilling the Clock. Reloading a weapon either consumes an Ammunition item relating to the weapon, or consumes a creature's IP at an increased cost."
+  },
+  {
+    "slug": "reload-5",
+    "label": "Reload 5",
+    "related": [],
+    "description": "These weapons utilize a Clock, ticking down, to track the PP Cost of their Attacks, rather than their user's. Creatures can use 5 Simple Actions to reload the weapon, refilling the Clock. Reloading a weapon either consumes an Ammunition item relating to the weapon, or consumes a creature's IP at an increased cost."
+  },
+  {
+    "slug": "reload-6",
+    "label": "Reload 6",
+    "related": [],
+    "description": "These weapons utilize a Clock, ticking down, to track the PP Cost of their Attacks, rather than their user's. Creatures can use 6 Simple Actions to reload the weapon, refilling the Clock. Reloading a weapon either consumes an Ammunition item relating to the weapon, or consumes a creature's IP at an increased cost."
+  },
+  {
+    "slug": "reload-7",
+    "label": "Reload 7",
+    "related": [],
+    "description": "These weapons utilize a Clock, ticking down, to track the PP Cost of their Attacks, rather than their user's. Creatures can use 7 Simple Actions to reload the weapon, refilling the Clock. Reloading a weapon either consumes an Ammunition item relating to the weapon, or consumes a creature's IP at an increased cost."
+  },
+  {
+    "slug": "reload-8",
+    "label": "Reload 8",
+    "related": [],
+    "description": "These weapons utilize a Clock, ticking down, to track the PP Cost of their Attacks, rather than their user's. Creatures can use 8 Simple Actions to reload the weapon, refilling the Clock. Reloading a weapon either consumes an Ammunition item relating to the weapon, or consumes a creature's IP at an increased cost."
+  },
+  {
+    "slug": "reload-9",
+    "label": "Reload 9",
+    "related": [],
+    "description": "These weapons utilize a Clock, ticking down, to track the PP Cost of their Attacks, rather than their user's. Creatures can use 9 Simple Actions to reload the weapon, refilling the Clock. Reloading a weapon either consumes an Ammunition item relating to the weapon, or consumes a creature's IP at an increased cost."
+  },
+  {
+    "slug": "reload-10",
+    "label": "Reload 10",
+    "related": [],
+    "description": "These weapons utilize a Clock, ticking down, to track the PP Cost of their Attacks, rather than their user's. Creatures can use 10 Simple Actions to reload the weapon, refilling the Clock. Reloading a weapon either consumes an Ammunition item relating to the weapon, or consumes a creature's IP at an increased cost."
+  },
+  {
+    "slug": "reload-11",
+    "label": "Reload 11",
+    "related": [],
+    "description": "These weapons utilize a Clock, ticking down, to track the PP Cost of their Attacks, rather than their user's. Creatures can use 11 Simple Actions to reload the weapon, refilling the Clock. Reloading a weapon either consumes an Ammunition item relating to the weapon, or consumes a creature's IP at an increased cost."
+  },
+  {
+    "slug": "reload-12",
+    "label": "Reload 12",
+    "related": [],
+    "description": "These weapons utilize a Clock, ticking down, to track the PP Cost of their Attacks, rather than their user's. Creatures can use 12 Simple Actions to reload the weapon, refilling the Clock. Reloading a weapon either consumes an Ammunition item relating to the weapon, or consumes a creature's IP at an increased cost."
+  },
+  {
+    "slug": "reload-13",
+    "label": "Reload 13",
+    "related": [],
+    "description": "These weapons utilize a Clock, ticking down, to track the PP Cost of their Attacks, rather than their user's. Creatures can use 13 Simple Actions to reload the weapon, refilling the Clock. Reloading a weapon either consumes an Ammunition item relating to the weapon, or consumes a creature's IP at an increased cost."
+  },
+  {
+    "slug": "reload-14",
+    "label": "Reload 14",
+    "related": [],
+    "description": "These weapons utilize a Clock, ticking down, to track the PP Cost of their Attacks, rather than their user's. Creatures can use 14 Simple Actions to reload the weapon, refilling the Clock. Reloading a weapon either consumes an Ammunition item relating to the weapon, or consumes a creature's IP at an increased cost."
+  },
+  {
+    "slug": "reload-15",
+    "label": "Reload 15",
+    "related": [],
+    "description": "These weapons utilize a Clock, ticking down, to track the PP Cost of their Attacks, rather than their user's. Creatures can use 15 Simple Actions to reload the weapon, refilling the Clock. Reloading a weapon either consumes an Ammunition item relating to the weapon, or consumes a creature's IP at an increased cost."
+  },
+  {
+    "slug": "reload-16",
+    "label": "Reload 16",
+    "related": [],
+    "description": "These weapons utilize a Clock, ticking down, to track the PP Cost of their Attacks, rather than their user's. Creatures can use 16 Simple Actions to reload the weapon, refilling the Clock. Reloading a weapon either consumes an Ammunition item relating to the weapon, or consumes a creature's IP at an increased cost."
+  },
+  {
+    "slug": "reload-17",
+    "label": "Reload 17",
+    "related": [],
+    "description": "These weapons utilize a Clock, ticking down, to track the PP Cost of their Attacks, rather than their user's. Creatures can use 17 Simple Actions to reload the weapon, refilling the Clock. Reloading a weapon either consumes an Ammunition item relating to the weapon, or consumes a creature's IP at an increased cost."
+  },
+  {
+    "slug": "reload-18",
+    "label": "Reload 18",
+    "related": [],
+    "description": "These weapons utilize a Clock, ticking down, to track the PP Cost of their Attacks, rather than their user's. Creatures can use 18 Simple Actions to reload the weapon, refilling the Clock. Reloading a weapon either consumes an Ammunition item relating to the weapon, or consumes a creature's IP at an increased cost."
+  },
+  {
+    "slug": "reload-19",
+    "label": "Reload 19",
+    "related": [],
+    "description": "These weapons utilize a Clock, ticking down, to track the PP Cost of their Attacks, rather than their user's. Creatures can use 19 Simple Actions to reload the weapon, refilling the Clock. Reloading a weapon either consumes an Ammunition item relating to the weapon, or consumes a creature's IP at an increased cost."
+  },
+  {
+    "slug": "reload-20",
+    "label": "Reload 20",
+    "related": [],
+    "description": "These weapons utilize a Clock, ticking down, to track the PP Cost of their Attacks, rather than their user's. Creatures can use 20 Simple Actions to reload the weapon, refilling the Clock. Reloading a weapon either consumes an Ammunition item relating to the weapon, or consumes a creature's IP at an increased cost."
+  },
+  {
+    "slug": "readied",
+    "label": "Readied",
+    "related": [],
+    "description": "Actions with his trait cannot be used if the user has Move since the end of their Previous Activation, and cannot Move during the Activation this Action is used. `Moving` includeds the user's own Movement, Forced Movement, or as Rider or Crew to a creature or vehicle that would Move."
+  },
+  {
+    "slug": "manned",
+    "label": "Manned",
+    "related": [],
+    "description": "This trait denotes if a weapon is mostly stationary, being affixed to an emplacement, structure, or vehicle. Creatures must use the weapon from its designated postiion, and cannot easily Move the weapon by themselves."
+  },
+  {
+    "slug": "autoload",
+    "label": "Autoload",
+    "related": [],
+    "description": "Weapons with this trait use a mechanism to automatically feed their ammunition, rather than loading each shot by hand, like with a sling, bow, or muzzleloading firearm."
   },
   {
     "slug": "ranger",
@@ -4409,14 +5057,6 @@
     "description": "Creatures with this Trait possess a heart that's been forcefully closed, gaining the following changes:\n1) +50% SPD\n2) The Extra Abilities \"Hyper Agressive\" and \"Coldhearted\"\n3) +1 Active List Slot\n4) Access to the [Shadow] %lt;Type&gt;Learnlist\n5) The Anguish Skill (100 by default) and its associated mechanics\n6) Are susceptible to the \"Hyper Mode\" Affliction\n7) Cannot undergo Evolution or other miscellaneous transformations\n8. Placed onto a slower EXP Track, based on their Species"
   },
   {
-    "slug": "pp-updated",
-    "label": "PP Updated",
-    "related": [
-      "requires-rework"
-    ],
-    "description": "This action has had it's PP Errata'd, any action lacking this trait still has to undergo the PP Errata.\nOnce all actions have been errata'd this trait will be removed."
-  },
-  {
     "slug": "ignore-immunity",
     "label": "Ignore Immunity",
     "related": [],
@@ -4441,9 +5081,7 @@
   {
     "slug": "requires-rework",
     "label": "Requires Rework",
-    "related": [
-      "pp-updated"
-    ],
+    "related": [],
     "description": "The current version of this requires a rework, and will be changed or removed in the near future",
     "type": "automated",
     "changes": []
@@ -4467,6 +5105,13 @@
     "label": "Minor Buff",
     "related": [],
     "description": "[Minor Buff] perks, also known as 'Spacer Perks' are perks which are not present on the web, and instead are widely available through one of the many @UUID[Compendium.ptr2e.core-perks.Item.minorbuffperk000] perks present on the web. You can use the Compendium Browser to find a full list of options, or check the Minor Buff folder in the PTR 2e Perks Compendium.",
+    "type": "automated"
+  },
+  {
+    "slug": "flat",
+    "label": "Flat",
+    "related": [],
+    "description": "This Trait denotes that the Attack deals Flat Damage.",
     "type": "automated"
   }
 ]

@@ -28,7 +28,7 @@ function extractModifiers(
     );
   }
 
-  return modifiers;
+  return modifiers.filter(m => m.value);
 }
 
 async function extractTargetModifiers({

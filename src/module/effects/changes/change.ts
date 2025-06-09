@@ -90,7 +90,7 @@ class ChangeModel<TSchema extends ChangeSchema = ChangeSchema> extends foundry.a
         required: true,
         blank: false,
         initial: this.TYPE,
-        choices: Object.entries(ChangeModelTypes() as Record<string, {label: string}>).reduce((acc, [k, v]: [string, {label: string}]) => ({...acc, [k]: v.label}), {}),
+        choices: Object.entries(ChangeModelTypes() as Record<string, { label: string }>).reduce((acc, [k, v]: [string, { label: string }]) => ({ ...acc, [k]: v.label }), {}),
         validate: (value) => value === this.TYPE,
         validationError: `must be equal to "${this.TYPE}"`,
         label: "PTR2E.Effect.FIELDS.ChangeType.label",
@@ -316,15 +316,15 @@ class ChangeModel<TSchema extends ChangeSchema = ChangeSchema> extends foundry.a
           const unresolveds = formula.match(/@[a-z0-9.]+/gi) ?? [];
           // Allow failure of "@target" and "@actor.conditions" with no warning
           if (unresolveds.length > 0) {
-            const shouldWarn =
-              warn &&
-              !unresolveds.every(
-                (u) =>
-                  u.startsWith("@target.") || u.startsWith("@actor.conditions.")
-              );
-            this.ignored = true;
-            if (shouldWarn) {
-              this.failValidation(`unable to resolve formula, "${formula}"`);
+            const ignoredCase = unresolveds.every(
+              (u) =>
+                u.startsWith("@target.") || u.startsWith("@actor.conditions.")
+            );
+            if (!ignoredCase) {
+              this.ignored = true;
+              if (warn) {
+                this.failValidation(`unable to resolve formula, "${formula}"`);
+              }
             }
             return Number(defaultValue);
           }
@@ -452,7 +452,7 @@ interface ChangeModel<TSchema extends ChangeSchema = ChangeSchema>
   afterRoll?(params: ChangeModel.AfterRollParams): Promise<void>;
 
   /** Runs before the rule's parent effect's owning actor is updated */
-  preUpdateActor?(): Promise<{ create: ItemSourcePTR2e[]; delete: string[];} | { createEffects: EffectSourcePTR2e[]; deleteEffects: string[];}>;
+  preUpdateActor?(): Promise<{ create: ItemSourcePTR2e[]; delete: string[]; } | { createEffects: EffectSourcePTR2e[]; deleteEffects: string[]; }>;
 
   /**
    * Runs before this rules element's parent effect is created. The effect is temporarilly constructed. A rule element can

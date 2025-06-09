@@ -29,7 +29,7 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
       "toggle-edit-mode": function (this: PerkWebApp) {
         this.editMode = !this.editMode;
         if (this.editMode) {
-          if (!ui.perksTab.popout || ui.perksTab.popout.minimized) ui.perksTab.renderPopout();
+          if (!ui.perksTab?.popout || ui.perksTab?.popout.minimized) ui.perksTab?.renderPopout?.();
 
           if (game.settings.get("ptr2e", "dev-mode")) {
             const pack = game.packs.get("ptr2e.core-perks");
@@ -40,7 +40,7 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
           }
         }
         else {
-          ui.perksTab.popout?.close();
+          ui.perksTab?.popout?.close?.();
 
           if (game.settings.get("ptr2e", "dev-mode")) {
             const pack = game.packs.get("ptr2e.core-perks");
@@ -530,7 +530,7 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
       webOptions,
       web: this.web,
       filterData: this.perkTab.filterData,
-      noZoom: navigator.userAgent.includes("FoundryVirtualTabletop")
+      // noZoom: navigator.userAgent.includes("FoundryVirtualTabletop")
     }
   }
 
@@ -1261,7 +1261,16 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
           if ((unlockedPerkStates.includes(node.state) || !!node.tierInfo) && (unlockedPerkStates.includes(connectedNode.state) || !!connectedNode.tierInfo)) {
             return "#2ECFF5"; // Change to blue if both nodes are unlocked
           }
-          if (node.state === PerkState.purchased || !!node.tierInfo || connectedNode.state === PerkState.purchased || !!connectedNode.tierInfo) return "#ffffff";
+          if (unlockedPerkStates.includes(node.state) || !!node.tierInfo || unlockedPerkStates.includes(connectedNode.state) || !!connectedNode.tierInfo) {
+            if((node.state === PerkState.connected || connectedNode.state === PerkState.connected)) {
+              return "#fba151"; // Change to orange to signify connected state
+            }
+            else if(node.state === PerkState.available || connectedNode.state === PerkState.available) {
+              return "#208C4B"; // Change to green to signify available state
+            }
+            
+            return "#ffffff";
+          }
           return "#898989";
         })();
 
@@ -1369,6 +1378,29 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
     element.addEventListener("contextmenu", this.zoomOut.bind(this));
   }
 
+  async deletePerk() {
+    if(!this.rendered || !this.editMode || !this.currentNode) return;
+    const {perk: current, position} = this.currentNode;
+    foundry.applications.api.DialogV2.confirm({
+      window: {
+        title: "Delete Perk"
+      },
+      content: await foundry.applications.ux.TextEditor.enrichHTML(`<p>Are you sure you want to delete this node of ${current.link}?</p>`),
+      yes: {
+        callback: async () => {
+          const nodes = current.system.toObject().nodes;
+          const index = nodes.findIndex(node => node.x === position.x && node.y === position.y);
+          if (index === -1) return;
+          nodes.splice(index, 1);
+          await current.update({
+            "system.nodes": nodes
+          }, current.pack ? { pack: current.pack } : {});
+          await PerkWebApp.refresh.call(this);
+        },
+      },
+    });
+  }
+
   zoomIn(event?: MouseEvent) {
     const element = this.element.querySelector<HTMLElement>(`[data-application-part="web"] .scroll`);
     if (!element) return;
@@ -1425,7 +1457,7 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
     }
 
     this._zoomAmount = zoom;
-    const isElectron = navigator.userAgent.includes("FoundryVirtualTabletop");
+    const isElectron = false// navigator.userAgent.includes("FoundryVirtualTabletop");
     if (!isElectron) {
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore - Zoom is a valid property
@@ -1756,15 +1788,6 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
     if (this.actor) {
       this.actor.sheet.setPosition({ left: 270, top: 20 });
       this.actor.sheet.minimize();
-    }
-
-    if (navigator.userAgent.includes("FoundryVirtualTabletop")) {
-      ui.notifications.warn("We've detected you're using the Foundry VTT Electron Client as your web browser. Please see chat for the full message...")
-      ChatMessage.create({
-        content: "<p>We've detected you're using the Foundry VTT Electron Client as your web browser.</p><p>Due to a problem in the older version of the Electron Client that Foundry V12 uses, the Perk Web's zoom feature is broken.</p><p>Since this is a browser issue, we cannot fix this at a system level, luckily, with Foundry V13, the Electron Version has been updated and this issue is fixed.</p><p>For now, you can still use the Perk Web, but the zoom feature will not work as intended.</p><p>As thus, we recommend using a different browser for the best experience.</p>",
-        speaker: ChatMessage.getSpeaker({ alias: "PTR2e" }),
-        whisper: [game.user.id]
-      }).then(message => ui.chat.renderPopout(message!));
     }
   }
 

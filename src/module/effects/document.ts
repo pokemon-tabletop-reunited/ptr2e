@@ -178,7 +178,8 @@ class ActiveEffectPTR2e<
   override _requiresDurationUpdate(): boolean {
     const { _combatTime, type } = this.duration;
     if (type === "turns" && game.combat) {
-      //@ts-expect-error - This is a private property
+      if(!this.targetsActor()) return false;
+
       const ct = this.parent?.combatant?.system.activations; //(game.combat as CombatPTR2e).system.turn;
       return ct !== _combatTime && !!(this.target as ActorPTR2e)?.inCombat;
     }
@@ -296,6 +297,15 @@ class ActiveEffectPTR2e<
       }
 
       if (this.target.isImmuneToEffect(this)) {
+        if(this.flags?.ptr2e?.itemGrants && typeof this.flags.ptr2e.itemGrants === "object" && Object.keys(this.flags.ptr2e.itemGrants).length > 0) {
+          const itemGrants = Object.values(this.flags.ptr2e.itemGrants);
+          for (const itemGrant of itemGrants) {
+            Hooks.once("preCreateActiveEffect", (effect: unknown) => {
+              if((effect as ActiveEffectPTR2e)._id === itemGrant.id) return false;
+              return;
+            });
+          }
+        }
         ui.notifications.warn(game.i18n.format("PTR2E.Effect.Immune", { effect: this.name, target: this.target.name }));
         return false;
       }
@@ -527,6 +537,7 @@ interface ActiveEffectPTR2e<
         removeOnExit: boolean;
         amount?: number;
       };
+      traitEffect?: string;
     };
   }
 
