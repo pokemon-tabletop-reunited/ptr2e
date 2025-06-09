@@ -32,7 +32,7 @@ class CombatTrackerPTR2e<TEncounter extends CombatPTR2e | null> extends foundry.
     const preview = (() => {
       const combat = this.viewed;
       const current = combat?.combatant;
-      if (!current) return null;
+      if (!current || (current.hidden && !game.user.isGM)) return null;
 
       return {
         ...(turns.find((t) => t.id === current.id) || {}),
