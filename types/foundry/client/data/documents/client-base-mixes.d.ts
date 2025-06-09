@@ -5456,6 +5456,7 @@ export class ClientBaseItem<
         data?: Record<string, unknown>,
         context?: {
             parent?: TDocument["parent"];
+            types?: string[];
             pack?: Collection<TDocument> | null;
         } & Partial<FormApplicationOptions>,
     ): Promise<TDocument | null>;

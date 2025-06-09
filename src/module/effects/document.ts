@@ -178,7 +178,8 @@ class ActiveEffectPTR2e<
   override _requiresDurationUpdate(): boolean {
     const { _combatTime, type } = this.duration;
     if (type === "turns" && game.combat) {
-      //@ts-expect-error - This is a private property
+      if(!this.targetsActor()) return false;
+
       const ct = this.parent?.combatant?.system.activations; //(game.combat as CombatPTR2e).system.turn;
       return ct !== _combatTime && !!(this.target as ActorPTR2e)?.inCombat;
     }
