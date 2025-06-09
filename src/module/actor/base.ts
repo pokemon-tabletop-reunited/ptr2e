@@ -1859,7 +1859,7 @@ class ActorPTR2e<
     if (effect.traits.has("ignore-immunity")) return false;
 
     if (effect.traits.has("major-affliction") || effect.traits.has("minor-affliction")) {
-      const name = effect.slug === "burn" ? "burned" : effect.slug;
+      const name = effect.slug === "burned" ? "burn" : effect.slug;
       if (immunities[`affliction:${name}`] && !effect.traits.has(`ignore-immunity-${name}`)) return true;
     }
 
