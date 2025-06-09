@@ -1611,6 +1611,27 @@
     "description": "PTR2E.Effect.Statuses.Descriptions.ringed"
   },
   {
+    "id": "bleed",
+    "name": "PTR2E.Effect.Statuses.Labels.bleed",
+    "img": "icons/skills/wounds/blood-drip-droplet-red.webp",
+    "type": "affliction",
+    "duration": {
+      "turns": 5
+    },
+    "system": {
+      "changes": [],
+      "priority": 0,
+      "formula": "-1/16",
+      "type": "healing",
+      "removeOnRecall": false,
+      "removeAfterCombat": true,
+      "traits": [
+        "minor-affliction"
+      ]
+    },
+    "description": "PTR2E.Effect.Statuses.Descriptions.bleed"
+  },
+  {
     "id": "enraged",
     "name": "PTR2E.Effect.Statuses.Labels.enraged",
     "img": "systems/ptr2e/img/conditions/rage.svg",
