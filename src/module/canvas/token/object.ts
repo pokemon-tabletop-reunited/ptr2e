@@ -21,7 +21,7 @@ class TokenPTR2e<TDocument extends TokenDocumentPTR2e = TokenDocumentPTR2e> exte
 
   /** Is this token currently animating? */
   get isAnimating(): boolean {
-    return !!this.animation;
+    return !!this.animation || !!this.movementAnimationPromise;
   }
 
   get isTiny(): boolean {

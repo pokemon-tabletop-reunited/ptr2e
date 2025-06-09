@@ -475,7 +475,12 @@
       "SkillLabel": "Skill",
       "YesLabel": "Yes",
       "NoSelectionMade": "No selection was made, aborting.",
-      "NoValidOptions": "There are no valid options to choose from, aborting."
+      "NoValidOptions": "There are no valid options to choose from, aborting.",
+      "DropItemError": "You must drop an Item here.",
+      "DropItemNotAllowed": "{badType} cannot be dropped here (must be {goodType})",
+      "MinorBuffPrompt": "Select which<br>[Minor Buff] Perk<br>you wish to obtain",
+      "MinorBuffDrop": "Perk with [Minor Buff] Trait",
+      "ImprovedMovementPrompt": "Select which Movement<br>you wish to increase"
     },
     "AttackWarning": {
       "FlingItemConsumed": "Reduced the quantity of the flung {name} by 1 (new total: {quantity}).",
@@ -949,6 +954,7 @@
           "leech": "Leech",
           "rebound": "Rebound",
           "ringed": "Ringed",
+          "bleed": "Bleed",
           "enraged": "Enraged",
           "charmed": "Charmed",
           "taunted": "Taunted",
@@ -1020,7 +1026,8 @@
           "stockpile": "The default stages for DEF and SPDEF are increased by +1 for each Stack of Stockpile it possesses. Stockpile can have up to 3 Stacks.",
           "leech": "The afflicted creature loses two Ticks of HP at the end of each of their Activations and the Source that applied Leech gains HP equal to the amount the afflicted creature lost.",
           "rebound": "Damage inflicted on the afflicted creature by Physical- or Special-Category attactks deals ¼ of the inflicted damage on the attacking creature.",
-          "ringed": "When a creature with Ringed concludes an Activation, they heal a Tick of HP, with additional effects from appropriate weathers/terrains as described by the effect that granted Ringed.",
+          "ringed": "When a creature with Ringed concludes an Activation, they heal a Tick of HP.",
+          "bleed": "When a creature with Bleed concludes an Activation, they lose a Tick of HP.",
           "enraged": "A creature may only use Physical- or Special-Category moves while it is Enraged.",
           "charmed": "The afflicted creature believes the source of Infatuation is a dear friend or romantic interest. Afflicted creatures have a 50% chance of being unable to target the source of their infatuation with an attack, and have -2 EVA Stages against attacks from the source of their infatuation.",
           "taunted": "The afflicted creature does 33% less damage to creatures other than the source of Taunted. The afflicted creature cannot use Status-category attacks for the duration of Taunted.",
@@ -2049,10 +2056,7 @@
       },
       "movement": {
         "primary": {
-          "label": "Primary Movement"
-        },
-        "secondary": {
-          "label": "Secondary Movement"
+          "label": "Movement"
         }
       },
       "powerPoints": {

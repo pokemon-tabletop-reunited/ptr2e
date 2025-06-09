@@ -486,10 +486,15 @@ class ActorPTR2e<
       this.abilities.entries[ability.system.slot] = ability;
     }
 
-    for(const attack of this.actions.attack) {
-      if(attack.traits.has("adaptable") && !attack.variant) {
+    for (const attack of this.actions.attack) {
+      if (attack.traits.has("adaptable") && !attack.variant) {
         attack.generateAdaptableVariants();
       }
+    }
+
+    // Add movement based roll options
+    for (const key in this.system.movement) {
+      this.rollOptions.addOption("self", `movement:${key}`);
     }
 
     // Create Fling Action
@@ -1080,7 +1085,7 @@ class ActorPTR2e<
 
   get movementType() {
     const type = this.system.movementType;
-    if(type in CONFIG.Token.movement.actions) return type;
+    if (type in CONFIG.Token.movement.actions) return type;
     else return CONFIG.Token.movement.defaultAction;
   }
 
@@ -1090,13 +1095,13 @@ class ActorPTR2e<
   }
 
   hasMovementType(type: string): boolean {
-    if(this.getMovement(type)) return true;
+    if (this.getMovement(type)) return true;
     return false;
   }
 
   getMovement(type: string) {
-    for(const record in this.system.movement) {
-      if(this.system.movement[record].method === type) return this.system.movement[record];
+    for (const record in this.system.movement) {
+      if (this.system.movement[record].method === type) return this.system.movement[record];
     }
     return null;
   }
@@ -1901,7 +1906,7 @@ class ActorPTR2e<
         )
     })
 
-    if(isHostile) {
+    if (isHostile) {
       const notes = extractNotes(this.synthetics.rollNotes, ["effect-applied"])
       if (notes?.length) {
         const content = RollNote.notesToHTML(notes)?.outerHTML;
@@ -1999,11 +2004,14 @@ class ActorPTR2e<
       }
     }
 
-    if(!this.items.get("struggleattaitem")) {
+    if (!this.items.get("struggleattaitem")) {
       const struggle = await fu.fromUuid<ItemPTR2e<MoveSystem>>("Compendium.ptr2e.core-moves.Item.struggleattaitem");
-      if(struggle) {
+      if (struggle) {
         const items = fu.duplicate(this._source.items ?? []);
-        items.push(struggle.toObject());
+        const struggleObject = struggle.toObject();
+        //@ts-expect-error - Intended
+        delete struggleObject.ownership;
+        items.push(struggleObject);
         this.updateSource({ items });
       }
     }
@@ -2014,26 +2022,29 @@ class ActorPTR2e<
     options: DocumentModificationContext<TParent>,
     user: User
   ): Promise<boolean | void> {
-    if(!this.items.get("struggleattaitem") && (!changed.items?.length || !(changed.items as ItemPTR2e['_source'][])?.some(i => i.type === "move" && i._id === "struggleattaitem"))) {
+    if (!this.items.get("struggleattaitem") && (!changed.items?.length || !(changed.items as ItemPTR2e['_source'][])?.some(i => i.type === "move" && i._id === "struggleattaitem"))) {
       const struggles = this.actions.filter(a => a.type === "attack" && a.slug === "struggle");
-      if(struggles.length) {
+      if (struggles.length) {
         const toDelete = new Set<string>();
-        for(const struggle of struggles) {
+        for (const struggle of struggles) {
           toDelete.add(struggle.item.id);
         }
-        await this.deleteEmbeddedDocuments("Item", [...toDelete], {noHook: true});
+        await this.deleteEmbeddedDocuments("Item", [...toDelete], { noHook: true });
       }
 
       const struggle = await fu.fromUuid<ItemPTR2e<MoveSystem>>("Compendium.ptr2e.core-moves.Item.struggleattaitem");
-      if(struggle) {
-        if(Array.isArray(changed.items) && changed.items.length && !options.keepEmbeddedIds) { 
-          for(const item of changed.items) {
+      if (struggle) {
+        if (Array.isArray(changed.items) && changed.items.length && !options.keepEmbeddedIds) {
+          for (const item of changed.items) {
             item._id = fu.randomID();
           }
         }
 
         changed.items ??= [];
-        (changed.items as ItemPTR2e['_source'][]).push(struggle.toObject());
+        const struggleObject = struggle.toObject();
+        //@ts-expect-error - Intended
+        delete struggleObject.ownership;
+        (changed.items as ItemPTR2e['_source'][]).push(struggleObject);
         options.keepEmbeddedIds = true;
       }
     }
@@ -2178,6 +2189,11 @@ class ActorPTR2e<
         }
       }
     }
+
+    if(changed.ownership && !game.user.isGM) {
+      delete changed.ownership;
+    }
+
     // 
     try {
       const updated = this.clone(changed, { keepId: true, addSource: true });
@@ -2187,6 +2203,23 @@ class ActorPTR2e<
     }
 
     return super._preUpdate(changed, options, user);
+  }
+
+  static override _preUpdateOperation(documents: Actor[], operation: DatabaseUpdateOperation, user: User) {
+    if(game.user.isGM) return super._preUpdateOperation(documents, operation, user);
+    for(const update of operation.updates) {
+      if('ownership' in update) {
+        delete update.ownership;
+      }
+      if('items' in update && Array.isArray(update.items)) {
+        for(const item of update.items) {
+          if('ownership' in item) {
+            delete item.ownership;
+          }
+        }
+      }
+    }
+    return super._preUpdateOperation(documents, operation, user);
   }
 
   protected override _onUpdate(

@@ -11,6 +11,12 @@ import BaseUser from "types/foundry/common/documents/user.js";
 
 class TokenDocumentPTR2e<TParent extends ScenePTR2e | null = ScenePTR2e | null> extends TokenDocument<TParent> {
 
+  debouncedRender = foundry.utils.debounce(this.renderActorSheet.bind(this), 250);
+
+  get objectFromLayer() {
+    return this.object ?? this.layer?.get(this.id) ?? null;
+  }
+
   /** This should be in Foundry core, but ... */
   get scene(): this["parent"] {
     return this.parent;
@@ -58,9 +64,9 @@ class TokenDocumentPTR2e<TParent extends ScenePTR2e | null = ScenePTR2e | null> 
   }
 
   get movementType() {
-    if(this.actor) return this.actor.movementType;
+    if (this.actor) return this.actor.movementType;
     const type = this.getFlag("ptr2e", "movementType") as string;
-    if(type in CONFIG.Token.movement.actions) return type;
+    if (type in CONFIG.Token.movement.actions) return type;
     else return CONFIG.Token.movement.defaultAction;
   }
 
@@ -140,31 +146,45 @@ class TokenDocumentPTR2e<TParent extends ScenePTR2e | null = ScenePTR2e | null> 
   }
 
   registerSpentMovement(reset?: boolean): void {
-    if(!this.actor || !canvas.ready || !game.ready) return;
-    if(reset === true) {
-      for(const movement in this.actor.system.movement) {
+    if (!this.actor || !canvas.ready || !game.ready) return;
+    if (reset === true) {
+      for (const movement in this.actor.system.movement) {
         this.actor.system.movement[movement].available = this.actor.system.movement[movement].value;
       }
-    } 
+    }
     else {
-      if(this.movementHistory.length === 0 || this.movementHistory.every(w => w.action === "walk")) return;
-      this.actor.system.registerSpentMovement(this.object!);
+      if (this.movementHistory.length === 0 || this.movementHistory.every(w => w.action === "walk")) return;
+      this.actor.system.registerSpentMovement(this.objectFromLayer!);
     }
 
-    if(this.actor.sheet?.rendered) {
-      //@ts-expect-error - Outdated types
-      this.actor.sheet.render({ force: true });
+    if (this.actor.sheet?.rendered && !this.actor.sheet.minimized) {
+      this.debouncedRender?.();
     }
     //@ts-expect-error - Outdated types
-    if(ui.hotbar.token === this.object) {
+    if (ui.hotbar.token === this.objectFromLayer) {
       //@ts-expect-error - Outdated types
-      ui.hotbar.updateFooterMovement();  
+      ui.hotbar.updateFooterMovement();
+    }
+  }
+
+  waiting = false;
+  async renderActorSheet(): Promise<void> {
+    if (this.waiting) return;
+    if (this.objectFromLayer && this.objectFromLayer?.movementAnimationPromise !== null) {
+      this.waiting = true;
+      await this.objectFromLayer.movementAnimationPromise;
+      this.waiting = false;
+    }
+
+    if (this.actor?.sheet?.rendered && !this.actor.sheet.minimized) {
+      //@ts-expect-error - Outdated types
+      this.actor.sheet.render({ force: true });
     }
   }
 
   /**
    * Whenever the token's actor delta changes, or the base actor changes, perform associated refreshes.
-   * @param {object} [update]                               The update delta.
+   * @param {object|object[]} [update]                               The update delta.
    * @param {Partial<DatabaseUpdateOperation>} [operation]  The database operation that was performed
    * @protected
    */
@@ -186,7 +206,7 @@ class TokenDocumentPTR2e<TParent extends ScenePTR2e | null = ScenePTR2e | null> 
   }
 
   /** Set a TokenData instance's dimensions from actor data. Static so actors can use for their prototypes */
-  static prepareSize(token: TokenDocumentPTR2e, {linkToActorSize = !!token.flags.ptr2e.linkToActorSize, autoscale = !!token.flags.ptr2e.autoscale}: {linkToActorSize?: boolean, autoscale?: boolean} = {}): {width: number; height: number, scaleX: number, scaleY: number} | null {
+  static prepareSize(token: TokenDocumentPTR2e, { linkToActorSize = !!token.flags.ptr2e.linkToActorSize, autoscale = !!token.flags.ptr2e.autoscale }: { linkToActorSize?: boolean, autoscale?: boolean } = {}): { width: number; height: number, scaleX: number, scaleY: number } | null {
     const actor = token.actor;
     if (!(actor && linkToActorSize)) return null;
 
@@ -199,7 +219,7 @@ class TokenDocumentPTR2e<TParent extends ScenePTR2e | null = ScenePTR2e | null> 
       scaleY: token.texture.scaleY,
     }
 
-    if(token.width !== size.width || token.height !== size.length) {
+    if (token.width !== size.width || token.height !== size.length) {
       result.width = size.width;
       result.height = size.length;
     }
@@ -245,13 +265,13 @@ class TokenDocumentPTR2e<TParent extends ScenePTR2e | null = ScenePTR2e | null> 
 
   //@ts-expect-error - Outdated types
   override async move(waypoints, options = {}): Promise<boolean> {
-    if ( !Array.isArray(waypoints) ) waypoints = [waypoints];
+    if (!Array.isArray(waypoints)) waypoints = [waypoints];
 
     const size = TokenDocumentPTR2e.prepareSize(this);
-    if(size) {
+    if (size) {
       const { width, height } = size;
-      for(const waypoint of waypoints) {
-        if(waypoint.width !== width || waypoint.height !== height) {
+      for (const waypoint of waypoints) {
+        if (waypoint.width !== width || waypoint.height !== height) {
           waypoint.width = width;
           waypoint.height = height;
         }
@@ -270,30 +290,30 @@ class TokenDocumentPTR2e<TParent extends ScenePTR2e | null = ScenePTR2e | null> 
       autoscale: !!this.flags.ptr2e.autoscale,
       linkToActorSize: !!this.flags.ptr2e.linkToActorSize,
     }
-    if('flags' in changed && typeof changed.flags === "object" && changed.flags && 'ptr2e' in changed.flags && typeof changed.flags.ptr2e === "object" && changed.flags.ptr2e) {
-      if('autoscale' in changed.flags.ptr2e) {
+    if ('flags' in changed && typeof changed.flags === "object" && changed.flags && 'ptr2e' in changed.flags && typeof changed.flags.ptr2e === "object" && changed.flags.ptr2e) {
+      if ('autoscale' in changed.flags.ptr2e) {
         options.autoscale = !!changed.flags.ptr2e.autoscale;
       }
-      if('linkToActorSize' in changed.flags.ptr2e) {
+      if ('linkToActorSize' in changed.flags.ptr2e) {
         options.linkToActorSize = !!changed.flags.ptr2e.linkToActorSize;
       }
     }
 
     const size = TokenDocumentPTR2e.prepareSize(this, flags);
-    if(size) {
-      const {scaleX, scaleY} = size
+    if (size) {
+      const { scaleX, scaleY } = size
       if (scaleX !== this.texture.scaleX || scaleY !== this.texture.scaleY) {
         changed.texture = changed.texture || {};
-        (changed.texture as {scaleX: number}).scaleX = scaleX;
-        (changed.texture as {scaleY: number}).scaleY = scaleY;
+        (changed.texture as { scaleX: number }).scaleX = scaleX;
+        (changed.texture as { scaleY: number }).scaleY = scaleY;
       }
     }
   }
 
   protected override _preDelete(options: DocumentModificationContext<TParent>, user: User): Promise<boolean | void> {
-    if(this.actor) {
-      if(this.actor.statuses.has("stuck")) {
-        ui.notifications.warn("PTR2E.TokenDeleteWarning", {localize: true})
+    if (this.actor) {
+      if (this.actor.statuses.has("stuck")) {
+        ui.notifications.warn("PTR2E.TokenDeleteWarning", { localize: true })
         return Promise.resolve(false);
       }
     }

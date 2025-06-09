@@ -4,8 +4,7 @@
   "folder": "zrVtKATNxzLNxTUe",
   "system": {
     "prerequisites": [
-      "#A Flight Movement Allowance",
-      "#Flying 20 + 10 x (# of Improved Flight Perks already obtained)"
+      "#A Flight Movement Allowance"
     ],
     "cost": 1,
     "description": "<p>Improve your Flight Movement Allowance by 2.</p>",
@@ -33,7 +32,9 @@
       }
     ],
     "slug": "improved-flight",
-    "traits": [],
+    "traits": [
+      "minor-buff"
+    ],
     "_migration": {
       "version": null,
       "previous": null
@@ -256,6 +257,12 @@
             "mode": 2,
             "priority": null,
             "ignored": false
+          },
+          {
+            "type": "roll-option",
+            "value": "improved-flight",
+            "domain": "all",
+            "count": true
           }
         ],
         "slug": null,
