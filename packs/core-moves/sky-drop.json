@@ -6,13 +6,14 @@
     "slug": "sky-drop",
     "actions": [
       {
-        "slug": "sky-drop",
-        "name": "Sky Drop",
+        "slug": "sky-drop-resolution",
+        "name": "Sky Drop (Resolution)",
         "type": "attack",
         "traits": [
           "set-up",
           "defensive",
-          "trap",
+          "grapple",
+          "danger-close",
           "crushing",
           "contact",
           "pp-updated"
@@ -24,20 +25,50 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 4
+          "powerPoints": 2,
+          "cost": "The user used Sky Drop (Set-Up) as their last Action, and they are still Grappling the target."
         },
         "category": "physical",
         "power": 60,
+        "accuracy": "",
+        "types": [
+          "flying"
+        ],
+        "description": "<p>Trigger: The user used Sky Drop (Set-Up) as their last Action, and they are still Grappling the target.</p><p>Effect: The user freely Moves up to their Overland or Flying Score to the ground, inflicting @Affliction[grounded 5].</p>",
+        "img": "icons/svg/explosion.svg",
+        "predicate": []
+      },
+      {
+        "slug": "sky-drop-set-up",
+        "name": "Sky Drop (Set-Up)",
+        "type": "attack",
+        "traits": [
+          "set-up",
+          "defensive",
+          "priority-3",
+          "contact",
+          "pp-updated"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 3
+        },
+        "category": "status",
         "accuracy": 100,
         "types": [
           "flying"
         ],
-        "description": "<p>Effect: Set-Up: The user @Affliction[grapple]s the target and freely moves themself and the target up to the user's Overland or Flight Score into the air, and ends their Activation. While in this state, both have +4 EVA Stages.</p><p>Resolution: On the user's next Activation, the user freely Moves up to their Overland or Flying Score and slams the target to the ground, inflicting @Affliction[grounded] 5 and resolving this attack's damage. Creatures WC 12 or higher are unaffected by Sky Drop.</p>",
+        "description": "<p>Effect: On hit, the user automatically succeeds on a @Affliction[grapple] Check against the target and freely moves itself and the target up to the user's Overland or Flight Score into the air, with both creatures remaining in the air. The user and the target each gain +3 EVA Stages for 2 Activations, and the user gains +20 to opposed Grapple checks for 2 Activations.</p><p>Restriction: This Attack fails after Grappling if the target is WC 12 or higher, and the user cannot use Sky Drop (Resolution).</p>",
         "img": "icons/svg/explosion.svg",
         "predicate": []
       }
     ],
-    "grade": "B",
+    "grade": "C",
     "publication": {
       "source": "PTR 2e Core",
       "authors": [

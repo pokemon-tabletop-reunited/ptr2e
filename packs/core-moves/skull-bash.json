@@ -25,7 +25,8 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 2
+          "powerPoints": 2,
+          "trigger": "The user used Skull Bash (Set-Up) as their last Action."
         },
         "category": "physical",
         "power": 130,
@@ -33,14 +34,14 @@
         "types": [
           "normal"
         ],
-        "description": "<p>Effect: The user freely Moves up to the Movement Score of their choice before attacking with this Attack.</p>",
+        "description": "<p>Trigger: The user used Skull Bash (Set-Up) as their last Action.</p><p>Effect: The user freely Moves up to the Movement Score of their choice before attacking with this Attack.</p>",
         "img": "systems/ptr2e/img/svg/normal_icon.svg",
         "predicate": []
       },
       {
         "name": "Skull Bash (Set-Up)",
         "slug": "skull-bash-set-up",
-        "description": "<p>Effect: The user gains @Affliction[braced 1] and +1 DEF Stage for 5 Activations.</p>",
+        "description": "<p>Effect: The user gains @Affliction[braced 2] and +1 DEF Stage for 5 Activations.</p>",
         "traits": [
           "set-up",
           "defensive"
