@@ -358,6 +358,12 @@ declare global {
         /** Draw the overlay effect icon */
         protected _drawOverlay({ src, tint }?: { src?: string; tint?: number }): Promise<void>;
 
+        /**
+         * Refresh the display of status effects, adjusting their position for the token width and height.
+         * @protected
+         */
+        _refreshEffects(): void;
+
         /** Draw a status effect icon */
         protected _drawEffect(
             src: ImageFilePath,
