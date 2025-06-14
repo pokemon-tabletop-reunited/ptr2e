@@ -9,6 +9,7 @@ import { DataUnionField } from "../fields/data-union-field.ts";
 import { StrictStringField } from "../fields/strict-primitive-fields.ts";
 import { HabitatRollTable } from "@system/habitat-table.ts";
 import { GeneratorConfig } from "./generator-config.ts";
+import { addDataFieldMigration } from "@utils";
 
 class Blueprint extends foundry.abstract.DataModel {
   static LOCALIZATION_PREFIXES = ["PTR2E.Blueprint"];
@@ -58,7 +59,12 @@ class Blueprint extends foundry.abstract.DataModel {
       }),
       shiny: new fields.NumberField({
         required: true,
-        initial: 1,
+        initial: () => {
+          if(game?.settings) {
+            return game.settings.get("ptr2e", "defaults.blueprint.shiny") ?? 1;
+          }
+          return 1;
+        },
         nullable: false,
         min: 0,
         max: 100,
@@ -67,7 +73,17 @@ class Blueprint extends foundry.abstract.DataModel {
         hint: "PTR2E.Blueprint.FIELDS.shiny.hint"
       }),
       level: new fields.StringField({
-        required: true, initial: null, nullable: true, trim: true, blank: false, validate: (value) => {
+        required: true, 
+        initial: () => {
+          if(game?.settings) {
+            return game.settings.get("ptr2e", "defaults.blueprint.level") || null;
+          }
+          return null;
+        }, 
+        nullable: true, 
+        trim: true, 
+        blank: false, 
+        validate: (value) => {
           // Level can be either a integer value, a range in the format `a-b`, a Rolltable UUID or null
           if (value === null) return true;
 
@@ -95,12 +111,18 @@ class Blueprint extends foundry.abstract.DataModel {
           }
 
           return false;
-        }, validationError: "The level must be a positive integer, a range in the format `a-b`, a Rolltable UUID or null.",
+        }, 
+        validationError: "The level must be a positive integer, a range in the format `a-b`, a Rolltable UUID or null.",
         label: "PTR2E.Blueprint.FIELDS.level.label",
         hint: "PTR2E.Blueprint.FIELDS.level.hint"
       }),
       nature: new fields.StringField({
-        required: true, initial: null, nullable: true, blank: false, trim: true, validate: (value) => {
+        required: true, initial: () => {
+          if(game?.settings) {
+            return game.settings.get("ptr2e", "defaults.blueprint.nature") || null;
+          }
+          return null;
+        }, nullable: true, blank: false, trim: true, validate: (value) => {
           //Natures can either be a valid nature typed out, a UUID to a Rolltable or null
           if (value === null) return true;
           if (typeof value !== "string") return false;
@@ -122,7 +144,12 @@ class Blueprint extends foundry.abstract.DataModel {
         hint: "PTR2E.Blueprint.FIELDS.nature.hint"
       }),
       gender: new fields.StringField({
-        required: true, initial: null, nullable: true, trim: true, blank: false, choices: ["random", "male", "female", "genderless"].reduce((acc, val) => ({ ...acc, [val]: val }), {}),
+        required: true, initial: () => {
+          if(game?.settings) {
+            return game.settings.get("ptr2e", "defaults.blueprint.gender") || null;
+          }
+          return null;
+        }, nullable: true, trim: true, blank: false, choices: ["random", "male", "female", "genderless"].reduce((acc, val) => ({ ...acc, [val]: val }), {}),
         label: "PTR2E.Blueprint.FIELDS.gender.label",
         hint: "PTR2E.Blueprint.FIELDS.gender.hint"
       }),
@@ -173,7 +200,18 @@ class Blueprint extends foundry.abstract.DataModel {
           chance: new fields.NumberField({ required: false, nullable: false, initial: 50, min: 0, max: 100, validationError: "The chance must be a positive integer between 0 and 100." }),
         }), { required: true, initial: [], label: "PTR2E.FIELDS.abilities.master.label", },),
       }),
-      config: new fields.EmbeddedDataField(GeneratorConfig, { required: true, nullable: true, initial: null }),
+      _config: new fields.EmbeddedDataField(GeneratorConfig, { required: true, nullable: true, initial: () => {
+        if(game?.settings) {
+          const setting = game.settings.get("ptr2e", "defaults.blueprint.perk") || null;
+          if(!setting) return null;
+          const configs = game.settings.get("ptr2e", "global-perk-configs");
+          const exists = configs.find(c => c.id === setting || c.label === setting);
+          if(exists) {
+            return fu.duplicate(exists);
+          }
+        }
+        return null;
+      }}),
       owner: new fields.BooleanField({ required: true, initial: false, nullable: false, label: "PTR2E.FIELDS.owner.label", hint: "PTR2E.FIELDS.owner.hint" }),
       sort: new fields.NumberField({ required: true, initial: 0, nullable: false }),
       preventEvolution: new fields.BooleanField({ required: true, initial: false, nullable: false, label: "PTR2E.FIELDS.preventEvolution.label", hint: "PTR2E.FIELDS.preventEvolution.hint" }),
@@ -185,9 +223,29 @@ class Blueprint extends foundry.abstract.DataModel {
     }
   }
 
-  prepareBaseData(): void {
-    console.log("intellisense func")
+  get config() {
+    const config = this._config
+    if (!config) return config;
+    if (!config.link) return config;
+    if (!config.id) {
+      config.link = false;
+      return config;
+    };
 
+    const configs = game.settings.get("ptr2e", "global-perk-configs");
+    const exists = configs.find(c => c.id === config.id);
+    if (exists) {
+      return new GeneratorConfig(fu.duplicate(exists), { parent: this });
+    }
+    return config;
+  }
+
+  static override migrateData(source: Record<string, unknown>) {
+    if ('config' in source && source.config != null && typeof source.config === "string") {
+      source.config = null;
+    }
+    addDataFieldMigration(source, "config", "_config")
+    return super.migrateData(source);
   }
 
   preparedAsyncData = false;
@@ -243,7 +301,7 @@ interface BlueprintSchema extends foundry.data.fields.DataSchema {
   preventEvolution: foundry.data.fields.BooleanField<boolean, boolean, true, false, true>;
   shiny: foundry.data.fields.NumberField<number, number, true, false, true>;
   gender: foundry.data.fields.StringField<"random" | "male" | "female" | "genderless", "random" | "male" | "female" | "genderless", true, false, true>;
-  config: foundry.data.fields.EmbeddedDataField<GeneratorConfig, true, true, true>;
+  _config: foundry.data.fields.EmbeddedDataField<GeneratorConfig, true, true, true>;
 }
 
 interface EVSSchema extends foundry.data.fields.DataSchema {

@@ -23,7 +23,69 @@
   "ITEM.DeleteButton": "Delete",
   "SETTINGS.TutorList": "Manage Tutor Lists",
   "SETTINGS.Github": "Manage Github PR",
+  "SETTINGS.GlobalPerkConfig": "Perk Generator Configs",
+  "DOCUMENT.ImportDataErrorType": "The imported data is not of the correct type. Looking for {type}, but got {got}.",
+  "DOCUMENT.ImportDataErrorParse": "An error occurred while parsing the imported data. Please ensure it is valid JSON.",
   "PTR2E": {
+    "BrowserSettingsSaved": "Settings have been saved",
+    "Keybindings": {
+      "PerkEditModeDelete": {
+        "Name": "Perk Web (Edit Mode) Delete",
+        "Hint": "Delete the selected Perk from the Perk Web"
+      },
+      "PerkZoomIn": {
+        "Name": "Perk Zoom In",
+        "Hint": "Zoom in the Perk Web"
+      },
+      "PerkZoomOut": {
+        "Name": "Perk Zoom Out",
+        "Hint": "Zoom out the Perk Web"
+      },
+      "PanUp": {
+        "Name": "Move / Pan Up",
+        "Hint": "Pan the Perk Web up"
+      },
+      "PanDown": {
+        "Name": "Move / Pan Down",
+        "Hint": "Pan the Perk Web down"
+      },
+      "PanLeft": {
+        "Name": "Move / Pan Left",
+        "Hint": "Pan the Perk Web left"
+      },
+      "PanRight": {
+        "Name": "Move / Pan Right",
+        "Hint": "Pan the Perk Web right"
+      },
+      "PanUpLeft": {
+        "Name": "Move / Pan Up-Left",
+        "Hint": "Pan the Perk Web up-left"
+      },
+      "PanUpRight": {
+        "Name": "Move / Pan Up-Right",
+        "Hint": "Pan the Perk Web up-right"
+      },
+      "PanDownLeft": {
+        "Name": "Move / Pan Down-Left",
+        "Hint": "Pan the Perk Web down-left"
+      },
+      "PanDownRight": {
+        "Name": "Move / Pan Down-Right",
+        "Hint": "Pan the Perk Web down-right"
+      }
+    },
+    "TokenMovement": {
+      "SelectType": "Select Movement Type",
+      "Actions": {
+        "Overland": "Overland",
+        "Burrow": "Burrowing",
+        "Swim": "Swiming",
+        "Flight": "Flying",
+        "Threaded": "Threaded",
+        "Teleport": "Teleport",
+        "Free": "Forced Movement"
+      }
+    },
     "DynamicTableRefresh": "Reset Dynamic Table Cache",
     "DynamicTableCopy": "Copy Dynamic Table",
     "Rename": "Rename",
@@ -108,7 +170,7 @@
           "hint": "Label for this Configuration when shown in the Global Configs list."
         },
         "link": {
-          "label": "Sync with Global Config?",
+          "label": "Linked",
           "hint": "Should this configuration's settings be synchronized with its version in the Global Configuration?"
         },
         "priorities": {
@@ -130,13 +192,31 @@
             "perk": "Perk"
           }
         }
+      },
+      "Global": {
+        "Delete": {
+          "Title": "Delete config: {name}", 
+          "Content": "Are you sure you wish to delete config: {name}?"
+        }
       }
     },
     "CompendiumBrowser": {
       "Title": "Compendium Browser",
+      "SettingsTitle": "Compendium Browser Settings",
       "SearchPlaceholder": "Search for items...",
       "SortByLabel": "Sort By",
       "ClearFilters": "Clear Filters",
+      "OpenSettings": "Open Settings",
+      "Purchase": {
+        "NotControlledToken": "Please make sure to select a token you control or make sure you have a Player Character set on your User.",
+        "ItemNotFound": "Oops. We could not load the item to purchase.",
+        "NoCost": "This item doesn't have an IP cost so cannot be purchased.",
+        "NotEnoughIP": "You do not have enough IP to purchase this item. (Required: {required}, Current: {current})",
+        "Success": "{actor} successfully purchased {item} for {cost} IP. (Remaining IP: {remaining})",
+        "RarityWarning": "Items of higher rarity than 'Common' are normally not obtainable through IP!",
+        "NoGrade": "This item doesn't have a grade so cannot be purchased.",
+        "GradeNotAllowed": "Your Character's Grade ({char}) is too low to purchase an item of {grade} Grade with IP."
+      },
       "FilterConjunction": {
         "AndLabel": "And",
         "OrLabel": "Or"
@@ -146,7 +226,10 @@
         "Gear": "Gear",
         "Move": "Moves",
         "Perk": "Perks",
-        "Species": "Species"
+        "Species": "Species",
+        "Traits": "Traits",
+        "Sources": "Sources",
+        "Packs": "Packs"
       },
       "Filters": {
         "Type": "Item Subtype",
@@ -170,14 +253,29 @@
         "LevelUpMoves": "Level Up Moves",
         "TutorMoves": "Tutor Moves",
         "Abilities": "Abilities",
+        "Source": "Source",
+        "Archetypes": "Archetypes",
         "Sort": {
           "Name": "Name",
-          "Number": "Number"
+          "Number": "Number",
+          "Cost": "Cost",
+          "Rarity": "Rarity",
+          "Grade": "Grade"
+        },
+        "TraitType": {
+          "Label": "Trait Type",
+          "Untyped": "Untyped",
+          "Automated": "Automated",
+          "Narrative": "Narrative"
         },
         "LoadSpeciesImages": {
           "Label": "Load Species Images",
           "No": "No",
           "Yes": "Yes (Will slow down loading)"
+        },
+        "ShowOnlyOnWeb": {
+          "Label": "Hide Perks not on (Global) Web",
+          "Yes": "Yes"
         },
         "ActionCost": {
           "Label": "Activation Cost",
@@ -213,7 +311,8 @@
         }
       },
       "title": "EXP / Venture Tracker",
-      "hint": "Open EXP / Venture Tracker"
+      "hint": "Open EXP / Venture Tracker",
+      "NoPermission": "Currently only GMs can use this application."
     },
     "CircumstanceModifiers": {
       "CustomEntry": {
@@ -381,7 +480,12 @@
       "SkillLabel": "Skill",
       "YesLabel": "Yes",
       "NoSelectionMade": "No selection was made, aborting.",
-      "NoValidOptions": "There are no valid options to choose from, aborting."
+      "NoValidOptions": "There are no valid options to choose from, aborting.",
+      "DropItemError": "You must drop an Item here.",
+      "DropItemNotAllowed": "{badType} cannot be dropped here (must be {goodType})",
+      "MinorBuffPrompt": "Select which<br>[Minor Buff] Perk<br>you wish to obtain",
+      "MinorBuffDrop": "Perk with [Minor Buff] Trait",
+      "ImprovedMovementPrompt": "Select which Movement<br>you wish to increase"
     },
     "AttackWarning": {
       "FlingItemConsumed": "Reduced the quantity of the flung {name} by 1 (new total: {quantity}).",
@@ -390,8 +494,10 @@
       "NotEnoughPP": "Unable to spend {cost} power points. You only have {current}.",
       "UnableToAct": "{action} Failed! ",
       "FlingTargetNotAllyOrGrappled": "Fling 'Actor-Toss' can only target allies or grappled enemies.",
-      "CannotCaptureTarget": "Oops! This target is not capturable!"
+      "CannotCaptureTarget": "Oops! This target is not capturable!",
+      "NoValidTargets": "Make sure you are targeting a token before using this action!"
     },
+    "TokenDeleteWarning": "You cannot delete Tokens that are Stuck!",
     "DataInspector": {
       "DataButton": "Data",
       "Instructions": "<p>The Data Inspector for Documents will show you all the available fields based on the <em>Mode</em> you have selected, most modes show the data located in the `system` property.</p><p>Left click to expand an entry.</p><p>Right click a <em>key</em> to copy path to clipboard,</p><p>right click a <em>value</em> to copy that value to clipboard.</p><br><p>The Data Inspector for Chat Messages will show you info about the rolls in those messages</p><p>Right click a <em>domain</em> or <em>option</em> to copy that value to clipboard.</p>",
@@ -577,6 +683,7 @@
       "size": "Size Accuracy Modifier"
     },
     "Effect": {
+      "IncrementClock": "<p>{clock} has been incremented by {value} <span style='font-size: var(--font-size-12); white-space: nowrap;'>(total: {total})</span></p><blockquote><i>Effect: [{effect}] has been deleted due to not having any other Changes to resolve.</i></blockquote>",
       "Immune": "{target} is Immune to {effect}. No effect was applied.",
       "FIELDS": {
         "ChangeType": {
@@ -601,7 +708,9 @@
           "token-alterations": "Token Alteration",
           "stats-alteration": "Stats Alteration",
           "aura": "Aura",
-          "token-tag": "Token Tag"
+          "token-tag": "Token Tag",
+          "create-clock": "Create Clock",
+          "increment-clock": "Increment Clock"
         },
         "ChangeLabel": {
           "label": "Label",
@@ -642,6 +751,9 @@
             "notAnItemUuid": "UUID must be a valid Item UUID.",
             "itemNotFound": "Failed to find an Item with UUID \"{uuid}\"."
           }
+        },
+        "ChangeId": {
+          "invalid": "The ID must be a valid alphanumeric string of exactly 16 characters."
         },
         "ChangeChance": {
           "label": "Chance",
@@ -696,6 +808,9 @@
         },
         "ChangeTrait": {
           "label": "Trait"
+        },
+        "DontMerge": {
+          "label": "Don't merge chances"
         },
         "priority": {
           "label": "Priority",
@@ -844,6 +959,7 @@
           "leech": "Leech",
           "rebound": "Rebound",
           "ringed": "Ringed",
+          "bleed": "Bleed",
           "enraged": "Enraged",
           "charmed": "Charmed",
           "taunted": "Taunted",
@@ -877,7 +993,7 @@
           "confused": "At the end of the afflicted creature's Activations, it has a 50% chance of using Fumble.",
           "hyper-mode": "While afflicted with Hyper Mode, the afflicted creature gains +20% to all of its Movement Scores, while dealing and taking 15% more damage. As well, the user’s Shadow-Type attacks gain [Crit 2], or have their [Crit X] value increase by +2. At the start of the afflicted creature’s Activations, it has:<ul><li>a 40% chance to act normally on that Activation.</li><li>a 25% chance to be Choice-Locked 1 to Shadow-Type attacks.</li><li>a 15% chance of ending its Activation and using Fumble.</li><li>a 15% chance of using Backlash.</li><li>a 5% chance to be cured of Hyper Mode.</li></ul>",
           "weary": "While a creature is Weary, its default ACC and EVA Stages are based on its Weary value, X. Specifically, the default ACC and EVA Stages are set to the negative sum of all X and all integers between 0 and X (Weary 1 sets the defaults to -1, 2 to -3, and 3 to -6). Weary is automatically increased by 1 when a creature Faints. When a creature has 4 or more Weary, it is unable to battle until they reduce their Weary. Weary cannot wear off on its own - a creature must deliberately Rest or consume Items such as Apples to remove Stacks of Weary.",
-          "exposed": "While a creature is Exposed, it cannot remove Weary by Resting.",
+          "exposed": "While a creature is Exposed, it cannot remove Weary.",
           "blinded": "The afflicted creature is unable to see, ocularly. The creature has their \"seeing-based\" vision options disabled (standard vision, Darkvision, X-Ray Vision, etc.) and can only perceive using their other senses (as listed in their Traits). If they do not have a way to see, or have someone guiding them, they are unable to target other creatures with Attacks or Actions.",
           "stuck": "While afflicted with Stuck, creatures may not leave the combat area. If the afflicted creature is an owned Pokemon, it cannot willingly switch out (or be switched out by another party). When a creature with the [Trainer] or [Ace] trait would gain Stuck; they instead gain Slowed X, rather than Stuck X.",
           "bound": "The afflicted creature cannot willingly use any Movement. Stacks of Bound do not decrease at the end of a creature's Activation, instead the effect that applied Bound will provide a way of removing the Bound Affliction.",
@@ -900,13 +1016,13 @@
           "engulfed": "While a creature is afflicted with Engulfed, it is also considered to be Bound and Stuck. While Engulfed the afflicted creature cannot be targeted by Attacks, and it can only target the creature that has Engulfed it with Attacks, although these Attacks are resisted by two steps.",
           "curled": "while Curled, a creature cannot use Held Items and has +1 default DEF Stage. Additionally, moves with the [Curl] Trait have their Power doubled while their user is Curled.",
           "chanted": "If an attack were to deal critical damage to a creature with Chanted, the attack instead deals damage as if it were not a Critical Hit.",
-          "choice-locked": "While Choice-Locked, a creature may only use the last attack or action it used. A creature with the Choice-Locked affliction cannot gain further stacks of Choice-Locked in any way.",
+          "choice-locked": "While Choice-Locked, a creature may only use the last attack or action it used. A creature with the Choice-Locked affliction cannot gain further stacks of Choice-Locked in any way. Choice-Locked ends in the event you are unable to perform the choice-locked action.",
           "grounded": "While Grounded, creatures become unable to use their [Flight] movement, nor can they be Lifted or Raised and have those effects removed.",
           "cursed": "While Cursed, an afflicted creature loses three ticks of HP at the end of each of their Activations.",
-          "true-sight": "The afflicted creature ignores invisibility and illusions.",
+          "true-sight": "<p>The afflicted creature ignores invisibility and illusions.</p><p>Additionally, the user's Normal- and Fighting-Type attacks can hit Ghost-Type creatures, and the user's Ghost-Type attacks can hit Normal-Type creatures.</p>",
           "shrink": "The afflicted creature’s Size Category is reduced by one.",
           "enlarge": "The afflicted creature’s Size Category is increased by one.",
-          "marked": "While Marked, all creatures unallied to the afflicted creature and within 8m of it can only target the Marked creature with their attacks. Whenever the creature with Marked is hit by an Attack, reduce the Stack Value of its Marked by 1.",
+          "marked": "While Marked, all creatures unallied to the afflicted creature and within 8m of it can only target the Marked creature with their attacks. Whenever the creature with Marked is hit by an Attack, reduce the Stack Value of its Marked by 1. A creature that starts or enters the Marked creature's range at any point during their Activation must from that moment on target the Marked creature with any attacks they make, even when leaving the 8m range of the Marked effect.",
           "unlucky": "While Unlucky, a creature cannot utilize its Luck.",
           "perish": "When a creature’s Perish count hits 0, the creature's HP is set to 0. Humans and ‘Ace’ creatures gain Weary 1 instead of losing HP when their Perish count is 0. The Perish Affliction is removed if a creature is switched out or leaves combat.",
           "invisible": "The afflicted creature vanishes from sight, and cannot be detected by sight based vision or targeted by Attacks. In addition, the creature has +4 default EVA Stages. Invisible ends when the creature uses an Attack, is hit by an Attack, by using a Free Action to end Invisible, or by the end conditions of the effect that granted Invisible. Any creature can perform an Intense Spot Check to ignore the effects of Invisible.",
@@ -915,14 +1031,15 @@
           "stockpile": "The default stages for DEF and SPDEF are increased by +1 for each Stack of Stockpile it possesses. Stockpile can have up to 3 Stacks.",
           "leech": "The afflicted creature loses two Ticks of HP at the end of each of their Activations and the Source that applied Leech gains HP equal to the amount the afflicted creature lost.",
           "rebound": "Damage inflicted on the afflicted creature by Physical- or Special-Category attactks deals ¼ of the inflicted damage on the attacking creature.",
-          "ringed": "When a creature with Ringed concludes an Activation, they heal a Tick of HP, with additional effects from appropriate weathers/terrains as described by the effect that granted Ringed.",
+          "ringed": "When a creature with Ringed concludes an Activation, they heal a Tick of HP.",
+          "bleed": "When a creature with Bleed concludes an Activation, they lose a Tick of HP.",
           "enraged": "A creature may only use Physical- or Special-Category moves while it is Enraged.",
           "charmed": "The afflicted creature believes the source of Infatuation is a dear friend or romantic interest. Afflicted creatures have a 50% chance of being unable to target the source of their infatuation with an attack, and have -2 EVA Stages against attacks from the source of their infatuation.",
           "taunted": "The afflicted creature does 33% less damage to creatures other than the source of Taunted. The afflicted creature cannot use Status-category attacks for the duration of Taunted.",
-          "grapple": "The afflicted creature possesses -1 default ACC and EVA and may only take Actions with the [Grapple] trait. Creatures that are not in control of a Grapple are also Bound. A creature in control of the Grapple can take a Free Action on their turn to end their participation in Grapple. The creature in control of the Grapple is treated as having the non-in-control creature(s) as being Mounted on itself.<br>If an afflicted creature is the only participant of a Grapple, they lose this Affliction.",
-          "boosted": "An afflicted creature gains +1 default ATK and SPATK Stages.",
-          "resolved": "An afflicted creature gains +1 default DEF and SPDEF Stages.",
-          "rapid": "A creature afflicted with Rapid may perform Complex Actions as Simple Actions OR [Exhaust] Actions are performed as though they lack the Trait OR [Set Up] Actions set up and resolve on the same activation, spending 50% more PP on all Actions (minimum +2). The creature has its Initiative delayed by 50% after its Activation and loses -1 EVA Stages for 3 Activations.",
+          "grapple": "The afflicted creature possesses -1 default ACC and EVA and may only take Actions with the [Grapple] trait. Creatures that are not in control of a Grapple are also Bound. A creature in control of the Grapple can take a Free Action on their turn to end their participation in Grapple. The creature in control of the Grapple is treated as having the non-in-control creature(s) as being Mounted on itself.<br>If an afflicted creature is the only participant of a Grapple, they lose this Affliction. Hostile actions made whilst Grappled must target a participant of the Grapple.",
+          "boosted": "An afflicted creature has the Power of its Physical- and Special-Category Attacks increase by 20%.",
+          "resolved": "An afflicted creature takes 20% less damage from Physical- and Special-Category Attacks.",
+          "rapid": "A creature afflicted with Rapid may perform [Exhaust] Actions as though they lack the Trait AND resolve [Set Up] Actions on the same activation they are set up.",
           "strong": "While afflicted with Strong, the Power of the creature's Attacks are increased by +20% and has its Initiative delayed by 20% after its Activation.",
           "agile": "While afflicted with Agile, Power of the creature's Attacks are decreased by -20% and has its Initiative advanced by 20% after its Activation.",
           "precise": "While afflicted with Precise, the creature has +1 default ACC and has its Initiative delayed by 20% after its Activation.",
@@ -1009,6 +1126,15 @@
           "toggleHidden": "Toggle Hidden Skills",
           "editSkills": "Open Skills Editor",
           "luckRoll": "Roll 'End of Day' Luck Check"
+        },
+        "gender": {
+          "label": "Gender",
+          "male": "Male",
+          "female": "Female",
+          "genderless": "Genderless"
+        },
+        "shiny": {
+          "label": "Shiny"
         }
       }
     },
@@ -1054,6 +1180,7 @@
       "PartySheet": "Open Party Sheet",
       "OpenDex": "Open Dex",
       "Dex": "Dex",
+      "Sync": "Sync Item Data",
       "DexSync": "Sync Dex",
       "DexSyncPrompt": {
         "Title": "Synchronize Dex",
@@ -1064,6 +1191,14 @@
       "Tools": "Tools",
       "HeightWeight": "Height & Weight",
       "CarryType": "Change Carry Type",
+      "Temporary": {
+        "Active": "This item <u>was</u> created using IP.<br>Click to toggle.",
+        "Inactive": "This item was <u>not</u> created with IP.<br>Click to toggle."
+      },
+      "ResetIP": {
+        "title": "Reset IP for {name}?",
+        "content": "Are you sure you wish to reset your IP to the Max, and delete all Temporary Consumables on this actor?"
+      },
       "Tabs": {
         "overview": {
           "label": "Overview"
@@ -1103,11 +1238,12 @@
         }
       },
       "CreateItem": "Create Item",
+      "Browse": "Search in Compendium Browser",
       "KnownAttacks": {
         "hint": "Drag & Drop moves onto the actor / known attack sheet to add them as available options.<br><br>Drag & Drop from the Known Attack's sheet onto the Actor's Attack Slots to assign moves to the slots!"
       },
       "AvailableAbilities": {
-        "hint": "Drag & Drop abilities onto the actor / available ability sheet to add them as available options.<br><br>Drag & Drop from the Available Abilities's sheet onto the Actor's Ability Slots to assign abilities to the slots!<br><br>You gain an Ability Slot at level 20, 50 and 80, whenever you gain an ability from your Species it must be slotted into a slot of the same tier or higher (f.e., you cannot put a Master ability in any but the last slot, but you can put a Basic ability in slot 3 (advanced) or 4 (master))<br><br>Meanwhile, any abilities learned through other sources can only ever be fitted in the 2nd or 3rd slots (basic & advanced)"
+        "hint": "Drag & drop abilities onto the Actor sheet or the Available Abilities pop-out window to add them as available options. Then, you drag & drop from the Available Abilities pop-out window into an open Ability Slot to assign abilities to the slots!<br><br>Actors gain additional Ability Slots at level 20, 50 and 80. Whenever you gain an Ability from your Species beyond Starting, it must be slotted in these additional Ability Slots. Starting Abilities may be slotted in any slots (meaning, creatures with one Starting Ability will always have that one slotted in the first slot at all times).<br><br> Additional Abilities learned through other sources (i.e. via Perks and Tutoring) may only ever be slotted in the 2nd through 4th slots."
       },
       "Buttons": {
         "perkWeb": "Open Perk Web"
@@ -1162,7 +1298,8 @@
       "Inventory": {
         "CreateItem": "Create Item",
         "EditItem": "Edit Item",
-        "DeleteItem": "Delete Item"
+        "DeleteItem": "Delete Item",
+        "Grade": "Actor Grade"
       },
       "Unspent": "{num} Unspent",
       "Settings": {
@@ -1214,6 +1351,9 @@
       }
     },
     "Settings": {
+      "Sidebar": {
+        "Header": "PTR 2e System Settings"
+      },
       "DevMode": {
         "Name": "Developer Mode",
         "Hint": "Enable developer mode, this will allow you to commit changes to the Github repository."
@@ -1277,6 +1417,56 @@
           "Name": "Autoscale Tokens",
           "Hint": "Enables auto scaling for smaller tokens."
         }
+      },
+      "ExpandRolls": {
+        "Name": "Auto Expand Rolls",
+        "Hint": "Expand the roll details by default."
+      },
+      "Settings": "Settings",
+      "CompendiumBrowserSources": {
+        "DeleteAllInfo": "All compendium documents will become browseable, including those with empty sources.",
+        "DeleteAllQuestion": "Are you sure you want to reset all settings for included sources?",
+        "DeleteAllTitle": "Reset Settings",
+        "Hint": "Settings to display only entries with specified sources in the compendium browser.",
+        "IgnoreAsGM": "Let GMs ignore filtering and see all entries.",
+        "Name": "Included Sources",
+        "ShowEmptySources": "Do not filter entries with empty sources.",
+        "ShowUnknownSources": "Do not filter entries with unknown sources.",
+        "SourcesListHeader": "Specified Sources"
+      },
+      "CompendiumBrowserPacks": {
+        "Hint": "Settings to exclude packs from loading",
+        "Name": "Compendium Browser Packs"
+      },
+      "Defaults": {
+        "Blueprint": {
+          "Level": {
+            "Name": "Default Blueprint Level",
+            "Hint": "The level must be a positive integer, a range in the format `a-b`, a Rolltable UUID or blank (random)."
+          },
+          "Shiny": {
+            "Name": "Default Blueprint Shiny",
+            "Hint": "The % chance for the Pokémon to be shiny."
+          },
+          "Nature": {
+            "Name": "Default Blueprint Nature",
+            "Hint": "The nature must be a valid nature, a UUID to a Rolltable or blank (random)."
+          },
+          "Gender": {
+            "Name": "Default Blueprint Gender",
+            "Hint": "The gender of the Pokémon, if 'Random' is selected, the species' gender ratio is used."
+          },
+          "Perk": {
+            "Name": "Default Blueprint Perk Config",
+            "Hint": "Label or ID of the globally saved Perk Generator Config."
+          }
+        }
+      },
+      "Preferences": {
+        "MustTarget": {
+          "Name": "Force Targeting before Attack",
+          "Hint": "When Enabled, you will be forced to target any amount of creatures before you can resolve an attack."
+        }
       }
     },
     "SkillsEditor": {
@@ -1286,19 +1476,19 @@
       },
       "ChangeResources": {
         "title": "Change Resources for {name}",
-        "content": "<header style='color: var(--hint-text-color);'><h3 style='color: var(--hint-text-color); margin-bottom: 0; text-align: center; border-bottom: unset;'>Editing Resources</h3><p>this should only be done with explicit GM Permission!</p><p style='text-align: center;'>Current Value: {value}</p></header><content><div class='form-group'><label style='flex-basis: 30%;'>Modify by</label><div class='form-fields'><input style='text-align: center;' type='number' value='0' step='1'/></div></div></content>",
+        "content": "<header style='color: var(--hint-text-color);'><h3 style='color: var(--hint-text-color); margin-bottom: 0; text-align: center; border-bottom: unset;'>Editing Resources</h3><p class='center-text'>This should only be done with explicit GM Permission!</p><p class='center-text'>Current Value: <b>{value}</b></p></header><content><div class='form-group'><label style='flex-basis: 30%;'>Modify by</label><div class='form-fields'><input style='text-align: center;' type='number' value='0' step='1'/></div></div></content>",
         "submit": "Change Resources",
         "warn": "Resource total for {name} cannot drop below 1."
       },
       "ChangeLuck": {
         "title": "Change Luck for {name}",
-        "content": "<header style='color: var(--hint-text-color);'><h3 style='color: var(--hint-text-color); margin-bottom: 0; text-align: center; border-bottom: unset;'>Modifying Luck</h3><p>this should only be done with explicit GM Permission!</p><p style='text-align: center;'>Current Value: {value}</p></header><content><div class='form-group'><label style='flex-basis: 30%;'>Modify by</label><div class='form-fields'><input style='text-align: center;' type='number' value='0' step='1'/></div></div></content>",
+        "content": "<header style='color: var(--hint-text-color);'><h3 style='color: var(--hint-text-color); margin-bottom: 0; text-align: center; border-bottom: unset;'>Modifying Luck</h3><p class='center-text'>This should only be done with explicit GM Permission!</p><p class='center-text'>Current Value: <b>{value}</b></p></header><content><div class='form-group'><label style='flex-basis: 30%;'>Modify by</label><div class='form-fields'><input style='text-align: center;' type='number' value='0' step='1'/></div></div></content>",
         "submit": "Change Luck",
         "warn": "Luck total for {name} cannot drop below 1."
       },
       "RollLuck": {
         "title": "Reroll Luck for {name}",
-        "content": "Are you sure you want to reroll the luck for {name}?<br>This should only be done with <b>explicit permission</b> from the GM!",
+        "content": "<p>Are you sure you want to reroll the luck for {name}?<br>This should only be done with <b>explicit permission</b> from the GM!</p>",
         "roll": "{name}'s Luck Roll!",
         "reroll": "{name} just <b style='color: #aa0200;' data-tooltip-direction='UP' data-tooltip='Rerolling your luck may only be done with explicit permission from the GM!'>Rerolled</b> their Luck!!",
         "result": "The new score of {result} has been applied to their Luck Skill."
@@ -1427,6 +1617,9 @@
         },
         "belt": {
           "label": "Belt Slots"
+        },
+        "backpack": {
+          "label": "Backpack Slots"
         }
       },
       "consumable": {
@@ -1719,7 +1912,7 @@
       "clock": {
         "id": {
           "label": "Clock ID",
-          "hint": "The unique identifier of the clock."
+          "hint": "The unique identifier of the clock. Must be exactly 16 characters long and only contain letters and numbers."
         },
         "label": {
           "label": "Clock Label",
@@ -1739,7 +1932,7 @@
         },
         "private": {
           "label": "Private Clock",
-          "hint": "Whether the clock is private."
+          "hint": "Whether the clock is only visible to GMs."
         }
       },
       "prerequisites": {
@@ -1874,10 +2067,7 @@
       },
       "movement": {
         "primary": {
-          "label": "Primary Movement"
-        },
-        "secondary": {
-          "label": "Secondary Movement"
+          "label": "Movement"
         }
       },
       "powerPoints": {
@@ -2002,6 +2192,24 @@
         "biography": {
           "label": "Biography",
           "hint": "A free form field to store any details about this character."
+        },
+        "device": {
+          "label": "Capture Device",
+          "hint": "The type of Pokéball (/capture device) this Creature is caught in. (this field has no automation associated with it.)"
+        }
+      },
+      "publication": {
+        "source": {
+          "label": "Source",
+          "hint": "What is the source of this data? E.g. Core Dex"
+        },
+        "authors": {
+          "label": "Authors",
+          "hint": "Authors to Credit"
+        },
+        "notes": {
+          "label": "Notes",
+          "hint": "Any additional notes about this data, you can also use this for Dex Entries."
         }
       }
     },
@@ -2050,7 +2258,10 @@
           "label": "Effects"
         }
       },
-      "SendToChatLabel": "Send to Chat"
+      "SendToChatLabel": "Send to Chat",
+      "Actions": {
+        "EphemeralVariantWarning": "You are unable to edit/delete auto-generated Attack Variants."
+      }
     },
     "SpeciesSheet": {
       "Tabs": {
@@ -2156,22 +2367,44 @@
     "TokenPanel": {
       "Tabs": {
         "attack-slots": {
-          "label": "Attack Slots"
+          "label": "Attack Slots",
+          "inactive": "",
+          "active": ""
         },
         "attack-other": {
-          "label": "Other Attacks"
+          "label": "Other Attacks",
+          "inactive": "",
+          "active": ""
         },
         "passives": {
-          "label": "Passives"
+          "label": "Passives",
+          "inactive": "Show Passives",
+          "active": "Hide Passives"
         },
         "generic-actions": {
-          "label": "Generic Actions"
+          "label": "Generic Actions",
+          "inactive": "",
+          "active": ""
         },
         "skills": {
-          "label": "Skills"
+          "label": "Skills",
+          "inactive": "Show Skills",
+          "active": "Hide Skills"
         },
         "effects": {
-          "label": "Effects"
+          "label": "Effects",
+          "inactive": "Show Effects",
+          "active": "Hide Effects"
+        },
+        "party": {
+          "label": "Party",
+          "inactive": "Show Party",
+          "active": "Hide Party"
+        },
+        "movement": {
+          "label": "Movement",
+          "inactive": "Show Movement Panel",
+          "active": "Hide Movement Panel"
         }
       }
     },
@@ -2203,7 +2436,15 @@
       "OtherModifiers": "Other Modifiers",
       "ChangeToCritical": "Make Crit",
       "ChangeToMiss": "Make Miss",
-      "ChangeToHit": "Make Hit"
+      "ChangeToHit": "Make Hit",
+      "AccuracyPercentileMod": {
+        "Label": "Percentile Accuracy Mod",
+        "Hint": "Percentile modifier applied to this attack's accuracy."
+      },
+      "AccuracyFlatMod": {
+        "Label": "Flat Accuracy Mod",
+        "Hint": "Flat modifier applied to this attack's accuracy."
+      }
     },
     "Damage": {
       "ApplyDamage": "Apply Damage",
@@ -3139,6 +3380,9 @@
     },
     "DistanceToTarget": {
       "Hint": "When clicked, outputs the distance between current selected token and all targeted tokens to chat."
-    }
+    },
+    "Save": "Save",
+    "Link": "Link",
+    "Unlink": "Unlink"
   }
 }

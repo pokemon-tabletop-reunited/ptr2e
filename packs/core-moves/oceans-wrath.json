@@ -11,11 +11,10 @@
         "type": "attack",
         "traits": [
           "legendary",
-          "blast-3",
-          "pp-updated"
+          "blast-3"
         ],
         "range": {
-          "target": "creature",
+          "target": "blast",
           "distance": 10,
           "unit": "m"
         },
@@ -29,15 +28,24 @@
         "types": [
           "water"
         ],
-        "description": "<p>Effect: All valid targets become @Affliction[bound] 3. While @Affliction[bound], they take a Tick of HP in damage at the end of each of their Activations.</p>",
-        "contestType": "",
-        "contestEffect": "",
-        "free": false,
-        "slot": null
+        "description": "<p>Effect: All valid targets are @Affliction[bound 7]. While @Affliction[bound], they suffer from @Affliction[drowning] and are Delayed 20% at the end of each of their Activations. This @Affliction[bound] effect can be removed with an Intense Natural World, Navigate or Swim Skill Check or an Impossible Movement-related Skill, Acrobatics, or Survival Skill Check taken as a Complex Action.</p>",
+        "img": "systems/ptr2e/img/svg/water_icon.svg",
+        "predicate": []
       }
     ],
-    "container": null,
-    "grade": "B"
+    "grade": "B",
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "traits": [],
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
   },
   "_id": "Tyd4SLX0nURJZXSc",
   "effects": []

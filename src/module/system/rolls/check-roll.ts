@@ -27,6 +27,8 @@ class CheckRoll extends Roll {
                 return { formula: "1d6+4", data: { type: "luck-roll" } };
             case "pokeball-check":
                 return { formula: "1d100", data: { type: "pokeball-check" } };
+            case "generic-action":
+              return {formula: "", data: { type: "generic-action" }};
         }
     }
 
@@ -135,7 +137,7 @@ interface PokeballRollResults {
     check: CheckModifier;
 }
 
-type CheckType = "check" | "attack-roll" | "skill-check" | "luck-roll" | "luck-check" | "pokeball-check";
+type CheckType = "check" | "attack-roll" | "skill-check" | "luck-roll" | "luck-check" | "pokeball-check" | "generic-action";
 
 type CheckRollCallback = (
     roll: Rolled<CheckRoll>,

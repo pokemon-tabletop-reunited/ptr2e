@@ -177,16 +177,21 @@ declare global {
     type CompendiumUUID = `Compendium.${string}.${string}` | `Compendium.${string}.${CompendiumDocumentType}.${string}`;
     type DocumentUUID = WorldDocumentUUID | CompendiumUUID | TokenDocumentUUID;
 
+    /**@deprecated */
     function fromUuid(uuid: Maybe<CompendiumUUID>, relative?: Maybe<ClientDocument>): Promise<CompendiumDocument | null>;
+    /**@deprecated */
     function fromUuid(
         uuid: Maybe<ActorUUID>,
         relative?: Maybe<ClientDocument>,
     ): Promise<Actor<TokenDocument<Scene> | null> | null>;
+    /**@deprecated */
     function fromUuid(
         uuid: Maybe<ItemUUID>,
         relative?: Maybe<ClientDocument>,
     ): Promise<Item<Actor<TokenDocument<Scene> | null>> | null>;
+    /**@deprecated */
     function fromUuid(uuid: Maybe<TokenDocumentUUID>, relative?: Maybe<ClientDocument>): Promise<TokenDocument<Scene> | null>;
+    /**@deprecated */
     function fromUuid<TDocument extends ClientDocument>(
         uuid: Maybe<string>,
         options?: {relative?: Maybe<ClientDocument>},
@@ -199,12 +204,15 @@ declare global {
      * @param {} [relative]  A document to resolve relative UUIDs against.
      * @returns The Document or its index entry if it resides in a Compendium, otherwise null.
      * @throws If the uuid resolves to a Document that cannot be retrieved synchronously.
+     * @obsolete
      */
     function fromUuidSync(uuid: Maybe<ItemUUID>, relative?: Maybe<ClientDocument>): Item | CompendiumIndexData | null;
+    /** @obsolete */
     function fromUuidSync<TDocument extends WorldDocument>(
         uuid: Maybe<WorldDocumentUUID<TDocument>>,
         relative?: Maybe<ClientDocument>,
     ): TDocument | null;
+    /** @obsolete */
     function fromUuidSync<TDocument extends ClientDocument | CompendiumIndexData>(
         uuid: Maybe<string>,
         relative?: Maybe<ClientDocument>,

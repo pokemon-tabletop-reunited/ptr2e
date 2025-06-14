@@ -5,12 +5,6 @@
     "prerequisites": [
       "item:perk:climate-controller",
       {
-        "gte": [
-          "{actor|level}",
-          40
-        ]
-      },
-      {
         "or": [
           {
             "gte": [
@@ -43,13 +37,13 @@
         ]
       }
     ],
-    "cost": 2,
-    "description": "<p>Weathers set by you last for +2 additional Rounds, and their numerical effects are increased by 10% (minimum 1).</p>",
+    "cost": 5,
+    "description": "<p>Effect: Weathers created by the user last for +2 additional Rounds. While these Weathers are active, the user and all allies gain @Trait[priority-1] or [Priority X+1] with all of their Actions, and @Trait[flinch-1] and [Flinch X+1] on their Physical- and Special-Category Attacks.</p><p>Passive: the user gains one @Trait[weather] creating Ability (f.e. Drizzle) as a Tutored Ability.</p>",
     "actions": [
       {
         "name": "Perpetual Storm",
         "slug": "perpetual-storm",
-        "description": "<p>Weathers set by you last for +2 additional Rounds, and their numerical effects are increased by 10% (minimum 1).</p>",
+        "description": "<p>Effect: Weathers created by the user last for +2 additional Rounds. While these Weathers are active, the user and all allies gain @Trait[priority-1] or [Priority X+1] with all of their Actions, and @Trait[flinch-1] and [Flinch X+1] on their Physical- and Special-Category Attacks.",
         "cost": {
           "activation": "free",
           "powerPoints": 0,
@@ -106,6 +100,12 @@
       "arena": "physical",
       "approach": "finesse",
       "archetype": "Climatology"
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ]
     }
   },
   "_id": "LvxsCjJDbfgyQ7G5",

@@ -3,8 +3,49 @@
   "type": "ability",
   "img": "systems/ptr2e/img/icons/status_icon.png",
   "system": {
-    "actions": [],
-    "description": "<p>Trigger: The user declares Trick Room.</p><p>Effect: Connection - Trick Room. The set Trick Room lasts 5 rounds, and the triggering attack gains [Priority 5] until the end of the user's Activation.</p>",
+    "actions": [
+      {
+        "traits": [
+          "room",
+          "interrupt-4"
+        ],
+        "name": "Regression Field",
+        "slug": "regression-field",
+        "type": "generic",
+        "cost": {
+          "activation": "free",
+          "powerPoints": 6,
+          "trigger": "<p>The user enters combat or emerges from stealth.</p>"
+        },
+        "range": {
+          "target": "self",
+          "unit": "m"
+        },
+        "description": "<p>Trigger: The user enters combat or emerges from stealth.</p><p>Effect: The user freely uses Trick Room.</p>",
+        "img": "icons/svg/explosion.svg"
+      },
+      {
+        "traits": [
+          "room",
+          "interrupt-2"
+        ],
+        "name": "Regression Field (Extend)",
+        "slug": "regression-field-extend",
+        "type": "generic",
+        "cost": {
+          "activation": "free",
+          "powerPoints": 2,
+          "trigger": "<p>The user declares Foghorn.</p>"
+        },
+        "range": {
+          "target": "field",
+          "unit": "m"
+        },
+        "description": "<p>Trigger: The user declares Foghorn.</p><p>Effect: The set Trick Room has its duration increased by +2 Rounds.</p>",
+        "img": "icons/svg/explosion.svg"
+      }
+    ],
+    "description": "<p>Trigger: The user enters combat or emerges from stealth.</p><p>Effect: Connection - Trick Room. The user freely uses Trick Room. When the user sets Trick Room, they may spend 2 PP to increase its duration by +2 Rounds.</p>",
     "traits": [
       "room",
       "connection"
@@ -13,6 +54,12 @@
     "_migration": {
       "version": null,
       "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ]
     }
   },
   "_id": "vHlzzoEuyzHoBsbT",

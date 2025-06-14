@@ -10,13 +10,11 @@
         "name": "Counter",
         "type": "attack",
         "traits": [
-          "interrupt-3",
-          "contact",
-          "pp-updated"
+          "interrupt-3"
         ],
         "range": {
           "target": "creature",
-          "distance": 1,
+          "distance": 15,
           "unit": "m"
         },
         "cost": {
@@ -25,20 +23,28 @@
           "trigger": "<p>The user is damaged by a Physical damaging attack.</p>"
         },
         "category": "status",
-        "power": null,
         "accuracy": 100,
         "types": [
           "fighting"
         ],
         "description": "<p>Trigger: The user is damaged by a Physical damaging attack.</p><p>Effect: The user attacks the creature that attacked it, dealing twice the amount of damage it were dealt by the triggering attack (this is not modified by the target's DEF or other effects).</p>",
-        "contestType": "",
-        "contestEffect": "",
-        "free": false,
-        "slot": null
+        "img": "systems/ptr2e/img/svg/fighting_icon.svg",
+        "predicate": []
       }
     ],
-    "container": null,
-    "grade": "D"
+    "grade": "D",
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "traits": [],
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
   },
   "_id": "TzmxWMEVbUTipXGX",
   "effects": []

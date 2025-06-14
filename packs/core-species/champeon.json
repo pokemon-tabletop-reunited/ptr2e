@@ -12,20 +12,16 @@
     "diet": [
       "omnivore"
     ],
-    "movement": {
-      "primary": [
-        {
-          "type": "overland",
-          "value": 13
-        }
-      ],
-      "secondary": [
-        {
-          "type": "swim",
-          "value": 4
-        }
-      ]
-    },
+    "movement": [
+      {
+        "type": "overland",
+        "value": 13
+      },
+      {
+        "type": "swim",
+        "value": 4
+      }
+    ],
     "traits": [
       "pokemon",
       "quadrupedal",
@@ -235,6 +231,10 @@
           "gen": "xd"
         },
         {
+          "name": "bulk-up",
+          "gen": null
+        },
+        {
           "name": "calm-mind",
           "gen": "scarlet-violet"
         },
@@ -427,6 +427,10 @@
           "gen": "ultra-sun-ultra-moon"
         },
         {
+          "name": "stomping-tantrum",
+          "gen": null
+        },
+        {
           "name": "stored-power",
           "gen": "brilliant-diamond-and-shining-pearl"
         },
@@ -451,6 +455,10 @@
           "gen": "scarlet-violet"
         },
         {
+          "name": "throat-chop",
+          "gen": null
+        },
+        {
           "name": "tickle",
           "gen": "scarlet-violet"
         },
@@ -467,6 +475,10 @@
           "gen": "scarlet-violet"
         },
         {
+          "name": "wild-charge",
+          "gen": null
+        },
+        {
           "name": "wish",
           "gen": "scarlet-violet"
         },
@@ -477,30 +489,9 @@
         {
           "name": "yawn",
           "gen": "scarlet-violet"
-        },
-        {
-          "name": "bulk-up",
-          "gen": null
-        },
-        {
-          "name": "stomping-tantrum",
-          "gen": null
-        },
-        {
-          "name": "throat-chop",
-          "gen": null
-        },
-        {
-          "name": "wild-charge",
-          "gen": null
         }
       ],
       "levelUp": [
-        {
-          "name": "wild-swing",
-          "level": 20,
-          "gen": null
-        },
         {
           "name": "covet",
           "gen": "scarlet-violet",
@@ -585,6 +576,11 @@
           "name": "swift",
           "gen": "scarlet-violet",
           "level": 20
+        },
+        {
+          "name": "wild-swing",
+          "level": 20,
+          "gen": null
         },
         {
           "name": "bite",
@@ -687,17 +683,12 @@
               "operand": "or"
             }
           ],
-          "details": {
-            "gender": null,
-            "item": null,
-            "level": null,
-            "knownMove": null
-          },
-          "evolutions": [],
           "perk": {
             "x": 26,
             "y": 26
-          }
+          },
+          "details": null,
+          "evolutions": []
         }
       ],
       "uuid": "Compendium.ptr2e.core-species.Item.GLVg67j2hGGz2ksx",
@@ -718,7 +709,15 @@
     "habitats": [
       "mountain",
       "cave"
-    ]
+    ],
+    "publication": {
+      "source": "PTR 2e Core - Dev Dex",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "number": 2621
   },
   "effects": [],
   "folder": "Oeb54bzaq1E1cAj4",

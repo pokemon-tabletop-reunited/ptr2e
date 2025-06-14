@@ -10,8 +10,7 @@
         "name": "Spirit Shackle",
         "type": "attack",
         "traits": [
-          "missile",
-          "pp-updated"
+          "missile"
         ],
         "range": {
           "target": "creature",
@@ -28,7 +27,7 @@
         "types": [
           "ghost"
         ],
-        "description": "<p>Effect: On hit, the target becomes @Affliction[bound] 5. While @Affliction[bound], the target cannot be switched out or flee.</p>",
+        "description": "<p>Effect: On hit, the target gains @Affliction[stuck 5] and @Affliction[fear 5].</p>",
         "contestType": "",
         "contestEffect": "",
         "free": false,
@@ -36,7 +35,13 @@
       }
     ],
     "container": null,
-    "grade": "B"
+    "grade": "B",
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ]
+    }
   },
   "_id": "lFRKkWcPGvZ3M7zk",
   "effects": []

@@ -90,7 +90,7 @@ class ChangeModel<TSchema extends ChangeSchema = ChangeSchema> extends foundry.a
         required: true,
         blank: false,
         initial: this.TYPE,
-        choices: ChangeModelTypes,
+        choices: Object.entries(ChangeModelTypes() as Record<string, { label: string }>).reduce((acc, [k, v]: [string, { label: string }]) => ({ ...acc, [k]: v.label }), {}),
         validate: (value) => value === this.TYPE,
         validationError: `must be equal to "${this.TYPE}"`,
         label: "PTR2E.Effect.FIELDS.ChangeType.label",
@@ -220,11 +220,13 @@ class ChangeModel<TSchema extends ChangeSchema = ChangeSchema> extends foundry.a
    */
   resolveInjectedProperties<T extends string | number | object | null | undefined>(
     source: T,
-    options?: { warn?: boolean }
+    options?: { warn?: boolean },
+    resolvables?: Record<string, unknown>
   ): T;
   resolveInjectedProperties(
     source: string | number | object | null | undefined,
-    { warn = true } = {}
+    { warn = true } = {},
+    resolvables: Record<string, Record<string, unknown>> = {}
   ): string | number | object | null | undefined {
     if (
       source === null ||
@@ -248,21 +250,21 @@ class ChangeModel<TSchema extends ChangeSchema = ChangeSchema> extends foundry.a
       return source;
     } else if (typeof source === "string") {
       return source.replace(
-        /{(actor|item|change|effect)\|(.*?)}/g,
-        (_match, key: string, prop: string) => {
+        /{(actor|item|change|effect|attack)\|(.*?)(\|C)?}/g,
+        (_match, key: string, prop: string, modifier: string) => {
           const data =
             key === "change"
               ? this
               : key === "actor" || key === "item" || key === "effect"
-                ? this[key]
-                : this.effect;
+                ? this[key] ?? resolvables[key]
+                : resolvables[key] ?? this.effect;
           const value = fu.getProperty(data ?? {}, prop);
           if (value === undefined) {
             this.ignored = true;
             if (warn)
               this.failValidation(`Failed to resolve injected property "${source}"`);
           }
-          return String(value);
+          return modifier ? Handlebars.helpers.capitalize(String(value)) : String(value);
         }
       );
     }
@@ -294,7 +296,7 @@ class ChangeModel<TSchema extends ChangeSchema = ChangeSchema> extends foundry.a
     if (typeof value === "number" || typeof value === "boolean" || value === null) {
       return value;
     }
-    value = this.resolveInjectedProperties(value, { warn });
+    value = this.resolveInjectedProperties(value, { warn }, resolvables);
 
     const resolvedFromBracket = this.isBracketedValue(value)
       ? this.#resolveBracketedValue(value, defaultValue)
@@ -314,15 +316,15 @@ class ChangeModel<TSchema extends ChangeSchema = ChangeSchema> extends foundry.a
           const unresolveds = formula.match(/@[a-z0-9.]+/gi) ?? [];
           // Allow failure of "@target" and "@actor.conditions" with no warning
           if (unresolveds.length > 0) {
-            const shouldWarn =
-              warn &&
-              !unresolveds.every(
-                (u) =>
-                  u.startsWith("@target.") || u.startsWith("@actor.conditions.")
-              );
-            this.ignored = true;
-            if (shouldWarn) {
-              this.failValidation(`unable to resolve formula, "${formula}"`);
+            const ignoredCase = unresolveds.every(
+              (u) =>
+                u.startsWith("@target.") || u.startsWith("@actor.conditions.")
+            );
+            if (!ignoredCase) {
+              this.ignored = true;
+              if (warn) {
+                this.failValidation(`unable to resolve formula, "${formula}"`);
+              }
             }
             return Number(defaultValue);
           }
@@ -450,7 +452,7 @@ interface ChangeModel<TSchema extends ChangeSchema = ChangeSchema>
   afterRoll?(params: ChangeModel.AfterRollParams): Promise<void>;
 
   /** Runs before the rule's parent effect's owning actor is updated */
-  preUpdateActor?(): Promise<{ create: ItemSourcePTR2e[]; delete: string[];} | { createEffects: EffectSourcePTR2e[]; deleteEffects: string[];}>;
+  preUpdateActor?(): Promise<{ create: ItemSourcePTR2e[]; delete: string[]; } | { createEffects: EffectSourcePTR2e[]; deleteEffects: string[]; }>;
 
   /**
    * Runs before this rules element's parent effect is created. The effect is temporarilly constructed. A rule element can

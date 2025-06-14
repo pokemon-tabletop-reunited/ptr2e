@@ -10,12 +10,12 @@
         "name": "Blossom Blast",
         "slug": "blossom-blast",
         "type": "attack",
-        "img": "icons/svg/explosion.svg",
+        "img": "systems/ptr2e/img/svg/grass_icon.svg",
         "traits": [
           "blast-3"
         ],
         "range": {
-          "target": "creature",
+          "target": "blast",
           "distance": 8,
           "unit": "m"
         },
@@ -29,14 +29,23 @@
         "category": "physical",
         "power": 120,
         "accuracy": 80,
-        "description": "<p>Effect: On hit, all valid targets have a 20% chance of losing -1 EVA Stage for 5 Activations.</p>"
+        "description": "<p>Effect: On hit, all valid targets have a 20% chance of losing -1 EVA Stage for 5 Activations.</p>",
+        "predicate": []
       }
     ],
     "grade": "A",
     "_migration": {
       "version": null,
       "previous": null
-    }
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "traits": []
   },
   "effects": [
     {
@@ -55,7 +64,9 @@
             "affects": "target",
             "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "alterations": [],
+            "dontMerge": false
           }
         ],
         "slug": null,

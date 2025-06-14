@@ -1,6 +1,6 @@
 {
   "folder": "rS3iGnYQKzTIxvUN",
-  "name": "Sangloupmon",
+  "name": "sangloupmon",
   "type": "species",
   "system": {
     "_migration": {
@@ -13,7 +13,8 @@
       "virus",
       "digimon",
       "darkvision-15",
-      "quadrupedal"
+      "quadrupedal",
+      "champion"
     ],
     "number": 3001,
     "stats": {
@@ -68,20 +69,16 @@
         }
       ]
     },
-    "movement": {
-      "primary": [
-        {
-          "type": "overland",
-          "value": 8
-        }
-      ],
-      "secondary": [
-        {
-          "type": "swim",
-          "value": 4
-        }
-      ]
-    },
+    "movement": [
+      {
+        "type": "overland",
+        "value": 8
+      },
+      {
+        "type": "swim",
+        "value": 4
+      }
+    ],
     "skills": [
       {
         "slug": "acrobatics",
@@ -319,11 +316,23 @@
                     "level": null,
                     "knownMove": null
                   },
-                  "evolutions": []
+                  "evolutions": [],
+                  "perk": {
+                    "x": 26,
+                    "y": 26
+                  }
                 }
-              ]
+              ],
+              "perk": {
+                "x": 26,
+                "y": 26
+              }
             }
-          ]
+          ],
+          "perk": {
+            "x": 26,
+            "y": 26
+          }
         }
       ],
       "details": {
@@ -331,11 +340,21 @@
         "item": null,
         "level": null,
         "knownMove": null
+      },
+      "perk": {
+        "x": 26,
+        "y": 26
       }
+    },
+    "publication": {
+      "source": "PTR 2e Digimon Supplement - Digi Dex",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
     }
   },
   "img": "systems/ptr2e/img/icons/species_icon.webp",
   "effects": [],
-  "flags": {},
   "_id": "wAMTmYhc9ok3S013"
 }

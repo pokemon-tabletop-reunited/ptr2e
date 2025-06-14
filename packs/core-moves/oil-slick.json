@@ -4,59 +4,46 @@
   "_id": "ql8IlRVO9PlDMP8W",
   "img": "systems/ptr2e/img/svg/poison_icon.svg",
   "system": {
-    "slug": null,
+    "slug": "oil-slick",
     "actions": [
       {
         "name": "Oil Slick",
         "slug": "oil-slick",
         "type": "attack",
-        "img": "icons/svg/explosion.svg",
+        "img": "systems/ptr2e/img/svg/poison_icon.svg",
         "traits": [
           "hazard",
-          "blast-4",
-          "pp-updated"
+          "blast-4"
         ],
         "range": {
-          "target": "creature",
-          "distance": 0,
+          "target": "blast",
           "unit": "m"
         },
         "cost": {
           "activation": "complex",
           "powerPoints": 6
         },
-        "variant": null,
         "types": [
           "poison"
         ],
         "category": "status",
-        "power": null,
-        "accuracy": null,
-        "contestType": "",
-        "contestEffect": "",
-        "free": false,
-        "slot": null,
-        "description": "<p>Effect: An oil spill is created in the [Blast] area for 5 rounds. Any creature that starts their Activation in, or enters the hazard gains @Affliction[slowed] 2 and is covered in Oil. If a creature covered in Oil attempts to use a Fire-Type move, the attack fails and they and all adjacent creature lose 4 Ticks of HP. If a creature covered in Oil is hit by a Fire-type move, they and all they and all adjacent creature lose 4 Ticks of HP.</p>"
+        "description": "<p>Effect: An oil spill is created in the [Blast] area for 5 rounds. Any creature that starts their Activation in, or enters the hazard gains @Affliction[slowed] 2 and is covered in Oil. If a creature covered in Oil attempts to use a Fire-Type move, the attack fails and they and all adjacent creature lose 4 Ticks of HP. If a creature covered in Oil is hit by a Fire-type move, they and all they and all adjacent creature lose 4 Ticks of HP.</p>",
+        "predicate": []
       }
     ],
-    "container": null,
-    "grade": "A"
+    "grade": "A",
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "traits": [],
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
   },
-  "effects": [],
-  "sort": 0,
-  "ownership": {
-    "default": 0,
-    "CYLdyr5mPSDmNpTp": 3
-  },
-  "flags": {},
-  "_stats": {
-    "compendiumSource": null,
-    "duplicateSource": null,
-    "coreVersion": "12.328",
-    "systemId": "ptr2e",
-    "systemVersion": "0.10.0-alpha.1.5.2",
-    "createdTime": 1721257159789,
-    "modifiedTime": 1721257496122,
-    "lastModifiedBy": "CYLdyr5mPSDmNpTp"
-  }
+  "effects": []
 }

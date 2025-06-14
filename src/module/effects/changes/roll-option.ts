@@ -97,7 +97,12 @@ export default class RollOptionChangeSystem extends ChangeModel {
   }
 
   override resolveValue() {
-    return this.alwaysActive ? true : !!super.resolveValue(this.state);
+    return this.alwaysActive ? true : (() => {
+      if(this.effect.flags?.ptr2e?.traitEffect) {
+        return this.actor?.flags.ptr2e?.traitEffects?.[this.effect.flags.ptr2e.traitEffect] ?? true;
+      }
+      return !!super.resolveValue(this.state);
+    })();
   }
 
   private resolveOption({ appendSuboption = true } = {}): string {
@@ -151,7 +156,7 @@ export default class RollOptionChangeSystem extends ChangeModel {
       }
 
       const toggle: RollOptionToggle = {
-        effectUuid: this.effect.uuid,
+        effectUuid: this.effect.uuid || this.effect.flags?.ptr2e?.traitEffect as DocumentUUID,
         label: this.getReducedLabel(),
         placement: this.placement ?? "effects",
         domain: this.domain,

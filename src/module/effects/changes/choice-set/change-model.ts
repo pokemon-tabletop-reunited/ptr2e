@@ -128,7 +128,7 @@ export default class ChoiceSetChangeSystem extends ChangeModel {
 
     const inflatedChoices = await this.inflateChoices(rollOptions);
 
-    const selection = this.getPreselection() ?? (await new ChoiceSetPrompt({
+    const selection = this.getPreselection(inflatedChoices) ?? (await new ChoiceSetPrompt({
       prompt: this.prompt,
       item: this.item as Maybe<ItemPTR2e<ItemSystemPTR, ActorPTR2e>>,
       title: this.label,
@@ -264,8 +264,8 @@ export default class ChoiceSetChangeSystem extends ChangeModel {
     this.actor?.rollOptions.addOption("all", `${this.rollOption}${suffix}`);
   }
 
-  private getPreselection(): PickableThing | null {
-    const choice = Array.isArray(this.choices) ? this.choices.find(c => R.isDeepEqual(c.value, this.selection)) : null;
+  private getPreselection(inflatedChoices: PickableThing[]): PickableThing | null {
+    const choice = Array.isArray(inflatedChoices) ? inflatedChoices.find(c => R.isDeepEqual(c.value, this.selection)) : null;
     return choice ?? null;
   }
 }

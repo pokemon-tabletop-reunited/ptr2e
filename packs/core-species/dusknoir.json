@@ -13,20 +13,20 @@
     "diet": [
       "auravore"
     ],
-    "movement": {
-      "primary": [
-        {
-          "type": "overland",
-          "value": 5
-        }
-      ],
-      "secondary": [
-        {
-          "type": "swim",
-          "value": 3
-        }
-      ]
-    },
+    "movement": [
+      {
+        "type": "flight",
+        "value": 7
+      },
+      {
+        "type": "overland",
+        "value": 3
+      },
+      {
+        "type": "swim",
+        "value": 3
+      }
+    ],
     "traits": [
       "pokemon",
       "darkvision-15",
@@ -34,7 +34,8 @@
       "phasing",
       "medium",
       "hover",
-      "aura"
+      "aura-user",
+      "fully-evolved"
     ],
     "abilities": {
       "starting": [
@@ -73,7 +74,7 @@
     "skills": [
       {
         "slug": "acrobatics",
-        "value": 15,
+        "value": 40,
         "rvs": 0,
         "favourite": false,
         "hidden": false,
@@ -81,7 +82,7 @@
       },
       {
         "slug": "climb",
-        "value": 35,
+        "value": 40,
         "rvs": 0,
         "favourite": false,
         "hidden": false,
@@ -89,6 +90,22 @@
       },
       {
         "slug": "conversation",
+        "value": 45,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "fast-talk",
+        "value": 35,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "flying",
         "value": 45,
         "rvs": 0,
         "favourite": false,
@@ -113,7 +130,7 @@
       },
       {
         "slug": "lift",
-        "value": 55,
+        "value": 60,
         "rvs": 0,
         "favourite": false,
         "hidden": false,
@@ -121,7 +138,7 @@
       },
       {
         "slug": "listen",
-        "value": 50,
+        "value": 55,
         "rvs": 0,
         "favourite": false,
         "hidden": false,
@@ -137,7 +154,7 @@
       },
       {
         "slug": "navigate",
-        "value": 45,
+        "value": 55,
         "rvs": 0,
         "favourite": false,
         "hidden": false,
@@ -153,7 +170,7 @@
       },
       {
         "slug": "running",
-        "value": 45,
+        "value": 35,
         "rvs": 0,
         "favourite": false,
         "hidden": false,
@@ -161,7 +178,7 @@
       },
       {
         "slug": "spiritual",
-        "value": 70,
+        "value": 40,
         "rvs": 0,
         "favourite": false,
         "hidden": false,
@@ -169,7 +186,7 @@
       },
       {
         "slug": "spot",
-        "value": 50,
+        "value": 55,
         "rvs": 0,
         "favourite": false,
         "hidden": false,
@@ -177,7 +194,7 @@
       },
       {
         "slug": "stealth",
-        "value": 60,
+        "value": 55,
         "rvs": 0,
         "favourite": false,
         "hidden": false,
@@ -186,6 +203,14 @@
       {
         "slug": "survival",
         "value": 45,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "track",
+        "value": 55,
         "rvs": 0,
         "favourite": false,
         "hidden": false,
@@ -683,7 +708,11 @@
                 "level": null,
                 "knownMove": null
               },
-              "evolutions": []
+              "evolutions": [],
+              "perk": {
+                "x": 26,
+                "y": 26
+              }
             }
           ],
           "details": {
@@ -691,11 +720,19 @@
             "item": null,
             "level": null,
             "knownMove": null
+          },
+          "perk": {
+            "x": 26,
+            "y": 26
           }
         }
       ],
       "uuid": "Compendium.ptr2e.core-species.Item.NRLM4OLKyc5fyeQ6",
-      "methods": []
+      "methods": [],
+      "perk": {
+        "x": 26,
+        "y": 26
+      }
     },
     "habitats": [
       "forest",
@@ -706,6 +743,13 @@
     "_migration": {
       "version": null,
       "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core - Sinnoh Dex",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
     }
   },
   "_id": "N0qK5vxpzw3opgHT",

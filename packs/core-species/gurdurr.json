@@ -13,26 +13,23 @@
     "diet": [
       "omnivore"
     ],
-    "movement": {
-      "primary": [
-        {
-          "type": "overland",
-          "value": 4
-        }
-      ],
-      "secondary": [
-        {
-          "type": "swim",
-          "value": 3
-        }
-      ]
-    },
+    "movement": [
+      {
+        "type": "overland",
+        "value": 4
+      },
+      {
+        "type": "swim",
+        "value": 3
+      }
+    ],
     "traits": [
       "pokemon",
       "bipedal",
       "well-built",
       "wielder",
-      "natural-steel"
+      "natural-steel",
+      "jump-2"
     ],
     "abilities": {
       "starting": [
@@ -538,11 +535,9 @@
               "operand": "and"
             }
           ],
-          "details": {
-            "gender": null,
-            "item": null,
-            "level": null,
-            "knownMove": null
+          "perk": {
+            "x": 26,
+            "y": 26
           },
           "evolutions": [
             {
@@ -556,28 +551,24 @@
                 },
                 {
                   "type": "item",
-                  "item": "linking-chord",
+                  "item": "linking-cord",
                   "operand": "or",
                   "held": false
                 }
               ],
+              "perk": {
+                "x": 26,
+                "y": 26
+              },
               "details": {
                 "gender": null,
                 "item": null,
                 "level": null,
                 "knownMove": null
               },
-              "evolutions": [],
-              "perk": {
-                "x": 26,
-                "y": 26
-              }
+              "evolutions": []
             }
-          ],
-          "perk": {
-            "x": 26,
-            "y": 26
-          }
+          ]
         }
       ],
       "uuid": "Compendium.ptr2e.core-species.Item.g7v24VDuWAUFBwDm",
@@ -590,6 +581,12 @@
     "_migration": {
       "version": null,
       "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core - Unova Dex",
+      "authors": [
+        "PTR 2e Team"
+      ]
     }
   },
   "_id": "HGtXGrQdZylgI9t6",

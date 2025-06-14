@@ -1,6 +1,6 @@
 {
   "folder": "rS3iGnYQKzTIxvUN",
-  "name": "Dracmon",
+  "name": "dracmon",
   "type": "species",
   "system": {
     "_migration": {
@@ -13,7 +13,8 @@
       "digimon",
       "darkvision-15",
       "silent",
-      "bipedal"
+      "bipedal",
+      "rookie"
     ],
     "number": 3000,
     "stats": {
@@ -68,20 +69,16 @@
         }
       ]
     },
-    "movement": {
-      "primary": [
-        {
-          "type": "overland",
-          "value": 5
-        }
-      ],
-      "secondary": [
-        {
-          "type": "swim",
-          "value": 3
-        }
-      ]
-    },
+    "movement": [
+      {
+        "type": "overland",
+        "value": 5
+      },
+      {
+        "type": "swim",
+        "value": 3
+      }
+    ],
     "skills": [
       {
         "slug": "acrobatics",
@@ -303,11 +300,23 @@
                     "level": null,
                     "knownMove": null
                   },
-                  "evolutions": []
+                  "evolutions": [],
+                  "perk": {
+                    "x": 26,
+                    "y": 26
+                  }
                 }
-              ]
+              ],
+              "perk": {
+                "x": 26,
+                "y": 26
+              }
             }
-          ]
+          ],
+          "perk": {
+            "x": 26,
+            "y": 26
+          }
         }
       ],
       "details": {
@@ -315,11 +324,21 @@
         "item": null,
         "level": null,
         "knownMove": null
+      },
+      "perk": {
+        "x": 26,
+        "y": 26
       }
+    },
+    "publication": {
+      "source": "PTR 2e Digimon Supplement - Digi Dex",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
     }
   },
   "img": "systems/ptr2e/img/icons/species_icon.webp",
   "effects": [],
-  "flags": {},
   "_id": "hTKPo8deCFGc7Tii"
 }

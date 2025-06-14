@@ -39,6 +39,11 @@ class AttackRoll extends CheckRoll {
 
     options.moveAccuracy = attack.accuracy ?? 100
 
+    const isUnaware = {
+      target: options.targetUnaware,
+      origin: options.originUnaware
+    }
+
     const formula = "1d100ms@dc";
     const dc = ((
       baseAccuracy: number,
@@ -47,9 +52,9 @@ class AttackRoll extends CheckRoll {
     ) => {
       const { flat: accuracyFlat, stage: accuracyStage, percentile: accuracyPercent } = accuracyModifiers;
       const stageBonus = (() => {
-        const accuracy = accuracyStage;
+        const accuracy = isUnaware.target ? 0 : accuracyStage;
         if (Math.abs(accuracy) === Infinity) return -Infinity;
-        const evasion = evasionStage;
+        const evasion = isUnaware.origin ? 0 : evasionStage;
         const stages = Math.clamp(accuracy - evasion, -6, 6);
         options.adjustedStages = stages;
         return stages >= 0 ? (3 + stages) / 3 : 3 / (3 - stages);
@@ -82,7 +87,7 @@ class AttackRoll extends CheckRoll {
     // Status moves cannot crit
     if (attack.category === "status") return null;
 
-    options.critStages = Math.clamp(data.check.total?.crit?.stage ?? 0, 0, 4)
+    options.critStages = options.targetUnaware ? 0 : Math.clamp(data.check.total?.crit?.stage ?? 0, 0, 4)
 
     const formula = "1d100ms@dc";
     const dc = ((stage: 0 | 1 | 2 | 3 | 4): number => {
@@ -110,7 +115,13 @@ class AttackRoll extends CheckRoll {
     options: AttackRollDataPTR2e
   ): AttackRoll | null {
     const basePower = data.attack.power;
-    if (basePower === null) return null;
+    if (basePower === null) {
+      if(data.attack.traits.has("flat")) {
+        options.isFlat = true;
+        return new AttackRoll("0", {}, options);
+      }
+      return null;
+    }
 
     const powerModifier = data.check.total?.power?.percentile ?? 1;
     const powerFlatModifier = data.check.total?.power?.flat ?? 0;
@@ -155,15 +166,20 @@ class AttackRoll extends CheckRoll {
     // Get the randomness of the Roll
     const damageRoll = Number(this.result);
 
+    const isUnaware = {
+      target: !!target.rollOptions.all["special:unaware"],
+      origin: !!origin.rollOptions.all["special:unaware"]
+    }
+
     // Attack & Defense stats of the origin and target
-    const attackStat = attack.getAttackStat(useEnemyStats ? target : attack.actor);
-    const defenseStat = target.getDefenseStat(attack, isCritHit);
+    const attackStat = attack.getAttackStat(useEnemyStats ? target : attack.actor, useEnemyStats ? false : isUnaware.target);
+    const defenseStat = target.getDefenseStat(attack, isCritHit, isUnaware.origin);
 
     // Check for Sniper
     const hasSniper = origin.rollOptions.getFromDomain("item")["ability:sniper:active"];
 
     // Type effectiveness
-    const effectivenessStage = parseInt(this.options.effectivenessStage+"");
+    const effectivenessStage = parseInt(this.options.effectivenessStage + "");
     const typeEffectiveness = target.getEffectiveness(attack.types, effectivenessStage, this.options.ignoreImmune ?? false);
 
     // Other modifiers
@@ -190,7 +206,9 @@ class AttackRoll extends CheckRoll {
       flatDamage: flatDamage,
     };
     const roll = new Roll(
-      "((((((2 * @level) / 5) + 2) * @power * (@attack / (@defense * (4 / 3)))) / 50) + 2 + @flatDamage) * @targets * @critical * ((100 - @random) / 100) * @stab * @type * @other",
+      this.options.isFlat 
+      ? "@flatDamage"
+      : "((((((2 * @level) / 5) + 2) * @power * (@attack / (@defense * (4 / 3)))) / 50) + 2 + @flatDamage) * @targets * @critical * ((100 - @random) / 100) * @stab * @type * @other",
       context
     ).evaluateSync();
 
@@ -208,15 +226,17 @@ class AttackRoll extends CheckRoll {
 
   static calculateFlatDamage(attack: SummonAttackPTR2e, target: ActorPTR2e): Maybe<DamageCalc> {
     const formula = attack.getFormula()
+    const multiplier = isNaN(target.system.modifiers["vulnerabilityMultiplier"] ?? 1) ? 1 : (target.system.modifiers["vulnerabilityMultiplier"] ?? 1);
     const roll = new Roll(
-      formula,
+      formula + (multiplier !== 1 ? ` * @multiplier` : ""),
       {
         actor: target,
         health: {
           max: target.system.health.max,
           current: target.system.health.value,
         },
-        formula: formula
+        formula: formula,
+        multiplier
       }
     ).evaluateSync();
 
@@ -248,9 +268,12 @@ type AttackRollDataPTR2e = CheckRollDataPTR2e & {
   damageMod?: number;
   outOfRange: boolean;
   flatDamage?: number;
+  isFlat?: boolean;
   statMod: number;
   effectivenessStage: number;
   ignoreImmune: boolean;
+  targetUnaware: boolean;
+  originUnaware: boolean;
 } & AccuracyContext
 
 export { AttackRoll, type AttackRollDataPTR2e, type AttackRollCreationData };

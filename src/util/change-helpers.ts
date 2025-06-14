@@ -28,7 +28,7 @@ function extractModifiers(
     );
   }
 
-  return modifiers;
+  return modifiers.filter(m => m.value);
 }
 
 async function extractTargetModifiers({
@@ -145,6 +145,7 @@ async function extractEffectRolls({
     )
   ).reduce((acc, val): EffectRoll[] => {
     if(!val) return acc;
+    if(val.dontMerge) return [...acc, val];
     const inMap = effectTargets.get(val.effect + (val.critOnly ? '-crit' : ''));
     const sameType = inMap?.critOnly === val.critOnly;
     if (!inMap) {

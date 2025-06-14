@@ -1,6 +1,6 @@
 {
   "folder": "rS3iGnYQKzTIxvUN",
-  "name": "GranDracmon",
+  "name": "gran-dracmon",
   "type": "species",
   "system": {
     "_migration": {
@@ -13,7 +13,8 @@
       "digimon",
       "virus",
       "fully-evolved",
-      "quadrupedal"
+      "quadrupedal",
+      "mega"
     ],
     "number": 3003,
     "stats": {
@@ -68,20 +69,16 @@
         }
       ]
     },
-    "movement": {
-      "primary": [
-        {
-          "type": "overland",
-          "value": 16
-        }
-      ],
-      "secondary": [
-        {
-          "type": "swim",
-          "value": 8
-        }
-      ]
-    },
+    "movement": [
+      {
+        "type": "overland",
+        "value": 16
+      },
+      {
+        "type": "swim",
+        "value": 8
+      }
+    ],
     "skills": [
       {
         "slug": "acrobatics",
@@ -276,7 +273,11 @@
                 "level": null,
                 "knownMove": null
               },
-              "evolutions": []
+              "evolutions": [],
+              "perk": {
+                "x": 26,
+                "y": 26
+              }
             }
           ],
           "details": {
@@ -284,6 +285,10 @@
             "item": null,
             "level": null,
             "knownMove": null
+          },
+          "perk": {
+            "x": 26,
+            "y": 26
           }
         }
       ],
@@ -292,11 +297,21 @@
         "item": null,
         "level": null,
         "knownMove": null
+      },
+      "perk": {
+        "x": 26,
+        "y": 26
       }
+    },
+    "publication": {
+      "source": "PTR 2e Digimon Supplement - Digi Dex",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
     }
   },
   "img": "systems/ptr2e/img/icons/species_icon.webp",
   "effects": [],
-  "flags": {},
   "_id": "3qbBlJ6iHWXM7paf"
 }
