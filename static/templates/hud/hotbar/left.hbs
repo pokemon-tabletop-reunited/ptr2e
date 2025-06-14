@@ -25,9 +25,9 @@
             <div class="party-header mb-0">
               <span>Party Leader</span>
             </div>
-            <div class="owner">
-              <div class="icon actor" data-action="open-entry" data-tooltip="{{party.owner.name}}" data-tooltip-direction="UP" data-uuid="{{party.owner.uuid}}">
-                <img draggable="true" src="{{party.owner.img}}" alt="{{party.owner.name}}">
+            <div class="owner" data-uuid="{{party.owner.uuid}}" draggable="true" data-action="open-entry">
+              <div class="icon actor" data-tooltip="{{party.owner.name}}" data-tooltip-direction="UP" data-uuid="{{party.owner.uuid}}">
+                <img src="{{party.owner.img}}" alt="{{party.owner.name}}">
               </div>
               <div class="name">{{party.owner.name}}</div>
             </div>
@@ -38,8 +38,8 @@
             <span>Party Members</span>
           </div>
           {{#each party.party as |actor|}}
-            <div class="icon actor" data-action="open-entry" data-tooltip="{{actor.name}}" data-tooltip-direction="UP" data-uuid="{{actor.uuid}}">
-              <img draggable="true" src="{{actor.img}}" alt="{{actor.name}}">
+            <div class="icon actor" data-action="open-entry" data-tooltip="{{actor.name}}" data-tooltip-direction="UP" data-uuid="{{actor.uuid}}" draggable="true">
+              <img src="{{actor.img}}" alt="{{actor.name}}">
             </div>
           {{/each}}
           {{else}}
