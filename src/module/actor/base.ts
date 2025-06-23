@@ -771,7 +771,9 @@ class ActorPTR2e<
         ? o.replace(/^self/, prefix)
         : o.startsWith("trait:") && rollOptions.all[o]
           ? `${prefix}:${o}`
-          : []
+          : o.startsWith("effect:") && rollOptions.all[o]
+            ? `${prefix}:${o}`
+            : []
     );
   }
 
@@ -1002,9 +1004,9 @@ class ActorPTR2e<
     suboption: string | null = null,
   ): Promise<boolean | null> {
     if (!(typeof effectUuid === "string")) return null;
-    if(effectUuid.startsWith("trait:")) {
+    if (effectUuid.startsWith("trait:")) {
       const newValue = value ?? !(this.flags.ptr2e?.traitEffects?.[effectUuid] ?? true);
-      await this.update({"flags.ptr2e.traitEffects": { [effectUuid]: newValue }});
+      await this.update({ "flags.ptr2e.traitEffects": { [effectUuid]: newValue } });
       return newValue;
     }
 
@@ -1977,23 +1979,23 @@ class ActorPTR2e<
 
   static override async createDialog<TDocument extends foundry.abstract.Document>(this: ConstructorOf<TDocument>, data?: Record<string, unknown>, context?: { parent?: TDocument["parent"]; pack?: Collection<TDocument> | null; types?: string[] } & Partial<FormApplicationOptions>): Promise<TDocument | null>;
   static override async createDialog(
-    data: Record<string, unknown> = {}, 
+    data: Record<string, unknown> = {},
     createOptions: Record<string, unknown> = {},
     {
-      folders, 
-      types, 
-      template, 
-      context, 
+      folders,
+      types,
+      template,
+      context,
       ...dialogOptions
     }: {
-      folders?: {id: string, name: string}[];
+      folders?: { id: string, name: string }[];
       types?: string[];
       template?: string;
     } & {
       context?: { parent?: TokenDocumentPTR2e | null; pack?: Collection<ActorPTR2e> | null; types?: string[] } & Partial<FormApplicationOptions>;
     } = {}
   ) {
-    if(types?.length) types = types.filter(t => t !== "ptu-actor");
+    if (types?.length) types = types.filter(t => t !== "ptu-actor");
     else types = this.TYPES.filter(t => t !== "ptu-actor");
 
     return super.createDialog(data, createOptions, {
@@ -2211,7 +2213,7 @@ class ActorPTR2e<
       }
     }
 
-    if(changed.ownership && !game.user.isGM) {
+    if (changed.ownership && !game.user.isGM) {
       delete changed.ownership;
     }
 
@@ -2227,14 +2229,14 @@ class ActorPTR2e<
   }
 
   static override _preUpdateOperation(documents: Actor[], operation: DatabaseUpdateOperation, user: User) {
-    if(game.user.isGM) return super._preUpdateOperation(documents, operation, user);
-    for(const update of operation.updates) {
-      if('ownership' in update) {
+    if (game.user.isGM) return super._preUpdateOperation(documents, operation, user);
+    for (const update of operation.updates) {
+      if ('ownership' in update) {
         delete update.ownership;
       }
-      if('items' in update && Array.isArray(update.items)) {
-        for(const item of update.items) {
-          if('ownership' in item) {
+      if ('items' in update && Array.isArray(update.items)) {
+        for (const item of update.items) {
+          if ('ownership' in item) {
             delete item.ownership;
           }
         }
