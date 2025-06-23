@@ -158,6 +158,38 @@ export function initializeSettings() {
     scope: "client"
   })
 
+  game.settings.register("ptr2e", "preferences.open-sidebar", {
+    name: "PTR2E.Settings.Preferences.OpenSidebar.Name",
+    hint: "PTR2E.Settings.Preferences.OpenSidebar.Hint",
+    default: true,
+    config: true,
+    type: Boolean,
+    scope: "client"
+  });
+
+  game.settings.register("ptr2e", "preferences.sidebar-tab", {
+    name: "PTR2E.Settings.Preferences.SidebarTab.Name",
+    hint: "PTR2E.Settings.Preferences.SidebarTab.Hint",
+    default: "chat",
+    config: true,
+    type: String,
+    choices: {
+      chat: "PTR2E.Settings.Preferences.SidebarTab.Chat",
+      combat: "PTR2E.Settings.Preferences.SidebarTab.Combat",
+      scenes: "PTR2E.Settings.Preferences.SidebarTab.Scenes",
+      actors: "PTR2E.Settings.Preferences.SidebarTab.Actors",
+      items: "PTR2E.Settings.Preferences.SidebarTab.Items",
+      journal: "PTR2E.Settings.Preferences.SidebarTab.Journals",
+      tables: "PTR2E.Settings.Preferences.SidebarTab.Tables",
+      cards: "PTR2E.Settings.Preferences.SidebarTab.Cards",
+      macros: "PTR2E.Settings.Preferences.SidebarTab.Macros",
+      playlists: "PTR2E.Settings.Preferences.SidebarTab.Playlists",
+      compendium: "PTR2E.Settings.Preferences.SidebarTab.Compendium",
+      settings: "PTR2E.Settings.Preferences.SidebarTab.Settings",
+    },
+    scope: "client"
+  });
+
   game.settings.register("ptr2e", "defaults.blueprint.level", {
     name: "PTR2E.Settings.Defaults.Blueprint.Level.Name",
     hint: "PTR2E.Settings.Defaults.Blueprint.Level.Hint",
@@ -267,7 +299,8 @@ export function initializeSettings() {
     type: String,
     scope: "world"
   });
-
+  
+  /* -- All of the below are Data Only Settings -- */
   game.settings.register("ptr2e", "clocksPosition", {
     name: "PTR2E.Settings.ClocksPosition.Name",
     hint: "PTR2E.Settings.ClocksPosition.Hint",
@@ -279,8 +312,6 @@ export function initializeSettings() {
       y: null
     },
   });
-
-  /* -- All of the below are Data Only Settings -- */
 
   game.settings.register("ptr2e", "worldSystemVersion", {
     name: "World System Version",

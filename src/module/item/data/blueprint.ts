@@ -832,7 +832,7 @@ export default abstract class BlueprintSystem extends HasEmbed(HasMigrations(fou
           actorLink: linkToken,
           displayBars: foundryDefaultTokenSettings.displayBars ?? CONST.TOKEN_DISPLAY_MODES.OWNER_HOVER,
           displayName: foundryDefaultTokenSettings.displayName ?? CONST.TOKEN_DISPLAY_MODES.OWNER,
-          bar1: { attribute: foundryDefaultTokenSettings.bar1?.attribute || "health" },
+          bar1: { attribute: (foundryDefaultTokenSettings.bar1 as Record<string, unknown>)?.attribute || "health" },
           img: tokenImage,
           texture: {
             src: tokenImage,

@@ -123,7 +123,11 @@ const GamePTR = {
     //@ts-expect-error No types for workers
     game.workers.createWorker("PerkWorker", { scripts: ["../systems/ptr2e/scripts/perk-worker.js"] });
 
-    ui?.sidebar?.expand?.();
+    if(game.settings.get("ptr2e", "preferences.open-sidebar")) ui?.sidebar?.expand?.();
+    if(!(game.settings.get("ptr2e", "preferences.sidebar-tab") === "scenes" && !game.user.isGM)) {
+      //@ts-expect-error - Outdated types
+      ui.sidebar.changeTab(game.settings.get("ptr2e", "preferences.sidebar-tab") || "chat", "primary")
+    }
   },
 };
 
