@@ -56,7 +56,7 @@ export class TextEnricher {
       return null;
     }
 
-    const trait = game.ptr.data.traits.get(slug);
+    const trait = game.ptr.data.traits.getTrait(slug);
     if (!trait) {
       const decorator = ['[', ']'];
 

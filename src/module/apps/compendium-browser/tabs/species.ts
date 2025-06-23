@@ -131,7 +131,7 @@ export class CompendiumBrowserSpeciesTab extends CompendiumBrowserTab {
       return acc;
     }, {} as Record<string, string>));
     this.filterData.multiselects.traits.options = this.generateMultiselectOptions(allTraits.reduce((acc, trait) => {
-      const traitData = game.ptr.data.traits.get(trait);
+      const traitData = game.ptr.data.traits.getTrait(trait);
       if (!traitData) return acc;
       acc[traitData.slug] = traitData.label;
       return acc;

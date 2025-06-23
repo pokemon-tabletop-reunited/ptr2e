@@ -9,67 +9,55 @@
     "slug": "x-headed",
     "label": "X Headed",
     "related": [],
-    "description": "Lists the number of heads the creature possesses, equal to X. Only used for the Multi-headed Ability.\nSUBJECT TO CHANGE"
+    "description": "Lists the number of heads the creature possesses, equal to X. Only used for the Multi-headed Ability.",
+    "placeholders": [
+      {
+        "keyPattern": "\\d+-headed",
+        "labelPattern": "X",
+        "valuePattern": "\\d+",
+        "descriptionPattern": "Lists the number of heads the creature possesses, equal to X.",
+        "descriptionReplacement": "This creature possesses {{x}} heads."
+      }
+    ]
   },
   {
-    "slug": "2-headed",
-    "label": "2 Headed",
-    "related": [],
-    "description": "This creature possesses two heads. Only used for the Multi-headed Ability.\nSUBJECT TO CHANGE"
-  },
-  {
-    "slug": "4-headed",
-    "label": "4 Headed",
-    "related": [],
-    "description": "This creature possesses four heads. Only used for the Multi-headed Ability.\nSUBJECT TO CHANGE"
-  },
-  {
-    "slug": "5-headed",
-    "label": "5 Headed",
-    "related": [],
-    "description": "This creature possesses five heads. Only used for the Multi-headed Ability.\nSUBJECT TO CHANGE"
-  },
-  {
-    "slug": "6-headed",
-    "label": "6 Headed",
-    "related": [],
-    "description": "This creature possesses six heads. Only used for the Multi-headed Ability.\nSUBJECT TO CHANGE"
-  },
-  {
-    "slug": "7-headed",
-    "label": "7 Headed",
-    "related": [],
-    "description": "This creature possesses seven heads. Only used for the Multi-headed Ability.\nSUBJECT TO CHANGE"
-  },
-  {
-    "slug": "8-headed",
-    "label": "8 Headed",
-    "related": [],
-    "description": "This creature possesses eight heads. Only used for the Multi-headed Ability.\nSUBJECT TO CHANGE"
-  },
-  {
-    "slug": "9-headed",
-    "label": "9 Headed",
-    "related": [],
-    "description": "This creature possesses nine heads. Only used for the Multi-headed Ability.\nSUBJECT TO CHANGE"
-  },
-  {
-    "slug": "10-headed",
-    "label": "10 Headed",
-    "related": [],
-    "description": "This creature possesses ten heads. Only used for the Multi-headed Ability.\nSUBJECT TO CHANGE"
-  },
-  {
-    "slug": "11-headed",
-    "label": "11 Headed",
-    "related": [],
-    "description": "This creature possesses eleven heads. Only used for the Multi-headed Ability.\nSUBJECT TO CHANGE"
-  },
-  {
-    "slug": "3-headed",
-    "label": "3 Headed",
-    "related": [],
-    "description": "This creature possesses twelve heads. Only used for the Multi-headed Ability.\nSUBJECT TO CHANGE"
+    "slug": "boss-xy",
+    "label": "Boss XX.Y",
+    "related": [
+      "ace"
+    ],
+    "description": "Denotes a creature as a Boss and applies a HP & PP multiplier of XX.Y.",
+    "placeholders": [
+      {
+        "keyPattern": "boss-\\d+\\d",
+        "labelPattern": "XX",
+        "valuePattern": "(\\d+)\\d",
+        "descriptionPattern": "XX.Y",
+        "descriptionReplacement": "{{x}}.Y",
+        "valueDivisor": "."
+      },
+      {
+        "keyPattern": "boss-\\d+\\d",
+        "labelPattern": "Y",
+        "valuePattern": "\\d$",
+        "descriptionPattern": ".Y",
+        "descriptionReplacement": ".{{x}}"
+      }
+    ],
+    "changes": [
+      {
+        "type": "basic",
+        "key": "system.modifiers.hpMultiplier",
+        "value": "{trait|value}",
+        "mode": 5
+      },
+      {
+        "type": "basic",
+        "key": "system.modifiers.ppMultiplier",
+        "value": "{trait|value}",
+        "mode": 5
+      }
+    ]
   },
   {
     "slug": "trainer",

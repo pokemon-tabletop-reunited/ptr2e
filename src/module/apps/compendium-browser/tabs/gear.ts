@@ -107,7 +107,7 @@ export class CompendiumBrowserGearTab extends CompendiumBrowserTab {
       backpack: "PTR2E.FIELDS.gear.equipped.slot.backpack"
     });
     this.filterData.multiselects.traits.options = this.generateMultiselectOptions(traits.reduce((acc, trait) => {
-      const traitData = game.ptr.data.traits.get(trait);
+      const traitData = game.ptr.data.traits.getTrait(trait);
       if (!traitData) return acc;
       acc[traitData.slug] = traitData.label;
       return acc;

@@ -8,7 +8,7 @@ import ActionPTR2e from "./action.ts";
 class Trait {
   static isValid(value: unknown): value is Trait {
     if (typeof value === 'string') {
-      return true; //!!game.ptr.data.traits.get(value);
+      return true; //!!game.ptr.data.traits.getTrait(value);
     }
     if (value instanceof Trait) {
       return true;
@@ -51,22 +51,26 @@ class Trait {
       }
     }, { parent });
     effect.changes.forEach(c => {
-      c.key = c.resolveValue(c.key, c.key, {
-        evaluate: false, resolvables: {
-          actor,
-          item,
-          effect,
-          attack
-        }
-      }) as string;
-      c.value = c.resolveValue(c.value, c.value, {
-        evaluate: false, resolvables: {
-          actor,
-          item,
-          effect,
-          attack
-        }
-      }) as string | number;
+      c.updateSource({
+        key: c.resolveValue(c.key, c.key, {
+          evaluate: false, resolvables: {
+            actor,
+            item,
+            effect,
+            attack,
+            trait: { value: this.value ?? "" }
+          }
+        }) as string,
+        value: c.resolveValue(c.value, c.value, {
+          evaluate: false, resolvables: {
+            actor,
+            item,
+            effect,
+            attack,
+            trait: { value: this.value ?? "" }
+          }
+        }) as string | number
+      })
     })
     return effect;
   }
@@ -80,6 +84,18 @@ interface Trait {
   virtual?: boolean,
   type?: "narrative" | "automated"
   changes: ChangeModel['_source'][]
+  value?: string | number,
+}
+
+export interface PlaceholderTrait extends Trait {
+  placeholders: {
+    keyPattern: string,
+    labelPattern: string,
+    valuePattern: string,
+    descriptionPattern: string,
+    descriptionReplacement: string,
+    valueDivisor?: string
+  }[]
 }
 
 // interface Keyword {
