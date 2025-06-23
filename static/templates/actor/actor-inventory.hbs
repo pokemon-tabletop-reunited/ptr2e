@@ -42,6 +42,7 @@
                           {{~else if (and (eq this.system.equipped.carryType "equipped") (eq this.system.equipped.handsHeld 2))}}<span class="fa-stack fa-fw fa-2xs"><i class="fa-solid fa-hand-back-fist fa-stack-2x"></i><i class="fa-solid fa-2 fa-inverse fa-stack-1x"></i></span>
                           {{~else if (and (eq this.system.equipped.carryType "equipped") (eq this.system.equipped.slot "worn"))}}<i class="fa-solid fa-tshirt fa-fw"></i>
                           {{~else if (and (eq this.system.equipped.carryType "equipped") (eq this.system.equipped.slot "accessory"))}}<i class="fa-solid fa-gem fa-fw"></i>
+                          {{~else if (and (eq this.system.equipped.carryType "equipped") (eq this.system.equipped.slot "slotless"))}}<i class="fa-solid fa-gem fa-fw"></i>
                           {{~else if (eq this.system.equipped.carryType "stowed")}}<i class="fa-solid fa-box fa-fw"></i>
                           {{~else if (eq this.system.equipped.carryType "dropped")}}<i class="fa-solid fa-grip-lines fa-fw"></i>
                           {{~else}}<i class="fa-duotone fa-uniform-martial-arts"></i>{{/if~}}
