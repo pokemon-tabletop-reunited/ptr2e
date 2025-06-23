@@ -774,18 +774,34 @@ export default abstract class BlueprintSystem extends HasEmbed(HasMigrations(fou
         return Array.from(skills.values());
       })();
 
-      //TODO: Add foundry overrides for token settings
-      const foundryDefaultTokenSettings = {
+      const type = evolution.system.traits?.includes("humanoid") ? "humanoid" : "pokemon";
+
+      const prototypeTokenOverrides = game.settings.get("core", "prototypeTokenOverrides") as Record<string, unknown>;
+      const override = prototypeTokenOverrides?.[type] ?? {};
+
+      const foundryDefaultTokenSettings: Record<string, unknown> = {
         displayBars: CONST.TOKEN_DISPLAY_MODES.OWNER_HOVER,
         displayName: CONST.TOKEN_DISPLAY_MODES.OWNER,
         bar1: { attribute: "health" },
         bar2: { attribute: "powerPoints" },
       };
 
+      for(const [key, value] of Object.entries(override)) {
+        if(value === undefined || value === null) continue;
+        if(typeof value !== "object") {
+          foundryDefaultTokenSettings[key] = value;
+        }
+        for(const [subKey, subValue] of Object.entries(value)) {
+          if(!subValue) continue;
+          foundryDefaultTokenSettings[key] ??= {};
+          (foundryDefaultTokenSettings[key] as Record<string, unknown>)[subKey] = subValue;
+        }
+      }
+
       const data = {
         name: Handlebars.helpers.formatSlug(evolution.system.slug) || blueprint.name,
         img,
-        type: evolution.system.traits?.includes("humanoid") ? "humanoid" : "pokemon",
+        type,
         folder: options.folder?.id,
         ownership: options.parent ? options.parent.ownership : {},
         system: {
