@@ -6783,6 +6783,79 @@
             }
           }
         }
+
+        &[data-tab="skills"] {
+          flex-direction: column;
+
+          &.active {
+            display: flex;
+            padding: 0.5rem 0.25rem 0 0.5rem;
+          }
+
+          main.content {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            overflow-y: auto;
+
+            .skill-entry {
+              display: flex;
+              flex-direction: column;
+              flex-wrap: nowrap;
+              gap: 0.25rem;
+              border: 1px solid var(--border-theme-color);
+              padding: 0.25rem;
+              border-radius: 8px;
+              
+              header {
+                padding: 0.25rem;
+                border-bottom: 1px solid var(--border-theme-color);
+              }
+
+              .actors {
+                display: flex;
+                flex-direction: row;
+                flex-wrap: wrap;
+                gap: 0.25rem;
+              }
+
+              .actor {
+                flex: 0 0 130px;
+                height: 22px;
+                padding: 0px;
+                border: 1px solid var(--player-color, var(--border-theme-color));
+                border-radius: 6px;
+
+                display: flex;
+                flex-direction: row;
+                gap: 0.25rem;
+                font-size: 12px;
+                align-items: center;
+                
+                .avatar {
+                  flex: 0 0 20px;
+                  height: 20px;
+                  width: 20px;
+                  border-radius: 6px 0 0 6px;
+                }
+
+                .name {
+                  flex: 1;
+                  height: 22px;
+                  width: calc(130px - 0.25rem - 20px);
+                  overflow: hidden;
+                  white-space: nowrap;
+                  text-overflow: ellipsis;
+                  align-content: center;
+
+                  span {
+                    color: var(--hint-text-color);
+                  }
+                }
+              }
+            }
+          }
+        }
       }
     }
   
