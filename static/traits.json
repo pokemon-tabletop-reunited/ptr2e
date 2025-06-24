@@ -5107,5 +5107,29 @@
     "related": [],
     "description": "This Trait denotes that the Attack deals Flat Damage.",
     "type": "automated"
+  },
+  {
+    "slug": "digimon",
+    "label": "Digimon",
+    "related": ["vaccine", "data", "virus"],
+    "description": "Grant access to the Digivolution Web. (In a future build)"
+  },
+  {
+    "slug": "vaccine",
+    "label": "Vaccine",
+    "related": ["digimon", "data", "virus"],
+    "description": "Gain +50% Damage versus Virus-trait Digimon. Inflict 33% less Damage vs Data-trait Digimon."
+  },
+  {
+    "slug": "data",
+    "label": "Data",
+    "related": ["vaccine", "digimon", "virus"],
+    "description": "Gain +50% Damage versus Vaccine-trait Digimon. Inflict 33% less Damage vs Virus-trait Digimon."
+  },
+  {
+    "slug": "virus",
+    "label": "Virus",
+    "related": ["vaccine", "data", "digimon"],
+    "description": "Gain +50% Damage versus Data-trait Digimon. Inflict 33% less Damage vs Vaccine-trait Digimon."
   }
 ]
