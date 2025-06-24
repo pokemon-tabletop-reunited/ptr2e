@@ -30,6 +30,8 @@ import CreateClockChangeSystem from "../create-clock.ts";
 import CreateClockForm from "./create-clock.ts";
 import IncrementClockChangeSystem from "../increment-clock.ts";
 import IncrementClockForm from "./increment-clock.ts";
+import ApplyTickChangeSystem from "../apply-tick.ts";
+import ApplyTickForm from "./apply-tick.ts";
 // import AlterAttackChangeSystem from "../alter-attack.ts";
 // import AlterAttackForm from "./alter-attack.ts";
 
@@ -50,6 +52,7 @@ const CHANGE_FORMS: Partial<Record<string, ConstructorOf<ChangeForm>>> = {
     [StatsAlterationChangeSystem.TYPE]: StatsAlterationForm,
     [CreateClockChangeSystem.TYPE]: CreateClockForm,
     [IncrementClockChangeSystem.TYPE]: IncrementClockForm,
+    [ApplyTickChangeSystem.TYPE]: ApplyTickForm,
     // [AlterAttackChangeSystem.TYPE]: AlterActionForm,
 };
 

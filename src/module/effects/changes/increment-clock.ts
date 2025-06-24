@@ -69,7 +69,7 @@ export default class IncrementClockChangeSystem extends ChangeModel {
     // If this is not the only change, we keep the effect
     if (this.effect?.changes?.length > 1) {
       const changes = this.effect.changes.filter(c => c !== this);
-      if (!changes.every(c => c.type === "create-clock")) {
+      if (!changes.every(c => c.type === "increment-clock")) {
         return;
       }
     }
