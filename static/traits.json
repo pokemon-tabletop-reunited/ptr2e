@@ -1223,6 +1223,39 @@
     "description": "The creature's [Jaw] attacks have the [Grapple] trait. The creature has access to the [Jaw] tutor list."
   },
   {
+    "slug": "luca",
+    "label": "LUCA",
+    "related": [],
+    "description": "The \"last universal common ancestor\" is the hypothetical organism that is the most recent ancestor of modern life. Of course, a creature with this trait is anything but hypothetical. Creatures with this trait possess Connection – Transform.",
+    "changes": [
+      {
+        "type": "grant-item",
+        "key": "",
+        "value": "Compendium.ptr2e.core-moves.Item.KYiKjOrakhVcye6X",
+        "predicate": [],
+        "alterations": [
+          {
+            "mode": 5,
+            "property": "system.actions.0.free",
+            "value": "true"
+          }
+        ],
+        "mode": 2,
+        "priority": null,
+        "ignored": false,
+        "reevaluateOnUpdate": false,
+        "inMemoryOnly": false,
+        "allowDuplicate": true,
+        "track": false,
+        "replaceSelf": false,
+        "onDeleteActions": {
+          "grantee": "detach",
+          "granter": "cascade"
+        }
+      }
+    ]
+  },
+  {
     "slug": "lumbering",
     "label": "Lumbering",
     "related": [],
