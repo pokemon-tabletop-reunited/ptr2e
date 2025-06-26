@@ -63,14 +63,20 @@
       "system": {
         "changes": [
           {
-            "type": "roll-effect",
+            "type": "effect-alteration",
             "key": "rage-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.enragedcondiitem",
-            "predicate": [],
-            "chance": 100,
-            "affects": "self",
+            "value": 0,
+            "predicate": [
+              "effect:enraged"
+            ],
+            "alterations": [
+              {
+                "mode": 2,
+                "property": "effects.0.duration.turns",
+                "value": 3
+              }
+            ],
             "mode": 2,
-            "priority": null,
             "ignored": false
           },
           {

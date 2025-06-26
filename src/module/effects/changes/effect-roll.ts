@@ -96,6 +96,7 @@ export default class EffectRollChangeSystem extends ChangeModel {
 
       return {
         effect: effect.uuid,
+        slug: effect.slug,
         chance: this.chance,
         label: this.label,
         critOnly: isCrit,

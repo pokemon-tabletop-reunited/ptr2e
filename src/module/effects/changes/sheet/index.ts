@@ -32,6 +32,8 @@ import IncrementClockChangeSystem from "../increment-clock.ts";
 import IncrementClockForm from "./increment-clock.ts";
 import ApplyTickChangeSystem from "../apply-tick.ts";
 import ApplyTickForm from "./apply-tick.ts";
+import EffectAlterationChangeSystem from "../effect-alteration.ts";
+import EffectAlterationForm from "./effect-alteration.ts";
 // import AlterAttackChangeSystem from "../alter-attack.ts";
 // import AlterAttackForm from "./alter-attack.ts";
 
@@ -46,6 +48,7 @@ const CHANGE_FORMS: Partial<Record<string, ConstructorOf<ChangeForm>>> = {
     [BasicChangeSystem.TYPE]: AELikeModifierForm,
     [RollNoteChangeSystem.TYPE]: RollNoteForm,
     [RollEffectChangeSystem.TYPE]: RollEffectForm,
+    [EffectAlterationChangeSystem.TYPE]: EffectAlterationForm,
     [AddTraitChangeSystem.TYPE]: AddTraitForm,
     [RemoveTraitChangeSystem.TYPE]: RemoveTraitForm,
     [SuppresAbilityChangeSystem.TYPE]: SuppresAbilityForm,

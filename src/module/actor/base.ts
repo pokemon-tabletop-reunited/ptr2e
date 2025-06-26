@@ -336,6 +336,7 @@ class ActorPTR2e<
       afflictions: { data: [], ids: new Set() },
       rollNotes: {},
       effects: {},
+      effectAlterations: {},
       toggles: [],
       attackAdjustments: [],
       tokenTags: new Map(),
@@ -1670,6 +1671,7 @@ class ActorPTR2e<
       options: [...params.options, ...itemOptions, ...targetRollOptions],
       chanceModifier: (Number(selfActor.system?.modifiers?.effectChance) || 0),
       hasSenerenGrace: selfActor?.rollOptions?.all?.["special:serene-grace"] ?? false,
+      effectAlterations: selfActor.synthetics.effectAlterations,
     })
 
     const targetOriginEffectRolls = params.skipEffectRolls ? [] : await extractEffectRolls({
@@ -1682,7 +1684,8 @@ class ActorPTR2e<
       domains: params.domains,
       options: [...params.options, ...itemOptions, ...targetRollOptions],
       chanceModifier: (Number(targetToken?.actor?.system?.modifiers?.effectChance) || 0),
-      hasSenerenGrace: targetToken?.actor?.rollOptions?.all?.["special:serene-grace"] ?? false
+      hasSenerenGrace: targetToken?.actor?.rollOptions?.all?.["special:serene-grace"] ?? false,
+      effectAlterations: targetToken?.actor?.synthetics.effectAlterations ?? {},
     })
 
     const targetDefensiveEffectRolls = params.skipEffectRolls ? [] : await extractEffectRolls({
@@ -1695,7 +1698,8 @@ class ActorPTR2e<
       domains: params.domains,
       options: [...params.options, ...itemOptions, ...targetRollOptions],
       chanceModifier: (Number(targetToken?.actor?.system?.modifiers?.effectChance) || 0),
-      hasSenerenGrace: targetToken?.actor?.rollOptions?.all?.["special:serene-grace"] ?? false
+      hasSenerenGrace: targetToken?.actor?.rollOptions?.all?.["special:serene-grace"] ?? false,
+      effectAlterations: targetToken?.actor?.synthetics.effectAlterations ?? {},
     });
 
     const targetOriginFlatModifiers = await extractTargetModifiers({

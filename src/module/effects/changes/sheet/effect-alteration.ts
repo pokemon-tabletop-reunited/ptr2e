@@ -1,12 +1,12 @@
 
 import { htmlQueryAll } from "@utils";
-import ApplyTickChangeSystem from "../apply-tick.ts";
 import ChangeForm from "./base.ts";
 import { ItemAlteration } from "@module/effects/alterations/item.ts";
+import EffectAlterationChangeSystem from "../effect-alteration.ts";
 
-class ApplyTickForm extends ChangeForm<ApplyTickChangeSystem> {
+class EffectAlterationForm extends ChangeForm<EffectAlterationChangeSystem> {
   override get template() {
-    return "systems/ptr2e/templates/effects/changes/apply-tick.hbs";
+    return "systems/ptr2e/templates/effects/changes/effect-alteration.hbs";
   }
 
   override activateListeners(html: HTMLElement): void {
@@ -39,4 +39,4 @@ class ApplyTickForm extends ChangeForm<ApplyTickChangeSystem> {
   }
 }
 
-export default ApplyTickForm;
+export default EffectAlterationForm;
