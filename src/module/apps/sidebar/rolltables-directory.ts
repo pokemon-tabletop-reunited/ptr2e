@@ -52,7 +52,7 @@ export class RollTableDirectoryPTR2e extends foundry.applications.sidebar.tabs.R
     return context;
   }
 
-  async _getEntryDragData(entryId: string) {
+  _getEntryDragData(entryId: string) {
     // @ts-expect-error - Missing types for this function
     if(!entryId.startsWith("phtid0")) return super._getEntryDragData(entryId);
     ui.notifications.warn("Drag and drop is not supported for habitat tables.");
