@@ -14,6 +14,10 @@ export default class EffectRollChangeSystem extends ChangeModel {
     return {
       ...schema,
       chance: new fields.NumberField({ required: true, initial: 10, min: 1, max: 100 }),
+      isFixedChance: new fields.BooleanField({
+        required: true,
+        initial: false
+      }),
       affects: new fields.StringField({
         required: true,
         choices: ["self", "target", "origin", "defensive"].reduce<Record<string, string>>((acc, affects) => ({ ...acc, [affects]: affects }), {}),
@@ -97,13 +101,14 @@ export default class EffectRollChangeSystem extends ChangeModel {
         critOnly: isCrit,
         alterations: this.alterations,
         dontMerge: this.dontMerge,
+        isFixedChance: this.isFixedChance,
       };
     }
   }
 
   protected async getItem(key: string): Promise<Maybe<ClientDocument>> {
     try {
-      return (await fromUuid(key))?.clone({}, {keepId: true}) ?? null;
+      return (await fu.fromUuid(key))?.clone({}, {keepId: true}) ?? null;
     } catch (error) {
       console.error(error);
       return null;
@@ -118,6 +123,7 @@ export default interface EffectRollChangeSystem extends ChangeModel, ModelPropsF
 
 interface EffectRollSchema extends ChangeSchema {
   chance: foundry.data.fields.NumberField<number, number, true, false, true>;
+  isFixedChance: foundry.data.fields.BooleanField<boolean, boolean, true, false, true>;
   affects: foundry.data.fields.StringField<"self" | "target" | "origin", "self" | "target" | "origin", true, false, true>;
   alterations: foundry.data.fields.ArrayField<foundry.data.fields.EmbeddedDataField<ItemAlteration>>;
   dontMerge: foundry.data.fields.BooleanField<boolean, boolean, true, false, true>;

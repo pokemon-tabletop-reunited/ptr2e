@@ -17,6 +17,7 @@ export interface EffectRoll {
   effect: ItemUUID;
   label: string;
   roll?: Rolled<Roll>;
+  isFixedChance?: boolean;
   success?: boolean;
   critOnly?: boolean;
   alterations?: ItemAlteration[];

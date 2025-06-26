@@ -579,7 +579,9 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
       powerPoints: 0,
       weightClass: 0,
       heightClass: 0,
-      vulnerabilityMultiplier: 1
+      vulnerabilityMultiplier: 1,
+      effectHitRate: 0,
+      effectResistance: 0
     };
   }
 

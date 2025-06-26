@@ -145,7 +145,7 @@ async function extractEffectRolls({
     )
   ).reduce((acc, val): EffectRoll[] => {
     if(!val) return acc;
-    if(val.dontMerge) return [...acc, val];
+    if(val.dontMerge || val.isFixedChance) return [...acc, val];
     const inMap = effectTargets.get(val.effect + (val.critOnly ? '-crit' : ''));
     const sameType = inMap?.critOnly === val.critOnly;
     if (!inMap) {
@@ -180,7 +180,7 @@ async function extractEffectRolls({
   }
 
   return (hasSenerenGrace ? effectRolls.map(e => {
-    e.chance += e.chance;
+    if(!e.isFixedChance) e.chance += e.chance;
     return e;
   }) : effectRolls).map(e => {
     if (e.effect.endsWith("-crit")) {
