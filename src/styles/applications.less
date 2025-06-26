@@ -119,17 +119,17 @@
       }
     }
 
-    .perk-config-sheet {
+    &.perk-config-sheet {
       .window-content {
-        display: grid;
-        grid-template-columns: unset;
-        grid-template-rows: auto min-content 3rem;
+        display: grid !important;
+        grid-template-columns: unset !important;
+        grid-template-rows: auto min-content 3.5rem !important;
         grid-template-areas:
           "priorities"
           "config"
-          "footer";
-        overflow: hidden;
-        height: 100%;
+          "footer" !important;
+        overflow: hidden !important;
+        height: 100% !important;
     
         .config {
           grid-area: config;
@@ -3763,7 +3763,7 @@
   
           label,
           input {
-            flex: 0 0 45%;
+            flex: 0 0 25%;
           }
         }
       }
