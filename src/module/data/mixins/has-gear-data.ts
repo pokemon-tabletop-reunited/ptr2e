@@ -1,4 +1,4 @@
-import { EquipmentData, PokemonType, PTRCONSTS } from "@data";
+import { EquipmentData, PokemonType, PTRCONSTS, RangePTR2e } from "@data";
 import { TemplateConstructor } from "./data-template.ts";
 import { getTypes } from "@scripts/config/effectiveness.ts";
 import { SlugField } from "../fields/slug-field.ts";
@@ -77,6 +77,7 @@ export default function HasGearData<BaseClass extends TemplateConstructor>(baseC
             label: "PTR2E.FIELDS.gear.fling.hide.label",
             hint: "PTR2E.FIELDS.gear.fling.hide.hint",
           }),
+          range: new fields.EmbeddedDataField(RangePTR2e, { required: false, nullable: true }),
         }),
         quantity: new fields.NumberField({
           required: true,
@@ -267,6 +268,7 @@ interface _FlingSchema extends foundry.data.fields.DataSchema {
   power: foundry.data.fields.NumberField<number, number, true, true, true>;
   accuracy: foundry.data.fields.NumberField<number, number, true, false, true>;
   hide: foundry.data.fields.BooleanField<boolean, boolean, true, true, true>;
+  range: foundry.data.fields.EmbeddedDataField<RangePTR2e, false, true>;
 }
 
 export const grades = ["E", "D", "C", "B", "A", "S"] as const;
