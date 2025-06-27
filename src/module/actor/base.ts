@@ -615,12 +615,15 @@ class ActorPTR2e<
     const changes = [];
     // Afflictions don't always have changes, so we need to track them separately
     const afflictions: ActiveEffectPTR2e<ActorPTR2e, AfflictionActiveEffectSystem>[] = [];
+    const bossTrait = this.traits.find(t => t.slug.includes("boss") && !!t.value);
     for (const effect of this.allApplicableEffects() as unknown as Generator<
       ActiveEffectPTR2e<ActorPTR2e>,
       void,
       void
     >) {
       if (!effect.active) continue;
+      if(bossTrait && effect.flags?.ptr2e?.traitEffect == bossTrait.slug) continue;
+      if(effect.slug.includes("boss"))
       changes.push(
         ...effect.changes.map((change) => {
           const c = foundry.utils.deepClone(change);
