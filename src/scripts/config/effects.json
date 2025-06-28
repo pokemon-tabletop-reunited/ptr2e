@@ -1888,6 +1888,31 @@
           "mode": 2,
           "priority": null,
           "ignored": false
+        },
+        {
+          "type": "roll-effect",
+          "key": "attack",
+          "value": "Compendium.ptr2e.core-effects.Item.advanceffectitem",
+          "chance": 100,
+          "dontMerge": true,
+          "affects": "self",
+          "alterations": [
+            {
+              "mode": 5,
+              "property": "system.amount",
+              "value": -20
+            },
+            {
+              "mode": 5,
+              "property": "name",
+              "value": "Delay 20% (Strong)"
+            },
+            {
+              "mode": 5,
+              "property": "system.removeAfterAttacking",
+              "value": true
+            }
+          ]
         }
       ],
       "removeOnRecall": true,
@@ -1917,6 +1942,31 @@
           "mode": 2,
           "priority": null,
           "ignored": false
+        },
+        {
+          "type": "roll-effect",
+          "key": "attack",
+          "value": "Compendium.ptr2e.core-effects.Item.advanceffectitem",
+          "chance": 100,
+          "dontMerge": true,
+          "affects": "self",
+          "alterations": [
+            {
+              "mode": 5,
+              "property": "system.amount",
+              "value": 20
+            },
+            {
+              "mode": 5,
+              "property": "name",
+              "value": "Advance 20% (Agile)"
+            },
+            {
+              "mode": 5,
+              "property": "system.removeAfterAttacking",
+              "value": true
+            }
+          ]
         }
       ],
       "removeOnRecall": true,

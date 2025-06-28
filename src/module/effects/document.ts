@@ -108,6 +108,15 @@ class ActiveEffectPTR2e<
         this.setCount(this.parent.rollOptions.getFromDomain("all"), "effect:minor-affliction");
       }
     }
+
+    if(this.system.removeAfterAttacking && this.targetsActor() && this.parent.synthetics) {
+      this.parent.synthetics.effectsRemovedAfterAttacking ??= [];
+      this.parent.synthetics.effectsRemovedAfterAttacking.push(this);
+    }
+    if(this.system.removeAfterAttacked && this.targetsActor() && this.parent.synthetics) {
+      this.parent.synthetics.effectsRemovedAfterAttacked ??= [];
+      this.parent.synthetics.effectsRemovedAfterAttacked.push(this);
+    }
   }
 
   private setCount(domainRecord: Record<string, boolean>, option: string) {

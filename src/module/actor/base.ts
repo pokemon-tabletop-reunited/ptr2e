@@ -337,6 +337,8 @@ class ActorPTR2e<
       rollNotes: {},
       effects: {},
       effectAlterations: {},
+      effectsRemovedAfterAttacking: [],
+      effectsRemovedAfterAttacked: [],
       toggles: [],
       attackAdjustments: [],
       tokenTags: new Map(),

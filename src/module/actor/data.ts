@@ -1,5 +1,5 @@
 import { AttackPTR2e, DistanceUnit, Trait, WeightUnit } from "@data";
-import { EffectSourcePTR2e } from "@effects";
+import { ActiveEffectPTR2e, EffectSourcePTR2e } from "@effects";
 import { ItemAlteration } from "@module/effects/alterations/item.ts";
 import AfflictionActiveEffectSystem from "@module/effects/data/affliction.ts";
 import { DeferredPromise, DeferredValue, DeferredValueParams, ModifierAdjustment, ModifierPTR2e } from "@module/effects/modifiers.ts";
@@ -59,6 +59,8 @@ interface ActorSynthetics {
   rollNotes: Record<string, RollNote[]>;
   effects: Record<string, { self: DeferredEffectRoll[], target: DeferredEffectRoll[], origin: DeferredEffectRoll[], defensive: DeferredEffectRoll[] }>;
   effectAlterations: Record<string, DeferredValue<EffectAlteration>[]>;
+  effectsRemovedAfterAttacking: ActiveEffectPTR2e[];
+  effectsRemovedAfterAttacked: ActiveEffectPTR2e[];
   toggles: RollOptionToggle[];
   attackAdjustments: (() => AttackAdjustment)[];
   tokenTags: Map<TokenDocumentUUID, string>;

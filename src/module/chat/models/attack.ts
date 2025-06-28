@@ -626,6 +626,23 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
         const target = result.target;
         await applyEffects(target, result.effect.effects?.defensive ?? [], result.hit === "critical");
       })(),
+      (async (): Promise<void> => {
+        const target = result.target;
+        if (target?.synthetics?.effectsRemovedAfterAttacked?.length) {
+          const removedEffectsMessage = target.synthetics.effectsRemovedAfterAttacked.reduce((acc, effect) => {
+            return acc + `<li>${effect.name}</li>`;
+          }, "");
+          await ChatMessage.create({
+            content: `<p>${game.i18n.localize("PTR2E.Combat.Messages.EffectsRemovedAfterAttacked")}</p><ul>${removedEffectsMessage}</ul>`,
+            speaker: ChatMessagePTR2e.getSpeaker({
+              actor: target,
+              token: target.token,
+            })
+          })
+          await target.deleteEmbeddedDocuments("ActiveEffect", target.synthetics.effectsRemovedAfterAttacked.map(e => e.id));
+          target.synthetics.effectsRemovedAfterAttacked = [];
+        }
+      })(),
     ]))[0];
   }
 
@@ -883,7 +900,7 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
       const actor = await this.currentOrigin;
       return actor?.hasPlayerOwner ? true : false
     })();
-    
+
     return {
       isGM: game.user.isGM,
       hasPlayerOwner,

@@ -415,7 +415,7 @@ class CheckPTR2e {
         effectRoll.success = effectRoll.roll.total <= 0;
       }
       for (const effectRoll of targetContext.effectRolls.target) {
-        effectRoll.roll = await new Roll("1d100ms@dc", { dc: effectRoll.isFixedChance ? effectRoll.chance : this.calculateRealChance({ baseChance: effectRoll.chance, ehr: targetContext.self.actor.system.modifiers.effectHitRate, res: targetContext.target?.actor.system.modifiers.effectResistance }), baseChance: effectRoll.chance, ehr: targetContext.self.actor.system.modifiers.effectHitRate, res: targetContext.target?.actor.system.modifiers.effectResistance}).roll();
+        effectRoll.roll = await new Roll("1d100ms@dc", { dc: effectRoll.isFixedChance ? effectRoll.chance : this.calculateRealChance({ baseChance: effectRoll.chance, ehr: targetContext.self.actor.system.modifiers.effectHitRate, res: targetContext.target?.actor.system.modifiers.effectResistance }), baseChance: effectRoll.chance, ehr: targetContext.self.actor.system.modifiers.effectHitRate, res: targetContext.target?.actor.system.modifiers.effectResistance }).roll();
         effectRoll.success = effectRoll.roll.total <= 0;
       }
       for (const effectRoll of targetContext.effectRolls.defensive) {
@@ -472,7 +472,7 @@ class CheckPTR2e {
     const effectsToApply: ActiveEffectPTR2e['_source'][] = [];
     if (context.selfEffectRolls?.length) {
       for (const effectRoll of context.selfEffectRolls) {
-        effectRoll.roll ??= await new Roll("1d100ms@dc", { dc: effectRoll.isFixedChance ? effectRoll.chance : this.calculateRealChance({ baseChance: effectRoll.chance, ehr: context.actor?.system.modifiers.effectHitRate }), baseChance: effectRoll.chance, ehr: context.actor?.system.modifiers.effectHitRate}).roll();
+        effectRoll.roll ??= await new Roll("1d100ms@dc", { dc: effectRoll.isFixedChance ? effectRoll.chance : this.calculateRealChance({ baseChance: effectRoll.chance, ehr: context.actor?.system.modifiers.effectHitRate }), baseChance: effectRoll.chance, ehr: context.actor?.system.modifiers.effectHitRate }).roll();
         effectRoll.success = effectRoll.roll.total <= 0;
         if (effectRoll.success) {
           const item = await fu.fromUuid(effectRoll.effect);
@@ -539,6 +539,21 @@ class CheckPTR2e {
           // }
         }
       }
+    }
+
+    if (context.actor?.synthetics?.effectsRemovedAfterAttacking?.length) {
+      const removedEffectsMessage = context.actor.synthetics.effectsRemovedAfterAttacking.reduce((acc, effect) => {
+        return acc + `<li>${effect.name}</li>`;
+      }, "");
+      await ChatMessage.create({
+        content: `<p>${game.i18n.localize("PTR2E.Combat.Messages.EffectsRemovedAfterAttacking")}</p><ul>${removedEffectsMessage}</ul>`,
+        speaker: ChatMessagePTR2e.getSpeaker({
+          actor: context.actor,
+          token: context.token,
+        })
+      })
+      await context.actor.deleteEmbeddedDocuments("ActiveEffect", context.actor.synthetics.effectsRemovedAfterAttacking.map(e => e.id));
+      context.actor.synthetics.effectsRemovedAfterAttacking = [];
     }
 
     if (effectsToApply.length) {
