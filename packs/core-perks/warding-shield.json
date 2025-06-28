@@ -7,7 +7,7 @@
   "system": {
     "actions": [],
     "slug": "warding-shield",
-    "description": "<p>Enemy effect rates targeting you whilst Shielded reduce their effect range by 10, to a minimum of 1. This only applies to secondary effects which would be directly detrimental to yourself, and does not impact chances for the enemy to self-buff.</p>",
+    "description": "<p>You gain 33% Effect RES while Shielded.</p>",
     "traits": [],
     "prerequisites": [
       "item:perk:improved-shielding"
@@ -65,16 +65,14 @@
       "system": {
         "changes": [
           {
-            "type": "ephemeral-modifier",
-            "key": "system.modifiers.effectChance",
-            "value": -10,
+            "type": "ae-like",
+            "key": "system.modifiers.effectResistance",
+            "value": 33,
             "predicate": [
               "self:state:shielded"
             ],
             "mode": 2,
-            "priority": null,
-            "ignored": false,
-            "hideIfDisabled": false
+            "priority": null
           }
         ],
         "slug": null,

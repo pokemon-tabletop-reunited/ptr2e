@@ -17,10 +17,12 @@ export interface EffectRoll {
   effect: ItemUUID;
   label: string;
   roll?: Rolled<Roll>;
+  isFixedChance?: boolean;
   success?: boolean;
   critOnly?: boolean;
   alterations?: ItemAlteration[];
   dontMerge: boolean;
+  slug?: string;
   [key: string]: unknown;
 }
 
@@ -32,6 +34,10 @@ export interface EffectRollSource {
   success?: boolean;
   critOnly?: boolean;
   [key: string]: unknown;
+}
+
+export interface EffectAlteration {
+  alterations: ItemAlteration[];
 }
 
 export type DeferredEphemeralEffect = DeferredPromise<EffectSourcePTR2e[] | null>;
@@ -52,6 +58,7 @@ interface ActorSynthetics {
   afflictions: { data: AfflictionActiveEffectSystem[], ids: Set<string> };
   rollNotes: Record<string, RollNote[]>;
   effects: Record<string, { self: DeferredEffectRoll[], target: DeferredEffectRoll[], origin: DeferredEffectRoll[], defensive: DeferredEffectRoll[] }>;
+  effectAlterations: Record<string, DeferredValue<EffectAlteration>[]>;
   toggles: RollOptionToggle[];
   attackAdjustments: (() => AttackAdjustment)[];
   tokenTags: Map<TokenDocumentUUID, string>;

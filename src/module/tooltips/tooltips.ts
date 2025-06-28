@@ -127,7 +127,7 @@ export default class TooltipsPTR2e {
 
     const tooltipTrait = game.tooltip.element?.dataset.tooltipTrait ?? false;
 
-    const data = game.ptr.data.traits.get(trait);
+    const data = game.ptr.data.traits.getTrait(trait);
     if (!data) return false;
 
     this.tooltip.innerHTML = `<h4 class="trait">[${data.label

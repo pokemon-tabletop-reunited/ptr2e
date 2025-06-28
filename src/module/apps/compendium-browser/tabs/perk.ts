@@ -86,7 +86,7 @@ export class CompendiumBrowserPerkTab extends CompendiumBrowserTab {
     }
 
     this.filterData.multiselects.traits.options = this.generateMultiselectOptions(traits.reduce((acc, trait) => {
-      const traitData = game.ptr.data.traits.get(trait);
+      const traitData = game.ptr.data.traits.getTrait(trait);
       if (!traitData) return acc;
       acc[traitData.slug] = traitData.label;
       return acc;

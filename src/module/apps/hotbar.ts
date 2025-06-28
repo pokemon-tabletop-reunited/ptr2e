@@ -256,6 +256,15 @@ export class HotbarPTR2e extends foundry.applications.ui.Hotbar {
     this.#updateFadedUI();
 
     // this.#fadeOldState();
+
+    // Drag and Drop
+    //@ts-expect-error - Incomplete types
+    new foundry.applications.ux.DragDrop.implementation({
+      dragSelector: "menu.panel .owner, menu.panel .icon.actor",
+      callbacks: {
+        dragstart: this.#onDragStart.bind(this),
+      }
+    }).bind(this.element);
   }
 
   protected override _attachPartListeners(partId: string, htmlElement: HTMLElement, options: HandlebarsRenderOptions): void {
@@ -550,6 +559,19 @@ export class HotbarPTR2e extends foundry.applications.ui.Hotbar {
   static async #onToggleEffects(this: HotbarPTR2e) {
     this.shown = this.shown === "effects" ? null : "effects";
     await this.#updateToggles();
+  }
+
+  async #onDragStart(event: DragEvent) {
+    const uuid =( event.target as HTMLElement)?.closest<HTMLElement>("[data-uuid]")?.dataset.uuid ?? (event.target as HTMLElement)?.dataset.uuid;
+    if(!uuid) return;
+
+    const doc = await fu.fromUuid(uuid);
+    if (!doc || !('toDragData' in doc && typeof doc.toDragData === "function")) return;
+
+    const dragData = doc.toDragData();
+    if (!dragData) return;
+    
+    event.dataTransfer?.setData("text/plain", JSON.stringify(dragData));
   }
 }
 

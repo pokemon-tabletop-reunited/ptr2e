@@ -196,7 +196,7 @@ class ActionPTR2e extends foundry.abstract.DataModel {
 
   prepareDerivedData() {
     this.traits = this._source.traits.reduce((acc: SystemTraitsCollection<Trait>, traitSlug: string) => {
-      const trait = game.ptr.data.traits.get(traitSlug);
+      const trait = game.ptr.data.traits.getTrait(traitSlug);
       if (trait) {
         acc.set(traitSlug, trait);
       }

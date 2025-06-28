@@ -1,4 +1,4 @@
-import { ActorPTR2e, ActorSynthetics, EffectRoll } from "@actor";
+import { ActorPTR2e, ActorSynthetics, EffectAlteration, EffectRoll } from "@actor";
 import { ActionPTR2e, AttackPTR2e, ChangeModel } from "@data";
 import { ActiveEffectPTR2e, BracketedValue, EffectSourcePTR2e } from "@effects";
 import { ItemPTR2e, ItemSourcePTR2e } from "@item";
@@ -126,6 +126,7 @@ async function extractEffectRolls({
   options,
   chanceModifier = 0,
   hasSenerenGrace = false,
+  effectAlterations: effectAdjustments = {}
 }: Omit<ExtractEphemeralEffectsParams, 'affects'> & { affects: "self" | "origin" | "target" | "defensive", chanceModifier?: number, hasSenerenGrace?: boolean }): Promise<EffectRoll[]> {
   if (!(origin && target)) return [];
 
@@ -137,32 +138,44 @@ async function extractEffectRolls({
   ].flat();
   const resolvables = { item, attack, action };
   const effectTargets = new Map<string, EffectRoll>();
-  const effectRolls = (
-    await Promise.all(
-      domains
-        .flatMap((s) => (["origin", "defensive"].includes(affects) ? target : origin).synthetics.effects[s]?.[affects] ?? [])
-        .map((d) => d({ test: fullOptions, resolvables }))
-    )
-  ).reduce((acc, val): EffectRoll[] => {
-    if(!val) return acc;
-    if(val.dontMerge) return [...acc, val];
-    const inMap = effectTargets.get(val.effect + (val.critOnly ? '-crit' : ''));
-    const sameType = inMap?.critOnly === val.critOnly;
-    if (!inMap) {
-      effectTargets.set(val.effect + (val.critOnly ? '-crit' : ''), val);
-      return [...acc, val];
-    }
-    if (inMap && sameType) {
-      inMap.chance += val.chance;
-    }
-    return acc;
-  }, [] as EffectRoll[]).flatMap((e) => {
-    if (e) {
-      e.chance = e.chance + chanceModifier;
-      return e;
-    }
-    return [];
-  });
+  const effectRolls = (await Promise.all(
+    (
+      await Promise.all(
+        domains
+          .flatMap((s) => (["origin", "defensive"].includes(affects) ? target : origin).synthetics.effects[s]?.[affects] ?? [])
+          .map((d) => d({ test: fullOptions, resolvables }))
+      )
+    ).reduce((acc, val): EffectRoll[] => {
+      if (!val) return acc;
+      if (val.dontMerge || val.isFixedChance) return [...acc, val];
+      const inMap = effectTargets.get(val.effect + (val.critOnly ? '-crit' : ''));
+      const sameType = inMap?.critOnly === val.critOnly;
+      if (!inMap) {
+        effectTargets.set(val.effect + (val.critOnly ? '-crit' : ''), val);
+        return [...acc, val];
+      }
+      if (inMap && sameType) {
+        inMap.chance += val.chance;
+      }
+      return acc;
+    }, [] as EffectRoll[]).map(async (e) => {
+      if (e) {
+        if (!e.isFixedChance) e.chance = e.chance + chanceModifier;
+
+        const alterations = await extractEffectAlterations(
+          effectAdjustments,
+          domains,
+          e,
+          options,
+          resolvables
+        );
+        e.alterations = [...(e.alterations ?? []), ...alterations.flatMap(a => a.alterations ?? [])];
+
+        return e;
+      }
+      return [];
+    })
+  )).flatMap(e => e ? e : []);
 
   const effectIncreases = (
     await Promise.all(
@@ -180,7 +193,7 @@ async function extractEffectRolls({
   }
 
   return (hasSenerenGrace ? effectRolls.map(e => {
-    e.chance += e.chance;
+    if (!e.isFixedChance) e.chance += e.chance;
     return e;
   }) : effectRolls).map(e => {
     if (e.effect.endsWith("-crit")) {
@@ -188,6 +201,21 @@ async function extractEffectRolls({
     }
     return e;
   });
+}
+
+async function extractEffectAlterations(
+  adjustmentsRecord: ActorSynthetics["effectAlterations"],
+  selectors: string[],
+  effect: EffectRoll,
+  options: Set<string> | string[] = [],
+  resolvables: Record<string, unknown> = {}
+): Promise<EffectAlteration[]> {
+  return await Promise.all(
+    selectors
+      .flatMap((s) => adjustmentsRecord[s] ?? [])
+      .map((d) => d({ test: options, injectables: { ...resolvables, effect }, resolvables}))
+      .flatMap((e) => e ?? [])
+  )
 }
 
 interface ExtractEphemeralEffectsParams {
@@ -199,6 +227,7 @@ interface ExtractEphemeralEffectsParams {
   action: ActionPTR2e | null;
   domains: string[];
   options: Set<string> | string[];
+  effectAlterations?: ActorSynthetics["effectAlterations"];
 }
 
 // function extractRollSubstitutions(
@@ -273,14 +302,14 @@ async function processPreUpdateHooks(document: ActorPTR2e | ActiveEffectPTR2e | 
   if (createDeletes.delete.length > 0) {
     await actor.deleteEmbeddedDocuments("Item", createDeletes.delete, { render: true, ignoreRestricted: true });
   }
-  if(createDeletes.createEffects.length > 0) {
+  if (createDeletes.createEffects.length > 0) {
     await actor.createEmbeddedDocuments("ActiveEffect", createDeletes.createEffects, {
       keepId: true,
       render: true,
     });
   }
-  if(createDeletes.deleteEffects.length > 0) {
-    await actor.deleteEmbeddedDocuments("ActiveEffect", createDeletes.deleteEffects, { render: true, ignoreRestricted: true});
+  if (createDeletes.deleteEffects.length > 0) {
+    await actor.deleteEmbeddedDocuments("ActiveEffect", createDeletes.deleteEffects, { render: true, ignoreRestricted: true });
   }
 }
 

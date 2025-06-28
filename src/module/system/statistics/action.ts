@@ -183,7 +183,8 @@ class GenericActionCheck<TParent extends GenericActionStatistic = GenericActionS
       domains: this.domains,
       options: selfOptions,
       chanceModifier: (Number(this.actor.system?.modifiers?.effectChance) || 0),
-      hasSenerenGrace: this.actor.rollOptions?.all?.["special:serene-grace"] ?? false
+      hasSenerenGrace: this.actor.rollOptions?.all?.["special:serene-grace"] ?? false,
+      effectAlterations: this.actor.synthetics.effectAlterations,
     });
 
     // const extraModifiers = args.modifiers ?? [];

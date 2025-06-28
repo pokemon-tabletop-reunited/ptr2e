@@ -579,7 +579,9 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
       powerPoints: 0,
       weightClass: 0,
       heightClass: 0,
-      vulnerabilityMultiplier: 1
+      vulnerabilityMultiplier: 1,
+      effectHitRate: 0,
+      effectResistance: 0
     };
   }
 
@@ -641,6 +643,28 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
         const newSkill = new SkillPTR2e(fu.duplicate(skill), { parent: this });
         newSkill.prepareBaseData();
         this.skills.set(newSkill.slug, newSkill);
+      }
+    }
+
+    const bossTrait = this.traits.find(t => t.slug.includes("boss") && !!t.value);
+    if(bossTrait) {
+      const effect = Trait.effectsFromChanges.bind(bossTrait)(this.parent);
+      if(effect?.active) {
+        for(const change of effect.changes.map((change) => {
+          const c = foundry.utils.deepClone(change);
+          c.priority = c.priority ?? c.mode * 10;
+          return c;
+        }).sort((a, b) => a.priority! - b.priority!)) {
+          change.effect.apply(this.parent, change.clone());
+        }
+
+        if(!isNaN(Number(this.modifiers.hpMultiplier)) && this.modifiers.hpMultiplier !== 1) {
+          this.health.max = this.attributes.hp.value = Math.round(this.attributes.hp.value * Number(this.modifiers.hpMultiplier));
+          this.health.percent = Math.round((this.health.value / this.health.max) * 100);
+        }
+        if(!isNaN(Number(this.modifiers.ppMultiplier)) && this.modifiers.ppMultiplier !== 1) {
+          this.powerPoints.max = Math.round((this.powerPoints.max || 0) * Number(this.modifiers.ppMultiplier));
+        }
       }
     }
 

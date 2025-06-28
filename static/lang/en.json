@@ -710,7 +710,9 @@
           "aura": "Aura",
           "token-tag": "Token Tag",
           "create-clock": "Create Clock",
-          "increment-clock": "Increment Clock"
+          "increment-clock": "Increment Clock",
+          "apply-tick": "Apply Tick",
+          "effect-alteration": "Effect Alteration"
         },
         "ChangeLabel": {
           "label": "Label",
@@ -766,6 +768,10 @@
           "self": "Self",
           "origin": "Origin",
           "defensive": "Defensive"
+        },
+        "ChangeIsFixedChance": {
+          "label": "Is Fixed Chance?",
+          "hint": "Fixed Chance rolls are not modified by the user's EHR or the target's RES."
         },
         "ChangeReevaluateOnUpdate": {
           "label": "Reevaluate on Update",
@@ -883,6 +889,13 @@
         "conditions": {
           "label": "Conditions",
           "hint": "The conditions under which this Forme can be activated."
+        },
+        "ApplyTickMode": {
+          "label": "Apply Tick Mode",
+          "hint": "Which stat should be altered?",
+          "HP": "HP",
+          "PP": "PP",
+          "Shield": "Shield"
         }
       },
       "TurnIntoAffliction": "This effect doesn't have a duration since it's a Passive Effect.<br>Would you like to turn it into an Affliction?",
@@ -1026,7 +1039,7 @@
           "unlucky": "While Unlucky, a creature cannot utilize its Luck.",
           "perish": "When a creature’s Perish count hits 0, the creature's HP is set to 0. Humans and ‘Ace’ creatures gain Weary 1 instead of losing HP when their Perish count is 0. The Perish Affliction is removed if a creature is switched out or leaves combat.",
           "invisible": "The afflicted creature vanishes from sight, and cannot be detected by sight based vision or targeted by Attacks. In addition, the creature has +4 default EVA Stages. Invisible ends when the creature uses an Attack, is hit by an Attack, by using a Free Action to end Invisible, or by the end conditions of the effect that granted Invisible. Any creature can perform an Intense Spot Check to ignore the effects of Invisible.",
-          "transient": "The afflicted creature, while still visible, is able to traverse through any material, as if it wasn’t even there. It may use any of its Movements to move through the air or any substance (as if it were always on or in the appropriate substance), ignoring any and all blocking terrain. The creature also possesses +6 default EVA Stages. Afflicted creatures deal 75% less damage and take 50% less damage. The creature loses 2 PP per activation while Transient, and gains a Stack of Weary if it is out of PP while Transient.",
+          "transient": "The afflicted creature, while still visible, is able to traverse through any material, as if it wasn’t even there. It may use any of its Movements to move through the air or any substance (as if it were always on or in the appropriate substance), ignoring any and all Blocking Terrain. Attacks from unafflicted creatures targeting the user have -40 Accuracy, and afflicted creatures take and deal 75% less damage to/from unafflicted creatures. The afflicted creature loses 1 PP (or gains 1 Weary, if at 0 PP) per Activation while Transient (currently not automated). If the afflicted creature loses Transient while it is an space occupied by a solid material or Blocking Terrain, the creature is forcefully Moved to the nearest open space, taking 2 Ticks of HP per meter Moved.",
           "fear": "The afflicted creature does 33% less damage to the source of Fear, and suffers -1 default ACC Stage on attacks against them. Fear applied from different sources have their own Stacks.",
           "stockpile": "The default stages for DEF and SPDEF are increased by +1 for each Stack of Stockpile it possesses. Stockpile can have up to 3 Stacks.",
           "leech": "The afflicted creature loses two Ticks of HP at the end of each of their Activations and the Source that applied Leech gains HP equal to the amount the afflicted creature lost.",
@@ -1438,34 +1451,87 @@
         "Hint": "Settings to exclude packs from loading",
         "Name": "Compendium Browser Packs"
       },
-      "Defaults": {
-        "Blueprint": {
-          "Level": {
-            "Name": "Default Blueprint Level",
-            "Hint": "The level must be a positive integer, a range in the format `a-b`, a Rolltable UUID or blank (random)."
-          },
-          "Shiny": {
-            "Name": "Default Blueprint Shiny",
-            "Hint": "The % chance for the Pokémon to be shiny."
-          },
-          "Nature": {
-            "Name": "Default Blueprint Nature",
-            "Hint": "The nature must be a valid nature, a UUID to a Rolltable or blank (random)."
-          },
-          "Gender": {
-            "Name": "Default Blueprint Gender",
-            "Hint": "The gender of the Pokémon, if 'Random' is selected, the species' gender ratio is used."
-          },
-          "Perk": {
-            "Name": "Default Blueprint Perk Config",
-            "Hint": "Label or ID of the globally saved Perk Generator Config."
-          }
+      "Blueprint": {
+        "Label": "Blueprint Defaults",
+        "Level": {
+          "Name": "Default Blueprint Level",
+          "Hint": "The level must be a positive integer, a range in the format `a-b`, a Rolltable UUID or blank (random)."
+        },
+        "Shiny": {
+          "Name": "Default Blueprint Shiny",
+          "Hint": "The % chance for the Pokémon to be shiny."
+        },
+        "Nature": {
+          "Name": "Default Blueprint Nature",
+          "Hint": "The nature must be a valid nature, a UUID to a Rolltable or blank (random)."
+        },
+        "Gender": {
+          "Name": "Default Blueprint Gender",
+          "Hint": "The gender of the Pokémon, if 'Random' is selected, the species' gender ratio is used."
+        },
+        "Perk": {
+          "Name": "Default Blueprint Perk Config",
+          "Hint": "Label or ID of the globally saved Perk Generator Config."
+        }
+      },
+      "Metagame": {
+        "Label": "Metagame Settings",
+        "ShowAccuracy": {
+          "Name": "Show Accuracy",
+          "Hint": "Whether the Accuracy details can be seen by players or not. 'Full' allows players to see all the details on hover, 'Result' only shows the result of the roll, 'Result (Ally only)' only shows the result of the roll for allied rolls, otherwise hides it, and 'None' hides it completely. Please note that the dice result for Accuracy & Crit Rolls made my players will always be shown to them, so that they may spend Luck on them.",
+          "Full": "Full",
+          "Result": "Result",
+          "AllyOnlyResult": "Result (Ally only)",
+          "None": "None"
+        },
+        "ShowDamage": {
+          "Name": "Show Damage",
+          "Hint": "Whether the Damage Roll & Details can be seen by players or not. 'Full' allows players to see all the details on hover, 'Result' only shows the result of the roll, 'Result (Ally only)' only shows the result of the roll for allied rolls, otherwise hides it, and 'None' hides it completely.",
+          "Full": "Full",
+          "Result": "Result",
+          "AllyOnlyResult": "Result (Ally only)",
+          "None": "None"
+        },
+        "ShowEffectRolls": {
+          "Name": "Show Effect Rolls",
+          "Hint": "Whether the Effect Rolls can be seen by players or not. 'Full' allows players to see all the details on hover, 'Result' only shows the result of the roll, 'Result (Ally only)' only shows the result of the roll for allied rolls, otherwise hides it, and 'None' hides it completely.",
+          "Full": "Full",
+          "Result": "Result",
+          "AllyOnlyResult": "Result (Ally only)",
+          "None": "None"
+        },
+        "ShowDamageTaken": {
+          "Name": "Show Damage Taken",
+          "Hint": "Whether the 'Damage Taken' message of non-allied units should show all details or not. 'Show' will have all information available for players, 'Hide' will remove any numbers & other details from the message for Players.",
+          "Show": "Show",
+          "Hide": "Hide"
         }
       },
       "Preferences": {
+        "Label": "User Preferences",
         "MustTarget": {
           "Name": "Force Targeting before Attack",
           "Hint": "When Enabled, you will be forced to target any amount of creatures before you can resolve an attack."
+        },
+        "OpenSidebar": {
+          "Name": "Automatically Open Sidebar",
+          "Hint": "When Enabled, the sidebar will automatically open whenever you load foundry."
+        },
+        "SidebarTab": {
+          "Name": "Default Sidebar Tab",
+          "Hint": "The tab that will be opened by default on game launch.",
+          "Chat": "Chat",
+          "Combat": "Combat",
+          "Scenes": "Scenes (GMs only)",
+          "Actors": "Actors",
+          "Items": "Items",
+          "Journals": "Journals",
+          "Tables": "Tables",
+          "Cards": "Cards",
+          "Macros": "Macros",
+          "Playlists": "Playlists",
+          "Compendium": "Compendiums",
+          "Settings": "Settings"
         }
       }
     },
@@ -1683,7 +1749,8 @@
             "held": "Held",
             "worn": "Worn",
             "belt": "Belt",
-            "backpack": "Backpack"
+            "backpack": "Backpack",
+            "slotless": "Slotless"
           },
           "held1": "Held 1H",
           "held2": "Held 2H",
@@ -2346,6 +2413,9 @@
         },
         "party": {
           "label": "Organize Party/Boxes"
+        },
+        "skills": {
+          "label": "Skills Overview"
         }
       },
       "PartyLabel": "Party",
@@ -2361,6 +2431,9 @@
         },
         "party": {
           "label": "Parties"
+        },
+        "skills": {
+          "label": "Skills Overview"
         }
       }
     },

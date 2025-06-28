@@ -10,7 +10,7 @@ import { sluggify } from "@utils";
 export class PerkGeneratorConfig extends foundry.applications.api.HandlebarsApplicationMixin(ApplicationV2Expanded) {
   static override DEFAULT_OPTIONS = {
     tag: "form",
-    classes: ["sheet", "perk-config-sheet", "default-sheet"],
+    classes: ["ptr2e", "sheet", "perk-config-sheet", "default-sheet"],
     position: {
       height: 560,
       width: 650,

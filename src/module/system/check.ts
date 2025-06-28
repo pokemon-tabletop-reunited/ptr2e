@@ -1,9 +1,9 @@
 import ChatMessagePTR2e from "../chat/document.ts";
-import { 
-  ConsumablePTR2e, 
-  ItemPTR2e, 
-  ItemSourcePTR2e, 
-  ItemSystemsWithFlingStats 
+import {
+  ConsumablePTR2e,
+  ItemPTR2e,
+  ItemSourcePTR2e,
+  ItemSystemsWithFlingStats
 } from "@item";
 import { ModifierPopup } from "@module/apps/modifier-popup/modifier-popup.ts";
 import { AttackCheckModifier, CheckModifier, ModifierPTR2e } from "@module/effects/modifiers.ts";
@@ -47,7 +47,7 @@ class CheckPTR2e {
       check.calculateTotal(rollOptions);
     }
 
-    if(rollOptions.has("target:uncapturable")) {
+    if (rollOptions.has("target:uncapturable")) {
       ui.notifications.error(game.i18n.localize("PTR2E.AttackWarning.CannotCaptureTarget"));
       return null;
     }
@@ -243,7 +243,7 @@ class CheckPTR2e {
 
     for (const modifier of check.modifiers.filter(m => m.predicate.length !== 0)) {
       for (const [uuid, targetContext] of Object.entries(context.contexts)) {
-        if(modifier.ignored) {
+        if (modifier.ignored) {
           const sharedMod = sharedModifiers.get(modifier.slug);
           if (sharedMod && sharedMod.appliesTo.get(uuid as ActorUUID)) continue;
           if (modifier.predicate.test(targetContext.options)) {
@@ -262,8 +262,8 @@ class CheckPTR2e {
           continue;
         }
         const sharedMod = sharedModifiers.get(modifier.slug);
-        if(!modifier.predicate.test(targetContext.options)) {
-          if(sharedMod) {
+        if (!modifier.predicate.test(targetContext.options)) {
+          if (sharedMod) {
             sharedMod.appliesTo.set(uuid as ActorUUID, false);
           }
           else {
@@ -273,7 +273,7 @@ class CheckPTR2e {
             check.delete(modifier);
           }
         } else {
-          if(sharedMod) {
+          if (sharedMod) {
             sharedMod.appliesTo.set(uuid as ActorUUID, true);
           } else {
             const newMod = modifier.clone();
@@ -411,15 +411,15 @@ class CheckPTR2e {
       const notesList = RollNote.notesToHTML(notes);
 
       for (const effectRoll of targetContext.effectRolls.origin) {
-        effectRoll.roll = await new Roll("1d100ms@dc", { dc: effectRoll.chance }).roll();
+        effectRoll.roll = await new Roll("1d100ms@dc", { dc: effectRoll.isFixedChance ? effectRoll.chance : this.calculateRealChance({ baseChance: effectRoll.chance, ehr: targetContext.target?.actor.system.modifiers.effectHitRate, res: targetContext.self.actor.system.modifiers.effectResistance }), baseChance: effectRoll.chance, ehr: targetContext.target?.actor.system.modifiers.effectHitRate, res: targetContext.self.actor.system.modifiers.effectResistance }).roll();
         effectRoll.success = effectRoll.roll.total <= 0;
       }
       for (const effectRoll of targetContext.effectRolls.target) {
-        effectRoll.roll = await new Roll("1d100ms@dc", { dc: effectRoll.chance }).roll();
+        effectRoll.roll = await new Roll("1d100ms@dc", { dc: effectRoll.isFixedChance ? effectRoll.chance : this.calculateRealChance({ baseChance: effectRoll.chance, ehr: targetContext.self.actor.system.modifiers.effectHitRate, res: targetContext.target?.actor.system.modifiers.effectResistance }), baseChance: effectRoll.chance, ehr: targetContext.self.actor.system.modifiers.effectHitRate, res: targetContext.target?.actor.system.modifiers.effectResistance}).roll();
         effectRoll.success = effectRoll.roll.total <= 0;
       }
       for (const effectRoll of targetContext.effectRolls.defensive) {
-        effectRoll.roll = await new Roll("1d100ms@dc", { dc: effectRoll.chance }).roll();
+        effectRoll.roll = await new Roll("1d100ms@dc", { dc: effectRoll.isFixedChance ? effectRoll.chance : this.calculateRealChance({ baseChance: effectRoll.chance, ehr: targetContext.target?.actor.system.modifiers.effectHitRate }), baseChance: effectRoll.chance, ehr: targetContext.target?.actor.system.modifiers.effectHitRate }).roll();
         effectRoll.success = effectRoll.roll.total <= 0;
       }
 
@@ -472,17 +472,17 @@ class CheckPTR2e {
     const effectsToApply: ActiveEffectPTR2e['_source'][] = [];
     if (context.selfEffectRolls?.length) {
       for (const effectRoll of context.selfEffectRolls) {
-        effectRoll.roll ??= await new Roll("1d100ms@dc", { dc: effectRoll.chance }).roll();
+        effectRoll.roll ??= await new Roll("1d100ms@dc", { dc: effectRoll.isFixedChance ? effectRoll.chance : this.calculateRealChance({ baseChance: effectRoll.chance, ehr: context.actor?.system.modifiers.effectHitRate }), baseChance: effectRoll.chance, ehr: context.actor?.system.modifiers.effectHitRate}).roll();
         effectRoll.success = effectRoll.roll.total <= 0;
         if (effectRoll.success) {
-          const item = await fromUuid(effectRoll.effect);
+          const item = await fu.fromUuid(effectRoll.effect);
           if (!item || item.type !== "effect") {
             console.error(`Failed to find effect item with uuid ${effectRoll.effect}`);
             continue;
           }
 
           const grantedSource = item.toObject();
-          
+
           try {
             for (const alteration of effectRoll.alterations ?? []) {
               alteration.applyTo(grantedSource as ItemSourcePTR2e);
@@ -546,6 +546,18 @@ class CheckPTR2e {
     }
 
     return results.map((r) => r.rolls);
+  }
+
+  private static calculateRealChance({ baseChance, ehr, res }: {
+    baseChance: number,
+    ehr?: number,
+    res?: number,
+  }): number {
+    return Math.round(
+      baseChance
+      * (1 + ((ehr ?? 0) / 100))
+      * (1 - ((res ?? 0) / 100))
+    )
   }
 
   static async roll(

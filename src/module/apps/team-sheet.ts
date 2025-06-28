@@ -1,6 +1,7 @@
 import { ActorPTR2e, ActorSystemPTR2e } from "@actor";
 import { Tab } from "@item/sheets/document.ts";
 import FolderPTR2e from "@module/folder/document.ts";
+import { ApplicationRenderContext } from "types/foundry/common/applications/api.js";
 
 class TeamSheetPTR2e extends foundry.applications.api.HandlebarsApplicationMixin(
   foundry.applications.api.ApplicationV2
@@ -20,7 +21,7 @@ class TeamSheetPTR2e extends foundry.applications.api.HandlebarsApplicationMixin
     classes: ["sheet", "team-sheet"],
     position: {
       height: 600,
-      width: 450,
+      width: 460,
     },
     window: {
       resizable: true
@@ -42,6 +43,11 @@ class TeamSheetPTR2e extends foundry.applications.api.HandlebarsApplicationMixin
       template: "systems/ptr2e/templates/apps/team/party.hbs",
       scrollable: [".scroll"],
     },
+    skills: {
+      id: "skills",
+      template: "systems/ptr2e/templates/apps/team/skills.hbs",
+      scrollable: [".scroll"],
+    },
   };
 
   tabGroups: Record<string, string> = {
@@ -60,6 +66,12 @@ class TeamSheetPTR2e extends foundry.applications.api.HandlebarsApplicationMixin
       group: "sheet",
       icon: "fa-solid fa-cogs",
       label: "PTR2E.TeamSheet.Tabs.party.label",
+    },
+    skills: {
+      id: "skills",
+      group: "sheet",
+      icon: "fa-solid fa-dice-d20",
+      label: "PTR2E.TeamSheet.Tabs.skills.label",
     },
   };
 
@@ -84,25 +96,75 @@ class TeamSheetPTR2e extends foundry.applications.api.HandlebarsApplicationMixin
   override async _prepareContext() {
     const team = [];
     for (const memberUuid of this.folder.team) {
-      const actor = await fromUuid(memberUuid);
+      const actor = await fu.fromUuid(memberUuid);
       if (actor && actor instanceof ActorPTR2e) {
+        const color = (() => {
+          if (actor.hasPlayerOwner) {
+            const player = game.users.find(u => u.character?.id === actor.id);
+            if (player) {
+              return player.color || null;
+            }
+          }
+          return null;
+        })()
+
         const party = [];
         if (actor.folder?.isFolderOwner(actor.uuid)) {
           for (const partyMemberUuid of actor.folder.party) {
-            const partyMember = await fromUuid(partyMemberUuid);
+            const partyMember = await fu.fromUuid(partyMemberUuid);
             if (partyMember) party.push(partyMember);
           }
         }
-        team.push({ actor, party, folder: actor.folder });
+        team.push({ actor, party, folder: actor.folder, color });
       }
     }
-
 
     return {
       tabs: this._getTabs(),
       team,
       folder: this.folder
     }
+  }
+
+  override async _preparePartContext(partId: string, context: ApplicationRenderContext): Promise<ApplicationRenderContext> {
+    const partContext = await super._preparePartContext(partId, context);
+    if (partId === "skills") {
+      const teams = (partContext.team || []) as { actor: ActorPTR2e, party: ActorPTR2e[], color: string | null }[];
+      const skillData: Record<string, { actor: ActorPTR2e, value: number, color: string | null }[]> = {};
+
+      for (const skill of game.ptr.data.skills) {
+        skillData[skill.slug] = []
+      }
+
+      function handleActor(actor: ActorPTR2e, color: string | null) {
+        if (!actor) return;
+        for (const skill of actor.system.skills) {
+          if (skill.total <= 1) continue; // Skip skills with no meaningful value.
+          if (skillData[skill.slug]) {
+            skillData[skill.slug].push({
+              actor,
+              value: skill.total,
+              color: color || null
+            });
+          }
+        }
+      }
+
+      for (const team of teams) {
+        handleActor(team.actor, team.color);
+        for (const actor of team.party) {
+          handleActor(actor, team.color);
+        }
+      }
+
+      for (const key in skillData) {
+        if (skillData[key].length === 0) delete skillData[key];
+        else skillData[key].sort((a, b) => b.value - a.value);
+      }
+
+      partContext.skills = skillData;
+    }
+    return partContext;
   }
 
   override _attachPartListeners(partId: string, htmlElement: HTMLElement, options: foundry.applications.api.HandlebarsRenderOptions): void {

@@ -145,7 +145,7 @@ class TraitsSettingsMenu extends foundry.applications.api.HandlebarsApplicationM
         continue;
       }
       if (trait.slug) {
-        const existingTrait = game.ptr.data.traits.get(trait.slug);
+        const existingTrait = game.ptr.data.traits.getTrait(trait.slug);
         if (!existingTrait) continue;
         const update = fu.deepClone(existingTrait);
         update.label = trait.label ?? existingTrait.label;

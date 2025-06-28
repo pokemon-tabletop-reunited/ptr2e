@@ -195,6 +195,13 @@ declare global {
          */
         hasStatusEffect(statusId: string): boolean;
 
+        /**
+         * Get the width and height of the Token in pixels.
+         * @param {Partial<{width: number; height: number}>} [data] The width and/or height in grid units (must be positive)
+         * @returns {{width: number; height: number}} The width and height in pixels
+         */
+        getSize(data?: Partial<{ width: number; height: number }>): { width: number; height: number };
+
         /* -------------------------------------------- */
         /*  Actor Data Operations                       */
         /* -------------------------------------------- */

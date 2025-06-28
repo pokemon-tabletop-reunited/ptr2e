@@ -29,3 +29,6 @@ export const ui: {
 export const apps: {
   DocumentSheetConfig: typeof DocumentSheetConfig
 }
+export const settings: {
+  SettingsConfig: typeof SettingsConfig,
+}

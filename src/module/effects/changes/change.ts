@@ -250,7 +250,7 @@ class ChangeModel<TSchema extends ChangeSchema = ChangeSchema> extends foundry.a
       return source;
     } else if (typeof source === "string") {
       return source.replace(
-        /{(actor|item|change|effect|attack)\|(.*?)(\|C)?}/g,
+        /{(actor|item|change|effect|attack|trait)\|(.*?)(\|C)?}/g,
         (_match, key: string, prop: string, modifier: string) => {
           const data =
             key === "change"
@@ -258,6 +258,12 @@ class ChangeModel<TSchema extends ChangeSchema = ChangeSchema> extends foundry.a
               : key === "actor" || key === "item" || key === "effect"
                 ? this[key] ?? resolvables[key]
                 : resolvables[key] ?? this.effect;
+
+          if(key === "actor" && prop.match(/skills\.(.*)\.mod/)) {
+            const value = this.actor?.system?.skills?.get(prop.split(".")[1])?.total;
+            if(value != undefined && !isNaN(value)) return String(value); 
+          }
+
           const value = fu.getProperty(data ?? {}, prop);
           if (value === undefined) {
             this.ignored = true;

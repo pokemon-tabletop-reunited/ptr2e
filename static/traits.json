@@ -9,67 +9,55 @@
     "slug": "x-headed",
     "label": "X Headed",
     "related": [],
-    "description": "Lists the number of heads the creature possesses, equal to X. Only used for the Multi-headed Ability.\nSUBJECT TO CHANGE"
+    "description": "Lists the number of heads the creature possesses, equal to X. Only used for the Multi-headed Ability.",
+    "placeholders": [
+      {
+        "keyPattern": "\\d+-headed",
+        "labelPattern": "X",
+        "valuePattern": "\\d+",
+        "descriptionPattern": "Lists the number of heads the creature possesses, equal to X.",
+        "descriptionReplacement": "This creature possesses {{x}} heads."
+      }
+    ]
   },
   {
-    "slug": "2-headed",
-    "label": "2 Headed",
-    "related": [],
-    "description": "This creature possesses two heads. Only used for the Multi-headed Ability.\nSUBJECT TO CHANGE"
-  },
-  {
-    "slug": "4-headed",
-    "label": "4 Headed",
-    "related": [],
-    "description": "This creature possesses four heads. Only used for the Multi-headed Ability.\nSUBJECT TO CHANGE"
-  },
-  {
-    "slug": "5-headed",
-    "label": "5 Headed",
-    "related": [],
-    "description": "This creature possesses five heads. Only used for the Multi-headed Ability.\nSUBJECT TO CHANGE"
-  },
-  {
-    "slug": "6-headed",
-    "label": "6 Headed",
-    "related": [],
-    "description": "This creature possesses six heads. Only used for the Multi-headed Ability.\nSUBJECT TO CHANGE"
-  },
-  {
-    "slug": "7-headed",
-    "label": "7 Headed",
-    "related": [],
-    "description": "This creature possesses seven heads. Only used for the Multi-headed Ability.\nSUBJECT TO CHANGE"
-  },
-  {
-    "slug": "8-headed",
-    "label": "8 Headed",
-    "related": [],
-    "description": "This creature possesses eight heads. Only used for the Multi-headed Ability.\nSUBJECT TO CHANGE"
-  },
-  {
-    "slug": "9-headed",
-    "label": "9 Headed",
-    "related": [],
-    "description": "This creature possesses nine heads. Only used for the Multi-headed Ability.\nSUBJECT TO CHANGE"
-  },
-  {
-    "slug": "10-headed",
-    "label": "10 Headed",
-    "related": [],
-    "description": "This creature possesses ten heads. Only used for the Multi-headed Ability.\nSUBJECT TO CHANGE"
-  },
-  {
-    "slug": "11-headed",
-    "label": "11 Headed",
-    "related": [],
-    "description": "This creature possesses eleven heads. Only used for the Multi-headed Ability.\nSUBJECT TO CHANGE"
-  },
-  {
-    "slug": "3-headed",
-    "label": "3 Headed",
-    "related": [],
-    "description": "This creature possesses twelve heads. Only used for the Multi-headed Ability.\nSUBJECT TO CHANGE"
+    "slug": "boss-xy",
+    "label": "Boss XX.Y",
+    "related": [
+      "ace"
+    ],
+    "description": "Denotes a creature as a Boss and applies a HP & PP multiplier of XX.Y.",
+    "placeholders": [
+      {
+        "keyPattern": "boss-\\d+\\d",
+        "labelPattern": "XX",
+        "valuePattern": "(\\d+)\\d",
+        "descriptionPattern": "XX.Y",
+        "descriptionReplacement": "{{x}}.Y",
+        "valueDivisor": "."
+      },
+      {
+        "keyPattern": "boss-\\d+\\d",
+        "labelPattern": "Y",
+        "valuePattern": "\\d$",
+        "descriptionPattern": ".Y",
+        "descriptionReplacement": ".{{x}}"
+      }
+    ],
+    "changes": [
+      {
+        "type": "basic",
+        "key": "system.modifiers.hpMultiplier",
+        "value": "{trait|value}",
+        "mode": 5
+      },
+      {
+        "type": "basic",
+        "key": "system.modifiers.ppMultiplier",
+        "value": "{trait|value}",
+        "mode": 5
+      }
+    ]
   },
   {
     "slug": "trainer",
@@ -970,7 +958,7 @@
     "slug": "hover",
     "label": "Hover",
     "related": [],
-    "description": "This creature naturally floats, granting immunity to damage and effects from [Earthbound] actions. Does not crash if its deliberate flight is interrupted.",
+    "description": "This creature naturally floats, granting immunity to damage and effects from [Earthbound] actions. Does not crash if its deliberate flight is interrupted. This creatures can use Flight underwater instead of Swim, treating it as Difficult Terrain.",
     "type": "automated",
     "changes": [
       {
@@ -1088,7 +1076,7 @@
     "slug": "jet",
     "label": "Jet",
     "related": [],
-    "description": "This trait identifies an exceptionally fast flyer or swimmer.\nSUBJECT TO CHANGE"
+    "description": "This trait identifies an exceptionally fast flyer or swimmer. If this creature has a Flight Movement Score, they may move full speed using Flight underwater, instead of Swim.\nSUBJECT TO CHANGE"
   },
   {
     "slug": "jump-x",
@@ -1221,6 +1209,39 @@
     "label": "Lockjaw",
     "related": [],
     "description": "The creature's [Jaw] attacks have the [Grapple] trait. The creature has access to the [Jaw] tutor list."
+  },
+  {
+    "slug": "luca",
+    "label": "LUCA",
+    "related": [],
+    "description": "The \"last universal common ancestor\" is the hypothetical organism that is the most recent ancestor of modern life. Of course, a creature with this trait is anything but hypothetical. Creatures with this trait possess Connection – Transform.",
+    "changes": [
+      {
+        "type": "grant-item",
+        "key": "",
+        "value": "Compendium.ptr2e.core-moves.Item.KYiKjOrakhVcye6X",
+        "predicate": [],
+        "alterations": [
+          {
+            "mode": 5,
+            "property": "system.actions.0.free",
+            "value": "true"
+          }
+        ],
+        "mode": 2,
+        "priority": null,
+        "ignored": false,
+        "reevaluateOnUpdate": false,
+        "inMemoryOnly": false,
+        "allowDuplicate": true,
+        "track": false,
+        "replaceSelf": false,
+        "onDeleteActions": {
+          "grantee": "detach",
+          "granter": "cascade"
+        }
+      }
+    ]
   },
   {
     "slug": "lumbering",
@@ -1383,7 +1404,7 @@
     "slug": "phasing",
     "label": "Phasing",
     "related": [],
-    "description": "This creature ignores and passes through Blocking Terrain when using movement. If the creature ends its movement inside of Blocking Terrain, it is forced into the nearest available space and loses 3 ticks of HP for every meter it was forced to move."
+    "description": "This creature is able to gain or lose @affliction[transient] as a Simple Action, and gains 1 PP when it gains @affliction[transient]."
   },
   {
     "slug": "phoenix",
@@ -2209,6 +2230,48 @@
     "description": "This creature emanates Terastal Energy, able to direct it toward other creatures or siphon it away from its surroundings into itself. This creature, through great strain, can induce Terastallization in @Trait[pokemon]."
   },
   {
+    "slug": "fan-dex",
+    "label": "Fan Dex",
+    "related": [],
+    "description": "This item originates from a fan-developed project, usually a romhack or fangame, and was adapted by the 2e Dev Team for use in this system."
+  },
+  {
+    "slug": "dev-dex",
+    "label": "Dev Dex",
+    "related": [],
+    "description": "This item originates from a member of the 2e Dev Team, and is approved for use in the system. These items are generally adapted from an existing item or concept (officially or fanmade), and refined for default inclusion in this system."
+  },
+  {
+    "slug": "digimon",
+    "label": "Digimon",
+    "related": [],
+    "description": "Not quite a @trait[pokemon], creatures with this trait are 'digital monsters' or 'Digimon' for short. Creatures with this trait usually have the Digitize Trait, and always have access to the Digimon Perk Web. Other items with this trait are specifically designed for use by creatures with this trait, and games that center around Digimon and its settings."
+  },
+  {
+    "slug": "vaccine",
+    "label": "Vaccine",
+    "related": [],
+    "description": "@trait[digimon] with this trait deal 50% more damage with their Physical- and Special-Category Attacks to @trait[virus] creatures, and 33% less damage with those Attacks to @trait[data] creatures. AUTOMATION PENDING."
+  },
+  {
+    "slug": "virus",
+    "label": "Virus",
+    "related": [],
+    "description": "@trait[digimon] with this trait deal 50% more damage with their Physical- and Special-Category Attacks to @trait[data] creatures, and 33% less damage with those Attacks to @trait[vaccine] creatures. AUTOMATION PENDING."
+  },
+  {
+    "slug": "data",
+    "label": "Data",
+    "related": [],
+    "description": "@trait[digimon] with this trait deal 50% more damage with their Physical- and Special-Category Attacks to @trait[vaccine] creatures, and 33% less damage with those Attacks to @trait[virus] creatures. AUTOMATION PENDING."
+  },
+  {
+    "slug": "homebrew",
+    "label": "Homebrew",
+    "related": [],
+    "description": "This item is not part of the core 2e module. GMs that distribute homemade Species, Gear, Attacks, Abilities, Perks, etc. should include this trait on those items. GMs and Players in possession of these items should be wary using them, as they may not be designed to work perfectly with the system."
+  },
+  {
     "slug": "stellar",
     "label": "Stellar",
     "related": [],
@@ -2950,7 +3013,7 @@
     "slug": "crushing",
     "label": "Crushing",
     "related": [],
-    "description": "The associated action/attack deals double damage to and have +20 Accuracy against creatures that are Shrinked, or creatures with a CatMod that are 3 or more lower than the user."
+    "description": "The associated action/attack deals double damage to and have +20 Accuracy against creatures that are Shrinked, or creatures that are 2 Size Categories or more smaller than the user."
   },
   {
     "slug": "curl",
@@ -3603,6 +3666,12 @@
     "description": "Denotes if an attack is linked to the use of another. Linked attacks are automatically added to the Active List, ignoring the Active List limit."
   },
   {
+    "slug": "magma-wader",
+    "label": "Magma Wader",
+    "related": [],
+    "description": "Can move through Magma tiles without suffering the negative effects"
+  },
+  {
     "slug": "manipulate",
     "label": "Manipulate",
     "related": [],
@@ -3642,97 +3711,97 @@
     "slug": "pass-x",
     "label": "Pass X",
     "related": [],
-    "description": "This attack allows the creature to move through enemy squares as part of their Movement and attack those creatures. They can attack up to X creatures, declaring and resolving the attack on each. Each attack beyond the first costs 1 PP."
+    "description": "This attack allows the creature to move through enemy squares as part of their Movement and attack those creatures. They can attack up to X creatures beyond the first target, spending 1 PP to declare and resolve the attack on each additional target. When doing so, the user must Move and must 'pass' through these targets' spaces (treating those spaces as empty during this Movement) and end this 'pass' on an opposite side of the target in space(s) they can occupy, and cannot have Attack of Opportunity declared in response to this Movement and any related Movement made while Moving between Pass targets."
   },
   {
     "slug": "pass-1",
     "label": "Pass 1",
     "related": [],
-    "description": "This attack allows the creature to move through enemy squares as part of their Movement and attack those creatures. They can attack up to 1 creatures, declaring and resolving the attack on each. Each attack beyond the first costs 1 PP."
+    "description": "This attack allows the creature to move through enemy squares as part of their Movement and attack those creatures. They can attack up to 1 creature beyond the first target, spending 1 PP to declare and resolve the attack on each additional target. When doing so, the user must Move and must 'pass' through these targets' spaces (treating those spaces as empty during this Movement) and end this 'pass' on an opposite side of the target in space(s) they can occupy, and cannot have Attack of Opportunity declared in response to this Movement and any related Movement made while Moving between Pass targets."
   },
   {
     "slug": "pass-2",
     "label": "Pass 2",
     "related": [],
-    "description": "This attack allows the creature to move through enemy squares as part of their Movement and attack those creatures. They can attack up to 2 creatures, declaring and resolving the attack on each. Each attack beyond the first costs 1 PP."
+    "description": "This attack allows the creature to move through enemy squares as part of their Movement and attack those creatures. They can attack up to 2 creatures beyond the first target, spending 1 PP to declare and resolve the attack on each additional target. When doing so, the user must Move and must 'pass' through these targets' spaces (treating those spaces as empty during this Movement) and end this 'pass' on an opposite side of the target in space(s) they can occupy, and cannot have Attack of Opportunity declared in response to this Movement and any related Movement made while Moving between Pass targets."
   },
   {
     "slug": "pass-3",
     "label": "Pass 3",
     "related": [],
-    "description": "This attack allows the creature to move through enemy squares as part of their Movement and attack those creatures. They can attack up to 3 creatures, declaring and resolving the attack on each. Each attack beyond the first costs 1 PP."
+    "description": "This attack allows the creature to move through enemy squares as part of their Movement and attack those creatures. They can attack up to 3 creatures beyond the first target, spending 1 PP to declare and resolve the attack on each additional target. When doing so, the user must Move and must 'pass' through these targets' spaces (treating those spaces as empty during this Movement) and end this 'pass' on an opposite side of the target in space(s) they can occupy, and cannot have Attack of Opportunity declared in response to this Movement and any related Movement made while Moving between Pass targets."
   },
   {
     "slug": "pass-4",
     "label": "Pass 4",
     "related": [],
-    "description": "This attack allows the creature to move through enemy squares as part of their Movement and attack those creatures. They can attack up to 4 creatures, declaring and resolving the attack on each. Each attack beyond the first costs 1 PP."
+    "description": "This attack allows the creature to move through enemy squares as part of their Movement and attack those creatures. They can attack up to 4 creatures beyond the first target, spending 1 PP to declare and resolve the attack on each additional target. When doing so, the user must Move and must 'pass' through these targets' spaces (treating those spaces as empty during this Movement) and end this 'pass' on an opposite side of the target in space(s) they can occupy, and cannot have Attack of Opportunity declared in response to this Movement and any related Movement made while Moving between Pass targets."
   },
   {
     "slug": "pass-5",
     "label": "Pass 5",
     "related": [],
-    "description": "This attack allows the creature to move through enemy squares as part of their Movement and attack those creatures. They can attack up to 5 creatures, declaring and resolving the attack on each. Each attack beyond the first costs 1 PP."
+    "description": "This attack allows the creature to move through enemy squares as part of their Movement and attack those creatures. They can attack up to 5 creatures beyond the first target, spending 1 PP to declare and resolve the attack on each additional target. When doing so, the user must Move and must 'pass' through these targets' spaces (treating those spaces as empty during this Movement) and end this 'pass' on an opposite side of the target in space(s) they can occupy, and cannot have Attack of Opportunity declared in response to this Movement and any related Movement made while Moving between Pass targets."
   },
   {
     "slug": "pass-6",
     "label": "Pass 6",
     "related": [],
-    "description": "This attack allows the creature to move through enemy squares as part of their Movement and attack those creatures. They can attack up to 6 creatures, declaring and resolving the attack on each. Each attack beyond the first costs 1 PP."
+    "description": "This attack allows the creature to move through enemy squares as part of their Movement and attack those creatures. They can attack up to 6 creatures beyond the first target, spending 1 PP to declare and resolve the attack on each additional target. When doing so, the user must Move and must 'pass' through these targets' spaces (treating those spaces as empty during this Movement) and end this 'pass' on an opposite side of the target in space(s) they can occupy, and cannot have Attack of Opportunity declared in response to this Movement and any related Movement made while Moving between Pass targets."
   },
   {
     "slug": "pass-7",
     "label": "Pass 7",
     "related": [],
-    "description": "This attack allows the creature to move through enemy squares as part of their Movement and attack those creatures. They can attack up to 7 creatures, declaring and resolving the attack on each. Each attack beyond the first costs 1 PP."
+    "description": "This attack allows the creature to move through enemy squares as part of their Movement and attack those creatures. They can attack up to 7 creatures beyond the first target, spending 1 PP to declare and resolve the attack on each additional target. When doing so, the user must Move and must 'pass' through these targets' spaces (treating those spaces as empty during this Movement) and end this 'pass' on an opposite side of the target in space(s) they can occupy, and cannot have Attack of Opportunity declared in response to this Movement and any related Movement made while Moving between Pass targets."
   },
   {
     "slug": "pass-8",
     "label": "Pass 8",
     "related": [],
-    "description": "This attack allows the creature to move through enemy squares as part of their Movement and attack those creatures. They can attack up to 8 creatures, declaring and resolving the attack on each. Each attack beyond the first costs 1 PP."
+    "description": "This attack allows the creature to move through enemy squares as part of their Movement and attack those creatures. They can attack up to 8 creatures beyond the first target, spending 1 PP to declare and resolve the attack on each additional target. When doing so, the user must Move and must 'pass' through these targets' spaces (treating those spaces as empty during this Movement) and end this 'pass' on an opposite side of the target in space(s) they can occupy, and cannot have Attack of Opportunity declared in response to this Movement and any related Movement made while Moving between Pass targets."
   },
   {
     "slug": "pass-9",
     "label": "Pass 9",
     "related": [],
-    "description": "This attack allows the creature to move through enemy squares as part of their Movement and attack those creatures. They can attack up to 9 creatures, declaring and resolving the attack on each. Each attack beyond the first costs 1 PP."
+    "description": "This attack allows the creature to move through enemy squares as part of their Movement and attack those creatures. They can attack up to 9 creatures beyond the first target, spending 1 PP to declare and resolve the attack on each additional target. When doing so, the user must Move and must 'pass' through these targets' spaces (treating those spaces as empty during this Movement) and end this 'pass' on an opposite side of the target in space(s) they can occupy, and cannot have Attack of Opportunity declared in response to this Movement and any related Movement made while Moving between Pass targets."
   },
   {
     "slug": "pass-10",
     "label": "Pass 10",
     "related": [],
-    "description": "This attack allows the creature to move through enemy squares as part of their Movement and attack those creatures. They can attack up to 10 creatures, declaring and resolving the attack on each. Each attack beyond the first costs 1 PP."
+    "description": "This attack allows the creature to move through enemy squares as part of their Movement and attack those creatures. They can attack up to 10 creatures beyond the first target, spending 1 PP to declare and resolve the attack on each additional target. When doing so, the user must Move and must 'pass' through these targets' spaces (treating those spaces as empty during this Movement) and end this 'pass' on an opposite side of the target in space(s) they can occupy, and cannot have Attack of Opportunity declared in response to this Movement and any related Movement made while Moving between Pass targets."
   },
   {
     "slug": "pass-11",
     "label": "Pass 11",
     "related": [],
-    "description": "This attack allows the creature to move through enemy squares as part of their Movement and attack those creatures. They can attack up to 11 creatures, declaring and resolving the attack on each. Each attack beyond the first costs 1 PP."
+    "description": "This attack allows the creature to move through enemy squares as part of their Movement and attack those creatures. They can attack up to 11 creatures beyond the first target, spending 1 PP to declare and resolve the attack on each additional target. When doing so, the user must Move and must 'pass' through these targets' spaces (treating those spaces as empty during this Movement) and end this 'pass' on an opposite side of the target in space(s) they can occupy, and cannot have Attack of Opportunity declared in response to this Movement and any related Movement made while Moving between Pass targets."
   },
   {
     "slug": "pass-12",
     "label": "Pass 12",
     "related": [],
-    "description": "This attack allows the creature to move through enemy squares as part of their Movement and attack those creatures. They can attack up to 12 creatures, declaring and resolving the attack on each. Each attack beyond the first costs 1 PP."
+    "description": "This attack allows the creature to move through enemy squares as part of their Movement and attack those creatures. They can attack up to 12 creatures beyond the first target, spending 1 PP to declare and resolve the attack on each additional target. When doing so, the user must Move and must 'pass' through these targets' spaces (treating those spaces as empty during this Movement) and end this 'pass' on an opposite side of the target in space(s) they can occupy, and cannot have Attack of Opportunity declared in response to this Movement and any related Movement made while Moving between Pass targets."
   },
   {
     "slug": "pass-13",
     "label": "Pass 13",
     "related": [],
-    "description": "This attack allows the creature to move through enemy squares as part of their Movement and attack those creatures. They can attack up to 13 creatures, declaring and resolving the attack on each. Each attack beyond the first costs 1 PP."
+    "description": "This attack allows the creature to move through enemy squares as part of their Movement and attack those creatures. They can attack up to 13 creatures beyond the first target, spending 1 PP to declare and resolve the attack on each additional target. When doing so, the user must Move and must 'pass' through these targets' spaces (treating those spaces as empty during this Movement) and end this 'pass' on an opposite side of the target in space(s) they can occupy, and cannot have Attack of Opportunity declared in response to this Movement and any related Movement made while Moving between Pass targets."
   },
   {
     "slug": "pass-14",
     "label": "Pass 14",
     "related": [],
-    "description": "This attack allows the creature to move through enemy squares as part of their Movement and attack those creatures. They can attack up to 14 creatures, declaring and resolving the attack on each. Each attack beyond the first costs 1 PP."
+    "description": "This attack allows the creature to move through enemy squares as part of their Movement and attack those creatures. They can attack up to 14 creatures beyond the first target, spending 1 PP to declare and resolve the attack on each additional target. When doing so, the user must Move and must 'pass' through these targets' spaces (treating those spaces as empty during this Movement) and end this 'pass' on an opposite side of the target in space(s) they can occupy, and cannot have Attack of Opportunity declared in response to this Movement and any related Movement made while Moving between Pass targets."
   },
   {
     "slug": "pass-15",
     "label": "Pass 15",
     "related": [],
-    "description": "This attack allows the creature to move through enemy squares as part of their Movement and attack those creatures. They can attack up to 15 creatures, declaring and resolving the attack on each. Each attack beyond the first costs 1 PP."
+    "description": "This attack allows the creature to move through enemy squares as part of their Movement and attack those creatures. They can attack up to 15 creatures beyond the first target, spending 1 PP to declare and resolve the attack on each additional target. When doing so, the user must Move and must 'pass' through these targets' spaces (treating those spaces as empty during this Movement) and end this 'pass' on an opposite side of the target in space(s) they can occupy, and cannot have Attack of Opportunity declared in response to this Movement and any related Movement made while Moving between Pass targets."
   },
   {
     "slug": "pledge",
@@ -4138,6 +4207,12 @@
     "label": "Substitute",
     "related": [],
     "description": "Denotes if an attack or ability creates a Substitute or similar mitigating method."
+  },
+  {
+    "slug": "summon",
+    "label": "Summon",
+    "related": [],
+    "description": "Denotes if an attack/ability/effect features or interacts with a Summon."
   },
   {
     "slug": "tail",
@@ -5113,5 +5188,29 @@
     "related": [],
     "description": "This Trait denotes that the Attack deals Flat Damage.",
     "type": "automated"
+  },
+  {
+    "slug": "digimon",
+    "label": "Digimon",
+    "related": ["vaccine", "data", "virus"],
+    "description": "Grant access to the Digivolution Web. (In a future build)"
+  },
+  {
+    "slug": "vaccine",
+    "label": "Vaccine",
+    "related": ["digimon", "data", "virus"],
+    "description": "Gain +50% Damage versus Virus-trait Digimon. Inflict 33% less Damage vs Data-trait Digimon."
+  },
+  {
+    "slug": "data",
+    "label": "Data",
+    "related": ["vaccine", "digimon", "virus"],
+    "description": "Gain +50% Damage versus Vaccine-trait Digimon. Inflict 33% less Damage vs Virus-trait Digimon."
+  },
+  {
+    "slug": "virus",
+    "label": "Virus",
+    "related": ["vaccine", "data", "digimon"],
+    "description": "Gain +50% Damage versus Data-trait Digimon. Inflict 33% less Damage vs Vaccine-trait Digimon."
   }
 ]
