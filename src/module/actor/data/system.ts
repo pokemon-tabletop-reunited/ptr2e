@@ -646,7 +646,7 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
       }
     }
 
-    const bossTrait = this.traits.find(t => t.slug.includes("boss") && !!t.value);
+    const bossTrait = this.traits.find(t => t && !!t.slug && t.slug.includes("boss") && !!t.value);
     if(bossTrait) {
       const effect = Trait.effectsFromChanges.bind(bossTrait)(this.parent);
       if(effect?.active) {
