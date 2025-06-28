@@ -1465,15 +1465,36 @@
     "system": {
       "changes": [
         {
-          "type": "basic",
-          "key": "system.battleStats.evasion.stage",
-          "value": 6,
-          "mode": 2
+          "type": "ephemeral-modifier",
+          "key": "attack-accuracy-flat",
+          "value": -40,
+          "predicate": [],
+          "label": "Attacking a Transient creature.",
+          "mode": 2,
+          "priority": null,
+          "ignored": false,
+          "hideIfDisabled": false
+        },
+        {
+          "type": "ephemeral-modifier",
+          "key": "attack-damage-percentile",
+          "value": -75,
+          "predicate": [],
+          "label": "Attacking a Transient creature.",
+          "mode": 2,
+          "priority": null,
+          "ignored": false,
+          "hideIfDisabled": false
         },
         {
           "type": "percentile-modifier",
-          "key": "all-damage",
-          "value": -75
+          "key": "attack-damage",
+          "value": -75,
+          "predicate": [],
+          "label": "Attacking a non-Transient creature.",
+          "mode": 2,
+          "priority": null,
+          "ignored": false
         }
       ],
       "formula": null,
