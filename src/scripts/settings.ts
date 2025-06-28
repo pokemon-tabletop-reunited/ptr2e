@@ -5,19 +5,28 @@ import { TraitsSettingsMenu } from "@module/apps/traits.ts";
 import { TypeMatrix } from "@module/apps/type-matrix/sheet.ts";
 import { ExpTrackerSettings } from "@system/exp-tracker-model.ts";
 import { TutorListSettings } from "@system/tutor-list/setting-model.ts";
-import { natures } from "./config/natures.ts";
+import { registerSettings } from "./settings/index.ts";
 
 export function initializeSettings() {
+  registerSettings();
 
-  game.settings.register("ptr2e", "pokemonTypes", {
-    name: "PTR2E.Settings.PokemonTypes.Name",
-    hint: "PTR2E.Settings.PokemonTypes.Hint",
-    scope: "world",
-    config: false,
-    type: Object,
-    default: TypeEffectiveness,
-    requiresReload: true,
-  })
+  game.settings.registerMenu("ptr2e", "traits", {
+    name: "PTR2E.Settings.Traits.Name",
+    label: "PTR2E.Settings.Traits.Label",
+    hint: "PTR2E.Settings.Traits.Hint",
+    icon: "fa-solid fa-rectangle-list",
+    type: TraitsSettingsMenu,
+    restricted: true,
+  });
+
+  game.settings.registerMenu("ptr2e", "skills", {
+    name: "PTR2E.Settings.Skills.Name",
+    label: "PTR2E.Settings.Skills.Label",
+    hint: "PTR2E.Settings.Skills.Hint",
+    icon: "fa-solid fa-rectangle-list",
+    type: SkillsSettingsMenu,
+    restricted: true,
+  });
 
   game.settings.registerMenu("ptr2e", "pokemonTypes", {
     "name": "PTR2E.Settings.PokemonTypes.Name",
@@ -28,14 +37,13 @@ export function initializeSettings() {
     restricted: true,
   });
 
-  game.settings.register("ptr2e", "clocks", {
-    name: "PTR2E.Settings.Clocks.Name",
-    hint: "PTR2E.Settings.Clocks.Hint",
+  game.settings.register("ptr2e", "dev-mode", {
+    name: "PTR2E.Settings.DevMode.Name",
+    hint: "PTR2E.Settings.DevMode.Hint",
     scope: "world",
-    config: false,
-    type: ClockDatabase,
-    default: {},
-    requiresReload: true,
+    config: true,
+    type: Boolean,
+    default: false,
   });
 
   game.settings.register("ptr2e", "tokens.autoscale", {
@@ -50,15 +58,6 @@ export function initializeSettings() {
     }
   });
 
-  game.settings.register("ptr2e", "dev-mode", {
-    name: "PTR2E.Settings.DevMode.Name",
-    hint: "PTR2E.Settings.DevMode.Hint",
-    scope: "world",
-    config: true,
-    type: Boolean,
-    default: false,
-  });
-
   game.settings.register("ptr2e", "player-folder-create-permission", {
     name: "PTR2E.Settings.PlayerFolderCreatePermission.Name",
     hint: "PTR2E.Settings.PlayerFolderCreatePermission.Hint",
@@ -68,258 +67,7 @@ export function initializeSettings() {
     default: true,
   });
 
-  game.settings.register("ptr2e", "traits", {
-    name: "PTR2E.Settings.Traits.Name",
-    hint: "PTR2E.Settings.Traits.Hint",
-    scope: "world",
-    config: false,
-    type: Array,
-    default: [],
-    onChange: () => { game.ptr.data.traits.refresh(); }
-  })
-
-  game.settings.registerMenu("ptr2e", "traits", {
-    name: "PTR2E.Settings.Traits.Name",
-    label: "PTR2E.Settings.Traits.Label",
-    hint: "PTR2E.Settings.Traits.Hint",
-    icon: "fa-solid fa-rectangle-list",
-    type: TraitsSettingsMenu,
-    restricted: true,
-  });
-
-  game.settings.register("ptr2e", "skills", {
-    name: "PTR2E.Settings.Skills.Name",
-    hint: "PTR2E.Settings.Skills.Hint",
-    scope: "world",
-    config: false,
-    type: Array,
-    default: [],
-    onChange: () => { game.ptr.data.skills.refresh(); }
-  })
-
-  game.settings.registerMenu("ptr2e", "skills", {
-    name: "PTR2E.Settings.Skills.Name",
-    label: "PTR2E.Settings.Skills.Label",
-    hint: "PTR2E.Settings.Skills.Hint",
-    icon: "fa-solid fa-rectangle-list",
-    type: SkillsSettingsMenu,
-    restricted: true,
-  });
-
-  game.settings.register("ptr2e", "artmap", {
-    name: "PTR2E.Settings.ArtMap.Name",
-    hint: "PTR2E.Settings.ArtMap.Hint",
-    scope: "world",
-    config: false,
-    type: Object,
-    default: {},
-    onChange: () => { game.ptr.data.artMap.refresh(); }
-  });
-
-  // game.keybindings.register("ptr2e", "undo", {
-  //   name: "PTR2E.Keybindings.Undo.Name",
-  //   hint: "PTR2E.Keybindings.Undo.Hint",
-  //   editable: [
-  //     {
-  //       key: "KeyZ",
-  //       modifiers: ["Control"]
-  //     }
-  //   ],
-  //   onDown: (context) => game.ptr.web?.onUndo(context),
-  // });
-
-  // game.keybindings.register("ptr2e", "delete", {
-  //   name: "PTR2E.Keybindings.Delete.Name",
-  //   hint: "PTR2E.Keybindings.Delete.Hint",
-  //   editable: [
-  //     {
-  //       key: "Delete",
-  //       modifiers: []
-  //     }
-  //   ],
-  //   onDown: (context) => game.ptr.web?.onDelete(context),
-  // });
-
-  game.settings.register("ptr2e", "expand-rolls", {
-    name: "PTR2E.Settings.ExpandRolls.Name",
-    hint: "PTR2E.Settings.ExpandRolls.Hint",
-    default: false,
-    config: true,
-    type: Boolean,
-    scope: "client"
-  })
-
-  game.settings.register("ptr2e", "preferences.must-target", {
-    name: "PTR2E.Settings.Preferences.MustTarget.Name",
-    hint: "PTR2E.Settings.Preferences.MustTarget.Hint",
-    default: true,
-    config: true,
-    type: Boolean,
-    scope: "client"
-  })
-
-  game.settings.register("ptr2e", "preferences.open-sidebar", {
-    name: "PTR2E.Settings.Preferences.OpenSidebar.Name",
-    hint: "PTR2E.Settings.Preferences.OpenSidebar.Hint",
-    default: true,
-    config: true,
-    type: Boolean,
-    scope: "client"
-  });
-
-  game.settings.register("ptr2e", "preferences.sidebar-tab", {
-    name: "PTR2E.Settings.Preferences.SidebarTab.Name",
-    hint: "PTR2E.Settings.Preferences.SidebarTab.Hint",
-    default: "chat",
-    config: true,
-    type: String,
-    choices: {
-      chat: "PTR2E.Settings.Preferences.SidebarTab.Chat",
-      combat: "PTR2E.Settings.Preferences.SidebarTab.Combat",
-      scenes: "PTR2E.Settings.Preferences.SidebarTab.Scenes",
-      actors: "PTR2E.Settings.Preferences.SidebarTab.Actors",
-      items: "PTR2E.Settings.Preferences.SidebarTab.Items",
-      journal: "PTR2E.Settings.Preferences.SidebarTab.Journals",
-      tables: "PTR2E.Settings.Preferences.SidebarTab.Tables",
-      cards: "PTR2E.Settings.Preferences.SidebarTab.Cards",
-      macros: "PTR2E.Settings.Preferences.SidebarTab.Macros",
-      playlists: "PTR2E.Settings.Preferences.SidebarTab.Playlists",
-      compendium: "PTR2E.Settings.Preferences.SidebarTab.Compendium",
-      settings: "PTR2E.Settings.Preferences.SidebarTab.Settings",
-    },
-    scope: "client"
-  });
-
-  game.settings.register("ptr2e", "defaults.blueprint.level", {
-    name: "PTR2E.Settings.Defaults.Blueprint.Level.Name",
-    hint: "PTR2E.Settings.Defaults.Blueprint.Level.Hint",
-    config: true,
-    default: null,
-    type: new foundry.data.fields.StringField({
-      required: true,
-      nullable: true,
-      initial: null,
-      validate: (value) => {
-        // Level can be either a integer value, a range in the format `a-b`, a Rolltable UUID or null
-        if (value === null) return true;
-
-        // Check if the value is a number
-        const number = Number(value);
-        if (!isNaN(number)) {
-          if (Number.isInteger(number) && number >= 1) return true;
-          throw new Error("The level must be a positive integer.");
-        }
-        if (typeof value !== "string") return false;
-
-        // Check if the value is a range
-        if (value.match(/^\d+-\d+$/)) {
-          const [min, max] = value.split("-").map(Number);
-          if (min >= 1 && max >= min) return true;
-
-          throw new Error("The range must be in the format `a-b` where `a` and `b` are integers and `a` is less than or equal to `b`.");
-        }
-
-        // Check if the value is a Rolltable UUID
-        const uuid = fu.parseUuid(value);
-        if (uuid && uuid.documentId) {
-          if (uuid.documentType === "RollTable") return true;
-          throw new Error("The UUID must point to a Rolltable.");
-        }
-
-        return false;
-      },
-    }),
-    scope: "world"
-  });
-
-  game.settings.register("ptr2e", "defaults.blueprint.nature", {
-    name: "PTR2E.Settings.Defaults.Blueprint.Nature.Name",
-    hint: "PTR2E.Settings.Defaults.Blueprint.Nature.Hint",
-    config: true,
-    default: null,
-    type: new foundry.data.fields.StringField({
-      required: true, initial: null, nullable: true, trim: true, validate: (value) => {
-        //Natures can either be a valid nature typed out, a UUID to a Rolltable or null
-        if (value === null) return true;
-        if (typeof value !== "string") return false;
-
-        // Check if the value is a valid nature
-        const nature = value.toLowerCase();
-        if (natures[nature] !== undefined) return true;
-
-        // Check if the value is a Rolltable UUID
-        const uuid = fu.parseUuid(value);
-        if (uuid && uuid.documentId) {
-          if (uuid.documentType === "RollTable") return true;
-          throw new Error("The UUID must point to a Rolltable.");
-        }
-
-        return false;
-      }, validationError: "The nature must be a valid nature, a UUID to a Rolltable or null."
-    }),
-    scope: "world"
-  });
-
-  game.settings.register("ptr2e", "defaults.blueprint.gender", {
-    name: "PTR2E.Settings.Defaults.Blueprint.Gender.Name",
-    hint: "PTR2E.Settings.Defaults.Blueprint.Gender.Hint",
-    config: true,
-    default: null,
-    type: new foundry.data.fields.StringField({
-      required: true, 
-      initial: null, 
-      nullable: true, 
-      trim: true, 
-      choices: ["random", "male", "female", "genderless"].reduce((acc, val) => ({ ...acc, [val]: val }), {}),
-    }),
-    scope: "world"
-  });
-
-  game.settings.register("ptr2e", "defaults.blueprint.shiny", {
-    name: "PTR2E.Settings.Defaults.Blueprint.Shiny.Name",
-    hint: "PTR2E.Settings.Defaults.Blueprint.Shiny.Hint",
-    config: true,
-    default: 1,
-    type: new foundry.data.fields.NumberField({
-      required: true,
-      initial: 1,
-      nullable: false,
-      min: 0,
-      max: 100,
-      step: 1
-    }),
-    scope: "world"
-  });
-
-  game.settings.register("ptr2e", "defaults.blueprint.perk", {
-    name: "PTR2E.Settings.Defaults.Blueprint.Perk.Name",
-    hint: "PTR2E.Settings.Defaults.Blueprint.Perk.Hint",
-    config: true,
-    default: null,
-    type: String,
-    scope: "world"
-  });
   
-  /* -- All of the below are Data Only Settings -- */
-  game.settings.register("ptr2e", "clocksPosition", {
-    name: "PTR2E.Settings.ClocksPosition.Name",
-    hint: "PTR2E.Settings.ClocksPosition.Hint",
-    scope: "client",
-    config: false,
-    type: Object,
-    default: {
-      x: null,
-      y: null
-    },
-  });
-
-  game.settings.register("ptr2e", "worldSystemVersion", {
-    name: "World System Version",
-    scope: "world",
-    config: false,
-    default: game.system.version,
-    type: String,
-  });
 
   game.settings.register("ptr2e", "worldSchemaVersion", {
     name: "PTR2E.Settings.WorldSchemaVersion.Name",
@@ -329,6 +77,16 @@ export function initializeSettings() {
     default: 0,
     type: Number,
     requiresReload: true,
+  });
+
+  /* -- All of the below are Data Only Settings -- */
+
+  game.settings.register("ptr2e", "worldSystemVersion", {
+    name: "World System Version",
+    scope: "world",
+    config: false,
+    default: game.system.version,
+    type: String,
   });
 
   game.settings.register("ptr2e", "compendiumBrowserPacks", {
@@ -351,6 +109,8 @@ export function initializeSettings() {
       showUnknownSources: true,
       sources: {},
     },
+    config: false,
+
     type: Object,
     scope: "world",
     onChange: () => {
@@ -359,15 +119,45 @@ export function initializeSettings() {
     },
   });
 
-  game.settings.register("ptr2e", "tutorListData", {
-    name: "PTR2E.Settings.TutorListData.Name",
-    hint: "PTR2E.Settings.TutorListData.Hint",
-    default: {},
-    type: TutorListSettings,
+  game.settings.register("ptr2e", "artmap", {
+    name: "PTR2E.Settings.ArtMap.Name",
+    hint: "PTR2E.Settings.ArtMap.Hint",
     scope: "world",
-    onChange: () => {
-      game.ptr.data.tutorList = game.settings.get("ptr2e", "tutorListData");
-    }
+    config: false,
+    type: Object,
+    default: {},
+    onChange: () => { game.ptr.data.artMap.refresh(); }
+  });
+
+  game.settings.register("ptr2e", "clocks", {
+    name: "PTR2E.Settings.Clocks.Name",
+    hint: "PTR2E.Settings.Clocks.Hint",
+    scope: "world",
+    config: false,
+    type: ClockDatabase,
+    default: {},
+    requiresReload: true,
+  });
+
+  game.settings.register("ptr2e", "clocksPosition", {
+    name: "PTR2E.Settings.ClocksPosition.Name",
+    hint: "PTR2E.Settings.ClocksPosition.Hint",
+    scope: "client",
+    config: false,
+    type: Object,
+    default: {
+      x: null,
+      y: null
+    },
+  });
+
+  game.settings.register("ptr2e", "dev-identity", {
+    name: "dev-identity",
+    hint: "dev-identity",
+    default: {},
+    config: false,
+    type: String,
+    scope: "client"
   })
 
   game.settings.register("ptr2e", "expTrackerData", {
@@ -379,15 +169,6 @@ export function initializeSettings() {
     scope: "world"
   })
 
-  game.settings.register("ptr2e", "dev-identity", {
-    name: "dev-identity",
-    hint: "dev-identity",
-    default: {},
-    config: false,
-    type: String,
-    scope: "client"
-  })
-
   game.settings.register("ptr2e", "global-perk-configs", {
     name: "PTR2E.Settings.GlobalPerkConfigs.Name",
     hint: "PTR2E.Settings.GlobalPerkConfigs.Hint",
@@ -395,5 +176,47 @@ export function initializeSettings() {
     config: false,
     type: Object,
     scope: "world"
+  })
+
+  game.settings.register("ptr2e", "pokemonTypes", {
+    name: "PTR2E.Settings.PokemonTypes.Name",
+    hint: "PTR2E.Settings.PokemonTypes.Hint",
+    scope: "world",
+    config: false,
+    type: Object,
+    default: TypeEffectiveness,
+    requiresReload: true,
+  })
+
+  game.settings.register("ptr2e", "skills", {
+    name: "PTR2E.Settings.Skills.Name",
+    hint: "PTR2E.Settings.Skills.Hint",
+    scope: "world",
+    config: false,
+    type: Array,
+    default: [],
+    onChange: () => { game.ptr.data.skills.refresh(); }
+  })
+
+  game.settings.register("ptr2e", "traits", {
+    name: "PTR2E.Settings.Traits.Name",
+    hint: "PTR2E.Settings.Traits.Hint",
+    scope: "world",
+    config: false,
+    type: Array,
+    default: [],
+    onChange: () => { game.ptr.data.traits.refresh(); }
+  })
+
+  game.settings.register("ptr2e", "tutorListData", {
+    name: "PTR2E.Settings.TutorListData.Name",
+    hint: "PTR2E.Settings.TutorListData.Hint",
+    default: {},
+    config: false,
+    type: TutorListSettings,
+    scope: "world",
+    onChange: () => {
+      game.ptr.data.tutorList = game.settings.get("ptr2e", "tutorListData");
+    }
   });
 }

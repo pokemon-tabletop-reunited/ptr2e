@@ -212,7 +212,7 @@ abstract class CaptureMessageSystem extends foundry.abstract.TypeDataModel {
       target: this.target ? await fromUuid<ActorPTR2e>(this.target) : null,
     });
 
-    context.defaultExpanded = game.settings.get("ptr2e", "expand-rolls");
+    context.defaultExpanded = game.settings.get("ptr2e", "preferences.expand-rolls");
     return foundry.applications.handlebars.renderTemplate("systems/ptr2e/templates/chat/capture.hbs", context);
   }
 

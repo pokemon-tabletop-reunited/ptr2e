@@ -485,7 +485,7 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
       this.pendingResolutions.clear();
     }
 
-    context.defaultExpanded = game.settings.get("ptr2e", "expand-rolls");
+    context.defaultExpanded = game.settings.get("ptr2e", "preferences.expand-rolls");
     return foundry.applications.handlebars.renderTemplate("systems/ptr2e/templates/chat/attack.hbs", context);
   }
 
