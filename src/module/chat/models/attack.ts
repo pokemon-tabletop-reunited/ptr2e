@@ -478,14 +478,15 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
         })() : [],
       });
 
-    if(this.pendingResolutions?.size) {
-      for(const targetUuid of this.pendingResolutions) {
+    if (this.pendingResolutions?.size) {
+      for (const targetUuid of this.pendingResolutions) {
         this.applyDamage(targetUuid);
       }
       this.pendingResolutions.clear();
     }
 
     context.defaultExpanded = game.settings.get("ptr2e", "preferences.expand-rolls");
+    context.metagameInfo = await this.getMetagameInfo();
     return foundry.applications.handlebars.renderTemplate("systems/ptr2e/templates/chat/attack.hbs", context);
   }
 
@@ -553,10 +554,10 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
   pendingResolutions = new Set<ActorUUID>();
 
   async applyDamage(targetUuid: ActorUUID): Promise<false | number> {
-    if(!this.context) {
+    if (!this.context) {
       this.pendingResolutions.add(targetUuid);
       return false;
-    } 
+    }
     const result = this.context.results.get(targetUuid);
     if (!result) return false;
 
@@ -815,7 +816,7 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
     const results = fu.duplicate(this.parent.system.results);
     const currentResult = results[this.parent.system.results.findIndex(r => r.target.uuid == entry.uuid)];
     if (!currentResult) return;
-    
+
     const result = (() => {
       switch (choice.type) {
         case "target-effect": return currentResult.effectRolls?.target[choice.index!];
@@ -843,7 +844,7 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
           : skill;
       })
     });
-    
+
     const notification = game.i18n.format("PTR2E.ChatContext.SpendLuckAttack.spent", {
       amount: value,
       actor: actor.name,
@@ -863,7 +864,7 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
 
     //@ts-expect-error - As this is an object duplicate, the property is no longer read-only.
     roll.total = 0;
-    if(result) result.success = true;
+    if (result) result.success = true;
 
     await this.parent.update({ "system.results": results });
 
@@ -872,6 +873,30 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
       speaker: { alias: actor.name },
       content: notification,
     });
+  }
+
+  async getMetagameInfo() {
+    const showAccuracy = game.settings.get("ptr2e", "metagame.show-accuracy");
+    const showDamage = game.settings.get("ptr2e", "metagame.show-damage");
+    const showEffectRolls = game.settings.get("ptr2e", "metagame.show-effect-rolls");
+    const hasPlayerOwner = await (async () => {
+      const actor = await this.currentOrigin;
+      return actor?.hasPlayerOwner ? true : false
+    })();
+    
+    return {
+      isGM: game.user.isGM,
+      hasPlayerOwner,
+      showAccuracyTooltip: showAccuracy === "full" || game.user.isGM,
+      showAccuracyRoll: showAccuracy === "full" || game.user.isGM || hasPlayerOwner,
+      showAccuracyResult: game.user.isGM || (showAccuracy === "allyOnlyResult" && hasPlayerOwner) || ["full", "result"].includes(showAccuracy),
+      showDamageTooltip: showDamage === "full" || game.user.isGM,
+      showDamageRoll: showDamage === "full" || game.user.isGM || (hasPlayerOwner && showDamage === "allyOnlyResult"),
+      showDamageResult: game.user.isGM || (showDamage === "allyOnlyResult" && hasPlayerOwner) || ["full", "result"].includes(showDamage),
+      showEffectRollsTooltip: showEffectRolls === "full" || game.user.isGM,
+      showEffectRolls: showEffectRolls === "full" || game.user.isGM || hasPlayerOwner,
+      showEffectRollsResult: game.user.isGM || (showEffectRolls === "allyOnlyResult" && hasPlayerOwner) || ["full", "result"].includes(showEffectRolls),
+    }
   }
 }
 
@@ -898,6 +923,7 @@ interface AttackMessageRenderContext {
   pp: ModelPropsFromSchema<PPSchema>;
   selfEffectRolls: string[];
   defaultExpanded?: boolean;
+  metagameInfo?: Record<string, unknown>;
 }
 
 interface AttackMessageRenderContextData {

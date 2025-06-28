@@ -19,7 +19,6 @@ export class PreferencesMenu extends SettingsMenuPTR2e {
         type: Boolean,
         scope: "client"
       },
-
       "open-sidebar": {
         name: "PTR2E.Settings.Preferences.OpenSidebar.Name",
         hint: "PTR2E.Settings.Preferences.OpenSidebar.Hint",

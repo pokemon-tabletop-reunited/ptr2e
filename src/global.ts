@@ -147,6 +147,8 @@ declare global {
     get(module: "ptr2e", key: "blueprint.level" | "blueprint.nature" | "blueprint.perk"): string | null
     get(module: "ptr2e", key: "blueprint.gender"): "random" | "male" | "female" | "genderless" | null
     get(module: "ptr2e", key: "blueprint.shiny"): number;
+    get(module: "ptr2e", key: "metagame.show-accuracy" | "metagame.show-damage" | "metagame.show-effect-rolls"): "full" | "result" | "allyOnlyResult" | "none"
+    get(module: "ptr2e", key: "metagame.show-damage-taken"): "show" | "hide"
     set(module: "ptr2e", key: "expTrackerData", value: ExpTrackerSettings['_source']): ExpTrackerSettings
   }
 

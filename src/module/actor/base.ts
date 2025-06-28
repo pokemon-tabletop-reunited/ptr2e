@@ -623,7 +623,6 @@ class ActorPTR2e<
     >) {
       if (!effect.active) continue;
       if(bossTrait && effect.flags?.ptr2e?.traitEffect == bossTrait.slug) continue;
-      if(effect.slug.includes("boss"))
       changes.push(
         ...effect.changes.map((change) => {
           const c = foundry.utils.deepClone(change);

@@ -22,12 +22,26 @@ abstract class DamageAppliedMessageSystem extends foundry.abstract.TypeDataModel
         domains: new fields.ArrayField(new SlugField(), { required: true, initial: [] }),
         type: new fields.StringField({ required: true, blank: true, initial: "" }),
         options: new fields.ArrayField(new fields.StringField(), { required: true, initial: [] }),
-      }, {nullable: true, initial: null})
+      }, { nullable: true, initial: null })
     }
   }
 
-  override prepareBaseData(): void {
+  get hideInfo() {
+    const showDamageTaken = game.settings.get("ptr2e", "metagame.show-damage-taken");
+    const hasPlayerOwner = () => {
+      const actor = fromUuidSync<ActorPTR2e>(this._source.target!);
+      return actor?.hasPlayerOwner ? true : false
+    }
+    return game.user.isGM
+      ? hasPlayerOwner()
+        ? false
+        : "GM" 
+      : showDamageTaken === "show"
+        ? false
+        : !hasPlayerOwner()
+  }
 
+  override prepareBaseData(): void {
     this.target = (() => {
       const actor = fromUuidSync<ActorPTR2e>(this._source.target!);
       return actor;
@@ -59,7 +73,7 @@ abstract class DamageAppliedMessageSystem extends foundry.abstract.TypeDataModel
     if (!this.target) return;
 
     await this.parent.update({ "system.undone": true });
-    if(this.ppApplied) {
+    if (this.ppApplied) {
       await this.target.update({
         "system.powerPoints.value": Math.clamp(
           this.target.system.powerPoints.value - -this.damageApplied,

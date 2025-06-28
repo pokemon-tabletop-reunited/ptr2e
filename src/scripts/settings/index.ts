@@ -1,11 +1,13 @@
 import { SettingsMenuPTR2e } from "./base.ts";
 import { BlueprintDefaultsMenu } from "./blueprint.ts";
+import { MetagameMenu } from "./metagame.ts";
 import { monkeyPatchSettings } from "./overrides.ts";
 import { PreferencesMenu } from "./preferences.ts";
 
 const menus: (typeof SettingsMenuPTR2e)[] = [
   PreferencesMenu,
-  BlueprintDefaultsMenu
+  BlueprintDefaultsMenu,
+  MetagameMenu
 ]
 
 export function registerSettings() {
