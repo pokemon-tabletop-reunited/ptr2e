@@ -15,6 +15,7 @@ export default class PTR2eTraits extends Collection<Trait> {
   }
 
   getTrait(slug: string): Trait | undefined {
+    if(!slug) return undefined;
     const early = this.get(slug);
     if (early) return early;
 
