@@ -617,7 +617,7 @@ class ActorPTR2e<
     const changes = [];
     // Afflictions don't always have changes, so we need to track them separately
     const afflictions: ActiveEffectPTR2e<ActorPTR2e, AfflictionActiveEffectSystem>[] = [];
-    const bossTrait = this.traits.find(t => t.slug.includes("boss") && !!t.value);
+    const bossTrait = this.traits.find(t => t && !!t.slug && t.slug.includes("boss") && !!t.value);
     for (const effect of this.allApplicableEffects() as unknown as Generator<
       ActiveEffectPTR2e<ActorPTR2e>,
       void,
