@@ -230,6 +230,13 @@ interface ExtractEphemeralEffectsParams {
   effectAlterations?: ActorSynthetics["effectAlterations"];
 }
 
+function extractAttackAdjustments(
+  adjustmentRecord: ActorSynthetics["attackAdjustments"],
+  selectors: string[],
+) {
+  return selectors.flatMap((s) => adjustmentRecord[s] ?? [])
+}
+
 // function extractRollSubstitutions(
 //     substitutions: Record<string, RollSubstitution[]>,
 //     domains: string[],
@@ -322,4 +329,5 @@ export {
   isBracketedValue,
   extractEffectRolls,
   processPreUpdateHooks,
+  extractAttackAdjustments
 }

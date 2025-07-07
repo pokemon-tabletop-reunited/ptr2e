@@ -141,7 +141,7 @@ export class ActorSheetV2Expanded<
       if ((input as HTMLInputElement).value === "") (input as HTMLInputElement).value = "[]";
     });
 
-    const formData = new FormDataExtended(element);
+    const formData = new foundry.applications.ux.FormDataExtended(element);
     if (handler instanceof Function) await handler.call(this, event, element, formData);
     if (closeOnSubmit) await this.close();
   }
@@ -638,7 +638,7 @@ export class ItemSheetV2Expanded<
       if ((input as HTMLInputElement).value === "") (input as HTMLInputElement).value = "[]";
     });
 
-    const formData = new FormDataExtended(element);
+    const formData = new foundry.applications.ux.FormDataExtended(element);
     if (handler instanceof Function) await handler.call(this, event, element, formData);
     if (closeOnSubmit) await this.close();
   }

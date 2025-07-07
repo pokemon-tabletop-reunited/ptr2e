@@ -23,7 +23,7 @@ import { ActionsCollections } from "./actions.ts";
 import { CustomSkill } from "@module/data/models/skill.ts";
 import { BaseStatisticCheck, Statistic, StatisticCheck } from "@system/statistics/statistic.ts";
 import { CheckContext, CheckContextParams, RollContext, RollContextParams } from "@system/data.ts";
-import { extractEffectRolls, extractEphemeralEffects, extractModifiers, extractNotes, extractTargetModifiers, processPreUpdateHooks } from "src/util/change-helpers.ts";
+import { extractAttackAdjustments, extractEffectRolls, extractEphemeralEffects, extractModifiers, extractNotes, extractTargetModifiers, processPreUpdateHooks } from "src/util/change-helpers.ts";
 import { TokenPTR2e } from "@module/canvas/token/object.ts";
 import * as R from "remeda";
 import { ModifierPTR2e } from "@module/effects/modifiers.ts";
@@ -340,7 +340,7 @@ class ActorPTR2e<
       effectsRemovedAfterAttacking: [],
       effectsRemovedAfterAttacked: [],
       toggles: [],
-      attackAdjustments: [],
+      attackAdjustments: {},
       tokenTags: new Map(),
       tokenOverrides: {},
       preparationWarnings: {
@@ -1600,7 +1600,7 @@ class ActorPTR2e<
     const actionRollOptions = Array.from(new Set([...itemOptions, ...actionOptions, ...getTargetRollOptions(targetToken?.actor)]));
 
     if (selfAttack) {
-      for (const adjustment of selfActor.synthetics.attackAdjustments) {
+      for (const adjustment of extractAttackAdjustments(selfActor.synthetics.attackAdjustments, params.domains)) {
         adjustment().adjustAttack?.(selfAttack, actionRollOptions);
       }
     }
@@ -1609,7 +1609,7 @@ class ActorPTR2e<
       const traits = params.traits?.map((t) => (typeof t === "string" ? t : t.slug)) ?? [];
 
       if (selfAttack) {
-        for (const adjustment of selfActor.synthetics.attackAdjustments) {
+        for (const adjustment of extractAttackAdjustments(selfActor.synthetics.attackAdjustments, params.domains)) {
           adjustment().adjustTraits?.(selfAttack, traits, actionRollOptions);
         }
       }

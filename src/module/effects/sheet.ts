@@ -318,7 +318,7 @@ class ActiveEffectConfig extends foundry.applications.api.HandlebarsApplicationM
           $(this.element).find("tags ~ input").each((_i, input) => {
             if ((input as HTMLInputElement).value === "") (input as HTMLInputElement).value = "[]";
           });
-          const formData = new FormDataExtended(this.element);
+          const formData = new foundry.applications.ux.FormDataExtended(this.element);
           const data = this._prepareSubmitData(
             event as unknown as SubmitEvent,
             this.element as HTMLFormElement,
@@ -345,7 +345,7 @@ class ActiveEffectConfig extends foundry.applications.api.HandlebarsApplicationM
           $(this.element).find("tags ~ input").each((_i, input) => {
             if ((input as HTMLInputElement).value === "") (input as HTMLInputElement).value = "[]";
           });
-          const formData = new FormDataExtended(this.element);
+          const formData = new foundry.applications.ux.FormDataExtended(this.element);
 
           // Manually update the JSON data with the new type if it doesn't exist
           const selectValue =
@@ -400,7 +400,7 @@ class ActiveEffectConfig extends foundry.applications.api.HandlebarsApplicationM
           $(this.element).find("tags ~ input").each((_i, input) => {
             if ((input as HTMLInputElement).value === "") (input as HTMLInputElement).value = "[]";
           });
-          const formData = new FormDataExtended(this.element);
+          const formData = new foundry.applications.ux.FormDataExtended(this.element);
           const data = this._prepareSubmitData(
             event as unknown as SubmitEvent,
             this.element as HTMLFormElement,
