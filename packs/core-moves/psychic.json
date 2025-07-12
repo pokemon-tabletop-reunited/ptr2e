@@ -3,15 +3,14 @@
   "type": "move",
   "img": "systems/ptr2e/img/svg/psychic_icon.svg",
   "system": {
-    "slug": "psychic",
+    "slug": "psychic-attack",
     "actions": [
       {
         "slug": "psychic",
         "name": "Psychic",
         "type": "attack",
         "traits": [
-          "push-3",
-          "pp-updated"
+          "push-3"
         ],
         "range": {
           "target": "creature",
@@ -43,7 +42,8 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
+      ],
+      "notes": ""
     }
   },
   "_id": "NO3wo8dZeZsPzeW5",
@@ -57,22 +57,26 @@
         "changes": [
           {
             "type": "roll-effect",
-            "key": "{item|slug}-attack",
+            "key": "psychic-attack-attack",
             "value": "Compendium.ptr2e.core-effects.Item.qe5aLBJuwb9eYqvv",
             "predicate": [],
             "chance": 10,
             "affects": "target",
-            "mode": 2,
             "priority": null,
-            "ignored": false,
-            "alterations": []
+            "alterations": [],
+            "dontMerge": false,
+            "isFixedChance": false,
+            "mode": 2,
+            "ignored": false
           }
         ],
         "slug": null,
         "traits": [],
         "removeAfterCombat": true,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
@@ -94,12 +98,13 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.346",
         "systemId": "ptr2e",
-        "systemVersion": "1.0.6.beta",
+        "systemVersion": "1.3.8.beta",
         "createdTime": 1732970407385,
-        "modifiedTime": 1739888146038,
-        "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
+        "modifiedTime": 1752355827792,
+        "lastModifiedBy": "Kc3DOunCh3ClAeHS",
+        "exportSource": null
       }
     }
   ]

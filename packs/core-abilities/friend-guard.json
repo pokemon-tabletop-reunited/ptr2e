@@ -70,7 +70,9 @@
                 "removeOnExit": true,
                 "includesSelf": false,
                 "appliesSelfOnly": false,
-                "predicate": []
+                "predicate": [
+                  "friend-guard"
+                ]
               }
             ],
             "appearance": {
@@ -85,13 +87,30 @@
               "texture": null
             },
             "mergeExisting": true
+          },
+          {
+            "type": "roll-option",
+            "key": "",
+            "value": "friend-guard",
+            "predicate": [],
+            "domain": "all",
+            "label": "Friend Guard Toggle",
+            "toggleable": true,
+            "count": false,
+            "state": true,
+            "alwaysActive": false,
+            "mode": 2,
+            "ignored": false,
+            "suboptions": []
           }
         ],
         "slug": null,
         "traits": [],
         "removeAfterCombat": true,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
@@ -113,12 +132,13 @@
       "_stats": {
         "compendiumSource": "Compendium.ptr2e.core-abilities.Item.CzvgRhfvDuRjrtA1.ActiveEffect.WPH789V0rRrGKYvw",
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.346",
         "systemId": "ptr2e",
-        "systemVersion": "1.1.0.beta",
+        "systemVersion": "1.3.8.beta",
         "createdTime": 1741605625285,
-        "modifiedTime": 1741605691008,
-        "lastModifiedBy": "IcBpMqhFuTck9VpX"
+        "modifiedTime": 1752340875722,
+        "lastModifiedBy": "Kc3DOunCh3ClAeHS",
+        "exportSource": null
       }
     }
   ]
