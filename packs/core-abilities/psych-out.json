@@ -7,27 +7,22 @@
       {
         "traits": [
           "social",
-          "friendly",
-          "interrupt-3"
+          "friendly"
         ],
         "name": "Psych Out",
         "slug": "psych-out",
-        "type": "generic",
-        "cost": {
-          "activation": "free",
-          "powerPoints": 3,
-          "trigger": "<p>The user enters combat.</p>"
-        },
+        "type": "passive",
+        "cost": {},
         "range": {
-          "target": "creature",
-          "distance": 10,
+          "target": "enemy-aura",
+          "distance": 8,
           "unit": "m"
         },
-        "description": "<p>Trigger: The user enters combat.</p><p>Effect: All valid creatures within Range lose -1 SPATK Stage for 5 Activations. The user's Psychology Skill checks have an additional +10 bonus.</p>",
+        "description": "<p>Effect: All valid creatures in range have -1 default SPATK Stage. When an affected creature leaves the range of this effect, they lose -1 SPATK Stage for 3 Activations. The user's Psychology Skill checks have an additional +10 bonus. NEEDS REAUTOMATED.</p>",
         "img": "icons/svg/explosion.svg"
       }
     ],
-    "description": "<p>Trigger: The user enters combat.</p><p>Effect: All valid creatures within Range lose -1 SPATK Stage for 5 Activations. The user's Psychology Skill checks have an additional +10 bonus.</p>",
+    "description": "<p>Effect: All valid creatures in range have -1 default SPATK Stage. When an affected creature leaves the range of this effect, they lose -1 SPATK Stage for 3 Activations. The user's Psychology Skill checks have an additional +10 bonus. NEEDS REAUTOMATED.</p>",
     "traits": [
       "social",
       "friendly"
