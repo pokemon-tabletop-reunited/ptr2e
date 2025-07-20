@@ -23,7 +23,7 @@
         "img": "icons/svg/explosion.svg"
       }
     ],
-    "description": "<p>Effect: All enemy creatures within range of the user spend an additional 50% PP on all actions that use PP (minimum 1 on Attacks).</p>",
+    "description": "<p>Passive Effect: All enemy creatures within 5m of the user gain @Affliction[suppressed].</p>",
     "traits": [
       "aura"
     ],
@@ -53,7 +53,9 @@
             "type": "aura",
             "key": "",
             "value": 0,
-            "predicate": [],
+            "predicate": [
+              "pressure:active"
+            ],
             "mode": 2,
             "priority": null,
             "ignored": false,
@@ -83,13 +85,29 @@
               "texture": null
             },
             "mergeExisting": true
+          },
+          {
+            "type": "roll-option",
+            "key": "",
+            "value": "pressure:active",
+            "predicate": [],
+            "domain": "all",
+            "toggleable": false,
+            "count": false,
+            "label": "Pressure",
+            "mode": 2,
+            "ignored": false,
+            "suboptions": [],
+            "state": true
           }
         ],
         "slug": null,
         "traits": [],
         "removeAfterCombat": true,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
@@ -111,12 +129,13 @@
       "_stats": {
         "compendiumSource": "Compendium.ptr2e.core-abilities.Item.RmLYmSTJEvyBNTh5.ActiveEffect.LpaKqURqpjFFKlNh",
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.346",
         "systemId": "ptr2e",
-        "systemVersion": "1.1.0.beta",
+        "systemVersion": "1.3.8.beta",
         "createdTime": 1741605416199,
-        "modifiedTime": 1741605510814,
-        "lastModifiedBy": "IcBpMqhFuTck9VpX"
+        "modifiedTime": 1753019067418,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf",
+        "exportSource": null
       }
     }
   ]
