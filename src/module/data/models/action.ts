@@ -96,7 +96,15 @@ class ActionPTR2e extends foundry.abstract.DataModel {
         }),
       }),
       variant: new SlugField({ required: false, nullable: true }),
-      ephemeralVariant: new fields.BooleanField({required: true, initial: false})
+      ephemeralVariant: new fields.BooleanField({required: true, initial: false}),
+      summon: new fields.DocumentUUIDField({
+        required: true,
+        nullable: true,
+        initial: null,
+        label: "PTR2E.FIELDS.summon.label",
+        hint: "PTR2E.FIELDS.summon.hint",
+        type: "Item"
+      })
     };
   }
 
@@ -315,6 +323,7 @@ export interface ActionSchema extends foundry.data.fields.DataSchema {
   }>;
   variant: SlugField<string, string, false>;
   ephemeralVariant: foundry.data.fields.BooleanField<boolean, boolean>;
+  summon: foundry.data.fields.DocumentUUIDField<string>;
 }
 
 export default ActionPTR2e;
