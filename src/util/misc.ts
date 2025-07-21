@@ -142,7 +142,7 @@ async function importFromJSON<T>({name, type}: {name: string, type: string}): Pr
     systemVersion: string;
   };
 }>> {
-  const content = await foundry.applications.handlebars.renderTemplate("templates/apps/import-data.html", {
+  const content = await foundry.applications.handlebars.renderTemplate("templates/apps/import-data.hbs", {
     hint1: game.i18n.format("DOCUMENT.ImportDataHint1", {document: type}),
     hint2: game.i18n.format("DOCUMENT.ImportDataHint2", {name: Handlebars.Utils.escapeExpression(name)})
   });
