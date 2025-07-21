@@ -96,7 +96,7 @@ class ActionPTR2e extends foundry.abstract.DataModel {
         }),
       }),
       variant: new SlugField({ required: false, nullable: true }),
-      ephemeralVariant: new fields.BooleanField({required: true, initial: false}),
+      ephemeralVariant: new fields.BooleanField({ required: true, initial: false }),
       summon: new fields.DocumentUUIDField({
         required: true,
         nullable: true,
@@ -119,7 +119,7 @@ class ActionPTR2e extends foundry.abstract.DataModel {
     return null;
   }
 
-  get item(): ItemPTR2e<ItemSystemsWithActions>  {
+  get item(): ItemPTR2e<ItemSystemsWithActions> {
     if (this.parent instanceof ItemPTR2e) return this.parent;
     if (this.parent?.parent instanceof ItemPTR2e) return this.parent.parent;
     throw new Error("Action is not a child of an item");
@@ -140,7 +140,7 @@ class ActionPTR2e extends foundry.abstract.DataModel {
   get uuid(): string {
     // This is a temporary item, this might be due to this being a delayed action
     // In which case, link to the original item if possible.
-    if(!this.item.id && this.actor?.id) {
+    if (!this.item.id && this.actor?.id) {
       const originalAction = this.actor.actions.get(this.slug);
       return originalAction?.uuid ?? "";
     }
@@ -172,12 +172,12 @@ class ActionPTR2e extends foundry.abstract.DataModel {
     name?: string;
     icon?: string;
   } = {}): HTMLAnchorElement {
-    let {attrs = {}, dataset = {} as Record<string, string>, name} = options;
-    const {classes = [], icon} = options;
+    let { attrs = {}, dataset = {} as Record<string, string>, name } = options;
+    const { classes = [], icon } = options;
     // Build dataset
     const documentName = `${formatSlug(this.type)} ${this.name}`;
     const anchorIcon = icon ?? "fas fa-burst";
-    if ( !classes.includes("content-link") ) classes.unshift("content-link");
+    if (!classes.includes("content-link")) classes.unshift("content-link");
     attrs = foundry.utils.mergeObject({ draggable: "true" }, attrs);
     dataset = foundry.utils.mergeObject({
       link: "",
@@ -208,13 +208,15 @@ class ActionPTR2e extends foundry.abstract.DataModel {
       if (trait) {
         acc.set(traitSlug, trait);
       } else {
-        console.debug(`Could not find trait with slug ${traitSlug}`);
-        console.debug("TODO: Remove this functionality and add a migration to remove invalid traits.")
-        acc.set(traitSlug, { 
-          label: Handlebars.helpers.formatSlug(traitSlug), 
-          description: '', 
-          slug: traitSlug, 
-          related: [], 
+        if (traitSlug !== "pp-updated") {
+          console.debug(`Could not find trait with slug ${traitSlug}`);
+          console.debug("TODO: Remove this functionality and add a migration to remove invalid traits.")
+        }
+        acc.set(traitSlug, {
+          label: Handlebars.helpers.formatSlug(traitSlug),
+          description: '',
+          slug: traitSlug,
+          related: [],
           virtual: false,
           changes: []
         });
@@ -226,7 +228,7 @@ class ActionPTR2e extends foundry.abstract.DataModel {
       this.img = this.item.img;
     }
 
-    if(this.type === "attack") return;
+    if (this.type === "attack") return;
     this.statistic = this.prepareStatistic();
   }
 
@@ -270,7 +272,7 @@ class ActionPTR2e extends foundry.abstract.DataModel {
 
   prepareUpdate(data: DeepPartial<SourceFromSchema<ActionSchema>>) {
     const currentActions = this.item.system.toObject().actions.filter(a => !a.ephemeralVariant);
-    if(data.ephemeralVariant) return currentActions;
+    if (data.ephemeralVariant) return currentActions;
 
     const actionIndex = currentActions.findIndex((a) => a.slug === this.slug);
     fu.mergeObject(currentActions[actionIndex], data);
