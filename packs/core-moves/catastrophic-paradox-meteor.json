@@ -13,7 +13,6 @@
           "zenith",
           "move-locked",
           "blast-7",
-          "flinch-3",
           "sky"
         ],
         "range": {
@@ -32,7 +31,7 @@
         "types": [
           "fighting"
         ],
-        "description": "<p>Trigger: User's partner uses Z-Pose! and triggers the appropriate Z-Power-Crystal</p><p>Effect: The user may freely move up to the Movement Score of their choice when declaring this attack. This attack ignores [Defensive] Abilities and effects of valid targets. If this attack deals super effective damage to a target, that target is Flinched.</p><p>Requirement: [Koraidon] Z-Power-Crystal as an Accessory Item and Collision Course on the user's Active List.</p>",
+        "description": "<p>Trigger: User's partner uses Z-Pose! and triggers the appropriate Z-Power-Crystal</p><p>Effect: The user may freely move up to the Movement Score of their choice when declaring this attack. This attack ignores [Defensive] Abilities and effects of valid targets. If this attack deals super effective damage to a target, that target is Delayed by 30%.</p><p>Requirement: [Koraidon] Z-Power-Crystal as an Accessory Item and Collision Course on the user's Active List.</p>",
         "contestType": "",
         "contestEffect": "",
         "free": true,
@@ -49,5 +48,45 @@
     }
   },
   "_id": "uL2WWDzMqgLYBYEO",
-  "effects": []
+  "effects": [
+    {
+      "name": "Catastrophic Paradox Meteor",
+      "type": "passive",
+      "_id": "z7y1zzA2z4Rf7Nwm",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "catastrophic-paradox-meteor-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.advanceffectitem",
+            "predicate": [],
+            "chance": 100,
+            "dontMerge": true,
+            "affects": "target",
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "system.amount",
+                "value": -30
+              },
+              {
+                "mode": 5,
+                "property": "name",
+                "value": "Delay 30%"
+              }
+            ]
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      }
+    }
+  ]
 }

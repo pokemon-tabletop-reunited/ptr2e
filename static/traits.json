@@ -3202,16 +3202,25 @@
     "description": "These actions and attacks do not affect allied creatures in range."
   },
   {
-    "slug": "flinch-x",
-    "label": "Flinch X",
+    "slug": "flinch",
+    "label": "Flinch",
     "related": [],
-    "description": "Creature(s) that are target/hit by this Action are Flinched, having their next Activation delayed X0%."
+    "description": "A marker for moves that can afflict Flinch on others"
   },
   {
-    "slug": "flinch-1",
-    "label": "Flinch 1",
+    "slug": "flinch-xy",
+    "label": "Flinch XY",
     "related": [],
-    "description": "Creature(s) that are target/hit by this Action are Flinched, having their next Activation delayed 10%.",
+    "description": "The creature that uses this action is Flinched, having their next Activation delayed by XY%.",
+    "placeholders": [
+      {
+        "keyPattern": "flinch-\\d\\d",
+        "labelPattern": "XY",
+        "valuePattern": "\\d\\d",
+        "descriptionPattern": "XY%",
+        "descriptionReplacement": "{{x}}%"
+      }
+    ],
     "changes": [
       {
         "type": "roll-effect",
@@ -3224,356 +3233,17 @@
           {
             "mode": 5,
             "property": "system.amount",
-            "value": -10
+            "value": "-{{trait|value}}"
           },
           {
             "mode": 5,
             "property": "name",
-            "value": "Delay 10%"
+            "value": "Delay {{trait|value}}%"
           }
         ]
       }
     ],
     "type": "automated"
-  },
-  {
-    "slug": "flinch-2",
-    "label": "Flinch 2",
-    "related": [],
-    "description": "Creature(s) that are target/hit by this Action are Flinched, having their next Activation delayed 20%.",
-    "changes": [
-      {
-        "type": "roll-effect",
-        "key": "attack",
-        "value": "Compendium.ptr2e.core-effects.Item.advanceffectitem",
-        "chance": 100,
-        "dontMerge": true,
-        "affects": "target",
-        "alterations": [
-          {
-            "mode": 5,
-            "property": "system.amount",
-            "value": -20
-          },
-          {
-            "mode": 5,
-            "property": "name",
-            "value": "Delay 20%"
-          }
-        ]
-      }
-    ],
-    "type": "automated"
-  },
-  {
-    "slug": "flinch-3",
-    "label": "Flinch 3",
-    "related": [],
-    "description": "Creature(s) that are target/hit by this Action are Flinched, having their next Activation delayed 30%.",
-    "changes": [
-      {
-        "type": "roll-effect",
-        "key": "attack",
-        "value": "Compendium.ptr2e.core-effects.Item.advanceffectitem",
-        "chance": 100,
-        "dontMerge": true,
-        "affects": "target",
-        "alterations": [
-          {
-            "mode": 5,
-            "property": "system.amount",
-            "value": -30
-          },
-          {
-            "mode": 5,
-            "property": "name",
-            "value": "Delay 30%"
-          }
-        ]
-      }
-    ],
-    "type": "automated"
-  },
-  {
-    "slug": "flinch-4",
-    "label": "Flinch 4",
-    "related": [],
-    "description": "Creature(s) that are target/hit by this Action are Flinched, having their next Activation delayed 40%.",
-    "changes": [
-      {
-        "type": "roll-effect",
-        "key": "attack",
-        "value": "Compendium.ptr2e.core-effects.Item.advanceffectitem",
-        "chance": 100,
-        "dontMerge": true,
-        "affects": "target",
-        "alterations": [
-          {
-            "mode": 5,
-            "property": "system.amount",
-            "value": -40
-          },
-          {
-            "mode": 5,
-            "property": "name",
-            "value": "Delay 40%"
-          }
-        ]
-      }
-    ],
-    "type": "automated"
-  },
-  {
-    "slug": "flinch-5",
-    "label": "Flinch 5",
-    "related": [],
-    "description": "Creature(s) that are target/hit by this Action are Flinched, having their next Activation delayed 50%.",
-    "changes": [
-      {
-        "type": "roll-effect",
-        "key": "attack",
-        "value": "Compendium.ptr2e.core-effects.Item.advanceffectitem",
-        "chance": 100,
-        "dontMerge": true,
-        "affects": "target",
-        "alterations": [
-          {
-            "mode": 5,
-            "property": "system.amount",
-            "value": -50
-          },
-          {
-            "mode": 5,
-            "property": "name",
-            "value": "Delay 50%"
-          }
-        ]
-      }
-    ],
-    "type": "automated"
-  },
-  {
-    "slug": "flinch-chance-x",
-    "label": "Flinch Chance X",
-    "related": [],
-    "description": "Creature(s) that are target/hit by this Action have a chance to be Flinched, having their next Activation delayed X0%. This chance is detailed within this Action's description."
-  },
-  {
-    "slug": "flinch-chance-1",
-    "label": "Flinch Chance 1",
-    "related": [],
-    "description": "Creature(s) that are target/hit by this Action have a chance to be Flinched, having their next Activation delayed 10%. This chance is detailed within this Action's description."
-  },
-  {
-    "slug": "flinch-chance-2",
-    "label": "Flinch Chance 2",
-    "related": [],
-    "description": "Creature(s) that are target/hit by this Action have a chance to be Flinched, having their next Activation delayed 20%. This chance is detailed within this Action's description."
-  },
-  {
-    "slug": "flinch-chance-3",
-    "label": "Flinch Chance 3",
-    "related": [],
-    "description": "Creature(s) that are target/hit by this Action have a chance to be Flinched, having their next Activation delayed 30%. This chance is detailed within this Action's description."
-  },
-  {
-    "slug": "flinch-chance-4",
-    "label": "Flinch Chance 4",
-    "related": [],
-    "description": "Creature(s) that are target/hit by this Action have a chance to be Flinched, having their next Activation delayed 40%. This chance is detailed within this Action's description."
-  },
-  {
-    "slug": "flinch-chance-5",
-    "label": "Flinch Chance 5",
-    "related": [],
-    "description": "Creature(s) that are target/hit by this Action have a chance to be Flinched, having their next Activation delayed 50%. This chance is detailed within this Action's description."
-  },
-  {
-    "slug": "progress-x",
-    "label": "Progress X",
-    "related": [],
-    "description": "Creature(s) that are target/hit by this Action are Progressed, having their next Activation advanced X0%."
-  },
-  {
-    "slug": "progress-1",
-    "label": "Progress 1",
-    "related": [],
-    "description": "Creature(s) that are target/hit by this Action are Progressed, having their next Activation advanced 10%.",
-    "changes": [
-      {
-        "type": "roll-effect",
-        "key": "attack",
-        "value": "Compendium.ptr2e.core-effects.Item.advanceffectitem",
-        "chance": 100,
-        "dontMerge": true,
-        "affects": "target",
-        "alterations": [
-          {
-            "mode": 5,
-            "property": "system.amount",
-            "value": 10
-          },
-          {
-            "mode": 5,
-            "property": "name",
-            "value": "Advance 10%"
-          }
-        ]
-      }
-    ],
-    "type": "automated"
-  },
-  {
-    "slug": "progress-2",
-    "label": "Progress 2",
-    "related": [],
-    "description": "Creature(s) that are target/hit by this Action are Progressed, having their next Activation advanced 20%.",
-    "changes": [
-      {
-        "type": "roll-effect",
-        "key": "attack",
-        "value": "Compendium.ptr2e.core-effects.Item.advanceffectitem",
-        "chance": 100,
-        "dontMerge": true,
-        "affects": "target",
-        "alterations": [
-          {
-            "mode": 5,
-            "property": "system.amount",
-            "value": 20
-          },
-          {
-            "mode": 5,
-            "property": "name",
-            "value": "Advance 20%"
-          }
-        ]
-      }
-    ],
-    "type": "automated"
-  },
-  {
-    "slug": "progress-3",
-    "label": "Progress 3",
-    "related": [],
-    "description": "Creature(s) that are target/hit by this Action are Progressed, having their next Activation advanced 30%.",
-    "changes": [
-      {
-        "type": "roll-effect",
-        "key": "attack",
-        "value": "Compendium.ptr2e.core-effects.Item.advanceffectitem",
-        "chance": 100,
-        "dontMerge": true,
-        "affects": "target",
-        "alterations": [
-          {
-            "mode": 5,
-            "property": "system.amount",
-            "value": 30
-          },
-          {
-            "mode": 5,
-            "property": "name",
-            "value": "Advance 30%"
-          }
-        ]
-      }
-    ],
-    "type": "automated"
-  },
-  {
-    "slug": "progress-4",
-    "label": "Progress 4",
-    "related": [],
-    "description": "Creature(s) that are target/hit by this Action are Progressed, having their next Activation advanced 40%.",
-    "changes": [
-      {
-        "type": "roll-effect",
-        "key": "attack",
-        "value": "Compendium.ptr2e.core-effects.Item.advanceffectitem",
-        "chance": 100,
-        "dontMerge": true,
-        "affects": "target",
-        "alterations": [
-          {
-            "mode": 5,
-            "property": "system.amount",
-            "value": 40
-          },
-          {
-            "mode": 5,
-            "property": "name",
-            "value": "Advance 40%"
-          }
-        ]
-      }
-    ],
-    "type": "automated"
-  },
-  {
-    "slug": "progress-5",
-    "label": "Progress 5",
-    "related": [],
-    "description": "Creature(s) that are target/hit by this Action are Progressed, having their next Activation advanced 50%.",
-    "changes": [
-      {
-        "type": "roll-effect",
-        "key": "attack",
-        "value": "Compendium.ptr2e.core-effects.Item.advanceffectitem",
-        "chance": 100,
-        "dontMerge": true,
-        "affects": "target",
-        "alterations": [
-          {
-            "mode": 5,
-            "property": "system.amount",
-            "value": 50
-          },
-          {
-            "mode": 5,
-            "property": "name",
-            "value": "Advance 50%"
-          }
-        ]
-      }
-    ],
-    "type": "automated"
-  },
-  {
-    "slug": "progress-chance-x",
-    "label": "Progress Chance X",
-    "related": [],
-    "description": "Creature(s) that are target/hit by this Action have a chance to be Progressed, having their next Activation advanced X0%. This chance is detailed within this Action's description."
-  },
-  {
-    "slug": "progress-chance-1",
-    "label": "Progress Chance 1",
-    "related": [],
-    "description": "Creature(s) that are target/hit by this Action have a chance to be Progressed, having their next Activation advanced 10%. This chance is detailed within this Action's description."
-  },
-  {
-    "slug": "progress-chance-2",
-    "label": "Progress Chance 2",
-    "related": [],
-    "description": "Creature(s) that are target/hit by this Action have a chance to be Progressed, having their next Activation advanced 20%. This chance is detailed within this Action's description."
-  },
-  {
-    "slug": "progress-chance-3",
-    "label": "Progress Chance 3",
-    "related": [],
-    "description": "Creature(s) that are target/hit by this Action have a chance to be Progressed, having their next Activation advanced 30%. This chance is detailed within this Action's description."
-  },
-  {
-    "slug": "progress-chance-4",
-    "label": "Progress Chance 4",
-    "related": [],
-    "description": "Creature(s) that are target/hit by this Action have a chance to be Progressed, having their next Activation advanced 40%. This chance is detailed within this Action's description."
-  },
-  {
-    "slug": "progress-chance-5",
-    "label": "Progress Chance 5",
-    "related": [],
-    "description": "Creature(s) that are target/hit by this Action have a chance to be Progressed, having their next Activation advanced 50%. This chance is detailed within this Action's description."
   },
   {
     "slug": "hazard",
@@ -3816,45 +3486,25 @@
     "description": "Denotes if an attack or ability spreads or uses powder or a fine dust."
   },
   {
-    "slug": "priority-x",
-    "label": "Priority X",
+    "slug": "priority",
+    "label": "priority",
     "related": [],
-    "description": "After resolving this Action, the user's next Activation is advanced X0%."
+    "description": "A marker for moves that can afflict Advance on others"
   },
   {
-    "slug": "priority-1",
-    "label": "Priority 1",
+    "slug": "priority-xy",
+    "label": "Priority XY",
     "related": [],
-    "description": "After resolving this Action, the user's next Activation is advanced 10%.",
-    "changes": [
+    "description": "The creature that uses this action is Advanced, having their next Activation advanced by XY%.",
+    "placeholders": [
       {
-        "type": "roll-effect",
-        "key": "attack",
-        "value": "Compendium.ptr2e.core-effects.Item.advanceffectitem",
-        "chance": 100,
-        "dontMerge": true,
-        "affects": "self",
-        "alterations": [
-          {
-            "mode": 5,
-            "property": "system.amount",
-            "value": 10
-          },
-          {
-            "mode": 5,
-            "property": "name",
-            "value": "Advance 10%"
-          }
-        ]
+        "keyPattern": "priority-\\d\\d",
+        "labelPattern": "XY",
+        "valuePattern": "\\d\\d",
+        "descriptionPattern": "XY%",
+        "descriptionReplacement": "{{x}}%"
       }
     ],
-    "type": "automated"
-  },
-  {
-    "slug": "priority-2",
-    "label": "Priority 2",
-    "related": [],
-    "description": "After resolving this Action, the user's next Activation is advanced 20%.",
     "changes": [
       {
         "type": "roll-effect",
@@ -3862,104 +3512,17 @@
         "value": "Compendium.ptr2e.core-effects.Item.advanceffectitem",
         "chance": 100,
         "dontMerge": true,
-        "affects": "self",
+        "affects": "target",
         "alterations": [
           {
             "mode": 5,
             "property": "system.amount",
-            "value": 20
+            "value": "{{trait|value}}"
           },
           {
             "mode": 5,
             "property": "name",
-            "value": "Advance 20%"
-          }
-        ]
-      }
-    ],
-    "type": "automated"
-  },
-  {
-    "slug": "priority-3",
-    "label": "Priority 3",
-    "related": [],
-    "description": "After resolving this Action, the user's next Activation is advanced 30%.",
-    "changes": [
-      {
-        "type": "roll-effect",
-        "key": "attack",
-        "value": "Compendium.ptr2e.core-effects.Item.advanceffectitem",
-        "chance": 100,
-        "dontMerge": true,
-        "affects": "self",
-        "alterations": [
-          {
-            "mode": 5,
-            "property": "system.amount",
-            "value": 30
-          },
-          {
-            "mode": 5,
-            "property": "name",
-            "value": "Advance 30%"
-          }
-        ]
-      }
-    ],
-    "type": "automated"
-  },
-  {
-    "slug": "priority-4",
-    "label": "Priority 4",
-    "related": [],
-    "description": "After resolving this Action, the user's next Activation is advanced 40%.",
-    "changes": [
-      {
-        "type": "roll-effect",
-        "key": "attack",
-        "value": "Compendium.ptr2e.core-effects.Item.advanceffectitem",
-        "chance": 100,
-        "dontMerge": true,
-        "affects": "self",
-        "alterations": [
-          {
-            "mode": 5,
-            "property": "system.amount",
-            "value": 40
-          },
-          {
-            "mode": 5,
-            "property": "name",
-            "value": "Advance 40%"
-          }
-        ]
-      }
-    ],
-    "type": "automated"
-  },
-  {
-    "slug": "priority-5",
-    "label": "Priority 5",
-    "related": [],
-    "description": "After resolving this Action, the user's next Activation is advanced 50%.",
-    "changes": [
-      {
-        "type": "roll-effect",
-        "key": "attack",
-        "value": "Compendium.ptr2e.core-effects.Item.advanceffectitem",
-        "chance": 100,
-        "dontMerge": true,
-        "affects": "self",
-        "alterations": [
-          {
-            "mode": 5,
-            "property": "system.amount",
-            "value": 50
-          },
-          {
-            "mode": 5,
-            "property": "name",
-            "value": "Advance 50%"
+            "value": "Advance {{trait|value}}%"
           }
         ]
       }
