@@ -82,20 +82,16 @@
         }
       ]
     },
-    "movement": {
-      "primary": [
-        {
-          "type": "overland",
-          "value": 9
-        }
-      ],
-      "secondary": [
-        {
-          "type": "swim",
-          "value": 6
-        }
-      ]
-    },
+    "movement": [
+      {
+        "type": "overland",
+        "value": 9
+      },
+      {
+        "type": "swim",
+        "value": 6
+      }
+    ],
     "skills": [
       {
         "slug": "acrobatics",
@@ -955,7 +951,9 @@
         "removeOnRecall": false,
         "stacks": 0,
         "trigger": "manual",
-        "conditions": []
+        "conditions": [],
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
@@ -975,25 +973,18 @@
       "sort": 0,
       "flags": {},
       "_stats": {
-        "compendiumSource": null,
-        "duplicateSource": null,
-        "coreVersion": "12.331",
-        "systemId": "ptr2e",
-        "systemVersion": "1.1.0.beta",
+        "coreVersion": "13.346",
+        "systemId": null,
+        "systemVersion": null,
         "createdTime": null,
         "modifiedTime": null,
-        "lastModifiedBy": null
+        "lastModifiedBy": null,
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
       }
     }
   ],
   "folder": "rS3iGnYQKzTIxvUN",
-  "flags": {
-    "exportSource": {
-      "world": "ptr-test",
-      "system": "ptr2e",
-      "coreVersion": "12.331",
-      "systemVersion": "1.1.0.beta"
-    }
-  },
   "_id": "W4SrwI8Hg80yq2S7"
 }
