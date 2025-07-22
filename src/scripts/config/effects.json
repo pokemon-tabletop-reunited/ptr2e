@@ -203,18 +203,44 @@
       "changes": [
         {
           "type": "percentile-modifier",
-          "key": "all-power",
-          "value": -50
+          "key": "damaging-attack-power",
+          "value": -50,
+          "predicate": [],
+          "mode": 2,
+          "ignored": false,
+          "hideIfDisabled": false
         },
         {
           "type": "basic",
           "key": "system.attributes.spd.stage",
           "value": -1,
-          "mode": 2
+          "predicate": [],
+          "mode": 2,
+          "ignored": false
         },
         {
           "type": "grant-effect",
-          "value": "slowed"
+          "value": "slowed",
+          "key": "",
+          "predicate": [],
+          "alterations": [
+            {
+              "mode": 5,
+              "property": "duration.turns",
+              "value": 10
+            }
+          ],
+          "onDeleteActions": {
+            "grantee": "detach",
+            "granter": "cascade"
+          },
+          "mode": 2,
+          "ignored": false,
+          "reevaluateOnUpdate": false,
+          "inMemoryOnly": false,
+          "allowDuplicate": true,
+          "track": false,
+          "replaceSelf": false
         }
       ],
       "priority": 30,
