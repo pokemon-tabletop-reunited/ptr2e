@@ -14,8 +14,10 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
-    }
+      ],
+      "notes": ""
+    },
+    "slug": "intense-fog-weather"
   },
   "img": "systems/ptr2e/img/svg/normal_icon.svg",
   "effects": [
@@ -32,18 +34,18 @@
             "value": -60,
             "predicate": [],
             "label": "Electric Fog Modifier",
-            "mode": 2,
             "priority": null,
+            "mode": 2,
             "ignored": false,
             "hideIfDisabled": false
           },
           {
             "type": "basic",
-            "key": "system.attributes.spe.value",
+            "key": "system.modifiers.speMultiplier",
             "value": 1.5,
             "mode": 1,
             "predicate": [
-              "actor:trait:bug"
+              "trait:bug"
             ],
             "label": "Bug SpeedBoost",
             "priority": null,
@@ -62,7 +64,9 @@
         "formula": "",
         "type": "damage",
         "targetType": "all",
-        "targetUuid": null
+        "targetUuid": null,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
@@ -84,15 +88,15 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.346",
         "systemId": "ptr2e",
-        "systemVersion": "1.0.3.beta",
+        "systemVersion": "1.3.8.beta",
         "createdTime": null,
-        "modifiedTime": 1739484795007,
-        "lastModifiedBy": "OCI1vTFsIMTEwU21"
+        "modifiedTime": 1753351231414,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf",
+        "exportSource": null
       }
     }
   ],
-  "flags": {},
   "_id": "Krb1BRo2XyhMNZ3G"
 }

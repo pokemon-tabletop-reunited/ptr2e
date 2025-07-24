@@ -17,8 +17,10 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
-    }
+      ],
+      "notes": ""
+    },
+    "slug": "intense-winds-weather"
   },
   "img": "systems/ptr2e/img/svg/flying_icon.svg",
   "effects": [
@@ -31,10 +33,15 @@
         "changes": [
           {
             "type": "basic",
-            "key": "system.attributes.spe.value",
+            "key": "system.modifiers.speMultiplier",
             "value": 1.6,
             "predicate": [
-              "actor:trait:flying"
+              {
+                "or": [
+                  "trait:flying",
+                  "movement:flight"
+                ]
+              }
             ],
             "mode": 1,
             "label": "Flying SpeedBoost",
@@ -47,8 +54,8 @@
             "value": 80,
             "predicate": [],
             "label": "Wind Damage Modifier",
-            "mode": 2,
             "priority": null,
+            "mode": 2,
             "ignored": false,
             "hideIfDisabled": false
           }
@@ -65,7 +72,9 @@
         "formula": "",
         "type": "damage",
         "targetType": "all",
-        "targetUuid": null
+        "targetUuid": null,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
@@ -87,15 +96,15 @@
       "_stats": {
         "compendiumSource": "Compendium.ptr2e.core-summons.Item.OeB2hndOSCLzlbcp.ActiveEffect.btSZQSeig8xrmoQ4",
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.346",
         "systemId": "ptr2e",
-        "systemVersion": "1.0.3.beta",
+        "systemVersion": "1.3.8.beta",
         "createdTime": null,
-        "modifiedTime": 1739485374046,
-        "lastModifiedBy": "OCI1vTFsIMTEwU21"
+        "modifiedTime": 1753351323711,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf",
+        "exportSource": null
       }
     }
   ],
-  "flags": {},
   "_id": "Uq4WJydMueMJij91"
 }
