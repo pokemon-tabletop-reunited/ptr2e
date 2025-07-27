@@ -8,10 +8,10 @@
     },
     "actions": [],
     "slug": "mystery-scholar-1",
-    "description": "<p>The user selects 3 Occult Group Skills with which their Species proficiency is greater than 1. The user’s Species proficiency with the selected skills is increased by +10. A Skill may only be increased 3 times with this Perk and cannot be increased past 50.</p>",
+    "description": "<p>The user selects 3 Occult Group Skills. The user’s Species proficiency with the selected skills is increased by +10. A Skill may only be increased 3 times with this Perk and cannot be increased past 60 (with the last increase needing to be manually reduced to prevent the Skill from exceeding 60).</p>",
     "traits": [],
     "prerequisites": [
-      "item:perk:skill-refinement-3"
+      "item:perk:skill-refinement-5"
     ],
     "autoUnlock": [],
     "cost": 1,
@@ -127,6 +127,13 @@
       "arena": null,
       "approach": null,
       "archetype": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
     }
   },
   "_id": "k5ztJixTB9SD8OJm",
@@ -157,8 +164,8 @@
             "key": "system.skills.{effect|flags.ptr2e.choiceSelections.ms11}.value",
             "value": 10,
             "predicate": [],
-            "mode": 2,
             "priority": null,
+            "mode": 2,
             "ignored": false
           },
           {
@@ -169,7 +176,7 @@
             "mode": 2,
             "priority": null,
             "ignored": false,
-            "choices": "flags.ptr2e.skillOptions.arts",
+            "choices": "flags.ptr2e.skillOptions.occult",
             "prompt": "PTR2E.ChoiceSetPrompt.Prompt",
             "adjustName": true,
             "rollOption": "ms12"
@@ -179,8 +186,29 @@
             "key": "system.skills.{effect|flags.ptr2e.choiceSelections.ms12}.value",
             "value": 10,
             "predicate": [],
-            "mode": 2,
             "priority": null,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "choice-set",
+            "key": "",
+            "value": 0,
+            "predicate": [],
+            "mode": 2,
+            "ignored": false,
+            "choices": "flags.ptr2e.skillOptions.occult",
+            "prompt": "PTR2E.ChoiceSetPrompt.Prompt",
+            "adjustName": true,
+            "rollOption": "ms13",
+            "priority": null
+          },
+          {
+            "type": "basic",
+            "key": "system.skills.{effect|flags.ptr2e.choiceSelections.ms13}.value",
+            "value": 10,
+            "predicate": [],
+            "mode": 2,
             "ignored": false
           }
         ],
@@ -188,7 +216,9 @@
         "traits": [],
         "removeAfterCombat": false,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
@@ -210,22 +240,15 @@
       "_stats": {
         "compendiumSource": "Item.xxuGLZ0QPnw7NYa8.ActiveEffect.V64elrUanozajfG2",
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.346",
         "systemId": "ptr2e",
-        "systemVersion": "1.0.1.beta",
+        "systemVersion": "1.4.1.beta",
         "createdTime": 1739369847497,
-        "modifiedTime": 1739369937193,
-        "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
+        "modifiedTime": 1753650893793,
+        "lastModifiedBy": "QT9RUSVuyZd4bDWO",
+        "exportSource": null
       }
     }
   ],
-  "folder": "P8RtSJE1K00CB5lL",
-  "flags": {
-    "exportSource": {
-      "world": "pokemon-mystery-dungeon-shrouded-kingdoms",
-      "system": "ptr2e",
-      "coreVersion": "12.331",
-      "systemVersion": "0.10.0-alpha.5.2.1"
-    }
-  }
+  "folder": "P8RtSJE1K00CB5lL"
 }
