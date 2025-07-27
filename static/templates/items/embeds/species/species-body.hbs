@@ -16,25 +16,13 @@
         </section>
         <section class="species-primary-movement">
             <fieldset>
-                <legend>{{localize fields.movement.fields.primary.label}}</legend>
-                {{#each document.system.movement.primary as |movement|}}
-                    <label for="system.movement.primary.{{@index}}">{{formatSlug movement.type}}</label>
+                <legend>{{localize fields.movement.label}}</legend>
+                {{#each document.system.movement as |movement|}}
+                    <label for="system.movement.{{@index}}">{{formatSlug movement.type}}</label>
                     <span>{{movement.value}}</span>
                 {{/each}}
             </table>
             </fieldset>
         </section>
-        {{#if document.system.movement.secondary}}
-        <section class="species-secondary-movement">
-            <fieldset>
-                <legend>{{localize fields.movement.fields.secondary.label}}</legend>
-                {{#each document.system.movement.secondary as |movement|}}
-                    <label for="system.movement.secondary.{{@index}}">{{formatSlug movement.type}}</label>
-                    <span>{{movement.value}}</span>
-                {{/each}}
-            </table>
-            </fieldset>
-        </section>
-        {{/if}}
     </main>
 </content>

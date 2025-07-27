@@ -10,20 +10,16 @@ import { partialSkillToSkill } from "@scripts/config/skills.ts";
 import { ActiveEffectPTR2e } from "@effects";
 
 export default class SpeciesSheet extends ItemSheetPTR2e<SpeciesPTR2e["system"]> {
-  static override DEFAULT_OPTIONS = fu.mergeObject(
-    super.DEFAULT_OPTIONS,
-    {
-      position: {
-        width: 600,
-      },
-      classes: ["species-sheet"],
-      actions: {
-        "copy-evolution-tree": SpeciesSheet.#copyEvolutionTree,
-        "paste-evolution-tree": SpeciesSheet.#pasteEvolutionTree,
-      },
+  static override DEFAULT_OPTIONS = {
+    position: {
+      width: 600,
     },
-    { inplace: false }
-  );
+    classes: ["species-sheet"],
+    actions: {
+      "copy-evolution-tree": SpeciesSheet.#copyEvolutionTree,
+      "paste-evolution-tree": SpeciesSheet.#pasteEvolutionTree,
+    },
+  };
 
   static override readonly overviewTemplate =
     "systems/ptr2e/templates/items/species/species-overview.hbs";
@@ -123,41 +119,31 @@ export default class SpeciesSheet extends ItemSheetPTR2e<SpeciesPTR2e["system"]>
           const action = element.dataset.action;
           switch (action) {
             case "add": {
-              const { field, subField } = element.dataset;
+              const { field } = element.dataset;
 
               if (field === "movement") {
                 const movementArr = fu.deepClone(
-                  document.system.movement[
-                  subField as keyof typeof document.system.movement
-                  ]
+                  document.system.movement
                 ) as { type: string; value: number }[];
                 movementArr.push({ type: "", value: 0 });
                 document.update({
                   system: {
-                    movement: {
-                      [subField as keyof typeof document.system.movement]:
-                        movementArr,
-                    },
+                    movement: movementArr
                   },
                 });
               }
               break;
             }
             case "delete": {
-              const { field, subField, index } = element.dataset;
-              if (field === "movement" && subField && index) {
+              const { field, index } = element.dataset;
+              if (field === "movement" && index) {
                 const movementArr = fu.deepClone(
-                  document.system.movement[
-                  subField as keyof typeof document.system.movement
-                  ]
+                  document.system.movement
                 ) as { type: string; value: number }[];
                 movementArr.splice(parseInt(index ?? ""), 1);
                 document.update({
                   system: {
-                    movement: {
-                      [subField as keyof typeof document.system.movement]:
-                        movementArr,
-                    },
+                    movement: movementArr,
                   },
                 });
               }
@@ -445,7 +431,7 @@ export default class SpeciesSheet extends ItemSheetPTR2e<SpeciesPTR2e["system"]>
     const { path } = target.dataset;
     if (!path) return;
 
-    const data = TextEditor.getDragEventData(event) as Record<string, string>;
+    const data = foundry.applications.ux.TextEditor.getDragEventData(event) as Record<string, string>;
     if (data.type !== "Item" || !data.uuid) return;
     const item = await fromUuid<ItemPTR2e>(data.uuid);
     if (!item || !(item instanceof ItemPTR2e)) return;
@@ -492,7 +478,7 @@ export default class SpeciesSheet extends ItemSheetPTR2e<SpeciesPTR2e["system"]>
     const { path } = target.dataset;
     if (!path) return;
 
-    const data = TextEditor.getDragEventData(event) as Record<string, string>;
+    const data = foundry.applications.ux.TextEditor.getDragEventData(event) as Record<string, string>;
     if (data.type !== "Item" || !data.uuid) return;
     const item = await fromUuid<ItemPTR2e>(data.uuid);
     if (!item || !(item instanceof ItemPTR2e)) return;
@@ -609,7 +595,7 @@ export default class SpeciesSheet extends ItemSheetPTR2e<SpeciesPTR2e["system"]>
 
     target.classList.remove("dragover");
 
-    const data = TextEditor.getDragEventData(event) as Record<string, string>;
+    const data = foundry.applications.ux.TextEditor.getDragEventData(event) as Record<string, string>;
     if (data.type !== "Item" || !data.uuid) return;
     const item = await fromUuid<MovePTR2e>(data.uuid);
     if (!item || !(item instanceof ItemPTR2e)) return;

@@ -93,6 +93,7 @@ interface PerkFilters extends BaseFilterData {
   checkboxes: Record<"source", CheckboxData>;
   multiselects: {
     traits: MultiselectData<string>;
+    archetypes: MultiselectData<string>;
     // prerequisites: MultiselectData<string>;
   };
   sliders: {

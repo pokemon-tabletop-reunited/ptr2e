@@ -1,37 +1,29 @@
 import { Tab } from "@item/sheets/document.ts";
 import { CustomSkill, Skill } from "@module/data/models/skill.ts";
 import { sluggify } from "@utils";
-import {
-  ApplicationRenderContext,
-  HandlebarsRenderOptions,
-} from "types/foundry/common/applications/api.js";
 
 class SkillsSettingsMenu extends foundry.applications.api.HandlebarsApplicationMixin(
   foundry.applications.api.ApplicationV2
 ) {
   newCounter = 0;
 
-  static override DEFAULT_OPTIONS = fu.mergeObject(
-    foundry.applications.api.ApplicationV2.DEFAULT_OPTIONS,
-    {
-      id: "skills-settings",
-      classes: ["sheet", "default-sheet"],
-      tag: "form",
-      window: {
-        title: "PTR2E.Settings.Skills.Title",
-      },
-      position: {
-        width: 600,
-        height: 700,
-      },
-      form: {
-        closeOnSubmit: true,
-        submitOnChange: false,
-        handler: SkillsSettingsMenu.#onSubmit,
-      },
+  static override DEFAULT_OPTIONS = {
+    id: "skills-settings",
+    classes: ["sheet", "default-sheet"],
+    tag: "form",
+    window: {
+      title: "PTR2E.Settings.Skills.Title",
     },
-    { inplace: false }
-  );
+    position: {
+      width: 600,
+      height: 700,
+    },
+    form: {
+      closeOnSubmit: true,
+      submitOnChange: false,
+      handler: SkillsSettingsMenu.#onSubmit,
+    },
+  };
 
   static override PARTS: Record<string, foundry.applications.api.HandlebarsTemplatePart> = {
     header: {
@@ -59,7 +51,7 @@ class SkillsSettingsMenu extends foundry.applications.api.HandlebarsApplicationM
     },
   };
 
-  skills: (CustomSkill & { type: "custom" | "core"; locked?: true})[];
+  skills: (CustomSkill & { type: "custom" | "core"; locked?: true })[];
 
   constructor(options: Partial<foundry.applications.api.ApplicationConfiguration> = {}) {
     super(options);
@@ -124,13 +116,13 @@ class SkillsSettingsMenu extends foundry.applications.api.HandlebarsApplicationM
     return Object.fromEntries(Object.entries(this.tabs).filter(([k]) => parts.includes(k)));
   }
 
-  override async _prepareContext(options: HandlebarsRenderOptions) {
+  override async _prepareContext(options: foundry.applications.api.HandlebarsRenderOptions) {
     const systemSkills = [];
     const userSkills = [];
     const moduleSkills = game.ptr.data.skills.rawModuleSkills;
     for (const skill of this.skills) {
       if (skill.type === "core") {
-        if([
+        if ([
           "luck",
           "resources",
           "climb",
@@ -168,14 +160,14 @@ class SkillsSettingsMenu extends foundry.applications.api.HandlebarsApplicationM
 
   override async _preparePartContext(
     partId: string,
-    context: ApplicationRenderContext
-  ): Promise<ApplicationRenderContext> {
+    context: foundry.applications.api.ApplicationRenderContext
+  ): Promise<foundry.applications.api.ApplicationRenderContext> {
     const preparedContext = await super._preparePartContext(partId, context);
     preparedContext.partId = partId;
     return preparedContext;
   }
 
-  override _configureRenderOptions(options: HandlebarsRenderOptions): void {
+  override _configureRenderOptions(options: foundry.applications.api.HandlebarsRenderOptions): void {
     super._configureRenderOptions(options);
     if (game.ptr.data.skills.rawModuleSkills.length === 0) {
       options.parts = options.parts?.filter((part) => part !== "moduleSkills");
@@ -185,7 +177,7 @@ class SkillsSettingsMenu extends foundry.applications.api.HandlebarsApplicationM
   override _attachPartListeners(
     partId: string,
     htmlElement: HTMLElement,
-    options: HandlebarsRenderOptions
+    options: foundry.applications.api.HandlebarsRenderOptions
   ): void {
     super._attachPartListeners(partId, htmlElement, options);
 
