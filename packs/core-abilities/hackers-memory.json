@@ -18,7 +18,8 @@
       "partial-automation"
     ],
     "actions": [],
-    "description": "<p>Passive: The user gains +10% RES. The user heals @Tick[1] per Activation during combat.</p>"
+    "description": "<p>Passive: The user gains +10% RES. The user heals @Tick[1] per Activation during combat.</p>",
+    "slug": "hackers-memory"
   },
   "img": "systems/ptr2e/img/item-icons/pokegear%20gsc.webp",
   "effects": [
@@ -28,7 +29,16 @@
       "_id": "YNo33xZuDxQlHYf8",
       "img": "systems/ptr2e/img/icons/effect_icon.webp",
       "system": {
-        "changes": [],
+        "changes": [
+          {
+            "type": "basic",
+            "key": "system.modifiers.effectResistance",
+            "value": 10,
+            "predicate": [],
+            "mode": 2,
+            "ignored": false
+          }
+        ],
         "slug": null,
         "traits": [],
         "removeAfterCombat": false,
@@ -36,7 +46,9 @@
         "stacks": 0,
         "priority": 50,
         "formula": "1/16",
-        "type": "healing"
+        "type": "healing",
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
@@ -56,13 +68,13 @@
         "compendiumSource": null,
         "duplicateSource": null,
         "exportSource": null,
-        "coreVersion": "13.342",
+        "coreVersion": "13.346",
         "systemId": "ptr2e",
-        "systemVersion": "1.3.0.beta",
-        "lastModifiedBy": null
+        "systemVersion": "1.3.8.beta",
+        "lastModifiedBy": "mK35yvCqCgiTUvKf",
+        "modifiedTime": 1753373686364
       }
     }
   ],
-  "flags": {},
   "_id": "lMFgEtZAYUOaTS2W"
 }
