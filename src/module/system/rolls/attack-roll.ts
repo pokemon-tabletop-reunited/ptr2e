@@ -115,7 +115,13 @@ class AttackRoll extends CheckRoll {
     options: AttackRollDataPTR2e
   ): AttackRoll | null {
     const basePower = data.attack.power;
-    if (basePower === null) return null;
+    if (basePower === null) {
+      if(data.attack.traits.has("flat")) {
+        options.isFlat = true;
+        return new AttackRoll("0", {}, options);
+      }
+      return null;
+    }
 
     const powerModifier = data.check.total?.power?.percentile ?? 1;
     const powerFlatModifier = data.check.total?.power?.flat ?? 0;
@@ -200,7 +206,9 @@ class AttackRoll extends CheckRoll {
       flatDamage: flatDamage,
     };
     const roll = new Roll(
-      "((((((2 * @level) / 5) + 2) * @power * (@attack / (@defense * (4 / 3)))) / 50) + 2 + @flatDamage) * @targets * @critical * ((100 - @random) / 100) * @stab * @type * @other",
+      this.options.isFlat 
+      ? "@flatDamage"
+      : "((((((2 * @level) / 5) + 2) * @power * (@attack / (@defense * (4 / 3)))) / 50) + 2 + @flatDamage) * @targets * @critical * ((100 - @random) / 100) * @stab * @type * @other",
       context
     ).evaluateSync();
 
@@ -260,6 +268,7 @@ type AttackRollDataPTR2e = CheckRollDataPTR2e & {
   damageMod?: number;
   outOfRange: boolean;
   flatDamage?: number;
+  isFlat?: boolean;
   statMod: number;
   effectivenessStage: number;
   ignoreImmune: boolean;

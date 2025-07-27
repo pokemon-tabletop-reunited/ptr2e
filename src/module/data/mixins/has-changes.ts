@@ -21,7 +21,7 @@ export default function HasChanges<BaseClass extends TemplateConstructor>(baseCl
       };
     }
   }
-
+  
 
   interface TemplateClass extends ModelPropsFromSchema<ChangesSchema> {
     _source: SourceFromSchema<ChangesSchema>;

@@ -10,7 +10,6 @@
         "name": "Iron Defense",
         "type": "attack",
         "traits": [
-          "pp-updated",
           "partial-automation"
         ],
         "range": {
@@ -39,8 +38,10 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
-    }
+      ],
+      "notes": ""
+    },
+    "traits": []
   },
   "_id": "qSWTxI39iL7ivEVw",
   "effects": [
@@ -58,9 +59,24 @@
             "predicate": [],
             "chance": 100,
             "affects": "target",
+            "dontMerge": false,
             "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "alterations": []
+          },
+          {
+            "type": "roll-effect",
+            "key": "iron-defense-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.4ZnJFjeKHiSG3Eby",
+            "predicate": [],
+            "chance": 100,
+            "affects": "target",
+            "dontMerge": false,
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "alterations": []
           }
         ],
         "slug": null,
@@ -91,10 +107,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "ptr2e",
-        "systemVersion": "0.10.0-alpha.5.1.2",
+        "systemVersion": "1.2.1.beta",
         "createdTime": 1736888535213,
-        "modifiedTime": 1736888558910,
-        "lastModifiedBy": "IcBpMqhFuTck9VpX"
+        "modifiedTime": 1744468869120,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
       }
     }
   ]
