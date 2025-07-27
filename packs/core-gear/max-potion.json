@@ -22,7 +22,12 @@
       "type": "untyped",
       "power": null,
       "accuracy": 100,
-      "hide": null
+      "hide": false,
+      "range": {
+        "target": "creature",
+        "distance": 10,
+        "unit": "m"
+      }
     },
     "rarity": "uncommon",
     "consumableType": "restorative",
@@ -34,7 +39,7 @@
       "consumable",
       "healing"
     ],
-    "description": "The target is healed to its Max HP.",
+    "description": "<p>The target is healed by @Tick[16].</p>",
     "quantity": 1,
     "slug": "max-potion",
     "stack": 3,
@@ -46,7 +51,8 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
+      ],
+      "notes": ""
     }
   },
   "_id": "KGi1w0yNFhoyvdpE",

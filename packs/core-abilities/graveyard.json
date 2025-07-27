@@ -40,7 +40,8 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
+      ],
+      "notes": ""
     }
   },
   "_id": "Xwtf9S4YvML7PRBj",
@@ -67,7 +68,9 @@
         "traits": [],
         "removeAfterCombat": true,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
@@ -89,12 +92,13 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.346",
         "systemId": "ptr2e",
         "systemVersion": "0.10.0-alpha.4.1.0",
         "createdTime": 1732660127343,
         "modifiedTime": 1732661434582,
-        "lastModifiedBy": "IcBpMqhFuTck9VpX"
+        "lastModifiedBy": "IcBpMqhFuTck9VpX",
+        "exportSource": null
       }
     },
     {
@@ -108,7 +112,9 @@
             "type": "aura",
             "key": "",
             "value": 0,
-            "predicate": [],
+            "predicate": [
+              "graveyard:active"
+            ],
             "mode": 2,
             "priority": null,
             "ignored": false,
@@ -140,13 +146,30 @@
               "texture": null
             },
             "mergeExisting": true
+          },
+          {
+            "type": "roll-option",
+            "key": "",
+            "value": "graveyard:active",
+            "predicate": [],
+            "domain": "all",
+            "toggleable": true,
+            "count": false,
+            "state": true,
+            "label": "Graveyard",
+            "alwaysActive": false,
+            "mode": 2,
+            "ignored": false,
+            "suboptions": []
           }
         ],
         "slug": null,
         "traits": [],
         "removeAfterCombat": true,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
@@ -168,12 +191,13 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.346",
         "systemId": "ptr2e",
-        "systemVersion": "0.10.0-alpha.4.1.0",
+        "systemVersion": "1.3.8.beta",
         "createdTime": 1732660297239,
-        "modifiedTime": 1732661422629,
-        "lastModifiedBy": "IcBpMqhFuTck9VpX"
+        "modifiedTime": 1753018427369,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf",
+        "exportSource": null
       }
     }
   ]

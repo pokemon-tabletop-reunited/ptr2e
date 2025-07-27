@@ -19,7 +19,12 @@
       "type": "untyped",
       "power": null,
       "accuracy": 100,
-      "hide": null
+      "hide": false,
+      "range": {
+        "target": "creature",
+        "distance": 10,
+        "unit": "m"
+      }
     },
     "rarity": "uncommon",
     "consumableType": "restorative",
@@ -30,7 +35,7 @@
       "consumable",
       "healing"
     ],
-    "description": "The target is healed 15 PP and loses 1 @Affliction[weary].",
+    "description": "<p>The target is healed @PP[15] and loses 1 @Affliction[weary].</p>",
     "quantity": 1,
     "slug": "elixir",
     "stack": 1,
@@ -42,7 +47,8 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
+      ],
+      "notes": ""
     }
   },
   "_id": "FYyO3RygtffDkHo0",

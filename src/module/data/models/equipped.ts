@@ -16,7 +16,8 @@ class EquipmentData extends foundry.abstract.DataModel {
                 worn: "PTR2E.FIELDS.gear.equipped.slot.worn",
                 accessory: "PTR2E.FIELDS.gear.equipped.slot.accessory",
                 belt: "PTR2E.FIELDS.gear.equipped.slot.belt",
-                backpack: "PTR2E.FIELDS.gear.equipped.slot.backpack"
+                backpack: "PTR2E.FIELDS.gear.equipped.slot.backpack",
+                slotless: "PTR2E.FIELDS.gear.equipped.slot.slotless"
             }, initial:"held", label: "PTR2E.FIELDS.gear.equipped.slot.label", hint: "PTR2E.FIELDS.gear.equipped.slot.hint"}),
         }
     }

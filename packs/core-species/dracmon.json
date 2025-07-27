@@ -16,7 +16,7 @@
       "bipedal",
       "rookie"
     ],
-    "number": 3000,
+    "number": 5042,
     "stats": {
       "hp": 40,
       "atk": 65,
@@ -69,20 +69,16 @@
         }
       ]
     },
-    "movement": {
-      "primary": [
-        {
-          "type": "overland",
-          "value": 5
-        }
-      ],
-      "secondary": [
-        {
-          "type": "swim",
-          "value": 3
-        }
-      ]
-    },
+    "movement": [
+      {
+        "type": "overland",
+        "value": 5
+      },
+      {
+        "type": "swim",
+        "value": 3
+      }
+    ],
     "skills": [
       {
         "slug": "acrobatics",
@@ -264,11 +260,9 @@
               "operand": "and"
             }
           ],
-          "details": {
-            "gender": null,
-            "item": null,
-            "level": null,
-            "knownMove": null
+          "perk": {
+            "x": 26,
+            "y": 26
           },
           "evolutions": [
             {
@@ -281,11 +275,9 @@
                   "operand": "and"
                 }
               ],
-              "details": {
-                "gender": null,
-                "item": null,
-                "level": null,
-                "knownMove": null
+              "perk": {
+                "x": 26,
+                "y": 26
               },
               "evolutions": [
                 {
@@ -298,29 +290,17 @@
                       "operand": "and"
                     }
                   ],
-                  "details": {
-                    "gender": null,
-                    "item": null,
-                    "level": null,
-                    "knownMove": null
-                  },
-                  "evolutions": [],
                   "perk": {
                     "x": 26,
                     "y": 26
-                  }
+                  },
+                  "details": null
                 }
               ],
-              "perk": {
-                "x": 26,
-                "y": 26
-              }
+              "details": null
             }
           ],
-          "perk": {
-            "x": 26,
-            "y": 26
-          }
+          "details": null
         }
       ],
       "details": {
