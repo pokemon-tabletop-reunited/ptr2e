@@ -114,7 +114,7 @@ declare global {
          * @returns {Promise<DirectoryMixinEntry>}  The created Entry
          * @protected
          */
-        protected _createDroppedEntry(entry: TDocument, folderId?: string): Promise<TDocument>;
+        protected _createDroppedEntry(entry: TDocument, folder?: {folder?: string}): Promise<TDocument>;
 
         /**
          * Default folder context actions
@@ -134,7 +134,7 @@ declare global {
          * @param {PointerEvent} event    The originating button click event
          * @protected
          */
-        protected _onCreateFolder(event: PointerEvent): void;
+        protected _onCreateFolder(event: PointerEvent, target: HTMLElement): void;
     }
 
     interface SidebarDirectoryOptions extends ApplicationOptions {

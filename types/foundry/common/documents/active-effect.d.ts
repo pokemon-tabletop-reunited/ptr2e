@@ -90,6 +90,7 @@ type ActiveEffectSchema<
     transfer: fields.BooleanField;
     statuses: fields.SetField<fields.StringField<string, string, true, false, false>>;
     flags: fields.ObjectField<DocumentFlags>;
+    _stats: fields.DocumentStatsField;
 };
 
 export type ActiveEffectSource<TType extends string = string, TSystemSource extends object = object> = SourceFromSchema<ActiveEffectSchema<TType, TSystemSource>>;

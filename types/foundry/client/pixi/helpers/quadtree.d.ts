@@ -117,7 +117,7 @@ declare global {
             rect: Rectangle,
             options?: {
                 collisionTest?: (obj: QuadtreeObject, rect: Rectangle) => boolean;
-                _s: Set<TPlaceableObject>;
+                _s?: Set<TPlaceableObject>;
             },
         ): Set<TPlaceableObject>;
 

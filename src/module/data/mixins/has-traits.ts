@@ -28,7 +28,7 @@ export default function HasTraits<BaseClass extends TemplateConstructor>(baseCla
         return this.parent.rollOptions;
       })();
 
-      const trait = game.ptr.data.traits.get(traitSlug)
+      const trait = game.ptr.data.traits.getTrait(traitSlug)
       if (trait) {
         this.traits.set(traitSlug, {
           ...trait,

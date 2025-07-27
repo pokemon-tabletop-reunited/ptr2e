@@ -5,6 +5,15 @@ export function initializeKeybindings() {
     return foundry.applications.instances.get("perk-web-app") as PerkWebApp | undefined;
   }
 
+  game.keybindings.register("ptr2e", "perk-editmode-delete", {
+    name: "PTR2E.Keybindings.PerkEditModeDelete.Name",
+    hint: "PTR2E.Keybindings.PerkEditModeDelete.Hint",
+    restricted: false,
+    uneditable: [],
+    editable: [{ key: "Delete" }],
+    onDown: () => getPerkWeb()?.deletePerk(),
+  });
+
   game.keybindings.register("ptr2e", "perk-zoom-in", {
     name: "PTR2E.Keybindings.PerkZoomIn.Name",
     hint: "PTR2E.Keybindings.PerkZoomIn.Hint",

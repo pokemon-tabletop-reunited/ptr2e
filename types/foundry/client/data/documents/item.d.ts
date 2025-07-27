@@ -57,7 +57,7 @@ declare global {
 
     interface Item<TParent extends Actor | null = Actor | null, TSchema extends TypeDataModel = TypeDataModel> extends ClientBaseItem<TParent> {
         get uuid(): ItemUUID;
-        get sheet(): ItemSheet<this, DocumentSheetOptions>;
+        get sheet(): any
 
         system: TSchema;
     }

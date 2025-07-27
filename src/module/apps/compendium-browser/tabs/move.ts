@@ -114,7 +114,7 @@ export class CompendiumBrowserMoveTab extends CompendiumBrowserTab {
       "free": game.i18n.localize("PTR2E.CompendiumBrowser.Filters.ActionCost.Free")
     }
     this.filterData.multiselects.traits.options = this.generateMultiselectOptions(allTraits.reduce((acc, trait) => {
-      const traitData = game.ptr.data.traits.get(trait);
+      const traitData = game.ptr.data.traits.getTrait(trait);
       if (!traitData) return acc;
       acc[traitData.slug] = traitData.label;
       return acc;

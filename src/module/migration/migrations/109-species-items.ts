@@ -17,7 +17,7 @@ export class Migration109SpeciesItems extends MigrationBase {
         type: 'species',
         img: source.img,
         _id: "actorspeciesitem",
-        system: HumanoidActorSystem.constructSpecies(source.system as HumanoidActorSystem, source.name).toObject()
+        system: (await HumanoidActorSystem.constructSpecies(source.system as HumanoidActorSystem, source.name)).toObject()
       }
 
       // Add the species item to the actor

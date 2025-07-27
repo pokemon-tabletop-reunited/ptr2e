@@ -8,6 +8,8 @@ import SystemTraitsCollection from "../system-traits-collection.ts";
 import SummonSystem from "@item/data/summon.ts";
 import { ActionEditor } from "@module/apps/action-editor.ts";
 import { formatSlug } from "@utils";
+import { Statistic, StatisticRollParameters } from "@system/statistics/statistic.ts";
+import { GenericActionStatistic } from "@system/statistics/action.ts";
 
 class ActionPTR2e extends foundry.abstract.DataModel {
   static TYPE: ActionType = "generic" as const;
@@ -94,6 +96,7 @@ class ActionPTR2e extends foundry.abstract.DataModel {
         }),
       }),
       variant: new SlugField({ required: false, nullable: true }),
+      ephemeralVariant: new fields.BooleanField({required: true, initial: false})
     };
   }
 
@@ -181,7 +184,7 @@ class ActionPTR2e extends foundry.abstract.DataModel {
     classes.unshift(this.type, "action");
 
     name ??= this.name;
-    return TextEditor.createAnchor({ attrs, dataset, name, classes, icon: anchorIcon });
+    return foundry.applications.ux.TextEditor.createAnchor({ attrs, dataset, name, classes, icon: anchorIcon });
   }
 
   _onClickDocumentLink() {
@@ -193,7 +196,7 @@ class ActionPTR2e extends foundry.abstract.DataModel {
 
   prepareDerivedData() {
     this.traits = this._source.traits.reduce((acc: SystemTraitsCollection<Trait>, traitSlug: string) => {
-      const trait = game.ptr.data.traits.get(traitSlug);
+      const trait = game.ptr.data.traits.getTrait(traitSlug);
       if (trait) {
         acc.set(traitSlug, trait);
       }
@@ -203,6 +206,19 @@ class ActionPTR2e extends foundry.abstract.DataModel {
     if (this.img === ActionPTR2e.baseImg && this.item.img !== this.item.constructor.implementation.DEFAULT_ICON) {
       this.img = this.item.img;
     }
+
+    if(this.type === "attack") return;
+    this.statistic = this.prepareStatistic();
+  }
+
+  get rollable(): boolean {
+    return this.type === "generic" && !!this.statistic;
+  }
+
+  public prepareStatistic({ force }: { force?: boolean } = {}): Statistic | null {
+    if (!force && this.statistic) return this.statistic;
+    if (!this.actor) return null;
+    return new GenericActionStatistic(this);
   }
 
   /**
@@ -234,7 +250,9 @@ class ActionPTR2e extends foundry.abstract.DataModel {
   }
 
   prepareUpdate(data: DeepPartial<SourceFromSchema<ActionSchema>>) {
-    const currentActions = this.item.system.toObject().actions;
+    const currentActions = this.item.system.toObject().actions.filter(a => !a.ephemeralVariant);
+    if(data.ephemeralVariant) return currentActions;
+
     const actionIndex = currentActions.findIndex((a) => a.slug === this.slug);
     fu.mergeObject(currentActions[actionIndex], data);
 
@@ -244,8 +262,15 @@ class ActionPTR2e extends foundry.abstract.DataModel {
   toChat() {
     return this.item.toChat();
   }
+
+  //@ts-expect-error - Details are unknown, this is correct.
+  async roll(args?: StatisticRollParameters<unknown>): Promise<unknown> {
+    return this.statistic!.check.roll(args)
+  }
 }
 interface ActionPTR2e extends foundry.abstract.DataModel, ModelPropsFromSchema<ActionSchema> {
+  statistic: Maybe<Statistic>;
+
   _source: SourceFromSchema<ActionSchema>;
   get schema(): foundry.data.fields.SchemaField<ActionSchema>;
 }
@@ -278,6 +303,7 @@ export interface ActionSchema extends foundry.data.fields.DataSchema {
     priority: Priority;
   }>;
   variant: SlugField<string, string, false>;
+  ephemeralVariant: foundry.data.fields.BooleanField<boolean, boolean>;
 }
 
 export default ActionPTR2e;
