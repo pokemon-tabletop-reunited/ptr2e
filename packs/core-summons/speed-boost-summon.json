@@ -1,0 +1,109 @@
+{
+  "name": "Speed Boost Summon",
+  "type": "summon",
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "publication": {
+      "source": "",
+      "authors": [],
+      "notes": ""
+    },
+    "traits": [],
+    "actions": [
+      {
+        "name": "Speed Boost Summon Action (#1)",
+        "slug": "speed-boost-summon-action-1",
+        "traits": [],
+        "type": "summon",
+        "img": "icons/skills/movement/feet-winged-boots-glowing-yellow.webp",
+        "range": {
+          "target": "enemy",
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "simple"
+        },
+        "types": [
+          "untyped"
+        ],
+        "category": "status",
+        "predicate": [],
+        "targetType": "owner",
+        "damageType": "power",
+        "attackStat": "owner"
+      }
+    ],
+    "baseAV": 150,
+    "duration": 99
+  },
+  "img": "icons/skills/movement/feet-winged-boots-glowing-yellow.webp",
+  "effects": [
+    {
+      "name": "Speed Boost",
+      "type": "summon",
+      "_id": "CeznrgvryaAg49VV",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "speed-boost-summon-action-1-summon",
+            "value": "Compendium.ptr2e.core-effects.Item.XeiSuS3APUcN0MLM",
+            "predicate": [],
+            "chance": 100,
+            "affects": "target",
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "alterations": [],
+            "isFixedChance": false,
+            "dontMerge": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0,
+        "priority": 50,
+        "formula": "",
+        "type": "damage",
+        "targetType": "all",
+        "targetUuid": null,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.346",
+        "systemId": "ptr2e",
+        "systemVersion": "1.3.8.beta",
+        "lastModifiedBy": null
+      }
+    }
+  ],
+  "flags": {},
+  "_id": "LGwvbkltOQFXoI5W"
+}

@@ -14,12 +14,17 @@
         "type": "passive",
         "range": {
           "target": "self",
-          "unit": "m"
+          "unit": "m",
+          "distance": 0
         },
         "cost": {
-          "activation": "free"
+          "activation": "free",
+          "powerPoints": 0
         },
-        "img": "systems/ptr2e/img/perk-icons/Juggler.svg"
+        "img": "systems/ptr2e/img/perk-icons/Juggler.svg",
+        "variant": null,
+        "ephemeralVariant": false,
+        "hidden": false
       }
     ],
     "slug": "quick-and-the-dead",
@@ -36,7 +41,9 @@
         "connected": [
           "skirmish",
           "run-down",
-          "mightyena-tactic"
+          "mightyena-tactic",
+          "up-the-beat",
+          "lucky-duck"
         ],
         "config": {
           "alpha": null,
@@ -68,7 +75,10 @@
         "PTR 2e Team"
       ],
       "notes": ""
-    }
+    },
+    "originSlug": null,
+    "variant": null,
+    "mode": null
   },
   "effects": [
     {
@@ -118,12 +128,13 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.342",
         "systemId": "ptr2e",
         "systemVersion": "0.10.0-alpha.5.2.1",
         "createdTime": 1737661825098,
         "modifiedTime": 1737661874073,
-        "lastModifiedBy": "IcBpMqhFuTck9VpX"
+        "lastModifiedBy": "IcBpMqhFuTck9VpX",
+        "exportSource": null
       }
     }
   ]

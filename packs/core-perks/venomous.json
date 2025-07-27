@@ -13,15 +13,20 @@
         "slug": "venomous",
         "description": "<p>You gain the [Venomous] Trait.</p>",
         "cost": {
-          "activation": "free"
+          "activation": "free",
+          "powerPoints": 0
         },
         "type": "passive",
         "traits": [],
         "img": "icons/svg/explosion.svg",
         "range": {
           "target": "enemy",
-          "unit": "m"
-        }
+          "unit": "m",
+          "distance": 0
+        },
+        "variant": null,
+        "ephemeralVariant": false,
+        "hidden": false
       }
     ],
     "slug": "venomous",
@@ -35,7 +40,8 @@
         "connected": [
           "potent-venom",
           "root-3",
-          "tainted-blades"
+          "tainted-blades",
+          "clodsire-flesh"
         ],
         "config": {
           "alpha": null,
@@ -69,7 +75,10 @@
         "PTR 2e Team"
       ],
       "notes": ""
-    }
+    },
+    "originSlug": null,
+    "variant": null,
+    "mode": null
   },
   "_id": "hvuakkloMFHGmBMe",
   "img": "systems/ptr2e/img/svg/poison_icon.svg",
@@ -117,12 +126,13 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.342",
         "systemId": "ptr2e",
         "systemVersion": "0.10.0-alpha.4.0.0",
         "createdTime": 1732563827501,
         "modifiedTime": 1732563840313,
-        "lastModifiedBy": "IcBpMqhFuTck9VpX"
+        "lastModifiedBy": "IcBpMqhFuTck9VpX",
+        "exportSource": null
       }
     }
   ],

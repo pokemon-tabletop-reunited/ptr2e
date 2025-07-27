@@ -42,9 +42,7 @@
         "name": "Ice Drill (Frozen)",
         "type": "attack",
         "traits": [
-          "contact",
-          "flinch-5",
-          "pp-updated"
+          "contact"
         ],
         "range": {
           "target": "creature",
@@ -62,7 +60,7 @@
         "types": [
           "ice"
         ],
-        "description": "<p>Trigger: The target has @Affliction[frozen].<p>Effect: On resolution, the target is cured of @Affliction[frozen], and is Flinched.</p>",
+        "description": "<p>Trigger: The target has @Affliction[frozen].<p>Effect: On resolution, the target is cured of @Affliction[frozen], and is Delayed by 50%.</p>",
         "contestType": "",
         "contestEffect": "",
         "variant": "ice-drill",
@@ -79,7 +77,47 @@
       ]
     }
   },
-  "effects": [],
+  "effects": [
+    {
+      "name": "Ice Drill",
+      "type": "passive",
+      "_id": "z7y1zzA2z4Rf7Nwm",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "ice-drill-frozen-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.advanceffectitem",
+            "predicate": [],
+            "chance": 100,
+            "dontMerge": true,
+            "affects": "target",
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "system.amount",
+                "value": -50
+              },
+              {
+                "mode": 5,
+                "property": "name",
+                "value": "Delay 50%"
+              }
+            ]
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      }
+    }
+  ],
   "sort": 0,
   "ownership": {
     "default": 0,

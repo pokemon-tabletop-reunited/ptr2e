@@ -1,0 +1,55 @@
+{
+  "folder": "oguAsvaOzTLs8f97",
+  "name": "Flare Ignition",
+  "type": "perk",
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Dev"
+      ],
+      "notes": ""
+    },
+    "actions": [],
+    "slug": "flare-ignition",
+    "description": "<p>Effect: The user maintains an Ignition Clock, 10 Spans in size. The Clock ticks forward two Spans at the end of the user’s Activation if they have moved 3m or more since the end of their last Activation, and two Spans if the user has not been hit by a Physical- or Special-Category Attack in the same timeframe. The Clock ticks back one Span if the user has not moved in the timeframe, and back by one each time they get hit by a Physical- or Special-Category Attack. The Clock empties at the end of Combat.</p><p>The user’s ATK, SPATK, and SPD are reduced by -25% if the Clock is empty, and increase by 10% per filled Span, up to 75% at 10 Spans.</p>",
+    "traits": [],
+    "prerequisites": [
+      "trait:fire"
+    ],
+    "autoUnlock": [],
+    "cost": 3,
+    "design": {
+      "arena": "physical",
+      "approach": "power",
+      "archetype": "fire"
+    },
+    "global": true,
+    "webs": [],
+    "nodes": [
+      {
+        "x": 167,
+        "y": 88,
+        "connected": [
+          "intense-heat",
+          "inner-warmth",
+          "potent-venom"
+        ],
+        "hidden": false,
+        "type": "normal",
+        "tier": null
+      }
+    ],
+    "originSlug": null,
+    "variant": null,
+    "mode": null
+  },
+  "img": "systems/ptr2e/img/svg/fire_icon.svg",
+  "effects": [],
+  "flags": {},
+  "_id": "d5xDTqhMKlNaX4Cw"
+}

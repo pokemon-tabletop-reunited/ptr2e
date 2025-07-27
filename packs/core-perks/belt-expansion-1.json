@@ -12,15 +12,20 @@
         "slug": "belt-expansion-1",
         "description": "<p>Add an additional Belt slot.</p>",
         "cost": {
-          "activation": "free"
+          "activation": "free",
+          "powerPoints": 0
         },
         "type": "passive",
         "traits": [],
         "img": "icons/svg/explosion.svg",
         "range": {
           "target": "enemy",
-          "unit": "m"
-        }
+          "unit": "m",
+          "distance": 0
+        },
+        "variant": null,
+        "ephemeralVariant": false,
+        "hidden": false
       }
     ],
     "slug": "belt-expansion-1",
@@ -41,7 +46,8 @@
           "trained-wielder",
           "dress-to-impress",
           "out-of-options",
-          "dual-wielder"
+          "dual-wielder",
+          "dimensional-scream"
         ],
         "tier": {
           "rank": null,
@@ -110,8 +116,10 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
-    }
+      ],
+      "notes": ""
+    },
+    "originSlug": null
   },
   "_id": "zAKTLdBrA5eeGCsX",
   "img": "systems/ptr2e/img/perk-icons/Tactician.svg",
@@ -159,12 +167,13 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.342",
         "systemId": "ptr2e",
         "systemVersion": "0.10.0-alpha.5.2.1",
         "createdTime": 1737934804061,
         "modifiedTime": 1737934814111,
-        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+        "lastModifiedBy": "mK35yvCqCgiTUvKf",
+        "exportSource": null
       }
     }
   ]

@@ -10,12 +10,10 @@
         "name": "Shore Up",
         "type": "attack",
         "traits": [
-          "healing",
-          "pp-updated"
+          "healing"
         ],
         "range": {
           "target": "self",
-          "distance": 0,
           "unit": "m"
         },
         "cost": {
@@ -23,28 +21,22 @@
           "powerPoints": 8
         },
         "category": "status",
-        "power": null,
-        "accuracy": null,
         "types": [
           "ground"
         ],
         "description": "<p>Effect: The user recovers 8 Ticks of HP.</p>",
-        "contestType": "",
-        "contestEffect": "",
-        "free": false,
-        "slot": null
+        "img": "icons/svg/explosion.svg",
+        "predicate": []
       },
       {
         "slug": "shore-up",
         "name": "Shore Up",
         "type": "attack",
         "traits": [
-          "healing",
-          "pp-updated"
+          "healing"
         ],
         "range": {
           "target": "self",
-          "distance": 0,
           "unit": "m"
         },
         "cost": {
@@ -53,27 +45,107 @@
           "trigger": "<p>Sandy Weather is active.</p>"
         },
         "category": "status",
-        "power": null,
-        "accuracy": null,
         "types": [
           "ground"
         ],
         "description": "<p>Trigger: Dusty Weather is active.</p><p>Effect: Effect: The user recovers 11 Ticks of HP and gains @Affliction[resolved] 3</p>",
-        "contestType": "",
-        "contestEffect": "",
-        "free": false,
-        "slot": null
+        "img": "icons/svg/explosion.svg",
+        "predicate": []
       }
     ],
-    "container": null,
     "grade": "A",
     "publication": {
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
+      ],
+      "notes": ""
+    },
+    "traits": [],
+    "_migration": {
+      "version": null,
+      "previous": null
     }
   },
   "_id": "Gvj7tcE9CCwp5bBE",
-  "effects": []
+  "effects": [
+    {
+      "name": "Shore Up",
+      "type": "passive",
+      "_id": "5XDUvbBZYaxJRRFA",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "shore-up-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.4DlXFTVooz07YcDm",
+            "predicate": [],
+            "chance": 100,
+            "isFixedChance": true,
+            "affects": "target",
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "system.changes.0.value",
+                "value": 11
+              }
+            ],
+            "dontMerge": false,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "roll-effect",
+            "key": "shore-up-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.resolvedconditem",
+            "predicate": [],
+            "chance": 100,
+            "isFixedChance": true,
+            "affects": "target",
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "duration.turns",
+                "value": 3
+              }
+            ],
+            "dontMerge": false,
+            "mode": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.346",
+        "systemId": "ptr2e",
+        "systemVersion": "1.3.8.beta",
+        "createdTime": 1752173936748,
+        "modifiedTime": 1752174028451,
+        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
+      }
+    }
+  ]
 }

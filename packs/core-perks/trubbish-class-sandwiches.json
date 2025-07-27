@@ -13,9 +13,7 @@
         "description": "<p>You are able to make Trubbish-class Sandwiches as a Camp Action. These sandwiches may have particular effects determined by their ingredients, but are barely passable as 'food'.</p>",
         "cost": {
           "activation": "complex",
-          "powerPoints": 0,
-          "delay": null,
-          "priority": null
+          "powerPoints": 0
         },
         "type": "camping",
         "traits": [],
@@ -25,7 +23,8 @@
           "unit": "m",
           "distance": 0
         },
-        "variant": null
+        "variant": null,
+        "ephemeralVariant": false
       }
     ],
     "slug": "trubbish-class-sandwiches",
@@ -36,23 +35,17 @@
     },
     "nodes": [
       {
-        "x": 184,
-        "y": 134,
+        "x": null,
+        "y": null,
         "hidden": false,
         "type": "entry",
-        "connected": [
-          "root-4",
-          "zigzagoon-class-sandwiches",
-          "basic-ball-crafting",
-          "koffing-class-curry",
-          "stat-iv-booster-1-2"
-        ],
+        "connected": [],
         "config": {
+          "texture": "systems/ptr2e/img/perk-icons/Chef.svg",
           "alpha": null,
-          "backgroundColor": "#004000",
+          "backgroundColor": null,
           "borderColor": null,
           "borderWidth": null,
-          "texture": "systems/ptr2e/img/perk-icons/Chef.svg",
           "tint": null,
           "scale": null
         },
@@ -60,22 +53,23 @@
       }
     ],
     "autoUnlock": [],
-    "originSlug": null,
-    "variant": null,
-    "mode": null,
     "global": true,
     "webs": [],
     "design": {
       "arena": "social",
       "approach": "resilience",
-      "archetype": "Chef"
+      "archetype": "chef"
     },
     "publication": {
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
-    }
+      ],
+      "notes": ""
+    },
+    "originSlug": null,
+    "variant": null,
+    "mode": null
   },
   "_id": "VMIvDWQr9DdPtYNH",
   "img": "systems/ptr2e/img/perk-icons/Chef.svg",

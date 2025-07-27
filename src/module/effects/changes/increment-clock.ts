@@ -69,7 +69,7 @@ export default class IncrementClockChangeSystem extends ChangeModel {
     // If this is not the only change, we keep the effect
     if (this.effect?.changes?.length > 1) {
       const changes = this.effect.changes.filter(c => c !== this);
-      if (!changes.every(c => c.type === "create-clock")) {
+      if (!changes.every(c => c.type === "increment-clock")) {
         return;
       }
     }
@@ -80,13 +80,15 @@ export default class IncrementClockChangeSystem extends ChangeModel {
     }
     pendingEffects.splice(pendingEffects.findIndex(e => e._id === this.effect._id || e === effectSource), 1);
 
+    const sourceId = (this.effect?.flags?.core?.sourceId || this.effect?._stats?.compendiumSource) as string;
+
     await ChatMessage.create({
       speaker: ChatMessage.getSpeaker({ actor: this.actor }),
       content: game.i18n.format("PTR2E.Effect.IncrementClock", {
         clock: clock.label,
         value,
         total: newValue,
-        effect: this.effect?.flags?.core?.sourceId ? ((await fromUuid(this.effect.flags.core.sourceId as string) as ItemPTR2e)?.link ?? this.effect.name) : this.effect.name,
+        effect: sourceId ? ((await fu.fromUuid<ItemPTR2e>(sourceId))?.link ?? this.effect.name) : this.effect.name,
       }),
     })
   }

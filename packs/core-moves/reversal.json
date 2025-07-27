@@ -10,8 +10,7 @@
         "name": "Reversal",
         "type": "attack",
         "traits": [
-          "contact",
-          "pp-updated"
+          "contact"
         ],
         "range": {
           "target": "creature",
@@ -59,7 +58,7 @@
           {
             "type": "flat-modifier",
             "key": "reversal-attack-power",
-            "value": "1.8 * system.health.percent",
+            "value": "1.8 * (100-@actor.system.health.percent)",
             "label": "Reversal",
             "predicate": [],
             "mode": 2,

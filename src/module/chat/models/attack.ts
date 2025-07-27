@@ -1,5 +1,5 @@
 import { ActorPTR2e } from "@actor";
-import AttackPTR2e from "@module/data/models/attack.ts";
+import AttackPTR2e from "../../../module/data/models/attack.ts";
 import { ChatMessagePTR2e } from "@chat";
 import { AccuracySuccessCategory, PokeballActionPTR2e, PTRCONSTS, SummonAttackPTR2e } from "@data";
 import { SlugField } from "@module/data/fields/slug-field.ts";
@@ -149,7 +149,7 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
   }
 
   get currentOrigin(): Promise<Maybe<ActorPTR2e>> {
-    return this.context?.origin?.uuid ? fromUuid<ActorPTR2e>(this.context.origin.uuid) : Promise.resolve(null);
+    return this.context?.origin?.uuid ? fu.fromUuid<ActorPTR2e>(this.context.origin.uuid) : Promise.resolve(null);
   }
 
   override prepareBaseData(): void {
@@ -264,7 +264,7 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
     this.originItem = fromItemData(this._source.originItem);
 
     this.attack = ((): AttackPTR2e => {
-      if (!this._source.attack) return this.origin.actions.attack.get(this._source.attackSlug) as AttackPTR2e;
+      if (!this._source.attack) return this.origin.actions.get(this._source.attackSlug) as AttackPTR2e;
       const jsonData = (() => {
         try {
           return JSON.parse(this._source.attack);
@@ -317,7 +317,7 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
       const result = this.overrides.get(data.target.uuid)?.value || AttackRoll.successCategory(data.accuracy, data.crit);
 
       const rolls = {
-        accuracy: await renderTemplate(
+        accuracy: await foundry.applications.handlebars.renderTemplate(
           "systems/ptr2e/templates/chat/rolls/accuracy-check.hbs",
           {
             inner: await AttackMessageSystem.renderInnerRoll(data.accuracy, isPrivate, ["hit", "critical"].includes(result)),
@@ -326,13 +326,13 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
             label: "PTR2E.Attack.AccuracyCheck",
           }
         ),
-        crit: await renderTemplate("systems/ptr2e/templates/chat/rolls/crit-check.hbs", {
+        crit: await foundry.applications.handlebars.renderTemplate("systems/ptr2e/templates/chat/rolls/crit-check.hbs", {
           inner: await AttackMessageSystem.renderInnerRoll(data.crit, isPrivate, result === "critical"),
           isPrivate,
           type: "crit",
           label: "PTR2E.Attack.CritCheck",
         }),
-        damage: await renderTemplate(
+        damage: await foundry.applications.handlebars.renderTemplate(
           "systems/ptr2e/templates/chat/rolls/damage-randomness.hbs",
           {
             inner: await AttackMessageSystem.renderInnerRoll(data.damage, isPrivate, null),
@@ -356,7 +356,7 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
             return;
           }
 
-          rolls.effects.push(await renderTemplate(
+          rolls.effects.push(await foundry.applications.handlebars.renderTemplate(
             "systems/ptr2e/templates/chat/rolls/effect-roll.hbs",
             {
               inner: await AttackMessageSystem.renderInnerRoll(effectRoll.roll, isPrivate, effectRoll.success),
@@ -464,7 +464,7 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
               continue;
             }
 
-            rolls.push(await renderTemplate(
+            rolls.push(await foundry.applications.handlebars.renderTemplate(
               "systems/ptr2e/templates/chat/rolls/effect-roll.hbs",
               {
                 inner: await AttackMessageSystem.renderInnerRoll(roll.roll, false, roll.success),
@@ -478,8 +478,16 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
         })() : [],
       });
 
-    context.defaultExpanded = game.settings.get("ptr2e", "expand-rolls");
-    return renderTemplate("systems/ptr2e/templates/chat/attack.hbs", context);
+    if (this.pendingResolutions?.size) {
+      for (const targetUuid of this.pendingResolutions) {
+        this.applyDamage(targetUuid);
+      }
+      this.pendingResolutions.clear();
+    }
+
+    context.defaultExpanded = game.settings.get("ptr2e", "preferences.expand-rolls");
+    context.metagameInfo = await this.getMetagameInfo();
+    return foundry.applications.handlebars.renderTemplate("systems/ptr2e/templates/chat/attack.hbs", context);
   }
 
   async updateTarget(targetUuid: ActorUUID, { status }: { status: AccuracySuccessCategory }) {
@@ -543,8 +551,14 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
     return true;
   }
 
+  pendingResolutions = new Set<ActorUUID>();
+
   async applyDamage(targetUuid: ActorUUID): Promise<false | number> {
-    const result = this.context!.results.get(targetUuid);
+    if (!this.context) {
+      this.pendingResolutions.add(targetUuid);
+      return false;
+    }
+    const result = this.context.results.get(targetUuid);
     if (!result) return false;
 
     async function applyEffects(target: ActorPTR2e, effects: foundry.data.fields.ModelPropFromDataField<foundry.data.fields.SchemaField<EffectRollsSchema>>[], isCrit = false) {
@@ -559,7 +573,7 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
           if (!effectRoll.success) continue;
 
 
-          const item = await fromUuid(effectRoll.effect);
+          const item = await fu.fromUuid(effectRoll.effect);
           if (!item) {
             Hooks.onError("AttackMessageSystem#applyDamage", new Error(`Could not find item with uuid ${effectRoll.effect}`), { log: "error" });
             continue;
@@ -611,6 +625,23 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
       (async (): Promise<void> => {
         const target = result.target;
         await applyEffects(target, result.effect.effects?.defensive ?? [], result.hit === "critical");
+      })(),
+      (async (): Promise<void> => {
+        const target = result.target;
+        if (target?.synthetics?.effectsRemovedAfterAttacked?.length) {
+          const removedEffectsMessage = target.synthetics.effectsRemovedAfterAttacked.reduce((acc, effect) => {
+            return acc + `<li>${effect.name}</li>`;
+          }, "");
+          await ChatMessage.create({
+            content: `<p>${game.i18n.localize("PTR2E.Combat.Messages.EffectsRemovedAfterAttacked")}</p><ul>${removedEffectsMessage}</ul>`,
+            speaker: ChatMessagePTR2e.getSpeaker({
+              actor: target,
+              token: target.token,
+            })
+          })
+          await target.deleteEmbeddedDocuments("ActiveEffect", target.synthetics.effectsRemovedAfterAttacked.map(e => e.id));
+          target.synthetics.effectsRemovedAfterAttacked = [];
+        }
       })(),
     ]))[0];
   }
@@ -802,7 +833,7 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
     const results = fu.duplicate(this.parent.system.results);
     const currentResult = results[this.parent.system.results.findIndex(r => r.target.uuid == entry.uuid)];
     if (!currentResult) return;
-    
+
     const result = (() => {
       switch (choice.type) {
         case "target-effect": return currentResult.effectRolls?.target[choice.index!];
@@ -830,7 +861,7 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
           : skill;
       })
     });
-    
+
     const notification = game.i18n.format("PTR2E.ChatContext.SpendLuckAttack.spent", {
       amount: value,
       actor: actor.name,
@@ -850,7 +881,7 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
 
     //@ts-expect-error - As this is an object duplicate, the property is no longer read-only.
     roll.total = 0;
-    if(result) result.success = true;
+    if (result) result.success = true;
 
     await this.parent.update({ "system.results": results });
 
@@ -859,6 +890,30 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
       speaker: { alias: actor.name },
       content: notification,
     });
+  }
+
+  async getMetagameInfo() {
+    const showAccuracy = game.settings.get("ptr2e", "metagame.show-accuracy");
+    const showDamage = game.settings.get("ptr2e", "metagame.show-damage");
+    const showEffectRolls = game.settings.get("ptr2e", "metagame.show-effect-rolls");
+    const hasPlayerOwner = await (async () => {
+      const actor = await this.currentOrigin;
+      return actor?.hasPlayerOwner ? true : false
+    })();
+
+    return {
+      isGM: game.user.isGM,
+      hasPlayerOwner,
+      showAccuracyTooltip: showAccuracy === "full" || game.user.isGM,
+      showAccuracyRoll: showAccuracy === "full" || game.user.isGM || hasPlayerOwner,
+      showAccuracyResult: game.user.isGM || (showAccuracy === "allyOnlyResult" && hasPlayerOwner) || ["full", "result"].includes(showAccuracy),
+      showDamageTooltip: showDamage === "full" || game.user.isGM,
+      showDamageRoll: showDamage === "full" || game.user.isGM || (hasPlayerOwner && showDamage === "allyOnlyResult"),
+      showDamageResult: game.user.isGM || (showDamage === "allyOnlyResult" && hasPlayerOwner) || ["full", "result"].includes(showDamage),
+      showEffectRollsTooltip: showEffectRolls === "full" || game.user.isGM,
+      showEffectRolls: showEffectRolls === "full" || game.user.isGM || hasPlayerOwner,
+      showEffectRollsResult: game.user.isGM || (showEffectRolls === "allyOnlyResult" && hasPlayerOwner) || ["full", "result"].includes(showEffectRolls),
+    }
   }
 }
 
@@ -885,6 +940,7 @@ interface AttackMessageRenderContext {
   pp: ModelPropsFromSchema<PPSchema>;
   selfEffectRolls: string[];
   defaultExpanded?: boolean;
+  metagameInfo?: Record<string, unknown>;
 }
 
 interface AttackMessageRenderContextData {

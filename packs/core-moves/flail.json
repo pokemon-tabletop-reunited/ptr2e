@@ -10,8 +10,7 @@
         "name": "Flail",
         "type": "attack",
         "traits": [
-          "contact",
-          "pp-updated"
+          "contact"
         ],
         "range": {
           "target": "creature",
@@ -54,7 +53,7 @@
           {
             "type": "flat-modifier",
             "key": "flail-attack-power",
-            "value": "1.8 * system.health.percent",
+            "value": "1.8 * (100-@actor.system.health.percent)",
             "label": "Flail",
             "predicate": [],
             "mode": 2,

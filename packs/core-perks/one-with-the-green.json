@@ -14,9 +14,7 @@
         "description": "<p>You add the Sap Sipper Ability to your Trained Abilities list.</p>",
         "cost": {
           "activation": "free",
-          "powerPoints": 0,
-          "delay": null,
-          "priority": null
+          "powerPoints": 0
         },
         "type": "passive",
         "traits": [],
@@ -27,6 +25,7 @@
           "distance": 0
         },
         "variant": null,
+        "ephemeralVariant": false,
         "hidden": false
       }
     ],
@@ -41,7 +40,9 @@
         "connected": [
           "nurturing-shoots",
           "summer-growth",
-          "guard-up"
+          "guard-up",
+          "dryad-striding",
+          "floratic"
         ],
         "config": {
           "alpha": null,
@@ -59,23 +60,26 @@
         "tier": null
       }
     ],
-    "autoUnlock": [],
-    "originSlug": null,
-    "variant": null,
-    "mode": null,
+    "autoUnlock": [
+      "ability:sap-sipper"
+    ],
     "global": true,
     "webs": [],
     "design": {
       "arena": "physical",
       "approach": "resilience",
-      "archetype": "[Grass]"
+      "archetype": "grass"
     },
     "publication": {
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
-    }
+      ],
+      "notes": ""
+    },
+    "originSlug": null,
+    "variant": null,
+    "mode": null
   },
   "_id": "ks3F2x6TCKlFrWTO",
   "img": "systems/ptr2e/img/svg/grass_icon.svg",
@@ -133,12 +137,13 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.342",
         "systemId": "ptr2e",
         "systemVersion": "0.10.0-alpha.4.1.0",
         "createdTime": 1733069184244,
         "modifiedTime": 1733069218211,
-        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+        "lastModifiedBy": "mK35yvCqCgiTUvKf",
+        "exportSource": null
       }
     }
   ],
