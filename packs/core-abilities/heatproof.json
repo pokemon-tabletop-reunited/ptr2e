@@ -22,7 +22,7 @@
         "img": "icons/svg/explosion.svg"
       }
     ],
-    "description": "<p>Effect: The user takes 50% reduced damage from Fire-Type attacks. If the user has @Affliction[burn], they only take half damage from the @Affliction[burn] damage.</p>",
+    "description": "<p>Effect: The user takes 50% reduced damage from Fire-Type attacks. If the user has @Affliction[burn], they only take half damage from the @Affliction[burn] damage. Heatproof also confers the @Trait[magma-wader] trait whilst active.</p>",
     "traits": [
       "defensive",
       "partial-automation"
@@ -58,6 +58,15 @@
             "priority": null,
             "ignored": false,
             "hideIfDisabled": false
+          },
+          {
+            "type": "add-trait",
+            "key": "",
+            "value": "magma-wader",
+            "predicate": [],
+            "mode": 2,
+            "priority": null,
+            "ignored": false
           }
         ],
         "slug": null,
@@ -88,10 +97,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "ptr2e",
-        "systemVersion": "1.1.0.beta",
+        "systemVersion": "1.2.1.beta",
         "createdTime": 1741605124301,
-        "modifiedTime": 1741605139700,
-        "lastModifiedBy": "IcBpMqhFuTck9VpX"
+        "modifiedTime": 1744796023540,
+        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
       }
     }
   ]

@@ -37,7 +37,7 @@ async function checkAreaEffects(this: ActorPTR2e): Promise<void> {
     // Make sure this isn't an identically-slugged aura with different effects
     const auraEffectData = auraActor?.auras
       .get(auraData.slug)
-      ?.effects.find((e) => e.uuid === effect.flags?.core?.sourceId && auraAffectsActor(e, auraActor, this));
+      ?.effects.find((e) => (e.uuid === effect.flags?.core?.sourceId || e.uuid === effect._stats?.compendiumSource) && auraAffectsActor(e, auraActor, this));
 
     for (const token of thisTokens) {
       if (auraEffectData && aura?.containsToken(token)) {
@@ -107,7 +107,7 @@ async function resolveCapture(originUuid: string, targetUuid: string, success: b
       label: game.i18n.localize("PTR2E.ActorSheet.Settings.Save"),
       action: "ok",
       callback: async (_event, target, element) => {
-        const html = element ?? target;
+        const html = (element?.element) ?? target;
         const trainer = htmlQuery<HTMLInputElement>(html, '[name="trainer"]')?.value;
         const party = htmlQuery<HTMLInputElement>(html, '[name="party"]')?.checked ?? false;
 

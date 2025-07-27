@@ -25,12 +25,42 @@
       "weapon",
       "fling",
       "firearm",
-      "reload",
+      "autoload",
       "steel",
       "charge-pool-4",
-      "rearm-4"
+      "reload-4"
     ],
     "actions": [
+      {
+        "types": [
+          "untyped"
+        ],
+        "category": "special",
+        "power": 200,
+        "accuracy": 95,
+        "free": true,
+        "traits": [
+          "set-up",
+          "defensive",
+          "priority-2"
+        ],
+        "name": "Anti-Materiel Rifle (Set Up)",
+        "slug": "anti-materiel-rifle-set-up",
+        "description": "<p>Effect: The user spends 2 PP, and gains @Affliction[braced 2].</p>",
+        "img": "systems/ptr2e/img/svg/untyped_icon.svg",
+        "type": "attack",
+        "range": {
+          "target": "self",
+          "distance": 0,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 2,
+          "priority": 2
+        },
+        "predicate": []
+      },
       {
         "types": [
           "untyped"
@@ -43,9 +73,9 @@
           "missile",
           "pierce"
         ],
-        "name": "Anti-Materiel Rifle",
-        "slug": "anti-materiel-rifle",
-        "description": "<p>Effect: Set-Up: The user gains @Affliction[braced] and Flinched 3, and ends their Activation.</p><p>Resolution: On their next activation, they attack with and resolve this Attack. This attack calculates damage against the target's DEF, rather than SPDEF.</p>",
+        "name": "Anti-Materiel Rifle (Resolution)",
+        "slug": "anti-materiel-rifle-resolution",
+        "description": "<p>Trigger: The user used Anti-Materiel Rifle (Set Up) as their last Action.</p><p>Effect: This attack calculates damage against the target's DEF, rather than SPDEF.</p>",
         "img": "systems/ptr2e/img/svg/untyped_icon.svg",
         "type": "attack",
         "range": {
@@ -55,7 +85,8 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 1
+          "powerPoints": 1,
+          "trigger": "<p>The user used Anti-Materiel Rifle (Set Up) as their last Action.</p>"
         },
         "predicate": []
       },

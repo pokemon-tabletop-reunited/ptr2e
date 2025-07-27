@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-namespace */
 import { ActorPTR2e, ActorSystemPTR2e } from "@actor";
 import { CombatPTR2e, CombatantPTR2e, CombatTrackerPTR2e } from "@combat";
 import { ItemPTR2e, ItemSystemPTR, PerkPTR2e } from "@item";
@@ -140,12 +141,14 @@ declare global {
     get(module: "ptr2e", key: "compendiumBrowserPacks"): CompendiumBrowserSettings
     get(module: "ptr2e", key: "tutorListData"): TutorListSettings
     get(module: "ptr2e", key: "expTrackerData"): ExpTrackerSettings
-    get(module: "ptr2e", key: "tokens.autoscale" | "expand-rolls" | "preferences.must-target"): boolean
+    get(module: "ptr2e", key: "tokens.autoscale" | "preferences.expand-rolls" | "preferences.must-target"): boolean
     get(module: "ptr2e", key: "pokemonTypes"): TypeEffectiveness
     get(module: "ptr2e", key: "global-perk-configs"): GeneratorConfig['_source'][]
-    get(module: "ptr2e", key: "defaults.blueprint.level" | "defaults.blueprint.nature" | "defaults.blueprint.perk"): string | null
-    get(module: "ptr2e", key: "defaults.blueprint.gender"): "random" | "male" | "female" | "genderless" | null
-    get(module: "ptr2e", key: "defaults.blueprint.shiny"): number;
+    get(module: "ptr2e", key: "blueprint.level" | "blueprint.nature" | "blueprint.perk"): string | null
+    get(module: "ptr2e", key: "blueprint.gender"): "random" | "male" | "female" | "genderless" | null
+    get(module: "ptr2e", key: "blueprint.shiny"): number;
+    get(module: "ptr2e", key: "metagame.show-accuracy" | "metagame.show-damage" | "metagame.show-effect-rolls"): "full" | "result" | "allyOnlyResult" | "none"
+    get(module: "ptr2e", key: "metagame.show-damage-taken"): "show" | "hide"
     set(module: "ptr2e", key: "expTrackerData", value: ExpTrackerSettings['_source']): ExpTrackerSettings
   }
 

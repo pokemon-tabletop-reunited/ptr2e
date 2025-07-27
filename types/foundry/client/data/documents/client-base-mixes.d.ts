@@ -1452,10 +1452,19 @@ export class ClientBaseActor<TParent extends CanvasBaseToken<ClientBaseScene | n
     static createDialog<TDocument extends foundry.abstract.Document>(
         this: ConstructorOf<TDocument>,
         data?: Record<string, unknown>,
-        context?: {
-            parent?: TDocument["parent"];
-            pack?: Collection<TDocument> | null;
-        } & Partial<FormApplicationOptions>,
+        createOptions?: Record<string, unknown>,
+        {
+          folders, types, template, context, ...dialogOptions
+        }?:
+        {
+          folders?: {id: string, name: string}[];
+          types?: string[];
+          template?: string;
+          context?: {
+              parent?: TDocument["parent"];
+              pack?: Collection<TDocument> | null;
+          } & Partial<FormApplicationOptions>,
+        }
     ): Promise<TDocument | null>;
 
     /**
@@ -5079,7 +5088,7 @@ export class ClientBaseFolder extends foundry.documents.BaseFolder {
     ): void;
 
     /** Gets the default new name for a Document */
-    static defaultName(): string;
+    static defaultName(options?: Record<string, unknown>): string;
 
     /* -------------------------------------------- */
     /*  Importing and Exporting                     */
@@ -5191,7 +5200,7 @@ export class ClientBaseFolder extends foundry.documents.BaseFolder {
 export class ClientBaseItem<
     TParent extends ClientBaseActor<CanvasBaseToken<ClientBaseScene | null> | null> | null,
 > extends foundry.documents.BaseItem<TParent> {
-    protected _sheet: DocumentSheet<this> | null;
+    protected _sheet: any | null;
 
     /**
      * A collection of Application instances which should be re-rendered whenever this document is updated.
@@ -5454,10 +5463,19 @@ export class ClientBaseItem<
     static createDialog<TDocument extends foundry.abstract.Document>(
         this: ConstructorOf<TDocument>,
         data?: Record<string, unknown>,
-        context?: {
-            parent?: TDocument["parent"];
-            pack?: Collection<TDocument> | null;
-        } & Partial<FormApplicationOptions>,
+        createOptions?: Record<string, unknown>,
+        {
+          folders, types, template, context, ...dialogOptions
+        }?:
+        {
+          folders?: {id: string, name: string}[];
+          types?: string[];
+          template?: string;
+          context?: {
+              parent?: TDocument["parent"];
+              pack?: Collection<TDocument> | null;
+          } & Partial<FormApplicationOptions>,
+        }
     ): Promise<TDocument | null>;
 
     /**
