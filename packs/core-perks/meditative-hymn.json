@@ -1,0 +1,59 @@
+{
+  "folder": "lzLExT1c5IqNcbnB",
+  "name": "Meditative Hymn",
+  "type": "perk",
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "Fox"
+      ],
+      "notes": ""
+    },
+    "actions": [
+      {
+        "name": "Meditative Hymn",
+        "slug": "meditative-hymn",
+        "description": "<p>The user can cure nearby allies of @Affliction[confused].</p>",
+        "traits": [],
+        "type": "generic",
+        "img": "systems/ptr2e/img/perk-icons/Musician.svg",
+        "range": {
+          "target": "enemy",
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "simple"
+        }
+      }
+    ],
+    "description": "<p>The user can cure nearby allies of @Affliction[confused].</p>",
+    "traits": [],
+    "prerequisites": [
+      {
+        "gte": [
+          "{actor|skills.singing.mod}",
+          40
+        ]
+      }
+    ],
+    "autoUnlock": [],
+    "cost": 2,
+    "design": {
+      "arena": "social",
+      "approach": "finesse",
+      "archetype": "musician"
+    },
+    "global": true,
+    "webs": [],
+    "nodes": []
+  },
+  "img": "systems/ptr2e/img/perk-icons/Musician.svg",
+  "effects": [],
+  "flags": {},
+  "_id": "IriqJkYNMBhbX7Rj"
+}

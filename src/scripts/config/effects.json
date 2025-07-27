@@ -16,6 +16,11 @@
       ],
       "removeOnRecall": false,
       "removeAfterCombat": false
+    },
+    "flags": {
+      "core": {
+        "overlay": true
+      }
     }
   },
   {
@@ -125,6 +130,21 @@
         {
           "type": "grant-effect",
           "value": "slowed"
+        },
+        {
+          "type": "roll-effect",
+          "label": "Paralysis Taze Check",
+          "key": "attack",
+          "value": "Compendium.ptr2e.core-effects.Item.tasedconditiitem",
+          "chance": 25,
+          "affects": "self",
+          "alterations": [
+            {
+              "mode": 5,
+              "property": "effects.0.duration.turns",
+              "value": 2
+            }
+          ]
         }
       ],
       "formula": null,
@@ -150,7 +170,7 @@
       "changes": [
         {
           "type": "percentile-modifier",
-          "key": "all-power",
+          "key": "attack-power",
           "value": -33.33
         },
         {
@@ -547,7 +567,14 @@
         {
           "type": "grant-effect",
           "value": "slowed",
-          "predicate": [{"or": ["trait:ace", "trait:trainer"]}],
+          "predicate": [
+            {
+              "or": [
+                "trait:ace",
+                "trait:trainer"
+              ]
+            }
+          ],
           "replaceSelf": true,
           "alterations": [
             {
@@ -1438,15 +1465,36 @@
     "system": {
       "changes": [
         {
-          "type": "basic",
-          "key": "system.battleStats.evasion.stage",
-          "value": 6,
-          "mode": 2
+          "type": "ephemeral-modifier",
+          "key": "attack-accuracy-flat",
+          "value": -40,
+          "predicate": [],
+          "label": "Attacking a Transient creature.",
+          "mode": 2,
+          "priority": null,
+          "ignored": false,
+          "hideIfDisabled": false
+        },
+        {
+          "type": "ephemeral-modifier",
+          "key": "attack-damage-percentile",
+          "value": -75,
+          "predicate": [],
+          "label": "Attacking a Transient creature.",
+          "mode": 2,
+          "priority": null,
+          "ignored": false,
+          "hideIfDisabled": false
         },
         {
           "type": "percentile-modifier",
-          "key": "all-damage",
-          "value": -75
+          "key": "attack-damage",
+          "value": -75,
+          "predicate": [],
+          "label": "Attacking a non-Transient creature.",
+          "mode": 2,
+          "priority": null,
+          "ignored": false
         }
       ],
       "formula": null,
@@ -1587,6 +1635,27 @@
       ]
     },
     "description": "PTR2E.Effect.Statuses.Descriptions.ringed"
+  },
+  {
+    "id": "bleed",
+    "name": "PTR2E.Effect.Statuses.Labels.bleed",
+    "img": "icons/skills/wounds/blood-drip-droplet-red.webp",
+    "type": "affliction",
+    "duration": {
+      "turns": 5
+    },
+    "system": {
+      "changes": [],
+      "priority": 0,
+      "formula": "-1/16",
+      "type": "healing",
+      "removeOnRecall": false,
+      "removeAfterCombat": true,
+      "traits": [
+        "minor-affliction"
+      ]
+    },
+    "description": "PTR2E.Effect.Statuses.Descriptions.bleed"
   },
   {
     "id": "enraged",
@@ -1819,6 +1888,31 @@
           "mode": 2,
           "priority": null,
           "ignored": false
+        },
+        {
+          "type": "roll-effect",
+          "key": "attack",
+          "value": "Compendium.ptr2e.core-effects.Item.advanceffectitem",
+          "chance": 100,
+          "dontMerge": true,
+          "affects": "self",
+          "alterations": [
+            {
+              "mode": 5,
+              "property": "system.amount",
+              "value": -20
+            },
+            {
+              "mode": 5,
+              "property": "name",
+              "value": "Delay 20% (Strong)"
+            },
+            {
+              "mode": 5,
+              "property": "system.removeAfterAttacking",
+              "value": true
+            }
+          ]
         }
       ],
       "removeOnRecall": true,
@@ -1848,6 +1942,31 @@
           "mode": 2,
           "priority": null,
           "ignored": false
+        },
+        {
+          "type": "roll-effect",
+          "key": "attack",
+          "value": "Compendium.ptr2e.core-effects.Item.advanceffectitem",
+          "chance": 100,
+          "dontMerge": true,
+          "affects": "self",
+          "alterations": [
+            {
+              "mode": 5,
+              "property": "system.amount",
+              "value": 20
+            },
+            {
+              "mode": 5,
+              "property": "name",
+              "value": "Advance 20% (Agile)"
+            },
+            {
+              "mode": 5,
+              "property": "system.removeAfterAttacking",
+              "value": true
+            }
+          ]
         }
       ],
       "removeOnRecall": true,

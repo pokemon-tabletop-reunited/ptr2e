@@ -10,8 +10,7 @@
         "name": "Rage",
         "type": "attack",
         "traits": [
-          "contact",
-          "pp-updated"
+          "contact"
         ],
         "range": {
           "target": "creature",
@@ -85,6 +84,15 @@
                   "chance": 100,
                   "affects": "defensive",
                   "dontMerge": true
+                }
+              },
+              {
+                "mode": 2,
+                "property": "effects.0.system.changes",
+                "value": {
+                  "type": "roll-option",
+                  "domain": "all",
+                  "value": "enraged-from-rage"
                 }
               }
             ],

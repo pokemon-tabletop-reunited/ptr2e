@@ -1,0 +1,65 @@
+{
+  "folder": "KcpEanpX82Cu6Dqh",
+  "name": "Unown Song: Sanctuary Ward",
+  "type": "perk",
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "Fox"
+      ],
+      "notes": ""
+    },
+    "actions": [
+      {
+        "name": "Unown Song: Sanctuary Ward",
+        "slug": "unown-song-sanctuary-ward",
+        "description": "<p>Through your mastery of the Arcane, you can conjure a choir of Unown to perform a Sanctuary Ward. This effect reduces the Effect Hit Rate of incoming attacks against your team.</p>",
+        "traits": [],
+        "type": "attack",
+        "img": "systems/ptr2e/img/perk-icons/Arcana.svg",
+        "range": {
+          "target": "enemy",
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 3
+        },
+        "types": [
+          "untyped"
+        ],
+        "category": "status",
+        "predicate": []
+      }
+    ],
+    "description": "<p>Through your mastery of the Arcane, you can conjure a choir of Unown to perform a Sanctuary Ward. This effect reduces the Effect Hit Rate of incoming attacks against your team.</p>",
+    "traits": [],
+    "prerequisites": [
+      {
+        "gte": [
+          "{actor|skills.thaumaturgy.mod}",
+          45
+        ]
+      }
+    ],
+    "autoUnlock": [],
+    "cost": 3,
+    "design": {
+      "arena": "mental",
+      "approach": "resilience",
+      "archetype": "rune-master"
+    },
+    "global": true,
+    "webs": [],
+    "nodes": []
+  },
+  "img": "systems/ptr2e/img/perk-icons/Arcana.svg",
+  "effects": [],
+  "flags": {},
+  "_id": "loU95iDUK19XrXIE"
+}

@@ -49,6 +49,8 @@ declare global {
         /** A reference to the parent Folder if one is set, otherwise null. */
         get parentFolder(): this | null;
 
+        get inCompendium(): boolean;
+
         /* -------------------------------------------- */
         /*  Methods                                     */
         /* -------------------------------------------- */

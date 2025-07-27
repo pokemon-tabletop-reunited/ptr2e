@@ -56,7 +56,7 @@ export default class AttackPTR2e extends ActionPTR2e {
         required: false,
         nullable: true,
         min: 10,
-        max: 250,
+        max: 500,
         label: "PTR2E.FIELDS.power.label",
         hint: "PTR2E.FIELDS.power.hint",
       }),
@@ -184,7 +184,7 @@ export default class AttackPTR2e extends ActionPTR2e {
         : 1;
   }
 
-  get rollable(): boolean {
+  override get rollable(): boolean {
     return true//this.accuracy !== null || this.power !== null;
   }
 
@@ -192,7 +192,7 @@ export default class AttackPTR2e extends ActionPTR2e {
     return actor?.getAttackStat(this, ignoreStages) ?? 0;
   }
 
-  async roll(args?: AttackStatisticRollParameters): Promise<AttackRollResult['rolls'][] | null | false> {
+  override async roll(args?: AttackStatisticRollParameters): Promise<AttackRollResult['rolls'][] | null | false> {
     if (!this.rollable) return false;
     if(!args?.modifierDialog && !this.variant && this.defaultVariant) {
       const variant = this.actor?.actions.attack.get(this.defaultVariant);
@@ -204,7 +204,54 @@ export default class AttackPTR2e extends ActionPTR2e {
   override prepareDerivedData(): void {
     super.prepareDerivedData();
 
+    if(this.traits.has("adaptable") && !this.variant) {
+      this.generateAdaptableVariants();
+    }
+
     this.statistic = this.prepareStatistic();
+  }
+
+  generateAdaptableVariants(): void{
+    if (!this.actor) return;
+
+    const options = this.actor.rollOptions.getFromDomain("adaptable");
+
+    const types = getTypes();
+    const adaptableTypes = Object.keys(options).filter(type => type !== "untyped" && (types.includes(type) || type.startsWith("category:")))
+    if(adaptableTypes.length === 0) return; // No options to add
+    
+    let category: string | null = null;
+    const attacks = this.item.system._source.actions.filter(a => !a.ephemeralVariant) as unknown as ActionPTR2e["_source"][];
+    for(const type of adaptableTypes) {
+      if(type.startsWith("category:")) {
+        category = type.split(":")[1];
+        continue;
+      }
+      const attack = this.actor.actions.attack.get(this.slug);
+      if(!attack) continue;
+
+      const newAttack = attack.clone({types: [...this.types, type], slug: `${this.slug}-${type}`, name: `${this.name} (${Handlebars.helpers.capitalizeFirst(type)})`, variant: this.slug, free: false, ephemeralVariant: true});
+      attacks.push(newAttack.toObject());
+    }
+
+    const finalAttacks = Array.from(attacks);
+    if(category) {
+      for(const attack of attacks) {
+        if(attack.type !== "attack") continue;
+        if(attack.flingItemId || attack.slug === "fling-actor-toss") continue;
+        if([category, "status"].includes(attack.category as string)) continue;
+        const newAttack = fu.duplicate(attack) as AttackPTR2e["_source"];
+        newAttack.category = category;
+        newAttack.slug = `${attack.slug}-${category}`;
+        newAttack.name = `${attack.name} (${Handlebars.helpers.capitalizeFirst(category)})`;
+        newAttack.variant = this.slug;
+        newAttack.free = false;
+        newAttack.ephemeralVariant = true;
+        finalAttacks.push(newAttack);
+      }
+    }
+
+    this.item.updateSource({"system.actions": finalAttacks});
   }
 
   // eslint-disable-next-line @typescript-eslint/class-literal-property-style
@@ -217,13 +264,14 @@ export default class AttackPTR2e extends ActionPTR2e {
     return false; // TODO: Implement
   }
 
-  public prepareStatistic({ force }: { force?: boolean } = {}): AttackStatistic | null {
+  public override prepareStatistic({ force }: { force?: boolean } = {}): AttackStatistic | null {
     if (!force && this.statistic) return this.statistic;
     if (!this.actor) return null;
     return new AttackStatistic(this);
   }
 
-  public getRangeIncrement(distance: number | null, size: ActorSizePTR2e): number | null {
+  public getRangeIncrement(distance: number | null, size: ActorSizePTR2e, hasReach: boolean): number | null {
+    if(this.range?.target === "self") return -Infinity;
     if (
       distance === null ||
       !this.range ||
@@ -232,7 +280,7 @@ export default class AttackPTR2e extends ActionPTR2e {
       return null;
     const dangerClose = !!this.traits.get("danger-close");
 
-    const reach = {
+    const reach = ({
       0: 1,
       1: 1,
       2: 1,
@@ -242,7 +290,7 @@ export default class AttackPTR2e extends ActionPTR2e {
       6: 4,
       7: 5,
       8: 6
-    }[size.rank] ?? 1;
+    }[size.rank] ?? 1) * (hasReach ? 2 : 1);
     const rangeMultiplier = {
       0: 1,
       1: 1,
@@ -283,7 +331,7 @@ export default class AttackPTR2e extends ActionPTR2e {
           action: "ok",
           label: "Delay Action",
           callback: (_event, _button, dialog) => {
-            return dialog?.querySelector<HTMLInputElement>("input[name='delay']")?.value
+            return dialog?.element?.querySelector<HTMLInputElement>("input[name='delay']")?.value
           }
         }
       })
