@@ -1097,7 +1097,15 @@ class ActorPTR2e<
   }
 
   get movementType() {
-    const type = this.system.movementType;
+    const type = this.system.movementType ?? (() => {
+      //@ts-expect-error - Outdated types
+      const maybeType: string | undefined = this.getActiveTokens(false, true).at(0)?.movementAction;
+      if(maybeType) {
+        this.system.movementType = maybeType;
+        return maybeType;
+      }
+      return "";
+    })();
     if (type in CONFIG.Token.movement.actions) return type;
     else return CONFIG.Token.movement.defaultAction;
   }
