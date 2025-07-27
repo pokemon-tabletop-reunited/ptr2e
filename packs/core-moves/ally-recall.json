@@ -1,0 +1,54 @@
+{
+  "name": "Ally Recall",
+  "type": "move",
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "slug": "ally-recall",
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Dev"
+      ],
+      "notes": ""
+    },
+    "traits": [],
+    "actions": [
+      {
+        "name": "Ally Recall",
+        "slug": "ally-recall",
+        "type": "attack",
+        "img": "systems/ptr2e/img/svg/psychic_icon.svg",
+        "traits": [
+          "delay-2",
+          "blast-5",
+          "teleport"
+        ],
+        "range": {
+          "target": "blast",
+          "distance": 25,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 6,
+          "delay": 2
+        },
+        "types": [
+          "psychic"
+        ],
+        "category": "status",
+        "accuracy": 90,
+        "predicate": [],
+        "description": "<p>Effect: All valid allied targets in range are relocated to spaces as close to the user as possible, as per Teleport Movement. On miss, a target is Scattered from RI3 (as per [Fling]). Relocated creatures fill the spaces closet to the user from the relocated creature’s original location, and it is at the GM’s discretion to position creatures avoiding squeezing and overly dangerous environmental conditions (such as moving a creature above a bottomless pit.)</p>"
+      }
+    ],
+    "grade": "A"
+  },
+  "img": "systems/ptr2e/img/svg/psychic_icon.svg",
+  "effects": [],
+  "flags": {},
+  "_id": "vfD9OztxBbceUce5"
+}

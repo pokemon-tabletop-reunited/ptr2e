@@ -1,4 +1,4 @@
-import { ActionPTR2e } from "@data";
+import { ActionPTR2e } from "./index.ts";
 import { CaptureStatisticRollParameters } from "@system/statistics/statistic.ts";
 import { ConsumablePTR2e } from "@item";
 import { PokeballStatistic } from "@system/statistics/pokeball.ts";
@@ -9,11 +9,11 @@ export default class PokeballActionPTR2e extends ActionPTR2e {
   static override TYPE = "pokeball" as const;
 
   // eslint-disable-next-line @typescript-eslint/class-literal-property-style
-  get rollable(): boolean {
+  override get rollable(): boolean {
     return true;
   }
 
-  async roll(args: CaptureStatisticRollParameters) {
+  override async roll(args: CaptureStatisticRollParameters) {
     if (!this.rollable) return false;
 
     return this.statistic!.check.roll(args);
@@ -35,7 +35,7 @@ export default class PokeballActionPTR2e extends ActionPTR2e {
     return true; // TODO: Implement
   }
 
-  public prepareStatistic({ force }: { force?: boolean } = {}): PokeballStatistic | null {
+  public override prepareStatistic({ force }: { force?: boolean } = {}): PokeballStatistic | null {
     if (!force && this.statistic) return this.statistic;
     if (!this.actor) return null;
     return new PokeballStatistic(this);

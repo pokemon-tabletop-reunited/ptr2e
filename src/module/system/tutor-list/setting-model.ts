@@ -3,7 +3,7 @@ import { SlugField } from "@module/data/fields/slug-field.ts";
 import { TutorListData } from "@scripts/config/tutor-list.ts";
 import { sluggify } from "@utils";
 
-export const TutorListVersion = 3.4 as const;
+export const TutorListVersion = 3.5 as const;
 
 export class TutorListSettings extends foundry.abstract.DataModel {
   static override defineSchema(): TutorListSettingsSchema {
@@ -145,6 +145,8 @@ export interface _TutorListSettingsSchema extends foundry.data.fields.DataSchema
     true
   >;
 }
+
+export type TutorListMove = ModelPropsFromSchema<_MoveSchema>;
 
 interface _MoveSchema extends foundry.data.fields.DataSchema {
   slug: SlugField<string, string, true, false, false>,

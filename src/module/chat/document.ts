@@ -7,8 +7,9 @@ import { AttackRollResult, CheckRoll, PokeballRollResults } from "../system/roll
 import AttackMessageSystem from "./models/attack.ts";
 import * as R from "remeda";
 import { SummonPTR2e } from "@item";
-import { AttackPTR2e } from "@data";
+import { AttackPTR2e, Trait } from "@data";
 import { CombatantPTR2e } from "@combat";
+import Tagify, { BaseTagData } from "@yaireo/tagify";
 
 class ChatMessagePTR2e<TSchema extends TypeDataModel = TypeDataModel> extends ChatMessage<TSchema> {
   /** Get the actor associated with this chat message */
@@ -55,7 +56,15 @@ class ChatMessagePTR2e<TSchema extends TypeDataModel = TypeDataModel> extends Ch
    * The override is purely to replace the basic `this.content` call with a call to `this.system.getHTMLContent` if it exists.
    * If a foundry update changes the `getHTML` method, this override will need to be updated to match.
    */
-  override async getHTML(): Promise<JQuery<HTMLElement>> {
+  override async renderHTML({ canDelete, canClose = false, ...rest } = {} as { canDelete?: boolean, canClose: boolean }): Promise<HTMLElement> {
+    canDelete ??= game.user.isGM; // By default, GM users have the trash-bin icon in the chat log itself
+
+    if ('renderHTML' in this.system && typeof this.system.renderHTML === "function") {
+      const html = await this.system.renderHTML({ canDelete, canClose, ...rest });
+      Hooks.callAll("renderChatMessageHTML", this, html);
+      return html;
+    }
+
     const content =
       "getHTMLContent" in this.system && typeof this.system.getHTMLContent === "function"
         ? ((await this.system.getHTMLContent(this.content)) as string)
@@ -63,13 +72,15 @@ class ChatMessagePTR2e<TSchema extends TypeDataModel = TypeDataModel> extends Ch
 
     // Determine some metadata
     const data = this.toObject(false);
-    data.content = await TextEditor.enrichHTML(content, {
+    data.content = await foundry.applications.ux.TextEditor.enrichHTML(content, {
       rollData: this.getRollData() as Record<string, unknown>,
     });
     const isWhisper = this.whisper.length;
 
     // Construct message data
     const messageData = {
+      canDelete,
+      canClose,
       message: data,
       user: game.user,
       author: this.author as User,
@@ -80,9 +91,9 @@ class ChatMessagePTR2e<TSchema extends TypeDataModel = TypeDataModel> extends Ch
         isWhisper ? "whisper" : null,
         this.blind ? "blind" : null,
         this.type,
+        "ptr2e"
       ].filterJoin(" "),
       isWhisper: this.whisper.length,
-      canDelete: game.user.isGM, // Only GM users are allowed to have the trash-bin icon in the chat log itself
       whisperTo: this.whisper
         .map((u) => {
           const user = game.users.get(u);
@@ -92,28 +103,72 @@ class ChatMessagePTR2e<TSchema extends TypeDataModel = TypeDataModel> extends Ch
     } as ChatMessageRenderData;
 
     // Render message data specifically for ROLL type messages
-    if (this.isRoll) await this._renderRollContent(messageData);
+    if (this.isRoll) await this.#renderRollContent(messageData);
 
     // Define a border color
     if (this.style === CONST.CHAT_MESSAGE_STYLES.OOC)
       messageData.borderColor = (this.author?.color as Color).css;
 
     // Render the chat message
-    const template = await renderTemplate(CONFIG.ChatMessage.template, messageData);
-    const html = $(template);
-
-    // Set the message header color
-    html.css("--user-color", `var(--user-color-${this.author.id})`);
-    html.css("border-color", `var(--user-color-${this.author.id})`);
+    const template = await foundry.applications.handlebars.renderTemplate(CONFIG.ChatMessage.template, messageData);
+    const html = foundry.utils.parseHTML(template) as HTMLElement;
 
     // Flag expanded state of dice rolls
-    if (this._rollExpanded) html.find(".dice-tooltip").addClass("expanded");
     Hooks.call("renderChatMessage", this, html, messageData);
 
+    const $html = $(html);
+    if (this._rollExpanded) $html.find(".dice-tooltip").addClass("expanded");
+
+    // Set the message header color
+    $html.css("--user-color", `var(--user-color-${this.author.id})`);
+    $html.css("border-color", `var(--user-color-${this.author.id})`);
+
     // Add custom listeners
-    this.activateListeners(html);
+    this.activateListeners($html);
 
     // Return the rendered HTML
+    return html;
+  }
+
+  async #renderRollContent(messageData: ChatMessageRenderData): Promise<void> {
+    const data = messageData.message;
+    const renderRolls = async (isPrivate: boolean) => {
+      let html = "";
+      for (const r of this.rolls) {
+        html += await r.render({ isPrivate });
+      }
+      return html;
+    };
+
+    // Suppress the "to:" whisper flavor for private rolls
+    if (this.blind || this.whisper.length) messageData.isWhisper = false;
+
+    // Display standard Roll HTML content
+    if (this.isContentVisible) {
+      const el = document.createElement("div");
+      el.innerHTML = data.content;  // Ensure the content does not already contain custom HTML
+      if (!el.childElementCount && this.rolls.length) data.content = await this.#renderRollHTML(false);
+    }
+
+    // Otherwise, show "rolled privately" messages for Roll content
+    else {
+      const name = this.author?.name ?? game.i18n.localize("CHAT.UnknownUser");
+      data.flavor = game.i18n.format("CHAT.PrivateRollContent", { user: foundry.utils.escapeHTML(name) });
+      data.content = await renderRolls(true);
+      messageData.alias = name;
+    }
+  }
+
+  /**
+   * Render HTML for the array of Roll objects included in this message.
+   * @param {boolean} isPrivate   Is the chat message private?
+   * @returns {Promise<string>}   The rendered HTML string
+   */
+  async #renderRollHTML(isPrivate: boolean) {
+    let html = "";
+    for (const roll of this.rolls) {
+      html += await roll.render({ isPrivate });
+    }
     return html;
   }
 
@@ -148,12 +203,12 @@ class ChatMessagePTR2e<TSchema extends TypeDataModel = TypeDataModel> extends Ch
       if (!action) return void ui.notifications.error("Action not found.");
 
       const ppCost = action.cost.powerPoints
-      if(!ppCost) return void ui.notifications.error("No PP cost found on action.");
+      if (!ppCost) return void ui.notifications.error("No PP cost found on action.");
 
       const actor = action!.actor;
       if (!actor) return void ui.notifications.error("Unable to detect actor.");
 
-      if(ppCost > actor.system.powerPoints.value) return void ui.notifications.error(game.i18n.format("PTR2E.AttackWarning.NotEnoughPP", { cost: ppCost, current: actor.system.powerPoints.value }));
+      if (ppCost > actor.system.powerPoints.value) return void ui.notifications.error(game.i18n.format("PTR2E.AttackWarning.NotEnoughPP", { cost: ppCost, current: actor.system.powerPoints.value }));
 
       await actor.update({
         "system.powerPoints.value": actor.system.powerPoints.value - ppCost,
@@ -181,7 +236,7 @@ class ChatMessagePTR2e<TSchema extends TypeDataModel = TypeDataModel> extends Ch
         type: "summon",
         system: {
           owner: action.actor?.uuid ?? null,
-          item: { ...summonItem.clone({"system.owner": action.actor?.uuid ?? null}).toObject(), uuid: summonItem.uuid }
+          item: { ...summonItem.clone({ "system.owner": action.actor?.uuid ?? null }).toObject(), uuid: summonItem.uuid }
         }
       }])
 
@@ -190,23 +245,6 @@ class ChatMessagePTR2e<TSchema extends TypeDataModel = TypeDataModel> extends Ch
       ChatMessage.create({
         content: `Added: ${(combatants as CombatantPTR2e[]).map(c => c.link).join(", ")} to Combat.`,
       });
-    });
-
-    html.find(".dice-roll").on("click", (event) => {
-      event.preventDefault();
-      event.stopImmediatePropagation();
-
-      const roll = event.currentTarget;
-      const expanded = !roll.classList.contains("opened");
-
-      const tooltips = roll.querySelectorAll(".dice-tooltip");
-      for (const tip of tooltips) {
-        if (expanded) $(tip).slideDown(200);
-        else $(tip).slideUp(200);
-        tip.classList.toggle("expanded", expanded);
-      }
-
-      roll.classList.toggle("opened", expanded);
     });
 
     html.find(".collapse-rolls").each((_i, el) => {
@@ -284,6 +322,32 @@ class ChatMessagePTR2e<TSchema extends TypeDataModel = TypeDataModel> extends Ch
         });
       }
     });
+
+    for (const input of html[0].querySelectorAll<HTMLInputElement>(
+      "input.ptr2e-tagify"
+    )) {
+      new Tagify(input, {
+        editTags: false, //@ts-expect-error - Tagify types are not correct
+        tagTextProp: "label",
+        dropdown: {
+          enabled: 0,
+          mapValueTo: "label",
+        },
+        templates: { //@ts-expect-error - Tagify types are not correct
+          tag: function (tagData: BaseTagData & {type: keyof typeof Trait.bgColors, label: string}): string {
+            return `
+                  <tag contenteditable="false" spellcheck="false" tabindex="-1" class="tagify__tag" ${this.getAttributes(tagData)}style="${Trait.bgColors[tagData.type || "default"] ? `--tag-bg: ${Trait.bgColors[tagData.type || "default"]!["bg"]}; --tag-hover: ${Trait.bgColors[tagData.type || "default"]!["hover"]}; --tag-border-color: ${Trait.bgColors[tagData.type || "default"]!["border"]};` : ""}">
+                  <x title="" class="tagify__tag__removeBtn" role="button" aria-label="remove tag"></x>
+                  <div>
+                      <span class='tagify__tag-text'>
+                          <span class="trait" data-tooltip-direction="UP" data-trait="${tagData.value}" data-tooltip="${tagData.label}"><span>[</span><span class="tag">${tagData.label}</span><span>]</span></span>
+                      </span>
+                  </div>
+                  `;
+          },
+        },
+      });
+    }
   }
 
   static async expandCollapsible(element: HTMLElement): Promise<void> {
@@ -342,7 +406,7 @@ class ChatMessagePTR2e<TSchema extends TypeDataModel = TypeDataModel> extends Ch
 
     if (type == "skill") {
       system.result = {
-        modifiers: context.modifiers,
+        modifiers: context.modifiers?.map(m => m.toObject()) ?? [],
         ...R.pick(context, ["action", "domains", "notes", "title", "type"]),
         options: Array.from(context.options ?? [])
       }
@@ -359,7 +423,7 @@ class ChatMessagePTR2e<TSchema extends TypeDataModel = TypeDataModel> extends Ch
       type,
       speaker,
       flavor,
-      system,
+      system: fu.duplicate(system),
     }, { rollMode: context.rollMode });
   }
 
@@ -382,7 +446,7 @@ class ChatMessagePTR2e<TSchema extends TypeDataModel = TypeDataModel> extends Ch
       slug: context.action ?? context.title ?? type,
       target: context.target?.actor.uuid ?? null,
       result: {
-        modifiers: results.context.modifiers,
+        modifiers: results.context.modifiers?.map(m => m.toObject()) ?? [],
         ...R.pick(results.context, ["action", "domains", "notes", "title", "type"]),
         options: Array.from(results.context.options ?? [])
       }
@@ -400,7 +464,7 @@ class ChatMessagePTR2e<TSchema extends TypeDataModel = TypeDataModel> extends Ch
       type,
       speaker,
       flavor,
-      system,
+      system: fu.duplicate(system),
     }, { rollMode: context.rollMode });
   }
 
@@ -490,7 +554,7 @@ class ChatMessagePTR2e<TSchema extends TypeDataModel = TypeDataModel> extends Ch
         }))
       } : null
     };
-    if(context.attack?.type === "summon") system.originItem = context.item?.toJSON();
+    if (context.attack?.type === "summon") system.originItem = context.item?.toJSON();
 
     // @ts-expect-error - Chatmessages aren't typed properly yet
     return dataOnly ? { type: "attack", speaker, flavor, system, }
@@ -499,7 +563,7 @@ class ChatMessagePTR2e<TSchema extends TypeDataModel = TypeDataModel> extends Ch
         type: "attack",
         speaker,
         flavor,
-        system,
+        system: fu.duplicate(system),
       }, { rollMode: context.rollMode });
   }
 

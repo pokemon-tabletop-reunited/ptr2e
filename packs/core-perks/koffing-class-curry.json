@@ -12,20 +12,15 @@
         "slug": "koffing-class-curry",
         "description": "<p>You are able to make Koffing-class Curries as a Camp Action. One of these Curries restores 25% of the party's max HP. After making a Koffing-class Curry, roll a d100. On a 1, you attract a non-hostile Pokemon from the local environment to investigate the camp.</p>",
         "cost": {
-          "activation": "complex",
-          "powerPoints": 0,
-          "delay": null,
-          "priority": null
+          "activation": "complex"
         },
         "type": "camping",
         "traits": [],
         "img": "icons/svg/explosion.svg",
         "range": {
           "target": "enemy",
-          "unit": "m",
-          "distance": 0
-        },
-        "variant": null
+          "unit": "m"
+        }
       }
     ],
     "slug": "koffing-class-curry",
@@ -42,16 +37,16 @@
         "type": "entry",
         "connected": [
           "root-3",
-          "trubbish-class-sandwiches",
           "stat-iv-booster-1-2",
-          "wobbufet-class-curry"
+          "wobbufet-class-curry",
+          "root-4"
         ],
         "config": {
+          "texture": "systems/ptr2e/img/perk-icons/Chef.svg",
           "alpha": null,
-          "backgroundColor": "#8000ff",
+          "backgroundColor": null,
           "borderColor": null,
           "borderWidth": null,
-          "texture": "systems/ptr2e/img/perk-icons/Chef.svg",
           "tint": null,
           "scale": null
         },
@@ -59,21 +54,19 @@
       }
     ],
     "autoUnlock": [],
-    "originSlug": null,
-    "variant": null,
-    "mode": null,
     "global": true,
     "webs": [],
     "design": {
       "arena": "social",
       "approach": "resilience",
-      "archetype": "Chef"
+      "archetype": "chef"
     },
     "publication": {
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
+      ],
+      "notes": ""
     }
   },
   "_id": "u37SL8BTWqw1fr0P",

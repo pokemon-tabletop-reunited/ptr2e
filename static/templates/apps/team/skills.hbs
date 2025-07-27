@@ -1,0 +1,18 @@
+<section class="tab sheet-body {{tabs.skills.cssClass}}" data-tab="skills" data-group="sheet">
+  {{!-- <header>Controls</header> --}}
+  <main class="content scroll mb-1">
+    {{#each skills as |entry skill|}}
+      <div class="skill-entry">
+        <header><h3 class="m-0 p-0">{{formatSlug skill}}</h3></header>
+        <div class="actors">
+          {{#each entry as |data|}}
+            <div class="actor"{{#if data.color}} style="--player-color: {{data.color}};"{{/if}} data-actor-uuid="{{data.actor.uuid}}" data-action="open-entry" data-tooltip-direction="UP" data-tooltip="{{data.actor.name}} ({{numberFormat data.value decimals=0 sign=true}})">
+              <img class="avatar" src="{{data.actor.img}}"/>
+              <div class="name"><b>({{numberFormat data.value decimals=0 sign=true}})</b> <span>{{data.actor.name}}</span></div>
+            </div>
+          {{/each}}
+        </div>
+      </div>
+    {{/each}}
+  </main>
+</section>
