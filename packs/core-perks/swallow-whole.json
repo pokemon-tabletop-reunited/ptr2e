@@ -1,0 +1,60 @@
+{
+  "name": "Swallow Whole",
+  "_id": "6Tzki0qSe05Nvc6l",
+  "type": "perk",
+  "img": "icons/creatures/abilities/mouth-teeth-rows-white.webp",
+  "effects": [],
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "publication": {
+      "source": "PTR2e Core",
+      "authors": [
+        "Dragoon"
+      ],
+      "notes": ""
+    },
+    "actions": [],
+    "slug": null,
+    "description": "<p>Connection: Stockpile<br><br>Effect: When the user resolves @UUID[Compendium.ptr2e.core-abilities.TQNGoLOtYTLLnoTY]{Jaws of Carnage}, they gain 1 stack of @Affliction[stockpile].</p>",
+    "traits": [
+      "lockjaw",
+      "jaw"
+    ],
+    "prerequisites": [
+      "item:perk:devourer"
+    ],
+    "autoUnlock": [],
+    "cost": 4,
+    "originSlug": null,
+    "design": {
+      "arena": "physical",
+      "approach": "resilience",
+      "archetype": null
+    },
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": [],
+    "nodes": [
+      {
+        "x": 97,
+        "y": 69,
+        "hidden": false,
+        "type": "normal",
+        "connected": [
+          "devourer"
+        ],
+        "config": {
+          "texture": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "tint": null
+        },
+        "tier": null
+      }
+    ]
+  }
+}

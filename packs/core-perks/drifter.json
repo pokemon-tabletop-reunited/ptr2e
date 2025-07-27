@@ -19,15 +19,20 @@
         "slug": "drifter",
         "description": "<p>You gain the [Hover] trait, and if you did not already possess a Flight movement, you gain a Flight Movement Allowance equal to that of your highest Primary Movement Score.</p>",
         "cost": {
-          "activation": "free"
+          "activation": "free",
+          "powerPoints": 0
         },
         "type": "passive",
         "traits": [],
         "img": "icons/svg/explosion.svg",
         "range": {
           "target": "enemy",
-          "unit": "m"
-        }
+          "unit": "m",
+          "distance": 0
+        },
+        "variant": null,
+        "ephemeralVariant": false,
+        "hidden": false
       }
     ],
     "slug": "drifter",
@@ -45,7 +50,10 @@
           "enchanting-smile",
           "improved-flight",
           "acrobat",
-          "root-2"
+          "root-2",
+          "minor-buff-58",
+          "minor-buff-59",
+          "guster"
         ],
         "config": {
           "alpha": null,
@@ -76,14 +84,18 @@
     "design": {
       "arena": "mental",
       "approach": "finesse",
-      "archetype": "[Flying]"
+      "archetype": "flying"
     },
     "publication": {
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
-    }
+      ],
+      "notes": ""
+    },
+    "originSlug": null,
+    "variant": null,
+    "mode": null
   },
   "_id": "KxU35Iv6OY04jW0M",
   "img": "systems/ptr2e/img/svg/flying_icon.svg",

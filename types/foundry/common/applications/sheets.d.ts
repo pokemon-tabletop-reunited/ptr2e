@@ -1,4 +1,4 @@
-import { DocumentSheetRenderOptions, DocumentSheetConfiguration, DocumentSheetV2 } from "./api.js";
+import { DocumentSheetRenderOptions, DocumentSheetConfiguration, DocumentSheetV2, ApplicationV2 } from "./api.js";
 
 declare class ActorSheetV2<
     TDocument extends Actor = Actor,
@@ -37,9 +37,24 @@ declare class ItemSheetV2<
     get item(): TDocument;
 }
 
+declare class FolderConfig extends DocumentSheetV2<Folder> {
+}
 
+declare class _TokenConfig<
+  TDocument extends TokenDocument,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  TOptions extends DocumentSheetOptions = DocumentSheetOptions,
+> extends DocumentSheetV2<TDocument> {}
+
+declare class PrototypeTokenConfig extends ApplicationV2 {
+
+}
 
 export {
     ActorSheetV2,
-    ItemSheetV2
+    ItemSheetV2,
+    ActiveEffectConfig,
+    FolderConfig,
+    _TokenConfig as TokenConfig,
+    PrototypeTokenConfig,
 }

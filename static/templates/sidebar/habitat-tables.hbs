@@ -1,0 +1,5 @@
+<ol class="directory-list plain">
+  {{#with habitat}}
+    {{> (lookup @root "folderPartial") node=this folder=folder }}
+  {{/with}}
+</ol>

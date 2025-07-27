@@ -10,7 +10,7 @@
         "name": "Night Shade",
         "type": "attack",
         "traits": [
-          "pp-updated"
+          "flat"
         ],
         "range": {
           "target": "creature",
@@ -52,10 +52,7 @@
           {
             "type": "flat-modifier",
             "key": "night-shade-attack-damage-flat",
-            "value": "(@actor.system.advancement.level)*1.75",
-            "predicate": [
-              "item:move:night-shade"
-            ],
+            "value": "floor(@actor.system.advancement.level * 1.75)",
             "label": "Night Shade",
             "mode": 2,
             "priority": null,

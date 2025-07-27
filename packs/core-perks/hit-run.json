@@ -1,7 +1,6 @@
 {
   "name": "Hit & Run",
   "type": "perk",
-  "folder": "zrVtKATNxzLNxTUe",
   "system": {
     "prerequisites": [],
     "cost": 3,
@@ -12,15 +11,20 @@
         "slug": "hit-run",
         "description": "<p>You gain Run Away as a free, slotless ability.</p>",
         "cost": {
-          "activation": "free"
+          "activation": "free",
+          "powerPoints": 0
         },
         "type": "passive",
         "traits": [],
         "img": "systems/ptr2e/img/perk-icons/Combat.svg",
         "range": {
           "target": "creature",
-          "unit": "m"
-        }
+          "unit": "m",
+          "distance": 0
+        },
+        "variant": null,
+        "ephemeralVariant": false,
+        "hidden": false
       }
     ],
     "slug": "hit-run",
@@ -43,7 +47,14 @@
           "stat-iv-booster-1-9",
           "improved-overland-12",
           "improved-swim-1",
-          "type-style"
+          "type-style",
+          "minor-buff-9",
+          "minor-buff-14",
+          "minor-buff-15",
+          "minor-buff-21",
+          "minor-buff-53",
+          "resist-style",
+          "fractalised-contingency"
         ],
         "config": {
           "texture": "systems/ptr2e/img/perk-icons/Combat.svg",
@@ -71,7 +82,10 @@
         "PTR 2e Team"
       ],
       "notes": ""
-    }
+    },
+    "originSlug": null,
+    "variant": null,
+    "mode": null
   },
   "_id": "1SjUYN4180BTBYCk",
   "img": "systems/ptr2e/img/perk-icons/Combat.svg",
@@ -137,12 +151,13 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.342",
         "systemId": "ptr2e",
         "systemVersion": "1.1.0.beta",
         "createdTime": 1741635788212,
         "modifiedTime": 1741635847818,
-        "lastModifiedBy": "IcBpMqhFuTck9VpX"
+        "lastModifiedBy": "IcBpMqhFuTck9VpX",
+        "exportSource": null
       }
     }
   ]

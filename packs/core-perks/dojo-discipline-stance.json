@@ -1,0 +1,67 @@
+{
+  "name": "Dojo Discipline Stance",
+  "_id": "3ou4C32UROiZQ620",
+  "type": "perk",
+  "img": "icons/skills/melee/shield-block-fire-orange.webp",
+  "effects": [],
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "publication": {
+      "source": "PTR2e Core",
+      "authors": [
+        "Fox"
+      ],
+      "notes": ""
+    },
+    "actions": [],
+    "slug": null,
+    "description": "<p>Target: A Commanded @Trait[fighting] Creature<br><br>Effect: The affected creature gains +33% RES, but forfeits the ability to make Attacks of Opportunity. The Stance may be ended as a Free Action by the Initiator or Target.</p>",
+    "traits": [
+      "command",
+      "stance",
+      "fighting"
+    ],
+    "prerequisites": [
+      "item:perk:type-specialist",
+      {
+        "gte": [
+          "{actor|skills.leadership.mod}",
+          35
+        ]
+      },
+      {
+        "gte": [
+          "{actor|skills.tough.mod}",
+          30
+        ]
+      }
+    ],
+    "autoUnlock": [],
+    "cost": 2,
+    "originSlug": null,
+    "design": {
+      "arena": "physical",
+      "approach": "resilience",
+      "archetype": "fighting"
+    },
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": [],
+    "nodes": [
+      {
+        "x": 191,
+        "y": 103,
+        "connected": [
+          "type-specialist"
+        ],
+        "hidden": false,
+        "type": "normal",
+        "tier": null
+      }
+    ]
+  }
+}

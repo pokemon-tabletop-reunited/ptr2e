@@ -1,11 +1,10 @@
 {
   "name": "Improved Telekinesis",
   "type": "perk",
-  "folder": "zrVtKATNxzLNxTUe",
+  "folder": "minorbuffsfolder",
   "system": {
     "prerequisites": [
-      "#[Telekinetic X]",
-      "#Occult (Psychic) 20 + 10 x (# of Improved Telekinesis Perks already obtained)"
+      "#[Telekinetic X]"
     ],
     "cost": 1,
     "description": "<p>Improve your [Telekinesis X] by 2.</p>",
@@ -15,15 +14,20 @@
         "slug": "improved-telekinesis",
         "description": "<p>Improve your [Telekinesis X] by 2.</p>",
         "cost": {
-          "activation": "free"
+          "activation": "free",
+          "powerPoints": 0
         },
         "type": "passive",
         "traits": [],
         "img": "icons/svg/explosion.svg",
         "range": {
           "target": "enemy",
-          "unit": "m"
-        }
+          "unit": "m",
+          "distance": 0
+        },
+        "variant": null,
+        "ephemeralVariant": false,
+        "hidden": false
       }
     ],
     "slug": "improved-telekinesis",
@@ -33,27 +37,26 @@
       {
         "x": 129,
         "y": 116,
+        "hidden": false,
+        "type": "normal",
         "connected": [
           "telekinetic-potential",
           "stat-iv-booster-1-4",
           "improved-teleportation"
         ],
         "config": {
-          "alpha": null,
+          "texture": null,
           "backgroundColor": null,
           "borderColor": null,
-          "borderWidth": null,
-          "texture": null,
-          "tint": null,
-          "scale": null
+          "tint": null
         },
-        "hidden": false,
-        "type": "normal",
         "tier": null
       },
       {
         "x": 156,
         "y": 134,
+        "hidden": false,
+        "type": "normal",
         "connected": [
           "telekinetic-potential",
           "stat-iv-booster-1-2",
@@ -61,21 +64,18 @@
           "improved-teleportation-2"
         ],
         "config": {
-          "alpha": null,
+          "texture": null,
           "backgroundColor": null,
           "borderColor": null,
-          "borderWidth": null,
-          "texture": null,
-          "tint": null,
-          "scale": null
+          "tint": null
         },
-        "hidden": false,
-        "type": "normal",
         "tier": null
       },
       {
         "x": 103,
         "y": 150,
+        "hidden": false,
+        "type": "normal",
         "connected": [
           "stat-iv-booster-1-9",
           "improved-overland-11",
@@ -88,38 +88,37 @@
           "mental-alarm"
         ],
         "config": {
-          "alpha": null,
+          "texture": null,
           "backgroundColor": null,
           "borderColor": null,
-          "borderWidth": null,
-          "texture": null,
-          "tint": null,
-          "scale": null
+          "tint": null
         },
-        "hidden": false,
-        "type": "normal",
         "tier": null
       }
     ],
-    "traits": [],
+    "traits": [
+      "minor-buff"
+    ],
     "_migration": {
       "version": null,
       "previous": null
     },
     "autoUnlock": [],
-    "global": true,
+    "global": false,
     "webs": [],
     "design": {
       "arena": "mental",
       "approach": "power",
-      "archetype": "[Psychic]"
+      "archetype": "psychic"
     },
     "publication": {
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
-    }
+      ],
+      "notes": ""
+    },
+    "originSlug": null
   },
   "_id": "QmK8catssCQpdnaA",
   "img": "systems/ptr2e/img/icons/feat_icon.webp",

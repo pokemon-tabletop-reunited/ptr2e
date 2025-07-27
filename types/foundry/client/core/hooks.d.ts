@@ -15,7 +15,7 @@ declare global {
     type HookParamsDeleteCombat = HookParameters<"deleteCombat", [Combat, { [key: string]: unknown }, string]>;
     type HookParamsDropCanvasData = HookParameters<"dropCanvasData", [Canvas, DropCanvasData]>;
     type HookParamsGetChatLogEntryContext = HookParameters<"getChatLogEntryContext", [JQuery, EntryContextOption[]]>;
-    type HookParamsGetSceneControlButtons = HookParameters<"getSceneControlButtons", [SceneControl[]]>;
+    type HookParamsGetSceneControlButtons = HookParameters<"getSceneControlButtons", [Record<string, SceneControl>]>;
     type HookParamsHotbarDrop = HookParameters<"hotbarDrop", [Hotbar, unknown, string]>;
     type HookParamsLightingRefresh = HookParameters<"lightingRefresh", [LightingLayer]>;
     type HookParamsPreCreateItem = HookParameters<

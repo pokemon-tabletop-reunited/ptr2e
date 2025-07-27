@@ -1,30 +1,26 @@
 import { Tab } from "@item/sheets/document.ts";
-import { ApplicationV2Expanded } from "../appv2-expanded.ts";
+import { ApplicationConfigurationExpanded, ApplicationV2Expanded } from "../appv2-expanded.ts";
 import { htmlQuery, htmlQueryAll, localizer } from "@utils";
 import { PackInfo } from "./data.ts";
 
 export class CompendiumBrowserSettings extends foundry.applications.api.HandlebarsApplicationMixin(ApplicationV2Expanded) {
-  static override DEFAULT_OPTIONS = fu.mergeObject(
-    super.DEFAULT_OPTIONS,
-    {
-      tag: "form",
-      id: "compendium-browser-settings",
-      classes: ["sheet", "default-sheet"],
-      position: {
-        width: 800,
-        height: 'auto',
-      },
-      window: {
-        minimizable: true,
-        resizable: true,
-      },
-      form: {
-        closeOnSubmit: false,
-        handler: CompendiumBrowserSettings.#saveSettings,
-      }
+  static override DEFAULT_OPTIONS = {
+    tag: "form",
+    id: "compendium-browser-settings",
+    classes: ["sheet", "default-sheet"],
+    position: {
+      width: 800,
+      height: 'auto' as const
     },
-    { inplace: false }
-  );
+    window: {
+      minimizable: true,
+      resizable: true,
+    },
+    form: {
+      closeOnSubmit: false,
+      handler: CompendiumBrowserSettings.#saveSettings,
+    }
+  } as unknown as Omit<DeepPartial<ApplicationConfigurationExpanded>, "uniqueId">;
 
   static override PARTS: Record<string, foundry.applications.api.HandlebarsTemplatePart> = {
     tabs: {

@@ -1,0 +1,66 @@
+{
+  "name": "Isolated Study",
+  "_id": "IkKSOlFB0ueyL8Kk",
+  "type": "perk",
+  "img": "icons/skills/trades/academics-book-study-runes.webp",
+  "effects": [],
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "publication": {
+      "source": "PTR2e Core",
+      "authors": [
+        "Dragoon"
+      ],
+      "notes": ""
+    },
+    "actions": [],
+    "slug": null,
+    "description": "<p>The user learns 2 Grade C or lower Moves from one of their Tutor Lists.</p>",
+    "traits": [
+      "arcane"
+    ],
+    "prerequisites": [
+      {
+        "gte": [
+          "{actor|skills.research.mod}",
+          60
+        ]
+      },
+      {
+        "gte": [
+          "{actor|skills.teaching.mod}",
+          40
+        ]
+      },
+      "item:perk:introductory-magecraft"
+    ],
+    "autoUnlock": [],
+    "cost": 1,
+    "originSlug": null,
+    "design": {
+      "arena": "mental",
+      "approach": "finesse",
+      "archetype": "arcane"
+    },
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": [],
+    "nodes": [
+      {
+        "x": 125,
+        "y": 186,
+        "connected": [
+          "comingling-of-power",
+          "metamove-empower"
+        ],
+        "hidden": false,
+        "type": "normal",
+        "tier": null
+      }
+    ]
+  }
+}

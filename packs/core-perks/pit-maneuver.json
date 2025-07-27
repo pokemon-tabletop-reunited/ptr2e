@@ -1,0 +1,54 @@
+{
+  "name": "PIT Maneuver",
+  "_id": "BYPCagYxe1QtFBy8",
+  "type": "perk",
+  "img": "systems/ptr2e/img/perk-icons/Mechanist.svg",
+  "effects": [],
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "publication": {
+      "source": "PTR2e Core",
+      "authors": [
+        "Dragoon"
+      ],
+      "notes": ""
+    },
+    "actions": [],
+    "slug": null,
+    "description": "<p>Effect: When the user declares the use of a vehicle’s Ram Attack against another vehicle, they may spend 4 PP at 30% Delay to cause the attack to lose 20 Accuracy, -40% Power, and on hit inflict Delay 50%, @Affliction[slowed 5], @Affliction[stuck 5], @Affliction[stunted 5], and @UUID[Compendium.ptr2e.core-effects.5MQzVTuubNTERPjS]{-2 Evasion Stages for 5 activations}. The user may only apply this Perk with vehicles that share the same category of Pilot Skill that the user has that meets the prerequisites for this Perk.</p>",
+    "traits": [
+      "pilot"
+    ],
+    "prerequisites": [
+      "One Pilot Skill at 55 (Not Automated)"
+    ],
+    "autoUnlock": [],
+    "cost": 2,
+    "originSlug": null,
+    "design": {
+      "arena": "physical",
+      "approach": "power",
+      "archetype": "pilot"
+    },
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": [],
+    "nodes": [
+      {
+        "x": 78,
+        "y": 64,
+        "connected": [
+          "power-steering",
+          "minor-buff-49"
+        ],
+        "hidden": false,
+        "type": "normal",
+        "tier": null
+      }
+    ]
+  }
+}

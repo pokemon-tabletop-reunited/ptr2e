@@ -1,6 +1,6 @@
 import { ItemPTR2e, ItemSystemPTR } from "@item";
 
-class PerkDirectory extends ItemDirectory<ItemPTR2e<ItemSystemPTR, null>> {
+class PerkDirectory extends foundry.applications.sidebar.tabs.ItemDirectory<ItemPTR2e<ItemSystemPTR, null>> {
   get popout() {
     return this._popout;
   }

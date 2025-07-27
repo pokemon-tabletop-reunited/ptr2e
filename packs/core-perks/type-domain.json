@@ -18,9 +18,10 @@
       {
         "name": "<Type> Domain",
         "slug": "type-domain",
-        "description": "<p>You are able to tutor [Domain] abilities associated to your chosen <Type>. Only creatures that have your chosen <Type> can learn these abilties.</p>",
+        "description": "<p>You are able to tutor [Domain] abilities associated to your chosen &lt;Type&gt;. Only creatures that have your chosen <Type> can learn these abilties.</p>",
         "cost": {
-          "activation": "free"
+          "activation": "free",
+          "powerPoints": 0
         },
         "type": "passive",
         "traits": [
@@ -29,8 +30,12 @@
         "img": "icons/svg/explosion.svg",
         "range": {
           "target": "enemy",
-          "unit": "m"
-        }
+          "unit": "m",
+          "distance": 0
+        },
+        "variant": null,
+        "ephemeralVariant": false,
+        "hidden": false
       }
     ],
     "slug": "type-domain",
@@ -48,7 +53,11 @@
           "type-tutoring",
           "type-strategist",
           "improved-overland-1",
-          "stat-iv-booster-1-1"
+          "stat-iv-booster-1-1",
+          "minor-buff-4",
+          "minor-buff-45",
+          "evil-touch",
+          "dastardly-planner"
         ],
         "config": {
           "alpha": null,
@@ -78,8 +87,12 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
-    }
+      ],
+      "notes": ""
+    },
+    "originSlug": null,
+    "variant": null,
+    "mode": null
   },
   "_id": "aMMwSJntCErBGbQZ",
   "img": "systems/ptr2e/img/perk-icons/Trainer.svg",

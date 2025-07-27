@@ -34,7 +34,8 @@
         "description": "<p>Effect: The target gains @Affliction[gambit] 1.</p>",
         "type": "generic",
         "img": "systems/ptr2e/img/perk-icons/Orders_Training.svg",
-        "variant": null
+        "variant": null,
+        "ephemeralVariant": false
       },
       {
         "name": "Gambit! (Self)",
@@ -57,7 +58,8 @@
         "description": "<p>Effect: The target gains @Affliction[gambit] 2.</p>",
         "type": "generic",
         "img": "systems/ptr2e/img/perk-icons/Orders_Training.svg",
-        "variant": null
+        "variant": null,
+        "ephemeralVariant": false
       }
     ],
     "slug": "gambit-style",
@@ -70,6 +72,10 @@
     },
     "nodes": [
       {
+        "x": 95,
+        "y": 125,
+        "hidden": false,
+        "type": "normal",
         "connected": [
           "assault-armor-style",
           "precise-style",
@@ -78,37 +84,51 @@
           "improved-overland-5"
         ],
         "config": {
-          "alpha": null,
-          "backgroundColor": "#004080",
-          "borderColor": null,
-          "borderWidth": null,
           "texture": "systems/ptr2e/img/perk-icons/Orders_Training.svg",
-          "tint": "#808080",
-          "scale": null
+          "backgroundColor": null,
+          "borderColor": null,
+          "tint": null
         },
+        "tier": null
+      },
+      {
+        "x": 95,
+        "y": 179,
         "hidden": false,
         "type": "normal",
-        "x": 95,
-        "y": 125,
+        "connected": [
+          "up-the-beat",
+          "the-devil-does-bargain",
+          "minor-buff-13",
+          "minor-buff-65",
+          "minor-buff-53"
+        ],
+        "config": {
+          "texture": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "tint": null
+        },
         "tier": null
       }
     ],
     "autoUnlock": [],
     "originSlug": null,
-    "variant": null,
-    "mode": null,
+    "variant": "multi",
+    "mode": "shared",
     "global": true,
     "webs": [],
     "design": {
       "arena": "physical",
       "approach": "finesse",
-      "archetype": "Support"
+      "archetype": "support"
     },
     "publication": {
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
+      ],
+      "notes": ""
     }
   },
   "_id": "DejWRv29FwiYyyeE",
