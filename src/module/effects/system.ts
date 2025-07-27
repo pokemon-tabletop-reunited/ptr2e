@@ -29,6 +29,16 @@ export default abstract class ActiveEffectSystem extends HasEmbed(
         initial: false,
         nullable: false,
       }),
+      removeAfterAttacking: new fields.BooleanField({
+        required: true,
+        initial: false,
+        nullable: false,
+      }),
+      removeAfterAttacked: new fields.BooleanField({
+        required: true,
+        initial: false,
+        nullable: false,
+      }),
       stacks: new fields.NumberField({ required: true, initial: 0, min: 0, nullable: false }),
     };
   }
@@ -64,5 +74,7 @@ export default interface ActiveEffectSystem
 export interface ActiveEffectSystemSchema extends foundry.data.fields.DataSchema, TraitsSchema, SlugSchema, ChangesSchema {
   removeAfterCombat: foundry.data.fields.BooleanField<boolean, boolean, true, false, true>;
   removeOnRecall: foundry.data.fields.BooleanField<boolean, boolean, true, false, true>;
+  removeAfterAttacking: foundry.data.fields.BooleanField<boolean, boolean, true, false, true>;
+  removeAfterAttacked: foundry.data.fields.BooleanField<boolean, boolean, true, false, true>;
   stacks: foundry.data.fields.NumberField<number, number, true, false, true>;
 }

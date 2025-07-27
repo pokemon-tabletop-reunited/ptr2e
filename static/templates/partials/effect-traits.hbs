@@ -7,12 +7,14 @@
     </header>
     {{/if}}
     <main>
+        {{#if (or attack.category attack.types)}}
         <aside>
             {{{getIcon attack.category}}}
             {{#each attack.types as |type|}}
             {{{getIcon type}}}
             {{/each}}
         </aside>
+        {{/if}}
         {{#if attack.description}}
         <article>
           {{{attack.description}}}

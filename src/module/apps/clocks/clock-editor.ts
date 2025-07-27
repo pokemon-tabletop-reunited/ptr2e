@@ -17,25 +17,21 @@ export default class ClockEditor extends foundry.applications.api.HandlebarsAppl
     this.clock = clock;
   }
 
-  static override DEFAULT_OPTIONS = fu.mergeObject(
-    super.DEFAULT_OPTIONS,
-    {
-      id: "clock-editor-{id}",
-      classes: ["clock-editor"],
-      tag: "form",
-      window: {
-        frame: true,
-        positioned: true,
-        minimizable: false,
-      },
-      form: {
-        handler: ClockEditor.#submit,
-        closeOnSubmit: true,
-        submitOnChange: false,
-      },
+  static override DEFAULT_OPTIONS = {
+    id: "clock-editor-{id}",
+    classes: ["clock-editor"],
+    tag: "form",
+    window: {
+      frame: true,
+      positioned: true,
+      minimizable: false,
     },
-    { inplace: false }
-  );
+    form: {
+      handler: ClockEditor.#submit,
+      closeOnSubmit: true,
+      submitOnChange: false,
+    },
+  } as unknown as Omit<DeepPartial<foundry.applications.api.ApplicationConfiguration>, "uniqueId">;
 
   static override PARTS = {
     clocks: {
@@ -74,9 +70,9 @@ export default class ClockEditor extends foundry.applications.api.HandlebarsAppl
 
     if (partId === "clocks") {
       const dropdown = htmlElement.querySelector<HTMLSelectElement>("ul.dropdown");
-      if(!dropdown) return;
+      if (!dropdown) return;
 
-      for(const option of dropdown.children) {
+      for (const option of dropdown.children) {
         option.addEventListener("mousedown", () => {
           const value = (option as HTMLElement).dataset.value;
           if (!value) return;
@@ -99,7 +95,7 @@ export default class ClockEditor extends foundry.applications.api.HandlebarsAppl
     event.preventDefault();
 
     if (this.clock) {
-      if(this.clock.parent instanceof ActorSystemPTR2e) {
+      if (this.clock.parent instanceof ActorSystemPTR2e) {
         const clocks = fu.duplicate(this.clock.parent._source.clocks);
         const index = clocks.findIndex((c) => c.id === this.clock!.id);
         if (index === -1) {
@@ -112,7 +108,7 @@ export default class ClockEditor extends foundry.applications.api.HandlebarsAppl
         else {
           clocks[index] = fu.mergeObject(clocks[index], formData.object as SourceFromSchema<ClockSchema>);
         }
-        return this.clock.parent.parent.update({"system.clocks": clocks});
+        return this.clock.parent.parent.update({ "system.clocks": clocks });
       }
 
       return game.ptr.clocks.db.updateClock(

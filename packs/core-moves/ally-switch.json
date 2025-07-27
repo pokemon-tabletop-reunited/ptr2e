@@ -10,16 +10,50 @@
         "name": "Ally Switch",
         "type": "attack",
         "traits": [
-          "requires-rework"
+          "priority-2",
+          "teleport"
         ],
         "range": {
-          "target": "creature",
-          "distance": 5,
+          "target": "ally",
+          "distance": 10,
           "unit": "m"
         },
         "cost": {
           "activation": "simple",
-          "powerPoints": 6
+          "powerPoints": 4,
+          "priority": 2
+        },
+        "category": "status",
+        "power": null,
+        "accuracy": 10,
+        "types": [
+          "psychic"
+        ],
+        "description": "<p>Effect: The user switches places with the target, as per Teleport Movement. On miss, the user still takes the target’s spot, but the target’s location Scatters (as per [Fling]). If the user or target are larger than the other, the GM decides how creatures in proximity to the relocated creature are displaced.</p>",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      },
+      {
+        "slug": "ally-switch-intercept",
+        "name": "Ally Switch (Intercept)",
+        "type": "attack",
+        "traits": [
+          "interrupt-5",
+          "delay-2",
+          "teleport"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 10,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "simple",
+          "delay": 2,
+          "powerPoints": 4,
+          "trigger": "An ally is targeted by another creature’s Attack or Action."
         },
         "category": "status",
         "power": null,
@@ -27,9 +61,10 @@
         "types": [
           "psychic"
         ],
-        "description": "<p>Effect: The user and the selected Ally switch locations instantly.</p>",
+        "description": "<p>Trigger: An ally is targeted by another creature’s Attack or Action.</p><p>Effect: The user switches places with the target, as per Teleport Movement, and becomes the target of the triggering Attack or Action. On miss, the user still takes the target’s spot, but the target’s location Scatters (as per [Fling]). If the user or target are larger than the other, the GM decides how creatures in proximity to the relocated creature are displaced.</p>",
         "contestType": "",
         "contestEffect": "",
+        "variant": "ally-switch",
         "free": false,
         "slot": null
       }

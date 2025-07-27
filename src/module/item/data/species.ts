@@ -179,40 +179,22 @@ class SpeciesSystem extends SpeciesExtension {
           uuid: new fields.DocumentUUIDField(),
         }), { required: true, initial: [], label: "PTR2E.FIELDS.abilities.master.label", },),
       }),
-      movement: new fields.SchemaField({
-        primary: new fields.ArrayField(
-          new fields.SchemaField({
-            type: new SlugField({
-              required: true,
-              blank: true,
-              nullable: false,
-              initial: "",
-            }),
-            value: new fields.NumberField({ required: true, min: 0 }),
-          }),
-          {
+      movement: new fields.ArrayField(
+        new fields.SchemaField({
+          type: new SlugField({
             required: true,
-            initial: [],
-            label: "PTR2E.FIELDS.movement.primary.label",
-          }
-        ),
-        secondary: new fields.ArrayField(
-          new fields.SchemaField({
-            type: new SlugField({
-              required: true,
-              blank: true,
-              nullable: false,
-              initial: "",
-            }),
-            value: new fields.NumberField({ required: true, min: 0 }),
+            blank: true,
+            nullable: false,
+            initial: "",
           }),
-          {
-            required: true,
-            initial: [],
-            label: "PTR2E.FIELDS.movement.secondary.label",
-          }
-        ),
-      }),
+          value: new fields.NumberField({ required: true, min: 0 }),
+        }),
+        {
+          required: true,
+          initial: [],
+          label: "PTR2E.FIELDS.movement.primary.label",
+        }
+      ),
       skills: new CollectionField(new fields.EmbeddedDataField(SkillPTR2e), "slug", {
         initial: getInitialSkillList,
       }),
@@ -264,6 +246,11 @@ class SpeciesSystem extends SpeciesExtension {
           return { slug: g, uuid: null };
         });
       }
+    }
+    //@ts-expect-error - Old typing
+    if (!Array.isArray(source.movement) && (source.movement.primary?.length || source.movement.secondary?.length)) {
+      //@ts-expect-error - Old typing
+      source.movement = [...Array.from(source.movement.primary ?? []), ...Array.from(source.movement.secondary ?? [])].filter(m => !!m)
     }
     return super.migrateData(source);
   }
@@ -364,7 +351,7 @@ class SpeciesSystem extends SpeciesExtension {
     super.prepareBaseData();
 
     if (!this.evolutions) {
-      const uuid = this.parent.flags.core?.sourceId ?? this.parent.uuid;
+      const uuid = (this.parent.flags.core?.sourceId || this.parent._stats?.compendiumSource) ?? this.parent.uuid;
       const result = fu.parseUuid(uuid);
       if (result.documentId) {
         this.evolutions = new EvolutionData({
@@ -526,9 +513,9 @@ class SpeciesSystem extends SpeciesExtension {
 
     const evolutions = this.evolutions ? this.evolutions : {
       name: this.parent.slug,
-      uuid: this.parent.flags?.core?.sourceId ?? this.parent.uuid,
+      uuid: (this.parent.flags?.core?.sourceId || this.parent._stats.compendiumSource) ?? this.parent.uuid,
     } as EvolutionData;
-    if (!evolutions.uuid) evolutions.uuid = this.parent.flags?.core?.sourceId ?? this.parent.uuid;
+    if (!evolutions.uuid) evolutions.uuid = (this.parent.flags?.core?.sourceId || this.parent._stats.compendiumSource) ?? this.parent.uuid;
 
     for await (const [evolution, depth] of recursiveEvolution(evolutions)) {
       const data = await this.createEvolutionPerk(evolution, isShiny);
@@ -916,7 +903,14 @@ export interface SpeciesSchema extends foundry.data.fields.DataSchema, TraitsSch
   size: foundry.data.fields.SchemaField<SizeSchema, SourceFromSchema<SizeSchema>, ModelPropsFromSchema<SizeSchema>>;
   diet: foundry.data.fields.SetField<SlugField<string, string, true, false, true>, string[], Set<string>, true, false, true>;
   abilities: foundry.data.fields.SchemaField<AbilitySchema, SourceFromSchema<AbilitySchema>, ModelPropsFromSchema<AbilitySchema>>;
-  movement: foundry.data.fields.SchemaField<MovementSchema, SourceFromSchema<MovementSchema>, ModelPropsFromSchema<MovementSchema>>;
+  movement: foundry.data.fields.ArrayField<
+    foundry.data.fields.SchemaField<MovementTypeSchema, SourceFromSchema<MovementTypeSchema>, ModelPropsFromSchema<MovementTypeSchema>>,
+    SourcePropFromDataField<MovementTypeSchema>[],
+    ModelPropsFromSchema<MovementTypeSchema>[],
+    true,
+    false,
+    true
+  >;
   skills: CollectionField<foundry.data.fields.EmbeddedDataField<SkillPTR2e>>;
   moves: foundry.data.fields.SchemaField<MovesSchema, SourceFromSchema<MovesSchema>, ModelPropsFromSchema<MovesSchema>>;
   captureRate: foundry.data.fields.NumberField<number, number, true, false, true>;
@@ -955,25 +949,6 @@ export interface AbilityReferenceSchema extends foundry.data.fields.DataSchema {
 }
 
 export type AbilityReference = Required<{ slug: string, uuid: string }>;
-
-interface MovementSchema extends foundry.data.fields.DataSchema {
-  primary: foundry.data.fields.ArrayField<
-    foundry.data.fields.SchemaField<MovementTypeSchema, SourceFromSchema<MovementTypeSchema>, ModelPropsFromSchema<MovementTypeSchema>>,
-    SourcePropFromDataField<MovementTypeSchema>[],
-    ModelPropsFromSchema<MovementTypeSchema>[],
-    true,
-    false,
-    true
-  >;
-  secondary: foundry.data.fields.ArrayField<
-    foundry.data.fields.SchemaField<MovementTypeSchema, SourceFromSchema<MovementTypeSchema>, ModelPropsFromSchema<MovementTypeSchema>>,
-    SourcePropFromDataField<MovementTypeSchema>[],
-    ModelPropsFromSchema<MovementTypeSchema>[],
-    true,
-    false,
-    true
-  >;
-}
 
 interface MovementTypeSchema extends foundry.data.fields.DataSchema {
   type: SlugField<string, string, true, false, true>;

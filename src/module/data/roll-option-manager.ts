@@ -60,9 +60,9 @@ export default class RollOptionManager<TParent extends ActorPTR2e | ItemPTR2e | 
 
     if (!this.document.flags.ptr2e)
       this.document.flags.ptr2e = {
-        rollOptions: { all: {}, item: {}, effect: {}, self: {}, trait: {}, clocks: {}, "change-selections": {}, immunities: {} },
+        rollOptions: { all: {}, item: {}, effect: {}, self: {}, trait: {}, clocks: {}, "change-selections": {}, immunities: {}, adaptable: {} },
       };
-    else this.document.flags.ptr2e.rollOptions = { all: {}, item: {}, effect: {}, self: {}, trait: {}, clocks: {}, "change-selections": {}, immunities: {} };
+    else this.document.flags.ptr2e.rollOptions = { all: {}, item: {}, effect: {}, self: {}, trait: {}, clocks: {}, "change-selections": {}, immunities: {}, adaptable: {} };
 
     this.#initialized = true;
 
@@ -78,6 +78,7 @@ export const RollOptionDomains = {
   clocks: "clocks",
   "change-selections": "change-selections",
   immunities: "immunities",
+  adaptable: "adaptable",
 };
 export type RollOptions = {
   [domain in keyof typeof RollOptionDomains]: Record<string, boolean>;

@@ -138,6 +138,9 @@ declare global {
          */
         protected _sortCombatants(a: Combatant<this>, b: Combatant<this>): number;
 
+        clearMovementHistories(combatants?: Iterable<Combatant<this>>): Promise<void>;
+        protected _clearMovementHistoryOnStartTurn(combatant: Combatant<this>, context: object): Promise<void>;
+
         /* -------------------------------------------- */
         /*  Event Handlers                              */
         /* -------------------------------------------- */
@@ -214,7 +217,7 @@ declare global {
          * This method only executes for one designated GM user. If no GM users are present this method will not be called.
          * @param combatant The Combatant whose turn just ended
          */
-        protected _onEndTurn(combatant: Combatant<this>): Promise<void>;
+        protected _onEndTurn(combatant: Combatant<this>, context: Record<string, unknown>): Promise<void>;
 
         /**
          * A workflow that occurs at the end of each Combat Round.
@@ -222,7 +225,7 @@ declare global {
          * This can be overridden to implement system-specific combat tracking behaviors.
          * This method only executes for one designated GM user. If no GM users are present this method will not be called.
          */
-        protected _onEndRound(): Promise<void>;
+        protected _onEndRound(context: Record<string, unknown>): Promise<void>;
 
         /**
          * A workflow that occurs at the start of each Combat Round.
@@ -230,7 +233,7 @@ declare global {
          * This can be overridden to implement system-specific combat tracking behaviors.
          * This method only executes for one designated GM user. If no GM users are present this method will not be called.
          */
-        protected _onStartRound(): Promise<void>;
+        protected _onStartRound(context: Record<string, unknown>): Promise<void>;
 
         /**
          * A workflow that occurs at the start of each Combat Turn.
@@ -239,7 +242,12 @@ declare global {
          * This method only executes for one designated GM user. If no GM users are present this method will not be called.
          * @param combatant The Combatant whose turn just started
          */
-        protected _onStartTurn(combatant: Combatant<this>): Promise<void>;
+        protected _onStartTurn(combatant: Combatant<this>, context: Record<string, unknown>): Promise<void>;
+
+        /**
+         * Update active effect durations for all actors present in this Combat encounter.
+         */
+        updateCombatantActors(): void;
     }
 
     interface Combat<TSchema extends TypeDataModel = TypeDataModel> extends ClientBaseCombat {

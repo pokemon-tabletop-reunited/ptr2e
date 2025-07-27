@@ -40,6 +40,8 @@ interface RollContextParams<
   melee?: boolean;
   /** Action traits associated with the roll */
   traits?: string[] | Collection<Trait> | null;
+
+  skipEffectRolls?: boolean;
 }
 
 interface CheckContext<
@@ -88,6 +90,7 @@ interface AttackSelf<
   statistic: TStatistic,
   item: TItem,
   attack: AttackPTR2e,
+  action: ActionPTR2e,
   modifiers: ModifierPTR2e[]
 }
 

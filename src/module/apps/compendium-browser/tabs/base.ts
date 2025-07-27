@@ -72,7 +72,7 @@ export abstract class CompendiumBrowserTab {
       processTerm: (term): string[] | null => {
         if (term.length <= 1 || CompendiumDirectoryPTR2e.STOP_WORDS.has(term)) return null;
         return Array.from(wordSegmenter.segment(term)).map(t =>
-          SearchFilter.cleanQuery(t.segment.toLocaleLowerCase(game.i18n.lang)).replace(/['"]/g, "")
+          foundry.applications.ux.SearchFilter.cleanQuery(t.segment.toLocaleLowerCase(game.i18n.lang)).replace(/['"]/g, "")
         )
           .filter(t => t.length > 1);
       },
@@ -107,7 +107,7 @@ export abstract class CompendiumBrowserTab {
     }
 
     this.currentIndex = (() => {
-      const searchText = SearchFilter.cleanQuery(this.filterData.search.text);
+      const searchText = foundry.applications.ux.SearchFilter.cleanQuery(this.filterData.search.text);
       if (searchText) {
         const searchResult = this.searchEngine.search(searchText);
         return this.sortResult(searchResult.filter(this.filterIndexData.bind(this)));
@@ -172,7 +172,7 @@ export abstract class CompendiumBrowserTab {
     const indexData = fn ? await fn(this.getIndexData(start)) : this.getIndexData(start);;
     const liElements: HTMLLIElement[] = [];
     for (const entry of indexData) {
-      const htmlString = await renderTemplate(this.templatePath, {
+      const htmlString = await foundry.applications.handlebars.renderTemplate(this.templatePath, {
         entry: entry,
         filterData: this.filterData,
       });
@@ -342,7 +342,7 @@ export abstract class CompendiumBrowserTab {
       return;
     }
 
-    const content = await renderTemplate("systems/ptr2e/templates/compendium-browser/roll-table-dialog.hbs", {
+    const content = await foundry.applications.handlebars.renderTemplate("systems/ptr2e/templates/compendium-browser/roll-table-dialog.hbs", {
       count: this.currentIndex.length,
     });
     Dialog.confirm({
@@ -380,7 +380,7 @@ export abstract class CompendiumBrowserTab {
       return;
     }
 
-    const content = await renderTemplate("systems/ptr2e/templates/compendium-browser/roll-table-dialog.hbs", {
+    const content = await foundry.applications.handlebars.renderTemplate("systems/ptr2e/templates/compendium-browser/roll-table-dialog.hbs", {
       count: this.currentIndex.length,
       rollTables: game.tables.contents,
     });

@@ -32,6 +32,16 @@ jobs:
             - name: Create Wiki Pages
               run: |
                   npm ci
+                  rm -r ptr2e-wiki/data/abilities/**/*.md
+                  rm -r ptr2e-wiki/data/items/consumables/**/*.md
+                  rm -r ptr2e-wiki/data/items/equipment/**/*.md
+                  rm -r ptr2e-wiki/data/items/gear/**/*.md
+                  rm -r ptr2e-wiki/data/items/weapons/**/*.md
+                  rm -r ptr2e-wiki/data/lists/**/*.md
+                  rm -r ptr2e-wiki/data/moves/**/*.md
+                  rm -r ptr2e-wiki/data/perks/**/*.md
+                  rm -r ptr2e-wiki/data/species/**/*.md
+                  rm -r ptr2e-wiki/data/traits/**/*.md
                   npm run sync:wiki
 
             - name: Git Push Wiki Pages
