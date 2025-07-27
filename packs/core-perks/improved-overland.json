@@ -14,15 +14,20 @@
         "slug": "improved-overland",
         "description": "<p>Improve your Overland Movement Allowance by 2.</p>",
         "cost": {
-          "activation": "free"
+          "activation": "free",
+          "powerPoints": 0
         },
         "type": "passive",
         "traits": [],
         "img": "icons/svg/explosion.svg",
         "range": {
           "target": "enemy",
-          "unit": "m"
-        }
+          "unit": "m",
+          "distance": 0
+        },
+        "variant": null,
+        "ephemeralVariant": false,
+        "hidden": false
       }
     ],
     "slug": "improved-overland",
@@ -455,19 +460,21 @@
       }
     ],
     "autoUnlock": [],
-    "global": true,
+    "global": false,
     "webs": [],
     "design": {
       "arena": "physical",
       "approach": "resilience",
-      "archetype": "Mobility"
+      "archetype": "mobility"
     },
     "publication": {
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
-    }
+      ],
+      "notes": ""
+    },
+    "originSlug": null
   },
   "_id": "FsXHfqJTP8eN5X1x",
   "img": "systems/ptr2e/img/perk-icons/Exploration.svg",
@@ -492,7 +499,13 @@
             "type": "roll-option",
             "value": "improved-overland",
             "domain": "all",
-            "count": true
+            "count": true,
+            "key": "",
+            "mode": 2,
+            "predicate": [],
+            "ignored": false,
+            "suboptions": [],
+            "state": true
           }
         ],
         "slug": null,
@@ -521,12 +534,13 @@
       "_stats": {
         "compendiumSource": "Actor.zzmajvZtYY3MnEp5.Item.pWRJu6d1FvCFfOOO.ActiveEffect.evt0BhlYhiMcSDwC",
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.342",
         "systemId": "ptr2e",
         "systemVersion": "0.10.0-alpha.2.4.3",
         "createdTime": 1729182325482,
         "modifiedTime": 1729182325482,
-        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
+        "lastModifiedBy": "Kc3DOunCh3ClAeHS",
+        "exportSource": null
       }
     }
   ]

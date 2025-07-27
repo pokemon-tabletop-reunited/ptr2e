@@ -12,8 +12,7 @@
         "traits": [
           "zenith",
           "crushing",
-          "contact",
-          "flinch-4"
+          "contact"
         ],
         "range": {
           "target": "emanation",
@@ -31,7 +30,7 @@
         "types": [
           "normal"
         ],
-        "description": "<p>Trigger: User's partner uses Z-Pose! and triggers the appropriate Z-Power-Crystal</p><p>Effect: The user may freely move up to their Overland Score when declaring this attack. On hit, all valid targets are Flinched.</p><p>Requirement: [Snorlax] Z-Power-Crystal as an Accessory Item and Giga Impact on the user's Active List.</p>",
+        "description": "<p>Trigger: User's partner uses Z-Pose! and triggers the appropriate Z-Power-Crystal</p><p>Effect: The user may freely move up to their Overland Score when declaring this attack. On hit, all valid targets are Delayed by 40%.</p><p>Requirement: [Snorlax] Z-Power-Crystal as an Accessory Item and Giga Impact on the user's Active List.</p>",
         "contestType": "",
         "contestEffect": "",
         "free": true,
@@ -48,5 +47,45 @@
     }
   },
   "_id": "cx9q7nGDUItDoZd9",
-  "effects": []
+  "effects": [
+    {
+      "name": "Pulverizing Pancake",
+      "type": "passive",
+      "_id": "z7y1zzA2z4Rf7Nwm",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "pulverizing-pancake-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.advanceffectitem",
+            "predicate": [],
+            "chance": 100,
+            "dontMerge": true,
+            "affects": "target",
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "system.amount",
+                "value": -40
+              },
+              {
+                "mode": 5,
+                "property": "name",
+                "value": "Delay 40%"
+              }
+            ]
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      }
+    }
+  ]
 }

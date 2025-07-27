@@ -14,7 +14,8 @@
         "type": "attack",
         "range": {
           "target": "ally",
-          "unit": "m"
+          "unit": "m",
+          "distance": 0
         },
         "cost": {
           "activation": "simple",
@@ -26,7 +27,17 @@
         ],
         "category": "status",
         "free": true,
-        "predicate": []
+        "predicate": [],
+        "variant": null,
+        "ephemeralVariant": false,
+        "contestType": "",
+        "contestEffect": "",
+        "slot": null,
+        "summon": null,
+        "defaultVariant": null,
+        "flingItemId": "",
+        "offensiveStat": null,
+        "defensiveStat": null
       }
     ],
     "slug": "masters-whip",
@@ -58,7 +69,8 @@
           "bloodthirst",
           "root-6",
           "climatologist",
-          "emergency-retreat"
+          "emergency-retreat",
+          "driven"
         ],
         "config": {
           "alpha": null,
@@ -86,7 +98,10 @@
         "PTR 2e Team"
       ],
       "notes": ""
-    }
+    },
+    "originSlug": null,
+    "variant": null,
+    "mode": null
   },
   "effects": [
     {
@@ -148,12 +163,13 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.342",
         "systemId": "ptr2e",
         "systemVersion": "1.2.1.beta",
         "createdTime": 1742128847826,
         "modifiedTime": 1745186004290,
-        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+        "lastModifiedBy": "mK35yvCqCgiTUvKf",
+        "exportSource": null
       }
     }
   ]

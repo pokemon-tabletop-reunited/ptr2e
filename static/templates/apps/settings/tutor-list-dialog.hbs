@@ -1,0 +1,4 @@
+<main class="dialog-form standard-form">
+  {{formGroup fields.slug value=list.slug localize=true disabled=(is list.type "universal")}}
+  {{formGroup fields.type value=list.type choices=typeChoices localize=true disabled=(is list.type "universal")}}
+</main>

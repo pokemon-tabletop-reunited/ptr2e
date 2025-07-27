@@ -15,7 +15,7 @@
       "notes": ""
     },
     "actions": [],
-    "description": "<p>You've trained your Pokemon in the way of the Duelist.<br><br>As a simple action costing 2PP, you may designate one member of your Team (or another ally, if combined with @UUID[Compendium.ptr2e.core-perks.13JRGGWEpyfuZZuG]{Tactician}) and one enemy as Duel Partners, both gaining the @Affliction[duel] Affliction for 3 activations.<br><br>If used during a League Combat Rules scenario, this may be used as a @Trait[command] Action in the same way as Styles are.</p>",
+    "description": "<p>Effect: As a @Trait[command] Simple Action costing 3PP, the user grants a creature @Affliction[duel 3], with a creature of the target's choosing becoming the target's Duel Partner, also gaining @Affliction[duel 3].</p>",
     "traits": [
       "trainer",
       "command"
@@ -32,7 +32,31 @@
     },
     "global": true,
     "webs": [],
-    "nodes": []
+    "nodes": [
+      {
+        "x": 109,
+        "y": 120,
+        "hidden": false,
+        "type": "normal",
+        "connected": [
+          "evasive-style",
+          "minor-buff-48",
+          "rapid-fire-style",
+          "minor-buff-8"
+        ],
+        "config": {
+          "texture": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "tint": null
+        },
+        "tier": null
+      }
+    ],
+    "slug": "duelist-trainer",
+    "originSlug": null,
+    "variant": null,
+    "mode": null
   },
   "img": "systems/ptr2e/img/perk-icons/Trainer.svg",
   "effects": [],

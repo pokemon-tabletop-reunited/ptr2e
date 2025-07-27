@@ -347,7 +347,7 @@ export class ActionEditor<
       if ((input as HTMLInputElement).value === "") (input as HTMLInputElement).value = "[]";
     });
 
-    const formData = new FormDataExtended(element);
+    const formData = new foundry.applications.ux.FormDataExtended(element);
 
 
 

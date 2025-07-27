@@ -17,7 +17,7 @@
       }
     ],
     "cost": 4,
-    "description": "<p>Trigger: An ally gains @Affliction[fainted].</p><p>Effect: The target is healed to 1HP, and is healed of one Stack of @Affliction[weary]. Then, the target is cleared of any [Major Afflictions] and [Minor Afflictions] and recover @Tick[5].</p>",
+    "description": "<p>Trigger: An ally gains @Affliction[fainted].</p><p>Effect: The user can spend 8 PP as a Complex Action at [interrupt-4] when a creature at a range of 10m of the user gains @Affliction[fainted] to revive the target to @HP[5 tick] and heal have it lose 1 Stack of @Affliction[weary], and the user is Flinched 40%.</p>",
     "actions": [
       {
         "name": "Keep Fighting!",
@@ -25,9 +25,11 @@
         "description": "<p>Effect: The target is healed to 1HP, and is healed of one Stack of @Affliction[weary]. Then, the target is cleared of any [Major Afflictions] and [Minor Afflictions] and recover @Tick[5].</p>",
         "type": "generic",
         "cost": {
-          "activation": "free",
-          "powerPoints": 10,
-          "trigger": "An ally gains @Affliction[fainted]."
+          "activation": "complex",
+          "powerPoints": 8,
+          "trigger": "An ally gains @Affliction[fainted].",
+          "delay": null,
+          "priority": null
         },
         "range": {
           "target": "ally",
@@ -38,7 +40,9 @@
           "interrupt-4",
           "healing"
         ],
-        "img": "systems/ptr2e/img/perk-icons/Tactician.svg"
+        "img": "systems/ptr2e/img/perk-icons/Tactician.svg",
+        "variant": null,
+        "ephemeralVariant": false
       }
     ],
     "slug": "keep-fighting",
@@ -55,16 +59,14 @@
         "type": "normal",
         "connected": [
           "hold-the-line",
-          "resolute-watcher"
+          "resolute-watcher",
+          "rapid-fire-commands"
         ],
         "config": {
           "texture": "systems/ptr2e/img/perk-icons/Tactician.svg",
-          "alpha": null,
           "backgroundColor": null,
           "borderColor": null,
-          "borderWidth": null,
-          "tint": null,
-          "scale": null
+          "tint": null
         },
         "tier": null
       }
@@ -83,7 +85,10 @@
         "PTR 2e Team"
       ],
       "notes": ""
-    }
+    },
+    "originSlug": null,
+    "variant": null,
+    "mode": null
   },
   "_id": "3RMFsZTuMdDhCyZg",
   "img": "systems/ptr2e/img/perk-icons/Tactician.svg",

@@ -193,7 +193,7 @@ export default class TooltipsPTR2e {
       const effectId = game.tooltip.element?.dataset.id;
       if (!effectId) return null;
 
-      const parent = await fromUuid<ActorPTR2e>(
+      const parent = await fu.fromUuid<ActorPTR2e>(
         (game.tooltip.element?.closest("[data-parent]") as HTMLElement)?.dataset.parent
       );
       if (!parent) return null;
@@ -256,7 +256,7 @@ export default class TooltipsPTR2e {
         .parent;
       if (!parentUuid) return false;
 
-      const parent = (await fromUuid(parentUuid)) as ActorPTR2e | ItemPTR2e;
+      const parent = (await fu.fromUuid(parentUuid)) as ActorPTR2e | ItemPTR2e;
       if (!parent) return false;
 
       const attack = parent.actions.get(attackSlug) as ActionPTR2e | undefined;
@@ -269,7 +269,7 @@ export default class TooltipsPTR2e {
     const attackUuid = game.tooltip.element?.dataset.uuid;
     if (!attackUuid) return false;
 
-    const attack = (await fromUuid(attackUuid)) as unknown as ActionPTR2e | undefined;
+    const attack = (await fu.fromUuid(attackUuid)) as unknown as ActionPTR2e | undefined;
     if (!(attack instanceof ActionPTR2e)) return false;
 
     return await this.#createActionTooltip(attack);
@@ -326,7 +326,7 @@ export default class TooltipsPTR2e {
           event.stopPropagation();
 
           const { actionUuid } = button.dataset;
-          const action = await fromUuid(actionUuid) as unknown as ActionPTR2e;
+          const action = await fu.fromUuid(actionUuid) as unknown as ActionPTR2e;
           if (!action) return void ui.notifications.error("Action not found.");
 
           const ppCost = action.cost.powerPoints
@@ -341,6 +341,37 @@ export default class TooltipsPTR2e {
             "system.powerPoints.value": actor.system.powerPoints.value - ppCost,
           })
           ui.notifications.info(`You have ${actor.system.powerPoints.value} power points remaining. (Used ${ppCost})`);
+        });
+      }
+      else if (button.classList.contains("create-summon")) {
+        button.addEventListener("click", async (event) => {
+          event.preventDefault();
+          event.stopPropagation();
+
+          if (!game.combat) return void ui.notifications.error("You must be in combat to summon a creature.");
+
+          const { actionUuid } = button.dataset;
+          const action = await fu.fromUuid(actionUuid) as unknown as ActionPTR2e;
+          if (!action) return void ui.notifications.error("Action not found.");
+          if (!(["attack", "generic"].includes(action?.type) && action.summon)) return void ui.notifications.error("Action not found on item.");
+
+          const summonItem = await fu.fromUuid<SummonPTR2e>((action as AttackPTR2e).summon);
+          if (!summonItem) return void ui.notifications.error("Summon not found on action.");
+
+          const combatants = await game.combat.createEmbeddedDocuments("Combatant", [{
+            name: summonItem.name,
+            type: "summon",
+            system: {
+              owner: action.actor?.uuid ?? null,
+              item: { ...summonItem.clone({ "system.owner": action.actor?.uuid ?? null }).toObject(), uuid: summonItem.uuid }
+            }
+          }])
+
+          if (!combatants.length) return void ui.notifications.error("Failed to create summon.");
+
+          ChatMessage.create({
+            content: `Added: ${(combatants as CombatantPTR2e[]).map(c => c.link).join(", ")} to Combat.`,
+          });
         });
       }
     }
@@ -358,7 +389,7 @@ export default class TooltipsPTR2e {
         .parent;
       if (!parentUuid) return false;
 
-      const parent = (await fromUuid(parentUuid)) as ActorPTR2e | ItemPTR2e;
+      const parent = (await fu.fromUuid(parentUuid)) as ActorPTR2e | ItemPTR2e;
       if (!parent) return false;
 
       const attack = parent.actions.attack!.get(attackSlug) as AttackPTR2e | undefined;
@@ -371,7 +402,7 @@ export default class TooltipsPTR2e {
     const attackUuid = game.tooltip.element?.dataset.uuid;
     if (!attackUuid) return false;
 
-    const attack = (await fromUuid(attackUuid)) as unknown as AttackPTR2e | undefined;
+    const attack = (await fu.fromUuid(attackUuid)) as unknown as AttackPTR2e | undefined;
     if (!(attack instanceof AttackPTR2e)) return false;
 
     return await this.#createAttackTooltip(attack);
@@ -428,7 +459,7 @@ export default class TooltipsPTR2e {
           event.stopPropagation();
 
           const { attackUuid } = button.dataset;
-          const action = await fromUuid(attackUuid) as unknown as AttackPTR2e;
+          const action = await fu.fromUuid(attackUuid) as unknown as AttackPTR2e;
           if (!action) return void ui.notifications.error("Action not found.");
 
           return action.delayAction();
@@ -441,7 +472,7 @@ export default class TooltipsPTR2e {
           event.stopPropagation();
 
           const { actionUuid } = button.dataset;
-          const action = await fromUuid(actionUuid) as unknown as ActionPTR2e;
+          const action = await fu.fromUuid(actionUuid) as unknown as ActionPTR2e;
           if (!action) return void ui.notifications.error("Action not found.");
 
           const ppCost = action.cost.powerPoints
@@ -466,11 +497,11 @@ export default class TooltipsPTR2e {
           if (!game.combat) return void ui.notifications.error("You must be in combat to summon a creature.");
 
           const { attackUuid } = button.dataset;
-          const action = await fromUuid(attackUuid) as unknown as ActionPTR2e;
+          const action = await fu.fromUuid(attackUuid) as unknown as ActionPTR2e;
           if (!action) return void ui.notifications.error("Action not found.");
-          if (!(action?.type === "attack" && action.summon)) return void ui.notifications.error("Action not found on item.");
+          if (!(["attack", "generic"].includes(action?.type) && action.summon)) return void ui.notifications.error("Action not found on item.");
 
-          const summonItem = await fromUuid<SummonPTR2e>((action as AttackPTR2e).summon);
+          const summonItem = await fu.fromUuid<SummonPTR2e>((action as AttackPTR2e).summon);
           if (!summonItem) return void ui.notifications.error("Summon not found on action.");
 
           const combatants = await game.combat.createEmbeddedDocuments("Combatant", [{
@@ -601,7 +632,7 @@ export default class TooltipsPTR2e {
     const uuid = element.dataset.message;
     if (!uuid) return false;
 
-    const message = (await fromUuid(uuid)) as ChatMessagePTR2e<DamageAppliedMessageSystem>;
+    const message = (await fu.fromUuid(uuid)) as ChatMessagePTR2e<DamageAppliedMessageSystem>;
     if (!message) return false;
 
     this.tooltip.classList.add("damage-info");
@@ -836,7 +867,7 @@ export default class TooltipsPTR2e {
     if (embedFigure?.classList.contains("no-tooltip") && embedFigure.dataset.uuid === uuid)
       return false;
 
-    const entity = (await fromUuid(uuid)) as ItemPTR2e | null;
+    const entity = (await fu.fromUuid(uuid)) as ItemPTR2e | null;
     if (!entity) return false;
 
     switch (entity.type) {

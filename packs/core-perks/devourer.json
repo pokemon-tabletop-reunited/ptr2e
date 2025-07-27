@@ -1,0 +1,57 @@
+{
+  "name": "Devourer",
+  "_id": "myHVSAQ7YlPxcfUU",
+  "type": "perk",
+  "img": "icons/creatures/abilities/mouth-teeth-rows-needles-purple.webp",
+  "effects": [],
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "publication": {
+      "source": "PTR2e Core",
+      "authors": [
+        "Dragoon"
+      ],
+      "notes": ""
+    },
+    "actions": [],
+    "slug": null,
+    "description": "<p>The user gains @UUID[Compendium.ptr2e.core-abilities.TQNGoLOtYTLLnoTY]{Jaws of Carnage} as a Tutored Ability.</p>",
+    "traits": [
+      "jaw",
+      "lockjaw"
+    ],
+    "prerequisites": [
+      "trait:lockjaw"
+    ],
+    "autoUnlock": [
+      "item:ability:jaws-of-carnage"
+    ],
+    "cost": 3,
+    "originSlug": null,
+    "design": {
+      "arena": "physical",
+      "approach": "resilience",
+      "archetype": null
+    },
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": [],
+    "nodes": [
+      {
+        "x": 99,
+        "y": 70,
+        "connected": [
+          "minor-buff-5",
+          "swallow-whole"
+        ],
+        "hidden": false,
+        "type": "normal",
+        "tier": null
+      }
+    ]
+  }
+}

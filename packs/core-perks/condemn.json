@@ -30,7 +30,17 @@
         "category": "status",
         "accuracy": 100,
         "free": true,
-        "predicate": []
+        "predicate": [],
+        "variant": null,
+        "ephemeralVariant": false,
+        "contestType": "",
+        "contestEffect": "",
+        "slot": null,
+        "summon": null,
+        "defaultVariant": null,
+        "flingItemId": "",
+        "offensiveStat": null,
+        "defensiveStat": null
       }
     ],
     "slug": "condemn",
@@ -61,7 +71,9 @@
       {
         "connected": [
           "hesitation",
-          "groomer"
+          "groomer",
+          "not-the-face",
+          "agitator"
         ],
         "config": {
           "alpha": null,
@@ -85,14 +97,18 @@
     "design": {
       "arena": "social",
       "approach": "power",
-      "archetype": "Socialite"
+      "archetype": "socialite"
     },
     "publication": {
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
-    }
+      ],
+      "notes": ""
+    },
+    "originSlug": null,
+    "variant": null,
+    "mode": null
   },
   "effects": [
     {
@@ -118,7 +134,8 @@
             ],
             "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "dontMerge": false
           },
           {
             "type": "roll-effect",
@@ -136,7 +153,8 @@
             ],
             "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "dontMerge": false
           }
         ],
         "slug": null,
@@ -165,12 +183,13 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.342",
         "systemId": "ptr2e",
         "systemVersion": "0.10.0-alpha.5.2.1",
         "createdTime": 1737935473142,
         "modifiedTime": 1737935537139,
-        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+        "lastModifiedBy": "mK35yvCqCgiTUvKf",
+        "exportSource": null
       }
     }
   ]

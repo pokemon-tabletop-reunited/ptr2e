@@ -19,15 +19,20 @@
         "slug": "type-tutoring",
         "description": "<p>You may count as the 'Source' during the Tutoring Downtime Activity for moves on the &lt;Type&gt;'s Tutor List, up to your grade, as if those moves where on your 'Known Attacks' list.</p>",
         "cost": {
-          "activation": "free"
+          "activation": "free",
+          "powerPoints": 0
         },
         "type": "passive",
         "traits": [],
         "img": "icons/svg/explosion.svg",
         "range": {
           "target": "enemy",
-          "unit": "m"
-        }
+          "unit": "m",
+          "distance": 0
+        },
+        "variant": null,
+        "ephemeralVariant": false,
+        "hidden": false
       }
     ],
     "slug": "type-tutoring",
@@ -49,7 +54,11 @@
           "improved-overland-1",
           "stat-iv-booster-1-1",
           "improved-overland-3",
-          "type-style"
+          "type-style",
+          "minor-buff-4",
+          "minor-buff-6",
+          "minor-buff-45",
+          "hostile-shadows"
         ],
         "config": {
           "texture": "systems/ptr2e/img/perk-icons/Trainer.svg",
@@ -74,7 +83,10 @@
         "PTR 2e Team"
       ],
       "notes": ""
-    }
+    },
+    "originSlug": null,
+    "variant": null,
+    "mode": null
   },
   "_id": "w40qBGGPJR3HimcE",
   "img": "systems/ptr2e/img/perk-icons/Trainer.svg",

@@ -28,7 +28,8 @@
           "distance": 0
         },
         "variant": null,
-        "hidden": false
+        "hidden": false,
+        "ephemeralVariant": false
       }
     ],
     "slug": "improved-flight",
@@ -225,18 +226,19 @@
     ],
     "autoUnlock": [],
     "originSlug": null,
-    "global": true,
+    "global": false,
     "webs": [],
     "design": {
       "arena": "physical",
       "approach": "power",
-      "archetype": "Mobility"
+      "archetype": "mobility"
     },
     "publication": {
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
+      ],
+      "notes": ""
     }
   },
   "_id": "zMt840jnFxHWURAj",
@@ -262,7 +264,13 @@
             "type": "roll-option",
             "value": "improved-flight",
             "domain": "all",
-            "count": true
+            "count": true,
+            "key": "",
+            "mode": 2,
+            "predicate": [],
+            "ignored": false,
+            "suboptions": [],
+            "state": true
           }
         ],
         "slug": null,
@@ -291,12 +299,13 @@
       "_stats": {
         "compendiumSource": "Compendium.ptr2e.core-perks.Item.zMt840jnFxHWURAj.ActiveEffect.OKJrZh7A4XkhSN30",
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.342",
         "systemId": "ptr2e",
         "systemVersion": "0.10.0-alpha.2.4.3",
         "createdTime": 1729187451168,
         "modifiedTime": 1729187465513,
-        "lastModifiedBy": "IcBpMqhFuTck9VpX"
+        "lastModifiedBy": "IcBpMqhFuTck9VpX",
+        "exportSource": null
       }
     }
   ]

@@ -15,10 +15,11 @@
       "notes": ""
     },
     "actions": [],
-    "description": "<p>You gain @UUID[Compendium.ptr2e.core-abilities.SMn7BHSs349uew78]{Scavenger} as a slotless ability while in the [Desperation 1/3] state.</p>",
+    "description": "<p>Effect: The user possesses @UUID[Compendium.ptr2e.core-abilities.SMn7BHSs349uew78]{Scavenger} as a Free Ability while you meet the @Trait[desperation-1-3] Condition.</p>",
     "traits": [
       "berserker",
-      "healing"
+      "healing",
+      "desperation-1-2"
     ],
     "prerequisites": [
       "trait:berserker"
@@ -32,7 +33,31 @@
     },
     "global": true,
     "webs": [],
-    "nodes": []
+    "nodes": [
+      {
+        "x": 75,
+        "y": 49,
+        "hidden": false,
+        "type": "normal",
+        "connected": [
+          "offering",
+          "i-get-knocked-down",
+          "minor-buff-49",
+          "minor-buff-10"
+        ],
+        "config": {
+          "texture": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "tint": null
+        },
+        "tier": null
+      }
+    ],
+    "slug": "wergild",
+    "originSlug": null,
+    "variant": null,
+    "mode": null
   },
   "img": "icons/commodities/currency/coin-oval-rune-copper.webp",
   "effects": [
@@ -97,12 +122,13 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.342",
         "systemId": "ptr2e",
         "systemVersion": "1.2.1.beta",
         "createdTime": null,
         "modifiedTime": null,
-        "lastModifiedBy": null
+        "lastModifiedBy": null,
+        "exportSource": null
       }
     }
   ],

@@ -69,7 +69,9 @@
         "traits": [],
         "removeAfterCombat": true,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
@@ -91,12 +93,13 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.346",
         "systemId": "ptr2e",
         "systemVersion": "0.10.0-alpha.2.0.3",
         "createdTime": 1722258319945,
         "modifiedTime": 1741609896104,
-        "lastModifiedBy": "IcBpMqhFuTck9VpX"
+        "lastModifiedBy": "IcBpMqhFuTck9VpX",
+        "exportSource": null
       }
     },
     {
@@ -110,7 +113,9 @@
             "type": "aura",
             "key": "",
             "value": 0,
-            "predicate": [],
+            "predicate": [
+              "blue-cascade:active"
+            ],
             "mode": 2,
             "priority": null,
             "ignored": false,
@@ -140,13 +145,30 @@
               "texture": null
             },
             "mergeExisting": true
+          },
+          {
+            "type": "roll-option",
+            "key": "",
+            "value": "blue-cascade:active",
+            "predicate": [],
+            "domain": "all",
+            "toggleable": true,
+            "count": false,
+            "state": true,
+            "label": "Blue Cascade",
+            "alwaysActive": false,
+            "mode": 2,
+            "ignored": false,
+            "suboptions": []
           }
         ],
         "slug": null,
         "traits": [],
         "removeAfterCombat": true,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
@@ -168,12 +190,13 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.346",
         "systemId": "ptr2e",
-        "systemVersion": "1.1.0.beta",
+        "systemVersion": "1.3.8.beta",
         "createdTime": 1741610126654,
-        "modifiedTime": 1741610199144,
-        "lastModifiedBy": "IcBpMqhFuTck9VpX"
+        "modifiedTime": 1753018352148,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf",
+        "exportSource": null
       }
     }
   ]

@@ -13,7 +13,7 @@
       "notes": ""
     },
     "actions": [],
-    "description": "<p>Whenever your Muse Clock is ticked, advance your next activation by 10%.</p>",
+    "description": "<p>Effect: When the user's Muse Clock is Ticked, they are Advanced 10%.</p>",
     "traits": [],
     "prerequisites": [
       "item:perk:muse"
@@ -27,7 +27,31 @@
     },
     "global": true,
     "webs": [],
-    "nodes": []
+    "nodes": [
+      {
+        "x": 145,
+        "y": 168,
+        "hidden": false,
+        "type": "normal",
+        "connected": [
+          "muse",
+          "minor-buff-33",
+          "minor-buff-15",
+          "wound-spring"
+        ],
+        "config": {
+          "texture": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "tint": null
+        },
+        "tier": null
+      }
+    ],
+    "slug": "dance-partner",
+    "originSlug": null,
+    "variant": null,
+    "mode": null
   },
   "img": "systems/ptr2e/img/perk-icons/Coordinator.svg",
   "effects": [],

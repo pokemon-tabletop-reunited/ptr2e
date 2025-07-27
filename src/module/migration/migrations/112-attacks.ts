@@ -3,8 +3,15 @@ import { MigrationBase } from "../base.ts"
 import { sluggify } from "@utils";
 import MoveSystem from "@item/data/move.ts";
 
-export class Migration111Attacks extends MigrationBase {
-  static override version = 0.111;
+/**
+ * Migration to update attack items with the latest action data.
+ * 
+ * The last 3 migrations (110, 111, and 112) all have been this migration, as long as no other migrations are added
+ * this one can be reused by simply upping the version number.
+ */
+
+export class Migration112Attacks extends MigrationBase {
+  static override version = 0.112;
 
   _map: Map<string, ItemPTR2e<MoveSystem>["_source"]> | null = null;
 

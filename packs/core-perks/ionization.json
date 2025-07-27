@@ -16,7 +16,7 @@
     },
     "actions": [],
     "slug": "ionization",
-    "description": "<p>Effect: The user gains their choice of Anionic or Cationic as a Tutored Ability.</p><p>NOTE: needs to become tiered.</p>",
+    "description": "<p>Effect: The user gains their choice of Anionic or Cationic as a Tutored Ability.</p>",
     "traits": [],
     "prerequisites": [
       {
@@ -24,9 +24,7 @@
           "trait:rock",
           "trait:steel",
           "trait:electric",
-          "trait:fire",
-          "trait:water",
-          "trait:ice"
+          "trait:ground"
         ]
       }
     ],
@@ -39,7 +37,29 @@
     },
     "global": true,
     "webs": [],
-    "nodes": []
+    "nodes": [
+      {
+        "x": 137,
+        "y": 29,
+        "hidden": false,
+        "type": "normal",
+        "connected": [
+          "stonecunning",
+          "shovel-hands",
+          "minor-buff-26"
+        ],
+        "config": {
+          "texture": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "tint": null
+        },
+        "tier": null
+      }
+    ],
+    "originSlug": null,
+    "variant": null,
+    "mode": null
   },
   "img": "icons/commodities/stone/masonry-block-cube-grey-teal.webp",
   "effects": [],

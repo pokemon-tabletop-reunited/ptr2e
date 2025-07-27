@@ -16,13 +16,13 @@
     },
     "actions": [],
     "slug": "cant-break-my-winning-streak",
-    "description": "<p>Effect: When the user or an ally uses Push Your Luck and fails, the user gains +2 Luck and Resolved 2.</p>",
+    "description": "<p>Effect: When the user spends Luck, that Luck cost is reduced by 2 (to a minimum Luck cost of 1). Whenever user activates a perk with a Luck-based Activation Cost they gain Resolved 2.</p>",
     "traits": [],
     "prerequisites": [
-      "item:perk:lets-go-gambling"
+      "item:perk:the-devil-does-bargain"
     ],
     "autoUnlock": [],
-    "cost": 1,
+    "cost": 2,
     "design": {
       "arena": "social",
       "approach": "finesse",
@@ -30,7 +30,30 @@
     },
     "global": true,
     "webs": [],
-    "nodes": []
+    "nodes": [
+      {
+        "x": 86,
+        "y": 188,
+        "hidden": false,
+        "type": "normal",
+        "connected": [
+          "up-the-beat",
+          "lets-go-gambling",
+          "lucky-duck",
+          "jockeying"
+        ],
+        "config": {
+          "texture": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "tint": null
+        },
+        "tier": null
+      }
+    ],
+    "originSlug": null,
+    "variant": null,
+    "mode": null
   },
   "img": "icons/commodities/currency/coins-plain-stack-gold-yellow.webp",
   "effects": [],

@@ -14,15 +14,20 @@
         "slug": "improved-burrow",
         "description": "<p>Improve your Burrow Movement Allowance by 2.</p>",
         "cost": {
-          "activation": "free"
+          "activation": "free",
+          "powerPoints": 0
         },
         "type": "passive",
         "traits": [],
         "img": "icons/svg/explosion.svg",
         "range": {
           "target": "enemy",
-          "unit": "m"
-        }
+          "unit": "m",
+          "distance": 0
+        },
+        "variant": null,
+        "ephemeralVariant": false,
+        "hidden": false
       }
     ],
     "slug": "improved-burrow",
@@ -129,19 +134,21 @@
       }
     ],
     "autoUnlock": [],
-    "global": true,
+    "global": false,
     "webs": [],
     "design": {
       "arena": "physical",
       "approach": "power",
-      "archetype": "Mobility"
+      "archetype": "mobility"
     },
     "publication": {
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
-    }
+      ],
+      "notes": ""
+    },
+    "originSlug": null
   },
   "_id": "QmK7pugsgkpdnaHA",
   "img": "systems/ptr2e/img/perk-icons/Exploration.svg",
@@ -166,7 +173,13 @@
             "type": "roll-option",
             "value": "improved-burrow",
             "domain": "all",
-            "count": true
+            "count": true,
+            "key": "",
+            "mode": 2,
+            "predicate": [],
+            "ignored": false,
+            "suboptions": [],
+            "state": true
           }
         ],
         "slug": null,
@@ -195,12 +208,13 @@
       "_stats": {
         "compendiumSource": "Compendium.ptr2e.core-perks.Item.QmK7pugsgkpdnaHA.ActiveEffect.A9U7GVQynow9u1zj",
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.342",
         "systemId": "ptr2e",
         "systemVersion": "0.10.0-alpha.2.4.3",
         "createdTime": 1729187749803,
         "modifiedTime": 1729187756184,
-        "lastModifiedBy": "IcBpMqhFuTck9VpX"
+        "lastModifiedBy": "IcBpMqhFuTck9VpX",
+        "exportSource": null
       }
     }
   ]

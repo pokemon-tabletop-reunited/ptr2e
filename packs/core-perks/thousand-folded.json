@@ -1,0 +1,66 @@
+{
+  "name": "Thousand Folded",
+  "_id": "wC9JojPMQApXtn0X",
+  "type": "perk",
+  "img": "icons/skills/melee/maneuver-sword-katana-yellow.webp",
+  "effects": [],
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "publication": {
+      "source": "PTR2e Core",
+      "authors": [
+        "Dragoon"
+      ],
+      "notes": ""
+    },
+    "actions": [],
+    "slug": null,
+    "description": "<p>The user gains @UUID[Compendium.ptr2e.core-abilities.b0O4QQ7hMwau5ZcE]{Sharpness} as a Tutored Ability.</p>",
+    "traits": [
+      "sharp",
+      "bladed"
+    ],
+    "prerequisites": [
+      "trait:bladed"
+    ],
+    "autoUnlock": [
+      "item:ability:sharpness"
+    ],
+    "cost": 3,
+    "originSlug": null,
+    "design": {
+      "arena": "physical",
+      "approach": "power",
+      "archetype": null
+    },
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": [],
+    "nodes": [
+      {
+        "x": 83,
+        "y": 70,
+        "hidden": false,
+        "type": "normal",
+        "connected": [
+          "minor-buff-54",
+          "lean-in",
+          "iaido",
+          "power-steering",
+          "take-the-wheel"
+        ],
+        "config": {
+          "texture": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "tint": null
+        },
+        "tier": null
+      }
+    ]
+  }
+}

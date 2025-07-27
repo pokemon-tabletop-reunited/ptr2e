@@ -95,6 +95,8 @@ class TokenDocumentPTR2e<TParent extends ScenePTR2e | null = ScenePTR2e | null> 
     const actor = this.actor;
     if (!actor) return;
 
+    this.actor.system.movementType = this.movementAction
+
     // Dimensions and scale
     const autoscaleDefault = game.ptr.settings.tokens.autoscale;
     const linkDefault = autoscaleDefault && (["humanoid", "pokemon"] as string[]).includes(actor.type);
@@ -147,6 +149,7 @@ class TokenDocumentPTR2e<TParent extends ScenePTR2e | null = ScenePTR2e | null> 
 
   registerSpentMovement(reset?: boolean): void {
     if (!this.actor || !canvas.ready || !game.ready) return;
+    this.actor.system.movementType = this.movementAction
     if (reset === true) {
       for (const movement in this.actor.system.movement) {
         this.actor.system.movement[movement].available = this.actor.system.movement[movement].value;
@@ -324,6 +327,8 @@ class TokenDocumentPTR2e<TParent extends ScenePTR2e | null = ScenePTR2e | null> 
 
 interface TokenDocumentPTR2e<TParent extends ScenePTR2e | null = ScenePTR2e | null> extends TokenDocument<TParent> {
   flags: TokenFlagsPTR2e;
+  
+  movementAction: string;
 
   initialized: boolean;
   auras: Map<string, TokenAura>;

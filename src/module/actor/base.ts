@@ -23,7 +23,7 @@ import { ActionsCollections } from "./actions.ts";
 import { CustomSkill } from "@module/data/models/skill.ts";
 import { BaseStatisticCheck, Statistic, StatisticCheck } from "@system/statistics/statistic.ts";
 import { CheckContext, CheckContextParams, RollContext, RollContextParams } from "@system/data.ts";
-import { extractEffectRolls, extractEphemeralEffects, extractModifiers, extractNotes, extractTargetModifiers, processPreUpdateHooks } from "src/util/change-helpers.ts";
+import { extractAttackAdjustments, extractEffectRolls, extractEphemeralEffects, extractModifiers, extractNotes, extractTargetModifiers, processPreUpdateHooks } from "src/util/change-helpers.ts";
 import { TokenPTR2e } from "@module/canvas/token/object.ts";
 import * as R from "remeda";
 import { ModifierPTR2e } from "@module/effects/modifiers.ts";
@@ -340,7 +340,7 @@ class ActorPTR2e<
       effectsRemovedAfterAttacking: [],
       effectsRemovedAfterAttacked: [],
       toggles: [],
-      attackAdjustments: [],
+      attackAdjustments: {},
       tokenTags: new Map(),
       tokenOverrides: {},
       preparationWarnings: {
@@ -617,7 +617,7 @@ class ActorPTR2e<
     const changes = [];
     // Afflictions don't always have changes, so we need to track them separately
     const afflictions: ActiveEffectPTR2e<ActorPTR2e, AfflictionActiveEffectSystem>[] = [];
-    const bossTrait = this.traits.find(t => t.slug.includes("boss") && !!t.value);
+    const bossTrait = this.traits.find(t => t && !!t.slug && t.slug.includes("boss") && !!t.value);
     for (const effect of this.allApplicableEffects() as unknown as Generator<
       ActiveEffectPTR2e<ActorPTR2e>,
       void,
@@ -1097,7 +1097,15 @@ class ActorPTR2e<
   }
 
   get movementType() {
-    const type = this.system.movementType;
+    const type = this.system.movementType ?? (() => {
+      //@ts-expect-error - Outdated types
+      const maybeType: string | undefined = this.getActiveTokens(false, true).at(0)?.movementAction;
+      if(maybeType) {
+        this.system.movementType = maybeType;
+        return maybeType;
+      }
+      return "";
+    })();
     if (type in CONFIG.Token.movement.actions) return type;
     else return CONFIG.Token.movement.defaultAction;
   }
@@ -1600,7 +1608,7 @@ class ActorPTR2e<
     const actionRollOptions = Array.from(new Set([...itemOptions, ...actionOptions, ...getTargetRollOptions(targetToken?.actor)]));
 
     if (selfAttack) {
-      for (const adjustment of selfActor.synthetics.attackAdjustments) {
+      for (const adjustment of extractAttackAdjustments(selfActor.synthetics.attackAdjustments, params.domains)) {
         adjustment().adjustAttack?.(selfAttack, actionRollOptions);
       }
     }
@@ -1609,7 +1617,7 @@ class ActorPTR2e<
       const traits = params.traits?.map((t) => (typeof t === "string" ? t : t.slug)) ?? [];
 
       if (selfAttack) {
-        for (const adjustment of selfActor.synthetics.attackAdjustments) {
+        for (const adjustment of extractAttackAdjustments(selfActor.synthetics.attackAdjustments, params.domains)) {
           adjustment().adjustTraits?.(selfAttack, traits, actionRollOptions);
         }
       }
@@ -1899,7 +1907,7 @@ class ActorPTR2e<
       if (oldEffect) {
         acc.stacksUpdated.push(oldEffect.uuid);
       } else {
-        if (effect.type !== "advancement") acc.notApplied.push(effect);
+        if (!["advancement"].includes(effect.type) && effect.changes.every(c => !["apply-tick"].includes(c.type))) acc.notApplied.push(effect);
       }
       return acc;
     }, { notApplied: [] as ActiveEffectPTR2e[], stacksUpdated: [] as string[] });

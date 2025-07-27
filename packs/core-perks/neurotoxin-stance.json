@@ -1,0 +1,67 @@
+{
+  "name": "Neurotoxin Stance",
+  "_id": "xpb898WZF9RO6boU",
+  "type": "perk",
+  "img": "icons/skills/toxins/bottle-open-vapors-pink.webp",
+  "effects": [],
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "publication": {
+      "source": "PTR2e Core",
+      "authors": [
+        "Fox"
+      ],
+      "notes": ""
+    },
+    "actions": [],
+    "slug": null,
+    "description": "<p>Target: A commanded @Trait[poison] creature.</p><p dir=\"auto\">Effect: When the target inflicts @Affliction[poison] or @Affliction[blight], or attacks a creature that already has these conditions, the creature in question gains @Affliction[stunted 3].<br><br>The target @Trait[poison] creature suffers from @Affliction[stunted] as long as the stance is in effect. The stance may be ended as a free action by either the Initiator or the Target.</p>",
+    "traits": [
+      "stance",
+      "poison",
+      "command"
+    ],
+    "prerequisites": [
+      "item:perk:type-specialist",
+      {
+        "gte": [
+          "{actor|skills.leadership.mod}",
+          30
+        ]
+      }
+    ],
+    "autoUnlock": [],
+    "cost": 2,
+    "originSlug": null,
+    "design": {
+      "arena": "physical",
+      "approach": "finesse",
+      "archetype": "poison"
+    },
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": [],
+    "nodes": [
+      {
+        "x": 193,
+        "y": 95,
+        "hidden": false,
+        "type": "normal",
+        "connected": [
+          "type-specialist"
+        ],
+        "config": {
+          "texture": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "tint": null
+        },
+        "tier": null
+      }
+    ]
+  }
+}

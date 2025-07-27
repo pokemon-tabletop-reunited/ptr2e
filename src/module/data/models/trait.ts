@@ -46,7 +46,7 @@ class Trait {
         }
       },
       system: {
-        changes: this.changes,
+        changes: fu.duplicate(this.changes),
         traits: [this.slug]
       }
     }, { parent });

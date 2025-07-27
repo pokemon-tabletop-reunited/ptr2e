@@ -62,7 +62,7 @@ interface ActorSynthetics {
   effectsRemovedAfterAttacking: ActiveEffectPTR2e[];
   effectsRemovedAfterAttacked: ActiveEffectPTR2e[];
   toggles: RollOptionToggle[];
-  attackAdjustments: (() => AttackAdjustment)[];
+  attackAdjustments: Record<string, (() => AttackAdjustment)[]>;
   tokenTags: Map<TokenDocumentUUID, string>;
   tokenOverrides: DeepPartial<Pick<TokenDocument['_source'], "light" | "name">> & {
     alpha?: number | null;

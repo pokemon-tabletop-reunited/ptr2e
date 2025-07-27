@@ -60,7 +60,7 @@ export default class BlueprintSheet extends foundry.applications.api.HandlebarsA
         },
         "create-config": async function (this: BlueprintSheet) {
           if (!this.selected) return;
-          await BlueprintSheet.#onSubmit.bind(this)(new Event("save"), this.element as HTMLFormElement, new FormDataExtended(this.element));
+          await BlueprintSheet.#onSubmit.bind(this)(new Event("save"), this.element as HTMLFormElement, new foundry.applications.ux.FormDataExtended(this.element));
           if (this.generation?.temporary) {
             this.selected.updateSource({ _config: new GeneratorConfig({}, { parent: this.selected }).toObject() });
           } else {

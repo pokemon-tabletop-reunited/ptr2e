@@ -6,6 +6,7 @@ import { TypeMatrix } from "@module/apps/type-matrix/sheet.ts";
 import { ExpTrackerSettings } from "@system/exp-tracker-model.ts";
 import { TutorListSettings } from "@system/tutor-list/setting-model.ts";
 import { registerSettings } from "./settings/index.ts";
+import { TutorListEditor } from "@module/apps/tutor-list-editor.ts";
 
 export function initializeSettings() {
   registerSettings();
@@ -25,6 +26,15 @@ export function initializeSettings() {
     hint: "PTR2E.Settings.Skills.Hint",
     icon: "fa-solid fa-rectangle-list",
     type: SkillsSettingsMenu,
+    restricted: true,
+  });
+
+  game.settings.registerMenu("ptr2e", "tutorLists", {
+    name: "PTR2E.Settings.TutorList.Name",
+    label: "PTR2E.Settings.TutorList.Label",
+    hint: "PTR2E.Settings.TutorList.Hint",
+    icon: "fa-solid fa-rectangle-list",
+    type: TutorListEditor,
     restricted: true,
   });
 

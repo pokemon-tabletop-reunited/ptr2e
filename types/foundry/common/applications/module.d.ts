@@ -22,6 +22,7 @@ export const ux: {
   DragDrop: typeof DragDrop, 
   TextEditor: typeof TextEditor,
   SearchFilter: typeof SearchFilter,
+  FormDataExtended: typeof FormDataExtended,
 }
 export const ui: {
   Hotbar: typeof Hotbar
