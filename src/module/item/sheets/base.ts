@@ -5,7 +5,7 @@ import Tagify from "@yaireo/tagify";
 import GithubManager from "@module/apps/github.ts";
 import { ActiveEffectPTR2e } from "@effects";
 import { ActionEditor } from "@module/apps/action-editor.ts";
-import { ItemSheetV2Expanded } from "@module/apps/appv2-expanded.ts";
+import { DocumentSheetConfigurationExpanded, ItemSheetV2Expanded } from "@module/apps/appv2-expanded.ts";
 import { ActionPTR2e, Trait } from "@data";
 import { DataInspector } from "@module/apps/data-inspector/data-inspector.ts";
 import BlueprintSystem from "@item/data/blueprint.ts";
@@ -13,59 +13,55 @@ import BlueprintSystem from "@item/data/blueprint.ts";
 export default class ItemSheetPTR2e<
   TSystem extends ItemSystemPTR,
 > extends foundry.applications.api.HandlebarsApplicationMixin(ItemSheetV2Expanded) {
-  static override DEFAULT_OPTIONS = fu.mergeObject(
-    super.DEFAULT_OPTIONS,
-    {
-      classes: ["move-sheet"],
-      dragDrop: [
+  static override DEFAULT_OPTIONS = {
+    classes: ["sheet", "default-sheet", "standard-form", "ptr2e"],
+    dragDrop: [
+      {
+        dropSelector: ".window-content",
+        dragSelector: ".effect-list .effect, .actions-list .action",
+      }
+    ],
+    position: {
+      height: 500,
+      width: 550,
+    },
+    actions: {
+      toChat: this.#toChat,
+      toGithub: GithubManager.commitItemToGithubSheet,
+      "open-inspector": async function <TSystem extends ItemSystemPTR>(this: ItemSheetPTR2e<TSystem>, event: Event) {
+        event.preventDefault();
+        const inspector = new DataInspector(this.item);
+        inspector.render(true);
+      },
+      sync: async function <TSystem extends ItemSystemPTR>(this: ItemSheetPTR2e<TSystem>, event: Event) {
+        event.preventDefault();
+        return this.document.syncData();
+      }
+    },
+    form: {
+      submitOnChange: true,
+      closeOnSubmit: false,
+    },
+    window: {
+      minimizable: true,
+      resizable: true,
+      controls: [
+        ...(super.DEFAULT_OPTIONS?.window?.controls ?? []),
         {
-          dropSelector: ".window-content",
-          dragSelector: ".effect-list .effect, .actions-list .action",
+          icon: "fas fa-atom",
+          label: "PTR2E.ActorSheet.Inspector",
+          action: "open-inspector",
+          visible: true
+        },
+        {
+          icon: "fas fa-sync",
+          label: "PTR2E.ActorSheet.Sync",
+          action: "sync",
+          visible: true
         }
       ],
-      position: {
-        height: 500,
-        width: 550,
-      },
-      actions: {
-        toChat: this.#toChat,
-        toGithub: GithubManager.commitItemToGithubSheet,
-        "open-inspector": async function<TSystem extends ItemSystemPTR>(this: ItemSheetPTR2e<TSystem>, event: Event) {
-          event.preventDefault();
-          const inspector = new DataInspector(this.item);
-          inspector.render(true);
-        },
-        sync: async function<TSystem extends ItemSystemPTR>(this: ItemSheetPTR2e<TSystem>, event: Event) {
-          event.preventDefault();
-          return this.document.syncData();
-        }
-      },
-      form: {
-        submitOnChange: true,
-        closeOnSubmit: false,
-      },
-      window: {
-        minimizable: true,
-        resizable: true,
-        controls: [
-          ...(super.DEFAULT_OPTIONS?.window?.controls ?? []),
-          {
-            icon: "fas fa-atom",
-            label: "PTR2E.ActorSheet.Inspector",
-            action: "open-inspector",
-            visible: true
-          },
-          {
-            icon: "fas fa-sync",
-            label: "PTR2E.ActorSheet.Sync",
-            action: "sync",
-            visible: true
-          }
-        ],
-      },
     },
-    { inplace: false }
-  );
+  } as Omit<Partial<DocumentSheetConfigurationExpanded>, "uniqueId">;
 
   // Settings for child classes to override
   static readonly overviewTemplate: string = "";
@@ -175,7 +171,7 @@ export default class ItemSheetPTR2e<
 
     const effects = this.document.effects.contents;
 
-    const enrichedDescription = await TextEditor.enrichHTML(this.document.system.description);
+    const enrichedDescription = await foundry.applications.ux.TextEditor.enrichHTML(this.document.system.description);
 
     return {
       ...((await super._prepareContext()) as Record<string, unknown>),
@@ -186,7 +182,7 @@ export default class ItemSheetPTR2e<
       traits,
       effects,
       enrichedDescription,
-      enrichedNotes: (this.document.system instanceof BlueprintSystem) ? "" : await TextEditor.enrichHTML(this.document.system.publication?.notes ?? ""),
+      enrichedNotes: (this.document.system instanceof BlueprintSystem) ? "" : await foundry.applications.ux.TextEditor.enrichHTML(this.document.system.publication?.notes ?? ""),
     };
   }
 
@@ -372,6 +368,10 @@ export default class ItemSheetPTR2e<
           if (!("actions" in this.document.system)) return;
           const action = (this.document.system.actions as Collection<ActionPTR2e>).get(slug);
           if (!action) return;
+
+          if(action.ephemeralVariant) {
+            return void ui.notifications.warn(game.i18n.localize("PTR2E.ItemSheet.Actions.EphemeralVariantWarning"));
+          }
 
           switch (actionType) {
             case "edit-action": {

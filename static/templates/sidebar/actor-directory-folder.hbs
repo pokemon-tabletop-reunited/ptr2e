@@ -1,54 +1,53 @@
-<li class="directory-item folder flexcol {{#unless folder.expanded}}collapsed{{/unless}}"
-    data-folder-id="{{folder.id}}" data-uuid={{folder.uuid}} data-folder-depth="{{node.depth}}" {{#if folder.color}}style="--owner-folder-background: {{folder.color.css}};"{{/if}}>
-  <header class="folder-header flexrow" {{#if folder.color}}style="background-color: {{folder.color.css}}"{{/if}}>
-    <h3 class="noborder"><i class="fas fa-folder-open fa-fw"></i>{{folder.name}}</h3>
+<li class="directory-item folder flexcol {{#if folder.expanded}}expanded{{/if}}" data-folder-id="{{ folder.id }}"
+  data-uuid="{{ folder.uuid }}" data-folder-depth="{{ node.depth }}" {{#if folder.color}}style="--owner-folder-background: {{ folder.color.css }};"{{/if}}>
+
+  {{!-- Folder Control --}}
+  <header class="folder-header" {{#if folder.color}}style="background-color: {{ folder.color.css }};"{{/if}}
+        data-action="toggleFolder">
+    <i class="fa-solid fa-folder-open fa-fw" inert></i>
+    <span class="folder-name ellipsis">{{ folder.name }}</span>
 
     {{#if node.team}}
-    <a class="create-button open-team" data-tooltip="Open Team Sheet">
-        <i class="fas fa-users"></i>
-    </a>
+    <button type="button" class="create-button open-team fa-solid fa-users" data-action="open-team" data-tooltip aria-label="Open Team Sheet"/>
     {{/if}}
     {{#if node.owner}}
-    <a class="create-button open-party" data-tooltip="Open Party Sheet">
-        <i class="fas fa-user-group"></i>
-    </a>
+    <button type="button" class="create-button open-party fa-solid fa-user-group" data-action="open-party" data-tooltip aria-label="Open Party Sheet"/>
     {{/if}}
-    {{#if @root.canCreateFolder}}
-    <a class="create-button create-folder" data-tooltip="Create Nested Folder">
-      <i class="{{@root.folderIcon}}"></i>
-      <i class="fas fa-plus"></i>
-    </a>
+
+    {{#if (and @root.canCreateFolder (lt node.depth @root.maxFolderDepth))}}
+    <button type="button" class="create-button create-folder icon icon-plus {{ @root.folderIcon }}"
+            data-action="createFolder" data-tooltip aria-label="{{ localize "FOLDER.Create" }}"></button>
     {{/if}}
+
     {{#if @root.canCreateEntry}}
-    <a class="create-button create-entry" data-tooltip="Create Actor in Folder">
-      <i class="{{@root.sidebarIcon}}"></i>
-      <i class="fas fa-plus"></i>
-    </a>
+    <button type="button" class="create-button create-entry icon icon-plus {{ @root.sidebarIcon }}" data-tooltip
+            data-action="createEntry" aria-label="{{ localize "SIDEBAR.Create" type=@root.label }}"></button>
     {{/if}}
   </header>
 
-  <ol class="subdirectory" {{#if folder.color}}style="border-left-color: {{folder.color.css}}"{{/if}}>
+  {{!-- Folder Contents --}}
+  <ol class="subdirectory plain" {{#if folder.color}}style="border-left-color: {{ folder.color.css }};"{{/if}}>
     {{~#if node.owner}}
       {{> (lookup @root "entryPartial") actor=node.owner cssClasses="owner"}}
     {{/if}}
     {{#if (and node.owner node.party.length)}}
-        <li class="directory-item party party-header">
-            <h4 class="document-name">
-                <span>{{localize "PTR2E.ActorSidebar.Party.Label" name=node.owner.name}}</span>
-            </h4>
-        </li>
+      <li class="directory-item party party-header flexrow">
+        <a class="entry-name ellipsis" data-action="open-party">
+          <span>{{localize "PTR2E.ActorSidebar.Party.Label" name=node.owner.name}}</span>
+        </a>
+      </li>
     {{/if}}
     {{#each node.party}}
-        {{> (lookup @root "entryPartial") actor=this cssClasses="party"}}
+      {{> (lookup @root "entryPartial") actor=this cssClasses="party"}}
     {{/each}}
     {{#each node.team}}
-        {{> (lookup @root "entryPartial") actor=this cssClasses="team" fake=true}}
+      {{> (lookup @root "entryPartial") actor=this cssClasses="team" fake=true}}
     {{/each}}
-	{{#each node.children}}
-      {{> (lookup @root "folderPartial") node=this folder=this.folder}}
+    {{~#each node.children}}
+      {{> (lookup @root "folderPartial") node=this folder=folder }}
     {{/each}}
-    {{#each node.entries}}
+    {{~#each node.entries}}
       {{> (lookup @root "entryPartial") actor=this}}
-    {{/each~}}
+    {{/each}}
   </ol>
 </li>

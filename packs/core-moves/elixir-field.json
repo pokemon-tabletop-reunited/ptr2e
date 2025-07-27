@@ -11,8 +11,7 @@
         "slug": "elixir-field",
         "type": "attack",
         "traits": [
-          "earthbound",
-          "pp-updated"
+          "earthbound"
         ],
         "range": {
           "target": "emanation",
@@ -26,11 +25,12 @@
         "types": [
           "poison"
         ],
-        "category": "physical",
+        "category": "special",
         "power": 70,
         "accuracy": 95,
         "description": "<p>Effect: After this attack resolves, the user has a 10% chance of gaining ATK, DEF, SPATK, SPDEF and SPD Stage by 1 for 5 Activations.</p>",
-        "img": "systems/ptr2e/img/svg/poison_icon.svg"
+        "img": "systems/ptr2e/img/svg/poison_icon.svg",
+        "predicate": []
       }
     ],
     "grade": "C",
@@ -42,8 +42,10 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
-    }
+      ],
+      "notes": ""
+    },
+    "traits": []
   },
   "effects": [
     {
@@ -62,7 +64,9 @@
             "affects": "target",
             "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "alterations": [],
+            "dontMerge": false
           }
         ],
         "slug": null,
@@ -91,12 +95,13 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.342",
         "systemId": "ptr2e",
         "systemVersion": "0.10.0-alpha.3.0.0",
         "createdTime": 1729541410440,
         "modifiedTime": 1729541439483,
-        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
+        "lastModifiedBy": "Kc3DOunCh3ClAeHS",
+        "exportSource": null
       }
     }
   ]

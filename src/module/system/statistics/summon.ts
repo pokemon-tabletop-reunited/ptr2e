@@ -128,6 +128,12 @@ class SummonStatistic extends AttackStatistic {
             key === "actor" || key === "item" || key === "attack"
               ? injectables[key]
               : injectables.attack;
+
+          if (key === "actor" && prop.match(/skills\.(.*)\.mod/)) {
+            const value = injectables.actor?.system?.skills?.get(prop.split(".")[1])?.total;
+            if (value != undefined && !isNaN(value)) return String(value);
+          }
+
           const value = fu.getProperty(data ?? {}, prop);
           return modifier ? Handlebars.helpers.capitalize(String(value)) : String(value);
         }

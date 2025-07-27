@@ -10,10 +10,7 @@
         "name": "Moonblast",
         "type": "attack",
         "traits": [
-          "pulse",
-          "blast-2",
-          "friendly",
-          "pp-updated"
+          "pulse"
         ],
         "range": {
           "target": "creature",
@@ -22,7 +19,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 7
+          "powerPoints": 5
         },
         "category": "special",
         "power": 95,
@@ -30,44 +27,12 @@
         "types": [
           "fairy"
         ],
-        "description": "<p>Effect: On hit, all target have a 30% chance of losing -1 ATK Stage for 5 Activations.</p>",
-        "img": "icons/svg/explosion.svg",
-        "predicate": []
-      },
-      {
-        "slug": "moonblast-gloomy",
-        "name": "Moonblast (Gloomy)",
-        "type": "attack",
-        "traits": [
-          "pulse",
-          "blast-2",
-          "friendly",
-          "danger-close",
-          "environ",
-          "pp-updated"
-        ],
-        "range": {
-          "target": "creature",
-          "distance": 10,
-          "unit": "m"
-        },
-        "cost": {
-          "activation": "complex",
-          "powerPoints": 7,
-          "trigger": "Trigger: Gloomy Weather is active."
-        },
-        "category": "special",
-        "power": 95,
-        "accuracy": 100,
-        "types": [
-          "fairy"
-        ],
-        "description": "<p>Trigger: Gloomy Weather is active.</p><p>Effect: On hit, all target have a 30% chance of losing -1 ATK Stage for 5 Activations.</p>",
-        "img": "icons/svg/explosion.svg",
+        "description": "<p>Effect: On hit, the targets has a 30% chance of losing -1 ATK Stage for 5 Activations.</p>",
+        "img": "systems/ptr2e/img/svg/fairy_icon.svg",
         "predicate": []
       }
     ],
-    "grade": "A",
+    "grade": "B",
     "_migration": {
       "version": null,
       "previous": null
@@ -76,8 +41,10 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
-    }
+      ],
+      "notes": ""
+    },
+    "traits": []
   },
   "_id": "kltHeKA3GjwrqqTa",
   "effects": [
@@ -97,7 +64,9 @@
             "affects": "target",
             "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "alterations": [],
+            "dontMerge": false
           }
         ],
         "slug": null,

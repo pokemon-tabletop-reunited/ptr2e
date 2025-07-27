@@ -10,9 +10,7 @@
         "name": "Feather Dance",
         "type": "attack",
         "traits": [
-          "dance",
-          "blast-2",
-          "pp-updated"
+          "dance"
         ],
         "range": {
           "target": "emanation",
@@ -21,7 +19,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 7
+          "powerPoints": 5
         },
         "category": "status",
         "accuracy": 100,
@@ -29,7 +27,8 @@
           "flying"
         ],
         "description": "<p>Effect: On hit, all valid targets lose -2 ATK Stages for 5 turns.</p>",
-        "img": "icons/svg/explosion.svg"
+        "img": "systems/ptr2e/img/svg/flying_icon.svg",
+        "predicate": []
       }
     ],
     "grade": "A",
@@ -41,8 +40,10 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
-    }
+      ],
+      "notes": ""
+    },
+    "traits": []
   },
   "_id": "1gDU34LmXHmAf7VS",
   "effects": [
@@ -62,7 +63,9 @@
             "affects": "target",
             "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "alterations": [],
+            "dontMerge": false
           }
         ],
         "slug": null,

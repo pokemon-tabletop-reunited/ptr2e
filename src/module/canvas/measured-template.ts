@@ -1,7 +1,7 @@
 import { TemplateLayerPTR2e } from "./layer/template.ts";
 import { ScenePTR2e } from "./scene.ts";
 
-export class MeasuredTemplatePTR2e<TDocument extends MeasuredTemplateDocument<ScenePTR2e | null> = MeasuredTemplateDocument<ScenePTR2e | null>> extends MeasuredTemplate<TDocument> {
+export class MeasuredTemplatePTR2e<TDocument extends MeasuredTemplateDocument<ScenePTR2e | null> = MeasuredTemplateDocument<ScenePTR2e | null>> extends foundry.canvas.placeables.MeasuredTemplate<TDocument> {
   override highlightGrid(): void {
     const isCircleOrCone = ["circle", "cone"].includes(this.document.t);
     const hasSquareGrid = canvas.grid.type === CONST.GRID_TYPES.SQUARE;
