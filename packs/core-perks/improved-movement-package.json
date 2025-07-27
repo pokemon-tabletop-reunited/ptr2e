@@ -147,7 +147,13 @@
             "predicate": [],
             "ignored": false,
             "inMemoryOnly": false,
-            "alterations": [],
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "system.originSlug",
+                "value": "{effect|parent.system.originSlug}"
+              }
+            ],
             "track": false,
             "onDeleteActions": {
               "grantee": "detach",
