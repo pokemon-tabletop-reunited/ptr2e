@@ -249,8 +249,13 @@ export class ActorSheetV2Expanded<
 
     const effectData = effect.toObject();
     if ('amount' in data && !isNaN(Number(data.amount))) {
-      if (effectData.system.stacks) effectData.system.stacks = Number(data.amount);
-      effectData.duration.turns = Number(data.amount);
+      if(effect.type === "advancement") {
+        effectData.system.amount = Number(data.amount);
+      }
+      else {
+        if (effectData.system.stacks) effectData.system.stacks = Number(data.amount);
+        effectData.duration.turns = Number(data.amount);
+      }
     }
 
     return ActiveEffectPTR2e.create(effectData, { parent: this.actor });
@@ -608,8 +613,13 @@ export class ItemSheetV2Expanded<
 
     const effectData = effect.toObject();
     if ('amount' in data && !isNaN(Number(data.amount))) {
-      if (effectData.system.stacks) effectData.system.stacks = Number(data.amount);
-      effectData.duration.turns = Number(data.amount);
+      if(effect.type === "advancement") {
+        effectData.system.amount = Number(data.amount);
+      }
+      else {
+        if (effectData.system.stacks) effectData.system.stacks = Number(data.amount);
+        effectData.duration.turns = Number(data.amount);
+      }
     }
 
     return ActiveEffectPTR2e.create(effectData, { parent: this.document });
