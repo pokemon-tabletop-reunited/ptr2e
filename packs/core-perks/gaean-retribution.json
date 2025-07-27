@@ -16,7 +16,7 @@
     },
     "actions": [],
     "slug": "gaean-retribution",
-    "description": "<p>Effect: When the user takes super effective or critical damage or is afflicted with a Major Affliction, they gain +1 to a random stat for 5 Activations, are Boosted 5 and Progressed 5.</p>",
+    "description": "<p>Effect: While affllicted by @Affliction[rebound], you emit a 5m Aura which grants Allies [Rebound 1/2]</p>",
     "traits": [],
     "prerequisites": [
       "item:perk:natures-punishment"
@@ -30,7 +30,21 @@
     },
     "global": true,
     "webs": [],
-    "nodes": []
+    "nodes": [
+      {
+        "x": 45,
+        "y": 121,
+        "connected": [
+          "natures-punishment"
+        ],
+        "hidden": false,
+        "type": "normal",
+        "tier": null
+      }
+    ],
+    "originSlug": null,
+    "variant": null,
+    "mode": null
   },
   "img": "icons/magic/nature/root-vine-beanstolk-green.webp",
   "effects": [],

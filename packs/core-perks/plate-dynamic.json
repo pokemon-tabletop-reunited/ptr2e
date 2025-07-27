@@ -14,13 +14,13 @@
     },
     "actions": [],
     "slug": "plate-dynamic",
-    "description": "<p>The user gains +40 to Breach or Rush rolls if they are utilizing their Burrow Movement before using the Action. </p>",
+    "description": "<p>Effect: The user gains +40 to Breach or Rush rolls if they are utilizing their Burrow Movement before using the Action.</p>",
     "traits": [],
     "prerequisites": [
       "trait:ground"
     ],
     "autoUnlock": [],
-    "cost": 1,
+    "cost": 2,
     "design": {
       "arena": null,
       "approach": null,
@@ -28,7 +28,28 @@
     },
     "global": true,
     "webs": [],
-    "nodes": []
+    "nodes": [
+      {
+        "x": 170,
+        "y": 82,
+        "hidden": false,
+        "type": "normal",
+        "connected": [
+          "subsidence",
+          "minor-buff-27"
+        ],
+        "config": {
+          "texture": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "tint": null
+        },
+        "tier": null
+      }
+    ],
+    "originSlug": null,
+    "variant": null,
+    "mode": null
   },
   "img": "systems/ptr2e/img/svg/ground_icon.svg",
   "effects": [],

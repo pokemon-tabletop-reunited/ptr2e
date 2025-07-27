@@ -37,7 +37,17 @@
         ],
         "category": "status",
         "free": true,
-        "predicate": []
+        "predicate": [],
+        "variant": null,
+        "ephemeralVariant": false,
+        "contestType": "",
+        "contestEffect": "",
+        "slot": null,
+        "summon": null,
+        "defaultVariant": null,
+        "flingItemId": "",
+        "offensiveStat": null,
+        "defensiveStat": null
       },
       {
         "name": "Resist! (Self)",
@@ -48,7 +58,8 @@
         "img": "systems/ptr2e/img/icons/feat_icon.webp",
         "range": {
           "target": "self",
-          "unit": "m"
+          "unit": "m",
+          "distance": 0
         },
         "cost": {
           "activation": "simple",
@@ -59,7 +70,17 @@
         ],
         "category": "status",
         "free": true,
-        "predicate": []
+        "predicate": [],
+        "variant": null,
+        "ephemeralVariant": false,
+        "contestType": "",
+        "contestEffect": "",
+        "slot": null,
+        "summon": null,
+        "defaultVariant": null,
+        "flingItemId": "",
+        "offensiveStat": null,
+        "defensiveStat": null
       }
     ],
     "slug": "resist-style",
@@ -85,7 +106,26 @@
     },
     "global": true,
     "webs": [],
-    "nodes": []
+    "nodes": [
+      {
+        "x": 113,
+        "y": 140,
+        "connected": [
+          "minor-buff-17",
+          "agile-style",
+          "minor-buff-9",
+          "hit-run",
+          "magic-armor-style",
+          "berserker-trainer"
+        ],
+        "hidden": false,
+        "type": "normal",
+        "tier": null
+      }
+    ],
+    "originSlug": null,
+    "variant": null,
+    "mode": null
   },
   "img": "systems/ptr2e/img/perk-icons/Orders_Training.svg",
   "effects": [
@@ -107,7 +147,8 @@
             "mode": 2,
             "priority": null,
             "ignored": false,
-            "alterations": []
+            "alterations": [],
+            "dontMerge": false
           },
           {
             "type": "roll-effect",
@@ -120,7 +161,8 @@
             "mode": 2,
             "priority": null,
             "ignored": false,
-            "alterations": []
+            "alterations": [],
+            "dontMerge": false
           }
         ],
         "slug": null,
@@ -155,12 +197,13 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.342",
         "systemId": "ptr2e",
         "systemVersion": "1.1.2.beta",
         "createdTime": null,
         "modifiedTime": 1743268335699,
-        "lastModifiedBy": "QJgrK2D5gkPoparS"
+        "lastModifiedBy": "QJgrK2D5gkPoparS",
+        "exportSource": null
       }
     }
   ],

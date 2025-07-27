@@ -27,20 +27,25 @@
         "img": "systems/ptr2e/img/perk-icons/Combat.svg",
         "range": {
           "target": "self",
-          "unit": "m"
+          "unit": "m",
+          "distance": 0
         },
         "cost": {
           "activation": "free",
           "powerPoints": 2,
           "delay": 3,
           "trigger": "The user enters combat."
-        }
+        },
+        "variant": null,
+        "ephemeralVariant": false
       }
     ],
     "slug": "berserkergang",
     "description": "<p>When the user enters combat, they may spend 2 PP and may use Rage as a Free Action with [Interrupt 3] and [Delay 3], targeting itself with the attack.</p>",
     "traits": [],
-    "prerequisites": [],
+    "prerequisites": [
+      "item:move:rage"
+    ],
     "autoUnlock": [],
     "cost": 3,
     "design": {
@@ -50,7 +55,30 @@
     },
     "global": true,
     "webs": [],
-    "nodes": []
+    "nodes": [
+      {
+        "x": 52,
+        "y": 45,
+        "hidden": false,
+        "type": "normal",
+        "connected": [
+          "berserker",
+          "elemental-rage",
+          "bit-of-a-tosser",
+          "gut-punch"
+        ],
+        "config": {
+          "texture": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "tint": null
+        },
+        "tier": null
+      }
+    ],
+    "originSlug": null,
+    "variant": null,
+    "mode": null
   },
   "img": "systems/ptr2e/img/perk-icons/Combat.svg",
   "effects": [],

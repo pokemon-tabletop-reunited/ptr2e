@@ -6,7 +6,7 @@
   "img": "systems/ptr2e/img/perk-icons/Exploration.svg",
   "system": {
     "actions": [],
-    "slug": "backpacker-1",
+    "slug": "backpacker",
     "description": "<p>Increase your Inventory Point (IP) reservoir by 2.</p>",
     "traits": [
       "minor-buff"
@@ -52,18 +52,19 @@
     ],
     "autoUnlock": [],
     "originSlug": null,
-    "global": true,
+    "global": false,
     "webs": [],
     "design": {
       "arena": "physical",
       "approach": "resilience",
-      "archetype": "Backpacker"
+      "archetype": "backpacker"
     },
     "publication": {
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
+      ],
+      "notes": ""
     }
   },
   "effects": [
@@ -87,7 +88,13 @@
             "type": "roll-option",
             "value": "backpacker",
             "domain": "all",
-            "count": true
+            "count": true,
+            "key": "",
+            "mode": 2,
+            "predicate": [],
+            "ignored": false,
+            "suboptions": [],
+            "state": true
           }
         ],
         "slug": null,
@@ -116,12 +123,13 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.342",
         "systemId": "ptr2e",
         "systemVersion": "0.10.0-alpha.2.4.3",
         "createdTime": 1729174922170,
         "modifiedTime": 1729175404315,
-        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
+        "lastModifiedBy": "Kc3DOunCh3ClAeHS",
+        "exportSource": null
       }
     }
   ]

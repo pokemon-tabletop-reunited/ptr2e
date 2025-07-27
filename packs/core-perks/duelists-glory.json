@@ -15,7 +15,7 @@
       "notes": ""
     },
     "actions": [],
-    "description": "<p>Whilst under the effects of @Affliction[duel], you gain +10% Damage when attacking your Duel Partner.</p>",
+    "description": "<p>Effect: While Afflicted with @Affliction[duel], the user deals +15% more damage to their Duel Partner.</p>",
     "traits": [
       "hunter"
     ],
@@ -29,7 +29,32 @@
     },
     "global": true,
     "webs": [],
-    "nodes": []
+    "nodes": [
+      {
+        "x": 56,
+        "y": 184,
+        "hidden": false,
+        "type": "normal",
+        "connected": [
+          "high-noon",
+          "minor-buff-12",
+          "hamstring",
+          "duelists-eye",
+          "dont-interrupt-me"
+        ],
+        "config": {
+          "texture": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "tint": null
+        },
+        "tier": null
+      }
+    ],
+    "slug": "duelists-glory",
+    "originSlug": null,
+    "variant": null,
+    "mode": null
   },
   "img": "systems/ptr2e/img/icons/weapon_icon.webp",
   "effects": [
@@ -43,13 +68,13 @@
           {
             "type": "percentile-modifier",
             "key": "attack-damage",
-            "value": 10,
+            "value": 15,
             "predicate": [
               "effect:affliction:duel"
             ],
             "label": "Duelist's Glory - Duel Partner?",
-            "mode": 2,
             "priority": null,
+            "mode": 2,
             "ignored": false,
             "hideIfDisabled": false
           }
@@ -80,12 +105,13 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.342",
         "systemId": "ptr2e",
-        "systemVersion": "1.2.1.beta",
+        "systemVersion": "1.3.1.beta",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1750815112813,
+        "lastModifiedBy": "nrhyib0OvR59Mlxq",
+        "exportSource": null
       }
     }
   ],

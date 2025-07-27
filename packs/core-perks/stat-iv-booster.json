@@ -7,7 +7,7 @@
     "cost": 1,
     "description": "<p>Increase one <Stat>'s IV by 5.</p>",
     "actions": [],
-    "slug": "stat-iv-booster-1",
+    "slug": "stat-iv-booster",
     "traits": [
       "minor-buff"
     ],
@@ -373,7 +373,7 @@
       }
     ],
     "autoUnlock": [],
-    "global": true,
+    "global": false,
     "webs": [],
     "design": {
       "arena": "physical",
@@ -384,8 +384,10 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
-    }
+      ],
+      "notes": ""
+    },
+    "originSlug": null
   },
   "_id": "wqHZnaqbcQqOeLO7",
   "img": "systems/ptr2e/img/perk-icons/Trainer.svg",
@@ -409,32 +411,74 @@
               {
                 "value": "system.attributes.hp.ivs",
                 "label": "HP",
-                "predicate": [{"lte": ["{actor|system.attributes.hp.ivs}", 25]}]
+                "predicate": [
+                  {
+                    "lte": [
+                      "{actor|system.attributes.hp.ivs}",
+                      25
+                    ]
+                  }
+                ]
               },
               {
                 "value": "system.attributes.atk.ivs",
                 "label": "Attack",
-                "predicate": [{"lte": ["{actor|system.attributes.atk.ivs}", 25]}]
+                "predicate": [
+                  {
+                    "lte": [
+                      "{actor|system.attributes.atk.ivs}",
+                      25
+                    ]
+                  }
+                ]
               },
               {
                 "value": "system.attributes.def.ivs",
                 "label": "Defense",
-                "predicate": [{"lte": ["{actor|system.attributes.def.ivs}", 25]}]
+                "predicate": [
+                  {
+                    "lte": [
+                      "{actor|system.attributes.def.ivs}",
+                      25
+                    ]
+                  }
+                ]
               },
               {
                 "value": "system.attributes.spa.ivs",
                 "label": "Special Attack",
-                "predicate": [{"lte": ["{actor|system.attributes.spa.ivs}", 25]}]
+                "predicate": [
+                  {
+                    "lte": [
+                      "{actor|system.attributes.spa.ivs}",
+                      25
+                    ]
+                  }
+                ]
               },
               {
                 "value": "system.attributes.spd.ivs",
                 "label": "Special Defense",
-                "predicate": [{"lte": ["{actor|system.attributes.spd.ivs}", 25]}]
+                "predicate": [
+                  {
+                    "lte": [
+                      "{actor|system.attributes.spd.ivs}",
+                      25
+                    ]
+                  }
+                ]
               },
               {
                 "value": "system.attributes.spe.ivs",
                 "label": "Speed",
-                "predicate": [{"lte": ["{actor|system.attributes.spe.ivs}", 25]}]
+                "predicate": [
+                  {
+                    "lte": [
+                      "{actor|system.attributes.spe.ivs}",
+                      25
+                    ]
+                  }
+                ]
               }
             ],
             "prompt": "Pick a Stat",
@@ -474,14 +518,15 @@
       "transfer": true,
       "statuses": [],
       "_stats": {
-        "coreVersion": "12.331",
+        "coreVersion": "13.342",
         "systemId": null,
         "systemVersion": null,
         "createdTime": null,
         "modifiedTime": null,
         "lastModifiedBy": null,
         "compendiumSource": null,
-        "duplicateSource": null
+        "duplicateSource": null,
+        "exportSource": null
       },
       "sort": 0,
       "flags": {}
