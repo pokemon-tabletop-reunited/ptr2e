@@ -21,25 +21,21 @@
         "slug": "alpha-strike",
         "description": "<p>Trigger: Combat Begins<br><br>Effect: You may take the Alpha Strike action to advance your action forward by 100%.</p>",
         "traits": [],
-        "type": "attack",
+        "type": "generic",
         "img": "icons/magic/control/buff-flight-wings-runes-blue-white.webp",
         "cost": {
           "activation": "free",
           "powerPoints": 6
         },
         "range": {
-          "target": "enemy",
-          "unit": "m"
-        },
-        "types": [
-          "untyped"
-        ],
-        "category": "status",
-        "free": true,
-        "predicate": []
+          "target": "self",
+          "unit": "m",
+          "distance": 10
+        }
       }
     ],
-    "description": "<p>Trigger: Combat Begins<br><br>Effect: You may take the Alpha Strike action to advance your action forward by 100%.</p>"
+    "description": "<p>Trigger: Combat Begins<br><br>Effect: You may take the Alpha Strike action to advance your action forward by 100%.</p>",
+    "slug": "alpha-strike"
   },
   "img": "icons/magic/control/buff-flight-wings-runes-blue-white.webp",
   "effects": [
@@ -52,7 +48,7 @@
         "changes": [
           {
             "type": "roll-effect",
-            "key": "alpha-strike-attack",
+            "key": "alpha-strike-generic",
             "value": "Compendium.ptr2e.core-effects.Item.advanceffectitem",
             "predicate": [],
             "chance": 100,
@@ -70,6 +66,16 @@
               }
             ],
             "dontMerge": false,
+            "isFixedChance": false,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "roll-note",
+            "key": "combat-enter",
+            "value": "{actor|link} enters combat and may spend {item|system.cost} PP to use {item|link}!",
+            "predicate": [],
+            "visibility": null,
             "mode": 2,
             "ignored": false
           }
@@ -78,7 +84,9 @@
         "traits": [],
         "removeAfterCombat": true,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
@@ -96,13 +104,13 @@
         "compendiumSource": null,
         "duplicateSource": null,
         "exportSource": null,
-        "coreVersion": "13.344",
+        "coreVersion": "13.346",
         "systemId": "ptr2e",
-        "systemVersion": "1.3.3.beta",
-        "lastModifiedBy": null
+        "systemVersion": "1.3.8.beta",
+        "lastModifiedBy": "mK35yvCqCgiTUvKf",
+        "modifiedTime": 1753373629631
       }
     }
   ],
-  "flags": {},
   "_id": "98JHavZ9ypseReuV"
 }
