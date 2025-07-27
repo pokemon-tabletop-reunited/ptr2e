@@ -1,37 +1,64 @@
 <main {{#if undone}}class="undone"{{/if}}>
-  <p>
-    {{#if target}}{{target.link}}{{else}}@UUID[{{_source.target}}]{{/if}}
+  {{#if (eq hideInfo true)}}
+    <p>
+      {{#if target}}{{{target.link}}}{{else}}@UUID[{{_source.target}}]{{/if}}
       {{#if shieldApplied}}
         {{#if (lt damageApplied 0)}}
-          Gained {{abs damageApplied}} Shield
+          Gained ??? Shield
         {{else}}
-          Took {{damageApplied}} Shield Damage
+          Took ??? Shield Damage
         {{/if}}
       {{else if ppApplied}}
         {{#if (lt damageApplied 0)}}
-          Gained {{abs damageApplied}} PP
+          Gained ??? PP
         {{else}}
-          Lost {{damageApplied}} PP
+          Lost ??? PP
         {{/if}}
       {{else}}
         {{#if (lt damageApplied 0)}}
-          Healed for {{abs damageApplied}} 
+          Healed ???
         {{else}}
-        Took {{damageApplied}} Damage
+        Took ??? Damage
+        {{/if}}
+      {{/if}}
+    </p>
+  {{else}}
+    <p{{#if (eq hideInfo "GM")}} class="gm-info"{{/if}}>
+      {{#if target}}{{{target.link}}}{{else}}@UUID[{{_source.target}}]{{/if}}
+      {{#if shieldApplied}}
+        {{#if (lt damageApplied 0)}}
+          Gained <span class="damage">{{abs damageApplied}}</span> Shield
+        {{else}}
+          Took <span class="damage">{{damageApplied}}</span> Shield Damage
+        {{/if}}
+      {{else if ppApplied}}
+        {{#if (lt damageApplied 0)}}
+          Gained <span class="damage">{{abs damageApplied}}</span> PP
+        {{else}}
+          Lost <span class="damage">{{damageApplied}}</span> PP
+        {{/if}}
+      {{else}}
+        {{#if (lt damageApplied 0)}}
+          Healed for <span class="damage">{{abs damageApplied}}</span> 
+        {{else}}
+        Took <span class="damage">{{damageApplied}}</span> Damage
         {{/if}}
       {{/if}}
       {{#if _notesHTML}}
         <i class="fas fa-info-circle small damage-info" data-tooltip="Additional Info" data-tooltip-direction="UP" data-message="{{parent.uuid}}"></i>
       {{/if}}
     </p>
+  {{/if}}
   {{#if (isGm)}}
     {{#unless undone}}
       <button class="revert-damage" data-tooltip="Revert Damage"><i class="fa-solid fa-rotate-left"></i></button>
     {{/unless}}
   {{/if}}
+  {{#unless (eq hideInfo true)}}
   {{#if rollNotes}}
     <section class="notes">
       {{{rollNotes}}}
     </section>
   {{/if}}
+  {{/unless}}
 </main>

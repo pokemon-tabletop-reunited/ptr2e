@@ -3,13 +3,9 @@ import { Tab } from "./document.ts";
 import { default as ItemSheetPTR2e } from "./base.ts";
 
 export default class MoveSheet extends ItemSheetPTR2e<MovePTR2e["system"]> {
-  static override DEFAULT_OPTIONS = fu.mergeObject(
-    super.DEFAULT_OPTIONS,
-    {
-      classes: ["move-sheet"],
-    },
-    { inplace: false }
-  );
+  static override DEFAULT_OPTIONS = {
+    classes: ["move-sheet"],
+  };
 
   static override readonly overviewTemplate =
     "systems/ptr2e/templates/items/move/move-overview.hbs";
@@ -108,7 +104,7 @@ export default class MoveSheet extends ItemSheetPTR2e<MovePTR2e["system"]> {
         attack: attack,
         source: attack?._source,
         fields: attack?.schema.fields,
-        enrichedDescription: await TextEditor.enrichHTML(attack?.description ?? null),
+        enrichedDescription: await foundry.applications.ux.TextEditor.enrichHTML(attack?.description ?? null),
       },
     };
   }

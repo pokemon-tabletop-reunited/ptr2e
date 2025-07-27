@@ -54,7 +54,7 @@ export class DocumentSheetV2<TDocument extends foundry.abstract.Document> extend
         dragover: this._onDragOver.bind(this),
         drop: this._onDrop.bind(this),
       };
-      return new DragDrop(d);
+      return new foundry.applications.ux.DragDrop(d);
     }) ?? [];
   }
 

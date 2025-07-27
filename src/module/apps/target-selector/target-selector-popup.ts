@@ -5,22 +5,18 @@ import { htmlQueryAll } from "@utils";
 export class TargetSelectorPopup extends foundry.applications.api.HandlebarsApplicationMixin(
   foundry.applications.api.ApplicationV2
 ) {
-  static override DEFAULT_OPTIONS = fu.mergeObject(
-    super.DEFAULT_OPTIONS,
-    {
-      classes: ["sheet target-selector-popup"],
-      position: {
-        height: "auto",
-        width: 400,
-      },
-      form: {
-        closeOnSubmit: false,
-        submitOnChange: false,
-      },
-      tag: "form",
+  static override DEFAULT_OPTIONS = {
+    classes: ["sheet target-selector-popup"],
+    position: {
+      height: "auto",
+      width: 400,
     },
-    { inplace: false }
-  );
+    form: {
+      closeOnSubmit: false,
+      submitOnChange: false,
+    },
+    tag: "form",
+  } as unknown as Omit<DeepPartial<foundry.applications.api.ApplicationConfiguration>, "uniqueId">;
 
   static override PARTS: Record<string, foundry.applications.api.HandlebarsTemplatePart> = {
     modifiers: {
@@ -70,14 +66,14 @@ export class TargetSelectorPopup extends foundry.applications.api.HandlebarsAppl
       const entry = this.targets[parseInt(parent.dataset.index!)];
 
       element?.addEventListener("click", () => {
-        this.resolve?.({entry, choice: entry.results[index]});
+        this.resolve?.({ entry, choice: entry.results[index] });
         this.close();
       })
     }
   }
 
-  promise: Promise<Maybe<{entry: TargetData, choice: TargetData["results"][number]}>> | null = null;
-  resolve?: (value: Maybe<{entry: TargetData, choice: TargetData["results"][number]}>) => void;
+  promise: Promise<Maybe<{ entry: TargetData, choice: TargetData["results"][number] }>> | null = null;
+  resolve?: (value: Maybe<{ entry: TargetData, choice: TargetData["results"][number] }>) => void;
 
   async wait() {
     return (this.promise ??= new Promise((resolve) => {

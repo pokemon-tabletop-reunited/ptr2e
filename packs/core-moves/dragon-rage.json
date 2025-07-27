@@ -10,23 +10,23 @@
         "name": "Dragon Rage",
         "type": "attack",
         "traits": [
-          "pp-updated"
+          "flat"
         ],
         "range": {
           "target": "creature",
-          "distance": 10,
+          "distance": 5,
           "unit": "m"
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 3
+          "powerPoints": 4
         },
         "category": "special",
         "accuracy": 100,
         "types": [
           "dragon"
         ],
-        "description": "<p>Effect: This attack always deals 70 damage on hit.</p>",
+        "description": "<p>Effect: This attack deals flat damage based on the user's level.</p><blockquote><p>Damage Formula: Damage = 1.75 x UserLevel</p></blockquote></p>",
         "img": "systems/ptr2e/img/svg/dragon_icon.svg",
         "predicate": []
       }
@@ -52,10 +52,7 @@
           {
             "type": "flat-modifier",
             "key": "dragon-rage-attack-damage-flat",
-            "value": 70,
-            "predicate": [
-              "item:move:dragon-rage"
-            ],
+            "value": "floor(@actor.system.advancement.level * 1.75)",
             "label": "Dragon Rage",
             "mode": 2,
             "priority": null,

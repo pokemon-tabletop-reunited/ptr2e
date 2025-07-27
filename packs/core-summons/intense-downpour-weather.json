@@ -17,8 +17,10 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
-    }
+      ],
+      "notes": ""
+    },
+    "slug": "intense-downpour-weather"
   },
   "img": "systems/ptr2e/img/svg/water_icon.svg",
   "effects": [
@@ -35,8 +37,8 @@
             "value": 60,
             "predicate": [],
             "label": "Water Damage Boost",
-            "mode": 2,
             "priority": null,
+            "mode": 2,
             "ignored": false,
             "hideIfDisabled": false
           },
@@ -46,19 +48,19 @@
             "value": -100,
             "predicate": [],
             "label": "Fire Failure",
-            "mode": 2,
             "priority": null,
+            "mode": 2,
             "ignored": false,
             "hideIfDisabled": false
           },
           {
             "type": "ephemeral-modifier",
             "key": "explode-trait-attack-damage-percentile",
-            "value": -100,
+            "value": -10000,
             "predicate": [],
             "label": "Explode Failure",
-            "mode": 2,
             "priority": null,
+            "mode": 2,
             "ignored": false,
             "hideIfDisabled": false
           }
@@ -72,7 +74,9 @@
         "formula": "",
         "type": "damage",
         "targetType": "all",
-        "targetUuid": null
+        "targetUuid": null,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
@@ -94,15 +98,15 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.346",
         "systemId": "ptr2e",
-        "systemVersion": "1.0.3.beta",
+        "systemVersion": "1.3.8.beta",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1753349423331,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf",
+        "exportSource": null
       }
     }
   ],
-  "flags": {},
   "_id": "05v6WQHLOzcIKXPS"
 }

@@ -9,9 +9,7 @@
         "slug": "cosmic-power",
         "name": "Cosmic Power",
         "type": "attack",
-        "traits": [
-          "pp-updated"
-        ],
+        "traits": [],
         "range": {
           "target": "self",
           "unit": "m"
@@ -24,8 +22,33 @@
         "types": [
           "psychic"
         ],
-        "description": "<p>Effect: The user gains +1 DEF and SPDEF Stage for 5 Activations.</p>",
-        "img": "icons/svg/explosion.svg",
+        "description": "<p>Effect: The user gains +1 DEF and SPDEF Stage for 5 Activations. If there is Gloomy Weather, DEF and SPDEF Stages are increased by +2 for 7 Activations instead.</p>",
+        "img": "systems/ptr2e/img/svg/psychic_icon.svg",
+        "predicate": []
+      },
+      {
+        "name": "Cosmic Power (Gloomy)",
+        "slug": "cosmic-power-gloomy",
+        "type": "attack",
+        "img": "systems/ptr2e/img/svg/psychic_icon.svg",
+        "traits": [
+          "environ"
+        ],
+        "range": {
+          "target": "self",
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 3,
+          "trigger": "<p>Gloomy Weather is present.</p>"
+        },
+        "variant": "crystallize",
+        "types": [
+          "rock"
+        ],
+        "category": "status",
+        "description": "<p>Trigger: Dusty Weather is present.</p><p>Effect: The user's DEF and SPDEF Stages increase by +2 for 7 Activations.</p>",
         "predicate": []
       }
     ],
@@ -38,8 +61,10 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
-    }
+      ],
+      "notes": ""
+    },
+    "traits": []
   },
   "_id": "yF0XYtBJKJJstJDD",
   "effects": [
@@ -59,7 +84,9 @@
             "affects": "target",
             "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "alterations": [],
+            "dontMerge": false
           },
           {
             "type": "roll-effect",
@@ -70,7 +97,9 @@
             "affects": "target",
             "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "alterations": [],
+            "dontMerge": false
           }
         ],
         "slug": null,
