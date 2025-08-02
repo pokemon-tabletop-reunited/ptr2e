@@ -419,7 +419,7 @@ export default abstract class BlueprintSystem extends HasEmbed(HasMigrations(fou
       // TODO: Add stat settings
       const stats = (() => {
         const randomPoints = (() => {
-          const points = Math.ceil(Math.random() * 508 * 0.25);
+          const points = Math.ceil(Math.random() * 512 * 0.25);
           return points % 4 === 0 ? points : points + (4 - (points % 4));
         })()
 
@@ -465,7 +465,7 @@ export default abstract class BlueprintSystem extends HasEmbed(HasMigrations(fou
           return stats;
         };
 
-        const weightedStats = calculateStats(508 - randomPoints, true);
+        const weightedStats = calculateStats(512 - randomPoints, true);
         const randomStats = calculateStats(randomPoints, false);
 
         return Object.keys(evolution.system.stats).reduce(
