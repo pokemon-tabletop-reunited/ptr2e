@@ -19,15 +19,20 @@
         "slug": "formation-attacks",
         "description": "<p>When within Reach of a creature, you gain +1 ACC on Attacks against that creature for every other Pack Member that is also within Reach of that creature.</p>",
         "cost": {
-          "activation": "free"
+          "activation": "free",
+          "powerPoints": 0
         },
         "type": "passive",
         "traits": [],
         "img": "icons/svg/explosion.svg",
         "range": {
           "target": "enemy",
-          "unit": "m"
-        }
+          "unit": "m",
+          "distance": 0
+        },
+        "variant": null,
+        "ephemeralVariant": false,
+        "hidden": false
       }
     ],
     "slug": "formation-attacks",
@@ -65,14 +70,18 @@
     "design": {
       "arena": "mental",
       "approach": "finesse",
-      "archetype": "Pack Mon"
+      "archetype": "pack-mon"
     },
     "publication": {
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
-    }
+      ],
+      "notes": ""
+    },
+    "originSlug": null,
+    "variant": null,
+    "mode": null
   },
   "_id": "zW2fOBtO1e0LEv2K",
   "img": "systems/ptr2e/img/perk-icons/Tactician.svg",
@@ -136,12 +145,13 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.342",
         "systemId": "ptr2e",
         "systemVersion": "0.10.0-alpha.5.1.5",
         "createdTime": 1737391341790,
         "modifiedTime": 1737391374354,
-        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+        "lastModifiedBy": "mK35yvCqCgiTUvKf",
+        "exportSource": null
       }
     }
   ],

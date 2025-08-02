@@ -9,9 +9,7 @@
         "slug": "work-up",
         "name": "Work Up",
         "type": "attack",
-        "traits": [
-          "pp-updated"
-        ],
+        "traits": [],
         "range": {
           "target": "self",
           "unit": "m"
@@ -24,32 +22,8 @@
         "types": [
           "normal"
         ],
-        "description": "<p>Effect: The user raises their ATK and SPATK Stages by +1 for 5 Activations.</p>",
-        "img": "icons/svg/explosion.svg",
-        "predicate": []
-      },
-      {
-        "slug": "work-up-enraged",
-        "name": "Work Up (Enraged)",
-        "type": "attack",
-        "traits": [
-          "pp-updated"
-        ],
-        "range": {
-          "target": "self",
-          "unit": "m"
-        },
-        "cost": {
-          "activation": "simple",
-          "powerPoints": 3,
-          "trigger": "<p>The user is @Affliction[enraged].</p>"
-        },
-        "category": "status",
-        "types": [
-          "normal"
-        ],
-        "description": "<p>Trigger: The user is @Affliction[enraged].</p><p>Effect: The user gains +1 ATK and SPATK Stages for 5 Activations.</p>",
-        "img": "icons/svg/explosion.svg",
+        "description": "<p>Effect: The user raises their ATK and SPATK Stages by +1 for 5 Activations.<br><br>You may use this move as a Simple Action whilst @Affliction[enraged].</p>",
+        "img": "systems/ptr2e/img/svg/normal_icon.svg",
         "predicate": []
       }
     ],
@@ -62,8 +36,10 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
-    }
+      ],
+      "notes": ""
+    },
+    "traits": []
   },
   "_id": "Zsg9MXOaKH3vAb6q",
   "effects": [
@@ -83,7 +59,9 @@
             "affects": "target",
             "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "alterations": [],
+            "dontMerge": false
           },
           {
             "type": "roll-effect",
@@ -94,7 +72,9 @@
             "affects": "target",
             "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "alterations": [],
+            "dontMerge": false
           }
         ],
         "slug": null,

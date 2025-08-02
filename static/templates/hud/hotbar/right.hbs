@@ -1,0 +1,23 @@
+<div id="hotbar-controls-right" class="hotbar-controls flexrow" data-tooltip-direction="RIGHT">
+  <nav id="hotbar-page-controls" class="flexcol">
+    <button type="button" class="plain hotbar-page-control page-next fa-solid fa-triangle icon"
+        data-action="page" data-direction="1" data-tooltip aria-label="{{localize 'HOTBAR.PAGE_NEXT'}}">
+    </button>
+    <span class="hotbar-page-number">{{page}}</span>
+    <button type="button" class="plain hotbar-page-control page-prev fa-solid fa-triangle icon"
+        data-action="page" data-direction="-1" data-tooltip aria-label="{{localize 'HOTBAR.PAGE_PREV'}}">
+    </button>
+  </nav>
+  <div class="flexcol">
+    <button type="button" class="plain fa-solid fa-unlock icon" data-action="lock" data-tooltip
+        aria-label="{{localize 'HOTBAR.LOCK'}}"></button>
+    <button type="button" class="plain fa-solid fa-trash icon" data-action="clear" data-tooltip
+        aria-label="{{localize 'HOTBAR.CLEAR'}}"></button>
+  </div>
+  <div class="flexcol">
+    <button type="button" class="plain fa-solid fa-volume icon" data-action="mute" data-tooltip
+        aria-label="{{localize 'HOTBAR.MUTE'}}"></button>
+    <button type="button" class="plain fa-solid fa-bars icon" data-action="menu" data-tooltip
+        aria-label="{{localize 'HOTBAR.MENU'}}"></button>
+  </div>
+</div>

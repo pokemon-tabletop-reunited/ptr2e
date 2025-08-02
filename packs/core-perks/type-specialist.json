@@ -11,15 +11,20 @@
         "slug": "type-specialty",
         "description": "<p>You gain +10 to social interaction Skill Tests when interacting with Pokemon of your preferred type. The cost on this scales with each additional type chosen.</p>",
         "cost": {
-          "activation": "free"
+          "activation": "free",
+          "powerPoints": 0
         },
         "type": "passive",
         "traits": [],
         "img": "icons/svg/explosion.svg",
         "range": {
           "target": "enemy",
-          "unit": "m"
-        }
+          "unit": "m",
+          "distance": 0
+        },
+        "variant": null,
+        "ephemeralVariant": false,
+        "hidden": false
       }
     ],
     "slug": "type-specialist",
@@ -33,8 +38,19 @@
         "connected": [
           "improved-overland-1-1",
           "stat-iv-booster-1-1",
-          "type-harmony",
-          "type-embodiment-type"
+          "gaia-stance",
+          "neurotoxin-stance",
+          "root-3",
+          "landslide-style",
+          "thuggish-style",
+          "highlander-stance",
+          "short-circuit-style",
+          "fey-sorcery-stance",
+          "dojo-discipline-stance",
+          "fiery-footwork-style",
+          "primal-aversion-style",
+          "celerity-style",
+          "night-terror-stance"
         ],
         "config": {
           "alpha": null,
@@ -47,7 +63,7 @@
         },
         "hidden": false,
         "type": "normal",
-        "x": 154,
+        "x": 187,
         "y": 100,
         "tier": null
       }
@@ -58,14 +74,18 @@
     "design": {
       "arena": "social",
       "approach": "finesse",
-      "archetype": "Type Ace"
+      "archetype": "type-ace"
     },
     "publication": {
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
-    }
+      ],
+      "notes": ""
+    },
+    "originSlug": null,
+    "variant": null,
+    "mode": null
   },
   "_id": "7M9EE1mHIJeoAWhp",
   "img": "systems/ptr2e/img/perk-icons/Socialite.svg",

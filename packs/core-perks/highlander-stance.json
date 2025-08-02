@@ -1,0 +1,61 @@
+{
+  "name": "Highlander Stance",
+  "_id": "tx02Fe31FgQLxR2M",
+  "type": "perk",
+  "img": "icons/creatures/reptiles/dragon-winged-blue.webp",
+  "effects": [],
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "publication": {
+      "source": "PTR2e Core",
+      "authors": [
+        "Fox"
+      ],
+      "notes": ""
+    },
+    "actions": [],
+    "slug": null,
+    "description": "<p>Target: A Commanded @Trait[dragon] Creature<br><br>Effect: Grants the target creature +50% Damage versus @Trait[dragon] creatures, but the target creature takes 50% more damage from @Trait[ice] attacks.</p>",
+    "traits": [
+      "stance",
+      "dragon",
+      "command"
+    ],
+    "prerequisites": [
+      "item:perk:type-specialist"
+    ],
+    "autoUnlock": [],
+    "cost": 2,
+    "originSlug": null,
+    "design": {
+      "arena": "physical",
+      "approach": "power",
+      "archetype": "dragon"
+    },
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": [],
+    "nodes": [
+      {
+        "x": 190,
+        "y": 94,
+        "hidden": false,
+        "type": "normal",
+        "connected": [
+          "type-specialist"
+        ],
+        "config": {
+          "texture": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "tint": null
+        },
+        "tier": null
+      }
+    ]
+  }
+}

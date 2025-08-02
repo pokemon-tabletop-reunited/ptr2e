@@ -30,7 +30,7 @@ declare global {
         protected _searchFilters: SearchFilter[];
 
         /** Track whether the Application is currently minimized */
-        _minimized: boolean;
+        minimized: boolean;
 
         /**
          * Track the render state of the Application

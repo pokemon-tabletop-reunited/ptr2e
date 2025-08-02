@@ -1,0 +1,108 @@
+{
+  "name": "Harden",
+  "type": "effect",
+  "img": "icons/svg/tower.svg",
+  "system": {
+    "traits": [
+      "minor-affliction"
+    ],
+    "description": "While under the effect of Harden, the afflicted creature’s [Contact] attacks have +20 Power, and their [Dash] attacks gain [Crit 1] or have their [Crit X] increase by +1.",
+    "slug": "harden",
+    "publication": {
+      "source": "",
+      "authors": [],
+      "notes": ""
+    },
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "effects": [
+    {
+      "name": "Harden",
+      "img": "icons/svg/tower.svg",
+      "type": "affliction",
+      "duration": {
+        "turns": 5,
+        "startTime": null,
+        "combat": null
+      },
+      "system": {
+        "changes": [
+          {
+            "type": "flat-modifier",
+            "key": "contact-trait-attack-power",
+            "value": 20,
+            "mode": 2,
+            "predicate": [],
+            "ignored": false,
+            "hideIfDisabled": false
+          },
+          {
+            "type": "stage-modifier",
+            "key": "dash-trait-attack-crit",
+            "value": 1,
+            "mode": 2,
+            "predicate": [],
+            "ignored": false,
+            "hideIfDisabled": false
+          }
+        ],
+        "formula": null,
+        "type": null,
+        "removeOnRecall": false,
+        "removeAfterCombat": true,
+        "traits": [
+          "minor-affliction"
+        ],
+        "slug": null,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0,
+        "priority": 50
+      },
+      "description": "While under the effect of Harden, the afflicted creature’s [Contact] attacks have +20 Power, and their [Dash] attacks gain [Crit 1] or have their [Crit X] increase by +1.",
+      "statuses": [
+        "harden"
+      ],
+      "_id": "hardencondition0",
+      "_stats": {
+        "coreVersion": "13.346",
+        "systemId": null,
+        "systemVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null,
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "disabled": false,
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "sort": 0,
+      "flags": {}
+    }
+  ],
+  "_id": "hardencondititem",
+  "flags": {
+    "core": {}
+  },
+  "_stats": {
+    "coreVersion": "13.346",
+    "systemId": null,
+    "systemVersion": null,
+    "createdTime": null,
+    "modifiedTime": null,
+    "lastModifiedBy": null,
+    "compendiumSource": "Compendium.ptr2e.core-effects.Item.hardencondititem",
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  }
+}

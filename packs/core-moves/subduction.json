@@ -10,11 +10,10 @@
         "name": "Subduction",
         "type": "attack",
         "traits": [
-          "blast-3",
-          "pp-updated"
+          "blast-3"
         ],
         "range": {
-          "target": "creature",
+          "target": "blast",
           "distance": 10,
           "unit": "m"
         },
@@ -29,7 +28,7 @@
           "ground"
         ],
         "description": "<p>Effect: On hit, all valid targets lose -2 SPD Stages. The user gains @Affliction[confused] 5.</p>",
-        "img": "icons/svg/explosion.svg",
+        "img": "systems/ptr2e/img/svg/ground_icon.svg",
         "predicate": []
       }
     ],
@@ -43,7 +42,8 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
+      ],
+      "notes": ""
     }
   },
   "_id": "zPd9TgBoFp8GkYjw",
@@ -64,7 +64,9 @@
             "affects": "target",
             "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "alterations": [],
+            "dontMerge": false
           },
           {
             "type": "roll-effect",
@@ -75,7 +77,9 @@
             "affects": "self",
             "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "alterations": [],
+            "dontMerge": false
           }
         ],
         "slug": null,

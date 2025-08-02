@@ -1,4 +1,6 @@
-declare class HexagonalGrid extends BaseGrid {
+import type { BaseGrid } from "./base.d.ts";
+
+declare abstract class HexagonalGrid extends BaseGrid {
     override draw(preview?: { gridColor?: string | null; gridAlpha?: string | null }): this;
 
     /**

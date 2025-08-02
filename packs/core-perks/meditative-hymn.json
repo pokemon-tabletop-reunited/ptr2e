@@ -1,0 +1,79 @@
+{
+  "folder": "lzLExT1c5IqNcbnB",
+  "name": "Meditative Hymn",
+  "type": "perk",
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "Fox"
+      ],
+      "notes": ""
+    },
+    "actions": [
+      {
+        "name": "Meditative Hymn",
+        "slug": "meditative-hymn",
+        "description": "<p>The user can cure nearby allies of @Affliction[confused].</p>",
+        "traits": [],
+        "type": "generic",
+        "img": "systems/ptr2e/img/perk-icons/Musician.svg",
+        "range": {
+          "target": "enemy",
+          "unit": "m",
+          "distance": 0
+        },
+        "cost": {
+          "activation": "simple",
+          "powerPoints": 0
+        },
+        "variant": null,
+        "ephemeralVariant": false
+      }
+    ],
+    "description": "<p>The user can cure nearby allies of @Affliction[confused].<br><br>If the user has @UUID[Compendium.ptr2e.core-perks.ecTtuQNB6QPAwGwU]{Break-Up Song} or @UUID[Compendium.ptr2e.core-perks.mmH15ZJ0dH2LDfsg]{Rousing Song} they can combine the effects of these songs simultaneously.</p>",
+    "traits": [],
+    "prerequisites": [
+      {
+        "gte": [
+          "{actor|skills.singing.mod}",
+          40
+        ]
+      }
+    ],
+    "autoUnlock": [],
+    "cost": 2,
+    "design": {
+      "arena": "social",
+      "approach": "finesse",
+      "archetype": "musician"
+    },
+    "global": true,
+    "webs": [],
+    "nodes": [
+      {
+        "x": 172,
+        "y": 159,
+        "connected": [
+          "break-up-song",
+          "root-4"
+        ],
+        "hidden": false,
+        "type": "normal",
+        "tier": null
+      }
+    ],
+    "slug": "meditative-hymn",
+    "originSlug": null,
+    "variant": null,
+    "mode": null
+  },
+  "img": "systems/ptr2e/img/perk-icons/Musician.svg",
+  "effects": [],
+  "flags": {},
+  "_id": "IriqJkYNMBhbX7Rj"
+}

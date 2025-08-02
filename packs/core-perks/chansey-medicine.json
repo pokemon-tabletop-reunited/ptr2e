@@ -16,7 +16,8 @@
         ],
         "range": {
           "target": "creature",
-          "unit": "m"
+          "unit": "m",
+          "distance": 0
         },
         "cost": {
           "activation": "complex",
@@ -28,7 +29,18 @@
         ],
         "description": "<p>Effect: The target recovers @Tick[4]</p>",
         "img": "systems/ptr2e/img/svg/fairy_icon.svg",
-        "predicate": []
+        "predicate": [],
+        "variant": null,
+        "ephemeralVariant": false,
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null,
+        "summon": null,
+        "defaultVariant": null,
+        "flingItemId": "",
+        "offensiveStat": null,
+        "defensiveStat": null
       }
     ],
     "slug": "chansey-medicine",
@@ -67,7 +79,10 @@
           "heroic-transformation",
           "breeder",
           "stat-iv-booster-1-10",
-          "pack-mon-2"
+          "pack-mon-2",
+          "minor-buff-35",
+          "minor-buff-54",
+          "fixing-good"
         ],
         "config": {
           "alpha": null,
@@ -96,8 +111,11 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
-    }
+      ],
+      "notes": ""
+    },
+    "variant": null,
+    "mode": null
   },
   "effects": [
     {
@@ -181,12 +199,13 @@
       "_stats": {
         "compendiumSource": "Compendium.ptr2e.core-perks.Item.OWyKxGQEmvucwXQw.ActiveEffect.jYRRns43LCZAkrHB",
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.342",
         "systemId": "ptr2e",
         "systemVersion": "0.10.0-alpha.3.4.1",
         "createdTime": 1732231695711,
         "modifiedTime": 1732231705543,
-        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
+        "lastModifiedBy": "Kc3DOunCh3ClAeHS",
+        "exportSource": null
       }
     }
   ]

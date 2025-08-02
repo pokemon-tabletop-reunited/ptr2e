@@ -21,9 +21,7 @@
         "description": "<p>You are able to make Lechonk-Class Sandwiches. The staple food of the explorer. These reliable sandwiches confer a +10 to all Skill checks made in the following day.</p>",
         "cost": {
           "activation": "complex",
-          "powerPoints": 0,
-          "delay": null,
-          "priority": null
+          "powerPoints": 0
         },
         "type": "camping",
         "traits": [],
@@ -33,7 +31,8 @@
           "unit": "m",
           "distance": 0
         },
-        "variant": null
+        "variant": null,
+        "ephemeralVariant": false
       }
     ],
     "slug": "lechonk-class-sandwiches",
@@ -44,44 +43,41 @@
     },
     "nodes": [
       {
-        "connected": [
-          "ralts-class-sandwiches",
-          "zigzagoon-class-sandwiches",
-          "hitmon-class-sandwiches"
-        ],
+        "x": null,
+        "y": null,
+        "hidden": false,
+        "type": "normal",
+        "connected": [],
         "config": {
+          "texture": "systems/ptr2e/img/perk-icons/Chef.svg",
           "alpha": null,
-          "backgroundColor": "#ff80ff",
+          "backgroundColor": null,
           "borderColor": null,
           "borderWidth": null,
-          "texture": "systems/ptr2e/img/perk-icons/Chef.svg",
           "tint": null,
           "scale": null
         },
-        "hidden": false,
-        "type": "normal",
-        "x": 184,
-        "y": 138,
         "tier": null
       }
     ],
     "autoUnlock": [],
-    "originSlug": null,
-    "variant": null,
-    "mode": null,
     "global": true,
     "webs": [],
     "design": {
       "arena": "social",
       "approach": "finesse",
-      "archetype": "Chef"
+      "archetype": "chef"
     },
     "publication": {
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
-    }
+      ],
+      "notes": ""
+    },
+    "originSlug": null,
+    "variant": null,
+    "mode": null
   },
   "_id": "pZ9pdfIKMVYtJBeW",
   "img": "systems/ptr2e/img/perk-icons/Chef.svg",

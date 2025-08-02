@@ -194,6 +194,12 @@ class ItemAlteration extends foundry.abstract.DataModel<ChangeModel> {
               : key === "actor" || key === "item" || key === "effect"
                 ? this[key]
                 : this.effect;
+
+          if(key === "actor" && prop.match(/skills\.(.*)\.mod/)) {
+            const value = this.actor?.system?.skills?.get(prop.split(".")[1])?.total;
+            if(value != undefined && !isNaN(value)) return String(value); 
+          }
+
           const value = fu.getProperty(data ?? {}, prop);
           if (value === undefined) {
             this.ignored = true;
@@ -249,7 +255,7 @@ class ItemAlteration extends foundry.abstract.DataModel<ChangeModel> {
     }
 
     if (resolvedFromBracket instanceof Object) {
-      return defaultValue instanceof Object
+      return defaultValue instanceof Object && !Array.isArray(defaultValue)
         ? fu.mergeObject(defaultValue, resolvedFromBracket, { inplace: false })
         : resolvedFromBracket;
     }
@@ -261,15 +267,15 @@ class ItemAlteration extends foundry.abstract.DataModel<ChangeModel> {
           const unresolveds = formula.match(/@[a-z0-9.]+/g) ?? [];
           // Allow failure of "@target" and "@actor.conditions" with no warning
           if (unresolveds.length > 0) {
-            const shouldWarn =
-              warn &&
-              !unresolveds.every(
-                (u) =>
-                  u.startsWith("@target.") || u.startsWith("@actor.conditions.")
-              );
-            this.ignored = true;
-            if (shouldWarn) {
-              this.failValidation(`unable to resolve formula, "${formula}"`);
+            const ignoredCase = unresolveds.every(
+              (u) =>
+                u.startsWith("@target.") || u.startsWith("@actor.conditions.")
+            );
+            if (!ignoredCase) {
+              this.ignored = true;
+              if (warn) {
+                this.failValidation(`unable to resolve formula, "${formula}"`);
+              }
             }
             return Number(defaultValue);
           }
