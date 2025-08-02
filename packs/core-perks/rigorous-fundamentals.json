@@ -14,10 +14,9 @@
     ],
     "prerequisites": [],
     "autoUnlock": [],
-    "cost": 2,
+    "cost": 1,
     "variant": "multi",
     "mode": "individual",
-    "global": false,
     "webs": [],
     "nodes": [
       {
@@ -187,8 +186,7 @@
         "PTR 2e Team"
       ],
       "notes": ""
-    },
-    "originSlug": null
+    }
   },
   "_id": "gH6z0NmKq0Suh7iZ",
   "img": "systems/ptr2e/img/icons/feat_icon.webp",
@@ -293,7 +291,9 @@
         "traits": [],
         "removeAfterCombat": false,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
@@ -315,7 +315,7 @@
       "_stats": {
         "compendiumSource": "Item.xxuGLZ0QPnw7NYa8.ActiveEffect.V64elrUanozajfG2",
         "duplicateSource": null,
-        "coreVersion": "13.342",
+        "coreVersion": "13.346",
         "systemId": "ptr2e",
         "systemVersion": "1.0.3.beta",
         "createdTime": 1738606944598,
@@ -325,13 +325,5 @@
       }
     }
   ],
-  "folder": "minorbuffsfolder",
-  "flags": {
-    "exportSource": {
-      "world": "pokemon-mystery-dungeon-shrouded-kingdoms",
-      "system": "ptr2e",
-      "coreVersion": "12.331",
-      "systemVersion": "0.10.0-alpha.5.2.1"
-    }
-  }
+  "folder": "minorbuffsfolder"
 }
