@@ -11,11 +11,13 @@
         "type": "attack",
         "traits": [
           "interrupt-1",
-          "basic"
+          "basic",
+          "flinch-20"
         ],
         "range": {
           "target": "self",
-          "unit": "m"
+          "unit": "m",
+          "distance": 10
         },
         "cost": {
           "activation": "free",
@@ -28,7 +30,8 @@
         ],
         "description": "<p>Trigger: A creature within the user's Reach uses Movement to leave the user's Reach, or that creature uses a [Manipulate] Action.</p><p>Effect: The user uses a [Contact] Attack on their Active List as a Free Action against the target before they leave the user's Reach, consuming PP as normal. Then, the user's next Activation is delayed 20%.</p>",
         "free": true,
-        "img": "systems/ptr2e/img/svg/untyped_icon.svg"
+        "img": "systems/ptr2e/img/svg/untyped_icon.svg",
+        "predicate": []
       }
     ],
     "grade": "E",
@@ -36,7 +39,13 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
+      ],
+      "notes": ""
+    },
+    "traits": [],
+    "_migration": {
+      "version": null,
+      "previous": null
     }
   },
   "_id": "onQ8IjGIE523XM7Z",
