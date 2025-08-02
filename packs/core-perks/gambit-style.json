@@ -11,7 +11,7 @@
       }
     ],
     "cost": 1,
-    "description": "<p>The target gains @Affliction[gambit] 1.</p>",
+    "description": "<p>The target gains @UUID[Compendium.ptr2e.core-effects.gambitcondititem]{Gambit}.</p>",
     "actions": [
       {
         "name": "Gambit!",
@@ -27,37 +27,11 @@
         },
         "cost": {
           "activation": "simple",
-          "powerPoints": 1,
-          "delay": null,
-          "priority": null
+          "powerPoints": 1
         },
-        "description": "<p>Effect: The target gains @Affliction[gambit] 1.</p>",
+        "description": "<p>Effect: The target gains @UUID[Compendium.ptr2e.core-effects.gambitcondititem]{Gambit}.</p>",
         "type": "generic",
-        "img": "systems/ptr2e/img/perk-icons/Orders_Training.svg",
-        "variant": null
-      },
-      {
-        "name": "Gambit! (Self)",
-        "slug": "gambit-self",
-        "traits": [
-          "command",
-          "style"
-        ],
-        "range": {
-          "target": "self",
-          "unit": "m",
-          "distance": 0
-        },
-        "cost": {
-          "activation": "simple",
-          "powerPoints": 1,
-          "delay": null,
-          "priority": null
-        },
-        "description": "<p>Effect: The target gains @Affliction[gambit] 2.</p>",
-        "type": "generic",
-        "img": "systems/ptr2e/img/perk-icons/Orders_Training.svg",
-        "variant": null
+        "img": "systems/ptr2e/img/perk-icons/Orders_Training.svg"
       }
     ],
     "slug": "gambit-style",
@@ -70,6 +44,10 @@
     },
     "nodes": [
       {
+        "x": 95,
+        "y": 125,
+        "hidden": false,
+        "type": "normal",
         "connected": [
           "assault-armor-style",
           "precise-style",
@@ -78,41 +56,108 @@
           "improved-overland-5"
         ],
         "config": {
-          "alpha": null,
-          "backgroundColor": "#004080",
-          "borderColor": null,
-          "borderWidth": null,
           "texture": "systems/ptr2e/img/perk-icons/Orders_Training.svg",
-          "tint": "#808080",
-          "scale": null
+          "backgroundColor": null,
+          "borderColor": null,
+          "tint": null
         },
+        "tier": null
+      },
+      {
+        "x": 95,
+        "y": 179,
         "hidden": false,
         "type": "normal",
-        "x": 95,
-        "y": 125,
+        "connected": [
+          "up-the-beat",
+          "the-devil-does-bargain",
+          "minor-buff-13",
+          "minor-buff-65",
+          "minor-buff-53"
+        ],
+        "config": {
+          "texture": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "tint": null
+        },
         "tier": null
       }
     ],
     "autoUnlock": [],
-    "originSlug": null,
-    "variant": null,
-    "mode": null,
+    "variant": "multi",
+    "mode": "shared",
     "global": true,
     "webs": [],
     "design": {
       "arena": "physical",
       "approach": "finesse",
-      "archetype": "Support"
+      "archetype": "support"
     },
     "publication": {
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
+      ],
+      "notes": ""
     }
   },
   "_id": "DejWRv29FwiYyyeE",
   "img": "systems/ptr2e/img/perk-icons/Orders_Training.svg",
-  "effects": [],
+  "effects": [
+    {
+      "name": "Gambit Style",
+      "type": "passive",
+      "_id": "tkfwtlJPTYG41EEE",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "gambit-style-generic",
+            "value": "Compendium.ptr2e.core-effects.Item.gambitcondititem",
+            "predicate": [],
+            "chance": 100,
+            "isFixedChance": true,
+            "affects": "target",
+            "alterations": [],
+            "dontMerge": false,
+            "mode": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.346",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.1.beta",
+        "createdTime": 1754128230728,
+        "modifiedTime": 1754128254936,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+      }
+    }
+  ],
   "folder": "JZrGRskscJOkkPWA"
 }
