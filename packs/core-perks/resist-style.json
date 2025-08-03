@@ -8,8 +8,10 @@
       "previous": null
     },
     "publication": {
-      "source": "",
-      "authors": [],
+      "source": "PTR 2e Core",
+      "authors": [
+        "StitchedReals"
+      ],
       "notes": ""
     },
     "actions": [
@@ -37,17 +39,7 @@
         ],
         "category": "status",
         "free": true,
-        "predicate": [],
-        "variant": null,
-        "ephemeralVariant": false,
-        "contestType": "",
-        "contestEffect": "",
-        "slot": null,
-        "summon": null,
-        "defaultVariant": null,
-        "flingItemId": "",
-        "offensiveStat": null,
-        "defensiveStat": null
+        "predicate": []
       },
       {
         "name": "Resist! (Self)",
@@ -58,8 +50,7 @@
         "img": "systems/ptr2e/img/icons/feat_icon.webp",
         "range": {
           "target": "self",
-          "unit": "m",
-          "distance": 0
+          "unit": "m"
         },
         "cost": {
           "activation": "simple",
@@ -70,21 +61,11 @@
         ],
         "category": "status",
         "free": true,
-        "predicate": [],
-        "variant": null,
-        "ephemeralVariant": false,
-        "contestType": "",
-        "contestEffect": "",
-        "slot": null,
-        "summon": null,
-        "defaultVariant": null,
-        "flingItemId": "",
-        "offensiveStat": null,
-        "defensiveStat": null
+        "predicate": []
       }
     ],
     "slug": "resist-style",
-    "description": "<p>The Target gains Resist 1.</p>",
+    "description": "<p>The Target gains @UUID[Compendium.ptr2e.core-effects.resistcondititem]{Resist}.</p>",
     "traits": [
       "command",
       "style"
@@ -110,6 +91,8 @@
       {
         "x": 113,
         "y": 140,
+        "hidden": false,
+        "type": "normal",
         "connected": [
           "minor-buff-17",
           "agile-style",
@@ -118,14 +101,15 @@
           "magic-armor-style",
           "berserker-trainer"
         ],
-        "hidden": false,
-        "type": "normal",
+        "config": {
+          "texture": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "tint": null
+        },
         "tier": null
       }
-    ],
-    "originSlug": null,
-    "variant": null,
-    "mode": null
+    ]
   },
   "img": "systems/ptr2e/img/perk-icons/Orders_Training.svg",
   "effects": [
@@ -148,7 +132,8 @@
             "priority": null,
             "ignored": false,
             "alterations": [],
-            "dontMerge": false
+            "dontMerge": false,
+            "isFixedChance": false
           },
           {
             "type": "roll-effect",
@@ -162,7 +147,8 @@
             "priority": null,
             "ignored": false,
             "alterations": [],
-            "dontMerge": false
+            "dontMerge": false,
+            "isFixedChance": false
           }
         ],
         "slug": null,
@@ -175,7 +161,9 @@
         "stacks": 0,
         "priority": 50,
         "formula": "",
-        "type": "damage"
+        "type": "damage",
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
@@ -197,7 +185,7 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "13.342",
+        "coreVersion": "13.346",
         "systemId": "ptr2e",
         "systemVersion": "1.1.2.beta",
         "createdTime": null,
@@ -207,6 +195,5 @@
       }
     }
   ],
-  "flags": {},
   "_id": "IkpQyKRvQFBF1iD3"
 }
