@@ -31,11 +31,21 @@
     },
     "global": true,
     "webs": [],
-    "nodes": [],
-    "description": "<p>Effect: The user gains Rivalry as a Tutored Ability.</p>",
-    "originSlug": null,
-    "variant": null,
-    "mode": null
+    "nodes": [
+      {
+        "x": 123,
+        "y": 79,
+        "connected": [
+          "tyrants-contempt",
+          "minor-buff-61",
+          "minor-buff-39"
+        ],
+        "hidden": false,
+        "type": "normal",
+        "tier": null
+      }
+    ],
+    "description": "<p>Effect: The user gains Rivalry as a Tutored Ability.</p>"
   },
   "img": "systems/ptr2e/img/svg/dragon_icon.svg",
   "effects": [
@@ -70,7 +80,9 @@
         "traits": [],
         "removeAfterCombat": true,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
@@ -92,7 +104,7 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "13.342",
+        "coreVersion": "13.346",
         "systemId": "ptr2e",
         "systemVersion": "1.2.1.beta",
         "createdTime": null,
@@ -102,6 +114,5 @@
       }
     }
   ],
-  "flags": {},
   "_id": "KmAqDBmbIFeUsBXL"
 }

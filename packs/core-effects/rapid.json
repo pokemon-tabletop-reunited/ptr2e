@@ -24,9 +24,10 @@
       "img": "icons/svg/wingfoot.svg",
       "type": "affliction",
       "duration": {
-        "turns": 2,
+        "turns": null,
         "startTime": null,
-        "combat": null
+        "combat": null,
+        "startTurn": null
       },
       "system": {
         "changes": [],
@@ -36,7 +37,7 @@
           "pseudo-affliction"
         ],
         "slug": null,
-        "removeAfterAttacking": false,
+        "removeAfterAttacking": true,
         "removeAfterAttacked": false,
         "stacks": 0,
         "priority": 50,
@@ -44,17 +45,15 @@
         "type": "damage"
       },
       "description": "A creature afflicted with Rapid may perform [Exhaust] Actions as though they lack the Trait AND resolve [Set Up] Actions on the same activation they are set up.",
-      "statuses": [
-        "rapid"
-      ],
+      "statuses": [],
       "_id": "rapidcondition00",
       "_stats": {
         "coreVersion": "13.346",
-        "systemId": null,
-        "systemVersion": null,
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.1.beta",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null,
+        "modifiedTime": 1754127814588,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf",
         "compendiumSource": null,
         "duplicateSource": null,
         "exportSource": null
@@ -68,23 +67,5 @@
     }
   ],
   "folder": "V4skAU6G3OH5fXgE",
-  "_id": "rapidconditiitem",
-  "flags": {
-    "core": {}
-  },
-  "_stats": {
-    "coreVersion": "13.346",
-    "systemId": null,
-    "systemVersion": null,
-    "createdTime": null,
-    "modifiedTime": null,
-    "lastModifiedBy": null,
-    "compendiumSource": "Compendium.ptr2e.core-effects.Item.rapidconditiitem",
-    "duplicateSource": null,
-    "exportSource": null
-  },
-  "sort": 0,
-  "ownership": {
-    "default": 0
-  }
+  "_id": "rapidconditiitem"
 }

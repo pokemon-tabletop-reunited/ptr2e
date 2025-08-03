@@ -40,9 +40,105 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
+      ],
+      "notes": ""
     }
   },
   "_id": "GdUV0ujrIlwb3Eh4",
-  "effects": []
+  "effects": [
+    {
+      "name": "Dark Shroud",
+      "type": "passive",
+      "_id": "7zUxnH1t7Vx7UimX",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-option",
+            "key": "",
+            "value": "dark-shroud:active",
+            "predicate": [],
+            "domain": "all",
+            "toggleable": true,
+            "count": false,
+            "label": "Dark Shroud",
+            "state": true,
+            "alwaysActive": false,
+            "mode": 2,
+            "ignored": false,
+            "suboptions": []
+          },
+          {
+            "type": "aura",
+            "key": "",
+            "value": 0,
+            "predicate": [
+              "graveyard:active"
+            ],
+            "mode": 2,
+            "ignored": false,
+            "radius": 5,
+            "effects": [
+              {
+                "uuid": "Compendium.ptr2e.core-effects.Item.pAUcyVcIsI3Q5yG7",
+                "affects": "all",
+                "events": [
+                  "enter"
+                ],
+                "removeOnExit": true,
+                "includesSelf": true,
+                "appliesSelfOnly": false,
+                "predicate": [
+                  "target:trait:dark"
+                ]
+              }
+            ],
+            "appearance": {
+              "border": {
+                "color": "#FF0000",
+                "alpha": 0.75
+              },
+              "highlight": {
+                "color": "user-color",
+                "alpha": 0.25
+              },
+              "texture": null
+            },
+            "mergeExisting": true,
+            "priority": null
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.346",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.1.beta",
+        "createdTime": 1753872022084,
+        "modifiedTime": 1753872314062,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+      }
+    }
+  ]
 }
