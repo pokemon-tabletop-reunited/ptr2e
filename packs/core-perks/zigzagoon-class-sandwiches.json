@@ -21,9 +21,7 @@
         "description": "<p>You are able to make Zigzagoon-Class Sandwiches as a Camp Action. In addition to their usual effects, these sandwiches confer a +20 on one skill check of your choosing in the following day. Some diners find themselves oddly unable to walk in a straight line after eating these sandwiches.</p>",
         "cost": {
           "activation": "complex",
-          "powerPoints": 0,
-          "delay": null,
-          "priority": null
+          "powerPoints": 0
         },
         "type": "camping",
         "traits": [],
@@ -33,7 +31,8 @@
           "unit": "m",
           "distance": 0
         },
-        "variant": null
+        "variant": null,
+        "ephemeralVariant": false
       }
     ],
     "slug": "zigzagoon-class-sandwiches",
@@ -44,43 +43,41 @@
     },
     "nodes": [
       {
-        "x": 187,
-        "y": 136,
+        "x": null,
+        "y": null,
         "hidden": false,
         "type": "normal",
-        "connected": [
-          "trubbish-class-sandwiches",
-          "lechonk-class-sandwiches"
-        ],
+        "connected": [],
         "config": {
+          "texture": "systems/ptr2e/img/perk-icons/Chef.svg",
           "alpha": null,
-          "backgroundColor": "#804000",
+          "backgroundColor": null,
           "borderColor": null,
           "borderWidth": null,
-          "texture": "systems/ptr2e/img/perk-icons/Chef.svg",
-          "tint": "#ffffff",
+          "tint": null,
           "scale": null
         },
         "tier": null
       }
     ],
     "autoUnlock": [],
-    "originSlug": null,
-    "variant": null,
-    "mode": null,
     "global": true,
     "webs": [],
     "design": {
       "arena": "social",
       "approach": "resilience",
-      "archetype": "Chef"
+      "archetype": "chef"
     },
     "publication": {
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
-    }
+      ],
+      "notes": ""
+    },
+    "originSlug": null,
+    "variant": null,
+    "mode": null
   },
   "_id": "EICoj1ArkNCRaWrJ",
   "img": "systems/ptr2e/img/perk-icons/Chef.svg",

@@ -161,7 +161,7 @@ class PerkStore extends Collection<PerkNode> {
           const species = actor.items.get('actorspeciesitem') as SpeciesPTR2e | undefined;
           if (!species) continue;
 
-          if (species.flags.core?.sourceId === evolution.uuid || (species.slug + (species?.system.form ? `-${species.system.form}` : "")) === evolution.name || species.slug === evolution.name) {
+          if ((species.flags.core?.sourceId === evolution.uuid || species._stats.compendiumSource === evolution.uuid) || (species.slug + (species?.system.form ? `-${species.system.form}` : "")) === evolution.name || species.slug === evolution.name) {
             node.state = PerkState.purchased;
             currentTier = Math.max(currentTier, evolution.tier);
 

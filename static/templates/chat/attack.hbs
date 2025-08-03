@@ -25,12 +25,14 @@
               <button type="button" class="collapse-rolls{{#if @root.defaultExpanded}} expanded{{/if}}" data-uuid="{{uuid}}">Show Rolls for {{data.target.name}}</button>
           </div>
           <article class="collapsed">
-              {{#if data.rolls.accuracy}}{{{data.rolls.accuracy}}}{{/if}}
-              {{#if data.rolls.crit}}{{{data.rolls.crit}}}{{/if}}
-              {{#if data.rolls.damage}}{{{data.rolls.damage}}}{{/if}}
+              {{#if data.rolls.accuracy}}{{#if @root.metagameInfo.showAccuracyRoll}}{{{data.rolls.accuracy}}}{{/if}}{{/if}}
+              {{#if data.rolls.crit}}{{#if @root.metagameInfo.showAccuracyRoll}}{{{data.rolls.crit}}}{{/if}}{{/if}}
+              {{#if data.rolls.damage}}{{#if @root.metagameInfo.showDamageRoll}}{{{data.rolls.damage}}}{{/if}}{{/if}}
+              {{#if @root.metagameInfo.showEffectRolls}}
               {{#each data.rolls.effects}}
                   {{{this}}}
               {{/each}}
+              {{/if}}
           </article>
           {{#if data.notes}}
               <section class="notes">
@@ -40,12 +42,14 @@
       {{/unless}}
     {{/each}}
     {{#if selfEffectRolls}}
-       <div class="collapse-button">
-          <button type="button" class="collapse-rolls">Show Self Effect Rolls</button>
-      </div>
-      <article class="collapsed">
-        {{#each selfEffectRolls}}{{{this}}}{{/each}}
-      </article>
+      {{#if @root.metagameInfo.showEffectRolls}}
+        <div class="collapse-button">
+            <button type="button" class="collapse-rolls">Show Self Effect Rolls</button>
+        </div>
+        <article class="collapsed">
+          {{#each selfEffectRolls}}{{{this}}}{{/each}}
+        </article>
+      {{/if}}
     {{/if}}
 </main>
 <footer>
@@ -73,13 +77,21 @@
               <img src="{{data.target.img}}" alt="{{data.target.name}}">
           </div>
           {{#with data.hit}}
-          <div class="status" data-tooltip="{{this}}" data-tooltip-direction="UP">
+          <div class="status" {{#if @root.metagameInfo.showAccuracyTooltip}} data-tooltip="{{this}}" data-tooltip-direction="UP"{{/if}}>
+            {{#if @root.metagameInfo.showAccuracyResult}}
               <i class="fas fa-{{#if (is this "hit")}}certificate{{else if (is this "critical")}}crosshairs{{else}}times-circle{{/if}}"></i>
+            {{else}}
+              <i class="fas fa-question"></i>
+            {{/if}}
           </div>
           {{/with}}
           {{#if (and @root.hasDamage @root.hasEffect)}}
-            <div class="damage" data-tooltip="{{data.damage}}" data-tooltip-direction="LEFT">
+            <div class="damage" {{#if @root.metagameInfo.showDamageTooltip}}data-tooltip="{{data.damage}}" data-tooltip-direction="LEFT"{{/if}}>
+              {{#if @root.metagameInfo.showDamageResult}}
                 <span>{{data.damage}}</span>
+              {{else}}
+                <i class="fas fa-question"></i>
+              {{/if}}
             </div>
             {{#if hasCaptureRoll}}
               <div class="apply">
@@ -90,13 +102,21 @@
                 </button>
             </div>
             {{else}}
-              <div class="effect-rolls" data-tooltip="target-effect-rolls" data-tooltip-direction="LEFT">
-                <i class="{{#if data.effect.some}}fas{{else}}far{{/if}} fa-star"></i>
+              <div class="effect-rolls" {{#if @root.metagameInfo.showEffectRollsTooltip}}data-tooltip="target-effect-rolls" data-tooltip-direction="LEFT"{{/if}}>
+                {{#if @root.metagameInfo.showEffectRollsResult}}
+                  <i class="{{#if data.effect.some}}fas{{else}}far{{/if}} fa-star"></i>
+                {{else}}
+                  <i class="fas fa-question"></i>
+                {{/if}}
               </div>
             {{/if}}
           {{else if @root.hasEffect}}
-              <div class="effect-rolls" data-tooltip="target-effect-rolls" data-tooltip-direction="LEFT">
-                <i class="{{#if data.effect.some}}fas{{else}}far{{/if}} fa-star"></i>
+              <div class="effect-rolls" {{#if @root.metagameInfo.showEffectRollsTooltip}}data-tooltip="target-effect-rolls" data-tooltip-direction="LEFT"{{/if}}>
+                {{#if @root.metagameInfo.showEffectRollsResult}}
+                  <i class="{{#if data.effect.some}}fas{{else}}far{{/if}} fa-star"></i>
+                {{else}}
+                  <i class="fas fa-question"></i>
+                {{/if}}
               </div>
               <div class="damage">
                 {{#if hasCaptureRoll}}
@@ -110,8 +130,12 @@
                 {{/if}}
               </div>
           {{else if @root.hasDamage}}
-              <div class="damage" data-tooltip="{{data.damage}}" data-tooltip-direction="LEFT">
+              <div class="damage" {{#if @root.metagameInfo.showDamageTooltip}}data-tooltip="{{data.damage}}" data-tooltip-direction="LEFT"{{/if}}>
+                {{#if @root.metagameInfo.showDamageResult}}
                   <span>{{data.damage}}</span>
+                {{else}}
+                  <i class="fas fa-question"></i>
+                {{/if}}
               </div>
               <div class="effect-rolls">
                 {{#if hasCaptureRoll}}

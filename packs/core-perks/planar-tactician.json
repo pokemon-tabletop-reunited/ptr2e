@@ -1,0 +1,148 @@
+{
+  "folder": "F4b52L00KrAtdPu5",
+  "name": "Planar Tactician",
+  "type": "perk",
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Dev"
+      ],
+      "notes": ""
+    },
+    "actions": [],
+    "slug": "planar-tactician",
+    "traits": [],
+    "prerequisites": [
+      "item:move:ally-switch",
+      {
+        "gte": [
+          "{actor|skills.psychic.mod}",
+          60
+        ]
+      }
+    ],
+    "autoUnlock": [],
+    "cost": 1,
+    "design": {
+      "arena": "mental",
+      "approach": "resilience",
+      "archetype": "psychic"
+    },
+    "global": true,
+    "webs": [],
+    "nodes": [
+      {
+        "x": 150,
+        "y": 136,
+        "hidden": false,
+        "type": "normal",
+        "connected": [
+          "telekinetic-potential",
+          "hypnotic-suggestion",
+          "minor-buff-31",
+          "groomer"
+        ],
+        "config": {
+          "texture": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "tint": null
+        },
+        "tier": null
+      }
+    ],
+    "description": "<p>Effect: Connection – Ally Switch. <br><br>The user learns Ally Recall.</p>"
+  },
+  "img": "icons/magic/light/explosion-star-glow-purple.webp",
+  "effects": [
+    {
+      "name": "Planar Tactician",
+      "type": "passive",
+      "_id": "GjNBmA2qzg2MNYp0",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "grant-item",
+            "key": "",
+            "value": "Compendium.ptr2e.core-moves.Item.GFHmsvlYP7sgp7em",
+            "predicate": [],
+            "alterations": [
+              {
+                "mode": 2,
+                "property": "system.actions.0.free",
+                "value": "true"
+              }
+            ],
+            "priority": null,
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            },
+            "mode": 2,
+            "ignored": false,
+            "reevaluateOnUpdate": false,
+            "inMemoryOnly": false,
+            "allowDuplicate": true,
+            "track": false,
+            "replaceSelf": false
+          },
+          {
+            "type": "grant-item",
+            "key": "",
+            "value": "Compendium.ptr2e.core-moves.Item.vfD9OztxBbceUce5",
+            "predicate": [],
+            "priority": null,
+            "alterations": [],
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            },
+            "mode": 2,
+            "ignored": false,
+            "reevaluateOnUpdate": false,
+            "inMemoryOnly": false,
+            "allowDuplicate": true,
+            "track": false,
+            "replaceSelf": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": false,
+        "removeOnRecall": false,
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      }
+    }
+  ],
+  "_id": "kkdV5AfafK6scbd9"
+}

@@ -5,23 +5,19 @@ import { htmlQuery, htmlQueryAll, tupleHasValue } from "@utils";
 export class ModifierPopup extends foundry.applications.api.HandlebarsApplicationMixin(
   foundry.applications.api.ApplicationV2
 ) {
-  static override DEFAULT_OPTIONS = fu.mergeObject(
-    super.DEFAULT_OPTIONS,
-    {
-      classes: ["sheet modifier-popup"],
-      position: {
-        height: "auto",
-        width: 400,
-      },
-      form: {
-        closeOnSubmit: true,
-        submitOnChange: false,
-        handler: ModifierPopup.#onSubmit,
-      },
-      tag: "form",
+  static override DEFAULT_OPTIONS = {
+    classes: ["sheet modifier-popup"],
+    position: {
+      height: "auto",
+      width: 400,
     },
-    { inplace: false }
-  );
+    form: {
+      closeOnSubmit: true,
+      submitOnChange: false,
+      handler: ModifierPopup.#onSubmit,
+    },
+    tag: "form",
+  } as unknown as Omit<DeepPartial<foundry.applications.api.ApplicationConfiguration>, "uniqueId">;
 
   static override PARTS: Record<string, foundry.applications.api.HandlebarsTemplatePart> = {
     modifiers: {
@@ -117,7 +113,7 @@ export class ModifierPopup extends foundry.applications.api.HandlebarsApplicatio
               : "invalid";
         case "any":
           return method === "flat"
-            ? this.context.type !== "pokeball-check" 
+            ? this.context.type !== "pokeball-check"
               ? "any-flat"
               : "invalid"
             : "invalid";
@@ -214,7 +210,7 @@ export class ModifierPopup extends foundry.applications.api.HandlebarsApplicatio
         errors.push("Invalid modifier type. Please select a valid modifier type.");
       }
       if (!name || !name.trim()) {
-        if(modifierType === "crit-base") name = "Mons Caught";
+        if (modifierType === "crit-base") name = "Mons Caught";
         else name = game.i18n.localize(value < 0 ? `Penalty` : `Bonus`);
       }
       if (errors.length > 0) {

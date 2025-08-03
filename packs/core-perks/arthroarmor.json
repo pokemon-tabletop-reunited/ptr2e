@@ -1,0 +1,120 @@
+{
+  "folder": "o5iIUG4Bj40M86yi",
+  "name": "Arthroarmor",
+  "type": "perk",
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Dev"
+      ],
+      "notes": ""
+    },
+    "actions": [],
+    "slug": "arthroarmor",
+    "description": "<p>Effect: The user gains Chitin Plates as a Tutored Ability.</p>",
+    "traits": [],
+    "prerequisites": [
+      "trait:bug"
+    ],
+    "autoUnlock": [
+      "item:perk:chitin-plates"
+    ],
+    "cost": 2,
+    "design": {
+      "arena": "physical",
+      "approach": "resilience",
+      "archetype": "bug"
+    },
+    "global": true,
+    "webs": [],
+    "nodes": [
+      {
+        "x": 82,
+        "y": 28,
+        "connected": [
+          "arthroprods",
+          "root-1",
+          "adhesive-digits"
+        ],
+        "hidden": false,
+        "type": "normal",
+        "tier": null
+      }
+    ],
+    "originSlug": null,
+    "variant": null,
+    "mode": null
+  },
+  "img": "icons/creatures/invertebrates/beetle-stag-tan-brown.webp",
+  "effects": [
+    {
+      "name": "Arthroarmor",
+      "type": "passive",
+      "_id": "kc8ikOMwT7wKUVK5",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "grant-item",
+            "key": "",
+            "value": "Compendium.ptr2e.core-abilities.Item.gDSxrDlryQod2sNV",
+            "predicate": [],
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "reevaluateOnUpdate": false,
+            "inMemoryOnly": false,
+            "allowDuplicate": true,
+            "alterations": [],
+            "track": false,
+            "replaceSelf": false,
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            }
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": false,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "13.342",
+        "systemId": "ptr2e",
+        "systemVersion": "1.2.1.beta",
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null,
+        "exportSource": null
+      }
+    }
+  ],
+  "flags": {},
+  "_id": "755YpplHAof2NTRe"
+}

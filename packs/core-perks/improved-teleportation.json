@@ -4,8 +4,7 @@
   "folder": "zrVtKATNxzLNxTUe",
   "system": {
     "prerequisites": [
-      "#A Teleportation Movement Allowance",
-      "#Occult (Psychic) 40 + 5 x (# of Improved Teleportation Perks already obtained)"
+      "#A Teleportation Movement Allowance"
     ],
     "cost": 1,
     "description": "<p>Improve your Teleportation Movement Allowance by 2.</p>",
@@ -29,11 +28,14 @@
           "distance": 0
         },
         "variant": null,
-        "hidden": false
+        "hidden": false,
+        "ephemeralVariant": false
       }
     ],
     "slug": "improved-teleportation",
-    "traits": [],
+    "traits": [
+      "minor-buff"
+    ],
     "_migration": {
       "version": 0.109,
       "previous": {
@@ -117,18 +119,19 @@
     ],
     "autoUnlock": [],
     "originSlug": "improved-teleportation-2",
-    "global": true,
+    "global": false,
     "webs": [],
     "design": {
       "arena": "mental",
       "approach": "power",
-      "archetype": "Mobility"
+      "archetype": "mobility"
     },
     "publication": {
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
+      ],
+      "notes": ""
     }
   },
   "_id": "7f24boNPqznIhjiv",
@@ -149,6 +152,18 @@
             "mode": 2,
             "priority": null,
             "ignored": false
+          },
+          {
+            "type": "roll-option",
+            "value": "improved-teleportation",
+            "domain": "all",
+            "count": true,
+            "key": "",
+            "mode": 2,
+            "predicate": [],
+            "ignored": false,
+            "suboptions": [],
+            "state": true
           }
         ],
         "slug": null,
@@ -177,12 +192,13 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.342",
         "systemId": "ptr2e",
         "systemVersion": "0.10.0-alpha.4.2.3",
         "createdTime": 1735220270467,
         "modifiedTime": 1735220279891,
-        "lastModifiedBy": "wRgL6u6KEJDBDQIE"
+        "lastModifiedBy": "wRgL6u6KEJDBDQIE",
+        "exportSource": null
       }
     }
   ]

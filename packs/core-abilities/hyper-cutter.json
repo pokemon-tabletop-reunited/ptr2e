@@ -20,7 +20,8 @@
     ],
     "description": "<p>Passive: The user ignores negative ATK [Stage Change] effects. The user's [Contact] and/or [Sharp] Attacks gain [Crit 1] or [Crit X+1].</p>",
     "traits": [
-      "defensive"
+      "defensive",
+      "partial-automation"
     ],
     "slug": "hyper-cutter",
     "_migration": {
@@ -31,9 +32,69 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
+      ],
+      "notes": ""
     }
   },
   "_id": "SeI2XN0WYFCRxovH",
-  "effects": []
+  "effects": [
+    {
+      "name": "Hyper Cutter",
+      "type": "passive",
+      "_id": "VdsfK9HbwbjRdM3g",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "stage-modifier",
+            "key": "contact-trait-attack-crit",
+            "value": 1,
+            "predicate": [],
+            "mode": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          },
+          {
+            "type": "stage-modifier",
+            "key": "sharp-trait-attack-crit",
+            "value": 1,
+            "predicate": [],
+            "mode": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.346",
+        "systemId": "ptr2e",
+        "systemVersion": "1.3.8.beta",
+        "createdTime": 1753372188871,
+        "modifiedTime": 1753372220885,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+      }
+    }
+  ]
 }

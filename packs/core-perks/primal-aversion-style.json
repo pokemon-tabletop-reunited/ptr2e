@@ -1,0 +1,61 @@
+{
+  "name": "Primal Aversion Style",
+  "_id": "q1OjUbNvmTc0hyQk",
+  "type": "perk",
+  "img": "systems/ptr2e/img/svg/bug_icon.svg",
+  "effects": [],
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "publication": {
+      "source": "PTR2e Core",
+      "authors": [
+        "Fox"
+      ],
+      "notes": ""
+    },
+    "actions": [],
+    "slug": null,
+    "description": "<p>Target: A Commanded @Trait[bug] Creature<br><br>Effects: The target's @Trait[bug]-Type Attacks afflict the target with @Affliction[delay-20], additionally the user takes 50% more damage from @Trait[fire]-Type Attacks.</p>",
+    "traits": [
+      "command",
+      "style",
+      "bug"
+    ],
+    "prerequisites": [
+      "item:perk:type-specialist",
+      {
+        "gte": [
+          "{actor|skills.leadership.mod}",
+          35
+        ]
+      }
+    ],
+    "autoUnlock": [],
+    "cost": 2,
+    "originSlug": null,
+    "design": {
+      "arena": "social",
+      "approach": "power",
+      "archetype": "bug"
+    },
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": [],
+    "nodes": [
+      {
+        "x": 187,
+        "y": 103,
+        "connected": [
+          "type-specialist"
+        ],
+        "hidden": false,
+        "type": "normal",
+        "tier": null
+      }
+    ]
+  }
+}

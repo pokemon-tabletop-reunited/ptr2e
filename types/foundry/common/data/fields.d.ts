@@ -1085,6 +1085,7 @@ type DocumentStatsSchema = {
     createdTime: NumberField;
     modifiedTime: NumberField;
     lastModifiedBy: ForeignDocumentField<string>;
+    compendiumSource: StringField<string, string, false, false, true>;
 };
 
 /**
