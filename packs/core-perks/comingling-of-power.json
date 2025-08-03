@@ -1,0 +1,63 @@
+{
+  "name": "Comingling of Power",
+  "_id": "Q9ZbtsBFSQ5jUtG7",
+  "type": "perk",
+  "img": "icons/magic/symbols/chevron-elipse-circle-blue.webp",
+  "effects": [],
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "publication": {
+      "source": "PTR2e - Fantasy",
+      "authors": [
+        "Dragoon"
+      ],
+      "notes": ""
+    },
+    "actions": [],
+    "slug": null,
+    "description": "<p>The user’s Special-Category, [Aura], or [Pulse] Moves gain [Arcane].</p>",
+    "traits": [
+      "arcane"
+    ],
+    "prerequisites": [
+      {
+        "gte": [
+          "{actor|skills.thaumaturgy.mod}",
+          45
+        ]
+      }
+    ],
+    "autoUnlock": [],
+    "cost": 2,
+    "originSlug": null,
+    "design": {
+      "arena": "mental",
+      "approach": "finesse",
+      "archetype": "arcane"
+    },
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": [],
+    "nodes": [
+      {
+        "x": 121,
+        "y": 188,
+        "connected": [
+          "minor-buff-23",
+          "metamove-dirty-trick",
+          "metamove-power-swap",
+          "introductory-magecraft",
+          "prestidigitator",
+          "isolated-study"
+        ],
+        "hidden": false,
+        "type": "normal",
+        "tier": null
+      }
+    ]
+  }
+}

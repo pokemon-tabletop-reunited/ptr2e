@@ -22,7 +22,7 @@
       {
         "gte": [
           "{actor|skills.psychic.mod}",
-          80
+          60
         ]
       }
     ],
@@ -35,7 +35,28 @@
     },
     "global": true,
     "webs": [],
-    "nodes": []
+    "nodes": [
+      {
+        "x": 150,
+        "y": 136,
+        "hidden": false,
+        "type": "normal",
+        "connected": [
+          "telekinetic-potential",
+          "hypnotic-suggestion",
+          "minor-buff-31",
+          "groomer"
+        ],
+        "config": {
+          "texture": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "tint": null
+        },
+        "tier": null
+      }
+    ],
+    "description": "<p>Effect: Connection – Ally Switch. <br><br>The user learns Ally Recall.</p>"
   },
   "img": "icons/magic/light/explosion-star-glow-purple.webp",
   "effects": [
@@ -55,47 +76,49 @@
               {
                 "mode": 2,
                 "property": "system.actions.0.free",
-                "value": 0
+                "value": "true"
               }
             ],
-            "mode": 2,
             "priority": null,
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            },
+            "mode": 2,
             "ignored": false,
             "reevaluateOnUpdate": false,
             "inMemoryOnly": false,
             "allowDuplicate": true,
             "track": false,
-            "replaceSelf": false,
-            "onDeleteActions": {
-              "grantee": "detach",
-              "granter": "cascade"
-            }
+            "replaceSelf": false
           },
           {
             "type": "grant-item",
             "key": "",
             "value": "Compendium.ptr2e.core-moves.Item.vfD9OztxBbceUce5",
             "predicate": [],
-            "mode": 2,
             "priority": null,
+            "alterations": [],
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            },
+            "mode": 2,
             "ignored": false,
             "reevaluateOnUpdate": false,
             "inMemoryOnly": false,
             "allowDuplicate": true,
-            "alterations": [],
             "track": false,
-            "replaceSelf": false,
-            "onDeleteActions": {
-              "grantee": "detach",
-              "granter": "cascade"
-            }
+            "replaceSelf": false
           }
         ],
         "slug": null,
         "traits": [],
         "removeAfterCombat": false,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
@@ -117,15 +140,9 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
-        "systemId": "ptr2e",
-        "systemVersion": "1.2.1.beta",
-        "createdTime": 1746674836313,
-        "modifiedTime": 1746678072843,
-        "lastModifiedBy": "5ImYyhOS2D6D7ypO"
+        "exportSource": null
       }
     }
   ],
-  "flags": {},
   "_id": "kkdV5AfafK6scbd9"
 }

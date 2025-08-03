@@ -904,7 +904,7 @@ export default abstract class BlueprintSystem extends HasEmbed(HasMigrations(fou
         // If the species is not a compendium item, add it to the additional data
         if (!(blueprint.species as string)?.startsWith("Compendium.")) {
           const uuid = blueprint.species as string;
-          const doc = await fromUuid(uuid);
+          const doc = await fu.fromUuid(uuid);
 
           if (doc instanceof ItemPTR2e && doc.system instanceof SpeciesSystem) {
             if (!additionalData.items.has(uuid!)) additionalData.items.set(uuid!, doc.toCompendium(null, { keepId: true }));
@@ -947,7 +947,7 @@ export default abstract class BlueprintSystem extends HasEmbed(HasMigrations(fou
         }
         // If the species is a compendium item, add the pack to the required packs
         else {
-          const doc = await fromUuid(blueprint.species as string);
+          const doc = await fu.fromUuid(blueprint.species as string);
           if (!doc) return void ui.notifications.error("Invalid species reference");
           if (!(doc instanceof ItemPTR2e && doc.system instanceof SpeciesSystem) && !(doc instanceof ActorPTR2e) && !(doc instanceof RollTable)) return void ui.notifications.error("Invalid species reference");
 
@@ -961,7 +961,7 @@ export default abstract class BlueprintSystem extends HasEmbed(HasMigrations(fou
       else if (!Number.isNaN(Number(blueprint.level))) { ; }
       else if ((blueprint.level as string).match(/^\d+-\d+$/)) { ; }
       else {
-        const doc = await fromUuid(blueprint.level as string);
+        const doc = await fu.fromUuid(blueprint.level as string);
         if (doc instanceof RollTable) {
           const uuid = blueprint.level as string;
           if (!additionalData.tables.has(uuid!)) additionalData.tables.set(uuid!, doc.toCompendium(null, { keepId: true }));

@@ -11,15 +11,20 @@
         "slug": "curveball-technique",
         "description": "<p>When using Fling with a [PokeBall] item, you may choose to set the Fling's base Power to 40.</p>",
         "cost": {
-          "activation": "free"
+          "activation": "free",
+          "powerPoints": 0
         },
         "type": "passive",
         "traits": [],
         "img": "icons/svg/explosion.svg",
         "range": {
           "target": "enemy",
-          "unit": "m"
-        }
+          "unit": "m",
+          "distance": 0
+        },
+        "variant": null,
+        "ephemeralVariant": false,
+        "hidden": false
       },
       {
         "slug": "fling-curveball",
@@ -28,7 +33,8 @@
         "traits": [
           "adaptable",
           "basic",
-          "fling"
+          "fling",
+          "pp-updated"
         ],
         "range": {
           "target": "creature",
@@ -36,7 +42,8 @@
           "unit": "m"
         },
         "cost": {
-          "activation": "complex"
+          "activation": "complex",
+          "powerPoints": 0
         },
         "category": "physical",
         "power": 40,
@@ -47,7 +54,17 @@
         "description": "<p>Effect: The Type, Power, Accuracy, and Range of this attack are modified by the Fling stats of the utilized item. When using Fling utilizing a Held creature, Fling's Power and Accuracy are as follows:</p><blockquote><p>Power = 20 + (userLift / 4) + (thrownWC * 3)<br>Accuracy = 75 + (userLift / 5) + userCatMod - (4 * thrownCatMod)<br>Range = 8 + (userLift / 6) + userCatMod - (2* thrownCatMod)</p></blockquote>",
         "free": true,
         "img": "systems/ptr2e/img/svg/untyped_icon.svg",
-        "predicate": []
+        "predicate": [],
+        "variant": null,
+        "ephemeralVariant": false,
+        "contestType": "",
+        "contestEffect": "",
+        "slot": null,
+        "summon": null,
+        "defaultVariant": null,
+        "flingItemId": "",
+        "offensiveStat": null,
+        "defensiveStat": null
       }
     ],
     "slug": "curveball-technique",
@@ -90,14 +107,18 @@
     "design": {
       "arena": "physical",
       "approach": "power",
-      "archetype": "Capture"
+      "archetype": "capture"
     },
     "publication": {
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
-    }
+      ],
+      "notes": ""
+    },
+    "originSlug": null,
+    "variant": null,
+    "mode": null
   },
   "_id": "XOggUhl7hxBP9PHa",
   "img": "systems/ptr2e/img/perk-icons/Capture%20Spec.svg",

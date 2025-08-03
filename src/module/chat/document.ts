@@ -187,7 +187,7 @@ class ChatMessagePTR2e<TSchema extends TypeDataModel = TypeDataModel> extends Ch
       event.stopPropagation();
 
       const { attackUuid } = event.currentTarget.dataset;
-      const action = await fromUuid(attackUuid) as unknown as AttackPTR2e;
+      const action = await fu.fromUuid(attackUuid) as unknown as AttackPTR2e;
       if (!action) return void ui.notifications.error("Action not found.");
 
       return action.delayAction();
@@ -199,7 +199,7 @@ class ChatMessagePTR2e<TSchema extends TypeDataModel = TypeDataModel> extends Ch
       event.stopPropagation();
 
       const { actionUuid } = event.currentTarget.dataset;
-      const action = await fromUuid(actionUuid) as unknown as AttackPTR2e;
+      const action = await fu.fromUuid(actionUuid) as unknown as AttackPTR2e;
       if (!action) return void ui.notifications.error("Action not found.");
 
       const ppCost = action.cost.powerPoints
@@ -224,11 +224,11 @@ class ChatMessagePTR2e<TSchema extends TypeDataModel = TypeDataModel> extends Ch
       if (!game.combat) return void ui.notifications.error("You must be in combat to summon a creature.");
 
       const { attackUuid } = event.currentTarget.dataset;
-      const action = await fromUuid(attackUuid) as unknown as AttackPTR2e;
+      const action = await fu.fromUuid(attackUuid) as unknown as AttackPTR2e;
       if (!action) return void ui.notifications.error("Action not found.");
-      if (!(action?.type === "attack" && action.summon)) return void ui.notifications.error("Action not found on item.");
+      if (!(["attack", "generic"].includes(action?.type) && action.summon)) return void ui.notifications.error("Action not found on item.");
 
-      const summonItem = await fromUuid<SummonPTR2e>((action as AttackPTR2e).summon);
+      const summonItem = await fu.fromUuid<SummonPTR2e>((action as AttackPTR2e).summon);
       if (!summonItem) return void ui.notifications.error("Summon not found on action.");
 
       const combatants = await game.combat.createEmbeddedDocuments("Combatant", [{
@@ -297,7 +297,7 @@ class ChatMessagePTR2e<TSchema extends TypeDataModel = TypeDataModel> extends Ch
           event.preventDefault();
           if (!canvas.ready) return;
 
-          const actor = (await fromUuid(el.dataset.uuid)) as ActorPTR2e;
+          const actor = (await fu.fromUuid(el.dataset.uuid)) as ActorPTR2e;
           if (!actor) return;
 
           const tokens = actor.getActiveTokens(false);

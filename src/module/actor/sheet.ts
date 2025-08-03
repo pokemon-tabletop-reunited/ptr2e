@@ -1010,7 +1010,7 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
     } = foundry.applications.ux.TextEditor.getDragEventData(event);
 
     if (data.uuid) {
-      const item = await fromUuid(data.uuid);
+      const item = await fu.fromUuid(data.uuid);
       if (
         item instanceof ItemPTR2e &&
         item.type == "ability" &&

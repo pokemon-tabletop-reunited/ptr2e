@@ -86,7 +86,7 @@
               {{formField fields.cost.fields.delay value=source.cost.delay localize=true}}
               {{formField fields.cost.fields.priority value=source.cost.priority localize=true}}
           </fieldset>
-          {{#if (is source.category "status")}}
+          {{#if (or (is source.category "status") (is action.type "generic"))}}
           <fieldset>
             <legend>Summon</legend>
             {{formField fields.summon value=source.summon localize=true}}

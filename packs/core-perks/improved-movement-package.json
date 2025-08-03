@@ -24,11 +24,14 @@
     "design": {
       "arena": "physical",
       "approach": "resilience",
-      "archetype": "Mobility"
+      "archetype": "mobility"
     },
     "global": false,
     "webs": [],
-    "nodes": []
+    "nodes": [],
+    "originSlug": null,
+    "variant": null,
+    "mode": null
   },
   "_id": "improvedmovement",
   "img": "icons/svg/chest.svg",
@@ -126,7 +129,12 @@
                   }
                 ]
               }
-            ]
+            ],
+            "key": "",
+            "value": 0,
+            "mode": 2,
+            "predicate": [],
+            "ignored": false
           },
           {
             "type": "grant-item",
@@ -135,17 +143,53 @@
             "replaceSelf": true,
             "reevaluateOnUpdate": false,
             "allowDuplicate": true,
-            "onDelecteActions": {
+            "mode": 2,
+            "predicate": [],
+            "ignored": false,
+            "inMemoryOnly": false,
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "system.originSlug",
+                "value": "{effect|parent.system.originSlug}"
+              }
+            ],
+            "track": false,
+            "onDeleteActions": {
               "grantee": "detach",
-              "granter": "detach"
+              "granter": "cascade"
             }
           }
         ],
         "removeAfterCombat": false,
-        "removeOnRecall": false
+        "removeOnRecall": false,
+        "slug": null,
+        "traits": [],
+        "stacks": 0
       },
       "disabled": false,
-      "description": "<p>Replaces self with the appropriate Movement Perk.</p>"
+      "description": "<p>Replaces self with the appropriate Movement Perk.</p>",
+      "_stats": {
+        "coreVersion": "13.342",
+        "systemId": null,
+        "systemVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null,
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {}
     }
   ],
   "flags": {}

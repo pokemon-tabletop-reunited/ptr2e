@@ -15,7 +15,7 @@
       "notes": ""
     },
     "actions": [],
-    "description": "<p>Whilst under the effects of @Affliction[duel], you gain +2 Accuracy Stages against your Duel Partner.</p>",
+    "description": "<p>Effect: While Afflicted with @Affliction[duel], the user has +2 ACC Stages with Attacks targeting their Duel Partner.</p>",
     "traits": [
       "hunter"
     ],
@@ -29,7 +29,31 @@
     },
     "global": true,
     "webs": [],
-    "nodes": []
+    "nodes": [
+      {
+        "x": 50,
+        "y": 185,
+        "hidden": false,
+        "type": "normal",
+        "connected": [
+          "high-noon",
+          "dead-eye",
+          "duelists-glory",
+          "dont-interrupt-me"
+        ],
+        "config": {
+          "texture": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "tint": null
+        },
+        "tier": null
+      }
+    ],
+    "slug": "duelists-eye",
+    "originSlug": null,
+    "variant": null,
+    "mode": null
   },
   "img": "icons/svg/target.svg",
   "effects": [
@@ -79,12 +103,13 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.342",
         "systemId": "ptr2e",
         "systemVersion": "1.2.1.beta",
         "createdTime": null,
         "modifiedTime": null,
-        "lastModifiedBy": null
+        "lastModifiedBy": null,
+        "exportSource": null
       }
     }
   ],

@@ -312,14 +312,6 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
           max: new fields.NumberField({ required: true, initial: 0, min: 0, label: "PTR2E.FIELDS.inventory.backpack.max.label", hint: "PTR2E.FIELDS.inventory.backpack.max.hint" }),
         })
       }),
-      movementType: new fields.StringField({
-        required: true,
-        initial: "overland",
-        choices: Object.entries(CONFIG.PTR.movementTypes).reduce(
-          (acc, [type, { label }]) => ({ ...acc, [type]: label }),
-          {} as Record<string, string>
-        ),
-      }),
       investments: new fields.SchemaField({
         ivs: new fields.SchemaField({
           hp: new fields.NumberField({ required: true, nullable: false, initial: 0, min: 0, max: 30 }),
@@ -372,6 +364,22 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
         })
       })
     };
+  }
+
+  get movementType(): string | null {
+    return this._movementType || null;
+  }
+
+  set movementType(newType: string) {
+    if(this._movementType === newType) return;
+    if(this._movementType == null || this._movementType == undefined) {
+      this.parent.rollOptions.removeOption("self", `state:overland`);
+    }
+    if(this._movementType) {
+      this.parent.rollOptions.removeOption("self", `state:${this._movementType}`);
+    }
+    this._movementType = newType;
+    this.parent.rollOptions.addOption("self", `state:${this._movementType}`);
   }
 
   static override migrateData(source: ActorSystemPTR2e["_source"]) {
@@ -998,7 +1006,7 @@ interface ActorSystemPTR2e extends ModelPropsFromSchema<ActorSystemSchema> {
   }
 
   movement: Record<string, Movement>;
-  movementType: string;
+  _movementType: string;
 
   skills: Collection<SkillPTR2e> & Record<string, { value?: number, rvs?: number } | undefined>;
 

@@ -10,8 +10,7 @@
         "name": "Shadow Mist",
         "type": "attack",
         "traits": [
-          "friendly",
-          "flinch-3"
+          "friendly"
         ],
         "range": {
           "target": "emanation",
@@ -27,7 +26,7 @@
         "types": [
           "shadow"
         ],
-        "description": "<p>Effect: On hit, all valid targets lose -2 EVA Stage for 5 Activations and are Flinched.</p>",
+        "description": "<p>Effect: On hit, all valid targets lose -2 EVA Stage for 5 Activations and are Delayed by 30%.</p>",
         "img": "icons/svg/explosion.svg",
         "predicate": []
       }
@@ -99,6 +98,45 @@
         "createdTime": 1737745027309,
         "modifiedTime": 1737745048259,
         "lastModifiedBy": "Kc3DOunCh3ClAeHS"
+      }
+    },
+    {
+      "name": "Shadow Mist",
+      "type": "passive",
+      "_id": "z7y1zzA2z4Rf7Nwm",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "shadow-mist-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.advanceffectitem",
+            "predicate": [],
+            "chance": 100,
+            "dontMerge": true,
+            "affects": "target",
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "system.amount",
+                "value": -30
+              },
+              {
+                "mode": 5,
+                "property": "name",
+                "value": "Delay 30%"
+              }
+            ]
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
       }
     }
   ]

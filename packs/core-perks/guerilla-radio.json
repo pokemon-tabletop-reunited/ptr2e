@@ -15,7 +15,7 @@
       "notes": ""
     },
     "actions": [],
-    "description": "<p>You gain the @UUID[Compendium.ptr2e.core-abilities.LVKlym7cP5CTEF26]{Punk Rock} ability as a tutored ability for yourself.</p>",
+    "description": "<p>Effect: The user gains @UUID[Compendium.ptr2e.core-abilities.LVKlym7cP5CTEF26]{Punk Rock} as a Tutored Ability.</p>",
     "traits": [],
     "prerequisites": [
       {
@@ -28,7 +28,7 @@
     "autoUnlock": [
       "ability:punk-rock"
     ],
-    "cost": 2,
+    "cost": 3,
     "design": {
       "arena": "social",
       "approach": "resilience",
@@ -36,7 +36,23 @@
     },
     "global": true,
     "webs": [],
-    "nodes": []
+    "nodes": [
+      {
+        "x": 175,
+        "y": 162,
+        "connected": [
+          "root-4",
+          "swan-song"
+        ],
+        "hidden": false,
+        "type": "normal",
+        "tier": null
+      }
+    ],
+    "slug": "guerilla-radio",
+    "originSlug": null,
+    "variant": null,
+    "mode": null
   },
   "img": "systems/ptr2e/img/perk-icons/Musician.svg",
   "effects": [
@@ -93,12 +109,13 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.342",
         "systemId": "ptr2e",
         "systemVersion": "1.2.1.beta",
         "createdTime": null,
         "modifiedTime": null,
-        "lastModifiedBy": null
+        "lastModifiedBy": null,
+        "exportSource": null
       }
     }
   ],

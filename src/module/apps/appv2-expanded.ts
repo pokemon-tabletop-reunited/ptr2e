@@ -141,7 +141,7 @@ export class ActorSheetV2Expanded<
       if ((input as HTMLInputElement).value === "") (input as HTMLInputElement).value = "[]";
     });
 
-    const formData = new FormDataExtended(element);
+    const formData = new foundry.applications.ux.FormDataExtended(element);
     if (handler instanceof Function) await handler.call(this, event, element, formData);
     if (closeOnSubmit) await this.close();
   }
@@ -249,8 +249,13 @@ export class ActorSheetV2Expanded<
 
     const effectData = effect.toObject();
     if ('amount' in data && !isNaN(Number(data.amount))) {
-      if (effectData.system.stacks) effectData.system.stacks = Number(data.amount);
-      effectData.duration.turns = Number(data.amount);
+      if(effect.type === "advancement") {
+        effectData.system.amount = Number(data.amount);
+      }
+      else {
+        if (effectData.system.stacks) effectData.system.stacks = Number(data.amount);
+        effectData.duration.turns = Number(data.amount);
+      }
     }
 
     return ActiveEffectPTR2e.create(effectData, { parent: this.actor });
@@ -608,8 +613,13 @@ export class ItemSheetV2Expanded<
 
     const effectData = effect.toObject();
     if ('amount' in data && !isNaN(Number(data.amount))) {
-      if (effectData.system.stacks) effectData.system.stacks = Number(data.amount);
-      effectData.duration.turns = Number(data.amount);
+      if(effect.type === "advancement") {
+        effectData.system.amount = Number(data.amount);
+      }
+      else {
+        if (effectData.system.stacks) effectData.system.stacks = Number(data.amount);
+        effectData.duration.turns = Number(data.amount);
+      }
     }
 
     return ActiveEffectPTR2e.create(effectData, { parent: this.document });
@@ -638,7 +648,7 @@ export class ItemSheetV2Expanded<
       if ((input as HTMLInputElement).value === "") (input as HTMLInputElement).value = "[]";
     });
 
-    const formData = new FormDataExtended(element);
+    const formData = new foundry.applications.ux.FormDataExtended(element);
     if (handler instanceof Function) await handler.call(this, event, element, formData);
     if (closeOnSubmit) await this.close();
   }

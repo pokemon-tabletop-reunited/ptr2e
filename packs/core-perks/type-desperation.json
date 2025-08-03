@@ -17,11 +17,15 @@
         "img": "systems/ptr2e/img/perk-icons/Trainer.svg",
         "range": {
           "target": "ally",
-          "unit": "m"
+          "unit": "m",
+          "distance": 0
         },
         "cost": {
-          "activation": "free"
-        }
+          "activation": "free",
+          "powerPoints": 0
+        },
+        "variant": null,
+        "ephemeralVariant": false
       }
     ],
     "description": "<p>You are able to tutor the [Desperation] Ability of your chosen Type to yourself and any Pokemon you are responsible for of the chosen Type. This may be taken multiple times, each time selecting a different type for which you have a corresponding Type Specialty.</p>",
@@ -45,7 +49,10 @@
           "type-domain",
           "improved-overland-1",
           "type-tutoring",
-          "stat-iv-booster-1-1"
+          "stat-iv-booster-1-1",
+          "minor-buff-4",
+          "minor-buff-45",
+          "common-capability"
         ],
         "config": {
           "alpha": null,
@@ -69,14 +76,18 @@
     "design": {
       "arena": "mental",
       "approach": "finesse",
-      "archetype": "Type Ace"
+      "archetype": "type-ace"
     },
     "publication": {
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
-    }
+      ],
+      "notes": ""
+    },
+    "originSlug": null,
+    "variant": null,
+    "mode": null
   },
   "img": "systems/ptr2e/img/perk-icons/Trainer.svg",
   "effects": [],

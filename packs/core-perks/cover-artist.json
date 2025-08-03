@@ -15,7 +15,7 @@
       "notes": ""
     },
     "actions": [],
-    "description": "<p>You gain access to the Musician tutor list, and learn the moves @UUID[Compendium.ptr2e.core-moves.ddcyCuH4t0mVmB7n]{Sing}, @UUID[Compendium.ptr2e.core-moves.h2xOusyckAvQlQtf]{Bark} and @UUID[Compendium.ptr2e.core-moves.ETIoZqMMiW74sq3s]{Snarl} if you did not already possess them.</p>",
+    "description": "<p>Effect: The user gains @Trait[musician], and learns @UUID[Compendium.ptr2e.core-moves.ddcyCuH4t0mVmB7n]{Sing} and @UUID[Compendium.ptr2e.core-moves.h2xOusyckAvQlQtf]{Bark}.</p>",
     "traits": [],
     "prerequisites": [
       {
@@ -34,7 +34,21 @@
     },
     "global": true,
     "webs": [],
-    "nodes": []
+    "nodes": [
+      {
+        "x": 173,
+        "y": 169,
+        "connected": [
+          "swan-song",
+          "rousing-song",
+          "root-4"
+        ],
+        "hidden": false,
+        "type": "normal",
+        "tier": null
+      }
+    ],
+    "slug": "cover-artist"
   },
   "img": "systems/ptr2e/img/perk-icons/Musician.svg",
   "effects": [
@@ -51,18 +65,18 @@
             "value": "Compendium.ptr2e.core-moves.Item.ddcyCuH4t0mVmB7n",
             "predicate": [],
             "allowDuplicate": false,
-            "mode": 2,
             "priority": null,
-            "ignored": false,
-            "reevaluateOnUpdate": false,
-            "inMemoryOnly": false,
             "alterations": [],
-            "track": false,
-            "replaceSelf": false,
             "onDeleteActions": {
               "grantee": "detach",
               "granter": "cascade"
-            }
+            },
+            "mode": 2,
+            "ignored": false,
+            "reevaluateOnUpdate": false,
+            "inMemoryOnly": false,
+            "track": false,
+            "replaceSelf": false
           },
           {
             "type": "grant-item",
@@ -70,44 +84,35 @@
             "value": "Compendium.ptr2e.core-moves.Item.h2xOusyckAvQlQtf",
             "predicate": [],
             "allowDuplicate": false,
-            "mode": 2,
             "priority": null,
-            "ignored": false,
-            "reevaluateOnUpdate": false,
-            "inMemoryOnly": false,
             "alterations": [],
-            "track": false,
-            "replaceSelf": false,
             "onDeleteActions": {
               "grantee": "detach",
               "granter": "cascade"
-            }
+            },
+            "mode": 2,
+            "ignored": false,
+            "reevaluateOnUpdate": false,
+            "inMemoryOnly": false,
+            "track": false,
+            "replaceSelf": false
           },
           {
-            "type": "grant-item",
+            "type": "add-trait",
             "key": "",
-            "value": "Compendium.ptr2e.core-moves.Item.ETIoZqMMiW74sq3s",
+            "value": "musician",
             "predicate": [],
-            "allowDuplicate": false,
             "mode": 2,
-            "priority": null,
-            "ignored": false,
-            "reevaluateOnUpdate": false,
-            "inMemoryOnly": false,
-            "alterations": [],
-            "track": false,
-            "replaceSelf": false,
-            "onDeleteActions": {
-              "grantee": "detach",
-              "granter": "cascade"
-            }
+            "ignored": false
           }
         ],
         "slug": null,
         "traits": [],
         "removeAfterCombat": true,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
@@ -129,15 +134,9 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
-        "systemId": "ptr2e",
-        "systemVersion": "1.2.1.beta",
-        "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "exportSource": null
       }
     }
   ],
-  "flags": {},
   "_id": "DRgegaAcfqpkiBMK"
 }

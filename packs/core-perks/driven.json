@@ -18,27 +18,43 @@
       {
         "name": "Driven",
         "slug": "driven",
-        "description": "<p>When you use Master's Whip to advance a target's activation, you may spend a further 3PP to grant them +1 Critical Stage for 3 Activations.</p>",
+        "description": "<p>Trigger: The user resolves Master's Whip.</p><p>Effect: The triggering Action's target gains @UUID[Compendium.ptr2e.core-effects.Item.CEdcrWbb1KDTNIKl]{+1 Critical Stage} for 5 Activations.</p>",
         "traits": [],
         "type": "attack",
         "img": "systems/ptr2e/img/perk-icons/Taskmaster.svg",
         "range": {
           "target": "field",
-          "unit": "m"
+          "unit": "m",
+          "distance": 0
         },
         "cost": {
           "activation": "free",
-          "powerPoints": 3
+          "powerPoints": 3,
+          "trigger": "The user resolves Master's Whip.",
+          "delay": null,
+          "priority": null
         },
         "types": [
           "untyped"
         ],
         "category": "status",
         "free": true,
-        "predicate": []
+        "predicate": [],
+        "variant": null,
+        "ephemeralVariant": false,
+        "power": null,
+        "accuracy": null,
+        "contestType": "",
+        "contestEffect": "",
+        "slot": null,
+        "summon": null,
+        "defaultVariant": null,
+        "flingItemId": "",
+        "offensiveStat": null,
+        "defensiveStat": null
       }
     ],
-    "description": "<p>When you use Master's Whip to advance a target's activation, you may spend a further 3PP to grant them +1 Critical Stage for 3 Activations.</p>",
+    "description": "<p>Effect: When resolving Master's Whip, the user may spend 3 PP as a Free Action at [interrupt-2] to grant the target of Master's Whip @UUID[Compendium.ptr2e.core-effects.Item.CEdcrWbb1KDTNIKl]{+1 Critical Stage} for 5 Activations.</p>",
     "traits": [],
     "prerequisites": [
       "item:perk:masters-whip"
@@ -52,7 +68,28 @@
     },
     "global": true,
     "webs": [],
-    "nodes": []
+    "nodes": [
+      {
+        "x": 32,
+        "y": 121,
+        "hidden": false,
+        "type": "normal",
+        "connected": [
+          "masters-whip"
+        ],
+        "config": {
+          "texture": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "tint": null
+        },
+        "tier": null
+      }
+    ],
+    "slug": "driven",
+    "originSlug": null,
+    "variant": null,
+    "mode": null
   },
   "img": "systems/ptr2e/img/perk-icons/Taskmaster.svg",
   "effects": [
@@ -109,12 +146,13 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.342",
         "systemId": "ptr2e",
         "systemVersion": "1.2.1.beta",
         "createdTime": null,
         "modifiedTime": null,
-        "lastModifiedBy": null
+        "lastModifiedBy": null,
+        "exportSource": null
       }
     }
   ],

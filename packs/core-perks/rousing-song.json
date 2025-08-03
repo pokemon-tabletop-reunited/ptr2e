@@ -30,10 +30,12 @@
         "cost": {
           "activation": "simple",
           "powerPoints": 3
-        }
+        },
+        "variant": null,
+        "ephemeralVariant": false
       }
     ],
-    "description": "<p>The user can cure nearby allies of @Affliction[drowsy].</p>",
+    "description": "<p>The user can cure nearby allies of @Affliction[drowsy].<br><br>If the user has @UUID[Compendium.ptr2e.core-perks.ecTtuQNB6QPAwGwU]{Break-Up Song} or @UUID[Compendium.ptr2e.core-perks.IriqJkYNMBhbX7Rj]{Meditative Hymn} they can combine the effects of these songs simultaneously.</p>",
     "traits": [],
     "prerequisites": [
       {
@@ -52,7 +54,23 @@
     },
     "global": true,
     "webs": [],
-    "nodes": []
+    "nodes": [
+      {
+        "x": 172,
+        "y": 171,
+        "connected": [
+          "yousa-bad-bombin",
+          "root-4"
+        ],
+        "hidden": false,
+        "type": "normal",
+        "tier": null
+      }
+    ],
+    "slug": "rousing-song",
+    "originSlug": null,
+    "variant": null,
+    "mode": null
   },
   "img": "systems/ptr2e/img/perk-icons/Musician.svg",
   "effects": [],

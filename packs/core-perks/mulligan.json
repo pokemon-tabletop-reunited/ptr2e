@@ -16,13 +16,13 @@
     },
     "actions": [],
     "slug": "mulligan",
-    "description": "<p>Effect: The user can spend 4 Luck at [Delay 3] [Interrupt 3] to force a reroll of an Effect Roll, Critical Hit Roll, Shake Roll, or Critical Capture Roll from their own or another creature’s roll. The user, allies, or neutral creature that are, or would be, affected by the reroll are Flinched 3, while foes are Progressed 3.</p>",
+    "description": "<p>Effect: The user can spend 5 Luck to force a reroll of an ally's Effect Roll, this roll gains 50% EHR for this reroll only.</p>",
     "traits": [],
     "prerequisites": [
       "item:perk:jockeying"
     ],
     "autoUnlock": [],
-    "cost": 3,
+    "cost": 2,
     "design": {
       "arena": "social",
       "approach": "finesse",
@@ -30,7 +30,22 @@
     },
     "global": true,
     "webs": [],
-    "nodes": []
+    "nodes": [
+      {
+        "x": 83,
+        "y": 191,
+        "connected": [
+          "jockeying",
+          "lucky-duck"
+        ],
+        "hidden": false,
+        "type": "normal",
+        "tier": null
+      }
+    ],
+    "originSlug": null,
+    "variant": null,
+    "mode": null
   },
   "img": "icons/sundries/gaming/dice-runed-tan.webp",
   "effects": [],
