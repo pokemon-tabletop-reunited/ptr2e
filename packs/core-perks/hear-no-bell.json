@@ -14,12 +14,17 @@
         "type": "passive",
         "range": {
           "target": "self",
-          "unit": "m"
+          "unit": "m",
+          "distance": 0
         },
         "cost": {
-          "activation": "free"
+          "activation": "free",
+          "powerPoints": 0
         },
-        "img": "icons/svg/explosion.svg"
+        "img": "icons/svg/explosion.svg",
+        "variant": null,
+        "ephemeralVariant": false,
+        "hidden": false
       }
     ],
     "slug": "hear-no-bell",
@@ -42,8 +47,7 @@
           "glutton-for-punishment",
           "desperate-strike",
           "i-get-knocked-down",
-          "tubthumping",
-          "swan-song"
+          "tubthumping"
         ],
         "config": {
           "alpha": null,
@@ -73,8 +77,12 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
-    }
+      ],
+      "notes": ""
+    },
+    "originSlug": null,
+    "variant": null,
+    "mode": null
   },
   "effects": [
     {
@@ -121,12 +129,13 @@
       "_stats": {
         "compendiumSource": "Actor.vBCspn4IjAKk8EBj.Item.uIfc2ExBTcZKEZTL.ActiveEffect.CVhM2lljJfTSq5Tz",
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.342",
         "systemId": "ptr2e",
         "systemVersion": "0.10.0-alpha.5.0",
         "createdTime": 1736858076120,
         "modifiedTime": 1736858804799,
-        "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
+        "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+        "exportSource": null
       }
     }
   ]

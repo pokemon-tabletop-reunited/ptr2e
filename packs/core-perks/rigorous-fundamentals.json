@@ -9,13 +9,15 @@
     "actions": [],
     "slug": "rigorous-fundamentals",
     "description": "<p>The user selects 4 Skills, besides Resources. The user’s Species proficiency with the selected skills is increased by +5. A Skill may only be increased 3 times with this Perk and cannot be increased past 40.</p>",
-    "traits": [],
+    "traits": [
+      "minor-buff"
+    ],
     "prerequisites": [],
     "autoUnlock": [],
     "cost": 2,
     "variant": "multi",
     "mode": "individual",
-    "global": true,
+    "global": false,
     "webs": [],
     "nodes": [
       {
@@ -29,13 +31,10 @@
           "improved-overland-2"
         ],
         "config": {
-          "alpha": null,
+          "texture": null,
           "backgroundColor": null,
           "borderColor": null,
-          "borderWidth": null,
-          "texture": null,
-          "tint": null,
-          "scale": null
+          "tint": null
         },
         "tier": null
       },
@@ -51,13 +50,10 @@
           "tubthumping"
         ],
         "config": {
-          "alpha": null,
+          "texture": null,
           "backgroundColor": null,
           "borderColor": null,
-          "borderWidth": null,
-          "texture": null,
-          "tint": null,
-          "scale": null
+          "tint": null
         },
         "tier": null
       },
@@ -74,19 +70,18 @@
           "rigorous-fundamentals-5"
         ],
         "config": {
-          "alpha": null,
+          "texture": null,
           "backgroundColor": null,
           "borderColor": null,
-          "borderWidth": null,
-          "texture": null,
-          "tint": null,
-          "scale": null
+          "tint": null
         },
         "tier": null
       },
       {
         "x": 124,
         "y": 90,
+        "hidden": false,
+        "type": "normal",
         "connected": [
           "improved-overland-3",
           "screen-setter",
@@ -94,21 +89,18 @@
           "pack-mon-1"
         ],
         "config": {
-          "alpha": null,
+          "texture": null,
           "backgroundColor": null,
           "borderColor": null,
-          "borderWidth": null,
-          "texture": null,
-          "tint": null,
-          "scale": null
+          "tint": null
         },
-        "hidden": false,
-        "type": "normal",
         "tier": null
       },
       {
         "x": 79,
         "y": 132,
+        "hidden": false,
+        "type": "normal",
         "connected": [
           "new-foundations-2",
           "improved-overland-5",
@@ -116,21 +108,18 @@
           "summer-growth"
         ],
         "config": {
-          "alpha": null,
+          "texture": null,
           "backgroundColor": null,
           "borderColor": null,
-          "borderWidth": null,
-          "texture": null,
-          "tint": null,
-          "scale": null
+          "tint": null
         },
-        "hidden": false,
-        "type": "normal",
         "tier": null
       },
       {
         "x": 46,
         "y": 99,
+        "hidden": false,
+        "type": "normal",
         "connected": [
           "rigorous-fundamentals-2",
           "emergency-retreat",
@@ -140,21 +129,18 @@
           "guard-up"
         ],
         "config": {
-          "alpha": null,
+          "texture": null,
           "backgroundColor": null,
           "borderColor": null,
-          "borderWidth": null,
-          "texture": null,
-          "tint": null,
-          "scale": null
+          "tint": null
         },
-        "hidden": false,
-        "type": "normal",
         "tier": null
       },
       {
         "x": 136,
         "y": 62,
+        "hidden": false,
+        "type": "normal",
         "connected": [
           "scree",
           "thug",
@@ -164,37 +150,29 @@
           "stat-iv-booster-1-3"
         ],
         "config": {
-          "alpha": null,
+          "texture": null,
           "backgroundColor": null,
           "borderColor": null,
-          "borderWidth": null,
-          "texture": null,
-          "tint": null,
-          "scale": null
+          "tint": null
         },
-        "hidden": false,
-        "type": "normal",
         "tier": null
       },
       {
         "x": 78,
         "y": 110,
+        "hidden": false,
+        "type": "normal",
         "connected": [
           "snare",
           "stat-iv-booster-1",
           "thermal-dynamics"
         ],
         "config": {
-          "alpha": null,
+          "texture": null,
           "backgroundColor": null,
           "borderColor": null,
-          "borderWidth": null,
-          "texture": null,
-          "tint": null,
-          "scale": null
+          "tint": null
         },
-        "hidden": false,
-        "type": "normal",
         "tier": null
       }
     ],
@@ -207,8 +185,10 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
-    }
+      ],
+      "notes": ""
+    },
+    "originSlug": null
   },
   "_id": "gH6z0NmKq0Suh7iZ",
   "img": "systems/ptr2e/img/icons/feat_icon.webp",
@@ -335,16 +315,17 @@
       "_stats": {
         "compendiumSource": "Item.xxuGLZ0QPnw7NYa8.ActiveEffect.V64elrUanozajfG2",
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.342",
         "systemId": "ptr2e",
         "systemVersion": "1.0.3.beta",
         "createdTime": 1738606944598,
         "modifiedTime": 1739400935205,
-        "lastModifiedBy": "IcBpMqhFuTck9VpX"
+        "lastModifiedBy": "IcBpMqhFuTck9VpX",
+        "exportSource": null
       }
     }
   ],
-  "folder": "P8RtSJE1K00CB5lL",
+  "folder": "minorbuffsfolder",
   "flags": {
     "exportSource": {
       "world": "pokemon-mystery-dungeon-shrouded-kingdoms",

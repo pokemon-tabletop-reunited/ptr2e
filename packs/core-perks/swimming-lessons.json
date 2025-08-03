@@ -18,15 +18,20 @@
         "slug": "swimming-lessons",
         "description": "<p>If you previously lacked a Swim Movement Allowance, you gain a Swim Movement Allowance of 3. If you already possessed a Swim Movement Allowance, increase that Movement Allowance by 2.</p>",
         "cost": {
-          "activation": "free"
+          "activation": "free",
+          "powerPoints": 0
         },
         "type": "passive",
         "traits": [],
         "img": "icons/svg/explosion.svg",
         "range": {
           "target": "enemy",
-          "unit": "m"
-        }
+          "unit": "m",
+          "distance": 0
+        },
+        "variant": null,
+        "ephemeralVariant": false,
+        "hidden": false
       }
     ],
     "slug": "swimming-lessons",
@@ -43,7 +48,10 @@
           "improved-burrow",
           "sprint",
           "root-2",
-          "overboard"
+          "overboard",
+          "minor-buff-20",
+          "minor-buff-26",
+          "fountain"
         ],
         "config": {
           "alpha": null,
@@ -73,8 +81,12 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
-    }
+      ],
+      "notes": ""
+    },
+    "originSlug": null,
+    "variant": null,
+    "mode": null
   },
   "_id": "xr7XdAhvvd8T08IC",
   "img": "systems/ptr2e/img/svg/water_icon.svg",

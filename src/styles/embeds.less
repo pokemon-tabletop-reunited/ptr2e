@@ -3,6 +3,10 @@ span.trait {
     cursor: help;
     text-decoration: underline;
   }
+
+  &.invalid {
+    color: darkred;
+  }
 }
 
 .sheet .tab.active.sheet-body div.embed {
@@ -113,6 +117,8 @@ span.trait {
                   button {
                     line-height: unset;
                     flex: 0 0 65%;
+                    min-height: unset;
+                    height: 20px;
                   }
                 }
             }
@@ -277,6 +283,8 @@ aside[role="tooltip"].weapon,
                       button {
                         line-height: unset;
                         flex: 0 0 65%;
+                        min-height: unset;
+                        height: 20px;
                       }
                     }
                 }
@@ -669,4 +677,23 @@ content.attack-embed {
     content.attack-embed.variant {
         flex: 0 0 100%;
     }
+}
+
+content.item-embed main footer.buttons {
+  margin-top: 2rem;
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  flex-direction: row;
+
+  section {
+    flex: 1 1 calc(50% - 1rem);
+  }
+}
+
+.chat-message document-embed {
+  h2 {
+    margin: unset;
+  }
 }

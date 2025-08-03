@@ -149,8 +149,18 @@ class AttackCheck<TParent extends AttackStatistic = AttackStatistic> implements 
     this.parent = parent;
     data.check = fu.mergeObject(data.check ?? {}, { type: this.type });
 
+    const extraDomains = new Set<string>();
+    if (this.attack.variant) {
+      const original = this.attack.original as AttackPTR2e;
+      if (original) {
+        for (const od of original.statistic?.domains ?? []) {
+          extraDomains.add(od);
+        }
+      }
+    }
+
     data.check.domains = Array.from(new Set(data.check.domains ?? []));
-    this.domains = R.unique(R.filter([data.domains, data.check.domains].flat(), R.isTruthy));
+    this.domains = R.unique(R.filter([data.domains, data.check.domains, ...extraDomains].flat(), R.isTruthy));
 
     this.additionalOptions = new Set<string>();
     if (this.attack.power && this.attack.stab > 1) {
@@ -222,6 +232,13 @@ class AttackCheck<TParent extends AttackStatistic = AttackStatistic> implements 
     for (const type of this.attack.types) options.add(`attack:type:${type}`);
     for (const option of this.additionalOptions) options.add(option);
 
+    if (this.attack.variant) {
+      const original = this.attack.original;
+      if (original) {
+        options.add(`attack:original:${original.slug}`);
+      }
+    }
+
     const targets: { actor: ActorPTR2e, token?: TokenPTR2e }[] = (() => {
       if (args.targets) return args.targets.map(t => ({ actor: t, token: t.token?.object as TokenPTR2e }));
       return [...game.user.targets ?? []].map(t => ({ actor: t.actor as ActorPTR2e, token: t as TokenPTR2e }));
@@ -246,22 +263,16 @@ class AttackCheck<TParent extends AttackStatistic = AttackStatistic> implements 
         return null;
       }
       const actorLift = this.actor.skills["lift"]?.mod ?? 1;
+      const actorWC = this.actor.species?.size?.weightClass ?? 1
       const targetWC = target.actor.species?.size?.weightClass ?? 1;
-      const power = powerModifier.modifier = Math.floor(20 + (actorLift / 4) + (targetWC * 3));
-
       const actorCatMod = this.actor.size?.rank ?? 1;
       const thrownCatMod = target.actor.size?.rank ?? 1;
-      const accuracy = Math.floor(75 + (actorLift / 5) + actorCatMod - (4 * thrownCatMod));
-      if (accuracy < 0) {
-        ui.notifications.warn(game.i18n.localize("PTR2E.AttackWarning.FlingAccuracyTooLow"));
-        return null;
-      }
 
-      const range = Math.floor(8 + (actorLift / 6) + actorCatMod - (2 * thrownCatMod));
-      if (range < 0) {
-        ui.notifications.warn(game.i18n.localize("PTR2E.AttackWarning.FlingRangeTooLow"));
-        return null;
-      }
+      const power = powerModifier.modifier = Math.max(25, Math.floor(17 + (Math.pow(actorLift + 10, 0.5) / 5) * (3 + targetWC / 6) * (2 + thrownCatMod / 6) * (1.5 + actorWC / 18) * (1.25 + actorCatMod / 18)));
+
+      const accuracy = Math.min(100, Math.floor(10 + 50 * ((1 + actorWC / 18) * (1 + actorCatMod / 6) * (1 + actorLift / 200) / ((1 + targetWC / 9) * (1 + thrownCatMod / 3)))));
+
+      const range = Math.max(1, Math.floor(((Math.pow(actorLift + 10, 2 / 3) / 3) - 0.5) * Math.pow(((1.05 * actorWC) + (1.35 * actorCatMod)) / ((1.35 * targetWC) + (1.7 * thrownCatMod)), 0.5) * ((3 + (actorCatMod / 3)) / 10)));
 
       this.attack.power = power;
       this.attack.accuracy = accuracy;
@@ -300,7 +311,7 @@ class AttackCheck<TParent extends AttackStatistic = AttackStatistic> implements 
       return [];
     }) ?? []
 
-    const selfEffectRolls = await extractEffectRolls({
+    const selfEffectRolls = args.skipEffectRolls ? [] : await extractEffectRolls({
       affects: "self",
       origin: this.actor.clone({ effects: [fu.deepClone(this.actor._source.effects), traitEffects].flat() }, { keepId: true }),
       target: this.actor,
@@ -310,7 +321,8 @@ class AttackCheck<TParent extends AttackStatistic = AttackStatistic> implements 
       domains: this.domains,
       options: selfOptions,
       chanceModifier: (Number(this.actor.system?.modifiers?.effectChance) || 0),
-      hasSenerenGrace: this.actor.rollOptions?.all?.["special:serene-grace"] ?? false
+      hasSenerenGrace: this.actor.rollOptions?.all?.["special:serene-grace"] ?? false,
+      effectAlterations: this.actor.synthetics.effectAlterations,
     });
 
     // const extraModifiers = args.modifiers ?? [];
@@ -335,6 +347,7 @@ class AttackCheck<TParent extends AttackStatistic = AttackStatistic> implements 
         target: target,
         options: new Set([...options, `origin:${allyOrEnemy}`, ...(targetsSelf ? ["targets:self"] : [])]),
         traits: args.traits ?? this.item.traits,
+        skipEffectRolls: args.skipEffectRolls,
       }) as CheckContext<ActorPTR2e, AttackCheck<TParent>, ItemPTR2e<ItemSystemsWithActions, ActorPTR2e>>
 
       if (currContext.self.actor.flags.ptr2e.disableActionOptions?.disabled.includes(this.attack.uuid as ActionUUID)) {
@@ -396,7 +409,8 @@ class AttackCheck<TParent extends AttackStatistic = AttackStatistic> implements 
       skipDialog: args.skipDialog ?? targets.length === 0,
       omittedSubrolls: (() => {
         const ommited = new Set<"damage" | "crit" | "accuracy">();
-        if (context.self.attack.category === "status" || !context.self.attack.power) ommited.add("damage");
+        if (args.noCrit) ommited.add("crit");
+        if (context.self.attack.category === "status" || (!context.self.attack.power && !context.self.attack.traits.has("flat"))) ommited.add("damage");
         if (context.self.attack.category === "status") ommited.add("crit");
         if (!context.self.attack.accuracy) ommited.add("accuracy");
         if (context.self.attack instanceof SummonAttackPTR2e && context.self.attack.damageType === "flat") ommited.add("crit");

@@ -1,3 +1,4 @@
+//@ts-nocheck
 import { AttackMessageSystem, CaptureMessageSystem, ChatMessagePTR2e, DamageAppliedMessageSystem, SkillMessageSystem } from "@chat";
 import { PTRHook } from "./data.ts";
 import { DataInspector } from "@module/apps/data-inspector/data-inspector.ts";
@@ -7,18 +8,18 @@ export const ChatContext: PTRHook = {
   listen: () => {
     // Luck based rerolling
     //@ts-expect-error - This is valid typing
-    Hooks.on("getChatLogEntryContext", (chat: ChatLog, menuItems: ContextMenuEntry[]): void => {
+    Hooks.on("getChatMessageContextOptions", (chat: ChatLog, menuItems: ContextMenuEntry[]): void => {
       const options: ContextMenuEntry[] = [
         {
           name: "PTR2E.ChatContext.RerollSkill.label",
           icon: '<i class="fas fa-dice"></i>',
           condition: li => {
-            const message = game.messages.get(li.data("messageId"));
+            const message = game.messages.get(li.dataset.messageId);
             if (!message) return false;
             return ["skill"].includes(message.type) && !(message.system as SkillMessageSystem).rerolled && !(message.system as SkillMessageSystem).luckRoll;
           },
           callback: li => {
-            const message = game.messages.get(li.data("messageId")) as ChatMessagePTR2e<SkillMessageSystem>;
+            const message = game.messages.get(li.dataset.messageId) as ChatMessagePTR2e<SkillMessageSystem>;
             if (!message) return;
             foundry.applications.api.DialogV2.confirm({
               window: {
@@ -37,7 +38,7 @@ export const ChatContext: PTRHook = {
           name: "PTR2E.ChatContext.SpendLuckSkill.label",
           icon: '<i class="fas fa-dice"></i>',
           condition: li => {
-            const message = game.messages.get(li.data("messageId"));
+            const message = game.messages.get(li.dataset.messageId);
             if (!message) return false;
 
             if (["skill"].includes(message.type)) return !(message.system as SkillMessageSystem).luckRoll;
@@ -47,7 +48,7 @@ export const ChatContext: PTRHook = {
             return false;
           },
           callback: async li => {
-            const message = game.messages.get(li.data("messageId")) as ChatMessagePTR2e;
+            const message = game.messages.get(li.dataset.messageId) as ChatMessagePTR2e;
             if (!message) return;
 
             // skill
@@ -181,18 +182,18 @@ export const ChatContext: PTRHook = {
 
     // Roll Inspector
     //@ts-expect-error - This is valid typing
-    Hooks.on("getChatLogEntryContext", (chat: ChatLog, menuItems: ContextMenuEntry[]): void => {
+    Hooks.on("getChatMessageContextOptions", (chat: ChatLog, menuItems: ContextMenuEntry[]): void => {
       const options: ContextMenuEntry[] = [
         {
           name: "PTR2E.ChatContext.RollInspector.label",
           icon: '<i class="fas fa-magnifying-glass"></i>',
           condition: li => {
-            const message = game.messages.get(li.data("messageId"));
+            const message = game.messages.get(li.dataset.messageId);
             if (!message) return false;
             return ["attack", "skill", "capture"].includes(message.type) || (message.type === "damage-applied" && !!(message.system as DamageAppliedMessageSystem).result)
           },
           callback: li => {
-            const message = game.messages.get(li.data("messageId")) as ChatMessagePTR2e<SkillMessageSystem>;
+            const message = game.messages.get(li.dataset.messageId) as ChatMessagePTR2e<SkillMessageSystem>;
             if (!message) return;
             new DataInspector(message, {}).render(true);
           }
