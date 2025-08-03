@@ -24,9 +24,10 @@
       "img": "icons/svg/sun.svg",
       "type": "affliction",
       "duration": {
-        "turns": 2,
+        "turns": null,
         "startTime": null,
-        "combat": null
+        "combat": null,
+        "startTurn": null
       },
       "system": {
         "changes": [
@@ -34,8 +35,27 @@
             "type": "basic",
             "key": "system.battleStats.accuracy.stage",
             "value": 1,
-            "mode": 2,
             "predicate": [],
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "roll-effect",
+            "key": "attack",
+            "value": "Compendium.ptr2e.core-effects.Item.delayconditiitem",
+            "predicate": [],
+            "chance": 100,
+            "isFixedChance": true,
+            "affects": "self",
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "system.amount",
+                "value": -20
+              }
+            ],
+            "dontMerge": false,
+            "mode": 2,
             "ignored": false
           }
         ],
@@ -45,7 +65,7 @@
           "pseudo-affliction"
         ],
         "slug": null,
-        "removeAfterAttacking": false,
+        "removeAfterAttacking": true,
         "removeAfterAttacked": false,
         "stacks": 0,
         "priority": 50,
@@ -53,17 +73,15 @@
         "type": "damage"
       },
       "description": "While afflicted with Precise, the creature has +1 default ACC and has its Initiative delayed by 20% after its Activation.",
-      "statuses": [
-        "precise"
-      ],
+      "statuses": [],
       "_id": "precisecondition",
       "_stats": {
         "coreVersion": "13.346",
-        "systemId": null,
-        "systemVersion": null,
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.1.beta",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null,
+        "modifiedTime": 1754127796067,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf",
         "compendiumSource": null,
         "duplicateSource": null,
         "exportSource": null
@@ -77,23 +95,5 @@
     }
   ],
   "folder": "V4skAU6G3OH5fXgE",
-  "_id": "precisecondiitem",
-  "flags": {
-    "core": {}
-  },
-  "_stats": {
-    "coreVersion": "13.346",
-    "systemId": null,
-    "systemVersion": null,
-    "createdTime": null,
-    "modifiedTime": null,
-    "lastModifiedBy": null,
-    "compendiumSource": "Compendium.ptr2e.core-effects.Item.precisecondiitem",
-    "duplicateSource": null,
-    "exportSource": null
-  },
-  "sort": 0,
-  "ownership": {
-    "default": 0
-  }
+  "_id": "precisecondiitem"
 }
