@@ -3163,7 +3163,17 @@
     "slug": "earthbound",
     "label": "Earthbound",
     "related": [],
-    "description": "The attack/ability hits all creatures in area-of-effect, so long as the area-of-effect affects surfaces/objects are connected or touching, so a creature sitting on a tree branch is hit if a creature on the ground below is targeted and the tree itself is in the affected area. Attacks with this trait are one step more effective against creatures with the Grounded Affliction."
+    "description": "The attack/ability hits all creatures in area-of-effect, so long as the area-of-effect affects surfaces/objects are connected or touching, so a creature sitting on a tree branch is hit if a creature on the ground below is targeted and the tree itself is in the affected area. Attacks with this trait are one step more effective against creatures with the Grounded Affliction.",
+    "changes": [
+      {
+        "type": "stage-modifier",
+        "key": "earthbound-trait-attack-effectiveness",
+        "value": 1,
+        "predicate": ["target:effect:affliction:grounded"],
+        "mode": 2,
+        "hideIfDisabled": true
+      }
+    ]
   },
   {
     "slug": "environ",
