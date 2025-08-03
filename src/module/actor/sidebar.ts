@@ -5,42 +5,44 @@ import FolderConfigPTR2e from "@module/folder/sheet.ts";
 
 export default class ActorDirectoryPTR2e<
   TActor extends ActorPTR2e<ActorSystemPTR2e, null>,
-> extends ActorDirectory<TActor> {
-  static override entryPartial =
+> extends foundry.applications.sidebar.tabs.ActorDirectory<TActor> {
+
+  static DEFAULT_OPTIONS = {
+    classes: ["ptr2e"],
+    actions: {
+      "open-team": ActorDirectoryPTR2e.#openTeam,
+      "open-party": ActorDirectoryPTR2e.#openParty,
+    }
+  }
+
+  //@ts-expect-error - Missing types for this function
+  static override PARTS = fu.mergeObject(super.PARTS, {
+    directory: {
+      template: "systems/ptr2e/templates/sidebar/actor-directory.hbs"
+    }
+  }, { inplace: false });
+
+  static _entryPartial =
     "systems/ptr2e/templates/sidebar/actor-directory-entry.hbs";
 
-  static override folderPartial =
+  static _folderPartial =
     "systems/ptr2e/templates/sidebar/actor-directory-folder.hbs";
 
-  static override get defaultOptions() {
-    return foundry.utils.mergeObject(
-      super.defaultOptions,
-      {
-        template: "systems/ptr2e/templates/sidebar/actor-directory.hbs",
-        dragDrop: [
-          {
-            dragSelector: ".directory-item.actor, .directory-item.folder",
-            dropSelector: ".directory-list",
-          },
-        ],
-      },
-      { inplace: false }
-    );
-  }
 
   override _getFolderContextOptions() {
     const options = super._getFolderContextOptions();
     const option = options.find((o) => o.name === "FOLDER.Edit");
     if (option) {
       option.callback = async (header) => {
-        const li = header.closest(".directory-item")[0];
-        const folder = await fromUuid(li.dataset.uuid);
+        const li = header.closest<HTMLElement>(".directory-item");
+        if(!li) return;
+        const folder = await fu.fromUuid(li.dataset.uuid);
         const r = li.getBoundingClientRect();
         const context = {
           document: folder!,
           position: {
             top: r.top,
-            left: r.left - FolderConfigPTR2e.DEFAULT_OPTIONS.position.width - 10,
+            left: r.left - (FolderConfigPTR2e.DEFAULT_OPTIONS.position!.width as number) - 10,
           },
         };
         new FolderConfigPTR2e(context).render(true);
@@ -49,11 +51,12 @@ export default class ActorDirectoryPTR2e<
     return options;
   }
 
-  override async getData(options?: Partial<ApplicationOptions> | undefined): Promise<object> {
-    const data = await super.getData(options);
+  async _prepareDirectoryContext(context: foundry.applications.api.ApplicationRenderContext, options: foundry.applications.api.HandlebarsRenderOptions) {
+    // @ts-expect-error - Missing types for this function
+    super._prepareDirectoryContext(context, options);
 
-    if ("tree" in data && data.tree) {
-      const tree = data.tree as Tree;
+    if ("tree" in context && context.tree) {
+      const tree = context.tree as Tree;
       const team: EnfolderableDocument[] = [];
       const teamIds: string[] = [];
 
@@ -93,23 +96,15 @@ export default class ActorDirectoryPTR2e<
       }
       recurse(tree);
     }
-
-    return data;
   }
 
-  override activateListeners(html: JQuery): void {
-    super.activateListeners(html);
-
-    html.find(".open-party").on("click", this._openParty.bind(this));
-    html.find(".open-team").on("click", this._openTeam.bind(this));
-  }
-
-  protected _openParty(event: JQuery.ClickEvent) {
+  static #openParty<
+    TActor extends ActorPTR2e<ActorSystemPTR2e, null>,
+  >(this: ActorDirectoryPTR2e<TActor>, event: PointerEvent, target: HTMLElement) {
     event.preventDefault();
     event.stopPropagation();
 
-    const button = event.currentTarget as HTMLAnchorElement;
-    const li = button.closest<HTMLLIElement>("li.directory-item");
+    const li = target.closest<HTMLLIElement>("li.directory-item");
     const folderId = li?.dataset.folderId;
     if (!folderId) return;
 
@@ -117,12 +112,13 @@ export default class ActorDirectoryPTR2e<
     return folder?.renderPartySheet();
   }
 
-  protected _openTeam(event: JQuery.ClickEvent) {
+  static #openTeam<
+    TActor extends ActorPTR2e<ActorSystemPTR2e, null>,
+  >(this: ActorDirectoryPTR2e<TActor>, event: PointerEvent, target: HTMLElement) {
     event.preventDefault();
     event.stopPropagation();
 
-    const button = event.currentTarget as HTMLAnchorElement;
-    const li = button.closest<HTMLLIElement>("li.directory-item");
+    const li = target.closest<HTMLLIElement>("li.directory-item");
     const folderId = li?.dataset.folderId;
     if (!folderId) return;
 
@@ -135,23 +131,23 @@ export default class ActorDirectoryPTR2e<
    * @param {PointerEvent} event    The originating button click event
    * @protected
    */
-  protected override _onCreateFolder(event: PointerEvent) {
+  protected override _onCreateFolder(event: PointerEvent, target: HTMLElement): void {
     event.preventDefault();
     event.stopPropagation();
-    const button = event.currentTarget as HTMLElement;
-    const li = button.closest<HTMLElement>(".directory-item");
-    const data = { folder: li?.dataset?.folderId || null, type: this.entryType };
+    const { folderId } = (target.closest(".directory-item") as HTMLElement)?.dataset ?? {};
+    const data = { folder: folderId ?? null, type: this.documentName };
     const options: {
       top: number;
       left: number;
       pack?: string;
     } = {
-      top: button.offsetTop,
-      left: window.innerWidth - 310 - FolderConfigPTR2e.DEFAULT_OPTIONS.position.width,
+      top: target.offsetTop,
+      left: window.innerWidth - 310 - (FolderConfigPTR2e.DEFAULT_OPTIONS.position!.width as number),
     };
+    const operation: {pack?: string} = {}
     if (this.collection instanceof CompendiumCollection)
-      options.pack = this.collection.collection;
-    FolderPTR2e.createDialog(data, options);
+      operation.pack = this.collection.collection;
+    FolderPTR2e.createDialog(data, operation, options);
   }
 
   protected override async _handleDroppedEntry(
@@ -164,7 +160,8 @@ export default class ActorDirectoryPTR2e<
 
     // Get target Folder Document
     const closestFolder = target?.closest<HTMLElement>(".folder");
-    const targetFolder = await fromUuid<FolderPTR2e<TActor>>(closestFolder?.dataset.uuid ?? targetFolderUuid);
+    closestFolder?.classList.remove("droptarget");
+    const targetFolder = await fu.fromUuid<FolderPTR2e<TActor>>(closestFolder?.dataset.uuid ?? targetFolderUuid);
 
     // If the dropped Actor is already in the target Folder, do nothing
     if (targetFolder?.isFolderOwner(uuid)) {
@@ -172,7 +169,7 @@ export default class ActorDirectoryPTR2e<
     }
 
     // Get the Actor Document
-    const actor = await fromUuid<TActor>(uuid);
+    const actor = await fu.fromUuid<TActor>(uuid);
     if (!actor) return super._handleDroppedEntry(target, data);
 
     const party = actor.system.party;
@@ -232,6 +229,8 @@ export default class ActorDirectoryPTR2e<
       }
     });
   }
+
+  declare documentName: string;
 }
 
 interface Tree<TDocument extends EnfolderableDocument = EnfolderableDocument> {

@@ -26,14 +26,25 @@
         "img": "systems/ptr2e/img/perk-icons/Aura.svg",
         "range": {
           "target": "enemy",
-          "unit": "m"
+          "unit": "m",
+          "distance": 0
         },
         "types": [
           "untyped"
         ],
         "category": "status",
         "free": true,
-        "predicate": []
+        "predicate": [],
+        "variant": null,
+        "ephemeralVariant": false,
+        "contestType": "",
+        "contestEffect": "",
+        "slot": null,
+        "summon": null,
+        "defaultVariant": null,
+        "flingItemId": "",
+        "offensiveStat": null,
+        "defensiveStat": null
       }
     ],
     "slug": "shielding-aura",
@@ -71,14 +82,18 @@
     "design": {
       "arena": "physical",
       "approach": "resilience",
-      "archetype": "Aura"
+      "archetype": "aura"
     },
     "publication": {
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
-    }
+      ],
+      "notes": ""
+    },
+    "originSlug": null,
+    "variant": null,
+    "mode": null
   },
   "_id": "D4mh3LuuSy0DDBj0",
   "img": "systems/ptr2e/img/perk-icons/Aura.svg",
@@ -106,7 +121,8 @@
             ],
             "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "dontMerge": false
           }
         ],
         "slug": null,
@@ -135,12 +151,13 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.342",
         "systemId": "ptr2e",
         "systemVersion": "0.10.0-alpha.5.2.1",
         "createdTime": 1737934380177,
         "modifiedTime": 1737934406711,
-        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+        "lastModifiedBy": "mK35yvCqCgiTUvKf",
+        "exportSource": null
       }
     }
   ],

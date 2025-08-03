@@ -10,19 +10,18 @@
         "name": "Origin Flare",
         "type": "attack",
         "traits": [
-          "blast-1",
           "legendary",
-          "pp-updated",
-          "defrost"
+          "defrost",
+          "blast-1"
         ],
         "range": {
-          "target": "creature",
+          "target": "blast",
           "distance": 15,
           "unit": "m"
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 5
+          "powerPoints": 6
         },
         "category": "special",
         "power": 100,
@@ -30,7 +29,7 @@
         "types": [
           "steel"
         ],
-        "description": "<p>Effect: On hit, the target has a 30% chance of gaining @Affliction[burn] 5. When using this attack while @Affliction[harden], the user gains 2 Ticks of HP.</p>",
+        "description": "<p>Effect: On hit, all valid targets have a 30% chance of gaining @Affliction[burn] 5. When using this attack while @Affliction[harden], the user gains 2 Ticks of HP.</p>",
         "img": "systems/ptr2e/img/svg/steel_icon.svg",
         "predicate": []
       }

@@ -6,27 +6,23 @@
     "number": 260,
     "size": {
       "category": "medium",
-      "type": "height",
+      "type": "quad",
       "height": 1.5,
       "weight": 81.9
     },
     "diet": [
       "herbivore"
     ],
-    "movement": {
-      "primary": [
-        {
-          "type": "overland",
-          "value": 6
-        }
-      ],
-      "secondary": [
-        {
-          "type": "swim",
-          "value": 9
-        }
-      ]
-    },
+    "movement": [
+      {
+        "type": "overland",
+        "value": 6
+      },
+      {
+        "type": "swim",
+        "value": 9
+      }
+    ],
     "traits": [
       "pokemon",
       "semi-bipedal",
@@ -706,6 +702,10 @@
               "operand": "and"
             }
           ],
+          "perk": {
+            "x": 26,
+            "y": 26
+          },
           "evolutions": [
             {
               "name": "swampert",
@@ -717,29 +717,14 @@
                   "operand": "and"
                 }
               ],
-              "evolutions": [],
-              "details": {
-                "gender": null,
-                "item": null,
-                "level": null,
-                "knownMove": null
-              },
               "perk": {
                 "x": 26,
                 "y": 26
-              }
+              },
+              "details": null
             }
           ],
-          "details": {
-            "gender": null,
-            "item": null,
-            "level": null,
-            "knownMove": null
-          },
-          "perk": {
-            "x": 26,
-            "y": 26
-          }
+          "details": null
         }
       ],
       "uuid": "Compendium.ptr2e.core-species.Item.ztrb3a2ayqZdyvyf",
@@ -990,7 +975,9 @@
         "removeOnRecall": false,
         "stacks": 0,
         "trigger": "manual",
-        "conditions": []
+        "conditions": [],
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
@@ -1012,12 +999,13 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.346",
         "systemId": "ptr2e",
         "systemVersion": "1.1.1.beta",
         "createdTime": 1742066305002,
         "modifiedTime": 1742067139653,
-        "lastModifiedBy": "01onCaJSVMVOgMDI"
+        "lastModifiedBy": "01onCaJSVMVOgMDI",
+        "exportSource": null
       }
     }
   ]

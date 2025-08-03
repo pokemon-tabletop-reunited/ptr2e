@@ -21,11 +21,16 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 5
-        }
+          "powerPoints": 8,
+          "trigger": "",
+          "delay": null,
+          "priority": null
+        },
+        "variant": null,
+        "ephemeralVariant": false
       }
     ],
-    "description": "<p>You confer shields to all allies within 10m equal to four ticks of your Max HP. This benefits from the user having Improved Shielding, but not if the recipient does.</p>",
+    "description": "<p>Effect: Allied creatures in range gain @Tick[4 shield], based on the user's HP. Targeted creatures benefit from any Perks the user possesses that affects the user when the user would gain Shields.</p>",
     "traits": [],
     "prerequisites": [
       "item:perk:hold-the-line"
@@ -34,22 +39,19 @@
     "slug": "watchers-protection",
     "nodes": [
       {
+        "x": 36,
+        "y": 56,
+        "hidden": false,
+        "type": "normal",
         "connected": [
           "hold-the-line"
         ],
         "config": {
-          "alpha": null,
+          "texture": "icons/magic/defensive/shield-barrier-blue.webp",
           "backgroundColor": null,
           "borderColor": null,
-          "borderWidth": null,
-          "texture": "icons/magic/defensive/shield-barrier-blue.webp",
-          "tint": null,
-          "scale": null
+          "tint": null
         },
-        "hidden": false,
-        "type": "normal",
-        "x": 36,
-        "y": 56,
         "tier": null
       }
     ],
@@ -59,14 +61,18 @@
     "design": {
       "arena": "physical",
       "approach": "resilience",
-      "archetype": ""
+      "archetype": null
     },
     "publication": {
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
-    }
+      ],
+      "notes": ""
+    },
+    "originSlug": null,
+    "variant": null,
+    "mode": null
   },
   "img": "icons/magic/defensive/shield-barrier-blue.webp",
   "effects": [],

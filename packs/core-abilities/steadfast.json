@@ -11,17 +11,18 @@
         ],
         "name": "Steadfast",
         "slug": "steadfast",
-        "type": "passive",
+        "type": "generic",
         "cost": {
           "activation": "free",
           "trigger": "<p>The user becomes Flinched.</p>"
         },
         "range": {
           "target": "self",
-          "unit": "m"
+          "unit": "m",
+          "distance": 10
         },
         "description": "<p>Trigger: The user becomes Flinched.</p><p>Effect: The user gains +1 SPD Stage for 3 Activations.</p>",
-        "img": "systems/ptr2e/img/icons/ability_icon.webp"
+        "img": "systems/ptr2e/img/conditions/flinched.svg"
       }
     ],
     "description": "<p>Trigger: The user becomes Flinched.</p><p>Effect: The user gains +1 SPD Stage for 3 Activations.</p>",
@@ -38,9 +39,70 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
+      ],
+      "notes": ""
     }
   },
   "_id": "CSXApS5nns7n5E1O",
-  "effects": []
+  "effects": [
+    {
+      "name": "Steadfast",
+      "type": "passive",
+      "_id": "wVYBgmD1NdA7R2rn",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "steadfast-generic",
+            "value": "Compendium.ptr2e.core-effects.Item.XeiSuS3APUcN0MLM",
+            "predicate": [],
+            "chance": 100,
+            "isFixedChance": false,
+            "affects": "self",
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "duration.turns",
+                "value": 3
+              }
+            ],
+            "dontMerge": false,
+            "mode": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.346",
+        "systemId": "ptr2e",
+        "systemVersion": "1.3.8.beta",
+        "createdTime": 1753365866442,
+        "modifiedTime": 1753365941290,
+        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
+      }
+    }
+  ]
 }

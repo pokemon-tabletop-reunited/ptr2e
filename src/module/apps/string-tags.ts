@@ -70,7 +70,7 @@ export class HTMLStringTagsElementPTR2e extends foundry.applications.elements.HT
         tag.classList.add("tag");
         tag.dataset.key = data.value;
         const span = document.createElement("span");
-        span.innerHTML = await TextEditor.enrichHTML(data.label);
+        span.innerHTML = await foundry.applications.ux.TextEditor.enrichHTML(data.label);
         tag.appendChild(span);
         const a = document.createElement("a");
         a.classList.add("button", "remove", ...this.icons.remove.split(" "));

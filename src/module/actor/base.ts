@@ -11,7 +11,7 @@ import {
 } from "@actor";
 import { ActiveEffectPTR2e, ActiveEffectSystem, EffectSourcePTR2e } from "@effects";
 import { TypeEffectiveness } from "@scripts/config/effectiveness.ts";
-import { ActionPTR2e, AttackPTR2e, PokemonType, PTRCONSTS, RollOptionChangeSystem, RollOptionManager, Trait } from "@data";
+import { ActionPTR2e, AttackPTR2e, PokemonType, PTRCONSTS, RangePTR2e, RollOptionChangeSystem, RollOptionManager, Trait } from "@data";
 import { ActorFlags } from "types/foundry/common/documents/actor.js";
 import type { RollOptions } from "@module/data/roll-option-manager.ts";
 import FolderPTR2e from "@module/folder/document.ts";
@@ -23,7 +23,7 @@ import { ActionsCollections } from "./actions.ts";
 import { CustomSkill } from "@module/data/models/skill.ts";
 import { BaseStatisticCheck, Statistic, StatisticCheck } from "@system/statistics/statistic.ts";
 import { CheckContext, CheckContextParams, RollContext, RollContextParams } from "@system/data.ts";
-import { extractEffectRolls, extractEphemeralEffects, extractModifiers, extractTargetModifiers, processPreUpdateHooks } from "src/util/change-helpers.ts";
+import { extractAttackAdjustments, extractEffectRolls, extractEphemeralEffects, extractModifiers, extractNotes, extractTargetModifiers, processPreUpdateHooks } from "src/util/change-helpers.ts";
 import { TokenPTR2e } from "@module/canvas/token/object.ts";
 import * as R from "remeda";
 import { ModifierPTR2e } from "@module/effects/modifiers.ts";
@@ -37,6 +37,7 @@ import { PickableThing } from "@module/apps/pick-a-thing-prompt.ts";
 import { ActionUUID } from "src/util/uuid.ts";
 import { ActorSizePTR2e } from "./data/size.ts";
 import { auraAffectsActor, checkAreaEffects } from "./helpers.ts";
+import { RollNote } from "@system/notes.ts";
 
 interface ActorParty {
   owner: ActorPTR2e<ActorSystemPTR2e, null> | null;
@@ -335,8 +336,11 @@ class ActorPTR2e<
       afflictions: { data: [], ids: new Set() },
       rollNotes: {},
       effects: {},
+      effectAlterations: {},
+      effectsRemovedAfterAttacking: [],
+      effectsRemovedAfterAttacked: [],
       toggles: [],
-      attackAdjustments: [],
+      attackAdjustments: {},
       tokenTags: new Map(),
       tokenOverrides: {},
       preparationWarnings: {
@@ -386,6 +390,7 @@ class ActorPTR2e<
 
     // Todo: Add appropriate `self:` options to the rollOptions
     this.rollOptions.addOption("self", `type:${this.type}`);
+    this.rollOptions.addOption("self", `state:${this.movementType}`);
 
     this.system.type.effectiveness = this._calculateEffectiveness();
 
@@ -484,14 +489,25 @@ class ActorPTR2e<
       this.abilities.entries[ability.system.slot] = ability;
     }
 
+    for (const attack of this.actions.attack) {
+      if (attack.traits.has("adaptable") && !attack.variant) {
+        attack.generateAdaptableVariants();
+      }
+    }
+
+    // Add movement based roll options
+    for (const key in this.system.movement) {
+      this.rollOptions.addOption("self", `movement:${key}`);
+    }
+
     // Create Fling Action
     this.generateFlingAttack();
   }
 
   generateFlingAttack() {
     function getFlingAttack(
-      { name, slug, power = 25, accuracy = 100, types = ["untyped"], free = false, variant = true, description = "", id = "" }:
-        { name?: string, slug?: string, power?: number, accuracy?: number, types?: DeepPartial<AttackPTR2e['_source']['types']>, free?: boolean, variant?: boolean, description?: string, id?: string }
+      { name, slug, power = 25, accuracy = 100, types = ["untyped"], free = false, variant = true, description = "", id = "", range = null, traits = [] }:
+        { name?: string, slug?: string, power?: number, accuracy?: number, types?: DeepPartial<AttackPTR2e['_source']['types']>, free?: boolean, variant?: boolean, description?: string, id?: string, range?: RangePTR2e | null, traits?: string[] }
         = { name: "", slug: "", power: 25, accuracy: 100, types: ["untyped"], free: false, variant: true, description: "", id: "" }
     ): DeepPartial<AttackPTR2e['_source']> {
       return {
@@ -502,12 +518,13 @@ class ActorPTR2e<
           "adaptable",
           "basic",
           "fling",
-          "pp-updated"
+          "pp-updated",
+          ...(traits?.length ? traits : [])
         ],
         range: {
-          target: "creature",
-          distance: 10,
-          unit: "m"
+          target: range?.target || "creature",
+          distance: range?.distance ?? 10,
+          unit: range?.unit || "m"
         },
         cost: {
           activation: "complex",
@@ -517,7 +534,7 @@ class ActorPTR2e<
         power: power || 25,
         accuracy: accuracy || 100,
         types: types?.length ? types : ["untyped"],
-        description: description ? description : "<p>Effect: The Type, Power, Accuracy, and Range of this attack are modified by the Fling stats of the utilized item. When using Fling utilizing a Held creature, Fling's Power and Accuracy are as follows:</p><blockquote>Power = 20 + (userLift / 4) + (thrownWC * 3)<br>Accuracy = 75 + (userLift / 5) + userCatMod - (4 * thrownCatMod)<br>Range = 8 + (userLift / 6) + userCatMod - (2* thrownCatMod)</blockquote>",
+        description: description ? description : "<p>Effect: The Type, Power, Accuracy, and Range of this attack are modified by the Fling stats of the utilized item. When using Fling utilizing a Held creature, Fling's Power, Accuracy, and Range change based on the user and the Flung creature.</p>",
         variant: variant ? "fling" : null,
         free,
         img: "systems/ptr2e/img/svg/untyped_icon.svg",
@@ -530,7 +547,7 @@ class ActorPTR2e<
       "img": "systems/ptr2e/img/svg/untyped_icon.svg",
       "system": {
         "slug": "fling",
-        "description": "<p>Effect: The Type, Power, Accuracy, and Range of this attack are modified by the Fling stats of the utilized item. When using Fling utilizing a Held creature, Fling's Power and Accuracy are as follows:</p><blockquote>Power = 20 + (userLift / 4) + (thrownWC * 3)<br>Accuracy = 75 + (userLift / 5) + userCatMod - (4 * thrownCatMod)<br>Range = 8 + (userLift / 6) + userCatMod - (2* thrownCatMod)</blockquote>",
+        "description": "<p>Effect: The Type, Power, Accuracy, and Range of this attack are modified by the Fling stats of the utilized item. When using Fling utilizing a Held creature, Fling's Power, Accuracy, and Range change based on the user and the Flung creature.</p>",
         "traits": [
           "adaptable",
           "basic",
@@ -557,11 +574,11 @@ class ActorPTR2e<
       if (item.system.quantity !== undefined && typeof item.system.quantity === 'number' && item.system.quantity <= 0) continue;
       itemNames.add(item.slug);
 
-      const flingData = item.system.fling as { power: number, accuracy: number, type: PokemonType, hide: boolean };
+      const flingData = item.system.fling as { power: number, accuracy: number, type: PokemonType, hide: boolean, range: RangePTR2e | null};
       if (flingData.hide) continue;
 
       data.system.actions.push(getFlingAttack({
-        name: item.name, slug: item.slug, power: flingData.power, accuracy: flingData.accuracy, types: [flingData.type], id: item.id,
+        name: item.name, slug: item.slug, power: flingData.power, accuracy: flingData.accuracy, range: flingData.range, types: [flingData.type], traits: item.traits?.map(t => t.slug), id: item.id,
         description: `<p>Effect: The Type, Power, Accuracy, and Range of this attack are modified by the Fling stats of the utilized item.</p><p>This fling variant is based on ${item.link}</p>`
       }));
     }
@@ -600,12 +617,14 @@ class ActorPTR2e<
     const changes = [];
     // Afflictions don't always have changes, so we need to track them separately
     const afflictions: ActiveEffectPTR2e<ActorPTR2e, AfflictionActiveEffectSystem>[] = [];
+    const bossTrait = this.traits.find(t => t && !!t.slug && t.slug.includes("boss") && !!t.value);
     for (const effect of this.allApplicableEffects() as unknown as Generator<
       ActiveEffectPTR2e<ActorPTR2e>,
       void,
       void
     >) {
       if (!effect.active) continue;
+      if(bossTrait && effect.flags?.ptr2e?.traitEffect == bossTrait.slug) continue;
       changes.push(
         ...effect.changes.map((change) => {
           const c = foundry.utils.deepClone(change);
@@ -758,7 +777,9 @@ class ActorPTR2e<
         ? o.replace(/^self/, prefix)
         : o.startsWith("trait:") && rollOptions.all[o]
           ? `${prefix}:${o}`
-          : []
+          : o.startsWith("effect:") && rollOptions.all[o]
+            ? `${prefix}:${o}`
+            : []
     );
   }
 
@@ -828,7 +849,7 @@ class ActorPTR2e<
 
     if (!pp) {
       const originalAmount = Math.floor((this.system.health.max / 16) * Math.abs(ticks));
-      const amount = Math.floor(originalAmount * (isDamage ? multiplier : 1))
+      const amount = isDamage ? Math.max(Math.floor(originalAmount * multiplier), 1) : Math.floor(originalAmount);
       const applied = shield
         ? Math.min(amount || 0, isDamage ? this.system.shield.value : Infinity)
         : Math.min(amount || 0, isDamage ? this.system.health.value : this.system.health.max - this.system.health.value);
@@ -910,7 +931,7 @@ class ActorPTR2e<
     const multiplier = (this.system.modifiers["vulnerabilityMultiplier"] ?? 1)
     const originalDamage = damage;
     if (damage > 0) {
-      if (multiplier !== 1 && !isNaN(multiplier)) damage = Math.floor(damage * this.system.modifiers["vulnerabilityMultiplier"]!);
+      if (multiplier !== 1 && !isNaN(multiplier)) damage = Math.max(1, Math.floor(damage * this.system.modifiers["vulnerabilityMultiplier"]!));
     }
     // Damage is applied to shield first, then health
     // Shields cannot be healed
@@ -989,8 +1010,13 @@ class ActorPTR2e<
     suboption: string | null = null,
   ): Promise<boolean | null> {
     if (!(typeof effectUuid === "string")) return null;
+    if (effectUuid.startsWith("trait:")) {
+      const newValue = value ?? !(this.flags.ptr2e?.traitEffects?.[effectUuid] ?? true);
+      await this.update({ "flags.ptr2e.traitEffects": { [effectUuid]: newValue } });
+      return newValue;
+    }
 
-    const effect = await fromUuid<ActiveEffectPTR2e>(effectUuid, { relative: this as Actor });
+    const effect = await fu.fromUuid<ActiveEffectPTR2e>(effectUuid, { relative: this as Actor });
     const change = effect?.changes.find(
       (c): c is RollOptionChangeSystem =>
         c instanceof RollOptionChangeSystem && c.domain === domain && c.option === option,
@@ -1049,7 +1075,7 @@ class ActorPTR2e<
         "underdogperk0002",
       ]
     }) as PerkPTR2e[];
-    const webs = new Set([this.species!.evolutions?.uuid ?? this.species!.parent.flags?.core?.sourceId ?? []].flat());
+    const webs = new Set([(this.species!.evolutions?.uuid ?? this.species!.parent.flags?.core?.sourceId) || this.species!.parent._stats?.compendiumSource || []].flat());
     const baseConnection = `evolution-${this.species!.evolutions?.name ?? this.species!.parent.slug}`;
     return underdogPerks.map(perk => perk.clone({ "system.webs": webs, "system.nodes": perk.system._source.nodes.map(node => ({ ...node, connected: [baseConnection, ...node.connected] })) }));
   }
@@ -1068,6 +1094,37 @@ class ActorPTR2e<
 
   isEnemyOf(actor: ActorPTR2e): boolean {
     return this.alliance !== null && actor.alliance !== null && this.alliance !== actor.alliance;
+  }
+
+  get movementType() {
+    const type = this.system.movementType ?? (() => {
+      //@ts-expect-error - Outdated types
+      const maybeType: string | undefined = this.getActiveTokens(false, true).at(0)?.movementAction;
+      if(maybeType) {
+        this.system.movementType = maybeType;
+        return maybeType;
+      }
+      return "";
+    })();
+    if (type in CONFIG.Token.movement.actions) return type;
+    else return CONFIG.Token.movement.defaultAction;
+  }
+
+  availableMovement(type: string) {
+    const movement = this.getMovement(type);
+    return movement?.available ?? 0;
+  }
+
+  hasMovementType(type: string): boolean {
+    if (this.getMovement(type)) return true;
+    return false;
+  }
+
+  getMovement(type: string) {
+    for (const record in this.system.movement) {
+      if (this.system.movement[record].method === type) return this.system.movement[record];
+    }
+    return null;
   }
 
   async spendLuck(amount: number, pendingUpdates: Record<string, unknown>[] = [], notifications: { name: string, amount: number, leftover: number }[] = []): Promise<{ name: string, amount: number, leftover: number }[]> {
@@ -1551,7 +1608,7 @@ class ActorPTR2e<
     const actionRollOptions = Array.from(new Set([...itemOptions, ...actionOptions, ...getTargetRollOptions(targetToken?.actor)]));
 
     if (selfAttack) {
-      for (const adjustment of selfActor.synthetics.attackAdjustments) {
+      for (const adjustment of extractAttackAdjustments(selfActor.synthetics.attackAdjustments, params.domains)) {
         adjustment().adjustAttack?.(selfAttack, actionRollOptions);
       }
     }
@@ -1560,7 +1617,7 @@ class ActorPTR2e<
       const traits = params.traits?.map((t) => (typeof t === "string" ? t : t.slug)) ?? [];
 
       if (selfAttack) {
-        for (const adjustment of selfActor.synthetics.attackAdjustments) {
+        for (const adjustment of extractAttackAdjustments(selfActor.synthetics.attackAdjustments, params.domains)) {
           adjustment().adjustTraits?.(selfAttack, traits, actionRollOptions);
         }
       }
@@ -1616,7 +1673,7 @@ class ActorPTR2e<
       options: [...params.options, ...itemOptions, ...targetRollOptions],
     });
 
-    const targetEffectRolls = await extractEffectRolls({
+    const targetEffectRolls = params.skipEffectRolls ? [] : await extractEffectRolls({
       affects: "target",
       origin: selfActor,
       target: targetToken?.actor ?? null,
@@ -1627,9 +1684,10 @@ class ActorPTR2e<
       options: [...params.options, ...itemOptions, ...targetRollOptions],
       chanceModifier: (Number(selfActor.system?.modifiers?.effectChance) || 0),
       hasSenerenGrace: selfActor?.rollOptions?.all?.["special:serene-grace"] ?? false,
+      effectAlterations: selfActor.synthetics.effectAlterations,
     })
 
-    const targetOriginEffectRolls = await extractEffectRolls({
+    const targetOriginEffectRolls = params.skipEffectRolls ? [] : await extractEffectRolls({
       affects: "origin",
       origin: selfActor,
       target: targetToken?.actor ?? null,
@@ -1639,10 +1697,11 @@ class ActorPTR2e<
       domains: params.domains,
       options: [...params.options, ...itemOptions, ...targetRollOptions],
       chanceModifier: (Number(targetToken?.actor?.system?.modifiers?.effectChance) || 0),
-      hasSenerenGrace: targetToken?.actor?.rollOptions?.all?.["special:serene-grace"] ?? false
+      hasSenerenGrace: targetToken?.actor?.rollOptions?.all?.["special:serene-grace"] ?? false,
+      effectAlterations: targetToken?.actor?.synthetics.effectAlterations ?? {},
     })
 
-    const targetDefensiveEffectRolls = await extractEffectRolls({
+    const targetDefensiveEffectRolls = params.skipEffectRolls ? [] : await extractEffectRolls({
       affects: "defensive",
       origin: selfActor,
       target: targetToken?.actor ?? null,
@@ -1652,7 +1711,8 @@ class ActorPTR2e<
       domains: params.domains,
       options: [...params.options, ...itemOptions, ...targetRollOptions],
       chanceModifier: (Number(targetToken?.actor?.system?.modifiers?.effectChance) || 0),
-      hasSenerenGrace: targetToken?.actor?.rollOptions?.all?.["special:serene-grace"] ?? false
+      hasSenerenGrace: targetToken?.actor?.rollOptions?.all?.["special:serene-grace"] ?? false,
+      effectAlterations: targetToken?.actor?.synthetics.effectAlterations ?? {},
     });
 
     const targetOriginFlatModifiers = await extractTargetModifiers({
@@ -1685,7 +1745,7 @@ class ActorPTR2e<
     );
 
     const rangeIncrement = selfAttack
-      ? selfAttack.getRangeIncrement(distance, selfActor.size)
+      ? selfAttack.getRangeIncrement(distance, selfActor.size, rollOptions.has("actor:trait:reach"))
       : selfAction &&
         "getRangeIncrement" in selfAction &&
         selfAction.getRangeIncrement &&
@@ -1757,7 +1817,7 @@ class ActorPTR2e<
 
     // Predicate for appliesSelfOnly is checking how many actors in the aura count, not whether it should apply to this actor.
     for (const data of aura.effects.filter(e => e.appliesSelfOnly ? origin.actor === this : e.predicate.test(rollOptions))) {
-      const existing = this.appliedEffects.find(e => e.flags?.core?.sourceId === data.uuid) as ActiveEffectPTR2e | undefined;
+      const existing = this.appliedEffects.find(e => e.flags?.core?.sourceId === data.uuid || e._stats?.compendiumSource === data.uuid) as ActiveEffectPTR2e | undefined;
       if (existing && !data.appliesSelfOnly) continue;
 
       if (!auraAffectsActor(data, origin.actor, this)) continue;
@@ -1823,7 +1883,7 @@ class ActorPTR2e<
     if (effect.traits.has("ignore-immunity")) return false;
 
     if (effect.traits.has("major-affliction") || effect.traits.has("minor-affliction")) {
-      const name = effect.slug === "burn" ? "burned" : effect.slug;
+      const name = effect.slug === "burned" ? "burn" : effect.slug;
       if (immunities[`affliction:${name}`] && !effect.traits.has(`ignore-immunity-${name}`)) return true;
     }
 
@@ -1834,7 +1894,7 @@ class ActorPTR2e<
     return false;
   }
 
-  async applyRollEffects(toApply: ActiveEffectPTR2e["_source"][]) {
+  async applyRollEffects(toApply: ActiveEffectPTR2e["_source"][], isHostile = true) {
     const oldEffects = this.effects.filter(e => e.type === "affliction").map(e => e.clone({}, { keepId: true })) as unknown as ActiveEffectPTR2e[];
     const effects = await this.createEmbeddedDocuments("ActiveEffect", toApply) as ActiveEffectPTR2e[];
 
@@ -1847,7 +1907,7 @@ class ActorPTR2e<
       if (oldEffect) {
         acc.stacksUpdated.push(oldEffect.uuid);
       } else {
-        if (effect.type !== "advancement") acc.notApplied.push(effect);
+        if (!["advancement"].includes(effect.type) && effect.changes.every(c => !["apply-tick"].includes(c.type))) acc.notApplied.push(effect);
       }
       return acc;
     }, { notApplied: [] as ActiveEffectPTR2e[], stacksUpdated: [] as string[] });
@@ -1869,6 +1929,17 @@ class ActorPTR2e<
             : ""
         )
     })
+
+    if (isHostile) {
+      const notes = extractNotes(this.synthetics.rollNotes, ["effect-applied"])
+      if (notes?.length) {
+        const content = RollNote.notesToHTML(notes)?.outerHTML;
+        if (content?.length) await ChatMessage.create({
+          speaker: ChatMessage.getSpeaker({ actor: this }),
+          content
+        });
+      }
+    }
   }
 
   private static getLoafingCount(creature: number, owner: number) {
@@ -1910,7 +1981,7 @@ class ActorPTR2e<
         )
       );
 
-      const tokenDefaults = fu.deepClone(game.settings.get("core", "defaultToken"));
+      const tokenDefaults = {};
       const actor = new this(fu.mergeObject({ prototypeToken: tokenDefaults }, source));
       await MigrationRunner.ensureSchemaVersion(
         actor,
@@ -1924,13 +1995,29 @@ class ActorPTR2e<
   }
 
   static override async createDialog<TDocument extends foundry.abstract.Document>(this: ConstructorOf<TDocument>, data?: Record<string, unknown>, context?: { parent?: TDocument["parent"]; pack?: Collection<TDocument> | null; types?: string[] } & Partial<FormApplicationOptions>): Promise<TDocument | null>;
-  static override async createDialog(data: Record<string, unknown> = {}, context: { parent?: TokenDocumentPTR2e | null; pack?: Collection<ActorPTR2e> | null; types?: string[] } & Partial<FormApplicationOptions> = {}) {
-    if (!Array.isArray(context.types)) context.types = this.TYPES.filter(t => t !== "ptu-actor");
-    else {
-      if (context.types.length) context.types = context.types.filter(t => t !== "ptu-actor");
-      else context.types = this.TYPES.filter(t => t !== "ptu-actor");
-    }
-    return super.createDialog(data, context);
+  static override async createDialog(
+    data: Record<string, unknown> = {},
+    createOptions: Record<string, unknown> = {},
+    {
+      folders,
+      types,
+      template,
+      context,
+      ...dialogOptions
+    }: {
+      folders?: { id: string, name: string }[];
+      types?: string[];
+      template?: string;
+    } & {
+      context?: { parent?: TokenDocumentPTR2e | null; pack?: Collection<ActorPTR2e> | null; types?: string[] } & Partial<FormApplicationOptions>;
+    } = {}
+  ) {
+    if (types?.length) types = types.filter(t => t !== "ptu-actor");
+    else types = this.TYPES.filter(t => t !== "ptu-actor");
+
+    return super.createDialog(data, createOptions, {
+      folders, types, template, context, ...dialogOptions
+    });
   }
 
   protected override _onEmbeddedDocumentChange(): void {
@@ -1956,6 +2043,18 @@ class ActorPTR2e<
         throw new Error("Cannot create an actor that owns a party folder already owned by another actor.");
       }
     }
+
+    if (!this.items.get("struggleattaitem")) {
+      const struggle = await fu.fromUuid<ItemPTR2e<MoveSystem>>("Compendium.ptr2e.core-moves.Item.struggleattaitem");
+      if (struggle) {
+        const items = fu.duplicate(this._source.items ?? []);
+        const struggleObject = struggle.toObject();
+        //@ts-expect-error - Intended
+        delete struggleObject.ownership;
+        items.push(struggleObject);
+        this.updateSource({ items });
+      }
+    }
   }
 
   protected override async _preUpdate(
@@ -1963,6 +2062,33 @@ class ActorPTR2e<
     options: DocumentModificationContext<TParent>,
     user: User
   ): Promise<boolean | void> {
+    if (!this.items.get("struggleattaitem") && (!changed.items?.length || !(changed.items as ItemPTR2e['_source'][])?.some(i => i.type === "move" && i._id === "struggleattaitem"))) {
+      const struggles = this.actions.filter(a => a.type === "attack" && a.slug === "struggle");
+      if (struggles.length) {
+        const toDelete = new Set<string>();
+        for (const struggle of struggles) {
+          toDelete.add(struggle.item.id);
+        }
+        await this.deleteEmbeddedDocuments("Item", [...toDelete], { noHook: true });
+      }
+
+      const struggle = await fu.fromUuid<ItemPTR2e<MoveSystem>>("Compendium.ptr2e.core-moves.Item.struggleattaitem");
+      if (struggle) {
+        if (Array.isArray(changed.items) && changed.items.length && !options.keepEmbeddedIds) {
+          for (const item of changed.items) {
+            item._id = fu.randomID();
+          }
+        }
+
+        changed.items ??= [];
+        const struggleObject = struggle.toObject();
+        //@ts-expect-error - Intended
+        delete struggleObject.ownership;
+        (changed.items as ItemPTR2e['_source'][]).push(struggleObject);
+        options.keepEmbeddedIds = true;
+      }
+    }
+
     if (changed.system?.party?.ownerOf) {
       const folder = game.folders.get(changed.system.party.ownerOf as Maybe<string>) as FolderPTR2e;
       if (folder?.owner && !this.uuid?.endsWith(folder.owner)) {
@@ -2103,6 +2229,11 @@ class ActorPTR2e<
         }
       }
     }
+
+    if (changed.ownership && !game.user.isGM) {
+      delete changed.ownership;
+    }
+
     // 
     try {
       const updated = this.clone(changed, { keepId: true, addSource: true });
@@ -2112,6 +2243,23 @@ class ActorPTR2e<
     }
 
     return super._preUpdate(changed, options, user);
+  }
+
+  static override _preUpdateOperation(documents: Actor[], operation: DatabaseUpdateOperation, user: User) {
+    if (game.user.isGM) return super._preUpdateOperation(documents, operation, user);
+    for (const update of operation.updates) {
+      if ('ownership' in update) {
+        delete update.ownership;
+      }
+      if ('items' in update && Array.isArray(update.items)) {
+        for (const item of update.items) {
+          if ('ownership' in item) {
+            delete item.ownership;
+          }
+        }
+      }
+    }
+    return super._preUpdateOperation(documents, operation, user);
   }
 
   protected override _onUpdate(
@@ -2380,7 +2528,8 @@ type ActorFlags2e = ActorFlags & {
     typeOptions?: {
       get options(): PickableThing[],
       get types(): PickableThing[];
-    }
+    },
+    traitEffects?: Record<string, boolean>;
   };
 };
 

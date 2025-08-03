@@ -16,12 +16,13 @@
         "type": "attack",
         "cost": {
           "activation": "free",
-          "powerPoints": 6,
+          "powerPoints": 4,
           "trigger": "The user enters Combat."
         },
         "range": {
           "target": "self",
-          "unit": "m"
+          "unit": "m",
+          "distance": 0
         },
         "img": "systems/ptr2e/img/perk-icons/Ninja.svg",
         "types": [
@@ -29,11 +30,21 @@
         ],
         "category": "status",
         "free": true,
-        "predicate": []
+        "predicate": [],
+        "variant": null,
+        "ephemeralVariant": false,
+        "contestType": "",
+        "contestEffect": "",
+        "slot": null,
+        "summon": null,
+        "defaultVariant": null,
+        "flingItemId": "",
+        "offensiveStat": null,
+        "defensiveStat": null
       }
     ],
     "slug": "skirmish",
-    "description": "<p>Upon entering combat, as a Free Action at [Interrupt 2], you may spend 2 PP advance their Initiative by 50%.</p>",
+    "description": "<p>Upon entering combat, as a Free Action at [Interrupt 2], you may spend 4 PP advance their Initiative by 50%.</p>",
     "traits": [],
     "prerequisites": [],
     "cost": 2,
@@ -43,6 +54,10 @@
     },
     "nodes": [
       {
+        "x": 65,
+        "y": 177,
+        "hidden": false,
+        "type": "normal",
         "connected": [
           "quick-and-the-dead",
           "stat-iv-booster-1-7",
@@ -50,18 +65,14 @@
           "mightyena-tactic"
         ],
         "config": {
+          "texture": "systems/ptr2e/img/perk-icons/Ninja.svg",
           "alpha": null,
-          "backgroundColor": "#ff0000",
+          "backgroundColor": null,
           "borderColor": null,
           "borderWidth": null,
-          "texture": "systems/ptr2e/img/perk-icons/Ninja.svg",
           "tint": null,
           "scale": null
         },
-        "hidden": false,
-        "type": "normal",
-        "x": 65,
-        "y": 177,
         "tier": null
       }
     ],
@@ -79,7 +90,10 @@
         "PTR 2e Team"
       ],
       "notes": ""
-    }
+    },
+    "originSlug": null,
+    "variant": null,
+    "mode": null
   },
   "effects": [
     {
@@ -111,7 +125,8 @@
             "label": "Skirmish",
             "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "dontMerge": false
           },
           {
             "type": "roll-note",
@@ -150,12 +165,13 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.342",
         "systemId": "ptr2e",
         "systemVersion": "1.1.1.beta",
         "createdTime": 1742128039172,
         "modifiedTime": 1742128109855,
-        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+        "lastModifiedBy": "mK35yvCqCgiTUvKf",
+        "exportSource": null
       }
     }
   ]

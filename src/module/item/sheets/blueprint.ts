@@ -12,8 +12,7 @@ import { BlueprintPTR2e } from "@item";
 import { GlobalPerkGeneratorConfig } from "@module/apps/global-perk-generator-config.ts";
 
 export default class BlueprintSheet extends foundry.applications.api.HandlebarsApplicationMixin(DocumentSheetV2<ItemPTR2e<BlueprintSystem>>) {
-  static override DEFAULT_OPTIONS = fu.mergeObject(
-    super.DEFAULT_OPTIONS,
+  static override DEFAULT_OPTIONS =
     {
       classes: ["blueprint", "sheet"],
       position: {
@@ -47,7 +46,7 @@ export default class BlueprintSheet extends foundry.applications.api.HandlebarsA
               action: "ok",
               label: "Confirm",
               callback: (_event, _button, dialog) => {
-                return dialog?.querySelector<HTMLInputElement>("input[name='name']")?.value ?? name
+                return dialog?.element?.querySelector<HTMLInputElement>("input[name='name']")?.value ?? name
               }
             }
           })
@@ -61,7 +60,7 @@ export default class BlueprintSheet extends foundry.applications.api.HandlebarsA
         },
         "create-config": async function (this: BlueprintSheet) {
           if (!this.selected) return;
-          await BlueprintSheet.#onSubmit.bind(this)(new Event("save"), this.element as HTMLFormElement, new FormDataExtended(this.element));
+          await BlueprintSheet.#onSubmit.bind(this)(new Event("save"), this.element as HTMLFormElement, new foundry.applications.ux.FormDataExtended(this.element));
           if (this.generation?.temporary) {
             this.selected.updateSource({ _config: new GeneratorConfig({}, { parent: this.selected }).toObject() });
           } else {
@@ -98,9 +97,7 @@ export default class BlueprintSheet extends foundry.applications.api.HandlebarsA
         }
       },
       tag: "form",
-    },
-    { inplace: false }
-  );
+    };
 
   static override PARTS: Record<string, foundry.applications.api.HandlebarsTemplatePart> = {
     side: {
@@ -421,7 +418,7 @@ export default class BlueprintSheet extends foundry.applications.api.HandlebarsA
   }
 
   override async _onDrop(event: DragEvent) {
-    const data = TextEditor.getDragEventData(event) as Record<string, string>;
+    const data = foundry.applications.ux.TextEditor.getDragEventData(event) as Record<string, string>;
     const doc = await (async () => {
       switch (data.type) {
         case "RollTable": {

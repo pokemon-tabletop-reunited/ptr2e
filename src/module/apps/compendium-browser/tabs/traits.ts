@@ -53,7 +53,7 @@ export class CompendiumBrowserTraitsTab extends CompendiumBrowserTab {
         entries.map(async (entry) => {
           return {
             ...entry,
-            description: await TextEditor.enrichHTML(entry.description)
+            description: await foundry.applications.ux.TextEditor.enrichHTML(entry.description)
           }
         }));
     });

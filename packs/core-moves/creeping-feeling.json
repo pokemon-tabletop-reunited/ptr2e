@@ -17,15 +17,13 @@
     "traits": [],
     "actions": [
       {
-        "name": "Creeping Vibe",
-        "slug": "creeping-vibe",
+        "name": "Creeping Feeling",
+        "slug": "creeping-feeling",
         "type": "attack",
         "img": "systems/ptr2e/img/svg/ghost_icon.svg",
         "traits": [
           "pulse",
-          "social",
-          "flinch-chance-3",
-          "pp-updated"
+          "social"
         ],
         "range": {
           "target": "creature",
@@ -43,7 +41,7 @@
         "power": 35,
         "accuracy": 95,
         "predicate": [],
-        "description": "<p>undefined</p>"
+        "description": "<p><span style=\"font-family: Signika, sans-serif\">Effect: On hit, the target has a 30% chance of being Flinched.</span></p>"
       }
     ],
     "grade": "E"
@@ -52,7 +50,7 @@
   "img": "systems/ptr2e/img/svg/ghost_icon.svg",
   "effects": [
     {
-      "name": "Astonish",
+      "name": "Creeping Feeling",
       "type": "passive",
       "_id": "wpyTNqaE9BlZUYiL",
       "img": "systems/ptr2e/img/icons/effect_icon.webp",
@@ -79,7 +77,8 @@
             ],
             "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "dontMerge": false
           }
         ],
         "slug": null,
@@ -116,6 +115,5 @@
         "lastModifiedBy": "01onCaJSVMVOgMDI"
       }
     }
-  ],
-  "flags": {}
+  ]
 }
