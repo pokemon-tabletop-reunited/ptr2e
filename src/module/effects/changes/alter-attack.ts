@@ -292,7 +292,9 @@ export default class AlterAttackChangeSystem extends ChangeModel {
       }
     });
 
-    actor.synthetics.attackAdjustments.push(adjustment);
+    actor.synthetics.attackAdjustments ??= {};
+    actor.synthetics.attackAdjustments[this.selector] ??= [];
+    actor.synthetics.attackAdjustments[this.selector].push(adjustment);
   }
 }
 

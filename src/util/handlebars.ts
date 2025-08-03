@@ -124,7 +124,7 @@ function _registerPTRHelpers() {
 
       const doc = fromUuidSync(content);
       if (!doc) {
-        return TextEditor.createAnchor({
+        return foundry.applications.ux.TextEditor.createAnchor({
           classes: ["content-link", "broken"],
           icon: "fas fa-unlink",
           dataset: {},
@@ -191,7 +191,7 @@ function _registerPTRHelpers() {
         icon,
       };
 
-      return TextEditor.createAnchor(data).outerHTML;
+      return foundry.applications.ux.TextEditor.createAnchor(data).outerHTML;
     } catch (error) {
       console.warn(error);
       return content;

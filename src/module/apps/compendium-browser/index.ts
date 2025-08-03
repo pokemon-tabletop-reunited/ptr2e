@@ -13,75 +13,71 @@ import { ConsumablePTR2e } from "@item";
 import { CompendiumBrowserSettings as CompendiumBrowserSettingsApp } from "./settings.ts";
 
 export class CompendiumBrowser extends foundry.applications.api.HandlebarsApplicationMixin(ApplicationV2Expanded) {
-  static override DEFAULT_OPTIONS = fu.mergeObject(
-    super.DEFAULT_OPTIONS,
-    {
-      tag: "form",
-      id: "compendium-browser",
-      classes: ["sheet", "default-sheet"],
-      position: {
-        width: 800,
-        height: 700,
-      },
-      window: {
-        minimizable: true,
-        resizable: true
-      },
-      dragDrop: [{ dragSelector: "li.item[data-type]" }],
-      actions: {
-        tutorList: () => game.ptr.tutorList.render({ force: true, actor: null }),
-        purchase: async function (this: CompendiumBrowser, event: PointerEvent) {
-          const actor = canvas?.tokens?.controlled?.[0]?.actor ?? game.user.character;
-          if (!actor) return void ui.notifications.error("PTR2E.CompendiumBrowser.Purchase.NotControlledToken", { localize: true });
-
-          const itemUuid = htmlClosest(event.target, "[data-entry-uuid]")?.dataset.entryUuid;
-          const item = await fromUuid<ConsumablePTR2e>(itemUuid);
-          if (!item) return void ui.notifications.error("PTR2E.CompendiumBrowser.Purchase.ItemNotFound", { localize: true });
-
-          const cost = item.system.cost;
-          if (!cost) return void ui.notifications.error("PTR2E.CompendiumBrowser.Purchase.NoCost", { localize: true });
-          
-          const grade = actor.grade;
-          const itemGrade = item.system.grade;
-          if(!itemGrade) return void ui.notifications.error("PTR2E.CompendiumBrowser.Purchase.NoGrade", { localize: true });
-
-          const allowedGrade = (() => {
-            if(grade === "A") {
-              return itemGrade !== "S";
-            }
-            if(["A", "B"].includes(grade)) {
-              return !["S", "A"].includes(itemGrade);
-            }
-            if(["A", "B", "C"].includes(grade)) {
-              return !["S", "A", "B"].includes(itemGrade);
-            }
-            if(["A", "B", "C", "D"].includes(grade)) {
-              return !["S", "A", "B", "C"].includes(itemGrade);
-            }
-            if(["A", "B", "C", "D", "E"].includes(grade)) {
-              return !["S", "A", "B", "C", "D"].includes(itemGrade);
-            }
-            return false;
-          })();
-          if(!allowedGrade) return void ui.notifications.error(game.i18n.format("PTR2E.CompendiumBrowser.Purchase.GradeNotAllowed", { char: grade, grade: itemGrade }));
-
-          const availableIP = actor.system.inventoryPoints.current;
-          if (cost > availableIP) return void ui.notifications.error(game.i18n.format("PTR2E.CompendiumBrowser.Purchase.NotEnoughIP", { required: cost, current: availableIP }));
-
-          const newIP = availableIP - cost;
-          await actor.update({ "system.inventoryPoints.current": newIP });
-
-          await actor.createEmbeddedDocuments("Item", [item.clone({ "system.temporary": true }).toObject()]);
-          ui.notifications.info(game.i18n.format("PTR2E.CompendiumBrowser.Purchase.Success", { actor: actor.name, item: item.name, cost, remaining: newIP }));
-          if (item.system.rarity !== "common") {
-            ui.notifications.warn("PTR2E.CompendiumBrowser.Purchase.RarityWarning", { localize: true });
-          }
-        },
-        settings: () => new CompendiumBrowserSettingsApp().render(true),
-      }
+  static override DEFAULT_OPTIONS = {
+    tag: "form",
+    id: "compendium-browser",
+    classes: ["sheet", "default-sheet"],
+    position: {
+      width: 800,
+      height: 700,
     },
-    { inplace: false }
-  );
+    window: {
+      minimizable: true,
+      resizable: true
+    },
+    dragDrop: [{ dragSelector: "li.item[data-type]" }],
+    actions: {
+      tutorList: () => game.ptr.tutorList.render({ force: true, actor: null }),
+      purchase: async function (this: CompendiumBrowser, event: PointerEvent) {
+        const actor = canvas?.tokens?.controlled?.[0]?.actor ?? game.user.character;
+        if (!actor) return void ui.notifications.error("PTR2E.CompendiumBrowser.Purchase.NotControlledToken", { localize: true });
+
+        const itemUuid = htmlClosest(event.target, "[data-entry-uuid]")?.dataset.entryUuid;
+        const item = await fromUuid<ConsumablePTR2e>(itemUuid);
+        if (!item) return void ui.notifications.error("PTR2E.CompendiumBrowser.Purchase.ItemNotFound", { localize: true });
+
+        const cost = item.system.cost;
+        if (!cost) return void ui.notifications.error("PTR2E.CompendiumBrowser.Purchase.NoCost", { localize: true });
+
+        const grade = actor.grade;
+        const itemGrade = item.system.grade;
+        if (!itemGrade) return void ui.notifications.error("PTR2E.CompendiumBrowser.Purchase.NoGrade", { localize: true });
+
+        const allowedGrade = (() => {
+          if (grade === "A") {
+            return itemGrade !== "S";
+          }
+          if (["A", "B"].includes(grade)) {
+            return !["S", "A"].includes(itemGrade);
+          }
+          if (["A", "B", "C"].includes(grade)) {
+            return !["S", "A", "B"].includes(itemGrade);
+          }
+          if (["A", "B", "C", "D"].includes(grade)) {
+            return !["S", "A", "B", "C"].includes(itemGrade);
+          }
+          if (["A", "B", "C", "D", "E"].includes(grade)) {
+            return !["S", "A", "B", "C", "D"].includes(itemGrade);
+          }
+          return false;
+        })();
+        if (!allowedGrade) return void ui.notifications.error(game.i18n.format("PTR2E.CompendiumBrowser.Purchase.GradeNotAllowed", { char: grade, grade: itemGrade }));
+
+        const availableIP = actor.system.inventoryPoints.current;
+        if (cost > availableIP) return void ui.notifications.error(game.i18n.format("PTR2E.CompendiumBrowser.Purchase.NotEnoughIP", { required: cost, current: availableIP }));
+
+        const newIP = availableIP - cost;
+        await actor.update({ "system.inventoryPoints.current": newIP });
+
+        await actor.createEmbeddedDocuments("Item", [item.clone({ "system.temporary": true }).toObject()]);
+        ui.notifications.info(game.i18n.format("PTR2E.CompendiumBrowser.Purchase.Success", { actor: actor.name, item: item.name, cost, remaining: newIP }));
+        if (item.system.rarity !== "common") {
+          ui.notifications.warn("PTR2E.CompendiumBrowser.Purchase.RarityWarning", { localize: true });
+        }
+      },
+      settings: () => new CompendiumBrowserSettingsApp().render(true),
+    }
+  };
 
   static override PARTS: Record<string, foundry.applications.api.HandlebarsTemplatePart> = {
     header: {

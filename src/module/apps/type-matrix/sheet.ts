@@ -6,7 +6,7 @@ import { type TypeEffectiveness } from "@scripts/config/effectiveness.ts";
 export class TypeMatrix extends foundry.applications.api.HandlebarsApplicationMixin(ApplicationV2Expanded)<ApplicationConfigurationExpanded & { settings?: boolean }> {
   static override DEFAULT_OPTIONS = {
     tag: "div",
-    classes: ["sheet", "type-matrix", "default-sheet"],
+    classes: ["sheet", "type-matrix", "default-sheet", "ptr2e"],
     id: "type-matrix",
     position: {
       height: "auto" as const,

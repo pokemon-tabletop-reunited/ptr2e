@@ -12,7 +12,7 @@
       }
     ],
     "cost": 3,
-    "description": "<p>Increases your Critical Capture rate by one stage.</p>",
+    "description": "<p>Effect: Your Critical Capture rate increases by +1 (equivalent to capturing 75 more Species).</p>",
     "actions": [
       {
         "name": "Capture Ace 2",
@@ -33,7 +33,8 @@
           "distance": 0
         },
         "variant": null,
-        "hidden": false
+        "hidden": false,
+        "ephemeralVariant": false
       }
     ],
     "slug": "capture-ace-2",
@@ -44,24 +45,21 @@
     },
     "nodes": [
       {
+        "x": null,
+        "y": null,
+        "hidden": false,
+        "type": "normal",
         "connected": [
           "pokeball-repairs",
           "controlled-curve",
           "snare"
         ],
         "config": {
-          "alpha": null,
-          "backgroundColor": "#808000",
-          "borderColor": null,
-          "borderWidth": null,
           "texture": "systems/ptr2e/img/perk-icons/Capture%20Spec.svg",
-          "tint": null,
-          "scale": null
+          "backgroundColor": null,
+          "borderColor": null,
+          "tint": null
         },
-        "hidden": false,
-        "type": "normal",
-        "x": null,
-        "y": null,
         "tier": null
       }
     ],
@@ -74,13 +72,14 @@
     "design": {
       "arena": "social",
       "approach": "power",
-      "archetype": "Capture"
+      "archetype": "capture"
     },
     "publication": {
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
+      ],
+      "notes": ""
     }
   },
   "_id": "IkC5bSNIjIlYRs08",

@@ -1,0 +1,67 @@
+{
+  "name": "Gaia Stance",
+  "_id": "vvSq5eftA743Oytp",
+  "type": "perk",
+  "img": "icons/environment/wilderness/arch-stone.webp",
+  "effects": [],
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "publication": {
+      "source": "PTR2e Core",
+      "authors": [
+        "Fox"
+      ],
+      "notes": ""
+    },
+    "actions": [],
+    "slug": null,
+    "description": "<p>Target: A commanded @Trait[grass] creature.<br><br>Effect: The target @Trait[grass] creature gains the @Affliction[bound] and @Affliction[braced] afflictions whilst the stance is active, and an initial @Tick[2 shield]. <br><br>At the start of each of the target's activations, the target gains @Tick[1 shield], doubling in Sunny Weather. The stance may be ended at any time by the Target or the User. The Stance is ended forcibly if the target's Shields are reduced to 0.</p>",
+    "traits": [
+      "command",
+      "grass",
+      "stance"
+    ],
+    "prerequisites": [
+      "item:perk:type-specialist",
+      {
+        "gte": [
+          "{actor|skills.leadership.mod}",
+          30
+        ]
+      }
+    ],
+    "autoUnlock": [],
+    "cost": 2,
+    "originSlug": null,
+    "design": {
+      "arena": "physical",
+      "approach": "resilience",
+      "archetype": "grass"
+    },
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": [],
+    "nodes": [
+      {
+        "x": 188,
+        "y": 95,
+        "hidden": false,
+        "type": "normal",
+        "connected": [
+          "type-specialist"
+        ],
+        "config": {
+          "texture": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "tint": null
+        },
+        "tier": null
+      }
+    ]
+  }
+}

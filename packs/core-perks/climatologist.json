@@ -44,15 +44,20 @@
         "slug": "climatologist",
         "description": "<p>Effect: You gain +15 to Skill Rolls pertaining to Weather, and gain all @Trait[climate-clay] recipes. The user gains the @Trait[climatologist] Trait, and learns one Move from that Tutor List.</p>",
         "cost": {
-          "activation": "free"
+          "activation": "free",
+          "powerPoints": 0
         },
         "type": "passive",
         "traits": [],
         "img": "icons/svg/explosion.svg",
         "range": {
           "target": "enemy",
-          "unit": "m"
-        }
+          "unit": "m",
+          "distance": 0
+        },
+        "variant": null,
+        "ephemeralVariant": false,
+        "hidden": false
       }
     ],
     "slug": "climatologist",
@@ -99,14 +104,18 @@
     "design": {
       "arena": "physical",
       "approach": "finesse",
-      "archetype": "Climatology"
+      "archetype": "climatology"
     },
     "publication": {
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
-    }
+      ],
+      "notes": ""
+    },
+    "originSlug": null,
+    "variant": null,
+    "mode": null
   },
   "_id": "lR4jrHXCXj0HH3Cs",
   "img": "systems/ptr2e/img/perk-icons/Knowledge.svg",

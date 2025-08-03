@@ -21,12 +21,15 @@
         "img": "systems/ptr2e/img/perk-icons/Elamentalist.svg",
         "range": {
           "target": "object",
-          "unit": "m"
+          "unit": "m",
+          "distance": 0
         },
         "cost": {
           "activation": "simple",
           "powerPoints": 3
-        }
+        },
+        "variant": null,
+        "ephemeralVariant": false
       }
     ],
     "description": "<p>This perk allows you to advance a summon's activation forward by 30%.</p>",
@@ -50,13 +53,14 @@
     "webs": [],
     "nodes": [
       {
-        "x": 141,
+        "x": 140,
         "y": 119,
         "hidden": false,
         "type": "normal",
         "connected": [
           "screen-setter",
-          "type-style"
+          "type-style",
+          "unown-song-sanctuary-ward"
         ],
         "config": {
           "texture": null,
@@ -74,7 +78,11 @@
       "source": "",
       "authors": [],
       "notes": "undefined"
-    }
+    },
+    "slug": "hasten-conjuration",
+    "originSlug": null,
+    "variant": null,
+    "mode": null
   },
   "img": "systems/ptr2e/img/perk-icons/Elamentalist.svg",
   "effects": [],

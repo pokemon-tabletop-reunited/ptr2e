@@ -9,7 +9,6 @@
           "legendary",
           "defensive",
           "interrupt-7",
-          "flinch-5",
           "stage-change"
         ],
         "name": "Corridors of Time (Reaction)",
@@ -25,14 +24,14 @@
           "distance": 20,
           "unit": "m"
         },
-        "description": "<p>Trigger: The user would be affected by a declared Action, Attack, or Ability.</p><p>Effect: The user targets the source of Triggering effect, causing them to Flinch. The user is unaffected by the Triggering effect, and then user gains +6 EVA for 2 Activations.</p>",
+        "description": "<p>Trigger: The user would be affected by a declared Action, Attack, or Ability.</p><p>Effect: The user targets the source of Triggering effect, causing them to be Delayed by 50%. The user is unaffected by the Triggering effect, and then user gains +6 EVA for 2 Activations.</p>",
         "img": "icons/svg/explosion.svg"
       },
       {
         "traits": [
           "legendary",
           "interrupt-7",
-          "priority-5"
+          "priority-50"
         ],
         "name": "Corridors of Time (Action)",
         "slug": "corridors-of-time-action",
@@ -57,8 +56,7 @@
       "connection",
       "defensive",
       "interrupt-7",
-      "priority-5",
-      "flinch-5",
+      "priority-50",
       "stage-change",
       "partial-automation"
     ],

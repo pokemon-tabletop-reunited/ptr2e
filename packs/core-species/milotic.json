@@ -13,24 +13,20 @@
     "diet": [
       "herbivore"
     ],
-    "movement": {
-      "primary": [
-        {
-          "type": "swim",
-          "value": 12
-        },
-        {
-          "type": "flight",
-          "value": 12
-        }
-      ],
-      "secondary": [
-        {
-          "type": "overland",
-          "value": 8
-        }
-      ]
-    },
+    "movement": [
+      {
+        "type": "swim",
+        "value": 12
+      },
+      {
+        "type": "flight",
+        "value": 12
+      },
+      {
+        "type": "overland",
+        "value": 8
+      }
+    ],
     "traits": [
       "pokemon",
       "gilled",
@@ -45,15 +41,15 @@
     "abilities": {
       "starting": [
         {
-          "slug": "cute-charm"
+          "slug": "competitive"
         },
         {
-          "slug": "alluring"
+          "slug": "marvel-scale"
         }
       ],
       "basic": [
         {
-          "slug": "adaptability"
+          "slug": "cute-charm"
         },
         {
           "slug": "swift-swim"
@@ -61,7 +57,7 @@
       ],
       "advanced": [
         {
-          "slug": "perfectionist"
+          "slug": "adaptability"
         },
         {
           "slug": "serene-grace"
@@ -69,10 +65,10 @@
       ],
       "master": [
         {
-          "slug": "competitive"
+          "slug": "multiscale"
         },
         {
-          "slug": "marvel-scale"
+          "slug": "dazzling"
         }
       ]
     },
@@ -88,6 +84,14 @@
       {
         "slug": "conversation",
         "value": 60,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "flying",
+        "value": 40,
         "rvs": 0,
         "favourite": false,
         "hidden": false,
@@ -136,6 +140,22 @@
       {
         "slug": "negotiation",
         "value": 55,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "psychology",
+        "value": 45,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "running",
+        "value": 30,
         "rvs": 0,
         "favourite": false,
         "hidden": false,
@@ -599,17 +619,12 @@
               "operand": "or"
             }
           ],
-          "details": {
-            "gender": null,
-            "item": null,
-            "level": null,
-            "knownMove": null
-          },
-          "evolutions": [],
           "perk": {
             "x": 26,
             "y": 26
-          }
+          },
+          "details": null,
+          "evolutions": []
         }
       ],
       "uuid": "Compendium.ptr2e.core-species.Item.kHGEJsEEgG6dxwrj",

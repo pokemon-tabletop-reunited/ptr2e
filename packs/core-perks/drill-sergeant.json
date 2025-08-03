@@ -7,7 +7,7 @@
       "previous": null
     },
     "actions": [],
-    "description": "<p>You learn the moves Dragon Cheer and Coaching, and gain them as Connected Moves.</p>",
+    "description": "<p>Effect: The user gains @Trait[drill] and learns Dragon Cheer and Coaching.</p>",
     "traits": [],
     "prerequisites": [
       {
@@ -21,23 +21,21 @@
     "slug": "drill-sergeant",
     "nodes": [
       {
-        "connected": [
-          "tactician",
-          "mobilize"
-        ],
-        "config": {
-          "alpha": null,
-          "backgroundColor": null,
-          "borderColor": null,
-          "borderWidth": null,
-          "texture": null,
-          "tint": null,
-          "scale": null
-        },
-        "hidden": false,
-        "type": "normal",
         "x": 37,
         "y": 51,
+        "hidden": false,
+        "type": "normal",
+        "connected": [
+          "tactician",
+          "mobilize",
+          "victory-march"
+        ],
+        "config": {
+          "texture": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "tint": null
+        },
         "tier": null
       }
     ],
@@ -47,14 +45,18 @@
     "design": {
       "arena": "social",
       "approach": "power",
-      "archetype": ""
+      "archetype": "tactician"
     },
     "publication": {
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
-    }
+      ],
+      "notes": ""
+    },
+    "originSlug": null,
+    "variant": null,
+    "mode": null
   },
   "img": "systems/ptr2e/img/perk-icons/Orders_Training.svg",
   "effects": [
@@ -142,12 +144,13 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.342",
         "systemId": "ptr2e",
         "systemVersion": "0.10.0-alpha.5.1.5",
         "createdTime": 1737392003677,
         "modifiedTime": 1737392098018,
-        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+        "lastModifiedBy": "mK35yvCqCgiTUvKf",
+        "exportSource": null
       }
     }
   ],

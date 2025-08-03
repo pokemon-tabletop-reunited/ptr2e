@@ -1,0 +1,101 @@
+{
+  "folder": "KcpEanpX82Cu6Dqh",
+  "name": "Unown Song: Sanctuary Ward",
+  "type": "perk",
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "Fox"
+      ],
+      "notes": ""
+    },
+    "actions": [
+      {
+        "name": "Unown Song: Sanctuary Ward",
+        "slug": "unown-song-sanctuary-ward",
+        "description": "<p>Through your mastery of the Arcane, you can conjure a choir of Unown to perform a Sanctuary Ward. This effect grants you and your allies on the field +20% RES for the duration of 3 rounds.</p>",
+        "traits": [],
+        "type": "attack",
+        "img": "systems/ptr2e/img/perk-icons/Arcana.svg",
+        "range": {
+          "target": "enemy",
+          "unit": "m",
+          "distance": 0
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 3,
+          "trigger": "",
+          "delay": null,
+          "priority": null
+        },
+        "types": [
+          "untyped"
+        ],
+        "category": "status",
+        "predicate": [],
+        "variant": null,
+        "ephemeralVariant": false,
+        "power": null,
+        "accuracy": null,
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null,
+        "summon": null,
+        "defaultVariant": null,
+        "flingItemId": "",
+        "offensiveStat": null,
+        "defensiveStat": null
+      }
+    ],
+    "description": "<p>Through your mastery of the Arcane, you can conjure a choir of Unown to perform a Sanctuary Ward. This effect grants you and your allies on the field +20% RES for the duration of 3 rounds.</p>",
+    "traits": [
+      "shield"
+    ],
+    "prerequisites": [
+      {
+        "gte": [
+          "{actor|skills.thaumaturgy.mod}",
+          45
+        ]
+      }
+    ],
+    "autoUnlock": [],
+    "cost": 3,
+    "design": {
+      "arena": "mental",
+      "approach": "resilience",
+      "archetype": "rune-master"
+    },
+    "global": true,
+    "webs": [],
+    "nodes": [
+      {
+        "x": 148,
+        "y": 113,
+        "connected": [
+          "screen-setter",
+          "minor-buff-4",
+          "hasten-conjuration"
+        ],
+        "hidden": false,
+        "type": "normal",
+        "tier": null
+      }
+    ],
+    "slug": "unown-song-sanctuary-ward",
+    "originSlug": null,
+    "variant": null,
+    "mode": null
+  },
+  "img": "systems/ptr2e/img/perk-icons/Arcana.svg",
+  "effects": [],
+  "flags": {},
+  "_id": "loU95iDUK19XrXIE"
+}

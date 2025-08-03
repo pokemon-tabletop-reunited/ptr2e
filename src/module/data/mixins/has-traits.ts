@@ -28,7 +28,7 @@ export default function HasTraits<BaseClass extends TemplateConstructor>(baseCla
         return this.parent.rollOptions;
       })();
 
-      const trait = game.ptr.data.traits.get(traitSlug)
+      const trait = game.ptr.data.traits.getTrait(traitSlug)
       if (trait) {
         this.traits.set(traitSlug, {
           ...trait,
@@ -37,8 +37,10 @@ export default function HasTraits<BaseClass extends TemplateConstructor>(baseCla
         this._traits.push(trait);
       }
       else {
-        console.debug(`Could not find trait with slug ${traitSlug}`);
-        console.debug("TODO: Remove this functionality and add a migration to remove invalid traits.")
+        if(traitSlug !== "pp-updated") {
+          console.debug(`Could not find trait with slug ${traitSlug}`);
+          console.debug("TODO: Remove this functionality and add a migration to remove invalid traits.")
+        }
         this.traits.set(traitSlug, { 
           label: Handlebars.helpers.formatSlug(traitSlug), 
           description: '', 

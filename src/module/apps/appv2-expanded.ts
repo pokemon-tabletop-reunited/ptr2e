@@ -4,8 +4,7 @@ import { ActorPTR2e } from "@actor";
 import { ActionPTR2e } from "@data";
 import { ActiveEffectPTR2e } from "@effects";
 import { ItemPTR2e } from "@item";
-import { htmlQueryAll, sluggify } from "@utils";
-import { ApplicationHeaderControlsEntry } from "types/foundry/common/applications/api.js";
+import { htmlQueryAll } from "@utils";
 
 export type ApplicationConfigurationExpanded = foundry.applications.api.ApplicationConfiguration & {
   dragDrop?: DragDropConfiguration[];
@@ -18,10 +17,9 @@ export class ApplicationV2Expanded<
 > extends foundry.applications.api.ApplicationV2<TConfiguration, TRenderOptions> {
   declare options: TConfiguration;
 
-  static override DEFAULT_OPTIONS: Omit<ApplicationConfigurationExpanded, "uniqueId"> =
-    foundry.utils.mergeObject(foundry.applications.api.ApplicationV2.DEFAULT_OPTIONS, {
-      dragDrop: [],
-    });
+  static override DEFAULT_OPTIONS: Omit<DeepPartial<ApplicationConfigurationExpanded>, "uniqueId"> = {
+    dragDrop: [],
+  };
 
   protected _dragDropHandlers: DragDrop[];
 
@@ -54,7 +52,7 @@ export class ApplicationV2Expanded<
         dragover: this._onDragOver.bind(this),
         drop: this._onDrop.bind(this),
       };
-      return new DragDrop(d);
+      return new foundry.applications.ux.DragDrop(d);
     });
   }
 
@@ -121,18 +119,9 @@ export class ActorSheetV2Expanded<
   TRenderOptions,
   DocumentSheetConfigurationExpanded
 > {
-  static override DEFAULT_OPTIONS: Omit<DocumentSheetConfigurationExpanded, "uniqueId"> =
-    foundry.utils.mergeObject(foundry.applications.sheets.ActorSheetV2.DEFAULT_OPTIONS, {
-      dragDrop: [],
-    });
-
-  protected _dragDropHandlers: DragDrop[];
-
-  constructor(options: Partial<DocumentSheetConfigurationExpanded> = {}) {
-    super(options);
-
-    this._dragDropHandlers = this._createDragDropHandlers();
-  }
+  static override DEFAULT_OPTIONS: Omit<Partial<DocumentSheetConfigurationExpanded>, "uniqueId"> = {
+    dragDrop: [],
+  };
 
   override get title() {
     if (!this.actor.isToken) return this.actor.name;
@@ -152,60 +141,9 @@ export class ActorSheetV2Expanded<
       if ((input as HTMLInputElement).value === "") (input as HTMLInputElement).value = "[]";
     });
 
-    const formData = new FormDataExtended(element);
+    const formData = new foundry.applications.ux.FormDataExtended(element);
     if (handler instanceof Function) await handler.call(this, event, element, formData);
     if (closeOnSubmit) await this.close();
-  }
-
-  override _onRender(context: foundry.applications.api.ApplicationRenderContext, options: TRenderOptions): void {
-    super._onRender(context, options);
-
-    // Attach drag-and-drop handlers
-    this._dragDropHandlers.forEach((handler) => handler.bind(this.element));
-  }
-
-  /**
-   * Create drag-and-drop workflow handlers for this Application
-   * @returns {DragDrop[]}     An array of DragDrop handlers
-   * @private
-   */
-  _createDragDropHandlers() {
-    return this.options.dragDrop.map((d) => {
-      d.permissions = {
-        dragstart: this._canDragStart.bind(this),
-        drop: this._canDragDrop.bind(this),
-      };
-      d.callbacks = {
-        dragstart: this._onDragStart.bind(this),
-        dragover: this._onDragOver.bind(this),
-        drop: this._onDrop.bind(this),
-      };
-      return new DragDrop(d);
-    });
-  }
-
-  /**
-   * Add compatability with modules that add buttons to the header of the sheet using the AppV1 method
-   */
-  override _getHeaderControls(): ApplicationHeaderControlsEntry[] {
-    const controls = super._getHeaderControls();
-
-    Hooks.callAll("getActorSheetHeaderButtons", this, controls);
-
-    for (const control of controls) {
-      if ('onclick' in control && !control.action) {
-        const slug = sluggify(control.label + ' ' + control.icon);
-        if (controls.filter(c => c.action == slug).length > 0) {
-          controls.splice(controls.indexOf(control), 1);
-          continue;
-        }
-        // @ts-expect-error - Add AppV1 support for modules that use the old method
-        this.options.actions[slug] = control.onclick;
-        control.action = slug;
-      }
-    }
-
-    return controls;
   }
 
   /**
@@ -278,8 +216,8 @@ export class ActorSheetV2Expanded<
    * @param {DragEvent} event       The originating DragEvent
    * @protected
    */
-  async _onDrop(event: DragEvent, upstreamData?: {type: string}) {
-    const data: { type: string } = upstreamData ?? TextEditor.getDragEventData(event);
+  async _onDrop(event: DragEvent, upstreamData?: { type: string }) {
+    const data: { type: string } = upstreamData ?? foundry.applications.ux.TextEditor.getDragEventData(event);
     const actor = this.actor;
     const allowed = Hooks.call("dropActorSheetData", actor, this, data);
     if (allowed === false) return;
@@ -310,9 +248,14 @@ export class ActorSheetV2Expanded<
     if (!effect) return false;
 
     const effectData = effect.toObject();
-    if('amount' in data && !isNaN(Number(data.amount))) {
-      if(effectData.system.stacks) effectData.system.stacks = Number(data.amount);
-      effectData.duration.turns = Number(data.amount);
+    if ('amount' in data && !isNaN(Number(data.amount))) {
+      if(effect.type === "advancement") {
+        effectData.system.amount = Number(data.amount);
+      }
+      else {
+        if (effectData.system.stacks) effectData.system.stacks = Number(data.amount);
+        effectData.duration.turns = Number(data.amount);
+      }
     }
 
     return ActiveEffectPTR2e.create(effectData, { parent: this.actor });
@@ -469,10 +412,9 @@ export class ItemSheetV2Expanded<
   TRenderOptions,
   DocumentSheetConfigurationExpanded
 > {
-  static override DEFAULT_OPTIONS: Omit<DocumentSheetConfigurationExpanded, "uniqueId"> =
-    foundry.utils.mergeObject(foundry.applications.api.DocumentSheetV2.DEFAULT_OPTIONS, {
+  static override DEFAULT_OPTIONS: Omit<Partial<DocumentSheetConfigurationExpanded>, "uniqueId"> = {
       dragDrop: [],
-    });
+    };
 
   protected _dragDropHandlers: DragDrop[];
 
@@ -503,11 +445,11 @@ export class ItemSheetV2Expanded<
         }
       }
       for (const element of htmlQueryAll(content, ".item-controls a")) {
-        if(element.classList.contains("effect-edit") || element.dataset.action == "edit-action") continue;
+        if (element.classList.contains("effect-edit") || element.dataset.action == "edit-action") continue;
         (element as HTMLButtonElement).disabled = true;
         element.attributes.setNamedItem(document.createAttribute("disabled"));
       }
-      for(const element of htmlQueryAll(content, "tags.tagify")) {
+      for (const element of htmlQueryAll(content, "tags.tagify")) {
         (element as HTMLInputElement).readOnly = true;
         element.attributes.setNamedItem(document.createAttribute("readOnly"));
       }
@@ -530,32 +472,8 @@ export class ItemSheetV2Expanded<
         dragover: this._onDragOver.bind(this),
         drop: this._onDrop.bind(this),
       };
-      return new DragDrop(d);
+      return new foundry.applications.ux.DragDrop(d);
     });
-  }
-
-  /**
-   * Add compatability with modules that add buttons to the header of the sheet using the AppV1 method
-   */
-  override _getHeaderControls(): ApplicationHeaderControlsEntry[] {
-    const controls = super._getHeaderControls();
-
-    Hooks.callAll("getActorSheetHeaderButtons", this, controls);
-
-    for (const control of controls) {
-      if ('onclick' in control && !control.action) {
-        const slug = sluggify(control.label + ' ' + control.icon);
-        if (controls.filter(c => c.action == slug).length > 0) {
-          controls.splice(controls.indexOf(control), 1);
-          continue;
-        }
-        // @ts-expect-error - Add AppV1 support for modules that use the old method
-        this.options.actions[slug] = control.onclick;
-        control.action = slug;
-      }
-    }
-
-    return controls;
   }
 
   /**
@@ -635,24 +553,24 @@ export class ItemSheetV2Expanded<
    */
   async _onDrop(event: DragEvent): Promise<void> {
     event.preventDefault();
-    const data = TextEditor.getDragEventData<{ type: string }>(event);
+    const data = foundry.applications.ux.TextEditor.getDragEventData<{ type: string }>(event);
     const item = this.document;
     const allowed = Hooks.call("dropItemSheetData", item, data, event);
     if (allowed === false) return;
 
-    if('action' in data && data.action) {
-      if(!(this.document.system.actions instanceof Collection)) return;
+    if ('action' in data && data.action) {
+      if (!(this.document.system.actions instanceof Collection)) return;
 
-      const actionData = data.action as {slug: string, type: string};
+      const actionData = data.action as { slug: string, type: string };
 
       const item = await ItemPTR2e.fromDropData(data as unknown as DropCanvasData);
-      if(!item || !item?.actions?.size) return;
+      if (!item || !item?.actions?.size) return;
 
       const action = item.actions.get(actionData.slug);
-      if(!action) return;
+      if (!action) return;
 
       const existing = this.document.actions.get(actionData.slug);
-      if(existing) return void ui.notifications.warn(`An action with the slug ${actionData.slug} already exists on this item.`);
+      if (existing) return void ui.notifications.warn(`An action with the slug ${actionData.slug} already exists on this item.`);
 
       const actions = fu.duplicate(this.document.system._source.actions as ActionPTR2e['_source'][]);
       actions.push(action.toObject());
@@ -694,9 +612,14 @@ export class ItemSheetV2Expanded<
     if (!effect) return false;
 
     const effectData = effect.toObject();
-    if('amount' in data && !isNaN(Number(data.amount))) {
-      if(effectData.system.stacks) effectData.system.stacks = Number(data.amount);
-      effectData.duration.turns = Number(data.amount);
+    if ('amount' in data && !isNaN(Number(data.amount))) {
+      if(effect.type === "advancement") {
+        effectData.system.amount = Number(data.amount);
+      }
+      else {
+        if (effectData.system.stacks) effectData.system.stacks = Number(data.amount);
+        effectData.duration.turns = Number(data.amount);
+      }
     }
 
     return ActiveEffectPTR2e.create(effectData, { parent: this.document });
@@ -706,10 +629,10 @@ export class ItemSheetV2Expanded<
     const effect = await ActiveEffectPTR2e.fromDropData(data);
     if (!this.document.isOwner || !effect) return false;
     if (effect.parent === this.document) return false;
-    
+
     // Change type away from 'Summon' if applicable, as this type is only available for 'Summon' items.
     const source = effect.toObject();
-    if(source.type === "summon") {
+    if (source.type === "summon") {
       // Attempt a best-effor conversion.
       source.type = source.system.formula || source.duration.turns ? "affliction" : "passive";
     }
@@ -725,7 +648,7 @@ export class ItemSheetV2Expanded<
       if ((input as HTMLInputElement).value === "") (input as HTMLInputElement).value = "[]";
     });
 
-    const formData = new FormDataExtended(element);
+    const formData = new foundry.applications.ux.FormDataExtended(element);
     if (handler instanceof Function) await handler.call(this, event, element, formData);
     if (closeOnSubmit) await this.close();
   }

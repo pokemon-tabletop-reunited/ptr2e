@@ -7,26 +7,22 @@
       {
         "traits": [
           "social",
-          "friendly",
-          "interrupt-3"
+          "friendly"
         ],
         "name": "Intimidate",
         "slug": "intimidate",
-        "type": "generic",
-        "cost": {
-          "activation": "free",
-          "trigger": "<p>The user enters combat.</p>"
-        },
+        "type": "passive",
+        "cost": {},
         "range": {
-          "target": "emanation",
-          "distance": 10,
+          "target": "enemy-aura",
+          "distance": 8,
           "unit": "m"
         },
-        "description": "<p>Trigger: The user enters combat.</p><p>Effect: All valid creatures in range lose -1 ATK Stage for 5 Activations and gain @Affliction[fear] 2. The user's Intimidate Skill checks have an additional +10 bonus.</p>",
+        "description": "<p>Effect: All valid creatures in range have -1 default ATK Stage. When an affected creature leaves the range of this effect, they lose -1 ATK Stage for 3 Activations. The user's Intimidate Skill checks have an additional +10 bonus. NEEDS REAUTOMATED.</p>",
         "img": "icons/svg/explosion.svg"
       }
     ],
-    "description": "<p>Trigger: The user enters combat. Effect: All valid creatures in range lose -1 ATK Stage for 5 Activations and gain @Affliction[fear] 2. The user's Intimidate Skill checks have an additional +10 bonus.</p>",
+    "description": "<p>Effect: All valid creatures in range have -1 default ATK Stage. When an affected creature leaves the range of this effect, they lose -1 ATK Stage for 3 Activations. The user's Intimidate Skill checks have an additional +10 bonus. NEEDS REAUTOMATED.</p>",
     "traits": [
       "social",
       "friendly"

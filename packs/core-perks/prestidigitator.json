@@ -1,0 +1,72 @@
+{
+  "name": "Prestidigitator",
+  "_id": "ufHMoIYxE4KDkpSd",
+  "type": "perk",
+  "img": "icons/sundries/gaming/playing-cards.webp",
+  "effects": [],
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "publication": {
+      "source": "PTR2e Core",
+      "authors": [
+        "Dragoon"
+      ],
+      "notes": ""
+    },
+    "actions": [],
+    "slug": null,
+    "description": "<p>The user may utilize Sleight of Hand or Thaumaturgy for any sort of social check if they are aiming to dazzle, distract, deceive, or entertain. When Assisting allies in such situations, the user provides an additional +5 to the Test’s DC.</p>",
+    "traits": [
+      "arcane"
+    ],
+    "prerequisites": [
+      {
+        "gte": [
+          "{actor|skills.thaumaturgy.mod}",
+          40
+        ]
+      },
+      {
+        "gte": [
+          "{actor|skills.sleight-of-hand.mod}",
+          40
+        ]
+      },
+      "item:perk:introductory-magecraft"
+    ],
+    "autoUnlock": [],
+    "cost": 1,
+    "originSlug": null,
+    "design": {
+      "arena": "social",
+      "approach": "finesse",
+      "archetype": "arcane"
+    },
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": [],
+    "nodes": [
+      {
+        "x": 118,
+        "y": 190,
+        "hidden": false,
+        "type": "normal",
+        "connected": [
+          "introductory-magecraft",
+          "comingling-of-power"
+        ],
+        "config": {
+          "texture": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "tint": null
+        },
+        "tier": null
+      }
+    ]
+  }
+}

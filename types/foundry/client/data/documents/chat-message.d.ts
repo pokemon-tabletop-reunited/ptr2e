@@ -140,6 +140,8 @@ declare global {
          */
         static getWhisperRecipients(name: string): User[];
 
+        renderHTML(options?: {canDelete?: boolean, canClose?: boolean}): Promise<HTMLElement>;
+
         /** Render the HTML for the ChatMessage which should be added to the log */
         getHTML(): Promise<JQuery>;
 
@@ -227,7 +229,7 @@ declare global {
         alias: string;
         borderColor?: string;
         cssClass: string;
-        isWhisper: number;
+        isWhisper: number | boolean;
         canDelete: boolean;
         whisperTo: string;
     }
