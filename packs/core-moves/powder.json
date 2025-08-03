@@ -29,7 +29,7 @@
         "types": [
           "bug"
         ],
-        "description": "<p>Effect: All valid targets are covered in a flammable Powder for 5 Activations. If a creature covered in Powder attempts to use a Fire-typed move, the attack fails and they deal 4 Ticks of their HP as damage to themselves and all adjacent creatures, and the Powder is removed. If a creature covered in Powder is hit by a Fire-type move, they deal 4 Ticks of their HP as damage to themselves and all adjacent creatures, and the Powder is removed.</p>",
+        "description": "<p>Effect: All valid targets are covered in a flammable @UUID[Compendium.ptr2e.core-effects.NUba7VJbIYn7MpEh]{Powder} for 5 Activations. If a creature covered in @UUID[Compendium.ptr2e.core-effects.NUba7VJbIYn7MpEh]{Powder} attempts to use a Fire-typed move, the attack fails and they suffer @Tick[-4] as well all adjacent creatures, and the @UUID[Compendium.ptr2e.core-effects.NUba7VJbIYn7MpEh]{Powder} is removed. If a creature covered in @UUID[Compendium.ptr2e.core-effects.NUba7VJbIYn7MpEh]{Powder} is hit by a Fire-type move, they suffer @Tick[-4] alongside all adjacent creatures, and the @UUID[Compendium.ptr2e.core-effects.NUba7VJbIYn7MpEh]{Powder} is removed.</p>",
         "img": "systems/ptr2e/img/svg/bug_icon.svg",
         "predicate": []
       }
@@ -49,5 +49,59 @@
     }
   },
   "_id": "XOezqCVXnuNgBQRS",
-  "effects": []
+  "effects": [
+    {
+      "name": "Powder",
+      "type": "passive",
+      "_id": "JNmOkjP2P8zGHNvu",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "powder-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.NUba7VJbIYn7MpEh",
+            "predicate": [],
+            "chance": 100,
+            "isFixedChance": false,
+            "affects": "target",
+            "alterations": [],
+            "dontMerge": false,
+            "mode": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.346",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.1.beta",
+        "createdTime": 1754174189117,
+        "modifiedTime": 1754174206197,
+        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
+      }
+    }
+  ]
 }
