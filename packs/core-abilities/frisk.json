@@ -13,25 +13,26 @@
         "type": "generic",
         "cost": {
           "activation": "free",
-          "trigger": "<p>The user successfully hits with a [Contact] attack.</p>"
+          "powerPoints": 3,
+          "trigger": "<p>The user hits a creature with a @Trait[contact] Action. </p>"
         },
         "range": {
           "target": "creature",
           "distance": 1,
           "unit": "m"
         },
-        "description": "<p>Trigger: The user successfully hits with a [Contact] attack.</p><p>Effect: The user learns of one item the attack target has equipped, including details about the item and amount if applicable.</p>",
+        "description": "<p>Trigger: The user hits a creature with a @Trait[contact] Action.</p><p>Effect: The user freely uses Embargo on the targeted creature.</p>",
         "img": "icons/svg/explosion.svg"
       },
       {
         "traits": [],
-        "name": "Frisk",
-        "slug": "frisk",
+        "name": "Frisk (Passive)",
+        "slug": "frisk-passive",
         "type": "passive",
         "cost": {
           "activation": "free"
         },
-        "description": "<p>Passive: The user gains +10 to their Sleight of Hand.</p>",
+        "description": "<p>Passive: The user gains +10 to their Sleight of Hand and +5 RES.</p>",
         "img": "icons/svg/explosion.svg",
         "range": {
           "target": "enemy",
@@ -39,18 +40,24 @@
         }
       }
     ],
-    "description": "<p>Trigger: The user successfully hits with a [Contact] attack.</p><p>Effect: The user learns of one item the attack target has equipped, including details about the item and amount if applicable. Passive: The user gains +10 to their Sleight of Hand.</p>",
+    "description": "<p>Trigger: The user hits a creature with a @Trait[contact] Action.</p><p>Effect: Connection - Embargo. The user freely uses Embargo on the targeted creature.</p><p>Passive: The user gains +10 to their Sleight of Hand and +5 RES.</p>",
     "traits": [],
     "slug": "frisk",
     "_migration": {
       "version": null,
       "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ]
     }
   },
   "_id": "m3G3abHjeyxhULLM",
   "effects": [
     {
-      "name": "Frisk Passive",
+      "name": "Frisk (Passive)",
       "type": "passive",
       "_id": "EhMbi4LWYpA3IVUh",
       "img": "systems/ptr2e/img/icons/effect_icon.webp",
@@ -66,6 +73,73 @@
             "priority": null,
             "ignored": false,
             "hideIfDisabled": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.3.0.0",
+        "createdTime": 1729417497118,
+        "modifiedTime": 1729417508518,
+        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
+      }
+    },
+    {
+      "name": "Frisk",
+      "type": "passive",
+      "_id": "Frisk4LWYpA3IVUh",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "grant-item",
+            "key": "",
+            "value": "Compendium.ptr2e.core-moves.Item.9dEqQGUDJ3L0OTpc",
+            "predicate": [],
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "system.actions.0.free",
+                "value": "true"
+              }
+            ],
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "reevaluateOnUpdate": false,
+            "inMemoryOnly": false,
+            "allowDuplicate": true,
+            "track": false,
+            "replaceSelf": false,
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            }
           }
         ],
         "slug": null,

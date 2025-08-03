@@ -37,22 +37,18 @@ export abstract class PickAThingPrompt<TItem extends ItemPTR2e, TThing extends s
     return this.item?.actor;
   }
 
-  static override DEFAULT_OPTIONS = fu.mergeObject(
-    super.DEFAULT_OPTIONS,
-    {
-      tag: "aside",
-      classes: ["sheet pick-a-thing-prompt"],
-      position: {
-        height: 'auto',
-        width: 'auto',
-      },
-      window: {
-        minimizable: false,
-        resizable: false,
-      },
+  static override DEFAULT_OPTIONS = {
+    tag: "aside",
+    classes: ["sheet pick-a-thing-prompt"],
+    position: {
+      height: 'auto' as const,
+      width: 'auto' as const,
     },
-    { inplace: false }
-  );
+    window: {
+      minimizable: false,
+      resizable: false,
+    },
+  } as unknown as Omit<DeepPartial<foundry.applications.api.ApplicationConfiguration>, "uniqueId">;
 
   protected getSelection(event: MouseEvent): PickableThing<TThing> | null {
     const valueElement =
@@ -77,15 +73,15 @@ export abstract class PickAThingPrompt<TItem extends ItemPTR2e, TThing extends s
   override async _prepareContext(): Promise<PromptTemplateData> {
     return {
       item: this.item,
-      choices: this.choices.map((c, i) => ({...c, value: i})),
+      choices: this.choices.map((c, i) => ({ ...c, value: i })),
       user: game.user
     }
   }
 
   override _attachPartListeners(partId: string, htmlElement: HTMLElement): void {
-    if(partId !== "choices") return;
+    if (partId !== "choices") return;
 
-    for(const element of htmlQueryAll(htmlElement, "a[data-choice], button[data-action=pick]")) {
+    for (const element of htmlQueryAll(htmlElement, "a[data-choice], button[data-action=pick]")) {
       element.addEventListener("click", (event) => {
         this.selection = this.getSelection(event) ?? null;
         this.close();
@@ -93,7 +89,7 @@ export abstract class PickAThingPrompt<TItem extends ItemPTR2e, TThing extends s
     }
 
     const select = htmlElement.querySelector<HTMLInputElement>("input[data-tagify-select]");
-    if(!select) return;
+    if (!select) return;
 
     this.selectMenu = new Tagify(select, {
       enforceWhitelist: true,
@@ -108,14 +104,14 @@ export abstract class PickAThingPrompt<TItem extends ItemPTR2e, TThing extends s
         maxItems: this.choices.length,
         searchKeys: ["label"],
       },
-      whitelist: this.choices.map((c, i) => ({value: i.toString(), label: c.label})),
+      whitelist: this.choices.map((c, i) => ({ value: i.toString(), label: c.label })),
     });
 
     this.selectMenu.DOM.input.spellcheck = false;
   }
 
   override close(options?: Partial<foundry.applications.api.ApplicationClosingOptions>): Promise<foundry.applications.api.ApplicationV2> {
-    for(const element of htmlQueryAll(this.element, "button, select")) {
+    for (const element of htmlQueryAll(this.element, "button, select")) {
       element.style.pointerEvents = "none";
     }
     this.resolve?.(this.selection);

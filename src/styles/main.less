@@ -1,3 +1,7 @@
+.tabs > [data-tab] > * {
+  pointer-events: none;
+}
+
 .system-traits,
 .traits {
     --readonly-striped: 0 !important;
@@ -28,5 +32,76 @@ string-tags-ptr2e {
     padding: 0;
     flex: 0 0 36px;
     line-height: var(--form-field-height);
+  }
+}
+
+.application.sheet.stats-editor {
+  .window-content {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    min-width: 400px;
+    justify-content: space-between;
+    overflow-x: auto;
+    padding: 0.5rem;
+
+    > * {
+      flex: 0 0 auto;
+    }
+
+    [data-application-part="base"], [data-application-part="evs"], [data-application-part="ivs"], [data-application-part="underdog"] {
+      flex: 0 1 calc(50% - 0.5rem);
+      max-height: calc(50% - 0.5rem);
+      min-width: 300px;
+
+      fieldset {
+        height: 100%;
+
+        label {
+          flex: 0 0 40%;
+        }
+      }
+    }
+
+    [data-application-part="chart"] {
+      flex: 1 0 100%;
+      max-width: 350px;
+    }
+
+    .noUi-base {
+      background: var(--color-cool-4);
+    }
+    .noUi-horizontal {
+      height: 10px;
+      border: unset;
+
+      .noUi-handle {
+        width: 14px;
+        height: 14px;
+        right: -6px;
+        top: -2px;
+
+        border-color: var(--color-warm-1);
+        border-radius: 6px;
+        background: var(--color-cool-5);
+        box-shadow: unset;
+        
+        &:before, &:after {
+          content: unset;
+        }
+      }
+    }
+    .noUi-connect {
+      background: var(--user-color);
+    }
+  }
+  .noUi-tooltip {
+    border-color: var(--border-theme-color);
+    border-radius: 6px;
+    background: var(--appv2-background);
+    color: var(--appv2-text-color);
+    padding: 4px;
+    font-size: 12px;
   }
 }

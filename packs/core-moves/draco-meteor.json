@@ -10,17 +10,16 @@
         "name": "Draco Meteor",
         "type": "attack",
         "traits": [
-          "blast-3",
-          "pp-updated"
+          "blast-3"
         ],
         "range": {
-          "target": "creature",
-          "distance": 10,
+          "target": "blast",
+          "distance": 14,
           "unit": "m"
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 4
+          "powerPoints": 5
         },
         "category": "special",
         "power": 130,
@@ -29,14 +28,23 @@
           "dragon"
         ],
         "description": "<p>Effect: On hit, the user loses -2 SPATK Stage for 5 Activations.</p>",
-        "img": "icons/svg/explosion.svg"
+        "img": "systems/ptr2e/img/svg/dragon_icon.svg",
+        "predicate": []
       }
     ],
     "grade": "C",
     "_migration": {
       "version": null,
       "previous": null
-    }
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "traits": []
   },
   "_id": "P265RrFzk5qtekq3",
   "effects": [
@@ -56,7 +64,9 @@
             "affects": "self",
             "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "alterations": [],
+            "dontMerge": false
           }
         ],
         "slug": null,

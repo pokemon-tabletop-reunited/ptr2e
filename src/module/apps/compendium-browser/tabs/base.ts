@@ -12,7 +12,7 @@ import { CompendiumDirectoryPTR2e } from "@module/apps/sidebar/compendium-direct
 import * as R from "remeda";
 import { htmlQuery, sluggify } from "@utils";
 import { TableResultSource } from "types/foundry/common/documents/module.js";
-import { grades } from "@module/data/mixins/has-gear-data.ts";
+import { grades, rarities } from "@module/data/mixins/has-gear-data.ts";
 
 export abstract class CompendiumBrowserTab {
   /** A reference to the parent CompendiumBrowser */
@@ -72,7 +72,7 @@ export abstract class CompendiumBrowserTab {
       processTerm: (term): string[] | null => {
         if (term.length <= 1 || CompendiumDirectoryPTR2e.STOP_WORDS.has(term)) return null;
         return Array.from(wordSegmenter.segment(term)).map(t =>
-          SearchFilter.cleanQuery(t.segment.toLocaleLowerCase(game.i18n.lang)).replace(/['"]/g, "")
+          foundry.applications.ux.SearchFilter.cleanQuery(t.segment.toLocaleLowerCase(game.i18n.lang)).replace(/['"]/g, "")
         )
           .filter(t => t.length > 1);
       },
@@ -107,7 +107,7 @@ export abstract class CompendiumBrowserTab {
     }
 
     this.currentIndex = (() => {
-      const searchText = SearchFilter.cleanQuery(this.filterData.search.text);
+      const searchText = foundry.applications.ux.SearchFilter.cleanQuery(this.filterData.search.text);
       if (searchText) {
         const searchResult = this.searchEngine.search(searchText);
         return this.sortResult(searchResult.filter(this.filterIndexData.bind(this)));
@@ -172,7 +172,7 @@ export abstract class CompendiumBrowserTab {
     const indexData = fn ? await fn(this.getIndexData(start)) : this.getIndexData(start);;
     const liElements: HTMLLIElement[] = [];
     for (const entry of indexData) {
-      const htmlString = await renderTemplate(this.templatePath, {
+      const htmlString = await foundry.applications.handlebars.renderTemplate(this.templatePath, {
         entry: entry,
         filterData: this.filterData,
       });
@@ -194,6 +194,16 @@ export abstract class CompendiumBrowserTab {
           return entryA.cost - entryB.cost;
         case "number":
           return entryA.number - entryB.number;
+        case "rarity": {
+          const rarityA = rarities.indexOf(entryA.rarity as typeof rarities[number]);
+          const rarityB = rarities.indexOf(entryB.rarity as typeof rarities[number]);
+          return rarityA - rarityB;
+        }
+        case "grade": {
+          const gradeA = grades.indexOf(entryA.grade as typeof grades[number]);
+          const gradeB = grades.indexOf(entryB.grade as typeof grades[number]);
+          return gradeA - gradeB;
+        }
         default: return 0;
       }
     });
@@ -332,7 +342,7 @@ export abstract class CompendiumBrowserTab {
       return;
     }
 
-    const content = await renderTemplate("systems/ptr2e/templates/compendium-browser/roll-table-dialog.hbs", {
+    const content = await foundry.applications.handlebars.renderTemplate("systems/ptr2e/templates/compendium-browser/roll-table-dialog.hbs", {
       count: this.currentIndex.length,
     });
     Dialog.confirm({
@@ -370,7 +380,7 @@ export abstract class CompendiumBrowserTab {
       return;
     }
 
-    const content = await renderTemplate("systems/ptr2e/templates/compendium-browser/roll-table-dialog.hbs", {
+    const content = await foundry.applications.handlebars.renderTemplate("systems/ptr2e/templates/compendium-browser/roll-table-dialog.hbs", {
       count: this.currentIndex.length,
       rollTables: game.tables.contents,
     });

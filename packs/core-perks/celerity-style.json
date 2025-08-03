@@ -1,0 +1,61 @@
+{
+  "name": "Celerity Style",
+  "_id": "2D5zyGp1HRxMmDWx",
+  "type": "perk",
+  "img": "icons/creatures/abilities/wings-birdlike-blue.webp",
+  "effects": [],
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "publication": {
+      "source": "PTR2e Core",
+      "authors": [
+        "Fox"
+      ],
+      "notes": ""
+    },
+    "actions": [],
+    "slug": null,
+    "description": "<p>Target: A Commanded @Trait[flying] Creature<br><br>Effect: The affected creature is no longer able to be targeted with Attacks of Opportunity, but their attacks suffer @UUID[Compendium.ptr2e.core-effects.wA5oCsgHmZLcHHSn]{-1 Accuracy Stage} or gain the @Affliction[grapple] Affliction. If they already have this Affliction, they are cured from it immediately and may [Interrupt] to freely move 1m</p>",
+    "traits": [
+      "command",
+      "style",
+      "flying"
+    ],
+    "prerequisites": [
+      "item:perk:type-specialist",
+      {
+        "gte": [
+          "{actor|skills.leadership.mod}",
+          35
+        ]
+      }
+    ],
+    "autoUnlock": [],
+    "cost": 2,
+    "originSlug": null,
+    "design": {
+      "arena": "physical",
+      "approach": "finesse",
+      "archetype": "flying"
+    },
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": [],
+    "nodes": [
+      {
+        "x": 196,
+        "y": 102,
+        "connected": [
+          "type-specialist"
+        ],
+        "hidden": false,
+        "type": "normal",
+        "tier": null
+      }
+    ]
+  }
+}

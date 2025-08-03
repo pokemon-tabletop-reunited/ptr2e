@@ -14,13 +14,17 @@
         "type": "generic",
         "range": {
           "target": "creature",
-          "unit": "m"
+          "unit": "m",
+          "distance": 0
         },
         "cost": {
           "activation": "free",
-          "trigger": "The target is afflicted with a [Major Affliction] the user caused."
+          "trigger": "The target is afflicted with a [Major Affliction] the user caused.",
+          "powerPoints": 0
         },
-        "img": "systems/ptr2e/img/perk-icons/Arcana.svg"
+        "img": "systems/ptr2e/img/perk-icons/Arcana.svg",
+        "variant": null,
+        "ephemeralVariant": false
       }
     ],
     "slug": "acute-affliction",
@@ -66,7 +70,17 @@
       "arena": "mental",
       "approach": "power",
       "archetype": "affliction"
-    }
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "originSlug": null,
+    "variant": null,
+    "mode": null
   },
   "effects": []
 }

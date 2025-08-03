@@ -1,0 +1,73 @@
+{
+  "folder": "gB7SZ3Y6wf3Qjjtr",
+  "name": "Millionary Protection",
+  "type": "perk",
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Dev"
+      ],
+      "notes": ""
+    },
+    "actions": [],
+    "slug": "millionary-protection",
+    "description": "<p>Effect: You have learned to gain the protection of the local nature spirits, generally aiding you against the domains they govern. The user takes 25% less damage from Types shared by the environment and Terrain (as per the Types of the Moves in the Nature Power Table).</p>",
+    "traits": [],
+    "prerequisites": [
+      {
+        "or": [
+          {
+            "and": [
+              {
+                "gte": [
+                  "{actor|skills.aura-control.mod}",
+                  55
+                ]
+              },
+              "trait:aura-user"
+            ]
+          },
+          {
+            "gte": [
+              "{actor|skills.spiritual.mod}",
+              70
+            ]
+          },
+          {
+            "gte": [
+              "{actor|skills.ghost.mod}",
+              70
+            ]
+          },
+          {
+            "gte": [
+              "{actor|skills.parapsychology.mod}",
+              70
+            ]
+          }
+        ]
+      }
+    ],
+    "autoUnlock": [],
+    "cost": 3,
+    "design": {
+      "arena": "social",
+      "approach": "resilience",
+      "archetype": "occultism"
+    },
+    "global": true,
+    "webs": [],
+    "nodes": [],
+    "originSlug": null,
+    "variant": null,
+    "mode": null
+  },
+  "img": "systems/ptr2e/img/perk-icons/Occultism.svg",
+  "effects": [],
+  "_id": "zmwpNLsXTB0V3rGx"
+}

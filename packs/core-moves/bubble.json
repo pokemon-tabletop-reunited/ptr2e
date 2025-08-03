@@ -10,8 +10,7 @@
         "name": "Bubble",
         "type": "attack",
         "traits": [
-          "missile",
-          "pp-updated"
+          "missile"
         ],
         "range": {
           "target": "cone",
@@ -20,23 +19,31 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 2
+          "powerPoints": 1
         },
         "category": "special",
         "power": 40,
-        "accuracy": 100,
+        "accuracy": 95,
         "types": [
           "water"
         ],
         "description": "<p>Effect: On hit, all valid targets have a 10% chance of losing -1 SPD Stage for 5 Activations.</p>",
-        "img": "icons/svg/explosion.svg"
+        "img": "systems/ptr2e/img/svg/water_icon.svg",
+        "predicate": []
       }
     ],
     "grade": "E",
     "_migration": {
       "version": null,
       "previous": null
-    }
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ]
+    },
+    "traits": []
   },
   "_id": "HUlQklA9AdqWFii9",
   "effects": [
@@ -56,7 +63,8 @@
             "affects": "target",
             "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "alterations": []
           }
         ],
         "slug": null,

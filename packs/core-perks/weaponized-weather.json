@@ -26,12 +26,6 @@
                   "{actor|skills.spiritual.mod}",
                   40
                 ]
-              },
-              {
-                "gte": [
-                  "{actor|level}",
-                  30
-                ]
               }
             ]
           }
@@ -39,12 +33,12 @@
       }
     ],
     "cost": 1,
-    "description": "<p>You learn Weather Ball, and gain all [Climate Rock] recipies.</p>",
+    "description": "<p>Effect: The user learns Weather Ball and one Move from the @Trait[climatologist] Tutor List, and gains all @Trait[climate-rock] recipes.</p>",
     "actions": [
       {
         "name": "Weaponized Weather",
         "slug": "weaponized-weather",
-        "description": "<p>You learn Weather Ball, and gain all [Climate Rock] recipies.</p>",
+        "description": "<p>Effect: The user learns Weather Ball and one Move from the @Trait[climatologist] Tutor List, and gains all @Trait[climate-rock] recipes.</p>",
         "cost": {
           "activation": "free",
           "powerPoints": 0,
@@ -60,7 +54,8 @@
           "distance": 0
         },
         "variant": null,
-        "hidden": false
+        "hidden": false,
+        "ephemeralVariant": false
       }
     ],
     "slug": "weaponized-weather",
@@ -100,7 +95,14 @@
     "design": {
       "arena": "physical",
       "approach": "finesse",
-      "archetype": "Climatology"
+      "archetype": "climatology"
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
     }
   },
   "_id": "Dw10zWfY4E99U2cf",

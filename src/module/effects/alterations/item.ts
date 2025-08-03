@@ -1,11 +1,12 @@
 import ResolvableValueField from "@module/data/fields/resolvable-value-field.ts";
-import ChangeModel from "../changes/change.ts";
+import ChangeModel, { CHANGE_MODES } from "../changes/change.ts";
 import { ItemPTR2e, ItemSourcePTR2e } from "@item";
 import { StringField } from "types/foundry/common/data/fields.js";
 import { BasicChangeSystem, ResolveValueParams } from "@data";
 import { BracketedValue, RuleValue } from "../data.ts";
 import { isBracketedValue, isObject } from "@utils";
 import * as R from "remeda";
+import { ActorPTR2e } from "@actor";
 
 class ItemAlteration extends foundry.abstract.DataModel<ChangeModel> {
 
@@ -15,7 +16,7 @@ class ItemAlteration extends foundry.abstract.DataModel<ChangeModel> {
       mode: new fields.NumberField({
         required: true,
         initial: CONST.ACTIVE_EFFECT_MODES.ADD,
-        choices: Object.fromEntries(Object.entries(CONST.ACTIVE_EFFECT_MODES).map(([k, v]) => [v, k])),
+        choices: Object.fromEntries(Object.entries(CHANGE_MODES).map(([k, v]) => [v, k])),
       }),
       property: new fields.StringField({
         required: true,
@@ -35,23 +36,59 @@ class ItemAlteration extends foundry.abstract.DataModel<ChangeModel> {
   }
 
   get effect() {
-    return this.change.effect;
+    return this.change?.effect;
   }
 
   get actor() {
-    return this.change.actor;
+    return this.change?.actor ?? this._actor;
   }
 
-  applyTo(item: ItemPTR2e | ItemSourcePTR2e): void {
+  private _actor: ActorPTR2e | null = null;
+
+  applyTo(item: ItemPTR2e | ItemSourcePTR2e, actor?: ActorPTR2e): void {
     if(item instanceof ItemPTR2e) {
       return this.applyToItem(item);
     }
+    if(actor) this._actor = actor;
 
     const property = item.type === "effect" && !this.property.startsWith("effects.") ? `effects.0.${this.property}` : this.property;
-    const current = fu.getProperty(item, property);
-    const value = typeof this.value === "boolean" ? this.value : this.resolveInjectedProperties(this.value);
+    const current = fu.getProperty(item, property) as JSONValue;
+    const value = typeof this.value === "boolean" ? this.value : this.resolveValue(this.value, current, {evaluate: true} );
     const change = BasicChangeSystem.getNewValue(this.mode, current, value, false)
-    fu.setProperty(item, property, change);
+
+    const isArrayChange = (Array.isArray(current) || current instanceof Set) && (current as unknown[]).every(e => typeof e === typeof value)
+    if(isArrayChange) {
+      switch(this.mode) {
+        case CONST.ACTIVE_EFFECT_MODES.ADD: {
+          if(Array.isArray(current)) {
+            current.push(value);
+          } else {
+            current.add(value);
+          }
+          break;
+        }
+        case CONST.ACTIVE_EFFECT_MODES.OVERRIDE: {
+          if(Array.isArray(current)) {
+            current.splice(0, current.length, value);
+          } else {
+            current.clear();
+            current.add(value);
+          }
+          break;
+        }
+        case CHANGE_MODES.REMOVE: {
+          if(Array.isArray(current)) {
+            current.splice(current.indexOf(value), 1);
+          } else {
+            current.delete(value);
+          }
+          break; 
+        }
+      }
+    }
+    else {
+      fu.setProperty(item, property, change);
+    }
   }
 
   applyToItem(item: ItemPTR2e): void {
@@ -149,21 +186,27 @@ class ItemAlteration extends foundry.abstract.DataModel<ChangeModel> {
       return source;
     } else if (typeof source === "string") {
       return source.replace(
-        /{(actor|item|change|effect)\|(.*?)}/g,
-        (_match, key: string, prop: string) => {
+        /{(actor|item|change|effect)\|(.*?)(\|C)?}/g,
+        (_match, key: string, prop: string, modifier: string) => {
           const data =
             key === "change"
               ? this
               : key === "actor" || key === "item" || key === "effect"
                 ? this[key]
                 : this.effect;
+
+          if(key === "actor" && prop.match(/skills\.(.*)\.mod/)) {
+            const value = this.actor?.system?.skills?.get(prop.split(".")[1])?.total;
+            if(value != undefined && !isNaN(value)) return String(value); 
+          }
+
           const value = fu.getProperty(data ?? {}, prop);
           if (value === undefined) {
             this.ignored = true;
             if (warn)
               this.failValidation(`Failed to resolve injected property "${source}"`);
           }
-          return String(value);
+          return modifier ? Handlebars.helpers.capitalize(String(value)) : typeof value === "object" ? "JSON::"+JSON.stringify(value) : String(value);
         }
       );
     }
@@ -202,35 +245,44 @@ class ItemAlteration extends foundry.abstract.DataModel<ChangeModel> {
       : value;
     if (typeof resolvedFromBracket === "number") return resolvedFromBracket;
 
+    if(typeof resolvedFromBracket === "string" && resolvedFromBracket.startsWith("JSON::")) {
+      try {
+        return JSON.parse(resolvedFromBracket.slice(6));
+      } catch (error) {
+        this.failValidation(`unable to parse JSON value, "${resolvedFromBracket}"`);
+        return defaultValue;
+      }
+    }
+
     if (resolvedFromBracket instanceof Object) {
-      return defaultValue instanceof Object
+      return defaultValue instanceof Object && !Array.isArray(defaultValue)
         ? fu.mergeObject(defaultValue, resolvedFromBracket, { inplace: false })
         : resolvedFromBracket;
     }
 
     if (typeof resolvedFromBracket === "string") {
-      const saferEval = (formula: string): number => {
+      const saferEval = (formula: string): string | number => {
         try {
           // If any resolvables were not provided for this formula, return the default value
-          const unresolveds = formula.match(/@[a-z0-9.]+/gi) ?? [];
+          const unresolveds = formula.match(/@[a-z0-9.]+/g) ?? [];
           // Allow failure of "@target" and "@actor.conditions" with no warning
           if (unresolveds.length > 0) {
-            const shouldWarn =
-              warn &&
-              !unresolveds.every(
-                (u) =>
-                  u.startsWith("@target.") || u.startsWith("@actor.conditions.")
-              );
-            this.ignored = true;
-            if (shouldWarn) {
-              this.failValidation(`unable to resolve formula, "${formula}"`);
+            const ignoredCase = unresolveds.every(
+              (u) =>
+                u.startsWith("@target.") || u.startsWith("@actor.conditions.")
+            );
+            if (!ignoredCase) {
+              this.ignored = true;
+              if (warn) {
+                this.failValidation(`unable to resolve formula, "${formula}"`);
+              }
             }
             return Number(defaultValue);
           }
           return Roll.safeEval(formula);
         } catch {
           this.failValidation(`unable to evaluate formula, "${formula}"`);
-          return 0;
+          return formula || 0;
         }
       };
 

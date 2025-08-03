@@ -18,7 +18,10 @@
       {
         "connected": [
           "acceptance",
-          "improved-burrow-1"
+          "improved-burrow-1",
+          "minor-buff-27",
+          "down-to-earth",
+          "plate-dynamic"
         ],
         "config": {
           "alpha": null,
@@ -45,7 +48,14 @@
     "design": {
       "arena": "physical",
       "approach": "power",
-      "archetype": "Ground"
+      "archetype": "ground"
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
     }
   },
   "img": "systems/ptr2e/img/svg/ground_icon.svg",
@@ -66,7 +76,9 @@
             "affects": "target",
             "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "alterations": [],
+            "dontMerge": false
           }
         ],
         "slug": null,
@@ -95,12 +107,13 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.342",
         "systemId": "ptr2e",
         "systemVersion": "0.10.0-alpha.3.1.0",
         "createdTime": null,
         "modifiedTime": null,
-        "lastModifiedBy": null
+        "lastModifiedBy": null,
+        "exportSource": null
       }
     }
   ],

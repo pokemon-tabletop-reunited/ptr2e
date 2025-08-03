@@ -4,8 +4,8 @@ class Clock extends foundry.abstract.DataModel {
     const fields = foundry.data.fields;
     return {
       id: new fields.StringField({ required: true, initial: () => fu.randomID(), label: "PTR2E.FIELDS.clock.id.label", hint: "PTR2E.FIELDS.clock.id.hint" }),
-      value: new fields.NumberField({ required: true, initial: 0, min: 0, max: 16, label: "PTR2E.FIELDS.clock.value.label", hint: "PTR2E.FIELDS.clock.value.hint" }),
-      max: new fields.NumberField({ required: true, initial: 4, min: 1, max: 16, label: "PTR2E.FIELDS.clock.max.label", hint: "PTR2E.FIELDS.clock.max.hint" }),
+      value: new fields.NumberField({ required: true, initial: 0, min: 0, max: 20, label: "PTR2E.FIELDS.clock.value.label", hint: "PTR2E.FIELDS.clock.value.hint" }),
+      max: new fields.NumberField({ required: true, initial: 4, min: 1, max: 20, label: "PTR2E.FIELDS.clock.max.label", hint: "PTR2E.FIELDS.clock.max.hint" }),
       color: new fields.ColorField({ required: true, initial: "#d0b8a3", label: "PTR2E.FIELDS.clock.color.label", hint: "PTR2E.FIELDS.clock.color.hint" }),
       label: new fields.StringField({ required: true, initial: "Clock", label: "PTR2E.FIELDS.clock.label.label", hint: "PTR2E.FIELDS.clock.label.hint" }),
       private: new fields.BooleanField({ required: true, initial: false, label: "PTR2E.FIELDS.clock.private.label", hint: "PTR2E.FIELDS.clock.private.hint" }),
@@ -30,6 +30,12 @@ class Clock extends foundry.abstract.DataModel {
       ? game.ptr.clocks.db.clocks.reduce((acc, c) => Math.max(acc, c.sort), 0) + 1
       : 0;
   }
+}
+
+// eslint-disable-next-line @typescript-eslint/no-namespace
+namespace Clock {
+  export type Source = SourceFromSchema<ClockSchema>;
+  export type Schema = ClockSchema;
 }
 
 interface Clock {

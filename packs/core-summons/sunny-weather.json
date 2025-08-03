@@ -11,7 +11,15 @@
     ],
     "actions": [],
     "baseAV": 150,
-    "duration": 3
+    "duration": 3,
+    "slug": "sunny-weather",
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    }
   },
   "img": "icons/magic/air/weather-sunlight-sky.webp",
   "effects": [
@@ -27,8 +35,9 @@
             "key": "fire-attack-damage",
             "value": 30,
             "predicate": [],
-            "mode": 2,
+            "label": "Fire Damage Boost",
             "priority": null,
+            "mode": 2,
             "ignored": false,
             "hideIfDisabled": false
           },
@@ -37,33 +46,36 @@
             "key": "water-attack-damage",
             "value": -30,
             "predicate": [],
-            "mode": 2,
+            "label": "Water Damage Reduction",
             "priority": null,
+            "mode": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          },
+          {
+            "type": "ephemeral-modifier",
+            "key": "fire-attack-effectiveness-stage",
+            "value": 1,
+            "predicate": [
+              "target:trait:water"
+            ],
+            "label": "Neutral Fire Damage to Water",
+            "priority": null,
+            "mode": 2,
             "ignored": false,
             "hideIfDisabled": false
           },
           {
             "type": "basic",
-            "key": "system.attributes.spe.value",
+            "key": "system.modifiers.speMultiplier",
             "value": 1.15,
             "predicate": [
-              "actor:trait:grass"
+              "trait:grass"
             ],
             "mode": 1,
+            "label": "Grass Speed Boost",
             "priority": null,
             "ignored": false
-          },
-          {
-            "type": "flat-modifier",
-            "key": "fire-attack-effectiveness-stage",
-            "value": 100,
-            "predicate": [
-              "target:trait:water"
-            ],
-            "mode": 2,
-            "priority": null,
-            "ignored": false,
-            "hideIfDisabled": true
           },
           {
             "type": "roll-option",
@@ -73,8 +85,8 @@
             "domain": "immunities",
             "toggleable": false,
             "count": false,
-            "mode": 2,
             "priority": null,
+            "mode": 2,
             "ignored": false,
             "suboptions": [],
             "state": true
@@ -86,8 +98,11 @@
             "predicate": [],
             "chance": 10,
             "affects": "target",
-            "mode": 2,
             "priority": null,
+            "alterations": [],
+            "isFixedChance": false,
+            "dontMerge": false,
+            "mode": 2,
             "ignored": false
           },
           {
@@ -97,8 +112,11 @@
             "predicate": [],
             "chance": 10,
             "affects": "target",
-            "mode": 2,
             "priority": null,
+            "alterations": [],
+            "isFixedChance": false,
+            "dontMerge": false,
+            "mode": 2,
             "ignored": false
           },
           {
@@ -110,8 +128,11 @@
             ],
             "chance": 10,
             "affects": "target",
-            "mode": 2,
             "priority": null,
+            "alterations": [],
+            "isFixedChance": false,
+            "dontMerge": false,
+            "mode": 2,
             "ignored": false
           }
         ],
@@ -124,7 +145,9 @@
         "formula": "",
         "type": "damage",
         "targetType": "all",
-        "targetUuid": null
+        "targetUuid": null,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
@@ -146,15 +169,14 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.346",
         "systemId": "ptr2e",
-        "systemVersion": "0.10.0-alpha.4.1.0",
+        "systemVersion": "1.3.8.beta",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "lastModifiedBy": "mK35yvCqCgiTUvKf",
+        "exportSource": null
       }
     }
   ],
-  "flags": {},
   "_id": "9cgLo9qwotwZUqPT"
 }

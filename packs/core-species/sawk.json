@@ -13,25 +13,22 @@
     "diet": [
       "omnivore"
     ],
-    "movement": {
-      "primary": [
-        {
-          "type": "overland",
-          "value": 8
-        }
-      ],
-      "secondary": [
-        {
-          "type": "swim",
-          "value": 4
-        }
-      ]
-    },
+    "movement": [
+      {
+        "type": "overland",
+        "value": 8
+      },
+      {
+        "type": "swim",
+        "value": 4
+      }
+    ],
     "traits": [
       "pokemon",
       "fully-evolved",
       "bipedal",
-      "underdog"
+      "underdog",
+      "jump-3"
     ],
     "abilities": {
       "starting": [
@@ -163,6 +160,14 @@
         "favourite": false,
         "hidden": false,
         "group": null
+      },
+      {
+        "slug": "teaching",
+        "value": 35,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
       }
     ],
     "slug": "sawk",
@@ -180,132 +185,108 @@
     "moves": {
       "levelUp": [
         {
-          "name": "leer",
-          "level": 1,
-          "gen": "sword-shield"
+          "name": "bide",
+          "gen": "ultra-sun-ultra-moon",
+          "level": 1
         },
         {
-          "name": "bide",
-          "level": 1,
-          "gen": "ultra-sun-ultra-moon"
+          "name": "leer",
+          "gen": "sword-shield",
+          "level": 1
         },
         {
           "name": "rock-smash",
-          "level": 1,
-          "gen": "sword-shield"
+          "gen": "sword-shield",
+          "level": 1
         },
         {
           "name": "focus-energy",
-          "level": 5,
-          "gen": "sword-shield"
+          "gen": "sword-shield",
+          "level": 5
         },
         {
           "name": "double-kick",
-          "level": 10,
-          "gen": "sword-shield"
+          "gen": "sword-shield",
+          "level": 10
         },
         {
           "name": "quick-guard",
-          "level": 15,
-          "gen": "sword-shield"
+          "gen": "sword-shield",
+          "level": 15
         },
         {
           "name": "karate-chop",
-          "level": 17,
-          "gen": "ultra-sun-ultra-moon"
+          "gen": "ultra-sun-ultra-moon",
+          "level": 17
         },
         {
           "name": "low-sweep",
-          "level": 20,
-          "gen": "sword-shield"
+          "gen": "sword-shield",
+          "level": 20
         },
         {
           "name": "bulk-up",
-          "level": 25,
-          "gen": "sword-shield"
+          "gen": "sword-shield",
+          "level": 25
         },
         {
           "name": "retaliate",
-          "level": 30,
-          "gen": "sword-shield"
+          "gen": "sword-shield",
+          "level": 30
         },
         {
           "name": "brick-break",
-          "level": 35,
-          "gen": "sword-shield"
+          "gen": "sword-shield",
+          "level": 35
         },
         {
           "name": "counter",
-          "level": 40,
-          "gen": "sword-shield"
+          "gen": "sword-shield",
+          "level": 40
         },
         {
           "name": "endure",
-          "level": 45,
-          "gen": "sword-shield"
+          "gen": "sword-shield",
+          "level": 45
         },
         {
           "name": "reversal",
-          "level": 50,
-          "gen": "sword-shield"
+          "gen": "sword-shield",
+          "level": 50
         },
         {
           "name": "close-combat",
-          "level": 55,
-          "gen": "sword-shield"
+          "gen": "sword-shield",
+          "level": 55
         }
       ],
       "tutor": [
         {
-          "name": "fire-punch",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "ice-punch",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "thunder-punch",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "low-kick",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "snore",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "sleep-talk",
-          "gen": "black-2-white-2"
-        },
-        {
-          "name": "pain-split",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "focus-punch",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "helping-hand",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "superpower",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "knock-off",
-          "gen": "ultra-sun-ultra-moon"
+          "name": "attract",
+          "gen": "sword-shield"
         },
         {
           "name": "block",
           "gen": "ultra-sun-ultra-moon"
         },
         {
-          "name": "zen-headbutt",
+          "name": "bulldoze",
+          "gen": "sword-shield"
+        },
+        {
+          "name": "coaching",
+          "gen": "sword-shield"
+        },
+        {
+          "name": "confide",
+          "gen": "ultra-sun-ultra-moon"
+        },
+        {
+          "name": "dig",
+          "gen": "sword-shield"
+        },
+        {
+          "name": "double-team",
           "gen": "ultra-sun-ultra-moon"
         },
         {
@@ -313,91 +294,7 @@
           "gen": "ultra-sun-ultra-moon"
         },
         {
-          "name": "laser-focus",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "throat-chop",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "coaching",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "mega-punch",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "mega-kick",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "strength",
-          "gen": "omega-ruby-alpha-sapphire"
-        },
-        {
           "name": "earthquake",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "dig",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "toxic",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "double-team",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "rest",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "rock-slide",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "substitute",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "protect",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "scary-face",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "swagger",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "attract",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "return",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "frustration",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "hidden-power",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "rain-dance",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "sunny-day",
           "gen": "sword-shield"
         },
         {
@@ -405,20 +302,64 @@
           "gen": "sword-shield"
         },
         {
-          "name": "taunt",
+          "name": "fire-punch",
+          "gen": "ultra-sun-ultra-moon"
+        },
+        {
+          "name": "focus-blast",
           "gen": "sword-shield"
         },
         {
-          "name": "revenge",
+          "name": "focus-punch",
+          "gen": "ultra-sun-ultra-moon"
+        },
+        {
+          "name": "frustration",
+          "gen": "ultra-sun-ultra-moon"
+        },
+        {
+          "name": "giga-impact",
           "gen": "sword-shield"
         },
         {
-          "name": "secret-power",
-          "gen": "omega-ruby-alpha-sapphire"
+          "name": "grass-knot",
+          "gen": "sword-shield"
         },
         {
-          "name": "rock-tomb",
+          "name": "helping-hand",
+          "gen": "ultra-sun-ultra-moon"
+        },
+        {
+          "name": "hidden-power",
+          "gen": "ultra-sun-ultra-moon"
+        },
+        {
+          "name": "ice-punch",
+          "gen": "ultra-sun-ultra-moon"
+        },
+        {
+          "name": "knock-off",
+          "gen": "ultra-sun-ultra-moon"
+        },
+        {
+          "name": "laser-focus",
+          "gen": "ultra-sun-ultra-moon"
+        },
+        {
+          "name": "low-kick",
+          "gen": "ultra-sun-ultra-moon"
+        },
+        {
+          "name": "mega-kick",
           "gen": "sword-shield"
+        },
+        {
+          "name": "mega-punch",
+          "gen": "sword-shield"
+        },
+        {
+          "name": "pain-split",
+          "gen": "ultra-sun-ultra-moon"
         },
         {
           "name": "payback",
@@ -429,19 +370,35 @@
           "gen": "sword-shield"
         },
         {
-          "name": "focus-blast",
+          "name": "power-up-punch",
+          "gen": "omega-ruby-alpha-sapphire"
+        },
+        {
+          "name": "protect",
           "gen": "sword-shield"
         },
         {
-          "name": "giga-impact",
+          "name": "rain-dance",
           "gen": "sword-shield"
         },
         {
-          "name": "stone-edge",
+          "name": "rest",
           "gen": "sword-shield"
         },
         {
-          "name": "grass-knot",
+          "name": "return",
+          "gen": "ultra-sun-ultra-moon"
+        },
+        {
+          "name": "revenge",
+          "gen": "sword-shield"
+        },
+        {
+          "name": "rock-slide",
+          "gen": "sword-shield"
+        },
+        {
+          "name": "rock-tomb",
           "gen": "sword-shield"
         },
         {
@@ -449,20 +406,68 @@
           "gen": "sword-shield"
         },
         {
-          "name": "bulldoze",
+          "name": "scary-face",
           "gen": "sword-shield"
+        },
+        {
+          "name": "secret-power",
+          "gen": "omega-ruby-alpha-sapphire"
+        },
+        {
+          "name": "sleep-talk",
+          "gen": "black-2-white-2"
+        },
+        {
+          "name": "snore",
+          "gen": "ultra-sun-ultra-moon"
+        },
+        {
+          "name": "stone-edge",
+          "gen": "sword-shield"
+        },
+        {
+          "name": "strength",
+          "gen": "omega-ruby-alpha-sapphire"
+        },
+        {
+          "name": "substitute",
+          "gen": "sword-shield"
+        },
+        {
+          "name": "sunny-day",
+          "gen": "sword-shield"
+        },
+        {
+          "name": "superpower",
+          "gen": "ultra-sun-ultra-moon"
+        },
+        {
+          "name": "swagger",
+          "gen": "ultra-sun-ultra-moon"
+        },
+        {
+          "name": "taunt",
+          "gen": "sword-shield"
+        },
+        {
+          "name": "throat-chop",
+          "gen": "ultra-sun-ultra-moon"
+        },
+        {
+          "name": "thunder-punch",
+          "gen": "ultra-sun-ultra-moon"
+        },
+        {
+          "name": "toxic",
+          "gen": "ultra-sun-ultra-moon"
         },
         {
           "name": "work-up",
           "gen": "sword-shield"
         },
         {
-          "name": "confide",
+          "name": "zen-headbutt",
           "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "power-up-punch",
-          "gen": "omega-ruby-alpha-sapphire"
         }
       ]
     },
@@ -470,7 +475,6 @@
     "eggGroups": [
       "humanshape"
     ],
-    "genderRatio": 0,
     "habitats": [
       "forest",
       "mountain"
@@ -478,10 +482,26 @@
     "evolutions": {
       "name": "sawk",
       "details": null,
-      "evolutions": []
+      "evolutions": [],
+      "uuid": null,
+      "methods": [],
+      "perk": {
+        "x": 26,
+        "y": 26
+      }
+    },
+    "publication": {
+      "source": "PTR 2e Core - Unova Dex",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "_migration": {
+      "version": null,
+      "previous": null
     }
   },
   "_id": "EKeVeHZZlU0J75rQ",
-  "effects": [],
-  "folder": null
+  "effects": []
 }

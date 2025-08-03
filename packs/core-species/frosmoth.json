@@ -301,11 +301,19 @@
             "level": null,
             "knownMove": null
           },
-          "evolutions": []
+          "evolutions": [],
+          "perk": {
+            "x": 26,
+            "y": 26
+          }
         }
       ],
       "uuid": "Compendium.ptr2e.core-species.Item.H4aGcVk0t89qyUS4",
-      "methods": []
+      "methods": [],
+      "perk": {
+        "x": 26,
+        "y": 26
+      }
     },
     "number": 873,
     "traits": [
@@ -314,7 +322,8 @@
       "fully-evolved",
       "chiller",
       "wallclimber",
-      "freezer"
+      "freezer",
+      "jump-1"
     ],
     "diet": [
       "snow"
@@ -353,20 +362,16 @@
         }
       ]
     },
-    "movement": {
-      "primary": [
-        {
-          "type": "flight",
-          "value": 10
-        }
-      ],
-      "secondary": [
-        {
-          "type": "overland",
-          "value": 3
-        }
-      ]
-    },
+    "movement": [
+      {
+        "type": "flight",
+        "value": 10
+      },
+      {
+        "type": "overland",
+        "value": 3
+      }
+    ],
     "skills": [
       {
         "slug": "acrobatics",
@@ -497,6 +502,13 @@
     "_migration": {
       "version": null,
       "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core - Galar Dex",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
     }
   },
   "_id": "0976TRN63XfSPMwg",

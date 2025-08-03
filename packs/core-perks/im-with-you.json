@@ -9,7 +9,7 @@
       {
         "name": "I'm With You!",
         "slug": "im-with-you",
-        "description": "<p>The target gains @Affliction[boosted] 2.</p>",
+        "description": "<p>Trigger: During the user's or another creature's Activation.</p><p>Effect: The target gains @Affliction[boosted 2].</p>",
         "traits": [
           "interrupt-1",
           "social"
@@ -22,18 +22,34 @@
         },
         "cost": {
           "activation": "simple",
-          "powerPoints": 2
+          "powerPoints": 2,
+          "trigger": "During the user's or another creature's Activation.",
+          "delay": null,
+          "priority": null
         },
         "img": "systems/ptr2e/img/perk-icons/Musician.svg",
         "types": [
           "untyped"
         ],
         "category": "status",
-        "free": true
+        "free": true,
+        "variant": null,
+        "ephemeralVariant": false,
+        "power": null,
+        "accuracy": null,
+        "contestType": "",
+        "contestEffect": "",
+        "slot": null,
+        "summon": null,
+        "defaultVariant": null,
+        "flingItemId": "",
+        "offensiveStat": null,
+        "defensiveStat": null,
+        "predicate": []
       }
     ],
     "slug": "im-with-you",
-    "description": "<p>The target gains @Affliction[boosted] 2.</p>",
+    "description": "<p>Effect: By spending 2 PP as a Simple Action at @Trait[interrupt-1] during their or another creature's Activation, the user can grant one ally @Affliction[boosted 2].</p>",
     "traits": [],
     "prerequisites": [
       {
@@ -55,24 +71,21 @@
     },
     "nodes": [
       {
+        "x": 40,
+        "y": 56,
+        "hidden": false,
+        "type": "normal",
         "connected": [
           "mobilize",
           "tactician",
           "the-meaning-of-haste"
         ],
         "config": {
-          "alpha": null,
-          "backgroundColor": "#0000ff",
-          "borderColor": null,
-          "borderWidth": null,
           "texture": "systems/ptr2e/img/perk-icons/Musician.svg",
-          "tint": null,
-          "scale": null
+          "backgroundColor": null,
+          "borderColor": null,
+          "tint": null
         },
-        "hidden": false,
-        "type": "normal",
-        "x": 40,
-        "y": 56,
         "tier": null
       }
     ],
@@ -82,8 +95,18 @@
     "design": {
       "arena": "social",
       "approach": "power",
-      "archetype": "Support"
-    }
+      "archetype": "support"
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "originSlug": null,
+    "variant": null,
+    "mode": null
   },
   "effects": [
     {
@@ -102,7 +125,9 @@
             "affects": "target",
             "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "alterations": [],
+            "dontMerge": false
           }
         ],
         "slug": null,
@@ -131,12 +156,13 @@
       "_stats": {
         "compendiumSource": "Compendium.ptr2e.core-perks.Item.Z9RvqAZwW3zjuOrn.ActiveEffect.8rp8aXRLwsRFusz4",
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.342",
         "systemId": "ptr2e",
         "systemVersion": "0.10.0-alpha.5.0",
         "createdTime": 1736113888306,
         "modifiedTime": 1736113919041,
-        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+        "lastModifiedBy": "mK35yvCqCgiTUvKf",
+        "exportSource": null
       }
     }
   ]

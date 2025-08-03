@@ -1,0 +1,90 @@
+{
+  "name": "Vaulting",
+  "type": "perk",
+  "system": {
+    "prerequisites": [
+      {
+        "or": [
+          {
+            "gte": [
+              "{actor|skills.acrobatics.mod}",
+              40
+            ]
+          },
+          {
+            "gte": [
+              "{actor|skills.flying.mod}",
+              40
+            ]
+          },
+          {
+            "gte": [
+              "{actor|skills.swim.mod}",
+              40
+            ]
+          },
+          {
+            "gte": [
+              "{actor|skills.climb.mod}",
+              40
+            ]
+          }
+        ]
+      }
+    ],
+    "cost": 2,
+    "description": "<p>Trigger: The user declares Jump or Breach.<br><br>Effect: The user doubles the amount of Movement Score gained with the triggering Action, and if they only move in a straight line this Activation, they gain an additional +3 to that Movement Score.</p>",
+    "actions": [
+      {
+        "name": "Vaulting",
+        "slug": "vaulting",
+        "description": "Effect: The user doubles the amount of Movement Score gained with the triggering Action, and if they only move in a straight line this Activation, they gain an additional +3 to that Movement Score.",
+        "cost": {
+          "activation": "free",
+          "powerPoints": 2,
+          "trigger": "Trigger: The user declares Jump or Breach."
+        },
+        "range": {
+          "target": "self",
+          "unit": "m",
+          "distance": 0
+        },
+        "type": "passive",
+        "traits": [],
+        "img": "icons/svg/explosion.svg",
+        "variant": null,
+        "ephemeralVariant": false,
+        "hidden": false
+      }
+    ],
+    "slug": "vaulting",
+    "traits": [],
+    "_migration": {
+      "version": null,
+      "previous": null
+    },
+    "nodes": [],
+    "autoUnlock": [],
+    "global": true,
+    "webs": [],
+    "design": {
+      "arena": "physical",
+      "approach": "power",
+      "archetype": "exploration"
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "originSlug": null,
+    "variant": null,
+    "mode": null
+  },
+  "_id": "vxp5hyhlVJozIaNZ",
+  "img": "systems/ptr2e/img/perk-icons/Exploration.svg",
+  "effects": [],
+  "folder": "1osM6JY51pvLkJ3Q"
+}

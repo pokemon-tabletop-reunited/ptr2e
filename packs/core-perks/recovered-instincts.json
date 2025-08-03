@@ -1,0 +1,60 @@
+{
+  "name": "Recovered Instincts",
+  "_id": "u0paQYXCnrF5hmcq",
+  "type": "perk",
+  "img": "systems/ptr2e/img/item-icons/armor%20fossil.webp",
+  "effects": [],
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "publication": {
+      "source": "PTR2e Core",
+      "authors": [
+        "Dragoon"
+      ],
+      "notes": ""
+    },
+    "actions": [],
+    "slug": null,
+    "description": "<p>The user has reawakened the survival instincts they once required in the ancient past. The user gains +20 to Skill Checks made during combat, and the start of each Round, the user is Advanced 20%.</p>",
+    "traits": [
+      "fossil"
+    ],
+    "prerequisites": [
+      "trait:fossil",
+      "trait:fully-evolved",
+      {
+        "gte": [
+          "{actor|level}",
+          30
+        ]
+      }
+    ],
+    "autoUnlock": [],
+    "cost": 3,
+    "originSlug": null,
+    "design": {
+      "arena": "physical",
+      "approach": "resilience",
+      "archetype": "fossil"
+    },
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": [],
+    "nodes": [
+      {
+        "x": 164,
+        "y": 30,
+        "connected": [
+          "root-2"
+        ],
+        "hidden": false,
+        "type": "normal",
+        "tier": null
+      }
+    ]
+  }
+}
