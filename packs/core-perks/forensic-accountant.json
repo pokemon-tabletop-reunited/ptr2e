@@ -18,15 +18,20 @@
         "slug": "forensic-accountant",
         "description": "<p>You have a knack for spotting discrepancies when looking through accounts, inventory records and similar. You gain a +10 to Accounting checks to catch errors and \"cooked\" books.</p>",
         "cost": {
-          "activation": "free"
+          "activation": "free",
+          "powerPoints": 0
         },
         "type": "passive",
         "traits": [],
         "img": "icons/svg/explosion.svg",
         "range": {
           "target": "enemy",
-          "unit": "m"
-        }
+          "unit": "m",
+          "distance": 0
+        },
+        "variant": null,
+        "ephemeralVariant": false,
+        "hidden": false
       }
     ],
     "slug": "forensic-accountant",
@@ -42,7 +47,11 @@
           "breeder",
           "improved-overland-4",
           "lethal-restraint",
-          "rigorous-fundamentals-2"
+          "rigorous-fundamentals-2",
+          "minor-buff-7",
+          "minor-buff-38",
+          "experienced-educator",
+          "homeostatic-treatments"
         ],
         "config": {
           "alpha": null,
@@ -66,14 +75,18 @@
     "design": {
       "arena": "mental",
       "approach": "finesse",
-      "archetype": "Knowledge"
+      "archetype": "knowledge"
     },
     "publication": {
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
-    }
+      ],
+      "notes": ""
+    },
+    "originSlug": null,
+    "variant": null,
+    "mode": null
   },
   "_id": "lpfTAt7M1mDGh5kH",
   "img": "systems/ptr2e/img/perk-icons/Knowledge.svg",

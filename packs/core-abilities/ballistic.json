@@ -5,23 +5,41 @@
   "system": {
     "actions": [
       {
-        "traits": [],
-        "name": "Ballistic",
-        "slug": "ballistic",
+        "traits": [
+          "interrupt-4",
+          "delay-3"
+        ],
+        "name": "Ballistic (Active)",
+        "slug": "ballistic-active",
         "type": "generic",
         "cost": {
+          "trigger": "The user declares a @Trait[contact] Attack.",
           "activation": "free",
-          "powerPoints": 2
+          "powerPoints": 2,
+          "delay": 3
         },
         "range": {
           "target": "self",
           "unit": "m"
         },
-        "description": "The user's next [Contact] Attack loses [Contact], gains [Missile] (if it already had [Missile], its Power increases by +30%), and has its Range multiplied by x6 until it is resolved.</p>",
+        "description": "<p>Trigger: The user declares a @Trait[contact] Attack.</p><p>Effect: Until the triggering Attack is resolved, it loses @Trait[contact] and gains @Trait[missile]. has its range change. If the attack has a target of Creature, its range increases by 500% based on its effective range (the Attack’s range considering the user’s Reach), and Emanation Attacks become Blast, with a range of 10m and their @Trait[blast-x] equal to their base Emanation range (f.e., a 2m Emanation becomes @Trait[blast-2]).</p>",
+        "img": "icons/svg/explosion.svg"
+      },
+      {
+        "traits": [],
+        "name": "Ballistic (Passive)",
+        "slug": "ballistic-passive",
+        "type": "passive",
+        "cost": {},
+        "range": {
+          "target": "self",
+          "unit": "m"
+        },
+        "description": "<p>Effect: The user’s @Trait[missile] Attacks have 30% increased Power.</p>",
         "img": "icons/svg/explosion.svg"
       }
     ],
-    "description": "The user's next [Contact] Attack loses [Contact], gains [Missile] (if it already had [Missile], its Power increases by +30%), and has its Range multiplied by x6 until it is resolved.</p>",
+    "description": "<p>Trigger: The user declares a @Trait[contact] Attack.</p><p>Effect: Until the triggering Attack is resolved, it loses @Trait[contact] and gains @Trait[missile]. has its range change. If the attack has a target of Creature, its range increases by 500% based on its effective range (the Attack’s range considering the user’s Reach), and Emanation Attacks become Blast, with a range of 10m and their @Trait[blast-x] equal to their base Emanation range (f.e., a 2m Emanation becomes @Trait[blast-2]).</p><p>Passive: The user’s @Trait[missile] Attacks have 30% increased Power.</p>",
     "traits": [],
     "slug": "ballistic",
     "_migration": {
@@ -36,5 +54,62 @@
     }
   },
   "_id": "qgENOMqdeuKBs47a",
-  "effects": []
+  "effects": [
+    {
+      "name": "Ballistic",
+      "type": "affliction",
+      "_id": "Ballisticyj07dBR",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "percentile-modifier",
+            "key": "missile-trait-attack-power",
+            "value": 30,
+            "predicate": [],
+            "label": "Ballistic",
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "hideIfDisabled": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0,
+        "priority": 50,
+        "formula": "",
+        "type": "damage"
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": "Actor.JH7UeUyIDJg5n2rR.Item.RU6oP9DaZzGVCwYh.ActiveEffect.0vSjQQtCO3XYkB40",
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.2.0.3",
+        "createdTime": 1721933367671,
+        "modifiedTime": 1721933367671,
+        "lastModifiedBy": "y4EIjJlrc2eCclW7"
+      }
+    }
+  ]
 }

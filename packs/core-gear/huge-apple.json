@@ -5,7 +5,7 @@
   "system": {
     "cost": 7,
     "crafting": {
-      "skill": null,
+      "skill": "",
       "spans": null,
       "materials": []
     },
@@ -19,7 +19,12 @@
       "type": "grass",
       "power": 65,
       "accuracy": 95,
-      "hide": null
+      "hide": false,
+      "range": {
+        "target": "creature",
+        "distance": 10,
+        "unit": "m"
+      }
     },
     "rarity": "uncommon",
     "consumableType": "food",
@@ -32,7 +37,7 @@
       "held",
       "fling"
     ],
-    "description": "The target is healed up to their Max PP, and is cured of 2 @Affliction[weary].",
+    "description": "<p>The target is healed @Tick[16 pp], and is cured of 2 @Affliction[weary].</p>",
     "quantity": 1,
     "slug": "huge-apple",
     "stack": 1,
@@ -44,7 +49,8 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
+      ],
+      "notes": ""
     }
   },
   "_id": "vlzfzfrW3hUvxesB",

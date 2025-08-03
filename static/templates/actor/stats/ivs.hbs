@@ -1,0 +1,10 @@
+<section>
+  <fieldset>
+    <legend>IVs</legend>
+    {{#each stats as |value key|}}
+      <div class="form-group {{key}}">
+        <label for="{{concat "system.attributes." key ".evs"}}">{{localize (concat "PTR2E.Attributes." key ".Label")}}</label>
+      </div>
+    {{/each}}
+  </fieldset>
+</section>

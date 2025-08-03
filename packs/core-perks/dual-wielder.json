@@ -13,15 +13,20 @@
         "slug": "dual-wielder",
         "description": "<p>Gain a second Wielded Item Slot.</p>",
         "cost": {
-          "activation": "free"
+          "activation": "free",
+          "powerPoints": 0
         },
         "type": "passive",
         "traits": [],
         "img": "icons/svg/explosion.svg",
         "range": {
           "target": "enemy",
-          "unit": "m"
-        }
+          "unit": "m",
+          "distance": 0
+        },
+        "variant": null,
+        "ephemeralVariant": false,
+        "hidden": false
       }
     ],
     "slug": "dual-wielder",
@@ -35,7 +40,9 @@
         "connected": [
           "backpacker-1",
           "belt-expansion-1",
-          "dress-to-impress"
+          "dress-to-impress",
+          "yeomanry",
+          "nock-shot"
         ],
         "config": {
           "alpha": null,
@@ -65,8 +72,12 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
-    }
+      ],
+      "notes": ""
+    },
+    "originSlug": null,
+    "variant": null,
+    "mode": null
   },
   "_id": "QioUEl6UBFclZvzG",
   "img": "systems/ptr2e/img/perk-icons/Tactician.svg",
@@ -114,12 +125,13 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.342",
         "systemId": "ptr2e",
         "systemVersion": "0.10.0-alpha.5.1.5",
         "createdTime": 1737566059443,
         "modifiedTime": 1737566090456,
-        "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
+        "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+        "exportSource": null
       }
     }
   ],

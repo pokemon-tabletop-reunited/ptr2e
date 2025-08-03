@@ -408,6 +408,8 @@ class CompendiumPack {
       if (documentId === undefined) {
         throw PackError(`${docSource.name} (${this.packId}) has broken link to ${docName}: ${match}`);
       }
+      const source = idsToSource?.get(documentId);
+      if(source) docName = source.name;
       const sourceId = this.#sourceIdOf(documentId, { packId, docType });
       const labelBraceOrFullLabel = match.endsWith("{") ? "{" : `{${docName}}`;
 

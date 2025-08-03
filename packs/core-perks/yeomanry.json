@@ -1,0 +1,79 @@
+{
+  "name": "Yeomanry",
+  "_id": "KWW5eOGkAuGnaPHK",
+  "type": "perk",
+  "img": "icons/weapons/bows/shortbow-recurve-yellow.webp",
+  "effects": [],
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "publication": {
+      "source": "PTR2e Core",
+      "authors": [
+        "Dragoon"
+      ],
+      "notes": ""
+    },
+    "actions": [],
+    "slug": null,
+    "description": "<p>The user’s non-[Firearm] [Missile] [Weapon] attacks deal +40% more damage, and the user’s Struggle has +20 Power when they are holding a non-[Firearm] [Missile] [Weapon].</p>",
+    "traits": [],
+    "prerequisites": [
+      "trait:wielder",
+      {
+        "gte": [
+          "{actor|skills.survival.mod}",
+          30
+        ]
+      },
+      {
+        "gte": [
+          "{actor|skills.lift.mod}",
+          45
+        ]
+      },
+      {
+        "gte": [
+          "{actor|skills.acrobatics.mod}",
+          30
+        ]
+      },
+      {
+        "gte": [
+          "{actor|level}",
+          20
+        ]
+      }
+    ],
+    "autoUnlock": [],
+    "cost": 3,
+    "originSlug": null,
+    "design": {
+      "arena": "physical",
+      "approach": "finesse",
+      "archetype": null
+    },
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": [],
+    "nodes": [
+      {
+        "x": 187,
+        "y": 63,
+        "connected": [
+          "dual-wielder",
+          "down-the-sights",
+          "harry",
+          "arms-race",
+          "needle-threader"
+        ],
+        "hidden": false,
+        "type": "normal",
+        "tier": null
+      }
+    ]
+  }
+}

@@ -1,0 +1,120 @@
+{
+  "folder": "qrlUDsr0ZrNZAnR6",
+  "name": "Grounded Line",
+  "type": "perk",
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "actions": [],
+    "slug": "grounded-line",
+    "description": "<p>The user takes 15% less Electric-Type damage while touching a surface, and another 15% less while @Affliction[grounded].</p>",
+    "traits": [],
+    "prerequisites": [
+      "trait:steel"
+    ],
+    "autoUnlock": [],
+    "cost": 2,
+    "design": {
+      "arena": "physical",
+      "approach": "resilience",
+      "archetype": "steel"
+    },
+    "global": true,
+    "webs": [],
+    "nodes": [
+      {
+        "x": 97,
+        "y": 95,
+        "connected": [
+          "ready-for-anything",
+          "active-ground"
+        ],
+        "hidden": false,
+        "type": "normal",
+        "tier": null
+      }
+    ],
+    "originSlug": null,
+    "variant": null,
+    "mode": null
+  },
+  "img": "systems/ptr2e/img/svg/steel_icon.svg",
+  "effects": [
+    {
+      "name": "Grounded Line",
+      "type": "passive",
+      "_id": "BvpLglnHeOtR3lW7",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "ephemeral-modifier",
+            "key": "electric-attack-damage-percentile",
+            "value": -15,
+            "predicate": [],
+            "label": "Target is Grounded?",
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "hideIfDisabled": false
+          },
+          {
+            "type": "ephemeral-modifier",
+            "key": "electric-attack-damage-percentile",
+            "value": -15,
+            "predicate": [],
+            "label": "Target is touching a surface?",
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "hideIfDisabled": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": false,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "13.342",
+        "systemId": "ptr2e",
+        "systemVersion": "1.2.1.beta",
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null,
+        "exportSource": null
+      }
+    }
+  ],
+  "flags": {},
+  "_id": "i37lHpRUZOKqX5Jl"
+}

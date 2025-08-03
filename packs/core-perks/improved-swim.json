@@ -4,8 +4,7 @@
   "folder": "zrVtKATNxzLNxTUe",
   "system": {
     "prerequisites": [
-      "#An Swim Movement Allowance",
-      "#Swim 20 + 10 x (# of Improved Overland Perks already obtained)"
+      "#An Swim Movement Allowance"
     ],
     "cost": 1,
     "description": "<p>Improve your Swim Movement Allowance by 2.</p>",
@@ -15,19 +14,26 @@
         "slug": "improved-swim",
         "description": "<p>Improve your Swim Movement Allowance by 2.</p>",
         "cost": {
-          "activation": "free"
+          "activation": "free",
+          "powerPoints": 0
         },
         "type": "passive",
         "traits": [],
         "img": "icons/svg/explosion.svg",
         "range": {
           "target": "enemy",
-          "unit": "m"
-        }
+          "unit": "m",
+          "distance": 0
+        },
+        "variant": null,
+        "ephemeralVariant": false,
+        "hidden": false
       }
     ],
     "slug": "improved-swim",
-    "traits": [],
+    "traits": [
+      "minor-buff"
+    ],
     "_migration": {
       "version": null,
       "previous": null
@@ -129,19 +135,21 @@
       }
     ],
     "autoUnlock": [],
-    "global": true,
+    "global": false,
     "webs": [],
     "design": {
       "arena": "physical",
       "approach": "finesse",
-      "archetype": "Mobility"
+      "archetype": "mobility"
     },
     "publication": {
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
-    }
+      ],
+      "notes": ""
+    },
+    "originSlug": null
   },
   "_id": "JIKUtBXPktaHTCN6",
   "img": "systems/ptr2e/img/svg/water_icon.svg",
@@ -161,6 +169,18 @@
             "mode": 2,
             "priority": null,
             "ignored": false
+          },
+          {
+            "type": "roll-option",
+            "value": "improved-swim",
+            "domain": "all",
+            "count": true,
+            "key": "",
+            "mode": 2,
+            "predicate": [],
+            "ignored": false,
+            "suboptions": [],
+            "state": true
           }
         ],
         "slug": null,
@@ -189,12 +209,13 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.342",
         "systemId": "ptr2e",
         "systemVersion": "0.10.0-alpha.2.4.3",
         "createdTime": 1729187284575,
         "modifiedTime": 1729187296565,
-        "lastModifiedBy": "IcBpMqhFuTck9VpX"
+        "lastModifiedBy": "IcBpMqhFuTck9VpX",
+        "exportSource": null
       }
     }
   ]

@@ -13,11 +13,10 @@
         "img": "systems/ptr2e/img/svg/poison_icon.svg",
         "traits": [
           "basic",
-          "blast-1",
-          "pp-updated"
+          "blast-1"
         ],
         "range": {
-          "target": "creature",
+          "target": "blast",
           "distance": 6,
           "unit": "m"
         },
@@ -45,7 +44,8 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
+      ],
+      "notes": ""
     }
   },
   "effects": [
@@ -65,7 +65,9 @@
             "affects": "target",
             "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "alterations": [],
+            "dontMerge": false
           }
         ],
         "slug": null,
