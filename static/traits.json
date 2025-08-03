@@ -1325,10 +1325,20 @@
     "description": "Once every 5 Day Spans the creature produces a random [Mushroom] up to its Grade."
   },
   {
-    "slug": "musical",
-    "label": "Musical",
+    "slug": "musician",
+    "label": "Musician",
     "related": [],
-    "description": "TO BE DETERMINED"
+    "description": "This creature is skilled in musical performance and the power of sound. The user adds the [Sonic] trait to its @Trait[adaptable] attacks and gains access to the [Musician] Tutor List. Musical performances may provide bonuses to social interactions.",
+    "type": "automated",
+    "changes": [
+      {
+        "type": "alter-attack",
+        "key": "adaptable-trait-attack",
+        "property": "traits",
+        "mode": "2",
+        "value": "sonic"
+      }
+    ]
   },
   {
     "slug": "natural-backpack",
