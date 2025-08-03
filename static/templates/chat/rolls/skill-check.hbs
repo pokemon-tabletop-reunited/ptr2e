@@ -1,8 +1,8 @@
 <section class="skill-roll {{#if (gt degreeOfSuccess 0)}}success{{else}}failure{{/if}}">
+    {{{inner}}}
     <header class="breakdown">
         {{{breakdown}}}
     </header>
-    {{{inner}}}
     <footer>
         {{#if (gt degreeOfSuccess 0)}}
             <p class="dos success">{{abs degreeOfSuccess}} Degrees of Success</p>

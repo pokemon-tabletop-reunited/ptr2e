@@ -21,7 +21,10 @@
           "firefly",
           "psychoportation",
           "stat-iv-booster-1-1",
-          "telekinetic-potential"
+          "telekinetic-potential",
+          "elemental-study",
+          "minor-buff-45",
+          "manifest-psionic-power"
         ],
         "config": {
           "alpha": null,
@@ -40,16 +43,23 @@
       }
     ],
     "autoUnlock": [],
-    "originSlug": null,
-    "variant": null,
-    "mode": null,
     "global": true,
     "webs": [],
     "design": {
       "arena": "physical",
       "approach": "power",
-      "archetype": ""
-    }
+      "archetype": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "originSlug": null,
+    "variant": null,
+    "mode": null
   },
   "img": "systems/ptr2e/img/svg/psychic_icon.svg",
   "effects": [
@@ -69,7 +79,9 @@
             "affects": "target",
             "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "alterations": [],
+            "dontMerge": false
           }
         ],
         "slug": null,
@@ -98,12 +110,13 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.342",
         "systemId": "ptr2e",
         "systemVersion": "0.10.0-alpha.3.0.0",
         "createdTime": null,
         "modifiedTime": null,
-        "lastModifiedBy": null
+        "lastModifiedBy": null,
+        "exportSource": null
       }
     }
   ],

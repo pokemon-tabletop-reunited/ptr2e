@@ -20,7 +20,11 @@
           "watt-burn",
           "jammer",
           "root-5",
-          "stat-iv-booster-1-6"
+          "stat-iv-booster-1-6",
+          "minor-buff-50",
+          "zapper",
+          "kinetic-dynamo",
+          "left-handedness"
         ],
         "config": {
           "alpha": null,
@@ -47,7 +51,14 @@
     "design": {
       "arena": "physical",
       "approach": "power",
-      "archetype": ""
+      "archetype": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
     }
   },
   "img": "systems/ptr2e/img/svg/electric_icon.svg",
@@ -68,7 +79,9 @@
             "affects": "target",
             "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "alterations": [],
+            "dontMerge": false
           }
         ],
         "slug": null,
@@ -97,12 +110,13 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.342",
         "systemId": "ptr2e",
         "systemVersion": "0.10.0-alpha.3.0.0",
         "createdTime": null,
         "modifiedTime": null,
-        "lastModifiedBy": null
+        "lastModifiedBy": null,
+        "exportSource": null
       }
     }
   ],

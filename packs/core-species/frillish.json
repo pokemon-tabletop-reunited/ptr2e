@@ -13,30 +13,26 @@
     "diet": [
       "herbivore"
     ],
-    "movement": {
-      "primary": [
-        {
-          "type": "swim",
-          "value": 4
-        }
-      ],
-      "secondary": [
-        {
-          "type": "overland",
-          "value": 2
-        }
-      ]
-    },
+    "movement": [
+      {
+        "type": "swim",
+        "value": 6
+      },
+      {
+        "type": "overland",
+        "value": 3
+      }
+    ],
     "traits": [
       "pokemon",
-      "underdog",
       "darkvision-15",
       "silent",
       "amorphous",
       "wavesense-15",
       "lifesense-15",
       "gilled",
-      "venomous"
+      "venomous",
+      "jump-2"
     ],
     "abilities": {
       "starting": [
@@ -98,6 +94,14 @@
         "group": null
       },
       {
+        "slug": "ghost",
+        "value": 20,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
         "slug": "intimidate",
         "value": 15,
         "rvs": 0,
@@ -136,14 +140,6 @@
         "favourite": false,
         "hidden": false,
         "group": null
-      },
-      {
-        "slug": "ghost",
-        "value": 20,
-        "rvs": 0,
-        "favourite": false,
-        "hidden": false,
-        "group": "occult"
       },
       {
         "slug": "psychology",
@@ -196,111 +192,127 @@
       "spe": 40
     },
     "types": [
-      "water",
-      "ghost"
+      "ghost",
+      "water"
     ],
     "moves": {
       "levelUp": [
         {
-          "name": "water-gun",
-          "level": 1,
-          "gen": "sword-shield"
-        },
-        {
           "name": "absorb",
-          "level": 1,
-          "gen": "sword-shield"
+          "gen": "sword-shield",
+          "level": 1
         },
         {
           "name": "bubble",
-          "level": 1,
-          "gen": "ultra-sun-ultra-moon"
+          "gen": "ultra-sun-ultra-moon",
+          "level": 1
+        },
+        {
+          "name": "water-gun",
+          "gen": "sword-shield",
+          "level": 1
         },
         {
           "name": "water-sport",
-          "level": 1,
-          "gen": "ultra-sun-ultra-moon"
+          "gen": "ultra-sun-ultra-moon",
+          "level": 1
         },
         {
           "name": "poison-sting",
-          "level": 4,
-          "gen": "sword-shield"
+          "gen": "sword-shield",
+          "level": 4
         },
         {
           "name": "night-shade",
-          "level": 8,
-          "gen": "sword-shield"
+          "gen": "sword-shield",
+          "level": 8
         },
         {
           "name": "water-pulse",
-          "level": 12,
-          "gen": "sword-shield"
+          "gen": "sword-shield",
+          "level": 12
         },
         {
           "name": "bubble-beam",
-          "level": 13,
-          "gen": "ultra-sun-ultra-moon"
+          "gen": "ultra-sun-ultra-moon",
+          "level": 13
         },
         {
           "name": "rain-dance",
-          "level": 16,
-          "gen": "sword-shield"
+          "gen": "sword-shield",
+          "level": 16
         },
         {
           "name": "hex",
-          "level": 20,
-          "gen": "sword-shield"
+          "gen": "sword-shield",
+          "level": 20
         },
         {
           "name": "brine",
-          "level": 24,
-          "gen": "sword-shield"
+          "gen": "sword-shield",
+          "level": 24
         },
         {
           "name": "ominous-wind",
-          "level": 27,
-          "gen": "ultra-sun-ultra-moon"
+          "gen": "ultra-sun-ultra-moon",
+          "level": 27
         },
         {
           "name": "recover",
-          "level": 28,
-          "gen": "sword-shield"
+          "gen": "sword-shield",
+          "level": 28
         },
         {
           "name": "shadow-ball",
-          "level": 32,
-          "gen": "sword-shield"
+          "gen": "sword-shield",
+          "level": 32
         },
         {
           "name": "whirlpool",
-          "level": 36,
-          "gen": "sword-shield"
+          "gen": "sword-shield",
+          "level": 36
         },
         {
           "name": "hydro-pump",
-          "level": 41,
-          "gen": "sword-shield"
+          "gen": "sword-shield",
+          "level": 41
         },
         {
           "name": "destiny-bond",
-          "level": 44,
-          "gen": "sword-shield"
+          "gen": "sword-shield",
+          "level": 44
         },
         {
           "name": "water-spout",
-          "level": 48,
-          "gen": "sword-shield"
+          "gen": "sword-shield",
+          "level": 48
         },
         {
           "name": "wring-out",
-          "level": 55,
-          "gen": "ultra-sun-ultra-moon"
+          "gen": "ultra-sun-ultra-moon",
+          "level": 55
         }
       ],
       "tutor": [
         {
-          "name": "mist",
+          "name": "acid-armor",
           "gen": "sword-shield"
+        },
+        {
+          "name": "attract",
+          "gen": "sword-shield"
+        },
+        {
+          "name": "bind",
+          "gen": "ultra-sun-ultra-moon"
+        },
+        {
+          "name": "blizzard",
+          "gen": "sword-shield"
+        },
+        {
+          "name": "confide",
+          "gen": "ultra-sun-ultra-moon"
         },
         {
           "name": "confuse-ray",
@@ -311,7 +323,75 @@
           "gen": "ultra-sun-ultra-moon"
         },
         {
-          "name": "acid-armor",
+          "name": "dark-pulse",
+          "gen": "black-2-white-2"
+        },
+        {
+          "name": "dazzling-gleam",
+          "gen": "sword-shield"
+        },
+        {
+          "name": "dive",
+          "gen": "sword-shield"
+        },
+        {
+          "name": "double-team",
+          "gen": "ultra-sun-ultra-moon"
+        },
+        {
+          "name": "dream-eater",
+          "gen": "ultra-sun-ultra-moon"
+        },
+        {
+          "name": "endure",
+          "gen": "sword-shield"
+        },
+        {
+          "name": "energy-ball",
+          "gen": "sword-shield"
+        },
+        {
+          "name": "facade",
+          "gen": "sword-shield"
+        },
+        {
+          "name": "flash",
+          "gen": "omega-ruby-alpha-sapphire"
+        },
+        {
+          "name": "frustration",
+          "gen": "ultra-sun-ultra-moon"
+        },
+        {
+          "name": "giga-drain",
+          "gen": "ultra-sun-ultra-moon"
+        },
+        {
+          "name": "hail",
+          "gen": "sword-shield"
+        },
+        {
+          "name": "hidden-power",
+          "gen": "ultra-sun-ultra-moon"
+        },
+        {
+          "name": "ice-beam",
+          "gen": "sword-shield"
+        },
+        {
+          "name": "icy-wind",
+          "gen": "ultra-sun-ultra-moon"
+        },
+        {
+          "name": "imprison",
+          "gen": "sword-shield"
+        },
+        {
+          "name": "magic-coat",
+          "gen": "ultra-sun-ultra-moon"
+        },
+        {
+          "name": "mist",
           "gen": "sword-shield"
         },
         {
@@ -319,12 +399,60 @@
           "gen": "sword-shield"
         },
         {
-          "name": "strength-sap",
+          "name": "poltergeist",
           "gen": "sword-shield"
         },
         {
-          "name": "bind",
+          "name": "protect",
+          "gen": "sword-shield"
+        },
+        {
+          "name": "psych-up",
           "gen": "ultra-sun-ultra-moon"
+        },
+        {
+          "name": "psychic",
+          "gen": "sword-shield"
+        },
+        {
+          "name": "rest",
+          "gen": "sword-shield"
+        },
+        {
+          "name": "return",
+          "gen": "ultra-sun-ultra-moon"
+        },
+        {
+          "name": "round",
+          "gen": "sword-shield"
+        },
+        {
+          "name": "safeguard",
+          "gen": "sword-shield"
+        },
+        {
+          "name": "scald",
+          "gen": "sword-shield"
+        },
+        {
+          "name": "secret-power",
+          "gen": "omega-ruby-alpha-sapphire"
+        },
+        {
+          "name": "shock-wave",
+          "gen": "ultra-sun-ultra-moon"
+        },
+        {
+          "name": "sleep-talk",
+          "gen": "black-2-white-2"
+        },
+        {
+          "name": "sludge-bomb",
+          "gen": "sword-shield"
+        },
+        {
+          "name": "sludge-wave",
+          "gen": "sword-shield"
         },
         {
           "name": "snore",
@@ -335,75 +463,7 @@
           "gen": "ultra-sun-ultra-moon"
         },
         {
-          "name": "icy-wind",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "giga-drain",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "sleep-talk",
-          "gen": "black-2-white-2"
-        },
-        {
-          "name": "trick",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "magic-coat",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "shock-wave",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "dark-pulse",
-          "gen": "black-2-white-2"
-        },
-        {
-          "name": "poltergeist",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "surf",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "ice-beam",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "blizzard",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "toxic",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "psychic",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "double-team",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "waterfall",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "dream-eater",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "flash",
-          "gen": "omega-ruby-alpha-sapphire"
-        },
-        {
-          "name": "rest",
+          "name": "strength-sap",
           "gen": "sword-shield"
         },
         {
@@ -411,15 +471,7 @@
           "gen": "sword-shield"
         },
         {
-          "name": "protect",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "sludge-bomb",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "endure",
+          "name": "surf",
           "gen": "sword-shield"
         },
         {
@@ -427,83 +479,27 @@
           "gen": "ultra-sun-ultra-moon"
         },
         {
-          "name": "attract",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "return",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "frustration",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "safeguard",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "hidden-power",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "psych-up",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "hail",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "will-o-wisp",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "facade",
-          "gen": "sword-shield"
-        },
-        {
           "name": "taunt",
           "gen": "sword-shield"
         },
         {
-          "name": "imprison",
-          "gen": "sword-shield"
+          "name": "toxic",
+          "gen": "ultra-sun-ultra-moon"
         },
         {
-          "name": "secret-power",
-          "gen": "omega-ruby-alpha-sapphire"
-        },
-        {
-          "name": "dive",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "energy-ball",
-          "gen": "sword-shield"
+          "name": "trick",
+          "gen": "ultra-sun-ultra-moon"
         },
         {
           "name": "trick-room",
           "gen": "sword-shield"
         },
         {
-          "name": "sludge-wave",
+          "name": "waterfall",
           "gen": "sword-shield"
         },
         {
-          "name": "round",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "scald",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "confide",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "dazzling-gleam",
+          "name": "will-o-wisp",
           "gen": "sword-shield"
         }
       ]
@@ -539,13 +535,32 @@
             "item": null,
             "level": null,
             "knownMove": null
+          },
+          "perk": {
+            "x": 26,
+            "y": 26
           }
         }
       ],
-      "uuid": "Compendium.ptr2e.core-species.Item.TFdYvRVrA5YOUdb7"
+      "uuid": "Compendium.ptr2e.core-species.Item.TFdYvRVrA5YOUdb7",
+      "methods": [],
+      "perk": {
+        "x": 26,
+        "y": 26
+      }
+    },
+    "publication": {
+      "source": "PTR 2e Core - Unova Dex",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": "undefined"
+    },
+    "_migration": {
+      "version": null,
+      "previous": null
     }
   },
   "_id": "TFdYvRVrA5YOUdb7",
-  "effects": [],
-  "folder": null
+  "effects": []
 }

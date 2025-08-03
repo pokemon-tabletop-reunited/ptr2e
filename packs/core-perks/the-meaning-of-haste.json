@@ -14,7 +14,8 @@
         "type": "attack",
         "range": {
           "target": "field",
-          "unit": "m"
+          "unit": "m",
+          "distance": 0
         },
         "cost": {
           "activation": "complex",
@@ -25,7 +26,18 @@
           "untyped"
         ],
         "category": "status",
-        "predicate": []
+        "predicate": [],
+        "free": true,
+        "variant": null,
+        "ephemeralVariant": false,
+        "contestType": "",
+        "contestEffect": "",
+        "slot": null,
+        "summon": null,
+        "defaultVariant": null,
+        "flingItemId": "",
+        "offensiveStat": null,
+        "defensiveStat": null
       }
     ],
     "slug": "the-meaning-of-haste",
@@ -48,7 +60,8 @@
       {
         "connected": [
           "cheerleader",
-          "im-with-you"
+          "im-with-you",
+          "rapid-fire-commands"
         ],
         "config": {
           "alpha": null,
@@ -72,8 +85,18 @@
     "design": {
       "arena": "social",
       "approach": "power",
-      "archetype": "Tactician"
-    }
+      "archetype": "tactician"
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "originSlug": null,
+    "variant": null,
+    "mode": null
   },
   "effects": [
     {
@@ -92,7 +115,9 @@
             "affects": "target",
             "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "alterations": [],
+            "dontMerge": false
           }
         ],
         "slug": null,
@@ -121,12 +146,13 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.342",
         "systemId": "ptr2e",
         "systemVersion": "0.10.0-alpha.5.1.2",
         "createdTime": 1736877838885,
         "modifiedTime": 1736877883752,
-        "lastModifiedBy": "IcBpMqhFuTck9VpX"
+        "lastModifiedBy": "IcBpMqhFuTck9VpX",
+        "exportSource": null
       }
     }
   ]

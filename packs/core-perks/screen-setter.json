@@ -22,8 +22,11 @@
         "img": "icons/svg/explosion.svg",
         "range": {
           "target": "enemy",
-          "unit": "m"
-        }
+          "unit": "m",
+          "distance": 0
+        },
+        "variant": null,
+        "ephemeralVariant": false
       }
     ],
     "slug": "screen-setter",
@@ -34,6 +37,10 @@
     },
     "nodes": [
       {
+        "x": 142,
+        "y": 113,
+        "hidden": false,
+        "type": "normal",
         "connected": [
           "telekinetic-potential",
           "psychoportation",
@@ -42,21 +49,22 @@
           "improved-overland-3",
           "improved-teleportation",
           "rigorous-fundamentals-3",
-          "new-foundations-1"
+          "hasten-conjuration",
+          "minor-buff",
+          "minor-buff-4",
+          "minor-buff-6",
+          "minor-buff-39",
+          "unown-song-sanctuary-ward"
         ],
         "config": {
+          "texture": "systems/ptr2e/img/perk-icons/Occultism.svg",
           "alpha": null,
           "backgroundColor": null,
-          "borderColor": "#808080",
+          "borderColor": null,
           "borderWidth": null,
-          "texture": "systems/ptr2e/img/perk-icons/Occultism.svg",
-          "tint": "#ffffff",
+          "tint": null,
           "scale": null
         },
-        "hidden": false,
-        "type": "normal",
-        "x": 142,
-        "y": 113,
         "tier": null
       }
     ],
@@ -66,8 +74,18 @@
     "design": {
       "arena": "mental",
       "approach": "resilience",
-      "archetype": "Support"
-    }
+      "archetype": "support"
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": "undefined"
+    },
+    "originSlug": null,
+    "variant": null,
+    "mode": null
   },
   "_id": "cnTPWqYXmGaFZfBd",
   "img": "systems/ptr2e/img/perk-icons/Occultism.svg",
@@ -131,12 +149,13 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.342",
         "systemId": "ptr2e",
         "systemVersion": "0.10.0-alpha.5.1.5",
         "createdTime": 1737391538266,
         "modifiedTime": 1737391569234,
-        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+        "lastModifiedBy": "mK35yvCqCgiTUvKf",
+        "exportSource": null
       }
     }
   ],

@@ -3,7 +3,7 @@
   "img": "systems/ptr2e/img/item-icons/maranga berry.webp",
   "type": "consumable",
   "system": {
-    "cost": 6,
+    "cost": 4,
     "crafting": {
       "skill": null,
       "spans": null,
@@ -14,11 +14,12 @@
       "carryType": "stowed",
       "handsHeld": null
     },
-    "grade": "A",
+    "grade": "B",
     "fling": {
       "type": "untyped",
       "power": 10,
-      "accuracy": 95
+      "accuracy": 95,
+      "hide": null
     },
     "rarity": "uncommon",
     "consumableType": "food",
@@ -30,38 +31,29 @@
       "berry",
       "fling",
       "held",
-      "stash",
       "spicy-1",
       "dry-1",
       "sweet-5",
       "bitter-5",
-      "sour-1"
+      "sour-1",
+      "combat"
     ],
-    "description": "The user gains +2 SPDEF Stages for 5 activations, consuming the item as a Free Action.",
+    "description": "Effect: When the user is damaged by a Special-Category attack, this item can be retrieved from the Belt and consumed as a Free Action at @Trait[interrupt-2], giving the user +2 SPDEF Stages for 5 Activations.",
     "quantity": 1,
-    "container": null,
-    "slug": null,
-    "modifier": null,
-    "stack": 1
+    "slug": "maranga-berry",
+    "stack": 1,
+    "_migration": {
+      "version": null,
+      "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ]
+    }
   },
   "_id": "2bEeZsyg1BAGfth1",
   "effects": [],
-  "folder": "V4skAU6G3OH5fXab",
-  "sort": 0,
-  "ownership": {
-    "default": 0,
-    "tXAZ3QUgjuwX4gdV": 3
-  },
-  "flags": {},
-  "_stats": {
-    "compendiumSource": null,
-    "duplicateSource": null,
-    "coreVersion": "12.327",
-    "systemId": "ptr2e",
-    "systemVersion": "0.0.0-alpha.1.0",
-    "createdTime": 1717878484297,
-    "modifiedTime": 1717878484297,
-    "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
-  },
-  "_key": "!items!2bEeZsyg1BAGfth1"
+  "folder": "yR1GFstYOCdI2jOz"
 }

@@ -11,9 +11,7 @@
         "slug": "cocoon",
         "type": "attack",
         "img": "icons/svg/explosion.svg",
-        "traits": [
-          "pp-updated"
-        ],
+        "traits": [],
         "range": {
           "target": "self",
           "distance": 0,
@@ -34,11 +32,17 @@
         "contestEffect": "",
         "free": false,
         "slot": null,
-        "description": "<p>The user is @Affliction[bound] 5 and @Affliction[braced] 5. While afflicted with these conditions, the user heals two Ticks of HP at the end of each of their Activations. The user may otherwise remove this @Affliction[bound] Condition with a Complex Action.</p>"
+        "description": "<p>The user is @Affliction[bound 5] and @Affliction[braced 5]. While afflicted with both of these Afflictions, the user gains @Tick[3] and @Tick[1 pp] at the end of each of their Activations. If either @Affliction[bound] or @Affliction[braced] is removed, the user loses the other.</p>"
       }
     ],
     "container": null,
-    "grade": "B"
+    "grade": "B",
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ]
+    }
   },
   "effects": [],
   "sort": 11700000,

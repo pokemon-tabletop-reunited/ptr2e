@@ -9,7 +9,7 @@ export default class TokenAlterationsChangeSystem extends ChangeModel {
     const fields = foundry.data.fields;
     return {
       ...super.defineSchema(),
-      texture: new fields.FilePathField({ required: true, categories: ["IMAGE", "VIDEO"], initial: null }),
+      texture: new fields.StringField({ required: true, initial: null }),
       tint: new fields.ColorField({ required: true, nullable: true, initial: null }),
       scale: new fields.NumberField({ required: true, nullable: true, initial: null }),
       name: new fields.StringField({ required: true, nullable: true, initial: null }),

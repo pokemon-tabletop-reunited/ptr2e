@@ -9,8 +9,10 @@
       {
         "name": "Suspicious Minds",
         "slug": "suspicious-minds",
-        "description": "Effect: An additonal Stack is removed from the Affliction as if the creature ended their Activation again, proviking all of the pertinent end-of-Activation effects. This may be triggered a number of times on a creature per Affliction they possess, spending PP for each one.",
-        "traits": [],
+        "description": "<p>Trigger: A creature in range suffers damage or an effect from the End of Activation effect of a [DoT] Affliction.<br><br>Effect: For each End of Activation effect Affliction that was triggered on the target, the target loses @Tick[-1]. The affected creature is protected from further instances of this perk until their next activation commences.</p>",
+        "traits": [
+          "interrupt-3"
+        ],
         "type": "generic",
         "range": {
           "target": "creature",
@@ -19,23 +21,42 @@
         },
         "cost": {
           "activation": "free",
-          "powerPoints": 2,
+          "powerPoints": 3,
           "trigger": "A creature in range suffers effect damage from an Affliction due to a Stack being removed.",
           "delay": null,
           "priority": null
         },
-        "img": "icons/svg/explosion.svg",
-        "variant": null
+        "img": "systems/ptr2e/img/perk-icons/Occultism.svg",
+        "variant": null,
+        "ephemeralVariant": false
       }
     ],
     "slug": "suspicious-minds",
-    "description": "<p>Trigger: A creature in range suffers effect damage from an Affliction due to a Stack being removed. <br><br>Effect: An additonal Stack is removed from the Affliction as if the creature ended their Activation again, proviking all of the pertinent end-of-Activation effects. This may be triggered a number of times on a creature per Affliction they possess, spending PP for each one.</p>",
-    "traits": [],
+    "description": "<p>Trigger: A creature in range suffers damage or an effect from the End of Activation effect of a [DoT] Affliction.<br><br>Effect: For each End of Activation effect Affliction that was triggered on the target, the target loses @Tick[-1]. The affected creature is protected from further instances of this perk until their next activation commences.</p>",
+    "traits": [
+      "interrupt-3"
+    ],
     "prerequisites": [
       {
-        "gte": [
-          "{actor|skills.fast-talk.mod}",
-          40
+        "or": [
+          {
+            "gte": [
+              "{actor|skills.fast-talk.mod}",
+              40
+            ]
+          },
+          {
+            "gte": [
+              "{actor|skills.thaumaturgy.mod}",
+              40
+            ]
+          },
+          {
+            "gte": [
+              "{actor|skills.sleight-of-hand.mod}",
+              40
+            ]
+          }
         ]
       }
     ],
@@ -46,6 +67,10 @@
     },
     "nodes": [
       {
+        "x": 154,
+        "y": 69,
+        "hidden": false,
+        "type": "normal",
         "connected": [
           "hexcraft",
           "potent-afflictions",
@@ -54,18 +79,11 @@
           "insidious-wounds"
         ],
         "config": {
-          "alpha": null,
-          "backgroundColor": "#8000ff",
-          "borderColor": null,
-          "borderWidth": null,
           "texture": "systems/ptr2e/img/perk-icons/Occultism.svg",
-          "tint": null,
-          "scale": 1
+          "backgroundColor": null,
+          "borderColor": null,
+          "tint": null
         },
-        "hidden": false,
-        "type": "normal",
-        "x": 154,
-        "y": 69,
         "tier": null
       }
     ],
@@ -78,7 +96,14 @@
     "design": {
       "arena": "social",
       "approach": "finesse",
-      "archetype": "Affliction"
+      "archetype": "affliction"
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
     }
   },
   "effects": []

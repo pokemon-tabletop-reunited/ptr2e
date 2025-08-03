@@ -11,17 +11,16 @@
         "type": "attack",
         "traits": [
           "earthbound",
-          "10-strike",
-          "pp-updated"
+          "10-strike"
         ],
         "range": {
           "target": "emanation",
-          "distance": 5,
+          "distance": 4,
           "unit": "m"
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 10
+          "powerPoints": 8
         },
         "category": "physical",
         "power": 15,
@@ -29,7 +28,8 @@
         "types": [
           "ground"
         ],
-        "description": ""
+        "img": "systems/ptr2e/img/svg/ground_icon.svg",
+        "predicate": []
       },
       {
         "slug": "magnitude-burrowing",
@@ -37,17 +37,16 @@
         "type": "attack",
         "traits": [
           "earthbound",
-          "10-strike",
-          "pp-updated"
+          "10-strike"
         ],
         "range": {
           "target": "emanation",
-          "distance": 5,
+          "distance": 4,
           "unit": "m"
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 10,
+          "powerPoints": 8,
           "trigger": "<p>Valid target(s) is Burrowing.</p>"
         },
         "category": "physical",
@@ -56,11 +55,24 @@
         "types": [
           "ground"
         ],
-        "description": "<p>Trigger: Valid target(s) is Burrowing.</p><p>Effect: This attack ignores the target's EVA Stage increases.</p>"
+        "description": "<p>Trigger: Valid target(s) is Burrowing.</p><p>Effect: This attack ignores the target's EVA Stage increases.</p>",
+        "img": "systems/ptr2e/img/svg/ground_icon.svg",
+        "predicate": []
       }
     ],
-    "container": null,
-    "grade": "A"
+    "grade": "A",
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": "<p>Effect: This attack's Power is doubled against Burrowing targets.</p>"
+    },
+    "traits": [],
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
   },
   "_id": "BkXS5Jy1yg8SpU05",
   "effects": []

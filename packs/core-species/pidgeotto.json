@@ -6,32 +6,29 @@
     "number": 17,
     "size": {
       "category": "small",
-      "type": "height",
+      "type": "quad",
       "height": 1.1,
       "weight": 30
     },
     "diet": [
       "omnivore"
     ],
-    "movement": {
-      "primary": [
-        {
-          "type": "flight",
-          "value": 11
-        }
-      ],
-      "secondary": [
-        {
-          "type": "overland",
-          "value": 4
-        }
-      ]
-    },
+    "movement": [
+      {
+        "type": "flight",
+        "value": 11
+      },
+      {
+        "type": "overland",
+        "value": 4
+      }
+    ],
     "traits": [
       "pokemon",
       "winged",
-      "underdog",
-      "direction-sense"
+      "direction-sense",
+      "jump-4",
+      "guster"
     ],
     "abilities": {
       "starting": [
@@ -39,23 +36,23 @@
           "slug": "keen-eye"
         },
         {
-          "slug": "big-pecks"
+          "slug": "tangled-feet"
         }
       ],
       "basic": [
         {
-          "slug": "tangled-feet"
+          "slug": "flock"
         },
         {
-          "slug": "flock"
+          "slug": "big-pecks"
         }
       ],
       "advanced": [
         {
-          "slug": "gale-wings"
+          "slug": "early-bird"
         },
         {
-          "slug": "early-bird"
+          "slug": "windvane"
         }
       ],
       "master": [
@@ -70,7 +67,7 @@
     "skills": [
       {
         "slug": "acrobatics",
-        "value": 50,
+        "value": 40,
         "rvs": 0,
         "favourite": false,
         "hidden": false,
@@ -459,6 +456,10 @@
                 "item": null,
                 "level": null,
                 "knownMove": null
+              },
+              "perk": {
+                "x": 26,
+                "y": 26
               }
             }
           ],
@@ -467,11 +468,19 @@
             "item": null,
             "level": null,
             "knownMove": null
+          },
+          "perk": {
+            "x": 26,
+            "y": 26
           }
         }
       ],
       "uuid": "Compendium.ptr2e.core-species.Item.4SfdmzV3FAUxlffS",
-      "methods": []
+      "methods": [],
+      "perk": {
+        "x": 26,
+        "y": 26
+      }
     },
     "habitats": [
       "forest",
@@ -482,6 +491,13 @@
     "_migration": {
       "version": null,
       "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core - Kanto Dex",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
     }
   },
   "_id": "PHlbmAo6Yy55QOwd",

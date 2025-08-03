@@ -13,20 +13,16 @@
     "diet": [
       "terravore"
     ],
-    "movement": {
-      "primary": [
-        {
-          "type": "flight",
-          "value": 5
-        }
-      ],
-      "secondary": [
-        {
-          "type": "overland",
-          "value": 3
-        }
-      ]
-    },
+    "movement": [
+      {
+        "type": "flight",
+        "value": 8
+      },
+      {
+        "type": "overland",
+        "value": 3
+      }
+    ],
     "traits": [
       "pokemon",
       "legendary",
@@ -37,7 +33,9 @@
       "telekinetic-6",
       "royal-carbink",
       "lithic",
-      "sparkler"
+      "sparkler",
+      "fully-evolved",
+      "jump-1"
     ],
     "abilities": {
       "starting": [
@@ -47,18 +45,18 @@
       ],
       "basic": [
         {
-          "slug": "bedrock"
+          "slug": "telepathy"
         },
         {
-          "slug": "telepathy"
+          "slug": "queenly-majesty"
         }
       ],
       "advanced": [
         {
-          "slug": "mystification"
+          "slug": "regenerator"
         },
         {
-          "slug": "regenerator"
+          "slug": "magic-guard"
         }
       ],
       "master": [
@@ -88,6 +86,22 @@
         "group": null
       },
       {
+        "slug": "conversation",
+        "value": 70,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "fairy",
+        "value": 50,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
         "slug": "flying",
         "value": 50,
         "rvs": 0,
@@ -96,8 +110,8 @@
         "group": null
       },
       {
-        "slug": "conversation",
-        "value": 70,
+        "slug": "geology",
+        "value": 50,
         "rvs": 0,
         "favourite": false,
         "hidden": false,
@@ -114,6 +128,14 @@
       {
         "slug": "leadership",
         "value": 60,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "legendary",
+        "value": 25,
         "rvs": 0,
         "favourite": false,
         "hidden": false,
@@ -160,22 +182,6 @@
         "group": null
       },
       {
-        "slug": "legendary",
-        "value": 25,
-        "rvs": 0,
-        "favourite": false,
-        "hidden": false,
-        "group": "occult"
-      },
-      {
-        "slug": "geology",
-        "value": 50,
-        "rvs": 0,
-        "favourite": false,
-        "hidden": false,
-        "group": "science"
-      },
-      {
         "slug": "spot",
         "value": 60,
         "rvs": 0,
@@ -198,6 +204,14 @@
         "favourite": false,
         "hidden": false,
         "group": null
+      },
+      {
+        "slug": "thaumaturgy",
+        "value": 40,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
       }
     ],
     "slug": "diancie",
@@ -216,110 +230,222 @@
     "moves": {
       "levelUp": [
         {
-          "name": "tackle",
-          "level": 1,
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "rock-throw",
-          "level": 1,
-          "gen": "ultra-sun-ultra-moon"
+          "name": "diamond-storm",
+          "gen": "scarlet-violet",
+          "level": 1
         },
         {
           "name": "harden",
-          "level": 1,
-          "gen": "scarlet-violet"
+          "gen": "scarlet-violet",
+          "level": 1
         },
         {
-          "name": "diamond-storm",
-          "level": 1,
-          "gen": "scarlet-violet"
+          "name": "rock-throw",
+          "gen": "ultra-sun-ultra-moon",
+          "level": 1
+        },
+        {
+          "name": "tackle",
+          "gen": "scarlet-violet",
+          "level": 1
         },
         {
           "name": "sharpen",
-          "level": 5,
-          "gen": "ultra-sun-ultra-moon"
+          "gen": "ultra-sun-ultra-moon",
+          "level": 5
         },
         {
           "name": "guard-split",
-          "level": 7,
-          "gen": "scarlet-violet"
+          "gen": "scarlet-violet",
+          "level": 7
         },
         {
           "name": "reflect",
-          "level": 12,
-          "gen": "ultra-sun-ultra-moon"
+          "gen": "ultra-sun-ultra-moon",
+          "level": 12
         },
         {
           "name": "smack-down",
-          "level": 14,
-          "gen": "scarlet-violet"
+          "gen": "scarlet-violet",
+          "level": 14
         },
         {
           "name": "flail",
-          "level": 21,
-          "gen": "scarlet-violet"
+          "gen": "scarlet-violet",
+          "level": 21
         },
         {
           "name": "ancient-power",
-          "level": 28,
-          "gen": "scarlet-violet"
+          "gen": "scarlet-violet",
+          "level": 28
         },
         {
           "name": "rock-polish",
-          "level": 35,
-          "gen": "scarlet-violet"
+          "gen": "scarlet-violet",
+          "level": 35
         },
         {
           "name": "light-screen",
-          "level": 42,
-          "gen": "scarlet-violet"
+          "gen": "scarlet-violet",
+          "level": 42
         },
         {
           "name": "trick-room",
-          "level": 46,
-          "gen": "ultra-sun-ultra-moon"
+          "gen": "ultra-sun-ultra-moon",
+          "level": 46
         },
         {
           "name": "rock-slide",
-          "level": 49,
-          "gen": "scarlet-violet"
+          "gen": "scarlet-violet",
+          "level": 49
         },
         {
           "name": "skill-swap",
-          "level": 56,
-          "gen": "scarlet-violet"
+          "gen": "scarlet-violet",
+          "level": 56
         },
         {
           "name": "power-gem",
-          "level": 63,
-          "gen": "scarlet-violet"
+          "gen": "scarlet-violet",
+          "level": 63
         },
         {
           "name": "safeguard",
-          "level": 70,
-          "gen": "ultra-sun-ultra-moon"
+          "gen": "ultra-sun-ultra-moon",
+          "level": 70
         },
         {
           "name": "stealth-rock",
-          "level": 70,
-          "gen": "scarlet-violet"
+          "gen": "scarlet-violet",
+          "level": 70
         },
         {
           "name": "moonblast",
-          "level": 77,
-          "gen": "scarlet-violet"
+          "gen": "scarlet-violet",
+          "level": 77
         },
         {
           "name": "stone-edge",
-          "level": 84,
-          "gen": "scarlet-violet"
+          "gen": "scarlet-violet",
+          "level": 84
         }
       ],
       "tutor": [
         {
-          "name": "snore",
+          "name": "after-you",
           "gen": "ultra-sun-ultra-moon"
+        },
+        {
+          "name": "ally-switch",
+          "gen": "sword-shield"
+        },
+        {
+          "name": "amnesia",
+          "gen": "scarlet-violet"
+        },
+        {
+          "name": "baton-pass",
+          "gen": "scarlet-violet"
+        },
+        {
+          "name": "body-press",
+          "gen": "scarlet-violet"
+        },
+        {
+          "name": "body-slam",
+          "gen": "scarlet-violet"
+        },
+        {
+          "name": "bulldoze",
+          "gen": "scarlet-violet"
+        },
+        {
+          "name": "calm-mind",
+          "gen": "scarlet-violet"
+        },
+        {
+          "name": "charm",
+          "gen": "scarlet-violet"
+        },
+        {
+          "name": "confide",
+          "gen": "ultra-sun-ultra-moon"
+        },
+        {
+          "name": "covet",
+          "gen": "ultra-sun-ultra-moon"
+        },
+        {
+          "name": "dazzling-gleam",
+          "gen": "scarlet-violet"
+        },
+        {
+          "name": "double-team",
+          "gen": "ultra-sun-ultra-moon"
+        },
+        {
+          "name": "draining-kiss",
+          "gen": "scarlet-violet"
+        },
+        {
+          "name": "earth-power",
+          "gen": "ultra-sun-ultra-moon"
+        },
+        {
+          "name": "encore",
+          "gen": "scarlet-violet"
+        },
+        {
+          "name": "endeavor",
+          "gen": "ultra-sun-ultra-moon"
+        },
+        {
+          "name": "endure",
+          "gen": "scarlet-violet"
+        },
+        {
+          "name": "explosion",
+          "gen": "ultra-sun-ultra-moon"
+        },
+        {
+          "name": "facade",
+          "gen": "scarlet-violet"
+        },
+        {
+          "name": "fake-tears",
+          "gen": "scarlet-violet"
+        },
+        {
+          "name": "flash",
+          "gen": "omega-ruby-alpha-sapphire"
+        },
+        {
+          "name": "flash-cannon",
+          "gen": "scarlet-violet"
+        },
+        {
+          "name": "frustration",
+          "gen": "ultra-sun-ultra-moon"
+        },
+        {
+          "name": "giga-impact",
+          "gen": "scarlet-violet"
+        },
+        {
+          "name": "gravity",
+          "gen": "ultra-sun-ultra-moon"
+        },
+        {
+          "name": "guard-swap",
+          "gen": "sword-shield"
+        },
+        {
+          "name": "gyro-ball",
+          "gen": "scarlet-violet"
+        },
+        {
+          "name": "hail",
+          "gen": "sword-shield"
         },
         {
           "name": "heal-bell",
@@ -330,19 +456,15 @@
           "gen": "ultra-sun-ultra-moon"
         },
         {
-          "name": "endeavor",
+          "name": "hidden-power",
           "gen": "ultra-sun-ultra-moon"
+        },
+        {
+          "name": "hyper-beam",
+          "gen": "scarlet-violet"
         },
         {
           "name": "iron-defense",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "covet",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "gravity",
           "gen": "ultra-sun-ultra-moon"
         },
         {
@@ -354,83 +476,27 @@
           "gen": "ultra-sun-ultra-moon"
         },
         {
-          "name": "earth-power",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "wonder-room",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "telekinesis",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "after-you",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
           "name": "meteor-beam",
           "gen": "sword-shield"
-        },
-        {
-          "name": "misty-explosion",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "terrain-pulse",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "body-slam",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "take-down",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "hyper-beam",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "toxic",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "psychic",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "double-team",
-          "gen": "ultra-sun-ultra-moon"
         },
         {
           "name": "metronome",
           "gen": "scarlet-violet"
         },
         {
-          "name": "swift",
-          "gen": "scarlet-violet"
+          "name": "misty-explosion",
+          "gen": "sword-shield"
         },
         {
-          "name": "amnesia",
-          "gen": "scarlet-violet"
+          "name": "mystical-fire",
+          "gen": "sword-shield"
         },
         {
-          "name": "flash",
-          "gen": "omega-ruby-alpha-sapphire"
-        },
-        {
-          "name": "explosion",
+          "name": "nature-power",
           "gen": "ultra-sun-ultra-moon"
         },
         {
-          "name": "rest",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "substitute",
+          "name": "play-rough",
           "gen": "scarlet-violet"
         },
         {
@@ -438,107 +504,11 @@
           "gen": "scarlet-violet"
         },
         {
-          "name": "spikes",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "sandstorm",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "endure",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "charm",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "swagger",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "sleep-talk",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "return",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "frustration",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "baton-pass",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "encore",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "hidden-power",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "rain-dance",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "sunny-day",
-          "gen": "scarlet-violet"
-        },
-        {
           "name": "psych-up",
           "gen": "scarlet-violet"
         },
         {
-          "name": "hail",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "facade",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "nature-power",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "secret-power",
-          "gen": "omega-ruby-alpha-sapphire"
-        },
-        {
-          "name": "fake-tears",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "rock-tomb",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "sand-tomb",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "calm-mind",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "gyro-ball",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "guard-swap",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "giga-impact",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "flash-cannon",
+          "name": "psychic",
           "gen": "scarlet-violet"
         },
         {
@@ -546,43 +516,31 @@
           "gen": "scarlet-violet"
         },
         {
+          "name": "rain-dance",
+          "gen": "scarlet-violet"
+        },
+        {
+          "name": "rest",
+          "gen": "scarlet-violet"
+        },
+        {
+          "name": "return",
+          "gen": "ultra-sun-ultra-moon"
+        },
+        {
+          "name": "rock-tomb",
+          "gen": "scarlet-violet"
+        },
+        {
           "name": "round",
           "gen": "sword-shield"
         },
         {
-          "name": "stored-power",
+          "name": "sand-tomb",
           "gen": "scarlet-violet"
         },
         {
-          "name": "ally-switch",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "bulldoze",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "draining-kiss",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "play-rough",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "confide",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "mystical-fire",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "dazzling-gleam",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "body-press",
+          "name": "sandstorm",
           "gen": "scarlet-violet"
         },
         {
@@ -590,12 +548,68 @@
           "gen": "scarlet-violet"
         },
         {
-          "name": "tera-blast",
+          "name": "secret-power",
+          "gen": "omega-ruby-alpha-sapphire"
+        },
+        {
+          "name": "sleep-talk",
           "gen": "scarlet-violet"
+        },
+        {
+          "name": "snore",
+          "gen": "ultra-sun-ultra-moon"
         },
         {
           "name": "snowscape",
           "gen": "scarlet-violet"
+        },
+        {
+          "name": "spikes",
+          "gen": "scarlet-violet"
+        },
+        {
+          "name": "stored-power",
+          "gen": "scarlet-violet"
+        },
+        {
+          "name": "substitute",
+          "gen": "scarlet-violet"
+        },
+        {
+          "name": "sunny-day",
+          "gen": "scarlet-violet"
+        },
+        {
+          "name": "swagger",
+          "gen": "ultra-sun-ultra-moon"
+        },
+        {
+          "name": "swift",
+          "gen": "scarlet-violet"
+        },
+        {
+          "name": "take-down",
+          "gen": "scarlet-violet"
+        },
+        {
+          "name": "telekinesis",
+          "gen": "ultra-sun-ultra-moon"
+        },
+        {
+          "name": "tera-blast",
+          "gen": "scarlet-violet"
+        },
+        {
+          "name": "terrain-pulse",
+          "gen": "sword-shield"
+        },
+        {
+          "name": "toxic",
+          "gen": "ultra-sun-ultra-moon"
+        },
+        {
+          "name": "wonder-room",
+          "gen": "ultra-sun-ultra-moon"
         }
       ]
     },
@@ -608,10 +622,280 @@
     "evolutions": {
       "name": "diancie",
       "details": null,
-      "evolutions": []
+      "evolutions": [],
+      "uuid": null,
+      "methods": [],
+      "perk": {
+        "x": 26,
+        "y": 26
+      }
+    },
+    "publication": {
+      "source": "PTR 2e Core - Kalos Dex",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "_migration": {
+      "version": null,
+      "previous": null
     }
   },
   "_id": "LuxIchjFRSr5lvwT",
-  "effects": [],
-  "folder": null
+  "effects": [
+    {
+      "name": "Mega Diancie",
+      "type": "form",
+      "_id": "I43OvzRqRuEK79nM",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-option",
+            "key": "manual-forme-toggle",
+            "value": "forme:mega-diancie:active",
+            "domain": "all",
+            "toggleable": true,
+            "label": "Toggle: Mega Diancie Forme",
+            "predicate": [],
+            "alwaysActive": false,
+            "count": false,
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "suboptions": [],
+            "state": false
+          },
+          {
+            "type": "stats-alteration",
+            "predicate": [
+              "forme:mega-diancie:active"
+            ],
+            "key": "",
+            "value": 0,
+            "hp": null,
+            "atk": 60,
+            "def": -40,
+            "spa": 60,
+            "spd": -40,
+            "spe": 60,
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "add-trait",
+            "predicate": [
+              "forme:mega-diancie:active"
+            ],
+            "key": "",
+            "value": "glow 6",
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "add-trait",
+            "predicate": [
+              "forme:mega-diancie:active"
+            ],
+            "key": "",
+            "value": "telekinetic 8",
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "remove-trait",
+            "predicate": [
+              "forme:mega-diancie:active"
+            ],
+            "key": "",
+            "value": "glow 3",
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "remove-trait",
+            "predicate": [
+              "forme:mega-diancie:active"
+            ],
+            "key": "",
+            "value": "telekinetic 6",
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-diancie:active"
+            ],
+            "key": "system.movement.flight.value",
+            "value": 9,
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-diancie:active"
+            ],
+            "key": "system.movement.overland.value",
+            "value": 3,
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-diancie:active"
+            ],
+            "key": "system.skills.acrobatics.value",
+            "value": 20,
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-diancie:active"
+            ],
+            "key": "system.skills.conversation.value",
+            "value": 15,
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-diancie:active"
+            ],
+            "key": "system.skills.flying.value",
+            "value": 15,
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-diancie:active"
+            ],
+            "key": "system.skills.intimidate.value",
+            "value": 10,
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-diancie:active"
+            ],
+            "key": "system.skills.leadership.value",
+            "value": 25,
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-diancie:active"
+            ],
+            "key": "system.skills.legendary.value",
+            "value": 25,
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-diancie:active"
+            ],
+            "key": "system.skills.lift.value",
+            "value": 10,
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-diancie:active"
+            ],
+            "key": "system.skills.negotiation.value",
+            "value": 15,
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-diancie:active"
+            ],
+            "key": "system.skills.thaumaturgy.value",
+            "value": 20,
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-diancie:active"
+            ],
+            "key": "system.skills.fairy.value",
+            "value": 20,
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0,
+        "trigger": "manual",
+        "conditions": []
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "1.2.0.beta",
+        "createdTime": 1743992853763,
+        "modifiedTime": 1743993413144,
+        "lastModifiedBy": "fjFnY9UQ3QBBalRU"
+      }
+    }
+  ]
 }

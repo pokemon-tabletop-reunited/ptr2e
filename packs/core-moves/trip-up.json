@@ -46,7 +46,6 @@
         "traits": [
           "dash",
           "interrupt-4",
-          "flinch-4",
           "contact"
         ],
         "range": {
@@ -70,13 +69,59 @@
         "contestEffect": "",
         "free": false,
         "slot": null,
-        "description": "<p>Trigger: A [Priority X] or [Interrupt X] Attack is declared against the user.</p><p>Effect: The user can freely move up to half of the Movement Score of their choice towards the target and then attacks with Trip Up, if possible. On hit, the target is Flinched and gains -3 ACC Stages for 1 Activation. If the target gains @Affliction[fainted] due to damage from this attack, the triggering attack fails.</p>"
+        "description": "<p>Trigger: A [Priority X] or [Interrupt X] Attack is declared against the user.</p><p>Effect: The user can freely move up to half of the Movement Score of their choice towards the target and then attacks with Trip Up, if possible. On hit, the target is Delayed by 40% and gains -3 ACC Stages for 1 Activation. If the target gains @Affliction[fainted] due to damage from this attack, the triggering attack fails.</p>"
       }
     ],
     "container": null,
-    "grade": "C"
+    "grade": "C",
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ]
+    }
   },
-  "effects": [],
+  "effects": [
+    {
+      "name": "Trip Up",
+      "type": "passive",
+      "_id": "z7y1zzA2z4Rf7Nwm",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "trip-up-interrupt-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.advanceffectitem",
+            "predicate": [],
+            "chance": 100,
+            "dontMerge": true,
+            "affects": "target",
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "system.amount",
+                "value": -40
+              },
+              {
+                "mode": 5,
+                "property": "name",
+                "value": "Delay 40%"
+              }
+            ]
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      }
+    }
+  ],
   "sort": 10700000,
   "ownership": {
     "default": 0,

@@ -17,7 +17,8 @@
         },
         "range": {
           "target": "self",
-          "unit": "m"
+          "unit": "m",
+          "distance": 10
         },
         "description": "<p>Trigger: The user enters battle, or emerges from stealth.</p>The user gains +2 CRIT Stages for 2 Activations. Then, the user freely moves up to and using the Movement Score of their choice, and uses Scratch (First Strike).</p>",
         "img": "icons/svg/explosion.svg"
@@ -29,8 +30,7 @@
         "traits": [
           "sharp",
           "contact",
-          "pass-4",
-          "pp-updated"
+          "pass-4"
         ],
         "range": {
           "target": "creature",
@@ -63,6 +63,13 @@
     "_migration": {
       "version": null,
       "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
     }
   },
   "_id": "LT52ALHpGUv5ypbC",
@@ -86,25 +93,46 @@
                 "value": "true"
               }
             ],
-            "mode": 2,
             "priority": null,
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            },
+            "mode": 2,
             "ignored": false,
             "reevaluateOnUpdate": false,
             "inMemoryOnly": false,
             "allowDuplicate": true,
             "track": false,
-            "replaceSelf": false,
-            "onDeleteActions": {
-              "grantee": "detach",
-              "granter": "cascade"
-            }
+            "replaceSelf": false
+          },
+          {
+            "type": "roll-effect",
+            "key": "cheap-tactics-generic",
+            "value": "Compendium.ptr2e.core-effects.Item.rvtuxXa3K37260Rb",
+            "predicate": [],
+            "chance": 100,
+            "isFixedChance": true,
+            "affects": "self",
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "duration.turns",
+                "value": 4
+              }
+            ],
+            "dontMerge": false,
+            "mode": 2,
+            "ignored": false
           }
         ],
         "slug": null,
         "traits": [],
         "removeAfterCombat": true,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
@@ -126,12 +154,13 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.346",
         "systemId": "ptr2e",
-        "systemVersion": "0.10.0-alpha.5.1.5",
+        "systemVersion": "1.4.1.beta",
         "createdTime": 1737393609305,
-        "modifiedTime": 1737393635485,
-        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+        "modifiedTime": 1753747387573,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf",
+        "exportSource": null
       }
     }
   ]

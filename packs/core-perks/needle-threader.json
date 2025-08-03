@@ -1,0 +1,59 @@
+{
+  "name": "Needle-Threader",
+  "_id": "r75WWb1fvsp00BrC",
+  "type": "perk",
+  "img": "icons/skills/targeting/crosshair-ringed-gray.webp",
+  "effects": [],
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "publication": {
+      "source": "PTR2e Core",
+      "authors": [
+        "Dragoon"
+      ],
+      "notes": ""
+    },
+    "actions": [],
+    "slug": null,
+    "description": "<p>The user gains Deadeye as a Tutored Ability.</p>",
+    "traits": [],
+    "prerequisites": [
+      "trait:wielder",
+      {
+        "gte": [
+          "{actor|skills.acrobatics.mod}",
+          30
+        ]
+      }
+    ],
+    "autoUnlock": [],
+    "cost": 3,
+    "originSlug": null,
+    "design": {
+      "arena": "physical",
+      "approach": "finesse",
+      "archetype": null
+    },
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": [],
+    "nodes": [
+      {
+        "x": 183,
+        "y": 61,
+        "connected": [
+          "trained-wielder",
+          "yeomanry",
+          "down-the-sights"
+        ],
+        "hidden": false,
+        "type": "normal",
+        "tier": null
+      }
+    ]
+  }
+}

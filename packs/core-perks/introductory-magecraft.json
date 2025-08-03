@@ -1,0 +1,83 @@
+{
+  "name": "Introductory Magecraft",
+  "_id": "TfxQOoYdiF6xHE6T",
+  "type": "perk",
+  "img": "icons/skills/trades/academics-book-study-purple.webp",
+  "effects": [],
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "publication": {
+      "source": "PTR2e Core",
+      "authors": [
+        "Dragoon"
+      ],
+      "notes": ""
+    },
+    "actions": [],
+    "slug": null,
+    "description": "<p>The user gains the @Trait[arcane] Trait Tutor List, and learns Mana Spark.</p>",
+    "traits": [
+      "arcane"
+    ],
+    "prerequisites": [
+      {
+        "or": [
+          {
+            "gte": [
+              "{actor|skills.alchemy.mod}",
+              35
+            ]
+          },
+          {
+            "gte": [
+              "{actor|skills.thaumaturgy.mod}",
+              35
+            ]
+          },
+          {
+            "gte": [
+              "{actor|skills.research.mod}",
+              35
+            ]
+          }
+        ]
+      }
+    ],
+    "autoUnlock": [],
+    "cost": 2,
+    "originSlug": null,
+    "design": {
+      "arena": "mental",
+      "approach": "power",
+      "archetype": "arcane"
+    },
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": [],
+    "nodes": [
+      {
+        "x": 116,
+        "y": 185,
+        "hidden": false,
+        "type": "normal",
+        "connected": [
+          "comingling-of-power",
+          "minor-buff-23",
+          "metamove-power-swap",
+          "prestidigitator"
+        ],
+        "config": {
+          "texture": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "tint": null
+        },
+        "tier": null
+      }
+    ]
+  }
+}

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-namespace */
 import { ActorPTR2e, ActorSystemPTR2e } from "@actor";
 import { CombatPTR2e, CombatantPTR2e, CombatTrackerPTR2e } from "@combat";
 import { ItemPTR2e, ItemSystemPTR, PerkPTR2e } from "@item";
@@ -21,8 +22,9 @@ import { TutorListApp } from "@module/apps/tutor-list.ts";
 import GithubManager from "@module/apps/github.ts";
 import { ExpTrackerSettings } from "@system/exp-tracker-model.ts";
 import { type TypeEffectiveness } from "@scripts/config/effectiveness.ts";
-import { PerkWorkerConfig } from "@module/data/models/generator-config.ts";
+import { GeneratorConfig, PerkWorkerConfig } from "@module/data/models/generator-config.ts";
 import { PerkGeneratorResult } from "./worker/types.js";
+import { PickableThing } from "@module/apps/pick-a-thing-prompt.ts";
 
 interface GamePTR2e
   extends Game<
@@ -110,7 +112,12 @@ type ConfiguredConfig = Config<
 
 declare global {
   interface ConfigPTR2e extends ConfiguredConfig {
-    PTR: typeof PTRCONFIG;
+    PTR: typeof PTRCONFIG & {
+      data: {
+        types: string[]
+      }
+      options: Record<string, PickableThing[]>
+    };
     ui: ConfiguredConfig["ui"] & {
       perksTab: new () => PerkDirectory;
     };
@@ -134,8 +141,14 @@ declare global {
     get(module: "ptr2e", key: "compendiumBrowserPacks"): CompendiumBrowserSettings
     get(module: "ptr2e", key: "tutorListData"): TutorListSettings
     get(module: "ptr2e", key: "expTrackerData"): ExpTrackerSettings
-    get(module: "ptr2e", key: "tokens.autoscale"): boolean
+    get(module: "ptr2e", key: "tokens.autoscale" | "preferences.expand-rolls" | "preferences.must-target"): boolean
     get(module: "ptr2e", key: "pokemonTypes"): TypeEffectiveness
+    get(module: "ptr2e", key: "global-perk-configs"): GeneratorConfig['_source'][]
+    get(module: "ptr2e", key: "blueprint.level" | "blueprint.nature" | "blueprint.perk"): string | null
+    get(module: "ptr2e", key: "blueprint.gender"): "random" | "male" | "female" | "genderless" | null
+    get(module: "ptr2e", key: "blueprint.shiny"): number;
+    get(module: "ptr2e", key: "metagame.show-accuracy" | "metagame.show-damage" | "metagame.show-effect-rolls"): "full" | "result" | "allyOnlyResult" | "none"
+    get(module: "ptr2e", key: "metagame.show-damage-taken"): "show" | "hide"
     set(module: "ptr2e", key: "expTrackerData", value: ExpTrackerSettings['_source']): ExpTrackerSettings
   }
 
@@ -164,6 +177,9 @@ declare global {
     let actor: () => ActorPTR2e<ActorSystemPTR2e, TokenDocumentPTR2e<ScenePTR2e> | null> | null;
 
     let _maxZ: number;
+
+    function saveDataToFile(data: unknown, filetype: string, filename: string): void;
+    function readTextFromFile(file: File): Promise<string>;
   }
 
   const BUILD_MODE: "development" | "production";

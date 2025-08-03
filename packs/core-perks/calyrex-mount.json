@@ -1,0 +1,134 @@
+{
+  "folder": null,
+  "name": "Calyrex Mount",
+  "type": "perk",
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": "<p>PLACEHOLDER</p>"
+    },
+    "actions": [
+      {
+        "name": "Defend as One",
+        "slug": "defend-as-one",
+        "description": "<p>Trigger: The user and their Mount or Rider are targeted by the same Physical- or Special-Category Attack.</p><p>Effect: The targeted creatures take 33% less damage from the triggering Attack.</p>",
+        "traits": [
+          "defensive",
+          "legendary"
+        ],
+        "type": "passive",
+        "img": "systems/ptr2e/img/icons/feat_icon.webp",
+        "range": {
+          "target": "ally",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "free",
+          "powerPoints": 0,
+          "delay": null,
+          "priority": null,
+          "trigger": "The user and their Mount or Rider are targeted by the same Physical- or Special-Category Attack."
+        },
+        "variant": null,
+        "hidden": false,
+        "ephemeralVariant": false
+      },
+      {
+        "name": "Fight as One",
+        "slug": "fight-as-one",
+        "description": "<p>Effect: The user and their Mount or Rider may consider one another as the ‘user’ of one another’s Attacks, Abilities, and Perks for the purposes of Triggers, targeting, and Effects, and may use those Attacks, Abilities, and Perks as if they also possessed them.</p>",
+        "traits": [
+          "defensive",
+          "legendary"
+        ],
+        "type": "passive",
+        "img": "systems/ptr2e/img/icons/feat_icon.webp",
+        "range": {
+          "target": "self",
+          "distance": 0,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "free",
+          "powerPoints": 0,
+          "delay": null,
+          "priority": null,
+          "trigger": ""
+        },
+        "variant": null,
+        "hidden": false,
+        "ephemeralVariant": false
+      },
+      {
+        "name": "Intercept (Noble Steed)",
+        "slug": "intercept-noble-steed",
+        "description": "<p>Trigger: The user’s Rider is targeted by an Attack or Action.</p><p>Effect: The user becomes the target of the triggering Attack or Action. After the triggering Attack or Action is resolved, the user heals a Tick of HP.</p>",
+        "traits": [
+          "interrupt-6",
+          "legendary",
+          "healing"
+        ],
+        "type": "generic",
+        "img": "systems/ptr2e/img/icons/feat_icon.webp",
+        "range": {
+          "target": "self",
+          "distance": 0,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "free",
+          "powerPoints": 3,
+          "delay": null,
+          "priority": null,
+          "trigger": "Trigger: The user’s Rider is targeted by an Attack or Action."
+        },
+        "variant": null,
+        "ephemeralVariant": false
+      }
+    ],
+    "slug": "calyrex-mount",
+    "description": "",
+    "traits": [],
+    "prerequisites": [],
+    "autoUnlock": [],
+    "cost": 1,
+    "originSlug": null,
+    "design": {
+      "arena": null,
+      "approach": null,
+      "archetype": null
+    },
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": [],
+    "nodes": []
+  },
+  "img": "systems/ptr2e/img/icons/feat_icon.webp",
+  "effects": [],
+  "ownership": {
+    "default": 0,
+    "NGSbEbIP7O7ThFIb": 3
+  },
+  "flags": {},
+  "_stats": {
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "coreVersion": "12.331",
+    "systemId": "ptr2e",
+    "systemVersion": "1.1.2.beta",
+    "createdTime": 1742424050052,
+    "modifiedTime": 1742424050052,
+    "lastModifiedBy": "NGSbEbIP7O7ThFIb"
+  },
+  "_id": "hwjkFmCYFnBqphSJ",
+  "sort": 0
+}

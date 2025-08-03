@@ -14,25 +14,34 @@
         "type": "passive",
         "range": {
           "target": "creature",
-          "unit": "m"
+          "unit": "m",
+          "distance": 0
         },
         "cost": {
-          "activation": "free"
+          "activation": "free",
+          "powerPoints": 0
         },
-        "img": "systems/ptr2e/img/perk-icons/Hunting.svg"
+        "img": "systems/ptr2e/img/perk-icons/Hunting.svg",
+        "variant": null,
+        "ephemeralVariant": false,
+        "hidden": false
       }
     ],
     "slug": "mightyena-tactic",
     "description": "<p>Gain +20 Power when attacking targets that have a net negative SPD stage.</p>",
     "traits": [],
     "prerequisites": [],
-    "cost": 3,
+    "cost": 2,
     "_migration": {
       "version": null,
       "previous": null
     },
     "nodes": [
       {
+        "x": 64,
+        "y": 180,
+        "hidden": false,
+        "type": "normal",
         "connected": [
           "hamstring",
           "skirmish",
@@ -41,18 +50,14 @@
           "improved-overland-9"
         ],
         "config": {
+          "texture": "systems/ptr2e/img/perk-icons/Hunting.svg",
           "alpha": null,
-          "backgroundColor": "#804000",
+          "backgroundColor": null,
           "borderColor": null,
           "borderWidth": null,
-          "texture": "systems/ptr2e/img/perk-icons/Hunting.svg",
           "tint": null,
           "scale": null
         },
-        "hidden": false,
-        "type": "normal",
-        "x": 64,
-        "y": 180,
         "tier": null
       }
     ],
@@ -62,8 +67,18 @@
     "design": {
       "arena": "physical",
       "approach": "finesse",
-      "archetype": "Hunter"
-    }
+      "archetype": "hunter"
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": "undefined"
+    },
+    "originSlug": null,
+    "variant": null,
+    "mode": null
   },
   "effects": []
 }

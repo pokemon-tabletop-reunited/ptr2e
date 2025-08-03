@@ -128,7 +128,7 @@ declare global {
         /* ---------------------------------------- */
 
         /** Register core keybindings */
-        private _registerCoreKeybindings(): void;
+        private _registerCoreKeybindings(view: string): void;
 
         /**
          * Handle Select all action

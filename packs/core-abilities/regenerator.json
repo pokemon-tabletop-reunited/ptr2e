@@ -11,21 +11,27 @@
         ],
         "name": "Regenerator",
         "slug": "regenerator",
-        "type": "generic",
+        "type": "attack",
         "cost": {
           "activation": "free",
           "powerPoints": 4,
           "trigger": "<p>A new Round begins and the user is not @Affliction[fainted].</p>"
         },
         "range": {
-          "target": "self",
+          "target": "field",
           "unit": "m"
         },
-        "description": "<p>Trigger: A new Round begins and the user is not @Affliction[fainted].</p><p>Effect: The user recovers 5@Tick[5].</p>",
-        "img": "icons/magic/life/crosses-trio-red.webp"
+        "description": "<p>Trigger: A new Round begins and the user is not @Affliction[fainted].</p><p>Effect: The user recovers @Tick[3].</p>",
+        "img": "icons/magic/life/crosses-trio-red.webp",
+        "types": [
+          "untyped"
+        ],
+        "category": "status",
+        "summon": "Compendium.ptr2e.core-summons.Item.iQcLGerts7N7egCm",
+        "predicate": []
       }
     ],
-    "description": "<p>Trigger: A new Round begins and the user is not @Affliction[fainted].</p><p>Effect: The user recovers @Tick[5].</p>",
+    "description": "<p>Trigger: A new Round begins and the user is not @Affliction[fainted].</p><p>Effect: The user recovers @Tick[3].</p>",
     "traits": [
       "healing"
     ],
@@ -33,6 +39,13 @@
     "_migration": {
       "version": null,
       "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
     }
   },
   "_id": "jsHqtUqh6RRsIiMf",

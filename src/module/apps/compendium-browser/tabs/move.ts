@@ -13,7 +13,7 @@ export class CompendiumBrowserMoveTab extends CompendiumBrowserTab {
   templatePath = "systems/ptr2e/templates/apps/compendium-browser/tabs/move.hbs";
 
   override searchFields = ["name", "description"];
-  override storeFields = ["type", "name", "img", "uuid", "traits", "description", "category", "grade", "power", "accuracy", "types", "cost", "range", "target"];
+  override storeFields = ["type", "name", "img", "uuid", "traits", "description", "category", "grade", "power", "accuracy", "types", "cost", "range", "target", "source"];
 
   constructor(browser: CompendiumBrowser) {
     super(browser);
@@ -28,6 +28,7 @@ export class CompendiumBrowserMoveTab extends CompendiumBrowserTab {
     const moves: CompendiumBrowserIndexData[] = [];
     const indexFields = ["img", "system.description", "system.actions", "system.grade"];
     const allTraits = new Set<string>();
+    const publications = new Set<string>();
     let maxRange = 10;
 
     for await (const { pack, index } of this.browser.packLoader.loadPacks(
@@ -71,6 +72,9 @@ export class CompendiumBrowserMoveTab extends CompendiumBrowserTab {
           maxRange = Math.max(maxRange, Number(attack.range!.distance));
         }
 
+        const pubSource = (moveData.system.publication?.source ?? "").trim()
+        if(pubSource) publications.add(pubSource);
+
         moves.push({
           name: moveData.name,
           img: moveData.img,
@@ -85,7 +89,8 @@ export class CompendiumBrowserMoveTab extends CompendiumBrowserTab {
           types: attack.types ?? [],
           range: Number(attack.range?.distance) || null,
           target: attack.range?.target,
-          cost: attack.cost?.activation
+          cost: attack.cost?.activation,
+          source: pubSource
         })
       }
     }
@@ -109,12 +114,14 @@ export class CompendiumBrowserMoveTab extends CompendiumBrowserTab {
       "free": game.i18n.localize("PTR2E.CompendiumBrowser.Filters.ActionCost.Free")
     }
     this.filterData.multiselects.traits.options = this.generateMultiselectOptions(allTraits.reduce((acc, trait) => {
-      const traitData = game.ptr.data.traits.get(trait);
+      const traitData = game.ptr.data.traits.getTrait(trait);
       if (!traitData) return acc;
       acc[traitData.slug] = traitData.label;
       return acc;
     }, {} as Record<string, string>));
     this.filterData.sliders.range.values.upperLimit = this.filterData.sliders.range.values.max = maxRange;
+
+    this.filterData.checkboxes.source.options = this.generateCheckboxOptions(publications.reduce((acc, source) => ({[source]: source, ...acc}), {} as Record<string, string>));
 
     debug("Finished loading data");
   }
@@ -167,6 +174,11 @@ export class CompendiumBrowserMoveTab extends CompendiumBrowserTab {
     // Traits
     if (!this.filterTraits(entry.traits, multiselects.traits.selected, multiselects.traits.conjunction)) return false;
 
+    // Source
+    if (checkboxes.source.selected.length) {
+      if (!checkboxes.source.selected.includes(entry.source)) return false;
+    }
+
     return true;
   }
 
@@ -184,7 +196,13 @@ export class CompendiumBrowserMoveTab extends CompendiumBrowserTab {
           options: {},
           selected: [],
           isExpanded: false
-        }
+        },
+        source: {
+          isExpanded: false,
+          label: "PTR2E.CompendiumBrowser.Filters.Source",
+          options: {},
+          selected: [],
+        },
       },
       selects: {
         category: {

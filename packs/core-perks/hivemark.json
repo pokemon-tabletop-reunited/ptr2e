@@ -16,12 +16,16 @@
         "img": "systems/ptr2e/img/svg/bug_icon.svg",
         "range": {
           "target": "enemy",
-          "unit": "m"
+          "unit": "m",
+          "distance": 0
         },
         "cost": {
-          "activation": "free"
+          "activation": "free",
+          "powerPoints": 0
         },
-        "hidden": true
+        "hidden": true,
+        "variant": null,
+        "ephemeralVariant": false
       }
     ],
     "slug": "hivemark",
@@ -60,8 +64,18 @@
     "design": {
       "arena": "physical",
       "approach": "power",
-      "archetype": ""
-    }
+      "archetype": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "originSlug": null,
+    "variant": null,
+    "mode": null
   },
   "_id": "o8JKgkDzgMMay8Co",
   "img": "systems/ptr2e/img/svg/bug_icon.svg",
@@ -82,7 +96,9 @@
             "affects": "target",
             "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "alterations": [],
+            "dontMerge": false
           }
         ],
         "slug": null,
@@ -111,12 +127,13 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.342",
         "systemId": "ptr2e",
         "systemVersion": "0.10.0-alpha.3.2.0",
         "createdTime": 1731105131277,
         "modifiedTime": 1731105155513,
-        "lastModifiedBy": "wRgL6u6KEJDBDQIE"
+        "lastModifiedBy": "wRgL6u6KEJDBDQIE",
+        "exportSource": null
       }
     }
   ],
