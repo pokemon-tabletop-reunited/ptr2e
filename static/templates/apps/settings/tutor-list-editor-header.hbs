@@ -1,0 +1,10 @@
+<nav class="standard-form">
+  <select id="tutor-list-selector" class="form-control">
+    {{#each lists as |list|}}
+      <option value="{{list.id}}" {{#if (is @root.list.id list.id)}}selected{{/if}}>{{formatSlug list.slug}} {{#unless (is list.type "universal")}}({{formatSlug list.type}}){{/unless}}</option>
+    {{/each}}
+  </select>
+  <button type="button" data-action="edit">
+    <i class="fa-solid fa-pen-to-square fa-fw"></i> Edit List
+  </button>
+</nav>

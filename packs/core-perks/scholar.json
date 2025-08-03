@@ -18,15 +18,19 @@
         "slug": "scholar",
         "description": "<p>You gain access to the Research Camp Action. You may not know something then and there in the moment, but with enough dedication and the right resources, you will find out eventually.</p>",
         "cost": {
-          "activation": "complex"
+          "activation": "complex",
+          "powerPoints": 0
         },
         "type": "camping",
         "traits": [],
         "img": "icons/svg/explosion.svg",
         "range": {
           "target": "enemy",
-          "unit": "m"
-        }
+          "unit": "m",
+          "distance": 0
+        },
+        "variant": null,
+        "ephemeralVariant": false
       }
     ],
     "slug": "scholar",
@@ -49,7 +53,10 @@
           "climatologist",
           "mental-alarm",
           "stat-iv-booster-1-12",
-          "improved-overland-15"
+          "improved-overland-15",
+          "minor-buff-18",
+          "minor-buff-56",
+          "floratic"
         ],
         "config": {
           "alpha": null,
@@ -69,8 +76,18 @@
     "design": {
       "arena": "mental",
       "approach": "resilience",
-      "archetype": "Knowledge"
-    }
+      "archetype": "knowledge"
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "originSlug": null,
+    "variant": null,
+    "mode": null
   },
   "_id": "KEvYjwxJ3bWLCknR",
   "img": "systems/ptr2e/img/perk-icons/Knowledge.svg",

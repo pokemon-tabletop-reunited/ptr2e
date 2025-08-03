@@ -230,6 +230,7 @@ export default abstract class DataModel<
 }
 
 export interface DataModelValidationOptions {
+    update?: object;
     changes?: object;
     clean?: boolean;
     fallback?: boolean;

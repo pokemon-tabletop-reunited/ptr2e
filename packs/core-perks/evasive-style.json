@@ -34,7 +34,8 @@
         "description": "Effect: The target gains @Affliction[evasive] 1.",
         "type": "generic",
         "img": "icons/svg/explosion.svg",
-        "variant": null
+        "variant": null,
+        "ephemeralVariant": false
       },
       {
         "name": "Evasive! (Self)",
@@ -57,7 +58,8 @@
         "description": "Effect: The target gains @Affliction[evasive] 2.",
         "type": "generic",
         "img": "icons/svg/explosion.svg",
-        "variant": null
+        "variant": null,
+        "ephemeralVariant": false
       }
     ],
     "slug": "evasive-style",
@@ -71,12 +73,16 @@
     "nodes": [
       {
         "connected": [
-          "rapid-fire-style-1",
+          "rapid-fire-style",
           "assault-armor-style",
           "stat-iv-booster-1-11",
           "improved-burrow-3",
           "improved-flight-6",
-          "improved-overland-5"
+          "improved-overland-5",
+          "minor-buff-8",
+          "minor-buff-29",
+          "minor-buff-64",
+          "duelist-trainer"
         ],
         "config": {
           "alpha": null,
@@ -103,7 +109,14 @@
     "design": {
       "arena": "social",
       "approach": "finesse",
-      "archetype": "Support"
+      "archetype": "support"
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
     }
   },
   "_id": "DejTHLN3FViZzzeE",

@@ -1,0 +1,74 @@
+{
+  "name": "Hurried Operator",
+  "_id": "WWrrRAjtk4YbZyu9",
+  "type": "perk",
+  "img": "icons/skills/movement/figure-running-gray.webp",
+  "effects": [],
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "publication": {
+      "source": "PTR2e Core",
+      "authors": [
+        "Dragoon"
+      ],
+      "notes": ""
+    },
+    "actions": [],
+    "slug": null,
+    "description": "<p>Effect: The user may confer [Dash] to their [Adaptable] Actions, and deal +20% more damage with [Dash] Attacks after the user triggers [Dash] and succeeds on the Skill roll.</p>",
+    "traits": [],
+    "prerequisites": [
+      {
+        "or": [
+          {
+            "gte": [
+              "{actor|skills.running.mod}",
+              45
+            ]
+          },
+          {
+            "gte": [
+              "{actor|skills.flying.mod}",
+              45
+            ]
+          },
+          {
+            "gte": [
+              "{actor|skills.swim.mod}",
+              45
+            ]
+          }
+        ]
+      }
+    ],
+    "autoUnlock": [],
+    "cost": 3,
+    "originSlug": null,
+    "design": {
+      "arena": "physical",
+      "approach": "power",
+      "archetype": null
+    },
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": [],
+    "nodes": [
+      {
+        "x": 114,
+        "y": 30,
+        "connected": [
+          "minor-buff-3",
+          "hardy-trekker",
+          "minor-buff-58"
+        ],
+        "hidden": false,
+        "type": "normal",
+        "tier": null
+      }
+    ]
+  }
+}

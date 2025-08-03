@@ -18,6 +18,7 @@ import { ActorSystemSchema, AttributeSchema, StatSchema, TypeField, GenderOption
 import { addDataFieldMigration, sluggify } from "@utils";
 import { AbilityReferenceSchema } from "@item/data/species.ts";
 import { PickableThing } from "@module/apps/pick-a-thing-prompt.ts";
+import { TokenPTR2e } from "@module/canvas/token/object.ts";
 
 class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeDataModel)) {
   static LOCALIZATION_PREFIXES = ["PTR2E.ActorSystem"];
@@ -75,6 +76,24 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
         });
       return output as StatSchema | Omit<StatSchema, "stage">;
     };
+
+    function getUnderdogField() {
+      return new fields.SchemaField({
+        value: new fields.NumberField({ required: true, nullable: false, initial: 0, min: 0, max: 20 }),
+        stat: new fields.StringField({
+          required: true,
+          nullable: true,
+          initial: null,
+          choices: {
+            "atk": "PTR2E.Attributes.atk.Label",
+            "def": "PTR2E.Attributes.def.Label",
+            "spa": "PTR2E.Attributes.spa.Label",
+            "spd": "PTR2E.Attributes.spd.Label",
+            "spe": "PTR2E.Attributes.spe.Label",
+          }
+        })
+      })
+    }
 
     return {
       ...super.defineSchema() as MigrationSchema & TraitsSchema,
@@ -216,9 +235,9 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
       gender: new fields.StringField<GenderOptions, GenderOptions, true, false, true>({
         required: true,
         choices: {
-          "genderless": "genderless",
-          "male": "male",
-          "female": "female"
+          "genderless": "PTR2E.ActorSystem.FIELDS.gender.genderless",
+          "male": "PTR2E.ActorSystem.FIELDS.gender.male",
+          "female": "PTR2E.ActorSystem.FIELDS.gender.female"
         },
         initial: "genderless"
       }),
@@ -271,9 +290,10 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
         }),
         biography: new fields.HTMLField({ required: true, initial: "", label: "PTR2E.FIELDS.details.biography.label", hint: "PTR2E.FIELDS.details.biography.hint" }),
         dex: new CollectionField(new fields.SchemaField({
-          slug: new fields.StringField({ required: true, nullable: false}),
+          slug: new fields.StringField({ required: true, nullable: false }),
           state: new fields.StringField({ required: true, nullable: false, initial: "unknown", choices: ["unknown", "seen", "caught", "shiny"] }),
-        }))
+        })),
+        device: new fields.StringField({ required: true, blank: true, initial: "", label: "PTR2E.FIELDS.details.device.label", hint: "PTR2E.FIELDS.details.device.hint" }),
       }),
       inventory: new fields.SchemaField({
         held: new fields.SchemaField({
@@ -287,9 +307,79 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
         }),
         belt: new fields.SchemaField({
           max: new fields.NumberField({ required: true, initial: 0, min: 0, label: "PTR2E.FIELDS.inventory.belt.max.label", hint: "PTR2E.FIELDS.inventory.belt.max.hint" }),
+        }),
+        backpack: new fields.SchemaField({
+          max: new fields.NumberField({ required: true, initial: 0, min: 0, label: "PTR2E.FIELDS.inventory.backpack.max.label", hint: "PTR2E.FIELDS.inventory.backpack.max.hint" }),
+        })
+      }),
+      investments: new fields.SchemaField({
+        ivs: new fields.SchemaField({
+          hp: new fields.NumberField({ required: true, nullable: false, initial: 0, min: 0, max: 30 }),
+          atk: new fields.NumberField({ required: true, nullable: false, initial: 0, min: 0, max: 30 }),
+          def: new fields.NumberField({ required: true, nullable: false, initial: 0, min: 0, max: 30 }),
+          spa: new fields.NumberField({ required: true, nullable: false, initial: 0, min: 0, max: 30 }),
+          spd: new fields.NumberField({ required: true, nullable: false, initial: 0, min: 0, max: 30 }),
+          spe: new fields.NumberField({ required: true, nullable: false, initial: 0, min: 0, max: 30 })
+        }),
+        underdog: new fields.SchemaField({
+          boosts: new fields.SchemaField({
+            "1": new fields.SchemaField({
+              value: new fields.NumberField({ required: true, nullable: false, initial: 0, min: 0, max: 10 }),
+            }),
+            "2": getUnderdogField(),
+            "3": getUnderdogField(),
+            "4": getUnderdogField(),
+            "5": getUnderdogField(),
+            "6": getUnderdogField(),
+          }),
+          swap: new fields.SchemaField({
+            from: new fields.StringField({
+              required: true,
+              nullable: true,
+              initial: null,
+              choices: {
+                "hp": "PTR2E.Attributes.hp.Label",
+                "atk": "PTR2E.Attributes.atk.Label",
+                "def": "PTR2E.Attributes.def.Label",
+                "spa": "PTR2E.Attributes.spa.Label",
+                "spd": "PTR2E.Attributes.spd.Label",
+                "spe": "PTR2E.Attributes.spe.Label",
+              }
+            }),
+            to: new fields.StringField({
+              required: true,
+              nullable: true,
+              initial: null,
+              choices: {
+                "hp": "PTR2E.Attributes.hp.Label",
+                "atk": "PTR2E.Attributes.atk.Label",
+                "def": "PTR2E.Attributes.def.Label",
+                "spa": "PTR2E.Attributes.spa.Label",
+                "spd": "PTR2E.Attributes.spd.Label",
+                "spe": "PTR2E.Attributes.spe.Label",
+              }
+            }),
+            value: new fields.NumberField({required: true, nullable: false, initial: 0, min: 0, max: 10})
+          })
         })
       })
     };
+  }
+
+  get movementType(): string | null {
+    return this._movementType || null;
+  }
+
+  set movementType(newType: string) {
+    if(this._movementType === newType) return;
+    if(this._movementType == null || this._movementType == undefined) {
+      this.parent.rollOptions.removeOption("self", `state:overland`);
+    }
+    if(this._movementType) {
+      this.parent.rollOptions.removeOption("self", `state:${this._movementType}`);
+    }
+    this._movementType = newType;
+    this.parent.rollOptions.addOption("self", `state:${this._movementType}`);
   }
 
   static override migrateData(source: ActorSystemPTR2e["_source"]) {
@@ -324,6 +414,32 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
         get: () => this.advancement.advancementPoints.total - this.advancement.advancementPoints.spent
       })
     }
+    if(this.investments.ivs.unlocked === undefined) {
+      this.investments.ivs.unlocked = 0;
+    }
+    if(this.investments.ivs.available === undefined) {
+      Object.defineProperty(this.investments.ivs, "available", {
+        get: () => Object.entries(this.investments.ivs).reduce((acc, [key, value]) => {
+          if(!["hp", "atk", "def", "spa", "spd", "spe"].includes(key)) return acc;
+          return acc + value;
+        }, this.investments.ivs.unlocked)
+      });
+    }
+    if(this.investments.underdog.unlocked === undefined) {
+      this.investments.underdog.unlocked = 0;
+    }
+    if(this.investments.underdog.available === undefined) {
+      Object.defineProperty(this.investments.underdog, "available", {
+        get: () => {
+          const available: (1 | 2 | 3 | 4 | 5 | 6)[] = [];
+          for(let i = 1; i <= this.investments.underdog.unlocked; i++) {
+            if(this.investments.underdog.boosts[i as keyof typeof this.investments.underdog.boosts]?.value) continue;
+            available.push(i as 1 | 2 | 3 | 4 | 5 | 6);
+          }
+          return available;
+        }
+      });
+    }
   }
 
   getLevel(experience: number = this.advancement.experience.current): number {
@@ -345,7 +461,7 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
     for (const k in this.attributes) {
       const key = k as keyof Attributes;
       Object.defineProperty(this.attributes[key], "final", {
-        get: () => key === "hp" ? this.attributes[key].value : this.parent.calcStatTotal(this.attributes[key], false),
+        get: () => key === "hp" ? this.attributes[key].value : this.parent.calcStatTotal(this.attributes[key], false, false),
       });
     }
 
@@ -364,6 +480,14 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
       this.parent.rollOptions.addOption("clocks", `${clock.id}:value:${clock.value}`)
       this.parent.rollOptions.addOption("clocks", `${clock.id}:max:${clock.max}`)
     }
+    Object.defineProperty(this.clocks, "lookup", {
+      get: () => {
+        return this.clocks.contents.reduce((acc, clock) => {
+          acc[clock.id] = clock.value;
+          return acc;
+        }, {} as Record<string, number>);
+      }
+    })
 
     this.advancement.level = this.getLevel();
     if (this.parent.isHumanoid()) {
@@ -462,7 +586,10 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
       movement: 0,
       powerPoints: 0,
       weightClass: 0,
-      heightClass: 0
+      heightClass: 0,
+      vulnerabilityMultiplier: 1,
+      effectHitRate: 0,
+      effectResistance: 0
     };
   }
 
@@ -490,13 +617,12 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
     }
 
     this.movement = Object.fromEntries([
-      ...this.parent.species.movement.primary.map<(readonly [string, Movement])>(m => [m.type, { method: m.type, value: m.value, type: "primary" }]),
-      ...this.parent.species.movement.secondary.map<(readonly [string, Movement])>(m => [m.type, { method: m.type, value: m.value, type: "secondary" }])
+      ...this.parent.species.movement.map<(readonly [string, Movement])>(m => [m.type, { method: m.type, value: m.value, available: m.value }])
     ]);
 
     // Every creature has a base overland of 3 at least.
     if ((Number(this.movement["overland"]?.value) || 0) <= 3) {
-      this.movement["overland"] = { method: "overland", value: 3, type: "secondary" };
+      this.movement["overland"] = { method: "overland", value: 3, available: 3};
     }
   }
 
@@ -525,6 +651,28 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
         const newSkill = new SkillPTR2e(fu.duplicate(skill), { parent: this });
         newSkill.prepareBaseData();
         this.skills.set(newSkill.slug, newSkill);
+      }
+    }
+
+    const bossTrait = this.traits.find(t => t && !!t.slug && t.slug.includes("boss") && !!t.value);
+    if(bossTrait) {
+      const effect = Trait.effectsFromChanges.bind(bossTrait)(this.parent);
+      if(effect?.active) {
+        for(const change of effect.changes.map((change) => {
+          const c = foundry.utils.deepClone(change);
+          c.priority = c.priority ?? c.mode * 10;
+          return c;
+        }).sort((a, b) => a.priority! - b.priority!)) {
+          change.effect.apply(this.parent, change.clone());
+        }
+
+        if(!isNaN(Number(this.modifiers.hpMultiplier)) && this.modifiers.hpMultiplier !== 1) {
+          this.health.max = this.attributes.hp.value = Math.round(this.attributes.hp.value * Number(this.modifiers.hpMultiplier));
+          this.health.percent = Math.round((this.health.value / this.health.max) * 100);
+        }
+        if(!isNaN(Number(this.modifiers.ppMultiplier)) && this.modifiers.ppMultiplier !== 1) {
+          this.powerPoints.max = Math.round((this.powerPoints.max || 0) * Number(this.modifiers.ppMultiplier));
+        }
       }
     }
 
@@ -564,7 +712,7 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
     //@ts-expect-error - The getter needs to be added afterwards.
     this.parent.flags.ptr2e.skillOptions = {
       data: this.skills.reduce((acc, skill) => {
-        if (["luck", "resources"].includes(skill.slug)) return acc;
+        if (["luck", "resources"].includes(skill.slug) || skill.hidden) return acc;
         const label = (() => {
           const baseKey = skill.group
             ? `PTR2E.Skills.${skill.group}.${skill.slug}`
@@ -596,30 +744,50 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
       },
       "arts": {
         get: () => {
-          return this.parent.flags.ptr2e.skillOptions!.data.filter(skill => skill.group === "arts" && skill.base > 1);
+          return this.parent.flags.ptr2e.skillOptions!.data.filter(skill => skill.group === "arts");
         }
       },
       "science": {
         get: () => {
-          return this.parent.flags.ptr2e.skillOptions!.data.filter(skill => skill.group === "science" && skill.base > 1);
+          return this.parent.flags.ptr2e.skillOptions!.data.filter(skill => skill.group === "science");
         }
       },
       "performance": {
         get: () => {
-          return this.parent.flags.ptr2e.skillOptions!.data.filter(skill => skill.group === "performance" && skill.base > 1);
+          return this.parent.flags.ptr2e.skillOptions!.data.filter(skill => skill.group === "performance");
         }
       },
       "occult": {
         get: () => {
-          return this.parent.flags.ptr2e.skillOptions!.data.filter(skill => skill.group === "occult" && skill.base > 1);
+          return this.parent.flags.ptr2e.skillOptions!.data.filter(skill => skill.group === "occult");
         }
       },
       "pilot": {
         get: () => {
-          return this.parent.flags.ptr2e.skillOptions!.data.filter(skill => skill.group === "pilot" && skill.base > 1);
+          return this.parent.flags.ptr2e.skillOptions!.data.filter(skill => skill.group === "pilot");
         }
       }
     });
+    //@ts-expect-error - The getter are added afterwards.
+    this.parent.flags.ptr2e.typeOptions = {};
+    Object.defineProperties(this.parent.flags.ptr2e.typeOptions, {
+      "options": {
+        get: () => {
+          const types = Object.keys(game.settings.get("ptr2e", "pokemonTypes") as TypeEffectiveness ?? {}) as PokemonType[];
+
+          return types.filter(type => !this.type.types.has(type) || type === "untyped").map(type => {
+            return { label: Handlebars.helpers.formatSlug(type), value: type };
+          });
+        }
+      },
+      "types": {
+        get: () => {
+          return Array.from(this.type.types).map(type => {
+            return { label: Handlebars.helpers.formatSlug(type), value: type };
+          });
+        }
+      }
+    })
   }
 
   override prepareDerivedData(): void {
@@ -629,12 +797,12 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
 
     for (const key in this.skills) {
       const skill = this.skills.get(key);
-      if(!skill) continue;
+      if (!skill) continue;
 
       const { value, rvs } = this.skills[key]!;
-      if(value) skill.value += value;
-      if(rvs) skill.rvs = skill.rvs ? skill.rvs + rvs : rvs;
-      if(value || rvs) {
+      if (value) skill.value += value;
+      if (rvs) skill.rvs = skill.rvs ? skill.rvs + rvs : rvs;
+      if (value || rvs) {
         skill.total = skill.value + (skill.rvs ?? 0);
       }
     }
@@ -700,9 +868,55 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
 
     if (this.traits.has("ace")) {
       this.inventory.belt.max += 2;
+      this.inventory.backpack.max++;
     }
     if (this.traits.has("wielder")) {
       this.inventory.held.max++;
+    }
+
+    this.registerSpentMovement();
+  }
+
+  registerSpentMovement(token: TokenPTR2e = this.parent.getActiveTokens()?.at(0) as TokenPTR2e): void {
+    if (!token?.document || token.document.movementHistory.length === 0) return;
+    let highest: Movement[] = [];
+    for (const movement in this.movement) {
+      if (!highest.length) {
+        highest.push(this.movement[movement]);
+      }
+      else {
+        if (this.movement[movement].value > highest[0].value) {
+          highest = [this.movement[movement]];
+        }
+        else if (this.movement[movement].value === highest[0].value) {
+          highest.push(this.movement[movement]);
+        }
+      }
+      this.movement[movement].available = this.movement[movement].value;
+    }
+    for (const waypoint of token.document.movementHistory) {
+      if (waypoint.forced) continue;
+      const movement = this.movement[waypoint.action];
+      if (!movement) {
+        console.warn(`ActorSystemPTR2e#prepareDerivedData: No movement data for ${waypoint.action}`);
+        continue;
+      }
+      if (!waypoint.cost) continue;
+
+      if (!highest.find(m => m.method === waypoint.action)) {
+        movement.available -= waypoint.cost;
+      }
+
+      for (const m of highest) {
+        m.available -= waypoint.cost;
+      }
+
+      const newHighest: typeof highest = [];
+      for (const m in this.movement) {
+        this.movement[m].available = Math.min(this.movement[m].available, highest[0].available);
+        if (this.movement[m].available == highest[0].available) newHighest.push(this.movement[m]);
+      }
+      highest = newHighest;
     }
   }
 
@@ -792,10 +1006,45 @@ interface ActorSystemPTR2e extends ModelPropsFromSchema<ActorSystemSchema> {
   }
 
   movement: Record<string, Movement>;
+  _movementType: string;
 
-  skills: Collection<SkillPTR2e> & Record<string, { value?: number, rvs?: number} | undefined>;
+  skills: Collection<SkillPTR2e> & Record<string, { value?: number, rvs?: number } | undefined>;
+
+  investments: {
+    ivs: {
+      unlocked: number;
+      get available(): number;
+      hp: number;
+      atk: number;
+      def: number;
+      spa: number;
+      spd: number;
+      spe: number;
+    }
+    underdog: {
+      unlocked: number;
+      get available(): (1 | 2 | 3 | 4 | 5 | 6)[];
+      boosts: Record<2 | 3 | 4 | 5 | 6, {
+        value: number;
+        stat: Omit<StatKey, "hp">;
+      }> & {
+        1: {
+          value: number;
+          stat: "hp";
+        };
+      }
+      swap: {
+        unlocked: boolean;
+        from: StatKey | null;
+        to: StatKey | null;
+        value: number;
+      }
+    }
+  }
 
   _source: SourceFromSchema<ActorSystemSchema>;
 }
+
+type StatKey = "hp" | "atk" | "def" | "spa" | "spd" | "spe";
 
 export default ActorSystemPTR2e;

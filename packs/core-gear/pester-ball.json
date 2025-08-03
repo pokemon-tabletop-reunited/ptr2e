@@ -1,0 +1,272 @@
+{
+  "name": "Pester Ball",
+  "type": "consumable",
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "crafting": {
+      "skill": "",
+      "spans": null,
+      "materials": []
+    },
+    "equipped": {
+      "carryType": "stowed",
+      "handsHeld": 1,
+      "slot": "belt"
+    },
+    "grade": "D",
+    "fling": {
+      "type": "untyped",
+      "power": 20,
+      "accuracy": 95,
+      "hide": false
+    },
+    "quantity": 1,
+    "rarity": "rare",
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "container": null,
+    "slug": "pester-ball",
+    "description": "<p>When created, the Pester Ball has its designated Affliction selected from a Choice Set of:</p><blockquote><p>Burn, Poison, Paralysis, Drowsy, Frostbite, Splinter, Confused, Stunted, Blinded, Stuck, Suppressed, Nullified, Enraged, Charmed, Taunted.</p></blockquote>",
+    "traits": [
+      "stack-5",
+      "belt",
+      "fling",
+      "concoction"
+    ],
+    "consumableType": "other",
+    "stack": 5,
+    "modifier": null,
+    "cost": null,
+    "temporary": false
+  },
+  "img": "systems/ptr2e/img/item-icons/pester%20ball.webp",
+  "effects": [
+    {
+      "name": "Pester Ball",
+      "type": "passive",
+      "_id": "K5jLMPi1f4bKWqaB",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "choice-set",
+            "key": "",
+            "value": 0,
+            "predicate": [],
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "choices": [
+              {
+                "label": "Burn",
+                "value": {
+                  "slug": "burn",
+                  "uuid": "Compendium.ptr2e.core-effects.Item.burnconditioitem"
+                }
+              },
+              {
+                "label": "Poison",
+                "value": {
+                  "slug": "poison",
+                  "uuid": "Compendium.ptr2e.core-effects.Item.poisoncondititem"
+                }
+              },
+              {
+                "label": "Drowsy",
+                "value": {
+                  "slug": "drowsy",
+                  "uuid": "Compendium.ptr2e.core-effects.Item.drowsycondititem"
+                }
+              },
+              {
+                "label": "Frostbite",
+                "value": {
+                  "slug": "frostbite",
+                  "uuid": "Compendium.ptr2e.core-effects.Item.frostbiteconitem"
+                }
+              },
+              {
+                "label": "Splinter",
+                "value": {
+                  "slug": "splinter",
+                  "uuid": "Compendium.ptr2e.core-effects.Item.splinterconditem"
+                }
+              },
+              {
+                "label": "Confused",
+                "value": {
+                  "slug": "confused",
+                  "uuid": "Compendium.ptr2e.core-effects.Item.confusedconditem"
+                }
+              },
+              {
+                "label": "Stunted",
+                "value": {
+                  "slug": "stunted",
+                  "uuid": "Compendium.ptr2e.core-effects.Item.stuntedcondiitem"
+                }
+              },
+              {
+                "label": "Blinded",
+                "value": {
+                  "slug": "blinded",
+                  "uuid": "Compendium.ptr2e.core-effects.Item.blindedcondiitem"
+                }
+              },
+              {
+                "label": "Stuck",
+                "value": {
+                  "slug": "stuck",
+                  "uuid": "Compendium.ptr2e.core-effects.Item.stuckconditiitem"
+                }
+              },
+              {
+                "label": "Suppressed",
+                "value": {
+                  "slug": "suppressed",
+                  "uuid": "Compendium.ptr2e.core-effects.Item.suppressedcoitem"
+                }
+              },
+              {
+                "label": "Nullified",
+                "value": {
+                  "slug": "nullified",
+                  "uuid": "Compendium.ptr2e.core-effects.Item.nullifiedconitem"
+                }
+              },
+              {
+                "label": "Enraged",
+                "value": {
+                  "slug": "enraged",
+                  "uuid": "Compendium.ptr2e.core-effects.Item.enragedcondiitem"
+                }
+              },
+              {
+                "label": "Charmed",
+                "value": {
+                  "slug": "charmed",
+                  "uuid": "Compendium.ptr2e.core-effects.Item.charmedcondiitem"
+                }
+              },
+              {
+                "label": "Taunted",
+                "value": {
+                  "slug": "taunted",
+                  "uuid": "Compendium.ptr2e.core-effects.Item.tauntedcondiitem"
+                }
+              }
+            ],
+            "prompt": "PTR2E.ChoiceSetPrompt.Prompt",
+            "adjustName": true,
+            "rollOption": "pb-affliction",
+            "flag": "pb-affliction"
+          },
+          {
+            "type": "grant-item",
+            "key": "",
+            "value": "Compendium.ptr2e.core-gear.Item.WoK9OUxVL899eY4M",
+            "predicate": [],
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "effects.0.system.changes.0.selection",
+                "value": "{effect|flags.ptr2e.choiceSelections.pb-affliction}"
+              },
+              {
+                "mode": 5,
+                "property": "effects.0.system.changes.1.key",
+                "value": "fling-pester-ball-{effect|flags.ptr2e.choiceSelections.pb-affliction.slug}-attack"
+              },
+              {
+                "mode": 5,
+                "property": "effects.0.system.changes.1.value",
+                "value": "{effect|flags.ptr2e.choiceSelections.pb-affliction.uuid}"
+              },
+              {
+                "mode": 5,
+                "property": "name",
+                "value": "Pester Ball ({effect|flags.ptr2e.choiceSelections.pb-affliction.slug|C})"
+              },
+              {
+                "mode": 5,
+                "property": "system.slug",
+                "value": "{effect|flags.ptr2e.choiceSelections.pb-affliction.slug}"
+              },
+              {
+                "mode": 5,
+                "property": "system.description",
+                "value": "<p>Effect: When Flung and on hit, the target has a 20% chance of gaining @Affliction[{effect|flags.ptr2e.choiceSelections.pb-affliction.slug} 3].</p>"
+              }
+            ],
+            "replaceSelf": true,
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "reevaluateOnUpdate": false,
+            "inMemoryOnly": false,
+            "allowDuplicate": true,
+            "track": false,
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            }
+          },
+          {
+            "type": "roll-effect",
+            "key": "override",
+            "value": "Compendium.ptr2e.core-effects.Item.burnconditioitem",
+            "predicate": [],
+            "chance": 20,
+            "affects": "target",
+            "dontMerge": false,
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "duration.turns",
+                "value": 3
+              }
+            ],
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0,
+        "priority": 50,
+        "formula": "",
+        "type": "damage"
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "<p>When created, the Pester Ball has its designated Affliction selected from a Choice Set of:</p><blockquote><p>Burn, Poison, Paralysis, Drowsy, Frostbite, Splinter, Confused, Stunted, Blinded, Stuck, Suppressed, Nullified, Enraged, Charmed, Taunted.</p></blockquote>",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0
+    }
+  ],
+  "folder": "V4skAU6G3OH5fXab",
+  "_id": "WoK9OUxVL899eY4M",
+  "sort": 0
+}

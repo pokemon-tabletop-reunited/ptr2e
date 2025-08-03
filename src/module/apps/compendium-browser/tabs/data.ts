@@ -61,13 +61,14 @@ interface BaseFilterData {
 }
 
 interface AbilityFilters extends BaseFilterData {
+  checkboxes: Record<"source", CheckboxData>;
   multiselects: {
     traits: MultiselectData<string>;
   };
 }
 
 interface GearFilters extends BaseFilterData {
-  checkboxes: Record<"type" | "rarity" | "grade" | "flingType" | "carrySlot", CheckboxData>;
+  checkboxes: Record<"source" | "type" | "rarity" | "grade" | "flingType" | "carrySlot", CheckboxData>;
   multiselects: {
     traits: MultiselectData<string>;
   };
@@ -79,7 +80,7 @@ interface GearFilters extends BaseFilterData {
 }
 
 interface MoveFilters extends BaseFilterData {
-  checkboxes: Record<"grade" | "target", CheckboxData>;
+  checkboxes: Record<"source" | "grade" | "target", CheckboxData>;
   selects: Record<"category" | "cost", SelectData>;
   multiselects: {
     traits: MultiselectData<string>;
@@ -88,8 +89,11 @@ interface MoveFilters extends BaseFilterData {
 }
 
 interface PerkFilters extends BaseFilterData {
+  selects: Record<"showOnlyOnWeb", SelectData>;
+  checkboxes: Record<"source", CheckboxData>;
   multiselects: {
     traits: MultiselectData<string>;
+    archetypes: MultiselectData<string>;
     // prerequisites: MultiselectData<string>;
   };
   sliders: {
@@ -99,10 +103,16 @@ interface PerkFilters extends BaseFilterData {
 
 interface SpeciesFilters extends BaseFilterData {
   selects: Record<"loadSpeciesImages", SelectData>;
-  checkboxes: Record<"skills", CheckboxData>;
+  checkboxes: Record<"skills" | "source", CheckboxData>;
   multiselects: Record<"traits" | "eggGroups" | "levelUpMoves" | "tutorMoves" | "abilities", MultiselectData<string>>;
   // ranges: Record<"baseStatTotal", RangesInputData>;
   // sliders: Record<"height" | "weight", SliderData>;
+}
+
+interface TraitsFilters extends BaseFilterData {
+  multiselects: {
+    type: MultiselectData<string>;
+  }
 }
 
 
@@ -111,7 +121,8 @@ type BrowserFilter =
   | GearFilters
   | MoveFilters
   | PerkFilters
-  | SpeciesFilters;
+  | SpeciesFilters
+  | TraitsFilters;
 
 type CompendiumBrowserIndexData = Omit<CompendiumIndexData, "_id"> & Partial<SearchResult>;
 
@@ -136,5 +147,6 @@ export type {
   GearFilters,
   MoveFilters,
   PerkFilters,
-  SpeciesFilters
+  SpeciesFilters,
+  TraitsFilters
 };

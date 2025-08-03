@@ -10,17 +10,16 @@
         "name": "Earthquake",
         "type": "attack",
         "traits": [
-          "earthbound",
-          "pp-updated"
+          "earthbound"
         ],
         "range": {
           "target": "emanation",
-          "distance": 6,
+          "distance": 4,
           "unit": "m"
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 15
+          "powerPoints": 8
         },
         "category": "physical",
         "power": 100,
@@ -28,46 +27,24 @@
         "types": [
           "ground"
         ],
-        "description": "",
-        "contestType": "",
-        "contestEffect": "",
-        "free": false,
-        "slot": null
-      },
-      {
-        "slug": "earthquake-burrowing",
-        "name": "Earthquake (Burrowing)",
-        "type": "attack",
-        "traits": [
-          "earthbound",
-          "pp-updated"
-        ],
-        "range": {
-          "target": "emanation",
-          "distance": 6,
-          "unit": "m"
-        },
-        "cost": {
-          "activation": "complex",
-          "powerPoints": 15,
-          "trigger": "<p>Valid target(s) is Burrowing.</p>"
-        },
-        "category": "physical",
-        "power": 200,
-        "accuracy": 100,
-        "types": [
-          "ground"
-        ],
-        "description": "<p>Trigger: Valid target(s) is Burrowing.</p><p>Effect: This attack ignores the target's EVA Stage increases.</p>",
-        "contestType": "",
-        "contestEffect": "",
-        "varant": "earthquake",
-        "free": false,
-        "slot": null
+        "description": "<p>Effect: This attack ignores any EVA Stage increases of burrowing targets.</p>",
+        "img": "systems/ptr2e/img/svg/ground_icon.svg",
+        "predicate": []
       }
     ],
-    "container": null,
-    "grade": "S"
+    "grade": "A",
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": "<p>Effect: This attack's Power is doubled against Burrowing targets.</p>"
+    },
+    "traits": [],
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
   },
   "_id": "XNpXPx2w9KKZ8chL",
   "effects": []

@@ -6,12 +6,11 @@
     "slug": "stored-power",
     "actions": [
       {
-        "slug": "stored-power",
+        "slug": "stored-pwr",
         "name": "Stored Power",
         "type": "attack",
         "traits": [
-          "pulse",
-          "pp-updated"
+          "pulse"
         ],
         "range": {
           "target": "creature",
@@ -29,15 +28,78 @@
           "psychic"
         ],
         "description": "<p>Effect: This attack's Power increases based on the totals of the user's Stat Stages, increasing if a Stat's total Stages are positive.</p><p></p><blockquote><p>Damage Formula: Power = 20 + 20 x (max(0,ATKStages)+max(0,DEFStages)+max(0,SPATKStages)+max(0,SPDEFStages)+max(0,SPDStages)+max(0,ACCStages)+max(0,EVAStages))</p></blockquote>",
-        "img": "systems/ptr2e/img/svg/psychic_icon.svg"
+        "img": "systems/ptr2e/img/svg/psychic_icon.svg",
+        "predicate": []
       }
     ],
     "grade": "B",
     "_migration": {
       "version": null,
       "previous": null
-    }
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "traits": []
   },
   "_id": "7Mhbg8HQUtPGaWSg",
-  "effects": []
+  "effects": [
+    {
+      "name": "Stored Power",
+      "type": "passive",
+      "_id": "vr0NhprDlhR9Yj15",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "flat-modifier",
+            "key": "stored-pwr-attack-power",
+            "value": "20 * (@actor.system.attributes.atk.stage+@actor.system.attributes.def.stage+@actor.system.attributes.spa.stage+@actor.system.attributes.spd.stage+@actor.system.attributes.spd.stage+@actor.system.battleStats.accuracy.stage+@actor.system.battleStats.evasion.stage+@actor.system.battleStats.critRate.stage)",
+            "predicate": [],
+            "label": "Stored Power",
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "hideIfDisabled": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": false,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": "Compendium.ptr2e.core-moves.Item.yoBSCEEZtzbZESMt.ActiveEffect.SGs4pJyAdVY8y4Ah",
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "1.2.1.beta",
+        "createdTime": 1740188922597,
+        "modifiedTime": 1745090631006,
+        "lastModifiedBy": "n5bBYe2ClImhFeB2"
+      }
+    }
+  ]
 }

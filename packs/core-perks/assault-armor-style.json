@@ -20,11 +20,13 @@
         },
         "cost": {
           "activation": "simple",
-          "powerPoints": 3
+          "powerPoints": 1
         },
-        "description": "Effect: The target may use DEF in place of their ATK when using a Physical-Category Attack for 1 Activation.",
+        "description": "<p>Effect: The target may use DEF in place of their ATK when using a Physical-Category Attack for 1 Activation.</p>",
         "type": "generic",
-        "img": "icons/svg/explosion.svg"
+        "img": "systems/ptr2e/img/perk-icons/Orders_Training.svg",
+        "variant": null,
+        "ephemeralVariant": false
       },
       {
         "name": "Assault Armor! (Self)",
@@ -35,15 +37,18 @@
         ],
         "range": {
           "target": "self",
-          "unit": "m"
+          "unit": "m",
+          "distance": 0
         },
         "cost": {
           "activation": "simple",
-          "powerPoints": 3
+          "powerPoints": 1
         },
-        "description": "Effect: The user may use DEF in place of their ATK when using a Physical-Category Attack until the end of their next Activation.",
+        "description": "<p>Effect: The user may use DEF in place of their ATK when using a Physical-Category Attack until the end of their next Activation.</p>",
         "type": "generic",
-        "img": "icons/svg/explosion.svg"
+        "img": "systems/ptr2e/img/perk-icons/Orders_Training.svg",
+        "variant": null,
+        "ephemeralVariant": false
       }
     ],
     "slug": "assault-armor-style",
@@ -72,7 +77,10 @@
           "stat-iv-booster-1-11",
           "improved-burrow-3",
           "improved-overland-13",
-          "improved-overland-5"
+          "improved-overland-5",
+          "minor-buff-8",
+          "minor-buff-16",
+          "minor-buff-29"
         ],
         "config": {
           "alpha": null,
@@ -96,8 +104,18 @@
     "design": {
       "arena": "physical",
       "approach": "resilience",
-      "archetype": "Tactician"
-    }
+      "archetype": "tactician"
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "originSlug": null,
+    "variant": null,
+    "mode": null
   },
   "effects": []
 }

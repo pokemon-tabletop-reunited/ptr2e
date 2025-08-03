@@ -18,15 +18,20 @@
         "slug": "cyclist",
         "description": "<p>When riding a [Cycle], your Overland Movement Allowance increases by +3, and you may use Take Down as if it were on your Active List. When riding a [Rotom Device] [Cycle] you get access to Wild Charge instead of Take Down.</p>",
         "cost": {
-          "activation": "free"
+          "activation": "free",
+          "powerPoints": 0
         },
         "type": "passive",
         "traits": [],
         "img": "icons/svg/explosion.svg",
         "range": {
           "target": "enemy",
-          "unit": "m"
-        }
+          "unit": "m",
+          "distance": 0
+        },
+        "variant": null,
+        "ephemeralVariant": false,
+        "hidden": false
       }
     ],
     "slug": "cyclist",
@@ -43,7 +48,11 @@
           "trained-rider",
           "adhesive-digits",
           "improved-overland-7",
-          "rigorous-fundamentals"
+          "rigorous-fundamentals",
+          "minor-buff-3",
+          "minor-buff-10",
+          "minor-buff-36",
+          "mounted-specialist"
         ],
         "config": {
           "alpha": null,
@@ -68,7 +77,17 @@
       "arena": "physical",
       "approach": "power",
       "archetype": "cavalier"
-    }
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "originSlug": null,
+    "variant": null,
+    "mode": null
   },
   "_id": "AFU1teCNRoIixS3n",
   "img": "systems/ptr2e/img/item-icons/acro%20bike.webp",

@@ -28,15 +28,20 @@
         "slug": "pack-alpha",
         "description": "<p>You gain the [Pack Leader] trait, and may designate consenting creatures with the [Pack Mon] trait as members of your pack.</p>",
         "cost": {
-          "activation": "free"
+          "activation": "free",
+          "powerPoints": 0
         },
         "type": "passive",
         "traits": [],
         "img": "icons/svg/explosion.svg",
         "range": {
           "target": "enemy",
-          "unit": "m"
-        }
+          "unit": "m",
+          "distance": 0
+        },
+        "variant": null,
+        "ephemeralVariant": false,
+        "hidden": false
       }
     ],
     "slug": "pack-alpha",
@@ -55,7 +60,9 @@
           "pack-mon",
           "lead-from-behind",
           "root-4",
-          "packmarked"
+          "packmarked",
+          "minor-buff-33",
+          "yousa-bad-bombin"
         ],
         "config": {
           "alpha": null,
@@ -78,7 +85,17 @@
       "arena": "social",
       "approach": "power",
       "archetype": "pack-leader"
-    }
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "originSlug": null,
+    "variant": null,
+    "mode": null
   },
   "_id": "ee07hyZxFObQ5emn",
   "img": "systems/ptr2e/img/perk-icons/Tactician.svg",
@@ -126,12 +143,13 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.342",
         "systemId": "ptr2e",
         "systemVersion": "1.0.1.beta",
         "createdTime": 1739314032552,
         "modifiedTime": 1739314051765,
-        "lastModifiedBy": "IcBpMqhFuTck9VpX"
+        "lastModifiedBy": "IcBpMqhFuTck9VpX",
+        "exportSource": null
       }
     }
   ],

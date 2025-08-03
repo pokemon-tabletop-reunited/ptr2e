@@ -20,10 +20,13 @@
         },
         "range": {
           "target": "self",
-          "unit": "m"
+          "unit": "m",
+          "distance": 0
         },
         "description": "Effect: You heal 6 Ticks of HP, accruing a Stack of @Affliction[weary] as normal. If done on your own turn, this becomes a Complex Action.",
-        "img": "icons/svg/explosion.svg"
+        "img": "icons/svg/explosion.svg",
+        "variant": null,
+        "ephemeralVariant": false
       }
     ],
     "description": "<p>Trigger: The user gains @Affliction[fainted].<br><br>Effect: You heal 6 Ticks of HP, accruing a Stack of @Affliction[weary] as normal. If done on your own turn, this becomes a Complex Action.</p>",
@@ -43,7 +46,10 @@
           "overbooster",
           "hear-no-bell",
           "plus-ultra",
-          "offering"
+          "offering",
+          "minor-buff-37",
+          "boiling-blood",
+          "wolfshirt"
         ],
         "config": {
           "alpha": null,
@@ -68,7 +74,17 @@
       "arena": "physical",
       "approach": "resilience",
       "archetype": "berserker"
-    }
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "originSlug": null,
+    "variant": null,
+    "mode": null
   },
   "effects": []
 }
