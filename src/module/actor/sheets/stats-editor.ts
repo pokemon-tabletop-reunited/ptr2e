@@ -175,7 +175,7 @@ class StatsEditor extends foundry.applications.api.HandlebarsApplicationMixin(Ap
         slider.on("update", this.updateLimit.bind(this, {
           sliderKey: "ev",
           isBaseStat: false,
-          limit: 508,
+          limit: 512,
           max: 200,
           min: 0,
           totalElement,

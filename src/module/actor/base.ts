@@ -38,6 +38,7 @@ import { ActionUUID } from "src/util/uuid.ts";
 import { ActorSizePTR2e } from "./data/size.ts";
 import { auraAffectsActor, checkAreaEffects } from "./helpers.ts";
 import { RollNote } from "@system/notes.ts";
+import { PlaceholderTrait } from "@module/data/models/trait.ts";
 
 interface ActorParty {
   owner: ActorPTR2e<ActorSystemPTR2e, null> | null;
@@ -574,7 +575,7 @@ class ActorPTR2e<
       if (item.system.quantity !== undefined && typeof item.system.quantity === 'number' && item.system.quantity <= 0) continue;
       itemNames.add(item.slug);
 
-      const flingData = item.system.fling as { power: number, accuracy: number, type: PokemonType, hide: boolean, range: RangePTR2e | null};
+      const flingData = item.system.fling as { power: number, accuracy: number, type: PokemonType, hide: boolean, range: RangePTR2e | null };
       if (flingData.hide) continue;
 
       data.system.actions.push(getFlingAttack({
@@ -624,7 +625,7 @@ class ActorPTR2e<
       void
     >) {
       if (!effect.active) continue;
-      if(bossTrait && effect.flags?.ptr2e?.traitEffect == bossTrait.slug) continue;
+      if (bossTrait && effect.flags?.ptr2e?.traitEffect == bossTrait.slug) continue;
       changes.push(
         ...effect.changes.map((change) => {
           const c = foundry.utils.deepClone(change);
@@ -1100,7 +1101,7 @@ class ActorPTR2e<
     const type = this.system.movementType ?? (() => {
       //@ts-expect-error - Outdated types
       const maybeType: string | undefined = this.getActiveTokens(false, true).at(0)?.movementAction;
-      if(maybeType) {
+      if (maybeType) {
         this.system.movementType = maybeType;
         return maybeType;
       }
@@ -1519,8 +1520,19 @@ class ActorPTR2e<
     }) ?? []
 
     const initialActionOptions =
-      params.traits?.map((t) => `self:action:trait:${typeof t === "string" ? t : t.slug}`) ??
-      [];
+      params.traits
+        ? Array.isArray(params.traits)
+          ? params.traits.map((t) => `self:action:trait:${t ?? ""}`)
+          : params.traits?.contents.flatMap((t) => {
+            const trait = t as PlaceholderTrait;
+            if (!(trait.value && trait.placeholders && Array.isArray(trait.placeholders) && trait.placeholders.length)) return `self:action:trait:${t.slug}`
+
+            return [
+              `self:action:trait:${trait.slug.replace(new RegExp(trait.placeholders.at(0)!.valuePattern), "").replace(/^-/, "").replace(/-$/, "")}`,
+              `self:action:trait:${t.slug}`
+            ]
+          })
+        : [];
 
     const selfActor =
       params.viewOnly || !targetToken?.actor
@@ -1614,7 +1626,15 @@ class ActorPTR2e<
     }
 
     const actionTraits = (() => {
-      const traits = params.traits?.map((t) => (typeof t === "string" ? t : t.slug)) ?? [];
+      const traits = params.traits?.map((t) => (typeof t === "string" ? t : (() => {
+        const trait = t as PlaceholderTrait;
+        if (!(trait.value && trait.placeholders && Array.isArray(trait.placeholders) && trait.placeholders.length)) return t.slug
+
+        return [
+          trait.slug.replace(new RegExp(trait.placeholders.at(0)!.valuePattern), "").replace(/^-/, "").replace(/-$/, ""),
+          t.slug
+        ]
+      })()))?.flat() ?? [];
 
       if (selfAttack) {
         for (const adjustment of extractAttackAdjustments(selfActor.synthetics.attackAdjustments, params.domains)) {

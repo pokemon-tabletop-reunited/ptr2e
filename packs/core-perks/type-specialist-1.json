@@ -1,0 +1,122 @@
+{
+  "name": "Type Specialist 1",
+  "type": "perk",
+  "system": {
+    "prerequisites": [],
+    "cost": 1,
+    "description": "<p>You gain +10 to social interaction Skill Tests when interacting with Pokemon of your preferred type. This perk may be purchased multiple times, each time selecting a new Type.</p>",
+    "actions": [
+      {
+        "name": "Type Specialty",
+        "slug": "type-specialty",
+        "description": "<p>You gain +10 to social interaction Skill Tests when interacting with Pokemon of your preferred type. The cost on this scales with each additional type chosen.</p>",
+        "cost": {
+          "activation": "free"
+        },
+        "type": "passive",
+        "traits": [],
+        "img": "icons/svg/explosion.svg",
+        "range": {
+          "target": "enemy",
+          "unit": "m"
+        }
+      }
+    ],
+    "slug": "type-specialist",
+    "traits": [],
+    "_migration": {
+      "version": null,
+      "previous": null
+    },
+    "nodes": [
+      {
+        "x": 187,
+        "y": 100,
+        "hidden": false,
+        "type": "normal",
+        "connected": [
+          "improved-overland-1-1",
+          "stat-iv-booster-1-1",
+          "gaia-stance",
+          "neurotoxin-stance",
+          "root-3",
+          "landslide-style",
+          "thuggish-style",
+          "highlander-stance",
+          "short-circuit-style",
+          "fey-sorcery-stance",
+          "dojo-discipline-stance",
+          "fiery-footwork-style",
+          "primal-aversion-style",
+          "celerity-style",
+          "night-terror-stance"
+        ],
+        "tier": {
+          "rank": 1,
+          "uuid": null
+        },
+        "config": {
+          "texture": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "tint": null
+        }
+      },
+      {
+        "x": null,
+        "y": null,
+        "hidden": false,
+        "type": "normal",
+        "connected": [],
+        "tier": {
+          "rank": 2,
+          "uuid": "Compendium.ptr2e.core-perks.Item.adEy4rh1el8Bqv0R"
+        },
+        "config": {
+          "texture": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "tint": null
+        }
+      },
+      {
+        "x": null,
+        "y": null,
+        "hidden": false,
+        "type": "normal",
+        "connected": [],
+        "tier": {
+          "rank": 3,
+          "uuid": "Compendium.ptr2e.core-perks.Item.lHyI74f4ZtSzxVYO"
+        },
+        "config": {
+          "texture": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "tint": null
+        }
+      }
+    ],
+    "autoUnlock": [],
+    "global": true,
+    "webs": [],
+    "design": {
+      "arena": "social",
+      "approach": "finesse",
+      "archetype": "type-ace"
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "variant": "tiered",
+    "mode": "coexist"
+  },
+  "_id": "7M9EE1mHIJeoAWhp",
+  "img": "systems/ptr2e/img/perk-icons/Socialite.svg",
+  "effects": [],
+  "folder": "kWG8zov1UnSKOvEQ"
+}

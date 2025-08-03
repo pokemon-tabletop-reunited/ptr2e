@@ -24,9 +24,10 @@
       "img": "icons/svg/thrust.svg",
       "type": "affliction",
       "duration": {
-        "turns": 2,
+        "turns": null,
         "startTime": null,
-        "combat": null
+        "combat": null,
+        "startTurn": null
       },
       "system": {
         "changes": [
@@ -36,8 +37,8 @@
             "value": -20,
             "predicate": [],
             "label": "Agile",
-            "mode": 2,
             "priority": null,
+            "mode": 2,
             "ignored": false,
             "hideIfDisabled": false
           },
@@ -62,13 +63,13 @@
               {
                 "mode": 5,
                 "property": "system.removeAfterAttacking",
-                "value": true
+                "value": "true"
               }
             ],
-            "mode": 2,
             "predicate": [],
-            "ignored": false,
-            "isFixedChance": false
+            "isFixedChance": false,
+            "mode": 2,
+            "ignored": false
           }
         ],
         "removeOnRecall": true,
@@ -77,7 +78,7 @@
           "pseudo-affliction"
         ],
         "slug": null,
-        "removeAfterAttacking": false,
+        "removeAfterAttacking": true,
         "removeAfterAttacked": false,
         "stacks": 0,
         "priority": 50,
@@ -85,17 +86,15 @@
         "type": "damage"
       },
       "description": "While afflicted with Agile, Power of the creature's Attacks are decreased by -20% and has its Initiative advanced by 20% after its Activation.",
-      "statuses": [
-        "agile"
-      ],
+      "statuses": [],
       "_id": "agilecondition00",
       "_stats": {
         "coreVersion": "13.346",
-        "systemId": null,
-        "systemVersion": null,
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.1.beta",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null,
+        "modifiedTime": 1754127963588,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf",
         "compendiumSource": null,
         "duplicateSource": null,
         "exportSource": null
@@ -108,24 +107,6 @@
       "flags": {}
     }
   ],
-  "folder": "V4skAU6G3OH5fXgD",
-  "_id": "agileconditiitem",
-  "flags": {
-    "core": {}
-  },
-  "_stats": {
-    "coreVersion": "13.346",
-    "systemId": null,
-    "systemVersion": null,
-    "createdTime": null,
-    "modifiedTime": null,
-    "lastModifiedBy": null,
-    "compendiumSource": "Compendium.ptr2e.core-effects.Item.agileconditiitem",
-    "duplicateSource": null,
-    "exportSource": null
-  },
-  "sort": 0,
-  "ownership": {
-    "default": 0
-  }
+  "folder": "V4skAU6G3OH5fXgE",
+  "_id": "agileconditiitem"
 }

@@ -15,7 +15,7 @@
       "notes": ""
     },
     "actions": [],
-    "description": "<p>Effect: The user gains @Trait[musician], and learns @UUID[Compendium.ptr2e.core-moves.ddcyCuH4t0mVmB7n]{Sing}, @UUID[Compendium.ptr2e.core-moves.h2xOusyckAvQlQtf]{Bark} and @UUID[Compendium.ptr2e.core-moves.ETIoZqMMiW74sq3s]{Snarl}.</p>",
+    "description": "<p>Effect: The user gains @Trait[musician], and learns @UUID[Compendium.ptr2e.core-moves.ddcyCuH4t0mVmB7n]{Sing} and @UUID[Compendium.ptr2e.core-moves.h2xOusyckAvQlQtf]{Bark}.</p>",
     "traits": [],
     "prerequisites": [
       {
@@ -34,11 +34,21 @@
     },
     "global": true,
     "webs": [],
-    "nodes": [],
-    "slug": "cover-artist",
-    "originSlug": null,
-    "variant": null,
-    "mode": null
+    "nodes": [
+      {
+        "x": 173,
+        "y": 169,
+        "connected": [
+          "swan-song",
+          "rousing-song",
+          "root-4"
+        ],
+        "hidden": false,
+        "type": "normal",
+        "tier": null
+      }
+    ],
+    "slug": "cover-artist"
   },
   "img": "systems/ptr2e/img/perk-icons/Musician.svg",
   "effects": [
@@ -88,25 +98,6 @@
             "replaceSelf": false
           },
           {
-            "type": "grant-item",
-            "key": "",
-            "value": "Compendium.ptr2e.core-moves.Item.ETIoZqMMiW74sq3s",
-            "predicate": [],
-            "allowDuplicate": false,
-            "priority": null,
-            "alterations": [],
-            "onDeleteActions": {
-              "grantee": "detach",
-              "granter": "cascade"
-            },
-            "mode": 2,
-            "ignored": false,
-            "reevaluateOnUpdate": false,
-            "inMemoryOnly": false,
-            "track": false,
-            "replaceSelf": false
-          },
-          {
             "type": "add-trait",
             "key": "",
             "value": "musician",
@@ -119,7 +110,9 @@
         "traits": [],
         "removeAfterCombat": true,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
@@ -141,16 +134,9 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "13.342",
-        "systemId": "ptr2e",
-        "systemVersion": "1.3.1.beta",
-        "createdTime": null,
-        "modifiedTime": 1750816877569,
-        "lastModifiedBy": "nrhyib0OvR59Mlxq",
         "exportSource": null
       }
     }
   ],
-  "flags": {},
   "_id": "DRgegaAcfqpkiBMK"
 }

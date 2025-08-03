@@ -35,10 +35,7 @@
         "PTR 2e Team"
       ],
       "notes": ""
-    },
-    "originSlug": null,
-    "variant": null,
-    "mode": null
+    }
   },
   "img": "systems/ptr2e/img/icons/feat_icon.webp",
   "effects": [
@@ -67,8 +64,8 @@
             "key": "system.skills.{effect|flags.ptr2e.choiceSelections.ms41}.value",
             "value": 10,
             "predicate": [],
-            "mode": 2,
             "priority": null,
+            "mode": 2,
             "ignored": false
           },
           {
@@ -79,7 +76,7 @@
             "mode": 2,
             "priority": null,
             "ignored": false,
-            "choices": "flags.ptr2e.skillOptions.arts",
+            "choices": "flags.ptr2e.skillOptions.occult",
             "prompt": "PTR2E.ChoiceSetPrompt.Prompt",
             "adjustName": true,
             "rollOption": "ms42"
@@ -89,8 +86,29 @@
             "key": "system.skills.{effect|flags.ptr2e.choiceSelections.ms42}.value",
             "value": 10,
             "predicate": [],
-            "mode": 2,
             "priority": null,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "choice-set",
+            "key": "",
+            "value": 0,
+            "predicate": [],
+            "mode": 2,
+            "ignored": false,
+            "choices": "flags.ptr2e.skillOptions.occult",
+            "prompt": "PTR2E.ChoiceSetPrompt.Prompt",
+            "adjustName": true,
+            "rollOption": "ms43",
+            "priority": null
+          },
+          {
+            "type": "basic",
+            "key": "system.skills.{effect|flags.ptr2e.choiceSelections.ms43}.value",
+            "value": 10,
+            "predicate": [],
+            "mode": 2,
             "ignored": false
           }
         ],
@@ -98,7 +116,9 @@
         "traits": [],
         "removeAfterCombat": false,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
@@ -120,12 +140,6 @@
       "_stats": {
         "compendiumSource": "Item.xxuGLZ0QPnw7NYa8.ActiveEffect.V64elrUanozajfG2",
         "duplicateSource": null,
-        "coreVersion": "13.342",
-        "systemId": "ptr2e",
-        "systemVersion": "1.0.0.beta-ready.2",
-        "createdTime": 1738607327914,
-        "modifiedTime": 1738607327914,
-        "lastModifiedBy": "5ImYyhOS2D6D7ypO",
         "exportSource": null
       }
     }

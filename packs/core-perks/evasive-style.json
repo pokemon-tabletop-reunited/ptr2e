@@ -11,7 +11,7 @@
       }
     ],
     "cost": 1,
-    "description": "<p>The target gains @Affliction[evasive] 1.</p>",
+    "description": "<p>The target gains @UUID[Compendium.ptr2e.core-effects.evasivecondiitem]{Evasive}.</p>",
     "actions": [
       {
         "name": "Evasive!",
@@ -27,39 +27,11 @@
         },
         "cost": {
           "activation": "simple",
-          "powerPoints": 1,
-          "delay": null,
-          "priority": null
+          "powerPoints": 1
         },
-        "description": "Effect: The target gains @Affliction[evasive] 1.",
+        "description": "<p>Effect: The target gains @UUID[Compendium.ptr2e.core-effects.evasivecondiitem]{Evasive}</p>",
         "type": "generic",
-        "img": "icons/svg/explosion.svg",
-        "variant": null,
-        "ephemeralVariant": false
-      },
-      {
-        "name": "Evasive! (Self)",
-        "slug": "evasive-self",
-        "traits": [
-          "command",
-          "style"
-        ],
-        "range": {
-          "target": "self",
-          "unit": "m",
-          "distance": 0
-        },
-        "cost": {
-          "activation": "simple",
-          "powerPoints": 1,
-          "delay": null,
-          "priority": null
-        },
-        "description": "Effect: The target gains @Affliction[evasive] 2.",
-        "type": "generic",
-        "img": "icons/svg/explosion.svg",
-        "variant": null,
-        "ephemeralVariant": false
+        "img": "systems/ptr2e/img/perk-icons/Orders_Training.svg"
       }
     ],
     "slug": "evasive-style",
@@ -72,6 +44,10 @@
     },
     "nodes": [
       {
+        "x": 109,
+        "y": 124,
+        "hidden": false,
+        "type": "normal",
         "connected": [
           "rapid-fire-style",
           "assault-armor-style",
@@ -85,25 +61,15 @@
           "duelist-trainer"
         ],
         "config": {
-          "alpha": null,
-          "backgroundColor": "#004080",
-          "borderColor": null,
-          "borderWidth": null,
           "texture": "systems/ptr2e/img/perk-icons/Orders_Training.svg",
-          "tint": "#808080",
-          "scale": null
+          "backgroundColor": null,
+          "borderColor": null,
+          "tint": null
         },
-        "hidden": false,
-        "type": "normal",
-        "x": 109,
-        "y": 124,
         "tier": null
       }
     ],
     "autoUnlock": [],
-    "originSlug": null,
-    "variant": null,
-    "mode": null,
     "global": true,
     "webs": [],
     "design": {
@@ -121,6 +87,60 @@
   },
   "_id": "DejTHLN3FViZzzeE",
   "img": "systems/ptr2e/img/perk-icons/Orders_Training.svg",
-  "effects": [],
+  "effects": [
+    {
+      "name": "Evasive Style",
+      "type": "passive",
+      "_id": "Ks709HyI19GYoGdc",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "evasive-style-generic",
+            "value": "Compendium.ptr2e.core-effects.Item.evasivecondiitem",
+            "predicate": [],
+            "chance": 100,
+            "isFixedChance": true,
+            "affects": "target",
+            "alterations": [],
+            "dontMerge": false,
+            "mode": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.346",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.1.beta",
+        "createdTime": 1754128068655,
+        "modifiedTime": 1754128095844,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+      }
+    }
+  ],
   "folder": "JZrGRskscJOkkPWA"
 }
