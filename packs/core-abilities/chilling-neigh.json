@@ -19,7 +19,8 @@
         },
         "range": {
           "target": "self",
-          "unit": "m"
+          "unit": "m",
+          "distance": 10
         },
         "description": "<p>Trigger: The user causes at least one creature to gain @Affliction[fainted].</p><p>Effect: The user's ATK Stage is increased by +1 for 7 Activations.</p>",
         "img": "icons/svg/explosion.svg"
@@ -37,7 +38,8 @@
         },
         "range": {
           "target": "self",
-          "unit": "m"
+          "unit": "m",
+          "distance": 10
         },
         "description": "<p>Trigger: The user possesses the effect Calyrex Rider.</p><p>Effect: The user gains Connection - Glacial Lance and takes 33% less damage from Special-Category Attacks.</p>",
         "img": "icons/svg/explosion.svg"
@@ -78,17 +80,17 @@
             ],
             "reevaluateOnUpdate": true,
             "allowDuplicate": false,
-            "mode": 2,
             "priority": null,
-            "ignored": false,
-            "inMemoryOnly": false,
             "alterations": [],
-            "track": false,
-            "replaceSelf": false,
             "onDeleteActions": {
               "grantee": "detach",
               "granter": "cascade"
-            }
+            },
+            "mode": 2,
+            "ignored": false,
+            "inMemoryOnly": false,
+            "track": false,
+            "replaceSelf": false
           },
           {
             "type": "ephemeral-modifier",
@@ -98,17 +100,38 @@
               "effect:passive:calyrex-rider"
             ],
             "label": "Calyrex Rider - Chilling Neigh",
-            "mode": 2,
             "priority": null,
+            "mode": 2,
             "ignored": false,
             "hideIfDisabled": false
+          },
+          {
+            "type": "roll-effect",
+            "key": "chilling-neigh-generic",
+            "value": "Compendium.ptr2e.core-effects.Item.ZGwaMlzUwkSuCPyH",
+            "predicate": [],
+            "chance": 100,
+            "isFixedChance": true,
+            "affects": "self",
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "duration.turns",
+                "value": 7
+              }
+            ],
+            "dontMerge": false,
+            "mode": 2,
+            "ignored": false
           }
         ],
         "slug": null,
         "traits": [],
         "removeAfterCombat": false,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
@@ -130,12 +153,13 @@
       "_stats": {
         "compendiumSource": "Item.5TPjCjAsFMgdFVSR.ActiveEffect.X2J9s78aixergPau",
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.346",
         "systemId": "ptr2e",
-        "systemVersion": "1.1.2.beta",
+        "systemVersion": "1.4.1.beta",
         "createdTime": 1739813701982,
-        "modifiedTime": 1742427706863,
-        "lastModifiedBy": "NGSbEbIP7O7ThFIb"
+        "modifiedTime": 1753827333347,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf",
+        "exportSource": null
       }
     }
   ]

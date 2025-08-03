@@ -21,8 +21,8 @@
           "distance": 13,
           "unit": "m"
         },
-        "description": "<p>The user gains @Affliction[transient] 2 and @Affliction[invisible] 2, and relocates itself to an open space within 2m of the target. The user is then Flinched. Until the user's next Activation, they freely move with the target as the target itself moves.</p>",
-        "img": "icons/svg/explosion.svg"
+        "description": "<p>The user gains @Affliction[transient 2] and @Affliction[invisible 2], and relocates itself to an open space within 2m of the target. The user is then Flinched. Until the user's next Activation, they freely move with the target as the target itself moves.</p>",
+        "img": "systems/ptr2e/img/svg/ghost_icon.svg"
       }
     ],
     "description": "<p>Effect: Connection - Phantom Force. The user gains @Affliction[transient] 2 and @Affliction[invisible] 2, and relocates itself to an open space within 2m of the target. The user is then Flinched. Until the user's next Activation, they freely move with the target as the target itself moves.</p>",
@@ -41,7 +41,8 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
+      ],
+      "notes": ""
     }
   },
   "_id": "nh8NRKZkGqUSsfzd",
@@ -57,7 +58,9 @@
             "type": "grant-item",
             "key": "",
             "value": "Compendium.ptr2e.core-moves.Item.hK17tJ4kinDuhKyh",
-            "predicate": [],
+            "predicate": [
+              "item:ability:clinging-shadow"
+            ],
             "alterations": [
               {
                 "mode": 5,
@@ -65,25 +68,65 @@
                 "value": "true"
               }
             ],
-            "mode": 2,
             "priority": null,
-            "ignored": false,
-            "reevaluateOnUpdate": false,
-            "inMemoryOnly": false,
-            "allowDuplicate": true,
-            "track": false,
-            "replaceSelf": false,
+            "reevaluateOnUpdate": true,
             "onDeleteActions": {
               "grantee": "detach",
               "granter": "cascade"
-            }
+            },
+            "allowDuplicate": false,
+            "mode": 2,
+            "ignored": false,
+            "inMemoryOnly": false,
+            "track": false,
+            "replaceSelf": false
+          },
+          {
+            "type": "roll-effect",
+            "key": "clinging-shadow-generic",
+            "value": "Compendium.ptr2e.core-effects.Item.transientconitem",
+            "predicate": [],
+            "chance": 100,
+            "isFixedChance": true,
+            "affects": "self",
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "duration.turns",
+                "value": 2
+              }
+            ],
+            "dontMerge": false,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "roll-effect",
+            "key": "clinging-shadow-generic",
+            "value": "Compendium.ptr2e.core-effects.Item.invisibleconitem",
+            "predicate": [],
+            "chance": 100,
+            "isFixedChance": true,
+            "affects": "self",
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "duration.turns",
+                "value": 2
+              }
+            ],
+            "dontMerge": false,
+            "mode": 2,
+            "ignored": false
           }
         ],
         "slug": null,
         "traits": [],
         "removeAfterCombat": true,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
@@ -105,12 +148,13 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.346",
         "systemId": "ptr2e",
-        "systemVersion": "0.10.0-alpha.5.1.5",
+        "systemVersion": "1.4.1.beta",
         "createdTime": 1737393873368,
-        "modifiedTime": 1737393911713,
-        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+        "modifiedTime": 1753827820139,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf",
+        "exportSource": null
       }
     }
   ]

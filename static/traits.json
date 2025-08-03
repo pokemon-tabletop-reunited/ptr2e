@@ -4792,7 +4792,27 @@
       "data",
       "virus"
     ],
-    "description": "Gain +50% Damage versus Virus-trait Digimon. Inflict 33% less Damage vs Data-trait Digimon."
+    "description": "Gain +50% Damage versus Virus-trait Digimon. Inflict 50% less Damage vs Data-trait Digimon.",
+    "changes": [
+      {
+        "type": "percentile-modifier",
+        "key": "damaging-attack-damage",
+        "value": 50,
+        "predicate": [
+          "target:trait:virus"
+        ],
+        "hideIfDisabled": true
+      },
+      {
+        "type": "percentile-modifier",
+        "key": "damaging-attack-damage",
+        "value": -50,
+        "predicate": [
+          "target:trait:data"
+        ],
+        "hideIfDisabled": true
+      }
+    ]
   },
   {
     "slug": "data",
@@ -4802,7 +4822,27 @@
       "digimon",
       "virus"
     ],
-    "description": "Gain +50% Damage versus Vaccine-trait Digimon. Inflict 33% less Damage vs Virus-trait Digimon."
+    "description": "Gain +50% Damage versus Vaccine-trait Digimon. Inflict 50% less Damage vs Virus-trait Digimon.",
+    "changes": [
+      {
+        "type": "percentile-modifier",
+        "key": "damaging-attack-damage",
+        "value": 50,
+        "predicate": [
+          "target:trait:vaccine"
+        ],
+        "hideIfDisabled": true
+      },
+      {
+        "type": "percentile-modifier",
+        "key": "damaging-attack-damage",
+        "value": -50,
+        "predicate": [
+          "target:trait:virus"
+        ],
+        "hideIfDisabled": true
+      }
+    ]
   },
   {
     "slug": "virus",
@@ -4812,7 +4852,27 @@
       "data",
       "digimon"
     ],
-    "description": "Gain +50% Damage versus Data-trait Digimon. Inflict 33% less Damage vs Vaccine-trait Digimon."
+    "description": "Gain +50% Damage versus Data-trait Digimon. Inflict 50% less Damage vs Vaccine-trait Digimon.",
+    "changes": [
+      {
+        "type": "percentile-modifier",
+        "key": "damaging-attack-damage",
+        "value": 50,
+        "predicate": [
+          "target:trait:data"
+        ],
+        "hideIfDisabled": true
+      },
+      {
+        "type": "percentile-modifier",
+        "key": "damaging-attack-damage",
+        "value": -50,
+        "predicate": [
+          "target:trait:vaccine"
+        ],
+        "hideIfDisabled": true
+      }
+    ]
   },
   {
     "slug": "free",
@@ -4914,5 +4974,11 @@
     "label": "UFO",
     "related": [],
     "description": "This Trait denotes the creature to be or be in a Unidentified Flying Object (UFO). Meaning they must use Pilot (Aerospace) for its Rush skill."
+  },
+  {
+    "slug": "agitator",
+    "label": "Agitator",
+    "related": [],
+    "description": "This creature or item is specialised in the art of Agitation, using social moves to debuff their opponents."
   }
 ]
