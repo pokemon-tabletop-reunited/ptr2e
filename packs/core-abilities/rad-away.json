@@ -17,7 +17,8 @@
         },
         "range": {
           "target": "self",
-          "unit": "m"
+          "unit": "m",
+          "distance": 10
         },
         "description": "<p>Effect: The user's attacks deal 50% more damage to Nuclear-Type creatures.</p>",
         "img": "icons/svg/explosion.svg"
@@ -42,6 +43,58 @@
     }
   },
   "_id": "U8vafm3cXalg7c6d",
-  "effects": [],
+  "effects": [
+    {
+      "name": "Rad-Away",
+      "type": "passive",
+      "_id": "AijLgjCNCX9xzn66",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "percentile-modifier",
+            "key": "damaging-attack-damage",
+            "value": 50,
+            "predicate": [
+              "target:trait:nuclear"
+            ],
+            "mode": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.346",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.1.beta",
+        "createdTime": 1753698075296,
+        "modifiedTime": 1753698146565,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+      }
+    }
+  ],
   "folder": "0nG9TRDSwrmcTFwO"
 }

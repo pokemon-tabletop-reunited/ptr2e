@@ -535,6 +535,8 @@ namespace ChangeModel {
     context: DocumentModificationContext<ActorPTR2e | ItemPTR2e | null>;
     /** Whether this preCreate run is from a pre-update reevaluation */
     reevaluation?: boolean;
+    /** Item Source in case of name changes */
+    itemSource?: ItemSourcePTR2e;
   }
 
   export interface PreDeleteParams {

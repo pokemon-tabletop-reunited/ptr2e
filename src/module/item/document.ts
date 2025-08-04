@@ -268,6 +268,7 @@ class ItemPTR2e<
               changeSource,
               pendingEffects: outputEffectSources,
               pendingItems: outputItemSources,
+              itemSource: source,
               tempItems: [],
               context: {}
             })

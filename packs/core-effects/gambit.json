@@ -1,7 +1,7 @@
 {
   "name": "Gambit",
   "type": "effect",
-  "img": "icons/svg/upgrade.svg",
+  "img": "icons/svg/d20.svg",
   "system": {
     "traits": [
       "pseudo-affliction"
@@ -21,12 +21,13 @@
   "effects": [
     {
       "name": "Gambit",
-      "img": "icons/svg/upgrade.svg",
+      "img": "icons/svg/d20.svg",
       "type": "affliction",
       "duration": {
-        "turns": 2,
+        "turns": null,
         "startTime": null,
-        "combat": null
+        "combat": null,
+        "startTurn": null
       },
       "system": {
         "changes": [
@@ -53,7 +54,7 @@
           "pseudo-affliction"
         ],
         "slug": null,
-        "removeAfterAttacking": false,
+        "removeAfterAttacking": true,
         "removeAfterAttacked": false,
         "stacks": 0,
         "priority": 50,
@@ -61,17 +62,15 @@
         "type": "damage"
       },
       "description": "While afflicted with Gambit, the creature has +2 default CRIT and -1 default ACC.",
-      "statuses": [
-        "gambit"
-      ],
+      "statuses": [],
       "_id": "gambitcondition0",
       "_stats": {
         "coreVersion": "13.346",
-        "systemId": null,
-        "systemVersion": null,
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.1.beta",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null,
+        "modifiedTime": 1754129335256,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf",
         "compendiumSource": null,
         "duplicateSource": null,
         "exportSource": null
@@ -85,23 +84,5 @@
     }
   ],
   "folder": "V4skAU6G3OH5fXgE",
-  "_id": "gambitcondititem",
-  "flags": {
-    "core": {}
-  },
-  "_stats": {
-    "coreVersion": "13.346",
-    "systemId": null,
-    "systemVersion": null,
-    "createdTime": null,
-    "modifiedTime": null,
-    "lastModifiedBy": null,
-    "compendiumSource": "Compendium.ptr2e.core-effects.Item.gambitcondititem",
-    "duplicateSource": null,
-    "exportSource": null
-  },
-  "sort": 0,
-  "ownership": {
-    "default": 0
-  }
+  "_id": "gambitcondititem"
 }

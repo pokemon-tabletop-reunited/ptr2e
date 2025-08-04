@@ -7,9 +7,9 @@
   "system": {
     "actions": [
       {
-        "name": "Insidious Wounds Action",
+        "name": "Insidious Wounds",
         "slug": "insidious-wounds",
-        "description": "<p>Effect: The user can spend 3 PP as a Complex Action to trigger the End of Activation effects of all [DoT] Afflictions the target possesses, with their Stack Counts being decreased by -1 each upon this Action's resolution.</p>",
+        "description": "<p>Effect: The user can spend 3 PP as a Complex Action to trigger the End of Activation effects of all @Trait[dot] Afflictions the target possesses, with their Duration/Stack Counts being decreased by -1 each upon this Action's resolution.</p>",
         "traits": [
           "interrupt-1"
         ],
@@ -21,18 +21,13 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 3,
-          "trigger": "",
-          "delay": null,
-          "priority": null
+          "powerPoints": 3
         },
-        "img": "systems/ptr2e/img/perk-icons/Ninja.svg",
-        "variant": null,
-        "ephemeralVariant": false
+        "img": "systems/ptr2e/img/perk-icons/Ninja.svg"
       }
     ],
     "slug": "insidious-wounds",
-    "description": "<p>Effect: The user can spend 3 PP as a Complex Action to trigger the End of Activation effects of all [DoT] Afflictions the target possesses, with their Stack Counts being decreased by -1 each upon this Action's resolution.</p>",
+    "description": "<p>Effect: The user can spend 3 PP as a Complex Action to trigger the End of Activation effects of all @Trait[dot] Afflictions the target possesses, with their Duration/Stack Counts being decreased by -1 each upon this Action's resolution.</p>",
     "traits": [],
     "prerequisites": [],
     "cost": 2,
@@ -61,9 +56,6 @@
       }
     ],
     "autoUnlock": [],
-    "originSlug": null,
-    "variant": null,
-    "mode": null,
     "global": true,
     "webs": [],
     "design": {

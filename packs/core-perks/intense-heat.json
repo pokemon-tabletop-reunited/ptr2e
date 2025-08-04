@@ -7,41 +7,36 @@
       "trait:fire"
     ],
     "cost": 2,
-    "description": "<p>Your Fire-Type moves gain a 20% chance to @Affliction[burn], or increase that chance by +20%.</p>",
+    "description": "<p>Your @Trait[fire] Type moves gain a 20% chance to @Affliction[burn 5], or increase that chance by +20%.</p>",
     "actions": [
       {
         "name": "Intense Heat",
         "slug": "intense-heat",
         "description": "<p>Your Fire-Type moves gain a 20% chance to @Affliction[burn], or increase that chance by +20%.</p>",
         "cost": {
-          "activation": "free",
-          "powerPoints": 0,
-          "delay": null,
-          "priority": null
+          "activation": "free"
         },
         "type": "passive",
         "traits": [],
         "img": "icons/svg/explosion.svg",
         "range": {
           "target": "enemy",
-          "unit": "m",
-          "distance": 0
-        },
-        "variant": null,
-        "hidden": false,
-        "ephemeralVariant": false
+          "unit": "m"
+        }
       }
     ],
     "slug": "intense-heat",
-    "traits": [
-      "partial-automation"
-    ],
+    "traits": [],
     "_migration": {
       "version": null,
       "previous": null
     },
     "nodes": [
       {
+        "x": 162,
+        "y": 89,
+        "hidden": false,
+        "type": "normal",
         "connected": [
           "inner-warmth",
           "firefly",
@@ -51,25 +46,15 @@
           "flare-ignition"
         ],
         "config": {
-          "alpha": null,
+          "texture": "systems/ptr2e/img/svg/fire_icon.svg",
           "backgroundColor": null,
           "borderColor": null,
-          "borderWidth": null,
-          "texture": "systems/ptr2e/img/svg/fire_icon.svg",
-          "tint": null,
-          "scale": null
+          "tint": null
         },
-        "hidden": false,
-        "type": "normal",
-        "x": 162,
-        "y": 89,
         "tier": null
       }
     ],
     "autoUnlock": [],
-    "originSlug": null,
-    "variant": null,
-    "mode": null,
     "global": true,
     "webs": [],
     "design": {
@@ -92,7 +77,7 @@
       "name": "Intense Heat",
       "type": "passive",
       "_id": "r2W7KKw3xAibk4h4",
-      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "img": "systems/ptr2e/img/svg/fire_icon.svg",
       "system": {
         "changes": [
           {
@@ -106,14 +91,17 @@
             "priority": null,
             "ignored": false,
             "alterations": [],
-            "dontMerge": false
+            "dontMerge": false,
+            "isFixedChance": false
           }
         ],
         "slug": null,
         "traits": [],
-        "removeAfterCombat": true,
+        "removeAfterCombat": false,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
@@ -125,7 +113,7 @@
         "startRound": null,
         "startTurn": null
       },
-      "description": "",
+      "description": "<p>Your @Trait[fire] Type moves gain a 20% chance to @Affliction[burn 5], or increase that chance by +20%.</p>",
       "origin": null,
       "tint": "#ffffff",
       "transfer": true,
@@ -135,12 +123,12 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "13.342",
+        "coreVersion": "13.346",
         "systemId": "ptr2e",
-        "systemVersion": "0.10.0-alpha.3.0.0",
+        "systemVersion": "1.4.2.beta",
         "createdTime": 1729380480086,
-        "modifiedTime": 1729380508700,
-        "lastModifiedBy": "Kc3DOunCh3ClAeHS",
+        "modifiedTime": 1754225518896,
+        "lastModifiedBy": "dCIq77b7AO2frs8Z",
         "exportSource": null
       }
     }

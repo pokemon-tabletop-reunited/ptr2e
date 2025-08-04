@@ -134,8 +134,7 @@
         "PTR 2e Team"
       ],
       "notes": ""
-    },
-    "originSlug": null
+    }
   },
   "_id": "k5ztJixTB9SD8OJm",
   "img": "systems/ptr2e/img/icons/feat_icon.webp",
@@ -165,8 +164,8 @@
             "key": "system.skills.{effect|flags.ptr2e.choiceSelections.ms11}.value",
             "value": 10,
             "predicate": [],
-            "mode": 2,
             "priority": null,
+            "mode": 2,
             "ignored": false
           },
           {
@@ -177,7 +176,7 @@
             "mode": 2,
             "priority": null,
             "ignored": false,
-            "choices": "flags.ptr2e.skillOptions.arts",
+            "choices": "flags.ptr2e.skillOptions.occult",
             "prompt": "PTR2E.ChoiceSetPrompt.Prompt",
             "adjustName": true,
             "rollOption": "ms12"
@@ -187,8 +186,29 @@
             "key": "system.skills.{effect|flags.ptr2e.choiceSelections.ms12}.value",
             "value": 10,
             "predicate": [],
-            "mode": 2,
             "priority": null,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "choice-set",
+            "key": "",
+            "value": 0,
+            "predicate": [],
+            "mode": 2,
+            "ignored": false,
+            "choices": "flags.ptr2e.skillOptions.occult",
+            "prompt": "PTR2E.ChoiceSetPrompt.Prompt",
+            "adjustName": true,
+            "rollOption": "ms13",
+            "priority": null
+          },
+          {
+            "type": "basic",
+            "key": "system.skills.{effect|flags.ptr2e.choiceSelections.ms13}.value",
+            "value": 10,
+            "predicate": [],
+            "mode": 2,
             "ignored": false
           }
         ],
@@ -196,7 +216,9 @@
         "traits": [],
         "removeAfterCombat": false,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
@@ -218,23 +240,9 @@
       "_stats": {
         "compendiumSource": "Item.xxuGLZ0QPnw7NYa8.ActiveEffect.V64elrUanozajfG2",
         "duplicateSource": null,
-        "coreVersion": "13.342",
-        "systemId": "ptr2e",
-        "systemVersion": "1.0.1.beta",
-        "createdTime": 1739369847497,
-        "modifiedTime": 1739369937193,
-        "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
         "exportSource": null
       }
     }
   ],
-  "folder": "P8RtSJE1K00CB5lL",
-  "flags": {
-    "exportSource": {
-      "world": "pokemon-mystery-dungeon-shrouded-kingdoms",
-      "system": "ptr2e",
-      "coreVersion": "12.331",
-      "systemVersion": "0.10.0-alpha.5.2.1"
-    }
-  }
+  "folder": "P8RtSJE1K00CB5lL"
 }
