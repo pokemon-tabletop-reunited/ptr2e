@@ -868,6 +868,37 @@
         "format": 2
       },
       "_id": "IGddOJmAKpqm2are"
+    },
+    {
+      "name": "Perk Effect Descriptions",
+      "flags": {
+        "core": {
+          "sheetClass": "core.MarkdownJournalPageSheet"
+        },
+        "ptr2e": {
+          "metadata": {
+            "title": "Perk Effect Descriptions",
+            "description": "This is a guide (primarily) aimed at Contributors to help bring all types of effect descriptions in-line for a better cohesion of effect descriptions.",
+            "published": "true",
+            "date": "2025-08-04T10:53:11.745Z",
+            "tags": "perk, design guides",
+            "editor": "markdown",
+            "dateCreated": "2025-08-04T10:53:11.745Z",
+            "slug": "perk-effect-description",
+            "parent": "rules"
+          }
+        }
+      },
+      "title": {
+        "level": 1,
+        "show": true
+      },
+      "text": {
+        "content": "<blockquote>\n  <h2>Work In Progress</h2>\n  <p>This article is a stub and will be further expanded upon in the future!\n  Thanks for understanding.\n  {.is-warning}</p>\n</blockquote>\n<h1>Perk Effect Description Guidelines</h1>\n<p>This page serves as a wording guideline for effect descriptions of perks, so perks with similar types of effects can follow the same format.</p>\n<p><strong>Please note</strong>: These formats are subject to change, as well: Not all perks currently in the system will follow these formats, though you are welcome to commit an edited version that do follow these formats.</p>\n<h3>Trait Granting Effect</h3>\n<p>Any perk such as <a href=\"/data/perks/f-j/inner-warmth\">Inner Warmth</a> which grants a Trait should be worded in the following format:</p>\n<pre><code>You gain the @Trait[heater] Trait.\n</code></pre>\n<h3>Ability Granting Effect</h3>\n<p>Any perk such as <a href=\"/data/perks/a-e/arms-race\">Arms Race</a> which grants an Ability should be worded in the following format:</p>\n<pre><code>The user gains @UUID[Compendium.ptr2e.core-abilities.XYFBpNyW7MYqcrdY]{Artillery} as a Tutored Ability\n</code></pre>\n<p>If the ability is meant to be an Extra Ability (does not require to be slotted), replace the text 'As a Tutored Ability' with 'As an Extra Ability'.</p>\n<h3>(Custom) Action Granting Effect</h3>\n<p>Any Perk such as <a href=\"/data/perks/a-e/aura-haze\">Aura Haze</a> which grants an action the user can make to gain some effect should be worded in the following format:</p>\n<pre><code>--Effect Flavor--\n\nYou gain the @UUID[link-to-action]{Name of Action} Action/Attack which you can use as a --Frequency-- Action, spending --Cost--PP, to --effect--\n</code></pre>\n<p>For example:</p>\n<pre><code>Your skill at manipulating your own Aura allows you to create an indistinct haze about yourself.\n\nYou gain the @UUID[Compendium.ptr2e.core-perks.Item.UmbmjzRANft3PAxG.Actions.aura-haze]{Aura Haze} Action which you can use as a Simple Action, spending 2PP, to gain @UUID[Compendium.ptr2e.core-effects.OUBNweJOMjAEtAye]{+1 Evasion Stage}.\n</code></pre>\n<p>Optionally, if this action is a triggered action, you add the trigger behind the Frequency and before the PP cost, like so:</p>\n<pre><code>You are able to dampen your Aura, making it difficult to read your moods and intentions.\n\nYou gain the @UUID[Compendium.ptr2e.core-perks.Item.3j8tXm6MJWi1JKsH.Actions.aura-dampening]{Aura Dampening} Action which you can use as a Free Action at @Trait[interrupt-3] whenever someone attempts to probe your Aura using @UUID[Compendium.ptr2e.core-perks.0oopLlKDWl1rf2Sm]{Aura Empathy}, spending 2PP, to inflict a -20 penalty to any triggering Aura Sense check(s).\n</code></pre>",
+        "markdown": "> ## Work In Progress\n> This article is a stub and will be further expanded upon in the future!\n> Thanks for understanding.\n{.is-warning}\n\n# Perk Effect Description Guidelines\nThis page serves as a wording guideline for effect descriptions of perks, so perks with similar types of effects can follow the same format.\n\n**Please note**: These formats are subject to change, as well: Not all perks currently in the system will follow these formats, though you are welcome to commit an edited version that do follow these formats.\n\n### Trait Granting Effect\nAny perk such as [Inner Warmth](/data/perks/f-j/inner-warmth) which grants a Trait should be worded in the following format:\n```\nYou gain the @Trait[heater] Trait.\n```\n### Ability Granting Effect\nAny perk such as [Arms Race](/data/perks/a-e/arms-race) which grants an Ability should be worded in the following format:\n```\nThe user gains @UUID[Compendium.ptr2e.core-abilities.XYFBpNyW7MYqcrdY]{Artillery} as a Tutored Ability\n```\nIf the ability is meant to be an Extra Ability (does not require to be slotted), replace the text 'As a Tutored Ability' with 'As an Extra Ability'.\n\n### (Custom) Action Granting Effect\nAny Perk such as [Aura Haze](/data/perks/a-e/aura-haze) which grants an action the user can make to gain some effect should be worded in the following format:\n```\n--Effect Flavor--\n\nYou gain the @UUID[link-to-action]{Name of Action} Action/Attack which you can use as a --Frequency-- Action, spending --Cost--PP, to --effect--\n```\nFor example:\n```\nYour skill at manipulating your own Aura allows you to create an indistinct haze about yourself.\n\nYou gain the @UUID[Compendium.ptr2e.core-perks.Item.UmbmjzRANft3PAxG.Actions.aura-haze]{Aura Haze} Action which you can use as a Simple Action, spending 2PP, to gain @UUID[Compendium.ptr2e.core-effects.OUBNweJOMjAEtAye]{+1 Evasion Stage}.\n```\nOptionally, if this action is a triggered action, you add the trigger behind the Frequency and before the PP cost, like so:\n```\nYou are able to dampen your Aura, making it difficult to read your moods and intentions.\n\nYou gain the @UUID[Compendium.ptr2e.core-perks.Item.3j8tXm6MJWi1JKsH.Actions.aura-dampening]{Aura Dampening} Action which you can use as a Free Action at @Trait[interrupt-3] whenever someone attempts to probe your Aura using @UUID[Compendium.ptr2e.core-perks.0oopLlKDWl1rf2Sm]{Aura Empathy}, spending 2PP, to inflict a -20 penalty to any triggering Aura Sense check(s).\n```",
+        "format": 2
+      },
+      "_id": "lOyM0a6hNevYStON"
     }
   ]
 }
