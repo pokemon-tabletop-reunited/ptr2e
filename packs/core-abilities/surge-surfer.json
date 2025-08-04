@@ -34,13 +34,14 @@
         },
         "range": {
           "target": "self",
-          "unit": "m"
+          "unit": "m",
+          "distance": 10
         },
-        "description": "<p>Effect: While Electric Terrain is active the user's SPD stat is increased by 50% and the user has +2 default SPD Stages.</p>",
-        "img": "icons/svg/explosion.svg"
+        "description": "<p>Effect: While Electric Terrain is active the user's SPD stat is increased by 100%. Additionally, If a space within range possesses Electric Terrain, the user is affected by Electric Terrain.</p>",
+        "img": "systems/ptr2e/img/svg/electric_icon.svg"
       }
     ],
-    "description": "<p>Effect: While Electric Terrain is active the user's SPD stat is increased by 50% and the user has +2 default SPD Stages. Additionally, If a space within range possesses Electric Terrain, the user is affected by Electric Terrain.</p>",
+    "description": "<p>Effect: While Electric Terrain is active the user's SPD stat is increased by 100%. Additionally, If a space within range possesses Electric Terrain, the user is affected by Electric Terrain.</p>",
     "traits": [
       "environ"
     ],
@@ -53,9 +54,61 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
+      ],
+      "notes": ""
     }
   },
   "_id": "n9vuHXu38traPVlR",
-  "effects": []
+  "effects": [
+    {
+      "name": "Surge Surfer",
+      "type": "passive",
+      "_id": "9FFW3IFkGBQUnp5c",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "basic",
+            "key": "system.modifiers.speMultiplier",
+            "value": 1,
+            "predicate": [
+              "summon:electric-terrain"
+            ],
+            "mode": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.346",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.2.beta",
+        "createdTime": 1754254479562,
+        "modifiedTime": 1754254508838,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+      }
+    }
+  ]
 }
