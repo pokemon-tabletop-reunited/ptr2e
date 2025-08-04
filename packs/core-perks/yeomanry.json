@@ -17,8 +17,8 @@
       "notes": ""
     },
     "actions": [],
-    "slug": null,
-    "description": "<p>The user’s non-[Firearm] [Missile] [Weapon] attacks deal +40% more damage, and the user’s Struggle has +20 Power when they are holding a non-[Firearm] [Missile] [Weapon].</p>",
+    "slug": "yeomanry",
+    "description": "<p>The user’s non-@Trait[firearm] @Trait[missile] @Trait[weapon] attacks deal +40% more damage, and the user’s Struggle has +20 Power when they are holding a non-@Trait[firearm] @Trait[missile] @Trait[weapon].</p>",
     "traits": [],
     "prerequisites": [
       "trait:wielder",
@@ -49,20 +49,19 @@
     ],
     "autoUnlock": [],
     "cost": 3,
-    "originSlug": null,
     "design": {
       "arena": "physical",
       "approach": "finesse",
       "archetype": null
     },
-    "variant": null,
-    "mode": null,
     "global": true,
     "webs": [],
     "nodes": [
       {
         "x": 187,
         "y": 63,
+        "hidden": false,
+        "type": "normal",
         "connected": [
           "dual-wielder",
           "down-the-sights",
@@ -70,8 +69,12 @@
           "arms-race",
           "needle-threader"
         ],
-        "hidden": false,
-        "type": "normal",
+        "config": {
+          "texture": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "tint": null
+        },
         "tier": null
       }
     ]

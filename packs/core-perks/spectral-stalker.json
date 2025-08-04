@@ -6,29 +6,22 @@
       "trait:ghost"
     ],
     "cost": 3,
-    "description": "<p>Gain the [Shadow Meld] trait.</p>",
+    "description": "<p>Gain the @Trait[shadow-meld] trait.</p>",
     "actions": [
       {
         "name": "Spectral Stalker",
         "slug": "spectral-stalker",
         "description": "<p>Gain the [Shadow Meld] trait.</p>",
         "cost": {
-          "activation": "free",
-          "powerPoints": 0,
-          "delay": null,
-          "priority": null
+          "activation": "free"
         },
         "type": "passive",
         "traits": [],
         "img": "icons/svg/explosion.svg",
         "range": {
           "target": "enemy",
-          "unit": "m",
-          "distance": 0
-        },
-        "variant": null,
-        "hidden": false,
-        "ephemeralVariant": false
+          "unit": "m"
+        }
       }
     ],
     "slug": "spectral-stalker",
@@ -39,6 +32,10 @@
     },
     "nodes": [
       {
+        "x": 172,
+        "y": 114,
+        "hidden": false,
+        "type": "normal",
         "connected": [
           "walking-dead",
           "grim-haunt",
@@ -48,27 +45,17 @@
           "incorporeal"
         ],
         "config": {
-          "alpha": null,
+          "texture": "systems/ptr2e/img/svg/ghost_icon.svg",
           "backgroundColor": null,
           "borderColor": null,
-          "borderWidth": null,
-          "texture": "systems/ptr2e/img/svg/ghost_icon.svg",
-          "tint": null,
-          "scale": null
+          "tint": null
         },
-        "hidden": false,
-        "type": "normal",
-        "x": 172,
-        "y": 114,
         "tier": null
       }
     ],
     "autoUnlock": [
       "trait:shadow-meld"
     ],
-    "originSlug": null,
-    "variant": null,
-    "mode": null,
     "global": true,
     "webs": [],
     "design": {
@@ -91,24 +78,26 @@
       "name": "Spectral Stalker",
       "type": "passive",
       "_id": "RNigtm9NFQa7ATOz",
-      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "img": "systems/ptr2e/img/svg/ghost_icon.svg",
       "system": {
         "changes": [
           {
             "type": "add-trait",
             "key": "",
-            "value": "Shadow Meld",
+            "value": "shadow-meld",
             "predicate": [],
-            "mode": 2,
             "priority": null,
+            "mode": 2,
             "ignored": false
           }
         ],
         "slug": null,
         "traits": [],
-        "removeAfterCombat": true,
+        "removeAfterCombat": false,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
@@ -120,7 +109,7 @@
         "startRound": null,
         "startTurn": null
       },
-      "description": "",
+      "description": "<p>Gain the @Trait[shadow-meld] trait.</p>",
       "origin": null,
       "tint": "#ffffff",
       "transfer": true,
@@ -130,12 +119,12 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "13.342",
+        "coreVersion": "13.346",
         "systemId": "ptr2e",
-        "systemVersion": "0.10.0-alpha.4.1.0",
+        "systemVersion": "1.4.2.beta",
         "createdTime": 1733069550484,
-        "modifiedTime": 1733069563720,
-        "lastModifiedBy": "mK35yvCqCgiTUvKf",
+        "modifiedTime": 1754225927283,
+        "lastModifiedBy": "dCIq77b7AO2frs8Z",
         "exportSource": null
       }
     }
