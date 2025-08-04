@@ -8,7 +8,7 @@
       "previous": null
     },
     "publication": {
-      "source": "PTR2e Digimon Supplement - Digi Dex",
+      "source": "Digidex",
       "authors": [
         "Fox"
       ],
@@ -22,7 +22,8 @@
         "type": "attack",
         "img": "systems/ptr2e/img/svg/fire_icon.svg",
         "traits": [
-          "sonic"
+          "sonic",
+          "digimon"
         ],
         "cost": {
           "activation": "complex",
@@ -43,7 +44,8 @@
         "accuracy": 100
       }
     ],
-    "grade": "A"
+    "grade": "A",
+    "slug": "blaze-sonic-breath"
   },
   "img": "systems/ptr2e/img/svg/fire_icon.svg",
   "effects": [
@@ -64,14 +66,17 @@
             "alterations": [],
             "dontMerge": false,
             "mode": 2,
-            "ignored": false
+            "ignored": false,
+            "isFixedChance": false
           }
         ],
         "slug": null,
         "traits": [],
         "removeAfterCombat": true,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
@@ -89,13 +94,12 @@
         "compendiumSource": null,
         "duplicateSource": null,
         "exportSource": null,
-        "coreVersion": "13.344",
+        "coreVersion": "13.346",
         "systemId": "ptr2e",
         "systemVersion": "1.3.3.beta",
         "lastModifiedBy": null
       }
     }
   ],
-  "flags": {},
   "_id": "vIg8QGISMXC9oTGM"
 }

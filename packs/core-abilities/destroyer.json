@@ -8,15 +8,18 @@
       "previous": null
     },
     "publication": {
-      "source": "PTR 2e Digimon Supplement - Digi Dex",
+      "source": "Digidex",
       "authors": [
         "Fox"
       ],
       "notes": ""
     },
-    "traits": [],
+    "traits": [
+      "digimon"
+    ],
     "actions": [],
-    "description": "<p>Passive: The User's attacks gain +10% Chance to apply @Affliction[perish] 5.</p>"
+    "description": "<p>Passive: The User's attacks gain +10% Chance to apply @Affliction[perish] 5.</p>",
+    "slug": "destroyer"
   },
   "img": "icons/magic/death/skull-energy-light-white.webp",
   "effects": [
@@ -31,21 +34,26 @@
             "type": "roll-effect",
             "key": "attack",
             "value": "Compendium.ptr2e.core-effects.Item.perishcondititem",
-            "predicate": [],
+            "predicate": [
+              "origin:enemy"
+            ],
             "chance": 10,
             "affects": "target",
             "dontMerge": false,
-            "mode": 2,
             "priority": null,
-            "ignored": false,
-            "alterations": []
+            "alterations": [],
+            "isFixedChance": false,
+            "mode": 2,
+            "ignored": false
           }
         ],
         "slug": null,
         "traits": [],
         "removeAfterCombat": true,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
@@ -67,15 +75,15 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.346",
         "systemId": "ptr2e",
-        "systemVersion": "1.2.1.beta",
+        "systemVersion": "1.4.1.beta",
         "createdTime": null,
-        "modifiedTime": 1745434211740,
-        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+        "modifiedTime": 1753705818976,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf",
+        "exportSource": null
       }
     }
   ],
-  "flags": {},
   "_id": "jzZYECZeMANKz60b"
 }
