@@ -17,7 +17,9 @@
     "actions": [],
     "slug": "lucky-duck",
     "description": "<p>Effect: The user gains Super Luck as a Tutored Ability.</p>",
-    "traits": [],
+    "traits": [
+      "gambler"
+    ],
     "prerequisites": [
       "item:perk:cant-break-my-winning-streak"
     ],
@@ -34,6 +36,8 @@
       {
         "x": 81,
         "y": 188,
+        "hidden": false,
+        "type": "normal",
         "connected": [
           "cant-break-my-winning-streak",
           "up-the-beat",
@@ -41,14 +45,15 @@
           "mulligan",
           "lucky-charm"
         ],
-        "hidden": false,
-        "type": "normal",
+        "config": {
+          "texture": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "tint": null
+        },
         "tier": null
       }
-    ],
-    "originSlug": null,
-    "variant": null,
-    "mode": null
+    ]
   },
   "img": "icons/creatures/birds/duck-green.webp",
   "effects": [
@@ -83,7 +88,9 @@
         "traits": [],
         "removeAfterCombat": true,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
@@ -105,7 +112,7 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "13.342",
+        "coreVersion": "13.346",
         "systemId": "ptr2e",
         "systemVersion": "1.2.1.beta",
         "createdTime": null,
@@ -115,6 +122,5 @@
       }
     }
   ],
-  "flags": {},
   "_id": "4kXOJ5lOfe6z0rNK"
 }
