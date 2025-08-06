@@ -20,35 +20,19 @@
         },
         "cost": {
           "activation": "simple",
-          "powerPoints": 3
+          "powerPoints": 1
         },
-        "description": "Effect: The target may use SPDEF in place of their SPATK when using a Special-Category Attack for 1 Activation.",
+        "description": "<p>Effect: The target uses SPDEF in place of their SPATK when using a Special-Category Attack for 1 Activation.</p>",
         "type": "generic",
-        "img": "icons/svg/explosion.svg"
-      },
-      {
-        "name": "Magic Armor! (Self)",
-        "slug": "magic-armor-self",
-        "traits": [
-          "command",
-          "style"
-        ],
-        "range": {
-          "target": "self",
-          "unit": "m"
-        },
-        "cost": {
-          "activation": "simple",
-          "powerPoints": 3
-        },
-        "description": "Effect: The user may use SPDEF in place of their SPATK when using a Special-Category Attack until the end of their next Activation.",
-        "type": "generic",
-        "img": "icons/svg/explosion.svg"
+        "img": "systems/ptr2e/img/perk-icons/Orders_Training.svg"
       }
     ],
     "slug": "magic-armor-style",
-    "description": "<p>Simple Action, 2 PP cost. Target self or allied creature. The affected creature may use SPDEF in place of their SPATK when using a Special-Category Attack until the end of their next full Activation.</p>",
-    "traits": [],
+    "description": "<p>Simple Action, 2 PP cost. Target self or allied creature. The affected creature uses SPDEF in place of their SPATK when using a Special-Category Attack until the end of their next full Activation.</p>",
+    "traits": [
+      "command",
+      "style"
+    ],
     "prerequisites": [
       {
         "gte": [
@@ -64,25 +48,26 @@
     },
     "nodes": [
       {
+        "x": 116,
+        "y": 135,
+        "hidden": false,
+        "type": "normal",
         "connected": [
           "type-style",
           "agile-style",
           "improved-flight-6",
-          "improved-swim-2"
+          "improved-swim-2",
+          "minor-buff-22",
+          "minor-buff-64",
+          "resist-style",
+          "berserker-trainer"
         ],
         "config": {
-          "alpha": null,
-          "backgroundColor": "#0000ff",
-          "borderColor": null,
-          "borderWidth": null,
           "texture": "systems/ptr2e/img/perk-icons/Orders_Training.svg",
-          "tint": null,
-          "scale": null
+          "backgroundColor": null,
+          "borderColor": null,
+          "tint": null
         },
-        "hidden": false,
-        "type": "normal",
-        "x": 116,
-        "y": 135,
         "tier": null
       }
     ],
@@ -92,8 +77,69 @@
     "design": {
       "arena": "social",
       "approach": "resilience",
-      "archetype": "Tactician"
+      "archetype": "tactician"
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
     }
   },
-  "effects": []
+  "effects": [
+    {
+      "name": "Magic Armor Style",
+      "type": "passive",
+      "_id": "SnFQuB6e0NiPB0ga",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "magic-armor-generic",
+            "value": "Compendium.ptr2e.core-effects.Item.biMxQM9jKDEzR0YG",
+            "predicate": [],
+            "chance": 100,
+            "isFixedChance": true,
+            "affects": "target",
+            "alterations": [],
+            "dontMerge": false,
+            "mode": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.346",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.2.beta",
+        "createdTime": 1754143285807,
+        "modifiedTime": 1754466240017,
+        "lastModifiedBy": "QT9RUSVuyZd4bDWO"
+      }
+    }
+  ]
 }
