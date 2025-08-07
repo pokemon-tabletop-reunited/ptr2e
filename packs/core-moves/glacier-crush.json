@@ -7,17 +7,17 @@
     "slug": null,
     "actions": [
       {
-        "name": "Glacier Crush",
+        "name": "Glacier Crush (Resolution)",
         "slug": "glacier-crush",
         "type": "attack",
-        "img": "icons/svg/explosion.svg",
+        "img": "systems/ptr2e/img/svg/ice_icon.svg",
         "traits": [
           "set-up",
           "dash",
-          "defensive",
           "curl",
           "contact",
-          "crushing"
+          "crushing",
+          "priority-20"
         ],
         "range": {
           "target": "creature",
@@ -26,20 +26,42 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 7
+          "powerPoints": 3,
+          "trigger": "The user used Glacier Crush (Set-Up) as their last Action."
         },
-        "variant": null,
         "types": [
           "ice"
         ],
         "category": "physical",
         "power": 120,
         "accuracy": 100,
-        "contestType": "",
-        "contestEffect": "",
-        "free": false,
-        "slot": null,
-        "description": "<p>Effect: Set-Up: The user gains +1 ATK and SPDEF Stage for 5 Activations, and ends their Activation. If Snowy Weather is present, the user Sets Up and resolves this attack on the same Activation. </p><p>Resolution: On their next Activation, they attack with and resolve this attack. the target has a 20% chance of gaining @Affliction[frostbite] 5.</p>"
+        "description": "<p>Trigger: The user used Glacier Crush (Set-Up) as their last Action.</p><p>Effect: On hit, the target has a 20% chance of gaining @Affliction[frostbite 5].</p>",
+        "predicate": []
+      },
+      {
+        "name": "Glacier Crush (Set-Up)",
+        "slug": "glacier-crush-set-up",
+        "description": "<p>Effect: The user gains +1 ATK and SPDEF Stage for 5 Activations. If Snowy Weather is present, the user the user may use Glacier Crush (Resolution) as a Free Action upon resolving this Attack.</p>",
+        "traits": [
+          "set-up",
+          "defensive",
+          "flinch-40"
+        ],
+        "type": "attack",
+        "img": "systems/ptr2e/img/svg/ice_icon.svg",
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 4
+        },
+        "range": {
+          "target": "self",
+          "unit": "m"
+        },
+        "types": [
+          "ice"
+        ],
+        "category": "status",
+        "predicate": []
       }
     ],
     "container": null,
