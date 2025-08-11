@@ -7,40 +7,60 @@
     "slug": null,
     "actions": [
       {
-        "name": "Aura Flow",
-        "slug": "aura-flow",
+        "name": "Aura Flow (Resolution)",
+        "slug": "aura-flow-resolution",
         "type": "attack",
-        "img": "icons/svg/explosion.svg",
+        "img": "systems/ptr2e/img/svg/fighting_icon.svg",
         "traits": [
           "healing",
           "set-up",
-          "aura"
+          "aura",
+          "priority-30"
         ],
         "range": {
           "target": "field",
-          "distance": 0,
           "unit": "m"
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 6
+          "powerPoints": 3
         },
-        "variant": null,
         "types": [
           "fighting"
         ],
         "category": "status",
-        "power": null,
-        "accuracy": null,
-        "contestType": "",
-        "contestEffect": "",
-        "free": false,
-        "slot": null,
-        "description": "<p>Effect: Set-Up: The user starts to meditate, taking note of their current HP, gains @Affliction[resolved] 2, then their Activation ends.</p><p>Resolution: On their next Activation, they can select 1 creature on the field (which can be the user), to recover HP equal to 1/2 the user's HP they had at the time this Attack was initially used.</p>"
+        "description": "<p>Trigger: The user used Aura Flow (Set Up) as their last Action.</p><p>Effect: The user selects one creature on the field. That target gains @Affliction[boosted 5], and recovers half of the user’s HP and one quarter of the user’s PP when Aura Flow (Set Up) was resolved.</p>",
+        "predicate": []
+      },
+      {
+        "name": "Aura Flow (Set-Up)",
+        "slug": "aura-flow-set-up",
+        "description": "<p>Effect: The user gains @Affliction[resolved 5], @Affliction[chanted 5], and @Affliction[braced 2]. The user takes note of their current HP and PP totals when this Action resolves.</p>",
+        "traits": [
+          "set-up",
+          "defensive",
+          "flinch-20",
+          "aura"
+        ],
+        "type": "attack",
+        "img": "systems/ptr2e/img/svg/fighting_icon.svg",
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 3
+        },
+        "range": {
+          "target": "self",
+          "unit": "m"
+        },
+        "types": [
+          "fighting"
+        ],
+        "category": "status",
+        "predicate": []
       }
     ],
     "container": null,
-    "grade": "A",
+    "grade": "C",
     "publication": {
       "source": "PTR 2e Core",
       "authors": [

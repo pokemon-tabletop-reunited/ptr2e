@@ -12,28 +12,25 @@
       "item:perk:aura-bonding"
     ],
     "cost": 3,
-    "description": "<p>You may make a Hard (-20) Aura Sense check to try and assuage the aura of a hostile target and calm it, rendering it non-hostile unless provoked. Please note, this will not function on opponents who are hostile through cold indifference rather than anger or pain.</p>",
+    "description": "<p>You may make a Hard (-20) Aura Sense check to try and assuage the aura of a hostile target and calm it, rendering it non-hostile unless provoked.</p><blockquote><p>Please note, this will not function on opponents who are hostile through cold indifference rather than anger or pain.</p></blockquote>",
     "actions": [
       {
         "name": "Soothing Aura",
         "slug": "soothing-aura",
-        "description": "<p>You may make a Hard (-20) Aura Sense check to try and assuage the aura of a hostile target and calm it, rendering it non-hostile unless provoked. Please note, this will not function on opponents who are hostile through cold indifference rather than anger or pain.</p>",
+        "description": "<p>You may make a Hard (-20) Aura Sense check to try and assuage the aura of a hostile target and calm it, rendering it non-hostile unless provoked.</p><blockquote><p>Please note, this will not function on opponents who are hostile through cold indifference rather than anger or pain.</p></blockquote>",
         "cost": {
           "activation": "complex",
-          "powerPoints": 5,
-          "delay": null,
-          "priority": null
+          "powerPoints": 2
         },
         "type": "generic",
-        "traits": [],
-        "img": "icons/svg/explosion.svg",
+        "traits": [
+          "aura"
+        ],
+        "img": "systems/ptr2e/img/perk-icons/Aura.svg",
         "range": {
           "target": "enemy",
-          "unit": "m",
-          "distance": 0
-        },
-        "variant": null,
-        "ephemeralVariant": false
+          "unit": "m"
+        }
       }
     ],
     "slug": "soothing-aura",
@@ -44,29 +41,23 @@
     },
     "nodes": [
       {
+        "x": 179,
+        "y": 32,
+        "hidden": false,
+        "type": "normal",
         "connected": [
           "aura-bonding"
         ],
         "config": {
-          "alpha": null,
-          "backgroundColor": "#008000",
-          "borderColor": null,
-          "borderWidth": null,
           "texture": "systems/ptr2e/img/perk-icons/Aura.svg",
-          "tint": "#151515",
-          "scale": null
+          "backgroundColor": null,
+          "borderColor": null,
+          "tint": null
         },
-        "hidden": false,
-        "type": "normal",
-        "x": 179,
-        "y": 32,
         "tier": null
       }
     ],
     "autoUnlock": [],
-    "originSlug": null,
-    "variant": null,
-    "mode": null,
     "global": true,
     "webs": [],
     "design": {
