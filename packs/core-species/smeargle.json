@@ -13,24 +13,21 @@
     "diet": [
       "omnivore"
     ],
-    "movement": {
-      "primary": [
-        {
-          "type": "overland",
-          "value": 8
-        }
-      ],
-      "secondary": [
-        {
-          "type": "swim",
-          "value": 4
-        }
-      ]
-    },
+    "movement": [
+      {
+        "type": "overland",
+        "value": 8
+      },
+      {
+        "type": "swim",
+        "value": 4
+      }
+    ],
     "traits": [
       "pokemon",
       "bipedal",
-      "underdog"
+      "fully-evolved",
+      "jump-2"
     ],
     "abilities": {
       "starting": [
@@ -46,7 +43,7 @@
           "slug": "moody"
         },
         {
-          "slug": "adaptability"
+          "slug": "prankster"
         }
       ],
       "advanced": [
@@ -54,7 +51,7 @@
           "slug": "skill-link"
         },
         {
-          "slug": "quick-draw"
+          "slug": "blink"
         }
       ],
       "master": [
@@ -62,7 +59,7 @@
           "slug": "simple"
         },
         {
-          "slug": "prankster"
+          "slug": "adaptability"
         }
       ]
     },
@@ -81,7 +78,7 @@
         "rvs": 0,
         "favourite": false,
         "hidden": false,
-        "group": "arts"
+        "group": null
       },
       {
         "slug": "climb",
@@ -224,7 +221,13 @@
     "evolutions": {
       "name": "smeargle",
       "details": null,
-      "evolutions": []
+      "evolutions": [],
+      "uuid": null,
+      "methods": [],
+      "perk": {
+        "x": 26,
+        "y": 26
+      }
     },
     "moves": {
       "levelUp": [
@@ -233,14 +236,25 @@
           "level": 1,
           "gen": "scarlet-violet"
         }
-      ]
+      ],
+      "tutor": []
     },
     "habitats": [
       "forest",
       "city"
-    ]
+    ],
+    "publication": {
+      "source": "PTR 2e Core - Johto Dex",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
   },
   "_id": "XLSyfsD7DdksGJrp",
-  "effects": [],
-  "folder": null
+  "effects": []
 }

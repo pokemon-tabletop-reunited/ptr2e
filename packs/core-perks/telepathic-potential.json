@@ -6,30 +6,8 @@
       "trait:psychic"
     ],
     "cost": 2,
-    "description": "<p>You gain the [Telepath] trait.</p>",
-    "actions": [
-      {
-        "name": "Telepathic Potential",
-        "slug": "telepathic-potential",
-        "description": "<p>You gain the [Telepath] trait.</p>",
-        "cost": {
-          "activation": "free",
-          "powerPoints": 0,
-          "delay": null,
-          "priority": null
-        },
-        "type": "passive",
-        "traits": [],
-        "img": "icons/svg/explosion.svg",
-        "range": {
-          "target": "enemy",
-          "unit": "m",
-          "distance": 0
-        },
-        "variant": null,
-        "hidden": false
-      }
-    ],
+    "description": "<p>You gain the @Trait[telepath] trait.</p>",
+    "actions": [],
     "slug": "telepathic-potential",
     "traits": [],
     "_migration": {
@@ -38,6 +16,10 @@
     },
     "nodes": [
       {
+        "x": 141,
+        "y": 138,
+        "hidden": false,
+        "type": "normal",
         "connected": [
           "hypnotic-suggestion",
           "hesitation",
@@ -48,36 +30,37 @@
           "screen-setter",
           "improved-teleportation-2",
           "improved-overland-6",
-          "improved-telekinesis-2"
+          "improved-telekinesis-2",
+          "minor-buff-2",
+          "minor-buff-9",
+          "minor-buff-32",
+          "psycher"
         ],
         "config": {
-          "alpha": null,
+          "texture": "systems/ptr2e/img/svg/psychic_icon.svg",
           "backgroundColor": null,
           "borderColor": null,
-          "borderWidth": null,
-          "texture": "systems/ptr2e/img/svg/psychic_icon.svg",
-          "tint": null,
-          "scale": null
+          "tint": null
         },
-        "hidden": false,
-        "type": "normal",
-        "x": 141,
-        "y": 138,
         "tier": null
       }
     ],
     "autoUnlock": [
       "trait:telepath"
     ],
-    "originSlug": null,
-    "variant": null,
-    "mode": null,
     "global": true,
     "webs": [],
     "design": {
       "arena": "mental",
       "approach": "finesse",
-      "archetype": "[Psychic]"
+      "archetype": "psychic"
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
     }
   },
   "_id": "4n06ljZtbCqy6lEC",
@@ -87,33 +70,26 @@
       "name": "Telepathic Potential",
       "type": "passive",
       "_id": "2JtWtzy2Slq3HfIT",
-      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "img": "systems/ptr2e/img/svg/psychic_icon.svg",
       "system": {
         "changes": [
           {
             "type": "add-trait",
             "key": "",
-            "value": "Telepath",
+            "value": "telepath",
             "predicate": [],
-            "mode": 2,
             "priority": null,
-            "ignored": false
-          },
-          {
-            "type": "basic",
-            "key": "",
-            "value": 0,
             "mode": 2,
-            "priority": null,
-            "predicate": [],
             "ignored": false
           }
         ],
         "slug": null,
         "traits": [],
-        "removeAfterCombat": true,
+        "removeAfterCombat": false,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
@@ -125,7 +101,7 @@
         "startRound": null,
         "startTurn": null
       },
-      "description": "",
+      "description": "<p>You gain the @Trait[telepath] trait.</p>",
       "origin": null,
       "tint": "#ffffff",
       "transfer": true,
@@ -135,12 +111,13 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.346",
         "systemId": "ptr2e",
-        "systemVersion": "0.10.0-alpha.3.4.1",
+        "systemVersion": "1.4.2.beta",
         "createdTime": 1732233454404,
-        "modifiedTime": 1732233461512,
-        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
+        "modifiedTime": 1754227903493,
+        "lastModifiedBy": "dCIq77b7AO2frs8Z",
+        "exportSource": null
       }
     }
   ],

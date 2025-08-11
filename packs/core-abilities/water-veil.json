@@ -16,33 +16,14 @@
           "activation": "free"
         },
         "range": {
-          "target": "allied-aura",
-          "distance": 10,
-          "unit": "m"
-        },
-        "description": "<p>Effect: The duration of @Affliction[burn] affecting allied creatures within 10m of the user are reduced by 2 instead of 1 at the end of each of their Activations.</p>",
-        "img": "icons/svg/explosion.svg"
-      },
-      {
-        "traits": [
-          "defensive",
-          "aura"
-        ],
-        "name": "Water Veil",
-        "slug": "water-veil",
-        "type": "passive",
-        "cost": {
-          "activation": "free"
-        },
-        "description": "<p>Passive: The user is immune to the @Affliction[burn] Affliction.</p>",
-        "img": "icons/svg/explosion.svg",
-        "range": {
           "target": "enemy",
           "unit": "m"
-        }
+        },
+        "description": "<p>Passive: The user is immune to the @Affliction[burn] Affliction.</p>",
+        "img": "systems/ptr2e/img/svg/water_icon.svg"
       }
     ],
-    "description": "<p>Effect: The duration of @Affliction[burn] affecting allied creatures within 10m of the user are reduced by 2 instead of 1 at the end of each of their Activations. Passive: The user is immune to the @Affliction[burn] Affliction.</p>",
+    "description": "<p>Effect: The user is immune to @Affliction[burn]. Allied creatures in range have a 50% chance of being cured of @Affliction[burn] and a 10% chance to gain @Affliction[ringed] 5 at the end of their Activations.</p>",
     "traits": [
       "defensive",
       "aura"
@@ -51,6 +32,13 @@
     "_migration": {
       "version": null,
       "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
     }
   },
   "_id": "OaDKuFZu1MXY7sQV",

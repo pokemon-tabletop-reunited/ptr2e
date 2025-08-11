@@ -6,32 +6,29 @@
     "number": 661,
     "size": {
       "category": "tiny",
-      "type": "height",
+      "type": "quad",
       "height": 0.3,
       "weight": 1.7
     },
     "diet": [
       "omnivore"
     ],
-    "movement": {
-      "primary": [
-        {
-          "type": "flight",
-          "value": 6
-        }
-      ],
-      "secondary": [
-        {
-          "type": "overland",
-          "value": 4
-        }
-      ]
-    },
+    "movement": [
+      {
+        "type": "flight",
+        "value": 10
+      },
+      {
+        "type": "overland",
+        "value": 3
+      }
+    ],
     "traits": [
       "pokemon",
-      "underdog",
       "flying",
-      "heater"
+      "heater",
+      "winged",
+      "jump-3"
     ],
     "abilities": {
       "starting": [
@@ -44,7 +41,7 @@
       ],
       "basic": [
         {
-          "slug": "pickup"
+          "slug": "flame-body"
         },
         {
           "slug": "keen-eye"
@@ -55,15 +52,15 @@
           "slug": "feisty"
         },
         {
-          "slug": "defiant"
+          "slug": "fevered-pitch"
         }
       ],
       "master": [
         {
-          "slug": "forewarn"
+          "slug": "speed-boost"
         },
         {
-          "slug": "cloud-nine"
+          "slug": "raging-flame"
         }
       ]
     },
@@ -87,6 +84,14 @@
       {
         "slug": "conversation",
         "value": 25,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "flying",
+        "value": 30,
         "rvs": 0,
         "favourite": false,
         "hidden": false,
@@ -126,7 +131,7 @@
       },
       {
         "slug": "running",
-        "value": 5,
+        "value": 10,
         "rvs": 0,
         "favourite": false,
         "hidden": false,
@@ -173,94 +178,110 @@
     "moves": {
       "levelUp": [
         {
-          "name": "tackle",
-          "level": 1,
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
           "name": "growl",
-          "level": 1,
-          "gen": "scarlet-violet"
+          "gen": "scarlet-violet",
+          "level": 1
         },
         {
           "name": "peck",
-          "level": 1,
-          "gen": "scarlet-violet"
+          "gen": "scarlet-violet",
+          "level": 1
+        },
+        {
+          "name": "tackle",
+          "gen": "ultra-sun-ultra-moon",
+          "level": 1
         },
         {
           "name": "quick-attack",
-          "level": 5,
-          "gen": "scarlet-violet"
+          "gen": "scarlet-violet",
+          "level": 5
         },
         {
           "name": "ember",
-          "level": 10,
-          "gen": "scarlet-violet"
+          "gen": "scarlet-violet",
+          "level": 10
         },
         {
           "name": "flail",
-          "level": 15,
-          "gen": "scarlet-violet"
+          "gen": "scarlet-violet",
+          "level": 15
         },
         {
           "name": "acrobatics",
-          "level": 20,
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "razor-wind",
-          "level": 25,
-          "gen": "ultra-sun-ultra-moon"
+          "gen": "scarlet-violet",
+          "level": 20
         },
         {
           "name": "agility",
-          "level": 25,
-          "gen": "scarlet-violet"
+          "gen": "scarlet-violet",
+          "level": 25
+        },
+        {
+          "name": "razor-wind",
+          "gen": "ultra-sun-ultra-moon",
+          "level": 25
         },
         {
           "name": "natural-gift",
-          "level": 29,
-          "gen": "ultra-sun-ultra-moon"
+          "gen": "ultra-sun-ultra-moon",
+          "level": 29
         },
         {
           "name": "aerial-ace",
-          "level": 30,
-          "gen": "scarlet-violet"
+          "gen": "scarlet-violet",
+          "level": 30
         },
         {
           "name": "flame-charge",
-          "level": 34,
-          "gen": "ultra-sun-ultra-moon"
+          "gen": "ultra-sun-ultra-moon",
+          "level": 34
         },
         {
           "name": "tailwind",
-          "level": 35,
-          "gen": "scarlet-violet"
+          "gen": "scarlet-violet",
+          "level": 35
         },
         {
           "name": "steel-wing",
-          "level": 40,
-          "gen": "scarlet-violet"
+          "gen": "scarlet-violet",
+          "level": 40
         },
         {
           "name": "me-first",
-          "level": 41,
-          "gen": "ultra-sun-ultra-moon"
+          "gen": "ultra-sun-ultra-moon",
+          "level": 41
         },
         {
           "name": "roost",
-          "level": 45,
-          "gen": "scarlet-violet"
+          "gen": "scarlet-violet",
+          "level": 45
         },
         {
           "name": "fly",
-          "level": 50,
-          "gen": "scarlet-violet"
+          "gen": "scarlet-violet",
+          "level": 50
         }
       ],
       "tutor": [
         {
-          "name": "snatch",
+          "name": "air-cutter",
+          "gen": "scarlet-violet"
+        },
+        {
+          "name": "air-slash",
+          "gen": "scarlet-violet"
+        },
+        {
+          "name": "attract",
+          "gen": "sword-shield"
+        },
+        {
+          "name": "brave-bird",
+          "gen": "scarlet-violet"
+        },
+        {
+          "name": "confide",
           "gen": "ultra-sun-ultra-moon"
         },
         {
@@ -268,11 +289,35 @@
           "gen": "scarlet-violet"
         },
         {
-          "name": "quick-guard",
+          "name": "double-edge",
           "gen": "scarlet-violet"
         },
         {
-          "name": "snore",
+          "name": "double-team",
+          "gen": "ultra-sun-ultra-moon"
+        },
+        {
+          "name": "dual-wingbeat",
+          "gen": "sword-shield"
+        },
+        {
+          "name": "endure",
+          "gen": "scarlet-violet"
+        },
+        {
+          "name": "facade",
+          "gen": "scarlet-violet"
+        },
+        {
+          "name": "feather-dance",
+          "gen": "scarlet-violet"
+        },
+        {
+          "name": "flare-blitz",
+          "gen": "scarlet-violet"
+        },
+        {
+          "name": "frustration",
           "gen": "ultra-sun-ultra-moon"
         },
         {
@@ -280,8 +325,72 @@
           "gen": "ultra-sun-ultra-moon"
         },
         {
-          "name": "dual-wingbeat",
+          "name": "hidden-power",
+          "gen": "ultra-sun-ultra-moon"
+        },
+        {
+          "name": "hurricane",
+          "gen": "scarlet-violet"
+        },
+        {
+          "name": "overheat",
+          "gen": "scarlet-violet"
+        },
+        {
+          "name": "protect",
+          "gen": "scarlet-violet"
+        },
+        {
+          "name": "quick-guard",
+          "gen": "scarlet-violet"
+        },
+        {
+          "name": "rain-dance",
+          "gen": "scarlet-violet"
+        },
+        {
+          "name": "rest",
+          "gen": "scarlet-violet"
+        },
+        {
+          "name": "return",
+          "gen": "ultra-sun-ultra-moon"
+        },
+        {
+          "name": "round",
           "gen": "sword-shield"
+        },
+        {
+          "name": "secret-power",
+          "gen": "omega-ruby-alpha-sapphire"
+        },
+        {
+          "name": "sleep-talk",
+          "gen": "scarlet-violet"
+        },
+        {
+          "name": "snatch",
+          "gen": "ultra-sun-ultra-moon"
+        },
+        {
+          "name": "snore",
+          "gen": "ultra-sun-ultra-moon"
+        },
+        {
+          "name": "substitute",
+          "gen": "scarlet-violet"
+        },
+        {
+          "name": "sunny-day",
+          "gen": "scarlet-violet"
+        },
+        {
+          "name": "swagger",
+          "gen": "ultra-sun-ultra-moon"
+        },
+        {
+          "name": "swift",
+          "gen": "scarlet-violet"
         },
         {
           "name": "swords-dance",
@@ -292,27 +401,11 @@
           "gen": "scarlet-violet"
         },
         {
-          "name": "double-edge",
+          "name": "taunt",
           "gen": "scarlet-violet"
         },
         {
-          "name": "toxic",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "double-team",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "swift",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "rest",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "substitute",
+          "name": "tera-blast",
           "gen": "scarlet-violet"
         },
         {
@@ -320,43 +413,11 @@
           "gen": "scarlet-violet"
         },
         {
-          "name": "protect",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "endure",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "swagger",
+          "name": "toxic",
           "gen": "ultra-sun-ultra-moon"
         },
         {
-          "name": "attract",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "sleep-talk",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "return",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "frustration",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "hidden-power",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "rain-dance",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "sunny-day",
+          "name": "u-turn",
           "gen": "scarlet-violet"
         },
         {
@@ -364,64 +425,8 @@
           "gen": "sword-shield"
         },
         {
-          "name": "facade",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "taunt",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "secret-power",
-          "gen": "omega-ruby-alpha-sapphire"
-        },
-        {
-          "name": "feather-dance",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "air-cutter",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "overheat",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "u-turn",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "flare-blitz",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "air-slash",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "brave-bird",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "round",
-          "gen": "sword-shield"
-        },
-        {
           "name": "work-up",
           "gen": "sword-shield"
-        },
-        {
-          "name": "hurricane",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "confide",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "tera-blast",
-          "gen": "scarlet-violet"
         }
       ]
     },
@@ -466,6 +471,10 @@
                 "item": null,
                 "level": null,
                 "knownMove": null
+              },
+              "perk": {
+                "x": 26,
+                "y": 26
               }
             }
           ],
@@ -474,15 +483,30 @@
             "item": null,
             "level": null,
             "knownMove": null
+          },
+          "perk": {
+            "x": 26,
+            "y": 26
           }
         }
       ],
       "uuid": "Compendium.ptr2e.core-species.Item.VTXC9JoiGnAzmsE3",
-      "methods": []
+      "methods": [],
+      "perk": {
+        "x": 26,
+        "y": 26
+      }
     },
     "_migration": {
       "version": null,
       "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core - Kalos Dex",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
     }
   },
   "_id": "VTXC9JoiGnAzmsE3",

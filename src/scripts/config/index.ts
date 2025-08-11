@@ -10,7 +10,7 @@ import { ScenePTR2e } from "@module/canvas/scene.ts";
 import { BasicChangeSystem, ChangeModel } from "@data";
 import { ActiveEffectPTR2e } from "@module/effects/index.ts";
 import { AttackMessageSystem, ChatMessagePTR2e, DamageAppliedMessageSystem, ItemMessageSystem, SkillMessageSystem, CaptureMessageSystem } from "@module/chat/index.ts";
-import Traits from "static/traits.json" assert { type: "json" };
+import Traits from "static/traits.json" with { type: "json" };
 import ItemDirectoryPTR2e from "@item/sidebar.ts";
 import { StatusEffects } from "./effects.ts";
 import FolderPTR2e from "@module/folder/document.ts";
@@ -37,6 +37,11 @@ import { Habitats } from "./habitats.ts";
 import { HabitatRollTable } from "@system/habitat-table.ts";
 import { RollTableDirectoryPTR2e } from "@module/apps/sidebar/rolltables-directory.ts";
 import AdvancementActiveEffectSystem from "@module/effects/data/advancement.ts";
+import { PickableThing } from "@module/apps/pick-a-thing-prompt.ts";
+import { TokenHUDPTR2e } from "@module/apps/token-hud.ts";
+import { HotbarPTR2e } from "@module/apps/hotbar.ts";
+import { TokenRulerPTR2e } from "@module/canvas/token-ruler.ts";
+import { PrototypeTokenConfigPTR2e, TokenConfigPTR2e } from "@module/canvas/token/sheet.ts";
 
 export const PTRCONFIG = {
   ActiveEffect: {
@@ -150,7 +155,11 @@ export const PTRCONFIG = {
   Token: {
     documentClass: TokenDocumentPTR2e,
     objectClass: TokenPTR2e,
-    trackableAttributes
+    trackableAttributes,
+    hudClass: TokenHUDPTR2e,
+    rulerClass: TokenRulerPTR2e,
+    sheetClass: TokenConfigPTR2e,
+    prototypeSheetClass: PrototypeTokenConfigPTR2e
   },
   Scene: {
     documentClass: ScenePTR2e,
@@ -165,7 +174,8 @@ export const PTRCONFIG = {
     actors: ActorDirectoryPTR2e,
     compendium: CompendiumDirectoryPTR2e,
     settings: SettingsSidebarPTR2e,
-    tables: RollTableDirectoryPTR2e
+    tables: RollTableDirectoryPTR2e,
+    hotbar: HotbarPTR2e
   },
   data: {
     traits: Traits,
@@ -195,5 +205,59 @@ export const PTRCONFIG = {
   } as Record<Size, string>,
   utils: {
     predicate: Predicate
-  }
+  },
+  options: {} as Record<string, PickableThing[]>,
+  movementTypes: {
+    overland: {
+      label: "PTR2E.TokenMovement.Actions.Overland",
+      icon: "fa-solid fa-fw fa-person-walking",
+      canSelect: (token) => token?.actor?.hasMovementType("overland") ?? false,
+      order: 1
+    },
+    burrow:{
+      label: "PTR2E.TokenMovement.Actions.Burrow",
+      icon: "fa-solid fa-fw fa-shovel",
+      canSelect: (token) => token?.actor?.hasMovementType("burrow") ?? false,
+      getAnimationOptions: () => ({movementSpeed: 4}),
+      order: 2
+    },
+    swim: {
+      label: "PTR2E.TokenMovement.Actions.Swim",
+      icon: "fa-solid fa-fw fa-fish",
+      canSelect: (token) => token?.actor?.hasMovementType("swim") ?? false,
+      getAnimationOptions: () => ({movementSpeed: 4}),
+      order: 3
+    },
+    flight: {
+      label: "PTR2E.TokenMovement.Actions.Flight",
+      icon: "fa-solid fa-fw fa-dove",
+      canSelect: (token) => token?.actor?.hasMovementType("flight") ?? false,
+      getAnimationOptions: () => ({movementSpeed: 8, easing: "easeInCircle"}),
+      order: 4
+    },
+    threaded: {
+      label: "PTR2E.TokenMovement.Actions.Threaded",
+      icon: "fa-solid fa-fw fa-reel",
+      canSelect: (token) => token?.actor?.hasMovementType("threaded") ?? false,
+      order: 5
+    },
+    teleport: {
+      label: "PTR2E.TokenMovement.Actions.Teleport",
+      icon: "fa-solid fa-fw fa-transporter",
+      canSelect: (token) => token?.actor?.hasMovementType("teleport") ?? false,
+      teleport: true,
+      getAnimationOptions: () => ({movementSpeed: 10, easing: "easeOutCircle"}),
+      order: 6
+    },
+    free: {
+      label: "PTR2E.TokenMovement.Actions.Free",
+      icon: "fa-solid fa-fw fa-street-view",
+      canSelect: (token) => !!token?.actor,
+      getCostFunction: () => () => 0,
+      measure: false,
+      visualize: false,
+      teleport: true,
+      order: 999
+    }
+  } as Record<string, TokenMovementAction<TokenPTR2e, TokenDocumentPTR2e>>
 }

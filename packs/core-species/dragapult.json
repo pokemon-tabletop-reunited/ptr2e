@@ -342,6 +342,10 @@
               "operand": "and"
             }
           ],
+          "perk": {
+            "x": 26,
+            "y": 26
+          },
           "evolutions": [
             {
               "name": "dragapult",
@@ -353,29 +357,14 @@
                   "operand": "and"
                 }
               ],
-              "details": {
-                "gender": null,
-                "item": null,
-                "level": null,
-                "knownMove": null
-              },
-              "evolutions": [],
               "perk": {
                 "x": 26,
                 "y": 26
-              }
+              },
+              "details": null
             }
           ],
-          "details": {
-            "gender": null,
-            "item": null,
-            "level": null,
-            "knownMove": null
-          },
-          "perk": {
-            "x": 26,
-            "y": 26
-          }
+          "details": null
         }
       ],
       "uuid": "Compendium.ptr2e.core-species.Item.D7EFVprVAaeNuqrX",
@@ -397,7 +386,9 @@
       "invisibility",
       "stealth",
       "silent",
-      "phasing"
+      "phasing",
+      "fully-evolved",
+      "jump-2"
     ],
     "diet": [],
     "abilities": {
@@ -434,15 +425,12 @@
         }
       ]
     },
-    "movement": {
-      "primary": [
-        {
-          "type": "flight",
-          "value": 36
-        }
-      ],
-      "secondary": []
-    },
+    "movement": [
+      {
+        "type": "flight",
+        "value": 36
+      }
+    ],
     "skills": [
       {
         "slug": "conversation",
@@ -461,7 +449,7 @@
         "group": null
       },
       {
-        "slug": "ghosts",
+        "slug": "ghost",
         "value": 65,
         "rvs": 0,
         "favourite": false,
@@ -543,6 +531,13 @@
     "_migration": {
       "version": null,
       "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core - Galar Dex",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
     }
   },
   "_id": "T3n8FlfAh9bUxrKk",

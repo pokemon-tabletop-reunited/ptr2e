@@ -1,6 +1,6 @@
 import { MeasuredTemplatePTR2e } from "../measured-template.ts";
 
-export class TemplateLayerPTR2e<TObject extends MeasuredTemplatePTR2e = MeasuredTemplatePTR2e> extends TemplateLayer<TObject> {
+export class TemplateLayerPTR2e<TObject extends MeasuredTemplatePTR2e = MeasuredTemplatePTR2e> extends foundry.canvas.layers.TemplateLayer<TObject> {
     /** Preview event listeners that can be referenced across methods */
     #previewListeners: TemplatePreviewEventListeners | null = null;
 

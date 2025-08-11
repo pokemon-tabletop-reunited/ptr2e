@@ -1,0 +1,21 @@
+<section class="tab sheet-body {{tabs.packs.cssClass}}" data-tab="packs" data-group="tabs">
+  <h2>{{localize "PTR2E.Settings.CompendiumBrowserPacks.Name"}}</h2>
+
+  <section class="scroll">
+    {{#each settings as |setting|}}
+    {{#unless (is setting.key "traits")}}
+      <fieldset class="setting-section">
+        <legend>{{localize setting.label}}</legend> 
+        <dl>
+          {{#each setting.options as |conf pack|}}
+          <label>
+            <dt><input type="checkbox" name="{{setting.key}}-{{pack}}" {{checked conf.load}}></dt>
+            <dd>{{conf.name}} ({{conf.package}})</dd>
+          </label>
+          {{/each}}
+        </dl>
+      </fieldset>
+    {{/unless}}
+    {{/each}}
+  </section>
+</section>

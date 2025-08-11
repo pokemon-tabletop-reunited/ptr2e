@@ -7,14 +7,14 @@
     "slug": null,
     "actions": [
       {
-        "name": "Static Strike",
-        "slug": "static-strike",
+        "name": "Static Strike (Resolution)",
+        "slug": "static-strike-resolution",
         "type": "attack",
-        "img": "icons/svg/explosion.svg",
+        "img": "systems/ptr2e/img/svg/electric_icon.svg",
         "traits": [
           "set-up",
-          "contact",
-          "environ"
+          "crit-1",
+          "contact"
         ],
         "range": {
           "target": "creature",
@@ -23,24 +23,52 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 2
+          "powerPoints": 1,
+          "trigger": "The user used Static Strike (Set-Up) as their last Action."
         },
-        "variant": null,
         "types": [
           "electric"
         ],
         "category": "physical",
-        "power": 80,
+        "power": 90,
         "accuracy": 95,
-        "contestType": "",
-        "contestEffect": "",
-        "free": false,
-        "slot": null,
-        "description": "<p>Effect: Set-Up: The user gains @Affliction[braced] 1, and ends their Activation. If the user is affected by Electric Terrain or Rainy Weather, they Set-Up and resolve this Attack on the same Activation.</p><p>Resolution: On their next Activation, they attack with and resolve this attack. On hit, the target gains @Affliction[paralysis] 5.</p>"
+        "description": "<p>Trigger: The user used Static Strike (Set Up) as their last Action.</p><p>Effect: On hit, the target gains @Affliction[paralysis 5].</p>",
+        "predicate": []
+      },
+      {
+        "name": "Static Strike (Set-Up)",
+        "slug": "static-strike-set-up",
+        "description": "<p>Effect: The user gains @Affliction[braced 2], If the user is affected by Electric Terrain or Rainy Weather, the user may use Static Strike (Resolution] as a Free Action upon resolving this Attack.</p>",
+        "traits": [
+          "set-up",
+          "environ",
+          "priority-20"
+        ],
+        "type": "attack",
+        "img": "systems/ptr2e/img/svg/electric_icon.svg",
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 2
+        },
+        "range": {
+          "target": "self",
+          "unit": "m"
+        },
+        "types": [
+          "electric"
+        ],
+        "category": "status",
+        "predicate": []
       }
     ],
     "container": null,
-    "grade": "D"
+    "grade": "D",
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ]
+    }
   },
   "effects": [],
   "sort": 10100000,

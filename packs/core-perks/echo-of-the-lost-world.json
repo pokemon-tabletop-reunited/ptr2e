@@ -1,0 +1,58 @@
+{
+  "name": "Echo of the Lost World",
+  "_id": "QewUuhjwpxF2bzfp",
+  "type": "perk",
+  "img": "systems/ptr2e/img/item-icons/helix%20fossil.webp",
+  "effects": [],
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "publication": {
+      "source": "PTR2e Core",
+      "authors": [
+        "Dragoon"
+      ],
+      "notes": ""
+    },
+    "actions": [],
+    "slug": null,
+    "description": "<p>Effect: The user takes 5% less damage from non-Rock Type Attacks, and increases their RES by 10% against such attacks. Additionally, the user's non-Rock Type Attacks deal 10% more damage and have their Base Chances (if any) increased by 5%.</p>",
+    "traits": [],
+    "prerequisites": [
+      "trait:fossil",
+      {
+        "gte": [
+          "{actor|level}",
+          20
+        ]
+      }
+    ],
+    "autoUnlock": [],
+    "cost": 2,
+    "originSlug": null,
+    "design": {
+      "arena": "physical",
+      "approach": "resilience",
+      "archetype": "fossil"
+    },
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": [],
+    "nodes": [
+      {
+        "x": 166,
+        "y": 29,
+        "connected": [
+          "root-2",
+          "cthonic-terror"
+        ],
+        "hidden": false,
+        "type": "normal",
+        "tier": null
+      }
+    ]
+  }
+}

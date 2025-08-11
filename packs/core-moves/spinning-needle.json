@@ -1,0 +1,127 @@
+{
+  "folder": "BImk1fcMbR5akA4z",
+  "name": "Spinning Needle",
+  "type": "move",
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "publication": {
+      "source": "Digidex",
+      "authors": [
+        "Fox"
+      ],
+      "notes": ""
+    },
+    "traits": [],
+    "actions": [
+      {
+        "name": "Spinning Needle",
+        "slug": "spinning-needle",
+        "type": "attack",
+        "img": "systems/ptr2e/img/svg/flying_icon.svg",
+        "traits": [
+          "blast-3",
+          "digimon"
+        ],
+        "range": {
+          "target": "blast",
+          "distance": 8,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 4
+        },
+        "types": [
+          "flying"
+        ],
+        "category": "physical",
+        "power": 60,
+        "accuracy": 100,
+        "predicate": [],
+        "description": "<p>This attack has a 15% chance each to inflict @Affliction[splinter 5] and @Affliction[wind-shear 5].</p>"
+      }
+    ],
+    "grade": "C",
+    "slug": "spinning-needle"
+  },
+  "img": "systems/ptr2e/img/svg/flying_icon.svg",
+  "effects": [
+    {
+      "name": "Spinning Needle",
+      "type": "passive",
+      "_id": "yZ9liuIvKCzRfLct",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "spinning-needle-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.splinterconditem",
+            "predicate": [],
+            "chance": 15,
+            "affects": "target",
+            "dontMerge": false,
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "alterations": [],
+            "isFixedChance": false
+          },
+          {
+            "type": "roll-effect",
+            "key": "spinning-needle-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.windshearconitem",
+            "predicate": [],
+            "chance": 15,
+            "affects": "target",
+            "dontMerge": false,
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "alterations": [],
+            "isFixedChance": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "13.346",
+        "systemId": "ptr2e",
+        "systemVersion": "1.2.1.beta",
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null,
+        "exportSource": null
+      }
+    }
+  ],
+  "_id": "oZyRXrISYwbWIbyK"
+}

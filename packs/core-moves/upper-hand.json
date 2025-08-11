@@ -11,8 +11,7 @@
         "type": "attack",
         "traits": [
           "punch",
-          "contact",
-          "pp-updated"
+          "contact"
         ],
         "range": {
           "target": "creature",
@@ -21,8 +20,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 3,
-          "trigger": ""
+          "powerPoints": 3
         },
         "category": "physical",
         "power": 65,
@@ -30,11 +28,8 @@
         "types": [
           "fighting"
         ],
-        "description": "",
-        "contestType": "",
-        "contestEffect": "",
-        "free": false,
-        "slot": null
+        "img": "icons/svg/explosion.svg",
+        "predicate": []
       },
       {
         "slug": "upper-hand-reaction",
@@ -44,8 +39,7 @@
           "punch",
           "dash",
           "interrupt-2",
-          "contact",
-          "pp-updated"
+          "contact"
         ],
         "range": {
           "target": "creature",
@@ -64,15 +58,24 @@
           "fighting"
         ],
         "description": "<p>Trigger: The user is targeted by a  Attack.</p><p>Effect: The user can freely move up to half of the Movement Score of their choice towards the target and then attacks with Upper Hand, if possible. If the target gains @Affliction[fainted] due to damage from this move, the triggering attack fails.</p>",
-        "contestType": "",
-        "contestEffect": "",
         "variant": "upper-hand",
-        "free": false,
-        "slot": null
+        "img": "icons/svg/explosion.svg",
+        "predicate": []
       }
     ],
-    "container": null,
-    "grade": "D"
+    "grade": "C",
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "traits": [],
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
   },
   "_id": "PSM4n8qYVeHDnQEk",
   "effects": []

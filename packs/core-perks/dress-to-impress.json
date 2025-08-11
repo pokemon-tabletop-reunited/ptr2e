@@ -7,13 +7,17 @@
       "previous": null
     },
     "actions": [],
-    "description": "<p>You gain an additional [Accessory] slot.</p>",
+    "description": "<p>You gain an additional [Accessory] slot. You may not equip more than one instance of the same [Accessory].</p>",
     "traits": [],
     "prerequisites": [],
     "cost": 3,
     "slug": "dress-to-impress",
     "nodes": [
       {
+        "x": 185,
+        "y": 58,
+        "hidden": false,
+        "type": "normal",
         "connected": [
           "belt-expansion-1",
           "trained-wielder",
@@ -21,18 +25,11 @@
           "dual-wielder"
         ],
         "config": {
-          "alpha": null,
+          "texture": "systems/ptr2e/img/icons/equipment_icon.webp",
           "backgroundColor": null,
           "borderColor": null,
-          "borderWidth": null,
-          "texture": "systems/ptr2e/img/icons/equipment_icon.webp",
-          "tint": null,
-          "scale": null
+          "tint": null
         },
-        "hidden": false,
-        "type": "normal",
-        "x": 185,
-        "y": 58,
         "tier": null
       }
     ],
@@ -43,7 +40,17 @@
       "arena": "social",
       "approach": "finesse",
       "archetype": "backpacker"
-    }
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "originSlug": null,
+    "variant": null,
+    "mode": null
   },
   "img": "systems/ptr2e/img/icons/equipment_icon.webp",
   "effects": [
@@ -90,12 +97,13 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.342",
         "systemId": "ptr2e",
         "systemVersion": "0.10.0-alpha.5.2.1",
         "createdTime": 1737934863150,
         "modifiedTime": 1737934882767,
-        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+        "lastModifiedBy": "mK35yvCqCgiTUvKf",
+        "exportSource": null
       }
     }
   ],

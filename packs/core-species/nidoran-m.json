@@ -13,27 +13,24 @@
     "diet": [
       "herbivore"
     ],
-    "movement": {
-      "primary": [
-        {
-          "type": "overland",
-          "value": 8
-        }
-      ],
-      "secondary": [
-        {
-          "type": "swim",
-          "value": 3
-        }
-      ]
-    },
+    "movement": [
+      {
+        "type": "overland",
+        "value": 8
+      },
+      {
+        "type": "swim",
+        "value": 3
+      }
+    ],
     "traits": [
       "pokemon",
       "quadrupedal",
       "venomous",
       "underdog",
       "horned",
-      "pack-mon"
+      "pack-mon",
+      "jump-5"
     ],
     "abilities": {
       "starting": [
@@ -54,10 +51,10 @@
       ],
       "advanced": [
         {
-          "slug": "intoxicate"
+          "slug": "mighty-horn"
         },
         {
-          "slug": "mighty-horn"
+          "slug": "giant-tail"
         }
       ],
       "master": [
@@ -586,7 +583,11 @@
                 "level": null,
                 "knownMove": null
               },
-              "evolutions": []
+              "evolutions": [],
+              "perk": {
+                "x": 26,
+                "y": 26
+              }
             }
           ],
           "details": {
@@ -594,17 +595,36 @@
             "item": null,
             "level": null,
             "knownMove": null
+          },
+          "perk": {
+            "x": 26,
+            "y": 26
           }
         }
       ],
       "uuid": "Compendium.ptr2e.core-species.Item.P0atGVioDIxZ5wOr",
-      "methods": []
+      "methods": [],
+      "perk": {
+        "x": 26,
+        "y": 26
+      }
     },
     "habitats": [
       "grassland"
     ],
     "slug": "nidoran-m",
-    "genderRatio": -1
+    "genderRatio": -1,
+    "publication": {
+      "source": "PTR 2e Core - Kanto Dex",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
   },
   "_id": "P0atGVioDIxZ5wOr",
   "effects": []

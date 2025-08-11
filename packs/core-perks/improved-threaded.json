@@ -4,9 +4,7 @@
   "folder": "zrVtKATNxzLNxTUe",
   "system": {
     "prerequisites": [
-      "#An Threaded Movement Allowance",
-      "#Running 25 + 5 x (# of Improved Threaded Perks already obtained)",
-      "#Acrobatics 25 + 5 x (# of Improved Threaded Perks already obtained)"
+      "#An Threaded Movement Allowance"
     ],
     "cost": 1,
     "description": "<p>Improve your Threaded Movement Allowance by 2.</p>",
@@ -16,19 +14,26 @@
         "slug": "improved-threaded",
         "description": "<p>Improve your Threaded Movement Allowance by 2.</p>",
         "cost": {
-          "activation": "free"
+          "activation": "free",
+          "powerPoints": 0
         },
         "type": "passive",
         "traits": [],
         "img": "icons/svg/explosion.svg",
         "range": {
           "target": "enemy",
-          "unit": "m"
-        }
+          "unit": "m",
+          "distance": 0
+        },
+        "variant": null,
+        "ephemeralVariant": false,
+        "hidden": false
       }
     ],
     "slug": "improved-threaded",
-    "traits": [],
+    "traits": [
+      "minor-buff"
+    ],
     "_migration": {
       "version": null,
       "previous": null
@@ -81,13 +86,21 @@
       }
     ],
     "autoUnlock": [],
-    "global": true,
+    "global": false,
     "webs": [],
     "design": {
       "arena": "physical",
       "approach": "finesse",
-      "archetype": "Mobility"
-    }
+      "archetype": "mobility"
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "originSlug": null
   },
   "_id": "OluRtmzPHj9OgOXc",
   "img": "systems/ptr2e/img/svg/bug_icon.svg",
@@ -107,6 +120,18 @@
             "mode": 2,
             "priority": null,
             "ignored": false
+          },
+          {
+            "type": "roll-option",
+            "value": "improved-threaded",
+            "domain": "all",
+            "count": true,
+            "key": "",
+            "mode": 2,
+            "predicate": [],
+            "ignored": false,
+            "suboptions": [],
+            "state": true
           }
         ],
         "slug": null,
@@ -135,12 +160,13 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.342",
         "systemId": "ptr2e",
         "systemVersion": "0.10.0-alpha.5.1.2",
         "createdTime": 1736876858383,
         "modifiedTime": 1736876884316,
-        "lastModifiedBy": "IcBpMqhFuTck9VpX"
+        "lastModifiedBy": "IcBpMqhFuTck9VpX",
+        "exportSource": null
       }
     }
   ]

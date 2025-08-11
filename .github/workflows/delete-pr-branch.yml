@@ -1,0 +1,35 @@
+name: Delete Merged Branches
+
+on:
+  pull_request:
+    types: [closed]
+
+jobs:
+  delete_branch:
+    runs-on: ubuntu-latest
+    if: github.event.pull_request.merged == true
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Delete branch
+        run: |
+          branch_name=$(echo ${GITHUB_REF#refs/heads/})
+          if [[ "$branch_name" == pr-* ]]; then
+            git push origin --delete $branch_name
+          fi
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      
+      - name: Post PR comment
+        if: success()
+        uses: actions/github-script@v6
+        with:
+          script: |
+            github.rest.issues.createComment({
+              issue_number: ${{ github.event.pull_request.number }},
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: `The branch ${branch_name} has been successfully deleted.`
+            })
+          github-token: ${{ secrets.GITHUB_TOKEN }}

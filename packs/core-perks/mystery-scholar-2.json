@@ -9,7 +9,7 @@
     },
     "actions": [],
     "slug": "mystery-scholar-2",
-    "description": "<p>The user selects 3 Occult Group Skills with which their Species proficiency is greater than 1. The user’s Species proficiency with the selected skills is increased by +10. A Skill may only be increased 3 times with this Perk and cannot be increased past 50.</p>",
+    "description": "<p>The user selects 3 Occult Group Skills. The user’s Species proficiency with the selected skills is increased by +10. A Skill may only be increased 3 times with this Perk and cannot be increased past 60 (with the last increase needing to be manually reduced to prevent the Skill from exceeding 60).</p>",
     "traits": [],
     "prerequisites": [
       {
@@ -28,6 +28,13 @@
       "arena": null,
       "approach": null,
       "archetype": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
     }
   },
   "_id": "ogKYTDDvLqJYT835",
@@ -58,8 +65,8 @@
             "key": "system.skills.{effect|flags.ptr2e.choiceSelections.ms21}.value",
             "value": 10,
             "predicate": [],
-            "mode": 2,
             "priority": null,
+            "mode": 2,
             "ignored": false
           },
           {
@@ -70,7 +77,7 @@
             "mode": 2,
             "priority": null,
             "ignored": false,
-            "choices": "flags.ptr2e.skillOptions.arts",
+            "choices": "flags.ptr2e.skillOptions.occult",
             "prompt": "PTR2E.ChoiceSetPrompt.Prompt",
             "adjustName": true,
             "rollOption": "ms22"
@@ -80,8 +87,29 @@
             "key": "system.skills.{effect|flags.ptr2e.choiceSelections.ms22}.value",
             "value": 10,
             "predicate": [],
-            "mode": 2,
             "priority": null,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "choice-set",
+            "key": "",
+            "value": 0,
+            "predicate": [],
+            "mode": 2,
+            "ignored": false,
+            "choices": "flags.ptr2e.skillOptions.occult",
+            "prompt": "PTR2E.ChoiceSetPrompt.Prompt",
+            "adjustName": true,
+            "rollOption": "ms23",
+            "priority": null
+          },
+          {
+            "type": "basic",
+            "key": "system.skills.{effect|flags.ptr2e.choiceSelections.ms23}.value",
+            "value": 10,
+            "predicate": [],
+            "mode": 2,
             "ignored": false
           }
         ],
@@ -89,7 +117,9 @@
         "traits": [],
         "removeAfterCombat": false,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
@@ -111,12 +141,7 @@
       "_stats": {
         "compendiumSource": "Item.xxuGLZ0QPnw7NYa8.ActiveEffect.V64elrUanozajfG2",
         "duplicateSource": null,
-        "coreVersion": "12.331",
-        "systemId": "ptr2e",
-        "systemVersion": "1.0.0.beta-ready.2",
-        "createdTime": 1738607303805,
-        "modifiedTime": 1738607303805,
-        "lastModifiedBy": "5ImYyhOS2D6D7ypO"
+        "exportSource": null
       }
     }
   ]

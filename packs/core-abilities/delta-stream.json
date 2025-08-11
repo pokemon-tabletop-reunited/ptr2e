@@ -20,7 +20,8 @@
         },
         "range": {
           "target": "field",
-          "unit": "m"
+          "unit": "m",
+          "distance": 10
         },
         "description": "<p>Trigger: The user enters combat.</p><p>Effect: Connection - Tailwind. Wind Weather is set until it is overridden or if the user gains @Affliction[fainted] or leaves combat. If the user gains @Affliction[fainted] or leaves combat while Wind Weather is present, Wind Weather will remain for 3 Rounds.</p>",
         "img": "icons/svg/explosion.svg"
@@ -41,7 +42,8 @@
         },
         "range": {
           "target": "field",
-          "unit": "m"
+          "unit": "m",
+          "distance": 10
         },
         "description": "<p>Trigger: The user undergoes a Phenomenal Transformation.</p><p>Effect: Intense Winds Weather is set until it is overridden or the user gains @Affliction[fainted] or leaves combat. If the user gains @Affliction[fainted] or leaves combat while Intense Winds is present, the Weather is set to Wind for 5 Rounds.</p>",
         "img": "icons/svg/explosion.svg"
@@ -58,6 +60,13 @@
     "_migration": {
       "version": null,
       "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
     }
   },
   "_id": "sdRq4AQB3wDxWw5D",
@@ -73,7 +82,9 @@
             "type": "grant-item",
             "key": "",
             "value": "Compendium.ptr2e.core-moves.Item.u9S8zbICHVUBS1Gx",
-            "predicate": [],
+            "predicate": [
+              "ability:delta-stream:active"
+            ],
             "alterations": [
               {
                 "mode": 5,
@@ -81,25 +92,27 @@
                 "value": "true"
               }
             ],
-            "mode": 2,
+            "allowDuplicate": false,
+            "reevaluateOnUpdate": true,
             "priority": null,
-            "ignored": false,
-            "reevaluateOnUpdate": false,
-            "inMemoryOnly": false,
-            "allowDuplicate": true,
-            "track": false,
-            "replaceSelf": false,
             "onDeleteActions": {
               "grantee": "detach",
               "granter": "cascade"
-            }
+            },
+            "mode": 2,
+            "ignored": false,
+            "inMemoryOnly": false,
+            "track": false,
+            "replaceSelf": false
           }
         ],
         "slug": null,
         "traits": [],
         "removeAfterCombat": true,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
@@ -121,12 +134,13 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.346",
         "systemId": "ptr2e",
-        "systemVersion": "0.10.0-alpha.5.1.5",
+        "systemVersion": "1.4.2.beta",
         "createdTime": 1733069184244,
-        "modifiedTime": 1737396139550,
-        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+        "modifiedTime": 1754317497364,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf",
+        "exportSource": null
       }
     }
   ]

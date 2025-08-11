@@ -12,8 +12,7 @@
         "type": "attack",
         "img": "icons/svg/explosion.svg",
         "traits": [
-          "social",
-          "pp-updated"
+          "social"
         ],
         "range": {
           "target": "creature",
@@ -29,14 +28,23 @@
         ],
         "category": "status",
         "accuracy": 95,
-        "description": "<p>Effect: The target loses -1 SPATK and SPDEF Stages for 5 Activations.</p>"
+        "description": "<p>Effect: The target loses -1 SPATK and SPDEF Stages for 5 Activations.</p>",
+        "predicate": []
       }
     ],
-    "grade": "D",
+    "grade": "C",
     "_migration": {
       "version": null,
       "previous": null
-    }
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "traits": []
   },
   "effects": [
     {
@@ -55,7 +63,8 @@
             "affects": "target",
             "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "alterations": []
           },
           {
             "type": "roll-effect",
@@ -66,7 +75,8 @@
             "affects": "target",
             "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "alterations": []
           }
         ],
         "slug": null,

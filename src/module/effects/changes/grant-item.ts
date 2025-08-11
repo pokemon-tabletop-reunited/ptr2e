@@ -161,7 +161,7 @@ export default class GrantItemChangeSystem extends ChangeModel {
     // If we shouldn't allow duplicates, check for an existing item with this source ID
     const existingItem = this.type === "grant-effect"
       ? this.actor.effects.find(e => (e as ActiveEffectPTR2e).slug === grantedDocument.slug) as ActiveEffectPTR2e
-      : this.actor.items.find((i) => (i as ItemPTR2e)?.flags?.core?.sourceId === uuid) as ItemPTR2e;
+      : this.actor.items.find((i) => (i as ItemPTR2e)?.flags?.core?.sourceId === uuid || i?._stats.compendiumSource === uuid) as ItemPTR2e;
     if (!this.allowDuplicate && existingItem) {
       this.#setGrantFlags(effectSource, existingItem);
 
@@ -180,7 +180,7 @@ export default class GrantItemChangeSystem extends ChangeModel {
     grantedSource._id = fu.randomID();
 
     // An item may grant another copy of itself, but at least strip the copy of its grant CMs
-    if (this.item?.flags?.core?.sourceId === (grantedSource.flags.core?.sourceId ?? "")) {
+    if (this.item?.flags?.core?.sourceId === (grantedSource.flags.core?.sourceId || grantedSource._stats?.compendiumSource)) {
       if (this.type === "grant-effect") {
         (grantedSource as ActiveEffectPTR2e['_source']).system.changes = (grantedSource as ActiveEffectPTR2e['_source']).system.changes.filter(c => c.type !== GrantItemChangeSystem.TYPE);
       }
@@ -235,7 +235,7 @@ export default class GrantItemChangeSystem extends ChangeModel {
     // Run the granted item's preCreate callbacks unless this is a pre-actor-update reevaluation
     if (!args.reevaluation) {
       if(this.type === "grant-effect") await this.#runGrantedEffectPreCreates(args, tempGranted as ActiveEffectPTR2e, context);
-      else await this.#runGrantedItemPreCreates(args, tempGranted as ItemPTR2e, context);
+      else await this.#runGrantedItemPreCreates(args, tempGranted as ItemPTR2e, grantedSource as ItemSourcePTR2e, context);
     }
   }
 
@@ -363,14 +363,20 @@ export default class GrantItemChangeSystem extends ChangeModel {
   async #runGrantedItemPreCreates(
     originalArgs: Omit<ChangeModel.PreCreateParams, "changeSource">,
     grantedItem: ItemPTR2e,
+    grantedSource: ItemSourcePTR2e,
     context: DocumentModificationContext<ActorPTR2e | ItemPTR2e | null>,
   ): Promise<void> {
-    for (const effect of grantedItem.effects.contents) {
-      for (const change of (effect as ActiveEffectPTR2e).system.changes) {
+    for(let i = 0; i < grantedSource.effects.length; i++) {
+      const tempEffect = grantedItem.effects.contents[i] as ActiveEffectPTR2e;
+      const effectSource = grantedSource.effects[i] as EffectSourcePTR2e;
+      for(let i = 0; i < tempEffect.system.changes.length; i++) {
+        const change = tempEffect.system.changes[i];
+        const changeSource = effectSource.system.changes[i];
         await change.preCreate?.({
           ...originalArgs,
-          changeSource: change,
-          effectSource: effect.toObject() as EffectSourcePTR2e,
+          changeSource,
+          effectSource,
+          itemSource: grantedSource,
           context,
         });
       }

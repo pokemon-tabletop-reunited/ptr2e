@@ -1,6 +1,6 @@
 {
   "folder": "rS3iGnYQKzTIxvUN",
-  "name": "Dracmon",
+  "name": "dracmon",
   "type": "species",
   "system": {
     "_migration": {
@@ -13,9 +13,10 @@
       "digimon",
       "darkvision-15",
       "silent",
-      "bipedal"
+      "bipedal",
+      "rookie"
     ],
-    "number": 3000,
+    "number": 5042,
     "stats": {
       "hp": 40,
       "atk": 65,
@@ -68,20 +69,16 @@
         }
       ]
     },
-    "movement": {
-      "primary": [
-        {
-          "type": "overland",
-          "value": 5
-        }
-      ],
-      "secondary": [
-        {
-          "type": "swim",
-          "value": 3
-        }
-      ]
-    },
+    "movement": [
+      {
+        "type": "overland",
+        "value": 5
+      },
+      {
+        "type": "swim",
+        "value": 3
+      }
+    ],
     "skills": [
       {
         "slug": "acrobatics",
@@ -263,11 +260,9 @@
               "operand": "and"
             }
           ],
-          "details": {
-            "gender": null,
-            "item": null,
-            "level": null,
-            "knownMove": null
+          "perk": {
+            "x": 26,
+            "y": 26
           },
           "evolutions": [
             {
@@ -280,11 +275,9 @@
                   "operand": "and"
                 }
               ],
-              "details": {
-                "gender": null,
-                "item": null,
-                "level": null,
-                "knownMove": null
+              "perk": {
+                "x": 26,
+                "y": 26
               },
               "evolutions": [
                 {
@@ -297,17 +290,17 @@
                       "operand": "and"
                     }
                   ],
-                  "details": {
-                    "gender": null,
-                    "item": null,
-                    "level": null,
-                    "knownMove": null
+                  "perk": {
+                    "x": 26,
+                    "y": 26
                   },
-                  "evolutions": []
+                  "details": null
                 }
-              ]
+              ],
+              "details": null
             }
-          ]
+          ],
+          "details": null
         }
       ],
       "details": {
@@ -315,11 +308,22 @@
         "item": null,
         "level": null,
         "knownMove": null
+      },
+      "perk": {
+        "x": 26,
+        "y": 26
       }
+    },
+    "publication": {
+      "source": "Digidex",
+      "authors": [
+        "PTR 2e Team",
+        "Mocan"
+      ],
+      "notes": ""
     }
   },
   "img": "systems/ptr2e/img/icons/species_icon.webp",
   "effects": [],
-  "flags": {},
   "_id": "hTKPo8deCFGc7Tii"
 }

@@ -7,7 +7,7 @@ declare global {
 
         get hasPlayerOwner(): boolean;
         get isOwner(): boolean;
-        get sheet(): FormApplication;
+        get sheet(): any;
         get uuid(): DocumentUUID;
 
         toChat?(): Promise<any>;

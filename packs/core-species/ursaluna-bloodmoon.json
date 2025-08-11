@@ -14,27 +14,25 @@
     "diet": [
       "carnivore"
     ],
-    "movement": {
-      "primary": [
-        {
-          "type": "overland",
-          "value": 5
-        }
-      ],
-      "secondary": [
-        {
-          "type": "swim",
-          "value": 3
-        }
-      ]
-    },
+    "movement": [
+      {
+        "type": "overland",
+        "value": 5
+      },
+      {
+        "type": "swim",
+        "value": 3
+      }
+    ],
     "traits": [
       "pokemon",
       "bipedal",
       "blindsight-15",
       "keen-scent",
       "ground",
-      "normal"
+      "normal",
+      "fully-evolved",
+      "jump-1"
     ],
     "abilities": {
       "starting": [
@@ -110,7 +108,7 @@
       },
       {
         "slug": "lift",
-        "value": 75,
+        "value": 70,
         "rvs": 0,
         "favourite": false,
         "hidden": false,
@@ -578,7 +576,11 @@
                 "level": null,
                 "knownMove": null
               },
-              "evolutions": []
+              "evolutions": [],
+              "perk": {
+                "x": 26,
+                "y": 26
+              }
             }
           ],
           "details": {
@@ -586,17 +588,32 @@
             "item": null,
             "level": null,
             "knownMove": null
+          },
+          "perk": {
+            "x": 26,
+            "y": 26
           }
         }
       ],
       "uuid": "Compendium.ptr2e.core-species.Item.16CvEe5rvVo3MMZB",
-      "methods": []
+      "methods": [],
+      "perk": {
+        "x": 26,
+        "y": 26
+      }
     },
     "_migration": {
       "version": null,
       "previous": null
     },
-    "habitats": []
+    "habitats": [],
+    "publication": {
+      "source": "PTR 2e Core - Hisui Dex",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": "undefined"
+    }
   },
   "_id": "kUMcP0ghaBwJcCAK",
   "effects": []

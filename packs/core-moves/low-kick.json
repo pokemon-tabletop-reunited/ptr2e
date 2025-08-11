@@ -11,8 +11,7 @@
         "type": "attack",
         "traits": [
           "kick",
-          "contact",
-          "pp-updated"
+          "contact"
         ],
         "range": {
           "target": "creature",
@@ -21,7 +20,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 4
+          "powerPoints": 3
         },
         "category": "physical",
         "power": 20,
@@ -29,16 +28,79 @@
         "types": [
           "fighting"
         ],
-        "description": "<p>Effect: This attack's Power is based on how heavy the target is, ranging from 20 to 140.</p><p><blockquote>Damage Formula: Power = max(140, min(20, TargetWC x 10)))</blockquote>",
-        "contestType": "",
-        "contestEffect": "",
-        "free": false,
-        "slot": null
+        "description": "<p>Effect: This attack's Power is based on how heavy the target is, ranging from 20 to 140.</p>",
+        "img": "systems/ptr2e/img/svg/fighting_icon.svg",
+        "predicate": []
       }
     ],
-    "container": null,
-    "grade": "B"
+    "grade": "C",
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "traits": [],
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
   },
   "_id": "al2jzxSghEeNd7lw",
-  "effects": []
+  "effects": [
+    {
+      "name": "Low Kick",
+      "type": "passive",
+      "_id": "86eU27d83SlaYruq",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "percentile-modifier",
+            "key": "low-kick-attack-power",
+            "value": "min(600,@target.system.details.size.weightClass*50)",
+            "predicate": [],
+            "label": "Low Kick Scaling",
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "hideIfDisabled": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": false,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": "Compendium.ptr2e.core-moves.Item.iWdcVdEe3eMHGjUu.ActiveEffect.RWoOCmigMhLceiZI",
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "1.1.3.beta",
+        "createdTime": 1743550688572,
+        "modifiedTime": 1743550712079,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+      }
+    }
+  ]
 }

@@ -18,7 +18,7 @@ export const DropCanvasData = {
             });
           })()
 
-          const blueprint = await ItemPTR2e.create<ItemPTR2e<BlueprintSystemModel, null>>(
+          const blueprint = new ItemPTR2e(
             {
               name: item.name,
               type: "blueprint",
@@ -27,10 +27,8 @@ export const DropCanvasData = {
                 blueprints: [{
                   species: item.uuid,
                 }]
-              }
-            },
-            {
-              temporary: true
+              },
+              ownership: {default: CONST.DOCUMENT_OWNERSHIP_LEVELS.OWNER}
             }
           );
           if(!blueprint || !canvas.scene) return;
@@ -60,13 +58,8 @@ export const DropCanvasData = {
 
     // Handle dropping items onto tokens
     Hooks.on("dropCanvasData", (_canvas, data) => {
-      const dropTarget = [...canvas.tokens.placeables]
-        .sort((a, b) => b.document.sort - a.document.sort)
-        .find((token) => {
-          const maximumX = token.x + (token.hitArea?.right ?? 0);
-          const maximumY = token.y + (token.hitArea?.bottom ?? 0);
-          return data.x >= token.x && data.y >= token.y && data.x <= maximumX && data.y <= maximumY;
-        });
+      const rect = new PIXI.Rectangle(data.x, data.y, 0, 0);
+      const dropTarget = Array.from(canvas.tokens.quadtree.getObjects(rect, {collisionTest: o => o.t.hitArea.contains(data.x - o.t.x, data.y - o.t.y)})).at(0);
 
       const actor = dropTarget?.actor;
       if (actor && ["Affliction", "Item", "ActiveEffect"].includes(data.type!)) {

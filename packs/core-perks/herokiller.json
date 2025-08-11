@@ -1,0 +1,127 @@
+{
+  "folder": "0sbegdBkuhakZCMb",
+  "name": "Herokiller",
+  "type": "perk",
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "actions": [],
+    "slug": "herokiller",
+    "description": "<p>The user’s [Jaw], [Tail], [Sharp], and [Grapple] attacks deal 20% more damage, and their non-[Contact] Physical- and Special-Category attacks have +20% Range, and they take 30% more damage from Critical Hits.</p>",
+    "traits": [],
+    "prerequisites": [
+      "item:perk:grendelian-tribute"
+    ],
+    "autoUnlock": [],
+    "cost": 5,
+    "design": {
+      "arena": "physical",
+      "approach": "finesse",
+      "archetype": "dragon"
+    },
+    "global": true,
+    "webs": [],
+    "nodes": [],
+    "originSlug": null,
+    "variant": null,
+    "mode": null
+  },
+  "img": "systems/ptr2e/img/svg/dragon_icon.svg",
+  "effects": [
+    {
+      "name": "Herokiller",
+      "type": "passive",
+      "_id": "F8vbsM67JFN3FzQn",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "percentile-modifier",
+            "key": "jaw-trait-attack-power",
+            "value": 20,
+            "predicate": [],
+            "label": "Herokiller (Jaw)",
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "hideIfDisabled": false
+          },
+          {
+            "type": "basic",
+            "key": "tail-trait-attack-power",
+            "value": 20,
+            "predicate": [],
+            "label": "Herokiller (Tail)",
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "key": "sharp-trait-attack-power",
+            "value": 20,
+            "predicate": [],
+            "label": "Herokiller (Sharp)",
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "key": "grapple-trait-attack-power",
+            "value": 20,
+            "predicate": [],
+            "label": "Herokiller (Grapple)",
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": false,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "13.342",
+        "systemId": "ptr2e",
+        "systemVersion": "1.2.1.beta",
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null,
+        "exportSource": null
+      }
+    }
+  ],
+  "flags": {},
+  "_id": "7E4ZMO8oQWM3VIuQ"
+}

@@ -15,15 +15,20 @@
         "slug": "belt-expansion-2",
         "description": "<p>Add an additional Belt slot.</p>",
         "cost": {
-          "activation": "free"
+          "activation": "free",
+          "powerPoints": 0
         },
         "type": "passive",
         "traits": [],
         "img": "icons/svg/explosion.svg",
         "range": {
           "target": "enemy",
-          "unit": "m"
-        }
+          "unit": "m",
+          "distance": 0
+        },
+        "variant": null,
+        "ephemeralVariant": false,
+        "hidden": false
       }
     ],
     "slug": "belt-expansion-2",
@@ -61,7 +66,17 @@
       "arena": "physical",
       "approach": "resilience",
       "archetype": "backpacker"
-    }
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "originSlug": null,
+    "variant": null,
+    "mode": null
   },
   "_id": "sJ1B6djHXWc4F5Ez",
   "img": "systems/ptr2e/img/perk-icons/Tactician.svg",
@@ -109,12 +124,13 @@
       "_stats": {
         "compendiumSource": "Compendium.ptr2e.core-perks.Item.zAKTLdBrA5eeGCsX.ActiveEffect.lVg2p1y5m9hhxAjN",
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.342",
         "systemId": "ptr2e",
         "systemVersion": "0.10.0-alpha.5.2.1",
         "createdTime": 1737934839620,
         "modifiedTime": 1737934839620,
-        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+        "lastModifiedBy": "mK35yvCqCgiTUvKf",
+        "exportSource": null
       }
     }
   ]

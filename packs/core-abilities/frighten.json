@@ -11,27 +11,18 @@
         ],
         "name": "Frighten",
         "slug": "frighten",
-        "type": "attack",
-        "cost": {
-          "activation": "free",
-          "trigger": "<p>The user enters combat.</p>"
-        },
+        "type": "passive",
+        "cost": {},
         "range": {
-          "target": "emanation",
-          "distance": 10,
+          "target": "enemy-aura",
+          "distance": 8,
           "unit": "m"
         },
-        "description": "<p>Trigger: The user enters combat.</p><p>Effect: All valid creatures in range lose -1 SPD Stage for 5 Activations and gain @Affliction[fear] 5.</p>",
-        "img": "icons/svg/terror.svg",
-        "types": [
-          "untyped"
-        ],
-        "category": "status",
-        "free": true,
-        "predicate": []
+        "description": "<p>Effect: All valid creatures in range have -1 default SPDEF Stages. When an affected creature leaves the range of this effect, they lose -1 SPDEF Stage for 3 Activations. The user's Attacks have a 20% chance to inflict @Affliction[fear 5]. NEEDS REAUTOMATED.</p>",
+        "img": "icons/svg/explosion.svg"
       }
     ],
-    "description": "<p>Trigger: The user enters combat.</p><p>Effect: All valid creatures in range lose -1 SPD Stage for 5 Activations and gain @Affliction[fear] 5.</p>",
+    "description": "<p>Effect: All valid creatures in range have -1 default SPDEF Stages. When an affected creature leaves the range of this effect, they lose -1 SPDEF Stage for 3 Activations. The user's Attacks have a 20% chance to inflict @Affliction[fear 2]. NEEDS REAUTOMATED.</p>",
     "traits": [
       "social",
       "friendly"
@@ -40,6 +31,12 @@
     "_migration": {
       "version": null,
       "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ]
     }
   },
   "_id": "GlVWzzuSC6kJIil4",

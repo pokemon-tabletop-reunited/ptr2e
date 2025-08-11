@@ -14,24 +14,20 @@
     "diet": [
       "insectivore"
     ],
-    "movement": {
-      "primary": [
-        {
-          "type": "overland",
-          "value": 5
-        },
-        {
-          "type": "burrow",
-          "value": 5
-        }
-      ],
-      "secondary": [
-        {
-          "type": "swim",
-          "value": 3
-        }
-      ]
-    },
+    "movement": [
+      {
+        "type": "overland",
+        "value": 5
+      },
+      {
+        "type": "burrow",
+        "value": 5
+      },
+      {
+        "type": "swim",
+        "value": 3
+      }
+    ],
     "traits": [
       "pokemon",
       "semi-bipedal",
@@ -39,7 +35,8 @@
       "tremorsense-15",
       "burrower",
       "direction-sense",
-      "alolan"
+      "alolan",
+      "jump-3"
     ],
     "abilities": {
       "starting": [
@@ -55,23 +52,23 @@
           "slug": "slush-rush"
         },
         {
-          "slug": "tough-claws"
+          "slug": "snow-warning"
         }
       ],
       "advanced": [
         {
-          "slug": "stamina"
+          "slug": "battle-armor"
         },
         {
-          "slug": "sharpness"
+          "slug": "tuck-and-roll"
         }
       ],
       "master": [
         {
-          "slug": "mountaineer"
+          "slug": "ice-body"
         },
         {
-          "slug": "tuck-and-roll"
+          "slug": "stamina"
         }
       ]
     },
@@ -613,16 +610,34 @@
             "level": null,
             "knownMove": null
           },
-          "evolutions": []
+          "evolutions": [],
+          "perk": {
+            "x": 26,
+            "y": 26
+          }
         }
       ],
       "uuid": "Compendium.ptr2e.core-species.Item.uKT634NaMlQjwgUx",
-      "methods": []
+      "methods": [],
+      "perk": {
+        "x": 26,
+        "y": 26
+      }
     },
     "habitats": [],
-    "slug": "sandshrew"
+    "slug": "sandshrew",
+    "publication": {
+      "source": "PTR 2e Core - Alola Dex",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
   },
   "_id": "uKT634NaMlQjwgUx",
-  "effects": [],
-  "folder": null
+  "effects": []
 }

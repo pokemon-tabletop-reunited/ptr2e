@@ -1,0 +1,72 @@
+{
+  "folder": "4UhJK1LInml07WJf",
+  "name": "Homeostatic Treatments",
+  "type": "perk",
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Dev"
+      ],
+      "notes": ""
+    },
+    "actions": [],
+    "slug": "homeostatic-treatments",
+    "description": "<p>Effect: The user’s @Trait[healing] Actions and their Use Actions utilizing a [Healing] item have a 30% fixed chance of curing one Affliction the target possesses – @Trait[major-affliction]s are cured first, and @Trait[minor-affliction]s are cured if the user has no @Trait[major-affliction]s. Where multiple afflictions of the same severity exist, the user may select which one to cure.</p>",
+    "traits": [],
+    "prerequisites": [
+      {
+        "gte": [
+          "{actor|skills.medicine.mod}",
+          60
+        ]
+      },
+      {
+        "gte": [
+          "{actor|skills.pharmacy.mod}",
+          40
+        ]
+      }
+    ],
+    "autoUnlock": [],
+    "cost": 2,
+    "design": {
+      "arena": "social",
+      "approach": "finesse",
+      "archetype": "healer"
+    },
+    "global": true,
+    "webs": [],
+    "nodes": [
+      {
+        "x": 43,
+        "y": 88,
+        "hidden": false,
+        "type": "normal",
+        "connected": [
+          "fixing-good",
+          "invigorate",
+          "forensic-accountant"
+        ],
+        "config": {
+          "texture": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "tint": null
+        },
+        "tier": null
+      }
+    ],
+    "originSlug": null,
+    "variant": null,
+    "mode": null
+  },
+  "img": "icons/consumables/potions/potion-flash-open-blue.webp",
+  "effects": [],
+  "flags": {},
+  "_id": "bML0Bv3EApf0gjZ1"
+}

@@ -10,7 +10,7 @@
           "defensive"
         ],
         "name": "Olé",
-        "slug": "ole",
+        "slug": "olé",
         "type": "generic",
         "cost": {
           "activation": "simple",
@@ -19,7 +19,8 @@
         },
         "range": {
           "target": "self",
-          "unit": "m"
+          "unit": "m",
+          "distance": 10
         },
         "description": "<p>Trigger: The user is targeted by an Attack.</p><p>Effect: The user is treated as having +4 EVA against the triggering Attack. If the triggering attack misses, the triggering creature gains @Affliction[taunted] 5 and the user freely Moves 1 space using the Movement Score of their choice.</p>",
         "img": "icons/svg/explosion.svg"
@@ -33,6 +34,13 @@
     "_migration": {
       "version": null,
       "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
     }
   },
   "_id": "1YuofLNgejQeywbY",
@@ -48,7 +56,9 @@
             "type": "grant-item",
             "key": "",
             "value": "Compendium.ptr2e.core-moves.Item.IB5iMsqBlnOZpPM9",
-            "predicate": [],
+            "predicate": [
+              "ability:ole:active"
+            ],
             "alterations": [
               {
                 "mode": 5,
@@ -56,25 +66,27 @@
                 "value": "tier"
               }
             ],
-            "mode": 2,
             "priority": null,
-            "ignored": false,
-            "reevaluateOnUpdate": false,
-            "inMemoryOnly": false,
-            "allowDuplicate": true,
-            "track": false,
-            "replaceSelf": false,
+            "allowDuplicate": false,
             "onDeleteActions": {
               "grantee": "detach",
               "granter": "cascade"
-            }
+            },
+            "reevaluateOnUpdate": true,
+            "mode": 2,
+            "ignored": false,
+            "inMemoryOnly": false,
+            "track": false,
+            "replaceSelf": false
           }
         ],
         "slug": null,
         "traits": [],
         "removeAfterCombat": true,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
@@ -96,12 +108,13 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.346",
         "systemId": "ptr2e",
-        "systemVersion": "0.10.0-alpha.5.1.5",
+        "systemVersion": "1.4.2.beta",
         "createdTime": 1737405618153,
-        "modifiedTime": 1737405638688,
-        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+        "modifiedTime": 1754319848596,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf",
+        "exportSource": null
       }
     }
   ]

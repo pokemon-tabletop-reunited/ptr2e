@@ -1,0 +1,219 @@
+{
+  "name": "Phylogeny",
+  "type": "ability",
+  "img": "systems/ptr2e/img/item-icons/Dream_Mewnium_Z_Sprite.png",
+  "system": {
+    "actions": [
+      {
+        "traits": [
+          "legendary",
+          "interrupt-4",
+          "defensive",
+          "delay-4"
+        ],
+        "name": "Phylogeny (Reaction)",
+        "slug": "phylogeny-reaction",
+        "type": "generic",
+        "cost": {
+          "activation": "free",
+          "powerPoints": 4,
+          "trigger": "The user is targeted by an Attack."
+        },
+        "range": {
+          "target": "self",
+          "unit": "m",
+          "distance": 10
+        },
+        "description": "<p>Trigger: The user is targeted by an Attack.</p><p>Effect: The user freely uses Barrier and gains @Affliction[braced 3].</p>",
+        "img": "icons/svg/explosion.svg"
+      },
+      {
+        "traits": [
+          "legendary",
+          "interrupt-3"
+        ],
+        "name": "Phylogeny (Barrier)",
+        "slug": "phylogeny-barrier",
+        "type": "generic",
+        "cost": {
+          "activation": "free",
+          "powerPoints": 3,
+          "trigger": "The user declares Barrier."
+        },
+        "range": {
+          "target": "self",
+          "unit": "m",
+          "distance": 10
+        },
+        "description": "<p>Trigger: The user declares Barrier.</p><p>Effect: The user gains +1 SPDEF Stage for 5 Activations and @Tick[6 shield].</p>",
+        "img": "icons/svg/explosion.svg"
+      },
+      {
+        "traits": [
+          "legendary"
+        ],
+        "name": "Phylogeny (Passive)",
+        "slug": "phylogeny-passive",
+        "type": "passive",
+        "cost": {
+          "activation": "free"
+        },
+        "description": "<p>Passive: Connection – Barrier. The user has +3 Attack Slots, and possesses Synchronize and Trace as Extra Abilities.</p>",
+        "img": "icons/svg/explosion.svg"
+      }
+    ],
+    "description": "<p>Effect: Connection – Barrier. When the user declares Barrier, they may spend 3 PP as a Free Action at @Trait[interrupt-3] to gain +1 SPDEF Stage for 5 Activations and @Tick[6 shield]. When the user would be targeted by an Attack, the user may spend 4 PP as a Free Action at @Trait[interrupt-4] to freely use Barrier, gain @Affliction[braced 3], and be Flinched 4.</p>",
+    "traits": [
+      "legendary"
+    ],
+    "slug": "phylogeny",
+    "_migration": {
+      "version": null,
+      "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    }
+  },
+  "_id": "FyPnjuBlrZpsiTiJ",
+  "effects": [
+    {
+      "name": "Phylogeny",
+      "type": "passive",
+      "_id": "54tBcOxF67Pqe1hF",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "grant-item",
+            "key": "",
+            "value": "Compendium.ptr2e.core-moves.Item.KSxhLJTzKi6cNI4p",
+            "predicate": [
+              "ability:phylogeny:active"
+            ],
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "system.actions.0.free",
+                "value": 0
+              }
+            ],
+            "priority": null,
+            "allowDuplicate": false,
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            },
+            "reevaluateOnUpdate": true,
+            "mode": 2,
+            "ignored": false,
+            "inMemoryOnly": false,
+            "track": false,
+            "replaceSelf": false
+          },
+          {
+            "type": "basic",
+            "key": "system.modifiers.slots",
+            "value": 3,
+            "predicate": [],
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "grant-item",
+            "key": "",
+            "value": "Compendium.ptr2e.core-abilities.Item.MnmZB6tLLsi6lSsj",
+            "predicate": [
+              "ability:phylogeny:active"
+            ],
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "system.free",
+                "value": "true"
+              }
+            ],
+            "priority": null,
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            },
+            "allowDuplicate": false,
+            "reevaluateOnUpdate": true,
+            "mode": 2,
+            "ignored": false,
+            "inMemoryOnly": false,
+            "track": false,
+            "replaceSelf": false
+          },
+          {
+            "type": "grant-item",
+            "key": "",
+            "value": "Compendium.ptr2e.core-abilities.Item.06KMkEA8ZETa5N0r",
+            "predicate": [
+              "ability:phylogeny:active"
+            ],
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "system.free",
+                "value": "true"
+              }
+            ],
+            "priority": null,
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            },
+            "allowDuplicate": false,
+            "reevaluateOnUpdate": true,
+            "mode": 2,
+            "ignored": false,
+            "inMemoryOnly": false,
+            "track": false,
+            "replaceSelf": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "13.346",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.2.beta",
+        "createdTime": 1737402468602,
+        "modifiedTime": 1754320004632,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf",
+        "exportSource": null
+      }
+    }
+  ]
+}

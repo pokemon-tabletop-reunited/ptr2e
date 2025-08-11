@@ -1,6 +1,6 @@
 import { ActorPTR2e, ActorSheetPTR2e } from "@actor";
 import { PTRTour } from "./base.ts";
-import StatsForm from "@actor/sheets/stats-form.ts";
+import { StatsEditor } from "@actor/sheets/stats-editor.ts";
 
 export class ActorSheetTour extends PTRTour {
   private actor: ActorPTR2e | undefined;
@@ -156,7 +156,8 @@ export class ActorSheetTour extends PTRTour {
               }
             ]
           }
-        ]
+        ],
+        ownership: { [game.user.id]: CONST.DOCUMENT_OWNERSHIP_LEVELS.OWNER, default: CONST.DOCUMENT_OWNERSHIP_LEVELS.OBSERVER }
       }, { temporary: true });
     }
 
@@ -165,7 +166,7 @@ export class ActorSheetTour extends PTRTour {
     switch (this.currentStep?.id) {
       case "stats-editor": {
         if (!this.app?.rendered) await this.app.render(true);
-        this._statsEditor = await new StatsForm({ document: this.actor }).render(true)
+        this._statsEditor = await new StatsEditor({ document: this.actor }).render(true)
         break;
       }
       case "known-attacks": {

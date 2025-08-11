@@ -151,6 +151,22 @@ abstract class SkillMessageSystem extends foundry.abstract.TypeDataModel {
     };
   }
 
+  private readonly challengeRatings = {
+    "60": "+60 (Effortless)",
+    "50": "+50 (Trivial)",
+    "40": "+40 (Easy)",
+    "30": "+30 (Simple)",
+    "20": "+20 (Routine)",
+    "10": "+10 (Ordinary)",
+    "0": "+0 (Demanding)",
+    "-10": "-10 (Taxing)",
+    "-20": "-20 (Challenging)",
+    "-30": "-30 (Difficult)",
+    "-40": "-40 (Intense)",
+    "-50": "-50 (Insane)",
+    "-60": "-60 (Impossible)",
+  } as const;
+
   async getHTMLContent() {
     const context: this["context"] & Record<string, unknown> = this.context ?? {};
     context.degreeOfSuccess = context.roll
@@ -169,7 +185,7 @@ abstract class SkillMessageSystem extends foundry.abstract.TypeDataModel {
       const luckRollHTML = context.luckRoll
         ? await context.luckRoll.render({ isPrivate })
         : null;
-      return renderTemplate("systems/ptr2e/templates/chat/rolls/skill-check.hbs", {
+      return foundry.applications.handlebars.renderTemplate("systems/ptr2e/templates/chat/rolls/skill-check.hbs", {
         roll: context.roll,
         inner: innerRollHTML,
         innerLuck: luckRollHTML,
@@ -177,7 +193,19 @@ abstract class SkillMessageSystem extends foundry.abstract.TypeDataModel {
         degreeOfSuccess: context.degreeOfSuccess,
         luckRoll: context.luckRoll?.total,
         appliedLuck: this._source.appliedLuck,
-        breakdown: context.roll.data.breakdown,
+        breakdown: (() => {
+          if (context.roll.data.breakdown) return context.roll.data.breakdown;
+
+          let breakdown = `<div class="dice-roll" data-action="expandRoll"><div class="dice-result"><div class="dice-formula">Roll breakdown</div><div class="dice-tooltip"><div class="wrapper">`;
+          for (const modifier of this.result.modifiers) {
+            if (modifier.modifier === 0 && modifier.slug !== "challenge-rating") continue;
+
+            //@ts-expect-error - Index type is correct, but TypeScript doesn't like it
+            breakdown += `<span class="d-flex flex-row justify-content-evenly"><span class="fb-45"><b>${modifier.label}:</b></span><span class="fb-45 ${modifier.modifier >= 0 ? "pos" : "neg"}">${modifier.slug === "challenge-rating" ? this.challengeRatings[modifier.modifier.toString()] : modifier.modifier > 0 ? `+${modifier.modifier}` : modifier.modifier}</span></span>`;
+          }
+
+          return breakdown + "</div></div></div></div>";
+        })(),
         rerolled: this._source.rerolled,
         notes: RollNote.notesToHTML(this.result.notes.map(n => new RollNote(n)))?.outerHTML
       });
@@ -187,7 +215,7 @@ abstract class SkillMessageSystem extends foundry.abstract.TypeDataModel {
       context.label = "End of Day Luck Roll";
     }
 
-    return renderTemplate("systems/ptr2e/templates/chat/skill.hbs", context);
+    return foundry.applications.handlebars.renderTemplate("systems/ptr2e/templates/chat/skill.hbs", context);
   }
 
   activateListeners(html: JQuery<HTMLElement>) {

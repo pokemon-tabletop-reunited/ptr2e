@@ -1,0 +1,143 @@
+{
+  "folder": "BImk1fcMbR5akA4z",
+  "name": "Nightmare Syndrome",
+  "type": "move",
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "slug": "nightmare-syndrome",
+    "publication": {
+      "source": "Digidex",
+      "authors": [
+        "Nights"
+      ],
+      "notes": ""
+    },
+    "traits": [],
+    "actions": [
+      {
+        "name": "Nightmare Syndrome",
+        "slug": "nightmare-syndrome",
+        "type": "attack",
+        "img": "systems/ptr2e/img/svg/dark_icon.svg",
+        "traits": [
+          "digimon"
+        ],
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 6
+        },
+        "types": [
+          "dark"
+        ],
+        "category": "status",
+        "predicate": [],
+        "description": "<p>Effect: On hit, the target loses <span style=\"font-family: var(--font-code)\"><code class=\"inline\" style=\"border: 1px solid var(--border-normal); font-family: var(--font-code); font-size: 13.6px; font-style: normal; font-weight: 400; margin: -0.2em 0px; padding: 0px 0.2em; vertical-align: baseline; line-height: 1.125rem; background: var(--background-code); text-indent: 0px; white-space: pre-wrap; border-radius: 4px; height: auto; width: auto; color: oklab(0.952331 0.000418991 -0.00125992); font-variant-ligatures: normal; font-variant-caps: normal; letter-spacing: normal; orphans: 2; text-align: left; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial;\">@Tick[-3]</code></span><span style=\"font-family: &#x27;gg sans&#x27;, &#x27;Noto Sans&#x27;, &#x27;Helvetica Neue&#x27;, Helvetica, Arial, sans-serif\">of HP, and has a 20% chance of gaining @UUID[Compendium.ptr2e.core-effects.drowsycondititem]{Drowsy} 5.</span></p><p><span style=\"font-family: &#x27;gg sans&#x27;, &#x27;Noto Sans&#x27;, &#x27;Helvetica Neue&#x27;, Helvetica, Arial, sans-serif\">If the target is already @UUID[Compendium.ptr2e.core-effects.drowsycondititem]{Drowsy}, it instead has a 20% chance of gaining @UUID[Compendium.ptr2e.core-effects.nightmarescoitem]{Nightmares}.</span></p>",
+        "range": {
+          "target": "enemy",
+          "distance": 10,
+          "unit": "m"
+        },
+        "accuracy": 100
+      }
+    ],
+    "grade": "B"
+  },
+  "img": "systems/ptr2e/img/svg/dark_icon.svg",
+  "effects": [
+    {
+      "name": "Nightmare Syndrome",
+      "type": "affliction",
+      "_id": "iQ488mXmLUAguCxB",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "nightmare-syndrome-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.drowsycondititem",
+            "predicate": [],
+            "chance": 20,
+            "affects": "target",
+            "alterations": [],
+            "dontMerge": false,
+            "isFixedChance": false,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "roll-effect",
+            "key": "nightmare-syndrome-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.4DlXFTVooz07YcDm",
+            "predicate": [],
+            "chance": 100,
+            "isFixedChance": true,
+            "affects": "target",
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "system.changes.0.value",
+                "value": -3
+              }
+            ],
+            "dontMerge": false,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "roll-effect",
+            "key": "nightmare-syndrome-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.nightmarescoitem",
+            "predicate": [
+              "target:affliction:drowsy"
+            ],
+            "chance": 20,
+            "isFixedChance": false,
+            "affects": "target",
+            "alterations": [],
+            "dontMerge": false,
+            "mode": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0,
+        "priority": 50,
+        "formula": "",
+        "type": "damage",
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null,
+        "turns": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.346",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.2.beta",
+        "lastModifiedBy": "mK35yvCqCgiTUvKf",
+        "modifiedTime": 1754304317995
+      }
+    }
+  ],
+  "_id": "ffL3J820dgswRM0H"
+}
