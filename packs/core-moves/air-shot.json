@@ -1,0 +1,113 @@
+{
+  "folder": "BImk1fcMbR5akA4z",
+  "name": "Air Shot",
+  "type": "move",
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "publication": {
+      "source": "Digidex",
+      "authors": [
+        "Fox"
+      ],
+      "notes": ""
+    },
+    "traits": [],
+    "actions": [
+      {
+        "name": "Air Shot",
+        "slug": "air-shot",
+        "type": "attack",
+        "img": "systems/ptr2e/img/svg/flying_icon.svg",
+        "traits": [
+          "wind",
+          "digimon"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 10,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 2
+        },
+        "types": [
+          "flying"
+        ],
+        "category": "special",
+        "power": 50,
+        "accuracy": 100,
+        "predicate": [],
+        "description": "<p>On resolution, the user has a 10% chance of gaining +1 Speed Stage for 5 activations.</p>"
+      }
+    ],
+    "grade": "D",
+    "slug": "air-shot"
+  },
+  "img": "systems/ptr2e/img/svg/flying_icon.svg",
+  "effects": [
+    {
+      "name": "Air Shot",
+      "type": "passive",
+      "_id": "Ob0w4TKifMQzhGfP",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "air-shot-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.XeiSuS3APUcN0MLM",
+            "predicate": [],
+            "chance": 10,
+            "affects": "self",
+            "dontMerge": false,
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "alterations": [],
+            "isFixedChance": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "13.346",
+        "systemId": "ptr2e",
+        "systemVersion": "1.2.1.beta",
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null,
+        "exportSource": null
+      }
+    }
+  ],
+  "_id": "Oale17mBUm43zGRZ"
+}

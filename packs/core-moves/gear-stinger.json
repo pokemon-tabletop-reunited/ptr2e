@@ -1,0 +1,115 @@
+{
+  "folder": "BImk1fcMbR5akA4z",
+  "name": "Gear Stinger",
+  "type": "move",
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "publication": {
+      "source": "Digidex",
+      "authors": [
+        "Fox"
+      ],
+      "notes": ""
+    },
+    "traits": [],
+    "actions": [
+      {
+        "name": "Gear Stinger",
+        "slug": "gear-stinger",
+        "type": "attack",
+        "img": "systems/ptr2e/img/svg/bug_icon.svg",
+        "traits": [
+          "5-strike",
+          "missile",
+          "digimon"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 5,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 2
+        },
+        "types": [
+          "bug",
+          "electric"
+        ],
+        "category": "physical",
+        "power": 25,
+        "accuracy": 100,
+        "predicate": [],
+        "description": "<p>This attack has a 10% chance to inflict @Affliction[paralysis] 5</p>"
+      }
+    ],
+    "grade": "D",
+    "slug": "gear-stinger"
+  },
+  "img": "systems/ptr2e/img/svg/bug_icon.svg",
+  "effects": [
+    {
+      "name": "Gear Stinger",
+      "type": "passive",
+      "_id": "S3xZnvJNsvE8afnI",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "gear-stinger-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.paralysisconitem",
+            "predicate": [],
+            "chance": 10,
+            "affects": "target",
+            "dontMerge": false,
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "alterations": [],
+            "isFixedChance": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "13.346",
+        "systemId": "ptr2e",
+        "systemVersion": "1.2.1.beta",
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null,
+        "exportSource": null
+      }
+    }
+  ],
+  "_id": "UWJgX0NupAmnKRKr"
+}

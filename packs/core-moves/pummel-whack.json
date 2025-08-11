@@ -1,0 +1,129 @@
+{
+  "folder": "BImk1fcMbR5akA4z",
+  "name": "Pummel Whack",
+  "type": "move",
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "publication": {
+      "source": "Digidex",
+      "authors": [
+        "Fox"
+      ],
+      "notes": ""
+    },
+    "traits": [],
+    "actions": [
+      {
+        "name": "Pummel Whack",
+        "slug": "pummel-whack",
+        "type": "attack",
+        "img": "systems/ptr2e/img/svg/dark_icon.svg",
+        "traits": [
+          "contact",
+          "crit-2",
+          "weapon",
+          "digimon"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 4
+        },
+        "types": [
+          "dark"
+        ],
+        "category": "physical",
+        "power": 90,
+        "accuracy": 100,
+        "predicate": [],
+        "description": "<p>This attack has a 10% chance each to inflict @Affliction[stunted 5] and @Affliction[splinter 5].</p>"
+      }
+    ],
+    "grade": "C",
+    "slug": "pummel-whack"
+  },
+  "img": "systems/ptr2e/img/svg/dark_icon.svg",
+  "effects": [
+    {
+      "name": "Pummel Whack",
+      "type": "passive",
+      "_id": "93hxAD4cEW28bUsB",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "pummel-whack-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.splinterconditem",
+            "predicate": [],
+            "chance": 10,
+            "affects": "target",
+            "dontMerge": false,
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "alterations": [],
+            "isFixedChance": false
+          },
+          {
+            "type": "roll-effect",
+            "key": "pummel-whack-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.stuntedcondiitem",
+            "predicate": [],
+            "chance": 10,
+            "affects": "target",
+            "dontMerge": false,
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "alterations": [],
+            "isFixedChance": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "13.346",
+        "systemId": "ptr2e",
+        "systemVersion": "1.2.1.beta",
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null,
+        "exportSource": null
+      }
+    }
+  ],
+  "_id": "fffKFC3gvkAkbq5L"
+}

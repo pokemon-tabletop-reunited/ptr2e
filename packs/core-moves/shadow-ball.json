@@ -11,13 +11,11 @@
         "type": "attack",
         "traits": [
           "pulse",
-          "missile",
-          "blast-1",
-          "pp-updated"
+          "missile"
         ],
         "range": {
-          "target": "blast",
-          "distance": 10,
+          "target": "creature",
+          "distance": 13,
           "unit": "m"
         },
         "cost": {
@@ -31,14 +29,23 @@
           "ghost"
         ],
         "description": "<p>Effect: On hit, the target has a 20% chance of losing -1 SPDEF Stage for 5 Activations.</p>",
-        "img": "icons/svg/explosion.svg"
+        "img": "systems/ptr2e/img/svg/ghost_icon.svg",
+        "predicate": []
       }
     ],
     "grade": "B",
     "_migration": {
       "version": null,
       "previous": null
-    }
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "traits": []
   },
   "_id": "phyeLK91PQmBGupR",
   "effects": [
@@ -58,7 +65,9 @@
             "affects": "target",
             "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "alterations": [],
+            "dontMerge": false
           }
         ],
         "slug": null,

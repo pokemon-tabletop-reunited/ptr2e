@@ -1,0 +1,124 @@
+{
+  "folder": "BImk1fcMbR5akA4z",
+  "name": "Goblin Strike",
+  "type": "move",
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "publication": {
+      "source": "Digidex",
+      "authors": [
+        "Fox"
+      ],
+      "notes": ""
+    },
+    "traits": [],
+    "actions": [
+      {
+        "name": "Goblin Strike",
+        "slug": "goblin-strike",
+        "type": "attack",
+        "img": "systems/ptr2e/img/svg/fire_icon.svg",
+        "traits": [
+          "missile",
+          "digimon"
+        ],
+        "range": {
+          "target": "enemy",
+          "distance": 10,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "simple",
+          "powerPoints": 2
+        },
+        "types": [
+          "fire"
+        ],
+        "category": "physical",
+        "power": 65,
+        "accuracy": 100,
+        "predicate": [],
+        "description": "<p>Launches a small bolt of fire. This attack has a 10% chance to Flinch the target.</p>"
+      }
+    ],
+    "grade": "D",
+    "slug": "goblin-strike"
+  },
+  "img": "systems/ptr2e/img/svg/fire_icon.svg",
+  "effects": [
+    {
+      "name": "Goblin Strike",
+      "type": "passive",
+      "_id": "pYIHn4kMssOa43Tn",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "goblin-strike-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.advanceffectitem",
+            "predicate": [],
+            "chance": 10,
+            "affects": "target",
+            "dontMerge": false,
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "system.amount",
+                "value": -30
+              },
+              {
+                "mode": 5,
+                "property": "name",
+                "value": "Flinched 30%"
+              }
+            ],
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "isFixedChance": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "13.346",
+        "systemId": "ptr2e",
+        "systemVersion": "1.2.1.beta",
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null,
+        "exportSource": null
+      }
+    }
+  ],
+  "_id": "u2vqUOpMMV13GPOx"
+}

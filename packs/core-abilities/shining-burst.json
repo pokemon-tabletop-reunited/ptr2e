@@ -1,0 +1,83 @@
+{
+  "folder": "ANyTBaCvsFOl1tzn",
+  "name": "Shining Burst",
+  "type": "ability",
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "publication": {
+      "source": "Digidex",
+      "authors": [
+        "Fox"
+      ],
+      "notes": ""
+    },
+    "traits": [
+      "digimon"
+    ],
+    "actions": [],
+    "description": "<p>The user takes 50% more damage from Special Attacks, but gains a +25% increase to their ATK stat.</p>",
+    "slug": "shining-burst"
+  },
+  "img": "icons/magic/light/explosion-beam-impact-silhouette.webp",
+  "effects": [
+    {
+      "name": "Shining Burst",
+      "type": "passive",
+      "_id": "DJD6v9QHAaXi0mYm",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "ephemeral-modifier",
+            "key": "special-attack-damage-percentile",
+            "value": 50,
+            "predicate": [],
+            "mode": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          },
+          {
+            "type": "basic",
+            "key": "system.modifiers.atkMultiplier",
+            "value": 0.25,
+            "predicate": [],
+            "mode": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.346",
+        "systemId": "ptr2e",
+        "systemVersion": "1.3.8.beta",
+        "lastModifiedBy": null
+      }
+    }
+  ],
+  "_id": "qBAnTVXKNGE0tYCJ"
+}

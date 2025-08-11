@@ -1,0 +1,58 @@
+{
+  "name": "Fractalised Contingency",
+  "_id": "30CRqAQoCY59jHUt",
+  "type": "perk",
+  "img": "icons/magic/defensive/illusion-evasion-echo-purple.webp",
+  "effects": [],
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "publication": {
+      "source": "PTR2e Core",
+      "authors": [
+        "Dragoon"
+      ],
+      "notes": ""
+    },
+    "actions": [],
+    "slug": "fractalised-contingency",
+    "description": "<p>At the end of the user’s Activations, they have a 30% chance of being cured of one @Trait[major-affliction], one @Trait[minor-affliction], and one negative @Trait[stage-change] effect, with the highest Stack value effects being cured first.</p>",
+    "traits": [
+      "gestalt"
+    ],
+    "prerequisites": [
+      "trait:gestalt"
+    ],
+    "autoUnlock": [],
+    "cost": 1,
+    "design": {
+      "arena": "mental",
+      "approach": "resilience",
+      "archetype": null
+    },
+    "global": true,
+    "webs": [],
+    "nodes": [
+      {
+        "x": 138,
+        "y": 145,
+        "hidden": false,
+        "type": "normal",
+        "connected": [
+          "hit-run",
+          "psycher",
+          "minor-buff-2"
+        ],
+        "config": {
+          "texture": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "tint": null
+        },
+        "tier": null
+      }
+    ]
+  }
+}

@@ -13,27 +13,25 @@
     "diet": [
       "honey"
     ],
-    "movement": {
-      "primary": [
-        {
-          "type": "overland",
-          "value": 8
-        }
-      ],
-      "secondary": [
-        {
-          "type": "swim",
-          "value": 3
-        }
-      ]
-    },
+    "movement": [
+      {
+        "type": "overland",
+        "value": 8
+      },
+      {
+        "type": "swim",
+        "value": 3
+      }
+    ],
     "traits": [
       "pokemon",
       "quadrupedal",
       "darkvision-15",
       "keen-scent",
       "ground",
-      "normal"
+      "normal",
+      "fully-evolved",
+      "jump-1"
     ],
     "abilities": {
       "starting": [
@@ -137,6 +135,14 @@
       {
         "slug": "navigate",
         "value": 50,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "psychology",
+        "value": 45,
         "rvs": 0,
         "favourite": false,
         "hidden": false,
@@ -551,11 +557,9 @@
               "operand": "and"
             }
           ],
-          "details": {
-            "gender": null,
-            "item": null,
-            "level": null,
-            "knownMove": null
+          "perk": {
+            "x": 26,
+            "y": 26
           },
           "evolutions": [
             {
@@ -574,19 +578,22 @@
                   "operand": "or"
                 }
               ],
-              "details": {
-                "gender": null,
-                "item": null,
-                "level": null,
-                "knownMove": null
+              "perk": {
+                "x": 26,
+                "y": 26
               },
-              "evolutions": []
+              "details": null
             }
-          ]
+          ],
+          "details": null
         }
       ],
       "uuid": "Compendium.ptr2e.core-species.Item.16CvEe5rvVo3MMZB",
-      "methods": []
+      "methods": [],
+      "perk": {
+        "x": 26,
+        "y": 26
+      }
     },
     "_migration": {
       "version": null,
@@ -595,8 +602,269 @@
     "habitats": [
       "swamp",
       "tundra"
-    ]
+    ],
+    "publication": {
+      "source": "PTR 2e Core - Hisui Dex",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    }
   },
   "_id": "TilHLGKOpNOtYolO",
-  "effects": []
+  "effects": [
+    {
+      "name": "Mega Ursaluna",
+      "type": "form",
+      "_id": "Uv1xdwuyjYRdtukS",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-option",
+            "key": "manual-forme-toggle",
+            "value": "forme:mega-ursaluna:active",
+            "domain": "all",
+            "toggleable": true,
+            "label": "Toggle: Mega Ursaluna Forme",
+            "predicate": [],
+            "alwaysActive": false,
+            "count": false,
+            "mode": 2,
+            "ignored": false,
+            "suboptions": [],
+            "state": false
+          },
+          {
+            "type": "grant-item",
+            "predicate": [
+              "forme:mega-ursaluna:active"
+            ],
+            "key": "",
+            "value": "Compendium.ptr2e.core-abilities.Item.3dPT8q5a6qkcXhNM",
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "system.free",
+                "value": "true"
+              }
+            ],
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            },
+            "mode": 2,
+            "ignored": false,
+            "reevaluateOnUpdate": false,
+            "inMemoryOnly": false,
+            "allowDuplicate": true,
+            "track": false,
+            "replaceSelf": false
+          },
+          {
+            "type": "add-trait",
+            "predicate": [
+              "forme:mega-ursaluna:active"
+            ],
+            "key": "",
+            "value": "lumbering",
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "add-trait",
+            "predicate": [
+              "forme:mega-ursaluna:active"
+            ],
+            "key": "",
+            "value": "rapid",
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "add-trait",
+            "predicate": [
+              "forme:mega-ursaluna:active"
+            ],
+            "key": "",
+            "value": "blindsight 15",
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-ursaluna:active"
+            ],
+            "key": "system.skills.acrobatics.value",
+            "value": 15,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-ursaluna:active"
+            ],
+            "key": "system.skills.climb.value",
+            "value": 20,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-ursaluna:active"
+            ],
+            "key": "system.skills.conversation.value",
+            "value": -15,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-ursaluna:active"
+            ],
+            "key": "system.skills.fast-talk.value",
+            "value": -15,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-ursaluna:active"
+            ],
+            "key": "system.skills.intimidate.value",
+            "value": 25,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-ursaluna:active"
+            ],
+            "key": "system.skills.lift.value",
+            "value": 15,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-ursaluna:active"
+            ],
+            "key": "system.skills.listen.value",
+            "value": 15,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-ursaluna:active"
+            ],
+            "key": "system.skills.navigate.value",
+            "value": 5,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-ursaluna:active"
+            ],
+            "key": "system.skills.psychology.value",
+            "value": 20,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-ursaluna:active"
+            ],
+            "key": "system.skills.running.value",
+            "value": 10,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-ursaluna:active"
+            ],
+            "key": "system.skills.stealth.value",
+            "value": 5,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-ursaluna:active"
+            ],
+            "key": "system.skills.spot.value",
+            "value": 20,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-ursaluna:active"
+            ],
+            "key": "system.skills.swim.value",
+            "value": 15,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-ursaluna:active"
+            ],
+            "key": "system.skills.track.value",
+            "value": 10,
+            "mode": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0,
+        "trigger": "manual",
+        "conditions": []
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.346",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.1.beta",
+        "createdTime": 1754090459426,
+        "modifiedTime": 1754090970744,
+        "lastModifiedBy": "6zxE5EIsM9axXjpP"
+      }
+    }
+  ]
 }

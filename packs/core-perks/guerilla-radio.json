@@ -1,0 +1,122 @@
+{
+  "folder": "lzLExT1c5IqNcbnB",
+  "name": "Guerilla Radio",
+  "type": "perk",
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "publication": {
+      "source": "PTR2e Core",
+      "authors": [
+        "Fox"
+      ],
+      "notes": ""
+    },
+    "actions": [],
+    "description": "<p>Effect: The user gains @UUID[Compendium.ptr2e.core-abilities.LVKlym7cP5CTEF26]{Punk Rock} as a Tutored Ability.</p>",
+    "traits": [],
+    "prerequisites": [
+      {
+        "gte": [
+          "{actor|skills.singing.mod}",
+          55
+        ]
+      }
+    ],
+    "autoUnlock": [
+      "ability:punk-rock"
+    ],
+    "cost": 3,
+    "design": {
+      "arena": "social",
+      "approach": "resilience",
+      "archetype": "musician"
+    },
+    "global": true,
+    "webs": [],
+    "nodes": [
+      {
+        "x": 175,
+        "y": 162,
+        "connected": [
+          "root-4",
+          "swan-song"
+        ],
+        "hidden": false,
+        "type": "normal",
+        "tier": null
+      }
+    ],
+    "slug": "guerilla-radio"
+  },
+  "img": "systems/ptr2e/img/perk-icons/Musician.svg",
+  "effects": [
+    {
+      "name": "Guerilla Radio",
+      "type": "passive",
+      "_id": "TkJC1FA2Nw0lNigO",
+      "img": "systems/ptr2e/img/perk-icons/Musician.svg",
+      "system": {
+        "changes": [
+          {
+            "type": "grant-item",
+            "key": "",
+            "value": "Compendium.ptr2e.core-abilities.Item.LVKlym7cP5CTEF26",
+            "predicate": [],
+            "allowDuplicate": false,
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "reevaluateOnUpdate": false,
+            "inMemoryOnly": false,
+            "alterations": [],
+            "track": false,
+            "replaceSelf": false,
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            }
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": false,
+        "removeOnRecall": false,
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "<p>Effect: The user gains @UUID[Compendium.ptr2e.core-abilities.LVKlym7cP5CTEF26]{Punk Rock} as a Tutored Ability.</p>",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "13.346",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.2.beta",
+        "createdTime": null,
+        "modifiedTime": 1754226979437,
+        "lastModifiedBy": "dCIq77b7AO2frs8Z",
+        "exportSource": null
+      }
+    }
+  ],
+  "_id": "74H8ZsuebIkG27aJ"
+}

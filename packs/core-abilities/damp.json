@@ -6,31 +6,33 @@
     "actions": [
       {
         "traits": [
-          "interrupt-3"
+          "defensive"
         ],
         "name": "Damp",
         "slug": "damp",
-        "type": "generic",
-        "cost": {
-          "activation": "free",
-          "powerPoints": 3,
-          "trigger": "<p>A creature in range declares an [Explode] Attack or Ability.</p>"
-        },
+        "type": "passive",
+        "cost": {},
         "range": {
-          "target": "creature",
+          "target": "aura",
           "distance": 15,
           "unit": "m"
         },
-        "description": "<p>Trigger: A creature in range uses an [Explode] Attack or Ability.</p><p>Effect: The triggering action fails and becomes @Affliction[disabled] 5 if it was an Attack, or @Affliction[nullified] 5 if it was an Ability.</p>",
+        "description": "<p>Effect: @Trait[explode] and @Trait[firearm] Attacks and Abilities fail when they are declared in range, consuming their costs as normal. These declared Attacks gain @Affliction[disabled 2] (if the Attack originated from a Weapon, all of that weapon’s @Trait[explode] and @Trait[firearm] Attacks are @Affliction[disabled 2]), and these declared Abilities gain @Affliction[nullified 2].</p>",
         "img": "icons/svg/explosion.svg"
       }
     ],
-    "description": "<p>Trigger: A creature in range uses an [Explode] Attack or Ability.</p><p>Effect: The triggering action fails and becomes @Affliction[disabled] 5 if it was an Attack, or @Affliction[nullified] 5 if it was an Ability.</p>",
+    "description": "<p>Effect: @Trait[explode] and @Trait[firearm] Attacks and Abilities fail when they are declared in range, consuming their costs as normal. These declared Attacks gain @Affliction[disabled 2] (if the Attack originated from a Weapon, all of that weapon’s @Trait[explode] and @Trait[firearm] Attacks are @Affliction[disabled 2]), and these declared Abilities gain @Affliction[nullified 2].</p>",
     "traits": [],
     "slug": "damp",
     "_migration": {
       "version": null,
       "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ]
     }
   },
   "_id": "39Zmt5Nzi2EGf1YV",

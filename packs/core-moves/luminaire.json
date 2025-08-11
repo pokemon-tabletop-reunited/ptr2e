@@ -1,0 +1,158 @@
+{
+  "name": "Luminaire",
+  "type": "move",
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "slug": "luminaire",
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": "<p>Effect: Set-Up: The user gains +1 SPATK and EVA Stage for 5 Activations, and ends their Activation.</p><p>Resolution: On their next Activation, they attack with and resolve Luminaire. On hit, all valid targets have a 30% chance of losing -1 ACC for 5 Activations, and a 10% chance of gaining @Affliction[blinded] 5.</p>"
+    },
+    "traits": [
+      "arcane",
+      "adaptable",
+      "ray",
+      "pulse",
+      "set-up"
+    ],
+    "actions": [
+      {
+        "name": "Luminaire (Resolution)",
+        "slug": "luminaire-resolution",
+        "type": "attack",
+        "img": "systems/ptr2e/img/svg/untyped_icon.svg",
+        "traits": [
+          "arcane",
+          "adaptable",
+          "ray",
+          "pulse",
+          "set-up",
+          "flinch-30"
+        ],
+        "range": {
+          "target": "cone",
+          "distance": 6,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 4,
+          "trigger": "The user used Luminaire (Set-Up) as their last Action."
+        },
+        "types": [
+          "untyped"
+        ],
+        "category": "special",
+        "power": 160,
+        "accuracy": 90,
+        "predicate": [],
+        "description": "<p>Trigger: The user used Luminaire (Set-Up) as their last Action.</p><p>Effect: On hit, all valid targets have a 30% chance of losing -1 ACC for 5 Activations, and a 10% chance of gaining @Affliction[blinded 5].</p>"
+      },
+      {
+        "name": "Luminaire (Set-Up)",
+        "slug": "luminaire-set-up",
+        "description": "<p>Effect: The user gains +1 SPATK and SPD Stage for 5 Activations.</p>",
+        "traits": [
+          "arcane",
+          "set-up",
+          "defensive",
+          "flinch-10"
+        ],
+        "type": "attack",
+        "img": "systems/ptr2e/img/svg/untyped_icon.svg",
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 5,
+          "delay": 2
+        },
+        "range": {
+          "target": "self",
+          "unit": "m"
+        },
+        "types": [
+          "untyped"
+        ],
+        "category": "status",
+        "predicate": []
+      }
+    ],
+    "grade": "A"
+  },
+  "img": "systems/ptr2e/img/svg/untyped_icon.svg",
+  "effects": [
+    {
+      "name": "Luminaire",
+      "type": "passive",
+      "_id": "4U2OfXfhMFNhjYMh",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "luminaire-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.wA5oCsgHmZLcHHSn",
+            "predicate": [],
+            "chance": 30,
+            "affects": "target",
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "alterations": []
+          },
+          {
+            "type": "roll-effect",
+            "key": "luminaire-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.blindedcondiitem",
+            "predicate": [],
+            "chance": 10,
+            "affects": "target",
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "alterations": []
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": "Compendium.ptr2e.core-moves.Item.15GtkCYhWPhaRycg.ActiveEffect.kD9guYXqkGZD6vb0",
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "1.1.0.beta",
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      }
+    }
+  ],
+  "flags": {},
+  "_id": "jdY1fMOVV4wODaSR"
+}

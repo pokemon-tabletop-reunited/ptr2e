@@ -7,10 +7,31 @@
       {
         "traits": [
           "weather",
-          "interrupt-2"
+          "interrupt-4"
         ],
         "name": "Drought",
         "slug": "drought",
+        "type": "generic",
+        "cost": {
+          "activation": "free",
+          "powerPoints": 6,
+          "trigger": "<p>The user enters combat or emerges from stealth.</p>"
+        },
+        "range": {
+          "target": "self",
+          "unit": "m",
+          "distance": 10
+        },
+        "description": "<p>Trigger: The user enters combat or emerges from stealth.</p><p>Effect: The user freely uses Sunny Day.</p>",
+        "img": "icons/svg/explosion.svg"
+      },
+      {
+        "traits": [
+          "weather",
+          "interrupt-2"
+        ],
+        "name": "Drought (Extend)",
+        "slug": "drought-extend",
         "type": "generic",
         "cost": {
           "activation": "free",
@@ -19,13 +40,14 @@
         },
         "range": {
           "target": "field",
-          "unit": "m"
+          "unit": "m",
+          "distance": 10
         },
         "description": "<p>Trigger: The user declares Sunny Day.</p><p>Effect: The set Sunny Weather has its duration increased by +2 Rounds.</p>",
         "img": "icons/svg/explosion.svg"
       }
     ],
-    "description": "<p>Trigger: The user declares Sunny Day.</p><p>Effect: Connection - Sunny Day. The set Sunny Weather has its duration increased by +2 Rounds.</p>",
+    "description": "<p>Trigger: The user enters combat or emerges from stealth.</p><p>Effect: Connection - Sunny Day. The user freely uses Sunny Day. When the user sets Sunny Weather, they may spend 2 PP to increase its duration by +2 Rounds.</p>",
     "traits": [
       "connection",
       "weather",
@@ -35,6 +57,13 @@
     "_migration": {
       "version": null,
       "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
     }
   },
   "_id": "o9y5NB42vrAfxz7L",
@@ -50,7 +79,9 @@
             "type": "grant-item",
             "key": "",
             "value": "Compendium.ptr2e.core-moves.Item.oZFYMEJhZ3CZSNEZ",
-            "predicate": [],
+            "predicate": [
+              "active:drought:active"
+            ],
             "alterations": [
               {
                 "mode": 5,
@@ -58,25 +89,27 @@
                 "value": "true"
               }
             ],
-            "mode": 2,
             "priority": null,
-            "ignored": false,
-            "reevaluateOnUpdate": false,
-            "inMemoryOnly": false,
-            "allowDuplicate": true,
-            "track": false,
-            "replaceSelf": false,
+            "allowDuplicate": false,
             "onDeleteActions": {
               "grantee": "detach",
               "granter": "cascade"
-            }
+            },
+            "reevaluateOnUpdate": true,
+            "mode": 2,
+            "ignored": false,
+            "inMemoryOnly": false,
+            "track": false,
+            "replaceSelf": false
           }
         ],
         "slug": null,
         "traits": [],
         "removeAfterCombat": true,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
@@ -98,12 +131,13 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.346",
         "systemId": "ptr2e",
-        "systemVersion": "0.10.0-alpha.5.1.5",
+        "systemVersion": "1.4.2.beta",
         "createdTime": 1737397324717,
-        "modifiedTime": 1737397365980,
-        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+        "modifiedTime": 1754317822878,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf",
+        "exportSource": null
       }
     }
   ]

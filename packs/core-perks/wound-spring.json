@@ -1,0 +1,122 @@
+{
+  "name": "Wound Spring",
+  "_id": "ymvgqlFIvWJHs0hD",
+  "type": "perk",
+  "img": "icons/creatures/reptiles/serpent-horned-green.webp",
+  "effects": [
+    {
+      "name": "Wound Spring",
+      "type": "passive",
+      "_id": "ZfiCISJQLPjjD70u",
+      "img": "icons/creatures/reptiles/serpent-horned-green.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "grant-item",
+            "key": "",
+            "value": "Compendium.ptr2e.core-moves.Item.7r57DxIctmNSW2oV",
+            "predicate": [],
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "system.actions.0.free",
+                "value": "true"
+              }
+            ],
+            "priority": null,
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            },
+            "mode": 2,
+            "ignored": false,
+            "reevaluateOnUpdate": false,
+            "inMemoryOnly": false,
+            "allowDuplicate": true,
+            "track": false,
+            "replaceSelf": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": false,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "<p>Grants @UUID[Compendium.ptr2e.core-moves.7r57DxIctmNSW2oV]{Coil}</p>",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.346",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.2.beta",
+        "createdTime": 1754227681749,
+        "modifiedTime": 1754227717141,
+        "lastModifiedBy": "dCIq77b7AO2frs8Z"
+      }
+    }
+  ],
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "publication": {
+      "source": "PTR2e Core",
+      "authors": [
+        "Dragoon"
+      ],
+      "notes": ""
+    },
+    "actions": [],
+    "slug": "wound-spring",
+    "description": "<p>Connection: @UUID[Compendium.ptr2e.core-moves.7r57DxIctmNSW2oV]{Coil}<br><br>Effect: When the user uses @UUID[Compendium.ptr2e.core-moves.SxFXgSCqw5vnRzon]{Brace} or @UUID[Compendium.ptr2e.core-moves.7r57DxIctmNSW2oV]{Coil}, they gain +30 to the relevant skill check the next time they use @UUID[Compendium.ptr2e.core-moves.JgLLve8pmeAQFVcV]{Rush}, @UUID[Compendium.ptr2e.core-moves.JKlLve9aMaQAdVcZ]{Jump}, @UUID[Compendium.ptr2e.core-moves.JKlLve9aMaQAdVcW]{Leap}, or @UUID[Compendium.ptr2e.core-moves.LnlmVe81MaQAdVWd]{Breach}.</p>",
+    "traits": [],
+    "prerequisites": [
+      "trait:serpentine"
+    ],
+    "autoUnlock": [],
+    "cost": 2,
+    "design": {
+      "arena": "physical",
+      "approach": "power",
+      "archetype": "serpentine"
+    },
+    "global": true,
+    "webs": [],
+    "nodes": [
+      {
+        "x": 133,
+        "y": 170,
+        "hidden": false,
+        "type": "normal",
+        "connected": [
+          "minor-buff-15",
+          "dance-partner",
+          "metamove-target-split"
+        ],
+        "config": {
+          "texture": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "tint": null
+        },
+        "tier": null
+      }
+    ]
+  }
+}

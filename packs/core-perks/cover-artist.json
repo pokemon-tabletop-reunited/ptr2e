@@ -1,0 +1,147 @@
+{
+  "folder": "lzLExT1c5IqNcbnB",
+  "name": "Cover Artist",
+  "type": "perk",
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "Fox"
+      ],
+      "notes": ""
+    },
+    "actions": [],
+    "description": "<p>Effect: The user gains @Trait[musician], and learns @UUID[Compendium.ptr2e.core-moves.ddcyCuH4t0mVmB7n]{Sing} and @UUID[Compendium.ptr2e.core-moves.h2xOusyckAvQlQtf]{Bark}.</p>",
+    "traits": [],
+    "prerequisites": [
+      {
+        "gte": [
+          "{actor|skills.singing.mod}",
+          40
+        ]
+      }
+    ],
+    "autoUnlock": [],
+    "cost": 1,
+    "design": {
+      "arena": "social",
+      "approach": "finesse",
+      "archetype": "musician"
+    },
+    "global": true,
+    "webs": [],
+    "nodes": [
+      {
+        "x": 173,
+        "y": 169,
+        "connected": [
+          "swan-song",
+          "rousing-song",
+          "root-4"
+        ],
+        "hidden": false,
+        "type": "normal",
+        "tier": null
+      }
+    ],
+    "slug": "cover-artist"
+  },
+  "img": "systems/ptr2e/img/perk-icons/Musician.svg",
+  "effects": [
+    {
+      "name": "Cover Artist",
+      "type": "passive",
+      "_id": "9ihEGOB1lzPM2n88",
+      "img": "systems/ptr2e/img/perk-icons/Musician.svg",
+      "system": {
+        "changes": [
+          {
+            "type": "grant-item",
+            "key": "",
+            "value": "Compendium.ptr2e.core-moves.Item.ddcyCuH4t0mVmB7n",
+            "predicate": [],
+            "allowDuplicate": false,
+            "priority": null,
+            "alterations": [],
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            },
+            "mode": 2,
+            "ignored": false,
+            "reevaluateOnUpdate": false,
+            "inMemoryOnly": false,
+            "track": false,
+            "replaceSelf": false
+          },
+          {
+            "type": "grant-item",
+            "key": "",
+            "value": "Compendium.ptr2e.core-moves.Item.h2xOusyckAvQlQtf",
+            "predicate": [],
+            "allowDuplicate": false,
+            "priority": null,
+            "alterations": [],
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            },
+            "mode": 2,
+            "ignored": false,
+            "reevaluateOnUpdate": false,
+            "inMemoryOnly": false,
+            "track": false,
+            "replaceSelf": false
+          },
+          {
+            "type": "add-trait",
+            "key": "",
+            "value": "musician",
+            "predicate": [],
+            "mode": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": false,
+        "removeOnRecall": false,
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "<p>The user gains @Trait[musician], and learns @UUID[Compendium.ptr2e.core-moves.ddcyCuH4t0mVmB7n]{Sing} and @UUID[Compendium.ptr2e.core-moves.h2xOusyckAvQlQtf]{Bark}.</p>",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.346",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.2.beta",
+        "lastModifiedBy": "dCIq77b7AO2frs8Z",
+        "modifiedTime": 1754227030373
+      }
+    }
+  ],
+  "_id": "DRgegaAcfqpkiBMK"
+}

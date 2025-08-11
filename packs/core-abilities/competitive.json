@@ -8,7 +8,7 @@
         "traits": [],
         "name": "Competitive",
         "slug": "competitive",
-        "type": "attack",
+        "type": "generic",
         "cost": {
           "activation": "free",
           "powerPoints": 2,
@@ -19,13 +19,7 @@
           "unit": "m"
         },
         "description": "<p>Trigger: A negative [Stage Change] effect from another creature is applied to the user.</p><p>Effect: The user's SPATK Stage increases by +2 for 5 Activations.</p>",
-        "img": "systems/ptr2e/img/icons/special_icon.png",
-        "types": [
-          "untyped"
-        ],
-        "category": "physical",
-        "free": true,
-        "predicate": []
+        "img": "systems/ptr2e/img/icons/special_icon.png"
       }
     ],
     "description": "<p>Trigger: A negative [Stage Change] effect from another creature is applied to the user.</p><p>Effect: The user's SPATK Stage increases by +2 for 5 Activations.</p>",
@@ -34,6 +28,13 @@
     "_migration": {
       "version": null,
       "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
     }
   },
   "_id": "3ARcE4gEu7yKSkpH",
@@ -47,13 +48,16 @@
         "changes": [
           {
             "type": "roll-effect",
-            "key": "competetive-attack",
+            "key": "competetive-generic",
             "value": "Compendium.ptr2e.core-effects.Item.1TqcwIUNl32wJCAZ",
             "predicate": [],
             "chance": 100,
             "affects": "self",
-            "mode": 2,
             "priority": null,
+            "isFixedChance": false,
+            "alterations": [],
+            "dontMerge": false,
+            "mode": 2,
             "ignored": false
           }
         ],
@@ -61,7 +65,9 @@
         "traits": [],
         "removeAfterCombat": true,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
@@ -83,12 +89,13 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.346",
         "systemId": "ptr2e",
-        "systemVersion": "0.10.0-alpha.5.1.6",
+        "systemVersion": "1.4.1.beta",
         "createdTime": 1737564323163,
-        "modifiedTime": 1737564344312,
-        "lastModifiedBy": "IcBpMqhFuTck9VpX"
+        "modifiedTime": 1753828075507,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf",
+        "exportSource": null
       }
     }
   ]

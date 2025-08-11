@@ -44,8 +44,82 @@
     "_migration": {
       "version": null,
       "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
     }
   },
   "_id": "IVuHGyMaJTYFY6ew",
-  "effects": []
+  "effects": [
+    {
+      "name": "Triage",
+      "type": "passive",
+      "_id": "kVj9Wqf3hwOfcqC9",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "healing-trait-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.advanceffectitem",
+            "predicate": [],
+            "chance": 100,
+            "affects": "self",
+            "dontMerge": false,
+            "alterations": [
+              {
+                "mode": 2,
+                "property": "system.amount",
+                "value": 30
+              },
+              {
+                "mode": 5,
+                "property": "name",
+                "value": "Triage - Advance 30%"
+              }
+            ],
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "1.2.0.beta",
+        "createdTime": 1743891416402,
+        "modifiedTime": 1743891476044,
+        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
+      }
+    }
+  ]
 }

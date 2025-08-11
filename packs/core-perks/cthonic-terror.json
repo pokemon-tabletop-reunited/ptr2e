@@ -1,0 +1,59 @@
+{
+  "name": "Cthonic Terror",
+  "_id": "1BxjZlaOPUbxtWjZ",
+  "type": "perk",
+  "img": "systems/ptr2e/img/item-icons/old%20amber.webp",
+  "effects": [],
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "publication": {
+      "source": "PTR2e Core",
+      "authors": [
+        "Dragoon"
+      ],
+      "notes": ""
+    },
+    "actions": [],
+    "slug": null,
+    "description": "<p>Effect: While the user has Fossilized slotted, they gains 10% EHR and 10% RES. Additionally, they take 10% less damage from all Attacks, and all of their Attacks deal 15% more damage.</p>",
+    "traits": [
+      "fossil"
+    ],
+    "prerequisites": [
+      "item:perk:echo-of-the-lost-world",
+      {
+        "gte": [
+          "{actor|level}",
+          40
+        ]
+      }
+    ],
+    "autoUnlock": [],
+    "cost": 4,
+    "originSlug": null,
+    "design": {
+      "arena": "physical",
+      "approach": "resilience",
+      "archetype": "fossil"
+    },
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": [],
+    "nodes": [
+      {
+        "x": 165,
+        "y": 26,
+        "connected": [
+          "echo-of-the-lost-world"
+        ],
+        "hidden": false,
+        "type": "normal",
+        "tier": null
+      }
+    ]
+  }
+}

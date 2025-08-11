@@ -13,22 +13,20 @@
     "diet": [
       "nullivore"
     ],
-    "movement": {
-      "primary": [
-        {
-          "type": "flight",
-          "value": 5
-        }
-      ],
-      "secondary": []
-    },
+    "movement": [
+      {
+        "type": "flight",
+        "value": 5
+      }
+    ],
     "traits": [
       "pokemon",
       "spooky",
       "silent",
       "darkvision-15",
       "hover",
-      "underdog"
+      "fully-evolved",
+      "jump-1"
     ],
     "abilities": {
       "starting": [
@@ -95,6 +93,14 @@
         "group": null
       },
       {
+        "slug": "ghost",
+        "value": 65,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
         "slug": "intimidate",
         "value": 60,
         "rvs": 0,
@@ -133,14 +139,6 @@
         "favourite": false,
         "hidden": false,
         "group": null
-      },
-      {
-        "slug": "ghost",
-        "value": 65,
-        "rvs": 0,
-        "favourite": false,
-        "hidden": false,
-        "group": "occult"
       },
       {
         "slug": "running",
@@ -191,107 +189,99 @@
     "moves": {
       "levelUp": [
         {
-          "name": "night-shade",
-          "level": 1,
-          "gen": "sword-shield"
+          "name": "astonish",
+          "gen": "sword-shield",
+          "level": 1
         },
         {
           "name": "haze",
-          "level": 1,
-          "gen": "sword-shield"
+          "gen": "sword-shield",
+          "level": 1
+        },
+        {
+          "name": "night-shade",
+          "gen": "sword-shield",
+          "level": 1
         },
         {
           "name": "protect",
-          "level": 1,
-          "gen": "sword-shield"
+          "gen": "sword-shield",
+          "level": 1
         },
         {
           "name": "scary-face",
-          "level": 1,
-          "gen": "sword-shield"
-        },
-        {
-          "name": "astonish",
-          "level": 1,
-          "gen": "sword-shield"
+          "gen": "sword-shield",
+          "level": 1
         },
         {
           "name": "shadow-claw",
-          "level": 1,
-          "gen": "sword-shield"
+          "gen": "sword-shield",
+          "level": 1
         },
         {
           "name": "disable",
-          "level": 12,
-          "gen": "sword-shield"
+          "gen": "sword-shield",
+          "level": 12
         },
         {
           "name": "brutal-swing",
-          "level": 16,
-          "gen": "sword-shield"
+          "gen": "sword-shield",
+          "level": 16
         },
         {
           "name": "crafty-shield",
-          "level": 20,
-          "gen": "sword-shield"
+          "gen": "sword-shield",
+          "level": 20
         },
         {
           "name": "hex",
-          "level": 24,
-          "gen": "sword-shield"
+          "gen": "sword-shield",
+          "level": 24
         },
         {
           "name": "mean-look",
-          "level": 28,
-          "gen": "sword-shield"
+          "gen": "sword-shield",
+          "level": 28
         },
         {
           "name": "slam",
-          "level": 32,
-          "gen": "sword-shield"
+          "gen": "sword-shield",
+          "level": 32
         },
         {
           "name": "curse",
-          "level": 38,
-          "gen": "sword-shield"
+          "gen": "sword-shield",
+          "level": 38
         },
         {
           "name": "shadow-ball",
-          "level": 44,
-          "gen": "sword-shield"
+          "gen": "sword-shield",
+          "level": 44
         },
         {
           "name": "earthquake",
-          "level": 50,
-          "gen": "sword-shield"
+          "gen": "sword-shield",
+          "level": 50
         },
         {
           "name": "guard-split",
-          "level": 56,
-          "gen": "sword-shield"
+          "gen": "sword-shield",
+          "level": 56
         },
         {
           "name": "power-split",
-          "level": 56,
-          "gen": "sword-shield"
+          "gen": "sword-shield",
+          "level": 56
         },
         {
           "name": "destiny-bond",
-          "level": 62,
-          "gen": "sword-shield"
+          "gen": "sword-shield",
+          "level": 62
         }
       ],
       "tutor": [
         {
-          "name": "poltergeist",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "hyper-beam",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "psychic",
+          "name": "ally-switch",
           "gen": "sword-shield"
         },
         {
@@ -299,115 +289,19 @@
           "gen": "sword-shield"
         },
         {
-          "name": "rest",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "rock-slide",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "substitute",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "thief",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "snore",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "sandstorm",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "endure",
-          "gen": "sword-shield"
-        },
-        {
           "name": "attract",
           "gen": "sword-shield"
         },
         {
-          "name": "sleep-talk",
+          "name": "body-press",
           "gen": "sword-shield"
         },
         {
-          "name": "safeguard",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "rain-dance",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "will-o-wisp",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "facade",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "taunt",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "trick",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "revenge",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "skill-swap",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "imprison",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "fake-tears",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "rock-tomb",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "sand-tomb",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "iron-defense",
+          "name": "bulldoze",
           "gen": "sword-shield"
         },
         {
           "name": "calm-mind",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "rock-blast",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "payback",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "power-swap",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "guard-swap",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "toxic-spikes",
           "gen": "sword-shield"
         },
         {
@@ -419,11 +313,23 @@
           "gen": "sword-shield"
         },
         {
+          "name": "earth-power",
+          "gen": "sword-shield"
+        },
+        {
+          "name": "endure",
+          "gen": "sword-shield"
+        },
+        {
           "name": "energy-ball",
           "gen": "sword-shield"
         },
         {
-          "name": "earth-power",
+          "name": "facade",
+          "gen": "sword-shield"
+        },
+        {
+          "name": "fake-tears",
           "gen": "sword-shield"
         },
         {
@@ -431,43 +337,31 @@
           "gen": "sword-shield"
         },
         {
-          "name": "nasty-plot",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "zen-headbutt",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "trick-room",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "stone-edge",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "stealth-rock",
-          "gen": "sword-shield"
-        },
-        {
           "name": "grass-knot",
           "gen": "sword-shield"
         },
         {
-          "name": "wonder-room",
+          "name": "guard-swap",
           "gen": "sword-shield"
         },
         {
-          "name": "round",
+          "name": "hyper-beam",
           "gen": "sword-shield"
         },
         {
-          "name": "ally-switch",
+          "name": "imprison",
           "gen": "sword-shield"
         },
         {
-          "name": "bulldoze",
+          "name": "iron-defense",
+          "gen": "sword-shield"
+        },
+        {
+          "name": "nasty-plot",
+          "gen": "sword-shield"
+        },
+        {
+          "name": "payback",
           "gen": "sword-shield"
         },
         {
@@ -475,7 +369,111 @@
           "gen": "sword-shield"
         },
         {
-          "name": "body-press",
+          "name": "poltergeist",
+          "gen": "sword-shield"
+        },
+        {
+          "name": "power-swap",
+          "gen": "sword-shield"
+        },
+        {
+          "name": "psychic",
+          "gen": "sword-shield"
+        },
+        {
+          "name": "rain-dance",
+          "gen": "sword-shield"
+        },
+        {
+          "name": "rest",
+          "gen": "sword-shield"
+        },
+        {
+          "name": "revenge",
+          "gen": "sword-shield"
+        },
+        {
+          "name": "rock-blast",
+          "gen": "sword-shield"
+        },
+        {
+          "name": "rock-slide",
+          "gen": "sword-shield"
+        },
+        {
+          "name": "rock-tomb",
+          "gen": "sword-shield"
+        },
+        {
+          "name": "round",
+          "gen": "sword-shield"
+        },
+        {
+          "name": "safeguard",
+          "gen": "sword-shield"
+        },
+        {
+          "name": "sand-tomb",
+          "gen": "sword-shield"
+        },
+        {
+          "name": "sandstorm",
+          "gen": "sword-shield"
+        },
+        {
+          "name": "skill-swap",
+          "gen": "sword-shield"
+        },
+        {
+          "name": "sleep-talk",
+          "gen": "sword-shield"
+        },
+        {
+          "name": "snore",
+          "gen": "sword-shield"
+        },
+        {
+          "name": "stealth-rock",
+          "gen": "sword-shield"
+        },
+        {
+          "name": "stone-edge",
+          "gen": "sword-shield"
+        },
+        {
+          "name": "substitute",
+          "gen": "sword-shield"
+        },
+        {
+          "name": "taunt",
+          "gen": "sword-shield"
+        },
+        {
+          "name": "thief",
+          "gen": "sword-shield"
+        },
+        {
+          "name": "toxic-spikes",
+          "gen": "sword-shield"
+        },
+        {
+          "name": "trick",
+          "gen": "sword-shield"
+        },
+        {
+          "name": "trick-room",
+          "gen": "sword-shield"
+        },
+        {
+          "name": "will-o-wisp",
+          "gen": "sword-shield"
+        },
+        {
+          "name": "wonder-room",
+          "gen": "sword-shield"
+        },
+        {
+          "name": "zen-headbutt",
           "gen": "sword-shield"
         }
       ]
@@ -509,13 +507,32 @@
             "level": null,
             "knownMove": null
           },
-          "evolutions": []
+          "evolutions": [],
+          "perk": {
+            "x": 26,
+            "y": 26
+          }
         }
       ],
-      "uuid": "Compendium.ptr2e.core-species.Item.GZZoc4tDvS5c2UGE"
+      "uuid": "Compendium.ptr2e.core-species.Item.GZZoc4tDvS5c2UGE",
+      "methods": [],
+      "perk": {
+        "x": 26,
+        "y": 26
+      }
+    },
+    "publication": {
+      "source": "PTR 2e Core - Galar Dex",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "_migration": {
+      "version": null,
+      "previous": null
     }
   },
   "_id": "3LWkQftUzvnqxNtg",
-  "effects": [],
-  "folder": null
+  "effects": []
 }

@@ -11,4 +11,8 @@ export default class PassivePTR2e extends ActionPTR2e {
             hidden: new fields.BooleanField({ required: true, initial: false, label: "PTR2E.FIELDS.hidden.label", hint: "PTR2E.FIELDS.hidden.hint" }),
         }
     }
+
+    override get rollable() {
+      return false;
+    }
 }

@@ -9,21 +9,26 @@
       {
         "name": "Quick And The Dead",
         "slug": "quick-and-the-dead",
-        "description": "<p>All of your Combat Actions gain [Priority 1] or [Priority +1].</p>",
+        "description": "<p>All of your Combat Actions gain @Trait[priority-1] or [Priority +1].</p>",
         "traits": [],
-        "type": "generic",
+        "type": "passive",
         "range": {
           "target": "self",
-          "unit": "m"
+          "unit": "m",
+          "distance": 0
         },
         "cost": {
-          "activation": "simple"
+          "activation": "free",
+          "powerPoints": 0
         },
-        "img": "icons/svg/explosion.svg"
+        "img": "systems/ptr2e/img/perk-icons/Juggler.svg",
+        "variant": null,
+        "ephemeralVariant": false,
+        "hidden": false
       }
     ],
     "slug": "quick-and-the-dead",
-    "description": "<p>All of your Combat Actions gain [Priority 1] or [Priority +1].</p>",
+    "description": "<p>All of your Combat Actions gain @Trait[priority-1] or [Priority +1].</p>",
     "traits": [],
     "prerequisites": [],
     "cost": 3,
@@ -36,7 +41,9 @@
         "connected": [
           "skirmish",
           "run-down",
-          "mightyena-tactic"
+          "mightyena-tactic",
+          "up-the-beat",
+          "lucky-duck"
         ],
         "config": {
           "alpha": null,
@@ -60,8 +67,18 @@
     "design": {
       "arena": "physical",
       "approach": "finesse",
-      "archetype": "Hunter"
-    }
+      "archetype": "hunter"
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "originSlug": null,
+    "variant": null,
+    "mode": null
   },
   "effects": [
     {
@@ -77,6 +94,7 @@
             "value": "Compendium.ptr2e.core-effects.Item.advanceffectitem",
             "predicate": [],
             "chance": 100,
+            "dontMerge": true,
             "affects": "self",
             "mode": 2,
             "priority": null,
@@ -110,12 +128,13 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.342",
         "systemId": "ptr2e",
         "systemVersion": "0.10.0-alpha.5.2.1",
         "createdTime": 1737661825098,
         "modifiedTime": 1737661874073,
-        "lastModifiedBy": "IcBpMqhFuTck9VpX"
+        "lastModifiedBy": "IcBpMqhFuTck9VpX",
+        "exportSource": null
       }
     }
   ]

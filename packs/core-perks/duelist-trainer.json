@@ -1,0 +1,65 @@
+{
+  "folder": "fDfAXQXXzkaqpYoa",
+  "name": "Duelist Trainer",
+  "type": "perk",
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "publication": {
+      "source": "PTR2e Core",
+      "authors": [
+        "Fox"
+      ],
+      "notes": ""
+    },
+    "actions": [],
+    "description": "<p>Effect: As a @Trait[command] Simple Action costing 3PP, the user grants a creature @Affliction[duel 3], with a creature of the target's choosing becoming the target's Duel Partner, also gaining @Affliction[duel 3].</p>",
+    "traits": [
+      "trainer",
+      "command"
+    ],
+    "prerequisites": [
+      "trait:trainer"
+    ],
+    "autoUnlock": [],
+    "cost": 2,
+    "design": {
+      "arena": "social",
+      "approach": "finesse",
+      "archetype": "trainer"
+    },
+    "global": true,
+    "webs": [],
+    "nodes": [
+      {
+        "x": 109,
+        "y": 120,
+        "hidden": false,
+        "type": "normal",
+        "connected": [
+          "evasive-style",
+          "minor-buff-48",
+          "rapid-fire-style",
+          "minor-buff-8"
+        ],
+        "config": {
+          "texture": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "tint": null
+        },
+        "tier": null
+      }
+    ],
+    "slug": "duelist-trainer",
+    "originSlug": null,
+    "variant": null,
+    "mode": null
+  },
+  "img": "systems/ptr2e/img/perk-icons/Trainer.svg",
+  "effects": [],
+  "flags": {},
+  "_id": "SmDBQYY2qPilgmH6"
+}

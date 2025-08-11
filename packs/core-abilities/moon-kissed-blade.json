@@ -1,0 +1,247 @@
+{
+  "name": "Moon-Kissed Blade",
+  "type": "ability",
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": {
+        "schema": null,
+        "foundry": "12.331",
+        "system": "1.1.0.beta"
+      }
+    },
+    "slug": "moon-kissed-blade",
+    "publication": {
+      "source": "Digidex",
+      "authors": [
+        "PTR 2e Team",
+        "Gwen"
+      ],
+      "notes": ""
+    },
+    "traits": [
+      "domain",
+      "aura",
+      "dark",
+      "partial-automation",
+      "water",
+      "digimon",
+      "not-tutorable"
+    ],
+    "actions": [
+      {
+        "traits": [
+          "domain",
+          "aura",
+          "dark",
+          "water"
+        ],
+        "name": "Moon-Kissed Blade",
+        "slug": "wickedness",
+        "type": "passive",
+        "cost": {
+          "activation": "free"
+        },
+        "range": {
+          "target": "aura",
+          "distance": 5,
+          "unit": "m"
+        },
+        "description": "<p>Effect: The user and all creatures within Range increase the Power of their Dark and Water-Type attacks by 10%.</p>",
+        "img": "https://assets.forge-vtt.com/6132db9efd99d052c06b70e3/systems/ptr2e/img/svg/dark_icon.svg"
+      }
+    ],
+    "description": "<p>Effect: The user and all creatures within Range increase the Power of their Dark and Water-Type attacks by 10%.</p>"
+  },
+  "img": "systems/ptr2e/img/svg/fairy_icon.svg",
+  "effects": [
+    {
+      "name": "Moon-Kissed Blade",
+      "type": "passive",
+      "_id": "iv8BCajSNudSRgRh",
+      "img": "https://assets.forge-vtt.com/6132db9efd99d052c06b70e3/systems/ptr2e/img/svg/fairy_icon.svg",
+      "system": {
+        "changes": [
+          {
+            "type": "percentile-modifier",
+            "key": "fairy-attack-power",
+            "value": 10,
+            "predicate": [],
+            "label": "Moon-Kissed Blade Fairy",
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "hideIfDisabled": false
+          },
+          {
+            "type": "percentile-modifier",
+            "key": "water-attack-power",
+            "value": 10,
+            "predicate": [],
+            "label": "Moon-Kissed Blade Water",
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "hideIfDisabled": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "13.346",
+        "systemId": "ptr2e",
+        "systemVersion": "1.1.0.beta",
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null,
+        "exportSource": null
+      }
+    },
+    {
+      "name": "Moon-Kissed Blade (Aura)",
+      "type": "passive",
+      "_id": "lckjHwpi6p660QfP",
+      "img": "https://assets.forge-vtt.com/6132db9efd99d052c06b70e3/systems/ptr2e/img/svg/fairy_icon.svg",
+      "system": {
+        "changes": [
+          {
+            "type": "aura",
+            "key": "",
+            "value": 0,
+            "predicate": [],
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "radius": 5,
+            "effects": [
+              {
+                "uuid": "Compendium.ptr2e.core-effects.Item.2ZXLjaOzPUCMOjUL",
+                "affects": "all",
+                "events": [
+                  "enter"
+                ],
+                "removeOnExit": true,
+                "includesSelf": false,
+                "appliesSelfOnly": false,
+                "predicate": [
+                  "target:trait:fairy"
+                ]
+              }
+            ],
+            "appearance": {
+              "border": {
+                "color": "#FF0000",
+                "alpha": 0.375
+              },
+              "highlight": {
+                "color": "user-color",
+                "alpha": 0.125
+              },
+              "texture": null
+            },
+            "mergeExisting": true
+          },
+          {
+            "type": "aura",
+            "key": "",
+            "value": 0,
+            "predicate": [],
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "radius": 5,
+            "effects": [
+              {
+                "uuid": "Compendium.ptr2e.core-effects.Item.2ZXLjaOzPUCMOjUL",
+                "affects": "all",
+                "events": [
+                  "enter"
+                ],
+                "removeOnExit": true,
+                "includesSelf": false,
+                "appliesSelfOnly": false,
+                "predicate": [
+                  "target:trait:water"
+                ]
+              }
+            ],
+            "appearance": {
+              "border": {
+                "color": "#FF0000",
+                "alpha": 0.375
+              },
+              "highlight": {
+                "color": "user-color",
+                "alpha": 0.125
+              },
+              "texture": null
+            },
+            "mergeExisting": true
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "13.346",
+        "systemId": "ptr2e",
+        "systemVersion": "1.1.0.beta",
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null,
+        "exportSource": null
+      }
+    }
+  ],
+  "folder": "ANyTBaCvsFOl1tzn",
+  "_id": "Vpj738KrqViKJr1U"
+}

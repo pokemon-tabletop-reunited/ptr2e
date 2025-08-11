@@ -1,0 +1,124 @@
+{
+  "folder": "BImk1fcMbR5akA4z",
+  "name": "Veemon Headbutt",
+  "type": "move",
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "publication": {
+      "source": "Digidex",
+      "authors": [
+        "Fox"
+      ],
+      "notes": ""
+    },
+    "traits": [],
+    "actions": [
+      {
+        "name": "Veemon Headbutt",
+        "slug": "veemon-headbutt",
+        "type": "attack",
+        "img": "systems/ptr2e/img/svg/dragon_icon.svg",
+        "traits": [
+          "contact",
+          "digimon"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 2
+        },
+        "types": [
+          "dragon"
+        ],
+        "category": "physical",
+        "power": 75,
+        "accuracy": 100,
+        "predicate": [],
+        "description": "<p>This attack has a 25% chance to inflict a 20% Flinch on the target.</p>"
+      }
+    ],
+    "grade": "D",
+    "slug": "veemon-headbutt"
+  },
+  "img": "systems/ptr2e/img/svg/dragon_icon.svg",
+  "effects": [
+    {
+      "name": "Veemon Headbutt",
+      "type": "passive",
+      "_id": "hEzAuJ1JBCmugP7Y",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "veemon-headbutt-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.advanceffectitem",
+            "predicate": [],
+            "chance": 25,
+            "affects": "target",
+            "dontMerge": false,
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "system.amount",
+                "value": -20
+              },
+              {
+                "mode": 5,
+                "property": "name",
+                "value": "Flinch 20%"
+              }
+            ],
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "isFixedChance": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "13.346",
+        "systemId": "ptr2e",
+        "systemVersion": "1.2.1.beta",
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null,
+        "exportSource": null
+      }
+    }
+  ],
+  "_id": "ceNDqnTPTWedfGEn"
+}

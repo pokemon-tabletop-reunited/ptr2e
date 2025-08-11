@@ -1,0 +1,117 @@
+{
+  "folder": "BImk1fcMbR5akA4z",
+  "name": "Hyper Smell",
+  "type": "move",
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "publication": {
+      "source": "Digidex",
+      "authors": [
+        "Fox"
+      ],
+      "notes": ""
+    },
+    "traits": [],
+    "actions": [
+      {
+        "name": "Hyper Smell",
+        "slug": "hyper-smell",
+        "type": "attack",
+        "img": "systems/ptr2e/img/svg/poison_icon.svg",
+        "traits": [
+          "digimon"
+        ],
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 4
+        },
+        "types": [
+          "poison"
+        ],
+        "category": "physical",
+        "predicate": [],
+        "description": "<p>This attack has a 15% chance each to apply @Affliction[paralysis 5] and @Affliction[confused 5] to hit targets.</p>",
+        "range": {
+          "target": "emanation",
+          "distance": 3,
+          "unit": "m"
+        },
+        "power": 70,
+        "accuracy": 100
+      }
+    ],
+    "grade": "C",
+    "slug": "hyper-smell"
+  },
+  "img": "systems/ptr2e/img/svg/poison_icon.svg",
+  "effects": [
+    {
+      "name": "Hyper Smell",
+      "type": "passive",
+      "_id": "OO15PIh62cdNKknW",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "hyper-smell-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.paralysisconitem",
+            "predicate": [],
+            "chance": 15,
+            "affects": "target",
+            "alterations": [],
+            "dontMerge": false,
+            "mode": 2,
+            "ignored": false,
+            "isFixedChance": false
+          },
+          {
+            "type": "roll-effect",
+            "key": "hyper-smell-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.confusedconditem",
+            "predicate": [],
+            "chance": 15,
+            "affects": "target",
+            "alterations": [],
+            "dontMerge": false,
+            "mode": 2,
+            "ignored": false,
+            "isFixedChance": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.346",
+        "systemId": "ptr2e",
+        "systemVersion": "1.3.0.beta",
+        "lastModifiedBy": null
+      }
+    }
+  ],
+  "_id": "rJqeb5sTqEBnwpDA"
+}

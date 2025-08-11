@@ -1,0 +1,96 @@
+{
+  "folder": "ANyTBaCvsFOl1tzn",
+  "name": "Utopia",
+  "type": "ability",
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "publication": {
+      "source": "Digidex",
+      "authors": [
+        "Fox"
+      ],
+      "notes": ""
+    },
+    "traits": [
+      "digimon"
+    ],
+    "actions": [],
+    "description": "<p>You are immune to the Perish condition and gain +1 Default Crit Stage.</p>",
+    "slug": "utopia"
+  },
+  "img": "systems/ptr2e/img/svg/shadow_icon.svg",
+  "effects": [
+    {
+      "name": "Utopia",
+      "type": "passive",
+      "_id": "nZgR4FFUKY9We0ks",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-option",
+            "key": "",
+            "value": "affliction:perish",
+            "predicate": [],
+            "domain": "immunities",
+            "toggleable": false,
+            "count": false,
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "suboptions": [],
+            "state": true
+          },
+          {
+            "type": "basic",
+            "key": "system.battleStats.critRate.stage",
+            "value": 1,
+            "predicate": [],
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "13.346",
+        "systemId": "ptr2e",
+        "systemVersion": "1.2.1.beta",
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null,
+        "exportSource": null
+      }
+    }
+  ],
+  "_id": "RfahGUC4nLCTR3lb"
+}

@@ -255,10 +255,19 @@
             "item": null,
             "level": null,
             "knownMove": null
+          },
+          "perk": {
+            "x": 26,
+            "y": 26
           }
         }
       ],
-      "uuid": "Compendium.ptr2e.core-species.Item.njbUlb0ByRCtepSb"
+      "uuid": "Compendium.ptr2e.core-species.Item.njbUlb0ByRCtepSb",
+      "methods": [],
+      "perk": {
+        "x": 26,
+        "y": 26
+      }
     },
     "number": 965,
     "traits": [
@@ -267,7 +276,8 @@
       "construct",
       "rapid",
       "underdog",
-      "natural-steel"
+      "natural-steel",
+      "jump-1"
     ],
     "diet": [
       "terravore"
@@ -303,20 +313,16 @@
         }
       ]
     },
-    "movement": {
-      "primary": [
-        {
-          "type": "overland",
-          "value": 7
-        }
-      ],
-      "secondary": [
-        {
-          "type": "swim",
-          "value": 3
-        }
-      ]
-    },
+    "movement": [
+      {
+        "type": "overland",
+        "value": 7
+      },
+      {
+        "type": "swim",
+        "value": 3
+      }
+    ],
     "skills": [
       {
         "slug": "acrobatics",
@@ -459,9 +465,19 @@
       "city",
       "industrial"
     ],
-    "slug": "varoom"
+    "slug": "varoom",
+    "publication": {
+      "source": "PTR 2e Core - Paldea Dex",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
   },
   "_id": "njbUlb0ByRCtepSb",
-  "effects": [],
-  "folder": null
+  "effects": []
 }

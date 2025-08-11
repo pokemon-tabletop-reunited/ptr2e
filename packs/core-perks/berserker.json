@@ -39,7 +39,10 @@
           "guard-up",
           "trained-rider",
           "stat-iv-booster-1-5",
-          "stat-iv-booster-1-10"
+          "stat-iv-booster-1-10",
+          "minor-buff-49",
+          "minor-buff-54",
+          "berserkergang"
         ],
         "config": {
           "alpha": null,
@@ -61,8 +64,18 @@
     "design": {
       "arena": "physical",
       "approach": "power",
-      "archetype": "Berserker"
-    }
+      "archetype": "berserker"
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "originSlug": null,
+    "variant": null,
+    "mode": null
   },
   "effects": [
     {
@@ -124,13 +137,7 @@
             "key": "",
             "value": "Compendium.ptr2e.core-moves.Item.Zsg9MXOaKH3vAb6q",
             "predicate": [],
-            "alterations": [
-              {
-                "mode": 5,
-                "property": "system.actions.1.free",
-                "value": "true"
-              }
-            ],
+            "alterations": [],
             "mode": 2,
             "priority": null,
             "ignored": false,
@@ -171,12 +178,13 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.342",
         "systemId": "ptr2e",
         "systemVersion": "0.10.0-alpha.5.1.5",
         "createdTime": 1732232360900,
         "modifiedTime": 1737391812514,
-        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+        "lastModifiedBy": "mK35yvCqCgiTUvKf",
+        "exportSource": null
       }
     }
   ]

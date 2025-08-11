@@ -1,0 +1,122 @@
+{
+  "name": "Mana Whorl",
+  "type": "move",
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "slug": "mana-whorl",
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ]
+    },
+    "traits": [],
+    "actions": [
+      {
+        "name": "Mana Whorl",
+        "slug": "mana-whorl",
+        "type": "attack",
+        "img": "systems/ptr2e/img/svg/untyped_icon.svg",
+        "traits": [
+          "trap",
+          "blast-2",
+          "arcane",
+          "pulse",
+          "adaptable"
+        ],
+        "range": {
+          "target": "blast",
+          "distance": 8,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 5
+        },
+        "types": [
+          "untyped"
+        ],
+        "category": "special",
+        "power": 45,
+        "accuracy": 75,
+        "predicate": [],
+        "description": "<p>Effect: On hit, all valid targets gain @Affliction[bound 5]. While @Affliction[bound], they also suffer from @Affliction[wracked]. This @Affliction[bound] effect can be removed with a Difficult Movement-related Skill Check or an Ordinary Thaumaturgy Skill Check taken as a Simple Action.</p>"
+      }
+    ],
+    "grade": "B"
+  },
+  "img": "systems/ptr2e/img/svg/untyped_icon.svg",
+  "effects": [
+    {
+      "name": "Mana Whorl",
+      "type": "passive",
+      "_id": "htghEM6LYKTXaFy9",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "mana-whorl-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.boundconditiitem",
+            "predicate": [],
+            "chance": 100,
+            "affects": "target",
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "alterations": []
+          },
+          {
+            "type": "roll-effect",
+            "key": "mana-whorl-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.wrackedcondiitem",
+            "predicate": [],
+            "chance": 100,
+            "affects": "target",
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "alterations": []
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": "Compendium.ptr2e.core-moves.Item.gADis21rh3UuejhI.ActiveEffect.vWdwJhCMiSPqzBXU",
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "1.1.0.beta",
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      }
+    }
+  ],
+  "flags": {},
+  "_id": "3Qn2xyUwYBF24n5y"
+}

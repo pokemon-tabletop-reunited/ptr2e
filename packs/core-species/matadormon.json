@@ -1,6 +1,6 @@
 {
   "folder": "rS3iGnYQKzTIxvUN",
-  "name": "Matadormon",
+  "name": "matadormon",
   "type": "species",
   "system": {
     "_migration": {
@@ -12,7 +12,9 @@
       "virus",
       "rapid",
       "darkvision-15",
-      "bipedal"
+      "bipedal",
+      "digimon",
+      "ultimate"
     ],
     "number": 3002,
     "stats": {
@@ -67,20 +69,16 @@
         }
       ]
     },
-    "movement": {
-      "primary": [
-        {
-          "type": "overland",
-          "value": 14
-        }
-      ],
-      "secondary": [
-        {
-          "type": "swim",
-          "value": 7
-        }
-      ]
-    },
+    "movement": [
+      {
+        "type": "overland",
+        "value": 14
+      },
+      {
+        "type": "swim",
+        "value": 7
+      }
+    ],
     "skills": [
       {
         "slug": "acrobatics",
@@ -254,11 +252,6 @@
     "moves": {
       "levelUp": [
         {
-          "name": "destroyer-driver",
-          "level": 52,
-          "gen": null
-        },
-        {
           "name": "earth-shattering-stomp",
           "level": 1,
           "gen": null
@@ -317,6 +310,11 @@
           "name": "last-resort",
           "level": 50,
           "gen": null
+        },
+        {
+          "name": "destroyer-driver",
+          "level": 52,
+          "gen": null
         }
       ],
       "tutor": []
@@ -340,11 +338,9 @@
               "operand": "and"
             }
           ],
-          "details": {
-            "gender": null,
-            "item": null,
-            "level": null,
-            "knownMove": null
+          "perk": {
+            "x": 26,
+            "y": 26
           },
           "evolutions": [
             {
@@ -357,11 +353,9 @@
                   "operand": "and"
                 }
               ],
-              "details": {
-                "gender": null,
-                "item": null,
-                "level": null,
-                "knownMove": null
+              "perk": {
+                "x": 26,
+                "y": 26
               },
               "evolutions": [
                 {
@@ -374,17 +368,17 @@
                       "operand": "and"
                     }
                   ],
-                  "details": {
-                    "gender": null,
-                    "item": null,
-                    "level": null,
-                    "knownMove": null
+                  "perk": {
+                    "x": 26,
+                    "y": 26
                   },
-                  "evolutions": []
+                  "details": null
                 }
-              ]
+              ],
+              "details": null
             }
-          ]
+          ],
+          "details": null
         }
       ],
       "details": {
@@ -392,11 +386,22 @@
         "item": null,
         "level": null,
         "knownMove": null
+      },
+      "perk": {
+        "x": 26,
+        "y": 26
       }
+    },
+    "publication": {
+      "source": "Digidex",
+      "authors": [
+        "PTR 2e Team",
+        "Mocan"
+      ],
+      "notes": ""
     }
   },
   "img": "systems/ptr2e/img/icons/species_icon.webp",
   "effects": [],
-  "flags": {},
   "_id": "I8cJVbGFEJGPVjVN"
 }

@@ -1,0 +1,82 @@
+{
+  "name": "Stoked",
+  "type": "effect",
+  "img": "systems/ptr2e/img/svg/fire_icon.svg",
+  "system": {
+    "traits": [
+      "fire",
+      "pseudo-affliction"
+    ],
+    "description": "<p>While afflicted with Stoked, the creature's next damaging @Trait[fire] Attack has +100% Power.</p>",
+    "slug": "stoked",
+    "publication": {
+      "source": "",
+      "authors": [],
+      "notes": ""
+    },
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "effects": [
+    {
+      "name": "Stoked",
+      "img": "systems/ptr2e/img/svg/fire_icon.svg",
+      "type": "affliction",
+      "duration": {
+        "turns": 1,
+        "startTime": null,
+        "combat": null,
+        "startTurn": null
+      },
+      "system": {
+        "changes": [
+          {
+            "type": "percentile-modifier",
+            "key": "fire-attack-power",
+            "value": 100,
+            "mode": 2,
+            "predicate": [],
+            "ignored": false,
+            "hideIfDisabled": false
+          }
+        ],
+        "removeOnRecall": true,
+        "removeAfterCombat": true,
+        "traits": [
+          "fire",
+          "pseudo-affliction"
+        ],
+        "slug": null,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0,
+        "priority": 50,
+        "formula": "",
+        "type": "damage"
+      },
+      "description": "<p>While afflicted with Stoked, the creature's next damaging @Trait[fire] Attack has +100% Power.</p>",
+      "statuses": [],
+      "_id": "stokedcondition0",
+      "_stats": {
+        "coreVersion": "13.346",
+        "systemId": null,
+        "systemVersion": null,
+        "createdTime": null,
+        "modifiedTime": 1754225613568,
+        "lastModifiedBy": "dCIq77b7AO2frs8Z",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "disabled": false,
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "sort": 0,
+      "flags": {}
+    }
+  ],
+  "_id": "stokedcondititem"
+}

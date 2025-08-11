@@ -1,0 +1,161 @@
+{
+  "folder": "6XbjR9qPWzZw4vEd",
+  "name": "Driven",
+  "type": "perk",
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "publication": {
+      "source": "PTR2e Core",
+      "authors": [
+        "Fox"
+      ],
+      "notes": ""
+    },
+    "actions": [
+      {
+        "name": "Driven",
+        "slug": "driven",
+        "description": "<p>Trigger: The user resolves Master's Whip.</p><p>Effect: The triggering Action's target gains @UUID[Compendium.ptr2e.core-effects.Item.CEdcrWbb1KDTNIKl]{+1 Critical Stage} for 5 Activations.</p>",
+        "traits": [],
+        "type": "attack",
+        "img": "systems/ptr2e/img/perk-icons/Taskmaster.svg",
+        "range": {
+          "target": "field",
+          "unit": "m",
+          "distance": 0
+        },
+        "cost": {
+          "activation": "free",
+          "powerPoints": 3,
+          "trigger": "The user resolves Master's Whip.",
+          "delay": null,
+          "priority": null
+        },
+        "types": [
+          "untyped"
+        ],
+        "category": "status",
+        "free": true,
+        "predicate": [],
+        "variant": null,
+        "ephemeralVariant": false,
+        "power": null,
+        "accuracy": null,
+        "contestType": "",
+        "contestEffect": "",
+        "slot": null,
+        "summon": null,
+        "defaultVariant": null,
+        "flingItemId": "",
+        "offensiveStat": null,
+        "defensiveStat": null
+      }
+    ],
+    "description": "<p>Effect: When resolving Master's Whip, the user may spend 3 PP as a Free Action at [interrupt-2] to grant the target of Master's Whip @UUID[Compendium.ptr2e.core-effects.Item.CEdcrWbb1KDTNIKl]{+1 Critical Stage} for 5 Activations.</p>",
+    "traits": [],
+    "prerequisites": [
+      "item:perk:masters-whip"
+    ],
+    "autoUnlock": [],
+    "cost": 2,
+    "design": {
+      "arena": "social",
+      "approach": "power",
+      "archetype": "taskmaster"
+    },
+    "global": true,
+    "webs": [],
+    "nodes": [
+      {
+        "x": 32,
+        "y": 121,
+        "hidden": false,
+        "type": "normal",
+        "connected": [
+          "masters-whip"
+        ],
+        "config": {
+          "texture": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "tint": null
+        },
+        "tier": null
+      }
+    ],
+    "slug": "driven",
+    "originSlug": null,
+    "variant": null,
+    "mode": null
+  },
+  "img": "systems/ptr2e/img/perk-icons/Taskmaster.svg",
+  "effects": [
+    {
+      "name": "Driven",
+      "type": "passive",
+      "_id": "c4DAr8MR99r3HUEz",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "driven-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.CEdcrWbb1KDTNIKl",
+            "predicate": [],
+            "chance": 100,
+            "affects": "target",
+            "dontMerge": false,
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "duration.turns",
+                "value": 3
+              }
+            ],
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "13.342",
+        "systemId": "ptr2e",
+        "systemVersion": "1.2.1.beta",
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null,
+        "exportSource": null
+      }
+    }
+  ],
+  "flags": {},
+  "_id": "8HCCM0OycC7SzflV"
+}

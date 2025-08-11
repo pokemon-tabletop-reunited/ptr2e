@@ -6,24 +6,24 @@
     "slug": "sky-attack",
     "actions": [
       {
-        "slug": "sky-attack",
-        "name": "Sky Attack",
+        "slug": "sky-attack-resolution",
+        "name": "Sky Attack (Resolution)",
         "type": "attack",
         "traits": [
           "set-up",
-          "defensive",
           "crit-1",
-          "pass-4",
-          "pp-updated"
+          "contact",
+          "flinch-60"
         ],
         "range": {
-          "target": "creature",
-          "distance": 1,
+          "target": "wide-line",
+          "distance": 9,
           "unit": "m"
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 9
+          "powerPoints": 4,
+          "trigger": "The user used Sky Attack (Set-Up) as their last Action."
         },
         "category": "physical",
         "power": 140,
@@ -31,15 +31,44 @@
         "types": [
           "flying"
         ],
-        "description": "<p>Effect: Set-Up: The user is bathed in a harsh light, gaining +2 EVA Stages for 3 Activations.</p><p>Resolution: On their next Activation, the freely Moves up to double their Flight Score, and attacks with this attack.</p>",
-        "contestType": "",
-        "contestEffect": "",
-        "free": false,
-        "slot": null
+        "description": "<p>Trigger: The user used Sky Attack (Set-Up) as their last Action.</p><p>Effect: The user freely Moves up to their Flight Score before Attacking. On resolution, the user freely Moves to a space within the targeted Range.</p>",
+        "img": "systems/ptr2e/img/svg/flying_icon.svg",
+        "predicate": []
+      },
+      {
+        "name": "Sky Attack (Set-Up)",
+        "slug": "sky-attack-set-up",
+        "description": "<p>Effect: The user gains +1 ATK, SPD, and EVA Stages for 3 Activations.</p>",
+        "traits": [
+          "set-up",
+          "defensive",
+          "priority-20"
+        ],
+        "type": "attack",
+        "img": "systems/ptr2e/img/svg/flying_icon.svg",
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 4
+        },
+        "range": {
+          "target": "self",
+          "unit": "m"
+        },
+        "types": [
+          "flying"
+        ],
+        "category": "status",
+        "predicate": []
       }
     ],
     "container": null,
-    "grade": "A"
+    "grade": "B",
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ]
+    }
   },
   "_id": "7QvTao3ipJznOyey",
   "effects": []

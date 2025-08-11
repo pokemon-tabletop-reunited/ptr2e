@@ -1,0 +1,16 @@
+<section>
+  <fieldset>
+    <legend>EVs</legend>
+    {{#each stats as |value key|}}
+      <div class="form-group stat {{key}}">
+        <label for="{{concat "system.attributes." key ".evs"}}">{{localize (concat "PTR2E.Attributes." key ".Label")}}</label>
+        <div class="form-fields {{key}}"></div>
+      </div>
+    {{/each}}
+    <div class="form-group">
+      <label>Total (Max 512)</label>
+      <span style="flex: 3;"></span>
+      <span class="total-stats" style="flex: 0 1 48px; text-align: center;">{{evMaximums.total}}</span>
+    </div>
+  </fieldset>
+</section>

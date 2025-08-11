@@ -1,0 +1,101 @@
+{
+  "name": "Charged",
+  "type": "effect",
+  "img": "systems/ptr2e/img/perk-icons/Elamentalist.svg",
+  "system": {
+    "traits": [
+      "electric",
+      "psuedo-affliction"
+    ],
+    "description": "While afflicted with Charged, the creature's next damaging @Trait[Electric] Attack has +100% Power.",
+    "slug": "charged",
+    "publication": {
+      "source": "",
+      "authors": [],
+      "notes": ""
+    },
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "effects": [
+    {
+      "name": "Charged",
+      "img": "systems/ptr2e/img/perk-icons/Elamentalist.svg",
+      "type": "affliction",
+      "duration": {
+        "turns": 1,
+        "startTime": null,
+        "combat": null
+      },
+      "system": {
+        "changes": [
+          {
+            "type": "percentile-modifier",
+            "key": "electric-attack-power",
+            "value": 100,
+            "mode": 2,
+            "predicate": [],
+            "ignored": false,
+            "hideIfDisabled": false
+          }
+        ],
+        "removeOnRecall": false,
+        "removeAfterCombat": true,
+        "traits": [
+          "electric",
+          "psuedo-affliction"
+        ],
+        "slug": null,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0,
+        "priority": 50,
+        "formula": "",
+        "type": "damage"
+      },
+      "description": "While afflicted with Charged, the creature's next damaging @Trait[Electric] Attack has +100% Power.",
+      "statuses": [
+        "charged"
+      ],
+      "_id": "chargedcondition",
+      "_stats": {
+        "coreVersion": "13.346",
+        "systemId": null,
+        "systemVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null,
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "disabled": false,
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "sort": 0,
+      "flags": {}
+    }
+  ],
+  "_id": "chargedcondiitem",
+  "flags": {
+    "core": {}
+  },
+  "_stats": {
+    "coreVersion": "13.346",
+    "systemId": null,
+    "systemVersion": null,
+    "createdTime": null,
+    "modifiedTime": null,
+    "lastModifiedBy": null,
+    "compendiumSource": "Compendium.ptr2e.core-effects.Item.chargedcondiitem",
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  }
+}

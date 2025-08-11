@@ -1,0 +1,18 @@
+<section>
+  <fieldset>
+    <legend>Base Stats</legend>
+    {{#each stats as |value key|}}
+      <div class="form-group stat {{key}}">
+        <label for="{{concat "system.attributes." key ".base"}}">{{localize (concat "PTR2E.Attributes." key ".Label")}}</label>
+        <div class="form-fields {{key}}"></div>
+      </div>
+    {{/each}}
+    {{#unless isPokemon}}
+    <div class="form-group">
+      <label>Total (Max 110)</label>
+      <span style="flex: 3;"></span>
+      <span class="total-stats" style="flex: 0 1 48px; text-align: center;">{{baseMaximums.total}}</span>
+    </div>
+    {{/unless}}
+  </fieldset>
+</section>

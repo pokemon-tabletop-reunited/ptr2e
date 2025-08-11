@@ -13,20 +13,16 @@
     "diet": [
       "ominvore"
     ],
-    "movement": {
-      "primary": [
-        {
-          "type": "overland",
-          "value": 7
-        }
-      ],
-      "secondary": [
-        {
-          "type": "swim",
-          "value": 3
-        }
-      ]
-    },
+    "movement": [
+      {
+        "type": "overland",
+        "value": 7
+      },
+      {
+        "type": "swim",
+        "value": 3
+      }
+    ],
     "traits": [
       "pokemon",
       "bipedal",
@@ -35,7 +31,8 @@
       "premonition",
       "telekinetic-6",
       "lifesense-15",
-      "underdog"
+      "fully-evolved",
+      "jump-3"
     ],
     "abilities": {
       "starting": [
@@ -75,6 +72,14 @@
       {
         "slug": "acrobatics",
         "value": 30,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "astronomy",
+        "value": 50,
         "rvs": 0,
         "favourite": false,
         "hidden": false,
@@ -634,19 +639,38 @@
                 "level": null,
                 "knownMove": null
               },
-              "evolutions": []
+              "evolutions": [],
+              "perk": {
+                "x": 26,
+                "y": 26
+              }
             }
-          ]
+          ],
+          "perk": {
+            "x": 26,
+            "y": 26
+          }
         }
       ],
       "uuid": "Compendium.ptr2e.core-species.Item.yFoAoBaj6jXtkZlC",
-      "methods": []
+      "methods": [],
+      "perk": {
+        "x": 26,
+        "y": 26
+      }
     },
     "_migration": {
       "version": null,
       "previous": null
     },
-    "slug": "gothitelle"
+    "slug": "gothitelle",
+    "publication": {
+      "source": "PTR 2e Core - Unova Dex",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    }
   },
   "_id": "o8AO2CZ5Jty8SABk",
   "effects": []

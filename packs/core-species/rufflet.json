@@ -13,25 +13,22 @@
     "diet": [
       "omnivore"
     ],
-    "movement": {
-      "primary": [
-        {
-          "type": "flight",
-          "value": 9
-        }
-      ],
-      "secondary": [
-        {
-          "type": "overland",
-          "value": 3
-        }
-      ]
-    },
+    "movement": [
+      {
+        "type": "flight",
+        "value": 9
+      },
+      {
+        "type": "overland",
+        "value": 3
+      }
+    ],
     "traits": [
       "pokemon",
       "winged",
       "guster",
-      "pack-mon"
+      "pack-mon",
+      "jump-4"
     ],
     "abilities": {
       "starting": [
@@ -511,6 +508,10 @@
               "operand": "and"
             }
           ],
+          "perk": {
+            "x": 26,
+            "y": 26
+          },
           "details": {
             "gender": null,
             "item": null,
@@ -530,11 +531,15 @@
             },
             {
               "type": "item",
-              "item": "linking-chord",
+              "item": "linking-cord",
               "operand": "or",
               "held": false
             }
           ],
+          "perk": {
+            "x": 26,
+            "y": 26
+          },
           "details": {
             "gender": null,
             "item": null,
@@ -545,11 +550,22 @@
         }
       ],
       "uuid": "Compendium.ptr2e.core-species.Item.pyZamrkL16BWbkgG",
-      "methods": []
+      "methods": [],
+      "perk": {
+        "x": 26,
+        "y": 26
+      }
     },
     "_migration": {
       "version": null,
       "previous": null
+    },
+    "genderRatio": -1,
+    "publication": {
+      "source": "PTR 2e Core - Unova Dex",
+      "authors": [
+        "PTR 2e Team"
+      ]
     }
   },
   "_id": "pyZamrkL16BWbkgG",
