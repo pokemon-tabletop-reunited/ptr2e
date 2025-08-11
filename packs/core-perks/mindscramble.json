@@ -8,7 +8,7 @@
       "previous": null
     },
     "actions": [],
-    "description": "<p>Passive: Your Psychic-type attacks gain a 20% chance to inflict Confused 5. If they would already have a chance to inflict Confused, they increase that chance by 20%.</p>",
+    "description": "<p>Passive: Your @Trait[psychic] Type attacks gain a 20% chance to inflict @Affliction[confused 5]. If they would already have a chance to inflict @Affliction[confused], they increase that chance by 20%.</p>",
     "traits": [],
     "prerequisites": [
       "trait:psychic"
@@ -17,6 +17,10 @@
     "slug": "mindscramble",
     "nodes": [
       {
+        "x": 159,
+        "y": 113,
+        "hidden": false,
+        "type": "normal",
         "connected": [
           "firefly",
           "psychoportation",
@@ -27,18 +31,11 @@
           "manifest-psionic-power"
         ],
         "config": {
-          "alpha": null,
+          "texture": null,
           "backgroundColor": null,
           "borderColor": null,
-          "borderWidth": null,
-          "texture": null,
-          "tint": null,
-          "scale": null
+          "tint": null
         },
-        "hidden": false,
-        "type": "normal",
-        "x": 159,
-        "y": 113,
         "tier": null
       }
     ],
@@ -56,10 +53,7 @@
         "PTR 2e Team"
       ],
       "notes": ""
-    },
-    "originSlug": null,
-    "variant": null,
-    "mode": null
+    }
   },
   "img": "systems/ptr2e/img/svg/psychic_icon.svg",
   "effects": [
@@ -67,7 +61,7 @@
       "name": "Mindscramble",
       "type": "passive",
       "_id": "uAo2AehNmS7TiEH5",
-      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "img": "systems/ptr2e/img/svg/psychic_icon.svg",
       "system": {
         "changes": [
           {
@@ -81,14 +75,17 @@
             "priority": null,
             "ignored": false,
             "alterations": [],
-            "dontMerge": false
+            "dontMerge": false,
+            "isFixedChance": false
           }
         ],
         "slug": null,
         "traits": [],
-        "removeAfterCombat": true,
+        "removeAfterCombat": false,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
@@ -100,7 +97,7 @@
         "startRound": null,
         "startTurn": null
       },
-      "description": "",
+      "description": "<p>Passive: Your @Trait[psychic] Type attacks gain a 20% chance to inflict @Affliction[confused 5]. If they would already have a chance to inflict @Affliction[confused], they increase that chance by 20%.</p>",
       "origin": null,
       "tint": "#ffffff",
       "transfer": true,
@@ -110,12 +107,12 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "13.342",
+        "coreVersion": "13.346",
         "systemId": "ptr2e",
-        "systemVersion": "0.10.0-alpha.3.0.0",
+        "systemVersion": "1.4.2.beta",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null,
+        "modifiedTime": 1754226463125,
+        "lastModifiedBy": "dCIq77b7AO2frs8Z",
         "exportSource": null
       }
     }

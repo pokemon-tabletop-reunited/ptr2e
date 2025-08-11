@@ -11,6 +11,7 @@ import { CheckContext } from "@system/data.ts";
 import { extractEffectRolls, extractNotes } from "src/util/change-helpers.ts";
 import { CheckRollContext } from "@system/rolls/data.ts";
 import { CheckPTR2e } from "@system/check.ts";
+import { PlaceholderTrait } from "@module/data/models/trait.ts";
 
 /**
  * A generic action statistic that can be used for any type of action.
@@ -61,7 +62,15 @@ class GenericActionStatistic extends Statistic {
         `all`,
         `check`,
         `${action.type}`,
-        action.traits.map((t) => `${t.slug}-trait-${action.type}`),
+        action.traits.contents.flatMap((t) => {
+          const trait = t as PlaceholderTrait;
+          if(!(trait.value && trait.placeholders && Array.isArray(trait.placeholders) && trait.placeholders.length)) return `${t.slug}-trait-${action.type}`
+
+          return [
+            `${trait.slug.replace(new RegExp(trait.placeholders.at(0)!.valuePattern), "").replace(/^-/, "").replace(/-$/, "")}-trait-${action.type}`,
+            `${t.slug}-trait-${action.type}`
+          ]
+        }),
         `${action.slug}-${action.type}`,
         `${item.id}-${action.type}`,
         ...(data.domains ?? [])

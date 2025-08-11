@@ -1,6 +1,6 @@
 import { ActorPTR2e } from "@actor";
 import { ItemPTR2e } from "@item";
-import Trait from "./models/trait.ts";
+import Trait, { PlaceholderTrait } from "./models/trait.ts";
 import { ActiveEffectPTR2e } from "@effects";
 
 export default class RollOptionManager<TParent extends ActorPTR2e | ItemPTR2e | ActiveEffectPTR2e> {
@@ -53,6 +53,11 @@ export default class RollOptionManager<TParent extends ActorPTR2e | ItemPTR2e | 
   public addTrait(trait: Maybe<Trait>) {
     if (!trait) return;
     this.addOption("trait", trait.slug);
+
+    const t = trait as PlaceholderTrait;
+    if (!(t.value && t.placeholders && Array.isArray(t.placeholders) && t.placeholders.length)) return;
+
+    this.addOption("trait", t.slug.replace(new RegExp(t.placeholders.at(0)!.valuePattern), "").replace(/^-/, "").replace(/-$/, ""));
   }
 
   initialize() {

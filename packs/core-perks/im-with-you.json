@@ -5,51 +5,9 @@
   "_id": "Z9RvqAZwW3zjuOrn",
   "img": "systems/ptr2e/img/perk-icons/Musician.svg",
   "system": {
-    "actions": [
-      {
-        "name": "I'm With You!",
-        "slug": "im-with-you",
-        "description": "<p>Trigger: During the user's or another creature's Activation.</p><p>Effect: The target gains @Affliction[boosted 2].</p>",
-        "traits": [
-          "interrupt-1",
-          "social"
-        ],
-        "type": "attack",
-        "range": {
-          "target": "ally",
-          "distance": 10,
-          "unit": "m"
-        },
-        "cost": {
-          "activation": "simple",
-          "powerPoints": 2,
-          "trigger": "During the user's or another creature's Activation.",
-          "delay": null,
-          "priority": null
-        },
-        "img": "systems/ptr2e/img/perk-icons/Musician.svg",
-        "types": [
-          "untyped"
-        ],
-        "category": "status",
-        "free": true,
-        "variant": null,
-        "ephemeralVariant": false,
-        "power": null,
-        "accuracy": null,
-        "contestType": "",
-        "contestEffect": "",
-        "slot": null,
-        "summon": null,
-        "defaultVariant": null,
-        "flingItemId": "",
-        "offensiveStat": null,
-        "defensiveStat": null,
-        "predicate": []
-      }
-    ],
+    "actions": [],
     "slug": "im-with-you",
-    "description": "<p>Effect: By spending 2 PP as a Simple Action at @Trait[interrupt-1] during their or another creature's Activation, the user can grant one ally @Affliction[boosted 2].</p>",
+    "description": "<p>Connection: Helping Hand<br><br>Effect: The user's @UUID[Compendium.ptr2e.core-moves.losiXPVUcTy72boW]{Helping Hand} move gains @Trait[interrupt-1].</p>",
     "traits": [],
     "prerequisites": [
       {
@@ -60,7 +18,7 @@
               30
             ]
           },
-          "#Arts (Music) 30 "
+          "#Arts (Singing) 30 "
         ]
       }
     ],
@@ -103,10 +61,7 @@
         "PTR 2e Team"
       ],
       "notes": ""
-    },
-    "originSlug": null,
-    "variant": null,
-    "mode": null
+    }
   },
   "effects": [
     {
@@ -117,24 +72,39 @@
       "system": {
         "changes": [
           {
-            "type": "roll-effect",
-            "key": "im-with-you-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.boostedcondiitem",
-            "predicate": [],
-            "chance": 100,
-            "affects": "target",
+            "type": "grant-item",
+            "key": "",
+            "value": "Compendium.ptr2e.core-moves.Item.losiXPVUcTy72boW",
+            "predicate": [
+              "item:perk:im-with-you!"
+            ],
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "system.actions.0.free",
+                "value": "true"
+              }
+            ],
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            },
+            "allowDuplicate": false,
+            "reevaluateOnUpdate": true,
             "mode": 2,
-            "priority": null,
             "ignored": false,
-            "alterations": [],
-            "dontMerge": false
+            "inMemoryOnly": false,
+            "track": false,
+            "replaceSelf": false
           }
         ],
         "slug": null,
         "traits": [],
         "removeAfterCombat": true,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
@@ -156,11 +126,6 @@
       "_stats": {
         "compendiumSource": "Compendium.ptr2e.core-perks.Item.Z9RvqAZwW3zjuOrn.ActiveEffect.8rp8aXRLwsRFusz4",
         "duplicateSource": null,
-        "coreVersion": "13.342",
-        "systemId": "ptr2e",
-        "systemVersion": "0.10.0-alpha.5.0",
-        "createdTime": 1736113888306,
-        "modifiedTime": 1736113919041,
         "lastModifiedBy": "mK35yvCqCgiTUvKf",
         "exportSource": null
       }

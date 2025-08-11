@@ -915,6 +915,12 @@
     "description": "As an Easy Natural World Crafting Project, a creature can grow [Herbal] gear they are given. The [Herbal] is consumed in this process. At the end of 8 Day Spans, the creature gives a yield 2 of the [Herbal] on a successful crafting check, +1 additional [Herbal] for every DoS. See crafting rules for more details on crafting checks.\nSUBJECT TO CHANGE"
   },
   {
+    "slug": "hexcraft",
+    "label": "Hexcraft",
+    "related": [],
+    "description": "This creature is skilled in the arcane arts of hexcrafting. Gains access to the [Hexcraft] Tutor List."
+  },
+  {
     "slug": "hollow-husk",
     "label": "Hollow Husk",
     "related": [],
@@ -1325,10 +1331,10 @@
     "description": "Once every 5 Day Spans the creature produces a random [Mushroom] up to its Grade."
   },
   {
-    "slug": "musical",
-    "label": "Musical",
+    "slug": "musician",
+    "label": "Musician",
     "related": [],
-    "description": "TO BE DETERMINED"
+    "description": "This creature is skilled in musical performance and sound-based abilities. It gains access to the [Musician] Tutor List."
   },
   {
     "slug": "natural-backpack",
@@ -2248,24 +2254,6 @@
     "description": "Not quite a @trait[pokemon], creatures with this trait are 'digital monsters' or 'Digimon' for short. Creatures with this trait usually have the Digitize Trait, and always have access to the Digimon Perk Web. Other items with this trait are specifically designed for use by creatures with this trait, and games that center around Digimon and its settings."
   },
   {
-    "slug": "vaccine",
-    "label": "Vaccine",
-    "related": [],
-    "description": "@trait[digimon] with this trait deal 50% more damage with their Physical- and Special-Category Attacks to @trait[virus] creatures, and 33% less damage with those Attacks to @trait[data] creatures. AUTOMATION PENDING."
-  },
-  {
-    "slug": "virus",
-    "label": "Virus",
-    "related": [],
-    "description": "@trait[digimon] with this trait deal 50% more damage with their Physical- and Special-Category Attacks to @trait[data] creatures, and 33% less damage with those Attacks to @trait[vaccine] creatures. AUTOMATION PENDING."
-  },
-  {
-    "slug": "data",
-    "label": "Data",
-    "related": [],
-    "description": "@trait[digimon] with this trait deal 50% more damage with their Physical- and Special-Category Attacks to @trait[vaccine] creatures, and 33% less damage with those Attacks to @trait[virus] creatures. AUTOMATION PENDING."
-  },
-  {
     "slug": "homebrew",
     "label": "Homebrew",
     "related": [],
@@ -3163,7 +3151,17 @@
     "slug": "earthbound",
     "label": "Earthbound",
     "related": [],
-    "description": "The attack/ability hits all creatures in area-of-effect, so long as the area-of-effect affects surfaces/objects are connected or touching, so a creature sitting on a tree branch is hit if a creature on the ground below is targeted and the tree itself is in the affected area. Attacks with this trait are one step more effective against creatures with the Grounded Affliction."
+    "description": "The attack/ability hits all creatures in area-of-effect, so long as the area-of-effect affects surfaces/objects are connected or touching, so a creature sitting on a tree branch is hit if a creature on the ground below is targeted and the tree itself is in the affected area. Attacks with this trait are one step more effective against creatures with the Grounded Affliction.",
+    "changes": [
+      {
+        "type": "stage-modifier",
+        "key": "earthbound-trait-attack-effectiveness",
+        "value": 1,
+        "predicate": ["target:effect:affliction:grounded"],
+        "mode": 2,
+        "hideIfDisabled": true
+      }
+    ]
   },
   {
     "slug": "environ",
@@ -3829,7 +3827,7 @@
     "slug": "connection",
     "label": "Connection",
     "related": [],
-    "description": "Denotes if an Ability provides an Action or Attack onto a creature's Active List, not taking up a slot on the user's Active List."
+    "description": "Denotes if an Ability or Perk provides an Attack onto a creature's Active List, not taking up a slot on the user's Active List."
   },
   {
     "slug": "fusion",
@@ -4767,67 +4765,199 @@
   {
     "slug": "digimon",
     "label": "Digimon",
-    "related": ["vaccine", "data", "virus"],
+    "related": [
+      "vaccine",
+      "data",
+      "virus"
+    ],
     "description": "Grant access to the Digivolution Web. (In a future build)"
   },
   {
     "slug": "vaccine",
     "label": "Vaccine",
-    "related": ["digimon", "data", "virus"],
-    "description": "Gain +50% Damage versus Virus-trait Digimon. Inflict 33% less Damage vs Data-trait Digimon."
+    "related": [
+      "digimon",
+      "data",
+      "virus"
+    ],
+    "description": "Gain +50% Damage versus Virus-trait Digimon. Inflict 50% less Damage vs Data-trait Digimon.",
+    "type":"automated",
+    "changes": [
+      {
+        "type": "percentile-modifier",
+        "key": "damaging-attack-damage",
+        "value": 50,
+        "predicate": [
+          "target:trait:virus"
+        ],
+        "hideIfDisabled": true
+      },
+      {
+        "type": "percentile-modifier",
+        "key": "damaging-attack-damage",
+        "value": -50,
+        "predicate": [
+          "target:trait:data"
+        ],
+        "hideIfDisabled": true
+      }
+    ]
   },
   {
     "slug": "data",
     "label": "Data",
-    "related": ["vaccine", "digimon", "virus"],
-    "description": "Gain +50% Damage versus Vaccine-trait Digimon. Inflict 33% less Damage vs Virus-trait Digimon."
+    "related": [
+      "vaccine",
+      "digimon",
+      "virus"
+    ],
+    "description": "Gain +50% Damage versus Vaccine-trait Digimon. Inflict 50% less Damage vs Virus-trait Digimon.",
+    "type":"automated",
+    "changes": [
+      {
+        "type": "percentile-modifier",
+        "key": "damaging-attack-damage",
+        "value": 50,
+        "predicate": [
+          "target:trait:vaccine"
+        ],
+        "hideIfDisabled": true
+      },
+      {
+        "type": "percentile-modifier",
+        "key": "damaging-attack-damage",
+        "value": -50,
+        "predicate": [
+          "target:trait:virus"
+        ],
+        "hideIfDisabled": true
+      }
+    ]
   },
   {
     "slug": "virus",
     "label": "Virus",
-    "related": ["vaccine", "data", "digimon"],
-    "description": "Gain +50% Damage versus Data-trait Digimon. Inflict 33% less Damage vs Vaccine-trait Digimon."
+    "related": [
+      "vaccine",
+      "data",
+      "digimon"
+    ],
+    "description": "Gain +50% Damage versus Data-trait Digimon. Inflict 50% less Damage vs Vaccine-trait Digimon.",
+    "type":"automated",
+    "changes": [
+      {
+        "type": "percentile-modifier",
+        "key": "damaging-attack-damage",
+        "value": 50,
+        "predicate": [
+          "target:trait:data"
+        ],
+        "hideIfDisabled": true
+      },
+      {
+        "type": "percentile-modifier",
+        "key": "damaging-attack-damage",
+        "value": -50,
+        "predicate": [
+          "target:trait:vaccine"
+        ],
+        "hideIfDisabled": true
+      }
+    ]
   },
   {
     "slug": "free",
     "label": "Free",
-    "related": ["vaccine", "data", "virus", "digimon"],
+    "related": [
+      "vaccine",
+      "data",
+      "virus",
+      "digimon"
+    ],
     "description": "Neutrally aligned Digimon do not deal or receive more or less damage from any other Digimon Traits."
   },
   {
     "slug": "in-training",
     "label": "In Training",
-    "related": ["baby", "rookie", "champion", "ultimate", "mega", "ultra", "digimon"],
+    "related": [
+      "baby",
+      "rookie",
+      "champion",
+      "ultimate",
+      "mega",
+      "ultra",
+      "digimon"
+    ],
     "description": "In Training Digimon are one step up from Baby Digimon, but are still weak and undefined. Starter Digimon are sometimes given at this stage."
   },
   {
     "slug": "rookie",
     "label": "Rookie",
-    "related": ["baby", "in-training", "champion", "ultimate", "mega", "ultra", "digimon"],
+    "related": [
+      "baby",
+      "in-training",
+      "champion",
+      "ultimate",
+      "mega",
+      "ultra",
+      "digimon"
+    ],
     "description": "Rookie Digimon are capable of fighting at this stage, and usually gain traits defining them as Vaccine, Virus, or Data."
   },
   {
     "slug": "champion",
     "label": "Champion",
-    "related": ["baby", "in-training", "rookie", "ultimate", "mega", "ultra", "digimon"],
+    "related": [
+      "baby",
+      "in-training",
+      "rookie",
+      "ultimate",
+      "mega",
+      "ultra",
+      "digimon"
+    ],
     "description": "Champion Digimon are grown up and powerful, and are often the strongest Digimon you meet in the wild."
   },
   {
     "slug": "ultimate",
     "label": "Ultimate",
-    "related": ["baby", "in-training", "rookie", "champion", "mega", "ultra", "digimon"],
+    "related": [
+      "baby",
+      "in-training",
+      "rookie",
+      "champion",
+      "mega",
+      "ultra",
+      "digimon"
+    ],
     "description": "Ultimate Digimon have gone beyond the typical level of power, often becoming leaders of communities or petty tyrants of swathes of land."
   },
   {
     "slug": "mega",
     "label": "Mega",
-    "related": ["baby", "in-training", "rookie", "champion", "ultimate", "ultra", "digimon"],
+    "related": [
+      "baby",
+      "in-training",
+      "rookie",
+      "champion",
+      "ultimate",
+      "ultra",
+      "digimon"
+    ],
     "description": "Mega Digimon have powers that if misused could destroy their world. In some cases they are the servants of God.  Or are worshipped as gods themselves."
   },
   {
     "slug": "ultra",
     "label": "Ultra",
-    "related": ["baby", "in-training", "rookie", "champion", "ultimate", "mega", "digimon"],
+    "related": [
+      "baby",
+      "in-training",
+      "rookie",
+      "champion",
+      "ultimate",
+      "mega",
+      "digimon"
+    ],
     "description": "Ultra Digimon are true rarities, being temporary states of Mega Digimon, or DNA Fusions of multiple Mega Digimon."
   },
   {
@@ -4835,5 +4965,11 @@
     "label": "UFO",
     "related": [],
     "description": "This Trait denotes the creature to be or be in a Unidentified Flying Object (UFO). Meaning they must use Pilot (Aerospace) for its Rush skill."
+  },
+  {
+    "slug": "agitator",
+    "label": "Agitator",
+    "related": [],
+    "description": "This creature or item is specialised in the art of Agitation, using social moves to debuff their opponents."
   }
 ]

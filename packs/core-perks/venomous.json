@@ -13,20 +13,15 @@
         "slug": "venomous",
         "description": "<p>You gain the [Venomous] Trait.</p>",
         "cost": {
-          "activation": "free",
-          "powerPoints": 0
+          "activation": "free"
         },
         "type": "passive",
         "traits": [],
         "img": "icons/svg/explosion.svg",
         "range": {
           "target": "enemy",
-          "unit": "m",
-          "distance": 0
-        },
-        "variant": null,
-        "ephemeralVariant": false,
-        "hidden": false
+          "unit": "m"
+        }
       }
     ],
     "slug": "venomous",
@@ -75,10 +70,7 @@
         "PTR 2e Team"
       ],
       "notes": ""
-    },
-    "originSlug": null,
-    "variant": null,
-    "mode": null
+    }
   },
   "_id": "hvuakkloMFHGmBMe",
   "img": "systems/ptr2e/img/svg/poison_icon.svg",
@@ -87,24 +79,26 @@
       "name": "Venomous",
       "type": "passive",
       "_id": "IrKbdTOohqeeUv7w",
-      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "img": "systems/ptr2e/img/svg/poison_icon.svg",
       "system": {
         "changes": [
           {
             "type": "add-trait",
             "key": "",
-            "value": "Venomous",
+            "value": "venomous",
             "predicate": [],
-            "mode": 2,
             "priority": null,
+            "mode": 2,
             "ignored": false
           }
         ],
         "slug": null,
         "traits": [],
-        "removeAfterCombat": true,
+        "removeAfterCombat": false,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
@@ -116,7 +110,7 @@
         "startRound": null,
         "startTurn": null
       },
-      "description": "",
+      "description": "<p>You gain the @Trait[venomous] Trait.</p>",
       "origin": null,
       "tint": "#ffffff",
       "transfer": true,
@@ -126,12 +120,12 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "13.342",
+        "coreVersion": "13.346",
         "systemId": "ptr2e",
-        "systemVersion": "0.10.0-alpha.4.0.0",
+        "systemVersion": "1.4.2.beta",
         "createdTime": 1732563827501,
-        "modifiedTime": 1732563840313,
-        "lastModifiedBy": "IcBpMqhFuTck9VpX",
+        "modifiedTime": 1754225348008,
+        "lastModifiedBy": "dCIq77b7AO2frs8Z",
         "exportSource": null
       }
     }

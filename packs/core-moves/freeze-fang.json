@@ -8,7 +8,7 @@
       "previous": null
     },
     "publication": {
-      "source": "PTR2e Digimon Supplement - Digi Dex",
+      "source": "Digidex",
       "authors": [
         "Fox"
       ],
@@ -23,7 +23,8 @@
         "img": "systems/ptr2e/img/svg/ice_icon.svg",
         "traits": [
           "contact",
-          "jaw"
+          "jaw",
+          "digimon"
         ],
         "range": {
           "target": "creature",
@@ -44,7 +45,8 @@
         "description": "<p>This attack has a 10% chance each of inflicting @Affliction[frostbite 5] & @Affliction[frozen 2] to the target, and granting the user +1 Speed Stages for 5 activations.</p>"
       }
     ],
-    "grade": "C"
+    "grade": "C",
+    "slug": "freeze-fang"
   },
   "img": "systems/ptr2e/img/svg/ice_icon.svg",
   "effects": [
@@ -66,7 +68,8 @@
             "mode": 2,
             "priority": null,
             "ignored": false,
-            "alterations": []
+            "alterations": [],
+            "isFixedChance": false
           },
           {
             "type": "roll-effect",
@@ -85,7 +88,8 @@
             ],
             "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "isFixedChance": false
           },
           {
             "type": "roll-effect",
@@ -98,14 +102,17 @@
             "mode": 2,
             "priority": null,
             "ignored": false,
-            "alterations": []
+            "alterations": [],
+            "isFixedChance": false
           }
         ],
         "slug": null,
         "traits": [],
         "removeAfterCombat": true,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
@@ -127,15 +134,15 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.346",
         "systemId": "ptr2e",
         "systemVersion": "1.2.1.beta",
         "createdTime": null,
         "modifiedTime": null,
-        "lastModifiedBy": null
+        "lastModifiedBy": null,
+        "exportSource": null
       }
     }
   ],
-  "flags": {},
   "_id": "UZpXweatjhESiJL8"
 }

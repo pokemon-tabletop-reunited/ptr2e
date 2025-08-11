@@ -17,6 +17,7 @@ import { TagTokenPrompt } from "@module/effects/changes/token-tag/prompt.ts";
 import ConsumableSystem from "@item/data/consumable.ts";
 import PokeballActionPTR2e from "@module/data/models/pokeball-action.ts";
 import { ActiveEffectPTR2e } from "@effects";
+import { PlaceholderTrait } from "@module/data/models/trait.ts";
 
 type AttackStatisticData = StatisticData & Required<Pick<StatisticData, "defferedValueParams" | 'modifiers' | 'domains' | 'rollOptions'>>;
 type AttackRollParameters = AttackStatisticRollParameters
@@ -69,7 +70,15 @@ class AttackStatistic extends Statistic {
         `${attack.type}`,
         `${meleeOrRanged}-${attack.type}`,
         `${attack.category}-${attack.type}`,
-        attack.traits.map((t) => `${t.slug}-trait-${attack.type}`),
+        attack.traits.contents.flatMap((t) => {
+          const trait = t as PlaceholderTrait;
+          if(!(trait.value && trait.placeholders && Array.isArray(trait.placeholders) && trait.placeholders.length)) return `${t.slug}-trait-${attack.type}`
+
+          return [
+            `${trait.slug.replace(new RegExp(trait.placeholders.at(0)!.valuePattern), "").replace(/^-/, "").replace(/-$/, "")}-trait-${attack.type}`,
+            `${t.slug}-trait-${attack.type}`
+          ]
+        }),
         ...attack.types.map((t) => `${t}-${attack.type}`),
         `${attack.slug}-${attack.type}`,
         `${item.id}-${attack.type}`,
