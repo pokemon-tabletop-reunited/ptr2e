@@ -18,54 +18,26 @@
       {
         "name": "Resist!",
         "slug": "resist",
-        "description": "<p>The Target gains Resist 1.</p>",
+        "description": "<p>The Target gains @UUID[Compendium.ptr2e.core-effects.Item.resistcondititem]{Resist}.</p>",
         "traits": [
           "command",
           "style"
         ],
-        "type": "attack",
-        "img": "systems/ptr2e/img/icons/feat_icon.webp",
+        "type": "generic",
+        "img": "systems/ptr2e/img/perk-icons/Orders_Training.svg",
+        "cost": {
+          "activation": "simple",
+          "powerPoints": 1
+        },
         "range": {
           "target": "ally",
           "distance": 20,
           "unit": "m"
-        },
-        "cost": {
-          "activation": "simple",
-          "powerPoints": 2
-        },
-        "types": [
-          "untyped"
-        ],
-        "category": "status",
-        "free": true,
-        "predicate": []
-      },
-      {
-        "name": "Resist! (Self)",
-        "slug": "resist-self",
-        "description": "<p>The Target gains Resist 1.</p>",
-        "traits": [],
-        "type": "attack",
-        "img": "systems/ptr2e/img/icons/feat_icon.webp",
-        "range": {
-          "target": "self",
-          "unit": "m"
-        },
-        "cost": {
-          "activation": "simple",
-          "powerPoints": 2
-        },
-        "types": [
-          "untyped"
-        ],
-        "category": "status",
-        "free": true,
-        "predicate": []
+        }
       }
     ],
     "slug": "resist-style",
-    "description": "<p>The Target gains @UUID[Compendium.ptr2e.core-effects.resistcondititem]{Resist}.</p>",
+    "description": "<p>The Target gains Resist @UUID[Compendium.ptr2e.core-effects.Item.resistcondititem]{Resist}.</p>",
     "traits": [
       "command",
       "style"
@@ -115,65 +87,38 @@
   "effects": [
     {
       "name": "Resist Style",
-      "type": "affliction",
-      "_id": "N96jkDoxFPPsCTJ0",
+      "type": "passive",
+      "_id": "BXhQiD6VCYjWugOV",
       "img": "systems/ptr2e/img/icons/effect_icon.webp",
       "system": {
         "changes": [
           {
             "type": "roll-effect",
-            "key": "resist-attack",
+            "key": "resist-generic",
             "value": "Compendium.ptr2e.core-effects.Item.resistcondititem",
             "predicate": [],
             "chance": 100,
+            "isFixedChance": true,
             "affects": "target",
-            "label": "Resist!",
-            "mode": 2,
-            "priority": null,
-            "ignored": false,
             "alterations": [],
             "dontMerge": false,
-            "isFixedChance": false
-          },
-          {
-            "type": "roll-effect",
-            "key": "resist-self-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.resistcondititem",
-            "predicate": [],
-            "chance": 100,
-            "affects": "self",
-            "label": "Resist! (Self)",
             "mode": 2,
-            "priority": null,
-            "ignored": false,
-            "alterations": [],
-            "dontMerge": false,
-            "isFixedChance": false
+            "ignored": false
           }
         ],
         "slug": null,
-        "traits": [
-          "command",
-          "style"
-        ],
+        "traits": [],
         "removeAfterCombat": true,
         "removeOnRecall": false,
-        "stacks": 0,
-        "priority": 50,
-        "formula": "",
-        "type": "damage",
         "removeAfterAttacking": false,
-        "removeAfterAttacked": false
+        "removeAfterAttacked": false,
+        "stacks": 0
+
       },
       "disabled": false,
       "duration": {
         "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "combat": null
       },
       "description": "",
       "origin": null,
@@ -184,14 +129,7 @@
       "flags": {},
       "_stats": {
         "compendiumSource": null,
-        "duplicateSource": null,
-        "coreVersion": "13.346",
-        "systemId": "ptr2e",
-        "systemVersion": "1.1.2.beta",
-        "createdTime": null,
-        "modifiedTime": 1743268335699,
-        "lastModifiedBy": "QJgrK2D5gkPoparS",
-        "exportSource": null
+        "duplicateSource": null
       }
     }
   ],
