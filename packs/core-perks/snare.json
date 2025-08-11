@@ -18,15 +18,20 @@
         "slug": "snare",
         "description": "<p>You gain +1 Capture Power against [Pokemon] that have been entangled in a Net or on a Fishing Line.</p>",
         "cost": {
-          "activation": "free"
+          "activation": "free",
+          "powerPoints": 0
         },
         "type": "passive",
         "traits": [],
         "img": "icons/svg/explosion.svg",
         "range": {
           "target": "enemy",
-          "unit": "m"
-        }
+          "unit": "m",
+          "distance": 0
+        },
+        "variant": null,
+        "ephemeralVariant": false,
+        "hidden": false
       }
     ],
     "slug": "snare",
@@ -66,8 +71,18 @@
     "design": {
       "arena": "mental",
       "approach": "finesse",
-      "archetype": "Capture"
-    }
+      "archetype": "capture"
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "originSlug": null,
+    "variant": null,
+    "mode": null
   },
   "_id": "tw7DjZ6QkzrExVJA",
   "img": "systems/ptr2e/img/perk-icons/Capture%20Spec.svg",

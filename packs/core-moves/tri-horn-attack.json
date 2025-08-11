@@ -1,0 +1,121 @@
+{
+  "folder": "BImk1fcMbR5akA4z",
+  "name": "Tri-Horn Attack",
+  "type": "move",
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "publication": {
+      "source": "Digidex",
+      "authors": [
+        "Fox"
+      ],
+      "notes": ""
+    },
+    "traits": [],
+    "actions": [
+      {
+        "name": "Tri-Horn Attack",
+        "slug": "tri-horn-attack",
+        "type": "attack",
+        "img": "systems/ptr2e/img/svg/ground_icon.svg",
+        "traits": [
+          "contact",
+          "dash",
+          "push-3",
+          "digimon",
+          "horn"
+        ],
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 6
+        },
+        "types": [
+          "ground"
+        ],
+        "category": "physical",
+        "predicate": [],
+        "description": "<p>This attack has a 50% chance each to inflict @Affliction[paralysis 5] and @Affliction[splinter 5]</p>",
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "power": 150,
+        "accuracy": 100
+      }
+    ],
+    "grade": "A",
+    "slug": "tri-horn-attack"
+  },
+  "img": "systems/ptr2e/img/svg/ground_icon.svg",
+  "effects": [
+    {
+      "name": "Tri-Horn-Attack",
+      "type": "passive",
+      "_id": "lsGAuDSFZSQhMxrT",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "tri-horn-attack-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.paralysisconitem",
+            "predicate": [],
+            "chance": 50,
+            "affects": "target",
+            "alterations": [],
+            "dontMerge": false,
+            "mode": 2,
+            "ignored": false,
+            "isFixedChance": false
+          },
+          {
+            "type": "roll-effect",
+            "key": "tri-horn-attack-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.splinterconditem",
+            "predicate": [],
+            "chance": 50,
+            "affects": "target",
+            "alterations": [],
+            "dontMerge": false,
+            "mode": 2,
+            "ignored": false,
+            "isFixedChance": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.346",
+        "systemId": "ptr2e",
+        "systemVersion": "1.3.4.beta",
+        "lastModifiedBy": null
+      }
+    }
+  ],
+  "_id": "pY9wH5lCVmKZzxMm"
+}

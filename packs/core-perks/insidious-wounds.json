@@ -7,9 +7,9 @@
   "system": {
     "actions": [
       {
-        "name": "Insidious Wounds Action",
+        "name": "Insidious Wounds",
         "slug": "insidious-wounds",
-        "description": "<p>Trigger: The user hits a target that has at least one [Major Affliction] or [Minor Affliction] that inflicts effect damage.</p><p>Effect: The target has each of those Afflictions immediately reduce their Stacks  as though the creature had taken another Activation. This Action's PP Cost is multiplied by the number of Afflictions that are targeted.</p>",
+        "description": "<p>Effect: The user can spend 3 PP as a Complex Action to trigger the End of Activation effects of all @Trait[dot] Afflictions the target possesses, with their Duration/Stack Counts being decreased by -1 each upon this Action's resolution.</p>",
         "traits": [
           "interrupt-1"
         ],
@@ -17,63 +17,58 @@
         "range": {
           "target": "creature",
           "unit": "m",
-          "distance": 0
+          "distance": 10
         },
         "cost": {
-          "activation": "free",
-          "powerPoints": 1,
-          "trigger": "The user hits a target that has at least one [Major Affliction] or [Minor Affliction] that inflicts effect damage.",
-          "delay": null,
-          "priority": null
+          "activation": "complex",
+          "powerPoints": 3
         },
-        "img": "icons/svg/explosion.svg",
-        "variant": null
+        "img": "systems/ptr2e/img/perk-icons/Ninja.svg"
       }
     ],
     "slug": "insidious-wounds",
-    "description": "<p>When you hit a target that has at least one Affliction that inflicts effect damage, you may spend 1PP per Affliction to immediately reduce the Stacks of those Afflictions as though the creature had taken another Activation, triggering those Afflictions as appropriate. </p>",
-    "traits": [
-      "interrupt-1"
-    ],
+    "description": "<p>Effect: The user can spend 3 PP as a Complex Action to trigger the End of Activation effects of all @Trait[dot] Afflictions the target possesses, with their Duration/Stack Counts being decreased by -1 each upon this Action's resolution.</p>",
+    "traits": [],
     "prerequisites": [],
-    "cost": 4,
+    "cost": 2,
     "_migration": {
       "version": null,
       "previous": null
     },
     "nodes": [
       {
+        "x": 150,
+        "y": 69,
+        "hidden": false,
+        "type": "normal",
         "connected": [
           "suspicious-minds",
           "sadism",
           "cultivate-weakness"
         ],
         "config": {
-          "alpha": null,
-          "backgroundColor": "#808040",
-          "borderColor": null,
-          "borderWidth": null,
           "texture": "systems/ptr2e/img/perk-icons/Ninja.svg",
-          "tint": null,
-          "scale": null
+          "backgroundColor": null,
+          "borderColor": null,
+          "tint": null
         },
-        "hidden": false,
-        "type": "normal",
-        "x": 150,
-        "y": 69,
         "tier": null
       }
     ],
     "autoUnlock": [],
-    "originSlug": null,
-    "variant": null,
-    "mode": null,
     "global": true,
     "webs": [],
     "design": {
       "arena": "mental",
       "approach": "finesse",
-      "archetype": "Affliction"
+      "archetype": "affliction"
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
     }
   },
   "effects": []

@@ -17,6 +17,7 @@ export class PackLoader {
   ): AsyncGenerator<{ pack: CompendiumCollection<CompendiumDocument>; index: CompendiumIndex }, void, unknown> {
     const localize = localizer("PTR2E.ProgressBar");
     const sources = this.#getSources();
+    if(!indexFields.includes("system.publication.source")) indexFields.push("system.publication.source");
 
     const progress = new Progress({ steps: packs.length });
     for (const packId of packs) {
@@ -102,7 +103,7 @@ export class PackLoader {
     const progress = new Progress({ steps: packs.length });
 
     const loadedSources = new Set<string>();
-    const indexFields = ["system.publication.title", "system.source.value"];
+    const indexFields = ["system.publication.source"];
     const knownDocumentTypes = ["Actor", "Item"];
 
     for (const packId of packs) {
@@ -130,15 +131,7 @@ export class PackLoader {
   #getSourceFromIndexData(indexData: CompendiumIndexData): string {
     const system = indexData.system;
     if (!system) return "";
-
-    // Handle unmigrated data
-    return (
-      system.publication?.title ??
-      system.details?.publication?.title ??
-      system.source?.value ??
-      system.details?.source?.value ??
-      ""
-    );
+    return system.publication?.source ?? "";
   }
 
   reset(): void {

@@ -1,0 +1,119 @@
+{
+  "name": "Creeping Feeling",
+  "type": "move",
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "slug": "creeping-feeling",
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": "<p>Effect: On hit, the target has a 30% chance of being Flinched.</p>"
+    },
+    "traits": [],
+    "actions": [
+      {
+        "name": "Creeping Feeling",
+        "slug": "creeping-feeling",
+        "type": "attack",
+        "img": "systems/ptr2e/img/svg/ghost_icon.svg",
+        "traits": [
+          "pulse",
+          "social"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 6,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 1
+        },
+        "types": [
+          "ghost"
+        ],
+        "category": "special",
+        "power": 35,
+        "accuracy": 95,
+        "predicate": [],
+        "description": "<p><span style=\"font-family: Signika, sans-serif\">Effect: On hit, the target has a 30% chance of being Flinched.</span></p>"
+      }
+    ],
+    "grade": "E"
+  },
+  "_id": "NBrY9HtsrILhtrgZ",
+  "img": "systems/ptr2e/img/svg/ghost_icon.svg",
+  "effects": [
+    {
+      "name": "Creeping Feeling",
+      "type": "passive",
+      "_id": "wpyTNqaE9BlZUYiL",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "creeping-feeling-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.advanceffectitem",
+            "predicate": [],
+            "chance": 30,
+            "affects": "target",
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "system.amount",
+                "value": -30
+              },
+              {
+                "mode": 5,
+                "property": "name",
+                "value": "Flinch 30%"
+              }
+            ],
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "dontMerge": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": "Compendium.ptr2e.core-moves.Item.05gTyZzErLsW9RtE.ActiveEffect.dStoecgRLGTkIVx9",
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "1.0.7.beta",
+        "createdTime": 1740927920269,
+        "modifiedTime": 1740927930662,
+        "lastModifiedBy": "01onCaJSVMVOgMDI"
+      }
+    }
+  ]
+}

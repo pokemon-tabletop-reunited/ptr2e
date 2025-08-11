@@ -1,0 +1,137 @@
+{
+  "folder": "BImk1fcMbR5akA4z",
+  "name": "Nail Bone",
+  "type": "move",
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "publication": {
+      "source": "Digidex",
+      "authors": [
+        "Fox"
+      ],
+      "notes": ""
+    },
+    "traits": [],
+    "actions": [
+      {
+        "name": "Nail Bone",
+        "slug": "nail-bone",
+        "type": "attack",
+        "img": "systems/ptr2e/img/svg/ghost_icon.svg",
+        "traits": [
+          "arcane",
+          "digimon"
+        ],
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 6
+        },
+        "types": [
+          "ghost"
+        ],
+        "category": "status",
+        "predicate": [],
+        "description": "<p>This attack inflicts @Tick[-4] of Damage, and has a 50% chance each to inflict @Affliction[bleed 5] and @Affliction[stunted 5] . This attack bypasses @Trait[defensive] effects.</p>",
+        "range": {
+          "target": "enemy",
+          "distance": 10,
+          "unit": "m"
+        },
+        "accuracy": 100
+      }
+    ],
+    "grade": "A",
+    "slug": "nail-bone"
+  },
+  "img": "systems/ptr2e/img/svg/ghost_icon.svg",
+  "effects": [
+    {
+      "name": "Nail Bone",
+      "type": "passive",
+      "_id": "nEjFvNPgwKY3WDxP",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "nail-bone-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.bleedconditiitem",
+            "predicate": [],
+            "chance": 50,
+            "affects": "target",
+            "alterations": [],
+            "dontMerge": false,
+            "isFixedChance": false,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "roll-effect",
+            "key": "nail-bone-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.stuntedcondiitem",
+            "predicate": [],
+            "chance": 50,
+            "affects": "target",
+            "alterations": [],
+            "dontMerge": false,
+            "isFixedChance": false,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "roll-effect",
+            "key": "nail-bone-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.4DlXFTVooz07YcDm",
+            "predicate": [],
+            "chance": 100,
+            "isFixedChance": true,
+            "affects": "target",
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "system.changes.0.value",
+                "value": -4
+              }
+            ],
+            "dontMerge": false,
+            "mode": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.346",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.2.beta",
+        "lastModifiedBy": "mK35yvCqCgiTUvKf",
+        "modifiedTime": 1754303788211
+      }
+    }
+  ],
+  "_id": "AMtLIAeCZbzc6Ikr"
+}

@@ -1,3 +1,7 @@
+#ui-right #ui-right-column-1 {
+  position: relative;
+}
+
 .clock-panel {
   background: unset;
   box-shadow: unset;
@@ -15,6 +19,11 @@
 
   .clock-list {
     display: contents;
+  }
+
+  section {
+    max-height: 32vh;
+    flex-wrap: wrap-reverse;
   }
 }
 
@@ -83,6 +92,7 @@
     background: var(--color-cool-5-75);
     box-shadow: 0 0 4px rgba(0, 0, 0, 0.5);
     color: white;
+    width: min-content;
 
     .clock {
       cursor: pointer;

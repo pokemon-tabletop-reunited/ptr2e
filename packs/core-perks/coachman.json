@@ -1,0 +1,56 @@
+{
+  "name": "Coachman",
+  "_id": "Sog9ZmzWvASR3hnR",
+  "type": "perk",
+  "img": "systems/ptr2e/img/perk-icons/Mechanist.svg",
+  "effects": [],
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "publication": {
+      "source": "PTR2e Core",
+      "authors": [
+        "Dragoon"
+      ],
+      "notes": ""
+    },
+    "actions": [],
+    "slug": null,
+    "description": "<p>Effect: The user may use @Trait[readied] Actions with +20% Delay, ignoring the trait’s Movement restrictions for vehicles the user is Crewing. The user may only apply this Perk with vehicles that share the same category of Pilot Skill that the user has that meets the prerequisites for this Perk.</p>",
+    "traits": [
+      "pilot"
+    ],
+    "prerequisites": [
+      "One Pilot Skill at 50+ (Not Automated)"
+    ],
+    "autoUnlock": [],
+    "cost": 3,
+    "originSlug": null,
+    "design": {
+      "arena": "mental",
+      "approach": "finesse",
+      "archetype": "pilot"
+    },
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": [],
+    "nodes": [
+      {
+        "x": 76,
+        "y": 77,
+        "connected": [
+          "minor-buff-54",
+          "hard-swerve",
+          "power-steering",
+          "take-the-wheel"
+        ],
+        "hidden": false,
+        "type": "normal",
+        "tier": null
+      }
+    ]
+  }
+}

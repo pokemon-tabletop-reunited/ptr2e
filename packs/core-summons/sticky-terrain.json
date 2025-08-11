@@ -1,0 +1,136 @@
+{
+  "name": "Sticky Terrain",
+  "type": "summon",
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "slug": "sticky-terrain",
+    "traits": [
+      "partial-automation"
+    ],
+    "actions": [],
+    "baseAV": 150,
+    "duration": 3
+  },
+  "_id": "PLNJYWSXWXWzHlb8",
+  "img": "systems/ptr2e/img/svg/bug_icon.svg",
+  "effects": [
+    {
+      "name": "Sticky Terrain",
+      "type": "summon",
+      "_id": "CrIAURlUT1wG84Yw",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "percentile-modifier",
+            "key": "bug-attack-power",
+            "value": 30,
+            "predicate": [],
+            "label": "Sticky Bug Power Boost",
+            "mode": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          },
+          {
+            "type": "grant-effect",
+            "key": "",
+            "value": "Compendium.ptr2e.core-effects.Item.stuckconditiitem",
+            "predicate": [
+              {
+                "nor": [
+                  "trait:bug",
+                  "trait:wallclimber"
+                ]
+              }
+            ],
+            "reevaluateOnUpdate": true,
+            "alterations": [],
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            },
+            "allowDuplicate": false,
+            "label": "Sticky Stuck",
+            "mode": 2,
+            "ignored": false,
+            "inMemoryOnly": false,
+            "track": false,
+            "replaceSelf": false
+          },
+          {
+            "type": "grant-effect",
+            "key": "",
+            "value": "Compendium.ptr2e.core-effects.Item.hinderedconditem",
+            "predicate": [
+              {
+                "nor": [
+                  "trait:bug",
+                  "trait:wallclimber"
+                ]
+              }
+            ],
+            "label": "Sticky Hindered",
+            "alterations": [],
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            },
+            "reevaluateOnUpdate": true,
+            "allowDuplicate": false,
+            "mode": 2,
+            "ignored": false,
+            "inMemoryOnly": false,
+            "track": false,
+            "replaceSelf": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0,
+        "priority": 50,
+        "formula": "",
+        "type": "damage",
+        "targetType": "all",
+        "targetUuid": null
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.346",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.1.beta",
+        "createdTime": 1753733022807,
+        "modifiedTime": 1753734934274,
+        "lastModifiedBy": "QT9RUSVuyZd4bDWO"
+      }
+    }
+  ],
+  "flags": {}
+}

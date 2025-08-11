@@ -1,0 +1,136 @@
+{
+  "folder": "minorbuffsfolder",
+  "name": "Backpacker",
+  "type": "perk",
+  "_id": "VrNeav68NYWBJGuo",
+  "img": "systems/ptr2e/img/perk-icons/Exploration.svg",
+  "system": {
+    "actions": [],
+    "slug": "backpacker",
+    "description": "<p>Increase your Inventory Point (IP) reservoir by 2.</p>",
+    "traits": [
+      "minor-buff"
+    ],
+    "prerequisites": [
+      {
+        "gte": [
+          "{actor|skills.resources.mod}",
+          30
+        ]
+      }
+    ],
+    "cost": 1,
+    "_migration": {
+      "version": null,
+      "previous": null
+    },
+    "variant": "multi",
+    "mode": "individual",
+    "nodes": [
+      {
+        "connected": [
+          "trained-wielder",
+          "dress-to-impress",
+          "dual-wielder",
+          "harry"
+        ],
+        "config": {
+          "alpha": null,
+          "backgroundColor": "#408080",
+          "borderColor": null,
+          "borderWidth": null,
+          "texture": "systems/ptr2e/img/perk-icons/Exploration.svg",
+          "tint": null,
+          "scale": null
+        },
+        "hidden": false,
+        "type": "normal",
+        "x": 189,
+        "y": 63,
+        "tier": null
+      }
+    ],
+    "autoUnlock": [],
+    "originSlug": null,
+    "global": false,
+    "webs": [],
+    "design": {
+      "arena": "physical",
+      "approach": "resilience",
+      "archetype": "backpacker"
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    }
+  },
+  "effects": [
+    {
+      "name": "Backpacker",
+      "type": "passive",
+      "_id": "okWzVpubgGqDryhJ",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "basic",
+            "key": "system.modifiers.inventoryPoints",
+            "value": 2,
+            "predicate": [],
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "roll-option",
+            "value": "backpacker",
+            "domain": "all",
+            "count": true,
+            "key": "",
+            "mode": 2,
+            "predicate": [],
+            "ignored": false,
+            "suboptions": [],
+            "state": true
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "13.342",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.2.4.3",
+        "createdTime": 1729174922170,
+        "modifiedTime": 1729175404315,
+        "lastModifiedBy": "Kc3DOunCh3ClAeHS",
+        "exportSource": null
+      }
+    }
+  ]
+}

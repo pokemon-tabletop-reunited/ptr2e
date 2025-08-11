@@ -9,73 +9,62 @@
     "slug": "x-headed",
     "label": "X Headed",
     "related": [],
-    "description": "Lists the number of heads the creature possesses, equal to X. Only used for the Multi-headed Ability.\nSUBJECT TO CHANGE"
+    "description": "Lists the number of heads the creature possesses, equal to X. Only used for the Multi-headed Ability.",
+    "placeholders": [
+      {
+        "keyPattern": "\\d+-headed",
+        "labelPattern": "X",
+        "valuePattern": "\\d+",
+        "descriptionPattern": "Lists the number of heads the creature possesses, equal to X.",
+        "descriptionReplacement": "This creature possesses {{x}} heads."
+      }
+    ]
   },
   {
-    "slug": "2-headed",
-    "label": "2 Headed",
-    "related": [],
-    "description": "This creature possesses two heads. Only used for the Multi-headed Ability.\nSUBJECT TO CHANGE"
-  },
-  {
-    "slug": "4-headed",
-    "label": "4 Headed",
-    "related": [],
-    "description": "This creature possesses four heads. Only used for the Multi-headed Ability.\nSUBJECT TO CHANGE"
-  },
-  {
-    "slug": "5-headed",
-    "label": "5 Headed",
-    "related": [],
-    "description": "This creature possesses five heads. Only used for the Multi-headed Ability.\nSUBJECT TO CHANGE"
-  },
-  {
-    "slug": "6-headed",
-    "label": "6 Headed",
-    "related": [],
-    "description": "This creature possesses six heads. Only used for the Multi-headed Ability.\nSUBJECT TO CHANGE"
-  },
-  {
-    "slug": "7-headed",
-    "label": "7 Headed",
-    "related": [],
-    "description": "This creature possesses seven heads. Only used for the Multi-headed Ability.\nSUBJECT TO CHANGE"
-  },
-  {
-    "slug": "8-headed",
-    "label": "8 Headed",
-    "related": [],
-    "description": "This creature possesses eight heads. Only used for the Multi-headed Ability.\nSUBJECT TO CHANGE"
-  },
-  {
-    "slug": "9-headed",
-    "label": "9 Headed",
-    "related": [],
-    "description": "This creature possesses nine heads. Only used for the Multi-headed Ability.\nSUBJECT TO CHANGE"
-  },
-  {
-    "slug": "10-headed",
-    "label": "10 Headed",
-    "related": [],
-    "description": "This creature possesses ten heads. Only used for the Multi-headed Ability.\nSUBJECT TO CHANGE"
-  },
-  {
-    "slug": "11-headed",
-    "label": "11 Headed",
-    "related": [],
-    "description": "This creature possesses eleven heads. Only used for the Multi-headed Ability.\nSUBJECT TO CHANGE"
-  },
-  {
-    "slug": "3-headed",
-    "label": "3 Headed",
-    "related": [],
-    "description": "This creature possesses twelve heads. Only used for the Multi-headed Ability.\nSUBJECT TO CHANGE"
+    "slug": "boss-xy",
+    "label": "Boss XX.Y",
+    "related": [
+      "ace"
+    ],
+    "description": "Denotes a creature as a Boss and applies a HP & PP multiplier of XX.Y.",
+    "placeholders": [
+      {
+        "keyPattern": "boss-\\d+\\d",
+        "labelPattern": "XX",
+        "valuePattern": "(\\d+)\\d",
+        "descriptionPattern": "XX.Y",
+        "descriptionReplacement": "{{x}}.Y",
+        "valueDivisor": "."
+      },
+      {
+        "keyPattern": "boss-\\d+\\d",
+        "labelPattern": "Y",
+        "valuePattern": "\\d$",
+        "descriptionPattern": ".Y",
+        "descriptionReplacement": ".{{x}}"
+      }
+    ],
+    "changes": [
+      {
+        "type": "basic",
+        "key": "system.modifiers.hpMultiplier",
+        "value": "{trait|value}",
+        "mode": 5
+      },
+      {
+        "type": "basic",
+        "key": "system.modifiers.ppMultiplier",
+        "value": "{trait|value}",
+        "mode": 5
+      }
+    ]
   },
   {
     "slug": "trainer",
     "label": "Trainer",
     "related": [],
-    "description": "A Pokémon Trainer is a person who catches, trains, cares for, and battles with Pokémon. Generally, Trainers possess multiple Pokémon, and interact with their world in unique, significant ways. In most settings, Trainers have their Pokémon with them at all times, with some manner to capture and store them, keeping them out of harm's way and keeping a small stable of Pokémon available at any given time, know as their Team."
+    "description": "A Pokémon Trainer is a person who catches, trains, cares for, and battles with Pokémon. Generally, Trainers possess multiple Pokémon, and interact with their world in unique, significant ways. In most settings, Trainers have their Pokémon with them at all times, with some manner to capture and store them, keeping them out of harm's way and keeping a small stable of Pokémon available at any given time, know as their Team.",
+    "type": "automated"
   },
   {
     "slug": "expedition-leader",
@@ -167,7 +156,17 @@
     "slug": "bladed",
     "label": "Bladed",
     "related": [],
-    "description": "This creature possesses effective edged limbs, body parts, or tools. Confers [Sharp] to @Trait[adaptable] actions, and grants access to the [Bladed] Tutor List."
+    "description": "This creature possesses effective edged limbs, body parts, or tools as part of its anatomy. Confers [Sharp] to @Trait[adaptable] actions, and grants access to the [Bladed] Tutor List.",
+    "type": "automated",
+    "changes": [
+      {
+        "type": "alter-attack",
+        "key": "adaptable-trait-attack",
+        "property": "traits",
+        "mode": "2",
+        "value": "sharp"
+      }
+    ]
   },
   {
     "slug": "blindsight-x",
@@ -387,7 +386,17 @@
     "slug": "deafening",
     "label": "Deafening",
     "related": [],
-    "description": "This creature is capable of being extremely loud, to the point of pain. The user adds the [Sonic] trait to its @Trait[adaptable] attacks. As a Simple Action, the creature can spend 4 PP to give its Sonic Attacks +20% Power and a 10% chance to inflict Suppressed 5 on hit for the next 4 Activations. The creature gains access to the [Deafening] Tutor List."
+    "description": "This creature is capable of being extremely loud, to the point of pain. The user adds the [Sonic] trait to its @Trait[adaptable] attacks. As a Simple Action, the creature can spend 4 PP to give its Sonic Attacks +20% Power and a 10% chance to inflict Suppressed 5 on hit for the next 4 Activations. The creature gains access to the [Deafening] Tutor List.",
+    "type": "automated",
+    "changes": [
+      {
+        "type": "alter-attack",
+        "key": "adaptable-trait-attack",
+        "property": "traits",
+        "mode": "2",
+        "value": "sonic"
+      }
+    ]
   },
   {
     "slug": "deep-breath",
@@ -543,73 +552,337 @@
     "slug": "glow-1",
     "label": "Glow 1",
     "related": [],
-    "description": "This creature may choose, as a Free Action to illuminate (or no longer illuminate) an area with Bright/Dim Light in an Emanation up to 1m and 3m respectively (3m of Dim Light per 1m of Bright Light)."
+    "description": "This creature may choose, as a Free Action to illuminate (or no longer illuminate) an area with Bright/Dim Light in an Emanation up to 1m and 3m respectively (3m of Dim Light per 1m of Bright Light).",
+    "type": "automated",
+    "changes": [
+      {
+        "type": "roll-option",
+        "value": "toggle:glow",
+        "domain": "all",
+        "toggleable": true,
+        "state": true
+      },
+      {
+        "type": "token-alterations",
+        "predicate": [
+          "toggle:glow"
+        ],
+        "texture": "{actor|img}",
+        "light": {
+          "bright": 1,
+          "angle": 360,
+          "dim": 3
+        }
+      }
+    ]
   },
   {
     "slug": "glow-2",
     "label": "Glow 2",
     "related": [],
-    "description": "This creature may choose, as a Free Action to illuminate (or no longer illuminate) an area with Bright/Dim Light in an Emanation up to 2m and 6m respectively (3m of Dim Light per 1m of Bright Light)."
+    "description": "This creature may choose, as a Free Action to illuminate (or no longer illuminate) an area with Bright/Dim Light in an Emanation up to 2m and 6m respectively (3m of Dim Light per 1m of Bright Light).",
+    "type": "automated",
+    "changes": [
+      {
+        "type": "roll-option",
+        "value": "toggle:glow",
+        "domain": "all",
+        "toggleable": true,
+        "state": true
+      },
+      {
+        "type": "token-alterations",
+        "predicate": [
+          "toggle:glow"
+        ],
+        "texture": "{actor|img}",
+        "light": {
+          "bright": 2,
+          "angle": 360,
+          "dim": 6
+        }
+      }
+    ]
   },
   {
     "slug": "glow-3",
     "label": "Glow 3",
     "related": [],
-    "description": "This creature may choose, as a Free Action to illuminate (or no longer illuminate) an area with Bright/Dim Light in an Emanation up to 3m and 9m respectively (3m of Dim Light per 1m of Bright Light)."
+    "description": "This creature may choose, as a Free Action to illuminate (or no longer illuminate) an area with Bright/Dim Light in an Emanation up to 3m and 9m respectively (3m of Dim Light per 1m of Bright Light).",
+    "type": "automated",
+    "changes": [
+      {
+        "type": "roll-option",
+        "value": "toggle:glow",
+        "domain": "all",
+        "toggleable": true,
+        "state": true
+      },
+      {
+        "type": "token-alterations",
+        "predicate": [
+          "toggle:glow"
+        ],
+        "texture": "{actor|img}",
+        "light": {
+          "bright": 3,
+          "angle": 360,
+          "dim": 9
+        }
+      }
+    ]
   },
   {
     "slug": "glow-4",
     "label": "Glow 4",
     "related": [],
-    "description": "This creature may choose, as a Free Action to illuminate (or no longer illuminate) an area with Bright/Dim Light in an Emanation up to 4m and 12m respectively (3m of Dim Light per 1m of Bright Light)."
+    "description": "This creature may choose, as a Free Action to illuminate (or no longer illuminate) an area with Bright/Dim Light in an Emanation up to 4m and 12m respectively (3m of Dim Light per 1m of Bright Light).",
+    "type": "automated",
+    "changes": [
+      {
+        "type": "roll-option",
+        "value": "toggle:glow",
+        "domain": "all",
+        "toggleable": true,
+        "state": true
+      },
+      {
+        "type": "token-alterations",
+        "predicate": [
+          "toggle:glow"
+        ],
+        "texture": "{actor|img}",
+        "light": {
+          "bright": 4,
+          "angle": 360,
+          "dim": 12
+        }
+      }
+    ]
   },
   {
     "slug": "glow-5",
     "label": "Glow 5",
     "related": [],
-    "description": "This creature may choose, as a Free Action to illuminate (or no longer illuminate) an area with Bright/Dim Light in an Emanation up to 5m and 15m respectively (3m of Dim Light per 1m of Bright Light)."
+    "description": "This creature may choose, as a Free Action to illuminate (or no longer illuminate) an area with Bright/Dim Light in an Emanation up to 5m and 15m respectively (3m of Dim Light per 1m of Bright Light).",
+    "type": "automated",
+    "changes": [
+      {
+        "type": "roll-option",
+        "value": "toggle:glow",
+        "domain": "all",
+        "toggleable": true,
+        "state": true
+      },
+      {
+        "type": "token-alterations",
+        "predicate": [
+          "toggle:glow"
+        ],
+        "texture": "{actor|img}",
+        "light": {
+          "bright": 5,
+          "angle": 360,
+          "dim": 15
+        }
+      }
+    ]
   },
   {
     "slug": "glow-6",
     "label": "Glow 6",
     "related": [],
-    "description": "This creature may choose, as a Free Action to illuminate (or no longer illuminate) an area with Bright/Dim Light in an Emanation up to 6m and 18m respectively (3m of Dim Light per 1m of Bright Light)."
+    "description": "This creature may choose, as a Free Action to illuminate (or no longer illuminate) an area with Bright/Dim Light in an Emanation up to 6m and 18m respectively (3m of Dim Light per 1m of Bright Light).",
+    "type": "automated",
+    "changes": [
+      {
+        "type": "roll-option",
+        "value": "toggle:glow",
+        "domain": "all",
+        "toggleable": true,
+        "state": true
+      },
+      {
+        "type": "token-alterations",
+        "predicate": [
+          "toggle:glow"
+        ],
+        "texture": "{actor|img}",
+        "light": {
+          "bright": 7,
+          "angle": 360,
+          "dim": 18
+        }
+      }
+    ]
   },
   {
     "slug": "glow-7",
     "label": "Glow 7",
     "related": [],
-    "description": "This creature may choose, as a Free Action to illuminate (or no longer illuminate) an area with Bright/Dim Light in an Emanation up to 7m and 21m respectively (3m of Dim Light per 1m of Bright Light)."
+    "description": "This creature may choose, as a Free Action to illuminate (or no longer illuminate) an area with Bright/Dim Light in an Emanation up to 7m and 21m respectively (3m of Dim Light per 1m of Bright Light).",
+    "type": "automated",
+    "changes": [
+      {
+        "type": "roll-option",
+        "value": "toggle:glow",
+        "domain": "all",
+        "toggleable": true,
+        "state": true
+      },
+      {
+        "type": "token-alterations",
+        "predicate": [
+          "toggle:glow"
+        ],
+        "texture": "{actor|img}",
+        "light": {
+          "bright": 7,
+          "angle": 360,
+          "dim": 21
+        }
+      }
+    ]
   },
   {
     "slug": "glow-8",
     "label": "Glow 8",
     "related": [],
-    "description": "This creature may choose, as a Free Action to illuminate (or no longer illuminate) an area with Bright/Dim Light in an Emanation up to 8m and 24m respectively (3m of Dim Light per 1m of Bright Light)."
+    "description": "This creature may choose, as a Free Action to illuminate (or no longer illuminate) an area with Bright/Dim Light in an Emanation up to 8m and 24m respectively (3m of Dim Light per 1m of Bright Light).",
+    "type": "automated",
+    "changes": [
+      {
+        "type": "roll-option",
+        "value": "toggle:glow",
+        "domain": "all",
+        "toggleable": true,
+        "state": true
+      },
+      {
+        "type": "token-alterations",
+        "predicate": [
+          "toggle:glow"
+        ],
+        "texture": "{actor|img}",
+        "light": {
+          "bright": 8,
+          "angle": 360,
+          "dim": 24
+        }
+      }
+    ]
   },
   {
     "slug": "glow-9",
     "label": "Glow 9",
     "related": [],
-    "description": "This creature may choose, as a Free Action to illuminate (or no longer illuminate) an area with Bright/Dim Light in an Emanation up to 9m and 27m respectively (3m of Dim Light per 1m of Bright Light)."
+    "description": "This creature may choose, as a Free Action to illuminate (or no longer illuminate) an area with Bright/Dim Light in an Emanation up to 9m and 27m respectively (3m of Dim Light per 1m of Bright Light).",
+    "type": "automated",
+    "changes": [
+      {
+        "type": "roll-option",
+        "value": "toggle:glow",
+        "domain": "all",
+        "toggleable": true,
+        "state": true
+      },
+      {
+        "type": "token-alterations",
+        "predicate": [
+          "toggle:glow"
+        ],
+        "texture": "{actor|img}",
+        "light": {
+          "bright": 9,
+          "angle": 360,
+          "dim": 27
+        }
+      }
+    ]
   },
   {
     "slug": "glow-10",
     "label": "Glow 10",
     "related": [],
-    "description": "This creature may choose, as a Free Action to illuminate (or no longer illuminate) an area with Bright/Dim Light in an Emanation up to 10m and 30m respectively (3m of Dim Light per 1m of Bright Light)."
+    "description": "This creature may choose, as a Free Action to illuminate (or no longer illuminate) an area with Bright/Dim Light in an Emanation up to 10m and 30m respectively (3m of Dim Light per 1m of Bright Light).",
+    "type": "automated",
+    "changes": [
+      {
+        "type": "roll-option",
+        "value": "toggle:glow",
+        "domain": "all",
+        "toggleable": true,
+        "state": true
+      },
+      {
+        "type": "token-alterations",
+        "predicate": [
+          "toggle:glow"
+        ],
+        "texture": "{actor|img}",
+        "light": {
+          "bright": 10,
+          "angle": 360,
+          "dim": 30
+        }
+      }
+    ]
   },
   {
     "slug": "glow-11",
     "label": "Glow 11",
     "related": [],
-    "description": "This creature may choose, as a Free Action to illuminate (or no longer illuminate) an area with Bright/Dim Light in an Emanation up to 11m and 33m respectively (3m of Dim Light per 1m of Bright Light)."
+    "description": "This creature may choose, as a Free Action to illuminate (or no longer illuminate) an area with Bright/Dim Light in an Emanation up to 11m and 33m respectively (3m of Dim Light per 1m of Bright Light).",
+    "type": "automated",
+    "changes": [
+      {
+        "type": "roll-option",
+        "value": "toggle:glow",
+        "domain": "all",
+        "toggleable": true,
+        "state": true
+      },
+      {
+        "type": "token-alterations",
+        "predicate": [
+          "toggle:glow"
+        ],
+        "texture": "{actor|img}",
+        "light": {
+          "bright": 11,
+          "angle": 360,
+          "dim": 33
+        }
+      }
+    ]
   },
   {
     "slug": "glow-12",
     "label": "Glow 12",
     "related": [],
-    "description": "This creature may choose, as a Free Action to illuminate (or no longer illuminate) an area with Bright/Dim Light in an Emanation up to 12m and 36m respectively (3m of Dim Light per 1m of Bright Light)."
+    "description": "This creature may choose, as a Free Action to illuminate (or no longer illuminate) an area with Bright/Dim Light in an Emanation up to 12m and 36m respectively (3m of Dim Light per 1m of Bright Light).",
+    "type": "automated",
+    "changes": [
+      {
+        "type": "roll-option",
+        "value": "toggle:glow",
+        "domain": "all",
+        "toggleable": true,
+        "state": true
+      },
+      {
+        "type": "token-alterations",
+        "predicate": [
+          "toggle:glow"
+        ],
+        "texture": "{actor|img}",
+        "light": {
+          "bright": 12,
+          "angle": 360,
+          "dim": 36
+        }
+      }
+    ]
   },
   {
     "slug": "grotesque-fusion",
@@ -642,6 +915,12 @@
     "description": "As an Easy Natural World Crafting Project, a creature can grow [Herbal] gear they are given. The [Herbal] is consumed in this process. At the end of 8 Day Spans, the creature gives a yield 2 of the [Herbal] on a successful crafting check, +1 additional [Herbal] for every DoS. See crafting rules for more details on crafting checks.\nSUBJECT TO CHANGE"
   },
   {
+    "slug": "hexcraft",
+    "label": "Hexcraft",
+    "related": [],
+    "description": "This creature is skilled in the arcane arts of hexcrafting. Gains access to the [Hexcraft] Tutor List."
+  },
+  {
     "slug": "hollow-husk",
     "label": "Hollow Husk",
     "related": [],
@@ -663,7 +942,17 @@
     "slug": "horned",
     "label": "Horned",
     "related": [],
-    "description": "This creature possesses a prominent horn or spike. Confers [Horn] to @Trait[adaptable] actions. Grants access to the [Horn] Tutor list."
+    "description": "This creature possesses a prominent horn or spike. Confers [Horn] to @Trait[adaptable] actions. Grants access to the [Horn] Tutor list.",
+    "type": "automated",
+    "changes": [
+      {
+        "type": "alter-attack",
+        "key": "adaptable-trait-attack",
+        "property": "traits",
+        "mode": "2",
+        "value": "horn"
+      }
+    ]
   },
   {
     "slug": "hostile-dynamax",
@@ -675,7 +964,7 @@
     "slug": "hover",
     "label": "Hover",
     "related": [],
-    "description": "This creature naturally floats, granting immunity to damage and effects from [Earthbound] actions. Does not crash if its deliberate flight is interrupted.",
+    "description": "This creature naturally floats, granting immunity to damage and effects from [Earthbound] actions. Does not crash if its deliberate flight is interrupted. This creatures can use Flight underwater instead of Swim, treating it as Difficult Terrain.",
     "type": "automated",
     "changes": [
       {
@@ -793,61 +1082,61 @@
     "slug": "jet",
     "label": "Jet",
     "related": [],
-    "description": "This trait identifies an exceptionally fast flyer or swimmer.\nSUBJECT TO CHANGE"
+    "description": "This trait identifies an exceptionally fast flyer or swimmer. If this creature has a Flight Movement Score, they may move full speed using Flight underwater, instead of Swim.\nSUBJECT TO CHANGE"
   },
   {
     "slug": "jump-x",
     "label": "Jump X",
     "related": [],
-    "description": "This trait identifies whether or not a creature can jump, equal to some multiplier of its height. Humans usually have [Jump 2].\nJumping is usually done through muscular locomotion, though it might also be accomplished through some other pressure production, like hydraulics, air pressure, or perhaps a supernatural force. Jumping is utilized as part of the Jump and Leap Actions.\nTO-DO: add Breaching rules and revisions for serpents and other oddities."
+    "description": "This trait identifies whether or not a creature can jump, with its Jump Height outside of combat being equal to some multiplier of its height. Humans usually have [Jump 2].\nJumping is usually done through muscular locomotion, though it might also be accomplished through some other pressure production, like hydraulics, air pressure, or perhaps a supernatural force.\nTO-DO: add revisions for serpents and other oddities."
   },
   {
     "slug": "jump-1",
     "label": "Jump 1",
     "related": [],
-    "description": "This trait identifies whether or not a creature can jump, by default 0.1 times its height.\nJumping is usually done through muscular locomotion, though it might also be accomplished through some other pressure production, like hydraulics, air pressure, or perhaps a supernatural force. Jumping is utilized as part of the Jump and Leap Actions."
+    "description": "This trait identifies whether or not a creature can jump, with its Jump Height outside of combat being 0.1 times its height.\nJumping is usually done through muscular locomotion, though it might also be accomplished through some other pressure production, like hydraulics, air pressure, or perhaps a supernatural force."
   },
   {
     "slug": "jump-2",
     "label": "Jump 2",
     "related": [],
-    "description": "This trait identifies whether or not a creature can jump, by default 0.4 times its height.\nJumping is usually done through muscular locomotion, though it might also be accomplished through some other pressure production, like hydraulics, air pressure, or perhaps a supernatural force. Jumping is utilized as part of the Jump and Leap Actions."
+    "description": "This trait identifies whether or not a creature can jump, with its Jump Height outside of combat being 0.4 times its height.\nJumping is usually done through muscular locomotion, though it might also be accomplished through some other pressure production, like hydraulics, air pressure, or perhaps a supernatural force."
   },
   {
     "slug": "jump-3",
     "label": "Jump 3",
     "related": [],
-    "description": "This trait identifies whether or not a creature can jump, by default 0.8 times its height.\nJumping is usually done through muscular locomotion, though it might also be accomplished through some other pressure production, like hydraulics, air pressure, or perhaps a supernatural force. Jumping is utilized as part of the Jump and Leap Actions."
+    "description": "This trait identifies whether or not a creature can jump, with its Jump Height outside of combat being 0.8 times its height.\nJumping is usually done through muscular locomotion, though it might also be accomplished through some other pressure production, like hydraulics, air pressure, or perhaps a supernatural force."
   },
   {
     "slug": "jump-4",
     "label": "Jump 4",
     "related": [],
-    "description": "This trait identifies whether or not a creature can jump, by default 1.4 times its height.\nJumping is usually done through muscular locomotion, though it might also be accomplished through some other pressure production, like hydraulics, air pressure, or perhaps a supernatural force. Jumping is utilized as part of the Jump and Leap Actions."
+    "description": "This trait identifies whether or not a creature can jump, with its Jump Height outside of combat being 1.4 times its height.\nJumping is usually done through muscular locomotion, though it might also be accomplished through some other pressure production, like hydraulics, air pressure, or perhaps a supernatural force."
   },
   {
     "slug": "jump-5",
     "label": "Jump 5",
     "related": [],
-    "description": "This trait identifies whether or not a creature can jump, by default 3 times its height.\nJumping is usually done through muscular locomotion, though it might also be accomplished through some other pressure production, like hydraulics, air pressure, or perhaps a supernatural force. Jumping is utilized as part of the Jump and Leap Actions."
+    "description": "This trait identifies whether or not a creature can jump, with its Jump Height outside of combat being 3 times its height.\nJumping is usually done through muscular locomotion, though it might also be accomplished through some other pressure production, like hydraulics, air pressure, or perhaps a supernatural force."
   },
   {
     "slug": "jump-6",
     "label": "Jump 6",
     "related": [],
-    "description": "This trait identifies whether or not a creature can jump, by default 8 times its height.\nJumping is usually done through muscular locomotion, though it might also be accomplished through some other pressure production, like hydraulics, air pressure, or perhaps a supernatural force. Jumping is utilized as part of the Jump and Leap Actions."
+    "description": "This trait identifies whether or not a creature can jump, with its Jump Height outside of combat being 8 times its height.\nJumping is usually done through muscular locomotion, though it might also be accomplished through some other pressure production, like hydraulics, air pressure, or perhaps a supernatural force."
   },
   {
     "slug": "jump-7",
     "label": "Jump 7",
     "related": [],
-    "description": "This trait identifies whether or not a creature can jump, by default 16 times its height.\nJumping is usually done through muscular locomotion, though it might also be accomplished through some other pressure production, like hydraulics, air pressure, or perhaps a supernatural force. Jumping is utilized as part of the Jump and Leap Actions."
+    "description": "This trait identifies whether or not a creature can jump, with its Jump Height outside of combat being 16 times its height.\nJumping is usually done through muscular locomotion, though it might also be accomplished through some other pressure production, like hydraulics, air pressure, or perhaps a supernatural force."
   },
   {
     "slug": "jump-8",
     "label": "Jump 8",
     "related": [],
-    "description": "This trait identifies whether or not a creature can jump, by default 30 times its height.\nJumping is usually done through muscular locomotion, though it might also be accomplished through some other pressure production, like hydraulics, air pressure, or perhaps a supernatural force. Jumping is utilized as part of the Jump and Leap Actions."
+    "description": "This trait identifies whether or not a creature can jump, with its Jump Height outside of combat being 30 times its height.\nJumping is usually done through muscular locomotion, though it might also be accomplished through some other pressure production, like hydraulics, air pressure, or perhaps a supernatural force."
   },
   {
     "slug": "keen-scent",
@@ -926,6 +1215,39 @@
     "label": "Lockjaw",
     "related": [],
     "description": "The creature's [Jaw] attacks have the [Grapple] trait. The creature has access to the [Jaw] tutor list."
+  },
+  {
+    "slug": "luca",
+    "label": "LUCA",
+    "related": [],
+    "description": "The \"last universal common ancestor\" is the hypothetical organism that is the most recent ancestor of modern life. Of course, a creature with this trait is anything but hypothetical. Creatures with this trait possess Connection – Transform.",
+    "changes": [
+      {
+        "type": "grant-item",
+        "key": "",
+        "value": "Compendium.ptr2e.core-moves.Item.KYiKjOrakhVcye6X",
+        "predicate": [],
+        "alterations": [
+          {
+            "mode": 5,
+            "property": "system.actions.0.free",
+            "value": "true"
+          }
+        ],
+        "mode": 2,
+        "priority": null,
+        "ignored": false,
+        "reevaluateOnUpdate": false,
+        "inMemoryOnly": false,
+        "allowDuplicate": true,
+        "track": false,
+        "replaceSelf": false,
+        "onDeleteActions": {
+          "grantee": "detach",
+          "granter": "cascade"
+        }
+      }
+    ]
   },
   {
     "slug": "lumbering",
@@ -1009,10 +1331,10 @@
     "description": "Once every 5 Day Spans the creature produces a random [Mushroom] up to its Grade."
   },
   {
-    "slug": "musical",
-    "label": "Musical",
+    "slug": "musician",
+    "label": "Musician",
     "related": [],
-    "description": "TO BE DETERMINED"
+    "description": "This creature is skilled in musical performance and sound-based abilities. It gains access to the [Musician] Tutor List."
   },
   {
     "slug": "natural-backpack",
@@ -1088,7 +1410,7 @@
     "slug": "phasing",
     "label": "Phasing",
     "related": [],
-    "description": "This creature ignores and passes through Blocking Terrain when using movement. If the creature ends its movement inside of Blocking Terrain, it is forced into the nearest available space and loses 3 ticks of HP for every meter it was forced to move."
+    "description": "This creature is able to gain or lose @affliction[transient] as a Simple Action, and gains 1 PP when it gains @affliction[transient]."
   },
   {
     "slug": "phoenix",
@@ -1124,7 +1446,7 @@
     "slug": "propulsion",
     "label": "Propulsion",
     "related": [],
-    "description": "TO BE DETERMINED"
+    "description": "This creature possesses a special way to move itself, granting itself a Movement Type or Score that might be unusual for a creature of its Speed or anatomy normally.\nPropulsion is usually in the form of liquid or high pressure gas that is expelled in one direction to move a creature in the other, often quite quickly.\nWhen using Rush, Jump, Leap, or Breach to gain Flying or Swim Movement, the user gains +4 DoS on a successful roll."
   },
   {
     "slug": "psychic-radar",
@@ -1233,6 +1555,12 @@
     "description": "Indicates this creature can evolve into more than one option."
   },
   {
+    "slug": "shed-evolution",
+    "label": "Shed Evolution",
+    "related": [],
+    "description": "When Nincada evolves into Ninjask, if another Capture Container is available, a Shedinja will take its residence inside of said container.\nThe GM should spawn in a new Shedinja and allow the player to freely capture it."
+  },
+  {
     "slug": "steel-officer",
     "label": "Steel Officer",
     "related": [],
@@ -1257,46 +1585,338 @@
     "description": "This creature can create or clear stormy conditions. The user has access to the [Stormcaller] Tutor List."
   },
   {
+    "slug": "mouthy",
+    "label": "Mouthy",
+    "related": [],
+    "description": "This creature has an advanced and developed mouth (or something resembling one) that allows them to bite, chew, rip and tear with decent offensive effectiveness. The user has access to the [Jaw] Tutor List.",
+    "type": "automated",
+    "changes": [
+      {
+        "type": "alter-attack",
+        "key": "adaptable-trait-attack",
+        "property": "traits",
+        "mode": "2",
+        "value": "jaw"
+      }
+    ]
+  },
+  {
+    "slug": "tailed",
+    "label": "Tailed",
+    "related": [],
+    "description": "This creature has a significantly sized physical appendage or tool that is great for smashing and crushing. The user has access to the [Hammer] Tutor List.",
+    "type": "automated",
+    "changes": [
+      {
+        "type": "alter-attack",
+        "key": "adaptable-trait-attack",
+        "property": "traits",
+        "mode": "2",
+        "value": "hammer"
+      }
+    ]
+  },
+  {
+    "slug": "tailed",
+    "label": "Tailed",
+    "related": [],
+    "description": "This creature has a sizeable tail. The user has access to the [Tailed] Tutor List.",
+    "type": "automated",
+    "changes": [
+      {
+        "type": "alter-attack",
+        "key": "adaptable-trait-attack",
+        "property": "traits",
+        "mode": "2",
+        "value": "tailed"
+      }
+    ]
+  },
+  {
     "slug": "telekinetic-x",
     "label": "Telekinetic X",
     "related": [],
-    "description": "This creature is able to use the Lift skill telekinetically at range X / This creature can use Occult (Psychic) in place of the Lift skill."
+    "description": "This creature is able to project their psionic will at a distance of Xm. The user has fine (remote) motor control in this space, able to interact with objects and use the Lift skill telekinetically up to that range, so long as they can sense/observe the target(s). The creature may originate the Use, Draw/Store, Drop, Bestow, Grab, Fling, and Struggle from a space within Xm of the creature. This creature can use Occult (Psychic) or Parapsychology (if utilizing special tools) in place of the Lift skill, and may have their Struggle be used as Special-Category."
+  },
+  {
+    "slug": "telekinetic-1",
+    "label": "Telekinetic 1",
+    "related": [],
+    "description": "This creature is able to project their psionic will at a distance of 1m. The user has fine (remote) motor control in this space, able to interact with objects and use the Lift skill telekinetically up to that range, so long as they can sense/observe the target(s). The creature may originate the Use, Draw/Store, Drop, Bestow, Grab, Fling, and Struggle from a space within 1m of the creature. This creature can use Occult (Psychic) or Parapsychology (if utilizing special tools) in place of the Lift skill, and may have their Struggle be used as Special-Category.",
+    "type": "automated",
+    "changes": [
+      {
+        "type": "roll-option",
+        "domain": "adaptable",
+        "value": "category:special"
+      }
+    ]
   },
   {
     "slug": "telekinetic-2",
     "label": "Telekinetic 2",
     "related": [],
-    "description": "This creature is able to use the Lift skill telekinetically at range 2 / This creature can use Occult (Psychic) in place of the Lift skill."
+    "description": "This creature is able to project their psionic will at a distance of 2m. The user has fine (remote) motor control in this space, able to interact with objects and use the Lift skill telekinetically up to that range, so long as they can sense/observe the target(s). The creature may originate the Use, Draw/Store, Drop, Bestow, Grab, Fling, and Struggle from a space within 2m of the creature. This creature can use Occult (Psychic) or Parapsychology (if utilizing special tools) in place of the Lift skill, and may have their Struggle be used as Special-Category.",
+    "type": "automated",
+    "changes": [
+      {
+        "type": "roll-option",
+        "domain": "adaptable",
+        "value": "category:special"
+      }
+    ]
+  },
+  {
+    "slug": "telekinetic-3",
+    "label": "Telekinetic 3",
+    "related": [],
+    "description": "This creature is able to project their psionic will at a distance of 3m. The user has fine (remote) motor control in this space, able to interact with objects and use the Lift skill telekinetically up to that range, so long as they can sense/observe the target(s). The creature may originate the Use, Draw/Store, Drop, Bestow, Grab, Fling, and Struggle from a space within 3m of the creature. This creature can use Occult (Psychic) or Parapsychology (if utilizing special tools) in place of the Lift skill, and may have their Struggle be used as Special-Category.",
+    "type": "automated",
+    "changes": [
+      {
+        "type": "roll-option",
+        "domain": "adaptable",
+        "value": "category:special"
+      }
+    ]
   },
   {
     "slug": "telekinetic-4",
     "label": "Telekinetic 4",
     "related": [],
-    "description": "This creature is able to use the Lift skill telekinetically at range 4 / This creature can use Occult (Psychic) in place of the Lift skill."
+    "description": "This creature is able to project their psionic will at a distance of 4m. The user has fine (remote) motor control in this space, able to interact with objects and use the Lift skill telekinetically up to that range, so long as they can sense/observe the target(s). The creature may originate the Use, Draw/Store, Drop, Bestow, Grab, Fling, and Struggle from a space within 4m of the creature. This creature can use Occult (Psychic) or Parapsychology (if utilizing special tools) in place of the Lift skill, and may have their Struggle be used as Special-Category.",
+    "type": "automated",
+    "changes": [
+      {
+        "type": "roll-option",
+        "domain": "adaptable",
+        "value": "category:special"
+      }
+    ]
+  },
+  {
+    "slug": "telekinetic-5",
+    "label": "Telekinetic 5",
+    "related": [],
+    "description": "This creature is able to project their psionic will at a distance of 5m. The user has fine (remote) motor control in this space, able to interact with objects and use the Lift skill telekinetically up to that range, so long as they can sense/observe the target(s). The creature may originate the Use, Draw/Store, Drop, Bestow, Grab, Fling, and Struggle from a space within 5m of the creature. This creature can use Occult (Psychic) or Parapsychology (if utilizing special tools) in place of the Lift skill, and may have their Struggle be used as Special-Category.",
+    "type": "automated",
+    "changes": [
+      {
+        "type": "roll-option",
+        "domain": "adaptable",
+        "value": "category:special"
+      }
+    ]
   },
   {
     "slug": "telekinetic-6",
     "label": "Telekinetic 6",
     "related": [],
-    "description": "This creature is able to use the Lift skill telekinetically at range 6 / This creature can use Occult (Psychic) in place of the Lift skill."
+    "description": "This creature is able to project their psionic will at a distance of 6m. The user has fine (remote) motor control in this space, able to interact with objects and use the Lift skill telekinetically up to that range, so long as they can sense/observe the target(s). The creature may originate the Use, Draw/Store, Drop, Bestow, Grab, Fling, and Struggle from a space within 6m of the creature. This creature can use Occult (Psychic) or Parapsychology (if utilizing special tools) in place of the Lift skill, and may have their Struggle be used as Special-Category.",
+    "type": "automated",
+    "changes": [
+      {
+        "type": "roll-option",
+        "domain": "adaptable",
+        "value": "category:special"
+      }
+    ]
+  },
+  {
+    "slug": "telekinetic-7",
+    "label": "Telekinetic 7",
+    "related": [],
+    "description": "This creature is able to project their psionic will at a distance of 7m. The user has fine (remote) motor control in this space, able to interact with objects and use the Lift skill telekinetically up to that range, so long as they can sense/observe the target(s). The creature may originate the Use, Draw/Store, Drop, Bestow, Grab, Fling, and Struggle from a space within 7m of the creature. This creature can use Occult (Psychic) or Parapsychology (if utilizing special tools) in place of the Lift skill, and may have their Struggle be used as Special-Category.",
+    "type": "automated",
+    "changes": [
+      {
+        "type": "roll-option",
+        "domain": "adaptable",
+        "value": "category:special"
+      }
+    ]
   },
   {
     "slug": "telekinetic-8",
     "label": "Telekinetic 8",
     "related": [],
-    "description": "This creature is able to use the Lift skill telekinetically at range 8 / This creature can use Occult (Psychic) in place of the Lift skill."
+    "description": "This creature is able to project their psionic will at a distance of 8m. The user has fine (remote) motor control in this space, able to interact with objects and use the Lift skill telekinetically up to that range, so long as they can sense/observe the target(s). The creature may originate the Use, Draw/Store, Drop, Bestow, Grab, Fling, and Struggle from a space within 8m of the creature. This creature can use Occult (Psychic) or Parapsychology (if utilizing special tools) in place of the Lift skill, and may have their Struggle be used as Special-Category.",
+    "type": "automated",
+    "changes": [
+      {
+        "type": "roll-option",
+        "domain": "adaptable",
+        "value": "category:special"
+      }
+    ]
+  },
+  {
+    "slug": "telekinetic-9",
+    "label": "Telekinetic 9",
+    "related": [],
+    "description": "This creature is able to project their psionic will at a distance of 9m. The user has fine (remote) motor control in this space, able to interact with objects and use the Lift skill telekinetically up to that range, so long as they can sense/observe the target(s). The creature may originate the Use, Draw/Store, Drop, Bestow, Grab, Fling, and Struggle from a space within 9m of the creature. This creature can use Occult (Psychic) or Parapsychology (if utilizing special tools) in place of the Lift skill, and may have their Struggle be used as Special-Category.",
+    "type": "automated",
+    "changes": [
+      {
+        "type": "roll-option",
+        "domain": "adaptable",
+        "value": "category:special"
+      }
+    ]
   },
   {
     "slug": "telekinetic-10",
     "label": "Telekinetic 10",
     "related": [],
-    "description": "This creature is able to use the Lift skill telekinetically at range 10 / This creature can use Occult (Psychic) in place of the Lift skill."
+    "description": "This creature is able to project their psionic will at a distance of 10m. The user has fine (remote) motor control in this space, able to interact with objects and use the Lift skill telekinetically up to that range, so long as they can sense/observe the target(s). The creature may originate the Use, Draw/Store, Drop, Bestow, Grab, Fling, and Struggle from a space within 10m of the creature. This creature can use Occult (Psychic) or Parapsychology (if utilizing special tools) in place of the Lift skill, and may have their Struggle be used as Special-Category.",
+    "type": "automated",
+    "changes": [
+      {
+        "type": "roll-option",
+        "domain": "adaptable",
+        "value": "category:special"
+      }
+    ]
+  },
+  {
+    "slug": "telekinetic-11",
+    "label": "Telekinetic 11",
+    "related": [],
+    "description": "This creature is able to project their psionic will at a distance of 11m. The user has fine (remote) motor control in this space, able to interact with objects and use the Lift skill telekinetically up to that range, so long as they can sense/observe the target(s). The creature may originate the Use, Draw/Store, Drop, Bestow, Grab, Fling, and Struggle from a space within 11m of the creature. This creature can use Occult (Psychic) or Parapsychology (if utilizing special tools) in place of the Lift skill, and may have their Struggle be used as Special-Category.",
+    "type": "automated",
+    "changes": [
+      {
+        "type": "roll-option",
+        "domain": "adaptable",
+        "value": "category:special"
+      }
+    ]
   },
   {
     "slug": "telekinetic-12",
     "label": "Telekinetic 12",
     "related": [],
-    "description": "This creature is able to use the Lift skill telekinetically at range 12 / This creature can use Occult (Psychic) in place of the Lift skill."
+    "description": "This creature is able to project their psionic will at a distance of 12m. The user has fine (remote) motor control in this space, able to interact with objects and use the Lift skill telekinetically up to that range, so long as they can sense/observe the target(s). The creature may originate the Use, Draw/Store, Drop, Bestow, Grab, Fling, and Struggle from a space within 12m of the creature. This creature can use Occult (Psychic) or Parapsychology (if utilizing special tools) in place of the Lift skill, and may have their Struggle be used as Special-Category.",
+    "type": "automated",
+    "changes": [
+      {
+        "type": "roll-option",
+        "domain": "adaptable",
+        "value": "category:special"
+      }
+    ]
+  },
+  {
+    "slug": "telekinetic-13",
+    "label": "Telekinetic 13",
+    "related": [],
+    "description": "This creature is able to project their psionic will at a distance of 13m. The user has fine (remote) motor control in this space, able to interact with objects and use the Lift skill telekinetically up to that range, so long as they can sense/observe the target(s). The creature may originate the Use, Draw/Store, Drop, Bestow, Grab, Fling, and Struggle from a space within 13m of the creature. This creature can use Occult (Psychic) or Parapsychology (if utilizing special tools) in place of the Lift skill, and may have their Struggle be used as Special-Category.",
+    "type": "automated",
+    "changes": [
+      {
+        "type": "roll-option",
+        "domain": "adaptable",
+        "value": "category:special"
+      }
+    ]
+  },
+  {
+    "slug": "telekinetic-14",
+    "label": "Telekinetic 14",
+    "related": [],
+    "description": "This creature is able to project their psionic will at a distance of 14m. The user has fine (remote) motor control in this space, able to interact with objects and use the Lift skill telekinetically up to that range, so long as they can sense/observe the target(s). The creature may originate the Use, Draw/Store, Drop, Bestow, Grab, Fling, and Struggle from a space within 14m of the creature. This creature can use Occult (Psychic) or Parapsychology (if utilizing special tools) in place of the Lift skill, and may have their Struggle be used as Special-Category.",
+    "type": "automated",
+    "changes": [
+      {
+        "type": "roll-option",
+        "domain": "adaptable",
+        "value": "category:special"
+      }
+    ]
+  },
+  {
+    "slug": "telekinetic-15",
+    "label": "Telekinetic 15",
+    "related": [],
+    "description": "This creature is able to project their psionic will at a distance of 15m. The user has fine (remote) motor control in this space, able to interact with objects and use the Lift skill telekinetically up to that range, so long as they can sense/observe the target(s). The creature may originate the Use, Draw/Store, Drop, Bestow, Grab, Fling, and Struggle from a space within 15m of the creature. This creature can use Occult (Psychic) or Parapsychology (if utilizing special tools) in place of the Lift skill, and may have their Struggle be used as Special-Category.",
+    "type": "automated",
+    "changes": [
+      {
+        "type": "roll-option",
+        "domain": "adaptable",
+        "value": "category:special"
+      }
+    ]
+  },
+  {
+    "slug": "telekinetic-16",
+    "label": "Telekinetic 16",
+    "related": [],
+    "description": "This creature is able to project their psionic will at a distance of 16m. The user has fine (remote) motor control in this space, able to interact with objects and use the Lift skill telekinetically up to that range, so long as they can sense/observe the target(s). The creature may originate the Use, Draw/Store, Drop, Bestow, Grab, Fling, and Struggle from a space within 16m of the creature. This creature can use Occult (Psychic) or Parapsychology (if utilizing special tools) in place of the Lift skill, and may have their Struggle be used as Special-Category.",
+    "type": "automated",
+    "changes": [
+      {
+        "type": "roll-option",
+        "domain": "adaptable",
+        "value": "category:special"
+      }
+    ]
+  },
+  {
+    "slug": "telekinetic-17",
+    "label": "Telekinetic 17",
+    "related": [],
+    "description": "This creature is able to project their psionic will at a distance of 17m. The user has fine (remote) motor control in this space, able to interact with objects and use the Lift skill telekinetically up to that range, so long as they can sense/observe the target(s). The creature may originate the Use, Draw/Store, Drop, Bestow, Grab, Fling, and Struggle from a space within 17m of the creature. This creature can use Occult (Psychic) or Parapsychology (if utilizing special tools) in place of the Lift skill, and may have their Struggle be used as Special-Category.",
+    "type": "automated",
+    "changes": [
+      {
+        "type": "roll-option",
+        "domain": "adaptable",
+        "value": "category:special"
+      }
+    ]
+  },
+  {
+    "slug": "telekinetic-18",
+    "label": "Telekinetic 18",
+    "related": [],
+    "description": "This creature is able to project their psionic will at a distance of 18m. The user has fine (remote) motor control in this space, able to interact with objects and use the Lift skill telekinetically up to that range, so long as they can sense/observe the target(s). The creature may originate the Use, Draw/Store, Drop, Bestow, Grab, Fling, and Struggle from a space within 18m of the creature. This creature can use Occult (Psychic) or Parapsychology (if utilizing special tools) in place of the Lift skill, and may have their Struggle be used as Special-Category.",
+    "type": "automated",
+    "changes": [
+      {
+        "type": "roll-option",
+        "domain": "adaptable",
+        "value": "category:special"
+      }
+    ]
+  },
+  {
+    "slug": "telekinetic-19",
+    "label": "Telekinetic 19",
+    "related": [],
+    "description": "This creature is able to project their psionic will at a distance of 19m. The user has fine (remote) motor control in this space, able to interact with objects and use the Lift skill telekinetically up to that range, so long as they can sense/observe the target(s). The creature may originate the Use, Draw/Store, Drop, Bestow, Grab, Fling, and Struggle from a space within 19m of the creature. This creature can use Occult (Psychic) or Parapsychology (if utilizing special tools) in place of the Lift skill, and may have their Struggle be used as Special-Category.",
+    "type": "automated",
+    "changes": [
+      {
+        "type": "roll-option",
+        "domain": "adaptable",
+        "value": "category:special"
+      }
+    ]
+  },
+  {
+    "slug": "telekinetic-20",
+    "label": "Telekinetic 20",
+    "related": [],
+    "description": "This creature is able to project their psionic will at a distance of 20m. The user has fine (remote) motor control in this space, able to interact with objects and use the Lift skill telekinetically up to that range, so long as they can sense/observe the target(s). The creature may originate the Use, Draw/Store, Drop, Bestow, Grab, Fling, and Struggle from a space within 20m of the creature. This creature can use Occult (Psychic) or Parapsychology (if utilizing special tools) in place of the Lift skill, and may have their Struggle be used as Special-Category.",
+    "type": "automated",
+    "changes": [
+      {
+        "type": "roll-option",
+        "domain": "adaptable",
+        "value": "category:special"
+      }
+    ]
   },
   {
     "slug": "telepath",
@@ -1402,8 +2022,8 @@
     "label": "Ultra Beast",
     "related": [],
     "description": "This creature has been flung through Ultra Space, and appear to resonate in one form or another with Z-Energy. These creatures tend to be quite formidable. These creatures also possess [Ultra].\nSUBJECT TO CHANGE",
-    "type": "narrative" 
- },
+    "type": "narrative"
+  },
   {
     "slug": "ultra-burst",
     "label": "Ultra Burst",
@@ -1428,7 +2048,7 @@
     "slug": "underdog",
     "label": "Underdog",
     "related": [],
-    "description": "An creature with lower base stats, making them eligible for Underdog perks.",
+    "description": "An creature with lower base stats, making them eligible for Underdog perks. The 'Underdog Cap' is a total of 510 BST.",
     "type": "automated"
   },
   {
@@ -1516,19 +2136,61 @@
     "slug": "weapon-training",
     "label": "Weapon Training",
     "related": [],
-    "description": "This creature is trained in the use of human-made weaponry."
+    "description": "This creature is trained in the use of human-made weaponry. NOTE: NEEDS AUTOMATION TO OFFSET WEAPON PENALTY."
   },
   {
     "slug": "weapon",
     "label": "Weapon",
     "related": [],
-    "description": "This trait applies to weapons and weapon-interactive moves."
+    "description": "This trait applies to weapons and weapon-interactive moves. NOTE: NEEDS AUTOMATION FOR INNATE PENALTY."
+  },
+  {
+    "slug": "blade",
+    "label": "Blade",
+    "related": [],
+    "description": "This weapons possesses a sharp, edged surface that the user is able to utilize for the weapons' Attacks, which usually have @trait[sharp]."
+  },
+  {
+    "slug": "blunt",
+    "label": "Blunt",
+    "related": [],
+    "description": "This weapon is weighty and solid, making it ideal for brute force physical Attacks, often being @trait[hammer] Attacks."
+  },
+  {
+    "slug": "projectile",
+    "label": "Projectile",
+    "related": [],
+    "description": "This weapon, via a chemical, mechanical, or physical method, launches physical projectiles as its intended form of Attack, usually possessing @trait[missile]."
+  },
+  {
+    "slug": "bomb",
+    "label": "Bomb",
+    "related": [],
+    "description": "This weapon utilizes a powerful reaction to produce explosions, utlizing the shockwaves and fragmentation as its primary vector of Attack. These weapons' Attacks often possess @trait[explode]."
+  },
+  {
+    "slug": "dew",
+    "label": "DEW",
+    "related": [],
+    "description": "This weapon is a directed energy weapon, or 'DEW', which compresses fundamental energies in a tight, controlled beam that is used to inflict @trait[ray] damage."
+  },
+  {
+    "slug": "emission",
+    "label": "Emission",
+    "related": [],
+    "description": "This weapon expels energy or matter toward targets, usually less controlled as a DEW, but often in more signficiant quantities. This weapon's attacks are likely to possess @trait[pulse]."
+  },
+  {
+    "slug": "firearm",
+    "label": "Firearm",
+    "related": [],
+    "description": "This trait refers to guns and other such @trait[projectile] devices that utilize an explosive charge to propel one or more projectiles down a barrel to inflict damage on a target. Firearms tend to be synonymous with more cold and calculated modern-style warfare, away from the romanticized sword and spear combat of the Middle Ages and Antiquity, and are ubiquitious in many settings that resemble contemporary society to any degree."
   },
   {
     "slug": "weathervane",
     "label": "Weathervane",
     "related": [],
-    "description": "The creature changes Forme depending on the most recent Weather, changing %lt;Type&gt;and granting the appropriate <Adaptable Type> Trait.\nSUBJECT TO CHANGE"
+    "description": "The creature changes Forme depending on the most recent Weather, changing %lt;Type&gt;and granting the appropriate %lt;Adaptable Type&gt; Trait.\nSUBJECT TO CHANGE"
   },
   {
     "slug": "wielder",
@@ -1574,6 +2236,30 @@
     "description": "This creature emanates Terastal Energy, able to direct it toward other creatures or siphon it away from its surroundings into itself. This creature, through great strain, can induce Terastallization in @Trait[pokemon]."
   },
   {
+    "slug": "fan-dex",
+    "label": "Fan Dex",
+    "related": [],
+    "description": "This item originates from a fan-developed project, usually a romhack or fangame, and was adapted by the 2e Dev Team for use in this system."
+  },
+  {
+    "slug": "dev-dex",
+    "label": "Dev Dex",
+    "related": [],
+    "description": "This item originates from a member of the 2e Dev Team, and is approved for use in the system. These items are generally adapted from an existing item or concept (officially or fanmade), and refined for default inclusion in this system."
+  },
+  {
+    "slug": "digimon",
+    "label": "Digimon",
+    "related": [],
+    "description": "Not quite a @trait[pokemon], creatures with this trait are 'digital monsters' or 'Digimon' for short. Creatures with this trait usually have the Digitize Trait, and always have access to the Digimon Perk Web. Other items with this trait are specifically designed for use by creatures with this trait, and games that center around Digimon and its settings."
+  },
+  {
+    "slug": "homebrew",
+    "label": "Homebrew",
+    "related": [],
+    "description": "This item is not part of the core 2e module. GMs that distribute homemade Species, Gear, Attacks, Abilities, Perks, etc. should include this trait on those items. GMs and Players in possession of these items should be wary using them, as they may not be designed to work perfectly with the system."
+  },
+  {
     "slug": "stellar",
     "label": "Stellar",
     "related": [],
@@ -1583,127 +2269,407 @@
     "slug": "creepy-crawly",
     "label": "Creepy Crawly",
     "related": [],
-    "description": "Allows the user to Type-Shift @Trait[adaptable] actions and attacks to the Bug-Type."
+    "description": "Allows the user to Type-Shift @Trait[adaptable] actions and attacks to the Bug-Type.",
+    "type": "automated",
+    "changes": [
+      {
+        "type": "roll-option",
+        "domain": "adaptable",
+        "value": "bug"
+      }
+    ]
   },
   {
     "slug": "evil-touch",
     "label": "Evil Touch",
     "related": [],
-    "description": "Allows the user to Type-Shift @Trait[adaptable] actions and attacks to the Dark-Type."
+    "description": "Allows the user to Type-Shift @Trait[adaptable] actions and attacks to the Dark-Type.",
+    "type": "automated",
+    "changes": [
+      {
+        "type": "roll-option",
+        "domain": "adaptable",
+        "value": "dark"
+      }
+    ]
   },
   {
     "slug": "drakelike",
     "label": "Drakelike",
     "related": [],
-    "description": "Allows the user to Type-Shift @Trait[adaptable] actions and attacks to the Dragon-Type."
+    "description": "Allows the user to Type-Shift @Trait[adaptable] actions and attacks to the Dragon-Type.",
+    "type": "automated",
+    "changes": [
+      {
+        "type": "roll-option",
+        "domain": "adaptable",
+        "value": "dragon"
+      }
+    ]
   },
   {
     "slug": "zapper",
     "label": "Zapper",
     "related": [],
-    "description": "Allows the user to Type-Shift @Trait[adaptable] actions and attacks to the Electric-Type."
+    "description": "Allows the user to Type-Shift @Trait[adaptable] actions and attacks to the Electric-Type.",
+    "type": "automated",
+    "changes": [
+      {
+        "type": "roll-option",
+        "domain": "adaptable",
+        "value": "electric"
+      }
+    ]
   },
   {
     "slug": "sparkler",
     "label": "Sparkler",
     "related": [],
-    "description": "Allows the user to Type-Shift @Trait[adaptable] actions and attacks to the Fairy-Type."
+    "description": "Allows the user to Type-Shift @Trait[adaptable] actions and attacks to the Fairy-Type.",
+    "type": "automated",
+    "changes": [
+      {
+        "type": "roll-option",
+        "domain": "adaptable",
+        "value": "fairy"
+      }
+    ]
   },
   {
     "slug": "well-built",
     "label": "Well Built",
     "related": [],
-    "description": "Allows the user to Type-Shift @Trait[adaptable] actions and attacks to the Fighting-Type."
+    "description": "Allows the user to Type-Shift @Trait[adaptable] actions and attacks to the Fighting-Type.",
+    "type": "automated",
+    "changes": [
+      {
+        "type": "roll-option",
+        "domain": "adaptable",
+        "value": "fighting"
+      }
+    ]
   },
   {
     "slug": "firestarter",
     "label": "Firestarter",
     "related": [],
-    "description": "Allows the user to Type-Shift @Trait[adaptable] actions and attacks to the Fire-Type."
+    "description": "Allows the user to Type-Shift @Trait[adaptable] actions and attacks to the Fire-Type.",
+    "type": "automated",
+    "changes": [
+      {
+        "type": "roll-option",
+        "domain": "adaptable",
+        "value": "fire"
+      }
+    ]
   },
   {
     "slug": "guster",
     "label": "Guster",
     "related": [],
-    "description": "Allows the user to Type-Shift @Trait[adaptable] actions and attacks to the Flying-Type."
+    "description": "Allows the user to Type-Shift @Trait[adaptable] actions and attacks to the Flying-Type.",
+    "type": "automated",
+    "changes": [
+      {
+        "type": "roll-option",
+        "domain": "adaptable",
+        "value": "flying"
+      }
+    ]
   },
   {
     "slug": "spooky",
     "label": "Spooky",
     "related": [],
-    "description": "Allows the user to Type-Shift @Trait[adaptable] actions and attacks to the Ghost-Type."
+    "description": "Allows the user to Type-Shift @Trait[adaptable] actions and attacks to the Ghost-Type.",
+    "type": "automated",
+    "changes": [
+      {
+        "type": "roll-option",
+        "domain": "adaptable",
+        "value": "ghost"
+      }
+    ]
   },
   {
     "slug": "floratic",
     "label": "Floratic",
     "related": [],
-    "description": "Allows the user to Type-Shift @Trait[adaptable] actions and attacks to the Grass-Type."
+    "description": "Allows the user to Type-Shift @Trait[adaptable] actions and attacks to the Grass-Type.",
+    "type": "automated",
+    "changes": [
+      {
+        "type": "roll-option",
+        "domain": "adaptable",
+        "value": "grass"
+      }
+    ]
   },
   {
     "slug": "fictile",
     "label": "Fictile",
     "related": [],
-    "description": "Allows the user to Type-Shift @Trait[adaptable] actions and attacks to the Ground-Type."
+    "description": "Allows the user to Type-Shift @Trait[adaptable] actions and attacks to the Ground-Type.",
+    "type": "automated",
+    "changes": [
+      {
+        "type": "roll-option",
+        "domain": "adaptable",
+        "value": "ground"
+      }
+    ]
   },
   {
     "slug": "freezer",
     "label": "Freezer",
     "related": [],
-    "description": "Allows the user to Type-Shift @Trait[adaptable] actions and attacks to the Ice-Type."
+    "description": "Allows the user to Type-Shift @Trait[adaptable] actions and attacks to the Ice-Type.",
+    "type": "automated",
+    "changes": [
+      {
+        "type": "roll-option",
+        "domain": "adaptable",
+        "value": "ice"
+      }
+    ]
   },
   {
     "slug": "generalizer",
     "label": "Generalizer",
     "related": [],
-    "description": "Allows the user to Type-Shift @Trait[adaptable] actions and attacks to the Normal-Type."
+    "description": "Allows the user to Type-Shift @Trait[adaptable] actions and attacks to the Normal-Type.",
+    "type": "automated",
+    "changes": [
+      {
+        "type": "roll-option",
+        "domain": "adaptable",
+        "value": "normal"
+      }
+    ]
   },
   {
     "slug": "emitter",
     "label": "Emitter",
     "related": [],
-    "description": "Allows the user to Type-Shift @Trait[adaptable] actions and attacks to the Nuclear-Type."
+    "description": "Allows the user to Type-Shift @Trait[adaptable] actions and attacks to the Nuclear-Type.",
+    "type": "automated",
+    "changes": [
+      {
+        "type": "roll-option",
+        "domain": "adaptable",
+        "value": "nuclear"
+      }
+    ]
   },
   {
     "slug": "venomous",
     "label": "Venomous",
     "related": [],
-    "description": "Allows the user to Type-Shift @Trait[adaptable] actions and attacks to the Poison-Type."
+    "description": "Allows the user to Type-Shift @Trait[adaptable] actions and attacks to the Poison-Type.",
+    "type": "automated",
+    "changes": [
+      {
+        "type": "roll-option",
+        "domain": "adaptable",
+        "value": "poison"
+      }
+    ]
   },
   {
     "slug": "psycher",
     "label": "Psycher",
     "related": [],
-    "description": "Allows the user to Type-Shift @Trait[adaptable] actions and attacks to the Psychic-Type."
+    "description": "Allows the user to Type-Shift @Trait[adaptable] actions and attacks to the Psychic-Type.",
+    "type": "automated",
+    "changes": [
+      {
+        "type": "roll-option",
+        "domain": "adaptable",
+        "value": "psychic"
+      }
+    ]
   },
   {
     "slug": "lithic",
     "label": "Lithic",
     "related": [],
-    "description": "Allows the user to Type-Shift @Trait[adaptable] actions and attacks to the Rock-Type."
+    "description": "Allows the user to Type-Shift @Trait[adaptable] actions and attacks to the Rock-Type.",
+    "type": "automated",
+    "changes": [
+      {
+        "type": "roll-option",
+        "domain": "adaptable",
+        "value": "rock"
+      }
+    ]
   },
   {
     "slug": "rancor",
     "label": "Rancor",
     "related": [],
-    "description": "Allows the user to Type-Shift @Trait[adaptable] actions and attacks to the Shadow-Type."
+    "description": "Allows the user to Type-Shift @Trait[adaptable] actions and attacks to the Shadow-Type.",
+    "type": "automated",
+    "changes": [
+      {
+        "type": "roll-option",
+        "domain": "adaptable",
+        "value": "shadow"
+      }
+    ]
   },
   {
     "slug": "natural-steel",
     "label": "Natural Steel",
     "related": [],
-    "description": "Allows the user to Type-Shift @Trait[adaptable] actions and attacks to the Steel-Type."
+    "description": "Allows the user to Type-Shift @Trait[adaptable] actions and attacks to the Steel-Type.",
+    "type": "automated",
+    "changes": [
+      {
+        "type": "roll-option",
+        "domain": "adaptable",
+        "value": "steel"
+      }
+    ]
   },
   {
     "slug": "fountain",
     "label": "Fountain",
     "related": [],
-    "description": "Allows the user to Type-Shift @Trait[adaptable] actions and attacks to the Water-Type."
+    "description": "Allows the user to Type-Shift @Trait[adaptable] actions and attacks to the Water-Type.",
+    "type": "automated",
+    "changes": [
+      {
+        "type": "roll-option",
+        "domain": "adaptable",
+        "value": "water"
+      }
+    ]
   },
   {
     "slug": "stack-x",
     "label": "Stack X",
     "related": [],
-    "description": "Denotes the number of individual items that make up a stack of that item."
+    "description": "Items with this trait may have between 1 and X of this item occupying a single item slot."
+  },
+  {
+    "slug": "stack-1",
+    "label": "Stack 1",
+    "related": [],
+    "description": "Items with this trait may have 1 of this item occupying a single item slot."
+  },
+  {
+    "slug": "stack-2",
+    "label": "Stack 2",
+    "related": [],
+    "description": "Items with this trait may have between 1 and 2 of this item occupying a single item slot."
+  },
+  {
+    "slug": "stack-3",
+    "label": "Stack 3",
+    "related": [],
+    "description": "Items with this trait may have between 1 and 3 of this item occupying a single item slot."
+  },
+  {
+    "slug": "stack-4",
+    "label": "Stack 4",
+    "related": [],
+    "description": "Items with this trait may have between 1 and 4 of this item occupying a single item slot."
+  },
+  {
+    "slug": "stack-5",
+    "label": "Stack 5",
+    "related": [],
+    "description": "Items with this trait may have between 1 and 5 of this item occupying a single item slot."
+  },
+  {
+    "slug": "stack-6",
+    "label": "Stack 6",
+    "related": [],
+    "description": "Items with this trait may have between 1 and 6 of this item occupying a single item slot."
+  },
+  {
+    "slug": "stack-7",
+    "label": "Stack 7",
+    "related": [],
+    "description": "Items with this trait may have between 1 and 7 of this item occupying a single item slot."
+  },
+  {
+    "slug": "stack-8",
+    "label": "Stack 8",
+    "related": [],
+    "description": "Items with this trait may have between 1 and 8 of this item occupying a single item slot."
+  },
+  {
+    "slug": "stack-9",
+    "label": "Stack 9",
+    "related": [],
+    "description": "Items with this trait may have between 1 and 9 of this item occupying a single item slot."
+  },
+  {
+    "slug": "stack-10",
+    "label": "Stack 10",
+    "related": [],
+    "description": "Items with this trait may have between 1 and 10 of this item occupying a single item slot."
+  },
+  {
+    "slug": "stack-11",
+    "label": "Stack 11",
+    "related": [],
+    "description": "Items with this trait may have between 1 and 11 of this item occupying a single item slot."
+  },
+  {
+    "slug": "stack-12",
+    "label": "Stack 12",
+    "related": [],
+    "description": "Items with this trait may have between 1 and 12 of this item occupying a single item slot."
+  },
+  {
+    "slug": "stack-13",
+    "label": "Stack 13",
+    "related": [],
+    "description": "Items with this trait may have between 1 and 13 of this item occupying a single item slot."
+  },
+  {
+    "slug": "stack-14",
+    "label": "Stack 14",
+    "related": [],
+    "description": "Items with this trait may have between 1 and 14 of this item occupying a single item slot."
+  },
+  {
+    "slug": "stack-15",
+    "label": "Stack 15",
+    "related": [],
+    "description": "Items with this trait may have between 1 and 15 of this item occupying a single item slot."
+  },
+  {
+    "slug": "stack-16",
+    "label": "Stack 16",
+    "related": [],
+    "description": "Items with this trait may have between 1 and 16 of this item occupying a single item slot."
+  },
+  {
+    "slug": "stack-17",
+    "label": "Stack 17",
+    "related": [],
+    "description": "Items with this trait may have between 1 and 17 of this item occupying a single item slot."
+  },
+  {
+    "slug": "stack-18",
+    "label": "Stack 18",
+    "related": [],
+    "description": "Items with this trait may have between 1 and 18 of this item occupying a single item slot."
+  },
+  {
+    "slug": "stack-19",
+    "label": "Stack 19",
+    "related": [],
+    "description": "Items with this trait may have between 1 and 19 of this item occupying a single item slot."
+  },
+  {
+    "slug": "stack-20",
+    "label": "Stack 20",
+    "related": [],
+    "description": "Items with this trait may have between 1 and 20 of this item occupying a single item slot."
   },
   {
     "slug": "belt",
@@ -1715,13 +2681,31 @@
     "slug": "fling",
     "label": "Fling",
     "related": [],
-    "description": "Denotes if an item can be used as part of the Fling attack action."
+    "description": "Denotes if an item can be used as part of the Fling Attack Action, or if an Action is a Fling Action. Flung items or creatures that would miss their target Scatter, being relocated to a space a random distance away from the target creature/space in a random direction. The Scatter Direction is determined with a d8, interating clockwise from 1 (to the map's 'north' of the target) to 8 (to the map's 'northwest' of the target). The Scatter Distance is dX meters in the rolled Direction away from the target, being based on which Range Increment the target was in, times 2 - RI1 is d2, RI2 is d4, RI3 is d6, and RI4 is d8."
   },
   {
     "slug": "combat",
     "label": "Combat",
     "related": [],
     "description": "Denotes the general use of a item or piece of gear. [Consumable] items cannot be used in combat if they lack this trait."
+  },
+  {
+    "slug": "consumable",
+    "label": "Consumable",
+    "related": [],
+    "description": "Items with this trait are destroyed when they are used. Items with @trait[stack-x] remove one item from their Stack, until the count hits zero, and then the item is destroyed."
+  },
+  {
+    "slug": "battle",
+    "label": "Battle",
+    "related": [],
+    "description": "Items with this trait are particularly designed for combat use. These items may used be Used during Combat."
+  },
+  {
+    "slug": "ball",
+    "label": "Ball",
+    "related": [],
+    "description": "Items with this trait are spherical and perfectly sized to be thrown. Gear with self-compression and miniaturization technology, such as Poke Balls and Pester Balls, usually possess this trait."
   },
   {
     "slug": "x-strike",
@@ -1961,31 +2945,63 @@
     "slug": "crit-1",
     "label": "Crit 1",
     "related": [],
-    "description": "User's CRIT stage is considered to be +1 higher when using the associated action or attack."
+    "description": "User's CRIT stage is considered to be +1 higher when using the associated action or attack.",
+    "changes": [
+      {
+        "type": "flat-modifier",
+        "key": "{attack|slug}-attack-crit-stage",
+        "value": 1
+      }
+    ],
+    "type": "automated"
   },
   {
     "slug": "crit-2",
     "label": "Crit 2",
     "related": [],
-    "description": "User's CRIT stage is considered to be +2 higher when using the associated action or attack."
+    "description": "User's CRIT stage is considered to be +2 higher when using the associated action or attack.",
+    "changes": [
+      {
+        "type": "flat-modifier",
+        "key": "{attack|slug}-attack-crit-stage",
+        "value": 2
+      }
+    ],
+    "type": "automated"
   },
   {
     "slug": "crit-3",
     "label": "Crit 3",
     "related": [],
-    "description": "User's CRIT stage is considered to be +3 higher when using the associated action or attack."
+    "description": "User's CRIT stage is considered to be +3 higher when using the associated action or attack.",
+    "changes": [
+      {
+        "type": "flat-modifier",
+        "key": "{attack|slug}-attack-crit-stage",
+        "value": 3
+      }
+    ],
+    "type": "automated"
   },
   {
     "slug": "crit-4",
     "label": "Crit 4",
     "related": [],
-    "description": "User's CRIT stage is considered to be +4 higher when using the associated action or attack."
+    "description": "User's CRIT stage is considered to be +4 higher when using the associated action or attack.",
+    "changes": [
+      {
+        "type": "flat-modifier",
+        "key": "{attack|slug}-attack-crit-stage",
+        "value": 4
+      }
+    ],
+    "type": "automated"
   },
   {
     "slug": "crushing",
     "label": "Crushing",
     "related": [],
-    "description": "The associated action/attack deals double damage to and have +20 Accuracy against creatures that are Shrinked, or creatures with a CatMod that are 3 or more lower than the user."
+    "description": "The associated action/attack deals double damage to and have +20 Accuracy against creatures that are Shrinked, or creatures that are 2 Size Categories or more smaller than the user."
   },
   {
     "slug": "curl",
@@ -2009,7 +3025,7 @@
     "slug": "dash",
     "label": "Dash",
     "related": [],
-    "description": "Declaring these attacks allow the user to freely use Rush, but cannot be used if the user is Bound."
+    "description": "Actions with this Trait may be declared even if the user is out of range of a target, such as those with @Trait[contact] and the target is out of the user's Reach. When declaring this Action, the user freely uses Rush, Leap, Jump, or Breach, and utilizes the gained Movement.\nIf after this extra Movement the user is still out of range or the Action otherwise would be unable to be used, the Action fails and any Activation, PP, or other costs are still consumed as normal. If the user is in range, the Action continues its resolution as normal."
   },
   {
     "slug": "defensive",
@@ -2135,7 +3151,19 @@
     "slug": "earthbound",
     "label": "Earthbound",
     "related": [],
-    "description": "The attack/ability hits all creatures in area-of-effect, so long as the area-of-effect affects surfaces/objects are connected or touching, so a creature sitting on a tree branch is hit if a creature on the ground below is targeted and the tree itself is in the affected area. Attacks with this trait are one step more effective against creatures with the Grounded Affliction."
+    "description": "The attack/ability hits all creatures in area-of-effect, so long as the area-of-effect affects surfaces/objects are connected or touching, so a creature sitting on a tree branch is hit if a creature on the ground below is targeted and the tree itself is in the affected area. Attacks with this trait are one step more effective against creatures with the Grounded Affliction.",
+    "changes": [
+      {
+        "type": "stage-modifier",
+        "key": "earthbound-trait-attack-effectiveness",
+        "value": 1,
+        "predicate": [
+          "target:effect:affliction:grounded"
+        ],
+        "mode": 2,
+        "hideIfDisabled": true
+      }
+    ]
   },
   {
     "slug": "environ",
@@ -2148,12 +3176,6 @@
     "label": "Execute",
     "related": [],
     "description": "On hit, an affected creature has their HP reduced to zero."
-  },
-  {
-    "slug": "exhaust",
-    "label": "Exhaust",
-    "related": [],
-    "description": "This attack consumes a Simple Action on the user's next activation."
   },
   {
     "slug": "explode",
@@ -2174,186 +3196,68 @@
     "description": "These actions and attacks do not affect allied creatures in range."
   },
   {
-    "slug": "flinch-x",
-    "label": "Flinch X",
+    "slug": "flinch",
+    "label": "Flinch",
     "related": [],
-    "description": "Creature(s) that are target/hit by this Action are Flinched, having their next Activation delayed X0%."
+    "description": "A marker for moves that can afflict Flinch on others"
   },
   {
-    "slug": "flinch-1",
-    "label": "Flinch 1",
+    "slug": "flinch-xy",
+    "label": "Flinch XY",
     "related": [],
-    "description": "Creature(s) that are target/hit by this Action are Flinched, having their next Activation delayed 10%.",
+    "description": "The creature that uses this action is Flinched, having their next Activation delayed by XY%.",
+    "placeholders": [
+      {
+        "keyPattern": "flinch-\\d\\d",
+        "labelPattern": "XY",
+        "valuePattern": "\\d\\d",
+        "descriptionPattern": "XY%",
+        "descriptionReplacement": "{{x}}%"
+      }
+    ],
     "changes": [
       {
         "type": "roll-effect",
         "key": "attack",
         "value": "Compendium.ptr2e.core-effects.Item.advanceffectitem",
         "chance": 100,
+        "dontMerge": true,
         "affects": "target",
         "alterations": [
           {
             "mode": 5,
             "property": "system.amount",
-            "value": -10
+            "value": "-{{trait|value}}"
           },
           {
             "mode": 5,
             "property": "name",
-            "value": "Delay 10%"
+            "value": "Delay {{trait|value}}%"
           }
         ]
-      }
-    ],
-    "type": "automated"
-  },
-  {
-    "slug": "flinch-2",
-    "label": "Flinch 2",
-    "related": [],
-    "description": "Creature(s) that are target/hit by this Action are Flinched, having their next Activation delayed 20%.",
-    "changes": [
+      },
       {
         "type": "roll-effect",
-        "key": "attack",
+        "key": "generic",
         "value": "Compendium.ptr2e.core-effects.Item.advanceffectitem",
         "chance": 100,
+        "dontMerge": true,
         "affects": "target",
         "alterations": [
           {
             "mode": 5,
             "property": "system.amount",
-            "value": -20
+            "value": "-{{trait|value}}"
           },
           {
             "mode": 5,
             "property": "name",
-            "value": "Delay 20%"
+            "value": "Delay {{trait|value}}%"
           }
         ]
       }
     ],
     "type": "automated"
-  },
-  {
-    "slug": "flinch-3",
-    "label": "Flinch 3",
-    "related": [],
-    "description": "Creature(s) that are target/hit by this Action are Flinched, having their next Activation delayed 30%.",
-    "changes": [
-      {
-        "type": "roll-effect",
-        "key": "attack",
-        "value": "Compendium.ptr2e.core-effects.Item.advanceffectitem",
-        "chance": 100,
-        "affects": "target",
-        "alterations": [
-          {
-            "mode": 5,
-            "property": "system.amount",
-            "value": -30
-          },
-          {
-            "mode": 5,
-            "property": "name",
-            "value": "Delay 30%"
-          }
-        ]
-      }
-    ],
-    "type": "automated"
-  },
-  {
-    "slug": "flinch-4",
-    "label": "Flinch 4",
-    "related": [],
-    "description": "Creature(s) that are target/hit by this Action are Flinched, having their next Activation delayed 40%.",
-    "changes": [
-      {
-        "type": "roll-effect",
-        "key": "attack",
-        "value": "Compendium.ptr2e.core-effects.Item.advanceffectitem",
-        "chance": 100,
-        "affects": "target",
-        "alterations": [
-          {
-            "mode": 5,
-            "property": "system.amount",
-            "value": -40
-          },
-          {
-            "mode": 5,
-            "property": "name",
-            "value": "Delay 40%"
-          }
-        ]
-      }
-    ],
-    "type": "automated"
-  },
-  {
-    "slug": "flinch-5",
-    "label": "Flinch 5",
-    "related": [],
-    "description": "Creature(s) that are target/hit by this Action are Flinched, having their next Activation delayed 50%.",
-    "changes": [
-      {
-        "type": "roll-effect",
-        "key": "attack",
-        "value": "Compendium.ptr2e.core-effects.Item.advanceffectitem",
-        "chance": 100,
-        "affects": "target",
-        "alterations": [
-          {
-            "mode": 5,
-            "property": "system.amount",
-            "value": -50
-          },
-          {
-            "mode": 5,
-            "property": "name",
-            "value": "Delay 50%"
-          }
-        ]
-      }
-    ],
-    "type": "automated"
-  },
-  {
-    "slug": "flinch-chance-x",
-    "label": "Flinch Chance X",
-    "related": [],
-    "description": "Creature(s) that are target/hit by this Action have a chance to be Flinched, having their next Activation delayed X0%. This chance is detailed within this Action's description."
-  },
-  {
-    "slug": "flinch-chance-1",
-    "label": "Flinch Chance 1",
-    "related": [],
-    "description": "Creature(s) that are target/hit by this Action have a chance to be Flinched, having their next Activation delayed 10%. This chance is detailed within this Action's description."
-  },
-  {
-    "slug": "flinch-chance-2",
-    "label": "Flinch Chance 2",
-    "related": [],
-    "description": "Creature(s) that are target/hit by this Action have a chance to be Flinched, having their next Activation delayed 20%. This chance is detailed within this Action's description."
-  },
-  {
-    "slug": "flinch-chance-3",
-    "label": "Flinch Chance 3",
-    "related": [],
-    "description": "Creature(s) that are target/hit by this Action have a chance to be Flinched, having their next Activation delayed 30%. This chance is detailed within this Action's description."
-  },
-  {
-    "slug": "flinch-chance-4",
-    "label": "Flinch Chance 4",
-    "related": [],
-    "description": "Creature(s) that are target/hit by this Action have a chance to be Flinched, having their next Activation delayed 40%. This chance is detailed within this Action's description."
-  },
-  {
-    "slug": "flinch-chance-5",
-    "label": "Flinch Chance 5",
-    "related": [],
-    "description": "Creature(s) that are target/hit by this Action have a chance to be Flinched, having their next Activation delayed 50%. This chance is detailed within this Action's description."
   },
   {
     "slug": "hazard",
@@ -2446,6 +3350,12 @@
     "description": "Denotes if an attack is linked to the use of another. Linked attacks are automatically added to the Active List, ignoring the Active List limit."
   },
   {
+    "slug": "magma-wader",
+    "label": "Magma Wader",
+    "related": [],
+    "description": "Can move through Magma tiles without suffering the negative effects"
+  },
+  {
     "slug": "manipulate",
     "label": "Manipulate",
     "related": [],
@@ -2485,97 +3395,97 @@
     "slug": "pass-x",
     "label": "Pass X",
     "related": [],
-    "description": "This attack allows the creature to move through enemy squares as part of their Movement and attack those creatures. They can attack up to X creatures, declaring and resolving the attack on each. Each attack beyond the first costs 1 PP."
+    "description": "This attack allows the creature to move through enemy squares as part of their Movement and attack those creatures. They can attack up to X creatures beyond the first target, spending 1 PP to declare and resolve the attack on each additional target. When doing so, the user must Move and must 'pass' through these targets' spaces (treating those spaces as empty during this Movement) and end this 'pass' on an opposite side of the target in space(s) they can occupy, and cannot have Attack of Opportunity declared in response to this Movement and any related Movement made while Moving between Pass targets."
   },
   {
     "slug": "pass-1",
     "label": "Pass 1",
     "related": [],
-    "description": "This attack allows the creature to move through enemy squares as part of their Movement and attack those creatures. They can attack up to 1 creatures, declaring and resolving the attack on each. Each attack beyond the first costs 1 PP."
+    "description": "This attack allows the creature to move through enemy squares as part of their Movement and attack those creatures. They can attack up to 1 creature beyond the first target, spending 1 PP to declare and resolve the attack on each additional target. When doing so, the user must Move and must 'pass' through these targets' spaces (treating those spaces as empty during this Movement) and end this 'pass' on an opposite side of the target in space(s) they can occupy, and cannot have Attack of Opportunity declared in response to this Movement and any related Movement made while Moving between Pass targets."
   },
   {
     "slug": "pass-2",
     "label": "Pass 2",
     "related": [],
-    "description": "This attack allows the creature to move through enemy squares as part of their Movement and attack those creatures. They can attack up to 2 creatures, declaring and resolving the attack on each. Each attack beyond the first costs 1 PP."
+    "description": "This attack allows the creature to move through enemy squares as part of their Movement and attack those creatures. They can attack up to 2 creatures beyond the first target, spending 1 PP to declare and resolve the attack on each additional target. When doing so, the user must Move and must 'pass' through these targets' spaces (treating those spaces as empty during this Movement) and end this 'pass' on an opposite side of the target in space(s) they can occupy, and cannot have Attack of Opportunity declared in response to this Movement and any related Movement made while Moving between Pass targets."
   },
   {
     "slug": "pass-3",
     "label": "Pass 3",
     "related": [],
-    "description": "This attack allows the creature to move through enemy squares as part of their Movement and attack those creatures. They can attack up to 3 creatures, declaring and resolving the attack on each. Each attack beyond the first costs 1 PP."
+    "description": "This attack allows the creature to move through enemy squares as part of their Movement and attack those creatures. They can attack up to 3 creatures beyond the first target, spending 1 PP to declare and resolve the attack on each additional target. When doing so, the user must Move and must 'pass' through these targets' spaces (treating those spaces as empty during this Movement) and end this 'pass' on an opposite side of the target in space(s) they can occupy, and cannot have Attack of Opportunity declared in response to this Movement and any related Movement made while Moving between Pass targets."
   },
   {
     "slug": "pass-4",
     "label": "Pass 4",
     "related": [],
-    "description": "This attack allows the creature to move through enemy squares as part of their Movement and attack those creatures. They can attack up to 4 creatures, declaring and resolving the attack on each. Each attack beyond the first costs 1 PP."
+    "description": "This attack allows the creature to move through enemy squares as part of their Movement and attack those creatures. They can attack up to 4 creatures beyond the first target, spending 1 PP to declare and resolve the attack on each additional target. When doing so, the user must Move and must 'pass' through these targets' spaces (treating those spaces as empty during this Movement) and end this 'pass' on an opposite side of the target in space(s) they can occupy, and cannot have Attack of Opportunity declared in response to this Movement and any related Movement made while Moving between Pass targets."
   },
   {
     "slug": "pass-5",
     "label": "Pass 5",
     "related": [],
-    "description": "This attack allows the creature to move through enemy squares as part of their Movement and attack those creatures. They can attack up to 5 creatures, declaring and resolving the attack on each. Each attack beyond the first costs 1 PP."
+    "description": "This attack allows the creature to move through enemy squares as part of their Movement and attack those creatures. They can attack up to 5 creatures beyond the first target, spending 1 PP to declare and resolve the attack on each additional target. When doing so, the user must Move and must 'pass' through these targets' spaces (treating those spaces as empty during this Movement) and end this 'pass' on an opposite side of the target in space(s) they can occupy, and cannot have Attack of Opportunity declared in response to this Movement and any related Movement made while Moving between Pass targets."
   },
   {
     "slug": "pass-6",
     "label": "Pass 6",
     "related": [],
-    "description": "This attack allows the creature to move through enemy squares as part of their Movement and attack those creatures. They can attack up to 6 creatures, declaring and resolving the attack on each. Each attack beyond the first costs 1 PP."
+    "description": "This attack allows the creature to move through enemy squares as part of their Movement and attack those creatures. They can attack up to 6 creatures beyond the first target, spending 1 PP to declare and resolve the attack on each additional target. When doing so, the user must Move and must 'pass' through these targets' spaces (treating those spaces as empty during this Movement) and end this 'pass' on an opposite side of the target in space(s) they can occupy, and cannot have Attack of Opportunity declared in response to this Movement and any related Movement made while Moving between Pass targets."
   },
   {
     "slug": "pass-7",
     "label": "Pass 7",
     "related": [],
-    "description": "This attack allows the creature to move through enemy squares as part of their Movement and attack those creatures. They can attack up to 7 creatures, declaring and resolving the attack on each. Each attack beyond the first costs 1 PP."
+    "description": "This attack allows the creature to move through enemy squares as part of their Movement and attack those creatures. They can attack up to 7 creatures beyond the first target, spending 1 PP to declare and resolve the attack on each additional target. When doing so, the user must Move and must 'pass' through these targets' spaces (treating those spaces as empty during this Movement) and end this 'pass' on an opposite side of the target in space(s) they can occupy, and cannot have Attack of Opportunity declared in response to this Movement and any related Movement made while Moving between Pass targets."
   },
   {
     "slug": "pass-8",
     "label": "Pass 8",
     "related": [],
-    "description": "This attack allows the creature to move through enemy squares as part of their Movement and attack those creatures. They can attack up to 8 creatures, declaring and resolving the attack on each. Each attack beyond the first costs 1 PP."
+    "description": "This attack allows the creature to move through enemy squares as part of their Movement and attack those creatures. They can attack up to 8 creatures beyond the first target, spending 1 PP to declare and resolve the attack on each additional target. When doing so, the user must Move and must 'pass' through these targets' spaces (treating those spaces as empty during this Movement) and end this 'pass' on an opposite side of the target in space(s) they can occupy, and cannot have Attack of Opportunity declared in response to this Movement and any related Movement made while Moving between Pass targets."
   },
   {
     "slug": "pass-9",
     "label": "Pass 9",
     "related": [],
-    "description": "This attack allows the creature to move through enemy squares as part of their Movement and attack those creatures. They can attack up to 9 creatures, declaring and resolving the attack on each. Each attack beyond the first costs 1 PP."
+    "description": "This attack allows the creature to move through enemy squares as part of their Movement and attack those creatures. They can attack up to 9 creatures beyond the first target, spending 1 PP to declare and resolve the attack on each additional target. When doing so, the user must Move and must 'pass' through these targets' spaces (treating those spaces as empty during this Movement) and end this 'pass' on an opposite side of the target in space(s) they can occupy, and cannot have Attack of Opportunity declared in response to this Movement and any related Movement made while Moving between Pass targets."
   },
   {
     "slug": "pass-10",
     "label": "Pass 10",
     "related": [],
-    "description": "This attack allows the creature to move through enemy squares as part of their Movement and attack those creatures. They can attack up to 10 creatures, declaring and resolving the attack on each. Each attack beyond the first costs 1 PP."
+    "description": "This attack allows the creature to move through enemy squares as part of their Movement and attack those creatures. They can attack up to 10 creatures beyond the first target, spending 1 PP to declare and resolve the attack on each additional target. When doing so, the user must Move and must 'pass' through these targets' spaces (treating those spaces as empty during this Movement) and end this 'pass' on an opposite side of the target in space(s) they can occupy, and cannot have Attack of Opportunity declared in response to this Movement and any related Movement made while Moving between Pass targets."
   },
   {
     "slug": "pass-11",
     "label": "Pass 11",
     "related": [],
-    "description": "This attack allows the creature to move through enemy squares as part of their Movement and attack those creatures. They can attack up to 11 creatures, declaring and resolving the attack on each. Each attack beyond the first costs 1 PP."
+    "description": "This attack allows the creature to move through enemy squares as part of their Movement and attack those creatures. They can attack up to 11 creatures beyond the first target, spending 1 PP to declare and resolve the attack on each additional target. When doing so, the user must Move and must 'pass' through these targets' spaces (treating those spaces as empty during this Movement) and end this 'pass' on an opposite side of the target in space(s) they can occupy, and cannot have Attack of Opportunity declared in response to this Movement and any related Movement made while Moving between Pass targets."
   },
   {
     "slug": "pass-12",
     "label": "Pass 12",
     "related": [],
-    "description": "This attack allows the creature to move through enemy squares as part of their Movement and attack those creatures. They can attack up to 12 creatures, declaring and resolving the attack on each. Each attack beyond the first costs 1 PP."
+    "description": "This attack allows the creature to move through enemy squares as part of their Movement and attack those creatures. They can attack up to 12 creatures beyond the first target, spending 1 PP to declare and resolve the attack on each additional target. When doing so, the user must Move and must 'pass' through these targets' spaces (treating those spaces as empty during this Movement) and end this 'pass' on an opposite side of the target in space(s) they can occupy, and cannot have Attack of Opportunity declared in response to this Movement and any related Movement made while Moving between Pass targets."
   },
   {
     "slug": "pass-13",
     "label": "Pass 13",
     "related": [],
-    "description": "This attack allows the creature to move through enemy squares as part of their Movement and attack those creatures. They can attack up to 13 creatures, declaring and resolving the attack on each. Each attack beyond the first costs 1 PP."
+    "description": "This attack allows the creature to move through enemy squares as part of their Movement and attack those creatures. They can attack up to 13 creatures beyond the first target, spending 1 PP to declare and resolve the attack on each additional target. When doing so, the user must Move and must 'pass' through these targets' spaces (treating those spaces as empty during this Movement) and end this 'pass' on an opposite side of the target in space(s) they can occupy, and cannot have Attack of Opportunity declared in response to this Movement and any related Movement made while Moving between Pass targets."
   },
   {
     "slug": "pass-14",
     "label": "Pass 14",
     "related": [],
-    "description": "This attack allows the creature to move through enemy squares as part of their Movement and attack those creatures. They can attack up to 14 creatures, declaring and resolving the attack on each. Each attack beyond the first costs 1 PP."
+    "description": "This attack allows the creature to move through enemy squares as part of their Movement and attack those creatures. They can attack up to 14 creatures beyond the first target, spending 1 PP to declare and resolve the attack on each additional target. When doing so, the user must Move and must 'pass' through these targets' spaces (treating those spaces as empty during this Movement) and end this 'pass' on an opposite side of the target in space(s) they can occupy, and cannot have Attack of Opportunity declared in response to this Movement and any related Movement made while Moving between Pass targets."
   },
   {
     "slug": "pass-15",
     "label": "Pass 15",
     "related": [],
-    "description": "This attack allows the creature to move through enemy squares as part of their Movement and attack those creatures. They can attack up to 15 creatures, declaring and resolving the attack on each. Each attack beyond the first costs 1 PP."
+    "description": "This attack allows the creature to move through enemy squares as part of their Movement and attack those creatures. They can attack up to 15 creatures beyond the first target, spending 1 PP to declare and resolve the attack on each additional target. When doing so, the user must Move and must 'pass' through these targets' spaces (treating those spaces as empty during this Movement) and end this 'pass' on an opposite side of the target in space(s) they can occupy, and cannot have Attack of Opportunity declared in response to this Movement and any related Movement made while Moving between Pass targets."
   },
   {
     "slug": "pledge",
@@ -2590,145 +3500,63 @@
     "description": "Denotes if an attack or ability spreads or uses powder or a fine dust."
   },
   {
-    "slug": "priority-x",
-    "label": "Priority X",
+    "slug": "priority",
+    "label": "priority",
     "related": [],
-    "description": "After resolving this Action, the user's next Activation is advanced X0%."
+    "description": "A marker for moves that can afflict Advance on others"
   },
   {
-    "slug": "priority-1",
-    "label": "Priority 1",
+    "slug": "priority-xy",
+    "label": "Priority XY",
     "related": [],
-    "description": "After resolving this Action, the user's next Activation is advanced 10%.",
-    "changes": [
+    "description": "The creature that uses this action is Advanced, having their next Activation advanced by XY%.",
+    "placeholders": [
       {
-        "type": "roll-effect",
-        "key": "attack",
-        "value": "Compendium.ptr2e.core-effects.Item.advanceffectitem",
-        "chance": 100,
-        "affects": "self",
-        "alterations": [
-          {
-            "mode": 5,
-            "property": "system.amount",
-            "value": 10
-          },
-          {
-            "mode": 5,
-            "property": "name",
-            "value": "Advance 10%"
-          }
-        ]
+        "keyPattern": "priority-\\d\\d",
+        "labelPattern": "XY",
+        "valuePattern": "\\d\\d",
+        "descriptionPattern": "XY%",
+        "descriptionReplacement": "{{x}}%"
       }
     ],
-    "type": "automated"
-  },
-  {
-    "slug": "priority-2",
-    "label": "Priority 2",
-    "related": [],
-    "description": "After resolving this Action, the user's next Activation is advanced 20%.",
     "changes": [
       {
         "type": "roll-effect",
         "key": "attack",
         "value": "Compendium.ptr2e.core-effects.Item.advanceffectitem",
         "chance": 100,
-        "affects": "self",
+        "dontMerge": true,
+        "affects": "target",
         "alterations": [
           {
             "mode": 5,
             "property": "system.amount",
-            "value": 20
+            "value": "{{trait|value}}"
           },
           {
             "mode": 5,
             "property": "name",
-            "value": "Advance 20%"
+            "value": "Advance {{trait|value}}%"
           }
         ]
-      }
-    ],
-    "type": "automated"
-  },
-  {
-    "slug": "priority-3",
-    "label": "Priority 3",
-    "related": [],
-    "description": "After resolving this Action, the user's next Activation is advanced 30%.",
-    "changes": [
+      },
       {
         "type": "roll-effect",
-        "key": "attack",
+        "key": "generic",
         "value": "Compendium.ptr2e.core-effects.Item.advanceffectitem",
         "chance": 100,
-        "affects": "self",
+        "dontMerge": true,
+        "affects": "target",
         "alterations": [
           {
             "mode": 5,
             "property": "system.amount",
-            "value": 30
+            "value": "{{trait|value}}"
           },
           {
             "mode": 5,
             "property": "name",
-            "value": "Advance 30%"
-          }
-        ]
-      }
-    ],
-    "type": "automated"
-  },
-  {
-    "slug": "priority-4",
-    "label": "Priority 4",
-    "related": [],
-    "description": "After resolving this Action, the user's next Activation is advanced 40%.",
-    "changes": [
-      {
-        "type": "roll-effect",
-        "key": "attack",
-        "value": "Compendium.ptr2e.core-effects.Item.advanceffectitem",
-        "chance": 100,
-        "affects": "self",
-        "alterations": [
-          {
-            "mode": 5,
-            "property": "system.amount",
-            "value": 40
-          },
-          {
-            "mode": 5,
-            "property": "name",
-            "value": "Advance 40%"
-          }
-        ]
-      }
-    ],
-    "type": "automated"
-  },
-  {
-    "slug": "priority-5",
-    "label": "Priority 5",
-    "related": [],
-    "description": "After resolving this Action, the user's next Activation is advanced 50%.",
-    "changes": [
-      {
-        "type": "roll-effect",
-        "key": "attack",
-        "value": "Compendium.ptr2e.core-effects.Item.advanceffectitem",
-        "chance": 100,
-        "affects": "self",
-        "alterations": [
-          {
-            "mode": 5,
-            "property": "system.amount",
-            "value": 50
-          },
-          {
-            "mode": 5,
-            "property": "name",
-            "value": "Advance 50%"
+            "value": "Advance {{trait|value}}%"
           }
         ]
       }
@@ -2930,8 +3758,10 @@
   {
     "slug": "set-up",
     "label": "Set-Up",
-    "related": [],
-    "description": "The action has a two-step activation and resolution, split across two activations (Set-Up and Resolution) and consumes Complex Actions on both Activations, but PP only once. It may have separate effects on both the set up activation and resolution activation, though usually the attack's accuracy and damage roll occur on the resolution activation."
+    "related": [
+      "grapple"
+    ],
+    "description": "The action has a two-step activation and resolution, split across two activations (Set-Up and Resolution) and consumes Complex Actions on both Activations, but PP only once. It may have separate effects on both the set up activation and resolution activation, though usually the attack's accuracy and damage roll occur on the resolution activation. Set-up moves temporarily gain @Trait[grapple] during the resolution phase."
   },
   {
     "slug": "sharp",
@@ -2974,6 +3804,12 @@
     "label": "Substitute",
     "related": [],
     "description": "Denotes if an attack or ability creates a Substitute or similar mitigating method."
+  },
+  {
+    "slug": "summon",
+    "label": "Summon",
+    "related": [],
+    "description": "Denotes if an attack/ability/effect features or interacts with a Summon."
   },
   {
     "slug": "tail",
@@ -3027,7 +3863,7 @@
     "slug": "connection",
     "label": "Connection",
     "related": [],
-    "description": "Denotes if an Ability provides an Action or Attack onto a creature's Active List, not taking up a slot on the user's Active List."
+    "description": "Denotes if an Ability or Perk provides an Attack onto a creature's Active List, not taking up a slot on the user's Active List."
   },
   {
     "slug": "fusion",
@@ -3044,21 +3880,30 @@
   {
     "slug": "major-affliction",
     "label": "Major Affliction",
-    "related": ["minor-affliction", "pseudo-affliction"],
+    "related": [
+      "minor-affliction",
+      "pseudo-affliction"
+    ],
     "description": "Major Afflictions persist during a fight; even if the creature is Recalled.",
     "type": "automated"
   },
   {
     "slug": "minor-affliction",
     "label": "Minor Affliction",
-    "related": ["major-affliction", "pseudo-affliction"],
+    "related": [
+      "major-affliction",
+      "pseudo-affliction"
+    ],
     "description": "Minor Afflictions get automatically removed when a creature is Recalled.",
     "type": "automated"
   },
   {
     "slug": "pseudo-affliction",
     "label": "Pseudo Affliction",
-    "related": ["major-affliction", "minor-affliction"],
+    "related": [
+      "major-affliction",
+      "minor-affliction"
+    ],
     "description": "Pseudo Afflictions are effects that are similar in nature to Major/Minor afflictions, but count as neither; and often have unique interactions with other effects.",
     "type": "automated"
   },
@@ -3626,16 +4471,172 @@
     "description": "Denotes if an item possesses a pool governing the number of times the item may be used before the pool needs to be refilled (requirements and conditions vary depending on the item's other Traits). This count is maintained as a Clock on the holding Actor's page, Clock Size equal to 50."
   },
   {
+    "slug": "1-Handed",
+    "label": "1-handed",
+    "related": [],
+    "description": "Items with this Trait usually require one or more hands to properly utilize, if not hold outright, taking up 1 Held Slot."
+  },
+  {
+    "slug": "2-Handed",
+    "label": "2-handed",
+    "related": [],
+    "description": "Items with this Trait usually require one or more hands to properly utilize, if not hold outright, taking up 2 Held Slots."
+  },
+  {
     "slug": "switch-grip",
     "label": "Switch Grip",
     "related": [],
-    "description": "One-handed: can hold item in one hand, and another held item in the other hand. Two-handed: power of weapon attacks +30%, loses second held item slot"
+    "description": "@trait[1-handed] weapons with this trait are able to be optionally held in two slots, which boosts the Power of those weapon's Attacks by +50%."
   },
   {
-    "slug": "reload",
-    "label": "Reload",
+    "slug": "reload-X",
+    "label": "Reload X",
     "related": [],
-    "description": "These weapons can only use their innate PP Pool for their attacks. The user can use a Simple Action to reload the weapon, refilling its PP Pool. This Action either consumes an Ammunition item relating to the weapon, or consumes the Character's IP at an increased cost."
+    "description": "These weapons utilize a Clock, ticking down, to track the PP Cost of their Attacks, rather than their user's. Creatures can use X Simple Actions to reload the weapon, refilling the Clock. Reloading a weapon either consumes an Ammunition item relating to the weapon, or consumes a creature's IP at an increased cost."
+  },
+  {
+    "slug": "reload-1",
+    "label": "Reload 1",
+    "related": [],
+    "description": "These weapons utilize a Clock, ticking down, to track the PP Cost of their Attacks, rather than their user's. Creatures can use 1 Simple Action to reload the weapon, refilling the Clock. Reloading a weapon either consumes an Ammunition item relating to the weapon, or consumes a creature's IP at an increased cost."
+  },
+  {
+    "slug": "reload-2",
+    "label": "Reload 2",
+    "related": [],
+    "description": "These weapons utilize a Clock, ticking down, to track the PP Cost of their Attacks, rather than their user's. Creatures can use 2 Simple Actions to reload the weapon, refilling the Clock. Reloading a weapon either consumes an Ammunition item relating to the weapon, or consumes a creature's IP at an increased cost."
+  },
+  {
+    "slug": "reload-3",
+    "label": "Reload 3",
+    "related": [],
+    "description": "These weapons utilize a Clock, ticking down, to track the PP Cost of their Attacks, rather than their user's. Creatures can use 3 Simple Actions to reload the weapon, refilling the Clock. Reloading a weapon either consumes an Ammunition item relating to the weapon, or consumes a creature's IP at an increased cost."
+  },
+  {
+    "slug": "reload-3",
+    "label": "Reload 3",
+    "related": [],
+    "description": "These weapons utilize a Clock, ticking down, to track the PP Cost of their Attacks, rather than their user's. Creatures can use 3 Simple Actions to reload the weapon, refilling the Clock. Reloading a weapon either consumes an Ammunition item relating to the weapon, or consumes a creature's IP at an increased cost."
+  },
+  {
+    "slug": "reload-4",
+    "label": "Reload 4",
+    "related": [],
+    "description": "These weapons utilize a Clock, ticking down, to track the PP Cost of their Attacks, rather than their user's. Creatures can use 4 Simple Actions to reload the weapon, refilling the Clock. Reloading a weapon either consumes an Ammunition item relating to the weapon, or consumes a creature's IP at an increased cost."
+  },
+  {
+    "slug": "reload-5",
+    "label": "Reload 5",
+    "related": [],
+    "description": "These weapons utilize a Clock, ticking down, to track the PP Cost of their Attacks, rather than their user's. Creatures can use 5 Simple Actions to reload the weapon, refilling the Clock. Reloading a weapon either consumes an Ammunition item relating to the weapon, or consumes a creature's IP at an increased cost."
+  },
+  {
+    "slug": "reload-6",
+    "label": "Reload 6",
+    "related": [],
+    "description": "These weapons utilize a Clock, ticking down, to track the PP Cost of their Attacks, rather than their user's. Creatures can use 6 Simple Actions to reload the weapon, refilling the Clock. Reloading a weapon either consumes an Ammunition item relating to the weapon, or consumes a creature's IP at an increased cost."
+  },
+  {
+    "slug": "reload-7",
+    "label": "Reload 7",
+    "related": [],
+    "description": "These weapons utilize a Clock, ticking down, to track the PP Cost of their Attacks, rather than their user's. Creatures can use 7 Simple Actions to reload the weapon, refilling the Clock. Reloading a weapon either consumes an Ammunition item relating to the weapon, or consumes a creature's IP at an increased cost."
+  },
+  {
+    "slug": "reload-8",
+    "label": "Reload 8",
+    "related": [],
+    "description": "These weapons utilize a Clock, ticking down, to track the PP Cost of their Attacks, rather than their user's. Creatures can use 8 Simple Actions to reload the weapon, refilling the Clock. Reloading a weapon either consumes an Ammunition item relating to the weapon, or consumes a creature's IP at an increased cost."
+  },
+  {
+    "slug": "reload-9",
+    "label": "Reload 9",
+    "related": [],
+    "description": "These weapons utilize a Clock, ticking down, to track the PP Cost of their Attacks, rather than their user's. Creatures can use 9 Simple Actions to reload the weapon, refilling the Clock. Reloading a weapon either consumes an Ammunition item relating to the weapon, or consumes a creature's IP at an increased cost."
+  },
+  {
+    "slug": "reload-10",
+    "label": "Reload 10",
+    "related": [],
+    "description": "These weapons utilize a Clock, ticking down, to track the PP Cost of their Attacks, rather than their user's. Creatures can use 10 Simple Actions to reload the weapon, refilling the Clock. Reloading a weapon either consumes an Ammunition item relating to the weapon, or consumes a creature's IP at an increased cost."
+  },
+  {
+    "slug": "reload-11",
+    "label": "Reload 11",
+    "related": [],
+    "description": "These weapons utilize a Clock, ticking down, to track the PP Cost of their Attacks, rather than their user's. Creatures can use 11 Simple Actions to reload the weapon, refilling the Clock. Reloading a weapon either consumes an Ammunition item relating to the weapon, or consumes a creature's IP at an increased cost."
+  },
+  {
+    "slug": "reload-12",
+    "label": "Reload 12",
+    "related": [],
+    "description": "These weapons utilize a Clock, ticking down, to track the PP Cost of their Attacks, rather than their user's. Creatures can use 12 Simple Actions to reload the weapon, refilling the Clock. Reloading a weapon either consumes an Ammunition item relating to the weapon, or consumes a creature's IP at an increased cost."
+  },
+  {
+    "slug": "reload-13",
+    "label": "Reload 13",
+    "related": [],
+    "description": "These weapons utilize a Clock, ticking down, to track the PP Cost of their Attacks, rather than their user's. Creatures can use 13 Simple Actions to reload the weapon, refilling the Clock. Reloading a weapon either consumes an Ammunition item relating to the weapon, or consumes a creature's IP at an increased cost."
+  },
+  {
+    "slug": "reload-14",
+    "label": "Reload 14",
+    "related": [],
+    "description": "These weapons utilize a Clock, ticking down, to track the PP Cost of their Attacks, rather than their user's. Creatures can use 14 Simple Actions to reload the weapon, refilling the Clock. Reloading a weapon either consumes an Ammunition item relating to the weapon, or consumes a creature's IP at an increased cost."
+  },
+  {
+    "slug": "reload-15",
+    "label": "Reload 15",
+    "related": [],
+    "description": "These weapons utilize a Clock, ticking down, to track the PP Cost of their Attacks, rather than their user's. Creatures can use 15 Simple Actions to reload the weapon, refilling the Clock. Reloading a weapon either consumes an Ammunition item relating to the weapon, or consumes a creature's IP at an increased cost."
+  },
+  {
+    "slug": "reload-16",
+    "label": "Reload 16",
+    "related": [],
+    "description": "These weapons utilize a Clock, ticking down, to track the PP Cost of their Attacks, rather than their user's. Creatures can use 16 Simple Actions to reload the weapon, refilling the Clock. Reloading a weapon either consumes an Ammunition item relating to the weapon, or consumes a creature's IP at an increased cost."
+  },
+  {
+    "slug": "reload-17",
+    "label": "Reload 17",
+    "related": [],
+    "description": "These weapons utilize a Clock, ticking down, to track the PP Cost of their Attacks, rather than their user's. Creatures can use 17 Simple Actions to reload the weapon, refilling the Clock. Reloading a weapon either consumes an Ammunition item relating to the weapon, or consumes a creature's IP at an increased cost."
+  },
+  {
+    "slug": "reload-18",
+    "label": "Reload 18",
+    "related": [],
+    "description": "These weapons utilize a Clock, ticking down, to track the PP Cost of their Attacks, rather than their user's. Creatures can use 18 Simple Actions to reload the weapon, refilling the Clock. Reloading a weapon either consumes an Ammunition item relating to the weapon, or consumes a creature's IP at an increased cost."
+  },
+  {
+    "slug": "reload-19",
+    "label": "Reload 19",
+    "related": [],
+    "description": "These weapons utilize a Clock, ticking down, to track the PP Cost of their Attacks, rather than their user's. Creatures can use 19 Simple Actions to reload the weapon, refilling the Clock. Reloading a weapon either consumes an Ammunition item relating to the weapon, or consumes a creature's IP at an increased cost."
+  },
+  {
+    "slug": "reload-20",
+    "label": "Reload 20",
+    "related": [],
+    "description": "These weapons utilize a Clock, ticking down, to track the PP Cost of their Attacks, rather than their user's. Creatures can use 20 Simple Actions to reload the weapon, refilling the Clock. Reloading a weapon either consumes an Ammunition item relating to the weapon, or consumes a creature's IP at an increased cost."
+  },
+  {
+    "slug": "readied",
+    "label": "Readied",
+    "related": [],
+    "description": "Actions with his trait cannot be used if the user has Move since the end of their Previous Activation, and cannot Move during the Activation this Action is used. `Moving` includeds the user's own Movement, Forced Movement, or as Rider or Crew to a creature or vehicle that would Move."
+  },
+  {
+    "slug": "manned",
+    "label": "Manned",
+    "related": [],
+    "description": "This trait denotes if a weapon is mostly stationary, being affixed to an emplacement, structure, or vehicle. Creatures must use the weapon from its designated postiion, and cannot easily Move the weapon by themselves."
+  },
+  {
+    "slug": "autoload",
+    "label": "Autoload",
+    "related": [],
+    "description": "Weapons with this trait use a mechanism to automatically feed their ammunition, rather than loading each shot by hand, like with a sling, bow, or muzzleloading firearm."
   },
   {
     "slug": "ranger",
@@ -3680,8 +4681,10 @@
   {
     "slug": "grapple",
     "label": "Grapple",
-    "related": [],
-    "description": "Denotes if an Action can be utilized while the Action's user is affected by the Grapple affliction."
+    "related": [
+      "contact"
+    ],
+    "description": "Denotes if an Action can be utilized while the Action's user is affected by the Grapple affliction. All [Grapple] actions are considered to have the @Trait[contact] Trait whenever they are used as part of a Grapple."
   },
   {
     "slug": "pierce",
@@ -3726,14 +4729,6 @@
     "description": "Creatures with this Trait possess a heart that's been forcefully closed, gaining the following changes:\n1) +50% SPD\n2) The Extra Abilities \"Hyper Agressive\" and \"Coldhearted\"\n3) +1 Active List Slot\n4) Access to the [Shadow] %lt;Type&gt;Learnlist\n5) The Anguish Skill (100 by default) and its associated mechanics\n6) Are susceptible to the \"Hyper Mode\" Affliction\n7) Cannot undergo Evolution or other miscellaneous transformations\n8. Placed onto a slower EXP Track, based on their Species"
   },
   {
-    "slug": "pp-updated",
-    "label": "PP Updated",
-    "related": [
-      "requires-rework"
-    ],
-    "description": "This action has had it's PP Errata'd, any action lacking this trait still has to undergo the PP Errata.\nOnce all actions have been errata'd this trait will be removed."
-  },
-  {
     "slug": "ignore-immunity",
     "label": "Ignore Immunity",
     "related": [],
@@ -3758,9 +4753,7 @@
   {
     "slug": "requires-rework",
     "label": "Requires Rework",
-    "related": [
-      "pp-updated"
-    ],
+    "related": [],
     "description": "The current version of this requires a rework, and will be changed or removed in the near future",
     "type": "automated",
     "changes": []
@@ -3778,5 +4771,241 @@
         "value": "uncapturable"
       }
     ]
+  },
+  {
+    "slug": "minor-buff",
+    "label": "Minor Buff",
+    "related": [],
+    "description": "[Minor Buff] perks, also known as 'Spacer Perks' are perks which are not present on the web, and instead are widely available through one of the many @UUID[Compendium.ptr2e.core-perks.Item.minorbuffperk000] perks present on the web. You can use the Compendium Browser to find a full list of options, or check the Minor Buff folder in the PTR 2e Perks Compendium.",
+    "type": "automated"
+  },
+  {
+    "slug": "dot",
+    "label": "DoT",
+    "related": [],
+    "description": "This Affliction is one that Deals Damage over Time (DoT)."
+  },
+  {
+    "slug": "control",
+    "label": "Control",
+    "related": [],
+    "description": "This Affliction is one which includes Crowd Control effects."
+  },
+  {
+    "slug": "flat",
+    "label": "Flat",
+    "related": [],
+    "description": "This Trait denotes that the Attack deals Flat Damage.",
+    "type": "automated"
+  },
+  {
+    "slug": "digimon",
+    "label": "Digimon",
+    "related": [
+      "vaccine",
+      "data",
+      "virus"
+    ],
+    "description": "Grant access to the Digivolution Web. (In a future build)"
+  },
+  {
+    "slug": "vaccine",
+    "label": "Vaccine",
+    "related": [
+      "digimon",
+      "data",
+      "virus"
+    ],
+    "description": "Gain +50% Damage versus Virus-trait Digimon. Inflict 50% less Damage vs Data-trait Digimon.",
+    "type":"automated",
+    "changes": [
+      {
+        "type": "percentile-modifier",
+        "key": "damaging-attack-damage",
+        "value": 50,
+        "predicate": [
+          "target:trait:virus"
+        ],
+        "hideIfDisabled": true
+      },
+      {
+        "type": "percentile-modifier",
+        "key": "damaging-attack-damage",
+        "value": -50,
+        "predicate": [
+          "target:trait:data"
+        ],
+        "hideIfDisabled": true
+      }
+    ]
+  },
+  {
+    "slug": "data",
+    "label": "Data",
+    "related": [
+      "vaccine",
+      "digimon",
+      "virus"
+    ],
+    "description": "Gain +50% Damage versus Vaccine-trait Digimon. Inflict 50% less Damage vs Virus-trait Digimon.",
+    "type":"automated",
+    "changes": [
+      {
+        "type": "percentile-modifier",
+        "key": "damaging-attack-damage",
+        "value": 50,
+        "predicate": [
+          "target:trait:vaccine"
+        ],
+        "hideIfDisabled": true
+      },
+      {
+        "type": "percentile-modifier",
+        "key": "damaging-attack-damage",
+        "value": -50,
+        "predicate": [
+          "target:trait:virus"
+        ],
+        "hideIfDisabled": true
+      }
+    ]
+  },
+  {
+    "slug": "virus",
+    "label": "Virus",
+    "related": [
+      "vaccine",
+      "data",
+      "digimon"
+    ],
+    "description": "Gain +50% Damage versus Data-trait Digimon. Inflict 50% less Damage vs Vaccine-trait Digimon.",
+    "type":"automated",
+    "changes": [
+      {
+        "type": "percentile-modifier",
+        "key": "damaging-attack-damage",
+        "value": 50,
+        "predicate": [
+          "target:trait:data"
+        ],
+        "hideIfDisabled": true
+      },
+      {
+        "type": "percentile-modifier",
+        "key": "damaging-attack-damage",
+        "value": -50,
+        "predicate": [
+          "target:trait:vaccine"
+        ],
+        "hideIfDisabled": true
+      }
+    ]
+  },
+  {
+    "slug": "free",
+    "label": "Free",
+    "related": [
+      "vaccine",
+      "data",
+      "virus",
+      "digimon"
+    ],
+    "description": "Neutrally aligned Digimon do not deal or receive more or less damage from any other Digimon Traits."
+  },
+  {
+    "slug": "in-training",
+    "label": "In Training",
+    "related": [
+      "baby",
+      "rookie",
+      "champion",
+      "ultimate",
+      "mega",
+      "ultra",
+      "digimon"
+    ],
+    "description": "In Training Digimon are one step up from Baby Digimon, but are still weak and undefined. Starter Digimon are sometimes given at this stage."
+  },
+  {
+    "slug": "rookie",
+    "label": "Rookie",
+    "related": [
+      "baby",
+      "in-training",
+      "champion",
+      "ultimate",
+      "mega",
+      "ultra",
+      "digimon"
+    ],
+    "description": "Rookie Digimon are capable of fighting at this stage, and usually gain traits defining them as Vaccine, Virus, or Data."
+  },
+  {
+    "slug": "champion",
+    "label": "Champion",
+    "related": [
+      "baby",
+      "in-training",
+      "rookie",
+      "ultimate",
+      "mega",
+      "ultra",
+      "digimon"
+    ],
+    "description": "Champion Digimon are grown up and powerful, and are often the strongest Digimon you meet in the wild."
+  },
+  {
+    "slug": "ultimate",
+    "label": "Ultimate",
+    "related": [
+      "baby",
+      "in-training",
+      "rookie",
+      "champion",
+      "mega",
+      "ultra",
+      "digimon"
+    ],
+    "description": "Ultimate Digimon have gone beyond the typical level of power, often becoming leaders of communities or petty tyrants of swathes of land."
+  },
+  {
+    "slug": "mega",
+    "label": "Mega",
+    "related": [
+      "baby",
+      "in-training",
+      "rookie",
+      "champion",
+      "ultimate",
+      "ultra",
+      "digimon"
+    ],
+    "description": "Mega Digimon have powers that if misused could destroy their world. In some cases they are the servants of God.  Or are worshipped as gods themselves."
+  },
+  {
+    "slug": "ultra",
+    "label": "Ultra",
+    "related": [
+      "baby",
+      "in-training",
+      "rookie",
+      "champion",
+      "ultimate",
+      "mega",
+      "digimon"
+    ],
+    "description": "Ultra Digimon are true rarities, being temporary states of Mega Digimon, or DNA Fusions of multiple Mega Digimon."
+  },
+  {
+    "slug": "ufo",
+    "label": "UFO",
+    "related": [],
+    "description": "This Trait denotes the creature to be or be in a Unidentified Flying Object (UFO). Meaning they must use Pilot (Aerospace) for its Rush skill."
+  },
+  {
+    "slug": "agitator",
+    "label": "Agitator",
+    "related": [],
+    "description": "This creature or item is specialised in the art of Agitation, using social moves to debuff their opponents."
   }
 ]

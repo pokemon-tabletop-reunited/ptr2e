@@ -8,22 +8,18 @@ import {
 class SpeciesDropSheetV2 extends foundry.applications.api.HandlebarsApplicationMixin(
   ApplicationV2Expanded
 ) {
-  static override DEFAULT_OPTIONS = fu.mergeObject(
-    super.DEFAULT_OPTIONS,
-    {
-      classes: ["pokemon", "sheet", "actor"],
-      position: {
-        width: 250,
-        height: 141,
-      },
-      window: {
-        resizable: false,
-      },
-      tag: "form",
-      dragDrop: [{ dragSelector: ".species-link", dropSelector: "form" }],
+  static override DEFAULT_OPTIONS = {
+    classes: ["pokemon", "sheet", "actor"],
+    position: {
+      width: 250,
+      height: 141,
     },
-    { inplace: false }
-  );
+    window: {
+      resizable: false,
+    },
+    tag: "form",
+    dragDrop: [{ dragSelector: ".species-link", dropSelector: "form" }],
+  };
 
   static override PARTS: Record<string, foundry.applications.api.HandlebarsTemplatePart> = {
     main: {
@@ -47,8 +43,12 @@ class SpeciesDropSheetV2 extends foundry.applications.api.HandlebarsApplicationM
     return "Creating a Pokemon...";
   }
 
+  override _canDragDrop(): boolean {
+    return true;
+  }
+
   override async _onDrop(event: DragEvent) {
-    const data = TextEditor.getDragEventData(event) as Record<string, string>;
+    const data = foundry.applications.ux.TextEditor.getDragEventData(event) as Record<string, string>;
     if (data.type === "Item") {
       const item = await fromUuid(data.uuid);
       if (!item) {

@@ -1,0 +1,45 @@
+<div class="form-group">
+    <label>{{localize "PTR2E.FIELDS.clock.id.label"}}</label>
+    <div class="form-fields">
+      <input type="text" name="{{basePath}}.key" value="{{change.key}}" />
+      <a style="flex: 0;" data-action="randomId" data-tooltip="Randomize ID"><i class="fa-solid fa-fw fa-shuffle"></i></a>
+    </div>
+    <p class="hint">{{localize "PTR2E.FIELDS.clock.id.hint"}}</p>
+</div>
+
+<div class="form-group">
+    <label>{{localize "PTR2E.FIELDS.clock.max.label"}}</label>
+    <div class="form-fields">
+        <input type="text" name="{{basePath}}.max" value="{{change.max}}" />
+    </div>
+    <p class="hint">{{localize "PTR2E.FIELDS.clock.max.hint"}}</p>
+</div>
+
+<div class="form-group">
+    <label>{{localize "PTR2E.FIELDS.clock.value.label"}}</label>
+    <div class="form-fields">
+        <input type="text" name="{{basePath}}.value" value="{{change.value}}" />
+    </div>
+    <p class="hint">{{localize "PTR2E.FIELDS.clock.value.hint"}}</p>
+</div>
+
+<div class="form-group">
+    <label>{{localize "PTR2E.FIELDS.clock.color.label"}}</label>
+    <div class="form-fields">
+      {{formInput fields.color value=change.color name=(concat basePath ".color") localize=true}}
+    </div>
+    <p class="hint">{{localize "PTR2E.FIELDS.clock.color.hint"}}</p>
+</div>
+
+<div class="form-group">
+    <label>{{localize "PTR2E.FIELDS.clock.private.label"}}</label>
+    <div class="form-fields">
+        {{formInput fields.private value=change.private name=(concat basePath ".private") localize=true}}
+    </div>
+    <p class="hint">{{localize "PTR2E.FIELDS.clock.private.hint"}}</p>
+</div>
+
+<div class="form-group">
+    <label>{{localize fields.predicate.label}}</label>
+    <input type="text" name="{{basePath}}.predicate" value="{{json change.predicate spaces=0}}" />
+</div>

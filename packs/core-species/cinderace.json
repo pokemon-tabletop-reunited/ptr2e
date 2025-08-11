@@ -385,6 +385,10 @@
                 "item": null,
                 "level": null,
                 "knownMove": null
+              },
+              "perk": {
+                "x": 26,
+                "y": 26
               }
             }
           ],
@@ -393,17 +397,27 @@
             "item": null,
             "level": null,
             "knownMove": null
+          },
+          "perk": {
+            "x": 26,
+            "y": 26
           }
         }
       ],
-      "uuid": "Compendium.ptr2e.core-species.Item.jjhmtkzmGapwefFk"
+      "uuid": "Compendium.ptr2e.core-species.Item.jjhmtkzmGapwefFk",
+      "methods": [],
+      "perk": {
+        "x": 26,
+        "y": 26
+      }
     },
     "number": 815,
     "traits": [
       "pokemon",
       "fully-evolved",
       "rapid",
-      "bipedal"
+      "bipedal",
+      "jump-4"
     ],
     "diet": [
       "herbivore"
@@ -442,20 +456,16 @@
         }
       ]
     },
-    "movement": {
-      "primary": [
-        {
-          "type": "overland",
-          "value": 18
-        }
-      ],
-      "secondary": [
-        {
-          "type": "swim",
-          "value": 5
-        }
-      ]
-    },
+    "movement": [
+      {
+        "type": "overland",
+        "value": 18
+      },
+      {
+        "type": "swim",
+        "value": 5
+      }
+    ],
     "skills": [
       {
         "slug": "acrobatics",
@@ -557,9 +567,18 @@
     "habitats": [
       "grassland"
     ],
-    "slug": "cinderace"
+    "slug": "cinderace",
+    "publication": {
+      "source": "PTR 2e Core - Galar Dex",
+      "authors": [
+        "PTR 2e Team"
+      ]
+    },
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
   },
   "_id": "OLjQ2WTluQkQxhEq",
-  "effects": [],
-  "folder": null
+  "effects": []
 }

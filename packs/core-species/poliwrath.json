@@ -13,24 +13,22 @@
     "diet": [
       "herbivore"
     ],
-    "movement": {
-      "primary": [
-        {
-          "type": "overland",
-          "value": 9
-        },
-        {
-          "type": "swim",
-          "value": 9
-        }
-      ],
-      "secondary": []
-    },
+    "movement": [
+      {
+        "type": "overland",
+        "value": 9
+      },
+      {
+        "type": "swim",
+        "value": 9
+      }
+    ],
     "traits": [
       "pokemon",
       "bipedal",
       "gilled",
-      "fully-evolved"
+      "fully-evolved",
+      "jump-4"
     ],
     "abilities": {
       "starting": [
@@ -43,26 +41,26 @@
       ],
       "basic": [
         {
-          "slug": "iron-fist"
+          "slug": "swift-swim"
         },
         {
-          "slug": "hydration"
+          "slug": "regenerator"
         }
       ],
       "advanced": [
         {
-          "slug": "swift-swim"
+          "slug": "hypnotist"
         },
         {
-          "slug": "hypnotist"
+          "slug": "precise-fist"
         }
       ],
       "master": [
         {
-          "slug": "storm-drain"
+          "slug": "mud-armor"
         },
         {
-          "slug": "regenerator"
+          "slug": "full-force"
         }
       ]
     },
@@ -711,13 +709,25 @@
                 "level": null,
                 "knownMove": null
               },
-              "evolutions": []
+              "evolutions": [],
+              "perk": {
+                "x": 26,
+                "y": 26
+              }
             }
-          ]
+          ],
+          "perk": {
+            "x": 26,
+            "y": 26
+          }
         }
       ],
       "uuid": "Compendium.ptr2e.core-species.Item.oUfJuoj1rW1NuzjU",
-      "methods": []
+      "methods": [],
+      "perk": {
+        "x": 26,
+        "y": 26
+      }
     },
     "habitats": [
       "cave",
@@ -726,9 +736,233 @@
       "riverside",
       "swamp"
     ],
-    "slug": "poliwrath"
+    "slug": "poliwrath",
+    "publication": {
+      "source": "PTR 2e Core - Kanto Dex",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
   },
   "_id": "5sXcAhedmd5rHS2y",
-  "effects": [],
-  "folder": null
+  "effects": [
+    {
+      "name": "Mega Poliwrath",
+      "type": "form",
+      "_id": "V5jC6WgqFz8bKIOk",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-option",
+            "key": "manual-forme-toggle",
+            "value": "forme:mega-poliwrath:active",
+            "domain": "all",
+            "toggleable": true,
+            "label": "Toggle: Mega Poliwrath Forme",
+            "predicate": [],
+            "alwaysActive": false,
+            "count": false,
+            "mode": 2,
+            "ignored": false,
+            "suboptions": [],
+            "state": false
+          },
+          {
+            "type": "add-trait",
+            "predicate": [
+              "forme:mega-poliwrath:active"
+            ],
+            "key": "",
+            "value": "well built",
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "grant-item",
+            "predicate": [
+              "forme:mega-poliwrath:active"
+            ],
+            "key": "",
+            "value": "Compendium.ptr2e.core-abilities.Item.jXsgiVvlZju6eoNm",
+            "alterations": [],
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            },
+            "mode": 2,
+            "ignored": false,
+            "reevaluateOnUpdate": false,
+            "inMemoryOnly": false,
+            "allowDuplicate": true,
+            "track": false,
+            "replaceSelf": false
+          },
+          {
+            "type": "stats-alteration",
+            "predicate": [
+              "forme:mega-poliwrath:active"
+            ],
+            "key": "",
+            "value": 0,
+            "hp": null,
+            "atk": 55,
+            "def": 25,
+            "spa": -10,
+            "spd": 15,
+            "spe": 10,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-poliwrath:active"
+            ],
+            "key": "system.movement.overland.value",
+            "value": 1,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-poliwrath:active"
+            ],
+            "key": "system.movement.swim.value",
+            "value": 1,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-poliwrath:active"
+            ],
+            "key": "system.skills.acrobatics.value",
+            "value": 10,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-poliwrath:active"
+            ],
+            "key": "system.skills.climb.value",
+            "value": 15,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-poliwrath:active"
+            ],
+            "key": "system.skills.intimidate.value",
+            "value": 15,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-poliwrath:active"
+            ],
+            "key": "system.skills.leadership.value",
+            "value": 25,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-poliwrath:active"
+            ],
+            "key": "system.skills.lift.value",
+            "value": 20,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-poliwrath:active"
+            ],
+            "key": "system.skills.running.value",
+            "value": 5,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-poliwrath:active"
+            ],
+            "key": "system.skills.stealth.value",
+            "value": 5,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-poliwrath:active"
+            ],
+            "key": "system.skills.swim.value",
+            "value": 15,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-poliwrath:active"
+            ],
+            "key": "system.skills.survival.value",
+            "value": 10,
+            "mode": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0,
+        "trigger": "manual",
+        "conditions": []
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.346",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.1.beta",
+        "createdTime": 1754087710994,
+        "modifiedTime": 1754088553642,
+        "lastModifiedBy": "6zxE5EIsM9axXjpP"
+      }
+    }
+  ]
 }

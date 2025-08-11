@@ -4,57 +4,47 @@
   "_id": "d2pqGaOH5ngClI3i",
   "img": "systems/ptr2e/img/svg/normal_icon.svg",
   "system": {
-    "slug": null,
+    "slug": "shimmer",
     "actions": [
       {
         "name": "Shimmer",
         "slug": "shimmer",
         "type": "attack",
-        "img": "icons/svg/explosion.svg",
+        "img": "systems/ptr2e/img/svg/normal_icon.svg",
         "traits": [
           "basic"
         ],
         "range": {
           "target": "creature",
-          "distance": 10,
+          "distance": 4,
           "unit": "m"
         },
         "cost": {
           "activation": "complex",
           "powerPoints": 1
         },
-        "variant": null,
         "types": [
           "normal"
         ],
         "category": "special",
         "power": 30,
         "accuracy": 100,
-        "contestType": "",
-        "contestEffect": "",
-        "free": false,
-        "slot": null,
-        "description": "<p>Effect: This attack is super effective against the Ghost Type.</p>"
+        "description": "<p>Effect: This attack is super effective against the Ghost Type.</p>",
+        "predicate": []
       }
     ],
-    "container": null,
-    "grade": "E"
+    "grade": "E",
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ]
+    },
+    "traits": [],
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
   },
-  "effects": [],
-  "sort": 0,
-  "ownership": {
-    "default": 0,
-    "CYLdyr5mPSDmNpTp": 3
-  },
-  "flags": {},
-  "_stats": {
-    "compendiumSource": null,
-    "duplicateSource": null,
-    "coreVersion": "12.328",
-    "systemId": "ptr2e",
-    "systemVersion": "0.10.0-alpha.1.5.2",
-    "createdTime": 1721063781486,
-    "modifiedTime": 1721063852478,
-    "lastModifiedBy": "CYLdyr5mPSDmNpTp"
-  }
+  "effects": []
 }

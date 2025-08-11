@@ -1,0 +1,114 @@
+{
+  "folder": "BImk1fcMbR5akA4z",
+  "name": "Paralyze Breath",
+  "type": "move",
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "publication": {
+      "source": "Digidex",
+      "authors": [
+        "Fox"
+      ],
+      "notes": ""
+    },
+    "traits": [],
+    "actions": [
+      {
+        "name": "Paralyze Breath",
+        "slug": "paralyze-breath",
+        "type": "attack",
+        "img": "systems/ptr2e/img/svg/electric_icon.svg",
+        "traits": [
+          "hazard",
+          "blast-2",
+          "digimon"
+        ],
+        "range": {
+          "target": "blast",
+          "distance": 5,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 6
+        },
+        "types": [
+          "electric"
+        ],
+        "category": "physical",
+        "power": 65,
+        "accuracy": 100,
+        "predicate": [],
+        "description": "<p>Effect: Creates a cloud in the Blast Area for 3 rounds. Any creature that starts their activation in or enters a space containing this Hazard has a 15% chance to gain @Affliction[paralysis] 5 per tile. The initial attack also possesses this 15% chance to apply the affliction.</p>"
+      }
+    ],
+    "grade": "B",
+    "slug": "paralyze-breath"
+  },
+  "img": "systems/ptr2e/img/svg/electric_icon.svg",
+  "effects": [
+    {
+      "name": "Paralyze Breath",
+      "type": "passive",
+      "_id": "5uUi7T6wrszzuMtH",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "paralyze-breath-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.paralysisconitem",
+            "predicate": [],
+            "chance": 15,
+            "affects": "target",
+            "dontMerge": false,
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "alterations": [],
+            "isFixedChance": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "13.346",
+        "systemId": "ptr2e",
+        "systemVersion": "1.2.1.beta",
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null,
+        "exportSource": null
+      }
+    }
+  ],
+  "_id": "Ug2caoRxuWMgzrtP"
+}

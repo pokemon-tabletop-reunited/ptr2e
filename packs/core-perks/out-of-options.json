@@ -7,7 +7,7 @@
   "system": {
     "actions": [],
     "slug": "out-of-options",
-    "description": "<p>Your Struggle Attacks gain +50 Power if you have less than 10% of your PP remaining. This does not apply to Weapons.</p>",
+    "description": "<p>Effect: When the user has 10% or less of their PP remaining, their Struggle Attacks gain +20 Power.</p>",
     "traits": [],
     "prerequisites": [],
     "cost": 2,
@@ -29,13 +29,10 @@
           "belt-expansion-1"
         ],
         "config": {
-          "alpha": null,
-          "backgroundColor": "#fbfbfb",
-          "borderColor": null,
-          "borderWidth": null,
           "texture": "systems/ptr2e/img/perk-icons/Taskmaster.svg",
-          "tint": "#000000",
-          "scale": null
+          "backgroundColor": null,
+          "borderColor": null,
+          "tint": null
         },
         "tier": null
       }
@@ -49,7 +46,14 @@
     "design": {
       "arena": "physical",
       "approach": "resilience",
-      "archetype": "Blitzer"
+      "archetype": "blitzer"
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
     }
   },
   "effects": []

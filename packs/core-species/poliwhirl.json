@@ -13,25 +13,23 @@
     "diet": [
       "herbivore"
     ],
-    "movement": {
-      "primary": [
-        {
-          "type": "overland",
-          "value": 9
-        },
-        {
-          "type": "swim",
-          "value": 14
-        }
-      ],
-      "secondary": []
-    },
+    "movement": [
+      {
+        "type": "overland",
+        "value": 9
+      },
+      {
+        "type": "swim",
+        "value": 14
+      }
+    ],
     "traits": [
       "pokemon",
       "bipedal",
       "natural-swimmer",
       "underdog",
-      "gilled"
+      "gilled",
+      "jump-2"
     ],
     "abilities": {
       "starting": [
@@ -47,23 +45,23 @@
           "slug": "swift-swim"
         },
         {
-          "slug": "hydration"
+          "slug": "regenerator"
         }
       ],
       "advanced": [
         {
-          "slug": "aquaboost"
+          "slug": "hypnotist"
         },
         {
-          "slug": "hypnotist"
+          "slug": "hydration"
         }
       ],
       "master": [
         {
-          "slug": "storm-drain"
+          "slug": "mud-armor"
         },
         {
-          "slug": "regenerator"
+          "slug": "dry-skin"
         }
       ]
     },
@@ -608,7 +606,11 @@
                 "level": null,
                 "knownMove": null
               },
-              "evolutions": []
+              "evolutions": [],
+              "perk": {
+                "x": 26,
+                "y": 26
+              }
             },
             {
               "name": "politoed",
@@ -632,13 +634,25 @@
                 "level": null,
                 "knownMove": null
               },
-              "evolutions": []
+              "evolutions": [],
+              "perk": {
+                "x": 26,
+                "y": 26
+              }
             }
-          ]
+          ],
+          "perk": {
+            "x": 26,
+            "y": 26
+          }
         }
       ],
       "uuid": "Compendium.ptr2e.core-species.Item.oUfJuoj1rW1NuzjU",
-      "methods": []
+      "methods": [],
+      "perk": {
+        "x": 26,
+        "y": 26
+      }
     },
     "habitats": [
       "pond",
@@ -646,9 +660,19 @@
       "riverside",
       "swamp"
     ],
-    "slug": "poliwhirl"
+    "slug": "poliwhirl",
+    "publication": {
+      "source": "PTR 2e Core - Kanto Dex",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
   },
   "_id": "GQgqAHxbXuep5oum",
-  "effects": [],
-  "folder": null
+  "effects": []
 }

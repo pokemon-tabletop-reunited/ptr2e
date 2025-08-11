@@ -1,0 +1,113 @@
+{
+  "folder": "BImk1fcMbR5akA4z",
+  "name": "Electro Shocker",
+  "type": "move",
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "publication": {
+      "source": "Digidex",
+      "authors": [
+        "Fox"
+      ],
+      "notes": ""
+    },
+    "traits": [],
+    "actions": [
+      {
+        "name": "Electro Shocker",
+        "slug": "electro-shocker",
+        "type": "attack",
+        "img": "systems/ptr2e/img/svg/electric_icon.svg",
+        "traits": [
+          "crit-1",
+          "digimon"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 10,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 4
+        },
+        "types": [
+          "electric"
+        ],
+        "category": "special",
+        "power": 80,
+        "accuracy": 100,
+        "predicate": [],
+        "description": "<p>This attack has a 20% chance to inflict @Affliction[tased 5]</p>"
+      }
+    ],
+    "grade": "C",
+    "slug": "electro-shocker"
+  },
+  "img": "systems/ptr2e/img/svg/electric_icon.svg",
+  "effects": [
+    {
+      "name": "Electro Shocker",
+      "type": "passive",
+      "_id": "g2J8N4o7GGmFhuQ9",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "electro-shocker-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.tasedconditiitem",
+            "predicate": [],
+            "chance": 20,
+            "affects": "target",
+            "dontMerge": false,
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "alterations": [],
+            "isFixedChance": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "13.346",
+        "systemId": "ptr2e",
+        "systemVersion": "1.2.1.beta",
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null,
+        "exportSource": null
+      }
+    }
+  ],
+  "_id": "bx0KOGKXM8hP3eCr"
+}

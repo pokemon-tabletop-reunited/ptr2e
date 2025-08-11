@@ -1,0 +1,64 @@
+{
+  "folder": "4UhJK1LInml07WJf",
+  "name": "Nightingale Pledge",
+  "type": "perk",
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "publication": {
+      "source": "PTR2e Core",
+      "authors": [
+        "PTR2 Team"
+      ],
+      "notes": ""
+    },
+    "actions": [],
+    "slug": "nightingale-pledge",
+    "description": "<p>Effect: When the user recovers HP from a [Healing] item or effect, they may choose to confer 33% of the amount healed to a creature within 5m.</p>",
+    "traits": [],
+    "prerequisites": [
+      {
+        "gte": [
+          "{actor|skills.medicine.mod}",
+          60
+        ]
+      },
+      "item:perk:healing-hands"
+    ],
+    "autoUnlock": [
+      "item:perk:healing-hands"
+    ],
+    "cost": 3,
+    "design": {
+      "arena": "mental",
+      "approach": "resilience",
+      "archetype": "healer"
+    },
+    "global": true,
+    "webs": [],
+    "nodes": [
+      {
+        "x": 46,
+        "y": 70,
+        "hidden": false,
+        "type": "normal",
+        "connected": [
+          "healing-hands",
+          "minor-buff-38"
+        ],
+        "config": {
+          "texture": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "tint": null
+        },
+        "tier": null
+      }
+    ]
+  },
+  "img": "icons/creatures/birds/songbird-yellow-flying.webp",
+  "effects": [],
+  "_id": "aDwIXZ7n0kjuzMgu"
+}

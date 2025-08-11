@@ -19,7 +19,8 @@
         },
         "range": {
           "target": "self",
-          "unit": "m"
+          "unit": "m",
+          "distance": 10
         },
         "description": "<p>Trigger: The user is hit by a Water-Type attack.</p><p>Effect: The user takes half damage from the attack and is unaffected by the triggering Attack's effects. Then, the user freely uses Mist.</p>",
         "img": "icons/svg/explosion.svg"
@@ -34,6 +35,13 @@
     "_migration": {
       "version": null,
       "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
     }
   },
   "_id": "tSF30sI3iDjAAYyW",
@@ -75,7 +83,9 @@
         "traits": [],
         "removeAfterCombat": true,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
@@ -97,12 +107,13 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.346",
         "systemId": "ptr2e",
         "systemVersion": "0.10.0-alpha.5.1.5",
         "createdTime": 1737398118242,
         "modifiedTime": 1737398160431,
-        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+        "lastModifiedBy": "mK35yvCqCgiTUvKf",
+        "exportSource": null
       }
     }
   ]

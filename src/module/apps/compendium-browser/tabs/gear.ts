@@ -11,7 +11,7 @@ export class CompendiumBrowserGearTab extends CompendiumBrowserTab {
   templatePath = "systems/ptr2e/templates/apps/compendium-browser/tabs/gear.hbs";
 
   override searchFields = ["name", "description"];
-  override storeFields = ["type", "name", "img", "uuid", "traits", "description", "rarity", "grade", "cost", "fling", "slot"];
+  override storeFields = ["type", "name", "img", "uuid", "traits", "description", "rarity", "grade", "cost", "fling", "slot", "source"];
 
   constructor(browser: CompendiumBrowser) {
     super(browser);
@@ -27,6 +27,7 @@ export class CompendiumBrowserGearTab extends CompendiumBrowserTab {
     const indexFields = ["img", "system.description", "system.traits", "system.rarity", "system.grade", "system.cost", "system.fling", "system.equipped.slot"];
     const traits = new Set<string>();
     const flingTypes = new Set<string>();
+    const publications = new Set<string>();
     let highestIpCost = 10;
 
     for await (const { pack, index } of this.browser.packLoader.loadPacks(
@@ -54,6 +55,9 @@ export class CompendiumBrowserGearTab extends CompendiumBrowserTab {
           flingTypes.add(gearData.system.fling.type);
         }
 
+        const pubSource = (gearData.system.publication?.source ?? "").trim()
+        if(pubSource) publications.add(pubSource);
+
         gear.push({
           name: gearData.name,
           img: gearData.img,
@@ -65,7 +69,8 @@ export class CompendiumBrowserGearTab extends CompendiumBrowserTab {
           grade: gearData.system.grade,
           cost: gearData.system.cost,
           fling: gearData.system.fling,
-          slot: gearData.system.equipped?.slot
+          slot: gearData.system.equipped?.slot,
+          source: pubSource
         })
       }
     }
@@ -102,12 +107,14 @@ export class CompendiumBrowserGearTab extends CompendiumBrowserTab {
       backpack: "PTR2E.FIELDS.gear.equipped.slot.backpack"
     });
     this.filterData.multiselects.traits.options = this.generateMultiselectOptions(traits.reduce((acc, trait) => {
-      const traitData = game.ptr.data.traits.get(trait);
+      const traitData = game.ptr.data.traits.getTrait(trait);
       if (!traitData) return acc;
       acc[traitData.slug] = traitData.label;
       return acc;
     }, {} as Record<string, string>));
     this.filterData.sliders.cost.values.upperLimit = this.filterData.sliders.cost.values.max = highestIpCost;
+
+    this.filterData.checkboxes.source.options = this.generateCheckboxOptions(publications.reduce((acc, source) => ({[source]: source, ...acc}), {} as Record<string, string>));
 
     debug("Finished loading data");
   }
@@ -160,6 +167,11 @@ export class CompendiumBrowserGearTab extends CompendiumBrowserTab {
     // Traits
     if (!this.filterTraits(entry.traits, multiselects.traits.selected, multiselects.traits.conjunction)) return false;
 
+    // Source
+    if (checkboxes.source.selected.length) {
+      if (!checkboxes.source.selected.includes(entry.source)) return false;
+    }
+
     return true;
   }
 
@@ -195,7 +207,13 @@ export class CompendiumBrowserGearTab extends CompendiumBrowserTab {
           options: {},
           selected: [],
           isExpanded: false
-        }
+        },
+        source: {
+          isExpanded: false,
+          label: "PTR2E.CompendiumBrowser.Filters.Source",
+          options: {},
+          selected: [],
+        },
       },
       multiselects: {
         traits: {
@@ -245,6 +263,9 @@ export class CompendiumBrowserGearTab extends CompendiumBrowserTab {
         direction: "asc",
         options: {
           name: "PTR2E.CompendiumBrowser.Filters.Sort.Name",
+          rarity: "PTR2E.CompendiumBrowser.Filters.Sort.Rarity",
+          grade: "PTR2E.CompendiumBrowser.Filters.Sort.Grade",
+          cost: "PTR2E.CompendiumBrowser.Filters.Sort.Cost"
         }
       },
       search: {

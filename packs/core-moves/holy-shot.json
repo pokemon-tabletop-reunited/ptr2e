@@ -1,0 +1,118 @@
+{
+  "folder": "BImk1fcMbR5akA4z",
+  "name": "Holy Shot",
+  "type": "move",
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "publication": {
+      "source": "Digidex",
+      "authors": [
+        "Fox"
+      ],
+      "notes": ""
+    },
+    "traits": [],
+    "actions": [
+      {
+        "name": "Holy Shot",
+        "slug": "holy-shot",
+        "type": "attack",
+        "img": "systems/ptr2e/img/svg/fairy_icon.svg",
+        "traits": [
+          "wind",
+          "digimon"
+        ],
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 3
+        },
+        "types": [
+          "fairy"
+        ],
+        "category": "special",
+        "predicate": [],
+        "description": "<p>This attack has a 20% chance each of improving the user's Special Attack and Special Defense by 1 stage for 5 activations.</p>",
+        "range": {
+          "target": "creature",
+          "distance": 8,
+          "unit": "m"
+        },
+        "power": 75,
+        "accuracy": 100
+      }
+    ],
+    "grade": "C",
+    "slug": "holy-shot"
+  },
+  "img": "systems/ptr2e/img/svg/fairy_icon.svg",
+  "effects": [
+    {
+      "name": "Holy Shot",
+      "type": "passive",
+      "_id": "bwI7OFSrISmhs02c",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "holy-shot-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.1TqcwIUNl32wJCAa",
+            "predicate": [],
+            "chance": 20,
+            "affects": "target",
+            "alterations": [],
+            "dontMerge": false,
+            "mode": 2,
+            "ignored": false,
+            "isFixedChance": false
+          },
+          {
+            "type": "roll-effect",
+            "key": "holy-shot-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.jEX7s3GbbAtzgyS3",
+            "predicate": [],
+            "chance": 20,
+            "affects": "target",
+            "alterations": [],
+            "dontMerge": false,
+            "mode": 2,
+            "ignored": false,
+            "isFixedChance": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.346",
+        "systemId": "ptr2e",
+        "systemVersion": "1.3.0.beta",
+        "lastModifiedBy": null
+      }
+    }
+  ],
+  "_id": "w5Mwlu9wenlTJngR"
+}

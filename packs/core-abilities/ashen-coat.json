@@ -35,8 +35,110 @@
     "_migration": {
       "version": null,
       "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
     }
   },
   "_id": "C4cewgHsBWo64KBk",
-  "effects": []
+  "effects": [
+    {
+      "name": "Ashen Coat",
+      "type": "passive",
+      "_id": "F29vm55DjvIz1q05",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "aura",
+            "key": "",
+            "value": 0,
+            "predicate": [
+              "ashen-coat:active"
+            ],
+            "mode": 2,
+            "ignored": false,
+            "radius": 5,
+            "effects": [
+              {
+                "uuid": "Compendium.ptr2e.core-effects.Item.lC8kkqiga1Bw7VAI",
+                "affects": "all",
+                "events": [
+                  "enter"
+                ],
+                "removeOnExit": true,
+                "includesSelf": true,
+                "appliesSelfOnly": false,
+                "predicate": [
+                  "target:trait:fire"
+                ]
+              }
+            ],
+            "appearance": {
+              "border": {
+                "color": "#FF0000",
+                "alpha": 0.75
+              },
+              "highlight": {
+                "color": "user-color",
+                "alpha": 0.25
+              },
+              "texture": null
+            },
+            "mergeExisting": true,
+            "priority": null
+          },
+          {
+            "type": "roll-option",
+            "key": "",
+            "value": "ashen-coat:active",
+            "predicate": [],
+            "domain": "all",
+            "toggleable": true,
+            "count": false,
+            "state": true,
+            "label": "Ashen Coat",
+            "alwaysActive": false,
+            "mode": 2,
+            "ignored": false,
+            "suboptions": []
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.346",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.1.beta",
+        "createdTime": 1753712264450,
+        "modifiedTime": 1753712578393,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+      }
+    }
+  ]
 }

@@ -1,0 +1,115 @@
+{
+  "folder": "BImk1fcMbR5akA4z",
+  "name": "Super Shocker",
+  "type": "move",
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "slug": "super-shocker",
+    "publication": {
+      "source": "Digidex",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "traits": [],
+    "actions": [
+      {
+        "name": "Super Shocker",
+        "slug": "super-shocker",
+        "type": "attack",
+        "img": "systems/ptr2e/img/svg/electric_icon.svg",
+        "traits": [
+          "digimon"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 10,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 4
+        },
+        "types": [
+          "electric"
+        ],
+        "category": "special",
+        "power": 60,
+        "accuracy": 100,
+        "predicate": [],
+        "description": "<p>Effect: On hit, the target has a 30% chance of gaining @Affliction[paralysis] 5.</p>"
+      }
+    ],
+    "grade": "D"
+  },
+  "img": "systems/ptr2e/img/svg/electric_icon.svg",
+  "effects": [
+    {
+      "name": "Super Shocker",
+      "type": "affliction",
+      "_id": "O431JtZ8dmFclsjS",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "super-shocker-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.paralysisconitem",
+            "predicate": [],
+            "chance": 30,
+            "affects": "target",
+            "dontMerge": false,
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "alterations": [],
+            "isFixedChance": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0,
+        "priority": 50,
+        "formula": "",
+        "type": "damage",
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": "Compendium.ptr2e.core-moves.Item.g0tf8DHabi55oj5C.ActiveEffect.zAd4Vr0jBWUo767Q",
+        "duplicateSource": null,
+        "coreVersion": "13.346",
+        "systemId": "ptr2e",
+        "systemVersion": "1.2.1.beta",
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null,
+        "exportSource": null
+      }
+    }
+  ],
+  "_id": "9Y3TbfF5IVLcjox8"
+}

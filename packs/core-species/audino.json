@@ -13,26 +13,23 @@
     "diet": [
       "omnivore"
     ],
-    "movement": {
-      "primary": [
-        {
-          "type": "overland",
-          "value": 5
-        }
-      ],
-      "secondary": [
-        {
-          "type": "swim",
-          "value": 3
-        }
-      ]
-    },
+    "movement": [
+      {
+        "type": "overland",
+        "value": 5
+      },
+      {
+        "type": "swim",
+        "value": 3
+      }
+    ],
     "traits": [
       "pokemon",
       "bipedal",
       "generalizer",
       "sparkler",
-      "underdog"
+      "underdog",
+      "jump-2"
     ],
     "abilities": {
       "starting": [
@@ -645,10 +642,263 @@
     "evolutions": {
       "name": "audino",
       "details": null,
-      "evolutions": []
+      "evolutions": [],
+      "uuid": null,
+      "methods": [],
+      "perk": {
+        "x": 26,
+        "y": 26
+      }
+    },
+    "publication": {
+      "source": "PTR 2e Core - Unova Dex",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "_migration": {
+      "version": null,
+      "previous": null
     }
   },
   "_id": "DmfiLIaR8aFEg28Z",
-  "effects": [],
-  "folder": null
+  "effects": [
+    {
+      "name": "Mega Audino",
+      "type": "form",
+      "_id": "blD8uYpVogxeH23R",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-option",
+            "key": "manual-forme-toggle",
+            "value": "forme:mega-audino:active",
+            "domain": "all",
+            "toggleable": true,
+            "label": "Toggle: Mega Audino Forme",
+            "predicate": [],
+            "alwaysActive": false,
+            "count": false,
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "suboptions": [],
+            "state": false
+          },
+          {
+            "type": "stats-alteration",
+            "predicate": [
+              "forme:mega-audino:active"
+            ],
+            "key": "",
+            "value": 0,
+            "hp": null,
+            "atk": null,
+            "def": 30,
+            "spa": 40,
+            "spd": 30,
+            "spe": null,
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "grant-item",
+            "predicate": [
+              "forme:mega-audino:active"
+            ],
+            "key": "",
+            "value": "Compendium.ptr2e.core-abilities.Item.k9ghBGh02kBjShMp",
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "system.free",
+                "value": "true"
+              }
+            ],
+            "reevaluateOnUpdate": true,
+            "allowDuplicate": false,
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "inMemoryOnly": false,
+            "track": false,
+            "replaceSelf": false,
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            }
+          },
+          {
+            "type": "add-trait",
+            "predicate": [
+              "forme:mega-audino:active"
+            ],
+            "key": "",
+            "value": "sparkler",
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "add-trait",
+            "predicate": [
+              "forme:mega-audino:active"
+            ],
+            "key": "",
+            "value": "calming",
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-audino:active"
+            ],
+            "key": "system.type.types",
+            "value": "fairy",
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-audino:active"
+            ],
+            "key": "system.skills.climb.value",
+            "value": 10,
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-audino:active"
+            ],
+            "key": "system.skills.husbandry.value",
+            "value": 15,
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-audino:active"
+            ],
+            "key": "system.skills.intimidate.value",
+            "value": 20,
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-audino:active"
+            ],
+            "key": "system.skills.medicine.value",
+            "value": 20,
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-audino:active"
+            ],
+            "key": "system.skills.natural-world.value",
+            "value": 20,
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-audino:active"
+            ],
+            "key": "system.skills.fairy.value",
+            "value": 40,
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-audino:active"
+            ],
+            "key": "system.skills.running.value",
+            "value": 10,
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-audino:active"
+            ],
+            "key": "system.skills.survival.value",
+            "value": 15,
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-audino:active"
+            ],
+            "key": "system.skills.swim.value",
+            "value": 5,
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0,
+        "trigger": "manual",
+        "conditions": []
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": "Compendium.ptr2e.core-species.Item.DmfiLIaR8aFEg28Z.ActiveEffect.blD8uYpVogxeH23R",
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "1.1.1.beta",
+        "createdTime": 1741991466737,
+        "modifiedTime": 1741991807014,
+        "lastModifiedBy": "01onCaJSVMVOgMDI"
+      }
+    }
+  ]
 }

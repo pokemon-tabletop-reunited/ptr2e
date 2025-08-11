@@ -1,0 +1,127 @@
+{
+  "folder": "BImk1fcMbR5akA4z",
+  "name": "Blazing Ice",
+  "type": "move",
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "publication": {
+      "source": "Digidex",
+      "authors": [
+        "Fox"
+      ],
+      "notes": ""
+    },
+    "traits": [],
+    "actions": [
+      {
+        "name": "Blazing Ice",
+        "slug": "blazing-ice",
+        "type": "attack",
+        "img": "systems/ptr2e/img/svg/ice_icon.svg",
+        "traits": [
+          "ray",
+          "digimon"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 8,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 3
+        },
+        "types": [
+          "ice"
+        ],
+        "category": "special",
+        "power": 60,
+        "accuracy": 100,
+        "predicate": [],
+        "description": "<p>This attack has a 10% chance each to inflict @Affliction[burn 5] and @Affliction[frostbite 5].</p>"
+      }
+    ],
+    "grade": "D",
+    "slug": "blazing-ice"
+  },
+  "img": "systems/ptr2e/img/svg/ice_icon.svg",
+  "effects": [
+    {
+      "name": "Blazing Ice",
+      "type": "passive",
+      "_id": "iji9wsS0IeK6Obhk",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "blazing-ice-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.burnconditioitem",
+            "predicate": [],
+            "chance": 10,
+            "affects": "target",
+            "dontMerge": false,
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "alterations": [],
+            "isFixedChance": false
+          },
+          {
+            "type": "roll-effect",
+            "key": "blazing-ice-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.frostbiteconitem",
+            "predicate": [],
+            "chance": 10,
+            "affects": "target",
+            "dontMerge": false,
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "alterations": [],
+            "isFixedChance": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "13.346",
+        "systemId": "ptr2e",
+        "systemVersion": "1.2.1.beta",
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null,
+        "exportSource": null
+      }
+    }
+  ],
+  "_id": "ohDJnwYrwXXqBwYQ"
+}

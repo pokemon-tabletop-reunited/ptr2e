@@ -1,0 +1,87 @@
+{
+  "folder": "zrVtKATNxzLNxTUa",
+  "name": "Boiling Blood",
+  "type": "perk",
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "actions": [
+      {
+        "name": "Boiling Blood",
+        "slug": "boiling-blood",
+        "description": "<p>While the user is @Affliction[enraged] due to the use of @UUID[Compendium.ptr2e.core-moves.Item.6OK8vhZYljL4X7cd]{Rage}, they gain +1 SPATK for 5 Activations when hit by a Physical- or Special-Category Attack.</p>",
+        "traits": [],
+        "type": "passive",
+        "img": "systems/ptr2e/img/perk-icons/Occultism.svg",
+        "range": {
+          "target": "self",
+          "unit": "m",
+          "distance": 0
+        },
+        "cost": {
+          "activation": "free",
+          "powerPoints": 0,
+          "trigger": "",
+          "delay": null,
+          "priority": null
+        },
+        "variant": null,
+        "ephemeralVariant": false,
+        "hidden": false
+      }
+    ],
+    "slug": "boiling-blood",
+    "description": "<p>While the user is @Affliction[enraged] due to the use of @UUID[Compendium.ptr2e.core-moves.Item.6OK8vhZYljL4X7cd], they gain both +1 ATK and +1 SPA Stage for 5 Activations when hit by a Physical- or Special-Category Attack. This overrides the regular effect of Rage & Brain Fog.</p>",
+    "traits": [],
+    "prerequisites": [
+      "item:perk:brain-fog"
+    ],
+    "autoUnlock": [],
+    "cost": 3,
+    "design": {
+      "arena": "physical",
+      "approach": "power",
+      "archetype": "berserker"
+    },
+    "global": true,
+    "webs": [],
+    "nodes": [
+      {
+        "x": 65,
+        "y": 39,
+        "hidden": false,
+        "type": "normal",
+        "connected": [
+          "overbooster",
+          "desperate-strike",
+          "tubthumping",
+          "wolfshirt",
+          "brain-fog"
+        ],
+        "config": {
+          "texture": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "tint": null
+        },
+        "tier": null
+      }
+    ],
+    "originSlug": null,
+    "variant": null,
+    "mode": null
+  },
+  "img": "systems/ptr2e/img/perk-icons/Occultism.svg",
+  "effects": [],
+  "flags": {},
+  "_id": "u8KkKK1W7xJynkBa"
+}

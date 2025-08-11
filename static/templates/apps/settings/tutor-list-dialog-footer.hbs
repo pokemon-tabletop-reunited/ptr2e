@@ -1,0 +1,10 @@
+<footer class="d-flex pt-2 justify-content-evenly">
+  <button class="fb-40" type="submit">
+    <i class="fas fa-check"></i> {{localize "Submit"}}
+  </button>
+  {{#if (and exists (not (is list.type "universal")))}}
+    <button class="fb-40" type="button" data-action="delete">
+      <i class="fas fa-trash"></i> {{localize "Delete"}}
+    </button>
+  {{/if}}
+</footer>

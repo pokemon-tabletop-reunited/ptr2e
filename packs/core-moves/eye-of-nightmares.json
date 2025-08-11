@@ -14,7 +14,8 @@
         "type": "attack",
         "img": "systems/ptr2e/img/svg/dark_icon.svg",
         "traits": [
-          "drain-1-10"
+          "digimon",
+          "drain-1-8"
         ],
         "range": {
           "target": "enemy",
@@ -31,10 +32,20 @@
         "category": "special",
         "power": 50,
         "accuracy": 100,
-        "description": "<p>On hit, the target is @Affliction[confused] 5.</p>"
+        "description": "<p>On hit, the target is @Affliction[confused] 5.</p>",
+        "predicate": []
       }
     ],
-    "grade": "E"
+    "grade": "D",
+    "publication": {
+      "source": "Digidex",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "slug": "eye-of-nightmares",
+    "traits": []
   },
   "img": "systems/ptr2e/img/svg/dark_icon.svg",
   "effects": [
@@ -54,7 +65,10 @@
             "affects": "target",
             "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "isFixedChance": false,
+            "alterations": [],
+            "dontMerge": false
           }
         ],
         "slug": null,
@@ -64,7 +78,9 @@
         "stacks": 0,
         "priority": 50,
         "formula": "",
-        "type": "damage"
+        "type": "damage",
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
@@ -86,15 +102,15 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.346",
         "systemId": "ptr2e",
         "systemVersion": "0.10.0-alpha.5.0",
         "createdTime": 1736398977431,
         "modifiedTime": 1736399015468,
-        "lastModifiedBy": "IXsEzbSWqpGyrmcc"
+        "lastModifiedBy": "IXsEzbSWqpGyrmcc",
+        "exportSource": null
       }
     }
   ],
-  "flags": {},
   "_id": "KDfjIv5STQco0KrW"
 }

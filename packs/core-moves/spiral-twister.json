@@ -1,0 +1,113 @@
+{
+  "folder": "BImk1fcMbR5akA4z",
+  "name": "Spiral Twister",
+  "type": "move",
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "publication": {
+      "source": "Digidex",
+      "authors": [
+        "Fox"
+      ],
+      "notes": ""
+    },
+    "traits": [],
+    "actions": [
+      {
+        "name": "Spiral Twister",
+        "slug": "spiral-twister",
+        "type": "attack",
+        "img": "systems/ptr2e/img/svg/fire_icon.svg",
+        "traits": [
+          "wind",
+          "digimon"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 10,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 2
+        },
+        "types": [
+          "fire"
+        ],
+        "category": "special",
+        "power": 55,
+        "accuracy": 100,
+        "predicate": [],
+        "description": "<p>This attack has a 10% chance to grant the user +1 Special Attack Stage for 5 Activations.</p>"
+      }
+    ],
+    "grade": "D",
+    "slug": "spiral-twister"
+  },
+  "img": "systems/ptr2e/img/svg/fire_icon.svg",
+  "effects": [
+    {
+      "name": "Spiral Twister",
+      "type": "passive",
+      "_id": "dTDa9DFH443tbmsv",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "spiral-twister-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.1TqcwIUNl32wJCAa",
+            "predicate": [],
+            "chance": 10,
+            "affects": "self",
+            "dontMerge": false,
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "alterations": [],
+            "isFixedChance": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "13.346",
+        "systemId": "ptr2e",
+        "systemVersion": "1.2.1.beta",
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null,
+        "exportSource": null
+      }
+    }
+  ],
+  "_id": "S0tYEVIDKZs68Tof"
+}
