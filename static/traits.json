@@ -2254,24 +2254,6 @@
     "description": "Not quite a @trait[pokemon], creatures with this trait are 'digital monsters' or 'Digimon' for short. Creatures with this trait usually have the Digitize Trait, and always have access to the Digimon Perk Web. Other items with this trait are specifically designed for use by creatures with this trait, and games that center around Digimon and its settings."
   },
   {
-    "slug": "vaccine",
-    "label": "Vaccine",
-    "related": [],
-    "description": "@trait[digimon] with this trait deal 50% more damage with their Physical- and Special-Category Attacks to @trait[virus] creatures, and 33% less damage with those Attacks to @trait[data] creatures. AUTOMATION PENDING."
-  },
-  {
-    "slug": "virus",
-    "label": "Virus",
-    "related": [],
-    "description": "@trait[digimon] with this trait deal 50% more damage with their Physical- and Special-Category Attacks to @trait[data] creatures, and 33% less damage with those Attacks to @trait[vaccine] creatures. AUTOMATION PENDING."
-  },
-  {
-    "slug": "data",
-    "label": "Data",
-    "related": [],
-    "description": "@trait[digimon] with this trait deal 50% more damage with their Physical- and Special-Category Attacks to @trait[vaccine] creatures, and 33% less damage with those Attacks to @trait[virus] creatures. AUTOMATION PENDING."
-  },
-  {
     "slug": "homebrew",
     "label": "Homebrew",
     "related": [],
@@ -4799,6 +4781,7 @@
       "virus"
     ],
     "description": "Gain +50% Damage versus Virus-trait Digimon. Inflict 50% less Damage vs Data-trait Digimon.",
+    "type":"automated",
     "changes": [
       {
         "type": "percentile-modifier",
@@ -4829,6 +4812,7 @@
       "virus"
     ],
     "description": "Gain +50% Damage versus Vaccine-trait Digimon. Inflict 50% less Damage vs Virus-trait Digimon.",
+    "type":"automated",
     "changes": [
       {
         "type": "percentile-modifier",
@@ -4859,6 +4843,7 @@
       "digimon"
     ],
     "description": "Gain +50% Damage versus Data-trait Digimon. Inflict 50% less Damage vs Vaccine-trait Digimon.",
+    "type":"automated",
     "changes": [
       {
         "type": "percentile-modifier",
