@@ -13,7 +13,7 @@
         "traits": [
           "interrupt-2"
         ],
-        "type": "attack",
+        "type": "generic",
         "cost": {
           "activation": "free",
           "powerPoints": 4,
@@ -21,26 +21,9 @@
         },
         "range": {
           "target": "self",
-          "unit": "m",
-          "distance": 0
+          "unit": "m"
         },
-        "img": "systems/ptr2e/img/perk-icons/Ninja.svg",
-        "types": [
-          "untyped"
-        ],
-        "category": "status",
-        "free": true,
-        "predicate": [],
-        "variant": null,
-        "ephemeralVariant": false,
-        "contestType": "",
-        "contestEffect": "",
-        "slot": null,
-        "summon": null,
-        "defaultVariant": null,
-        "flingItemId": "",
-        "offensiveStat": null,
-        "defensiveStat": null
+        "img": "systems/ptr2e/img/perk-icons/Ninja.svg"
       }
     ],
     "slug": "skirmish",
@@ -90,10 +73,7 @@
         "PTR 2e Team"
       ],
       "notes": ""
-    },
-    "originSlug": null,
-    "variant": null,
-    "mode": null
+    }
   },
   "effects": [
     {
@@ -105,7 +85,7 @@
         "changes": [
           {
             "type": "roll-effect",
-            "key": "skirmish-attack",
+            "key": "skirmish-generic",
             "value": "Compendium.ptr2e.core-effects.Item.advanceffectitem",
             "predicate": [],
             "chance": 100,
@@ -123,19 +103,20 @@
               }
             ],
             "label": "Skirmish",
-            "mode": 2,
             "priority": null,
-            "ignored": false,
-            "dontMerge": false
+            "dontMerge": false,
+            "isFixedChance": false,
+            "mode": 2,
+            "ignored": false
           },
           {
             "type": "roll-note",
             "key": "combat-enter",
-            "value": "{actor|link} enters combat and may spend {item|system.cost} PP to use {item|link}!",
+            "value": "{actor|link} enters combat and may spend {item|actions.contents.0.cost.powerPoints} PP to use {item|link}!",
             "predicate": [],
             "visibility": null,
-            "mode": 2,
             "priority": null,
+            "mode": 2,
             "ignored": false
           }
         ],
@@ -143,7 +124,9 @@
         "traits": [],
         "removeAfterCombat": true,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
@@ -165,11 +148,11 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "13.342",
+        "coreVersion": "13.346",
         "systemId": "ptr2e",
-        "systemVersion": "1.1.1.beta",
+        "systemVersion": "1.4.1.beta",
         "createdTime": 1742128039172,
-        "modifiedTime": 1742128109855,
+        "modifiedTime": 1754146292781,
         "lastModifiedBy": "mK35yvCqCgiTUvKf",
         "exportSource": null
       }

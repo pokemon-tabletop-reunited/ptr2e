@@ -11,7 +11,7 @@
       }
     ],
     "cost": 2,
-    "description": "<p>The target gains @Affliction[rapid] 1.</p>",
+    "description": "<p>The target gains @UUID[Compendium.ptr2e.core-effects.rapidconditiitem]{Rapid}.</p>",
     "actions": [
       {
         "name": "Rapid!",
@@ -27,39 +27,11 @@
         },
         "cost": {
           "activation": "simple",
-          "powerPoints": 2,
-          "delay": null,
-          "priority": null
+          "powerPoints": 2
         },
-        "description": "Effect: The target gains @Affliction[rapid] 1.",
+        "description": "<p>Effect: The target gains @UUID[Compendium.ptr2e.core-effects.rapidconditiitem]{Rapid}.</p>",
         "type": "generic",
-        "img": "icons/svg/explosion.svg",
-        "variant": null,
-        "ephemeralVariant": false
-      },
-      {
-        "name": "Rapid! (Self)",
-        "slug": "rapid-self",
-        "traits": [
-          "command",
-          "style"
-        ],
-        "range": {
-          "target": "self",
-          "distance": 20,
-          "unit": "m"
-        },
-        "cost": {
-          "activation": "simple",
-          "powerPoints": 2,
-          "delay": null,
-          "priority": null
-        },
-        "description": "Effect: The target gains @Affliction[rapid] 2.",
-        "type": "generic",
-        "img": "icons/svg/explosion.svg",
-        "variant": null,
-        "ephemeralVariant": false
+        "img": "systems/ptr2e/img/perk-icons/Orders_Training.svg"
       }
     ],
     "slug": "rapid-style",
@@ -70,6 +42,10 @@
     },
     "nodes": [
       {
+        "x": 95,
+        "y": 135,
+        "hidden": false,
+        "type": "normal",
         "connected": [
           "hobby-gardener",
           "strong-style",
@@ -80,25 +56,15 @@
           "improved-overland-14"
         ],
         "config": {
-          "alpha": null,
-          "backgroundColor": "#800080",
-          "borderColor": null,
-          "borderWidth": null,
           "texture": "systems/ptr2e/img/perk-icons/Orders_Training.svg",
-          "tint": "#ffffff",
-          "scale": null
+          "backgroundColor": null,
+          "borderColor": null,
+          "tint": null
         },
-        "hidden": false,
-        "type": "normal",
-        "x": 95,
-        "y": 135,
         "tier": null
       }
     ],
     "autoUnlock": [],
-    "originSlug": null,
-    "variant": null,
-    "mode": null,
     "global": true,
     "webs": [],
     "design": {
@@ -116,6 +82,60 @@
   },
   "_id": "jJJ6DaJCklHa5x2X",
   "img": "systems/ptr2e/img/perk-icons/Orders_Training.svg",
-  "effects": [],
+  "effects": [
+    {
+      "name": "Rapid Style",
+      "type": "passive",
+      "_id": "xbZq9uoxDkZ4bida",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "rapid-style-generic",
+            "value": "Compendium.ptr2e.core-effects.Item.rapidconditiitem",
+            "predicate": [],
+            "chance": 100,
+            "isFixedChance": true,
+            "affects": "target",
+            "alterations": [],
+            "dontMerge": false,
+            "mode": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.346",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.1.beta",
+        "createdTime": 1754128396399,
+        "modifiedTime": 1754128418269,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+      }
+    }
+  ],
   "folder": "JZrGRskscJOkkPWA"
 }

@@ -8,7 +8,7 @@
       "previous": null
     },
     "publication": {
-      "source": "PTR 2e Digimon Supplement - Digi Dex",
+      "source": "Digidex",
       "authors": [
         "Fox"
       ],
@@ -24,7 +24,8 @@
         "traits": [
           "explode",
           "blast-2",
-          "crit-2"
+          "crit-2",
+          "digimon"
         ],
         "range": {
           "target": "blast",
@@ -45,7 +46,8 @@
         "description": "<p>This attack has a 20% chance to inflict 20% Flinch.</p>"
       }
     ],
-    "grade": "C"
+    "grade": "C",
+    "slug": "iceball-bomb"
   },
   "img": "systems/ptr2e/img/svg/ice_icon.svg",
   "effects": [
@@ -78,14 +80,17 @@
             ],
             "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "isFixedChance": false
           }
         ],
         "slug": null,
         "traits": [],
         "removeAfterCombat": true,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
@@ -107,15 +112,15 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.346",
         "systemId": "ptr2e",
         "systemVersion": "1.2.1.beta",
         "createdTime": null,
         "modifiedTime": null,
-        "lastModifiedBy": null
+        "lastModifiedBy": null,
+        "exportSource": null
       }
     }
   ],
-  "flags": {},
   "_id": "m2xPfCIW7xJCb0nz"
 }
