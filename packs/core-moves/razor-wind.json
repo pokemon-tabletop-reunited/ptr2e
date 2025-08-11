@@ -6,15 +6,16 @@
     "slug": "razor-wind",
     "actions": [
       {
-        "slug": "razor-wind",
-        "name": "Razor Wind",
+        "slug": "razor-wind-resolution",
+        "name": "Razor Wind (Resolution)",
         "type": "attack",
         "traits": [
           "set-up",
           "defensive",
           "crit-1",
           "wind",
-          "sharp"
+          "sharp",
+          "priority-20"
         ],
         "range": {
           "target": "wide-line",
@@ -23,7 +24,8 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 3
+          "powerPoints": 2,
+          "trigger": "The user used Razor Wind (Set-Up) as their last Action."
         },
         "category": "special",
         "power": 80,
@@ -31,12 +33,38 @@
         "types": [
           "normal"
         ],
-        "description": "<p>Effect: Set-Up: The user starts whipping up a whirlwind, gaining +3 EVA Stages for 5 Activations.</p><p>Resolution: On their next Activation, the user attacks with this Attack.</p>",
+        "description": "<p>Trigger: The user used Razor Wind (Set-Up) as their last Action.</p><p>The user freely Moves up to half the Movement Score of their choice before attacking with this Attack.</p>",
         "img": "systems/ptr2e/img/svg/normal_icon.svg",
+        "predicate": []
+      },
+      {
+        "name": "Razor Wind (Set-Up)",
+        "slug": "razor-wind-set-up",
+        "description": "<p>Effect: The user gains +3 EVA Stages for 5 Activations and @Affliction[rebound 3]. If Windy Weather is present, the user may use Razor Wind (Resolution) as a Free Action upon resolving this Attack.</p>",
+        "traits": [
+          "set-up",
+          "defensive",
+          "flinch-30"
+        ],
+        "type": "attack",
+        "img": "systems/ptr2e/img/svg/normal_icon.svg",
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 2,
+          "delay": 3
+        },
+        "range": {
+          "target": "self",
+          "unit": "m"
+        },
+        "types": [
+          "normal"
+        ],
+        "category": "physical",
         "predicate": []
       }
     ],
-    "grade": "C",
+    "grade": "D",
     "publication": {
       "source": "PTR 2e Core",
       "authors": [
