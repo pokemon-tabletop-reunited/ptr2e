@@ -14,19 +14,12 @@
         "type": "passive",
         "range": {
           "target": "creature",
-          "unit": "m",
-          "distance": 0
+          "unit": "m"
         },
         "cost": {
-          "activation": "simple",
-          "powerPoints": 0,
-          "delay": null,
-          "priority": null
+          "activation": "simple"
         },
-        "img": "systems/ptr2e/img/perk-icons/Arcana.svg",
-        "variant": null,
-        "hidden": false,
-        "ephemeralVariant": false
+        "img": "systems/ptr2e/img/perk-icons/Arcana.svg"
       }
     ],
     "slug": "potent-afflictions",
@@ -81,9 +74,6 @@
       }
     ],
     "autoUnlock": [],
-    "originSlug": null,
-    "variant": null,
-    "mode": null,
     "global": true,
     "webs": [],
     "design": {
@@ -99,5 +89,61 @@
       "notes": ""
     }
   },
-  "effects": []
+  "effects": [
+    {
+      "name": "Potent Afflictions",
+      "type": "passive",
+      "_id": "6QcDvxp7MWzyXdFb",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "effect-alteration",
+            "key": "dot-trait-applied",
+            "alterations": [
+              {
+                "mode": 2,
+                "property": "effects.0.system.amount",
+                "value": "+(1/16)"
+              }
+            ],
+            "value": 0,
+            "predicate": [],
+            "mode": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.347",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.2.beta",
+        "createdTime": 1755164767858,
+        "modifiedTime": 1755165102176,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+      }
+    }
+  ]
 }

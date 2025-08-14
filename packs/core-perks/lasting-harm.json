@@ -13,19 +13,12 @@
         "type": "passive",
         "range": {
           "target": "self",
-          "unit": "m",
-          "distance": 0
+          "unit": "m"
         },
         "cost": {
-          "activation": "free",
-          "powerPoints": 0,
-          "delay": null,
-          "priority": null
+          "activation": "free"
         },
-        "img": "icons/svg/explosion.svg",
-        "variant": null,
-        "hidden": false,
-        "ephemeralVariant": false
+        "img": "icons/svg/explosion.svg"
       }
     ],
     "slug": "lasting-harm",
@@ -65,9 +58,6 @@
       }
     ],
     "autoUnlock": [],
-    "originSlug": null,
-    "variant": null,
-    "mode": null,
     "global": true,
     "webs": [],
     "design": {
@@ -83,6 +73,62 @@
       "notes": ""
     }
   },
-  "effects": [],
+  "effects": [
+    {
+      "name": "Lasting Harm",
+      "type": "passive",
+      "_id": "uBYUieWkSnIj4LrI",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "effect-alteration",
+            "key": "dot-trait-applied",
+            "alterations": [
+              {
+                "mode": 2,
+                "property": "effects.0.duration.turns",
+                "value": 2
+              }
+            ],
+            "value": 0,
+            "mode": 2,
+            "predicate": [],
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.347",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.2.beta",
+        "createdTime": 1755162831765,
+        "modifiedTime": 1755162888196,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+      }
+    }
+  ],
   "folder": "a1w2zpzavg6qtJFn"
 }
