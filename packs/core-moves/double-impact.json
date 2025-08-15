@@ -1,0 +1,132 @@
+{
+  "folder": "BImk1fcMbR5akA4z",
+  "name": "Double Impact",
+  "type": "move",
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "publication": {
+      "source": "Digidex",
+      "authors": [
+        "Fox"
+      ],
+      "notes": ""
+    },
+    "traits": [],
+    "actions": [
+      {
+        "name": "Double Impact",
+        "slug": "double-impact",
+        "type": "attack",
+        "img": "systems/ptr2e/img/svg/dark_icon.svg",
+        "traits": [
+          "digimon",
+          "10-strike",
+          "missile"
+        ],
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 9
+        },
+        "types": [
+          "dark"
+        ],
+        "category": "physical",
+        "predicate": [],
+        "description": "<p>On hit, the target is inflicted with @Affliction[stunted 5] and @Affliction[bleed 5]. On resolution, even if the attack missed, the target gains @Affliction[fear 5].</p>",
+        "range": {
+          "target": "creature",
+          "distance": 10,
+          "unit": "m"
+        },
+        "power": 20,
+        "accuracy": 90
+      }
+    ],
+    "grade": "S"
+  },
+  "img": "systems/ptr2e/img/svg/dark_icon.svg",
+  "effects": [
+    {
+      "name": "Double Impact",
+      "type": "passive",
+      "_id": "ZkGYif92Ia5JZAYR",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "double-impact-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.stuntedcondiitem",
+            "predicate": [],
+            "chance": 100,
+            "isFixedChance": false,
+            "affects": "target",
+            "alterations": [],
+            "dontMerge": false,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "roll-effect",
+            "key": "double-impact-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.bleedconditiitem",
+            "predicate": [],
+            "chance": 100,
+            "isFixedChance": false,
+            "affects": "target",
+            "alterations": [],
+            "dontMerge": false,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "roll-effect",
+            "key": "double-impact-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.fearconditioitem",
+            "predicate": [],
+            "chance": 100,
+            "isFixedChance": false,
+            "affects": "target",
+            "alterations": [],
+            "dontMerge": false,
+            "mode": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.347",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.2.beta",
+        "lastModifiedBy": null
+      }
+    }
+  ],
+  "flags": {},
+  "_id": "GPPtKRXcQYui6301"
+}
