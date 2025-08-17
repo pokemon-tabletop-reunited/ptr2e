@@ -12,7 +12,7 @@
     },
     "slug": "lunatic-dance",
     "publication": {
-      "source": "PTR 2e Digimon Supplement - Digi Dex",
+      "source": "Digidex",
       "authors": [
         "PTR 2e Team",
         "Gwen"
@@ -25,7 +25,9 @@
         "slug": "lunatic-dance",
         "name": "Lunatic Dance",
         "type": "attack",
-        "traits": [],
+        "traits": [
+          "digimon"
+        ],
         "range": {
           "target": "creature",
           "distance": 1,
@@ -51,7 +53,7 @@
   "img": "systems/ptr2e/img/svg/water_icon.svg",
   "effects": [
     {
-      "name": "Deathroll",
+      "name": "Lunatic Dance",
       "type": "passive",
       "_id": "lb4xfBhyvPZC9byY",
       "img": "systems/ptr2e/img/icons/effect_icon.webp",
@@ -59,22 +61,26 @@
         "changes": [
           {
             "type": "roll-effect",
-            "key": "deathroll-attack",
+            "key": "lunatic-dance-attack",
             "value": "Compendium.ptr2e.core-effects.Item.confusedconditem",
             "predicate": [],
-            "chance": 20,
+            "chance": 50,
             "affects": "target",
-            "mode": 2,
             "priority": null,
-            "ignored": false,
-            "alterations": []
+            "alterations": [],
+            "isFixedChance": false,
+            "dontMerge": false,
+            "mode": 2,
+            "ignored": false
           }
         ],
         "slug": null,
         "traits": [],
         "removeAfterCombat": true,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
@@ -96,23 +102,16 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.347",
         "systemId": "ptr2e",
-        "systemVersion": "1.1.0.beta",
+        "systemVersion": "1.4.2.beta",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1755382241929,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf",
+        "exportSource": null
       }
     }
   ],
   "folder": "BImk1fcMbR5akA4z",
-  "flags": {
-    "exportSource": {
-      "world": "ptr-test",
-      "system": "ptr2e",
-      "coreVersion": "12.331",
-      "systemVersion": "1.1.0.beta"
-    }
-  },
   "_id": "AourPTTtoPUg4FD4"
 }
