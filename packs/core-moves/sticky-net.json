@@ -8,7 +8,7 @@
       "previous": null
     },
     "publication": {
-      "source": "PTR 2e Digimon Supplement - Digi Dex",
+      "source": "Digidex",
       "authors": [
         "PTR 2e Team"
       ],
@@ -22,7 +22,7 @@
         "type": "attack",
         "img": "systems/ptr2e/img/svg/bug_icon.svg",
         "traits": [
-          "digimon-move"
+          "digimon"
         ],
         "range": {
           "target": "cone",
@@ -43,7 +43,8 @@
         "description": "<p>Effect: On hit, all valid targets lose -1 SPD Stages for 5 Activations.</p>"
       }
     ],
-    "grade": "E"
+    "grade": "E",
+    "slug": "sticky-net"
   },
   "img": "systems/ptr2e/img/svg/bug_icon.svg",
   "effects": [
@@ -65,7 +66,8 @@
             "mode": 2,
             "priority": null,
             "ignored": false,
-            "alterations": []
+            "alterations": [],
+            "isFixedChance": false
           }
         ],
         "slug": null,
@@ -75,7 +77,9 @@
         "stacks": 0,
         "priority": 50,
         "formula": "",
-        "type": "damage"
+        "type": "damage",
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
@@ -97,15 +101,15 @@
       "_stats": {
         "compendiumSource": "Compendium.ptr2e.core-moves.Item.TijijTYIY2UOVWOn.ActiveEffect.UCnWrisOhzQ9nLd2",
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.346",
         "systemId": "ptr2e",
         "systemVersion": "1.2.1.beta",
         "createdTime": null,
         "modifiedTime": null,
-        "lastModifiedBy": null
+        "lastModifiedBy": null,
+        "exportSource": null
       }
     }
   ],
-  "flags": {},
   "_id": "xsp0fBBTgChEdCel"
 }

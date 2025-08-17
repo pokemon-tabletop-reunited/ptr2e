@@ -9,7 +9,7 @@
       {
         "name": "Sadism",
         "slug": "sadism",
-        "description": "<p>Trigger: A creature within 5m of you suffers loses a Tick(s) of HP as effect damage from an Affliction.<br><br>Effect: You heal a number of Ticks of HP equal to the number of Ticks the triggering creature lost.</p>",
+        "description": "<p>Trigger: A creature within 5m of you suffers a Tick(s) of HP as effect damage from an Affliction.<br><br>Effect: You heal a number of @Tick[1]s of HP equal to the number of Ticks the triggering creature lost.</p>",
         "traits": [
           "healing",
           "interrupt-2"
@@ -17,23 +17,18 @@
         "type": "generic",
         "range": {
           "target": "self",
-          "unit": "m",
-          "distance": 0
+          "unit": "m"
         },
         "cost": {
           "activation": "free",
           "powerPoints": 3,
-          "trigger": "A creature within 5m of you suffers loses a Tick(s) of HP as effect damage from an Affliction.",
-          "delay": null,
-          "priority": null
+          "trigger": "A creature within 5m of you suffers loses a Tick(s) of HP as effect damage from an Affliction."
         },
-        "img": "icons/svg/explosion.svg",
-        "variant": null,
-        "ephemeralVariant": false
+        "img": "systems/ptr2e/img/perk-icons/Taskmaster.svg"
       }
     ],
     "slug": "sadism",
-    "description": "<p>Trigger: A creature within 5m of you suffers loses a Tick(s) of HP as effect damage from an Affliction.<br><br>Effect: You heal a number of Ticks of HP equal to the number of Ticks the triggering creature lost.</p>",
+    "description": "<p>Trigger: A creature within 5m of you suffers a Tick(s) of HP as effect damage from an Affliction.<br><br>Effect: You heal a number of @Tick[1]s of HP equal to the number of Ticks the triggering creature lost.</p>",
     "traits": [],
     "prerequisites": [
       {
@@ -50,31 +45,25 @@
     },
     "nodes": [
       {
+        "x": 147,
+        "y": 70,
+        "hidden": false,
+        "type": "normal",
         "connected": [
           "stage-vampirism",
           "cultivate-weakness",
           "insidious-wounds"
         ],
         "config": {
-          "alpha": null,
-          "backgroundColor": "#004040",
-          "borderColor": null,
-          "borderWidth": null,
           "texture": "systems/ptr2e/img/perk-icons/Taskmaster.svg",
-          "tint": null,
-          "scale": null
+          "backgroundColor": null,
+          "borderColor": null,
+          "tint": null
         },
-        "hidden": false,
-        "type": "normal",
-        "x": 147,
-        "y": 70,
         "tier": null
       }
     ],
     "autoUnlock": [],
-    "originSlug": null,
-    "variant": null,
-    "mode": null,
     "global": true,
     "webs": [],
     "design": {

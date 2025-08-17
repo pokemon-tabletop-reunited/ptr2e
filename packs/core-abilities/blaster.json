@@ -1,0 +1,82 @@
+{
+  "folder": "ANyTBaCvsFOl1tzn",
+  "name": "Blaster",
+  "type": "ability",
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "publication": {
+      "source": "",
+      "authors": [],
+      "notes": ""
+    },
+    "traits": [
+      "digimon",
+      "partial-automation"
+    ],
+    "actions": [],
+    "description": "<p>Passive: The user gains +1 default Attack Stage and increases the amount of HP recovered by @Trait[drain-x] moves by 30%.</p>"
+  },
+  "img": "icons/magic/fire/projectile-bolts-salvo-red.webp",
+  "effects": [
+    {
+      "name": "+1 Attack Stage",
+      "type": "affliction",
+      "_id": "mZ037ZA6jbCPyC06",
+      "img": "systems/ptr2e/img/icons/physical_icon.png",
+      "system": {
+        "changes": [
+          {
+            "type": "basic",
+            "key": "system.attributes.atk.stage",
+            "value": 1,
+            "predicate": [],
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0,
+        "priority": 50,
+        "formula": "",
+        "type": "damage",
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": 5,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.347",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.2.beta",
+        "lastModifiedBy": null
+      }
+    }
+  ],
+  "flags": {},
+  "_id": "xieDMfUtsRm6RaW1"
+}

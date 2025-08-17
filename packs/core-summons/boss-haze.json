@@ -1,0 +1,57 @@
+{
+  "name": "Boss Haze",
+  "type": "summon",
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "publication": {
+      "source": "PTR2e Core",
+      "authors": [
+        "Fox"
+      ],
+      "notes": ""
+    },
+    "traits": [
+      "boss",
+      "summon"
+    ],
+    "description": "<p>When the Boss Haze activates, the Boss entity may choose to either cleanse all @Trait[stage-change] effects from it and it's allies, from the players and their allies, or not to cleanse at all during this activation.</p>",
+    "actions": [
+      {
+        "name": "Boss Haze",
+        "slug": "boss-haze",
+        "description": "<p>When the Boss Haze activates, the Boss entity may choose to either cleanse all @Trait[stage-change] effects from it and it's allies, from the players and their allies, or not to cleanse at all during this activation.</p>",
+        "traits": [
+          "boss",
+          "summon"
+        ],
+        "type": "summon",
+        "img": "systems/ptr2e/img/item-icons/max%20repel.webp",
+        "cost": {
+          "activation": "simple"
+        },
+        "range": {
+          "target": "creature",
+          "distance": 10,
+          "unit": "m"
+        },
+        "types": [
+          "untyped"
+        ],
+        "category": "status",
+        "predicate": [],
+        "targetType": "owner",
+        "damageType": "power",
+        "attackStat": "owner"
+      }
+    ],
+    "baseAV": 120,
+    "duration": 999
+  },
+  "img": "systems/ptr2e/img/item-icons/max%20repel.webp",
+  "effects": [],
+  "flags": {},
+  "_id": "ABcQaAM2w1M6G5Aw"
+}

@@ -5,7 +5,7 @@
   "system": {
     "prerequisites": [],
     "cost": 1,
-    "description": "<p>Your next non-[Contact] Attack gains [Crit X] or [Crit X+1] until it resolves.</p>",
+    "description": "<p>Your next non-@Trait[contact] Attack gains @Trait[crit-x] or [Crit X+1] until it resolves.</p>",
     "actions": [
       {
         "name": "Down The Sights",
@@ -20,11 +20,8 @@
         "img": "icons/svg/explosion.svg",
         "range": {
           "target": "enemy",
-          "unit": "m",
-          "distance": 0
-        },
-        "variant": null,
-        "ephemeralVariant": false
+          "unit": "m"
+        }
       }
     ],
     "slug": "down-the-sights",
@@ -48,13 +45,10 @@
           "needle-threader"
         ],
         "config": {
-          "alpha": null,
+          "texture": "systems/ptr2e/img/perk-icons/Combat.svg",
           "backgroundColor": null,
           "borderColor": null,
-          "borderWidth": null,
-          "texture": "systems/ptr2e/img/perk-icons/Combat.svg",
-          "tint": "#ffffff",
-          "scale": null
+          "tint": null
         },
         "tier": null
       }
@@ -73,10 +67,7 @@
         "PTR 2e Team"
       ],
       "notes": ""
-    },
-    "originSlug": null,
-    "variant": null,
-    "mode": null
+    }
   },
   "_id": "eHdFNdcyllxflfNA",
   "img": "systems/ptr2e/img/perk-icons/Combat.svg",

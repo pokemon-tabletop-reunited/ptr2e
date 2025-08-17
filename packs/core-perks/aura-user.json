@@ -11,27 +11,22 @@
       }
     ],
     "cost": 1,
-    "description": "<p>You gain [Aura User].</p>",
+    "description": "<p>You gain the @Trait[aura-user] Trait.</p>",
     "actions": [
       {
         "name": "Aura User",
         "slug": "aura-user",
         "description": "<p>You gain [Aura User].</p>",
         "cost": {
-          "activation": "free",
-          "powerPoints": 0
+          "activation": "free"
         },
         "type": "passive",
         "traits": [],
         "img": "icons/svg/explosion.svg",
         "range": {
           "target": "enemy",
-          "unit": "m",
-          "distance": 0
-        },
-        "variant": null,
-        "ephemeralVariant": false,
-        "hidden": false
+          "unit": "m"
+        }
       }
     ],
     "slug": "aura-user",
@@ -55,13 +50,10 @@
           "out-of-options"
         ],
         "config": {
-          "alpha": null,
-          "backgroundColor": "#bcf0d8",
-          "borderColor": null,
-          "borderWidth": null,
           "texture": "systems/ptr2e/img/perk-icons/Aura.svg",
-          "tint": "#18af68",
-          "scale": null
+          "backgroundColor": null,
+          "borderColor": null,
+          "tint": null
         },
         "tier": null
       }
@@ -82,10 +74,7 @@
         "PTR 2e Team"
       ],
       "notes": ""
-    },
-    "originSlug": null,
-    "variant": null,
-    "mode": null
+    }
   },
   "_id": "ft8sIBRLOGVjp70g",
   "img": "systems/ptr2e/img/perk-icons/Aura.svg",
@@ -94,24 +83,26 @@
       "name": "Aura User",
       "type": "passive",
       "_id": "dh14MmRV6bMSra3a",
-      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "img": "systems/ptr2e/img/perk-icons/Aura.svg",
       "system": {
         "changes": [
           {
             "type": "add-trait",
             "key": "",
-            "value": "Aura User",
+            "value": "aura-user",
             "predicate": [],
-            "mode": 2,
             "priority": null,
+            "mode": 2,
             "ignored": false
           }
         ],
         "slug": null,
         "traits": [],
-        "removeAfterCombat": true,
+        "removeAfterCombat": false,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
@@ -123,7 +114,7 @@
         "startRound": null,
         "startTurn": null
       },
-      "description": "",
+      "description": "<p>You gain the @Trait[aura-user] Trait.</p>",
       "origin": null,
       "tint": "#ffffff",
       "transfer": true,
@@ -133,12 +124,12 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "13.342",
+        "coreVersion": "13.346",
         "systemId": "ptr2e",
-        "systemVersion": "0.10.0-alpha.3.4.1",
+        "systemVersion": "1.4.1.beta",
         "createdTime": 1732233165457,
-        "modifiedTime": 1732233176195,
-        "lastModifiedBy": "Kc3DOunCh3ClAeHS",
+        "modifiedTime": 1754301993588,
+        "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
         "exportSource": null
       }
     }
