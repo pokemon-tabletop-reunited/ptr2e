@@ -1604,22 +1604,6 @@
     "slug": "tailed",
     "label": "Tailed",
     "related": [],
-    "description": "This creature has a significantly sized physical appendage or tool that is great for smashing and crushing. The user has access to the [Hammer] Tutor List.",
-    "type": "automated",
-    "changes": [
-      {
-        "type": "alter-attack",
-        "key": "adaptable-trait-attack",
-        "property": "traits",
-        "mode": "2",
-        "value": "hammer"
-      }
-    ]
-  },
-  {
-    "slug": "tailed",
-    "label": "Tailed",
-    "related": [],
     "description": "This creature has a sizeable tail. The user has access to the [Tailed] Tutor List.",
     "type": "automated",
     "changes": [
@@ -2250,7 +2234,11 @@
   {
     "slug": "digimon",
     "label": "Digimon",
-    "related": [],
+    "related": [
+      "vaccine",
+      "data",
+      "virus"
+    ],
     "description": "Not quite a @trait[pokemon], creatures with this trait are 'digital monsters' or 'Digimon' for short. Creatures with this trait usually have the Digitize Trait, and always have access to the Digimon Perk Web. Other items with this trait are specifically designed for use by creatures with this trait, and games that center around Digimon and its settings."
   },
   {
@@ -4513,12 +4501,6 @@
     "description": "These weapons utilize a Clock, ticking down, to track the PP Cost of their Attacks, rather than their user's. Creatures can use 3 Simple Actions to reload the weapon, refilling the Clock. Reloading a weapon either consumes an Ammunition item relating to the weapon, or consumes a creature's IP at an increased cost."
   },
   {
-    "slug": "reload-3",
-    "label": "Reload 3",
-    "related": [],
-    "description": "These weapons utilize a Clock, ticking down, to track the PP Cost of their Attacks, rather than their user's. Creatures can use 3 Simple Actions to reload the weapon, refilling the Clock. Reloading a weapon either consumes an Ammunition item relating to the weapon, or consumes a creature's IP at an increased cost."
-  },
-  {
     "slug": "reload-4",
     "label": "Reload 4",
     "related": [],
@@ -4799,16 +4781,6 @@
     "type": "automated"
   },
   {
-    "slug": "digimon",
-    "label": "Digimon",
-    "related": [
-      "vaccine",
-      "data",
-      "virus"
-    ],
-    "description": "Grant access to the Digivolution Web. (In a future build)"
-  },
-  {
     "slug": "vaccine",
     "label": "Vaccine",
     "related": [
@@ -4983,8 +4955,8 @@
     "description": "Mega Digimon have powers that if misused could destroy their world. In some cases they are the servants of God.  Or are worshipped as gods themselves."
   },
   {
-    "slug": "ultra",
-    "label": "Ultra",
+    "slug": "ultra-digimon",
+    "label": "Ultra (Digimon)",
     "related": [
       "baby",
       "in-training",

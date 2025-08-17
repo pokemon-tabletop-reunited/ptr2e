@@ -243,7 +243,6 @@ class CompendiumPack {
       throw PackError(`Filename at ${filePath} does not reflect document name (should be ${filenameForm}).`);
     }
 
-
     return [packSource];
   }
 
