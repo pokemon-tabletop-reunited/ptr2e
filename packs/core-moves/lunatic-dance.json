@@ -53,7 +53,7 @@
   "img": "systems/ptr2e/img/svg/water_icon.svg",
   "effects": [
     {
-      "name": "Deathroll",
+      "name": "Lunatic Dance",
       "type": "passive",
       "_id": "lb4xfBhyvPZC9byY",
       "img": "systems/ptr2e/img/icons/effect_icon.webp",
@@ -61,17 +61,17 @@
         "changes": [
           {
             "type": "roll-effect",
-            "key": "deathroll-attack",
+            "key": "lunatic-dance-attack",
             "value": "Compendium.ptr2e.core-effects.Item.confusedconditem",
             "predicate": [],
-            "chance": 20,
+            "chance": 50,
             "affects": "target",
-            "mode": 2,
             "priority": null,
-            "ignored": false,
             "alterations": [],
             "isFixedChance": false,
-            "dontMerge": false
+            "dontMerge": false,
+            "mode": 2,
+            "ignored": false
           }
         ],
         "slug": null,
@@ -102,12 +102,6 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "13.346",
-        "systemId": "ptr2e",
-        "systemVersion": "1.1.0.beta",
-        "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null,
         "exportSource": null
       }
     }

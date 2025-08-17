@@ -522,6 +522,12 @@ class ActiveEffectPTR2e<
       this.target.update(actorUpdates, { noHook: true });
     }
   }
+
+  override get isTemporary(): boolean {
+    if(this.flags.ptr2e.displayOnToken) return this.flags.ptr2e.displayOnToken === "always";
+
+    return super.isTemporary;
+  }
 }
 
 interface ActiveEffectPTR2e<
@@ -547,6 +553,7 @@ interface ActiveEffectPTR2e<
         amount?: number;
       };
       traitEffect?: string;
+      displayOnToken?: "always" | "never" | null;
     };
   }
 

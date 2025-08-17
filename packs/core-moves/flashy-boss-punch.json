@@ -1,0 +1,113 @@
+{
+  "folder": "BImk1fcMbR5akA4z",
+  "name": "Flashy Boss Punch",
+  "type": "move",
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "publication": {
+      "source": "Digidex",
+      "authors": [
+        "Fox"
+      ],
+      "notes": ""
+    },
+    "traits": [],
+    "actions": [
+      {
+        "name": "Flashy Boss Punch",
+        "slug": "flashy-boss-punch",
+        "type": "attack",
+        "img": "systems/ptr2e/img/svg/fighting_icon.svg",
+        "traits": [
+          "digimon",
+          "punch",
+          "contact"
+        ],
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 9
+        },
+        "types": [
+          "fighting",
+          "fairy"
+        ],
+        "category": "physical",
+        "predicate": [],
+        "description": "<p>This attack has a 75% chance to inflict @Affliction[delay 50] to the target. The attack counts as both @Trait[fighting] and @Trait[fairy] type.</p>",
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "power": 130,
+        "accuracy": 100
+      }
+    ],
+    "grade": "S"
+  },
+  "img": "systems/ptr2e/img/svg/fighting_icon.svg",
+  "effects": [
+    {
+      "name": "Flashy Boss Punch",
+      "type": "passive",
+      "_id": "vUiEl8YuxDs4ih7y",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "flashy-boss-punch-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.delayconditiitem",
+            "predicate": [],
+            "chance": 75,
+            "isFixedChance": false,
+            "affects": "target",
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "system.amount",
+                "value": -50
+              }
+            ],
+            "dontMerge": false,
+            "mode": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.347",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.2.beta",
+        "lastModifiedBy": null
+      }
+    }
+  ],
+  "flags": {},
+  "_id": "Be8aQ935jbANHOBS"
+}

@@ -57,10 +57,7 @@
         "PTR 2e Team"
       ],
       "notes": ""
-    },
-    "originSlug": null,
-    "variant": null,
-    "mode": null
+    }
   },
   "effects": [
     {
@@ -82,25 +79,46 @@
                 "value": "true"
               }
             ],
-            "mode": 2,
             "priority": null,
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            },
+            "mode": 2,
             "ignored": false,
             "reevaluateOnUpdate": false,
             "inMemoryOnly": false,
             "allowDuplicate": true,
             "track": false,
-            "replaceSelf": false,
-            "onDeleteActions": {
-              "grantee": "detach",
-              "granter": "cascade"
-            }
+            "replaceSelf": false
+          },
+          {
+            "type": "roll-effect",
+            "key": "high-noon-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.k1FukpHKnZGqjSNc",
+            "predicate": [],
+            "chance": 100,
+            "isFixedChance": true,
+            "affects": "self",
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "system.changes.0.value",
+                "value": 4
+              }
+            ],
+            "dontMerge": false,
+            "mode": 2,
+            "ignored": false
           }
         ],
         "slug": null,
         "traits": [],
         "removeAfterCombat": true,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
@@ -122,11 +140,11 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "13.342",
+        "coreVersion": "13.347",
         "systemId": "ptr2e",
-        "systemVersion": "0.10.0-alpha.5.2.1",
+        "systemVersion": "1.4.2.beta",
         "createdTime": 1737935167337,
-        "modifiedTime": 1737935200437,
+        "modifiedTime": 1755030306295,
         "lastModifiedBy": "mK35yvCqCgiTUvKf",
         "exportSource": null
       }

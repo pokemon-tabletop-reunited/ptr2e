@@ -1,0 +1,111 @@
+{
+  "folder": "BImk1fcMbR5akA4z",
+  "name": "Giga Blaster",
+  "type": "move",
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "publication": {
+      "source": "Digidex",
+      "authors": [
+        "Fox"
+      ],
+      "notes": ""
+    },
+    "traits": [],
+    "actions": [
+      {
+        "name": "Giga Blaster",
+        "slug": "giga-blaster",
+        "type": "attack",
+        "img": "systems/ptr2e/img/svg/electric_icon.svg",
+        "traits": [
+          "digimon",
+          "explode"
+        ],
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 9
+        },
+        "types": [
+          "electric"
+        ],
+        "category": "special",
+        "predicate": [],
+        "description": "<p>This attack has a 50% chance to apply @Affliction[tased 3].</p>",
+        "range": {
+          "target": "creature",
+          "distance": 18,
+          "unit": "m"
+        },
+        "power": 130,
+        "accuracy": 100
+      }
+    ],
+    "grade": "S"
+  },
+  "img": "systems/ptr2e/img/svg/electric_icon.svg",
+  "effects": [
+    {
+      "name": "Giga Blaster",
+      "type": "passive",
+      "_id": "z7SWEDwnaEexrm33",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "giga-blaster-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.tasedconditiitem",
+            "predicate": [],
+            "chance": 50,
+            "isFixedChance": false,
+            "affects": "target",
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "duration.turns",
+                "value": 3
+              }
+            ],
+            "dontMerge": false,
+            "mode": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.347",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.2.beta",
+        "lastModifiedBy": null
+      }
+    }
+  ],
+  "flags": {},
+  "_id": "ND8nleUohyiBryyH"
+}
