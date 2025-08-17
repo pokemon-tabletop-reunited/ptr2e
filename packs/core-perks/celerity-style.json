@@ -18,7 +18,7 @@
     },
     "actions": [],
     "slug": "celerity-style",
-    "description": "<p>Target: A Commanded @Trait[flying] Creature<br><br>Effect: The affected creature is no longer able to be targeted with Attacks of Opportunity, but their attacks suffer @UUID[Compendium.ptr2e.core-effects.wA5oCsgHmZLcHHSn]{-1 Accuracy Stage} or gain the @Affliction[grapple] Affliction. If they already have this Affliction, they are cured from it immediately and may [Interrupt] to freely move 1m</p>",
+    "description": "<p>Target: A Commanded @Trait[flying] Creature<br><br>Effect: The effected creature is no longer able to be targeted with Attacks of Opportunity, and is immune to the @Affliction[grapple] Affliction. If they already have this Affliction, they are cured of it immediately and may Interrupt to freely move 1m. Additionally, their attacks suffer from @UUID[Compendium.ptr2e.core-effects.wA5oCsgHmZLcHHSn]{-1 Default Accuracy Stage} whilst the Style is active.</p>",
     "traits": [
       "command",
       "style",
@@ -46,11 +46,17 @@
       {
         "x": 196,
         "y": 102,
+        "hidden": false,
+        "type": "normal",
         "connected": [
           "type-specialist"
         ],
-        "hidden": false,
-        "type": "normal",
+        "config": {
+          "texture": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "tint": null
+        },
         "tier": null
       }
     ]
