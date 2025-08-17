@@ -6,38 +6,61 @@
     "slug": "geomancy",
     "actions": [
       {
-        "slug": "geomancy",
-        "name": "Geomancy",
+        "slug": "geomancy-resolution",
+        "name": "Geomancy (Resolution)",
         "type": "attack",
         "traits": [
           "legendary",
-          "aura",
-          "set-up"
+          "set-up",
+          "priority-60"
         ],
         "range": {
           "target": "self",
-          "distance": 0,
           "unit": "m"
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 7
+          "powerPoints": 4,
+          "trigger": "The user used Geomancy (Set-Up) as their last Action."
         },
         "category": "status",
-        "power": null,
-        "accuracy": null,
         "types": [
           "fairy"
         ],
-        "description": "<p>Effect: Set-up: The user begins to glow with mystical Power, gaining @Affliction[braced] 1 and healing 3 Ticks of HP.</p><p>Resolution: The user gains +2 SPATK, SPDEF, and SPD Stages for 7 Activations.</p>",
-        "contestType": "",
-        "contestEffect": "",
-        "free": false,
-        "slot": null
+        "description": "<p>Trigger: The user used Geomancy (Set-Up) as their last Action.</p><p>Effect: The user gains +2 SPATK, SPDEF, and SPD Stages for 7 Activations.</p>",
+        "img": "systems/ptr2e/img/svg/fairy_icon.svg",
+        "predicate": []
+      },
+      {
+        "name": "Geomancy (Set-Up)",
+        "slug": "geomancy-set-up",
+        "description": "<p>Effect: The user gains @Affliction[braced 2] and @Tick[3].</p>",
+        "traits": [
+          "legendary",
+          "set-up",
+          "aura",
+          "defensive",
+          "flinch-40"
+        ],
+        "type": "attack",
+        "img": "systems/ptr2e/img/svg/fairy_icon.svg",
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 4
+        },
+        "range": {
+          "target": "self",
+          "unit": "m"
+        },
+        "types": [
+          "fairy"
+        ],
+        "category": "status",
+        "predicate": []
       }
     ],
     "container": null,
-    "grade": "A",
+    "grade": "B",
     "publication": {
       "source": "PTR 2e Core",
       "authors": [

@@ -20,7 +20,7 @@
         },
         "cost": {
           "activation": "simple",
-          "powerPoints": 1
+          "powerPoints": 2
         },
         "description": "<p>Effect: The target uses DEF in place of their ATK when using a Physical-Category Attack for 1 Activation.</p>",
         "type": "generic",
@@ -30,7 +30,8 @@
     "slug": "assault-armor-style",
     "description": "<p>Simple Action, 2 PP cost. Target self or allied creature. The affected creature uses DEF in place of their ATK when using a Physical-Category Attack until the end of their next full Activation.</p>",
     "traits": [
-      "command"
+      "command",
+      "style"
     ],
     "prerequisites": [
       {
@@ -97,7 +98,7 @@
         "changes": [
           {
             "type": "roll-effect",
-            "key": "assault-armor-style-generic",
+            "key": "assault-armor-generic",
             "value": "Compendium.ptr2e.core-effects.Item.v94DtQcoeLWVMpyv",
             "predicate": [],
             "chance": 100,
@@ -134,11 +135,7 @@
         "duplicateSource": null,
         "exportSource": null,
         "coreVersion": "13.346",
-        "systemId": "ptr2e",
-        "systemVersion": "1.4.1.beta",
-        "createdTime": 1754142985368,
-        "modifiedTime": 1754143013197,
-        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+        "systemId": "ptr2e"
       }
     }
   ]

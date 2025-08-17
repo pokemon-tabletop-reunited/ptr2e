@@ -21,6 +21,10 @@
       {
         "type": "swim",
         "value": 4
+      },
+      {
+        "type": "burrow",
+        "value": 8
       }
     ],
     "traits": [
@@ -29,7 +33,8 @@
       "firestarter",
       "heater",
       "glow-3",
-      "jump-4"
+      "jump-4",
+      "tremorsense-15"
     ],
     "abilities": {
       "starting": [
@@ -50,18 +55,18 @@
       ],
       "advanced": [
         {
-          "slug": "sandstrike"
+          "slug": "flaming-soul"
         },
         {
-          "slug": "fearmonger"
+          "slug": "sand-rush"
         }
       ],
       "master": [
         {
-          "slug": "sand-rush"
+          "slug": "pyromancy"
         },
         {
-          "slug": "vaporization"
+          "slug": "sand-skin"
         }
       ]
     },
@@ -157,6 +162,14 @@
       {
         "slug": "survival",
         "value": 45,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "swim",
+        "value": 25,
         "rvs": 0,
         "favourite": false,
         "hidden": false,
@@ -544,13 +557,7 @@
                 "x": 26,
                 "y": 26
               },
-              "details": {
-                "gender": null,
-                "item": null,
-                "level": null,
-                "knownMove": null
-              },
-              "evolutions": []
+              "details": null
             },
             {
               "name": "typhlosion-hisuian",
@@ -572,21 +579,10 @@
                 "x": 26,
                 "y": 26
               },
-              "details": {
-                "gender": null,
-                "item": null,
-                "level": null,
-                "knownMove": null
-              },
-              "evolutions": []
+              "details": null
             }
           ],
-          "details": {
-            "gender": null,
-            "item": null,
-            "level": null,
-            "knownMove": null
-          }
+          "details": null
         }
       ],
       "uuid": "Compendium.ptr2e.core-species.Item.6r9PIDH1IiIKDIhz",
@@ -608,7 +604,8 @@
       "source": "PTR 2e Core - Johto Dex",
       "authors": [
         "PTR 2e Team"
-      ]
+      ],
+      "notes": ""
     }
   },
   "_id": "7ZcUbcTtaf581s5h",

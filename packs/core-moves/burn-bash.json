@@ -7,14 +7,14 @@
     "slug": null,
     "actions": [
       {
-        "name": "Burn Bash",
-        "slug": "burn-bash",
+        "name": "Burn Bash (Resolution)",
+        "slug": "burn-bash-resolution",
         "type": "attack",
-        "img": "icons/svg/explosion.svg",
+        "img": "systems/ptr2e/img/svg/fire_icon.svg",
         "traits": [
           "set-up",
-          "contact",
-          "environ"
+          "crit-1",
+          "contact"
         ],
         "range": {
           "target": "creature",
@@ -23,24 +23,47 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 2
+          "powerPoints": 2,
+          "trigger": "The user used Burn Bash (Set-Up) as their last Action."
         },
-        "variant": null,
         "types": [
           "fire"
         ],
         "category": "physical",
-        "power": 80,
+        "power": 90,
         "accuracy": 95,
-        "contestType": "",
-        "contestEffect": "",
-        "free": false,
-        "slot": null,
-        "description": "<p>Effect: Set-Up: The user gains @Affliction[braced] 1, and ends their Activation. If the user is affected by Scorched Terrain or Sunny Weather, then they Set-Up and resolve this Attack on the same Activation.</p><p>Resolution: On their next Activation, they attack with and resolves this attack. On hit, the target gains @Affliction[burn] 5.</p>"
+        "description": "<p>Trigger: The user used Burn Bash (Set-Up) as their last Action.</p><p>Effect: On hit, the target gains @Affliction[burn 5].</p>",
+        "predicate": []
+      },
+      {
+        "name": "Burn Bash (Set-Up)",
+        "slug": "burn-bash-set-up",
+        "description": "<p>Effect: The user gains @Affliction[braced 2], If the user is affected by Scorched Terrain or Sunny Weather, the user may use Burn Bash (Resolution) as a Free Action upon resolving this Attack.</p>",
+        "traits": [
+          "set-up",
+          "environ",
+          "priority-20"
+        ],
+        "type": "attack",
+        "img": "systems/ptr2e/img/svg/fire_icon.svg",
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 2,
+          "delay": 1
+        },
+        "range": {
+          "target": "self",
+          "unit": "m"
+        },
+        "types": [
+          "fire"
+        ],
+        "category": "status",
+        "predicate": []
       }
     ],
     "container": null,
-    "grade": "B",
+    "grade": "D",
     "publication": {
       "source": "PTR 2e Core",
       "authors": [

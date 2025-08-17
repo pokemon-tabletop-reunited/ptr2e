@@ -39,38 +39,38 @@
           "slug": "intimidate"
         },
         {
-          "slug": "guard-dog"
+          "slug": "flash-fire"
         }
       ],
       "basic": [
         {
-          "slug": "flash-fire"
+          "slug": "justified"
         },
         {
-          "slug": "blaze"
+          "slug": "guard-dog"
         }
       ],
       "advanced": [
         {
-          "slug": "justified"
+          "slug": "fevered-pitch"
         },
         {
-          "slug": "friend-guard"
+          "slug": "advantageous"
         }
       ],
       "master": [
         {
-          "slug": "moxie"
+          "slug": "flaming-soul"
         },
         {
-          "slug": "reckless"
+          "slug": "acceleration"
         }
       ]
     },
     "skills": [
       {
         "slug": "acrobatics",
-        "value": 40,
+        "value": 45,
         "rvs": 0,
         "favourite": false,
         "hidden": false,
@@ -102,7 +102,7 @@
       },
       {
         "slug": "leadership",
-        "value": 40,
+        "value": 45,
         "rvs": 0,
         "favourite": false,
         "hidden": false,
@@ -110,7 +110,7 @@
       },
       {
         "slug": "lift",
-        "value": 45,
+        "value": 50,
         "rvs": 0,
         "favourite": false,
         "hidden": false,
@@ -134,7 +134,7 @@
       },
       {
         "slug": "negotiation",
-        "value": 40,
+        "value": 45,
         "rvs": 0,
         "favourite": false,
         "hidden": false,
@@ -142,7 +142,7 @@
       },
       {
         "slug": "psychology",
-        "value": 35,
+        "value": 45,
         "rvs": 0,
         "favourite": false,
         "hidden": false,
@@ -182,7 +182,7 @@
       },
       {
         "slug": "swim",
-        "value": 35,
+        "value": 40,
         "rvs": 0,
         "favourite": false,
         "hidden": false,
@@ -620,17 +620,12 @@
               "operand": "or"
             }
           ],
-          "details": {
-            "gender": null,
-            "item": null,
-            "level": null,
-            "knownMove": null
-          },
-          "evolutions": [],
           "perk": {
             "x": 26,
             "y": 26
-          }
+          },
+          "details": null,
+          "evolutions": []
         }
       ],
       "uuid": "Compendium.ptr2e.core-species.Item.KOXNoMzACprI2b2N",
@@ -659,5 +654,275 @@
     }
   },
   "_id": "QTmMNadOKByVZSNP",
-  "effects": []
+  "effects": [
+    {
+      "name": "Mega Arcanine",
+      "type": "form",
+      "_id": "pbfrKWJNyYePdzjf",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-option",
+            "key": "manual-forme-toggle",
+            "value": "forme:mega-arcanine:active",
+            "domain": "all",
+            "toggleable": true,
+            "label": "Toggle: Mega Arcanine Forme",
+            "predicate": [],
+            "alwaysActive": false,
+            "count": false,
+            "mode": 2,
+            "ignored": false,
+            "suboptions": [],
+            "state": false
+          },
+          {
+            "type": "grant-item",
+            "predicate": [
+              "forme:mega-arcanine:active"
+            ],
+            "key": "",
+            "value": "Compendium.ptr2e.core-abilities.Item.jXsgiVvlZju6eoNm",
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "system.free",
+                "value": "true"
+              }
+            ],
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            },
+            "mode": 2,
+            "ignored": false,
+            "reevaluateOnUpdate": false,
+            "inMemoryOnly": false,
+            "allowDuplicate": true,
+            "track": false,
+            "replaceSelf": false
+          },
+          {
+            "type": "add-trait",
+            "predicate": [
+              "forme:mega-arcanine:active"
+            ],
+            "key": "",
+            "value": "Firestarter",
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "add-trait",
+            "predicate": [
+              "forme:mega-arcanine:active"
+            ],
+            "key": "",
+            "value": "Glow 6",
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-arcanine:active"
+            ],
+            "key": "system.movement.overland.value",
+            "value": 5,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-arcanine:active"
+            ],
+            "key": "system.movement.swim.value",
+            "value": 2,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "stats-alteration",
+            "predicate": [
+              "forme:mega-arcanine:active"
+            ],
+            "key": "",
+            "value": 0,
+            "hp": null,
+            "atk": 40,
+            "def": null,
+            "spa": 30,
+            "spd": null,
+            "spe": 30,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-arcanine:active"
+            ],
+            "key": "system.skills.acrobatics.value",
+            "value": 15,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-arcanine:active"
+            ],
+            "key": "system.skills.climb.value",
+            "value": 10,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-arcanine:active"
+            ],
+            "key": "system.skills.intimidate.value",
+            "value": 15,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-arcanine:active"
+            ],
+            "key": "system.skills.leadership.value",
+            "value": 10,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-arcanine:active"
+            ],
+            "key": "system.skills.lift.value",
+            "value": 15,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-arcanine:active"
+            ],
+            "key": "system.skills.listen.value",
+            "value": 10,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-arcanine:active"
+            ],
+            "key": "system.skills.psychology.value",
+            "value": 10,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-arcanine:active"
+            ],
+            "key": "system.skills.running.value",
+            "value": 20,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-arcanine:active"
+            ],
+            "key": "system.skills.spot.value",
+            "value": 15,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-arcanine:active"
+            ],
+            "key": "system.skills.stealth.value",
+            "value": 5,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-arcanine:active"
+            ],
+            "key": "system.skills.survival.value",
+            "value": 10,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-arcanine:active"
+            ],
+            "key": "system.skills.swim.value",
+            "value": 15,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-arcanine:active"
+            ],
+            "key": "system.skills.track.value",
+            "value": 15,
+            "mode": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0,
+        "trigger": "manual",
+        "conditions": []
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.346",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.1.beta",
+        "createdTime": 1754087191451,
+        "modifiedTime": 1754087573150,
+        "lastModifiedBy": "6zxE5EIsM9axXjpP"
+      }
+    }
+  ]
 }
