@@ -7,7 +7,7 @@
       "trait:poison"
     ],
     "cost": 2,
-    "description": "<p>Your Poison-Type Attacks gain +20% chance to inflict @Affliction[poison] 5.</p>",
+    "description": "<p>Your @Trait[poison] Type Attacks gain +20% chance to inflict @Affliction[poison 5].</p>",
     "actions": [],
     "slug": "potent-venom",
     "traits": [],
@@ -17,6 +17,10 @@
     },
     "nodes": [
       {
+        "x": 167,
+        "y": 85,
+        "hidden": false,
+        "type": "normal",
         "connected": [
           "venomous",
           "acceptance",
@@ -24,25 +28,15 @@
           "flare-ignition"
         ],
         "config": {
-          "alpha": null,
+          "texture": "systems/ptr2e/img/svg/poison_icon.svg",
           "backgroundColor": null,
           "borderColor": null,
-          "borderWidth": null,
-          "texture": "systems/ptr2e/img/svg/poison_icon.svg",
-          "tint": null,
-          "scale": null
+          "tint": null
         },
-        "hidden": false,
-        "type": "normal",
-        "x": 167,
-        "y": 85,
         "tier": null
       }
     ],
     "autoUnlock": [],
-    "originSlug": null,
-    "variant": null,
-    "mode": null,
     "global": true,
     "webs": [],
     "design": {
@@ -65,7 +59,7 @@
       "name": "Potent Venom",
       "type": "passive",
       "_id": "cR1z4vapujM8EJUC",
-      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "img": "systems/ptr2e/img/svg/poison_icon.svg",
       "system": {
         "changes": [
           {
@@ -79,14 +73,17 @@
             "priority": null,
             "ignored": false,
             "alterations": [],
-            "dontMerge": false
+            "dontMerge": false,
+            "isFixedChance": false
           }
         ],
         "slug": null,
         "traits": [],
-        "removeAfterCombat": true,
+        "removeAfterCombat": false,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
@@ -98,7 +95,7 @@
         "startRound": null,
         "startTurn": null
       },
-      "description": "",
+      "description": "<p>Your @Trait[poison] Type Attacks gain +20% chance to inflict @Affliction[poison 5].</p>",
       "origin": null,
       "tint": "#ffffff",
       "transfer": true,
@@ -108,12 +105,12 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "13.342",
+        "coreVersion": "13.346",
         "systemId": "ptr2e",
-        "systemVersion": "0.10.0-alpha.4.0.0",
+        "systemVersion": "1.4.2.beta",
         "createdTime": 1732569045186,
-        "modifiedTime": 1732569067521,
-        "lastModifiedBy": "IcBpMqhFuTck9VpX",
+        "modifiedTime": 1754225441916,
+        "lastModifiedBy": "dCIq77b7AO2frs8Z",
         "exportSource": null
       }
     }

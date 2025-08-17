@@ -38,30 +38,31 @@
       }
     ],
     "cost": 2,
-    "description": "<p>You have practiced the technique known as Channeling, and may use it to communicate with the spirits of the dead. You also gain +10 on Aura Sense skill checks pertaining to [Ghost][Pokemon].</p><p>(Should be relocated out of the Aura web, and moved nearby the other Occult stuff)</p>",
+    "description": "<p>You have practiced the technique known as Channeling, and may use it to communicate with the spirits of the dead. You also gain +10 on Aura Sense skill checks pertaining to @Trait[ghost] Creatures.</p>",
     "actions": [
       {
         "name": "Channeling Spirit",
-        "slug": "aura-channeling",
-        "description": "<p>Effect: You have become versed in the art of Channeling, whether through refining aura control, spiritual enlightenment, or being a general occult nut. You gain the [Medium] Trait and gain a +10 toward interactions with [Ghost] creatures.</p>",
+        "slug": "channeling-spirit",
+        "description": "<p>You have practiced the technique known as Channeling, and may use it to communicate with the spirits of the dead. You also gain +10 on Aura Sense skill checks pertaining to @Trait[ghost] Creatures.</p>",
         "cost": {
           "activation": "complex",
           "powerPoints": 3
         },
         "type": "exploration",
-        "traits": [],
+        "traits": [
+          "aura"
+        ],
         "img": "systems/ptr2e/img/perk-icons/Occultism.svg",
         "range": {
           "target": "enemy",
-          "unit": "m",
-          "distance": 0
-        },
-        "variant": null,
-        "ephemeralVariant": false
+          "unit": "m"
+        }
       }
     ],
     "slug": "channeling-spirit",
-    "traits": [],
+    "traits": [
+      "aura"
+    ],
     "_migration": {
       "version": 0.111,
       "previous": {
@@ -94,7 +95,7 @@
     "design": {
       "arena": "mental",
       "approach": "finesse",
-      "archetype": "occultism"
+      "archetype": "aura"
     },
     "publication": {
       "source": "PTR 2e Core",
@@ -102,18 +103,15 @@
         "PTR 2e Team"
       ],
       "notes": ""
-    },
-    "originSlug": null,
-    "variant": null,
-    "mode": null
+    }
   },
-  "img": "systems/ptr2e/img/perk-icons/Occultism.svg",
+  "img": "systems/ptr2e/img/perk-icons/Aura.svg",
   "effects": [
     {
       "name": "Channeling Spirit",
       "type": "passive",
       "_id": "2LNe30UmesAzva9h",
-      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "img": "systems/ptr2e/img/perk-icons/Aura.svg",
       "system": {
         "changes": [
           {
@@ -124,26 +122,19 @@
               "Manual"
             ],
             "label": "Ghost Pokemon?",
-            "mode": 2,
             "priority": null,
+            "mode": 2,
             "ignored": false,
             "hideIfDisabled": false
-          },
-          {
-            "type": "add-trait",
-            "key": "",
-            "value": "medium",
-            "predicate": [],
-            "mode": 2,
-            "priority": null,
-            "ignored": false
           }
         ],
         "slug": null,
         "traits": [],
         "removeAfterCombat": true,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
@@ -165,12 +156,12 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "13.342",
+        "coreVersion": "13.346",
         "systemId": "ptr2e",
-        "systemVersion": "1.2.1.beta",
+        "systemVersion": "1.4.1.beta",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null,
+        "modifiedTime": 1754303758777,
+        "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
         "exportSource": null
       }
     }

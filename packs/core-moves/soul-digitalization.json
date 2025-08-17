@@ -8,7 +8,7 @@
       "previous": null
     },
     "publication": {
-      "source": "PTR2e Digimon Supplement - Digi Dex",
+      "source": "Digidex",
       "authors": [
         "Fox"
       ],
@@ -21,7 +21,9 @@
         "slug": "soul-digitalization",
         "type": "attack",
         "img": "systems/ptr2e/img/svg/untyped_icon.svg",
-        "traits": [],
+        "traits": [
+          "digimon"
+        ],
         "cost": {
           "activation": "complex",
           "powerPoints": 12
@@ -34,13 +36,15 @@
         "description": "<p>This attack is made against all enemies on the field, and possesses a 1% fixed chance to inflict @Affliction[perish 1].</p>",
         "range": {
           "target": "field",
-          "unit": "m"
+          "unit": "m",
+          "distance": 10
         },
         "power": 120,
         "accuracy": 100
       }
     ],
-    "grade": "S"
+    "grade": "S",
+    "slug": "soul-digitalization"
   },
   "img": "systems/ptr2e/img/svg/untyped_icon.svg",
   "effects": [
@@ -102,6 +106,5 @@
       }
     }
   ],
-  "flags": {},
   "_id": "YjwbFnQVpulmT66U"
 }

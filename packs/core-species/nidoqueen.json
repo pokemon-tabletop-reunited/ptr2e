@@ -52,10 +52,10 @@
       ],
       "advanced": [
         {
-          "slug": "intoxicate"
+          "slug": "thick-fat"
         },
         {
-          "slug": "thick-fat"
+          "slug": "sturdy"
         }
       ],
       "master": [
@@ -63,7 +63,7 @@
           "slug": "merciless"
         },
         {
-          "slug": "stubborn"
+          "slug": "berserk"
         }
       ]
     },
@@ -803,13 +803,25 @@
                 "level": null,
                 "knownMove": null
               },
-              "evolutions": []
+              "evolutions": [],
+              "perk": {
+                "x": 26,
+                "y": 26
+              }
             }
-          ]
+          ],
+          "perk": {
+            "x": 26,
+            "y": 26
+          }
         }
       ],
       "uuid": "Compendium.ptr2e.core-species.Item.DtGN1O4rC6PJIBLm",
-      "methods": []
+      "methods": [],
+      "perk": {
+        "x": 26,
+        "y": 26
+      }
     },
     "habitats": [
       "grassland"
@@ -819,9 +831,264 @@
       "source": "PTR 2e Core - Kanto Dex",
       "authors": [
         "PTR 2e Team"
-      ]
+      ],
+      "notes": ""
+    },
+    "_migration": {
+      "version": null,
+      "previous": null
     }
   },
   "_id": "cVTt79izrpQPFf85",
-  "effects": []
+  "effects": [
+    {
+      "name": "Mega Nidoqueen",
+      "type": "form",
+      "_id": "j1PNLG8PehTKLqbw",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-option",
+            "key": "manual-forme-toggle",
+            "value": "forme:mega-nidoqueen:active",
+            "domain": "all",
+            "toggleable": true,
+            "label": "Toggle: Mega Nidoqueen Forme",
+            "predicate": [],
+            "alwaysActive": false,
+            "count": false,
+            "mode": 2,
+            "ignored": false,
+            "suboptions": [],
+            "state": false
+          },
+          {
+            "type": "grant-item",
+            "predicate": [
+              "forme:mega-nidoqueen:active"
+            ],
+            "key": "",
+            "value": "Compendium.ptr2e.core-abilities.Item.8GvXZx8XZA5lTatw",
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "system.free",
+                "value": "true"
+              }
+            ],
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            },
+            "mode": 2,
+            "ignored": false,
+            "reevaluateOnUpdate": false,
+            "inMemoryOnly": false,
+            "allowDuplicate": true,
+            "track": false,
+            "replaceSelf": false
+          },
+          {
+            "type": "remove-trait",
+            "predicate": [
+              "forme:mega-nidoqueen:active"
+            ],
+            "key": "",
+            "value": "jump 2",
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "add-trait",
+            "predicate": [
+              "forme:mega-nidoqueen:active"
+            ],
+            "key": "",
+            "value": "jump 5",
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "add-trait",
+            "predicate": [
+              "forme:mega-nidoqueen:active"
+            ],
+            "key": "",
+            "value": "pack leader",
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "add-trait",
+            "predicate": [
+              "forme:mega-nidoqueen:active"
+            ],
+            "key": "",
+            "value": "fictile",
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "stats-alteration",
+            "predicate": [
+              "forme:mega-nidoqueen:active"
+            ],
+            "key": "",
+            "value": 0,
+            "hp": null,
+            "atk": -15,
+            "def": 20,
+            "spa": 50,
+            "spd": 20,
+            "spe": 25,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-nidoqueen:active"
+            ],
+            "key": "system.movement.overland.value",
+            "value": 2,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-nidoqueen:active"
+            ],
+            "key": "system.movement.swim.value",
+            "value": 1,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-nidoqueen:active"
+            ],
+            "key": "system.skills.acrobatics.value",
+            "value": 20,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-nidoqueen:active"
+            ],
+            "key": "system.skills.climb.value",
+            "value": 5,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-nidoqueen:active"
+            ],
+            "key": "system.skills.conversation.value",
+            "value": 15,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-nidoqueen:active"
+            ],
+            "key": "system.skills.intimidate.value",
+            "value": 10,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-nidoqueen:active"
+            ],
+            "key": "system.skills.leadership.value",
+            "value": 20,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-nidoqueen:active"
+            ],
+            "key": "system.skills.lift.value",
+            "value": -5,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-nidoqueen:active"
+            ],
+            "key": "system.skills.negotiation.value",
+            "value": 15,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-nidoqueen:active"
+            ],
+            "key": "system.skills.running.value",
+            "value": 10,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-nidoqueen:active"
+            ],
+            "key": "system.skills.swim.value",
+            "value": 15,
+            "mode": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0,
+        "trigger": "manual",
+        "conditions": []
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.346",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.1.beta",
+        "createdTime": 1754083775527,
+        "modifiedTime": 1754084227817,
+        "lastModifiedBy": "6zxE5EIsM9axXjpP"
+      }
+    }
+  ]
 }

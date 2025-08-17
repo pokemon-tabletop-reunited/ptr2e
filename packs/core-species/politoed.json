@@ -51,15 +51,15 @@
       ],
       "advanced": [
         {
-          "slug": "aquaboost"
+          "slug": "unaware"
         },
         {
-          "slug": "unaware"
+          "slug": "hydration"
         }
       ],
       "master": [
         {
-          "slug": "storm-drain"
+          "slug": "mud-armor"
         },
         {
           "slug": "amplifier"
@@ -640,7 +640,8 @@
       "source": "PTR 2e Core - Johto Dex",
       "authors": [
         "PTR 2e Team"
-      ]
+      ],
+      "notes": ""
     },
     "_migration": {
       "version": null,
@@ -648,5 +649,275 @@
     }
   },
   "_id": "eDeVwWD2O5YW7e8m",
-  "effects": []
+  "effects": [
+    {
+      "name": "Mega Politoed",
+      "type": "form",
+      "_id": "wJxUvURlT8VLIKSE",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-option",
+            "key": "manual-forme-toggle",
+            "value": "forme:mega-politoed:active",
+            "domain": "all",
+            "toggleable": true,
+            "label": "Toggle: Mega Politoed Forme",
+            "predicate": [],
+            "alwaysActive": false,
+            "count": false,
+            "mode": 2,
+            "ignored": false,
+            "suboptions": [],
+            "state": false
+          },
+          {
+            "type": "grant-item",
+            "predicate": [
+              "forme:mega-politoed:active"
+            ],
+            "key": "",
+            "value": "Compendium.ptr2e.core-abilities.Item.DkBaiEXasPXCcpWw",
+            "alterations": [
+              {
+                "mode": 2,
+                "property": "system.free",
+                "value": "true"
+              }
+            ],
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            },
+            "mode": 2,
+            "ignored": false,
+            "reevaluateOnUpdate": false,
+            "inMemoryOnly": false,
+            "allowDuplicate": true,
+            "track": false,
+            "replaceSelf": false
+          },
+          {
+            "type": "stats-alteration",
+            "predicate": [
+              "forme:mega-politoed:active"
+            ],
+            "key": "",
+            "value": 0,
+            "hp": null,
+            "atk": -15,
+            "def": 20,
+            "spa": 30,
+            "spd": 40,
+            "spe": 25,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "add-trait",
+            "predicate": [
+              "forme:mega-politoed:active"
+            ],
+            "key": "",
+            "value": "hover",
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "add-trait",
+            "predicate": [
+              "forme:mega-politoed:active"
+            ],
+            "key": "",
+            "value": "stormcaller",
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "add-trait",
+            "predicate": [
+              "forme:mega-politoed:active"
+            ],
+            "key": "",
+            "value": "lumbering",
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "add-trait",
+            "predicate": [
+              "forme:mega-politoed:active"
+            ],
+            "key": "",
+            "value": "zapper",
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-politoed:active"
+            ],
+            "key": "system.type.types",
+            "value": "electric",
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-politoed:active"
+            ],
+            "key": "system.movement.overland.value",
+            "value": -3,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-politoed:active"
+            ],
+            "key": "system.movement.flight.value",
+            "value": 6,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-politoed:active"
+            ],
+            "key": "system.movement.swim.value",
+            "value": -5,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-politoed:active"
+            ],
+            "key": "system.skills.acrobatics.value",
+            "value": 10,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-politoed:active"
+            ],
+            "key": "system.skills.flying.value",
+            "value": 30,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-politoed:active"
+            ],
+            "key": "system.skills.intimidate.value",
+            "value": 5,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-politoed:active"
+            ],
+            "key": "system.skills.listen.value",
+            "value": 20,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-politoed:active"
+            ],
+            "key": "system.skills.natural-world.value",
+            "value": 20,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-politoed:active"
+            ],
+            "key": "system.skills.running.value",
+            "value": 5,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-politoed:active"
+            ],
+            "key": "system.skills.meteorology.value",
+            "value": 40,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-politoed:active"
+            ],
+            "key": "system.skills.spot.value",
+            "value": 20,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-politoed:active"
+            ],
+            "key": "system.skills.survival.value",
+            "value": 20,
+            "mode": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0,
+        "trigger": "manual",
+        "conditions": []
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.346",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.1.beta",
+        "createdTime": 1754088594489,
+        "modifiedTime": 1754089215796,
+        "lastModifiedBy": "6zxE5EIsM9axXjpP"
+      }
+    }
+  ]
 }

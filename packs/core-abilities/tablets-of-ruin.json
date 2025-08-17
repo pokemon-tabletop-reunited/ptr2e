@@ -17,7 +17,8 @@
         },
         "range": {
           "target": "field",
-          "unit": "m"
+          "unit": "m",
+          "distance": 10
         },
         "description": "<p>Effect: All other creatures have their ATK stat reduced by 25%. This reduction happens before any [Stage Change] effects.</p>",
         "img": "icons/svg/explosion.svg"
@@ -39,7 +40,8 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
+      ],
+      "notes": ""
     }
   },
   "_id": "5KUeoSGMw8YWNwDO",
@@ -55,7 +57,9 @@
             "type": "grant-item",
             "key": "",
             "value": "Compendium.ptr2e.core-moves.Item.6MiHI8QGhMknDms5",
-            "predicate": [],
+            "predicate": [
+              "trait:treasure-of-ruin"
+            ],
             "alterations": [
               {
                 "mode": 5,
@@ -63,25 +67,27 @@
                 "value": "true"
               }
             ],
-            "mode": 2,
             "priority": null,
-            "ignored": false,
-            "reevaluateOnUpdate": false,
-            "inMemoryOnly": false,
-            "allowDuplicate": true,
-            "track": false,
-            "replaceSelf": false,
+            "reevaluateOnUpdate": true,
             "onDeleteActions": {
               "grantee": "detach",
               "granter": "cascade"
-            }
+            },
+            "allowDuplicate": false,
+            "mode": 2,
+            "ignored": false,
+            "inMemoryOnly": false,
+            "track": false,
+            "replaceSelf": false
           }
         ],
         "slug": null,
         "traits": [],
         "removeAfterCombat": true,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
@@ -103,12 +109,13 @@
       "_stats": {
         "compendiumSource": "Compendium.ptr2e.core-abilities.Item.sWdQIvH00vsGkCYB.ActiveEffect.J2mZCtyIjIqYFGrQ",
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.346",
         "systemId": "ptr2e",
-        "systemVersion": "0.10.0-alpha.5.1.5",
+        "systemVersion": "1.4.2.beta",
         "createdTime": 1737392939156,
-        "modifiedTime": 1737392939156,
-        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+        "modifiedTime": 1754322086436,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf",
+        "exportSource": null
       }
     }
   ]
