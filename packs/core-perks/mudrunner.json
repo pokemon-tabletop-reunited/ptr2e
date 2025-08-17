@@ -3,7 +3,56 @@
   "_id": "CPI0fLxCQkvDZ1St",
   "type": "perk",
   "img": "systems/ptr2e/img/svg/ground_icon.svg",
-  "effects": [],
+  "effects": [
+    {
+      "name": "Mudrunner",
+      "type": "passive",
+      "_id": "DKEtnlWBofTgvaHB",
+      "img": "systems/ptr2e/img/svg/ground_icon.svg",
+      "system": {
+        "changes": [
+          {
+            "type": "add-trait",
+            "key": "",
+            "value": "mud-runner",
+            "predicate": [],
+            "mode": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": false,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "<p>Grants the @Trait[mud-runner] trait.</p>",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.346",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.2.beta",
+        "createdTime": 1754225157712,
+        "modifiedTime": 1754225189855,
+        "lastModifiedBy": "dCIq77b7AO2frs8Z"
+      }
+    }
+  ],
   "system": {
     "_migration": {
       "version": 0.111,
@@ -17,7 +66,7 @@
       "notes": ""
     },
     "actions": [],
-    "slug": null,
+    "slug": "mudrunner",
     "description": "<p>Grants the @Trait[mud-runner] trait.</p>",
     "traits": [
       "ground",
@@ -35,14 +84,11 @@
     ],
     "autoUnlock": [],
     "cost": 1,
-    "originSlug": null,
     "design": {
       "arena": "physical",
       "approach": "resilience",
       "archetype": null
     },
-    "variant": null,
-    "mode": null,
     "global": true,
     "webs": [],
     "nodes": [
@@ -59,5 +105,6 @@
         "tier": null
       }
     ]
-  }
+  },
+  "folder": "65s6t1apBC1J01GE"
 }

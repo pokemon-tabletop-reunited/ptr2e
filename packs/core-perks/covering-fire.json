@@ -14,22 +14,17 @@
         "type": "generic",
         "range": {
           "target": "object",
-          "unit": "m",
-          "distance": 0
+          "unit": "m"
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 2,
-          "delay": null,
-          "priority": null
+          "powerPoints": 2
         },
-        "img": "systems/ptr2e/img/perk-icons/Tactician.svg",
-        "variant": null,
-        "ephemeralVariant": false
+        "img": "systems/ptr2e/img/perk-icons/Tactician.svg"
       }
     ],
     "slug": "covering-fire",
-    "description": "<p>As a Complex Action costing 2PP, the user uses a Ranged Weapon to provide Covering Fire, delayling their next Activation by 20%. Set up a Covering Fire Clock with 3 Spans. The user and their allies may tick a Span on this Clock to claim Light Cover (or Heavy Cover if already in Light Cover) from incoming non-[Contact] attacks. The Covering Fire effect ends when either the clock is filled, or the user's next Activation begins.</p>",
+    "description": "<p>As a Complex Action costing 2PP, the user uses a Ranged Weapon to provide Covering Fire, delayling their next Activation by 20%. Set up a Covering Fire Clock with 3 Spans. The user and their allies may tick a Span on this Clock to claim Light Cover (or Heavy Cover if already in Light Cover) from incoming non-@Trait[contact] attacks. The Covering Fire effect ends when either the clock is filled, or the user's next Activation begins.</p>",
     "traits": [],
     "prerequisites": [
       "trait:wielder"
@@ -41,6 +36,10 @@
     },
     "nodes": [
       {
+        "x": 177,
+        "y": 70,
+        "hidden": false,
+        "type": "normal",
         "connected": [
           "hobby-gardener",
           "tainted-blades",
@@ -51,25 +50,15 @@
           "mudrunner"
         ],
         "config": {
-          "alpha": null,
-          "backgroundColor": "#808080",
-          "borderColor": null,
-          "borderWidth": null,
           "texture": "systems/ptr2e/img/perk-icons/Tactician.svg",
-          "tint": "#000000",
-          "scale": null
+          "backgroundColor": null,
+          "borderColor": null,
+          "tint": null
         },
-        "hidden": false,
-        "type": "normal",
-        "x": 177,
-        "y": 70,
         "tier": null
       }
     ],
     "autoUnlock": [],
-    "originSlug": null,
-    "variant": null,
-    "mode": null,
     "global": true,
     "webs": [],
     "design": {

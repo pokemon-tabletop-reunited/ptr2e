@@ -8,7 +8,7 @@
       "previous": null
     },
     "publication": {
-      "source": "PTR2 Digimon Supplement - Digi Dex",
+      "source": "Digidex",
       "authors": [
         "Fox"
       ],
@@ -21,7 +21,9 @@
         "slug": "spitfire-blast",
         "type": "attack",
         "img": "systems/ptr2e/img/svg/fire_icon.svg",
-        "traits": [],
+        "traits": [
+          "digimon"
+        ],
         "range": {
           "target": "cone",
           "distance": 3,
@@ -41,7 +43,8 @@
         "description": "<p>This attack has a 10% chance to grant the user +1 Attack Stage for 5 activations.</p>"
       }
     ],
-    "grade": "D"
+    "grade": "D",
+    "slug": "spitfire-blast"
   },
   "img": "systems/ptr2e/img/svg/fire_icon.svg",
   "effects": [
@@ -63,14 +66,17 @@
             "mode": 2,
             "priority": null,
             "ignored": false,
-            "alterations": []
+            "alterations": [],
+            "isFixedChance": false
           }
         ],
         "slug": null,
         "traits": [],
         "removeAfterCombat": true,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
@@ -92,15 +98,15 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.346",
         "systemId": "ptr2e",
         "systemVersion": "1.2.1.beta",
         "createdTime": null,
         "modifiedTime": null,
-        "lastModifiedBy": null
+        "lastModifiedBy": null,
+        "exportSource": null
       }
     }
   ],
-  "flags": {},
   "_id": "5u9SCzKeGELRJgYY"
 }

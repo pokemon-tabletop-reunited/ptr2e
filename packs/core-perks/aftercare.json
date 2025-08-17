@@ -32,11 +32,21 @@
     },
     "global": true,
     "webs": [],
-    "nodes": [],
-    "slug": "aftercare",
-    "originSlug": null,
-    "variant": null,
-    "mode": null
+    "nodes": [
+      {
+        "x": 46,
+        "y": 86,
+        "connected": [
+          "homeostatic-treatments",
+          "involuntary-transfusion",
+          "valetudinary"
+        ],
+        "hidden": false,
+        "type": "normal",
+        "tier": null
+      }
+    ],
+    "slug": "aftercare"
   },
   "img": "systems/ptr2e/img/perk-icons/Elamentalist.svg",
   "effects": [
@@ -64,14 +74,17 @@
             ],
             "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "isFixedChance": false
           }
         ],
         "slug": null,
         "traits": [],
         "removeAfterCombat": true,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
@@ -93,7 +106,7 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "13.342",
+        "coreVersion": "13.346",
         "systemId": "ptr2e",
         "systemVersion": "1.2.1.beta",
         "createdTime": null,
@@ -103,6 +116,5 @@
       }
     }
   ],
-  "flags": {},
   "_id": "AjDJCvLTINvpIfmb"
 }
