@@ -14,20 +14,17 @@
         "type": "generic",
         "range": {
           "target": "self",
-          "unit": "m",
-          "distance": 0
+          "unit": "m"
         },
         "cost": {
           "activation": "free",
           "powerPoints": 1
         },
-        "img": "icons/svg/explosion.svg",
-        "variant": null,
-        "ephemeralVariant": false
+        "img": "icons/svg/explosion.svg"
       }
     ],
     "slug": "overbooster",
-    "description": "<p>The user spends a Tick of HP and 1 PP. The user's next Physical- or Special-Category Attack deals +20% more damage. This can be done twice on each of the user's Activations</p>>",
+    "description": "<p>The user spends a Tick of HP and 1 PP. The user's next Physical- or Special-Category Attack deals +20% more damage. This can be done twice on each of the user's Activations.</p>",
     "traits": [],
     "prerequisites": [],
     "cost": 3,
@@ -37,6 +34,10 @@
     },
     "nodes": [
       {
+        "x": 65,
+        "y": 42,
+        "hidden": false,
+        "type": "normal",
         "connected": [
           "desperate-strike",
           "glutton-for-punishment",
@@ -45,18 +46,11 @@
           "boiling-blood"
         ],
         "config": {
-          "alpha": null,
-          "backgroundColor": "#808080",
-          "borderColor": null,
-          "borderWidth": null,
           "texture": "systems/ptr2e/img/perk-icons/Combat.svg",
-          "tint": "#ff0000",
-          "scale": null
+          "backgroundColor": null,
+          "borderColor": null,
+          "tint": null
         },
-        "hidden": false,
-        "type": "normal",
-        "x": 65,
-        "y": 42,
         "tier": null
       }
     ],
@@ -74,10 +68,7 @@
         "PTR 2e Team"
       ],
       "notes": ""
-    },
-    "originSlug": null,
-    "variant": null,
-    "mode": null
+    }
   },
   "effects": []
 }

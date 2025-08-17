@@ -1331,10 +1331,10 @@
     "description": "Once every 5 Day Spans the creature produces a random [Mushroom] up to its Grade."
   },
   {
-    "slug": "musical",
-    "label": "Musical",
+    "slug": "musician",
+    "label": "Musician",
     "related": [],
-    "description": "TO BE DETERMINED"
+    "description": "This creature is skilled in musical performance and sound-based abilities. It gains access to the [Musician] Tutor List."
   },
   {
     "slug": "natural-backpack",
@@ -2254,24 +2254,6 @@
     "description": "Not quite a @trait[pokemon], creatures with this trait are 'digital monsters' or 'Digimon' for short. Creatures with this trait usually have the Digitize Trait, and always have access to the Digimon Perk Web. Other items with this trait are specifically designed for use by creatures with this trait, and games that center around Digimon and its settings."
   },
   {
-    "slug": "vaccine",
-    "label": "Vaccine",
-    "related": [],
-    "description": "@trait[digimon] with this trait deal 50% more damage with their Physical- and Special-Category Attacks to @trait[virus] creatures, and 33% less damage with those Attacks to @trait[data] creatures. AUTOMATION PENDING."
-  },
-  {
-    "slug": "virus",
-    "label": "Virus",
-    "related": [],
-    "description": "@trait[digimon] with this trait deal 50% more damage with their Physical- and Special-Category Attacks to @trait[data] creatures, and 33% less damage with those Attacks to @trait[vaccine] creatures. AUTOMATION PENDING."
-  },
-  {
-    "slug": "data",
-    "label": "Data",
-    "related": [],
-    "description": "@trait[digimon] with this trait deal 50% more damage with their Physical- and Special-Category Attacks to @trait[vaccine] creatures, and 33% less damage with those Attacks to @trait[virus] creatures. AUTOMATION PENDING."
-  },
-  {
     "slug": "homebrew",
     "label": "Homebrew",
     "related": [],
@@ -3175,7 +3157,9 @@
         "type": "stage-modifier",
         "key": "earthbound-trait-attack-effectiveness",
         "value": 1,
-        "predicate": ["target:effect:affliction:grounded"],
+        "predicate": [
+          "target:effect:affliction:grounded"
+        ],
         "mode": 2,
         "hideIfDisabled": true
       }
@@ -3192,12 +3176,6 @@
     "label": "Execute",
     "related": [],
     "description": "On hit, an affected creature has their HP reduced to zero."
-  },
-  {
-    "slug": "exhaust",
-    "label": "Exhaust",
-    "related": [],
-    "description": "This attack consumes a Simple Action on the user's next activation."
   },
   {
     "slug": "explode",
@@ -3241,6 +3219,26 @@
       {
         "type": "roll-effect",
         "key": "attack",
+        "value": "Compendium.ptr2e.core-effects.Item.advanceffectitem",
+        "chance": 100,
+        "dontMerge": true,
+        "affects": "target",
+        "alterations": [
+          {
+            "mode": 5,
+            "property": "system.amount",
+            "value": "-{{trait|value}}"
+          },
+          {
+            "mode": 5,
+            "property": "name",
+            "value": "Delay {{trait|value}}%"
+          }
+        ]
+      },
+      {
+        "type": "roll-effect",
+        "key": "generic",
         "value": "Compendium.ptr2e.core-effects.Item.advanceffectitem",
         "chance": 100,
         "dontMerge": true,
@@ -3525,6 +3523,26 @@
       {
         "type": "roll-effect",
         "key": "attack",
+        "value": "Compendium.ptr2e.core-effects.Item.advanceffectitem",
+        "chance": 100,
+        "dontMerge": true,
+        "affects": "target",
+        "alterations": [
+          {
+            "mode": 5,
+            "property": "system.amount",
+            "value": "{{trait|value}}"
+          },
+          {
+            "mode": 5,
+            "property": "name",
+            "value": "Advance {{trait|value}}%"
+          }
+        ]
+      },
+      {
+        "type": "roll-effect",
+        "key": "generic",
         "value": "Compendium.ptr2e.core-effects.Item.advanceffectitem",
         "chance": 100,
         "dontMerge": true,
@@ -3845,7 +3863,7 @@
     "slug": "connection",
     "label": "Connection",
     "related": [],
-    "description": "Denotes if an Ability provides an Action or Attack onto a creature's Active List, not taking up a slot on the user's Active List."
+    "description": "Denotes if an Ability or Perk provides an Attack onto a creature's Active List, not taking up a slot on the user's Active List."
   },
   {
     "slug": "fusion",
@@ -4799,6 +4817,7 @@
       "virus"
     ],
     "description": "Gain +50% Damage versus Virus-trait Digimon. Inflict 50% less Damage vs Data-trait Digimon.",
+    "type":"automated",
     "changes": [
       {
         "type": "percentile-modifier",
@@ -4829,6 +4848,7 @@
       "virus"
     ],
     "description": "Gain +50% Damage versus Vaccine-trait Digimon. Inflict 50% less Damage vs Virus-trait Digimon.",
+    "type":"automated",
     "changes": [
       {
         "type": "percentile-modifier",
@@ -4859,6 +4879,7 @@
       "digimon"
     ],
     "description": "Gain +50% Damage versus Data-trait Digimon. Inflict 50% less Damage vs Vaccine-trait Digimon.",
+    "type":"automated",
     "changes": [
       {
         "type": "percentile-modifier",

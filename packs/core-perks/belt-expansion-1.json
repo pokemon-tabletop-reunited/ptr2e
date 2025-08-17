@@ -5,29 +5,8 @@
   "system": {
     "prerequisites": [],
     "cost": 1,
-    "description": "<p>Add an additional Belt slot.</p>",
-    "actions": [
-      {
-        "name": "Belt Expansion 1",
-        "slug": "belt-expansion-1",
-        "description": "<p>Add an additional Belt slot.</p>",
-        "cost": {
-          "activation": "free",
-          "powerPoints": 0
-        },
-        "type": "passive",
-        "traits": [],
-        "img": "icons/svg/explosion.svg",
-        "range": {
-          "target": "enemy",
-          "unit": "m",
-          "distance": 0
-        },
-        "variant": null,
-        "ephemeralVariant": false,
-        "hidden": false
-      }
-    ],
+    "description": "<p>Gain an additional Belt slot.</p>",
+    "actions": [],
     "slug": "belt-expansion-1",
     "traits": [],
     "_migration": {
@@ -54,13 +33,10 @@
           "uuid": null
         },
         "config": {
-          "alpha": null,
-          "backgroundColor": "#004080",
-          "borderColor": null,
-          "borderWidth": null,
           "texture": "systems/ptr2e/img/perk-icons/Tactician.svg",
-          "tint": null,
-          "scale": null
+          "backgroundColor": null,
+          "borderColor": null,
+          "tint": null
         }
       },
       {
@@ -74,13 +50,10 @@
           "uuid": "Compendium.ptr2e.core-perks.Item.sJ1B6djHXWc4F5Ez"
         },
         "config": {
-          "alpha": null,
+          "texture": null,
           "backgroundColor": null,
           "borderColor": null,
-          "borderWidth": null,
-          "texture": null,
-          "tint": null,
-          "scale": null
+          "tint": null
         }
       },
       {
@@ -94,13 +67,10 @@
           "uuid": "Compendium.ptr2e.core-perks.Item.wWAAPsxfOC8nGPGm"
         },
         "config": {
-          "alpha": null,
+          "texture": null,
           "backgroundColor": null,
           "borderColor": null,
-          "borderWidth": null,
-          "texture": null,
-          "tint": null,
-          "scale": null
+          "tint": null
         }
       }
     ],
@@ -118,8 +88,7 @@
         "PTR 2e Team"
       ],
       "notes": ""
-    },
-    "originSlug": null
+    }
   },
   "_id": "zAKTLdBrA5eeGCsX",
   "img": "systems/ptr2e/img/perk-icons/Tactician.svg",
@@ -128,7 +97,7 @@
       "name": "Belt Expansion",
       "type": "passive",
       "_id": "lVg2p1y5m9hhxAjN",
-      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "img": "systems/ptr2e/img/perk-icons/Tactician.svg",
       "system": {
         "changes": [
           {
@@ -143,9 +112,11 @@
         ],
         "slug": null,
         "traits": [],
-        "removeAfterCombat": true,
+        "removeAfterCombat": false,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
@@ -157,7 +128,7 @@
         "startRound": null,
         "startTurn": null
       },
-      "description": "",
+      "description": "<p>Gain an additional Belt slot.</p>",
       "origin": null,
       "tint": "#ffffff",
       "transfer": true,
@@ -167,12 +138,12 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "13.342",
+        "coreVersion": "13.346",
         "systemId": "ptr2e",
-        "systemVersion": "0.10.0-alpha.5.2.1",
+        "systemVersion": "1.4.1.beta",
         "createdTime": 1737934804061,
-        "modifiedTime": 1737934814111,
-        "lastModifiedBy": "mK35yvCqCgiTUvKf",
+        "modifiedTime": 1754299607462,
+        "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
         "exportSource": null
       }
     }

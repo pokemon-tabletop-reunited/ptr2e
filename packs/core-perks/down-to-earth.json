@@ -14,7 +14,7 @@
     },
     "actions": [],
     "slug": "down-to-earth",
-    "description": "<p>The user gains Quaker as a Tutored Ability.</p>",
+    "description": "<p>The user gains @UUID[Compendium.ptr2e.core-abilities.wNYFCTGML9z46vNI]{Quaker} as a Tutored Ability.</p>",
     "traits": [],
     "prerequisites": [
       "trait:ground"
@@ -34,6 +34,8 @@
       {
         "x": 168,
         "y": 77,
+        "hidden": false,
+        "type": "normal",
         "connected": [
           "subsidence",
           "minor-buff-27",
@@ -41,14 +43,15 @@
           "fictile",
           "mudrunner"
         ],
-        "hidden": false,
-        "type": "normal",
+        "config": {
+          "texture": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "tint": null
+        },
         "tier": null
       }
-    ],
-    "originSlug": null,
-    "variant": null,
-    "mode": null
+    ]
   },
   "img": "systems/ptr2e/img/svg/ground_icon.svg",
   "effects": [
@@ -56,7 +59,7 @@
       "name": "Down to Earth",
       "type": "passive",
       "_id": "Dtt3fJMUB3N4J4sZ",
-      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "img": "systems/ptr2e/img/svg/ground_icon.svg",
       "system": {
         "changes": [
           {
@@ -83,7 +86,9 @@
         "traits": [],
         "removeAfterCombat": false,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
@@ -95,7 +100,7 @@
         "startRound": null,
         "startTurn": null
       },
-      "description": "",
+      "description": "<p>The user gains @UUID[Compendium.ptr2e.core-abilities.wNYFCTGML9z46vNI]{Quaker} as a Tutored Ability.</p>",
       "origin": null,
       "tint": "#ffffff",
       "transfer": true,
@@ -105,16 +110,15 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "13.342",
+        "coreVersion": "13.346",
         "systemId": "ptr2e",
         "systemVersion": "1.2.1.beta",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null,
+        "modifiedTime": 1754224600976,
+        "lastModifiedBy": "dCIq77b7AO2frs8Z",
         "exportSource": null
       }
     }
   ],
-  "flags": {},
   "_id": "KZVuWSwGSR4LdNOX"
 }

@@ -12,7 +12,7 @@
     },
     "slug": "lunatic-dance",
     "publication": {
-      "source": "PTR 2e Digimon Supplement - Digi Dex",
+      "source": "Digidex",
       "authors": [
         "PTR 2e Team",
         "Gwen"
@@ -25,7 +25,9 @@
         "slug": "lunatic-dance",
         "name": "Lunatic Dance",
         "type": "attack",
-        "traits": [],
+        "traits": [
+          "digimon"
+        ],
         "range": {
           "target": "creature",
           "distance": 1,
@@ -67,14 +69,18 @@
             "mode": 2,
             "priority": null,
             "ignored": false,
-            "alterations": []
+            "alterations": [],
+            "isFixedChance": false,
+            "dontMerge": false
           }
         ],
         "slug": null,
         "traits": [],
         "removeAfterCombat": true,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
@@ -96,23 +102,16 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.346",
         "systemId": "ptr2e",
         "systemVersion": "1.1.0.beta",
         "createdTime": null,
         "modifiedTime": null,
-        "lastModifiedBy": null
+        "lastModifiedBy": null,
+        "exportSource": null
       }
     }
   ],
   "folder": "BImk1fcMbR5akA4z",
-  "flags": {
-    "exportSource": {
-      "world": "ptr-test",
-      "system": "ptr2e",
-      "coreVersion": "12.331",
-      "systemVersion": "1.1.0.beta"
-    }
-  },
   "_id": "AourPTTtoPUg4FD4"
 }

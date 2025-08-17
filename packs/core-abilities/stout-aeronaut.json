@@ -1,0 +1,121 @@
+{
+  "name": "Stout Aeronaut",
+  "type": "ability",
+  "img": "systems/ptr2e/img/svg/dragon_icon.svg",
+  "system": {
+    "actions": [
+      {
+        "traits": [
+          "legendary"
+        ],
+        "name": "Stout Aerouant",
+        "slug": "stout-aerouant",
+        "type": "generic",
+        "cost": {
+          "activation": "free",
+          "powerPoints": 3,
+          "trigger": "<p>The user resolves a Dragon-Type attack.</p>"
+        },
+        "range": {
+          "target": "self",
+          "unit": "m",
+          "distance": 10
+        },
+        "description": "<p>Trigger: The user resolves a Dragon-Type attack.</p><p>Effect: Negative [Stage Change] effects affecting the user are removed.</p>",
+        "img": "icons/svg/explosion.svg"
+      }
+    ],
+    "description": "<p>Trigger: The user resolves a Dragon-Type attack.</p><p>Effect: Connection - Dragon Energy. Negative [Stage Change] effects affecting the user are removed. Passive: The user's Dragon Energy gains [Drain 1/4].</p>",
+    "traits": [
+      "legendary",
+      "connection"
+    ],
+    "slug": "stout-aerouant",
+    "_migration": {
+      "version": null,
+      "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    }
+  },
+  "_id": "fgnUpZqSxSncHLqF",
+  "effects": [
+    {
+      "name": "Stout Aeronaut",
+      "type": "passive",
+      "_id": "yw1FfE7VzH6t42cu",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "grant-item",
+            "key": "",
+            "value": "Compendium.ptr2e.core-moves.Item.xf2NuI372VOQGVIL",
+            "predicate": [
+              "ability:stout-aeronaut:active"
+            ],
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "system.actions.0.free",
+                "value": "true"
+              }
+            ],
+            "priority": null,
+            "allowDuplicate": false,
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            },
+            "reevaluateOnUpdate": true,
+            "mode": 2,
+            "ignored": false,
+            "inMemoryOnly": false,
+            "track": false,
+            "replaceSelf": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "13.346",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.2.beta",
+        "createdTime": 1737421256366,
+        "modifiedTime": 1754321737137,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf",
+        "exportSource": null
+      }
+    }
+  ]
+}
