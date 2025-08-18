@@ -72,7 +72,7 @@ class AttackStatistic extends Statistic {
         `${attack.category}-${attack.type}`,
         attack.traits.contents.flatMap((t) => {
           const trait = t as PlaceholderTrait;
-          if(!(trait.value && trait.placeholders && Array.isArray(trait.placeholders) && trait.placeholders.length)) return `${t.slug}-trait-${attack.type}`
+          if (!(trait.value && trait.placeholders && Array.isArray(trait.placeholders) && trait.placeholders.length)) return `${t.slug}-trait-${attack.type}`
 
           return [
             `${trait.slug.replace(new RegExp(trait.placeholders.at(0)!.valuePattern), "").replace(/^-/, "").replace(/-$/, "")}-trait-${attack.type}`,
@@ -266,22 +266,9 @@ class AttackCheck<TParent extends AttackStatistic = AttackStatistic> implements 
         targets.splice(index, 1);
       }
 
-      const powerModifier = this.modifiers.find(m => m.type === "power" && m.method === "base");
-      if (!powerModifier) {
-        ui.notifications.warn(game.i18n.localize("PTR2E.AttackWarning.FlingNoPower"));
-        return null;
-      }
-      const actorLift = this.actor.skills["lift"]?.mod ?? 1;
-      const actorWC = this.actor.species?.size?.weightClass ?? 1
-      const targetWC = target.actor.species?.size?.weightClass ?? 1;
-      const actorCatMod = this.actor.size?.rank ?? 1;
-      const thrownCatMod = target.actor.size?.rank ?? 1;
-
-      const power = powerModifier.modifier = Math.max(25, Math.floor(17 + (Math.pow(actorLift + 10, 0.5) / 5) * (3 + targetWC / 6) * (2 + thrownCatMod / 6) * (1.5 + actorWC / 18) * (1.25 + actorCatMod / 18)));
-
-      const accuracy = Math.min(100, Math.floor(10 + 50 * ((1 + actorWC / 18) * (1 + actorCatMod / 6) * (1 + actorLift / 200) / ((1 + targetWC / 9) * (1 + thrownCatMod / 3)))));
-
-      const range = Math.max(1, Math.floor(((Math.pow(actorLift + 10, 2 / 3) / 3) - 0.5) * Math.pow(((1.05 * actorWC) + (1.35 * actorCatMod)) / ((1.35 * targetWC) + (1.7 * thrownCatMod)), 0.5) * ((3 + (actorCatMod / 3)) / 10)));
+      const result = AttackCheck.calculateActorToss(this.modifiers, this.actor, target.actor);
+      if(!result) return null;
+      const {power, accuracy, range} = result;
 
       this.attack.power = power;
       this.attack.accuracy = accuracy;
@@ -456,6 +443,26 @@ class AttackCheck<TParent extends AttackStatistic = AttackStatistic> implements 
     }
 
     return rolls;
+  }
+
+  static calculateActorToss(modifiers: ModifierPTR2e[], actor: ActorPTR2e, target: ActorPTR2e) {
+    const powerModifier = modifiers.find(m => m.type === "power" && m.method === "base");
+    if (!powerModifier) {
+      ui.notifications.warn(game.i18n.localize("PTR2E.AttackWarning.FlingNoPower"));
+      return null;
+    }
+    const actorLift = actor.skills["lift"]?.mod ?? 1;
+    const actorWC = actor.species?.size?.weightClass ?? 1
+    const targetWC = target.species?.size?.weightClass ?? 1;
+    const actorCatMod = actor.size?.rank ?? 1;
+    const thrownCatMod = target.size?.rank ?? 1;
+
+    const power = powerModifier.modifier = Math.max(25, Math.floor(17 + (Math.pow(actorLift + 10, 0.5) / 5) * (3 + targetWC / 6) * (2 + thrownCatMod / 6) * (1.5 + actorWC / 18) * (1.25 + actorCatMod / 18)));
+
+    const accuracy = Math.min(100, Math.floor(10 + 50 * ((1 + actorWC / 18) * (1 + actorCatMod / 6) * (1 + actorLift / 200) / ((1 + targetWC / 9) * (1 + thrownCatMod / 3)))));
+
+    const range = Math.max(1, Math.floor(((Math.pow(actorLift + 10, 2 / 3) / 3) - 0.5) * Math.pow(((1.05 * actorWC) + (1.35 * actorCatMod)) / ((1.35 * targetWC) + (1.7 * thrownCatMod)), 0.5) * ((3 + (actorCatMod / 3)) / 10)));
+    return {power, accuracy, range};
   }
 
   get breakdown(): string {
