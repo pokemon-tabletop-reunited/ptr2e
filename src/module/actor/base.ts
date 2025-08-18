@@ -841,16 +841,17 @@ class ActorPTR2e<
     return stat.value * stageModifier();
   }
 
-  async applyTickDamage({ ticks, apply, shield, pp }: { ticks: number, apply: false, shield?: boolean, pp?: boolean }): Promise<{ applied: number, update: Record<string, unknown> }>;
-  async applyTickDamage({ ticks, apply, shield, pp }: { ticks: number, apply: true, shield?: boolean, pp?: boolean }): Promise<{ applied: number, message: ChatMessagePTR2e }>;
-  async applyTickDamage({ ticks, apply, shield, pp }: { ticks: number, apply?: boolean, shield?: boolean, pp?: boolean }): Promise<{ applied: number, update?: Record<string, unknown>, message?: ChatMessagePTR2e }>;
-  async applyTickDamage({ ticks, apply = true, shield = false, pp = false }: { ticks: number, apply?: boolean, shield?: boolean, pp?: boolean }): Promise<{ applied: number, update?: Record<string, unknown>, message?: ChatMessagePTR2e }> {
+  async applyTickDamage({ ticks, apply, shield, pp }: { ticks: number, apply: false, shield?: boolean, pp?: boolean, types?: Set<PokemonType> }): Promise<{ applied: number, update: Record<string, unknown> }>;
+  async applyTickDamage({ ticks, apply, shield, pp }: { ticks: number, apply: true, shield?: boolean, pp?: boolean, types?: Set<PokemonType> }): Promise<{ applied: number, message: ChatMessagePTR2e }>;
+  async applyTickDamage({ ticks, apply, shield, pp }: { ticks: number, apply?: boolean, shield?: boolean, pp?: boolean, types?: Set<PokemonType> }): Promise<{ applied: number, update?: Record<string, unknown>, message?: ChatMessagePTR2e }>;
+  async applyTickDamage({ ticks, apply = true, shield = false, pp = false, types = new Set() }: { ticks: number, apply?: boolean, shield?: boolean, pp?: boolean, types?: Set<PokemonType> }): Promise<{ applied: number, update?: Record<string, unknown>, message?: ChatMessagePTR2e }> {
     const isDamage = ticks < 0;
     const multiplier = !isNaN((this.system.modifiers["vulnerabilityMultiplier"] ?? 1)) ? (this.system.modifiers["vulnerabilityMultiplier"] ?? 1) : 1;
+    const typeMultiplier = this.getEffectiveness(types);
 
     if (!pp) {
       const originalAmount = Math.floor((this.system.health.max / 16) * Math.abs(ticks));
-      const amount = isDamage ? Math.max(Math.floor(originalAmount * multiplier), 1) : Math.floor(originalAmount);
+      const amount = isDamage ? Math.max(Math.floor(originalAmount * multiplier * typeMultiplier), 1) : Math.floor(originalAmount);
       const applied = shield
         ? Math.min(amount || 0, isDamage ? this.system.shield.value : Infinity)
         : Math.min(amount || 0, isDamage ? this.system.health.value : this.system.health.max - this.system.health.value);
@@ -875,6 +876,16 @@ class ActorPTR2e<
       }
 
       await this.update(update);
+      const notes = [];
+      if (isDamage && multiplier !== 1) {
+        notes.push(`Vulnerability Multiplier: x${multiplier}`);
+      }
+      if (typeMultiplier !== 1) {
+        notes.push(`Type Multiplier: x${typeMultiplier}`);
+      }
+      if (notes.length) {
+        notes.unshift(`Original Damage: ${originalAmount}`);
+      }
 
       return {
         applied,
@@ -885,13 +896,13 @@ class ActorPTR2e<
             damageApplied: isDamage ? applied : -applied,
             shieldApplied: shield,
             target: this.uuid,
-            notes: isDamage && multiplier !== 1 ? [`Original Damage: ${originalAmount}`, `Vulnerability Multiplier: ${multiplier}`] : []
+            notes
           }
         })
       }
     }
 
-    const amount = Math.floor(Math.floor((this.system.powerPoints.max / 16) * Math.abs(ticks)) * (isDamage ? multiplier : 1));
+    const amount = Math.floor(Math.floor((this.system.powerPoints.max / 16) * Math.abs(ticks)) * (isDamage ? multiplier : 1) * (isDamage ? typeMultiplier : 1));
     const applied = Math.min(amount || 0, isDamage ? this.system.powerPoints.value : this.system.powerPoints.max - this.system.powerPoints.value);
 
     const update = {
@@ -909,6 +920,14 @@ class ActorPTR2e<
 
     await this.update(update);
 
+    const notes = [];
+    if (multiplier !== 1) {
+      notes.push(`Vulnerability Multiplier: x${multiplier}`);
+    }
+    if (typeMultiplier !== 1) {
+      notes.push(`Type Multiplier: x${typeMultiplier}`);
+    }
+
     return {
       applied,
       //@ts-expect-error - Chat messages have not been properly defined yet
@@ -918,7 +937,7 @@ class ActorPTR2e<
           damageApplied: isDamage ? applied : -applied,
           target: this.uuid,
           ppApplied: true,
-          notes: multiplier !== 1 ? [`Vulnerability Multiplier: ${multiplier}`] : []
+          notes
         }
       })
     }

@@ -1,6 +1,7 @@
 // Default Pattern
 // /@(?<type>Key)\[(?<slug>[-a-z]+)(\s+)?(?<options>[^\]]+)*](?:{(?<label>[^}]+)})?/gi
 
+import { PokemonType } from "@data";
 import { ActiveEffectPTR2e } from "@effects";
 export class TextEnricher {
   static init() {
@@ -118,6 +119,7 @@ export class TextEnricher {
 
     const isPPBased = !!options?.pp;
     const isShieldBased = !!options?.shield && !isPPBased;
+    const types = new Set(options?.types?.split(":") ?? []) as Set<PokemonType>;
 
     const span = document.createElement("span");
     span.classList.add("tick");
@@ -132,10 +134,15 @@ export class TextEnricher {
       : isShieldBased
         ? `${amount} Tick${biggerThanOne ? "s" : ""} of Shield${isDamage ? " Damage" : ""}`
         : `${amount} Tick${biggerThanOne ? "s" : ""} of ${isDamage ? "Damage" : "Healing"}`;
+
+    if (isDamage && types.size > 0) {
+      span.dataset.tooltip += ` (Typed: ${Array.from(types).map(t => Handlebars.helpers.formatSlug(t)).join(", ")})`;
+    }
+
     span.append((() => {
       const name = label || `${amount} Tick${biggerThanOne ? "s" : ""}`;
       return foundry.applications.ux.TextEditor.createAnchor({
-        classes: ["content-link"],
+        classes: ["content-link", ...Array.from(types).map(t => `type-${t}`)],
         attrs: { draggable: true as unknown as string },
         name,
         dataset: {
@@ -143,6 +150,7 @@ export class TextEnricher {
           amount: amount.toString(),
           shield: isShieldBased.toString(),
           pp: isPPBased.toString(),
+          types: Array.from(types).join(":"),
         },
         icon: isPPBased
           ? isDamage
@@ -236,10 +244,11 @@ export class TextEnricher {
 
     const isShieldBased = a.dataset.shield === "true";
     const isPPBased = a.dataset.pp === "true";
+    const types = new Set(a.dataset.types?.split(":") ?? []) as Set<PokemonType>
 
     //TODO: This should probably be updated to allow for doing all updates in one, as well as merging all chat messages.
     for (const actor of targets) {
-      await actor.applyTickDamage({ ticks: amount, apply: true, shield: isShieldBased, pp: isPPBased });
+      await actor.applyTickDamage({ ticks: amount, apply: true, shield: isShieldBased, pp: isPPBased, types});
     }
   }
 

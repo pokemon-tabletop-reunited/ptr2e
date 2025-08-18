@@ -1,4 +1,4 @@
-import { ChangeModel, ChangeSchema } from "@data";
+import { ChangeModel, ChangeSchema, PokemonType, PTRCONSTS } from "@data";
 import { ItemPTR2e } from "@item";
 
 export default class ApplyTickChangeSystem extends ChangeModel {
@@ -7,7 +7,7 @@ export default class ApplyTickChangeSystem extends ChangeModel {
   static override defineSchema() {
     return {
       ...super.defineSchema(),
-      method: new foundry.data.fields.StringField<"HP"|"PP"|"Shield", "HP"|"PP"|"Shield", true>({
+      method: new foundry.data.fields.StringField<"HP" | "PP" | "Shield", "HP" | "PP" | "Shield", true>({
         required: true,
         nullable: false,
         initial: "HP",
@@ -16,7 +16,15 @@ export default class ApplyTickChangeSystem extends ChangeModel {
           "PP": "PTR2E.Effect.FIELDS.ApplyTickMode.PP",
           "Shield": "PTR2E.Effect.FIELDS.ApplyTickMode.Shield",
         }
-      })
+      }),
+      types: new foundry.data.fields.SetField(
+        new foundry.data.fields.StringField<PokemonType, PokemonType, true>({
+          required: true,
+          initial: "untyped",
+          choices: Object.values(PTRCONSTS.Types)
+        }),
+        { required: true, initial: [] }
+      )
     }
   }
 
@@ -32,6 +40,7 @@ export default class ApplyTickChangeSystem extends ChangeModel {
       apply: true,
       shield: this.method === "Shield",
       pp: this.method === "PP",
+      types: this.types
     })
 
     // If this is not the only change, we keep the effect
@@ -58,5 +67,6 @@ export default interface ApplyTickChangeSystem extends ChangeModel, ModelPropsFr
 
 interface ApplyTickChangeSchema extends ChangeSchema {
   /** The method to apply the tick damage */
-  method: foundry.data.fields.StringField<"HP"|"PP"|"Shield", "HP"|"PP"|"Shield", true>;
+  method: foundry.data.fields.StringField<"HP" | "PP" | "Shield", "HP" | "PP" | "Shield", true>;
+  types: foundry.data.fields.SetField<foundry.data.fields.StringField<PokemonType, PokemonType, true>>;
 };
