@@ -25,6 +25,15 @@
 </div>
 
 <div class="form-group">
+  <label>{{localize "PTR2E.Effect.FIELDS.ChangeIsFlat.label"}}</label>
+  <div class="form-fields">
+    <input type="checkbox" name="{{basePath}}.isFlat" {{#if change.isFlat}}checked{{/if}} />
+  </div>
+  <p class="hint">{{localize "PTR2E.Effect.FIELDS.ChangeIsFlat.hint"}}</p>
+</div>
+
+
+<div class="form-group">
     <label>{{localize fields.predicate.label}}</label>
     <input type="text" name="{{basePath}}.predicate" value="{{json change.predicate spaces=0}}" />
 </div>
