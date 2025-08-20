@@ -13,20 +13,20 @@
     "diet": [
       "omnivore"
     ],
-    "movement": {
-      "primary": [
-        {
-          "type": "overland",
-          "value": 8
-        }
-      ],
-      "secondary": [
-        {
-          "type": "swim",
-          "value": 4
-        }
-      ]
-    },
+    "movement": [
+      {
+        "type": "overland",
+        "value": 8
+      },
+      {
+        "type": "swim",
+        "value": 4
+      },
+      {
+        "type": "flight",
+        "value": 8
+      }
+    ],
     "traits": [
       "pokemon",
       "bipedal",
@@ -35,7 +35,8 @@
       "telekinetic-6",
       "aura-user",
       "fully-evolved",
-      "jump-4"
+      "jump-4",
+      "hover"
     ],
     "abilities": {
       "starting": [
@@ -43,15 +44,15 @@
           "slug": "pure-power"
         },
         {
-          "slug": "telepathy"
+          "slug": "raw-might"
         }
       ],
       "basic": [
         {
-          "slug": "limber"
+          "slug": "steel-toed"
         },
         {
-          "slug": "simple"
+          "slug": "telepathy"
         }
       ],
       "advanced": [
@@ -59,15 +60,15 @@
           "slug": "monks-spirit"
         },
         {
-          "slug": "gifted-mind"
+          "slug": "conditioning"
         }
       ],
       "master": [
         {
-          "slug": "potent-might"
+          "slug": "channeled-strength"
         },
         {
-          "slug": "steel-toed"
+          "slug": "sage-power"
         }
       ]
     },
@@ -99,6 +100,14 @@
       {
         "slug": "conversation",
         "value": 40,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "flying",
+        "value": 45,
         "rvs": 0,
         "favourite": false,
         "hidden": false,
@@ -726,21 +735,16 @@
           "methods": [
             {
               "type": "level",
-              "level": 37,
+              "level": 18,
               "operand": "and"
             }
           ],
-          "evolutions": [],
-          "details": {
-            "gender": null,
-            "item": null,
-            "level": null,
-            "knownMove": null
-          },
           "perk": {
             "x": 26,
             "y": 26
-          }
+          },
+          "details": null,
+          "evolutions": []
         }
       ],
       "uuid": "Compendium.ptr2e.core-species.Item.e2J4wosPsaI6gwYM",
@@ -1040,7 +1044,9 @@
         "removeOnRecall": false,
         "stacks": 0,
         "trigger": "manual",
-        "conditions": []
+        "conditions": [],
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
@@ -1062,12 +1068,13 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.347",
         "systemId": "ptr2e",
         "systemVersion": "1.2.0.beta",
         "createdTime": 1743983723554,
         "modifiedTime": 1743984670314,
-        "lastModifiedBy": "fjFnY9UQ3QBBalRU"
+        "lastModifiedBy": "fjFnY9UQ3QBBalRU",
+        "exportSource": null
       }
     }
   ]
