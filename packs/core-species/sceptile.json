@@ -13,27 +13,24 @@
     "diet": [
       "herbivore"
     ],
-    "movement": {
-      "primary": [
-        {
-          "type": "overland",
-          "value": 12
-        }
-      ],
-      "secondary": [
-        {
-          "type": "swim",
-          "value": 6
-        }
-      ]
-    },
+    "movement": [
+      {
+        "type": "overland",
+        "value": 12
+      },
+      {
+        "type": "swim",
+        "value": 6
+      }
+    ],
     "traits": [
       "pokemon",
       "wallclimber",
       "plant-grower",
       "bladed",
       "silent",
-      "fully-evolved"
+      "fully-evolved",
+      "jump-5"
     ],
     "abilities": {
       "starting": [
@@ -770,6 +767,10 @@
                 "item": null,
                 "level": null,
                 "knownMove": null
+              },
+              "perk": {
+                "x": 26,
+                "y": 26
               }
             }
           ],
@@ -778,17 +779,308 @@
             "item": null,
             "level": null,
             "knownMove": null
+          },
+          "perk": {
+            "x": 26,
+            "y": 26
           }
         }
       ],
-      "uuid": "Compendium.ptr2e.core-species.Item.LXFlse9HJRVgIpxq"
+      "uuid": "Compendium.ptr2e.core-species.Item.LXFlse9HJRVgIpxq",
+      "methods": [],
+      "perk": {
+        "x": 26,
+        "y": 26
+      }
     },
     "habitats": [
       "forest",
       "jungle"
-    ]
+    ],
+    "publication": {
+      "source": "PTR 2e Core - Hoenn Dex",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
   },
   "_id": "DIG4YH9chCDY1sUk",
-  "effects": [],
-  "folder": null
+  "effects": [
+    {
+      "name": "Mega Sceptile",
+      "type": "form",
+      "_id": "NW11YmYQhDOrLNbI",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-option",
+            "key": "manual-forme-toggle",
+            "value": "forme:mega-sceptile:active",
+            "domain": "all",
+            "toggleable": true,
+            "label": "Toggle: Mega Sceptile Forme",
+            "predicate": [],
+            "alwaysActive": false,
+            "count": false,
+            "priority": null,
+            "mode": 2,
+            "ignored": false,
+            "suboptions": [],
+            "state": false
+          },
+          {
+            "type": "stats-alteration",
+            "predicate": [
+              "forme:mega-sceptile:active"
+            ],
+            "key": "",
+            "value": 0,
+            "hp": null,
+            "atk": 25,
+            "def": 10,
+            "spa": 40,
+            "spd": null,
+            "spe": 25,
+            "priority": null,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "add-trait",
+            "predicate": [
+              "forme:mega-sceptile:active"
+            ],
+            "key": "",
+            "value": "Drakelike",
+            "priority": null,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "grant-item",
+            "predicate": [
+              "forme:mega-sceptile:active"
+            ],
+            "key": "",
+            "value": "Compendium.ptr2e.core-abilities.Item.zGgfm8CE0qrdcmdf",
+            "reevaluateOnUpdate": true,
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "system.free",
+                "value": "true"
+              }
+            ],
+            "allowDuplicate": false,
+            "priority": null,
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            },
+            "mode": 2,
+            "ignored": false,
+            "inMemoryOnly": false,
+            "track": false,
+            "replaceSelf": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-sceptile:active"
+            ],
+            "key": "system.skills.acrobatics.value",
+            "value": 15,
+            "priority": null,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-sceptile:active"
+            ],
+            "key": "system.skills.climb.value",
+            "value": 10,
+            "priority": null,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-sceptile:active"
+            ],
+            "key": "system.skills.intimidate.value",
+            "value": 35,
+            "priority": null,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-sceptile:active"
+            ],
+            "key": "system.skills.lift.value",
+            "value": 10,
+            "priority": null,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-sceptile:active"
+            ],
+            "key": "system.skills.listen.value",
+            "value": 5,
+            "priority": null,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-sceptile:active"
+            ],
+            "key": "system.skills.running.value",
+            "value": 5,
+            "priority": null,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-sceptile:active"
+            ],
+            "key": "system.skills.running.value",
+            "value": 5,
+            "priority": null,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-sceptile:active"
+            ],
+            "key": "system.skills.spot.value",
+            "value": 5,
+            "priority": null,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-sceptile:active"
+            ],
+            "key": "system.skills.survival.value",
+            "value": 10,
+            "priority": null,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-sceptile:active"
+            ],
+            "key": "system.skills.swim.value",
+            "value": 5,
+            "priority": null,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-sceptile:active"
+            ],
+            "key": "system.skills.track.value",
+            "value": 10,
+            "priority": null,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-sceptile:active"
+            ],
+            "key": "system.movement.overland.value",
+            "value": 2,
+            "priority": null,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-sceptile:active"
+            ],
+            "key": "system.movement.swim.value",
+            "value": 1,
+            "priority": null,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-sceptile:active"
+            ],
+            "key": "system.type.types",
+            "value": "dragon",
+            "mode": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0,
+        "trigger": "manual",
+        "conditions": [],
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "13.347",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.3.beta",
+        "createdTime": 1742065373425,
+        "modifiedTime": 1756387399074,
+        "lastModifiedBy": "w5mk2oBt4HxVY0Pe",
+        "exportSource": null
+      }
+    }
+  ]
 }
