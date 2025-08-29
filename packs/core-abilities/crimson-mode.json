@@ -1,0 +1,110 @@
+{
+  "folder": "ANyTBaCvsFOl1tzn",
+  "name": "Crimson Mode",
+  "type": "ability",
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "publication": {
+      "source": "Digidex",
+      "authors": [
+        "Fox"
+      ],
+      "notes": ""
+    },
+    "traits": [
+      "digimon"
+    ],
+    "actions": [],
+    "description": "<p>Passive: On using a Move, the user has a 10% chance to gain @UUID[Compendium.ptr2e.core-effects.rMNLqloV5nLmCLrZ]{Omniboost}.<br><br>The user gains @UUID[Compendium.ptr2e.core-abilities.W5ObFdvViwwEqZhl]{Power Spot} as a free ability.</p>"
+  },
+  "img": "icons/svg/radiation.svg",
+  "effects": [
+    {
+      "name": "Crimson Mode",
+      "type": "passive",
+      "_id": "9mAEN6xuMrZrIZi1",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "attack",
+            "value": "Compendium.ptr2e.core-effects.Item.rMNLqloV5nLmCLrZ",
+            "predicate": [],
+            "chance": 10,
+            "isFixedChance": false,
+            "affects": "self",
+            "alterations": [],
+            "dontMerge": false,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "grant-item",
+            "key": "",
+            "value": "Compendium.ptr2e.core-abilities.Item.W5ObFdvViwwEqZhl",
+            "predicate": [
+              "ability:crimson-mode:active"
+            ],
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "system.free",
+                "value": "true"
+              }
+            ],
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            },
+            "allowDuplicate": false,
+            "reevaluateOnUpdate": true,
+            "mode": 2,
+            "ignored": false,
+            "inMemoryOnly": false,
+            "track": false,
+            "replaceSelf": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.347",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.3.beta",
+        "lastModifiedBy": "mK35yvCqCgiTUvKf",
+        "modifiedTime": 1756458412148
+      }
+    }
+  ],
+  "flags": {},
+  "_id": "tcK86rvy6omGajUz"
+}
