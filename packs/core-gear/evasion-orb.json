@@ -11,8 +11,8 @@
     },
     "equipped": {
       "slot": "belt",
-      "carryType": "stowed",
-      "handsHeld": null
+      "carryType": "equipped",
+      "handsHeld": 0
     },
     "grade": "B",
     "fling": {
@@ -35,17 +35,81 @@
     "slug": "evasion-orb",
     "stack": 1,
     "_migration": {
-      "version": null,
-      "previous": null
+      "version": 0.111,
+      "previous": {
+        "schema": null,
+        "foundry": "13.347",
+        "system": "1.4.3.beta"
+      }
     },
     "publication": {
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
-    }
+      ],
+      "notes": ""
+    },
+    "actions": []
   },
   "_id": "0Oau8hUKhEIA4lNZ",
-  "effects": [],
+  "effects": [
+    {
+      "name": "Evasion Orb",
+      "type": "affliction",
+      "_id": "WMm4jnIzcn8aHmRO",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "basic",
+            "key": "system.battleStats.evasion.stage",
+            "value": 3,
+            "predicate": [],
+            "mode": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0,
+        "priority": 50,
+        "formula": "",
+        "type": "damage"
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null,
+        "turns": 10,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.347",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.3.beta",
+        "createdTime": 1756969027114,
+        "modifiedTime": 1756969104374,
+        "lastModifiedBy": "oC3xwsMDu7M30pzG"
+      }
+    }
+  ],
   "folder": "4MbEHvhwmG5DYTkB"
 }
