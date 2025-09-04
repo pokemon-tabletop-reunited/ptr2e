@@ -13,14 +13,13 @@
         "type": "attack",
         "cost": {
           "activation": "free",
-          "powerPoints": 2,
-          "trigger": "<p>The user causes another creature to gain @Affliction[fainted].</p>"
+          "trigger": "The user causes at least one creature to gain @Affliction[fainted]."
         },
         "range": {
           "target": "self",
           "unit": "m"
         },
-        "description": "<p>Trigger: The user causes another creature to gain @Affliction[fainted].</p><p>Effect: The user's SPATK Stage is raised by +1 for 5 Activations.</p>",
+        "description": "<p>Trigger: The user causes at least one creature to gain @Affliction[fainted].</p><p>Effect: The user gains +1 SPATK Stage for 5 Activations.</p>",
         "img": "systems/ptr2e/img/icons/special_icon.png",
         "types": [
           "untyped"
@@ -30,7 +29,7 @@
         "predicate": []
       }
     ],
-    "description": "<p>Trigger: The user causes another creature to gain @Affliction[fainted].</p><p>Effect: The user's SPATK Stage is raised by +1 for 5 Activations.</p>",
+    "description": "<p>Trigger: The user causes at least one creature to gain @Affliction[fainted].</p><p>Effect: The user gains +1 SPATK Stage for 5 Activations.</p>",
     "traits": [],
     "slug": "hubris",
     "_migration": {
@@ -41,7 +40,8 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
+      ],
+      "notes": ""
     }
   },
   "_id": "1XQtWBu3lfTeAxJ3",
@@ -62,14 +62,19 @@
             "affects": "self",
             "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "isFixedChance": false,
+            "alterations": [],
+            "dontMerge": false
           }
         ],
         "slug": null,
         "traits": [],
         "removeAfterCombat": true,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
@@ -91,12 +96,13 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.347",
         "systemId": "ptr2e",
         "systemVersion": "0.10.0-alpha.5.1.6",
         "createdTime": 1737563734209,
         "modifiedTime": 1737563756918,
-        "lastModifiedBy": "IcBpMqhFuTck9VpX"
+        "lastModifiedBy": "IcBpMqhFuTck9VpX",
+        "exportSource": null
       }
     }
   ]
