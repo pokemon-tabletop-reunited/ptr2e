@@ -12,19 +12,20 @@
         "description": "<p>Trigger: The user takes damage and crosses the threshold to meet the [Desperation 1/3] Condition.</p><p>Effect: The user gains @Affliction[boosted] 5 and @Affliction[resolved] 5.</p>",
         "cost": {
           "activation": "free",
-          "powerPoints": 5,
+          "powerPoints": 4,
           "trigger": "The user takes damage and crosses the threshold to meet the [Desperation 1/3] Condition."
         },
         "range": {
           "target": "self",
-          "unit": "m"
+          "unit": "m",
+          "distance": 10
         },
         "traits": [
           "desperation-1-3",
           "interrupt-2"
         ],
         "type": "generic",
-        "img": "icons/svg/explosion.svg"
+        "img": "systems/ptr2e/img/perk-icons/Combat.svg"
       }
     ],
     "slug": "plus-ultra",
@@ -74,5 +75,76 @@
       "notes": ""
     }
   },
-  "effects": []
+  "effects": [
+    {
+      "name": "PLus Ultra",
+      "type": "passive",
+      "_id": "qSehFV1lXkjqcw9c",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "plus-ultra-generic",
+            "value": "Compendium.ptr2e.core-effects.Item.boostedcondiitem",
+            "predicate": [],
+            "chance": 100,
+            "isFixedChance": false,
+            "affects": "self",
+            "alterations": [],
+            "dontMerge": false,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "roll-effect",
+            "key": "plus-ultra-generic",
+            "value": "Compendium.ptr2e.core-effects.Item.resolvedconditem",
+            "predicate": [],
+            "chance": 100,
+            "isFixedChance": false,
+            "affects": "self",
+            "alterations": [],
+            "dontMerge": false,
+            "mode": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.348",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.3.beta",
+        "createdTime": 1757808628609,
+        "modifiedTime": 1757808690250,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+      }
+    }
+  ]
 }
