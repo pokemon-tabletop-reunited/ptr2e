@@ -11,14 +11,19 @@
     "equipped": {
       "slot": "held",
       "carryType": "stowed",
-      "handsHeld": null
+      "handsHeld": 1
     },
     "grade": "E",
     "fling": {
       "type": "grass",
-      "power": 50,
-      "accuracy": 100,
-      "hide": null
+      "power": 65,
+      "accuracy": 90,
+      "hide": false,
+      "range": {
+        "target": "creature",
+        "distance": 4,
+        "unit": "m"
+      }
     },
     "rarity": "common",
     "traits": [
@@ -26,37 +31,41 @@
       "fling",
       "blunt",
       "switch-grip",
-      "grass"
+      "grass",
+      "modern",
+      "1-handed",
+      "conventional"
     ],
     "actions": [
       {
+        "types": [
+          "untyped"
+        ],
+        "category": "physical",
+        "power": 50,
+        "accuracy": 90,
+        "free": true,
+        "traits": [
+          "adaptable",
+          "priority-10",
+          "contact"
+        ],
         "name": "Bat (Wood)",
         "slug": "bat-wood",
+        "img": "systems/ptr2e/img/icons/weapon_icon.webp",
         "type": "attack",
-        "description": "Effect: The user may use the Attack Bat (Wood), drawing upon this item's PP Pool or the user's PP to use the Attack.",
-        "traits": [
-          "Weapon",
-          "Fling",
-          "Blunt",
-          "Switch-Grip",
-          "Grass"
-        ],
         "range": {
           "target": "creature",
+          "distance": 1,
           "unit": "m"
         },
         "cost": {
           "activation": "complex"
         },
-        "types": [
-          "untyped"
-        ],
-        "category": "physical",
-        "img": "icons/svg/explosion.svg",
         "predicate": []
       }
     ],
-    "description": "Effect: The user may use the Attack Bat (Wood), drawing upon this item's PP Pool or the user's PP to use the Attack.",
+    "description": "<p>A baseball bat is a smooth wooden or metal club used in the sport of baseball to hit the ball after it is thrown by the pitcher. Bats are effective weapons because they are inexpensive compared to other weapons, and, unlike many other weapons, they can be carried without raising suspicion or violating laws, due to their primarily purpose as sports equipment.</p>",
     "weaponType": "untyped",
     "weaponRange": "Creature",
     "slug": "bat-wood",
@@ -78,10 +87,66 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
+      ],
+      "notes": ""
     }
   },
   "_id": "ZewWbLPYdCt2qPzv",
-  "effects": [],
+  "effects": [
+    {
+      "name": "Bat (Wood)",
+      "type": "passive",
+      "_id": "hKiDWsZdq14T4lXi",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "flat-modifier",
+            "key": "{item|id}-attack-damage-flat",
+            "value": 2,
+            "predicate": [],
+            "label": "Bat (Wood)",
+            "mode": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": false,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.347",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.3.beta",
+        "createdTime": 1757541637710,
+        "modifiedTime": 1757553426726,
+        "lastModifiedBy": "UTlFSVhgfIUeTsoW"
+      }
+    }
+  ],
   "folder": "PhrQtZzEwKPjfmK2"
 }

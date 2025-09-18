@@ -16,9 +16,14 @@
     "grade": "E",
     "fling": {
       "type": "steel",
-      "power": 40,
-      "accuracy": 100,
-      "hide": false
+      "power": 60,
+      "accuracy": 95,
+      "hide": false,
+      "range": {
+        "target": "creature",
+        "distance": 4,
+        "unit": "m"
+      }
     },
     "rarity": "uncommon",
     "traits": [
@@ -26,11 +31,16 @@
       "fling",
       "firearm",
       "autoload",
-      "one-handed",
       "concealable",
       "steel",
       "charge-pool-4",
-      "reload-1"
+      "reload-1",
+      "1-handed",
+      "conventional",
+      "modern",
+      "early-modern",
+      "sci-fi",
+      "fantasy"
     ],
     "actions": [
       {
@@ -44,7 +54,8 @@
         "traits": [
           "load-adaptive",
           "missile",
-          "readied"
+          "readied",
+          "firearm"
         ],
         "name": "Pocket Pistol",
         "slug": "pocket-pistol",
@@ -75,7 +86,9 @@
           "interrupt-2",
           "contact",
           "crit-2",
-          "missile"
+          "missile",
+          "flinch-20",
+          "firearm"
         ],
         "name": "Pocket Pistol (Palmed Shot)",
         "slug": "pocket-pistol-palmed-shot",
@@ -147,7 +160,9 @@
         "traits": [],
         "removeAfterCombat": true,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
@@ -169,12 +184,13 @@
       "_stats": {
         "compendiumSource": "Compendium.ptr2e.core-gear.Item.Ba3EyqpUePgGrfQk.ActiveEffect.uOxpw5kHcRtpv4pa",
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.347",
         "systemId": "ptr2e",
         "systemVersion": "1.1.3.beta",
         "createdTime": 1743879953422,
         "modifiedTime": 1743879978926,
-        "lastModifiedBy": "UTlFSVhgfIUeTsoW"
+        "lastModifiedBy": "UTlFSVhgfIUeTsoW",
+        "exportSource": null
       }
     }
   ],

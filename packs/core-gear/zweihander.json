@@ -10,36 +10,159 @@
     "slug": "zweihander",
     "traits": [
       "weapon",
-      "blade"
+      "blade",
+      "fling",
+      "steel",
+      "2-handed",
+      "early-modern",
+      "medieval",
+      "fantasy"
     ],
     "actions": [
       {
-        "name": "Zweihander Cleave",
-        "slug": "zweihander-action-1",
+        "name": "Zweihander Chop",
+        "slug": "zweihander-chop",
         "traits": [
           "weapon",
+          "adaptable",
           "contact",
-          "sharp",
-          "reach"
+          "crit-1",
+          "flinch-20",
+          "sharp"
         ],
         "type": "attack",
+        "img": "systems/ptr2e/img/icons/weapon_icon.webp",
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 1
+        },
         "range": {
-          "target": "enemy",
+          "target": "creature",
           "distance": 2,
           "unit": "m"
-        },
-        "cost": {
-          "activation": "complex"
         },
         "types": [
           "untyped"
         ],
         "category": "physical",
-        "power": 90,
-        "accuracy": 70,
         "free": true,
-        "img": "icons/svg/explosion.svg",
-        "predicate": []
+        "predicate": [],
+        "power": 80,
+        "accuracy": 95
+      },
+      {
+        "name": "Zweihander Thrust",
+        "slug": "zweihander-thrust",
+        "traits": [
+          "weapon",
+          "adaptable",
+          "contact",
+          "crit-2",
+          "flinch-30"
+        ],
+        "type": "attack",
+        "img": "systems/ptr2e/img/icons/weapon_icon.webp",
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 1
+        },
+        "range": {
+          "target": "creature",
+          "distance": 2,
+          "unit": "m"
+        },
+        "types": [
+          "untyped"
+        ],
+        "category": "physical",
+        "predicate": [],
+        "power": 130,
+        "accuracy": 90
+      },
+      {
+        "name": "Zweihander Cleave",
+        "slug": "zweihander-cleave",
+        "description": "<p>Effect: On hit, all valid targets have a 30% chance of gaining @Affliction[delay 20].</p>",
+        "traits": [
+          "weapon",
+          "adaptable",
+          "sharp",
+          "contact",
+          "flinch-50"
+        ],
+        "type": "attack",
+        "img": "systems/ptr2e/img/icons/weapon_icon.webp",
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 2
+        },
+        "range": {
+          "target": "emanation",
+          "distance": 2,
+          "unit": "m"
+        },
+        "types": [
+          "untyped"
+        ],
+        "category": "physical",
+        "predicate": [],
+        "power": 80,
+        "accuracy": 100
+      },
+      {
+        "name": "Zweihander Half-Swing",
+        "slug": "zweihander-half-swing",
+        "traits": [
+          "weapon",
+          "sharp",
+          "adaptable",
+          "contact",
+          "grapple"
+        ],
+        "type": "attack",
+        "img": "systems/ptr2e/img/icons/weapon_icon.webp",
+        "cost": {
+          "activation": "complex"
+        },
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "types": [
+          "untyped"
+        ],
+        "category": "physical",
+        "predicate": [],
+        "power": 55,
+        "accuracy": 100
+      },
+      {
+        "name": "Zweihander Half-Thrust",
+        "slug": "zweihander-half-thrust",
+        "traits": [
+          "weapon",
+          "adaptable",
+          "crit-2",
+          "grapple"
+        ],
+        "type": "attack",
+        "img": "systems/ptr2e/img/icons/weapon_icon.webp",
+        "cost": {
+          "activation": "complex"
+        },
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "types": [
+          "untyped"
+        ],
+        "category": "physical",
+        "predicate": [],
+        "power": 75,
+        "accuracy": 95
       }
     ],
     "crafting": {
@@ -55,9 +178,14 @@
     "grade": "D",
     "fling": {
       "type": "untyped",
-      "power": 70,
-      "accuracy": 30,
-      "hide": false
+      "power": 100,
+      "accuracy": 65,
+      "hide": false,
+      "range": {
+        "target": "creature",
+        "distance": 2,
+        "unit": "m"
+      }
     },
     "quantity": 1,
     "rarity": "rare",
@@ -74,10 +202,141 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
-    }
+      ],
+      "notes": ""
+    },
+    "description": "<p>The zweihander is a large two-handed sword and is considered the final stage in the trend of making very large swords, offering many of the benefits of polearms in the process.</p>"
   },
   "_id": "MXMKNrLaYJsoTetc",
   "img": "systems/ptr2e/img/icons/weapon_icon.webp",
-  "effects": []
+  "effects": [
+    {
+      "name": "Zweihander",
+      "type": "passive",
+      "_id": "GAie8JdzAhiKuvqG",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "flat-modifier",
+            "key": "{item|id}-attack-damage-flat",
+            "value": 19,
+            "predicate": [],
+            "label": "Zweihander",
+            "mode": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          },
+          {
+            "type": "flat-modifier",
+            "key": "zweihander-thrust-attack-damage-flat",
+            "value": 15,
+            "predicate": [],
+            "label": "Thrust",
+            "mode": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          },
+          {
+            "type": "flat-modifier",
+            "key": "zweihander-cleave-attack-damage-flat",
+            "value": -5,
+            "predicate": [],
+            "label": "Cleave",
+            "mode": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          },
+          {
+            "type": "flat-modifier",
+            "key": "zweihander-half-swing-attack-damage-flat",
+            "value": -7,
+            "predicate": [],
+            "label": "Half-Swing",
+            "mode": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          },
+          {
+            "type": "flat-modifier",
+            "key": "zweihander-half-thrust-attack-damage-flat",
+            "value": "+3",
+            "predicate": [],
+            "label": "Half-Thrust",
+            "mode": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          },
+          {
+            "type": "flat-modifier",
+            "key": "fling-zweihander-attack-damage-flat",
+            "value": 16,
+            "predicate": [],
+            "label": "Zweihander (Fling)",
+            "mode": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          },
+          {
+            "type": "roll-effect",
+            "key": "zweihander-cleave-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.advanceffectitem",
+            "predicate": [],
+            "chance": 30,
+            "isFixedChance": false,
+            "affects": "target",
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "system.amount",
+                "value": -20
+              },
+              {
+                "mode": 5,
+                "property": "name",
+                "value": "Delay 20%"
+              }
+            ],
+            "dontMerge": false,
+            "mode": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.347",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.3.beta",
+        "createdTime": 1757549013437,
+        "modifiedTime": 1757549551240,
+        "lastModifiedBy": "UTlFSVhgfIUeTsoW"
+      }
+    }
+  ]
 }

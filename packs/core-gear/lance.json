@@ -1,0 +1,190 @@
+{
+  "folder": "V4skAU6G3OH5fXaf",
+  "name": "Lance",
+  "type": "weapon",
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "slug": "lance",
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "traits": [
+      "weapon",
+      "polearm",
+      "1-handed",
+      "early-modern",
+      "medieval",
+      "fantasy"
+    ],
+    "actions": [
+      {
+        "name": "Lance Thrust",
+        "slug": "lance-thrust",
+        "traits": [
+          "weapon",
+          "adaptable",
+          "crit-1",
+          "contact",
+          "flinch-20"
+        ],
+        "type": "attack",
+        "img": "systems/ptr2e/img/icons/weapon_icon.webp",
+        "cost": {
+          "activation": "complex"
+        },
+        "range": {
+          "target": "creature",
+          "distance": 2,
+          "unit": "m"
+        },
+        "types": [
+          "untyped"
+        ],
+        "category": "physical",
+        "free": true,
+        "predicate": [],
+        "power": 50,
+        "accuracy": 85
+      },
+      {
+        "name": "Lance Charge",
+        "slug": "lance-charge",
+        "traits": [
+          "weapon",
+          "adaptable",
+          "crit-3",
+          "contact",
+          "pass-1",
+          "dash",
+          "flinch-40"
+        ],
+        "type": "attack",
+        "img": "systems/ptr2e/img/icons/weapon_icon.webp",
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 3
+        },
+        "range": {
+          "target": "creature",
+          "distance": 2,
+          "unit": "m"
+        },
+        "types": [
+          "untyped"
+        ],
+        "category": "physical",
+        "free": true,
+        "predicate": [],
+        "power": 120,
+        "accuracy": 90
+      }
+    ],
+    "description": "<p>The lance is a type of specialized spear used by cavalry for mounted combat. It usually consists of a long wooden shaft with a sharp metal point. Lances can be used like a normal spear, but are designed to be couched and held firm and straight for devastating charges.</p>",
+    "crafting": {
+      "skill": "",
+      "spans": null,
+      "materials": []
+    },
+    "equipped": {
+      "carryType": "stowed",
+      "slot": "held",
+      "handsHeld": null
+    },
+    "fling": {
+      "type": "untyped",
+      "power": 95,
+      "accuracy": 80,
+      "hide": false,
+      "range": {
+        "target": "creature",
+        "distance": 2,
+        "unit": "m"
+      }
+    },
+    "quantity": 1,
+    "rarity": "common",
+    "identification": {
+      "misidentified": null,
+      "status": "identified",
+      "unidentified": {
+        "name": "Unidentified Item",
+        "img": "systems/ptu/css/images/icons/gear_icon.png",
+        "description": "<p>Unidentified Item</p>"
+      }
+    }
+  },
+  "img": "systems/ptr2e/img/icons/weapon_icon.webp",
+  "effects": [
+    {
+      "name": "Lance",
+      "type": "passive",
+      "_id": "fGs7ZtWes2IxXTQe",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "flat-modifier",
+            "key": "{item|id}-attack-damage-flat",
+            "value": 8,
+            "predicate": [],
+            "label": "Lance",
+            "mode": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          },
+          {
+            "type": "flat-modifier",
+            "key": "lance-charge-attack-damage-flat",
+            "value": 37,
+            "predicate": [],
+            "label": "Lance Charge",
+            "mode": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.347",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.3.beta",
+        "lastModifiedBy": null
+      }
+    }
+  ],
+  "flags": {},
+  "_id": "nf4wHnAEdQ1e8H3J"
+}

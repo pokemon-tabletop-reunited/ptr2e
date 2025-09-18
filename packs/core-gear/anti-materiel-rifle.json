@@ -18,7 +18,12 @@
       "type": "steel",
       "power": 80,
       "accuracy": 90,
-      "hide": false
+      "hide": false,
+      "range": {
+        "target": "creature",
+        "distance": 10,
+        "unit": "m"
+      }
     },
     "rarity": "rare",
     "traits": [
@@ -28,21 +33,22 @@
       "autoload",
       "steel",
       "charge-pool-4",
-      "reload-4"
+      "reload-4",
+      "conventional",
+      "modern",
+      "sci-fi"
     ],
     "actions": [
       {
         "types": [
           "untyped"
         ],
-        "category": "special",
-        "power": 200,
-        "accuracy": 95,
+        "category": "status",
         "free": true,
         "traits": [
           "set-up",
           "defensive",
-          "priority-2"
+          "priority-20"
         ],
         "name": "Anti-Materiel Rifle (Set Up)",
         "slug": "anti-materiel-rifle-set-up",
@@ -51,12 +57,10 @@
         "type": "attack",
         "range": {
           "target": "self",
-          "distance": 0,
           "unit": "m"
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 2,
           "priority": 2
         },
         "predicate": []
@@ -71,7 +75,10 @@
         "free": true,
         "traits": [
           "missile",
-          "pierce"
+          "pierce",
+          "flinch-40",
+          "firearm",
+          "crit-1"
         ],
         "name": "Anti-Materiel Rifle (Resolution)",
         "slug": "anti-materiel-rifle-resolution",
@@ -100,7 +107,8 @@
         "free": true,
         "traits": [
           "missile",
-          "pierce"
+          "pierce",
+          "firearm"
         ],
         "name": "Anti-Materiel Rifle (Hip Fire)",
         "slug": "anti-materiel-rifle-hip-fire",
@@ -157,20 +165,22 @@
           {
             "type": "flat-modifier",
             "key": "{item|id}-attack-damage-flat",
-            "value": 62,
+            "value": 68,
             "predicate": [],
             "label": "Anti-Materiel Rifle",
-            "mode": 2,
             "priority": null,
+            "mode": 2,
             "ignored": false,
             "hideIfDisabled": false
           }
         ],
         "slug": null,
         "traits": [],
-        "removeAfterCombat": true,
+        "removeAfterCombat": false,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
@@ -188,16 +198,21 @@
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "flags": {},
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
       "_stats": {
         "compendiumSource": "Compendium.ptr2e.core-gear.Item.Ba3EyqpUePgGrfQk.ActiveEffect.uOxpw5kHcRtpv4pa",
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.347",
         "systemId": "ptr2e",
-        "systemVersion": "1.1.3.beta",
+        "systemVersion": "1.4.3.beta",
         "createdTime": 1743971623486,
-        "modifiedTime": 1743971719892,
-        "lastModifiedBy": "UTlFSVhgfIUeTsoW"
+        "modifiedTime": 1757632056546,
+        "lastModifiedBy": "UTlFSVhgfIUeTsoW",
+        "exportSource": null
       }
     }
   ],

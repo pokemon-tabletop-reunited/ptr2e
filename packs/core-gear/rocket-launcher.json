@@ -18,7 +18,12 @@
       "type": "steel",
       "power": 80,
       "accuracy": 90,
-      "hide": false
+      "hide": false,
+      "range": {
+        "target": "creature",
+        "distance": 10,
+        "unit": "m"
+      }
     },
     "rarity": "uncommon",
     "traits": [
@@ -27,7 +32,10 @@
       "firearm",
       "steel",
       "charge-pool-1",
-      "reload-2"
+      "reload-2",
+      "conventional",
+      "modern",
+      "sci-fi"
     ],
     "actions": [
       {
@@ -40,7 +48,8 @@
         "free": true,
         "traits": [
           "explode",
-          "blast-1"
+          "blast-1",
+          "firearm"
         ],
         "name": "Rocket Launcher",
         "slug": "rocket-launcher",
@@ -97,11 +106,11 @@
           {
             "type": "flat-modifier",
             "key": "{item|id}-attack-damage-flat",
-            "value": 70,
+            "value": 140,
             "predicate": [],
             "label": "Rocket Launcher",
-            "mode": 2,
             "priority": null,
+            "mode": 2,
             "ignored": false,
             "hideIfDisabled": false
           }
@@ -110,7 +119,9 @@
         "traits": [],
         "removeAfterCombat": true,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
@@ -128,16 +139,21 @@
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "flags": {},
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
       "_stats": {
         "compendiumSource": "Compendium.ptr2e.core-gear.Item.Ba3EyqpUePgGrfQk.ActiveEffect.uOxpw5kHcRtpv4pa",
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.347",
         "systemId": "ptr2e",
-        "systemVersion": "1.1.3.beta",
+        "systemVersion": "1.4.3.beta",
         "createdTime": 1743904735453,
-        "modifiedTime": 1743904757652,
-        "lastModifiedBy": "UTlFSVhgfIUeTsoW"
+        "modifiedTime": 1757632918983,
+        "lastModifiedBy": "UTlFSVhgfIUeTsoW",
+        "exportSource": null
       }
     }
   ],

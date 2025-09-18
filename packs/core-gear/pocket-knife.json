@@ -11,41 +11,49 @@
     "equipped": {
       "slot": "held",
       "carryType": "stowed",
-      "handsHeld": null
+      "handsHeld": 1
     },
     "grade": "D",
     "fling": {
       "type": "dark",
-      "power": 40,
-      "accuracy": 100,
-      "hide": null
+      "power": 60,
+      "accuracy": 90,
+      "hide": false,
+      "range": {
+        "target": "creature",
+        "distance": 4,
+        "unit": "m"
+      }
     },
     "rarity": "common",
     "traits": [
       "weapon",
       "fling",
       "blade",
-      "one-handed",
       "concealable",
-      "dark"
+      "dark",
+      "1-handed",
+      "conventional",
+      "modern",
+      "early-modern"
     ],
     "actions": [
       {
-        "name": "Pocket Knife",
-        "slug": "pocket-knife",
+        "name": "Pocket Knife Swing",
+        "slug": "pocket-knife-swing",
         "type": "attack",
-        "description": "Effect: The user may use the Attack Pocket Knife, drawing upon this item's PP Pool or the user's PP to use the Attack.",
         "traits": [
-          "Weapon",
-          "Fling",
-          "blade",
-          "One-Handed",
-          "Concealable",
-          "Dark"
+          "weapon",
+          "contact",
+          "sharp",
+          "adaptable",
+          "grapple",
+          "priority-30"
         ],
         "range": {
           "target": "creature",
-          "unit": "m"
+          "unit": "m",
+          "distance": 1
         },
         "cost": {
           "activation": "complex"
@@ -54,11 +62,41 @@
           "untyped"
         ],
         "category": "physical",
-        "img": "icons/svg/explosion.svg",
-        "predicate": []
+        "img": "systems/ptr2e/img/icons/weapon_icon.webp",
+        "predicate": [],
+        "power": 30,
+        "accuracy": 95
+      },
+      {
+        "name": "Pocket Knife Thrust",
+        "slug": "pocket-knife-thrust",
+        "traits": [
+          "weapon",
+          "contact",
+          "crit-1",
+          "grapple",
+          "priority-10"
+        ],
+        "type": "attack",
+        "img": "systems/ptr2e/img/icons/weapon_icon.webp",
+        "cost": {
+          "activation": "complex"
+        },
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "types": [
+          "untyped"
+        ],
+        "category": "physical",
+        "predicate": [],
+        "power": 55,
+        "accuracy": 90
       }
     ],
-    "description": "Effect: The user may use the Attack Pocket Knife, drawing upon this item's PP Pool or the user's PP to use the Attack.",
+    "description": "<p>A pocket knife is a knife with one or more blades that fold into the handle. Pocket knives are versatile tools, and may be used for anything from whittling and woodcarving, to butchering small game, gutting and filleting small fish, aiding in the preparation of tinder and kindling for fires, boring holes in soft material, to opening an envelope, cutting twine, slicing fruits and vegetables or as a means of self-defense.</p>",
     "weaponType": "untyped",
     "weaponRange": "Creature",
     "slug": "pocket-knife",
@@ -80,10 +118,83 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
+      ],
+      "notes": ""
     }
   },
   "_id": "kvrgCQjgU2sDuLal",
-  "effects": [],
+  "effects": [
+    {
+      "name": "Pocket Knife",
+      "type": "passive",
+      "_id": "s5OhalZgBrilaWEM",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "flat-modifier",
+            "key": "{item|id}-attack-damage-flat",
+            "value": 6,
+            "predicate": [],
+            "label": "Pocket Knife",
+            "mode": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          },
+          {
+            "type": "basic",
+            "key": "pocket-knife-thrust-attack-damage-flat",
+            "value": 5,
+            "predicate": [],
+            "label": "Thrust",
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "key": "fling-pocket-knife-attack-damage-flat",
+            "value": 9,
+            "predicate": [],
+            "mode": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": false,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.347",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.3.beta",
+        "createdTime": 1757547044775,
+        "modifiedTime": 1757553354211,
+        "lastModifiedBy": "UTlFSVhgfIUeTsoW"
+      }
+    }
+  ],
   "folder": "GPebepuiQbZSuf35"
 }
