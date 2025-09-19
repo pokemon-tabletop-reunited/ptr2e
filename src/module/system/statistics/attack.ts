@@ -1,4 +1,4 @@
-import { AttackPTR2e, FlatModifierChangeSystem, SummonAttackPTR2e, Trait } from "@data";
+import { AttackPTR2e, FlatModifierChangeSystem, PTRCONSTS, SummonAttackPTR2e, Trait } from "@data";
 import { AttackStatisticRollParameters, BaseStatisticCheck, RollOptionConfig, Statistic } from "./statistic.ts";
 import { StatisticData } from "./data.ts";
 import * as R from "remeda";
@@ -162,7 +162,9 @@ class AttackCheck<TParent extends AttackStatistic = AttackStatistic> implements 
     if (this.attack.variant) {
       const original = this.attack.original as AttackPTR2e;
       if (original) {
+        const typeDomains = Object.values(PTRCONSTS.Types).map(t => `${t}-${original.type}`)
         for (const od of original.statistic?.domains ?? []) {
+          if(typeDomains.includes(od)) continue;
           extraDomains.add(od);
         }
       }
