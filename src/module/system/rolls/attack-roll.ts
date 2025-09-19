@@ -115,7 +115,7 @@ class AttackRoll extends CheckRoll {
     options: AttackRollDataPTR2e
   ): AttackRoll | null {
     const basePower = data.attack.power;
-    if (basePower === null) {
+    if (basePower == null) {
       if(data.attack.traits.has("flat")) {
         options.isFlat = true;
         return new AttackRoll("0", {}, options);
