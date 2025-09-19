@@ -20,7 +20,7 @@
         },
         "cost": {
           "activation": "simple",
-          "powerPoints": 1
+          "powerPoints": 2
         },
         "description": "<p>Effect: The target uses SPDEF in place of their SPATK when using a Special-Category Attack for 1 Activation.</p>",
         "type": "generic",
@@ -29,7 +29,10 @@
     ],
     "slug": "magic-armor-style",
     "description": "<p>Simple Action, 2 PP cost. Target self or allied creature. The affected creature uses SPDEF in place of their SPATK when using a Special-Category Attack until the end of their next full Activation.</p>",
-    "traits": [],
+    "traits": [
+      "command",
+      "style"
+    ],
     "prerequisites": [
       {
         "gte": [
@@ -94,7 +97,7 @@
         "changes": [
           {
             "type": "roll-effect",
-            "key": "magic-armor-style-generic",
+            "key": "magic-armor-generic",
             "value": "Compendium.ptr2e.core-effects.Item.biMxQM9jKDEzR0YG",
             "predicate": [],
             "chance": 100,
@@ -131,11 +134,7 @@
         "duplicateSource": null,
         "exportSource": null,
         "coreVersion": "13.346",
-        "systemId": "ptr2e",
-        "systemVersion": "1.4.1.beta",
-        "createdTime": 1754143285807,
-        "modifiedTime": 1754143322443,
-        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+        "systemId": "ptr2e"
       }
     }
   ]

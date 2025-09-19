@@ -8,7 +8,7 @@
       "previous": null
     },
     "publication": {
-      "source": "PTR2e Digimon Supplement - Digi Dex",
+      "source": "Digidex",
       "authors": [
         "Fox"
       ],
@@ -23,7 +23,8 @@
         "img": "systems/ptr2e/img/svg/dark_icon.svg",
         "traits": [
           "sonic",
-          "pierce"
+          "pierce",
+          "digimon"
         ],
         "cost": {
           "activation": "complex",
@@ -43,7 +44,8 @@
         "accuracy": 100
       }
     ],
-    "grade": "A"
+    "grade": "A",
+    "slug": "love-serenade"
   },
   "img": "systems/ptr2e/img/svg/dark_icon.svg",
   "effects": [
@@ -64,7 +66,8 @@
             "alterations": [],
             "dontMerge": false,
             "mode": 2,
-            "ignored": false
+            "ignored": false,
+            "isFixedChance": false
           },
           {
             "type": "roll-effect",
@@ -76,14 +79,17 @@
             "alterations": [],
             "dontMerge": false,
             "mode": 2,
-            "ignored": false
+            "ignored": false,
+            "isFixedChance": false
           }
         ],
         "slug": null,
         "traits": [],
         "removeAfterCombat": true,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
@@ -101,13 +107,12 @@
         "compendiumSource": null,
         "duplicateSource": null,
         "exportSource": null,
-        "coreVersion": "13.344",
+        "coreVersion": "13.346",
         "systemId": "ptr2e",
         "systemVersion": "1.3.3.beta",
         "lastModifiedBy": null
       }
     }
   ],
-  "flags": {},
   "_id": "NeKYCA7UrBbWf4rE"
 }

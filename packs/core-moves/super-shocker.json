@@ -9,7 +9,7 @@
     },
     "slug": "super-shocker",
     "publication": {
-      "source": "PTR 2e Core",
+      "source": "Digidex",
       "authors": [
         "PTR 2e Team"
       ],
@@ -22,7 +22,9 @@
         "slug": "super-shocker",
         "type": "attack",
         "img": "systems/ptr2e/img/svg/electric_icon.svg",
-        "traits": [],
+        "traits": [
+          "digimon"
+        ],
         "range": {
           "target": "creature",
           "distance": 10,
@@ -64,7 +66,8 @@
             "mode": 2,
             "priority": null,
             "ignored": false,
-            "alterations": []
+            "alterations": [],
+            "isFixedChance": false
           }
         ],
         "slug": null,
@@ -74,7 +77,9 @@
         "stacks": 0,
         "priority": 50,
         "formula": "",
-        "type": "damage"
+        "type": "damage",
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
@@ -96,15 +101,15 @@
       "_stats": {
         "compendiumSource": "Compendium.ptr2e.core-moves.Item.g0tf8DHabi55oj5C.ActiveEffect.zAd4Vr0jBWUo767Q",
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.346",
         "systemId": "ptr2e",
         "systemVersion": "1.2.1.beta",
         "createdTime": null,
         "modifiedTime": null,
-        "lastModifiedBy": null
+        "lastModifiedBy": null,
+        "exportSource": null
       }
     }
   ],
-  "flags": {},
   "_id": "9Y3TbfF5IVLcjox8"
 }

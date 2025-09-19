@@ -12,7 +12,7 @@
     },
     "slug": "moon-night-bomb",
     "publication": {
-      "source": "PTR 2e Digimon Supplement - Digi Dex",
+      "source": "Digidex",
       "authors": [
         "PTR 2e Team",
         "Gwen"
@@ -25,7 +25,9 @@
         "slug": "moon-night-bomb",
         "name": "Moon Night Bomb",
         "type": "attack",
-        "traits": [],
+        "traits": [
+          "digimon"
+        ],
         "range": {
           "target": "creature",
           "distance": 10,
@@ -49,70 +51,7 @@
     "grade": "C"
   },
   "img": "systems/ptr2e/img/svg/water_icon.svg",
-  "effects": [
-    {
-      "name": "Water Pulse",
-      "type": "passive",
-      "_id": "sBhE6HlghpjGaV1q",
-      "img": "systems/ptr2e/img/icons/effect_icon.webp",
-      "system": {
-        "changes": [
-          {
-            "type": "roll-effect",
-            "key": "water-pulse-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.confusedconditem",
-            "predicate": [],
-            "chance": 20,
-            "affects": "target",
-            "mode": 2,
-            "priority": null,
-            "ignored": false,
-            "alterations": []
-          }
-        ],
-        "slug": null,
-        "traits": [],
-        "removeAfterCombat": true,
-        "removeOnRecall": false,
-        "stacks": 0
-      },
-      "disabled": false,
-      "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
-      },
-      "description": "",
-      "origin": null,
-      "tint": "#ffffff",
-      "transfer": true,
-      "statuses": [],
-      "sort": 0,
-      "flags": {},
-      "_stats": {
-        "compendiumSource": null,
-        "duplicateSource": null,
-        "coreVersion": "12.331",
-        "systemId": "ptr2e",
-        "systemVersion": "1.1.0.beta",
-        "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
-      }
-    }
-  ],
+  "effects": [],
   "folder": "BImk1fcMbR5akA4z",
-  "flags": {
-    "exportSource": {
-      "world": "ptr-test",
-      "system": "ptr2e",
-      "coreVersion": "12.331",
-      "systemVersion": "1.1.0.beta"
-    }
-  },
   "_id": "S9zpXGy1Y0n6IETl"
 }
