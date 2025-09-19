@@ -1,0 +1,106 @@
+{
+  "folder": "BImk1fcMbR5akA4z",
+  "name": "Dark Terra Force",
+  "type": "move",
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "publication": {
+      "source": "Digidex",
+      "authors": [
+        "Fox"
+      ],
+      "notes": ""
+    },
+    "traits": [],
+    "actions": [
+      {
+        "name": "Dark Terra Force",
+        "slug": "dark-terra-force",
+        "type": "attack",
+        "img": "systems/ptr2e/img/svg/dark_icon.svg",
+        "traits": [
+          "digimon",
+          "explode",
+          "blast-4"
+        ],
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 11
+        },
+        "types": [
+          "dark"
+        ],
+        "category": "physical",
+        "predicate": [],
+        "description": "<p>On resolution, the user has a 30% chance to gain @UUID[Compendium.ptr2e.core-effects.DYJyYbH3EVwM4P90]{+2 Defense Stages for 5 activations}.</p>",
+        "range": {
+          "target": "creature",
+          "distance": 10,
+          "unit": "m"
+        },
+        "power": 120,
+        "accuracy": 100
+      }
+    ],
+    "grade": "S"
+  },
+  "img": "systems/ptr2e/img/svg/dark_icon.svg",
+  "effects": [
+    {
+      "name": "Dark Terra Force",
+      "type": "passive",
+      "_id": "Vxv6bNPTHCs25xmV",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "dark-terra-force-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.DYJyYbH3EVwM4P90",
+            "predicate": [],
+            "chance": 30,
+            "isFixedChance": false,
+            "affects": "self",
+            "alterations": [],
+            "dontMerge": false,
+            "mode": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.347",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.2.beta",
+        "lastModifiedBy": null
+      }
+    }
+  ],
+  "flags": {},
+  "_id": "umkDeJkaVHweJssZ"
+}

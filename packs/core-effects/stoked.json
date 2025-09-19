@@ -7,7 +7,7 @@
       "fire",
       "pseudo-affliction"
     ],
-    "description": "<p>While afflicted with Stoked, the creature's next damaging @Trait[Fire] Attack has +100% Power.</p>",
+    "description": "<p>While afflicted with Stoked, the creature's next damaging @Trait[fire] Attack has +100% Power.</p>",
     "slug": "stoked",
     "publication": {
       "source": "",
@@ -27,7 +27,8 @@
       "duration": {
         "turns": 1,
         "startTime": null,
-        "combat": null
+        "combat": null,
+        "startTurn": null
       },
       "system": {
         "changes": [
@@ -55,18 +56,16 @@
         "formula": "",
         "type": "damage"
       },
-      "description": "While afflicted with Stoked, the creature's next damaging @Trait[fire] Attack has +100% Power.",
-      "statuses": [
-        "stoked"
-      ],
+      "description": "<p>While afflicted with Stoked, the creature's next damaging @Trait[fire] Attack has +100% Power.</p>",
+      "statuses": [],
       "_id": "stokedcondition0",
       "_stats": {
         "coreVersion": "13.346",
         "systemId": null,
         "systemVersion": null,
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null,
+        "modifiedTime": 1754225613568,
+        "lastModifiedBy": "dCIq77b7AO2frs8Z",
         "compendiumSource": null,
         "duplicateSource": null,
         "exportSource": null
@@ -79,23 +78,5 @@
       "flags": {}
     }
   ],
-  "_id": "stokedcondititem",
-  "flags": {
-    "core": {}
-  },
-  "_stats": {
-    "coreVersion": "13.346",
-    "systemId": "ptr2e",
-    "systemVersion": "1.3.8.beta",
-    "createdTime": null,
-    "modifiedTime": 1753615320749,
-    "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
-    "compendiumSource": "Compendium.ptr2e.core-effects.Item.stokedcondititem",
-    "duplicateSource": null,
-    "exportSource": null
-  },
-  "sort": 0,
-  "ownership": {
-    "default": 0
-  }
+  "_id": "stokedcondititem"
 }

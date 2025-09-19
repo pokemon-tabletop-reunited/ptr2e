@@ -28,7 +28,7 @@
       "wavesense-15",
       "gilled",
       "fully-evolved",
-      "jump-1"
+      "jump-3"
     ],
     "abilities": {
       "starting": [
@@ -561,6 +561,10 @@
               "operand": "and"
             }
           ],
+          "perk": {
+            "x": 26,
+            "y": 26
+          },
           "evolutions": [
             {
               "name": "kingdra",
@@ -578,29 +582,14 @@
                   "operand": "or"
                 }
               ],
-              "details": {
-                "gender": null,
-                "item": null,
-                "level": null,
-                "knownMove": null
-              },
-              "evolutions": [],
               "perk": {
                 "x": 26,
                 "y": 26
-              }
+              },
+              "details": null
             }
           ],
-          "details": {
-            "gender": null,
-            "item": null,
-            "level": null,
-            "knownMove": null
-          },
-          "perk": {
-            "x": 26,
-            "y": 26
-          }
+          "details": null
         }
       ],
       "uuid": "Compendium.ptr2e.core-species.Item.VmZG4PJCPFtsD0Ke",
@@ -628,5 +617,225 @@
     }
   },
   "_id": "mwSqbGDLIDMnutkE",
-  "effects": []
+  "effects": [
+    {
+      "name": "Mega Kingdra",
+      "type": "form",
+      "_id": "HzAGdLmI158l7Cmz",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-option",
+            "key": "manual-forme-toggle",
+            "value": "forme:mega-kingdra:active",
+            "domain": "all",
+            "toggleable": true,
+            "label": "Toggle: Mega Kingdra Forme",
+            "predicate": [],
+            "alwaysActive": false,
+            "count": false,
+            "mode": 2,
+            "ignored": false,
+            "suboptions": [],
+            "state": false
+          },
+          {
+            "type": "grant-item",
+            "predicate": [
+              "forme:mega-kingdra:active"
+            ],
+            "key": "",
+            "value": "Compendium.ptr2e.core-abilities.Item.KAxw2xAJEVEc3Xy9",
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "system.free",
+                "value": "true"
+              }
+            ],
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            },
+            "mode": 2,
+            "ignored": false,
+            "reevaluateOnUpdate": false,
+            "inMemoryOnly": false,
+            "allowDuplicate": true,
+            "track": false,
+            "replaceSelf": false
+          },
+          {
+            "type": "stats-alteration",
+            "predicate": [
+              "forme:mega-kingdra:active"
+            ],
+            "key": "",
+            "value": 0,
+            "hp": null,
+            "atk": -5,
+            "def": 15,
+            "spa": 30,
+            "spd": 35,
+            "spe": 25,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "add-trait",
+            "predicate": [
+              "forme:mega-kingdra:active"
+            ],
+            "key": "",
+            "value": "stormcaller",
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-kingdra:active"
+            ],
+            "key": "system.skills.acrobatics.value",
+            "value": 15,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-kingdra:active"
+            ],
+            "key": "system.skills.dragon.value",
+            "value": 15,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-kingdra:active"
+            ],
+            "key": "system.skills.meteorology.value",
+            "value": 30,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-kingdra:active"
+            ],
+            "key": "system.skills.intimidate.value",
+            "value": 15,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-kingdra:active"
+            ],
+            "key": "system.skills.leadership.value",
+            "value": 5,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-kingdra:active"
+            ],
+            "key": "system.skills.natural-world.value",
+            "value": 20,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-kingdra:active"
+            ],
+            "key": "system.skills.navigate.value",
+            "value": 15,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-kingdra:active"
+            ],
+            "key": "system.skills.swim.value",
+            "value": 20,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-kingdra:active"
+            ],
+            "key": "system.movement.swim.value",
+            "value": 4,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "remove-trait",
+            "predicate": [
+              "forme:mega-kingdra:active"
+            ],
+            "key": "",
+            "value": "jump 3",
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "add-trait",
+            "predicate": [
+              "forme:mega-kingdra:active"
+            ],
+            "key": "",
+            "value": "jump 5",
+            "mode": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0,
+        "trigger": "manual",
+        "conditions": []
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.346",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.1.beta",
+        "createdTime": 1754150192416,
+        "modifiedTime": 1754152109863,
+        "lastModifiedBy": "6zxE5EIsM9axXjpP"
+      }
+    }
+  ]
 }

@@ -38,9 +38,6 @@
       }
     ],
     "autoUnlock": [],
-    "originSlug": null,
-    "variant": null,
-    "mode": null,
     "global": true,
     "webs": [],
     "design": {
@@ -56,5 +53,62 @@
       "notes": ""
     }
   },
-  "effects": []
+  "effects": [
+    {
+      "name": "Out Of Options",
+      "type": "passive",
+      "_id": "mJCsLmVEMZClDEgD",
+      "img": "systems/ptr2e/img/perk-icons/Taskmaster.svg",
+      "system": {
+        "changes": [
+          {
+            "type": "flat-modifier",
+            "key": "struggle-attack-power-flat",
+            "value": 20,
+            "predicate": [
+              {
+                "lte": [
+                  "{actor|system.powerPoints.percent}",
+                  10
+                ]
+              }
+            ],
+            "mode": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": false,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "<p>Effect: When the user has 10% or less of their PP remaining, their Struggle Attacks gain +20 Power.</p>",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.346",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.1.beta",
+        "createdTime": 1754299744190,
+        "modifiedTime": 1754299990729,
+        "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
+      }
+    }
+  ]
 }

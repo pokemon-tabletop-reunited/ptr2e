@@ -54,10 +54,7 @@
         "PTR 2e Team"
       ],
       "notes": ""
-    },
-    "originSlug": null,
-    "variant": null,
-    "mode": null
+    }
   },
   "effects": [
     {
@@ -67,19 +64,6 @@
       "img": "systems/ptr2e/img/icons/effect_icon.webp",
       "system": {
         "changes": [
-          {
-            "type": "roll-effect",
-            "key": "rage-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.enragedcondiitem",
-            "predicate": [],
-            "chance": 100,
-            "affects": "self",
-            "mode": 2,
-            "priority": null,
-            "ignored": false,
-            "alterations": [],
-            "dontMerge": false
-          },
           {
             "type": "grant-item",
             "key": "",
@@ -92,25 +76,41 @@
                 "value": "true"
               }
             ],
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            },
             "mode": 2,
-            "priority": null,
             "ignored": false,
             "reevaluateOnUpdate": false,
             "inMemoryOnly": false,
             "allowDuplicate": true,
             "track": false,
-            "replaceSelf": false,
-            "onDeleteActions": {
-              "grantee": "detach",
-              "granter": "cascade"
-            }
+            "replaceSelf": false
+          },
+          {
+            "type": "effect-alteration",
+            "key": "enraged-received",
+            "alterations": [
+              {
+                "mode": 2,
+                "property": "effects.0.duration.turns",
+                "value": 2
+              }
+            ],
+            "value": 0,
+            "mode": 2,
+            "predicate": [],
+            "ignored": false
           }
         ],
         "slug": null,
         "traits": [],
         "removeAfterCombat": true,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
@@ -130,13 +130,13 @@
       "sort": 0,
       "flags": {},
       "_stats": {
-        "compendiumSource": null,
+        "compendiumSource": "Compendium.ptr2e.core-perks.Item.ZPI6ynhdFdYyxJUx.ActiveEffect.Mul9Bgd2zc3DTvj8",
         "duplicateSource": null,
-        "coreVersion": "13.342",
+        "coreVersion": "13.347",
         "systemId": "ptr2e",
-        "systemVersion": "0.10.0-alpha.5.1.5",
+        "systemVersion": "1.4.2.beta",
         "createdTime": 1733496068419,
-        "modifiedTime": 1737391150981,
+        "modifiedTime": 1755163064898,
         "lastModifiedBy": "mK35yvCqCgiTUvKf",
         "exportSource": null
       }

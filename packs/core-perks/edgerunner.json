@@ -7,7 +7,7 @@
   "system": {
     "actions": [],
     "slug": "edgerunner",
-    "description": "<p>Your non-struggle moves gain a 1% Power increase per 4% of your Max PP that has been spent prior to the declaration of the move.</p>",
+    "description": "<p>For each 4% of Max PP you are missing, your non-@UUID[Compendium.ptr2e.core-moves.struggleattaitem]{Struggle} Attacks gain 1% Power.</p>",
     "traits": [],
     "prerequisites": [],
     "cost": 2,
@@ -17,22 +17,19 @@
     },
     "nodes": [
       {
+        "x": 182,
+        "y": 40,
+        "hidden": false,
+        "type": "normal",
         "connected": [
           "out-of-options"
         ],
         "config": {
-          "alpha": null,
-          "backgroundColor": "#000000",
-          "borderColor": null,
-          "borderWidth": null,
           "texture": "systems/ptr2e/img/perk-icons/Aura.svg",
-          "tint": "#ff0000",
-          "scale": null
+          "backgroundColor": null,
+          "borderColor": null,
+          "tint": null
         },
-        "hidden": false,
-        "type": "normal",
-        "x": 182,
-        "y": 40,
         "tier": null
       }
     ],
@@ -50,10 +47,64 @@
         "PTR 2e Team"
       ],
       "notes": ""
-    },
-    "originSlug": null,
-    "variant": null,
-    "mode": null
+    }
   },
-  "effects": []
+  "effects": [
+    {
+      "name": "Edgerunner",
+      "type": "passive",
+      "_id": "His0ifeBGm1t2IbQ",
+      "img": "systems/ptr2e/img/perk-icons/Aura.svg",
+      "system": {
+        "changes": [
+          {
+            "type": "percentile-modifier",
+            "key": "attack-power",
+            "value": "floor((100-@actor.system.powerPoints.percent)/4)",
+            "predicate": [
+              {
+                "nor": [
+                  "attack:slug:struggle",
+                  "attack:original:struggle"
+                ]
+              }
+            ],
+            "mode": 2,
+            "ignored": false,
+            "hideIfDisabled": true
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": false,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "<p>For each 4% of Max PP you are missing, your non-@UUID[Compendium.ptr2e.core-moves.struggleattaitem]{Struggle} Attacks gain 1% Power.</p>",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.346",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.1.beta",
+        "createdTime": 1754300144759,
+        "modifiedTime": 1754301768971,
+        "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
+      }
+    }
+  ]
 }
