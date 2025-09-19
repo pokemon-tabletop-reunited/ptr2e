@@ -2467,6 +2467,8 @@ class ActorPTR2e<
     await this.update({
       "system.health.value": health,
       "system.powerPoints.value": this.system.powerPoints?.max ?? 0,
+      "system.shield.value": 0,
+      "system.shield.max": 0
     });
 
     // remove effects
