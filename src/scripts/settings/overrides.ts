@@ -135,7 +135,7 @@ export function monkeyPatchSettings() {
     for(const [ id, category ] of Object.entries(categories)) {
       if(!id.startsWith("systemMenu")) continue; // only system menus
       if(category.entries?.length === 1 && !isSettingsMenu(category.entries[0].type)) {
-        categories["system"].entries.unshift(...category.entries);
+        if(categories["system"]) categories["system"].entries.unshift(...category.entries);
         delete categories[id]; // remove empty system menu categories
       }
       else {
