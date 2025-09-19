@@ -18,17 +18,14 @@
         "type": "generic",
         "range": {
           "target": "self",
-          "unit": "m",
-          "distance": 0
+          "unit": "m"
         },
         "cost": {
           "activation": "free",
           "powerPoints": 2,
           "trigger": "The user takes damage and crosses the threshold to meet the [Desperation 1/3] Condition."
         },
-        "img": "systems/ptr2e/img/perk-icons/Taskmaster.svg",
-        "variant": null,
-        "ephemeralVariant": false
+        "img": "systems/ptr2e/img/perk-icons/Taskmaster.svg"
       }
     ],
     "description": "<p>Trigger: The user takes damage and crosses the threshold to meet the [Desperation 1/3] Condition.</p><p>Effect: The user gains @Tick[4 shield].<br><br></p>",
@@ -82,10 +79,71 @@
         "PTR 2e Team"
       ],
       "notes": ""
-    },
-    "originSlug": null,
-    "variant": null,
-    "mode": null
+    }
   },
-  "effects": []
+  "effects": [
+    {
+      "name": "I Get Knocked Down",
+      "type": "passive",
+      "_id": "FzMz9vm15bBnQSj0",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "i-get-knocked-down-generic",
+            "value": "Compendium.ptr2e.core-effects.Item.k1FukpHKnZGqjSNc",
+            "predicate": [],
+            "chance": 100,
+            "isFixedChance": false,
+            "affects": "self",
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "system.changes.0.value",
+                "value": 4
+              }
+            ],
+            "dontMerge": false,
+            "mode": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.348",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.3.beta",
+        "createdTime": 1757808404414,
+        "modifiedTime": 1757808536931,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+      }
+    }
+  ]
 }
