@@ -387,6 +387,22 @@ class CompendiumPack {
         })(docSource.system as {
           moves: Record<string, {name: string, uuid: string, gen?: string, level?: number}[]>;
         });
+
+        // Check if species has <510 stats, if so make sure that the underdog trait is added, and otherwise remove said trait.
+        const stats = docSource.system as { stats: Record<string, number | null>, traits: string[] };
+        const totalStats = Object.values(stats.stats ?? {}).filter(s => s !== null).reduce((a, b) => a + (b ?? 0), 0);
+        if(totalStats === 0) {
+          throw PackError(`Species '${docSource.name}' has no stats defined`);
+        }
+        if(!stats.traits || !Array.isArray(stats.traits)) {
+          stats.traits = [];
+        }
+        const hasUnderdog = stats.traits.includes("underdog");
+        if(totalStats < 510 && !hasUnderdog) {
+          stats.traits.push("underdog");
+        } else if(totalStats >= 510 && hasUnderdog) {
+          stats.traits = stats.traits.filter(t => t !== "underdog");
+        }
       }
     }
 
