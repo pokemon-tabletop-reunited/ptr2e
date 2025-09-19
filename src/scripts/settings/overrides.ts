@@ -9,8 +9,8 @@ export function monkeyPatchSettings() {
   const core = foundry.applications.settings.SettingsConfig;
   core.prototype._sortCategories = function(a: { id: string, label: string }, b: { id, string, label: string }) {
     const categoryOrder = { core: 0, system: 1, systemMenu: 2 };
-    const indexOfA = categoryOrder[a.id] ?? 3;
-    const indexOfB = categoryOrder[b.id] ?? 3;
+    const indexOfA = categoryOrder[a.id.startsWith("systemMenu") ? "systemMenu" : a.id] ?? 3;
+    const indexOfB = categoryOrder[b.id.startsWith("systemMenu") ? "systemMenu" : b.id] ?? 3;
     return (indexOfA - indexOfB) || a.label.localeCompare(b.label, game.i18n.lang);
   }
 
