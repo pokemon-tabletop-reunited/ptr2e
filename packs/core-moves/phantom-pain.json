@@ -2,16 +2,18 @@
   "name": "Phantom Pain",
   "type": "move",
   "_id": "qziSLv5nzIEo0OwN",
-  "img": "systems/ptr2e/img/svg/ghost_icon.svg",
+  "img": "systems/ptr2e/img/svg/shadow_icon.svg",
   "system": {
-    "slug": "phantom-pain",
     "actions": [
       {
         "name": "Phantom Pain",
         "slug": "phantom-pain",
         "type": "attack",
-        "img": "icons/svg/explosion.svg",
-        "traits": [],
+        "img": "systems/ptr2e/img/svg/shadow_icon.svg",
+        "traits": [
+          "digimon",
+          "flat"
+        ],
         "range": {
           "target": "creature",
           "distance": 10,
@@ -19,84 +21,31 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 2
+          "powerPoints": 10
         },
         "types": [
-          "ghost"
+          "shadow"
         ],
         "category": "special",
         "power": 50,
         "accuracy": 100,
-        "description": "<p>Effect: On hit, the target has a 30% chance of gaining @Affliction[splinter] 5.</p>",
+        "description": "<p>This attack deals flat damage equal to UserLevel x 3.<br><br>Effect: This attack inflicts @Affliction[wracked 5].</p>",
         "predicate": []
       }
     ],
-    "grade": "D",
+    "grade": "S",
     "traits": [],
     "_migration": {
-      "version": null,
+      "version": 0.111,
       "previous": null
     },
     "publication": {
-      "source": "PTR 2e Core",
+      "source": "Digidex",
       "authors": [
-        "PTR 2e Team"
-      ]
+        "Fox"
+      ],
+      "notes": ""
     }
   },
-  "effects": [
-    {
-      "name": "Phantom Pain",
-      "type": "passive",
-      "_id": "fTaY7oGnGifd0cKC",
-      "img": "systems/ptr2e/img/icons/effect_icon.webp",
-      "system": {
-        "changes": [
-          {
-            "type": "roll-effect",
-            "key": "phantom-pain-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.splinterconditem",
-            "predicate": [],
-            "chance": 30,
-            "affects": "target",
-            "mode": 2,
-            "priority": null,
-            "ignored": false
-          }
-        ],
-        "slug": null,
-        "traits": [],
-        "removeAfterCombat": true,
-        "removeOnRecall": false,
-        "stacks": 0
-      },
-      "disabled": false,
-      "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
-      },
-      "description": "",
-      "origin": null,
-      "tint": "#ffffff",
-      "transfer": true,
-      "statuses": [],
-      "sort": 0,
-      "flags": {},
-      "_stats": {
-        "compendiumSource": null,
-        "duplicateSource": null,
-        "coreVersion": "12.331",
-        "systemId": "ptr2e",
-        "systemVersion": "0.10.0-alpha.5.1.5",
-        "createdTime": 1737314384831,
-        "modifiedTime": 1737314409023,
-        "lastModifiedBy": "mK35yvCqCgiTUvKf"
-      }
-    }
-  ]
+  "effects": []
 }
