@@ -132,7 +132,9 @@
             "type": "grant-item",
             "key": "",
             "value": "Compendium.ptr2e.core-abilities.Item.SaEKwKaz49q3qV4M",
-            "predicate": [],
+            "predicate": [
+              "item:ability:brazen-ashes:active"
+            ],
             "alterations": [
               {
                 "mode": 5,
@@ -144,11 +146,11 @@
               "grantee": "detach",
               "granter": "cascade"
             },
+            "allowDuplicate": false,
+            "reevaluateOnUpdate": true,
             "mode": 2,
             "ignored": false,
-            "reevaluateOnUpdate": false,
             "inMemoryOnly": false,
-            "allowDuplicate": true,
             "track": false,
             "replaceSelf": false
           },
@@ -164,7 +166,9 @@
             "type": "grant-item",
             "key": "",
             "value": "Compendium.ptr2e.core-moves.Item.FMxkce89JzTELo3Z",
-            "predicate": [],
+            "predicate": [
+              "item:ability:brazen-ashes:active"
+            ],
             "alterations": [
               {
                 "mode": 5,
@@ -176,11 +180,11 @@
               "grantee": "detach",
               "granter": "cascade"
             },
+            "allowDuplicate": false,
+            "reevaluateOnUpdate": true,
             "mode": 2,
             "ignored": false,
-            "reevaluateOnUpdate": false,
             "inMemoryOnly": false,
-            "allowDuplicate": true,
             "track": false,
             "replaceSelf": false
           }
@@ -204,13 +208,15 @@
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "flags": {},
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "exportSource": null,
-        "coreVersion": "13.346",
-        "systemId": "ptr2e"
+        "exportSource": null
       }
     }
   ]

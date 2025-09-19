@@ -18,7 +18,12 @@
       "type": "steel",
       "power": 50,
       "accuracy": 100,
-      "hide": false
+      "hide": false,
+      "range": {
+        "target": "creature",
+        "distance": 10,
+        "unit": "m"
+      }
     },
     "rarity": "rare",
     "traits": [
@@ -26,11 +31,14 @@
       "fling",
       "firearm",
       "autoload",
-      "two-handed",
       "shouldered",
       "steel",
       "reload-1",
-      "charge-pool-12"
+      "charge-pool-12",
+      "2-handed",
+      "conventional",
+      "modern",
+      "sci-fi"
     ],
     "actions": [
       {
@@ -42,7 +50,8 @@
         "accuracy": 95,
         "free": true,
         "traits": [
-          "missile"
+          "missile",
+          "firearm"
         ],
         "name": "Marksman Rifle",
         "slug": "marksman-rifle",
@@ -64,30 +73,57 @@
         "types": [
           "untyped"
         ],
-        "category": "special",
-        "power": 125,
-        "accuracy": 100,
+        "category": "status",
         "free": true,
         "traits": [
-          "missile",
-          "crit-2"
+          "defensive",
+          "set-up",
+          "flinch-20"
         ],
-        "name": "Marksman Rifle (Pinpoint Shot)",
-        "slug": "marksman-rifle-pinpoint-shot",
-        "description": "<p>Effect: Set-Up: The user gains +2 ACC Stages for 2 Activations, and ends their Activation.</p><p>Resolution: On their next activation, they attack with and resolve this Attack. This attack calculates damage against the target's DEF, rather than SPDEF.</p>",
+        "name": "Marksman Rifle (Set-Up)",
+        "slug": "marksman-rifle-set-up",
+        "description": "<p>Effect: The user gains +2 ACC Stages for 2 Activations.</p>",
         "img": "systems/ptr2e/img/svg/untyped_icon.svg",
         "type": "attack",
+        "range": {
+          "target": "self",
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex"
+        },
+        "variant": "marksman-rifle",
+        "predicate": []
+      },
+      {
+        "name": "Marksman Rifle (Resolution)",
+        "slug": "marksman-rifle-resolution",
+        "description": "<p>Trigger: The user used Marksman Rifle (Set Up) on their previous Activation.</p><p>Effect: This attack calculates damage against the target's DEF, rather than SPDEF.</p>",
+        "traits": [
+          "weapon",
+          "missile",
+          "crit-2",
+          "firearm"
+        ],
+        "type": "attack",
+        "img": "systems/ptr2e/img/svg/untyped_icon.svg",
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 1,
+          "trigger": "The user used Marksman Rifle (Set Up) on their previous Activation."
+        },
         "range": {
           "target": "creature",
           "distance": 60,
           "unit": "m"
         },
-        "cost": {
-          "activation": "complex",
-          "powerPoints": 1
-        },
-        "variant": "marksman-rifle",
-        "predicate": []
+        "types": [
+          "untyped"
+        ],
+        "category": "physical",
+        "predicate": [],
+        "power": 125,
+        "accuracy": 100
       }
     ],
     "weaponType": "untyped",
@@ -128,20 +164,41 @@
           {
             "type": "flat-modifier",
             "key": "{item|id}-attack-damage-flat",
-            "value": 32,
+            "value": 33,
             "predicate": [],
             "label": "Marksman Rifle",
-            "mode": 2,
             "priority": null,
+            "mode": 2,
             "ignored": false,
             "hideIfDisabled": false
+          },
+          {
+            "type": "roll-effect",
+            "key": "marksman-rifle-set-up",
+            "value": "Compendium.ptr2e.core-effects.Item.Smwu5LWbBYgjUmPc",
+            "predicate": [],
+            "chance": 100,
+            "isFixedChance": false,
+            "affects": "self",
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "duration.turns",
+                "value": 2
+              }
+            ],
+            "dontMerge": false,
+            "mode": 2,
+            "ignored": false
           }
         ],
         "slug": null,
         "traits": [],
-        "removeAfterCombat": true,
+        "removeAfterCombat": false,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
@@ -159,16 +216,21 @@
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "flags": {},
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
       "_stats": {
         "compendiumSource": "Compendium.ptr2e.core-gear.Item.Ba3EyqpUePgGrfQk.ActiveEffect.uOxpw5kHcRtpv4pa",
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.347",
         "systemId": "ptr2e",
-        "systemVersion": "1.1.3.beta",
+        "systemVersion": "1.4.3.beta",
         "createdTime": 1743904713324,
-        "modifiedTime": 1743906501513,
-        "lastModifiedBy": "UTlFSVhgfIUeTsoW"
+        "modifiedTime": 1757632647609,
+        "lastModifiedBy": "UTlFSVhgfIUeTsoW",
+        "exportSource": null
       }
     }
   ],

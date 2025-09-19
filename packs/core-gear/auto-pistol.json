@@ -16,9 +16,14 @@
     "grade": "C",
     "fling": {
       "type": "steel",
-      "power": 40,
-      "accuracy": 100,
-      "hide": false
+      "power": 55,
+      "accuracy": 90,
+      "hide": false,
+      "range": {
+        "target": "creature",
+        "distance": 3,
+        "unit": "m"
+      }
     },
     "rarity": "common",
     "traits": [
@@ -28,7 +33,10 @@
       "autoload",
       "steel",
       "reload-1",
-      "charge-pool-15"
+      "charge-pool-15",
+      "conventional",
+      "modern",
+      "sci-fi"
     ],
     "actions": [
       {
@@ -40,7 +48,8 @@
         "accuracy": 95,
         "free": true,
         "traits": [
-          "missile"
+          "missile",
+          "firearm"
         ],
         "name": "Auto Pistol",
         "slug": "auto-pistol",
@@ -64,10 +73,11 @@
         ],
         "category": "special",
         "power": 60,
-        "accuracy": 95,
+        "accuracy": 90,
         "free": true,
         "traits": [
-          "missile"
+          "missile",
+          "firearm"
         ],
         "name": "Auto Pistol (Double Tap)",
         "slug": "auto-pistol-double-tap",
@@ -96,8 +106,9 @@
         "free": true,
         "traits": [
           "missile",
-          "priority-1",
-          "dash"
+          "dash",
+          "firearm",
+          "priority-10"
         ],
         "name": "Auto Pistol (Hip Fire)",
         "slug": "auto-pistol-hip-fire",
@@ -159,17 +170,29 @@
             "value": 32,
             "predicate": [],
             "label": "Auto Pistol",
-            "mode": 2,
             "priority": null,
+            "mode": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          },
+          {
+            "type": "flat-modifier",
+            "key": "auto-pistol-double-tap-attack-damage-flat",
+            "value": 32,
+            "predicate": [],
+            "label": "Double Tap",
+            "mode": 2,
             "ignored": false,
             "hideIfDisabled": false
           }
         ],
         "slug": null,
         "traits": [],
-        "removeAfterCombat": true,
+        "removeAfterCombat": false,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
@@ -187,16 +210,21 @@
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "flags": {},
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
       "_stats": {
         "compendiumSource": "Compendium.ptr2e.core-gear.Item.Ba3EyqpUePgGrfQk.ActiveEffect.uOxpw5kHcRtpv4pa",
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.347",
         "systemId": "ptr2e",
-        "systemVersion": "1.1.3.beta",
+        "systemVersion": "1.4.3.beta",
         "createdTime": 1743877436694,
-        "modifiedTime": 1743877462142,
-        "lastModifiedBy": "UTlFSVhgfIUeTsoW"
+        "modifiedTime": 1757553567781,
+        "lastModifiedBy": "UTlFSVhgfIUeTsoW",
+        "exportSource": null
       }
     }
   ],

@@ -1,0 +1,179 @@
+{
+  "folder": "V4skAU6G3OH5fXad",
+  "name": "Husarine Plate",
+  "type": "equipment",
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "slug": "husarine-plate",
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "traits": [
+      "early-modern",
+      "medieval",
+      "fantasy"
+    ],
+    "actions": [],
+    "description": "<p>Husarine plate is an intricate, articulated set of steel armor consisting of a breastplate, backplate, arm bracers, and a helmet, oftentimes adorned with brass, gold, or other precious metals. These adornments are sometimes accompanied by a set of wooden \"wings\" or flags arranged like wings on the user's back or, in the case of primarily mounted warriors, anchored to the saddle. As an advancement of full plate armor since the proliferation of firearms, it is very protective against conventional forms of harm, and does mitigate the threat of firearms somewhat.</p>",
+    "crafting": {
+      "skill": "",
+      "spans": null,
+      "materials": []
+    },
+    "equipped": {
+      "carryType": "stowed",
+      "slot": "held",
+      "handsHeld": null
+    },
+    "fling": {
+      "type": "untyped",
+      "power": null,
+      "accuracy": 100,
+      "hide": false,
+      "range": {
+        "target": "creature",
+        "distance": 10,
+        "unit": "m"
+      }
+    },
+    "quantity": 1,
+    "rarity": "common",
+    "identification": {
+      "misidentified": null,
+      "status": "identified",
+      "unidentified": {
+        "name": "Unidentified Item",
+        "img": "systems/ptu/css/images/icons/gear_icon.png",
+        "description": "<p>Unidentified Item</p>"
+      }
+    }
+  },
+  "img": "systems/ptr2e/img/icons/equipment_icon.webp",
+  "effects": [
+    {
+      "name": "Husarine Plate",
+      "type": "affliction",
+      "_id": "YQcvqf3ThzgLjbik",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "ephemeral-modifier",
+            "key": "physical-attack-damage-flat",
+            "value": -30,
+            "predicate": [],
+            "label": "Husarine Plate (Physical)",
+            "mode": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          },
+          {
+            "type": "ephemeral-modifier",
+            "key": "special-attack-damage-percentage",
+            "value": -15,
+            "predicate": [],
+            "label": "Husarine Plate (Special)",
+            "mode": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          },
+          {
+            "type": "ephemeral-modifier",
+            "key": "sharp-trait-attack-damage-percentile",
+            "value": -25,
+            "predicate": [],
+            "label": "Husarine Plate (Missile/Sharp)",
+            "mode": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          },
+          {
+            "type": "ephemeral-modifier",
+            "key": "missile-trait-attack-damage-percentile",
+            "value": -25,
+            "predicate": [],
+            "label": "Husarine Plate (Missile/Sharp)",
+            "mode": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          },
+          {
+            "type": "ephemeral-modifier",
+            "key": "firearm-trait-attack-damage-percentile",
+            "value": -10,
+            "predicate": [],
+            "label": "Husarine Plate (Firearm)",
+            "mode": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          },
+          {
+            "type": "basic",
+            "key": "system.modifiers.effectResistance",
+            "value": 15,
+            "predicate": [],
+            "label": "Husarine Plate (RES)",
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "key": "system.attributes.spe.base",
+            "value": 0.8,
+            "predicate": [],
+            "mode": 1,
+            "label": "Husarine Plate",
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0,
+        "priority": 50,
+        "formula": "",
+        "type": "damage"
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null,
+        "turns": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.347",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.3.beta",
+        "lastModifiedBy": "UTlFSVhgfIUeTsoW",
+        "modifiedTime": 1758160464663
+      }
+    }
+  ],
+  "flags": {},
+  "_id": "djcxLiDMEv2opOCQ"
+}

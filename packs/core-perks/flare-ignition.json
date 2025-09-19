@@ -44,12 +44,90 @@
         "tier": null
       }
     ],
-    "originSlug": null,
-    "variant": null,
-    "mode": null
+    "originSlug": "flare-ignition"
   },
   "img": "systems/ptr2e/img/svg/fire_icon.svg",
-  "effects": [],
-  "flags": {},
+  "effects": [
+    {
+      "name": "Flare Igintion",
+      "type": "passive",
+      "_id": "Qhvhz72efeOcfq7t",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "create-clock",
+            "key": "cyfRZpZznW2FypRQ",
+            "value": 0,
+            "predicate": [],
+            "max": 10,
+            "color": "#ff0000",
+            "private": false,
+            "label": "Flame Ignition",
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "key": "system.modifiers.atkMultiplier",
+            "value": "-0.25+@actor.clocks.cyfRZpZznW2FypRQ*0.1",
+            "predicate": [],
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "key": "system.modifiers.speMultiplier",
+            "value": "-0.25+@actor.clocks.cyfRZpZznW2FypRQ*0.1",
+            "predicate": [],
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "key": "system.modifiers.spaMultiplier",
+            "value": "-0.25+@actor.clocks.cyfRZpZznW2FypRQ*0.1",
+            "predicate": [],
+            "mode": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": false,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ff0000",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": "never"
+        }
+      },
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.347",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.3.beta",
+        "createdTime": 1755585157565,
+        "modifiedTime": 1755587524412,
+        "lastModifiedBy": "oC3xwsMDu7M30pzG"
+      }
+    }
+  ],
   "_id": "d5xDTqhMKlNaX4Cw"
 }

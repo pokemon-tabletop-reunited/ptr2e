@@ -18,7 +18,12 @@
       "type": "steel",
       "power": 70,
       "accuracy": 90,
-      "hide": false
+      "hide": false,
+      "range": {
+        "target": "creature",
+        "distance": 10,
+        "unit": "m"
+      }
     },
     "rarity": "rare",
     "traits": [
@@ -26,12 +31,12 @@
       "fling",
       "firearm",
       "autoload",
-      "two-handed",
       "shouldered",
       "readied",
       "steel",
       "reload-4",
-      "charge-pool-24"
+      "charge-pool-24",
+      "2-handed"
     ],
     "actions": [
       {
@@ -43,10 +48,8 @@
         "accuracy": 90,
         "free": true,
         "traits": [
-          "load-adaptive",
-          "two-handed",
           "missile",
-          "readied"
+          "firearm"
         ],
         "name": "Heavy Machinegun",
         "slug": "heavy-machinegun",
@@ -73,7 +76,8 @@
         "accuracy": 80,
         "free": true,
         "traits": [
-          "missile"
+          "missile",
+          "firearm"
         ],
         "name": "Heavy Machinegun (Burst)",
         "slug": "heavy-machinegun-burst",
@@ -102,8 +106,9 @@
         "free": true,
         "traits": [
           "missile",
-          "delay-3",
-          "8-strike"
+          "8-strike",
+          "firearm",
+          "flinch-40"
         ],
         "name": "Heavy Machinegun (Salvo)",
         "slug": "heavy-machinegun-salvo",
@@ -132,7 +137,8 @@
         "accuracy": 65,
         "free": true,
         "traits": [
-          "missile"
+          "missile",
+          "firearm"
         ],
         "name": "Heavy Machinegun (Hip Fire)",
         "slug": "heavy-machinegun-hip-fire",
@@ -193,17 +199,39 @@
             "value": 50,
             "predicate": [],
             "label": "Heavy Machinegun",
-            "mode": 2,
             "priority": null,
+            "mode": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          },
+          {
+            "type": "flat-modifier",
+            "key": "heavy-machinegun-burst-attack-damage-flat",
+            "value": 50,
+            "predicate": [],
+            "label": "Burst",
+            "mode": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          },
+          {
+            "type": "flat-modifier",
+            "key": "heavy-machinegun-hip-fire-attack-damage-flat",
+            "value": 50,
+            "predicate": [],
+            "label": "Hip Fire",
+            "mode": 2,
             "ignored": false,
             "hideIfDisabled": false
           }
         ],
         "slug": null,
         "traits": [],
-        "removeAfterCombat": true,
+        "removeAfterCombat": false,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
@@ -221,16 +249,21 @@
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "flags": {},
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
       "_stats": {
         "compendiumSource": "Compendium.ptr2e.core-gear.Item.Ba3EyqpUePgGrfQk.ActiveEffect.uOxpw5kHcRtpv4pa",
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.347",
         "systemId": "ptr2e",
-        "systemVersion": "1.1.3.beta",
+        "systemVersion": "1.4.3.beta",
         "createdTime": 1743893056846,
-        "modifiedTime": 1743893090390,
-        "lastModifiedBy": "UTlFSVhgfIUeTsoW"
+        "modifiedTime": 1757632068754,
+        "lastModifiedBy": "UTlFSVhgfIUeTsoW",
+        "exportSource": null
       }
     }
   ],
