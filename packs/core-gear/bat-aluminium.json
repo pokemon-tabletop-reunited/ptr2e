@@ -11,14 +11,19 @@
     "equipped": {
       "slot": "held",
       "carryType": "stowed",
-      "handsHeld": null
+      "handsHeld": 1
     },
-    "grade": "D",
+    "grade": "E",
     "fling": {
       "type": "steel",
-      "power": 60,
-      "accuracy": 100,
-      "hide": null
+      "power": 65,
+      "accuracy": 90,
+      "hide": false,
+      "range": {
+        "target": "creature",
+        "distance": 4,
+        "unit": "m"
+      }
     },
     "rarity": "common",
     "traits": [
@@ -26,37 +31,41 @@
       "fling",
       "blunt",
       "switch-grip",
-      "steel"
+      "steel",
+      "conventional",
+      "modern",
+      "1-handed"
     ],
     "actions": [
       {
+        "types": [
+          "untyped"
+        ],
+        "category": "physical",
+        "power": 40,
+        "accuracy": 90,
+        "free": true,
+        "traits": [
+          "adaptable",
+          "priority-15",
+          "contact"
+        ],
         "name": "Bat (Aluminium)",
         "slug": "bat-aluminium",
+        "img": "systems/ptr2e/img/svg/untyped_icon.svg",
         "type": "attack",
-        "description": "Effect: The user may use the Attack Bat (Aluminium), drawing upon this item's PP Pool or the user's PP to use the Attack.",
-        "traits": [
-          "Weapon",
-          "Fling",
-          "Blunt",
-          "Switch-Grip",
-          "Steel"
-        ],
         "range": {
           "target": "creature",
+          "distance": 1,
           "unit": "m"
         },
         "cost": {
           "activation": "complex"
         },
-        "types": [
-          "untyped"
-        ],
-        "category": "physical",
-        "img": "icons/svg/explosion.svg",
         "predicate": []
       }
     ],
-    "description": "Effect: The user may use the Attack Bat (Aluminium), drawing upon this item's PP Pool or the user's PP to use the Attack.",
+    "description": "<p>A baseball bat is a smooth wooden or metal club used in the sport of baseball to hit the ball after it is thrown by the pitcher. Bats are effective weapons because they are inexpensive compared to other weapons, and, unlike many other weapons, they can be carried without raising suspicion or violating laws, due to their primarily purpose as sports equipment.</p>",
     "weaponType": "untyped",
     "weaponRange": "Creature",
     "slug": "bat-aluminium",
@@ -78,10 +87,66 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
+      ],
+      "notes": ""
     }
   },
   "_id": "poulKoHX1ZWb4pVr",
-  "effects": [],
-  "folder": "GPebepuiQbZSuf35"
+  "effects": [
+    {
+      "name": "Bat (Aluminium)",
+      "type": "passive",
+      "_id": "XLB7w16W2S1RjHeY",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "flat-modifier",
+            "key": "{item|id}-attack-damage-flat",
+            "value": 4,
+            "predicate": [],
+            "label": "Bat (Aluminium)",
+            "mode": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": false,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
+      "_stats": {
+        "compendiumSource": "Compendium.ptr2e.core-gear.Item.ZewWbLPYdCt2qPzv.ActiveEffect.hKiDWsZdq14T4lXi",
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.347",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.3.beta",
+        "createdTime": 1757542093820,
+        "modifiedTime": 1757553419362,
+        "lastModifiedBy": "UTlFSVhgfIUeTsoW"
+      }
+    }
+  ],
+  "folder": "PhrQtZzEwKPjfmK2"
 }

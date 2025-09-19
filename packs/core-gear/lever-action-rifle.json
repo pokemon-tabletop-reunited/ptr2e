@@ -16,9 +16,14 @@
     "grade": "D",
     "fling": {
       "type": "steel",
-      "power": 50,
-      "accuracy": 95,
-      "hide": false
+      "power": 75,
+      "accuracy": 80,
+      "hide": false,
+      "range": {
+        "target": "creature",
+        "distance": 2,
+        "unit": "m"
+      }
     },
     "rarity": "uncommon",
     "traits": [
@@ -28,7 +33,10 @@
       "autoload",
       "steel",
       "charge-pool-10",
-      "reload-2"
+      "reload-2",
+      "conventional",
+      "modern",
+      "early-modern"
     ],
     "actions": [
       {
@@ -40,7 +48,8 @@
         "accuracy": 95,
         "free": true,
         "traits": [
-          "missile"
+          "missile",
+          "firearm"
         ],
         "name": "Lever-Action Rifle",
         "slug": "lever-action-rifle",
@@ -67,7 +76,8 @@
         "free": true,
         "traits": [
           "missile",
-          "3-strike"
+          "3-strike",
+          "firearm"
         ],
         "name": "Lever-Action Rifle (Snap Shot)",
         "slug": "lever-action-rifle-snap-shot",
@@ -94,7 +104,8 @@
         "accuracy": 80,
         "free": true,
         "traits": [
-          "missile"
+          "missile",
+          "firearm"
         ],
         "name": "Lever-Action Rifle (Hip Fire)",
         "slug": "lever-action-rifle-hip-fire",
@@ -165,7 +176,9 @@
         "traits": [],
         "removeAfterCombat": true,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
@@ -187,12 +200,13 @@
       "_stats": {
         "compendiumSource": "Compendium.ptr2e.core-gear.Item.Ba3EyqpUePgGrfQk.ActiveEffect.uOxpw5kHcRtpv4pa",
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.347",
         "systemId": "ptr2e",
         "systemVersion": "1.1.3.beta",
         "createdTime": 1743880813905,
         "modifiedTime": 1743883281938,
-        "lastModifiedBy": "UTlFSVhgfIUeTsoW"
+        "lastModifiedBy": "UTlFSVhgfIUeTsoW",
+        "exportSource": null
       }
     }
   ],
