@@ -4,17 +4,17 @@
   "_id": "tdv6I3YSwXkmvwWI",
   "img": "systems/ptr2e/img/svg/poison_icon.svg",
   "system": {
-    "slug": null,
+    "slug": "venomous-vex",
     "actions": [
       {
-        "name": "Venomous Vex",
+        "name": "Venomous Vex (Resolution)",
         "slug": "venomous-vex",
         "type": "attack",
-        "img": "icons/svg/explosion.svg",
+        "img": "systems/ptr2e/img/svg/poison_icon.svg",
         "traits": [
           "set-up",
           "contact",
-          "defensive"
+          "crit-1"
         ],
         "range": {
           "target": "creature",
@@ -23,24 +23,47 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 3
+          "powerPoints": 1,
+          "trigger": "The user used Venomous Vex (Set-Up) as their last Action."
         },
-        "variant": null,
         "types": [
           "poison"
         ],
         "category": "physical",
-        "power": 60,
+        "power": 90,
         "accuracy": 95,
-        "contestType": "",
-        "contestEffect": "",
-        "free": false,
-        "slot": null,
-        "description": "<p>Effect: Set-Up: The user gains @Affliction[braced] 1, and ends their Activation. If the user is affected by Smoggy or Gloomy Weather, then they Set-Up and resolve this Attack on the same Activation.</p><p>Resolution: On their next Activation, they attack with and resolves this attack. On hit, the target gains @Affliction[poison] 5.</p>"
+        "description": "<p>Trigger: The user used Venomous Vex (Set-Up) as their last Action.</p><p>Effect: On hit, the target gains @Affliction[poison 5].</p>",
+        "predicate": []
+      },
+      {
+        "name": "Venomous Vex (Set-Up)",
+        "slug": "venomous-vex-set-up",
+        "description": "<p>Effect: The user gains @Affliction[braced 2]. If Smoggy or Gloomy Weather is present, the user may use Venomous Vex (Resolution) as a Free Action upon resolving this Attack.</p>",
+        "traits": [
+          "set-up",
+          "defensive",
+          "environ",
+          "priority-20"
+        ],
+        "type": "attack",
+        "img": "systems/ptr2e/img/svg/poison_icon.svg",
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 2
+        },
+        "range": {
+          "target": "self",
+          "unit": "m"
+        },
+        "types": [
+          "poison"
+        ],
+        "category": "status",
+        "predicate": []
       }
     ],
     "container": null,
-    "grade": "C",
+    "grade": "D",
     "publication": {
       "source": "PTR 2e Core",
       "authors": [

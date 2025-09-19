@@ -1,0 +1,84 @@
+{
+  "name": "Draconic Terrain",
+  "type": "summon",
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "slug": "draconic-terrain",
+    "traits": [
+      "partial-automation"
+    ],
+    "actions": [],
+    "baseAV": 150,
+    "duration": 3
+  },
+  "img": "systems/ptr2e/img/icons/dragon_icon.png",
+  "effects": [
+    {
+      "name": "Draconic Terrain",
+      "type": "summon",
+      "_id": "cQEegrqBxRqmSqWm",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "percentile-modifier",
+            "key": "attack-power",
+            "value": 15,
+            "predicate": [
+              "trait:dragon"
+            ],
+            "label": "Dragon Damage Boost",
+            "mode": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0,
+        "priority": 50,
+        "formula": "",
+        "type": "damage",
+        "targetType": "all",
+        "targetUuid": null
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.346",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.1.beta",
+        "lastModifiedBy": null
+      }
+    }
+  ],
+  "flags": {},
+  "_id": "Cru1SkGkZY92tqXK"
+}

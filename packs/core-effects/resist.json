@@ -1,6 +1,7 @@
 {
   "name": "Resist",
   "type": "effect",
+  "_id": "resistcondititem",
   "system": {
     "_migration": {
       "version": 0.111,
@@ -8,22 +9,24 @@
     },
     "slug": "resist",
     "publication": {
-      "source": "",
-      "authors": [],
+      "source": "PTR 2e Core",
+      "authors": [
+        "StitchedReals"
+      ],
       "notes": ""
     },
-    "description": "<p>While afflicted with Resist, the Power the creature would take from Physical- and Special-attacks is decreased by 20% and the creature has -2 default EVA.</p>",
+    "description": "<p>While afflicted with Resist, the Power the creature would take from Physical- and Special-attacks is decreased by 20% and the creature has -2 default EVA. The creature additionally gains 20% RES.</p>",
     "traits": [
       "pseudo-affliction"
     ]
   },
-  "img": "systems/ptr2e/img/icons/effect_icon.webp",
+  "img": "systems/ptr2e/img/icons/consumable_icon.webp",
   "effects": [
     {
       "name": "Resist",
       "type": "affliction",
       "_id": "resistcondition0",
-      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "img": "systems/ptr2e/img/icons/consumable_icon.webp",
       "system": {
         "changes": [
           {
@@ -31,8 +34,9 @@
             "key": "attack-power-percentile",
             "value": -20,
             "predicate": [],
-            "mode": 2,
             "priority": null,
+            "label": "Resist Style",
+            "mode": 2,
             "ignored": false,
             "hideIfDisabled": false
           },
@@ -41,8 +45,16 @@
             "key": "system.battleStats.evasion.stage",
             "value": -2,
             "predicate": [],
-            "mode": 2,
             "priority": null,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "key": "system.modifiers.effectResistance",
+            "value": 20,
+            "predicate": [],
+            "mode": 2,
             "ignored": false
           }
         ],
@@ -53,7 +65,9 @@
         "stacks": 0,
         "priority": 50,
         "formula": "",
-        "type": "damage"
+        "type": "damage",
+        "removeAfterAttacking": true,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
@@ -65,26 +79,22 @@
         "startRound": null,
         "startTurn": null
       },
-      "description": "<p>While afflicted with Resist, the Power the creature would take from Physical- and Special-attacks is decreased by 20% and the creature has -2 default EVA.</p>",
+      "description": "<p>While afflicted with Resist, the Power the creature would take from Physical- and Special-attacks is decreased by 20% and the creature has -2 default EVA. The creature additionally gains 20% RES.</p>",
       "origin": null,
       "tint": "#ffffff",
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "flags": {},
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": "always"
+        }
+      },
       "_stats": {
-        "compendiumSource": null,
-        "duplicateSource": null,
-        "coreVersion": "12.331",
-        "systemId": "ptr2e",
-        "systemVersion": "1.1.2.beta",
-        "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "coreVersion": "13.347",
+        "systemId": "ptr2e"
       }
     }
   ],
-  "flags": {},
-  "folder": "V4skAU6G3OH5fXgD",
-  "_id": "resistcondititem"
+  "folder": "V4skAU6G3OH5fXgE"
 }

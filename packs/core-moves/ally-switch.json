@@ -24,16 +24,13 @@
           "priority": 2
         },
         "category": "status",
-        "power": null,
-        "accuracy": 10,
+        "accuracy": 100,
         "types": [
           "psychic"
         ],
         "description": "<p>Effect: The user switches places with the target, as per Teleport Movement. On miss, the user still takes the target’s spot, but the target’s location Scatters (as per [Fling]). If the user or target are larger than the other, the GM decides how creatures in proximity to the relocated creature are displaced.</p>",
-        "contestType": "",
-        "contestEffect": "",
-        "free": false,
-        "slot": null
+        "img": "systems/ptr2e/img/svg/psychic_icon.svg",
+        "predicate": []
       },
       {
         "slug": "ally-switch-intercept",
@@ -41,8 +38,8 @@
         "type": "attack",
         "traits": [
           "interrupt-5",
-          "delay-2",
-          "teleport"
+          "teleport",
+          "flinch-20"
         ],
         "range": {
           "target": "creature",
@@ -56,26 +53,28 @@
           "trigger": "An ally is targeted by another creature’s Attack or Action."
         },
         "category": "status",
-        "power": null,
-        "accuracy": null,
+        "accuracy": 90,
         "types": [
           "psychic"
         ],
         "description": "<p>Trigger: An ally is targeted by another creature’s Attack or Action.</p><p>Effect: The user switches places with the target, as per Teleport Movement, and becomes the target of the triggering Attack or Action. On miss, the user still takes the target’s spot, but the target’s location Scatters (as per [Fling]). If the user or target are larger than the other, the GM decides how creatures in proximity to the relocated creature are displaced.</p>",
-        "contestType": "",
-        "contestEffect": "",
         "variant": "ally-switch",
-        "free": false,
-        "slot": null
+        "img": "systems/ptr2e/img/svg/psychic_icon.svg",
+        "predicate": []
       }
     ],
-    "container": null,
     "grade": "B",
     "publication": {
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
+      ],
+      "notes": ""
+    },
+    "traits": [],
+    "_migration": {
+      "version": null,
+      "previous": null
     }
   },
   "_id": "GFHmsvlYP7sgp7em",

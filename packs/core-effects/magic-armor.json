@@ -1,0 +1,87 @@
+{
+  "name": "Magic Armor",
+  "type": "effect",
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "publication": {
+      "source": "PTR2e Core",
+      "authors": [
+        "Fox"
+      ],
+      "notes": ""
+    },
+    "description": "<p>The affected creature uses SPDEF in place of their SPATK when using a Special-Category Attack until the end of their next full Activation.</p>",
+    "traits": [
+      "pseudo-affliction"
+    ],
+    "slug": "magic-armor"
+  },
+  "img": "icons/svg/teleport.svg",
+  "effects": [
+    {
+      "name": "Magic Armor",
+      "type": "affliction",
+      "_id": "7g1vUov8IMuxkDrV",
+      "img": "icons/svg/teleport.svg",
+      "system": {
+        "changes": [
+          {
+            "type": "alter-attack",
+            "key": "special-attack",
+            "value": "spd",
+            "predicate": [],
+            "mode": 2,
+            "ignored": false,
+            "property": "offensiveStat",
+            "definition": []
+          }
+        ],
+        "slug": null,
+        "traits": [
+          "pseudo-affliction"
+        ],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": true,
+        "removeAfterAttacked": false,
+        "stacks": 0,
+        "priority": 50,
+        "formula": "",
+        "type": "damage"
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null,
+        "turns": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": "always"
+        }
+      },
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.347",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.3.beta",
+        "lastModifiedBy": "mK35yvCqCgiTUvKf",
+        "modifiedTime": 1756025632490
+      }
+    }
+  ],
+  "folder": "V4skAU6G3OH5fXgE",
+  "_id": "biMxQM9jKDEzR0YG"
+}

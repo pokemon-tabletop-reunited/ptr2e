@@ -16,7 +16,8 @@
         },
         "range": {
           "target": "self",
-          "unit": "m"
+          "unit": "m",
+          "distance": 10
         },
         "description": "<p>Effect: The user is immune to the damage and effects of [Explode] and [Missile] attacks.</p>",
         "img": "icons/svg/explosion.svg"
@@ -50,23 +51,23 @@
         "changes": [
           {
             "type": "ephemeral-modifier",
-            "key": "explode-trait-attack-damage-percentile",
-            "value": -1000,
+            "key": "explode-trait-attack-effectiveness-stage",
+            "value": -8,
             "predicate": [],
             "label": "Bulletproof",
-            "mode": 2,
             "priority": null,
+            "mode": 2,
             "ignored": false,
             "hideIfDisabled": false
           },
           {
             "type": "ephemeral-modifier",
-            "key": "missile-trait-attack-damage-percentile",
-            "value": -1000,
+            "key": "missile-trait-attack-effectiveness-stage",
+            "value": -8,
             "predicate": [],
             "label": "Bulletproof",
-            "mode": 2,
             "priority": null,
+            "mode": 2,
             "ignored": false,
             "hideIfDisabled": false
           }
@@ -75,7 +76,9 @@
         "traits": [],
         "removeAfterCombat": true,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
@@ -97,12 +100,13 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.346",
         "systemId": "ptr2e",
-        "systemVersion": "1.1.0.beta",
+        "systemVersion": "1.4.1.beta",
         "createdTime": 1732575988202,
-        "modifiedTime": 1741605282134,
-        "lastModifiedBy": "IcBpMqhFuTck9VpX"
+        "modifiedTime": 1753747010131,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf",
+        "exportSource": null
       }
     }
   ]

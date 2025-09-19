@@ -7,41 +7,60 @@
     "slug": null,
     "actions": [
       {
-        "name": "Rainstorm Deluge",
+        "name": "Rainstorm Deluge (Resolution)",
         "slug": "rainstorm-deluge",
         "type": "attack",
-        "img": "icons/svg/explosion.svg",
+        "img": "systems/ptr2e/img/svg/water_icon.svg",
         "traits": [
           "legendary",
-          "set-up",
-          "pass-4",
-          "contact",
-          "pierce"
+          "set-up"
         ],
         "range": {
-          "target": "creature",
-          "distance": 1,
+          "target": "emanation",
+          "distance": 5,
           "unit": "m"
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 7
+          "powerPoints": 4,
+          "trigger": "The user used Rainstorm Deluge (Set-Up) as their last Action."
         },
-        "variant": null,
         "types": [
           "water"
         ],
-        "category": "special",
+        "category": "physical",
         "power": 120,
         "accuracy": 100,
-        "contestType": "",
-        "contestEffect": "",
-        "free": false,
-        "slot": null,
-        "description": "<p>Effect: Set-Up: The user gains @Affliction[invisible] 1, and ends their Activation. If the weather is Rainy, the user Sets-Up and resolves this attack on the same Activation.</p><p>Resolution: On their next Activation, the user freely Moves up to two times the Movement Score of their choice and attacks with and resolves this attack.</p>"
+        "description": "<p>Trigger: The user used Rainstorm Deluge (Set-Up) as their last Action.</p><p>Effect: The user freely Moves up to the Movement Score of their choice before attacking with this Attack. On hit, all valid targets are Flinched 30%.</p>",
+        "predicate": []
+      },
+      {
+        "name": "Rainstorm Deluge (Set-Up)",
+        "slug": "rainstorm-deluge-set-up",
+        "description": "<p>Effect: The user gains @Affliction[invisible 2], and ends their Activation. If Rainy Weather is present or the user is affected by Flooded Terrain when this Attack is declared, the user may use Rainstorm Deluge (Resolution) as a Free Action upon resolving this Attack. On resolution, Rainy Weather is set for 3 Rounds.</p>",
+        "traits": [
+          "legendary",
+          "set-up",
+          "defensive",
+          "flinch-40"
+        ],
+        "type": "attack",
+        "img": "systems/ptr2e/img/svg/water_icon.svg",
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 4
+        },
+        "range": {
+          "target": "self",
+          "unit": "m"
+        },
+        "types": [
+          "water"
+        ],
+        "category": "status",
+        "predicate": []
       }
     ],
-    "container": null,
     "grade": "A",
     "publication": {
       "source": "PTR 2e Core",

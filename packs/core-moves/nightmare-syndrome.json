@@ -9,7 +9,7 @@
     },
     "slug": "nightmare-syndrome",
     "publication": {
-      "source": "PTR2e Digimon Supplement - Digi Dex",
+      "source": "Digidex",
       "authors": [
         "Nights"
       ],
@@ -22,7 +22,9 @@
         "slug": "nightmare-syndrome",
         "type": "attack",
         "img": "systems/ptr2e/img/svg/dark_icon.svg",
-        "traits": [],
+        "traits": [
+          "digimon"
+        ],
         "cost": {
           "activation": "complex",
           "powerPoints": 6
@@ -61,6 +63,41 @@
             "affects": "target",
             "alterations": [],
             "dontMerge": false,
+            "isFixedChance": false,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "roll-effect",
+            "key": "nightmare-syndrome-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.4DlXFTVooz07YcDm",
+            "predicate": [],
+            "chance": 100,
+            "isFixedChance": true,
+            "affects": "target",
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "system.changes.0.value",
+                "value": -3
+              }
+            ],
+            "dontMerge": false,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "roll-effect",
+            "key": "nightmare-syndrome-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.nightmarescoitem",
+            "predicate": [
+              "target:affliction:drowsy"
+            ],
+            "chance": 20,
+            "isFixedChance": false,
+            "affects": "target",
+            "alterations": [],
+            "dontMerge": false,
             "mode": 2,
             "ignored": false
           }
@@ -72,7 +109,9 @@
         "stacks": 0,
         "priority": 50,
         "formula": "",
-        "type": "damage"
+        "type": "damage",
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
@@ -92,13 +131,13 @@
         "compendiumSource": null,
         "duplicateSource": null,
         "exportSource": null,
-        "coreVersion": "13.345",
+        "coreVersion": "13.346",
         "systemId": "ptr2e",
-        "systemVersion": "1.3.4.beta",
-        "lastModifiedBy": null
+        "systemVersion": "1.4.2.beta",
+        "lastModifiedBy": "mK35yvCqCgiTUvKf",
+        "modifiedTime": 1754304317995
       }
     }
   ],
-  "flags": {},
   "_id": "ffL3J820dgswRM0H"
 }

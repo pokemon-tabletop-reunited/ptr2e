@@ -1,0 +1,89 @@
+{
+  "img": "icons/svg/ice-aura.svg",
+  "name": "Assault Armor",
+  "type": "effect",
+  "effects": [
+    {
+      "name": "Assault Armor",
+      "type": "affliction",
+      "_id": "wrmtunINuJYGGPP3",
+      "img": "icons/svg/ice-aura.svg",
+      "system": {
+        "changes": [
+          {
+            "type": "alter-attack",
+            "key": "physical-attack",
+            "value": "def",
+            "predicate": [],
+            "mode": 2,
+            "ignored": false,
+            "property": "offensiveStat",
+            "definition": []
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": true,
+        "removeAfterAttacked": false,
+        "stacks": 0,
+        "priority": 50,
+        "formula": "",
+        "type": "damage"
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null,
+        "turns": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": "always"
+        }
+      },
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.347",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.3.beta",
+        "lastModifiedBy": "mK35yvCqCgiTUvKf",
+        "modifiedTime": 1756025567563
+      }
+    }
+  ],
+  "system": {
+    "publication": {
+      "source": "PTR2e Core",
+      "authors": [
+        "Fox"
+      ],
+      "notes": ""
+    },
+    "description": "<p>The affected creature uses DEF in place of their ATK when using a Physical-Category Attack until the end of their next full Activation.</p>",
+    "_migration": {
+      "version": 0.111,
+      "previous": {
+        "schema": null,
+        "foundry": "13.346",
+        "system": "1.4.1.beta"
+      }
+    },
+    "traits": [
+      "pseudo-affliction"
+    ],
+    "slug": "assault-armor"
+  },
+  "folder": "V4skAU6G3OH5fXgE",
+  "_id": "v94DtQcoeLWVMpyv"
+}

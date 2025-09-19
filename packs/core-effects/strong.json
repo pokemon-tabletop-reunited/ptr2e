@@ -24,9 +24,10 @@
       "img": "icons/svg/statue.svg",
       "type": "affliction",
       "duration": {
-        "turns": 2,
+        "turns": null,
         "startTime": null,
-        "combat": null
+        "combat": null,
+        "startTurn": null
       },
       "system": {
         "changes": [
@@ -36,8 +37,8 @@
             "value": 20,
             "predicate": [],
             "label": "Strong",
-            "mode": 2,
             "priority": null,
+            "mode": 2,
             "ignored": false,
             "hideIfDisabled": false
           },
@@ -62,13 +63,13 @@
               {
                 "mode": 5,
                 "property": "system.removeAfterAttacking",
-                "value": true
+                "value": "true"
               }
             ],
-            "mode": 2,
             "predicate": [],
-            "ignored": false,
-            "isFixedChance": false
+            "isFixedChance": false,
+            "mode": 2,
+            "ignored": false
           }
         ],
         "removeOnRecall": true,
@@ -77,7 +78,7 @@
           "pseudo-affliction"
         ],
         "slug": null,
-        "removeAfterAttacking": false,
+        "removeAfterAttacking": true,
         "removeAfterAttacked": false,
         "stacks": 0,
         "priority": 50,
@@ -85,17 +86,15 @@
         "type": "damage"
       },
       "description": "While afflicted with Strong, the Power of the creature's Attacks are increased by +20% and has its Initiative delayed by 20% after its Activation.",
-      "statuses": [
-        "strong"
-      ],
+      "statuses": [],
       "_id": "strongcondition0",
       "_stats": {
-        "coreVersion": "13.346",
-        "systemId": null,
-        "systemVersion": null,
+        "coreVersion": "13.347",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.3.beta",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null,
+        "modifiedTime": 1756025738986,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf",
         "compendiumSource": null,
         "duplicateSource": null,
         "exportSource": null
@@ -105,27 +104,13 @@
       "tint": "#ffffff",
       "transfer": true,
       "sort": 0,
-      "flags": {}
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": "always"
+        }
+      }
     }
   ],
   "folder": "V4skAU6G3OH5fXgE",
-  "_id": "strongcondititem",
-  "flags": {
-    "core": {}
-  },
-  "_stats": {
-    "coreVersion": "13.346",
-    "systemId": null,
-    "systemVersion": null,
-    "createdTime": null,
-    "modifiedTime": null,
-    "lastModifiedBy": null,
-    "compendiumSource": "Compendium.ptr2e.core-effects.Item.strongcondititem",
-    "duplicateSource": null,
-    "exportSource": null
-  },
-  "sort": 0,
-  "ownership": {
-    "default": 0
-  }
+  "_id": "strongcondititem"
 }
