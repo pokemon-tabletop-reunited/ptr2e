@@ -1,0 +1,201 @@
+{
+  "folder": "V4skAU6G3OH5fXaf",
+  "name": "Spadroon",
+  "type": "weapon",
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "slug": "spadroon",
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "traits": [
+      "weapon",
+      "blade",
+      "fling",
+      "steel",
+      "1-handed",
+      "switch-grip",
+      "modern",
+      "early-modern",
+      "medieval",
+      "fantasy"
+    ],
+    "actions": [
+      {
+        "name": "Spadroon Swing",
+        "slug": "sword-swing",
+        "traits": [
+          "weapon",
+          "sharp",
+          "contact",
+          "adaptable",
+          "pass-1",
+          "priority-30"
+        ],
+        "type": "attack",
+        "img": "systems/ptr2e/img/icons/weapon_icon.webp",
+        "cost": {
+          "activation": "complex"
+        },
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "types": [
+          "untyped"
+        ],
+        "category": "physical",
+        "free": true,
+        "predicate": [],
+        "power": 40,
+        "accuracy": 100
+      },
+      {
+        "name": "Spadroon Thrust",
+        "slug": "sword-thrust",
+        "traits": [
+          "weapon",
+          "contact",
+          "adaptable",
+          "grapple",
+          "priority-10",
+          "crit-2"
+        ],
+        "type": "attack",
+        "img": "systems/ptr2e/img/icons/weapon_icon.webp",
+        "cost": {
+          "activation": "complex"
+        },
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "types": [
+          "untyped"
+        ],
+        "category": "physical",
+        "predicate": [],
+        "power": 70,
+        "accuracy": 95
+      }
+    ],
+    "description": "<p>A spadroon is a light sword with a hard, straight-edged blade, enabling both cut and thrust attacks, but with particularly effective thrusting attacks. Spadroons are primarily sidearms for military officers and non-commissioned officers duing the Early Modern period, and are ceremonial in the Modern era.</p>",
+    "crafting": {
+      "skill": "",
+      "spans": null,
+      "materials": []
+    },
+    "equipped": {
+      "carryType": "stowed",
+      "slot": "held",
+      "handsHeld": 1
+    },
+    "fling": {
+      "type": "steel",
+      "power": 80,
+      "accuracy": 90,
+      "hide": false,
+      "range": {
+        "target": "creature",
+        "distance": 3,
+        "unit": "m"
+      }
+    },
+    "quantity": 1,
+    "rarity": "common",
+    "identification": {
+      "misidentified": null,
+      "status": "identified",
+      "unidentified": {
+        "name": "Unidentified Item",
+        "img": "systems/ptu/css/images/icons/gear_icon.png",
+        "description": "<p>Unidentified Item</p>"
+      }
+    }
+  },
+  "img": "systems/ptr2e/img/icons/weapon_icon.webp",
+  "effects": [
+    {
+      "name": "Spadroon",
+      "type": "passive",
+      "_id": "jHp6eYKulB9GuVPw",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "flat-modifier",
+            "key": "{item|id}-attack-damage-flat",
+            "value": 7,
+            "predicate": [],
+            "label": "Spadroon",
+            "mode": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          },
+          {
+            "type": "flat-modifier",
+            "key": "spadroon-thrust-attack-damage-flat",
+            "value": 13,
+            "predicate": [],
+            "label": "Spadroon Thrust",
+            "mode": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          },
+          {
+            "type": "basic",
+            "key": "fling-spadroon-attack-damage-flat",
+            "value": 6,
+            "predicate": [],
+            "label": "Spadroon (Fling)",
+            "mode": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.347",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.3.beta",
+        "lastModifiedBy": null
+      }
+    }
+  ],
+  "flags": {},
+  "_id": "VeARUVttJ2hHxFn7"
+}

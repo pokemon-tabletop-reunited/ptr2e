@@ -21,6 +21,10 @@
       {
         "type": "swim",
         "value": 4
+      },
+      {
+        "type": "flight",
+        "value": 8
       }
     ],
     "traits": [
@@ -31,7 +35,8 @@
       "telekinetic-6",
       "aura-user",
       "fully-evolved",
-      "jump-4"
+      "jump-4",
+      "hover"
     ],
     "abilities": {
       "starting": [
@@ -44,10 +49,10 @@
       ],
       "basic": [
         {
-          "slug": "limber"
+          "slug": "steel-toed"
         },
         {
-          "slug": "simple"
+          "slug": "raw-might"
         }
       ],
       "advanced": [
@@ -55,15 +60,15 @@
           "slug": "monks-spirit"
         },
         {
-          "slug": "gifted-mind"
+          "slug": "limber"
         }
       ],
       "master": [
         {
-          "slug": "potent-might"
+          "slug": "channeled-strength"
         },
         {
-          "slug": "steel-toed"
+          "slug": "sage-power"
         }
       ]
     },
@@ -722,21 +727,16 @@
           "methods": [
             {
               "type": "level",
-              "level": 37,
+              "level": 24,
               "operand": "and"
             }
           ],
-          "evolutions": [],
-          "details": {
-            "gender": null,
-            "item": null,
-            "level": null,
-            "knownMove": null
-          },
           "perk": {
             "x": 26,
             "y": 26
-          }
+          },
+          "details": null,
+          "evolutions": []
         }
       ],
       "uuid": "Compendium.ptr2e.core-species.Item.e2J4wosPsaI6gwYM",
@@ -1036,7 +1036,9 @@
         "removeOnRecall": false,
         "stacks": 0,
         "trigger": "manual",
-        "conditions": []
+        "conditions": [],
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
@@ -1058,12 +1060,13 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.347",
         "systemId": "ptr2e",
         "systemVersion": "1.2.0.beta",
         "createdTime": 1743983723554,
         "modifiedTime": 1743984670314,
-        "lastModifiedBy": "fjFnY9UQ3QBBalRU"
+        "lastModifiedBy": "fjFnY9UQ3QBBalRU",
+        "exportSource": null
       }
     }
   ]
