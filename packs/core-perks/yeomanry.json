@@ -1,0 +1,83 @@
+{
+  "name": "Yeomanry",
+  "_id": "KWW5eOGkAuGnaPHK",
+  "type": "perk",
+  "img": "icons/weapons/bows/shortbow-recurve-yellow.webp",
+  "effects": [],
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "publication": {
+      "source": "PTR2e Core",
+      "authors": [
+        "Dragoon"
+      ],
+      "notes": ""
+    },
+    "actions": [],
+    "slug": "yeomanry",
+    "description": "<p>The user’s non-@Trait[firearm] @Trait[missile] @Trait[weapon] attacks deal +40% more damage, and the user’s Struggle has +20 Power when they are holding a non-@Trait[firearm] @Trait[missile] @Trait[weapon].</p>",
+    "traits": [],
+    "prerequisites": [
+      "trait:wielder",
+      {
+        "gte": [
+          "{actor|skills.survival.mod}",
+          30
+        ]
+      },
+      {
+        "gte": [
+          "{actor|skills.lift.mod}",
+          45
+        ]
+      },
+      {
+        "gte": [
+          "{actor|skills.acrobatics.mod}",
+          30
+        ]
+      },
+      {
+        "gte": [
+          "{actor|level}",
+          20
+        ]
+      }
+    ],
+    "autoUnlock": [],
+    "cost": 3,
+    "design": {
+      "arena": "physical",
+      "approach": "finesse",
+      "archetype": null
+    },
+    "global": true,
+    "webs": [],
+    "nodes": [
+      {
+        "x": 187,
+        "y": 63,
+        "hidden": false,
+        "type": "normal",
+        "connected": [
+          "dual-wielder",
+          "down-the-sights",
+          "harry",
+          "arms-race",
+          "needle-threader"
+        ],
+        "config": {
+          "texture": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "tint": null
+        },
+        "tier": null
+      }
+    ]
+  },
+  "folder": "VCEaYPpKcCqDx7yx"
+}

@@ -2,11 +2,11 @@
   "id": "ptr2e",
   "title": "Pokemon Tabletop Reunited: Evolved",
   "description": "PTR 2e is a fan-made tabletop RPG based on the Pokemon video games. It is a complete overhaul of the original PTR 1e system.",
-  "version": "1.0.3.beta",
+  "version": "1.4.3.beta",
   "compatibility": {
-    "minimum": "12.331",
-    "verified": "12.331",
-    "maximum": 12
+    "minimum": "13.347",
+    "verified": "13.347",
+    "maximum": 13
   },
   "authors": [
     {
@@ -14,6 +14,12 @@
       "email": "ptr2e@soaringnetwork.com",
       "discord": "asheeon"
     }
+  ],
+  "scripts": [
+    "greensock/dist/gsap.min.js",
+    "greensock/dist/Flip.min.js",
+    "greensock/dist/Draggable.min.js",
+    "greensock/dist/InertiaPlugin.min.js"
   ],
   "esmodules": [
     "ptr2e.mjs",
@@ -63,7 +69,8 @@
       "label": "PTR 2e Gear",
       "path": "packs/core-gear",
       "type": "Item",
-      "system": "ptr2e"
+      "system": "ptr2e",
+      "sort": "m"
     },
     {
       "name": "core-effects",
@@ -77,6 +84,13 @@
       "label": "PTR 2e Rules",
       "path": "packs/core-rules",
       "type": "JournalEntry",
+      "system": "ptr2e"
+    },
+    {
+      "name": "core-tables",
+      "label": "PTR 2e Tables",
+      "path": "packs/core-tables",
+      "type": "RollTable",
       "system": "ptr2e"
     }
   ],

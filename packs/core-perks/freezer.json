@@ -1,0 +1,102 @@
+{
+  "folder": "ge4zHJUHigfmeDte",
+  "name": "Freezer",
+  "type": "perk",
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "Fox"
+      ],
+      "notes": ""
+    },
+    "actions": [],
+    "description": "<p>You gain the @Trait[freezer] trait.</p>",
+    "traits": [],
+    "prerequisites": [
+      "trait:ice"
+    ],
+    "autoUnlock": [
+      "trait:freezer"
+    ],
+    "cost": 1,
+    "design": {
+      "arena": "social",
+      "approach": "resilience",
+      "archetype": "ice"
+    },
+    "global": true,
+    "webs": [],
+    "nodes": [
+      {
+        "x": 87,
+        "y": 119,
+        "connected": [
+          "thermal-dynamics",
+          "minor-buff-8",
+          "cryogenics"
+        ],
+        "hidden": false,
+        "type": "normal",
+        "tier": null
+      }
+    ],
+    "slug": "freezer"
+  },
+  "img": "systems/ptr2e/img/svg/ice_icon.svg",
+  "effects": [
+    {
+      "name": "Freezer",
+      "type": "passive",
+      "_id": "Jz9Nt6t0t0VUTx7W",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "add-trait",
+            "key": "",
+            "value": "Freezer",
+            "predicate": [],
+            "mode": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.347",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.2.beta",
+        "createdTime": 1755006967251,
+        "modifiedTime": 1755006974116,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+      }
+    }
+  ],
+  "_id": "aZZpAgGP2IQUyStw"
+}

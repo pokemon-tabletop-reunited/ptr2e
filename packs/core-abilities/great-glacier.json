@@ -1,0 +1,79 @@
+{
+  "name": "Great Glacier",
+  "type": "ability",
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "publication": {
+      "source": "",
+      "authors": [],
+      "notes": ""
+    },
+    "traits": [],
+    "actions": [],
+    "description": "<p>For every 1.5% HP the user loses, their DEF and SPDEF increase by +1%, to a max of +60% at 10% HP remaining.</p>",
+    "slug": "great-glacier"
+  },
+  "img": "icons/magic/water/barrier-ice-crystal-wall-faceted-blue.webp",
+  "effects": [
+    {
+      "name": "Great Glacier",
+      "type": "passive",
+      "_id": "7QV07d8XJ7iZGizg",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "basic",
+            "key": "system.modifiers.defMultiplier",
+            "value": "min(floor((100-@actor.system.health.percent)/1.5),60)/100",
+            "predicate": [],
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "key": "system.modifiers.spdMultiplier",
+            "value": "min(floor((100-@actor.system.health.percent)/1.5),60)/100",
+            "predicate": [],
+            "mode": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.346",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.1.beta",
+        "createdTime": 1753802620145,
+        "modifiedTime": 1753804755087,
+        "lastModifiedBy": "01onCaJSVMVOgMDI"
+      }
+    }
+  ],
+  "_id": "YATBqj4h9JnlLEHF"
+}

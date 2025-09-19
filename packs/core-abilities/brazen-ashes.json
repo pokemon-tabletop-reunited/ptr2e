@@ -19,13 +19,14 @@
         },
         "range": {
           "target": "self",
-          "unit": "m"
+          "unit": "m",
+          "distance": 10
         },
         "description": "<p>Trigger: The user would be @Affliction[fainted] by a damaging attack.</p><p>Effect: The user does not gain @Affliction[fainted] and heals 100% HP. Then, the user gains @Affliction[boosted] 7 and @Affliction[chanted] 7. This can occur once per combat.</p>",
         "img": "icons/svg/explosion.svg"
       }
     ],
-    "description": "<p>Trigger: The user would be @Affliction[fainted] by a damaging attack.</p><p>Effect: The user does not gain @Affliction[fainted] and heals 100% HP. Then, the user gains @Affliction[boosted] 7 and @Affliction[chanted] 7. This can occur once per combat.</p>",
+    "description": "<p>Trigger: The user would be @Affliction[fainted] by a damaging attack.</p><p>Effect: The user does not gain @Affliction[fainted] and heals 100% HP. Then, the user gains @Affliction[boosted 7], @Affliction[resolved 7], and @Affliction[chanted 7]. This can occur once per combat.</p><p>Passive: Connection - Extreme Speed. The user possesses +1 default SPD Stage, and has @UUID[Compendium.ptr2e.core-abilities.SaEKwKaz49q3qV4M]{Inner Focus} as an Extra Ability.</p>",
     "traits": [
       "legendary"
     ],
@@ -33,8 +34,190 @@
     "_migration": {
       "version": null,
       "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
     }
   },
   "_id": "3jN2EdzZtKPbEUql",
-  "effects": []
+  "effects": [
+    {
+      "name": "Brazen Ashes",
+      "type": "passive",
+      "_id": "MQ54VafXijIFU2dZ",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "brazen-ashes-generic",
+            "value": "Compendium.ptr2e.core-effects.Item.4DlXFTVooz07YcDm",
+            "predicate": [],
+            "chance": 100,
+            "isFixedChance": true,
+            "affects": "target",
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "system.changes.0.value",
+                "value": 16
+              }
+            ],
+            "dontMerge": false,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "roll-effect",
+            "key": "brazen-ashes-generic",
+            "value": "Compendium.ptr2e.core-effects.Item.boostedcondiitem",
+            "predicate": [],
+            "chance": 100,
+            "isFixedChance": true,
+            "affects": "target",
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "duration.turns",
+                "value": 7
+              }
+            ],
+            "dontMerge": false,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "roll-effect",
+            "key": "brazen-ashes-generic",
+            "value": "Compendium.ptr2e.core-effects.Item.resolvedconditem",
+            "predicate": [],
+            "chance": 100,
+            "isFixedChance": false,
+            "affects": "target",
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "duration.turns",
+                "value": 7
+              }
+            ],
+            "dontMerge": false,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "roll-effect",
+            "key": "brazen-ashes-generic",
+            "value": "Compendium.ptr2e.core-effects.Item.chantedcondiitem",
+            "predicate": [],
+            "chance": 100,
+            "isFixedChance": true,
+            "affects": "target",
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "duration.turns",
+                "value": 7
+              }
+            ],
+            "dontMerge": false,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "grant-item",
+            "key": "",
+            "value": "Compendium.ptr2e.core-abilities.Item.SaEKwKaz49q3qV4M",
+            "predicate": [
+              "item:ability:brazen-ashes:active"
+            ],
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "system.free",
+                "value": "true"
+              }
+            ],
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            },
+            "allowDuplicate": false,
+            "reevaluateOnUpdate": true,
+            "mode": 2,
+            "ignored": false,
+            "inMemoryOnly": false,
+            "track": false,
+            "replaceSelf": false
+          },
+          {
+            "type": "basic",
+            "key": "system.attributes.spe.stage",
+            "value": 1,
+            "predicate": [],
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "grant-item",
+            "key": "",
+            "value": "Compendium.ptr2e.core-moves.Item.FMxkce89JzTELo3Z",
+            "predicate": [
+              "item:ability:brazen-ashes:active"
+            ],
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "system.actions.0.free",
+                "value": "true"
+              }
+            ],
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            },
+            "allowDuplicate": false,
+            "reevaluateOnUpdate": true,
+            "mode": 2,
+            "ignored": false,
+            "inMemoryOnly": false,
+            "track": false,
+            "replaceSelf": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": false,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      }
+    }
+  ]
 }

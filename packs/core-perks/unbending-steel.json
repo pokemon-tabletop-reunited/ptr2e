@@ -9,7 +9,7 @@
     },
     "actions": [],
     "slug": "unbending-steel",
-    "description": "<p>You gain Iron Defense as a Connected Move, and may spend an additional 2PP when using Iron Defense to gain 2 ticks of Shields.</p>",
+    "description": "<p>You gain Iron Defense as a Connected Move, and may spend an additional 2PP when using Iron Defense to gain @Tick[2 shield].</p>",
     "traits": [],
     "prerequisites": [
       "trait:steel"
@@ -22,7 +22,16 @@
           "stat-iv-booster-1",
           "improved-overland-3",
           "stat-iv-booster-1-4",
-          "improved-teleportation"
+          "improved-teleportation",
+          "minor-buff",
+          "minor-buff-6",
+          "minor-buff-44",
+          "minor-buff-48",
+          "ready-for-anything",
+          "dowsing-instinct",
+          "dowsing-organ",
+          "natural-steel",
+          "active-ground"
         ],
         "config": {
           "alpha": null,
@@ -46,8 +55,18 @@
     "design": {
       "arena": "physical",
       "approach": "resilience",
-      "archetype": "Steel"
-    }
+      "archetype": "steel"
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "originSlug": null,
+    "variant": null,
+    "mode": null
   },
   "_id": "Gxv0teWTcPT64AJu",
   "img": "systems/ptr2e/img/svg/steel_icon.svg",
@@ -111,12 +130,13 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.342",
         "systemId": "ptr2e",
         "systemVersion": "0.10.0-alpha.5.2.1",
         "createdTime": 1737922877806,
         "modifiedTime": 1737922913974,
-        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+        "lastModifiedBy": "mK35yvCqCgiTUvKf",
+        "exportSource": null
       }
     }
   ]

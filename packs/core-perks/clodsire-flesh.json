@@ -1,0 +1,142 @@
+{
+  "name": "Clodsire Flesh",
+  "_id": "QwnZ5DIAwbNYHJSX",
+  "type": "perk",
+  "img": "systems/ptr2e/img/svg/poison_icon.svg",
+  "effects": [
+    {
+      "name": "Clodsire Flesh",
+      "type": "passive",
+      "_id": "w9fsn7k8shYUdIgq",
+      "img": "systems/ptr2e/img/svg/poison_icon.svg",
+      "system": {
+        "changes": [
+          {
+            "type": "choice-set",
+            "key": "",
+            "value": 0,
+            "predicate": [],
+            "mode": 2,
+            "ignored": false,
+            "choices": [
+              {
+                "value": "Compendium.ptr2e.core-abilities.Item.C5bFrbElBGmp1UM0",
+                "predicate": [
+                  {
+                    "not": "item:ability:poison-point"
+                  }
+                ]
+              },
+              {
+                "value": "Compendium.ptr2e.core-abilities.Item.IQWqxfEZ1OmBuG1d",
+                "predicate": [
+                  {
+                    "not": "item:ability:poison-touch"
+                  }
+                ]
+              }
+            ],
+            "prompt": "PTR2E.ChoiceSetPrompt.Prompt",
+            "adjustName": true,
+            "rollOption": "clodsireFleshChoice",
+            "flag": "clodsireFleshChoice"
+          },
+          {
+            "type": "grant-item",
+            "key": "",
+            "value": "{effect|flags.ptr2e.choiceSelections.clodsireFleshChoice}",
+            "predicate": [],
+            "alterations": [],
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            },
+            "allowDuplicate": false,
+            "mode": 2,
+            "ignored": false,
+            "reevaluateOnUpdate": false,
+            "inMemoryOnly": false,
+            "track": false,
+            "replaceSelf": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": false,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "<p>Effect: The user gains one of either @UUID[Compendium.ptr2e.core-abilities.C5bFrbElBGmp1UM0]{Poison Point} or @UUID[Compendium.ptr2e.core-abilities.IQWqxfEZ1OmBuG1d]{Poison Touch} as a tutored ability.</p>",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.346",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.2.beta",
+        "createdTime": 1754224773391,
+        "modifiedTime": 1754224950247,
+        "lastModifiedBy": "dCIq77b7AO2frs8Z"
+      }
+    }
+  ],
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "publication": {
+      "source": "PTR2e Core",
+      "authors": [
+        "Fox"
+      ],
+      "notes": ""
+    },
+    "actions": [],
+    "slug": "clodsire-flesh",
+    "description": "<p>Effect: The user gains one of either @UUID[Compendium.ptr2e.core-abilities.C5bFrbElBGmp1UM0]{Poison Point} or @UUID[Compendium.ptr2e.core-abilities.IQWqxfEZ1OmBuG1d]{Poison Touch} as a tutored ability.</p>",
+    "traits": [
+      "poison"
+    ],
+    "prerequisites": [
+      "trait:poison"
+    ],
+    "autoUnlock": [],
+    "cost": 2,
+    "design": {
+      "arena": "physical",
+      "approach": "resilience",
+      "archetype": "poison"
+    },
+    "global": true,
+    "webs": [],
+    "nodes": [
+      {
+        "x": 178,
+        "y": 89,
+        "connected": [
+          "tainted-blades",
+          "venomous",
+          "root-3"
+        ],
+        "hidden": false,
+        "type": "normal",
+        "tier": null
+      }
+    ]
+  },
+  "folder": "8nTJNodaluw5G4Y6"
+}

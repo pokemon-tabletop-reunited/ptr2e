@@ -11,7 +11,7 @@
       }
     ],
     "cost": 1,
-    "description": "<p>The user spends 4 PP as a Simple Action. Allied creatures within 8m cannot have [Interrupt X] Actions or Abilities triggered by their Movement for 2 Activations.</p>",
+    "description": "<p>Effect: The user spends 4 PP as a Simple Action and sets a Mobilize Summon at 100. While the Summon is active, allies cannot have [interrupt-x] Actions or Abilities triggered by their Movement.</p>",
     "actions": [
       {
         "name": "Mobilize",
@@ -31,7 +31,9 @@
           "command",
           "social"
         ],
-        "img": "icons/svg/explosion.svg"
+        "img": "icons/svg/explosion.svg",
+        "variant": null,
+        "ephemeralVariant": false
       }
     ],
     "slug": "mobilize",
@@ -56,16 +58,15 @@
           "im-with-you",
           "chansey-medicine",
           "root-1",
-          "breeder"
+          "breeder",
+          "victory-march",
+          "bit-of-a-tosser"
         ],
         "config": {
-          "alpha": null,
-          "backgroundColor": "#00ff40",
-          "borderColor": null,
-          "borderWidth": null,
           "texture": "systems/ptr2e/img/perk-icons/Tactician.svg",
-          "tint": "#141414",
-          "scale": null
+          "backgroundColor": null,
+          "borderColor": null,
+          "tint": null
         },
         "tier": null
       }
@@ -76,8 +77,18 @@
     "design": {
       "arena": "social",
       "approach": "finesse",
-      "archetype": "Support"
-    }
+      "archetype": "support"
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "originSlug": null,
+    "variant": null,
+    "mode": null
   },
   "_id": "EhfPkS23yRI8VENp",
   "img": "systems/ptr2e/img/perk-icons/Tactician.svg",

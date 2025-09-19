@@ -12,8 +12,7 @@
         "traits": [
           "blast-1",
           "trap",
-          "field",
-          "pp-updated"
+          "field"
         ],
         "range": {
           "target": "blast",
@@ -30,7 +29,7 @@
         "types": [
           "water"
         ],
-        "description": "<p>Effect: All valid targets become @Affliction[bound] 5 and @Affliction[drowning] 5.  Whirlpool's Power is doubled against Swimming targets.</p>",
+        "description": "<p>Effect: All valid targets gain @Affliction[bound 5]. While @Affliction[bound], targets also suffer from @Affliction[drowning]. This @Affliction[bound] effect can be removed with a Challenging Flying or Swim Skill Check or an Intense Movement-related Skill or Acrobatics Skill Check taken as a Simple Action.</p>",
         "img": "systems/ptr2e/img/svg/water_icon.svg"
       },
       {
@@ -40,8 +39,7 @@
         "traits": [
           "blast-1",
           "trap",
-          "field",
-          "pp-updated"
+          "field"
         ],
         "range": {
           "target": "blast",
@@ -50,15 +48,16 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 6
+          "powerPoints": 6,
+          "trigger": "<p>The targeted creature(s) are Swimming.</p>"
         },
         "category": "special",
-        "power": 35,
+        "power": 70,
         "accuracy": 85,
         "types": [
           "water"
         ],
-        "description": "<p>Effect: All valid targets become @Affliction[bound] 5 and @Affliction[drowning] 5. Whirlpool's Power is doubled against Swimming targets.</p>",
+        "description": "<p>Trigger: The targeted creature(s) are Swimming.</p><p>Effect: Effect: All valid targets gain @Affliction[bound 5]. While @Affliction[bound], targets also suffer from @Affliction[drowning]. This @Affliction[bound] effect can be removed with a Challenging Flying or Swim Skill Check or an Intense Movement-related Skill or Acrobatics Skill Check taken as a Simple Action.</p>",
         "img": "systems/ptr2e/img/svg/water_icon.svg",
         "variant": "whirlpool"
       }
@@ -67,6 +66,12 @@
     "_migration": {
       "version": null,
       "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ]
     }
   },
   "_id": "TwttyD3UFB2FQi6K",

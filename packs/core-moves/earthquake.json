@@ -11,16 +11,16 @@
         "type": "attack",
         "traits": [
           "earthbound",
-          "pp-updated"
+          "partial-automation"
         ],
         "range": {
           "target": "emanation",
-          "distance": 6,
+          "distance": 4,
           "unit": "m"
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 15
+          "powerPoints": 8
         },
         "category": "physical",
         "power": 100,
@@ -28,47 +28,77 @@
         "types": [
           "ground"
         ],
-        "description": "",
-        "contestType": "",
-        "contestEffect": "",
-        "free": false,
-        "slot": null
-      },
-      {
-        "slug": "earthquake-burrowing",
-        "name": "Earthquake (Burrowing)",
-        "type": "attack",
-        "traits": [
-          "earthbound",
-          "pp-updated"
-        ],
-        "range": {
-          "target": "emanation",
-          "distance": 6,
-          "unit": "m"
-        },
-        "cost": {
-          "activation": "complex",
-          "powerPoints": 15,
-          "trigger": "<p>Valid target(s) is Burrowing.</p>"
-        },
-        "category": "physical",
-        "power": 200,
-        "accuracy": 100,
-        "types": [
-          "ground"
-        ],
-        "description": "<p>Trigger: Valid target(s) is Burrowing.</p><p>Effect: This attack ignores the target's EVA Stage increases.</p>",
-        "contestType": "",
-        "contestEffect": "",
-        "varant": "earthquake",
-        "free": false,
-        "slot": null
+        "description": "<p>Effect: This attack ignores any EVA Stage increases of burrowing targets. Deals 50% more damage to targets in the Burrow Movement State.</p>",
+        "img": "systems/ptr2e/img/svg/ground_icon.svg",
+        "predicate": []
       }
     ],
-    "container": null,
-    "grade": "S"
+    "grade": "A",
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": "<p>Effect: This attack's Power is doubled against Burrowing targets.</p>"
+    },
+    "traits": [],
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
   },
   "_id": "XNpXPx2w9KKZ8chL",
-  "effects": []
+  "effects": [
+    {
+      "name": "Earthquake",
+      "type": "passive",
+      "_id": "vVj9zZD5Qu8ifxmH",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "percentile-modifier",
+            "key": "earthquake-attack-damage",
+            "value": 50,
+            "predicate": [
+              "target:state:burrow"
+            ],
+            "mode": 2,
+            "ignored": false,
+            "hideIfDisabled": true
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.346",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.2.beta",
+        "createdTime": 1754312342912,
+        "modifiedTime": 1754312453969,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+      }
+    }
+  ]
 }

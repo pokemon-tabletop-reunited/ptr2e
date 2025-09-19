@@ -29,14 +29,23 @@
         "category": "special",
         "power": 65,
         "accuracy": 100,
-        "description": "<p>Effect: On hit, the target has a 20% chance of gaining @Affliction[frostbite] 5 and a 20% chance of gaining @Affliction[fear] 5.</p>"
+        "description": "<p>Effect: On hit, the target has a 20% chance of gaining @Affliction[frostbite] 5 and a 20% chance of gaining @Affliction[fear] 5.</p>",
+        "predicate": []
       }
     ],
     "grade": "C",
     "_migration": {
       "version": null,
       "previous": null
-    }
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "traits": []
   },
   "effects": [
     {
@@ -53,19 +62,25 @@
             "predicate": [],
             "chance": 20,
             "affects": "target",
-            "mode": 2,
             "priority": null,
+            "isFixedChance": false,
+            "alterations": [],
+            "dontMerge": false,
+            "mode": 2,
             "ignored": false
           },
           {
             "type": "roll-effect",
-            "key": "contact-trait-attack",
+            "key": "cold-terror-attack",
             "value": "Compendium.ptr2e.core-effects.Item.fearconditioitem",
             "predicate": [],
             "chance": 20,
             "affects": "target",
-            "mode": 2,
             "priority": null,
+            "isFixedChance": false,
+            "alterations": [],
+            "dontMerge": false,
+            "mode": 2,
             "ignored": false
           }
         ],
@@ -73,7 +88,9 @@
         "traits": [],
         "removeAfterCombat": true,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
@@ -95,12 +112,13 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.346",
         "systemId": "ptr2e",
-        "systemVersion": "0.10.0-alpha.3.0.0",
+        "systemVersion": "1.3.8.beta",
         "createdTime": 1729532843989,
-        "modifiedTime": 1729532866189,
-        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
+        "modifiedTime": 1751895787235,
+        "lastModifiedBy": "5ImYyhOS2D6D7ypO",
+        "exportSource": null
       }
     }
   ]

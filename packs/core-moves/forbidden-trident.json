@@ -1,0 +1,108 @@
+{
+  "folder": "BImk1fcMbR5akA4z",
+  "name": "Forbidden Trident",
+  "type": "move",
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "publication": {
+      "source": "Digidex",
+      "authors": [
+        "Fox"
+      ],
+      "notes": ""
+    },
+    "traits": [],
+    "actions": [
+      {
+        "name": "Forbidden Trident",
+        "slug": "forbidden-trident",
+        "type": "attack",
+        "img": "systems/ptr2e/img/svg/water_icon.svg",
+        "traits": [
+          "pierce",
+          "missile",
+          "digimon"
+        ],
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 7
+        },
+        "types": [
+          "water"
+        ],
+        "category": "physical",
+        "predicate": [],
+        "description": "<p>This attack has a 20% chance to apply @Affliction[cursed 5].</p>",
+        "range": {
+          "target": "creature",
+          "distance": 8,
+          "unit": "m"
+        },
+        "power": 115,
+        "accuracy": 100
+      }
+    ],
+    "grade": "A",
+    "slug": "forbidden-trident"
+  },
+  "img": "systems/ptr2e/img/svg/water_icon.svg",
+  "effects": [
+    {
+      "name": "Forbidden Trident",
+      "type": "passive",
+      "_id": "ZZx5OAp5LKlwl5rB",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "forbidden-trident-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.cursedcondititem",
+            "predicate": [],
+            "chance": 20,
+            "isFixedChance": false,
+            "affects": "target",
+            "alterations": [],
+            "dontMerge": false,
+            "mode": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.347",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.2.beta",
+        "createdTime": 1755380866736,
+        "modifiedTime": 1755380905770,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+      }
+    }
+  ],
+  "_id": "GFIVgY61wEiIWFEJ"
+}

@@ -1,0 +1,127 @@
+{
+  "folder": "BImk1fcMbR5akA4z",
+  "name": "Toy Flame",
+  "type": "move",
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "publication": {
+      "source": "Digidex",
+      "authors": [
+        "Fox"
+      ],
+      "notes": ""
+    },
+    "traits": [],
+    "actions": [
+      {
+        "name": "Toy Flame",
+        "slug": "toy-flame",
+        "type": "attack",
+        "img": "systems/ptr2e/img/svg/fire_icon.svg",
+        "traits": [
+          "missile",
+          "digimon"
+        ],
+        "range": {
+          "target": "enemy",
+          "distance": 5,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 3
+        },
+        "types": [
+          "fire"
+        ],
+        "category": "physical",
+        "power": 60,
+        "accuracy": 100,
+        "predicate": [],
+        "description": "<p>This attack has a 10% chance to reduce the target's Defense and Special Defense Stages by 1 for 5 activations.</p>"
+      }
+    ],
+    "grade": "D",
+    "slug": "toy-flame"
+  },
+  "img": "systems/ptr2e/img/svg/fire_icon.svg",
+  "effects": [
+    {
+      "name": "Toy Flame",
+      "type": "passive",
+      "_id": "1XzfQTjLZGbJCPr5",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "toy-flame-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.1JXumQz0QqthT9Iv",
+            "predicate": [],
+            "chance": 10,
+            "affects": "target",
+            "dontMerge": false,
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "alterations": [],
+            "isFixedChance": false
+          },
+          {
+            "type": "roll-effect",
+            "key": "toy-flame-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.qe5aLBJuwb9eYqvv",
+            "predicate": [],
+            "chance": 10,
+            "affects": "target",
+            "dontMerge": false,
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "alterations": [],
+            "isFixedChance": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "13.346",
+        "systemId": "ptr2e",
+        "systemVersion": "1.2.1.beta",
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null,
+        "exportSource": null
+      }
+    }
+  ],
+  "_id": "86W4dbZOy3X59v0b"
+}

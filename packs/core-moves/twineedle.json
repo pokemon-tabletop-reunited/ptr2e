@@ -12,17 +12,16 @@
         "traits": [
           "2-strike",
           "sharp",
-          "horn",
-          "pp-updated"
+          "horn"
         ],
         "range": {
           "target": "creature",
-          "distance": 1,
+          "distance": 10,
           "unit": "m"
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 1
+          "powerPoints": 2
         },
         "category": "physical",
         "power": 25,
@@ -31,15 +30,22 @@
           "bug"
         ],
         "description": "<p>Effect: On hit, the target has a 20% chance of gaining @Affliction[poison] 5.</p>",
-        "img": "icons/svg/explosion.svg",
+        "img": "systems/ptr2e/img/svg/bug_icon.svg",
         "predicate": []
       }
     ],
-    "grade": "E",
+    "grade": "D",
     "traits": [],
     "_migration": {
       "version": null,
       "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
     }
   },
   "_id": "rLMUMSSHkXGIqGab",
@@ -60,7 +66,9 @@
             "affects": "target",
             "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "alterations": [],
+            "dontMerge": false
           }
         ],
         "slug": null,

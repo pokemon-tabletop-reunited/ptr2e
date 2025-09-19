@@ -1,0 +1,59 @@
+{
+  "name": "Landslide Style",
+  "_id": "lX7dzWNq87k7wlpP",
+  "type": "perk",
+  "img": "icons/environment/wilderness/terrain-rocky-ground.webp",
+  "effects": [],
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "publication": {
+      "source": "PTR2e Core",
+      "authors": [
+        "Fox"
+      ],
+      "notes": ""
+    },
+    "actions": [],
+    "slug": "landslide-style",
+    "description": "<p>Target: Commanded @Trait[rock] Creatures<br><br>Effect: The target @Trait[rock] creature's @Trait[contact] moves gain the @Trait[crushing] trait and increases their Power by their Weight Class multiplied by 5%, but they gain the @Affliction[slowed] affliction and @UUID[Compendium.ptr2e.core-effects.hIE6W3Y5E9CyHiTy]{-1 Evasion Stage} whilst the style is active.</p>",
+    "traits": [
+      "command",
+      "rock",
+      "style"
+    ],
+    "prerequisites": [
+      "item:perk:type-specialist",
+      {
+        "gte": [
+          "{actor|skills.leadership.mod}",
+          30
+        ]
+      }
+    ],
+    "autoUnlock": [],
+    "cost": 2,
+    "design": {
+      "arena": "social",
+      "approach": "resilience",
+      "archetype": "rock"
+    },
+    "global": true,
+    "webs": [],
+    "nodes": [
+      {
+        "x": 194,
+        "y": 100,
+        "connected": [
+          "type-specialist"
+        ],
+        "hidden": false,
+        "type": "normal",
+        "tier": null
+      }
+    ]
+  },
+  "folder": "YOjkwRlXiBOynxGV"
+}

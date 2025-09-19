@@ -40,7 +40,8 @@
         "img": "icons/svg/explosion.svg",
         "range": {
           "target": "enemy",
-          "unit": "m"
+          "unit": "m",
+          "distance": 10
         }
       }
     ],
@@ -54,6 +55,13 @@
     "_migration": {
       "version": null,
       "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
     }
   },
   "_id": "F0sV19dmngv5CVe9",
@@ -69,7 +77,9 @@
             "type": "grant-item",
             "key": "",
             "value": "Compendium.ptr2e.core-moves.Item.g0tf8DHabi55oj5C",
-            "predicate": [],
+            "predicate": [
+              "ability:phantom-devicer:active"
+            ],
             "alterations": [
               {
                 "mode": 5,
@@ -77,24 +87,26 @@
                 "value": "true"
               }
             ],
-            "mode": 2,
+            "allowDuplicate": false,
+            "reevaluateOnUpdate": true,
             "priority": null,
-            "ignored": false,
-            "reevaluateOnUpdate": false,
-            "inMemoryOnly": false,
-            "allowDuplicate": true,
-            "track": false,
-            "replaceSelf": false,
             "onDeleteActions": {
               "grantee": "detach",
               "granter": "cascade"
-            }
+            },
+            "mode": 2,
+            "ignored": false,
+            "inMemoryOnly": false,
+            "track": false,
+            "replaceSelf": false
           },
           {
             "type": "grant-item",
             "key": "",
             "value": "Compendium.ptr2e.core-abilities.Item.WNpGnjZkiWLOta0C",
-            "predicate": [],
+            "predicate": [
+              "ability:phantom-devicer:active"
+            ],
             "alterations": [
               {
                 "mode": 5,
@@ -102,25 +114,27 @@
                 "value": "true"
               }
             ],
-            "mode": 2,
+            "allowDuplicate": false,
+            "reevaluateOnUpdate": true,
             "priority": null,
-            "ignored": false,
-            "reevaluateOnUpdate": false,
-            "inMemoryOnly": false,
-            "allowDuplicate": true,
-            "track": false,
-            "replaceSelf": false,
             "onDeleteActions": {
               "grantee": "detach",
               "granter": "cascade"
-            }
+            },
+            "mode": 2,
+            "ignored": false,
+            "inMemoryOnly": false,
+            "track": false,
+            "replaceSelf": false
           }
         ],
         "slug": null,
         "traits": [],
         "removeAfterCombat": true,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
@@ -142,12 +156,13 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.346",
         "systemId": "ptr2e",
-        "systemVersion": "0.10.0-alpha.5.1.5",
+        "systemVersion": "1.4.2.beta",
         "createdTime": 1737417652483,
-        "modifiedTime": 1737417721437,
-        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+        "modifiedTime": 1754319964832,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf",
+        "exportSource": null
       }
     }
   ]

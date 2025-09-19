@@ -1,0 +1,109 @@
+{
+  "folder": "F4b52L00KrAtdPu5",
+  "name": "Psycher",
+  "type": "perk",
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "Fox"
+      ],
+      "notes": ""
+    },
+    "actions": [],
+    "description": "<p>You gain the @Trait[psycher] trait.</p>",
+    "traits": [],
+    "prerequisites": [
+      "trait:psychic"
+    ],
+    "autoUnlock": [
+      "trait:psycher"
+    ],
+    "cost": 1,
+    "design": {
+      "arena": "mental",
+      "approach": "power",
+      "archetype": "psychic"
+    },
+    "global": true,
+    "webs": [],
+    "nodes": [
+      {
+        "x": 134,
+        "y": 138,
+        "connected": [
+          "minor-buff-9",
+          "conceal-mind",
+          "telepathic-potential",
+          "fractalised-contingency"
+        ],
+        "hidden": false,
+        "type": "normal",
+        "tier": null
+      }
+    ],
+    "slug": "psycher"
+  },
+  "img": "systems/ptr2e/img/svg/psychic_icon.svg",
+  "effects": [
+    {
+      "name": "Telepathic Potential",
+      "type": "passive",
+      "_id": "6laA7fKIAdWMl7UP",
+      "img": "systems/ptr2e/img/svg/psychic_icon.svg",
+      "system": {
+        "changes": [
+          {
+            "type": "add-trait",
+            "key": "",
+            "value": "psycher",
+            "predicate": [],
+            "priority": null,
+            "mode": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": false,
+        "removeOnRecall": false,
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "<p>You gain the @Trait[psycher] trait.</p>",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": "Compendium.ptr2e.core-perks.Item.4n06ljZtbCqy6lEC.ActiveEffect.2JtWtzy2Slq3HfIT",
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.346",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.2.beta",
+        "createdTime": 1754228049729,
+        "modifiedTime": 1754228061710,
+        "lastModifiedBy": "dCIq77b7AO2frs8Z"
+      }
+    }
+  ],
+  "_id": "KpNl1wepbpQDYmJf"
+}

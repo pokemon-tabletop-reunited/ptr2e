@@ -1,0 +1,106 @@
+{
+  "folder": "BImk1fcMbR5akA4z",
+  "name": "Trump Sword",
+  "type": "move",
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "publication": {
+      "source": "Digidex",
+      "authors": [
+        "Fox"
+      ],
+      "notes": ""
+    },
+    "traits": [],
+    "actions": [
+      {
+        "name": "Trump Sword",
+        "slug": "trump-sword",
+        "type": "attack",
+        "img": "systems/ptr2e/img/svg/steel_icon.svg",
+        "traits": [
+          "digimon",
+          "sharp",
+          "4-strike"
+        ],
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 10
+        },
+        "types": [
+          "steel"
+        ],
+        "category": "physical",
+        "predicate": [],
+        "description": "<p>This attack inflicts @Affliction[nullified 5] to the target, selecting a different ability with each hit.</p>",
+        "range": {
+          "target": "creature",
+          "distance": 10,
+          "unit": "m"
+        },
+        "power": 35,
+        "accuracy": 100
+      }
+    ],
+    "grade": "S"
+  },
+  "img": "systems/ptr2e/img/svg/steel_icon.svg",
+  "effects": [
+    {
+      "name": "Trump Sword",
+      "type": "passive",
+      "_id": "d02EnhNegfdjh3dq",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "trump-sword-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.nullifiedconitem",
+            "predicate": [],
+            "chance": 100,
+            "isFixedChance": false,
+            "affects": "target",
+            "alterations": [],
+            "dontMerge": false,
+            "mode": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.347",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.2.beta",
+        "lastModifiedBy": null
+      }
+    }
+  ],
+  "flags": {},
+  "_id": "HJebeUcg3mwOKwKt"
+}

@@ -12,12 +12,10 @@
         "traits": [
           "shield",
           "paradox",
-          "interrupt-4",
-          "pp-updated"
+          "interrupt-6"
         ],
         "range": {
           "target": "self",
-          "distance": 0,
           "unit": "m"
         },
         "cost": {
@@ -26,20 +24,27 @@
           "trigger": "<p>The user is targeted by a damaging attack that lacks[Interrupt X].</p>"
         },
         "category": "status",
-        "power": null,
-        "accuracy": null,
         "types": [
           "fire"
         ],
-        "description": "<p>Trigger: The user is targeted by an Attack.</p><p>Effect: The triggering attack fails to hit the user, and additional attacks also fail to hit until the user's next Activation, or when the round ends, whichever is first. Attacks failing to hit this way do not activate their secondary effects. If the triggering Attack has [Contact], the attacker gains @Affliction[burn] 5.</p>",
-        "contestType": "",
-        "contestEffect": "",
-        "free": false,
-        "slot": null
+        "description": "<p>Trigger: The user is targeted by an Attack.</p><p>Effect: The triggering attack fails to hit the user, and additional attacks also fail to hit until the end of the user's next Activation. Attacks failing to hit this way do not activate their secondary effects. If the triggering Attack has @Trait[contact], the attacker gains @Affliction[burn] 5.</p><p>On resolution, the user gains @Affliction[disabled] 3 on this Attack.</p>",
+        "img": "systems/ptr2e/img/svg/fire_icon.svg",
+        "predicate": []
       }
     ],
-    "container": null,
-    "grade": "B"
+    "grade": "B",
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "traits": [],
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
   },
   "_id": "FH15xu2wp3fbz18D",
   "effects": []

@@ -243,7 +243,6 @@ class CompendiumPack {
       throw PackError(`Filename at ${filePath} does not reflect document name (should be ${filenameForm}).`);
     }
 
-
     return [packSource];
   }
 
@@ -394,6 +393,9 @@ class CompendiumPack {
     const replace = (match: string, packId: string, docType: string, docName: string): string => {
       if (match.includes("JournalEntryPage")) return match;
 
+      const isAction = docName.includes(".Actions.");
+      const [name, actionName] = isAction ? docName.split(".Actions.") : [docName, null];
+
       const idsToSource = CompendiumPack.#idsToEntry[docType]?.get(packId);
       const namesToIds = CompendiumPack.#namesToIds[docType]?.get(packId);
       const link = match.replace(/\{$/, "");
@@ -401,14 +403,16 @@ class CompendiumPack {
         throw PackError(`${docSource.name} (${this.packId}) has a bad pack reference: ${link}`);
       }
 
-      const documentId: string | undefined = namesToIds.get(sluggify(docName)) || idsToSource?.get(docName)?._id || undefined;
+      const documentId: string | undefined = namesToIds.get(sluggify(name)) || idsToSource?.get(name)?._id || undefined;
       if (documentId === undefined) {
         throw PackError(`${docSource.name} (${this.packId}) has broken link to ${docName}: ${match}`);
       }
+      const source = idsToSource?.get(documentId);
+      if(source) docName = source.name;
       const sourceId = this.#sourceIdOf(documentId, { packId, docType });
       const labelBraceOrFullLabel = match.endsWith("{") ? "{" : `{${docName}}`;
 
-      return `@UUID[${sourceId}]${labelBraceOrFullLabel}`;
+      return `@UUID[${sourceId}${actionName ? `.Actions.${actionName}` : ""}]${labelBraceOrFullLabel}`;
     };
 
     return JSON.stringify(docSource)

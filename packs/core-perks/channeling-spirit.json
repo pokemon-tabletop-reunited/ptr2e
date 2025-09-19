@@ -1,0 +1,171 @@
+{
+  "name": "Channeling Spirit",
+  "type": "perk",
+  "system": {
+    "prerequisites": [
+      {
+        "or": [
+          {
+            "and": [
+              {
+                "gte": [
+                  "{actor|skills.aura-control.mod}",
+                  55
+                ]
+              },
+              "trait:aura-user"
+            ]
+          },
+          {
+            "gte": [
+              "{actor|skills.spiritual.mod}",
+              70
+            ]
+          },
+          {
+            "gte": [
+              "{actor|skills.ghost.mod}",
+              70
+            ]
+          },
+          {
+            "gte": [
+              "{actor|skills.parapsychology.mod}",
+              70
+            ]
+          }
+        ]
+      }
+    ],
+    "cost": 2,
+    "description": "<p>You have practiced the technique known as Channeling, and may use it to communicate with the spirits of the dead. You also gain +10 on Aura Sense skill checks pertaining to @Trait[ghost] Creatures.</p>",
+    "actions": [
+      {
+        "name": "Channeling Spirit",
+        "slug": "channeling-spirit",
+        "description": "<p>You have practiced the technique known as Channeling, and may use it to communicate with the spirits of the dead. You also gain +10 on Aura Sense skill checks pertaining to @Trait[ghost] Creatures.</p>",
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 3
+        },
+        "type": "exploration",
+        "traits": [
+          "aura"
+        ],
+        "img": "systems/ptr2e/img/perk-icons/Occultism.svg",
+        "range": {
+          "target": "enemy",
+          "unit": "m"
+        }
+      }
+    ],
+    "slug": "channeling-spirit",
+    "traits": [
+      "aura"
+    ],
+    "_migration": {
+      "version": 0.111,
+      "previous": {
+        "schema": null,
+        "foundry": "12.331",
+        "system": "1.2.1.beta"
+      }
+    },
+    "nodes": [
+      {
+        "x": 182,
+        "y": 29,
+        "hidden": false,
+        "type": "normal",
+        "connected": [
+          "aura-bonding"
+        ],
+        "config": {
+          "texture": "systems/ptr2e/img/perk-icons/Aura.svg",
+          "backgroundColor": null,
+          "borderColor": null,
+          "tint": null
+        },
+        "tier": null
+      }
+    ],
+    "autoUnlock": [],
+    "global": true,
+    "webs": [],
+    "design": {
+      "arena": "mental",
+      "approach": "finesse",
+      "archetype": "aura"
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    }
+  },
+  "img": "systems/ptr2e/img/perk-icons/Aura.svg",
+  "effects": [
+    {
+      "name": "Channeling Spirit",
+      "type": "passive",
+      "_id": "2LNe30UmesAzva9h",
+      "img": "systems/ptr2e/img/perk-icons/Aura.svg",
+      "system": {
+        "changes": [
+          {
+            "type": "flat-modifier",
+            "key": "aura-control-check",
+            "value": 10,
+            "predicate": [
+              "Manual"
+            ],
+            "label": "Ghost Pokemon?",
+            "priority": null,
+            "mode": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "13.346",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.1.beta",
+        "createdTime": null,
+        "modifiedTime": 1754303758777,
+        "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+        "exportSource": null
+      }
+    }
+  ],
+  "folder": "gB7SZ3Y6wf3Qjjtr",
+  "_id": "klQo99noqkYbXTSm"
+}

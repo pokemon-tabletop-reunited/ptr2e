@@ -1,0 +1,121 @@
+{
+  "folder": "BImk1fcMbR5akA4z",
+  "name": "Burning Fist",
+  "type": "move",
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "publication": {
+      "source": "Digidex",
+      "authors": [
+        "Fox"
+      ],
+      "notes": ""
+    },
+    "traits": [],
+    "actions": [
+      {
+        "name": "Burning Fist",
+        "slug": "burning-fist",
+        "type": "attack",
+        "img": "systems/ptr2e/img/svg/fire_icon.svg",
+        "traits": [
+          "punch",
+          "push-3",
+          "contact",
+          "digimon"
+        ],
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 3
+        },
+        "types": [
+          "fire"
+        ],
+        "category": "physical",
+        "predicate": [],
+        "description": "<p>This attack has a 30% chance each to inflict @Affliction[burn 5] and grant the user @UUID[Compendium.ptr2e.core-effects.ZGwaMlzUwkSuCPyH]{+1 Attack Stage for 5 Activations.}</p>",
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "power": 80,
+        "accuracy": 100
+      }
+    ],
+    "grade": "C",
+    "slug": "burning-fist"
+  },
+  "img": "systems/ptr2e/img/svg/fire_icon.svg",
+  "effects": [
+    {
+      "name": "Burning Fist",
+      "type": "passive",
+      "_id": "q5EFmcZoU44pFh8x",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "burning-fist-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.burnconditioitem",
+            "predicate": [],
+            "chance": 30,
+            "affects": "target",
+            "alterations": [],
+            "dontMerge": false,
+            "mode": 2,
+            "ignored": false,
+            "isFixedChance": false
+          },
+          {
+            "type": "roll-effect",
+            "key": "burning-fist-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.ZGwaMlzUwkSuCPyH",
+            "predicate": [],
+            "chance": 30,
+            "affects": "self",
+            "alterations": [],
+            "dontMerge": false,
+            "mode": 2,
+            "ignored": false,
+            "isFixedChance": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.346",
+        "systemId": "ptr2e",
+        "systemVersion": "1.3.0.beta",
+        "lastModifiedBy": "mK35yvCqCgiTUvKf",
+        "modifiedTime": 1747136692399
+      }
+    }
+  ],
+  "_id": "vgiQRUTzmyliYq6G"
+}

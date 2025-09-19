@@ -119,7 +119,7 @@ export default class ChoiceSetChangeSystem extends ChangeModel {
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   override apply(): void { }
 
-  override async preCreate({ changeSource, effectSource }: ChangeModel.PreCreateParams<ChoiceSetSource>): Promise<void> {
+  override async preCreate({ changeSource, effectSource, itemSource }: ChangeModel.PreCreateParams<ChoiceSetSource>): Promise<void> {
     const rollOptions = new Set([this.actor?.getRollOptions() ?? [], this.item?.getRollOptions() ?? []].flat());
     const predicate = this.resolveInjectedProperties(this.predicate);
     if (!predicate.test(rollOptions)) return;
@@ -128,7 +128,7 @@ export default class ChoiceSetChangeSystem extends ChangeModel {
 
     const inflatedChoices = await this.inflateChoices(rollOptions);
 
-    const selection = this.getPreselection() ?? (await new ChoiceSetPrompt({
+    const selection = this.getPreselection(inflatedChoices) ?? (await new ChoiceSetPrompt({
       prompt: this.prompt,
       item: this.item as Maybe<ItemPTR2e<ItemSystemPTR, ActorPTR2e>>,
       title: this.label,
@@ -153,6 +153,14 @@ export default class ChoiceSetChangeSystem extends ChangeModel {
           return new RegExp(`\\(${escaped}\\) \\(${escaped}\\)$`);
         })();
         effectSource.name = newName.replace(pattern, `(${label})`);
+
+        // Also update the item's name if it exists
+        if(itemSource) {
+          const itemName = itemSource.name;
+          const newItemName = `${itemName} (${label})`;
+          // Deduplicate if parenthetical is already present
+          itemSource.name = newItemName.replace(pattern, `(${label})`);
+        }
       }
       else {
         effectSource.name = game.i18n.format(this.adjustName, {
@@ -164,8 +172,7 @@ export default class ChoiceSetChangeSystem extends ChangeModel {
     this.effect.flags.ptr2e.choiceSelections ??= {};
     this.effect.flags.ptr2e.choiceSelections[this.flag] = selection.value;
 
-    
-    this.setRollOption(changeSource.selection);
+    this.setRollOption(changeSource.selection, effectSource);
 
     for (const change of this.effect?.system?.changes ?? []) {
       // Now that a selection is made, other rule elements can be set back to unignored
@@ -254,18 +261,25 @@ export default class ChoiceSetChangeSystem extends ChangeModel {
     )
   }
 
-  private setRollOption(selection: unknown): void {
+  private setRollOption(selection: unknown, effectSource: ChangeModel.PreCreateParams<ChoiceSetSource>["effectSource"] | null = null): void {
     if (!(this.rollOption && (typeof selection === "string" || typeof selection === "number"))) return;
 
     // If the selection was a UUID, the roll option had its suffix appended at item creation
     const suffix = UUIDUtils.isItemUUID(selection) || UUIDUtils.isActionUUID(selection) ? "" : `:${selection}`;
+
     this.effect.flags.ptr2e.choiceSelections ??= {};
     this.effect.flags.ptr2e.choiceSelections[this.rollOption] = selection;
+    if(effectSource) {
+      effectSource.flags ??= {};
+      effectSource.flags.ptr2e ??= {};
+      effectSource.flags.ptr2e.choiceSelections = this.effect.flags.ptr2e.choiceSelections;
+      (effectSource.flags.ptr2e.choiceSelections as Record<string, string | number>)[this.rollOption] = selection;
+    }
     this.actor?.rollOptions.addOption("all", `${this.rollOption}${suffix}`);
   }
 
-  private getPreselection(): PickableThing | null {
-    const choice = Array.isArray(this.choices) ? this.choices.find(c => R.isDeepEqual(c.value, this.selection)) : null;
+  private getPreselection(inflatedChoices: PickableThing[]): PickableThing | null {
+    const choice = Array.isArray(inflatedChoices) ? inflatedChoices.find(c => R.isDeepEqual(c.value, this.selection)) : null;
     return choice ?? null;
   }
 }

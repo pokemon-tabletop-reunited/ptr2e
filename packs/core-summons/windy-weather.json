@@ -1,0 +1,103 @@
+{
+  "name": "Windy Weather",
+  "type": "summon",
+  "system": {
+    "_migration": {
+      "version": 0.11,
+      "previous": null
+    },
+    "traits": [
+      "partial-automation"
+    ],
+    "actions": [],
+    "baseAV": 150,
+    "duration": 3,
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "slug": "windy-weather"
+  },
+  "img": "icons/magic/air/wind-weather-sailing-ship.webp",
+  "effects": [
+    {
+      "name": "Windy Weather",
+      "type": "summon",
+      "_id": "btSZQSeig8xrmoQ4",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "basic",
+            "key": "system.modifiers.speMultiplier",
+            "value": 1.3,
+            "predicate": [
+              {
+                "or": [
+                  "trait:flying",
+                  "movement:flight"
+                ]
+              }
+            ],
+            "mode": 1,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "percentile-modifier",
+            "key": "wind-trait-attack-damage",
+            "value": 40,
+            "predicate": [],
+            "priority": null,
+            "mode": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0,
+        "priority": 50,
+        "formula": "",
+        "type": "damage",
+        "targetType": "all",
+        "targetUuid": null,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": "Item.OxTYO0dQOmMBT2OZ.ActiveEffect.btSZQSeig8xrmoQ4",
+        "duplicateSource": null,
+        "coreVersion": "13.346",
+        "systemId": "ptr2e",
+        "systemVersion": "1.3.8.beta",
+        "createdTime": null,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf",
+        "exportSource": null
+      }
+    }
+  ],
+  "_id": "JkgrSB6ARoHoyayT"
+}

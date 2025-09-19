@@ -1,0 +1,118 @@
+{
+  "folder": "W85LoOCz3WlwbyhZ",
+  "name": "Duelist's Eye",
+  "type": "perk",
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "publication": {
+      "source": "PTR2e Core",
+      "authors": [
+        "Fox"
+      ],
+      "notes": ""
+    },
+    "actions": [],
+    "description": "<p>Effect: While Afflicted with @Affliction[duel], the user has +2 ACC Stages with Attacks targeting their Duel Partner.</p>",
+    "traits": [
+      "hunter"
+    ],
+    "prerequisites": [],
+    "autoUnlock": [],
+    "cost": 2,
+    "design": {
+      "arena": "mental",
+      "approach": "finesse",
+      "archetype": "hunter"
+    },
+    "global": true,
+    "webs": [],
+    "nodes": [
+      {
+        "x": 50,
+        "y": 185,
+        "hidden": false,
+        "type": "normal",
+        "connected": [
+          "high-noon",
+          "dead-eye",
+          "duelists-glory",
+          "dont-interrupt-me"
+        ],
+        "config": {
+          "texture": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "tint": null
+        },
+        "tier": null
+      }
+    ],
+    "slug": "duelists-eye",
+    "originSlug": null,
+    "variant": null,
+    "mode": null
+  },
+  "img": "icons/svg/target.svg",
+  "effects": [
+    {
+      "name": "Duelist's Eye",
+      "type": "passive",
+      "_id": "TkJN8OSrYcTtiRGU",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "basic",
+            "key": "system.battleStats.accuracy.stage",
+            "value": 2,
+            "predicate": [
+              "effect:affliction:duel"
+            ],
+            "label": "Duelist's Eye - Duel Partner?",
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "13.342",
+        "systemId": "ptr2e",
+        "systemVersion": "1.2.1.beta",
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null,
+        "exportSource": null
+      }
+    }
+  ],
+  "flags": {},
+  "_id": "hqLlxrNgq2V9zDSL"
+}

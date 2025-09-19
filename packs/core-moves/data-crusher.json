@@ -1,0 +1,113 @@
+{
+  "folder": "BImk1fcMbR5akA4z",
+  "name": "Data Crusher",
+  "type": "move",
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "publication": {
+      "source": "Digidex",
+      "authors": [
+        "Fox"
+      ],
+      "notes": ""
+    },
+    "traits": [],
+    "actions": [
+      {
+        "name": "Data Crusher",
+        "slug": "data-crusher",
+        "type": "attack",
+        "img": "systems/ptr2e/img/svg/dark_icon.svg",
+        "traits": [
+          "contact",
+          "digimon"
+        ],
+        "range": {
+          "target": "enemy",
+          "distance": 3,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 4
+        },
+        "types": [
+          "dark"
+        ],
+        "category": "physical",
+        "power": 90,
+        "accuracy": 100,
+        "predicate": [],
+        "description": "<p>This attack has a 5% fixed chance to apply @Affliction[perish 1].</p>"
+      }
+    ],
+    "grade": "C",
+    "slug": "data-crusher"
+  },
+  "img": "systems/ptr2e/img/svg/dark_icon.svg",
+  "effects": [
+    {
+      "name": "Data Crusher",
+      "type": "passive",
+      "_id": "GloNs1SpL7atA1SY",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "data-crusher-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.perishcondititem",
+            "predicate": [],
+            "chance": 5,
+            "isFixedChance": true,
+            "affects": "target",
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "duration.turns",
+                "value": 1
+              }
+            ],
+            "dontMerge": false,
+            "mode": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.346",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.2.beta",
+        "createdTime": 1754299948146,
+        "modifiedTime": 1754299989858,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+      }
+    }
+  ],
+  "_id": "PRi9TZCA3f46iTF9"
+}

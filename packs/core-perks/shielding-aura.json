@@ -11,57 +11,52 @@
       }
     ],
     "cost": 3,
-    "description": "<p>You harden your Aura about yourself. You gain @Affliction[resolved] 5.</p>",
+    "description": "<p>You gain the ability to harden your Aura around yourself.</p><p>You gain the @UUID[Compendium.ptr2e.core-perks.Item.D4mh3LuuSy0DDBj0.Actions.shielding-aura]{Shielding Aura} Action which you can use as a Complex Action, spending 4PP, to gain @Affliction[resolved 5].</p>",
     "actions": [
       {
         "name": "Shielding Aura",
         "slug": "shielding-aura",
-        "description": "<p>You harden your Aura about yourself. You gain @Affliction[resolved] 5.</p>",
+        "description": "<p>You gain @Affliction[resolved 5].</p>",
         "cost": {
           "activation": "complex",
           "powerPoints": 4
         },
-        "type": "attack",
-        "traits": [],
+        "type": "generic",
+        "traits": [
+          "aura"
+        ],
         "img": "systems/ptr2e/img/perk-icons/Aura.svg",
         "range": {
           "target": "enemy",
           "unit": "m"
-        },
-        "types": [
-          "untyped"
-        ],
-        "category": "status",
-        "free": true,
-        "predicate": []
+        }
       }
     ],
     "slug": "shielding-aura",
-    "traits": [],
+    "traits": [
+      "aura"
+    ],
     "_migration": {
       "version": null,
       "previous": null
     },
     "nodes": [
       {
+        "x": 176,
+        "y": 23,
+        "hidden": false,
+        "type": "normal",
         "connected": [
           "aura-dampening",
           "aura-haze",
           "aura-projection"
         ],
         "config": {
-          "alpha": null,
-          "backgroundColor": "#8000ff",
-          "borderColor": null,
-          "borderWidth": null,
           "texture": "systems/ptr2e/img/perk-icons/Aura.svg",
-          "tint": "#ffffff",
-          "scale": null
+          "backgroundColor": null,
+          "borderColor": null,
+          "tint": null
         },
-        "hidden": false,
-        "type": "normal",
-        "x": 176,
-        "y": 23,
         "tier": null
       }
     ],
@@ -71,7 +66,14 @@
     "design": {
       "arena": "physical",
       "approach": "resilience",
-      "archetype": "Aura"
+      "archetype": "aura"
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
     }
   },
   "_id": "D4mh3LuuSy0DDBj0",
@@ -81,15 +83,15 @@
       "name": "Shielding Aura",
       "type": "passive",
       "_id": "ic5iLopjjgfGT61E",
-      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "img": "systems/ptr2e/img/perk-icons/Aura.svg",
       "system": {
         "changes": [
           {
             "type": "roll-effect",
-            "key": "shielding-aura-attack",
+            "key": "shielding-aura-generic",
             "value": "Compendium.ptr2e.core-effects.Item.resolvedconditem",
             "predicate": [],
-            "chance": 10,
+            "chance": 100,
             "affects": "self",
             "alterations": [
               {
@@ -98,16 +100,22 @@
                 "value": 5
               }
             ],
-            "mode": 2,
             "priority": null,
+            "dontMerge": false,
+            "isFixedChance": false,
+            "mode": 2,
             "ignored": false
           }
         ],
         "slug": null,
-        "traits": [],
-        "removeAfterCombat": true,
+        "traits": [
+          "aura"
+        ],
+        "removeAfterCombat": false,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
@@ -119,7 +127,7 @@
         "startRound": null,
         "startTurn": null
       },
-      "description": "",
+      "description": "<p>You gain the ability to harden your Aura around yourself.</p><p>You gain the @UUID[Compendium.ptr2e.core-perks.Item.D4mh3LuuSy0DDBj0.Actions.shielding-aura]{Shielding Aura} Action which you can use as a Complex Action, spending 4PP, to gain @Affliction[resolved 5].</p>",
       "origin": null,
       "tint": "#ffffff",
       "transfer": true,
@@ -129,12 +137,13 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.346",
         "systemId": "ptr2e",
-        "systemVersion": "0.10.0-alpha.5.2.1",
+        "systemVersion": "1.4.1.beta",
         "createdTime": 1737934380177,
-        "modifiedTime": 1737934406711,
-        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+        "modifiedTime": 1754302744125,
+        "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+        "exportSource": null
       }
     }
   ],

@@ -10,7 +10,7 @@
         ],
         "name": "Covert",
         "slug": "covert",
-        "type": "attack",
+        "type": "generic",
         "cost": {
           "activation": "simple",
           "powerPoints": 2,
@@ -21,13 +21,7 @@
           "unit": "m"
         },
         "description": "<p>Trigger: The user rolls a Stealth Skill Test to hide or obscure itself from view.</p><p>Effect: The user automatically succeeds the triggering roll and gains +1 DEF and SPDEF for 5 Activations.</p>",
-        "img": "systems/ptr2e/img/perk-icons/Ninja.svg",
-        "types": [
-          "untyped"
-        ],
-        "category": "physical",
-        "free": true,
-        "predicate": []
+        "img": "systems/ptr2e/img/perk-icons/Ninja.svg"
       }
     ],
     "description": "<p>Trigger: The user rolls a Stealth Skill Test to hide or obscure itself from view.</p><p>Effect: The user automatically succeeds the triggering roll and gains +1 DEF and SPDEF for 5 Activations.</p>",
@@ -38,6 +32,13 @@
     "_migration": {
       "version": null,
       "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
     }
   },
   "_id": "H2cLIvhLbnXtzMhj",
@@ -51,24 +52,30 @@
         "changes": [
           {
             "type": "roll-effect",
-            "key": "covert-attack",
+            "key": "covert-generic",
             "value": "Compendium.ptr2e.core-effects.Item.sMystTj3FBJ00AZp",
             "predicate": [],
             "chance": 100,
             "affects": "self",
-            "mode": 2,
             "priority": null,
+            "isFixedChance": false,
+            "alterations": [],
+            "dontMerge": false,
+            "mode": 2,
             "ignored": false
           },
           {
             "type": "roll-effect",
-            "key": "covert-attack",
+            "key": "covert-generic",
             "value": "Compendium.ptr2e.core-effects.Item.jEX7s3GbbAtzgyS3",
             "predicate": [],
             "chance": 100,
             "affects": "self",
-            "mode": 2,
             "priority": null,
+            "isFixedChance": false,
+            "alterations": [],
+            "dontMerge": false,
+            "mode": 2,
             "ignored": false
           }
         ],
@@ -76,7 +83,9 @@
         "traits": [],
         "removeAfterCombat": true,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
@@ -98,12 +107,13 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.346",
         "systemId": "ptr2e",
-        "systemVersion": "0.10.0-alpha.5.1.6",
+        "systemVersion": "1.4.1.beta",
         "createdTime": 1737566553835,
-        "modifiedTime": 1737566597054,
-        "lastModifiedBy": "IcBpMqhFuTck9VpX"
+        "modifiedTime": 1753828952628,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf",
+        "exportSource": null
       }
     }
   ]

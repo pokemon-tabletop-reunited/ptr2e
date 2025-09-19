@@ -1,0 +1,28 @@
+<section class="sheet-body standard-form">
+{{#if list}}
+  <fieldset class="scroll">
+    <legend>
+      {{formatSlug list.slug}} {{#unless (is list.type "universal")}}({{formatSlug list.type}}){{/unless}}
+    </legend>
+    <article class="list editable">   
+      {{#each list.moves as | move |}}
+        <div class="form-group" data-slug="{{move.slug}}">
+          <label>{{{asContentLink move.uuid}}}</label>
+          <div class="move-controls">
+            <a class="move-control move-delete" data-slug="{{move.slug}}" data-tooltip="Delete {{formatSlug move.slug}} from List" data-action="delete" >
+              <i class="fas fa-trash"></i>
+            </a>
+          </div>
+        </div>
+      {{else}}
+        <div class="form-group center empty">
+          <p><small>No moves have been added to this list</small></p>
+        </div>
+      {{/each}}
+    </article>
+  </fieldset>
+  <aside>
+    <p class="mt-0">Drag & Drop moves to add them to this Tutor List.</p>
+  </aside>
+{{/if}}
+</section>

@@ -6,8 +6,8 @@
     "slug": "skull-bash",
     "actions": [
       {
-        "slug": "skull-bash",
-        "name": "Skull Bash",
+        "slug": "skull-bash-resolution",
+        "name": "Skull Bash (Resolution)",
         "type": "attack",
         "traits": [
           "set-up",
@@ -15,7 +15,7 @@
           "defensive",
           "curl",
           "contact",
-          "pp-updated"
+          "flinch-40"
         ],
         "range": {
           "target": "creature",
@@ -24,7 +24,8 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 5
+          "powerPoints": 2,
+          "trigger": "The user used Skull Bash (Set-Up) as their last Action."
         },
         "category": "physical",
         "power": 130,
@@ -32,15 +33,44 @@
         "types": [
           "normal"
         ],
-        "description": "<p>Effect: Set-Up: The user takes a charging stance, gaining @Affliction[braced] 1 and gain +1 DEF Stage for 5 Activations.</p><p>Resolution: On their next Activation, they attack with Skull Bash.</p>",
-        "contestType": "",
-        "contestEffect": "",
-        "free": false,
-        "slot": null
+        "description": "<p>Trigger: The user used Skull Bash (Set-Up) as their last Action.</p><p>Effect: The user freely Moves up to the Movement Score of their choice before attacking with this Attack.</p>",
+        "img": "systems/ptr2e/img/svg/normal_icon.svg",
+        "predicate": []
+      },
+      {
+        "name": "Skull Bash (Set-Up)",
+        "slug": "skull-bash-set-up",
+        "description": "<p>Effect: The user gains @Affliction[braced 2] and +1 DEF Stage for 5 Activations.</p>",
+        "traits": [
+          "set-up",
+          "defensive",
+          "priority-20"
+        ],
+        "type": "attack",
+        "img": "systems/ptr2e/img/svg/normal_icon.svg",
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 3
+        },
+        "range": {
+          "target": "self",
+          "unit": "m"
+        },
+        "types": [
+          "normal"
+        ],
+        "category": "status",
+        "predicate": []
       }
     ],
     "container": null,
-    "grade": "B"
+    "grade": "C",
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ]
+    }
   },
   "_id": "cw3MOFXqhEP3p6yY",
   "effects": []

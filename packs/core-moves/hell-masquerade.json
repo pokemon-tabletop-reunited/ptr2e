@@ -1,0 +1,107 @@
+{
+  "folder": "BImk1fcMbR5akA4z",
+  "name": "Hell Masquerade",
+  "type": "move",
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "publication": {
+      "source": "Digidex",
+      "authors": [
+        "Fox"
+      ],
+      "notes": ""
+    },
+    "traits": [],
+    "actions": [
+      {
+        "name": "Hell Masquerade",
+        "slug": "hell-masquerade",
+        "type": "attack",
+        "img": "systems/ptr2e/img/svg/bug_icon.svg",
+        "traits": [
+          "contact",
+          "5-strike",
+          "crit-1",
+          "digimon"
+        ],
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 8
+        },
+        "types": [
+          "bug"
+        ],
+        "category": "physical",
+        "predicate": [],
+        "description": "<p>This attack grants the user @UUID[Compendium.ptr2e.core-effects.OUBNweJOMjAEtAye]{+1 Evasion Stage for 5 activations}.</p>",
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "power": 35,
+        "accuracy": 100
+      }
+    ],
+    "grade": "A",
+    "slug": "hell-masquerade"
+  },
+  "img": "systems/ptr2e/img/svg/bug_icon.svg",
+  "effects": [
+    {
+      "name": "Hell Masquerade",
+      "type": "passive",
+      "_id": "Eq5L2W6qTQYNijBv",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "hell-masquerade-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.OUBNweJOMjAEtAye",
+            "predicate": [],
+            "chance": 100,
+            "affects": "self",
+            "alterations": [],
+            "dontMerge": false,
+            "mode": 2,
+            "ignored": false,
+            "isFixedChance": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.346",
+        "systemId": "ptr2e",
+        "systemVersion": "1.3.4.beta",
+        "lastModifiedBy": null
+      }
+    }
+  ],
+  "_id": "9XDcOjC9VoMmT2pc"
+}

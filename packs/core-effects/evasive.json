@@ -1,0 +1,94 @@
+{
+  "name": "Evasive",
+  "type": "effect",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "traits": [
+      "pseudo-affliction"
+    ],
+    "description": "While afflicted with Evasive, the creature has +1 default EVA and the Power of its Attacks are decreased by -20%.",
+    "slug": "evasive",
+    "publication": {
+      "source": "",
+      "authors": [],
+      "notes": ""
+    },
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "effects": [
+    {
+      "name": "Evasive",
+      "img": "icons/svg/upgrade.svg",
+      "type": "affliction",
+      "duration": {
+        "turns": null,
+        "startTime": null,
+        "combat": null,
+        "startTurn": null
+      },
+      "system": {
+        "changes": [
+          {
+            "type": "basic",
+            "key": "system.battleStats.evasion.stage",
+            "value": 1,
+            "predicate": [],
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "percentile-modifier",
+            "key": "damaging-attack-power",
+            "value": -20,
+            "predicate": [],
+            "label": "Evasive",
+            "mode": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          }
+        ],
+        "removeOnRecall": true,
+        "removeAfterCombat": true,
+        "traits": [
+          "pseudo-affliction"
+        ],
+        "slug": null,
+        "removeAfterAttacking": true,
+        "removeAfterAttacked": false,
+        "stacks": 0,
+        "priority": 50,
+        "formula": "",
+        "type": "damage"
+      },
+      "description": "While afflicted with Evasive, the creature has +1 default EVA and the Power of its Attacks are decreased by -20%.",
+      "statuses": [],
+      "_id": "evasivecondition",
+      "_stats": {
+        "coreVersion": "13.347",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.3.beta",
+        "createdTime": null,
+        "modifiedTime": 1756025601478,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "disabled": false,
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "sort": 0,
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": "always"
+        }
+      }
+    }
+  ],
+  "folder": "V4skAU6G3OH5fXgE",
+  "_id": "evasivecondiitem"
+}

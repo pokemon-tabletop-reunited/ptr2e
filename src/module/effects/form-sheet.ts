@@ -5,21 +5,17 @@ import FormActiveEffectSystem from "./data/form.ts";
 import { ActorPTR2e } from "@actor";
 import { ItemPTR2e } from "@item";
 import { sluggify } from "@utils";
-// import * as R from "remeda";
+import { DocumentSheetConfigurationExpanded } from "@module/apps/appv2-expanded.ts";
 
 export class FormConfigSheet extends ActiveEffectConfig {
 
-  static override DEFAULT_OPTIONS = fu.mergeObject(
-    super.DEFAULT_OPTIONS,
-    {
-      classes: ["form-sheet"],
-      actions: {},
-      form: {
-        handler: FormConfigSheet.#onSubmit
-      }
-    },
-    { inplace: false }
-  );
+  static override DEFAULT_OPTIONS = {
+    classes: ["form-sheet"],
+    actions: {},
+    form: {
+      handler: FormConfigSheet.#onSubmit
+    }
+  }  as unknown as Omit<DeepPartial<DocumentSheetConfigurationExpanded>, "uniqueId">;
 
   static override PARTS: Record<string, foundry.applications.api.HandlebarsTemplatePart> = {
     header: {
@@ -72,7 +68,7 @@ export class FormConfigSheet extends ActiveEffectConfig {
 
   prepareConditionDisplays() {
     const conditions = this.document.system.conditions;
-    if(!conditions.length) return [];
+    if (!conditions.length) return [];
 
     interface ConditionDisplay {
       type: "weather" | "item" | "ability";
@@ -83,10 +79,10 @@ export class FormConfigSheet extends ActiveEffectConfig {
     }
 
     const displays: ConditionDisplay[] = [];
-    for(let i = 0; i < conditions.length; i++) {
+    for (let i = 0; i < conditions.length; i++) {
       const condition = conditions[i];
-      if(typeof condition !== "string") continue;
-      switch(true) {
+      if (typeof condition !== "string") continue;
+      switch (true) {
         case /^weather:[a-z-]+$/.test(condition): {
           displays.push({
             type: "weather",
@@ -97,7 +93,7 @@ export class FormConfigSheet extends ActiveEffectConfig {
           break;
         }
         case /^item:[a-z]+:[a-z-]+:(held|worn|equipped)$/.test(condition): {
-          const [,itemType, itemName,] = condition.split(":");
+          const [, itemType, itemName,] = condition.split(":");
           displays.push({
             type: "item",
             value: itemName,
@@ -108,7 +104,7 @@ export class FormConfigSheet extends ActiveEffectConfig {
           break;
         }
         case /^item:ability:[a-z-]+:active$/.test(condition): {
-          const [,, abilityname,] = condition.split(":");
+          const [, , abilityname,] = condition.split(":");
           displays.push({
             type: "ability",
             value: abilityname,
@@ -128,33 +124,33 @@ export class FormConfigSheet extends ActiveEffectConfig {
     if (partId === "overview") {
       const richConditionInputs = htmlElement.querySelectorAll<HTMLInputElement | HTMLSelectElement>(".conditions input, .conditions select");
       const conditionPredicateInput = htmlElement.querySelector<HTMLInputElement>("input[name='system.conditions']");
-      for(const conditionInput of richConditionInputs) {
-        if(!conditionPredicateInput) continue;
+      for (const conditionInput of richConditionInputs) {
+        if (!conditionPredicateInput) continue;
         conditionInput.addEventListener("change", () => {
           const conditions = this.document.clone().system.conditions;
 
-          const {idx, type} = conditionInput.dataset;
-          if(!idx || !type) return;
+          const { idx, type } = conditionInput.dataset;
+          if (!idx || !type) return;
           const index = parseInt(idx);
-          if(isNaN(index)) return;
+          if (isNaN(index)) return;
 
           const value = sluggify(conditionInput.value);
-          switch(type) {
+          switch (type) {
             case "weather": {
               conditions[index] = `weather:${value}`;
               break;
             }
             case "item": {
-              if(conditionInput instanceof HTMLSelectElement) {
+              if (conditionInput instanceof HTMLSelectElement) {
                 const input = conditionInput.nextElementSibling as HTMLInputElement | null;
-                if(!input) return;
+                if (!input) return;
                 const itemValue = sluggify(input.value);
                 conditions[index] = `item:${value}:${itemValue}:held`;
                 break;
               }
 
               const select = conditionInput.previousElementSibling as HTMLSelectElement | null;
-              if(!select) return;
+              if (!select) return;
               const itemType = select.value;
               conditions[index] = `item:${itemType}:${value}:equipped`;
               break;
@@ -170,14 +166,14 @@ export class FormConfigSheet extends ActiveEffectConfig {
       }
 
       const conditionTypeSelects = htmlElement.querySelectorAll<HTMLSelectElement>(".conditions select.condition-type");
-      for(const select of conditionTypeSelects) {
-        if(!conditionPredicateInput) continue;
+      for (const select of conditionTypeSelects) {
+        if (!conditionPredicateInput) continue;
         select.addEventListener("change", () => {
           const conditions = this.document.clone().system.conditions;
           const index = parseInt(select.dataset.idx || "");
-          if(isNaN(index)) return;
+          if (isNaN(index)) return;
 
-          switch(select.value) {
+          switch (select.value) {
             case "weather": {
               conditions[index] = `weather:clear`;
               break;
@@ -198,7 +194,7 @@ export class FormConfigSheet extends ActiveEffectConfig {
 
       const conditionAddButton = htmlElement.querySelector<HTMLButtonElement>("button[data-action='add-condition']");
       conditionAddButton?.addEventListener("click", () => {
-        if(!conditionPredicateInput) return;
+        if (!conditionPredicateInput) return;
         const conditions = this.document.clone().system.conditions;
         conditions.push("weather:clear");
         conditionPredicateInput.value = JSON.stringify(conditions, null, 0);
@@ -206,12 +202,12 @@ export class FormConfigSheet extends ActiveEffectConfig {
       });
 
       const conditionRemoveButtons = htmlElement.querySelectorAll<HTMLButtonElement>("button[data-action='remove-condition']");
-      for(const button of conditionRemoveButtons) {
+      for (const button of conditionRemoveButtons) {
         button.addEventListener("click", () => {
-          if(!conditionPredicateInput) return;
+          if (!conditionPredicateInput) return;
           const conditions = this.document.clone().system.conditions;
           const index = parseInt(button.dataset.idx || "");
-          if(isNaN(index)) return;
+          if (isNaN(index)) return;
           conditions.splice(index, 1);
           conditionPredicateInput.value = JSON.stringify(conditions, null, 0);
         });

@@ -51,19 +51,19 @@
       }
     ],
     "cost": 4,
-    "description": "<p>The user’s bonuses from Great Hunter increase to +20 when the target is Large or larger.</p><p>The user's Attacks deal more damage the larger the target is compared to the user.</p><blockquote> PowerPercentIncrease = max(0, 7.5 * (targetCatMod-userCatMod))</blockquote>",
+    "description": "<p>The user’s bonuses from Great Hunter increase to +20 when the target is Large or larger.</p><p>The user's Attacks deal more damage the larger the target is compared to the user.</p><blockquote> PowerPercentIncrease = max(0, 15 * (targetCatMod-userCatMod))</blockquote>",
     "actions": [
       {
         "name": "Trophy Bagger",
         "slug": "trophy-bagger",
-        "description": "<p>The user’s bonuses from Great Hunter increase to +20 when the target is Large or larger.</p><p>The user's Attacks deal more damage the larger the target is compared to the user.</p><blockquote> PowerPercentIncrease = max(0, 7.5 * (targetCatMod-userCatMod))</blockquote>",
+        "description": "<p>The user’s bonuses from Great Hunter increase to +20 when the target is Large or larger.</p><p>The user's Attacks deal more damage the larger the target is compared to the user.</p><blockquote> PowerPercentIncrease = max(0, 15 * (targetCatMod-userCatMod))</blockquote>",
         "cost": {
-          "activation": "free",
+          "activation": "simple",
           "powerPoints": 0,
           "delay": null,
           "priority": null
         },
-        "type": "generic",
+        "type": "passive",
         "traits": [],
         "img": "icons/svg/explosion.svg",
         "range": {
@@ -71,7 +71,9 @@
           "unit": "m",
           "distance": 0
         },
-        "variant": null
+        "variant": null,
+        "ephemeralVariant": false,
+        "hidden": false
       }
     ],
     "slug": "trophy-bagger",
@@ -111,7 +113,14 @@
     "design": {
       "arena": "physical",
       "approach": "finesse",
-      "archetype": "Hunter"
+      "archetype": "hunter"
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
     }
   },
   "_id": "w7jJHaMJtSIg6FrQ",

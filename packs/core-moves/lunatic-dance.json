@@ -1,0 +1,111 @@
+{
+  "name": "Lunatic Dance",
+  "type": "move",
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": {
+        "schema": null,
+        "foundry": "12.331",
+        "system": "1.1.0.beta"
+      }
+    },
+    "slug": "lunatic-dance",
+    "publication": {
+      "source": "Digidex",
+      "authors": [
+        "PTR 2e Team",
+        "Gwen"
+      ],
+      "notes": ""
+    },
+    "traits": [],
+    "actions": [
+      {
+        "slug": "lunatic-dance",
+        "name": "Lunatic Dance",
+        "type": "attack",
+        "traits": [
+          "digimon"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 5
+        },
+        "category": "physical",
+        "power": 100,
+        "accuracy": 100,
+        "types": [
+          "water"
+        ],
+        "description": "<p>Effect: On hit, the target has a 50% chance of gaining @Affliction[confused] 5.</p>",
+        "img": "https://assets.forge-vtt.com/6132db9efd99d052c06b70e3/systems/ptr2e/img/svg/water_icon.svg",
+        "predicate": []
+      }
+    ],
+    "grade": "B"
+  },
+  "img": "systems/ptr2e/img/svg/water_icon.svg",
+  "effects": [
+    {
+      "name": "Lunatic Dance",
+      "type": "passive",
+      "_id": "lb4xfBhyvPZC9byY",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "lunatic-dance-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.confusedconditem",
+            "predicate": [],
+            "chance": 50,
+            "affects": "target",
+            "priority": null,
+            "alterations": [],
+            "isFixedChance": false,
+            "dontMerge": false,
+            "mode": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      }
+    }
+  ],
+  "folder": "BImk1fcMbR5akA4z",
+  "_id": "AourPTTtoPUg4FD4"
+}

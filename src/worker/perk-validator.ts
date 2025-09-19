@@ -469,7 +469,7 @@ function resolveInjectedProperties(
     return source;
   } else if (typeof source === "string") {
     return source.replace(
-      /{(actor|item|attack)\|(.*?)}/g,
+      /{(actor|item|attack)\|(.*?)(\|C)?}/g,
       (_match, key: string, prop: string) => {
         const data =
           key === "actor" || key === "item"

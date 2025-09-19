@@ -1,0 +1,115 @@
+{
+  "name": "Incorporeal",
+  "_id": "lmZT5Z1Oto8qt4jh",
+  "type": "perk",
+  "img": "icons/creatures/magical/spirit-mischief-fire-blue.webp",
+  "effects": [
+    {
+      "name": "Incorporeal",
+      "type": "passive",
+      "_id": "eYhfQfaYEn9ZwWV2",
+      "img": "icons/creatures/magical/spirit-mischief-fire-blue.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "add-trait",
+            "key": "",
+            "value": "phasing",
+            "predicate": [],
+            "priority": null,
+            "mode": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": false,
+        "removeOnRecall": false,
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "<p>You gain the @Trait[phasing] trait.</p>",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": "Compendium.ptr2e.core-perks.Item.vgrtXLOiip6DrtUb.ActiveEffect.9sPoZxBVcS4lYsy5",
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.346",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.2.beta",
+        "createdTime": 1754225846252,
+        "modifiedTime": 1754225870911,
+        "lastModifiedBy": "dCIq77b7AO2frs8Z"
+      }
+    }
+  ],
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "publication": {
+      "source": "PTR2e Core",
+      "authors": [
+        "Fox"
+      ],
+      "notes": ""
+    },
+    "actions": [],
+    "slug": "incorporeal",
+    "description": "<p>Effect: Grants the @Trait[phasing] trait.</p>",
+    "traits": [
+      "ghost"
+    ],
+    "prerequisites": [
+      "trait:ghost"
+    ],
+    "autoUnlock": [
+      "trait:phasing"
+    ],
+    "cost": 3,
+    "design": {
+      "arena": "mental",
+      "approach": "finesse",
+      "archetype": "ghost"
+    },
+    "global": true,
+    "webs": [],
+    "nodes": [
+      {
+        "x": 174,
+        "y": 109,
+        "hidden": false,
+        "type": "normal",
+        "connected": [
+          "spectral-stalker",
+          "walking-dead"
+        ],
+        "config": {
+          "texture": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "tint": null
+        },
+        "tier": null
+      }
+    ]
+  },
+  "folder": "mYLGJuVcLTxYkgvC"
+}

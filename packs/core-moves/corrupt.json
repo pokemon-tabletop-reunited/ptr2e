@@ -9,33 +9,39 @@
         "slug": "corrupt",
         "name": "Corrupt",
         "type": "attack",
-        "traits": [
-          "pp-updated"
-        ],
+        "traits": [],
         "range": {
-          "target": "self",
-          "distance": 0,
+          "target": "creature",
+          "distance": 1,
           "unit": "m"
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 2
+          "powerPoints": 3
         },
         "category": "status",
-        "power": null,
         "accuracy": 85,
         "types": [
           "poison"
         ],
-        "description": "<p>Effect: Roll 2d8 and decrease the Stage of the stats in the corresponding table by -2 for 5 Activations.</p><p><ol><li>ATK</li><li>DEF</li><li>SPATK</li><li>SPDEF</li><li>SPD</li><li>ACC</li><li>EVA</li><li>User Choice<></ol></p>",
-        "contestType": "",
-        "contestEffect": "",
-        "free": false,
-        "slot": null
+        "description": "<p>Effect: Roll 2d8 and decrease the Stage of the stats in the corresponding table by -2 for 5 Activations.</p><ol><li>ATK</li><li>DEF</li><li>SPATK</li><li>SPDEF</li><li>SPD</li><li>ACC</li><li>EVA</li><li>User Choice</li></ol>",
+        "img": "systems/ptr2e/img/svg/poison_icon.svg",
+        "predicate": []
       }
     ],
-    "container": null,
-    "grade": "E"
+    "grade": "C",
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": "undefined"
+    },
+    "traits": [],
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
   },
   "_id": "Gjdv2pC50rh1lvrG",
   "effects": []

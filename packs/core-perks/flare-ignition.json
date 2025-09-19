@@ -1,0 +1,133 @@
+{
+  "folder": "oguAsvaOzTLs8f97",
+  "name": "Flare Ignition",
+  "type": "perk",
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Dev"
+      ],
+      "notes": ""
+    },
+    "actions": [],
+    "slug": "flare-ignition",
+    "description": "<p>Effect: The user maintains an Ignition Clock, 10 Spans in size. The Clock ticks forward two Spans at the end of the user’s Activation if they have moved 3m or more since the end of their last Activation, and two Spans if the user has not been hit by a Physical- or Special-Category Attack in the same timeframe. The Clock ticks back one Span if the user has not moved in the timeframe, and back by one each time they get hit by a Physical- or Special-Category Attack. The Clock empties at the end of Combat.</p><p>The user’s ATK, SPATK, and SPD are reduced by -25% if the Clock is empty, and increase by 10% per filled Span, up to 75% at 10 Spans.</p>",
+    "traits": [],
+    "prerequisites": [
+      "trait:fire"
+    ],
+    "autoUnlock": [],
+    "cost": 3,
+    "design": {
+      "arena": "physical",
+      "approach": "power",
+      "archetype": "fire"
+    },
+    "global": true,
+    "webs": [],
+    "nodes": [
+      {
+        "x": 167,
+        "y": 88,
+        "connected": [
+          "intense-heat",
+          "inner-warmth",
+          "potent-venom"
+        ],
+        "hidden": false,
+        "type": "normal",
+        "tier": null
+      }
+    ],
+    "originSlug": "flare-ignition"
+  },
+  "img": "systems/ptr2e/img/svg/fire_icon.svg",
+  "effects": [
+    {
+      "name": "Flare Igintion",
+      "type": "passive",
+      "_id": "Qhvhz72efeOcfq7t",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "create-clock",
+            "key": "cyfRZpZznW2FypRQ",
+            "value": 0,
+            "predicate": [],
+            "max": 10,
+            "color": "#ff0000",
+            "private": false,
+            "label": "Flame Ignition",
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "key": "system.modifiers.atkMultiplier",
+            "value": "-0.25+@actor.clocks.cyfRZpZznW2FypRQ*0.1",
+            "predicate": [],
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "key": "system.modifiers.speMultiplier",
+            "value": "-0.25+@actor.clocks.cyfRZpZznW2FypRQ*0.1",
+            "predicate": [],
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "key": "system.modifiers.spaMultiplier",
+            "value": "-0.25+@actor.clocks.cyfRZpZznW2FypRQ*0.1",
+            "predicate": [],
+            "mode": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": false,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ff0000",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": "never"
+        }
+      },
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.347",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.3.beta",
+        "createdTime": 1755585157565,
+        "modifiedTime": 1755587524412,
+        "lastModifiedBy": "oC3xwsMDu7M30pzG"
+      }
+    }
+  ],
+  "_id": "d5xDTqhMKlNaX4Cw"
+}

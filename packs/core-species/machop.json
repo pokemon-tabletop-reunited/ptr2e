@@ -13,25 +13,21 @@
     "diet": [
       "omnivore"
     ],
-    "movement": {
-      "primary": [
-        {
-          "type": "overland",
-          "value": 4
-        }
-      ],
-      "secondary": [
-        {
-          "type": "swim",
-          "value": 3
-        }
-      ]
-    },
+    "movement": [
+      {
+        "type": "overland",
+        "value": 4
+      },
+      {
+        "type": "swim",
+        "value": 3
+      }
+    ],
     "traits": [
       "pokemon",
       "bipedal",
-      "underdog",
-      "well-built"
+      "well-built",
+      "jump-3"
     ],
     "abilities": {
       "starting": [
@@ -619,6 +615,10 @@
               "operand": "and"
             }
           ],
+          "perk": {
+            "x": 26,
+            "y": 26
+          },
           "evolutions": [
             {
               "name": "machamp",
@@ -631,11 +631,15 @@
                 },
                 {
                   "type": "item",
-                  "item": "linking-chord",
+                  "item": "linking-cord",
                   "operand": "or",
                   "held": false
                 }
               ],
+              "perk": {
+                "x": 26,
+                "y": 26
+              },
               "details": {
                 "gender": null,
                 "item": null,
@@ -654,7 +658,11 @@
         }
       ],
       "uuid": "Compendium.ptr2e.core-species.Item.iFLjHphgXY8RxuaO",
-      "methods": []
+      "methods": [],
+      "perk": {
+        "x": 26,
+        "y": 26
+      }
     },
     "_migration": {
       "version": null,
@@ -664,7 +672,13 @@
       "cave",
       "mountain"
     ],
-    "slug": "machop"
+    "slug": "machop",
+    "publication": {
+      "source": "PTR 2e Core - Kanto Dex",
+      "authors": [
+        "PTR 2e Team"
+      ]
+    }
   },
   "_id": "iFLjHphgXY8RxuaO",
   "effects": []

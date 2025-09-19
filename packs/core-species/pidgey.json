@@ -6,32 +6,29 @@
     "number": 16,
     "size": {
       "category": "tiny",
-      "type": "height",
+      "type": "quad",
       "height": 0.3,
       "weight": 1.8
     },
     "diet": [
       "omnivore"
     ],
-    "movement": {
-      "primary": [
-        {
-          "type": "flight",
-          "value": 9
-        }
-      ],
-      "secondary": [
-        {
-          "type": "overland",
-          "value": 3
-        }
-      ]
-    },
+    "movement": [
+      {
+        "type": "flight",
+        "value": 9
+      },
+      {
+        "type": "overland",
+        "value": 3
+      }
+    ],
     "traits": [
       "pokemon",
       "winged",
-      "underdog",
-      "direction-sense"
+      "direction-sense",
+      "jump-4",
+      "guster"
     ],
     "abilities": {
       "starting": [
@@ -39,23 +36,23 @@
           "slug": "keen-eye"
         },
         {
-          "slug": "big-pecks"
+          "slug": "tangled-feet"
         }
       ],
       "basic": [
         {
-          "slug": "tangled-feet"
+          "slug": "flock"
         },
         {
-          "slug": "flock"
+          "slug": "big-pecks"
         }
       ],
       "advanced": [
         {
-          "slug": "gale-wings"
+          "slug": "early-bird"
         },
         {
-          "slug": "early-bird"
+          "slug": "windvane"
         }
       ],
       "master": [
@@ -475,6 +472,10 @@
                 "item": null,
                 "level": null,
                 "knownMove": null
+              },
+              "perk": {
+                "x": 26,
+                "y": 26
               }
             }
           ],
@@ -483,11 +484,19 @@
             "item": null,
             "level": null,
             "knownMove": null
+          },
+          "perk": {
+            "x": 26,
+            "y": 26
           }
         }
       ],
       "uuid": "Compendium.ptr2e.core-species.Item.4SfdmzV3FAUxlffS",
-      "methods": []
+      "methods": [],
+      "perk": {
+        "x": 26,
+        "y": 26
+      }
     },
     "habitats": [
       "forest",
@@ -495,7 +504,18 @@
       "grassland",
       "city"
     ],
-    "slug": "pidgey"
+    "slug": "pidgey",
+    "publication": {
+      "source": "PTR 2e Core - Kanto Dex",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
   },
   "_id": "4SfdmzV3FAUxlffS",
   "effects": []

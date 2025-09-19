@@ -1,0 +1,179 @@
+{
+  "name": "Agitator",
+  "_id": "ebtHuGuVOmCt5rwj",
+  "type": "perk",
+  "img": "icons/skills/social/intimidation-impressing.webp",
+  "effects": [
+    {
+      "name": "Agitator",
+      "type": "passive",
+      "_id": "TftNMXyt1SWccZwi",
+      "img": "icons/skills/social/intimidation-impressing.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "add-trait",
+            "key": "",
+            "value": "agitator",
+            "predicate": [],
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "grant-item",
+            "key": "",
+            "value": "Compendium.ptr2e.core-moves.Item.NoHd6SBeivDS66M1",
+            "predicate": [],
+            "alterations": [],
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            },
+            "allowDuplicate": false,
+            "mode": 2,
+            "ignored": false,
+            "reevaluateOnUpdate": false,
+            "inMemoryOnly": false,
+            "track": false,
+            "replaceSelf": false
+          },
+          {
+            "type": "grant-item",
+            "key": "",
+            "value": "Compendium.ptr2e.core-moves.Item.wYGAvakAQaDex43K",
+            "predicate": [],
+            "alterations": [],
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            },
+            "allowDuplicate": false,
+            "mode": 2,
+            "ignored": false,
+            "reevaluateOnUpdate": false,
+            "inMemoryOnly": false,
+            "track": false,
+            "replaceSelf": false
+          },
+          {
+            "type": "grant-item",
+            "key": "",
+            "value": "Compendium.ptr2e.core-moves.Item.j42qPlBO6UlbdaV6",
+            "predicate": [],
+            "alterations": [],
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            },
+            "allowDuplicate": false,
+            "mode": 2,
+            "ignored": false,
+            "reevaluateOnUpdate": false,
+            "inMemoryOnly": false,
+            "track": false,
+            "replaceSelf": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": false,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "<p>You gain the @Trait[agitator] Trait, providing you access to its tutor list and learn @UUID[Compendium.ptr2e.core-moves.NoHd6SBeivDS66M1]{Confide}, @UUID[Compendium.ptr2e.core-moves.wYGAvakAQaDex43K]{Swagger} and @UUID[Compendium.ptr2e.core-moves.j42qPlBO6UlbdaV6]{Growl} if you don't already know them.</p>",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.346",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.2.beta",
+        "createdTime": 1754226702511,
+        "modifiedTime": 1754226756614,
+        "lastModifiedBy": "dCIq77b7AO2frs8Z"
+      }
+    }
+  ],
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "publication": {
+      "source": "PTR2e Core",
+      "authors": [
+        "Fox"
+      ],
+      "notes": ""
+    },
+    "actions": [],
+    "slug": "agitator",
+    "description": "<p>You gain the @Trait[agitator] Trait, providing you access to its tutor list and learn @UUID[Compendium.ptr2e.core-moves.NoHd6SBeivDS66M1]{Confide}, @UUID[Compendium.ptr2e.core-moves.wYGAvakAQaDex43K]{Swagger} and @UUID[Compendium.ptr2e.core-moves.j42qPlBO6UlbdaV6]{Growl} if you don't already know them.</p>",
+    "traits": [],
+    "prerequisites": [
+      {
+        "gte": [
+          "{actor|skills.conversation.mod}",
+          35
+        ]
+      },
+      {
+        "gte": [
+          "{actor|skills.fast-talk.mod}",
+          35
+        ]
+      },
+      {
+        "gte": [
+          "{actor|skills.intimidate.mod}",
+          35
+        ]
+      }
+    ],
+    "autoUnlock": [
+      "trait:agitator"
+    ],
+    "cost": 1,
+    "design": {
+      "arena": "social",
+      "approach": "finesse",
+      "archetype": "social"
+    },
+    "global": true,
+    "webs": [],
+    "nodes": [
+      {
+        "x": 167,
+        "y": 141,
+        "hidden": false,
+        "type": "normal",
+        "connected": [
+          "condemn",
+          "hesitation",
+          "not-the-face"
+        ],
+        "config": {
+          "texture": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "tint": null
+        },
+        "tier": null
+      }
+    ]
+  },
+  "folder": "jLhPGZvYVjjs7D54"
+}

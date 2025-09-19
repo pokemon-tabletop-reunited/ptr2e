@@ -1,0 +1,112 @@
+{
+  "folder": "BImk1fcMbR5akA4z",
+  "name": "Electric Shock (Betamon)",
+  "type": "move",
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "publication": {
+      "source": "Digidex",
+      "authors": [
+        "Fox"
+      ],
+      "notes": ""
+    },
+    "traits": [],
+    "actions": [
+      {
+        "name": "Electric Shock (Betamon)",
+        "slug": "electric-shock-betamon",
+        "type": "attack",
+        "img": "systems/ptr2e/img/svg/electric_icon.svg",
+        "traits": [
+          "digimon"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 15,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 2
+        },
+        "types": [
+          "electric"
+        ],
+        "category": "special",
+        "power": 55,
+        "accuracy": 100,
+        "predicate": [],
+        "description": "<p>This attack has a 10% chance to inflict @Affliction[paralysis] 5.</p>"
+      }
+    ],
+    "grade": "D",
+    "slug": "electric-shock-betamon"
+  },
+  "img": "systems/ptr2e/img/svg/electric_icon.svg",
+  "effects": [
+    {
+      "name": "Electric Shock (Betamon)",
+      "type": "passive",
+      "_id": "rKdwHoZyGbpMp9ry",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "electric-shock-betamon",
+            "value": "Compendium.ptr2e.core-effects.Item.paralysisconitem",
+            "predicate": [],
+            "chance": 10,
+            "affects": "target",
+            "dontMerge": false,
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "alterations": [],
+            "isFixedChance": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "13.346",
+        "systemId": "ptr2e",
+        "systemVersion": "1.2.1.beta",
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null,
+        "exportSource": null
+      }
+    }
+  ],
+  "_id": "We0SClwIUwmre7v0"
+}

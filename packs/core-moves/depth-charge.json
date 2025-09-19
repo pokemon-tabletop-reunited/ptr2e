@@ -11,11 +11,10 @@
         "type": "attack",
         "traits": [
           "blast-2",
-          "explode",
-          "pp-updated"
+          "explode"
         ],
         "range": {
-          "target": "creature",
+          "target": "blast",
           "distance": 5,
           "unit": "m"
         },
@@ -29,11 +28,8 @@
         "types": [
           "water"
         ],
-        "description": "",
-        "contestType": "",
-        "contestEffect": "",
-        "free": false,
-        "slot": null
+        "img": "systems/ptr2e/img/svg/water_icon.svg",
+        "predicate": []
       },
       {
         "slug": "depth-charge-submerged",
@@ -41,11 +37,10 @@
         "type": "attack",
         "traits": [
           "blast-2",
-          "explode",
-          "pp-updated"
+          "explode"
         ],
         "range": {
-          "target": "creature",
+          "target": "blast",
           "distance": 15,
           "unit": "m"
         },
@@ -61,15 +56,25 @@
           "water"
         ],
         "description": "<p>Trigger: Target location is submerged, and valid targets are Swimming.</p><p>Effect: This Attack ignores valid targets' EVA Stage increases.</p>",
-        "contestType": "",
-        "contestEffect": "",
         "variant": "depth-charge",
         "free": true,
-        "slot": null
+        "img": "systems/ptr2e/img/svg/water_icon.svg",
+        "predicate": []
       }
     ],
-    "container": null,
-    "grade": "B"
+    "grade": "B",
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "traits": [],
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
   },
   "_id": "uYrOp53quR0k2gqN",
   "effects": []

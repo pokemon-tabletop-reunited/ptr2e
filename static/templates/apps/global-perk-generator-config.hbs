@@ -1,0 +1,11 @@
+<section class="configs scroll">
+  <div class="list d-flex flex-row" style="flex-wrap: wrap; gap: 0.5rem;">
+    {{#each data as |entry|}}
+      <div class="entry fb-45 center-text" data-id="{{entry.id}}" data-label="{{entry.label}}">
+        <a class="content-link" data-action="open-entry" draggable="true" data-action="open-config" data-id="{{entry.id}}" data-type="GeneratorConfig" data-tooltip-direction="UP" data-tooltip="Open {{#if entry.label}}{{entry.label}}{{else}}Perk Generator Config{{/if}}"><i class="fas fa-rectangle-list"></i>{{#if entry.label}}{{entry.label}}{{else}}Perk Generator Config{{/if}}</a>
+        <a class="content-link open-global-configs" style="flex: 0;" data-action="export-config" data-id="{{entry.id}}" data-tooltip-direction="UP" data-tooltip="Export Config"><i class="fas fa-download m-0"></i></a>
+        <a class="content-link delete" style="flex: 0;" data-action="delete-config" data-id="{{entry.id}}" data-type="GeneratorConfig" data-tooltip-direction="UP" data-tooltip="Delete {{#if blueprint.config.label}}{{blueprint.config.label}}{{else}}Perk Generator Config{{/if}}"><i class="fas fa-trash m-0"></i></a>
+      </div>
+    {{/each}}
+  </div>
+</section>

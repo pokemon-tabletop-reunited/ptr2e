@@ -9,7 +9,6 @@
           "legendary",
           "defensive",
           "interrupt-7",
-          "flinch-5",
           "stage-change"
         ],
         "name": "Corridors of Time (Reaction)",
@@ -25,14 +24,14 @@
           "distance": 20,
           "unit": "m"
         },
-        "description": "<p>Trigger: The user would be affected by a declared Action, Attack, or Ability.</p><p>Effect: The user targets the source of Triggering effect, causing them to Flinch. The user is unaffected by the Triggering effect, and then user gains +6 EVA for 2 Activations.</p>",
+        "description": "<p>Trigger: The user would be affected by a declared Action, Attack, or Ability.</p><p>Effect: The user targets the source of Triggering effect, causing them to be Delayed by 50%. The user is unaffected by the Triggering effect, and then user gains +6 EVA for 2 Activations.</p>",
         "img": "icons/svg/explosion.svg"
       },
       {
         "traits": [
           "legendary",
           "interrupt-7",
-          "priority-5"
+          "priority-50"
         ],
         "name": "Corridors of Time (Action)",
         "slug": "corridors-of-time-action",
@@ -45,20 +44,20 @@
         },
         "range": {
           "target": "self",
-          "unit": "m"
+          "unit": "m",
+          "distance": 10
         },
-        "description": "<p>Trigger: The user declares an Action or Ability that consumes at least one Simple Action.</p><p>The number of Simple Actions the Triggering Action consumes are reduced by 1 ([Exhaust] Actions instead just lose [Exhaust]).</p>",
+        "description": "<p>Trigger: The user declares an Action or Ability that consumes at least one Simple Action.</p><p>The number of Simple Actions the Triggering Action consumes are reduced by 1.</p>",
         "img": "icons/svg/explosion.svg"
       }
     ],
-    "description": "<p>Trigger: The user would be affected by a declared Action, Attack, or Ability.</p><p>Effect: Connection - Roar of Time. The triggering effect does not affect the user, and effect's source is affected by Flinch. Then user gains +6 EVA for 2 Activations. When the user declares an Action or Ability that consumes at least one Simple Action, the user may spend 4 PP to reduce the number of Simple Actions that Action consumes by 1 ([Exhaust] Actions instead just lose [Exhaust]).</p>",
+    "description": "<p>Trigger: The user would be affected by a declared Action, Attack, or Ability.</p><p>Effect: Connection - Roar of Time. The triggering effect does not affect the user, and effect's source is affected by Flinch. Then user gains +6 EVA for 2 Activations. When the user declares an Action or Ability that consumes at least one Simple Action, the user may spend 4 PP to reduce the number of Simple Actions that Action consumes by 1.</p>",
     "traits": [
       "legendary",
       "connection",
       "defensive",
       "interrupt-7",
-      "priority-5",
-      "flinch-5",
+      "priority-50",
       "stage-change",
       "partial-automation"
     ],
@@ -66,6 +65,13 @@
     "_migration": {
       "version": null,
       "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
     }
   },
   "_id": "Zen8fn6P5ibzzf1l",
@@ -81,7 +87,9 @@
             "type": "grant-item",
             "key": "",
             "value": "Compendium.ptr2e.core-moves.Item.PTh9HrZFLR9vXBGN",
-            "predicate": [],
+            "predicate": [
+              "ability:corridors-of-time:active"
+            ],
             "alterations": [
               {
                 "mode": 5,
@@ -89,25 +97,27 @@
                 "value": "true"
               }
             ],
-            "mode": 2,
             "priority": null,
-            "ignored": false,
-            "reevaluateOnUpdate": false,
-            "inMemoryOnly": false,
-            "allowDuplicate": true,
-            "track": false,
-            "replaceSelf": false,
+            "reevaluateOnUpdate": true,
             "onDeleteActions": {
               "grantee": "detach",
               "granter": "cascade"
-            }
+            },
+            "allowDuplicate": false,
+            "mode": 2,
+            "ignored": false,
+            "inMemoryOnly": false,
+            "track": false,
+            "replaceSelf": false
           }
         ],
         "slug": null,
         "traits": [],
         "removeAfterCombat": true,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
@@ -129,12 +139,13 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.346",
         "systemId": "ptr2e",
-        "systemVersion": "0.10.0-alpha.5.1.5",
+        "systemVersion": "1.4.2.beta",
         "createdTime": 1737395351936,
-        "modifiedTime": 1737395403815,
-        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+        "modifiedTime": 1754317360725,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf",
+        "exportSource": null
       }
     }
   ]

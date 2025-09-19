@@ -13,26 +13,23 @@
     "diet": [
       "phototroph"
     ],
-    "movement": {
-      "primary": [
-        {
-          "type": "overland",
-          "value": 8
-        }
-      ],
-      "secondary": [
-        {
-          "type": "swim",
-          "value": 4
-        }
-      ]
-    },
+    "movement": [
+      {
+        "type": "overland",
+        "value": 8
+      },
+      {
+        "type": "swim",
+        "value": 4
+      }
+    ],
     "traits": [
       "pokemon",
       "plant-grower",
       "reach",
       "serpentine",
-      "underdog"
+      "underdog",
+      "jump-3"
     ],
     "abilities": {
       "starting": [
@@ -40,31 +37,31 @@
           "slug": "overgrow"
         },
         {
-          "slug": "shed-skin"
+          "slug": "contrary"
         }
       ],
       "basic": [
         {
-          "slug": "contrary"
+          "slug": "frighten"
         },
         {
-          "slug": "solar-power"
+          "slug": "shed-skin"
         }
       ],
       "advanced": [
         {
-          "slug": "chloroplast"
+          "slug": "solar-power"
         },
         {
-          "slug": "coil-up"
+          "slug": "wyrm-power"
         }
       ],
       "master": [
         {
-          "slug": "sun-worship"
+          "slug": "chloroplast"
         },
         {
-          "slug": "sunbathe"
+          "slug": "fearmonger"
         }
       ]
     },
@@ -546,6 +543,10 @@
                 "item": null,
                 "level": null,
                 "knownMove": null
+              },
+              "perk": {
+                "x": 26,
+                "y": 26
               }
             }
           ],
@@ -554,13 +555,32 @@
             "item": null,
             "level": null,
             "knownMove": null
+          },
+          "perk": {
+            "x": 26,
+            "y": 26
           }
         }
       ],
-      "uuid": "Compendium.ptr2e.core-species.Item.QvOl1owpzrBeqWog"
+      "uuid": "Compendium.ptr2e.core-species.Item.QvOl1owpzrBeqWog",
+      "methods": [],
+      "perk": {
+        "x": 26,
+        "y": 26
+      }
+    },
+    "publication": {
+      "source": "PTR 2e Core - Unova Dex",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "_migration": {
+      "version": null,
+      "previous": null
     }
   },
   "_id": "2BcUkTAIEPNMREwB",
-  "effects": [],
-  "folder": null
+  "effects": []
 }

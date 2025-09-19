@@ -42,7 +42,8 @@ export default class CombatantSystemPTR2e extends foundry.abstract.TypeDataModel
     }
 
     const currentlyApplied = this.advanceDelayPercent;
-    const maxDelta = -150 / this.baseAV;
+    const hasBossDelayImmunity = !!this.parent.actor?.rollOptions?.all?.["special:boss-delay"];
+    const maxDelta = Math.clamp(-150 / this.baseAV, hasBossDelayImmunity ? -0.3 : -99, 1);
     const newApplied = Math.clamp(currentlyApplied + advancementDelay, maxDelta, 1);
     const delta = ((newApplied < 0 && Math.floor(this.baseAV * newApplied) < -150) ? maxDelta : newApplied) - currentlyApplied;
 

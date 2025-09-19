@@ -1,0 +1,118 @@
+{
+  "name": "Nock & Shot",
+  "_id": "5WFNYRPn6z0GBL6C",
+  "type": "perk",
+  "img": "icons/weapons/ammunition/arrows-barbed-white.webp",
+  "effects": [
+    {
+      "name": "Nock & Shot",
+      "type": "passive",
+      "_id": "sXXvbSqpJbsSDwZf",
+      "img": "icons/weapons/ammunition/arrows-barbed-white.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "grant-item",
+            "key": "",
+            "value": "Compendium.ptr2e.core-abilities.Item.qgENOMqdeuKBs47a",
+            "predicate": [],
+            "alterations": [],
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            },
+            "allowDuplicate": false,
+            "mode": 2,
+            "ignored": false,
+            "reevaluateOnUpdate": false,
+            "inMemoryOnly": false,
+            "track": false,
+            "replaceSelf": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": false,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "<p>Effect: The user gains @UUID[Compendium.ptr2e.core-abilities.qgENOMqdeuKBs47a]{Ballistic} as a Tutored Ability.</p>",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.346",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.2.beta",
+        "createdTime": 1754224199355,
+        "modifiedTime": 1754224350157,
+        "lastModifiedBy": "dCIq77b7AO2frs8Z"
+      }
+    }
+  ],
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "publication": {
+      "source": "PTR2e Core",
+      "authors": [
+        "Dragoon"
+      ],
+      "notes": ""
+    },
+    "actions": [],
+    "slug": "nock-shot",
+    "description": "<p>Effect: The user gains @UUID[Compendium.ptr2e.core-abilities.qgENOMqdeuKBs47a]{Ballistic} as a Tutored Ability.</p>",
+    "traits": [],
+    "prerequisites": [
+      "trait:humanoid",
+      "item:perk:dual-wielder"
+    ],
+    "autoUnlock": [
+      "item:ability:ballistic"
+    ],
+    "cost": 3,
+    "design": {
+      "arena": "physical",
+      "approach": "finesse",
+      "archetype": null
+    },
+    "global": true,
+    "webs": [],
+    "nodes": [
+      {
+        "x": 192,
+        "y": 63,
+        "hidden": false,
+        "type": "normal",
+        "connected": [
+          "dual-wielder",
+          "harry"
+        ],
+        "config": {
+          "texture": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "tint": null
+        },
+        "tier": null
+      }
+    ]
+  },
+  "folder": "VCEaYPpKcCqDx7yx"
+}

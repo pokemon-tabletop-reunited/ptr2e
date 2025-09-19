@@ -1,0 +1,103 @@
+{
+  "name": "Precise",
+  "type": "effect",
+  "img": "icons/svg/sun.svg",
+  "system": {
+    "traits": [
+      "pseudo-affliction"
+    ],
+    "description": "While afflicted with Precise, the creature has +1 default ACC and has its Initiative delayed by 20% after its Activation.",
+    "slug": "precise",
+    "publication": {
+      "source": "",
+      "authors": [],
+      "notes": ""
+    },
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "effects": [
+    {
+      "name": "Precise",
+      "img": "icons/svg/sun.svg",
+      "type": "affliction",
+      "duration": {
+        "turns": null,
+        "startTime": null,
+        "combat": null,
+        "startTurn": null
+      },
+      "system": {
+        "changes": [
+          {
+            "type": "basic",
+            "key": "system.battleStats.accuracy.stage",
+            "value": 1,
+            "predicate": [],
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "roll-effect",
+            "key": "attack",
+            "value": "Compendium.ptr2e.core-effects.Item.delayconditiitem",
+            "predicate": [],
+            "chance": 100,
+            "isFixedChance": true,
+            "affects": "self",
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "system.amount",
+                "value": -20
+              }
+            ],
+            "dontMerge": false,
+            "mode": 2,
+            "ignored": false
+          }
+        ],
+        "removeOnRecall": true,
+        "removeAfterCombat": true,
+        "traits": [
+          "pseudo-affliction"
+        ],
+        "slug": null,
+        "removeAfterAttacking": true,
+        "removeAfterAttacked": false,
+        "stacks": 0,
+        "priority": 50,
+        "formula": "",
+        "type": "damage"
+      },
+      "description": "While afflicted with Precise, the creature has +1 default ACC and has its Initiative delayed by 20% after its Activation.",
+      "statuses": [],
+      "_id": "precisecondition",
+      "_stats": {
+        "coreVersion": "13.347",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.3.beta",
+        "createdTime": null,
+        "modifiedTime": 1756025649581,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "disabled": false,
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "sort": 0,
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": "always"
+        }
+      }
+    }
+  ],
+  "folder": "V4skAU6G3OH5fXgE",
+  "_id": "precisecondiitem"
+}

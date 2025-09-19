@@ -19,7 +19,8 @@
         },
         "range": {
           "target": "self",
-          "unit": "m"
+          "unit": "m",
+          "distance": 10
         },
         "description": "<p>Trigger: The user resolves Atlas Crash.</p><p>Effect: The user freely uses Stealth Rock as if it were on their Active List.</p>",
         "img": "icons/svg/explosion.svg"
@@ -39,7 +40,8 @@
         "img": "icons/svg/explosion.svg",
         "range": {
           "target": "enemy",
-          "unit": "m"
+          "unit": "m",
+          "distance": 10
         }
       }
     ],
@@ -52,6 +54,13 @@
     "_migration": {
       "version": null,
       "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
     }
   },
   "_id": "WSsH1saeCoCsJOw1",
@@ -67,7 +76,9 @@
             "type": "grant-item",
             "key": "",
             "value": "Compendium.ptr2e.core-moves.Item.nGNLKSSBn9QOTUn6",
-            "predicate": [],
+            "predicate": [
+              "ability:cobbled-stone:active"
+            ],
             "allowDuplicate": false,
             "alterations": [
               {
@@ -76,24 +87,26 @@
                 "value": "true"
               }
             ],
-            "mode": 2,
             "priority": null,
-            "ignored": false,
-            "reevaluateOnUpdate": false,
-            "inMemoryOnly": false,
-            "track": false,
-            "replaceSelf": false,
+            "reevaluateOnUpdate": true,
             "onDeleteActions": {
               "grantee": "detach",
               "granter": "cascade"
-            }
+            },
+            "mode": 2,
+            "ignored": false,
+            "inMemoryOnly": false,
+            "track": false,
+            "replaceSelf": false
           }
         ],
         "slug": null,
         "traits": [],
         "removeAfterCombat": true,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
@@ -115,12 +128,13 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.346",
         "systemId": "ptr2e",
-        "systemVersion": "1.0.0.beta-ready.2",
+        "systemVersion": "1.4.2.beta",
         "createdTime": 1739145883001,
-        "modifiedTime": 1739145929779,
-        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+        "modifiedTime": 1754317147585,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf",
+        "exportSource": null
       }
     }
   ]

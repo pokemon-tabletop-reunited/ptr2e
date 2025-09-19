@@ -1,0 +1,119 @@
+{
+  "folder": "BImk1fcMbR5akA4z",
+  "name": "Heavy Metal Fire",
+  "type": "move",
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "publication": {
+      "source": "Digidex",
+      "authors": [
+        "Fox"
+      ],
+      "notes": ""
+    },
+    "traits": [],
+    "actions": [
+      {
+        "name": "Heavy Metal Fire",
+        "slug": "heavy-metal-fire",
+        "type": "attack",
+        "img": "systems/ptr2e/img/svg/fire_icon.svg",
+        "traits": [
+          "digimon",
+          "missile"
+        ],
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 6
+        },
+        "types": [
+          "steel",
+          "fire"
+        ],
+        "category": "physical",
+        "predicate": [],
+        "description": "<p>This attack is considered both @Trait[fire] and @Trait[steel] typed. It has a 10% chance to inflict @Affliction[burn 5] and a 30% chance to grant the user @UUID[Compendium.ptr2e.core-effects.sMystTj3FBJ00AZp]{+1 Defense Stage for 5 activations}.</p>",
+        "range": {
+          "target": "creature",
+          "distance": 7,
+          "unit": "m"
+        },
+        "power": 110,
+        "accuracy": 100
+      }
+    ],
+    "grade": "A"
+  },
+  "img": "systems/ptr2e/img/svg/fire_icon.svg",
+  "effects": [
+    {
+      "name": "Heavy Metal Fire",
+      "type": "passive",
+      "_id": "mhe4dAjqgRERs8MK",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "heavy-metal-fire-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.burnconditioitem",
+            "predicate": [],
+            "chance": 10,
+            "isFixedChance": false,
+            "affects": "target",
+            "alterations": [],
+            "dontMerge": false,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "roll-effect",
+            "key": "heavy-metal-fire-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.sMystTj3FBJ00AZp",
+            "predicate": [],
+            "chance": 30,
+            "isFixedChance": false,
+            "affects": "self",
+            "alterations": [],
+            "dontMerge": false,
+            "mode": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.346",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.2.beta",
+        "lastModifiedBy": null
+      }
+    }
+  ],
+  "flags": {},
+  "_id": "9VIoWCkSwDiDMJFr"
+}

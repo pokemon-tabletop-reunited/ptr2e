@@ -12,28 +12,22 @@
       }
     ],
     "cost": 3,
-    "description": "<p>You are able to tap into your Aura powers to see without the use of your eyes. You gain the [Blindsense 10] trait.</p>",
+    "description": "<p>You are able to tap into your Aura powers to see without the use of your eyes. You gain the @Trait[blindsense-10] Trait.</p>",
     "actions": [
       {
         "name": "Sight Beyond Sight",
         "slug": "sight-beyond-sight",
-        "description": "<p>You are able to tap into your Aura powers to see without the use of your eyes. You gain the [Blindsense 10] trait.</p>",
+        "description": "<p>You are able to tap into your Aura powers to see without the use of your eyes. You gain the @Trait[blindsense-10] Trait.</p>",
         "cost": {
-          "activation": "free",
-          "powerPoints": 0,
-          "delay": null,
-          "priority": null
+          "activation": "free"
         },
         "type": "passive",
         "traits": [],
-        "img": "icons/svg/explosion.svg",
+        "img": "systems/ptr2e/img/perk-icons/Aura.svg",
         "range": {
           "target": "enemy",
-          "unit": "m",
-          "distance": 0
-        },
-        "variant": null,
-        "hidden": false
+          "unit": "m"
+        }
       }
     ],
     "slug": "sight-beyond-sight",
@@ -48,37 +42,39 @@
     },
     "nodes": [
       {
-        "connected": [
-          "aura-user"
-        ],
-        "config": {
-          "alpha": null,
-          "backgroundColor": "#ffffff",
-          "borderColor": null,
-          "borderWidth": null,
-          "texture": "systems/ptr2e/img/perk-icons/Aura.svg",
-          "tint": "#8000ff",
-          "scale": null
-        },
-        "hidden": false,
-        "type": "normal",
         "x": 170,
         "y": 27,
+        "hidden": false,
+        "type": "normal",
+        "connected": [
+          "aura-user",
+          "chi-alignment"
+        ],
+        "config": {
+          "texture": "systems/ptr2e/img/perk-icons/Aura.svg",
+          "backgroundColor": null,
+          "borderColor": null,
+          "tint": null
+        },
         "tier": null
       }
     ],
     "autoUnlock": [
       "trait:blindsense-10"
     ],
-    "originSlug": null,
-    "variant": null,
-    "mode": null,
     "global": true,
     "webs": [],
     "design": {
       "arena": "mental",
       "approach": "power",
-      "archetype": "Aura"
+      "archetype": "aura"
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
     }
   },
   "_id": "pqVd47faROt2qSBR",
@@ -88,24 +84,26 @@
       "name": "Sight Beyond Sight",
       "type": "passive",
       "_id": "qrYlisqKU7CyEgKk",
-      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "img": "systems/ptr2e/img/perk-icons/Aura.svg",
       "system": {
         "changes": [
           {
             "type": "add-trait",
             "key": "",
-            "value": "Blindsense 10",
+            "value": "blindsense-10",
             "predicate": [],
-            "mode": 2,
             "priority": null,
+            "mode": 2,
             "ignored": false
           }
         ],
         "slug": null,
         "traits": [],
-        "removeAfterCombat": true,
+        "removeAfterCombat": false,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
@@ -117,7 +115,7 @@
         "startRound": null,
         "startTurn": null
       },
-      "description": "",
+      "description": "<p>You are able to tap into your Aura powers to see without the use of your eyes. You gain the @Trait[blindsense-10] Trait.</p>",
       "origin": null,
       "tint": "#ffffff",
       "transfer": true,
@@ -127,12 +125,13 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.346",
         "systemId": "ptr2e",
-        "systemVersion": "0.10.0-alpha.3.4.1",
+        "systemVersion": "1.4.1.beta",
         "createdTime": 1732233195168,
-        "modifiedTime": 1732233207504,
-        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
+        "modifiedTime": 1754302094005,
+        "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+        "exportSource": null
       }
     }
   ]

@@ -99,13 +99,46 @@ class ActiveEffectPTR2e<
 
     if (this.parent?.rollOptions) {
       this.parent.rollOptions.addOption("effect", `${this.type}:${this.slug}`);
+      if (this.traits.has("major-affliction")) {
+        this.setCount(this.parent.rollOptions.getFromDomain("effect"), "major-affliction");
+        this.setCount(this.parent.rollOptions.getFromDomain("all"), "effect:major-affliction");
+      }
+      if (this.traits.has("minor-affliction")) {
+        this.setCount(this.parent.rollOptions.getFromDomain("effect"), "minor-affliction");
+        this.setCount(this.parent.rollOptions.getFromDomain("all"), "effect:minor-affliction");
+      }
+    }
+
+    if(this.system.removeAfterAttacking && this.targetsActor() && this.parent.synthetics) {
+      this.parent.synthetics.effectsRemovedAfterAttacking ??= [];
+      this.parent.synthetics.effectsRemovedAfterAttacking.push(this);
+    }
+    if(this.system.removeAfterAttacked && this.targetsActor() && this.parent.synthetics) {
+      this.parent.synthetics.effectsRemovedAfterAttacked ??= [];
+      this.parent.synthetics.effectsRemovedAfterAttacked.push(this);
+    }
+  }
+
+  private setCount(domainRecord: Record<string, boolean>, option: string) {
+    const existing = Object.keys(domainRecord)
+      .flatMap((key: string) => ({
+        key,
+        count: Number(new RegExp(`^${option}:(\\d+)$`).exec(key)?.[1]) || 0,
+      }))
+      .find((kc) => !!kc.count);
+    if (existing) {
+      delete domainRecord[existing.key];
+      domainRecord[`${option}:${existing.count + 1}`] = true;
+    }
+    else {
+      domainRecord[`${option}:1`] = true;
     }
   }
 
   override apply(actor: ActorPTR2e, change: ChangeModel, options?: string[]): unknown {
     if (this.parent instanceof ItemPTR2e && this.parent) {
-      if(this.parent.system instanceof AbilitySystemModel && this.parent.system.isSuppressed) return;
-      if([
+      if (this.parent.system instanceof AbilitySystemModel && this.parent.system.isSuppressed) return;
+      if ([
         "weapon",
         "equipment",
         "consumable",
@@ -154,7 +187,8 @@ class ActiveEffectPTR2e<
   override _requiresDurationUpdate(): boolean {
     const { _combatTime, type } = this.duration;
     if (type === "turns" && game.combat) {
-      //@ts-expect-error - This is a private property
+      if(!this.targetsActor()) return false;
+
       const ct = this.parent?.combatant?.system.activations; //(game.combat as CombatPTR2e).system.turn;
       return ct !== _combatTime && !!(this.target as ActorPTR2e)?.inCombat;
     }
@@ -272,6 +306,15 @@ class ActiveEffectPTR2e<
       }
 
       if (this.target.isImmuneToEffect(this)) {
+        if(this.flags?.ptr2e?.itemGrants && typeof this.flags.ptr2e.itemGrants === "object" && Object.keys(this.flags.ptr2e.itemGrants).length > 0) {
+          const itemGrants = Object.values(this.flags.ptr2e.itemGrants);
+          for (const itemGrant of itemGrants) {
+            Hooks.once("preCreateActiveEffect", (effect: unknown) => {
+              if((effect as ActiveEffectPTR2e)._id === itemGrant.id) return false;
+              return;
+            });
+          }
+        }
         ui.notifications.warn(game.i18n.format("PTR2E.Effect.Immune", { effect: this.name, target: this.target.name }));
         return false;
       }
@@ -377,6 +420,9 @@ class ActiveEffectPTR2e<
         if (!(context.keepId || context.keepEmbeddedIds)) {
           source._id = fu.randomID();
         }
+        else if (source.changes?.some(c => ["grant-item", "grant-effect"].includes((c as { type: string })?.type))) {
+          source._id ??= fu.randomID();
+        }
 
         if (source.flags?.ptr2e?.stacks !== false) {
           const existing = (parent.effects.contents as ActiveEffectPTR2e[]).find(
@@ -461,6 +507,27 @@ class ActiveEffectPTR2e<
     }
     return super.deleteDocuments(ids, context);
   }
+
+  protected override _onDelete(options: DocumentModificationContext<TParent>, userId: string): void {
+    super._onDelete(options, userId);
+    if (!(this.targetsActor() && this.target && game.user.id === userId)) return;
+
+    const actorUpdates: Record<string, unknown> = {};
+    for (const change of this.changes) {
+      change.onDelete?.(actorUpdates);
+    }
+
+    const updateKeys = Object.keys(actorUpdates);
+    if (updateKeys.length > 0 && !updateKeys.every((k) => k === "_id")) {
+      this.target.update(actorUpdates, { noHook: true });
+    }
+  }
+
+  override get isTemporary(): boolean {
+    if(this.flags.ptr2e.displayOnToken) return this.flags.ptr2e.displayOnToken === "always";
+
+    return super.isTemporary;
+  }
 }
 
 interface ActiveEffectPTR2e<
@@ -485,6 +552,8 @@ interface ActiveEffectPTR2e<
         removeOnExit: boolean;
         amount?: number;
       };
+      traitEffect?: string;
+      displayOnToken?: "always" | "never" | null;
     };
   }
 

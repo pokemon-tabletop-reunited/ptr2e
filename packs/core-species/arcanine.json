@@ -13,27 +13,25 @@
     "diet": [
       "omnivore"
     ],
-    "movement": {
-      "primary": [
-        {
-          "type": "overland",
-          "value": 15
-        }
-      ],
-      "secondary": [
-        {
-          "type": "swim",
-          "value": 5
-        }
-      ]
-    },
+    "movement": [
+      {
+        "type": "overland",
+        "value": 15
+      },
+      {
+        "type": "swim",
+        "value": 5
+      }
+    ],
     "traits": [
       "pokemon",
       "quadrupedal",
       "heater",
       "darkvision-15",
       "pack-mon",
-      "keen-scent"
+      "keen-scent",
+      "fully-evolved",
+      "jump-5"
     ],
     "abilities": {
       "starting": [
@@ -41,38 +39,38 @@
           "slug": "intimidate"
         },
         {
-          "slug": "guard-dog"
+          "slug": "flash-fire"
         }
       ],
       "basic": [
         {
-          "slug": "flash-fire"
+          "slug": "justified"
         },
         {
-          "slug": "blaze"
+          "slug": "guard-dog"
         }
       ],
       "advanced": [
         {
-          "slug": "justified"
+          "slug": "fevered-pitch"
         },
         {
-          "slug": "friend-guard"
+          "slug": "advantageous"
         }
       ],
       "master": [
         {
-          "slug": "moxie"
+          "slug": "flaming-soul"
         },
         {
-          "slug": "reckless"
+          "slug": "acceleration"
         }
       ]
     },
     "skills": [
       {
         "slug": "acrobatics",
-        "value": 40,
+        "value": 45,
         "rvs": 0,
         "favourite": false,
         "hidden": false,
@@ -104,7 +102,7 @@
       },
       {
         "slug": "leadership",
-        "value": 40,
+        "value": 45,
         "rvs": 0,
         "favourite": false,
         "hidden": false,
@@ -112,7 +110,7 @@
       },
       {
         "slug": "lift",
-        "value": 45,
+        "value": 50,
         "rvs": 0,
         "favourite": false,
         "hidden": false,
@@ -136,7 +134,7 @@
       },
       {
         "slug": "negotiation",
-        "value": 40,
+        "value": 45,
         "rvs": 0,
         "favourite": false,
         "hidden": false,
@@ -144,7 +142,7 @@
       },
       {
         "slug": "psychology",
-        "value": 35,
+        "value": 45,
         "rvs": 0,
         "favourite": false,
         "hidden": false,
@@ -184,7 +182,7 @@
       },
       {
         "slug": "swim",
-        "value": 35,
+        "value": 40,
         "rvs": 0,
         "favourite": false,
         "hidden": false,
@@ -213,155 +211,7 @@
     "moves": {
       "tutor": [
         {
-          "name": "headbutt",
-          "gen": "heartgold-soulsilver"
-        },
-        {
-          "name": "body-slam",
-          "gen": "xd"
-        },
-        {
-          "name": "mimic",
-          "gen": "xd"
-        },
-        {
-          "name": "swift",
-          "gen": "heartgold-soulsilver"
-        },
-        {
-          "name": "substitute",
-          "gen": "xd"
-        },
-        {
-          "name": "snore",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "mud-slap",
-          "gen": "heartgold-soulsilver"
-        },
-        {
-          "name": "outrage",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "endure",
-          "gen": "emerald"
-        },
-        {
-          "name": "swagger",
-          "gen": "xd"
-        },
-        {
-          "name": "sleep-talk",
-          "gen": "black-2-white-2"
-        },
-        {
-          "name": "iron-tail",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "heat-wave",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "covet",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "dragon-pulse",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "iron-head",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "laser-focus",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "scorching-sands",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "hyper-beam",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "strength",
-          "gen": "brilliant-diamond-and-shining-pearl"
-        },
-        {
-          "name": "solar-beam",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "dragon-rage",
-          "gen": "yellow"
-        },
-        {
-          "name": "fire-spin",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "dig",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "toxic",
-          "gen": "lets-go-pikachu-lets-go-eevee"
-        },
-        {
-          "name": "rage",
-          "gen": "yellow"
-        },
-        {
-          "name": "teleport",
-          "gen": "lets-go-pikachu-lets-go-eevee"
-        },
-        {
-          "name": "double-team",
-          "gen": "brilliant-diamond-and-shining-pearl"
-        },
-        {
-          "name": "reflect",
-          "gen": "lets-go-pikachu-lets-go-eevee"
-        },
-        {
-          "name": "bide",
-          "gen": "yellow"
-        },
-        {
-          "name": "fire-blast",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "skull-bash",
-          "gen": "yellow"
-        },
-        {
-          "name": "rest",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "thief",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "curse",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "protect",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "scary-face",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "charm",
+          "name": "aerial-ace",
           "gen": "scarlet-violet"
         },
         {
@@ -369,107 +219,27 @@
           "gen": "brilliant-diamond-and-shining-pearl"
         },
         {
-          "name": "return",
-          "gen": "ultra-sun-ultra-moon"
+          "name": "bide",
+          "gen": "yellow"
         },
         {
-          "name": "frustration",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "safeguard",
-          "gen": "brilliant-diamond-and-shining-pearl"
-        },
-        {
-          "name": "dragon-breath",
-          "gen": "crystal"
-        },
-        {
-          "name": "hidden-power",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "sunny-day",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "rock-smash",
-          "gen": "brilliant-diamond-and-shining-pearl"
-        },
-        {
-          "name": "will-o-wisp",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "facade",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "superpower",
-          "gen": "lets-go-pikachu-lets-go-eevee"
-        },
-        {
-          "name": "secret-power",
-          "gen": "omega-ruby-alpha-sapphire"
-        },
-        {
-          "name": "hyper-voice",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "overheat",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "aerial-ace",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "natural-gift",
-          "gen": "heartgold-soulsilver"
-        },
-        {
-          "name": "close-combat",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "giga-impact",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "rock-climb",
-          "gen": "brilliant-diamond-and-shining-pearl"
-        },
-        {
-          "name": "captivate",
-          "gen": "heartgold-soulsilver"
-        },
-        {
-          "name": "flame-charge",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "round",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "incinerate",
-          "gen": "omega-ruby-alpha-sapphire"
+          "name": "body-slam",
+          "gen": "xd"
         },
         {
           "name": "bulldoze",
           "gen": "scarlet-violet"
         },
         {
-          "name": "wild-charge",
+          "name": "captivate",
+          "gen": "heartgold-soulsilver"
+        },
+        {
+          "name": "charm",
           "gen": "scarlet-violet"
         },
         {
-          "name": "heat-crash",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "snarl",
+          "name": "close-combat",
           "gen": "scarlet-violet"
         },
         {
@@ -477,7 +247,223 @@
           "gen": "ultra-sun-ultra-moon"
         },
         {
+          "name": "covet",
+          "gen": "ultra-sun-ultra-moon"
+        },
+        {
+          "name": "curse",
+          "gen": "scarlet-violet"
+        },
+        {
+          "name": "dig",
+          "gen": "scarlet-violet"
+        },
+        {
+          "name": "double-team",
+          "gen": "brilliant-diamond-and-shining-pearl"
+        },
+        {
+          "name": "dragon-breath",
+          "gen": "crystal"
+        },
+        {
+          "name": "dragon-pulse",
+          "gen": "ultra-sun-ultra-moon"
+        },
+        {
+          "name": "dragon-rage",
+          "gen": "yellow"
+        },
+        {
+          "name": "endure",
+          "gen": "emerald"
+        },
+        {
+          "name": "facade",
+          "gen": "scarlet-violet"
+        },
+        {
+          "name": "fire-blast",
+          "gen": "scarlet-violet"
+        },
+        {
+          "name": "fire-spin",
+          "gen": "scarlet-violet"
+        },
+        {
+          "name": "flame-charge",
+          "gen": "scarlet-violet"
+        },
+        {
+          "name": "frustration",
+          "gen": "ultra-sun-ultra-moon"
+        },
+        {
+          "name": "giga-impact",
+          "gen": "scarlet-violet"
+        },
+        {
+          "name": "headbutt",
+          "gen": "heartgold-soulsilver"
+        },
+        {
+          "name": "heat-crash",
+          "gen": "scarlet-violet"
+        },
+        {
+          "name": "heat-wave",
+          "gen": "ultra-sun-ultra-moon"
+        },
+        {
+          "name": "hidden-power",
+          "gen": "ultra-sun-ultra-moon"
+        },
+        {
+          "name": "hyper-beam",
+          "gen": "scarlet-violet"
+        },
+        {
+          "name": "hyper-voice",
+          "gen": "scarlet-violet"
+        },
+        {
+          "name": "incinerate",
+          "gen": "omega-ruby-alpha-sapphire"
+        },
+        {
+          "name": "iron-head",
+          "gen": "ultra-sun-ultra-moon"
+        },
+        {
+          "name": "iron-tail",
+          "gen": "ultra-sun-ultra-moon"
+        },
+        {
+          "name": "laser-focus",
+          "gen": "ultra-sun-ultra-moon"
+        },
+        {
+          "name": "mimic",
+          "gen": "xd"
+        },
+        {
+          "name": "mud-slap",
+          "gen": "heartgold-soulsilver"
+        },
+        {
+          "name": "natural-gift",
+          "gen": "heartgold-soulsilver"
+        },
+        {
+          "name": "outrage",
+          "gen": "ultra-sun-ultra-moon"
+        },
+        {
+          "name": "overheat",
+          "gen": "scarlet-violet"
+        },
+        {
+          "name": "protect",
+          "gen": "scarlet-violet"
+        },
+        {
           "name": "psychic-fangs",
+          "gen": "scarlet-violet"
+        },
+        {
+          "name": "rage",
+          "gen": "yellow"
+        },
+        {
+          "name": "reflect",
+          "gen": "lets-go-pikachu-lets-go-eevee"
+        },
+        {
+          "name": "rest",
+          "gen": "scarlet-violet"
+        },
+        {
+          "name": "return",
+          "gen": "ultra-sun-ultra-moon"
+        },
+        {
+          "name": "rock-climb",
+          "gen": "brilliant-diamond-and-shining-pearl"
+        },
+        {
+          "name": "rock-smash",
+          "gen": "brilliant-diamond-and-shining-pearl"
+        },
+        {
+          "name": "round",
+          "gen": "sword-shield"
+        },
+        {
+          "name": "safeguard",
+          "gen": "brilliant-diamond-and-shining-pearl"
+        },
+        {
+          "name": "scary-face",
+          "gen": "scarlet-violet"
+        },
+        {
+          "name": "scorching-sands",
+          "gen": "sword-shield"
+        },
+        {
+          "name": "secret-power",
+          "gen": "omega-ruby-alpha-sapphire"
+        },
+        {
+          "name": "skull-bash",
+          "gen": "yellow"
+        },
+        {
+          "name": "sleep-talk",
+          "gen": "black-2-white-2"
+        },
+        {
+          "name": "snarl",
+          "gen": "scarlet-violet"
+        },
+        {
+          "name": "snore",
+          "gen": "ultra-sun-ultra-moon"
+        },
+        {
+          "name": "solar-beam",
+          "gen": "scarlet-violet"
+        },
+        {
+          "name": "strength",
+          "gen": "brilliant-diamond-and-shining-pearl"
+        },
+        {
+          "name": "substitute",
+          "gen": "xd"
+        },
+        {
+          "name": "sunny-day",
+          "gen": "scarlet-violet"
+        },
+        {
+          "name": "superpower",
+          "gen": "lets-go-pikachu-lets-go-eevee"
+        },
+        {
+          "name": "swagger",
+          "gen": "xd"
+        },
+        {
+          "name": "swift",
+          "gen": "heartgold-soulsilver"
+        },
+        {
+          "name": "teleport",
+          "gen": "lets-go-pikachu-lets-go-eevee"
+        },
+        {
+          "name": "temper-flare",
           "gen": "scarlet-violet"
         },
         {
@@ -485,115 +471,127 @@
           "gen": "scarlet-violet"
         },
         {
-          "name": "temper-flare",
+          "name": "thief",
+          "gen": "scarlet-violet"
+        },
+        {
+          "name": "toxic",
+          "gen": "lets-go-pikachu-lets-go-eevee"
+        },
+        {
+          "name": "wild-charge",
+          "gen": "scarlet-violet"
+        },
+        {
+          "name": "will-o-wisp",
           "gen": "scarlet-violet"
         }
       ],
       "levelUp": [
         {
-          "name": "take-down",
-          "level": 1,
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "double-edge",
-          "level": 1,
-          "gen": "lets-go-pikachu-lets-go-eevee"
-        },
-        {
-          "name": "leer",
-          "level": 1,
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "bite",
-          "level": 1,
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "roar",
-          "level": 1,
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "ember",
-          "level": 1,
-          "gen": "scarlet-violet"
+          "name": "extreme-speed",
+          "gen": "scarlet-violet",
+          "level": null
         },
         {
           "name": "agility",
-          "level": 1,
-          "gen": "scarlet-violet"
+          "gen": "scarlet-violet",
+          "level": 1
         },
         {
-          "name": "flame-wheel",
-          "level": 1,
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "reversal",
-          "level": 1,
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "crunch",
-          "level": 1,
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "odor-sleuth",
-          "level": 1,
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "howl",
-          "level": 1,
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "thunder-fang",
-          "level": 1,
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "fire-fang",
-          "level": 1,
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "retaliate",
-          "level": 1,
-          "gen": "scarlet-violet"
+          "name": "bite",
+          "gen": "scarlet-violet",
+          "level": 1
         },
         {
           "name": "burn-up",
-          "level": 1,
-          "gen": "brilliant-diamond-and-shining-pearl"
+          "gen": "brilliant-diamond-and-shining-pearl",
+          "level": 1
         },
         {
-          "name": "flamethrower",
-          "level": 5,
-          "gen": "scarlet-violet"
+          "name": "crunch",
+          "gen": "scarlet-violet",
+          "level": 1
         },
         {
-          "name": "extreme-speed",
-          "level": null,
-          "gen": "scarlet-violet"
+          "name": "double-edge",
+          "gen": "lets-go-pikachu-lets-go-eevee",
+          "level": 1
         },
         {
-          "name": "helping-hand",
-          "level": 1,
-          "gen": "scarlet-violet"
+          "name": "ember",
+          "gen": "scarlet-violet",
+          "level": 1
+        },
+        {
+          "name": "fire-fang",
+          "gen": "scarlet-violet",
+          "level": 1
+        },
+        {
+          "name": "flame-wheel",
+          "gen": "scarlet-violet",
+          "level": 1
         },
         {
           "name": "flare-blitz",
-          "level": 1,
-          "gen": "scarlet-violet"
+          "gen": "scarlet-violet",
+          "level": 1
+        },
+        {
+          "name": "helping-hand",
+          "gen": "scarlet-violet",
+          "level": 1
+        },
+        {
+          "name": "howl",
+          "gen": "scarlet-violet",
+          "level": 1
+        },
+        {
+          "name": "leer",
+          "gen": "scarlet-violet",
+          "level": 1
+        },
+        {
+          "name": "odor-sleuth",
+          "gen": "ultra-sun-ultra-moon",
+          "level": 1
         },
         {
           "name": "play-rough",
-          "level": 1,
-          "gen": "scarlet-violet"
+          "gen": "scarlet-violet",
+          "level": 1
+        },
+        {
+          "name": "retaliate",
+          "gen": "scarlet-violet",
+          "level": 1
+        },
+        {
+          "name": "reversal",
+          "gen": "scarlet-violet",
+          "level": 1
+        },
+        {
+          "name": "roar",
+          "gen": "scarlet-violet",
+          "level": 1
+        },
+        {
+          "name": "take-down",
+          "gen": "scarlet-violet",
+          "level": 1
+        },
+        {
+          "name": "thunder-fang",
+          "gen": "ultra-sun-ultra-moon",
+          "level": 1
+        },
+        {
+          "name": "flamethrower",
+          "gen": "scarlet-violet",
+          "level": 5
         }
       ]
     },
@@ -622,26 +620,309 @@
               "operand": "or"
             }
           ],
-          "details": {
-            "gender": null,
-            "item": null,
-            "level": null,
-            "knownMove": null
+          "perk": {
+            "x": 26,
+            "y": 26
           },
+          "details": null,
           "evolutions": []
         }
       ],
       "uuid": "Compendium.ptr2e.core-species.Item.KOXNoMzACprI2b2N",
-      "methods": []
+      "methods": [],
+      "perk": {
+        "x": 26,
+        "y": 26
+      }
     },
     "habitats": [
       "grassland",
       "volcano",
       "mountain"
     ],
-    "slug": "arcanine"
+    "slug": "arcanine",
+    "publication": {
+      "source": "PTR 2e Core - Kanto Dex",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
   },
   "_id": "QTmMNadOKByVZSNP",
-  "effects": [],
-  "folder": null
+  "effects": [
+    {
+      "name": "Mega Arcanine",
+      "type": "form",
+      "_id": "pbfrKWJNyYePdzjf",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-option",
+            "key": "manual-forme-toggle",
+            "value": "forme:mega-arcanine:active",
+            "domain": "all",
+            "toggleable": true,
+            "label": "Toggle: Mega Arcanine Forme",
+            "predicate": [],
+            "alwaysActive": false,
+            "count": false,
+            "mode": 2,
+            "ignored": false,
+            "suboptions": [],
+            "state": false
+          },
+          {
+            "type": "grant-item",
+            "predicate": [
+              "forme:mega-arcanine:active"
+            ],
+            "key": "",
+            "value": "Compendium.ptr2e.core-abilities.Item.jXsgiVvlZju6eoNm",
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "system.free",
+                "value": "true"
+              }
+            ],
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            },
+            "mode": 2,
+            "ignored": false,
+            "reevaluateOnUpdate": false,
+            "inMemoryOnly": false,
+            "allowDuplicate": true,
+            "track": false,
+            "replaceSelf": false
+          },
+          {
+            "type": "add-trait",
+            "predicate": [
+              "forme:mega-arcanine:active"
+            ],
+            "key": "",
+            "value": "Firestarter",
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "add-trait",
+            "predicate": [
+              "forme:mega-arcanine:active"
+            ],
+            "key": "",
+            "value": "Glow 6",
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-arcanine:active"
+            ],
+            "key": "system.movement.overland.value",
+            "value": 5,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-arcanine:active"
+            ],
+            "key": "system.movement.swim.value",
+            "value": 2,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "stats-alteration",
+            "predicate": [
+              "forme:mega-arcanine:active"
+            ],
+            "key": "",
+            "value": 0,
+            "hp": null,
+            "atk": 40,
+            "def": null,
+            "spa": 30,
+            "spd": null,
+            "spe": 30,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-arcanine:active"
+            ],
+            "key": "system.skills.acrobatics.value",
+            "value": 15,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-arcanine:active"
+            ],
+            "key": "system.skills.climb.value",
+            "value": 10,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-arcanine:active"
+            ],
+            "key": "system.skills.intimidate.value",
+            "value": 15,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-arcanine:active"
+            ],
+            "key": "system.skills.leadership.value",
+            "value": 10,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-arcanine:active"
+            ],
+            "key": "system.skills.lift.value",
+            "value": 15,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-arcanine:active"
+            ],
+            "key": "system.skills.listen.value",
+            "value": 10,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-arcanine:active"
+            ],
+            "key": "system.skills.psychology.value",
+            "value": 10,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-arcanine:active"
+            ],
+            "key": "system.skills.running.value",
+            "value": 20,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-arcanine:active"
+            ],
+            "key": "system.skills.spot.value",
+            "value": 15,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-arcanine:active"
+            ],
+            "key": "system.skills.stealth.value",
+            "value": 5,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-arcanine:active"
+            ],
+            "key": "system.skills.survival.value",
+            "value": 10,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-arcanine:active"
+            ],
+            "key": "system.skills.swim.value",
+            "value": 15,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-arcanine:active"
+            ],
+            "key": "system.skills.track.value",
+            "value": 15,
+            "mode": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0,
+        "trigger": "manual",
+        "conditions": []
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.346",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.1.beta",
+        "createdTime": 1754087191451,
+        "modifiedTime": 1754087573150,
+        "lastModifiedBy": "6zxE5EIsM9axXjpP"
+      }
+    }
+  ]
 }

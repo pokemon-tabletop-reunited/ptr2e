@@ -1,0 +1,118 @@
+{
+  "folder": "BImk1fcMbR5akA4z",
+  "name": "Full Moon Meteor Impact",
+  "type": "move",
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "publication": {
+      "source": "Digidex",
+      "authors": [
+        "Fox"
+      ],
+      "notes": ""
+    },
+    "traits": [],
+    "actions": [
+      {
+        "name": "Full Moon Meteor Impact",
+        "slug": "full-moon-meteor-impact",
+        "type": "attack",
+        "img": "systems/ptr2e/img/svg/fairy_icon.svg",
+        "traits": [
+          "digimon",
+          "contact",
+          "pierce",
+          "dash",
+          "crit-2"
+        ],
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 11
+        },
+        "types": [
+          "fairy"
+        ],
+        "category": "physical",
+        "predicate": [],
+        "description": "<p>This attack has a 30% chance to inflict @Affliction[delay 60].</p>",
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "power": 120,
+        "accuracy": 100
+      }
+    ],
+    "grade": "S"
+  },
+  "img": "systems/ptr2e/img/svg/fairy_icon.svg",
+  "effects": [
+    {
+      "name": "Full Moon Meteor Impact",
+      "type": "passive",
+      "_id": "VKqnW0Sri3ylpPYH",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "full-moon-meteor-impact-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.delayconditiitem",
+            "predicate": [],
+            "chance": 30,
+            "isFixedChance": false,
+            "affects": "target",
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "system.amount",
+                "value": -60
+              }
+            ],
+            "dontMerge": false,
+            "mode": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.347",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.3.beta",
+        "lastModifiedBy": null
+      }
+    }
+  ],
+  "flags": {},
+  "_id": "Q4Lu9XDK8kUUXVsk"
+}

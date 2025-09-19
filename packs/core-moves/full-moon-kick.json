@@ -1,0 +1,107 @@
+{
+  "folder": "BImk1fcMbR5akA4z",
+  "name": "Full Moon Kick",
+  "type": "move",
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "publication": {
+      "source": "Digidex",
+      "authors": [
+        "Fox"
+      ],
+      "notes": ""
+    },
+    "traits": [],
+    "actions": [
+      {
+        "name": "Full Moon Kick",
+        "slug": "full-moon-kick",
+        "type": "attack",
+        "img": "systems/ptr2e/img/svg/fighting_icon.svg",
+        "traits": [
+          "kick",
+          "digimon",
+          "dash",
+          "contact"
+        ],
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 7
+        },
+        "types": [
+          "fighting"
+        ],
+        "category": "physical",
+        "predicate": [],
+        "description": "<p>On resolution, the user gains </p><p>@UUID[Compendium.ptr2e.core-effects.Item.XeiSuS3APUcN0MLM]{+1 Speed Stage for 5 activations}.</p>",
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "power": 110,
+        "accuracy": 100
+      }
+    ],
+    "grade": "A",
+    "slug": "full-moon-kick"
+  },
+  "img": "systems/ptr2e/img/svg/fighting_icon.svg",
+  "effects": [
+    {
+      "name": "Full Moon Kick",
+      "type": "passive",
+      "_id": "HUBu8s5nuJ4DWm2m",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "full-moon-kick-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.XeiSuS3APUcN0MLM",
+            "predicate": [],
+            "chance": 100,
+            "isFixedChance": false,
+            "affects": "self",
+            "alterations": [],
+            "dontMerge": false,
+            "mode": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.346",
+        "systemId": "ptr2e",
+        "systemVersion": "1.3.8.beta",
+        "lastModifiedBy": null
+      }
+    }
+  ],
+  "_id": "erHgpuKj9sTHbLOU"
+}
