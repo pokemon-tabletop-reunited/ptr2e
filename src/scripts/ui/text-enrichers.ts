@@ -145,7 +145,7 @@ export class TextEnricher {
         classes: ["content-link", ...Array.from(types).map(t => `type-${t}`)],
         attrs: { draggable: true as unknown as string },
         name,
-        dataset: {
+        dataset: {  
           type: "Tick",
           amount: amount.toString(),
           shield: isShieldBased.toString(),

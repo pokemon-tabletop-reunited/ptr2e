@@ -390,7 +390,7 @@ class CompendiumPack {
 
         // Check if species has <510 stats, if so make sure that the underdog trait is added, and otherwise remove said trait.
         const stats = docSource.system as { stats: Record<string, number | null>, traits: string[] };
-        const totalStats = Object.values(stats.stats ?? {}).filter(s => s !== null).reduce((a, b) => a + (b ?? 0), 0);
+        const totalStats = Object.values(stats.stats ?? {}).filter(s => s !== null).reduce((a, b) => (a ?? 0) + (b ?? 0), 0) ?? 0;
         if(totalStats === 0) {
           throw PackError(`Species '${docSource.name}' has no stats defined`);
         }
