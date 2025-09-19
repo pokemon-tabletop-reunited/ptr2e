@@ -34,7 +34,6 @@
       "horned",
       "lifesense-15",
       "glow-2",
-      "underdog",
       "jump-4"
     ],
     "abilities": {
@@ -48,18 +47,18 @@
       ],
       "basic": [
         {
-          "slug": "quick-feet"
+          "slug": "anticipation"
         },
         {
-          "slug": "anticipation"
+          "slug": "mighty-horn"
         }
       ],
       "advanced": [
         {
-          "slug": "dazzling"
+          "slug": "mystic-blades"
         },
         {
-          "slug": "aura-spell"
+          "slug": "dazzling"
         }
       ],
       "master": [
@@ -67,7 +66,7 @@
           "slug": "speed-force"
         },
         {
-          "slug": "mighty-horn"
+          "slug": "aura-spell"
         }
       ]
     },
@@ -75,6 +74,22 @@
       {
         "slug": "acrobatics",
         "value": 30,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "aura-sense",
+        "value": 15,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "climb",
+        "value": 15,
         "rvs": 0,
         "favourite": false,
         "hidden": false,
@@ -121,14 +136,6 @@
         "group": null
       },
       {
-        "slug": "psychic",
-        "value": 25,
-        "rvs": 0,
-        "favourite": false,
-        "hidden": false,
-        "group": "occult"
-      },
-      {
         "slug": "natural-world",
         "value": 30,
         "rvs": 0,
@@ -147,6 +154,14 @@
       {
         "slug": "negotiation",
         "value": 30,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "psychic",
+        "value": 25,
         "rvs": 0,
         "favourite": false,
         "hidden": false,
@@ -200,67 +215,7 @@
     "moves": {
       "tutor": [
         {
-          "name": "double-kick",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "horn-drill",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "thrash",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "double-edge",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "hypnosis",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "morning-sun",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "expanding-force",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "body-slam",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "low-kick",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "swift",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "rest",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "substitute",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "snore",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "protect",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "endure",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "charm",
+          "name": "ally-switch",
           "gen": "sword-shield"
         },
         {
@@ -268,23 +223,7 @@
           "gen": "sword-shield"
         },
         {
-          "name": "sleep-talk",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "iron-tail",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "future-sight",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "facade",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "imprison",
+          "name": "body-slam",
           "gen": "sword-shield"
         },
         {
@@ -296,27 +235,59 @@
           "gen": "sword-shield"
         },
         {
-          "name": "zen-headbutt",
+          "name": "charm",
           "gen": "sword-shield"
         },
         {
-          "name": "round",
+          "name": "double-edge",
           "gen": "sword-shield"
         },
         {
-          "name": "stored-power",
+          "name": "double-kick",
           "gen": "sword-shield"
         },
         {
-          "name": "ally-switch",
+          "name": "endure",
           "gen": "sword-shield"
         },
         {
-          "name": "wild-charge",
+          "name": "expanding-force",
           "gen": "sword-shield"
         },
         {
-          "name": "play-rough",
+          "name": "facade",
+          "gen": "sword-shield"
+        },
+        {
+          "name": "future-sight",
+          "gen": "sword-shield"
+        },
+        {
+          "name": "high-horsepower",
+          "gen": "sword-shield"
+        },
+        {
+          "name": "horn-drill",
+          "gen": "sword-shield"
+        },
+        {
+          "name": "hypnosis",
+          "gen": "sword-shield"
+        },
+        {
+          "name": "imprison",
+          "gen": "sword-shield"
+        },
+        {
+          "name": "iron-tail",
+          "gen": "sword-shield"
+        },
+        {
+          "name": "low-kick",
+          "gen": "sword-shield"
+        },
+        {
+          "name": "morning-sun",
           "gen": "sword-shield"
         },
         {
@@ -324,75 +295,119 @@
           "gen": "sword-shield"
         },
         {
-          "name": "high-horsepower",
+          "name": "play-rough",
+          "gen": "sword-shield"
+        },
+        {
+          "name": "protect",
+          "gen": "sword-shield"
+        },
+        {
+          "name": "rest",
+          "gen": "sword-shield"
+        },
+        {
+          "name": "round",
+          "gen": "sword-shield"
+        },
+        {
+          "name": "sleep-talk",
+          "gen": "sword-shield"
+        },
+        {
+          "name": "snore",
+          "gen": "sword-shield"
+        },
+        {
+          "name": "stored-power",
+          "gen": "sword-shield"
+        },
+        {
+          "name": "substitute",
+          "gen": "sword-shield"
+        },
+        {
+          "name": "swift",
+          "gen": "sword-shield"
+        },
+        {
+          "name": "thrash",
+          "gen": "sword-shield"
+        },
+        {
+          "name": "wild-charge",
+          "gen": "sword-shield"
+        },
+        {
+          "name": "zen-headbutt",
           "gen": "sword-shield"
         }
       ],
       "levelUp": [
         {
-          "name": "tackle",
-          "level": 1,
-          "gen": "sword-shield"
+          "name": "growl",
+          "gen": "sword-shield",
+          "level": 1
         },
         {
-          "name": "growl",
-          "level": 1,
-          "gen": "sword-shield"
+          "name": "tackle",
+          "gen": "sword-shield",
+          "level": 1
         },
         {
           "name": "tail-whip",
-          "level": 5,
-          "gen": "sword-shield"
+          "gen": "sword-shield",
+          "level": 5
         },
         {
           "name": "confusion",
-          "level": 10,
-          "gen": "sword-shield"
+          "gen": "sword-shield",
+          "level": 10
         },
         {
           "name": "fairy-wind",
-          "level": 15,
-          "gen": "sword-shield"
+          "gen": "sword-shield",
+          "level": 15
         },
         {
           "name": "agility",
-          "level": 20,
-          "gen": "sword-shield"
+          "gen": "sword-shield",
+          "level": 20
         },
         {
           "name": "psybeam",
-          "level": 25,
-          "gen": "sword-shield"
+          "gen": "sword-shield",
+          "level": 25
         },
         {
           "name": "stomp",
-          "level": 30,
-          "gen": "sword-shield"
+          "gen": "sword-shield",
+          "level": 30
         },
         {
           "name": "heal-pulse",
-          "level": 35,
-          "gen": "sword-shield"
+          "gen": "sword-shield",
+          "level": 35
         },
         {
           "name": "take-down",
-          "level": 41,
-          "gen": "sword-shield"
+          "gen": "sword-shield",
+          "level": 41
         },
         {
           "name": "dazzling-gleam",
-          "level": 45,
-          "gen": "sword-shield"
+          "gen": "sword-shield",
+          "level": 45
         },
         {
           "name": "psychic",
-          "level": 50,
-          "gen": "sword-shield"
+          "gen": "sword-shield",
+          "level": 50
         },
         {
           "name": "healing-wish",
-          "level": 55,
-          "gen": "sword-shield"
+          "gen": "sword-shield",
+          "level": 55
         }
       ]
     },
@@ -415,25 +430,34 @@
               "operand": "and"
             }
           ],
-          "details": {
-            "gender": null,
-            "item": null,
-            "level": null,
-            "knownMove": null
+          "perk": {
+            "x": 26,
+            "y": 26
           },
+          "details": null,
           "evolutions": []
         }
       ],
-      "uuid": "Compendium.ptr2e.core-species.Item.wSd7PCrT1N0EAXNR"
+      "uuid": "Compendium.ptr2e.core-species.Item.wSd7PCrT1N0EAXNR",
+      "methods": [],
+      "perk": {
+        "x": 26,
+        "y": 26
+      }
     },
     "publication": {
       "source": "PTR 2e Core - Galar Dex",
       "authors": [
         "PTR 2e Team"
-      ]
-    }
+      ],
+      "notes": ""
+    },
+    "_migration": {
+      "version": null,
+      "previous": null
+    },
+    "habitats": []
   },
   "_id": "wSd7PCrT1N0EAXNR",
-  "effects": [],
-  "folder": null
+  "effects": []
 }

@@ -9,7 +9,7 @@
       {
         "name": "Suspicious Minds",
         "slug": "suspicious-minds",
-        "description": "<p>Trigger: A creature in range suffers damage or an effect from the End of Activation effect of a [DoT] Affliction.<br><br>Effect: For each End of Activation effect Affliction that was triggered on the target, the target loses @Tick[-1]. The affected creature is protected from further instances of this perk until their next activation commences.</p>",
+        "description": "<p>Trigger: A creature in range suffers damage or an effect from the End of Activation effect of a @Trait[dot] Affliction.<br><br>Effect: For each End of Activation @Trait[dot] effect that was triggered on the target, the target loses an additional @Tick[-1]. The affected creature is protected from further instances of this perk until their next activation commences.</p>",
         "traits": [
           "interrupt-3"
         ],
@@ -22,17 +22,13 @@
         "cost": {
           "activation": "free",
           "powerPoints": 3,
-          "trigger": "A creature in range suffers effect damage from an Affliction due to a Stack being removed.",
-          "delay": null,
-          "priority": null
+          "trigger": "A creature in range suffers effect damage from an Affliction due to a Stack being removed."
         },
-        "img": "systems/ptr2e/img/perk-icons/Occultism.svg",
-        "variant": null,
-        "ephemeralVariant": false
+        "img": "systems/ptr2e/img/perk-icons/Occultism.svg"
       }
     ],
     "slug": "suspicious-minds",
-    "description": "<p>Trigger: A creature in range suffers damage or an effect from the End of Activation effect of a [DoT] Affliction.<br><br>Effect: For each End of Activation effect Affliction that was triggered on the target, the target loses @Tick[-1]. The affected creature is protected from further instances of this perk until their next activation commences.</p>",
+    "description": "<p>Trigger: A creature in range suffers damage or an effect from the End of Activation effect of a @Trait[dot] Affliction.<br><br>Effect: For each End of Activation @Trait[dot] effect that was triggered on the target, the target loses an additional @Tick[-1]. The affected creature is protected from further instances of this perk until their next activation commences.</p>",
     "traits": [
       "interrupt-3"
     ],
@@ -88,9 +84,6 @@
       }
     ],
     "autoUnlock": [],
-    "originSlug": null,
-    "variant": null,
-    "mode": null,
     "global": true,
     "webs": [],
     "design": {

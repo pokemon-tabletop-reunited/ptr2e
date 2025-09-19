@@ -12,20 +12,15 @@
         "slug": "type-embodiment-type-2",
         "description": "<p>You gain a &lt;Type&gt; trait, from the baseline 18 &lt;Type&gt;s (at default).</p><p>Additionally, you may instantly add 2 E-Grade moves from that &lt;Type&gt;'s Tutor List to your 'Known Attacks' list.</p><blockquote>A recommended limit on &lt;Type&gt; traits is 3 total, but this can be revised at GM discretion. May replace an existing &lt;Type&gt;.</blockquote>",
         "cost": {
-          "activation": "free",
-          "powerPoints": 0
+          "activation": "free"
         },
         "type": "passive",
         "traits": [],
         "range": {
           "target": "self",
-          "unit": "m",
-          "distance": 0
+          "unit": "m"
         },
-        "img": "icons/svg/explosion.svg",
-        "variant": null,
-        "ephemeralVariant": false,
-        "hidden": false
+        "img": "icons/svg/explosion.svg"
       }
     ],
     "slug": "type-embodiment-type-2",
@@ -73,10 +68,7 @@
         "PTR 2e Team"
       ],
       "notes": ""
-    },
-    "originSlug": null,
-    "variant": null,
-    "mode": null
+    }
   },
   "_id": "Ele0eTIzN2GUFQD7",
   "img": "systems/ptr2e/img/perk-icons/Touched.svg",
@@ -191,8 +183,16 @@
             "key": "system.type.types",
             "value": "{effect|flags.ptr2e.choiceSelections.te-add}",
             "predicate": [],
-            "mode": 2,
             "priority": null,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "remove-trait",
+            "key": "",
+            "value": "untyped",
+            "predicate": [],
+            "mode": 2,
             "ignored": false
           }
         ],
@@ -200,7 +200,9 @@
         "traits": [],
         "removeAfterCombat": true,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
@@ -222,12 +224,12 @@
       "_stats": {
         "compendiumSource": "Compendium.ptr2e.core-perks.Item.3hmeZeafNkHeCKvi.ActiveEffect.GE0TilBXs6WMXRph",
         "duplicateSource": null,
-        "coreVersion": "13.342",
+        "coreVersion": "13.347",
         "systemId": "ptr2e",
-        "systemVersion": "1.0.3.beta",
+        "systemVersion": "1.4.2.beta",
         "createdTime": 1739730444929,
-        "modifiedTime": 1739730444929,
-        "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+        "modifiedTime": 1755359333133,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf",
         "exportSource": null
       }
     }

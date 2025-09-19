@@ -11,8 +11,9 @@
       "authors": [],
       "notes": ""
     },
-    "description": "<p>If a creature with Powder attempts to use a @Trait[fire]-type move, the attack fails and they suffer @Tick[-4].<br><br>If a creature with Powder is hit by a @Trait[fire]-type move, the creature suffers @Tick[-4] and is cured of Powder.</p>",
-    "traits": []
+    "description": "<p>If a creature with Powder attempts to use a @Trait[fire] Type move, the attack fails and they suffer @Tick[-4].<br><br>If a creature with Powder is hit by a @Trait[fire] Type move, the creature suffers @Tick[-4] and is cured of Powder.</p>",
+    "traits": [],
+    "slug": "powder"
   },
   "img": "icons/svg/poison.svg",
   "effects": [
@@ -60,6 +61,16 @@
             "dontMerge": false,
             "mode": 2,
             "ignored": false
+          },
+          {
+            "type": "roll-note",
+            "key": "fire-attack",
+            "value": "Due to using a Fire Attack {effect|link} triggers! Please resolve the effect & delete it afterwards.",
+            "predicate": [],
+            "visibility": null,
+            "label": "Powder",
+            "mode": 2,
+            "ignored": false
           }
         ],
         "slug": null,
@@ -86,18 +97,22 @@
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "flags": {},
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": "always"
+        }
+      },
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
         "exportSource": null,
-        "coreVersion": "13.346",
+        "coreVersion": "13.347",
         "systemId": "ptr2e",
         "systemVersion": "1.4.1.beta",
-        "lastModifiedBy": null
+        "lastModifiedBy": "Kc3DOunCh3ClAeHS",
+        "modifiedTime": 1755379450467
       }
     }
   ],
-  "flags": {},
   "_id": "NUba7VJbIYn7MpEh"
 }
