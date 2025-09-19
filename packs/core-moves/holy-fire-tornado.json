@@ -1,0 +1,139 @@
+{
+  "folder": "BImk1fcMbR5akA4z",
+  "name": "Holy Fire Tornado",
+  "type": "move",
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "publication": {
+      "source": "Digidex",
+      "authors": [
+        "Fox"
+      ],
+      "notes": ""
+    },
+    "traits": [],
+    "actions": [
+      {
+        "name": "Holy Fire Tornado",
+        "slug": "holy-fire-tornado",
+        "type": "attack",
+        "img": "systems/ptr2e/img/svg/fairy_icon.svg",
+        "traits": [
+          "digimon",
+          "blast-4",
+          "sky"
+        ],
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 9
+        },
+        "types": [
+          "fairy"
+        ],
+        "category": "physical",
+        "predicate": [],
+        "description": "<p>If an affected creature is @Trait[dark]-Type or @Trait[ghost]-Type, this attack has a 5% fixed chance to inflict @Affliction[perish 1].</p>",
+        "range": {
+          "target": "blast",
+          "distance": 10,
+          "unit": "m"
+        },
+        "power": 125,
+        "accuracy": 100
+      }
+    ],
+    "grade": "S"
+  },
+  "img": "systems/ptr2e/img/svg/fairy_icon.svg",
+  "effects": [
+    {
+      "name": "Holy Fire Tornado",
+      "type": "passive",
+      "_id": "MC5gnjaM77Qy4LJv",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "holy-fire-tornado-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.perishcondititem",
+            "predicate": [
+              "target:trait:ghost"
+            ],
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "duration.turns",
+                "value": 1
+              }
+            ],
+            "chance": 5,
+            "isFixedChance": true,
+            "affects": "target",
+            "dontMerge": false,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "roll-effect",
+            "key": "holy-fire-tornado-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.perishcondititem",
+            "predicate": [
+              "target:trait:dark"
+            ],
+            "chance": 5,
+            "isFixedChance": true,
+            "affects": "target",
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "duration.turns",
+                "value": 1
+              }
+            ],
+            "dontMerge": false,
+            "mode": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.347",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.3.beta",
+        "lastModifiedBy": null
+      }
+    }
+  ],
+  "flags": {},
+  "_id": "7ybSR63v6Sauky7B"
+}
