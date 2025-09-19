@@ -1,0 +1,110 @@
+{
+  "folder": "BImk1fcMbR5akA4z",
+  "name": "Tomahawk Stinger",
+  "type": "move",
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "publication": {
+      "source": "Digidex",
+      "authors": [
+        "Fox"
+      ],
+      "notes": ""
+    },
+    "traits": [],
+    "actions": [
+      {
+        "name": "Tomahawk Stinger",
+        "slug": "tomahawk-stinger",
+        "type": "attack",
+        "img": "systems/ptr2e/img/svg/ghost_icon.svg",
+        "traits": [
+          "digimon",
+          "missile",
+          "sharp"
+        ],
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 8
+        },
+        "types": [
+          "ghost"
+        ],
+        "category": "physical",
+        "predicate": [],
+        "description": "<p>This attack inflicts @Affliction[confused 5] on the target.</p>",
+        "range": {
+          "target": "creature",
+          "distance": 15,
+          "unit": "m"
+        },
+        "power": 130,
+        "accuracy": 100
+      }
+    ],
+    "grade": "S"
+  },
+  "img": "systems/ptr2e/img/svg/ghost_icon.svg",
+  "effects": [
+    {
+      "name": "Tomahawk Stinger",
+      "type": "passive",
+      "_id": "xpEPqFtgOQYDptMT",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "tomahawk-stinger-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.confusedconditem",
+            "predicate": [],
+            "chance": 100,
+            "isFixedChance": false,
+            "affects": "target",
+            "alterations": [],
+            "dontMerge": false,
+            "mode": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.347",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.3.beta",
+        "lastModifiedBy": null
+      }
+    }
+  ],
+  "flags": {},
+  "_id": "x8sJPRQ8RBhnV6f7"
+}

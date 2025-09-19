@@ -44,9 +44,6 @@
       }
     ],
     "autoUnlock": [],
-    "originSlug": null,
-    "variant": null,
-    "mode": null,
     "global": true,
     "webs": [],
     "design": {
@@ -75,21 +72,26 @@
             "type": "roll-effect",
             "key": "normal-attack",
             "value": "Compendium.ptr2e.core-effects.Item.enragedcondiitem",
-            "predicate": [],
+            "predicate": [
+              "origin:enemy"
+            ],
             "chance": 20,
             "affects": "target",
-            "mode": 2,
             "priority": null,
-            "ignored": false,
             "alterations": [],
-            "dontMerge": false
+            "dontMerge": false,
+            "isFixedChance": false,
+            "mode": 2,
+            "ignored": false
           }
         ],
         "slug": null,
         "traits": [],
         "removeAfterCombat": true,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
@@ -107,16 +109,20 @@
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "flags": {},
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "13.342",
+        "coreVersion": "13.348",
         "systemId": "ptr2e",
-        "systemVersion": "0.10.0-alpha.3.0.0",
+        "systemVersion": "1.4.3.beta",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null,
+        "modifiedTime": 1757798529758,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf",
         "exportSource": null
       }
     }

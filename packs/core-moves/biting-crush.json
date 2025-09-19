@@ -1,0 +1,117 @@
+{
+  "folder": "BImk1fcMbR5akA4z",
+  "name": "Biting Crush",
+  "type": "move",
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "publication": {
+      "source": "Digidex",
+      "authors": [
+        "Fox"
+      ],
+      "notes": ""
+    },
+    "traits": [],
+    "actions": [
+      {
+        "name": "Biting Crush",
+        "slug": "biting-crush",
+        "type": "attack",
+        "img": "systems/ptr2e/img/svg/water_icon.svg",
+        "traits": [
+          "digimon",
+          "contact",
+          "grapple",
+          "jaw"
+        ],
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 9
+        },
+        "types": [
+          "water"
+        ],
+        "category": "physical",
+        "predicate": [],
+        "description": "<p>Effect: This attack has a 15% Fixed Chance to inflict @Affliction[perish 1].</p>",
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "power": 145,
+        "accuracy": 100
+      }
+    ],
+    "grade": "S"
+  },
+  "img": "systems/ptr2e/img/svg/water_icon.svg",
+  "effects": [
+    {
+      "name": "Biting Crush",
+      "type": "passive",
+      "_id": "a3zvLnl1PRQVNaiq",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "biting-crush-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.perishcondititem",
+            "predicate": [],
+            "chance": 15,
+            "isFixedChance": true,
+            "affects": "target",
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "duration.turns",
+                "value": 1
+              }
+            ],
+            "dontMerge": false,
+            "mode": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.347",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.3.beta",
+        "lastModifiedBy": null
+      }
+    }
+  ],
+  "flags": {},
+  "_id": "p3BLJ4Md3gXXkCZk"
+}

@@ -27,8 +27,9 @@
         "types": [
           "poison"
         ],
-        "description": "<p>Effect: On hit, the target has 50% chance each of gaining either @Affliction[poison] 5, @Affliction[paralysis] 5, or @Affliction[drowsy] 5.</p>",
-        "img": "systems/ptr2e/img/svg/poison_icon.svg"
+        "description": "<p>Effect: On hit, the target has a 25% chance each of gaining @Affliction[poison 5], @Affliction[paralysis 5], and @Affliction[drowsy 5].</p>",
+        "img": "systems/ptr2e/img/svg/poison_icon.svg",
+        "predicate": []
       }
     ],
     "grade": "C",
@@ -40,8 +41,10 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
-    }
+      ],
+      "notes": ""
+    },
+    "traits": []
   },
   "_id": "697n2MmrhrzaWUGr",
   "effects": [
@@ -57,10 +60,13 @@
             "key": "dire-claw-attack",
             "value": "Compendium.ptr2e.core-effects.Item.poisoncondititem",
             "predicate": [],
-            "chance": 50,
+            "chance": 25,
             "affects": "target",
-            "mode": 2,
             "priority": null,
+            "isFixedChance": false,
+            "alterations": [],
+            "dontMerge": false,
+            "mode": 2,
             "ignored": false
           },
           {
@@ -68,10 +74,13 @@
             "key": "dire-claw-attack",
             "value": "Compendium.ptr2e.core-effects.Item.paralysisconitem",
             "predicate": [],
-            "chance": 50,
+            "chance": 25,
             "affects": "target",
-            "mode": 2,
             "priority": null,
+            "isFixedChance": false,
+            "alterations": [],
+            "dontMerge": false,
+            "mode": 2,
             "ignored": false
           },
           {
@@ -79,10 +88,13 @@
             "key": "dire-claw-attack",
             "value": "Compendium.ptr2e.core-effects.Item.drowsycondititem",
             "predicate": [],
-            "chance": 50,
+            "chance": 25,
             "affects": "target",
-            "mode": 2,
             "priority": null,
+            "isFixedChance": false,
+            "alterations": [],
+            "dontMerge": false,
+            "mode": 2,
             "ignored": false
           }
         ],
@@ -90,7 +102,9 @@
         "traits": [],
         "removeAfterCombat": true,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
@@ -108,16 +122,21 @@
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "flags": {},
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.347",
         "systemId": "ptr2e",
-        "systemVersion": "0.10.0-alpha.3.0.0",
+        "systemVersion": "1.4.3.beta",
         "createdTime": 1729540428544,
-        "modifiedTime": 1729540555762,
-        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
+        "modifiedTime": 1756257345743,
+        "lastModifiedBy": "6zxE5EIsM9axXjpP",
+        "exportSource": null
       }
     }
   ]
