@@ -1,10 +1,11 @@
 import globals from "globals";
 import pluginJs from "@eslint/js";
 import tseslint from "typescript-eslint";
+import jestPlugin from "eslint-plugin-jest";
 
 export default [
   {
-    "plugins": { "html": {} }
+    "plugins": { "html": {}, "jest": jestPlugin },
   },
   { files: ["**/*.{js,mjs,cjs,ts}"] },
   { files: ["**/*.js"], languageOptions: { sourceType: "script" } },
@@ -37,6 +38,16 @@ export default [
         "ts-check": false,
         minimumDescriptionLength: 10,
       }],
+    }
+  },
+  {
+    files: ["**/*.test.js", "**/*.spec.js"],
+    plugins: { jest: jestPlugin },
+    languageOptions: {
+      globals: { ...globals.jest }
+    },
+    rules: {
+      ...jestPlugin.configs.recommended.rules
     }
   }
 ];

@@ -61,7 +61,7 @@ class Trait {
             trait: { value: this.value ?? "" }
           }
         }) as string,
-        value: c.resolveValue(c.value, c.value, {
+        value: c.type === "roll-option" ? c.value : c.resolveValue(c.value, c.value, {
           evaluate: false, resolvables: {
             actor,
             item,

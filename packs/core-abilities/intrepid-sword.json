@@ -38,7 +38,8 @@
         "img": "icons/svg/explosion.svg",
         "range": {
           "target": "enemy",
-          "unit": "m"
+          "unit": "m",
+          "distance": 10
         }
       }
     ],
@@ -56,7 +57,8 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
+      ],
+      "notes": ""
     }
   },
   "_id": "oAcbRHt5mlUrMtux",
@@ -73,7 +75,7 @@
             "key": "",
             "value": "Compendium.ptr2e.core-moves.Item.0rhyfVFsZ1asQIwv",
             "predicate": [
-              "item:ability:intrepid-sword:active"
+              "ability:intrepid-sword:active"
             ],
             "alterations": [
               {
@@ -84,24 +86,24 @@
             ],
             "reevaluateOnUpdate": true,
             "allowDuplicate": false,
-            "mode": 2,
             "priority": null,
-            "ignored": false,
-            "inMemoryOnly": false,
-            "track": false,
-            "replaceSelf": false,
             "onDeleteActions": {
               "grantee": "detach",
               "granter": "cascade"
-            }
+            },
+            "mode": 2,
+            "ignored": false,
+            "inMemoryOnly": false,
+            "track": false,
+            "replaceSelf": false
           },
           {
             "type": "basic",
             "key": "system.attributes.atk.stage",
             "value": 1,
             "predicate": [],
-            "mode": 2,
             "priority": null,
+            "mode": 2,
             "ignored": false
           }
         ],
@@ -109,7 +111,9 @@
         "traits": [],
         "removeAfterCombat": true,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
@@ -131,12 +135,13 @@
       "_stats": {
         "compendiumSource": "Compendium.ptr2e.core-abilities.Item.nseOdT3vpRN0AW0K.ActiveEffect.SL5wDgqnuATW2IkH",
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.346",
         "systemId": "ptr2e",
-        "systemVersion": "1.0.6.beta",
+        "systemVersion": "1.4.2.beta",
         "createdTime": 1737403811338,
-        "modifiedTime": 1739816174716,
-        "lastModifiedBy": "IcBpMqhFuTck9VpX"
+        "modifiedTime": 1754319296738,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf",
+        "exportSource": null
       }
     }
   ]

@@ -549,14 +549,8 @@ function speciesToMarkdown(species: any): MarkdownResult | null {
   const movements =
     `\n### Movements\n` +
     `| Type | Value |\n| --- | --- |\n` +
-    (species.system.movement.primary?.length > 0
-      ? species.system.movement.primary
-        .map((movement: any) => `| **${capitalize(movement.type)}** | ${movement.value}m |`)
-        .join("\n")
-      : "") +
-    (species.system.movement.secondary?.length > 0
-      ? "\n" +
-      species.system.movement.secondary
+    (species.system.movement.length > 0
+      ? species.system.movement
         .map((movement: any) => `| **${capitalize(movement.type)}** | ${movement.value}m |`)
         .join("\n")
       : "") +

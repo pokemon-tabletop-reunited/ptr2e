@@ -7,28 +7,23 @@
       "trait:telepath"
     ],
     "cost": 2,
-    "description": "<p>You may hide your mind's presence as an [Interrupt 4] Simple Action in response to an incoming telepathic sweep of the area. You automatically become aware of any telepaths who are actively searching for minds.</p>",
+    "description": "<p>You may hide your mind's presence as an @Trait[interrupt-4] Simple Action in response to an incoming telepathic sweep of the area. You automatically become aware of any telepaths who are actively searching for minds.</p>",
     "actions": [
       {
         "name": "Conceal Mind",
         "slug": "conceal-mind",
-        "description": "<p>You may hide your mind's presence as an [Interrupt 4] Simple Action in response to an incoming telepathic sweep of the area. You automatically become aware of any telepaths who are actively searching for minds.</p>",
+        "description": "<p>You may hide your mind's presence as an @Trait[interrupt-4] Simple Action in response to an incoming telepathic sweep of the area. You automatically become aware of any telepaths who are actively searching for minds.</p>",
         "cost": {
           "activation": "free",
-          "powerPoints": 2,
-          "delay": null,
-          "priority": null
+          "powerPoints": 2
         },
         "type": "generic",
         "traits": [],
-        "img": "icons/svg/explosion.svg",
+        "img": "systems/ptr2e/img/svg/psychic_icon.svg",
         "range": {
           "target": "enemy",
-          "unit": "m",
-          "distance": 0
-        },
-        "variant": null,
-        "ephemeralVariant": false
+          "unit": "m"
+        }
       }
     ],
     "slug": "conceal-mind",
@@ -39,6 +34,10 @@
     },
     "nodes": [
       {
+        "x": 137,
+        "y": 131,
+        "hidden": false,
+        "type": "normal",
         "connected": [
           "hypnotic-suggestion",
           "telepathic-potential",
@@ -48,25 +47,15 @@
           "master-mindscanner"
         ],
         "config": {
-          "alpha": null,
-          "backgroundColor": "#400000",
-          "borderColor": null,
-          "borderWidth": null,
           "texture": "systems/ptr2e/img/svg/psychic_icon.svg",
-          "tint": "#ffffff",
-          "scale": null
+          "backgroundColor": null,
+          "borderColor": null,
+          "tint": null
         },
-        "hidden": false,
-        "type": "normal",
-        "x": 137,
-        "y": 131,
         "tier": null
       }
     ],
     "autoUnlock": [],
-    "originSlug": null,
-    "variant": null,
-    "mode": null,
     "global": true,
     "webs": [],
     "design": {
