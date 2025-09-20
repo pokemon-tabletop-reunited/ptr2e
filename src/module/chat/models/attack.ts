@@ -561,6 +561,8 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
     const result = this.context.results.get(targetUuid);
     if (!result) return false;
 
+    const origin = await this.currentOrigin;
+
     async function applyEffects(target: ActorPTR2e, effects: foundry.data.fields.ModelPropFromDataField<foundry.data.fields.SchemaField<EffectRollsSchema>>[], isCrit = false) {
       if (!effects.length) return;
       const toApply = await (async () => {
@@ -587,7 +589,7 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
 
           try {
             for (const alteration of effectRoll.alterations ?? []) {
-              alteration.applyTo(grantedSource as ItemSourcePTR2e, target);
+              alteration.applyTo(grantedSource as ItemSourcePTR2e, target, origin);
             }
 
             toApply.push(...grantedSource.effects as ActiveEffectPTR2e['_source'][]);
@@ -604,14 +606,15 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
       }
     }
 
+    // Damage needs to be applied before all effects are, in case any effect depends on the new HP value.
     const promise = (async () => {
-        const target = result.target;
-        const damage = result.damage;
-        if (!damage) return 0;
+      const target = result.target;
+      const damage = result.damage;
+      if (!damage) return 0;
 
-        const damageApplied = await target.applyDamage(damage);
-        return damageApplied;
-      })()
+      const damageApplied = await target.applyDamage(damage);
+      return damageApplied;
+    })()
 
     return (await Promise.all([
       await promise,

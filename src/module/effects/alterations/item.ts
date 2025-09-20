@@ -44,16 +44,18 @@ class ItemAlteration extends foundry.abstract.DataModel<ChangeModel> {
   }
 
   private _actor: ActorPTR2e | null = null;
+  private origin: ActorPTR2e | null = null;
 
-  applyTo(item: ItemPTR2e | ItemSourcePTR2e, actor?: ActorPTR2e): void {
+  applyTo(item: ItemPTR2e | ItemSourcePTR2e, actor?: ActorPTR2e, origin?: Maybe<ActorPTR2e>): void {
     if(item instanceof ItemPTR2e) {
       return this.applyToItem(item);
     }
     if(actor) this._actor = actor;
+    if(origin) this.origin = origin;
 
     const property = item.type === "effect" && !this.property.startsWith("effects.") ? `effects.0.${this.property}` : this.property;
     const current = fu.getProperty(item, property) as JSONValue;
-    const value = typeof this.value === "boolean" ? this.value : this.resolveValue(this.value, current, {evaluate: true} );
+    const value = typeof this.value === "boolean" ? this.value : this.resolveValue(this.value, current, {evaluate: true, resolvables: {actor: this.actor, origin: this.origin}} );
     const change = BasicChangeSystem.getNewValue(this.mode, current, value, false)
 
     const isArrayChange = (Array.isArray(current) || current instanceof Set) && (current as unknown[]).every(e => typeof e === typeof value)
@@ -191,7 +193,7 @@ class ItemAlteration extends foundry.abstract.DataModel<ChangeModel> {
           const data =
             key === "change"
               ? this
-              : key === "actor" || key === "item" || key === "effect"
+              : key === "actor" || key === "item" || key === "effect" || key === "origin"
                 ? this[key]
                 : this.effect;
 
