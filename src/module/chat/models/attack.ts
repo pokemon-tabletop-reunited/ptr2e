@@ -604,15 +604,17 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
       }
     }
 
-    return (await Promise.all([
-      (async () => {
+    const promise = (async () => {
         const target = result.target;
         const damage = result.damage;
-        if (!damage) return false;
+        if (!damage) return 0;
 
         const damageApplied = await target.applyDamage(damage);
         return damageApplied;
-      })(),
+      })()
+
+    return (await Promise.all([
+      await promise,
       (async (): Promise<void> => {
         const target = result.target;
         await applyEffects(target, result.effect.effects?.target ?? [], result.hit === "critical");
