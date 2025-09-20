@@ -14,7 +14,7 @@ export abstract class PickAThingPrompt<TItem extends ItemPTR2e, TThing extends s
   protected choices: PickableThing<TThing>[];
 
   /** If the number of choices is beyond a certain length, a select menu is presented instead of a list of buttons */
-  protected selectMenu?: Tagify<{ value: string; label: string }>;
+  protected selectMenu?: Tagify<{ value: string; label: string, disabled: boolean | undefined }>;
 
   protected predicate: Predicate;
 
@@ -104,7 +104,7 @@ export abstract class PickAThingPrompt<TItem extends ItemPTR2e, TThing extends s
         maxItems: this.choices.length,
         searchKeys: ["label"],
       },
-      whitelist: this.choices.map((c, i) => ({ value: i.toString(), label: c.label })),
+      whitelist: this.choices.map((c, i) => ({ value: i.toString(), label: c.label, disabled: c.disabled })),
     });
 
     this.selectMenu.DOM.input.spellcheck = false;
@@ -136,6 +136,7 @@ interface PickableThing<T extends string | number | object = string | number | o
   img?: string;
   domain?: string[];
   predicate?: Predicate;
+  disabled?: boolean;
 }
 
 interface PromptTemplateData {
