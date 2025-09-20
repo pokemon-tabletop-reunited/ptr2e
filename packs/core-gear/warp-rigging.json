@@ -10,8 +10,7 @@
     "traits": [
       "sci-fi",
       "accessory",
-      "teleporter",
-      "partial-automation"
+      "teleporter"
     ],
     "actions": [],
     "description": "<p>Warp Rigging is worn about the body and laced with a number of psychoactive components. It responds to the wearer's intent, granting them the @Trait[teleporter] trait and a Teleportation Movement Allowance of 15m. <br><br>Connected Move: Teleport.</p>",
@@ -30,7 +29,12 @@
       "type": "untyped",
       "power": null,
       "accuracy": 100,
-      "hide": true
+      "hide": true,
+      "range": {
+        "target": "creature",
+        "distance": 10,
+        "unit": "m"
+      }
     },
     "quantity": 1,
     "rarity": "rare",
@@ -48,7 +52,8 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
+      ],
+      "notes": ""
     }
   },
   "img": "systems/ptr2e/img/icons/equipment_icon.webp",
@@ -65,8 +70,6 @@
             "key": "",
             "value": "Compendium.ptr2e.core-moves.Item.D70apP7vVf1aEVVr",
             "predicate": [],
-            "allowDuplicate": false,
-            "replaceSelf": true,
             "alterations": [
               {
                 "mode": 5,
@@ -74,24 +77,34 @@
                 "value": "true"
               }
             ],
-            "mode": 2,
             "priority": null,
-            "ignored": false,
-            "reevaluateOnUpdate": false,
-            "inMemoryOnly": false,
-            "track": false,
             "onDeleteActions": {
               "grantee": "detach",
               "granter": "cascade"
-            }
+            },
+            "mode": 2,
+            "ignored": false,
+            "reevaluateOnUpdate": false,
+            "inMemoryOnly": false,
+            "allowDuplicate": true,
+            "track": false,
+            "replaceSelf": false
           },
           {
             "type": "add-trait",
             "key": "",
             "value": "Teleporter",
             "predicate": [],
-            "mode": 2,
             "priority": null,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "key": "system.movement.teleport.value",
+            "value": 15,
+            "predicate": [],
+            "mode": 2,
             "ignored": false
           }
         ],
@@ -99,7 +112,9 @@
         "traits": [],
         "removeAfterCombat": true,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
@@ -117,16 +132,21 @@
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "flags": {},
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.348",
         "systemId": "ptr2e",
-        "systemVersion": "1.0.3.beta",
+        "systemVersion": "1.4.4.beta",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1758382843680,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf",
+        "exportSource": null
       }
     }
   ],

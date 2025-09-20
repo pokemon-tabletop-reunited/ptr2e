@@ -52,8 +52,69 @@
     }
   },
   "img": "systems/ptr2e/img/icons/equipment_icon.webp",
-  "effects": [],
+  "effects": [
+    {
+      "name": "Lucky Punch",
+      "type": "passive",
+      "_id": "KhJhBPoabN2YScIy",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "basic",
+            "key": "system.battleStats.critRate.stage",
+            "value": 2,
+            "predicate": [
+              {
+                "or": [
+                  "species:happiny",
+                  "species:chansey",
+                  "species:blissey"
+                ]
+              }
+            ],
+            "label": "Lucky Punch",
+            "mode": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.348",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.4.beta",
+        "createdTime": 1758376216132,
+        "modifiedTime": 1758376316950,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+      }
+    }
+  ],
   "folder": "6VDJBcrqVDh5bYtA",
-  "flags": {},
   "_id": "r9nYqXBqArpRXnrs"
 }
