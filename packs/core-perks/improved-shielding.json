@@ -60,5 +60,65 @@
     "variant": null,
     "mode": null
   },
-  "effects": []
+  "effects": [
+    {
+      "name": "Improved Shielding",
+      "type": "passive",
+      "_id": "M0W0LiUTmu7u9GQF",
+      "img": "systems/ptr2e/img/perk-icons/Combat.svg",
+      "system": {
+          "changes": [
+              {
+                  "type": "effect-alteration",
+                  "key": "hold-the-line-generic",
+                  "value": 0,
+                  "predicate": [],
+                  "alterations": [
+                      {
+                          "mode": 5,
+                          "property": "system.changes.0.value",
+                          "value": "floor((@origin.system.health.max / 16) * 6)"
+                      }
+                  ],
+                  "mode": 2,
+                  "ignored": false
+              }
+          ],
+          "slug": null,
+          "traits": [],
+          "removeAfterCombat": false,
+          "removeOnRecall": false,
+          "removeAfterAttacking": false,
+          "removeAfterAttacked": false,
+          "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+          "startTime": null,
+          "combat": null
+      },
+      "description": "<p>Whenever you would gain Shields, you gain an additional @Tick[2 shield].<br /></p>",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {
+          "ptr2e": {
+              "displayOnToken": ""
+          }
+      },
+      "_stats": {
+          "compendiumSource": null,
+          "duplicateSource": null,
+          "exportSource": null,
+          "coreVersion": "13.348",
+          "systemId": "ptr2e",
+          "systemVersion": "1.4.4.beta",
+          "createdTime": 1758365471843,
+          "modifiedTime": 1758365525331,
+          "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
+      }
+    }
+  ]
 }
