@@ -14,17 +14,12 @@
         "type": "passive",
         "range": {
           "target": "self",
-          "unit": "m",
-          "distance": 0
+          "unit": "m"
         },
         "cost": {
-          "activation": "free",
-          "powerPoints": 0
+          "activation": "free"
         },
-        "img": "systems/ptr2e/img/perk-icons/Juggler.svg",
-        "variant": null,
-        "ephemeralVariant": false,
-        "hidden": false
+        "img": "systems/ptr2e/img/perk-icons/Juggler.svg"
       }
     ],
     "slug": "quick-and-the-dead",
@@ -75,10 +70,7 @@
         "PTR 2e Team"
       ],
       "notes": ""
-    },
-    "originSlug": null,
-    "variant": null,
-    "mode": null
+    }
   },
   "effects": [
     {
@@ -96,17 +88,33 @@
             "chance": 100,
             "dontMerge": true,
             "affects": "self",
-            "mode": 2,
             "priority": null,
-            "ignored": false,
-            "alterations": []
+            "alterations": [],
+            "isFixedChance": false,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "roll-effect",
+            "key": "generic",
+            "value": "Compendium.ptr2e.core-effects.Item.advanceffectitem",
+            "predicate": [],
+            "chance": 100,
+            "isFixedChance": false,
+            "affects": "self",
+            "alterations": [],
+            "dontMerge": true,
+            "mode": 2,
+            "ignored": false
           }
         ],
         "slug": null,
         "traits": [],
         "removeAfterCombat": true,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
@@ -124,16 +132,20 @@
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "flags": {},
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "13.342",
+        "coreVersion": "13.348",
         "systemId": "ptr2e",
-        "systemVersion": "0.10.0-alpha.5.2.1",
+        "systemVersion": "1.4.4.beta",
         "createdTime": 1737661825098,
-        "modifiedTime": 1737661874073,
-        "lastModifiedBy": "IcBpMqhFuTck9VpX",
+        "modifiedTime": 1758401935169,
+        "lastModifiedBy": "Kc3DOunCh3ClAeHS",
         "exportSource": null
       }
     }
