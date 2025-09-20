@@ -18,27 +18,6 @@
 </div>
 
 <div class="form-group">
-    <label class="short">{{localize "PTR2E.Effect.FIELDS.ChangeChance.label"}}</label>
-    <div class="form-fields">
-        <input type="number" name="{{basePath}}.chance" value="{{change.chance}}" />
-    </div>
-</div>
-
-<div class="form-group">
-  <label>{{localize "PTR2E.Effect.FIELDS.ChangeIsFixedChance.label"}}</label>
-  <div class="form-fields">
-    <input type="checkbox" name="{{basePath}}.isFixedChance" {{#if change.isFixedChance}}checked{{/if}} />
-  </div>
-</div>
-
-<div class="form-group">
-  <label>{{localize "PTR2E.Effect.FIELDS.DontMerge.label"}}</label>
-  <div class="form-fields">
-    <input type="checkbox" name="{{basePath}}.dontMerge" {{#if change.dontMerge}}checked{{/if}} />
-  </div>
-</div>
-
-<div class="form-group">
     <label class="short">{{localize "PTR2E.Effect.FIELDS.ChangeAffects.label"}}</label>
     <div class="form-fields">
       <div>
@@ -52,10 +31,6 @@
       <div>
         <input type="radio" name="{{basePath}}.affects" value="origin" {{#if (is change.affects 'origin')}}checked{{/if}} />
         <label>{{localize "PTR2E.Effect.FIELDS.ChangeAffects.origin"}}</label>
-      </div>
-      <div>
-        <input type="radio" name="{{basePath}}.affects" value="defensive" {{#if (is change.affects 'defensive')}}checked{{/if}} />
-        <label>{{localize "PTR2E.Effect.FIELDS.ChangeAffects.defensive"}}</label>
       </div>
     </div>
 </div>

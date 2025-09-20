@@ -1,16 +1,16 @@
 
 import { htmlQueryAll } from "@utils";
-import RollEffectChangeSystem from "../effect-roll.ts";
+import EphemeralEffectChangeSystem from "../ephemeral-effect.ts";
 import ChangeForm, { ChangeFormContext } from "./base.ts";
 import { ItemAlteration } from "@module/effects/alterations/item.ts";
 
-class RollEffectForm extends ChangeForm<RollEffectChangeSystem> {
+class EphemeralEffectForm extends ChangeForm<EphemeralEffectChangeSystem> {
   override get template() {
-    return "systems/ptr2e/templates/effects/changes/effect-roll.hbs";
+    return "systems/ptr2e/templates/effects/changes/ephemeral-effect.hbs";
   }
 
   override async _prepareContext() {
-    const context: ChangeFormContext<RollEffectChangeSystem> & {
+    const context: ChangeFormContext<EphemeralEffectChangeSystem> & {
       granted?: ClientDocument | null;
     } = await super._prepareContext();
     const item = await this.change.getItem();
@@ -48,4 +48,4 @@ class RollEffectForm extends ChangeForm<RollEffectChangeSystem> {
   }
 }
 
-export default RollEffectForm;
+export default EphemeralEffectForm;
