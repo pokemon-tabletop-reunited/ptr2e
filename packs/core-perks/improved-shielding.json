@@ -67,35 +67,54 @@
       "_id": "M0W0LiUTmu7u9GQF",
       "img": "systems/ptr2e/img/perk-icons/Combat.svg",
       "system": {
-          "changes": [
+        "changes": [
+          {
+            "type": "effect-alteration",
+            "key": "shield-tick-effect-applied",
+            "value": 0,
+            "predicate": [
               {
-                  "type": "effect-alteration",
-                  "key": "hold-the-line-generic",
-                  "value": 0,
-                  "predicate": [],
-                  "alterations": [
-                      {
-                          "mode": 5,
-                          "property": "system.changes.0.value",
-                          "value": "floor((@origin.system.health.max / 16) * 6)"
-                      }
-                  ],
-                  "mode": 2,
-                  "ignored": false
+                "nor": ["item:slug:hold-the-line", "item:slug:watchers-protection"]
               }
-          ],
-          "slug": null,
-          "traits": [],
-          "removeAfterCombat": false,
-          "removeOnRecall": false,
-          "removeAfterAttacking": false,
-          "removeAfterAttacked": false,
-          "stacks": 0
+            ],
+            "alterations": [
+              {
+                "mode": 2,
+                "property": "system.changes.0.value",
+                "value": "floor((@actor.system.health.max / 16) * 2)"
+              }
+            ]
+          },
+          {
+            "type": "effect-alteration",
+            "key": "shield-tick-effect-applied",
+            "value": 0,
+            "predicate": [
+              {
+                "or": ["item:slug:hold-the-line", "item:slug:watchers-protection"]
+              }
+            ],
+            "alterations": [
+              {
+                "mode": 2,
+                "property": "system.changes.0.value",
+                "value": "floor((@origin.system.health.max / 16) * 2)"
+              }
+            ]
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": false,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
       },
       "disabled": false,
       "duration": {
-          "startTime": null,
-          "combat": null
+        "startTime": null,
+        "combat": null
       },
       "description": "<p>Whenever you would gain Shields, you gain an additional @Tick[2 shield].<br /></p>",
       "origin": null,
@@ -104,20 +123,20 @@
       "statuses": [],
       "sort": 0,
       "flags": {
-          "ptr2e": {
-              "displayOnToken": ""
-          }
+        "ptr2e": {
+          "displayOnToken": ""
+        }
       },
       "_stats": {
-          "compendiumSource": null,
-          "duplicateSource": null,
-          "exportSource": null,
-          "coreVersion": "13.348",
-          "systemId": "ptr2e",
-          "systemVersion": "1.4.4.beta",
-          "createdTime": 1758365471843,
-          "modifiedTime": 1758365525331,
-          "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.348",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.4.beta",
+        "createdTime": 1758365471843,
+        "modifiedTime": 1758365525331,
+        "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
       }
     }
   ]
