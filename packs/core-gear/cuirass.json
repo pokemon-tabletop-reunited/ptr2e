@@ -1,0 +1,183 @@
+{
+  "folder": "V4skAU6G3OH5fXad",
+  "name": "Cuirass",
+  "type": "equipment",
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "slug": "cuirass",
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "traits": [
+      "early-modern",
+      "medieval",
+      "fantasy"
+    ],
+    "actions": [],
+    "description": "<p>A cuirass is a piece of armour that covers the torso, formed of both a breastplate and a backplate. This wider protection expands the protective benefits of the breastplate, though its weaknesses remain, or are intensified (such as in restricting the wearer's movements).</p>",
+    "crafting": {
+      "skill": "",
+      "spans": null,
+      "materials": []
+    },
+    "equipped": {
+      "carryType": "stowed",
+      "slot": "worn",
+      "handsHeld": null
+    },
+    "fling": {
+      "type": "untyped",
+      "power": 80,
+      "accuracy": 85,
+      "hide": false,
+      "range": {
+        "target": "creature",
+        "distance": 2,
+        "unit": "m"
+      }
+    },
+    "quantity": 1,
+    "rarity": "common",
+    "identification": {
+      "misidentified": null,
+      "status": "identified",
+      "unidentified": {
+        "name": "Unidentified Item",
+        "img": "systems/ptu/css/images/icons/gear_icon.png",
+        "description": "<p>Unidentified Item</p>"
+      }
+    }
+  },
+  "img": "systems/ptr2e/img/icons/equipment_icon.webp",
+  "effects": [
+    {
+      "name": "Cuirass",
+      "type": "passive",
+      "_id": "V4urmpxir4ruvTsf",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "ephemeral-modifier",
+            "key": "sharp-trait-attack-damage-flat",
+            "value": -20,
+            "predicate": [],
+            "label": "Cuirass (Missile/Sharp)",
+            "mode": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          },
+          {
+            "type": "ephemeral-modifier",
+            "key": "firearm-trait-attack-damage-flat",
+            "value": -10,
+            "predicate": [],
+            "label": "Cuirass (Missile/Sharp)",
+            "mode": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          },
+          {
+            "type": "ephemeral-modifier",
+            "key": "missile-trait-attack-damage-flat",
+            "value": -20,
+            "predicate": [],
+            "label": "Cuirass (Missile/Sharp)",
+            "mode": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          },
+          {
+            "type": "ephemeral-modifier",
+            "key": "sharp-trait-attack-damage-percentile",
+            "value": -10,
+            "predicate": [],
+            "label": "Cuirass (Missile/Sharp %)",
+            "mode": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          },
+          {
+            "type": "ephemeral-modifier",
+            "key": "missile-trait-attack-damage-percentile",
+            "value": -10,
+            "predicate": [],
+            "label": "Cuirass (Missile/Sharp %)",
+            "mode": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          },
+          {
+            "type": "ephemeral-modifier",
+            "key": "firearm-trait-attack-damage-percentile",
+            "value": -15,
+            "predicate": [],
+            "label": "Cuirass (Firearm)",
+            "mode": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          },
+          {
+            "type": "basic",
+            "key": "system.modifiers.effectResistance",
+            "value": 5,
+            "predicate": [],
+            "label": "Cuirass (RES)",
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "key": "system.attributes.spe.base",
+            "value": 0.85,
+            "mode": 1,
+            "predicate": [],
+            "label": "Cuirass",
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.347",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.3.beta",
+        "lastModifiedBy": null
+      }
+    }
+  ],
+  "flags": {},
+  "_id": "LXHFqpMecx2a0DfR"
+}

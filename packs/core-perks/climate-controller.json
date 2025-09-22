@@ -6,33 +6,44 @@
       "item:perk:climate-change"
     ],
     "cost": 3,
-    "description": "<p>Trigger: A @Trait[weather] Effect is created by a creature other than a user using an Attack or Ability (but not Intense Weather).</p><p>Effect: The triggering @Trait[weather] is removed, and the source creature has their Activation delayed 20%. If the Effect and its source lack [Legendary], the source creature gains @Affliction[suppressed] 5 and the source Attack/Ability is @Affliction[disabled] 5 or @Affliction[nullified] 5, and has their Activation delayed another 20%.</p>",
+    "description": "<p>Trigger: A @Trait[weather] Effect is created by a creature other than a user using an Attack or Ability (but not Intense Weather).</p><p>Effect: The triggering @Trait[weather] is removed, and the triggering creature is @Affliction[delay 20]{Delayed 20%}. If the Effect and its source lack @Trait[legendary], the source creature gains @Affliction[suppressed 5] and the source Attack/Ability is @Affliction[disabled 5] or @Affliction[nullified 5], and is @Affliction[delay 20]{Delayed 20%} further.</p>",
     "actions": [
       {
         "name": "Climate Controller",
-        "slug": "climate-controller",
-        "description": "<p>Trigger: A @Trait[weather] Effect is created by a creature other than a user using an Attack or Ability (but not Intense Weather).</p><p>Effect: The triggering @Trait[weather] is removed, and the source creature has their Activation delayed 20%. If the Effect and its source lack [Legendary], the source creature gains @Affliction[suppressed] 5 and the source Attack/Ability is @Affliction[disabled] 5 or @Affliction[nullified] 5, and has their Activation delayed another 20%.</p>",
+        "slug": "climate-controller-trigger",
+        "description": "<p>Trigger: A @Trait[weather] Effect is created by a creature other than a user using an Attack or Ability (but not Intense Weather).</p><p>Effect: The triggering @Trait[weather] is removed, and the triggering creature is @Affliction[delay 20]{Delayed 20%}. If the Effect and its source lack @Trait[legendary], the source creature gains @Affliction[suppressed 5] and the source Attack/Ability is @Affliction[disabled 5] or @Affliction[nullified 5], and is @Affliction[delay 20]{Delayed 20%} further.</p>",
         "cost": {
           "activation": "complex",
           "powerPoints": 5,
-          "trigger": "Trigger: A [Weather] Effect is created by a creature other than a user using an Attack or Ability (but not Intense Weather).",
-          "delay": null,
-          "priority": null
+          "trigger": "Trigger: A [Weather] Effect is created by a creature other than a user using an Attack or Ability (but not Intense Weather)."
         },
         "range": {
           "target": "field",
-          "unit": "m",
-          "distance": 0
+          "unit": "m"
         },
-        "type": "passive",
+        "type": "generic",
         "traits": [
           "environ",
           "weather"
         ],
-        "img": "icons/svg/explosion.svg",
-        "variant": null,
-        "hidden": false,
-        "ephemeralVariant": false
+        "img": "systems/ptr2e/img/perk-icons/Trainer.svg"
+      },
+      {
+        "name": "Climate Controller",
+        "slug": "climate-controller-passive",
+        "description": "<p>Passive: The user may slot one @Trait[weather] creating Ability as an Extra Ability.</p>",
+        "traits": [
+          "weather"
+        ],
+        "type": "passive",
+        "img": "systems/ptr2e/img/perk-icons/Trainer.svg",
+        "cost": {
+          "activation": "free"
+        },
+        "range": {
+          "target": "self",
+          "unit": "m"
+        }
       }
     ],
     "slug": "climate-controller",
@@ -43,6 +54,10 @@
     },
     "nodes": [
       {
+        "x": 43,
+        "y": 125,
+        "hidden": false,
+        "type": "normal",
         "connected": [
           "climate-change",
           "weaponized-weather",
@@ -50,25 +65,15 @@
           "climate-controller"
         ],
         "config": {
-          "alpha": null,
-          "backgroundColor": "#00ff00",
-          "borderColor": null,
-          "borderWidth": null,
           "texture": "systems/ptr2e/img/perk-icons/Trainer.svg",
-          "tint": null,
-          "scale": null
+          "backgroundColor": null,
+          "borderColor": null,
+          "tint": null
         },
-        "hidden": false,
-        "type": "normal",
-        "x": 43,
-        "y": 125,
         "tier": null
       }
     ],
     "autoUnlock": [],
-    "originSlug": null,
-    "variant": null,
-    "mode": null,
     "global": true,
     "webs": [],
     "design": {

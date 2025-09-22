@@ -828,8 +828,6 @@
             "predicate": [],
             "alwaysActive": false,
             "count": false,
-            "mode": 2,
-            "priority": null,
             "ignored": false,
             "suboptions": [],
             "state": false
@@ -847,8 +845,6 @@
             "spa": 40,
             "spd": null,
             "spe": 25,
-            "mode": 2,
-            "priority": null,
             "ignored": false
           },
           {
@@ -858,8 +854,6 @@
             ],
             "key": "",
             "value": "Drakelike",
-            "mode": 2,
-            "priority": null,
             "ignored": false
           },
           {
@@ -878,16 +872,16 @@
               }
             ],
             "allowDuplicate": false,
-            "mode": 2,
             "priority": null,
-            "ignored": false,
-            "inMemoryOnly": false,
-            "track": false,
-            "replaceSelf": false,
             "onDeleteActions": {
               "grantee": "detach",
               "granter": "cascade"
-            }
+            },
+            "mode": 2,
+            "ignored": false,
+            "inMemoryOnly": false,
+            "track": false,
+            "replaceSelf": false
           },
           {
             "type": "basic",
@@ -896,8 +890,8 @@
             ],
             "key": "system.skills.acrobatics.value",
             "value": 15,
-            "mode": 2,
             "priority": null,
+            "mode": 2,
             "ignored": false
           },
           {
@@ -907,8 +901,8 @@
             ],
             "key": "system.skills.climb.value",
             "value": 10,
-            "mode": 2,
             "priority": null,
+            "mode": 2,
             "ignored": false
           },
           {
@@ -918,8 +912,8 @@
             ],
             "key": "system.skills.intimidate.value",
             "value": 35,
-            "mode": 2,
             "priority": null,
+            "mode": 2,
             "ignored": false
           },
           {
@@ -929,8 +923,8 @@
             ],
             "key": "system.skills.lift.value",
             "value": 10,
-            "mode": 2,
             "priority": null,
+            "mode": 2,
             "ignored": false
           },
           {
@@ -940,8 +934,8 @@
             ],
             "key": "system.skills.listen.value",
             "value": 5,
-            "mode": 2,
             "priority": null,
+            "mode": 2,
             "ignored": false
           },
           {
@@ -951,8 +945,8 @@
             ],
             "key": "system.skills.running.value",
             "value": 5,
-            "mode": 2,
             "priority": null,
+            "mode": 2,
             "ignored": false
           },
           {
@@ -962,8 +956,8 @@
             ],
             "key": "system.skills.running.value",
             "value": 5,
-            "mode": 2,
             "priority": null,
+            "mode": 2,
             "ignored": false
           },
           {
@@ -973,8 +967,8 @@
             ],
             "key": "system.skills.spot.value",
             "value": 5,
-            "mode": 2,
             "priority": null,
+            "mode": 2,
             "ignored": false
           },
           {
@@ -984,8 +978,8 @@
             ],
             "key": "system.skills.survival.value",
             "value": 10,
-            "mode": 2,
             "priority": null,
+            "mode": 2,
             "ignored": false
           },
           {
@@ -995,8 +989,8 @@
             ],
             "key": "system.skills.swim.value",
             "value": 5,
-            "mode": 2,
             "priority": null,
+            "mode": 2,
             "ignored": false
           },
           {
@@ -1006,8 +1000,8 @@
             ],
             "key": "system.skills.track.value",
             "value": 10,
-            "mode": 2,
             "priority": null,
+            "mode": 2,
             "ignored": false
           },
           {
@@ -1017,8 +1011,8 @@
             ],
             "key": "system.movement.overland.value",
             "value": 2,
-            "mode": 2,
             "priority": null,
+            "mode": 2,
             "ignored": false
           },
           {
@@ -1028,8 +1022,18 @@
             ],
             "key": "system.movement.swim.value",
             "value": 1,
-            "mode": 2,
             "priority": null,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-sceptile:active"
+            ],
+            "key": "system.type.types",
+            "value": "dragon",
+            "mode": 2,
             "ignored": false
           }
         ],
@@ -1039,7 +1043,9 @@
         "removeOnRecall": false,
         "stacks": 0,
         "trigger": "manual",
-        "conditions": []
+        "conditions": [],
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
@@ -1060,13 +1066,7 @@
       "flags": {},
       "_stats": {
         "compendiumSource": null,
-        "duplicateSource": null,
-        "coreVersion": "12.331",
-        "systemId": "ptr2e",
-        "systemVersion": "1.1.1.beta",
-        "createdTime": 1742065373425,
-        "modifiedTime": 1742066752887,
-        "lastModifiedBy": "01onCaJSVMVOgMDI"
+        "duplicateSource": null
       }
     }
   ]

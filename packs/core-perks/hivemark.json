@@ -16,16 +16,12 @@
         "img": "systems/ptr2e/img/svg/bug_icon.svg",
         "range": {
           "target": "enemy",
-          "unit": "m",
-          "distance": 0
+          "unit": "m"
         },
         "cost": {
-          "activation": "free",
-          "powerPoints": 0
+          "activation": "free"
         },
-        "hidden": true,
-        "variant": null,
-        "ephemeralVariant": false
+        "hidden": true
       }
     ],
     "slug": "hivemark",
@@ -72,10 +68,7 @@
         "PTR 2e Team"
       ],
       "notes": ""
-    },
-    "originSlug": null,
-    "variant": null,
-    "mode": null
+    }
   },
   "_id": "o8JKgkDzgMMay8Co",
   "img": "systems/ptr2e/img/svg/bug_icon.svg",
@@ -91,21 +84,26 @@
             "type": "roll-effect",
             "key": "bug-attack",
             "value": "Compendium.ptr2e.core-effects.Item.infestedconditem",
-            "predicate": [],
+            "predicate": [
+              "origin:enemy"
+            ],
             "chance": 20,
             "affects": "target",
-            "mode": 2,
             "priority": null,
-            "ignored": false,
             "alterations": [],
-            "dontMerge": false
+            "dontMerge": false,
+            "isFixedChance": false,
+            "mode": 2,
+            "ignored": false
           }
         ],
         "slug": null,
         "traits": [],
         "removeAfterCombat": true,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
@@ -123,16 +121,20 @@
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "flags": {},
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "13.342",
+        "coreVersion": "13.348",
         "systemId": "ptr2e",
-        "systemVersion": "0.10.0-alpha.3.2.0",
+        "systemVersion": "1.4.3.beta",
         "createdTime": 1731105131277,
-        "modifiedTime": 1731105155513,
-        "lastModifiedBy": "wRgL6u6KEJDBDQIE",
+        "modifiedTime": 1757797803090,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf",
         "exportSource": null
       }
     }

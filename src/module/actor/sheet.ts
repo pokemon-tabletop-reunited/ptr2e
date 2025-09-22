@@ -268,7 +268,7 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
     actions: {
       id: "actions",
       template: "systems/ptr2e/templates/actor/actor-actions.hbs",
-      scrollable: [".scroll"]
+      scrollable: ["[data-tab='actionsCombat']",".scroll"]
     },
     inventory: {
       id: "inventory",
@@ -550,6 +550,28 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
 
     if (partId === "actions") {
       context.subtabs = this._getSubTabs();
+      context.actions = {
+        generic: [...this.actor.actions.generic, ...this.actor.actions.pokeball].map(action => ({
+          action,
+          sort: action.item.sort
+        })).sort((a, b) => a.sort - b.sort).map(({ action }) => action),
+        passive: this.actor.actions.passive.map(action => ({
+          action,
+          sort: action.item.sort
+        })).sort((a, b) => a.sort - b.sort).map(({ action }) => action),
+        camping: this.actor.actions.camping.map(action => ({
+          action,
+          sort: action.item.sort
+        })).sort((a, b) => a.sort - b.sort).map(({ action }) => action),
+        downtime: this.actor.actions.downtime.map(action => ({
+          action,
+          sort: action.item.sort
+        })).sort((a, b) => a.sort - b.sort).map(({ action }) => action),
+        exploration: this.actor.actions.exploration.map(action => ({
+          action,
+          sort: action.item.sort
+        })).sort((a, b) => a.sort - b.sort).map(({ action }) => action),
+      }
     }
 
     if (partId === "effects") {

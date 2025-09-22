@@ -1,0 +1,193 @@
+{
+  "folder": "V4skAU6G3OH5fXaf",
+  "name": "Short Spear",
+  "type": "weapon",
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "slug": "short-spear",
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "traits": [
+      "weapon",
+      "polearm",
+      "fling",
+      "1-handed",
+      "switch-grip",
+      "early-modern",
+      "medieval",
+      "ancient",
+      "fantasy"
+    ],
+    "actions": [
+      {
+        "name": "Short Spear Thrust",
+        "slug": "short-spear-thrust",
+        "traits": [
+          "weapon",
+          "adaptable",
+          "crit-1",
+          "contact"
+        ],
+        "type": "attack",
+        "img": "systems/ptr2e/img/icons/weapon_icon.webp",
+        "cost": {
+          "activation": "complex"
+        },
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "types": [
+          "untyped"
+        ],
+        "category": "physical",
+        "free": true,
+        "predicate": [],
+        "power": 45,
+        "accuracy": 100
+      },
+      {
+        "name": "Short Spear Thrust (Readied)",
+        "slug": "short-spear-thrust-readied",
+        "description": "<p>Trigger: A creature within range of this attack attempts to leave the range of this Attack, or that creature attempts to move adjacent to the user while the user is @Affliction[braced].</p>",
+        "traits": [
+          "weapon",
+          "interrupt-2",
+          "adaptable",
+          "crit-1",
+          "priority-30",
+          "contact"
+        ],
+        "type": "attack",
+        "img": "systems/ptr2e/img/icons/weapon_icon.webp",
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 2,
+          "trigger": "A creature within range of this attack attempts to leave the range of this Attack, or that creature attempts to move adjacent to the user while the user is @Affliction[braced]."
+        },
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "types": [
+          "untyped"
+        ],
+        "category": "physical",
+        "predicate": [],
+        "power": 45,
+        "accuracy": 100
+      }
+    ],
+    "description": "<p>A spear is a polearm consisting of a shaft, usually of wood, with a pointed head. The head may be simply the sharpened end of the shaft itself or it may be made of a more durable material fastened to the shaft. The spear has been used throughout history as a weapon for hunting and/or fishing and for warfare. Short spears are typically 1.1 to 1.8m in length.</p>",
+    "crafting": {
+      "skill": "",
+      "spans": null,
+      "materials": []
+    },
+    "equipped": {
+      "carryType": "stowed",
+      "slot": "held",
+      "handsHeld": 1
+    },
+    "grade": "E",
+    "fling": {
+      "type": "untyped",
+      "power": 80,
+      "accuracy": 90,
+      "hide": false,
+      "range": {
+        "target": "creature",
+        "distance": 5,
+        "unit": "m"
+      }
+    },
+    "quantity": 1,
+    "rarity": "common",
+    "identification": {
+      "misidentified": null,
+      "status": "identified",
+      "unidentified": {
+        "name": "Unidentified Item",
+        "img": "systems/ptu/css/images/icons/gear_icon.png",
+        "description": "<p>Unidentified Item</p>"
+      }
+    }
+  },
+  "img": "systems/ptr2e/img/icons/weapon_icon.webp",
+  "effects": [
+    {
+      "name": "Short Spear",
+      "type": "passive",
+      "_id": "37TqWAz0eINJpDoS",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "flat-modifier",
+            "key": "{item|id}-attack-damage-flat",
+            "value": 6,
+            "predicate": [],
+            "label": "Short Spear",
+            "mode": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          },
+          {
+            "type": "flat-modifier",
+            "key": "fling-short-spear-attack-damage-flat",
+            "value": 6,
+            "predicate": [],
+            "label": "Short Spear (Fling)",
+            "mode": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": false,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.347",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.3.beta",
+        "lastModifiedBy": null
+      }
+    }
+  ],
+  "flags": {},
+  "_id": "59jMPim78LPZLF1r"
+}

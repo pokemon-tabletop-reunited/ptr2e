@@ -1,0 +1,125 @@
+{
+  "folder": "BImk1fcMbR5akA4z",
+  "name": "Flame Cannon",
+  "type": "move",
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "publication": {
+      "source": "Digidex",
+      "authors": [
+        "Fox"
+      ],
+      "notes": ""
+    },
+    "traits": [],
+    "actions": [
+      {
+        "name": "Flame Cannon (Offense)",
+        "slug": "flame-cannon",
+        "type": "attack",
+        "img": "systems/ptr2e/img/svg/fire_icon.svg",
+        "traits": [
+          "digimon",
+          "sonic"
+        ],
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 9
+        },
+        "types": [
+          "fire"
+        ],
+        "category": "physical",
+        "predicate": [],
+        "description": "<p>This attack has two parts to it. The offensive action is resolved as a cone in front of the user, whilst the defensive action is used as a wide line behind the user. The defensive action resolves freely after performing the offensive action.</p>",
+        "range": {
+          "target": "cone",
+          "distance": 6,
+          "unit": "m"
+        },
+        "power": 135,
+        "accuracy": 100
+      },
+      {
+        "name": "Flame Cannon (Defense)",
+        "slug": "flame-cannon-defense",
+        "description": "<p>Effect: The defensive action is used freely after resolving the offensive action. All allies in the area of effect gain @UUID[Compendium.ptr2e.core-effects.z7BfyuquHkly9OfK]{Protected 1}.</p>",
+        "traits": [],
+        "type": "generic",
+        "img": "systems/ptr2e/img/svg/fire_icon.svg",
+        "cost": {
+          "activation": "free"
+        },
+        "range": {
+          "target": "wide-line",
+          "distance": 4,
+          "unit": "m"
+        }
+      }
+    ],
+    "grade": "S"
+  },
+  "img": "systems/ptr2e/img/svg/fire_icon.svg",
+  "effects": [
+    {
+      "name": "Flame Cannon",
+      "type": "passive",
+      "_id": "gFdWPWhHESnlhmua",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "flame-cannon-defense-generic",
+            "value": "Compendium.ptr2e.core-effects.Item.z7BfyuquHkly9OfK",
+            "predicate": [],
+            "chance": 100,
+            "isFixedChance": true,
+            "affects": "target",
+            "alterations": [],
+            "dontMerge": false,
+            "mode": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.347",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.3.beta",
+        "lastModifiedBy": null
+      }
+    }
+  ],
+  "flags": {},
+  "_id": "vyZg6dJgIVP3YJAq"
+}

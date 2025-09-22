@@ -41,7 +41,7 @@
         }
       }
     ],
-    "description": "<p>Trigger: The user hits a creature with a @Trait[contact] Action.</p><p>Effect: Connection - Embargo. The user freely uses Embargo on the targeted creature.</p><p>Passive: The user gains +10 to their Sleight of Hand and +5 RES.</p>",
+    "description": "<p>Trigger: The user hits a creature with a @Trait[contact] Action.</p><p>Effect: Connection - Embargo. The user freely uses Embargo on the targeted creature.</p><p>Passive: The user gains +10 to their Sleight of Hand and +10% RES.</p>",
     "traits": [],
     "slug": "frisk",
     "_migration": {
@@ -61,7 +61,7 @@
     {
       "name": "Frisk (Passive)",
       "type": "passive",
-      "_id": "EhMbi4LWYpA3IVUh",
+      "_id": "yUrm1qA0pWlpSxGS",
       "img": "systems/ptr2e/img/icons/effect_icon.webp",
       "system": {
         "changes": [
@@ -71,15 +71,24 @@
             "value": 10,
             "predicate": [],
             "label": "Frisk",
-            "mode": 2,
             "priority": null,
+            "mode": 2,
             "ignored": false,
             "hideIfDisabled": false
+          },
+          {
+            "type": "basic",
+            "key": "system.modifiers.effectResistance",
+            "value": 10,
+            "predicate": [],
+            "label": "Frisk RES",
+            "mode": 2,
+            "ignored": false
           }
         ],
         "slug": null,
         "traits": [],
-        "removeAfterCombat": true,
+        "removeAfterCombat": false,
         "removeOnRecall": false,
         "stacks": 0,
         "removeAfterAttacking": false,
@@ -101,23 +110,27 @@
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "flags": {},
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
       "_stats": {
-        "compendiumSource": null,
+        "compendiumSource": "Actor.A02xdMnnGFUEgVLP.Item.m3G3abHjeyxhULLM.ActiveEffect.EhMbi4LWYpA3IVUh",
         "duplicateSource": null,
-        "coreVersion": "13.346",
+        "exportSource": null,
+        "coreVersion": "13.347",
         "systemId": "ptr2e",
-        "systemVersion": "0.10.0-alpha.3.0.0",
-        "createdTime": 1729417497118,
-        "modifiedTime": 1729417508518,
-        "lastModifiedBy": "Kc3DOunCh3ClAeHS",
-        "exportSource": null
+        "systemVersion": "1.4.3.beta",
+        "createdTime": 1758155858770,
+        "modifiedTime": 1758155858770,
+        "lastModifiedBy": "UTlFSVhgfIUeTsoW"
       }
     },
     {
       "name": "Frisk",
       "type": "passive",
-      "_id": "Frisk4LWYpA3IVUh",
+      "_id": "B0NGUqueCBie0sq2",
       "img": "systems/ptr2e/img/icons/effect_icon.webp",
       "system": {
         "changes": [
@@ -136,22 +149,22 @@
               }
             ],
             "priority": null,
-            "allowDuplicate": false,
             "onDeleteActions": {
               "grantee": "detach",
               "granter": "cascade"
             },
-            "reevaluateOnUpdate": true,
             "mode": 2,
             "ignored": false,
+            "reevaluateOnUpdate": false,
             "inMemoryOnly": false,
+            "allowDuplicate": true,
             "track": false,
             "replaceSelf": false
           }
         ],
         "slug": null,
         "traits": [],
-        "removeAfterCombat": true,
+        "removeAfterCombat": false,
         "removeOnRecall": false,
         "stacks": 0,
         "removeAfterAttacking": false,
@@ -173,17 +186,21 @@
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "flags": {},
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
       "_stats": {
-        "compendiumSource": null,
+        "compendiumSource": "Actor.A02xdMnnGFUEgVLP.Item.m3G3abHjeyxhULLM.ActiveEffect.Frisk4LWYpA3IVUh",
         "duplicateSource": null,
-        "coreVersion": "13.346",
+        "exportSource": null,
+        "coreVersion": "13.347",
         "systemId": "ptr2e",
-        "systemVersion": "1.4.2.beta",
-        "createdTime": 1729417497118,
-        "modifiedTime": 1754318300802,
-        "lastModifiedBy": "mK35yvCqCgiTUvKf",
-        "exportSource": null
+        "systemVersion": "1.4.3.beta",
+        "createdTime": 1758155863495,
+        "modifiedTime": 1758155863495,
+        "lastModifiedBy": "UTlFSVhgfIUeTsoW"
       }
     }
   ]

@@ -1,0 +1,55 @@
+{
+  "name": "Anvil Shatter",
+  "type": "move",
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "slug": "anvil-shatter",
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "traits": [],
+    "actions": [
+      {
+        "name": "Anvil Shatter",
+        "slug": "anvil-shatter",
+        "type": "attack",
+        "img": "systems/ptr2e/img/svg/steel_icon.svg",
+        "traits": [
+          "flinch-50",
+          "crushing",
+          "hammer",
+          "contact"
+        ],
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 5
+        },
+        "types": [
+          "steel"
+        ],
+        "category": "physical",
+        "predicate": [],
+        "description": "<p>Effect: On resolution, all @Trait[terrain] and @Trait[room] effects are removed.</p>",
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "power": 140,
+        "accuracy": 90
+      }
+    ],
+    "grade": "B"
+  },
+  "img": "systems/ptr2e/img/svg/steel_icon.svg",
+  "effects": [],
+  "flags": {},
+  "_id": "hE4gOyeN5LRBSMI9"
+}

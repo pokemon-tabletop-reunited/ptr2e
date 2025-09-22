@@ -824,6 +824,10 @@
         "ChangeTrait": {
           "label": "Trait"
         },
+        "ChangeIsFlat": {
+          "label": "Apply as Flat Damage?",
+          "hint": "Whether this should be applied as Flat Damage rather then as Tick Damage"
+        },
         "DontMerge": {
           "label": "Don't merge chances"
         },
@@ -3454,7 +3458,16 @@
       }
     },
     "DistanceToTarget": {
-      "Hint": "When clicked, outputs the distance between current selected token and all targeted tokens to chat."
+      "Hint": "When clicked, outputs the distance between current selected token and all targeted tokens to chat.",
+      "NoTargets": "No targets selected, please select a target to measure the distance to.",
+      "NoSelf": "You need to have a token controlled as a starting point to measure from.",
+      "NoGrid": "The Scene you are currently in does not have a grid, please select a different Scene or enable the grid on this Scene.",
+      "WrongGrid": "Currently this tool only supports Square Grids."
+    },
+    "FlingCalculator": {
+      "Hint": "When clicked, outputs the Fling Statistics that would be used for throwing the targeted actor.",
+      "NoTargets": "No valid targets selected, please select a target to fling.",
+      "NoSelf": "You need to have a token controlled defining whom is throwing whom."
     },
     "Save": "Save",
     "Link": "Link",

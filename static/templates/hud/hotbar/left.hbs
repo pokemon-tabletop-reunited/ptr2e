@@ -6,7 +6,7 @@
         aria-label="{{localize 'PTR2E.TokenPanel.Tabs.movement.label'}}"></button> --}}
     <button type="button" class="plain fa-regular fa-star icon{{#if (is toggle "passives")}} active{{/if}}" data-action="passives" data-tooltip
         aria-label="{{localize 'PTR2E.TokenPanel.Tabs.passives.label'}}"></button>
-    <button type="button" class="plain fa-solid fa-star icon{{#if (is toggle "effects")}} active{{/if}}" data-action="effects" data-tooltip
+    <button type="button" class="plain fa-regular fa-star icon{{#if (is toggle "effects")}} active{{/if}}" data-action="effects" data-tooltip
         aria-label="{{localize 'PTR2E.TokenPanel.Tabs.effects.label'}}"></button>
   </div>
   <div class="flexcol" {{#unless actor}}style="visibility: hidden;"{{/unless}}>
@@ -14,8 +14,8 @@
         aria-label="{{localize 'PTR2E.TokenPanel.Tabs.attack-slots.label'}}"></button>
     <button type="button" class="plain fa-regular fa-burst icon{{#if (is tab "other")}} active{{/if}}" data-action="other" data-tooltip
         aria-label="{{localize 'PTR2E.TokenPanel.Tabs.attack-other.label'}}"></button>
-        <button type="button" class="plain fa-solid fa-dice-d20 icon{{#if (is tab "skills")}} active{{/if}}" data-action="skills" data-tooltip
-        aria-label="{{localize 'PTR2E.TokenPanel.Tabs.skills.label'}}"></button>
+        <button type="button" class="plain fa-solid fa-dice-d20 icon{{#if (is tab "generic")}} active{{/if}}" data-action="generic" data-tooltip
+        aria-label="{{localize 'PTR2E.TokenPanel.Tabs.generic-actions.label'}}"></button>
   </div>
   {{#if actor}}
     <menu class="panel{{#if toggle}} {{toggle}}{{/if}}" data-parent="{{actor.uuid}}">

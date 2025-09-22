@@ -1,0 +1,107 @@
+{
+  "folder": "BImk1fcMbR5akA4z",
+  "name": "Acceleration (Digimon)",
+  "type": "move",
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "publication": {
+      "source": "Digidex",
+      "authors": [
+        "Fox"
+      ],
+      "notes": ""
+    },
+    "traits": [],
+    "actions": [
+      {
+        "name": "Acceleration (Digimon)",
+        "slug": "acceleration-digimon",
+        "type": "attack",
+        "img": "systems/ptr2e/img/svg/normal_icon.svg",
+        "traits": [
+          "digimon"
+        ],
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 4
+        },
+        "types": [
+          "normal"
+        ],
+        "category": "status",
+        "predicate": [],
+        "description": "<p>The user becomes @UUID[Compendium.ptr2e.core-effects.xhI2IzUDSXy4Y42z]{Amped}, giving their next attack +100% Damage.</p>",
+        "range": {
+          "target": "self",
+          "unit": "m"
+        }
+      }
+    ],
+    "grade": "C"
+  },
+  "img": "systems/ptr2e/img/svg/normal_icon.svg",
+  "effects": [
+    {
+      "name": "Acceleration (Digimon)",
+      "type": "passive",
+      "_id": "b24azX7SsJmkO3EA",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "acceleration-digimon-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.xhI2IzUDSXy4Y42z",
+            "predicate": [],
+            "chance": 100,
+            "isFixedChance": true,
+            "affects": "target",
+            "alterations": [],
+            "dontMerge": false,
+            "mode": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.347",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.3.beta",
+        "createdTime": 1756466809809,
+        "modifiedTime": 1756466932680,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+      }
+    }
+  ],
+  "flags": {},
+  "_id": "pT5HsMVcB2FvG0l5"
+}
