@@ -1,5 +1,5 @@
 {
-  "folder": "6VDJBcrqVDh5bYtA",
+  "folder": "V4skAU6G3OH5fXae",
   "name": "Dragon Scale",
   "type": "equipment",
   "system": {
@@ -10,15 +10,15 @@
     "slug": "dragon-scale",
     "traits": [
       "combat",
-      "type",
       "dragon",
       "evolution",
       "horsea",
       "seadra",
-      "kingdra"
+      "kingdra",
+      "accessory"
     ],
     "actions": [],
-    "description": "<p>A very tough and inflexible scale That boosts the power of Dragon-type moves. Dragon-type Pokémon may be holding this item when caught. It is known to evolve Seadra into Kingdra so far.<br><br>Effect: Increases the Power and Accuracy of attacks by 10%.</p>",
+    "description": "<p>Dragon-type Pokémon may be holding this item when caught. It is known to evolve Seadra into Kingdra so far.<br><br>Effect: Dragon-Type creatures and Dragon Egg Group creatures take 10% less damage from Physical- and Special-Category Attacks.</p>",
     "crafting": {
       "skill": "",
       "spans": null,
@@ -29,12 +29,17 @@
       "handsHeld": null,
       "slot": "accessory"
     },
-    "grade": "C",
+    "grade": "B",
     "fling": {
       "type": "dragon",
       "power": 70,
       "accuracy": 100,
-      "hide": false
+      "hide": false,
+      "range": {
+        "target": "creature",
+        "distance": 10,
+        "unit": "m"
+      }
     },
     "quantity": 1,
     "rarity": "rare",
@@ -51,37 +56,38 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
+      ],
+      "notes": ""
     }
   },
-  "img": "systems/ptr2e/img/icons/equipment_icon.webp",
+  "img": "systems/ptr2e/img/item-icons/dragon%20scale.webp",
   "effects": [
     {
-      "name": "Type Booster (Dragon)",
+      "name": "Dragon Scale",
       "type": "passive",
-      "_id": "a0cVcTWB25BuKkiL",
+      "_id": "1sXJp6UzxHT8jZgG",
       "img": "systems/ptr2e/img/icons/effect_icon.webp",
       "system": {
         "changes": [
           {
-            "type": "percentile-modifier",
-            "key": "dragon-attack-power",
-            "value": 10,
-            "predicate": [],
-            "label": "Type Booster (Dragon) Power",
+            "type": "ephemeral-modifier",
+            "key": "damaging-attack-damage-percentile",
+            "value": -10,
+            "predicate": [
+              "target:trait:dragon"
+            ],
             "mode": 2,
-            "priority": null,
             "ignored": false,
             "hideIfDisabled": false
           },
           {
-            "type": "percentile-modifier",
-            "key": "dragon-attack-accuracy",
-            "value": 10,
-            "predicate": [],
-            "label": "Type Booster (Dragon)",
+            "type": "ephemeral-modifier",
+            "key": "damaging-attack-damage-percentile",
+            "value": -10,
+            "predicate": [
+              "target:system.eggGroups.0:dragon"
+            ],
             "mode": 2,
-            "priority": null,
             "ignored": false,
             "hideIfDisabled": false
           }
@@ -90,17 +96,14 @@
         "traits": [],
         "removeAfterCombat": true,
         "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
         "stacks": 0
       },
       "disabled": false,
       "duration": {
         "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "combat": null
       },
       "description": "",
       "origin": null,
@@ -108,16 +111,21 @@
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "flags": {},
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
       "_stats": {
-        "compendiumSource": "Compendium.ptr2e.core-gear.Item.JhU4x5wZQlVuqvfz.ActiveEffect.pMVRnjGSvrhLNVtr",
+        "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "exportSource": null,
+        "coreVersion": "13.348",
         "systemId": "ptr2e",
-        "systemVersion": "1.0.3.beta",
-        "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "systemVersion": "1.4.4.beta",
+        "createdTime": 1758626106347,
+        "modifiedTime": 1758626258346,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
       }
     }
   ],
