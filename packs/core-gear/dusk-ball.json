@@ -3,7 +3,7 @@
   "img": "systems/ptr2e/img/item-icons/dusk ball.webp",
   "type": "consumable",
   "system": {
-    "cost": 4,
+    "cost": 3,
     "crafting": {
       "skill": "electronics",
       "spans": 2,
@@ -22,7 +22,12 @@
       "type": "untyped",
       "power": 0,
       "accuracy": 95,
-      "hide": null
+      "hide": false,
+      "range": {
+        "target": "creature",
+        "distance": 10,
+        "unit": "m"
+      }
     },
     "rarity": "uncommon",
     "consumableType": "pokeball",
@@ -30,10 +35,11 @@
       "stack-5",
       "belt",
       "fling",
-      "environ-ball"
+      "environ-ball",
+      "ball"
     ],
-    "description": "5x Catch Rate modifier with Gloomy Weather present. 2x Catch Rate modifier if it is only nighttime or otherwise dark. 1x Catch Rate modifier otherwise.",
-    "modifier": 2,
+    "description": "<p>3x Catch Rate modifier with Gloomy Weather present or at night. 1x Catch Rate modifier otherwise.</p>",
+    "modifier": 3,
     "quantity": 1,
     "slug": "dusk-ball",
     "stack": 5,
@@ -45,8 +51,10 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
-    }
+      ],
+      "notes": ""
+    },
+    "actions": []
   },
   "_id": "Tf7l91f61dumDDyG",
   "effects": [],

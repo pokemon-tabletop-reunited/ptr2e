@@ -22,7 +22,12 @@
       "type": "untyped",
       "power": 0,
       "accuracy": 95,
-      "hide": null
+      "hide": false,
+      "range": {
+        "target": "creature",
+        "distance": 10,
+        "unit": "m"
+      }
     },
     "rarity": "common",
     "consumableType": "pokeball",
@@ -30,7 +35,8 @@
       "stack-5",
       "belt",
       "fling",
-      "training-ball"
+      "training-ball",
+      "ball"
     ],
     "description": "1x Catch Rate modifier. Upon capture, heals the captured creature's HP, PP, and removes all of its Status Afflictions.",
     "modifier": 1,
@@ -45,8 +51,10 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
-    }
+      ],
+      "notes": ""
+    },
+    "actions": []
   },
   "_id": "4A4CPITprvVAVOkM",
   "effects": [],
