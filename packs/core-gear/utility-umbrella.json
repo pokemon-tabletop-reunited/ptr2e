@@ -4,7 +4,7 @@
   "type": "equipment",
   "system": {
     "crafting": {
-      "skill": null,
+      "skill": "",
       "spans": null,
       "materials": []
     },
@@ -18,12 +18,18 @@
       "type": "untyped",
       "power": null,
       "accuracy": 100,
-      "hide": null
+      "hide": true,
+      "range": {
+        "target": "creature",
+        "distance": 10,
+        "unit": "m"
+      }
     },
     "rarity": "uncommon",
     "traits": [
       "combat",
-      "environ"
+      "environ",
+      "held"
     ],
     "actions": [
       {
@@ -37,7 +43,8 @@
         ],
         "range": {
           "target": "creature",
-          "unit": "m"
+          "unit": "m",
+          "distance": 10
         },
         "cost": {
           "activation": "complex"
@@ -45,7 +52,7 @@
         "img": "icons/svg/explosion.svg"
       }
     ],
-    "description": "Effect: The user is immune to the negative effects of every <Weather Type>.",
+    "description": "<p>Effect: The user is immune to the negative effects of every @Trait[weather].</p>",
     "slug": "utility-umbrella",
     "quantity": 1,
     "identification": {
@@ -65,7 +72,8 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
+      ],
+      "notes": ""
     }
   },
   "_id": "OvyxnA1VrzjdrHSI",
