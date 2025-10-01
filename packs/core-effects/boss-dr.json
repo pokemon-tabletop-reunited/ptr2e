@@ -3,11 +3,14 @@
   "type": "effect",
   "system": {
     "_migration": {
-      "version": 0.109,
-      "previous": null
+      "version": 0.111,
+      "previous": {
+        "schema": 0.109,
+        "foundry": "13.348",
+        "system": "1.4.4.beta"
+      }
     },
     "slug": "boss-dr",
-    "traits": [],
     "publication": {
       "source": "PTR 2e Core",
       "authors": [
@@ -15,9 +18,9 @@
       ],
       "notes": ""
     },
-    "description": "<p>Adds a togglable 75% damage reduction from all sources to this Boss. </p><p>The toggle can be found in the Effects tab under 'Toggles'</p>"
+    "description": "<p>Adds a togglable 75% damage reduction from all sources to this Boss. </p><p>The toggle can be found in the Effects tab under 'Toggles'</p>",
+    "traits": []
   },
-  "_id": "WyIdpwgbw0rWWfWW",
   "img": "icons/magic/defensive/shield-barrier-glowing-blue.webp",
   "effects": [
     {
@@ -35,30 +38,31 @@
             "domain": "all",
             "toggleable": true,
             "count": false,
-            "state": true,
             "alwaysActive": false,
-            "mode": 2,
             "priority": null,
+            "state": true,
+            "mode": 2,
             "ignored": false,
             "suboptions": []
           },
           {
-            "type": "basic",
-            "key": "system.modifiers.vulnerabilityMultiplier",
-            "value": -0.75,
-            "predicate": [
-              "boss-dr-active"
-            ],
-            "mode": 2,
+            "type": "ephemeral-modifier",
+            "key": "attack-damage-percentile",
+            "value": -75,
+            "predicate": [],
             "priority": null,
-            "ignored": false
+            "mode": 2,
+            "ignored": false,
+            "hideIfDisabled": false
           }
         ],
         "slug": null,
         "traits": [],
         "removeAfterCombat": true,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
@@ -76,18 +80,38 @@
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "flags": {},
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
       "_stats": {
-        "compendiumSource": null,
-        "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.348",
         "systemId": "ptr2e",
-        "systemVersion": "1.1.2.beta",
-        "createdTime": 1734210390162,
-        "modifiedTime": 1743595876869,
-        "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
+        "systemVersion": "1.4.4.beta",
+        "modifiedTime": 1759288615712,
+        "lastModifiedBy": "ZMtJHc7oUjWzVGas"
       }
     }
   ],
-  "folder": "QUgx4S1LlBbCXWnX"
+  "folder": null,
+  "flags": {},
+  "_stats": {
+    "coreVersion": "13.348",
+    "systemId": "ptr2e",
+    "systemVersion": "1.4.4.beta",
+    "createdTime": 1759288408312,
+    "modifiedTime": 1759288416426,
+    "lastModifiedBy": "ZMtJHc7oUjWzVGas",
+    "exportSource": {
+      "worldId": "pokemon",
+      "uuid": "Item.LVRaAWKepFdDfFKd",
+      "coreVersion": "13.348",
+      "systemId": "ptr2e",
+      "systemVersion": "1.4.4.beta"
+    }
+  },
+  "ownership": {
+    "default": 0
+  }
 }
