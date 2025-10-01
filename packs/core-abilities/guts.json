@@ -14,7 +14,8 @@
         },
         "range": {
           "target": "self",
-          "unit": "m"
+          "unit": "m",
+          "distance": 10
         },
         "description": "<p>Effect: The user's ATK stat increases by 50% if affected by a Major Status Affliction. If the user has @Affliction[burn], their ATK increases by 100% instead.</p>",
         "img": "icons/svg/explosion.svg"
@@ -24,16 +25,116 @@
     "traits": [],
     "slug": "guts",
     "_migration": {
-      "version": null,
-      "previous": null
+      "version": 0.111,
+      "previous": {
+        "schema": null,
+        "foundry": "13.348",
+        "system": "1.4.4.beta"
+      }
     },
     "publication": {
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
+      ],
+      "notes": ""
     }
   },
   "_id": "3MR5B9v9Gz9aDLo0",
-  "effects": []
+  "effects": [
+    {
+      "name": "Guts-Effect",
+      "type": "passive",
+      "_id": "rA1rxSoAjnzOvKp9",
+      "img": "systems/ptr2e/img/conditions/burned.svg",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-option",
+            "key": "",
+            "value": "state:guts",
+            "predicate": [],
+            "domain": "all",
+            "label": "Guts (generic)",
+            "toggleable": true,
+            "count": false,
+            "alwaysActive": false,
+            "mode": 2,
+            "ignored": false,
+            "suboptions": [],
+            "state": false
+          },
+          {
+            "type": "basic",
+            "key": "system.modifiers.atkMultiplier",
+            "value": 0.5,
+            "predicate": [
+              "state:guts"
+            ],
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "roll-option",
+            "key": "",
+            "value": "state:gutsburn",
+            "predicate": [],
+            "domain": "all",
+            "label": "Guts (burned)",
+            "toggleable": true,
+            "count": false,
+            "alwaysActive": false,
+            "state": true,
+            "mode": 2,
+            "ignored": false,
+            "suboptions": []
+          },
+          {
+            "type": "basic",
+            "key": "system.modifiers.atkMultiplier",
+            "value": 1,
+            "predicate": [
+              "state:gutsburn"
+            ],
+            "mode": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": false,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.348",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.4.beta",
+        "createdTime": 1759307140057,
+        "modifiedTime": 1759312967793,
+        "lastModifiedBy": "TdEGKLWkYwYNGUCI"
+      }
+    }
+  ]
 }
