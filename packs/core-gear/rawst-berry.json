@@ -5,7 +5,7 @@
   "system": {
     "cost": 1,
     "crafting": {
-      "skill": null,
+      "skill": "",
       "spans": null,
       "materials": []
     },
@@ -19,7 +19,12 @@
       "type": "untyped",
       "power": 10,
       "accuracy": 95,
-      "hide": null
+      "hide": false,
+      "range": {
+        "target": "creature",
+        "distance": 10,
+        "unit": "m"
+      }
     },
     "rarity": "common",
     "consumableType": "food",
@@ -30,9 +35,7 @@
       "healing",
       "berry",
       "fling",
-      "held",
       "desperation-1-3",
-      "bitter-1",
       "combat"
     ],
     "description": "Cures the user of @Affliction[burn]. This item can be retrieved from the Belt and consumed as a Free Action at @Trait[interrupt-2] when the user gains this Affliction.",
@@ -47,8 +50,10 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
-    }
+      ],
+      "notes": ""
+    },
+    "actions": []
   },
   "_id": "t9oYztMdUAivTdua",
   "effects": [],
