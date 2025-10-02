@@ -43,58 +43,28 @@
   "_id": "3MR5B9v9Gz9aDLo0",
   "effects": [
     {
-      "name": "Guts-Effect",
+      "name": "Guts",
       "type": "passive",
-      "_id": "rA1rxSoAjnzOvKp9",
+      "_id": "HTDQ6UxkuDoKlsmk",
       "img": "systems/ptr2e/img/conditions/burned.svg",
       "system": {
         "changes": [
           {
-            "type": "roll-option",
-            "key": "",
-            "value": "state:guts",
-            "predicate": [],
-            "domain": "all",
-            "label": "Guts (generic)",
-            "toggleable": true,
-            "count": false,
-            "alwaysActive": false,
+            "type": "basic",
+            "key": "system.modifiers.atkMultiplier",
+            "value": 0.5,
+            "predicate": [
+              "effect:major-affliction"
+            ],
             "mode": 2,
-            "ignored": false,
-            "suboptions": [],
-            "state": false
+            "ignored": false
           },
           {
             "type": "basic",
             "key": "system.modifiers.atkMultiplier",
             "value": 0.5,
             "predicate": [
-              "state:guts"
-            ],
-            "mode": 2,
-            "ignored": false
-          },
-          {
-            "type": "roll-option",
-            "key": "",
-            "value": "state:gutsburn",
-            "predicate": [],
-            "domain": "all",
-            "label": "Guts (burned)",
-            "toggleable": true,
-            "count": false,
-            "alwaysActive": false,
-            "state": true,
-            "mode": 2,
-            "ignored": false,
-            "suboptions": []
-          },
-          {
-            "type": "basic",
-            "key": "system.modifiers.atkMultiplier",
-            "value": 1,
-            "predicate": [
-              "state:gutsburn"
+              "effect:affliction:burn"
             ],
             "mode": 2,
             "ignored": false
@@ -102,7 +72,7 @@
         ],
         "slug": null,
         "traits": [],
-        "removeAfterCombat": false,
+        "removeAfterCombat": true,
         "removeOnRecall": false,
         "removeAfterAttacking": false,
         "removeAfterAttacked": false,
@@ -110,10 +80,12 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "combat": null
+        "startTime": 0,
+        "combat": null,
+        "startRound": 1,
+        "startTurn": 0
       },
-      "description": "",
+      "description": "<p>Effect: The user's ATK stat increases by 50% if affected by a Major Status Affliction. If the user has @Affliction[burn], their ATK increases by 100% instead.</p>",
       "origin": null,
       "tint": "#ffffff",
       "transfer": true,
@@ -131,10 +103,30 @@
         "coreVersion": "13.348",
         "systemId": "ptr2e",
         "systemVersion": "1.4.4.beta",
-        "createdTime": 1759307140057,
-        "modifiedTime": 1759312967793,
-        "lastModifiedBy": "TdEGKLWkYwYNGUCI"
-      }
+        "lastModifiedBy": null
+      },
+      "changes": [
+        {
+          "type": "basic",
+          "key": "system.modifiers.atkMultiplier",
+          "value": 0.5,
+          "predicate": [
+            "effect:major-affliction"
+          ],
+          "mode": 2,
+          "ignored": false
+        },
+        {
+          "type": "basic",
+          "key": "system.modifiers.atkMultiplier",
+          "value": 0.5,
+          "predicate": [
+            "effect:affliction:burn"
+          ],
+          "mode": 2,
+          "ignored": false
+        }
+      ]
     }
   ]
 }
