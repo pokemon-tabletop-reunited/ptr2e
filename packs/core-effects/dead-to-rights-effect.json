@@ -1,0 +1,97 @@
+{
+  "name": "Dead To Rights (Effect)",
+  "type": "effect",
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "publication": {
+      "source": "",
+      "authors": [],
+      "notes": ""
+    },
+    "traits": []
+  },
+  "_id": "AFffBybHMtOMQoHV",
+  "img": "icons/svg/target.svg",
+  "effects": [
+    {
+      "name": "Dead To Rights",
+      "type": "affliction",
+      "_id": "02qegVdPEEAZ1IVl",
+      "img": "icons/svg/target.svg",
+      "system": {
+        "changes": [
+          {
+            "type": "stage-modifier",
+            "key": "attack-accuracy",
+            "value": 3,
+            "predicate": [
+              {
+                "not": "trait:contact"
+              }
+            ],
+            "label": "Dead To Rights (Acc)",
+            "mode": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          },
+          {
+            "type": "stage-modifier",
+            "key": "attack-crit",
+            "value": 2,
+            "predicate": [
+              {
+                "not": "trait:contact"
+              }
+            ],
+            "mode": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": true,
+        "removeAfterAttacked": false,
+        "stacks": 0,
+        "priority": 50,
+        "formula": "",
+        "type": "damage"
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null,
+        "turns": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": "always"
+        }
+      },
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.348",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.3.beta",
+        "createdTime": 1757852239246,
+        "modifiedTime": 1757852431960,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+      }
+    }
+  ],
+  "flags": {}
+}
