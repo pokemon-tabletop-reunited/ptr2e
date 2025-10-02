@@ -128,9 +128,11 @@ class ActiveEffectPTR2e<
       .find((kc) => !!kc.count);
     if (existing) {
       delete domainRecord[existing.key];
+      domainRecord[option] = true;
       domainRecord[`${option}:${existing.count + 1}`] = true;
     }
     else {
+      domainRecord[option] = true;
       domainRecord[`${option}:1`] = true;
     }
   }
