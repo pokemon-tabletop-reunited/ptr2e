@@ -18,7 +18,12 @@
       "type": "untyped",
       "power": null,
       "accuracy": 100,
-      "hide": false
+      "hide": false,
+      "range": {
+        "target": "creature",
+        "distance": 10,
+        "unit": "m"
+      }
     },
     "rarity": "uncommon",
     "traits": [
@@ -35,7 +40,8 @@
         ],
         "range": {
           "target": "creature",
-          "unit": "m"
+          "unit": "m",
+          "distance": 10
         },
         "cost": {
           "activation": "complex"
@@ -43,7 +49,7 @@
         "img": "icons/svg/explosion.svg"
       }
     ],
-    "description": "<p>Effect: When the user declares an Attack, they have a 20% chance of gaining @Trait[priority-2] on that Attack (or increasing that Action's existing Priority value by +2 for that Attack's use).</p>",
+    "description": "<p>Effect: When the user declares an Attack, they have a 20% chance of gaining @Affliction[advance 20] on that Attack (or increasing that Action's existing @Affliction[advance] value by +20% for that Attack's use).</p>",
     "slug": "quick-claw",
     "quantity": 1,
     "publication": {
@@ -98,14 +104,17 @@
             "dontMerge": true,
             "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "isFixedChance": false
           }
         ],
         "slug": null,
         "traits": [],
         "removeAfterCombat": true,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
@@ -127,12 +136,13 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.348",
         "systemId": "ptr2e",
         "systemVersion": "1.2.1.beta",
         "createdTime": null,
         "modifiedTime": 1745100787035,
-        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
+        "lastModifiedBy": "Kc3DOunCh3ClAeHS",
+        "exportSource": null
       }
     }
   ],

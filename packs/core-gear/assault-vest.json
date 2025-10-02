@@ -37,7 +37,8 @@
         ],
         "range": {
           "target": "creature",
-          "unit": "m"
+          "unit": "m",
+          "distance": 10
         },
         "cost": {
           "activation": "complex"
@@ -65,7 +66,8 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
+      ],
+      "notes": ""
     }
   },
   "_id": "ahojUbJchR7UdB4O",
@@ -85,13 +87,25 @@
             "predicate": [],
             "priority": null,
             "ignored": false
+          },
+          {
+            "type": "alter-attack",
+            "key": "status-attack",
+            "value": 3,
+            "predicate": [],
+            "mode": 1,
+            "ignored": false,
+            "property": "pp-cost",
+            "definition": []
           }
         ],
         "slug": null,
         "traits": [],
         "removeAfterCombat": true,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
@@ -109,16 +123,21 @@
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "flags": {},
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.348",
         "systemId": "ptr2e",
-        "systemVersion": "1.0.3.beta",
+        "systemVersion": "1.4.4.beta",
         "createdTime": 1739483952805,
-        "modifiedTime": 1739483996580,
-        "lastModifiedBy": "IcBpMqhFuTck9VpX"
+        "modifiedTime": 1758379966614,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf",
+        "exportSource": null
       }
     }
   ],

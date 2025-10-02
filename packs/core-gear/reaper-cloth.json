@@ -1,5 +1,5 @@
 {
-  "folder": "6VDJBcrqVDh5bYtA",
+  "folder": "V4skAU6G3OH5fXae",
   "name": "Reaper Cloth",
   "type": "equipment",
   "system": {
@@ -10,7 +10,6 @@
     "slug": "reaper-cloth",
     "traits": [
       "combat",
-      "type",
       "ghost",
       "evolution",
       "duskull",
@@ -18,7 +17,7 @@
       "dusknoir"
     ],
     "actions": [],
-    "description": "<p>A cloth imbued with horrifyingly strong spiritual energy that boosts the power of Ghost-type moves. It's loved by a certain Pokémon.<br><br>Effect: Increases the Power and Accuracy of attacks by 10%.</p>",
+    "description": "<p>Effect: Ghost Type creatures take 10% less damage from Physical- and Special-Category Attacks. Duskull, Dusclops, and Dusknoir gain @Affliction[advance 15] when they use an attack.</p>",
     "crafting": {
       "skill": "",
       "spans": null,
@@ -34,7 +33,12 @@
       "type": "ghost",
       "power": 70,
       "accuracy": 100,
-      "hide": false
+      "hide": false,
+      "range": {
+        "target": "creature",
+        "distance": 10,
+        "unit": "m"
+      }
     },
     "quantity": 1,
     "rarity": "rare",
@@ -51,56 +55,68 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
+      ],
+      "notes": ""
     }
   },
-  "img": "systems/ptr2e/img/icons/equipment_icon.webp",
+  "img": "systems/ptr2e/img/item-icons/reaper%20cloth.webp",
   "effects": [
     {
-      "name": "Type Booster (Ghost)",
+      "name": "Reaper Cloth",
       "type": "passive",
-      "_id": "1SH2PhGFeK52Umuv",
+      "_id": "D38H5Wfqs1yvQg0u",
       "img": "systems/ptr2e/img/icons/effect_icon.webp",
       "system": {
         "changes": [
           {
-            "type": "percentile-modifier",
-            "key": "ghost-attack-power",
-            "value": 10,
+            "type": "ephemeral-modifier",
+            "key": "damaging-attack-damage-percentile",
+            "value": -10,
             "predicate": [],
-            "label": "Type Booster (Ghost) Power",
             "mode": 2,
-            "priority": null,
             "ignored": false,
             "hideIfDisabled": false
           },
           {
-            "type": "percentile-modifier",
-            "key": "ghost-attack-accuracy",
-            "value": 10,
-            "predicate": [],
-            "label": "Type Booster (Ghost)",
+            "type": "roll-effect",
+            "key": "attack",
+            "value": "Compendium.ptr2e.core-effects.Item.advancecondiitem",
+            "predicate": [
+              {
+                "or": [
+                  "item:species:duskull",
+                  "item:species:dusclops",
+                  "item:species:dusknoir"
+                ]
+              }
+            ],
+            "chance": 100,
+            "isFixedChance": false,
+            "affects": "self",
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "system.amount",
+                "value": 15
+              }
+            ],
+            "dontMerge": true,
             "mode": 2,
-            "priority": null,
-            "ignored": false,
-            "hideIfDisabled": false
+            "ignored": false
           }
         ],
         "slug": null,
         "traits": [],
         "removeAfterCombat": true,
         "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
         "stacks": 0
       },
       "disabled": false,
       "duration": {
         "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "combat": null
       },
       "description": "",
       "origin": null,
@@ -108,16 +124,21 @@
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "flags": {},
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
       "_stats": {
-        "compendiumSource": "Compendium.ptr2e.core-gear.Item.JhU4x5wZQlVuqvfz.ActiveEffect.pMVRnjGSvrhLNVtr",
+        "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "exportSource": null,
+        "coreVersion": "13.348",
         "systemId": "ptr2e",
-        "systemVersion": "1.0.3.beta",
-        "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "systemVersion": "1.4.4.beta",
+        "createdTime": 1758629799235,
+        "modifiedTime": 1758630064734,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
       }
     }
   ],

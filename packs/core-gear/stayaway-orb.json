@@ -19,7 +19,12 @@
       "type": "untyped",
       "power": 40,
       "accuracy": 100,
-      "hide": null
+      "hide": false,
+      "range": {
+        "target": "creature",
+        "distance": 10,
+        "unit": "m"
+      }
     },
     "rarity": "common",
     "consumableType": "other",
@@ -27,10 +32,9 @@
       "combat",
       "consumable",
       "wonder-orb",
-      "held",
       "fling"
     ],
-    "description": "A target in the Room gains @Affliction[fear] 5, and is freely Teleported to the Stairs on the Floor.",
+    "description": "<p>The target is teleported to the nearest Stairs (unless the nearest Stairs would be in the same room) and is removed from the combat encounter.</p>",
     "quantity": 1,
     "slug": "stayaway-orb",
     "stack": 1,
@@ -42,8 +46,38 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
-    }
+      ],
+      "notes": ""
+    },
+    "actions": [
+      {
+        "name": "Stayaway Orb",
+        "slug": "stayaway-orb",
+        "description": "<p>The target is teleported to the nearest Stairs (unless the nearest Stairs would be in the same room) and is removed from the combat encounter.</p>",
+        "traits": [
+          "combat",
+          "consumable",
+          "wonder-orb",
+          "fling"
+        ],
+        "type": "attack",
+        "img": "systems/ptr2e/img/icons/consumable_icon.webp",
+        "cost": {
+          "activation": "complex"
+        },
+        "range": {
+          "target": "creature",
+          "distance": 10,
+          "unit": "m"
+        },
+        "types": [
+          "untyped"
+        ],
+        "category": "status",
+        "free": true,
+        "predicate": []
+      }
+    ]
   },
   "_id": "zgtncClL81ICmusK",
   "effects": [],

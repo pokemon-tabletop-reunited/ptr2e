@@ -21,7 +21,12 @@
       "type": "untyped",
       "power": 0,
       "accuracy": 95,
-      "hide": null
+      "hide": false,
+      "range": {
+        "target": "creature",
+        "distance": 10,
+        "unit": "m"
+      }
     },
     "rarity": "uncommon",
     "consumableType": "pokeball",
@@ -29,10 +34,12 @@
       "stack-5",
       "belt",
       "fling",
-      "training-ball"
+      "training-ball",
+      "ball",
+      "danger-close"
     ],
-    "description": "3.5x Catch Rate modifier.",
-    "modifier": 3.5,
+    "description": "<p>3x Catch Rate modifier. +10 Crit Capture Chance.</p>",
+    "modifier": 3,
     "quantity": 1,
     "slug": "luxury-ball",
     "stack": 5,
@@ -44,8 +51,10 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
-    }
+      ],
+      "notes": ""
+    },
+    "actions": []
   },
   "_id": "tIiki4hc6xYtQgky",
   "effects": [],

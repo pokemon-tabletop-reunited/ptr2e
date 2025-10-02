@@ -19,7 +19,12 @@
       "type": "untyped",
       "power": 40,
       "accuracy": 100,
-      "hide": null
+      "hide": false,
+      "range": {
+        "target": "creature",
+        "distance": 10,
+        "unit": "m"
+      }
     },
     "rarity": "uncommon",
     "consumableType": "other",
@@ -27,10 +32,9 @@
       "combat",
       "consumable",
       "wonder-orb",
-      "held",
       "fling"
     ],
-    "description": "All foes in the Room are freely teleported to random places on the Floor.",
+    "description": "<p>All foes in the Room are freely teleported to random places on the Floor, other than the current Room, and are removed from the combat.</p>",
     "quantity": 1,
     "slug": "spurn-orb",
     "stack": 1,
@@ -42,8 +46,10 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
-    }
+      ],
+      "notes": ""
+    },
+    "actions": []
   },
   "_id": "u9bCyvDgEvpINC2y",
   "effects": [],

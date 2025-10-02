@@ -4,7 +4,7 @@
   "type": "consumable",
   "system": {
     "crafting": {
-      "skill": null,
+      "skill": "",
       "spans": null,
       "materials": []
     },
@@ -13,12 +13,17 @@
       "carryType": "stowed",
       "handsHeld": null
     },
-    "grade": "D",
+    "grade": "C",
     "fling": {
       "type": "untyped",
       "power": 0,
       "accuracy": 95,
-      "hide": null
+      "hide": false,
+      "range": {
+        "target": "creature",
+        "distance": 15,
+        "unit": "m"
+      }
     },
     "rarity": "rare",
     "consumableType": "pokeball",
@@ -27,8 +32,8 @@
       "belt",
       "fling"
     ],
-    "description": "A ball given for use in specific catching contests. 2.5x Catch Rate modifier.",
-    "modifier": 2.5,
+    "description": "<p>A ball given for use in specific catching contests. 2x Catch Rate modifier.</p>",
+    "modifier": 2,
     "quantity": 1,
     "slug": "sport-ball",
     "stack": 10,
@@ -40,8 +45,10 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
-    }
+      ],
+      "notes": ""
+    },
+    "actions": []
   },
   "_id": "dcMRu1DwEVSnpwkD",
   "effects": [],

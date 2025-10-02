@@ -22,7 +22,12 @@
       "type": "untyped",
       "power": 0,
       "accuracy": 95,
-      "hide": null
+      "hide": false,
+      "range": {
+        "target": "creature",
+        "distance": 10,
+        "unit": "m"
+      }
     },
     "rarity": "uncommon",
     "consumableType": "pokeball",
@@ -30,7 +35,8 @@
       "stack-5",
       "belt",
       "fling",
-      "training-ball"
+      "training-ball",
+      "ball"
     ],
     "description": "Catch Rate modifier starts at 6x, and decreases by 1x after each of the user's turns.",
     "modifier": 6,
@@ -45,8 +51,10 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
-    }
+      ],
+      "notes": ""
+    },
+    "actions": []
   },
   "_id": "mm2VA3udokrf30am",
   "effects": [],

@@ -1,5 +1,5 @@
 {
-  "folder": "6VDJBcrqVDh5bYtA",
+  "folder": "V4skAU6G3OH5fXae",
   "name": "Sachet",
   "type": "equipment",
   "system": {
@@ -10,14 +10,15 @@
     "slug": "sachet",
     "traits": [
       "combat",
-      "type",
       "fairy",
       "evolution",
       "spritzee",
-      "aromatisse"
+      "aromatisse",
+      "consumable",
+      "accessory"
     ],
     "actions": [],
-    "description": "<p>A sachet filled with fragrant perfumes that are just slightly overwhelming That boosts the power of Fairy-type moves. Yet it's loved by a certain Pokémon.</p><p></p><p>Effect: Increases the Power and Accuracy of attacks by 10%</p>",
+    "description": "<p>Effect: Grants @Trait[fairy]-type creatures +20% EHR.<br><br>Can be consumed by Spritzee to trigger Evolution.</p>",
     "crafting": {
       "skill": "",
       "spans": null,
@@ -33,7 +34,12 @@
       "type": "fairy",
       "power": 70,
       "accuracy": 100,
-      "hide": false
+      "hide": false,
+      "range": {
+        "target": "creature",
+        "distance": 10,
+        "unit": "m"
+      }
     },
     "quantity": 1,
     "rarity": "rare",
@@ -50,56 +56,42 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
+      ],
+      "notes": ""
     }
   },
-  "img": "systems/ptr2e/img/icons/equipment_icon.webp",
+  "img": "systems/ptr2e/img/item-icons/sachet.webp",
   "effects": [
     {
-      "name": "Type Booster (Fairy)",
+      "name": "Sachet",
       "type": "passive",
-      "_id": "TGoTjawzLutdvVCF",
+      "_id": "1WZydCAk8pVCOMC7",
       "img": "systems/ptr2e/img/icons/effect_icon.webp",
       "system": {
         "changes": [
           {
-            "type": "percentile-modifier",
-            "key": "fairy-attack-power",
-            "value": 10,
-            "predicate": [],
-            "label": "Type Booster (Fairy) Power",
+            "type": "basic",
+            "key": "system.modifiers.effectHitRate",
+            "value": 20,
+            "predicate": [
+              "trait:fairy"
+            ],
             "mode": 2,
-            "priority": null,
-            "ignored": false,
-            "hideIfDisabled": false
-          },
-          {
-            "type": "percentile-modifier",
-            "key": "fairy-attack-accuracy",
-            "value": 10,
-            "predicate": [],
-            "label": "Type Booster (Fairy)",
-            "mode": 2,
-            "priority": null,
-            "ignored": false,
-            "hideIfDisabled": false
+            "ignored": false
           }
         ],
         "slug": null,
         "traits": [],
         "removeAfterCombat": true,
         "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
         "stacks": 0
       },
       "disabled": false,
       "duration": {
         "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "combat": null
       },
       "description": "",
       "origin": null,
@@ -107,16 +99,21 @@
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "flags": {},
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
       "_stats": {
-        "compendiumSource": "Compendium.ptr2e.core-gear.Item.JhU4x5wZQlVuqvfz.ActiveEffect.pMVRnjGSvrhLNVtr",
+        "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "exportSource": null,
+        "coreVersion": "13.348",
         "systemId": "ptr2e",
-        "systemVersion": "1.0.3.beta",
-        "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "systemVersion": "1.4.4.beta",
+        "createdTime": 1758630794074,
+        "modifiedTime": 1758630820317,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
       }
     }
   ],
