@@ -9,10 +9,12 @@
     },
     "traits": [
       "evolution",
-      "electric"
+      "belt",
+      "held",
+      "charge-pool-6"
     ],
     "actions": [],
-    "description": "<p>This stone catalyses evolution in a number of electromagnetic pokemon.</p>",
+    "description": "<p>This item’s Charge Pool refreshes following Camp. While equipped in a Held or Belt Slot, the user may spend Charge in place of PP (1 Tick of the Clock equals 1 PP) for their Electric-Type Attacks.</p><p>This is also a catalyst for Evolution. When used to evolve a creature, this item is Consumed.</p>",
     "crafting": {
       "skill": "",
       "spans": null,
@@ -20,15 +22,20 @@
     },
     "equipped": {
       "carryType": "stowed",
-      "handsHeld": null,
-      "slot": "held"
+      "handsHeld": 1,
+      "slot": "backpack"
     },
     "grade": "C",
     "fling": {
       "type": "electric",
       "power": 70,
-      "accuracy": 100,
-      "hide": false
+      "accuracy": 90,
+      "hide": false,
+      "range": {
+        "target": "creature",
+        "distance": 7,
+        "unit": "m"
+      }
     },
     "quantity": 1,
     "rarity": "uncommon",
@@ -45,11 +52,12 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
-    }
+      ],
+      "notes": ""
+    },
+    "slug": "thunder-stone"
   },
   "_id": "PqfiVo6yrFIZEkWg",
   "img": "systems/ptr2e/img/item-icons/thunder%20stone.webp",
-  "effects": [],
-  "flags": {}
+  "effects": []
 }
