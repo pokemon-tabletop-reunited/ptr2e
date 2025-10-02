@@ -1,70 +1,75 @@
 {
+  "folder": "V4skAU6G3OH5fXab",
   "name": "Eject Button",
-  "img": "systems/ptr2e/img/icons/equipment_icon.webp",
   "type": "consumable",
   "system": {
-    "cost": 5,
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "actions": [
+      {
+        "name": "Eject Button",
+        "slug": "eject-button",
+        "description": "<p>Trigger: The user is hit by an attack.<br><br>Effect: The user may freely move up to half the maximum of a movement type of their choosing from the source of the attack. If the user is an owned creature, they may immediately recall themselves as a free action, and the owner may send out a new creature in their place.</p>",
+        "traits": [
+          "consumable",
+          "combat"
+        ],
+        "type": "generic",
+        "img": "systems/ptr2e/img/icons/consumable_icon.webp",
+        "cost": {
+          "activation": "free"
+        },
+        "range": {
+          "target": "self",
+          "unit": "m"
+        }
+      }
+    ],
     "crafting": {
       "skill": "",
       "spans": null,
       "materials": []
     },
     "equipped": {
-      "slot": "belt",
       "carryType": "stowed",
+      "slot": "belt",
       "handsHeld": null
     },
-    "grade": "D",
+    "grade": "C",
     "fling": {
       "type": "untyped",
       "power": null,
       "accuracy": 100,
-      "hide": false
-    },
-    "rarity": "uncommon",
-    "consumableType": "other",
-    "traits": [
-      "combat",
-      "defensive"
-    ],
-    "actions": [
-      {
-        "name": "Eject Button",
-        "slug": "eject-button",
-        "type": "generic",
-        "description": "Trigger: The user is hit by an attack.\nEffect: The user takes 50% less damage from the triggering attack, and then freely moves themselves up to half of the Movement type of their choice away from triggering attack's source. If the user is an owned Pokémon, they may then immediately be returned their Poké Ball and another Pokémon may immediately be sent out in their place.",
-        "traits": [
-          "Combat",
-          "Consumable",
-          "Defensive"
-        ],
-        "range": {
-          "target": "creature",
-          "unit": "m"
-        },
-        "cost": {
-          "activation": "complex",
-          "trigger": "The user is hit by an attack."
-        },
-        "img": "icons/svg/explosion.svg"
+      "hide": true,
+      "range": {
+        "target": "creature",
+        "distance": 10,
+        "unit": "m"
       }
-    ],
-    "description": "Trigger: The user is hit by an attack.\nEffect: The user takes 50% less damage from the triggering attack, and then freely moves themselves up to half of the Movement type of their choice away from triggering attack's source. If the user is an owned Pokémon, they may then immediately be returned their Poké Ball and another Pokémon may immediately be sent out in their place.",
-    "slug": "eject-button",
-    "quantity": 1,
-    "stack": 1,
-    "_migration": {
-      "version": null,
-      "previous": null
     },
+    "quantity": 1,
+    "rarity": "common",
     "publication": {
       "source": "PTR 2e Core",
       "authors": [
-        "PTR 2e Team"
-      ]
-    }
+        "PTR 2e Core"
+      ],
+      "notes": ""
+    },
+    "slug": "eject-button-rework",
+    "description": "<p>Trigger: The user is hit by an attack.<br><br>Effect: The user may freely move up to half the maximum of a movement type of their choosing from the source of the attack. If the user is an owned creature, they may immediately recall themselves as a free action, and the owner may send out a new creature in their place.</p>",
+    "traits": [
+      "consumable",
+      "combat"
+    ],
+    "consumableType": "other",
+    "stack": 1,
+    "cost": 4
   },
-  "_id": "uyem3I3aZSIBSv1J",
+  "img": "systems/ptr2e/img/icons/consumable_icon.webp",
   "effects": [],
-  "folder": "ZJQbcaoYaa7A40WO"
+  "flags": {},
+  "_id": "0FcqI4CxUqQjkLBN"
 }
