@@ -12,7 +12,8 @@
         "traits": [],
         "range": {
           "target": "creature",
-          "unit": "m"
+          "unit": "m",
+          "distance": 10
         },
         "cost": {
           "activation": "simple",
@@ -22,8 +23,8 @@
         "types": [
           "normal"
         ],
-        "description": "<p>Effect: The user gains +1 ATK Stages for 5 Activations and @Affliction[sharpen] 5.</p>",
-        "img": "icons/svg/explosion.svg",
+        "description": "<p>Effect: The user gains +1 ATK Stages for 5 Activations and @UUID[Compendium.ptr2e.core-effects.sharpencondiitem]{Sharpen} for 5.</p>",
+        "img": "systems/ptr2e/img/svg/normal_icon.svg",
         "predicate": []
       }
     ],
@@ -36,8 +37,10 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
-    }
+      ],
+      "notes": ""
+    },
+    "traits": []
   },
   "_id": "ZbfFVvq6rf5tyiUI",
   "effects": [
@@ -57,7 +60,10 @@
             "affects": "target",
             "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "isFixedChance": false,
+            "alterations": [],
+            "dontMerge": false
           },
           {
             "type": "roll-effect",
@@ -68,14 +74,19 @@
             "affects": "target",
             "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "isFixedChance": false,
+            "alterations": [],
+            "dontMerge": false
           }
         ],
         "slug": null,
         "traits": [],
         "removeAfterCombat": true,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
@@ -97,12 +108,13 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.348",
         "systemId": "ptr2e",
         "systemVersion": "0.10.0-alpha.5.1.2",
         "createdTime": 1736888218983,
         "modifiedTime": 1736888268127,
-        "lastModifiedBy": "IcBpMqhFuTck9VpX"
+        "lastModifiedBy": "IcBpMqhFuTck9VpX",
+        "exportSource": null
       }
     }
   ]
