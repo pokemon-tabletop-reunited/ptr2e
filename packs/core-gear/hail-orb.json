@@ -19,7 +19,12 @@
       "type": "untyped",
       "power": 40,
       "accuracy": 100,
-      "hide": null
+      "hide": false,
+      "range": {
+        "target": "creature",
+        "distance": 10,
+        "unit": "m"
+      }
     },
     "rarity": "uncommon",
     "consumableType": "other",
@@ -27,11 +32,9 @@
       "combat",
       "consumable",
       "weather",
-      "wonder-orb",
-      "held",
-      "fling"
+      "wonder-orb"
     ],
-    "description": "The Weather is set to Snowy on the current Floor.",
+    "description": "<p>The Weather is set to @UUID[Compendium.ptr2e.core-summons.8EVtue4CUOjddZIP]{Snowy Weather} for 3 rounds.</p>",
     "quantity": 1,
     "slug": "hail-orb",
     "stack": 1,
@@ -43,8 +46,32 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
-    }
+      ],
+      "notes": ""
+    },
+    "actions": [
+      {
+        "name": "Hail Orb",
+        "slug": "hail-orb",
+        "description": "<p>The Weather is set to Snowy on the current Floor.</p>",
+        "traits": [
+          "combat",
+          "consumable",
+          "weather",
+          "wonder-orb"
+        ],
+        "type": "generic",
+        "img": "systems/ptr2e/img/icons/consumable_icon.webp",
+        "cost": {
+          "activation": "simple"
+        },
+        "range": {
+          "target": "creature",
+          "distance": 10,
+          "unit": "m"
+        }
+      }
+    ]
   },
   "_id": "ouc4BKMdEhOfBH0o",
   "effects": [],
