@@ -1,0 +1,130 @@
+{
+  "folder": "V4skAU6G3OH5fXab",
+  "name": "Electric Seed",
+  "type": "consumable",
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "actions": [
+      {
+        "name": "Electric Seed",
+        "slug": "electric-seed",
+        "description": "<p>Trigger: Electric Terrain is summoned.<br><br>Effect: The user gains @UUID[Compendium.ptr2e.core-effects.sMystTj3FBJ00AZp]{+1 Defense Stage} for 5 Activations.</p>",
+        "traits": [
+          "consumable",
+          "combat"
+        ],
+        "type": "generic",
+        "img": "systems/ptr2e/img/item-icons/miracle%20seed.webp",
+        "cost": {
+          "activation": "free"
+        },
+        "range": {
+          "target": "self",
+          "unit": "m"
+        }
+      }
+    ],
+    "crafting": {
+      "skill": "",
+      "spans": null,
+      "materials": []
+    },
+    "equipped": {
+      "carryType": "stowed",
+      "slot": "belt",
+      "handsHeld": null
+    },
+    "grade": "D",
+    "fling": {
+      "type": "electric",
+      "power": 50,
+      "accuracy": 100,
+      "hide": false,
+      "range": {
+        "target": "creature",
+        "distance": 10,
+        "unit": "m"
+      }
+    },
+    "quantity": 1,
+    "rarity": "common",
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "description": "<p>Trigger: @UUID[Compendium.ptr2e.core-summons.dinLBMHBNUshV0Og]{Electric Terrain} is summoned.<br><br>Effect: The user gains @UUID[Compendium.ptr2e.core-effects.sMystTj3FBJ00AZp]{+1 Defense Stage} for 5 Activations.</p>",
+    "traits": [
+      "consumable",
+      "combat"
+    ],
+    "consumableType": "other",
+    "stack": 1,
+    "cost": 2
+  },
+  "img": "systems/ptr2e/img/item-icons/miracle%20seed.webp",
+  "effects": [
+    {
+      "name": "Electric Seed",
+      "type": "passive",
+      "_id": "1ldZfIhrMgxZveeH",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "electric-seed-generic",
+            "value": "Compendium.ptr2e.core-effects.Item.sMystTj3FBJ00AZp",
+            "predicate": [],
+            "chance": 100,
+            "isFixedChance": true,
+            "affects": "target",
+            "alterations": [],
+            "dontMerge": false,
+            "mode": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.348",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.4.beta",
+        "lastModifiedBy": null
+      }
+    }
+  ],
+  "flags": {},
+  "_id": "Iub4QuaaL32PQrPp"
+}
