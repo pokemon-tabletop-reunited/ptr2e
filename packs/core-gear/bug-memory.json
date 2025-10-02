@@ -1,0 +1,146 @@
+{
+  "name": "Bug Memory",
+  "img": "systems/ptr2e/img/item-icons/bug%20memory.webp",
+  "type": "equipment",
+  "system": {
+    "crafting": {
+      "skill": "",
+      "spans": null,
+      "materials": []
+    },
+    "equipped": {
+      "slot": "accessory",
+      "carryType": "stowed",
+      "handsHeld": null
+    },
+    "grade": "A",
+    "fling": {
+      "type": "untyped",
+      "power": 45,
+      "accuracy": 90,
+      "hide": true,
+      "range": {
+        "target": "creature",
+        "distance": 10,
+        "unit": "m"
+      }
+    },
+    "rarity": "rare",
+    "traits": [
+      "silvally",
+      "memory",
+      "bug"
+    ],
+    "actions": [
+      {
+        "name": "Memory",
+        "slug": "memory",
+        "type": "passive",
+        "description": "Effect: The user deals 10% more damage with %lt;Type&gt;-Type actions and attacks, and takes 20% less damage from %lt;Type&gt;-Type actions and attacks. This item does not use an Accessory slot when equipped by a [Silvally].",
+        "traits": [
+          "silvally",
+          "memory",
+          "type-fling"
+        ],
+        "range": {
+          "target": "creature",
+          "unit": "m",
+          "distance": 10
+        },
+        "cost": {
+          "activation": "complex"
+        },
+        "img": "icons/svg/explosion.svg"
+      }
+    ],
+    "description": "<p>Effect: The user deals 10% more damage with @Trait[bug]-Type actions and attacks, and takes 20% less damage from @Trait[bug]-Type actions and attacks.<br><br>@UUID[Compendium.ptr2e.core-species.MXkBlhF3Bhj0UUzv]{Silvally} users change type, replacing the Normal Type with the first Memory they equip, and adding a second type for any subsequent equipped Memory items.</p>",
+    "slug": "memory",
+    "quantity": 1,
+    "identification": {
+      "misidentified": null,
+      "status": "identified",
+      "unidentified": {
+        "name": "Unidentified Item",
+        "img": "systems/ptu/css/images/icons/item_icon.png",
+        "description": "<p>Unidentified Item</p>"
+      }
+    },
+    "_migration": {
+      "version": null,
+      "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    }
+  },
+  "_id": "t0ZDWUZrSWeFvxTx",
+  "effects": [
+    {
+      "name": "Bug Memory",
+      "type": "passive",
+      "_id": "TcGq75aKf8FhoLju",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "percentile-modifier",
+            "key": "bug-attack-damage",
+            "value": 10,
+            "predicate": [],
+            "mode": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          },
+          {
+            "type": "ephemeral-modifier",
+            "key": "bug-attack-damage-percentile",
+            "value": -20,
+            "predicate": [],
+            "mode": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.348",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.4.beta",
+        "createdTime": 1759320571736,
+        "modifiedTime": 1759320596510,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+      }
+    }
+  ],
+  "folder": "6VDJBcrqVDh5bYtA"
+}

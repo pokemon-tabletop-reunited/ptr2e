@@ -19,18 +19,21 @@
       "type": "untyped",
       "power": 40,
       "accuracy": 100,
-      "hide": null
+      "hide": false,
+      "range": {
+        "target": "creature",
+        "distance": 10,
+        "unit": "m"
+      }
     },
     "rarity": "common",
     "consumableType": "other",
     "traits": [
       "combat",
       "consumable",
-      "wonder-orb",
-      "held",
-      "fling"
+      "wonder-orb"
     ],
-    "description": "For 3 rounds, a target in the Room cannot use [Sonic] attacks, or vocalise.",
+    "description": "<p>The target creature becomes @UUID[Compendium.ptr2e.core-effects.V8CNzN148X1bYsSS]{Gagged} for 5 activations.</p>",
     "quantity": 1,
     "slug": "silence-orb",
     "stack": 1,
@@ -42,10 +45,91 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
-    }
+      ],
+      "notes": ""
+    },
+    "actions": [
+      {
+        "name": "Silence Orb",
+        "slug": "silence-orb",
+        "description": "<p>The target creature becomes @UUID[Compendium.ptr2e.core-effects.V8CNzN148X1bYsSS]{Gagged} for 5 activations.</p>",
+        "traits": [
+          "combat",
+          "consumable",
+          "wonder-orb"
+        ],
+        "type": "generic",
+        "img": "systems/ptr2e/img/icons/consumable_icon.webp",
+        "cost": {
+          "activation": "simple"
+        },
+        "range": {
+          "target": "creature",
+          "distance": 10,
+          "unit": "m"
+        }
+      }
+    ]
   },
   "_id": "pdPVNihRTrYX6Dey",
-  "effects": [],
+  "effects": [
+    {
+      "name": "Silence Orb",
+      "type": "passive",
+      "_id": "izI0BlUML2JisM3W",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "silence-orb-generic",
+            "value": "Compendium.ptr2e.core-effects.Item.V8CNzN148X1bYsSS",
+            "predicate": [],
+            "chance": 100,
+            "isFixedChance": false,
+            "affects": "target",
+            "alterations": [],
+            "dontMerge": false,
+            "mode": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.348",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.4.beta",
+        "createdTime": 1759320117683,
+        "modifiedTime": 1759320134433,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+      }
+    }
+  ],
   "folder": "4MbEHvhwmG5DYTkB"
 }
