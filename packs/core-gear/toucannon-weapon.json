@@ -1,0 +1,156 @@
+{
+  "name": "Toucannon (Weapon)",
+  "type": "weapon",
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "slug": "toucannon-weapon",
+    "publication": {
+      "source": "",
+      "authors": [],
+      "notes": ""
+    },
+    "traits": [
+      "pokemon",
+      "living-weapon",
+      "normal",
+      "flying",
+      "missile",
+      "explode",
+      "weapon"
+    ],
+    "actions": [
+      {
+        "name": "Bluk Blast",
+        "slug": "bluk-burner",
+        "description": "<p>Effect: On hit, all valid targets have a 30% chance to gain @Affliction[burn] 5.</p>",
+        "traits": [
+          "pokemon",
+          "living-weapon",
+          "normal",
+          "flying",
+          "explode",
+          "blast-3",
+          "weapon"
+        ],
+        "type": "attack",
+        "img": "systems/ptr2e/img/icons/weapon_icon.webp",
+        "range": {
+          "target": "blast",
+          "distance": 10,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 6
+        },
+        "types": [
+          "fire"
+        ],
+        "category": "physical",
+        "power": 70,
+        "accuracy": 90,
+        "free": true,
+        "predicate": []
+      },
+      {
+        "name": "Shuca Shot",
+        "slug": "shuca-shot",
+        "traits": [
+          "pokemon",
+          "living-weapon",
+          "normal",
+          "flying",
+          "missile",
+          "weapon"
+        ],
+        "type": "attack",
+        "img": "systems/ptr2e/img/icons/weapon_icon.webp",
+        "range": {
+          "target": "enemy",
+          "distance": 15,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 2
+        },
+        "types": [
+          "normal"
+        ],
+        "category": "physical",
+        "power": 45,
+        "accuracy": 100,
+        "free": true,
+        "predicate": []
+      },
+      {
+        "name": "Ganlon Gat",
+        "slug": "ganlon-gat",
+        "traits": [
+          "pokemon",
+          "living-weapon",
+          "normal",
+          "flying",
+          "missile",
+          "5-strike",
+          "weapon"
+        ],
+        "type": "attack",
+        "img": "systems/ptr2e/img/icons/weapon_icon.webp",
+        "range": {
+          "target": "creature",
+          "distance": 5,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 6
+        },
+        "types": [
+          "flying"
+        ],
+        "category": "physical",
+        "power": 40,
+        "accuracy": 75,
+        "free": true,
+        "predicate": []
+      }
+    ],
+    "crafting": {
+      "skill": "N/A",
+      "spans": null,
+      "materials": []
+    },
+    "equipped": {
+      "carryType": "stowed",
+      "handsHeld": 1,
+      "slot": "held"
+    },
+    "grade": "E",
+    "fling": {
+      "type": "untyped",
+      "power": null,
+      "accuracy": 100,
+      "hide": false
+    },
+    "quantity": 1,
+    "rarity": "common",
+    "identification": {
+      "misidentified": null,
+      "status": "identified",
+      "unidentified": {
+        "name": "Unidentified Item",
+        "img": "systems/ptu/css/images/icons/gear_icon.png",
+        "description": "<p>Unidentified Item</p>"
+      }
+    }
+  },
+  "img": "systems/ptr2e/img/icons/weapon_icon.webp",
+  "effects": [],
+  "folder": "V4skAU6G3OH5fXaf",
+  "flags": {},
+  "_id": "CDNqBOplN2ZdaK3H"
+}

@@ -5,7 +5,7 @@
   "system": {
     "cost": 3,
     "crafting": {
-      "skill": null,
+      "skill": "",
       "spans": null,
       "materials": []
     },
@@ -19,7 +19,12 @@
       "type": "untyped",
       "power": null,
       "accuracy": 100,
-      "hide": null
+      "hide": false,
+      "range": {
+        "target": "creature",
+        "distance": 10,
+        "unit": "m"
+      }
     },
     "rarity": "common",
     "consumableType": "restorative",
@@ -32,7 +37,7 @@
       "held",
       "desperation-1-2"
     ],
-    "description": "The target is healed 3 ticks of HP.",
+    "description": "<p>The target is healed @Tick[3]. Can be consumed as a free action at @Trait[desperation-1-2].</p>",
     "quantity": 1,
     "slug": "berry-juice",
     "stack": 1,
@@ -44,10 +49,101 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
-    }
+      ],
+      "notes": ""
+    },
+    "actions": [
+      {
+        "name": "Berry Juice",
+        "slug": "berry-juice",
+        "description": "<p>The target is healed @Tick[3]. Can be consumed as a free action at @Trait[desperation-1-2].</p>",
+        "traits": [
+          "restorative",
+          "consumable",
+          "natural",
+          "healing",
+          "berry",
+          "held",
+          "desperation-1-2"
+        ],
+        "type": "generic",
+        "img": "systems/ptr2e/img/item-icons/berry juice.webp",
+        "cost": {
+          "activation": "simple"
+        },
+        "range": {
+          "target": "creature",
+          "distance": 10,
+          "unit": "m"
+        }
+      }
+    ]
   },
   "_id": "HrWKlyHUn8Cuxbxh",
-  "effects": [],
+  "effects": [
+    {
+      "name": "Berry Juice",
+      "type": "passive",
+      "_id": "HKkuMNjyImIXSz4a",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "berry-juice-generic",
+            "value": "Compendium.ptr2e.core-effects.Item.4DlXFTVooz07YcDm",
+            "predicate": [],
+            "chance": 100,
+            "isFixedChance": true,
+            "affects": "target",
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "system.changes.0.value",
+                "value": 3
+              }
+            ],
+            "dontMerge": false,
+            "mode": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.348",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.4.beta",
+        "createdTime": 1759151796839,
+        "modifiedTime": 1759151959221,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+      }
+    }
+  ],
   "folder": "fWXwbB0LHCXeB5EW"
 }
