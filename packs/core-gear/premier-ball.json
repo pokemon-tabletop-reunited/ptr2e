@@ -4,7 +4,7 @@
   "type": "consumable",
   "system": {
     "crafting": {
-      "skill": null,
+      "skill": "",
       "spans": null,
       "materials": []
     },
@@ -18,7 +18,12 @@
       "type": "untyped",
       "power": 0,
       "accuracy": 95,
-      "hide": null
+      "hide": false,
+      "range": {
+        "target": "creature",
+        "distance": 10,
+        "unit": "m"
+      }
     },
     "rarity": "uncommon",
     "consumableType": "pokeball",
@@ -27,7 +32,7 @@
       "belt",
       "fling"
     ],
-    "description": "A sleek, pretty ball given out during promotional events. Gives no bonuses on capture checks.",
+    "description": "<p>A sleek, pretty ball given out during promotional events. +10 Critical Capture chance.</p>",
     "modifier": 1,
     "quantity": 1,
     "slug": "premier-ball",
@@ -40,8 +45,10 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
-    }
+      ],
+      "notes": ""
+    },
+    "actions": []
   },
   "_id": "1DyQ3ufyPpixrxtP",
   "effects": [],
