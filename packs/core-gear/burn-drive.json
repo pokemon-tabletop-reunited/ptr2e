@@ -18,7 +18,12 @@
       "type": "untyped",
       "power": null,
       "accuracy": 100,
-      "hide": false
+      "hide": false,
+      "range": {
+        "target": "creature",
+        "distance": 10,
+        "unit": "m"
+      }
     },
     "rarity": "rare",
     "traits": [
@@ -39,7 +44,8 @@
         ],
         "range": {
           "target": "creature",
-          "unit": "m"
+          "unit": "m",
+          "distance": 10
         },
         "cost": {
           "activation": "complex"
@@ -47,7 +53,7 @@
         "img": "icons/svg/explosion.svg"
       }
     ],
-    "description": "Effect: This item does not use an Accessory slot when equipped by a [Genesect].",
+    "description": "<p>Effect: This accessory allows you to either add the @Trait[fire] type to @UUID[Compendium.ptr2e.core-moves.gWjoYU30cvj8Vu4L]{Techno Blast} or replace Techno Blast's existing typing with @Trait[fire]</p>",
     "slug": "burn-drive",
     "quantity": 1,
     "identification": {
@@ -67,7 +73,8 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
+      ],
+      "notes": ""
     }
   },
   "_id": "eOrOr2QMZMtWvVYu",

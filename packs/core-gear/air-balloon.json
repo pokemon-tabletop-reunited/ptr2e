@@ -1,6 +1,6 @@
 {
   "name": "Air Balloon",
-  "img": "systems/ptr2e/img/icons/equipment_icon.webp",
+  "img": "icons/svg/up.svg",
   "type": "equipment",
   "system": {
     "crafting": {
@@ -9,7 +9,7 @@
       "materials": []
     },
     "equipped": {
-      "slot": "worn",
+      "slot": "backpack",
       "carryType": "stowed",
       "handsHeld": null
     },
@@ -18,11 +18,15 @@
       "type": "untyped",
       "power": null,
       "accuracy": 100,
-      "hide": false
+      "hide": false,
+      "range": {
+        "target": "creature",
+        "distance": 10,
+        "unit": "m"
+      }
     },
     "rarity": "uncommon",
     "traits": [
-      "consumable",
       "defensive"
     ],
     "actions": [
@@ -37,7 +41,8 @@
         ],
         "range": {
           "target": "creature",
-          "unit": "m"
+          "unit": "m",
+          "distance": 10
         },
         "cost": {
           "activation": "complex"
@@ -45,7 +50,7 @@
         "img": "icons/svg/explosion.svg"
       }
     ],
-    "description": "Effect: The user gains the [Hover] trait and Fly as a secondary movement type. If the user takes damage from an attack, Air Balloon becomes unusable until the end of combat.",
+    "description": "<p>Effect: The user gains the @Trait[hover] trait and +5 Flight Movement. If the user takes damage from an attack, Air Balloon becomes unusable until the end of combat.</p>",
     "slug": "air-balloon",
     "quantity": 1,
     "identification": {
@@ -65,10 +70,89 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
+      ],
+      "notes": ""
     }
   },
   "_id": "xaFzOKH4tEHZjG8J",
-  "effects": [],
-  "folder": "UUWElZA9w1KEqZS7"
+  "effects": [
+    {
+      "name": "Air Balloon",
+      "type": "passive",
+      "_id": "ksIc5kQ3Gvpn7igR",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-option",
+            "key": "",
+            "value": "balloon:intact",
+            "predicate": [],
+            "domain": "all",
+            "label": "Balloon Intact?",
+            "toggleable": true,
+            "count": false,
+            "state": true,
+            "alwaysActive": false,
+            "mode": 2,
+            "ignored": false,
+            "suboptions": []
+          },
+          {
+            "type": "add-trait",
+            "key": "",
+            "value": "hover",
+            "predicate": [
+              "balloon:intact"
+            ],
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "key": "system.movement.flight.value",
+            "value": 5,
+            "predicate": [],
+            "mode": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.348",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.4.beta",
+        "createdTime": 1758636605199,
+        "modifiedTime": 1758636677907,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+      }
+    }
+  ],
+  "folder": "V4skAU6G3OH5fXac"
 }

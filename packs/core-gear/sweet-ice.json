@@ -1,26 +1,32 @@
 {
+  "folder": "V4skAU6G3OH5fXab",
   "name": "Sweet Ice",
-  "type": "equipment",
+  "type": "consumable",
   "system": {
     "_migration": {
       "version": 0.111,
       "previous": null
     },
-    "slug": "sweet-ice",
-    "publication": {
-      "source": "PTR 2e Core",
-      "authors": [
-        "PTR 2e Team"
-      ],
-      "notes": ""
-    },
-    "traits": [
-      "consumable",
-      "natural",
-      "combat"
+    "actions": [
+      {
+        "name": "Sweet Ice",
+        "slug": "sweet-ice",
+        "description": "<p>Trigger: The user is hit with an @Trait[ice]-type attack.<br><br>Effect: The user gains @UUID[Compendium.ptr2e.core-effects.ZGwaMlzUwkSuCPyH]{+1 Attack Stage} and @UUID[Compendium.ptr2e.core-effects.1TqcwIUNl32wJCAa]{+1 Special Attack Stage} for 5 activations.</p>",
+        "traits": [
+          "combat",
+          "consumable"
+        ],
+        "type": "generic",
+        "img": "systems/ptr2e/img/item-icons/never-melt%20ice.webp",
+        "cost": {
+          "activation": "free"
+        },
+        "range": {
+          "target": "self",
+          "unit": "m"
+        }
+      }
     ],
-    "actions": [],
-    "description": "<p>Trigger: The user is hit by an Ice-type attack. Effect: The user gains +1 ATK and SPATK Stage for 10 activations.</p>",
     "crafting": {
       "skill": "",
       "spans": null,
@@ -28,31 +34,110 @@
     },
     "equipped": {
       "carryType": "stowed",
-      "handsHeld": null,
-      "slot": "belt"
+      "slot": "belt",
+      "handsHeld": null
     },
-    "grade": "D",
+    "grade": "C",
     "fling": {
-      "type": "untyped",
-      "power": null,
+      "type": "ice",
+      "power": 50,
       "accuracy": 100,
-      "hide": false
+      "hide": false,
+      "range": {
+        "target": "creature",
+        "distance": 10,
+        "unit": "m"
+      }
     },
     "quantity": 1,
-    "rarity": "uncommon",
-    "identification": {
-      "misidentified": null,
-      "status": "identified",
-      "unidentified": {
-        "name": "Unidentified Item",
-        "img": "systems/ptu/css/images/icons/gear_icon.png",
-        "description": "<p>Unidentified Item</p>"
+    "rarity": "common",
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "description": "<p>Trigger: The user is hit with an @Trait[ice]-type attack.<br><br>Effect: The user gains @UUID[Compendium.ptr2e.core-effects.ZGwaMlzUwkSuCPyH]{+1 Attack Stage} and @UUID[Compendium.ptr2e.core-effects.1TqcwIUNl32wJCAa]{+1 Special Attack Stage} for 5 activations.</p>",
+    "traits": [
+      "combat",
+      "consumable"
+    ],
+    "consumableType": "other",
+    "stack": 1,
+    "cost": 5
+  },
+  "img": "systems/ptr2e/img/item-icons/never-melt%20ice.webp",
+  "effects": [
+    {
+      "name": "Sweet Ice",
+      "type": "passive",
+      "_id": "10s4fxn00iMgbRQO",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "sweet-ice-generic",
+            "value": "Compendium.ptr2e.core-effects.Item.ZGwaMlzUwkSuCPyH",
+            "predicate": [],
+            "chance": 100,
+            "isFixedChance": true,
+            "affects": "target",
+            "alterations": [],
+            "dontMerge": false,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "roll-effect",
+            "key": "sweet-ice-generic",
+            "value": "Compendium.ptr2e.core-effects.Item.1TqcwIUNl32wJCAa",
+            "predicate": [],
+            "chance": 100,
+            "isFixedChance": true,
+            "affects": "target",
+            "alterations": [],
+            "dontMerge": false,
+            "mode": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.348",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.4.beta",
+        "lastModifiedBy": null
       }
     }
-  },
-  "img": "systems/ptr2e/img/icons/equipment_icon.webp",
-  "effects": [],
-  "folder": "ZJQbcaoYaa7A40WO",
+  ],
   "flags": {},
-  "_id": "bSqZQwGQvL6ivLG7"
+  "_id": "w243XFGMtX3rr96b"
 }

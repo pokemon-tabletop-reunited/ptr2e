@@ -5,7 +5,7 @@
   "system": {
     "cost": 2,
     "crafting": {
-      "skill": null,
+      "skill": "",
       "spans": null,
       "materials": []
     },
@@ -19,7 +19,12 @@
       "type": "untyped",
       "power": 10,
       "accuracy": 95,
-      "hide": null
+      "hide": false,
+      "range": {
+        "target": "creature",
+        "distance": 10,
+        "unit": "m"
+      }
     },
     "rarity": "common",
     "consumableType": "food",
@@ -27,18 +32,11 @@
       "restorative",
       "consumable",
       "natural",
-      "healing",
       "berry",
       "fling",
-      "held",
-      "spicy-2",
-      "dry-2",
-      "sweet-2",
-      "bitter-2",
-      "combat",
-      "sour-2"
+      "combat"
     ],
-    "description": "The target gains 6 PP and is Flinched 5.",
+    "description": "<p>The target gains @PP[5].</p>",
     "quantity": 1,
     "slug": "hopo-berry",
     "stack": 1,
@@ -50,10 +48,105 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
-    }
+      ],
+      "notes": ""
+    },
+    "actions": [
+      {
+        "name": "Hopo Berry",
+        "slug": "hopo-berry",
+        "description": "<p>The target gains @PP[5].</p>",
+        "traits": [
+          "restorative",
+          "consumable",
+          "natural",
+          "berry",
+          "fling",
+          "combat"
+        ],
+        "type": "generic",
+        "img": "systems/ptr2e/img/icons/consumable_icon.webp",
+        "cost": {
+          "activation": "simple"
+        },
+        "range": {
+          "target": "creature",
+          "distance": 10,
+          "unit": "m"
+        }
+      }
+    ]
   },
   "_id": "PyfMOQBXiL0NexN5",
-  "effects": [],
+  "effects": [
+    {
+      "name": "Hopo Berry",
+      "type": "passive",
+      "_id": "9xZYNaWw62lrtzTE",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "hopo-berry-generic",
+            "value": "Compendium.ptr2e.core-effects.Item.LHUTMAC0nCJWDRFt",
+            "predicate": [],
+            "chance": 100,
+            "isFixedChance": true,
+            "affects": "target",
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "system.changes.0.isFlat",
+                "value": "true"
+              },
+              {
+                "mode": 5,
+                "property": "system.changes.0.value",
+                "value": 5
+              }
+            ],
+            "dontMerge": false,
+            "mode": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
+      "_stats": {
+        "compendiumSource": "Compendium.ptr2e.core-gear.Item.UGTXYL1GX6QLUfM5.ActiveEffect.RyVoE01nh7JpzY4y",
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.348",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.4.beta",
+        "createdTime": 1758641381545,
+        "modifiedTime": 1758641393485,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+      }
+    }
+  ],
   "folder": "yR1GFstYOCdI2jOz"
 }

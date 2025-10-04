@@ -1,0 +1,213 @@
+{
+  "name": "Aegislash (Weapon)",
+  "type": "weapon",
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "slug": "aegislash-weapon",
+    "publication": {
+      "source": "",
+      "authors": [],
+      "notes": ""
+    },
+    "traits": [
+      "living-weapon",
+      "weapon",
+      "pokemon",
+      "steel",
+      "ghost",
+      "sharp"
+    ],
+    "actions": [
+      {
+        "name": "Steel Pierce",
+        "slug": "steel-pierce",
+        "traits": [
+          "living-weapon",
+          "weapon",
+          "pokemon",
+          "steel",
+          "ghost",
+          "sharp",
+          "pierce",
+          "contact"
+        ],
+        "type": "attack",
+        "img": "systems/ptr2e/img/icons/weapon_icon.webp",
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 4
+        },
+        "types": [
+          "steel"
+        ],
+        "category": "physical",
+        "power": 95,
+        "accuracy": 100,
+        "free": true,
+        "predicate": []
+      },
+      {
+        "name": "Spectral Cleave",
+        "slug": "spectrial-cleave",
+        "description": "<p>Effect: Upon resolving this Attack, the user loses -1 ATK Stages for 3 Activations.</p>",
+        "traits": [
+          "living-weapon",
+          "weapon",
+          "pokemon",
+          "steel",
+          "ghost",
+          "sharp",
+          "contact",
+          "drain-1-2",
+          "pass-3"
+        ],
+        "type": "attack",
+        "img": "systems/ptr2e/img/icons/weapon_icon.webp",
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 3
+        },
+        "types": [
+          "ghost"
+        ],
+        "category": "physical",
+        "power": 75,
+        "accuracy": 100,
+        "free": true,
+        "predicate": []
+      },
+      {
+        "name": "Aegislash Strike",
+        "slug": "aegislash-strike",
+        "traits": [
+          "weapon",
+          "sharp",
+          "contact",
+          "pokemon",
+          "steel",
+          "ghost",
+          "living-weapon"
+        ],
+        "type": "attack",
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex"
+        },
+        "types": [
+          "steel"
+        ],
+        "category": "physical",
+        "power": 60,
+        "accuracy": 100,
+        "free": true,
+        "img": "systems/ptr2e/img/icons/weapon_icon.webp",
+        "predicate": []
+      }
+    ],
+    "description": "<p>Wielding a Aegislash as a weapon. It is said whoever this Pokémon chooses is destined to become king.</p><p>Aegislash confers Light Cover (+1 Evasion Stage) while equipped in the Wielded/Held item slot.</p>",
+    "crafting": {
+      "skill": "N/A",
+      "spans": null,
+      "materials": []
+    },
+    "equipped": {
+      "carryType": "stowed",
+      "handsHeld": 2,
+      "slot": "held"
+    },
+    "grade": "E",
+    "fling": {
+      "type": "steel",
+      "power": 55,
+      "accuracy": 70,
+      "hide": false
+    },
+    "quantity": 1,
+    "rarity": "common",
+    "identification": {
+      "misidentified": null,
+      "status": "identified",
+      "unidentified": {
+        "name": "Unidentified Item",
+        "img": "systems/ptu/css/images/icons/gear_icon.png",
+        "description": "<p>Unidentified Item</p>"
+      }
+    },
+    "weaponType": "Living Weapon"
+  },
+  "img": "systems/ptr2e/img/icons/weapon_icon.webp",
+  "effects": [
+    {
+      "name": "Aegislash Shield Equipped",
+      "type": "passive",
+      "_id": "PDq7tWWcaJkoF4xw",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "basic",
+            "key": "system.battleStats.evasion.stage",
+            "value": 1,
+            "predicate": [],
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.348",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.4.beta",
+        "lastModifiedBy": null
+      }
+    }
+  ],
+  "folder": "V4skAU6G3OH5fXaf",
+  "flags": {},
+  "_id": "ZmJea43J6wpbgdXr"
+}

@@ -3,9 +3,9 @@
   "img": "systems/ptr2e/img/item-icons/moomoo milk.webp",
   "type": "consumable",
   "system": {
-    "cost": 2,
+    "cost": 3,
     "crafting": {
-      "skill": null,
+      "skill": "",
       "spans": null,
       "materials": []
     },
@@ -19,19 +19,23 @@
       "type": "untyped",
       "power": null,
       "accuracy": 100,
-      "hide": null
+      "hide": false,
+      "range": {
+        "target": "creature",
+        "distance": 10,
+        "unit": "m"
+      }
     },
     "rarity": "common",
     "consumableType": "restorative",
     "traits": [
       "stack-2",
       "combat",
-      "held",
       "restorative",
       "consumable",
       "healing"
     ],
-    "description": "The target is healed 100 HP.",
+    "description": "<p>The target is healed @HP[100].</p>",
     "quantity": 1,
     "slug": "moomoo-milk",
     "stack": 2,
@@ -43,10 +47,104 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
-    }
+      ],
+      "notes": ""
+    },
+    "actions": [
+      {
+        "name": "Moomoo Milk",
+        "slug": "moomoo-milk",
+        "description": "<p>The target is healed @HP[100].</p>",
+        "traits": [
+          "stack-2",
+          "combat",
+          "restorative",
+          "consumable",
+          "healing"
+        ],
+        "type": "generic",
+        "img": "systems/ptr2e/img/item-icons/moomoo milk.webp",
+        "cost": {
+          "activation": "simple"
+        },
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        }
+      }
+    ]
   },
   "_id": "GsW03vZCcv3h7qWq",
-  "effects": [],
+  "effects": [
+    {
+      "name": "Moomoo Milk",
+      "type": "passive",
+      "_id": "106T0tRcxwRHjL3K",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "moomoo-milk-generic",
+            "value": "Compendium.ptr2e.core-effects.Item.4DlXFTVooz07YcDm",
+            "predicate": [],
+            "chance": 100,
+            "isFixedChance": true,
+            "affects": "target",
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "system.changes.0.isFlat",
+                "value": "true"
+              },
+              {
+                "mode": 5,
+                "property": "system.changes.0.value",
+                "value": 100
+              }
+            ],
+            "dontMerge": false,
+            "mode": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
+      "_stats": {
+        "compendiumSource": "Compendium.ptr2e.core-gear.Item.jfGzfe3pG69kJ6Bx.ActiveEffect.G4cA5qHnxsI2Yegr",
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.348",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.4.beta",
+        "createdTime": 1758620891865,
+        "modifiedTime": 1758620907096,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+      }
+    }
+  ],
   "folder": "srQci2ThhRKdmC6g"
 }

@@ -15,10 +15,13 @@
       "notes": ""
     },
     "traits": [
-      "evolution"
+      "evolution",
+      "belt",
+      "held",
+      "charge-pool-6"
     ],
     "actions": [],
-    "description": "<p>This stone is a catalyst for several Pokemon species to evolve.</p>",
+    "description": "<p>This item’s Charge Pool refreshes following Camp. While equipped in a Held or Belt Slot, the user may spend Charge in place of PP (1 Tick of the Clock equals 1 PP) for their Ghost-Type Attacks.</p><p>This is also a catalyst for Evolution. When used to evolve a creature, this item is Consumed.</p>",
     "crafting": {
       "skill": "",
       "spans": null,
@@ -26,15 +29,20 @@
     },
     "equipped": {
       "carryType": "stowed",
-      "slot": "accessory",
-      "handsHeld": null
+      "slot": "backpack",
+      "handsHeld": 1
     },
     "grade": "C",
     "fling": {
       "type": "dark",
       "power": 70,
-      "accuracy": 100,
-      "hide": false
+      "accuracy": 90,
+      "hide": false,
+      "range": {
+        "target": "creature",
+        "distance": 7,
+        "unit": "m"
+      }
     },
     "quantity": 1,
     "rarity": "uncommon",
@@ -46,10 +54,10 @@
         "img": "systems/ptu/css/images/icons/gear_icon.png",
         "description": "<p>Unidentified Item</p>"
       }
-    }
+    },
+    "slug": "dusk-stone"
   },
   "_id": "bPMGEe7H5usId24x",
   "img": "systems/ptr2e/img/item-icons/dusk%20stone.webp",
-  "effects": [],
-  "flags": {}
+  "effects": []
 }

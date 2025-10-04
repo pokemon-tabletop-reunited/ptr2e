@@ -1,24 +1,13 @@
 {
+  "folder": "V4skAU6G3OH5fXab",
   "name": "Power Herb",
-  "type": "equipment",
+  "type": "consumable",
   "system": {
     "_migration": {
       "version": 0.111,
       "previous": null
     },
-    "slug": "power-herb",
-    "publication": {
-      "source": "",
-      "authors": [],
-      "notes": ""
-    },
-    "traits": [
-      "consumable",
-      "natural",
-      "held"
-    ],
     "actions": [],
-    "description": "<p>Trigger: the user declares a @Trait[set-up] Action. Effect: The user Sets Up and Resolves the triggering Action on the same Activation.</p>",
     "crafting": {
       "skill": "",
       "spans": null,
@@ -26,31 +15,41 @@
     },
     "equipped": {
       "carryType": "stowed",
-      "handsHeld": null,
-      "slot": "held"
+      "slot": "held",
+      "handsHeld": null
     },
-    "grade": "B",
+    "grade": "C",
     "fling": {
       "type": "untyped",
       "power": null,
       "accuracy": 100,
-      "hide": false
+      "hide": true,
+      "range": {
+        "target": "creature",
+        "distance": 10,
+        "unit": "m"
+      }
     },
     "quantity": 1,
-    "rarity": "uncommon",
-    "identification": {
-      "misidentified": null,
-      "status": "identified",
-      "unidentified": {
-        "name": "Unidentified Item",
-        "img": "systems/ptu/css/images/icons/gear_icon.png",
-        "description": "<p>Unidentified Item</p>"
-      }
-    }
+    "rarity": "common",
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "description": "<p>Trigger: the user declares a @Trait[set-up] <br><br>Action. Effect: The user Sets Up and Resolves the triggering Action on the same Activation.</p>",
+    "traits": [
+      "combat",
+      "consumable"
+    ],
+    "consumableType": "other",
+    "stack": 1,
+    "cost": 3
   },
-  "img": "systems/ptr2e/img/icons/equipment_icon.webp",
+  "img": "systems/ptr2e/img/item-icons/revival%20herb.webp",
   "effects": [],
-  "folder": "ZJQbcaoYaa7A40WO",
   "flags": {},
-  "_id": "t2v8HeuN04njgy8g"
+  "_id": "CvmappKRJmHZigt5"
 }

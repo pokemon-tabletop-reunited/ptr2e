@@ -60,7 +60,7 @@ export default class EffectRollChangeSystem extends ChangeModel {
   override apply(actor: ActorPTR2e): void {
     if (!this.actor) return;
 
-    const {selector, isCrit} = (() => {
+    const { selector, isCrit } = (() => {
       const selector = this.resolveInjectedProperties(this.selector)
       const isCrit = selector.endsWith("-crit");
       return {
@@ -82,7 +82,7 @@ export default class EffectRollChangeSystem extends ChangeModel {
     return async (params: DeferredValueParams = {}): Promise<EffectRoll | null> => {
       if (!this.actor) return null;
       if (!this.test(params.test ?? this.actor.getRollOptions())) return null;
-      
+
       const uuid = this.resolveInjectedProperties(this.uuid);
       if (!UUIDUtils.isItemUUID(uuid)) {
         this.failValidation(`"${uuid}" does not look like a UUID`);
@@ -107,9 +107,9 @@ export default class EffectRollChangeSystem extends ChangeModel {
     }
   }
 
-  protected async getItem(key: string): Promise<Maybe<ClientDocument>> {
+  public async getItem(key: string = this.resolveInjectedProperties(this.uuid)): Promise<Maybe<ClientDocument>> {
     try {
-      return (await fu.fromUuid(key))?.clone({}, {keepId: true}) ?? null;
+      return (await fu.fromUuid(key))?.clone({}, { keepId: true }) ?? null;
     } catch (error) {
       console.error(error);
       return null;

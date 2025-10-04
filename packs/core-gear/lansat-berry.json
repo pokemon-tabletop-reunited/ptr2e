@@ -5,7 +5,7 @@
   "system": {
     "cost": 3,
     "crafting": {
-      "skill": null,
+      "skill": "",
       "spans": null,
       "materials": []
     },
@@ -19,24 +19,21 @@
       "type": "untyped",
       "power": 10,
       "accuracy": 95,
-      "hide": null
+      "hide": false,
+      "range": {
+        "target": "creature",
+        "distance": 10,
+        "unit": "m"
+      }
     },
     "rarity": "common",
     "consumableType": "food",
     "traits": [
-      "restorative",
       "consumable",
       "natural",
-      "healing",
       "berry",
       "fling",
-      "held",
       "desperation-1-3",
-      "spicy-5",
-      "dry-1",
-      "sweet-5",
-      "bitter-1",
-      "sour-5",
       "combat"
     ],
     "description": "The user gains +2 CRIT Stage for 5 activations. This item can be retrieved from the Belt and consumed as a Free Action at @Trait[interrupt-2] when the user passes the Desperation threshold.",
@@ -51,10 +48,94 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
-    }
+      ],
+      "notes": ""
+    },
+    "actions": [
+      {
+        "name": "Lansat Berry",
+        "slug": "lansat-berry",
+        "description": "<p>The user gains +2 CRIT Stage for 5 activations. This item can be retrieved from the Belt and consumed as a Free Action at @Trait[interrupt-2] when the user passes the Desperation threshold.</p>",
+        "traits": [
+          "consumable",
+          "natural",
+          "berry",
+          "fling",
+          "desperation-1-3",
+          "combat"
+        ],
+        "type": "generic",
+        "img": "systems/ptr2e/img/item-icons/lansat berry.webp",
+        "cost": {
+          "activation": "simple"
+        },
+        "range": {
+          "target": "creature",
+          "distance": 10,
+          "unit": "m"
+        }
+      }
+    ]
   },
   "_id": "AgCXb9WF6mj9Lgmk",
-  "effects": [],
+  "effects": [
+    {
+      "name": "Lansat Berry",
+      "type": "passive",
+      "_id": "smFWojHj6mGaHkV7",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "lansat-berry-generic",
+            "value": "Compendium.ptr2e.core-effects.Item.rvtuxXa3K37260Rb",
+            "predicate": [],
+            "chance": 100,
+            "isFixedChance": false,
+            "affects": "target",
+            "alterations": [],
+            "dontMerge": false,
+            "mode": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.348",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.4.beta",
+        "createdTime": 1758642303777,
+        "modifiedTime": 1758642333327,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+      }
+    }
+  ],
   "folder": "yR1GFstYOCdI2jOz"
 }
