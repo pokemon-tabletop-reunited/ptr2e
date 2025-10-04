@@ -5,7 +5,7 @@
   "system": {
     "cost": 4,
     "crafting": {
-      "skill": null,
+      "skill": "",
       "spans": null,
       "materials": []
     },
@@ -19,23 +19,20 @@
       "type": "untyped",
       "power": 10,
       "accuracy": 95,
-      "hide": null
+      "hide": false,
+      "range": {
+        "target": "creature",
+        "distance": 10,
+        "unit": "m"
+      }
     },
     "rarity": "uncommon",
     "consumableType": "food",
     "traits": [
-      "restorative",
       "consumable",
       "natural",
-      "healing",
       "berry",
       "fling",
-      "held",
-      "spicy-5",
-      "dry-5",
-      "sweet-1",
-      "bitter-1",
-      "sour-1",
       "combat"
     ],
     "description": "Effect: When the user is damaged by a Physical-Category attack, this item can be retrieved from the Belt and consumed as a Free Action at @Trait[interrupt-2], giving the user +2 DEF Stages for 5 Activations.",
@@ -50,10 +47,92 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
-    }
+      ],
+      "notes": ""
+    },
+    "actions": [
+      {
+        "name": "Kee Berry",
+        "slug": "kee-berry",
+        "description": "<p>Effect: When the user is damaged by a Physical-Category attack, this item can be retrieved from the Belt and consumed as a Free Action at @Trait[interrupt-2], giving the user +2 DEF Stages for 5 Activations.</p>",
+        "traits": [
+          "consumable",
+          "natural",
+          "berry",
+          "fling",
+          "combat"
+        ],
+        "type": "generic",
+        "img": "systems/ptr2e/img/item-icons/kee berry.webp",
+        "cost": {
+          "activation": "simple"
+        },
+        "range": {
+          "target": "self",
+          "unit": "m"
+        }
+      }
+    ]
   },
   "_id": "LYDa6xK9rhu0MNdT",
-  "effects": [],
+  "effects": [
+    {
+      "name": "Kee Berry",
+      "type": "passive",
+      "_id": "8L5kXU3lnd61lfw9",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "kee-berry-generic",
+            "value": "Compendium.ptr2e.core-effects.Item.DYJyYbH3EVwM4P90",
+            "predicate": [],
+            "chance": 100,
+            "isFixedChance": false,
+            "affects": "target",
+            "alterations": [],
+            "dontMerge": false,
+            "mode": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.348",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.4.beta",
+        "createdTime": 1758642175116,
+        "modifiedTime": 1758642198708,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+      }
+    }
+  ],
   "folder": "yR1GFstYOCdI2jOz"
 }

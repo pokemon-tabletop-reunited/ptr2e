@@ -27,11 +27,9 @@
         "types": [
           "electric"
         ],
-        "description": "<p>Effect: On hit, the user has a 70% chance of gaining +1 SPATK Stage for 5 Activations.</p>",
-        "contestType": "",
-        "contestEffect": "",
-        "free": false,
-        "slot": null
+        "description": "<p>Effect: On resolution, the user has a 70% chance of gaining +1 SPATK Stage for 5 Activations.</p>",
+        "img": "systems/ptr2e/img/svg/electric_icon.svg",
+        "predicate": []
       }
     ],
     "grade": "E",
@@ -43,8 +41,10 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
-    }
+      ],
+      "notes": ""
+    },
+    "traits": []
   },
   "_id": "q61qNu184LoCq0DQ",
   "effects": [
@@ -64,7 +64,10 @@
             "affects": "self",
             "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "isFixedChance": false,
+            "alterations": [],
+            "dontMerge": false
           }
         ],
         "slug": null,
@@ -74,7 +77,9 @@
         "stacks": 0,
         "priority": 50,
         "formula": "",
-        "type": "damage"
+        "type": "damage",
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
@@ -96,12 +101,13 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.348",
         "systemId": "ptr2e",
         "systemVersion": "0.10.0-alpha.2.2.1",
         "createdTime": 1726154092790,
         "modifiedTime": 1726154126650,
-        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
+        "lastModifiedBy": "Kc3DOunCh3ClAeHS",
+        "exportSource": null
       }
     }
   ]

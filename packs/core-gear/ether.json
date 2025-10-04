@@ -31,15 +31,13 @@
     "traits": [
       "stack-3",
       "combat",
-      "held",
       "restorative",
-      "consumable",
-      "healing"
+      "consumable"
     ],
     "description": "<p>The target is healed @PP[5].</p>",
     "quantity": 1,
     "slug": "ether",
-    "stack": 1,
+    "stack": 3,
     "_migration": {
       "version": null,
       "previous": null
@@ -50,9 +48,101 @@
         "PTR 2e Team"
       ],
       "notes": ""
-    }
+    },
+    "actions": [
+      {
+        "name": "Ether",
+        "slug": "ether",
+        "description": "<p>The target recovers @PP[5].</p>",
+        "traits": [
+          "stack-3",
+          "combat",
+          "restorative",
+          "consumable"
+        ],
+        "type": "generic",
+        "img": "systems/ptr2e/img/item-icons/ether.webp",
+        "cost": {
+          "activation": "simple"
+        },
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        }
+      }
+    ]
   },
   "_id": "UGTXYL1GX6QLUfM5",
-  "effects": [],
+  "effects": [
+    {
+      "name": "Ether",
+      "type": "passive",
+      "_id": "RyVoE01nh7JpzY4y",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "ether-generic",
+            "value": "Compendium.ptr2e.core-effects.Item.LHUTMAC0nCJWDRFt",
+            "predicate": [],
+            "chance": 100,
+            "isFixedChance": true,
+            "affects": "target",
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "system.changes.0.isFlat",
+                "value": "true"
+              },
+              {
+                "mode": 5,
+                "property": "system.changes.0.value",
+                "value": 5
+              }
+            ],
+            "dontMerge": false,
+            "mode": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.348",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.4.beta",
+        "createdTime": 1758620092942,
+        "modifiedTime": 1758620144873,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+      }
+    }
+  ],
   "folder": "srQci2ThhRKdmC6g"
 }

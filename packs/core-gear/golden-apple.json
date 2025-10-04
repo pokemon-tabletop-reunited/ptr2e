@@ -4,7 +4,7 @@
   "type": "consumable",
   "system": {
     "crafting": {
-      "skill": null,
+      "skill": "",
       "spans": null,
       "materials": []
     },
@@ -13,12 +13,17 @@
       "carryType": "stowed",
       "handsHeld": null
     },
-    "grade": "B",
+    "grade": "S",
     "fling": {
       "type": "grass",
       "power": 40,
       "accuracy": 95,
-      "hide": null
+      "hide": false,
+      "range": {
+        "target": "creature",
+        "distance": 10,
+        "unit": "m"
+      }
     },
     "rarity": "rare",
     "consumableType": "food",
@@ -29,9 +34,10 @@
       "healing",
       "food",
       "held",
-      "fling"
+      "fling",
+      "mystery-dungeon"
     ],
-    "description": "The target has their Max PP increased by 25% (rounded up) until the next Rest, is healed up to their Max PP, and is cured of 3 @Affliction[weary].",
+    "description": "<p>The user recovers @Tick[16 pp] and increases their Maximum PP by 5.</p>",
     "quantity": 1,
     "slug": "golden-apple",
     "stack": 1,
@@ -43,8 +49,10 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
-    }
+      ],
+      "notes": ""
+    },
+    "actions": []
   },
   "_id": "KDFRnG4WVB3As6N3",
   "effects": [],

@@ -11,33 +11,16 @@
         "slug": "run-down",
         "description": "<p>Trigger: The user successfully hits an opponent with an attack.<br><br>Effect: The user may spend 3 PP to gain +1 SPD stage for 5 activations as a Free Action at [Interrupt 2].</p>",
         "traits": [],
-        "type": "attack",
+        "type": "generic",
         "range": {
           "target": "self",
-          "unit": "m",
-          "distance": 0
+          "unit": "m"
         },
         "cost": {
           "activation": "free",
-          "powerPoints": 2
+          "powerPoints": 3
         },
-        "img": "systems/ptr2e/img/perk-icons/Cavalier.svg",
-        "types": [
-          "untyped"
-        ],
-        "category": "status",
-        "free": true,
-        "predicate": [],
-        "variant": null,
-        "ephemeralVariant": false,
-        "contestType": "",
-        "contestEffect": "",
-        "slot": null,
-        "summon": null,
-        "defaultVariant": null,
-        "flingItemId": "",
-        "offensiveStat": null,
-        "defensiveStat": null
+        "img": "systems/ptr2e/img/perk-icons/Cavalier.svg"
       }
     ],
     "slug": "run-down",
@@ -88,10 +71,7 @@
         "PTR 2e Team"
       ],
       "notes": ""
-    },
-    "originSlug": null,
-    "variant": null,
-    "mode": null
+    }
   },
   "effects": [
     {
@@ -103,23 +83,26 @@
         "changes": [
           {
             "type": "roll-effect",
-            "key": "run-down-attack",
+            "key": "run-down-generic",
             "value": "Compendium.ptr2e.core-effects.Item.XeiSuS3APUcN0MLM",
             "predicate": [],
             "chance": 100,
             "affects": "self",
-            "mode": 2,
             "priority": null,
-            "ignored": false,
             "alterations": [],
-            "dontMerge": false
+            "dontMerge": false,
+            "isFixedChance": true,
+            "mode": 2,
+            "ignored": false
           }
         ],
         "slug": null,
         "traits": [],
         "removeAfterCombat": true,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
@@ -137,16 +120,20 @@
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "flags": {},
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "13.342",
+        "coreVersion": "13.348",
         "systemId": "ptr2e",
-        "systemVersion": "0.10.0-alpha.5.2.1",
+        "systemVersion": "1.4.4.beta",
         "createdTime": 1737935246436,
-        "modifiedTime": 1737935273361,
-        "lastModifiedBy": "mK35yvCqCgiTUvKf",
+        "modifiedTime": 1758394785878,
+        "lastModifiedBy": "Kc3DOunCh3ClAeHS",
         "exportSource": null
       }
     }

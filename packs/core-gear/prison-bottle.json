@@ -9,7 +9,7 @@
       "materials": []
     },
     "equipped": {
-      "slot": "belt",
+      "slot": "accessory",
       "carryType": "stowed",
       "handsHeld": null
     },
@@ -18,7 +18,12 @@
       "type": "untyped",
       "power": null,
       "accuracy": 100,
-      "hide": false
+      "hide": true,
+      "range": {
+        "target": "creature",
+        "distance": 10,
+        "unit": "m"
+      }
     },
     "rarity": "unique",
     "traits": [
@@ -37,7 +42,8 @@
         ],
         "range": {
           "target": "creature",
-          "unit": "m"
+          "unit": "m",
+          "distance": 10
         },
         "cost": {
           "activation": "complex"
@@ -65,7 +71,8 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
+      ],
+      "notes": ""
     }
   },
   "_id": "BTl38IL09UA64VQR",

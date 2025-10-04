@@ -1,15 +1,15 @@
 {
   "name": "Zenith Core",
-  "img": "systems/ptr2e/img/icons/equipment_icon.webp",
+  "img": "systems/ptr2e/img/item-icons/ultranecrozium%20z.webp",
   "type": "equipment",
   "system": {
     "crafting": {
-      "skill": null,
+      "skill": "",
       "spans": null,
       "materials": []
     },
     "equipped": {
-      "slot": "held",
+      "slot": "slotless",
       "carryType": "stowed",
       "handsHeld": null
     },
@@ -18,12 +18,16 @@
       "type": "untyped",
       "power": null,
       "accuracy": 100,
-      "hide": null
+      "hide": true,
+      "range": {
+        "target": "creature",
+        "distance": 10,
+        "unit": "m"
+      }
     },
     "rarity": "unique",
     "traits": [
       "phenomenon",
-      "slottable",
       "charge-pool-1"
     ],
     "actions": [
@@ -70,7 +74,7 @@
         "img": "icons/svg/explosion.svg"
       }
     ],
-    "description": "Effect: The user may utilize a charge from this Item to pay the PP Cost of the user's Z-Pose! and the [Zenith] Move triggered by it.",
+    "description": "<p>Effect: The user may utilize a charge from this Item to pay the PP Cost of the user's Z-Pose! and the @Trait[zenith] Move triggered by it.</p>",
     "slug": "zenith-core",
     "quantity": 1,
     "identification": {
@@ -90,10 +94,11 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
+      ],
+      "notes": ""
     }
   },
   "_id": "TABUqtAKU3zTmqkn",
   "effects": [],
-  "folder": "PGpYU7mfnRpzOZSm"
+  "folder": "V4skAU6G3OH5fXae"
 }

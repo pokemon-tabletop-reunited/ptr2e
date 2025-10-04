@@ -1,0 +1,119 @@
+{
+  "folder": "MKaFm5Pvt7tvgdAa",
+  "name": "Taser Club",
+  "type": "weapon",
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "Fox"
+      ],
+      "notes": ""
+    },
+    "traits": [
+      "sci-fi",
+      "modern",
+      "weapon",
+      "bludgeon",
+      "electric",
+      "contact"
+    ],
+    "actions": [
+      {
+        "name": "Volt Jolt",
+        "slug": "volt-jolt",
+        "description": "<p>This attack can cause sporadic muscle twitches. It has a 30% chance to inflict @Affliction[tased] 5</p>",
+        "traits": [
+          "weapon",
+          "electric",
+          "contact"
+        ],
+        "type": "attack",
+        "img": "systems/ptr2e/img/icons/weapon_icon.webp",
+        "range": {
+          "target": "enemy",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 2
+        },
+        "types": [
+          "electric"
+        ],
+        "category": "physical",
+        "power": 80,
+        "accuracy": 90,
+        "free": true,
+        "predicate": []
+      },
+      {
+        "name": "Capture Prod",
+        "slug": "capture-prod",
+        "description": "<p>The Capture Prod attack has a 30% chance to inflict Paralysis, and cannot reduce the target's HP below 1.</p>",
+        "traits": [
+          "weapon",
+          "electric",
+          "contact"
+        ],
+        "type": "attack",
+        "img": "systems/ptr2e/img/icons/weapon_icon.webp",
+        "range": {
+          "target": "enemy",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 2
+        },
+        "types": [
+          "electric"
+        ],
+        "category": "physical",
+        "power": 100,
+        "accuracy": 80,
+        "free": true,
+        "predicate": []
+      }
+    ],
+    "description": "<p>Taser Clubs tend to be used for violent but nonlethal suppression by law enforcement units.</p>",
+    "crafting": {
+      "skill": "",
+      "spans": null,
+      "materials": []
+    },
+    "equipped": {
+      "carryType": "stowed",
+      "handsHeld": null,
+      "slot": "held"
+    },
+    "grade": "C",
+    "fling": {
+      "type": "electric",
+      "power": null,
+      "accuracy": 100,
+      "hide": false
+    },
+    "quantity": 1,
+    "rarity": "uncommon",
+    "identification": {
+      "misidentified": null,
+      "status": "identified",
+      "unidentified": {
+        "name": "Unidentified Item",
+        "img": "systems/ptu/css/images/icons/gear_icon.png",
+        "description": "<p>Unidentified Item</p>"
+      }
+    }
+  },
+  "img": "systems/ptr2e/img/icons/weapon_icon.webp",
+  "effects": [],
+  "flags": {},
+  "_id": "LSbokvEI2j3nTdO1"
+}
