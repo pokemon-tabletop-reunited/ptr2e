@@ -1,0 +1,129 @@
+{
+  "folder": "V4skAU6G3OH5fXab",
+  "name": "Adrenaline Orb",
+  "type": "consumable",
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "actions": [
+      {
+        "name": "Adrenaline Orb",
+        "slug": "adrenaline-orb",
+        "description": "<p>Trigger: The user gains @Affliction[fear] or falls below the @Trait[desperation-1-3] threshold.<br><br>Effect: The user gains @UUID[Compendium.ptr2e.core-effects.XeiSuS3APUcN0MLM]{+1 Speed Stage} for 5 activations.</p>",
+        "traits": [
+          "consumable",
+          "combat"
+        ],
+        "type": "generic",
+        "img": "systems/ptr2e/img/icons/consumable_icon.webp",
+        "cost": {
+          "activation": "free"
+        },
+        "range": {
+          "target": "self",
+          "unit": "m"
+        }
+      }
+    ],
+    "crafting": {
+      "skill": "",
+      "spans": null,
+      "materials": []
+    },
+    "equipped": {
+      "carryType": "stowed",
+      "slot": "held",
+      "handsHeld": null
+    },
+    "grade": "C",
+    "fling": {
+      "type": "untyped",
+      "power": null,
+      "accuracy": 100,
+      "hide": true,
+      "range": {
+        "target": "creature",
+        "distance": 10,
+        "unit": "m"
+      }
+    },
+    "quantity": 1,
+    "rarity": "common",
+    "publication": {
+      "source": "",
+      "authors": [],
+      "notes": ""
+    },
+    "slug": "adrenaline-orb-rework",
+    "description": "<p>Trigger: The user gains @Affliction[fear] or falls below the @Trait[desperation-1-3] threshold.<br><br>Effect: The user gains @UUID[Compendium.ptr2e.core-effects.XeiSuS3APUcN0MLM]{+1 Speed Stage} for 5 activations.</p>",
+    "traits": [
+      "consumable",
+      "combat"
+    ],
+    "consumableType": "other",
+    "stack": 1,
+    "cost": 3
+  },
+  "img": "systems/ptr2e/img/icons/consumable_icon.webp",
+  "effects": [
+    {
+      "name": "Adrenaline Orb",
+      "type": "passive",
+      "_id": "KnEdZ2Jb07zGGAj5",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "adrenaline-orb-generic",
+            "value": "Compendium.ptr2e.core-effects.Item.XeiSuS3APUcN0MLM",
+            "predicate": [],
+            "chance": 100,
+            "isFixedChance": false,
+            "affects": "target",
+            "alterations": [],
+            "dontMerge": false,
+            "mode": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.350",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.5.beta",
+        "lastModifiedBy": null
+      }
+    }
+  ],
+  "flags": {},
+  "_id": "HyFQWSAl5NQIGjs5"
+}
