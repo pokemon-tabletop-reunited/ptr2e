@@ -4,12 +4,12 @@
   "type": "equipment",
   "system": {
     "crafting": {
-      "skill": null,
+      "skill": "",
       "spans": null,
       "materials": []
     },
     "equipped": {
-      "slot": "held",
+      "slot": "accessory",
       "carryType": "stowed",
       "handsHeld": null
     },
@@ -18,7 +18,12 @@
       "type": "untyped",
       "power": null,
       "accuracy": 100,
-      "hide": null
+      "hide": false,
+      "range": {
+        "target": "creature",
+        "distance": 10,
+        "unit": "m"
+      }
     },
     "rarity": "uncommon",
     "traits": [
@@ -35,7 +40,8 @@
         ],
         "range": {
           "target": "creature",
-          "unit": "m"
+          "unit": "m",
+          "distance": 10
         },
         "cost": {
           "activation": "complex",
@@ -44,7 +50,7 @@
         "img": "icons/svg/explosion.svg"
       }
     ],
-    "description": "Trigger: The user declares an attack on a creature that acted before the user's first activation this Round.\nEffect: The triggering attack's Accuracy is increased by +20.",
+    "description": "<p>Passive: The user gains @UUID[Compendium.ptr2e.core-effects.iv1l5qSwT9ykajV0]{+1 Accuracy Stage} on attacks that are suffering from Range Increment Penalty.</p>",
     "slug": "zoom-lens",
     "quantity": 1,
     "identification": {
@@ -64,7 +70,8 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
+      ],
+      "notes": ""
     }
   },
   "_id": "JsNiU25tyqQ4rtgc",

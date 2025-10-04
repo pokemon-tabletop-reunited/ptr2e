@@ -22,18 +22,24 @@
       "type": "untyped",
       "power": 0,
       "accuracy": 95,
-      "hide": null
+      "hide": false,
+      "range": {
+        "target": "creature",
+        "distance": 10,
+        "unit": "m"
+      }
     },
-    "rarity": "common",
+    "rarity": "uncommon",
     "consumableType": "pokeball",
     "traits": [
       "stack-5",
       "belt",
       "fling",
-      "type-ball"
+      "type-ball",
+      "ball"
     ],
-    "description": "4x Catch Rate modifier if used on a Flying- or Ice-Type creature. 1x Catch Rate modifier otherwise.",
-    "modifier": 4,
+    "description": "<p>3x Catch Rate modifier if used on a Flying- or Ice-Type creature. 1x Catch Rate modifier otherwise.</p>",
+    "modifier": 3,
     "quantity": 1,
     "slug": "air-ball",
     "stack": 5,
@@ -45,8 +51,10 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
-    }
+      ],
+      "notes": ""
+    },
+    "actions": []
   },
   "_id": "Y1dSMzWwPG9gKM6v",
   "effects": [],

@@ -1,5 +1,5 @@
 {
-  "folder": "6VDJBcrqVDh5bYtA",
+  "folder": "V4skAU6G3OH5fXae",
   "name": "Electirizer",
   "type": "equipment",
   "system": {
@@ -10,15 +10,15 @@
     "slug": "electirizer",
     "traits": [
       "combat",
-      "type",
-      "dragon",
       "evolution",
       "elekid",
       "electabuzz",
-      "electivire"
+      "electivire",
+      "accessory",
+      "electric"
     ],
     "actions": [],
-    "description": "<p>A box packed with a tremendous amount of electric energy that boosts the power of Electric-type moves. It's loved by a certain Pokémon.</p><p></p><p>Effect: Increases the Power and Accuracy of attacks by 10%</p>",
+    "description": "<p>Effect: The user spends 20% fewer PP (minimum 1) with Electric-Type Attacks. Elekid, Electabuzz, and Electivire deal 20% more damage with Physical-Category Attacks.<br><br>An Electabuzz may consume this to trigger Evolution.</p>",
     "crafting": {
       "skill": "",
       "spans": null,
@@ -29,12 +29,17 @@
       "handsHeld": null,
       "slot": "accessory"
     },
-    "grade": "C",
+    "grade": "B",
     "fling": {
       "type": "electric",
-      "power": 70,
-      "accuracy": 100,
-      "hide": false
+      "power": 85,
+      "accuracy": 85,
+      "hide": false,
+      "range": {
+        "target": "creature",
+        "distance": 10,
+        "unit": "m"
+      }
     },
     "quantity": 1,
     "rarity": "rare",
@@ -51,37 +56,43 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
+      ],
+      "notes": ""
     }
   },
-  "img": "systems/ptr2e/img/icons/equipment_icon.webp",
+  "img": "systems/ptr2e/img/item-icons/electirizer.webp",
   "effects": [
     {
-      "name": "Type Booster (Electric)",
+      "name": "Electirizer",
       "type": "passive",
-      "_id": "V5UzPKOtLcBPEYkI",
+      "_id": "kaMSShHKWD5a2PKU",
       "img": "systems/ptr2e/img/icons/effect_icon.webp",
       "system": {
         "changes": [
           {
-            "type": "percentile-modifier",
-            "key": "electric-attack-power",
-            "value": 10,
+            "type": "alter-attack",
+            "key": "electric-attack",
+            "value": -1,
             "predicate": [],
-            "label": "Type Booster (Electric) Power",
             "mode": 2,
-            "priority": null,
             "ignored": false,
-            "hideIfDisabled": false
+            "property": "pp-cost",
+            "definition": []
           },
           {
             "type": "percentile-modifier",
-            "key": "electric-attack-accuracy",
-            "value": 10,
-            "predicate": [],
-            "label": "Type Booster (Electric)",
+            "key": "physical-attack-damage",
+            "value": 20,
+            "predicate": [
+              {
+                "or": [
+                  "item:species:elekid",
+                  "item:species:electabuzz",
+                  "item:species:electivire"
+                ]
+              }
+            ],
             "mode": 2,
-            "priority": null,
             "ignored": false,
             "hideIfDisabled": false
           }
@@ -90,17 +101,14 @@
         "traits": [],
         "removeAfterCombat": true,
         "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
         "stacks": 0
       },
       "disabled": false,
       "duration": {
         "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "combat": null
       },
       "description": "",
       "origin": null,
@@ -108,16 +116,21 @@
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "flags": {},
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
       "_stats": {
-        "compendiumSource": "Compendium.ptr2e.core-gear.Item.JhU4x5wZQlVuqvfz.ActiveEffect.pMVRnjGSvrhLNVtr",
+        "compendiumSource": "Compendium.ptr2e.core-gear.Item.zQRQn1X9bw5xOApv.ActiveEffect.kaMSShHKWD5a2PKU",
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "exportSource": null,
+        "coreVersion": "13.348",
         "systemId": "ptr2e",
-        "systemVersion": "1.0.6.beta",
-        "createdTime": 1740097221555,
-        "modifiedTime": 1740097221555,
-        "lastModifiedBy": "QJgrK2D5gkPoparS"
+        "systemVersion": "1.4.4.beta",
+        "createdTime": 1758626477212,
+        "modifiedTime": 1758626685927,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
       }
     }
   ],

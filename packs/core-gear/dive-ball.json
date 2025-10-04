@@ -22,7 +22,12 @@
       "type": "untyped",
       "power": 0,
       "accuracy": 95,
-      "hide": null
+      "hide": false,
+      "range": {
+        "target": "creature",
+        "distance": 10,
+        "unit": "m"
+      }
     },
     "rarity": "uncommon",
     "consumableType": "pokeball",
@@ -30,10 +35,11 @@
       "stack-5",
       "belt",
       "fling",
-      "training-ball"
+      "training-ball",
+      "ball"
     ],
-    "description": "8x Catch Rate modifer if used on a target that is Swimming. 1x Catch Rate modifer otherwise. This Ball can target creatures 4m underwater from the user.",
-    "modifier": 8,
+    "description": "<p>3.5x Catch Rate modifer if used on a target that is Swimming. 1x Catch Rate modifer otherwise. Water can't provide Cover against Dive Balls.</p>",
+    "modifier": 3.5,
     "quantity": 1,
     "slug": "dive-ball",
     "stack": 5,
@@ -45,8 +51,10 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
-    }
+      ],
+      "notes": ""
+    },
+    "actions": []
   },
   "_id": "1RAmn9H3LSZCk4X2",
   "effects": [],

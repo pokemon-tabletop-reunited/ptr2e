@@ -16,10 +16,10 @@
     },
     "traits": [
       "combat",
-      "held"
+      "accessory"
     ],
     "actions": [],
-    "description": "<p>Effect: The user is unaffected by negative @Trait[stage-change] effects originating from other creatures.</p>",
+    "description": "<p>Connected Ability: @UUID[Compendium.ptr2e.core-abilities.mPXwSVDLwuQlSIoH]{Clear Body}</p>",
     "crafting": {
       "skill": "",
       "spans": null,
@@ -35,7 +35,12 @@
       "type": "rock",
       "power": 45,
       "accuracy": 90,
-      "hide": false
+      "hide": false,
+      "range": {
+        "target": "creature",
+        "distance": 10,
+        "unit": "m"
+      }
     },
     "quantity": 1,
     "rarity": "rare",
@@ -52,6 +57,5 @@
   "img": "systems/ptr2e/img/icons/equipment_icon.webp",
   "effects": [],
   "folder": "6VDJBcrqVDh5bYtA",
-  "flags": {},
   "_id": "yhhLPmBzlk5SJWwH"
 }

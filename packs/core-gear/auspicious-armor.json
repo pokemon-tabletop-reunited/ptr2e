@@ -28,14 +28,19 @@
     "equipped": {
       "carryType": "equipped",
       "handsHeld": null,
-      "slot": "held"
+      "slot": "worn"
     },
     "grade": "A",
     "fling": {
       "type": "psychic",
       "power": 65,
       "accuracy": 85,
-      "hide": false
+      "hide": false,
+      "range": {
+        "target": "creature",
+        "distance": 10,
+        "unit": "m"
+      }
     },
     "quantity": 1,
     "rarity": "rare",
@@ -107,7 +112,9 @@
         "traits": [],
         "removeAfterCombat": true,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
@@ -129,12 +136,13 @@
       "_stats": {
         "compendiumSource": "Item.H8Jyu9wupiygpqxO.ActiveEffect.KDfvrk0ejLb9PQUP",
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.348",
         "systemId": "ptr2e",
         "systemVersion": "0.10.0-alpha.5.2.1",
         "createdTime": null,
         "modifiedTime": null,
-        "lastModifiedBy": null
+        "lastModifiedBy": null,
+        "exportSource": null
       }
     }
   ],

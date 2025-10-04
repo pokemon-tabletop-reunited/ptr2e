@@ -1,11 +1,11 @@
 {
   "name": "Hunger Seed",
-  "img": "systems/ptr2e/img/icons/consumable_icon.webp",
+  "img": "systems/ptr2e/img/item-icons/miracle%20seed.webp",
   "type": "consumable",
   "system": {
     "cost": 3,
     "crafting": {
-      "skill": null,
+      "skill": "",
       "spans": null,
       "materials": []
     },
@@ -19,20 +19,19 @@
       "type": "untyped",
       "power": 0,
       "accuracy": 90,
-      "hide": null
+      "hide": false,
+      "range": {
+        "target": "creature",
+        "distance": 10,
+        "unit": "m"
+      }
     },
     "rarity": "uncommon",
     "consumableType": "other",
     "traits": [
-      "consumable",
-      "natural",
-      "fling",
-      "seed",
-      "held",
-      "stack-3",
-      "fling"
+      "consumable"
     ],
-    "description": "On hit, the target loses 10 PP.",
+    "description": "<p>On hit, the target loses @Tick[-3 pp].</p>",
     "quantity": 1,
     "slug": "hunger-seed",
     "stack": 1,
@@ -44,10 +43,104 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
-    }
+      ],
+      "notes": ""
+    },
+    "actions": [
+      {
+        "name": "Hunger Seed",
+        "slug": "hunger-seed",
+        "description": "<p>On hit, the target loses @Tick[-3 pp].</p>",
+        "traits": [
+          "consumable",
+          "natural",
+          "seed",
+          "stack-3"
+        ],
+        "type": "attack",
+        "img": "systems/ptr2e/img/item-icons/miracle%20seed.webp",
+        "range": {
+          "target": "creature",
+          "distance": 10,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "simple"
+        },
+        "types": [
+          "untyped"
+        ],
+        "category": "status",
+        "predicate": [],
+        "accuracy": 100
+      }
+    ]
   },
   "_id": "fm6NCTfdvGCPj8LX",
-  "effects": [],
+  "effects": [
+    {
+      "name": "Hunger Seed",
+      "type": "passive",
+      "_id": "mPUMn8YHZ98dt2H5",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "hunger-seed-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.LHUTMAC0nCJWDRFt",
+            "predicate": [],
+            "chance": 100,
+            "isFixedChance": false,
+            "affects": "target",
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "system.changes.0.value",
+                "value": -3
+              }
+            ],
+            "dontMerge": false,
+            "mode": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.348",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.4.beta",
+        "createdTime": 1759154851269,
+        "modifiedTime": 1759154892365,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+      }
+    }
+  ],
   "folder": "4MbEHvhwmG5DYTkB"
 }

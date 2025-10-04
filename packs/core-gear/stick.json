@@ -4,7 +4,7 @@
   "type": "consumable",
   "system": {
     "crafting": {
-      "skill": null,
+      "skill": "",
       "spans": null,
       "materials": []
     },
@@ -18,12 +18,16 @@
       "type": "grass",
       "power": 20,
       "accuracy": 100,
-      "hide": null
+      "hide": false,
+      "range": {
+        "target": "creature",
+        "distance": 10,
+        "unit": "m"
+      }
     },
     "rarity": "common",
     "traits": [
       "weapon",
-      "pierce",
       "stack-10",
       "grass",
       "fling"
@@ -40,8 +44,10 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
-    }
+      ],
+      "notes": ""
+    },
+    "actions": []
   },
   "_id": "e9GJnXED87lLyJ2t",
   "effects": [],
