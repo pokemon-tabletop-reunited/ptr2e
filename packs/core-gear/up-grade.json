@@ -9,16 +9,12 @@
     },
     "slug": "up-grade",
     "traits": [
-      "combat",
-      "type",
-      "normal",
-      "evolution",
-      "porygon",
-      "porygon2",
-      "porygon-z"
+      "accessory",
+      "held",
+      "evolution"
     ],
     "actions": [],
-    "description": "<p>A transparent device somehow filled with all sorts of data that boosts the power of Normal-type moves. It's loved by a certain Pokémon.</p><p></p><p>Effect: Increases the Power and Accuracy of attacks by 10%.</p>",
+    "description": "<p>Effect: The @Trait[digital] user’s ATK, DEF, SPATK, and SPDEF are increased by +10%, and the user is @Affliction[advance 5] at the end of their Activations.@Trait[electric-soldier] creatures have these effects doubled.<br><br>A Porygon can consume this item to trigger evolution.</p>",
     "crafting": {
       "skill": "",
       "spans": null,
@@ -32,12 +28,17 @@
     "grade": "C",
     "fling": {
       "type": "normal",
-      "power": 55,
-      "accuracy": 100,
-      "hide": false
+      "power": 60,
+      "accuracy": 90,
+      "hide": false,
+      "range": {
+        "target": "creature",
+        "distance": 6,
+        "unit": "m"
+      }
     },
     "quantity": 1,
-    "rarity": "rare",
+    "rarity": "uncommon",
     "identification": {
       "misidentified": null,
       "status": "identified",
@@ -51,10 +52,11 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
+      ],
+      "notes": ""
     }
   },
-  "img": "systems/ptr2e/img/icons/equipment_icon.webp",
+  "img": "systems/ptr2e/img/item-icons/up-grade.webp",
   "effects": [
     {
       "name": "Type Booster (Normal)",
@@ -90,7 +92,9 @@
         "traits": [],
         "removeAfterCombat": true,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
@@ -112,12 +116,13 @@
       "_stats": {
         "compendiumSource": "Compendium.ptr2e.core-gear.Item.JhU4x5wZQlVuqvfz.ActiveEffect.pMVRnjGSvrhLNVtr",
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.350",
         "systemId": "ptr2e",
         "systemVersion": "1.0.3.beta",
         "createdTime": null,
         "modifiedTime": null,
-        "lastModifiedBy": null
+        "lastModifiedBy": null,
+        "exportSource": null
       }
     }
   ],

@@ -7,9 +7,13 @@
       "version": 0.11,
       "previous": null
     },
-    "traits": [],
+    "traits": [
+      "accessory",
+      "held",
+      "evolution"
+    ],
     "actions": [],
-    "description": "<p>The Black Augurite resonates with Scyther to trigger evolution. Beyond that, it is simply a rare stone.</p>",
+    "description": "<p>Effect: The user’s @Trait[contact] Attacks have a 10% chance to inflict @Affliction[splinter 5] on hit, and those @Trait[contact] Move that also have @Trait[sharp] instead have 30%.<br><br>A Scyther may consume this item in order to trigger Evolution.</p>",
     "crafting": {
       "skill": "",
       "spans": null,
@@ -22,10 +26,15 @@
     },
     "grade": "C",
     "fling": {
-      "type": "bug",
-      "power": 60,
-      "accuracy": 100,
-      "hide": false
+      "type": "rock",
+      "power": 110,
+      "accuracy": 80,
+      "hide": false,
+      "range": {
+        "target": "creature",
+        "distance": 4,
+        "unit": "m"
+      }
     },
     "quantity": 1,
     "rarity": "rare",
@@ -42,11 +51,12 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
-    }
+      ],
+      "notes": ""
+    },
+    "slug": "black-augurite"
   },
   "_id": "YRVve7S4P4kGJcvK",
   "img": "systems/ptr2e/img/icons/gear_icon.webp",
-  "effects": [],
-  "flags": {}
+  "effects": []
 }
