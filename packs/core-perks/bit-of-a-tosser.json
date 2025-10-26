@@ -1,0 +1,120 @@
+{
+  "name": "Bit Of A Tosser",
+  "_id": "hiK7fqYYnsT7ThJP",
+  "type": "perk",
+  "img": "icons/skills/ranged/shuriken-thrown-orange.webp",
+  "effects": [
+    {
+      "name": "Bit Of A Tosser",
+      "type": "passive",
+      "_id": "CdI0SHtobHxq9Srl",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "fling-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.delayconditiitem",
+            "predicate": [],
+            "chance": 30,
+            "isFixedChance": false,
+            "affects": "target",
+            "alterations": [
+              {
+                "mode": 2,
+                "property": "",
+                "value": 0
+              }
+            ],
+            "dontMerge": true,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "flat-modifier",
+            "key": "fling-trait-attack-damage",
+            "value": 5,
+            "predicate": [],
+            "mode": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
+      "_stats": {
+        "compendiumSource": "Actor.tGa5Upvillhew3kv.Item.okq5vNnqfxQRj5A7.ActiveEffect.RtKFuVw7jRDYWvMG",
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.350",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.6.beta",
+        "createdTime": 1759897005106,
+        "modifiedTime": 1761507916526,
+        "lastModifiedBy": "HXJQDBwSD1R41BZS"
+      }
+    }
+  ],
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "publication": {
+      "source": "PTR2e Core",
+      "authors": [
+        "Dragoon"
+      ],
+      "notes": ""
+    },
+    "actions": [],
+    "slug": "bit-of-a-tosser",
+    "description": "<p>Effect: The user’s Fling Attacks deal +5 flat damage and have a 30% chance of inflicting Flinched 1 on hit.</p>",
+    "traits": [],
+    "prerequisites": [],
+    "autoUnlock": [],
+    "cost": 2,
+    "design": {
+      "arena": "physical",
+      "approach": "power",
+      "archetype": null
+    },
+    "global": true,
+    "webs": [],
+    "nodes": [
+      {
+        "x": 48,
+        "y": 50,
+        "connected": [
+          "mobilize",
+          "berserkergang"
+        ],
+        "hidden": false,
+        "type": "normal",
+        "tier": null
+      }
+    ]
+  }
+}
