@@ -16,21 +16,21 @@
       {
         "name": "Fast Pitch",
         "slug": "fast-pitch",
-        "description": "<p>You may activate Fling with [Priority 3] utilising a [Pokeball], and spend up to 4 additional PP to gain +1 to the [Priority X] of the Fling per PP spent.</p>",
+        "description": "<p>The user may freely Fling a @Trait[ball] or @Trait[concoction] Item. This Action is then @Affliction[disabled 1].</p>",
         "cost": {
           "activation": "free",
-          "powerPoints": 3
+          "powerPoints": 4
         },
         "type": "generic",
-        "traits": [],
-        "img": "icons/svg/explosion.svg",
+        "traits": [
+          "flinch-30",
+          "interrupt-2"
+        ],
+        "img": "systems/ptr2e/img/perk-icons/Capture%20Spec.svg",
         "range": {
-          "target": "enemy",
-          "unit": "m",
-          "distance": 0
-        },
-        "variant": null,
-        "ephemeralVariant": false
+          "target": "self",
+          "unit": "m"
+        }
       }
     ],
     "slug": "fast-pitch",
@@ -72,10 +72,7 @@
         "PTR 2e Team"
       ],
       "notes": ""
-    },
-    "originSlug": null,
-    "variant": null,
-    "mode": null
+    }
   },
   "_id": "P49Aro4LHhgEkPC5",
   "img": "systems/ptr2e/img/perk-icons/Capture%20Spec.svg",
