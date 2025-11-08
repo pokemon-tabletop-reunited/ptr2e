@@ -1,0 +1,131 @@
+{
+  "folder": "V4skAU6G3OH5fXab",
+  "name": "Blunder Policy",
+  "type": "consumable",
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "actions": [
+      {
+        "name": "Blunder Policy",
+        "slug": "blunder-policy",
+        "description": "<p>Trigger: The user misses with an attack.<br><br>Effect: The user gains @UUID[Compendium.ptr2e.core-effects.XeiSuS3APUcN0MLZ]{+2 Speed Stages} for 5 activations.</p>",
+        "traits": [
+          "combat",
+          "consumable"
+        ],
+        "type": "generic",
+        "img": "systems/ptr2e/img/icons/consumable_icon.webp",
+        "cost": {
+          "activation": "free"
+        },
+        "range": {
+          "target": "self",
+          "unit": "m"
+        }
+      }
+    ],
+    "crafting": {
+      "skill": "",
+      "spans": null,
+      "materials": []
+    },
+    "equipped": {
+      "carryType": "stowed",
+      "slot": "belt",
+      "handsHeld": null
+    },
+    "grade": "D",
+    "fling": {
+      "type": "untyped",
+      "power": null,
+      "accuracy": 100,
+      "hide": true,
+      "range": {
+        "target": "creature",
+        "distance": 10,
+        "unit": "m"
+      }
+    },
+    "quantity": 1,
+    "rarity": "common",
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "slug": "blunder-policy",
+    "description": "<p>Trigger: The user misses with an attack.<br><br>Effect: The user gains @UUID[Compendium.ptr2e.core-effects.XeiSuS3APUcN0MLZ]{+2 Speed Stages} for 5 activations.</p>",
+    "traits": [
+      "combat",
+      "consumable"
+    ],
+    "consumableType": "other",
+    "stack": 1,
+    "cost": 4
+  },
+  "img": "systems/ptr2e/img/icons/consumable_icon.webp",
+  "effects": [
+    {
+      "name": "Blunder Policy",
+      "type": "passive",
+      "_id": "AZUTU71uchGi1t4b",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "blunder-policy-generic",
+            "value": "Compendium.ptr2e.core-effects.Item.XeiSuS3APUcN0MLZ",
+            "predicate": [],
+            "chance": 100,
+            "isFixedChance": false,
+            "affects": "target",
+            "alterations": [],
+            "dontMerge": false,
+            "mode": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.350",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.5.beta",
+        "lastModifiedBy": null
+      }
+    }
+  ],
+  "flags": {},
+  "_id": "OnRRpp3GvpzcH9vW"
+}
