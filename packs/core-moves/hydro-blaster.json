@@ -1,0 +1,78 @@
+{
+  "folder": "BImk1fcMbR5akA4z",
+  "name": "Hydro Blaster",
+  "type": "move",
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "publication": {
+      "source": "Digidex",
+      "authors": [],
+      "notes": ""
+    },
+    "traits": [],
+    "actions": [
+      {
+        "name": "Hydro Blaster",
+        "slug": "hydro-blaster",
+        "type": "attack",
+        "img": "systems/ptr2e/img/svg/water_icon.svg",
+        "traits": [
+          "digimon"
+        ],
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 5
+        },
+        "types": [
+          "water"
+        ],
+        "category": "special",
+        "predicate": [],
+        "description": "<p>Effect: If the user has Positive Defense Stages, this attack gains @Trait[crit-2].</p>",
+        "range": {
+          "target": "creature",
+          "distance": 12,
+          "unit": "m"
+        },
+        "power": 80,
+        "accuracy": 100
+      },
+      {
+        "name": "Hydro Blaster (Defense Up)",
+        "slug": "hydro-blaster-crit",
+        "type": "attack",
+        "img": "systems/ptr2e/img/svg/water_icon.svg",
+        "traits": [
+          "digimon",
+          "crit-2"
+        ],
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 5
+        },
+        "variant": "hydro-blaster",
+        "types": [
+          "water"
+        ],
+        "category": "special",
+        "predicate": [],
+        "description": "<p>Effect: If the user has Positive Defense Stages, this attack gains @Trait[crit-2].</p>",
+        "range": {
+          "target": "creature",
+          "distance": 12,
+          "unit": "m"
+        },
+        "power": 80,
+        "accuracy": 100
+      }
+    ],
+    "grade": "C"
+  },
+  "img": "systems/ptr2e/img/svg/water_icon.svg",
+  "effects": [],
+  "flags": {},
+  "_id": "ffnQkXhwtCoBRb8b"
+}
