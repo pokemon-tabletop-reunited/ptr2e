@@ -16,7 +16,8 @@
         },
         "range": {
           "target": "self",
-          "unit": "m"
+          "unit": "m",
+          "distance": 10
         },
         "description": "<p>Effect: Doubles the user's Base ATK and SPATK and halves its Base DEF and SPDEF stats.</p>",
         "img": "icons/svg/explosion.svg"
@@ -35,7 +36,8 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
+      ],
+      "notes": ""
     }
   },
   "_id": "CnIA5kLVMECRqSqI",
@@ -49,7 +51,7 @@
         "changes": [
           {
             "type": "basic",
-            "key": "system.attributes.atk.value",
+            "key": "system.attributes.atk.base",
             "value": 2,
             "mode": 1,
             "predicate": [],
@@ -58,7 +60,7 @@
           },
           {
             "type": "basic",
-            "key": "system.attributes.spa.value",
+            "key": "system.attributes.spa.base",
             "value": 2,
             "mode": 1,
             "predicate": [],
@@ -88,7 +90,9 @@
         "traits": [],
         "removeAfterCombat": true,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
@@ -106,16 +110,21 @@
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "flags": {},
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.350",
         "systemId": "ptr2e",
-        "systemVersion": "0.10.0-alpha.3.0.0",
+        "systemVersion": "1.4.6.beta",
         "createdTime": 1729470778490,
-        "modifiedTime": 1729470848908,
-        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
+        "modifiedTime": 1762903879725,
+        "lastModifiedBy": "5ImYyhOS2D6D7ypO",
+        "exportSource": null
       }
     }
   ]
