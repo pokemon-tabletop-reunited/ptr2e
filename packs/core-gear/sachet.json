@@ -9,16 +9,14 @@
     },
     "slug": "sachet",
     "traits": [
-      "combat",
-      "fairy",
+      "accessory",
+      "held",
       "evolution",
       "spritzee",
-      "aromatisse",
-      "consumable",
-      "accessory"
+      "aromatisse"
     ],
     "actions": [],
-    "description": "<p>Effect: Grants @Trait[fairy]-type creatures +20% EHR.<br><br>Can be consumed by Spritzee to trigger Evolution.</p>",
+    "description": "<p>Effect: @Trait[fairy] creatures gain +10 Base SPATK and SPDEF. Spritzee and Aromatisse users deal +15% more and take -10% less Special-Category damage.<br><br>A Spritzee may consume this item in order to trigger Evolution.</p>",
     "crafting": {
       "skill": "",
       "spans": null,
@@ -26,7 +24,7 @@
     },
     "equipped": {
       "carryType": "stowed",
-      "handsHeld": null,
+      "handsHeld": 1,
       "slot": "accessory"
     },
     "grade": "C",
@@ -37,12 +35,12 @@
       "hide": false,
       "range": {
         "target": "creature",
-        "distance": 10,
+        "distance": 5,
         "unit": "m"
       }
     },
     "quantity": 1,
-    "rarity": "rare",
+    "rarity": "uncommon",
     "identification": {
       "misidentified": null,
       "status": "identified",
@@ -61,61 +59,6 @@
     }
   },
   "img": "systems/ptr2e/img/item-icons/sachet.webp",
-  "effects": [
-    {
-      "name": "Sachet",
-      "type": "passive",
-      "_id": "1WZydCAk8pVCOMC7",
-      "img": "systems/ptr2e/img/icons/effect_icon.webp",
-      "system": {
-        "changes": [
-          {
-            "type": "basic",
-            "key": "system.modifiers.effectHitRate",
-            "value": 20,
-            "predicate": [
-              "trait:fairy"
-            ],
-            "mode": 2,
-            "ignored": false
-          }
-        ],
-        "slug": null,
-        "traits": [],
-        "removeAfterCombat": true,
-        "removeOnRecall": false,
-        "removeAfterAttacking": false,
-        "removeAfterAttacked": false,
-        "stacks": 0
-      },
-      "disabled": false,
-      "duration": {
-        "startTime": null,
-        "combat": null
-      },
-      "description": "",
-      "origin": null,
-      "tint": "#ffffff",
-      "transfer": true,
-      "statuses": [],
-      "sort": 0,
-      "flags": {
-        "ptr2e": {
-          "displayOnToken": ""
-        }
-      },
-      "_stats": {
-        "compendiumSource": null,
-        "duplicateSource": null,
-        "exportSource": null,
-        "coreVersion": "13.348",
-        "systemId": "ptr2e",
-        "systemVersion": "1.4.4.beta",
-        "createdTime": 1758630794074,
-        "modifiedTime": 1758630820317,
-        "lastModifiedBy": "mK35yvCqCgiTUvKf"
-      }
-    }
-  ],
+  "effects": [],
   "_id": "AddZ0pPHBStJ19Qb"
 }
