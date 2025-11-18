@@ -1,11 +1,11 @@
 {
   "name": "Empowerment Seed",
-  "img": "systems/ptr2e/img/icons/consumable_icon.webp",
+  "img": "systems/ptr2e/img/item-icons/miracle%20seed.webp",
   "type": "consumable",
   "system": {
     "cost": 5,
     "crafting": {
-      "skill": null,
+      "skill": "",
       "spans": null,
       "materials": []
     },
@@ -18,43 +18,124 @@
     "fling": {
       "type": "untyped",
       "power": 0,
-      "accuracy": 90
+      "accuracy": 90,
+      "hide": false,
+      "range": {
+        "target": "creature",
+        "distance": 10,
+        "unit": "m"
+      }
     },
     "rarity": "rare",
     "consumableType": "other",
     "traits": [
-      "restorative",
       "consumable",
       "natural",
-      "seed",
-      "held",
-      "stash"
+      "seed"
     ],
-    "description": "When used, the target gains @Affliction[boosted] 3 for 3 activations.",
+    "description": "<p>When used, the target gains @Affliction[boosted 3].</p>",
     "quantity": 1,
-    "container": null,
-    "slug": null,
-    "modifier": null,
-    "stack": 1
+    "slug": "empowerment-seed",
+    "stack": 1,
+    "_migration": {
+      "version": null,
+      "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "actions": [
+      {
+        "name": "Empowerment Seed",
+        "slug": "empowerment-seed",
+        "description": "<p>When used, the target gains @Affliction[boosted 3].</p>",
+        "traits": [
+          "consumable",
+          "natural",
+          "seed"
+        ],
+        "type": "generic",
+        "img": "systems/ptr2e/img/item-icons/miracle%20seed.webp",
+        "cost": {
+          "activation": "simple"
+        },
+        "range": {
+          "target": "creature",
+          "distance": 10,
+          "unit": "m"
+        }
+      }
+    ]
   },
   "_id": "VzoEKSYvRtfOBmcB",
-  "effects": [],
-  "folder": "V4skAU6G3OH5fXab",
-  "sort": 0,
-  "ownership": {
-    "default": 0,
-    "tXAZ3QUgjuwX4gdV": 3
-  },
-  "flags": {},
-  "_stats": {
-    "compendiumSource": null,
-    "duplicateSource": null,
-    "coreVersion": "12.327",
-    "systemId": "ptr2e",
-    "systemVersion": "0.0.0-alpha.1.0",
-    "createdTime": 1717878484297,
-    "modifiedTime": 1717878484297,
-    "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
-  },
-  "_key": "!items!VzoEKSYvRtfOBmcB"
+  "effects": [
+    {
+      "name": "Empowerment Seed",
+      "type": "passive",
+      "_id": "KRk50xyystmtcYDN",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "empowerment-seed-generic",
+            "value": "Compendium.ptr2e.core-effects.Item.boostedcondiitem",
+            "predicate": [],
+            "chance": 100,
+            "isFixedChance": false,
+            "affects": "target",
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "duration.turns",
+                "value": 3
+              }
+            ],
+            "dontMerge": false,
+            "mode": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.348",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.4.beta",
+        "createdTime": 1758795781001,
+        "modifiedTime": 1758795853145,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+      }
+    }
+  ],
+  "folder": "4MbEHvhwmG5DYTkB"
 }

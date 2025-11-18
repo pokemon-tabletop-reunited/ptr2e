@@ -7,17 +7,14 @@
       "trait:fire"
     ],
     "cost": 2,
-    "description": "<p>Your Fire-Type moves gain a 20% chance to @Affliction[burn], or increase that chance by +20%.</p>",
+    "description": "<p>Your @Trait[fire] Type moves gain a 20% chance to @Affliction[burn 5], or increase that chance by +20%.</p>",
     "actions": [
       {
         "name": "Intense Heat",
         "slug": "intense-heat",
         "description": "<p>Your Fire-Type moves gain a 20% chance to @Affliction[burn], or increase that chance by +20%.</p>",
         "cost": {
-          "activation": "free",
-          "powerPoints": 0,
-          "delay": null,
-          "priority": null
+          "activation": "free"
         },
         "type": "passive",
         "traits": [],
@@ -25,54 +22,53 @@
         "range": {
           "target": "enemy",
           "unit": "m",
-          "distance": 0
-        },
-        "variant": null,
-        "hidden": false
+          "distance": 10
+        }
       }
     ],
     "slug": "intense-heat",
-    "traits": [
-      "partial-automation"
-    ],
+    "traits": [],
     "_migration": {
       "version": null,
       "previous": null
     },
     "nodes": [
       {
+        "x": 162,
+        "y": 89,
+        "hidden": false,
+        "type": "normal",
         "connected": [
           "inner-warmth",
           "firefly",
           "midnight-oil",
-          "acceptance"
+          "acceptance",
+          "firestarter",
+          "flare-ignition"
         ],
         "config": {
-          "alpha": null,
+          "texture": "systems/ptr2e/img/svg/fire_icon.svg",
           "backgroundColor": null,
           "borderColor": null,
-          "borderWidth": null,
-          "texture": "systems/ptr2e/img/svg/fire_icon.svg",
-          "tint": null,
-          "scale": null
+          "tint": null
         },
-        "hidden": false,
-        "type": "normal",
-        "x": 162,
-        "y": 89,
         "tier": null
       }
     ],
     "autoUnlock": [],
-    "originSlug": null,
-    "variant": null,
-    "mode": null,
     "global": true,
     "webs": [],
     "design": {
       "arena": "physical",
       "approach": "power",
-      "archetype": "[Fire]"
+      "archetype": "fire"
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
     }
   },
   "_id": "TCYfgKMsSUhsv9Tp",
@@ -82,26 +78,33 @@
       "name": "Intense Heat",
       "type": "passive",
       "_id": "r2W7KKw3xAibk4h4",
-      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "img": "systems/ptr2e/img/svg/fire_icon.svg",
       "system": {
         "changes": [
           {
             "type": "roll-effect",
             "key": "fire-attack",
             "value": "Compendium.ptr2e.core-effects.Item.burnconditioitem",
-            "predicate": [],
+            "predicate": [
+              "origin:enemy"
+            ],
             "chance": 20,
             "affects": "target",
-            "mode": 2,
             "priority": null,
+            "alterations": [],
+            "dontMerge": false,
+            "isFixedChance": false,
+            "mode": 2,
             "ignored": false
           }
         ],
         "slug": null,
         "traits": [],
-        "removeAfterCombat": true,
+        "removeAfterCombat": false,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
@@ -113,22 +116,27 @@
         "startRound": null,
         "startTurn": null
       },
-      "description": "",
+      "description": "<p>Your @Trait[fire] Type moves gain a 20% chance to @Affliction[burn 5], or increase that chance by +20%.</p>",
       "origin": null,
       "tint": "#ffffff",
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "flags": {},
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.348",
         "systemId": "ptr2e",
-        "systemVersion": "0.10.0-alpha.3.0.0",
+        "systemVersion": "1.4.3.beta",
         "createdTime": 1729380480086,
-        "modifiedTime": 1729380508700,
-        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
+        "modifiedTime": 1757798296213,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf",
+        "exportSource": null
       }
     }
   ]

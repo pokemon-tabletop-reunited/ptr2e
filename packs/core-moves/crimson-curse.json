@@ -1,0 +1,105 @@
+{
+  "folder": "BImk1fcMbR5akA4z",
+  "name": "Crimson Curse",
+  "type": "move",
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "publication": {
+      "source": "Digidex",
+      "authors": [
+        "Fox"
+      ],
+      "notes": ""
+    },
+    "traits": [],
+    "actions": [
+      {
+        "name": "Crimson Curse",
+        "slug": "crimson-curse",
+        "type": "attack",
+        "img": "systems/ptr2e/img/svg/ghost_icon.svg",
+        "traits": [
+          "digimon"
+        ],
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 5
+        },
+        "types": [
+          "ghost",
+          "fire"
+        ],
+        "category": "physical",
+        "predicate": [],
+        "description": "<p>This attack counts as both Ghost and Fire typed, and has a 10% chance to inflict @Affliction[cursed 5] to targets hit.</p>",
+        "range": {
+          "target": "emanation",
+          "distance": 3,
+          "unit": "m"
+        },
+        "power": 60,
+        "accuracy": 100
+      }
+    ],
+    "grade": "C",
+    "slug": "crimson-curse"
+  },
+  "img": "systems/ptr2e/img/svg/ghost_icon.svg",
+  "effects": [
+    {
+      "name": "Crimson Curse",
+      "type": "passive",
+      "_id": "yv12MQwo2Q1Rtnu3",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "crimson-curse-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.cursedcondititem",
+            "predicate": [],
+            "chance": 10,
+            "affects": "target",
+            "alterations": [],
+            "dontMerge": false,
+            "mode": 2,
+            "ignored": false,
+            "isFixedChance": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.346",
+        "systemId": "ptr2e",
+        "systemVersion": "1.3.0.beta",
+        "lastModifiedBy": null
+      }
+    }
+  ],
+  "_id": "Z6XmoiTxB1a3BgNc"
+}

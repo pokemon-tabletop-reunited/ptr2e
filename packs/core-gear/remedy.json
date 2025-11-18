@@ -1,6 +1,6 @@
 {
   "name": "Remedy",
-  "img": "systems/ptr2e/img/icons/consumable_icon.webp",
+  "img": "systems/ptr2e/img/item-icons/energy%20powder.webp",
   "type": "consumable",
   "system": {
     "cost": 2,
@@ -21,43 +21,133 @@
     "fling": {
       "type": "untyped",
       "power": null,
-      "accuracy": 100
+      "accuracy": 100,
+      "hide": false,
+      "range": {
+        "target": "creature",
+        "distance": 10,
+        "unit": "m"
+      }
     },
     "rarity": "rare",
     "consumableType": "restorative",
     "traits": [
       "stack-5",
-      "held",
       "restorative",
       "consumable",
       "natural",
       "healing"
     ],
-    "description": "The target is healed 70 HP.",
+    "description": "<p>The target is healed @HP[90].</p>",
     "quantity": 1,
-    "container": null,
-    "slug": null,
-    "modifier": null,
-    "stack": 5
+    "slug": "remedy",
+    "stack": 5,
+    "_migration": {
+      "version": null,
+      "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "actions": [
+      {
+        "name": "Remedy",
+        "slug": "remedy",
+        "description": "<p>The target is healed @HP[90].</p>",
+        "traits": [
+          "stack-5",
+          "restorative",
+          "consumable",
+          "natural",
+          "healing"
+        ],
+        "type": "generic",
+        "img": "systems/ptr2e/img/item-icons/energy%20powder.webp",
+        "cost": {
+          "activation": "complex"
+        },
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        }
+      }
+    ]
   },
   "_id": "ddhEpRwh4AdDszh4",
-  "effects": [],
-  "folder": "V4skAU6G3OH5fXab",
-  "sort": 0,
-  "ownership": {
-    "default": 0,
-    "tXAZ3QUgjuwX4gdV": 3
-  },
-  "flags": {},
-  "_stats": {
-    "compendiumSource": null,
-    "duplicateSource": null,
-    "coreVersion": "12.327",
-    "systemId": "ptr2e",
-    "systemVersion": "0.0.0-alpha.1.0",
-    "createdTime": 1717878484297,
-    "modifiedTime": 1717878484297,
-    "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
-  },
-  "_key": "!items!ddhEpRwh4AdDszh4"
+  "effects": [
+    {
+      "name": "Remedy",
+      "type": "passive",
+      "_id": "RrXGmAM94pGNcXhc",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "remedy-generic",
+            "value": "Compendium.ptr2e.core-effects.Item.4DlXFTVooz07YcDm",
+            "predicate": [],
+            "chance": 100,
+            "isFixedChance": true,
+            "affects": "target",
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "system.changes.0.isFlat",
+                "value": "true"
+              },
+              {
+                "mode": 5,
+                "property": "system.changes.0.value",
+                "value": 90
+              }
+            ],
+            "dontMerge": false,
+            "mode": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
+      "_stats": {
+        "compendiumSource": "Compendium.ptr2e.core-gear.Item.jfGzfe3pG69kJ6Bx.ActiveEffect.G4cA5qHnxsI2Yegr",
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.348",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.4.beta",
+        "createdTime": 1759157767929,
+        "modifiedTime": 1759157777496,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+      }
+    }
+  ],
+  "folder": "fWXwbB0LHCXeB5EW"
 }

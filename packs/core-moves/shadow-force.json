@@ -7,7 +7,7 @@
     "actions": [
       {
         "slug": "shadow-force",
-        "name": "Shadow Force",
+        "name": "Shadow Force (Resolution)",
         "type": "attack",
         "traits": [
           "legendary",
@@ -16,7 +16,7 @@
           "crushing",
           "pierce",
           "contact",
-          "pp-updated"
+          "priority-40"
         ],
         "range": {
           "target": "creature",
@@ -25,7 +25,8 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 7
+          "powerPoints": 5,
+          "trigger": "The user used Shadow Force (Set-Up) as their last Action."
         },
         "category": "physical",
         "power": 120,
@@ -33,15 +34,45 @@
         "types": [
           "ghost"
         ],
-        "description": "<p>Effect: Set-Up: The user gains @Affliction[invisible] 3 and @Affliction[transient] 3, and ends their Activation.</p><p>Resolution: On their next Activation, the user freely Moves up to two times the Movement Score of their choice, is cured of @Affliction[transient] and @Affliction[invisible], and then attacks with and resolves this attack.</p>",
-        "contestType": "",
-        "contestEffect": "",
-        "free": false,
-        "slot": null
+        "description": "<p>Trigger: The user used Shadow Force (Set-Up) as their last Action.</p><p>Effect: The user freely Moves up to double the Movement Score of their choice before attacking with this Attack.</p>",
+        "img": "systems/ptr2e/img/svg/ghost_icon.svg",
+        "predicate": []
+      },
+      {
+        "name": "Shadow Force (Set-Up)",
+        "slug": "shadow-force-set-up",
+        "description": "<p>Effect: The user gains @Affliction[invisible 2], @Affliction[transient 2], and freely Moves up to half the Movement Score of their choice.</p>",
+        "traits": [
+          "legendary",
+          "set-up",
+          "defensive",
+          "priority-20"
+        ],
+        "type": "attack",
+        "img": "systems/ptr2e/img/svg/ghost_icon.svg",
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 6
+        },
+        "range": {
+          "target": "self",
+          "unit": "m"
+        },
+        "types": [
+          "ghost"
+        ],
+        "category": "status",
+        "predicate": []
       }
     ],
     "container": null,
-    "grade": "A"
+    "grade": "A",
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ]
+    }
   },
   "_id": "3FUbV3cOXazvisJ0",
   "effects": []

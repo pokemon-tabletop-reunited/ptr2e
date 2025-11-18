@@ -1,0 +1,148 @@
+{
+  "name": "Chi Alignment",
+  "_id": "KUdOYcLgZDGRZq5F",
+  "type": "perk",
+  "img": "icons/skills/trades/academics-astronomy-navigation-purple.webp",
+  "effects": [
+    {
+      "name": "Chi Alignment",
+      "type": "passive",
+      "_id": "muVuiDwHZPcoluJN",
+      "img": "icons/skills/trades/academics-astronomy-navigation-purple.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "grant-item",
+            "key": "",
+            "value": "Compendium.ptr2e.core-moves.Item.B5u8TLbX10kgSB9d",
+            "predicate": [],
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "system.actions.0.free",
+                "value": "true"
+              }
+            ],
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            },
+            "allowDuplicate": false,
+            "mode": 2,
+            "ignored": false,
+            "reevaluateOnUpdate": false,
+            "inMemoryOnly": false,
+            "track": false,
+            "replaceSelf": false
+          }
+        ],
+        "slug": null,
+        "traits": [
+          "aura"
+        ],
+        "removeAfterCombat": false,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "<p>@Trait[connection]: @UUID[Compendium.ptr2e.core-moves.B5u8TLbX10kgSB9d]{Foresight}<br /><br />The user may activate the @UUID[Compendium.ptr2e.core-moves.B5u8TLbX10kgSB9d]{Foresight} move as a free action.</p>",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.346",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.1.beta",
+        "createdTime": 1754302181925,
+        "modifiedTime": 1754302233754,
+        "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
+      }
+    }
+  ],
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "publication": {
+      "source": "PTR2e Core",
+      "authors": [
+        "Fox"
+      ],
+      "notes": ""
+    },
+    "actions": [
+      {
+        "name": "Chi Alignment",
+        "slug": "chi-alignment",
+        "description": "<p>The user may activate the @UUID[Compendium.ptr2e.core-moves.B5u8TLbX10kgSB9d]{Foresight} move as a free action.</p>",
+        "traits": [
+          "aura"
+        ],
+        "type": "passive",
+        "img": "icons/skills/trades/academics-astronomy-navigation-purple.webp",
+        "cost": {
+          "activation": "free"
+        },
+        "range": {
+          "target": "self",
+          "unit": "m"
+        }
+      }
+    ],
+    "slug": "chi-alignment",
+    "description": "<p>@Trait[connection]: @UUID[Compendium.ptr2e.core-moves.B5u8TLbX10kgSB9d]{Foresight}<br><br>The user may activate the @UUID[Compendium.ptr2e.core-moves.B5u8TLbX10kgSB9d]{Foresight} move as a free action.</p>",
+    "traits": [
+      "aura"
+    ],
+    "prerequisites": [
+      {
+        "gte": [
+          "{actor|skills.aura-sense.mod}",
+          55
+        ]
+      }
+    ],
+    "autoUnlock": [],
+    "cost": 2,
+    "design": {
+      "arena": "physical",
+      "approach": "finesse",
+      "archetype": "aura"
+    },
+    "global": true,
+    "webs": [],
+    "nodes": [
+      {
+        "x": 170,
+        "y": 25,
+        "hidden": false,
+        "type": "normal",
+        "connected": [
+          "sight-beyond-sight",
+          "aura-haze"
+        ],
+        "config": {
+          "texture": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "tint": null
+        },
+        "tier": null
+      }
+    ]
+  },
+  "folder": "I7ocNlZvZjyhwUcw"
+}

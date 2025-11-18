@@ -9,9 +9,7 @@
         "slug": "rest",
         "name": "Rest",
         "type": "attack",
-        "traits": [
-          "pp-updated"
-        ],
+        "traits": [],
         "range": {
           "target": "self",
           "distance": 0,
@@ -31,12 +29,129 @@
         "contestType": "",
         "contestEffect": "",
         "free": false,
-        "slot": null
+        "slot": null,
+        "img": "icons/svg/explosion.svg",
+        "variant": null,
+        "ephemeralVariant": false,
+        "summon": null,
+        "defaultVariant": null,
+        "flingItemId": "",
+        "offensiveStat": null,
+        "defensiveStat": null,
+        "predicate": []
       }
     ],
     "container": null,
-    "grade": "A"
+    "grade": "A",
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "traits": [],
+    "description": "",
+    "_migration": {
+      "version": 0.111,
+      "previous": {
+        "schema": null,
+        "foundry": "13.347",
+        "system": "1.4.3.beta"
+      }
+    }
+  },
+  "effects": [
+    {
+      "name": "Rest",
+      "type": "passive",
+      "_id": "FPmZ9l31HuVoRqxk",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "rest-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.4DlXFTVooz07YcDm",
+            "predicate": [],
+            "chance": 100,
+            "isFixedChance": true,
+            "affects": "target",
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "system.changes.0.value",
+                "value": 16
+              }
+            ],
+            "dontMerge": false,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "roll-effect",
+            "key": "rest-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.drowsycondititem",
+            "predicate": [],
+            "chance": 100,
+            "isFixedChance": false,
+            "affects": "target",
+            "alterations": [],
+            "dontMerge": false,
+            "label": "rest-attack",
+            "mode": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
+      "_stats": {
+        "coreVersion": "13.347",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.3.beta",
+        "modifiedTime": 1757188444213,
+        "lastModifiedBy": "ZMtJHc7oUjWzVGas"
+      }
+    }
+  ],
+  "flags": {},
+  "_stats": {
+    "coreVersion": "13.347",
+    "systemId": "ptr2e",
+    "systemVersion": "1.4.3.beta",
+    "createdTime": 1757183202839,
+    "modifiedTime": 1757189211940,
+    "lastModifiedBy": "ZMtJHc7oUjWzVGas",
+    "exportSource": {
+      "worldId": "pokemon",
+      "uuid": "Item.6M6RppJh1ECVIz31",
+      "coreVersion": "13.347",
+      "systemId": "ptr2e",
+      "systemVersion": "1.4.3.beta"
+    }
   },
   "_id": "DEsVXTtV0dDFdodn",
-  "effects": []
+  "folder": "LDaj7zkCl6ctXq96"
 }

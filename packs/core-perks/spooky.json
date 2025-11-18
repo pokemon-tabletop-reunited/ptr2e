@@ -1,0 +1,109 @@
+{
+  "folder": "mYLGJuVcLTxYkgvC",
+  "name": "Spooky",
+  "type": "perk",
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "Fox"
+      ],
+      "notes": ""
+    },
+    "actions": [],
+    "description": "<p>You gain the @Trait[spooky] trait.</p>",
+    "traits": [],
+    "prerequisites": [
+      "trait:ghost"
+    ],
+    "autoUnlock": [
+      "trait:spooky"
+    ],
+    "cost": 1,
+    "design": {
+      "arena": "social",
+      "approach": "finesse",
+      "archetype": "ghost"
+    },
+    "global": true,
+    "webs": [],
+    "nodes": [
+      {
+        "x": 165,
+        "y": 112,
+        "connected": [
+          "grim-haunt",
+          "walking-dead",
+          "manifest-psionic-power",
+          "morgul-blade"
+        ],
+        "hidden": false,
+        "type": "normal",
+        "tier": null
+      }
+    ],
+    "slug": "spooky"
+  },
+  "img": "systems/ptr2e/img/svg/ghost_icon.svg",
+  "effects": [
+    {
+      "name": "Spooky",
+      "type": "passive",
+      "_id": "HfEqMR7XBiF8JJYH",
+      "img": "systems/ptr2e/img/svg/ghost_icon.svg",
+      "system": {
+        "changes": [
+          {
+            "type": "add-trait",
+            "key": "",
+            "value": "spooky",
+            "predicate": [],
+            "priority": null,
+            "mode": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": false,
+        "removeOnRecall": false,
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "<p>Gain the @Trait[spooky] trait.</p>",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": "Compendium.ptr2e.core-perks.Item.fdBGG8e0iPzaYfbD.ActiveEffect.RNigtm9NFQa7ATOz",
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.346",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.2.beta",
+        "createdTime": 1754226090747,
+        "modifiedTime": 1754226110896,
+        "lastModifiedBy": "dCIq77b7AO2frs8Z"
+      }
+    }
+  ],
+  "_id": "PeupEOfxAEvYLoFV"
+}

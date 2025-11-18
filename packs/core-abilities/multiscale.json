@@ -17,7 +17,8 @@
         },
         "range": {
           "target": "self",
-          "unit": "m"
+          "unit": "m",
+          "distance": 10
         },
         "description": "<p>Effect: While the user meets the [Intrepid 3/4] Condition, they take 50% less damage from Physical- and Special-Category Attacks.</p>",
         "img": "icons/svg/explosion.svg"
@@ -31,6 +32,13 @@
     "_migration": {
       "version": null,
       "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
     }
   },
   "_id": "KAxw2xAJEVEc3Xy9",
@@ -47,19 +55,21 @@
             "key": "attack-damage-percentile",
             "value": -50,
             "predicate": [
-              "self:state:intrepid-3-4"
+              "target:state:intrepid-3-4"
             ],
-            "mode": 2,
             "priority": null,
+            "mode": 2,
             "ignored": false,
-            "hideIfDisabled": false
+            "hideIfDisabled": true
           }
         ],
         "slug": null,
         "traits": [],
         "removeAfterCombat": true,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
@@ -77,16 +87,21 @@
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "flags": {},
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.348",
         "systemId": "ptr2e",
-        "systemVersion": "0.10.0-alpha.5.1.2",
+        "systemVersion": "1.4.3.beta",
         "createdTime": 1737050341433,
-        "modifiedTime": 1737050411445,
-        "lastModifiedBy": "IcBpMqhFuTck9VpX"
+        "modifiedTime": 1757424425640,
+        "lastModifiedBy": "Kc3DOunCh3ClAeHS",
+        "exportSource": null
       }
     }
   ]

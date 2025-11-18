@@ -9,7 +9,7 @@ class PerksComponent extends ActorComponent {
 
     override renderComponent(data: Record<string, unknown>): Promise<string> {
         data.perks = this.actor.itemTypes.perk;
-        return renderTemplate(this.template, data);
+        return foundry.applications.handlebars.renderTemplate(this.template, data);
     }
 
     override attachListeners(htmlElement: HTMLElement) {

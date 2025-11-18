@@ -1,0 +1,56 @@
+{
+  "name": "Mounted Specialist",
+  "_id": "g6eImvsYuIfeOqgw",
+  "type": "perk",
+  "img": "icons/weapons/guns/gun-pistol-flintlock.webp",
+  "effects": [],
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "publication": {
+      "source": "PTR2e Core",
+      "authors": [
+        "Dragoon"
+      ],
+      "notes": ""
+    },
+    "actions": [],
+    "slug": "mounted-specialist",
+    "description": "<p>Effect: The user may use @Trait[readied] Actions with +30% Delay, ignoring the trait’s Movement restrictions for the user’s Mounts.</p>",
+    "traits": [],
+    "prerequisites": [
+      {
+        "gte": [
+          "{actor|skills.ride.mod}",
+          50
+        ]
+      }
+    ],
+    "autoUnlock": [],
+    "cost": 2,
+    "design": {
+      "arena": "physical",
+      "approach": "finesse",
+      "archetype": "rider"
+    },
+    "global": true,
+    "webs": [],
+    "nodes": [
+      {
+        "x": 100,
+        "y": 56,
+        "connected": [
+          "ride-for-ruin",
+          "urge-mount",
+          "cyclist"
+        ],
+        "hidden": false,
+        "type": "normal",
+        "tier": null
+      }
+    ]
+  },
+  "folder": "ZTA2RsL9wA15o2ic"
+}

@@ -1,0 +1,151 @@
+{
+  "name": "Dojo Discipline Stance",
+  "_id": "3ou4C32UROiZQ620",
+  "type": "perk",
+  "img": "icons/skills/melee/shield-block-fire-orange.webp",
+  "effects": [
+    {
+      "name": "Dojo Discipline Stance",
+      "type": "passive",
+      "_id": "BJsSCQA2eXEi99zA",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "dojo-discipline-stance-generic",
+            "value": "Compendium.ptr2e.core-effects.Item.fHQFJY3vbbbDvdi9",
+            "predicate": [],
+            "chance": 100,
+            "isFixedChance": true,
+            "affects": "target",
+            "alterations": [],
+            "dontMerge": false,
+            "mode": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.347",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.3.beta",
+        "createdTime": 1756043051336,
+        "modifiedTime": 1756043080911,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+      }
+    }
+  ],
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "publication": {
+      "source": "PTR2e Core",
+      "authors": [
+        "Fox"
+      ],
+      "notes": ""
+    },
+    "actions": [
+      {
+        "name": "Dojo Discipline Stance",
+        "slug": "dojo-discipline-stance",
+        "description": "<p>Target: A Commanded @Trait[fighting] Creature<br><br>Effect: The affected creature gains +33% RES, but forfeits the ability to make Attacks of Opportunity. The Stance may be ended as a Free Action by the Initiator or Target.</p>",
+        "traits": [
+          "command",
+          "stance",
+          "fighting"
+        ],
+        "type": "generic",
+        "img": "icons/skills/melee/shield-block-fire-orange.webp",
+        "cost": {
+          "activation": "simple",
+          "powerPoints": 3
+        },
+        "range": {
+          "target": "creature",
+          "distance": 20,
+          "unit": "m"
+        }
+      }
+    ],
+    "slug": "dojo-discipline-stance",
+    "description": "<p>Target: A Commanded @Trait[fighting] Creature<br><br>Effect: The affected creature gains +33% RES, but forfeits the ability to make Attacks of Opportunity. The Stance may be ended as a Free Action by the Initiator or Target.</p>",
+    "traits": [
+      "command",
+      "stance",
+      "fighting"
+    ],
+    "prerequisites": [
+      "item:perk:type-specialist",
+      {
+        "gte": [
+          "{actor|skills.leadership.mod}",
+          35
+        ]
+      },
+      {
+        "gte": [
+          "{actor|skills.tough.mod}",
+          30
+        ]
+      }
+    ],
+    "autoUnlock": [],
+    "cost": 2,
+    "design": {
+      "arena": "physical",
+      "approach": "resilience",
+      "archetype": "fighting"
+    },
+    "global": true,
+    "webs": [],
+    "nodes": [
+      {
+        "x": 191,
+        "y": 103,
+        "hidden": false,
+        "type": "normal",
+        "connected": [
+          "type-specialist"
+        ],
+        "config": {
+          "texture": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "tint": null
+        },
+        "tier": null
+      }
+    ]
+  },
+  "folder": "bvVSJTYvqaY3Smhz"
+}

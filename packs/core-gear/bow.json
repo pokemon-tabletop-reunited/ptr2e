@@ -1,5 +1,5 @@
 {
-  "folder": "V4skAU6G3OH5fXaf",
+  "folder": "PhrQtZzEwKPjfmK2",
   "name": "Bow",
   "type": "weapon",
   "system": {
@@ -10,121 +10,50 @@
     "slug": "bow",
     "traits": [
       "weapon",
-      "reload",
-      "charge-pool-12"
+      "charge-pool-12",
+      "reload-2",
+      "conventional",
+      "modern",
+      "early-modern",
+      "medieval",
+      "ancient",
+      "fantasy",
+      "2-handed",
+      "projectile"
     ],
     "actions": [
       {
-        "name": "Standard Arrow",
-        "slug": "standard-arrow",
-        "description": "",
-        "traits": [
-          "weapon",
-          "missile"
-        ],
-        "type": "attack",
-        "range": {
-          "target": "enemy",
-          "distance": 45,
-          "unit": "m"
-        },
-        "cost": {
-          "activation": "complex",
-          "powerPoints": 0
-        },
-        "types": [
-          "untyped"
-        ],
-        "category": "physical",
-        "power": 60,
-        "accuracy": 95,
-        "free": true
-      },
-      {
-        "name": "Blunthead Arrow",
-        "slug": "blunthead-arrow",
-        "description": "<p>On hit, the target has a 30% chance of being Flinched 3.</p>",
+        "name": "Bow Shot",
+        "slug": "bow-shot",
         "traits": [
           "weapon",
           "missile",
-          "flinch-chance-3"
+          "adaptable",
+          "flinch-10",
+          "readied"
         ],
         "type": "attack",
         "range": {
-          "target": "enemy",
-          "distance": 45,
-          "unit": "m"
-        },
-        "cost": {
-          "activation": "complex",
-          "powerPoints": 0
-        },
-        "variant": "standard-arrow",
-        "types": [
-          "untyped"
-        ],
-        "category": "physical",
-        "power": 40,
-        "accuracy": 95,
-        "free": true
-      },
-      {
-        "name": "Broadhead Arrow",
-        "slug": "broadhead-arrow",
-        "description": "<p>Effect: On hit, the target has a 30% chance of gaining @Affliction[splinter] 5.</p>",
-        "traits": [
-          "weapon",
-          "missile"
-        ],
-        "type": "attack",
-        "range": {
-          "target": "enemy",
-          "distance": 45,
+          "target": "creature",
+          "distance": 30,
           "unit": "m"
         },
         "cost": {
           "activation": "complex",
           "powerPoints": 1
         },
-        "variant": "standard-arrow",
-        "types": [
-          "untyped"
-        ],
-        "category": "physical",
-        "power": 80,
-        "accuracy": 85,
-        "free": true
-      },
-      {
-        "name": "Bodkin Arrow",
-        "slug": "bodkin-arrow",
-        "description": "",
-        "traits": [
-          "weapon",
-          "missile",
-          "crit-1"
-        ],
-        "type": "attack",
-        "range": {
-          "target": "enemy",
-          "distance": 45,
-          "unit": "m"
-        },
-        "cost": {
-          "activation": "complex",
-          "powerPoints": 1
-        },
-        "variant": "standard-arrow",
         "types": [
           "untyped"
         ],
         "category": "physical",
         "power": 50,
-        "accuracy": 90,
-        "free": true
+        "accuracy": 95,
+        "free": true,
+        "img": "systems/ptr2e/img/icons/weapon_icon.webp",
+        "predicate": []
       }
     ],
-    "description": "<p>A bow's attack profile can be altered by changing the ammunition used for it. Arrows may be lit on fire to change their typing to Fire Type. Otherwise, damage type may be altered through alchemical treatments.</p>",
+    "description": "<p>The bow and arrow is a ranged weapon system consisting of an elastic launching device (bow) and long-shafted projectiles (arrows). Humans used bows and arrows for hunting and aggression long before recorded history, and the practice was common to many prehistoric cultures. They were important weapons of war from ancient history until the early modern period, when they were rendered increasingly obsolete by the development of the more powerful and accurate firearms. Today, bows and arrows are mostly used for hunting and sports. </p>",
     "crafting": {
       "skill": "Wood",
       "spans": null,
@@ -138,8 +67,14 @@
     "grade": "E",
     "fling": {
       "type": "untyped",
-      "power": 20,
-      "accuracy": 100
+      "power": 25,
+      "accuracy": 85,
+      "hide": false,
+      "range": {
+        "target": "creature",
+        "distance": 3,
+        "unit": "m"
+      }
     },
     "quantity": 1,
     "rarity": "common",
@@ -152,37 +87,43 @@
         "description": "<p>Unidentified Item</p>"
       }
     },
-    "weaponType": "Ranged",
-    "weaponPp": 12,
-    "weaponRange": "45"
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    }
   },
   "_id": "lvWIPtRom0SHwdMn",
   "img": "systems/ptr2e/img/icons/weapon_icon.webp",
   "effects": [
     {
-      "name": "Broadhead Arrow",
+      "name": "Bow",
       "type": "passive",
-      "_id": "LolzlRdBaFbwWM3d",
+      "_id": "QIzI6zPDNJYtxuRx",
       "img": "systems/ptr2e/img/icons/effect_icon.webp",
       "system": {
         "changes": [
           {
-            "type": "roll-effect",
-            "key": "broadhead-arrow-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.splinterconditem",
+            "type": "flat-modifier",
+            "key": "{item|id}-attack-damage-flat",
+            "value": 10,
             "predicate": [],
-            "chance": 30,
-            "affects": "target",
-            "mode": 2,
+            "label": "Bow",
             "priority": null,
-            "ignored": false
+            "mode": 2,
+            "ignored": false,
+            "hideIfDisabled": false
           }
         ],
         "slug": null,
         "traits": [],
-        "removeAfterCombat": true,
+        "removeAfterCombat": false,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
@@ -200,16 +141,21 @@
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "flags": {},
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
       "_stats": {
-        "compendiumSource": null,
+        "compendiumSource": "Compendium.ptr2e.core-gear.Item.Ba3EyqpUePgGrfQk.ActiveEffect.uOxpw5kHcRtpv4pa",
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.347",
         "systemId": "ptr2e",
-        "systemVersion": "0.10.0-alpha.2.4.3",
-        "createdTime": 1729161823663,
-        "modifiedTime": 1729161853985,
-        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
+        "systemVersion": "1.4.3.beta",
+        "createdTime": 1743879487195,
+        "modifiedTime": 1757553433026,
+        "lastModifiedBy": "UTlFSVhgfIUeTsoW",
+        "exportSource": null
       }
     }
   ]

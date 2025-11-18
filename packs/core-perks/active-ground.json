@@ -1,0 +1,121 @@
+{
+  "folder": "qrlUDsr0ZrNZAnR6",
+  "name": "Active Ground",
+  "type": "perk",
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "actions": [],
+    "slug": "active-ground",
+    "description": "<p>The user gains Lightning Rod as a Tutored Ability.</p>",
+    "traits": [],
+    "prerequisites": [
+      "item:perk:grounded-line"
+    ],
+    "autoUnlock": [
+      "ability:lightning-rod"
+    ],
+    "cost": 2,
+    "design": {
+      "arena": "physical",
+      "approach": "power",
+      "archetype": "steel"
+    },
+    "global": true,
+    "webs": [],
+    "nodes": [
+      {
+        "x": 102,
+        "y": 94,
+        "connected": [
+          "unbending-steel",
+          "natural-steel",
+          "minor-buff-6",
+          "grounded-line"
+        ],
+        "hidden": false,
+        "type": "normal",
+        "tier": null
+      }
+    ],
+    "originSlug": null,
+    "variant": null,
+    "mode": null
+  },
+  "img": "systems/ptr2e/img/svg/steel_icon.svg",
+  "effects": [
+    {
+      "name": "Active Ground",
+      "type": "passive",
+      "_id": "uEBFGR6Dkyit3jUx",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "grant-item",
+            "key": "",
+            "value": "Compendium.ptr2e.core-abilities.Item.zGgfm8CE0qrdcmdf",
+            "predicate": [],
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "reevaluateOnUpdate": false,
+            "inMemoryOnly": false,
+            "allowDuplicate": true,
+            "alterations": [],
+            "track": false,
+            "replaceSelf": false,
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            }
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": false,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "13.342",
+        "systemId": "ptr2e",
+        "systemVersion": "1.2.1.beta",
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null,
+        "exportSource": null
+      }
+    }
+  ],
+  "flags": {},
+  "_id": "CJHjeqioRxwMiemH"
+}

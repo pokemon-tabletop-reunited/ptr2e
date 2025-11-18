@@ -1,0 +1,152 @@
+{
+  "folder": "V4skAU6G3OH5fXae",
+  "name": "Dart",
+  "type": "consumable",
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "actions": [
+      {
+        "name": "Dart Thrust",
+        "slug": "dart-thrust",
+        "traits": [
+          "weapon",
+          "adaptable",
+          "contact",
+          "crit-1",
+          "grapple"
+        ],
+        "type": "attack",
+        "img": "systems/ptr2e/img/icons/weapon_icon.webp",
+        "cost": {
+          "activation": "complex"
+        },
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "types": [
+          "untyped"
+        ],
+        "category": "physical",
+        "free": true,
+        "predicate": [],
+        "power": 30,
+        "accuracy": 90
+      }
+    ],
+    "description": "<p>Darts are airborne ranged weapons, usually less than 1.3m long. They are designed to fly such that a sharp, often weighted point will strike first. They can be distinguished from short spears by the presence of fletching (feathers on the tail) and a shaft that is shorter or more flexible. Darts can be propelled by hand or with the aid of a handheld implement. In emergencies, they may be used like any other spear, but are not quite as effective.</p>",
+    "crafting": {
+      "skill": "",
+      "spans": null,
+      "materials": []
+    },
+    "equipped": {
+      "carryType": "stowed",
+      "slot": "held",
+      "handsHeld": 1
+    },
+    "grade": "E",
+    "fling": {
+      "type": "untyped",
+      "power": 45,
+      "accuracy": 90,
+      "hide": false,
+      "range": {
+        "target": "creature",
+        "distance": 8,
+        "unit": "m"
+      }
+    },
+    "quantity": 1,
+    "rarity": "common",
+    "publication": {
+      "source": "",
+      "authors": [],
+      "notes": ""
+    },
+    "slug": "dart",
+    "traits": [
+      "weapon",
+      "fling",
+      "1-handed",
+      "medieval",
+      "ancient",
+      "fantasy",
+      "stack-8"
+    ],
+    "consumableType": "other",
+    "stack": 8,
+    "cost": 3
+  },
+  "img": "systems/ptr2e/img/icons/weapon_icon.webp",
+  "effects": [
+    {
+      "name": "Dart",
+      "type": "passive",
+      "_id": "UbSjnpFad1jveyKU",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "flat-modifier",
+            "key": "{item|id}-attack-damage-flat",
+            "value": 4,
+            "predicate": [],
+            "label": "Dart",
+            "mode": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          },
+          {
+            "type": "flat-modifier",
+            "key": "fling-dart-attack-damage-flat",
+            "value": 7,
+            "predicate": [],
+            "label": "Dart (Fling)",
+            "mode": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": false,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.347",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.3.beta",
+        "lastModifiedBy": null
+      }
+    }
+  ],
+  "flags": {},
+  "_id": "35sZHVUQMo1g7jTO"
+}

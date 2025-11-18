@@ -1,0 +1,39 @@
+<div class="form-group">
+    <label>{{localize "PTR2E.Effect.FIELDS.ChangeValue.label"}}</label>
+    <div class="form-fields">
+        <input type="text" name="{{basePath}}.value" value="{{change.value}}" />
+    </div>
+</div>
+
+<div class="form-group">
+    <label class="short">{{localize "PTR2E.Effect.FIELDS.ApplyTickMode.label"}}</label>
+    <div class="form-fields">
+      <div>
+        <input type="radio" name="{{basePath}}.method" value="HP" {{#if (is change.method 'HP')}}checked{{/if}} />
+        <label>{{localize "PTR2E.Effect.FIELDS.ApplyTickMode.HP"}}</label>
+      </div>
+      <div>
+        <input type="radio" name="{{basePath}}.method" value="PP" {{#if (is change.method 'PP')}}checked{{/if}} />
+        <label>{{localize "PTR2E.Effect.FIELDS.ApplyTickMode.PP"}}</label>
+      </div>
+      <div>
+        <input type="radio" name="{{basePath}}.method" value="Shield" {{#if (is change.method 'Shield')}}checked{{/if}} />
+        <label>{{localize "PTR2E.Effect.FIELDS.ApplyTickMode.Shield"}}</label>
+      </div>
+    </div>
+    <p class="hint">{{localize "PTR2E.Effect.FIELDS.ApplyTickMode.hint"}}</p>
+</div>
+
+<div class="form-group">
+  <label>{{localize "PTR2E.Effect.FIELDS.ChangeIsFlat.label"}}</label>
+  <div class="form-fields">
+    <input type="checkbox" name="{{basePath}}.isFlat" {{#if change.isFlat}}checked{{/if}} />
+  </div>
+  <p class="hint">{{localize "PTR2E.Effect.FIELDS.ChangeIsFlat.hint"}}</p>
+</div>
+
+
+<div class="form-group">
+    <label>{{localize fields.predicate.label}}</label>
+    <input type="text" name="{{basePath}}.predicate" value="{{json change.predicate spaces=0}}" />
+</div>

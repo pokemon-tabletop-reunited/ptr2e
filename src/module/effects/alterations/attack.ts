@@ -1,5 +1,5 @@
 import ResolvableValueField from "@module/data/fields/resolvable-value-field.ts";
-import ChangeModel from "../changes/change.ts";
+import ChangeModel, { CHANGE_MODES } from "../changes/change.ts";
 import { ItemPTR2e, ItemSourcePTR2e } from "@item";
 import { StringField } from "types/foundry/common/data/fields.js";
 import { BasicChangeSystem, ResolveValueParams } from "@data";
@@ -25,7 +25,7 @@ class AttackAlteration extends foundry.abstract.DataModel<ChangeModel> {
       mode: new fields.NumberField({
         required: true,
         initial: CONST.ACTIVE_EFFECT_MODES.ADD,
-        choices: Object.fromEntries(Object.entries(CONST.ACTIVE_EFFECT_MODES).map(([k, v]) => [v, k])),
+        choices: Object.fromEntries(Object.entries(CHANGE_MODES).map(([k, v]) => [v, k])),
       }),
       property: new fields.StringField({
         required: true,
@@ -159,8 +159,8 @@ class AttackAlteration extends foundry.abstract.DataModel<ChangeModel> {
       return source;
     } else if (typeof source === "string") {
       return source.replace(
-        /{(actor|item|change|effect)\|(.*?)}/g,
-        (_match, key: string, prop: string) => {
+        /{(actor|item|change|effect)\|(.*?)(\|C)?}/g,
+        (_match, key: string, prop: string, modifier: string) => {
           const data =
             key === "change"
               ? this
@@ -173,7 +173,7 @@ class AttackAlteration extends foundry.abstract.DataModel<ChangeModel> {
             if (warn)
               this.failValidation(`Failed to resolve injected property "${source}"`);
           }
-          return String(value);
+          return modifier ? Handlebars.helpers.capitalize(String(value)) : String(value);
         }
       );
     }
@@ -225,15 +225,15 @@ class AttackAlteration extends foundry.abstract.DataModel<ChangeModel> {
           const unresolveds = formula.match(/@[a-z0-9.]+/gi) ?? [];
           // Allow failure of "@target" and "@actor.conditions" with no warning
           if (unresolveds.length > 0) {
-            const shouldWarn =
-              warn &&
-              !unresolveds.every(
-                (u) =>
-                  u.startsWith("@target.") || u.startsWith("@actor.conditions.")
-              );
-            this.ignored = true;
-            if (shouldWarn) {
-              this.failValidation(`unable to resolve formula, "${formula}"`);
+            const ignoredCase = unresolveds.every(
+              (u) =>
+                u.startsWith("@target.") || u.startsWith("@actor.conditions.")
+            );
+            if (!ignoredCase) {
+              this.ignored = true;
+              if (warn) {
+                this.failValidation(`unable to resolve formula, "${formula}"`);
+              }
             }
             return Number(defaultValue);
           }

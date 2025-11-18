@@ -1,4 +1,4 @@
-import { EquipmentData, PokemonType, PTRCONSTS } from "@data";
+import { EquipmentData, PokemonType, PTRCONSTS, RangePTR2e } from "@data";
 import { TemplateConstructor } from "./data-template.ts";
 import { getTypes } from "@scripts/config/effectiveness.ts";
 import { SlugField } from "../fields/slug-field.ts";
@@ -77,6 +77,7 @@ export default function HasGearData<BaseClass extends TemplateConstructor>(baseC
             label: "PTR2E.FIELDS.gear.fling.hide.label",
             hint: "PTR2E.FIELDS.gear.fling.hide.hint",
           }),
+          range: new fields.EmbeddedDataField(RangePTR2e, { required: false, nullable: true }),
         }),
         quantity: new fields.NumberField({
           required: true,
@@ -118,6 +119,7 @@ export default function HasGearData<BaseClass extends TemplateConstructor>(baseC
         const actorSystem = this.parent.actor.system as ActorSystemPTR2e;
 
         switch(this.equipped.slot) {
+          case "backpack": actorSystem.inventory.backpack.used += this.quantity; break;
           case "accessory": actorSystem.inventory.accessory.used += this.quantity; break;
           case "worn": actorSystem.inventory.worn.used += this.quantity; break;
           case "held": {
@@ -266,7 +268,9 @@ interface _FlingSchema extends foundry.data.fields.DataSchema {
   power: foundry.data.fields.NumberField<number, number, true, true, true>;
   accuracy: foundry.data.fields.NumberField<number, number, true, false, true>;
   hide: foundry.data.fields.BooleanField<boolean, boolean, true, true, true>;
+  range: foundry.data.fields.EmbeddedDataField<RangePTR2e, false, true>;
 }
 
 export const grades = ["E", "D", "C", "B", "A", "S"] as const;
+export const rarities = ["common", "uncommon", "rare", "unique"] as const;
 export type GearGrade = typeof grades[number];

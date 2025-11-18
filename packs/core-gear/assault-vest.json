@@ -4,7 +4,7 @@
   "type": "equipment",
   "system": {
     "crafting": {
-      "skill": null,
+      "skill": "",
       "spans": null,
       "materials": []
     },
@@ -17,7 +17,8 @@
     "fling": {
       "type": "untyped",
       "power": null,
-      "accuracy": 100
+      "accuracy": 100,
+      "hide": false
     },
     "rarity": "uncommon",
     "traits": [
@@ -36,21 +37,17 @@
         ],
         "range": {
           "target": "creature",
-          "distance": 0,
-          "unit": "m"
+          "unit": "m",
+          "distance": 10
         },
         "cost": {
-          "activation": "complex",
-          "powerPoints": 0,
-          "delay": null,
-          "priority": null
+          "activation": "complex"
         },
-        "variant": null
+        "img": "icons/svg/explosion.svg"
       }
     ],
     "description": "Effect: Increases the user's Special Defense stat by 50%. All of the user's Status-Category Attacks have triple PP cost.",
-    "slug": null,
-    "container": null,
+    "slug": "assault-vest",
     "quantity": 1,
     "identification": {
       "misidentified": null,
@@ -60,26 +57,89 @@
         "img": "systems/ptu/css/images/icons/item_icon.png",
         "description": "<p>Unidentified Item</p>"
       }
+    },
+    "_migration": {
+      "version": null,
+      "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
     }
   },
   "_id": "ahojUbJchR7UdB4O",
-  "effects": [],
-  "folder": "V4skAU6G3OH5fXad",
-  "sort": 0,
-  "ownership": {
-    "default": 0,
-    "tXAZ3QUgjuwX4gdV": 3
-  },
-  "flags": {},
-  "_stats": {
-    "compendiumSource": null,
-    "duplicateSource": null,
-    "coreVersion": "12.327",
-    "systemId": "ptr2e",
-    "systemVersion": "0.0.0-alpha.1.0",
-    "createdTime": 1717878484297,
-    "modifiedTime": 1717878484297,
-    "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
-  },
-  "_key": "!items!ahojUbJchR7UdB4O"
+  "effects": [
+    {
+      "name": "Assault Vest",
+      "type": "passive",
+      "_id": "XaoJayVzLraEIIuZ",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "basic",
+            "key": "system.modifiers.spdMultiplier",
+            "value": 1.5,
+            "mode": 1,
+            "predicate": [],
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "alter-attack",
+            "key": "status-attack",
+            "value": 3,
+            "predicate": [],
+            "mode": 1,
+            "ignored": false,
+            "property": "pp-cost",
+            "definition": []
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "13.348",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.4.beta",
+        "createdTime": 1739483952805,
+        "modifiedTime": 1758379966614,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf",
+        "exportSource": null
+      }
+    }
+  ],
+  "folder": "UUWElZA9w1KEqZS7"
 }

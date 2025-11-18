@@ -1,0 +1,197 @@
+{
+  "name": "Improved Movement Package",
+  "type": "perk",
+  "folder": "zrVtKATNxzLNxTUe",
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "actions": [],
+    "slug": "improved-movement-package",
+    "description": "<p>This perk is used to automate picking an Improved Movement perk; when you obtain it, it will present you a Choice-Set to pick which Improved Movement perk you wish to obtain, replacing itself with the result.</p><p>Options:</p><ul><li>@UUID[Compendium.ptr2e.core-perks.Item.FsXHfqJTP8eN5X1x]{Improved Overland}</li><li>@UUID[Compendium.ptr2e.core-perks.Item.QmK7pugsgkpdnaHA]{Improved Burrow}</li><li>@UUID[Compendium.ptr2e.core-perks.Item.JIKUtBXPktaHTCN6]{Improved Swimming}</li><li>@UUID[Compendium.ptr2e.core-perks.Item.zMt840jnFxHWURAj]{Improved Flying}</li><li>@UUID[Compendium.ptr2e.core-perks.Item.OluRtmzPHj9OgOXc]{Improved Threaded}</li><li>@UUID[Compendium.ptr2e.core-perks.Item.7f24boNPqznIhjiv]{Improved Teleport}</li></ul>",
+    "traits": [],
+    "prerequisites": [],
+    "autoUnlock": [],
+    "cost": 0,
+    "design": {
+      "arena": "physical",
+      "approach": "resilience",
+      "archetype": "mobility"
+    },
+    "global": false,
+    "webs": [],
+    "nodes": [],
+    "originSlug": null,
+    "variant": null,
+    "mode": null
+  },
+  "_id": "improvedmovement",
+  "img": "icons/svg/chest.svg",
+  "effects": [
+    {
+      "name": "Improved Movement Selection",
+      "type": "passive",
+      "_id": "improvedmovement",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "choice-set",
+            "prompt": "PTR2E.ChoiceSetPrompt.ImprovedMovementPrompt",
+            "adjustName": false,
+            "flag": "improvedMovementChoice",
+            "rollOption": "improvedMovementChoice",
+            "allowNoSelection": false,
+            "showDisabled": true,
+            "choices": [
+              {
+                "value": "Compendium.ptr2e.core-perks.Item.FsXHfqJTP8eN5X1x",
+                "predicate": [
+                  "self:movement:overland",
+                  {
+                    "nor": [
+                      "improved-overland:5",
+                      "improved-overland:6",
+                      "improved-overland:7"
+                    ]
+                  }
+                ]
+              },
+              {
+                "value": "Compendium.ptr2e.core-perks.Item.QmK7pugsgkpdnaHA",
+                "predicate": [
+                  "self:movement:burrow",
+                  {
+                    "nor": [
+                      "improved-burrow:5",
+                      "improved-burrow:6",
+                      "improved-burrow:7"
+                    ]
+                  }
+                ]
+              },
+              {
+                "value": "Compendium.ptr2e.core-perks.Item.JIKUtBXPktaHTCN6",
+                "predicate": [
+                  "self:movement:swim",
+                  {
+                    "nor": [
+                      "improved-swim:5",
+                      "improved-swim:6",
+                      "improved-swim:7"
+                    ]
+                  }
+                ]
+              },
+              {
+                "value": "Compendium.ptr2e.core-perks.Item.zMt840jnFxHWURAj",
+                "predicate": [
+                  "self:movement:flight",
+                  {
+                    "nor": [
+                      "improved-flight:5",
+                      "improved-flight:6",
+                      "improved-flight:7"
+                    ]
+                  }
+                ]
+              },
+              {
+                "value": "Compendium.ptr2e.core-perks.Item.OluRtmzPHj9OgOXc",
+                "predicate": [
+                  "self:movement:threaded",
+                  {
+                    "nor": [
+                      "improved-threaded:5",
+                      "improved-threaded:6",
+                      "improved-threaded:7"
+                    ]
+                  }
+                ]
+              },
+              {
+                "value": "Compendium.ptr2e.core-perks.Item.7f24boNPqznIhjiv",
+                "predicate": [
+                  "self:movement:teleport",
+                  {
+                    "nor": [
+                      "improved-teleportation:5",
+                      "improved-teleportation:6",
+                      "improved-teleportation:7"
+                    ]
+                  }
+                ]
+              }
+            ],
+            "key": "",
+            "value": 0,
+            "mode": 2,
+            "predicate": [],
+            "ignored": false
+          },
+          {
+            "type": "grant-item",
+            "key": "",
+            "value": "{effect|flags.ptr2e.choiceSelections.improvedMovementChoice}",
+            "replaceSelf": true,
+            "reevaluateOnUpdate": false,
+            "allowDuplicate": true,
+            "mode": 2,
+            "predicate": [],
+            "ignored": false,
+            "inMemoryOnly": false,
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "system.originSlug",
+                "value": "{effect|parent.system.originSlug}"
+              }
+            ],
+            "track": false,
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            }
+          }
+        ],
+        "removeAfterCombat": false,
+        "removeOnRecall": false,
+        "slug": null,
+        "traits": [],
+        "stacks": 0
+      },
+      "disabled": false,
+      "description": "<p>Replaces self with the appropriate Movement Perk.</p>",
+      "_stats": {
+        "coreVersion": "13.342",
+        "systemId": null,
+        "systemVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null,
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {}
+    }
+  ],
+  "flags": {}
+}

@@ -20,7 +20,11 @@
           "watt-burn",
           "jammer",
           "root-5",
-          "stat-iv-booster-1-6"
+          "stat-iv-booster-1-6",
+          "minor-buff-50",
+          "zapper",
+          "kinetic-dynamo",
+          "left-handedness"
         ],
         "config": {
           "alpha": null,
@@ -39,15 +43,19 @@
       }
     ],
     "autoUnlock": [],
-    "originSlug": null,
-    "variant": null,
-    "mode": null,
     "global": true,
     "webs": [],
     "design": {
       "arena": "physical",
       "approach": "power",
-      "archetype": ""
+      "archetype": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
     }
   },
   "img": "systems/ptr2e/img/svg/electric_icon.svg",
@@ -63,11 +71,16 @@
             "type": "roll-effect",
             "key": "electric-attack",
             "value": "Compendium.ptr2e.core-effects.Item.paralysisconitem",
-            "predicate": [],
+            "predicate": [
+              "origin:enemy"
+            ],
             "chance": 20,
             "affects": "target",
-            "mode": 2,
             "priority": null,
+            "alterations": [],
+            "dontMerge": false,
+            "isFixedChance": false,
+            "mode": 2,
             "ignored": false
           }
         ],
@@ -75,7 +88,9 @@
         "traits": [],
         "removeAfterCombat": true,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
@@ -93,16 +108,21 @@
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "flags": {},
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.348",
         "systemId": "ptr2e",
-        "systemVersion": "0.10.0-alpha.3.0.0",
+        "systemVersion": "1.4.3.beta",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1757798199917,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf",
+        "exportSource": null
       }
     }
   ],

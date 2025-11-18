@@ -4,7 +4,7 @@
   "type": "equipment",
   "system": {
     "crafting": {
-      "skill": null,
+      "skill": "",
       "spans": null,
       "materials": []
     },
@@ -16,12 +16,21 @@
     "grade": "B",
     "fling": {
       "type": "untyped",
-      "power": null,
-      "accuracy": 100
+      "power": 45,
+      "accuracy": 90,
+      "hide": false,
+      "range": {
+        "target": "creature",
+        "distance": 15,
+        "unit": "m"
+      }
     },
     "rarity": "uncommon",
     "traits": [
-      "combat"
+      "combat",
+      "evolution",
+      "consumable",
+      "accessory"
     ],
     "actions": [
       {
@@ -35,21 +44,16 @@
         ],
         "range": {
           "target": "creature",
-          "distance": 0,
-          "unit": "m"
+          "unit": "m",
+          "distance": 10
         },
         "cost": {
-          "activation": "complex",
-          "powerPoints": 0,
-          "delay": null,
-          "priority": null
-        },
-        "variant": null
+          "activation": "complex"
+        }
       }
     ],
-    "description": "Effect: The user's Physical- and Special-Category Attacks gain [Flinch Chance 2], at a 10% chance to cause Flinch on hit. The user's attacks that already have [Flinch Chance X] have their chance to Flinch increase by +10%.",
-    "slug": null,
-    "container": null,
+    "description": "<p>Effect: The user's @Trait[contact] trait attacks have a +20% chance to inflict @Affliction[delay 40].<br><br>May be consumed by certain Species to trigger Evolution.</p>",
+    "slug": "razor-fang",
     "quantity": 1,
     "identification": {
       "misidentified": null,
@@ -59,26 +63,85 @@
         "img": "systems/ptu/css/images/icons/item_icon.png",
         "description": "<p>Unidentified Item</p>"
       }
+    },
+    "_migration": {
+      "version": null,
+      "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
     }
   },
   "_id": "7QtTkf6L4gdE1sMz",
-  "effects": [],
-  "folder": "V4skAU6G3OH5fXad",
-  "sort": 0,
-  "ownership": {
-    "default": 0,
-    "tXAZ3QUgjuwX4gdV": 3
-  },
-  "flags": {},
-  "_stats": {
-    "compendiumSource": null,
-    "duplicateSource": null,
-    "coreVersion": "12.327",
-    "systemId": "ptr2e",
-    "systemVersion": "0.0.0-alpha.1.0",
-    "createdTime": 1717878484297,
-    "modifiedTime": 1717878484297,
-    "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
-  },
-  "_key": "!items!7QtTkf6L4gdE1sMz"
+  "effects": [
+    {
+      "name": "Razor Fang",
+      "type": "passive",
+      "_id": "FoHDF2rVnWkJazzu",
+      "img": "systems/ptr2e/img/item-icons/razor fang.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "contact-trait-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.delayconditiitem",
+            "predicate": [],
+            "chance": 20,
+            "isFixedChance": false,
+            "affects": "target",
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "system.amount",
+                "value": 40
+              }
+            ],
+            "dontMerge": false,
+            "label": "Razor Fang",
+            "mode": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.348",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.4.beta",
+        "createdTime": 1758623436728,
+        "modifiedTime": 1758623528040,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+      }
+    }
+  ],
+  "folder": "V4skAU6G3OH5fXae"
 }

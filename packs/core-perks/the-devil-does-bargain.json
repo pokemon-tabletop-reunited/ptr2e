@@ -1,0 +1,130 @@
+{
+  "folder": "E5JYWji5073kTXhD",
+  "name": "The Devil Does Bargain",
+  "type": "perk",
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "Dragoon"
+      ],
+      "notes": ""
+    },
+    "actions": [],
+    "slug": "the-devil-does-bargain",
+    "description": "<p>Effect: The user earns double the Luck from The Devil’s Deal.</p>",
+    "traits": [
+      "gambler"
+    ],
+    "prerequisites": [
+      {
+        "and": [
+          "item:perk:gambit-style",
+          "trait:ace"
+        ]
+      }
+    ],
+    "autoUnlock": [],
+    "cost": 3,
+    "design": {
+      "arena": "social",
+      "approach": "finesse",
+      "archetype": "gambler"
+    },
+    "global": true,
+    "webs": [],
+    "nodes": [
+      {
+        "x": 92,
+        "y": 189,
+        "hidden": false,
+        "type": "normal",
+        "connected": [
+          "up-the-beat",
+          "minor-buff-65",
+          "cant-break-my-winning-streak",
+          "jockeying"
+        ],
+        "config": {
+          "texture": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "tint": null
+        },
+        "tier": null
+      }
+    ]
+  },
+  "img": "icons/sundries/gaming/dice-pair-white-green.webp",
+  "effects": [
+    {
+      "name": "Let's Go Gambling!",
+      "type": "passive",
+      "_id": "rtmLG6Y2O1p35sSE",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "grant-item",
+            "key": "",
+            "value": "Compendium.ptr2e.core-moves.Item.m6eeM9WpSKpSS3rw",
+            "predicate": [],
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "reevaluateOnUpdate": false,
+            "inMemoryOnly": false,
+            "allowDuplicate": true,
+            "alterations": [],
+            "track": false,
+            "replaceSelf": false,
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            }
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": false,
+        "removeOnRecall": false,
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "13.346",
+        "systemId": "ptr2e",
+        "systemVersion": "1.2.1.beta",
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null,
+        "exportSource": null
+      }
+    }
+  ],
+  "_id": "3dakhQVtvPyUlnAh"
+}

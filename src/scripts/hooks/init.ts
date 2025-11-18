@@ -6,19 +6,21 @@ import { PTRHook } from "./data.ts";
 import { HTMLStringTagsElementPTR2e } from "@module/apps/string-tags.ts";
 import { initializeSettings } from "@scripts/settings.ts";
 import { default as enrichers } from "@scripts/ui/text-enrichers.ts";
-import { WelcomeTour } from "@module/tours/welcome.ts";
-import { FoldersTour } from "@module/tours/folders.ts";
-import { ActorSheetTour } from "@module/tours/actor-sheet.ts";
 import { storeInitialWorldVersions } from "@scripts/store-versions.ts";
 import { MigrationList, MigrationRunner } from "@module/migration/index.ts";
 import { MigrationSummary } from "@module/apps/migration-summary.ts";
-import { TokenConfigPTR2e } from "@module/canvas/token/sheet.ts";
 import { TokenDocumentPTR2e } from "@module/canvas/token/document.ts";
+import { WelcomeTour } from "@module/tours/welcome.ts";
+import { ActorSheetTour } from "@module/tours/actor-sheet.ts";
 import { PerkWebTour } from "@module/tours/perk-web.ts";
-import { GeneratingPokemonTour } from "@module/tours/generating-pokemon.ts";
-import { AutomationTour } from "@module/tours/automation.ts";
-import { MiscTour } from "@module/tours/misc.ts";
-import { CompendiumBrowserTour } from "@module/tours/compendium-browser.ts";
+// import { FoldersTour } from "@module/tours/folders.ts";
+// import { GeneratingPokemonTour } from "@module/tours/generating-pokemon.ts";
+// import { AutomationTour } from "@module/tours/automation.ts";
+// import { MiscTour } from "@module/tours/misc.ts";
+// import { CompendiumBrowserTour } from "@module/tours/compendium-browser.ts";
+import { initializeKeybindings } from "@scripts/keybindings.ts";
+import { UUID_REDIRECTS } from "@scripts/config/uuid-redirects.ts";
+import { Draggable } from "gsap/all";
 
 export const Init: PTRHook = {
   listen() {
@@ -37,12 +39,17 @@ export const Init: PTRHook = {
       }
 
       // Setup PTR Config
+      // @ts-expect-error - Certain config options are added in the Ready Hook.
       CONFIG.PTR = PTRCONFIG;
       Object.freeze(CONFIG.PTR);
 
-      if (game.release.generation === 12) {
-        CONFIG.Token.prototypeSheetClass = TokenConfigPTR2e;
-      }
+      // if (game.release.generation === 12) {
+      CONFIG.Token.prototypeSheetClass = PTRCONFIG.Token.prototypeSheetClass;
+      // }
+
+      //Add UUID Redirects
+      //@ts-expect-error - Missing types
+      CONFIG.compendium.uuidRedirects = UUID_REDIRECTS;
 
       // Define custom Entity classes
       CONFIG.ActiveEffect.documentClass = PTRCONFIG.ActiveEffect.documentClass;
@@ -66,6 +73,10 @@ export const Init: PTRHook = {
       };
       CONFIG.Token.documentClass = PTRCONFIG.Token.documentClass;
       CONFIG.Token.objectClass = PTRCONFIG.Token.objectClass;
+      // CONFIG.Token.hudClass = PTRCONFIG.Token.hudClass;
+      CONFIG.Token.rulerClass = PTRCONFIG.Token.rulerClass;
+      CONFIG.Token.movement.defaultAction = "overland";
+      CONFIG.Token.movement.actions = fu.mergeObject(PTRCONFIG.movementTypes, { displace: CONFIG.Token.movement.actions["displace"] }, { inplace: false });
       CONFIG.Dice.rolls = CONFIG.Dice.rolls.concat(PTRCONFIG.Dice.rolls);
 
       CONFIG.Folder.documentClass = PTRCONFIG.Folder.documentClass;
@@ -81,63 +92,66 @@ export const Init: PTRHook = {
       CONFIG.statusEffects = PTRCONFIG.statusEffects;
       CONFIG.specialStatusEffects = PTRCONFIG.specialStatusEffects;
 
+      CONFIG.ui.actors = PTRCONFIG.ui.actors;
+      CONFIG.ui.combat = PTRCONFIG.ui.combat
+      CONFIG.ui.compendium = PTRCONFIG.ui.compendium;
+      CONFIG.ui.settings = PTRCONFIG.ui.settings;
+      //@ts-expect-error - Typing issue
+      CONFIG.ui.tables = PTRCONFIG.ui.tables;
+      CONFIG.ui.hotbar = PTRCONFIG.ui.hotbar;
+      CONFIG.ui.items = PTRCONFIG.ui.items;
+
       if (game.release.generation === 12) {
-        CONFIG.ui.combat = PTRCONFIG.ui.combat
-        CONFIG.ui.items = PTRCONFIG.ui.items;
-        CONFIG.ui.actors = PTRCONFIG.ui.actors;
-        CONFIG.ui.compendium = PTRCONFIG.ui.compendium;
-        //@ts-expect-error - Typing issue
-        CONFIG.ui.tables = PTRCONFIG.ui.tables;
         CONFIG.ui.perksTab = PTRCONFIG.ui.perks;
-        CONFIG.ui.settings = PTRCONFIG.ui.settings;
       }
 
       // Register custom sheets
       {
-        Actors.unregisterSheet("core", ActorSheet);
+        foundry.documents.collections.Actors.unregisterSheet("core", foundry.appv1.sheets.ActorSheet);
         //@ts-expect-error - Application V2 Compatability
-        Actors.registerSheet("ptr2e", ActorSheetPTR2e, { types: ["humanoid", "pokemon"], makeDefault: true })
-        Actors.registerSheet("ptr2e", PTRCONFIG.Actor.sheetClasses["ptu-actor"], { types: ["ptu-actor"], makeDefault: true })
+        foundry.documents.collections.Actors.registerSheet("ptr2e", ActorSheetPTR2e, { types: ["humanoid", "pokemon"], makeDefault: true })
+        foundry.documents.collections.Actors.registerSheet("ptr2e", PTRCONFIG.Actor.sheetClasses["ptu-actor"], { types: ["ptu-actor"], makeDefault: true })
 
-        Items.unregisterSheet("core", ItemSheet);
+        foundry.documents.collections.Items.unregisterSheet("core", foundry.appv1.sheets.ItemSheet);
         for (const type in PTRCONFIG.Item.sheetClasses) {
           const key = type as keyof typeof PTRCONFIG.Item.sheetClasses;
           for (const sheet of PTRCONFIG.Item.sheetClasses[key]) {
             //@ts-expect-error - Application V2 Compatability
-            Items.registerSheet("ptr2e", sheet, { types: [type], makeDefault: true });
+            foundry.documents.collections.Items.registerSheet("ptr2e", sheet, { types: [type], makeDefault: true });
           }
         }
 
-        DocumentSheetConfig.unregisterSheet(ActiveEffect, "core", ActiveEffectConfig);
+        foundry.applications.apps.DocumentSheetConfig.unregisterSheet(ActiveEffect, "core", foundry.applications.sheets.ActiveEffectConfig);
         //@ts-expect-error - Application V2 Compatability
-        DocumentSheetConfig.registerSheet(ActiveEffect, "ptr2e", PTRCONFIG.ActiveEffect.sheetClasses.effect, { makeDefault: true });
+        foundry.applications.apps.DocumentSheetConfig.registerSheet(ActiveEffect, "ptr2e", PTRCONFIG.ActiveEffect.sheetClasses.effect, { makeDefault: true });
         //@ts-expect-error - Application V2 Compatability
-        DocumentSheetConfig.registerSheet(ActiveEffect, "ptr2e", PTRCONFIG.ActiveEffect.sheetClasses.form, { types: ['form'], makeDefault: true });
-
-        DocumentSheetConfig.registerSheet(TokenDocumentPTR2e, "ptr2e", TokenConfigPTR2e, { makeDefault: true });
+        foundry.applications.apps.DocumentSheetConfig.registerSheet(ActiveEffect, "ptr2e", PTRCONFIG.ActiveEffect.sheetClasses.form, { types: ['form'], makeDefault: true });
+        //@ts-expect-error - Application V2 Compatability
+        foundry.applications.apps.DocumentSheetConfig.registerSheet(TokenDocumentPTR2e, "ptr2e", PTRCONFIG.Token.sheetClass, { makeDefault: true });
       }
 
       initializeSettings();
+      initializeKeybindings();
 
       // Register tours
       (async () => {
-        // Monkeypatch the game.tooltip class to stop auto-dismissing tooltips
-        const original = game.tooltip.deactivate.bind(game.tooltip);
-        game.tooltip.deactivate = (force) => {
-          if (Tour.tourInProgress && !force) return;
-          original();
-        }
+      //   // Monkeypatch the game.tooltip class to stop auto-dismissing tooltips
+      //   const original = game.tooltip.deactivate.bind(game.tooltip);
+      //   game.tooltip.deactivate = (force) => {
+      //     if (foundry.nue.Tour.tourInProgress && !force) return;
+      //     original();
+      //   }
 
         try {
           game.tours.register("ptr2e", "welcome", await WelcomeTour.fromJSON("systems/ptr2e/tours/welcome.json"));
-          game.tours.register("ptr2e", "folders", await FoldersTour.fromJSON("systems/ptr2e/tours/folders.json"));
+          // game.tours.register("ptr2e", "folders", await FoldersTour.fromJSON("systems/ptr2e/tours/folders.json"));
           game.tours.register("ptr2e", "actor-sheet", await ActorSheetTour.fromJSON("systems/ptr2e/tours/actor-sheet.json"));
           game.tours.register("ptr2e", "perk-web", await PerkWebTour.fromJSON("systems/ptr2e/tours/perk-web.json"));
           // game.tours.register("ptr2e", "character-creation", await CharacterCreationTour.fromJSON("systems/ptr2e/tours/character-creation.json"));
-          game.tours.register("ptr2e", "compendium-browser", await CompendiumBrowserTour.fromJSON("systems/ptr2e/tours/compendium-browser.json"));
-          game.tours.register("ptr2e", "generating-pokemon", await GeneratingPokemonTour.fromJSON("systems/ptr2e/tours/generating-pokemon.json"));
-          game.tours.register("ptr2e", "automation", await AutomationTour.fromJSON("systems/ptr2e/tours/automation.json"));
-          game.tours.register("ptr2e", "misc", await MiscTour.fromJSON("systems/ptr2e/tours/misc.json"));
+          // game.tours.register("ptr2e", "compendium-browser", await CompendiumBrowserTour.fromJSON("systems/ptr2e/tours/compendium-browser.json"));
+          // game.tours.register("ptr2e", "generating-pokemon", await GeneratingPokemonTour.fromJSON("systems/ptr2e/tours/generating-pokemon.json"));
+          // game.tours.register("ptr2e", "automation", await AutomationTour.fromJSON("systems/ptr2e/tours/automation.json"));
+          // game.tours.register("ptr2e", "misc", await MiscTour.fromJSON("systems/ptr2e/tours/misc.json"));
         }
         catch (err) {
           console.error(err);
@@ -153,6 +167,8 @@ export const Init: PTRHook = {
       registerHandlebarsHelpers();
       HandlebarTemplates.register();
 
+      gsap.registerPlugin(Flip, Draggable, InertiaPlugin);
+
       // Create and populate initial game.ptr interface
       GamePTR.onInit();
     });
@@ -161,10 +177,41 @@ export const Init: PTRHook = {
       console.log('PTR 2e | Setup');
       // Add setup code here
       GamePTR.onSetup();
+
+      // Monkeypatch core macro keyboard bindings
+      //@ts-expect-error - Monkey Patching
+      const core = game.keybindings._registerCoreKeybindings;
+      //@ts-expect-error - Monkey Patching
+      game.keybindings._registerCoreKeybindings = function(view: string) {
+        // Run core code
+        core.bind(this)(view)
+        // Override the macro keybinding to use the PTR2E macro bar instead of the core one
+        for (const number of Array.fromRange(9, 1).concat([0])) {
+          const action = game.keybindings.actions.get(`core.executeMacro${number}`);
+          if (!action) continue; // @ts-expect-error - Incomplete types
+          action.onDown = () => ui.hotbar.executeMacro(number);
+        }
+      }
+
+      //@ts-expect-error - Monkey Patching
+      const original = CONFIG.Token.hudClass.prototype._getMovementActionChoices as (() => Record<string, Record<string, object>>);
+      //@ts-expect-error - Monkey Patching
+      CONFIG.Token.hudClass.prototype._getMovementActionChoices = function() {
+        const results = original.bind(this)()
+        if(Object.keys(results).length > 1) delete results[""];
+        return results;
+      }
     })
 
     Hooks.once('ready', () => {
       console.log('PTR 2e | Ready');
+
+      const config = game.settings.get("core", "combatTrackerConfig") as {turnMarker: {src: string, animation: string}};
+      if(config?.turnMarker && config.turnMarker.src == "") {
+        config.turnMarker.src = "icons/svg/circle.svg";
+        config.turnMarker.animation = "spinPulse";
+        game.settings.set("core", "combatTrackerConfig", config);
+      }
 
       // Add ready code here
       GamePTR.onReady();

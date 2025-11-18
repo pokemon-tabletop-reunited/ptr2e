@@ -1,0 +1,145 @@
+{
+  "name": "Night Terror Stance",
+  "_id": "T3m18dn3i6MEgmbI",
+  "type": "perk",
+  "img": "icons/magic/death/undead-ghost-strike-white.webp",
+  "effects": [
+    {
+      "name": "Night Terror Stance",
+      "type": "passive",
+      "_id": "IAiEc1MboKBOf6Se",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "night-terror-stance-generic",
+            "value": "Compendium.ptr2e.core-effects.Item.IsSu3OLWQFh2cX01",
+            "predicate": [],
+            "chance": 100,
+            "isFixedChance": true,
+            "affects": "target",
+            "alterations": [],
+            "dontMerge": false,
+            "mode": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.347",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.3.beta",
+        "createdTime": 1756044114052,
+        "modifiedTime": 1756044174041,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+      }
+    }
+  ],
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "publication": {
+      "source": "PTR2e Core",
+      "authors": [
+        "Fox"
+      ],
+      "notes": ""
+    },
+    "actions": [
+      {
+        "name": "Night Terror Stance",
+        "slug": "night-terror-stance",
+        "description": "<p>Target: A Commanded @Trait[ghost] Creature.<br><br>Effect: Effect: This Stance remains active until the initiator or affected @Trait[ghost] choose to end it, or the Night Terror clock has been consumed.<br><br>While in the Night Terror Stance, the Initiator establishes a Night Terror Clock of 5 Spans. In the event that the affected @Trait[ghost] is removed from Combat, the Initiator may transfer this Stance to a new @Trait[ghost].</p><p dir=\"auto\">Whenever the affected @Trait[ghost] uses a @Trait[ghost]-Type attack, or applies a @Trait[major-affliction] or @Trait[minor-affliction] to a Foe, the Night Terror clock is progressed by 1 Span (stacking in the event the @Trait[ghost] attack applies such an affliction). When the Night Terror clock is filled, the affected @Trait[ghost] may consume it to inflict @Affliction[nightmares 5] on a foe within 5m, bypassing any need for the target to be @Affliction[drowsy] first. In the event that the target is already @Affliction[drowsy], make the appropriate modification to @Affliction[nightmares] duration.</p><p dir=\"auto\">While in the Night Terror Stance, @Trait[psychic] attacks gain +1 Effectiveness Stage versus the affected @Trait[ghost]</p>",
+        "traits": [
+          "command",
+          "stance",
+          "ghost"
+        ],
+        "type": "generic",
+        "img": "icons/magic/death/undead-ghost-strike-white.webp",
+        "range": {
+          "target": "creature",
+          "distance": 20,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "simple",
+          "powerPoints": 3
+        }
+      }
+    ],
+    "slug": "night-terror-stance",
+    "description": "<p>Target: A Commanded @Trait[ghost] Creature.<br><br>Effect: Effect: This Stance remains active until the initiator or affected @Trait[ghost] choose to end it, or the Night Terror clock has been consumed.<br><br>While in the Night Terror Stance, the Initiator establishes a Night Terror Clock of 5 Spans. In the event that the affected @Trait[ghost] is removed from Combat, the Initiator may transfer this Stance to a new @Trait[ghost].</p><p dir=\"auto\">Whenever the affected @Trait[ghost] uses a @Trait[ghost]-Type attack, or applies a @Trait[major-affliction] or @Trait[minor-affliction] to a Foe, the Night Terror clock is progressed by 1 Span (stacking in the event the @Trait[ghost] attack applies such an affliction). When the Night Terror clock is filled, the affected @Trait[ghost] may consume it to inflict @Affliction[nightmares 5] on a foe within 5m, bypassing any need for the target to be @Affliction[drowsy] first. In the event that the target is already @Affliction[drowsy], make the appropriate modification to @Affliction[nightmares] duration.</p><p dir=\"auto\">While in the Night Terror Stance, @Trait[psychic] attacks gain +1 Effectiveness Stage versus the affected @Trait[ghost]</p>",
+    "traits": [
+      "command",
+      "stance",
+      "ghost"
+    ],
+    "prerequisites": [
+      "item:perk:type-specialist",
+      {
+        "gte": [
+          "{actor|skills.ghost.mod}",
+          45
+        ]
+      }
+    ],
+    "autoUnlock": [],
+    "cost": 3,
+    "design": {
+      "arena": "mental",
+      "approach": "power",
+      "archetype": "ghost"
+    },
+    "global": true,
+    "webs": [],
+    "nodes": [
+      {
+        "x": 184,
+        "y": 102,
+        "hidden": false,
+        "type": "normal",
+        "connected": [
+          "type-specialist"
+        ],
+        "config": {
+          "texture": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "tint": null
+        },
+        "tier": null
+      }
+    ]
+  },
+  "folder": "mYLGJuVcLTxYkgvC"
+}

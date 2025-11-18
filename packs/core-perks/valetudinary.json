@@ -1,0 +1,162 @@
+{
+  "name": "Valetudinary",
+  "_id": "8hgeEVn8DIrLT7T4",
+  "type": "perk",
+  "img": "icons/equipment/feet/boots-galosh-white.webp",
+  "effects": [
+    {
+      "name": "Valetudinary",
+      "type": "passive",
+      "_id": "KM4X5RPW1rUchZj8",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "basic",
+            "key": "system.battleStats.evasion.stage",
+            "value": 2,
+            "predicate": [
+              "self:state:desperation-1-2"
+            ],
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "key": "system.attributes.spe.stage",
+            "value": 2,
+            "predicate": [
+              "self:state:desperation-1-2"
+            ],
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "key": "system.attributes.atk.stage",
+            "value": -1,
+            "predicate": [
+              "self:state:desperation-1-2"
+            ],
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "key": "system.attributes.def.stage",
+            "value": -1,
+            "predicate": [
+              "self:state:desperation-1-2"
+            ],
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "key": "system.attributes.spa.stage",
+            "value": -1,
+            "predicate": [
+              "self:state:desperation-1-2"
+            ],
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "key": "system.attributes.spd.stage",
+            "value": -1,
+            "predicate": [
+              "self:state:desperation-1-2"
+            ],
+            "mode": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.348",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.3.beta",
+        "createdTime": 1757810214501,
+        "modifiedTime": 1757810458996,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+      }
+    }
+  ],
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "publication": {
+      "source": "PTR2e Core",
+      "authors": [
+        "Dragoon"
+      ],
+      "notes": ""
+    },
+    "actions": [],
+    "slug": "valetudinary",
+    "description": "<p><span style=\"font-family: -apple-system, BlinkMacSystemFont, &#x27;Segoe UI&#x27;, &#x27;Noto Sans&#x27;, Helvetica, Arial, sans-serif, &#x27;Apple Color Emoji&#x27;, &#x27;Segoe UI Emoji&#x27;\">While the user meets the [Desperation 1/2] condition, they gain +2 default EVA and SPD Stages. lose -1 ATK. DEF, SPATK, SPDEF Stages, and gain +2 to all of their Movement Scores.</span></p>",
+    "traits": [
+      "healer",
+      "desperation-1-2",
+      "partial-automation"
+    ],
+    "prerequisites": [],
+    "autoUnlock": [],
+    "cost": 3,
+    "design": {
+      "arena": "physical",
+      "approach": "finesse",
+      "archetype": "healer"
+    },
+    "global": true,
+    "webs": [],
+    "nodes": [
+      {
+        "x": 48,
+        "y": 81,
+        "hidden": false,
+        "type": "normal",
+        "connected": [
+          "tourniquetting"
+        ],
+        "config": {
+          "texture": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "tint": null
+        },
+        "tier": null
+      }
+    ]
+  },
+  "folder": "4UhJK1LInml07WJf"
+}

@@ -11,22 +11,18 @@
         ],
         "name": "Alluring",
         "slug": "alluring",
-        "type": "generic",
-        "cost": {
-          "activation": "free",
-          "powerPoints": 3,
-          "trigger": "<p>The user enters combat.</p>"
-        },
+        "type": "passive",
+        "cost": {},
         "range": {
-          "target": "emanation",
-          "distance": 10,
+          "target": "enemy-aura",
+          "distance": 8,
           "unit": "m"
         },
-        "description": "<p>Trigger: The user enters combat.</p><p>Effect: All creatures within Range of the user lose -1 EVA Stage for 3 Activations.</p>",
+        "description": "<p>Effect: All valid creatures in range have -1 default EVA Stage. When an affected creature leaves the range of this effect, they lose -1 EVA Stage for 3 Activations. The user's Conversation Skill checks have an additional +10 bonus. NEEDS REAUTOMATED.</p>",
         "img": "icons/svg/explosion.svg"
       }
     ],
-    "description": "<p>Trigger: The user enters combat.</p><p>Effect: All valid creatures within Range of the user lose -1 EVA Stage for 3 Activations.</p>",
+    "description": "<p>Effect: All valid creatures in range have -1 default EVA Stage. When an affected creature leaves the range of this effect, they lose -1 EVA Stage for 3 Activations. The user's Conversation Skill checks have an additional +10 bonus. NEEDS REAUTOMATED.</p>",
     "traits": [
       "social",
       "friendly"
@@ -35,6 +31,12 @@
     "_migration": {
       "version": null,
       "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ]
     }
   },
   "_id": "EgoYwbdN2WxsVoB0",

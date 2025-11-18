@@ -1,86 +1,129 @@
 {
+  "folder": "V4skAU6G3OH5fXab",
   "name": "Cell Battery",
-  "img": "systems/ptr2e/img/icons/equipment_icon.webp",
-  "type": "equipment",
+  "type": "consumable",
   "system": {
-    "crafting": {
-      "skill": null,
-      "spans": null,
-      "materials": []
+    "_migration": {
+      "version": 0.111,
+      "previous": null
     },
-    "equipped": {
-      "slot": "belt",
-      "carryType": "stowed",
-      "handsHeld": null
-    },
-    "grade": "C",
-    "fling": {
-      "type": "untyped",
-      "power": null,
-      "accuracy": 100
-    },
-    "rarity": "uncommon",
-    "traits": [
-      "combat",
-      "consumable"
-    ],
     "actions": [
       {
         "name": "Cell Battery",
         "slug": "cell-battery",
-        "type": "generic",
-        "description": "Trigger: The user is hit with an Electric-Type attack.\nEffect: The user gains +2 default ATK Stages for the remainder of the combat.",
+        "description": "<p>Trigger: The user is hit with an @Trait[electric]-type attack. <br><br>Effect: The user gains @UUID[Compendium.ptr2e.core-effects.ZGwaMlzUwkSuCPyH]{+1 Attack Stage} for 5 activations.</p>",
         "traits": [
-          "Combat",
-          "Consumable"
+          "consumable",
+          "combat"
         ],
-        "range": {
-          "target": "creature",
-          "distance": 0,
-          "unit": "m"
-        },
+        "type": "generic",
+        "img": "systems/ptr2e/img/icons/consumable_icon.webp",
         "cost": {
-          "activation": "complex",
-          "trigger": "The user is hit with an Electric-Type attack.",
-          "powerPoints": 0,
-          "delay": null,
-          "priority": null
+          "activation": "free"
         },
-        "variant": null
+        "range": {
+          "target": "self",
+          "unit": "m"
+        }
       }
     ],
-    "description": "Trigger: The user is hit with an Electric-Type attack.\nEffect: The user gains +2 default ATK Stages for the remainder of the combat.",
-    "slug": null,
-    "container": null,
+    "crafting": {
+      "skill": "",
+      "spans": null,
+      "materials": []
+    },
+    "equipped": {
+      "carryType": "stowed",
+      "slot": "belt",
+      "handsHeld": null
+    },
+    "fling": {
+      "type": "untyped",
+      "power": null,
+      "accuracy": 100,
+      "hide": true,
+      "range": {
+        "target": "creature",
+        "distance": 10,
+        "unit": "m"
+      }
+    },
     "quantity": 1,
-    "identification": {
-      "misidentified": null,
-      "status": "identified",
-      "unidentified": {
-        "name": "Unidentified Item",
-        "img": "systems/ptu/css/images/icons/item_icon.png",
-        "description": "<p>Unidentified Item</p>"
+    "rarity": "common",
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "description": "<p>Trigger: The user is hit with an @Trait[electric]-type attack. <br><br>Effect: The user gains @UUID[Compendium.ptr2e.core-effects.ZGwaMlzUwkSuCPyH]{+1 Attack Stage} for 5 activations.</p>",
+    "traits": [
+      "consumable",
+      "combat"
+    ],
+    "consumableType": "other",
+    "stack": 1,
+    "cost": 3
+  },
+  "img": "systems/ptr2e/img/icons/consumable_icon.webp",
+  "effects": [
+    {
+      "name": "Cell Battery",
+      "type": "passive",
+      "_id": "JhuoRf4zltwvGjOQ",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "cell-battery-generic",
+            "value": "Compendium.ptr2e.core-effects.Item.ZGwaMlzUwkSuCPyH",
+            "predicate": [],
+            "chance": 100,
+            "isFixedChance": false,
+            "affects": "target",
+            "alterations": [],
+            "dontMerge": false,
+            "mode": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.350",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.5.beta",
+        "lastModifiedBy": null
       }
     }
-  },
-  "_id": "KLEZV8CtGZEivvaZ",
-  "effects": [],
-  "folder": "V4skAU6G3OH5fXad",
-  "sort": 0,
-  "ownership": {
-    "default": 0,
-    "tXAZ3QUgjuwX4gdV": 3
-  },
+  ],
   "flags": {},
-  "_stats": {
-    "compendiumSource": null,
-    "duplicateSource": null,
-    "coreVersion": "12.327",
-    "systemId": "ptr2e",
-    "systemVersion": "0.0.0-alpha.1.0",
-    "createdTime": 1717878484297,
-    "modifiedTime": 1717878484297,
-    "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
-  },
-  "_key": "!items!KLEZV8CtGZEivvaZ"
+  "_id": "pqHWM9eDrSgsXAcX"
 }

@@ -29,26 +29,21 @@
             ]
           }
         ]
-      },
-      {
-        "gte": [
-          "{actor|level}",
-          20
-        ]
       }
     ],
-    "cost": 3,
-    "description": "<p>When a [Weather] effect ends or you enter Combat, you may use a [Weather] Attack as an [Interrupt 4] Free Action. The user learns one Attack from the [Climatologist] Tutor List.</p>",
+    "cost": 4,
+    "description": "<p>Trigger: A @Trait[weather] effect expires.</p><p>Effect: The user may use a [Weather] Status-Category Attack as an [Interrupt 4] Free Action.</p><p>Passive: The user may slot one @Trait[weather] Move they know freely, and gains one @Trait[weather] creating Ability (f.e. Drizzle) as a Tutored Ability.</p>",
     "actions": [
       {
         "name": "Climate Change",
         "slug": "climate-change",
-        "description": "<p>When a [Weather] effect ends or you enter Combat, you may use a [Weather] Attack as an [Interrupt 4] Free Action.</p>",
+        "description": "<p>Effect: The user may use a [Weather] Status-Category Attack as an [Interrupt 4] Free Action.</p>",
         "cost": {
           "activation": "free",
-          "powerPoints": 3,
+          "powerPoints": 2,
           "delay": null,
-          "priority": null
+          "priority": null,
+          "trigger": "Trigger: A @Trait[weather] effect expires."
         },
         "type": "generic",
         "traits": [
@@ -61,7 +56,8 @@
           "unit": "m",
           "distance": 0
         },
-        "variant": null
+        "variant": null,
+        "ephemeralVariant": false
       }
     ],
     "slug": "climate-change",
@@ -101,7 +97,14 @@
     "design": {
       "arena": "physical",
       "approach": "finesse",
-      "archetype": "Climatology"
+      "archetype": "climatology"
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
     }
   },
   "_id": "c9lZiSYxUivRPn2p",

@@ -1,0 +1,125 @@
+{
+  "name": "Lucky Punch",
+  "type": "equipment",
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "slug": "lucky-punch",
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "traits": [
+      "combat",
+      "happiny",
+      "chansey",
+      "blissey"
+    ],
+    "actions": [],
+    "description": "<p>Effect: [Happiny], [Chansey], or [Blissey] creatures that have this item equipped have +2 default CRIT stages.</p>",
+    "crafting": {
+      "skill": "",
+      "spans": null,
+      "materials": []
+    },
+    "equipped": {
+      "carryType": "stowed",
+      "handsHeld": null,
+      "slot": "accessory"
+    },
+    "grade": "D",
+    "fling": {
+      "type": "untyped",
+      "power": null,
+      "accuracy": 100,
+      "hide": false,
+      "range": {
+        "target": "creature",
+        "distance": 10,
+        "unit": "m"
+      }
+    },
+    "quantity": 1,
+    "rarity": "rare",
+    "identification": {
+      "misidentified": null,
+      "status": "identified",
+      "unidentified": {
+        "name": "Unidentified Item",
+        "img": "systems/ptu/css/images/icons/gear_icon.png",
+        "description": "<p>Unidentified Item</p>"
+      }
+    }
+  },
+  "img": "systems/ptr2e/img/item-icons/lucky%20punch.webp",
+  "effects": [
+    {
+      "name": "Lucky Punch",
+      "type": "passive",
+      "_id": "KhJhBPoabN2YScIy",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "basic",
+            "key": "system.battleStats.critRate.stage",
+            "value": 2,
+            "predicate": [
+              {
+                "or": [
+                  "species:happiny",
+                  "species:chansey",
+                  "species:blissey"
+                ]
+              }
+            ],
+            "label": "Lucky Punch",
+            "mode": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.350",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.4.beta",
+        "createdTime": 1758376216132,
+        "modifiedTime": 1758376316950,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+      }
+    }
+  ],
+  "folder": "6VDJBcrqVDh5bYtA",
+  "_id": "r9nYqXBqArpRXnrs"
+}

@@ -9,28 +9,22 @@
       {
         "name": "Run Down",
         "slug": "run-down",
-        "description": "<p>Trigger: You successfully hit an opponent with an attack.<br><br>May spend 4 PP to gain +1 SPD stage for 5 activations as a Free Action at [Interrupt 2].</p>",
+        "description": "<p>Trigger: The user successfully hits an opponent with an attack.<br><br>Effect: The user may spend 3 PP to gain +1 SPD stage for 5 activations as a Free Action at [Interrupt 2].</p>",
         "traits": [],
-        "type": "attack",
+        "type": "generic",
         "range": {
           "target": "self",
           "unit": "m"
         },
         "cost": {
           "activation": "free",
-          "powerPoints": 4
+          "powerPoints": 3
         },
-        "img": "systems/ptr2e/img/perk-icons/Cavalier.svg",
-        "types": [
-          "untyped"
-        ],
-        "category": "status",
-        "free": true,
-        "predicate": []
+        "img": "systems/ptr2e/img/perk-icons/Cavalier.svg"
       }
     ],
     "slug": "run-down",
-    "description": "<p>Trigger: You successfully hit an opponent with an attack.<br><br>May spend 4 PP to gain +1 SPD stage for 5 activations as a Free Action at [Interrupt 2].</p>",
+    "description": "<p>Trigger: You successfully hit an opponent with an attack.<br><br>May spend 3 PP to gain +1 SPD stage for 5 activations as a Free Action at [Interrupt 2].</p>",
     "traits": [],
     "prerequisites": [],
     "cost": 3,
@@ -40,25 +34,26 @@
     },
     "nodes": [
       {
+        "x": 67,
+        "y": 185,
+        "hidden": false,
+        "type": "normal",
         "connected": [
           "hobby-gardener",
           "hamstring",
           "quick-and-the-dead",
-          "mightyena-tactic"
+          "mightyena-tactic",
+          "dont-interrupt-me"
         ],
         "config": {
+          "texture": "systems/ptr2e/img/perk-icons/Cavalier.svg",
           "alpha": null,
-          "backgroundColor": "#000000",
+          "backgroundColor": null,
           "borderColor": null,
           "borderWidth": null,
-          "texture": "systems/ptr2e/img/perk-icons/Cavalier.svg",
           "tint": null,
           "scale": null
         },
-        "hidden": false,
-        "type": "normal",
-        "x": 67,
-        "y": 185,
         "tier": null
       }
     ],
@@ -68,7 +63,14 @@
     "design": {
       "arena": "physical",
       "approach": "power",
-      "archetype": "Hunter"
+      "archetype": "hunter"
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
     }
   },
   "effects": [
@@ -81,22 +83,26 @@
         "changes": [
           {
             "type": "roll-effect",
-            "key": "run-down-attack",
+            "key": "run-down-generic",
             "value": "Compendium.ptr2e.core-effects.Item.XeiSuS3APUcN0MLM",
             "predicate": [],
             "chance": 100,
             "affects": "self",
-            "mode": 2,
             "priority": null,
-            "ignored": false,
-            "alterations": []
+            "alterations": [],
+            "dontMerge": false,
+            "isFixedChance": true,
+            "mode": 2,
+            "ignored": false
           }
         ],
         "slug": null,
         "traits": [],
         "removeAfterCombat": true,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
@@ -114,16 +120,21 @@
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "flags": {},
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.348",
         "systemId": "ptr2e",
-        "systemVersion": "0.10.0-alpha.5.2.1",
+        "systemVersion": "1.4.4.beta",
         "createdTime": 1737935246436,
-        "modifiedTime": 1737935273361,
-        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+        "modifiedTime": 1758394785878,
+        "lastModifiedBy": "Kc3DOunCh3ClAeHS",
+        "exportSource": null
       }
     }
   ]

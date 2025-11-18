@@ -9,10 +9,12 @@
     },
     "traits": [
       "evolution",
-      "grass"
+      "belt",
+      "held",
+      "charge-pool-6"
     ],
     "actions": [],
-    "description": "<p>This item catalyses evolution for a number of Grass-type Pokemon.</p>",
+    "description": "<p>This item’s Charge Pool refreshes following Camp. While equipped in a Held or Belt Slot, the user may spend Charge in place of PP (1 Tick of the Clock equals 1 PP) for their Grass-Type Attacks.</p><p>This is also a catalyst for Evolution. When used to evolve a creature, this item is Consumed.</p>",
     "crafting": {
       "skill": "",
       "spans": null,
@@ -20,18 +22,23 @@
     },
     "equipped": {
       "carryType": "stowed",
-      "handsHeld": null,
+      "handsHeld": 1,
       "slot": "backpack"
     },
-    "grade": "E",
+    "grade": "C",
     "fling": {
       "type": "grass",
       "power": 70,
-      "accuracy": 100,
-      "hide": false
+      "accuracy": 90,
+      "hide": false,
+      "range": {
+        "target": "creature",
+        "distance": 7,
+        "unit": "m"
+      }
     },
     "quantity": 1,
-    "rarity": "common",
+    "rarity": "uncommon",
     "identification": {
       "misidentified": null,
       "status": "identified",
@@ -40,10 +47,17 @@
         "img": "systems/ptu/css/images/icons/gear_icon.png",
         "description": "<p>Unidentified Item</p>"
       }
-    }
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "slug": "leaf-stone"
   },
   "_id": "Rt0SxLyROdChPHvE",
   "img": "systems/ptr2e/img/item-icons/leaf%20stone.webp",
-  "effects": [],
-  "flags": {}
+  "effects": []
 }

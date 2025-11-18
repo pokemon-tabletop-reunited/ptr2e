@@ -13,31 +13,27 @@
     "diet": [
       "omnivoire"
     ],
-    "movement": {
-      "primary": [
-        {
-          "type": "flight",
-          "value": 15
-        },
-        {
-          "type": "overland",
-          "value": 15
-        }
-      ],
-      "secondary": [
-        {
-          "type": "swim",
-          "value": 5
-        }
-      ]
-    },
+    "movement": [
+      {
+        "type": "flight",
+        "value": 15
+      },
+      {
+        "type": "overland",
+        "value": 15
+      },
+      {
+        "type": "swim",
+        "value": 5
+      }
+    ],
     "traits": [
       "pokemon",
-      "underdog",
       "quadrupedal",
       "zapper",
       "fully-evolved",
-      "pikalike"
+      "pikalike",
+      "jump-4"
     ],
     "abilities": {
       "starting": [
@@ -99,6 +95,14 @@
         "group": null
       },
       {
+        "slug": "flying",
+        "value": 50,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
         "slug": "intimidate",
         "value": 20,
         "rvs": 0,
@@ -140,7 +144,7 @@
       },
       {
         "slug": "running",
-        "value": 60,
+        "value": 30,
         "rvs": 0,
         "favourite": false,
         "hidden": false,
@@ -189,103 +193,99 @@
       "spe": 103
     },
     "types": [
-      "electric",
-      "flying"
+      "flying",
+      "electric"
     ],
     "moves": {
       "levelUp": [
         {
-          "name": "tail-whip",
-          "level": 1,
-          "gen": "sword-shield"
+          "name": "nuzzle",
+          "gen": "sword-shield",
+          "level": 1
         },
         {
-          "name": "nuzzle",
-          "level": 1,
-          "gen": "sword-shield"
+          "name": "tail-whip",
+          "gen": "sword-shield",
+          "level": 1
         },
         {
           "name": "double-team",
-          "level": 5,
-          "gen": "sword-shield"
+          "gen": "sword-shield",
+          "level": 5
         },
         {
           "name": "quick-attack",
-          "level": 10,
-          "gen": "sword-shield"
+          "gen": "sword-shield",
+          "level": 10
         },
         {
           "name": "thunder-shock",
-          "level": 15,
-          "gen": "sword-shield"
+          "gen": "sword-shield",
+          "level": 15
         },
         {
           "name": "pursuit",
-          "level": 16,
-          "gen": "ultra-sun-ultra-moon"
+          "gen": "ultra-sun-ultra-moon",
+          "level": 16
         },
         {
           "name": "charge",
-          "level": 20,
-          "gen": "sword-shield"
+          "gen": "sword-shield",
+          "level": 20
         },
         {
           "name": "shock-wave",
-          "level": 22,
-          "gen": "ultra-sun-ultra-moon"
+          "gen": "ultra-sun-ultra-moon",
+          "level": 22
         },
         {
           "name": "acrobatics",
-          "level": 25,
-          "gen": "sword-shield"
+          "gen": "sword-shield",
+          "level": 25
         },
         {
           "name": "electro-ball",
-          "level": 26,
-          "gen": "ultra-sun-ultra-moon"
+          "gen": "ultra-sun-ultra-moon",
+          "level": 26
         },
         {
           "name": "spark",
-          "level": 30,
-          "gen": "sword-shield"
+          "gen": "sword-shield",
+          "level": 30
         },
         {
           "name": "encore",
-          "level": 35,
-          "gen": "sword-shield"
+          "gen": "sword-shield",
+          "level": 35
         },
         {
           "name": "volt-switch",
-          "level": 40,
-          "gen": "sword-shield"
+          "gen": "sword-shield",
+          "level": 40
         },
         {
           "name": "light-screen",
-          "level": 45,
-          "gen": "sword-shield"
+          "gen": "sword-shield",
+          "level": 45
         },
         {
           "name": "discharge",
-          "level": 50,
-          "gen": "sword-shield"
+          "gen": "sword-shield",
+          "level": 50
         },
         {
           "name": "agility",
-          "level": 55,
-          "gen": "sword-shield"
+          "gen": "sword-shield",
+          "level": 55
         }
       ],
       "tutor": [
         {
-          "name": "charm",
+          "name": "aerial-ace",
           "gen": "ultra-sun-ultra-moon"
         },
         {
-          "name": "baton-pass",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "iron-tail",
+          "name": "air-slash",
           "gen": "ultra-sun-ultra-moon"
         },
         {
@@ -293,71 +293,27 @@
           "gen": "sword-shield"
         },
         {
-          "name": "tickle",
+          "name": "attract",
           "gen": "sword-shield"
+        },
+        {
+          "name": "baton-pass",
+          "gen": "ultra-sun-ultra-moon"
+        },
+        {
+          "name": "charge-beam",
+          "gen": "ultra-sun-ultra-moon"
+        },
+        {
+          "name": "charm",
+          "gen": "ultra-sun-ultra-moon"
+        },
+        {
+          "name": "confide",
+          "gen": "ultra-sun-ultra-moon"
         },
         {
           "name": "covet",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "roost",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "air-slash",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "defog",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "ion-deluge",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "speed-swap",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "snore",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "sleep-talk",
-          "gen": "black-2-white-2"
-        },
-        {
-          "name": "helping-hand",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "knock-off",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "signal-beam",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "tailwind",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "last-resort",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "electroweb",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "rising-voltage",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "dual-wingbeat",
           "gen": "sword-shield"
         },
         {
@@ -365,91 +321,23 @@
           "gen": "omega-ruby-alpha-sapphire"
         },
         {
-          "name": "solar-beam",
+          "name": "defog",
           "gen": "sword-shield"
         },
         {
-          "name": "thunderbolt",
+          "name": "dual-wingbeat",
           "gen": "sword-shield"
         },
         {
-          "name": "thunder-wave",
+          "name": "eerie-impulse",
           "gen": "sword-shield"
         },
         {
-          "name": "thunder",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "toxic",
+          "name": "electroweb",
           "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "swift",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "flash",
-          "gen": "omega-ruby-alpha-sapphire"
-        },
-        {
-          "name": "rest",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "substitute",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "protect",
-          "gen": "sword-shield"
         },
         {
           "name": "endure",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "swagger",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "attract",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "return",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "frustration",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "hidden-power",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "rain-dance",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "facade",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "taunt",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "secret-power",
-          "gen": "omega-ruby-alpha-sapphire"
-        },
-        {
-          "name": "aerial-ace",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "u-turn",
           "gen": "sword-shield"
         },
         {
@@ -457,23 +345,139 @@
           "gen": "sword-shield"
         },
         {
-          "name": "charge-beam",
+          "name": "facade",
+          "gen": "sword-shield"
+        },
+        {
+          "name": "flash",
+          "gen": "omega-ruby-alpha-sapphire"
+        },
+        {
+          "name": "frustration",
           "gen": "ultra-sun-ultra-moon"
+        },
+        {
+          "name": "helping-hand",
+          "gen": "ultra-sun-ultra-moon"
+        },
+        {
+          "name": "hidden-power",
+          "gen": "ultra-sun-ultra-moon"
+        },
+        {
+          "name": "ion-deluge",
+          "gen": "ultra-sun-ultra-moon"
+        },
+        {
+          "name": "iron-tail",
+          "gen": "ultra-sun-ultra-moon"
+        },
+        {
+          "name": "knock-off",
+          "gen": "ultra-sun-ultra-moon"
+        },
+        {
+          "name": "last-resort",
+          "gen": "ultra-sun-ultra-moon"
+        },
+        {
+          "name": "protect",
+          "gen": "sword-shield"
+        },
+        {
+          "name": "rain-dance",
+          "gen": "sword-shield"
+        },
+        {
+          "name": "rest",
+          "gen": "sword-shield"
+        },
+        {
+          "name": "return",
+          "gen": "ultra-sun-ultra-moon"
+        },
+        {
+          "name": "rising-voltage",
+          "gen": "sword-shield"
+        },
+        {
+          "name": "roost",
+          "gen": "sword-shield"
         },
         {
           "name": "round",
           "gen": "sword-shield"
         },
         {
-          "name": "wild-charge",
-          "gen": "sword-shield"
+          "name": "secret-power",
+          "gen": "omega-ruby-alpha-sapphire"
         },
         {
-          "name": "confide",
+          "name": "signal-beam",
           "gen": "ultra-sun-ultra-moon"
         },
         {
-          "name": "eerie-impulse",
+          "name": "sleep-talk",
+          "gen": "black-2-white-2"
+        },
+        {
+          "name": "snore",
+          "gen": "ultra-sun-ultra-moon"
+        },
+        {
+          "name": "solar-beam",
+          "gen": "sword-shield"
+        },
+        {
+          "name": "speed-swap",
+          "gen": "ultra-sun-ultra-moon"
+        },
+        {
+          "name": "substitute",
+          "gen": "sword-shield"
+        },
+        {
+          "name": "swagger",
+          "gen": "ultra-sun-ultra-moon"
+        },
+        {
+          "name": "swift",
+          "gen": "sword-shield"
+        },
+        {
+          "name": "tailwind",
+          "gen": "ultra-sun-ultra-moon"
+        },
+        {
+          "name": "taunt",
+          "gen": "sword-shield"
+        },
+        {
+          "name": "thunder",
+          "gen": "sword-shield"
+        },
+        {
+          "name": "thunder-wave",
+          "gen": "sword-shield"
+        },
+        {
+          "name": "thunderbolt",
+          "gen": "sword-shield"
+        },
+        {
+          "name": "tickle",
+          "gen": "sword-shield"
+        },
+        {
+          "name": "toxic",
+          "gen": "ultra-sun-ultra-moon"
+        },
+        {
+          "name": "u-turn",
+          "gen": "sword-shield"
+        },
+        {
+          "name": "wild-charge",
           "gen": "sword-shield"
         }
       ]
@@ -490,9 +494,14 @@
       "name": "emolga",
       "details": null,
       "evolutions": []
+    },
+    "publication": {
+      "source": "PTR 2e Core - Unova Dex",
+      "authors": [
+        "PTR 2e Team"
+      ]
     }
   },
   "_id": "k6S22i58HeSODtct",
-  "effects": [],
-  "folder": null
+  "effects": []
 }

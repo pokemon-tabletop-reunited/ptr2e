@@ -1,0 +1,145 @@
+{
+  "name": "Neurotoxin Stance",
+  "_id": "xpb898WZF9RO6boU",
+  "type": "perk",
+  "img": "icons/skills/toxins/bottle-open-vapors-pink.webp",
+  "effects": [
+    {
+      "name": "Neurotoxin Stance",
+      "type": "passive",
+      "_id": "tko58yIn8oK0MJTz",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "neurotoxin-stance-generic",
+            "value": "Compendium.ptr2e.core-effects.Item.sBbhycvHdY70qm15",
+            "predicate": [],
+            "chance": 100,
+            "isFixedChance": true,
+            "affects": "target",
+            "alterations": [],
+            "dontMerge": false,
+            "mode": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.347",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.3.beta",
+        "createdTime": 1756045425808,
+        "modifiedTime": 1756045464961,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+      }
+    }
+  ],
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "publication": {
+      "source": "PTR2e Core",
+      "authors": [
+        "Fox"
+      ],
+      "notes": ""
+    },
+    "actions": [
+      {
+        "name": "Neurotoxin Stance",
+        "slug": "neurotoxin-stance",
+        "description": "<p>Target: A commanded @Trait[poison] creature.</p><p dir=\"auto\">Effect: When the target inflicts @Affliction[poison] or @Affliction[blight], or attacks a creature that already has these conditions, the creature in question gains @Affliction[stunted 3].<br><br>The target @Trait[poison] creature suffers from @Affliction[stunted] as long as the stance is in effect. The stance may be ended as a free action by either the Initiator or the Target.</p>",
+        "traits": [
+          "stance",
+          "poison",
+          "command"
+        ],
+        "type": "generic",
+        "img": "icons/skills/toxins/bottle-open-vapors-pink.webp",
+        "cost": {
+          "activation": "simple",
+          "powerPoints": 3
+        },
+        "range": {
+          "target": "creature",
+          "distance": 20,
+          "unit": "m"
+        }
+      }
+    ],
+    "slug": "neurotoxin-stance",
+    "description": "<p>Target: A commanded @Trait[poison] creature.</p><p dir=\"auto\">Effect: When the target inflicts @Affliction[poison] or @Affliction[blight], or attacks a creature that already has these conditions, the creature in question gains @Affliction[stunted 3].<br><br>The target @Trait[poison] creature suffers from @Affliction[stunted] as long as the stance is in effect. The stance may be ended as a free action by either the Initiator or the Target.</p>",
+    "traits": [
+      "stance",
+      "poison",
+      "command"
+    ],
+    "prerequisites": [
+      "item:perk:type-specialist",
+      {
+        "gte": [
+          "{actor|skills.leadership.mod}",
+          30
+        ]
+      }
+    ],
+    "autoUnlock": [],
+    "cost": 2,
+    "design": {
+      "arena": "physical",
+      "approach": "finesse",
+      "archetype": "poison"
+    },
+    "global": true,
+    "webs": [],
+    "nodes": [
+      {
+        "x": 193,
+        "y": 95,
+        "hidden": false,
+        "type": "normal",
+        "connected": [
+          "type-specialist"
+        ],
+        "config": {
+          "texture": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "tint": null
+        },
+        "tier": null
+      }
+    ]
+  },
+  "folder": "8nTJNodaluw5G4Y6"
+}

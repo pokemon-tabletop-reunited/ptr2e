@@ -7,17 +7,14 @@
     "slug": null,
     "actions": [
       {
-        "name": "Time Out",
-        "slug": "time-out",
+        "name": "Time Out (Resolution)",
+        "slug": "time-out-resolution",
         "type": "attack",
-        "img": "icons/svg/explosion.svg",
+        "img": "systems/ptr2e/img/svg/normal_icon.svg",
         "traits": [
           "legendary",
-          "defensive",
-          "interrupt-3",
           "set-up",
-          "delay-3",
-          "pp-updated"
+          "flinch-30"
         ],
         "range": {
           "target": "emanation",
@@ -26,25 +23,52 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 5,
-          "delay": 3
+          "powerPoints": 3,
+          "trigger": "The user used Time Out (Set-Up) as their last Action."
         },
-        "variant": null,
         "types": [
           "normal"
         ],
         "category": "status",
-        "power": null,
-        "accuracy": 80,
-        "contestType": "",
-        "contestEffect": "",
-        "free": false,
-        "slot": null,
-        "description": "<p>Effect: The user gains @Affliction[braced] 2. If the user is hit by a Physical or Special-Category Attack before their next Activation, they may resolve this attack as an Interrupt.</p><p>Resolution: On hit, all legal targets gain  @Affliction[suppressed] 5, @Affliction[hindered] 5, @Affliction[unlucky] 5, @Affliction[disabled] 5, and @Affliction[nullified] 5 (the latter two decided randomly).</p>"
+        "accuracy": 85,
+        "description": "<p>Trigger: The user used Time Out (Set-Up) as their last Action.</p><p>Effect: On hit, all legal targets gain @Affliction[suppressed 7], @Affliction[hindered 7], @Affliction[unlucky 7], @Affliction[disabled 7] (decided randomly), and @Affliction[nullified 7] (decided randomly) and are Flinched 50%.</p>",
+        "predicate": []
+      },
+      {
+        "name": "Time Out (Set-Up)",
+        "slug": "time-out-set-up",
+        "description": "<p>Effect: The user gains @Affliction[braced 2]. If the user is hit by a Physical or Special-Category Attack before their next Activation, they may use Time Out (Resolution) as a Free Action at [Interrupt 5].</p>",
+        "traits": [
+          "legendary",
+          "set-up",
+          "defensive",
+          "flinch-50"
+        ],
+        "type": "attack",
+        "img": "systems/ptr2e/img/svg/normal_icon.svg",
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 3
+        },
+        "range": {
+          "target": "self",
+          "unit": "m"
+        },
+        "types": [
+          "normal"
+        ],
+        "category": "status",
+        "predicate": []
       }
     ],
     "container": null,
-    "grade": "B"
+    "grade": "B",
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ]
+    }
   },
   "effects": [],
   "sort": 0,

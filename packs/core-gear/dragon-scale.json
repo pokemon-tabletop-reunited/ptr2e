@@ -1,0 +1,133 @@
+{
+  "folder": "V4skAU6G3OH5fXae",
+  "name": "Dragon Scale",
+  "type": "equipment",
+  "system": {
+    "_migration": {
+      "version": 0.11,
+      "previous": null
+    },
+    "slug": "dragon-scale",
+    "traits": [
+      "combat",
+      "dragon",
+      "evolution",
+      "horsea",
+      "seadra",
+      "kingdra",
+      "accessory"
+    ],
+    "actions": [],
+    "description": "<p>Dragon-type Pokémon may be holding this item when caught. It is known to evolve Seadra into Kingdra so far.<br><br>Effect: Dragon-Type creatures and Dragon Egg Group creatures take 10% less damage from Physical- and Special-Category Attacks.</p>",
+    "crafting": {
+      "skill": "",
+      "spans": null,
+      "materials": []
+    },
+    "equipped": {
+      "carryType": "stowed",
+      "handsHeld": null,
+      "slot": "accessory"
+    },
+    "grade": "B",
+    "fling": {
+      "type": "dragon",
+      "power": 70,
+      "accuracy": 100,
+      "hide": false,
+      "range": {
+        "target": "creature",
+        "distance": 10,
+        "unit": "m"
+      }
+    },
+    "quantity": 1,
+    "rarity": "rare",
+    "identification": {
+      "misidentified": null,
+      "status": "identified",
+      "unidentified": {
+        "name": "Unidentified Item",
+        "img": "systems/ptu/css/images/icons/gear_icon.png",
+        "description": "<p>Unidentified Item</p>"
+      }
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    }
+  },
+  "img": "systems/ptr2e/img/item-icons/dragon%20scale.webp",
+  "effects": [
+    {
+      "name": "Dragon Scale",
+      "type": "passive",
+      "_id": "1sXJp6UzxHT8jZgG",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "ephemeral-modifier",
+            "key": "damaging-attack-damage-percentile",
+            "value": -10,
+            "predicate": [
+              "target:trait:dragon"
+            ],
+            "mode": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          },
+          {
+            "type": "ephemeral-modifier",
+            "key": "damaging-attack-damage-percentile",
+            "value": -10,
+            "predicate": [
+              "target:system.eggGroups.0:dragon"
+            ],
+            "mode": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.348",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.4.beta",
+        "createdTime": 1758626106347,
+        "modifiedTime": 1758626258346,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+      }
+    }
+  ],
+  "_id": "WkAaKuYgo4mLohIx"
+}

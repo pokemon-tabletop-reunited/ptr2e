@@ -300,11 +300,9 @@
               "operand": "and"
             }
           ],
-          "details": {
-            "gender": null,
-            "item": null,
-            "level": null,
-            "knownMove": null
+          "perk": {
+            "x": 26,
+            "y": 26
           },
           "evolutions": [
             {
@@ -317,23 +315,14 @@
                   "operand": "and"
                 }
               ],
-              "details": {
-                "gender": null,
-                "item": null,
-                "level": null,
-                "knownMove": null
-              },
-              "evolutions": [],
               "perk": {
                 "x": 26,
                 "y": 26
-              }
+              },
+              "details": null
             }
           ],
-          "perk": {
-            "x": 26,
-            "y": 26
-          }
+          "details": null
         }
       ],
       "uuid": "Compendium.ptr2e.core-species.Item.D7EFVprVAaeNuqrX",
@@ -353,7 +342,8 @@
       "jet",
       "pack-mon",
       "pack-leader",
-      "phasing"
+      "phasing",
+      "jump-2"
     ],
     "diet": [
       "nullivore"
@@ -392,15 +382,12 @@
         }
       ]
     },
-    "movement": {
-      "primary": [
-        {
-          "type": "flight",
-          "value": 26
-        }
-      ],
-      "secondary": []
-    },
+    "movement": [
+      {
+        "type": "flight",
+        "value": 26
+      }
+    ],
     "skills": [
       {
         "slug": "conversation",
@@ -419,7 +406,7 @@
         "group": null
       },
       {
-        "slug": "ghosts",
+        "slug": "ghost",
         "value": 45,
         "rvs": 0,
         "favourite": false,
@@ -501,6 +488,13 @@
     "_migration": {
       "version": null,
       "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core - Galar Dex",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
     }
   },
   "_id": "RDGFEtj1sZPtuo3y",

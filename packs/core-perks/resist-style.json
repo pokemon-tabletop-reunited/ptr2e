@@ -1,0 +1,137 @@
+{
+  "folder": "JZrGRskscJOkkPWA",
+  "name": "Resist Style",
+  "type": "perk",
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "StitchedReals"
+      ],
+      "notes": ""
+    },
+    "actions": [
+      {
+        "name": "Resist!",
+        "slug": "resist",
+        "description": "<p>The Target gains @UUID[Compendium.ptr2e.core-effects.Item.resistcondititem]{Resist}.</p>",
+        "traits": [
+          "command",
+          "style"
+        ],
+        "type": "generic",
+        "img": "systems/ptr2e/img/perk-icons/Orders_Training.svg",
+        "cost": {
+          "activation": "simple",
+          "powerPoints": 1
+        },
+        "range": {
+          "target": "ally",
+          "distance": 20,
+          "unit": "m"
+        }
+      }
+    ],
+    "slug": "resist-style",
+    "description": "<p>The Target gains Resist @UUID[Compendium.ptr2e.core-effects.Item.resistcondititem]{Resist}.</p>",
+    "traits": [
+      "command",
+      "style"
+    ],
+    "prerequisites": [
+      {
+        "gte": [
+          "{actor|skills.leadership.mod}",
+          25
+        ]
+      }
+    ],
+    "autoUnlock": [],
+    "cost": 1,
+    "design": {
+      "arena": null,
+      "approach": null,
+      "archetype": null
+    },
+    "global": true,
+    "webs": [],
+    "nodes": [
+      {
+        "x": 113,
+        "y": 140,
+        "hidden": false,
+        "type": "normal",
+        "connected": [
+          "minor-buff-17",
+          "agile-style",
+          "minor-buff-9",
+          "hit-run",
+          "magic-armor-style",
+          "berserker-trainer"
+        ],
+        "config": {
+          "texture": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "tint": null
+        },
+        "tier": null
+      }
+    ]
+  },
+  "img": "systems/ptr2e/img/perk-icons/Orders_Training.svg",
+  "effects": [
+    {
+      "name": "Resist Style",
+      "type": "passive",
+      "_id": "BXhQiD6VCYjWugOV",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "resist-generic",
+            "value": "Compendium.ptr2e.core-effects.Item.resistcondititem",
+            "predicate": [],
+            "chance": 100,
+            "isFixedChance": true,
+            "affects": "target",
+            "alterations": [],
+            "dontMerge": false,
+            "mode": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null
+      }
+    }
+  ],
+  "_id": "IkpQyKRvQFBF1iD3"
+}

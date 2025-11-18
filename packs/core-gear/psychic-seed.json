@@ -1,92 +1,128 @@
 {
+  "folder": "V4skAU6G3OH5fXab",
   "name": "Psychic Seed",
-  "img": "systems/ptr2e/img/icons/equipment_icon.webp",
-  "type": "equipment",
+  "type": "consumable",
   "system": {
-    "crafting": {
-      "skill": null,
-      "spans": null,
-      "materials": []
+    "_migration": {
+      "version": 0.111,
+      "previous": null
     },
-    "equipped": {
-      "slot": "held",
-      "carryType": "stowed",
-      "handsHeld": null
-    },
-    "grade": "C",
-    "fling": {
-      "type": "untyped",
-      "power": null,
-      "accuracy": 100
-    },
-    "rarity": "uncommon",
-    "traits": [
-      "combat",
-      "consumable",
-      "environ",
-      "stash",
-      "defensive"
-    ],
     "actions": [
       {
         "name": "Psychic Seed",
         "slug": "psychic-seed",
-        "type": "generic",
-        "description": "Trigger: The user is affected by Psychic Terrain.\nEffect: The user gains +1 default SPDEF Stage.",
+        "description": "<p>Trigger: @UUID[Compendium.ptr2e.core-summons.oc66Xzagn5alOrFN]{Psychic Terrain} is summoned.<br><br>Effect: The user gains @UUID[Compendium.ptr2e.core-effects.jEX7s3GbbAtzgyS3]{+1 Special Defense Stage} for 5 activations.</p>",
         "traits": [
-          "Combat",
-          "Consumable",
-          "Environ",
-          "Stash",
-          "Defensive"
+          "combat",
+          "consumable"
         ],
-        "range": {
-          "target": "creature",
-          "distance": 0,
-          "unit": "m"
-        },
+        "type": "generic",
+        "img": "systems/ptr2e/img/item-icons/miracle%20seed.webp",
         "cost": {
-          "activation": "complex",
-          "trigger": "The user is affected by Psychic Terrain.",
-          "powerPoints": 0,
-          "delay": null,
-          "priority": null
+          "activation": "free"
         },
-        "variant": null
+        "range": {
+          "target": "self",
+          "unit": "m"
+        }
       }
     ],
-    "description": "Trigger: The user is affected by Psychic Terrain.\nEffect: The user gains +1 default SPDEF Stage.",
-    "slug": null,
-    "container": null,
+    "crafting": {
+      "skill": "",
+      "spans": null,
+      "materials": []
+    },
+    "equipped": {
+      "carryType": "stowed",
+      "slot": "belt",
+      "handsHeld": null
+    },
+    "grade": "D",
+    "fling": {
+      "type": "psychic",
+      "power": 50,
+      "accuracy": 100,
+      "hide": false,
+      "range": {
+        "target": "creature",
+        "distance": 10,
+        "unit": "m"
+      }
+    },
     "quantity": 1,
-    "identification": {
-      "misidentified": null,
-      "status": "identified",
-      "unidentified": {
-        "name": "Unidentified Item",
-        "img": "systems/ptu/css/images/icons/item_icon.png",
-        "description": "<p>Unidentified Item</p>"
+    "rarity": "common",
+    "publication": {
+      "source": "",
+      "authors": [],
+      "notes": ""
+    },
+    "description": "<p>Trigger: @UUID[Compendium.ptr2e.core-summons.oc66Xzagn5alOrFN]{Psychic Terrain} is summoned.<br><br>Effect: The user gains @UUID[Compendium.ptr2e.core-effects.jEX7s3GbbAtzgyS3]{+1 Special Defense Stage} for 5 activations.</p>",
+    "traits": [
+      "combat",
+      "consumable"
+    ],
+    "consumableType": "other",
+    "stack": 1,
+    "cost": 2
+  },
+  "img": "systems/ptr2e/img/item-icons/miracle%20seed.webp",
+  "effects": [
+    {
+      "name": "Psychic Seed",
+      "type": "passive",
+      "_id": "GB4R9lNm1JEoM3xi",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "psychic-seed-generic",
+            "value": "Compendium.ptr2e.core-effects.Item.jEX7s3GbbAtzgyS3",
+            "predicate": [],
+            "chance": 100,
+            "isFixedChance": true,
+            "affects": "target",
+            "alterations": [],
+            "dontMerge": false,
+            "mode": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.348",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.4.beta",
+        "lastModifiedBy": null
       }
     }
-  },
-  "_id": "Ojebr3zU4m7gB8hk",
-  "effects": [],
-  "folder": "V4skAU6G3OH5fXad",
-  "sort": 0,
-  "ownership": {
-    "default": 0,
-    "tXAZ3QUgjuwX4gdV": 3
-  },
+  ],
   "flags": {},
-  "_stats": {
-    "compendiumSource": null,
-    "duplicateSource": null,
-    "coreVersion": "12.327",
-    "systemId": "ptr2e",
-    "systemVersion": "0.0.0-alpha.1.0",
-    "createdTime": 1717878484297,
-    "modifiedTime": 1717878484297,
-    "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
-  },
-  "_key": "!items!Ojebr3zU4m7gB8hk"
+  "_id": "1pTDkoxE39vhX91j"
 }

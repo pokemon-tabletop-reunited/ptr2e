@@ -1,0 +1,115 @@
+{
+  "folder": "JVlvijPZ5VhpbHkZ",
+  "name": "Veilborn",
+  "type": "perk",
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [],
+      "notes": ""
+    },
+    "actions": [],
+    "slug": "veilborn",
+    "description": "<p>The user gains +15 on rolls concerning the supernatural, either directly or indirectly. The user takes 20% less damage from Special-Category Attacks and 25% more damage from Physical-Category Attacks.</p>",
+    "traits": [],
+    "prerequisites": [
+      "trait:fairy"
+    ],
+    "autoUnlock": [],
+    "cost": 2,
+    "design": {
+      "arena": "mental",
+      "approach": "finesse",
+      "archetype": "fairy"
+    },
+    "global": true,
+    "webs": [],
+    "nodes": [
+      {
+        "x": 153,
+        "y": 43,
+        "connected": [
+          "root-2",
+          "sparkler",
+          "optimism"
+        ],
+        "hidden": false,
+        "type": "normal",
+        "tier": null
+      }
+    ],
+    "originSlug": null,
+    "variant": null,
+    "mode": null
+  },
+  "img": "systems/ptr2e/img/svg/fairy_icon.svg",
+  "effects": [
+    {
+      "name": "Veilborn",
+      "type": "passive",
+      "_id": "e6PhUwU5cOF66m6e",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "basic",
+            "key": "physical-attack-damage-percentile",
+            "value": 25,
+            "predicate": [],
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "key": "special-attack-damage-percentile",
+            "value": -20,
+            "predicate": [],
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": false,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "13.342",
+        "systemId": "ptr2e",
+        "systemVersion": "1.2.1.beta",
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null,
+        "exportSource": null
+      }
+    }
+  ],
+  "flags": {},
+  "_id": "4vDcwuZf5xqA4d6u"
+}

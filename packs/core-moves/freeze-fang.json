@@ -1,0 +1,148 @@
+{
+  "folder": "BImk1fcMbR5akA4z",
+  "name": "Freeze Fang",
+  "type": "move",
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "publication": {
+      "source": "Digidex",
+      "authors": [
+        "Fox"
+      ],
+      "notes": ""
+    },
+    "traits": [],
+    "actions": [
+      {
+        "name": "Freeze Fang",
+        "slug": "freeze-fang",
+        "type": "attack",
+        "img": "systems/ptr2e/img/svg/ice_icon.svg",
+        "traits": [
+          "contact",
+          "jaw",
+          "digimon"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 4
+        },
+        "types": [
+          "ice"
+        ],
+        "category": "physical",
+        "power": 85,
+        "accuracy": 100,
+        "predicate": [],
+        "description": "<p>This attack has a 10% chance each of inflicting @Affliction[frostbite 5] & @Affliction[frozen 2] to the target, and granting the user +1 Speed Stages for 5 activations.</p>"
+      }
+    ],
+    "grade": "C",
+    "slug": "freeze-fang"
+  },
+  "img": "systems/ptr2e/img/svg/ice_icon.svg",
+  "effects": [
+    {
+      "name": "Freeze Fang",
+      "type": "passive",
+      "_id": "6acrsB9Dulv8EITj",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "freeze-fang-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.frostbiteconitem",
+            "predicate": [],
+            "chance": 10,
+            "affects": "target",
+            "dontMerge": false,
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "alterations": [],
+            "isFixedChance": false
+          },
+          {
+            "type": "roll-effect",
+            "key": "freeze-fang-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.frozencondititem",
+            "predicate": [],
+            "chance": 10,
+            "affects": "target",
+            "dontMerge": false,
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "duration.turns",
+                "value": 2
+              }
+            ],
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "isFixedChance": false
+          },
+          {
+            "type": "roll-effect",
+            "key": "freeze-fang-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.XeiSuS3APUcN0MLM",
+            "predicate": [],
+            "chance": 10,
+            "affects": "self",
+            "dontMerge": false,
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "alterations": [],
+            "isFixedChance": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "13.346",
+        "systemId": "ptr2e",
+        "systemVersion": "1.2.1.beta",
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null,
+        "exportSource": null
+      }
+    }
+  ],
+  "_id": "UZpXweatjhESiJL8"
+}

@@ -14,20 +14,101 @@
         },
         "range": {
           "target": "self",
-          "unit": "m"
+          "unit": "m",
+          "distance": 10
         },
-        "description": "<p>Effect: The user's [X-Strike] attacks with X<5 gain [Danger Close], and those that have X>=5 have their hit calculation changed to \"4+d(X-4)\".</p>",
-        "img": "icons/svg/explosion.svg"
+        "description": "<p>Effect: The user's [X-Strike] attacks with X&lt;5 gain +20 Accuracy, and those that have X&gt;=5 have their hit calculation changed to \"4+d(X-4)\".</p>",
+        "img": "systems/ptr2e/img/perk-icons/Combat.svg"
       }
     ],
-    "description": "<p>Effect: The user's [X-Strike] attacks with X<5 gain [Danger Close], and those that have X>=5 have their hit calculation changed to \"4+d(X-4)\".</p>",
+    "description": "<p>Effect: The user's [X-Strike] attacks with X&lt;5 gain +20 Accuracy, and those that have X&gt;=5 have their hit calculation changed to \"4+d(X-4)\".</p>",
     "traits": [],
     "slug": "skill-link",
     "_migration": {
       "version": null,
       "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
     }
   },
   "_id": "m3NkhaFegGTH5ZuK",
-  "effects": []
+  "effects": [
+    {
+      "name": "Skill Link",
+      "type": "passive",
+      "_id": "7fkhVUCkOVfU5n13",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "flat-modifier",
+            "key": "2-strike-trait-attack-accuracy",
+            "value": 20,
+            "predicate": [],
+            "label": "Skill Link",
+            "mode": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          },
+          {
+            "type": "basic",
+            "key": "3-strike-trait-attack-accuracy",
+            "value": 20,
+            "predicate": [],
+            "label": "Skill Link",
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "key": "4-strike-trait-attack-accuracy",
+            "value": 20,
+            "predicate": [],
+            "label": "Skill Link",
+            "mode": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.350",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.6.beta",
+        "createdTime": 1761089867737,
+        "modifiedTime": 1761090465555,
+        "lastModifiedBy": "UTlFSVhgfIUeTsoW"
+      }
+    }
+  ]
 }

@@ -13,19 +13,16 @@
     "diet": [
       "carnivore"
     ],
-    "movement": {
-      "primary": [
-        {
-          "type": "overland",
-          "value": 10
-        },
-        {
-          "type": "flight",
-          "value": 15
-        }
-      ],
-      "secondary": []
-    },
+    "movement": [
+      {
+        "type": "overland",
+        "value": 10
+      },
+      {
+        "type": "flight",
+        "value": 15
+      }
+    ],
     "traits": [
       "pokemon",
       "bipedal",
@@ -34,7 +31,8 @@
       "natural-flyer",
       "fully-evolved",
       "glow-3",
-      "hydrophobic"
+      "hydrophobic",
+      "jump-2"
     ],
     "abilities": {
       "starting": [
@@ -42,15 +40,15 @@
           "slug": "blaze"
         },
         {
-          "slug": "pure-blooded"
+          "slug": "solar-power"
         }
       ],
       "basic": [
         {
-          "slug": "solar-power"
+          "slug": "rivalry"
         },
         {
-          "slug": "rivalry"
+          "slug": "flaming-soul"
         }
       ],
       "advanced": [
@@ -63,10 +61,10 @@
       ],
       "master": [
         {
-          "slug": "flaming-soul"
+          "slug": "sheer-force"
         },
         {
-          "slug": "sheer-force"
+          "slug": "dragonfire"
         }
       ]
     },
@@ -800,6 +798,10 @@
                 "item": null,
                 "level": null,
                 "knownMove": null
+              },
+              "perk": {
+                "x": 26,
+                "y": 26
               }
             }
           ],
@@ -808,11 +810,19 @@
             "item": null,
             "level": null,
             "knownMove": null
+          },
+          "perk": {
+            "x": 26,
+            "y": 26
           }
         }
       ],
       "uuid": "Compendium.ptr2e.core-species.Item.E1QakqCVmnAbx4Uo",
-      "methods": []
+      "methods": [],
+      "perk": {
+        "x": 26,
+        "y": 26
+      }
     },
     "habitats": [
       "volcano",
@@ -822,6 +832,13 @@
     "_migration": {
       "version": null,
       "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core - Kanto Dex",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
     }
   },
   "_id": "9PStsTvP0J3tLcER",
@@ -843,8 +860,8 @@
             "predicate": [],
             "alwaysActive": false,
             "count": false,
-            "mode": 2,
             "priority": null,
+            "mode": 2,
             "ignored": false,
             "suboptions": [],
             "state": false
@@ -865,16 +882,16 @@
                 "value": "true"
               }
             ],
-            "mode": 2,
             "priority": null,
-            "ignored": false,
-            "inMemoryOnly": false,
-            "track": false,
-            "replaceSelf": false,
             "onDeleteActions": {
               "grantee": "detach",
               "granter": "cascade"
-            }
+            },
+            "mode": 2,
+            "ignored": false,
+            "inMemoryOnly": false,
+            "track": false,
+            "replaceSelf": false
           },
           {
             "type": "add-trait",
@@ -883,8 +900,8 @@
             ],
             "key": "",
             "value": "Drakelike",
-            "mode": 2,
             "priority": null,
+            "mode": 2,
             "ignored": false
           },
           {
@@ -894,8 +911,8 @@
             ],
             "key": "",
             "value": "Jump 4",
-            "mode": 2,
             "priority": null,
+            "mode": 2,
             "ignored": false
           },
           {
@@ -905,8 +922,8 @@
             ],
             "key": "",
             "value": "Jump 2",
-            "mode": 2,
             "priority": null,
+            "mode": 2,
             "ignored": false
           },
           {
@@ -917,13 +934,13 @@
             "key": "",
             "value": 0,
             "hp": null,
-            "atk": 18,
-            "def": 40,
-            "spa": 22,
-            "spd": 20,
+            "atk": 50,
+            "def": 33,
+            "spa": 6,
+            "spd": 11,
             "spe": null,
-            "mode": 2,
             "priority": null,
+            "mode": 2,
             "ignored": false
           },
           {
@@ -933,8 +950,8 @@
             ],
             "key": "system.skills.climb.value",
             "value": 10,
-            "mode": 2,
             "priority": null,
+            "mode": 2,
             "ignored": false
           },
           {
@@ -944,8 +961,8 @@
             ],
             "key": "system.skills.intimidate.value",
             "value": 10,
-            "mode": 2,
             "priority": null,
+            "mode": 2,
             "ignored": false
           },
           {
@@ -955,8 +972,8 @@
             ],
             "key": "system.skills.lift.value",
             "value": 10,
-            "mode": 2,
             "priority": null,
+            "mode": 2,
             "ignored": false
           },
           {
@@ -966,8 +983,8 @@
             ],
             "key": "system.skills.dragon.value",
             "value": 30,
-            "mode": 2,
             "priority": null,
+            "mode": 2,
             "ignored": false
           },
           {
@@ -977,8 +994,8 @@
             ],
             "key": "system.skills.running.value",
             "value": 10,
-            "mode": 2,
             "priority": null,
+            "mode": 2,
             "ignored": false
           },
           {
@@ -1005,8 +1022,8 @@
             ],
             "key": "system.type.types",
             "value": "dragon",
-            "mode": 2,
             "priority": null,
+            "mode": 2,
             "ignored": false
           },
           {
@@ -1027,8 +1044,8 @@
             ],
             "key": "",
             "value": "flying",
-            "mode": 2,
             "priority": null,
+            "mode": 2,
             "ignored": false
           }
         ],
@@ -1038,7 +1055,9 @@
         "removeOnRecall": false,
         "stacks": 0,
         "trigger": "manual",
-        "conditions": []
+        "conditions": [],
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
@@ -1058,14 +1077,15 @@
       "sort": 0,
       "flags": {},
       "_stats": {
-        "compendiumSource": null,
+        "compendiumSource": "Compendium.ptr2e.core-species.Item.9PStsTvP0J3tLcER.ActiveEffect.s8mbXztpSNsvB9GV",
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.350",
         "systemId": "ptr2e",
-        "systemVersion": "0.10.0-alpha.5.2.1",
+        "systemVersion": "1.4.6.beta",
         "createdTime": 1736701896752,
-        "modifiedTime": 1737650694915,
-        "lastModifiedBy": "IcBpMqhFuTck9VpX"
+        "modifiedTime": 1761088848721,
+        "lastModifiedBy": "6zxE5EIsM9axXjpP",
+        "exportSource": null
       }
     },
     {
@@ -1085,8 +1105,8 @@
             "predicate": [],
             "alwaysActive": false,
             "count": false,
-            "mode": 2,
             "priority": null,
+            "mode": 2,
             "ignored": false,
             "suboptions": [],
             "state": false
@@ -1107,16 +1127,16 @@
                 "value": "true"
               }
             ],
-            "mode": 2,
             "priority": null,
-            "ignored": false,
-            "inMemoryOnly": false,
-            "track": false,
-            "replaceSelf": false,
             "onDeleteActions": {
               "grantee": "detach",
               "granter": "cascade"
-            }
+            },
+            "mode": 2,
+            "ignored": false,
+            "inMemoryOnly": false,
+            "track": false,
+            "replaceSelf": false
           },
           {
             "type": "basic",
@@ -1125,8 +1145,8 @@
             ],
             "key": "system.movement.flight.value",
             "value": 10,
-            "mode": 2,
             "priority": null,
+            "mode": 2,
             "ignored": false
           },
           {
@@ -1136,8 +1156,8 @@
             ],
             "key": "",
             "value": "Jump 3",
-            "mode": 2,
             "priority": null,
+            "mode": 2,
             "ignored": false
           },
           {
@@ -1147,8 +1167,8 @@
             ],
             "key": "",
             "value": "Jump 2",
-            "mode": 2,
             "priority": null,
+            "mode": 2,
             "ignored": false
           },
           {
@@ -1158,8 +1178,8 @@
             ],
             "key": "",
             "value": "Jet",
-            "mode": 2,
             "priority": null,
+            "mode": 2,
             "ignored": false
           },
           {
@@ -1170,13 +1190,13 @@
             "key": "",
             "value": 0,
             "hp": null,
-            "atk": 20,
-            "def": null,
+            "atk": 10,
+            "def": 5,
             "spa": 50,
             "spd": 30,
-            "spe": null,
-            "mode": 2,
+            "spe": 5,
             "priority": null,
+            "mode": 2,
             "ignored": false
           },
           {
@@ -1186,8 +1206,8 @@
             ],
             "key": "system.skills.climb.value",
             "value": -10,
-            "mode": 2,
             "priority": null,
+            "mode": 2,
             "ignored": false
           },
           {
@@ -1197,8 +1217,8 @@
             ],
             "key": "system.skills.intimidate.value",
             "value": 5,
-            "mode": 2,
             "priority": null,
+            "mode": 2,
             "ignored": false
           },
           {
@@ -1208,8 +1228,8 @@
             ],
             "key": "system.skills.flying.value",
             "value": 15,
-            "mode": 2,
             "priority": null,
+            "mode": 2,
             "ignored": false
           },
           {
@@ -1219,8 +1239,8 @@
             ],
             "key": "system.skills.navigate.value",
             "value": 5,
-            "mode": 2,
             "priority": null,
+            "mode": 2,
             "ignored": false
           },
           {
@@ -1247,7 +1267,9 @@
         "removeOnRecall": false,
         "stacks": 0,
         "trigger": "manual",
-        "conditions": []
+        "conditions": [],
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
@@ -1267,14 +1289,15 @@
       "sort": 0,
       "flags": {},
       "_stats": {
-        "compendiumSource": null,
+        "compendiumSource": "Compendium.ptr2e.core-species.Item.9PStsTvP0J3tLcER.ActiveEffect.2WhcBT8JATI6htcU",
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.350",
         "systemId": "ptr2e",
-        "systemVersion": "0.10.0-alpha.5.2.1",
+        "systemVersion": "1.4.6.beta",
         "createdTime": 1736701906472,
-        "modifiedTime": 1737650934030,
-        "lastModifiedBy": "IcBpMqhFuTck9VpX"
+        "modifiedTime": 1761088902349,
+        "lastModifiedBy": "6zxE5EIsM9axXjpP",
+        "exportSource": null
       }
     }
   ]

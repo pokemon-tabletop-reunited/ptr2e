@@ -1,0 +1,145 @@
+{
+  "name": "Gaia Stance",
+  "_id": "vvSq5eftA743Oytp",
+  "type": "perk",
+  "img": "icons/environment/wilderness/arch-stone.webp",
+  "effects": [
+    {
+      "name": "Gaia Stance",
+      "type": "passive",
+      "_id": "Tq9k4f2s0xXLGhNC",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "gaia-stance-generic",
+            "value": "Compendium.ptr2e.core-effects.Item.enTpmKwhZLfopFNt",
+            "predicate": [],
+            "chance": 100,
+            "isFixedChance": true,
+            "affects": "target",
+            "alterations": [],
+            "dontMerge": false,
+            "mode": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.347",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.3.beta",
+        "createdTime": 1756044625400,
+        "modifiedTime": 1756045009292,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+      }
+    }
+  ],
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "publication": {
+      "source": "PTR2e Core",
+      "authors": [
+        "Fox"
+      ],
+      "notes": ""
+    },
+    "actions": [
+      {
+        "name": "Gaia Stance",
+        "slug": "gaia-stance",
+        "description": "<p>Target: A commanded @Trait[grass] creature.<br><br>Effect: The target @Trait[grass] creature gains the @Affliction[bound] and @Affliction[braced] afflictions whilst the stance is active, and an initial @Tick[2 shield]. <br><br>At the start of each of the target's activations, the target gains @Tick[1 shield], doubling in Sunny Weather. The stance may be ended at any time by the Target or the User. The Stance is ended forcibly if the target's Shields are reduced to 0.</p>",
+        "traits": [
+          "command",
+          "grass",
+          "stance"
+        ],
+        "type": "generic",
+        "img": "icons/environment/wilderness/arch-stone.webp",
+        "cost": {
+          "activation": "simple",
+          "powerPoints": 3
+        },
+        "range": {
+          "target": "creature",
+          "distance": 20,
+          "unit": "m"
+        }
+      }
+    ],
+    "slug": "gaia-stance",
+    "description": "<p>Target: A commanded @Trait[grass] creature.<br><br>Effect: The target @Trait[grass] creature gains the @Affliction[bound] and @Affliction[braced] afflictions whilst the stance is active, and an initial @Tick[2 shield]. <br><br>At the start of each of the target's activations, the target gains @Tick[1 shield], doubling in Sunny Weather. The stance may be ended at any time by the Target or the User. The Stance is ended forcibly if the target's Shields are reduced to 0.</p>",
+    "traits": [
+      "command",
+      "grass",
+      "stance"
+    ],
+    "prerequisites": [
+      "item:perk:type-specialist",
+      {
+        "gte": [
+          "{actor|skills.leadership.mod}",
+          30
+        ]
+      }
+    ],
+    "autoUnlock": [],
+    "cost": 2,
+    "design": {
+      "arena": "physical",
+      "approach": "resilience",
+      "archetype": "grass"
+    },
+    "global": true,
+    "webs": [],
+    "nodes": [
+      {
+        "x": 188,
+        "y": 95,
+        "hidden": false,
+        "type": "normal",
+        "connected": [
+          "type-specialist"
+        ],
+        "config": {
+          "texture": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "tint": null
+        },
+        "tier": null
+      }
+    ]
+  },
+  "folder": "eXSEV54jXXZfP27D"
+}

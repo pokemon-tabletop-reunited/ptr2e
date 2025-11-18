@@ -1,0 +1,174 @@
+{
+  "folder": "V4skAU6G3OH5fXad",
+  "name": "Buff Coat",
+  "type": "equipment",
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "slug": "buff-coat",
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "traits": [
+      "conventional",
+      "early-modern",
+      "medieval",
+      "fantasy"
+    ],
+    "actions": [],
+    "description": "<p>The buff coat is an item of leather clothing that was primarily worn by cavalry and officers, and some infantry, during the late Medieval, early Early Modern period. It provides slash and minor missile protection and performs well when layered with other armors, much like the gambeson of earlier eras. Unsurprisingly though, this doesn't at all mitigate firearm projectiles.</p>",
+    "crafting": {
+      "skill": "",
+      "spans": null,
+      "materials": []
+    },
+    "equipped": {
+      "carryType": "stowed",
+      "slot": "worn",
+      "handsHeld": null
+    },
+    "fling": {
+      "type": "untyped",
+      "power": 40,
+      "accuracy": 90,
+      "hide": false,
+      "range": {
+        "target": "creature",
+        "distance": 3,
+        "unit": "m"
+      }
+    },
+    "quantity": 1,
+    "rarity": "common",
+    "identification": {
+      "misidentified": null,
+      "status": "identified",
+      "unidentified": {
+        "name": "Unidentified Item",
+        "img": "systems/ptu/css/images/icons/gear_icon.png",
+        "description": "<p>Unidentified Item</p>"
+      }
+    }
+  },
+  "img": "systems/ptr2e/img/icons/equipment_icon.webp",
+  "effects": [
+    {
+      "name": "Buff Coat",
+      "type": "passive",
+      "_id": "c0i6cLL1Ealp1dCO",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "ephemeral-modifier",
+            "key": "physical-attack-damage-flat",
+            "value": -6,
+            "predicate": [],
+            "label": "Buff Coat (Physical)",
+            "mode": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          },
+          {
+            "type": "ephemeral-modifier",
+            "key": "special-attack-damage-percentile",
+            "value": -5,
+            "predicate": [],
+            "label": "Buff Coat (Special)",
+            "mode": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          },
+          {
+            "type": "ephemeral-modifier",
+            "key": "missile-trait-attack-damage-percentile",
+            "value": -10,
+            "predicate": [],
+            "label": "Buff Coat (Missile/Sharp)",
+            "mode": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          },
+          {
+            "type": "ephemeral-modifier",
+            "key": "sharp-trait-attack-damage-percentile",
+            "value": -10,
+            "predicate": [],
+            "label": "Buff Coat (Missile/Sharp)",
+            "mode": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          },
+          {
+            "type": "ephemeral-modifier",
+            "key": "firearm-trait-attack-damage-percentile",
+            "value": 10,
+            "predicate": [],
+            "label": "Buff Coat (Firearm)",
+            "mode": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          },
+          {
+            "type": "basic",
+            "key": "system.modifiers.effectResistance",
+            "value": 10,
+            "predicate": [],
+            "label": "Buff Coat (RES)",
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "key": "system.attributes.spe.base",
+            "value": 0.9,
+            "predicate": [],
+            "mode": 1,
+            "label": "Buff Coat",
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.347",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.3.beta",
+        "lastModifiedBy": null
+      }
+    }
+  ],
+  "flags": {},
+  "_id": "SO3AIyku3JRVL3Yx"
+}

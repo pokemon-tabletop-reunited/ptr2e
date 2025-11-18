@@ -9,21 +9,21 @@
       {
         "name": "Quick And The Dead",
         "slug": "quick-and-the-dead",
-        "description": "<p>All of your Combat Actions gain [Priority 1] or [Priority +1].</p>",
+        "description": "<p>All of your Combat Actions gain @Trait[priority-1] or [Priority +1].</p>",
         "traits": [],
-        "type": "generic",
+        "type": "passive",
         "range": {
           "target": "self",
           "unit": "m"
         },
         "cost": {
-          "activation": "simple"
+          "activation": "free"
         },
-        "img": "icons/svg/explosion.svg"
+        "img": "systems/ptr2e/img/perk-icons/Juggler.svg"
       }
     ],
     "slug": "quick-and-the-dead",
-    "description": "<p>All of your Combat Actions gain [Priority 1] or [Priority +1].</p>",
+    "description": "<p>All of your Combat Actions gain @Trait[priority-1] or [Priority +1].</p>",
     "traits": [],
     "prerequisites": [],
     "cost": 3,
@@ -36,7 +36,9 @@
         "connected": [
           "skirmish",
           "run-down",
-          "mightyena-tactic"
+          "mightyena-tactic",
+          "up-the-beat",
+          "lucky-duck"
         ],
         "config": {
           "alpha": null,
@@ -60,7 +62,14 @@
     "design": {
       "arena": "physical",
       "approach": "finesse",
-      "archetype": "Hunter"
+      "archetype": "hunter"
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
     }
   },
   "effects": [
@@ -77,18 +86,35 @@
             "value": "Compendium.ptr2e.core-effects.Item.advanceffectitem",
             "predicate": [],
             "chance": 100,
+            "dontMerge": true,
             "affects": "self",
-            "mode": 2,
             "priority": null,
-            "ignored": false,
-            "alterations": []
+            "alterations": [],
+            "isFixedChance": false,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "roll-effect",
+            "key": "generic",
+            "value": "Compendium.ptr2e.core-effects.Item.advanceffectitem",
+            "predicate": [],
+            "chance": 100,
+            "isFixedChance": false,
+            "affects": "self",
+            "alterations": [],
+            "dontMerge": true,
+            "mode": 2,
+            "ignored": false
           }
         ],
         "slug": null,
         "traits": [],
         "removeAfterCombat": true,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
@@ -106,16 +132,21 @@
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "flags": {},
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.348",
         "systemId": "ptr2e",
-        "systemVersion": "0.10.0-alpha.5.2.1",
+        "systemVersion": "1.4.4.beta",
         "createdTime": 1737661825098,
-        "modifiedTime": 1737661874073,
-        "lastModifiedBy": "IcBpMqhFuTck9VpX"
+        "modifiedTime": 1758401935169,
+        "lastModifiedBy": "Kc3DOunCh3ClAeHS",
+        "exportSource": null
       }
     }
   ]

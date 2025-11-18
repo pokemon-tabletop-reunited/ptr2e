@@ -22,11 +22,11 @@
           "target": "self",
           "unit": "m"
         },
-        "description": "Effect: You heal 6 Ticks of HP, accruing a Stack of @Affliction[weary] as normal. If done on your own turn, this becomes a Complex Action.",
-        "img": "icons/svg/explosion.svg"
+        "description": "<p>Effect: You heal @Tick[6], accruing a Stack of @Affliction[weary] as normal. If done on your own turn, this becomes a Complex Action.</p>",
+        "img": "systems/ptr2e/img/perk-icons/Taskmaster.svg"
       }
     ],
-    "description": "<p>Trigger: The user gains @Affliction[fainted].<br><br>Effect: You heal 6 Ticks of HP, accruing a Stack of @Affliction[weary] as normal. If done on your own turn, this becomes a Complex Action.</p>",
+    "description": "<p>Trigger: The user gains @Affliction[fainted].<br><br>Effect: You heal @Tick[6], accruing a Stack of @Affliction[weary] as normal. If done on your own turn, this becomes a Complex Action.</p>",
     "traits": [],
     "prerequisites": [
       "item:perk:i-get-knocked-down"
@@ -39,25 +39,25 @@
     },
     "nodes": [
       {
+        "x": 70,
+        "y": 41,
+        "hidden": false,
+        "type": "normal",
         "connected": [
           "overbooster",
           "hear-no-bell",
           "plus-ultra",
-          "offering"
+          "offering",
+          "minor-buff-37",
+          "boiling-blood",
+          "wolfshirt"
         ],
         "config": {
-          "alpha": null,
-          "backgroundColor": "#0000ff",
-          "borderColor": null,
-          "borderWidth": null,
           "texture": "systems/ptr2e/img/perk-icons/Taskmaster.svg",
-          "tint": null,
-          "scale": null
+          "backgroundColor": null,
+          "borderColor": null,
+          "tint": null
         },
-        "hidden": false,
-        "type": "normal",
-        "x": 70,
-        "y": 41,
         "tier": null
       }
     ],
@@ -68,7 +68,78 @@
       "arena": "physical",
       "approach": "resilience",
       "archetype": "berserker"
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
     }
   },
-  "effects": []
+  "effects": [
+    {
+      "name": "Tubthumping",
+      "type": "passive",
+      "_id": "OCBhfMpoLpSaBzQI",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "tubthumping-generic",
+            "value": "Compendium.ptr2e.core-effects.Item.4DlXFTVooz07YcDm",
+            "predicate": [],
+            "chance": 100,
+            "isFixedChance": false,
+            "affects": "self",
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "system.changes.0.value",
+                "value": 6
+              }
+            ],
+            "dontMerge": false,
+            "mode": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.348",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.3.beta",
+        "createdTime": 1757809621799,
+        "modifiedTime": 1757809696893,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+      }
+    }
+  ]
 }

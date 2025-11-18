@@ -1,0 +1,51 @@
+{
+  "folder": "BImk1fcMbR5akA4z",
+  "name": "Breath of God",
+  "type": "move",
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "publication": {
+      "source": "Digidex",
+      "authors": [
+        "Fox"
+      ],
+      "notes": ""
+    },
+    "traits": [],
+    "actions": [
+      {
+        "name": "Breath of God",
+        "slug": "breath-of-god",
+        "type": "attack",
+        "img": "systems/ptr2e/img/svg/fairy_icon.svg",
+        "traits": [
+          "interrupt-5",
+          "shield",
+          "digimon"
+        ],
+        "cost": {
+          "activation": "complex"
+        },
+        "types": [
+          "fairy"
+        ],
+        "category": "status",
+        "predicate": [],
+        "description": "<p>On using this attack, the user becomes @Affliction[bound] until the beginning of their next activation. While the user is @Affliction[bound], they emit a 3m radius Aura. This aura applies @UUID[Compendium.ptr2e.core-effects.z7BfyuquHkly9OfK]{Protected} to the user and all allies within the aura.<br><br>Enemies are displaced to the first viable space outside of the aura. In the event that this @Trait[shield] is hit with a @Trait[pierce] attack, the aura collapses, @UUID[Compendium.ptr2e.core-effects.z7BfyuquHkly9OfK]{Protected} is cleansed from all targets, and the User is cured of @Affliction[bound].</p>",
+        "range": {
+          "target": "allied-aura",
+          "distance": 9,
+          "unit": "m"
+        }
+      }
+    ],
+    "grade": "S",
+    "slug": "breath-of-god"
+  },
+  "img": "systems/ptr2e/img/svg/fairy_icon.svg",
+  "effects": [],
+  "_id": "G9vhUVkb5YtDEHog"
+}

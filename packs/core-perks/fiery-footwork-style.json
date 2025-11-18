@@ -1,0 +1,139 @@
+{
+  "name": "Fiery Footwork Style",
+  "_id": "1T9fWb9HlNz9AKwk",
+  "type": "perk",
+  "img": "icons/magic/movement/trail-streak-impact-blue.webp",
+  "effects": [
+    {
+      "name": "Fiery Footwork Style",
+      "type": "passive",
+      "_id": "G1YnUlrA6cjeAQVp",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "fiery-footwork-style-generic",
+            "value": "Compendium.ptr2e.core-effects.Item.5r2IITbEOGcERZxf",
+            "predicate": [],
+            "chance": 100,
+            "isFixedChance": true,
+            "affects": "target",
+            "alterations": [],
+            "dontMerge": false,
+            "mode": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.347",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.3.beta",
+        "createdTime": 1756043465498,
+        "modifiedTime": 1756043525781,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+      }
+    }
+  ],
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "publication": {
+      "source": "PTR2e Core",
+      "authors": [
+        "Fox"
+      ],
+      "notes": ""
+    },
+    "actions": [
+      {
+        "name": "Fiery Footwork Style",
+        "slug": "fiery-footwork-style",
+        "description": "<p>Target: A Commanded @Trait[fire] Creature<br><br>Effect: The affected @Trait[fire] creature improves either it's existing Overland or Flight Movement Allowance by 4 while the style is active, but suffers @Tick[-1] per activation.</p>",
+        "traits": [
+          "command",
+          "style",
+          "fire"
+        ],
+        "type": "generic",
+        "img": "icons/magic/movement/trail-streak-impact-blue.webp",
+        "cost": {
+          "activation": "simple",
+          "powerPoints": 2
+        },
+        "range": {
+          "target": "creature",
+          "distance": 20,
+          "unit": "m"
+        }
+      }
+    ],
+    "slug": "fiery-footwork-style",
+    "description": "<p>Target: A Commanded @Trait[fire] Creature<br><br>Effect: The affected @Trait[fire] creature improves either it's existing Overland or Flight Movement Allowance by 4 while the style is active, but suffers @Tick[-1] per activation.</p>",
+    "traits": [
+      "command",
+      "style",
+      "fire"
+    ],
+    "prerequisites": [
+      "item:perk:type-specialist",
+      {
+        "gte": [
+          "{actor|skills.leadership.mod}",
+          35
+        ]
+      }
+    ],
+    "autoUnlock": [],
+    "cost": 2,
+    "design": {
+      "arena": "physical",
+      "approach": "finesse",
+      "archetype": "fire"
+    },
+    "global": true,
+    "webs": [],
+    "nodes": [
+      {
+        "x": 189,
+        "y": 103,
+        "connected": [
+          "type-specialist"
+        ],
+        "hidden": false,
+        "type": "normal",
+        "tier": null
+      }
+    ]
+  },
+  "folder": "oguAsvaOzTLs8f97"
+}

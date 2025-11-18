@@ -1,5 +1,5 @@
 <div class="content">
-    <h3 class="noborder m-2">{{{localize prompt}}}</h3>
+    <h3 class="noborder m-2 center-text">{{{localize prompt}}}</h3>
     <div class="choices{{#if selectMenu}} select-menu{{/if}}">
         {{#if selectMenu}}
             <div class="choice-buttons">
@@ -21,7 +21,7 @@
             <div class="choice-buttons">
                 {{#each choices as |choice|}}
                     <div class="choice">
-                        <button type="button" value="{{choice.value}}" data-action="pick"{{#if choice.img}} class="with-image"{{/if}}>
+                        <button type="button" value="{{choice.value}}" data-action="pick"{{#if choice.img}} class="with-image{{#if choice.hasUUID}} item perk{{/if}}"{{/if}} {{#if choice.hasUUID}} data-uuid="{{choice.uuid}}" data-tooltip="{{choice.label}}"{{#unless choice.img}} class="item perk"{{/unless}}{{/if}} {{#if choice.disabled}} disabled{{/if}}>
                             {{#if choice.img}}<img src="{{choice.img}}" />{{/if}}
                             <span>{{choice.label}}</span>
                         </button>
@@ -50,8 +50,10 @@
 {{#*inline "dropZone"}}
     {{#if @root.includeDropZone}}
         <div class="drop-zone with-image">
+          <div class="choice p-0">
             <i class="fa-solid fa-fw fa-info-circle" data-tooltip="{{localize "PTR2E.ChoiceSetPrompt.DragHomebrewItem"}}"></i>
             <span>{{localize "PTR2E.ChoiceSetPrompt.HomebrewItem"}}</span>
+          </div>
         </div>
     {{/if}}
 {{/inline}}

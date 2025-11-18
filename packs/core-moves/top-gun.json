@@ -1,0 +1,106 @@
+{
+  "folder": "BImk1fcMbR5akA4z",
+  "name": "Top Gun",
+  "type": "move",
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "publication": {
+      "source": "Digidex",
+      "authors": [
+        "Fox"
+      ],
+      "notes": ""
+    },
+    "traits": [],
+    "actions": [
+      {
+        "name": "Top Gun",
+        "slug": "top-gun",
+        "type": "attack",
+        "img": "systems/ptr2e/img/svg/flying_icon.svg",
+        "traits": [
+          "wind",
+          "push-5",
+          "digimon"
+        ],
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 6
+        },
+        "types": [
+          "flying"
+        ],
+        "category": "special",
+        "predicate": [],
+        "description": "<p>This attack has a 30% chance to inflict @Affliction[wind-shear 5].</p>",
+        "range": {
+          "target": "enemy",
+          "distance": 10,
+          "unit": "m"
+        },
+        "power": 110,
+        "accuracy": 100
+      }
+    ],
+    "grade": "A",
+    "slug": "top-gun"
+  },
+  "img": "systems/ptr2e/img/svg/flying_icon.svg",
+  "effects": [
+    {
+      "name": "Top Gun",
+      "type": "passive",
+      "_id": "OlmErHgiwYADMJvv",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "top-gun-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.windshearconitem",
+            "mode": 5,
+            "predicate": [],
+            "chance": 30,
+            "affects": "target",
+            "alterations": [],
+            "dontMerge": false,
+            "ignored": false,
+            "isFixedChance": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.346",
+        "systemId": "ptr2e",
+        "systemVersion": "1.3.4.beta",
+        "lastModifiedBy": null
+      }
+    }
+  ],
+  "_id": "TdU6Snbbn3CaQlWF"
+}

@@ -10,17 +10,18 @@
         ],
         "name": "Zero to Hero",
         "slug": "zero-to-hero",
-        "type": "generic",
+        "type": "passive",
         "cost": {
           "activation": "free",
           "trigger": "<p>The user switches-out.</p>"
         },
         "range": {
           "target": "self",
-          "unit": "m"
+          "unit": "m",
+          "distance": 10
         },
-        "description": "<p>Trigger: The user switches-out.</p><p>Effect: The user transforms into their Hero Forme until the end of combat or when the user gains @Affliction[fainted]. When using Flip Turn, the user can spend an additional 4 PP to transform into their Hero Forme for 3 Activations. Zero to Hero cannot activate if the user is @Affliction[weary].</p>",
-        "img": "icons/svg/explosion.svg"
+        "description": "<p>Trigger: The user switches out, or is Hidden while in Combat.</p><p>Effect: The user transforms into their Hero Forme until the end of combat or when the user gains @Affliction[fainted].</p>",
+        "img": "icons/magic/control/silhouette-grow-shrink-blue.webp"
       },
       {
         "traits": [
@@ -31,37 +32,18 @@
         "type": "generic",
         "cost": {
           "activation": "complex",
-          "powerPoints": 4,
-          "trigger": "<p>The user does not have @Affliction[weary].</p>"
-        },
-        "range": {
-          "target": "self",
-          "unit": "m"
-        },
-        "description": "<p>Trigger: The user does not have @Affliction[weary].</p><p>Effect: The user enters their Hero Forme for 5 Activations.</p>",
-        "img": "icons/svg/explosion.svg"
-      },
-      {
-        "traits": [
-          "forme-change",
-          "exhaust"
-        ],
-        "name": "Zero to Hero (Henshin Weary)",
-        "slug": "zero-to-hero-henshin-weary",
-        "type": "generic",
-        "cost": {
-          "activation": "complex",
           "powerPoints": 6
         },
         "range": {
           "target": "self",
-          "unit": "m"
+          "unit": "m",
+          "distance": 10
         },
         "description": "<p>Effect: The user enters their Hero Forme for 5 Activations.</p>",
-        "img": "icons/svg/explosion.svg"
+        "img": "icons/magic/control/silhouette-grow-shrink-blue.webp"
       }
     ],
-    "description": "<p>Trigger: The user switches-out.</p><p>Effect: Connection - Flip Turn. The user transforms into their Hero Forme until the end of combat or when the user gains @Affliction[fainted]. The user can spend an 4 PP to transform into their Hero Forme for 5 Activations as a Complex Action. This effect costs 2 more PP and gains [Exhaust] if the user has @Affliction[weary].</p><p>Passive: While the user is in their Hero Forme, they gain Connection - Jet Punch.</p>",
+    "description": "<p>Effect: Connection - Flip Turn. If the user switches out or becomes Hidden during combat (including if they start Combat while Hidden), the user transforms into their Hero Forme until the end of combat or when the user gains @Affliction[fainted]. The user can spend 6 PP to transform into their Hero Forme for 5 Activations as a Complex Action.</p><p>Passive: The user gains Water Veil and Run Away as Extra Abilities. While the user is in their Hero Forme, they gain Connection - Jet Punch and instead gain Iron Fist and Avenger as Extra Abilities.</p>",
     "traits": [
       "forme-change",
       "innate",
@@ -71,6 +53,13 @@
     "_migration": {
       "version": null,
       "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
     }
   },
   "_id": "gfJ5DPR5rW4LmiZA",
@@ -86,7 +75,9 @@
             "type": "grant-item",
             "key": "",
             "value": "Compendium.ptr2e.core-moves.Item.mQ7A5gRxvfUfZ8ew",
-            "predicate": [],
+            "predicate": [
+              "ability:zero-to-hero:active"
+            ],
             "alterations": [
               {
                 "mode": 5,
@@ -94,25 +85,27 @@
                 "value": "true"
               }
             ],
-            "mode": 2,
             "priority": null,
-            "ignored": false,
-            "reevaluateOnUpdate": false,
-            "inMemoryOnly": false,
-            "allowDuplicate": true,
-            "track": false,
-            "replaceSelf": false,
+            "allowDuplicate": false,
             "onDeleteActions": {
               "grantee": "detach",
               "granter": "cascade"
-            }
+            },
+            "reevaluateOnUpdate": true,
+            "mode": 2,
+            "ignored": false,
+            "inMemoryOnly": false,
+            "track": false,
+            "replaceSelf": false
           }
         ],
         "slug": null,
         "traits": [],
         "removeAfterCombat": true,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
@@ -134,12 +127,13 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.346",
         "systemId": "ptr2e",
-        "systemVersion": "0.10.0-alpha.5.1.5",
+        "systemVersion": "1.4.2.beta",
         "createdTime": 1737422198535,
-        "modifiedTime": 1737422234674,
-        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+        "modifiedTime": 1754322300794,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf",
+        "exportSource": null
       }
     }
   ]

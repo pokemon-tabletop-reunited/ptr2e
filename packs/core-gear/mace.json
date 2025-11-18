@@ -1,5 +1,5 @@
 {
-  "folder": "V4skAU6G3OH5fXaf",
+  "folder": "PhrQtZzEwKPjfmK2",
   "name": "Mace",
   "type": "weapon",
   "system": {
@@ -10,36 +10,49 @@
     "slug": "mace",
     "traits": [
       "weapon",
-      "bludgeon"
+      "blunt",
+      "switch-grip",
+      "steel",
+      "1-handed",
+      "fling",
+      "early-modern",
+      "medieval",
+      "ancient",
+      "fantasy"
     ],
     "actions": [
       {
         "name": "Mace Blow",
-        "slug": "item-action-1",
-        "description": "<p>A Bludgeoning Weapon</p>",
+        "slug": "mace-blow",
+        "description": "<p>Effect: On hit, the target has a 50% chance of gaining @Affliction[delay 20].</p>",
         "traits": [
           "weapon",
-          "contact"
+          "contact",
+          "flinch-20",
+          "crit-2"
         ],
         "type": "attack",
         "range": {
-          "target": "enemy",
+          "target": "creature",
           "distance": 1,
           "unit": "m"
         },
         "cost": {
-          "activation": "complex"
+          "activation": "complex",
+          "powerPoints": 1
         },
         "types": [
           "untyped"
         ],
         "category": "physical",
-        "power": 70,
-        "accuracy": 90,
-        "free": true
+        "power": 85,
+        "accuracy": 85,
+        "free": true,
+        "img": "systems/ptr2e/img/svg/untyped_icon.svg",
+        "predicate": []
       }
     ],
-    "description": "<p>A Bludgeoning Weapon</p>",
+    "description": "<p>A mace is a blunt weapon, a type of club or virge that uses a heavy head on the end of a handle to deliver powerful strikes. A mace typically consists of a strong, heavy, wooden or metal shaft, often reinforced with metal.</p>",
     "crafting": {
       "skill": "Blacksmith or Handiwork",
       "spans": null,
@@ -52,9 +65,15 @@
     },
     "grade": "E",
     "fling": {
-      "type": "untyped",
-      "power": 30,
-      "accuracy": 100
+      "type": "steel",
+      "power": 80,
+      "accuracy": 90,
+      "hide": false,
+      "range": {
+        "target": "creature",
+        "distance": 4,
+        "unit": "m"
+      }
     },
     "quantity": 1,
     "rarity": "uncommon",
@@ -68,9 +87,94 @@
       }
     },
     "weaponType": "Untyped",
-    "weaponRange": "1"
+    "weaponRange": "1",
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    }
   },
   "_id": "NIGq9GWSV7beSr6J",
   "img": "systems/ptr2e/img/icons/weapon_icon.webp",
-  "effects": []
+  "effects": [
+    {
+      "name": "Mace",
+      "type": "passive",
+      "_id": "vCcJStcumcQmMpxp",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "basic",
+            "key": "{item|id}-attack-damage-flat",
+            "value": 8,
+            "predicate": [],
+            "label": "Mace",
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "roll-effect",
+            "key": "mace-blow-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.advanceffectitem",
+            "predicate": [],
+            "chance": 50,
+            "isFixedChance": false,
+            "affects": "target",
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "system.amount",
+                "value": -20
+              },
+              {
+                "mode": 5,
+                "property": "name",
+                "value": "Delay 20%"
+              }
+            ],
+            "dontMerge": false,
+            "mode": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": false,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.347",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.3.beta",
+        "createdTime": 1757543131224,
+        "modifiedTime": 1757553446231,
+        "lastModifiedBy": "UTlFSVhgfIUeTsoW"
+      }
+    }
+  ]
 }

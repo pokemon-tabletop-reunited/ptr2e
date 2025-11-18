@@ -1,0 +1,111 @@
+{
+  "name": "Stubbornly Ordinary",
+  "_id": "1dP2bQ16OdYMirJz",
+  "type": "perk",
+  "img": "systems/ptr2e/img/svg/normal_icon.svg",
+  "effects": [
+    {
+      "name": "Stubbornly Ordinary",
+      "type": "passive",
+      "_id": "w2VApGBNtW6usJ0t",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "basic",
+            "key": "system.modifiers.effectResistance",
+            "value": 10,
+            "predicate": [],
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "ephemeral-modifier",
+            "key": "damaging-attack-damage-percentile",
+            "value": -20,
+            "predicate": [
+              "effect:affliction:enraged"
+            ],
+            "label": "Stubbornly Ordinary",
+            "mode": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.347",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.2.beta",
+        "createdTime": 1755370411302,
+        "modifiedTime": 1755370478805,
+        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
+      }
+    }
+  ],
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "publication": {
+      "source": "PTR2e Core",
+      "authors": [
+        "Dragoon"
+      ],
+      "notes": ""
+    },
+    "actions": [],
+    "slug": "stubbornly-ordinary",
+    "description": "<p>The user gains +10% RES and takes 20% less damage from @Affliction[enraged] creatures.</p>",
+    "traits": [],
+    "prerequisites": [
+      "trait:normal"
+    ],
+    "autoUnlock": [],
+    "cost": 3,
+    "design": {
+      "arena": "social",
+      "approach": "resilience",
+      "archetype": "normal"
+    },
+    "global": true,
+    "webs": [],
+    "nodes": [
+      {
+        "x": 155,
+        "y": 92,
+        "connected": [
+          "plain-irritating",
+          "firestarter"
+        ],
+        "hidden": false,
+        "type": "normal",
+        "tier": null
+      }
+    ]
+  },
+  "folder": "LPbbEDkprZMje251"
+}

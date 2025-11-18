@@ -49,10 +49,7 @@
                 <p>Generic Actions</p>
             </div>
             <div class="action-container generic scroll">
-                {{#each actor.actions.generic as |action|}}
-                    {{> action action=action direction="LEFT"}}
-                {{/each}}
-                {{#each actor.actions.pokeball as |action|}}
+                {{#each actions.generic as |action|}}
                     {{> action action=action direction="LEFT"}}
                 {{/each}}
             </div>
@@ -62,7 +59,7 @@
                 <p>Passives</p>
             </div>
             <div class="action-container passives scroll">
-                {{#each actor.actions.passive as |action|}}
+                {{#each actions.passive as |action|}}
                     {{#unless action.hidden}}
                         {{> action action=action direction="RIGHT"}}
                     {{/unless}}
@@ -74,7 +71,7 @@
                 <p>Camping Activities</p>
             </div>
             <div class="action-container camping scroll">
-                {{#each actor.actions.camping as |action|}}
+                {{#each actions.camping as |action|}}
                     {{> action action=action direction="LEFT"}}
                 {{/each}}
             </div>
@@ -84,7 +81,7 @@
                 <p>Downtime Activities</p>
             </div>
             <div class="action-container downtime scroll">
-                {{#each actor.actions.downtime as |action|}}
+                {{#each actions.downtime as |action|}}
                     {{> action action=action direction="RIGHT"}}
                 {{/each}}
             </div>
@@ -94,7 +91,7 @@
                 <p>Exploration Activities</p>
             </div>
             <div class="action-container exploration scroll">
-                {{#each actor.actions.exploration as |action|}}
+                {{#each actions.exploration as |action|}}
                     {{> action action=action direction="RIGHT"}}
                 {{/each}}
             </div>
@@ -134,7 +131,7 @@
 </section>
 
 {{#*inline "action"}}
-    <div class="{{action.type}} action {{#if action.css.class}}{{action.css.class}}{{/if}}" data-tooltip-direction="{{direction}}" data-slug="{{action.slug}}" data-item-id="{{action.item.id}}" data-parent="{{action.item.uuid}}" data-tooltip="{{action.name}}" {{#if (isdefined slot)}}data-slot="{{slot}}"{{/if}} {{#if action.css.style}}style="{{action.css.style}}"{{/if}}>
+    <div class="{{action.type}} action draggable {{#if action.css.class}}{{action.css.class}}{{/if}}" data-tooltip-direction="{{direction}}" data-slug="{{action.slug}}" data-item-id="{{action.item.id}}" data-parent="{{action.item.uuid}}" data-tooltip="{{action.name}}" {{#if (isdefined slot)}}data-slot="{{slot}}"{{/if}} {{#if action.css.style}}style="{{action.css.style}}"{{/if}}>
         <div class="action-icon {{#if action.rollable}}rollable{{/if}}" {{#if action.rollable}}data-action="roll-attack"{{/if}} >
             <img class="icon" src="{{action.img}}"/>
             <img class="dice" src="icons/svg/d20.svg" data-tooltip="Roll {{action.name}}">

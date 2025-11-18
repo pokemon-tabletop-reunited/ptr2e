@@ -22,7 +22,10 @@
           "type-hunter",
           "root-5",
           "dead-to-rights",
-          "stat-iv-booster-1-7"
+          "stat-iv-booster-1-7",
+          "minor-buff-51",
+          "duelists-eye",
+          "duelists-glory"
         ],
         "config": {
           "alpha": null,
@@ -46,7 +49,14 @@
     "design": {
       "arena": "social",
       "approach": "power",
-      "archetype": "Hunter"
+      "archetype": "hunter"
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
     }
   },
   "effects": [
@@ -69,25 +79,46 @@
                 "value": "true"
               }
             ],
-            "mode": 2,
             "priority": null,
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            },
+            "mode": 2,
             "ignored": false,
             "reevaluateOnUpdate": false,
             "inMemoryOnly": false,
             "allowDuplicate": true,
             "track": false,
-            "replaceSelf": false,
-            "onDeleteActions": {
-              "grantee": "detach",
-              "granter": "cascade"
-            }
+            "replaceSelf": false
+          },
+          {
+            "type": "roll-effect",
+            "key": "stand-off-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.k1FukpHKnZGqjSNc",
+            "predicate": [],
+            "chance": 100,
+            "isFixedChance": true,
+            "affects": "self",
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "system.changes.0.value",
+                "value": 4
+              }
+            ],
+            "dontMerge": false,
+            "mode": 2,
+            "ignored": false
           }
         ],
         "slug": null,
         "traits": [],
         "removeAfterCombat": true,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
@@ -105,16 +136,21 @@
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "flags": {},
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.348",
         "systemId": "ptr2e",
-        "systemVersion": "0.10.0-alpha.5.2.1",
+        "systemVersion": "1.4.4.beta",
         "createdTime": 1737935167337,
-        "modifiedTime": 1737935200437,
-        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+        "modifiedTime": 1758403775868,
+        "lastModifiedBy": "Kc3DOunCh3ClAeHS",
+        "exportSource": null
       }
     }
   ]

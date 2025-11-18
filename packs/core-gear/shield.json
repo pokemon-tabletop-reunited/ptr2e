@@ -1,5 +1,5 @@
 {
-  "folder": "V4skAU6G3OH5fXaf",
+  "folder": "PGpYU7mfnRpzOZSm",
   "name": "Shield",
   "type": "weapon",
   "system": {
@@ -25,7 +25,13 @@
     "fling": {
       "type": "untyped",
       "power": 35,
-      "accuracy": 70
+      "accuracy": 70,
+      "hide": false,
+      "range": {
+        "target": "creature",
+        "distance": 10,
+        "unit": "m"
+      }
     },
     "quantity": 1,
     "rarity": "uncommon",
@@ -37,25 +43,32 @@
         "img": "systems/ptu/css/images/icons/item_icon.png",
         "description": "<p>Unidentified Item</p>"
       }
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
     }
   },
   "_id": "ChBTTn5Y92l3vopZ",
-  "img": "systems/ptr2e/img/icons/weapon_icon.webp",
+  "img": "icons/equipment/shield/wardoor-wooden-boss-brown.webp",
   "effects": [
     {
       "name": "Shield Equipped",
       "type": "passive",
       "_id": "vwCWilRNpvXznB84",
-      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "img": "icons/equipment/shield/wardoor-wooden-boss-brown.webp",
       "system": {
         "changes": [
           {
             "type": "basic",
-            "key": "system.battleStats.evasion.Stage",
+            "key": "system.battleStats.evasion.stage",
             "value": 1,
             "predicate": [],
-            "mode": 2,
             "priority": null,
+            "mode": 2,
             "ignored": false
           }
         ],
@@ -63,7 +76,9 @@
         "traits": [],
         "removeAfterCombat": false,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
@@ -81,16 +96,21 @@
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "flags": {},
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": "always"
+        }
+      },
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.348",
         "systemId": "ptr2e",
-        "systemVersion": "0.10.0-alpha.2.1.6",
+        "systemVersion": "1.4.4.beta",
         "createdTime": 1723846044870,
-        "modifiedTime": 1723846062660,
-        "lastModifiedBy": "IcBpMqhFuTck9VpX"
+        "modifiedTime": 1758619848335,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf",
+        "exportSource": null
       }
     }
   ]

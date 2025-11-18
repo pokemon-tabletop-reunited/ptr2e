@@ -1,0 +1,124 @@
+{
+  "name": "Needle-Threader",
+  "_id": "r75WWb1fvsp00BrC",
+  "type": "perk",
+  "img": "icons/skills/targeting/crosshair-ringed-gray.webp",
+  "effects": [
+    {
+      "name": "Needle-Threader",
+      "type": "passive",
+      "_id": "nxp3QMMdMDQfjEym",
+      "img": "icons/skills/targeting/crosshair-ringed-gray.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "grant-item",
+            "key": "",
+            "value": "Compendium.ptr2e.core-abilities.Item.JvEQgZGAANjyXwaM",
+            "predicate": [],
+            "alterations": [],
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            },
+            "allowDuplicate": false,
+            "mode": 2,
+            "ignored": false,
+            "reevaluateOnUpdate": false,
+            "inMemoryOnly": false,
+            "track": false,
+            "replaceSelf": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": false,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "<p>The user gains @UUID[Compendium.ptr2e.core-abilities.JvEQgZGAANjyXwaM]{Deadeye} as a Tutored Ability.</p>",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": "Compendium.ptr2e.core-perks.Item.5WFNYRPn6z0GBL6C.ActiveEffect.sXXvbSqpJbsSDwZf",
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.346",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.1.beta",
+        "createdTime": 1754299218782,
+        "modifiedTime": 1754299267303,
+        "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
+      }
+    }
+  ],
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "publication": {
+      "source": "PTR2e Core",
+      "authors": [
+        "Dragoon"
+      ],
+      "notes": ""
+    },
+    "actions": [],
+    "slug": "needle-threader",
+    "description": "<p>The user gains @UUID[Compendium.ptr2e.core-abilities.JvEQgZGAANjyXwaM]{Deadeye} as a Tutored Ability.</p>",
+    "traits": [],
+    "prerequisites": [
+      "trait:wielder",
+      {
+        "gte": [
+          "{actor|skills.acrobatics.mod}",
+          30
+        ]
+      }
+    ],
+    "autoUnlock": [
+      "item:ability:deadeye"
+    ],
+    "cost": 3,
+    "design": {
+      "arena": "physical",
+      "approach": "finesse",
+      "archetype": null
+    },
+    "global": true,
+    "webs": [],
+    "nodes": [
+      {
+        "x": 183,
+        "y": 61,
+        "hidden": false,
+        "type": "normal",
+        "connected": [
+          "trained-wielder",
+          "yeomanry",
+          "down-the-sights"
+        ],
+        "config": {
+          "texture": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "tint": null
+        },
+        "tier": null
+      }
+    ]
+  },
+  "folder": "VCEaYPpKcCqDx7yx"
+}

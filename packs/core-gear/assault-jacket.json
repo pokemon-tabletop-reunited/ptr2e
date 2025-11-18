@@ -4,7 +4,7 @@
   "type": "equipment",
   "system": {
     "crafting": {
-      "skill": null,
+      "skill": "",
       "spans": null,
       "materials": []
     },
@@ -18,7 +18,7 @@
       "type": "untyped",
       "power": null,
       "accuracy": 100,
-      "hide": null
+      "hide": false
     },
     "rarity": "uncommon",
     "traits": [
@@ -37,7 +37,8 @@
         ],
         "range": {
           "target": "creature",
-          "unit": "m"
+          "unit": "m",
+          "distance": 10
         },
         "cost": {
           "activation": "complex"
@@ -60,6 +61,13 @@
     "_migration": {
       "version": null,
       "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
     }
   },
   "_id": "sVCEjkvugrCRkH60",
@@ -79,13 +87,25 @@
             "predicate": [],
             "priority": null,
             "ignored": false
+          },
+          {
+            "type": "alter-attack",
+            "key": "status-attack",
+            "value": 3,
+            "predicate": [],
+            "mode": 1,
+            "ignored": false,
+            "property": "pp-cost",
+            "definition": []
           }
         ],
         "slug": null,
         "traits": [],
         "removeAfterCombat": true,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
@@ -103,18 +123,23 @@
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "flags": {},
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.348",
         "systemId": "ptr2e",
-        "systemVersion": "0.10.0-alpha.5.2.1",
+        "systemVersion": "1.4.4.beta",
         "createdTime": 1737934680878,
-        "modifiedTime": 1737934689641,
-        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+        "modifiedTime": 1758379991642,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf",
+        "exportSource": null
       }
     }
   ],
-  "folder": "V4skAU6G3OH5fXad"
+  "folder": "UUWElZA9w1KEqZS7"
 }

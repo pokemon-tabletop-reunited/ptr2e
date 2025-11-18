@@ -243,7 +243,6 @@ class CompendiumPack {
       throw PackError(`Filename at ${filePath} does not reflect document name (should be ${filenameForm}).`);
     }
 
-
     return [packSource];
   }
 
@@ -388,11 +387,30 @@ class CompendiumPack {
         })(docSource.system as {
           moves: Record<string, {name: string, uuid: string, gen?: string, level?: number}[]>;
         });
+
+        // Check if species has <510 stats, if so make sure that the underdog trait is added, and otherwise remove said trait.
+        const stats = docSource.system as { stats: Record<string, number | null>, traits: string[] };
+        const totalStats = Object.values(stats.stats ?? {}).filter(s => s !== null).reduce((a, b) => (a ?? 0) + (b ?? 0), 0) ?? 0;
+        if(totalStats === 0) {
+          throw PackError(`Species '${docSource.name}' has no stats defined`);
+        }
+        if(!stats.traits || !Array.isArray(stats.traits)) {
+          stats.traits = [];
+        }
+        const hasUnderdog = stats.traits.includes("underdog");
+        if(totalStats < 510 && !hasUnderdog) {
+          stats.traits.push("underdog");
+        } else if(totalStats >= 510 && hasUnderdog) {
+          stats.traits = stats.traits.filter(t => t !== "underdog");
+        }
       }
     }
 
     const replace = (match: string, packId: string, docType: string, docName: string): string => {
       if (match.includes("JournalEntryPage")) return match;
+
+      const isAction = docName.includes(".Actions.");
+      const [name, actionName] = isAction ? docName.split(".Actions.") : [docName, null];
 
       const idsToSource = CompendiumPack.#idsToEntry[docType]?.get(packId);
       const namesToIds = CompendiumPack.#namesToIds[docType]?.get(packId);
@@ -401,14 +419,16 @@ class CompendiumPack {
         throw PackError(`${docSource.name} (${this.packId}) has a bad pack reference: ${link}`);
       }
 
-      const documentId: string | undefined = namesToIds.get(sluggify(docName)) || idsToSource?.get(docName)?._id || undefined;
+      const documentId: string | undefined = namesToIds.get(sluggify(name)) || idsToSource?.get(name)?._id || undefined;
       if (documentId === undefined) {
         throw PackError(`${docSource.name} (${this.packId}) has broken link to ${docName}: ${match}`);
       }
+      const source = idsToSource?.get(documentId);
+      if(source) docName = source.name;
       const sourceId = this.#sourceIdOf(documentId, { packId, docType });
       const labelBraceOrFullLabel = match.endsWith("{") ? "{" : `{${docName}}`;
 
-      return `@UUID[${sourceId}]${labelBraceOrFullLabel}`;
+      return `@UUID[${sourceId}${actionName ? `.Actions.${actionName}` : ""}]${labelBraceOrFullLabel}`;
     };
 
     return JSON.stringify(docSource)

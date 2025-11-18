@@ -1,0 +1,155 @@
+{
+  "folder": "V4skAU6G3OH5fXae",
+  "name": "Prism Scale",
+  "type": "equipment",
+  "system": {
+    "_migration": {
+      "version": 0.11,
+      "previous": null
+    },
+    "slug": "prism-scale",
+    "traits": [
+      "combat",
+      "water",
+      "evolution",
+      "feebas",
+      "milotic",
+      "consumable",
+      "accessory"
+    ],
+    "actions": [],
+    "description": "<p>Effect: The user takes 10% less damage from Special-Category Attacks. Feebas and Milotic take 10% less damage from Physical-Category Attacks, and another 10% less from Special-Category Attacks.<br><br>Feebas may consume this item to trigger Evolution.</p>",
+    "crafting": {
+      "skill": "",
+      "spans": null,
+      "materials": []
+    },
+    "equipped": {
+      "carryType": "stowed",
+      "handsHeld": null,
+      "slot": "accessory"
+    },
+    "grade": "C",
+    "fling": {
+      "type": "water",
+      "power": 70,
+      "accuracy": 100,
+      "hide": false,
+      "range": {
+        "target": "creature",
+        "distance": 10,
+        "unit": "m"
+      }
+    },
+    "quantity": 1,
+    "rarity": "rare",
+    "identification": {
+      "misidentified": null,
+      "status": "identified",
+      "unidentified": {
+        "name": "Unidentified Item",
+        "img": "systems/ptu/css/images/icons/gear_icon.png",
+        "description": "<p>Unidentified Item</p>"
+      }
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    }
+  },
+  "img": "systems/ptr2e/img/item-icons/prism%20scale.webp",
+  "effects": [
+    {
+      "name": "Prism Scale",
+      "type": "passive",
+      "_id": "Yv41qOcilsYuiS4Q",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "ephemeral-modifier",
+            "key": "special-attack-damage-percentile",
+            "value": -10,
+            "predicate": [],
+            "label": "Prism Scale (Base)",
+            "mode": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          },
+          {
+            "type": "ephemeral-modifier",
+            "key": "physical-attack-damage-percentile",
+            "value": -10,
+            "predicate": [
+              {
+                "or": [
+                  "target:species:feebas",
+                  "target:species:milotic"
+                ]
+              }
+            ],
+            "label": "Prism Scale (Phys)",
+            "hideIfDisabled": true,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "ephemeral-modifier",
+            "key": "special-attack-damage-percentile",
+            "value": -10,
+            "predicate": [
+              {
+                "or": [
+                  "target:species:feebas",
+                  "target:species:milotic"
+                ]
+              }
+            ],
+            "label": "Prism Scale (Feebas/Milotic)",
+            "hideIfDisabled": true,
+            "mode": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.348",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.4.beta",
+        "createdTime": 1758629437658,
+        "modifiedTime": 1758629832937,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+      }
+    }
+  ],
+  "_id": "LrsTWZAslsQeuiJb"
+}

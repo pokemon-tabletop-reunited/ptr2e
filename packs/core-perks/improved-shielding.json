@@ -7,7 +7,7 @@
   "system": {
     "actions": [],
     "slug": "improved-shielding",
-    "description": "<p>Whenever you would gain Shields, you gain an additional @Tick[2 shield].<br><br></p>",
+    "description": "<p>Whenever you would apply Shields to any Target(s) (including yourself), the target(s) gain an additional @Tick[2 shield].</p>",
     "traits": [],
     "prerequisites": [
       "#A Perk which grants Shields"
@@ -48,7 +48,96 @@
       "arena": "physical",
       "approach": "resilience",
       "archetype": "tank"
-    }
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "originSlug": null,
+    "variant": null,
+    "mode": null
   },
-  "effects": []
+  "effects": [
+    {
+      "name": "Improved Shielding",
+      "type": "passive",
+      "_id": "M0W0LiUTmu7u9GQF",
+      "img": "systems/ptr2e/img/perk-icons/Combat.svg",
+      "system": {
+        "changes": [
+          {
+            "type": "effect-alteration",
+            "key": "shield-tick-effect-applied",
+            "value": 0,
+            "predicate": [
+              {
+                "nor": ["item:slug:hold-the-line", "item:slug:watchers-protection"]
+              }
+            ],
+            "alterations": [
+              {
+                "mode": 2,
+                "property": "system.changes.0.value",
+                "value": "2"
+              }
+            ]
+          },
+          {
+            "type": "effect-alteration",
+            "key": "shield-tick-effect-applied",
+            "value": 0,
+            "predicate": [
+              {
+                "or": ["item:slug:hold-the-line", "item:slug:watchers-protection"]
+              }
+            ],
+            "alterations": [
+              {
+                "mode": 2,
+                "property": "system.changes.0.value",
+                "value": "floor((@origin.system.health.max / 16) * 2)"
+              }
+            ]
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": false,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "<p>Whenever you would apply Shields to any Target(s) (including yourself), the target(s) gain an additional @Tick[2 shield].</p>",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.348",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.4.beta",
+        "createdTime": 1758365471843,
+        "modifiedTime": 1758365525331,
+        "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
+      }
+    }
+  ]
 }

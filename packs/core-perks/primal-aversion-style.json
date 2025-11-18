@@ -1,0 +1,145 @@
+{
+  "name": "Primal Aversion Style",
+  "_id": "q1OjUbNvmTc0hyQk",
+  "type": "perk",
+  "img": "systems/ptr2e/img/svg/bug_icon.svg",
+  "effects": [
+    {
+      "name": "Primal Aversion Style",
+      "type": "passive",
+      "_id": "VsRlKIg9rlEKPQ8d",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "primal-aversion-style-generic",
+            "value": "Compendium.ptr2e.core-effects.Item.F5zGW8MN7MZTi6PN",
+            "predicate": [],
+            "chance": 100,
+            "isFixedChance": true,
+            "affects": "target",
+            "alterations": [],
+            "dontMerge": false,
+            "mode": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.347",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.3.beta",
+        "createdTime": 1756040964216,
+        "modifiedTime": 1756040983184,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+      }
+    }
+  ],
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "publication": {
+      "source": "PTR2e Core",
+      "authors": [
+        "Fox"
+      ],
+      "notes": ""
+    },
+    "actions": [
+      {
+        "name": "Primal Aversion Style",
+        "slug": "primal-aversion-style",
+        "description": "<p>Target: A Commanded @Trait[bug] Creature<br><br>Effects: The target's @Trait[bug]-Type Attacks afflict the target with @Affliction[delay-20], additionally the target @Trait[bug] takes 50% more damage from @Trait[fire]-Type Attacks.</p>",
+        "traits": [
+          "command",
+          "style",
+          "bug"
+        ],
+        "type": "generic",
+        "img": "systems/ptr2e/img/svg/bug_icon.svg",
+        "cost": {
+          "activation": "simple",
+          "powerPoints": 2
+        },
+        "range": {
+          "target": "creature",
+          "distance": 10,
+          "unit": "m"
+        }
+      }
+    ],
+    "slug": "primal-aversion-style",
+    "description": "<p>Target: A Commanded @Trait[bug] Creature<br><br>Effects: The target's @Trait[bug]-Type Attacks afflict the target with @Affliction[delay-20], additionally the target @Trait[bug] takes 50% more damage from @Trait[fire]-Type Attacks.</p>",
+    "traits": [
+      "command",
+      "style",
+      "bug"
+    ],
+    "prerequisites": [
+      "item:perk:type-specialist",
+      {
+        "gte": [
+          "{actor|skills.leadership.mod}",
+          35
+        ]
+      }
+    ],
+    "autoUnlock": [],
+    "cost": 2,
+    "design": {
+      "arena": "social",
+      "approach": "power",
+      "archetype": "bug"
+    },
+    "global": true,
+    "webs": [],
+    "nodes": [
+      {
+        "x": 187,
+        "y": 103,
+        "hidden": false,
+        "type": "normal",
+        "connected": [
+          "type-specialist"
+        ],
+        "config": {
+          "texture": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "tint": null
+        },
+        "tier": null
+      }
+    ]
+  },
+  "folder": "o5iIUG4Bj40M86yi"
+}

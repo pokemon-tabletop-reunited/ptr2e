@@ -1,0 +1,121 @@
+{
+  "folder": "V4skAU6G3OH5fXae",
+  "name": "Sachet",
+  "type": "equipment",
+  "system": {
+    "_migration": {
+      "version": 0.11,
+      "previous": null
+    },
+    "slug": "sachet",
+    "traits": [
+      "combat",
+      "fairy",
+      "evolution",
+      "spritzee",
+      "aromatisse",
+      "consumable",
+      "accessory"
+    ],
+    "actions": [],
+    "description": "<p>Effect: Grants @Trait[fairy]-type creatures +20% EHR.<br><br>Can be consumed by Spritzee to trigger Evolution.</p>",
+    "crafting": {
+      "skill": "",
+      "spans": null,
+      "materials": []
+    },
+    "equipped": {
+      "carryType": "stowed",
+      "handsHeld": null,
+      "slot": "accessory"
+    },
+    "grade": "C",
+    "fling": {
+      "type": "fairy",
+      "power": 70,
+      "accuracy": 100,
+      "hide": false,
+      "range": {
+        "target": "creature",
+        "distance": 10,
+        "unit": "m"
+      }
+    },
+    "quantity": 1,
+    "rarity": "rare",
+    "identification": {
+      "misidentified": null,
+      "status": "identified",
+      "unidentified": {
+        "name": "Unidentified Item",
+        "img": "systems/ptu/css/images/icons/gear_icon.png",
+        "description": "<p>Unidentified Item</p>"
+      }
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    }
+  },
+  "img": "systems/ptr2e/img/item-icons/sachet.webp",
+  "effects": [
+    {
+      "name": "Sachet",
+      "type": "passive",
+      "_id": "1WZydCAk8pVCOMC7",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "basic",
+            "key": "system.modifiers.effectHitRate",
+            "value": 20,
+            "predicate": [
+              "trait:fairy"
+            ],
+            "mode": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.348",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.4.beta",
+        "createdTime": 1758630794074,
+        "modifiedTime": 1758630820317,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+      }
+    }
+  ],
+  "_id": "AddZ0pPHBStJ19Qb"
+}

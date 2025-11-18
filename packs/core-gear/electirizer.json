@@ -1,0 +1,138 @@
+{
+  "folder": "V4skAU6G3OH5fXae",
+  "name": "Electirizer",
+  "type": "equipment",
+  "system": {
+    "_migration": {
+      "version": 0.11,
+      "previous": null
+    },
+    "slug": "electirizer",
+    "traits": [
+      "combat",
+      "evolution",
+      "elekid",
+      "electabuzz",
+      "electivire",
+      "accessory",
+      "electric"
+    ],
+    "actions": [],
+    "description": "<p>Effect: The user spends 20% fewer PP (minimum 1) with Electric-Type Attacks. Elekid, Electabuzz, and Electivire deal 20% more damage with Physical-Category Attacks.<br><br>An Electabuzz may consume this to trigger Evolution.</p>",
+    "crafting": {
+      "skill": "",
+      "spans": null,
+      "materials": []
+    },
+    "equipped": {
+      "carryType": "stowed",
+      "handsHeld": null,
+      "slot": "accessory"
+    },
+    "grade": "B",
+    "fling": {
+      "type": "electric",
+      "power": 85,
+      "accuracy": 85,
+      "hide": false,
+      "range": {
+        "target": "creature",
+        "distance": 10,
+        "unit": "m"
+      }
+    },
+    "quantity": 1,
+    "rarity": "rare",
+    "identification": {
+      "misidentified": null,
+      "status": "identified",
+      "unidentified": {
+        "name": "Unidentified Item",
+        "img": "systems/ptu/css/images/icons/gear_icon.png",
+        "description": "<p>Unidentified Item</p>"
+      }
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    }
+  },
+  "img": "systems/ptr2e/img/item-icons/electirizer.webp",
+  "effects": [
+    {
+      "name": "Electirizer",
+      "type": "passive",
+      "_id": "kaMSShHKWD5a2PKU",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "alter-attack",
+            "key": "electric-attack",
+            "value": -1,
+            "predicate": [],
+            "mode": 2,
+            "ignored": false,
+            "property": "pp-cost",
+            "definition": []
+          },
+          {
+            "type": "percentile-modifier",
+            "key": "physical-attack-damage",
+            "value": 20,
+            "predicate": [
+              {
+                "or": [
+                  "item:species:elekid",
+                  "item:species:electabuzz",
+                  "item:species:electivire"
+                ]
+              }
+            ],
+            "mode": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
+      "_stats": {
+        "compendiumSource": "Compendium.ptr2e.core-gear.Item.zQRQn1X9bw5xOApv.ActiveEffect.kaMSShHKWD5a2PKU",
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.348",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.4.beta",
+        "createdTime": 1758626477212,
+        "modifiedTime": 1758626685927,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+      }
+    }
+  ],
+  "_id": "zQRQn1X9bw5xOApv"
+}

@@ -7,23 +7,7 @@
     ],
     "cost": 4,
     "description": "<p>Gain a second Held Item slot.</p>",
-    "actions": [
-      {
-        "name": "Dual Wielder",
-        "slug": "dual-wielder",
-        "description": "<p>Gain a second Wielded Item Slot.</p>",
-        "cost": {
-          "activation": "free"
-        },
-        "type": "passive",
-        "traits": [],
-        "img": "icons/svg/explosion.svg",
-        "range": {
-          "target": "enemy",
-          "unit": "m"
-        }
-      }
-    ],
+    "actions": [],
     "slug": "dual-wielder",
     "traits": [],
     "_migration": {
@@ -35,7 +19,9 @@
         "connected": [
           "backpacker-1",
           "belt-expansion-1",
-          "dress-to-impress"
+          "dress-to-impress",
+          "yeomanry",
+          "nock-shot"
         ],
         "config": {
           "alpha": null,
@@ -60,6 +46,13 @@
       "arena": "physical",
       "approach": "finesse",
       "archetype": "weapon"
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
     }
   },
   "_id": "QioUEl6UBFclZvzG",
@@ -69,7 +62,7 @@
       "name": "Dual Wielder",
       "type": "passive",
       "_id": "KS2tYC5yodOQrCN2",
-      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "img": "systems/ptr2e/img/perk-icons/Tactician.svg",
       "system": {
         "changes": [
           {
@@ -84,9 +77,11 @@
         ],
         "slug": null,
         "traits": [],
-        "removeAfterCombat": true,
+        "removeAfterCombat": false,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
@@ -108,12 +103,13 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.346",
         "systemId": "ptr2e",
-        "systemVersion": "0.10.0-alpha.5.1.5",
+        "systemVersion": "1.4.1.beta",
         "createdTime": 1737566059443,
-        "modifiedTime": 1737566090456,
-        "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
+        "modifiedTime": 1754299623416,
+        "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+        "exportSource": null
       }
     }
   ],

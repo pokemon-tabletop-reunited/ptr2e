@@ -1,0 +1,146 @@
+{
+  "folder": "V4skAU6G3OH5fXae",
+  "name": "Reaper Cloth",
+  "type": "equipment",
+  "system": {
+    "_migration": {
+      "version": 0.11,
+      "previous": null
+    },
+    "slug": "reaper-cloth",
+    "traits": [
+      "combat",
+      "ghost",
+      "evolution",
+      "duskull",
+      "dusclops",
+      "dusknoir"
+    ],
+    "actions": [],
+    "description": "<p>Effect: Ghost Type creatures take 10% less damage from Physical- and Special-Category Attacks. Duskull, Dusclops, and Dusknoir gain @Affliction[advance 15] when they use an attack.</p>",
+    "crafting": {
+      "skill": "",
+      "spans": null,
+      "materials": []
+    },
+    "equipped": {
+      "carryType": "stowed",
+      "handsHeld": null,
+      "slot": "accessory"
+    },
+    "grade": "C",
+    "fling": {
+      "type": "ghost",
+      "power": 70,
+      "accuracy": 100,
+      "hide": false,
+      "range": {
+        "target": "creature",
+        "distance": 10,
+        "unit": "m"
+      }
+    },
+    "quantity": 1,
+    "rarity": "rare",
+    "identification": {
+      "misidentified": null,
+      "status": "identified",
+      "unidentified": {
+        "name": "Unidentified Item",
+        "img": "systems/ptu/css/images/icons/gear_icon.png",
+        "description": "<p>Unidentified Item</p>"
+      }
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    }
+  },
+  "img": "systems/ptr2e/img/item-icons/reaper%20cloth.webp",
+  "effects": [
+    {
+      "name": "Reaper Cloth",
+      "type": "passive",
+      "_id": "D38H5Wfqs1yvQg0u",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "ephemeral-modifier",
+            "key": "damaging-attack-damage-percentile",
+            "value": -10,
+            "predicate": [],
+            "mode": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          },
+          {
+            "type": "roll-effect",
+            "key": "attack",
+            "value": "Compendium.ptr2e.core-effects.Item.advancecondiitem",
+            "predicate": [
+              {
+                "or": [
+                  "item:species:duskull",
+                  "item:species:dusclops",
+                  "item:species:dusknoir"
+                ]
+              }
+            ],
+            "chance": 100,
+            "isFixedChance": false,
+            "affects": "self",
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "system.amount",
+                "value": 15
+              }
+            ],
+            "dontMerge": true,
+            "mode": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.348",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.4.beta",
+        "createdTime": 1758629799235,
+        "modifiedTime": 1758630064734,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+      }
+    }
+  ],
+  "_id": "L0OlExGenlDjF0Ft"
+}

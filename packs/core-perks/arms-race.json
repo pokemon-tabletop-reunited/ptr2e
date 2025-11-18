@@ -1,0 +1,121 @@
+{
+  "name": "Arms Race",
+  "_id": "kUZFfd8U5WQwPh5S",
+  "type": "perk",
+  "img": "icons/weapons/artillery/cannon-engraved-gold.webp",
+  "effects": [
+    {
+      "name": "Arms Race",
+      "type": "passive",
+      "_id": "89hargPTyxkqDYqz",
+      "img": "icons/weapons/artillery/cannon-engraved-gold.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "grant-item",
+            "key": "",
+            "value": "Compendium.ptr2e.core-abilities.Item.XYFBpNyW7MYqcrdY",
+            "predicate": [],
+            "alterations": [],
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            },
+            "mode": 2,
+            "ignored": false,
+            "reevaluateOnUpdate": false,
+            "inMemoryOnly": false,
+            "allowDuplicate": true,
+            "track": false,
+            "replaceSelf": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": false,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "<p>Effect: The user gains @UUID[Compendium.ptr2e.core-abilities.XYFBpNyW7MYqcrdY]{Artillery} as a Tutored Ability.</p>",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.346",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.2.beta",
+        "createdTime": 1754224493242,
+        "modifiedTime": 1754224524237,
+        "lastModifiedBy": "dCIq77b7AO2frs8Z"
+      }
+    }
+  ],
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "publication": {
+      "source": "PTR2e Core",
+      "authors": [
+        "Dragoon"
+      ],
+      "notes": ""
+    },
+    "actions": [],
+    "slug": "arms-race",
+    "description": "<p>Effect: The user gains @UUID[Compendium.ptr2e.core-abilities.XYFBpNyW7MYqcrdY]{Artillery} as a Tutored Ability.</p>",
+    "traits": [],
+    "prerequisites": [
+      {
+        "or": [
+          "item:ability:ballistic",
+          "item:ability:mega-launcher",
+          "item:ability:ray-blaster",
+          "item:ability:bombard"
+        ]
+      }
+    ],
+    "autoUnlock": [],
+    "cost": 3,
+    "design": {
+      "arena": "mental",
+      "approach": "power",
+      "archetype": null
+    },
+    "global": true,
+    "webs": [],
+    "nodes": [
+      {
+        "x": 175,
+        "y": 64,
+        "hidden": false,
+        "type": "normal",
+        "connected": [
+          "covering-fire",
+          "yeomanry"
+        ],
+        "config": {
+          "texture": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "tint": null
+        },
+        "tier": null
+      }
+    ]
+  }
+}

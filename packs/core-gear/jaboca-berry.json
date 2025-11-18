@@ -3,9 +3,9 @@
   "img": "systems/ptr2e/img/item-icons/jaboca berry.webp",
   "type": "consumable",
   "system": {
-    "cost": 7,
+    "cost": 5,
     "crafting": {
-      "skill": null,
+      "skill": "",
       "spans": null,
       "materials": []
     },
@@ -18,47 +18,128 @@
     "fling": {
       "type": "untyped",
       "power": 10,
-      "accuracy": 95
+      "accuracy": 95,
+      "hide": false,
+      "range": {
+        "target": "creature",
+        "distance": 10,
+        "unit": "m"
+      }
     },
-    "rarity": "uncommon",
+    "rarity": "common",
     "consumableType": "food",
     "traits": [
-      "restorative",
       "consumable",
       "natural",
-      "healing",
       "berry",
       "fling",
-      "held",
-      "stash",
-      "bitter-7",
-      "sour-1"
+      "combat"
     ],
-    "description": "The attacking creature loses 3 Ticks of HP, consuming the item as a Free Action.",
+    "description": "<p>Effect: When the user is damaged by a Physical-Category attack, this item can be retrieved from the Belt and consumed as a Free Action at @Trait[interrupt-2], causing the attacking creature to lose @Tick[-3].</p>",
     "quantity": 1,
-    "container": null,
-    "slug": null,
-    "modifier": null,
-    "stack": 1
+    "slug": "jaboca-berry",
+    "stack": 1,
+    "_migration": {
+      "version": null,
+      "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "actions": [
+      {
+        "name": "Jaboca Berry",
+        "slug": "jaboca-berry-action-1",
+        "description": "<p>Effect: When the user is damaged by a Physical-Category attack, this item can be retrieved from the Belt and consumed as a Free Action at @Trait[interrupt-2], causing the attacking creature to lose @Tick[-3].</p>",
+        "traits": [
+          "consumable",
+          "natural",
+          "berry",
+          "fling",
+          "combat"
+        ],
+        "type": "generic",
+        "img": "systems/ptr2e/img/item-icons/jaboca berry.webp",
+        "cost": {
+          "activation": "simple"
+        },
+        "range": {
+          "target": "creature",
+          "distance": 10,
+          "unit": "m"
+        }
+      }
+    ]
   },
   "_id": "GS4iA0Bz19Mab6Zg",
-  "effects": [],
-  "folder": "V4skAU6G3OH5fXab",
-  "sort": 0,
-  "ownership": {
-    "default": 0,
-    "tXAZ3QUgjuwX4gdV": 3
-  },
-  "flags": {},
-  "_stats": {
-    "compendiumSource": null,
-    "duplicateSource": null,
-    "coreVersion": "12.327",
-    "systemId": "ptr2e",
-    "systemVersion": "0.0.0-alpha.1.0",
-    "createdTime": 1717878484297,
-    "modifiedTime": 1717878484297,
-    "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
-  },
-  "_key": "!items!GS4iA0Bz19Mab6Zg"
+  "effects": [
+    {
+      "name": "Jaboca Berry",
+      "type": "passive",
+      "_id": "peq5CxgOAFZPlPDu",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "jaboca-berry-generic",
+            "value": "Compendium.ptr2e.core-effects.Item.4DlXFTVooz07YcDm",
+            "predicate": [],
+            "chance": 100,
+            "isFixedChance": true,
+            "affects": "target",
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "system.changes.0.value",
+                "value": -3
+              }
+            ],
+            "dontMerge": false,
+            "mode": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
+      "_stats": {
+        "compendiumSource": "Compendium.ptr2e.core-gear.Item.Rmp9cDtLcTuRuf9x.ActiveEffect.N0vLanHTvK1vmCcE",
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.348",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.4.beta",
+        "createdTime": 1758641766193,
+        "modifiedTime": 1758641783739,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+      }
+    }
+  ],
+  "folder": "yR1GFstYOCdI2jOz"
 }

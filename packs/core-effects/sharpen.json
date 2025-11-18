@@ -1,0 +1,88 @@
+{
+  "name": "Sharpen",
+  "type": "effect",
+  "img": "icons/svg/sword.svg",
+  "system": {
+    "traits": [],
+    "description": "While under the effect of Sharpen, the afflicted creature’s [Contact] attacks gain [Sharp], and their [Sharp] attacks gain [Crit 1] or have their [Crit X] increase by +1.",
+    "slug": "sharpen",
+    "publication": {
+      "source": "",
+      "authors": [],
+      "notes": ""
+    },
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "effects": [
+    {
+      "name": "Sharpen",
+      "img": "icons/svg/sword.svg",
+      "type": "affliction",
+      "duration": {
+        "turns": 5,
+        "startTime": null,
+        "combat": null
+      },
+      "system": {
+        "changes": [
+          {
+            "type": "stage-modifier",
+            "key": "dash-trait-attack-crit",
+            "value": 1,
+            "mode": 2,
+            "predicate": [],
+            "ignored": false,
+            "hideIfDisabled": false
+          },
+          {
+            "type": "stage-modifier",
+            "key": "sharp-trait-attack-crit",
+            "value": 1,
+            "mode": 2,
+            "predicate": [],
+            "ignored": false,
+            "hideIfDisabled": false
+          }
+        ],
+        "formula": null,
+        "type": null,
+        "removeOnRecall": false,
+        "removeAfterCombat": true,
+        "traits": [
+          "minor-affliction"
+        ],
+        "slug": null,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0,
+        "priority": 50
+      },
+      "description": "While under the effect of Sharpen, the afflicted creature’s [Contact] attacks gain [Sharp], and their [Sharp] attacks gain [Crit 1] or have their [Crit X] increase by +1.",
+      "statuses": [
+        "sharpen"
+      ],
+      "_id": "sharpencondition",
+      "_stats": {
+        "coreVersion": "13.346",
+        "systemId": null,
+        "systemVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null,
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "disabled": false,
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "sort": 0,
+      "flags": {}
+    }
+  ],
+  "_id": "sharpencondiitem"
+}

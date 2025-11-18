@@ -12,17 +12,15 @@
       }
     ],
     "cost": 2,
-    "description": "<p>You are able to Tutor Attacks from the <Type> Tutor List as if you knew them already yourself, up to your Grade.</p>",
+    "description": "<p>You may count as the 'Source' during the Tutoring Downtime Activity for moves on the &lt;Type&gt;'s Tutor List, up to your grade, as if those moves were on your 'Known Attacks' list.</p>",
     "actions": [
       {
         "name": "<Type> Tutoring",
         "slug": "type-tutoring",
-        "description": "<p>You are able to Tutor Attacks from the <Type> Tutor List as if you knew them already yourself, up to your Grade.</p>",
+        "description": "<p>You may count as the 'Source' during the Tutoring Downtime Activity for moves on the &lt;Type&gt;'s Tutor List, up to your grade, as if those moves where on your 'Known Attacks' list.</p>",
         "cost": {
           "activation": "free",
-          "powerPoints": 0,
-          "delay": null,
-          "priority": null
+          "powerPoints": 0
         },
         "type": "passive",
         "traits": [],
@@ -33,6 +31,7 @@
           "distance": 0
         },
         "variant": null,
+        "ephemeralVariant": false,
         "hidden": false
       }
     ],
@@ -44,6 +43,10 @@
     },
     "nodes": [
       {
+        "x": 141,
+        "y": 102,
+        "hidden": false,
+        "type": "normal",
         "connected": [
           "type-strategist",
           "type-domain",
@@ -51,35 +54,39 @@
           "improved-overland-1",
           "stat-iv-booster-1-1",
           "improved-overland-3",
-          "type-style"
+          "type-style",
+          "minor-buff-4",
+          "minor-buff-6",
+          "minor-buff-45",
+          "hostile-shadows"
         ],
         "config": {
-          "alpha": null,
+          "texture": "systems/ptr2e/img/perk-icons/Trainer.svg",
           "backgroundColor": null,
           "borderColor": null,
-          "borderWidth": null,
-          "texture": "systems/ptr2e/img/perk-icons/Trainer.svg",
-          "tint": null,
-          "scale": null
+          "tint": null
         },
-        "hidden": false,
-        "type": "normal",
-        "x": 141,
-        "y": 102,
         "tier": null
       }
     ],
     "autoUnlock": [],
-    "originSlug": null,
-    "variant": null,
-    "mode": null,
     "global": true,
     "webs": [],
     "design": {
       "arena": "mental",
       "approach": "finesse",
-      "archetype": "Type Ace"
-    }
+      "archetype": "type-ace"
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "originSlug": null,
+    "variant": null,
+    "mode": null
   },
   "_id": "w40qBGGPJR3HimcE",
   "img": "systems/ptr2e/img/perk-icons/Trainer.svg",

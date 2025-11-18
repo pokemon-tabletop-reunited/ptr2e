@@ -1,0 +1,140 @@
+{
+  "folder": "V4skAU6G3OH5fXae",
+  "name": "King's Rock",
+  "type": "equipment",
+  "system": {
+    "_migration": {
+      "version": 0.11,
+      "previous": null
+    },
+    "slug": "kings-rock",
+    "traits": [
+      "combat",
+      "evolution",
+      "slowpoke",
+      "slowking",
+      "accessory",
+      "consumable"
+    ],
+    "actions": [],
+    "description": "<p>An item to be held by a Pokémon. It may cause the target to flinch whenever the holder successfully inflicts damage on them with an attack.<br><br>Effect: The user’s Physical- and Special-Category Attacks have a 10% chance to inflict @Affliction[delay 30] on hit.<br><br>May be consumed by certain species to trigger Evolution.<br></p>",
+    "crafting": {
+      "skill": "",
+      "spans": null,
+      "materials": []
+    },
+    "equipped": {
+      "carryType": "stowed",
+      "handsHeld": null,
+      "slot": "accessory"
+    },
+    "grade": "B",
+    "fling": {
+      "type": "rock",
+      "power": 70,
+      "accuracy": 90,
+      "hide": false,
+      "range": {
+        "target": "creature",
+        "distance": 8,
+        "unit": "m"
+      }
+    },
+    "quantity": 1,
+    "rarity": "uncommon",
+    "identification": {
+      "misidentified": null,
+      "status": "identified",
+      "unidentified": {
+        "name": "Unidentified Item",
+        "img": "systems/ptu/css/images/icons/gear_icon.png",
+        "description": "<p>Unidentified Item</p>"
+      }
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    }
+  },
+  "img": "systems/ptr2e/img/item-icons/king%27s%20rock.webp",
+  "effects": [
+    {
+      "name": "King's Rock",
+      "type": "passive",
+      "_id": "BJ3qkYo6TQo4dnDw",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "damaging-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.advanceffectitem",
+            "predicate": [],
+            "chance": 10,
+            "affects": "target",
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "system.amount",
+                "value": -30
+              },
+              {
+                "mode": 5,
+                "property": "name",
+                "value": "Delay 30%"
+              }
+            ],
+            "priority": null,
+            "isFixedChance": false,
+            "dontMerge": false,
+            "mode": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
+      "_stats": {
+        "compendiumSource": "Compendium.ptr2e.core-moves.Item.3KCZGRV9lMmb44FC.ActiveEffect.uM9lEbJS6Ee0AHd9",
+        "duplicateSource": null,
+        "coreVersion": "13.348",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.4.beta",
+        "createdTime": null,
+        "modifiedTime": 1758626983368,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf",
+        "exportSource": null
+      }
+    }
+  ],
+  "_id": "gczzcqNALLAAN5wi"
+}

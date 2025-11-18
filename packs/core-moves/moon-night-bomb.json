@@ -1,0 +1,57 @@
+{
+  "name": "Moon Night Bomb",
+  "type": "move",
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": {
+        "schema": null,
+        "foundry": "12.331",
+        "system": "1.1.0.beta"
+      }
+    },
+    "slug": "moon-night-bomb",
+    "publication": {
+      "source": "Digidex",
+      "authors": [
+        "PTR 2e Team",
+        "Gwen"
+      ],
+      "notes": ""
+    },
+    "traits": [],
+    "actions": [
+      {
+        "slug": "moon-night-bomb",
+        "name": "Moon Night Bomb",
+        "type": "attack",
+        "traits": [
+          "digimon"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 10,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 4
+        },
+        "category": "special",
+        "power": 60,
+        "accuracy": 100,
+        "types": [
+          "water"
+        ],
+        "description": "<p>Effect: On hit, the target and all adjacent creatures take a Tick of HP damage and has a 20% chance of gaining @Affliction[confused] 5. This effect is considered be an [Explode] effect.</p>",
+        "img": "https://assets.forge-vtt.com/6132db9efd99d052c06b70e3/systems/ptr2e/img/svg/water_icon.svg",
+        "predicate": []
+      }
+    ],
+    "grade": "C"
+  },
+  "img": "systems/ptr2e/img/svg/water_icon.svg",
+  "effects": [],
+  "folder": "BImk1fcMbR5akA4z",
+  "_id": "S9zpXGy1Y0n6IETl"
+}

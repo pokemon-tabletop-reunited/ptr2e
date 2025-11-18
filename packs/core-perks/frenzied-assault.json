@@ -4,50 +4,58 @@
   "system": {
     "prerequisites": [],
     "cost": 2,
-    "description": "<p>While @Affliction[enraged], the user's Attacks have a 30% chance on resolution to grant the user +1 SPD Stage for 5 Activations for 5 Activations.</p>",
+    "description": "<p>While @Affliction[enraged], the user's Damaging Attacks have a 30% chance on resolution to grant the user +1 SPD Stage for 5 Activations.</p>",
     "actions": [
       {
         "name": "Frenzied Assault",
         "slug": "frenzied-assault",
-        "description": "<p>While @Affliction[enraged], the user's Attacks have a 30% chance on resolution to grant the user +1 SPD Stage for 5 Activations for 5 Activations.</p>",
+        "description": "<p>While @Affliction[enraged], the user's Damaging Attacks have a 30% chance on resolution to grant the user +1 SPD Stage for 5 Activations for 5 Activations.</p>",
         "cost": {
-          "activation": "free"
+          "activation": "free",
+          "powerPoints": 0
         },
         "type": "generic",
         "traits": [],
-        "img": "icons/svg/explosion.svg",
+        "img": "systems/ptr2e/img/perk-icons/Combat.svg",
         "range": {
           "target": "enemy",
-          "unit": "m"
-        }
+          "unit": "m",
+          "distance": 0
+        },
+        "variant": null,
+        "ephemeralVariant": false
       }
     ],
     "slug": "frenzied-assault",
     "traits": [],
     "_migration": {
-      "version": null,
-      "previous": null
+      "version": 0.11,
+      "previous": {
+        "schema": null,
+        "foundry": "12.331",
+        "system": "1.0.6.beta"
+      }
     },
     "nodes": [
       {
+        "x": 57,
+        "y": 41,
+        "hidden": false,
+        "type": "normal",
         "connected": [
           "berserker",
           "elemental-rage",
           "seeing-red"
         ],
         "config": {
+          "texture": "systems/ptr2e/img/perk-icons/Combat.svg",
           "alpha": null,
-          "backgroundColor": "#ff0000",
+          "backgroundColor": null,
           "borderColor": null,
           "borderWidth": null,
-          "texture": "systems/ptr2e/img/perk-icons/Combat.svg",
           "tint": null,
           "scale": null
         },
-        "hidden": false,
-        "type": "normal",
-        "x": 57,
-        "y": 41,
         "tier": null
       }
     ],
@@ -57,8 +65,18 @@
     "design": {
       "arena": "physical",
       "approach": "power",
-      "archetype": "Berserker"
-    }
+      "archetype": "berserker"
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "originSlug": null,
+    "variant": null,
+    "mode": null
   },
   "_id": "IMn0UktiyUWZXQty",
   "img": "systems/ptr2e/img/perk-icons/Combat.svg",
@@ -72,7 +90,7 @@
         "changes": [
           {
             "type": "roll-effect",
-            "key": "attack",
+            "key": "damaging-attack",
             "value": "Compendium.ptr2e.core-effects.Item.XeiSuS3APUcN0MLM",
             "predicate": [
               "effect:affliction:enraged"
@@ -81,7 +99,9 @@
             "affects": "self",
             "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "alterations": [],
+            "dontMerge": false
           }
         ],
         "slug": null,
@@ -92,7 +112,7 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
+        "startTime": 0,
         "seconds": null,
         "combat": null,
         "rounds": null,
@@ -110,12 +130,13 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.342",
         "systemId": "ptr2e",
-        "systemVersion": "0.10.0-alpha.4.1.0",
-        "createdTime": 1734211188522,
-        "modifiedTime": 1734212542084,
-        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
+        "systemVersion": "1.1.1.beta",
+        "createdTime": null,
+        "modifiedTime": 1742140638683,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf",
+        "exportSource": null
       }
     }
   ],

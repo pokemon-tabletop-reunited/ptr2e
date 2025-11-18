@@ -1,0 +1,78 @@
+{
+  "name": "Fixing Good",
+  "_id": "UwZBjymeBa703IIS",
+  "type": "perk",
+  "img": "systems/ptr2e/img/icons/container_icon.webp",
+  "effects": [],
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "publication": {
+      "source": "PTR2e Core",
+      "authors": [
+        "Dragoon"
+      ],
+      "notes": ""
+    },
+    "actions": [],
+    "slug": "fixing-good",
+    "description": "<p><span style=\"font-family: -apple-system, BlinkMacSystemFont, &#x27;Segoe UI&#x27;, &#x27;Noto Sans&#x27;, Helvetica, Arial, sans-serif, &#x27;Apple Color Emoji&#x27;, &#x27;Segoe UI Emoji&#x27;\">The user spends 1 less IP (minimum cost of 1) on @Trait[healing] [Consumable] items.</span></p>",
+    "traits": [
+      "healer"
+    ],
+    "prerequisites": [
+      {
+        "gte": [
+          "{actor|skills.appraise.mod}",
+          30
+        ]
+      },
+      {
+        "gte": [
+          "{actor|skills.pharmacy.mod}",
+          30
+        ]
+      },
+      {
+        "gte": [
+          "{actor|skills.medicine.mod}",
+          30
+        ]
+      }
+    ],
+    "autoUnlock": [],
+    "cost": 3,
+    "design": {
+      "arena": "mental",
+      "approach": "resilience",
+      "archetype": "healer"
+    },
+    "global": true,
+    "webs": [],
+    "nodes": [
+      {
+        "x": 37,
+        "y": 81,
+        "hidden": false,
+        "type": "normal",
+        "connected": [
+          "invigorate",
+          "chansey-medicine",
+          "healing-hands",
+          "tourniquetting",
+          "homeostatic-treatments"
+        ],
+        "config": {
+          "texture": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "tint": null
+        },
+        "tier": null
+      }
+    ]
+  },
+  "folder": "4UhJK1LInml07WJf"
+}

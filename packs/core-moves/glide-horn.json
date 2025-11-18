@@ -1,0 +1,129 @@
+{
+  "folder": "BImk1fcMbR5akA4z",
+  "name": "Glide Horn",
+  "type": "move",
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "publication": {
+      "source": "Digidex",
+      "authors": [
+        "Fox"
+      ],
+      "notes": ""
+    },
+    "traits": [],
+    "actions": [
+      {
+        "name": "Glide Horn",
+        "slug": "glide-horn",
+        "type": "attack",
+        "img": "systems/ptr2e/img/svg/flying_icon.svg",
+        "traits": [
+          "contact",
+          "horn",
+          "dash",
+          "push-3",
+          "pierce",
+          "digimon"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 5
+        },
+        "types": [
+          "flying"
+        ],
+        "category": "physical",
+        "power": 85,
+        "accuracy": 100,
+        "offensiveStat": "spe",
+        "predicate": [],
+        "description": "<p>This attack uses your Speed as it's Offensive Stat, and your opponent's Speed as their defensive stat. This attack has a 15% chance to inflict a 50% Flinch to the target.</p>"
+      }
+    ],
+    "grade": "C",
+    "slug": "glide-horn"
+  },
+  "img": "systems/ptr2e/img/svg/flying_icon.svg",
+  "effects": [
+    {
+      "name": "Glide Horn",
+      "type": "passive",
+      "_id": "eg9dIeR4zy8IXX2U",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "glide-horn-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.advanceffectitem",
+            "predicate": [],
+            "chance": 15,
+            "affects": "target",
+            "dontMerge": false,
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "system.amount",
+                "value": -50
+              },
+              {
+                "mode": 5,
+                "property": "name",
+                "value": "Flinch 50%"
+              }
+            ],
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "isFixedChance": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "13.346",
+        "systemId": "ptr2e",
+        "systemVersion": "1.2.1.beta",
+        "createdTime": 1746200306727,
+        "modifiedTime": 1746200350628,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf",
+        "exportSource": null
+      }
+    }
+  ],
+  "_id": "Lg1HOEBQlC9sN2Sh"
+}

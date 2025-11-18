@@ -1,0 +1,126 @@
+{
+  "folder": "BImk1fcMbR5akA4z",
+  "name": "Iceball Bomb",
+  "type": "move",
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "publication": {
+      "source": "Digidex",
+      "authors": [
+        "Fox"
+      ],
+      "notes": ""
+    },
+    "traits": [],
+    "actions": [
+      {
+        "name": "Iceball Bomb",
+        "slug": "iceball-bomb",
+        "type": "attack",
+        "img": "systems/ptr2e/img/svg/ice_icon.svg",
+        "traits": [
+          "explode",
+          "blast-2",
+          "crit-2",
+          "digimon"
+        ],
+        "range": {
+          "target": "blast",
+          "distance": 8,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 5
+        },
+        "types": [
+          "ice"
+        ],
+        "category": "physical",
+        "power": 80,
+        "accuracy": 100,
+        "predicate": [],
+        "description": "<p>This attack has a 20% chance to inflict 20% Flinch.</p>"
+      }
+    ],
+    "grade": "C",
+    "slug": "iceball-bomb"
+  },
+  "img": "systems/ptr2e/img/svg/ice_icon.svg",
+  "effects": [
+    {
+      "name": "Iceball Bomb",
+      "type": "passive",
+      "_id": "GtyZ5PSQOPOQPRq4",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "iceball-bomb-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.advanceffectitem",
+            "predicate": [],
+            "chance": 20,
+            "affects": "target",
+            "dontMerge": false,
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "system.amount",
+                "value": -20
+              },
+              {
+                "mode": 5,
+                "property": "name",
+                "value": "Flinch 20%"
+              }
+            ],
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "isFixedChance": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "13.346",
+        "systemId": "ptr2e",
+        "systemVersion": "1.2.1.beta",
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null,
+        "exportSource": null
+      }
+    }
+  ],
+  "_id": "m2xPfCIW7xJCb0nz"
+}

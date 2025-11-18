@@ -11,13 +11,19 @@
     "equipped": {
       "slot": "held",
       "carryType": "stowed",
-      "handsHeld": null
+      "handsHeld": 1
     },
-    "grade": "D",
+    "grade": "E",
     "fling": {
       "type": "steel",
-      "power": 60,
-      "accuracy": 100
+      "power": 65,
+      "accuracy": 90,
+      "hide": false,
+      "range": {
+        "target": "creature",
+        "distance": 4,
+        "unit": "m"
+      }
     },
     "rarity": "common",
     "traits": [
@@ -25,50 +31,44 @@
       "fling",
       "blunt",
       "switch-grip",
-      "steel"
+      "steel",
+      "conventional",
+      "modern",
+      "1-handed"
     ],
     "actions": [
       {
-        "name": "Bat (Aluminium)",
-        "slug": "bat-aluminium",
-        "type": "attack",
-        "description": "Effect: The user may use the Attack Bat (Aluminium), drawing upon this item's PP Pool or the user's PP to use the Attack.",
-        "traits": [
-          "Weapon",
-          "Fling",
-          "Blunt",
-          "Switch-Grip",
-          "Steel"
-        ],
-        "range": {
-          "target": "creature",
-          "distance": 0,
-          "unit": "m"
-        },
-        "cost": {
-          "activation": "complex",
-          "powerPoints": 0,
-          "delay": null,
-          "priority": null
-        },
-        "variant": null,
         "types": [
           "untyped"
         ],
         "category": "physical",
-        "power": null,
-        "accuracy": null,
-        "contestType": "",
-        "contestEffect": "",
-        "free": false,
-        "slot": null
+        "power": 40,
+        "accuracy": 90,
+        "free": true,
+        "traits": [
+          "adaptable",
+          "priority-15",
+          "contact"
+        ],
+        "name": "Bat (Aluminium)",
+        "slug": "bat-aluminium",
+        "img": "systems/ptr2e/img/svg/untyped_icon.svg",
+        "type": "attack",
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex"
+        },
+        "predicate": []
       }
     ],
-    "description": "Effect: The user may use the Attack Bat (Aluminium), drawing upon this item's PP Pool or the user's PP to use the Attack.",
+    "description": "<p>A baseball bat is a smooth wooden or metal club used in the sport of baseball to hit the ball after it is thrown by the pitcher. Bats are effective weapons because they are inexpensive compared to other weapons, and, unlike many other weapons, they can be carried without raising suspicion or violating laws, due to their primarily purpose as sports equipment.</p>",
     "weaponType": "untyped",
     "weaponRange": "Creature",
-    "slug": null,
-    "container": null,
+    "slug": "bat-aluminium",
     "quantity": 1,
     "identification": {
       "misidentified": null,
@@ -79,26 +79,74 @@
         "description": "<p>Unidentified Item</p>"
       }
     },
-    "weaponPp": 0
+    "_migration": {
+      "version": null,
+      "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    }
   },
   "_id": "poulKoHX1ZWb4pVr",
-  "effects": [],
-  "folder": "V4skAU6G3OH5fXaf",
-  "sort": 0,
-  "ownership": {
-    "default": 0,
-    "tXAZ3QUgjuwX4gdV": 3
-  },
-  "flags": {},
-  "_stats": {
-    "compendiumSource": null,
-    "duplicateSource": null,
-    "coreVersion": "12.327",
-    "systemId": "ptr2e",
-    "systemVersion": "0.0.0-alpha.1.0",
-    "createdTime": 1717878484297,
-    "modifiedTime": 1717878484297,
-    "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
-  },
-  "_key": "!items!poulKoHX1ZWb4pVr"
+  "effects": [
+    {
+      "name": "Bat (Aluminium)",
+      "type": "passive",
+      "_id": "XLB7w16W2S1RjHeY",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "flat-modifier",
+            "key": "{item|id}-attack-damage-flat",
+            "value": 4,
+            "predicate": [],
+            "label": "Bat (Aluminium)",
+            "mode": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": false,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
+      "_stats": {
+        "compendiumSource": "Compendium.ptr2e.core-gear.Item.ZewWbLPYdCt2qPzv.ActiveEffect.hKiDWsZdq14T4lXi",
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.347",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.3.beta",
+        "createdTime": 1757542093820,
+        "modifiedTime": 1757553419362,
+        "lastModifiedBy": "UTlFSVhgfIUeTsoW"
+      }
+    }
+  ],
+  "folder": "PhrQtZzEwKPjfmK2"
 }

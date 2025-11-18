@@ -7,7 +7,7 @@
   "system": {
     "actions": [],
     "slug": "cryogenics",
-    "description": "<p>Double the Effect chance of @Affliction[frostbite] effects, and the user's chance to inflict @Affliction[frozen] increases by 10%.</p>",
+    "description": "<p>Your @Trait[ice] moves gain +30% EHR.</p>",
     "traits": [],
     "prerequisites": [
       "trait:ice"
@@ -19,26 +19,25 @@
     },
     "nodes": [
       {
+        "x": 86,
+        "y": 115,
+        "hidden": false,
+        "type": "normal",
         "connected": [
           "brittle-ice",
           "chill-out",
           "improved-overland-5",
           "biting-cold",
-          "thermal-dynamics"
+          "thermal-dynamics",
+          "minor-buff-8",
+          "freezer"
         ],
         "config": {
-          "alpha": null,
+          "texture": "systems/ptr2e/img/svg/ice_icon.svg",
           "backgroundColor": null,
           "borderColor": null,
-          "borderWidth": null,
-          "texture": "systems/ptr2e/img/svg/ice_icon.svg",
-          "tint": null,
-          "scale": null
+          "tint": null
         },
-        "hidden": false,
-        "type": "normal",
-        "x": 86,
-        "y": 115,
         "tier": null
       }
     ],
@@ -51,7 +50,14 @@
     "design": {
       "arena": "mental",
       "approach": "power",
-      "archetype": "[Ice]"
+      "archetype": "ice"
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
     }
   },
   "effects": []

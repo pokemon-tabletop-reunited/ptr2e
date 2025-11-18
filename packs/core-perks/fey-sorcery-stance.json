@@ -1,0 +1,139 @@
+{
+  "name": "Fey Sorcery Stance",
+  "_id": "0kFSioQYYEal0Pcp",
+  "type": "perk",
+  "img": "icons/magic/symbols/runes-star-pentagon-magenta.webp",
+  "effects": [
+    {
+      "name": "Fey Sorcery Stance",
+      "type": "passive",
+      "_id": "okrouwJtBmdqnMBD",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "fey-sorcery-stance-generic",
+            "value": "Compendium.ptr2e.core-effects.Item.lVtK5JwbDBIAq5yV",
+            "predicate": [],
+            "chance": 100,
+            "isFixedChance": true,
+            "affects": "target",
+            "alterations": [],
+            "dontMerge": false,
+            "mode": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.347",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.3.beta",
+        "createdTime": 1756042899495,
+        "modifiedTime": 1756042930588,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+      }
+    }
+  ],
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "publication": {
+      "source": "PTR2e Core",
+      "authors": [
+        "Fox"
+      ],
+      "notes": ""
+    },
+    "actions": [
+      {
+        "name": "Fey Sorcery Stance",
+        "slug": "fey-sorcery-stance",
+        "description": "<p>Target: A Commanded @Trait[fairy] Creature<br><br>Effect: Grants the target @Trait[fairy] the [Drain 1/4] trait on it's @Trait[fairy] attacks, but reduces it's RES by 35%. The stance may be ended as a Free Action by the Initiator or the Target.</p>",
+        "traits": [
+          "command",
+          "fairy",
+          "stance"
+        ],
+        "type": "generic",
+        "img": "icons/magic/symbols/runes-star-pentagon-magenta.webp",
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 3
+        },
+        "range": {
+          "target": "creature",
+          "distance": 20,
+          "unit": "m"
+        }
+      }
+    ],
+    "slug": "fey-sorcery-stance",
+    "description": "<p>Target: A Commanded @Trait[fairy] Creature<br><br>Effect: Grants the target @Trait[fairy] the [Drain 1/4] trait on it's @Trait[fairy] attacks, but reduces it's RES by 35%. The stance may be ended as a Free Action by the Initiator or the Target.</p>",
+    "traits": [
+      "command",
+      "fairy",
+      "stance"
+    ],
+    "prerequisites": [
+      "item:perk:type-specialist"
+    ],
+    "autoUnlock": [],
+    "cost": 2,
+    "design": {
+      "arena": "social",
+      "approach": "resilience",
+      "archetype": "fairy"
+    },
+    "global": true,
+    "webs": [],
+    "nodes": [
+      {
+        "x": 193,
+        "y": 102,
+        "hidden": false,
+        "type": "normal",
+        "connected": [
+          "type-specialist"
+        ],
+        "config": {
+          "texture": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "tint": null
+        },
+        "tier": null
+      }
+    ]
+  },
+  "folder": "JVlvijPZ5VhpbHkZ"
+}

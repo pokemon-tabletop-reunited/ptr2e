@@ -3,9 +3,9 @@
   "img": "systems/ptr2e/img/item-icons/kee berry.webp",
   "type": "consumable",
   "system": {
-    "cost": 6,
+    "cost": 4,
     "crafting": {
-      "skill": null,
+      "skill": "",
       "spans": null,
       "materials": []
     },
@@ -14,54 +14,125 @@
       "carryType": "stowed",
       "handsHeld": null
     },
-    "grade": "A",
+    "grade": "B",
     "fling": {
       "type": "untyped",
       "power": 10,
-      "accuracy": 95
+      "accuracy": 95,
+      "hide": false,
+      "range": {
+        "target": "creature",
+        "distance": 10,
+        "unit": "m"
+      }
     },
     "rarity": "uncommon",
     "consumableType": "food",
     "traits": [
-      "restorative",
       "consumable",
       "natural",
-      "healing",
       "berry",
       "fling",
-      "held",
-      "stash",
-      "spicy-5",
-      "dry-5",
-      "sweet-1",
-      "bitter-1",
-      "sour-1"
+      "combat"
     ],
-    "description": "The user gains +2 DEF Stages for 5 activations, consuming the item as a Free Action.",
+    "description": "Effect: When the user is damaged by a Physical-Category attack, this item can be retrieved from the Belt and consumed as a Free Action at @Trait[interrupt-2], giving the user +2 DEF Stages for 5 Activations.",
     "quantity": 1,
-    "container": null,
-    "slug": null,
-    "modifier": null,
-    "stack": 1
+    "slug": "kee-berry",
+    "stack": 1,
+    "_migration": {
+      "version": null,
+      "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "actions": [
+      {
+        "name": "Kee Berry",
+        "slug": "kee-berry",
+        "description": "<p>Effect: When the user is damaged by a Physical-Category attack, this item can be retrieved from the Belt and consumed as a Free Action at @Trait[interrupt-2], giving the user +2 DEF Stages for 5 Activations.</p>",
+        "traits": [
+          "consumable",
+          "natural",
+          "berry",
+          "fling",
+          "combat"
+        ],
+        "type": "generic",
+        "img": "systems/ptr2e/img/item-icons/kee berry.webp",
+        "cost": {
+          "activation": "simple"
+        },
+        "range": {
+          "target": "self",
+          "unit": "m"
+        }
+      }
+    ]
   },
   "_id": "LYDa6xK9rhu0MNdT",
-  "effects": [],
-  "folder": "V4skAU6G3OH5fXab",
-  "sort": 0,
-  "ownership": {
-    "default": 0,
-    "tXAZ3QUgjuwX4gdV": 3
-  },
-  "flags": {},
-  "_stats": {
-    "compendiumSource": null,
-    "duplicateSource": null,
-    "coreVersion": "12.327",
-    "systemId": "ptr2e",
-    "systemVersion": "0.0.0-alpha.1.0",
-    "createdTime": 1717878484297,
-    "modifiedTime": 1717878484297,
-    "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
-  },
-  "_key": "!items!LYDa6xK9rhu0MNdT"
+  "effects": [
+    {
+      "name": "Kee Berry",
+      "type": "passive",
+      "_id": "8L5kXU3lnd61lfw9",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "kee-berry-generic",
+            "value": "Compendium.ptr2e.core-effects.Item.DYJyYbH3EVwM4P90",
+            "predicate": [],
+            "chance": 100,
+            "isFixedChance": false,
+            "affects": "target",
+            "alterations": [],
+            "dontMerge": false,
+            "mode": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.348",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.4.beta",
+        "createdTime": 1758642175116,
+        "modifiedTime": 1758642198708,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+      }
+    }
+  ],
+  "folder": "yR1GFstYOCdI2jOz"
 }

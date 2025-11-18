@@ -46,7 +46,14 @@
     "design": {
       "arena": "physical",
       "approach": "power",
-      "archetype": ""
+      "archetype": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
     }
   },
   "img": "systems/ptr2e/img/svg/ice_icon.svg",
@@ -62,11 +69,16 @@
             "type": "roll-effect",
             "key": "ice-attack",
             "value": "Compendium.ptr2e.core-effects.Item.frostbiteconitem",
-            "predicate": [],
+            "predicate": [
+              "origin:enemy"
+            ],
             "chance": 20,
             "affects": "target",
-            "mode": 2,
             "priority": null,
+            "alterations": [],
+            "dontMerge": false,
+            "isFixedChance": false,
+            "mode": 2,
             "ignored": false
           }
         ],
@@ -74,7 +86,9 @@
         "traits": [],
         "removeAfterCombat": true,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
@@ -92,16 +106,21 @@
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "flags": {},
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.348",
         "systemId": "ptr2e",
-        "systemVersion": "0.10.0-alpha.5.0",
+        "systemVersion": "1.4.3.beta",
         "createdTime": null,
-        "modifiedTime": 1736711266722,
-        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+        "modifiedTime": 1757798501233,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf",
+        "exportSource": null
       }
     }
   ],

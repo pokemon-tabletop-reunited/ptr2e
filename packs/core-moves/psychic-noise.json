@@ -10,8 +10,7 @@
         "name": "Psychic Noise",
         "type": "attack",
         "traits": [
-          "sonic",
-          "pp-updated"
+          "sonic"
         ],
         "range": {
           "target": "cone",
@@ -28,8 +27,8 @@
         "types": [
           "psychic"
         ],
-        "description": "<p>Effect: On hit, all valid targets have a 40% chance of gaining @Affliction[stunted] 5.</p>",
-        "img": "icons/svg/explosion.svg",
+        "description": "<p>Effect: On hit, all valid targets are inflicted with @Affliction[stunted 5].</p>",
+        "img": "systems/ptr2e/img/svg/psychic_icon.svg",
         "predicate": []
       }
     ],
@@ -38,6 +37,13 @@
     "_migration": {
       "version": null,
       "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
     }
   },
   "_id": "uFDEwGGaBvMpq7VY",
@@ -54,10 +60,13 @@
             "key": "psychic-noise-attack",
             "value": "Compendium.ptr2e.core-effects.Item.stuntedcondiitem",
             "predicate": [],
-            "chance": 40,
+            "chance": 100,
             "affects": "target",
-            "mode": 2,
             "priority": null,
+            "isFixedChance": false,
+            "alterations": [],
+            "dontMerge": false,
+            "mode": 2,
             "ignored": false
           }
         ],
@@ -65,7 +74,9 @@
         "traits": [],
         "removeAfterCombat": true,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
@@ -87,12 +98,13 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.347",
         "systemId": "ptr2e",
-        "systemVersion": "0.10.0-alpha.5.1.5",
+        "systemVersion": "1.4.2.beta",
         "createdTime": 1737315609249,
-        "modifiedTime": 1737315636088,
-        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+        "modifiedTime": 1755373207607,
+        "lastModifiedBy": "Kc3DOunCh3ClAeHS",
+        "exportSource": null
       }
     }
   ]

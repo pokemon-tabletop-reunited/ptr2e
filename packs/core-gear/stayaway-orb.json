@@ -18,7 +18,13 @@
     "fling": {
       "type": "untyped",
       "power": 40,
-      "accuracy": 100
+      "accuracy": 100,
+      "hide": false,
+      "range": {
+        "target": "creature",
+        "distance": 10,
+        "unit": "m"
+      }
     },
     "rarity": "common",
     "consumableType": "other",
@@ -26,34 +32,54 @@
       "combat",
       "consumable",
       "wonder-orb",
-      "held",
       "fling"
     ],
-    "description": "A target in the Room gains @Affliction[fear] 5, and is freely Teleported to the Stairs on the Floor.",
+    "description": "<p>The target is teleported to the nearest Stairs (unless the nearest Stairs would be in the same room) and is removed from the combat encounter.</p>",
     "quantity": 1,
-    "container": null,
-    "slug": null,
-    "modifier": null,
-    "stack": 1
+    "slug": "stayaway-orb",
+    "stack": 1,
+    "_migration": {
+      "version": null,
+      "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "actions": [
+      {
+        "name": "Stayaway Orb",
+        "slug": "stayaway-orb",
+        "description": "<p>The target is teleported to the nearest Stairs (unless the nearest Stairs would be in the same room) and is removed from the combat encounter.</p>",
+        "traits": [
+          "combat",
+          "consumable",
+          "wonder-orb",
+          "fling"
+        ],
+        "type": "attack",
+        "img": "systems/ptr2e/img/icons/consumable_icon.webp",
+        "cost": {
+          "activation": "complex"
+        },
+        "range": {
+          "target": "creature",
+          "distance": 10,
+          "unit": "m"
+        },
+        "types": [
+          "untyped"
+        ],
+        "category": "status",
+        "free": true,
+        "predicate": []
+      }
+    ]
   },
   "_id": "zgtncClL81ICmusK",
   "effects": [],
-  "folder": "V4skAU6G3OH5fXab",
-  "sort": 0,
-  "ownership": {
-    "default": 0,
-    "tXAZ3QUgjuwX4gdV": 3
-  },
-  "flags": {},
-  "_stats": {
-    "compendiumSource": null,
-    "duplicateSource": null,
-    "coreVersion": "12.327",
-    "systemId": "ptr2e",
-    "systemVersion": "0.0.0-alpha.1.0",
-    "createdTime": 1717878484297,
-    "modifiedTime": 1717878484297,
-    "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
-  },
-  "_key": "!items!zgtncClL81ICmusK"
+  "folder": "4MbEHvhwmG5DYTkB"
 }

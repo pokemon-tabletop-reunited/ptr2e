@@ -4,7 +4,7 @@
   "type": "weapon",
   "system": {
     "crafting": {
-      "skill": null,
+      "skill": "",
       "spans": null,
       "materials": []
     },
@@ -16,17 +16,27 @@
     "grade": "C",
     "fling": {
       "type": "steel",
-      "power": 60,
-      "accuracy": 95
+      "power": 75,
+      "accuracy": 80,
+      "hide": false,
+      "range": {
+        "target": "creature",
+        "distance": 10,
+        "unit": "m"
+      }
     },
     "rarity": "rare",
     "traits": [
       "weapon",
       "fling",
       "firearm",
-      "reload",
+      "autoload",
       "steel",
-      "charge-pool-10"
+      "charge-pool-10",
+      "reload-1",
+      "conventional",
+      "modern",
+      "sci-fi"
     ],
     "actions": [
       {
@@ -34,14 +44,12 @@
           "untyped"
         ],
         "category": "special",
-        "power": 60,
+        "power": 55,
         "accuracy": 95,
         "free": true,
         "traits": [
-          "load-adaptive",
-          "two-handed",
-          "readied",
-          "missile"
+          "missile",
+          "firearm"
         ],
         "name": "Battle Rifle",
         "slug": "battle-rifle",
@@ -55,28 +63,21 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 1,
-          "delay": null,
-          "priority": null
+          "powerPoints": 1
         },
-        "variant": null,
-        "contestType": "",
-        "contestEffect": "",
-        "slot": null
+        "predicate": []
       },
       {
         "types": [
           "untyped"
         ],
         "category": "special",
-        "power": 115,
-        "accuracy": 85,
+        "power": 125,
+        "accuracy": 80,
         "free": true,
         "traits": [
-          "load-adaptive",
-          "two-handed",
-          "readied",
-          "missile"
+          "missile",
+          "firearm"
         ],
         "name": "Battle Rifle (Auto)",
         "slug": "battle-rifle-auto",
@@ -90,14 +91,10 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 5,
-          "delay": null,
-          "priority": null
+          "powerPoints": 4
         },
         "variant": "battle-rifle",
-        "contestType": "",
-        "contestEffect": "",
-        "slot": null
+        "predicate": []
       },
       {
         "types": [
@@ -108,10 +105,9 @@
         "accuracy": 75,
         "free": true,
         "traits": [
-          "load-adaptive",
-          "two-handed",
           "dash",
-          "missile"
+          "missile",
+          "firearm"
         ],
         "name": "Battle Rifle (Hip Fire)",
         "slug": "battle-rifle-hip-fire",
@@ -125,22 +121,15 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 1,
-          "delay": null,
-          "priority": null
+          "powerPoints": 1
         },
         "variant": "battle-rifle",
-        "contestType": "",
-        "contestEffect": "",
-        "slot": null
+        "predicate": []
       }
     ],
-    "description": "",
     "weaponType": "untyped",
     "weaponPp": 10,
-    "weaponRange": "",
-    "slug": null,
-    "container": null,
+    "slug": "battle-rifle",
     "quantity": 1,
     "identification": {
       "misidentified": null,
@@ -150,26 +139,91 @@
         "img": "systems/ptu/css/images/icons/item_icon.png",
         "description": "<p>Unidentified Item</p>"
       }
-    }
+    },
+    "_migration": {
+      "version": null,
+      "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "description": "<p>A battle rifle is a service rifle chambered to fire a fully powered cartridge. The terms was created largely out of a need to differentiate automatic rifles chambered for fully powered cartridges from automatic rifles chambered for intermediate cartridges, which were later categorized as assault rifles.</p>"
   },
   "_id": "xPbMEBEaTsw02Ouy",
-  "effects": [],
-  "folder": "V4skAU6G3OH5fXaf",
-  "sort": 0,
-  "ownership": {
-    "default": 0,
-    "tXAZ3QUgjuwX4gdV": 3
-  },
-  "flags": {},
-  "_stats": {
-    "compendiumSource": null,
-    "duplicateSource": null,
-    "coreVersion": "12.327",
-    "systemId": "ptr2e",
-    "systemVersion": "0.0.0-alpha.1.0",
-    "createdTime": 1717878484297,
-    "modifiedTime": 1717878484297,
-    "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
-  },
-  "_key": "!items!xPbMEBEaTsw02Ouy"
+  "effects": [
+    {
+      "name": "Battle Rifle",
+      "type": "passive",
+      "_id": "3PMJApkEIhqaZer7",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "flat-modifier",
+            "key": "{item|id}-attack-damage-flat",
+            "value": 33,
+            "predicate": [],
+            "label": "Battle Rifle",
+            "priority": null,
+            "mode": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          },
+          {
+            "type": "flat-modifier",
+            "key": "battle-rifle-auto-attack-damage-flat",
+            "value": 66,
+            "predicate": [],
+            "mode": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": false,
+        "removeOnRecall": false,
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
+      "_stats": {
+        "compendiumSource": "Compendium.ptr2e.core-gear.Item.Ba3EyqpUePgGrfQk.ActiveEffect.uOxpw5kHcRtpv4pa",
+        "duplicateSource": null,
+        "coreVersion": "13.347",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.3.beta",
+        "createdTime": 1743893018184,
+        "modifiedTime": 1757632011406,
+        "lastModifiedBy": "UTlFSVhgfIUeTsoW",
+        "exportSource": null
+      }
+    }
+  ],
+  "folder": "fwBg1GB1fMcgPklo"
 }

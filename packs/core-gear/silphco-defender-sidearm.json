@@ -10,17 +10,21 @@
       "laser",
       "adaptable-ammunition",
       "firearm",
+      "autoload",
       "weapon",
       "energy-weapon",
-      "sci-fi"
+      "sci-fi",
+      "reload-2",
+      "charge-pool-12"
     ],
     "actions": [
       {
-        "name": "SilphCo Defender",
-        "slug": "silphco-defender-sidearm-action-1",
+        "name": "Defender Shot",
+        "slug": "defender-shot",
         "description": "<p>The SilphCo Defender is a mass-produced sidearm, not known for it's power but certainly for it's reliability.</p>",
         "traits": [
-          "weapon"
+          "weapon",
+          "ray"
         ],
         "type": "attack",
         "img": "systems/ptr2e/img/icons/weapon_icon.webp",
@@ -37,9 +41,10 @@
           "untyped"
         ],
         "category": "special",
-        "power": 50,
+        "power": 65,
         "accuracy": 100,
-        "free": true
+        "free": true,
+        "predicate": []
       }
     ],
     "description": "<p>The SilphCo Defender is a mass-produced sidearm, not known for it's power but certainly for it's reliability.</p>",
@@ -58,8 +63,14 @@
     "grade": "E",
     "fling": {
       "type": "untyped",
-      "power": 35,
-      "accuracy": 100
+      "power": 45,
+      "accuracy": 90,
+      "hide": false,
+      "range": {
+        "target": "creature",
+        "distance": 3,
+        "unit": "m"
+      }
     },
     "quantity": 1,
     "rarity": "common",
@@ -74,11 +85,72 @@
     },
     "weaponType": "Handgun (Laser)",
     "weaponPp": 15,
-    "weaponRange": "15"
+    "weaponRange": "15",
+    "slug": "silphco-defender-sidearm",
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    }
   },
   "img": "systems/ptr2e/img/icons/weapon_icon.webp",
-  "effects": [],
-  "folder": "V4skAU6G3OH5fXaf",
-  "flags": {},
+  "effects": [
+    {
+      "name": "SilphCo Defender Sidearm",
+      "type": "passive",
+      "_id": "vRxJemdpdO30GTyW",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "flat-modifier",
+            "key": "{item|id}-attack-damage-flat",
+            "value": 5,
+            "predicate": [],
+            "mode": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": false,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
+      "_stats": {
+        "compendiumSource": "Compendium.ptr2e.core-gear.Item.fhfuptGmpadYy37I.ActiveEffect.QO0MYb3X5EGQF0Iv",
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.347",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.3.beta",
+        "createdTime": 1758158102085,
+        "modifiedTime": 1758158110337,
+        "lastModifiedBy": "UTlFSVhgfIUeTsoW"
+      }
+    }
+  ],
+  "folder": "PhrQtZzEwKPjfmK2",
   "_id": "a1H9kQkRPQNzY4mS"
 }

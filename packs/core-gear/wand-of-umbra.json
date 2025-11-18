@@ -1,5 +1,5 @@
 {
-  "folder": "V4skAU6G3OH5fXaf",
+  "folder": "PhrQtZzEwKPjfmK2",
   "name": "Wand of Umbra",
   "type": "weapon",
   "system": {
@@ -30,7 +30,12 @@
       "type": "untyped",
       "power": null,
       "accuracy": 100,
-      "hide": false
+      "hide": false,
+      "range": {
+        "target": "creature",
+        "distance": 10,
+        "unit": "m"
+      }
     },
     "quantity": 1,
     "rarity": "common",
@@ -42,9 +47,17 @@
         "img": "systems/ptu/css/images/icons/gear_icon.png",
         "description": "<p>Unidentified Item</p>"
       }
+    },
+    "slug": "wand-of-umbra",
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
     }
   },
-  "img": "systems/ptr2e/img/icons/weapon_icon.webp",
+  "img": "icons/weapons/wands/wand-gem-purple.webp",
   "effects": [
     {
       "name": "Wand of Umbra",
@@ -88,7 +101,9 @@
         "traits": [],
         "removeAfterCombat": true,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
@@ -110,15 +125,15 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.348",
         "systemId": "ptr2e",
         "systemVersion": "1.0.0.beta-ready.2",
         "createdTime": null,
         "modifiedTime": null,
-        "lastModifiedBy": null
+        "lastModifiedBy": null,
+        "exportSource": null
       }
     }
   ],
-  "flags": {},
   "_id": "Aylv8pQ7kIoSm43o"
 }

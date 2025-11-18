@@ -1,94 +1,55 @@
 {
+  "folder": "V4skAU6G3OH5fXab",
   "name": "White Herb",
-  "img": "systems/ptr2e/img/icons/equipment_icon.webp",
-  "type": "equipment",
+  "type": "consumable",
   "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "actions": [],
     "crafting": {
-      "skill": null,
+      "skill": "",
       "spans": null,
       "materials": []
     },
     "equipped": {
-      "slot": "belt",
       "carryType": "stowed",
+      "slot": "belt",
       "handsHeld": null
     },
-    "grade": "C",
+    "grade": "B",
     "fling": {
       "type": "untyped",
       "power": null,
-      "accuracy": 100
+      "accuracy": 100,
+      "hide": true,
+      "range": {
+        "target": "creature",
+        "distance": 10,
+        "unit": "m"
+      }
     },
-    "rarity": "uncommon",
-    "traits": [
-      "restorative",
-      "consumable",
-      "natural",
-      "healing",
-      "held",
-      "stash"
-    ],
-    "actions": [
-      {
-        "name": "White Herb",
-        "slug": "white-herb",
-        "type": "generic",
-        "description": "Trigger: The user receives a negative Stage change effect.\nEffect: The user is cured of the triggering effect.",
-        "traits": [
-          "Restorative",
-          "Consumable",
-          "Natural",
-          "Healing",
-          "Held",
-          "Stash"
-        ],
-        "range": {
-          "target": "creature",
-          "distance": 0,
-          "unit": "m"
-        },
-        "cost": {
-          "activation": "complex",
-          "trigger": "The user receives a negative Stage change effect.",
-          "powerPoints": 0,
-          "delay": null,
-          "priority": null
-        },
-        "variant": null
-      }
-    ],
-    "description": "Trigger: The user receives a negative Stage change effect.\nEffect: The user is cured of the triggering effect.",
-    "slug": null,
-    "container": null,
     "quantity": 1,
-    "identification": {
-      "misidentified": null,
-      "status": "identified",
-      "unidentified": {
-        "name": "Unidentified Item",
-        "img": "systems/ptu/css/images/icons/item_icon.png",
-        "description": "<p>Unidentified Item</p>"
-      }
-    }
+    "rarity": "uncommon",
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "description": "<p>Trigger: The user receives a negative @Trait[stage-change] effect.<br><br>Effect: The user is immediately cured of the negative @Trait[stage-change] effect.</p>",
+    "traits": [
+      "combat",
+      "consumable"
+    ],
+    "consumableType": "other",
+    "stack": 1,
+    "cost": 3
   },
-  "_id": "iCF6U0Usn4ASTHgY",
+  "img": "systems/ptr2e/img/item-icons/revival%20herb.webp",
   "effects": [],
-  "folder": "V4skAU6G3OH5fXad",
-  "sort": 0,
-  "ownership": {
-    "default": 0,
-    "tXAZ3QUgjuwX4gdV": 3
-  },
   "flags": {},
-  "_stats": {
-    "compendiumSource": null,
-    "duplicateSource": null,
-    "coreVersion": "12.327",
-    "systemId": "ptr2e",
-    "systemVersion": "0.0.0-alpha.1.0",
-    "createdTime": 1717878484297,
-    "modifiedTime": 1717878484297,
-    "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
-  },
-  "_key": "!items!iCF6U0Usn4ASTHgY"
+  "_id": "zgmbOuKp31sTrtOQ"
 }

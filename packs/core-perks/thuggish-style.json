@@ -1,0 +1,140 @@
+{
+  "name": "Thuggish Style",
+  "_id": "IU8F6sheQNHxeXza",
+  "type": "perk",
+  "img": "systems/ptr2e/img/perk-icons/Taskmaster.svg",
+  "effects": [
+    {
+      "name": "Thuggish Style",
+      "type": "passive",
+      "_id": "FVeDWraJcEBNR9z2",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "thuggish-style-generic",
+            "value": "Compendium.ptr2e.core-effects.Item.DUfWZkASx351nIl1",
+            "predicate": [],
+            "chance": 100,
+            "isFixedChance": true,
+            "affects": "target",
+            "alterations": [],
+            "dontMerge": false,
+            "mode": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.347",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.3.beta",
+        "createdTime": 1756041198680,
+        "modifiedTime": 1756041217001,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+      }
+    }
+  ],
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "publication": {
+      "source": "PTR2e Core",
+      "authors": [
+        "Fox"
+      ],
+      "notes": ""
+    },
+    "actions": [
+      {
+        "name": "Thuggish Style",
+        "slug": "thuggish-style",
+        "description": "<p>Target: A Commanded @Trait[dark] Creature.<br><br>Effect: This allows the Initiator setting the Style to spend PP to activate the Thug perk as part of the target creature's attack.</p>",
+        "traits": [
+          "command",
+          "style",
+          "dark"
+        ],
+        "type": "generic",
+        "img": "systems/ptr2e/img/perk-icons/Taskmaster.svg",
+        "cost": {
+          "activation": "simple",
+          "powerPoints": 2
+        },
+        "range": {
+          "target": "creature",
+          "distance": 20,
+          "unit": "m"
+        }
+      }
+    ],
+    "slug": "thuggish-style",
+    "description": "<p>Target: A Commanded @Trait[dark] Creature.<br><br>Effect: This allows the Initiator setting the Style to spend PP to activate the Thug perk as part of the target creature's attack.</p>",
+    "traits": [
+      "command",
+      "style",
+      "dark"
+    ],
+    "prerequisites": [
+      "item:perk:type-specialist",
+      "item:perk:thug"
+    ],
+    "autoUnlock": [],
+    "cost": 2,
+    "design": {
+      "arena": "social",
+      "approach": "power",
+      "archetype": "dark"
+    },
+    "global": true,
+    "webs": [],
+    "nodes": [
+      {
+        "x": 186,
+        "y": 98,
+        "hidden": false,
+        "type": "normal",
+        "connected": [
+          "type-specialist"
+        ],
+        "config": {
+          "texture": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "tint": null
+        },
+        "tier": null
+      }
+    ]
+  },
+  "folder": "3FMJcmOMjNlPT6A0"
+}

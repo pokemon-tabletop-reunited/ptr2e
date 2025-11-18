@@ -18,7 +18,8 @@
         },
         "range": {
           "target": "self",
-          "unit": "m"
+          "unit": "m",
+          "distance": 10
         },
         "description": "<p>The user is hit by a super effective Attack or by a Critical Hit.</p><p>Effect: The user freely uses Gamma Ray.</p>",
         "img": "icons/svg/explosion.svg"
@@ -28,8 +29,7 @@
         "name": "Gamma Ray",
         "type": "attack",
         "traits": [
-          "ray",
-          "pp-updated"
+          "ray"
         ],
         "range": {
           "target": "creature",
@@ -47,7 +47,8 @@
           "nuclear"
         ],
         "free": true,
-        "img": "icons/svg/explosion.svg"
+        "img": "icons/svg/explosion.svg",
+        "predicate": []
       }
     ],
     "description": "<p>The user is hit by a super effective Attack or by a Critical Hit.</p><p>Effect: Connection - Gamma Ray. The user freely uses Gamma Ray.</p>",
@@ -59,9 +60,77 @@
     "_migration": {
       "version": null,
       "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
     }
   },
   "_id": "pIOZ1AiCbagHQJrP",
-  "effects": [],
+  "effects": [
+    {
+      "name": "Atomic Burst",
+      "type": "passive",
+      "_id": "m92XAt5vEzXdM8AF",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "grant-item",
+            "key": "",
+            "value": "Compendium.ptr2e.core-moves.Item.WVPzbqV4kQo9e29K",
+            "predicate": [
+              "ability:atomic-burst:active"
+            ],
+            "allowDuplicate": false,
+            "alterations": [],
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            },
+            "reevaluateOnUpdate": true,
+            "mode": 2,
+            "ignored": false,
+            "inMemoryOnly": false,
+            "track": false,
+            "replaceSelf": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.346",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.2.beta",
+        "createdTime": 1754316775050,
+        "modifiedTime": 1754316808266,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+      }
+    }
+  ],
   "folder": "0nG9TRDSwrmcTFwO"
 }

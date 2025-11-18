@@ -13,25 +13,22 @@
     "diet": [
       "herbivore"
     ],
-    "movement": {
-      "primary": [
-        {
-          "type": "overland",
-          "value": 5
-        }
-      ],
-      "secondary": [
-        {
-          "type": "swim",
-          "value": 3
-        }
-      ]
-    },
+    "movement": [
+      {
+        "type": "overland",
+        "value": 5
+      },
+      {
+        "type": "swim",
+        "value": 3
+      }
+    ],
     "traits": [
       "pokemon",
       "bipedal",
       "venomous",
-      "underdog"
+      "underdog",
+      "jump-5"
     ],
     "abilities": {
       "starting": [
@@ -44,18 +41,18 @@
       ],
       "basic": [
         {
-          "slug": "no-guard"
+          "slug": "opportunist"
         },
         {
-          "slug": "opportunist"
+          "slug": "poison-touch"
         }
       ],
       "advanced": [
         {
-          "slug": "poison-touch"
+          "slug": "advantageous"
         },
         {
-          "slug": "anger-shell"
+          "slug": "merciless"
         }
       ],
       "master": [
@@ -680,13 +677,32 @@
             "item": null,
             "level": null,
             "knownMove": null
+          },
+          "perk": {
+            "x": 26,
+            "y": 26
           }
         }
       ],
-      "uuid": "Compendium.ptr2e.core-species.Item.uvoFhMykVfzCo9o8"
+      "uuid": "Compendium.ptr2e.core-species.Item.uvoFhMykVfzCo9o8",
+      "methods": [],
+      "perk": {
+        "x": 26,
+        "y": 26
+      }
+    },
+    "publication": {
+      "source": "PTR 2e Core - Sinnoh Dex",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "_migration": {
+      "version": null,
+      "previous": null
     }
   },
   "_id": "uvoFhMykVfzCo9o8",
-  "effects": [],
-  "folder": null
+  "effects": []
 }

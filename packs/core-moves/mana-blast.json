@@ -1,0 +1,132 @@
+{
+  "name": "Mana Blast",
+  "type": "move",
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "slug": "mana-blast",
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [],
+      "notes": "undefined"
+    },
+    "traits": [],
+    "actions": [
+      {
+        "name": "Mana Blast",
+        "slug": "mana-blast",
+        "type": "attack",
+        "img": "systems/ptr2e/img/svg/untyped_icon.svg",
+        "traits": [
+          "blast-1",
+          "arcane",
+          "pulse",
+          "adaptable",
+          "explode"
+        ],
+        "range": {
+          "target": "blast",
+          "distance": 10,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 4
+        },
+        "types": [
+          "untyped"
+        ],
+        "category": "special",
+        "power": 70,
+        "accuracy": 95,
+        "predicate": [],
+        "description": "<p>Effect: On hit, the target has a 10% chance of losing -1 EVA Stage for 5 Activations, and a 50% chance of being Flinched.</p>"
+      }
+    ],
+    "grade": "C"
+  },
+  "img": "systems/ptr2e/img/svg/untyped_icon.svg",
+  "effects": [
+    {
+      "name": "Mana Blast",
+      "type": "passive",
+      "_id": "jXGrd0eVuDQFnAqQ",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "mana-blast-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.advanceffectitem",
+            "predicate": [],
+            "chance": 50,
+            "affects": "target",
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "system.amount",
+                "value": -10
+              },
+              {
+                "mode": 5,
+                "property": "name",
+                "value": "Flinched 10%"
+              }
+            ],
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "roll-effect",
+            "key": "mana-blast-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.hIE6W3Y5E9CyHiTy",
+            "predicate": [],
+            "chance": 10,
+            "affects": "target",
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "alterations": []
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": "Compendium.ptr2e.core-moves.Item.3KCZGRV9lMmb44FC.ActiveEffect.uM9lEbJS6Ee0AHd9",
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "1.1.0.beta",
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      }
+    }
+  ],
+  "flags": {},
+  "_id": "sJd0tznkt5DWhquq"
+}

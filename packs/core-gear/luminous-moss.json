@@ -1,88 +1,130 @@
 {
+  "folder": "V4skAU6G3OH5fXab",
   "name": "Luminous Moss",
-  "img": "systems/ptr2e/img/icons/equipment_icon.webp",
-  "type": "equipment",
+  "type": "consumable",
   "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "actions": [
+      {
+        "name": "Luminous Moss",
+        "slug": "luminous-moss",
+        "description": "<p>Trigger: User is hit by a @Trait[water]-type attack.<br><br>Effect: The user gains @UUID[Compendium.ptr2e.core-effects.jEX7s3GbbAtzgyS3]{+1 Special Defense Stage} for 5 activations.</p>",
+        "traits": [
+          "consumable",
+          "combat"
+        ],
+        "type": "generic",
+        "img": "systems/ptr2e/img/icons/consumable_icon.webp",
+        "cost": {
+          "activation": "free"
+        },
+        "range": {
+          "target": "self",
+          "unit": "m"
+        }
+      }
+    ],
     "crafting": {
-      "skill": null,
+      "skill": "",
       "spans": null,
       "materials": []
     },
     "equipped": {
-      "slot": "belt",
       "carryType": "stowed",
+      "slot": "belt",
       "handsHeld": null
     },
     "grade": "D",
     "fling": {
       "type": "untyped",
       "power": null,
-      "accuracy": 100
+      "accuracy": 100,
+      "hide": true,
+      "range": {
+        "target": "creature",
+        "distance": 10,
+        "unit": "m"
+      }
     },
-    "rarity": "uncommon",
+    "quantity": 1,
+    "rarity": "common",
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "description": "<p>Trigger: User is hit by a @Trait[water]-type attack.<br><br>Effect: The user gains @UUID[Compendium.ptr2e.core-effects.jEX7s3GbbAtzgyS3]{+1 Special Defense Stage} for 5 activations.</p>",
     "traits": [
       "consumable",
-      "natural",
       "combat"
     ],
-    "actions": [
-      {
-        "name": "Luminous Moss",
-        "slug": "luminous-moss",
-        "type": "generic",
-        "description": "Trigger: The user is hit by a Water-type attack.\nEffect: The user gains +2 SPDEF Stages for 10 activations.",
-        "traits": [
-          "Consumable",
-          "Natural",
-          "Combat"
+    "consumableType": "other",
+    "stack": 1,
+    "cost": 3
+  },
+  "img": "systems/ptr2e/img/icons/consumable_icon.webp",
+  "effects": [
+    {
+      "name": "Luminous Moss",
+      "type": "passive",
+      "_id": "mdGmARZoRA09IFZZ",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "luminous-moss-generic",
+            "value": "Compendium.ptr2e.core-effects.Item.jEX7s3GbbAtzgyS3",
+            "predicate": [],
+            "chance": 100,
+            "isFixedChance": false,
+            "affects": "target",
+            "alterations": [],
+            "dontMerge": false,
+            "mode": 2,
+            "ignored": false
+          }
         ],
-        "range": {
-          "target": "creature",
-          "distance": 0,
-          "unit": "m"
-        },
-        "cost": {
-          "activation": "complex",
-          "trigger": "The user is hit by a Water-type attack.",
-          "powerPoints": 0,
-          "delay": null,
-          "priority": null
-        },
-        "variant": null
-      }
-    ],
-    "description": "Trigger: The user is hit by a Water-type attack.\nEffect: The user gains +2 SPDEF Stages for 10 activations.",
-    "slug": null,
-    "container": null,
-    "quantity": 1,
-    "identification": {
-      "misidentified": null,
-      "status": "identified",
-      "unidentified": {
-        "name": "Unidentified Item",
-        "img": "systems/ptu/css/images/icons/item_icon.png",
-        "description": "<p>Unidentified Item</p>"
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.348",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.4.beta",
+        "lastModifiedBy": null
       }
     }
-  },
-  "_id": "M7JlKvEkfFoPrfou",
-  "effects": [],
-  "folder": "V4skAU6G3OH5fXad",
-  "sort": 0,
-  "ownership": {
-    "default": 0,
-    "tXAZ3QUgjuwX4gdV": 3
-  },
+  ],
   "flags": {},
-  "_stats": {
-    "compendiumSource": null,
-    "duplicateSource": null,
-    "coreVersion": "12.327",
-    "systemId": "ptr2e",
-    "systemVersion": "0.0.0-alpha.1.0",
-    "createdTime": 1717878484297,
-    "modifiedTime": 1717878484297,
-    "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
-  },
-  "_key": "!items!M7JlKvEkfFoPrfou"
+  "_id": "poAOPBkOKEAGGdMN"
 }

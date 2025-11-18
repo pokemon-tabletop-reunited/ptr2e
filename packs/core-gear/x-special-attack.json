@@ -1,0 +1,137 @@
+{
+  "folder": "Y7AqrGYTyQ9I1vPu",
+  "name": "X-Special Attack",
+  "type": "consumable",
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "crafting": {
+      "skill": "",
+      "spans": null,
+      "materials": []
+    },
+    "equipped": {
+      "carryType": "stowed",
+      "slot": "belt",
+      "handsHeld": null
+    },
+    "grade": "C",
+    "fling": {
+      "type": "untyped",
+      "power": 35,
+      "accuracy": 100,
+      "hide": false,
+      "range": {
+        "target": "creature",
+        "distance": 10,
+        "unit": "m"
+      }
+    },
+    "quantity": 1,
+    "rarity": "uncommon",
+    "publication": {
+      "source": "PTR2e Core",
+      "authors": [
+        "Fox"
+      ],
+      "notes": ""
+    },
+    "description": "<p>Grants the target @UUID[Compendium.ptr2e.core-effects.1TqcwIUNl32wJCAZ]{+2 Special Attack Stage for 5 activations}.</p>",
+    "traits": [
+      "consumable",
+      "combat",
+      "belt",
+      "x-booster"
+    ],
+    "consumableType": "boosters",
+    "stack": 1,
+    "cost": 3,
+    "slug": "x-special-attack",
+    "actions": [
+      {
+        "name": "X-Special Attack",
+        "slug": "x-special-attack",
+        "description": "<p>Grants the target @UUID[Compendium.ptr2e.core-effects.1TqcwIUNl32wJCAZ]{+2 Special Attack Stage for 5 activations}.</p>",
+        "traits": [
+          "consumable",
+          "combat",
+          "belt",
+          "x-booster"
+        ],
+        "type": "generic",
+        "img": "systems/ptr2e/img/item-icons/x%20special.webp",
+        "cost": {
+          "activation": "simple"
+        },
+        "range": {
+          "target": "creature",
+          "distance": 10,
+          "unit": "m"
+        }
+      }
+    ]
+  },
+  "img": "systems/ptr2e/img/item-icons/x%20special.webp",
+  "effects": [
+    {
+      "name": "X Special Attack",
+      "type": "passive",
+      "_id": "eTfabZSFnhtcDcP2",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "x-special-attack-generic",
+            "value": "Compendium.ptr2e.core-effects.Item.1TqcwIUNl32wJCAZ",
+            "predicate": [],
+            "chance": 100,
+            "isFixedChance": true,
+            "affects": "target",
+            "alterations": [],
+            "dontMerge": false,
+            "mode": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.348",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.4.beta",
+        "createdTime": 1758583960685,
+        "modifiedTime": 1758583986524,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+      }
+    }
+  ],
+  "_id": "yTvdxD5dZQRQ6Ma9"
+}

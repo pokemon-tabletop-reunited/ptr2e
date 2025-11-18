@@ -4,7 +4,7 @@
   "type": "weapon",
   "system": {
     "crafting": {
-      "skill": null,
+      "skill": "",
       "spans": null,
       "materials": []
     },
@@ -17,16 +17,25 @@
     "fling": {
       "type": "steel",
       "power": 80,
-      "accuracy": 90
+      "accuracy": 90,
+      "hide": false,
+      "range": {
+        "target": "creature",
+        "distance": 10,
+        "unit": "m"
+      }
     },
-    "rarity": "rare",
+    "rarity": "uncommon",
     "traits": [
       "weapon",
       "fling",
       "firearm",
-      "reload",
       "steel",
-      "charge-pool-1"
+      "charge-pool-1",
+      "reload-2",
+      "conventional",
+      "modern",
+      "sci-fi"
     ],
     "actions": [
       {
@@ -34,20 +43,17 @@
           "untyped"
         ],
         "category": "special",
-        "power": 120,
+        "power": 180,
         "accuracy": 80,
         "free": true,
         "traits": [
-          "load-adaptive",
           "explode",
-          "readied",
-          "two-handed",
           "blast-1",
-          "flinch-3"
+          "firearm"
         ],
         "name": "Rocket Launcher",
         "slug": "rocket-launcher",
-        "description": "<p>Effect: This attack calculates damage against the target's DEF, rather than SPDEF. On resolution, the user is Flinched.</p>",
+        "description": "<p>Effect: This attack calculates damage against the target's DEF, rather than SPDEF. On resolution, the user is Flinched 2.</p>",
         "img": "systems/ptr2e/img/svg/untyped_icon.svg",
         "type": "attack",
         "range": {
@@ -57,22 +63,14 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 1,
-          "delay": null,
-          "priority": null
+          "powerPoints": 1
         },
-        "variant": null,
-        "contestType": "",
-        "contestEffect": "",
-        "slot": null
+        "predicate": []
       }
     ],
-    "description": "",
     "weaponType": "untyped",
     "weaponPp": 1,
-    "weaponRange": "",
-    "slug": null,
-    "container": null,
+    "slug": "rocket-launcher",
     "quantity": 1,
     "identification": {
       "misidentified": null,
@@ -82,26 +80,82 @@
         "img": "systems/ptu/css/images/icons/item_icon.png",
         "description": "<p>Unidentified Item</p>"
       }
-    }
+    },
+    "_migration": {
+      "version": null,
+      "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "description": "<p>A rocket launcher is a weapon that launches an unguided, rocket-propelled projectile. Modern rocket launchers includes shoulder-fired weapons, any weapon that fires a rocket-propelled projectile at a target yet is small enough to be carried by a single person and fired while held on one's shoulder.</p>"
   },
   "_id": "K3a5ILims233TLsp",
-  "effects": [],
-  "folder": "V4skAU6G3OH5fXaf",
-  "sort": 0,
-  "ownership": {
-    "default": 0,
-    "tXAZ3QUgjuwX4gdV": 3
-  },
-  "flags": {},
-  "_stats": {
-    "compendiumSource": null,
-    "duplicateSource": null,
-    "coreVersion": "12.327",
-    "systemId": "ptr2e",
-    "systemVersion": "0.0.0-alpha.1.0",
-    "createdTime": 1717878484297,
-    "modifiedTime": 1717878484297,
-    "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
-  },
-  "_key": "!items!K3a5ILims233TLsp"
+  "effects": [
+    {
+      "name": "Rocket Launcher",
+      "type": "passive",
+      "_id": "VPE3rFVQrtYjWq6u",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "flat-modifier",
+            "key": "{item|id}-attack-damage-flat",
+            "value": 140,
+            "predicate": [],
+            "label": "Rocket Launcher",
+            "priority": null,
+            "mode": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
+      "_stats": {
+        "compendiumSource": "Compendium.ptr2e.core-gear.Item.Ba3EyqpUePgGrfQk.ActiveEffect.uOxpw5kHcRtpv4pa",
+        "duplicateSource": null,
+        "coreVersion": "13.347",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.3.beta",
+        "createdTime": 1743904735453,
+        "modifiedTime": 1757632918983,
+        "lastModifiedBy": "UTlFSVhgfIUeTsoW",
+        "exportSource": null
+      }
+    }
+  ],
+  "folder": "Tn65RZTafVbxqEXT"
 }

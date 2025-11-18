@@ -15,7 +15,8 @@
           "contact",
           "crit-1",
           "punch",
-          "kick"
+          "kick",
+          "hammer"
         ],
         "range": {
           "target": "creature",
@@ -32,14 +33,23 @@
         "category": "physical",
         "power": 85,
         "accuracy": 100,
-        "description": "<p>Effect: On hit, the target has a 30% chance of gaining @Affliction[splinter] 5.</p>"
+        "description": "<p>Effect: On hit, the target has a 30% chance of gaining @Affliction[splinter] 5.</p>",
+        "predicate": []
       }
     ],
     "grade": "B",
     "_migration": {
       "version": null,
       "previous": null
-    }
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "traits": []
   },
   "effects": [
     {
@@ -58,14 +68,19 @@
             "affects": "target",
             "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "isFixedChance": false,
+            "alterations": [],
+            "dontMerge": false
           }
         ],
         "slug": null,
         "traits": [],
         "removeAfterCombat": true,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
@@ -87,12 +102,13 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.347",
         "systemId": "ptr2e",
         "systemVersion": "0.10.0-alpha.2.4.3",
         "createdTime": 1729171877110,
         "modifiedTime": 1729171911828,
-        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
+        "lastModifiedBy": "Kc3DOunCh3ClAeHS",
+        "exportSource": null
       }
     }
   ]

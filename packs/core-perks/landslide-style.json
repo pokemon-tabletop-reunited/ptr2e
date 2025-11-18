@@ -1,0 +1,138 @@
+{
+  "name": "Landslide Style",
+  "_id": "lX7dzWNq87k7wlpP",
+  "type": "perk",
+  "img": "icons/environment/wilderness/terrain-rocky-ground.webp",
+  "effects": [
+    {
+      "name": "Landslide Style",
+      "type": "passive",
+      "_id": "VC1LTdcNaMGDC6l2",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "landslide-style-generic",
+            "value": "Compendium.ptr2e.core-effects.Item.0iy9w11FwvKVHDTO",
+            "predicate": [],
+            "chance": 100,
+            "isFixedChance": true,
+            "affects": "target",
+            "alterations": [],
+            "dontMerge": false,
+            "mode": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.347",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.3.beta",
+        "createdTime": 1756046023774,
+        "modifiedTime": 1756046076678,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+      }
+    }
+  ],
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "publication": {
+      "source": "PTR2e Core",
+      "authors": [
+        "Fox"
+      ],
+      "notes": ""
+    },
+    "actions": [
+      {
+        "name": "Landslide Style",
+        "slug": "landslide-style",
+        "description": "<p>Target: Commanded @Trait[rock] Creatures<br><br>Effect: The target @Trait[rock] creature's @Trait[contact] moves gain the @Trait[crushing] trait and increases their Power by their Weight Class multiplied by 5%, but they gain the @Affliction[slowed] affliction and @UUID[Compendium.ptr2e.core-effects.hIE6W3Y5E9CyHiTy]{-1 Evasion Stage} whilst the style is active.</p>",
+        "traits": [
+          "command",
+          "rock",
+          "style"
+        ],
+        "type": "generic",
+        "img": "icons/environment/wilderness/terrain-rocky-ground.webp",
+        "cost": {
+          "activation": "simple"
+        },
+        "range": {
+          "target": "creature",
+          "distance": 10,
+          "unit": "m"
+        }
+      }
+    ],
+    "slug": "landslide-style",
+    "description": "<p>Target: Commanded @Trait[rock] Creatures<br><br>Effect: The target @Trait[rock] creature's @Trait[contact] moves gain the @Trait[crushing] trait and increases their Power by their Weight Class multiplied by 5%, but they gain the @Affliction[slowed] affliction and @UUID[Compendium.ptr2e.core-effects.hIE6W3Y5E9CyHiTy]{-1 Evasion Stage} whilst the style is active.</p>",
+    "traits": [
+      "command",
+      "rock",
+      "style"
+    ],
+    "prerequisites": [
+      "item:perk:type-specialist",
+      {
+        "gte": [
+          "{actor|skills.leadership.mod}",
+          30
+        ]
+      }
+    ],
+    "autoUnlock": [],
+    "cost": 2,
+    "design": {
+      "arena": "social",
+      "approach": "resilience",
+      "archetype": "rock"
+    },
+    "global": true,
+    "webs": [],
+    "nodes": [
+      {
+        "x": 194,
+        "y": 100,
+        "connected": [
+          "type-specialist"
+        ],
+        "hidden": false,
+        "type": "normal",
+        "tier": null
+      }
+    ]
+  },
+  "folder": "YOjkwRlXiBOynxGV"
+}

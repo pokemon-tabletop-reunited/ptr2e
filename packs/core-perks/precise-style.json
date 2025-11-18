@@ -11,7 +11,7 @@
       }
     ],
     "cost": 1,
-    "description": "<p>The target gains @Affliction[precise] 1.</p>",
+    "description": "<p>The target gains @UUID[Compendium.ptr2e.core-effects.precisecondiitem]{Precise}.</p>",
     "actions": [
       {
         "name": "Precise!",
@@ -27,47 +27,28 @@
         },
         "cost": {
           "activation": "simple",
-          "powerPoints": 1,
-          "delay": null,
-          "priority": null
+          "powerPoints": 1
         },
-        "description": "Effect: The target gains @Affliction[precise] 1.",
+        "description": "<p>Effect: The target gains @UUID[Compendium.ptr2e.core-effects.precisecondiitem]{Precise}.</p>",
         "type": "generic",
-        "img": "icons/svg/explosion.svg",
-        "variant": null
-      },
-      {
-        "name": "Precise! (Self)",
-        "slug": "precise-self",
-        "traits": [
-          "command",
-          "style"
-        ],
-        "range": {
-          "target": "self",
-          "unit": "m",
-          "distance": 0
-        },
-        "cost": {
-          "activation": "simple",
-          "powerPoints": 1,
-          "delay": null,
-          "priority": null
-        },
-        "description": "Effect: The target gains @Affliction[precise] 2.",
-        "type": "generic",
-        "img": "icons/svg/explosion.svg",
-        "variant": null
+        "img": "systems/ptr2e/img/perk-icons/Orders_Training.svg"
       }
     ],
     "slug": "precise-style",
-    "traits": [],
+    "traits": [
+      "command",
+      "style"
+    ],
     "_migration": {
       "version": null,
       "previous": null
     },
     "nodes": [
       {
+        "x": 89,
+        "y": 130,
+        "hidden": false,
+        "type": "normal",
         "connected": [
           "gambit-style",
           "rapid-style",
@@ -75,35 +56,82 @@
           "stat-iv-booster-1-12"
         ],
         "config": {
-          "alpha": null,
-          "backgroundColor": "#80ffff",
-          "borderColor": null,
-          "borderWidth": null,
           "texture": "systems/ptr2e/img/perk-icons/Orders_Training.svg",
-          "tint": "#161616",
-          "scale": null
+          "backgroundColor": null,
+          "borderColor": null,
+          "tint": null
         },
-        "hidden": false,
-        "type": "normal",
-        "x": 89,
-        "y": 130,
         "tier": null
       }
     ],
     "autoUnlock": [],
-    "originSlug": null,
-    "variant": null,
-    "mode": null,
     "global": true,
     "webs": [],
     "design": {
       "arena": "mental",
       "approach": "finesse",
-      "archetype": "Support"
+      "archetype": "support"
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
     }
   },
   "_id": "bj0EK3ur1N9ULr4A",
   "img": "systems/ptr2e/img/perk-icons/Orders_Training.svg",
-  "effects": [],
+  "effects": [
+    {
+      "name": "Precise Style",
+      "type": "passive",
+      "_id": "2cAk70XltE7ba1hF",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "precise-generic",
+            "value": "Compendium.ptr2e.core-effects.Item.precisecondiitem",
+            "predicate": [],
+            "chance": 100,
+            "isFixedChance": true,
+            "affects": "target",
+            "alterations": [],
+            "dontMerge": false,
+            "mode": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.346",
+        "systemId": "ptr2e"
+      }
+    }
+  ],
   "folder": "JZrGRskscJOkkPWA"
 }

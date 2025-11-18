@@ -1,0 +1,92 @@
+{
+  "name": "Gambit",
+  "type": "effect",
+  "img": "icons/svg/d20.svg",
+  "system": {
+    "traits": [
+      "pseudo-affliction"
+    ],
+    "description": "While afflicted with Gambit, the creature has +2 default CRIT and -1 default ACC.",
+    "slug": "gambit",
+    "publication": {
+      "source": "",
+      "authors": [],
+      "notes": ""
+    },
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "effects": [
+    {
+      "name": "Gambit",
+      "img": "icons/svg/d20.svg",
+      "type": "affliction",
+      "duration": {
+        "turns": null,
+        "startTime": null,
+        "combat": null,
+        "startTurn": null
+      },
+      "system": {
+        "changes": [
+          {
+            "type": "basic",
+            "key": "system.battleStats.acc.stage",
+            "value": -1,
+            "mode": 2,
+            "predicate": [],
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "key": "system.battleStats.critRate.stage",
+            "value": 2,
+            "mode": 2,
+            "predicate": [],
+            "ignored": false
+          }
+        ],
+        "removeOnRecall": true,
+        "removeAfterCombat": true,
+        "traits": [
+          "pseudo-affliction"
+        ],
+        "slug": null,
+        "removeAfterAttacking": true,
+        "removeAfterAttacked": false,
+        "stacks": 0,
+        "priority": 50,
+        "formula": "",
+        "type": "damage"
+      },
+      "description": "While afflicted with Gambit, the creature has +2 default CRIT and -1 default ACC.",
+      "statuses": [],
+      "_id": "gambitcondition0",
+      "_stats": {
+        "coreVersion": "13.347",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.3.beta",
+        "createdTime": null,
+        "modifiedTime": 1756025618984,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "disabled": false,
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "sort": 0,
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": "always"
+        }
+      }
+    }
+  ],
+  "folder": "V4skAU6G3OH5fXgE",
+  "_id": "gambitcondititem"
+}

@@ -9,6 +9,11 @@
     <label class="short">{{localize "PTR2E.Effect.FIELDS.ChangeUuid.label"}}</label>
     <div class="form-fields">
         <input type="text" name="{{basePath}}.value" value="{{change.uuid}}" />
+        {{#if granted}} {{log granted}}
+            <a class="content-link" data-uuid="{{granted.uuid}}" data-link="{{granted.uuid}}" data-tooltip="{{granted.name}}" data-type="Item" data-tooltip-direction="RIGHT">
+                <img src="{{granted.img}}"/> {{granted.name}}
+            </a>
+        {{/if}}
     </div>
 </div>
 
@@ -17,6 +22,20 @@
     <div class="form-fields">
         <input type="number" name="{{basePath}}.chance" value="{{change.chance}}" />
     </div>
+</div>
+
+<div class="form-group">
+  <label>{{localize "PTR2E.Effect.FIELDS.ChangeIsFixedChance.label"}}</label>
+  <div class="form-fields">
+    <input type="checkbox" name="{{basePath}}.isFixedChance" {{#if change.isFixedChance}}checked{{/if}} />
+  </div>
+</div>
+
+<div class="form-group">
+  <label>{{localize "PTR2E.Effect.FIELDS.DontMerge.label"}}</label>
+  <div class="form-fields">
+    <input type="checkbox" name="{{basePath}}.dontMerge" {{#if change.dontMerge}}checked{{/if}} />
+  </div>
 </div>
 
 <div class="form-group">

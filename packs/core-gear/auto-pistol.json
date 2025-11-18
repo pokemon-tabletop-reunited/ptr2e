@@ -4,7 +4,7 @@
   "type": "weapon",
   "system": {
     "crafting": {
-      "skill": null,
+      "skill": "",
       "spans": null,
       "materials": []
     },
@@ -13,20 +13,30 @@
       "carryType": "stowed",
       "handsHeld": null
     },
-    "grade": "B",
+    "grade": "C",
     "fling": {
       "type": "steel",
-      "power": 40,
-      "accuracy": 100
+      "power": 55,
+      "accuracy": 90,
+      "hide": false,
+      "range": {
+        "target": "creature",
+        "distance": 3,
+        "unit": "m"
+      }
     },
-    "rarity": "uncommon",
+    "rarity": "common",
     "traits": [
       "weapon",
       "fling",
       "firearm",
-      "reload",
+      "autoload",
       "steel",
-      "charge-pool-15"
+      "reload-1",
+      "charge-pool-15",
+      "conventional",
+      "modern",
+      "sci-fi"
     ],
     "actions": [
       {
@@ -34,13 +44,12 @@
           "untyped"
         ],
         "category": "special",
-        "power": 45,
+        "power": 35,
         "accuracy": 95,
         "free": true,
         "traits": [
-          "load-adaptive",
           "missile",
-          "readied"
+          "firearm"
         ],
         "name": "Auto Pistol",
         "slug": "auto-pistol",
@@ -54,27 +63,21 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 1,
-          "delay": null,
-          "priority": null
+          "powerPoints": 1
         },
-        "variant": null,
-        "contestType": "",
-        "contestEffect": "",
-        "slot": null
+        "predicate": []
       },
       {
         "types": [
           "untyped"
         ],
         "category": "special",
-        "power": 70,
-        "accuracy": 95,
+        "power": 60,
+        "accuracy": 90,
         "free": true,
         "traits": [
-          "load-adaptive",
           "missile",
-          "readied"
+          "firearm"
         ],
         "name": "Auto Pistol (Double Tap)",
         "slug": "auto-pistol-double-tap",
@@ -88,28 +91,24 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 2,
-          "delay": null,
-          "priority": null
+          "powerPoints": 2
         },
         "variant": "auto-pistol",
-        "contestType": "",
-        "contestEffect": "",
-        "slot": null
+        "predicate": []
       },
       {
         "types": [
           "untyped"
         ],
         "category": "special",
-        "power": 45,
+        "power": 30,
         "accuracy": 75,
         "free": true,
         "traits": [
-          "load-adaptive",
           "missile",
-          "priority-1",
-          "dash"
+          "dash",
+          "firearm",
+          "priority-10"
         ],
         "name": "Auto Pistol (Hip Fire)",
         "slug": "auto-pistol-hip-fire",
@@ -124,21 +123,15 @@
         "cost": {
           "activation": "complex",
           "powerPoints": 1,
-          "delay": null,
           "priority": 1
         },
         "variant": "auto-p",
-        "contestType": "",
-        "contestEffect": "",
-        "slot": null
+        "predicate": []
       }
     ],
-    "description": "",
     "weaponType": "untyped",
     "weaponPp": 15,
-    "weaponRange": "",
-    "slug": null,
-    "container": null,
+    "slug": "auto-pistol",
     "quantity": 1,
     "identification": {
       "misidentified": null,
@@ -148,26 +141,92 @@
         "img": "systems/ptu/css/images/icons/item_icon.png",
         "description": "<p>Unidentified Item</p>"
       }
-    }
+    },
+    "_migration": {
+      "version": null,
+      "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "description": "<p>A auto pistol is a repeating handgun that automatically ejects and loads cartridges in its chamber after every shot fired, but only one round of ammunition is fired each time the trigger is pulled. A ubiquitous design in contemporary settings, utilized by militaries and civilians as a sidearm and for personal defense.</p>"
   },
   "_id": "TD3HM4XSYLbWAemQ",
-  "effects": [],
-  "folder": "V4skAU6G3OH5fXaf",
-  "sort": 0,
-  "ownership": {
-    "default": 0,
-    "tXAZ3QUgjuwX4gdV": 3
-  },
-  "flags": {},
-  "_stats": {
-    "compendiumSource": null,
-    "duplicateSource": null,
-    "coreVersion": "12.327",
-    "systemId": "ptr2e",
-    "systemVersion": "0.0.0-alpha.1.0",
-    "createdTime": 1717878484297,
-    "modifiedTime": 1717878484297,
-    "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
-  },
-  "_key": "!items!TD3HM4XSYLbWAemQ"
+  "effects": [
+    {
+      "name": "Auto Pistol",
+      "type": "passive",
+      "_id": "l5RIbZygF2J5Qc7l",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "flat-modifier",
+            "key": "{item|id}-attack-damage-flat",
+            "value": 32,
+            "predicate": [],
+            "label": "Auto Pistol",
+            "priority": null,
+            "mode": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          },
+          {
+            "type": "flat-modifier",
+            "key": "auto-pistol-double-tap-attack-damage-flat",
+            "value": 32,
+            "predicate": [],
+            "label": "Double Tap",
+            "mode": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": false,
+        "removeOnRecall": false,
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
+      "_stats": {
+        "compendiumSource": "Compendium.ptr2e.core-gear.Item.Ba3EyqpUePgGrfQk.ActiveEffect.uOxpw5kHcRtpv4pa",
+        "duplicateSource": null,
+        "coreVersion": "13.347",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.3.beta",
+        "createdTime": 1743877436694,
+        "modifiedTime": 1757553567781,
+        "lastModifiedBy": "UTlFSVhgfIUeTsoW",
+        "exportSource": null
+      }
+    }
+  ],
+  "folder": "MKaFm5Pvt7tvgdAa"
 }

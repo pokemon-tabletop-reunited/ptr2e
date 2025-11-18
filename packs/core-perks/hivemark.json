@@ -60,7 +60,14 @@
     "design": {
       "arena": "physical",
       "approach": "power",
-      "archetype": ""
+      "archetype": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
     }
   },
   "_id": "o8JKgkDzgMMay8Co",
@@ -77,11 +84,16 @@
             "type": "roll-effect",
             "key": "bug-attack",
             "value": "Compendium.ptr2e.core-effects.Item.infestedconditem",
-            "predicate": [],
+            "predicate": [
+              "origin:enemy"
+            ],
             "chance": 20,
             "affects": "target",
-            "mode": 2,
             "priority": null,
+            "alterations": [],
+            "dontMerge": false,
+            "isFixedChance": false,
+            "mode": 2,
             "ignored": false
           }
         ],
@@ -89,7 +101,9 @@
         "traits": [],
         "removeAfterCombat": true,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
@@ -107,16 +121,21 @@
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "flags": {},
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.348",
         "systemId": "ptr2e",
-        "systemVersion": "0.10.0-alpha.3.2.0",
+        "systemVersion": "1.4.3.beta",
         "createdTime": 1731105131277,
-        "modifiedTime": 1731105155513,
-        "lastModifiedBy": "wRgL6u6KEJDBDQIE"
+        "modifiedTime": 1757797803090,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf",
+        "exportSource": null
       }
     }
   ],

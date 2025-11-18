@@ -4,13 +4,13 @@
   "_id": "K3uox37rgUbs2xwq",
   "img": "systems/ptr2e/img/svg/psychic_icon.svg",
   "system": {
-    "slug": null,
+    "slug": "mind-games",
     "actions": [
       {
         "name": "Mind Games",
         "slug": "mind-games",
         "type": "attack",
-        "img": "icons/svg/explosion.svg",
+        "img": "systems/ptr2e/img/svg/psychic_icon.svg",
         "traits": [
           "social"
         ],
@@ -24,16 +24,94 @@
           "powerPoints": 6
         },
         "types": [
-          "untyped"
+          "psychic"
         ],
         "category": "special",
         "accuracy": 100,
-        "description": "<p>Effect: All valid targets lose -1 SPATK Stages for 5 Activations,  and user gains +1 SPDEF Stage for 5 Activations.</p>",
+        "description": "<p>Effect: All valid targets lose -1 SPATK Stages for 5 Activations, and user gains +1 SPDEF Stage for 5 Activations.</p>",
         "predicate": []
       }
     ],
-    "container": null,
-    "grade": "A"
+    "grade": "A",
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "traits": [],
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
   },
-  "effects": []
+  "effects": [
+    {
+      "name": "Mind Games",
+      "type": "passive",
+      "_id": "rkHy8WKP8xuKfFXu",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "mind-games-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.1JXumQz0QqthT9Iv",
+            "predicate": [],
+            "chance": 100,
+            "isFixedChance": false,
+            "affects": "target",
+            "alterations": [],
+            "dontMerge": false,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "roll-effect",
+            "key": "mind-games-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.jEX7s3GbbAtzgyS3",
+            "predicate": [],
+            "chance": 100,
+            "isFixedChance": false,
+            "affects": "self",
+            "alterations": [],
+            "dontMerge": false,
+            "mode": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.347",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.2.beta",
+        "createdTime": 1755354657520,
+        "modifiedTime": 1755354711757,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+      }
+    }
+  ]
 }

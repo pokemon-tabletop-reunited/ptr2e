@@ -12,7 +12,7 @@
         "traits": [
           "crushing",
           "contact",
-          "pp-updated"
+          "hammer"
         ],
         "range": {
           "target": "creature",
@@ -30,14 +30,23 @@
           "fighting"
         ],
         "description": "<p>Effect: On hit, the user loses -1 SPD Stage for 5 Activations.</p>",
-        "img": "icons/svg/explosion.svg"
+        "img": "systems/ptr2e/img/svg/fighting_icon.svg",
+        "predicate": []
       }
     ],
-    "grade": "D",
+    "grade": "C",
     "_migration": {
       "version": null,
       "previous": null
-    }
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "traits": []
   },
   "_id": "8Cz8RZllldCmYvQm",
   "effects": [
@@ -57,14 +66,19 @@
             "affects": "self",
             "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "alterations": [],
+            "isFixedChance": false,
+            "dontMerge": false
           }
         ],
         "slug": null,
         "traits": [],
         "removeAfterCombat": true,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
@@ -86,12 +100,13 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.347",
         "systemId": "ptr2e",
         "systemVersion": "0.10.0-alpha.3.0.0",
         "createdTime": 1729550516542,
         "modifiedTime": 1729550539250,
-        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
+        "lastModifiedBy": "Kc3DOunCh3ClAeHS",
+        "exportSource": null
       }
     }
   ]

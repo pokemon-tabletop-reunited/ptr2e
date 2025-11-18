@@ -1,0 +1,137 @@
+{
+  "folder": "Y7AqrGYTyQ9I1vPu",
+  "name": "X-Speed",
+  "type": "consumable",
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "crafting": {
+      "skill": "",
+      "spans": null,
+      "materials": []
+    },
+    "equipped": {
+      "carryType": "stowed",
+      "slot": "belt",
+      "handsHeld": null
+    },
+    "grade": "C",
+    "fling": {
+      "type": "untyped",
+      "power": 35,
+      "accuracy": 100,
+      "hide": false,
+      "range": {
+        "target": "creature",
+        "distance": 10,
+        "unit": "m"
+      }
+    },
+    "quantity": 1,
+    "rarity": "uncommon",
+    "publication": {
+      "source": "PTR2e Core",
+      "authors": [
+        "Fox"
+      ],
+      "notes": ""
+    },
+    "description": "<p>Grants the target @UUID[Compendium.ptr2e.core-effects.XeiSuS3APUcN0MLZ]{+2 Speed Stages for 5 activations}.</p>",
+    "traits": [
+      "consumable",
+      "combat",
+      "belt",
+      "x-booster"
+    ],
+    "consumableType": "boosters",
+    "stack": 1,
+    "cost": 3,
+    "slug": "x-speed",
+    "actions": [
+      {
+        "name": "X-Speed",
+        "slug": "x-speed",
+        "description": "<p>May be used as a Simple Action. Grants the target @UUID[Compendium.ptr2e.core-effects.XeiSuS3APUcN0MLZ]{+2 Speed Stages for 5 activations}.</p>",
+        "traits": [
+          "consumable",
+          "combat",
+          "belt",
+          "x-booster"
+        ],
+        "type": "generic",
+        "img": "systems/ptr2e/img/item-icons/x%20speed.webp",
+        "cost": {
+          "activation": "simple"
+        },
+        "range": {
+          "target": "creature",
+          "distance": 10,
+          "unit": "m"
+        }
+      }
+    ]
+  },
+  "img": "systems/ptr2e/img/item-icons/x%20speed.webp",
+  "effects": [
+    {
+      "name": "X Speed",
+      "type": "passive",
+      "_id": "WkPDXgiuVKaZSgH6",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "x-speed-generic",
+            "value": "Compendium.ptr2e.core-effects.Item.XeiSuS3APUcN0MLZ",
+            "predicate": [],
+            "chance": 100,
+            "isFixedChance": true,
+            "affects": "target",
+            "alterations": [],
+            "dontMerge": false,
+            "mode": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.348",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.4.beta",
+        "createdTime": 1758584188713,
+        "modifiedTime": 1758584211401,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+      }
+    }
+  ],
+  "_id": "KEEDGwMPGeJlwvJs"
+}

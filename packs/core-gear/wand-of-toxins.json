@@ -1,11 +1,15 @@
 {
-  "folder": "V4skAU6G3OH5fXaf",
+  "folder": "PhrQtZzEwKPjfmK2",
   "name": "Wand of Toxins",
   "type": "weapon",
   "system": {
     "_migration": {
-      "version": 0.11,
-      "previous": null
+      "version": 0.111,
+      "previous": {
+        "schema": 0.11,
+        "foundry": "13.347",
+        "system": "1.4.3.beta"
+      }
     },
     "traits": [
       "fantasy",
@@ -30,7 +34,12 @@
       "type": "untyped",
       "power": null,
       "accuracy": 100,
-      "hide": false
+      "hide": false,
+      "range": {
+        "target": "creature",
+        "distance": 10,
+        "unit": "m"
+      }
     },
     "quantity": 1,
     "rarity": "common",
@@ -42,9 +51,17 @@
         "img": "systems/ptu/css/images/icons/gear_icon.png",
         "description": "<p>Unidentified Item</p>"
       }
+    },
+    "slug": "wand-of-toxins",
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
     }
   },
-  "img": "systems/ptr2e/img/icons/weapon_icon.webp",
+  "img": "icons/weapons/wands/wand-gem-violet.webp",
   "effects": [
     {
       "name": "Wand of Toxins",
@@ -75,25 +92,27 @@
                 "value": "weapon"
               }
             ],
-            "replaceSelf": true,
-            "mode": 2,
             "priority": null,
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            },
+            "mode": 2,
             "ignored": false,
             "reevaluateOnUpdate": false,
             "inMemoryOnly": false,
             "allowDuplicate": true,
             "track": false,
-            "onDeleteActions": {
-              "grantee": "detach",
-              "granter": "cascade"
-            }
+            "replaceSelf": false
           }
         ],
         "slug": null,
         "traits": [],
         "removeAfterCombat": true,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
@@ -111,19 +130,22 @@
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "flags": {},
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "exportSource": null,
+        "coreVersion": "13.348",
         "systemId": "ptr2e",
-        "systemVersion": "1.0.0.beta-ready.2",
-        "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "systemVersion": "1.4.3.beta",
+        "lastModifiedBy": "XNKN3zSF1KgrBp5u",
+        "modifiedTime": 1755850672487
       }
     }
   ],
-  "flags": {},
   "_id": "BD8kP4HEY5UdCDVK"
 }

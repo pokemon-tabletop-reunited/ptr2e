@@ -1,0 +1,138 @@
+{
+  "name": "Highlander Stance",
+  "_id": "tx02Fe31FgQLxR2M",
+  "type": "perk",
+  "img": "icons/creatures/reptiles/dragon-winged-blue.webp",
+  "effects": [
+    {
+      "name": "Highlander Stance",
+      "type": "passive",
+      "_id": "tOWFaIWrKKqT3Nnt",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "highlander-stance-generic",
+            "value": "Compendium.ptr2e.core-effects.Item.olWzCfvRbE04Fkd4",
+            "predicate": [],
+            "chance": 100,
+            "isFixedChance": false,
+            "affects": "target",
+            "alterations": [],
+            "dontMerge": false,
+            "mode": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.347",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.3.beta",
+        "createdTime": 1756041665739,
+        "modifiedTime": 1756041778944,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+      }
+    }
+  ],
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "publication": {
+      "source": "PTR2e Core",
+      "authors": [
+        "Fox"
+      ],
+      "notes": ""
+    },
+    "actions": [
+      {
+        "name": "Highlander Stance",
+        "slug": "highlander-stance",
+        "description": "<p>Target: A Commanded @Trait[dragon] Creature<br><br>Effect: Grants the target creature +50% Damage versus @Trait[dragon] creatures, but the target creature takes 50% more damage from @Trait[ice] attacks.<br><br>Either the Target or the Initiator can end the Stance as a Free Action.</p>",
+        "traits": [
+          "stance",
+          "dragon",
+          "command"
+        ],
+        "type": "generic",
+        "img": "icons/creatures/reptiles/dragon-winged-blue.webp",
+        "cost": {
+          "activation": "simple",
+          "powerPoints": 3
+        },
+        "range": {
+          "target": "creature",
+          "distance": 20,
+          "unit": "m"
+        }
+      }
+    ],
+    "slug": "highlander-stance",
+    "description": "<p>Target: A Commanded @Trait[dragon] Creature<br><br>Effect: Grants the target creature +50% Damage versus @Trait[dragon] creatures, but the target creature takes 50% more damage from @Trait[ice] attacks.<br><br>Either the Target or the Initiator can end the Stance as a Free Action.</p>",
+    "traits": [
+      "stance",
+      "dragon"
+    ],
+    "prerequisites": [
+      "item:perk:type-specialist"
+    ],
+    "autoUnlock": [],
+    "cost": 2,
+    "design": {
+      "arena": "physical",
+      "approach": "power",
+      "archetype": "dragon"
+    },
+    "global": true,
+    "webs": [],
+    "nodes": [
+      {
+        "x": 190,
+        "y": 94,
+        "hidden": false,
+        "type": "normal",
+        "connected": [
+          "type-specialist"
+        ],
+        "config": {
+          "texture": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "tint": null
+        },
+        "tier": null
+      }
+    ]
+  },
+  "folder": "0sbegdBkuhakZCMb"
+}

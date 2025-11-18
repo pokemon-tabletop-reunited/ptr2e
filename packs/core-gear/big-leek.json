@@ -1,114 +1,192 @@
 {
+  "folder": "MKaFm5Pvt7tvgdAa",
   "name": "Big Leek",
-  "img": "systems/ptr2e/img/icons/equipment_icon.webp",
-  "type": "equipment",
+  "type": "weapon",
   "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "traits": [
+      "weapon",
+      "farfetchd",
+      "set-up"
+    ],
+    "actions": [
+      {
+        "name": "Leeky Iajitsu (Set-Up)",
+        "slug": "leeky-iajitsu-set-up",
+        "description": "<p>The user gains @UUID[Compendium.ptr2e.core-effects.iv1l5qSwT9ykajV0]{+1 Accuracy Stage} for 5 activations and becomes @UUID[Compendium.ptr2e.core-effects.xhI2IzUDSXy4Y42z]{Amped}.</p>",
+        "traits": [
+          "weapon",
+          "farfetchd",
+          "priority-20"
+        ],
+        "type": "attack",
+        "img": "systems/ptr2e/img/item-icons/rare%20leek.webp",
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 3
+        },
+        "range": {
+          "target": "self",
+          "unit": "m"
+        },
+        "types": [
+          "untyped"
+        ],
+        "category": "status",
+        "free": true,
+        "predicate": []
+      },
+      {
+        "name": "Leeky Iajitsu (Resolution)",
+        "slug": "leeky-iajitsu-resolution",
+        "description": "<p>Trigger: This action may be activated early if the user is attacked after Setting Up.<br><br>Effect: The user may move up to half their Overland Movement Allowance freely and attack a nearby target. If used as an interrupt, must attack the creature attacking you.<br><br>If the target gains @Affliction[fainted] due to damage from this Attack, the triggering attack fails.</p>",
+        "traits": [
+          "weapon",
+          "farfetchd",
+          "set-up",
+          "interrupt-5",
+          "crit-2",
+          "contact",
+          "flinch-30"
+        ],
+        "type": "attack",
+        "img": "systems/ptr2e/img/item-icons/rare%20leek.webp",
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 3
+        },
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "types": [
+          "fighting",
+          "grass"
+        ],
+        "category": "physical",
+        "predicate": [],
+        "power": 125,
+        "accuracy": 100
+      }
+    ],
+    "description": "<p>Connected Ability: @UUID[Compendium.ptr2e.core-abilities.lAcCSoZ34eDzVLmb]{Hustle}<br><br>Weapon actions included.</p>",
     "crafting": {
-      "skill": null,
+      "skill": "",
       "spans": null,
       "materials": []
     },
     "equipped": {
-      "slot": "accessory",
       "carryType": "stowed",
+      "slot": "held",
       "handsHeld": null
     },
-    "grade": "B",
+    "grade": "C",
     "fling": {
       "type": "untyped",
       "power": null,
       "accuracy": 100,
-      "hide": null
-    },
-    "rarity": "rare",
-    "traits": [
-      "combat",
-      "farfetchd",
-      "garlarian-farfetchd",
-      "sirfetchd"
-    ],
-    "actions": [
-      {
-        "name": "Big Leek",
-        "slug": "big-leek",
-        "type": "generic",
-        "description": "Effect: The user has their Base ATK increased by 150%, but their default ACC is decreased by -1.",
-        "traits": [
-          "Combat",
-          "Farfetch'd",
-          "Garlarian Farfetch'd",
-          "Sirfetch'd"
-        ],
-        "range": {
-          "target": "creature",
-          "unit": "m"
-        },
-        "cost": {
-          "activation": "complex"
-        },
-        "img": "icons/svg/explosion.svg"
+      "hide": true,
+      "range": {
+        "target": "creature",
+        "distance": 10,
+        "unit": "m"
       }
-    ],
-    "description": "Effect: The user has their Base ATK increased by 150%, but their default ACC is decreased by -1.",
-    "slug": "big-leek",
+    },
     "quantity": 1,
+    "rarity": "common",
     "identification": {
       "misidentified": null,
       "status": "identified",
       "unidentified": {
         "name": "Unidentified Item",
-        "img": "systems/ptu/css/images/icons/item_icon.png",
+        "img": "systems/ptu/css/images/icons/gear_icon.png",
         "description": "<p>Unidentified Item</p>"
       }
-    },
-    "_migration": {
-      "version": null,
-      "previous": null
     }
   },
-  "_id": "Yi6lzbeaZEY5F9qP",
+  "img": "systems/ptr2e/img/item-icons/rare%20leek.webp",
   "effects": [
     {
       "name": "Big Leek",
       "type": "passive",
-      "_id": "pXaKQoDXW7Jd1Oht",
+      "_id": "D74OSoabRirIv2jh",
       "img": "systems/ptr2e/img/icons/effect_icon.webp",
       "system": {
         "changes": [
           {
-            "type": "basic",
-            "key": "system.attributes.atk.base",
-            "value": 1.5,
+            "type": "roll-effect",
+            "key": "leeky-iajitsu-set-up",
+            "value": "Compendium.ptr2e.core-effects.Item.iv1l5qSwT9ykajV0",
             "predicate": [],
-            "mode": 1,
-            "priority": null,
+            "chance": 100,
+            "isFixedChance": true,
+            "affects": "self",
+            "alterations": [],
+            "dontMerge": false,
+            "mode": 2,
             "ignored": false
           },
           {
-            "type": "basic",
-            "key": "system.battleStats.accuracy.stage",
-            "value": -1,
+            "type": "roll-effect",
+            "key": "leeky-iajitsu-set-up",
+            "value": "Compendium.ptr2e.core-effects.Item.xhI2IzUDSXy4Y42z",
             "predicate": [],
+            "chance": 100,
+            "isFixedChance": true,
+            "affects": "self",
+            "alterations": [],
+            "dontMerge": false,
             "mode": 2,
-            "priority": null,
             "ignored": false
+          },
+          {
+            "type": "grant-item",
+            "key": "",
+            "value": "Compendium.ptr2e.core-abilities.Item.lAcCSoZ34eDzVLmb",
+            "predicate": [],
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "system.free",
+                "value": "true"
+              }
+            ],
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            },
+            "mode": 2,
+            "ignored": false,
+            "reevaluateOnUpdate": false,
+            "inMemoryOnly": false,
+            "allowDuplicate": true,
+            "track": false,
+            "replaceSelf": false
           }
         ],
         "slug": null,
         "traits": [],
         "removeAfterCombat": true,
         "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
         "stacks": 0
       },
       "disabled": false,
       "duration": {
         "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "combat": null
       },
       "description": "",
       "origin": null,
@@ -116,18 +194,23 @@
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "flags": {},
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": "always"
+        }
+      },
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "exportSource": null,
+        "coreVersion": "13.348",
         "systemId": "ptr2e",
-        "systemVersion": "0.10.0-alpha.4.1.0",
-        "createdTime": 1733442432996,
-        "modifiedTime": 1733442483526,
-        "lastModifiedBy": "IcBpMqhFuTck9VpX"
+        "systemVersion": "1.4.4.beta",
+        "lastModifiedBy": "mK35yvCqCgiTUvKf",
+        "modifiedTime": 1759315941267
       }
     }
   ],
-  "folder": "V4skAU6G3OH5fXad"
+  "flags": {},
+  "_id": "555g9lcczf4liTbC"
 }
