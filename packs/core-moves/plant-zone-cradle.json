@@ -1,0 +1,120 @@
+{
+  "folder": "BImk1fcMbR5akA4z",
+  "name": "Plant Zone Cradle",
+  "type": "move",
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "publication": {
+      "source": "Digidex",
+      "authors": [
+        "Fox"
+      ],
+      "notes": ""
+    },
+    "traits": [],
+    "actions": [
+      {
+        "name": "Plant Zone Cradle",
+        "slug": "plant-zone-cradle",
+        "type": "attack",
+        "img": "systems/ptr2e/img/svg/grass_icon.svg",
+        "traits": [
+          "digimon",
+          "friendly"
+        ],
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 5
+        },
+        "types": [
+          "grass"
+        ],
+        "category": "special",
+        "predicate": [],
+        "description": "<p>Effect: This attack has a 30% chance to inflict @Affliction[drowsy 5] and has +1 Effectiveness Stage vs @Trait[steel].</p>",
+        "range": {
+          "target": "emanation",
+          "distance": 4,
+          "unit": "m"
+        },
+        "power": 80,
+        "accuracy": 100
+      }
+    ],
+    "grade": "B"
+  },
+  "img": "systems/ptr2e/img/svg/grass_icon.svg",
+  "effects": [
+    {
+      "name": "Plant Zone Cradle",
+      "type": "passive",
+      "_id": "uUeXy9dTWHm8siz8",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "flat-modifier",
+            "key": "plant-zone-cradle-attack-effectiveness-stage",
+            "value": 1,
+            "predicate": [
+              "target:trait:steel"
+            ],
+            "mode": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          },
+          {
+            "type": "roll-effect",
+            "key": "plant-zone-cradle-attack-effectiveness-stage",
+            "value": "Compendium.ptr2e.core-effects.Item.drowsycondititem",
+            "predicate": [],
+            "chance": 30,
+            "isFixedChance": false,
+            "affects": "target",
+            "alterations": [],
+            "dontMerge": false,
+            "mode": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.350",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.6.beta",
+        "lastModifiedBy": null
+      }
+    }
+  ],
+  "flags": {},
+  "_id": "tpLDv5D2DSoYsxmN"
+}
