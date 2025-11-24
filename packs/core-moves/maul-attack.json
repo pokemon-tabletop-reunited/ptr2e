@@ -1,0 +1,71 @@
+{
+  "folder": "BImk1fcMbR5akA4z",
+  "name": "Maul Attack",
+  "type": "move",
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "publication": {
+      "source": "Digidex",
+      "authors": [
+        "Fox"
+      ],
+      "notes": ""
+    },
+    "traits": [],
+    "actions": [
+      {
+        "name": "Maul Attack (Retaliate)",
+        "slug": "maul-attack-retaliate",
+        "type": "attack",
+        "img": "systems/ptr2e/img/svg/normal_icon.svg",
+        "traits": [
+          "digimon",
+          "contact",
+          "punch",
+          "jaw",
+          "sharp"
+        ],
+        "cost": {
+          "activation": "free"
+        },
+        "types": [
+          "normal"
+        ],
+        "category": "physical",
+        "predicate": [],
+        "description": "<p>Trigger: The user receives a Physical Attack whilst in the [Mauling] state.</p>",
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "power": 100,
+        "accuracy": 100
+      },
+      {
+        "name": "Maul Attack Initiate Stance",
+        "slug": "maul-attack-initiate",
+        "description": "<p>Effect: The user gains [Mauling 2].</p>",
+        "traits": [],
+        "type": "generic",
+        "img": "systems/ptr2e/img/svg/normal_icon.svg",
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 8
+        },
+        "range": {
+          "target": "self",
+          "unit": "m"
+        }
+      }
+    ],
+    "grade": "C"
+  },
+  "img": "systems/ptr2e/img/svg/normal_icon.svg",
+  "effects": [],
+  "flags": {},
+  "_id": "r27rcwhmPbUyA3Zo"
+}
