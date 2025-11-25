@@ -22,7 +22,7 @@
       {
         "name": "The Tea to Be (Phony)",
         "slug": "the-tea-to-be-phony",
-"description": "<p>Effect: If the user is in their Phony Forme, the user has +15% EHR and RES and their Special- and Status-Category Attacks targeting other creatures have a 20% chance of giving their target @Affliction[delay 20].</p>",
+        "description": "<p>Effect: If the user is in their Phony Forme, the user has +15% EHR and RES and their Special- and Status-Category Attacks targeting other creatures have a 20% chance of giving their target @Affliction[delay 20].</p>",
         "traits": [],
         "type": "passive",
         "img": "systems/ptr2e/img/icons/ability_icon.webp",
@@ -31,7 +31,8 @@
         },
         "range": {
           "target": "self",
-          "unit": "m"
+          "unit": "m",
+          "distance": 10
         }
       },
       {
@@ -102,13 +103,13 @@
               "grantee": "detach",
               "granter": "cascade"
             },
-            "replaceSelf": true,
+            "allowDuplicate": false,
             "mode": 2,
             "ignored": false,
             "reevaluateOnUpdate": false,
             "inMemoryOnly": false,
-            "allowDuplicate": true,
-            "track": false
+            "track": false,
+            "replaceSelf": false
           }
         ],
         "slug": null,
@@ -130,18 +131,22 @@
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "flags": {},
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
         "exportSource": null,
-        "coreVersion": "13.347",
+        "coreVersion": "13.350",
         "systemId": "ptr2e",
-        "systemVersion": "1.4.2.beta",
-        "lastModifiedBy": null
+        "systemVersion": "1.4.6.beta",
+        "lastModifiedBy": "mK35yvCqCgiTUvKf",
+        "modifiedTime": 1762716569900
       }
     }
   ],
-  "flags": {},
   "_id": "Ufs68YY3hxV4gzFI"
 }

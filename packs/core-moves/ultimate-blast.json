@@ -1,0 +1,119 @@
+{
+  "folder": "BImk1fcMbR5akA4z",
+  "name": "Ultimate Blast",
+  "type": "move",
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "publication": {
+      "source": "Digidex",
+      "authors": [
+        "Fox"
+      ],
+      "notes": ""
+    },
+    "traits": [],
+    "actions": [
+      {
+        "name": "Ultimate Blast",
+        "slug": "ultimate-blast",
+        "type": "attack",
+        "img": "systems/ptr2e/img/svg/dragon_icon.svg",
+        "traits": [
+          "digimon"
+        ],
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 7
+        },
+        "types": [
+          "dragon"
+        ],
+        "category": "physical",
+        "predicate": [],
+        "description": "<p>Effect: This attack inflicts @UUID[Compendium.ptr2e.core-effects.uUvR309c9UV7myji]{Vulnerable (Dragon)} and gains +1 Effectiveness Stage vs @Trait[humanoid] creatures.</p>",
+        "range": {
+          "target": "creature",
+          "distance": 12,
+          "unit": "m"
+        },
+        "power": 110,
+        "accuracy": 100
+      }
+    ],
+    "grade": "A"
+  },
+  "img": "systems/ptr2e/img/svg/dragon_icon.svg",
+  "effects": [
+    {
+      "name": "Ultimate Blast",
+      "type": "passive",
+      "_id": "2VB4Vi04RjgY0UMg",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "flat-modifier",
+            "key": "ultimate-blast-attack-effectiveness-stage",
+            "value": 1,
+            "predicate": [
+              "target:trait:humanoid"
+            ],
+            "mode": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          },
+          {
+            "type": "roll-effect",
+            "key": "ultimate-blast-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.uUvR309c9UV7myji",
+            "predicate": [],
+            "chance": 100,
+            "isFixedChance": false,
+            "affects": "target",
+            "alterations": [],
+            "dontMerge": false,
+            "mode": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.350",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.6.beta",
+        "lastModifiedBy": null
+      }
+    }
+  ],
+  "flags": {},
+  "_id": "0qjXHLDkVq9V8rZW"
+}

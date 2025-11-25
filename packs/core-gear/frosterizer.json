@@ -1,0 +1,158 @@
+{
+  "folder": "V4skAU6G3OH5fXae",
+  "name": "Frosterizer",
+  "type": "equipment",
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "slug": "frosterizer",
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "traits": [
+      "combat",
+      "evolution",
+      "smoochum",
+      "jynx",
+      "sopranice",
+      "accessory",
+      "ice"
+    ],
+    "actions": [],
+    "description": "<p>Effect: The user spends 20% fewer PP (minimum 1) with Ice-Type Attacks. Smoochum, Jynx, and Sopranice take 25% less damage from Physical-Category Attacks.<br><br>A Jynx may consume this to trigger Evolution.</p>",
+    "container": null,
+    "crafting": {
+      "skill": "",
+      "spans": null,
+      "materials": []
+    },
+    "equipped": {
+      "carryType": "stowed",
+      "slot": "accessory",
+      "handsHeld": null
+    },
+    "grade": null,
+    "fling": {
+      "type": "ice",
+      "power": 85,
+      "accuracy": 85,
+      "hide": false,
+      "range": {
+        "target": "creature",
+        "distance": 4,
+        "unit": "m"
+      }
+    },
+    "quantity": 1,
+    "rarity": "common",
+    "identification": {
+      "misidentified": null,
+      "status": "identified",
+      "unidentified": {
+        "name": "Unidentified Item",
+        "img": "systems/ptu/css/images/icons/gear_icon.png",
+        "description": "<p>Unidentified Item</p>"
+      }
+    }
+  },
+  "img": "systems/ptr2e/img/item-icons/frosterizer.webp",
+  "effects": [
+    {
+      "name": "Frosterizer",
+      "type": "passive",
+      "_id": "RddM7Ipk12RH5fxy",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "alter-attack",
+            "key": "ice-attack",
+            "value": -1,
+            "predicate": [],
+            "mode": 2,
+            "ignored": false,
+            "property": "pp-cost",
+            "definition": []
+          },
+          {
+            "type": "ephemeral-modifier",
+            "key": "physical-attack-damage-percentile",
+            "value": 25,
+            "predicate": [
+              {
+                "or": [
+                  "target:item:species:smoochum",
+                  "target:item:species:jynx",
+                  "target:item:species:sopranice"
+                ]
+              }
+            ],
+            "mode": 1,
+            "ignored": false,
+            "hideIfDisabled": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.350",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.6.beta",
+        "lastModifiedBy": null
+      }
+    }
+  ],
+  "flags": {},
+  "_stats": {
+    "compendiumSource": "Compendium.ptr2e.core-gear.Item.PEWFTPhJ5xE2wXgF",
+    "duplicateSource": null,
+    "exportSource": {
+      "worldId": "2e-testbed",
+      "uuid": "Item.rU8sQMfOm3kay116",
+      "coreVersion": "13.350",
+      "systemId": "ptr2e",
+      "systemVersion": "1.4.6.beta"
+    },
+    "coreVersion": "13.350",
+    "systemId": "ptr2e",
+    "systemVersion": "1.4.6.beta",
+    "createdTime": 1759885356461,
+    "modifiedTime": 1759885356461,
+    "lastModifiedBy": "UTlFSVhgfIUeTsoW"
+  },
+  "ownership": {
+    "default": 0
+  },
+  "_id": "UTlFSVhgfIUeTsoa"
+}
