@@ -10,21 +10,16 @@ jobs:
   comment-on-failure:
     # Run if either a check_run or check_suite completed with conclusion 'failure'
     # and there is at least one associated pull request
-    if: ${{ (github.event_name == 'check_run' && github.event.check_run.conclusion == 'failure' && length(github.event.check_run.pull_requests) > 0) || (github.event_name == 'check_suite' && github.event.check_suite.conclusion == 'failure' && length(github.event.check_suite.pull_requests) > 0) }}
+    if: ${{ (github.event_name == 'check_run' && github.event.check_run.conclusion == 'failure' && github.event.check_run.pull_requests[0] != null) || (github.event_name == 'check_suite' && github.event.check_suite.conclusion == 'failure' && github.event.check_suite.pull_requests[0] != null) }}
     runs-on: ubuntu-latest
 
     steps:
-      - name: Debug print event name and limited payload
+      - name: Debug show event payload (first 2000 chars)
         run: |
           echo "GITHUB_EVENT_NAME=${GITHUB_EVENT_NAME:-$GITHUB_EVENT_NAME}"
-          echo "Event name: ${{ github.event_name }}"
-          if [ "${{ github.event_name }}" = "check_run" ]; then
-            echo "Check run conclusion: ${{ github.event.check_run.conclusion }}"
-            echo "Pull requests length: ${{ length(github.event.check_run.pull_requests) }}"
-          else
-            echo "Check suite conclusion: ${{ github.event.check_suite.conclusion }}"
-            echo "Pull requests length: ${{ length(github.event.check_suite.pull_requests) }}"
-          fi
+          echo "Event file: $GITHUB_EVENT_PATH"
+          # Show a limited amount of the event file for debugging
+          head -n 2000 "$GITHUB_EVENT_PATH" || true
 
       - name: Post failure comment
         uses: marocchino/sticky-pull-request-comment@v2
