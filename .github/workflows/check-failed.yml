@@ -52,77 +52,101 @@ jobs:
           echo "conclusion=${conclusion}" >> "$GITHUB_OUTPUT"
           echo "Determined number=${pr_number}, conclusion=${conclusion}"
 
-      - name: Fetch failing check message
+      - name: Fetch failing check message (generic extraction of the custom error)
         id: fetch_message
         run: |
           set -euo pipefail
           event="$GITHUB_EVENT_PATH"
-
           owner="${GITHUB_REPOSITORY%/*}"
           repo="${GITHUB_REPOSITORY#*/}"
           auth="Authorization: token ${GITHUB_TOKEN}"
+
+          # Determine commit/run ids if available
           commit_sha=$(jq -r '
             if (.check_run and (.check_run.head_sha|length>0)) then .check_run.head_sha
             elif (.check_suite and (.check_suite.head_sha|length>0)) then .check_suite.head_sha
             elif (.workflow_run and (.workflow_run.head_sha|length>0)) then .workflow_run.head_sha
             else "" end' "$event")
+          run_id=$(jq -r '.workflow_run.id // .check_run.check_suite.run_id // ""' "$event" || true)
 
-          echo "commit_sha=${commit_sha}" >&2
+          # helper to pick concise custom error line then extract substring after last '-'
+          extract_after_last_dash() {
+            input="$1"
+            # normalize newlines
+            input=$(printf "%s" "$input" | sed 's/\r//g')
+            # prefer a line containing keywords but skip stack trace 'at ' lines
+            line=$(printf "%s\n" "$input" | grep -i -E 'error|exception|failed|fatal|panic' | grep -v -E '^\s*at\s' | head -n1 || true)
+            if [ -z "$line" ]; then
+              # fallback: first non-empty, non-stacktrace line shorter than 2000 chars
+              line=$(printf "%s\n" "$input" | awk '!/^\s*$/ && !/^\s*at / { if(length($0) < 2000) { print; exit } }' || true)
+            fi
+            if [ -z "$line" ]; then
+              line=$(printf "%s\n" "$input" | awk 'NF{line=$0} END{print line}' || true)
+            fi
+            # if no dash present return the full line trimmed
+            if [ -z "$line" ]; then
+              echo ""
+              return 0
+            fi
+            if echo "$line" | grep -q '-'; then
+              # print text after the last '-' and trim whitespace
+              echo "$line" | awk -F'-' '{print $NF}' | sed 's/^[[:space:]]*//;s/[[:space:]]*$//'
+            else
+              echo "$line" | sed 's/^[[:space:]]*//;s/[[:space:]]*$//'
+            fi
+          }
 
-          # 1) Query check-runs for the commit
           message=""
+
+          # 1) Try to get check-run output & annotations
           if [ -n "$commit_sha" ]; then
             checks_resp=$(curl -s -H "$auth" -H "Accept: application/vnd.github+json" "https://api.github.com/repos/$owner/$repo/commits/$commit_sha/check-runs")
             check_id=$(echo "$checks_resp" | jq -r '.check_runs[] | select(.conclusion=="failure") | .id' | head -n1 || true)
             if [ -z "$check_id" ]; then
               check_id=$(echo "$checks_resp" | jq -r '.check_runs[] | select(.status=="completed") | .id' | head -n1 || true)
             fi
-            # If we have a check-run id, fetch its output and annotations
+
             if [ -n "$check_id" ]; then
               cr=$(curl -s -H "$auth" -H "Accept: application/vnd.github+json" "https://api.github.com/repos/$owner/$repo/check-runs/$check_id")
-              output_text=$(echo "$cr" | jq -r '.output.text // .output.summary // ""' | sed 's/\r//g' || true)
+              output_text=$(echo "$cr" | jq -r '.output.text // .output.summary // ""' || true)
               annotations=$(curl -s -H "$auth" -H "Accept: application/vnd.github+json" "https://api.github.com/repos/$owner/$repo/check-runs/$check_id/annotations" || true)
-              ann_snip=$(echo "$annotations" | jq -r '.[] | ("\(.path):\(.start_line):\(.annotation_level) - \(.message)" )' | sed 's/\r/ /g' | head -n 50 || true)
-              if [ -n "$output_text" ]; then
-                message="${output_text}"
-              fi
-              if [ -n "$ann_snip" ]; then
-                if [ -n "$message" ]; then
-                  message="${message}\n\nAnnotations:\n${ann_snip}"
-                else
-                  message="Annotations:\n${ann_snip}"
-                fi
+              ann_snip=$(echo "$annotations" | jq -r '.[] | "\(.path):\(.start_line):\(.annotation_level) - \(.message)"' || true)
+
+              message=$(extract_after_last_dash "$output_text" || true)
+              if [ -z "$message" ]; then
+                message=$(extract_after_last_dash "$ann_snip" || true)
               fi
             fi
           fi
 
-          # 2) Fallback: if message empty, try workflow run logs
-          if [ -z "$message" ]; then
-            run_id=$(jq -r '.workflow_run.id // .check_run.check_suite.run_id // ""' "$event")
-            echo "Fallback to logs; run_id=${run_id}" >&2
-            if [ -n "$run_id" ]; then
-              tmpzip="$(mktemp /tmp/logs-XXXXXX.zip)"
-              curl -sL -H "$auth" -H "Accept: application/vnd.github+json" -o "$tmpzip" "https://api.github.com/repos/$owner/$repo/actions/runs/$run_id/logs" || true
-              tmpdir="$(mktemp -d /tmp/logsdir-XXXXXX)"
-              unzip -q "$tmpzip" -d "$tmpdir" || true
-              # pick a likely logfile (largest .txt)
-              logfile=$(find "$tmpdir" -type f -name "*.txt" -print0 | xargs -0 ls -S 2>/dev/null | head -n1 || true)
-              if [ -n "$logfile" ]; then
-                tail_output=$(tail -n 500 "$logfile" || true)
-                errors=$(grep -i -E 'error|exception|fail(ed)?' "$logfile" -n -m 200 || true)
-                message="Log tail:\n${tail_output}\n\nMatching error lines:\n${errors}"
-              fi
-              rm -rf "$tmpzip" "$tmpdir" || true
-            fi
+          # 2) Fallback: search in workflow run logs
+          if [ -z "$message" ] && [ -n "$run_id" ]; then
+            tmpzip="$(mktemp /tmp/logs-XXXXXX.zip)"
+            curl -sL -H "$auth" -H "Accept: application/vnd.github+json" -o "$tmpzip" "https://api.github.com/repos/$owner/$repo/actions/runs/$run_id/logs" || true
+            tmpdir="$(mktemp -d /tmp/logsdir-XXXXXX)"
+            unzip -q "$tmpzip" -d "$tmpdir" || true
+
+            # combine tails of job log files for searching
+            combined=""
+            while IFS= read -r -d '' f; do
+              combined="${combined}\n\n==== FILE: ${f} ====\n$(tail -n 500 "$f" 2>/dev/null || true)"
+            done < <(find "$tmpdir" -type f -name "*.txt" -print0)
+
+            message=$(extract_after_last_dash "$combined" || true)
+
+            rm -rf "$tmpzip" "$tmpdir" || true
           fi
 
+          # 3) final fallback
           if [ -z "$message" ]; then
-            message="(no readable output found in check-run output, annotations, or logs)"
+            message="(no concise custom error found after last '-' in outputs/annotations/logs)"
           fi
 
-          # truncate to avoid huge comments
-          max=12000
+          # sanitize/truncate
+          message="$(echo "$message" | sed 's/^[[:space:]]*//;s/[[:space:]]*$//')"
+          max=1000
           clipped=$(echo -n "$message" | head -c $max)
+
           echo "error_message<<EOF" >> "$GITHUB_OUTPUT"
           echo "$clipped" >> "$GITHUB_OUTPUT"
           echo "EOF" >> "$GITHUB_OUTPUT"
