@@ -1,0 +1,78 @@
+{
+  "name": "Vulnerable (Ghost)",
+  "type": "effect",
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [],
+      "notes": ""
+    },
+    "description": "<p>This effect renders @Trait[ghost] attacks one stage more effective against the victim.</p>",
+    "traits": []
+  },
+  "img": "systems/ptr2e/img/svg/ghost_icon.svg",
+  "effects": [
+    {
+      "name": "Vulnerable (Ghost)",
+      "type": "affliction",
+      "_id": "FsnUM3Ia6IRPpbTl",
+      "img": "systems/ptr2e/img/svg/ghost_icon.svg",
+      "system": {
+        "changes": [
+          {
+            "type": "ephemeral-modifier",
+            "key": "ghost-attack-effectiveness-stage",
+            "value": 1,
+            "predicate": [],
+            "mode": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0,
+        "priority": 50,
+        "formula": "",
+        "type": "damage"
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null,
+        "turns": 3,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.350",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.6.beta",
+        "lastModifiedBy": null
+      }
+    }
+  ],
+  "flags": {},
+  "_id": "Az1Mu3y5PtsWsKV9"
+}

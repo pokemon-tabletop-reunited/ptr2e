@@ -1,0 +1,55 @@
+{
+  "name": "Splintered Stormshards",
+  "type": "move",
+  "img": "systems/ptr2e/img/svg/rock_icon.svg",
+  "system": {
+    "slug": "spintered-stormshards",
+    "actions": [
+      {
+        "slug": "spintered-stormshards",
+        "name": "Spintered Stormshards",
+        "type": "attack",
+        "traits": [
+          "zenith",
+          "move-locked",
+          "missile",
+          "crit-1"
+        ],
+        "range": {
+          "target": "cone",
+          "distance": 7,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "trigger": "<p>User's partner uses Z-Pose! and triggers the appropriate Z-Power-Crystal.</p>"
+        },
+        "category": "physical",
+        "power": 190,
+        "accuracy": 100,
+        "types": [
+          "rock"
+        ],
+        "description": "<p>Trigger: User's partner uses Z-Pose! and triggers the appropriate Z-Power-Crystal.</p><p>Effect: All [Terrain] effects on the Field are cleared.</p><p>Requirement: [Lycanroc] Z-Power-Crystal as an Accessory Item and Stone Edge on the user's Active List.</p>",
+        "free": true,
+        "img": "icons/svg/explosion.svg",
+        "predicate": []
+      }
+    ],
+    "grade": "S",
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "traits": [],
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "arnnhoFXG3WGE9cW",
+  "effects": []
+}
