@@ -35,8 +35,8 @@ class ItemPTR2e<
   }
 
   get grantedBy(): ItemPTR2e | ActiveEffectPTR2e | null {
-    return (this.actor?.items.get(this.flags.ptr2e.grantedBy?.id ?? "") as Maybe<ItemPTR2e>)
-      ?? (this.actor?.effects.get(this.flags.ptr2e.grantedBy?.id ?? "") as Maybe<ActiveEffectPTR2e>)
+    return (this.actor?.items.get(this.flags.ptr2e?.grantedBy?.id ?? "") as Maybe<ItemPTR2e>)
+      ?? (this.actor?.effects.get(this.flags.ptr2e?.grantedBy?.id ?? "") as Maybe<ActiveEffectPTR2e>)
       ?? null;
   }
 
