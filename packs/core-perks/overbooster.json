@@ -7,24 +7,25 @@
   "system": {
     "actions": [
       {
-        "name": "Overbooster",
-        "slug": "overbooster",
-        "description": "<p>The user loses a Tick of HP. The user's next Physical- or Special-Category Attack deals +20% more damage. This can be done twice on each of the user's Activations.</p>",
-        "traits": [],
+        "name": "Overbooster (Tick)",
+        "slug": "overbooster-tick",
+        "description": "<p>The user loses @Tick[-1]. The user Ticks their Overbooster Clock by 1 Span.<br><br>This may only be done up two times during each of the user's Activations.</p>",
+        "traits": [
+          "priority-10"
+        ],
         "type": "generic",
         "range": {
           "target": "self",
           "unit": "m"
         },
         "cost": {
-          "activation": "free",
-          "powerPoints": 1
+          "activation": "free"
         },
-        "img": "icons/svg/explosion.svg"
+        "img": "systems/ptr2e/img/perk-icons/Combat.svg"
       }
     ],
     "slug": "overbooster",
-    "description": "<p>The user spends a Tick of HP and 1 PP. The user's next Physical- or Special-Category Attack deals +20% more damage. This can be done twice on each of the user's Activations.</p>",
+    "description": "<p>The user maintains an Overbooster Clock, maximum 20 Spans. Up to twice per Activation as a Free Action at @Trait[priority-10], the user can Tick the Overbooster Clock by 1 Span and lose @Tick[-1].</p><p>The user can choose to empty the Overbooster Clock as a Free Action when they declare a Physical- or Special-Category Attack, increasing the EHR and Damage of the Attack by +2% and +20% respectively per Span consumed. The Overbooster Clock is emptied when the user enters or exits combat.</p>",
     "traits": [],
     "prerequisites": [],
     "cost": 3,
@@ -70,5 +71,124 @@
       "notes": ""
     }
   },
-  "effects": []
+  "effects": [
+    {
+      "name": "Overbooster",
+      "type": "passive",
+      "_id": "BZCTFJh2KJosyZvX",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "create-clock",
+            "key": "tsKvTmarivU7SRqz",
+            "value": 0,
+            "predicate": [],
+            "max": 20,
+            "color": "#e02e6f",
+            "private": false,
+            "label": "Overbooster",
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "percentile-modifier",
+            "key": "damaging-attack-damage",
+            "value": "20*@actor.clocks.tsKvTmarivU7SRqz",
+            "predicate": [],
+            "mode": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          },
+          {
+            "type": "ephemeral-effect",
+            "key": "damaging-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.cTqkSSjz3mvoSjwW",
+            "predicate": [],
+            "affects": "self",
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "system.changes.0.label",
+                "value": "Overbooster EHR"
+              },
+              {
+                "mode": 5,
+                "property": "system.changes.0.value",
+                "value": "2*@actor.clocks.tsKvTmarivU7SRqz"
+              }
+            ],
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "roll-effect",
+            "key": "overbooster-tick-generic",
+            "value": "Compendium.ptr2e.core-effects.Item.4DlXFTVooz07YcDm",
+            "predicate": [],
+            "chance": 100,
+            "isFixedChance": true,
+            "affects": "target",
+            "alterations": [],
+            "dontMerge": false,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "roll-effect",
+            "key": "overbooster-tick-generic",
+            "value": "Compendium.ptr2e.core-effects.Item.w6LCoIGG3DiKRJB0",
+            "predicate": [],
+            "chance": 100,
+            "isFixedChance": true,
+            "affects": "target",
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "system.changes.0.key",
+                "value": "tsKvTmarivU7SRqz"
+              }
+            ],
+            "dontMerge": false,
+            "mode": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": false,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#e02e6f",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": "never"
+        }
+      },
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.350",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.6.beta",
+        "createdTime": 1764113923903,
+        "modifiedTime": 1764117302727,
+        "lastModifiedBy": "UTlFSVhgfIUeTsoW"
+      }
+    }
+  ]
 }

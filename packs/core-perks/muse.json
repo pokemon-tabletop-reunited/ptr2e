@@ -10,21 +10,17 @@
       {
         "name": "Muse",
         "slug": "muse",
-        "description": "<p>Effect: As a Simple Action, the user designates an ally as their Muse, setting a Muse Clock on the user's sheet with 6 Spans. When the designated ally ends an Activation, tick one Span on the Muse Clock. For every Span that is filled, the user's Attacks have their Power increased by 20%, up to a max increase of 100%. When the Muse Clock expires, the user is healed of all Afflictions with the @Trait[major-affliction] or @Trait[minor-affliction] traits.</p><p>The Muse Clock disappears if either the user or their Muse is switched out or @Affliction[fainted], or if combat ends. The user may only possess one Muse Clock at any given time.</p>",
+        "description": "<p>Effect: As a Simple Action, the user designates an ally as their Muse, setting a Muse Clock on the user's sheet with 6 Spans. When the designated ally ends an Activation, tick one Span on the Muse Clock. For every Span that is filled, the user's Attacks have their Power and EHR increased by +20% and +10%, up to a max of +100% and +50% respectively. When the Muse Clock expires, the user is healed of all Afflictions with the @Trait[major-affliction] or @Trait[minor-affliction] traits.</p><p>The Muse Clock disappears if either the user or their Muse is switched out or @Affliction[fainted], or if combat ends. The user may only possess one Muse Clock at any given time.</p>",
         "traits": [],
         "type": "generic",
         "img": "systems/ptr2e/img/conditions/cheered.svg",
         "range": {
           "target": "ally",
-          "unit": "m",
-          "distance": 0
+          "unit": "m"
         },
         "cost": {
-          "activation": "simple",
-          "powerPoints": 0
-        },
-        "variant": null,
-        "ephemeralVariant": false
+          "activation": "simple"
+        }
       }
     ],
     "description": "<p>Effect: As a Simple Action, the user designates an ally as their Muse, setting a Muse Clock on the user's sheet with 6 Spans. When the designated ally ends an Activation, tick one Span on the Muse Clock. For every Span that is filled, the user's Attacks have their Power increased by 20%, up to a max increase of 100%. When the Muse Clock expires, the user is healed of all Afflictions with the @Trait[major-affliction] or @Trait[minor-affliction] traits.</p><p>The Muse Clock disappears if either the user or their Muse is switched out or @Affliction[fainted], or if combat ends. The user may only possess one Muse Clock at any given time.</p>",
@@ -77,13 +73,97 @@
         "PTR 2e Team"
       ],
       "notes": ""
-    },
-    "originSlug": null,
-    "variant": null,
-    "mode": null
+    }
   },
   "img": "systems/ptr2e/img/conditions/cheered.svg",
-  "effects": [],
+  "effects": [
+    {
+      "name": "Muse",
+      "type": "passive",
+      "_id": "cRL4JX53XpfmrFQu",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "create-clock",
+            "key": "QMg4CYIKEc9QM2lz",
+            "value": 0,
+            "predicate": [],
+            "label": "Muse",
+            "max": 6,
+            "color": "#c2f55f",
+            "private": false,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "percentile-modifier",
+            "key": "damaging-attack-power",
+            "value": "max(100,20*@actor.clocks.QMg4CYIKEc9QM2lz)",
+            "predicate": [],
+            "mode": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          },
+          {
+            "type": "ephemeral-effect",
+            "key": "attack",
+            "value": "Compendium.ptr2e.core-effects.Item.cTqkSSjz3mvoSjwW",
+            "predicate": [],
+            "affects": "self",
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "system.changes.0.label",
+                "value": "Muse EHR"
+              },
+              {
+                "mode": 5,
+                "property": "system.changes.0.value",
+                "value": "max(50,10*@actor.clocks.QMg4CYIKEc9QM2lz)"
+              }
+            ],
+            "mode": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": false,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#c2f55f",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.350",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.6.beta",
+        "createdTime": 1764117451717,
+        "modifiedTime": 1764117735036,
+        "lastModifiedBy": "UTlFSVhgfIUeTsoW"
+      }
+    }
+  ],
   "_id": "OXVqgQQ78QUgRinK",
   "folder": "UZGN1glVNXLieg48"
 }
