@@ -2177,15 +2177,8 @@ class ActorPTR2e<
       }
     }
 
-    if (changed.system?.shield !== undefined) {
-      if (
-        typeof changed.system.shield.value === "number" &&
-        changed.system.shield.value > this.system.shield.value
-      ) {
-        changed.system.shield.max ??= changed.system.shield.value;
-      } else if (changed.system.shield.value === 0) {
-        changed.system.shield.max = 0;
-      }
+    if(changed.system?.shield?.value !== undefined && (changed.system.shield.value as number) > this.system.shield.max) {
+      changed.system.shield.value = this.system.shield.max;
     }
 
     if (changed.system?.traits !== undefined && this.system?.traits?.suppressedTraits?.size) {
@@ -2470,8 +2463,7 @@ class ActorPTR2e<
     await this.update({
       "system.health.value": health,
       "system.powerPoints.value": this.system.powerPoints?.max ?? 0,
-      "system.shield.value": 0,
-      "system.shield.max": 0
+      "system.shield.value": 0
     });
 
     // remove effects
