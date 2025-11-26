@@ -430,6 +430,10 @@ class ActiveEffectPTR2e<
           const existing = (parent.effects.contents as ActiveEffectPTR2e[]).find(
             (e) => e.slug === sluggify(source.name)
           );
+          if(existing?.slug === "duel") {
+            ui.notifications.warn("Only one Duel effect can be applied at a time.");
+            return [];
+          }
           if (existing?.system.stacks) {
             existing.update({ "system.stacks": existing.system.stacks + (source.system?.stacks || 1) });
             return [];
