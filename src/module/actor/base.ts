@@ -945,7 +945,7 @@ class ActorPTR2e<
 
   async applyDamage(
     damage: number,
-    { silent, healShield } = { silent: false, healShield: false }
+    { silent, healShield, flat } = { silent: false, healShield: false, flat: false }
   ) {
     // If this is damage, apply the vulnerability multiplier
     const multiplier = (this.system.modifiers["vulnerabilityMultiplier"] ?? 1)
@@ -955,7 +955,7 @@ class ActorPTR2e<
     }
     // Damage is applied to shield first, then health
     // Shields cannot be healed
-    if (damage > 0 || healShield) {
+    if ((damage > 0 && !flat) || healShield) {
       const damageAppliedToShield = Math.min(damage || 0, this.system.shield.value);
       if (this.system.shield.value > 0 && damageAppliedToShield === 0) return 0;
       if (damageAppliedToShield > 0 || healShield) {
