@@ -359,25 +359,31 @@ class CheckPTR2e {
         ignoreImmune: !!targetContext.options.has("self:action:trait:ignore-type-immunity"),
         targetUnaware: !!targetContext.target?.actor.rollOptions.all["special:unaware"],
         originUnaware: !!targetContext.self.actor.rollOptions.all["special:unaware"],
+        strikes: targetCheck.total.strikes?.flat ?? 0,
+        hits: targetCheck.total.hits?.flat ?? 0
       };
 
       const rolls: {
         accuracy: Rolled<CheckRoll> | null;
         crit: Rolled<CheckRoll> | null;
         damage: Rolled<CheckRoll> | null;
+        amount: Rolled<CheckRoll> | null;
       } = await (async () => {
-        const [accuracy, crit, damage] = await Promise.all([
+        const [accuracy, crit, amount, damage] = await Promise.all([
           skippedRolls.has("accuracy")
             ? null
             : AttackRoll.createFromData(data, options, "accuracy")?.evaluate() ?? null,
           skippedRolls.has("crit")
             ? null
             : AttackRoll.createFromData(data, options, "crit")?.evaluate() ?? null,
+          skippedRolls.has("amount") || options.strikes == 0
+            ? null
+            : AttackRoll.createFromData(data, options, "amount")?.evaluate() ?? null,
           skippedRolls.has("damage")
             ? null
             : AttackRoll.createFromData(data, options, "damage")?.evaluate() ?? null,
         ]);
-        return { accuracy, crit, damage };
+        return { accuracy, crit, damage, amount };
       })();
 
       const degrees: {
