@@ -4,7 +4,7 @@
   "img": "icons/magic/control/hypnosis-mesmerism-watch.webp",
   "system": {
     "actions": [],
-    "description": "<p>Effect: While slotted, the user maintains a Pendulum Clock, 6 Spans in size. Each time the user resolves the same specific attack between consecutive Activations, tick the Clock 1 Span. For each each filled Span on the Clock, that attack's Power increased by 20%, up to a max increase of 100%. This boost this Ability resets if the user is switched out, @Affliction[fainted], combat ends, or the user declares a different attack.</p>",
+    "description": "<p>Effect: While slotted, the user maintains a Pendulum Clock, 5 Spans in size. Each time the user resolves the same specific attack between consecutive Activations, tick the Clock 1 Span. For each each filled Span on the Clock, that attack's Power increased by 20%, up to a max increase of 100%. This boost this Ability resets if the user is switched out, @Affliction[fainted], combat ends, or the user declares a different attack.</p>",
     "traits": [
       "innate"
     ],
@@ -17,9 +17,75 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
+      ],
+      "notes": ""
     }
   },
   "_id": "Jxbaa5q8xBqN1veZ",
-  "effects": []
+  "effects": [
+    {
+      "name": "Pendulum",
+      "type": "passive",
+      "_id": "cqNyFl9bPTLpFZSn",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "create-clock",
+            "key": "pendulumClockSlf",
+            "value": 0,
+            "predicate": [],
+            "max": 5,
+            "color": "#800080",
+            "private": false,
+            "label": "Pendulum",
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "key": "attack-power",
+            "value": "20*@actor.clocks.pendulumClockSlf",
+            "predicate": [],
+            "mode": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.6.beta",
+        "createdTime": 1765281750852,
+        "modifiedTime": 1765840139278,
+        "lastModifiedBy": "5ImYyhOS2D6D7ypO"
+      }
+    }
+  ]
 }
