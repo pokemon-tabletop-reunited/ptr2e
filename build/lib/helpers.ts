@@ -1,8 +1,9 @@
 import fs from "fs";
 import path from "path";
+import core from "@actions/core";
 
 const PackError = (message: string): void => {
-    console.error(`Error: ${message}`);
+    core.setFailed(message);
     process.exit(1);
 };
 
