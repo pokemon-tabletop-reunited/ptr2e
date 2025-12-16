@@ -19,7 +19,12 @@
       "type": "untyped",
       "power": 40,
       "accuracy": 100,
-      "hide": null
+      "hide": false,
+      "range": {
+        "target": "creature",
+        "distance": 10,
+        "unit": "m"
+      }
     },
     "rarity": "common",
     "consumableType": "other",
@@ -30,7 +35,7 @@
       "held",
       "fling"
     ],
-    "description": "All allies of the target on the Floor are teleported to the target. The target and its allies gain @Affliction[bound] 5.",
+    "description": "<p>All allies of the target on the Floor are teleported to the target. The target and its allies gain @Affliction[bound] 5. This can be broken out of with a -30 Lift Check or  -10 Thaumaturgy check.</p>",
     "quantity": 1,
     "slug": "lasso-orb",
     "stack": 1,
@@ -42,8 +47,10 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
-    }
+      ],
+      "notes": ""
+    },
+    "actions": []
   },
   "_id": "j4ovHYdNWAAAHvHM",
   "effects": [],
