@@ -12,8 +12,7 @@
         "traits": [
           "social",
           "sonic",
-          "friendly",
-          "growl-at"
+          "friendly"
         ],
         "range": {
           "target": "cone",
@@ -30,10 +29,8 @@
           "normal"
         ],
         "description": "<p>Effect: All valid targets lose -1 ATK Stages for 5 Activations.</p>",
-        "contestType": "",
-        "contestEffect": "",
-        "free": false,
-        "slot": null
+        "img": "icons/svg/explosion.svg",
+        "predicate": []
       }
     ],
     "grade": "C",
@@ -45,8 +42,10 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
-    }
+      ],
+      "notes": ""
+    },
+    "traits": []
   },
   "_id": "j42qPlBO6UlbdaV6",
   "effects": [
@@ -67,7 +66,10 @@
             "label": "Effect Roll",
             "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "isFixedChance": false,
+            "alterations": [],
+            "dontMerge": false
           }
         ],
         "slug": null,
@@ -77,7 +79,9 @@
         "stacks": 0,
         "priority": 50,
         "formula": "",
-        "type": "damage"
+        "type": "damage",
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
@@ -99,12 +103,13 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.350",
         "systemId": "ptr2e",
         "systemVersion": "0.10.0-alpha.2.2.1",
         "createdTime": 1726136939979,
         "modifiedTime": 1726136992739,
-        "lastModifiedBy": "IcBpMqhFuTck9VpX"
+        "lastModifiedBy": "IcBpMqhFuTck9VpX",
+        "exportSource": null
       }
     }
   ]
