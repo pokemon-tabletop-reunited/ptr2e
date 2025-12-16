@@ -1,0 +1,134 @@
+{
+  "folder": "BImk1fcMbR5akA4z",
+  "name": "Plasmadness",
+  "type": "move",
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "publication": {
+      "source": "Digidex",
+      "authors": [
+        "Fox"
+      ],
+      "notes": ""
+    },
+    "traits": [],
+    "actions": [
+      {
+        "name": "Plasmadness",
+        "slug": "plasmadness",
+        "type": "attack",
+        "img": "systems/ptr2e/img/svg/dark_icon.svg",
+        "traits": [
+          "digimon",
+          "contact",
+          "dash"
+        ],
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 6
+        },
+        "types": [
+          "dark"
+        ],
+        "category": "physical",
+        "predicate": [],
+        "description": "<p>Effect: This attack inflicts @UUID[Compendium.ptr2e.core-effects.26IPhMibQ0lzvAqS]{Vulnerable (Dark)} and gains +1 Effectiveness Stage vs @Trait[data] and @Trait[angel] creatures, stacking cumulatively.</p>",
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "power": 100,
+        "accuracy": 100
+      }
+    ],
+    "grade": "B"
+  },
+  "img": "systems/ptr2e/img/svg/dark_icon.svg",
+  "effects": [
+    {
+      "name": "Plasmadness",
+      "type": "passive",
+      "_id": "0WCXw1w0RviRU8K0",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "plasmadness-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.26IPhMibQ0lzvAqS",
+            "predicate": [],
+            "chance": 100,
+            "isFixedChance": false,
+            "affects": "target",
+            "alterations": [],
+            "dontMerge": false,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "flat-modifier",
+            "key": "plasmadness-attack-effectiveness-stage",
+            "value": 1,
+            "predicate": [
+              "target:trait:data"
+            ],
+            "label": "Vs Data",
+            "mode": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          },
+          {
+            "type": "flat-modifier",
+            "key": "plasmadness-attack-effectiveness-stage",
+            "value": 1,
+            "predicate": [
+              "target:trait:angel"
+            ],
+            "label": "Vs Angel",
+            "mode": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.350",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.6.beta",
+        "lastModifiedBy": null
+      }
+    }
+  ],
+  "flags": {},
+  "_id": "DWQzOaSON16SV7Ta"
+}

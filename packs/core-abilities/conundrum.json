@@ -13,7 +13,6 @@
         "type": "generic",
         "cost": {
           "activation": "free",
-          "powerPoints": 2,
           "trigger": "<p>The user is hit with a [Contact] attack.</p>"
         },
         "range": {
@@ -22,7 +21,7 @@
           "unit": "m"
         },
         "description": "<p>Trigger: The user is hit with a [Contact] attack.</p><p>Effect: The attacking creature has a 30% chance of gaining @Affliction[confused] 5.</p>",
-        "img": "icons/svg/explosion.svg"
+        "img": "systems/ptr2e/img/conditions/confused.svg"
       }
     ],
     "description": "<p>Trigger: The user is hit with a [Contact] attack.</p><p>Effect: The attacking creature has a 30% chance of gaining @Affliction[confused] 5.</p>",
@@ -38,7 +37,8 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
+      ],
+      "notes": ""
     }
   },
   "_id": "PGSMbE2lN3u4j9wP",
@@ -59,14 +59,19 @@
             "affects": "origin",
             "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "isFixedChance": false,
+            "alterations": [],
+            "dontMerge": false
           }
         ],
         "slug": null,
         "traits": [],
         "removeAfterCombat": true,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
@@ -88,12 +93,13 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.350",
         "systemId": "ptr2e",
         "systemVersion": "0.10.0-alpha.2.4.2",
         "createdTime": 1728599422002,
         "modifiedTime": 1728635635603,
-        "lastModifiedBy": "IcBpMqhFuTck9VpX"
+        "lastModifiedBy": "IcBpMqhFuTck9VpX",
+        "exportSource": null
       }
     }
   ]
