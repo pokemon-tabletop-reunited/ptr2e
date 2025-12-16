@@ -1,0 +1,121 @@
+{
+  "folder": "BImk1fcMbR5akA4z",
+  "name": "Calydon Arcus",
+  "type": "move",
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "publication": {
+      "source": "Digidex",
+      "authors": [
+        "Fox"
+      ],
+      "notes": ""
+    },
+    "traits": [],
+    "actions": [
+      {
+        "name": "Calydon Arcus",
+        "slug": "calydon-arcus",
+        "type": "attack",
+        "img": "systems/ptr2e/img/svg/ice_icon.svg",
+        "traits": [
+          "digimon",
+          "5-strike",
+          "partial-automation"
+        ],
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 9
+        },
+        "types": [
+          "ice"
+        ],
+        "category": "special",
+        "predicate": [],
+        "description": "<p>Effect: This attack gains +1 Effectiveness Stage, stacking cumulatively, if the target has a @Trait[stage-change] effect, has the @Affliction[stunted] affliction or the @Trait[fire] trait.</p>",
+        "range": {
+          "target": "creature",
+          "distance": 12,
+          "unit": "m"
+        },
+        "power": 30,
+        "accuracy": 100
+      }
+    ],
+    "grade": "S"
+  },
+  "img": "systems/ptr2e/img/svg/ice_icon.svg",
+  "effects": [
+    {
+      "name": "Calydon Arcus",
+      "type": "passive",
+      "_id": "JAQIB9qc8J9H6t0D",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "flat-modifier",
+            "key": "calydon-arcus-effectiveness-stage",
+            "value": 1,
+            "predicate": [
+              "target:affliction:stunted"
+            ],
+            "label": "Vs Stunted",
+            "mode": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          },
+          {
+            "type": "flat-modifier",
+            "key": "calydon-arcus-effectiveness-stage",
+            "value": 1,
+            "predicate": [
+              "target:trait:fire"
+            ],
+            "label": "Vs Fire",
+            "mode": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.6.beta",
+        "lastModifiedBy": null
+      }
+    }
+  ],
+  "flags": {},
+  "_id": "hcexVRiwtfprCRuo"
+}

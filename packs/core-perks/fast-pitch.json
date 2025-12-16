@@ -11,24 +11,24 @@
       }
     ],
     "cost": 2,
-    "description": "<p>You may spend 4 PP to Fling a [Ball] or [Concoction] item as a Free Action at [Delay 3] [Interrupt 2] once before the start of your next Activation.</p>",
+    "description": "<p>You may spend 4 PP to Fling a @Trait[ball] or @Trait[concoction] item as a Free Action at @Trait[flinch 30], @Trait[interrupt-2] once before the start of your next Activation.</p>",
     "actions": [
       {
         "name": "Fast Pitch",
         "slug": "fast-pitch",
-        "description": "<p>The user may freely Fling a @Trait[ball] or @Trait[concoction] Item. This Action is then @Affliction[disabled 1].</p>",
+        "description": "<p>You may spend 4 PP to Fling a @Trait[ball] or @Trait[concoction] item as a Free Action at @Trait[flinch 30], @Trait[interrupt-2] once before the start of your next Activation.</p>",
         "cost": {
           "activation": "free",
           "powerPoints": 4
         },
         "type": "generic",
         "traits": [
-          "flinch-30",
-          "interrupt-2"
+          "interrupt-2",
+          "flinch-30"
         ],
         "img": "systems/ptr2e/img/perk-icons/Capture%20Spec.svg",
         "range": {
-          "target": "self",
+          "target": "enemy",
           "unit": "m"
         }
       }
