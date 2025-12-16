@@ -169,46 +169,19 @@
     ]
   },
   {
-    "slug": "blindsight-x",
-    "label": "Blindsight X",
+    "slug": "blindsense-x",
+    "label": "Blindsense X",
     "related": [],
-    "description": "This creature is blind and can use Listen in place of Spot Hidden. Otherwise continued capable of \"seeing\" in it' vicinity, which is Xm."
-  },
-  {
-    "slug": "blindsight-5",
-    "label": "Blindsight 5",
-    "related": [],
-    "description": "This creature is blind and can use Listen in place of Spot Hidden. Otherwise continued capable of \"seeing\" in it' vicinity, which is 5m."
-  },
-  {
-    "slug": "blindsight-10",
-    "label": "Blindsight 10",
-    "related": [],
-    "description": "This creature is blind and can use Listen in place of Spot Hidden. Otherwise continued capable of \"seeing\" in it' vicinity, which is 10."
-  },
-  {
-    "slug": "blindsight-15",
-    "label": "Blindsight 15",
-    "related": [],
-    "description": "This creature is blind and can use Listen in place of Spot Hidden. Otherwise continued capable of \"seeing\" in it' vicinity, which is 15m."
-  },
-  {
-    "slug": "blindsight-20",
-    "label": "Blindsight 20",
-    "related": [],
-    "description": "This creature is blind and can use Listen in place of Spot Hidden. Otherwise continued capable of \"seeing\" in it' vicinity, which is 20m."
-  },
-  {
-    "slug": "blindsight-25",
-    "label": "Blindsight 25",
-    "related": [],
-    "description": "This creature is blind and can use Listen in place of Spot Hidden. Otherwise continued capable of \"seeing\" in it' vicinity, which is 25m."
-  },
-  {
-    "slug": "blindsight-30",
-    "label": "Blindsight 30",
-    "related": [],
-    "description": "This creature is blind and can use Listen in place of Spot Hidden. Otherwise continued capable of \"seeing\" in it' vicinity, which is 30m."
+    "description": "Lists the range of a creature's Blindsense, equal to X meters.",
+    "placeholders": [
+      {
+        "keyPattern": "\\blindsense-d+",
+        "labelPattern": "X",
+        "valuePattern": "\\d+",
+        "descriptionPattern": "Lists the range of a creature's Blindsense, equal to X meters.",
+        "descriptionReplacement": "This creature can sense its surroundings without relying on sight, up to {{x}} meters."
+      }
+    ]
   },
   {
     "slug": "breathing-bubble",
@@ -2666,6 +2639,12 @@
     "description": "Denotes an item stored in the Belt equipment slot."
   },
   {
+    "slug": "held",
+    "label": "Held",
+    "related": [],
+    "description": "Denotes if an item is able to be slotted in a Held Slot."
+  },
+  {
     "slug": "fling",
     "label": "Fling",
     "related": [],
@@ -2694,6 +2673,42 @@
     "label": "Ball",
     "related": [],
     "description": "Items with this trait are spherical and perfectly sized to be thrown. Gear with self-compression and miniaturization technology, such as Poke Balls and Pester Balls, usually possess this trait."
+  },
+  {
+    "slug": "concoction",
+    "label": "Concoction",
+    "related": [],
+    "description": "Denotes if an item was created or improved with the wiles of a tricksy madlad. Generally, these tend to be much more suited for combat, and characteristically may backfire spectacularly."
+  },
+  {
+    "slug": "berry",
+    "label": "Berry",
+    "related": [],
+    "description": "These items are small to medium sized (usually smaller than an adult human's clenched fist) pulpy fruits that lack stones or pits. Generally, these @Trait[food] items are beloved by @Trait[pokemon] and many other creatures besides, and have significant nutritional and combat benefits."
+  },
+  {
+    "slug": "natural",
+    "label": "Natural",
+    "related": [],
+    "description": "Denotes if an item is biological in nature, and is naturally-occurring."
+  },
+  {
+    "slug": "food",
+    "label": "Food",
+    "related": [],
+    "description": "Denotes if an item is edible to most creatures. When @Trait[consumable] items with this Trait are Flung, they are Used on the target of the Fling."
+  },
+  {
+    "slug": "restorative",
+    "label": "Restorative",
+    "related": [],
+    "description": "Denotes if an item is medicinal in use or application. While a number of @Trait[natural] items have this trait, a number of manufactured items do as well."
+  },
+  {
+    "slug": "capture",
+    "label": "Capture",
+    "related": [],
+    "description": "Gear with this trait are able to Capture creatures, usually adding them to the user's Party as a result. However, the specifics of how this gear is able to do so and what happens with and resulting from that Capturing can differ between different sorts of gear."
   },
   {
     "slug": "x-strike",
@@ -2837,79 +2852,79 @@
     "slug": "blast-x",
     "label": "Blast X",
     "related": [],
-    "description": "Utilized with ranged attacks and effects. Affects entities within a X.5m radius circle/sphere, centered on a selected space."
+    "description": "Utilized with ranged attacks and effects. Affects entities within a X+1m radius circle/sphere, centered on a selected space."
   },
   {
     "slug": "blast-1",
     "label": "Blast 1",
     "related": [],
-    "description": "Affects entities within a 1.5m radius circle/sphere, centered on a selected space."
+    "description": "Affects entities within a 2m radius circle/sphere, centered on a selected space."
   },
   {
     "slug": "blast-2",
     "label": "Blast 2",
     "related": [],
-    "description": "Affects entities within a 2.5m radius circle/sphere, centered on a selected space."
+    "description": "Affects entities within a 3m radius circle/sphere, centered on a selected space."
   },
   {
     "slug": "blast-3",
     "label": "Blast 3",
     "related": [],
-    "description": "Affects entities within a 3.5m radius circle/sphere, centered on a selected space."
+    "description": "Affects entities within a 4m radius circle/sphere, centered on a selected space."
   },
   {
     "slug": "blast-4",
     "label": "Blast 4",
     "related": [],
-    "description": "Affects entities within a 4.5m radius circle/sphere, centered on a selected space."
+    "description": "Affects entities within a 5m radius circle/sphere, centered on a selected space."
   },
   {
     "slug": "blast-5",
     "label": "Blast 5",
     "related": [],
-    "description": "Affects entities within a 5.5m radius circle/sphere, centered on a selected space."
+    "description": "Affects entities within a 6m radius circle/sphere, centered on a selected space."
   },
   {
     "slug": "blast-6",
     "label": "Blast 6",
     "related": [],
-    "description": "Affects entities within a 6.5m radius circle/sphere, centered on a selected space."
+    "description": "Affects entities within a 7m radius circle/sphere, centered on a selected space."
   },
   {
     "slug": "blast-7",
     "label": "Blast 7",
     "related": [],
-    "description": "Affects entities within a 7.5m radius circle/sphere, centered on a selected space."
+    "description": "Affects entities within a 8m radius circle/sphere, centered on a selected space."
   },
   {
     "slug": "blast-8",
     "label": "Blast 8",
     "related": [],
-    "description": "Affects entities within a 8.5m radius circle/sphere, centered on a selected space."
+    "description": "Affects entities within a 9m radius circle/sphere, centered on a selected space."
   },
   {
     "slug": "blast-9",
     "label": "Blast 9",
     "related": [],
-    "description": "Affects entities within a 9.5m radius circle/sphere, centered on a selected space."
+    "description": "Affects entities within a 10m radius circle/sphere, centered on a selected space."
   },
   {
     "slug": "blast-10",
     "label": "Blast 10",
     "related": [],
-    "description": "Affects entities within a 10.5m radius circle/sphere, centered on a selected space."
+    "description": "Affects entities within a 11m radius circle/sphere, centered on a selected space."
   },
   {
     "slug": "blast-11",
     "label": "Blast 11",
     "related": [],
-    "description": "Affects entities within a 11.5m radius circle/sphere, centered on a selected space."
+    "description": "Affects entities within a 12m radius circle/sphere, centered on a selected space."
   },
   {
     "slug": "blast-12",
     "label": "Blast 12",
     "related": [],
-    "description": "Affects entities within a 12.5m radius circle/sphere, centered on a selected space."
+    "description": "Affects entities within a 1m radius circle/sphere, centered on a selected space."
   },
   {
     "slug": "bone",
@@ -3026,30 +3041,6 @@
     "label": "Defrost",
     "related": [],
     "description": "<p>The user may declare Actions with this Trait while they have the @Affliction[frozen] Affliction, curing themselves of the Affliction on declaration.</p><p>Whenever you use an Action with this Trait while suffering from @Affliction[frostbite], you may cure up to 5 stacks of Frostbite on yourself.</p><p>Targets hit by Actions with this Trait are cured of @Affliction[frozen] and up to 5 stacks of @Affliction[frostbite] after the action resolves, any damage dealt ignores the 33% damage reduction from the @Affliction[frozen] Affliction.</p>"
-  },
-  {
-    "slug": "delay-x",
-    "label": "Delay X",
-    "description": "This action resolves after X other activations have resolved.",
-    "related": []
-  },
-  {
-    "slug": "delay-1",
-    "label": "Delay 1",
-    "description": "This action resolves after 1 other activation has resolved.",
-    "related": []
-  },
-  {
-    "slug": "delay-2",
-    "label": "Delay 2",
-    "description": "This action resolves after 2 other activations have resolved.",
-    "related": []
-  },
-  {
-    "slug": "delay-3",
-    "label": "Delay 3",
-    "description": "This action resolves after 3 other activations have resolved.",
-    "related": []
   },
   {
     "slug": "drain-x",
@@ -3389,97 +3380,97 @@
     "slug": "pass-x",
     "label": "Pass X",
     "related": [],
-    "description": "This attack allows the creature to move through enemy squares as part of their Movement and attack those creatures. They can attack up to X creatures beyond the first target, spending 1 PP to declare and resolve the attack on each additional target. When doing so, the user must Move and must 'pass' through these targets' spaces (treating those spaces as empty during this Movement) and end this 'pass' on an opposite side of the target in space(s) they can occupy, and cannot have Attack of Opportunity declared in response to this Movement and any related Movement made while Moving between Pass targets."
+    "description": "This attack allows the creature to move through enemy squares as part of their Movement and attack those creatures. They can attack up to X creatures beyond the first target, declaring against all targets and resolving the attack against them simultaneously as though the move were an AOE move. When doing so, the user must Move and must 'pass' through these targets' spaces (treating those spaces as empty during this Movement) and end this 'pass' on an opposite side of the target in space(s) they can occupy, and cannot have Attack of Opportunity declared in response to this Movement and any related Movement made while Moving between Pass targets."
   },
   {
     "slug": "pass-1",
     "label": "Pass 1",
     "related": [],
-    "description": "This attack allows the creature to move through enemy squares as part of their Movement and attack those creatures. They can attack up to 1 creature beyond the first target, spending 1 PP to declare and resolve the attack on each additional target. When doing so, the user must Move and must 'pass' through these targets' spaces (treating those spaces as empty during this Movement) and end this 'pass' on an opposite side of the target in space(s) they can occupy, and cannot have Attack of Opportunity declared in response to this Movement and any related Movement made while Moving between Pass targets."
+    "description": "This attack allows the creature to move through enemy squares as part of their Movement and attack those creatures. They can attack up to X creatures beyond the first target, declaring against all targets and resolving the attack against them simultaneously as though the move were an AOE move. When doing so, the user must Move and must 'pass' through these targets' spaces (treating those spaces as empty during this Movement) and end this 'pass' on an opposite side of the target in space(s) they can occupy, and cannot have Attack of Opportunity declared in response to this Movement and any related Movement made while Moving between Pass targets."
   },
   {
     "slug": "pass-2",
     "label": "Pass 2",
     "related": [],
-    "description": "This attack allows the creature to move through enemy squares as part of their Movement and attack those creatures. They can attack up to 2 creatures beyond the first target, spending 1 PP to declare and resolve the attack on each additional target. When doing so, the user must Move and must 'pass' through these targets' spaces (treating those spaces as empty during this Movement) and end this 'pass' on an opposite side of the target in space(s) they can occupy, and cannot have Attack of Opportunity declared in response to this Movement and any related Movement made while Moving between Pass targets."
+    "description": "This attack allows the creature to move through enemy squares as part of their Movement and attack those creatures. They can attack up to X creatures beyond the first target, declaring against all targets and resolving the attack against them simultaneously as though the move were an AOE move. When doing so, the user must Move and must 'pass' through these targets' spaces (treating those spaces as empty during this Movement) and end this 'pass' on an opposite side of the target in space(s) they can occupy, and cannot have Attack of Opportunity declared in response to this Movement and any related Movement made while Moving between Pass targets."
   },
   {
     "slug": "pass-3",
     "label": "Pass 3",
     "related": [],
-    "description": "This attack allows the creature to move through enemy squares as part of their Movement and attack those creatures. They can attack up to 3 creatures beyond the first target, spending 1 PP to declare and resolve the attack on each additional target. When doing so, the user must Move and must 'pass' through these targets' spaces (treating those spaces as empty during this Movement) and end this 'pass' on an opposite side of the target in space(s) they can occupy, and cannot have Attack of Opportunity declared in response to this Movement and any related Movement made while Moving between Pass targets."
+    "description": "This attack allows the creature to move through enemy squares as part of their Movement and attack those creatures. They can attack up to X creatures beyond the first target, declaring against all targets and resolving the attack against them simultaneously as though the move were an AOE move. When doing so, the user must Move and must 'pass' through these targets' spaces (treating those spaces as empty during this Movement) and end this 'pass' on an opposite side of the target in space(s) they can occupy, and cannot have Attack of Opportunity declared in response to this Movement and any related Movement made while Moving between Pass targets."
   },
   {
     "slug": "pass-4",
     "label": "Pass 4",
     "related": [],
-    "description": "This attack allows the creature to move through enemy squares as part of their Movement and attack those creatures. They can attack up to 4 creatures beyond the first target, spending 1 PP to declare and resolve the attack on each additional target. When doing so, the user must Move and must 'pass' through these targets' spaces (treating those spaces as empty during this Movement) and end this 'pass' on an opposite side of the target in space(s) they can occupy, and cannot have Attack of Opportunity declared in response to this Movement and any related Movement made while Moving between Pass targets."
+    "description": "This attack allows the creature to move through enemy squares as part of their Movement and attack those creatures. They can attack up to X creatures beyond the first target, declaring against all targets and resolving the attack against them simultaneously as though the move were an AOE move. When doing so, the user must Move and must 'pass' through these targets' spaces (treating those spaces as empty during this Movement) and end this 'pass' on an opposite side of the target in space(s) they can occupy, and cannot have Attack of Opportunity declared in response to this Movement and any related Movement made while Moving between Pass targets."
   },
   {
     "slug": "pass-5",
     "label": "Pass 5",
     "related": [],
-    "description": "This attack allows the creature to move through enemy squares as part of their Movement and attack those creatures. They can attack up to 5 creatures beyond the first target, spending 1 PP to declare and resolve the attack on each additional target. When doing so, the user must Move and must 'pass' through these targets' spaces (treating those spaces as empty during this Movement) and end this 'pass' on an opposite side of the target in space(s) they can occupy, and cannot have Attack of Opportunity declared in response to this Movement and any related Movement made while Moving between Pass targets."
+    "description": "This attack allows the creature to move through enemy squares as part of their Movement and attack those creatures. They can attack up to X creatures beyond the first target, declaring against all targets and resolving the attack against them simultaneously as though the move were an AOE move. When doing so, the user must Move and must 'pass' through these targets' spaces (treating those spaces as empty during this Movement) and end this 'pass' on an opposite side of the target in space(s) they can occupy, and cannot have Attack of Opportunity declared in response to this Movement and any related Movement made while Moving between Pass targets."
   },
   {
     "slug": "pass-6",
     "label": "Pass 6",
     "related": [],
-    "description": "This attack allows the creature to move through enemy squares as part of their Movement and attack those creatures. They can attack up to 6 creatures beyond the first target, spending 1 PP to declare and resolve the attack on each additional target. When doing so, the user must Move and must 'pass' through these targets' spaces (treating those spaces as empty during this Movement) and end this 'pass' on an opposite side of the target in space(s) they can occupy, and cannot have Attack of Opportunity declared in response to this Movement and any related Movement made while Moving between Pass targets."
+    "description": "This attack allows the creature to move through enemy squares as part of their Movement and attack those creatures. They can attack up to X creatures beyond the first target, declaring against all targets and resolving the attack against them simultaneously as though the move were an AOE move. When doing so, the user must Move and must 'pass' through these targets' spaces (treating those spaces as empty during this Movement) and end this 'pass' on an opposite side of the target in space(s) they can occupy, and cannot have Attack of Opportunity declared in response to this Movement and any related Movement made while Moving between Pass targets."
   },
   {
     "slug": "pass-7",
     "label": "Pass 7",
     "related": [],
-    "description": "This attack allows the creature to move through enemy squares as part of their Movement and attack those creatures. They can attack up to 7 creatures beyond the first target, spending 1 PP to declare and resolve the attack on each additional target. When doing so, the user must Move and must 'pass' through these targets' spaces (treating those spaces as empty during this Movement) and end this 'pass' on an opposite side of the target in space(s) they can occupy, and cannot have Attack of Opportunity declared in response to this Movement and any related Movement made while Moving between Pass targets."
+    "description": "This attack allows the creature to move through enemy squares as part of their Movement and attack those creatures. They can attack up to X creatures beyond the first target, declaring against all targets and resolving the attack against them simultaneously as though the move were an AOE move. When doing so, the user must Move and must 'pass' through these targets' spaces (treating those spaces as empty during this Movement) and end this 'pass' on an opposite side of the target in space(s) they can occupy, and cannot have Attack of Opportunity declared in response to this Movement and any related Movement made while Moving between Pass targets."
   },
   {
     "slug": "pass-8",
     "label": "Pass 8",
     "related": [],
-    "description": "This attack allows the creature to move through enemy squares as part of their Movement and attack those creatures. They can attack up to 8 creatures beyond the first target, spending 1 PP to declare and resolve the attack on each additional target. When doing so, the user must Move and must 'pass' through these targets' spaces (treating those spaces as empty during this Movement) and end this 'pass' on an opposite side of the target in space(s) they can occupy, and cannot have Attack of Opportunity declared in response to this Movement and any related Movement made while Moving between Pass targets."
+    "description": "This attack allows the creature to move through enemy squares as part of their Movement and attack those creatures. They can attack up to X creatures beyond the first target, declaring against all targets and resolving the attack against them simultaneously as though the move were an AOE move. When doing so, the user must Move and must 'pass' through these targets' spaces (treating those spaces as empty during this Movement) and end this 'pass' on an opposite side of the target in space(s) they can occupy, and cannot have Attack of Opportunity declared in response to this Movement and any related Movement made while Moving between Pass targets."
   },
   {
     "slug": "pass-9",
     "label": "Pass 9",
     "related": [],
-    "description": "This attack allows the creature to move through enemy squares as part of their Movement and attack those creatures. They can attack up to 9 creatures beyond the first target, spending 1 PP to declare and resolve the attack on each additional target. When doing so, the user must Move and must 'pass' through these targets' spaces (treating those spaces as empty during this Movement) and end this 'pass' on an opposite side of the target in space(s) they can occupy, and cannot have Attack of Opportunity declared in response to this Movement and any related Movement made while Moving between Pass targets."
+    "description": "This attack allows the creature to move through enemy squares as part of their Movement and attack those creatures. They can attack up to X creatures beyond the first target, declaring against all targets and resolving the attack against them simultaneously as though the move were an AOE move. When doing so, the user must Move and must 'pass' through these targets' spaces (treating those spaces as empty during this Movement) and end this 'pass' on an opposite side of the target in space(s) they can occupy, and cannot have Attack of Opportunity declared in response to this Movement and any related Movement made while Moving between Pass targets."
   },
   {
     "slug": "pass-10",
     "label": "Pass 10",
     "related": [],
-    "description": "This attack allows the creature to move through enemy squares as part of their Movement and attack those creatures. They can attack up to 10 creatures beyond the first target, spending 1 PP to declare and resolve the attack on each additional target. When doing so, the user must Move and must 'pass' through these targets' spaces (treating those spaces as empty during this Movement) and end this 'pass' on an opposite side of the target in space(s) they can occupy, and cannot have Attack of Opportunity declared in response to this Movement and any related Movement made while Moving between Pass targets."
+    "description": "This attack allows the creature to move through enemy squares as part of their Movement and attack those creatures. They can attack up to X creatures beyond the first target, declaring against all targets and resolving the attack against them simultaneously as though the move were an AOE move. When doing so, the user must Move and must 'pass' through these targets' spaces (treating those spaces as empty during this Movement) and end this 'pass' on an opposite side of the target in space(s) they can occupy, and cannot have Attack of Opportunity declared in response to this Movement and any related Movement made while Moving between Pass targets."
   },
   {
     "slug": "pass-11",
     "label": "Pass 11",
     "related": [],
-    "description": "This attack allows the creature to move through enemy squares as part of their Movement and attack those creatures. They can attack up to 11 creatures beyond the first target, spending 1 PP to declare and resolve the attack on each additional target. When doing so, the user must Move and must 'pass' through these targets' spaces (treating those spaces as empty during this Movement) and end this 'pass' on an opposite side of the target in space(s) they can occupy, and cannot have Attack of Opportunity declared in response to this Movement and any related Movement made while Moving between Pass targets."
+    "description": "This attack allows the creature to move through enemy squares as part of their Movement and attack those creatures. They can attack up to X creatures beyond the first target, declaring against all targets and resolving the attack against them simultaneously as though the move were an AOE move. When doing so, the user must Move and must 'pass' through these targets' spaces (treating those spaces as empty during this Movement) and end this 'pass' on an opposite side of the target in space(s) they can occupy, and cannot have Attack of Opportunity declared in response to this Movement and any related Movement made while Moving between Pass targets."
   },
   {
     "slug": "pass-12",
     "label": "Pass 12",
     "related": [],
-    "description": "This attack allows the creature to move through enemy squares as part of their Movement and attack those creatures. They can attack up to 12 creatures beyond the first target, spending 1 PP to declare and resolve the attack on each additional target. When doing so, the user must Move and must 'pass' through these targets' spaces (treating those spaces as empty during this Movement) and end this 'pass' on an opposite side of the target in space(s) they can occupy, and cannot have Attack of Opportunity declared in response to this Movement and any related Movement made while Moving between Pass targets."
+    "description": "This attack allows the creature to move through enemy squares as part of their Movement and attack those creatures. They can attack up to X creatures beyond the first target, declaring against all targets and resolving the attack against them simultaneously as though the move were an AOE move. When doing so, the user must Move and must 'pass' through these targets' spaces (treating those spaces as empty during this Movement) and end this 'pass' on an opposite side of the target in space(s) they can occupy, and cannot have Attack of Opportunity declared in response to this Movement and any related Movement made while Moving between Pass targets."
   },
   {
     "slug": "pass-13",
     "label": "Pass 13",
     "related": [],
-    "description": "This attack allows the creature to move through enemy squares as part of their Movement and attack those creatures. They can attack up to 13 creatures beyond the first target, spending 1 PP to declare and resolve the attack on each additional target. When doing so, the user must Move and must 'pass' through these targets' spaces (treating those spaces as empty during this Movement) and end this 'pass' on an opposite side of the target in space(s) they can occupy, and cannot have Attack of Opportunity declared in response to this Movement and any related Movement made while Moving between Pass targets."
+    "description": "This attack allows the creature to move through enemy squares as part of their Movement and attack those creatures. They can attack up to X creatures beyond the first target, declaring against all targets and resolving the attack against them simultaneously as though the move were an AOE move. When doing so, the user must Move and must 'pass' through these targets' spaces (treating those spaces as empty during this Movement) and end this 'pass' on an opposite side of the target in space(s) they can occupy, and cannot have Attack of Opportunity declared in response to this Movement and any related Movement made while Moving between Pass targets."
   },
   {
     "slug": "pass-14",
     "label": "Pass 14",
     "related": [],
-    "description": "This attack allows the creature to move through enemy squares as part of their Movement and attack those creatures. They can attack up to 14 creatures beyond the first target, spending 1 PP to declare and resolve the attack on each additional target. When doing so, the user must Move and must 'pass' through these targets' spaces (treating those spaces as empty during this Movement) and end this 'pass' on an opposite side of the target in space(s) they can occupy, and cannot have Attack of Opportunity declared in response to this Movement and any related Movement made while Moving between Pass targets."
+    "description": "This attack allows the creature to move through enemy squares as part of their Movement and attack those creatures. They can attack up to X creatures beyond the first target, declaring against all targets and resolving the attack against them simultaneously as though the move were an AOE move. When doing so, the user must Move and must 'pass' through these targets' spaces (treating those spaces as empty during this Movement) and end this 'pass' on an opposite side of the target in space(s) they can occupy, and cannot have Attack of Opportunity declared in response to this Movement and any related Movement made while Moving between Pass targets."
   },
   {
     "slug": "pass-15",
     "label": "Pass 15",
     "related": [],
-    "description": "This attack allows the creature to move through enemy squares as part of their Movement and attack those creatures. They can attack up to 15 creatures beyond the first target, spending 1 PP to declare and resolve the attack on each additional target. When doing so, the user must Move and must 'pass' through these targets' spaces (treating those spaces as empty during this Movement) and end this 'pass' on an opposite side of the target in space(s) they can occupy, and cannot have Attack of Opportunity declared in response to this Movement and any related Movement made while Moving between Pass targets."
+    "description": "This attack allows the creature to move through enemy squares as part of their Movement and attack those creatures. They can attack up to X creatures beyond the first target, declaring against all targets and resolving the attack against them simultaneously as though the move were an AOE move. When doing so, the user must Move and must 'pass' through these targets' spaces (treating those spaces as empty during this Movement) and end this 'pass' on an opposite side of the target in space(s) they can occupy, and cannot have Attack of Opportunity declared in response to this Movement and any related Movement made while Moving between Pass targets."
   },
   {
     "slug": "pledge",
@@ -4486,127 +4477,127 @@
     "slug": "reload-X",
     "label": "Reload X",
     "related": [],
-    "description": "These weapons utilize a Clock, ticking down, to track the PP Cost of their Attacks, rather than their user's. Creatures can use X Simple Actions to reload the weapon, refilling the Clock. Reloading a weapon either consumes an Ammunition item relating to the weapon, or consumes a creature's IP at an increased cost."
+    "description": "When this item's Charge Pool is depleted, a empty Reload Clock specific to this item, X Spans in size, is created. Creatures can use the Reload Default Action on the item to tick this Clock up. When the Clock is filled, the item's Charge Pool is refilled. Reloading a weapon either consumes an Ammunition item relating to the weapon, or consumes IP based on the weapon's rarity and other Traits."
   },
   {
     "slug": "reload-1",
     "label": "Reload 1",
     "related": [],
-    "description": "These weapons utilize a Clock, ticking down, to track the PP Cost of their Attacks, rather than their user's. Creatures can use 1 Simple Action to reload the weapon, refilling the Clock. Reloading a weapon either consumes an Ammunition item relating to the weapon, or consumes a creature's IP at an increased cost."
+    "description": "When this item's Charge Pool is depleted, a empty Reload Clock specific to this item, 1 Span in size, is created. Creatures can use the Reload Default Action on the item to tick this Clock up. When the Clock is filled, the item's Charge Pool is refilled. Reloading a weapon either consumes an Ammunition item relating to the weapon, or consumes IP based on the weapon's rarity and other Traits."
   },
   {
     "slug": "reload-2",
     "label": "Reload 2",
     "related": [],
-    "description": "These weapons utilize a Clock, ticking down, to track the PP Cost of their Attacks, rather than their user's. Creatures can use 2 Simple Actions to reload the weapon, refilling the Clock. Reloading a weapon either consumes an Ammunition item relating to the weapon, or consumes a creature's IP at an increased cost."
+    "description": "When this item's Charge Pool is depleted, a empty Reload Clock specific to this item, 2 Spans in size, is created. Creatures can use the Reload Default Action on the item to tick this Clock up. When the Clock is filled, the item's Charge Pool is refilled. Reloading a weapon either consumes an Ammunition item relating to the weapon, or consumes IP based on the weapon's rarity and other Traits."
   },
   {
     "slug": "reload-3",
     "label": "Reload 3",
     "related": [],
-    "description": "These weapons utilize a Clock, ticking down, to track the PP Cost of their Attacks, rather than their user's. Creatures can use 3 Simple Actions to reload the weapon, refilling the Clock. Reloading a weapon either consumes an Ammunition item relating to the weapon, or consumes a creature's IP at an increased cost."
+    "description": "When this item's Charge Pool is depleted, a empty Reload Clock specific to this item, 3 Spans in size, is created. Creatures can use the Reload Default Action on the item to tick this Clock up. When the Clock is filled, the item's Charge Pool is refilled. Reloading a weapon either consumes an Ammunition item relating to the weapon, or consumes IP based on the weapon's rarity and other Traits."
   },
   {
     "slug": "reload-4",
     "label": "Reload 4",
     "related": [],
-    "description": "These weapons utilize a Clock, ticking down, to track the PP Cost of their Attacks, rather than their user's. Creatures can use 4 Simple Actions to reload the weapon, refilling the Clock. Reloading a weapon either consumes an Ammunition item relating to the weapon, or consumes a creature's IP at an increased cost."
+    "description": "When this item's Charge Pool is depleted, a empty Reload Clock specific to this item, 4 Spans in size, is created. Creatures can use the Reload Default Action on the item to tick this Clock up. When the Clock is filled, the item's Charge Pool is refilled. Reloading a weapon either consumes an Ammunition item relating to the weapon, or consumes IP based on the weapon's rarity and other Traits."
   },
   {
     "slug": "reload-5",
     "label": "Reload 5",
     "related": [],
-    "description": "These weapons utilize a Clock, ticking down, to track the PP Cost of their Attacks, rather than their user's. Creatures can use 5 Simple Actions to reload the weapon, refilling the Clock. Reloading a weapon either consumes an Ammunition item relating to the weapon, or consumes a creature's IP at an increased cost."
+    "description": "When this item's Charge Pool is depleted, a empty Reload Clock specific to this item, 5 Spans in size, is created. Creatures can use the Reload Default Action on the item to tick this Clock up. When the Clock is filled, the item's Charge Pool is refilled. Reloading a weapon either consumes an Ammunition item relating to the weapon, or consumes IP based on the weapon's rarity and other Traits."
   },
   {
     "slug": "reload-6",
     "label": "Reload 6",
     "related": [],
-    "description": "These weapons utilize a Clock, ticking down, to track the PP Cost of their Attacks, rather than their user's. Creatures can use 6 Simple Actions to reload the weapon, refilling the Clock. Reloading a weapon either consumes an Ammunition item relating to the weapon, or consumes a creature's IP at an increased cost."
+    "description": "When this item's Charge Pool is depleted, a empty Reload Clock specific to this item, 6 Spans in size, is created. Creatures can use the Reload Default Action on the item to tick this Clock up. When the Clock is filled, the item's Charge Pool is refilled. Reloading a weapon either consumes an Ammunition item relating to the weapon, or consumes IP based on the weapon's rarity and other Traits."
   },
   {
     "slug": "reload-7",
     "label": "Reload 7",
     "related": [],
-    "description": "These weapons utilize a Clock, ticking down, to track the PP Cost of their Attacks, rather than their user's. Creatures can use 7 Simple Actions to reload the weapon, refilling the Clock. Reloading a weapon either consumes an Ammunition item relating to the weapon, or consumes a creature's IP at an increased cost."
+    "description": "When this item's Charge Pool is depleted, a empty Reload Clock specific to this item, 7 Spans in size, is created. Creatures can use the Reload Default Action on the item to tick this Clock up. When the Clock is filled, the item's Charge Pool is refilled. Reloading a weapon either consumes an Ammunition item relating to the weapon, or consumes IP based on the weapon's rarity and other Traits."
   },
   {
     "slug": "reload-8",
     "label": "Reload 8",
     "related": [],
-    "description": "These weapons utilize a Clock, ticking down, to track the PP Cost of their Attacks, rather than their user's. Creatures can use 8 Simple Actions to reload the weapon, refilling the Clock. Reloading a weapon either consumes an Ammunition item relating to the weapon, or consumes a creature's IP at an increased cost."
+    "description": "When this item's Charge Pool is depleted, a empty Reload Clock specific to this item, 8 Spans in size, is created. Creatures can use the Reload Default Action on the item to tick this Clock up. When the Clock is filled, the item's Charge Pool is refilled. Reloading a weapon either consumes an Ammunition item relating to the weapon, or consumes IP based on the weapon's rarity and other Traits."
   },
   {
     "slug": "reload-9",
     "label": "Reload 9",
     "related": [],
-    "description": "These weapons utilize a Clock, ticking down, to track the PP Cost of their Attacks, rather than their user's. Creatures can use 9 Simple Actions to reload the weapon, refilling the Clock. Reloading a weapon either consumes an Ammunition item relating to the weapon, or consumes a creature's IP at an increased cost."
+    "description": "When this item's Charge Pool is depleted, a empty Reload Clock specific to this item, 9 Spans in size, is created. Creatures can use the Reload Default Action on the item to tick this Clock up. When the Clock is filled, the item's Charge Pool is refilled. Reloading a weapon either consumes an Ammunition item relating to the weapon, or consumes IP based on the weapon's rarity and other Traits."
   },
   {
     "slug": "reload-10",
     "label": "Reload 10",
     "related": [],
-    "description": "These weapons utilize a Clock, ticking down, to track the PP Cost of their Attacks, rather than their user's. Creatures can use 10 Simple Actions to reload the weapon, refilling the Clock. Reloading a weapon either consumes an Ammunition item relating to the weapon, or consumes a creature's IP at an increased cost."
+    "description": "When this item's Charge Pool is depleted, a empty Reload Clock specific to this item, 10 Spans in size, is created. Creatures can use the Reload Default Action on the item to tick this Clock up. When the Clock is filled, the item's Charge Pool is refilled. Reloading a weapon either consumes an Ammunition item relating to the weapon, or consumes IP based on the weapon's rarity and other Traits."
   },
   {
     "slug": "reload-11",
     "label": "Reload 11",
     "related": [],
-    "description": "These weapons utilize a Clock, ticking down, to track the PP Cost of their Attacks, rather than their user's. Creatures can use 11 Simple Actions to reload the weapon, refilling the Clock. Reloading a weapon either consumes an Ammunition item relating to the weapon, or consumes a creature's IP at an increased cost."
+    "description": "When this item's Charge Pool is depleted, a empty Reload Clock specific to this item, 11 Spans in size, is created. Creatures can use the Reload Default Action on the item to tick this Clock up. When the Clock is filled, the item's Charge Pool is refilled. Reloading a weapon either consumes an Ammunition item relating to the weapon, or consumes IP based on the weapon's rarity and other Traits."
   },
   {
     "slug": "reload-12",
     "label": "Reload 12",
     "related": [],
-    "description": "These weapons utilize a Clock, ticking down, to track the PP Cost of their Attacks, rather than their user's. Creatures can use 12 Simple Actions to reload the weapon, refilling the Clock. Reloading a weapon either consumes an Ammunition item relating to the weapon, or consumes a creature's IP at an increased cost."
+    "description": "When this item's Charge Pool is depleted, a empty Reload Clock specific to this item, 12 Spans in size, is created. Creatures can use the Reload Default Action on the item to tick this Clock up. When the Clock is filled, the item's Charge Pool is refilled. Reloading a weapon either consumes an Ammunition item relating to the weapon, or consumes IP based on the weapon's rarity and other Traits."
   },
   {
     "slug": "reload-13",
     "label": "Reload 13",
     "related": [],
-    "description": "These weapons utilize a Clock, ticking down, to track the PP Cost of their Attacks, rather than their user's. Creatures can use 13 Simple Actions to reload the weapon, refilling the Clock. Reloading a weapon either consumes an Ammunition item relating to the weapon, or consumes a creature's IP at an increased cost."
+    "description": "When this item's Charge Pool is depleted, a empty Reload Clock specific to this item, 13 Spans in size, is created. Creatures can use the Reload Default Action on the item to tick this Clock up. When the Clock is filled, the item's Charge Pool is refilled. Reloading a weapon either consumes an Ammunition item relating to the weapon, or consumes IP based on the weapon's rarity and other Traits."
   },
   {
     "slug": "reload-14",
     "label": "Reload 14",
     "related": [],
-    "description": "These weapons utilize a Clock, ticking down, to track the PP Cost of their Attacks, rather than their user's. Creatures can use 14 Simple Actions to reload the weapon, refilling the Clock. Reloading a weapon either consumes an Ammunition item relating to the weapon, or consumes a creature's IP at an increased cost."
+    "description": "When this item's Charge Pool is depleted, a empty Reload Clock specific to this item, 14 Spans in size, is created. Creatures can use the Reload Default Action on the item to tick this Clock up. When the Clock is filled, the item's Charge Pool is refilled. Reloading a weapon either consumes an Ammunition item relating to the weapon, or consumes IP based on the weapon's rarity and other Traits."
   },
   {
     "slug": "reload-15",
     "label": "Reload 15",
     "related": [],
-    "description": "These weapons utilize a Clock, ticking down, to track the PP Cost of their Attacks, rather than their user's. Creatures can use 15 Simple Actions to reload the weapon, refilling the Clock. Reloading a weapon either consumes an Ammunition item relating to the weapon, or consumes a creature's IP at an increased cost."
+    "description": "When this item's Charge Pool is depleted, a empty Reload Clock specific to this item, 15 Spans in size, is created. Creatures can use the Reload Default Action on the item to tick this Clock up. When the Clock is filled, the item's Charge Pool is refilled. Reloading a weapon either consumes an Ammunition item relating to the weapon, or consumes IP based on the weapon's rarity and other Traits."
   },
   {
     "slug": "reload-16",
     "label": "Reload 16",
     "related": [],
-    "description": "These weapons utilize a Clock, ticking down, to track the PP Cost of their Attacks, rather than their user's. Creatures can use 16 Simple Actions to reload the weapon, refilling the Clock. Reloading a weapon either consumes an Ammunition item relating to the weapon, or consumes a creature's IP at an increased cost."
+    "description": "When this item's Charge Pool is depleted, a empty Reload Clock specific to this item, 16 Spans in size, is created. Creatures can use the Reload Default Action on the item to tick this Clock up. When the Clock is filled, the item's Charge Pool is refilled. Reloading a weapon either consumes an Ammunition item relating to the weapon, or consumes IP based on the weapon's rarity and other Traits."
   },
   {
     "slug": "reload-17",
     "label": "Reload 17",
     "related": [],
-    "description": "These weapons utilize a Clock, ticking down, to track the PP Cost of their Attacks, rather than their user's. Creatures can use 17 Simple Actions to reload the weapon, refilling the Clock. Reloading a weapon either consumes an Ammunition item relating to the weapon, or consumes a creature's IP at an increased cost."
+    "description": "When this item's Charge Pool is depleted, a empty Reload Clock specific to this item, 17 Spans in size, is created. Creatures can use the Reload Default Action on the item to tick this Clock up. When the Clock is filled, the item's Charge Pool is refilled. Reloading a weapon either consumes an Ammunition item relating to the weapon, or consumes IP based on the weapon's rarity and other Traits."
   },
   {
     "slug": "reload-18",
     "label": "Reload 18",
     "related": [],
-    "description": "These weapons utilize a Clock, ticking down, to track the PP Cost of their Attacks, rather than their user's. Creatures can use 18 Simple Actions to reload the weapon, refilling the Clock. Reloading a weapon either consumes an Ammunition item relating to the weapon, or consumes a creature's IP at an increased cost."
+    "description": "When this item's Charge Pool is depleted, a empty Reload Clock specific to this item, 18 Spans in size, is created. Creatures can use the Reload Default Action on the item to tick this Clock up. When the Clock is filled, the item's Charge Pool is refilled. Reloading a weapon either consumes an Ammunition item relating to the weapon, or consumes IP based on the weapon's rarity and other Traits."
   },
   {
     "slug": "reload-19",
     "label": "Reload 19",
     "related": [],
-    "description": "These weapons utilize a Clock, ticking down, to track the PP Cost of their Attacks, rather than their user's. Creatures can use 19 Simple Actions to reload the weapon, refilling the Clock. Reloading a weapon either consumes an Ammunition item relating to the weapon, or consumes a creature's IP at an increased cost."
+    "description": "When this item's Charge Pool is depleted, a empty Reload Clock specific to this item, 19 Spans in size, is created. Creatures can use the Reload Default Action on the item to tick this Clock up. When the Clock is filled, the item's Charge Pool is refilled. Reloading a weapon either consumes an Ammunition item relating to the weapon, or consumes IP based on the weapon's rarity and other Traits."
   },
   {
     "slug": "reload-20",
     "label": "Reload 20",
     "related": [],
-    "description": "These weapons utilize a Clock, ticking down, to track the PP Cost of their Attacks, rather than their user's. Creatures can use 20 Simple Actions to reload the weapon, refilling the Clock. Reloading a weapon either consumes an Ammunition item relating to the weapon, or consumes a creature's IP at an increased cost."
+    "description": "When this item's Charge Pool is depleted, a empty Reload Clock specific to this item, 20 Spans in size, is created. Creatures can use the Reload Default Action on the item to tick this Clock up. When the Clock is filled, the item's Charge Pool is refilled. Reloading a weapon either consumes an Ammunition item relating to the weapon, or consumes IP based on the weapon's rarity and other Traits."
   },
   {
     "slug": "readied",
@@ -4687,6 +4678,54 @@
     "description": "Denotes if an Item, Ability, or Effect relates to the various transformational phenomena, ie Mega Evolution."
   },
   {
+    "slug": "conventional",
+    "label": "Conventional",
+    "related": [],
+    "description": "Gear with this Trait generally appear in the generic, mostly \"@Trait[modern] with hints of @Trait[sci-fi]\" setting in which most mainline Pokémon games and anime are set. Often, these are also @Trait[league] games."
+  },
+  {
+    "slug": "mystery-dungeon",
+    "label": "Mystery Dungeon",
+    "related": [],
+    "description": "Gear with this Trait are intended for use in Mystery Dungeon campaigns, and are not recommended for use in non-Mystery Dungeon games."
+  },
+  {
+    "slug": "modern",
+    "label": "Modern",
+    "related": [],
+    "description": "Gear with this Trait are generally from, readily found in, or other roughly analogous to Gear from the modern era, typifying products and inventions from the late 1800s to the modern day, covering the turn of the century, the World Wars, the Cold War, and our present day."
+  },
+  {
+    "slug": "early-modern",
+    "label": "Early Modern",
+    "related": [],
+    "description": "Gear with this Trait are generally from, readily found in, or other roughly analogous to Gear from the early modern period, typifying products and inventions from the early 1500s to the late 1800s, covering the Ages of Exploration and Imperialism, and the dawn of the industrial era."
+  },
+  {
+    "slug": "medieval",
+    "label": "Medieval",
+    "related": [],
+    "description": "Gear with this Trait are generally from, readily found in, or other roughly analogous to Gear from the postclassical period, typifying products and inventions from the early 500s to the early 1500s, covering the Middle Ages."
+  },
+  {
+    "slug": "ancient",
+    "label": "Ancient",
+    "related": [],
+    "description": "Gear with this Trait are generally from, readily found in, or other roughly analogous to Gear from the ancient period, typifying products and inventions from around 3000 BCE to the early 500s CE, covering the dawn of civilization through the end of Late Antiquity."
+  },
+  {
+    "slug": "sci-fi",
+    "label": "Sci-Fi",
+    "related": [],
+    "description": "Gear with this trait are generally from, readily found in, or other roughly analogous to Gear from alternate present or speculative future times, typifying products and inventions that boast significantly advanced technology and potentially aliens or other dimensions."
+  },
+  {
+    "slug": "fantasy",
+    "label": "Fantasy",
+    "related": [],
+    "description": "Gear with this trait are generally from, readily found in, or other roughly analogous to Gear from storybooks, myths, and legends across any sort of time, typifying products and inventions that are attuned to the arcane or occult beyond what is seen in our reality."
+  },
+  {
     "slug": "style",
     "label": "Style",
     "related": [],
@@ -4702,7 +4741,7 @@
     "slug": "command",
     "label": "Command",
     "related": [],
-    "description": "TO BE DETERMINED"
+    "description": "This Trait denotes Actions that are of a commanding nature (naturally), generally associated with instruction, tactics, and the like. At default, Command Actions are only able to target their user or creature in their Team. Notably, Command Actions are one of a small selection of Actions allowed during League Combat."
   },
   {
     "slug": "evolution",

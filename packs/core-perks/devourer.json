@@ -3,7 +3,70 @@
   "_id": "myHVSAQ7YlPxcfUU",
   "type": "perk",
   "img": "icons/creatures/abilities/mouth-teeth-rows-needles-purple.webp",
-  "effects": [],
+  "effects": [
+    {
+      "name": "Devourer",
+      "type": "passive",
+      "_id": "bdlEEnP77wLBCMpb",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "grant-item",
+            "key": "",
+            "value": "Compendium.ptr2e.core-abilities.Item.TQNGoLOtYTLLnoTY",
+            "predicate": [],
+            "alterations": [],
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            },
+            "mode": 2,
+            "ignored": false,
+            "reevaluateOnUpdate": false,
+            "inMemoryOnly": false,
+            "allowDuplicate": true,
+            "track": false,
+            "replaceSelf": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.6.beta",
+        "createdTime": 1764894992909,
+        "modifiedTime": 1764895011046,
+        "lastModifiedBy": "bDEGyOQfZwkb2ml2"
+      }
+    }
+  ],
   "system": {
     "_migration": {
       "version": 0.111,
@@ -17,7 +80,7 @@
       "notes": ""
     },
     "actions": [],
-    "slug": null,
+    "slug": "devourer",
     "description": "<p>The user gains @UUID[Compendium.ptr2e.core-abilities.TQNGoLOtYTLLnoTY]{Jaws of Carnage} as a Tutored Ability.</p>",
     "traits": [
       "jaw",
@@ -30,14 +93,11 @@
       "item:ability:jaws-of-carnage"
     ],
     "cost": 3,
-    "originSlug": null,
     "design": {
       "arena": "physical",
       "approach": "resilience",
       "archetype": null
     },
-    "variant": null,
-    "mode": null,
     "global": true,
     "webs": [],
     "nodes": [

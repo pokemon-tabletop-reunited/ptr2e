@@ -3,7 +3,65 @@
   "_id": "uqfVptCRvlkiUvXM",
   "type": "perk",
   "img": "icons/commodities/treasure/crown-gold-satin-gems-red.webp",
-  "effects": [],
+  "effects": [
+    {
+      "name": "Tyrant's Contempt",
+      "type": "passive",
+      "_id": "oP2Rgl7dur0ePIaK",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "all-crit",
+            "value": "Compendium.ptr2e.core-effects.Item.5M3gNCpB5xXi9lO9",
+            "predicate": [],
+            "chance": 100,
+            "isFixedChance": true,
+            "affects": "defensive",
+            "alterations": [],
+            "dontMerge": false,
+            "mode": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.6.beta",
+        "createdTime": 1765236327599,
+        "modifiedTime": 1765236362598,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+      }
+    }
+  ],
   "system": {
     "_migration": {
       "version": 0.111,
@@ -18,7 +76,7 @@
     },
     "actions": [],
     "slug": "tyrants-contempt",
-    "description": "<p>Trigger: The user takes damage from a Critical Hit.</p><p>Effect: The user gains [Contempt], granting their next @Trait[dragon] Attack the @Trait[danger-close] Trait</p>",
+    "description": "<p>Trigger: The user takes damage from a Critical Hit.</p><p>Effect: The user gains @UUID[Compendium.ptr2e.core-effects.5M3gNCpB5xXi9lO9]{Contempt}, granting their next @Trait[dragon] Attack the @Trait[danger-close] Trait</p>",
     "traits": [],
     "prerequisites": [
       "trait:dragon"
@@ -36,13 +94,19 @@
       {
         "x": 130,
         "y": 79,
+        "hidden": false,
+        "type": "normal",
         "connected": [
           "bladesworn-scion",
           "drakelike",
           "minor-buff-61"
         ],
-        "hidden": false,
-        "type": "normal",
+        "config": {
+          "texture": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "tint": null
+        },
         "tier": null
       }
     ]

@@ -3,7 +3,70 @@
   "_id": "Tn1IUJGfnpzCZzVY",
   "type": "perk",
   "img": "icons/creatures/abilities/wing-batlike-white-blue.webp",
-  "effects": [],
+  "effects": [
+    {
+      "name": "Wingspan",
+      "type": "passive",
+      "_id": "anIbpSFCyPGpGVXA",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "grant-item",
+            "key": "",
+            "value": "Compendium.ptr2e.core-abilities.Item.fftHyL4b2VM6KrHG",
+            "predicate": [],
+            "alterations": [],
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            },
+            "mode": 2,
+            "ignored": false,
+            "reevaluateOnUpdate": false,
+            "inMemoryOnly": false,
+            "allowDuplicate": true,
+            "track": false,
+            "replaceSelf": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.6.beta",
+        "createdTime": 1764897423576,
+        "modifiedTime": 1764897436336,
+        "lastModifiedBy": "bDEGyOQfZwkb2ml2"
+      }
+    }
+  ],
   "system": {
     "_migration": {
       "version": 0.111,
@@ -17,7 +80,7 @@
       "notes": ""
     },
     "actions": [],
-    "slug": null,
+    "slug": "wingspan",
     "description": "<p>The user gains @UUID[Compendium.ptr2e.core-abilities.fftHyL4b2VM6KrHG]{Giant Wings} as a Tutored Ability.</p>",
     "traits": [
       "winged"
@@ -29,14 +92,11 @@
       "item:ability:giant-wings"
     ],
     "cost": 3,
-    "originSlug": null,
     "design": {
       "arena": "physical",
       "approach": "power",
       "archetype": null
     },
-    "variant": null,
-    "mode": null,
     "global": true,
     "webs": [],
     "nodes": [

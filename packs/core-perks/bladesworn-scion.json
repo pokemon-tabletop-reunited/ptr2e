@@ -3,7 +3,79 @@
   "_id": "qzpbsWBCsiDZlcMD",
   "type": "perk",
   "img": "icons/skills/melee/sword-engraved-glow-purple.webp",
-  "effects": [],
+  "effects": [
+    {
+      "name": "Bladesworn Scion",
+      "type": "passive",
+      "_id": "S9NI6JHCCqM3iPYd",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-option",
+            "key": "",
+            "value": "bladesworn-scion",
+            "predicate": [],
+            "domain": "all",
+            "label": "Bladesworn Scion",
+            "toggleable": true,
+            "count": false,
+            "state": true,
+            "alwaysActive": false,
+            "mode": 2,
+            "ignored": false,
+            "suboptions": []
+          },
+          {
+            "type": "alter-attack",
+            "key": "weapon-trait-attack",
+            "value": "dragon",
+            "predicate": [
+              "bladesworn-scion"
+            ],
+            "mode": 2,
+            "ignored": false,
+            "property": "type",
+            "definition": []
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.6.beta",
+        "createdTime": 1765217758024,
+        "modifiedTime": 1765218303510,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+      }
+    }
+  ],
   "system": {
     "_migration": {
       "version": 0.111,
